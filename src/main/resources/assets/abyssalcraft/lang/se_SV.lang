@@ -1,0 +1,281 @@
+#Start av lokaliseringfilen
+#Översätter till ett annat språk? Man, jag tycker synd om dig.
+
+#Prestationer
+achievement.mineDS=
+achievement.mineDS.desc=
+
+achievement.mineAby=
+achievement.mineAby.desc=
+
+achievement.killghoul=
+achievement.killghoul.desc=
+
+achievement.enterabyss=
+achievement.enterabyss.desc=
+
+achievement.killdragon=
+achievement.killdragon.desc=
+
+achievement.summonAsorah=
+achievement.summonAsorah.desc=
+
+achievement.killAsorah=
+achievement.killAsorah.desc=
+
+achievement.enterdreadlands=
+achievement.enterdreadlands.desc=
+
+achievement.killdreadguard=
+achievement.killdreadguard.dsec=
+
+achievement.ghoulhead=
+achievement.ghoulhead.desc=
+
+achievement.killPete=
+achievement.killPete.desc=
+
+achievement.killWilson=
+achievement.killWilson.desc=
+
+achievement.killorange=
+achievement.killorange.desc=
+
+achievement.petehead=
+achievement.petehead.desc=
+
+achievement.wilsonhead=
+achievement.wilsonhead.desc=
+
+achievement.orangehead=
+achievement.orangehead.desc=
+
+achievement.mineCorgem=
+achievement.mineCorgem.desc=
+
+achievement.mineCor=
+achievement.mineCor.desc=
+
+achievement.findPSDL=
+achievement.findPSDL.desc=
+
+achievement.GK1=
+achievement.GK1.desc=
+
+achievement.GK2=
+achievement.GK2.desc=
+
+achievement.GK3=
+achievement.GK3.desc=
+
+achievement.Jzhstaff=
+achievement.Jzhstaff.desc=
+
+achievement.secret1=
+achievement.secret1.desc=
+
+#Block
+tile.DS.name=Mörkersten
+tile.DSB.name=
+tile.DSC.name=
+tile.DSGlow.name=
+tile.DSBs1.name=
+tile.DSBs2.name=
+tile.DSCs1.name=
+tile.DSCs2.name=
+tile.DLG.name=
+tile.DSBs.name=
+tile.DSCs.name=
+tile.DLTL.name=
+tile.DLTT.name=
+tile.DLTS.name=
+tile.AS.name=§4Underjordisk Sten
+tile.ASB.name=
+tile.ASBs1.name=
+tile.ASBs2.name=
+tile.ASBs.name=
+tile.CO.name=
+tile.AO.name=
+tile.ASBf.name=
+tile.DSCw.name=
+tile.Crate.name=
+tile.ODB.name=
+tile.BOA.name=
+tile.CIS.name=
+tile.ODBC.name=
+tile.AG.name=
+tile.DSs1.name=
+tile.DSs2.name=
+tile.Cfire.name=
+tile.DSbb.name=
+tile.DSpp.name=
+tile.DLTplank.name=
+tile.DLTplankb.name=
+tile.DLTpp.name=
+tile.DLTplanks.name=
+tile.DLTplanks1.name=
+tile.DLTplanks2.name=
+tile.BOC.name=§bBlock av Raffinerad Korallium
+tile.PSDL.name=
+tile.ACO.name=
+tile.Altar.name=Altare
+tile.ASbb.name=
+tile.ASpp.name=
+tile.DSBf.name=
+tile.DLTf.name=
+tile.DrSO.name=
+tile.AbyDrSO.name=
+tile.DrSB.name=
+tile.AbyDrSB.name=
+tile.DrT.name=
+tile.DrTL.name=
+tile.DrTS.name=
+tile.DrTplank.name=
+tile.DG.name=
+tile.Dfire.name=
+tile.DGhead.name=
+tile.Cwater.name=
+tile.DrS.name=
+tile.AbyDrS.name=
+tile.DrG.name=
+tile.Phead.name=Petes huvud
+tile.Whead.name=Herr Wilsons huvud
+tile.Ohead.name=Doktor Oranges huvud
+tile.DrSBs.name=
+tile.DrSBf.name=
+tile.DrSBs1.name=
+tile.DrSBs2.name=
+tile.AbyDrSBs.name=
+tile.AbyDrSBf.name=
+tile.AbyDrSBs1.name=
+tile.AbyDrSBs2.name=
+tile.antiliquid.name=Flytande Antimateria
+tile.cstone.name=
+tile.cstonebrick.name=
+tile.cstonebrickf.name=
+tile.cstonebricks1.name=
+tile.cstonebricks2.name=
+tile.cstonebricks.name=
+tile.cstonebutton.name=
+tile.cstonepplate.name=
+
+#Föremål
+item.Sword.name=§4Utveklarklingan
+item.OC.name=§4Evighetskatalysator
+item.SOTG.name=§9Dörrväktarens stav
+item.GK.name=§9Portgångsnyckek
+item.Cbucket.name=Hink med Flytande Korallium
+item.PSDLf.name=Kraftstenshittare
+item.EoA.name=§bUnderjordens Öga
+item.GKD.name=§4Asorahs Fruktade Portgångsnyckel
+item.DSOA.name=
+item.DAC.name=
+item.AC.name=
+item.AI.name=
+item.CGCA.name=
+item.CGCB.name=
+item.CGCC.name=
+item.CGCD.name=
+item.CGCE.name=
+item.CGCF.name=
+item.CGCG.name=
+item.CGCH.name=
+item.CP.name=
+item.CC.name=
+item.RCI.name=
+item.CPP.name=
+item.CG.name=
+item.TG.name=
+item.CF.name=
+item.CB.name=
+item.DP.name=
+item.DA.name=
+item.DS.name=
+item.DSW.name=
+item.DH.name=
+item.AP.name=
+item.AA.name=
+item.AS.name=
+item.ASW.name=
+item.AH.name=
+item.CIAP.name=
+item.CIAA.name=
+item.CIAS.name=
+item.CIASW.name=
+item.CIAH.name=
+item.RCP.name=
+item.RCA.name=
+item.RCS.name=
+item.RCSW.name=
+item.RCH.name=
+item.AAB.name=
+item.AAH.name=
+item.AAC.name=
+item.AAP.name=
+item.ACIAB.name=
+item.ACIAH.name=
+item.ACIAC.name=
+item.ACIAP.name=
+item.ADAB.name=
+item.ADAH.name=
+item.ADAC.name=
+item.ADAP.name=
+item.ACB.name=§4Djupets Stövlar
+item.ACH.name=§4Djupets Visir
+item.ACC.name=§4Djupets Rustning
+item.ACP.name=§4Djupets Benskydd
+item.ACBP.name=
+item.ACHP.name=
+item.ACCP.name=
+item.ACPP.name=
+item.ADB.name=§aKorallium-plåts skor
+item.ADH.name=§aKorallium-plåts Hjälm
+item.ADC.name=§aKorallium-plåts Rustning
+item.ADP.name=§aKorallium-plåts Byxor
+item.CobU.name=Kullersten Uppgraderingspaket
+item.IroU.name=Järn Uppgraderinspaket
+item.GolU.name=Guld Uppgraderingspaket
+item.DiaU.name=Diamant Uppgraderingspaket
+item.AbyU.name= Uppgraderingspaket
+item.CorU.name=Korallium Uppgraderingspaket
+item.plate.name=Tallrik
+item.MRE.name=MRE
+item.ChiP.name=Kyckling på Tallrik
+item.PorP.name=Fläak på Tallrik
+item.BeeP.name=Biff på Tallrik
+item.FisP.name=Fisk på Tallrik
+item.dirtyplate.name=Smutsig Tallrik
+item.friedegg.name=Steks Ägg
+item.eggp.name=Stekt Ägg på Tallrik
+item.cloth.name=Diskhandduk
+item.SF.name=
+item.SS.name=
+item.SG.name=
+item.OS.name=
+item.Corbow.name=
+item.Antibucket.name=Hink med Flytande Antimateria
+item.cbrick.name=
+
+#Varelser
+entity.abyssalcraft.depthsghoul.name=Djup Vålnad
+entity.abyssalcraft.evilpig.name=Gris
+entity.abyssalcraft.abyssalzombieombie.name=Underjordisk Zombie
+entity.abyssalcraft.Primed ODB.name=Antänd ODB
+entity.abyssalcraft.Jzahar.name=§9J'zahar, Underjordens Dörrväktare
+entity.abyssalcraft.abygolem.name=
+entity.abyssalcraft.dreadgolem.name=
+entity.abyssalcraft.dreadguard.name=
+entity.abyssalcraft.dragonminion.name=Spektral Drake
+entity.abyssalcraft.dragonboss.name=§bAsorah, Den Fallne
+entity.abyssalcraft.Primed ODB Core.name=Antänd ODB Kärna
+entity.abyssalcraft.shadowcreature.name=Skuggvarelse
+entity.abyssalcraft.shadowmonster.name=Skuggmonster
+entity.abyssalcraft.dreadling.name=
+entity.abyssalcraft.dreadspawn.name=
+entity.abyssalcraft.demonpig.name=Grisdemon
+
+#Brygder
+potion.Cplague=Korallium Pest
+potion.Dplague=
+
+#Lokalisering klar, Shin ut.

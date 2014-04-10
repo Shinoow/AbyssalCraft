@@ -1,0 +1,134 @@
+package com.shinoow.abyssalcraft.client.model.entity;
+
+import net.minecraft.client.model.ModelBase;
+import net.minecraft.client.model.ModelRenderer;
+import net.minecraft.entity.Entity;
+import net.minecraft.util.MathHelper;
+
+public class ModelJzahar extends ModelBase
+{
+  
+    ModelRenderer head;
+    ModelRenderer body;
+    ModelRenderer bodyr;
+    ModelRenderer bodyl;
+    ModelRenderer rightarm;
+    ModelRenderer leftarm;
+    ModelRenderer rightleg;
+    ModelRenderer leftleg;
+  
+    public int heldItemRight;
+    
+  public ModelJzahar()
+  {
+    textureWidth = 128;
+    textureHeight = 64;
+    
+      head = new ModelRenderer(this, 0, 0);
+      head.addBox(-7F, -14F, -7F, 14, 14, 14);
+      head.setRotationPoint(4F, -28F, 2F);
+      head.setTextureSize(128, 64);
+      head.mirror = false;
+      setRotation(head, 0F, 0F, 0F);
+      body = new ModelRenderer(this, 56, 0);
+      body.addBox(-8F, -16F, -2F, 16, 24, 8);
+      body.setRotationPoint(4F, -12F, 0F);
+      body.setTextureSize(128, 64);
+      body.mirror = true;
+      setRotation(body, 0F, 0F, 0F);
+      bodyr = new ModelRenderer(this, 104, 0);
+      bodyr.addBox(-8F, -16F, -3F, 5, 31, 1);
+      bodyr.setRotationPoint(4F, -12F, 0F);
+      bodyr.setTextureSize(128, 64);
+      bodyr.mirror = false;
+      setRotation(bodyr, 0F, 0F, 0F);
+      bodyl = new ModelRenderer(this, 116, 0);
+      bodyl.addBox(3F, -16F, -3F, 5, 31, 1);
+      bodyl.setRotationPoint(4F, -12F, 0F);
+      bodyl.setTextureSize(128, 64);
+      bodyl.mirror = true;
+      setRotation(bodyl, 0F, 0F, 0F);
+      rightarm = new ModelRenderer(this, 30, 30);
+      rightarm.addBox(-6F, -4F, -4F, 7, 26, 8);
+      rightarm.setRotationPoint(-5F, -24F, 2F);
+      rightarm.setTextureSize(128, 64);
+      rightarm.mirror = false;
+      setRotation(rightarm, 0F, 0F, 0F);
+      leftarm = new ModelRenderer(this, 30, 30);
+      leftarm.addBox(-1F, -4F, -4F, 7, 26, 8);
+      leftarm.setRotationPoint(13F, -24F, 2F);
+      leftarm.setTextureSize(128, 64);
+      leftarm.mirror = true;
+      setRotation(leftarm, 0F, 0F, 0F);
+      rightleg = new ModelRenderer(this, 0, 30);
+      rightleg.addBox(-2F, 0F, -4F, 7, 26, 8);
+      rightleg.setRotationPoint(-2F, -4F, 2F);
+      rightleg.setTextureSize(128, 64);
+      rightleg.mirror = false;
+      setRotation(rightleg, 0F, 0F, 0F);
+      leftleg = new ModelRenderer(this, 0, 30);
+      leftleg.addBox(-3F, 0F, -4F, 7, 26, 8);
+      leftleg.setRotationPoint(8F, -4F, 2F);
+      leftleg.setTextureSize(128, 64);
+      leftleg.mirror = true;
+      setRotation(leftleg, 0F, 0F, 0F);
+  }
+  
+  public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5)
+  {
+    super.render(entity, f, f1, f2, f3, f4, f5);
+    setRotationAngles(f, f1, f2, f3, f4, f5, entity);
+    head.render(f5);
+    body.render(f5);
+    bodyr.render(f5);
+    bodyl.render(f5);
+    rightarm.render(f5);
+    leftarm.render(f5);
+    rightleg.render(f5);
+    leftleg.render(f5);
+  }
+  
+  private void setRotation(ModelRenderer model, float x, float y, float z)
+  {
+    model.rotateAngleX = x;
+    model.rotateAngleY = y;
+    model.rotateAngleZ = z;
+  }
+  
+  public void setRotationAngles(float par1, float par2, float par3, float par4, float par5, float par6, Entity par7Entity)
+  {
+	  
+	  this.head.rotateAngleY = par4 / (180F / (float)Math.PI);
+      this.head.rotateAngleX = par5 / (180F / (float)Math.PI);
+      
+      this.rightarm.rotateAngleX = MathHelper.cos(par1 * 0.6662F + (float)Math.PI) * 2.0F * par2 * 0.5F;
+      this.leftarm.rotateAngleX = MathHelper.cos(par1 * 0.6662F) * 2.0F * par2 * 0.5F;
+      
+      this.rightarm.rotateAngleZ = 0.0F;
+      this.leftarm.rotateAngleZ = 0.0F;
+      
+	  this.rightleg.rotateAngleX = MathHelper.cos(par1 * 0.6662F) * 1.4F * par2;
+	  this.rightleg.rotateAngleY = 0.0F;
+	  
+	  this.leftleg.rotateAngleX = MathHelper.cos(par1 * 0.6662F + (float)Math.PI) * 1.4F * par2;
+      this.leftleg.rotateAngleY = 0.0F;
+      
+      if (this.heldItemRight != 0)
+      {
+          this.rightarm.rotateAngleX = this.rightarm.rotateAngleX * 0.5F - ((float)Math.PI / 10F) * (float)this.heldItemRight;
+      }
+      
+      if (this.isRiding)
+      {
+          this.rightarm.rotateAngleX += -((float)Math.PI / 5F);
+          this.leftarm.rotateAngleX += -((float)Math.PI / 5F);
+          
+          this.rightleg.rotateAngleX = -((float)Math.PI * 2F / 5F);
+          this.leftleg.rotateAngleX = -((float)Math.PI * 2F / 5F);
+          
+          this.rightleg.rotateAngleY = ((float)Math.PI / 10F);
+          this.leftleg.rotateAngleY = -((float)Math.PI / 10F);
+      }
+  }
+
+}

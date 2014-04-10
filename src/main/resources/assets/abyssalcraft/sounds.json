@@ -1,0 +1,37 @@
+{
+	"dreadguard.death": {
+		"category": "hostile",
+		"sounds": [
+			"dreadguard/death"
+		]
+	},
+	"ghoul.pete.death": {
+		"category": "hostile",
+		"sounds": [
+			"ghoul/pete/death"
+		]
+	},
+	"ghoul.pete.hit": {
+		"category": "hostile",
+		"sounds": [
+			"ghoul/pete/hit1",
+			"ghoul/pete/hit2",
+			"ghoul/pete/hit3",
+			"ghoul/pete/hit4",
+			"ghoul/pete/hit5"
+		]
+	},
+	"ghoul.pete.idle": {
+		"category": "hostile",
+		"sounds": [
+			"ghoul/pete/idle1",
+			"ghoul/pete/idle2",
+			"ghoul/pete/idle3",
+			"ghoul/pete/idle4",
+			"ghoul/pete/idle5",
+			"ghoul/pete/idle6",
+			"ghoul/pete/idle7",
+			"ghoul/pete/idle8"
+		]
+	}
+}
