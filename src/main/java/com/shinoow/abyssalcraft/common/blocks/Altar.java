@@ -35,8 +35,8 @@ public class Altar extends BlockContainer {
 		return new TileEntityAltar();
 	}
 
-	public boolean func_149662_c()
-	{
+	@Override
+	public boolean renderAsNormalBlock() {
 		return false;
 	}
 
