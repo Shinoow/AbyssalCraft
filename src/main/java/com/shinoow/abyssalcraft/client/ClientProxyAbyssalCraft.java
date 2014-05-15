@@ -1,3 +1,18 @@
+/**AbyssalCraft
+ *Copyright 2012-2014 Shinoow
+ *
+ *Licensed under the Apache License, Version 2.0 (the "License");
+ *you may not use this file except in compliance with the License.
+ *You may obtain a copy of the License at
+ *
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *Unless required by applicable law or agreed to in writing, software
+ *distributed under the License is distributed on an "AS IS" BASIS,
+ *WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *See the License for the specific language governing permissions and
+ *limitations under the License.
+ */
 package com.shinoow.abyssalcraft.client;
 
 import net.minecraft.client.model.ModelBiped;
@@ -9,13 +24,13 @@ import net.minecraft.item.Item;
 import net.minecraftforge.client.MinecraftForgeClient;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
+import com.shinoow.abyssalcraft.core.api.render.Block3DRender;
 import com.shinoow.abyssalcraft.client.model.entity.ModelDG;
 import com.shinoow.abyssalcraft.client.model.entity.ModelDreadSpawn;
 import com.shinoow.abyssalcraft.client.model.entity.ModelDreadling;
 import com.shinoow.abyssalcraft.client.model.entity.ModelJzahar;
 import com.shinoow.abyssalcraft.client.model.entity.ModelShadowCreature;
 import com.shinoow.abyssalcraft.client.model.entity.ModelShadowMonster;
-import com.shinoow.abyssalcraft.client.render.block.ItemPSDLRenderer;
 import com.shinoow.abyssalcraft.client.render.block.RenderODB;
 import com.shinoow.abyssalcraft.client.render.block.RenderODBc;
 import com.shinoow.abyssalcraft.client.render.block.TileEntityAltarRenderer;
@@ -105,8 +120,8 @@ public class ClientProxyAbyssalCraft extends CommonProxyAbyssalCraft
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityWhead.class, new TileEntityWheadRenderer());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityOhead.class, new TileEntityOheadRenderer());
 
-		MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(AbyssalCraft.PSDL), new ItemPSDLRenderer(new TileEntityPSDLRenderer(), new TileEntityPSDL()));
-		MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(AbyssalCraft.Altar), new ItemPSDLRenderer(new TileEntityAltarRenderer(), new TileEntityAltar()));
+		MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(AbyssalCraft.PSDL), new Block3DRender(new TileEntityPSDLRenderer(), new TileEntityPSDL()));
+		MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(AbyssalCraft.Altar), new Block3DRender(new TileEntityAltarRenderer(), new TileEntityAltar()));
 		//MinecraftForgeClient.registerItemRenderer(AbyssalCraft.Staff.itemID, (IItemRenderer)new RenderStaff());
 
 		CapeHandler.addGroupedCape(CapeHandler.getArrayFromUrl("https://dl.dropboxusercontent.com/s/ujztlnlqbt9mkyw/Donator_10.txt?dl=1&token_hash=AAHM_2kEhZtfL-xYaBHNaMEM7OwmbANsxwch6RBb5TQPJA"), EnumCapeGroup.DONATOR_10);

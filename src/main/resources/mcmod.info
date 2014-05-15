@@ -15,7 +15,27 @@
 				"dependencies": [  ],
 				"parent": "",
 				"requiredMods": [  ],
-				"logoFile": "/assets/shinoow.abyssalcraft/textures/logo.png",
+				"logoFile": "/assets/abyssalcraft/textures/logo.png",
+				"screenshots": [  ],
+				"updateUrl": "http://adf.ly/FQarm",
+  				"url": "http://adf.ly/FQarm",
+ 				"useDependencyInformation": true
+			},
+			{
+  				"modid": "accore",
+  				"name": "AbyssalCraft Core",
+  				"description": "Library used by AbyssalCraft mods - contains API as well",
+  				"mcversion": "${mcversion}",
+  				"version": "${version}",
+  				"authorList": [
+  						"shinoow"
+  				],
+  				"credits": "shinoow (coding)",
+  				"dependants": [  ],
+				"dependencies": [  ],
+				"parent": "",
+				"requiredMods": [  ],
+				"logoFile": "/assets/abyssalcraft/textures/logo_core.png",
 				"screenshots": [  ],
 				"updateUrl": "http://adf.ly/FQarm",
   				"url": "http://adf.ly/FQarm",

@@ -1,4 +1,20 @@
+/**AbyssalCraft
+ *Copyright 2012-2014 Shinoow
+ *
+ *Licensed under the Apache License, Version 2.0 (the "License");
+ *you may not use this file except in compliance with the License.
+ *You may obtain a copy of the License at
+ *
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *Unless required by applicable law or agreed to in writing, software
+ *distributed under the License is distributed on an "AS IS" BASIS,
+ *WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *See the License for the specific language governing permissions and
+ *limitations under the License.
+ */
 package com.shinoow.abyssalcraft.common.blocks;
+
 import java.util.Random;
 
 import net.minecraft.block.Block;
@@ -101,11 +117,11 @@ public class BlockTeleporter extends BlockBreakable
 	{
 		byte b0 = 0;
 		byte b1 = 0;
-		if (par1World.getBlock(par2 - 1, par3, par4) == AbyssalCraft.Darkstone || par1World.getBlock(par2 + 1, par3, par4) == AbyssalCraft.Darkstone)
+		if (par1World.getBlock(par2 - 1, par3, par4) == AbyssalCraft.abystone || par1World.getBlock(par2 + 1, par3, par4) == AbyssalCraft.abystone)
 		{
 			b0 = 1;
 		}
-		if (par1World.getBlock(par2, par3, par4 - 1) == AbyssalCraft.Darkstone || par1World.getBlock(par2, par3, par4 + 1) == AbyssalCraft.Darkstone)
+		if (par1World.getBlock(par2, par3, par4 - 1) == AbyssalCraft.abystone || par1World.getBlock(par2, par3, par4 + 1) == AbyssalCraft.abystone)
 		{
 			b1 = 1;
 		}
@@ -132,7 +148,7 @@ public class BlockTeleporter extends BlockBreakable
 						Block j1 = par1World.getBlock(par2 + b0 * l, par3 + i1, par4 + b1 * l);
 						if (flag)
 						{
-							if (j1 != AbyssalCraft.Darkstone)
+							if (j1 != AbyssalCraft.abystone)
 							{
 								return false;
 							}
@@ -172,7 +188,7 @@ public class BlockTeleporter extends BlockBreakable
 		{
 			;
 		}
-		if (par1World.getBlock(par2, i1 - 1, par4) != AbyssalCraft.Darkstone)
+		if (par1World.getBlock(par2, i1 - 1, par4) != AbyssalCraft.abystone)
 		{
 			par1World.setBlockToAir(par2, par3, par4);
 		}
@@ -183,7 +199,7 @@ public class BlockTeleporter extends BlockBreakable
 			{
 				;
 			}
-			if (j1 == 3 && par1World.getBlock(par2, i1 + j1, par4) == AbyssalCraft.Darkstone)
+			if (j1 == 3 && par1World.getBlock(par2, i1 + j1, par4) == AbyssalCraft.abystone)
 			{
 				boolean flag = par1World.getBlock(par2 - 1, par3, par4) == this || par1World.getBlock(par2 + 1, par3, par4) == this;
 				boolean flag1 = par1World.getBlock(par2, par3, par4 - 1) == this || par1World.getBlock(par2, par3, par4 + 1) == this;
@@ -193,7 +209,7 @@ public class BlockTeleporter extends BlockBreakable
 				}
 				else
 				{
-					if ((par1World.getBlock(par2 + b0, par3, par4 + b1) != AbyssalCraft.Darkstone || par1World.getBlock(par2 - b0, par3, par4 - b1) != this) && (par1World.getBlock(par2 - b0, par3, par4 - b1) != AbyssalCraft.Darkstone || par1World.getBlock(par2 + b0, par3, par4 + b1) != this))
+					if ((par1World.getBlock(par2 + b0, par3, par4 + b1) != AbyssalCraft.abystone || par1World.getBlock(par2 - b0, par3, par4 - b1) != this) && (par1World.getBlock(par2 - b0, par3, par4 - b1) != AbyssalCraft.abystone || par1World.getBlock(par2 + b0, par3, par4 + b1) != this))
 					{
 						par1World.setBlockToAir(par2, par3, par4);
 					}

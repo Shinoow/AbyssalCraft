@@ -3,13 +3,14 @@ package com.shinoow.abyssalcraft.common.handlers;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-import com.shinoow.abyssalcraft.common.util.EnumBiomeType;
-
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.gen.layer.GenLayer;
 import net.minecraft.world.gen.layer.GenLayerBiome;
 import net.minecraft.world.gen.layer.GenLayerRiverMix;
 import net.minecraftforge.event.terraingen.WorldTypeEvent.InitBiomeGens;
+
+import com.shinoow.abyssalcraft.common.util.EnumBiomeType;
+
 import cpw.mods.fml.common.ObfuscationReflectionHelper;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 

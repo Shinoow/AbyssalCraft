@@ -1,3 +1,18 @@
+/**AbyssalCraft
+ *Copyright 2012-2014 Shinoow
+ *
+ *Licensed under the Apache License, Version 2.0 (the "License");
+ *you may not use this file except in compliance with the License.
+ *You may obtain a copy of the License at
+ *
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *Unless required by applicable law or agreed to in writing, software
+ *distributed under the License is distributed on an "AS IS" BASIS,
+ *WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *See the License for the specific language governing permissions and
+ *limitations under the License.
+ */
 package com.shinoow.abyssalcraft.common.blocks;
 
 import java.util.ArrayList;
@@ -6,6 +21,7 @@ import java.util.Random;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLeavesBase;
 import net.minecraft.block.material.Material;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
@@ -196,7 +212,7 @@ public class Dreadleaves extends BlockLeavesBase implements IShearable
 
 	public Item getItemDropped(int par1, Random par2Random, int par3)
 	{
-		return Item.getItemFromBlock(this);
+		return Item.getItemFromBlock(AbyssalCraft.dreadsapling);
 	}
 
 	public void dropBlockAsItemWithChance(World par1World, int par2, int par3, int par4, int par5, float par6, int par7)
@@ -249,8 +265,10 @@ public class Dreadleaves extends BlockLeavesBase implements IShearable
 	/**
 	 * From the specified side and block metadata retrieves the blocks texture. Args: side, metadata
 	 */
-	 public IIcon getIcon(int par1, int par2)
+	public IIcon getIcon(int par1, int par2)
 	{
+		this.setGraphicsLevel(Minecraft.getMinecraft().gameSettings.fancyGraphics);
+		
 		return (par2 & 3) == 1 ? this.iconArray[this.iconType][1] : ((par2 & 3) == 3 ? this.iconArray[this.iconType][3] : ((par2 & 3) == 2 ? this.iconArray[this.iconType][2] : this.iconArray[this.iconType][0]));
 	}
 

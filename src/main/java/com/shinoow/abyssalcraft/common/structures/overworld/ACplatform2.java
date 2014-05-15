@@ -1,5 +1,20 @@
-
+/**AbyssalCraft
+ *Copyright 2012-2014 Shinoow
+ *
+ *Licensed under the Apache License, Version 2.0 (the "License");
+ *you may not use this file except in compliance with the License.
+ *You may obtain a copy of the License at
+ *
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *Unless required by applicable law or agreed to in writing, software
+ *distributed under the License is distributed on an "AS IS" BASIS,
+ *WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *See the License for the specific language governing permissions and
+ *limitations under the License.
+ */
 package com.shinoow.abyssalcraft.common.structures.overworld;
+
 import java.util.Random;
 
 import net.minecraft.block.Block;
@@ -13,8 +28,8 @@ public class ACplatform2 extends WorldGenerator
 {
 	protected Block[] GetValidSpawnBlocks() {
 		return new Block[] {
-			AbyssalCraft.Darkstone,
-			AbyssalCraft.Darkgrass
+				AbyssalCraft.Darkstone,
+				AbyssalCraft.Darkgrass
 		};
 	}
 
@@ -51,7 +66,7 @@ public class ACplatform2 extends WorldGenerator
 	public ACplatform2() { }
 
 	public boolean generate(World world, Random random, int i, int j, int k) {
-		
+
 		if(!LocationIsValidSpawn(world, i, j, k) || !LocationIsValidSpawn(world, i + 6, j, k) || !LocationIsValidSpawn(world, i + 6, j, k + 6) || !LocationIsValidSpawn(world, i, j, k + 6))
 		{
 			return false;
@@ -208,6 +223,6 @@ public class ACplatform2 extends WorldGenerator
 		return true;
 	}
 
-	
+
 
 }

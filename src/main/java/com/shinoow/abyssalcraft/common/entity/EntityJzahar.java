@@ -1,3 +1,18 @@
+/**AbyssalCraft
+ *Copyright 2012-2014 Shinoow
+ *
+ *Licensed under the Apache License, Version 2.0 (the "License");
+ *you may not use this file except in compliance with the License.
+ *You may obtain a copy of the License at
+ *
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *Unless required by applicable law or agreed to in writing, software
+ *distributed under the License is distributed on an "AS IS" BASIS,
+ *WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *See the License for the specific language governing permissions and
+ *limitations under the License.
+ */
 package com.shinoow.abyssalcraft.common.entity;
 
 import java.util.Calendar;
@@ -120,12 +135,12 @@ public class EntityJzahar extends EntityMob implements IBossDisplayData, IRanged
 	{
 		super.onDeath(par1DamageSource);
 
-//		EntityPlayer entityplayer = (EntityPlayer)par1DamageSource.getEntity();
-//		ItemStack itemstack = entityplayer.inventory.getCurrentItem();
-//		if(par1DamageSource.getEntity() instanceof EntityPlayer && itemstack.getItem() == AbyssalCraft.devsword)
-//		{
-//			FMLClientHandler.instance().getClient().ingameGUI.getChatGUI().printChatMessage(new ChatComponentText("J'zahar: Pfft, you and your Dev Blade Shin... wait, are you even Shinoow?"));
-//		}
+		//		EntityPlayer entityplayer = (EntityPlayer)par1DamageSource.getEntity();
+		//		ItemStack itemstack = entityplayer.inventory.getCurrentItem();
+		//		if(par1DamageSource.getEntity() instanceof EntityPlayer && itemstack.getItem() == AbyssalCraft.devsword)
+		//		{
+		//			FMLClientHandler.instance().getClient().ingameGUI.getChatGUI().printChatMessage(new ChatComponentText("J'zahar: Pfft, you and your Dev Blade Shin... wait, are you even Shinoow?"));
+		//		}
 		FMLClientHandler.instance().getClient().ingameGUI.getChatGUI().printChatMessage(new ChatComponentText("J'zahar: I'm still an in-dev boss, so you didn't exactly achieve anything killing me."));
 	}
 
@@ -202,7 +217,7 @@ public class EntityJzahar extends EntityMob implements IBossDisplayData, IRanged
 	/**
 	 * Attack the specified entity using a ranged attack.
 	 */
-	 public void attackEntityWithRangedAttack(EntityLivingBase par1EntityLivingBase, float par2)
+	public void attackEntityWithRangedAttack(EntityLivingBase par1EntityLivingBase, float par2)
 	{
 		this.func_82216_a(0, par1EntityLivingBase);
 	}

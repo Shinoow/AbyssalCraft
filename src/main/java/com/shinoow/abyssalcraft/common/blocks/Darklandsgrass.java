@@ -1,7 +1,23 @@
+/**AbyssalCraft
+ *Copyright 2012-2014 Shinoow
+ *
+ *Licensed under the Apache License, Version 2.0 (the "License");
+ *you may not use this file except in compliance with the License.
+ *You may obtain a copy of the License at
+ *
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *Unless required by applicable law or agreed to in writing, software
+ *distributed under the License is distributed on an "AS IS" BASIS,
+ *WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *See the License for the specific language governing permissions and
+ *limitations under the License.
+ */
 package com.shinoow.abyssalcraft.common.blocks;
 
 import java.util.Random;
 
+import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.init.Blocks;
@@ -11,12 +27,11 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
-import com.shinoow.abyssalcraft.common.BlockGeneralAC;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class Darklandsgrass extends BlockGeneralAC
+public class Darklandsgrass extends Block
 {
 	@SideOnly(Side.CLIENT)
 	private IIcon iconGrassTop;
@@ -79,16 +94,16 @@ public class Darklandsgrass extends BlockGeneralAC
 		}
 	}
 
-//	@Override
-//	public boolean canSustainPlant(IBlockAccess world, int x, int y, int z, ForgeDirection direction, IPlantable plantable)
-//	{
-//		Block plant = plantable.getPlant(world, x, y + 1, z);
-//		if (plant == AbyssalCraft.DLTSapling)
-//		{
-//			return true;
-//		}
-//		return true;
-//	}
+	//	@Override
+	//	public boolean canSustainPlant(IBlockAccess world, int x, int y, int z, ForgeDirection direction, IPlantable plantable)
+	//	{
+	//		Block plant = plantable.getPlant(world, x, y + 1, z);
+	//		if (plant == AbyssalCraft.DLTSapling)
+	//		{
+	//			return true;
+	//		}
+	//		return true;
+	//	}
 
 	/**
 	 * Returns the ID of the items to drop on destruction.

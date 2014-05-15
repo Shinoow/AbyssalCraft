@@ -1,3 +1,18 @@
+/**AbyssalCraft
+ *Copyright 2012-2014 Shinoow
+ *
+ *Licensed under the Apache License, Version 2.0 (the "License");
+ *you may not use this file except in compliance with the License.
+ *You may obtain a copy of the License at
+ *
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *Unless required by applicable law or agreed to in writing, software
+ *distributed under the License is distributed on an "AS IS" BASIS,
+ *WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *See the License for the specific language governing permissions and
+ *limitations under the License.
+ */
 package com.shinoow.abyssalcraft.common.blocks;
 
 import java.util.Random;
@@ -116,7 +131,7 @@ public class DLTLog extends BlockRotatedPillar
 	/**
 	 * From the specified side and block metadata retrieves the blocks texture. Args: side, metadata
 	 */
-	 public IIcon getIcon(int par1, int par2)
+	public IIcon getIcon(int par1, int par2)
 	{
 		return par1 == 1 ? this.iconLogTop : (par1 == 0 ? this.iconLogTop : this.blockIcon);
 	}

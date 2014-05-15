@@ -1,3 +1,18 @@
+/**AbyssalCraft
+ *Copyright 2012-2014 Shinoow
+ *
+ *Licensed under the Apache License, Version 2.0 (the "License");
+ *you may not use this file except in compliance with the License.
+ *You may obtain a copy of the License at
+ *
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *Unless required by applicable law or agreed to in writing, software
+ *distributed under the License is distributed on an "AS IS" BASIS,
+ *WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *See the License for the specific language governing permissions and
+ *limitations under the License.
+ */
 package com.shinoow.abyssalcraft.common.world.biome;
 
 import java.util.Random;
@@ -29,16 +44,16 @@ public class BiomeGenCorSwamp extends BiomeGenBase {
 		this.topBlock=Blocks.grass;
 		this.fillerBlock=Blocks.dirt;
 		this.theBiomeDecorator.treesPerChunk = 2;
-        this.theBiomeDecorator.flowersPerChunk = 1;
-        this.theBiomeDecorator.deadBushPerChunk = 1;
-        this.theBiomeDecorator.mushroomsPerChunk = 8;
-        this.theBiomeDecorator.reedsPerChunk = 10;
-        this.theBiomeDecorator.clayPerChunk = 1;
-        this.theBiomeDecorator.waterlilyPerChunk = 4;
-        this.theBiomeDecorator.sandPerChunk2 = 0;
-        this.theBiomeDecorator.sandPerChunk = 0;
-        this.theBiomeDecorator.grassPerChunk = 5;
-        this.waterColorMultiplier = 0x24FF83;
+		this.theBiomeDecorator.flowersPerChunk = 1;
+		this.theBiomeDecorator.deadBushPerChunk = 1;
+		this.theBiomeDecorator.mushroomsPerChunk = 8;
+		this.theBiomeDecorator.reedsPerChunk = 10;
+		this.theBiomeDecorator.clayPerChunk = 1;
+		this.theBiomeDecorator.waterlilyPerChunk = 4;
+		this.theBiomeDecorator.sandPerChunk2 = 0;
+		this.theBiomeDecorator.sandPerChunk = 0;
+		this.theBiomeDecorator.grassPerChunk = 5;
+		this.waterColorMultiplier = 0x24FF83;
 		this.spawnableMonsterList.add(new SpawnListEntry(EntityDepthsghoul.class, 5, 1, 5));
 		this.spawnableMonsterList.add(new SpawnListEntry(EntityDepthsZombie.class, 5, 1, 5));
 	}
@@ -72,7 +87,7 @@ public class BiomeGenCorSwamp extends BiomeGenBase {
 
 			new WorldGenMinable(AbyssalCraft.Coraliumore, veinSize).generate(par1World, par2Random, x, y, z);
 		}
-		
+
 		for(int k = 0; k < 2; k++)
 		{
 			int RandPosX = par3 + par2Random.nextInt(5);
@@ -81,27 +96,27 @@ public class BiomeGenCorSwamp extends BiomeGenBase {
 			(new WorldGenAntimatterLake(AbyssalCraft.anticwater)).generate(par1World, par2Random, RandPosX, RandPosY, RandPosZ);	
 		}
 	}
-	
-	public WorldGenAbstractTree func_150567_a(Random p_150567_1_)
-    {
-        return this.worldGeneratorSwamp;
-    }
-	
-	/**
-     * Provides the basic grass color based on the biome temperature and rainfall
-     */
-    @SideOnly(Side.CLIENT)
-    public int getBiomeGrassColor(int p_150558_1_, int p_150558_2_, int p_150558_3_)
-    {
-        return 0x6EF5DE;
-    }
 
-    /**
-     * Provides the basic foliage color based on the biome temperature and rainfall
-     */
-    @SideOnly(Side.CLIENT)
-    public int getBiomeFoliageColor(int p_150571_1_, int p_150571_2_, int p_150571_3_)
-    {
-        return 0x6EF5DE;
-    }
+	public WorldGenAbstractTree func_150567_a(Random p_150567_1_)
+	{
+		return this.worldGeneratorSwamp;
+	}
+
+	/**
+	 * Provides the basic grass color based on the biome temperature and rainfall
+	 */
+	@SideOnly(Side.CLIENT)
+	public int getBiomeGrassColor(int p_150558_1_, int p_150558_2_, int p_150558_3_)
+	{
+		return 0x6EF5DE;
+	}
+
+	/**
+	 * Provides the basic foliage color based on the biome temperature and rainfall
+	 */
+	@SideOnly(Side.CLIENT)
+	public int getBiomeFoliageColor(int p_150571_1_, int p_150571_2_, int p_150571_3_)
+	{
+		return 0x6EF5DE;
+	}
 }

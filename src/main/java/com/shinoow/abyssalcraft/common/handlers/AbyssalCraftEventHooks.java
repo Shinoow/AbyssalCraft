@@ -1,3 +1,18 @@
+/**AbyssalCraft
+ *Copyright 2012-2014 Shinoow
+ *
+ *Licensed under the Apache License, Version 2.0 (the "License");
+ *you may not use this file except in compliance with the License.
+ *You may obtain a copy of the License at
+ *
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *Unless required by applicable law or agreed to in writing, software
+ *distributed under the License is distributed on an "AS IS" BASIS,
+ *WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *See the License for the specific language governing permissions and
+ *limitations under the License.
+ */
 package com.shinoow.abyssalcraft.common.handlers;
 
 import java.io.BufferedReader;
@@ -8,7 +23,6 @@ import java.net.URL;
 
 import net.minecraft.entity.IEntityLivingData;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumChatFormatting;
@@ -21,15 +35,12 @@ import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.common.blocks.DLTSapling;
 import com.shinoow.abyssalcraft.common.blocks.Dreadsapling;
 import com.shinoow.abyssalcraft.common.entity.EntityDepthsZombie;
-import com.shinoow.abyssalcraft.common.entity.EntityDepthsghoul;
-import com.shinoow.abyssalcraft.common.entity.EntityDragonBoss;
-import com.shinoow.abyssalcraft.common.entity.EntityDragonMinion;
-import com.shinoow.abyssalcraft.common.entity.Entitydreadguard;
+import com.shinoow.abyssalcraft.core.api.entity.CoraliumMob;
+import com.shinoow.abyssalcraft.core.api.entity.DreadMob;
 
 import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.common.eventhandler.Event.Result;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import cpw.mods.fml.common.gameevent.PlayerEvent;
 
 public class AbyssalCraftEventHooks {
 
@@ -38,7 +49,7 @@ public class AbyssalCraftEventHooks {
 		if (event.entityLiving.isPotionActive(AbyssalCraft.Cplague)) {
 			if (event.entityLiving.worldObj.rand.nextInt(20) == 0) {
 				event.entityLiving.attackEntityFrom(DamageSource.magic, 2);
-				if (event.entityLiving instanceof EntityDepthsghoul || event.entityLiving instanceof EntityDepthsZombie || event.entityLiving instanceof EntityDragonBoss || event.entityLiving instanceof EntityDragonMinion)
+				if (event.entityLiving instanceof CoraliumMob)
 				{
 					event.entityLiving.removePotionEffect(AbyssalCraft.Cplague.id);
 				}
@@ -58,28 +69,9 @@ public class AbyssalCraftEventHooks {
 		if (event.entityLiving.isPotionActive(AbyssalCraft.Dplague)){
 			if (event.entityLiving.worldObj.rand.nextInt(20) == 0) {
 				event.entityLiving.attackEntityFrom(DamageSource.magic, 1);
-				if (event.entityLiving instanceof Entitydreadguard)
+				if (event.entityLiving instanceof DreadMob)
 				{
 					event.entityLiving.removePotionEffect(AbyssalCraft.Dplague.id);
-				}
-			}
-		}
-	}
-	@SubscribeEvent
-	public void craftingEvent(PlayerEvent.ItemCraftedEvent event)
-	{
-		for(int i=0; i < event.craftMatrix.getSizeInventory(); i++)
-		{               
-			if(event.craftMatrix.getStackInSlot(i) != null)
-			{
-				ItemStack j = event.craftMatrix.getStackInSlot(i);
-				if(j.getItem() != null && j.getItem() == AbyssalCraft.cloth)
-				{
-					ItemStack k = new ItemStack(AbyssalCraft.cloth, 2, (j.getItemDamage() + 1));
-					if(k.getItemDamage() >= k.getMaxDamage()){
-						k.stackSize--;
-					}
-					event.craftMatrix.setInventorySlotContents(i, k);
 				}
 			}
 		}

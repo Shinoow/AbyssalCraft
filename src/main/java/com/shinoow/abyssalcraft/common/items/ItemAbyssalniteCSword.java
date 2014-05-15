@@ -1,3 +1,18 @@
+/**AbyssalCraft
+ *Copyright 2012-2014 Shinoow
+ *
+ *Licensed under the Apache License, Version 2.0 (the "License");
+ *you may not use this file except in compliance with the License.
+ *You may obtain a copy of the License at
+ *
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *Unless required by applicable law or agreed to in writing, software
+ *distributed under the License is distributed on an "AS IS" BASIS,
+ *WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *See the License for the specific language governing permissions and
+ *limitations under the License.
+ */
 package com.shinoow.abyssalcraft.common.items;
 
 import java.util.List;
@@ -38,7 +53,7 @@ public class ItemAbyssalniteCSword extends ItemSword
 	{
 		return par2Block != Blocks.web ? 1.5F : 15F;
 	}
-	
+
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
 	public void addInformation(ItemStack is, EntityPlayer player, List l, boolean B)
@@ -46,7 +61,7 @@ public class ItemAbyssalniteCSword extends ItemSword
 		l.add("This sword applies fire and");
 		l.add("potion effects on hit");
 	}
-	
+
 	/**
 	 * Current implementations of this method in child classes do not use the entry argument beside ev. They just raise
 	 * the damage on the stack.
@@ -72,73 +87,73 @@ public class ItemAbyssalniteCSword extends ItemSword
 	/**
 	 * Returns the damage against a given entity.
 	 */
-	 public float func_82803_g()
-	 {
-		 return this.toolMaterial.getDamageVsEntity();
-	 }
-	 /**
-	  * Returns True is the item is renderer in full 3D when hold.
-	  */
-	 public boolean isFull3D()
-	 {
-		 return true;
-	 }
-	 /**
-	  * returns the action that specifies what animation to play when the items is being used
-	  */
-	 public EnumAction getItemUseAction(ItemStack par1ItemStack)
-	 {
-		 return EnumAction.block;
-	 }
-	 /**
-	  * How long it takes to use or consume an item
-	  */
-	 public int getMaxItemUseDuration(ItemStack par1ItemStack)
-	 {
-		 return 0x11940;
-	 }
-	 /**
-	  * Called whenever this item is equipped and the right mouse button is pressed. Args: itemStack, world, entityPlayer
-	  */
-	 public ItemStack onItemRightClick(ItemStack par1ItemStack, World par2World, EntityPlayer par3EntityPlayer)
-	 {
-		 par3EntityPlayer.setItemInUse(par1ItemStack, getMaxItemUseDuration(par1ItemStack));
-		 return par1ItemStack;
-	 }
-	 /**
-	  * Returns if the item (tool) can harvest results from the block type.
-	  */
-	 public boolean func_150897_b(Block par1Block)
-	 {
-		 return par1Block == Blocks.web;
-	 }
-	 /**
-	  * Return the enchantability factor of the item, most of the time is based on material.
-	  */
-	 public int getItemEnchantability()
-	 {
-		 return toolMaterial.getEnchantability();
-	 }
+	public float func_82803_g()
+	{
+		return this.toolMaterial.getDamageVsEntity();
+	}
+	/**
+	 * Returns True is the item is renderer in full 3D when hold.
+	 */
+	public boolean isFull3D()
+	{
+		return true;
+	}
+	/**
+	 * returns the action that specifies what animation to play when the items is being used
+	 */
+	public EnumAction getItemUseAction(ItemStack par1ItemStack)
+	{
+		return EnumAction.block;
+	}
+	/**
+	 * How long it takes to use or consume an item
+	 */
+	public int getMaxItemUseDuration(ItemStack par1ItemStack)
+	{
+		return 0x11940;
+	}
+	/**
+	 * Called whenever this item is equipped and the right mouse button is pressed. Args: itemStack, world, entityPlayer
+	 */
+	public ItemStack onItemRightClick(ItemStack par1ItemStack, World par2World, EntityPlayer par3EntityPlayer)
+	{
+		par3EntityPlayer.setItemInUse(par1ItemStack, getMaxItemUseDuration(par1ItemStack));
+		return par1ItemStack;
+	}
+	/**
+	 * Returns if the item (tool) can harvest results from the block type.
+	 */
+	public boolean func_150897_b(Block par1Block)
+	{
+		return par1Block == Blocks.web;
+	}
+	/**
+	 * Return the enchantability factor of the item, most of the time is based on material.
+	 */
+	public int getItemEnchantability()
+	{
+		return toolMaterial.getEnchantability();
+	}
 
-	 public String getToolMaterialName()
-	 {
-		 return this.toolMaterial.toString();
-	 }
+	public String getToolMaterialName()
+	{
+		return this.toolMaterial.toString();
+	}
 
-	 /**
-	  * Return whether this item is repairable in an anvil.
-	  */
-	 public boolean getIsRepairable(ItemStack par1ItemStack, ItemStack par2ItemStack)
-	 {
-		 return this.toolMaterial.getToolCraftingMaterial() == par2ItemStack.getItem() ? true : super.getIsRepairable(par1ItemStack, par2ItemStack);
-	 }
+	/**
+	 * Return whether this item is repairable in an anvil.
+	 */
+	public boolean getIsRepairable(ItemStack par1ItemStack, ItemStack par2ItemStack)
+	{
+		return this.toolMaterial.getToolCraftingMaterial() == par2ItemStack.getItem() ? true : super.getIsRepairable(par1ItemStack, par2ItemStack);
+	}
 
-	 @SuppressWarnings({ "rawtypes", "unchecked" })
-	 public Multimap getItemAttributeModifiers()
-	 {
-		 Multimap multimap = super.getItemAttributeModifiers();
-		 multimap.put(SharedMonsterAttributes.attackDamage.getAttributeUnlocalizedName(), new AttributeModifier(field_111210_e, "Weapon modifier", (double)this.weaponDamage, 0));
-		 return multimap;
-	 }
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	public Multimap getItemAttributeModifiers()
+	{
+		Multimap multimap = super.getItemAttributeModifiers();
+		multimap.put(SharedMonsterAttributes.attackDamage.getAttributeUnlocalizedName(), new AttributeModifier(field_111210_e, "Weapon modifier", (double)this.weaponDamage, 0));
+		return multimap;
+	}
 
 }

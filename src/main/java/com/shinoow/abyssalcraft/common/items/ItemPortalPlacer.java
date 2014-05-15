@@ -1,19 +1,34 @@
+/**AbyssalCraft
+ *Copyright 2012-2014 Shinoow
+ *
+ *Licensed under the Apache License, Version 2.0 (the "License");
+ *you may not use this file except in compliance with the License.
+ *You may obtain a copy of the License at
+ *
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *Unless required by applicable law or agreed to in writing, software
+ *distributed under the License is distributed on an "AS IS" BASIS,
+ *WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *See the License for the specific language governing permissions and
+ *limitations under the License.
+ */
 package com.shinoow.abyssalcraft.common.items;
 
 import java.util.List;
 
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
-import com.shinoow.abyssalcraft.common.ItemGeneralAC;
 
 import cpw.mods.fml.client.FMLClientHandler;
 
-public class ItemPortalPlacer extends ItemGeneralAC
+public class ItemPortalPlacer extends Item
 {
 	public ItemPortalPlacer()
 	{
@@ -26,7 +41,7 @@ public class ItemPortalPlacer extends ItemGeneralAC
 	{
 		return true;
 	}
-	
+
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public void addInformation(ItemStack par1ItemStack, EntityPlayer entityplayer, List list, boolean is){
 		list.add("Right-click on the ground to");
@@ -48,28 +63,28 @@ public class ItemPortalPlacer extends ItemGeneralAC
 						if(par3World.getBlockMetadata(par4, par5 + y, par6 + z) != 0)
 						{
 							FMLClientHandler.instance().getClient().ingameGUI.getChatGUI().printChatMessage(new ChatComponentText("No room for a portal."));
-									return false;
+							return false;
 						}
 					}
 				}
 
-				par3World.setBlock(par4, par5 + 1, par6, AbyssalCraft.Darkstone);
-				par3World.setBlock(par4, par5 + 1, par6 + 1, AbyssalCraft.Darkstone);
-				par3World.setBlock(par4, par5 + 1, par6 + 2, AbyssalCraft.Darkstone);
-				par3World.setBlock(par4, par5 + 1, par6 - 1, AbyssalCraft.Darkstone);
+				par3World.setBlock(par4, par5 + 1, par6, AbyssalCraft.abystone);
+				par3World.setBlock(par4, par5 + 1, par6 + 1, AbyssalCraft.abystone);
+				par3World.setBlock(par4, par5 + 1, par6 + 2, AbyssalCraft.abystone);
+				par3World.setBlock(par4, par5 + 1, par6 - 1, AbyssalCraft.abystone);
 
-				par3World.setBlock(par4, par5 + 2, par6 - 1, AbyssalCraft.Darkstone);
-				par3World.setBlock(par4, par5 + 3, par6 - 1, AbyssalCraft.Darkstone);
-				par3World.setBlock(par4, par5 + 4, par6 - 1, AbyssalCraft.Darkstone);
-				par3World.setBlock(par4, par5 + 5, par6 - 1, AbyssalCraft.Darkstone);
+				par3World.setBlock(par4, par5 + 2, par6 - 1, AbyssalCraft.abystone);
+				par3World.setBlock(par4, par5 + 3, par6 - 1, AbyssalCraft.abystone);
+				par3World.setBlock(par4, par5 + 4, par6 - 1, AbyssalCraft.abystone);
+				par3World.setBlock(par4, par5 + 5, par6 - 1, AbyssalCraft.abystone);
 
-				par3World.setBlock(par4, par5 + 2, par6 + 2, AbyssalCraft.Darkstone);
-				par3World.setBlock(par4, par5 + 3, par6 + 2, AbyssalCraft.Darkstone);
-				par3World.setBlock(par4, par5 + 4, par6 + 2, AbyssalCraft.Darkstone);
-				par3World.setBlock(par4, par5 + 5, par6 + 2, AbyssalCraft.Darkstone);
+				par3World.setBlock(par4, par5 + 2, par6 + 2, AbyssalCraft.abystone);
+				par3World.setBlock(par4, par5 + 3, par6 + 2, AbyssalCraft.abystone);
+				par3World.setBlock(par4, par5 + 4, par6 + 2, AbyssalCraft.abystone);
+				par3World.setBlock(par4, par5 + 5, par6 + 2, AbyssalCraft.abystone);
 
-				par3World.setBlock(par4, par5 + 5, par6, AbyssalCraft.Darkstone);
-				par3World.setBlock(par4, par5 + 5, par6 + 1, AbyssalCraft.Darkstone);
+				par3World.setBlock(par4, par5 + 5, par6, AbyssalCraft.abystone);
+				par3World.setBlock(par4, par5 + 5, par6 + 1, AbyssalCraft.abystone);
 
 				par3World.setBlock(par4, par5 + 2, par6 + 1, AbyssalCraft.Coraliumfire);
 			}
@@ -82,28 +97,28 @@ public class ItemPortalPlacer extends ItemGeneralAC
 						if(par3World.getBlockMetadata(par4 + x, par5 + y, par6) != 0)
 						{
 							FMLClientHandler.instance().getClient().ingameGUI.getChatGUI().printChatMessage(new ChatComponentText("No room for a portal."));
-									return false;
+							return false;
 						}
 					}
 				}
 
-				par3World.setBlock(par4, par5 + 1, par6, AbyssalCraft.Darkstone);
-				par3World.setBlock(par4 + 1, par5 + 1, par6, AbyssalCraft.Darkstone);
-				par3World.setBlock(par4 + 2, par5 + 1, par6, AbyssalCraft.Darkstone);
-				par3World.setBlock(par4 - 1, par5 + 1, par6, AbyssalCraft.Darkstone);
+				par3World.setBlock(par4, par5 + 1, par6, AbyssalCraft.abystone);
+				par3World.setBlock(par4 + 1, par5 + 1, par6, AbyssalCraft.abystone);
+				par3World.setBlock(par4 + 2, par5 + 1, par6, AbyssalCraft.abystone);
+				par3World.setBlock(par4 - 1, par5 + 1, par6, AbyssalCraft.abystone);
 
-				par3World.setBlock(par4 - 1, par5 + 2, par6, AbyssalCraft.Darkstone);
-				par3World.setBlock(par4 - 1, par5 + 3, par6, AbyssalCraft.Darkstone);
-				par3World.setBlock(par4 - 1, par5 + 4, par6, AbyssalCraft.Darkstone);
-				par3World.setBlock(par4 - 1, par5 + 5, par6, AbyssalCraft.Darkstone);
+				par3World.setBlock(par4 - 1, par5 + 2, par6, AbyssalCraft.abystone);
+				par3World.setBlock(par4 - 1, par5 + 3, par6, AbyssalCraft.abystone);
+				par3World.setBlock(par4 - 1, par5 + 4, par6, AbyssalCraft.abystone);
+				par3World.setBlock(par4 - 1, par5 + 5, par6, AbyssalCraft.abystone);
 
-				par3World.setBlock(par4 + 2, par5 + 2, par6, AbyssalCraft.Darkstone);
-				par3World.setBlock(par4 + 2, par5 + 3, par6, AbyssalCraft.Darkstone);
-				par3World.setBlock(par4 + 2, par5 + 4, par6, AbyssalCraft.Darkstone);
-				par3World.setBlock(par4 + 2, par5 + 5, par6, AbyssalCraft.Darkstone);
+				par3World.setBlock(par4 + 2, par5 + 2, par6, AbyssalCraft.abystone);
+				par3World.setBlock(par4 + 2, par5 + 3, par6, AbyssalCraft.abystone);
+				par3World.setBlock(par4 + 2, par5 + 4, par6, AbyssalCraft.abystone);
+				par3World.setBlock(par4 + 2, par5 + 5, par6, AbyssalCraft.abystone);
 
-				par3World.setBlock(par4, par5 + 5, par6, AbyssalCraft.Darkstone);
-				par3World.setBlock(par4 + 1, par5 + 5, par6, AbyssalCraft.Darkstone);
+				par3World.setBlock(par4, par5 + 5, par6, AbyssalCraft.abystone);
+				par3World.setBlock(par4 + 1, par5 + 5, par6, AbyssalCraft.abystone);
 
 				par3World.setBlock(par4 + 1, par5 + 2, par6, AbyssalCraft.Coraliumfire);
 			}
@@ -117,34 +132,34 @@ public class ItemPortalPlacer extends ItemGeneralAC
 	/**  When portal block generation has been changed to match the new design, replace the methods
          	above with these (keep the Coralium Fire)
 
-         				   par3World.setBlock(par4, par5 + 1, par6 - 2, AbyssalCraft.Darkstone);
-                           par3World.setBlock(par4, par5 + 2, par6 - 2, AbyssalCraft.Darkstone);
-                           par3World.setBlock(par4, par5 + 3, par6 - 2, AbyssalCraft.Darkstone);
-                           par3World.setBlock(par4, par5 + 4, par6 - 2, AbyssalCraft.Darkstone);
-                           par3World.setBlock(par4, par5 + 5, par6 - 2, AbyssalCraft.Darkstone);
+         				   par3World.setBlock(par4, par5 + 1, par6 - 2, AbyssalCraft.abystone);
+                           par3World.setBlock(par4, par5 + 2, par6 - 2, AbyssalCraft.abystone);
+                           par3World.setBlock(par4, par5 + 3, par6 - 2, AbyssalCraft.abystone);
+                           par3World.setBlock(par4, par5 + 4, par6 - 2, AbyssalCraft.abystone);
+                           par3World.setBlock(par4, par5 + 5, par6 - 2, AbyssalCraft.abystone);
 
-                           par3World.setBlock(par4, par5 + 2, par6 + 2, AbyssalCraft.Darkstone);
-                           par3World.setBlock(par4, par5 + 3, par6 + 2, AbyssalCraft.Darkstone);
-                           par3World.setBlock(par4, par5 + 4, par6 + 2, AbyssalCraft.Darkstone);
-                           par3World.setBlock(par4, par5 + 5, par6 + 2, AbyssalCraft.Darkstone);
+                           par3World.setBlock(par4, par5 + 2, par6 + 2, AbyssalCraft.abystone);
+                           par3World.setBlock(par4, par5 + 3, par6 + 2, AbyssalCraft.abystone);
+                           par3World.setBlock(par4, par5 + 4, par6 + 2, AbyssalCraft.abystone);
+                           par3World.setBlock(par4, par5 + 5, par6 + 2, AbyssalCraft.abystone);
 
-                           par3World.setBlock(par4, par5 + 5, par6, AbyssalCraft.Darkstone);
-                           par3World.setBlock(par4, par5 + 5, par6 + 1, AbyssalCraft.Darkstone);
-                           par3World.setBlock(par4, par5 + 5, par6 - 1, AbyssalCraft.Darkstone);
+                           par3World.setBlock(par4, par5 + 5, par6, AbyssalCraft.abystone);
+                           par3World.setBlock(par4, par5 + 5, par6 + 1, AbyssalCraft.abystone);
+                           par3World.setBlock(par4, par5 + 5, par6 - 1, AbyssalCraft.abystone);
 
-						   par3World.setBlock(par4 - 2, par5 + 1, par6, AbyssalCraft.Darkstone);
-                           par3World.setBlock(par4 - 2, par5 + 2, par6, AbyssalCraft.Darkstone);
-                           par3World.setBlock(par4 - 2, par5 + 3, par6, AbyssalCraft.Darkstone);
-                           par3World.setBlock(par4 - 2, par5 + 4, par6, AbyssalCraft.Darkstone);
-                           par3World.setBlock(par4 - 2, par5 + 5, par6, AbyssalCraft.Darkstone);
+						   par3World.setBlock(par4 - 2, par5 + 1, par6, AbyssalCraft.abystone);
+                           par3World.setBlock(par4 - 2, par5 + 2, par6, AbyssalCraft.abystone);
+                           par3World.setBlock(par4 - 2, par5 + 3, par6, AbyssalCraft.abystone);
+                           par3World.setBlock(par4 - 2, par5 + 4, par6, AbyssalCraft.abystone);
+                           par3World.setBlock(par4 - 2, par5 + 5, par6, AbyssalCraft.abystone);
 
-                           par3World.setBlock(par4 + 2, par5 + 2, par6, AbyssalCraft.Darkstone);
-                           par3World.setBlock(par4 + 2, par5 + 3, par6, AbyssalCraft.Darkstone);
-                           par3World.setBlock(par4 + 2, par5 + 4, par6, AbyssalCraft.Darkstone);
-                           par3World.setBlock(par4 + 2, par5 + 5, par6, AbyssalCraft.Darkstone);
+                           par3World.setBlock(par4 + 2, par5 + 2, par6, AbyssalCraft.abystone);
+                           par3World.setBlock(par4 + 2, par5 + 3, par6, AbyssalCraft.abystone);
+                           par3World.setBlock(par4 + 2, par5 + 4, par6, AbyssalCraft.abystone);
+                           par3World.setBlock(par4 + 2, par5 + 5, par6, AbyssalCraft.abystone);
 
-                           par3World.setBlock(par4, par5 + 5, par6, AbyssalCraft.Darkstone);
-                           par3World.setBlock(par4 + 1, par5 + 5, par6, AbyssalCraft.Darkstone);
-                           par3World.setBlock(par4 - 1, par5 + 5, par6, AbyssalCraft.Darkstone);
+                           par3World.setBlock(par4, par5 + 5, par6, AbyssalCraft.abystone);
+                           par3World.setBlock(par4 + 1, par5 + 5, par6, AbyssalCraft.abystone);
+                           par3World.setBlock(par4 - 1, par5 + 5, par6, AbyssalCraft.abystone);
 	 */
 }

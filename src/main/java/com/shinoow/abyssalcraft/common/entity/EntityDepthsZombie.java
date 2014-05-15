@@ -1,3 +1,18 @@
+/**AbyssalCraft
+ *Copyright 2012-2014 Shinoow
+ *
+ *Licensed under the Apache License, Version 2.0 (the "License");
+ *you may not use this file except in compliance with the License.
+ *You may obtain a copy of the License at
+ *
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *Unless required by applicable law or agreed to in writing, software
+ *distributed under the License is distributed on an "AS IS" BASIS,
+ *WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *See the License for the specific language governing permissions and
+ *limitations under the License.
+ */
 package com.shinoow.abyssalcraft.common.entity;
 
 import java.util.Calendar;
@@ -19,7 +34,6 @@ import net.minecraft.entity.ai.EntityAIWander;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.ai.attributes.IAttributeInstance;
-import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.monster.EntitySkeleton;
 import net.minecraft.entity.monster.EntityZombie;
 import net.minecraft.entity.player.EntityPlayer;
@@ -34,8 +48,9 @@ import net.minecraft.world.World;
 import net.minecraft.world.WorldProviderEnd;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
+import com.shinoow.abyssalcraft.core.api.entity.CoraliumMob;
 
-public class EntityDepthsZombie extends EntityMob
+public class EntityDepthsZombie extends CoraliumMob
 {
 
 	private static final UUID babySpeedBoostUUID = UUID.fromString("B9766B59-9566-4402-BC1F-2EE2A276D836");
@@ -84,13 +99,6 @@ public class EntityDepthsZombie extends EntityMob
 		}
 	}
 
-	@Override
-	public boolean canBreatheUnderwater() 
-	{
-		return true;
-
-	}
-
 	protected void entityInit()
 	{
 		super.entityInit();
@@ -105,6 +113,11 @@ public class EntityDepthsZombie extends EntityMob
 		return this.getDataWatcher().getWatchableObjectByte(12) == 1;
 	}
 
+	protected float getSoundPitch()
+	{
+		return 0.9F;
+	}
+	
 	/**
 	 * Set whether this zombie is a child.
 	 */

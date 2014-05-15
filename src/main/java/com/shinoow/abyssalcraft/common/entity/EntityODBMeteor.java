@@ -1,3 +1,18 @@
+/**AbyssalCraft
+ *Copyright 2012-2014 Shinoow
+ *
+ *Licensed under the Apache License, Version 2.0 (the "License");
+ *you may not use this file except in compliance with the License.
+ *You may obtain a copy of the License at
+ *
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *Unless required by applicable law or agreed to in writing, software
+ *distributed under the License is distributed on an "AS IS" BASIS,
+ *WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *See the License for the specific language governing permissions and
+ *limitations under the License.
+ */
 package com.shinoow.abyssalcraft.common.entity;
 
 import java.util.List;
@@ -206,66 +221,66 @@ public class EntityODBMeteor extends Entity
 	}
 
 	public boolean canBeCollidedWith()
-    {
-        return true;
-    }
+	{
+		return true;
+	}
 
-    public float getCollisionBorderSize()
-    {
-        return 1.0F;
-    }
-    
-    protected float getMotionFactor()
-    {
-        return 0.95F;
-    }
-	
-    public void writeEntityToNBT(NBTTagCompound par1NBTTagCompound)
-    {
-        par1NBTTagCompound.setShort("xTile", (short)this.field_145795_e);
-        par1NBTTagCompound.setShort("yTile", (short)this.field_145793_f);
-        par1NBTTagCompound.setShort("zTile", (short)this.field_145794_g);
-        par1NBTTagCompound.setByte("inTile", (byte)Block.getIdFromBlock(this.field_145796_h));
-        par1NBTTagCompound.setByte("inGround", (byte)(this.inGround ? 1 : 0));
-        par1NBTTagCompound.setTag("direction", this.newDoubleNBTList(new double[] {this.motionX, this.motionY, this.motionZ}));
-    }
+	public float getCollisionBorderSize()
+	{
+		return 1.0F;
+	}
 
-    /**
-     * (abstract) Protected helper method to read subclass entity data from NBT.
-     */
-    public void readEntityFromNBT(NBTTagCompound par1NBTTagCompound)
-    {
-        this.field_145795_e = par1NBTTagCompound.getShort("xTile");
-        this.field_145793_f = par1NBTTagCompound.getShort("yTile");
-        this.field_145794_g = par1NBTTagCompound.getShort("zTile");
-        this.field_145796_h = Block.getBlockById(par1NBTTagCompound.getByte("inTile") & 255);
-        this.inGround = par1NBTTagCompound.getByte("inGround") == 1;
+	protected float getMotionFactor()
+	{
+		return 0.95F;
+	}
 
-        if (par1NBTTagCompound.hasKey("direction", 9))
-        {
-            NBTTagList nbttaglist = par1NBTTagCompound.getTagList("direction", 6);
-            this.motionX = nbttaglist.func_150309_d(0);
-            this.motionY = nbttaglist.func_150309_d(1);
-            this.motionZ = nbttaglist.func_150309_d(2);
-        }
-        else
-        {
-            this.setDead();
-        }
-    }
-	
+	public void writeEntityToNBT(NBTTagCompound par1NBTTagCompound)
+	{
+		par1NBTTagCompound.setShort("xTile", (short)this.field_145795_e);
+		par1NBTTagCompound.setShort("yTile", (short)this.field_145793_f);
+		par1NBTTagCompound.setShort("zTile", (short)this.field_145794_g);
+		par1NBTTagCompound.setByte("inTile", (byte)Block.getIdFromBlock(this.field_145796_h));
+		par1NBTTagCompound.setByte("inGround", (byte)(this.inGround ? 1 : 0));
+		par1NBTTagCompound.setTag("direction", this.newDoubleNBTList(new double[] {this.motionX, this.motionY, this.motionZ}));
+	}
+
+	/**
+	 * (abstract) Protected helper method to read subclass entity data from NBT.
+	 */
+	public void readEntityFromNBT(NBTTagCompound par1NBTTagCompound)
+	{
+		this.field_145795_e = par1NBTTagCompound.getShort("xTile");
+		this.field_145793_f = par1NBTTagCompound.getShort("yTile");
+		this.field_145794_g = par1NBTTagCompound.getShort("zTile");
+		this.field_145796_h = Block.getBlockById(par1NBTTagCompound.getByte("inTile") & 255);
+		this.inGround = par1NBTTagCompound.getByte("inGround") == 1;
+
+		if (par1NBTTagCompound.hasKey("direction", 9))
+		{
+			NBTTagList nbttaglist = par1NBTTagCompound.getTagList("direction", 6);
+			this.motionX = nbttaglist.func_150309_d(0);
+			this.motionY = nbttaglist.func_150309_d(1);
+			this.motionZ = nbttaglist.func_150309_d(2);
+		}
+		else
+		{
+			this.setDead();
+		}
+	}
+
 	protected void onImpact(MovingObjectPosition movingobjectposition)
 	{
 		if (!this.worldObj.isRemote)
-        {
-            if (movingobjectposition.entityHit != null)
-            {
-                movingobjectposition.entityHit.attackEntityFrom(DamageSource.causeThrownDamage(this, this.shootingEntity), 6.0F);
-            }
+		{
+			if (movingobjectposition.entityHit != null)
+			{
+				movingobjectposition.entityHit.attackEntityFrom(DamageSource.causeThrownDamage(this, this.shootingEntity), 6.0F);
+			}
 
-            this.worldObj.newExplosion((Entity)null, this.posX, this.posY, this.posZ, (float)this.field_92057_e, true, this.worldObj.getGameRules().getGameRuleBooleanValue("mobGriefing"));
-            this.setDead();
-        }
+			this.worldObj.newExplosion((Entity)null, this.posX, this.posY, this.posZ, (float)this.field_92057_e, true, this.worldObj.getGameRules().getGameRuleBooleanValue("mobGriefing"));
+			this.setDead();
+		}
 	}
 
 }

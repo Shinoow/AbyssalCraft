@@ -1,3 +1,18 @@
+/**AbyssalCraft
+ *Copyright 2012-2014 Shinoow
+ *
+ *Licensed under the Apache License, Version 2.0 (the "License");
+ *you may not use this file except in compliance with the License.
+ *You may obtain a copy of the License at
+ *
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *Unless required by applicable law or agreed to in writing, software
+ *distributed under the License is distributed on an "AS IS" BASIS,
+ *WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *See the License for the specific language governing permissions and
+ *limitations under the License.
+ */
 package com.shinoow.abyssalcraft;
 
 import java.lang.reflect.Field;
@@ -33,15 +48,8 @@ import net.minecraftforge.fluids.FluidContainerRegistry;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.oredict.OreDictionary;
 
-import com.shinoow.abyssalcraft.common.AbyssalCraftBlocks;
 import com.shinoow.abyssalcraft.common.AbyssalCraftItems;
 import com.shinoow.abyssalcraft.common.CommonProxyAbyssalCraft;
-import com.shinoow.abyssalcraft.common.CreativeTabs.TabACBlocks;
-import com.shinoow.abyssalcraft.common.CreativeTabs.TabACCombat;
-import com.shinoow.abyssalcraft.common.CreativeTabs.TabACDecoration;
-import com.shinoow.abyssalcraft.common.CreativeTabs.TabACFood;
-import com.shinoow.abyssalcraft.common.CreativeTabs.TabACItems;
-import com.shinoow.abyssalcraft.common.CreativeTabs.TabACTools;
 import com.shinoow.abyssalcraft.common.blocks.ACPressureplate;
 import com.shinoow.abyssalcraft.common.blocks.ACfence;
 import com.shinoow.abyssalcraft.common.blocks.AbyCoraliumore;
@@ -64,6 +72,7 @@ import com.shinoow.abyssalcraft.common.blocks.Coraliumfire;
 import com.shinoow.abyssalcraft.common.blocks.Coraliumstone;
 import com.shinoow.abyssalcraft.common.blocks.Crate;
 import com.shinoow.abyssalcraft.common.blocks.Cstone;
+import com.shinoow.abyssalcraft.common.blocks.CstoneBrick;
 import com.shinoow.abyssalcraft.common.blocks.Cstonebrickslab;
 import com.shinoow.abyssalcraft.common.blocks.Cstonebrickslabdouble;
 import com.shinoow.abyssalcraft.common.blocks.Cstonebrickstairs;
@@ -118,12 +127,14 @@ import com.shinoow.abyssalcraft.common.blocks.abystoneslabdouble;
 import com.shinoow.abyssalcraft.common.blocks.corblock;
 import com.shinoow.abyssalcraft.common.blocks.itemblock.ItemAbyDreadbrickSlab;
 import com.shinoow.abyssalcraft.common.blocks.itemblock.ItemAbySlab;
+import com.shinoow.abyssalcraft.common.blocks.itemblock.ItemAltar;
 import com.shinoow.abyssalcraft.common.blocks.itemblock.ItemCstonebrickSlab;
 import com.shinoow.abyssalcraft.common.blocks.itemblock.ItemDLTSlab;
 import com.shinoow.abyssalcraft.common.blocks.itemblock.ItemDarkbrickSlab;
 import com.shinoow.abyssalcraft.common.blocks.itemblock.ItemDarkcobbleSlab;
 import com.shinoow.abyssalcraft.common.blocks.itemblock.ItemDarkstoneSlab;
 import com.shinoow.abyssalcraft.common.blocks.itemblock.ItemDreadbrickSlab;
+import com.shinoow.abyssalcraft.common.blocks.itemblock.ItemODB;
 import com.shinoow.abyssalcraft.common.blocks.tile.TileEntityAltar;
 import com.shinoow.abyssalcraft.common.blocks.tile.TileEntityCrate;
 import com.shinoow.abyssalcraft.common.blocks.tile.TileEntityDGhead;
@@ -131,6 +142,12 @@ import com.shinoow.abyssalcraft.common.blocks.tile.TileEntityOhead;
 import com.shinoow.abyssalcraft.common.blocks.tile.TileEntityPSDL;
 import com.shinoow.abyssalcraft.common.blocks.tile.TileEntityPhead;
 import com.shinoow.abyssalcraft.common.blocks.tile.TileEntityWhead;
+import com.shinoow.abyssalcraft.common.creativetabs.TabACBlocks;
+import com.shinoow.abyssalcraft.common.creativetabs.TabACCombat;
+import com.shinoow.abyssalcraft.common.creativetabs.TabACDecoration;
+import com.shinoow.abyssalcraft.common.creativetabs.TabACFood;
+import com.shinoow.abyssalcraft.common.creativetabs.TabACItems;
+import com.shinoow.abyssalcraft.common.creativetabs.TabACTools;
 import com.shinoow.abyssalcraft.common.entity.EntityDemonPig;
 import com.shinoow.abyssalcraft.common.entity.EntityDepthsZombie;
 import com.shinoow.abyssalcraft.common.entity.EntityDepthsghoul;
@@ -152,6 +169,7 @@ import com.shinoow.abyssalcraft.common.entity.Entityevilpig;
 import com.shinoow.abyssalcraft.common.handlers.AbyssalCraftEventHooks;
 import com.shinoow.abyssalcraft.common.handlers.BiomeEventHandler;
 import com.shinoow.abyssalcraft.common.handlers.BucketHandler;
+import com.shinoow.abyssalcraft.common.handlers.CraftingHandler;
 import com.shinoow.abyssalcraft.common.items.AbyssalCraftTool;
 import com.shinoow.abyssalcraft.common.items.ItemAbyssalniteAxe;
 import com.shinoow.abyssalcraft.common.items.ItemAbyssalniteCAxe;
@@ -221,6 +239,7 @@ import com.shinoow.abyssalcraft.common.world.biome.BiomeGenForestDreadlands;
 import com.shinoow.abyssalcraft.common.world.biome.BiomeGenMountainDreadlands;
 import com.shinoow.abyssalcraft.packet.PacketPipeline;
 
+import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Instance;
@@ -499,8 +518,6 @@ public class AbyssalCraft
 	//public static int dimension3 = 52;
 	static int startEntityId = 300;
 
-	public static Item PSDLrender;
-
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event)
 	{
@@ -531,6 +548,7 @@ public class AbyssalCraft
 
 		MinecraftForge.EVENT_BUS.register(new AbyssalCraftEventHooks());
 		MinecraftForge.TERRAIN_GEN_BUS.register(new BiomeEventHandler());
+		FMLCommonHandler.instance().bus().register(new CraftingHandler());
 		instance = this;
 		proxy.preInit();
 
@@ -634,14 +652,14 @@ public class AbyssalCraft
 		abydreadbrickslab2 = (BlockSlab) new AbyDreadbrickslabdouble(true).setHardness(2.5F).setResistance(20.0F).setStepSound(Block.soundTypeStone).setBlockName("AbyDrSBs2").setBlockTextureName(modid + ":" + "AbyDrSB");
 		anticwater = new Antiliquid().setResistance(100.0F).setLightLevel(0.5F).setBlockName("antiliquid");
 		cstone = new Cstone().setHardness(1.5F).setResistance(10.0F).setStepSound(Block.soundTypeStone).setBlockName("cstone").setBlockTextureName(modid + ":" + "cstone");
-		cstonebrick = new AbyssalCraftBlocks(Material.rock).setHardness(1.5F).setResistance(10.0F).setStepSound(Block.soundTypeStone).setBlockName("cstonebrick").setBlockTextureName(modid + ":" + "cstonebrick");
+		cstonebrick = new CstoneBrick().setHardness(1.5F).setResistance(10.0F).setStepSound(Block.soundTypeStone).setBlockName("cstonebrick").setBlockTextureName(modid + ":" + "cstonebrick");
 		cstonebrickfence = new ACfence("cstonebrick", Material.rock, "pickaxe", 0).setHardness(1.5F).setResistance(10.0F).setStepSound(Block.soundTypeStone).setBlockName("cstonebrickf");
 		cstonebrickslab1 = (BlockSlab) new Cstonebrickslab(false).setHardness(1.5F).setResistance(10.0F).setStepSound(Block.soundTypeStone).setBlockName("cstonebricks1").setBlockTextureName(modid + ":" + "cstonebrick");
 		cstonebrickslab2 = (BlockSlab) new Cstonebrickslabdouble(true).setHardness(1.5F).setResistance(10.0F).setStepSound(Block.soundTypeStone).setBlockName("cstonebricks2").setBlockTextureName(modid + ":" + "cstonebrick");
 		cstonebrickstairs = new Cstonebrickstairs(0).setHardness(1.5F).setResistance(10.0F).setStepSound(Block.soundTypeStone).setBlockName("cstonebricks").setBlockTextureName(modid + ":" + "cstonebrick");
 		cstonebutton = new Cstonebutton().setHardness(0.6F).setResistance(12.0F).setBlockName("cstonebutton");
 		cstonepplate = new ACPressureplate("cstone", Material.rock, ACPressureplate.Sensitivity.mobs, "pickaxe", 0).setHardness(0.6F).setResistance(12.0F).setStepSound(Block.soundTypeStone).setBlockName("cstonepplate");
-		
+
 		//Biome
 		Darklands = (new BiomeGenDarklands(100).setColor(522674).setBiomeName("Darklands"));
 		Wastelands = (new BiomeGenAbywasteland(101).setColor(522674).setBiomeName("Abyssal Wastelands").setDisableRain());
@@ -808,7 +826,7 @@ public class AbyssalCraft
 		GameRegistry.registerBlock(abyore, "abyore");
 		GameRegistry.registerBlock(abyfence, "abyfence");
 		GameRegistry.registerBlock(DSCwall, "dscwall");
-		GameRegistry.registerBlock(ODB, "odb");
+		GameRegistry.registerBlock(ODB, ItemODB.class, "odb");
 		GameRegistry.registerBlock(abyblock, "abyblock");
 		GameRegistry.registerBlock(Coraliumstone, "coraliumstone");
 		GameRegistry.registerBlock(ODBcore, "odbcore");
@@ -829,7 +847,7 @@ public class AbyssalCraft
 		GameRegistry.registerBlock(corblock, "corblock");
 		GameRegistry.registerBlock(PSDL, "psdl");
 		GameRegistry.registerBlock(AbyCorOre, "abycorore");
-		GameRegistry.registerBlock(Altar, "altar");
+		GameRegistry.registerBlock(Altar, ItemAltar.class, "altar");
 		GameRegistry.registerBlock(Abybutton, "abybutton");
 		GameRegistry.registerBlock(Abypplate, "abypplate");
 		GameRegistry.registerBlock(DSBfence, "dsbfence");
@@ -1120,7 +1138,6 @@ public class AbyssalCraft
 
 	@EventHandler
 	public void Init(FMLInitializationEvent event)
-
 	{
 		//start, mineDS, mineAby, killghoul, enterabyss, killdragon, summonAsorah, killAsorah, enterdreadlands, killdreadguard, ghoulhead, killPete, killWilson, killOrange, petehead, wilsonhead, orangehead, mineCorgem, mineCorore, findPSDL, GK1, Gk2, Gk3, Jzhstaff
 

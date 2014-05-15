@@ -1,3 +1,18 @@
+/**AbyssalCraft
+ *Copyright 2012-2014 Shinoow
+ *
+ *Licensed under the Apache License, Version 2.0 (the "License");
+ *you may not use this file except in compliance with the License.
+ *You may obtain a copy of the License at
+ *
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *Unless required by applicable law or agreed to in writing, software
+ *distributed under the License is distributed on an "AS IS" BASIS,
+ *WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *See the License for the specific language governing permissions and
+ *limitations under the License.
+ */
 package com.shinoow.abyssalcraft.common.world.biome;
 
 import java.util.Random;
@@ -23,7 +38,7 @@ public class BiomeGenAbywasteland extends BiomeGenBase
 	public BiomeGenAbywasteland(int par1)
 	{
 		super(par1);
-		
+
 		this.waterColorMultiplier = 0x24FF83;
 		this.spawnableMonsterList.clear();
 		this.spawnableCreatureList.clear();
@@ -34,7 +49,7 @@ public class BiomeGenAbywasteland extends BiomeGenBase
 		this.spawnableMonsterList.add(new SpawnListEntry(EntityDepthsghoul.class, 5, 1, 5));
 		this.spawnableMonsterList.add(new SpawnListEntry(EntityDepthsZombie.class, 5, 1, 5));
 	}
-	
+
 	public void decorate(World par1World, Random par2Random, int par3, int par4)
 	{
 		super.decorate(par1World, par2Random, par3, par4);
@@ -58,107 +73,107 @@ public class BiomeGenAbywasteland extends BiomeGenBase
 	} 
 	@Override
 	public void genTerrainBlocks(World p_150573_1_, Random p_150573_2_, Block[] p_150573_3_, byte[] p_150573_4_, int p_150573_5_, int p_150573_6_, double p_150573_7_)
-    {
+	{
 		this.topBlock = (Block)AbyssalCraft.abystone;
 		this.fillerBlock = (Block)AbyssalCraft.abystone;
-        this.genAbyssTerrain(p_150573_1_, p_150573_2_, p_150573_3_, p_150573_4_, p_150573_5_, p_150573_6_, p_150573_7_);
-    }
-	
+		this.genAbyssTerrain(p_150573_1_, p_150573_2_, p_150573_3_, p_150573_4_, p_150573_5_, p_150573_6_, p_150573_7_);
+	}
+
 	public final void genAbyssTerrain(World p_150560_1_, Random p_150560_2_, Block[] p_150560_3_, byte[] p_150560_4_, int p_150560_5_, int p_150560_6_, double p_150560_7_)
-    {
-        Block block = this.topBlock;
-        byte b0 = (byte)(this.field_150604_aj & 255);
-        Block block1 = this.fillerBlock;
-        int k = -1;
-        int l = (int)(p_150560_7_ / 3.0D + 3.0D + p_150560_2_.nextDouble() * 0.25D);
-        int i1 = p_150560_5_ & 15;
-        int j1 = p_150560_6_ & 15;
-        int k1 = p_150560_3_.length / 256;
+	{
+		Block block = this.topBlock;
+		byte b0 = (byte)(this.field_150604_aj & 255);
+		Block block1 = this.fillerBlock;
+		int k = -1;
+		int l = (int)(p_150560_7_ / 3.0D + 3.0D + p_150560_2_.nextDouble() * 0.25D);
+		int i1 = p_150560_5_ & 15;
+		int j1 = p_150560_6_ & 15;
+		int k1 = p_150560_3_.length / 256;
 
-        for (int l1 = 255; l1 >= 0; --l1)
-        {
-            int i2 = (j1 * 16 + i1) * k1 + l1;
+		for (int l1 = 255; l1 >= 0; --l1)
+		{
+			int i2 = (j1 * 16 + i1) * k1 + l1;
 
-            if (l1 <= 0 + p_150560_2_.nextInt(5))
-            {
-                p_150560_3_[i2] = Blocks.bedrock;
-            }
-            else
-            {
-                Block block2 = p_150560_3_[i2];
+			if (l1 <= 0 + p_150560_2_.nextInt(5))
+			{
+				p_150560_3_[i2] = Blocks.bedrock;
+			}
+			else
+			{
+				Block block2 = p_150560_3_[i2];
 
-                if (block2 != null && block2.getMaterial() != Material.air)
-                {
-                    if (block2 == AbyssalCraft.abystone)
-                    {
-                        if (k == -1)
-                        {
-                            if (l <= 0)
-                            {
-                                block = null;
-                                b0 = 0;
-                                block1 = AbyssalCraft.abystone;
-                            }
-                            else if (l1 >= 59 && l1 <= 64)
-                            {
-                                block = this.topBlock;
-                                b0 = (byte)(this.field_150604_aj & 255);
-                                block1 = this.fillerBlock;
-                            }
+				if (block2 != null && block2.getMaterial() != Material.air)
+				{
+					if (block2 == AbyssalCraft.abystone)
+					{
+						if (k == -1)
+						{
+							if (l <= 0)
+							{
+								block = null;
+								b0 = 0;
+								block1 = AbyssalCraft.abystone;
+							}
+							else if (l1 >= 59 && l1 <= 64)
+							{
+								block = this.topBlock;
+								b0 = (byte)(this.field_150604_aj & 255);
+								block1 = this.fillerBlock;
+							}
 
-                            if (l1 < 63 && (block == null || block.getMaterial() == Material.air))
-                            {
-                                if (this.getFloatTemperature(p_150560_5_, l1, p_150560_6_) < 0.15F)
-                                {
-                                    block = Blocks.ice;
-                                    b0 = 0;
-                                }
-                                else
-                                {
-                                    block = Blocks.water;
-                                    b0 = 0;
-                                }
-                            }
+							if (l1 < 63 && (block == null || block.getMaterial() == Material.air))
+							{
+								if (this.getFloatTemperature(p_150560_5_, l1, p_150560_6_) < 0.15F)
+								{
+									block = Blocks.ice;
+									b0 = 0;
+								}
+								else
+								{
+									block = Blocks.water;
+									b0 = 0;
+								}
+							}
 
-                            k = l;
+							k = l;
 
-                            if (l1 >= 62)
-                            {
-                                p_150560_3_[i2] = block;
-                                p_150560_4_[i2] = b0;
-                            }
-                            else if (l1 < 56 - l)
-                            {
-                                block = null;
-                                block1 = AbyssalCraft.abystone;
-                                p_150560_3_[i2] = AbyssalCraft.abystone;
-                            }
-                            else
-                            {
-                                p_150560_3_[i2] = block1;
-                            }
-                        }
-                        else if (k > 0)
-                        {
-                            --k;
-                            p_150560_3_[i2] = block1;
+							if (l1 >= 62)
+							{
+								p_150560_3_[i2] = block;
+								p_150560_4_[i2] = b0;
+							}
+							else if (l1 < 56 - l)
+							{
+								block = null;
+								block1 = AbyssalCraft.abystone;
+								p_150560_3_[i2] = AbyssalCraft.abystone;
+							}
+							else
+							{
+								p_150560_3_[i2] = block1;
+							}
+						}
+						else if (k > 0)
+						{
+							--k;
+							p_150560_3_[i2] = block1;
 
-                            if (k == 0 && block1 == Blocks.sand)
-                            {
-                                k = p_150560_2_.nextInt(4) + Math.max(0, l1 - 63);
-                                block1 = Blocks.sandstone;
-                            }
-                        }
-                    }
-                }
-                else
-                {
-                    k = -1;
-                }
-            }
-        }
-    }
-	
+							if (k == 0 && block1 == Blocks.sand)
+							{
+								k = p_150560_2_.nextInt(4) + Math.max(0, l1 - 63);
+								block1 = Blocks.sandstone;
+							}
+						}
+					}
+				}
+				else
+				{
+					k = -1;
+				}
+			}
+		}
+	}
+
 	@SideOnly(Side.CLIENT)
 
 	public int getSkyColorByTemp(float par1)
