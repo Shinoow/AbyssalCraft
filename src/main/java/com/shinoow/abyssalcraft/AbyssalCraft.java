@@ -256,7 +256,7 @@ import cpw.mods.fml.common.registry.GameRegistry;
 @Mod(modid = AbyssalCraft.modid, name = AbyssalCraft.name, version = AbyssalCraft.version, useMetadata = true)
 public class AbyssalCraft
 {
-	public static final String version = "1.5.0";
+	public static final String version = "1.5.5";
 	public static final String modid = "abyssalcraft";
 	public static final String name = "AbyssalCraft";
 
