@@ -1,7 +1,6 @@
-#Start av lokaliseringfilen
-#Översätter till ett annat språk? Man, jag tycker synd om dig.
+#Start of localization file
 
-#Prestationer
+#Achievements
 achievement.mineDS=
 achievement.mineDS.desc=
 
@@ -74,8 +73,48 @@ achievement.Jzhstaff.desc=
 achievement.secret1=
 achievement.secret1.desc=
 
-#Block
-tile.DS.name=Mörkersten
+#Tooltips
+tooltip.portalplacer.1=
+tooltip.portalplacer.2=
+tooltip.portalplacerdl.1=
+tooltip.portalplacerdl.2=
+tooltip.oc=
+tooltip.staff=
+tooltip.eoa=
+tooltip.caxe.1=
+tooltip.caxe.2=
+tooltip.cpickaxe.1=
+tooltip.cpickaxe.2=
+tooltip.cshovel.1=
+tooltip.cshovel.2=
+toooltip.csword.1=
+tooltip.csword.2=
+tooltip.devblade.1=
+tooltip.devblade.2=
+tooltip.antibucket=
+tooltip.cbucket.1=
+tooltip.cbucket.2=
+tooltip.cbucket.3=
+tooltip.corbow.1=
+tooltip.corbow.2=
+tooltip.corb.1=
+tooltip.corb.2=
+tooltip.corb.3=
+tooltip.corb.4=
+tooltip.altar.1=
+tooltip.altar.2=
+tooltip.odb=
+
+#Creative Tabs
+itemgroup.acblocks=
+itemgroup.acitems=
+itemgroup.actools=
+itemgroup.acctools=
+itemgroup.acfood=
+itemgroup.acdblocks=
+
+#Blocks
+tile.DS.name=
 tile.DSB.name=
 tile.DSC.name=
 tile.DSGlow.name=
@@ -89,7 +128,7 @@ tile.DSCs.name=
 tile.DLTL.name=
 tile.DLTT.name=
 tile.DLTS.name=
-tile.AS.name=§4Underjordisk Sten
+tile.AS.name=
 tile.ASB.name=
 tile.ASBs1.name=
 tile.ASBs2.name=
@@ -115,10 +154,10 @@ tile.DLTpp.name=
 tile.DLTplanks.name=
 tile.DLTplanks1.name=
 tile.DLTplanks2.name=
-tile.BOC.name=§bBlock av Raffinerad Korallium
+tile.BOC.name=
 tile.PSDL.name=
 tile.ACO.name=
-tile.Altar.name=Altare
+tile.Altar.name=
 tile.ASbb.name=
 tile.ASpp.name=
 tile.DSBf.name=
@@ -138,9 +177,9 @@ tile.Cwater.name=
 tile.DrS.name=
 tile.AbyDrS.name=
 tile.DrG.name=
-tile.Phead.name=Petes huvud
-tile.Whead.name=Herr Wilsons huvud
-tile.Ohead.name=Doktor Oranges huvud
+tile.Phead.name=
+tile.Whead.name=
+tile.Ohead.name=
 tile.DrSBs.name=
 tile.DrSBf.name=
 tile.DrSBs1.name=
@@ -149,7 +188,7 @@ tile.AbyDrSBs.name=
 tile.AbyDrSBf.name=
 tile.AbyDrSBs1.name=
 tile.AbyDrSBs2.name=
-tile.antiliquid.name=Flytande Antimateria
+tile.antiliquid.name=
 tile.cstone.name=
 tile.cstonebrick.name=
 tile.cstonebrickf.name=
@@ -159,15 +198,15 @@ tile.cstonebricks.name=
 tile.cstonebutton.name=
 tile.cstonepplate.name=
 
-#Föremål
-item.Sword.name=§4Utveklarklingan
-item.OC.name=§4Evighetskatalysator
-item.SOTG.name=§9Dörrväktarens stav
-item.GK.name=§9Portgångsnyckek
-item.Cbucket.name=Hink med Flytande Korallium
-item.PSDLf.name=Kraftstenshittare
-item.EoA.name=§bUnderjordens Öga
-item.GKD.name=§4Asorahs Fruktade Portgångsnyckel
+#Items
+item.Sword.name=
+item.OC.name=
+item.SOTG.name=
+item.GK.name=
+item.Cbucket.name=
+item.PSDLf.name=
+item.EoA.name=
+item.GKD.name=
 item.DSOA.name=
 item.DAC.name=
 item.AC.name=
@@ -220,62 +259,62 @@ item.ADAB.name=
 item.ADAH.name=
 item.ADAC.name=
 item.ADAP.name=
-item.ACB.name=§4Djupets Stövlar
-item.ACH.name=§4Djupets Visir
-item.ACC.name=§4Djupets Rustning
-item.ACP.name=§4Djupets Benskydd
+item.ACB.name=
+item.ACH.name=
+item.ACC.name=
+item.ACP.name=
 item.ACBP.name=
 item.ACHP.name=
 item.ACCP.name=
 item.ACPP.name=
-item.ADB.name=§aKorallium-plåts skor
-item.ADH.name=§aKorallium-plåts Hjälm
-item.ADC.name=§aKorallium-plåts Rustning
-item.ADP.name=§aKorallium-plåts Byxor
-item.CobU.name=Kullersten Uppgraderingspaket
-item.IroU.name=Järn Uppgraderinspaket
-item.GolU.name=Guld Uppgraderingspaket
-item.DiaU.name=Diamant Uppgraderingspaket
-item.AbyU.name= Uppgraderingspaket
-item.CorU.name=Korallium Uppgraderingspaket
-item.plate.name=Tallrik
-item.MRE.name=MRE
-item.ChiP.name=Kyckling på Tallrik
-item.PorP.name=Fläak på Tallrik
-item.BeeP.name=Biff på Tallrik
-item.FisP.name=Fisk på Tallrik
-item.dirtyplate.name=Smutsig Tallrik
-item.friedegg.name=Steks Ägg
-item.eggp.name=Stekt Ägg på Tallrik
-item.cloth.name=Diskhandduk
+item.ADB.name=
+item.ADH.name=
+item.ADC.name=
+item.ADP.name=
+item.CobU.name=
+item.IroU.name=
+item.GolU.name=
+item.DiaU.name=
+item.AbyU.name=
+item.CorU.name=
+item.plate.name=
+item.MRE.name=
+item.ChiP.name=
+item.PorP.name=
+item.BeeP.name=
+item.FisP.name=
+item.dirtyplate.name=
+item.friedegg.name=
+item.eggp.name=
+item.cloth.name=
 item.SF.name=
 item.SS.name=
 item.SG.name=
 item.OS.name=
 item.Corbow.name=
-item.Antibucket.name=Hink med Flytande Antimateria
+item.Antibucket.name=
 item.cbrick.name=
 
-#Varelser
-entity.abyssalcraft.depthsghoul.name=Djup Vålnad
-entity.abyssalcraft.evilpig.name=Gris
-entity.abyssalcraft.abyssalzombieombie.name=Underjordisk Zombie
-entity.abyssalcraft.Primed ODB.name=Antänd ODB
-entity.abyssalcraft.Jzahar.name=§9J'zahar, Underjordens Dörrväktare
+#Entities
+entity.abyssalcraft.depthsghoul.name=
+entity.abyssalcraft.evilpig.name=
+entity.abyssalcraft.abyssalzombie.name=
+entity.abyssalcraft.Primed ODB.name=
+entity.abyssalcraft.Jzahar.name=
 entity.abyssalcraft.abygolem.name=
 entity.abyssalcraft.dreadgolem.name=
 entity.abyssalcraft.dreadguard.name=
-entity.abyssalcraft.dragonminion.name=Spektral Drake
-entity.abyssalcraft.dragonboss.name=§bAsorah, Den Fallne
-entity.abyssalcraft.Primed ODB Core.name=Antänd ODB Kärna
-entity.abyssalcraft.shadowcreature.name=Skuggvarelse
-entity.abyssalcraft.shadowmonster.name=Skuggmonster
+entity.abyssalcraft.dragonminion.name=
+entity.abyssalcraft.dragonboss.name=
+entity.abyssalcraft.Primed ODB Core.name=
+entity.abyssalcraft.shadowcreature.name=
+entity.abyssalcraft.shadowmonster.name=
 entity.abyssalcraft.dreadling.name=
 entity.abyssalcraft.dreadspawn.name=
-entity.abyssalcraft.demonpig.name=Grisdemon
+entity.abyssalcraft.demonpig.name=
 
-#Brygder
-potion.Cplague=Korallium Pest
+#Potions
+potion.Cplague=
 potion.Dplague=
 
-#Lokalisering klar, Shin ut.
+#Localization done, Shin out.
