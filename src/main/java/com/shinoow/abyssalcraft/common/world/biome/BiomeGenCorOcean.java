@@ -32,33 +32,32 @@ public class BiomeGenCorOcean extends BiomeGenBase {
 	@SuppressWarnings("unchecked")
 	public BiomeGenCorOcean(int par1) {
 		super(par1);
-		this.rootHeight = -1.0F;
-		this.heightVariation = 0.1F;
-		this.waterColorMultiplier = 0x24FF83;
-		this.spawnableCreatureList.clear();
-		this.spawnableMonsterList.clear();
-		this.spawnableMonsterList.add(new SpawnListEntry(EntityDepthsghoul.class, 5, 1, 5));
-		this.spawnableMonsterList.add(new SpawnListEntry(EntityDepthsZombie.class, 5, 1, 5));
+		rootHeight = -1.0F;
+		heightVariation = 0.1F;
+		waterColorMultiplier = 0x24FF83;
+		spawnableCreatureList.clear();
+		spawnableMonsterList.clear();
+		spawnableMonsterList.add(new SpawnListEntry(EntityDepthsghoul.class, 5, 1, 5));
+		spawnableMonsterList.add(new SpawnListEntry(EntityDepthsZombie.class, 5, 1, 5));
 
 	}
 
-	public void decorate(World par1World, Random par2Random, int par3, int par4)
-	{
+	@Override
+	public void decorate(World par1World, Random par2Random, int par3, int par4) {
+
 		super.decorate(par1World, par2Random, par3, par4);
 		int var5 = 3 + par2Random.nextInt(6);
 		int var6;
 		int var7;
 		int var8;
 
-		for (var6 = 0; var6 < var5; ++var6)
-		{
+		for (var6 = 0; var6 < var5; ++var6) {
 			var7 = par3 + par2Random.nextInt(16);
 			var8 = par2Random.nextInt(28) + 4;
 			int var9 = par4 + par2Random.nextInt(16);
 			Block var10 = par1World.getBlock(var7, var8, var9);
 
-			if (var10 == Blocks.stone || var10 == Blocks.iron_ore || var10 == Blocks.coal_ore)
-			{
+			if (var10 == Blocks.stone || var10 == Blocks.iron_ore || var10 == Blocks.coal_ore) {
 				par1World.setBlock(var7, var8, var9, AbyssalCraft.Coraliumore);
 				if(var10 == Blocks.diamond_ore || var10 == Blocks.gold_ore || var10 == Blocks.iron_ore)
 				{
@@ -66,8 +65,7 @@ public class BiomeGenCorOcean extends BiomeGenBase {
 				}
 			}
 		}
-		for(int rarity = 0; rarity < 3; rarity++)
-		{
+		for(int rarity = 0; rarity < 3; rarity++) {
 			int veinSize = 4;
 			int x = par3 + par2Random.nextInt(16);
 			int y = par2Random.nextInt(40);
@@ -77,6 +75,7 @@ public class BiomeGenCorOcean extends BiomeGenBase {
 		}
 	}
 
+	@Override
 	public BiomeGenBase.TempCategory getTempCategory()
 	{
 		return BiomeGenBase.TempCategory.OCEAN;

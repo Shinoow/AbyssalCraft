@@ -36,57 +36,49 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 public class Antiliquid extends BlockFluidClassic {
 
-	public static final MaterialLiquid antimatter = (new MaterialLiquid(MapColor.silverColor));
-
+	public static final MaterialLiquid antimatter = new MaterialLiquid(MapColor.silverColor);
 
 	@SideOnly(Side.CLIENT)
 	protected IIcon[] theIcon;
 
 	public Antiliquid() {
-		super(AbyssalCraft.antifluid, antimatter);
+		super(AbyssalCraft.antifluid, Material.water);
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void registerBlockIcons(IIconRegister iconRegister) {
-		this.theIcon = new IIcon[]{iconRegister.registerIcon("abyssalcraft:anti_still"), iconRegister.registerIcon("abyssalcraft:anti_flow")};
+		theIcon = new IIcon[]{iconRegister.registerIcon("abyssalcraft:anti_still"), iconRegister.registerIcon("abyssalcraft:anti_flow")};
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public IIcon getIcon(int side, int meta)
-	{
-		if ( side <= 1 ) {
-			return this.theIcon[0];
-		} else {
-			return this.theIcon[1];
-		}
+	public IIcon getIcon(int side, int meta) {
+		if ( side <= 1 )
+			return theIcon[0];
+		else
+			return theIcon[1];
 	}
 
 	@Override
 	public boolean canDisplace(IBlockAccess world, int x, int y, int z) {
-		if(world.getBlock(x, y, z).getMaterial() == CLiquid.Cwater || world.getBlock(x, y, z).getMaterial() == Material.water || world.getBlock(x, y, z).getMaterial() == Material.lava)
-		{
+		if(world.getBlock(x, y, z) == AbyssalCraft.Cwater || world.getBlock(x, y, z).getMaterial() == Material.water && world.getBlock(x, y, z) != AbyssalCraft.Cwater && world.getBlock(x, y, z) != this || world.getBlock(x, y, z).getMaterial() == Material.lava)
 			return true;
-		}
-
 		return super.canDisplace(world, x, y, z);
 	}
 
 	@Override
 	public boolean displaceIfPossible(World world, int x, int y, int z) {
 
-		if(!world.isRemote && world.getBlock(x, y, z).getMaterial() == CLiquid.Cwater)
-		{
+		if(!world.isRemote && world.getBlock(x, y, z) == AbyssalCraft.Cwater) {
 			world.setBlock(x, y, z, AbyssalCraft.cstone);
 		}
-		if(!world.isRemote && world.getBlock(x, y, z).getMaterial() == Material.water)
-		{
+
+		if(!world.isRemote && world.getBlock(x, y, z).getMaterial() == Material.water && world.getBlock(x, y, z) != AbyssalCraft.Cwater && world.getBlock(x, y, z) != this) {
 			world.setBlock(x, y, z, Blocks.packed_ice);
 		}
 
-		if(!world.isRemote && world.getBlock(x, y, z).getMaterial() == Material.lava)
-		{
+		if(!world.isRemote && world.getBlock(x, y, z).getMaterial() == Material.lava) {
 			world.setBlock(x, y, z, Blocks.obsidian);
 		}
 
@@ -94,9 +86,9 @@ public class Antiliquid extends BlockFluidClassic {
 	}
 
 	@Override
-	public void onEntityCollidedWithBlock(World par1World, int par2, int par3, int par4, Entity par5Entity)
-	{
+	public void onEntityCollidedWithBlock(World par1World, int par2, int par3, int par4, Entity par5Entity) {
 		super.onEntityCollidedWithBlock(par1World, par2, par3, par4, par5Entity);
+
 		if(par5Entity instanceof EntityLivingBase){
 			((EntityLivingBase)par5Entity).addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, 100, 1));
 			((EntityLivingBase)par5Entity).addPotionEffect(new PotionEffect(Potion.blindness.id, 100, 1));

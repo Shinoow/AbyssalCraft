@@ -28,7 +28,7 @@ public class Coraliumstone extends Block
 	public Coraliumstone()
 	{
 		super(Material.rock);
-		this.setCreativeTab(AbyssalCraft.tabBlock);
+		setCreativeTab(AbyssalCraft.tabBlock);
 		this.setHarvestLevel("pickaxe", 3);
 	}
 

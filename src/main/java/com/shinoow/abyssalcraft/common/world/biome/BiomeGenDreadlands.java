@@ -31,18 +31,19 @@ public class BiomeGenDreadlands extends BiomeGenBase
 	@SuppressWarnings("unchecked")
 	public BiomeGenDreadlands(int par1) {
 		super(par1);
-		this.topBlock = (Block)AbyssalCraft.dreadstone;
-		this.fillerBlock = (Block)AbyssalCraft.dreadstone;
-		this.spawnableMonsterList.clear();
-		this.spawnableCreatureList.clear();
-		this.spawnableWaterCreatureList.clear();
-		this.spawnableCaveCreatureList.clear();
-		this.theBiomeDecorator.treesPerChunk = -1;
-		this.theBiomeDecorator.flowersPerChunk= -1;
-		this.spawnableMonsterList.add(new SpawnListEntry(Entitydreadgolem.class, 5, 1, 5));
-		this.spawnableCreatureList.add(new SpawnListEntry(Entityabygolem.class, 2, 1, 2));
+		topBlock = AbyssalCraft.dreadstone;
+		fillerBlock = AbyssalCraft.dreadstone;
+		spawnableMonsterList.clear();
+		spawnableCreatureList.clear();
+		spawnableWaterCreatureList.clear();
+		spawnableCaveCreatureList.clear();
+		theBiomeDecorator.treesPerChunk = -1;
+		theBiomeDecorator.flowersPerChunk= -1;
+		spawnableMonsterList.add(new SpawnListEntry(Entitydreadgolem.class, 5, 1, 5));
+		spawnableCreatureList.add(new SpawnListEntry(Entityabygolem.class, 2, 1, 2));
 	}
 
+	@Override
 	public void decorate(World par1World, Random par2Random, int par3, int par4)
 	{
 		super.decorate(par1World, par2Random, par3, par4);

@@ -43,19 +43,22 @@ public class Dreadlog extends BlockRotatedPillar
 
 	public Dreadlog() {
 		super(Material.wood);
-		this.setCreativeTab(AbyssalCraft.tabBlock);
+		setCreativeTab(AbyssalCraft.tabBlock);
 	}
 
+	@Override
 	public int getRenderType()
 	{
 		return 31;
 	}
 
+	@Override
 	public int quantityDropped(Random par1Random)
 	{
 		return 1;
 	}
 
+	@Override
 	public Item getItemDropped(int par1, Random par2Random, int par3)
 	{
 		return Item.getItemFromBlock(this);
@@ -110,6 +113,7 @@ public class Dreadlog extends BlockRotatedPillar
 	}
 
 
+	@Override
 	public int damageDropped(int par1)
 	{
 		return par1 & 3;
@@ -120,28 +124,32 @@ public class Dreadlog extends BlockRotatedPillar
 		return par0 & 3;
 	}
 
+	@Override
 	protected ItemStack createStackedBlock(int par1)
 	{
 		return new ItemStack(this, 1, limitToValidMetadata(par1));
 	}
 
+	@Override
 	public boolean canSustainLeaves(IBlockAccess world, int x, int y, int z)
 	{
 		return true;
 	}
 
+	@Override
 	@SideOnly(Side.CLIENT)
 	public IIcon getIcon(int par1, int par2)
 	{
-		return par1 == 1 ? this.iconLogTop : (par1 == 0 ? this.iconLogTop : this.blockIcon);
+		return par1 == 1 ? iconLogTop : par1 == 0 ? iconLogTop : blockIcon;
 	}
 
+	@Override
 	@SideOnly(Side.CLIENT)
 	public void registerBlockIcons(IIconRegister par1IconRegister)
 	{
-		this.blockIcon = par1IconRegister.registerIcon(AbyssalCraft.modid + ":" + "DrTside");
-		this.iconLogTop = par1IconRegister.registerIcon(AbyssalCraft.modid + ":" + "DrTtop");
-		this.iconLogSide = par1IconRegister.registerIcon(AbyssalCraft.modid + ":" + "DrTside");
+		blockIcon = par1IconRegister.registerIcon(AbyssalCraft.modid + ":" + "DrTside");
+		iconLogTop = par1IconRegister.registerIcon(AbyssalCraft.modid + ":" + "DrTtop");
+		iconLogSide = par1IconRegister.registerIcon(AbyssalCraft.modid + ":" + "DrTside");
 		Dreadlog.iconLogSideOverlay = par1IconRegister.registerIcon(AbyssalCraft.modid + ":" + "DrTside");
 	}
 
@@ -151,6 +159,7 @@ public class Dreadlog extends BlockRotatedPillar
 		return iconLogSideOverlay;
 	}
 
+	@Override
 	@SideOnly(Side.CLIENT)
 	protected IIcon getSideIcon(int var1) {
 

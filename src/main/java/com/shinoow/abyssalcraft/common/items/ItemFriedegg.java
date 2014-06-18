@@ -30,9 +30,10 @@ public class ItemFriedegg extends ItemFood {
 
 	}
 
+	@Override
 	@SideOnly(Side.CLIENT)
 	public void registerIcons(IIconRegister par1IconRegister)
 	{
-		this.itemIcon = par1IconRegister.registerIcon(AbyssalCraft.modid + ":" + (this.getUnlocalizedName().substring(5)));
+		itemIcon = par1IconRegister.registerIcon(AbyssalCraft.modid + ":" + this.getUnlocalizedName().substring(5));
 	}
 }

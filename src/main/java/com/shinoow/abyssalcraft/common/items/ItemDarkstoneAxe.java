@@ -33,22 +33,19 @@ public class ItemDarkstoneAxe extends ItemTool
 	public ItemDarkstoneAxe(ToolMaterial enumToolMaterial)
 	{
 		super(3, enumToolMaterial, blocksEffectiveAgainst);
-		this.setHarvestLevel("axe", 1);
+		setHarvestLevel("axe", 1);
 	}
 	/**
 	 * Returns the strength of the stack against a given block. 1.0F base, (Quality+1)*2 if correct blocktype, 1.5F if
 	 * sword
 	 */
+	@Override
 	public float func_150893_a(ItemStack par1ItemStack, Block par2Block)
 	{
 		if (par2Block != null && par2Block.getMaterial() == Material.wood)
-		{
 			return efficiencyOnProperMaterial;
-		}
 		else
-		{
 			return super.func_150893_a(par1ItemStack, par2Block);
-		}
 	}
 
 }

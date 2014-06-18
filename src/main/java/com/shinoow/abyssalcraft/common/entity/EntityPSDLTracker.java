@@ -43,11 +43,13 @@ public class EntityPSDLTracker extends Entity
 	public EntityPSDLTracker(World par1World)
 	{
 		super(par1World);
-		this.setSize(0.25F, 0.25F);
+		setSize(0.25F, 0.25F);
 	}
 
+	@Override
 	protected void entityInit() {}
 
+	@Override
 	@SideOnly(Side.CLIENT)
 
 	/**
@@ -56,7 +58,7 @@ public class EntityPSDLTracker extends Entity
 	 */
 	public boolean isInRangeToRenderDist(double par1)
 	{
-		double d1 = this.boundingBox.getAverageEdgeLength() * 4.0D;
+		double d1 = boundingBox.getAverageEdgeLength() * 4.0D;
 		d1 *= 64.0D;
 		return par1 < d1 * d1;
 	}
@@ -64,10 +66,10 @@ public class EntityPSDLTracker extends Entity
 	public EntityPSDLTracker(World par1World, double par2, double par4, double par6)
 	{
 		super(par1World);
-		this.despawnTimer = 0;
-		this.setSize(0.25F, 0.25F);
-		this.setPosition(par2, par4, par6);
-		this.yOffset = 0.0F;
+		despawnTimer = 0;
+		setSize(0.25F, 0.25F);
+		setPosition(par2, par4, par6);
+		yOffset = 0.0F;
 	}
 
 	/**
@@ -76,27 +78,28 @@ public class EntityPSDLTracker extends Entity
 	 */
 	public void moveTowards(double par1, int par3, double par4)
 	{
-		double d2 = par1 - this.posX;
-		double d3 = par4 - this.posZ;
+		double d2 = par1 - posX;
+		double d3 = par4 - posZ;
 		float f = MathHelper.sqrt_double(d2 * d2 + d3 * d3);
 
 		if (f > 12.0F)
 		{
-			this.targetX = this.posX + d2 / (double)f * 12.0D;
-			this.targetZ = this.posZ + d3 / (double)f * 12.0D;
-			this.targetY = this.posY + 8.0D;
+			targetX = posX + d2 / f * 12.0D;
+			targetZ = posZ + d3 / f * 12.0D;
+			targetY = posY + 8.0D;
 		}
 		else
 		{
-			this.targetX = par1;
-			this.targetY = (double)par3;
-			this.targetZ = par4;
+			targetX = par1;
+			targetY = par3;
+			targetZ = par4;
 		}
 
-		this.despawnTimer = 0;
-		this.shatterOrDrop = this.rand.nextInt(5) > 0;
+		despawnTimer = 0;
+		shatterOrDrop = rand.nextInt(5) > 0;
 	}
 
+	@Override
 	@SideOnly(Side.CLIENT)
 
 	/**
@@ -104,113 +107,114 @@ public class EntityPSDLTracker extends Entity
 	 */
 	public void setVelocity(double par1, double par3, double par5)
 	{
-		this.motionX = par1;
-		this.motionY = par3;
-		this.motionZ = par5;
+		motionX = par1;
+		motionY = par3;
+		motionZ = par5;
 
-		if (this.prevRotationPitch == 0.0F && this.prevRotationYaw == 0.0F)
+		if (prevRotationPitch == 0.0F && prevRotationYaw == 0.0F)
 		{
 			float f = MathHelper.sqrt_double(par1 * par1 + par5 * par5);
-			this.prevRotationYaw = this.rotationYaw = (float)(Math.atan2(par1, par5) * 180.0D / Math.PI);
-			this.prevRotationPitch = this.rotationPitch = (float)(Math.atan2(par3, (double)f) * 180.0D / Math.PI);
+			prevRotationYaw = rotationYaw = (float)(Math.atan2(par1, par5) * 180.0D / Math.PI);
+			prevRotationPitch = rotationPitch = (float)(Math.atan2(par3, f) * 180.0D / Math.PI);
 		}
 	}
 
 	/**
 	 * Called to update the entity's position/logic.
 	 */
+	@Override
 	public void onUpdate()
 	{
-		this.lastTickPosX = this.posX;
-		this.lastTickPosY = this.posY;
-		this.lastTickPosZ = this.posZ;
+		lastTickPosX = posX;
+		lastTickPosY = posY;
+		lastTickPosZ = posZ;
 		super.onUpdate();
-		this.posX += this.motionX;
-		this.posY += this.motionY;
-		this.posZ += this.motionZ;
-		float f = MathHelper.sqrt_double(this.motionX * this.motionX + this.motionZ * this.motionZ);
-		this.rotationYaw = (float)(Math.atan2(this.motionX, this.motionZ) * 180.0D / Math.PI);
+		posX += motionX;
+		posY += motionY;
+		posZ += motionZ;
+		float f = MathHelper.sqrt_double(motionX * motionX + motionZ * motionZ);
+		rotationYaw = (float)(Math.atan2(motionX, motionZ) * 180.0D / Math.PI);
 
-		for (this.rotationPitch = (float)(Math.atan2(this.motionY, (double)f) * 180.0D / Math.PI); this.rotationPitch - this.prevRotationPitch < -180.0F; this.prevRotationPitch -= 360.0F)
+		for (rotationPitch = (float)(Math.atan2(motionY, f) * 180.0D / Math.PI); rotationPitch - prevRotationPitch < -180.0F; prevRotationPitch -= 360.0F)
 		{
 			;
 		}
 
-		while (this.rotationPitch - this.prevRotationPitch >= 180.0F)
+		while (rotationPitch - prevRotationPitch >= 180.0F)
 		{
-			this.prevRotationPitch += 360.0F;
+			prevRotationPitch += 360.0F;
 		}
 
-		while (this.rotationYaw - this.prevRotationYaw < -180.0F)
+		while (rotationYaw - prevRotationYaw < -180.0F)
 		{
-			this.prevRotationYaw -= 360.0F;
+			prevRotationYaw -= 360.0F;
 		}
 
-		while (this.rotationYaw - this.prevRotationYaw >= 180.0F)
+		while (rotationYaw - prevRotationYaw >= 180.0F)
 		{
-			this.prevRotationYaw += 360.0F;
+			prevRotationYaw += 360.0F;
 		}
 
-		this.rotationPitch = this.prevRotationPitch + (this.rotationPitch - this.prevRotationPitch) * 0.2F;
-		this.rotationYaw = this.prevRotationYaw + (this.rotationYaw - this.prevRotationYaw) * 0.2F;
+		rotationPitch = prevRotationPitch + (rotationPitch - prevRotationPitch) * 0.2F;
+		rotationYaw = prevRotationYaw + (rotationYaw - prevRotationYaw) * 0.2F;
 
-		if (!this.worldObj.isRemote)
+		if (!worldObj.isRemote)
 		{
-			double d0 = this.targetX - this.posX;
-			double d1 = this.targetZ - this.posZ;
+			double d0 = targetX - posX;
+			double d1 = targetZ - posZ;
 			float f1 = (float)Math.sqrt(d0 * d0 + d1 * d1);
 			float f2 = (float)Math.atan2(d1, d0);
-			double d2 = (double)f + (double)(f1 - f) * 0.0025D;
+			double d2 = f + (f1 - f) * 0.0025D;
 
 			if (f1 < 1.0F)
 			{
 				d2 *= 0.8D;
-				this.motionY *= 0.8D;
+				motionY *= 0.8D;
 			}
 
-			this.motionX = Math.cos((double)f2) * d2;
-			this.motionZ = Math.sin((double)f2) * d2;
+			motionX = Math.cos(f2) * d2;
+			motionZ = Math.sin(f2) * d2;
 
-			if (this.posY < this.targetY)
+			if (posY < targetY)
 			{
-				this.motionY += (1.0D - this.motionY) * 0.014999999664723873D;
+				motionY += (1.0D - motionY) * 0.014999999664723873D;
 			}
 			else
 			{
-				this.motionY += (-1.0D - this.motionY) * 0.014999999664723873D;
+				motionY += (-1.0D - motionY) * 0.014999999664723873D;
 			}
 		}
 
 		float f3 = 0.25F;
 
-		if (this.isInWater())
+		if (isInWater())
 		{
 			for (int i = 0; i < 4; ++i)
 			{
-				this.worldObj.spawnParticle("bubble", this.posX - this.motionX * (double)f3, this.posY - this.motionY * (double)f3, this.posZ - this.motionZ * (double)f3, this.motionX, this.motionY, this.motionZ);
+				worldObj.spawnParticle("bubble", posX - motionX * f3, posY - motionY * f3, posZ - motionZ * f3, motionX, motionY, motionZ);
 			}
 		}
 		else
 		{
-			this.worldObj.spawnParticle("smoke", this.posX - this.motionX * (double)f3 + this.rand.nextDouble() * 0.6D - 0.3D, this.posY - this.motionY * (double)f3 - 0.5D, this.posZ - this.motionZ * (double)f3 + this.rand.nextDouble() * 0.6D - 0.3D, this.motionX, this.motionY, this.motionZ);
+			worldObj.spawnParticle("smoke", posX - motionX * f3 + rand.nextDouble() * 0.6D - 0.3D, posY - motionY * f3 - 0.5D, posZ - motionZ * f3 + rand.nextDouble() * 0.6D - 0.3D, motionX, motionY, motionZ);
 		}
 
-		if (!this.worldObj.isRemote)
+		if (!worldObj.isRemote)
 		{
-			this.setPosition(this.posX, this.posY, this.posZ);
-			++this.despawnTimer;
+			setPosition(posX, posY, posZ);
+			++despawnTimer;
 
-			if (this.despawnTimer > 80 && !this.worldObj.isRemote)
+			if (despawnTimer > 80 && !worldObj.isRemote)
 			{
-				this.setDead();
+				setDead();
 
-				if (this.shatterOrDrop)
+				if (shatterOrDrop)
 				{
-					this.worldObj.spawnEntityInWorld(new EntityItem(this.worldObj, this.posX, this.posY, this.posZ, new ItemStack(AbyssalCraft.PSDLfinder)));
+					worldObj.spawnEntityInWorld(new EntityItem(worldObj, posX, posY, posZ, new ItemStack(AbyssalCraft.PSDLfinder)));
 				}
 				else
 				{
-					this.worldObj.playAuxSFX(2003, (int)Math.round(this.posX), (int)Math.round(this.posY), (int)Math.round(this.posZ), 0);
+					worldObj.playAuxSFX(2003, (int)Math.round(posX), (int)Math.round(posY), (int)Math.round(posZ), 0);
 				}
 			}
 		}
@@ -219,13 +223,16 @@ public class EntityPSDLTracker extends Entity
 	/**
 	 * (abstract) Protected helper method to write subclass entity data to NBT.
 	 */
+	@Override
 	public void writeEntityToNBT(NBTTagCompound par1NBTTagCompound) {}
 
 	/**
 	 * (abstract) Protected helper method to read subclass entity data from NBT.
 	 */
+	@Override
 	public void readEntityFromNBT(NBTTagCompound par1NBTTagCompound) {}
 
+	@Override
 	@SideOnly(Side.CLIENT)
 	public float getShadowSize()
 	{
@@ -235,11 +242,13 @@ public class EntityPSDLTracker extends Entity
 	/**
 	 * Gets how bright this entity is.
 	 */
+	@Override
 	public float getBrightness(float par1)
 	{
 		return 1.0F;
 	}
 
+	@Override
 	@SideOnly(Side.CLIENT)
 	public int getBrightnessForRender(float par1)
 	{
@@ -249,6 +258,7 @@ public class EntityPSDLTracker extends Entity
 	/**
 	 * If returns false, the item will not inflict any damage against entities.
 	 */
+	@Override
 	public boolean canAttackWithItem()
 	{
 		return false;

@@ -34,7 +34,7 @@ public class TabACCombat extends CreativeTabs
 	@SideOnly(Side.CLIENT)
 	public String getTranslatedTabLabel()
 	{
-		return "AbyssalCraft Combat Tools";
+		return "itemgroup." + this.getTabLabel();
 	}
 
 	@Override

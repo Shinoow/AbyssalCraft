@@ -34,9 +34,10 @@ public class WorldGenAbyLake extends WorldGenerator
 
 	public WorldGenAbyLake(Block par1)
 	{
-		this.blockIndex = par1;
+		blockIndex = par1;
 	}
 
+	@Override
 	public boolean generate(World par1World, Random par2Random, int par3, int par4, int par5)
 	{
 		par3 -= 8;
@@ -47,9 +48,7 @@ public class WorldGenAbyLake extends WorldGenerator
 		}
 
 		if (par4 <= 4)
-		{
 			return false;
-		}
 		else
 		{
 			par4 -= 4;
@@ -72,9 +71,9 @@ public class WorldGenAbyLake extends WorldGenerator
 					{
 						for (int l1 = 1; l1 < 7; ++l1)
 						{
-							double d6 = ((double)j1 - d3) / (d0 / 2.0D);
-							double d7 = ((double)l1 - d4) / (d1 / 2.0D);
-							double d8 = ((double)k1 - d5) / (d2 / 2.0D);
+							double d6 = (j1 - d3) / (d0 / 2.0D);
+							double d7 = (l1 - d4) / (d1 / 2.0D);
+							double d8 = (k1 - d5) / (d2 / 2.0D);
 							double d9 = d6 * d6 + d7 * d7 + d8 * d8;
 
 							if (d9 < 1.0D)
@@ -96,21 +95,17 @@ public class WorldGenAbyLake extends WorldGenerator
 				{
 					for (i2 = 0; i2 < 8; ++i2)
 					{
-						flag = !aboolean[(i1 * 16 + j2) * 8 + i2] && (i1 < 15 && aboolean[((i1 + 1) * 16 + j2) * 8 + i2] || i1 > 0 && aboolean[((i1 - 1) * 16 + j2) * 8 + i2] || j2 < 15 && aboolean[(i1 * 16 + j2 + 1) * 8 + i2] || j2 > 0 && aboolean[(i1 * 16 + (j2 - 1)) * 8 + i2] || i2 < 7 && aboolean[(i1 * 16 + j2) * 8 + i2 + 1] || i2 > 0 && aboolean[(i1 * 16 + j2) * 8 + (i2 - 1)]);
+						flag = !aboolean[(i1 * 16 + j2) * 8 + i2] && (i1 < 15 && aboolean[((i1 + 1) * 16 + j2) * 8 + i2] || i1 > 0 && aboolean[((i1 - 1) * 16 + j2) * 8 + i2] || j2 < 15 && aboolean[(i1 * 16 + j2 + 1) * 8 + i2] || j2 > 0 && aboolean[(i1 * 16 + j2 - 1) * 8 + i2] || i2 < 7 && aboolean[(i1 * 16 + j2) * 8 + i2 + 1] || i2 > 0 && aboolean[(i1 * 16 + j2) * 8 + i2 - 1]);
 
 						if (flag)
 						{
 							Material material = par1World.getBlock(par3 + i1, par4 + i2, par5 + j2).getMaterial();
 
 							if (i2 >= 4 && material.isLiquid())
-							{
 								return false;
-							}
 
-							if (i2 < 4 && !material.isSolid() && par1World.getBlock(par3 + i1, par4 + i2, par5 + j2) != this.blockIndex)
-							{
+							if (i2 < 4 && !material.isSolid() && par1World.getBlock(par3 + i1, par4 + i2, par5 + j2) != blockIndex)
 								return false;
-							}
 						}
 					}
 				}
@@ -124,7 +119,7 @@ public class WorldGenAbyLake extends WorldGenerator
 					{
 						if (aboolean[(i1 * 16 + j2) * 8 + i2])
 						{
-							par1World.setBlock(par3 + i1, par4 + i2, par5 + j2, i2 >= 4 ? Blocks.air : this.blockIndex, 0, 2);
+							par1World.setBlock(par3 + i1, par4 + i2, par5 + j2, i2 >= 4 ? Blocks.air : blockIndex, 0, 2);
 						}
 					}
 				}
@@ -153,7 +148,7 @@ public class WorldGenAbyLake extends WorldGenerator
 				}
 			}
 
-			if (this.blockIndex.getMaterial() == CLiquid.Cwater)
+			if (blockIndex.getMaterial() == CLiquid.Cwater)
 			{
 				for (i1 = 0; i1 < 16; ++i1)
 				{
@@ -161,7 +156,7 @@ public class WorldGenAbyLake extends WorldGenerator
 					{
 						for (i2 = 0; i2 < 8; ++i2)
 						{
-							flag = !aboolean[(i1 * 16 + j2) * 8 + i2] && (i1 < 15 && aboolean[((i1 + 1) * 16 + j2) * 8 + i2] || i1 > 0 && aboolean[((i1 - 1) * 16 + j2) * 8 + i2] || j2 < 15 && aboolean[(i1 * 16 + j2 + 1) * 8 + i2] || j2 > 0 && aboolean[(i1 * 16 + (j2 - 1)) * 8 + i2] || i2 < 7 && aboolean[(i1 * 16 + j2) * 8 + i2 + 1] || i2 > 0 && aboolean[(i1 * 16 + j2) * 8 + (i2 - 1)]);
+							flag = !aboolean[(i1 * 16 + j2) * 8 + i2] && (i1 < 15 && aboolean[((i1 + 1) * 16 + j2) * 8 + i2] || i1 > 0 && aboolean[((i1 - 1) * 16 + j2) * 8 + i2] || j2 < 15 && aboolean[(i1 * 16 + j2 + 1) * 8 + i2] || j2 > 0 && aboolean[(i1 * 16 + j2 - 1) * 8 + i2] || i2 < 7 && aboolean[(i1 * 16 + j2) * 8 + i2 + 1] || i2 > 0 && aboolean[(i1 * 16 + j2) * 8 + i2 - 1]);
 
 							if (flag && (i2 < 4 || par2Random.nextInt(2) != 0) && par1World.getBlock(par3 + i1, par4 + i2, par5 + j2).getMaterial().isSolid())
 							{

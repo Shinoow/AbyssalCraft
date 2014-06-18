@@ -37,27 +37,28 @@ public class BiomeGenCorSwamp extends BiomeGenBase {
 	@SuppressWarnings("unchecked")
 	public BiomeGenCorSwamp(int par1) {
 		super(par1);
-		this.spawnableCreatureList.clear();
-		this.spawnableMonsterList.clear();
-		this.rootHeight = -0.2F;
-		this.heightVariation = 0.1F;
-		this.topBlock=Blocks.grass;
-		this.fillerBlock=Blocks.dirt;
-		this.theBiomeDecorator.treesPerChunk = 2;
-		this.theBiomeDecorator.flowersPerChunk = 1;
-		this.theBiomeDecorator.deadBushPerChunk = 1;
-		this.theBiomeDecorator.mushroomsPerChunk = 8;
-		this.theBiomeDecorator.reedsPerChunk = 10;
-		this.theBiomeDecorator.clayPerChunk = 1;
-		this.theBiomeDecorator.waterlilyPerChunk = 4;
-		this.theBiomeDecorator.sandPerChunk2 = 0;
-		this.theBiomeDecorator.sandPerChunk = 0;
-		this.theBiomeDecorator.grassPerChunk = 5;
-		this.waterColorMultiplier = 0x24FF83;
-		this.spawnableMonsterList.add(new SpawnListEntry(EntityDepthsghoul.class, 5, 1, 5));
-		this.spawnableMonsterList.add(new SpawnListEntry(EntityDepthsZombie.class, 5, 1, 5));
+		spawnableCreatureList.clear();
+		spawnableMonsterList.clear();
+		rootHeight = -0.2F;
+		heightVariation = 0.1F;
+		topBlock=Blocks.grass;
+		fillerBlock=Blocks.dirt;
+		theBiomeDecorator.treesPerChunk = 2;
+		theBiomeDecorator.flowersPerChunk = 1;
+		theBiomeDecorator.deadBushPerChunk = 1;
+		theBiomeDecorator.mushroomsPerChunk = 8;
+		theBiomeDecorator.reedsPerChunk = 10;
+		theBiomeDecorator.clayPerChunk = 1;
+		theBiomeDecorator.waterlilyPerChunk = 4;
+		theBiomeDecorator.sandPerChunk2 = 0;
+		theBiomeDecorator.sandPerChunk = 0;
+		theBiomeDecorator.grassPerChunk = 5;
+		waterColorMultiplier = 0x24FF83;
+		spawnableMonsterList.add(new SpawnListEntry(EntityDepthsghoul.class, 5, 1, 5));
+		spawnableMonsterList.add(new SpawnListEntry(EntityDepthsZombie.class, 5, 1, 5));
 	}
 
+	@Override
 	public void decorate(World par1World, Random par2Random, int par3, int par4)
 	{
 		super.decorate(par1World, par2Random, par3, par4);
@@ -93,18 +94,20 @@ public class BiomeGenCorSwamp extends BiomeGenBase {
 			int RandPosX = par3 + par2Random.nextInt(5);
 			int RandPosY = par2Random.nextInt(60);
 			int RandPosZ = par4 + par2Random.nextInt(5);
-			(new WorldGenAntimatterLake(AbyssalCraft.anticwater)).generate(par1World, par2Random, RandPosX, RandPosY, RandPosZ);	
+			new WorldGenAntimatterLake(AbyssalCraft.anticwater).generate(par1World, par2Random, RandPosX, RandPosY, RandPosZ);
 		}
 	}
 
+	@Override
 	public WorldGenAbstractTree func_150567_a(Random p_150567_1_)
 	{
-		return this.worldGeneratorSwamp;
+		return worldGeneratorSwamp;
 	}
 
 	/**
 	 * Provides the basic grass color based on the biome temperature and rainfall
 	 */
+	@Override
 	@SideOnly(Side.CLIENT)
 	public int getBiomeGrassColor(int p_150558_1_, int p_150558_2_, int p_150558_3_)
 	{
@@ -114,6 +117,7 @@ public class BiomeGenCorSwamp extends BiomeGenBase {
 	/**
 	 * Provides the basic foliage color based on the biome temperature and rainfall
 	 */
+	@Override
 	@SideOnly(Side.CLIENT)
 	public int getBiomeFoliageColor(int p_150571_1_, int p_150571_2_, int p_150571_3_)
 	{

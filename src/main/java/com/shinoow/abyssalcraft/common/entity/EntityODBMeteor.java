@@ -48,101 +48,103 @@ public class EntityODBMeteor extends Entity
 	public EntityODBMeteor(World par1World)
 	{
 		super(par1World);
-		this.setSize(3.0F, 3.0F);
+		setSize(3.0F, 3.0F);
 	}
 
+	@Override
 	protected void entityInit() {}
 
 	public EntityODBMeteor(World par1World, double par2, double par4, double par6, double par8, double par10, double par12)
 	{
 		super(par1World);
-		this.setSize(3.0F, 3.0F);
-		this.setLocationAndAngles(par2, par4, par6, this.rotationYaw, this.rotationPitch);
-		this.setPosition(par2, par4, par6);
-		double d6 = (double)MathHelper.sqrt_double(par8 * par8 + par10 * par10 + par12 * par12);
-		this.accelerationX = par8 / d6 * 0.1D;
-		this.accelerationY = par10 / d6 * 0.1D;
-		this.accelerationZ = par12 / d6 * 0.1D;
+		setSize(3.0F, 3.0F);
+		setLocationAndAngles(par2, par4, par6, rotationYaw, rotationPitch);
+		setPosition(par2, par4, par6);
+		double d6 = MathHelper.sqrt_double(par8 * par8 + par10 * par10 + par12 * par12);
+		accelerationX = par8 / d6 * 0.1D;
+		accelerationY = par10 / d6 * 0.1D;
+		accelerationZ = par12 / d6 * 0.1D;
 	}
 
 	public EntityODBMeteor(World par1World, EntityLivingBase par2EntityLivingBase, double par3, double par5, double par7)
 	{
 		super(par1World);
-		this.shootingEntity = par2EntityLivingBase;
-		this.setSize(3.0F, 3.0F);
-		this.setLocationAndAngles(par2EntityLivingBase.posX, par2EntityLivingBase.posY, par2EntityLivingBase.posZ, par2EntityLivingBase.rotationYaw, par2EntityLivingBase.rotationPitch);
-		this.setPosition(this.posX, this.posY, this.posZ);
-		this.yOffset = 0.0F;
-		this.motionX = this.motionY = this.motionZ = 0.0D;
-		par3 += this.rand.nextGaussian() * 0.4D;
-		par5 += this.rand.nextGaussian() * 0.4D;
-		par7 += this.rand.nextGaussian() * 0.4D;
-		double d3 = (double)MathHelper.sqrt_double(par3 * par3 + par5 * par5 + par7 * par7);
-		this.accelerationX = par3 / d3 * 0.1D;
-		this.accelerationY = par5 / d3 * 0.1D;
-		this.accelerationZ = par7 / d3 * 0.1D;
+		shootingEntity = par2EntityLivingBase;
+		setSize(3.0F, 3.0F);
+		setLocationAndAngles(par2EntityLivingBase.posX, par2EntityLivingBase.posY, par2EntityLivingBase.posZ, par2EntityLivingBase.rotationYaw, par2EntityLivingBase.rotationPitch);
+		setPosition(posX, posY, posZ);
+		yOffset = 0.0F;
+		motionX = motionY = motionZ = 0.0D;
+		par3 += rand.nextGaussian() * 0.4D;
+		par5 += rand.nextGaussian() * 0.4D;
+		par7 += rand.nextGaussian() * 0.4D;
+		double d3 = MathHelper.sqrt_double(par3 * par3 + par5 * par5 + par7 * par7);
+		accelerationX = par3 / d3 * 0.1D;
+		accelerationY = par5 / d3 * 0.1D;
+		accelerationZ = par7 / d3 * 0.1D;
 	}
 
+	@Override
 	@SuppressWarnings("rawtypes")
 	public void onUpdate()
 	{
-		if (!this.worldObj.isRemote || !this.worldObj.blockExists((int)this.posX, (int)this.posY, (int)this.posZ))
+		if (!worldObj.isRemote || !worldObj.blockExists((int)posX, (int)posY, (int)posZ))
 		{
-			this.setDead();
+			setDead();
 		}
 		else
 		{
 			super.onUpdate();
 
-			if (this.inGround)
+			if (inGround)
 			{
-				if (this.worldObj.getBlock(this.field_145795_e, this.field_145793_f, this.field_145794_g) == this.field_145796_h)
+				if (worldObj.getBlock(field_145795_e, field_145793_f, field_145794_g) == field_145796_h)
 				{
-					++this.ticksAlive;
+					++ticksAlive;
 
-					if (this.ticksAlive == 600)
+					if (ticksAlive == 600)
 					{
-						this.setDead();
+						setDead();
 					}
 
 					return;
 				}
 
-				this.inGround = false;
-				this.motionX *= (double)(this.rand.nextFloat() * 0.2F);
-				this.motionY *= (double)(this.rand.nextFloat() * 0.2F);
-				this.motionZ *= (double)(this.rand.nextFloat() * 0.2F);
-				this.ticksAlive = 0;
-				this.ticksInAir = 0;
+				inGround = false;
+				motionX *= rand.nextFloat() * 0.2F;
+				motionY *= rand.nextFloat() * 0.2F;
+				motionZ *= rand.nextFloat() * 0.2F;
+				ticksAlive = 0;
+				ticksInAir = 0;
 			}
 			else
 			{
-				++this.ticksInAir;
+				++ticksInAir;
 			}
 
-			Vec3 vec3 = this.worldObj.getWorldVec3Pool().getVecFromPool(this.posX, this.posY, this.posZ);
-			Vec3 vec31 = this.worldObj.getWorldVec3Pool().getVecFromPool(this.posX + this.motionX, this.posY + this.motionY, this.posZ + this.motionZ);
-			MovingObjectPosition movingobjectposition = this.worldObj.rayTraceBlocks(vec3, vec31);
-			vec3 = this.worldObj.getWorldVec3Pool().getVecFromPool(this.posX, this.posY, this.posZ);
-			vec31 = this.worldObj.getWorldVec3Pool().getVecFromPool(this.posX + this.motionX, this.posY + this.motionY, this.posZ + this.motionZ);
+			Vec3 vec3 = worldObj.getWorldVec3Pool().getVecFromPool(posX, posY, posZ);
+			Vec3 vec31 = worldObj.getWorldVec3Pool().getVecFromPool(posX + motionX, posY + motionY, posZ + motionZ);
+			MovingObjectPosition movingobjectposition = worldObj.rayTraceBlocks(vec3, vec31);
+			vec3 = worldObj.getWorldVec3Pool().getVecFromPool(posX, posY, posZ);
+			vec31 = worldObj.getWorldVec3Pool().getVecFromPool(posX + motionX, posY + motionY, posZ + motionZ);
 
 			if (movingobjectposition != null)
 			{
-				vec31 = this.worldObj.getWorldVec3Pool().getVecFromPool(movingobjectposition.hitVec.xCoord, movingobjectposition.hitVec.yCoord, movingobjectposition.hitVec.zCoord);
+				vec31 = worldObj.getWorldVec3Pool().getVecFromPool(movingobjectposition.hitVec.xCoord, movingobjectposition.hitVec.yCoord, movingobjectposition.hitVec.zCoord);
 			}
 
 			Entity entity = null;
-			List list = this.worldObj.getEntitiesWithinAABBExcludingEntity(this, this.boundingBox.addCoord(this.motionX, this.motionY, this.motionZ).expand(1.0D, 1.0D, 1.0D));
+			List list = worldObj.getEntitiesWithinAABBExcludingEntity(this, boundingBox.addCoord(motionX, motionY, motionZ).expand(1.0D, 1.0D, 1.0D));
 			double d0 = 0.0D;
 
 			for (int i = 0; i < list.size(); ++i)
 			{
 				Entity entity1 = (Entity)list.get(i);
 
-				if (entity1.canBeCollidedWith() && (!entity1.isEntityEqual(this.shootingEntity) || this.ticksInAir >= 25))
+				if (entity1.canBeCollidedWith() && (!entity1.isEntityEqual(shootingEntity) || ticksInAir >= 25))
 				{
 					float f = 0.3F;
-					AxisAlignedBB axisalignedbb = entity1.boundingBox.expand((double)f, (double)f, (double)f);
+					AxisAlignedBB axisalignedbb = entity1.boundingBox.expand(f, f, f);
 					MovingObjectPosition movingobjectposition1 = axisalignedbb.calculateIntercept(vec3, vec31);
 
 					if (movingobjectposition1 != null)
@@ -165,66 +167,68 @@ public class EntityODBMeteor extends Entity
 
 			if (movingobjectposition != null)
 			{
-				this.onImpact(movingobjectposition);
+				onImpact(movingobjectposition);
 			}
 
-			this.posX += this.motionX;
-			this.posY += this.motionY;
-			this.posZ += this.motionZ;
-			float f1 = MathHelper.sqrt_double(this.motionX * this.motionX + this.motionZ * this.motionZ);
-			this.rotationYaw = (float)(Math.atan2(this.motionZ, this.motionX) * 180.0D / Math.PI) + 90.0F;
+			posX += motionX;
+			posY += motionY;
+			posZ += motionZ;
+			float f1 = MathHelper.sqrt_double(motionX * motionX + motionZ * motionZ);
+			rotationYaw = (float)(Math.atan2(motionZ, motionX) * 180.0D / Math.PI) + 90.0F;
 
-			for (this.rotationPitch = (float)(Math.atan2((double)f1, this.motionY) * 180.0D / Math.PI) - 90.0F; this.rotationPitch - this.prevRotationPitch < -180.0F; this.prevRotationPitch -= 360.0F)
+			for (rotationPitch = (float)(Math.atan2(f1, motionY) * 180.0D / Math.PI) - 90.0F; rotationPitch - prevRotationPitch < -180.0F; prevRotationPitch -= 360.0F)
 			{
 				;
 			}
 
-			while (this.rotationPitch - this.prevRotationPitch >= 180.0F)
+			while (rotationPitch - prevRotationPitch >= 180.0F)
 			{
-				this.prevRotationPitch += 360.0F;
+				prevRotationPitch += 360.0F;
 			}
 
-			while (this.rotationYaw - this.prevRotationYaw < -180.0F)
+			while (rotationYaw - prevRotationYaw < -180.0F)
 			{
-				this.prevRotationYaw -= 360.0F;
+				prevRotationYaw -= 360.0F;
 			}
 
-			while (this.rotationYaw - this.prevRotationYaw >= 180.0F)
+			while (rotationYaw - prevRotationYaw >= 180.0F)
 			{
-				this.prevRotationYaw += 360.0F;
+				prevRotationYaw += 360.0F;
 			}
 
-			this.rotationPitch = this.prevRotationPitch + (this.rotationPitch - this.prevRotationPitch) * 0.2F;
-			this.rotationYaw = this.prevRotationYaw + (this.rotationYaw - this.prevRotationYaw) * 0.2F;
-			float f2 = this.getMotionFactor();
+			rotationPitch = prevRotationPitch + (rotationPitch - prevRotationPitch) * 0.2F;
+			rotationYaw = prevRotationYaw + (rotationYaw - prevRotationYaw) * 0.2F;
+			float f2 = getMotionFactor();
 
-			if (this.isInWater())
+			if (isInWater())
 			{
 				for (int j = 0; j < 4; ++j)
 				{
 					float f3 = 0.25F;
-					this.worldObj.spawnParticle("bubble", this.posX - this.motionX * (double)f3, this.posY - this.motionY * (double)f3, this.posZ - this.motionZ * (double)f3, this.motionX, this.motionY, this.motionZ);
+					worldObj.spawnParticle("bubble", posX - motionX * f3, posY - motionY * f3, posZ - motionZ * f3, motionX, motionY, motionZ);
 				}
 
 				f2 = 0.8F;
 			}
 
-			this.motionX += this.accelerationX;
-			this.motionY += this.accelerationY;
-			this.motionZ += this.accelerationZ;
-			this.motionX *= (double)f2;
-			this.motionY *= (double)f2;
-			this.motionZ *= (double)f2;
-			this.worldObj.spawnParticle("smoke", this.posX, this.posY + 0.5D, this.posZ, 0.0D, 0.0D, 0.0D);
-			this.setPosition(this.posX, this.posY, this.posZ);
+			motionX += accelerationX;
+			motionY += accelerationY;
+			motionZ += accelerationZ;
+			motionX *= f2;
+			motionY *= f2;
+			motionZ *= f2;
+			worldObj.spawnParticle("smoke", posX, posY + 0.5D, posZ, 0.0D, 0.0D, 0.0D);
+			setPosition(posX, posY, posZ);
 		}
 	}
 
+	@Override
 	public boolean canBeCollidedWith()
 	{
 		return true;
 	}
 
+	@Override
 	public float getCollisionBorderSize()
 	{
 		return 1.0F;
@@ -235,51 +239,53 @@ public class EntityODBMeteor extends Entity
 		return 0.95F;
 	}
 
+	@Override
 	public void writeEntityToNBT(NBTTagCompound par1NBTTagCompound)
 	{
-		par1NBTTagCompound.setShort("xTile", (short)this.field_145795_e);
-		par1NBTTagCompound.setShort("yTile", (short)this.field_145793_f);
-		par1NBTTagCompound.setShort("zTile", (short)this.field_145794_g);
-		par1NBTTagCompound.setByte("inTile", (byte)Block.getIdFromBlock(this.field_145796_h));
-		par1NBTTagCompound.setByte("inGround", (byte)(this.inGround ? 1 : 0));
-		par1NBTTagCompound.setTag("direction", this.newDoubleNBTList(new double[] {this.motionX, this.motionY, this.motionZ}));
+		par1NBTTagCompound.setShort("xTile", (short)field_145795_e);
+		par1NBTTagCompound.setShort("yTile", (short)field_145793_f);
+		par1NBTTagCompound.setShort("zTile", (short)field_145794_g);
+		par1NBTTagCompound.setByte("inTile", (byte)Block.getIdFromBlock(field_145796_h));
+		par1NBTTagCompound.setByte("inGround", (byte)(inGround ? 1 : 0));
+		par1NBTTagCompound.setTag("direction", newDoubleNBTList(new double[] {motionX, motionY, motionZ}));
 	}
 
 	/**
 	 * (abstract) Protected helper method to read subclass entity data from NBT.
 	 */
+	@Override
 	public void readEntityFromNBT(NBTTagCompound par1NBTTagCompound)
 	{
-		this.field_145795_e = par1NBTTagCompound.getShort("xTile");
-		this.field_145793_f = par1NBTTagCompound.getShort("yTile");
-		this.field_145794_g = par1NBTTagCompound.getShort("zTile");
-		this.field_145796_h = Block.getBlockById(par1NBTTagCompound.getByte("inTile") & 255);
-		this.inGround = par1NBTTagCompound.getByte("inGround") == 1;
+		field_145795_e = par1NBTTagCompound.getShort("xTile");
+		field_145793_f = par1NBTTagCompound.getShort("yTile");
+		field_145794_g = par1NBTTagCompound.getShort("zTile");
+		field_145796_h = Block.getBlockById(par1NBTTagCompound.getByte("inTile") & 255);
+		inGround = par1NBTTagCompound.getByte("inGround") == 1;
 
 		if (par1NBTTagCompound.hasKey("direction", 9))
 		{
 			NBTTagList nbttaglist = par1NBTTagCompound.getTagList("direction", 6);
-			this.motionX = nbttaglist.func_150309_d(0);
-			this.motionY = nbttaglist.func_150309_d(1);
-			this.motionZ = nbttaglist.func_150309_d(2);
+			motionX = nbttaglist.func_150309_d(0);
+			motionY = nbttaglist.func_150309_d(1);
+			motionZ = nbttaglist.func_150309_d(2);
 		}
 		else
 		{
-			this.setDead();
+			setDead();
 		}
 	}
 
 	protected void onImpact(MovingObjectPosition movingobjectposition)
 	{
-		if (!this.worldObj.isRemote)
+		if (!worldObj.isRemote)
 		{
 			if (movingobjectposition.entityHit != null)
 			{
-				movingobjectposition.entityHit.attackEntityFrom(DamageSource.causeThrownDamage(this, this.shootingEntity), 6.0F);
+				movingobjectposition.entityHit.attackEntityFrom(DamageSource.causeThrownDamage(this, shootingEntity), 6.0F);
 			}
 
-			this.worldObj.newExplosion((Entity)null, this.posX, this.posY, this.posZ, (float)this.field_92057_e, true, this.worldObj.getGameRules().getGameRuleBooleanValue("mobGriefing"));
-			this.setDead();
+			worldObj.newExplosion((Entity)null, posX, posY, posZ, field_92057_e, true, worldObj.getGameRules().getGameRuleBooleanValue("mobGriefing"));
+			setDead();
 		}
 	}
 

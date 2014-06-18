@@ -21,25 +21,33 @@ import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.EnumChatFormatting;
+import net.minecraft.util.StatCollector;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
 
-public class ItemEoA extends Item
-{
-	public ItemEoA()
-	{
+public class ItemEoA extends Item {
+
+	public ItemEoA() {
 		super();
-		this.setMaxStackSize(1);
+		setMaxStackSize(1);
+	}
+
+	@Override
+	public String getItemStackDisplayName(ItemStack par1ItemStack) {
+
+		return EnumChatFormatting.AQUA + StatCollector.translateToLocal(this.getUnlocalizedName() + ".name");
 	}
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
 	public void addInformation(ItemStack is, EntityPlayer player, List l, boolean B){
-		l.add("Eye of Asorah, The Fallen");
+		l.add(StatCollector.translateToLocal("tooltip.eoa"));
 	}
 
+	@Override
 	public void registerIcons(IIconRegister par1IconRegister)
 	{
-		this.itemIcon = par1IconRegister.registerIcon(AbyssalCraft.modid + ":" + this.getUnlocalizedName().substring(5));
+		itemIcon = par1IconRegister.registerIcon(AbyssalCraft.modid + ":" + this.getUnlocalizedName().substring(5));
 	}
 }

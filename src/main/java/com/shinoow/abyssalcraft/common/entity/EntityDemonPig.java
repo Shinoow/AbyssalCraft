@@ -42,29 +42,31 @@ public class EntityDemonPig extends EntityMob
 	public EntityDemonPig(World par1World)
 	{
 		super(par1World);
-		this.setSize(0.9F, 0.9F);
-		this.getNavigator().setAvoidsWater(true);
-		this.isImmuneToFire = true;
+		setSize(0.9F, 0.9F);
+		getNavigator().setAvoidsWater(true);
+		isImmuneToFire = true;
 		double var2 = 0.35D;
-		this.setHealth(15.0F);
-		this.tasks.addTask(0, new EntityAISwimming(this));
-		this.tasks.addTask(1, new EntityAIAttackOnCollide(this, EntityPlayer.class, var2, true));
-		this.tasks.addTask(2, new EntityAIWander(this, var2));
-		this.tasks.addTask(3, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
-		this.tasks.addTask(4, new EntityAILookIdle(this));
-		this.targetTasks.addTask(0, new EntityAIHurtByTarget(this, false));
-		this.targetTasks.addTask(1, new EntityAINearestAttackableTarget(this, EntityPlayer.class, 0, true));
+		setHealth(15.0F);
+		tasks.addTask(0, new EntityAISwimming(this));
+		tasks.addTask(1, new EntityAIAttackOnCollide(this, EntityPlayer.class, var2, true));
+		tasks.addTask(2, new EntityAIWander(this, var2));
+		tasks.addTask(3, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
+		tasks.addTask(4, new EntityAILookIdle(this));
+		targetTasks.addTask(0, new EntityAIHurtByTarget(this, false));
+		targetTasks.addTask(1, new EntityAINearestAttackableTarget(this, EntityPlayer.class, 0, true));
 
 	}
 
 	/**
 	 * Returns true if the newer Entity AI code should be run
 	 */
+	@Override
 	public boolean isAIEnabled()
 	{
 		return true;
 	}
 
+	@Override
 	protected void updateAITasks()
 	{
 		super.updateAITasks();
@@ -75,15 +77,17 @@ public class EntityDemonPig extends EntityMob
 	 * by a player and the player is holding a carrot-on-a-stick
 	 */
 
+	@Override
 	protected void entityInit()
 	{
 		super.entityInit();
-		this.dataWatcher.addObject(16, Byte.valueOf((byte)0));
+		dataWatcher.addObject(16, Byte.valueOf((byte)0));
 	}
 
 	/**
 	 * Returns the sound this mob makes while it's alive.
 	 */
+	@Override
 	protected String getLivingSound()
 	{
 		return "mob.pig.say";
@@ -92,6 +96,7 @@ public class EntityDemonPig extends EntityMob
 	/**
 	 * Returns the sound this mob makes when it is hurt.
 	 */
+	@Override
 	protected String getHurtSound()
 	{
 		return "mob.ghast.scream";
@@ -100,6 +105,7 @@ public class EntityDemonPig extends EntityMob
 	/**
 	 * Returns the sound this mob makes on death.
 	 */
+	@Override
 	protected String getDeathSound()
 	{
 		return "mob.pig.death";
@@ -110,91 +116,94 @@ public class EntityDemonPig extends EntityMob
 	 */
 	protected void playStepSound(int par1, int par2, int par3, int par4)
 	{
-		this.playSound("mob.pig.step", 0.15F, 1.0F);
+		playSound("mob.pig.step", 0.15F, 1.0F);
 	}
 
+	@Override
 	protected float getSoundPitch()
 	{
 		return 0.2F;
 	}
-	
+
+	@Override
 	public void onLivingUpdate()
 	{
 		super.onLivingUpdate();
 
-		int i = MathHelper.floor_double(this.posX);
-		int j = MathHelper.floor_double(this.posY);
-		int k = MathHelper.floor_double(this.posZ);
+		int i = MathHelper.floor_double(posX);
+		int j = MathHelper.floor_double(posY);
+		int k = MathHelper.floor_double(posZ);
 
 		for (int l = 0; l < 4; ++l)
 		{
-			i = MathHelper.floor_double(this.posX + (double)((float)(l % 2 * 2 - 1) * 0.25F));
-			j = MathHelper.floor_double(this.posY);
-			k = MathHelper.floor_double(this.posZ + (double)((float)(l / 2 % 2 * 2 - 1) * 0.25F));
+			i = MathHelper.floor_double(posX + (l % 2 * 2 - 1) * 0.25F);
+			j = MathHelper.floor_double(posY);
+			k = MathHelper.floor_double(posZ + (l / 2 % 2 * 2 - 1) * 0.25F);
 
-			if (this.worldObj.getBlock(i, j, k).getMaterial() == Material.air && this.worldObj.getBiomeGenForCoords(i, k).getFloatTemperature(i, j, k) < 10.0F && Blocks.fire.canPlaceBlockAt(this.worldObj, i, j, k))
+			if (worldObj.getBlock(i, j, k).getMaterial() == Material.air && worldObj.getBiomeGenForCoords(i, k).getFloatTemperature(i, j, k) < 10.0F && Blocks.fire.canPlaceBlockAt(worldObj, i, j, k))
 			{
-				this.worldObj.setBlock(i, j, k, Blocks.fire);
+				worldObj.setBlock(i, j, k, Blocks.fire);
 			}
 		}
 	}
 
 
+	@Override
 	protected void attackEntity(Entity par1Entity, float par2)
 	{
-		if (this.attackTime <= 0 && par2 < 2.0F && par1Entity.boundingBox.maxY > this.boundingBox.minY && par1Entity.boundingBox.minY < this.boundingBox.maxY)
+		if (attackTime <= 0 && par2 < 2.0F && par1Entity.boundingBox.maxY > boundingBox.minY && par1Entity.boundingBox.minY < boundingBox.maxY)
 		{
-			this.attackTime = 20;
-			this.attackEntityAsMob(par1Entity);
+			attackTime = 20;
+			attackEntityAsMob(par1Entity);
 		}
 		else if (par2 < 30.0F)
 		{
-			double var3 = par1Entity.posX - this.posX;
-			double var5 = par1Entity.boundingBox.minY + (double)(par1Entity.height / 2.0F) - (this.posY + (double)(this.height / 2.0F));
-			double var7 = par1Entity.posZ - this.posZ;
+			double var3 = par1Entity.posX - posX;
+			double var5 = par1Entity.boundingBox.minY + par1Entity.height / 2.0F - (posY + height / 2.0F);
+			double var7 = par1Entity.posZ - posZ;
 
-			if (this.attackTime == 0)
+			if (attackTime == 0)
 			{
-				++this.field_70846_g;
+				++field_70846_g;
 
-				if (this.field_70846_g == 1)
+				if (field_70846_g == 1)
 				{
-					this.attackTime = 60;
-					this.func_70844_e(true);
+					attackTime = 60;
+					func_70844_e(true);
 				}
-				else if (this.field_70846_g <= 4)
+				else if (field_70846_g <= 4)
 				{
-					this.attackTime = 6;
+					attackTime = 6;
 				}
 				else
 				{
-					this.attackTime = 100;
-					this.field_70846_g = 0;
-					this.func_70844_e(false);
+					attackTime = 100;
+					field_70846_g = 0;
+					func_70844_e(false);
 				}
 
-				if (this.field_70846_g > 1)
+				if (field_70846_g > 1)
 				{
 					float var9 = MathHelper.sqrt_float(par2) * 0.5F;
-					this.worldObj.playAuxSFXAtEntity((EntityPlayer)null, 1009, (int)this.posX, (int)this.posY, (int)this.posZ, 0);
+					worldObj.playAuxSFXAtEntity((EntityPlayer)null, 1009, (int)posX, (int)posY, (int)posZ, 0);
 
 					for (int var10 = 0; var10 < 1; ++var10)
 					{
-						EntitySmallFireball var11 = new EntitySmallFireball(this.worldObj, this, var3 + this.rand.nextGaussian() * (double)var9, var5, var7 + this.rand.nextGaussian() * (double)var9);
-						var11.posY = this.posY + (double)(this.height / 2.0F) + 0.5D;
-						this.worldObj.spawnEntityInWorld(var11);
+						EntitySmallFireball var11 = new EntitySmallFireball(worldObj, this, var3 + rand.nextGaussian() * var9, var5, var7 + rand.nextGaussian() * var9);
+						var11.posY = posY + height / 2.0F + 0.5D;
+						worldObj.spawnEntityInWorld(var11);
 					}
 				}
 			}
 
-			this.rotationYaw = (float)(Math.atan2(var7, var3) * 180.0D / Math.PI) - 90.0F;
-			this.hasAttacked = true;
+			rotationYaw = (float)(Math.atan2(var7, var3) * 180.0D / Math.PI) - 90.0F;
+			hasAttacked = true;
 		}
 	}
 
 	public void func_70844_e(boolean par1)
 	{
-		byte var2 = this.dataWatcher.getWatchableObjectByte(16);
+		byte var2 = dataWatcher.getWatchableObjectByte(16);
 
 		if (par1)
 		{
@@ -205,21 +214,22 @@ public class EntityDemonPig extends EntityMob
 			var2 &= -2;
 		}
 
-		this.dataWatcher.updateObject(16, Byte.valueOf(var2));
+		dataWatcher.updateObject(16, Byte.valueOf(var2));
 	}
 
 
 	/**
 	 * Drop 0-2 items of this living's type
 	 */
+	@Override
 	protected void dropFewItems(boolean par1, int par2)
 	{
-		int var3 = this.rand.nextInt(3) + 1 + this.rand.nextInt(1 + par2);
+		int var3 = rand.nextInt(3) + 1 + rand.nextInt(1 + par2);
 
 		for (int var4 = 0; var4 < var3; ++var4)
 		{
 			{
-				this.dropItem(Items.rotten_flesh, 1);
+				dropItem(Items.rotten_flesh, 1);
 			}
 		}
 	}

@@ -39,7 +39,7 @@ public class PSDL extends BlockContainer {
 	public PSDL()
 	{
 		super(Material.rock);
-		this.setBlockBounds(0.1F, 0.0F, 0.1F, 0.8F, 0.7F, 0.8F);
+		setBlockBounds(0.1F, 0.0F, 0.1F, 0.8F, 0.7F, 0.8F);
 		this.setHarvestLevel("pickaxe", 5);
 	}
 
@@ -49,6 +49,7 @@ public class PSDL extends BlockContainer {
 		return new TileEntityPSDL();
 	}
 
+	@Override
 	public boolean isOpaqueCube()
 	{
 		return false;
@@ -59,13 +60,14 @@ public class PSDL extends BlockContainer {
 		return -1;
 	}
 
+	@Override
 	public void randomDisplayTick(World par1World, int par2, int par3, int par4, Random par5Random)
 	{
 		super.randomDisplayTick(par1World, par2, par3, par4, par5Random);
 
 		if (par5Random.nextInt(10) == 0)
 		{
-			par1World.spawnParticle("largesmoke", (double)((float)par2 + par5Random.nextFloat()), (double)((float)par3 + 1.1F), (double)((float)par4 + par5Random.nextFloat()), 0.0D, 0.0D, 0.0D);
+			par1World.spawnParticle("largesmoke", par2 + par5Random.nextFloat(), par3 + 1.1F, par4 + par5Random.nextFloat(), 0.0D, 0.0D, 0.0D);
 		}
 	}
 
@@ -87,9 +89,10 @@ public class PSDL extends BlockContainer {
 		return false;
 	}
 
+	@Override
 	public void onBlockPlacedBy(World par1World, int par2, int par3, int par4, EntityLivingBase par5EntityLivingBase, ItemStack par6ItemStack)
 	{
-		int dir = MathHelper.floor_double((double)((par5EntityLivingBase.rotationYaw * 4F) / 360F) + 0.5D) & 3;
+		int dir = MathHelper.floor_double(par5EntityLivingBase.rotationYaw * 4F / 360F + 0.5D) & 3;
 		par1World.setBlockMetadataWithNotify(par2, par3, par4, dir, 0);
 	}
 

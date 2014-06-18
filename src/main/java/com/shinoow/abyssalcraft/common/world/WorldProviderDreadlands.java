@@ -24,107 +24,104 @@ import com.shinoow.abyssalcraft.AbyssalCraft;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class WorldProviderDreadlands extends WorldProvider
-{
+public class WorldProviderDreadlands extends WorldProvider {
+
 	/**
 	 * creates a new world chunk manager for WorldProvider
 	 */
-	public void registerWorldChunkManager()
-	{
-		this.worldChunkMgr = new WorldChunkManagerDreadlands(worldObj.getSeed(), terrainType);
-		this.hasNoSky = true;
-		this.dimensionId = AbyssalCraft.dimension2;
+	@Override
+	public void registerWorldChunkManager() {
+		worldChunkMgr = new WorldChunkManagerDreadlands(worldObj.getSeed(), terrainType);
+		hasNoSky = true;
+		dimensionId = AbyssalCraft.configDimId2;
 	}
 
+	@Override
 	@SideOnly(Side.CLIENT)
-
 	/**
 	 * Return Vec3D with biome specific fog color
 	 */
-	public Vec3 getFogColor(float par1, float par2)
-	{
-		return this.worldObj.getWorldVec3Pool().getVecFromPool(0.20000000298023224D, 0.029999999329447746D, 0.029999999329447746D);
+	public Vec3 getFogColor(float par1, float par2) {
+		return worldObj.getWorldVec3Pool().getVecFromPool(0.20000000298023224D, 0.029999999329447746D, 0.029999999329447746D);
 	}
 
 	/**
 	 * Creates the light to brightness table
 	 */
-	protected void generateLightBrightnessTable()
-	{
+	@Override
+	protected void generateLightBrightnessTable() {
 		float f = 0.35F;
 
-		for (int i = 0; i <= 15; ++i)
-		{
-			float f1 = 1.0F - (float)i / 15.0F;
-			this.lightBrightnessTable[i] = (1.0F - f1) / (f1 * 3.0F + 1.0F) * (1.0F - f) + f;
+		for (int i = 0; i <= 15; ++i) {
+			float f1 = 1.0F - i / 15.0F;
+			lightBrightnessTable[i] = (1.0F - f1) / (f1 * 3.0F + 1.0F) * (1.0F - f) + f;
 		}
 	}
 
 	/**
 	 * Returns a new chunk provider which generates chunks for this world
 	 */
-	public IChunkProvider createChunkGenerator()
-	{
-		return new ChunkProviderDreadlands(this.worldObj, this.worldObj.getSeed(), true);
+	@Override
+	public IChunkProvider createChunkGenerator() {
+		return new ChunkProviderDreadlands(worldObj, worldObj.getSeed(), true);
 	}
 
 	/**
 	 * Returns 'true' if in the "main surface world", but 'false' if in the Nether or End dimensions.
 	 */
-	public boolean isSurfaceWorld()
-	{
+	@Override
+	public boolean isSurfaceWorld() {
 		return false;
 	}
 
 	/**
 	 * Will check if the x, z position specified is alright to be set as the map spawn point
 	 */
-	public boolean canCoordinateBeSpawn(int par1, int par2)
-	{
+	@Override
+	public boolean canCoordinateBeSpawn(int par1, int par2) {
 		return false;
 	}
 
 	/**
 	 * Calculates the angle of sun and moon in the sky relative to a specified time (usually worldTime)
 	 */
-	public float calculateCelestialAngle(long par1, float par3)
-	{
+	@Override
+	public float calculateCelestialAngle(long par1, float par3) {
 		return 0.5F;
 	}
 
 	/**
 	 * True if the player can respawn in this dimension (true = overworld, false = nether).
 	 */
-	public boolean canRespawnHere()
-	{
+	@Override
+	public boolean canRespawnHere() {
 		return false;
 	}
 
+	@Override
 	@SideOnly(Side.CLIENT)
-
 	/**
 	 * Returns true if the given X,Z coordinate should show environmental fog.
 	 */
-	public boolean doesXZShowFog(int par1, int par2)
-	{
+	public boolean doesXZShowFog(int par1, int par2) {
 		return true;
 	}
 
-	public String getSaveFolder()
-	{
+	@Override
+	public String getSaveFolder() {
 		return "The_Dreadlands";
 	}
 
-	public int getAverageGroundLevel()
-	{
+	@Override
+	public int getAverageGroundLevel() {
 		return 50;
 	}
 
 	/**
 	 * Returns the dimension's name, e.g. "The End", "Nether", or "Overworld".
 	 */
-	public String getDimensionName()
-	{
+	@Override
+	public String getDimensionName() {
 		return "The Dreadlands";
 	}
 }

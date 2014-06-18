@@ -40,9 +40,9 @@ public class DreadFire extends BlockFire
 		super();
 		setTickRandomly(true);
 	}
-	public IIcon func_149691_a(int par1, int par2)
+	public IIcon getIcon(int par1, int par2)
 	{
-		return this.iconArray[0];
+		return iconArray[0];
 	}
 	public void initializeBlock()
 	{
@@ -71,30 +71,37 @@ public class DreadFire extends BlockFire
 		setFireInfo(Blocks.carpet, 60, 20);
 	}
 
+	@Override
 	public AxisAlignedBB getCollisionBoundingBoxFromPool(World par1World, int par2, int par3, int par4)
 	{
 		return null;
 	}
+	@Override
 	public boolean isOpaqueCube()
 	{
 		return false;
 	}
+	@Override
 	public boolean renderAsNormalBlock()
 	{
 		return false;
 	}
+	@Override
 	public int getRenderType()
 	{
 		return 3;
 	}
+	@Override
 	public int quantityDropped(Random par1Random)
 	{
 		return 0;
 	}
+	@Override
 	public int tickRate(World par1World)
 	{
 		return 30;
 	}
+	@Override
 	public void updateTick(World par1World, int par2, int par3, int par4, Random par5Random)
 	{
 		if (par1World.getGameRules().getGameRuleBooleanValue("doFireTick"))
@@ -105,7 +112,7 @@ public class DreadFire extends BlockFire
 			{
 				par1World.setBlockToAir(par2, par3, par4);
 			}
-			if ((!flag) && (par1World.isRaining()) && ((par1World.canLightningStrikeAt(par2, par3, par4)) || (par1World.canLightningStrikeAt(par2 - 1, par3, par4)) || (par1World.canLightningStrikeAt(par2 + 1, par3, par4)) || (par1World.canLightningStrikeAt(par2, par3, par4 - 1)) || (par1World.canLightningStrikeAt(par2, par3, par4 + 1))))
+			if (!flag && par1World.isRaining() && (par1World.canLightningStrikeAt(par2, par3, par4) || par1World.canLightningStrikeAt(par2 - 1, par3, par4) || par1World.canLightningStrikeAt(par2 + 1, par3, par4) || par1World.canLightningStrikeAt(par2, par3, par4 - 1) || par1World.canLightningStrikeAt(par2, par3, par4 + 1)))
 			{
 				par1World.setBlockToAir(par2, par3, par4);
 			}
@@ -117,14 +124,14 @@ public class DreadFire extends BlockFire
 					par1World.setBlockMetadataWithNotify(par2, par3, par4, l + par5Random.nextInt(3) / 2, 4);
 				}
 				par1World.scheduleBlockUpdate(par2, par3, par4, this, tickRate(par1World) + par5Random.nextInt(10));
-				if ((!flag) && (!canNeighborBurn(par1World, par2, par3, par4)))
+				if (!flag && !canNeighborBurn(par1World, par2, par3, par4))
 				{
-					if ((!World.doesBlockHaveSolidTopSurface(par1World, par2, par3 - 1, par4)) || (l > 3))
+					if (!World.doesBlockHaveSolidTopSurface(par1World, par2, par3 - 1, par4) || l > 3)
 					{
 						par1World.setBlockToAir(par2, par3, par4);
 					}
 				}
-				else if ((!flag) && (!canBlockCatchFire(par1World, par2, par3 - 1, par4, ForgeDirection.UP)) && (l == 15) && (par5Random.nextInt(4) == 0))
+				else if (!flag && !canBlockCatchFire(par1World, par2, par3 - 1, par4, ForgeDirection.UP) && l == 15 && par5Random.nextInt(4) == 0)
 				{
 					par1World.setBlockToAir(par2, par3, par4);
 				}
@@ -148,7 +155,7 @@ public class DreadFire extends BlockFire
 						{
 							for (int k1 = par3 - 1; k1 <= par3 + 4; k1++)
 							{
-								if ((i1 != par2) || (k1 != par3) || (j1 != par4))
+								if (i1 != par2 || k1 != par3 || j1 != par4)
 								{
 									int l1 = 100;
 									if (k1 > par3 + 1)
@@ -163,7 +170,7 @@ public class DreadFire extends BlockFire
 										{
 											j2 /= 2;
 										}
-										if ((j2 > 0) && (par5Random.nextInt(l1) <= j2) && ((!par1World.isRaining()) || (!par1World.canLightningStrikeAt(i1, k1, j1))) && (!par1World.canLightningStrikeAt(i1 - 1, k1, par4)) && (!par1World.canLightningStrikeAt(i1 + 1, k1, j1)) && (!par1World.canLightningStrikeAt(i1, k1, j1 - 1)) && (!par1World.canLightningStrikeAt(i1, k1, j1 + 1)))
+										if (j2 > 0 && par5Random.nextInt(l1) <= j2 && (!par1World.isRaining() || !par1World.canLightningStrikeAt(i1, k1, j1)) && !par1World.canLightningStrikeAt(i1 - 1, k1, par4) && !par1World.canLightningStrikeAt(i1 + 1, k1, j1) && !par1World.canLightningStrikeAt(i1, k1, j1 - 1) && !par1World.canLightningStrikeAt(i1, k1, j1 + 1))
 										{
 											int k2 = l + par5Random.nextInt(5) / 4;
 											if (k2 > 15)
@@ -189,7 +196,7 @@ public class DreadFire extends BlockFire
 		if (par6Random.nextInt(par5) < j1)
 		{
 			boolean flag = par1World.getBlock(par2, par3, par4) == Blocks.tnt;
-			if ((par6Random.nextInt(par7 + 10) < 5) && (!par1World.canLightningStrikeAt(par2, par3, par4)))
+			if (par6Random.nextInt(par7 + 10) < 5 && !par1World.canLightningStrikeAt(par2, par3, par4))
 			{
 				int k1 = par7 + par6Random.nextInt(5) / 4;
 				if (k1 > 15)
@@ -210,20 +217,18 @@ public class DreadFire extends BlockFire
 	}
 	private boolean canNeighborBurn(World par1World, int par2, int par3, int par4)
 	{
-		return (canBlockCatchFire(par1World, par2 + 1, par3, par4, ForgeDirection.WEST)) ||
-				(canBlockCatchFire(par1World, par2 - 1, par3, par4, ForgeDirection.EAST)) ||
-				(canBlockCatchFire(par1World, par2, par3 - 1, par4, ForgeDirection.UP)) ||
-				(canBlockCatchFire(par1World, par2, par3 + 1, par4, ForgeDirection.DOWN)) ||
-				(canBlockCatchFire(par1World, par2, par3, par4 - 1, ForgeDirection.SOUTH)) ||
-				(canBlockCatchFire(par1World, par2, par3, par4 + 1, ForgeDirection.NORTH));
+		return canBlockCatchFire(par1World, par2 + 1, par3, par4, ForgeDirection.WEST) ||
+				canBlockCatchFire(par1World, par2 - 1, par3, par4, ForgeDirection.EAST) ||
+				canBlockCatchFire(par1World, par2, par3 - 1, par4, ForgeDirection.UP) ||
+				canBlockCatchFire(par1World, par2, par3 + 1, par4, ForgeDirection.DOWN) ||
+				canBlockCatchFire(par1World, par2, par3, par4 - 1, ForgeDirection.SOUTH) ||
+				canBlockCatchFire(par1World, par2, par3, par4 + 1, ForgeDirection.NORTH);
 	}
 	private int getChanceOfNeighborsEncouragingFire(World par1World, int par2, int par3, int par4)
 	{
 		byte b0 = 0;
 		if (!par1World.setBlockToAir(par2, par3, par4))
-		{
 			return 0;
-		}
 		int l = getChanceToEncourageFire(par1World, par2 + 1, par3, par4, b0, ForgeDirection.WEST);
 		l = getChanceToEncourageFire(par1World, par2 - 1, par3, par4, l, ForgeDirection.EAST);
 		l = getChanceToEncourageFire(par1World, par2, par3 - 1, par4, l, ForgeDirection.UP);
@@ -232,6 +237,7 @@ public class DreadFire extends BlockFire
 		l = getChanceToEncourageFire(par1World, par2, par3, par4 + 1, l, ForgeDirection.NORTH);
 		return l;
 	}
+	@Override
 	public boolean isCollidable()
 	{
 		return false;
@@ -239,21 +245,22 @@ public class DreadFire extends BlockFire
 
 	public boolean canBlockCatchFire(World par1World, int par2, int par3, int par4)
 	{
-		return (World.doesBlockHaveSolidTopSurface(par1World, par2, par3 - 1, par4)) || (canNeighborBurn(par1World, par2, par3, par4));
+		return World.doesBlockHaveSolidTopSurface(par1World, par2, par3 - 1, par4) || canNeighborBurn(par1World, par2, par3, par4);
 	}
 	public void onNeighborBlockChange(World par1World, int par2, int par3, int par4, int par5)
 	{
-		if ((!World.doesBlockHaveSolidTopSurface(par1World, par2, par3 - 1, par4)) && (!canNeighborBurn(par1World, par2, par3, par4)))
+		if (!World.doesBlockHaveSolidTopSurface(par1World, par2, par3 - 1, par4) && !canNeighborBurn(par1World, par2, par3, par4))
 		{
 			par1World.setBlockToAir(par2, par3, par4);
 		}
 	}
+	@Override
 	public void onBlockAdded(World par1World, int par2, int par3, int par4)
 	{
 
-		if ((par1World.getBlock(par2, par3 - 1, par4) != AbyssalCraft.dreadstone) || (!BlockTeleporterDL.tryToCreatePortal(par1World, par2, par3, par4)))
+		if (par1World.getBlock(par2, par3 - 1, par4) != AbyssalCraft.dreadstone || !BlockTeleporterDL.tryToCreatePortal(par1World, par2, par3, par4))
 		{
-			if ((!World.doesBlockHaveSolidTopSurface(par1World, par2, par3 - 1, par4)) && (!canNeighborBurn(par1World, par2, par3, par4)))
+			if (!World.doesBlockHaveSolidTopSurface(par1World, par2, par3 - 1, par4) && !canNeighborBurn(par1World, par2, par3, par4))
 			{
 				par1World.setBlockToAir(par2, par3, par4);
 			}
@@ -263,6 +270,7 @@ public class DreadFire extends BlockFire
 			}
 		}
 	}
+	@Override
 	@SideOnly(Side.CLIENT)
 	public void randomDisplayTick(World par1World, int par2, int par3, int par4, Random par5Random)
 	{
@@ -270,7 +278,7 @@ public class DreadFire extends BlockFire
 		{
 			par1World.playSound(par2 + 0.5F, par3 + 0.5F, par4 + 0.5F, "fire.fire", 1.0F + par5Random.nextFloat(), par5Random.nextFloat() * 0.7F + 0.3F, false);
 		}
-		if ((!World.doesBlockHaveSolidTopSurface(par1World, par2, par3 - 1, par4)) && (!this.canBlockCatchFire(par1World, par2, par3 - 1, par4, ForgeDirection.UP)))
+		if (!World.doesBlockHaveSolidTopSurface(par1World, par2, par3 - 1, par4) && !this.canBlockCatchFire(par1World, par2, par3 - 1, par4, ForgeDirection.UP))
 		{
 			if (this.canBlockCatchFire(par1World, par2 - 1, par3, par4, ForgeDirection.EAST))
 			{
@@ -341,18 +349,20 @@ public class DreadFire extends BlockFire
 	public int getChanceToEncourageFire(World world, int x, int y, int z, int oldChance, ForgeDirection face)
 	{
 		int newChance = world.getBlock(x, y, z).getFireSpreadSpeed(world, x, y, z, face);
-		return (newChance > oldChance ? newChance : oldChance);
+		return newChance > oldChance ? newChance : oldChance;
 	}
 
+	@Override
 	@SideOnly(Side.CLIENT)
 	public void registerBlockIcons(IIconRegister par1IconRegister)
 	{
-		this.iconArray = new IIcon[] { par1IconRegister.registerIcon("abyssalcraft:dfire_layer_0"), par1IconRegister.registerIcon("abyssalcraft:dfire_layer_1") };
-		this.blockIcon = par1IconRegister.registerIcon(AbyssalCraft.modid + ":" + "dfire_layer_0");
+		iconArray = new IIcon[] { par1IconRegister.registerIcon("abyssalcraft:dfire_layer_0"), par1IconRegister.registerIcon("abyssalcraft:dfire_layer_1") };
+		blockIcon = par1IconRegister.registerIcon(AbyssalCraft.modid + ":" + "dfire_layer_0");
 	}
+	@Override
 	@SideOnly(Side.CLIENT)
 	public IIcon getFireIcon(int par1) {
-		return this.iconArray[par1];
+		return iconArray[par1];
 	}
 
 }

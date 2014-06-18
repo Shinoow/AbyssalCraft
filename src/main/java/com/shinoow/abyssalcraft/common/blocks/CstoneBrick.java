@@ -24,7 +24,7 @@ public class CstoneBrick extends Block {
 
 	public CstoneBrick() {
 		super(Material.rock);
-		this.setCreativeTab(AbyssalCraft.tabBlock);
+		setCreativeTab(AbyssalCraft.tabBlock);
 	}
 
 }

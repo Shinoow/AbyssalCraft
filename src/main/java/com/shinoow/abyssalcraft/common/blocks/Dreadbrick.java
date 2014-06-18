@@ -24,7 +24,7 @@ public class Dreadbrick extends Block {
 
 	public Dreadbrick() {
 		super(Material.rock);
-		this.setCreativeTab(AbyssalCraft.tabBlock);
+		setCreativeTab(AbyssalCraft.tabBlock);
 		this.setHarvestLevel("pickaxe", 4);
 	}
 

@@ -44,19 +44,22 @@ public class DLTLog extends BlockRotatedPillar
 	public DLTLog()
 	{
 		super(Material.wood);
-		this.setCreativeTab(AbyssalCraft.tabBlock);
+		setCreativeTab(AbyssalCraft.tabBlock);
 	}
 
+	@Override
 	public int getRenderType()
 	{
 		return 31;
 	}
 
+	@Override
 	public int quantityDropped(Random par1Random)
 	{
 		return 1;
 	}
 
+	@Override
 	public Item getItemDropped(int par1, Random par2Random, int par3)
 	{
 		return Item.getItemFromBlock(this);
@@ -111,6 +114,7 @@ public class DLTLog extends BlockRotatedPillar
 	}
 
 
+	@Override
 	public int damageDropped(int par1)
 	{
 		return par1 & 3;
@@ -121,11 +125,13 @@ public class DLTLog extends BlockRotatedPillar
 		return par0 & 3;
 	}
 
+	@Override
 	protected ItemStack createStackedBlock(int par1)
 	{
 		return new ItemStack(this, 1, limitToValidMetadata(par1));
 	}
 
+	@Override
 	@SideOnly(Side.CLIENT)
 
 	/**
@@ -133,15 +139,17 @@ public class DLTLog extends BlockRotatedPillar
 	 */
 	public IIcon getIcon(int par1, int par2)
 	{
-		return par1 == 1 ? this.iconLogTop : (par1 == 0 ? this.iconLogTop : this.blockIcon);
+		return par1 == 1 ? iconLogTop : par1 == 0 ? iconLogTop : blockIcon;
 	}
 
+	@Override
 	public boolean canSustainLeaves(IBlockAccess world, int x, int y, int z)
 	{
 		return true;
 	}
 
 
+	@Override
 	@SideOnly(Side.CLIENT)
 
 	/**
@@ -150,9 +158,9 @@ public class DLTLog extends BlockRotatedPillar
 	 */
 	public void registerBlockIcons(IIconRegister par1IconRegister)
 	{
-		this.blockIcon = par1IconRegister.registerIcon(AbyssalCraft.modid + ":" + "DLTTside");
-		this.iconLogTop = par1IconRegister.registerIcon(AbyssalCraft.modid + ":" + "DLTTtop");
-		this.iconLogSide = par1IconRegister.registerIcon(AbyssalCraft.modid + ":" + "DLTTside");
+		blockIcon = par1IconRegister.registerIcon(AbyssalCraft.modid + ":" + "DLTTside");
+		iconLogTop = par1IconRegister.registerIcon(AbyssalCraft.modid + ":" + "DLTTtop");
+		iconLogSide = par1IconRegister.registerIcon(AbyssalCraft.modid + ":" + "DLTTside");
 		DLTLog.iconLogSideOverlay = par1IconRegister.registerIcon(AbyssalCraft.modid + ":" + "DLTTside");
 	}
 
@@ -162,6 +170,7 @@ public class DLTLog extends BlockRotatedPillar
 		return iconLogSideOverlay;
 	}
 
+	@Override
 	@SideOnly(Side.CLIENT)
 	protected IIcon getSideIcon(int i) {
 

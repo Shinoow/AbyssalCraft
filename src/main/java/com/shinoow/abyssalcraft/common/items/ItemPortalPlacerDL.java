@@ -21,45 +21,55 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ChatComponentText;
+import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.MathHelper;
+import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
 
 import cpw.mods.fml.client.FMLClientHandler;
 
-public class ItemPortalPlacerDL extends Item
-{
-	public ItemPortalPlacerDL()
-	{
+public class ItemPortalPlacerDL extends Item {
+
+	public ItemPortalPlacerDL() {
 		super();
-		this.maxStackSize = 1;
-		this.setMaxDamage(1);
-		this.setCreativeTab(AbyssalCraft.tabTools);
+		maxStackSize = 1;
+		setMaxDamage(1);
+		setCreativeTab(AbyssalCraft.tabTools);
 	}
 
+	@Override
+	public String getItemStackDisplayName(ItemStack par1ItemStack) {
+
+		return EnumChatFormatting.DARK_RED + StatCollector.translateToLocal(this.getUnlocalizedName() + ".name");
+	}
+
+	@Override
 	public boolean isFull3D()
 	{
 		return true;
 	}
 
+	@Override
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public void addInformation(ItemStack par1ItemStack, EntityPlayer entityplayer, List list, boolean is){
-		list.add("Can only be used within");
-		list.add("the Abyssal Wasteland");
+		list.add(StatCollector.translateToLocal("tooltip.portalplacerdl.1"));
+		list.add(StatCollector.translateToLocal("tooltip.portalplacerdl.2"));
 	}
 
+	@Override
 	public boolean onItemUse(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, World par3World, int par4, int par5, int par6, int par7, float par8, float par9, float par10)
 	{
-		if(par3World.provider.isSurfaceWorld())
+		if(!par3World.isRemote && par3World.provider.isSurfaceWorld())
 		{
 			FMLClientHandler.instance().getClient().ingameGUI.getChatGUI().printChatMessage(new ChatComponentText("Nothing happened..."));
 			return false;
 		}
 
-		else if(!par3World.isRemote && par2EntityPlayer.dimension != AbyssalCraft.dimension || !par3World.isRemote && par2EntityPlayer.dimension != AbyssalCraft.dimension2)
+		else if(!par3World.isRemote && par2EntityPlayer.dimension != AbyssalCraft.configDimId1 || !par3World.isRemote && par2EntityPlayer.dimension != AbyssalCraft.configDimId2)
 		{
-			int direction = MathHelper.floor_double((double)(par2EntityPlayer.rotationYaw * 4.0F / 360.0F) + 0.5D) & 3;
+			int direction = MathHelper.floor_double(par2EntityPlayer.rotationYaw * 4.0F / 360.0F + 0.5D) & 3;
 
 			if(direction == 1 || direction == 3)
 			{
@@ -135,7 +145,6 @@ public class ItemPortalPlacerDL extends Item
 		else
 			return false;
 	}
-
 
 	/**  When portal block generation has been changed to match the new design, replace the methods
          	above with these (keep the Dreaded Fire)

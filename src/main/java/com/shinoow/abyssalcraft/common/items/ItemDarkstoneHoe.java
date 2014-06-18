@@ -38,19 +38,16 @@ public class ItemDarkstoneHoe extends Item
 		maxStackSize = 1;
 		setMaxDamage(enumToolMaterial.getMaxUses());
 	}
+	@Override
 	public boolean onItemUse(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, World par3World, int par4, int par5, int par6, int par7, float par8, float par9, float par10)
 	{
 		if (!par2EntityPlayer.canPlayerEdit(par4, par5, par6, par7, par1ItemStack))
-		{
 			return false;
-		}
 		else
 		{
 			UseHoeEvent event = new UseHoeEvent(par2EntityPlayer, par1ItemStack, par3World, par4, par5, par6);
 			if (MinecraftForge.EVENT_BUS.post(event))
-			{
 				return false;
-			}
 
 			if (event.getResult() == Result.ALLOW)
 			{
@@ -62,18 +59,14 @@ public class ItemDarkstoneHoe extends Item
 			int var12 = par3World.getBlockMetadata(par4, par5 + 1, par6);
 
 			if ((par7 == 0 || var12 != 0 || var11 != Blocks.grass) && var11 != Blocks.dirt && var11 != AbyssalCraft.Darkgrass && var11 != AbyssalCraft.dreadgrass)
-			{
 				return false;
-			}
 			else
 			{
 				Block var13 = Blocks.farmland;
-				par3World.playSoundEffect((double)((float)par4 + 0.5F), (double)((float)par5 + 0.5F), (double)((float)par6 + 0.5F), var13.stepSound.func_150496_b(), (var13.stepSound.getVolume() + 1.0F) / 2.0F, var13.stepSound.getPitch() * 0.8F);
+				par3World.playSoundEffect(par4 + 0.5F, par5 + 0.5F, par6 + 0.5F, var13.stepSound.func_150496_b(), (var13.stepSound.getVolume() + 1.0F) / 2.0F, var13.stepSound.getPitch() * 0.8F);
 
 				if (par3World.isRemote)
-				{
 					return true;
-				}
 				else
 				{
 					par3World.setBlock(par4, par5, par6, var13);
@@ -84,6 +77,7 @@ public class ItemDarkstoneHoe extends Item
 		}
 	}
 
+	@Override
 	public boolean isFull3D()
 	{
 		return true;

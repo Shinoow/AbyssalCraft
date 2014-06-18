@@ -41,35 +41,31 @@ public class ACscion2 extends WorldGenerator
 			checkID = world.getBlockMetadata(i, j + distanceToAir, k);
 		}
 
-		if (distanceToAir > 1){
+		if (distanceToAir > 1)
 			return false;
-		}
 		j += distanceToAir - 1;
 
 		Block blockID = world.getBlock(i, j, k);
 		Block blockIDAbove = world.getBlock(i, j+1, k);
 		Block blockIDBelow = world.getBlock(i, j-1, k);
 		for (Block x : GetValidSpawnBlocks()){
-			if (blockIDAbove != Blocks.air){
+			if (blockIDAbove != Blocks.air)
 				return false;
-			}
-			if (blockID == x){
+			if (blockID == x)
 				return true;
-			}else if (blockID == Blocks.snow && blockIDBelow == x){
+			else if (blockID == Blocks.snow && blockIDBelow == x)
 				return true;
-			}
 		}
 		return false;
 	}
 
 	public ACscion2() { }
 
+	@Override
 	public boolean generate(World world, Random random, int i, int j, int k) {
 
 		if(!LocationIsValidSpawn(world, i, j, k) || !LocationIsValidSpawn(world, i + 6, j, k) || !LocationIsValidSpawn(world, i + 6, j, k + 6) || !LocationIsValidSpawn(world, i, j, k + 6))
-		{
 			return false;
-		}
 
 		world.setBlock(i + 0, j + 0, k + 0, AbyssalCraft.Darkstone_brick, k, k);
 		world.setBlock(i + 0, j + 0, k + 1, Blocks.air, 0, k);

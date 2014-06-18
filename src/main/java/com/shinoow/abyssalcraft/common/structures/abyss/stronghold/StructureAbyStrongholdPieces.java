@@ -42,6 +42,7 @@ public class StructureAbyStrongholdPieces
 	private static final StructureAbyStrongholdPieces.PieceWeight[] pieceWeightArray = new StructureAbyStrongholdPieces.PieceWeight[] {new StructureAbyStrongholdPieces.PieceWeight(StructureAbyStrongholdPieces.Straight.class, 40, 0), new StructureAbyStrongholdPieces.PieceWeight(StructureAbyStrongholdPieces.Prison.class, 5, 5), new StructureAbyStrongholdPieces.PieceWeight(StructureAbyStrongholdPieces.LeftTurn.class, 20, 0), new StructureAbyStrongholdPieces.PieceWeight(StructureAbyStrongholdPieces.RightTurn.class, 20, 0), new StructureAbyStrongholdPieces.PieceWeight(StructureAbyStrongholdPieces.RoomCrossing.class, 10, 6), new StructureAbyStrongholdPieces.PieceWeight(StructureAbyStrongholdPieces.StairsStraight.class, 5, 5), new StructureAbyStrongholdPieces.PieceWeight(StructureAbyStrongholdPieces.Stairs.class, 5, 5), new StructureAbyStrongholdPieces.PieceWeight(StructureAbyStrongholdPieces.Crossing.class, 5, 4), new StructureAbyStrongholdPieces.PieceWeight(StructureAbyStrongholdPieces.ChestCorridor.class, 5, 4)
 	{
 
+		@Override
 		public boolean canSpawnMoreStructuresOfType(int par1)
 		{
 			return super.canSpawnMoreStructuresOfType(par1) && par1 > 4;
@@ -49,6 +50,7 @@ public class StructureAbyStrongholdPieces
 	}, new StructureAbyStrongholdPieces.PieceWeight(StructureAbyStrongholdPieces.PortalRoom.class, 20, 1)
 	{
 
+		@Override
 		public boolean canSpawnMoreStructuresOfType(int par1)
 		{
 			return super.canSpawnMoreStructuresOfType(par1) && par1 > 5;
@@ -59,7 +61,7 @@ public class StructureAbyStrongholdPieces
 	private static Class<?> strongComponentType;
 	static int totalWeight;
 	private static final StructureAbyStrongholdPieces.Stones strongholdStones = new StructureAbyStrongholdPieces.Stones(null);
-	public static void func_143046_a()
+	public static void registerStructurePieces()
 	{
 		MapGenStructureIO.func_143031_a(StructureAbyStrongholdPieces.ChestCorridor.class, "SHACC");
 		MapGenStructureIO.func_143031_a(StructureAbyStrongholdPieces.Corridor.class, "SHAFC");
@@ -102,7 +104,7 @@ public class StructureAbyStrongholdPieces
 
 		for (Iterator<PieceWeight> iterator = structurePieceList.iterator(); iterator.hasNext(); totalWeight += pieceweight.pieceWeight)
 		{
-			pieceweight = (StructureAbyStrongholdPieces.PieceWeight)iterator.next();
+			pieceweight = iterator.next();
 
 			if (pieceweight.instancesLimit > 0 && pieceweight.instancesSpawned < pieceweight.instancesLimit)
 			{
@@ -134,7 +136,7 @@ public class StructureAbyStrongholdPieces
 		}
 		else if (par0Class == StructureAbyStrongholdPieces.RightTurn.class)
 		{
-			object = StructureAbyStrongholdPieces.RightTurn.findValidPlacement(par1List, par2Random, par3, par4, par5, par6, par7);
+			object = LeftTurn.findValidPlacement(par1List, par2Random, par3, par4, par5, par6, par7);
 		}
 		else if (par0Class == StructureAbyStrongholdPieces.RoomCrossing.class)
 		{
@@ -167,9 +169,7 @@ public class StructureAbyStrongholdPieces
 	private static StructureAbyStrongholdPieces.Stronghold getNextComponent(StructureAbyStrongholdPieces.Stairs2 par0ComponentStrongholdStairs2, List<Stronghold> par1List, Random par2Random, int par3, int par4, int par5, int par6, int par7)
 	{
 		if (!canAddStructurePieces())
-		{
 			return null;
-		}
 		else
 		{
 			if (strongComponentType != null)
@@ -178,9 +178,7 @@ public class StructureAbyStrongholdPieces
 				strongComponentType = null;
 
 				if (stronghold != null)
-				{
 					return stronghold;
-				}
 			}
 
 			int k1 = 0;
@@ -193,7 +191,7 @@ public class StructureAbyStrongholdPieces
 
 				while (iterator.hasNext())
 				{
-					StructureAbyStrongholdPieces.PieceWeight pieceweight = (StructureAbyStrongholdPieces.PieceWeight)iterator.next();
+					StructureAbyStrongholdPieces.PieceWeight pieceweight = iterator.next();
 					j1 -= pieceweight.pieceWeight;
 
 					if (j1 < 0)
@@ -224,22 +222,16 @@ public class StructureAbyStrongholdPieces
 			StructureBoundingBox structureboundingbox = StructureAbyStrongholdPieces.Corridor.func_74992_a(par1List, par2Random, par3, par4, par5, par6);
 
 			if (structureboundingbox != null && structureboundingbox.minY > 1)
-			{
 				return new StructureAbyStrongholdPieces.Corridor(par7, par2Random, structureboundingbox, par6);
-			}
 			else
-			{
 				return null;
-			}
 		}
 	}
 
 	private static StructureComponent getNextValidComponent(StructureAbyStrongholdPieces.Stairs2 par0ComponentStrongholdStairs2, List<Stronghold> par1List, Random par2Random, int par3, int par4, int par5, int par6, int par7)
 	{
 		if (par7 > 50)
-		{
 			return null;
-		}
 		else if (Math.abs(par3 - par0ComponentStrongholdStairs2.getBoundingBox().minX) <= 112 && Math.abs(par5 - par0ComponentStrongholdStairs2.getBoundingBox().minZ) <= 112)
 		{
 			StructureAbyStrongholdPieces.Stronghold stronghold = getNextComponent(par0ComponentStrongholdStairs2, par1List, par2Random, par3, par4, par5, par6, par7 + 1);
@@ -251,11 +243,8 @@ public class StructureAbyStrongholdPieces
 			}
 
 			return stronghold;
-		}
-		else
-		{
+		} else
 			return null;
-		}
 	}
 
 	public static class Stairs extends StructureAbyStrongholdPieces.Stronghold
@@ -266,54 +255,57 @@ public class StructureAbyStrongholdPieces
 		public Stairs(int par1, Random par2Random, int par3, int par4)
 		{
 			super(par1);
-			this.field_75024_a = true;
-			this.coordBaseMode = par2Random.nextInt(4);
-			this.field_143013_d = StructureAbyStrongholdPieces.Stronghold.Door.OPENING;
+			field_75024_a = true;
+			coordBaseMode = par2Random.nextInt(4);
+			field_143013_d = StructureAbyStrongholdPieces.Stronghold.Door.OPENING;
 
-			switch (this.coordBaseMode)
+			switch (coordBaseMode)
 			{
 			case 0:
 			case 2:
-				this.boundingBox = new StructureBoundingBox(par3, 64, par4, par3 + 5 - 1, 74, par4 + 5 - 1);
+				boundingBox = new StructureBoundingBox(par3, 64, par4, par3 + 5 - 1, 74, par4 + 5 - 1);
 				break;
 			default:
-				this.boundingBox = new StructureBoundingBox(par3, 64, par4, par3 + 5 - 1, 74, par4 + 5 - 1);
+				boundingBox = new StructureBoundingBox(par3, 64, par4, par3 + 5 - 1, 74, par4 + 5 - 1);
 			}
 		}
 
 		public Stairs(int par1, Random par2Random, StructureBoundingBox par3StructureBoundingBox, int par4)
 		{
 			super(par1);
-			this.field_75024_a = false;
-			this.coordBaseMode = par4;
-			this.field_143013_d = this.getRandomDoor(par2Random);
-			this.boundingBox = par3StructureBoundingBox;
+			field_75024_a = false;
+			coordBaseMode = par4;
+			field_143013_d = getRandomDoor(par2Random);
+			boundingBox = par3StructureBoundingBox;
 		}
 
+		@Override
 		protected void func_143012_a(NBTTagCompound par1NBTTagCompound)
 		{
 			super.func_143012_a(par1NBTTagCompound);
-			par1NBTTagCompound.setBoolean("Source", this.field_75024_a);
+			par1NBTTagCompound.setBoolean("Source", field_75024_a);
 		}
 
+		@Override
 		protected void func_143011_b(NBTTagCompound par1NBTTagCompound)
 		{
 			super.func_143011_b(par1NBTTagCompound);
-			this.field_75024_a = par1NBTTagCompound.getBoolean("Source");
+			field_75024_a = par1NBTTagCompound.getBoolean("Source");
 		}
 
 		/**
 		 * Initiates construction of the Structure Component picked, at the current Location of StructGen
 		 */
+		@Override
 		@SuppressWarnings({ "rawtypes", "unchecked" })
 		public void buildComponent(StructureComponent par1StructureComponent, List par2List, Random par3Random)
 		{
-			if (this.field_75024_a)
+			if (field_75024_a)
 			{
 				StructureAbyStrongholdPieces.strongComponentType = StructureAbyStrongholdPieces.Crossing.class;
 			}
 
-			this.getNextComponentNormal((StructureAbyStrongholdPieces.Stairs2)par1StructureComponent, par2List, par3Random, 1, 1);
+			getNextComponentNormal((StructureAbyStrongholdPieces.Stairs2)par1StructureComponent, par2List, par3Random, 1, 1);
 		}
 
 		/**
@@ -332,34 +324,33 @@ public class StructureAbyStrongholdPieces
 		 * second Part of Structure generating, this for example places Spiderwebs, Mob Spawners, it closes
 		 * Mineshafts at the end, it adds Fences...
 		 */
+		@Override
 		public boolean addComponentParts(World par1World, Random par2Random, StructureBoundingBox par3StructureBoundingBox)
 		{
-			if (this.isLiquidInStructureBoundingBox(par1World, par3StructureBoundingBox))
-			{
+			if (isLiquidInStructureBoundingBox(par1World, par3StructureBoundingBox))
 				return false;
-			}
 			else
 			{
-				this.fillWithRandomizedBlocks(par1World, par3StructureBoundingBox, 0, 0, 0, 4, 10, 4, true, par2Random, StructureAbyStrongholdPieces.strongholdStones);
-				this.placeDoor(par1World, par2Random, par3StructureBoundingBox, this.field_143013_d, 1, 7, 0);
-				this.placeDoor(par1World, par2Random, par3StructureBoundingBox, StructureAbyStrongholdPieces.Stronghold.Door.OPENING, 1, 1, 4);
-				this.placeBlockAtCurrentPosition(par1World, AbyssalCraft.abybrick, 0, 2, 6, 1, par3StructureBoundingBox);
-				this.placeBlockAtCurrentPosition(par1World, AbyssalCraft.abybrick, 0, 1, 5, 1, par3StructureBoundingBox);
-				this.placeBlockAtCurrentPosition(par1World, AbyssalCraft.abyslab1, 0, 1, 6, 1, par3StructureBoundingBox);
-				this.placeBlockAtCurrentPosition(par1World, AbyssalCraft.abybrick, 0, 1, 5, 2, par3StructureBoundingBox);
-				this.placeBlockAtCurrentPosition(par1World, AbyssalCraft.abybrick, 0, 1, 4, 3, par3StructureBoundingBox);
-				this.placeBlockAtCurrentPosition(par1World, AbyssalCraft.abyslab1, 0, 1, 5, 3, par3StructureBoundingBox);
-				this.placeBlockAtCurrentPosition(par1World, AbyssalCraft.abybrick, 0, 2, 4, 3, par3StructureBoundingBox);
-				this.placeBlockAtCurrentPosition(par1World, AbyssalCraft.abybrick, 0, 3, 3, 3, par3StructureBoundingBox);
-				this.placeBlockAtCurrentPosition(par1World, AbyssalCraft.abyslab1, 0, 3, 4, 3, par3StructureBoundingBox);
-				this.placeBlockAtCurrentPosition(par1World, AbyssalCraft.abybrick, 0, 3, 3, 2, par3StructureBoundingBox);
-				this.placeBlockAtCurrentPosition(par1World, AbyssalCraft.abybrick, 0, 3, 2, 1, par3StructureBoundingBox);
-				this.placeBlockAtCurrentPosition(par1World, AbyssalCraft.abyslab1, 0, 3, 3, 1, par3StructureBoundingBox);
-				this.placeBlockAtCurrentPosition(par1World, AbyssalCraft.abybrick, 0, 2, 2, 1, par3StructureBoundingBox);
-				this.placeBlockAtCurrentPosition(par1World, AbyssalCraft.abybrick, 0, 1, 1, 1, par3StructureBoundingBox);
-				this.placeBlockAtCurrentPosition(par1World, AbyssalCraft.abyslab1, 0, 1, 2, 1, par3StructureBoundingBox);
-				this.placeBlockAtCurrentPosition(par1World, AbyssalCraft.abybrick, 0, 1, 1, 2, par3StructureBoundingBox);
-				this.placeBlockAtCurrentPosition(par1World, AbyssalCraft.abyslab1, 0, 1, 1, 3, par3StructureBoundingBox);
+				fillWithRandomizedBlocks(par1World, par3StructureBoundingBox, 0, 0, 0, 4, 10, 4, true, par2Random, StructureAbyStrongholdPieces.strongholdStones);
+				placeDoor(par1World, par2Random, par3StructureBoundingBox, field_143013_d, 1, 7, 0);
+				placeDoor(par1World, par2Random, par3StructureBoundingBox, StructureAbyStrongholdPieces.Stronghold.Door.OPENING, 1, 1, 4);
+				placeBlockAtCurrentPosition(par1World, AbyssalCraft.abybrick, 0, 2, 6, 1, par3StructureBoundingBox);
+				placeBlockAtCurrentPosition(par1World, AbyssalCraft.abybrick, 0, 1, 5, 1, par3StructureBoundingBox);
+				placeBlockAtCurrentPosition(par1World, AbyssalCraft.abyslab1, 0, 1, 6, 1, par3StructureBoundingBox);
+				placeBlockAtCurrentPosition(par1World, AbyssalCraft.abybrick, 0, 1, 5, 2, par3StructureBoundingBox);
+				placeBlockAtCurrentPosition(par1World, AbyssalCraft.abybrick, 0, 1, 4, 3, par3StructureBoundingBox);
+				placeBlockAtCurrentPosition(par1World, AbyssalCraft.abyslab1, 0, 1, 5, 3, par3StructureBoundingBox);
+				placeBlockAtCurrentPosition(par1World, AbyssalCraft.abybrick, 0, 2, 4, 3, par3StructureBoundingBox);
+				placeBlockAtCurrentPosition(par1World, AbyssalCraft.abybrick, 0, 3, 3, 3, par3StructureBoundingBox);
+				placeBlockAtCurrentPosition(par1World, AbyssalCraft.abyslab1, 0, 3, 4, 3, par3StructureBoundingBox);
+				placeBlockAtCurrentPosition(par1World, AbyssalCraft.abybrick, 0, 3, 3, 2, par3StructureBoundingBox);
+				placeBlockAtCurrentPosition(par1World, AbyssalCraft.abybrick, 0, 3, 2, 1, par3StructureBoundingBox);
+				placeBlockAtCurrentPosition(par1World, AbyssalCraft.abyslab1, 0, 3, 3, 1, par3StructureBoundingBox);
+				placeBlockAtCurrentPosition(par1World, AbyssalCraft.abybrick, 0, 2, 2, 1, par3StructureBoundingBox);
+				placeBlockAtCurrentPosition(par1World, AbyssalCraft.abybrick, 0, 1, 1, 1, par3StructureBoundingBox);
+				placeBlockAtCurrentPosition(par1World, AbyssalCraft.abyslab1, 0, 1, 2, 1, par3StructureBoundingBox);
+				placeBlockAtCurrentPosition(par1World, AbyssalCraft.abybrick, 0, 1, 1, 2, par3StructureBoundingBox);
+				placeBlockAtCurrentPosition(par1World, AbyssalCraft.abyslab1, 0, 1, 1, 3, par3StructureBoundingBox);
 				return true;
 			}
 		}
@@ -374,43 +365,46 @@ public class StructureAbyStrongholdPieces
 		public Straight(int par1, Random par2Random, StructureBoundingBox par3StructureBoundingBox, int par4)
 		{
 			super(par1);
-			this.coordBaseMode = par4;
-			this.field_143013_d = this.getRandomDoor(par2Random);
-			this.boundingBox = par3StructureBoundingBox;
-			this.expandsX = par2Random.nextInt(2) == 0;
-			this.expandsZ = par2Random.nextInt(2) == 0;
+			coordBaseMode = par4;
+			field_143013_d = getRandomDoor(par2Random);
+			boundingBox = par3StructureBoundingBox;
+			expandsX = par2Random.nextInt(2) == 0;
+			expandsZ = par2Random.nextInt(2) == 0;
 		}
 
+		@Override
 		protected void func_143012_a(NBTTagCompound par1NBTTagCompound)
 		{
 			super.func_143012_a(par1NBTTagCompound);
-			par1NBTTagCompound.setBoolean("Left", this.expandsX);
-			par1NBTTagCompound.setBoolean("Right", this.expandsZ);
+			par1NBTTagCompound.setBoolean("Left", expandsX);
+			par1NBTTagCompound.setBoolean("Right", expandsZ);
 		}
 
+		@Override
 		protected void func_143011_b(NBTTagCompound par1NBTTagCompound)
 		{
 			super.func_143011_b(par1NBTTagCompound);
-			this.expandsX = par1NBTTagCompound.getBoolean("Left");
-			this.expandsZ = par1NBTTagCompound.getBoolean("Right");
+			expandsX = par1NBTTagCompound.getBoolean("Left");
+			expandsZ = par1NBTTagCompound.getBoolean("Right");
 		}
 
 		/**
 		 * Initiates construction of the Structure Component picked, at the current Location of StructGen
 		 */
+		@Override
 		@SuppressWarnings({ "rawtypes", "unchecked" })
 		public void buildComponent(StructureComponent par1StructureComponent, List par2List, Random par3Random)
 		{
-			this.getNextComponentNormal((StructureAbyStrongholdPieces.Stairs2)par1StructureComponent, par2List, par3Random, 1, 1);
+			getNextComponentNormal((StructureAbyStrongholdPieces.Stairs2)par1StructureComponent, par2List, par3Random, 1, 1);
 
-			if (this.expandsX)
+			if (expandsX)
 			{
-				this.getNextComponentX((StructureAbyStrongholdPieces.Stairs2)par1StructureComponent, par2List, par3Random, 1, 2);
+				getNextComponentX((StructureAbyStrongholdPieces.Stairs2)par1StructureComponent, par2List, par3Random, 1, 2);
 			}
 
-			if (this.expandsZ)
+			if (expandsZ)
 			{
-				this.getNextComponentZ((StructureAbyStrongholdPieces.Stairs2)par1StructureComponent, par2List, par3Random, 1, 2);
+				getNextComponentZ((StructureAbyStrongholdPieces.Stairs2)par1StructureComponent, par2List, par3Random, 1, 2);
 			}
 		}
 
@@ -427,30 +421,29 @@ public class StructureAbyStrongholdPieces
 		 * second Part of Structure generating, this for example places Spiderwebs, Mob Spawners, it closes
 		 * Mineshafts at the end, it adds Fences...
 		 */
+		@Override
 		public boolean addComponentParts(World par1World, Random par2Random, StructureBoundingBox par3StructureBoundingBox)
 		{
-			if (this.isLiquidInStructureBoundingBox(par1World, par3StructureBoundingBox))
-			{
+			if (isLiquidInStructureBoundingBox(par1World, par3StructureBoundingBox))
 				return false;
-			}
 			else
 			{
-				this.fillWithRandomizedBlocks(par1World, par3StructureBoundingBox, 0, 0, 0, 4, 4, 6, true, par2Random, StructureAbyStrongholdPieces.strongholdStones);
-				this.placeDoor(par1World, par2Random, par3StructureBoundingBox, this.field_143013_d, 1, 1, 0);
-				this.placeDoor(par1World, par2Random, par3StructureBoundingBox, StructureAbyStrongholdPieces.Stronghold.Door.OPENING, 1, 1, 6);
-				this.func_151552_a(par1World, par3StructureBoundingBox, par2Random, 0.1F, 1, 2, 1, Blocks.torch, 0);
-				this.func_151552_a(par1World, par3StructureBoundingBox, par2Random, 0.1F, 3, 2, 1, Blocks.torch, 0);
-				this.func_151552_a(par1World, par3StructureBoundingBox, par2Random, 0.1F, 1, 2, 5, Blocks.torch, 0);
-				this.func_151552_a(par1World, par3StructureBoundingBox, par2Random, 0.1F, 3, 2, 5, Blocks.torch, 0);
+				fillWithRandomizedBlocks(par1World, par3StructureBoundingBox, 0, 0, 0, 4, 4, 6, true, par2Random, StructureAbyStrongholdPieces.strongholdStones);
+				placeDoor(par1World, par2Random, par3StructureBoundingBox, field_143013_d, 1, 1, 0);
+				placeDoor(par1World, par2Random, par3StructureBoundingBox, StructureAbyStrongholdPieces.Stronghold.Door.OPENING, 1, 1, 6);
+				func_151552_a(par1World, par3StructureBoundingBox, par2Random, 0.1F, 1, 2, 1, Blocks.torch, 0);
+				func_151552_a(par1World, par3StructureBoundingBox, par2Random, 0.1F, 3, 2, 1, Blocks.torch, 0);
+				func_151552_a(par1World, par3StructureBoundingBox, par2Random, 0.1F, 1, 2, 5, Blocks.torch, 0);
+				func_151552_a(par1World, par3StructureBoundingBox, par2Random, 0.1F, 3, 2, 5, Blocks.torch, 0);
 
-				if (this.expandsX)
+				if (expandsX)
 				{
-					this.fillWithBlocks(par1World, par3StructureBoundingBox, 0, 1, 2, 0, 3, 4, Blocks.air, Blocks.air, false);
+					fillWithBlocks(par1World, par3StructureBoundingBox, 0, 1, 2, 0, 3, 4, Blocks.air, Blocks.air, false);
 				}
 
-				if (this.expandsZ)
+				if (expandsZ)
 				{
-					this.fillWithBlocks(par1World, par3StructureBoundingBox, 4, 1, 2, 4, 3, 4, Blocks.air, Blocks.air, false);
+					fillWithBlocks(par1World, par3StructureBoundingBox, 4, 1, 2, 4, 3, 4, Blocks.air, Blocks.air, false);
 				}
 
 				return true;
@@ -466,25 +459,28 @@ public class StructureAbyStrongholdPieces
 		public PortalRoom(int par1, Random par2Random, StructureBoundingBox par3StructureBoundingBox, int par4)
 		{
 			super(par1);
-			this.coordBaseMode = par4;
-			this.boundingBox = par3StructureBoundingBox;
+			coordBaseMode = par4;
+			boundingBox = par3StructureBoundingBox;
 		}
 
+		@Override
 		protected void func_143012_a(NBTTagCompound par1NBTTagCompound)
 		{
 			super.func_143012_a(par1NBTTagCompound);
-			par1NBTTagCompound.setBoolean("Mob", this.hasSpawner);
+			par1NBTTagCompound.setBoolean("Mob", hasSpawner);
 		}
 
+		@Override
 		protected void func_143011_b(NBTTagCompound par1NBTTagCompound)
 		{
 			super.func_143011_b(par1NBTTagCompound);
-			this.hasSpawner = par1NBTTagCompound.getBoolean("Mob");
+			hasSpawner = par1NBTTagCompound.getBoolean("Mob");
 		}
 
 		/**
 		 * Initiates construction of the Structure Component picked, at the current Location of StructGen
 		 */
+		@Override
 		@SuppressWarnings("rawtypes")
 		public void buildComponent(StructureComponent par1StructureComponent, List par2List, Random par3Random)
 		{
@@ -507,44 +503,45 @@ public class StructureAbyStrongholdPieces
 		 * second Part of Structure generating, this for example places Spiderwebs, Mob Spawners, it closes
 		 * Mineshafts at the end, it adds Fences...
 		 */
+		@Override
 		public boolean addComponentParts(World par1World, Random par2Random, StructureBoundingBox par3StructureBoundingBox)
 		{
-			this.fillWithRandomizedBlocks(par1World, par3StructureBoundingBox, 0, 0, 0, 10, 7, 15, false, par2Random, StructureAbyStrongholdPieces.strongholdStones);
-			this.placeDoor(par1World, par2Random, par3StructureBoundingBox, StructureAbyStrongholdPieces.Stronghold.Door.GRATES, 4, 1, 0);
+			fillWithRandomizedBlocks(par1World, par3StructureBoundingBox, 0, 0, 0, 10, 7, 15, false, par2Random, StructureAbyStrongholdPieces.strongholdStones);
+			placeDoor(par1World, par2Random, par3StructureBoundingBox, StructureAbyStrongholdPieces.Stronghold.Door.GRATES, 4, 1, 0);
 			byte b0 = 6;
-			this.fillWithRandomizedBlocks(par1World, par3StructureBoundingBox, 1, b0, 1, 1, b0, 14, false, par2Random, StructureAbyStrongholdPieces.strongholdStones);
-			this.fillWithRandomizedBlocks(par1World, par3StructureBoundingBox, 9, b0, 1, 9, b0, 14, false, par2Random, StructureAbyStrongholdPieces.strongholdStones);
-			this.fillWithRandomizedBlocks(par1World, par3StructureBoundingBox, 2, b0, 1, 8, b0, 2, false, par2Random, StructureAbyStrongholdPieces.strongholdStones);
-			this.fillWithRandomizedBlocks(par1World, par3StructureBoundingBox, 2, b0, 14, 8, b0, 14, false, par2Random, StructureAbyStrongholdPieces.strongholdStones);
-			this.fillWithRandomizedBlocks(par1World, par3StructureBoundingBox, 1, 1, 1, 2, 1, 4, false, par2Random, StructureAbyStrongholdPieces.strongholdStones);
-			this.fillWithRandomizedBlocks(par1World, par3StructureBoundingBox, 8, 1, 1, 9, 1, 4, false, par2Random, StructureAbyStrongholdPieces.strongholdStones);
-			this.fillWithBlocks(par1World, par3StructureBoundingBox, 1, 1, 1, 1, 1, 3, AbyssalCraft.Cwater, AbyssalCraft.Cwater, false);
-			this.fillWithBlocks(par1World, par3StructureBoundingBox, 9, 1, 1, 9, 1, 3, AbyssalCraft.Cwater, AbyssalCraft.Cwater, false);
-			this.fillWithRandomizedBlocks(par1World, par3StructureBoundingBox, 3, 1, 8, 7, 1, 12, false, par2Random, StructureAbyStrongholdPieces.strongholdStones);
-			this.fillWithBlocks(par1World, par3StructureBoundingBox, 4, 1, 9, 6, 1, 11, AbyssalCraft.Cwater, AbyssalCraft.Cwater, false);
+			fillWithRandomizedBlocks(par1World, par3StructureBoundingBox, 1, b0, 1, 1, b0, 14, false, par2Random, StructureAbyStrongholdPieces.strongholdStones);
+			fillWithRandomizedBlocks(par1World, par3StructureBoundingBox, 9, b0, 1, 9, b0, 14, false, par2Random, StructureAbyStrongholdPieces.strongholdStones);
+			fillWithRandomizedBlocks(par1World, par3StructureBoundingBox, 2, b0, 1, 8, b0, 2, false, par2Random, StructureAbyStrongholdPieces.strongholdStones);
+			fillWithRandomizedBlocks(par1World, par3StructureBoundingBox, 2, b0, 14, 8, b0, 14, false, par2Random, StructureAbyStrongholdPieces.strongholdStones);
+			fillWithRandomizedBlocks(par1World, par3StructureBoundingBox, 1, 1, 1, 2, 1, 4, false, par2Random, StructureAbyStrongholdPieces.strongholdStones);
+			fillWithRandomizedBlocks(par1World, par3StructureBoundingBox, 8, 1, 1, 9, 1, 4, false, par2Random, StructureAbyStrongholdPieces.strongholdStones);
+			fillWithBlocks(par1World, par3StructureBoundingBox, 1, 1, 1, 1, 1, 3, AbyssalCraft.Cwater, AbyssalCraft.Cwater, false);
+			fillWithBlocks(par1World, par3StructureBoundingBox, 9, 1, 1, 9, 1, 3, AbyssalCraft.Cwater, AbyssalCraft.Cwater, false);
+			fillWithRandomizedBlocks(par1World, par3StructureBoundingBox, 3, 1, 8, 7, 1, 12, false, par2Random, StructureAbyStrongholdPieces.strongholdStones);
+			fillWithBlocks(par1World, par3StructureBoundingBox, 4, 1, 9, 6, 1, 11, AbyssalCraft.Cwater, AbyssalCraft.Cwater, false);
 			int i;
 
 			for (i = 3; i < 14; i += 2)
 			{
-				this.fillWithBlocks(par1World, par3StructureBoundingBox, 0, 3, i, 0, 4, i, AbyssalCraft.abyfence, AbyssalCraft.abyfence, false);
-				this.fillWithBlocks(par1World, par3StructureBoundingBox, 10, 3, i, 10, 4, i, AbyssalCraft.abyfence, AbyssalCraft.abyfence, false);
+				fillWithBlocks(par1World, par3StructureBoundingBox, 0, 3, i, 0, 4, i, AbyssalCraft.abyfence, AbyssalCraft.abyfence, false);
+				fillWithBlocks(par1World, par3StructureBoundingBox, 10, 3, i, 10, 4, i, AbyssalCraft.abyfence, AbyssalCraft.abyfence, false);
 			}
 
 			for (i = 2; i < 9; i += 2)
 			{
-				this.fillWithBlocks(par1World, par3StructureBoundingBox, i, 3, 15, i, 4, 15, AbyssalCraft.abyfence, AbyssalCraft.abyfence, false);
+				fillWithBlocks(par1World, par3StructureBoundingBox, i, 3, 15, i, 4, 15, AbyssalCraft.abyfence, AbyssalCraft.abyfence, false);
 			}
 
-			i = this.getMetadataWithOffset(AbyssalCraft.abystairs, 3);
-			this.fillWithRandomizedBlocks(par1World, par3StructureBoundingBox, 4, 1, 5, 6, 1, 7, false, par2Random, StructureAbyStrongholdPieces.strongholdStones);
-			this.fillWithRandomizedBlocks(par1World, par3StructureBoundingBox, 4, 2, 6, 6, 2, 7, false, par2Random, StructureAbyStrongholdPieces.strongholdStones);
-			this.fillWithRandomizedBlocks(par1World, par3StructureBoundingBox, 4, 3, 7, 6, 3, 7, false, par2Random, StructureAbyStrongholdPieces.strongholdStones);
+			i = getMetadataWithOffset(AbyssalCraft.abystairs, 3);
+			fillWithRandomizedBlocks(par1World, par3StructureBoundingBox, 4, 1, 5, 6, 1, 7, false, par2Random, StructureAbyStrongholdPieces.strongholdStones);
+			fillWithRandomizedBlocks(par1World, par3StructureBoundingBox, 4, 2, 6, 6, 2, 7, false, par2Random, StructureAbyStrongholdPieces.strongholdStones);
+			fillWithRandomizedBlocks(par1World, par3StructureBoundingBox, 4, 3, 7, 6, 3, 7, false, par2Random, StructureAbyStrongholdPieces.strongholdStones);
 
 			for (int j = 4; j <= 6; ++j)
 			{
-				this.placeBlockAtCurrentPosition(par1World, AbyssalCraft.abystairs, i, j, 1, 4, par3StructureBoundingBox);
-				this.placeBlockAtCurrentPosition(par1World, AbyssalCraft.abystairs, i, j, 2, 5, par3StructureBoundingBox);
-				this.placeBlockAtCurrentPosition(par1World, AbyssalCraft.abystairs, i, j, 3, 6, par3StructureBoundingBox);
+				placeBlockAtCurrentPosition(par1World, AbyssalCraft.abystairs, i, j, 1, 4, par3StructureBoundingBox);
+				placeBlockAtCurrentPosition(par1World, AbyssalCraft.abystairs, i, j, 2, 5, par3StructureBoundingBox);
+				placeBlockAtCurrentPosition(par1World, AbyssalCraft.abystairs, i, j, 3, 6, par3StructureBoundingBox);
 			}
 
 			byte b4 = 2;
@@ -552,7 +549,7 @@ public class StructureAbyStrongholdPieces
 			byte b2 = 3;
 			byte b3 = 1;
 
-			switch (this.coordBaseMode)
+			switch (coordBaseMode)
 			{
 			case 0:
 				b4 = 0;
@@ -573,62 +570,62 @@ public class StructureAbyStrongholdPieces
 				b3 = 2;
 			}
 
-			this.placeBlockAtCurrentPosition(par1World, AbyssalCraft.abybrick, b4 + (par2Random.nextFloat() > 0.9F ? 4 : 0), 4, 3, 8, par3StructureBoundingBox);
-			this.placeBlockAtCurrentPosition(par1World, AbyssalCraft.abybrick, b4 + (par2Random.nextFloat() > 0.9F ? 4 : 0), 5, 3, 8, par3StructureBoundingBox);
-			this.placeBlockAtCurrentPosition(par1World, AbyssalCraft.abybrick, b4 + (par2Random.nextFloat() > 0.9F ? 4 : 0), 6, 3, 8, par3StructureBoundingBox);
+			placeBlockAtCurrentPosition(par1World, AbyssalCraft.abybrick, b4 + (par2Random.nextFloat() > 0.9F ? 4 : 0), 4, 3, 8, par3StructureBoundingBox);
+			placeBlockAtCurrentPosition(par1World, AbyssalCraft.abybrick, b4 + (par2Random.nextFloat() > 0.9F ? 4 : 0), 5, 3, 8, par3StructureBoundingBox);
+			placeBlockAtCurrentPosition(par1World, AbyssalCraft.abybrick, b4 + (par2Random.nextFloat() > 0.9F ? 4 : 0), 6, 3, 8, par3StructureBoundingBox);
 
-			this.placeBlockAtCurrentPosition(par1World, AbyssalCraft.abybrick, b1 + (par2Random.nextFloat() > 0.9F ? 4 : 0), 4, 3, 12, par3StructureBoundingBox);
-			this.placeBlockAtCurrentPosition(par1World, AbyssalCraft.abybrick, b1 + (par2Random.nextFloat() > 0.9F ? 4 : 0), 5, 3, 12, par3StructureBoundingBox);
-			this.placeBlockAtCurrentPosition(par1World, AbyssalCraft.abybrick, b1 + (par2Random.nextFloat() > 0.9F ? 4 : 0), 6, 3, 12, par3StructureBoundingBox);
-			this.placeBlockAtCurrentPosition(par1World, AbyssalCraft.abyfence, b1 + (par2Random.nextFloat() > 0.9F ? 4 : 0), 4, 4, 12, par3StructureBoundingBox);
-			this.placeBlockAtCurrentPosition(par1World, AbyssalCraft.abyfence, b1 + (par2Random.nextFloat() > 0.9F ? 4 : 0), 5, 4, 12, par3StructureBoundingBox);
-			this.placeBlockAtCurrentPosition(par1World, AbyssalCraft.abyfence, b1 + (par2Random.nextFloat() > 0.9F ? 4 : 0), 6, 4, 12, par3StructureBoundingBox);
+			placeBlockAtCurrentPosition(par1World, AbyssalCraft.abybrick, b1 + (par2Random.nextFloat() > 0.9F ? 4 : 0), 4, 3, 12, par3StructureBoundingBox);
+			placeBlockAtCurrentPosition(par1World, AbyssalCraft.abybrick, b1 + (par2Random.nextFloat() > 0.9F ? 4 : 0), 5, 3, 12, par3StructureBoundingBox);
+			placeBlockAtCurrentPosition(par1World, AbyssalCraft.abybrick, b1 + (par2Random.nextFloat() > 0.9F ? 4 : 0), 6, 3, 12, par3StructureBoundingBox);
+			placeBlockAtCurrentPosition(par1World, AbyssalCraft.abyfence, b1 + (par2Random.nextFloat() > 0.9F ? 4 : 0), 4, 4, 12, par3StructureBoundingBox);
+			placeBlockAtCurrentPosition(par1World, AbyssalCraft.abyfence, b1 + (par2Random.nextFloat() > 0.9F ? 4 : 0), 5, 4, 12, par3StructureBoundingBox);
+			placeBlockAtCurrentPosition(par1World, AbyssalCraft.abyfence, b1 + (par2Random.nextFloat() > 0.9F ? 4 : 0), 6, 4, 12, par3StructureBoundingBox);
 
 
-			this.placeBlockAtCurrentPosition(par1World, AbyssalCraft.PSDL, b1 + (par2Random.nextFloat() > 0.9F ? 4 : 0), 5, 4, 10, par3StructureBoundingBox);
+			placeBlockAtCurrentPosition(par1World, AbyssalCraft.PSDL, b1 + (par2Random.nextFloat() > 0.9F ? 4 : 0), 5, 4, 10, par3StructureBoundingBox);
 
-			this.placeBlockAtCurrentPosition(par1World, AbyssalCraft.abybrick, b1 + (par2Random.nextFloat() > 0.9F ? 4 : 0), 5, 3, 10, par3StructureBoundingBox);
-			this.placeBlockAtCurrentPosition(par1World, AbyssalCraft.abybrick, b1 + (par2Random.nextFloat() > 0.9F ? 4 : 0), 4, 3, 10, par3StructureBoundingBox);
-			this.placeBlockAtCurrentPosition(par1World, AbyssalCraft.abybrick, b1 + (par2Random.nextFloat() > 0.9F ? 4 : 0), 6, 3, 10, par3StructureBoundingBox);
-			this.placeBlockAtCurrentPosition(par1World, AbyssalCraft.abybrick, b1 + (par2Random.nextFloat() > 0.9F ? 4 : 0), 5, 3, 9, par3StructureBoundingBox);
-			this.placeBlockAtCurrentPosition(par1World, AbyssalCraft.abybrick, b1 + (par2Random.nextFloat() > 0.9F ? 4 : 0), 4, 3, 9, par3StructureBoundingBox);
-			this.placeBlockAtCurrentPosition(par1World, AbyssalCraft.abybrick, b1 + (par2Random.nextFloat() > 0.9F ? 4 : 0), 6, 3, 9, par3StructureBoundingBox);
-			this.placeBlockAtCurrentPosition(par1World, AbyssalCraft.abybrick, b1 + (par2Random.nextFloat() > 0.9F ? 4 : 0), 5, 3, 11, par3StructureBoundingBox);
-			this.placeBlockAtCurrentPosition(par1World, AbyssalCraft.abybrick, b1 + (par2Random.nextFloat() > 0.9F ? 4 : 0), 4, 3, 11, par3StructureBoundingBox);
-			this.placeBlockAtCurrentPosition(par1World, AbyssalCraft.abybrick, b1 + (par2Random.nextFloat() > 0.9F ? 4 : 0), 6, 3, 11, par3StructureBoundingBox);
+			placeBlockAtCurrentPosition(par1World, AbyssalCraft.abybrick, b1 + (par2Random.nextFloat() > 0.9F ? 4 : 0), 5, 3, 10, par3StructureBoundingBox);
+			placeBlockAtCurrentPosition(par1World, AbyssalCraft.abybrick, b1 + (par2Random.nextFloat() > 0.9F ? 4 : 0), 4, 3, 10, par3StructureBoundingBox);
+			placeBlockAtCurrentPosition(par1World, AbyssalCraft.abybrick, b1 + (par2Random.nextFloat() > 0.9F ? 4 : 0), 6, 3, 10, par3StructureBoundingBox);
+			placeBlockAtCurrentPosition(par1World, AbyssalCraft.abybrick, b1 + (par2Random.nextFloat() > 0.9F ? 4 : 0), 5, 3, 9, par3StructureBoundingBox);
+			placeBlockAtCurrentPosition(par1World, AbyssalCraft.abybrick, b1 + (par2Random.nextFloat() > 0.9F ? 4 : 0), 4, 3, 9, par3StructureBoundingBox);
+			placeBlockAtCurrentPosition(par1World, AbyssalCraft.abybrick, b1 + (par2Random.nextFloat() > 0.9F ? 4 : 0), 6, 3, 9, par3StructureBoundingBox);
+			placeBlockAtCurrentPosition(par1World, AbyssalCraft.abybrick, b1 + (par2Random.nextFloat() > 0.9F ? 4 : 0), 5, 3, 11, par3StructureBoundingBox);
+			placeBlockAtCurrentPosition(par1World, AbyssalCraft.abybrick, b1 + (par2Random.nextFloat() > 0.9F ? 4 : 0), 4, 3, 11, par3StructureBoundingBox);
+			placeBlockAtCurrentPosition(par1World, AbyssalCraft.abybrick, b1 + (par2Random.nextFloat() > 0.9F ? 4 : 0), 6, 3, 11, par3StructureBoundingBox);
 
-			this.placeBlockAtCurrentPosition(par1World, AbyssalCraft.abybrick, b2 + (par2Random.nextFloat() > 0.9F ? 4 : 0), 3, 3, 9, par3StructureBoundingBox);
-			this.placeBlockAtCurrentPosition(par1World, AbyssalCraft.abybrick, b2 + (par2Random.nextFloat() > 0.9F ? 4 : 0), 3, 3, 10, par3StructureBoundingBox);
-			this.placeBlockAtCurrentPosition(par1World, AbyssalCraft.abybrick, b2 + (par2Random.nextFloat() > 0.9F ? 4 : 0), 3, 3, 11, par3StructureBoundingBox);
-			this.placeBlockAtCurrentPosition(par1World, AbyssalCraft.abyfence, b2 + (par2Random.nextFloat() > 0.9F ? 4 : 0), 3, 4, 9, par3StructureBoundingBox);
-			this.placeBlockAtCurrentPosition(par1World, AbyssalCraft.abyfence, b2 + (par2Random.nextFloat() > 0.9F ? 4 : 0), 3, 4, 10, par3StructureBoundingBox);
-			this.placeBlockAtCurrentPosition(par1World, AbyssalCraft.abyfence, b2 + (par2Random.nextFloat() > 0.9F ? 4 : 0), 3, 4, 11, par3StructureBoundingBox);
+			placeBlockAtCurrentPosition(par1World, AbyssalCraft.abybrick, b2 + (par2Random.nextFloat() > 0.9F ? 4 : 0), 3, 3, 9, par3StructureBoundingBox);
+			placeBlockAtCurrentPosition(par1World, AbyssalCraft.abybrick, b2 + (par2Random.nextFloat() > 0.9F ? 4 : 0), 3, 3, 10, par3StructureBoundingBox);
+			placeBlockAtCurrentPosition(par1World, AbyssalCraft.abybrick, b2 + (par2Random.nextFloat() > 0.9F ? 4 : 0), 3, 3, 11, par3StructureBoundingBox);
+			placeBlockAtCurrentPosition(par1World, AbyssalCraft.abyfence, b2 + (par2Random.nextFloat() > 0.9F ? 4 : 0), 3, 4, 9, par3StructureBoundingBox);
+			placeBlockAtCurrentPosition(par1World, AbyssalCraft.abyfence, b2 + (par2Random.nextFloat() > 0.9F ? 4 : 0), 3, 4, 10, par3StructureBoundingBox);
+			placeBlockAtCurrentPosition(par1World, AbyssalCraft.abyfence, b2 + (par2Random.nextFloat() > 0.9F ? 4 : 0), 3, 4, 11, par3StructureBoundingBox);
 
-			this.placeBlockAtCurrentPosition(par1World, AbyssalCraft.abybrick, b3 + (par2Random.nextFloat() > 0.9F ? 4 : 0), 7, 3, 9, par3StructureBoundingBox);
-			this.placeBlockAtCurrentPosition(par1World, AbyssalCraft.abybrick, b3 + (par2Random.nextFloat() > 0.9F ? 4 : 0), 7, 3, 10, par3StructureBoundingBox);
-			this.placeBlockAtCurrentPosition(par1World, AbyssalCraft.abybrick, b3 + (par2Random.nextFloat() > 0.9F ? 4 : 0), 7, 3, 11, par3StructureBoundingBox);
-			this.placeBlockAtCurrentPosition(par1World, AbyssalCraft.abyfence, b3 + (par2Random.nextFloat() > 0.9F ? 4 : 0), 7, 4, 9, par3StructureBoundingBox);
-			this.placeBlockAtCurrentPosition(par1World, AbyssalCraft.abyfence, b3 + (par2Random.nextFloat() > 0.9F ? 4 : 0), 7, 4, 10, par3StructureBoundingBox);
-			this.placeBlockAtCurrentPosition(par1World, AbyssalCraft.abyfence, b3 + (par2Random.nextFloat() > 0.9F ? 4 : 0), 7, 4, 11, par3StructureBoundingBox);
+			placeBlockAtCurrentPosition(par1World, AbyssalCraft.abybrick, b3 + (par2Random.nextFloat() > 0.9F ? 4 : 0), 7, 3, 9, par3StructureBoundingBox);
+			placeBlockAtCurrentPosition(par1World, AbyssalCraft.abybrick, b3 + (par2Random.nextFloat() > 0.9F ? 4 : 0), 7, 3, 10, par3StructureBoundingBox);
+			placeBlockAtCurrentPosition(par1World, AbyssalCraft.abybrick, b3 + (par2Random.nextFloat() > 0.9F ? 4 : 0), 7, 3, 11, par3StructureBoundingBox);
+			placeBlockAtCurrentPosition(par1World, AbyssalCraft.abyfence, b3 + (par2Random.nextFloat() > 0.9F ? 4 : 0), 7, 4, 9, par3StructureBoundingBox);
+			placeBlockAtCurrentPosition(par1World, AbyssalCraft.abyfence, b3 + (par2Random.nextFloat() > 0.9F ? 4 : 0), 7, 4, 10, par3StructureBoundingBox);
+			placeBlockAtCurrentPosition(par1World, AbyssalCraft.abyfence, b3 + (par2Random.nextFloat() > 0.9F ? 4 : 0), 7, 4, 11, par3StructureBoundingBox);
 
-			this.placeBlockAtCurrentPosition(par1World, AbyssalCraft.abybrick, b1 + (par2Random.nextFloat() > 0.9F ? 4 : 0), 7, 3, 12, par3StructureBoundingBox);
-			this.placeBlockAtCurrentPosition(par1World, AbyssalCraft.abyfence, b1 + (par2Random.nextFloat() > 0.9F ? 4 : 0), 7, 4, 12, par3StructureBoundingBox);
-			this.placeBlockAtCurrentPosition(par1World, AbyssalCraft.abybrick, b1 + (par2Random.nextFloat() > 0.9F ? 4 : 0), 3, 3, 12, par3StructureBoundingBox);
-			this.placeBlockAtCurrentPosition(par1World, AbyssalCraft.abyfence, b1 + (par2Random.nextFloat() > 0.9F ? 4 : 0), 3, 4, 12, par3StructureBoundingBox);
-			this.placeBlockAtCurrentPosition(par1World, AbyssalCraft.abybrick, b1 + (par2Random.nextFloat() > 0.9F ? 4 : 0), 7, 3, 8, par3StructureBoundingBox);
-			this.placeBlockAtCurrentPosition(par1World, AbyssalCraft.abyfence, b1 + (par2Random.nextFloat() > 0.9F ? 4 : 0), 7, 4, 8, par3StructureBoundingBox);
-			this.placeBlockAtCurrentPosition(par1World, AbyssalCraft.abybrick, b1 + (par2Random.nextFloat() > 0.9F ? 4 : 0), 3, 3, 8, par3StructureBoundingBox);
-			this.placeBlockAtCurrentPosition(par1World, AbyssalCraft.abyfence, b1 + (par2Random.nextFloat() > 0.9F ? 4 : 0), 3, 4, 8, par3StructureBoundingBox);
+			placeBlockAtCurrentPosition(par1World, AbyssalCraft.abybrick, b1 + (par2Random.nextFloat() > 0.9F ? 4 : 0), 7, 3, 12, par3StructureBoundingBox);
+			placeBlockAtCurrentPosition(par1World, AbyssalCraft.abyfence, b1 + (par2Random.nextFloat() > 0.9F ? 4 : 0), 7, 4, 12, par3StructureBoundingBox);
+			placeBlockAtCurrentPosition(par1World, AbyssalCraft.abybrick, b1 + (par2Random.nextFloat() > 0.9F ? 4 : 0), 3, 3, 12, par3StructureBoundingBox);
+			placeBlockAtCurrentPosition(par1World, AbyssalCraft.abyfence, b1 + (par2Random.nextFloat() > 0.9F ? 4 : 0), 3, 4, 12, par3StructureBoundingBox);
+			placeBlockAtCurrentPosition(par1World, AbyssalCraft.abybrick, b1 + (par2Random.nextFloat() > 0.9F ? 4 : 0), 7, 3, 8, par3StructureBoundingBox);
+			placeBlockAtCurrentPosition(par1World, AbyssalCraft.abyfence, b1 + (par2Random.nextFloat() > 0.9F ? 4 : 0), 7, 4, 8, par3StructureBoundingBox);
+			placeBlockAtCurrentPosition(par1World, AbyssalCraft.abybrick, b1 + (par2Random.nextFloat() > 0.9F ? 4 : 0), 3, 3, 8, par3StructureBoundingBox);
+			placeBlockAtCurrentPosition(par1World, AbyssalCraft.abyfence, b1 + (par2Random.nextFloat() > 0.9F ? 4 : 0), 3, 4, 8, par3StructureBoundingBox);
 
-			if (!this.hasSpawner)
+			if (!hasSpawner)
 			{
-				int i1 = this.getYWithOffset(3);
-				int k = this.getXWithOffset(5, 6);
-				int l = this.getZWithOffset(5, 6);
+				int i1 = getYWithOffset(3);
+				int k = getXWithOffset(5, 6);
+				int l = getZWithOffset(5, 6);
 
 				if (par3StructureBoundingBox.isVecInside(k, i1, l))
 				{
-					this.hasSpawner = true;
+					hasSpawner = true;
 					par1World.setBlock(k, i1, l, Blocks.mob_spawner, 0, 2);
 					TileEntityMobSpawner tileentitymobspawner = (TileEntityMobSpawner)par1World.getTileEntity(k, i1, l);
 
@@ -648,37 +645,40 @@ public class StructureAbyStrongholdPieces
 		/**
 		 * List of items that Stronghold chests can contain.
 		 */
-		public static final WeightedRandomChestContent[] strongholdChestContents = new WeightedRandomChestContent[] {new WeightedRandomChestContent(Items.ender_pearl, 0, 1, 1, 10), new WeightedRandomChestContent(AbyssalCraft.Corb, 0, 1, 3, 3), new WeightedRandomChestContent(AbyssalCraft.abyingot, 0, 1, 5, 10), new WeightedRandomChestContent(AbyssalCraft.Cingot, 0, 1, 3, 5), new WeightedRandomChestContent(AbyssalCraft.Cpearl, 0, 4, 9, 5), new WeightedRandomChestContent(Items.bread, 0, 1, 3, 15), new WeightedRandomChestContent(Items.golden_apple, 0, 1, 3, 15), new WeightedRandomChestContent(AbyssalCraft.pickaxeA, 0, 1, 1, 5), new WeightedRandomChestContent(AbyssalCraft.pickaxeA, 0, 1, 1, 5), new WeightedRandomChestContent(AbyssalCraft.plate, 0, 1, 1, 5), new WeightedRandomChestContent(AbyssalCraft.helmet, 0, 1, 1, 5), new WeightedRandomChestContent(AbyssalCraft.legs, 0, 1, 1, 5), new WeightedRandomChestContent(AbyssalCraft.boots, 0, 1, 1, 5), new WeightedRandomChestContent(AbyssalCraft.OC, 0, 1, 1, 1)};
+		public static final WeightedRandomChestContent[] strongholdChestContents = new WeightedRandomChestContent[] {new WeightedRandomChestContent(Items.ender_pearl, 0, 1, 4, 10), new WeightedRandomChestContent(AbyssalCraft.Corb, 0, 1, 3, 3), new WeightedRandomChestContent(AbyssalCraft.abyingot, 0, 1, 5, 10), new WeightedRandomChestContent(AbyssalCraft.Cingot, 0, 1, 3, 5), new WeightedRandomChestContent(AbyssalCraft.Cpearl, 0, 1, 3, 5), new WeightedRandomChestContent(Items.bread, 0, 1, 3, 15), new WeightedRandomChestContent(Items.golden_apple, 0, 1, 3, 15), new WeightedRandomChestContent(AbyssalCraft.pickaxeA, 0, 1, 1, 5), new WeightedRandomChestContent(AbyssalCraft.pickaxeA, 0, 1, 1, 5), new WeightedRandomChestContent(AbyssalCraft.plate, 0, 1, 1, 5), new WeightedRandomChestContent(AbyssalCraft.helmet, 0, 1, 1, 5), new WeightedRandomChestContent(AbyssalCraft.legs, 0, 1, 1, 5), new WeightedRandomChestContent(AbyssalCraft.boots, 0, 1, 1, 5), new WeightedRandomChestContent(AbyssalCraft.OC, 0, 1, 1, 1)};
 		private boolean hasMadeChest;
 		public ChestCorridor() {}
 
 		public ChestCorridor(int par1, Random par2Random, StructureBoundingBox par3StructureBoundingBox, int par4)
 		{
 			super(par1);
-			this.coordBaseMode = par4;
-			this.field_143013_d = this.getRandomDoor(par2Random);
-			this.boundingBox = par3StructureBoundingBox;
+			coordBaseMode = par4;
+			field_143013_d = getRandomDoor(par2Random);
+			boundingBox = par3StructureBoundingBox;
 		}
 
+		@Override
 		protected void func_143012_a(NBTTagCompound par1NBTTagCompound)
 		{
 			super.func_143012_a(par1NBTTagCompound);
-			par1NBTTagCompound.setBoolean("Chest", this.hasMadeChest);
+			par1NBTTagCompound.setBoolean("Chest", hasMadeChest);
 		}
 
+		@Override
 		protected void func_143011_b(NBTTagCompound par1NBTTagCompound)
 		{
 			super.func_143011_b(par1NBTTagCompound);
-			this.hasMadeChest = par1NBTTagCompound.getBoolean("Chest");
+			hasMadeChest = par1NBTTagCompound.getBoolean("Chest");
 		}
 
 		/**
 		 * Initiates construction of the Structure Component picked, at the current Location of StructGen
 		 */
+		@Override
 		@SuppressWarnings({ "rawtypes", "unchecked" })
 		public void buildComponent(StructureComponent par1StructureComponent, List par2List, Random par3Random)
 		{
-			this.getNextComponentNormal((StructureAbyStrongholdPieces.Stairs2)par1StructureComponent, par2List, par3Random, 1, 1);
+			getNextComponentNormal((StructureAbyStrongholdPieces.Stairs2)par1StructureComponent, par2List, par3Random, 1, 1);
 		}
 
 		public static StructureAbyStrongholdPieces.ChestCorridor findValidPlacement(List<Stronghold> par0List, Random par1Random, int par2, int par3, int par4, int par5, int par6)
@@ -694,39 +694,38 @@ public class StructureAbyStrongholdPieces
 		 * second Part of Structure generating, this for example places Spiderwebs, Mob Spawners, it closes
 		 * Mineshafts at the end, it adds Fences...
 		 */
+		@Override
 		public boolean addComponentParts(World par1World, Random par2Random, StructureBoundingBox par3StructureBoundingBox)
 		{
-			if (this.isLiquidInStructureBoundingBox(par1World, par3StructureBoundingBox))
-			{
+			if (isLiquidInStructureBoundingBox(par1World, par3StructureBoundingBox))
 				return false;
-			}
 			else
 			{
-				this.fillWithRandomizedBlocks(par1World, par3StructureBoundingBox, 0, 0, 0, 4, 4, 6, true, par2Random, StructureAbyStrongholdPieces.strongholdStones);
-				this.placeDoor(par1World, par2Random, par3StructureBoundingBox, this.field_143013_d, 1, 1, 0);
-				this.placeDoor(par1World, par2Random, par3StructureBoundingBox, StructureAbyStrongholdPieces.Stronghold.Door.OPENING, 1, 1, 6);
-				this.fillWithBlocks(par1World, par3StructureBoundingBox, 3, 1, 2, 3, 1, 4, AbyssalCraft.abybrick, AbyssalCraft.abybrick, false);
-				this.placeBlockAtCurrentPosition(par1World, AbyssalCraft.abyslab1, 5, 3, 1, 1, par3StructureBoundingBox);
-				this.placeBlockAtCurrentPosition(par1World, AbyssalCraft.abyslab1, 5, 3, 1, 5, par3StructureBoundingBox);
-				this.placeBlockAtCurrentPosition(par1World, AbyssalCraft.abyslab1, 5, 3, 2, 2, par3StructureBoundingBox);
-				this.placeBlockAtCurrentPosition(par1World, AbyssalCraft.abyslab1, 5, 3, 2, 4, par3StructureBoundingBox);
+				fillWithRandomizedBlocks(par1World, par3StructureBoundingBox, 0, 0, 0, 4, 4, 6, true, par2Random, StructureAbyStrongholdPieces.strongholdStones);
+				placeDoor(par1World, par2Random, par3StructureBoundingBox, field_143013_d, 1, 1, 0);
+				placeDoor(par1World, par2Random, par3StructureBoundingBox, StructureAbyStrongholdPieces.Stronghold.Door.OPENING, 1, 1, 6);
+				fillWithBlocks(par1World, par3StructureBoundingBox, 3, 1, 2, 3, 1, 4, AbyssalCraft.abybrick, AbyssalCraft.abybrick, false);
+				placeBlockAtCurrentPosition(par1World, AbyssalCraft.abyslab1, 5, 3, 1, 1, par3StructureBoundingBox);
+				placeBlockAtCurrentPosition(par1World, AbyssalCraft.abyslab1, 5, 3, 1, 5, par3StructureBoundingBox);
+				placeBlockAtCurrentPosition(par1World, AbyssalCraft.abyslab1, 5, 3, 2, 2, par3StructureBoundingBox);
+				placeBlockAtCurrentPosition(par1World, AbyssalCraft.abyslab1, 5, 3, 2, 4, par3StructureBoundingBox);
 				int i;
 
 				for (i = 2; i <= 4; ++i)
 				{
-					this.placeBlockAtCurrentPosition(par1World, AbyssalCraft.abyslab1, 5, 2, 1, i, par3StructureBoundingBox);
+					placeBlockAtCurrentPosition(par1World, AbyssalCraft.abyslab1, 5, 2, 1, i, par3StructureBoundingBox);
 				}
 
-				if (!this.hasMadeChest)
+				if (!hasMadeChest)
 				{
-					i = this.getYWithOffset(2);
-					int j = this.getXWithOffset(3, 3);
-					int k = this.getZWithOffset(3, 3);
+					i = getYWithOffset(2);
+					int j = getXWithOffset(3, 3);
+					int k = getZWithOffset(3, 3);
 
 					if (par3StructureBoundingBox.isVecInside(j, i, k))
 					{
-						this.hasMadeChest = true;
-						this.generateStructureChestContents(par1World, par3StructureBoundingBox, par2Random, 3, 2, 3, ChestGenHooks.getItems(STRONGHOLD_CORRIDOR, par2Random), ChestGenHooks.getCount(STRONGHOLD_CORRIDOR, par2Random));
+						hasMadeChest = true;
+						generateStructureChestContents(par1World, par3StructureBoundingBox, par2Random, 3, 2, 3, strongholdChestContents, ChestGenHooks.getCount(STRONGHOLD_CORRIDOR, par2Random));
 					}
 				}
 
@@ -740,40 +739,43 @@ public class StructureAbyStrongholdPieces
 		/**
 		 * Items that could generate in the chest that is located in Stronghold Room Crossing.
 		 */
-		public static final WeightedRandomChestContent[] strongholdRoomCrossingChestContents = new WeightedRandomChestContent[] {new WeightedRandomChestContent(AbyssalCraft.abyingot, 0, 1, 5, 10), new WeightedRandomChestContent(AbyssalCraft.Cingot, 0, 1, 3, 5), new WeightedRandomChestContent(AbyssalCraft.Cpearl, 0, 4, 9, 5), new WeightedRandomChestContent(AbyssalCraft.Coralium, 0, 3, 8, 10), new WeightedRandomChestContent(Items.bread, 0, 1, 3, 15), new WeightedRandomChestContent(Items.golden_apple, 0, 1, 3, 15), new WeightedRandomChestContent(AbyssalCraft.pickaxeA, 0, 1, 1, 1)};
+		public static final WeightedRandomChestContent[] strongholdRoomCrossingChestContents = new WeightedRandomChestContent[] {new WeightedRandomChestContent(AbyssalCraft.abyingot, 0, 1, 5, 10), new WeightedRandomChestContent(AbyssalCraft.Cingot, 0, 1, 5, 5), new WeightedRandomChestContent(AbyssalCraft.Cpearl, 0, 1, 3, 5), new WeightedRandomChestContent(AbyssalCraft.Coralium, 0, 3, 8, 10), new WeightedRandomChestContent(Items.golden_apple, 0, 1, 3, 15), new WeightedRandomChestContent(AbyssalCraft.MRE, 0, 1, 1, 10), new WeightedRandomChestContent(AbyssalCraft.pickaxeA, 0, 1, 1, 1)};
 		protected int roomType;
 		public RoomCrossing() {}
 
 		public RoomCrossing(int par1, Random par2Random, StructureBoundingBox par3StructureBoundingBox, int par4)
 		{
 			super(par1);
-			this.coordBaseMode = par4;
-			this.field_143013_d = this.getRandomDoor(par2Random);
-			this.boundingBox = par3StructureBoundingBox;
-			this.roomType = par2Random.nextInt(5);
+			coordBaseMode = par4;
+			field_143013_d = getRandomDoor(par2Random);
+			boundingBox = par3StructureBoundingBox;
+			roomType = par2Random.nextInt(5);
 		}
 
+		@Override
 		protected void func_143012_a(NBTTagCompound par1NBTTagCompound)
 		{
 			super.func_143012_a(par1NBTTagCompound);
-			par1NBTTagCompound.setInteger("Type", this.roomType);
+			par1NBTTagCompound.setInteger("Type", roomType);
 		}
 
+		@Override
 		protected void func_143011_b(NBTTagCompound par1NBTTagCompound)
 		{
 			super.func_143011_b(par1NBTTagCompound);
-			this.roomType = par1NBTTagCompound.getInteger("Type");
+			roomType = par1NBTTagCompound.getInteger("Type");
 		}
 
 		/**
 		 * Initiates construction of the Structure Component picked, at the current Location of StructGen
 		 */
+		@Override
 		@SuppressWarnings({ "rawtypes", "unchecked" })
 		public void buildComponent(StructureComponent par1StructureComponent, List par2List, Random par3Random)
 		{
-			this.getNextComponentNormal((StructureAbyStrongholdPieces.Stairs2)par1StructureComponent, par2List, par3Random, 4, 1);
-			this.getNextComponentX((StructureAbyStrongholdPieces.Stairs2)par1StructureComponent, par2List, par3Random, 1, 4);
-			this.getNextComponentZ((StructureAbyStrongholdPieces.Stairs2)par1StructureComponent, par2List, par3Random, 1, 4);
+			getNextComponentNormal((StructureAbyStrongholdPieces.Stairs2)par1StructureComponent, par2List, par3Random, 4, 1);
+			getNextComponentX((StructureAbyStrongholdPieces.Stairs2)par1StructureComponent, par2List, par3Random, 1, 4);
+			getNextComponentZ((StructureAbyStrongholdPieces.Stairs2)par1StructureComponent, par2List, par3Random, 1, 4);
 		}
 
 		public static StructureAbyStrongholdPieces.RoomCrossing findValidPlacement(List<Stronghold> par0List, Random par1Random, int par2, int par3, int par4, int par5, int par6)
@@ -789,106 +791,105 @@ public class StructureAbyStrongholdPieces
 		 * second Part of Structure generating, this for example places Spiderwebs, Mob Spawners, it closes
 		 * Mineshafts at the end, it adds Fences...
 		 */
+		@Override
 		public boolean addComponentParts(World par1World, Random par2Random, StructureBoundingBox par3StructureBoundingBox)
 		{
-			if (this.isLiquidInStructureBoundingBox(par1World, par3StructureBoundingBox))
-			{
+			if (isLiquidInStructureBoundingBox(par1World, par3StructureBoundingBox))
 				return false;
-			}
 			else
 			{
-				this.fillWithRandomizedBlocks(par1World, par3StructureBoundingBox, 0, 0, 0, 10, 6, 10, true, par2Random, StructureAbyStrongholdPieces.strongholdStones);
-				this.placeDoor(par1World, par2Random, par3StructureBoundingBox, this.field_143013_d, 4, 1, 0);
-				this.fillWithBlocks(par1World, par3StructureBoundingBox, 4, 1, 10, 6, 3, 10, Blocks.air, Blocks.air, false);
-				this.fillWithBlocks(par1World, par3StructureBoundingBox, 0, 1, 4, 0, 3, 6, Blocks.air, Blocks.air, false);
-				this.fillWithBlocks(par1World, par3StructureBoundingBox, 10, 1, 4, 10, 3, 6, Blocks.air, Blocks.air, false);
+				fillWithRandomizedBlocks(par1World, par3StructureBoundingBox, 0, 0, 0, 10, 6, 10, true, par2Random, StructureAbyStrongholdPieces.strongholdStones);
+				placeDoor(par1World, par2Random, par3StructureBoundingBox, field_143013_d, 4, 1, 0);
+				fillWithBlocks(par1World, par3StructureBoundingBox, 4, 1, 10, 6, 3, 10, Blocks.air, Blocks.air, false);
+				fillWithBlocks(par1World, par3StructureBoundingBox, 0, 1, 4, 0, 3, 6, Blocks.air, Blocks.air, false);
+				fillWithBlocks(par1World, par3StructureBoundingBox, 10, 1, 4, 10, 3, 6, Blocks.air, Blocks.air, false);
 				int i;
 
-				switch (this.roomType)
+				switch (roomType)
 				{
 				case 0:
-					this.placeBlockAtCurrentPosition(par1World, AbyssalCraft.abybrick, 0, 5, 1, 5, par3StructureBoundingBox);
-					this.placeBlockAtCurrentPosition(par1World, AbyssalCraft.abybrick, 0, 5, 2, 5, par3StructureBoundingBox);
-					this.placeBlockAtCurrentPosition(par1World, AbyssalCraft.abybrick, 0, 5, 3, 5, par3StructureBoundingBox);
-					this.placeBlockAtCurrentPosition(par1World, Blocks.torch, 0, 4, 3, 5, par3StructureBoundingBox);
-					this.placeBlockAtCurrentPosition(par1World, Blocks.torch, 0, 6, 3, 5, par3StructureBoundingBox);
-					this.placeBlockAtCurrentPosition(par1World, Blocks.torch, 0, 5, 3, 4, par3StructureBoundingBox);
-					this.placeBlockAtCurrentPosition(par1World, Blocks.torch, 0, 5, 3, 6, par3StructureBoundingBox);
-					this.placeBlockAtCurrentPosition(par1World, AbyssalCraft.abyslab1, 0, 4, 1, 4, par3StructureBoundingBox);
-					this.placeBlockAtCurrentPosition(par1World, AbyssalCraft.abyslab1, 0, 4, 1, 5, par3StructureBoundingBox);
-					this.placeBlockAtCurrentPosition(par1World, AbyssalCraft.abyslab1, 0, 4, 1, 6, par3StructureBoundingBox);
-					this.placeBlockAtCurrentPosition(par1World, AbyssalCraft.abyslab1, 0, 6, 1, 4, par3StructureBoundingBox);
-					this.placeBlockAtCurrentPosition(par1World, AbyssalCraft.abyslab1, 0, 6, 1, 5, par3StructureBoundingBox);
-					this.placeBlockAtCurrentPosition(par1World, AbyssalCraft.abyslab1, 0, 6, 1, 6, par3StructureBoundingBox);
-					this.placeBlockAtCurrentPosition(par1World, AbyssalCraft.abyslab1, 0, 5, 1, 4, par3StructureBoundingBox);
-					this.placeBlockAtCurrentPosition(par1World, AbyssalCraft.abyslab1, 0, 5, 1, 6, par3StructureBoundingBox);
+					placeBlockAtCurrentPosition(par1World, AbyssalCraft.abybrick, 0, 5, 1, 5, par3StructureBoundingBox);
+					placeBlockAtCurrentPosition(par1World, AbyssalCraft.abybrick, 0, 5, 2, 5, par3StructureBoundingBox);
+					placeBlockAtCurrentPosition(par1World, AbyssalCraft.abybrick, 0, 5, 3, 5, par3StructureBoundingBox);
+					placeBlockAtCurrentPosition(par1World, Blocks.torch, 0, 4, 3, 5, par3StructureBoundingBox);
+					placeBlockAtCurrentPosition(par1World, Blocks.torch, 0, 6, 3, 5, par3StructureBoundingBox);
+					placeBlockAtCurrentPosition(par1World, Blocks.torch, 0, 5, 3, 4, par3StructureBoundingBox);
+					placeBlockAtCurrentPosition(par1World, Blocks.torch, 0, 5, 3, 6, par3StructureBoundingBox);
+					placeBlockAtCurrentPosition(par1World, AbyssalCraft.abyslab1, 0, 4, 1, 4, par3StructureBoundingBox);
+					placeBlockAtCurrentPosition(par1World, AbyssalCraft.abyslab1, 0, 4, 1, 5, par3StructureBoundingBox);
+					placeBlockAtCurrentPosition(par1World, AbyssalCraft.abyslab1, 0, 4, 1, 6, par3StructureBoundingBox);
+					placeBlockAtCurrentPosition(par1World, AbyssalCraft.abyslab1, 0, 6, 1, 4, par3StructureBoundingBox);
+					placeBlockAtCurrentPosition(par1World, AbyssalCraft.abyslab1, 0, 6, 1, 5, par3StructureBoundingBox);
+					placeBlockAtCurrentPosition(par1World, AbyssalCraft.abyslab1, 0, 6, 1, 6, par3StructureBoundingBox);
+					placeBlockAtCurrentPosition(par1World, AbyssalCraft.abyslab1, 0, 5, 1, 4, par3StructureBoundingBox);
+					placeBlockAtCurrentPosition(par1World, AbyssalCraft.abyslab1, 0, 5, 1, 6, par3StructureBoundingBox);
 					break;
 				case 1:
 					for (i = 0; i < 5; ++i)
 					{
-						this.placeBlockAtCurrentPosition(par1World, AbyssalCraft.abybrick, 0, 3, 1, 3 + i, par3StructureBoundingBox);
-						this.placeBlockAtCurrentPosition(par1World, AbyssalCraft.abybrick, 0, 7, 1, 3 + i, par3StructureBoundingBox);
-						this.placeBlockAtCurrentPosition(par1World, AbyssalCraft.abybrick, 0, 3 + i, 1, 3, par3StructureBoundingBox);
-						this.placeBlockAtCurrentPosition(par1World, AbyssalCraft.abybrick, 0, 3 + i, 1, 7, par3StructureBoundingBox);
+						placeBlockAtCurrentPosition(par1World, AbyssalCraft.abybrick, 0, 3, 1, 3 + i, par3StructureBoundingBox);
+						placeBlockAtCurrentPosition(par1World, AbyssalCraft.abybrick, 0, 7, 1, 3 + i, par3StructureBoundingBox);
+						placeBlockAtCurrentPosition(par1World, AbyssalCraft.abybrick, 0, 3 + i, 1, 3, par3StructureBoundingBox);
+						placeBlockAtCurrentPosition(par1World, AbyssalCraft.abybrick, 0, 3 + i, 1, 7, par3StructureBoundingBox);
 					}
 
-					this.placeBlockAtCurrentPosition(par1World, AbyssalCraft.abybrick, 0, 5, 1, 5, par3StructureBoundingBox);
-					this.placeBlockAtCurrentPosition(par1World, AbyssalCraft.abybrick, 0, 5, 2, 5, par3StructureBoundingBox);
-					this.placeBlockAtCurrentPosition(par1World, AbyssalCraft.abybrick, 0, 5, 3, 5, par3StructureBoundingBox);
-					this.placeBlockAtCurrentPosition(par1World, Blocks.flowing_water, 0, 5, 4, 5, par3StructureBoundingBox);
+					placeBlockAtCurrentPosition(par1World, AbyssalCraft.abybrick, 0, 5, 1, 5, par3StructureBoundingBox);
+					placeBlockAtCurrentPosition(par1World, AbyssalCraft.abybrick, 0, 5, 2, 5, par3StructureBoundingBox);
+					placeBlockAtCurrentPosition(par1World, AbyssalCraft.abybrick, 0, 5, 3, 5, par3StructureBoundingBox);
+					placeBlockAtCurrentPosition(par1World, Blocks.flowing_water, 0, 5, 4, 5, par3StructureBoundingBox);
 					break;
 				case 2:
 					for (i = 1; i <= 9; ++i)
 					{
-						this.placeBlockAtCurrentPosition(par1World, AbyssalCraft.Darkstone_cobble, 0, 1, 3, i, par3StructureBoundingBox);
-						this.placeBlockAtCurrentPosition(par1World, AbyssalCraft.Darkstone_cobble, 0, 9, 3, i, par3StructureBoundingBox);
+						placeBlockAtCurrentPosition(par1World, AbyssalCraft.Darkstone_cobble, 0, 1, 3, i, par3StructureBoundingBox);
+						placeBlockAtCurrentPosition(par1World, AbyssalCraft.Darkstone_cobble, 0, 9, 3, i, par3StructureBoundingBox);
 					}
 
 					for (i = 1; i <= 9; ++i)
 					{
-						this.placeBlockAtCurrentPosition(par1World, AbyssalCraft.Darkstone_cobble, 0, i, 3, 1, par3StructureBoundingBox);
-						this.placeBlockAtCurrentPosition(par1World, AbyssalCraft.Darkstone_cobble, 0, i, 3, 9, par3StructureBoundingBox);
+						placeBlockAtCurrentPosition(par1World, AbyssalCraft.Darkstone_cobble, 0, i, 3, 1, par3StructureBoundingBox);
+						placeBlockAtCurrentPosition(par1World, AbyssalCraft.Darkstone_cobble, 0, i, 3, 9, par3StructureBoundingBox);
 					}
 
-					this.placeBlockAtCurrentPosition(par1World, AbyssalCraft.Darkstone_cobble, 0, 5, 1, 4, par3StructureBoundingBox);
-					this.placeBlockAtCurrentPosition(par1World, AbyssalCraft.Darkstone_cobble, 0, 5, 1, 6, par3StructureBoundingBox);
-					this.placeBlockAtCurrentPosition(par1World, AbyssalCraft.Darkstone_cobble, 0, 5, 3, 4, par3StructureBoundingBox);
-					this.placeBlockAtCurrentPosition(par1World, AbyssalCraft.Darkstone_cobble, 0, 5, 3, 6, par3StructureBoundingBox);
-					this.placeBlockAtCurrentPosition(par1World, AbyssalCraft.Darkstone_cobble, 0, 4, 1, 5, par3StructureBoundingBox);
-					this.placeBlockAtCurrentPosition(par1World, AbyssalCraft.Darkstone_cobble, 0, 6, 1, 5, par3StructureBoundingBox);
-					this.placeBlockAtCurrentPosition(par1World, AbyssalCraft.Darkstone_cobble, 0, 4, 3, 5, par3StructureBoundingBox);
-					this.placeBlockAtCurrentPosition(par1World, AbyssalCraft.Darkstone_cobble, 0, 6, 3, 5, par3StructureBoundingBox);
+					placeBlockAtCurrentPosition(par1World, AbyssalCraft.Darkstone_cobble, 0, 5, 1, 4, par3StructureBoundingBox);
+					placeBlockAtCurrentPosition(par1World, AbyssalCraft.Darkstone_cobble, 0, 5, 1, 6, par3StructureBoundingBox);
+					placeBlockAtCurrentPosition(par1World, AbyssalCraft.Darkstone_cobble, 0, 5, 3, 4, par3StructureBoundingBox);
+					placeBlockAtCurrentPosition(par1World, AbyssalCraft.Darkstone_cobble, 0, 5, 3, 6, par3StructureBoundingBox);
+					placeBlockAtCurrentPosition(par1World, AbyssalCraft.Darkstone_cobble, 0, 4, 1, 5, par3StructureBoundingBox);
+					placeBlockAtCurrentPosition(par1World, AbyssalCraft.Darkstone_cobble, 0, 6, 1, 5, par3StructureBoundingBox);
+					placeBlockAtCurrentPosition(par1World, AbyssalCraft.Darkstone_cobble, 0, 4, 3, 5, par3StructureBoundingBox);
+					placeBlockAtCurrentPosition(par1World, AbyssalCraft.Darkstone_cobble, 0, 6, 3, 5, par3StructureBoundingBox);
 
 					for (i = 1; i <= 3; ++i)
 					{
-						this.placeBlockAtCurrentPosition(par1World, AbyssalCraft.Darkstone_cobble, 0, 4, i, 4, par3StructureBoundingBox);
-						this.placeBlockAtCurrentPosition(par1World, AbyssalCraft.Darkstone_cobble, 0, 6, i, 4, par3StructureBoundingBox);
-						this.placeBlockAtCurrentPosition(par1World, AbyssalCraft.Darkstone_cobble, 0, 4, i, 6, par3StructureBoundingBox);
-						this.placeBlockAtCurrentPosition(par1World, AbyssalCraft.Darkstone_cobble, 0, 6, i, 6, par3StructureBoundingBox);
+						placeBlockAtCurrentPosition(par1World, AbyssalCraft.Darkstone_cobble, 0, 4, i, 4, par3StructureBoundingBox);
+						placeBlockAtCurrentPosition(par1World, AbyssalCraft.Darkstone_cobble, 0, 6, i, 4, par3StructureBoundingBox);
+						placeBlockAtCurrentPosition(par1World, AbyssalCraft.Darkstone_cobble, 0, 4, i, 6, par3StructureBoundingBox);
+						placeBlockAtCurrentPosition(par1World, AbyssalCraft.Darkstone_cobble, 0, 6, i, 6, par3StructureBoundingBox);
 					}
 
-					this.placeBlockAtCurrentPosition(par1World, Blocks.torch, 0, 5, 3, 5, par3StructureBoundingBox);
+					placeBlockAtCurrentPosition(par1World, Blocks.torch, 0, 5, 3, 5, par3StructureBoundingBox);
 
 					for (i = 2; i <= 8; ++i)
 					{
-						this.placeBlockAtCurrentPosition(par1World, AbyssalCraft.DLTplank, 0, 2, 3, i, par3StructureBoundingBox);
-						this.placeBlockAtCurrentPosition(par1World, AbyssalCraft.DLTplank, 0, 3, 3, i, par3StructureBoundingBox);
+						placeBlockAtCurrentPosition(par1World, AbyssalCraft.DLTplank, 0, 2, 3, i, par3StructureBoundingBox);
+						placeBlockAtCurrentPosition(par1World, AbyssalCraft.DLTplank, 0, 3, 3, i, par3StructureBoundingBox);
 
 						if (i <= 3 || i >= 7)
 						{
-							this.placeBlockAtCurrentPosition(par1World, AbyssalCraft.DLTplank, 0, 4, 3, i, par3StructureBoundingBox);
-							this.placeBlockAtCurrentPosition(par1World, AbyssalCraft.DLTplank, 0, 5, 3, i, par3StructureBoundingBox);
-							this.placeBlockAtCurrentPosition(par1World, AbyssalCraft.DLTplank, 0, 6, 3, i, par3StructureBoundingBox);
+							placeBlockAtCurrentPosition(par1World, AbyssalCraft.DLTplank, 0, 4, 3, i, par3StructureBoundingBox);
+							placeBlockAtCurrentPosition(par1World, AbyssalCraft.DLTplank, 0, 5, 3, i, par3StructureBoundingBox);
+							placeBlockAtCurrentPosition(par1World, AbyssalCraft.DLTplank, 0, 6, 3, i, par3StructureBoundingBox);
 						}
 
-						this.placeBlockAtCurrentPosition(par1World, AbyssalCraft.DLTplank, 0, 7, 3, i, par3StructureBoundingBox);
-						this.placeBlockAtCurrentPosition(par1World, AbyssalCraft.DLTplank, 0, 8, 3, i, par3StructureBoundingBox);
+						placeBlockAtCurrentPosition(par1World, AbyssalCraft.DLTplank, 0, 7, 3, i, par3StructureBoundingBox);
+						placeBlockAtCurrentPosition(par1World, AbyssalCraft.DLTplank, 0, 8, 3, i, par3StructureBoundingBox);
 					}
 
-					this.placeBlockAtCurrentPosition(par1World, Blocks.ladder, this.getMetadataWithOffset(Blocks.ladder, 4), 9, 1, 3, par3StructureBoundingBox);
-					this.placeBlockAtCurrentPosition(par1World, Blocks.ladder, this.getMetadataWithOffset(Blocks.ladder, 4), 9, 2, 3, par3StructureBoundingBox);
-					this.placeBlockAtCurrentPosition(par1World, Blocks.ladder, this.getMetadataWithOffset(Blocks.ladder, 4), 9, 3, 3, par3StructureBoundingBox);
-					this.generateStructureChestContents(par1World, par3StructureBoundingBox, par2Random, 3, 4, 8, ChestGenHooks.getItems(STRONGHOLD_CROSSING, par2Random), ChestGenHooks.getCount(STRONGHOLD_CROSSING, par2Random));
+					placeBlockAtCurrentPosition(par1World, Blocks.ladder, getMetadataWithOffset(Blocks.ladder, 4), 9, 1, 3, par3StructureBoundingBox);
+					placeBlockAtCurrentPosition(par1World, Blocks.ladder, getMetadataWithOffset(Blocks.ladder, 4), 9, 2, 3, par3StructureBoundingBox);
+					placeBlockAtCurrentPosition(par1World, Blocks.ladder, getMetadataWithOffset(Blocks.ladder, 4), 9, 3, 3, par3StructureBoundingBox);
+					generateStructureChestContents(par1World, par3StructureBoundingBox, par2Random, 3, 4, 8, strongholdRoomCrossingChestContents, ChestGenHooks.getCount(STRONGHOLD_CROSSING, par2Random));
 				}
 
 				return true;
@@ -903,18 +904,19 @@ public class StructureAbyStrongholdPieces
 		public StairsStraight(int par1, Random par2Random, StructureBoundingBox par3StructureBoundingBox, int par4)
 		{
 			super(par1);
-			this.coordBaseMode = par4;
-			this.field_143013_d = this.getRandomDoor(par2Random);
-			this.boundingBox = par3StructureBoundingBox;
+			coordBaseMode = par4;
+			field_143013_d = getRandomDoor(par2Random);
+			boundingBox = par3StructureBoundingBox;
 		}
 
 		/**
 		 * Initiates construction of the Structure Component picked, at the current Location of StructGen
 		 */
+		@Override
 		@SuppressWarnings({ "rawtypes", "unchecked" })
 		public void buildComponent(StructureComponent par1StructureComponent, List par2List, Random par3Random)
 		{
-			this.getNextComponentNormal((StructureAbyStrongholdPieces.Stairs2)par1StructureComponent, par2List, par3Random, 1, 1);
+			getNextComponentNormal((StructureAbyStrongholdPieces.Stairs2)par1StructureComponent, par2List, par3Random, 1, 1);
 		}
 
 		public static StructureAbyStrongholdPieces.StairsStraight findValidPlacement(List<Stronghold> par0List, Random par1Random, int par2, int par3, int par4, int par5, int par6)
@@ -930,30 +932,29 @@ public class StructureAbyStrongholdPieces
 		 * second Part of Structure generating, this for example places Spiderwebs, Mob Spawners, it closes
 		 * Mineshafts at the end, it adds Fences...
 		 */
+		@Override
 		public boolean addComponentParts(World par1World, Random par2Random, StructureBoundingBox par3StructureBoundingBox)
 		{
-			if (this.isLiquidInStructureBoundingBox(par1World, par3StructureBoundingBox))
-			{
+			if (isLiquidInStructureBoundingBox(par1World, par3StructureBoundingBox))
 				return false;
-			}
 			else
 			{
-				this.fillWithRandomizedBlocks(par1World, par3StructureBoundingBox, 0, 0, 0, 4, 10, 7, true, par2Random, StructureAbyStrongholdPieces.strongholdStones);
-				this.placeDoor(par1World, par2Random, par3StructureBoundingBox, this.field_143013_d, 1, 7, 0);
-				this.placeDoor(par1World, par2Random, par3StructureBoundingBox, StructureAbyStrongholdPieces.Stronghold.Door.OPENING, 1, 1, 7);
-				int i = this.getMetadataWithOffset(AbyssalCraft.DCstairs, 2);
+				fillWithRandomizedBlocks(par1World, par3StructureBoundingBox, 0, 0, 0, 4, 10, 7, true, par2Random, StructureAbyStrongholdPieces.strongholdStones);
+				placeDoor(par1World, par2Random, par3StructureBoundingBox, field_143013_d, 1, 7, 0);
+				placeDoor(par1World, par2Random, par3StructureBoundingBox, StructureAbyStrongholdPieces.Stronghold.Door.OPENING, 1, 1, 7);
+				int i = getMetadataWithOffset(AbyssalCraft.DCstairs, 2);
 
 				for (int j = 0; j < 6; ++j)
 				{
-					this.placeBlockAtCurrentPosition(par1World, AbyssalCraft.DCstairs, i, 1, 6 - j, 1 + j, par3StructureBoundingBox);
-					this.placeBlockAtCurrentPosition(par1World, AbyssalCraft.DCstairs, i, 2, 6 - j, 1 + j, par3StructureBoundingBox);
-					this.placeBlockAtCurrentPosition(par1World, AbyssalCraft.DCstairs, i, 3, 6 - j, 1 + j, par3StructureBoundingBox);
+					placeBlockAtCurrentPosition(par1World, AbyssalCraft.DCstairs, i, 1, 6 - j, 1 + j, par3StructureBoundingBox);
+					placeBlockAtCurrentPosition(par1World, AbyssalCraft.DCstairs, i, 2, 6 - j, 1 + j, par3StructureBoundingBox);
+					placeBlockAtCurrentPosition(par1World, AbyssalCraft.DCstairs, i, 3, 6 - j, 1 + j, par3StructureBoundingBox);
 
 					if (j < 5)
 					{
-						this.placeBlockAtCurrentPosition(par1World, AbyssalCraft.abybrick, 0, 1, 5 - j, 1 + j, par3StructureBoundingBox);
-						this.placeBlockAtCurrentPosition(par1World, AbyssalCraft.abybrick, 0, 2, 5 - j, 1 + j, par3StructureBoundingBox);
-						this.placeBlockAtCurrentPosition(par1World, AbyssalCraft.abybrick, 0, 3, 5 - j, 1 + j, par3StructureBoundingBox);
+						placeBlockAtCurrentPosition(par1World, AbyssalCraft.abybrick, 0, 1, 5 - j, 1 + j, par3StructureBoundingBox);
+						placeBlockAtCurrentPosition(par1World, AbyssalCraft.abybrick, 0, 2, 5 - j, 1 + j, par3StructureBoundingBox);
+						placeBlockAtCurrentPosition(par1World, AbyssalCraft.abybrick, 0, 3, 5 - j, 1 + j, par3StructureBoundingBox);
 					}
 				}
 
@@ -974,9 +975,10 @@ public class StructureAbyStrongholdPieces
 			super(0, par2Random, par3, par4);
 		}
 
+		@Override
 		public ChunkPosition func_151553_a()
 		{
-			return this.strongholdPortalRoom != null ? this.strongholdPortalRoom.func_151553_a() : super.func_151553_a();
+			return strongholdPortalRoom != null ? strongholdPortalRoom.func_151553_a() : super.func_151553_a();
 		}
 	}
 
@@ -987,18 +989,19 @@ public class StructureAbyStrongholdPieces
 		public Prison(int par1, Random par2Random, StructureBoundingBox par3StructureBoundingBox, int par4)
 		{
 			super(par1);
-			this.coordBaseMode = par4;
-			this.field_143013_d = this.getRandomDoor(par2Random);
-			this.boundingBox = par3StructureBoundingBox;
+			coordBaseMode = par4;
+			field_143013_d = getRandomDoor(par2Random);
+			boundingBox = par3StructureBoundingBox;
 		}
 
 		/**
 		 * Initiates construction of the Structure Component picked, at the current Location of StructGen
 		 */
+		@Override
 		@SuppressWarnings({ "rawtypes", "unchecked" })
 		public void buildComponent(StructureComponent par1StructureComponent, List par2List, Random par3Random)
 		{
-			this.getNextComponentNormal((StructureAbyStrongholdPieces.Stairs2)par1StructureComponent, par2List, par3Random, 1, 1);
+			getNextComponentNormal((StructureAbyStrongholdPieces.Stairs2)par1StructureComponent, par2List, par3Random, 1, 1);
 		}
 
 		public static StructureAbyStrongholdPieces.Prison findValidPlacement(List<Stronghold> par0List, Random par1Random, int par2, int par3, int par4, int par5, int par6)
@@ -1014,29 +1017,28 @@ public class StructureAbyStrongholdPieces
 		 * second Part of Structure generating, this for example places Spiderwebs, Mob Spawners, it closes
 		 * Mineshafts at the end, it adds Fences...
 		 */
+		@Override
 		public boolean addComponentParts(World par1World, Random par2Random, StructureBoundingBox par3StructureBoundingBox)
 		{
-			if (this.isLiquidInStructureBoundingBox(par1World, par3StructureBoundingBox))
-			{
+			if (isLiquidInStructureBoundingBox(par1World, par3StructureBoundingBox))
 				return false;
-			}
 			else
 			{
-				this.fillWithRandomizedBlocks(par1World, par3StructureBoundingBox, 0, 0, 0, 8, 4, 10, true, par2Random, StructureAbyStrongholdPieces.strongholdStones);
-				this.placeDoor(par1World, par2Random, par3StructureBoundingBox, this.field_143013_d, 1, 1, 0);
-				this.fillWithBlocks(par1World, par3StructureBoundingBox, 1, 1, 10, 3, 3, 10, Blocks.air, Blocks.air, false);
-				this.fillWithRandomizedBlocks(par1World, par3StructureBoundingBox, 4, 1, 1, 4, 3, 1, false, par2Random, StructureAbyStrongholdPieces.strongholdStones);
-				this.fillWithRandomizedBlocks(par1World, par3StructureBoundingBox, 4, 1, 3, 4, 3, 3, false, par2Random, StructureAbyStrongholdPieces.strongholdStones);
-				this.fillWithRandomizedBlocks(par1World, par3StructureBoundingBox, 4, 1, 7, 4, 3, 7, false, par2Random, StructureAbyStrongholdPieces.strongholdStones);
-				this.fillWithRandomizedBlocks(par1World, par3StructureBoundingBox, 4, 1, 9, 4, 3, 9, false, par2Random, StructureAbyStrongholdPieces.strongholdStones);
-				this.fillWithBlocks(par1World, par3StructureBoundingBox, 4, 1, 4, 4, 3, 6, AbyssalCraft.abyfence, AbyssalCraft.abyfence, false);
-				this.fillWithBlocks(par1World, par3StructureBoundingBox, 5, 1, 5, 7, 3, 5, AbyssalCraft.abyfence, AbyssalCraft.abyfence, false);
-				this.placeBlockAtCurrentPosition(par1World, AbyssalCraft.abyfence, 0, 4, 3, 2, par3StructureBoundingBox);
-				this.placeBlockAtCurrentPosition(par1World, AbyssalCraft.abyfence, 0, 4, 3, 8, par3StructureBoundingBox);
-				this.placeBlockAtCurrentPosition(par1World, Blocks.iron_door, this.getMetadataWithOffset(Blocks.iron_door, 3), 4, 1, 2, par3StructureBoundingBox);
-				this.placeBlockAtCurrentPosition(par1World, Blocks.iron_door, this.getMetadataWithOffset(Blocks.iron_door, 3) + 8, 4, 2, 2, par3StructureBoundingBox);
-				this.placeBlockAtCurrentPosition(par1World, Blocks.iron_door, this.getMetadataWithOffset(Blocks.iron_door, 3), 4, 1, 8, par3StructureBoundingBox);
-				this.placeBlockAtCurrentPosition(par1World, Blocks.iron_door, this.getMetadataWithOffset(Blocks.iron_door, 3) + 8, 4, 2, 8, par3StructureBoundingBox);
+				fillWithRandomizedBlocks(par1World, par3StructureBoundingBox, 0, 0, 0, 8, 4, 10, true, par2Random, StructureAbyStrongholdPieces.strongholdStones);
+				placeDoor(par1World, par2Random, par3StructureBoundingBox, field_143013_d, 1, 1, 0);
+				fillWithBlocks(par1World, par3StructureBoundingBox, 1, 1, 10, 3, 3, 10, Blocks.air, Blocks.air, false);
+				fillWithRandomizedBlocks(par1World, par3StructureBoundingBox, 4, 1, 1, 4, 3, 1, false, par2Random, StructureAbyStrongholdPieces.strongholdStones);
+				fillWithRandomizedBlocks(par1World, par3StructureBoundingBox, 4, 1, 3, 4, 3, 3, false, par2Random, StructureAbyStrongholdPieces.strongholdStones);
+				fillWithRandomizedBlocks(par1World, par3StructureBoundingBox, 4, 1, 7, 4, 3, 7, false, par2Random, StructureAbyStrongholdPieces.strongholdStones);
+				fillWithRandomizedBlocks(par1World, par3StructureBoundingBox, 4, 1, 9, 4, 3, 9, false, par2Random, StructureAbyStrongholdPieces.strongholdStones);
+				fillWithBlocks(par1World, par3StructureBoundingBox, 4, 1, 4, 4, 3, 6, AbyssalCraft.abyfence, AbyssalCraft.abyfence, false);
+				fillWithBlocks(par1World, par3StructureBoundingBox, 5, 1, 5, 7, 3, 5, AbyssalCraft.abyfence, AbyssalCraft.abyfence, false);
+				placeBlockAtCurrentPosition(par1World, AbyssalCraft.abyfence, 0, 4, 3, 2, par3StructureBoundingBox);
+				placeBlockAtCurrentPosition(par1World, AbyssalCraft.abyfence, 0, 4, 3, 8, par3StructureBoundingBox);
+				placeBlockAtCurrentPosition(par1World, Blocks.iron_door, getMetadataWithOffset(Blocks.iron_door, 3), 4, 1, 2, par3StructureBoundingBox);
+				placeBlockAtCurrentPosition(par1World, Blocks.iron_door, getMetadataWithOffset(Blocks.iron_door, 3) + 8, 4, 2, 2, par3StructureBoundingBox);
+				placeBlockAtCurrentPosition(par1World, Blocks.iron_door, getMetadataWithOffset(Blocks.iron_door, 3), 4, 1, 8, par3StructureBoundingBox);
+				placeBlockAtCurrentPosition(par1World, Blocks.iron_door, getMetadataWithOffset(Blocks.iron_door, 3) + 8, 4, 2, 8, par3StructureBoundingBox);
 				return true;
 			}
 		}
@@ -1049,24 +1051,25 @@ public class StructureAbyStrongholdPieces
 		public LeftTurn(int par1, Random par2Random, StructureBoundingBox par3StructureBoundingBox, int par4)
 		{
 			super(par1);
-			this.coordBaseMode = par4;
-			this.field_143013_d = this.getRandomDoor(par2Random);
-			this.boundingBox = par3StructureBoundingBox;
+			coordBaseMode = par4;
+			field_143013_d = getRandomDoor(par2Random);
+			boundingBox = par3StructureBoundingBox;
 		}
 
 		/**
 		 * Initiates construction of the Structure Component picked, at the current Location of StructGen
 		 */
+		@Override
 		@SuppressWarnings({ "rawtypes", "unchecked" })
 		public void buildComponent(StructureComponent par1StructureComponent, List par2List, Random par3Random)
 		{
-			if (this.coordBaseMode != 2 && this.coordBaseMode != 3)
+			if (coordBaseMode != 2 && coordBaseMode != 3)
 			{
-				this.getNextComponentZ((StructureAbyStrongholdPieces.Stairs2)par1StructureComponent, par2List, par3Random, 1, 1);
+				getNextComponentZ((StructureAbyStrongholdPieces.Stairs2)par1StructureComponent, par2List, par3Random, 1, 1);
 			}
 			else
 			{
-				this.getNextComponentX((StructureAbyStrongholdPieces.Stairs2)par1StructureComponent, par2List, par3Random, 1, 1);
+				getNextComponentX((StructureAbyStrongholdPieces.Stairs2)par1StructureComponent, par2List, par3Random, 1, 1);
 			}
 		}
 
@@ -1083,24 +1086,23 @@ public class StructureAbyStrongholdPieces
 		 * second Part of Structure generating, this for example places Spiderwebs, Mob Spawners, it closes
 		 * Mineshafts at the end, it adds Fences...
 		 */
+		@Override
 		public boolean addComponentParts(World par1World, Random par2Random, StructureBoundingBox par3StructureBoundingBox)
 		{
-			if (this.isLiquidInStructureBoundingBox(par1World, par3StructureBoundingBox))
-			{
+			if (isLiquidInStructureBoundingBox(par1World, par3StructureBoundingBox))
 				return false;
-			}
 			else
 			{
-				this.fillWithRandomizedBlocks(par1World, par3StructureBoundingBox, 0, 0, 0, 4, 4, 4, true, par2Random, StructureAbyStrongholdPieces.strongholdStones);
-				this.placeDoor(par1World, par2Random, par3StructureBoundingBox, this.field_143013_d, 1, 1, 0);
+				fillWithRandomizedBlocks(par1World, par3StructureBoundingBox, 0, 0, 0, 4, 4, 4, true, par2Random, StructureAbyStrongholdPieces.strongholdStones);
+				placeDoor(par1World, par2Random, par3StructureBoundingBox, field_143013_d, 1, 1, 0);
 
-				if (this.coordBaseMode != 2 && this.coordBaseMode != 3)
+				if (coordBaseMode != 2 && coordBaseMode != 3)
 				{
-					this.fillWithBlocks(par1World, par3StructureBoundingBox, 4, 1, 1, 4, 3, 3, Blocks.air, Blocks.air, false);
+					fillWithBlocks(par1World, par3StructureBoundingBox, 4, 1, 1, 4, 3, 3, Blocks.air, Blocks.air, false);
 				}
 				else
 				{
-					this.fillWithBlocks(par1World, par3StructureBoundingBox, 0, 1, 1, 0, 3, 3, Blocks.air, Blocks.air, false);
+					fillWithBlocks(par1World, par3StructureBoundingBox, 0, 1, 1, 0, 3, 3, Blocks.air, Blocks.air, false);
 				}
 
 				return true;
@@ -1113,16 +1115,17 @@ public class StructureAbyStrongholdPieces
 		/**
 		 * Initiates construction of the Structure Component picked, at the current Location of StructGen
 		 */
+		@Override
 		@SuppressWarnings({ "rawtypes", "unchecked" })
 		public void buildComponent(StructureComponent par1StructureComponent, List par2List, Random par3Random)
 		{
-			if (this.coordBaseMode != 2 && this.coordBaseMode != 3)
+			if (coordBaseMode != 2 && coordBaseMode != 3)
 			{
-				this.getNextComponentX((StructureAbyStrongholdPieces.Stairs2)par1StructureComponent, par2List, par3Random, 1, 1);
+				getNextComponentX((StructureAbyStrongholdPieces.Stairs2)par1StructureComponent, par2List, par3Random, 1, 1);
 			}
 			else
 			{
-				this.getNextComponentZ((StructureAbyStrongholdPieces.Stairs2)par1StructureComponent, par2List, par3Random, 1, 1);
+				getNextComponentZ((StructureAbyStrongholdPieces.Stairs2)par1StructureComponent, par2List, par3Random, 1, 1);
 			}
 		}
 
@@ -1130,24 +1133,23 @@ public class StructureAbyStrongholdPieces
 		 * second Part of Structure generating, this for example places Spiderwebs, Mob Spawners, it closes
 		 * Mineshafts at the end, it adds Fences...
 		 */
+		@Override
 		public boolean addComponentParts(World par1World, Random par2Random, StructureBoundingBox par3StructureBoundingBox)
 		{
-			if (this.isLiquidInStructureBoundingBox(par1World, par3StructureBoundingBox))
-			{
+			if (isLiquidInStructureBoundingBox(par1World, par3StructureBoundingBox))
 				return false;
-			}
 			else
 			{
-				this.fillWithRandomizedBlocks(par1World, par3StructureBoundingBox, 0, 0, 0, 4, 4, 4, true, par2Random, StructureAbyStrongholdPieces.strongholdStones);
-				this.placeDoor(par1World, par2Random, par3StructureBoundingBox, this.field_143013_d, 1, 1, 0);
+				fillWithRandomizedBlocks(par1World, par3StructureBoundingBox, 0, 0, 0, 4, 4, 4, true, par2Random, StructureAbyStrongholdPieces.strongholdStones);
+				placeDoor(par1World, par2Random, par3StructureBoundingBox, field_143013_d, 1, 1, 0);
 
-				if (this.coordBaseMode != 2 && this.coordBaseMode != 3)
+				if (coordBaseMode != 2 && coordBaseMode != 3)
 				{
-					this.fillWithBlocks(par1World, par3StructureBoundingBox, 0, 1, 1, 0, 3, 3, Blocks.air, Blocks.air, false);
+					fillWithBlocks(par1World, par3StructureBoundingBox, 0, 1, 1, 0, 3, 3, Blocks.air, Blocks.air, false);
 				}
 				else
 				{
-					this.fillWithBlocks(par1World, par3StructureBoundingBox, 4, 1, 1, 4, 3, 3, Blocks.air, Blocks.air, false);
+					fillWithBlocks(par1World, par3StructureBoundingBox, 4, 1, 1, 4, 3, 3, Blocks.air, Blocks.air, false);
 				}
 
 				return true;
@@ -1162,35 +1164,36 @@ public class StructureAbyStrongholdPieces
 		/**
 		 * picks Block Ids and Metadata (Silverfish)
 		 */
+		@Override
 		public void selectBlocks(Random par1Random, int par2, int par3, int par4, boolean par5)
 		{
 			if (par5)
 			{
-				this.field_151562_a = AbyssalCraft.abybrick;
+				field_151562_a = AbyssalCraft.abybrick;
 				float f = par1Random.nextFloat();
 
 				if (f < 0.2F)
 				{
-					this.selectedBlockMetaData = 0;
+					selectedBlockMetaData = 0;
 				}
 				else if (f < 0.5F)
 				{
-					this.selectedBlockMetaData = 0;
+					selectedBlockMetaData = 0;
 				}
 				else if (f < 0.55F)
 				{
-					this.field_151562_a = AbyssalCraft.abybrick;
-					this.selectedBlockMetaData = 0;
+					field_151562_a = AbyssalCraft.abybrick;
+					selectedBlockMetaData = 0;
 				}
 				else
 				{
-					this.selectedBlockMetaData = 0;
+					selectedBlockMetaData = 0;
 				}
 			}
 			else
 			{
-				this.field_151562_a = Blocks.air;
-				this.selectedBlockMetaData = 0;
+				field_151562_a = Blocks.air;
+				selectedBlockMetaData = 0;
 			}
 		}
 
@@ -1205,23 +1208,25 @@ public class StructureAbyStrongholdPieces
 		protected StructureAbyStrongholdPieces.Stronghold.Door field_143013_d;
 		public Stronghold()
 		{
-			this.field_143013_d = StructureAbyStrongholdPieces.Stronghold.Door.OPENING;
+			field_143013_d = StructureAbyStrongholdPieces.Stronghold.Door.OPENING;
 		}
 
 		protected Stronghold(int par1)
 		{
 			super(par1);
-			this.field_143013_d = StructureAbyStrongholdPieces.Stronghold.Door.OPENING;
+			field_143013_d = StructureAbyStrongholdPieces.Stronghold.Door.OPENING;
 		}
 
+		@Override
 		protected void func_143012_a(NBTTagCompound par1NBTTagCompound)
 		{
-			par1NBTTagCompound.setString("EntryDoor", this.field_143013_d.name());
+			par1NBTTagCompound.setString("EntryDoor", field_143013_d.name());
 		}
 
+		@Override
 		protected void func_143011_b(NBTTagCompound par1NBTTagCompound)
 		{
-			this.field_143013_d = StructureAbyStrongholdPieces.Stronghold.Door.valueOf(par1NBTTagCompound.getString("EntryDoor"));
+			field_143013_d = StructureAbyStrongholdPieces.Stronghold.Door.valueOf(par1NBTTagCompound.getString("EntryDoor"));
 		}
 
 		/**
@@ -1233,42 +1238,42 @@ public class StructureAbyStrongholdPieces
 			{
 			case 1:
 			default:
-				this.fillWithBlocks(par1World, par3StructureBoundingBox, par5, par6, par7, par5 + 3 - 1, par6 + 3 - 1, par7, Blocks.air, Blocks.air, false);
+				fillWithBlocks(par1World, par3StructureBoundingBox, par5, par6, par7, par5 + 3 - 1, par6 + 3 - 1, par7, Blocks.air, Blocks.air, false);
 				break;
 			case 2:
-				this.placeBlockAtCurrentPosition(par1World, AbyssalCraft.abybrick, 0, par5, par6, par7, par3StructureBoundingBox);
-				this.placeBlockAtCurrentPosition(par1World, AbyssalCraft.abybrick, 0, par5, par6 + 1, par7, par3StructureBoundingBox);
-				this.placeBlockAtCurrentPosition(par1World, AbyssalCraft.abybrick, 0, par5, par6 + 2, par7, par3StructureBoundingBox);
-				this.placeBlockAtCurrentPosition(par1World, AbyssalCraft.abybrick, 0, par5 + 1, par6 + 2, par7, par3StructureBoundingBox);
-				this.placeBlockAtCurrentPosition(par1World, AbyssalCraft.abybrick, 0, par5 + 2, par6 + 2, par7, par3StructureBoundingBox);
-				this.placeBlockAtCurrentPosition(par1World, AbyssalCraft.abybrick, 0, par5 + 2, par6 + 1, par7, par3StructureBoundingBox);
-				this.placeBlockAtCurrentPosition(par1World, AbyssalCraft.abybrick, 0, par5 + 2, par6, par7, par3StructureBoundingBox);
-				this.placeBlockAtCurrentPosition(par1World, Blocks.wooden_door, 0, par5 + 1, par6, par7, par3StructureBoundingBox);
-				this.placeBlockAtCurrentPosition(par1World, Blocks.wooden_door, 8, par5 + 1, par6 + 1, par7, par3StructureBoundingBox);
+				placeBlockAtCurrentPosition(par1World, AbyssalCraft.abybrick, 0, par5, par6, par7, par3StructureBoundingBox);
+				placeBlockAtCurrentPosition(par1World, AbyssalCraft.abybrick, 0, par5, par6 + 1, par7, par3StructureBoundingBox);
+				placeBlockAtCurrentPosition(par1World, AbyssalCraft.abybrick, 0, par5, par6 + 2, par7, par3StructureBoundingBox);
+				placeBlockAtCurrentPosition(par1World, AbyssalCraft.abybrick, 0, par5 + 1, par6 + 2, par7, par3StructureBoundingBox);
+				placeBlockAtCurrentPosition(par1World, AbyssalCraft.abybrick, 0, par5 + 2, par6 + 2, par7, par3StructureBoundingBox);
+				placeBlockAtCurrentPosition(par1World, AbyssalCraft.abybrick, 0, par5 + 2, par6 + 1, par7, par3StructureBoundingBox);
+				placeBlockAtCurrentPosition(par1World, AbyssalCraft.abybrick, 0, par5 + 2, par6, par7, par3StructureBoundingBox);
+				placeBlockAtCurrentPosition(par1World, Blocks.wooden_door, 0, par5 + 1, par6, par7, par3StructureBoundingBox);
+				placeBlockAtCurrentPosition(par1World, Blocks.wooden_door, 8, par5 + 1, par6 + 1, par7, par3StructureBoundingBox);
 				break;
 			case 3:
-				this.placeBlockAtCurrentPosition(par1World, Blocks.air, 0, par5 + 1, par6, par7, par3StructureBoundingBox);
-				this.placeBlockAtCurrentPosition(par1World, Blocks.air, 0, par5 + 1, par6 + 1, par7, par3StructureBoundingBox);
-				this.placeBlockAtCurrentPosition(par1World, AbyssalCraft.abyfence, 0, par5, par6, par7, par3StructureBoundingBox);
-				this.placeBlockAtCurrentPosition(par1World, AbyssalCraft.abyfence, 0, par5, par6 + 1, par7, par3StructureBoundingBox);
-				this.placeBlockAtCurrentPosition(par1World, AbyssalCraft.abyfence, 0, par5, par6 + 2, par7, par3StructureBoundingBox);
-				this.placeBlockAtCurrentPosition(par1World, AbyssalCraft.abyfence, 0, par5 + 1, par6 + 2, par7, par3StructureBoundingBox);
-				this.placeBlockAtCurrentPosition(par1World, AbyssalCraft.abyfence, 0, par5 + 2, par6 + 2, par7, par3StructureBoundingBox);
-				this.placeBlockAtCurrentPosition(par1World, AbyssalCraft.abyfence, 0, par5 + 2, par6 + 1, par7, par3StructureBoundingBox);
-				this.placeBlockAtCurrentPosition(par1World, AbyssalCraft.abyfence, 0, par5 + 2, par6, par7, par3StructureBoundingBox);
+				placeBlockAtCurrentPosition(par1World, Blocks.air, 0, par5 + 1, par6, par7, par3StructureBoundingBox);
+				placeBlockAtCurrentPosition(par1World, Blocks.air, 0, par5 + 1, par6 + 1, par7, par3StructureBoundingBox);
+				placeBlockAtCurrentPosition(par1World, AbyssalCraft.abyfence, 0, par5, par6, par7, par3StructureBoundingBox);
+				placeBlockAtCurrentPosition(par1World, AbyssalCraft.abyfence, 0, par5, par6 + 1, par7, par3StructureBoundingBox);
+				placeBlockAtCurrentPosition(par1World, AbyssalCraft.abyfence, 0, par5, par6 + 2, par7, par3StructureBoundingBox);
+				placeBlockAtCurrentPosition(par1World, AbyssalCraft.abyfence, 0, par5 + 1, par6 + 2, par7, par3StructureBoundingBox);
+				placeBlockAtCurrentPosition(par1World, AbyssalCraft.abyfence, 0, par5 + 2, par6 + 2, par7, par3StructureBoundingBox);
+				placeBlockAtCurrentPosition(par1World, AbyssalCraft.abyfence, 0, par5 + 2, par6 + 1, par7, par3StructureBoundingBox);
+				placeBlockAtCurrentPosition(par1World, AbyssalCraft.abyfence, 0, par5 + 2, par6, par7, par3StructureBoundingBox);
 				break;
 			case 4:
-				this.placeBlockAtCurrentPosition(par1World, AbyssalCraft.abybrick, 0, par5, par6, par7, par3StructureBoundingBox);
-				this.placeBlockAtCurrentPosition(par1World, AbyssalCraft.abybrick, 0, par5, par6 + 1, par7, par3StructureBoundingBox);
-				this.placeBlockAtCurrentPosition(par1World, AbyssalCraft.abybrick, 0, par5, par6 + 2, par7, par3StructureBoundingBox);
-				this.placeBlockAtCurrentPosition(par1World, AbyssalCraft.abybrick, 0, par5 + 1, par6 + 2, par7, par3StructureBoundingBox);
-				this.placeBlockAtCurrentPosition(par1World, AbyssalCraft.abybrick, 0, par5 + 2, par6 + 2, par7, par3StructureBoundingBox);
-				this.placeBlockAtCurrentPosition(par1World, AbyssalCraft.abybrick, 0, par5 + 2, par6 + 1, par7, par3StructureBoundingBox);
-				this.placeBlockAtCurrentPosition(par1World, AbyssalCraft.abybrick, 0, par5 + 2, par6, par7, par3StructureBoundingBox);
-				this.placeBlockAtCurrentPosition(par1World, Blocks.iron_door, 0, par5 + 1, par6, par7, par3StructureBoundingBox);
-				this.placeBlockAtCurrentPosition(par1World, Blocks.iron_door, 8, par5 + 1, par6 + 1, par7, par3StructureBoundingBox);
-				this.placeBlockAtCurrentPosition(par1World, AbyssalCraft.Abybutton, this.getMetadataWithOffset(AbyssalCraft.Abybutton, 4), par5 + 2, par6 + 1, par7 + 1, par3StructureBoundingBox);
-				this.placeBlockAtCurrentPosition(par1World, AbyssalCraft.Abybutton, this.getMetadataWithOffset(AbyssalCraft.Abybutton, 3), par5 + 2, par6 + 1, par7 - 1, par3StructureBoundingBox);
+				placeBlockAtCurrentPosition(par1World, AbyssalCraft.abybrick, 0, par5, par6, par7, par3StructureBoundingBox);
+				placeBlockAtCurrentPosition(par1World, AbyssalCraft.abybrick, 0, par5, par6 + 1, par7, par3StructureBoundingBox);
+				placeBlockAtCurrentPosition(par1World, AbyssalCraft.abybrick, 0, par5, par6 + 2, par7, par3StructureBoundingBox);
+				placeBlockAtCurrentPosition(par1World, AbyssalCraft.abybrick, 0, par5 + 1, par6 + 2, par7, par3StructureBoundingBox);
+				placeBlockAtCurrentPosition(par1World, AbyssalCraft.abybrick, 0, par5 + 2, par6 + 2, par7, par3StructureBoundingBox);
+				placeBlockAtCurrentPosition(par1World, AbyssalCraft.abybrick, 0, par5 + 2, par6 + 1, par7, par3StructureBoundingBox);
+				placeBlockAtCurrentPosition(par1World, AbyssalCraft.abybrick, 0, par5 + 2, par6, par7, par3StructureBoundingBox);
+				placeBlockAtCurrentPosition(par1World, Blocks.iron_door, 0, par5 + 1, par6, par7, par3StructureBoundingBox);
+				placeBlockAtCurrentPosition(par1World, Blocks.iron_door, 8, par5 + 1, par6 + 1, par7, par3StructureBoundingBox);
+				placeBlockAtCurrentPosition(par1World, AbyssalCraft.Abybutton, getMetadataWithOffset(AbyssalCraft.Abybutton, 4), par5 + 2, par6 + 1, par7 + 1, par3StructureBoundingBox);
+				placeBlockAtCurrentPosition(par1World, AbyssalCraft.Abybutton, getMetadataWithOffset(AbyssalCraft.Abybutton, 3), par5 + 2, par6 + 1, par7 - 1, par3StructureBoundingBox);
 			}
 
 		}
@@ -1297,16 +1302,16 @@ public class StructureAbyStrongholdPieces
 		 */
 		protected StructureComponent getNextComponentNormal(StructureAbyStrongholdPieces.Stairs2 par1ComponentStrongholdStairs2, List<Stronghold> par2List, Random par3Random, int par4, int par5)
 		{
-			switch (this.coordBaseMode)
+			switch (coordBaseMode)
 			{
 			case 0:
-				return StructureAbyStrongholdPieces.getNextValidComponent(par1ComponentStrongholdStairs2, par2List, par3Random, this.boundingBox.minX + par4, this.boundingBox.minY + par5, this.boundingBox.maxZ + 1, this.coordBaseMode, this.getComponentType());
+				return StructureAbyStrongholdPieces.getNextValidComponent(par1ComponentStrongholdStairs2, par2List, par3Random, boundingBox.minX + par4, boundingBox.minY + par5, boundingBox.maxZ + 1, coordBaseMode, getComponentType());
 			case 1:
-				return StructureAbyStrongholdPieces.getNextValidComponent(par1ComponentStrongholdStairs2, par2List, par3Random, this.boundingBox.minX - 1, this.boundingBox.minY + par5, this.boundingBox.minZ + par4, this.coordBaseMode, this.getComponentType());
+				return StructureAbyStrongholdPieces.getNextValidComponent(par1ComponentStrongholdStairs2, par2List, par3Random, boundingBox.minX - 1, boundingBox.minY + par5, boundingBox.minZ + par4, coordBaseMode, getComponentType());
 			case 2:
-				return StructureAbyStrongholdPieces.getNextValidComponent(par1ComponentStrongholdStairs2, par2List, par3Random, this.boundingBox.minX + par4, this.boundingBox.minY + par5, this.boundingBox.minZ - 1, this.coordBaseMode, this.getComponentType());
+				return StructureAbyStrongholdPieces.getNextValidComponent(par1ComponentStrongholdStairs2, par2List, par3Random, boundingBox.minX + par4, boundingBox.minY + par5, boundingBox.minZ - 1, coordBaseMode, getComponentType());
 			case 3:
-				return StructureAbyStrongholdPieces.getNextValidComponent(par1ComponentStrongholdStairs2, par2List, par3Random, this.boundingBox.maxX + 1, this.boundingBox.minY + par5, this.boundingBox.minZ + par4, this.coordBaseMode, this.getComponentType());
+				return StructureAbyStrongholdPieces.getNextValidComponent(par1ComponentStrongholdStairs2, par2List, par3Random, boundingBox.maxX + 1, boundingBox.minY + par5, boundingBox.minZ + par4, coordBaseMode, getComponentType());
 			default:
 				return null;
 			}
@@ -1317,16 +1322,16 @@ public class StructureAbyStrongholdPieces
 		 */
 		protected StructureComponent getNextComponentX(StructureAbyStrongholdPieces.Stairs2 par1ComponentStrongholdStairs2, List<Stronghold> par2List, Random par3Random, int par4, int par5)
 		{
-			switch (this.coordBaseMode)
+			switch (coordBaseMode)
 			{
 			case 0:
-				return StructureAbyStrongholdPieces.getNextValidComponent(par1ComponentStrongholdStairs2, par2List, par3Random, this.boundingBox.minX - 1, this.boundingBox.minY + par4, this.boundingBox.minZ + par5, 1, this.getComponentType());
+				return StructureAbyStrongholdPieces.getNextValidComponent(par1ComponentStrongholdStairs2, par2List, par3Random, boundingBox.minX - 1, boundingBox.minY + par4, boundingBox.minZ + par5, 1, getComponentType());
 			case 1:
-				return StructureAbyStrongholdPieces.getNextValidComponent(par1ComponentStrongholdStairs2, par2List, par3Random, this.boundingBox.minX + par5, this.boundingBox.minY + par4, this.boundingBox.minZ - 1, 2, this.getComponentType());
+				return StructureAbyStrongholdPieces.getNextValidComponent(par1ComponentStrongholdStairs2, par2List, par3Random, boundingBox.minX + par5, boundingBox.minY + par4, boundingBox.minZ - 1, 2, getComponentType());
 			case 2:
-				return StructureAbyStrongholdPieces.getNextValidComponent(par1ComponentStrongholdStairs2, par2List, par3Random, this.boundingBox.minX - 1, this.boundingBox.minY + par4, this.boundingBox.minZ + par5, 1, this.getComponentType());
+				return StructureAbyStrongholdPieces.getNextValidComponent(par1ComponentStrongholdStairs2, par2List, par3Random, boundingBox.minX - 1, boundingBox.minY + par4, boundingBox.minZ + par5, 1, getComponentType());
 			case 3:
-				return StructureAbyStrongholdPieces.getNextValidComponent(par1ComponentStrongholdStairs2, par2List, par3Random, this.boundingBox.minX + par5, this.boundingBox.minY + par4, this.boundingBox.minZ - 1, 2, this.getComponentType());
+				return StructureAbyStrongholdPieces.getNextValidComponent(par1ComponentStrongholdStairs2, par2List, par3Random, boundingBox.minX + par5, boundingBox.minY + par4, boundingBox.minZ - 1, 2, getComponentType());
 			default:
 				return null;
 			}
@@ -1337,16 +1342,16 @@ public class StructureAbyStrongholdPieces
 		 */
 		protected StructureComponent getNextComponentZ(StructureAbyStrongholdPieces.Stairs2 par1ComponentStrongholdStairs2, List<Stronghold> par2List, Random par3Random, int par4, int par5)
 		{
-			switch (this.coordBaseMode)
+			switch (coordBaseMode)
 			{
 			case 0:
-				return StructureAbyStrongholdPieces.getNextValidComponent(par1ComponentStrongholdStairs2, par2List, par3Random, this.boundingBox.maxX + 1, this.boundingBox.minY + par4, this.boundingBox.minZ + par5, 3, this.getComponentType());
+				return StructureAbyStrongholdPieces.getNextValidComponent(par1ComponentStrongholdStairs2, par2List, par3Random, boundingBox.maxX + 1, boundingBox.minY + par4, boundingBox.minZ + par5, 3, getComponentType());
 			case 1:
-				return StructureAbyStrongholdPieces.getNextValidComponent(par1ComponentStrongholdStairs2, par2List, par3Random, this.boundingBox.minX + par5, this.boundingBox.minY + par4, this.boundingBox.maxZ + 1, 0, this.getComponentType());
+				return StructureAbyStrongholdPieces.getNextValidComponent(par1ComponentStrongholdStairs2, par2List, par3Random, boundingBox.minX + par5, boundingBox.minY + par4, boundingBox.maxZ + 1, 0, getComponentType());
 			case 2:
-				return StructureAbyStrongholdPieces.getNextValidComponent(par1ComponentStrongholdStairs2, par2List, par3Random, this.boundingBox.maxX + 1, this.boundingBox.minY + par4, this.boundingBox.minZ + par5, 3, this.getComponentType());
+				return StructureAbyStrongholdPieces.getNextValidComponent(par1ComponentStrongholdStairs2, par2List, par3Random, boundingBox.maxX + 1, boundingBox.minY + par4, boundingBox.minZ + par5, 3, getComponentType());
 			case 3:
-				return StructureAbyStrongholdPieces.getNextValidComponent(par1ComponentStrongholdStairs2, par2List, par3Random, this.boundingBox.minX + par5, this.boundingBox.minY + par4, this.boundingBox.maxZ + 1, 0, this.getComponentType());
+				return StructureAbyStrongholdPieces.getNextValidComponent(par1ComponentStrongholdStairs2, par2List, par3Random, boundingBox.minX + par5, boundingBox.minY + par4, boundingBox.maxZ + 1, 0, getComponentType());
 			default:
 				return null;
 			}
@@ -1380,68 +1385,71 @@ public class StructureAbyStrongholdPieces
 		public Crossing(int par1, Random par2Random, StructureBoundingBox par3StructureBoundingBox, int par4)
 		{
 			super(par1);
-			this.coordBaseMode = par4;
-			this.field_143013_d = this.getRandomDoor(par2Random);
-			this.boundingBox = par3StructureBoundingBox;
-			this.field_74996_b = par2Random.nextBoolean();
-			this.field_74997_c = par2Random.nextBoolean();
-			this.field_74995_d = par2Random.nextBoolean();
-			this.field_74999_h = par2Random.nextInt(3) > 0;
+			coordBaseMode = par4;
+			field_143013_d = getRandomDoor(par2Random);
+			boundingBox = par3StructureBoundingBox;
+			field_74996_b = par2Random.nextBoolean();
+			field_74997_c = par2Random.nextBoolean();
+			field_74995_d = par2Random.nextBoolean();
+			field_74999_h = par2Random.nextInt(3) > 0;
 		}
 
+		@Override
 		protected void func_143012_a(NBTTagCompound par1NBTTagCompound)
 		{
 			super.func_143012_a(par1NBTTagCompound);
-			par1NBTTagCompound.setBoolean("leftLow", this.field_74996_b);
-			par1NBTTagCompound.setBoolean("leftHigh", this.field_74997_c);
-			par1NBTTagCompound.setBoolean("rightLow", this.field_74995_d);
-			par1NBTTagCompound.setBoolean("rightHigh", this.field_74999_h);
+			par1NBTTagCompound.setBoolean("leftLow", field_74996_b);
+			par1NBTTagCompound.setBoolean("leftHigh", field_74997_c);
+			par1NBTTagCompound.setBoolean("rightLow", field_74995_d);
+			par1NBTTagCompound.setBoolean("rightHigh", field_74999_h);
 		}
 
+		@Override
 		protected void func_143011_b(NBTTagCompound par1NBTTagCompound)
 		{
 			super.func_143011_b(par1NBTTagCompound);
-			this.field_74996_b = par1NBTTagCompound.getBoolean("leftLow");
-			this.field_74997_c = par1NBTTagCompound.getBoolean("leftHigh");
-			this.field_74995_d = par1NBTTagCompound.getBoolean("rightLow");
-			this.field_74999_h = par1NBTTagCompound.getBoolean("rightHigh");
+			field_74996_b = par1NBTTagCompound.getBoolean("leftLow");
+			field_74997_c = par1NBTTagCompound.getBoolean("leftHigh");
+			field_74995_d = par1NBTTagCompound.getBoolean("rightLow");
+			field_74999_h = par1NBTTagCompound.getBoolean("rightHigh");
 		}
 
 		/**
 		 * Initiates construction of the Structure Component picked, at the current Location of StructGen
 		 */
+		@Override
 		@SuppressWarnings({ "rawtypes", "unchecked" })
 		public void buildComponent(StructureComponent par1StructureComponent, List par2List, Random par3Random)
 		{
 			int i = 3;
 			int j = 5;
 
-			if (this.coordBaseMode == 1 || this.coordBaseMode == 2)
+			if (coordBaseMode == 1 || coordBaseMode == 2)
 			{
 				i = 8 - i;
 				j = 8 - j;
 			}
 
-			this.getNextComponentNormal((StructureAbyStrongholdPieces.Stairs2)par1StructureComponent, par2List, par3Random, 5, 1);
+			getNextComponentNormal((StructureAbyStrongholdPieces.Stairs2)par1StructureComponent, par2List, par3Random, 5, 1);
 
-			if (this.field_74996_b)
+			if (field_74996_b)
 			{
-				this.getNextComponentX((StructureAbyStrongholdPieces.Stairs2)par1StructureComponent, par2List, par3Random, i, 1);
+				getNextComponentX((StructureAbyStrongholdPieces.Stairs2)par1StructureComponent, par2List, par3Random, i, 1);
 			}
 
-			if (this.field_74997_c)
+			if (field_74997_c)
 			{
-				this.getNextComponentX((StructureAbyStrongholdPieces.Stairs2)par1StructureComponent, par2List, par3Random, j, 7);
+				getNextComponentX((StructureAbyStrongholdPieces.Stairs2)par1StructureComponent, par2List, par3Random, j, 7);
 			}
 
-			if (this.field_74995_d)
+			if (field_74995_d)
 			{
-				this.getNextComponentZ((StructureAbyStrongholdPieces.Stairs2)par1StructureComponent, par2List, par3Random, i, 1);
+				getNextComponentZ((StructureAbyStrongholdPieces.Stairs2)par1StructureComponent, par2List, par3Random, i, 1);
 			}
 
-			if (this.field_74999_h)
+			if (field_74999_h)
 			{
-				this.getNextComponentZ((StructureAbyStrongholdPieces.Stairs2)par1StructureComponent, par2List, par3Random, j, 7);
+				getNextComponentZ((StructureAbyStrongholdPieces.Stairs2)par1StructureComponent, par2List, par3Random, j, 7);
 			}
 		}
 
@@ -1458,52 +1466,51 @@ public class StructureAbyStrongholdPieces
 		 * second Part of Structure generating, this for example places Spiderwebs, Mob Spawners, it closes
 		 * Mineshafts at the end, it adds Fences...
 		 */
+		@Override
 		public boolean addComponentParts(World par1World, Random par2Random, StructureBoundingBox par3StructureBoundingBox)
 		{
-			if (this.isLiquidInStructureBoundingBox(par1World, par3StructureBoundingBox))
-			{
+			if (isLiquidInStructureBoundingBox(par1World, par3StructureBoundingBox))
 				return false;
-			}
 			else
 			{
-				this.fillWithRandomizedBlocks(par1World, par3StructureBoundingBox, 0, 0, 0, 9, 8, 10, true, par2Random, StructureAbyStrongholdPieces.strongholdStones);
-				this.placeDoor(par1World, par2Random, par3StructureBoundingBox, this.field_143013_d, 4, 3, 0);
+				fillWithRandomizedBlocks(par1World, par3StructureBoundingBox, 0, 0, 0, 9, 8, 10, true, par2Random, StructureAbyStrongholdPieces.strongholdStones);
+				placeDoor(par1World, par2Random, par3StructureBoundingBox, field_143013_d, 4, 3, 0);
 
-				if (this.field_74996_b)
+				if (field_74996_b)
 				{
-					this.fillWithBlocks(par1World, par3StructureBoundingBox, 0, 3, 1, 0, 5, 3, Blocks.air, Blocks.air, false);
+					fillWithBlocks(par1World, par3StructureBoundingBox, 0, 3, 1, 0, 5, 3, Blocks.air, Blocks.air, false);
 				}
 
-				if (this.field_74995_d)
+				if (field_74995_d)
 				{
-					this.fillWithBlocks(par1World, par3StructureBoundingBox, 9, 3, 1, 9, 5, 3, Blocks.air, Blocks.air, false);
+					fillWithBlocks(par1World, par3StructureBoundingBox, 9, 3, 1, 9, 5, 3, Blocks.air, Blocks.air, false);
 				}
 
-				if (this.field_74997_c)
+				if (field_74997_c)
 				{
-					this.fillWithBlocks(par1World, par3StructureBoundingBox, 0, 5, 7, 0, 7, 9, Blocks.air, Blocks.air, false);
+					fillWithBlocks(par1World, par3StructureBoundingBox, 0, 5, 7, 0, 7, 9, Blocks.air, Blocks.air, false);
 				}
 
-				if (this.field_74999_h)
+				if (field_74999_h)
 				{
-					this.fillWithBlocks(par1World, par3StructureBoundingBox, 9, 5, 7, 9, 7, 9, Blocks.air, Blocks.air, false);
+					fillWithBlocks(par1World, par3StructureBoundingBox, 9, 5, 7, 9, 7, 9, Blocks.air, Blocks.air, false);
 				}
 
-				this.fillWithBlocks(par1World, par3StructureBoundingBox, 5, 1, 10, 7, 3, 10, Blocks.air, Blocks.air, false);
-				this.fillWithRandomizedBlocks(par1World, par3StructureBoundingBox, 1, 2, 1, 8, 2, 6, false, par2Random, StructureAbyStrongholdPieces.strongholdStones);
-				this.fillWithRandomizedBlocks(par1World, par3StructureBoundingBox, 4, 1, 5, 4, 4, 9, false, par2Random, StructureAbyStrongholdPieces.strongholdStones);
-				this.fillWithRandomizedBlocks(par1World, par3StructureBoundingBox, 8, 1, 5, 8, 4, 9, false, par2Random, StructureAbyStrongholdPieces.strongholdStones);
-				this.fillWithRandomizedBlocks(par1World, par3StructureBoundingBox, 1, 4, 7, 3, 4, 9, false, par2Random, StructureAbyStrongholdPieces.strongholdStones);
-				this.fillWithRandomizedBlocks(par1World, par3StructureBoundingBox, 1, 3, 5, 3, 3, 6, false, par2Random, StructureAbyStrongholdPieces.strongholdStones);
-				this.fillWithBlocks(par1World, par3StructureBoundingBox, 1, 3, 4, 3, 3, 4, AbyssalCraft.abyslab1, AbyssalCraft.abyslab1, false);
-				this.fillWithBlocks(par1World, par3StructureBoundingBox, 1, 4, 6, 3, 4, 6, AbyssalCraft.abyslab1, AbyssalCraft.abyslab1, false);
-				this.fillWithRandomizedBlocks(par1World, par3StructureBoundingBox, 5, 1, 7, 7, 1, 8, false, par2Random, StructureAbyStrongholdPieces.strongholdStones);
-				this.fillWithBlocks(par1World, par3StructureBoundingBox, 5, 1, 9, 7, 1, 9, AbyssalCraft.abyslab1, AbyssalCraft.abyslab1, false);
-				this.fillWithBlocks(par1World, par3StructureBoundingBox, 5, 2, 7, 7, 2, 7, AbyssalCraft.abyslab1, AbyssalCraft.abyslab1, false);
-				this.fillWithBlocks(par1World, par3StructureBoundingBox, 4, 5, 7, 4, 5, 9, AbyssalCraft.abyslab1, AbyssalCraft.abyslab1, false);
-				this.fillWithBlocks(par1World, par3StructureBoundingBox, 8, 5, 7, 8, 5, 9, AbyssalCraft.abyslab1, AbyssalCraft.abyslab1, false);
-				this.fillWithBlocks(par1World, par3StructureBoundingBox, 5, 5, 7, 7, 5, 9, AbyssalCraft.abyslab2, AbyssalCraft.abyslab2, false);
-				this.placeBlockAtCurrentPosition(par1World, Blocks.torch, 0, 6, 5, 6, par3StructureBoundingBox);
+				fillWithBlocks(par1World, par3StructureBoundingBox, 5, 1, 10, 7, 3, 10, Blocks.air, Blocks.air, false);
+				fillWithRandomizedBlocks(par1World, par3StructureBoundingBox, 1, 2, 1, 8, 2, 6, false, par2Random, StructureAbyStrongholdPieces.strongholdStones);
+				fillWithRandomizedBlocks(par1World, par3StructureBoundingBox, 4, 1, 5, 4, 4, 9, false, par2Random, StructureAbyStrongholdPieces.strongholdStones);
+				fillWithRandomizedBlocks(par1World, par3StructureBoundingBox, 8, 1, 5, 8, 4, 9, false, par2Random, StructureAbyStrongholdPieces.strongholdStones);
+				fillWithRandomizedBlocks(par1World, par3StructureBoundingBox, 1, 4, 7, 3, 4, 9, false, par2Random, StructureAbyStrongholdPieces.strongholdStones);
+				fillWithRandomizedBlocks(par1World, par3StructureBoundingBox, 1, 3, 5, 3, 3, 6, false, par2Random, StructureAbyStrongholdPieces.strongholdStones);
+				fillWithBlocks(par1World, par3StructureBoundingBox, 1, 3, 4, 3, 3, 4, AbyssalCraft.abyslab1, AbyssalCraft.abyslab1, false);
+				fillWithBlocks(par1World, par3StructureBoundingBox, 1, 4, 6, 3, 4, 6, AbyssalCraft.abyslab1, AbyssalCraft.abyslab1, false);
+				fillWithRandomizedBlocks(par1World, par3StructureBoundingBox, 5, 1, 7, 7, 1, 8, false, par2Random, StructureAbyStrongholdPieces.strongholdStones);
+				fillWithBlocks(par1World, par3StructureBoundingBox, 5, 1, 9, 7, 1, 9, AbyssalCraft.abyslab1, AbyssalCraft.abyslab1, false);
+				fillWithBlocks(par1World, par3StructureBoundingBox, 5, 2, 7, 7, 2, 7, AbyssalCraft.abyslab1, AbyssalCraft.abyslab1, false);
+				fillWithBlocks(par1World, par3StructureBoundingBox, 4, 5, 7, 4, 5, 9, AbyssalCraft.abyslab1, AbyssalCraft.abyslab1, false);
+				fillWithBlocks(par1World, par3StructureBoundingBox, 8, 5, 7, 8, 5, 9, AbyssalCraft.abyslab1, AbyssalCraft.abyslab1, false);
+				fillWithBlocks(par1World, par3StructureBoundingBox, 5, 5, 7, 7, 5, 9, AbyssalCraft.abyslab2, AbyssalCraft.abyslab2, false);
+				placeBlockAtCurrentPosition(par1World, Blocks.torch, 0, 6, 5, 6, par3StructureBoundingBox);
 				return true;
 			}
 		}
@@ -1517,21 +1524,23 @@ public class StructureAbyStrongholdPieces
 		public Corridor(int par1, Random par2Random, StructureBoundingBox par3StructureBoundingBox, int par4)
 		{
 			super(par1);
-			this.coordBaseMode = par4;
-			this.boundingBox = par3StructureBoundingBox;
-			this.field_74993_a = par4 != 2 && par4 != 0 ? par3StructureBoundingBox.getXSize() : par3StructureBoundingBox.getZSize();
+			coordBaseMode = par4;
+			boundingBox = par3StructureBoundingBox;
+			field_74993_a = par4 != 2 && par4 != 0 ? par3StructureBoundingBox.getXSize() : par3StructureBoundingBox.getZSize();
 		}
 
+		@Override
 		protected void func_143012_a(NBTTagCompound par1NBTTagCompound)
 		{
 			super.func_143012_a(par1NBTTagCompound);
-			par1NBTTagCompound.setInteger("Steps", this.field_74993_a);
+			par1NBTTagCompound.setInteger("Steps", field_74993_a);
 		}
 
+		@Override
 		protected void func_143011_b(NBTTagCompound par1NBTTagCompound)
 		{
 			super.func_143011_b(par1NBTTagCompound);
-			this.field_74993_a = par1NBTTagCompound.getInteger("Steps");
+			field_74993_a = par1NBTTagCompound.getInteger("Steps");
 		}
 
 		public static StructureBoundingBox func_74992_a(List<Stronghold> par0List, Random par1Random, int par2, int par3, int par4, int par5)
@@ -1540,9 +1549,7 @@ public class StructureAbyStrongholdPieces
 			StructureComponent structurecomponent = StructureComponent.findIntersecting(par0List, structureboundingbox);
 
 			if (structurecomponent == null)
-			{
 				return null;
-			}
 			else
 			{
 				if (structurecomponent.getBoundingBox().minY == structureboundingbox.minY)
@@ -1552,9 +1559,7 @@ public class StructureAbyStrongholdPieces
 						structureboundingbox = StructureBoundingBox.getComponentToAddBoundingBox(par2, par3, par4, -1, -1, 0, 5, 5, i1 - 1, par5);
 
 						if (!structurecomponent.getBoundingBox().intersectsWith(structureboundingbox))
-						{
 							return StructureBoundingBox.getComponentToAddBoundingBox(par2, par3, par4, -1, -1, 0, 5, 5, i1, par5);
-						}
 					}
 				}
 
@@ -1566,36 +1571,35 @@ public class StructureAbyStrongholdPieces
 		 * second Part of Structure generating, this for example places Spiderwebs, Mob Spawners, it closes
 		 * Mineshafts at the end, it adds Fences...
 		 */
+		@Override
 		public boolean addComponentParts(World par1World, Random par2Random, StructureBoundingBox par3StructureBoundingBox)
 		{
-			if (this.isLiquidInStructureBoundingBox(par1World, par3StructureBoundingBox))
-			{
+			if (isLiquidInStructureBoundingBox(par1World, par3StructureBoundingBox))
 				return false;
-			}
 			else
 			{
-				for (int i = 0; i < this.field_74993_a; ++i)
+				for (int i = 0; i < field_74993_a; ++i)
 				{
-					this.placeBlockAtCurrentPosition(par1World, AbyssalCraft.abybrick, 0, 0, 0, i, par3StructureBoundingBox);
-					this.placeBlockAtCurrentPosition(par1World, AbyssalCraft.abybrick, 0, 1, 0, i, par3StructureBoundingBox);
-					this.placeBlockAtCurrentPosition(par1World, AbyssalCraft.abybrick, 0, 2, 0, i, par3StructureBoundingBox);
-					this.placeBlockAtCurrentPosition(par1World, AbyssalCraft.abybrick, 0, 3, 0, i, par3StructureBoundingBox);
-					this.placeBlockAtCurrentPosition(par1World, AbyssalCraft.abybrick, 0, 4, 0, i, par3StructureBoundingBox);
+					placeBlockAtCurrentPosition(par1World, AbyssalCraft.abybrick, 0, 0, 0, i, par3StructureBoundingBox);
+					placeBlockAtCurrentPosition(par1World, AbyssalCraft.abybrick, 0, 1, 0, i, par3StructureBoundingBox);
+					placeBlockAtCurrentPosition(par1World, AbyssalCraft.abybrick, 0, 2, 0, i, par3StructureBoundingBox);
+					placeBlockAtCurrentPosition(par1World, AbyssalCraft.abybrick, 0, 3, 0, i, par3StructureBoundingBox);
+					placeBlockAtCurrentPosition(par1World, AbyssalCraft.abybrick, 0, 4, 0, i, par3StructureBoundingBox);
 
 					for (int j = 1; j <= 3; ++j)
 					{
-						this.placeBlockAtCurrentPosition(par1World, AbyssalCraft.abybrick, 0, 0, j, i, par3StructureBoundingBox);
-						this.placeBlockAtCurrentPosition(par1World, Blocks.air, 0, 1, j, i, par3StructureBoundingBox);
-						this.placeBlockAtCurrentPosition(par1World, Blocks.air, 0, 2, j, i, par3StructureBoundingBox);
-						this.placeBlockAtCurrentPosition(par1World, Blocks.air, 0, 3, j, i, par3StructureBoundingBox);
-						this.placeBlockAtCurrentPosition(par1World, AbyssalCraft.abybrick, 0, 4, j, i, par3StructureBoundingBox);
+						placeBlockAtCurrentPosition(par1World, AbyssalCraft.abybrick, 0, 0, j, i, par3StructureBoundingBox);
+						placeBlockAtCurrentPosition(par1World, Blocks.air, 0, 1, j, i, par3StructureBoundingBox);
+						placeBlockAtCurrentPosition(par1World, Blocks.air, 0, 2, j, i, par3StructureBoundingBox);
+						placeBlockAtCurrentPosition(par1World, Blocks.air, 0, 3, j, i, par3StructureBoundingBox);
+						placeBlockAtCurrentPosition(par1World, AbyssalCraft.abybrick, 0, 4, j, i, par3StructureBoundingBox);
 					}
 
-					this.placeBlockAtCurrentPosition(par1World, AbyssalCraft.abybrick, 0, 0, 4, i, par3StructureBoundingBox);
-					this.placeBlockAtCurrentPosition(par1World, AbyssalCraft.abybrick, 0, 1, 4, i, par3StructureBoundingBox);
-					this.placeBlockAtCurrentPosition(par1World, AbyssalCraft.abybrick, 0, 2, 4, i, par3StructureBoundingBox);
-					this.placeBlockAtCurrentPosition(par1World, AbyssalCraft.abybrick, 0, 3, 4, i, par3StructureBoundingBox);
-					this.placeBlockAtCurrentPosition(par1World, AbyssalCraft.abybrick, 0, 4, 4, i, par3StructureBoundingBox);
+					placeBlockAtCurrentPosition(par1World, AbyssalCraft.abybrick, 0, 0, 4, i, par3StructureBoundingBox);
+					placeBlockAtCurrentPosition(par1World, AbyssalCraft.abybrick, 0, 1, 4, i, par3StructureBoundingBox);
+					placeBlockAtCurrentPosition(par1World, AbyssalCraft.abybrick, 0, 2, 4, i, par3StructureBoundingBox);
+					placeBlockAtCurrentPosition(par1World, AbyssalCraft.abybrick, 0, 3, 4, i, par3StructureBoundingBox);
+					placeBlockAtCurrentPosition(par1World, AbyssalCraft.abybrick, 0, 4, 4, i, par3StructureBoundingBox);
 				}
 
 				return true;
@@ -1661,19 +1665,19 @@ public class StructureAbyStrongholdPieces
 		public int instancesLimit;
 		public PieceWeight(Class<?> par1Class, int par2, int par3)
 		{
-			this.pieceClass = par1Class;
-			this.pieceWeight = par2;
-			this.instancesLimit = par3;
+			pieceClass = par1Class;
+			pieceWeight = par2;
+			instancesLimit = par3;
 		}
 
 		public boolean canSpawnMoreStructuresOfType(int par1)
 		{
-			return this.instancesLimit == 0 || this.instancesSpawned < this.instancesLimit;
+			return instancesLimit == 0 || instancesSpawned < instancesLimit;
 		}
 
 		public boolean canSpawnMoreStructures()
 		{
-			return this.instancesLimit == 0 || this.instancesSpawned < this.instancesLimit;
+			return instancesLimit == 0 || instancesSpawned < instancesLimit;
 		}
 	}
 }

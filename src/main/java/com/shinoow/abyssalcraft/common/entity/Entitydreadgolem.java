@@ -34,40 +34,43 @@ import com.shinoow.abyssalcraft.core.api.entity.DreadMob;
 public class Entitydreadgolem extends DreadMob
 {
 
-	public Entitydreadgolem(World par1World) 
+	public Entitydreadgolem(World par1World)
 	{
 		super(par1World);
-		this.tasks.addTask(0, new EntityAIAttackOnCollide(this, Entityabygolem.class, 0.35D, true));
-		this.tasks.addTask(1, new EntityAIMoveTowardsRestriction(this, 0.35D));
-		this.tasks.addTask(2, new EntityAIWander(this, 0.35D));
-		this.tasks.addTask(3, new EntityAILookIdle(this));
-		this.tasks.addTask(4, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
-		this.tasks.addTask(5, new EntityAIAttackOnCollide(this, EntityPlayer.class, 0.35D, true));
-		this.targetTasks.addTask(0, new EntityAIHurtByTarget(this, false));
-		this.targetTasks.addTask(1, new EntityAINearestAttackableTarget(this, Entityabygolem.class, 0, true));
-		this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityPlayer.class, 0, true));
+		tasks.addTask(0, new EntityAIAttackOnCollide(this, Entityabygolem.class, 0.35D, true));
+		tasks.addTask(1, new EntityAIMoveTowardsRestriction(this, 0.35D));
+		tasks.addTask(2, new EntityAIWander(this, 0.35D));
+		tasks.addTask(3, new EntityAILookIdle(this));
+		tasks.addTask(4, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
+		tasks.addTask(5, new EntityAIAttackOnCollide(this, EntityPlayer.class, 0.35D, true));
+		targetTasks.addTask(0, new EntityAIHurtByTarget(this, false));
+		targetTasks.addTask(1, new EntityAINearestAttackableTarget(this, Entityabygolem.class, 0, true));
+		targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityPlayer.class, 0, true));
 	}
 
+	@Override
 	protected void applyEntityAttributes()
 	{
 		super.applyEntityAttributes();
 		// Max Health - default 20.0D - min 0.0D - max Double.MAX_VALUE
-		this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(20.0D);
+		getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(20.0D);
 		// Follow Range - default 32.0D - min 0.0D - max 2048.0D
-		this.getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(32.0D);
+		getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(32.0D);
 		// Knockback Resistance - default 0.0D - min 0.0D - max 1.0D
-		this.getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setBaseValue(0.0D);
+		getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setBaseValue(0.0D);
 		// Movement Speed - default 0.699D - min 0.0D - max Double.MAX_VALUE
-		this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.699D);
+		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.699D);
 		// Attack Damage - default 2.0D - min 0.0D - max Doubt.MAX_VALUE
-		this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(4.0D);
+		getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(4.0D);
 	}
 
+	@Override
 	protected boolean isAIEnabled()
 	{
 		return true;
 	}
 
+	@Override
 	protected String getLivingSound()
 	{
 		return "mob.blaze.breathe";
@@ -76,6 +79,7 @@ public class Entitydreadgolem extends DreadMob
 	/**
 	 * Returns the sound this mob makes when it is hurt.
 	 */
+	@Override
 	protected String getHurtSound()
 	{
 		return "mob.blaze.hit";
@@ -84,6 +88,7 @@ public class Entitydreadgolem extends DreadMob
 	/**
 	 * Returns the sound this mob makes on death.
 	 */
+	@Override
 	protected String getDeathSound()
 	{
 		return "mob.blaze.death";
@@ -91,15 +96,17 @@ public class Entitydreadgolem extends DreadMob
 
 	protected void playStepSound(int par1, int par2, int par3, int par4)
 	{
-		this.worldObj.playSoundAtEntity(this, "mob.zombie.step", 0.15F, 1.0F);
+		worldObj.playSoundAtEntity(this, "mob.zombie.step", 0.15F, 1.0F);
 	}
 
+	@Override
 	protected Item getDropItem()
 	{
 		return AbyssalCraft.dreadchunk;
 
 	}
 
+	@Override
 	public EnumCreatureAttribute getCreatureAttribute()
 	{
 		return EnumCreatureAttribute.UNDEFINED;

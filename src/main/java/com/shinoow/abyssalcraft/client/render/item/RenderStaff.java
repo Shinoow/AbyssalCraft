@@ -25,20 +25,20 @@ import com.shinoow.abyssalcraft.client.model.item.ModelStaff;
 
 import cpw.mods.fml.client.FMLClientHandler;
 
-public class RenderStaff implements IItemRenderer 
+public class RenderStaff implements IItemRenderer
 {
 	protected ModelStaff model;
 
 	ResourceLocation resource = new ResourceLocation("/assets/abyssalcraft/textures/model/staff.png");
-	
+
 	public RenderStaff()
 	{
 		model = new ModelStaff();
 	}
-	
+
 	@Override
 	public boolean handleRenderType(ItemStack item, ItemRenderType type) {
-		
+
 		switch(type)
 		{
 		case EQUIPPED: return true;
@@ -54,23 +54,23 @@ public class RenderStaff implements IItemRenderer
 
 	@Override
 	public void renderItem(ItemRenderType type, ItemStack item, Object... data) {
-		
+
 		switch(type)
 		{
 		case EQUIPPED:
 		{
 			GL11.glPushMatrix();
-			
+
 			FMLClientHandler.instance().getClient().renderEngine.bindTexture(resource);
-			
+
 			model.render((Entity)data[1], 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0625F);
-			
+
 			GL11.glPopMatrix();
 		}
 		default:
 			break;
 		}
-		
+
 	}
-	
+
 }

@@ -28,13 +28,11 @@ public class CoraliumMob extends EntityMob {
 	 */
 	public CoraliumMob(World par1World) {
 		super(par1World);
-		this.experienceValue = 10;
+		experienceValue = 10;
 	}
 
 	@Override
-	public boolean canBreatheUnderwater() 
-	{
+	public boolean canBreatheUnderwater() {
 		return true;
-
 	}
 }

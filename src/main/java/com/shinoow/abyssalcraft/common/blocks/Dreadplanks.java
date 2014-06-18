@@ -24,7 +24,7 @@ public class Dreadplanks extends Block {
 
 	public Dreadplanks() {
 		super(Material.wood);
-		this.setCreativeTab(AbyssalCraft.tabBlock);
+		setCreativeTab(AbyssalCraft.tabBlock);
 	}
 
 }

@@ -22,10 +22,10 @@ import net.minecraft.tileentity.TileEntity;
 
 public class TileEntityPSDL extends TileEntity {
 
+	@Override
 	public Packet getDescriptionPacket() {
 		NBTTagCompound nbtTag = new NBTTagCompound();
-		this.writeToNBT(nbtTag);
-		return new S35PacketUpdateTileEntity(this.xCoord, this.yCoord, this.zCoord, 1, nbtTag);
+		writeToNBT(nbtTag);
+		return new S35PacketUpdateTileEntity(xCoord, yCoord, zCoord, 1, nbtTag);
 	}
-
 }

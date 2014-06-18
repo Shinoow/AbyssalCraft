@@ -43,13 +43,9 @@ public class ParticleEffects {
 			double var22 = 16.0D;
 
 			if (var15 * var15 + var17 * var17 + var19 * var19 > var22 * var22)
-			{
 				return null;
-			}
 			else if (var14 > 1)
-			{
 				return null;
-			}
 			else
 			{
 				if (particleName.equals("CorBlood"))
@@ -57,8 +53,8 @@ public class ParticleEffects {
 					var21 = new ACParticleFX(theWorld, par2, par4, par6, (float)par8, (float)par10, (float)par12);
 				}
 
-				mc.effectRenderer.addEffect((EntityFX)var21);
-				return (EntityFX)var21;
+				mc.effectRenderer.addEffect(var21);
+				return var21;
 			}
 		}
 		return null;

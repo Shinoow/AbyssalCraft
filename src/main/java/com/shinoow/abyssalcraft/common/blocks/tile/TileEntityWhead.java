@@ -19,42 +19,39 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 public class TileEntityWhead extends TileEntity {
 
-	private int rotation;
 	public int direction;
 
-	public void writeToNBT(NBTTagCompound par1NBTTagCompound)
+	@Override
+	public void readFromNBT(NBTTagCompound nbttagcompound)
 	{
-		super.writeToNBT(par1NBTTagCompound);
-		par1NBTTagCompound.setByte("Rot", (byte)(this.rotation & 255));
+		super.readFromNBT(nbttagcompound);  
+		direction = nbttagcompound.getInteger("Dir");
 	}
 
-	public void readFromNBT(NBTTagCompound par1NBTTagCompound)
+	@Override
+	public void writeToNBT(NBTTagCompound nbttagcompound)
 	{
-		super.readFromNBT(par1NBTTagCompound);
-		this.rotation = par1NBTTagCompound.getByte("Rot");
+		super.writeToNBT(nbttagcompound);
+		nbttagcompound.setInteger("Dir", direction);
 	}
 
-	public Packet getDescriptionPacket()
-	{
+	@Override
+	public Packet getDescriptionPacket() {
 		NBTTagCompound nbtTag = new NBTTagCompound();
-		this.writeToNBT(nbtTag);
-		return new S35PacketUpdateTileEntity(this.xCoord, this.yCoord, this.zCoord, 4, nbtTag);
+		writeToNBT(nbtTag);
+		return new S35PacketUpdateTileEntity(xCoord, yCoord, zCoord, 1, nbtTag);
 	}
 
-	public void setRotation(int par1)
+	public int getDirection()
 	{
-		this.rotation = par1;
+		return this.direction;
 	}
 
-	@SideOnly(Side.CLIENT)
-	public int func_82119_b()
+	public void setDirection(int par1)
 	{
-		return this.rotation;
+		this.direction = par1;
 	}
-
 }

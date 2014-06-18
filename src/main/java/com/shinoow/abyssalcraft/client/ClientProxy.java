@@ -17,16 +17,13 @@ package com.shinoow.abyssalcraft.client;
 
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.model.ModelPig;
-import net.minecraft.client.model.ModelZombie;
 import net.minecraft.client.renderer.entity.RenderFireball;
 import net.minecraft.client.renderer.entity.RenderSnowball;
 import net.minecraft.item.Item;
 import net.minecraftforge.client.MinecraftForgeClient;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
-import com.shinoow.abyssalcraft.core.api.render.Block3DRender;
 import com.shinoow.abyssalcraft.client.model.entity.ModelDG;
-import com.shinoow.abyssalcraft.client.model.entity.ModelDreadSpawn;
 import com.shinoow.abyssalcraft.client.model.entity.ModelDreadling;
 import com.shinoow.abyssalcraft.client.model.entity.ModelJzahar;
 import com.shinoow.abyssalcraft.client.model.entity.ModelShadowCreature;
@@ -53,7 +50,7 @@ import com.shinoow.abyssalcraft.client.render.entity.RenderShadowMonster;
 import com.shinoow.abyssalcraft.client.render.entity.Renderabygolem;
 import com.shinoow.abyssalcraft.client.render.entity.Renderdreadgolem;
 import com.shinoow.abyssalcraft.client.render.entity.Renderdreadguard;
-import com.shinoow.abyssalcraft.common.CommonProxyAbyssalCraft;
+import com.shinoow.abyssalcraft.common.CommonProxy;
 import com.shinoow.abyssalcraft.common.blocks.tile.TileEntityAltar;
 import com.shinoow.abyssalcraft.common.blocks.tile.TileEntityDGhead;
 import com.shinoow.abyssalcraft.common.blocks.tile.TileEntityOhead;
@@ -80,19 +77,18 @@ import com.shinoow.abyssalcraft.common.entity.Entitydreadguard;
 import com.shinoow.abyssalcraft.common.entity.Entityevilpig;
 import com.shinoow.abyssalcraft.common.handlers.CapeHandler;
 import com.shinoow.abyssalcraft.common.util.EnumCapeGroup;
+import com.shinoow.abyssalcraft.core.api.render.Block3DRender;
 
 import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class ClientProxyAbyssalCraft extends CommonProxyAbyssalCraft
-{
+public class ClientProxy extends CommonProxy {
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void registerRenderThings()
-	{
+	public void registerRenderThings() {
 
 		RenderingRegistry.registerEntityRenderingHandler(Entityevilpig.class, new RenderPig(new ModelPig(), 0.5F));
 		RenderingRegistry.registerEntityRenderingHandler(EntityDepthsghoul.class, new RenderDepthsghoul(new ModelDG(), 0.8F));
@@ -102,7 +98,7 @@ public class ClientProxyAbyssalCraft extends CommonProxyAbyssalCraft
 		RenderingRegistry.registerEntityRenderingHandler(EntityJzahar.class, new RenderJzahar(new ModelJzahar(), 1.5F));
 		RenderingRegistry.registerEntityRenderingHandler(Entityabygolem.class, new Renderabygolem(new ModelBiped(), 0.5F));
 		RenderingRegistry.registerEntityRenderingHandler(Entitydreadgolem.class, new Renderdreadgolem(new ModelBiped(), 0.5F));
-		RenderingRegistry.registerEntityRenderingHandler(Entitydreadguard.class, new Renderdreadguard(new ModelZombie(), 0.5F, 1.5F));
+		RenderingRegistry.registerEntityRenderingHandler(Entitydreadguard.class, new Renderdreadguard());
 		RenderingRegistry.registerEntityRenderingHandler(EntityDragonMinion.class, new RenderDragonMinion());
 		RenderingRegistry.registerEntityRenderingHandler(EntityDragonBoss.class, new RenderDragonBoss());
 		RenderingRegistry.registerEntityRenderingHandler(EntityPSDLTracker.class, new RenderSnowball(AbyssalCraft.PSDLfinder));
@@ -110,7 +106,7 @@ public class ClientProxyAbyssalCraft extends CommonProxyAbyssalCraft
 		RenderingRegistry.registerEntityRenderingHandler(EntityShadowCreature.class, new RenderShadowCreature(new ModelShadowCreature(), 0.5F));
 		RenderingRegistry.registerEntityRenderingHandler(EntityShadowMonster.class, new RenderShadowMonster(new ModelShadowMonster(), 0.5F));
 		RenderingRegistry.registerEntityRenderingHandler(EntityDreadling.class, new RenderDreadling(new ModelDreadling(), 0.5F));
-		RenderingRegistry.registerEntityRenderingHandler(EntityDreadSpawn.class, new RenderDreadSpawn(new ModelDreadSpawn(), 0.5F));
+		RenderingRegistry.registerEntityRenderingHandler(EntityDreadSpawn.class, new RenderDreadSpawn());
 		RenderingRegistry.registerEntityRenderingHandler(EntityDemonPig.class, new RenderDemonPig(new ModelPig(), 0.5F));
 
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityPSDL.class, new TileEntityPSDLRenderer());
@@ -133,9 +129,7 @@ public class ClientProxyAbyssalCraft extends CommonProxyAbyssalCraft
 	}
 
 	@Override
-	public int addArmor(String armor)
-	{
+	public int addArmor(String armor) {
 		return RenderingRegistry.addNewArmourRendererPrefix(armor);
 	}
-
 }

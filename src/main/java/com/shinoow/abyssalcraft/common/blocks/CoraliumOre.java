@@ -28,15 +28,17 @@ public class CoraliumOre extends Block
 	public CoraliumOre()
 	{
 		super(Material.rock);
-		this.setCreativeTab(AbyssalCraft.tabBlock);
+		setCreativeTab(AbyssalCraft.tabBlock);
 		this.setHarvestLevel("pickaxe", 2);
 	}
 
+	@Override
 	public Item getItemDropped(int par1, Random par2Random, int par3)
 	{
 		return AbyssalCraft.Coralium;
 	}
 
+	@Override
 	public int quantityDropped(Random par1Random)
 	{
 		return 1 + par1Random.nextInt(3);

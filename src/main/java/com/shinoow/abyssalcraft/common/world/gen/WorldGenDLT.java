@@ -45,15 +45,14 @@ public class WorldGenDLT extends WorldGenTrees
 		field_48200_b = flag1;
 	}
 
+	@Override
 	public boolean generate(World world, Random random, int i, int j, int k)
 	{
 		int l = random.nextInt(3) + field_48202_a;
 		boolean flag = true;
 
 		if (j < 1 || j + l + 1 > 256)
-		{
 			return false;
-		}
 
 		for (int i1 = j; i1 <= j + 1 + l; i1++)
 		{
@@ -64,7 +63,7 @@ public class WorldGenDLT extends WorldGenTrees
 				byte0 = 0;
 			}
 
-			if (i1 >= (j + 1 + l) - 2)
+			if (i1 >= j + 1 + l - 2)
 			{
 				byte0 = 2;
 			}
@@ -91,25 +90,21 @@ public class WorldGenDLT extends WorldGenTrees
 		}
 
 		if (!flag)
-		{
 			return false;
-		}
 
 		Block j1 = world.getBlock(i, j - 1, k);
 
 		if (j1 != Blocks.dirt && j1 != AbyssalCraft.Darkgrass && j1 != Blocks.grass && j1 != AbyssalCraft.dreadgrass || j >= 256 - l - 1)
-		{
 			return false;
-		}
 
 		setBlockAndNotifyAdequately(world, i, j - 1, k, AbyssalCraft.DLTLog, l);
 		byte byte1 = 3;
 		int l1 = 0;
 
-		for (int j2 = (j - byte1) + l; j2 <= j + l; j2++)
+		for (int j2 = j - byte1 + l; j2 <= j + l; j2++)
 		{
 			int j3 = j2 - (j + l);
-			int i4 = (l1 + 1) - j3 / 2;
+			int i4 = l1 + 1 - j3 / 2;
 
 			for (int k4 = i - i4; k4 <= i + i4; k4++)
 			{
@@ -119,7 +114,7 @@ public class WorldGenDLT extends WorldGenTrees
 				{
 					int l5 = k5 - k;
 
-					if ((Math.abs(i5) != i4 || Math.abs(l5) != i4 || random.nextInt(2) != 0 && j3 != 0))
+					if (Math.abs(i5) != i4 || Math.abs(l5) != i4 || random.nextInt(2) != 0 && j3 != 0)
 					{
 						setBlockAndNotifyAdequately(world, k4, j2, k5, AbyssalCraft.DLTLeaves, field_48199_d);
 					}
@@ -166,7 +161,7 @@ public class WorldGenDLT extends WorldGenTrees
 
 		if (field_48200_b)
 		{
-			for (int l2 = (j - 3) + l; l2 <= j + l; l2++)
+			for (int l2 = j - 3 + l; l2 <= j + l; l2++)
 			{
 				int l3 = l2 - (j + l);
 				int j4 = 2 - l3 / 2;

@@ -24,7 +24,9 @@ import net.minecraft.init.Items;
 import net.minecraft.item.EnumAction;
 import net.minecraft.item.ItemBow;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.IIcon;
+import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.player.ArrowLooseEvent;
@@ -41,7 +43,7 @@ public class ItemCoraliumBow extends ItemBow {
 
 	public int anim_0;
 	public int anim_1;
-	public int anim_2;  
+	public int anim_2;
 	/**
 	 * @param texture is String of item texture, ie itemName.png
 	 * 		also sets the UnlocalizedName to avoid render issues
@@ -51,7 +53,7 @@ public class ItemCoraliumBow extends ItemBow {
 	 * @param chargeTime is Float of how fast the bow charges, ie 21.0F where 20.0F is
 	 * the default bow speed
 	 * @param anim_0 is used for syncing charge time with pull_0 animation,
-	 *  recommended left at 0 
+	 *  recommended left at 0
 	 * @param anim_1 is used for syncing charge time with pull_1 animation, ie 9 where
 	 * 8 is default bow
 	 * @param anim_2 is used for syncing charge time with pull_2 animation, ie 17 where
@@ -59,12 +61,11 @@ public class ItemCoraliumBow extends ItemBow {
 	 * 
 	 * Notes: adjust anim_0-2 whenever chargeTime is changed for smoother animation flow
 	 */
-	public ItemCoraliumBow(float chargeTime, int anim_0, int anim_1, int anim_2)
-	{
-		this.maxStackSize = 1;
+	public ItemCoraliumBow(float chargeTime, int anim_0, int anim_1, int anim_2) {
+		maxStackSize = 1;
 		setCreativeTab(AbyssalCraft.tabCombat);
 
-		this.charge = chargeTime;
+		charge = chargeTime;
 
 		this.anim_0 = anim_0;
 		this.anim_1 = anim_1;
@@ -73,6 +74,12 @@ public class ItemCoraliumBow extends ItemBow {
 
 		setMaxDamage(637);
 
+	}
+
+	@Override
+	public String getItemStackDisplayName(ItemStack par1ItemStack) {
+
+		return EnumChatFormatting.AQUA + StatCollector.translateToLocal(this.getUnlocalizedName() + ".name");
 	}
 
 	public String[] bowPullIconNameArray;
@@ -87,36 +94,33 @@ public class ItemCoraliumBow extends ItemBow {
 
 	/**@SuppressWarnings({ "unchecked", "rawtypes" })
 	public void addInformation(ItemStack par1ItemStack, EntityPlayer entityplayer, List list, boolean is){
-		list.add("Arrows will apply");
-		list.add("Coralium Plague on hit");
+		list.add(StatCollector.translateToLocal("tooltip.corbow.1"));
+		list.add(StatCollector.translateToLocal("tooltip.corbow.2"));
 	}*/
 
 	/**
 	 * called when the player releases the use item button. Args: itemstack, world, entityplayer, itemInUseCount
 	 */
+	@Override
 	public void onPlayerStoppedUsing(ItemStack par1ItemStack, World par2World, EntityPlayer par3EntityPlayer, int par4)
 	{
-		int j = this.getMaxItemUseDuration(par1ItemStack) - par4;
+		int j = getMaxItemUseDuration(par1ItemStack) - par4;
 
 		ArrowLooseEvent event = new ArrowLooseEvent(par3EntityPlayer, par1ItemStack, j);
 		MinecraftForge.EVENT_BUS.post(event);
 		if (event.isCanceled())
-		{
 			return;
-		}
 		j = event.charge;
 
 		boolean flag = par3EntityPlayer.capabilities.isCreativeMode || EnchantmentHelper.getEnchantmentLevel(Enchantment.infinity.effectId, par1ItemStack) > 0;
 
 		if (flag || par3EntityPlayer.inventory.hasItem(Items.arrow))
 		{
-			float f = (float)j / charge;
+			float f = j / charge;
 			f = (f * f + f * 2.0F) / 3.0F;
 
-			if ((double)f < 0.1D)
-			{
+			if (f < 0.1D)
 				return;
-			}
 
 			if (f > 1.0F)
 			{
@@ -136,7 +140,7 @@ public class ItemCoraliumBow extends ItemBow {
 
 			if (k > 0)
 			{
-				entityarrow.setDamage(entityarrow.getDamage() + 7.0D + (double)k * 0.5D + 0.5D);
+				entityarrow.setDamage(entityarrow.getDamage() + 7.0D + k * 0.5D + 0.5D);
 
 			}
 
@@ -171,6 +175,7 @@ public class ItemCoraliumBow extends ItemBow {
 		}
 	}
 
+	@Override
 	public ItemStack onEaten(ItemStack par1ItemStack, World par2World, EntityPlayer par3EntityPlayer)
 	{
 		return par1ItemStack;
@@ -179,6 +184,7 @@ public class ItemCoraliumBow extends ItemBow {
 	/**
 	 * How long it takes to use or consume an item
 	 */
+	@Override
 	public int getMaxItemUseDuration(ItemStack par1ItemStack)
 	{
 		return 72000;
@@ -187,6 +193,7 @@ public class ItemCoraliumBow extends ItemBow {
 	/**
 	 * returns the action that specifies what animation to play when the items is being used
 	 */
+	@Override
 	public EnumAction getItemUseAction(ItemStack par1ItemStack)
 	{
 		return EnumAction.bow;
@@ -195,19 +202,18 @@ public class ItemCoraliumBow extends ItemBow {
 	/**
 	 * Called whenever this item is equipped and the right mouse button is pressed. Args: itemStack, world, entityPlayer
 	 */
+	@Override
 	public ItemStack onItemRightClick(ItemStack par1ItemStack, World par2World, EntityPlayer par3EntityPlayer)
 	{
 
 		ArrowNockEvent event = new ArrowNockEvent(par3EntityPlayer, par1ItemStack);
 		MinecraftForge.EVENT_BUS.post(event);
 		if (event.isCanceled())
-		{
 			return event.result;
-		}
 
 		if (par3EntityPlayer.capabilities.isCreativeMode || par3EntityPlayer.inventory.hasItem(Items.arrow))
 		{
-			par3EntityPlayer.setItemInUse(par1ItemStack, this.getMaxItemUseDuration(par1ItemStack));
+			par3EntityPlayer.setItemInUse(par1ItemStack, getMaxItemUseDuration(par1ItemStack));
 		}
 
 		return par1ItemStack;
@@ -216,24 +222,27 @@ public class ItemCoraliumBow extends ItemBow {
 	/**
 	 * Return the enchantability factor of the item, most of the time is based on material.
 	 */
+	@Override
 	public int getItemEnchantability()
 	{
 		return 1;
 	}
 
+	@Override
 	@SideOnly(Side.CLIENT)
 	public void registerIcons(IIconRegister par1IconRegister)
 	{
 		getBowPullIconNameArray();
-		this.itemIcon = par1IconRegister.registerIcon(AbyssalCraft.modid + ":" + getUnlocalizedName().substring(5));
-		this.iconArray = new IIcon[bowPullIconNameArray.length];
+		itemIcon = par1IconRegister.registerIcon(AbyssalCraft.modid + ":" + getUnlocalizedName().substring(5));
+		iconArray = new IIcon[bowPullIconNameArray.length];
 
-		for (int i = 0; i < this.iconArray.length; ++i)
+		for (int i = 0; i < iconArray.length; ++i)
 		{
-			this.iconArray[i] = par1IconRegister.registerIcon(AbyssalCraft.modid + ":" + getUnlocalizedName().substring(5) + "_" + bowPullIconNameArray[i]);
+			iconArray[i] = par1IconRegister.registerIcon(AbyssalCraft.modid + ":" + getUnlocalizedName().substring(5) + "_" + bowPullIconNameArray[i]);
 		}
 	}
 
+	@Override
 	@SideOnly(Side.CLIENT)
 	public boolean isFull3D()
 	{
@@ -243,23 +252,18 @@ public class ItemCoraliumBow extends ItemBow {
 	/**
 	 * used to cycle through icons based on their used duration, i.e. for the bow
 	 */
+	@Override
 	@SideOnly(Side.CLIENT)
 	public IIcon getIcon(ItemStack stack, int renderPass, EntityPlayer player, ItemStack usingItem, int useRemaining)
 	{
-		if(player.getItemInUse() == null) return this.itemIcon;
+		if(player.getItemInUse() == null) return itemIcon;
 		int Pulling = stack.getMaxItemUseDuration() - useRemaining;
-		if (Pulling >= this.anim_2)
-		{
+		if (Pulling >= anim_2)
 			return iconArray[2];
-		}
-		else if (Pulling > this.anim_1)
-		{
+		else if (Pulling > anim_1)
 			return iconArray[1];
-		}
-		else if (Pulling > this.anim_0)
-		{
+		else if (Pulling > anim_0)
 			return iconArray[0];
-		}              
 		return itemIcon;
 	}
 }

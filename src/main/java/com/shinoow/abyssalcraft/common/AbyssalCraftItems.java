@@ -16,12 +16,25 @@
 package com.shinoow.abyssalcraft.common;
 
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.EnumChatFormatting;
+import net.minecraft.util.StatCollector;
 
-public class AbyssalCraftItems extends Item
-{
-                 public AbyssalCraftItems()
-                 {
-                         super();
-                 }
+public class AbyssalCraftItems extends Item {
 
+	public AbyssalCraftItems() {
+		super();
+	}
+
+	@Override
+	public String getItemStackDisplayName(ItemStack par1ItemStack) {
+		if(this.getUnlocalizedName().contains("DSOA") || this.getUnlocalizedName().contains("DAC"))
+			return EnumChatFormatting.DARK_RED + StatCollector.translateToLocal(this.getUnlocalizedName() + ".name");
+		else if(this.getUnlocalizedName().contains("AI"))
+			return EnumChatFormatting.DARK_AQUA + StatCollector.translateToLocal(this.getUnlocalizedName() + ".name");
+		else if(this.getUnlocalizedName().contains("CP") || this.getUnlocalizedName().contains("RCI"))
+			return EnumChatFormatting.AQUA + StatCollector.translateToLocal(this.getUnlocalizedName() + ".name");
+
+		return StatCollector.translateToLocal(this.getUnlocalizedName() + ".name");
+	}
 }

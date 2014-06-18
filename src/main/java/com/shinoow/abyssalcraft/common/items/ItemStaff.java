@@ -17,32 +17,33 @@ package com.shinoow.abyssalcraft.common.items;
 import java.util.List;
 
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.EnumRarity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.EnumChatFormatting;
+import net.minecraft.util.StatCollector;
 
-public class ItemStaff extends Item
+public class ItemStaff extends Item {
 
-{
 	public ItemStaff() {
 		super();
 		setMaxStackSize(1);
 
 	}
 
+	@Override
+	public String getItemStackDisplayName(ItemStack par1ItemStack) {
+
+		return EnumChatFormatting.BLUE + StatCollector.translateToLocal(this.getUnlocalizedName() + ".name");
+	}
+
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
 	public void addInformation(ItemStack is, EntityPlayer player, List l, boolean B){
-		l.add("The staff of J'zahar, Gatekeeper of the Abyss");
+		l.add(StatCollector.translateToLocal("tooltip.staff"));
 	}
 
-	public EnumRarity getRarity(ItemStack is){
-		return EnumRarity.epic;
-	}
-
-	public boolean isFull3D()
-	{
+	@Override
+	public boolean isFull3D(){
 		return true;
 	}
-
 }

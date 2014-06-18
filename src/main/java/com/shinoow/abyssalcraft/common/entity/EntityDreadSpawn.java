@@ -18,6 +18,7 @@ package com.shinoow.abyssalcraft.common.entity;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureAttribute;
+import net.minecraft.entity.IEntityLivingData;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIAttackOnCollide;
 import net.minecraft.entity.ai.EntityAIHurtByTarget;
@@ -28,6 +29,7 @@ import net.minecraft.entity.ai.EntityAIWander;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.world.World;
 
@@ -37,38 +39,59 @@ import com.shinoow.abyssalcraft.core.api.entity.DreadMob;
 public class EntityDreadSpawn extends DreadMob
 {
 
-	public EntityDreadSpawn(World par1World) 
+	public EntityDreadSpawn(World par1World)
 	{
 		super(par1World);
-		this.tasks.addTask(0, new EntityAIAttackOnCollide(this, EntityPlayer.class, 0.35D, true));
-		this.tasks.addTask(1, new EntityAIMoveTowardsRestriction(this, 0.35D));
-		this.tasks.addTask(2, new EntityAIWander(this, 0.35D));
-		this.tasks.addTask(3, new EntityAILookIdle(this));
-		this.tasks.addTask(4, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
-		this.targetTasks.addTask(0, new EntityAIHurtByTarget(this, false));
-		this.targetTasks.addTask(1, new EntityAINearestAttackableTarget(this, EntityPlayer.class, 0, true));
+		setSize(0.6F, 0.6F);
+		tasks.addTask(0, new EntityAIAttackOnCollide(this, EntityPlayer.class, 0.35D, true));
+		tasks.addTask(1, new EntityAIMoveTowardsRestriction(this, 0.35D));
+		tasks.addTask(2, new EntityAIWander(this, 0.35D));
+		tasks.addTask(3, new EntityAILookIdle(this));
+		tasks.addTask(4, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
+		targetTasks.addTask(0, new EntityAIHurtByTarget(this, false));
+		targetTasks.addTask(1, new EntityAINearestAttackableTarget(this, EntityPlayer.class, 0, true));
 	}
 
+	@Override
 	protected void applyEntityAttributes()
 	{
 		super.applyEntityAttributes();
 		// Max Health - default 20.0D - min 0.0D - max Double.MAX_VALUE
-		this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(20.0D);
+		getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(20.0D);
 		// Follow Range - default 32.0D - min 0.0D - max 2048.0D
-		this.getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(32.0D);
+		getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(32.0D);
 		// Knockback Resistance - default 0.0D - min 0.0D - max 1.0D
-		this.getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setBaseValue(0.0D);
+		getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setBaseValue(0.0D);
 		// Movement Speed - default 0.699D - min 0.0D - max Double.MAX_VALUE
-		this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.3D);
+		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.3D);
 		// Attack Damage - default 2.0D - min 0.0D - max Doubt.MAX_VALUE
-		this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(6.0D);
+		getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(6.0D);
 	}
 
+	@Override
+	protected void entityInit()
+	{
+		super.entityInit();
+		getDataWatcher().addObject(20, Byte.valueOf((byte)0));
+	}
+
+	public int getDreadMorph()
+	{
+		return dataWatcher.getWatchableObjectByte(20);
+	}
+
+	public void setDreadMorph(int par1)
+	{
+		dataWatcher.updateObject(20, Byte.valueOf((byte)par1));
+	}
+
+	@Override
 	protected boolean isAIEnabled()
 	{
 		return true;
 	}
 
+	@Override
 	public boolean attackEntityAsMob(Entity par1Entity)
 	{
 
@@ -82,6 +105,7 @@ public class EntityDreadSpawn extends DreadMob
 		return hasAttacked;
 	}
 
+	@Override
 	protected String getLivingSound()
 	{
 		return "mob.zombie.say";
@@ -90,6 +114,7 @@ public class EntityDreadSpawn extends DreadMob
 	/**
 	 * Returns the sound this mob makes when it is hurt.
 	 */
+	@Override
 	protected String getHurtSound()
 	{
 		return "mob.zombie.hurt";
@@ -98,6 +123,7 @@ public class EntityDreadSpawn extends DreadMob
 	/**
 	 * Returns the sound this mob makes on death.
 	 */
+	@Override
 	protected String getDeathSound()
 	{
 		return "mob.zombie.death";
@@ -105,17 +131,56 @@ public class EntityDreadSpawn extends DreadMob
 
 	protected void playStepSound(int par1, int par2, int par3, int par4)
 	{
-		this.worldObj.playSoundAtEntity(this, "mob.zombie.step", 0.15F, 1.0F);
+		worldObj.playSoundAtEntity(this, "mob.zombie.step", 0.15F, 1.0F);
 	}
 
+	@Override
 	protected Item getDropItem()
 	{
 		return AbyssalCraft.dreadchunk;
 
 	}
 
+	@Override
 	public EnumCreatureAttribute getCreatureAttribute()
 	{
 		return EnumCreatureAttribute.UNDEAD;
+	}
+
+	@Override
+	public void readEntityFromNBT(NBTTagCompound par1NBTTagCompound)
+	{
+		super.readEntityFromNBT(par1NBTTagCompound);
+		if (par1NBTTagCompound.hasKey("DreadMorph"))
+		{
+			byte var2 = par1NBTTagCompound.getByte("DreadMorph");
+			setDreadMorph(var2);
+		}
+	}
+
+	@Override
+	public void writeEntityToNBT(NBTTagCompound par1NBTTagCompound)
+	{
+		super.writeEntityToNBT(par1NBTTagCompound);
+		par1NBTTagCompound.setByte("DreadMorph", (byte)getDreadMorph());
+	}
+
+	@Override
+	public IEntityLivingData onSpawnWithEgg(IEntityLivingData par1EntityLivingData)
+	{
+		par1EntityLivingData = super.onSpawnWithEgg(par1EntityLivingData);
+
+		switch(worldObj.rand.nextInt(3)){
+		case 0:
+			setDreadMorph(0);
+			break;
+		case 1:
+			setDreadMorph(1);
+			break;
+		case 2:
+			setDreadMorph(2);
+		}
+
+		return par1EntityLivingData;
 	}
 }

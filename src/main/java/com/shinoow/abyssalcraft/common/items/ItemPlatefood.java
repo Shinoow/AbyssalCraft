@@ -27,11 +27,12 @@ public class ItemPlatefood extends ItemFood
 
 	public ItemPlatefood(int j, float f, boolean b) {
 		super(j, f, b);
-		this.setCreativeTab(AbyssalCraft.tabFood);
-		this.setMaxStackSize(1);
+		setCreativeTab(AbyssalCraft.tabFood);
+		setMaxStackSize(1);
 
 	}
 
+	@Override
 	public ItemStack onEaten(ItemStack par1ItemStack, World par2World, EntityPlayer par3EntityPlayer)
 	{
 		super.onEaten(par1ItemStack, par2World, par3EntityPlayer);

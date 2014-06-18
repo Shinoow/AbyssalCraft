@@ -34,7 +34,7 @@ public class TabACItems extends CreativeTabs
 	@SideOnly(Side.CLIENT)
 	public String getTranslatedTabLabel()
 	{
-		return "AbyssalCraft Items";
+		return "itemgroup." + this.getTabLabel();
 	}
 
 	@Override

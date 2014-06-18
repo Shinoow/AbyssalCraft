@@ -32,14 +32,13 @@ public class ItemTrackerPSDL extends Item {
 
 	}
 
+	@Override
 	public ItemStack onItemRightClick(ItemStack par1ItemStack, World par2World, EntityPlayer par3EntityPlayer)
 	{
-		MovingObjectPosition movingobjectposition = this.getMovingObjectPositionFromPlayer(par2World, par3EntityPlayer, false);
+		MovingObjectPosition movingobjectposition = getMovingObjectPositionFromPlayer(par2World, par3EntityPlayer, false);
 
 		if (movingobjectposition != null && movingobjectposition.typeOfHit == MovingObjectPosition.MovingObjectType.BLOCK && par2World.getBlock(movingobjectposition.blockX, movingobjectposition.blockY, movingobjectposition.blockZ) == AbyssalCraft.PSDL)
-		{
 			return par1ItemStack;
-		}
 
 		if (!par2World.isRemote)
 		{
@@ -47,8 +46,8 @@ public class ItemTrackerPSDL extends Item {
 
 			if (chunkposition != null)
 			{
-				EntityPSDLTracker entitypsdltracker = new EntityPSDLTracker(par2World, par3EntityPlayer.posX, par3EntityPlayer.posY + 1.62D - (double)par3EntityPlayer.yOffset, par3EntityPlayer.posZ);
-				entitypsdltracker.moveTowards((double)chunkposition.chunkPosX, chunkposition.chunkPosY, (double)chunkposition.chunkPosZ);
+				EntityPSDLTracker entitypsdltracker = new EntityPSDLTracker(par2World, par3EntityPlayer.posX, par3EntityPlayer.posY + 1.62D - par3EntityPlayer.yOffset, par3EntityPlayer.posZ);
+				entitypsdltracker.moveTowards(chunkposition.chunkPosX, chunkposition.chunkPosY, chunkposition.chunkPosZ);
 				par2World.spawnEntityInWorld(entitypsdltracker);
 				par2World.playSoundAtEntity(par3EntityPlayer, "random.bow", 0.5F, 0.4F / (itemRand.nextFloat() * 0.4F + 0.8F));
 				par2World.playAuxSFXAtEntity((EntityPlayer)null, 1002, (int)par3EntityPlayer.posX, (int)par3EntityPlayer.posY, (int)par3EntityPlayer.posZ, 0);
@@ -63,7 +62,8 @@ public class ItemTrackerPSDL extends Item {
 		return par1ItemStack;
 	}
 
-	public boolean hasEffect(ItemStack is){
+	@Override
+	public boolean hasEffect(ItemStack is, int pass){
 		return true;
 	}
 }

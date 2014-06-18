@@ -66,6 +66,7 @@ public class TileEntityCrate extends TileEntity implements IInventory
 	/**
 	 * Returns the number of slots in the inventory.
 	 */
+	@Override
 	public int getSizeInventory()
 	{
 		return 27;
@@ -74,114 +75,115 @@ public class TileEntityCrate extends TileEntity implements IInventory
 	/**
 	 * Returns the stack in slot i
 	 */
+	@Override
 	public ItemStack getStackInSlot(int par1)
 	{
-		return this.chestContents[par1];
+		return chestContents[par1];
 	}
 
 	/**
 	 * Removes from an inventory slot (first arg) up to a specified number (second arg) of items and returns them in a
 	 * new stack.
 	 */
+	@Override
 	public ItemStack decrStackSize(int par1, int par2)
 	{
-		if (this.chestContents[par1] != null)
+		if (chestContents[par1] != null)
 		{
 			ItemStack itemstack;
 
-			if (this.chestContents[par1].stackSize <= par2)
+			if (chestContents[par1].stackSize <= par2)
 			{
-				itemstack = this.chestContents[par1];
-				this.chestContents[par1] = null;
-				this.markDirty();
+				itemstack = chestContents[par1];
+				chestContents[par1] = null;
+				markDirty();
 				return itemstack;
 			}
 			else
 			{
-				itemstack = this.chestContents[par1].splitStack(par2);
+				itemstack = chestContents[par1].splitStack(par2);
 
-				if (this.chestContents[par1].stackSize == 0)
+				if (chestContents[par1].stackSize == 0)
 				{
-					this.chestContents[par1] = null;
+					chestContents[par1] = null;
 				}
 
-				this.markDirty();
+				markDirty();
 				return itemstack;
 			}
-		}
-		else
-		{
+		} else
 			return null;
-		}
 	}
 
 	/**
 	 * When some containers are closed they call this on each slot, then drop whatever it returns as an EntityItem -
 	 * like when you close a workbench GUI.
 	 */
+	@Override
 	public ItemStack getStackInSlotOnClosing(int par1)
 	{
-		if (this.chestContents[par1] != null)
+		if (chestContents[par1] != null)
 		{
-			ItemStack itemstack = this.chestContents[par1];
-			this.chestContents[par1] = null;
+			ItemStack itemstack = chestContents[par1];
+			chestContents[par1] = null;
 			return itemstack;
-		}
-		else
-		{
+		} else
 			return null;
-		}
 	}
 
 	/**
 	 * Sets the given item stack to the specified slot in the inventory (can be crafting or armor sections).
 	 */
+	@Override
 	public void setInventorySlotContents(int par1, ItemStack par2ItemStack)
 	{
-		this.chestContents[par1] = par2ItemStack;
+		chestContents[par1] = par2ItemStack;
 
-		if (par2ItemStack != null && par2ItemStack.stackSize > this.getInventoryStackLimit())
+		if (par2ItemStack != null && par2ItemStack.stackSize > getInventoryStackLimit())
 		{
-			par2ItemStack.stackSize = this.getInventoryStackLimit();
+			par2ItemStack.stackSize = getInventoryStackLimit();
 		}
 
-		this.markDirty();
+		markDirty();
 	}
 
 	/**
 	 * Returns the name of the inventory.
 	 */
+	@Override
 	public String getInventoryName()
 	{
-		return this.hasCustomInventoryName() ? this.field_94045_s : "Crate";
+		return hasCustomInventoryName() ? field_94045_s : "Crate";
 	}
 
 	/**
 	 * If this returns false, the inventory name will be used as an unlocalized name, and translated into the player's
 	 * language. Otherwise it will be used directly.
 	 */
+	@Override
 	public boolean hasCustomInventoryName()
 	{
-		return this.field_94045_s != null && this.field_94045_s.length() > 0;
+		return field_94045_s != null && field_94045_s.length() > 0;
 	}
 
 	public void func_94043_a(String par1Str)
 	{
-		this.field_94045_s = par1Str;
+		field_94045_s = par1Str;
 	}
 
 	/**
 	 * Reads a tile entity from NBT.
 	 */
+	@Override
 	public void readFromNBT(NBTTagCompound par1NBTTagCompound)
 	{
 		super.readFromNBT(par1NBTTagCompound);
 		NBTTagList nbttaglist = par1NBTTagCompound.getTagList("Items", 10);
-		this.chestContents = new ItemStack[this.getSizeInventory()];
+		chestContents = new ItemStack[getSizeInventory()];
 
 		if (par1NBTTagCompound.hasKey("CustomName", 8))
 		{
-			this.field_94045_s = par1NBTTagCompound.getString("CustomName");
+			field_94045_s = par1NBTTagCompound.getString("CustomName");
 		}
 
 		for (int i = 0; i < nbttaglist.tagCount(); ++i)
@@ -189,9 +191,9 @@ public class TileEntityCrate extends TileEntity implements IInventory
 			NBTTagCompound nbttagcompound1 = nbttaglist.getCompoundTagAt(i);
 			int j = nbttagcompound1.getByte("Slot") & 255;
 
-			if (j >= 0 && j < this.chestContents.length)
+			if (j >= 0 && j < chestContents.length)
 			{
-				this.chestContents[j] = ItemStack.loadItemStackFromNBT(nbttagcompound1);
+				chestContents[j] = ItemStack.loadItemStackFromNBT(nbttagcompound1);
 			}
 		}
 	}
@@ -199,27 +201,28 @@ public class TileEntityCrate extends TileEntity implements IInventory
 	/**
 	 * Writes a tile entity to NBT.
 	 */
+	@Override
 	public void writeToNBT(NBTTagCompound par1NBTTagCompound)
 	{
 		super.writeToNBT(par1NBTTagCompound);
 		NBTTagList nbttaglist = new NBTTagList();
 
-		for (int i = 0; i < this.chestContents.length; ++i)
+		for (int i = 0; i < chestContents.length; ++i)
 		{
-			if (this.chestContents[i] != null)
+			if (chestContents[i] != null)
 			{
 				NBTTagCompound nbttagcompound1 = new NBTTagCompound();
 				nbttagcompound1.setByte("Slot", (byte)i);
-				this.chestContents[i].writeToNBT(nbttagcompound1);
+				chestContents[i].writeToNBT(nbttagcompound1);
 				nbttaglist.appendTag(nbttagcompound1);
 			}
 		}
 
 		par1NBTTagCompound.setTag("Items", nbttaglist);
 
-		if (this.hasCustomInventoryName())
+		if (hasCustomInventoryName())
 		{
-			par1NBTTagCompound.setString("CustomName", this.field_94045_s);
+			par1NBTTagCompound.setString("CustomName", field_94045_s);
 		}
 	}
 
@@ -227,6 +230,7 @@ public class TileEntityCrate extends TileEntity implements IInventory
 	 * Returns the maximum stack size for a inventory slot. Seems to always be 64, possibly will be extended. *Isn't
 	 * this more of a set than a get?*
 	 */
+	@Override
 	public int getInventoryStackLimit()
 	{
 		return 64;
@@ -235,37 +239,40 @@ public class TileEntityCrate extends TileEntity implements IInventory
 	/**
 	 * Do not make give this method the name canInteractWith because it clashes with Container
 	 */
+	@Override
 	public boolean isUseableByPlayer(EntityPlayer par1EntityPlayer)
 	{
-		return this.worldObj.getTileEntity(this.xCoord, this.yCoord, this.zCoord) != this ? false : par1EntityPlayer.getDistanceSq((double)this.xCoord + 0.5D, (double)this.yCoord + 0.5D, (double)this.zCoord + 0.5D) <= 64.0D;
+		return worldObj.getTileEntity(xCoord, yCoord, zCoord) != this ? false : par1EntityPlayer.getDistanceSq(xCoord + 0.5D, yCoord + 0.5D, zCoord + 0.5D) <= 64.0D;
 	}
 
 	/**
 	 * Causes the TileEntity to reset all it's cached values for it's container block, blockID, metaData and in the case
 	 * of chests, the adjcacent chest check
 	 */
+	@Override
 	public void updateContainingBlockInfo()
 	{
 		super.updateContainingBlockInfo();
-		this.adjacentChestChecked = false;
+		adjacentChestChecked = false;
 	}
 
 	/**
 	 * Allows the entity to update its state. Overridden in most subclasses, e.g. the mob spawner uses this to count
 	 * ticks and creates a new spawn inside its implementation.
 	 */
+	@Override
 	@SuppressWarnings("rawtypes")
 	public void updateEntity()
 	{
 		super.updateEntity();
-		++this.ticksSinceSync;
+		++ticksSinceSync;
 		float f;
 
-		if (!this.worldObj.isRemote && this.numUsingPlayers != 0 && (this.ticksSinceSync + this.xCoord + this.yCoord + this.zCoord) % 200 == 0)
+		if (!worldObj.isRemote && numUsingPlayers != 0 && (ticksSinceSync + xCoord + yCoord + zCoord) % 200 == 0)
 		{
-			this.numUsingPlayers = 0;
+			numUsingPlayers = 0;
 			f = 5.0F;
-			List list = this.worldObj.getEntitiesWithinAABB(EntityPlayer.class, AxisAlignedBB.getAABBPool().getAABB((double)((float)this.xCoord - f), (double)((float)this.yCoord - f), (double)((float)this.zCoord - f), (double)((float)(this.xCoord + 1) + f), (double)((float)(this.yCoord + 1) + f), (double)((float)(this.zCoord + 1) + f)));
+			List list = worldObj.getEntitiesWithinAABB(EntityPlayer.class, AxisAlignedBB.getAABBPool().getAABB(xCoord - f, yCoord - f, zCoord - f, xCoord + 1 + f, yCoord + 1 + f, zCoord + 1 + f));
 			Iterator iterator = list.iterator();
 
 			while (iterator.hasNext())
@@ -278,61 +285,61 @@ public class TileEntityCrate extends TileEntity implements IInventory
 
 					if (iinventory == this || iinventory instanceof InventoryLargeChest && ((InventoryLargeChest)iinventory).isPartOfLargeChest(this))
 					{
-						++this.numUsingPlayers;
+						++numUsingPlayers;
 					}
 				}
 			}
 		}
 
-		this.prevLidAngle = this.lidAngle;
+		prevLidAngle = lidAngle;
 		f = 0.1F;
-		if (this.numUsingPlayers > 0 && this.lidAngle == 0.0F && this.adjacentChestZNeg == null && this.adjacentChestXNeg == null)
+		if (numUsingPlayers > 0 && lidAngle == 0.0F && adjacentChestZNeg == null && adjacentChestXNeg == null)
 		{
-			if (this.adjacentChestZPosition != null)
+			if (adjacentChestZPosition != null)
 			{
 			}
 
-			if (this.adjacentChestXPos != null)
+			if (adjacentChestXPos != null)
 			{
 			}
 
 		}
 
-		if (this.numUsingPlayers == 0 && this.lidAngle > 0.0F || this.numUsingPlayers > 0 && this.lidAngle < 1.0F)
+		if (numUsingPlayers == 0 && lidAngle > 0.0F || numUsingPlayers > 0 && lidAngle < 1.0F)
 		{
-			float f1 = this.lidAngle;
+			float f1 = lidAngle;
 
-			if (this.numUsingPlayers > 0)
+			if (numUsingPlayers > 0)
 			{
-				this.lidAngle += f;
+				lidAngle += f;
 			}
 			else
 			{
-				this.lidAngle -= f;
+				lidAngle -= f;
 			}
 
-			if (this.lidAngle > 1.0F)
+			if (lidAngle > 1.0F)
 			{
-				this.lidAngle = 1.0F;
+				lidAngle = 1.0F;
 			}
 
 			float f2 = 0.5F;
 
-			if (this.lidAngle < f2 && f1 >= f2 && this.adjacentChestZNeg == null && this.adjacentChestXNeg == null)
+			if (lidAngle < f2 && f1 >= f2 && adjacentChestZNeg == null && adjacentChestXNeg == null)
 			{
-				if (this.adjacentChestZPosition != null)
+				if (adjacentChestZPosition != null)
 				{
 				}
 
-				if (this.adjacentChestXPos != null)
+				if (adjacentChestXPos != null)
 				{
 				}
 
 			}
 
-			if (this.lidAngle < 0.0F)
+			if (lidAngle < 0.0F)
 			{
-				this.lidAngle = 0.0F;
+				lidAngle = 0.0F;
 			}
 		}
 	}
@@ -340,40 +347,40 @@ public class TileEntityCrate extends TileEntity implements IInventory
 	/**
 	 * Called when a client event is received with the event number and argument, see World.sendClientEvent
 	 */
+	@Override
 	public boolean receiveClientEvent(int par1, int par2)
 	{
 		if (par1 == 1)
 		{
-			this.numUsingPlayers = par2;
+			numUsingPlayers = par2;
 			return true;
-		}
-		else
-		{
+		} else
 			return super.receiveClientEvent(par1, par2);
-		}
 	}
 
+	@Override
 	public void openInventory()
 	{
-		if (this.numUsingPlayers < 0)
+		if (numUsingPlayers < 0)
 		{
-			this.numUsingPlayers = 0;
+			numUsingPlayers = 0;
 		}
 
-		++this.numUsingPlayers;
-		this.worldObj.addBlockEvent(this.xCoord, this.yCoord, this.zCoord, this.getBlockType(), 1, this.numUsingPlayers);
-		this.worldObj.notifyBlocksOfNeighborChange(this.xCoord, this.yCoord, this.zCoord, this.getBlockType());
-		this.worldObj.notifyBlocksOfNeighborChange(this.xCoord, this.yCoord - 1, this.zCoord, this.getBlockType());
+		++numUsingPlayers;
+		worldObj.addBlockEvent(xCoord, yCoord, zCoord, getBlockType(), 1, numUsingPlayers);
+		worldObj.notifyBlocksOfNeighborChange(xCoord, yCoord, zCoord, getBlockType());
+		worldObj.notifyBlocksOfNeighborChange(xCoord, yCoord - 1, zCoord, getBlockType());
 	}
 
+	@Override
 	public void closeInventory()
 	{
-		if (this.getBlockType() != null && this.getBlockType() instanceof Crate)
+		if (getBlockType() != null && getBlockType() instanceof Crate)
 		{
-			--this.numUsingPlayers;
-			this.worldObj.addBlockEvent(this.xCoord, this.yCoord, this.zCoord, this.getBlockType(), 1, this.numUsingPlayers);
-			this.worldObj.notifyBlocksOfNeighborChange(this.xCoord, this.yCoord, this.zCoord, this.getBlockType());
-			this.worldObj.notifyBlocksOfNeighborChange(this.xCoord, this.yCoord - 1, this.zCoord, this.getBlockType());
+			--numUsingPlayers;
+			worldObj.addBlockEvent(xCoord, yCoord, zCoord, getBlockType(), 1, numUsingPlayers);
+			worldObj.notifyBlocksOfNeighborChange(xCoord, yCoord, zCoord, getBlockType());
+			worldObj.notifyBlocksOfNeighborChange(xCoord, yCoord - 1, zCoord, getBlockType());
 		}
 	}
 
@@ -388,10 +395,11 @@ public class TileEntityCrate extends TileEntity implements IInventory
 	/**
 	 * invalidates a tile entity
 	 */
+	@Override
 	public void invalidate()
 	{
 		super.invalidate();
-		this.updateContainingBlockInfo();
+		updateContainingBlockInfo();
 	}
 
 	@Override
@@ -402,16 +410,14 @@ public class TileEntityCrate extends TileEntity implements IInventory
 
 	public int func_98041_l()
 	{
-		if (this.field_94046_i == -1)
+		if (field_94046_i == -1)
 		{
-			if (this.worldObj == null || !(this.getBlockType() instanceof Crate))
-			{
+			if (worldObj == null || !(getBlockType() instanceof Crate))
 				return 0;
-			}
 
 		}
 
-		return this.field_94046_i;
+		return field_94046_i;
 	}
 
 }

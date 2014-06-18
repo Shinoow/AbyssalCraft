@@ -41,14 +41,15 @@ public class ACPressureplate extends BlockBasePressurePlate
 	public ACPressureplate(String par2Str, Material par3Material, ACPressureplate.Sensitivity par4EnumMobType, String par5, int par6)
 	{
 		super(par2Str, par3Material);
-		this.triggerMobType = par4EnumMobType;
-		this.pressurePlateIconName = par2Str;
+		triggerMobType = par4EnumMobType;
+		pressurePlateIconName = par2Str;
 		this.setHarvestLevel(par5, par6);
 	}
 
 	/**
 	 * Argument is weight (0-15). Return the metadata to be set because of it.
 	 */
+	@Override
 	protected int func_150066_d(int par1)
 	{
 		return par1 > 0 ? 1 : 0;
@@ -57,6 +58,7 @@ public class ACPressureplate extends BlockBasePressurePlate
 	/**
 	 * Argument is metadata. Returns power level (0-15)
 	 */
+	@Override
 	protected int func_150060_c(int par1)
 	{
 		return par1 == 1 ? 15 : 0;
@@ -72,19 +74,19 @@ public class ACPressureplate extends BlockBasePressurePlate
 	{
 		List list = null;
 
-		if (this.triggerMobType == ACPressureplate.Sensitivity.everything)
+		if (triggerMobType == ACPressureplate.Sensitivity.everything)
 		{
-			list = p_150065_1_.getEntitiesWithinAABBExcludingEntity((Entity)null, this.func_150061_a(p_150065_2_, p_150065_3_, p_150065_4_));
+			list = p_150065_1_.getEntitiesWithinAABBExcludingEntity((Entity)null, func_150061_a(p_150065_2_, p_150065_3_, p_150065_4_));
 		}
 
-		if (this.triggerMobType == ACPressureplate.Sensitivity.mobs)
+		if (triggerMobType == ACPressureplate.Sensitivity.mobs)
 		{
-			list = p_150065_1_.getEntitiesWithinAABB(EntityLivingBase.class, this.func_150061_a(p_150065_2_, p_150065_3_, p_150065_4_));
+			list = p_150065_1_.getEntitiesWithinAABB(EntityLivingBase.class, func_150061_a(p_150065_2_, p_150065_3_, p_150065_4_));
 		}
 
-		if (this.triggerMobType == ACPressureplate.Sensitivity.players)
+		if (triggerMobType == ACPressureplate.Sensitivity.players)
 		{
-			list = p_150065_1_.getEntitiesWithinAABB(EntityPlayer.class, this.func_150061_a(p_150065_2_, p_150065_3_, p_150065_4_));
+			list = p_150065_1_.getEntitiesWithinAABB(EntityPlayer.class, func_150061_a(p_150065_2_, p_150065_3_, p_150065_4_));
 		}
 
 		if (list != null && !list.isEmpty())
@@ -96,9 +98,7 @@ public class ACPressureplate extends BlockBasePressurePlate
 				Entity entity = (Entity)iterator.next();
 
 				if (!entity.doesEntityNotTriggerPressurePlate())
-				{
 					return 15;
-				}
 			}
 		}
 
@@ -115,7 +115,7 @@ public class ACPressureplate extends BlockBasePressurePlate
 	@SideOnly(Side.CLIENT)
 	public void registerBlockIcons(IIconRegister par1IconRegister)
 	{
-		this.blockIcon = par1IconRegister.registerIcon(AbyssalCraft.modid + ":" + this.pressurePlateIconName);
+		blockIcon = par1IconRegister.registerIcon(AbyssalCraft.modid + ":" + pressurePlateIconName);
 	}
 
 }

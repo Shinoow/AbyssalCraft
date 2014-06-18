@@ -46,6 +46,7 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldProviderEnd;
+import net.minecraftforge.common.ForgeModContainer;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.core.api.entity.CoraliumMob;
@@ -60,74 +61,83 @@ public class EntityDepthsZombie extends CoraliumMob
 	public EntityDepthsZombie(World par1World)
 	{
 		super(par1World);
-		this.tasks.addTask(0, new EntityAISwimming(this));
-		this.tasks.addTask(1, new EntityAIAttackOnCollide(this, EntityPlayer.class, 0.35D, false));
-		this.tasks.addTask(2, new EntityAIMoveTowardsRestriction(this, 0.35D));
-		this.tasks.addTask(3, new EntityAIWander(this, 0.35D));
-		this.tasks.addTask(4, new EntityAILookIdle(this));
-		this.tasks.addTask(5, new EntityAIFleeSun(this, 0.35D));
-		this.tasks.addTask(6, new EntityAIAttackOnCollide(this, EntityZombie.class, 0.35D, true));
-		this.tasks.addTask(7, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
-		this.tasks.addTask(8, new EntityAIWatchClosest(this, EntityDepthsZombie.class, 6.0F));
-		this.tasks.addTask(9, new EntityAIWatchClosest(this, EntityZombie.class, 6.0F));
-		this.tasks.addTask(10, new EntityAIWatchClosest(this, EntityDepthsghoul.class, 6.0F));
-		this.tasks.addTask(11, new EntityAIWatchClosest(this, EntitySkeleton.class, 6.0F));
-		this.targetTasks.addTask(0, new EntityAIHurtByTarget(this, false));
-		this.targetTasks.addTask(1, new EntityAINearestAttackableTarget(this, EntityZombie.class, 0, true));
-		this.targetTasks.addTask(2, player);
-
+		tasks.addTask(0, new EntityAISwimming(this));
+		tasks.addTask(1, new EntityAIAttackOnCollide(this, EntityPlayer.class, 0.35D, false));
+		tasks.addTask(2, new EntityAIMoveTowardsRestriction(this, 0.35D));
+		tasks.addTask(3, new EntityAIWander(this, 0.35D));
+		tasks.addTask(4, new EntityAILookIdle(this));
+		tasks.addTask(5, new EntityAIFleeSun(this, 0.35D));
+		tasks.addTask(6, new EntityAIAttackOnCollide(this, EntityZombie.class, 0.35D, true));
+		tasks.addTask(7, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
+		tasks.addTask(8, new EntityAIWatchClosest(this, EntityDepthsZombie.class, 6.0F));
+		tasks.addTask(9, new EntityAIWatchClosest(this, EntityZombie.class, 6.0F));
+		tasks.addTask(10, new EntityAIWatchClosest(this, EntityDepthsghoul.class, 6.0F));
+		tasks.addTask(11, new EntityAIWatchClosest(this, EntitySkeleton.class, 6.0F));
+		targetTasks.addTask(0, new EntityAIHurtByTarget(this, false));
+		targetTasks.addTask(1, new EntityAINearestAttackableTarget(this, EntityZombie.class, 0, true));
+		targetTasks.addTask(2, player);
 	}
 
+	@Override
 	protected void applyEntityAttributes()
 	{
 		super.applyEntityAttributes();
 		// Max Health - default 20.0D - min 0.0D - max Double.MAX_VALUE
-		this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(25.0D);
+		getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(25.0D);
 		// Follow Range - default 32.0D - min 0.0D - max 2048.0D
-		this.getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(128.0D);
+		getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(128.0D);
 		// Knockback Resistance - default 0.0D - min 0.0D - max 1.0D
-		this.getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setBaseValue(0.0D);
+		getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setBaseValue(0.0D);
 		// Movement Speed - default 0.699D - min 0.0D - max Double.MAX_VALUE
-		this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.699D);
+		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.699D);
 		// Attack Damage - default 2.0D - min 0.0D - max Doubt.MAX_VALUE
-		this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(6.0D);
-		Calendar calendar = this.worldObj.getCurrentDate();
+		getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(6.0D);
+		Calendar calendar = worldObj.getCurrentDate();
 
-		if (calendar.get(2) + 1 == 10 && calendar.get(5) == 31 && this.rand.nextFloat() < 0.25F)
+		if (calendar.get(2) + 1 == 10 && calendar.get(5) == 31 && rand.nextFloat() < 0.25F)
 		{
-			this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(9.0D);
+			getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(9.0D);
 		}
 	}
 
+	@Override
 	protected void entityInit()
 	{
 		super.entityInit();
-		this.getDataWatcher().addObject(12, Byte.valueOf((byte)0));
-		this.getDataWatcher().addObject(13, Byte.valueOf((byte)0));
-		this.getDataWatcher().addObject(14, Byte.valueOf((byte)0));
-		this.getDataWatcher().addObject(19, Byte.valueOf((byte)0));
+		getDataWatcher().addObject(12, Byte.valueOf((byte)0));
+		getDataWatcher().addObject(13, Byte.valueOf((byte)0));
+		getDataWatcher().addObject(14, Byte.valueOf((byte)0));
+		getDataWatcher().addObject(19, Byte.valueOf((byte)0));
 	}
 
+	@Override
 	public boolean isChild()
 	{
-		return this.getDataWatcher().getWatchableObjectByte(12) == 1;
+		return getDataWatcher().getWatchableObjectByte(12) == 1;
 	}
 
+	@Override
 	protected float getSoundPitch()
 	{
-		return 0.9F;
+		float pitch;
+		if(isChild()){
+			pitch = this.rand.nextFloat() - this.rand.nextFloat() * 0.2F + 1.3F;
+		}else{
+			pitch = 0.9F;
+		}
+		return pitch;
 	}
-	
+
 	/**
 	 * Set whether this zombie is a child.
 	 */
 	public void setChild(boolean par1)
 	{
-		this.getDataWatcher().updateObject(12, Byte.valueOf((byte)(par1 ? 1 : 0)));
+		getDataWatcher().updateObject(12, Byte.valueOf((byte)(par1 ? 1 : 0)));
 
-		if (this.worldObj != null && !this.worldObj.isRemote)
+		if (worldObj != null && !worldObj.isRemote)
 		{
-			IAttributeInstance attributeinstance = this.getEntityAttribute(SharedMonsterAttributes.movementSpeed);
+			IAttributeInstance attributeinstance = getEntityAttribute(SharedMonsterAttributes.movementSpeed);
 			attributeinstance.removeModifier(babySpeedBoostModifier);
 
 			if (par1)
@@ -142,26 +152,28 @@ public class EntityDepthsZombie extends CoraliumMob
 	 */
 	public boolean isZombie()
 	{
-		return this.getDataWatcher().getWatchableObjectByte(13) == 1;
+		return getDataWatcher().getWatchableObjectByte(13) == 1;
 	}
 
+	@Override
 	public boolean isPlayer()
 	{
-		return this.getDataWatcher().getWatchableObjectByte(19) == 1;
+		return getDataWatcher().getWatchableObjectByte(19) == 1;
 	}
 	/**
 	 * Set whether this abyssal zombie is a zombie.
 	 */
 	public void setIsZombie(boolean par1)
 	{
-		this.getDataWatcher().updateObject(13, Byte.valueOf((byte)(par1 ? 1 : 0)));
+		getDataWatcher().updateObject(13, Byte.valueOf((byte)(par1 ? 1 : 0)));
 	}
 
 	public void setIsPlayer(boolean par1)
 	{
-		this.getDataWatcher().updateObject(19, Byte.valueOf((byte)(par1 ? 1 : 0)));
+		getDataWatcher().updateObject(19, Byte.valueOf((byte)(par1 ? 1 : 0)));
 	}
 
+	@Override
 	public int getTotalArmorValue()
 	{
 		int var1 = super.getTotalArmorValue() + 2;
@@ -174,6 +186,7 @@ public class EntityDepthsZombie extends CoraliumMob
 		return var1;
 	}
 
+	@Override
 	protected boolean isAIEnabled()
 	{
 		return true;
@@ -181,35 +194,36 @@ public class EntityDepthsZombie extends CoraliumMob
 
 	public int getZombieType()
 	{
-		return this.dataWatcher.getWatchableObjectByte(14);
+		return dataWatcher.getWatchableObjectByte(14);
 	}
 
 	public void setZombieType(int par1)
 	{
-		this.dataWatcher.updateObject(14, Byte.valueOf((byte)par1));
+		dataWatcher.updateObject(14, Byte.valueOf((byte)par1));
 	}
 
+	@Override
 	public void onLivingUpdate()
 	{
-		if (this.worldObj.isDaytime() && !this.worldObj.isRemote && !this.isChild())
+		if (worldObj.isDaytime() && !worldObj.isRemote && !isChild() && worldObj.provider.dimensionId != AbyssalCraft.configDimId1)
 		{
-			float var1 = this.getBrightness(1.0F);
+			float var1 = getBrightness(1.0F);
 
-			if (var1 > 0.5F && this.rand.nextFloat() * 30.0F < (var1 - 0.4F) * 2.0F && this.worldObj.canBlockSeeTheSky(MathHelper.floor_double(this.posX), MathHelper.floor_double(this.posY), MathHelper.floor_double(this.posZ)))
+			if (var1 > 0.5F && rand.nextFloat() * 30.0F < (var1 - 0.4F) * 2.0F && worldObj.canBlockSeeTheSky(MathHelper.floor_double(posX), MathHelper.floor_double(posY), MathHelper.floor_double(posZ)))
 			{
 				boolean var2 = true;
-				ItemStack var3 = this.getEquipmentInSlot(4);
+				ItemStack var3 = getEquipmentInSlot(4);
 
 				if (var3 != null)
 				{
 					if (var3.isItemStackDamageable())
 					{
-						var3.setItemDamage(var3.getItemDamageForDisplay() + this.rand.nextInt(2));
+						var3.setItemDamage(var3.getItemDamageForDisplay() + rand.nextInt(2));
 
 						if (var3.getItemDamageForDisplay() >= var3.getMaxDamage())
 						{
-							this.renderBrokenItemStack(var3);
-							this.setCurrentItemOrArmor(4, (ItemStack)null);
+							renderBrokenItemStack(var3);
+							setCurrentItemOrArmor(4, (ItemStack)null);
 						}
 					}
 
@@ -218,7 +232,7 @@ public class EntityDepthsZombie extends CoraliumMob
 
 				if (var2)
 				{
-					this.setFire(16);
+					setFire(16);
 				}
 			}
 		}
@@ -226,6 +240,7 @@ public class EntityDepthsZombie extends CoraliumMob
 		super.onLivingUpdate();
 	}
 
+	@Override
 	public boolean attackEntityAsMob(Entity par1Entity)
 	{
 
@@ -233,31 +248,27 @@ public class EntityDepthsZombie extends CoraliumMob
 		{
 			if (par1Entity instanceof EntityLivingBase)
 			{
-				if(this.worldObj.provider.dimensionId == AbyssalCraft.dimension)
+				if(worldObj.provider.dimensionId == AbyssalCraft.configDimId1)
 				{
-					((EntityLivingBase)par1Entity).addPotionEffect(new PotionEffect(AbyssalCraft.Cplague.id, 200));	
+					((EntityLivingBase)par1Entity).addPotionEffect(new PotionEffect(AbyssalCraft.Cplague.id, 200));
 				}
 			}
 		}
 
 		boolean flag = super.attackEntityAsMob(par1Entity);
 
-		if (flag && this.getHeldItem() == null && this.isBurning() && this.rand.nextFloat() < (float)this.worldObj.difficultySetting.getDifficultyId() * 0.3F)
+		if (flag && getHeldItem() == null && isBurning() && rand.nextFloat() < worldObj.difficultySetting.getDifficultyId() * 0.3F)
 		{
-			par1Entity.setFire(2 * this.worldObj.difficultySetting.getDifficultyId());
+			par1Entity.setFire(2 * worldObj.difficultySetting.getDifficultyId());
 		}
 
 		return flag;
 	}
 
-	public String getEntityName()
-	{
-		return "Abyssal Zombie";
-	}
-
 	/**
 	 * Returns the sound this mob makes while it's alive.
 	 */
+	@Override
 	protected String getLivingSound()
 	{
 		return "mob.zombie.say";
@@ -266,6 +277,7 @@ public class EntityDepthsZombie extends CoraliumMob
 	/**
 	 * Returns the sound this mob makes when it is hurt.
 	 */
+	@Override
 	protected String getHurtSound()
 	{
 		return "mob.zombie.hurt";
@@ -274,6 +286,7 @@ public class EntityDepthsZombie extends CoraliumMob
 	/**
 	 * Returns the sound this mob makes on death.
 	 */
+	@Override
 	protected String getDeathSound()
 	{
 		return "mob.zombie.death";
@@ -281,33 +294,37 @@ public class EntityDepthsZombie extends CoraliumMob
 
 	protected void playStepSound(int par1, int par2, int par3, int par4)
 	{
-		this.playSound("mob.zombie.step", 0.15F, 1.0F);
+		playSound("mob.zombie.step", 0.15F, 1.0F);
 	}
 
+	@Override
 	protected Item getDropItem()
 	{
 		return AbyssalCraft.Corflesh;
 
 	}
+	@Override
 	public EnumCreatureAttribute getCreatureAttribute()
 	{
 		return EnumCreatureAttribute.UNDEAD;
 	}
+	@Override
 	protected void dropRareDrop(int par1)
 	{
-		switch (this.rand.nextInt(3))
+		switch (rand.nextInt(3))
 		{
 		case 0:
-			this.dropItem(Items.bone, 1);
+			dropItem(Items.bone, 1);
 			break;
 		case 1:
-			this.dropItem(AbyssalCraft.sword, 1);
+			dropItem(AbyssalCraft.sword, 1);
 			break;
 		case 2:
-			this.dropItem(AbyssalCraft.Cpearl, 1);
+			dropItem(AbyssalCraft.Cpearl, 1);
 		}
 	}
 
+	@Override
 	public void readEntityFromNBT(NBTTagCompound par1NBTTagCompound)
 	{
 		super.readEntityFromNBT(par1NBTTagCompound);
@@ -315,46 +332,46 @@ public class EntityDepthsZombie extends CoraliumMob
 		if (par1NBTTagCompound.hasKey("ZombieType"))
 		{
 			byte var2 = par1NBTTagCompound.getByte("ZombieType");
-			this.setZombieType(var2);
+			setZombieType(var2);
 		}
 	}
 
+	@Override
 	public void writeEntityToNBT(NBTTagCompound par1NBTTagCompound)
 	{
 		super.writeEntityToNBT(par1NBTTagCompound);
 
-		if (this.isChild())
+		if (isChild())
 		{
 			par1NBTTagCompound.setBoolean("IsBaby", true);
 		}
 
-		if (this.isZombie())
+		if (isZombie())
 		{
 			par1NBTTagCompound.setBoolean("IsZombie", true);
 		}
-		if (this.isPlayer())
+		if (isPlayer())
 		{
 			par1NBTTagCompound.setBoolean("IsPlayer", true);
 		}
-		par1NBTTagCompound.setByte("ZombieType", (byte)this.getZombieType());
+		par1NBTTagCompound.setByte("ZombieType", (byte)getZombieType());
 	}
 
 
 
+	@Override
 	public void onKillEntity(EntityLivingBase par1EntityLivingBase)
 	{
 		super.onKillEntity(par1EntityLivingBase);
 
-		if (this.worldObj.difficultySetting.getDifficultyId() >= 2 && par1EntityLivingBase instanceof EntityZombie)
+		if (worldObj.difficultySetting.getDifficultyId() >= 2 && par1EntityLivingBase instanceof EntityZombie)
 		{
-			if (this.worldObj.difficultySetting.getDifficultyId() == 2 && this.rand.nextBoolean())
-			{
+			if (worldObj.difficultySetting.getDifficultyId() == 2 && rand.nextBoolean())
 				return;
-			}
 
-			EntityDepthsZombie EntityDephsZombie = new EntityDepthsZombie(this.worldObj);
+			EntityDepthsZombie EntityDephsZombie = new EntityDepthsZombie(worldObj);
 			EntityDephsZombie.copyLocationAndAnglesFrom(par1EntityLivingBase);
-			this.worldObj.removeEntity(par1EntityLivingBase);
+			worldObj.removeEntity(par1EntityLivingBase);
 			EntityDephsZombie.onSpawnWithEgg((IEntityLivingData)null);
 			EntityDephsZombie.setIsZombie(true);
 
@@ -363,58 +380,90 @@ public class EntityDepthsZombie extends CoraliumMob
 				EntityDephsZombie.setChild(true);
 			}
 
-			this.worldObj.spawnEntityInWorld(EntityDephsZombie);
-			this.worldObj.playAuxSFXAtEntity((EntityPlayer)null, 1016, (int)this.posX, (int)this.posY, (int)this.posZ, 0);
+			worldObj.spawnEntityInWorld(EntityDephsZombie);
+			worldObj.playAuxSFXAtEntity((EntityPlayer)null, 1016, (int)posX, (int)posY, (int)posZ, 0);
 
-		}else if (this.worldObj.difficultySetting.getDifficultyId() >= 2 && par1EntityLivingBase instanceof EntityPlayer)
+		}else if (worldObj.difficultySetting.getDifficultyId() >= 2 && par1EntityLivingBase instanceof EntityPlayer)
 		{
-			if (this.worldObj.difficultySetting.getDifficultyId() == 2 && this.rand.nextBoolean())
-			{
+			if (worldObj.difficultySetting.getDifficultyId() == 2 && rand.nextBoolean())
 				return;
-			}
 
-			EntityDepthsZombie EntityDephsZombie = new EntityDepthsZombie(this.worldObj);
+			EntityDepthsZombie EntityDephsZombie = new EntityDepthsZombie(worldObj);
 			EntityDephsZombie.copyLocationAndAnglesFrom(par1EntityLivingBase);
-			this.worldObj.removeEntity(par1EntityLivingBase);
+			worldObj.removeEntity(par1EntityLivingBase);
 			EntityDephsZombie.onSpawnWithEgg((IEntityLivingData)null);
 			EntityDephsZombie.setIsPlayer(true);
 
-			this.worldObj.spawnEntityInWorld(EntityDephsZombie);
-			this.worldObj.playAuxSFXAtEntity((EntityPlayer)null, 1016, (int)this.posX, (int)this.posY, (int)this.posZ, 0);
+			worldObj.spawnEntityInWorld(EntityDephsZombie);
+			worldObj.playAuxSFXAtEntity((EntityPlayer)null, 1016, (int)posX, (int)posY, (int)posZ, 0);
 		}
 	}
 
+	@Override
 	public IEntityLivingData onSpawnWithEgg(IEntityLivingData par1EntityLivingData)
 	{
-		par1EntityLivingData = super.onSpawnWithEgg(par1EntityLivingData);
+		Object data = super.onSpawnWithEgg(par1EntityLivingData);
 
-		if (this.worldObj.provider instanceof WorldProviderEnd && this.getRNG().nextInt(5) > 0)
+		if (worldObj.provider instanceof WorldProviderEnd && getRNG().nextInt(5) > 0)
 		{
-			this.setZombieType(2);
+			setZombieType(2);
 		}
 
-		float f = this.worldObj.func_147462_b(this.posX, this.posY, this.posZ);
-		this.setCanPickUpLoot(this.rand.nextFloat() < 0.55F * f);
+		float f = worldObj.func_147462_b(posX, posY, posZ);
+		setCanPickUpLoot(rand.nextFloat() < 0.55F * f);
 
-		if (this.worldObj.rand.nextFloat() < 0.05F)
+		if (data == null)
 		{
-			this.setIsZombie(true);
+			data = new EntityDepthsZombie.GroupData(this.worldObj.rand.nextFloat() < ForgeModContainer.zombieBabyChance, this.worldObj.rand.nextFloat() < 0.05F, null);
 		}
 
-		this.addRandomArmor();
-		this.enchantEquipment();
-
-		if (this.getEquipmentInSlot(4) == null)
+		if (data instanceof EntityDepthsZombie.GroupData)
 		{
-			Calendar calendar = this.worldObj.getCurrentDate();
+			EntityDepthsZombie.GroupData groupdata = (EntityDepthsZombie.GroupData)data;
 
-			if (calendar.get(2) + 1 == 10 && calendar.get(5) == 31 && this.rand.nextFloat() < 0.25F)
+			if (groupdata.field_142046_b)
 			{
-				this.setCurrentItemOrArmor(4, new ItemStack(this.rand.nextFloat() < 0.1F ? Blocks.lit_pumpkin : Blocks.pumpkin));
-				this.equipmentDropChances[4] = 0.0F;
+				this.setIsZombie(true);
+			}
+
+			if (groupdata.field_142048_a)
+			{
+				this.setChild(true);
 			}
 		}
 
-		return par1EntityLivingData;
+		addRandomArmor();
+		enchantEquipment();
+
+		if (getEquipmentInSlot(4) == null)
+		{
+			Calendar calendar = worldObj.getCurrentDate();
+
+			if (calendar.get(2) + 1 == 10 && calendar.get(5) == 31 && rand.nextFloat() < 0.25F)
+			{
+				setCurrentItemOrArmor(4, new ItemStack(rand.nextFloat() < 0.1F ? Blocks.lit_pumpkin : Blocks.pumpkin));
+				equipmentDropChances[4] = 0.0F;
+			}
+		}
+
+		return (IEntityLivingData)data;
+	}
+
+	class GroupData implements IEntityLivingData
+	{
+		public boolean field_142048_a;
+		public boolean field_142046_b;
+		private GroupData(boolean par2, boolean par3)
+		{
+			this.field_142048_a = false;
+			this.field_142046_b = false;
+			this.field_142048_a = par2;
+			this.field_142046_b = par3;
+		}
+
+		GroupData(boolean par2, boolean par3, Object par4EntityZombieINNER1)
+		{
+			this(par2, par3);
+		}
 	}
 }

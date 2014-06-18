@@ -27,110 +27,104 @@ import com.shinoow.abyssalcraft.AbyssalCraft;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class WorldProviderAbyss extends WorldProvider
-{
+public class WorldProviderAbyss extends WorldProvider {
 
 	@Override
-	public void setDimension (int dim) 
-	{
-		this.dimensionId = dim;
+	public void setDimension (int dim) {
+		dimensionId = dim;
 		super.setDimension(dim);
 	}
 
 	@Override
-	public IChunkProvider createChunkGenerator()
-	{
+	public IChunkProvider createChunkGenerator() {
 		return new ChunkProviderAbyss(worldObj, worldObj.getSeed(), true);
 	}
 
 	@Override
-	public void registerWorldChunkManager()
-	{
-		this.worldChunkMgr = new WorldChunkManagerHell(AbyssalCraft.Wastelands, 0.0F);
-		this.isHellWorld= false;
-		this.dimensionId = AbyssalCraft.dimension;
-		this.hasNoSky = true;
+	public void registerWorldChunkManager() {
+		worldChunkMgr = new WorldChunkManagerHell(AbyssalCraft.Wastelands, 0.0F);
+		isHellWorld= false;
+		dimensionId = AbyssalCraft.configDimId1;
+		hasNoSky = true;
 	}
 
-	public String getDimensionName() 
-	{
+	@Override
+	public String getDimensionName()  {
 		return "The Abyssal Wasteland";
 	}
 
-	public boolean canRespawnHere()
-	{
+	@Override
+	public boolean canRespawnHere() {
 		return false;
 	}
 
 	/**
 	 * Creates the light to brightness table
 	 */
-	protected void generateLightBrightnessTable()
-	{
+	@Override
+	protected void generateLightBrightnessTable() {
 		float f = 0.25F;
 
-		for (int i = 0; i <= 15; ++i)
-		{
-			float f1 = 1.0F - (float)i / 15.0F;
-			this.lightBrightnessTable[i] = (1.0F - f1) / (f1 * 3.0F + 1.0F) * (1.0F - f) + f;
+		for (int i = 0; i <= 15; ++i) {
+			float f1 = 1.0F - i / 15.0F;
+			lightBrightnessTable[i] = (1.0F - f1) / (f1 * 3.0F + 1.0F) * (1.0F - f) + f;
 		}
 	}
+
 	@Override
-	public boolean canDoRainSnowIce(Chunk chunk)
-	{
+	public boolean canDoRainSnowIce(Chunk chunk) {
 		return false;
 	}
 
-	public boolean isSurfaceWorld()
-	{
+	@Override
+	public boolean isSurfaceWorld() {
 		return false;
 	}
+
 	/**
 	 * Calculates the angle of sun and moon in the sky relative to a specified time (usually worldTime)
 	 */
-	public float calculateCelestialAngle(long par1, float par3)
-	{
+	@Override
+	public float calculateCelestialAngle(long par1, float par3) {
 		return 0.0F;
 	}
 
+	@Override
 	@SideOnly(Side.CLIENT)
-
 	/**
 	 * Returns array with sunrise/sunset colors
 	 */
-	public float[] calcSunriseSunsetColors(float par1, float par2)
-	{
+	public float[] calcSunriseSunsetColors(float par1, float par2) {
 		return null;
 	}
 
+	@Override
 	@SideOnly(Side.CLIENT)
-	public boolean isSkyColored()
-	{
+	public boolean isSkyColored() {
 		return true;
 	}
+
 	@Override
-	public Vec3 getSkyColor(Entity cameraEntity, float partialTicks)
-	{
-		return this.worldObj.getWorldVec3Pool().getVecFromPool(0, 180, 50);
+	public Vec3 getSkyColor(Entity cameraEntity, float partialTicks) {
+		return worldObj.getWorldVec3Pool().getVecFromPool(0, 180, 50);
 	}
 
+	@Override
 	@SideOnly(Side.CLIENT)
-
 	/**
 	 * the y level at which clouds are rendered.
 	 */
-	public float getCloudHeight()
-	{
+	public float getCloudHeight() {
 		return 8.0F;
 	}
 
-	public String getSaveFolder()
-	{
+	@Override
+	public String getSaveFolder() {
 		return "The_Abyss";
 	}
 
-	public int getAverageGroundLevel()
-	{
+	@Override
+	public int getAverageGroundLevel() {
 		return 50;
 	}
 }

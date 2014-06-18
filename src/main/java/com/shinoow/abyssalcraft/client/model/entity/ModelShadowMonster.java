@@ -178,6 +178,7 @@ public class ModelShadowMonster extends ModelBase
 		setRotation(Back9, 1.00382F, 0F, 0F);
 	}
 
+	@Override
 	public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5)
 	{
 		super.render(entity, f, f1, f2, f3, f4, f5);
@@ -212,20 +213,21 @@ public class ModelShadowMonster extends ModelBase
 		model.rotateAngleZ = z;
 	}
 
+	@Override
 	public void setRotationAngles(float par1, float par2, float par3, float par4, float par5, float par6, Entity par7Entity)
 	{
-		this.Head.rotateAngleY = par4 / (180F / (float)Math.PI);
-		this.Head.rotateAngleX = par5 / (180F / (float)Math.PI);
+		Head.rotateAngleY = par4 / (180F / (float)Math.PI);
+		Head.rotateAngleX = par5 / (180F / (float)Math.PI);
 
-		this.Rarm1.rotateAngleX = MathHelper.cos(par1 * 0.6662F + (float)Math.PI) * 2.0F * par2 * 0.5F;
-		this.Larm1.rotateAngleX = MathHelper.cos(par1 * 0.6662F) * 2.0F * par2 * 0.5F;
-		this.Rarm2.rotateAngleX = MathHelper.cos(par1 * 0.6662F + (float)Math.PI) * 2.0F * par2 * 0.5F * 0.1F;
-		this.Larm2.rotateAngleX = MathHelper.cos(par1 * 0.6662F) * 2.0F * par2 * 0.5F * 0.1F;
+		Rarm1.rotateAngleX = MathHelper.cos(par1 * 0.6662F + (float)Math.PI) * 2.0F * par2 * 0.5F;
+		Larm1.rotateAngleX = MathHelper.cos(par1 * 0.6662F) * 2.0F * par2 * 0.5F;
+		Rarm2.rotateAngleX = MathHelper.cos(par1 * 0.6662F + (float)Math.PI) * 2.0F * par2 * 0.5F * 0.1F;
+		Larm2.rotateAngleX = MathHelper.cos(par1 * 0.6662F) * 2.0F * par2 * 0.5F * 0.1F;
 
-		this.Rarm1.rotateAngleZ = 0.0F;
-		this.Larm1.rotateAngleZ = 0.0F;
-		this.Rarm2.rotateAngleZ = 0.0F;
-		this.Larm2.rotateAngleZ = 0.0F;
+		Rarm1.rotateAngleZ = 0.0F;
+		Larm1.rotateAngleZ = 0.0F;
+		Rarm2.rotateAngleZ = 0.0F;
+		Larm2.rotateAngleZ = 0.0F;
 	}
 
 }

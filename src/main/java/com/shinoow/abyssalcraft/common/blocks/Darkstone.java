@@ -28,9 +28,10 @@ public class Darkstone extends Block
 	public Darkstone()
 	{
 		super(Material.rock);
-		this.setCreativeTab(AbyssalCraft.tabBlock);
+		setCreativeTab(AbyssalCraft.tabBlock);
 	}
 
+	@Override
 	public Item getItemDropped(int i, Random random, int j)
 	{
 		return AbyssalCraft.Darkstone_cobble.getItemDropped(0, random, j);

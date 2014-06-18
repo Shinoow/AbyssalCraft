@@ -1,4 +1,4 @@
-/**AbyssalCraft
+/**AbyssalCraft Core
  *Copyright 2012-2014 Shinoow
  *
  *Licensed under the Apache License, Version 2.0 (the "License");
@@ -13,13 +13,13 @@
  *See the License for the specific language governing permissions and
  *limitations under the License.
  */
-package com.shinoow.abyssalcraft.common.handlers;
+package com.shinoow.abyssalcraft.core.handlers;
 
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 
-import com.shinoow.abyssalcraft.AbyssalCraft;
+import com.shinoow.abyssalcraft.core.api.item.ItemUpgradeKit;
 
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.PlayerEvent;
@@ -30,18 +30,17 @@ public class CraftingHandler {
 	public void onCraftingEvent(PlayerEvent.ItemCraftedEvent event)
 	{
 		for(int h=0; h < event.craftMatrix.getSizeInventory(); h++)
-		{           
+		{
 			if(event.craftMatrix.getStackInSlot(h) != null)
 			{
 				for(int i=0; i < event.craftMatrix.getSizeInventory(); i++)
-				{           
+				{
 					if(event.craftMatrix.getStackInSlot(i) != null)
 					{
 						ItemStack k = event.craftMatrix.getStackInSlot(h);
 						ItemStack j = event.craftMatrix.getStackInSlot(i);
 
-						if(k.getItem() != null && j.getItem() != null && k.getItem() == AbyssalCraft.CobbleU || k.getItem() == AbyssalCraft.IronU || k.getItem() == AbyssalCraft.GoldU
-								|| k.getItem() == AbyssalCraft.DiamondU || k.getItem() == AbyssalCraft.AbyssalniteU || k.getItem() == AbyssalCraft.CoraliumU)
+						if(k.getItem() != null && j.getItem() != null && k.getItem() instanceof ItemUpgradeKit)
 						{
 							NBTTagCompound nbttest = new NBTTagCompound();
 							NBTTagList tag = new NBTTagList();

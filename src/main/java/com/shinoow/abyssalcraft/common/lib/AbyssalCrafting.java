@@ -24,12 +24,21 @@ import com.shinoow.abyssalcraft.AbyssalCraft;
 
 import cpw.mods.fml.common.registry.GameRegistry;
 
-public class AbyssalCrafting 
-{
+public class AbyssalCrafting {
 
 	public static void addRecipes()
 	{
 		//Block crafting
+		addBlockCrafting();
+		//Block smelting
+		addBlockSmelting();
+		//Item crafting
+		addItemCrafting();
+		//Item smelting
+		addItemSmelting();
+	}
+	private static void addBlockCrafting(){
+
 		GameRegistry.addRecipe(new ItemStack(AbyssalCraft.Darkstone_brick, 4), new Object []{"AA", "AA", 'A', AbyssalCraft.Darkstone });
 		GameRegistry.addRecipe(new ItemStack(AbyssalCraft.Darkbrickslab1, 6), new Object []{"AAA", 'A', AbyssalCraft.Darkstone_brick });
 		GameRegistry.addRecipe(new ItemStack(AbyssalCraft.DSGlow, 4), new Object []{"#$#", "&%&", "#&#", '#', AbyssalCraft.Darkstone_brick, '$', Items.diamond,'&', Blocks.obsidian, '%', Blocks.glowstone });
@@ -86,7 +95,7 @@ public class AbyssalCrafting
 		GameRegistry.addRecipe(new ItemStack(AbyssalCraft.DLTfence, 6), new Object []{"###", "###", '#', AbyssalCraft.DLTplank});
 		GameRegistry.addRecipe(new ItemStack(AbyssalCraft.Altar, 1), new Object [] {" # ", "%&%", "%@%", '#', Items.bucket, '%', Items.gold_ingot, '&', AbyssalCraft.Corb, '@', Blocks.enchanting_table});
 		GameRegistry.addRecipe(new ItemStack(AbyssalCraft.dreadbrick, 4), new Object []{"##", "##", '#', AbyssalCraft.dreadstone});
-		GameRegistry.addRecipe(new ItemStack(AbyssalCraft.abydreadbrick, 4), new Object []{"##", "##", '#', AbyssalCraft.abydreadstone});	    
+		GameRegistry.addRecipe(new ItemStack(AbyssalCraft.abydreadbrick, 4), new Object []{"##", "##", '#', AbyssalCraft.abydreadstone});
 		GameRegistry.addRecipe(new ItemStack(AbyssalCraft.dreadplanks, 4), new Object []{"%", '%', AbyssalCraft.dreadlog});
 		GameRegistry.addRecipe(new ItemStack(AbyssalCraft.dreadbrickslab1, 6), new Object []{"###", '#', AbyssalCraft.dreadbrick});
 		GameRegistry.addRecipe(new ItemStack(AbyssalCraft.dreadbrickfence, 6), new Object []{"###", "###", '#', AbyssalCraft.dreadbrick});
@@ -107,7 +116,10 @@ public class AbyssalCrafting
 		GameRegistry.addShapelessRecipe(new ItemStack(AbyssalCraft.abydreadbrickstairs, 4), AbyssalCraft.abydreadbrick, AbyssalCraft.abydreadbrick, AbyssalCraft.abydreadbrick, AbyssalCraft.abydreadbrick, AbyssalCraft.abydreadbrick, AbyssalCraft.abydreadbrick);
 		GameRegistry.addShapelessRecipe(new ItemStack(AbyssalCraft.cstonebrickstairs, 4), AbyssalCraft.cstonebrick, AbyssalCraft.cstonebrick, AbyssalCraft.cstonebrick, AbyssalCraft.cstonebrick, AbyssalCraft.cstonebrick, AbyssalCraft.cstonebrick);
 
-		//Block smelting
+	}
+
+	private static void addBlockSmelting(){
+
 		GameRegistry.addSmelting(AbyssalCraft.Darkstone_cobble, new ItemStack(AbyssalCraft.Darkstone, 1), 0.1F);
 		GameRegistry.addSmelting(AbyssalCraft.abyore, new ItemStack(AbyssalCraft.abyingot, 1), 3F);
 		GameRegistry.addSmelting(AbyssalCraft.Coraliumore, new ItemStack(AbyssalCraft.Coralium, 1), 3F);
@@ -117,8 +129,10 @@ public class AbyssalCrafting
 		GameRegistry.addSmelting(AbyssalCraft.dreadore, new ItemStack(AbyssalCraft.abyingot, 1), 3F);
 		GameRegistry.addSmelting(AbyssalCraft.abydreadore, new ItemStack(AbyssalCraft.abyingot, 1), 3F);
 		GameRegistry.addSmelting(AbyssalCraft.cstone, new ItemStack(AbyssalCraft.cbrick, 1), 0.1F);
+	}
 
-		//Items crafting
+	private static void addItemCrafting(){
+
 		GameRegistry.addRecipe(new ItemStack(AbyssalCraft.devsword, 1), new Object [] {"#", '#', AbyssalCraft.devsword}); //You ain't seen nothing
 
 		GameRegistry.addRecipe(new ItemStack(AbyssalCraft.pickaxe, 1), new Object [] {"###", " % ", " % ", '#', AbyssalCraft.Darkstone_cobble, '%', Items.stick});
@@ -128,13 +142,15 @@ public class AbyssalCrafting
 		GameRegistry.addRecipe(new ItemStack(AbyssalCraft.hoe, 1), new Object [] {"##", " %", " %", '#', AbyssalCraft.Darkstone_cobble, '%', Items.stick});
 		GameRegistry.addRecipe(new ItemStack(AbyssalCraft.OC, 1), new Object [] {"@#@", "#$#", "@#@", '$', Items.ender_eye, '#', AbyssalCraft.oblivionshard, '@', Items.redstone});
 		GameRegistry.addRecipe(new ItemStack(AbyssalCraft.OC, 1), new Object [] {"@#@", "#$#", "@#@", '$', Items.ender_eye, '#', Items.redstone, '@', AbyssalCraft.oblivionshard});
+		GameRegistry.addRecipe(new ItemStack(AbyssalCraft.OC, 1), new Object [] {"@#@", "#$#", "@#@", '$', Items.nether_star, '#', Items.ender_eye, '@', Items.redstone});
+		GameRegistry.addRecipe(new ItemStack(AbyssalCraft.OC, 1), new Object [] {"@#@", "#$#", "@#@", '$', Items.nether_star, '#', Items.redstone, '@', Items.ender_eye});
 		GameRegistry.addRecipe(new ItemStack(AbyssalCraft.pickaxeA, 1), new Object [] {"###", " % ", " % ", '#', AbyssalCraft.abyingot, '%', Items.stick});
 		GameRegistry.addRecipe(new ItemStack(AbyssalCraft.axeA, 1), new Object [] {"##", "#%", " %", '#', AbyssalCraft.abyingot, '%', Items.stick});
 		GameRegistry.addRecipe(new ItemStack(AbyssalCraft.shovelA, 1), new Object [] {"#", "%", "%", '#', AbyssalCraft.abyingot, '%', Items.stick});
 		GameRegistry.addRecipe(new ItemStack(AbyssalCraft.swordA, 1), new Object [] {"#", "#", "%", '#', AbyssalCraft.abyingot, '%', Items.stick});
 		GameRegistry.addRecipe(new ItemStack(AbyssalCraft.hoeA, 1), new Object [] {"##", " %", " %", '#', AbyssalCraft.abyingot, '%', Items.stick});
 		GameRegistry.addRecipe(new ItemStack(AbyssalCraft.portalPlacer, 1), new Object []{" #%", " &#", "&  ", '#', AbyssalCraft.Cpearl, '%', AbyssalCraft.OC, '&', Items.blaze_rod});
-		GameRegistry.addRecipe(new ItemStack(AbyssalCraft.abyingot, 9), new Object [] {"#", '#', AbyssalCraft.abyblock}); 
+		GameRegistry.addRecipe(new ItemStack(AbyssalCraft.abyingot, 9), new Object [] {"#", '#', AbyssalCraft.abyblock});
 		GameRegistry.addRecipe(new ItemStack(AbyssalCraft.Corb, 1), new Object [] {"#%#", "@$@", "#%#", '#', Items.blaze_powder, '%', Items.diamond, '@', Items.ender_pearl, '$', AbyssalCraft.Cpearl});
 		GameRegistry.addRecipe(new ItemStack(AbyssalCraft.Corb, 1), new Object [] {"#%#", "@$@", "#%#", '#', Items.blaze_powder, '%', Items.ender_pearl, '@', Items.diamond, '$', AbyssalCraft.Cpearl});
 		GameRegistry.addRecipe(new ItemStack(AbyssalCraft.pickaxeC, 1), new Object [] {"#%#", " & ", " @ ", '#', AbyssalCraft.abyingot, '%', AbyssalCraft.Corb, '&', AbyssalCraft.pickaxeA, '@', Items.blaze_rod});
@@ -329,8 +345,10 @@ public class AbyssalCrafting
 		GameRegistry.addShapelessRecipe(new ItemStack(AbyssalCraft.Corplate), AbyssalCraft.plate, AbyssalCraft.CoraliumU);
 		GameRegistry.addShapelessRecipe(new ItemStack(AbyssalCraft.Corlegs), AbyssalCraft.legs, AbyssalCraft.CoraliumU);
 		GameRegistry.addShapelessRecipe(new ItemStack(AbyssalCraft.Corboots), AbyssalCraft.boots, AbyssalCraft.CoraliumU);
+	}
 
-		//Items smelting
+	private static void addItemSmelting(){
+
 		GameRegistry.addSmelting(AbyssalCraft.abychunk, new ItemStack(AbyssalCraft.abyingot, 2), 3F);
 		GameRegistry.addSmelting(AbyssalCraft.Cchunk, new ItemStack(AbyssalCraft.Cingot, 2), 3F);
 		GameRegistry.addSmelting(Items.egg, new ItemStack(AbyssalCraft.friedegg, 1), 0F);
@@ -365,6 +383,5 @@ public class AbyssalCrafting
 		GameRegistry.addSmelting(AbyssalCraft.Corplate, new ItemStack(AbyssalCraft.Cingot, 4), 1F);
 		GameRegistry.addSmelting(AbyssalCraft.Corlegs, new ItemStack(AbyssalCraft.Cingot, 3), 1F);
 		GameRegistry.addSmelting(AbyssalCraft.Corboots, new ItemStack(AbyssalCraft.Cingot, 2), 1F);
-
 	}
 }

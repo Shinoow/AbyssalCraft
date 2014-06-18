@@ -38,52 +38,53 @@ import net.minecraft.world.World;
 import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.core.api.entity.DreadMob;
 
-public class Entitydreadguard extends DreadMob
-{
+public class Entitydreadguard extends DreadMob {
 
-	public Entitydreadguard(World par1World) 
+	public Entitydreadguard(World par1World)
 	{
 		super(par1World);
-		this.setSize(0.72F, 2.34F);
-		this.isImmuneToFire = true;
-		this.tasks.addTask(0, new EntityAIAttackOnCollide(this, EntityPlayer.class, 0.3D, true));
-		this.tasks.addTask(1, new EntityAIMoveTowardsRestriction(this, 0.3D));
-		this.tasks.addTask(2, new EntityAIWander(this, 0.3D));
-		this.tasks.addTask(3, new EntityAILookIdle(this));
-		this.tasks.addTask(4, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
-		this.targetTasks.addTask(0, new EntityAIHurtByTarget(this, false));
-		this.targetTasks.addTask(1, new EntityAINearestAttackableTarget(this, EntityPlayer.class, 0, true));
+		setSize(1.0F, 3.0F);
+		isImmuneToFire = true;
+		tasks.addTask(0, new EntityAIAttackOnCollide(this, EntityPlayer.class, 0.3D, true));
+		tasks.addTask(1, new EntityAIMoveTowardsRestriction(this, 0.3D));
+		tasks.addTask(2, new EntityAIWander(this, 0.3D));
+		tasks.addTask(3, new EntityAILookIdle(this));
+		tasks.addTask(4, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
+		targetTasks.addTask(0, new EntityAIHurtByTarget(this, false));
+		targetTasks.addTask(1, new EntityAINearestAttackableTarget(this, EntityPlayer.class, 0, true));
 
 	}
 
+	@Override
 	protected void applyEntityAttributes()
 	{
 		super.applyEntityAttributes();
 		// Max Health - default 20.0D - min 0.0D - max Double.MAX_VALUE
-		this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(120.0D);
+		getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(120.0D);
 		// Follow Range - default 32.0D - min 0.0D - max 2048.0D
-		this.getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(32.0D);
+		getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(32.0D);
 		// Knockback Resistance - default 0.0D - min 0.0D - max 1.0D
-		this.getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setBaseValue(0.0D);
+		getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setBaseValue(0.0D);
 		// Movement Speed - default 0.699D - min 0.0D - max Double.MAX_VALUE
-		this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.699D);
+		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.699D);
 		// Attack Damage - default 2.0D - min 0.0D - max Doubt.MAX_VALUE
-		this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(5.0D);
-		Calendar calendar = this.worldObj.getCurrentDate();
+		getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(5.0D);
+		Calendar calendar = worldObj.getCurrentDate();
 
-		if (calendar.get(2) + 1 == 10 && calendar.get(5) == 31 && this.rand.nextFloat() < 0.25F)
+		if (calendar.get(2) + 1 == 10 && calendar.get(5) == 31 && rand.nextFloat() < 0.25F)
 		{
-			this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(7.5D);
+			getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(7.5D);
 		}
 	}
 
 	@Override
-	public boolean canBreatheUnderwater() 
+	public boolean canBreatheUnderwater()
 	{
 		return true;
 
 	}
 
+	@Override
 	public boolean attackEntityAsMob(Entity par1Entity)
 	{
 
@@ -97,6 +98,7 @@ public class Entitydreadguard extends DreadMob
 		return hasAttacked;
 	}
 
+	@Override
 	public int getTotalArmorValue()
 	{
 		int var1 = super.getTotalArmorValue() + 2;
@@ -109,6 +111,7 @@ public class Entitydreadguard extends DreadMob
 		return var1;
 	}
 
+	@Override
 	protected boolean isAIEnabled()
 	{
 		return true;
@@ -119,6 +122,7 @@ public class Entitydreadguard extends DreadMob
 		return "Dreadguard";
 	}
 
+	@Override
 	protected String getLivingSound()
 	{
 		return "mob.blaze.breathe";
@@ -127,6 +131,7 @@ public class Entitydreadguard extends DreadMob
 	/**
 	 * Returns the sound this mob makes when it is hurt.
 	 */
+	@Override
 	protected String getHurtSound()
 	{
 		return "mob.blaze.hit";
@@ -135,17 +140,18 @@ public class Entitydreadguard extends DreadMob
 	/**
 	 * Returns the sound this mob makes on death.
 	 */
+	@Override
 	protected String getDeathSound()
 	{
 		return "abyssalcraft:dreadguard.death";
-		//		return "mob.blaze.death";
 	}
 
 	protected void playStepSound(int par1, int par2, int par3, int par4)
 	{
-		this.worldObj.playSoundAtEntity(this, "mob.zombie.step", 0.15F, 1.0F);
+		worldObj.playSoundAtEntity(this, "mob.zombie.step", 0.15F, 1.0F);
 	}
 
+	@Override
 	public EnumCreatureAttribute getCreatureAttribute()
 	{
 		return EnumCreatureAttribute.UNDEFINED;
@@ -157,18 +163,19 @@ public class Entitydreadguard extends DreadMob
 
 	}
 
+	@Override
 	public void onLivingUpdate()
 	{
-		if (this.worldObj.isRemote)
+		if (worldObj.isRemote)
 		{
 
-			this.setCurrentItemOrArmor(1, new ItemStack(AbyssalCraft.bootsD));
-			this.setCurrentItemOrArmor(3, new ItemStack(AbyssalCraft.plateD));
-			this.setCurrentItemOrArmor(4, new ItemStack(AbyssalCraft.helmetD));
-			this.setCurrentItemOrArmor(2, new ItemStack(AbyssalCraft.legsD));
+			setCurrentItemOrArmor(1, new ItemStack(AbyssalCraft.bootsD));
+			setCurrentItemOrArmor(3, new ItemStack(AbyssalCraft.plateD));
+			setCurrentItemOrArmor(4, new ItemStack(AbyssalCraft.helmetD));
+			setCurrentItemOrArmor(2, new ItemStack(AbyssalCraft.legsD));
 		}
 
-		if(this.isDead)
+		if(isDead)
 		{
 			Minecraft.getMinecraft().thePlayer.addStat(AbyssalCraft.killdreadguard, 1);
 		}

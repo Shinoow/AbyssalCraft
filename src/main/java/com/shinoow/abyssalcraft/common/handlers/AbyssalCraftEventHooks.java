@@ -15,30 +15,23 @@
  */
 package com.shinoow.abyssalcraft.common.handlers;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.MalformedURLException;
-import java.net.URL;
-
 import net.minecraft.entity.IEntityLivingData;
+import net.minecraft.entity.monster.EntityZombie;
 import net.minecraft.item.Item;
-import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.DamageSource;
-import net.minecraft.util.EnumChatFormatting;
+import net.minecraft.world.EnumDifficulty;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import net.minecraftforge.event.entity.player.BonemealEvent;
 import net.minecraftforge.event.entity.player.EntityItemPickupEvent;
-import net.minecraftforge.event.world.WorldEvent;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.common.blocks.DLTSapling;
 import com.shinoow.abyssalcraft.common.blocks.Dreadsapling;
 import com.shinoow.abyssalcraft.common.entity.EntityDepthsZombie;
+import com.shinoow.abyssalcraft.common.entity.EntityDepthsghoul;
 import com.shinoow.abyssalcraft.core.api.entity.CoraliumMob;
 import com.shinoow.abyssalcraft.core.api.entity.DreadMob;
 
-import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.common.eventhandler.Event.Result;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 
@@ -49,28 +42,44 @@ public class AbyssalCraftEventHooks {
 		if (event.entityLiving.isPotionActive(AbyssalCraft.Cplague)) {
 			if (event.entityLiving.worldObj.rand.nextInt(20) == 0) {
 				event.entityLiving.attackEntityFrom(DamageSource.magic, 2);
-				if (event.entityLiving instanceof CoraliumMob)
-				{
+				if (event.entityLiving instanceof CoraliumMob) {
 					event.entityLiving.removePotionEffect(AbyssalCraft.Cplague.id);
 				}
-				if( event.entityLiving.isDead == true )
-				{
-					EntityDepthsZombie entityzombie = new EntityDepthsZombie(event.entityLiving.worldObj);
-					entityzombie.copyLocationAndAnglesFrom(event.entityLiving);
-					entityzombie.onSpawnWithEgg((IEntityLivingData)null);
-					entityzombie.setIsPlayer(true);
+				if(event.entityLiving instanceof EntityZombie) {
+					if(!event.entityLiving.isEntityAlive())
+					{
+						EntityDepthsZombie entityzombie = new EntityDepthsZombie(event.entityLiving.worldObj);
+						if(event.entityLiving.worldObj.difficultySetting == EnumDifficulty.HARD && event.entityLiving.worldObj.rand.nextBoolean()) {
+							entityzombie.copyLocationAndAnglesFrom(event.entityLiving);
+							entityzombie.onSpawnWithEgg((IEntityLivingData)null);
+							entityzombie.setIsZombie(true);
+						}
+						else if(event.entityLiving.worldObj.rand.nextInt(8) == 0) {
+							entityzombie.copyLocationAndAnglesFrom(event.entityLiving);
+							entityzombie.onSpawnWithEgg((IEntityLivingData)null);
+							entityzombie.setIsZombie(true);
+						}
 
-					event.entityLiving.worldObj.removeEntity(event.entityLiving);
-					event.entityLiving.worldObj.spawnEntityInWorld(entityzombie);
+						event.entityLiving.worldObj.removeEntity(event.entityLiving);
+						event.entityLiving.worldObj.spawnEntityInWorld(entityzombie);
+					}
+					if(event.entityLiving.worldObj.getWorldInfo().isHardcoreModeEnabled()) {
+						if(!event.entityLiving.isEntityAlive() && event.entityLiving.worldObj.rand.nextInt(10) == 0) {
+							EntityDepthsghoul ghoul = new EntityDepthsghoul(event.entityLiving.worldObj);
+							ghoul.copyLocationAndAnglesFrom(event.entityLiving);
+							ghoul.onSpawnWithEgg((IEntityLivingData)null);
+							event.entityLiving.worldObj.removeEntity(event.entityLiving);
+							ghoul.setGhoulType(0);
+							event.entityLiving.worldObj.spawnEntityInWorld(ghoul);
+						}
+					}
 				}
-
 			}
 		}
 		if (event.entityLiving.isPotionActive(AbyssalCraft.Dplague)){
 			if (event.entityLiving.worldObj.rand.nextInt(20) == 0) {
 				event.entityLiving.attackEntityFrom(DamageSource.magic, 1);
-				if (event.entityLiving instanceof DreadMob)
-				{
+				if (event.entityLiving instanceof DreadMob) {
 					event.entityLiving.removePotionEffect(AbyssalCraft.Dplague.id);
 				}
 			}
@@ -79,96 +88,68 @@ public class AbyssalCraftEventHooks {
 
 	//Bonemeal events
 	@SubscribeEvent
-	public void bonemealUsed(BonemealEvent event)
-	{
-		if (event.block == AbyssalCraft.DLTSapling)
-		{
-			if (!event.world.isRemote)
-			{
+	public void bonemealUsed(BonemealEvent event) {
+		if (event.block == AbyssalCraft.DLTSapling) {
+			if (!event.world.isRemote) {
 				((DLTSapling)AbyssalCraft.DLTSapling).growTree(event.world, event.x, event.y, event.z, event.world.rand);
 			}
 			event.setResult(Result.ALLOW);
 		}
 
-		if (event.block == AbyssalCraft.dreadsapling)
-		{
-			if (!event.world.isRemote)
-			{
+		if (event.block == AbyssalCraft.dreadsapling) {
+			if (!event.world.isRemote) {
 				((Dreadsapling)AbyssalCraft.dreadsapling).growTree(event.world, event.x, event.y, event.z, event.world.rand);
 			}
 			event.setResult(Result.ALLOW);
 		}
-
 	}
+
 	@SubscribeEvent
-	public void onItemPickup(EntityItemPickupEvent event)
-	{
-		if(event.item.getEntityItem().getItem() == Item.getItemFromBlock(AbyssalCraft.Darkstone_cobble))
-		{
+	public void onItemPickup(EntityItemPickupEvent event) {
+		if(event.item.getEntityItem().getItem() == Item.getItemFromBlock(AbyssalCraft.Darkstone_cobble)) {
 			event.entityPlayer.addStat(AbyssalCraft.mineDS, 1);
 		}
-
-		if(event.item.getEntityItem().getItem() == AbyssalCraft.abychunk)
-		{
+		if(event.item.getEntityItem().getItem() == AbyssalCraft.abychunk) {
 			event.entityPlayer.addStat(AbyssalCraft.mineAby, 1);
 		}
-
-		if(event.item.getEntityItem().getItem() == AbyssalCraft.Coralium)
-		{
+		if(event.item.getEntityItem().getItem() == AbyssalCraft.Coralium) {
 			event.entityPlayer.addStat(AbyssalCraft.mineCorgem, 1);
 		}
-
-		if(event.item.getEntityItem().getItem() == AbyssalCraft.Cchunk)
-		{
+		if(event.item.getEntityItem().getItem() == AbyssalCraft.Cchunk) {
 			event.entityPlayer.addStat(AbyssalCraft.mineCor, 1);
 		}
-
-		if(event.item.getEntityItem().getItem() == Item.getItemFromBlock(AbyssalCraft.DGhead))
-		{
+		if(event.item.getEntityItem().getItem() == Item.getItemFromBlock(AbyssalCraft.DGhead)) {
 			event.entityPlayer.addStat(AbyssalCraft.ghoulhead, 1);
 		}
-
-		if(event.item.getEntityItem().getItem() == Item.getItemFromBlock(AbyssalCraft.Phead))
-		{
+		if(event.item.getEntityItem().getItem() == Item.getItemFromBlock(AbyssalCraft.Phead)) {
 			event.entityPlayer.addStat(AbyssalCraft.petehead, 1);
 		}
-
-		if(event.item.getEntityItem().getItem() == Item.getItemFromBlock(AbyssalCraft.Whead))
-		{
+		if(event.item.getEntityItem().getItem() == Item.getItemFromBlock(AbyssalCraft.Whead)) {
 			event.entityPlayer.addStat(AbyssalCraft.wilsonhead, 1);
 		}
-
-		if(event.item.getEntityItem().getItem() == Item.getItemFromBlock(AbyssalCraft.Ohead))
-		{
+		if(event.item.getEntityItem().getItem() == Item.getItemFromBlock(AbyssalCraft.Ohead)) {
 			event.entityPlayer.addStat(AbyssalCraft.orangehead, 1);
 		}
-
-		if(event.item.getEntityItem().getItem() == AbyssalCraft.devsword)
-		{
+		if(event.item.getEntityItem().getItem() == AbyssalCraft.devsword) {
 			event.entityPlayer.addStat(AbyssalCraft.secret1, 1);
 		}
-		if(event.item.getEntityItem().getItem() == AbyssalCraft.portalPlacer)
-		{
+		if(event.item.getEntityItem().getItem() == AbyssalCraft.portalPlacer) {
 			event.entityPlayer.addStat(AbyssalCraft.GK1, 1);
 		}
-		if(event.item.getEntityItem().getItem() == AbyssalCraft.portalPlacerDL)
-		{
+		if(event.item.getEntityItem().getItem() == AbyssalCraft.portalPlacerDL) {
 			event.entityPlayer.addStat(AbyssalCraft.GK2, 1);
 		}
-		if(event.item.getEntityItem().getItem() == Item.getItemFromBlock(AbyssalCraft.PSDL))
-		{
+		if(event.item.getEntityItem().getItem() == Item.getItemFromBlock(AbyssalCraft.PSDL)) {
 			event.entityPlayer.addStat(AbyssalCraft.findPSDL, 1);
 		}
 	}
 
 	/**@SubscribeEvent
-	public void renderDepthsHelmetOverlay(RenderGameOverlayEvent event)
-	{
+	public void renderDepthsHelmetOverlay(RenderGameOverlayEvent event) {
 		final ResourceLocation coraliumBlur = new ResourceLocation("abyssalcraft:textures/misc/coraliumblur.png");
 
 		ItemStack helmet = Minecraft.getMinecraft().thePlayer.inventory.armorItemInSlot(3);
-		if(Minecraft.getMinecraft().gameSettings.thirdPersonView == 0 && helmet != null && helmet.getItem() == AbyssalCraft.Depthshelmet)
-		{
+		if(Minecraft.getMinecraft().gameSettings.thirdPersonView == 0 && helmet != null && helmet.getItem() == AbyssalCraft.Depthshelmet) {
 			GL11.glPushAttrib(GL11.GL_ALL_ATTRIB_BITS);
 
 			Tessellator t = Tessellator.instance;
@@ -193,49 +174,5 @@ public class AbyssalCraftEventHooks {
 
 			GL11.glPopAttrib();
 		}
-	}*/
-
-	@SubscribeEvent
-	public void onWorldLoad(WorldEvent.Load event)
-	{
-		new UpdateCheck().start();
-	}
-
-	private class UpdateCheck extends Thread
-	{
-		@Override
-		public void run()
-		{
-			try
-			{
-				Thread.sleep(10000L);
-
-				if(isUpdateAvailable())
-				{
-					FMLClientHandler.instance().getClient().ingameGUI.getChatGUI().printChatMessage(new ChatComponentText("["+EnumChatFormatting.BLUE
-							+"AbyssalCraft"+EnumChatFormatting.RESET+"] An Update is available for this mod. Check http://adf.ly/FQarm for more info. (Your Version: "
-							+EnumChatFormatting.AQUA+AbyssalCraft.version+EnumChatFormatting.RESET+")"));
-
-				}
-			}
-			catch(Exception e)
-			{
-				System.err.println("UpdateChecker encountered an Exception, see following stacktrace:");
-				e.printStackTrace();
-			}
-		}
-		public boolean isUpdateAvailable() throws IOException, MalformedURLException {
-			BufferedReader versionFile = new BufferedReader(new InputStreamReader(new URL("https://dl.dropboxusercontent.com/s/ff14wwf1hqav59z/version.txt?token_hash=AAHGqet5RWJdHIPJVNrE4omCxAtx_PJbN4R_1YYSFAs-Og&dl=1").openStream()));
-			String curVersion = versionFile.readLine();
-
-			versionFile.close();
-
-			if (!curVersion.equals(AbyssalCraft.version)) {
-				return true;
-			}
-
-			return false;
-		}
-	}
+	}*/	
 }
-

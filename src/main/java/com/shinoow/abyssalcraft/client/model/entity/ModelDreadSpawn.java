@@ -20,8 +20,7 @@ import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.MathHelper;
 
-public class ModelDreadSpawn extends ModelBase
-{
+public class ModelDreadSpawn extends ModelBase {
 
 	ModelRenderer Body;
 	ModelRenderer leg1;
@@ -101,6 +100,7 @@ public class ModelDreadSpawn extends ModelBase
 		setRotation(eye4, 0F, 0F, 0F);
 	}
 
+	@Override
 	public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5)
 	{
 		super.render(entity, f, f1, f2, f3, f4, f5);
@@ -124,28 +124,29 @@ public class ModelDreadSpawn extends ModelBase
 		model.rotateAngleZ = z;
 	}
 
+	@Override
 	public void setRotationAngles(float par1, float par2, float par3, float par4, float par5, float par6, Entity par7Entity)
 	{
-		this.eye1.rotateAngleY = par4 / (180F / (float)Math.PI);
-		this.eye1.rotateAngleX = par5 / (180F / (float)Math.PI);
-		this.eye2.rotateAngleY = par4 / (180F / (float)Math.PI);
-		this.eye2.rotateAngleX = par5 / (180F / (float)Math.PI);
-		this.eye3.rotateAngleY = par4 / (180F / (float)Math.PI);
-		this.eye3.rotateAngleX = par5 / (180F / (float)Math.PI);
-		this.eye4.rotateAngleY = par4 / (180F / (float)Math.PI);
-		this.eye4.rotateAngleX = par5 / (180F / (float)Math.PI);
+		eye1.rotateAngleY = par4 / (180F / (float)Math.PI);
+		eye1.rotateAngleX = par5 / (180F / (float)Math.PI);
+		eye2.rotateAngleY = par4 / (180F / (float)Math.PI);
+		eye2.rotateAngleX = par5 / (180F / (float)Math.PI);
+		eye3.rotateAngleY = par4 / (180F / (float)Math.PI);
+		eye3.rotateAngleX = par5 / (180F / (float)Math.PI);
+		eye4.rotateAngleY = par4 / (180F / (float)Math.PI);
+		eye4.rotateAngleX = par5 / (180F / (float)Math.PI);
 
-		this.leg1.rotateAngleY = MathHelper.cos(par1 * 0.6662F + (float)Math.PI) * 2.0F * par2 * 0.5F;
-		this.leg2.rotateAngleY = MathHelper.cos(par1 * 0.6662F) * 2.0F * par2 * 0.5F;
-		this.leg3.rotateAngleY = MathHelper.cos(par1 * 0.6662F) * 1.4F * par2;
-		this.leg4.rotateAngleY = MathHelper.cos(par1 * 0.6662F + (float)Math.PI) * 1.4F * par2;
-		this.leg5.rotateAngleY = MathHelper.cos(par1 * 0.6662F + (float)Math.PI) * 1.0F * par2 * -0.5F;
+		leg1.rotateAngleY = MathHelper.cos(par1 * 0.6662F + (float)Math.PI) * 2.0F * par2 * 0.5F;
+		leg2.rotateAngleY = MathHelper.cos(par1 * 0.6662F) * 2.0F * par2 * 0.5F;
+		leg3.rotateAngleY = MathHelper.cos(par1 * 0.6662F) * 1.4F * par2;
+		leg4.rotateAngleY = MathHelper.cos(par1 * 0.6662F + (float)Math.PI) * 1.4F * par2;
+		leg5.rotateAngleY = MathHelper.cos(par1 * 0.6662F + (float)Math.PI) * 1.0F * par2 * -0.5F;
 
-		this.leg1.rotateAngleZ = 0.0F;
-		this.leg2.rotateAngleZ = 0.0F;
-		this.leg3.rotateAngleZ = 0.0F;
-		this.leg4.rotateAngleZ = 0.0F;
-		this.leg5.rotateAngleZ = 0.0F;
+		leg1.rotateAngleZ = 0.0F;
+		leg2.rotateAngleZ = 0.0F;
+		leg3.rotateAngleZ = 0.0F;
+		leg4.rotateAngleZ = 0.0F;
+		leg5.rotateAngleZ = 0.0F;
 
 	}
 

@@ -37,13 +37,14 @@ public class Darkbrickslab extends BlockSlab
 	public Darkbrickslab(boolean par2)
 	{
 		super(par2, Material.rock);
-		this.setCreativeTab(CreativeTabs.tabBlock);
-		this.setLightOpacity(0);
+		setCreativeTab(CreativeTabs.tabBlock);
+		setLightOpacity(0);
 	}
 
 	/**
 	 * Returns the ID of the items to drop on destruction.
 	 */
+	@Override
 	public Item getItemDropped(int par1, Random par2Random, int par3)
 	{
 		return Item.getItemFromBlock(this);
@@ -70,14 +71,14 @@ public class Darkbrickslab extends BlockSlab
 	@SideOnly(Side.CLIENT)
 	public Item func_149694_d(World p_149694_1_, int p_149694_2_, int p_149694_3_, int p_149694_4_)
 	{
-		return func_150003_a(this) ? Item.getItemFromBlock(this) : (this == AbyssalCraft.Darkbrickslab2 ? Item.getItemFromBlock(AbyssalCraft.Darkbrickslab1) : Item.getItemFromBlock(AbyssalCraft.Darkbrickslab1));
+		return func_150003_a(this) ? Item.getItemFromBlock(this) : this == AbyssalCraft.Darkbrickslab2 ? Item.getItemFromBlock(AbyssalCraft.Darkbrickslab1) : Item.getItemFromBlock(AbyssalCraft.Darkbrickslab1);
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
 	public String func_150002_b(int var1) {
 
-		return AbyssalCraft.Darkbrickslab1.getLocalizedName();
+		return super.getUnlocalizedName();
 	}
 
 }

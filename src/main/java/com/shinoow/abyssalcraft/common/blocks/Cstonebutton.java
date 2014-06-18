@@ -30,9 +30,10 @@ public class Cstonebutton extends BlockButton {
 		super(false);
 	}
 
+	@Override
 	@SideOnly(Side.CLIENT)
 	public void registerBlockIcons(IIconRegister par1IconRegister)
 	{
-		this.blockIcon = par1IconRegister.registerIcon(AbyssalCraft.modid + ":" + "cstone");
+		blockIcon = par1IconRegister.registerIcon(AbyssalCraft.modid + ":" + "cstone");
 	}
 }

@@ -44,23 +44,23 @@ public class ODBcore extends Block
 	@SideOnly(Side.CLIENT)
 	private static IIcon iconODBcSideOverlay;
 
-	public ODBcore()
-	{
+	public ODBcore() {
 		super(Material.iron);
-		this.setCreativeTab(AbyssalCraft.tabBlock);
+		setCreativeTab(AbyssalCraft.tabBlock);
 		this.setHarvestLevel("pickaxe", 3);
 	}
 
 	/**
 	 * Called whenever the block is added into the world. Args: world, x, y, z
 	 */
+	@Override
 	public void onBlockAdded(World par1World, int par2, int par3, int par4)
 	{
 		super.onBlockAdded(par1World, par2, par3, par4);
 
 		if (par1World.isBlockIndirectlyGettingPowered(par2, par3, par4))
 		{
-			this.onBlockDestroyedByPlayer(par1World, par2, par3, par4, 1);
+			onBlockDestroyedByPlayer(par1World, par2, par3, par4, 1);
 			par1World.setBlockToAir(par2, par3, par4);
 		}
 	}
@@ -73,7 +73,7 @@ public class ODBcore extends Block
 	{
 		if (par1World.isBlockIndirectlyGettingPowered(par2, par3, par4))
 		{
-			this.onBlockDestroyedByPlayer(par1World, par2, par3, par4, 1);
+			onBlockDestroyedByPlayer(par1World, par2, par3, par4, 1);
 			par1World.setBlockToAir(par2, par3, par4);
 		}
 	}
@@ -91,7 +91,7 @@ public class ODBcore extends Block
 	{
 		if (!par1World.isRemote)
 		{
-			EntityODBPrimed var5 = new EntityODBPrimed(par1World, (double)((float)par2 + 0.5F), (double)((float)par3 + 0.5F), (double)((float)par4 + 0.5F));
+			EntityODBPrimed var5 = new EntityODBPrimed(par1World, par2 + 0.5F, par3 + 0.5F, par4 + 0.5F);
 			var5.fuse = par1World.rand.nextInt(var5.fuse / 4) + var5.fuse / 8;
 			par1World.spawnEntityInWorld(var5);
 		}
@@ -100,13 +100,14 @@ public class ODBcore extends Block
 	/**
 	 * Called right before the block is destroyed by a player.  Args: world, x, y, z, metaData
 	 */
+	@Override
 	public void onBlockDestroyedByPlayer(World par1World, int par2, int par3, int par4, int par5)
 	{
 		if (!par1World.isRemote)
 		{
 			if ((par5 & 1) == 1)
 			{
-				EntityODBcPrimed var6 = new EntityODBcPrimed(par1World, (double)((float)par2 + 0.5F), (double)((float)par3 + 0.5F), (double)((float)par4 + 0.5F));
+				EntityODBcPrimed var6 = new EntityODBcPrimed(par1World, par2 + 0.5F, par3 + 0.5F, par4 + 0.5F);
 				par1World.spawnEntityInWorld(var6);
 				par1World.playSoundAtEntity(var6, "random.fuse", 1.0F, 1.0F);
 			}
@@ -116,24 +117,23 @@ public class ODBcore extends Block
 	/**
 	 * Called upon block activation (right click on the block.)
 	 */
+	@Override
 	public boolean onBlockActivated(World par1World, int par2, int par3, int par4, EntityPlayer par5EntityPlayer, int par6, float par7, float par8, float par9)
 	{
 		if (par5EntityPlayer.getCurrentEquippedItem() != null && par5EntityPlayer.getCurrentEquippedItem().getItem() == Items.flint_and_steel)
 		{
-			this.onBlockDestroyedByPlayer(par1World, par2, par3, par4, 1);
+			onBlockDestroyedByPlayer(par1World, par2, par3, par4, 1);
 			par1World.setBlockToAir(par2, par3, par4);
 			par5EntityPlayer.getCurrentEquippedItem().damageItem(1, par5EntityPlayer);
 			return true;
-		}
-		else
-		{
+		} else
 			return super.onBlockActivated(par1World, par2, par3, par4, par5EntityPlayer, par6, par7, par8, par9);
-		}
 	}
 
 	/**
 	 * Triggered whenever an entity collides with this block (enters into the block). Args: world, x, y, z, entity
 	 */
+	@Override
 	public void onEntityCollidedWithBlock(World par1World, int par2, int par3, int par4, Entity par5Entity)
 	{
 		if (par5Entity instanceof EntityArrow && !par1World.isRemote)
@@ -142,7 +142,7 @@ public class ODBcore extends Block
 
 			if (var6.isBurning())
 			{
-				this.onBlockDestroyedByPlayer(par1World, par2, par3, par4, 1);
+				onBlockDestroyedByPlayer(par1World, par2, par3, par4, 1);
 				par1World.setBlockToAir(par2, par3, par4);
 			}
 		}
@@ -151,11 +151,13 @@ public class ODBcore extends Block
 	/**
 	 * Return whether this block can drop from an explosion.
 	 */
+	@Override
 	public boolean canDropFromExplosion(Explosion par1Explosion)
 	{
 		return false;
 	}
 
+	@Override
 	@SideOnly(Side.CLIENT)
 
 	/**
@@ -163,16 +165,17 @@ public class ODBcore extends Block
 	 */
 	public IIcon getIcon(int par1, int par2)
 	{
-		return par1 == 1 ? this.ODBcTopIcon : (par1 == 0 ? this.ODBcBottomIcon : this.blockIcon);
+		return par1 == 1 ? ODBcTopIcon : par1 == 0 ? ODBcBottomIcon : blockIcon;
 	}
 
 
+	@Override
 	@SideOnly(Side.CLIENT)
 	public void registerBlockIcons(IIconRegister par1IconRegister)
 	{
-		this.blockIcon = par1IconRegister.registerIcon(AbyssalCraft.modid + ":" + "ODBCsides");
-		this.ODBcTopIcon = par1IconRegister.registerIcon(AbyssalCraft.modid + ":" + "BOA");
-		this.ODBcBottomIcon = par1IconRegister.registerIcon(AbyssalCraft.modid + ":" + "BOA");
+		blockIcon = par1IconRegister.registerIcon(AbyssalCraft.modid + ":" + "ODBCsides");
+		ODBcTopIcon = par1IconRegister.registerIcon(AbyssalCraft.modid + ":" + "BOA");
+		ODBcBottomIcon = par1IconRegister.registerIcon(AbyssalCraft.modid + ":" + "BOA");
 		ODBcore.iconODBcSideOverlay = par1IconRegister.registerIcon(AbyssalCraft.modid + ":" + "ODBsides");
 	}
 

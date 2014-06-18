@@ -39,17 +39,18 @@ public class BiomeGenAbywasteland extends BiomeGenBase
 	{
 		super(par1);
 
-		this.waterColorMultiplier = 0x24FF83;
-		this.spawnableMonsterList.clear();
-		this.spawnableCreatureList.clear();
-		this.spawnableWaterCreatureList.clear();
-		this.spawnableCaveCreatureList.clear();
-		this.spawnableMonsterList.add(new SpawnListEntry(EntityZombie.class, 5, 1, 5));
-		this.spawnableMonsterList.add(new SpawnListEntry(EntitySkeleton.class, 5, 1, 5));
-		this.spawnableMonsterList.add(new SpawnListEntry(EntityDepthsghoul.class, 5, 1, 5));
-		this.spawnableMonsterList.add(new SpawnListEntry(EntityDepthsZombie.class, 5, 1, 5));
+		waterColorMultiplier = 0x24FF83;
+		spawnableMonsterList.clear();
+		spawnableCreatureList.clear();
+		spawnableWaterCreatureList.clear();
+		spawnableCaveCreatureList.clear();
+		spawnableMonsterList.add(new SpawnListEntry(EntityZombie.class, 5, 1, 5));
+		spawnableMonsterList.add(new SpawnListEntry(EntitySkeleton.class, 5, 1, 5));
+		spawnableMonsterList.add(new SpawnListEntry(EntityDepthsghoul.class, 5, 1, 5));
+		spawnableMonsterList.add(new SpawnListEntry(EntityDepthsZombie.class, 5, 1, 5));
 	}
 
+	@Override
 	public void decorate(World par1World, Random par2Random, int par3, int par4)
 	{
 		super.decorate(par1World, par2Random, par3, par4);
@@ -70,20 +71,20 @@ public class BiomeGenAbywasteland extends BiomeGenBase
 				par1World.setBlock(var7, var8, var9, AbyssalCraft.AbyCorOre);
 			}
 		}
-	} 
+	}
 	@Override
 	public void genTerrainBlocks(World p_150573_1_, Random p_150573_2_, Block[] p_150573_3_, byte[] p_150573_4_, int p_150573_5_, int p_150573_6_, double p_150573_7_)
 	{
-		this.topBlock = (Block)AbyssalCraft.abystone;
-		this.fillerBlock = (Block)AbyssalCraft.abystone;
-		this.genAbyssTerrain(p_150573_1_, p_150573_2_, p_150573_3_, p_150573_4_, p_150573_5_, p_150573_6_, p_150573_7_);
+		topBlock = AbyssalCraft.abystone;
+		fillerBlock = AbyssalCraft.abystone;
+		genAbyssTerrain(p_150573_1_, p_150573_2_, p_150573_3_, p_150573_4_, p_150573_5_, p_150573_6_, p_150573_7_);
 	}
 
 	public final void genAbyssTerrain(World p_150560_1_, Random p_150560_2_, Block[] p_150560_3_, byte[] p_150560_4_, int p_150560_5_, int p_150560_6_, double p_150560_7_)
 	{
-		Block block = this.topBlock;
-		byte b0 = (byte)(this.field_150604_aj & 255);
-		Block block1 = this.fillerBlock;
+		Block block = topBlock;
+		byte b0 = (byte)(field_150604_aj & 255);
+		Block block1 = fillerBlock;
 		int k = -1;
 		int l = (int)(p_150560_7_ / 3.0D + 3.0D + p_150560_2_.nextDouble() * 0.25D);
 		int i1 = p_150560_5_ & 15;
@@ -116,14 +117,14 @@ public class BiomeGenAbywasteland extends BiomeGenBase
 							}
 							else if (l1 >= 59 && l1 <= 64)
 							{
-								block = this.topBlock;
-								b0 = (byte)(this.field_150604_aj & 255);
-								block1 = this.fillerBlock;
+								block = topBlock;
+								b0 = (byte)(field_150604_aj & 255);
+								block1 = fillerBlock;
 							}
 
 							if (l1 < 63 && (block == null || block.getMaterial() == Material.air))
 							{
-								if (this.getFloatTemperature(p_150560_5_, l1, p_150560_6_) < 0.15F)
+								if (getFloatTemperature(p_150560_5_, l1, p_150560_6_) < 0.15F)
 								{
 									block = Blocks.ice;
 									b0 = 0;
@@ -174,6 +175,7 @@ public class BiomeGenAbywasteland extends BiomeGenBase
 		}
 	}
 
+	@Override
 	@SideOnly(Side.CLIENT)
 
 	public int getSkyColorByTemp(float par1)

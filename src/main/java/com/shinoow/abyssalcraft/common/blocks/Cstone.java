@@ -27,20 +27,22 @@ public class Cstone extends Block {
 
 	public Cstone() {
 		super(Material.rock);
-		this.setCreativeTab(AbyssalCraft.tabBlock);
+		setCreativeTab(AbyssalCraft.tabBlock);
+		setTickRandomly(true);
 	}
 
-	public void randomDisplayTick(World par1World, int par2, int par3, int par4, Random par5Random)
-	{
-		super.randomDisplayTick(par1World, par2, par3, par4, par5Random);
+	@Override
+	public void updateTick(World par1World, int par2, int par3, int par4, Random par5Random) {
+		if (!par1World.isRemote) {
+			for (int l = 0; l < 1; ++l) {
+				int i1 = par2 + par5Random.nextInt(3) - 1;
+				int j1 = par3 + par5Random.nextInt(5) - 3;
+				int k1 = par4 + par5Random.nextInt(3) - 1;
 
-		if (!par1World.isRemote)
-		{
-			if (par1World.getBlock(par2, par3, par4).getMaterial() == CLiquid.Cwater)
-			{
-				par1World.setBlock(par2, par3, par4, this);
+				if (par1World.getBlock(i1, j1, k1) == AbyssalCraft.Cwater && par1World.getBlockMetadata(i1, j1, k1) == 0) {
+					par1World.setBlock(i1, j1, k1, AbyssalCraft.cstone);
+				}
 			}
-
 		}
 	}
 }

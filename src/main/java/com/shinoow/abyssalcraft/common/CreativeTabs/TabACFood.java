@@ -34,7 +34,7 @@ public class TabACFood extends CreativeTabs
 	@SideOnly(Side.CLIENT)
 	public String getTranslatedTabLabel()
 	{
-		return "AbyssalCraft Foodstuffs";
+		return "itemgroup." + this.getTabLabel();
 	}
 
 	@Override

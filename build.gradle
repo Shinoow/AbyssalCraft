@@ -17,12 +17,12 @@ buildscript {
 
 apply plugin: 'forge'
 
-version = "1.7.2-1.5.5"
+version = "1.7.2-1.6.0"
 group= "com.shinoow.abyssalcraft" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = "AbyssalCraft"
 
 minecraft {
-    version = "1.7.2-10.12.1.1078"
+    version = "1.7.2-10.12.1.1112"
     assetDir = "eclipse/assets"
 }
 

@@ -18,12 +18,10 @@ package com.shinoow.abyssalcraft.common.blocks;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 
-public class abyblock extends Block
-{
+public class abyblock extends Block {
 
 	public abyblock() {
 		super(Material.iron);
 		this.setHarvestLevel("pickaxe", 2);
-		
 	}
 }

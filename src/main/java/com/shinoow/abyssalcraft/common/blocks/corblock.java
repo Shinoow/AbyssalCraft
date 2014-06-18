@@ -23,7 +23,5 @@ public class corblock extends Block {
 	public corblock() {
 		super(Material.iron);
 		this.setHarvestLevel("pickaxe", 5);
-
 	}
-
 }

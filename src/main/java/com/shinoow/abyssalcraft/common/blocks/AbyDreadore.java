@@ -24,7 +24,7 @@ public class AbyDreadore extends Block {
 
 	public AbyDreadore() {
 		super(Material.rock);
-		this.setCreativeTab(AbyssalCraft.tabBlock);
+		setCreativeTab(AbyssalCraft.tabBlock);
 		this.setHarvestLevel("pickaxe", 4);
 	}
 }

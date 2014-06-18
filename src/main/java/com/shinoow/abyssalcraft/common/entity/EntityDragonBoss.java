@@ -30,7 +30,9 @@ import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.MathHelper;
+import net.minecraft.util.StatCollector;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
@@ -90,20 +92,28 @@ public class EntityDragonBoss extends CoraliumMob implements IBossDisplayData, I
 
 	public EntityDragonBoss(World par1World) {
 		super(par1World);
-		this.dragonPartArray = new EntityDragonPart[] {this.dragonPartHead = new EntityDragonPart(this, "head", 6.0F, 6.0F), this.dragonPartBody = new EntityDragonPart(this, "body", 8.0F, 8.0F), this.dragonPartTail1 = new EntityDragonPart(this, "tail", 4.0F, 4.0F), this.dragonPartTail2 = new EntityDragonPart(this, "tail", 4.0F, 4.0F), this.dragonPartTail3 = new EntityDragonPart(this, "tail", 4.0F, 4.0F), this.dragonPartWing1 = new EntityDragonPart(this, "wing", 4.0F, 4.0F), this.dragonPartWing2 = new EntityDragonPart(this, "wing", 4.0F, 4.0F)};
-		this.setHealth(this.getMaxHealth());
-		this.setSize(16.0F, 8.0F);
-		this.noClip = false;
-		this.targetY = 100.0D;
-		this.ignoreFrustumCheck = true;
+		dragonPartArray = new EntityDragonPart[] {dragonPartHead = new EntityDragonPart(this, "head", 6.0F, 6.0F), dragonPartBody = new EntityDragonPart(this, "body", 8.0F, 8.0F), dragonPartTail1 = new EntityDragonPart(this, "tail", 4.0F, 4.0F), dragonPartTail2 = new EntityDragonPart(this, "tail", 4.0F, 4.0F), dragonPartTail3 = new EntityDragonPart(this, "tail", 4.0F, 4.0F), dragonPartWing1 = new EntityDragonPart(this, "wing", 4.0F, 4.0F), dragonPartWing2 = new EntityDragonPart(this, "wing", 4.0F, 4.0F)};
+		setHealth(getMaxHealth());
+		setSize(16.0F, 8.0F);
+		noClip = false;
+		targetY = 100.0D;
+		ignoreFrustumCheck = true;
 	}
+	
+	@Override
+	public String getCommandSenderName()
+    {
+        return EnumChatFormatting.AQUA + StatCollector.translateToLocal("entity.abyssalcraft.dragonboss.name");
+    }
 
+	@Override
 	protected void applyEntityAttributes()
 	{
 		super.applyEntityAttributes();
-		this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(400.0D);
+		getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(400.0D);
 	}
 
+	@Override
 	protected void entityInit()
 	{
 		super.entityInit();
@@ -111,30 +121,32 @@ public class EntityDragonBoss extends CoraliumMob implements IBossDisplayData, I
 
 	public double[] getMovementOffsets(int par1, float par2)
 	{
-		if (this.getHealth() <= 0.0F)
+		if (getHealth() <= 0.0F)
 		{
 			par2 = 0.0F;
 		}
 
 		par2 = 1.0F - par2;
-		int j = this.ringBufferIndex - par1 * 1 & 63;
-		int k = this.ringBufferIndex - par1 * 1 - 1 & 63;
+		int j = ringBufferIndex - par1 * 1 & 63;
+		int k = ringBufferIndex - par1 * 1 - 1 & 63;
 		double[] adouble = new double[3];
-		double d0 = this.ringBuffer[j][0];
-		double d1 = MathHelper.wrapAngleTo180_double(this.ringBuffer[k][0] - d0);
-		adouble[0] = d0 + d1 * (double)par2;
-		d0 = this.ringBuffer[j][1];
-		d1 = this.ringBuffer[k][1] - d0;
-		adouble[1] = d0 + d1 * (double)par2;
-		adouble[2] = this.ringBuffer[j][2] + (this.ringBuffer[k][2] - this.ringBuffer[j][2]) * (double)par2;
+		double d0 = ringBuffer[j][0];
+		double d1 = MathHelper.wrapAngleTo180_double(ringBuffer[k][0] - d0);
+		adouble[0] = d0 + d1 * par2;
+		d0 = ringBuffer[j][1];
+		d1 = ringBuffer[k][1] - d0;
+		adouble[1] = d0 + d1 * par2;
+		adouble[2] = ringBuffer[j][2] + (ringBuffer[k][2] - ringBuffer[j][2]) * par2;
 		return adouble;
 	}
 
+	@Override
 	protected void dropFewItems(boolean par1, int par2)
 	{
-		this.dropItem(AbyssalCraft.EoA, 1);
+		dropItem(AbyssalCraft.EoA, 1);
 	}
 
+	@Override
 	public void onDeath(DamageSource par1DamageSource)
 	{
 		if (par1DamageSource.getEntity() instanceof EntityPlayer)
@@ -145,6 +157,7 @@ public class EntityDragonBoss extends CoraliumMob implements IBossDisplayData, I
 		super.onDeath(par1DamageSource);
 	}
 
+	@Override
 	public void onLivingUpdate()
 	{
 		BossStatus.setBossStatus(this, true);
@@ -152,88 +165,88 @@ public class EntityDragonBoss extends CoraliumMob implements IBossDisplayData, I
 		float f;
 		float f1;
 
-		if (this.worldObj.isRemote)
+		if (worldObj.isRemote)
 		{
-			f = MathHelper.cos(this.animTime * (float)Math.PI * 2.0F);
-			f1 = MathHelper.cos(this.prevAnimTime * (float)Math.PI * 2.0F);
+			f = MathHelper.cos(animTime * (float)Math.PI * 2.0F);
+			f1 = MathHelper.cos(prevAnimTime * (float)Math.PI * 2.0F);
 
 			if (f1 <= -0.3F && f >= -0.3F)
 			{
-				this.worldObj.playSound(this.posX, this.posY, this.posZ, "mob.enderdragon.wings", 5.0F, 0.8F + this.rand.nextFloat() * 0.3F, false);
+				worldObj.playSound(posX, posY, posZ, "mob.enderdragon.wings", 5.0F, 0.8F + rand.nextFloat() * 0.3F, false);
 			}
 		}
 
-		this.prevAnimTime = this.animTime;
+		prevAnimTime = animTime;
 		float f2;
 
-		if (this.getHealth() <= 0.0F)
+		if (getHealth() <= 0.0F)
 		{
-			f = (this.rand.nextFloat() - 0.5F) * 8.0F;
-			f1 = (this.rand.nextFloat() - 0.5F) * 4.0F;
-			f2 = (this.rand.nextFloat() - 0.5F) * 8.0F;
-			this.worldObj.spawnParticle("largeexplode", this.posX + (double)f, this.posY + 2.0D + (double)f1, this.posZ + (double)f2, 0.0D, 0.0D, 0.0D);
+			f = (rand.nextFloat() - 0.5F) * 8.0F;
+			f1 = (rand.nextFloat() - 0.5F) * 4.0F;
+			f2 = (rand.nextFloat() - 0.5F) * 8.0F;
+			worldObj.spawnParticle("largeexplode", posX + f, posY + 2.0D + f1, posZ + f2, 0.0D, 0.0D, 0.0D);
 		}
 		else
 		{
-			this.updateHealingCircle();
-			f = 0.2F / (MathHelper.sqrt_double(this.motionX * this.motionX + this.motionZ * this.motionZ) * 10.0F + 1.0F);
-			f *= (float)Math.pow(2.0D, this.motionY);
+			updateHealingCircle();
+			f = 0.2F / (MathHelper.sqrt_double(motionX * motionX + motionZ * motionZ) * 10.0F + 1.0F);
+			f *= (float)Math.pow(2.0D, motionY);
 
-			this.animTime += f;
+			animTime += f;
 
 
-			this.rotationYaw = MathHelper.wrapAngleTo180_float(this.rotationYaw);
+			rotationYaw = MathHelper.wrapAngleTo180_float(rotationYaw);
 
-			if (this.ringBufferIndex < 0)
+			if (ringBufferIndex < 0)
 			{
-				for (int i = 0; i < this.ringBuffer.length; ++i)
+				for (int i = 0; i < ringBuffer.length; ++i)
 				{
-					this.ringBuffer[i][0] = (double)this.rotationYaw;
-					this.ringBuffer[i][1] = this.posY;
+					ringBuffer[i][0] = rotationYaw;
+					ringBuffer[i][1] = posY;
 				}
 			}
 
-			if (++this.ringBufferIndex == this.ringBuffer.length)
+			if (++ringBufferIndex == ringBuffer.length)
 			{
-				this.ringBufferIndex = 0;
+				ringBufferIndex = 0;
 			}
 
-			this.ringBuffer[this.ringBufferIndex][0] = (double)this.rotationYaw;
-			this.ringBuffer[this.ringBufferIndex][1] = this.posY;
+			ringBuffer[ringBufferIndex][0] = rotationYaw;
+			ringBuffer[ringBufferIndex][1] = posY;
 			double d0;
 			double d1;
 			double d2;
 			double d3;
 			float f3;
 
-			if (this.worldObj.isRemote)
+			if (worldObj.isRemote)
 			{
-				if (this.newPosRotationIncrements > 0)
+				if (newPosRotationIncrements > 0)
 				{
-					d3 = this.posX + (this.newPosX - this.posX) / (double)this.newPosRotationIncrements;
-					d0 = this.posY + (this.newPosY - this.posY) / (double)this.newPosRotationIncrements;
-					d1 = this.posZ + (this.newPosZ - this.posZ) / (double)this.newPosRotationIncrements;
-					d2 = MathHelper.wrapAngleTo180_double(this.newRotationYaw - (double)this.rotationYaw);
-					this.rotationYaw = (float)((double)this.rotationYaw + d2 / (double)this.newPosRotationIncrements);
-					this.rotationPitch = (float)((double)this.rotationPitch + (this.newRotationPitch - (double)this.rotationPitch) / (double)this.newPosRotationIncrements);
-					--this.newPosRotationIncrements;
-					this.setPosition(d3, d0, d1);
-					this.setRotation(this.rotationYaw, this.rotationPitch);
+					d3 = posX + (newPosX - posX) / newPosRotationIncrements;
+					d0 = posY + (newPosY - posY) / newPosRotationIncrements;
+					d1 = posZ + (newPosZ - posZ) / newPosRotationIncrements;
+					d2 = MathHelper.wrapAngleTo180_double(newRotationYaw - rotationYaw);
+					rotationYaw = (float)(rotationYaw + d2 / newPosRotationIncrements);
+					rotationPitch = (float)(rotationPitch + (newRotationPitch - rotationPitch) / newPosRotationIncrements);
+					--newPosRotationIncrements;
+					setPosition(d3, d0, d1);
+					setRotation(rotationYaw, rotationPitch);
 				}
 			}
 			else
 			{
-				d3 = this.targetX - this.posX;
-				d0 = this.targetY - this.posY;
-				d1 = this.targetZ - this.posZ;
+				d3 = targetX - posX;
+				d0 = targetY - posY;
+				d1 = targetZ - posZ;
 				d2 = d3 * d3 + d0 * d0 + d1 * d1;
 
-				if (this.target != null)
+				if (target != null)
 				{
-					this.targetX = this.target.posX;
-					this.targetZ = this.target.posZ;
-					double d4 = this.targetX - this.posX;
-					double d5 = this.targetZ - this.posZ;
+					targetX = target.posX;
+					targetZ = target.posZ;
+					double d4 = targetX - posX;
+					double d5 = targetZ - posZ;
 					double d6 = Math.sqrt(d4 * d4 + d5 * d5);
 					double d7 = 0.4000000059604645D + d6 / 80.0D - 1.0D;
 
@@ -242,36 +255,36 @@ public class EntityDragonBoss extends CoraliumMob implements IBossDisplayData, I
 						d7 = 10.0D;
 					}
 
-					this.targetY = this.target.boundingBox.minY + d7;
+					targetY = target.boundingBox.minY + d7;
 				}
 				else
 				{
-					this.targetX += this.rand.nextGaussian() * 2.0D;
-					this.targetZ += this.rand.nextGaussian() * 2.0D;
+					targetX += rand.nextGaussian() * 2.0D;
+					targetZ += rand.nextGaussian() * 2.0D;
 				}
 
-				if (this.forceNewTarget || d2 < 100.0D || d2 > 22500.0D || this.isCollidedHorizontally || this.isCollidedVertically)
+				if (forceNewTarget || d2 < 100.0D || d2 > 22500.0D || isCollidedHorizontally || isCollidedVertically)
 				{
-					this.setNewTarget();
+					setNewTarget();
 				}
 
-				d0 /= (double)MathHelper.sqrt_double(d3 * d3 + d1 * d1);
+				d0 /= MathHelper.sqrt_double(d3 * d3 + d1 * d1);
 				f3 = 0.6F;
 
-				if (d0 < (double)(-f3))
+				if (d0 < -f3)
 				{
-					d0 = (double)(-f3);
+					d0 = -f3;
 				}
 
-				if (d0 > (double)f3)
+				if (d0 > f3)
 				{
-					d0 = (double)f3;
+					d0 = f3;
 				}
 
-				this.motionY += d0 * 0.10000000149011612D;
-				this.rotationYaw = MathHelper.wrapAngleTo180_float(this.rotationYaw);
+				motionY += d0 * 0.10000000149011612D;
+				rotationYaw = MathHelper.wrapAngleTo180_float(rotationYaw);
 				double d8 = 180.0D - Math.atan2(d3, d1) * 180.0D / Math.PI;
-				double d9 = MathHelper.wrapAngleTo180_double(d8 - (double)this.rotationYaw);
+				double d9 = MathHelper.wrapAngleTo180_double(d8 - rotationYaw);
 
 				if (d9 > 50.0D)
 				{
@@ -283,8 +296,8 @@ public class EntityDragonBoss extends CoraliumMob implements IBossDisplayData, I
 					d9 = -50.0D;
 				}
 
-				Vec3 vec3 = this.worldObj.getWorldVec3Pool().getVecFromPool(this.targetX - this.posX, this.targetY - this.posY, this.targetZ - this.posZ).normalize();
-				Vec3 vec31 = this.worldObj.getWorldVec3Pool().getVecFromPool((double)MathHelper.sin(this.rotationYaw * (float)Math.PI / 180.0F), this.motionY, (double)(-MathHelper.cos(this.rotationYaw * (float)Math.PI / 180.0F))).normalize();
+				Vec3 vec3 = worldObj.getWorldVec3Pool().getVecFromPool(targetX - posX, targetY - posY, targetZ - posZ).normalize();
+				Vec3 vec31 = worldObj.getWorldVec3Pool().getVecFromPool(MathHelper.sin(rotationYaw * (float)Math.PI / 180.0F), motionY, -MathHelper.cos(rotationYaw * (float)Math.PI / 180.0F)).normalize();
 				float f4 = (float)(vec31.dotProduct(vec3) + 0.5D) / 1.5F;
 
 				if (f4 < 0.0F)
@@ -292,75 +305,75 @@ public class EntityDragonBoss extends CoraliumMob implements IBossDisplayData, I
 					f4 = 0.0F;
 				}
 
-				this.randomYawVelocity *= 0.8F;
-				float f5 = MathHelper.sqrt_double(this.motionX * this.motionX + this.motionZ * this.motionZ) * 1.0F + 1.0F;
-				double d10 = Math.sqrt(this.motionX * this.motionX + this.motionZ * this.motionZ) * 1.0D + 1.0D;
+				randomYawVelocity *= 0.8F;
+				float f5 = MathHelper.sqrt_double(motionX * motionX + motionZ * motionZ) * 1.0F + 1.0F;
+				double d10 = Math.sqrt(motionX * motionX + motionZ * motionZ) * 1.0D + 1.0D;
 
 				if (d10 > 40.0D)
 				{
 					d10 = 40.0D;
 				}
 
-				this.randomYawVelocity = (float)((double)this.randomYawVelocity + d9 * (0.699999988079071D / d10 / (double)f5));
-				this.rotationYaw += this.randomYawVelocity * 0.1F;
+				randomYawVelocity = (float)(randomYawVelocity + d9 * (0.699999988079071D / d10 / f5));
+				rotationYaw += randomYawVelocity * 0.1F;
 				float f6 = (float)(2.0D / (d10 + 1.0D));
 				float f7 = 0.06F;
-				this.moveFlying(0.0F, -1.0F, f7 * (f4 * f6 + (1.0F - f6)));
+				moveFlying(0.0F, -1.0F, f7 * (f4 * f6 + (1.0F - f6)));
 
 
-				this.moveEntity(this.motionX, this.motionY, this.motionZ);
+				moveEntity(motionX, motionY, motionZ);
 
 
-				Vec3 vec32 = this.worldObj.getWorldVec3Pool().getVecFromPool(this.motionX, this.motionY, this.motionZ).normalize();
+				Vec3 vec32 = worldObj.getWorldVec3Pool().getVecFromPool(motionX, motionY, motionZ).normalize();
 				float f8 = (float)(vec32.dotProduct(vec31) + 1.0D) / 2.0F;
 				f8 = 0.8F + 0.15F * f8;
-				this.motionX *= (double)f8;
-				this.motionZ *= (double)f8;
-				this.motionY *= 0.9100000262260437D;
+				motionX *= f8;
+				motionZ *= f8;
+				motionY *= 0.9100000262260437D;
 			}
 
 			for (int i = 0; i < 2; ++i)
 			{
-				ParticleEffects.spawnParticle("CorBlood", this.posX + (this.rand.nextDouble() - 0.5D) * (double)this.width, this.posY + this.rand.nextDouble() * (double)this.height - 0.25D, this.posZ + (this.rand.nextDouble() - 0.5D) * (double)this.width, (this.rand.nextDouble() - 0.5D) * 2.0D, -this.rand.nextDouble(), (this.rand.nextDouble() - 0.5D) * 2.0D);
+				ParticleEffects.spawnParticle("CorBlood", posX + (rand.nextDouble() - 0.5D) * width, posY + rand.nextDouble() * height - 0.25D, posZ + (rand.nextDouble() - 0.5D) * width, (rand.nextDouble() - 0.5D) * 2.0D, -rand.nextDouble(), (rand.nextDouble() - 0.5D) * 2.0D);
 			}
 
-			this.renderYawOffset = this.rotationYaw;
-			this.dragonPartHead.width = this.dragonPartHead.height = 3.0F;
-			this.dragonPartTail1.width = this.dragonPartTail1.height = 2.0F;
-			this.dragonPartTail2.width = this.dragonPartTail2.height = 2.0F;
-			this.dragonPartTail3.width = this.dragonPartTail3.height = 2.0F;
-			this.dragonPartBody.height = 3.0F;
-			this.dragonPartBody.width = 5.0F;
-			this.dragonPartWing1.height = 2.0F;
-			this.dragonPartWing1.width = 4.0F;
-			this.dragonPartWing2.height = 3.0F;
-			this.dragonPartWing2.width = 4.0F;
-			f1 = (float)(this.getMovementOffsets(5, 1.0F)[1] - this.getMovementOffsets(10, 1.0F)[1]) * 10.0F / 180.0F * (float)Math.PI;
+			renderYawOffset = rotationYaw;
+			dragonPartHead.width = dragonPartHead.height = 3.0F;
+			dragonPartTail1.width = dragonPartTail1.height = 2.0F;
+			dragonPartTail2.width = dragonPartTail2.height = 2.0F;
+			dragonPartTail3.width = dragonPartTail3.height = 2.0F;
+			dragonPartBody.height = 3.0F;
+			dragonPartBody.width = 5.0F;
+			dragonPartWing1.height = 2.0F;
+			dragonPartWing1.width = 4.0F;
+			dragonPartWing2.height = 3.0F;
+			dragonPartWing2.width = 4.0F;
+			f1 = (float)(getMovementOffsets(5, 1.0F)[1] - getMovementOffsets(10, 1.0F)[1]) * 10.0F / 180.0F * (float)Math.PI;
 			f2 = MathHelper.cos(f1);
 			float f9 = -MathHelper.sin(f1);
-			float f10 = this.rotationYaw * (float)Math.PI / 180.0F;
+			float f10 = rotationYaw * (float)Math.PI / 180.0F;
 			float f11 = MathHelper.sin(f10);
 			float f12 = MathHelper.cos(f10);
-			this.dragonPartBody.onUpdate();
-			this.dragonPartBody.setLocationAndAngles(this.posX + (double)(f11 * 0.5F), this.posY, this.posZ - (double)(f12 * 0.5F), 0.0F, 0.0F);
-			this.dragonPartWing1.onUpdate();
-			this.dragonPartWing1.setLocationAndAngles(this.posX + (double)(f12 * 4.5F), this.posY + 2.0D, this.posZ + (double)(f11 * 4.5F), 0.0F, 0.0F);
-			this.dragonPartWing2.onUpdate();
-			this.dragonPartWing2.setLocationAndAngles(this.posX - (double)(f12 * 4.5F), this.posY + 2.0D, this.posZ - (double)(f11 * 4.5F), 0.0F, 0.0F);
+			dragonPartBody.onUpdate();
+			dragonPartBody.setLocationAndAngles(posX + f11 * 0.5F, posY, posZ - f12 * 0.5F, 0.0F, 0.0F);
+			dragonPartWing1.onUpdate();
+			dragonPartWing1.setLocationAndAngles(posX + f12 * 4.5F, posY + 2.0D, posZ + f11 * 4.5F, 0.0F, 0.0F);
+			dragonPartWing2.onUpdate();
+			dragonPartWing2.setLocationAndAngles(posX - f12 * 4.5F, posY + 2.0D, posZ - f11 * 4.5F, 0.0F, 0.0F);
 
-			if (!this.worldObj.isRemote && this.hurtTime == 0)
+			if (!worldObj.isRemote && hurtTime == 0)
 			{
-				this.collideWithEntities(this.worldObj.getEntitiesWithinAABBExcludingEntity(this, this.dragonPartWing1.boundingBox.expand(4.0D, 2.0D, 4.0D).offset(0.0D, -2.0D, 0.0D)));
-				this.collideWithEntities(this.worldObj.getEntitiesWithinAABBExcludingEntity(this, this.dragonPartWing2.boundingBox.expand(4.0D, 2.0D, 4.0D).offset(0.0D, -2.0D, 0.0D)));
-				this.attackEntitiesInList(this.worldObj.getEntitiesWithinAABBExcludingEntity(this, this.dragonPartHead.boundingBox.expand(1.0D, 1.0D, 1.0D)));
+				collideWithEntities(worldObj.getEntitiesWithinAABBExcludingEntity(this, dragonPartWing1.boundingBox.expand(4.0D, 2.0D, 4.0D).offset(0.0D, -2.0D, 0.0D)));
+				collideWithEntities(worldObj.getEntitiesWithinAABBExcludingEntity(this, dragonPartWing2.boundingBox.expand(4.0D, 2.0D, 4.0D).offset(0.0D, -2.0D, 0.0D)));
+				attackEntitiesInList(worldObj.getEntitiesWithinAABBExcludingEntity(this, dragonPartHead.boundingBox.expand(1.0D, 1.0D, 1.0D)));
 			}
 
-			double[] adouble = this.getMovementOffsets(5, 1.0F);
-			double[] adouble1 = this.getMovementOffsets(0, 1.0F);
-			f3 = MathHelper.sin(this.rotationYaw * (float)Math.PI / 180.0F - this.randomYawVelocity * 0.01F);
-			float f13 = MathHelper.cos(this.rotationYaw * (float)Math.PI / 180.0F - this.randomYawVelocity * 0.01F);
-			this.dragonPartHead.onUpdate();
-			this.dragonPartHead.setLocationAndAngles(this.posX + (double)(f3 * 5.5F * f2), this.posY + (adouble1[1] - adouble[1]) * 1.0D + (double)(f9 * 5.5F), this.posZ - (double)(f13 * 5.5F * f2), 0.0F, 0.0F);
+			double[] adouble = getMovementOffsets(5, 1.0F);
+			double[] adouble1 = getMovementOffsets(0, 1.0F);
+			f3 = MathHelper.sin(rotationYaw * (float)Math.PI / 180.0F - randomYawVelocity * 0.01F);
+			float f13 = MathHelper.cos(rotationYaw * (float)Math.PI / 180.0F - randomYawVelocity * 0.01F);
+			dragonPartHead.onUpdate();
+			dragonPartHead.setLocationAndAngles(posX + f3 * 5.5F * f2, posY + (adouble1[1] - adouble[1]) * 1.0D + f9 * 5.5F, posZ - f13 * 5.5F * f2, 0.0F, 0.0F);
 
 			for (int j = 0; j < 3; ++j)
 			{
@@ -368,63 +381,63 @@ public class EntityDragonBoss extends CoraliumMob implements IBossDisplayData, I
 
 				if (j == 0)
 				{
-					entitydragonpart = this.dragonPartTail1;
+					entitydragonpart = dragonPartTail1;
 				}
 
 				if (j == 1)
 				{
-					entitydragonpart = this.dragonPartTail2;
+					entitydragonpart = dragonPartTail2;
 				}
 
 				if (j == 2)
 				{
-					entitydragonpart = this.dragonPartTail3;
+					entitydragonpart = dragonPartTail3;
 				}
 
-				double[] adouble2 = this.getMovementOffsets(12 + j * 2, 1.0F);
-				float f14 = this.rotationYaw * (float)Math.PI / 180.0F + this.simplifyAngle(adouble2[0] - adouble[0]) * (float)Math.PI / 180.0F * 1.0F;
+				double[] adouble2 = getMovementOffsets(12 + j * 2, 1.0F);
+				float f14 = rotationYaw * (float)Math.PI / 180.0F + simplifyAngle(adouble2[0] - adouble[0]) * (float)Math.PI / 180.0F * 1.0F;
 				float f15 = MathHelper.sin(f14);
 				float f16 = MathHelper.cos(f14);
 				float f17 = 1.5F;
-				float f18 = (float)(j + 1) * 2.0F;
+				float f18 = (j + 1) * 2.0F;
 				entitydragonpart.onUpdate();
-				entitydragonpart.setLocationAndAngles(this.posX - (double)((f11 * f17 + f15 * f18) * f2), this.posY + (adouble2[1] - adouble[1]) * 1.0D - (double)((f18 + f17) * f9) + 1.5D, this.posZ + (double)((f12 * f17 + f16 * f18) * f2), 0.0F, 0.0F);
+				entitydragonpart.setLocationAndAngles(posX - (f11 * f17 + f15 * f18) * f2, posY + (adouble2[1] - adouble[1]) * 1.0D - (f18 + f17) * f9 + 1.5D, posZ + (f12 * f17 + f16 * f18) * f2, 0.0F, 0.0F);
 			}
 		}
-	}
-
-	public String getEntityName()
-	{
-		return "\u00a7bAsorah, The Fallen";
 	}
 
 	private void updateHealingCircle()
 	{
-		if (this.healingcircle != null)
+		if (healingcircle != null)
 		{
-			if (this.healingcircle.isDead)
+			if (healingcircle.isDead)
 			{
-				if (!this.worldObj.isRemote)
+				if (!worldObj.isRemote)
 				{
-					this.attackEntityFromPart(this.dragonPartHead, DamageSource.setExplosionSource((Explosion)null), 10.0F);
+					attackEntityFromPart(dragonPartHead, DamageSource.setExplosionSource((Explosion)null), 10.0F);
 				}
 
-				this.healingcircle = null;
+				healingcircle = null;
 			}
-			else if (this.ticksExisted % 10 == 0 && this.getHealth() < this.getMaxHealth())
+			else if (ticksExisted % 10 == 0 && getHealth() < getMaxHealth())
 			{
-				this.setHealth(this.getHealth() + 1.0F);
+				setHealth(getHealth() + 1.0F);
 			}
-			else if (this.ticksExisted % 10 == 0 && this.getHealth() < (this.getMaxHealth()/2))
+			else if (ticksExisted % 10 == 0 && getHealth() < getMaxHealth()/2)
 			{
-				this.setHealth(this.getHealth() - 1.0F);
+				setHealth(getHealth() - 1.0F);
+			}
+			else if (ticksExisted % 10 == 0 && getHealth() < getMaxHealth()/4)
+			{
+				setHealth(getHealth() + 1.0F);
+				healingcircle.worldObj.createExplosion(healingcircle, healingcircle.lastTickPosX, healingcircle.lastTickPosY, healingcircle.lastTickPosZ, 10F, true);
 			}
 		}
 
-		if (this.rand.nextInt(10) == 0)
+		if (rand.nextInt(10) == 0)
 		{
 			float f = 32.0F;
-			List<?> list = this.worldObj.getEntitiesWithinAABB(EntityDragonMinion.class, this.boundingBox.expand((double)f, (double)f, (double)f));
+			List<?> list = worldObj.getEntitiesWithinAABB(EntityDragonMinion.class, boundingBox.expand(f, f, f));
 			EntityDragonMinion entitydragonminion = null;
 			double d0 = Double.MAX_VALUE;
 			Iterator<?> iterator = list.iterator();
@@ -441,14 +454,14 @@ public class EntityDragonBoss extends CoraliumMob implements IBossDisplayData, I
 				}
 			}
 
-			this.healingcircle = entitydragonminion;
+			healingcircle = entitydragonminion;
 		}
 	}
 
 	private void collideWithEntities(List<?> par1List)
 	{
-		double d0 = (this.dragonPartBody.boundingBox.minX + this.dragonPartBody.boundingBox.maxX) / 2.0D;
-		double d1 = (this.dragonPartBody.boundingBox.minZ + this.dragonPartBody.boundingBox.maxZ) / 2.0D;
+		double d0 = (dragonPartBody.boundingBox.minX + dragonPartBody.boundingBox.maxX) / 2.0D;
+		double d1 = (dragonPartBody.boundingBox.minZ + dragonPartBody.boundingBox.maxZ) / 2.0D;
 		Iterator<?> iterator = par1List.iterator();
 
 		while (iterator.hasNext())
@@ -480,11 +493,11 @@ public class EntityDragonBoss extends CoraliumMob implements IBossDisplayData, I
 
 	private void setNewTarget()
 	{
-		this.forceNewTarget = false;
+		forceNewTarget = false;
 
-		if (this.rand.nextInt(2) == 0 && !this.worldObj.playerEntities.isEmpty())
+		if (rand.nextInt(2) == 0 && !worldObj.playerEntities.isEmpty())
 		{
-			this.target = (Entity)this.worldObj.playerEntities.get(this.rand.nextInt(this.worldObj.playerEntities.size()));
+			target = (Entity)worldObj.playerEntities.get(rand.nextInt(worldObj.playerEntities.size()));
 		}
 		else
 		{
@@ -492,19 +505,19 @@ public class EntityDragonBoss extends CoraliumMob implements IBossDisplayData, I
 
 			do
 			{
-				this.targetX = 0.0D;
-				this.targetY = (double)(70.0F + this.rand.nextFloat() * 50.0F);
-				this.targetZ = 0.0D;
-				this.targetX += (double)(this.rand.nextFloat() * 120.0F - 60.0F);
-				this.targetZ += (double)(this.rand.nextFloat() * 120.0F - 60.0F);
-				double d0 = this.posX - this.targetX;
-				double d1 = this.posY - this.targetY;
-				double d2 = this.posZ - this.targetZ;
+				targetX = 0.0D;
+				targetY = 70.0F + rand.nextFloat() * 50.0F;
+				targetZ = 0.0D;
+				targetX += rand.nextFloat() * 120.0F - 60.0F;
+				targetZ += rand.nextFloat() * 120.0F - 60.0F;
+				double d0 = posX - targetX;
+				double d1 = posY - targetY;
+				double d2 = posZ - targetZ;
 				flag = d0 * d0 + d1 * d1 + d2 * d2 > 100.0D;
 			}
 			while (!flag);
 
-			this.target = null;
+			target = null;
 		}
 	}
 
@@ -513,29 +526,31 @@ public class EntityDragonBoss extends CoraliumMob implements IBossDisplayData, I
 		return (float)MathHelper.wrapAngleTo180_double(par1);
 	}
 
+	@Override
 	public boolean attackEntityFromPart(EntityDragonPart par1EntityDragonPart, DamageSource par2DamageSource, float par3)
 	{
-		if (par1EntityDragonPart != this.dragonPartHead)
+		if (par1EntityDragonPart != dragonPartHead)
 		{
 			par3 = par3 / 4.0F + 1.0F;
 		}
 
-		float f1 = this.rotationYaw * (float)Math.PI / 180.0F;
+		float f1 = rotationYaw * (float)Math.PI / 180.0F;
 		float f2 = MathHelper.sin(f1);
 		float f3 = MathHelper.cos(f1);
-		this.targetX = this.posX + (double)(f2 * 5.0F) + (double)((this.rand.nextFloat() - 0.5F) * 2.0F);
-		this.targetY = this.posY + (double)(this.rand.nextFloat() * 3.0F) + 1.0D;
-		this.targetZ = this.posZ - (double)(f3 * 5.0F) + (double)((this.rand.nextFloat() - 0.5F) * 2.0F);
-		this.target = null;
+		targetX = posX + f2 * 5.0F + (rand.nextFloat() - 0.5F) * 2.0F;
+		targetY = posY + rand.nextFloat() * 3.0F + 1.0D;
+		targetZ = posZ - f3 * 5.0F + (rand.nextFloat() - 0.5F) * 2.0F;
+		target = null;
 
 		if (par2DamageSource.getEntity() instanceof EntityPlayer || par2DamageSource.isExplosion())
 		{
-			this.func_82195_e(par2DamageSource, par3);
+			func_82195_e(par2DamageSource, par3);
 		}
 
 		return true;
 	}
 
+	@Override
 	public boolean attackEntityFrom(DamageSource par1DamageSource, float par2)
 	{
 		return false;
@@ -546,24 +561,25 @@ public class EntityDragonBoss extends CoraliumMob implements IBossDisplayData, I
 		return super.attackEntityFrom(par1DamageSource, par2);
 	}
 
+	@Override
 	protected void onDeathUpdate()
 	{
-		++this.deathTicks;
+		++deathTicks;
 
-		if (this.deathTicks >= 180 && this.deathTicks <= 200)
+		if (deathTicks >= 180 && deathTicks <= 200)
 		{
-			float f = (this.rand.nextFloat() - 0.5F) * 8.0F;
-			float f1 = (this.rand.nextFloat() - 0.5F) * 4.0F;
-			float f2 = (this.rand.nextFloat() - 0.5F) * 8.0F;
-			this.worldObj.spawnParticle("hugeexplosion", this.posX + (double)f, this.posY + 2.0D + (double)f1, this.posZ + (double)f2, 0.0D, 0.0D, 0.0D);
+			float f = (rand.nextFloat() - 0.5F) * 8.0F;
+			float f1 = (rand.nextFloat() - 0.5F) * 4.0F;
+			float f2 = (rand.nextFloat() - 0.5F) * 8.0F;
+			worldObj.spawnParticle("hugeexplosion", posX + f, posY + 2.0D + f1, posZ + f2, 0.0D, 0.0D, 0.0D);
 		}
 
 		int i;
 		int j;
 
-		if (!this.worldObj.isRemote)
+		if (!worldObj.isRemote)
 		{
-			if (this.deathTicks > 150 && this.deathTicks % 5 == 0)
+			if (deathTicks > 150 && deathTicks % 5 == 0)
 			{
 				i = 500;
 
@@ -571,20 +587,20 @@ public class EntityDragonBoss extends CoraliumMob implements IBossDisplayData, I
 				{
 					j = EntityXPOrb.getXPSplit(i);
 					i -= j;
-					this.worldObj.spawnEntityInWorld(new EntityXPOrb(this.worldObj, this.posX, this.posY, this.posZ, j));
+					worldObj.spawnEntityInWorld(new EntityXPOrb(worldObj, posX, posY, posZ, j));
 				}
 			}
 
-			if (this.deathTicks == 1)
+			if (deathTicks == 1)
 			{
-				this.worldObj.playBroadcastSound(1018, (int)this.posX, (int)this.posY, (int)this.posZ, 0);
+				worldObj.playBroadcastSound(1018, (int)posX, (int)posY, (int)posZ, 0);
 			}
 		}
 
-		this.moveEntity(0.0D, 0.10000000149011612D, 0.0D);
-		this.renderYawOffset = this.rotationYaw += 20.0F;
+		moveEntity(0.0D, 0.10000000149011612D, 0.0D);
+		renderYawOffset = rotationYaw += 20.0F;
 
-		if (this.deathTicks == 200 && !this.worldObj.isRemote)
+		if (deathTicks == 200 && !worldObj.isRemote)
 		{
 			i = 1000;
 
@@ -592,41 +608,47 @@ public class EntityDragonBoss extends CoraliumMob implements IBossDisplayData, I
 			{
 				j = EntityXPOrb.getXPSplit(i);
 				i -= j;
-				this.worldObj.spawnEntityInWorld(new EntityXPOrb(this.worldObj, this.posX, this.posY, this.posZ, j));
+				worldObj.spawnEntityInWorld(new EntityXPOrb(worldObj, posX, posY, posZ, j));
 			}
 
-			this.setDead();
+			setDead();
 			FMLClientHandler.instance().getClient().ingameGUI.getChatGUI().printChatMessage(new ChatComponentText("Oblivionaire: Asorah? ... Asorah?!"));
 			FMLClientHandler.instance().getClient().ingameGUI.getChatGUI().printChatMessage(new ChatComponentText("Oblivionaire: YOU, you will pay for this mortal!"));
 			FMLClientHandler.instance().getClient().ingameGUI.getChatGUI().printChatMessage(new ChatComponentText("Oblivionaire: Besides, you'll never get past The Dreadlands. Have fun digging your own grave."));
 		}
 	}
 
+	@Override
 	public Entity[] getParts()
 	{
-		return this.dragonPartArray;
+		return dragonPartArray;
 	}
 
+	@Override
 	public boolean canBeCollidedWith()
 	{
 		return true;
 	}
 
+	@Override
 	public World func_82194_d()
 	{
-		return this.worldObj;
+		return worldObj;
 	}
 
+	@Override
 	protected String getLivingSound()
 	{
 		return "mob.enderdragon.growl";
 	}
 
+	@Override
 	protected String getHurtSound()
 	{
 		return "mob.enderdragon.hit";
 	}
 
+	@Override
 	protected float getSoundVolume()
 	{
 		return 5.0F;

@@ -15,50 +15,42 @@
  */
 package com.shinoow.abyssalcraft.client.render.entity;
 
-import com.shinoow.abyssalcraft.common.entity.EntityDepthsZombie;
-
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.renderer.entity.RenderBiped;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.util.ResourceLocation;
 
-public class RenderDepthsZombie extends RenderBiped
-{
+import com.shinoow.abyssalcraft.common.entity.EntityDepthsZombie;
+
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+
+@SideOnly(Side.CLIENT)
+public class RenderDepthsZombie extends RenderBiped {
+
 	protected ModelBiped model;
 
 	public RenderDepthsZombie (ModelBiped ModelBiped, float f)
 	{
 		super(ModelBiped, f);
-		model = ((ModelBiped)mainModel);
+		model = (ModelBiped)mainModel;
 	}
 
-	private static final ResourceLocation field_110862_k = new ResourceLocation("abyssalcraft:textures/model/depths_zombie.png");
-	private static final ResourceLocation field_110861_l = new ResourceLocation("abyssalcraft:textures/model/depths_zombie_end.png");
+	private static final ResourceLocation zombieTexture = new ResourceLocation("abyssalcraft:textures/model/depths_zombie.png");
+	private static final ResourceLocation zombieTexture_end = new ResourceLocation("abyssalcraft:textures/model/depths_zombie_end.png");
 
-
-	public void renderDepthsZombie(EntityDepthsZombie entity, double par2, double par4, double par6, float par8, float par9)
+	public void doRender(EntityDepthsZombie entity, double par2, double par4, double par6, float par8, float par9)
 	{
 		super.doRender(entity, par2, par4, par6, par8, par9);
 	}
 
-	public void doRenderLiving(EntityLiving par1EntityLiving, double par2, double par4, double par6, float par8, float par9)
+	protected ResourceLocation getZombieTexture(EntityDepthsZombie par1EntityLiving)
 	{
-		renderDepthsZombie((EntityDepthsZombie)par1EntityLiving, par2, par4, par6, par8, par9);
-	}
-
-	public void doRender(Entity par1Entity, double par2, double par4, double par6, float par8, float par9)
-	{
-		renderDepthsZombie((EntityDepthsZombie)par1Entity, par2, par4, par6, par8, par9);
-	}
-
-	protected ResourceLocation func_110860_a(EntityDepthsZombie par1EntityLiving)
-	{
-		return par1EntityLiving.getZombieType() == 2 ? field_110861_l : field_110862_k;
+		return par1EntityLiving.getZombieType() == 2 ? zombieTexture_end : zombieTexture;
 	}
 	@Override
 	protected ResourceLocation getEntityTexture(EntityLiving par1EntityLiving)
 	{
-		return this.func_110860_a((EntityDepthsZombie)par1EntityLiving);
+		return getZombieTexture((EntityDepthsZombie)par1EntityLiving);
 	}
 }

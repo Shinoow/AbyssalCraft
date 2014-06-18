@@ -20,12 +20,11 @@ import net.minecraft.block.material.Material;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
 
-public class AbyOre extends Block
-{
-	public AbyOre()
-	{
+public class AbyOre extends Block {
+
+	public AbyOre() {
 		super(Material.rock);
-		this.setCreativeTab(AbyssalCraft.tabBlock);
+		setCreativeTab(AbyssalCraft.tabBlock);
 		this.setHarvestLevel("pickaxe", 2);
-    }
+	}
 }

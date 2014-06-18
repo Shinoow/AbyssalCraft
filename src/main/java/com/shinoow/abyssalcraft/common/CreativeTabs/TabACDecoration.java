@@ -34,7 +34,7 @@ public class TabACDecoration extends CreativeTabs
 	@SideOnly(Side.CLIENT)
 	public String getTranslatedTabLabel()
 	{
-		return "AbyssalCraft Decoration Blocks";
+		return "itemgroup." + this.getTabLabel();
 	}
 
 	@Override

@@ -19,8 +19,8 @@ import net.minecraft.item.Item;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
 
-public enum EnumToolMaterialAC
-{
+public enum EnumToolMaterialAC {
+
 	DARKSTONE(1, 180, 5.0F, 1, 15),
 	ABYSSALNITE(4, 1261, 13.0F, 4, 10),
 	CORALIUM(6, 4000, 14.0F, 6, 12),
@@ -30,8 +30,8 @@ public enum EnumToolMaterialAC
 	private final float efficiencyOnProperMaterial;
 	private final int damageVsEntity;
 	private final int enchantability;
-	private EnumToolMaterialAC(int par3, int par4, float par5, int par6, int par7)
-	{
+
+	private EnumToolMaterialAC(int par3, int par4, float par5, int par6, int par7) {
 		harvestLevel = par3;
 		maxUses = par4;
 		efficiencyOnProperMaterial = par5;
@@ -41,30 +41,28 @@ public enum EnumToolMaterialAC
 
 	public Item customCraftingMaterial = null;
 
-	public int getMaxUses()
-	{
+	public int getMaxUses() {
 		return maxUses;
 	}
-	public float getEfficiencyOnProperMaterial()
-	{
+
+	public float getEfficiencyOnProperMaterial() {
 		return efficiencyOnProperMaterial;
 	}
-	public int getDamageVsEntity()
-	{
+
+	public int getDamageVsEntity() {
 		return damageVsEntity;
 	}
-	public int getHarvestLevel()
-	{
+
+	public int getHarvestLevel() {
 		return harvestLevel;
 	}
-	public int getEnchantability()
-	{
+
+	public int getEnchantability() {
 		return enchantability;
 	}
-	public Item getToolCraftingMaterial()
-	{	
-		switch(this)
-		{
+
+	public Item getToolCraftingMaterial() {
+		switch(this) {
 		case DARKSTONE: return Item.getItemFromBlock(AbyssalCraft.Darkstone_cobble);
 		case ABYSSALNITE: return AbyssalCraft.abyingot;
 		case CORALIUM: return AbyssalCraft.Cingot;

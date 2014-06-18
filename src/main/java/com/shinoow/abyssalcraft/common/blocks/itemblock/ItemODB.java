@@ -21,11 +21,10 @@ import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.util.EnumChatFormatting;
+import net.minecraft.util.StatCollector;
 
-public class ItemODB extends ItemBlock
-{
+public class ItemODB extends ItemBlock {
 
 	public ItemODB(Block p_i45328_1_)
 	{
@@ -34,9 +33,14 @@ public class ItemODB extends ItemBlock
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@Override
-	@SideOnly(Side.CLIENT)
 	public void addInformation(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, List par3List, boolean par4)
 	{
-		par3List.add("Heavy explosive, use at own risk.");  
+		par3List.add(StatCollector.translateToLocal("tooltip.odb"));
+	}
+
+	@Override
+	public String getItemStackDisplayName(ItemStack par1ItemStack) {
+
+		return EnumChatFormatting.DARK_RED + StatCollector.translateToLocal(this.getUnlocalizedName() + ".name");
 	}
 }

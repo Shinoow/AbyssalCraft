@@ -22,7 +22,6 @@ import java.util.ArrayList;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.ThreadDownloadImageData;
-import net.minecraft.client.renderer.texture.ITextureObject;
 import net.minecraft.util.ResourceLocation;
 
 import com.shinoow.abyssalcraft.common.util.EnumCapeGroup;
@@ -31,7 +30,7 @@ public class CapeHandler {
 
 	/**
 	 * Adds a cape for just a single player
-	 * @param username: The username of the player. 
+	 * @param username: The username of the player.
 	 * @param group: The cape group.
 	 */
 	public static void addCape(String username, EnumCapeGroup group)
@@ -66,7 +65,7 @@ public class CapeHandler {
 		}
 
 		ThreadDownloadImageData object = new ThreadDownloadImageData(url, null, null);
-		Minecraft.getMinecraft().renderEngine.loadTexture(new ResourceLocation("cloaks/" + username), (ITextureObject) object);
+		Minecraft.getMinecraft().renderEngine.loadTexture(new ResourceLocation("cloaks/" + username), object);
 	}
 
 	/**
@@ -77,7 +76,7 @@ public class CapeHandler {
 	public static void addGroupedCape(String[] group, EnumCapeGroup cape)
 	{
 
-		for (String username : group) 
+		for (String username : group)
 		{
 
 			addCape(username, cape);
@@ -85,7 +84,7 @@ public class CapeHandler {
 	}
 
 	/**
-	 * Grabs a string array from an online source. 
+	 * Grabs a string array from an online source.
 	 * Each line of file is a new username.
 	 * @param url: Link to the text file.
 	 * @return: An array from a text file. If link is invalid returns a blank array.
@@ -108,14 +107,14 @@ public class CapeHandler {
 				list.add(line);
 			}
 
-			return (String[]) list.toArray(new String[list.size()]);
+			return list.toArray(new String[list.size()]);
 		}
 
 		catch(Exception e) {
 
 			e.printStackTrace();
 			list.add("");
-			return (String[]) list.toArray(new String[list.size()]);
+			return list.toArray(new String[list.size()]);
 		}
 	}
 }

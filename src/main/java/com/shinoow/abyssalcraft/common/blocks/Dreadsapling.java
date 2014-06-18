@@ -37,15 +37,17 @@ public class Dreadsapling extends BlockBush implements IGrowable {
 		super();
 		float f = 0.4F;
 		setBlockBounds(0.5F - f, 0.0F, 0.5F - f, 0.5F + f, f * 2.0F, 0.5F + f);
-		this.setCreativeTab(AbyssalCraft.tabDecoration);
+		setCreativeTab(AbyssalCraft.tabDecoration);
 	}
 
+	@Override
 	@SideOnly(Side.CLIENT)
 	public void registerBlockIcons(IIconRegister par1IconRegister)
 	{
-		this.blockIcon = par1IconRegister.registerIcon(AbyssalCraft.modid + ":" + "DrTS");
+		blockIcon = par1IconRegister.registerIcon(AbyssalCraft.modid + ":" + "DrTS");
 	}
 
+	@Override
 	public void updateTick(World world, int i, int j, int k, Random random)
 	{
 		if(world.isRemote)
@@ -72,13 +74,13 @@ public class Dreadsapling extends BlockBush implements IGrowable {
 		world.setBlock(i, j, k, Blocks.air, 0, l);
 		Object obj = null;
 		obj = new WorldGenDrT(true);
-		if(!((WorldGenerator) (obj)).generate(world, random, i, j, k))
+		if(!((WorldGenerator) obj).generate(world, random, i, j, k))
 		{
 			world.setBlock(i, j, k, this, l, l);
 		}
 	}
 
-	public void fertilize(World world, int x, int y, int z) 
+	public void fertilize(World world, int x, int y, int z)
 	{
 
 	}

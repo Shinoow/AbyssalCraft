@@ -24,6 +24,5 @@ public class abystone extends Block
 	public abystone() {
 		super(Material.rock);
 		this.setHarvestLevel("pickaxe", 2);
-		
 	}
 }

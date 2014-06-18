@@ -45,23 +45,24 @@ public class BiomeGenDarklandsMountains extends BiomeGenBase
 	public BiomeGenDarklandsMountains(int par1)
 	{
 		super(par1);
-		this.rootHeight = 1.3F;
-		this.heightVariation = 0.9F;
-		this.spawnableCreatureList.clear();
-		this.spawnableMonsterList.clear();
-		this.topBlock = (Block)AbyssalCraft.Darkstone;
-		this.fillerBlock = (Block)AbyssalCraft.Darkstone;
-		this.waterColorMultiplier = 14745518;
-		this.theWorldGenerator = new WorldGenMinable(AbyssalCraft.Darkstone, 96);
-		this.theSecondWorldGenerator = new WorldGenMinable(AbyssalCraft.abydreadstone, 1);
-		this.theThirdWorldGenerator = new WorldGenMinable(AbyssalCraft.Darkstone, 64);
-		this.theFourthWorldGenerator = new WorldGenMinable(AbyssalCraft.Darkstone, 32);
-		this.theBiomeDecorator.treesPerChunk = 0;
-		this.spawnableMonsterList.add(new SpawnListEntry(EntityZombie.class, 2, 1, 2));
-		this.spawnableMonsterList.add(new SpawnListEntry(EntitySkeleton.class, 2, 1, 2));
-		this.spawnableMonsterList.add(new SpawnListEntry(EntityDepthsghoul.class, 2, 1, 2));
-		this.spawnableMonsterList.add(new SpawnListEntry(EntityDepthsZombie.class, 2, 1, 2));
+		rootHeight = 1.3F;
+		heightVariation = 0.9F;
+		spawnableCreatureList.clear();
+		spawnableMonsterList.clear();
+		topBlock = AbyssalCraft.Darkstone;
+		fillerBlock = AbyssalCraft.Darkstone;
+		waterColorMultiplier = 14745518;
+		theWorldGenerator = new WorldGenMinable(AbyssalCraft.Darkstone, 96);
+		theSecondWorldGenerator = new WorldGenMinable(AbyssalCraft.abydreadstone, 1);
+		theThirdWorldGenerator = new WorldGenMinable(AbyssalCraft.Darkstone, 64);
+		theFourthWorldGenerator = new WorldGenMinable(AbyssalCraft.Darkstone, 32);
+		theBiomeDecorator.treesPerChunk = 0;
+		spawnableMonsterList.add(new SpawnListEntry(EntityZombie.class, 2, 1, 2));
+		spawnableMonsterList.add(new SpawnListEntry(EntitySkeleton.class, 2, 1, 2));
+		spawnableMonsterList.add(new SpawnListEntry(EntityDepthsghoul.class, 2, 1, 2));
+		spawnableMonsterList.add(new SpawnListEntry(EntityDepthsZombie.class, 2, 1, 2));
 	}
+	@Override
 	public void decorate(World par1World, Random par2Random, int par3, int par4)
 	{
 		super.decorate(par1World, par2Random, par3, par4);
@@ -88,7 +89,7 @@ public class BiomeGenDarklandsMountains extends BiomeGenBase
 			var6 = par3 + par2Random.nextInt(16);
 			var7 = par2Random.nextInt(64);
 			var8 = par4 + par2Random.nextInt(16);
-			this.theWorldGenerator.generate(par1World, par2Random, var6, var7, var8);
+			theWorldGenerator.generate(par1World, par2Random, var6, var7, var8);
 		}
 
 		for (var5 = 0; var5 < 7; ++var5)
@@ -96,7 +97,7 @@ public class BiomeGenDarklandsMountains extends BiomeGenBase
 			var6 = par3 + par2Random.nextInt(16);
 			var7 = par2Random.nextInt(64);
 			var8 = par4 + par2Random.nextInt(16);
-			this.theSecondWorldGenerator.generate(par1World, par2Random, var6, var7, var8);
+			theSecondWorldGenerator.generate(par1World, par2Random, var6, var7, var8);
 		}
 
 		for (var5 = 0; var5 < 7; ++var5)
@@ -104,7 +105,7 @@ public class BiomeGenDarklandsMountains extends BiomeGenBase
 			var6 = par3 + par2Random.nextInt(16);
 			var7 = par2Random.nextInt(64);
 			var8 = par4 + par2Random.nextInt(16);
-			this.theThirdWorldGenerator.generate(par1World, par2Random, var6, var7, var8);
+			theThirdWorldGenerator.generate(par1World, par2Random, var6, var7, var8);
 		}
 
 		for (var5 = 0; var5 < 7; ++var5)
@@ -112,10 +113,11 @@ public class BiomeGenDarklandsMountains extends BiomeGenBase
 			var6 = par3 + par2Random.nextInt(16);
 			var7 = par2Random.nextInt(64);
 			var8 = par4 + par2Random.nextInt(16);
-			this.theFourthWorldGenerator.generate(par1World, par2Random, var6, var7, var8);
+			theFourthWorldGenerator.generate(par1World, par2Random, var6, var7, var8);
 		}
 	}
 
+	@Override
 	@SideOnly(Side.CLIENT)
 
 	public int getSkyColorByTemp(float par1)

@@ -43,7 +43,7 @@ public class Crate extends BlockContainer
 	public Crate()
 	{
 		super(Material.wood);
-		this.setCreativeTab(AbyssalCraft.tabDecoration);
+		setCreativeTab(AbyssalCraft.tabDecoration);
 	}
 
 	/**
@@ -57,7 +57,7 @@ public class Crate extends BlockContainer
 		Block j1 = par1World.getBlock(par2 - 1, par3, par4);
 		Block k1 = par1World.getBlock(par2 + 1, par3, par4);
 		byte b0 = 0;
-		int l1 = MathHelper.floor_double((double)(par5EntityLiving.rotationYaw * 4.0F / 360.0F) + 0.5D) & 3;
+		int l1 = MathHelper.floor_double(par5EntityLiving.rotationYaw * 4.0F / 360.0F + 0.5D) & 3;
 
 		if (l1 == 0)
 		{
@@ -152,13 +152,13 @@ public class Crate extends BlockContainer
 
 				if (itemstack != null)
 				{
-					float f = this.random.nextFloat() * 0.8F + 0.1F;
-					float f1 = this.random.nextFloat() * 0.8F + 0.1F;
+					float f = random.nextFloat() * 0.8F + 0.1F;
+					float f1 = random.nextFloat() * 0.8F + 0.1F;
 					EntityItem entityitem;
 
-					for (float f2 = this.random.nextFloat() * 0.8F + 0.1F; itemstack.stackSize > 0; par1World.spawnEntityInWorld(entityitem))
+					for (float f2 = random.nextFloat() * 0.8F + 0.1F; itemstack.stackSize > 0; par1World.spawnEntityInWorld(entityitem))
 					{
-						int k1 = this.random.nextInt(21) + 10;
+						int k1 = random.nextInt(21) + 10;
 
 						if (k1 > itemstack.stackSize)
 						{
@@ -166,11 +166,11 @@ public class Crate extends BlockContainer
 						}
 
 						itemstack.stackSize -= k1;
-						entityitem = new EntityItem(par1World, (double)((float)par2 + f), (double)((float)par3 + f1), (double)((float)par4 + f2), new ItemStack(itemstack.getItem(), k1, itemstack.getItemDamage()));
+						entityitem = new EntityItem(par1World, par2 + f, par3 + f1, par4 + f2, new ItemStack(itemstack.getItem(), k1, itemstack.getItemDamage()));
 						float f3 = 0.05F;
-						entityitem.motionX = (double)((float)this.random.nextGaussian() * f3);
-						entityitem.motionY = (double)((float)this.random.nextGaussian() * f3 + 0.2F);
-						entityitem.motionZ = (double)((float)this.random.nextGaussian() * f3);
+						entityitem.motionX = (float)random.nextGaussian() * f3;
+						entityitem.motionY = (float)random.nextGaussian() * f3 + 0.2F;
+						entityitem.motionZ = (float)random.nextGaussian() * f3;
 
 						if (itemstack.hasTagCompound())
 						{
@@ -193,12 +193,10 @@ public class Crate extends BlockContainer
 	public boolean onBlockActivated(World par1World, int par2, int par3, int par4, EntityPlayer par5EntityPlayer, int par6, float par7, float par8, float par9)
 	{
 		if (par1World.isRemote)
-		{
 			return true;
-		}
 		else
 		{
-			IInventory iinventory = this.func_149951_m(par1World, par2, par3, par4);
+			IInventory iinventory = func_149951_m(par1World, par2, par3, par4);
 
 			if (iinventory != null)
 			{
@@ -215,21 +213,14 @@ public class Crate extends BlockContainer
 	 */
 	public IInventory func_149951_m(World par1World, int par2, int par3, int par4)
 	{
-		Object object = (TileEntityCrate)par1World.getTileEntity(par2, par3, par4);
+		Object object = par1World.getTileEntity(par2, par3, par4);
 
 		if (object == null)
-		{
 			return null;
-		}
 		else if (par1World.isSideSolid(par2, par3 + 1, par4, DOWN))
-		{
 			return null;
-		}
-
 		else
-		{
 			return (IInventory)object;
-		}
 	}
 
 	/**
@@ -249,7 +240,7 @@ public class Crate extends BlockContainer
 	@Override
 	public int getComparatorInputOverride(World par1World, int par2, int par3, int par4, int par5)
 	{
-		return Container.calcRedstoneFromInventory(this.func_149951_m(par1World, par2, par3, par4));
+		return Container.calcRedstoneFromInventory(func_149951_m(par1World, par2, par3, par4));
 	}
 
 	@Override

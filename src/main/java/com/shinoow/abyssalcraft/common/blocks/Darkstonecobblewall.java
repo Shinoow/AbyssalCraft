@@ -23,6 +23,7 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
+import net.minecraft.world.World;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
 
@@ -33,7 +34,7 @@ public class Darkstonecobblewall extends BlockWall{
 
 	public Darkstonecobblewall(Block par2Block) {
 		super(par2Block);
-		this.setCreativeTab(AbyssalCraft.tabBlock);
+		setCreativeTab(AbyssalCraft.tabBlock);
 
 	}
 	@SuppressWarnings({ "unchecked", "rawtypes" })
@@ -41,6 +42,10 @@ public class Darkstonecobblewall extends BlockWall{
 	public void getSubBlocks(Item par1, CreativeTabs par2CreativeTabs, List par3List)
 	{
 		par3List.add(new ItemStack(par1, 1, 0));
+	}
+
+	public boolean canPlaceTorchOnTop(World world, int x, int y, int z) {
+		return true;
 	}
 
 	@SideOnly(Side.CLIENT)

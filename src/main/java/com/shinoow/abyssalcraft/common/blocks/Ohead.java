@@ -30,7 +30,7 @@ public class Ohead extends BlockContainer {
 
 	public Ohead() {
 		super(Material.cloth);
-		this.setBlockBounds(0.1F, 0.0F, 0.1F, 0.8F, 0.7F, 0.8F);
+		setBlockBounds(0.1F, 0.0F, 0.1F, 0.8F, 0.7F, 0.8F);
 	}
 
 	@Override
@@ -38,6 +38,7 @@ public class Ohead extends BlockContainer {
 		return new TileEntityOhead();
 	}
 
+	@Override
 	public boolean isOpaqueCube()
 	{
 		return false;
@@ -55,20 +56,19 @@ public class Ohead extends BlockContainer {
 
 	public AxisAlignedBB func_149668_a(World par1World, int par2, int par3, int par4)
 	{
-		this.setBlockBoundsBasedOnState(par1World, par2, par3, par4);
+		setBlockBoundsBasedOnState(par1World, par2, par3, par4);
 		return super.getCollisionBoundingBoxFromPool(par1World, par2, par3, par4);
 	}
 
 
+	@Override
 	public void onBlockPlacedBy(World par1World, int par2, int par3, int par4, EntityLivingBase par5EntityLivingBase, ItemStack par6ItemStack)
 	{
 		if (par5EntityLivingBase == null)
-		{
 			return;
-		}
 
 		TileEntityOhead tile = (TileEntityOhead) par1World.getTileEntity(par2, par3, par4);
-		tile.direction = MathHelper.floor_double((double)(par5EntityLivingBase.rotationYaw * 4.0F / 360.0F) + 0.5D) & 3;
+		tile.direction = MathHelper.floor_double(par5EntityLivingBase.rotationYaw * 4.0F / 360.0F + 0.5D) & 3;
 	}
 
 }

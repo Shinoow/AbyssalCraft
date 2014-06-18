@@ -33,94 +33,97 @@ import cpw.mods.fml.relauncher.SideOnly;
 public class Renderdreadguard extends RenderBiped
 {
 	/** Scale of the model to use */
-    private float scale;
-    
-    private static final ResourceLocation texture = new ResourceLocation("abyssalcraft:textures/model/elite/Dread_guard.png");
+	private float scale = 1.5F;
 
-    private ModelBiped field_82434_o;
-    protected ModelBiped field_82437_k;
-    protected ModelBiped field_82435_l;
-    protected ModelBiped field_82436_m;
-    protected ModelBiped field_82433_n;
-    
-    public Renderdreadguard(ModelZombie par1ModelBiped, float par2, float par3)
-    {
-    	super(par1ModelBiped, par2 * par3);
-    	this.field_82434_o = this.modelBipedMain;
-        this.scale = par3;
-    }
-    
-    protected void func_82421_b()
-    {
-        this.field_82423_g = new ModelZombie(1.0F, true);
-        this.field_82425_h = new ModelZombie(0.5F, true);
-        this.field_82437_k = this.field_82423_g;
-        this.field_82435_l = this.field_82425_h;
-    }
-    
-    /**
-     * Applies the scale to the transform matrix
-     */
-    protected void preRenderScale(Entitydreadguard par1Entitydreadguard, float par2)
-    {
-        GL11.glScalef(this.scale, this.scale, this.scale);
-    }
+	private static final ResourceLocation texture = new ResourceLocation("abyssalcraft:textures/model/elite/Dread_guard.png");
 
-    protected int func_82429_a(Entitydreadguard par1Entitydreadguard, int par2, float par3)
-    {
-        this.func_82427_a(par1Entitydreadguard);
-        //return super.func_130006_a(par1Entitydreadguard, par2, par3);
-		return par2;
-    }
+	private ModelBiped field_82434_o;
+	protected ModelBiped field_82437_k;
+	protected ModelBiped field_82435_l;
+	protected ModelBiped field_82436_m;
+	protected ModelBiped field_82433_n;
 
-    public void func_82426_a(Entitydreadguard par1Entitydreadguard, double par2, double par4, double par6, float par8, float par9)
-    {
-        this.func_82427_a(par1Entitydreadguard);
-        super.doRender(par1Entitydreadguard, par2, par4, par6, par8, par9);
-    }
-    
-    protected ResourceLocation getTexture(Entitydreadguard par1Entitydreadguard)
-    {
-        return texture;
-    }
+	public Renderdreadguard()
+	{
+		super(new ModelZombie(), 0.5F, 1.5F);
+		field_82434_o = modelBipedMain;
 
-    protected void func_82428_a(Entitydreadguard par1Entitydreadguard, float par2)
-    {
-        this.func_82427_a(par1Entitydreadguard);
-        //super.func_130005_c(par1Entitydreadguard, par2);
-    }
+	}
 
-    private void func_82427_a(Entitydreadguard par1Entitydreadguard)
-    {
-        {
-            this.mainModel = this.field_82434_o;
-            this.field_82423_g = this.field_82437_k;
-            this.field_82425_h = this.field_82435_l;
-        }
+	@Override
+	protected void func_82421_b()
+	{
+		field_82423_g = new ModelZombie(1.0F, true);
+		field_82425_h = new ModelZombie(0.5F, true);
+		field_82437_k = field_82423_g;
+		field_82435_l = field_82425_h;
+	}
 
-        this.modelBipedMain = (ModelBiped)this.mainModel;
-    }
-    
-    protected void renderEquippedItems(EntityLivingBase par1EntityLivingBase, float par2)
-    {
-        this.func_82428_a((Entitydreadguard)par1EntityLivingBase, par2);
-    }
-    
-    /**
-     * Allows the render to do any OpenGL state modifications necessary before the model is rendered. Args:
-     * entityLiving, partialTickTime
-     */
-    protected void preRenderCallback(EntityLivingBase par1EntityLivingBase, float par2)
-    {
-        this.preRenderScale((Entitydreadguard)par1EntityLivingBase, par2);
-    }
+	/**
+	 * Applies the scale to the transform matrix
+	 */
+	protected void preRenderScale(Entitydreadguard par1Entitydreadguard, float par2)
+	{
+		GL11.glScalef(scale, scale, scale);
+	}
 
-    /**
-     * Returns the location of an entity's texture. Doesn't seem to be called unless you call Render.bindEntityTexture.
-     */
-    protected ResourceLocation getEntityTexture(Entity par1Entity)
-    {
-        return this.getTexture((Entitydreadguard)par1Entity);
-    }
-    
+	protected int shouldRenderPass(Entitydreadguard par1Entitydreadguard, int par2, float par3)
+	{
+		func_82427_a(par1Entitydreadguard);
+		return super.shouldRenderPass(par1Entitydreadguard, par2, par3);
+	}
+
+	public void doRender(Entitydreadguard par1Entitydreadguard, double par2, double par4, double par6, float par8, float par9)
+	{
+		func_82427_a(par1Entitydreadguard);
+		super.doRender(par1Entitydreadguard, par2, par4, par6, par8, par9);
+	}
+
+	protected ResourceLocation getTexture(Entitydreadguard par1Entitydreadguard)
+	{
+		return texture;
+	}
+
+	protected void renderEquippedItems(Entitydreadguard par1Entitydreadguard, float par2)
+	{
+		func_82427_a(par1Entitydreadguard);
+		super.renderEquippedItems(par1Entitydreadguard, par2);
+	}
+
+	private void func_82427_a(Entitydreadguard par1Entitydreadguard)
+	{
+		{
+			mainModel = field_82434_o;
+			field_82423_g = field_82437_k;
+			field_82425_h = field_82435_l;
+		}
+
+		modelBipedMain = (ModelBiped)mainModel;
+	}
+
+	@Override
+	protected void renderEquippedItems(EntityLivingBase par1EntityLivingBase, float par2)
+	{
+		renderEquippedItems((Entitydreadguard)par1EntityLivingBase, par2);
+	}
+
+	/**
+	 * Allows the render to do any OpenGL state modifications necessary before the model is rendered. Args:
+	 * entityLiving, partialTickTime
+	 */
+	@Override
+	protected void preRenderCallback(EntityLivingBase par1EntityLivingBase, float par2)
+	{
+		preRenderScale((Entitydreadguard)par1EntityLivingBase, par2);
+	}
+
+	/**
+	 * Returns the location of an entity's texture. Doesn't seem to be called unless you call Render.bindEntityTexture.
+	 */
+	@Override
+	protected ResourceLocation getEntityTexture(Entity par1Entity)
+	{
+		return getTexture((Entitydreadguard)par1Entity);
+	}
+
 }

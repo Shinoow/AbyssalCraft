@@ -32,7 +32,7 @@ public class ItemDarkstoneShovel extends ItemTool
 	public ItemDarkstoneShovel(ToolMaterial enumToolMaterial)
 	{
 		super(1, enumToolMaterial, blocksEffectiveAgainst);
-		this.setHarvestLevel("shovel", 1);
+		setHarvestLevel("shovel", 1);
 
 	}
 	/**
@@ -41,10 +41,8 @@ public class ItemDarkstoneShovel extends ItemTool
 	public boolean canHarvestBlock(Block par1Block)
 	{
 		if (par1Block == Blocks.snow_layer)
-		{
 			return true;
-		}
 		return par1Block == Blocks.snow;
-	} 
+	}
 
 }

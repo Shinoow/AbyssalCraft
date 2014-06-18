@@ -24,7 +24,7 @@ public class AbyDreadstone extends Block {
 
 	public AbyDreadstone() {
 		super(Material.rock);
-		this.setCreativeTab(AbyssalCraft.tabBlock);
+		setCreativeTab(AbyssalCraft.tabBlock);
 		this.setHarvestLevel("pickaxe", 4);
 	}
 }

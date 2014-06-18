@@ -28,7 +28,7 @@ public class DreadMob extends EntityMob {
 	 */
 	public DreadMob(World par1World) {
 		super(par1World);
-		this.experienceValue = 10;
-		this.isImmuneToFire = true;
+		experienceValue = 10;
+		isImmuneToFire = true;
 	}
 }

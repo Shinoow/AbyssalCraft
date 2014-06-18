@@ -23,31 +23,39 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemTool;
+import net.minecraft.util.EnumChatFormatting;
+import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 
 import com.google.common.collect.Sets;
 import com.shinoow.abyssalcraft.AbyssalCraft;
 
-public class ItemAbyssalniteCShovel extends ItemTool
-{
+public class ItemAbyssalniteCShovel extends ItemTool {
+
 	private static Set<Block> blocksEffectiveAgainst = Sets.newHashSet(new Block[] {Blocks.grass, Blocks.dirt, Blocks.sand, Blocks.gravel, Blocks.snow_layer, Blocks.snow, Blocks.clay, Blocks.farmland, Blocks.soul_sand, Blocks.mycelium, AbyssalCraft.Darkgrass});
-	public ItemAbyssalniteCShovel(ToolMaterial enumToolMaterial)
-	{
+	public ItemAbyssalniteCShovel(ToolMaterial enumToolMaterial) {
 		super(1, enumToolMaterial, blocksEffectiveAgainst);
-		this.setHarvestLevel("shovel", 8);
+		setHarvestLevel("shovel", 8);
+	}
+
+	@Override
+	public String getItemStackDisplayName(ItemStack par1ItemStack) {
+
+		return EnumChatFormatting.AQUA + StatCollector.translateToLocal(this.getUnlocalizedName() + ".name");
 	}
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
 	public void addInformation(ItemStack is, EntityPlayer player, List l, boolean B)
 	{
-		l.add("This shovel can transmutate");
-		l.add("grass types, gravel and sand");
+		l.add(StatCollector.translateToLocal("tooltip.cshovel.1"));
+		l.add(StatCollector.translateToLocal("tooltip.cshovel.2"));
 	}
 
 	/**
 	 * Returns if the item (tool) can harvest results from the block type.
 	 */
+	@Override
 	public boolean onItemUse(ItemStack is, EntityPlayer player, World w, int x, int y, int z, int l, float f, float f1, float f3){ //Called when an item is right clicked on a block
 		if(w.getBlock(x, y, z) == Blocks.sand){
 			w.setBlock(x, y, z, Blocks.soul_sand);
@@ -71,11 +79,11 @@ public class ItemAbyssalniteCShovel extends ItemTool
 		}
 		else if(w.getBlock(x, y, z) == AbyssalCraft.Darkgrass){
 			w.setBlock(x, y, z, AbyssalCraft.dreadgrass);
-			is.damageItem(40, player);	
+			is.damageItem(40, player);
 		}
 		else if(w.getBlock(x, y, z) == AbyssalCraft.dreadgrass){
 			w.setBlock(x, y, z, Blocks.grass);
-			is.damageItem(40, player);	
+			is.damageItem(40, player);
 		}
 		return false;
 	}
@@ -83,10 +91,7 @@ public class ItemAbyssalniteCShovel extends ItemTool
 	public boolean canHarvestBlock(Block par1Block)
 	{
 		if (par1Block == Blocks.snow_layer)
-		{
 			return true;
-		}
 		return par1Block == Blocks.snow;
 	}
-
 }

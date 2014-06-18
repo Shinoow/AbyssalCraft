@@ -22,33 +22,35 @@ import net.minecraft.block.material.Material;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemTool;
+import net.minecraft.util.EnumChatFormatting;
+import net.minecraft.util.StatCollector;
 
 import com.google.common.collect.Sets;
 
-public class ItemAbyssalniteAxe extends ItemTool
-{
+public class ItemAbyssalniteAxe extends ItemTool {
 
 	private static Set<Block> blocksEffectiveAgainst = Sets.newHashSet(new Block[] {Blocks.planks, Blocks.bookshelf, Blocks.log, Blocks.chest, Blocks.pumpkin, Blocks.lit_pumpkin});
 
-	public ItemAbyssalniteAxe(ToolMaterial enumToolMaterial)
-	{
+	public ItemAbyssalniteAxe(ToolMaterial enumToolMaterial) {
 		super(3, enumToolMaterial, blocksEffectiveAgainst);
-		this.setHarvestLevel("axe", 4);
+		setHarvestLevel("axe", 4);
 	}
+
+	@Override
+	public String getItemStackDisplayName(ItemStack par1ItemStack) {
+
+		return EnumChatFormatting.DARK_AQUA + StatCollector.translateToLocal(this.getUnlocalizedName() + ".name");
+	}
+
 	/**
 	 * Returns the strength of the stack against a given block. 1.0F base, (Quality+1)*2 if correct blocktype, 1.5F if
 	 * sword
 	 */
-	public float func_150893_a(ItemStack par1ItemStack, Block par2Block)
-	{
+	@Override
+	public float func_150893_a(ItemStack par1ItemStack, Block par2Block) {
 		if (par2Block != null && par2Block.getMaterial() == Material.wood)
-		{
 			return efficiencyOnProperMaterial;
-		}
 		else
-		{
 			return super.func_150893_a(par1ItemStack, par2Block);
-		}
 	}
-
 }

@@ -22,6 +22,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.MathHelper;
+import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
@@ -33,26 +34,29 @@ public class ItemPortalPlacer extends Item
 	public ItemPortalPlacer()
 	{
 		super();
-		this.maxStackSize = 1;
-		this.setCreativeTab(AbyssalCraft.tabTools);
+		maxStackSize = 1;
+		setCreativeTab(AbyssalCraft.tabTools);
 	}
 
+	@Override
 	public boolean isFull3D()
 	{
 		return true;
 	}
 
+	@Override
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public void addInformation(ItemStack par1ItemStack, EntityPlayer entityplayer, List list, boolean is){
-		list.add("Right-click on the ground to");
-		list.add("create a portal. Infinite uses.");
+		list.add(StatCollector.translateToLocal("tooltip.portalplacer.1"));
+		list.add(StatCollector.translateToLocal("tooltip.portalplacer.2"));
 	}
 
+	@Override
 	public boolean onItemUse(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, World par3World, int par4, int par5, int par6, int par7, float par8, float par9, float par10)
 	{
 		if(!par3World.isRemote)
 		{
-			int direction = MathHelper.floor_double((double)(par2EntityPlayer.rotationYaw * 4.0F / 360.0F) + 0.5D) & 3;
+			int direction = MathHelper.floor_double(par2EntityPlayer.rotationYaw * 4.0F / 360.0F + 0.5D) & 3;
 
 			if(direction == 1 || direction == 3)
 			{

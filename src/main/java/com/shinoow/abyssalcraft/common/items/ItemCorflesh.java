@@ -31,6 +31,7 @@ public class ItemCorflesh extends ItemFood {
 
 	}
 
+	@Override
 	public void onFoodEaten(ItemStack itemStack, World world, EntityPlayer entityPlayer)
 	{
 		world.playSoundAtEntity(entityPlayer, "random.burp", 0.5F, world.rand.nextFloat() * 0.1F + 0.9F);

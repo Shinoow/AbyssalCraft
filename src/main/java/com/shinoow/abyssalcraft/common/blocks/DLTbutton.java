@@ -30,9 +30,10 @@ public class DLTbutton extends BlockButton {
 		super(true);
 	}
 
+	@Override
 	@SideOnly(Side.CLIENT)
 	public void registerBlockIcons(IIconRegister par1IconRegister)
 	{
-		this.blockIcon = par1IconRegister.registerIcon(AbyssalCraft.modid + ":" + "DLTplank");
+		blockIcon = par1IconRegister.registerIcon(AbyssalCraft.modid + ":" + "DLTplank");
 	}
 }

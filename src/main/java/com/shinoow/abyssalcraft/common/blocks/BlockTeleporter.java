@@ -39,20 +39,22 @@ public class BlockTeleporter extends BlockBreakable
 	public BlockTeleporter()
 	{
 		super("AG", Material.portal , false);
-		this.setTickRandomly(true);
-		this.setHardness(-1.0F);
-		this.setLightLevel(0.75F);
+		setTickRandomly(true);
+		setHardness(-1.0F);
+		setLightLevel(0.75F);
 	}
 
+	@Override
 	@SideOnly(Side.CLIENT)
 	public void registerBlockIcons(IIconRegister par1IconRegister)
 	{
-		this.blockIcon = par1IconRegister.registerIcon(AbyssalCraft.modid + ":" + "AG");
+		blockIcon = par1IconRegister.registerIcon(AbyssalCraft.modid + ":" + "AG");
 	}
 
 	/**
 	 * Ticks the block if it's been scheduled
 	 */
+	@Override
 	public void updateTick(World par1World, int par2, int par3, int par4, Random par5Random)
 	{
 		super.updateTick(par1World, par2, par3, par4, par5Random);
@@ -69,6 +71,7 @@ public class BlockTeleporter extends BlockBreakable
 	 * Returns a bounding box from the pool of bounding boxes (this means this box can change after the pool has been
 	 * cleared to be reused)
 	 */
+	@Override
 	public AxisAlignedBB getCollisionBoundingBoxFromPool(World par1World, int par2, int par3, int par4)
 	{
 		return null;
@@ -76,6 +79,7 @@ public class BlockTeleporter extends BlockBreakable
 	/**
 	 * Updates the blocks bounds based on its current state. Args: world, x, y, z
 	 */
+	@Override
 	public void setBlockBoundsBasedOnState(IBlockAccess par1IBlockAccess, int par2, int par3, int par4)
 	{
 		float f;
@@ -84,13 +88,13 @@ public class BlockTeleporter extends BlockBreakable
 		{
 			f = 0.125F;
 			f1 = 0.5F;
-			this.setBlockBounds(0.5F - f, 0.0F, 0.5F - f1, 0.5F + f, 1.0F, 0.5F + f1);
+			setBlockBounds(0.5F - f, 0.0F, 0.5F - f1, 0.5F + f, 1.0F, 0.5F + f1);
 		}
 		else
 		{
 			f = 0.5F;
 			f1 = 0.125F;
-			this.setBlockBounds(0.5F - f, 0.0F, 0.5F - f1, 0.5F + f, 1.0F, 0.5F + f1);
+			setBlockBounds(0.5F - f, 0.0F, 0.5F - f1, 0.5F + f, 1.0F, 0.5F + f1);
 		}
 	}
 	/**
@@ -126,9 +130,7 @@ public class BlockTeleporter extends BlockBreakable
 			b1 = 1;
 		}
 		if (b0 == b1)
-		{
 			return false;
-		}
 		else
 		{
 			if (par1World.getBlock(par2 - b0, par3, par4 - b1) == Blocks.air)
@@ -149,14 +151,10 @@ public class BlockTeleporter extends BlockBreakable
 						if (flag)
 						{
 							if (j1 != AbyssalCraft.abystone)
-							{
 								return false;
-							}
 						}
 						else if (j1 != Blocks.air && j1 != AbyssalCraft.Coraliumfire)
-						{
 							return false;
-						}
 					}
 				}
 			}
@@ -221,6 +219,7 @@ public class BlockTeleporter extends BlockBreakable
 			}
 		}
 	}
+	@Override
 	@SideOnly(Side.CLIENT)
 	/**
 	 * Returns true if the given side of this block type should be rendered, if the adjacent block is at the given
@@ -229,9 +228,7 @@ public class BlockTeleporter extends BlockBreakable
 	public boolean shouldSideBeRendered(IBlockAccess par1IBlockAccess, int par2, int par3, int par4, int par5)
 	{
 		if (par1IBlockAccess.getBlock(par2, par3, par4) == this)
-		{
 			return false;
-		}
 		else
 		{
 			boolean flag = par1IBlockAccess.getBlock(par2 - 1, par3, par4) == this && par1IBlockAccess.getBlock(par2 - 2, par3, par4) != this;
@@ -240,12 +237,13 @@ public class BlockTeleporter extends BlockBreakable
 			boolean flag3 = par1IBlockAccess.getBlock(par2, par3, par4 + 1) == this && par1IBlockAccess.getBlock(par2, par3, par4 + 2) != this;
 			boolean flag4 = flag || flag1;
 			boolean flag5 = flag2 || flag3;
-			return flag4 && par5 == 4 ? true : (flag4 && par5 == 5 ? true : (flag5 && par5 == 2 ? true : flag5 && par5 == 3));
+			return flag4 && par5 == 4 ? true : flag4 && par5 == 5 ? true : flag5 && par5 == 2 ? true : flag5 && par5 == 3;
 		}
 	}
 	/**
 	 * Returns the quantity of items to drop on block destruction.
 	 */
+	@Override
 	public int quantityDropped(Random par1Random)
 	{
 		return 0;
@@ -253,10 +251,11 @@ public class BlockTeleporter extends BlockBreakable
 	/**
 	 * Triggered whenever an entity collides with this block (enters into the block). Args: world, x, y, z, entity
 	 */
+	@Override
 	public void onEntityCollidedWithBlock(World par1World, int par2, int par3, int par4, Entity par5Entity)
 	{
 
-		if ((par5Entity.ridingEntity == null) && (par5Entity.riddenByEntity == null) && ((par5Entity instanceof EntityPlayerMP)))
+		if (par5Entity.ridingEntity == null && par5Entity.riddenByEntity == null && par5Entity instanceof EntityPlayerMP)
 		{
 			EntityPlayerMP thePlayer = (EntityPlayerMP)par5Entity;
 			thePlayer.addStat(AbyssalCraft.enterabyss, 1);
@@ -264,10 +263,10 @@ public class BlockTeleporter extends BlockBreakable
 			{
 				thePlayer.timeUntilPortal = 10;
 			}
-			else if (thePlayer.dimension != AbyssalCraft.dimension)
+			else if (thePlayer.dimension != AbyssalCraft.configDimId1)
 			{
 				thePlayer.timeUntilPortal = 10;
-				thePlayer.mcServer.getConfigurationManager().transferPlayerToDimension(thePlayer, AbyssalCraft.dimension, new TeleporterAbyss(thePlayer.mcServer.worldServerForDimension(AbyssalCraft.dimension)));
+				thePlayer.mcServer.getConfigurationManager().transferPlayerToDimension(thePlayer, AbyssalCraft.configDimId1, new TeleporterAbyss(thePlayer.mcServer.worldServerForDimension(AbyssalCraft.configDimId1)));
 			}
 			else {
 				thePlayer.timeUntilPortal = 10;
@@ -275,6 +274,7 @@ public class BlockTeleporter extends BlockBreakable
 			}
 		}
 	}
+	@Override
 	@SideOnly(Side.CLIENT)
 	/**
 	 * Returns which pass should this block be rendered on. 0 for solids and 1 for alpha

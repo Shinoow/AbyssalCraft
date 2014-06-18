@@ -22,19 +22,27 @@ import net.minecraft.item.ItemFood;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
+import net.minecraft.util.EnumChatFormatting;
+import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class ItemOC extends ItemFood
+public class ItemOC extends ItemFood {
 
-{
+	public ItemOC(int j, float f, boolean b) {
 
-	public ItemOC(int j, float f, boolean b)
-	{
 		super(j, f, b);
 		setAlwaysEdible();
 	}
+
+	@Override
+	public String getItemStackDisplayName(ItemStack par1ItemStack) {
+
+		return EnumChatFormatting.DARK_RED + StatCollector.translateToLocal(this.getUnlocalizedName() + ".name");
+	}
+
+	@Override
 	public void onFoodEaten(ItemStack itemStack, World world, EntityPlayer entityPlayer)
 	{
 		world.playSoundAtEntity(entityPlayer, "random.burp", 0.5F, world.rand.nextFloat() * 0.1F + 0.9F);
@@ -51,20 +59,19 @@ public class ItemOC extends ItemFood
 		entityPlayer.addPotionEffect(new PotionEffect(Potion.digSpeed.id, 6000, 6));
 		entityPlayer.addPotionEffect(new PotionEffect(Potion.fireResistance.id, 6000, 6));
 
-
 		return;
 	}
+
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@Override
 	public void addInformation(ItemStack is, EntityPlayer player, List l, boolean B){
-		l.add("This item contains incredible powers");
+		l.add(StatCollector.translateToLocal("tooltip.oc"));
 	}
 
+	@Override
 	@SideOnly(Side.CLIENT)
-	public boolean hasEffect(ItemStack stack)
+	public boolean hasEffect(ItemStack stack, int pass)
 	{
 		return true;
 	}
-
 }
-
