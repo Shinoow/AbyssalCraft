@@ -312,6 +312,19 @@ item.OS.name=
 item.Corbow.name=
 item.Antibucket.name=
 item.cbrick.name=
+item.cudgel.name=
+item.DI.name=
+item.DF.name=
+item.ADDB.name=
+item.ADDH.name=
+item.ADDC.name=
+item.ADDP.name=
+item.DDP.name=
+item.DDA.name=
+item.DDS.name=
+item.DDSW.name=
+item.DDH.name=
+item.DreU.name=
 
 #Entities
 entity.abyssalcraft.depthsghoul.name=
