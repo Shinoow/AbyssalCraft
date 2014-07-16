@@ -209,17 +209,11 @@ tile.cstonebricks.name=
 tile.cstonebutton.name=
 tile.cstonepplate.name=
 tile.dreadaltar1.name=
-
 tile.dreadaltar2.name=
-
 tile.crystallizer.name=
-
 tile.crystallizer_on.name=
-
 tile.BOD.name=
-
 tile.transmutator.name=
-
 tile.transmutator_on.name=
 
 #Items
@@ -337,13 +331,9 @@ entity.abyssalcraft.dreadling.name=
 entity.abyssalcraft.dreadspawn.name=
 entity.abyssalcraft.demonpig.name=
 entity.abyssalcraft.chagaroth.name=
-
 entity.abyssalcraft.chagarothfist.name=
-
 entity.abyssalcraft.shadowbeast.name=
-
 entity.abyssalcraft.shadowboss.name=
-
 entity.abyssalcraft.gskeleton.name=
 
 #Potions
