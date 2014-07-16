@@ -65,13 +65,24 @@ achievement.GK2=La Clé Redouté
 achievement.GK2.desc=A fabriqué la Clé Redouté de la Porte D'Asorah
 
 achievement.GK3=L'Ancienne Clé
-achievement.GK3.desc=A fabriqué la Clé de Cha'garoth's R'lyethian
+achievement.GK3.desc=A fabriqué la Clé de Cha'garoth's R'lyehian
 
 achievement.Jzhstaff=Attend...C'est une clé ?!?!!
 achievement.Jzhstaff.desc=A obtenu le Bâton du Gardien de la Porte
 
 achievement.secret1=La Lame du Développeur
 achievement.secret1.desc=Lolwut. Arrête de tricher, c'est mon épée !
+
+#Container Inventories
+container.abyssalcraft.crate=
+container.abyssalcraft.crystallizer=
+container.abyssalcraft.transmutator=
+
+#Damagesources
+death.attack.coralium=%1$s
+death.attack.coralium.player=%1$s %2$s
+death.attack.coralium=%1$s
+death.attack.coralium.player=%1$s %2$s
 
 #Tooltips
 tooltip.portalplacer.1=Clic-droit sur le sol pour
@@ -87,7 +98,7 @@ tooltip.cpickaxe.1=Cette pioche peut transformer
 tooltip.cpickaxe.2=les minerais et certains types de pierre.
 tooltip.cshovel.1=Cette pelle peut transformer
 tooltip.cshovel.2=les types d'herbe, le gravier et le sable.
-tooltip.csword.1=Cette épée applique le feu et 
+toooltip.csword.1=Cette épée applique le feu et 
 tooltip.csword.2=des effets de potions lors d'une frappe.
 tooltip.devblade.1=Cette lame est si impie que
 tooltip.devblade.2=votre main commence a pourrir quand vous la tenez.
@@ -197,6 +208,13 @@ tile.cstonebricks2.name=Double-Dalle de Brique de Coralium
 tile.cstonebricks.name=Escaliers de Brique de Coraliu
 tile.cstonebutton.name=Bouton de Pierre de Coralium
 tile.cstonepplate.name=Plaque de Pression de Pierre de Coralium
+tile.dreadaltar1.name=
+tile.dreadaltar2.name=
+tile.crystallizer.name=
+tile.crystallizer_on.name=
+tile.BOD.name=
+tile.transmutator.name=
+tile.transmutator_on.name=
 
 #Items
 item.Sword.name=La Lame du Développeur
@@ -294,6 +312,19 @@ item.OS.name=Tesson d'Oblivion
 item.Corbow.name=Arc-Long de Coralium
 item.Antibucket.name=Sceau d'Antimatière Liquide
 item.cbrick.name=Brique de Coralium
+item.cudgel.name=
+item.DI.name=
+item.DF.name=
+item.ADDB.name=
+item.ADDH.name=
+item.ADDC.name=
+item.ADDP.name=
+item.DDP.name=
+item.DDA.name=
+item.DDS.name=
+item.DDSW.name=
+item.DDH.name=
+item.DreU.name=
 
 #Entities
 entity.abyssalcraft.depthsghoul.name=Goule des Profondeurs
@@ -312,6 +343,11 @@ entity.abyssalcraft.shadowmonster.name=Monstre de l'Ombre
 entity.abyssalcraft.dreadling.name=Lingue Redouté
 entity.abyssalcraft.dreadspawn.name=Spawn Redouté
 entity.abyssalcraft.demonpig.name=Cochon Démon
+entity.abyssalcraft.chagaroth.name=
+entity.abyssalcraft.chagarothfist.name=
+entity.abyssalcraft.shadowbeast.name=
+entity.abyssalcraft.shadowboss.name=
+entity.abyssalcraft.gskeleton.name=
 
 #Potions
 potion.Cplague=Peste de Coralium

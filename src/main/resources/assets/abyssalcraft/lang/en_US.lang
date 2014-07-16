@@ -65,13 +65,24 @@ achievement.GK2=The Dreaded key
 achievement.GK2.desc=Crafted Asorah's Dreaded Gateway Key
 
 achievement.GK3=The Ancient key
-achievement.GK3.desc=Crafted Cha'garoth's R'lyethian Key
+achievement.GK3.desc=Crafted Cha'garoth's R'lyehian Key
 
 achievement.Jzhstaff=wait... THIS IS A KEY?!?!?
 achievement.Jzhstaff.desc=Obtained The Staff of The Gatekeeper
 
 achievement.secret1=The Dev Blade
 achievement.secret1.desc=Lolwut. Stop cheating, that's my sword!
+
+#Container Inventories
+container.abyssalcraft.crate=Crate
+container.abyssalcraft.crystallizer=Crystalizer
+container.abyssalcraft.transmutator=Transmutator
+
+#Damagesources
+death.attack.coralium=%1$s died from the Coralium Plague
+death.attack.coralium.player=%1$s succumbed to the Coralium Plague whilst trying to escape %2$s
+death.attack.coralium=%1$s died from Dread Plague
+death.attack.coralium.player=%1$s succumbed to the might of Cha'garoth whilst trying to escape %2$s
 
 #Tooltips
 tooltip.portalplacer.1=Right-click on the ground to
@@ -197,6 +208,13 @@ tile.cstonebricks2.name=Coralium Brick Doubleslab
 tile.cstonebricks.name=Coralium Brick Stairs
 tile.cstonebutton.name=Coralium Stone Button
 tile.cstonepplate.name=Coralium Stone Pressure Plate
+tile.dreadaltar1.name=Altar of Cha'garoth (top)
+tile.dreadaltar2.name=Altar of Cha'garoth (bottom)
+tile.crystallizer.name=Crystallizer
+tile.crystallizer_on.name=Active Crystallizer
+tile.BOD.name=Block of Dreadium
+tile.transmutator.name=Transmutator
+tile.transmutator_on.name=Active Transmutator
 
 #Items
 item.Sword.name=The Dev Blade
@@ -294,6 +312,19 @@ item.OS.name=Shard of Oblivion
 item.Corbow.name=Coralium Longbow
 item.Antibucket.name=Bucket of Liquid Antimatter
 item.cbrick.name=Coralium Brick
+item.cudgel.name=Cudgel
+item.DI.name=Dreadium Ingot
+item.DF.name=Dread Fragment
+item.ADDB.name=Dreadium Boots
+item.ADDH.name=Dreadium Helmet
+item.ADDC.name=Dreadium Chestplate
+item.ADDP.name=Dreadium Leggings
+item.DDP.name=Dreadium Pickaxe
+item.DDA.name=Dreadium Axe
+item.DDS.name=Dreadium Shovel
+item.DDSW.name=Dreadium Sword
+item.DDH.name=Dreadium Hoe
+item.DreU.name=Dreadium Upgrade Kit
 
 #Entities
 entity.abyssalcraft.depthsghoul.name=Depths Ghoul
@@ -312,6 +343,11 @@ entity.abyssalcraft.shadowmonster.name=Shadow Monster
 entity.abyssalcraft.dreadling.name=Dreadling
 entity.abyssalcraft.dreadspawn.name=Dread Spawn
 entity.abyssalcraft.demonpig.name=Demon Pig
+entity.abyssalcraft.chagaroth.name=Cha'garoth, The Dreadbeast
+entity.abyssalcraft.chagarothfist.name=Fist of Cha'garoth
+entity.abyssalcraft.shadowbeast.name=Shadow Beast
+entity.abyssalcraft.shadowboss.name=
+entity.abyssalcraft.gskeleton.name=Goliath Skeleton
 
 #Potions
 potion.Cplague=Coralium Plague
