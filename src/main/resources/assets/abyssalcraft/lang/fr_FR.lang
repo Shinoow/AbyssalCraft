@@ -115,6 +115,7 @@ tooltip.corb.4=de l'Overworld.
 tooltip.altar.1=Utilisé pour invoquer Asorah, Le Déchu,
 tooltip.altar.2=depuis le royaume des ténèbres.
 tooltip.odb=Explosif puissant, à utiliser à vos propres risques !
+tooltip.crystal=
 
 #Creative Tabs
 itemgroup.acblocks= Blocs d'AbyssalCraft
@@ -123,6 +124,7 @@ itemgroup.actools=Outils d'AbyssalCraft
 itemgroup.acctools=Outils de Combat d'AbyssalCraft
 itemgroup.acfood=Nourritures d'AbyssalCraft
 itemgroup.acdblocks=Blocs de décoration d'AbyssalCraft
+itemgroup.accrystals=
 
 #Blocks
 tile.DS.name=Pierre Sombre
@@ -184,7 +186,7 @@ tile.DrTplank.name=Planches de Bois des Terres de l'Effroi
 tile.DG.name=Porte des Terres de l'Effroi
 tile.Dfire.name=Feu Redouté
 tile.DGhead.name=Tête de Goule des Profondeurs
-tile.Cwater.name=Liquide coulant de Coralium
+tile.Cwater.name=Liquide de Coralium
 tile.DrS.name=Pierre Redouté
 tile.AbyDrS.name=Roche d'Abyssalnite
 tile.DrG.name=Pierre des Terres de l'Effroi
@@ -211,10 +213,13 @@ tile.cstonepplate.name=Plaque de Pression de Pierre de Coralium
 tile.dreadaltar1.name=
 tile.dreadaltar2.name=
 tile.crystallizer.name=
-tile.crystallizer_on.name=
 tile.BOD.name=
 tile.transmutator.name=
-tile.transmutator_on.name=
+tile.dreadguardspawner.name=
+tile.chagarothspawner.name=
+tile.chagarothfistspawner.name=
+tile.DrTf.name=
+tile.NO.name=
 
 #Items
 item.Sword.name=La Lame du Développeur
@@ -325,6 +330,26 @@ item.DDS.name=
 item.DDSW.name=
 item.DDH.name=
 item.DreU.name=
+item.CarbC.name=
+item.DCarbC.name=
+item.methane.name=
+item.nitre.name=
+item.sulfur.name=
+item.crystalIron.name=
+item.crystalGold.name=
+item.crystalSulfur.name=
+item.crystalCarbon.name=
+item.crystalOxygen.name=
+item.crystalHydrogen.name=
+item.crystalPhosphorus.name=
+item.crystalPotassium.name=
+item.crystalNitrate.name=
+item.crystalMethane.name=
+item.crystalRedstone.name=
+item.crystalAbyssalnite.name=
+item.crystalCoralium.name=
+item.crystalDreadium.name=
+item.crystalBlaze.name=
 
 #Entities
 entity.abyssalcraft.depthsghoul.name=Goule des Profondeurs

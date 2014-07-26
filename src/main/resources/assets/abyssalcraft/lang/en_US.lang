@@ -115,6 +115,7 @@ tooltip.corb.4=elements (Blocks).
 tooltip.altar.1=Used to summon Asorah, the fallen,
 tooltip.altar.2=from the dark realm.
 tooltip.odb=Heavy explosive, use at own risk.
+tooltip.crystal=Molecular formula
 
 #Creative Tabs
 itemgroup.acblocks=AbyssalCraft Blocks
@@ -123,6 +124,7 @@ itemgroup.actools=AbyssalCraft Tools
 itemgroup.acctools=AbyssalCraft Combat Tools
 itemgroup.acfood=AbyssalCraft Foodstuffs
 itemgroup.acdblocks=AbyssalCraft Decoration Blocks
+itemgroup.accrystals=AbyssalCraft Crystallizer Crystals
 
 #Blocks
 tile.DS.name=Darkstone
@@ -159,7 +161,7 @@ tile.DSs2.name=Darkstone Doubleslab
 tile.Cfire.name=Coralium Fire
 tile.DSbb.name=Darkstone Button
 tile.DSpp.name=Darkstone Pressure Plate
-tile.DLTplank.name=Darlands Oak Wood Planks
+tile.DLTplank.name=Darklands Oak Wood Planks
 tile.DLTplankb.name=Darklands Oak Wood Button
 tile.DLTpp.name=Darklands Oak Wood Pressure Plate
 tile.DLTplanks.name=Darklands Oak Wood Stairs
@@ -184,7 +186,7 @@ tile.DrTplank.name=Dreadlands Wood Planks
 tile.DG.name=Dreadlands Gateway
 tile.Dfire.name=Dreaded Fire
 tile.DGhead.name=Depths Ghoul head
-tile.Cwater.name=Flowing Liquid Coralium
+tile.Cwater.name=Liquid Coralium
 tile.DrS.name=Dreadstone
 tile.AbyDrS.name=Abyssalnite Stone
 tile.DrG.name=Dreadlands Grass
@@ -211,10 +213,13 @@ tile.cstonepplate.name=Coralium Stone Pressure Plate
 tile.dreadaltar1.name=Altar of Cha'garoth (top)
 tile.dreadaltar2.name=Altar of Cha'garoth (bottom)
 tile.crystallizer.name=Crystallizer
-tile.crystallizer_on.name=Active Crystallizer
 tile.BOD.name=Block of Dreadium
 tile.transmutator.name=Transmutator
-tile.transmutator_on.name=Active Transmutator
+tile.dreadguardspawner.name=Dreadguard Spawner Block
+tile.chagarothspawner.name=Cha'garoth Spawner Block
+tile.chagarothfistspawner.name=Fist of Cha'garoth Spawner Block
+tile.DrTf.name=Dreadlands Wood Fence
+tile.NO.name=Nitre Ore
 
 #Items
 item.Sword.name=The Dev Blade
@@ -325,6 +330,26 @@ item.DDS.name=Dreadium Shovel
 item.DDSW.name=Dreadium Sword
 item.DDH.name=Dreadium Hoe
 item.DreU.name=Dreadium Upgrade Kit
+item.CarbC.name=Carbon Cluster
+item.DCarbC.name=Dense Carbon Cluster
+item.methane.name=Methane
+item.nitre.name=Nitre
+item.sulfur.name=Sulfur
+item.crystalIron.name=Crystallized Iron
+item.crystalGold.name=Crystallized Gold
+item.crystalSulfur.name=Crystallized Sulfur
+item.crystalCarbon.name=Crystallized Carbon
+item.crystalOxygen.name=Crystallized Oxygen
+item.crystalHydrogen.name=Crystallized Hydrogen
+item.crystalPhosphorus.name=Crystallized Phosphorus
+item.crystalPotassium.name=Crystallized Potassium
+item.crystalNitrate.name=Crystallized Nitrate
+item.crystalMethane.name=Crystallized Methane
+item.crystalRedstone.name=Crystallized Redstone
+item.crystalAbyssalnite.name=Crystallized Abyssalnite
+item.crystalCoralium.name=Crystallized Coralium
+item.crystalDreadium.name=Crystallized Dreadium
+item.crystalBlaze.name=Crystallized Blaze
 
 #Entities
 entity.abyssalcraft.depthsghoul.name=Depths Ghoul
@@ -346,8 +371,8 @@ entity.abyssalcraft.demonpig.name=Demon Pig
 entity.abyssalcraft.chagaroth.name=Cha'garoth, The Dreadbeast
 entity.abyssalcraft.chagarothfist.name=Fist of Cha'garoth
 entity.abyssalcraft.shadowbeast.name=Shadow Beast
-entity.abyssalcraft.shadowboss.name=
-entity.abyssalcraft.gskeleton.name=Goliath Skeleton
+entity.abyssalcraft.shadowboss.name=Sacthoth, Harbringer of Doom
+entity.abyssalcraft.gskeleton.name=Skeleton Goliath
 
 #Potions
 potion.Cplague=Coralium Plague

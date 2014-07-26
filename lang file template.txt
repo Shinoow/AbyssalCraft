@@ -115,6 +115,7 @@ tooltip.corb.4=
 tooltip.altar.1=
 tooltip.altar.2=
 tooltip.odb=
+tooltip.crystal=
 
 #Creative Tabs
 itemgroup.acblocks=
@@ -123,6 +124,7 @@ itemgroup.actools=
 itemgroup.acctools=
 itemgroup.acfood=
 itemgroup.acdblocks=
+itemgroup.accrystals=
 
 #Blocks
 tile.DS.name=
@@ -211,10 +213,13 @@ tile.cstonepplate.name=
 tile.dreadaltar1.name=
 tile.dreadaltar2.name=
 tile.crystallizer.name=
-tile.crystallizer_on.name=
 tile.BOD.name=
 tile.transmutator.name=
-tile.transmutator_on.name=
+tile.dreadguardspawner.name=
+tile.chagarothspawner.name=
+tile.chagarothfistspawner.name=
+tile.DrTf.name=
+tile.NO.name=
 
 #Items
 item.Sword.name=
@@ -325,6 +330,26 @@ item.DDS.name=
 item.DDSW.name=
 item.DDH.name=
 item.DreU.name=
+item.CarbC.name=
+item.DCarbC.name=
+item.methane.name=
+item.nitre.name=
+item.sulfur.name=
+item.crystalIron.name=
+item.crystalGold.name=
+item.crystalSulfur.name=
+item.crystalCarbon.name=
+item.crystalOxygen.name=
+item.crystalHydrogen.name=
+item.crystalPhosphorus.name=
+item.crystalPotassium.name=
+item.crystalNitrate.name=
+item.crystalMethane.name=
+item.crystalRedstone.name=
+item.crystalAbyssalnite.name=
+item.crystalCoralium.name=
+item.crystalDreadium.name=
+item.crystalBlaze.name=
 
 #Entities
 entity.abyssalcraft.depthsghoul.name=
