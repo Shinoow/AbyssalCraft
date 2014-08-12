@@ -73,6 +73,12 @@ achievement.Jzhstaff.desc=A obtenu le Bâton du Gardien de la Porte
 achievement.secret1=La Lame du Développeur
 achievement.secret1.desc=Lolwut. Arrête de tricher, c'est mon épée !
 
+achievement.summonChagaroth=
+achievement.summonChagaroth.desc=
+
+achievement.killChagaroth=
+achievement.killChagaroth.desc=
+
 #Container Inventories
 container.abyssalcraft.crate=
 container.abyssalcraft.crystallizer=
@@ -116,6 +122,8 @@ tooltip.altar.1=Utilisé pour invoquer Asorah, Le Déchu,
 tooltip.altar.2=depuis le royaume des ténèbres.
 tooltip.odb=Explosif puissant, à utiliser à vos propres risques !
 tooltip.crystal=
+tooltip.portalplacerjzh.1=
+tooltip.portalplacerjzh.2=
 
 #Creative Tabs
 itemgroup.acblocks= Blocs d'AbyssalCraft
@@ -341,6 +349,7 @@ item.crystalSulfur.name=
 item.crystalCarbon.name=
 item.crystalOxygen.name=
 item.crystalHydrogen.name=
+item.crystalNitrogen.name=
 item.crystalPhosphorus.name=
 item.crystalPotassium.name=
 item.crystalNitrate.name=
@@ -350,6 +359,17 @@ item.crystalAbyssalnite.name=
 item.crystalCoralium.name=
 item.crystalDreadium.name=
 item.crystalBlaze.name=
+item.DC.name=
+item.DPP.name=
+item.DB.name=
+item.hilt.name=
+item.katana.name=
+item.DK.name=
+item.portalplacerjzh.name=
+item.ADSB.name=
+item.ADSH.name=
+item.ADSC.name=
+item.ADSP.name=
 
 #Entities
 entity.abyssalcraft.depthsghoul.name=Goule des Profondeurs
@@ -373,6 +393,7 @@ entity.abyssalcraft.chagarothfist.name=
 entity.abyssalcraft.shadowbeast.name=
 entity.abyssalcraft.shadowboss.name=
 entity.abyssalcraft.gskeleton.name=
+entity.abyssalcraft.chagarothspawn.name=
 
 #Potions
 potion.Cplague=Peste de Coralium

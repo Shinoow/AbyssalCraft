@@ -46,7 +46,7 @@ achievement.petehead.desc=Yay, we can be friends forever :D
 achievement.wilsonhead=The grumpy head
 achievement.wilsonhead.desc=Where's my body?
 
-achievement.orangehead=The medial head
+achievement.orangehead=The medical head
 achievement.orangehead.desc=Your diagnose has come back, you have Squaids.
 
 achievement.mineCorgem=Gems of the ocean
@@ -67,11 +67,17 @@ achievement.GK2.desc=Crafted Asorah's Dreaded Gateway Key
 achievement.GK3=The Ancient key
 achievement.GK3.desc=Crafted Cha'garoth's R'lyehian Key
 
-achievement.Jzhstaff=wait... THIS IS A KEY?!?!?
+achievement.Jzhstaff=Wait... THIS IS A KEY?!?!?
 achievement.Jzhstaff.desc=Obtained The Staff of The Gatekeeper
 
 achievement.secret1=The Dev Blade
 achievement.secret1.desc=Lolwut. Stop cheating, that's my sword!
+
+achievement.summonChagaroth=Lair of The Dreadbeast
+achievement.summonChagaroth.desc=Entered the lair of Cha'garoth
+
+achievement.killChagaroth=Fall of the Dreadbeast
+achievement.killChagaroth.desc=You killed Cha'garoth... nice work.
 
 #Container Inventories
 container.abyssalcraft.crate=Crate
@@ -116,6 +122,8 @@ tooltip.altar.1=Used to summon Asorah, the fallen,
 tooltip.altar.2=from the dark realm.
 tooltip.odb=Heavy explosive, use at own risk.
 tooltip.crystal=Molecular formula
+tooltip.portalplacerjzh.1=Can only be used within
+tooltip.portalplacerjzh.2=The Dreadlands.
 
 #Creative Tabs
 itemgroup.acblocks=AbyssalCraft Blocks
@@ -341,6 +349,7 @@ item.crystalSulfur.name=Crystallized Sulfur
 item.crystalCarbon.name=Crystallized Carbon
 item.crystalOxygen.name=Crystallized Oxygen
 item.crystalHydrogen.name=Crystallized Hydrogen
+item.crystalNitrogen.name=Crystallized Nitrogen
 item.crystalPhosphorus.name=Crystallized Phosphorus
 item.crystalPotassium.name=Crystallized Potassium
 item.crystalNitrate.name=Crystallized Nitrate
@@ -350,6 +359,17 @@ item.crystalAbyssalnite.name=Crystallized Abyssalnite
 item.crystalCoralium.name=Crystallized Coralium
 item.crystalDreadium.name=Crystallized Dreadium
 item.crystalBlaze.name=Crystallized Blaze
+item.DC.name=Dread Cloth
+item.DPP.name=Dreadium Plate
+item.DB.name=Dreadium Katana Blade
+item.hilt.name=Dreadium Katana Hilt
+item.katana.name=Dreadium Katana
+item.DK.name=Dread-plagued Gateway Key
+item.portalplacerjzh.name=Cha'garoth's R'lyehian Gateway Key
+item.ADSB.name=Dreadium Samurai Boots
+item.ADSH.name=Dreadium Samurai Helmet
+item.ADSC.name=Dreadium Samurai Chestplate
+item.ADSP.name=Dreadium Samurai Leggings
 
 #Entities
 entity.abyssalcraft.depthsghoul.name=Depths Ghoul
@@ -373,6 +393,7 @@ entity.abyssalcraft.chagarothfist.name=Fist of Cha'garoth
 entity.abyssalcraft.shadowbeast.name=Shadow Beast
 entity.abyssalcraft.shadowboss.name=Sacthoth, Harbringer of Doom
 entity.abyssalcraft.gskeleton.name=Skeleton Goliath
+entity.abyssalcraft.chagarothspawn.name=Spawn of Cha'garoth
 
 #Potions
 potion.Cplague=Coralium Plague

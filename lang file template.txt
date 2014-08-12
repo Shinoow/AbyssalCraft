@@ -73,6 +73,12 @@ achievement.Jzhstaff.desc=
 achievement.secret1=
 achievement.secret1.desc=
 
+achievement.summonChagaroth=
+achievement.summonChagaroth.desc=
+
+achievement.killChagaroth=
+achievement.killChagaroth.desc=
+
 #Container Inventories
 container.abyssalcraft.crate=
 container.abyssalcraft.crystallizer=
@@ -116,6 +122,8 @@ tooltip.altar.1=
 tooltip.altar.2=
 tooltip.odb=
 tooltip.crystal=
+tooltip.portalplacerjzh.1=
+tooltip.portalplacerjzh.2=
 
 #Creative Tabs
 itemgroup.acblocks=
@@ -350,6 +358,17 @@ item.crystalAbyssalnite.name=
 item.crystalCoralium.name=
 item.crystalDreadium.name=
 item.crystalBlaze.name=
+item.DC.name=
+item.DPP.name=
+item.DB.name=
+item.hilt.name=
+item.katana.name=
+item.DK.name=
+item.portalplacerjzh.name=
+item.ADSB.name=
+item.ADSH.name=
+item.ADSC.name=
+item.ADSP.name=
 
 #Entities
 entity.abyssalcraft.depthsghoul.name=
@@ -373,6 +392,7 @@ entity.abyssalcraft.chagarothfist.name=
 entity.abyssalcraft.shadowbeast.name=
 entity.abyssalcraft.shadowboss.name=
 entity.abyssalcraft.gskeleton.name=
+entity.chagarothspawn.name=
 
 #Potions
 potion.Cplague=
