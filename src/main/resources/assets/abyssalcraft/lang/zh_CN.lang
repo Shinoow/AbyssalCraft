@@ -73,6 +73,12 @@ achievement.Jzhstaff.desc=获得守门者之杖
 achievement.secret1=恶魔之刃
 achievement.secret1.desc=Lolwut. 别再骗人了, 那是我的剑!
 
+achievement.summonChagaroth=
+achievement.summonChagaroth.desc=
+
+achievement.killChagaroth=
+achievement.killChagaroth.desc=
+
 #Tooltips
 tooltip.portalplacer.1=右击地面来
 tooltip.portalplacer.2=创建一个传送门. 无限使用.
@@ -104,6 +110,9 @@ tooltip.corb.4=的成分(方块).
 tooltip.altar.1=用来召唤堕落者阿索拉, 
 tooltip.altar.2=阿索拉来自黑暗王国.
 tooltip.odb=巨大的爆炸, 自身也承受危险.
+tooltip.crystal=
+tooltip.portalplacerjzh.1=
+tooltip.portalplacerjzh.2=
 
 #Creative Tabs
 itemgroup.acblocks=深渊工艺方块
@@ -112,6 +121,7 @@ itemgroup.actools=深渊工艺工具
 itemgroup.acctools=深渊工艺战斗工具
 itemgroup.acfood=深渊工艺食物
 itemgroup.acdblocks=深渊工艺装饰方块
+itemgroup.accrystals=
 
 #Blocks
 tile.DS.name=黑暗石
@@ -197,6 +207,16 @@ tile.cstonebricks2.name=珊瑚石砖双层台阶
 tile.cstonebricks.name=珊瑚石砖楼梯
 tile.cstonebutton.name=珊瑚石按钮
 tile.cstonepplate.name=珊瑚石压力板
+tile.dreadaltar1.name=
+tile.dreadaltar2.name=
+tile.crystallizer.name=
+tile.BOD.name=
+tile.transmutator.name=
+tile.dreadguardspawner.name=
+tile.chagarothspawner.name=
+tile.chagarothfistspawner.name=
+tile.DrTf.name=
+tile.NO.name=
 
 #Items
 item.Sword.name=恶魔之刃
@@ -294,6 +314,50 @@ item.OS.name=湮没碎片
 item.Corbow.name=珊瑚长弓
 item.Antibucket.name=桶装液态反物质
 item.cbrick.name=珊瑚石砖
+item.cudgel.name=
+item.DI.name=
+item.DF.name=
+item.ADDB.name=
+item.ADDH.name=
+item.ADDC.name=
+item.ADDP.name=
+item.DDP.name=
+item.DDA.name=
+item.DDS.name=
+item.DDSW.name=
+item.DDH.name=
+item.DreU.name=
+item.CarbC.name=
+item.DCarbC.name=
+item.methane.name=
+item.nitre.name=
+item.sulfur.name=
+item.crystalIron.name=
+item.crystalGold.name=
+item.crystalSulfur.name=
+item.crystalCarbon.name=
+item.crystalOxygen.name=
+item.crystalHydrogen.name=
+item.crystalPhosphorus.name=
+item.crystalPotassium.name=
+item.crystalNitrate.name=
+item.crystalMethane.name=
+item.crystalRedstone.name=
+item.crystalAbyssalnite.name=
+item.crystalCoralium.name=
+item.crystalDreadium.name=
+item.crystalBlaze.name=
+item.DC.name=
+item.DPP.name=
+item.DB.name=
+item.hilt.name=
+item.katana.name=
+item.DK.name=
+item.portalplacerjzh.name=
+item.ADSB.name=
+item.ADSH.name=
+item.ADSC.name=
+item.ADSP.name=
 
 #Entities
 entity.abyssalcraft.depthsghoul.name=深渊食尸鬼
@@ -312,6 +376,12 @@ entity.abyssalcraft.shadowmonster.name=暗影怪物
 entity.abyssalcraft.dreadling.name=惧魔
 entity.abyssalcraft.dreadspawn.name=恐惧根源
 entity.abyssalcraft.demonpig.name=恶魔猪
+entity.abyssalcraft.chagaroth.name=
+entity.abyssalcraft.chagarothfist.name=
+entity.abyssalcraft.shadowbeast.name=
+entity.abyssalcraft.shadowboss.name=
+entity.abyssalcraft.gskeleton.name=
+entity.chagarothspawn.name=
 
 
 #Potions
