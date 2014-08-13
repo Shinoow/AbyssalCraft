@@ -79,6 +79,17 @@ achievement.summonChagaroth.desc=
 achievement.killChagaroth=
 achievement.killChagaroth.desc=
 
+#Container Inventories
+container.abyssalcraft.crate=
+container.abyssalcraft.crystallizer=
+container.abyssalcraft.transmutator=
+
+#Damagesources
+death.attack.coralium=%1$s
+death.attack.coralium.player=%1$s %2$s
+death.attack.coralium=%1$s
+death.attack.coralium.player=%1$s %2$s
+
 #Tooltips
 tooltip.portalplacer.1=右击地面来
 tooltip.portalplacer.2=创建一个传送门. 无限使用.
