@@ -73,22 +73,22 @@ achievement.Jzhstaff.desc=获得守门者之杖
 achievement.secret1=恶魔之刃
 achievement.secret1.desc=Lolwut. 别再骗人了, 那是我的剑!
 
-achievement.summonChagaroth=
-achievement.summonChagaroth.desc=
+achievement.summonChagaroth=恐惧野兽的巢穴
+achievement.summonChagaroth.desc=进入Cha'garoth的巢穴
 
-achievement.killChagaroth=
-achievement.killChagaroth.desc=
+achievement.killChagaroth=恐惧野兽的陨落
+achievement.killChagaroth.desc=你杀死了Cha'garoth... 干得漂亮.
 
 #Container Inventories
-container.abyssalcraft.crate=
-container.abyssalcraft.crystallizer=
-container.abyssalcraft.transmutator=
+container.abyssalcraft.crate=板条箱
+container.abyssalcraft.crystallizer=结晶器
+container.abyssalcraft.transmutator=嬗变器
 
 #Damagesources
-death.attack.coralium=%1$s
-death.attack.coralium.player=%1$s %2$s
-death.attack.coralium=%1$s
-death.attack.coralium.player=%1$s %2$s
+death.attack.coralium=%1$s由于珊瑚侵染而死亡
+death.attack.coralium.player=在逃避%2$s的时候%1$s屈服于珊瑚侵染之下
+death.attack.coralium=%1$s 由于恐惧侵染而死亡
+death.attack.coralium.player=在逃避%2$s的时候%1$s屈服于Cha'garoth的拳头之下
 
 #Tooltips
 tooltip.portalplacer.1=右击地面来
@@ -121,9 +121,9 @@ tooltip.corb.4=的成分(方块).
 tooltip.altar.1=用来召唤堕落者阿索拉, 
 tooltip.altar.2=阿索拉来自黑暗王国.
 tooltip.odb=巨大的爆炸, 自身也承受危险.
-tooltip.crystal=
-tooltip.portalplacerjzh.1=
-tooltip.portalplacerjzh.2=
+tooltip.crystal=分子式
+tooltip.portalplacerjzh.1=只能在
+tooltip.portalplacerjzh.2=恐惧之地使用
 
 #Creative Tabs
 itemgroup.acblocks=深渊工艺方块
@@ -132,7 +132,7 @@ itemgroup.actools=深渊工艺工具
 itemgroup.acctools=深渊工艺战斗工具
 itemgroup.acfood=深渊工艺食物
 itemgroup.acdblocks=深渊工艺装饰方块
-itemgroup.accrystals=
+itemgroup.accrystals=深渊工艺结晶器水晶
 
 #Blocks
 tile.DS.name=黑暗石
@@ -218,16 +218,16 @@ tile.cstonebricks2.name=珊瑚石砖双层台阶
 tile.cstonebricks.name=珊瑚石砖楼梯
 tile.cstonebutton.name=珊瑚石按钮
 tile.cstonepplate.name=珊瑚石压力板
-tile.dreadaltar1.name=
-tile.dreadaltar2.name=
-tile.crystallizer.name=
-tile.BOD.name=
-tile.transmutator.name=
-tile.dreadguardspawner.name=
-tile.chagarothspawner.name=
-tile.chagarothfistspawner.name=
-tile.DrTf.name=
-tile.NO.name=
+tile.dreadaltar1.name=Cha'garoth祭坛(顶部)
+tile.dreadaltar2.name=Cha'garoth祭坛(底部)
+tile.crystallizer.name=结晶器
+tile.BOD.name=恐惧锭块
+tile.transmutator.name=嬗变器
+tile.dreadguardspawner.name=恐惧守卫刷怪笼
+tile.chagarothspawner.name=Cha'garoth刷怪笼
+tile.chagarothfistspawner.name=触发的Cha'garoth刷怪笼
+tile.DrTf.name=恐惧之地木栅栏
+tile.NO.name=硝石矿
 
 #Items
 item.Sword.name=恶魔之刃
@@ -325,50 +325,51 @@ item.OS.name=湮没碎片
 item.Corbow.name=珊瑚长弓
 item.Antibucket.name=桶装液态反物质
 item.cbrick.name=珊瑚石砖
-item.cudgel.name=
-item.DI.name=
-item.DF.name=
-item.ADDB.name=
-item.ADDH.name=
-item.ADDC.name=
-item.ADDP.name=
-item.DDP.name=
-item.DDA.name=
-item.DDS.name=
-item.DDSW.name=
-item.DDH.name=
-item.DreU.name=
-item.CarbC.name=
-item.DCarbC.name=
-item.methane.name=
-item.nitre.name=
-item.sulfur.name=
-item.crystalIron.name=
-item.crystalGold.name=
-item.crystalSulfur.name=
-item.crystalCarbon.name=
-item.crystalOxygen.name=
-item.crystalHydrogen.name=
-item.crystalPhosphorus.name=
-item.crystalPotassium.name=
-item.crystalNitrate.name=
-item.crystalMethane.name=
-item.crystalRedstone.name=
-item.crystalAbyssalnite.name=
-item.crystalCoralium.name=
-item.crystalDreadium.name=
-item.crystalBlaze.name=
-item.DC.name=
-item.DPP.name=
-item.DB.name=
-item.hilt.name=
-item.katana.name=
-item.DK.name=
-item.portalplacerjzh.name=
-item.ADSB.name=
-item.ADSH.name=
-item.ADSC.name=
-item.ADSP.name=
+item.cudgel.name=棍棒
+item.DI.name=恐惧锭
+item.DF.name=恐惧碎片
+item.ADDB.name=恐惧锭靴子
+item.ADDH.name=恐惧锭头盔
+item.ADDC.name=恐惧锭胸甲
+item.ADDP.name=恐惧锭护腿
+item.DDP.name=恐惧锭镐
+item.DDA.name=恐惧锭斧
+item.DDS.name=恐惧锭锹
+item.DDSW.name=恐惧锭剑
+item.DDH.name=恐惧锭锄
+item.DreU.name=恐惧锭升级套件
+item.CarbC.name=碳簇
+item.DCarbC.name=高密碳簇
+item.methane.name=甲烷
+item.nitre.name=硝石
+item.sulfur.name=硫磺
+item.crystalIron.name=结晶铁
+item.crystalGold.name=结晶金
+item.crystalSulfur.name=结晶硫磺
+item.crystalCarbon.name=结晶碳
+item.crystalOxygen.name=结晶氧
+item.crystalHydrogen.name=结晶氢
+item.crystalNitrogen.name=结晶氮
+item.crystalPhosphorus.name=结晶磷
+item.crystalPotassium.name=结晶钾
+item.crystalNitrate.name=结晶硝酸
+item.crystalMethane.name=结晶甲烷
+item.crystalRedstone.name=结晶红石
+item.crystalAbyssalnite.name=结晶深渊锭
+item.crystalCoralium.name=结晶珊瑚石
+item.crystalDreadium.name=结晶恐惧锭
+item.crystalBlaze.name=结晶烈焰
+item.DC.name=可怕的桌布
+item.DPP.name=恐惧锭盘子
+item.DB.name=可怕的武士刀刀刃
+item.hilt.name=可怕的武士刀刀把
+item.katana.name=可怕的武士刀
+item.DK.name=恐惧侵染的传送门钥匙
+item.portalplacerjzh.name=Cha'garoth's R'lyehian传送门钥匙
+item.ADSB.name=可怕的侍魂靴子
+item.ADSH.name=可怕的侍魂头盔
+item.ADSC.name=可怕的侍魂胸甲
+item.ADSP.name=可怕的侍魂护腿
 
 #Entities
 entity.abyssalcraft.depthsghoul.name=深渊食尸鬼
@@ -387,12 +388,12 @@ entity.abyssalcraft.shadowmonster.name=暗影怪物
 entity.abyssalcraft.dreadling.name=惧魔
 entity.abyssalcraft.dreadspawn.name=恐惧根源
 entity.abyssalcraft.demonpig.name=恶魔猪
-entity.abyssalcraft.chagaroth.name=
-entity.abyssalcraft.chagarothfist.name=
-entity.abyssalcraft.shadowbeast.name=
-entity.abyssalcraft.shadowboss.name=
-entity.abyssalcraft.gskeleton.name=
-entity.chagarothspawn.name=
+entity.abyssalcraft.chagaroth.name=恐惧野兽Cha'garoth
+entity.abyssalcraft.chagarothfist.name=Cha'garoth的拳头
+entity.abyssalcraft.shadowbeast.name=阴影野兽
+entity.abyssalcraft.shadowboss.name=末日先驱者Sacthoth
+entity.abyssalcraft.gskeleton.name=骷髅哥利亚
+entity.abyssalcraft.chagarothspawn.name=Cha'garoth的卵
 
 
 #Potions
