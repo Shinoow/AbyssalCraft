@@ -1,7 +1,7 @@
 #Start of localization file
 
 #Achievements
-achievement.mineDS=欢迎来到深渊工艺！
+achievement.mineDS=欢迎来到深渊国度！
 achievement.mineDS.desc=挖掘一些黑暗石
 
 achievement.mineAby=比钻石好！
@@ -65,19 +65,19 @@ achievement.GK2=恐惧之地钥匙
 achievement.GK2.desc=合成阿索拉的恐惧传送门钥匙
 
 achievement.GK3=古老的钥匙
-achievement.GK3.desc=合成Cha'garoth's R'lyethian钥匙
+achievement.GK3.desc=合成查加罗特的瑞尔森钥匙
 
 achievement.Jzhstaff=等一下... 这是一把钥匙?!?!?
 achievement.Jzhstaff.desc=获得守门者之杖
 
 achievement.secret1=恶魔之刃
-achievement.secret1.desc=Lolwut. 别再骗人了, 那是我的剑!
+achievement.secret1.desc=洛瓦特. 别再骗人了, 那是我的剑!
 
 achievement.summonChagaroth=恐惧野兽的巢穴
-achievement.summonChagaroth.desc=进入Cha'garoth的巢穴
+achievement.summonChagaroth.desc=进入查加罗特的巢穴
 
 achievement.killChagaroth=恐惧野兽的陨落
-achievement.killChagaroth.desc=你杀死了Cha'garoth... 干得漂亮.
+achievement.killChagaroth.desc=你杀死了查加罗特... 干得漂亮.
 
 #Container Inventories
 container.abyssalcraft.crate=板条箱
@@ -88,7 +88,7 @@ container.abyssalcraft.transmutator=嬗变器
 death.attack.coralium=%1$s由于珊瑚侵染而死亡
 death.attack.coralium.player=在逃避%2$s的时候%1$s屈服于珊瑚侵染之下
 death.attack.coralium=%1$s 由于恐惧侵染而死亡
-death.attack.coralium.player=在逃避%2$s的时候%1$s屈服于Cha'garoth的拳头之下
+death.attack.coralium.player=在逃避%2$s的时候%1$s屈服于查加罗特的拳头之下
 
 #Tooltips
 tooltip.portalplacer.1=右击地面来
@@ -126,13 +126,13 @@ tooltip.portalplacerjzh.1=只能在
 tooltip.portalplacerjzh.2=恐惧之地使用
 
 #Creative Tabs
-itemgroup.acblocks=深渊工艺方块
-itemgroup.acitems=深渊工艺物品
-itemgroup.actools=深渊工艺工具
-itemgroup.acctools=深渊工艺战斗工具
-itemgroup.acfood=深渊工艺食物
-itemgroup.acdblocks=深渊工艺装饰方块
-itemgroup.accrystals=深渊工艺结晶器水晶
+itemgroup.acblocks=深渊国度方块
+itemgroup.acitems=深渊国度物品
+itemgroup.actools=深渊国度工具
+itemgroup.acctools=深渊国度战斗工具
+itemgroup.acfood=深渊国度食物
+itemgroup.acdblocks=深渊国度装饰方块
+itemgroup.accrystals=深渊国度结晶器水晶
 
 #Blocks
 tile.DS.name=黑暗石
@@ -218,14 +218,14 @@ tile.cstonebricks2.name=珊瑚石砖双层台阶
 tile.cstonebricks.name=珊瑚石砖楼梯
 tile.cstonebutton.name=珊瑚石按钮
 tile.cstonepplate.name=珊瑚石压力板
-tile.dreadaltar1.name=Cha'garoth祭坛(顶部)
-tile.dreadaltar2.name=Cha'garoth祭坛(底部)
+tile.dreadaltar1.name=查加罗特祭坛(顶部)
+tile.dreadaltar2.name=查加罗特祭坛(底部)
 tile.crystallizer.name=结晶器
 tile.BOD.name=恐惧锭块
 tile.transmutator.name=嬗变器
 tile.dreadguardspawner.name=恐惧守卫刷怪笼
-tile.chagarothspawner.name=Cha'garoth刷怪笼
-tile.chagarothfistspawner.name=触发的Cha'garoth刷怪笼
+tile.chagarothspawner.name=查加罗特刷怪笼
+tile.chagarothfistspawner.name=触发的查加罗特刷怪笼
 tile.DrTf.name=恐惧之地木栅栏
 tile.NO.name=硝石矿
 
@@ -365,7 +365,7 @@ item.DB.name=可怕的武士刀刀刃
 item.hilt.name=可怕的武士刀刀把
 item.katana.name=可怕的武士刀
 item.DK.name=恐惧侵染的传送门钥匙
-item.portalplacerjzh.name=Cha'garoth's R'lyehian传送门钥匙
+item.portalplacerjzh.name=查加罗特的瑞尔森传送门钥匙
 item.ADSB.name=可怕的侍魂靴子
 item.ADSH.name=可怕的侍魂头盔
 item.ADSC.name=可怕的侍魂胸甲
@@ -376,7 +376,7 @@ entity.abyssalcraft.depthsghoul.name=深渊食尸鬼
 entity.abyssalcraft.evilpig.name=猪
 entity.abyssalcraft.abyssalzombie.name=深渊僵尸
 entity.abyssalcraft.Primed ODB.name=待发的湮灭弹
-entity.abyssalcraft.Jzahar.name=深渊的守门者J'zahar
+entity.abyssalcraft.Jzahar.name=深渊的守门者扎哈尔
 entity.abyssalcraft.abygolem.name=深渊傀儡
 entity.abyssalcraft.dreadgolem.name=恐惧深渊傀儡
 entity.abyssalcraft.dreadguard.name=恐惧守卫
@@ -388,12 +388,12 @@ entity.abyssalcraft.shadowmonster.name=暗影怪物
 entity.abyssalcraft.dreadling.name=惧魔
 entity.abyssalcraft.dreadspawn.name=恐惧根源
 entity.abyssalcraft.demonpig.name=恶魔猪
-entity.abyssalcraft.chagaroth.name=恐惧野兽Cha'garoth
-entity.abyssalcraft.chagarothfist.name=Cha'garoth的拳头
+entity.abyssalcraft.chagaroth.name=恐惧野兽查加罗特
+entity.abyssalcraft.chagarothfist.name=查加罗特的拳头
 entity.abyssalcraft.shadowbeast.name=阴影野兽
-entity.abyssalcraft.shadowboss.name=末日先驱者Sacthoth
+entity.abyssalcraft.shadowboss.name=末日先驱者萨索斯
 entity.abyssalcraft.gskeleton.name=骷髅哥利亚
-entity.abyssalcraft.chagarothspawn.name=Cha'garoth的卵
+entity.abyssalcraft.chagarothspawn.name=查加罗特的卵
 
 
 #Potions
