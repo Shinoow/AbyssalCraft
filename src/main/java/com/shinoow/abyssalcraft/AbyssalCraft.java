@@ -940,6 +940,8 @@ public class AbyssalCraft {
 		registerEntityEgg(EntityChagaroth.class, 0xE60000, 0xCC0000);
 
 		EntityRegistry.registerModEntity(EntityShadowBeast.class, "shadowbeast", 46, this, 80, 3, true);
+		EntityRegistry.addSpawn(EntityShadowBeast.class, 1, 1, 1, EnumCreatureType.monster, new BiomeGenBase[] {
+			AbyssalCraft.DarklandsMountains});
 		registerEntityEgg(EntityShadowBeast.class, 0, 0xFFFFFF);
 
 		EntityRegistry.registerModEntity(EntitySacthoth.class, "shadowboss", 47, this, 80, 3, true);
