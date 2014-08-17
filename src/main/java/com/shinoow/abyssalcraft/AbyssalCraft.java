@@ -68,7 +68,7 @@ import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.*;
 
-@Mod(modid = AbyssalCraft.modid, name = AbyssalCraft.name, version = AbyssalCraft.version, dependencies = "required-after:Forge@[10.12.1.1079,)", useMetadata = true)
+@Mod(modid = AbyssalCraft.modid, name = AbyssalCraft.name, version = AbyssalCraft.version, dependencies = "required-after:Forge@[10.12.2.1147,)", useMetadata = true)
 public class AbyssalCraft {
 
 	public static final String version = "1.7.0";
