@@ -36,13 +36,9 @@ public class ACParticleFX extends EntityFX {
 		motionZ *= 0.10000000149011612D;
 
 		if (par9 == 0.0F)
-		{
 			par9 = 1.0F;
-		}
 
-		particleRed = 0;
-		particleGreen = 255;
-		particleBlue = 255;
+		particleRed = particleGreen = particleBlue = 1.0F;
 		particleScale *= 0.75F;
 		particleScale *= par8;
 		reddustParticleScale = particleScale;
@@ -57,14 +53,10 @@ public class ACParticleFX extends EntityFX {
 		float var8 = (particleAge + par2) / particleMaxAge * 32.0F;
 
 		if (var8 < 0.0F)
-		{
 			var8 = 0.0F;
-		}
 
 		if (var8 > 1.0F)
-		{
 			var8 = 1.0F;
-		}
 
 		particleScale = reddustParticleScale * var8;
 		super.renderParticle(par1Tessellator, par2, par3, par4, par5, par6, par7);
@@ -78,9 +70,7 @@ public class ACParticleFX extends EntityFX {
 		prevPosZ = posZ;
 
 		if (particleAge++ >= particleMaxAge)
-		{
 			setDead();
-		}
 
 		setParticleTextureIndex(7 - particleAge * 8 / particleMaxAge);
 		moveEntity(motionX, motionY, motionZ);

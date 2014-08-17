@@ -87,8 +87,8 @@ container.abyssalcraft.transmutator=
 #Damagesources
 death.attack.coralium=%1$s
 death.attack.coralium.player=%1$s %2$s
-death.attack.coralium=%1$s
-death.attack.coralium.player=%1$s %2$s
+death.attack.dread=%1$s
+death.attack.dread.player=%1$s %2$s
 
 #Tooltips
 tooltip.portalplacer.1=Clic-droit sur le sol pour
@@ -365,7 +365,7 @@ item.DB.name=
 item.hilt.name=
 item.katana.name=
 item.DK.name=
-item.portalplacerjzh.name=
+item.GKJ.name=
 item.ADSB.name=
 item.ADSH.name=
 item.ADSC.name=

@@ -22,8 +22,8 @@ import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
-import com.shinoow.abyssalcraft.common.entity.Entityabygolem;
-import com.shinoow.abyssalcraft.common.entity.Entitydreadgolem;
+import com.shinoow.abyssalcraft.common.entity.EntityAbygolem;
+import com.shinoow.abyssalcraft.common.entity.EntityDreadgolem;
 
 public class BiomeGenDreadlands extends BiomeGenBase
 {
@@ -39,8 +39,8 @@ public class BiomeGenDreadlands extends BiomeGenBase
 		spawnableCaveCreatureList.clear();
 		theBiomeDecorator.treesPerChunk = -1;
 		theBiomeDecorator.flowersPerChunk= -1;
-		spawnableMonsterList.add(new SpawnListEntry(Entitydreadgolem.class, 5, 1, 5));
-		spawnableCreatureList.add(new SpawnListEntry(Entityabygolem.class, 2, 1, 2));
+		spawnableMonsterList.add(new SpawnListEntry(EntityDreadgolem.class, 5, 1, 5));
+		spawnableCreatureList.add(new SpawnListEntry(EntityAbygolem.class, 2, 1, 2));
 	}
 
 	@Override
@@ -60,9 +60,7 @@ public class BiomeGenDreadlands extends BiomeGenBase
 			Block var10 = par1World.getBlock(var7, var8, var9);
 
 			if (var10 == AbyssalCraft.dreadstone)
-			{
 				par1World.setBlock(var7, var8, var9, AbyssalCraft.dreadore);
-			}
 		}
 	}
 }

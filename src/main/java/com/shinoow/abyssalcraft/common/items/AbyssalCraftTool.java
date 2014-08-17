@@ -36,17 +36,13 @@ import net.minecraft.world.WorldSettings.GameType;
 
 import com.google.common.collect.Multimap;
 import com.shinoow.abyssalcraft.common.entity.EntityJzahar;
-import com.shinoow.abyssalcraft.common.util.EnumToolMaterialAC;
 
 public class AbyssalCraftTool extends Item {
 
 	private float weaponDamage;
-	private final EnumToolMaterialAC toolMaterial;
-	public AbyssalCraftTool(EnumToolMaterialAC abyssalniteC) {
+	public AbyssalCraftTool() {
 		super();
-		toolMaterial = abyssalniteC;
 		maxStackSize = 1;
-		setMaxDamage(abyssalniteC.getMaxUses());
 		weaponDamage = 500000;
 		setCreativeTab(null);
 	}
@@ -62,10 +58,6 @@ public class AbyssalCraftTool extends Item {
 	public String getItemStackDisplayName(ItemStack par1ItemStack) {
 
 		return EnumChatFormatting.DARK_RED + StatCollector.translateToLocal(this.getUnlocalizedName() + ".name");
-	}
-
-	public float func_82803_g() {
-		return toolMaterial.getDamageVsEntity();
 	}
 
 	@Override
@@ -91,40 +83,28 @@ public class AbyssalCraftTool extends Item {
 
 		List list = par3EntityPlayer.worldObj.getEntitiesWithinAABBExcludingEntity(par3EntityPlayer, par3EntityPlayer.boundingBox.expand(40D, 40D, 40D));
 
-		if(list != null) {
+		if(list != null)
 			for(int k2 = 0; k2 < list.size(); k2++) {
 				Entity entity = (Entity)list.get(k2);
 
-				if(entity instanceof EntityLiving && !entity.isDead) {
+				if(entity instanceof EntityLiving && !entity.isDead)
 					entity.attackEntityFrom(DamageSource.generic, 50);
-				}
-				else if(entity instanceof EntityPlayer && !entity.isDead) {
+				else if(entity instanceof EntityPlayer && !entity.isDead)
 					entity.attackEntityFrom(DamageSource.causePlayerDamage(par3EntityPlayer), 50);
-				}
 				if(entity instanceof EntityJzahar) {
 					par3EntityPlayer.setGameType(GameType.SURVIVAL);
 					par3EntityPlayer.attackTargetEntityWithCurrentItem(par3EntityPlayer);
 					((EntityJzahar)entity).heal(Float.MAX_VALUE);
-					Minecraft.getMinecraft().thePlayer.sendChatMessage("I really thought I could do that, didn't I?");
+					if(!par2World.isRemote)
+						Minecraft.getMinecraft().thePlayer.sendChatMessage("I really thought I could do that, didn't I?");
 				}
 			}
-		}
 		return par1ItemStack;
 	}
 
 	@Override
 	public boolean func_150897_b(Block par1Block) {
 		return par1Block == Blocks.web;
-	}
-
-	@Override
-	public int getItemEnchantability() {
-		return toolMaterial.getEnchantability();
-	}
-
-	@Override
-	public boolean getIsRepairable(ItemStack par1ItemStack, ItemStack par2ItemStack) {
-		return toolMaterial.getToolCraftingMaterial() == par2ItemStack.getItem() ? true : super.getIsRepairable(par1ItemStack, par2ItemStack);
 	}
 
 	@Override

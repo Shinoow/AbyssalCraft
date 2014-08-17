@@ -18,48 +18,29 @@ package com.shinoow.abyssalcraft.common.entity;
 import java.util.Calendar;
 import java.util.UUID;
 
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.EnumCreatureAttribute;
-import net.minecraft.entity.IEntityLivingData;
-import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.EntityAIAttackOnCollide;
-import net.minecraft.entity.ai.EntityAIFleeSun;
-import net.minecraft.entity.ai.EntityAIHurtByTarget;
-import net.minecraft.entity.ai.EntityAILookIdle;
-import net.minecraft.entity.ai.EntityAIMoveTowardsRestriction;
-import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
-import net.minecraft.entity.ai.EntityAISwimming;
-import net.minecraft.entity.ai.EntityAIWander;
-import net.minecraft.entity.ai.EntityAIWatchClosest;
-import net.minecraft.entity.ai.attributes.AttributeModifier;
-import net.minecraft.entity.ai.attributes.IAttributeInstance;
-import net.minecraft.entity.monster.EntitySkeleton;
-import net.minecraft.entity.monster.EntityZombie;
+import net.minecraft.block.Block;
+import net.minecraft.entity.*;
+import net.minecraft.entity.ai.*;
+import net.minecraft.entity.ai.attributes.*;
+import net.minecraft.entity.monster.*;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
+import net.minecraft.init.*;
+import net.minecraft.item.*;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.MathHelper;
-import net.minecraft.world.World;
-import net.minecraft.world.WorldProviderEnd;
+import net.minecraft.world.*;
 import net.minecraftforge.common.ForgeModContainer;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.core.api.entity.CoraliumMob;
 
-public class EntityDepthsZombie extends CoraliumMob
-{
+public class EntityDepthsZombie extends CoraliumMob {
 
 	private static final UUID babySpeedBoostUUID = UUID.fromString("B9766B59-9566-4402-BC1F-2EE2A276D836");
 	private static final AttributeModifier babySpeedBoostModifier = new AttributeModifier(babySpeedBoostUUID, "Baby speed boost", 0.5D, 1);
-	private EntityAINearestAttackableTarget player = new EntityAINearestAttackableTarget(this, EntityPlayer.class, 0, true);
 
-	public EntityDepthsZombie(World par1World)
-	{
+	public EntityDepthsZombie(World par1World) {
 		super(par1World);
 		tasks.addTask(0, new EntityAISwimming(this));
 		tasks.addTask(1, new EntityAIAttackOnCollide(this, EntityPlayer.class, 0.35D, false));
@@ -73,30 +54,28 @@ public class EntityDepthsZombie extends CoraliumMob
 		tasks.addTask(9, new EntityAIWatchClosest(this, EntityZombie.class, 6.0F));
 		tasks.addTask(10, new EntityAIWatchClosest(this, EntityDepthsghoul.class, 6.0F));
 		tasks.addTask(11, new EntityAIWatchClosest(this, EntitySkeleton.class, 6.0F));
+		tasks.addTask(12, new EntityAIWatchClosest(this, EntitySkeletonGoliath.class, 6.0F));
 		targetTasks.addTask(0, new EntityAIHurtByTarget(this, false));
 		targetTasks.addTask(1, new EntityAINearestAttackableTarget(this, EntityZombie.class, 0, true));
-		targetTasks.addTask(2, player);
+
+		EntityPlayer entityPlayer = par1World.getClosestPlayerToEntity(this, 30D);
+		if(entityPlayer !=null && !entityPlayer.getCommandSenderName().equals("shinoow") ||
+				entityPlayer !=null && !entityPlayer.getCommandSenderName().equals("Oblivionaire"))
+			targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityPlayer.class, 0, true));
 	}
 
 	@Override
-	protected void applyEntityAttributes()
-	{
+	protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
-		// Max Health - default 20.0D - min 0.0D - max Double.MAX_VALUE
 		getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(25.0D);
-		// Follow Range - default 32.0D - min 0.0D - max 2048.0D
 		getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(128.0D);
-		// Knockback Resistance - default 0.0D - min 0.0D - max 1.0D
 		getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setBaseValue(0.0D);
-		// Movement Speed - default 0.699D - min 0.0D - max Double.MAX_VALUE
 		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.699D);
-		// Attack Damage - default 2.0D - min 0.0D - max Doubt.MAX_VALUE
 		getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(6.0D);
-		Calendar calendar = worldObj.getCurrentDate();
 
-		if (calendar.get(2) + 1 == 10 && calendar.get(5) == 31 && rand.nextFloat() < 0.25F)
-		{
-			getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(9.0D);
+		Calendar calendar = worldObj.getCurrentDate();
+		if (calendar.get(2) + 1 == 10 && calendar.get(5) == 31 && rand.nextFloat() < 0.25F){
+			//TODO: Find a good way to implement the damage boost
 		}
 	}
 
@@ -120,11 +99,10 @@ public class EntityDepthsZombie extends CoraliumMob
 	protected float getSoundPitch()
 	{
 		float pitch;
-		if(isChild()){
-			pitch = this.rand.nextFloat() - this.rand.nextFloat() * 0.2F + 1.3F;
-		}else{
+		if(isChild())
+			pitch = rand.nextFloat() - rand.nextFloat() * 0.2F + 1.3F;
+		else
 			pitch = 0.9F;
-		}
 		return pitch;
 	}
 
@@ -141,9 +119,7 @@ public class EntityDepthsZombie extends CoraliumMob
 			attributeinstance.removeModifier(babySpeedBoostModifier);
 
 			if (par1)
-			{
 				attributeinstance.applyModifier(babySpeedBoostModifier);
-			}
 		}
 	}
 
@@ -179,9 +155,7 @@ public class EntityDepthsZombie extends CoraliumMob
 		int var1 = super.getTotalArmorValue() + 2;
 
 		if (var1 > 20)
-		{
 			var1 = 20;
-		}
 
 		return var1;
 	}
@@ -231,9 +205,7 @@ public class EntityDepthsZombie extends CoraliumMob
 				}
 
 				if (var2)
-				{
 					setFire(16);
-				}
 			}
 		}
 
@@ -245,22 +217,14 @@ public class EntityDepthsZombie extends CoraliumMob
 	{
 
 		if (super.attackEntityAsMob(par1Entity))
-		{
 			if (par1Entity instanceof EntityLivingBase)
-			{
 				if(worldObj.provider.dimensionId == AbyssalCraft.configDimId1)
-				{
 					((EntityLivingBase)par1Entity).addPotionEffect(new PotionEffect(AbyssalCraft.Cplague.id, 200));
-				}
-			}
-		}
 
 		boolean flag = super.attackEntityAsMob(par1Entity);
 
 		if (flag && getHeldItem() == null && isBurning() && rand.nextFloat() < worldObj.difficultySetting.getDifficultyId() * 0.3F)
-		{
 			par1Entity.setFire(2 * worldObj.difficultySetting.getDifficultyId());
-		}
 
 		return flag;
 	}
@@ -292,7 +256,8 @@ public class EntityDepthsZombie extends CoraliumMob
 		return "mob.zombie.death";
 	}
 
-	protected void playStepSound(int par1, int par2, int par3, int par4)
+	@Override
+	protected void func_145780_a(int par1, int par2, int par3, Block par4)
 	{
 		playSound("mob.zombie.step", 0.15F, 1.0F);
 	}
@@ -342,18 +307,12 @@ public class EntityDepthsZombie extends CoraliumMob
 		super.writeEntityToNBT(par1NBTTagCompound);
 
 		if (isChild())
-		{
 			par1NBTTagCompound.setBoolean("IsBaby", true);
-		}
 
 		if (isZombie())
-		{
 			par1NBTTagCompound.setBoolean("IsZombie", true);
-		}
 		if (isPlayer())
-		{
 			par1NBTTagCompound.setBoolean("IsPlayer", true);
-		}
 		par1NBTTagCompound.setByte("ZombieType", (byte)getZombieType());
 	}
 
@@ -376,9 +335,7 @@ public class EntityDepthsZombie extends CoraliumMob
 			EntityDephsZombie.setIsZombie(true);
 
 			if (par1EntityLivingBase.isChild())
-			{
 				EntityDephsZombie.setChild(true);
-			}
 
 			worldObj.spawnEntityInWorld(EntityDephsZombie);
 			worldObj.playAuxSFXAtEntity((EntityPlayer)null, 1016, (int)posX, (int)posY, (int)posZ, 0);
@@ -405,31 +362,23 @@ public class EntityDepthsZombie extends CoraliumMob
 		Object data = super.onSpawnWithEgg(par1EntityLivingData);
 
 		if (worldObj.provider instanceof WorldProviderEnd && getRNG().nextInt(5) > 0)
-		{
 			setZombieType(2);
-		}
 
 		float f = worldObj.func_147462_b(posX, posY, posZ);
 		setCanPickUpLoot(rand.nextFloat() < 0.55F * f);
 
 		if (data == null)
-		{
-			data = new EntityDepthsZombie.GroupData(this.worldObj.rand.nextFloat() < ForgeModContainer.zombieBabyChance, this.worldObj.rand.nextFloat() < 0.05F, null);
-		}
+			data = new EntityDepthsZombie.GroupData(worldObj.rand.nextFloat() < ForgeModContainer.zombieBabyChance, worldObj.rand.nextFloat() < 0.05F, null);
 
 		if (data instanceof EntityDepthsZombie.GroupData)
 		{
 			EntityDepthsZombie.GroupData groupdata = (EntityDepthsZombie.GroupData)data;
 
 			if (groupdata.field_142046_b)
-			{
-				this.setIsZombie(true);
-			}
+				setIsZombie(true);
 
 			if (groupdata.field_142048_a)
-			{
-				this.setChild(true);
-			}
+				setChild(true);
 		}
 
 		addRandomArmor();
@@ -455,10 +404,10 @@ public class EntityDepthsZombie extends CoraliumMob
 		public boolean field_142046_b;
 		private GroupData(boolean par2, boolean par3)
 		{
-			this.field_142048_a = false;
-			this.field_142046_b = false;
-			this.field_142048_a = par2;
-			this.field_142046_b = par3;
+			field_142048_a = false;
+			field_142046_b = false;
+			field_142048_a = par2;
+			field_142046_b = par3;
 		}
 
 		GroupData(boolean par2, boolean par3, Object par4EntityZombieINNER1)

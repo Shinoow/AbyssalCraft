@@ -26,9 +26,7 @@ import net.minecraft.entity.boss.BossStatus;
 import net.minecraft.entity.boss.EntityDragonPart;
 import net.minecraft.entity.boss.IBossDisplayData;
 import net.minecraft.entity.item.EntityXPOrb;
-import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.MathHelper;
@@ -39,11 +37,10 @@ import net.minecraft.world.World;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.common.lib.ParticleEffects;
+import com.shinoow.abyssalcraft.common.util.SpecialTextUtil;
 import com.shinoow.abyssalcraft.core.api.entity.CoraliumMob;
 
-import cpw.mods.fml.client.FMLClientHandler;
-
-public class EntityDragonBoss extends CoraliumMob implements IBossDisplayData, IEntityMultiPart, IMob
+public class EntityDragonBoss extends CoraliumMob implements IBossDisplayData, IEntityMultiPart
 {
 
 	public double targetX;
@@ -94,17 +91,17 @@ public class EntityDragonBoss extends CoraliumMob implements IBossDisplayData, I
 		super(par1World);
 		dragonPartArray = new EntityDragonPart[] {dragonPartHead = new EntityDragonPart(this, "head", 6.0F, 6.0F), dragonPartBody = new EntityDragonPart(this, "body", 8.0F, 8.0F), dragonPartTail1 = new EntityDragonPart(this, "tail", 4.0F, 4.0F), dragonPartTail2 = new EntityDragonPart(this, "tail", 4.0F, 4.0F), dragonPartTail3 = new EntityDragonPart(this, "tail", 4.0F, 4.0F), dragonPartWing1 = new EntityDragonPart(this, "wing", 4.0F, 4.0F), dragonPartWing2 = new EntityDragonPart(this, "wing", 4.0F, 4.0F)};
 		setHealth(getMaxHealth());
-		setSize(16.0F, 8.0F);
+		setSize(18.0F, 10.0F);
 		noClip = false;
 		targetY = 100.0D;
 		ignoreFrustumCheck = true;
 	}
-	
+
 	@Override
 	public String getCommandSenderName()
-    {
-        return EnumChatFormatting.AQUA + StatCollector.translateToLocal("entity.abyssalcraft.dragonboss.name");
-    }
+	{
+		return EnumChatFormatting.AQUA + StatCollector.translateToLocal("entity.abyssalcraft.dragonboss.name");
+	}
 
 	@Override
 	protected void applyEntityAttributes()
@@ -122,9 +119,7 @@ public class EntityDragonBoss extends CoraliumMob implements IBossDisplayData, I
 	public double[] getMovementOffsets(int par1, float par2)
 	{
 		if (getHealth() <= 0.0F)
-		{
 			par2 = 0.0F;
-		}
 
 		par2 = 1.0F - par2;
 		int j = ringBufferIndex - par1 * 1 & 63;
@@ -154,26 +149,29 @@ public class EntityDragonBoss extends CoraliumMob implements IBossDisplayData, I
 			EntityPlayer entityplayer = (EntityPlayer)par1DamageSource.getEntity();
 			entityplayer.addStat(AbyssalCraft.killAsorah, 1);
 		}
+		if(worldObj.isRemote){
+			SpecialTextUtil.OblivionaireText("Asorah? ... Asorah?!");
+			SpecialTextUtil.OblivionaireText("YOU, you will pay for this mortal!");
+			SpecialTextUtil.OblivionaireText("Besides, you'll never get past The Dreadlands. Have fun digging your own grave.");
+		}
 		super.onDeath(par1DamageSource);
 	}
 
 	@Override
 	public void onLivingUpdate()
 	{
-		BossStatus.setBossStatus(this, true);
 
 		float f;
 		float f1;
 
 		if (worldObj.isRemote)
 		{
+			BossStatus.setBossStatus(this, true);
 			f = MathHelper.cos(animTime * (float)Math.PI * 2.0F);
 			f1 = MathHelper.cos(prevAnimTime * (float)Math.PI * 2.0F);
 
 			if (f1 <= -0.3F && f >= -0.3F)
-			{
 				worldObj.playSound(posX, posY, posZ, "mob.enderdragon.wings", 5.0F, 0.8F + rand.nextFloat() * 0.3F, false);
-			}
 		}
 
 		prevAnimTime = animTime;
@@ -198,18 +196,14 @@ public class EntityDragonBoss extends CoraliumMob implements IBossDisplayData, I
 			rotationYaw = MathHelper.wrapAngleTo180_float(rotationYaw);
 
 			if (ringBufferIndex < 0)
-			{
 				for (int i = 0; i < ringBuffer.length; ++i)
 				{
 					ringBuffer[i][0] = rotationYaw;
 					ringBuffer[i][1] = posY;
 				}
-			}
 
 			if (++ringBufferIndex == ringBuffer.length)
-			{
 				ringBufferIndex = 0;
-			}
 
 			ringBuffer[ringBufferIndex][0] = rotationYaw;
 			ringBuffer[ringBufferIndex][1] = posY;
@@ -233,6 +227,9 @@ public class EntityDragonBoss extends CoraliumMob implements IBossDisplayData, I
 					setPosition(d3, d0, d1);
 					setRotation(rotationYaw, rotationPitch);
 				}
+
+				for (int i = 0; i < 2; ++i)
+					ParticleEffects.spawnParticle("CorBlood", posX + (rand.nextDouble() - 0.5D) * width, posY + rand.nextDouble() * height - 0.25D, posZ + (rand.nextDouble() - 0.5D) * width, (rand.nextDouble() - 0.5D) * 2.0D, -rand.nextDouble(), (rand.nextDouble() - 0.5D) * 2.0D);
 			}
 			else
 			{
@@ -251,9 +248,7 @@ public class EntityDragonBoss extends CoraliumMob implements IBossDisplayData, I
 					double d7 = 0.4000000059604645D + d6 / 80.0D - 1.0D;
 
 					if (d7 > 10.0D)
-					{
 						d7 = 10.0D;
-					}
 
 					targetY = target.boundingBox.minY + d7;
 				}
@@ -264,22 +259,16 @@ public class EntityDragonBoss extends CoraliumMob implements IBossDisplayData, I
 				}
 
 				if (forceNewTarget || d2 < 100.0D || d2 > 22500.0D || isCollidedHorizontally || isCollidedVertically)
-				{
 					setNewTarget();
-				}
 
 				d0 /= MathHelper.sqrt_double(d3 * d3 + d1 * d1);
 				f3 = 0.6F;
 
 				if (d0 < -f3)
-				{
 					d0 = -f3;
-				}
 
 				if (d0 > f3)
-				{
 					d0 = f3;
-				}
 
 				motionY += d0 * 0.10000000149011612D;
 				rotationYaw = MathHelper.wrapAngleTo180_float(rotationYaw);
@@ -287,32 +276,24 @@ public class EntityDragonBoss extends CoraliumMob implements IBossDisplayData, I
 				double d9 = MathHelper.wrapAngleTo180_double(d8 - rotationYaw);
 
 				if (d9 > 50.0D)
-				{
 					d9 = 50.0D;
-				}
 
 				if (d9 < -50.0D)
-				{
 					d9 = -50.0D;
-				}
 
-				Vec3 vec3 = worldObj.getWorldVec3Pool().getVecFromPool(targetX - posX, targetY - posY, targetZ - posZ).normalize();
-				Vec3 vec31 = worldObj.getWorldVec3Pool().getVecFromPool(MathHelper.sin(rotationYaw * (float)Math.PI / 180.0F), motionY, -MathHelper.cos(rotationYaw * (float)Math.PI / 180.0F)).normalize();
+				Vec3 vec3 = Vec3.createVectorHelper(targetX - posX, targetY - posY, targetZ - posZ).normalize();
+				Vec3 vec31 = Vec3.createVectorHelper(MathHelper.sin(rotationYaw * (float)Math.PI / 180.0F), motionY, -MathHelper.cos(rotationYaw * (float)Math.PI / 180.0F)).normalize();
 				float f4 = (float)(vec31.dotProduct(vec3) + 0.5D) / 1.5F;
 
 				if (f4 < 0.0F)
-				{
 					f4 = 0.0F;
-				}
 
 				randomYawVelocity *= 0.8F;
 				float f5 = MathHelper.sqrt_double(motionX * motionX + motionZ * motionZ) * 1.0F + 1.0F;
 				double d10 = Math.sqrt(motionX * motionX + motionZ * motionZ) * 1.0D + 1.0D;
 
 				if (d10 > 40.0D)
-				{
 					d10 = 40.0D;
-				}
 
 				randomYawVelocity = (float)(randomYawVelocity + d9 * (0.699999988079071D / d10 / f5));
 				rotationYaw += randomYawVelocity * 0.1F;
@@ -324,17 +305,12 @@ public class EntityDragonBoss extends CoraliumMob implements IBossDisplayData, I
 				moveEntity(motionX, motionY, motionZ);
 
 
-				Vec3 vec32 = worldObj.getWorldVec3Pool().getVecFromPool(motionX, motionY, motionZ).normalize();
+				Vec3 vec32 = Vec3.createVectorHelper(motionX, motionY, motionZ).normalize();
 				float f8 = (float)(vec32.dotProduct(vec31) + 1.0D) / 2.0F;
 				f8 = 0.8F + 0.15F * f8;
 				motionX *= f8;
 				motionZ *= f8;
 				motionY *= 0.9100000262260437D;
-			}
-
-			for (int i = 0; i < 2; ++i)
-			{
-				ParticleEffects.spawnParticle("CorBlood", posX + (rand.nextDouble() - 0.5D) * width, posY + rand.nextDouble() * height - 0.25D, posZ + (rand.nextDouble() - 0.5D) * width, (rand.nextDouble() - 0.5D) * 2.0D, -rand.nextDouble(), (rand.nextDouble() - 0.5D) * 2.0D);
 			}
 
 			renderYawOffset = rotationYaw;
@@ -380,19 +356,13 @@ public class EntityDragonBoss extends CoraliumMob implements IBossDisplayData, I
 				EntityDragonPart entitydragonpart = null;
 
 				if (j == 0)
-				{
 					entitydragonpart = dragonPartTail1;
-				}
 
 				if (j == 1)
-				{
 					entitydragonpart = dragonPartTail2;
-				}
 
 				if (j == 2)
-				{
 					entitydragonpart = dragonPartTail3;
-				}
 
 				double[] adouble2 = getMovementOffsets(12 + j * 2, 1.0F);
 				float f14 = rotationYaw * (float)Math.PI / 180.0F + simplifyAngle(adouble2[0] - adouble[0]) * (float)Math.PI / 180.0F * 1.0F;
@@ -409,30 +379,22 @@ public class EntityDragonBoss extends CoraliumMob implements IBossDisplayData, I
 	private void updateHealingCircle()
 	{
 		if (healingcircle != null)
-		{
 			if (healingcircle.isDead)
 			{
 				if (!worldObj.isRemote)
-				{
 					attackEntityFromPart(dragonPartHead, DamageSource.setExplosionSource((Explosion)null), 10.0F);
-				}
 
 				healingcircle = null;
 			}
 			else if (ticksExisted % 10 == 0 && getHealth() < getMaxHealth())
-			{
 				setHealth(getHealth() + 1.0F);
-			}
 			else if (ticksExisted % 10 == 0 && getHealth() < getMaxHealth()/2)
-			{
 				setHealth(getHealth() - 1.0F);
-			}
 			else if (ticksExisted % 10 == 0 && getHealth() < getMaxHealth()/4)
 			{
 				setHealth(getHealth() + 1.0F);
 				healingcircle.worldObj.createExplosion(healingcircle, healingcircle.lastTickPosX, healingcircle.lastTickPosY, healingcircle.lastTickPosZ, 10F, true);
 			}
-		}
 
 		if (rand.nextInt(10) == 0)
 		{
@@ -485,9 +447,7 @@ public class EntityDragonBoss extends CoraliumMob implements IBossDisplayData, I
 			Entity entity = (Entity)par1List.get(i);
 
 			if (entity instanceof EntityLivingBase)
-			{
 				entity.attackEntityFrom(DamageSource.causeMobDamage(this), 10.0F);
-			}
 		}
 	}
 
@@ -496,9 +456,7 @@ public class EntityDragonBoss extends CoraliumMob implements IBossDisplayData, I
 		forceNewTarget = false;
 
 		if (rand.nextInt(2) == 0 && !worldObj.playerEntities.isEmpty())
-		{
 			target = (Entity)worldObj.playerEntities.get(rand.nextInt(worldObj.playerEntities.size()));
-		}
 		else
 		{
 			boolean flag = false;
@@ -530,9 +488,7 @@ public class EntityDragonBoss extends CoraliumMob implements IBossDisplayData, I
 	public boolean attackEntityFromPart(EntityDragonPart par1EntityDragonPart, DamageSource par2DamageSource, float par3)
 	{
 		if (par1EntityDragonPart != dragonPartHead)
-		{
 			par3 = par3 / 4.0F + 1.0F;
-		}
 
 		float f1 = rotationYaw * (float)Math.PI / 180.0F;
 		float f2 = MathHelper.sin(f1);
@@ -543,9 +499,7 @@ public class EntityDragonBoss extends CoraliumMob implements IBossDisplayData, I
 		target = null;
 
 		if (par2DamageSource.getEntity() instanceof EntityPlayer || par2DamageSource.isExplosion())
-		{
 			func_82195_e(par2DamageSource, par3);
-		}
 
 		return true;
 	}
@@ -592,9 +546,7 @@ public class EntityDragonBoss extends CoraliumMob implements IBossDisplayData, I
 			}
 
 			if (deathTicks == 1)
-			{
 				worldObj.playBroadcastSound(1018, (int)posX, (int)posY, (int)posZ, 0);
-			}
 		}
 
 		moveEntity(0.0D, 0.10000000149011612D, 0.0D);
@@ -612,9 +564,6 @@ public class EntityDragonBoss extends CoraliumMob implements IBossDisplayData, I
 			}
 
 			setDead();
-			FMLClientHandler.instance().getClient().ingameGUI.getChatGUI().printChatMessage(new ChatComponentText("Oblivionaire: Asorah? ... Asorah?!"));
-			FMLClientHandler.instance().getClient().ingameGUI.getChatGUI().printChatMessage(new ChatComponentText("Oblivionaire: YOU, you will pay for this mortal!"));
-			FMLClientHandler.instance().getClient().ingameGUI.getChatGUI().printChatMessage(new ChatComponentText("Oblivionaire: Besides, you'll never get past The Dreadlands. Have fun digging your own grave."));
 		}
 	}
 

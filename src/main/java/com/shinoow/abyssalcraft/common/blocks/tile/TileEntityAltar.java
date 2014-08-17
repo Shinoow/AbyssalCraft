@@ -23,10 +23,15 @@ import net.minecraft.tileentity.TileEntity;
 public class TileEntityAltar extends TileEntity {
 
 	@Override
+	public boolean canUpdate()
+	{
+		return false;
+	}
+
+	@Override
 	public Packet getDescriptionPacket() {
 		NBTTagCompound nbtTag = new NBTTagCompound();
 		writeToNBT(nbtTag);
 		return new S35PacketUpdateTileEntity(xCoord, yCoord, zCoord, 1, nbtTag);
 	}
-
 }

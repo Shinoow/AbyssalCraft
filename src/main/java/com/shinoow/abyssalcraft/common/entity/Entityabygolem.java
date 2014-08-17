@@ -15,15 +15,9 @@
  */
 package com.shinoow.abyssalcraft.common.entity;
 
-import net.minecraft.entity.EnumCreatureAttribute;
+import net.minecraft.block.Block;
 import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.EntityAIAttackOnCollide;
-import net.minecraft.entity.ai.EntityAIHurtByTarget;
-import net.minecraft.entity.ai.EntityAILookIdle;
-import net.minecraft.entity.ai.EntityAIMoveTowardsRestriction;
-import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
-import net.minecraft.entity.ai.EntityAIWander;
-import net.minecraft.entity.ai.EntityAIWatchClosest;
+import net.minecraft.entity.ai.*;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
@@ -31,24 +25,22 @@ import net.minecraft.world.World;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
 
-public class Entityabygolem extends EntityMob
-{
+public class EntityAbygolem extends EntityMob {
 
-	public Entityabygolem(World par1World)
-	{
+	public EntityAbygolem(World par1World) {
 		super(par1World);
-		tasks.addTask(0, new EntityAIAttackOnCollide(this, Entitydreadgolem.class, 0.35D, true));
-		tasks.addTask(1, new EntityAIMoveTowardsRestriction(this, 0.35D));
-		tasks.addTask(2, new EntityAIWander(this, 0.35D));
-		tasks.addTask(3, new EntityAILookIdle(this));
-		tasks.addTask(4, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
-		targetTasks.addTask(0, new EntityAIHurtByTarget(this, false));
-		targetTasks.addTask(1, new EntityAINearestAttackableTarget(this, Entitydreadgolem.class, 0, true));
+		tasks.addTask(0, new EntityAIAttackOnCollide(this, EntityDreadgolem.class, 0.35D, true));
+		tasks.addTask(1, new EntityAIAttackOnCollide(this, EntityPlayer.class, 0.35D, false));
+		tasks.addTask(2, new EntityAIMoveTowardsRestriction(this, 0.35D));
+		tasks.addTask(3, new EntityAIWander(this, 0.35D));
+		tasks.addTask(4, new EntityAILookIdle(this));
+		tasks.addTask(5, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
+		targetTasks.addTask(0, new EntityAIHurtByTarget(this, true));
+		targetTasks.addTask(1, new EntityAINearestAttackableTarget(this, EntityDreadgolem.class, 0, true));
 	}
 
 	@Override
-	protected void applyEntityAttributes()
-	{
+	protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
 		// Max Health - default 20.0D - min 0.0D - max Double.MAX_VALUE
 		getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(20.0D);
@@ -68,36 +60,26 @@ public class Entityabygolem extends EntityMob
 		return true;
 	}
 
-	public String getEntityName()
-	{
-		return "Abyssalnite Golem";
-	}
-
 	@Override
 	protected String getLivingSound()
 	{
-		return "mob.blaze.breathe";
+		return "abyssalcraft:golem.idle";
 	}
 
-	/**
-	 * Returns the sound this mob makes when it is hurt.
-	 */
 	@Override
 	protected String getHurtSound()
 	{
-		return "mob.blaze.hit";
+		return "abyssalcraft:golem.hit";
 	}
 
-	/**
-	 * Returns the sound this mob makes on death.
-	 */
 	@Override
 	protected String getDeathSound()
 	{
-		return "mob.blaze.death";
+		return "abyssalcraft:golem.death";
 	}
 
-	protected void playStepSound(int par1, int par2, int par3, int par4)
+	@Override
+	protected void func_145780_a(int par1, int par2, int par3, Block par4)
 	{
 		worldObj.playSoundAtEntity(this, "mob.zombie.step", 0.15F, 1.0F);
 	}
@@ -106,12 +88,5 @@ public class Entityabygolem extends EntityMob
 	protected Item getDropItem()
 	{
 		return AbyssalCraft.abychunk;
-
-	}
-
-	@Override
-	public EnumCreatureAttribute getCreatureAttribute()
-	{
-		return EnumCreatureAttribute.UNDEFINED;
 	}
 }

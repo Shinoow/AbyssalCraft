@@ -27,8 +27,8 @@ import com.shinoow.abyssalcraft.AbyssalCraft;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class EntityPSDLTracker extends Entity
-{
+public class EntityPSDLTracker extends Entity {
+
 	/** 'x' location the eye should float towards. */
 	private double targetX;
 
@@ -51,11 +51,6 @@ public class EntityPSDLTracker extends Entity
 
 	@Override
 	@SideOnly(Side.CLIENT)
-
-	/**
-	 * Checks if the entity is in range to render by using the past in distance and comparing it to its average edge
-	 * length * 64 * renderDistanceWeight Args: distance
-	 */
 	public boolean isInRangeToRenderDist(double par1)
 	{
 		double d1 = boundingBox.getAverageEdgeLength() * 4.0D;
@@ -101,10 +96,6 @@ public class EntityPSDLTracker extends Entity
 
 	@Override
 	@SideOnly(Side.CLIENT)
-
-	/**
-	 * Sets the velocity to the args. Args: x, y, z
-	 */
 	public void setVelocity(double par1, double par3, double par5)
 	{
 		motionX = par1;
@@ -119,9 +110,6 @@ public class EntityPSDLTracker extends Entity
 		}
 	}
 
-	/**
-	 * Called to update the entity's position/logic.
-	 */
 	@Override
 	public void onUpdate()
 	{
@@ -136,24 +124,16 @@ public class EntityPSDLTracker extends Entity
 		rotationYaw = (float)(Math.atan2(motionX, motionZ) * 180.0D / Math.PI);
 
 		for (rotationPitch = (float)(Math.atan2(motionY, f) * 180.0D / Math.PI); rotationPitch - prevRotationPitch < -180.0F; prevRotationPitch -= 360.0F)
-		{
 			;
-		}
 
 		while (rotationPitch - prevRotationPitch >= 180.0F)
-		{
 			prevRotationPitch += 360.0F;
-		}
 
 		while (rotationYaw - prevRotationYaw < -180.0F)
-		{
 			prevRotationYaw -= 360.0F;
-		}
 
 		while (rotationYaw - prevRotationYaw >= 180.0F)
-		{
 			prevRotationYaw += 360.0F;
-		}
 
 		rotationPitch = prevRotationPitch + (rotationPitch - prevRotationPitch) * 0.2F;
 		rotationYaw = prevRotationYaw + (rotationYaw - prevRotationYaw) * 0.2F;
@@ -176,28 +156,18 @@ public class EntityPSDLTracker extends Entity
 			motionZ = Math.sin(f2) * d2;
 
 			if (posY < targetY)
-			{
 				motionY += (1.0D - motionY) * 0.014999999664723873D;
-			}
 			else
-			{
 				motionY += (-1.0D - motionY) * 0.014999999664723873D;
-			}
 		}
 
 		float f3 = 0.25F;
 
 		if (isInWater())
-		{
 			for (int i = 0; i < 4; ++i)
-			{
 				worldObj.spawnParticle("bubble", posX - motionX * f3, posY - motionY * f3, posZ - motionZ * f3, motionX, motionY, motionZ);
-			}
-		}
 		else
-		{
 			worldObj.spawnParticle("smoke", posX - motionX * f3 + rand.nextDouble() * 0.6D - 0.3D, posY - motionY * f3 - 0.5D, posZ - motionZ * f3 + rand.nextDouble() * 0.6D - 0.3D, motionX, motionY, motionZ);
-		}
 
 		if (!worldObj.isRemote)
 		{
@@ -209,26 +179,16 @@ public class EntityPSDLTracker extends Entity
 				setDead();
 
 				if (shatterOrDrop)
-				{
 					worldObj.spawnEntityInWorld(new EntityItem(worldObj, posX, posY, posZ, new ItemStack(AbyssalCraft.PSDLfinder)));
-				}
 				else
-				{
 					worldObj.playAuxSFX(2003, (int)Math.round(posX), (int)Math.round(posY), (int)Math.round(posZ), 0);
-				}
 			}
 		}
 	}
 
-	/**
-	 * (abstract) Protected helper method to write subclass entity data to NBT.
-	 */
 	@Override
 	public void writeEntityToNBT(NBTTagCompound par1NBTTagCompound) {}
 
-	/**
-	 * (abstract) Protected helper method to read subclass entity data from NBT.
-	 */
 	@Override
 	public void readEntityFromNBT(NBTTagCompound par1NBTTagCompound) {}
 
@@ -239,9 +199,6 @@ public class EntityPSDLTracker extends Entity
 		return 0.0F;
 	}
 
-	/**
-	 * Gets how bright this entity is.
-	 */
 	@Override
 	public float getBrightness(float par1)
 	{
@@ -255,9 +212,6 @@ public class EntityPSDLTracker extends Entity
 		return 15728880;
 	}
 
-	/**
-	 * If returns false, the item will not inflict any damage against entities.
-	 */
 	@Override
 	public boolean canAttackWithItem()
 	{

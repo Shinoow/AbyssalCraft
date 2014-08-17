@@ -66,9 +66,7 @@ public class TeleporterDreadlands extends Teleporter
 			byte b1 = 0;
 
 			for (int l = -2; l <= 2; ++l)
-			{
 				for (int i1 = -2; i1 <= 2; ++i1)
-				{
 					for (int j1 = -1; j1 < 3; ++j1)
 					{
 						int k1 = i + i1 * b0 + l * b1;
@@ -77,8 +75,6 @@ public class TeleporterDreadlands extends Teleporter
 						boolean flag = j1 < 0;
 						worldServerInstance.setBlock(k1, l1, i2, flag ? AbyssalCraft.dreadstone : Blocks.air);
 					}
-				}
-			}
 
 			par1Entity.setLocationAndAngles(i, j, k, par1Entity.rotationYaw, 0.0F);
 			par1Entity.motionX = par1Entity.motionY = par1Entity.motionZ = 0.0D;
@@ -110,9 +106,7 @@ public class TeleporterDreadlands extends Teleporter
 			k = portalposition.posZ;
 			portalposition.lastUpdateTime = worldServerInstance.getTotalWorldTime();
 			flag = false;
-		}
-		else
-		{
+		} else
 			for (k1 = l - short1; k1 <= l + short1; ++k1)
 			{
 				double d5 = k1 + 0.5D - par1Entity.posX;
@@ -122,13 +116,10 @@ public class TeleporterDreadlands extends Teleporter
 					double d6 = l1 + 0.5D - par1Entity.posZ;
 
 					for (int i2 = worldServerInstance.getActualHeight() - 1; i2 >= 0; --i2)
-					{
 						if (worldServerInstance.getBlock(k1, i2, l1) == AbyssalCraft.dreadportal)
 						{
 							while (worldServerInstance.getBlock(k1, i2 - 1, l1) == AbyssalCraft.dreadportal)
-							{
 								--i2;
-							}
 
 							d4 = i2 + 0.5D - par1Entity.posY;
 							double d7 = d5 * d5 + d4 * d4 + d6 * d6;
@@ -141,10 +132,8 @@ public class TeleporterDreadlands extends Teleporter
 								k = l1;
 							}
 						}
-					}
 				}
 			}
-		}
 
 		if (d3 >= 0.0D)
 		{
@@ -160,24 +149,16 @@ public class TeleporterDreadlands extends Teleporter
 			int j2 = -1;
 
 			if (worldServerInstance.getBlock(i - 1, j, k) == AbyssalCraft.dreadportal)
-			{
 				j2 = 2;
-			}
 
 			if (worldServerInstance.getBlock(i + 1, j, k) == AbyssalCraft.dreadportal)
-			{
 				j2 = 0;
-			}
 
 			if (worldServerInstance.getBlock(i, j, k - 1) == AbyssalCraft.dreadportal)
-			{
 				j2 = 3;
-			}
 
 			if (worldServerInstance.getBlock(i, j, k + 1) == AbyssalCraft.dreadportal)
-			{
 				j2 = 1;
-			}
 
 			int k2 = par1Entity.getTeleportDirection();
 
@@ -211,17 +192,11 @@ public class TeleporterDreadlands extends Teleporter
 				float f2 = 0.5F;
 
 				if (!flag1 && flag2)
-				{
 					f1 = 1.0F;
-				}
 				else if (flag1 && !flag2)
-				{
 					f1 = 0.0F;
-				}
 				else if (flag1 && flag2)
-				{
 					f2 = 0.0F;
-				}
 
 				d8 += k3 * f1 + f2 * i3;
 				d4 += l3 * f1 + f2 * j3;
@@ -256,11 +231,8 @@ public class TeleporterDreadlands extends Teleporter
 				par1Entity.motionX = d10 * f3 + d11 * f6;
 				par1Entity.motionZ = d10 * f5 + d11 * f4;
 				par1Entity.rotationYaw = par8 - k2 * 90 + j2 * 90;
-			}
-			else
-			{
+			} else
 				par1Entity.motionX = par1Entity.motionY = par1Entity.motionZ = 0.0D;
-			}
 
 			par1Entity.setLocationAndAngles(d8, d9, d4, par1Entity.rotationYaw, par1Entity.rotationPitch);
 			return true;
@@ -306,13 +278,10 @@ public class TeleporterDreadlands extends Teleporter
 				label274:
 
 					for (k2 = worldServerInstance.getActualHeight() - 1; k2 >= 0; --k2)
-					{
 						if (worldServerInstance.isAirBlock(i2, k2, j2))
 						{
 							while (k2 > 0 && worldServerInstance.isAirBlock(i2, k2 - 1, j2))
-							{
 								--k2;
-							}
 
 							for (i3 = l1; i3 < l1 + 4; ++i3)
 							{
@@ -326,9 +295,7 @@ public class TeleporterDreadlands extends Teleporter
 								}
 
 								for (j3 = 0; j3 < 3; ++j3)
-								{
 									for (i4 = 0; i4 < 4; ++i4)
-									{
 										for (l3 = -1; l3 < 4; ++l3)
 										{
 											k4 = i2 + (i4 - 1) * l2 + j3 * k3;
@@ -336,12 +303,8 @@ public class TeleporterDreadlands extends Teleporter
 											int l4 = j2 + (i4 - 1) * k3 - j3 * l2;
 
 											if (l3 < 0 && !worldServerInstance.getBlock(k4, j4, l4).getMaterial().isSolid() || l3 >= 0 && !worldServerInstance.isAirBlock(k4, j4, l4))
-											{
 												continue label274;
-											}
 										}
-									}
-								}
 
 								d4 = k2 + 0.5D - par1Entity.posY;
 								d3 = d1 * d1 + d4 * d4 + d2 * d2;
@@ -356,12 +319,10 @@ public class TeleporterDreadlands extends Teleporter
 								}
 							}
 						}
-					}
 			}
 		}
 
 		if (d0 < 0.0D)
-		{
 			for (i2 = i - b0; i2 <= i + b0; ++i2)
 			{
 				d1 = i2 + 0.5D - par1Entity.posX;
@@ -372,13 +333,10 @@ public class TeleporterDreadlands extends Teleporter
 					label222:
 
 						for (k2 = worldServerInstance.getActualHeight() - 1; k2 >= 0; --k2)
-						{
 							if (worldServerInstance.isAirBlock(i2, k2, j2))
 							{
 								while (k2 > 0 && worldServerInstance.isAirBlock(i2, k2 - 1, j2))
-								{
 									--k2;
-								}
 
 								for (i3 = l1; i3 < l1 + 2; ++i3)
 								{
@@ -386,7 +344,6 @@ public class TeleporterDreadlands extends Teleporter
 									k3 = 1 - l2;
 
 									for (j3 = 0; j3 < 4; ++j3)
-									{
 										for (i4 = -1; i4 < 4; ++i4)
 										{
 											l3 = i2 + (j3 - 1) * l2;
@@ -394,11 +351,8 @@ public class TeleporterDreadlands extends Teleporter
 											j4 = j2 + (j3 - 1) * k3;
 
 											if (i4 < 0 && !worldServerInstance.getBlock(l3, k4, j4).getMaterial().isSolid() || i4 >= 0 && !worldServerInstance.isAirBlock(l3, k4, j4))
-											{
 												continue label222;
-											}
 										}
-									}
 
 									d4 = k2 + 0.5D - par1Entity.posY;
 									d3 = d1 * d1 + d4 * d4 + d2 * d2;
@@ -413,10 +367,8 @@ public class TeleporterDreadlands extends Teleporter
 									}
 								}
 							}
-						}
 				}
 			}
-		}
 
 		int i5 = l;
 		int j5 = i1;
@@ -435,21 +387,15 @@ public class TeleporterDreadlands extends Teleporter
 		if (d0 < 0.0D)
 		{
 			if (i1 < 70)
-			{
 				i1 = 70;
-			}
 
 			if (i1 > worldServerInstance.getActualHeight() - 10)
-			{
 				i1 = worldServerInstance.getActualHeight() - 10;
-			}
 
 			j5 = i1;
 
 			for (k2 = -1; k2 <= 1; ++k2)
-			{
 				for (i3 = 1; i3 < 3; ++i3)
-				{
 					for (l2 = -1; l2 < 3; ++l2)
 					{
 						k3 = i5 + (i3 - 1) * k5 + k2 * l5;
@@ -458,14 +404,11 @@ public class TeleporterDreadlands extends Teleporter
 						flag = l2 < 0;
 						worldServerInstance.setBlock(k3, j3, i4, flag ? AbyssalCraft.dreadstone : Blocks.air);
 					}
-				}
-			}
 		}
 
 		for (k2 = 0; k2 < 4; ++k2)
 		{
 			for (i3 = 0; i3 < 4; ++i3)
-			{
 				for (l2 = -1; l2 < 4; ++l2)
 				{
 					k3 = i5 + (i3 - 1) * k5;
@@ -474,10 +417,8 @@ public class TeleporterDreadlands extends Teleporter
 					flag = i3 == 0 || i3 == 3 || l2 == -1 || l2 == 3;
 					worldServerInstance.setBlock(k3, j3, i4, flag ? AbyssalCraft.dreadstone : AbyssalCraft.dreadportal, 0, 2);
 				}
-			}
 
 			for (i3 = 0; i3 < 4; ++i3)
-			{
 				for (l2 = -1; l2 < 4; ++l2)
 				{
 					k3 = i5 + (i3 - 1) * k5;
@@ -485,7 +426,6 @@ public class TeleporterDreadlands extends Teleporter
 					i4 = j2 + (i3 - 1) * l5;
 					worldServerInstance.notifyBlocksOfNeighborChange(k3, j3, i4, worldServerInstance.getBlock(k3, j3, i4));
 				}
-			}
 		}
 
 		return true;

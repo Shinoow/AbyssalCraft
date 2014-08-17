@@ -83,9 +83,9 @@ public class ItemAbyssalniteCPickaxe extends ItemTool {
 			w.setBlock(x, y, z, AbyssalCraft.abyore);
 			is.damageItem(120, player);
 		}else if(w.getBlock(x,y,z) == AbyssalCraft.abyore) {
-			w.setBlock(x, y, z, AbyssalCraft.Coraliumstone);
+			w.setBlock(x, y, z, AbyssalCraft.CoraliumInfusedStone);
 			is.damageItem(130, player);
-		}else if(w.getBlock(x, y, z) == AbyssalCraft.Coraliumstone){
+		}else if(w.getBlock(x, y, z) == AbyssalCraft.CoraliumInfusedStone){
 			w.setBlock(x, y, z, Blocks.coal_ore);
 			is.damageItem(40, player);
 		}else if(w.getBlock(x, y, z) == Blocks.netherrack){
@@ -98,7 +98,8 @@ public class ItemAbyssalniteCPickaxe extends ItemTool {
 		return false;
 	}
 
-	public boolean canHarvestBlock(Block par1Block)
+	@Override
+	public boolean func_150897_b(Block par1Block)
 	{
 		if (par1Block == Blocks.obsidian)
 			return toolMaterial.getHarvestLevel() == 3;

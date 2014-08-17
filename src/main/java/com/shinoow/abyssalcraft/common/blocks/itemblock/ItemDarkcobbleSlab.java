@@ -25,7 +25,7 @@ public class ItemDarkcobbleSlab extends ItemSlab {
 
 	public ItemDarkcobbleSlab(Block block) {
 		super(block, (BlockSlab)AbyssalCraft.Darkcobbleslab1, (BlockSlab)AbyssalCraft.Darkcobbleslab2, false);
-		this.setMaxDamage(0);
-		this.setHasSubtypes(true);
+		setMaxDamage(0);
+		setHasSubtypes(true);
 	}
 }

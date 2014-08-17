@@ -24,7 +24,7 @@ import net.minecraft.util.ResourceLocation;
 
 import org.lwjgl.opengl.GL11;
 
-import com.shinoow.abyssalcraft.common.entity.Entitydreadguard;
+import com.shinoow.abyssalcraft.common.entity.EntityDreadguard;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -62,35 +62,35 @@ public class Renderdreadguard extends RenderBiped
 	/**
 	 * Applies the scale to the transform matrix
 	 */
-	protected void preRenderScale(Entitydreadguard par1Entitydreadguard, float par2)
+	protected void preRenderScale(EntityDreadguard par1Entitydreadguard, float par2)
 	{
 		GL11.glScalef(scale, scale, scale);
 	}
 
-	protected int shouldRenderPass(Entitydreadguard par1Entitydreadguard, int par2, float par3)
+	protected int shouldRenderPass(EntityDreadguard par1Entitydreadguard, int par2, float par3)
 	{
 		func_82427_a(par1Entitydreadguard);
 		return super.shouldRenderPass(par1Entitydreadguard, par2, par3);
 	}
 
-	public void doRender(Entitydreadguard par1Entitydreadguard, double par2, double par4, double par6, float par8, float par9)
+	public void doRender(EntityDreadguard par1Entitydreadguard, double par2, double par4, double par6, float par8, float par9)
 	{
 		func_82427_a(par1Entitydreadguard);
 		super.doRender(par1Entitydreadguard, par2, par4, par6, par8, par9);
 	}
 
-	protected ResourceLocation getTexture(Entitydreadguard par1Entitydreadguard)
+	protected ResourceLocation getTexture(EntityDreadguard par1Entitydreadguard)
 	{
 		return texture;
 	}
 
-	protected void renderEquippedItems(Entitydreadguard par1Entitydreadguard, float par2)
+	protected void renderEquippedItems(EntityDreadguard par1Entitydreadguard, float par2)
 	{
 		func_82427_a(par1Entitydreadguard);
 		super.renderEquippedItems(par1Entitydreadguard, par2);
 	}
 
-	private void func_82427_a(Entitydreadguard par1Entitydreadguard)
+	private void func_82427_a(EntityDreadguard par1Entitydreadguard)
 	{
 		{
 			mainModel = field_82434_o;
@@ -104,7 +104,7 @@ public class Renderdreadguard extends RenderBiped
 	@Override
 	protected void renderEquippedItems(EntityLivingBase par1EntityLivingBase, float par2)
 	{
-		renderEquippedItems((Entitydreadguard)par1EntityLivingBase, par2);
+		renderEquippedItems((EntityDreadguard)par1EntityLivingBase, par2);
 	}
 
 	/**
@@ -114,7 +114,7 @@ public class Renderdreadguard extends RenderBiped
 	@Override
 	protected void preRenderCallback(EntityLivingBase par1EntityLivingBase, float par2)
 	{
-		preRenderScale((Entitydreadguard)par1EntityLivingBase, par2);
+		preRenderScale((EntityDreadguard)par1EntityLivingBase, par2);
 	}
 
 	/**
@@ -123,7 +123,7 @@ public class Renderdreadguard extends RenderBiped
 	@Override
 	protected ResourceLocation getEntityTexture(Entity par1Entity)
 	{
-		return getTexture((Entitydreadguard)par1Entity);
+		return getTexture((EntityDreadguard)par1Entity);
 	}
 
 }

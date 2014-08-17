@@ -123,55 +123,38 @@ public class ItemCoraliumBow extends ItemBow {
 				return;
 
 			if (f > 1.0F)
-			{
 				f = 1.0F;
-			}
 			//TODO add a new arrow entity that inflicts Coralium Plague on hit
 			EntityArrow entityarrow = new EntityArrow(par2World, par3EntityPlayer, f * 2.0F);
 
 			if (f == 1.0F)
-			{
 				entityarrow.setIsCritical(true);
-			}
 
 			entityarrow.setDamage(entityarrow.getDamage() + 7.0D);
 
 			int k = EnchantmentHelper.getEnchantmentLevel(Enchantment.power.effectId, par1ItemStack);
 
 			if (k > 0)
-			{
 				entityarrow.setDamage(entityarrow.getDamage() + 7.0D + k * 0.5D + 0.5D);
-
-			}
 
 			int l = EnchantmentHelper.getEnchantmentLevel(Enchantment.punch.effectId, par1ItemStack);
 
 			if (l > 0)
-			{
 				entityarrow.setKnockbackStrength(l);
-			}
 
 			if (EnchantmentHelper.getEnchantmentLevel(Enchantment.flame.effectId, par1ItemStack) > 0)
-			{
 				entityarrow.setFire(100);
-			}
 
 			par1ItemStack.damageItem(1, par3EntityPlayer);
 			par2World.playSoundAtEntity(par3EntityPlayer, "random.bow", 1.0F, 1.0F / (itemRand.nextFloat() * 0.4F + 1.2F) + f * 0.5F);
 
 			if (flag)
-			{
 				entityarrow.canBePickedUp = 2;
-			}
 			else
-			{
 				par3EntityPlayer.inventory.consumeInventoryItem(Items.arrow);
-			}
 
 			if (!par2World.isRemote)
-			{
 				par2World.spawnEntityInWorld(entityarrow);
-			}
 		}
 	}
 
@@ -212,9 +195,7 @@ public class ItemCoraliumBow extends ItemBow {
 			return event.result;
 
 		if (par3EntityPlayer.capabilities.isCreativeMode || par3EntityPlayer.inventory.hasItem(Items.arrow))
-		{
 			par3EntityPlayer.setItemInUse(par1ItemStack, getMaxItemUseDuration(par1ItemStack));
-		}
 
 		return par1ItemStack;
 	}
@@ -237,9 +218,7 @@ public class ItemCoraliumBow extends ItemBow {
 		iconArray = new IIcon[bowPullIconNameArray.length];
 
 		for (int i = 0; i < iconArray.length; ++i)
-		{
 			iconArray[i] = par1IconRegister.registerIcon(AbyssalCraft.modid + ":" + getUnlocalizedName().substring(5) + "_" + bowPullIconNameArray[i]);
-		}
 	}
 
 	@Override

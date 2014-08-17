@@ -23,10 +23,9 @@ import com.shinoow.abyssalcraft.AbyssalCraft;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class TabACTools extends CreativeTabs
-{
-	public TabACTools(int id, String name)
-	{
+public class TabACTools extends CreativeTabs{
+
+	public TabACTools(int id, String name){
 		super(id, name);
 	}
 
@@ -34,7 +33,7 @@ public class TabACTools extends CreativeTabs
 	@SideOnly(Side.CLIENT)
 	public String getTranslatedTabLabel()
 	{
-		return "itemgroup." + this.getTabLabel();
+		return "itemgroup." + getTabLabel();
 	}
 
 	@Override
@@ -42,6 +41,5 @@ public class TabACTools extends CreativeTabs
 	public Item getTabIconItem()
 	{
 		return AbyssalCraft.axeC;
-
 	}
 }

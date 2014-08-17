@@ -53,9 +53,7 @@ public class ItemTrackerPSDL extends Item {
 				par2World.playAuxSFXAtEntity((EntityPlayer)null, 1002, (int)par3EntityPlayer.posX, (int)par3EntityPlayer.posY, (int)par3EntityPlayer.posZ, 0);
 
 				if (!par3EntityPlayer.capabilities.isCreativeMode)
-				{
 					--par1ItemStack.stackSize;
-				}
 			}
 		}
 

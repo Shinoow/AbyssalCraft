@@ -87,8 +87,8 @@ container.abyssalcraft.transmutator=Transmutator
 #Damagesources
 death.attack.coralium=%1$s died from the Coralium Plague
 death.attack.coralium.player=%1$s succumbed to the Coralium Plague whilst trying to escape %2$s
-death.attack.coralium=%1$s died from Dread Plague
-death.attack.coralium.player=%1$s succumbed to the might of Cha'garoth whilst trying to escape %2$s
+death.attack.dread=%1$s died from Dread Plague
+death.attack.dread.player=%1$s succumbed to the might of Cha'garoth whilst trying to escape %2$s
 
 #Tooltips
 tooltip.portalplacer.1=Right-click on the ground to
@@ -365,7 +365,7 @@ item.DB.name=Dreadium Katana Blade
 item.hilt.name=Dreadium Katana Hilt
 item.katana.name=Dreadium Katana
 item.DK.name=Dread-plagued Gateway Key
-item.portalplacerjzh.name=Cha'garoth's R'lyehian Gateway Key
+item.GKJ.name=Cha'garoth's R'lyehian Gateway Key
 item.ADSB.name=Dreadium Samurai Boots
 item.ADSH.name=Dreadium Samurai Helmet
 item.ADSC.name=Dreadium Samurai Chestplate

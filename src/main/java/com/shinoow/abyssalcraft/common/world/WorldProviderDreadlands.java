@@ -21,8 +21,7 @@ import net.minecraft.world.chunk.IChunkProvider;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import cpw.mods.fml.relauncher.*;
 
 public class WorldProviderDreadlands extends WorldProvider {
 
@@ -42,7 +41,7 @@ public class WorldProviderDreadlands extends WorldProvider {
 	 * Return Vec3D with biome specific fog color
 	 */
 	public Vec3 getFogColor(float par1, float par2) {
-		return worldObj.getWorldVec3Pool().getVecFromPool(0.20000000298023224D, 0.029999999329447746D, 0.029999999329447746D);
+		return Vec3.createVectorHelper(0.20000000298023224D, 0.029999999329447746D, 0.029999999329447746D);
 	}
 
 	/**

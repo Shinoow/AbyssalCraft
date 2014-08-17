@@ -41,9 +41,4 @@ public class ItemStaff extends Item {
 	public void addInformation(ItemStack is, EntityPlayer player, List l, boolean B){
 		l.add(StatCollector.translateToLocal("tooltip.staff"));
 	}
-
-	@Override
-	public boolean isFull3D(){
-		return true;
-	}
 }

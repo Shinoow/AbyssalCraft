@@ -17,31 +17,20 @@ package com.shinoow.abyssalcraft.common.entity;
 
 import java.util.Calendar;
 
-import net.minecraft.client.Minecraft;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.EnumCreatureAttribute;
-import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.EntityAIAttackOnCollide;
-import net.minecraft.entity.ai.EntityAIHurtByTarget;
-import net.minecraft.entity.ai.EntityAILookIdle;
-import net.minecraft.entity.ai.EntityAIMoveTowardsRestriction;
-import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
-import net.minecraft.entity.ai.EntityAIWander;
-import net.minecraft.entity.ai.EntityAIWatchClosest;
+import net.minecraft.entity.*;
+import net.minecraft.entity.ai.*;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
+import net.minecraft.item.*;
 import net.minecraft.potion.PotionEffect;
+import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.core.api.entity.DreadMob;
 
-public class Entitydreadguard extends DreadMob {
+public class EntityDreadguard extends DreadMob {
 
-	public Entitydreadguard(World par1World)
-	{
+	public EntityDreadguard(World par1World) {
 		super(par1World);
 		setSize(1.0F, 3.0F);
 		isImmuneToFire = true;
@@ -52,7 +41,6 @@ public class Entitydreadguard extends DreadMob {
 		tasks.addTask(4, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
 		targetTasks.addTask(0, new EntityAIHurtByTarget(this, false));
 		targetTasks.addTask(1, new EntityAINearestAttackableTarget(this, EntityPlayer.class, 0, true));
-
 	}
 
 	@Override
@@ -68,12 +56,11 @@ public class Entitydreadguard extends DreadMob {
 		// Movement Speed - default 0.699D - min 0.0D - max Double.MAX_VALUE
 		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.699D);
 		// Attack Damage - default 2.0D - min 0.0D - max Doubt.MAX_VALUE
-		getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(5.0D);
+		getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(10.0D);
 		Calendar calendar = worldObj.getCurrentDate();
 
-		if (calendar.get(2) + 1 == 10 && calendar.get(5) == 31 && rand.nextFloat() < 0.25F)
-		{
-			getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(7.5D);
+		if (calendar.get(2) + 1 == 10 && calendar.get(5) == 31 && rand.nextFloat() < 0.25F){
+			//TODO: Find a good way to implement the damage boost
 		}
 	}
 
@@ -81,20 +68,25 @@ public class Entitydreadguard extends DreadMob {
 	public boolean canBreatheUnderwater()
 	{
 		return true;
-
 	}
 
 	@Override
-	public boolean attackEntityAsMob(Entity par1Entity)
+	public void onDeath(DamageSource par1DamageSource)
 	{
+		if (par1DamageSource.getEntity() instanceof EntityPlayer)
+		{
+			EntityPlayer entityplayer = (EntityPlayer)par1DamageSource.getEntity();
+			entityplayer.addStat(AbyssalCraft.killdreadguard, 1);
+		}
+		super.onDeath(par1DamageSource);
+	}
+
+	@Override
+	public boolean attackEntityAsMob(Entity par1Entity) {
 
 		if (super.attackEntityAsMob(par1Entity))
-		{
 			if (par1Entity instanceof EntityLivingBase)
-			{
 				((EntityLivingBase)par1Entity).addPotionEffect(new PotionEffect(AbyssalCraft.Dplague.id, 200));
-			}
-		}
 		return hasAttacked;
 	}
 
@@ -104,9 +96,7 @@ public class Entitydreadguard extends DreadMob {
 		int var1 = super.getTotalArmorValue() + 2;
 
 		if (var1 > 20)
-		{
 			var1 = 20;
-		}
 
 		return var1;
 	}
@@ -117,29 +107,18 @@ public class Entitydreadguard extends DreadMob {
 		return true;
 	}
 
-	public String getEntityName()
-	{
-		return "Dreadguard";
-	}
-
 	@Override
 	protected String getLivingSound()
 	{
-		return "mob.blaze.breathe";
+		return "abyssalcraft:dreadguard.idle";
 	}
 
-	/**
-	 * Returns the sound this mob makes when it is hurt.
-	 */
 	@Override
 	protected String getHurtSound()
 	{
-		return "mob.blaze.hit";
+		return "abyssalcraft:dreadguard.hit";
 	}
 
-	/**
-	 * Returns the sound this mob makes on death.
-	 */
 	@Override
 	protected String getDeathSound()
 	{
@@ -157,30 +136,21 @@ public class Entitydreadguard extends DreadMob {
 		return EnumCreatureAttribute.UNDEFINED;
 	}
 
-	protected Item func_146068_u()
+	@Override
+	protected Item getDropItem()
 	{
 		return AbyssalCraft.Dreadshard;
-
 	}
 
 	@Override
 	public void onLivingUpdate()
 	{
-		if (worldObj.isRemote)
-		{
-
+		if (worldObj.isRemote){
 			setCurrentItemOrArmor(1, new ItemStack(AbyssalCraft.bootsD));
 			setCurrentItemOrArmor(3, new ItemStack(AbyssalCraft.plateD));
 			setCurrentItemOrArmor(4, new ItemStack(AbyssalCraft.helmetD));
 			setCurrentItemOrArmor(2, new ItemStack(AbyssalCraft.legsD));
 		}
-
-		if(isDead)
-		{
-			Minecraft.getMinecraft().thePlayer.addStat(AbyssalCraft.killdreadguard, 1);
-		}
-
 		super.onLivingUpdate();
 	}
-
 }

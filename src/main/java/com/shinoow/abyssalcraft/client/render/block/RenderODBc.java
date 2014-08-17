@@ -17,6 +17,7 @@ package com.shinoow.abyssalcraft.client.render.block;
 
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.entity.Render;
+import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.ResourceLocation;
 
@@ -33,8 +34,6 @@ public class RenderODBc extends Render {
 
 	private RenderBlocks blockRenderer = new RenderBlocks();
 
-	private static final ResourceLocation blockTexture = new ResourceLocation("abyssalcraft:textures/blocks/ODBc.png");
-
 	public RenderODBc() {
 		shadowSize = 0.5F;
 	}
@@ -48,12 +47,10 @@ public class RenderODBc extends Render {
 		if (par1EntityODBcPrimed.fuse - par9 + 1.0F < 10.0F) {
 			var10 = 1.0F - (par1EntityODBcPrimed.fuse - par9 + 1.0F) / 10.0F;
 
-			if (var10 < 0.0F) {
+			if (var10 < 0.0F)
 				var10 = 0.0F;
-			}
-			if (var10 > 1.0F) {
+			if (var10 > 1.0F)
 				var10 = 1.0F;
-			}
 
 			var10 *= var10;
 			var10 *= var10;
@@ -80,20 +77,19 @@ public class RenderODBc extends Render {
 		GL11.glPopMatrix();
 	}
 
-	/**
-	 * Actually renders the given argument. This is a synthetic bridge method, always casting down its argument and then
-	 * handing it off to a worker function which does the actual work. In all probabilty, the class Render is generic
-	 * (Render<T extends Entity) and this method has signature public void doRender(T entity, double d, double d1,
-	 * double d2, float f, float f1). But JAD is pre 1.5 so doesn't do that.
-	 */
-	@Override
-	public void doRender(Entity par1Entity, double par2, double par4, double par6, float par8, float par9) {
-		renderPrimedODBc((EntityODBcPrimed)par1Entity, par2, par4, par6, par8, par9);
+	protected ResourceLocation getEntityTexture(EntityODBcPrimed par1EntityODBPrimed)
+	{
+		return TextureMap.locationBlocksTexture;
 	}
 
 	@Override
 	protected ResourceLocation getEntityTexture(Entity entity) {
 
-		return blockTexture;
+		return getEntityTexture((EntityODBcPrimed)entity);
+	}
+
+	@Override
+	public void doRender(Entity par1Entity, double par2, double par4, double par6, float par8, float par9) {
+		renderPrimedODBc((EntityODBcPrimed)par1Entity, par2, par4, par6, par8, par9);
 	}
 }

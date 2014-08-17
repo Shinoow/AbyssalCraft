@@ -16,19 +16,23 @@
 package com.shinoow.abyssalcraft.common.entity;
 
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.init.Blocks;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 
+import com.shinoow.abyssalcraft.common.util.ExplosionUtil;
 import com.shinoow.abyssalcraft.common.util.LogHelper;
+import com.shinoow.abyssalcraft.common.util.SpecialTextUtil;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class EntityODBPrimed extends Entity
-{
+public class EntityODBPrimed extends Entity {
+
 	/** How long the fuse is */
 	public int fuse;
+	private EntityLivingBase odbPlacedBy;
 
 	public EntityODBPrimed(World par1World)
 	{
@@ -39,7 +43,7 @@ public class EntityODBPrimed extends Entity
 		yOffset = height / 2.0F;
 	}
 
-	public EntityODBPrimed(World par1World, double par2, double par4, double par6)
+	public EntityODBPrimed(World par1World, double par2, double par4, double par6, EntityLivingBase par8EntityLivingBase)
 	{
 		this(par1World);
 		setPosition(par2, par4, par6);
@@ -51,38 +55,24 @@ public class EntityODBPrimed extends Entity
 		prevPosX = par2;
 		prevPosY = par4;
 		prevPosZ = par6;
+		odbPlacedBy = par8EntityLivingBase;
 	}
 
 	@Override
 	protected void entityInit() {}
 
-	/**
-	 * returns if this entity triggers Block.onEntityWalking on the blocks they walk on. used for spiders and wolves to
-	 * prevent them from trampling crops
-	 */
 	@Override
 	protected boolean canTriggerWalking()
 	{
 		return false;
 	}
 
-	/**
-	 * Returns true if other Entities should be prevented from moving through this Entity.
-	 */
 	@Override
 	public boolean canBeCollidedWith()
 	{
 		return !isDead;
 	}
 
-	public String getEntityName()
-	{
-		return "Oblivion Deathbomb";
-	}
-
-	/**
-	 * Called to update the entity's position/logic.
-	 */
 	@Override
 	public void onUpdate()
 	{
@@ -107,64 +97,44 @@ public class EntityODBPrimed extends Entity
 			setDead();
 
 			if (!worldObj.isRemote)
-			{
 				explode();
-			}
-		}
-		else
-		{
+		} else if(worldObj.isRemote)
 			worldObj.spawnParticle("portal", posX, posY + 0.5D, posZ, 1.0D, 0.0D, 0.0D);
-		}
 	}
 
 	private void explode()
 	{
 		LogHelper.info("Unleashing hell shortly.");
 		Blocks.obsidian.setResistance(5.0F);
-		float var0 = 20.0F;
-		float var1 = 500.0F;
-		float var2 = 1000.0F;
-		worldObj.createExplosion((Entity)null, posX, posY, posZ, var0, true);
-		worldObj.createExplosion((Entity)null, posX, posY, posZ, var1, true);
-		worldObj.createExplosion((Entity)null, posX, posY, posZ, var2, true);
-		worldObj.createExplosion((Entity)null, posX, posY, posZ, var1, true);
-
-		worldObj.spawnEntityInWorld(new EntityODBcPrimed(worldObj, posX, posY, posZ));
-		worldObj.spawnEntityInWorld(new EntityODBcPrimed(worldObj, posX + 20, posY, posZ));
-		worldObj.spawnEntityInWorld(new EntityODBcPrimed(worldObj, posX, posY, posZ + 20));
-		worldObj.spawnEntityInWorld(new EntityODBcPrimed(worldObj, posX - 20, posY, posZ));
-		worldObj.spawnEntityInWorld(new EntityODBcPrimed(worldObj, posX, posY, posZ - 20));
-		worldObj.spawnEntityInWorld(new EntityODBcPrimed(worldObj, posX + 20, posY, posZ + 20));
-		worldObj.spawnEntityInWorld(new EntityODBcPrimed(worldObj, posX - 20, posY, posZ - 20));
-		worldObj.spawnEntityInWorld(new EntityODBcPrimed(worldObj, posX + 20, posY, posZ - 20));
-		worldObj.spawnEntityInWorld(new EntityODBcPrimed(worldObj, posX - 20, posY, posZ + 20));
-
-		worldObj.spawnEntityInWorld(new EntityODBcPrimed(worldObj, posX, posY, posZ));
-		worldObj.spawnEntityInWorld(new EntityODBcPrimed(worldObj, posX + 30, posY, posZ));
-		worldObj.spawnEntityInWorld(new EntityODBcPrimed(worldObj, posX, posY, posZ + 30));
-		worldObj.spawnEntityInWorld(new EntityODBcPrimed(worldObj, posX - 30, posY, posZ));
-		worldObj.spawnEntityInWorld(new EntityODBcPrimed(worldObj, posX, posY, posZ - 30));
-		worldObj.spawnEntityInWorld(new EntityODBcPrimed(worldObj, posX + 30, posY, posZ + 30));
-		worldObj.spawnEntityInWorld(new EntityODBcPrimed(worldObj, posX - 30, posY, posZ - 30));
-		worldObj.spawnEntityInWorld(new EntityODBcPrimed(worldObj, posX + 30, posY, posZ - 30));
-		worldObj.spawnEntityInWorld(new EntityODBcPrimed(worldObj, posX - 30, posY, posZ + 30));
+		float var0 = 200.0F;
+		ExplosionUtil.newODBExplosion(worldObj, (Entity)null, posX, posY, posZ, var0, 128, false, true);
 
 		Blocks.obsidian.setResistance(2000.0F);
 		LogHelper.info("Hell successfully unleashed.");
+
+		int x, x1, z, z1;
+		for(x = 0; x < 9; x++)
+			for(z = 0; z < 9; z++)
+				for(x1 = 0; x1 < 9; x1++)
+					for(z1 = 0; z1 < 9; z1++){
+						worldObj.setBlock((int)posX + x, (int)posY, (int)posZ + z, Blocks.obsidian);
+						worldObj.setBlock((int)posX - x1, (int)posY, (int)posZ - z1, Blocks.obsidian);
+						worldObj.setBlock((int)posX + x, (int)posY, (int)posZ - z1, Blocks.obsidian);
+						worldObj.setBlock((int)posX - x1, (int)posY, (int)posZ  + z, Blocks.obsidian);
+					}
+		EntitySacthoth sacthoth = new EntitySacthoth(worldObj);
+		sacthoth.setPosition(posX, posY + 1, posZ);
+		worldObj.spawnEntityInWorld(sacthoth);
+		if(worldObj.isRemote)
+			SpecialTextUtil.SacthothText("I am unleashed! Feel the wrath of The Dark Realm, mortal.");
 	}
 
-	/**
-	 * (abstract) Protected helper method to write subclass entity data to NBT.
-	 */
 	@Override
 	protected void writeEntityToNBT(NBTTagCompound par1NBTTagCompound)
 	{
 		par1NBTTagCompound.setByte("Fuse", (byte)fuse);
 	}
 
-	/**
-	 * (abstract) Protected helper method to read subclass entity data from NBT.
-	 */
 	@Override
 	protected void readEntityFromNBT(NBTTagCompound par1NBTTagCompound)
 	{
@@ -176,5 +146,13 @@ public class EntityODBPrimed extends Entity
 	public float getShadowSize()
 	{
 		return 0.0F;
+	}
+
+	/**
+	 * returns null or the entityliving it was placed or ignited by
+	 */
+	public EntityLivingBase getODBPlacedBy()
+	{
+		return odbPlacedBy;
 	}
 }

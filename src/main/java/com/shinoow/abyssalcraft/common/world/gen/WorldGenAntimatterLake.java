@@ -25,7 +25,7 @@ import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.gen.feature.WorldGenerator;
 
-import com.shinoow.abyssalcraft.common.blocks.Antiliquid;
+import com.shinoow.abyssalcraft.common.blocks.BlockAntiliquid;
 
 public class WorldGenAntimatterLake extends WorldGenerator
 {
@@ -42,9 +42,7 @@ public class WorldGenAntimatterLake extends WorldGenerator
 		par3 -= 8;
 
 		for (par5 -= 8; par4 > 5 && par1World.isAirBlock(par3, par4, par5); --par4)
-		{
 			;
-		}
 
 		if (par4 <= 4)
 			return false;
@@ -65,9 +63,7 @@ public class WorldGenAntimatterLake extends WorldGenerator
 				double d5 = par2Random.nextDouble() * (16.0D - d2 - 2.0D) + 1.0D + d2 / 2.0D;
 
 				for (int j1 = 1; j1 < 15; ++j1)
-				{
 					for (int k1 = 1; k1 < 15; ++k1)
-					{
 						for (int l1 = 1; l1 < 7; ++l1)
 						{
 							double d6 = (j1 - d3) / (d0 / 2.0D);
@@ -76,12 +72,8 @@ public class WorldGenAntimatterLake extends WorldGenerator
 							double d9 = d6 * d6 + d7 * d7 + d8 * d8;
 
 							if (d9 < 1.0D)
-							{
 								aboolean[(j1 * 16 + k1) * 8 + l1] = true;
-							}
 						}
-					}
-				}
 			}
 
 			int i2;
@@ -89,9 +81,7 @@ public class WorldGenAntimatterLake extends WorldGenerator
 			boolean flag;
 
 			for (i1 = 0; i1 < 16; ++i1)
-			{
 				for (j2 = 0; j2 < 16; ++j2)
-				{
 					for (i2 = 0; i2 < 8; ++i2)
 					{
 						flag = !aboolean[(i1 * 16 + j2) * 8 + i2] && (i1 < 15 && aboolean[((i1 + 1) * 16 + j2) * 8 + i2] || i1 > 0 && aboolean[((i1 - 1) * 16 + j2) * 8 + i2] || j2 < 15 && aboolean[(i1 * 16 + j2 + 1) * 8 + i2] || j2 > 0 && aboolean[(i1 * 16 + j2 - 1) * 8 + i2] || i2 < 7 && aboolean[(i1 * 16 + j2) * 8 + i2 + 1] || i2 > 0 && aboolean[(i1 * 16 + j2) * 8 + i2 - 1]);
@@ -107,64 +97,36 @@ public class WorldGenAntimatterLake extends WorldGenerator
 								return false;
 						}
 					}
-				}
-			}
 
 			for (i1 = 0; i1 < 16; ++i1)
-			{
 				for (j2 = 0; j2 < 16; ++j2)
-				{
 					for (i2 = 0; i2 < 8; ++i2)
-					{
 						if (aboolean[(i1 * 16 + j2) * 8 + i2])
-						{
 							par1World.setBlock(par3 + i1, par4 + i2, par5 + j2, i2 >= 4 ? Blocks.air : blockIndex, 0, 2);
-						}
-					}
-				}
-			}
 
 			for (i1 = 0; i1 < 16; ++i1)
-			{
 				for (j2 = 0; j2 < 16; ++j2)
-				{
 					for (i2 = 4; i2 < 8; ++i2)
-					{
 						if (aboolean[(i1 * 16 + j2) * 8 + i2] && par1World.getBlock(par3 + i1, par4 + i2 - 1, par5 + j2) == Blocks.stone && par1World.getSavedLightValue(EnumSkyBlock.Sky, par3 + i1, par4 + i2, par5 + j2) > 0)
 						{
 							BiomeGenBase biomegenbase = par1World.getBiomeGenForCoords(par3 + i1, par5 + j2);
 
 							if (biomegenbase.topBlock == Blocks.stone)
-							{
 								par1World.setBlock(par3 + i1, par4 + i2 - 1, par5 + j2, Blocks.stone, 0, 2);
-							}
 							else
-							{
 								par1World.setBlock(par3 + i1, par4 + i2 - 1, par5 + j2, Blocks.stone, 0, 2);
-							}
 						}
-					}
-				}
-			}
 
-			if (blockIndex.getMaterial() == Antiliquid.antimatter)
-			{
+			if (blockIndex.getMaterial() == BlockAntiliquid.antimatter)
 				for (i1 = 0; i1 < 16; ++i1)
-				{
 					for (j2 = 0; j2 < 16; ++j2)
-					{
 						for (i2 = 0; i2 < 8; ++i2)
 						{
 							flag = !aboolean[(i1 * 16 + j2) * 8 + i2] && (i1 < 15 && aboolean[((i1 + 1) * 16 + j2) * 8 + i2] || i1 > 0 && aboolean[((i1 - 1) * 16 + j2) * 8 + i2] || j2 < 15 && aboolean[(i1 * 16 + j2 + 1) * 8 + i2] || j2 > 0 && aboolean[(i1 * 16 + j2 - 1) * 8 + i2] || i2 < 7 && aboolean[(i1 * 16 + j2) * 8 + i2 + 1] || i2 > 0 && aboolean[(i1 * 16 + j2) * 8 + i2 - 1]);
 
 							if (flag && (i2 < 4 || par2Random.nextInt(2) != 0) && par1World.getBlock(par3 + i1, par4 + i2, par5 + j2).getMaterial().isSolid())
-							{
 								par1World.setBlock(par3 + i1, par4 + i2, par5 + j2, Blocks.stone, 0, 2);
-							}
 						}
-					}
-				}
-			}
 
 			return true;
 		}

@@ -19,15 +19,13 @@ import java.util.Random;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.entity.monster.EntitySkeleton;
-import net.minecraft.entity.monster.EntityZombie;
+import net.minecraft.entity.monster.*;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
-import com.shinoow.abyssalcraft.common.entity.EntityDepthsZombie;
-import com.shinoow.abyssalcraft.common.entity.EntityDepthsghoul;
+import com.shinoow.abyssalcraft.common.entity.*;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -67,9 +65,7 @@ public class BiomeGenAbywasteland extends BiomeGenBase
 			Block var10 = par1World.getBlock(var7, var8, var9);
 
 			if (var10 == AbyssalCraft.abystone)
-			{
 				par1World.setBlock(var7, var8, var9, AbyssalCraft.AbyCorOre);
-			}
 		}
 	}
 	@Override
@@ -96,9 +92,7 @@ public class BiomeGenAbywasteland extends BiomeGenBase
 			int i2 = (j1 * 16 + i1) * k1 + l1;
 
 			if (l1 <= 0 + p_150560_2_.nextInt(5))
-			{
 				p_150560_3_[i2] = Blocks.bedrock;
-			}
 			else
 			{
 				Block block2 = p_150560_3_[i2];
@@ -106,7 +100,6 @@ public class BiomeGenAbywasteland extends BiomeGenBase
 				if (block2 != null && block2.getMaterial() != Material.air)
 				{
 					if (block2 == AbyssalCraft.abystone)
-					{
 						if (k == -1)
 						{
 							if (l <= 0)
@@ -123,7 +116,6 @@ public class BiomeGenAbywasteland extends BiomeGenBase
 							}
 
 							if (l1 < 63 && (block == null || block.getMaterial() == Material.air))
-							{
 								if (getFloatTemperature(p_150560_5_, l1, p_150560_6_) < 0.15F)
 								{
 									block = Blocks.ice;
@@ -134,7 +126,6 @@ public class BiomeGenAbywasteland extends BiomeGenBase
 									block = Blocks.water;
 									b0 = 0;
 								}
-							}
 
 							k = l;
 
@@ -148,11 +139,8 @@ public class BiomeGenAbywasteland extends BiomeGenBase
 								block = null;
 								block1 = AbyssalCraft.abystone;
 								p_150560_3_[i2] = AbyssalCraft.abystone;
-							}
-							else
-							{
+							} else
 								p_150560_3_[i2] = block1;
-							}
 						}
 						else if (k > 0)
 						{
@@ -165,12 +153,8 @@ public class BiomeGenAbywasteland extends BiomeGenBase
 								block1 = Blocks.sandstone;
 							}
 						}
-					}
-				}
-				else
-				{
+				} else
 					k = -1;
-				}
 			}
 		}
 	}

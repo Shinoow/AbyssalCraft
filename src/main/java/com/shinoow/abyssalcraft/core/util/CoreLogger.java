@@ -1,4 +1,4 @@
-/**AbyssalCraft
+/**AbyssalCraft Core
  *Copyright 2012-2014 Shinoow
  *
  *Licensed under the Apache License, Version 2.0 (the "License");
@@ -16,15 +16,13 @@
 package com.shinoow.abyssalcraft.core.util;
 
 import org.apache.logging.log4j.Level;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+
+import cpw.mods.fml.common.FMLLog;
 
 public class CoreLogger {
 
-	private static Logger logger = LogManager.getLogger("AbyssalCraft Core");
-
 	public static void log(Level level, String format, Object... data) {
-		logger.log(level, format, data);
+		FMLLog.log("AbyssalCraft Core", level, format, data);
 	}
 
 	public static void severe(String format, Object... data) {
@@ -45,9 +43,5 @@ public class CoreLogger {
 
 	public static void finer(String format, Object... data) {
 		log(Level.TRACE, format, data);
-	}
-
-	public static Logger getLogger() {
-		return logger;
 	}
 }

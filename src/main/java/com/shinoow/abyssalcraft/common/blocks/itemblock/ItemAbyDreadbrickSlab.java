@@ -25,7 +25,7 @@ public class ItemAbyDreadbrickSlab extends ItemSlab {
 
 	public ItemAbyDreadbrickSlab(Block block) {
 		super(block, (BlockSlab)AbyssalCraft.abydreadbrickslab1, (BlockSlab)AbyssalCraft.abydreadbrickslab2, false);
-		this.setMaxDamage(0);
-		this.setHasSubtypes(true);
+		setMaxDamage(0);
+		setHasSubtypes(true);
 	}
 }

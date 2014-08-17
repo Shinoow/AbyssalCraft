@@ -38,8 +38,11 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
-public class RenderDragonBoss extends RenderLiving
-{
+public class RenderDragonBoss extends RenderLiving {
+
+	/** Scale of the model to use */
+	private float scale = 1.5F;
+
 	private static final ResourceLocation field_110842_f = new ResourceLocation("abyssalcraft:textures/model/boss/dragonboss_exploding.png");
 	private static final ResourceLocation field_110843_g = new ResourceLocation("textures/entity/endercrystal/endercrystal_beam.png");
 	private static final ResourceLocation field_110845_h = new ResourceLocation("abyssalcraft:textures/model/boss/dragonboss_eyes.png");
@@ -50,9 +53,17 @@ public class RenderDragonBoss extends RenderLiving
 
 	public RenderDragonBoss()
 	{
-		super(new ModelDragonBoss(0.0F), 0.6F);
+		super(new ModelDragonBoss(0.0F), 0.9F);
 		modelDragon = (ModelDragonBoss)mainModel;
 		setRenderPassModel(mainModel);
+	}
+
+	/**
+	 * Applies the scale to the transform matrix
+	 */
+	protected void preRenderScale(EntityDragonBoss par1EntityDragonMinion, float par2)
+	{
+		GL11.glScalef(scale, scale, scale);
 	}
 
 	/**
@@ -72,9 +83,7 @@ public class RenderDragonBoss extends RenderLiving
 			f5 = MathHelper.sqrt_float(f5);
 
 			if (f5 > 1.0F)
-			{
 				f5 = 1.0F;
-			}
 
 			GL11.glRotatef(f5 * getDeathMaxRotation(par1entitydragonboss), 0.0F, 0.0F, 1.0F);
 		}
@@ -185,9 +194,7 @@ public class RenderDragonBoss extends RenderLiving
 			float f2 = 0.0F;
 
 			if (f1 > 0.8F)
-			{
 				f2 = (f1 - 0.8F) / 0.2F;
-			}
 
 			Random random = new Random(432L);
 			GL11.glDisable(GL11.GL_TEXTURE_2D);
@@ -239,9 +246,7 @@ public class RenderDragonBoss extends RenderLiving
 	protected int renderGlow(EntityDragonBoss par1entitydragonboss, int par2, float par3)
 	{
 		if (par2 == 1)
-		{
 			GL11.glDepthFunc(GL11.GL_LEQUAL);
-		}
 
 		if (par2 != 0)
 			return -1;
@@ -303,6 +308,16 @@ public class RenderDragonBoss extends RenderLiving
 	public void renderPlayer(EntityLivingBase par1EntityLivingBase, double par2, double par4, double par6, float par8, float par9)
 	{
 		renderDragon((EntityDragonBoss)par1EntityLivingBase, par2, par4, par6, par8, par9);
+	}
+
+	/**
+	 * Allows the render to do any OpenGL state modifications necessary before the model is rendered. Args:
+	 * entityLiving, partialTickTime
+	 */
+	@Override
+	protected void preRenderCallback(EntityLivingBase par1EntityLivingBase, float par2)
+	{
+		preRenderScale((EntityDragonBoss)par1EntityLivingBase, par2);
 	}
 
 	@Override

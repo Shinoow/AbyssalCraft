@@ -23,7 +23,8 @@ public enum EnumToolMaterialAC {
 
 	DARKSTONE(1, 180, 5.0F, 1, 15),
 	ABYSSALNITE(4, 1261, 13.0F, 4, 10),
-	CORALIUM(6, 4000, 14.0F, 6, 12),
+	CORALIUM(5, 2000, 14.0F, 5, 12),
+	DREADIUM(6, 3000, 15.0F, 6, 15),
 	ABYSSALNITE_C(8, 8000, 20.0F, 8, 30);
 	private final int harvestLevel;
 	private final int maxUses;
@@ -66,6 +67,7 @@ public enum EnumToolMaterialAC {
 		case DARKSTONE: return Item.getItemFromBlock(AbyssalCraft.Darkstone_cobble);
 		case ABYSSALNITE: return AbyssalCraft.abyingot;
 		case CORALIUM: return AbyssalCraft.Cingot;
+		case DREADIUM: return AbyssalCraft.dreadiumingot;
 		case ABYSSALNITE_C: return AbyssalCraft.Cpearl;
 		default:      return customCraftingMaterial;
 		}

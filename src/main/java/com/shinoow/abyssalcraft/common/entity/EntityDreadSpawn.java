@@ -15,21 +15,11 @@
  */
 package com.shinoow.abyssalcraft.common.entity;
 
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.EnumCreatureAttribute;
-import net.minecraft.entity.IEntityLivingData;
-import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.EntityAIAttackOnCollide;
-import net.minecraft.entity.ai.EntityAIHurtByTarget;
-import net.minecraft.entity.ai.EntityAILookIdle;
-import net.minecraft.entity.ai.EntityAIMoveTowardsRestriction;
-import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
-import net.minecraft.entity.ai.EntityAIWander;
-import net.minecraft.entity.ai.EntityAIWatchClosest;
+import net.minecraft.block.Block;
+import net.minecraft.entity.*;
+import net.minecraft.entity.ai.*;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.world.World;
 
@@ -69,23 +59,6 @@ public class EntityDreadSpawn extends DreadMob
 	}
 
 	@Override
-	protected void entityInit()
-	{
-		super.entityInit();
-		getDataWatcher().addObject(20, Byte.valueOf((byte)0));
-	}
-
-	public int getDreadMorph()
-	{
-		return dataWatcher.getWatchableObjectByte(20);
-	}
-
-	public void setDreadMorph(int par1)
-	{
-		dataWatcher.updateObject(20, Byte.valueOf((byte)par1));
-	}
-
-	@Override
 	protected boolean isAIEnabled()
 	{
 		return true;
@@ -96,12 +69,8 @@ public class EntityDreadSpawn extends DreadMob
 	{
 
 		if (super.attackEntityAsMob(par1Entity))
-		{
 			if (par1Entity instanceof EntityLivingBase)
-			{
 				((EntityLivingBase)par1Entity).addPotionEffect(new PotionEffect(AbyssalCraft.Dplague.id, 200));
-			}
-		}
 		return hasAttacked;
 	}
 
@@ -111,25 +80,20 @@ public class EntityDreadSpawn extends DreadMob
 		return "mob.zombie.say";
 	}
 
-	/**
-	 * Returns the sound this mob makes when it is hurt.
-	 */
 	@Override
 	protected String getHurtSound()
 	{
 		return "mob.zombie.hurt";
 	}
 
-	/**
-	 * Returns the sound this mob makes on death.
-	 */
 	@Override
 	protected String getDeathSound()
 	{
 		return "mob.zombie.death";
 	}
 
-	protected void playStepSound(int par1, int par2, int par3, int par4)
+	@Override
+	protected void func_145780_a(int par1, int par2, int par3, Block par4)
 	{
 		worldObj.playSoundAtEntity(this, "mob.zombie.step", 0.15F, 1.0F);
 	}
@@ -137,7 +101,7 @@ public class EntityDreadSpawn extends DreadMob
 	@Override
 	protected Item getDropItem()
 	{
-		return AbyssalCraft.dreadchunk;
+		return AbyssalCraft.dreadfragment;
 
 	}
 
@@ -145,42 +109,5 @@ public class EntityDreadSpawn extends DreadMob
 	public EnumCreatureAttribute getCreatureAttribute()
 	{
 		return EnumCreatureAttribute.UNDEAD;
-	}
-
-	@Override
-	public void readEntityFromNBT(NBTTagCompound par1NBTTagCompound)
-	{
-		super.readEntityFromNBT(par1NBTTagCompound);
-		if (par1NBTTagCompound.hasKey("DreadMorph"))
-		{
-			byte var2 = par1NBTTagCompound.getByte("DreadMorph");
-			setDreadMorph(var2);
-		}
-	}
-
-	@Override
-	public void writeEntityToNBT(NBTTagCompound par1NBTTagCompound)
-	{
-		super.writeEntityToNBT(par1NBTTagCompound);
-		par1NBTTagCompound.setByte("DreadMorph", (byte)getDreadMorph());
-	}
-
-	@Override
-	public IEntityLivingData onSpawnWithEgg(IEntityLivingData par1EntityLivingData)
-	{
-		par1EntityLivingData = super.onSpawnWithEgg(par1EntityLivingData);
-
-		switch(worldObj.rand.nextInt(3)){
-		case 0:
-			setDreadMorph(0);
-			break;
-		case 1:
-			setDreadMorph(1);
-			break;
-		case 2:
-			setDreadMorph(2);
-		}
-
-		return par1EntityLivingData;
 	}
 }

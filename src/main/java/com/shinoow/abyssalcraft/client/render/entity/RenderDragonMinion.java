@@ -39,7 +39,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 public class RenderDragonMinion extends RenderLiving {
 
 	/** Scale of the model to use */
-	private float scale = 0.6F;
+	private float scale = 0.5F;
 
 	private static final ResourceLocation field_110845_h = new ResourceLocation("abyssalcraft:textures/model/elite/dragonminion_eyes.png");
 	private static final ResourceLocation field_110844_k = new ResourceLocation("abyssalcraft:textures/model/elite/dragonminion.png");
@@ -49,7 +49,7 @@ public class RenderDragonMinion extends RenderLiving {
 
 	public RenderDragonMinion()
 	{
-		super(new ModelDragonMinion(0.0F), 0.4F);
+		super(new ModelDragonMinion(0.0F), 0.3F);
 		modelDragon = (ModelDragonMinion)mainModel;
 		setRenderPassModel(mainModel);
 	}
@@ -79,9 +79,7 @@ public class RenderDragonMinion extends RenderLiving {
 			f5 = MathHelper.sqrt_float(f5);
 
 			if (f5 > 1.0F)
-			{
 				f5 = 1.0F;
-			}
 
 			GL11.glRotatef(f5 * getDeathMaxRotation(par1EntityDragonMinion), 0.0F, 0.0F, 1.0F);
 		}
@@ -151,9 +149,7 @@ public class RenderDragonMinion extends RenderLiving {
 			float f2 = 0.0F;
 
 			if (f1 > 0.8F)
-			{
 				f2 = (f1 - 0.8F) / 0.2F;
-			}
 
 			Random random = new Random(432L);
 			GL11.glDisable(GL11.GL_TEXTURE_2D);
@@ -205,9 +201,7 @@ public class RenderDragonMinion extends RenderLiving {
 	protected int renderGlow(EntityDragonMinion par1EntityDragonMinion, int par2, float par3)
 	{
 		if (par2 == 1)
-		{
 			GL11.glDepthFunc(GL11.GL_LEQUAL);
-		}
 
 		if (par2 != 0)
 			return -1;

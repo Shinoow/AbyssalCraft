@@ -5,6 +5,23 @@
 			"dreadguard/death"
 		]
 	},
+	"dreadguard.idle": {
+		"category": "hostile",
+		"sounds": [
+			"dreadguard/idle1",
+			"dreadguard/idle2",
+			"dreadguard/idle3"
+		]
+	},
+	"dreadguard.hit": {
+		"category": "hostile",
+		"sounds": [
+			"dreadguard/hit1",
+			"dreadguard/hit2",
+			"dreadguard/hit3",
+			"dreadguard/hit4"
+		]
+	},
 	"ghoul.pete.death": {
 		"category": "hostile",
 		"sounds": [
@@ -32,6 +49,25 @@
 			"ghoul/pete/idle6",
 			"ghoul/pete/idle7",
 			"ghoul/pete/idle8"
+		]
+	},
+	"golem.death": {
+		"category": "hostile",
+		"sounds": [
+			"golem/death"
+		]
+	},
+	"golem.hit": {
+		"category": "hostile",
+		"sounds": [
+			"golem/hit1",
+			"golem/hit2"
+		]
+	},
+	"golem.idle": {
+		"category": "hostile",
+		"sounds": [
+			"golem/idle1"
 		]
 	}
 }

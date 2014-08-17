@@ -33,7 +33,7 @@ public class ItemCoraliumAxe extends ItemTool {
 
 	public ItemCoraliumAxe(ToolMaterial enumToolMaterial) {
 		super(3, enumToolMaterial, blocksEffectiveAgainst);
-		setHarvestLevel("axe", 6);
+		setHarvestLevel("axe", 5);
 	}
 
 	@Override

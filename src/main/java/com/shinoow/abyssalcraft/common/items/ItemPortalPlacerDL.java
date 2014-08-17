@@ -61,29 +61,25 @@ public class ItemPortalPlacerDL extends Item {
 	@Override
 	public boolean onItemUse(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, World par3World, int par4, int par5, int par6, int par7, float par8, float par9, float par10)
 	{
-		if(!par3World.isRemote && par3World.provider.isSurfaceWorld())
+		if(par3World.isRemote && par3World.provider.isSurfaceWorld())
 		{
 			FMLClientHandler.instance().getClient().ingameGUI.getChatGUI().printChatMessage(new ChatComponentText("Nothing happened..."));
 			return false;
 		}
 
-		else if(!par3World.isRemote && par2EntityPlayer.dimension != AbyssalCraft.configDimId1 || !par3World.isRemote && par2EntityPlayer.dimension != AbyssalCraft.configDimId2)
+		else if(!par3World.isRemote && par2EntityPlayer.dimension == AbyssalCraft.configDimId1 || !par3World.isRemote && par2EntityPlayer.dimension == AbyssalCraft.configDimId2)
 		{
 			int direction = MathHelper.floor_double(par2EntityPlayer.rotationYaw * 4.0F / 360.0F + 0.5D) & 3;
 
 			if(direction == 1 || direction == 3)
 			{
 				for(int y = 1; y < 5; y++)
-				{
 					for (int z = -1; z < 2; z++)
-					{
 						if(par3World.getBlockMetadata(par4, par5 + y, par6 + z) != 0)
 						{
 							FMLClientHandler.instance().getClient().ingameGUI.getChatGUI().printChatMessage(new ChatComponentText("No room for a portal."));
 							return false;
 						}
-					}
-				}
 
 				par3World.setBlock(par4, par5 + 1, par6, AbyssalCraft.dreadstone);
 				par3World.setBlock(par4, par5 + 1, par6 + 1, AbyssalCraft.dreadstone);
@@ -108,16 +104,12 @@ public class ItemPortalPlacerDL extends Item {
 			else
 			{
 				for(int y = 1; y < 5; y++)
-				{
 					for (int x = -1; x < 2; x++)
-					{
 						if(par3World.getBlockMetadata(par4 + x, par5 + y, par6) != 0)
 						{
 							FMLClientHandler.instance().getClient().ingameGUI.getChatGUI().printChatMessage(new ChatComponentText("No room for a portal."));
 							return false;
 						}
-					}
-				}
 
 				par3World.setBlock(par4, par5 + 1, par6, AbyssalCraft.dreadstone);
 				par3World.setBlock(par4 + 1, par5 + 1, par6, AbyssalCraft.dreadstone);
@@ -145,38 +137,4 @@ public class ItemPortalPlacerDL extends Item {
 		else
 			return false;
 	}
-
-	/**  When portal block generation has been changed to match the new design, replace the methods
-         	above with these (keep the Dreaded Fire)
-
-         				   par3World.setBlock(par4, par5 + 1, par6 - 2, AbyssalCraft.dreadstone);
-                           par3World.setBlock(par4, par5 + 2, par6 - 2, AbyssalCraft.dreadstone);
-                           par3World.setBlock(par4, par5 + 3, par6 - 2, AbyssalCraft.dreadstone);
-                           par3World.setBlock(par4, par5 + 4, par6 - 2, AbyssalCraft.dreadstone);
-                           par3World.setBlock(par4, par5 + 5, par6 - 2, AbyssalCraft.dreadstone);
-
-                           par3World.setBlock(par4, par5 + 2, par6 + 2, AbyssalCraft.dreadstone);
-                           par3World.setBlock(par4, par5 + 3, par6 + 2, AbyssalCraft.dreadstone);
-                           par3World.setBlock(par4, par5 + 4, par6 + 2, AbyssalCraft.dreadstone);
-                           par3World.setBlock(par4, par5 + 5, par6 + 2, AbyssalCraft.dreadstone);
-
-                           par3World.setBlock(par4, par5 + 5, par6, AbyssalCraft.dreadstone);
-                           par3World.setBlock(par4, par5 + 5, par6 + 1, AbyssalCraft.dreadstone);
-                           par3World.setBlock(par4, par5 + 5, par6 - 1, AbyssalCraft.dreadstone);
-
-						   par3World.setBlock(par4 - 2, par5 + 1, par6, AbyssalCraft.dreadstone);
-                           par3World.setBlock(par4 - 2, par5 + 2, par6, AbyssalCraft.dreadstone);
-                           par3World.setBlock(par4 - 2, par5 + 3, par6, AbyssalCraft.dreadstone);
-                           par3World.setBlock(par4 - 2, par5 + 4, par6, AbyssalCraft.dreadstone);
-                           par3World.setBlock(par4 - 2, par5 + 5, par6, AbyssalCraft.dreadstone);
-
-                           par3World.setBlock(par4 + 2, par5 + 2, par6, AbyssalCraft.dreadstone);
-                           par3World.setBlock(par4 + 2, par5 + 3, par6, AbyssalCraft.dreadstone);
-                           par3World.setBlock(par4 + 2, par5 + 4, par6, AbyssalCraft.dreadstone);
-                           par3World.setBlock(par4 + 2, par5 + 5, par6, AbyssalCraft.dreadstone);
-
-                           par3World.setBlock(par4, par5 + 5, par6, AbyssalCraft.dreadstone);
-                           par3World.setBlock(par4 + 1, par5 + 5, par6, AbyssalCraft.dreadstone);
-                           par3World.setBlock(par4 - 1, par5 + 5, par6, AbyssalCraft.dreadstone);
-	 */
 }

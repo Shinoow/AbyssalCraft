@@ -25,7 +25,7 @@ public class ItemDLTSlab extends ItemSlab {
 
 	public ItemDLTSlab(Block block) {
 		super(block, (BlockSlab)AbyssalCraft.DLTslab1, (BlockSlab)AbyssalCraft.DLTslab2, false);
-		this.setMaxDamage(0);
-		this.setHasSubtypes(true);
+		setMaxDamage(0);
+		setHasSubtypes(true);
 	}
 }

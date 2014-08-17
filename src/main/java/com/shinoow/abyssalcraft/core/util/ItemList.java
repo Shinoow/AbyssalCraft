@@ -20,15 +20,13 @@ import cpw.mods.fml.common.registry.GameRegistry;
 
 public class ItemList {
 
-	/**
-	 * AbyssalCraft modId
-	 */
+	/** AbyssalCraft modId */
 	public static String modId = "abyssalcraft";
 
 	public static Item oblivion_catalyst = GameRegistry.findItem(modId, "OC");
 	public static Item gateway_key = GameRegistry.findItem(modId, "portalplacer");
 	public static Item staff_of_the_gatekeeper = GameRegistry.findItem(modId, "staff");
-	public static Item bucket_of_liquid_coralium = GameRegistry.findItem(modId, "cbucket");
+	public static Item liquid_coralium_bucket = GameRegistry.findItem(modId, "cbucket");
 	public static Item powerstone_tracker = GameRegistry.findItem(modId, "psdlfinder");
 	public static Item eye_of_the_abyss = GameRegistry.findItem(modId, "eoa");
 	public static Item dreaded_gateway_key = GameRegistry.findItem(modId, "portalplacerdl");
@@ -117,6 +115,45 @@ public class ItemList {
 	public static Item shadow_gem = GameRegistry.findItem(modId, "shadowgem");
 	public static Item shard_of_oblivion = GameRegistry.findItem(modId, "oblivionshard");
 	public static Item coralium_longbow = GameRegistry.findItem(modId, "corbow");
-	public static Item bucket_of_liquid_antimatter = GameRegistry.findItem(modId, "antibucket");
+	public static Item liquid_antimatter_bucket = GameRegistry.findItem(modId, "antibucket");
 	public static Item coralium_brick = GameRegistry.findItem(modId, "cbrick");
+	public static Item cudgel = GameRegistry.findItem(modId, "cudgel");
+	public static Item dreadium_ingot = GameRegistry.findItem(modId, "dreadiumingot");
+	public static Item dread_fragment = GameRegistry.findItem(modId, "dreadfragment");
+	public static Item dreadium_boots = GameRegistry.findItem(modId, "dreadiumboots");
+	public static Item dreadium_helmet = GameRegistry.findItem(modId, "dreadiumhelmet");
+	public static Item dreadium_chestplate = GameRegistry.findItem(modId, "dreadiumplate");
+	public static Item dreadium_leggings = GameRegistry.findItem(modId, "dreadiumlegs");
+	public static Item dreadium_pickaxe = GameRegistry.findItem(modId, "dreadiumpickaxe");
+	public static Item dreadium_axe = GameRegistry.findItem(modId, "dreadiumaxe");
+	public static Item dreadium_shovel = GameRegistry.findItem(modId, "dreadiumshovel");
+	public static Item dreadium_sword = GameRegistry.findItem(modId, "dreadiumsword");
+	public static Item dreadium_hoe = GameRegistry.findItem(modId, "dreadiumhoe");
+	public static Item dreadium_upgrade_kit = GameRegistry.findItem(modId, "dreadiumu");
+	public static Item carbon_cluster = GameRegistry.findItem(modId, "carboncluster");
+	public static Item dense_carbon_cluster = GameRegistry.findItem(modId, "densecarboncluster");
+	public static Item methane = GameRegistry.findItem(modId, "methane");
+	public static Item nitre = GameRegistry.findItem(modId, "nitre");
+	public static Item sulfur = GameRegistry.findItem(modId, "sulfur");
+	public static Item crystallized_iron = GameRegistry.findItem(modId, "crystaliron");
+	public static Item crystallized_gold = GameRegistry.findItem(modId, "crystalgold");
+	public static Item crystallized_sulfur = GameRegistry.findItem(modId, "crystalsulfur");
+	public static Item crystallized_carbon = GameRegistry.findItem(modId, "crystalcarbon");
+	public static Item crystallized_oxygen = GameRegistry.findItem(modId, "crystaloxygen");
+	public static Item crystallized_hydrogen = GameRegistry.findItem(modId, "crystalhydrogen");
+	public static Item crystallized_nitrogen = GameRegistry.findItem(modId, "crystalnitrogen");
+	public static Item crystallized_phosphorus = GameRegistry.findItem(modId, "crystalphosporus");
+	public static Item crystallized_potassium = GameRegistry.findItem(modId, "crystalpotassium");
+	public static Item crystallized_nitrate = GameRegistry.findItem(modId, "crystalnitrate");
+	public static Item crystallized_methane = GameRegistry.findItem(modId, "crystalmethane");
+	public static Item crystallized_redstone = GameRegistry.findItem(modId, "crystalredstone");
+	public static Item crystallized_abyssalnite = GameRegistry.findItem(modId, "crystalabyssalnite");
+	public static Item crystallized_coralium = GameRegistry.findItem(modId, "crystalcoralium");
+	public static Item crystallized_dreadium = GameRegistry.findItem(modId, "crystaldreadium");
+	public static Item crystallized_blaze = GameRegistry.findItem(modId, "crystalblaze");
+	public static Item dread_cloth = GameRegistry.findItem(modId, "dreadcloth");
+	public static Item dreadium_plate = GameRegistry.findItem(modId, "dreadiumplate");
+	public static Item dreadium_katana_blade = GameRegistry.findItem(modId, "dreadblade");
+	public static Item dreadium_katana_hilt = GameRegistry.findItem(modId, "dreadhilt");
+	public static Item dreadium_katana = GameRegistry.findItem(modId, "dreadkatana");
 }

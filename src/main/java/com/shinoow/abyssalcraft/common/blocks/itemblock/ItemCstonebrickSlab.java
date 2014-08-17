@@ -25,7 +25,7 @@ public class ItemCstonebrickSlab extends ItemSlab {
 
 	public ItemCstonebrickSlab(Block block) {
 		super(block, (BlockSlab)AbyssalCraft.cstonebrickslab1, (BlockSlab)AbyssalCraft.cstonebrickslab2, false);
-		this.setMaxDamage(0);
-		this.setHasSubtypes(true);
+		setMaxDamage(0);
+		setHasSubtypes(true);
 	}
 }

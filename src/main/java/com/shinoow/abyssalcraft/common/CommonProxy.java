@@ -15,19 +15,56 @@
  */
 package com.shinoow.abyssalcraft.common;
 
+import net.minecraft.client.model.ModelBiped;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
+
+import com.shinoow.abyssalcraft.AbyssalCraft;
+import com.shinoow.abyssalcraft.client.gui.GuiCrystallizer;
+import com.shinoow.abyssalcraft.client.gui.GuiTransmutator;
+import com.shinoow.abyssalcraft.common.blocks.tile.TileEntityCrystallizer;
+import com.shinoow.abyssalcraft.common.blocks.tile.TileEntityTransmutator;
+import com.shinoow.abyssalcraft.common.inventory.ContainerCrystallizer;
+import com.shinoow.abyssalcraft.common.inventory.ContainerTransmutator;
+
 import cpw.mods.fml.common.network.IGuiHandler;
 
 public class CommonProxy implements IGuiHandler {
 
 	@Override
 	public Object getServerGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
+		TileEntity entity = world.getTileEntity(x, y, z);
+
+		if(entity != null)
+			switch(ID) {
+			case AbyssalCraft.crystallizerGuiID:
+				if (entity instanceof TileEntityCrystallizer)
+					return new ContainerCrystallizer(player.inventory, (TileEntityCrystallizer) entity);
+				break;
+			case AbyssalCraft.transmutatorGuiID:
+				if (entity instanceof TileEntityTransmutator)
+					return new ContainerTransmutator(player.inventory, (TileEntityTransmutator) entity);
+				break;
+			}
 		return null;
 	}
 
 	@Override
 	public Object getClientGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
+		TileEntity entity = world.getTileEntity(x, y, z);
+
+		if(entity != null)
+			switch(ID) {
+			case AbyssalCraft.crystallizerGuiID:
+				if (entity instanceof TileEntityCrystallizer)
+					return new GuiCrystallizer(player.inventory, (TileEntityCrystallizer) entity);
+				break;
+			case AbyssalCraft.transmutatorGuiID:
+				if (entity instanceof TileEntityTransmutator)
+					return new GuiTransmutator(player.inventory, (TileEntityTransmutator) entity);
+				break;
+			}
 		return null;
 	}
 
@@ -45,5 +82,9 @@ public class CommonProxy implements IGuiHandler {
 
 	public int addArmor(String armor) {
 		return 0;
+	}
+
+	public ModelBiped getArmorModel(int id){
+		return null;
 	}
 }

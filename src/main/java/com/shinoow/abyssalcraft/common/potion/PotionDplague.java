@@ -15,7 +15,11 @@
  */
 package com.shinoow.abyssalcraft.common.potion;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.potion.Potion;
+import net.minecraft.util.ResourceLocation;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class PotionDplague extends Potion{
 
@@ -27,5 +31,13 @@ public class PotionDplague extends Potion{
 	public Potion setIconIndex(int par1, int par2) {
 		super.setIconIndex(par1, par2);
 		return this;
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public int getStatusIconIndex()
+	{
+		Minecraft.getMinecraft().renderEngine.bindTexture(new ResourceLocation("abyssalcraft:textures/misc/potionFX.png"));
+		return 1;
 	}
 }

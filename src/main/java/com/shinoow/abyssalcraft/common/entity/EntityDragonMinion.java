@@ -15,27 +15,19 @@
  */
 package com.shinoow.abyssalcraft.common.entity;
 
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.IEntityMultiPart;
-import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.*;
 import net.minecraft.entity.boss.EntityDragonPart;
-import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
-import net.minecraft.util.DamageSource;
-import net.minecraft.util.MathHelper;
-import net.minecraft.util.Vec3;
-import net.minecraft.world.Explosion;
-import net.minecraft.world.World;
+import net.minecraft.util.*;
+import net.minecraft.world.*;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.core.api.entity.CoraliumMob;
 
-public class EntityDragonMinion extends CoraliumMob implements IEntityMultiPart, IMob
+public class EntityDragonMinion extends CoraliumMob implements IEntityMultiPart
 {
 
 	public static final float innerRotation = 0;
@@ -90,7 +82,6 @@ public class EntityDragonMinion extends CoraliumMob implements IEntityMultiPart,
 		setSize(7.0F, 3.0F);
 		noClip = false;
 		targetY = 100.0D;
-		ignoreFrustumCheck = true;
 	}
 
 	@Override
@@ -109,9 +100,7 @@ public class EntityDragonMinion extends CoraliumMob implements IEntityMultiPart,
 	public double[] getMovementOffsets(int par1, float par2)
 	{
 		if (getHealth() <= 0.0F)
-		{
 			par2 = 0.0F;
-		}
 
 		par2 = 1.0F - par2;
 		int j = ringBufferIndex - par1 * 1 & 63;
@@ -132,11 +121,6 @@ public class EntityDragonMinion extends CoraliumMob implements IEntityMultiPart,
 	{
 		return AbyssalCraft.Corflesh;
 
-	}
-
-	public String getEntityName()
-	{
-		return "Spectral Dragon";
 	}
 
 	@Override
@@ -161,9 +145,7 @@ public class EntityDragonMinion extends CoraliumMob implements IEntityMultiPart,
 			f1 = MathHelper.cos(prevAnimTime * (float)Math.PI * 2.0F);
 
 			if (f1 <= -0.3F && f >= -0.3F)
-			{
 				worldObj.playSound(posX, posY, posZ, "mob.enderdragon.wings", 5.0F, 0.8F + rand.nextFloat() * 0.3F, false);
-			}
 		}
 
 		prevAnimTime = animTime;
@@ -188,18 +170,14 @@ public class EntityDragonMinion extends CoraliumMob implements IEntityMultiPart,
 			rotationYaw = MathHelper.wrapAngleTo180_float(rotationYaw);
 
 			if (ringBufferIndex < 0)
-			{
 				for (int i = 0; i < ringBuffer.length; ++i)
 				{
 					ringBuffer[i][0] = rotationYaw;
 					ringBuffer[i][1] = posY;
 				}
-			}
 
 			if (++ringBufferIndex == ringBuffer.length)
-			{
 				ringBufferIndex = 0;
-			}
 
 			ringBuffer[ringBufferIndex][0] = rotationYaw;
 			ringBuffer[ringBufferIndex][1] = posY;
@@ -241,9 +219,7 @@ public class EntityDragonMinion extends CoraliumMob implements IEntityMultiPart,
 					double d7 = 0.4000000059604645D + d6 / 80.0D - 1.0D;
 
 					if (d7 > 10.0D)
-					{
 						d7 = 10.0D;
-					}
 
 					targetY = target.boundingBox.minY + d7;
 				}
@@ -254,22 +230,16 @@ public class EntityDragonMinion extends CoraliumMob implements IEntityMultiPart,
 				}
 
 				if (forceNewTarget || d2 < 100.0D || d2 > 22500.0D || isCollidedHorizontally || isCollidedVertically)
-				{
 					setNewTarget();
-				}
 
 				d0 /= MathHelper.sqrt_double(d3 * d3 + d1 * d1);
 				f3 = 0.6F;
 
 				if (d0 < -f3)
-				{
 					d0 = -f3;
-				}
 
 				if (d0 > f3)
-				{
 					d0 = f3;
-				}
 
 				motionY += d0 * 0.10000000149011612D;
 				rotationYaw = MathHelper.wrapAngleTo180_float(rotationYaw);
@@ -277,32 +247,24 @@ public class EntityDragonMinion extends CoraliumMob implements IEntityMultiPart,
 				double d9 = MathHelper.wrapAngleTo180_double(d8 - rotationYaw);
 
 				if (d9 > 50.0D)
-				{
 					d9 = 50.0D;
-				}
 
 				if (d9 < -50.0D)
-				{
 					d9 = -50.0D;
-				}
 
-				Vec3 vec3 = worldObj.getWorldVec3Pool().getVecFromPool(targetX - posX, targetY - posY, targetZ - posZ).normalize();
-				Vec3 vec31 = worldObj.getWorldVec3Pool().getVecFromPool(MathHelper.sin(rotationYaw * (float)Math.PI / 180.0F), motionY, -MathHelper.cos(rotationYaw * (float)Math.PI / 180.0F)).normalize();
+				Vec3 vec3 = Vec3.createVectorHelper(targetX - posX, targetY - posY, targetZ - posZ).normalize();
+				Vec3 vec31 = Vec3.createVectorHelper(MathHelper.sin(rotationYaw * (float)Math.PI / 180.0F), motionY, -MathHelper.cos(rotationYaw * (float)Math.PI / 180.0F)).normalize();
 				float f4 = (float)(vec31.dotProduct(vec3) + 0.5D) / 1.5F;
 
 				if (f4 < 0.0F)
-				{
 					f4 = 0.0F;
-				}
 
 				randomYawVelocity *= 0.8F;
 				float f5 = MathHelper.sqrt_double(motionX * motionX + motionZ * motionZ) * 1.0F + 1.0F;
 				double d10 = Math.sqrt(motionX * motionX + motionZ * motionZ) * 1.0D + 1.0D;
 
 				if (d10 > 40.0D)
-				{
 					d10 = 40.0D;
-				}
 
 				randomYawVelocity = (float)(randomYawVelocity + d9 * (0.699999988079071D / d10 / f5));
 				rotationYaw += randomYawVelocity * 0.1F;
@@ -314,7 +276,7 @@ public class EntityDragonMinion extends CoraliumMob implements IEntityMultiPart,
 				moveEntity(motionX, motionY, motionZ);
 
 
-				Vec3 vec32 = worldObj.getWorldVec3Pool().getVecFromPool(motionX, motionY, motionZ).normalize();
+				Vec3 vec32 = Vec3.createVectorHelper(motionX, motionY, motionZ).normalize();
 				float f8 = (float)(vec32.dotProduct(vec31) + 1.0D) / 2.0F;
 				f8 = 0.8F + 0.15F * f8;
 				motionX *= f8;
@@ -348,8 +310,8 @@ public class EntityDragonMinion extends CoraliumMob implements IEntityMultiPart,
 
 			if (!worldObj.isRemote && hurtTime == 0)
 			{
-				collideWithEntities(worldObj.getEntitiesWithinAABBExcludingEntity(this, dragonPartWing1.boundingBox.expand(4.0D, 2.0D, 4.0D).offset(0.0D, -2.0D, 0.0D)));
-				collideWithEntities(worldObj.getEntitiesWithinAABBExcludingEntity(this, dragonPartWing2.boundingBox.expand(4.0D, 2.0D, 4.0D).offset(0.0D, -2.0D, 0.0D)));
+				attackEntitiesInList(worldObj.getEntitiesWithinAABBExcludingEntity(this, dragonPartWing1.boundingBox.expand(4.0D, 2.0D, 4.0D).offset(0.0D, -2.0D, 0.0D)));
+				attackEntitiesInList(worldObj.getEntitiesWithinAABBExcludingEntity(this, dragonPartWing2.boundingBox.expand(4.0D, 2.0D, 4.0D).offset(0.0D, -2.0D, 0.0D)));
 				attackEntitiesInList(worldObj.getEntitiesWithinAABBExcludingEntity(this, dragonPartHead.boundingBox.expand(1.0D, 1.0D, 1.0D)));
 			}
 
@@ -365,19 +327,13 @@ public class EntityDragonMinion extends CoraliumMob implements IEntityMultiPart,
 				EntityDragonPart entitydragonpart = null;
 
 				if (j == 0)
-				{
 					entitydragonpart = dragonPartTail1;
-				}
 
 				if (j == 1)
-				{
 					entitydragonpart = dragonPartTail2;
-				}
 
 				if (j == 2)
-				{
 					entitydragonpart = dragonPartTail3;
-				}
 
 				double[] adouble2 = getMovementOffsets(12 + j * 2, 1.0F);
 				float f14 = rotationYaw * (float)Math.PI / 180.0F + simplifyAngle(adouble2[0] - adouble[0]) * (float)Math.PI / 180.0F * 1.0F;
@@ -394,21 +350,15 @@ public class EntityDragonMinion extends CoraliumMob implements IEntityMultiPart,
 	private void updateHealingCircle()
 	{
 		if (healingcircle != null)
-		{
 			if (healingcircle.isDead)
 			{
 				if (!worldObj.isRemote)
-				{
 					attackEntityFromPart(dragonPartHead, DamageSource.setExplosionSource((Explosion)null), 10.0F);
-				}
 
 				healingcircle = null;
 			}
 			else if (ticksExisted % 10 == 0 && getHealth() < getMaxHealth())
-			{
 				setHealth(getHealth() - 1.0F);
-			}
-		}
 
 		if (rand.nextInt(10) == 0)
 		{
@@ -434,26 +384,6 @@ public class EntityDragonMinion extends CoraliumMob implements IEntityMultiPart,
 		}
 	}
 
-	private void collideWithEntities(List<?> par1List)
-	{
-		double d0 = (dragonPartBody.boundingBox.minX + dragonPartBody.boundingBox.maxX) / 2.0D;
-		double d1 = (dragonPartBody.boundingBox.minZ + dragonPartBody.boundingBox.maxZ) / 2.0D;
-		Iterator<?> iterator = par1List.iterator();
-
-		while (iterator.hasNext())
-		{
-			Entity entity = (Entity)iterator.next();
-
-			if (entity instanceof EntityLivingBase)
-			{
-				double d2 = entity.posX - d0;
-				double d3 = entity.posZ - d1;
-				double d4 = d2 * d2 + d3 * d3;
-				entity.addVelocity(d2 / d4 * 4.0D, 0.20000000298023224D, d3 / d4 * 4.0D);
-			}
-		}
-	}
-
 	private void attackEntitiesInList(List<?> par1List)
 	{
 		for (int i = 0; i < par1List.size(); ++i)
@@ -461,9 +391,7 @@ public class EntityDragonMinion extends CoraliumMob implements IEntityMultiPart,
 			Entity entity = (Entity)par1List.get(i);
 
 			if (entity instanceof EntityLivingBase)
-			{
 				entity.attackEntityFrom(DamageSource.causeMobDamage(this), 8.0F);
-			}
 		}
 	}
 
@@ -472,9 +400,7 @@ public class EntityDragonMinion extends CoraliumMob implements IEntityMultiPart,
 		forceNewTarget = false;
 
 		if (rand.nextInt(2) == 0 && !worldObj.playerEntities.isEmpty())
-		{
 			target = (Entity)worldObj.playerEntities.get(rand.nextInt(worldObj.playerEntities.size()));
-		}
 		else
 		{
 			boolean flag = false;
@@ -506,9 +432,7 @@ public class EntityDragonMinion extends CoraliumMob implements IEntityMultiPart,
 	public boolean attackEntityFromPart(EntityDragonPart par1EntityDragonPart, DamageSource par2DamageSource, float par3)
 	{
 		if (par1EntityDragonPart != dragonPartHead)
-		{
 			par3 = par3 / 4.0F + 1.0F;
-		}
 
 		float f1 = rotationYaw * (float)Math.PI / 180.0F;
 		float f2 = MathHelper.sin(f1);
@@ -519,9 +443,7 @@ public class EntityDragonMinion extends CoraliumMob implements IEntityMultiPart,
 		target = null;
 
 		if (par2DamageSource.getEntity() instanceof EntityPlayer || par2DamageSource.isExplosion())
-		{
 			func_82195_e(par2DamageSource, par3);
-		}
 
 		return true;
 	}
@@ -565,11 +487,5 @@ public class EntityDragonMinion extends CoraliumMob implements IEntityMultiPart,
 	protected String getHurtSound()
 	{
 		return "mob.enderdragon.hit";
-	}
-
-	@Override
-	protected float getSoundVolume()
-	{
-		return 5.0F;
 	}
 }

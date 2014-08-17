@@ -131,9 +131,7 @@ public class ModelJzahar extends ModelBase
 		leftleg.rotateAngleY = 0.0F;
 
 		if (heldItemRight != 0)
-		{
 			rightarm.rotateAngleX = rightarm.rotateAngleX * 0.5F - (float)Math.PI / 10F * heldItemRight;
-		}
 
 		if (isRiding)
 		{

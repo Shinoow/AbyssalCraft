@@ -26,7 +26,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 /**
  * Use this class to create Upgrade Kits for tools/armor.
  * You will need to create a crafting recipe for the upgrade:
- * GameRegistry.addShapelessRecipe(new ItemStack(NewItem), OldItem, UpgradeKit);
+ * GameRegistry.addRecipe(new ItemStack(NewItem, 1),  new Object [] {"#", "@", '#', OldItem, '@', UpgradeKit);
  * @author shinoow
  *
  */
@@ -38,7 +38,7 @@ public class ItemUpgradeKit extends Item {
 	/**
 	 * The Strings are only for display.
 	 * Remember to create a crafting recipe for the upgrade:
-	 * GameRegistry.addShapelessRecipe(new ItemStack(NewItem), OldItem, UpgradeKit);
+	 * GameRegistry.addRecipe(new ItemStack(NewItem, 1),  new Object [] {"#", "@", '#', OldItem, '@', UpgradeKit);
 	 * @param par2Str The old material
 	 * @param par3Str The new material
 	 */

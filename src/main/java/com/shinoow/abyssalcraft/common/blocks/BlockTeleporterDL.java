@@ -62,9 +62,7 @@ public class BlockTeleporterDL extends BlockBreakable
 		{
 			int l;
 			for (l = par3; !World.doesBlockHaveSolidTopSurface(par1World, par2, l, par4) && l > 0; --l)
-			{
 				;
-			}
 		}
 	}
 	/**
@@ -122,13 +120,9 @@ public class BlockTeleporterDL extends BlockBreakable
 		byte b0 = 0;
 		byte b1 = 0;
 		if (par1World.getBlock(par2 - 1, par3, par4) == AbyssalCraft.dreadstone || par1World.getBlock(par2 + 1, par3, par4) == AbyssalCraft.dreadstone)
-		{
 			b0 = 1;
-		}
 		if (par1World.getBlock(par2, par3, par4 - 1) == AbyssalCraft.dreadstone || par1World.getBlock(par2, par3, par4 + 1) == AbyssalCraft.dreadstone)
-		{
 			b1 = 1;
-		}
 		if (b0 == b1)
 			return false;
 		else
@@ -141,7 +135,6 @@ public class BlockTeleporterDL extends BlockBreakable
 			int l;
 			int i1;
 			for (l = -1; l <= 2; ++l)
-			{
 				for (i1 = -1; i1 <= 3; ++i1)
 				{
 					boolean flag = l == -1 || l == 2 || i1 == -1 || i1 == 3;
@@ -157,14 +150,9 @@ public class BlockTeleporterDL extends BlockBreakable
 							return false;
 					}
 				}
-			}
 			for (l = 0; l < 2; ++l)
-			{
 				for (i1 = 0; i1 < 3; ++i1)
-				{
 					par1World.setBlock(par2 + b0 * l, par3 + i1, par4 + b1 * l, AbyssalCraft.dreadportal, 0, 2);
-				}
-			}
 			return true;
 		}
 	}
@@ -183,40 +171,24 @@ public class BlockTeleporterDL extends BlockBreakable
 		}
 		int i1;
 		for (i1 = par3; par1World.getBlock(par2, i1 - 1, par4) == this; --i1)
-		{
 			;
-		}
 		if (par1World.getBlock(par2, i1 - 1, par4) != AbyssalCraft.dreadstone)
-		{
 			par1World.setBlockToAir(par2, par3, par4);
-		}
 		else
 		{
 			int j1;
 			for (j1 = 1; j1 < 4 && par1World.getBlock(par2, i1 + j1, par4) == this; ++j1)
-			{
 				;
-			}
 			if (j1 == 3 && par1World.getBlock(par2, i1 + j1, par4) == AbyssalCraft.dreadstone)
 			{
 				boolean flag = par1World.getBlock(par2 - 1, par3, par4) == this || par1World.getBlock(par2 + 1, par3, par4) == this;
 				boolean flag1 = par1World.getBlock(par2, par3, par4 - 1) == this || par1World.getBlock(par2, par3, par4 + 1) == this;
 				if (flag && flag1)
-				{
 					par1World.setBlockToAir(par2, par3, par4);
-				}
-				else
-				{
-					if ((par1World.getBlock(par2 + b0, par3, par4 + b1) != AbyssalCraft.dreadstone || par1World.getBlock(par2 - b0, par3, par4 - b1) != this) && (par1World.getBlock(par2 - b0, par3, par4 - b1) != AbyssalCraft.dreadstone || par1World.getBlock(par2 + b0, par3, par4 + b1) != this))
-					{
-						par1World.setBlockToAir(par2, par3, par4);
-					}
-				}
-			}
-			else
-			{
+				else if ((par1World.getBlock(par2 + b0, par3, par4 + b1) != AbyssalCraft.dreadstone || par1World.getBlock(par2 - b0, par3, par4 - b1) != this) && (par1World.getBlock(par2 - b0, par3, par4 - b1) != AbyssalCraft.dreadstone || par1World.getBlock(par2 + b0, par3, par4 + b1) != this))
+					par1World.setBlockToAir(par2, par3, par4);
+			} else
 				par1World.setBlockToAir(par2, par3, par4);
-			}
 		}
 	}
 	@Override
@@ -259,9 +231,7 @@ public class BlockTeleporterDL extends BlockBreakable
 			EntityPlayerMP thePlayer = (EntityPlayerMP)par5Entity;
 			thePlayer.addStat(AbyssalCraft.enterdreadlands, 1);
 			if (thePlayer.timeUntilPortal > 0)
-			{
 				thePlayer.timeUntilPortal = 10;
-			}
 			else if (thePlayer.dimension != AbyssalCraft.configDimId2)
 			{
 				thePlayer.timeUntilPortal = 10;

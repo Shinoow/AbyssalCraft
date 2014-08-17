@@ -25,7 +25,7 @@ public class ItemDarkstoneSlab extends ItemSlab {
 
 	public ItemDarkstoneSlab(Block block) {
 		super(block, (BlockSlab)AbyssalCraft.Darkstoneslab1, (BlockSlab)AbyssalCraft.Darkstoneslab2, false);
-		this.setMaxDamage(0);
-		this.setHasSubtypes(true);
+		setMaxDamage(0);
+		setHasSubtypes(true);
 	}
 }

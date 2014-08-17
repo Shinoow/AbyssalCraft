@@ -15,16 +15,8 @@
  */
 package com.shinoow.abyssalcraft.common.entity;
 
-import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.EntityAIAttackOnCollide;
-import net.minecraft.entity.ai.EntityAIFleeSun;
-import net.minecraft.entity.ai.EntityAIHurtByTarget;
-import net.minecraft.entity.ai.EntityAILookIdle;
-import net.minecraft.entity.ai.EntityAIMoveTowardsRestriction;
-import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
-import net.minecraft.entity.ai.EntityAIWander;
-import net.minecraft.entity.ai.EntityAIWatchClosest;
+import net.minecraft.entity.ai.*;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
@@ -43,7 +35,11 @@ public class EntityShadowMonster extends EntityMob {
 		tasks.addTask(4, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
 		tasks.addTask(5, new EntityAIFleeSun(this, 0.35D));
 		targetTasks.addTask(0, new EntityAIHurtByTarget(this, false));
-		targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityPlayer.class, 0, true));
+
+		EntityPlayer entityPlayer = par1World.getClosestPlayerToEntity(this, 30D);
+		if(entityPlayer !=null && !entityPlayer.getCommandSenderName().equals("shinoow") ||
+				entityPlayer !=null && !entityPlayer.getCommandSenderName().equals("Oblivionaire"))
+			targetTasks.addTask(1, new EntityAINearestAttackableTarget(this, EntityPlayer.class, 0, true));
 	}
 
 	@Override
@@ -69,23 +65,11 @@ public class EntityShadowMonster extends EntityMob {
 	}
 
 	@Override
-	protected String getLivingSound()
-	{
-		return "mob.blaze.breathe";
-	}
-
-	/**
-	 * Returns the sound this mob makes when it is hurt.
-	 */
-	@Override
 	protected String getHurtSound()
 	{
 		return "mob.blaze.hit";
 	}
 
-	/**
-	 * Returns the sound this mob makes on death.
-	 */
 	@Override
 	protected String getDeathSound()
 	{
@@ -103,16 +87,8 @@ public class EntityShadowMonster extends EntityMob {
 	public void onLivingUpdate()
 	{
 		for (int i = 0; i < 2; ++i)
-		{
 			worldObj.spawnParticle("largesmoke", posX + (rand.nextDouble() - 0.5D) * width, posY + rand.nextDouble() * height, posZ + (rand.nextDouble() - 0.5D) * width, 0.0D, 0.0D, 0.0D);
-		}
 
 		super.onLivingUpdate();
-	}
-
-	@Override
-	public EnumCreatureAttribute getCreatureAttribute()
-	{
-		return EnumCreatureAttribute.UNDEFINED;
 	}
 }

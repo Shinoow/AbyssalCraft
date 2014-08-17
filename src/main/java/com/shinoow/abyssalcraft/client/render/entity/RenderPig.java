@@ -20,7 +20,7 @@ import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.ResourceLocation;
 
-import com.shinoow.abyssalcraft.common.entity.Entityevilpig;
+import com.shinoow.abyssalcraft.common.entity.EntityEvilpig;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -38,7 +38,7 @@ public class RenderPig extends RenderLiving {
 		model = (ModelPig)mainModel;
 	}
 
-	public void doRender(Entityevilpig entity, double par2, double par4, double par6, float par8, float par9)
+	public void doRender(EntityEvilpig entity, double par2, double par4, double par6, float par8, float par9)
 	{
 		super.doRender(entity, par2, par4, par6, par8, par9);
 	}

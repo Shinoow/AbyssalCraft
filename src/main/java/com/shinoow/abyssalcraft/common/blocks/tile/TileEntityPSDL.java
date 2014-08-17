@@ -23,6 +23,12 @@ import net.minecraft.tileentity.TileEntity;
 public class TileEntityPSDL extends TileEntity {
 
 	@Override
+	public boolean canUpdate()
+	{
+		return false;
+	}
+
+	@Override
 	public Packet getDescriptionPacket() {
 		NBTTagCompound nbtTag = new NBTTagCompound();
 		writeToNBT(nbtTag);

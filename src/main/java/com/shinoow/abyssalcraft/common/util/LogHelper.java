@@ -16,15 +16,13 @@
 package com.shinoow.abyssalcraft.common.util;
 
 import org.apache.logging.log4j.Level;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+
+import cpw.mods.fml.common.FMLLog;
 
 public class LogHelper {
 
-	private static Logger logger = LogManager.getLogger("AbyssalCraft");
-
 	public static void log(Level level, String format, Object... data) {
-		logger.log(level, format, data);
+		FMLLog.log("AbyssalCraft", level, format, data);
 	}
 
 	public static void severe(String format, Object... data) {
@@ -45,9 +43,5 @@ public class LogHelper {
 
 	public static void finer(String format, Object... data) {
 		log(Level.TRACE, format, data);
-	}
-
-	public static Logger getLogger() {
-		return logger;
 	}
 }

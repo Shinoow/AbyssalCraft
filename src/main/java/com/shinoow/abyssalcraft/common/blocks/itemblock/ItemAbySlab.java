@@ -28,10 +28,10 @@ public class ItemAbySlab extends ItemSlab {
 
 	public ItemAbySlab(Block block) {
 		super(block, (BlockSlab)AbyssalCraft.abyslab1, (BlockSlab)AbyssalCraft.abyslab2, false);
-		this.setMaxDamage(0);
-		this.setHasSubtypes(true);
+		setMaxDamage(0);
+		setHasSubtypes(true);
 	}
-	
+
 	@Override
 	public String getItemStackDisplayName(ItemStack par1ItemStack) {
 

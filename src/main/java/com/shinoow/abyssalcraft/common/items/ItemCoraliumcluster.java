@@ -27,7 +27,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 public class ItemCoraliumcluster extends Item {
-	
+
 	public final String gemName;
 
 	public ItemCoraliumcluster(String par2Str) {

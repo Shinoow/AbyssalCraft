@@ -15,17 +15,9 @@
  */
 package com.shinoow.abyssalcraft.common.entity;
 
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.EnumCreatureAttribute;
-import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.EntityAIAttackOnCollide;
-import net.minecraft.entity.ai.EntityAIHurtByTarget;
-import net.minecraft.entity.ai.EntityAILookIdle;
-import net.minecraft.entity.ai.EntityAIMoveTowardsRestriction;
-import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
-import net.minecraft.entity.ai.EntityAIWander;
-import net.minecraft.entity.ai.EntityAIWatchClosest;
+import net.minecraft.block.Block;
+import net.minecraft.entity.*;
+import net.minecraft.entity.ai.*;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.potion.PotionEffect;
@@ -77,12 +69,8 @@ public class EntityDreadling extends DreadMob
 	{
 
 		if (super.attackEntityAsMob(par1Entity))
-		{
 			if (par1Entity instanceof EntityLivingBase)
-			{
 				((EntityLivingBase)par1Entity).addPotionEffect(new PotionEffect(AbyssalCraft.Dplague.id, 200));
-			}
-		}
 		return hasAttacked;
 	}
 
@@ -110,7 +98,8 @@ public class EntityDreadling extends DreadMob
 		return "mob.zombie.death";
 	}
 
-	protected void playStepSound(int par1, int par2, int par3, int par4)
+	@Override
+	protected void func_145780_a(int par1, int par2, int par3, Block par4)
 	{
 		worldObj.playSoundAtEntity(this, "mob.zombie.step", 0.15F, 1.0F);
 	}
@@ -118,7 +107,7 @@ public class EntityDreadling extends DreadMob
 	@Override
 	protected Item getDropItem()
 	{
-		return AbyssalCraft.dreadchunk;
+		return AbyssalCraft.dreadfragment;
 
 	}
 

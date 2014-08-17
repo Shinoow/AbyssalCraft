@@ -23,12 +23,7 @@ import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraft.world.gen.feature.WorldGenMinable;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
-import com.shinoow.abyssalcraft.common.structures.overworld.AChouse1;
-import com.shinoow.abyssalcraft.common.structures.overworld.AChouse2;
-import com.shinoow.abyssalcraft.common.structures.overworld.ACplatform1;
-import com.shinoow.abyssalcraft.common.structures.overworld.ACplatform2;
-import com.shinoow.abyssalcraft.common.structures.overworld.ACscion1;
-import com.shinoow.abyssalcraft.common.structures.overworld.ACscion2;
+import com.shinoow.abyssalcraft.common.structures.overworld.*;
 
 import cpw.mods.fml.common.IWorldGenerator;
 
@@ -47,25 +42,17 @@ public class AbyssalCraftWorldGenerator implements IWorldGenerator {
 		case 50:
 			generateAbyss(world, random, chunkX*16, chunkZ*16);
 		case 51:
-			generateDreadLands(world, random, chunkX*16, chunkZ*16);
+			generateDreadlands(world, random, chunkX*16, chunkZ*16);
 		}
 	}
 
-	private void generateEnd(World world, Random random, int chunkX, int chunkZ) {
+	private void generateEnd(World world, Random random, int chunkX, int chunkZ) {}
 
-	}
+	private void generateNether(World world, Random random, int chunkX, int chunkZ) {}
 
-	private void generateNether(World world, Random random, int chunkX, int chunkZ)  {
+	private void generateAbyss(World world, Random random, int chunkX, int chunkZ) {}
 
-	}
-
-	private void generateAbyss(World world, Random random, int chunkX, int chunkZ) {
-
-	}
-
-	private void generateDreadLands(World world, Random random, int chunkX, int chunkZ) {
-
-	}
+	private void generateDreadlands(World world, Random random, int chunkX, int chunkZ) {}
 
 	public void generateSurface(World world, Random random, int chunkX, int chunkZ) {
 
@@ -116,12 +103,19 @@ public class AbyssalCraftWorldGenerator implements IWorldGenerator {
 			int x = chunkX + random.nextInt(16);
 			int y = random.nextInt(40);
 			int z = chunkZ + random.nextInt(16);
-			if(world.getBiomeGenForCoords(chunkX, chunkZ)==BiomeGenBase.ocean) {
+			if(world.getBiomeGenForCoords(chunkX, chunkZ)==BiomeGenBase.ocean)
 				new WorldGenMinable(AbyssalCraft.Coraliumore, veinSize).generate(world, random, x, y, z);
-			}
-			if(world.getBiomeGenForCoords(chunkX, chunkZ)==BiomeGenBase.deepOcean) {
+			if(world.getBiomeGenForCoords(chunkX, chunkZ)==BiomeGenBase.deepOcean)
 				new WorldGenMinable(AbyssalCraft.Coraliumore, veinSize).generate(world, random, x, y-20, z);
-			}
+		}
+
+		for(int rarity = 0; rarity < 3; rarity++) {
+			int veinSize = 4;
+			int x = chunkX + random.nextInt(16);
+			int y = random.nextInt(30);
+			int z = chunkZ + random.nextInt(16);
+
+			new WorldGenMinable(AbyssalCraft.nitreOre, veinSize).generate(world, random, x, y, z);
 		}
 	}
 }

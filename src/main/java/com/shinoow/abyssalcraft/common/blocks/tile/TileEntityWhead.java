@@ -16,6 +16,7 @@
 package com.shinoow.abyssalcraft.common.blocks.tile;
 
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.network.NetworkManager;
 import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
@@ -25,9 +26,15 @@ public class TileEntityWhead extends TileEntity {
 	public int direction;
 
 	@Override
+	public boolean canUpdate()
+	{
+		return false;
+	}
+
+	@Override
 	public void readFromNBT(NBTTagCompound nbttagcompound)
 	{
-		super.readFromNBT(nbttagcompound);  
+		super.readFromNBT(nbttagcompound);
 		direction = nbttagcompound.getInteger("Dir");
 	}
 
@@ -45,13 +52,19 @@ public class TileEntityWhead extends TileEntity {
 		return new S35PacketUpdateTileEntity(xCoord, yCoord, zCoord, 1, nbtTag);
 	}
 
+	@Override
+	public void onDataPacket(NetworkManager net, S35PacketUpdateTileEntity packet)
+	{
+		readFromNBT(packet.func_148857_g());
+	}
+
 	public int getDirection()
 	{
-		return this.direction;
+		return direction;
 	}
 
 	public void setDirection(int par1)
 	{
-		this.direction = par1;
+		direction = par1;
 	}
 }

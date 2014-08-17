@@ -61,6 +61,7 @@ public class BiomeGenDarklandsForest extends BiomeGenBase
 		spawnableMonsterList.add(new SpawnListEntry(EntityDepthsghoul.class, 5, 1, 5));
 		spawnableMonsterList.add(new SpawnListEntry(EntityDepthsZombie.class, 3, 1, 3));
 	}
+
 	@Override
 	public void decorate(World par1World, Random par2Random, int par3, int par4)
 	{
@@ -78,9 +79,7 @@ public class BiomeGenDarklandsForest extends BiomeGenBase
 			Block var10 = par1World.getBlock(var7, var8, var9);
 
 			if (var10 == Blocks.stone)
-			{
 				par1World.setBlock(var7, var8, var9, AbyssalCraft.abyore);
-			}
 		}
 
 		for (var5 = 0; var5 < 7; ++var5)

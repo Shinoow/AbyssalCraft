@@ -28,7 +28,7 @@ import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
 
-import com.shinoow.abyssalcraft.common.blocks.Crate;
+import com.shinoow.abyssalcraft.common.blocks.BlockCrate;
 
 public class TileEntityCrate extends TileEntity implements IInventory
 {
@@ -104,9 +104,7 @@ public class TileEntityCrate extends TileEntity implements IInventory
 				itemstack = chestContents[par1].splitStack(par2);
 
 				if (chestContents[par1].stackSize == 0)
-				{
 					chestContents[par1] = null;
-				}
 
 				markDirty();
 				return itemstack;
@@ -140,9 +138,7 @@ public class TileEntityCrate extends TileEntity implements IInventory
 		chestContents[par1] = par2ItemStack;
 
 		if (par2ItemStack != null && par2ItemStack.stackSize > getInventoryStackLimit())
-		{
 			par2ItemStack.stackSize = getInventoryStackLimit();
-		}
 
 		markDirty();
 	}
@@ -153,7 +149,7 @@ public class TileEntityCrate extends TileEntity implements IInventory
 	@Override
 	public String getInventoryName()
 	{
-		return hasCustomInventoryName() ? field_94045_s : "Crate";
+		return hasCustomInventoryName() ? field_94045_s : "container.abyssalcraft.crate";
 	}
 
 	/**
@@ -182,9 +178,7 @@ public class TileEntityCrate extends TileEntity implements IInventory
 		chestContents = new ItemStack[getSizeInventory()];
 
 		if (par1NBTTagCompound.hasKey("CustomName", 8))
-		{
 			field_94045_s = par1NBTTagCompound.getString("CustomName");
-		}
 
 		for (int i = 0; i < nbttaglist.tagCount(); ++i)
 		{
@@ -192,9 +186,7 @@ public class TileEntityCrate extends TileEntity implements IInventory
 			int j = nbttagcompound1.getByte("Slot") & 255;
 
 			if (j >= 0 && j < chestContents.length)
-			{
 				chestContents[j] = ItemStack.loadItemStackFromNBT(nbttagcompound1);
-			}
 		}
 	}
 
@@ -208,7 +200,6 @@ public class TileEntityCrate extends TileEntity implements IInventory
 		NBTTagList nbttaglist = new NBTTagList();
 
 		for (int i = 0; i < chestContents.length; ++i)
-		{
 			if (chestContents[i] != null)
 			{
 				NBTTagCompound nbttagcompound1 = new NBTTagCompound();
@@ -216,14 +207,11 @@ public class TileEntityCrate extends TileEntity implements IInventory
 				chestContents[i].writeToNBT(nbttagcompound1);
 				nbttaglist.appendTag(nbttagcompound1);
 			}
-		}
 
 		par1NBTTagCompound.setTag("Items", nbttaglist);
 
 		if (hasCustomInventoryName())
-		{
 			par1NBTTagCompound.setString("CustomName", field_94045_s);
-		}
 	}
 
 	/**
@@ -272,7 +260,7 @@ public class TileEntityCrate extends TileEntity implements IInventory
 		{
 			numUsingPlayers = 0;
 			f = 5.0F;
-			List list = worldObj.getEntitiesWithinAABB(EntityPlayer.class, AxisAlignedBB.getAABBPool().getAABB(xCoord - f, yCoord - f, zCoord - f, xCoord + 1 + f, yCoord + 1 + f, zCoord + 1 + f));
+			List list = worldObj.getEntitiesWithinAABB(EntityPlayer.class, AxisAlignedBB.getBoundingBox(xCoord - f, yCoord - f, zCoord - f, xCoord + 1 + f, yCoord + 1 + f, zCoord + 1 + f));
 			Iterator iterator = list.iterator();
 
 			while (iterator.hasNext())
@@ -284,9 +272,7 @@ public class TileEntityCrate extends TileEntity implements IInventory
 					IInventory iinventory = ((ContainerChest)entityplayer.openContainer).getLowerChestInventory();
 
 					if (iinventory == this || iinventory instanceof InventoryLargeChest && ((InventoryLargeChest)iinventory).isPartOfLargeChest(this))
-					{
 						++numUsingPlayers;
-					}
 				}
 			}
 		}
@@ -310,18 +296,12 @@ public class TileEntityCrate extends TileEntity implements IInventory
 			float f1 = lidAngle;
 
 			if (numUsingPlayers > 0)
-			{
 				lidAngle += f;
-			}
 			else
-			{
 				lidAngle -= f;
-			}
 
 			if (lidAngle > 1.0F)
-			{
 				lidAngle = 1.0F;
-			}
 
 			float f2 = 0.5F;
 
@@ -338,9 +318,7 @@ public class TileEntityCrate extends TileEntity implements IInventory
 			}
 
 			if (lidAngle < 0.0F)
-			{
 				lidAngle = 0.0F;
-			}
 		}
 	}
 
@@ -362,9 +340,7 @@ public class TileEntityCrate extends TileEntity implements IInventory
 	public void openInventory()
 	{
 		if (numUsingPlayers < 0)
-		{
 			numUsingPlayers = 0;
-		}
 
 		++numUsingPlayers;
 		worldObj.addBlockEvent(xCoord, yCoord, zCoord, getBlockType(), 1, numUsingPlayers);
@@ -375,7 +351,7 @@ public class TileEntityCrate extends TileEntity implements IInventory
 	@Override
 	public void closeInventory()
 	{
-		if (getBlockType() != null && getBlockType() instanceof Crate)
+		if (getBlockType() != null && getBlockType() instanceof BlockCrate)
 		{
 			--numUsingPlayers;
 			worldObj.addBlockEvent(xCoord, yCoord, zCoord, getBlockType(), 1, numUsingPlayers);
@@ -411,11 +387,8 @@ public class TileEntityCrate extends TileEntity implements IInventory
 	public int func_98041_l()
 	{
 		if (field_94046_i == -1)
-		{
-			if (worldObj == null || !(getBlockType() instanceof Crate))
+			if (worldObj == null || !(getBlockType() instanceof BlockCrate))
 				return 0;
-
-		}
 
 		return field_94046_i;
 	}

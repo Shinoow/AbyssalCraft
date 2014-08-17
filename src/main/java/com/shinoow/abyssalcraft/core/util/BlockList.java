@@ -20,9 +20,7 @@ import cpw.mods.fml.common.registry.GameRegistry;
 
 public class BlockList {
 
-	/**
-	 * AbyssalCraft modId
-	 */
+	/** AbyssalCraft modId */
 	private static String modId = "abyssalcraft";
 
 	public static Block darkstone = GameRegistry.findBlock(modId, "darkstone");
@@ -101,4 +99,16 @@ public class BlockList {
 	public static Block coralium_stone_brick_stairs = GameRegistry.findBlock(modId, "cstonebrickstairs");
 	public static Block coralium_stone_button = GameRegistry.findBlock(modId, "cstonebutton");
 	public static Block coralium_stone_pressure_plate = GameRegistry.findBlock(modId, "cstonepplate");
+	public static Block chagaroth_altar_top = GameRegistry.findBlock(modId, "dreadaltartop");
+	public static Block chagaroth_altar_bottom = GameRegistry.findBlock(modId, "dreadaltarbottom");
+	public static Block crystallizer_idle = GameRegistry.findBlock(modId, "crystallizer");
+	public static Block crystallizer_active = GameRegistry.findBlock(modId, "crystallizer_on");
+	public static Block block_of_dreadium = GameRegistry.findBlock(modId, "dreadiumblock");
+	public static Block transmutator_idle = GameRegistry.findBlock(modId, "transmutator");
+	public static Block transmutator_active = GameRegistry.findBlock(modId, "transmutator_on");
+	public static Block dreadguard_spawner = GameRegistry.findBlock(modId, "dreadguardspawner");
+	public static Block chagaroth_spawner = GameRegistry.findBlock(modId, "chagarothspawner");
+	public static Block fist_of_chagaroth_spawner = GameRegistry.findBlock(modId, "chagarothfistspawner");
+	public static Block dreadlands_wood_fence = GameRegistry.findBlock(modId, "drtfence");
+	public static Block nitre_ore = GameRegistry.findBlock(modId, "nitreore");
 }

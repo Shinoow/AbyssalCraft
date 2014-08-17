@@ -38,7 +38,8 @@ public class ItemDarkstonePickaxe extends ItemTool
 	/**
 	 * Returns if the item (tool) can harvest results from the block type.
 	 */
-	public boolean canHarvestBlock(Block par1Block)
+	@Override
+	public boolean func_150897_b(Block par1Block)
 	{
 		if (par1Block == Blocks.obsidian)
 			return toolMaterial.getHarvestLevel() == 3;

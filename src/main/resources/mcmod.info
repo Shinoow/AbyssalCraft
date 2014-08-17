@@ -4,38 +4,18 @@
   			{
   				"modid": "abyssalcraft",
   				"name": "AbyssalCraft",
-  				"description": "This mod adds new things to the game, including a new dimension and a overworld biome.",
+  				"description": "This mod adds new things to the game, including 2 new dimensions and 7 overworld biomes.",
   				"mcversion": "${mcversion}",
   				"version": "${version}",
   				"authorList": [
   						"shinoow"
   				],
-  				"credits": "shinoow (coding), Uberorb (textures)",
+  				"credits": "shinoow (coding), Uberorb (textures), DamienDarkside (sounds), PinkMustard (sounds)",
   				"dependants": [  ],
 				"dependencies": [  ],
 				"parent": "",
 				"requiredMods": [  ],
-				"logoFile": "/assets/abyssalcraft/textures/logo.png",
-				"screenshots": [  ],
-				"updateUrl": "http://adf.ly/FQarm",
-  				"url": "http://adf.ly/FQarm",
- 				"useDependencyInformation": true
-			},
-			{
-  				"modid": "accore",
-  				"name": "AbyssalCraft Core",
-  				"description": "Library used by AbyssalCraft mods - contains API as well",
-  				"mcversion": "${mcversion}",
-  				"version": "${version}",
-  				"authorList": [
-  						"shinoow"
-  				],
-  				"credits": "shinoow (coding)",
-  				"dependants": [  ],
-				"dependencies": [  ],
-				"parent": "",
-				"requiredMods": [  ],
-				"logoFile": "/assets/abyssalcraft/textures/logo_core.png",
+				"logoFile": "assets/abyssalcraft/textures/logo.png",
 				"screenshots": [  ],
 				"updateUrl": "http://adf.ly/FQarm",
   				"url": "http://adf.ly/FQarm",

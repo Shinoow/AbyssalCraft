@@ -40,13 +40,11 @@ public class GenLayerBiomesDL extends GenLayer {
 		int[] dest = IntCache.getIntCache(width*depth);
 
 		for (int dz=0; dz<depth; dz++)
-		{
 			for (int dx=0; dx<width; dx++)
 			{
 				initChunkSeed(dx+x, dz+z);
 				dest[dx+dz*width] = allowedBiomes[nextInt(allowedBiomes.length)].biomeID;
 			}
-		}
 		return dest;
 	}
 }

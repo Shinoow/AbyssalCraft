@@ -15,20 +15,21 @@
  */
 package com.shinoow.abyssalcraft.common.entity;
 
-import net.minecraft.entity.Entity;
+import net.minecraft.entity.*;
 import net.minecraft.init.Blocks;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 
 import com.shinoow.abyssalcraft.common.lib.ParticleEffects;
+import com.shinoow.abyssalcraft.common.util.ExplosionUtil;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import cpw.mods.fml.relauncher.*;
 
-public class EntityODBcPrimed extends Entity
-{
+public class EntityODBcPrimed extends Entity {
+
 	/** How long the fuse is */
 	public int fuse;
+	private EntityLivingBase odbcPlacedBy;
 
 	public EntityODBcPrimed(World par1World)
 	{
@@ -39,7 +40,7 @@ public class EntityODBcPrimed extends Entity
 		yOffset = height / 2.0F;
 	}
 
-	public EntityODBcPrimed(World par1World, double par2, double par4, double par6)
+	public EntityODBcPrimed(World par1World, double par2, double par4, double par6, EntityLivingBase par8EntityLivingBase)
 	{
 		this(par1World);
 		setPosition(par2, par4, par6);
@@ -51,38 +52,24 @@ public class EntityODBcPrimed extends Entity
 		prevPosX = par2;
 		prevPosY = par4;
 		prevPosZ = par6;
+		odbcPlacedBy = par8EntityLivingBase;
 	}
 
 	@Override
 	protected void entityInit() {}
 
-	/**
-	 * returns if this entity triggers Block.onEntityWalking on the blocks they walk on. used for spiders and wolves to
-	 * prevent them from trampling crops
-	 */
 	@Override
 	protected boolean canTriggerWalking()
 	{
 		return true;
 	}
 
-	/**
-	 * Returns true if other Entities should be prevented from moving through this Entity.
-	 */
 	@Override
 	public boolean canBeCollidedWith()
 	{
 		return !isDead;
 	}
 
-	public String getEntityName()
-	{
-		return "ODB Core";
-	}
-
-	/**
-	 * Called to update the entity's position/logic.
-	 */
 	@Override
 	public void onUpdate()
 	{
@@ -107,37 +94,26 @@ public class EntityODBcPrimed extends Entity
 			setDead();
 
 			if (!worldObj.isRemote)
-			{
 				explode();
-			}
-		}
-		else
-		{
+		} else if(worldObj.isRemote)
 			ParticleEffects.spawnParticle("CorBlood", posX + (rand.nextDouble() - 0.5D) * width, posY + rand.nextDouble() * height - 0.25D, posZ + (rand.nextDouble() - 0.5D) * width, (rand.nextDouble() - 0.5D) * 100.0D, -rand.nextDouble(), (rand.nextDouble() - 0.5D) * 100.0D);
-		}
 	}
 
 	private void explode()
 	{
 		Blocks.obsidian.setResistance(5.0F);
 		float var0 = 20.0F;
-		worldObj.createExplosion((Entity)null, posX, posY, posZ, var0, true);
-		worldObj.createExplosion((Entity)null, posX, posY, posZ, var0, true);
+		ExplosionUtil.newODBExplosion(worldObj, (Entity)null, posX, posY, posZ, var0, 32, false, true);
+		ExplosionUtil.newODBExplosion(worldObj, (Entity)null, posX, posY, posZ, var0, 32, false, true);
 		Blocks.obsidian.setResistance(2000.0F);
 	}
 
-	/**
-	 * (abstract) Protected helper method to write subclass entity data to NBT.
-	 */
 	@Override
 	protected void writeEntityToNBT(NBTTagCompound par1NBTTagCompound)
 	{
 		par1NBTTagCompound.setByte("Fuse", (byte)fuse);
 	}
 
-	/**
-	 * (abstract) Protected helper method to read subclass entity data from NBT.
-	 */
 	@Override
 	protected void readEntityFromNBT(NBTTagCompound par1NBTTagCompound)
 	{
@@ -149,5 +125,13 @@ public class EntityODBcPrimed extends Entity
 	public float getShadowSize()
 	{
 		return 0.0F;
+	}
+
+	/**
+	 * returns null or the entityliving it was placed or ignited by
+	 */
+	public EntityLivingBase getODBCPlacedBy()
+	{
+		return odbcPlacedBy;
 	}
 }

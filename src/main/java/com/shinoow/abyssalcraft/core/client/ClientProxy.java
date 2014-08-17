@@ -17,6 +17,7 @@ package com.shinoow.abyssalcraft.core.client;
 
 import net.minecraft.entity.player.EntityPlayer;
 
+import com.shinoow.abyssalcraft.core.Core;
 import com.shinoow.abyssalcraft.core.client.render.RenderPlayerAC;
 import com.shinoow.abyssalcraft.core.common.CommonProxy;
 
@@ -29,6 +30,7 @@ public class ClientProxy extends CommonProxy {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void registerRenderThings(){
-		RenderingRegistry.registerEntityRenderingHandler(EntityPlayer.class, new RenderPlayerAC());
+		if(Core.canRenderStarspawn == true)
+			RenderingRegistry.registerEntityRenderingHandler(EntityPlayer.class, new RenderPlayerAC());
 	}
 }

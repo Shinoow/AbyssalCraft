@@ -15,75 +15,51 @@
  */
 package com.shinoow.abyssalcraft.common.world;
 
-import static net.minecraftforge.event.terraingen.InitMapGenEvent.EventType.CAVE;
-import static net.minecraftforge.event.terraingen.InitMapGenEvent.EventType.MINESHAFT;
-import static net.minecraftforge.event.terraingen.InitMapGenEvent.EventType.NETHER_CAVE;
-import static net.minecraftforge.event.terraingen.InitMapGenEvent.EventType.RAVINE;
-import static net.minecraftforge.event.terraingen.InitMapGenEvent.EventType.SCATTERED_FEATURE;
-import static net.minecraftforge.event.terraingen.PopulateChunkEvent.Populate.EventType.LAVA;
-import static net.minecraftforge.event.terraingen.PopulateChunkEvent.Populate.EventType.NETHER_LAVA;
+import static net.minecraftforge.event.terraingen.InitMapGenEvent.EventType.*;
+import static net.minecraftforge.event.terraingen.PopulateChunkEvent.Populate.EventType.*;
 
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockFalling;
+import net.minecraft.block.*;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.init.Blocks;
-import net.minecraft.util.IProgressUpdate;
-import net.minecraft.util.MathHelper;
-import net.minecraft.world.ChunkPosition;
-import net.minecraft.world.World;
-import net.minecraft.world.WorldType;
+import net.minecraft.util.*;
+import net.minecraft.world.*;
 import net.minecraft.world.biome.BiomeGenBase;
-import net.minecraft.world.chunk.Chunk;
-import net.minecraft.world.chunk.IChunkProvider;
-import net.minecraft.world.gen.MapGenBase;
-import net.minecraft.world.gen.MapGenCaves;
-import net.minecraft.world.gen.MapGenCavesHell;
-import net.minecraft.world.gen.MapGenRavine;
-import net.minecraft.world.gen.NoiseGenerator;
-import net.minecraft.world.gen.NoiseGeneratorOctaves;
-import net.minecraft.world.gen.NoiseGeneratorPerlin;
+import net.minecraft.world.chunk.*;
+import net.minecraft.world.gen.*;
 import net.minecraft.world.gen.feature.WorldGenHellLava;
 import net.minecraft.world.gen.structure.MapGenScatteredFeature;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.event.terraingen.ChunkProviderEvent;
-import net.minecraftforge.event.terraingen.PopulateChunkEvent;
-import net.minecraftforge.event.terraingen.TerrainGen;
+import net.minecraftforge.event.terraingen.*;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
-import com.shinoow.abyssalcraft.common.structures.dreadlands.mineshaft.MapGenDreadlandsMineA;
-import com.shinoow.abyssalcraft.common.structures.dreadlands.mineshaft.MapGenDreadlandsMineB;
-import com.shinoow.abyssalcraft.common.structures.dreadlands.mineshaft.MapGenDreadlandsMineC;
+import com.shinoow.abyssalcraft.common.structures.dreadlands.mineshaft.MapGenDreadlandsMine;
 
 import cpw.mods.fml.common.eventhandler.Event.Result;
 
-public class ChunkProviderDreadlands implements IChunkProvider
-{
+public class ChunkProviderDreadlands implements IChunkProvider {
 
 	private Random rand;
 
-	private NoiseGeneratorOctaves field_147431_j;
-	private NoiseGeneratorOctaves field_147432_k;
-	private NoiseGeneratorOctaves field_147429_l;
-	private NoiseGeneratorPerlin field_147430_m;
+	private NoiseGeneratorOctaves noiseGen1;
+	private NoiseGeneratorOctaves noiseGen2;
+	private NoiseGeneratorOctaves noiseGen3;
+	private NoiseGeneratorPerlin noiseGen4;
 	public NoiseGeneratorOctaves noiseGen5;
 	public NoiseGeneratorOctaves noiseGen6;
 
 	/** Reference to the World object. */
 	private World worldObj;
 	private final boolean mapFeaturesEnabled;
-	private WorldType field_147435_p;
+	private WorldType worldType;
 	private final double[] field_147434_q;
 	private final float[] parabolicField;
 	private double[] stoneNoise = new double[256];
 	private MapGenBase caveGenerator = new MapGenCaves();
 	private MapGenBase netherCaveGenerator = new MapGenCavesHell();
 
-	private MapGenDreadlandsMineA dmGeneratorA = new MapGenDreadlandsMineA();
-	private MapGenDreadlandsMineB dmGeneratorB = new MapGenDreadlandsMineB();
-	private MapGenDreadlandsMineC dmGeneratorC = new MapGenDreadlandsMineC();
+	private MapGenDreadlandsMine dmGenerator = new MapGenDreadlandsMine();
 	private MapGenScatteredFeature scatteredFeatureGenerator = new MapGenScatteredFeature();
 
 	/** Holds ravine generator */
@@ -92,17 +68,15 @@ public class ChunkProviderDreadlands implements IChunkProvider
 	/** The biomes that are used to generate the chunk */
 	private BiomeGenBase[] biomesForGeneration;
 
-	double[] field_147427_d;
-	double[] field_147428_e;
-	double[] field_147425_f;
-	double[] field_147426_g;
+	double[] doubleArray1;
+	double[] doubleArray2;
+	double[] doubleArray3;
+	double[] doubleArray4;
 	int[][] field_73219_j = new int[32][32];
 
 	{
 		caveGenerator = TerrainGen.getModdedMapGen(caveGenerator, CAVE);
-		dmGeneratorA = (MapGenDreadlandsMineA) TerrainGen.getModdedMapGen(dmGeneratorA, MINESHAFT);
-		dmGeneratorB = (MapGenDreadlandsMineB) TerrainGen.getModdedMapGen(dmGeneratorB, MINESHAFT);
-		dmGeneratorC = (MapGenDreadlandsMineC) TerrainGen.getModdedMapGen(dmGeneratorC, MINESHAFT);
+		dmGenerator = (MapGenDreadlandsMine) TerrainGen.getModdedMapGen(dmGenerator, MINESHAFT);
 		scatteredFeatureGenerator = (MapGenScatteredFeature) TerrainGen.getModdedMapGen(scatteredFeatureGenerator, SCATTERED_FEATURE);
 		ravineGenerator = TerrainGen.getModdedMapGen(ravineGenerator, RAVINE);
 		netherCaveGenerator = TerrainGen.getModdedMapGen(netherCaveGenerator, NETHER_CAVE);
@@ -112,41 +86,39 @@ public class ChunkProviderDreadlands implements IChunkProvider
 	{
 		worldObj = par1World;
 		mapFeaturesEnabled = par4;
-		field_147435_p = par1World.getWorldInfo().getTerrainType();
+		worldType = par1World.getWorldInfo().getTerrainType();
 		rand = new Random(par2);
-		field_147431_j = new NoiseGeneratorOctaves(rand, 16);
-		field_147432_k = new NoiseGeneratorOctaves(rand, 16);
-		field_147429_l = new NoiseGeneratorOctaves(rand, 8);
-		field_147430_m = new NoiseGeneratorPerlin(rand, 4);
+		noiseGen1 = new NoiseGeneratorOctaves(rand, 16);
+		noiseGen2 = new NoiseGeneratorOctaves(rand, 16);
+		noiseGen3 = new NoiseGeneratorOctaves(rand, 8);
+		noiseGen4 = new NoiseGeneratorPerlin(rand, 4);
 		noiseGen5 = new NoiseGeneratorOctaves(rand, 10);
 		noiseGen6 = new NoiseGeneratorOctaves(rand, 16);
 		field_147434_q = new double[825];
 		parabolicField = new float[25];
 
 		for (int j = -2; j <= 2; ++j)
-		{
 			for (int k = -2; k <= 2; ++k)
 			{
 				float f = 10.0F / MathHelper.sqrt_float(j * j + k * k + 0.2F);
 				parabolicField[j + 2 + (k + 2) * 5] = f;
 			}
-		}
 
-		NoiseGenerator[] noiseGens = {field_147431_j, field_147432_k, field_147429_l, field_147430_m, noiseGen5, noiseGen6};
+		NoiseGenerator[] noiseGens = {noiseGen1, noiseGen2, noiseGen3, noiseGen4, noiseGen5, noiseGen6};
 		noiseGens = TerrainGen.getModdedNoiseGenerators(par1World, rand, noiseGens);
-		field_147431_j = (NoiseGeneratorOctaves)noiseGens[0];
-		field_147432_k = (NoiseGeneratorOctaves)noiseGens[1];
-		field_147429_l = (NoiseGeneratorOctaves)noiseGens[2];
-		field_147430_m = (NoiseGeneratorPerlin)noiseGens[3];
+		noiseGen1 = (NoiseGeneratorOctaves)noiseGens[0];
+		noiseGen2 = (NoiseGeneratorOctaves)noiseGens[1];
+		noiseGen3 = (NoiseGeneratorOctaves)noiseGens[2];
+		noiseGen4 = (NoiseGeneratorPerlin)noiseGens[3];
 		noiseGen5 = (NoiseGeneratorOctaves)noiseGens[4];
 		noiseGen6 = (NoiseGeneratorOctaves)noiseGens[5];
 	}
 
-	public void func_147424_a(int p_147424_1_, int p_147424_2_, Block[] p_147424_3_)
+	public void generateTerrain(int par1, int par2, Block[] par3BlockArray)
 	{
 		byte b0 = 63;
-		biomesForGeneration = worldObj.getWorldChunkManager().getBiomesForGeneration(biomesForGeneration, p_147424_1_ * 4 - 2, p_147424_2_ * 4 - 2, 10, 10);
-		func_147423_a(p_147424_1_ * 4, 0, p_147424_2_ * 4);
+		biomesForGeneration = worldObj.getWorldChunkManager().getBiomesForGeneration(biomesForGeneration, par1 * 4 - 2, par2 * 4 - 2, 10, 10);
+		generateNoise(par1 * 4, 0, par2 * 4);
 
 		for (int k = 0; k < 4; ++k)
 		{
@@ -190,20 +162,12 @@ public class ChunkProviderDreadlands implements IChunkProvider
 							double d15 = d10 - d16;
 
 							for (int k3 = 0; k3 < 4; ++k3)
-							{
 								if ((d15 += d16) > 0.0D)
-								{
-									p_147424_3_[j3 += short1] = AbyssalCraft.dreadstone;
-								}
+									par3BlockArray[j3 += short1] = AbyssalCraft.dreadstone;
 								else if (k2 * 8 + l2 < b0)
-								{
-									p_147424_3_[j3 += short1] = AbyssalCraft.dreadgrass;
-								}
+									par3BlockArray[j3 += short1] = AbyssalCraft.dreadgrass;
 								else
-								{
-									p_147424_3_[j3 += short1] = null;
-								}
-							}
+									par3BlockArray[j3 += short1] = null;
 
 							d10 += d12;
 							d11 += d13;
@@ -219,23 +183,21 @@ public class ChunkProviderDreadlands implements IChunkProvider
 		}
 	}
 
-	public void replaceBlocksForBiome(int p_147422_1_, int p_147422_2_, Block[] p_147422_3_, byte[] p_147422_4_, BiomeGenBase[] p_147422_5_)
+	public void replaceBlocksForBiome(int par1, int par2, Block[] par3BlockArray, byte[] par4ByteArray, BiomeGenBase[] par5BiomeArray)
 	{
-		ChunkProviderEvent.ReplaceBiomeBlocks event = new ChunkProviderEvent.ReplaceBiomeBlocks(this, p_147422_1_, p_147422_2_, p_147422_3_, p_147422_5_);
+		ChunkProviderEvent.ReplaceBiomeBlocks event = new ChunkProviderEvent.ReplaceBiomeBlocks(this, par1, par2, par3BlockArray, par5BiomeArray);
 		MinecraftForge.EVENT_BUS.post(event);
 		if (event.getResult() == Result.DENY) return;
 
 		double d0 = 0.03125D;
-		stoneNoise = field_147430_m.func_151599_a(stoneNoise, p_147422_1_ * 16, p_147422_2_ * 16, 16, 16, d0 * 2.0D, d0 * 2.0D, 1.0D);
+		stoneNoise = noiseGen4.func_151599_a(stoneNoise, par1 * 16, par2 * 16, 16, 16, d0 * 2.0D, d0 * 2.0D, 1.0D);
 
 		for (int k = 0; k < 16; ++k)
-		{
 			for (int l = 0; l < 16; ++l)
 			{
-				BiomeGenBase biomegenbase = p_147422_5_[l + k * 16];
-				biomegenbase.genTerrainBlocks(worldObj, rand, p_147422_3_, p_147422_4_, p_147422_1_ * 16 + k, p_147422_2_ * 16 + l, stoneNoise[l + k * 16]);
+				BiomeGenBase biomegenbase = par5BiomeArray[l + k * 16];
+				biomegenbase.genTerrainBlocks(worldObj, rand, par3BlockArray, par4ByteArray, par1 * 16 + k, par2 * 16 + l, stoneNoise[l + k * 16]);
 			}
-		}
 	}
 
 	/**
@@ -257,7 +219,7 @@ public class ChunkProviderDreadlands implements IChunkProvider
 		rand.setSeed(par1 * 341873128712L + par2 * 132897987541L);
 		Block[] ablock = new Block[65536];
 		byte[] abyte = new byte[65536];
-		func_147424_a(par1, par2, ablock);
+		generateTerrain(par1, par2, ablock);
 		biomesForGeneration = worldObj.getWorldChunkManager().loadBlockGeneratorData(biomesForGeneration, par1 * 16, par2 * 16, 16, 16);
 		replaceBlocksForBiome(par1, par2, ablock, abyte, biomesForGeneration);
 		caveGenerator.func_151539_a(this, worldObj, par1, par2, ablock);
@@ -266,9 +228,7 @@ public class ChunkProviderDreadlands implements IChunkProvider
 
 		if (mapFeaturesEnabled)
 		{
-			dmGeneratorA.func_151539_a(this, worldObj, par1, par2, ablock);
-			dmGeneratorB.func_151539_a(this, worldObj, par1, par2, ablock);
-			dmGeneratorC.func_151539_a(this, worldObj, par1, par2, ablock);
+			dmGenerator.func_151539_a(this, worldObj, par1, par2, ablock);
 			scatteredFeatureGenerator.func_151539_a(this, worldObj, par1, par2, ablock);
 		}
 
@@ -276,24 +236,21 @@ public class ChunkProviderDreadlands implements IChunkProvider
 		byte[] abyte1 = chunk.getBiomeArray();
 
 		for (int k = 0; k < abyte1.length; ++k)
-		{
 			abyte1[k] = (byte)biomesForGeneration[k].biomeID;
-		}
 
 		chunk.generateSkylightMap();
 		return chunk;
 	}
 
-	private void func_147423_a(int p_147423_1_, int p_147423_2_, int p_147423_3_)
+	private void generateNoise(int par1, int par2, int par3)
 	{
-		field_147426_g = noiseGen6.generateNoiseOctaves(field_147426_g, p_147423_1_, p_147423_3_, 5, 5, 200.0D, 200.0D, 0.5D);
-		field_147427_d = field_147429_l.generateNoiseOctaves(field_147427_d, p_147423_1_, p_147423_2_, p_147423_3_, 5, 33, 5, 8.555150000000001D, 4.277575000000001D, 8.555150000000001D);
-		field_147428_e = field_147431_j.generateNoiseOctaves(field_147428_e, p_147423_1_, p_147423_2_, p_147423_3_, 5, 33, 5, 684.412D, 684.412D, 684.412D);
-		field_147425_f = field_147432_k.generateNoiseOctaves(field_147425_f, p_147423_1_, p_147423_2_, p_147423_3_, 5, 33, 5, 684.412D, 684.412D, 684.412D);
+		doubleArray4 = noiseGen6.generateNoiseOctaves(doubleArray4, par1, par3, 5, 5, 200.0D, 200.0D, 0.5D);
+		doubleArray1 = noiseGen3.generateNoiseOctaves(doubleArray1, par1, par2, par3, 5, 33, 5, 8.555150000000001D, 4.277575000000001D, 8.555150000000001D);
+		doubleArray2 = noiseGen1.generateNoiseOctaves(doubleArray2, par1, par2, par3, 5, 33, 5, 684.412D, 684.412D, 684.412D);
+		doubleArray3 = noiseGen2.generateNoiseOctaves(doubleArray3, par1, par2, par3, 5, 33, 5, 684.412D, 684.412D, 684.412D);
 		int l = 0;
 		int i1 = 0;
 		for (int j1 = 0; j1 < 5; ++j1)
-		{
 			for (int k1 = 0; k1 < 5; ++k1)
 			{
 				float f = 0.0F;
@@ -303,14 +260,13 @@ public class ChunkProviderDreadlands implements IChunkProvider
 				BiomeGenBase biomegenbase = biomesForGeneration[j1 + 2 + (k1 + 2) * 10];
 
 				for (int l1 = -b0; l1 <= b0; ++l1)
-				{
 					for (int i2 = -b0; i2 <= b0; ++i2)
 					{
 						BiomeGenBase biomegenbase1 = biomesForGeneration[j1 + l1 + 2 + (k1 + i2 + 2) * 10];
 						float f3 = biomegenbase1.rootHeight;
 						float f4 = biomegenbase1.heightVariation;
 
-						if (field_147435_p == WorldType.AMPLIFIED && f3 > 0.0F)
+						if (worldType == WorldType.AMPLIFIED && f3 > 0.0F)
 						{
 							f3 = 1.0F + f3 * 2.0F;
 							f4 = 1.0F + f4 * 4.0F;
@@ -319,26 +275,21 @@ public class ChunkProviderDreadlands implements IChunkProvider
 						float f5 = parabolicField[l1 + 2 + (i2 + 2) * 5] / (f3 + 2.0F);
 
 						if (biomegenbase1.rootHeight > biomegenbase.rootHeight)
-						{
 							f5 /= 2.0F;
-						}
 
 						f += f4 * f5;
 						f1 += f3 * f5;
 						f2 += f5;
 					}
-				}
 
 				f /= f2;
 				f1 /= f2;
 				f = f * 0.9F + 0.1F;
 				f1 = (f1 * 4.0F - 1.0F) / 8.0F;
-				double d13 = field_147426_g[i1] / 8000.0D;
+				double d13 = doubleArray4[i1] / 8000.0D;
 
 				if (d13 < 0.0D)
-				{
 					d13 = -d13 * 0.3D;
-				}
 
 				d13 = d13 * 3.0D - 2.0D;
 
@@ -347,9 +298,7 @@ public class ChunkProviderDreadlands implements IChunkProvider
 					d13 /= 2.0D;
 
 					if (d13 < -1.0D)
-					{
 						d13 = -1.0D;
-					}
 
 					d13 /= 1.4D;
 					d13 /= 2.0D;
@@ -357,9 +306,7 @@ public class ChunkProviderDreadlands implements IChunkProvider
 				else
 				{
 					if (d13 > 1.0D)
-					{
 						d13 = 1.0D;
-					}
 
 					d13 /= 8.0D;
 				}
@@ -376,13 +323,11 @@ public class ChunkProviderDreadlands implements IChunkProvider
 					double d6 = (j2 - d5) * 12.0D * 128.0D / 256.0D / d14;
 
 					if (d6 < 0.0D)
-					{
 						d6 *= 4.0D;
-					}
 
-					double d7 = field_147428_e[l] / 512.0D;
-					double d8 = field_147425_f[l] / 512.0D;
-					double d9 = (field_147427_d[l] / 10.0D + 1.0D) / 2.0D;
+					double d7 = doubleArray2[l] / 512.0D;
+					double d8 = doubleArray3[l] / 512.0D;
+					double d9 = (doubleArray1[l] / 10.0D + 1.0D) / 2.0D;
 					double d10 = MathHelper.denormalizeClamp(d7, d8, d9) - d6;
 
 					if (j2 > 29)
@@ -395,7 +340,6 @@ public class ChunkProviderDreadlands implements IChunkProvider
 					++l;
 				}
 			}
-		}
 	}
 
 	/**
@@ -427,9 +371,7 @@ public class ChunkProviderDreadlands implements IChunkProvider
 
 		if (mapFeaturesEnabled)
 		{
-			dmGeneratorA.generateStructuresInChunk(worldObj, rand, par2, par3);
-			dmGeneratorB.generateStructuresInChunk(worldObj, rand, par2, par3);
-			dmGeneratorC.generateStructuresInChunk(worldObj, rand, par2, par3);
+			dmGenerator.generateStructuresInChunk(worldObj, rand, par2, par3);
 			scatteredFeatureGenerator.generateStructuresInChunk(worldObj, rand, par2, par3);
 		}
 
@@ -531,9 +473,7 @@ public class ChunkProviderDreadlands implements IChunkProvider
 	{
 		if (mapFeaturesEnabled)
 		{
-			dmGeneratorA.func_151539_a(this, worldObj, par1, par2, (Block[])null);
-			dmGeneratorB.func_151539_a(this, worldObj, par1, par2, (Block[])null);
-			dmGeneratorC.func_151539_a(this, worldObj, par1, par2, (Block[])null);
+			dmGenerator.func_151539_a(this, worldObj, par1, par2, (Block[])null);
 			scatteredFeatureGenerator.func_151539_a(this, worldObj, par1, par2, (Block[])null);
 		}
 	}

@@ -75,19 +75,9 @@ public class ItemAbyssalniteSword extends ItemSword {
 	public boolean onBlockDestroyed(ItemStack par1ItemStack, World par2World, Block par3, int par4, int par5, int par6, EntityLivingBase par7EntityLivingBase)
 	{
 		if (par3.getBlockHardness(par2World, par4, par5, par6) != 0.0D)
-		{
 			par1ItemStack.damageItem(1, par7EntityLivingBase);
-		}
 
 		return true;
-	}
-
-	/**
-	 * Returns the damage against a given entity.
-	 */
-	public float func_82803_g()
-	{
-		return toolMaterial.getDamageVsEntity();
 	}
 
 	/**

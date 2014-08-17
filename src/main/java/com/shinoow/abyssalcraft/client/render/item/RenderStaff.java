@@ -25,11 +25,11 @@ import com.shinoow.abyssalcraft.client.model.item.ModelStaff;
 
 import cpw.mods.fml.client.FMLClientHandler;
 
-public class RenderStaff implements IItemRenderer
-{
+public class RenderStaff implements IItemRenderer {
+
 	protected ModelStaff model;
 
-	ResourceLocation resource = new ResourceLocation("/assets/abyssalcraft/textures/model/staff.png");
+	ResourceLocation resource = new ResourceLocation("abyssalcraft:textures/model/staff.png");
 
 	public RenderStaff()
 	{
@@ -39,38 +39,69 @@ public class RenderStaff implements IItemRenderer
 	@Override
 	public boolean handleRenderType(ItemStack item, ItemRenderType type) {
 
-		switch(type)
-		{
-		case EQUIPPED: return true;
-		default: return false;
-		}
+		return true;
 	}
 
 	@Override
-	public boolean shouldUseRenderHelper(ItemRenderType type, ItemStack item,
-			ItemRendererHelper helper) {
+	public boolean shouldUseRenderHelper(ItemRenderType type, ItemStack item, ItemRendererHelper helper) {
+
+		switch (type) {
+		case INVENTORY:
+			return true;
+		default:
+			break;
+		}
 		return false;
 	}
 
 	@Override
 	public void renderItem(ItemRenderType type, ItemStack item, Object... data) {
 
-		switch(type)
-		{
-		case EQUIPPED:
+		if(type == ItemRenderType.EQUIPPED_FIRST_PERSON || type == ItemRenderType.EQUIPPED)
 		{
 			GL11.glPushMatrix();
 
 			FMLClientHandler.instance().getClient().renderEngine.bindTexture(resource);
 
+			GL11.glRotatef(170F, 1.0F, 0.4F, -0.5F);
+
+			if(type == ItemRenderType.EQUIPPED)
+				GL11.glTranslatef(0.41F, -0.4F, -0.55F);
+			else
+				GL11.glTranslatef(0.61F, -0.4F, -0.55F);
+
+			float scale = 1.1F;
+			GL11.glScalef(scale, scale, scale);
+
 			model.render((Entity)data[1], 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0625F);
 
 			GL11.glPopMatrix();
 		}
-		default:
-			break;
+		if(type == ItemRenderType.ENTITY){
+
+			GL11.glPushMatrix();
+			float scale = 1.5F;
+			GL11.glScalef(scale, scale, scale);
+			FMLClientHandler.instance().getClient().renderEngine.bindTexture(resource);
+			GL11.glRotatef(0F, 1.0f, 0.0f, 0.0f);
+			GL11.glRotatef(0F, 0.0f, 1.0f, 0.0f);
+			GL11.glRotatef(90F, 0.0f, 0.0f, 1.0f);
+			GL11.glTranslatef(0.1F, -0.5F, 0.1F);
+			model.render((Entity) data[1], 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0625F);
+			GL11.glPopMatrix();
+
 		}
+		if(type == ItemRenderType.INVENTORY){
+			GL11.glPushMatrix();
+			float scale = 1.0F;
+			GL11.glScalef(scale, scale, scale);
+			FMLClientHandler.instance().getClient().renderEngine.bindTexture(resource);
 
+			GL11.glRotatef(80F, 1.0f, 0.0f, 0.0f);
+			GL11.glRotatef(-80F, 0.0f, 1.0f, 0.0f);
+			GL11.glTranslatef(0.0F, 0.0F, 0F);
+			model.render(0.0625F);
+			GL11.glPopMatrix();
+		}
 	}
-
 }

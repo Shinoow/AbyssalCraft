@@ -32,9 +32,7 @@ public class ParticleEffects {
 			int var14 = mc.gameSettings.particleSetting;
 
 			if (var14 == 1 && theWorld.rand.nextInt(3) == 0)
-			{
 				var14 = 2;
-			}
 
 			double var15 = mc.renderViewEntity.posX - par2;
 			double var17 = mc.renderViewEntity.posY - par4;
@@ -51,6 +49,7 @@ public class ParticleEffects {
 				if (particleName.equals("CorBlood"))
 				{
 					var21 = new ACParticleFX(theWorld, par2, par4, par6, (float)par8, (float)par10, (float)par12);
+					var21.setRBGColorF(0, 255, 255);
 				}
 
 				mc.effectRenderer.addEffect(var21);

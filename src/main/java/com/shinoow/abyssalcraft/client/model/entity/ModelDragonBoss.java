@@ -13,42 +13,19 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
-public class ModelDragonBoss extends ModelBase
-{
-	/** The head Model renderer of the dragon */
+public class ModelDragonBoss extends ModelBase {
+
 	private ModelRenderer head;
-
-	/** The neck Model renderer of the dragon */
 	private ModelRenderer neck;
-
-	/** The jaw Model renderer of the dragon */
 	private ModelRenderer jaw;
-
-	/** The body Model renderer of the dragon */
 	private ModelRenderer body;
-
-	/** The rear leg Model renderer of the dragon */
 	private ModelRenderer rearLeg;
-
-	/** The front leg Model renderer of the dragon */
 	private ModelRenderer frontLeg;
-
-	/** The rear leg tip Model renderer of the dragon */
 	private ModelRenderer rearLegTip;
-
-	/** The front leg tip Model renderer of the dragon */
 	private ModelRenderer frontLegTip;
-
-	/** The rear foot Model renderer of the dragon */
 	private ModelRenderer rearFoot;
-
-	/** The front foot Model renderer of the dragon */
 	private ModelRenderer frontFoot;
-
-	/** The wing Model renderer of the dragon */
 	private ModelRenderer wing;
-
-	/** The wing tip Model renderer of the dragon */
 	private ModelRenderer wingTip;
 	private float partialTicks;
 
@@ -131,19 +108,12 @@ public class ModelDragonBoss extends ModelBase
 		rearLegTip.addChild(rearFoot);
 	}
 
-	/**
-	 * Used for easily adding entity-dependent animations. The second and third float params here are the same second
-	 * and third as in the setRotationAngles method.
-	 */
 	@Override
 	public void setLivingAnimations(EntityLivingBase par1EntityLivingBase, float par2, float par3, float par4)
 	{
 		partialTicks = par4;
 	}
 
-	/**
-	 * Sets the models various rotation angles then renders the model.
-	 */
 	@Override
 	public void render(Entity par1Entity, float par2, float par3, float par4, float par5, float par6, float par7)
 	{
@@ -217,9 +187,7 @@ public class ModelDragonBoss extends ModelBase
 			GL11.glScalef(-1.0F, 1.0F, 1.0F);
 
 			if (j == 0)
-			{
 				GL11.glCullFace(GL11.GL_FRONT);
-			}
 		}
 
 		GL11.glPopMatrix();
@@ -259,14 +227,10 @@ public class ModelDragonBoss extends ModelBase
 	private float updateRotations(double par1)
 	{
 		while (par1 >= 180.0D)
-		{
 			par1 -= 360.0D;
-		}
 
 		while (par1 < -180.0D)
-		{
 			par1 += 360.0D;
-		}
 
 		return (float)par1;
 	}

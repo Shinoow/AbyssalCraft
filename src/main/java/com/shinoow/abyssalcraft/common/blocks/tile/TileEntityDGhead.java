@@ -26,9 +26,15 @@ public class TileEntityDGhead extends TileEntity {
 	public int direction;
 
 	@Override
+	public boolean canUpdate()
+	{
+		return false;
+	}
+
+	@Override
 	public void readFromNBT(NBTTagCompound nbttagcompound)
 	{
-		super.readFromNBT(nbttagcompound);  
+		super.readFromNBT(nbttagcompound);
 		direction = nbttagcompound.getInteger("Dir");
 	}
 
@@ -54,11 +60,11 @@ public class TileEntityDGhead extends TileEntity {
 
 	public int getDirection()
 	{
-		return this.direction;
+		return direction;
 	}
 
 	public void setDirection(int par1)
 	{
-		this.direction = par1;
+		direction = par1;
 	}
 }

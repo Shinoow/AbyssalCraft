@@ -36,7 +36,7 @@ public class CommonProxy implements IGuiHandler {
 	public void registerRenderThings() {
 	}
 
-	public void PreInit() {	
+	public void PreInit() {
 	}
 
 	public void Init() {

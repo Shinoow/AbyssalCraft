@@ -17,44 +17,24 @@ package com.shinoow.abyssalcraft.common.entity;
 
 import java.util.Calendar;
 
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.EnumCreatureAttribute;
-import net.minecraft.entity.IEntityLivingData;
-import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.EntityAIAttackOnCollide;
-import net.minecraft.entity.ai.EntityAIFleeSun;
-import net.minecraft.entity.ai.EntityAIHurtByTarget;
-import net.minecraft.entity.ai.EntityAILookIdle;
-import net.minecraft.entity.ai.EntityAIMoveTowardsRestriction;
-import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
-import net.minecraft.entity.ai.EntityAISwimming;
-import net.minecraft.entity.ai.EntityAIWander;
-import net.minecraft.entity.ai.EntityAIWatchClosest;
-import net.minecraft.entity.monster.EntitySkeleton;
-import net.minecraft.entity.monster.EntityZombie;
+import net.minecraft.block.Block;
+import net.minecraft.entity.*;
+import net.minecraft.entity.ai.*;
+import net.minecraft.entity.monster.*;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
+import net.minecraft.init.*;
+import net.minecraft.item.*;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.PotionEffect;
-import net.minecraft.util.DamageSource;
-import net.minecraft.util.MathHelper;
-import net.minecraft.util.StatCollector;
+import net.minecraft.util.*;
 import net.minecraft.world.World;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.core.api.entity.CoraliumMob;
 
-public class EntityDepthsghoul extends CoraliumMob
-{
+public class EntityDepthsghoul extends CoraliumMob {
 
-	private EntityAINearestAttackableTarget player = new EntityAINearestAttackableTarget(this, EntityPlayer.class, 0, true);
-
-	public EntityDepthsghoul(World par1World)
-	{
+	public EntityDepthsghoul(World par1World) {
 		super(par1World);
 		setSize(1.5F, 3.0F);
 		tasks.addTask(0, new EntityAISwimming(this));
@@ -68,63 +48,49 @@ public class EntityDepthsghoul extends CoraliumMob
 		tasks.addTask(8, new EntityAIWatchClosest(this, EntityDepthsZombie.class, 6.0F));
 		tasks.addTask(9, new EntityAIWatchClosest(this, EntityZombie.class, 6.0F));
 		tasks.addTask(10, new EntityAIWatchClosest(this, EntitySkeleton.class, 6.0F));
+		tasks.addTask(11, new EntityAIWatchClosest(this, EntitySkeletonGoliath.class, 6.0F));
 		targetTasks.addTask(0, new EntityAIHurtByTarget(this, false));
-		targetTasks.addTask(1, player);
+
+		EntityPlayer entityPlayer = par1World.getClosestPlayerToEntity(this, 30D);
+		if(entityPlayer !=null && !entityPlayer.getCommandSenderName().equals("shinoow") ||
+				entityPlayer !=null && !entityPlayer.getCommandSenderName().equals("Oblivionaire"))
+			targetTasks.addTask(1, new EntityAINearestAttackableTarget(this, EntityPlayer.class, 0, true));
 	}
 
 	@Override
-	protected void applyEntityAttributes()
-	{
+	protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
-		// Max Health - default 20.0D - min 0.0D - max Double.MAX_VALUE
 		getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(30.0D);
-		// Follow Range - default 32.0D - min 0.0D - max 2048.0D
 		getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(64.0D);
-		// Knockback Resistance - default 0.0D - min 0.0D - max 1.0D
 		getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setBaseValue(0.3D);
-		// Movement Speed - default 0.699D - min 0.0D - max Double.MAX_VALUE
 		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.699D);
-		// Attack Damage - default 2.0D - min 0.0D - max Doubt.MAX_VALUE
 		getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(5.0D);
+
 		Calendar calendar = worldObj.getCurrentDate();
 
-		if (calendar.get(2) + 1 == 10 && calendar.get(5) == 31 && rand.nextFloat() < 0.25F)
-		{
-			getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(7.5D);
-		}
-
-		switch(getGhoulType())
-		{
+		switch(getGhoulType()){
 		case 0:
-			getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(30.0D);
-			getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(5.0D);
-			if (calendar.get(2) + 1 == 10 && calendar.get(5) == 31 && rand.nextFloat() < 0.25F)
-			{
-				getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(7.5D);
+			//TODO: Find a good way to tweak health and damage relevant to ghoul type
+			if (calendar.get(2) + 1 == 10 && calendar.get(5) == 31 && rand.nextFloat() < 0.25F){
+				//TODO: Find a good way to implement the damage boost
 			}
 			break;
 		case 1:
-			getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(50.0D);
-			getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(6.0D);
-			if (calendar.get(2) + 1 == 10 && calendar.get(5) == 31 && rand.nextFloat() < 0.25F)
-			{
-				getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(9.0D);
+			//TODO: Find a good way to tweak health and damage relevant to ghoul type
+			if (calendar.get(2) + 1 == 10 && calendar.get(5) == 31 && rand.nextFloat() < 0.25F){
+				//TODO: Find a good way to implement the damage boost
 			}
 			break;
 		case 2:
-			getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(60.0D);
-			getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(7.0D);
-			if (calendar.get(2) + 1 == 10 && calendar.get(5) == 31 && rand.nextFloat() < 0.25F)
-			{
-				getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(11.5D);
+			//TODO: Find a good way to tweak health and damage relevant to ghoul type
+			if (calendar.get(2) + 1 == 10 && calendar.get(5) == 31 && rand.nextFloat() < 0.25F){
+				//TODO: Find a good way to implement the damage boost
 			}
 			break;
 		case 3:
-			getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(70.0D);
-			getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(8.0D);
-			if (calendar.get(2) + 1 == 10 && calendar.get(5) == 31 && rand.nextFloat() < 0.25F)
-			{
-				getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(12.0D);
+			//TODO: Find a good way to tweak health and damage relevant to ghoul type
+			if (calendar.get(2) + 1 == 10 && calendar.get(5) == 31 && rand.nextFloat() < 0.25F){
+				//TODO: Find a good way to implement the damage boost
 			}
 		}
 	}
@@ -202,9 +168,7 @@ public class EntityDepthsghoul extends CoraliumMob
 				}
 
 				if (var2)
-				{
 					setFire(8);
-				}
 
 			}
 		}
@@ -243,22 +207,14 @@ public class EntityDepthsghoul extends CoraliumMob
 	public boolean attackEntityAsMob(Entity par1Entity)
 	{
 		if (super.attackEntityAsMob(par1Entity))
-		{
 			if (par1Entity instanceof EntityLivingBase)
-			{
 				if(worldObj.provider.dimensionId == AbyssalCraft.configDimId1)
-				{
 					((EntityLivingBase)par1Entity).addPotionEffect(new PotionEffect(AbyssalCraft.Cplague.id, 200));
-				}
-			}
-		}
 
 		boolean flag = super.attackEntityAsMob(par1Entity);
 
 		if (flag && getHeldItem() == null && isBurning() && rand.nextFloat() < worldObj.difficultySetting.getDifficultyId() * 0.3F)
-		{
 			par1Entity.setFire(2 * worldObj.difficultySetting.getDifficultyId());
-		}
 
 		return flag;
 	}
@@ -335,7 +291,8 @@ public class EntityDepthsghoul extends CoraliumMob
 		return entitysound;
 	}
 
-	protected void playStepSound(int par1, int par2, int par3, int par4)
+	@Override
+	protected void func_145780_a(int par1, int par2, int par3, Block par4)
 	{
 		playSound("mob.zombie.step", 0.15F, 1.0F);
 	}
@@ -366,21 +323,13 @@ public class EntityDepthsghoul extends CoraliumMob
 			break;
 		case 2:
 			if(getGhoulType() == 0)
-			{
 				dropItem(Item.getItemFromBlock(AbyssalCraft.DGhead),1);
-			}
 			else if(getGhoulType() == 1)
-			{
 				dropItem(Item.getItemFromBlock(AbyssalCraft.Phead),1);
-			}
 			else if(getGhoulType() == 2)
-			{
 				dropItem(Item.getItemFromBlock(AbyssalCraft.Whead),1);
-			}
 			else if(getGhoulType() == 3)
-			{
 				dropItem(Item.getItemFromBlock(AbyssalCraft.Ohead),1);
-			}
 		}
 	}
 

@@ -21,12 +21,10 @@ import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
-import net.minecraft.world.gen.feature.WorldGenAbstractTree;
-import net.minecraft.world.gen.feature.WorldGenMinable;
+import net.minecraft.world.gen.feature.*;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
-import com.shinoow.abyssalcraft.common.entity.EntityDepthsZombie;
-import com.shinoow.abyssalcraft.common.entity.EntityDepthsghoul;
+import com.shinoow.abyssalcraft.common.entity.*;
 import com.shinoow.abyssalcraft.common.world.gen.WorldGenAntimatterLake;
 
 import cpw.mods.fml.relauncher.Side;
@@ -75,9 +73,7 @@ public class BiomeGenCorSwamp extends BiomeGenBase {
 			Block var10 = par1World.getBlock(var7, var8, var9);
 
 			if (var10 == Blocks.stone || var10 == Blocks.iron_ore || var10 == Blocks.coal_ore)
-			{
 				par1World.setBlock(var7, var8, var9, AbyssalCraft.Coraliumore);
-			}
 		}
 		for(int rarity = 0; rarity < 3; rarity++)
 		{

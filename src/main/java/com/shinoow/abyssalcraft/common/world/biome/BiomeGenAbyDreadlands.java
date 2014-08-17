@@ -20,12 +20,10 @@ import java.util.Random;
 import net.minecraft.block.Block;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
-import net.minecraft.world.gen.feature.WorldGenMinable;
-import net.minecraft.world.gen.feature.WorldGenerator;
+import net.minecraft.world.gen.feature.*;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
-import com.shinoow.abyssalcraft.common.entity.Entityabygolem;
-import com.shinoow.abyssalcraft.common.entity.Entitydreadgolem;
+import com.shinoow.abyssalcraft.common.entity.*;
 
 public class BiomeGenAbyDreadlands extends BiomeGenBase
 {
@@ -48,8 +46,8 @@ public class BiomeGenAbyDreadlands extends BiomeGenBase
 		theWorldGenerator = new WorldGenMinable(AbyssalCraft.abydreadstone, 96, AbyssalCraft.dreadstone);
 		theSecondWorldGenerator = new WorldGenMinable(AbyssalCraft.abydreadstone, 64, AbyssalCraft.dreadstone);
 		theThirdWorldGenerator = new WorldGenMinable(AbyssalCraft.abydreadstone, 32, AbyssalCraft.dreadstone);
-		spawnableMonsterList.add(new SpawnListEntry(Entitydreadgolem.class, 2, 1, 2));
-		spawnableCreatureList.add(new SpawnListEntry(Entityabygolem.class, 5, 1, 5));
+		spawnableMonsterList.add(new SpawnListEntry(EntityDreadgolem.class, 2, 1, 2));
+		spawnableCreatureList.add(new SpawnListEntry(EntityAbygolem.class, 5, 1, 5));
 	}
 
 	@Override
@@ -69,9 +67,7 @@ public class BiomeGenAbyDreadlands extends BiomeGenBase
 			Block var10 = par1World.getBlock(var7, var8, var9);
 
 			if (var10 == AbyssalCraft.dreadstone)
-			{
 				par1World.setBlock(var7, var8, var9, AbyssalCraft.abydreadore);
-			}
 		}
 		for (var5 = 0; var5 < 7; ++var5)
 		{

@@ -49,9 +49,8 @@ public class Block3DRender implements IItemRenderer {
 
 	@Override
 	public void renderItem(ItemRenderType type, ItemStack item, Object... data) {
-		if (type == IItemRenderer.ItemRenderType.ENTITY) {
+		if (type == IItemRenderer.ItemRenderType.ENTITY)
 			GL11.glTranslatef(-0.5F, 0.0F, -0.5F);
-		}
 		render.renderTileEntityAt(tile, 0.0D, 0.0D, 0.0D, 0.0F);
 	}
 }

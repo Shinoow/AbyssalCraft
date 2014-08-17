@@ -141,9 +141,7 @@ public class ModelAltar extends ModelBase
 		Bowl3.render(f5);
 		Bowl4.render(f5);
 		if(ModelAltar.isActivated = true)
-		{
 			Liquid.render(f5);
-		}
 
 	}
 

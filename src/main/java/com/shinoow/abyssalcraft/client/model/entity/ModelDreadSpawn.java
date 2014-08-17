@@ -1,18 +1,3 @@
-/**AbyssalCraft
- *Copyright 2012-2014 Shinoow
- *
- *Licensed under the Apache License, Version 2.0 (the "License");
- *you may not use this file except in compliance with the License.
- *You may obtain a copy of the License at
- *
- *  http://www.apache.org/licenses/LICENSE-2.0
- *
- *Unless required by applicable law or agreed to in writing, software
- *distributed under the License is distributed on an "AS IS" BASIS,
- *WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *See the License for the specific language governing permissions and
- *limitations under the License.
- */
 package com.shinoow.abyssalcraft.client.model.entity;
 
 import net.minecraft.client.model.ModelBase;
@@ -22,82 +7,48 @@ import net.minecraft.util.MathHelper;
 
 public class ModelDreadSpawn extends ModelBase {
 
-	ModelRenderer Body;
-	ModelRenderer leg1;
-	ModelRenderer leg2;
-	ModelRenderer leg3;
-	ModelRenderer leg4;
-	ModelRenderer leg5;
-	ModelRenderer eye1;
-	ModelRenderer eye2;
-	ModelRenderer eye3;
-	ModelRenderer eye4;
+	ModelRenderer body;
+	ModelRenderer head;
+	ModelRenderer jaw;
+	ModelRenderer thing;
+	ModelRenderer arm;
 
 	public ModelDreadSpawn()
 	{
-		textureWidth = 64;
-		textureHeight = 32;
+		textureWidth = 128;
+		textureHeight = 64;
 
-		Body = new ModelRenderer(this, 0, 0);
-		Body.addBox(0F, 0F, 0F, 3, 3, 3);
-		Body.setRotationPoint(-1F, 21F, -1F);
-		Body.setTextureSize(64, 32);
-		Body.mirror = true;
-		setRotation(Body, 0F, 0F, 0F);
-		leg1 = new ModelRenderer(this, 14, 11);
-		leg1.addBox(0F, -1F, -1F, 5, 2, 2);
-		leg1.setRotationPoint(2F, 22.5F, 0.5F);
-		leg1.setTextureSize(64, 32);
-		leg1.mirror = true;
-		setRotation(leg1, 0F, 0F, 0F);
-		leg2 = new ModelRenderer(this, 22, 0);
-		leg2.addBox(-1F, -1F, 0F, 2, 2, 5);
-		leg2.setRotationPoint(0.5F, 22.5F, 2F);
-		leg2.setTextureSize(64, 32);
-		leg2.mirror = true;
-		setRotation(leg2, 0F, 0F, 0F);
-		leg3 = new ModelRenderer(this, 19, 18);
-		leg3.addBox(-1F, -1F, -5F, 2, 2, 5);
-		leg3.setRotationPoint(0.5F, 22.5F, -1F);
-		leg3.setTextureSize(64, 32);
-		leg3.mirror = true;
-		setRotation(leg3, 0F, 0F, 0F);
-		leg4 = new ModelRenderer(this, 43, 4);
-		leg4.addBox(-5F, -1F, -1F, 5, 2, 2);
-		leg4.setRotationPoint(-1F, 22.5F, 0.5F);
-		leg4.setTextureSize(64, 32);
-		leg4.mirror = true;
-		setRotation(leg4, 0F, 0F, 0F);
-		leg5 = new ModelRenderer(this, 0, 16);
-		leg5.addBox(-1F, -5F, -1F, 2, 5, 2);
-		leg5.setRotationPoint(0.5F, 21F, 0.5F);
-		leg5.setTextureSize(64, 32);
-		leg5.mirror = true;
-		setRotation(leg5, 0F, 0F, 0F);
-		eye1 = new ModelRenderer(this, 34, 12);
-		eye1.addBox(0F, -1.5F, 0F, 3, 3, 3);
-		eye1.setRotationPoint(1F, 22.5F, 1F);
-		eye1.setTextureSize(64, 32);
-		eye1.mirror = true;
-		setRotation(eye1, 0F, 0F, 0F);
-		eye2 = new ModelRenderer(this, 34, 12);
-		eye2.addBox(-3F, -1.5F, -3F, 3, 3, 3);
-		eye2.setRotationPoint(0F, 22.5F, 0F);
-		eye2.setTextureSize(64, 32);
-		eye2.mirror = true;
-		setRotation(eye2, 0F, 0F, 0F);
-		eye3 = new ModelRenderer(this, 34, 12);
-		eye3.addBox(0F, -1.5F, -3F, 3, 3, 3);
-		eye3.setRotationPoint(1F, 22.5F, 0F);
-		eye3.setTextureSize(64, 32);
-		eye3.mirror = true;
-		setRotation(eye3, 0F, 0F, 0F);
-		eye4 = new ModelRenderer(this, 34, 12);
-		eye4.addBox(-3F, -1.5F, 0F, 3, 3, 3);
-		eye4.setRotationPoint(0F, 22.5F, 1F);
-		eye4.setTextureSize(64, 32);
-		eye4.mirror = true;
-		setRotation(eye4, 0F, 0F, 0F);
+		body = new ModelRenderer(this, 52, 48);
+		body.addBox(-3F, -3F, -3F, 6, 5, 6);
+		body.setRotationPoint(0F, 22F, 0F);
+		body.setTextureSize(128, 64);
+		body.mirror = true;
+		setRotation(body, 0F, 0F, 0F);
+		head = new ModelRenderer(this, 37, 18);
+		head.addBox(-1.5F, -4F, -1.5F, 3, 3, 3);
+		head.setRotationPoint(0F, 19F, 0F);
+		head.setTextureSize(128, 64);
+		head.mirror = true;
+		setRotation(head, -0.4833219F, 0F, 0F);
+		jaw = new ModelRenderer(this, 17, 23);
+		jaw.addBox(-1.5F, -1F, -1.5F, 3, 1, 3);
+		jaw.setRotationPoint(0F, 0F, 0F);
+		jaw.setTextureSize(128, 64);
+		head.addChild(jaw);
+		jaw.mirror = true;
+		setRotation(jaw, 0.4833219F, 0F, 0F);
+		thing = new ModelRenderer(this, 42, 34);
+		thing.addBox(0F, -1F, -3F, 6, 1, 6);
+		thing.setRotationPoint(3F, 21F, 2F);
+		thing.setTextureSize(128, 64);
+		thing.mirror = true;
+		setRotation(thing, 0F, 0F, 0F);
+		arm = new ModelRenderer(this, 33, 7);
+		arm.addBox(-1F, -1F, -6F, 2, 2, 6);
+		arm.setRotationPoint(-2F, 22F, -2F);
+		arm.setTextureSize(128, 64);
+		arm.mirror = true;
+		setRotation(arm, 0F, 0F, 0F);
 	}
 
 	@Override
@@ -105,16 +56,10 @@ public class ModelDreadSpawn extends ModelBase {
 	{
 		super.render(entity, f, f1, f2, f3, f4, f5);
 		setRotationAngles(f, f1, f2, f3, f4, f5, entity);
-		Body.render(f5);
-		leg1.render(f5);
-		leg2.render(f5);
-		leg3.render(f5);
-		leg4.render(f5);
-		leg5.render(f5);
-		eye1.render(f5);
-		eye2.render(f5);
-		eye3.render(f5);
-		eye4.render(f5);
+		body.render(f5);
+		head.render(f5);
+		thing.render(f5);
+		arm.render(f5);
 	}
 
 	private void setRotation(ModelRenderer model, float x, float y, float z)
@@ -127,27 +72,8 @@ public class ModelDreadSpawn extends ModelBase {
 	@Override
 	public void setRotationAngles(float par1, float par2, float par3, float par4, float par5, float par6, Entity par7Entity)
 	{
-		eye1.rotateAngleY = par4 / (180F / (float)Math.PI);
-		eye1.rotateAngleX = par5 / (180F / (float)Math.PI);
-		eye2.rotateAngleY = par4 / (180F / (float)Math.PI);
-		eye2.rotateAngleX = par5 / (180F / (float)Math.PI);
-		eye3.rotateAngleY = par4 / (180F / (float)Math.PI);
-		eye3.rotateAngleX = par5 / (180F / (float)Math.PI);
-		eye4.rotateAngleY = par4 / (180F / (float)Math.PI);
-		eye4.rotateAngleX = par5 / (180F / (float)Math.PI);
-
-		leg1.rotateAngleY = MathHelper.cos(par1 * 0.6662F + (float)Math.PI) * 2.0F * par2 * 0.5F;
-		leg2.rotateAngleY = MathHelper.cos(par1 * 0.6662F) * 2.0F * par2 * 0.5F;
-		leg3.rotateAngleY = MathHelper.cos(par1 * 0.6662F) * 1.4F * par2;
-		leg4.rotateAngleY = MathHelper.cos(par1 * 0.6662F + (float)Math.PI) * 1.4F * par2;
-		leg5.rotateAngleY = MathHelper.cos(par1 * 0.6662F + (float)Math.PI) * 1.0F * par2 * -0.5F;
-
-		leg1.rotateAngleZ = 0.0F;
-		leg2.rotateAngleZ = 0.0F;
-		leg3.rotateAngleZ = 0.0F;
-		leg4.rotateAngleZ = 0.0F;
-		leg5.rotateAngleZ = 0.0F;
-
+		arm.rotateAngleY = MathHelper.cos(par1 * 0.6662F + (float)Math.PI) * 2.0F * par2 * 0.5F;
+		thing.rotateAngleZ = MathHelper.cos(par1 * 0.6662F) * 1.4F * par2;
+		head.rotateAngleY = par4 / (180F / (float)Math.PI);
 	}
-
 }

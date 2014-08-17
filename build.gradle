@@ -17,12 +17,12 @@ buildscript {
 
 apply plugin: 'forge'
 
-version = "1.7.2-1.6.0"
+version = "1.7.2-1.7.0"
 group= "com.shinoow.abyssalcraft" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = "AbyssalCraft"
 
 minecraft {
-    version = "1.7.2-10.12.1.1112"
+    version = "1.7.2-10.12.2.1147"
     assetDir = "eclipse/assets"
 }
 
@@ -44,6 +44,9 @@ dependencies {
 
 processResources
 {
+	// I really don't want that file to exist anywhere
+	exclude '**/Thumbs.db'
+
     // this will ensure that this task is redone when the versions change.
     inputs.property "version", project.version
     inputs.property "mcversion", project.minecraft.version
@@ -59,6 +62,13 @@ processResources
     // copy everything else, thats not the mcmod.info
     from(sourceSets.main.resources.srcDirs) {
         exclude 'mcmod.info'
-		exclude 'Thumbs.db'
     }
+	
+	jar {
+		manifest 
+		{
+			attributes("FMLCorePlugin": "com.shinoow.abyssalcraft.core.ACCorePlugin")
+			attributes("FMLCorePluginContainsFMLMod": "com.shinoow.abyssalcraft.AbyssalCraft")
+		}
+}
 }

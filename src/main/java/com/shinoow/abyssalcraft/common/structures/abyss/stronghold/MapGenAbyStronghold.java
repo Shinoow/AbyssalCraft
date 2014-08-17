@@ -15,23 +15,13 @@
  */
 package com.shinoow.abyssalcraft.common.structures.abyss.stronghold;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.Map.Entry;
-import java.util.Random;
 
 import net.minecraft.util.MathHelper;
-import net.minecraft.world.ChunkCoordIntPair;
-import net.minecraft.world.ChunkPosition;
-import net.minecraft.world.World;
+import net.minecraft.world.*;
 import net.minecraft.world.biome.BiomeGenBase;
-import net.minecraft.world.gen.structure.MapGenStructure;
-import net.minecraft.world.gen.structure.StructureComponent;
-import net.minecraft.world.gen.structure.StructureStart;
+import net.minecraft.world.gen.structure.*;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
 
@@ -70,17 +60,11 @@ public class MapGenAbyStronghold extends MapGenStructure
 			Entry var3 = (Entry)var2.next();
 
 			if (((String)var3.getKey()).equals("distance"))
-			{
 				field_82671_h = MathHelper.parseDoubleWithDefaultAndMax((String)var3.getValue(), field_82671_h, 1.0D);
-			}
 			else if (((String)var3.getKey()).equals("count"))
-			{
 				structureCoords = new ChunkCoordIntPair[MathHelper.parseIntWithDefaultAndMax((String)var3.getValue(), structureCoords.length, 1)];
-			}
 			else if (((String)var3.getKey()).equals("spread"))
-			{
 				field_82672_i = MathHelper.parseIntWithDefaultAndMax((String)var3.getValue(), field_82672_i, 1);
-			}
 		}
 	}
 
@@ -161,9 +145,7 @@ public class MapGenAbyStronghold extends MapGenStructure
 			ChunkCoordIntPair var5 = var2[var4];
 
 			if (var5 != null)
-			{
 				var1.add(var5.func_151349_a(64));
-			}
 		}
 
 		return var1;
@@ -175,9 +157,7 @@ public class MapGenAbyStronghold extends MapGenStructure
 		MapGenAbyStronghold.Start start;
 
 		for (start = new MapGenAbyStronghold.Start(worldObj, rand, par1, par2); start.getComponents().isEmpty() || ((StructureAbyStrongholdPieces.Stairs2)start.getComponents().get(0)).strongholdPortalRoom == null; start = new MapGenAbyStronghold.Start(worldObj, rand, par1, par2))
-		{
 			;
-		}
 
 		return start;
 	}

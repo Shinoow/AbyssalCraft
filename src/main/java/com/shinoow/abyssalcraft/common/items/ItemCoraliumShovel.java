@@ -32,7 +32,7 @@ public class ItemCoraliumShovel extends ItemTool {
 	private static Set<Block> blocksEffectiveAgainst = Sets.newHashSet(new Block[] {Blocks.grass, Blocks.dirt, Blocks.sand, Blocks.gravel, Blocks.snow_layer, Blocks.snow, Blocks.clay, Blocks.farmland, Blocks.soul_sand, Blocks.mycelium, AbyssalCraft.Darkgrass});
 	public ItemCoraliumShovel(ToolMaterial enumToolMaterial) {
 		super(1, enumToolMaterial, blocksEffectiveAgainst);
-		setHarvestLevel("shovel", 6);
+		setHarvestLevel("shovel", 5);
 	}
 
 	@Override
@@ -44,7 +44,8 @@ public class ItemCoraliumShovel extends ItemTool {
 	/**
 	 * Returns if the item (tool) can harvest results from the block type.
 	 */
-	public boolean canHarvestBlock(Block par1Block)
+	@Override
+	public boolean func_150897_b(Block par1Block)
 	{
 		if (par1Block == Blocks.snow_layer)
 			return true;

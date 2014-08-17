@@ -78,34 +78,22 @@ public class ItemAntiBucket extends ItemBucket{
 
 
 				if (movingobjectposition.sideHit == 0)
-				{
 					--y;
-				}
 
 				if (movingobjectposition.sideHit == 1)
-				{
 					++y;
-				}
 
 				if (movingobjectposition.sideHit == 2)
-				{
 					--z;
-				}
 
 				if (movingobjectposition.sideHit == 3)
-				{
 					++z;
-				}
 
 				if (movingobjectposition.sideHit == 4)
-				{
 					--x;
-				}
 
 				if (movingobjectposition.sideHit == 5)
-				{
 					++x;
-				}
 
 				if (!player.canPlayerEdit(x, y, z, movingobjectposition.sideHit, item))
 					return item;

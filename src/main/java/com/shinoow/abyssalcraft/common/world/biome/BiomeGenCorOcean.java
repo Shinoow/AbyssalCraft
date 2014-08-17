@@ -24,8 +24,7 @@ import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.gen.feature.WorldGenMinable;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
-import com.shinoow.abyssalcraft.common.entity.EntityDepthsZombie;
-import com.shinoow.abyssalcraft.common.entity.EntityDepthsghoul;
+import com.shinoow.abyssalcraft.common.entity.*;
 
 public class BiomeGenCorOcean extends BiomeGenBase {
 
@@ -60,9 +59,7 @@ public class BiomeGenCorOcean extends BiomeGenBase {
 			if (var10 == Blocks.stone || var10 == Blocks.iron_ore || var10 == Blocks.coal_ore) {
 				par1World.setBlock(var7, var8, var9, AbyssalCraft.Coraliumore);
 				if(var10 == Blocks.diamond_ore || var10 == Blocks.gold_ore || var10 == Blocks.iron_ore)
-				{
-					par1World.setBlock(var7, var8, var9, AbyssalCraft.Coraliumstone);
-				}
+					par1World.setBlock(var7, var8, var9, AbyssalCraft.CoraliumInfusedStone);
 			}
 		}
 		for(int rarity = 0; rarity < 3; rarity++) {
@@ -79,5 +76,11 @@ public class BiomeGenCorOcean extends BiomeGenBase {
 	public BiomeGenBase.TempCategory getTempCategory()
 	{
 		return BiomeGenBase.TempCategory.OCEAN;
+	}
+
+	@Override
+	public void genTerrainBlocks(World par1World, Random par2Random, Block[] par3BlockArray, byte[] par4ByteArray, int par5, int par6, double par7)
+	{
+		super.genTerrainBlocks(par1World, par2Random, par3BlockArray, par4ByteArray, par5, par6, par7);
 	}
 }

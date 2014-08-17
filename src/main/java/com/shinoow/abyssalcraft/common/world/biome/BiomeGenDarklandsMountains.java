@@ -79,9 +79,7 @@ public class BiomeGenDarklandsMountains extends BiomeGenBase
 			Block var10 = par1World.getBlock(var7, var8, var9);
 
 			if (var10 == Blocks.stone)
-			{
 				par1World.setBlock(var7, var8, var9, AbyssalCraft.abyore);
-			}
 		}
 
 		for (var5 = 0; var5 < 7; ++var5)

@@ -72,7 +72,7 @@ public class ModelStaff extends ModelBase
 		Staff6.mirror = true;
 		setRotation(Staff6, -0.8922867F, 0.5948578F, 0.2230717F);
 		Cube = new ModelRenderer(this, 8, 15);
-		Cube.addBox(-2.8F, -6F, 0F, 2, 2, 2);
+		Cube.addBox(-2.8F, -6F, -1.5F, 2, 2, 2);
 		Cube.setRotationPoint(0F, 0F, 0F);
 		Cube.setTextureSize(64, 32);
 		Cube.mirror = true;
@@ -93,6 +93,17 @@ public class ModelStaff extends ModelBase
 		Cube.render(par7);
 	}
 
+	public void render(float f){
+
+		Staff1.render(f);
+		Staff2.render(f);
+		Staff3.render(f);
+		Staff4.render(f);
+		Staff5.render(f);
+		Staff6.render(f);
+		Cube.render(f);
+	}
+
 	private void setRotation(ModelRenderer model, float x, float y, float z)
 	{
 		model.rotateAngleX = x;
@@ -105,5 +116,4 @@ public class ModelStaff extends ModelBase
 	{
 		super.setRotationAngles(par1, par2, par3, par4, par5, par6, par7Entity);
 	}
-
 }

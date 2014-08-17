@@ -61,16 +61,12 @@ public class ItemPortalPlacer extends Item
 			if(direction == 1 || direction == 3)
 			{
 				for(int y = 1; y < 5; y++)
-				{
 					for (int z = -1; z < 2; z++)
-					{
 						if(par3World.getBlockMetadata(par4, par5 + y, par6 + z) != 0)
 						{
 							FMLClientHandler.instance().getClient().ingameGUI.getChatGUI().printChatMessage(new ChatComponentText("No room for a portal."));
 							return false;
 						}
-					}
-				}
 
 				par3World.setBlock(par4, par5 + 1, par6, AbyssalCraft.abystone);
 				par3World.setBlock(par4, par5 + 1, par6 + 1, AbyssalCraft.abystone);
@@ -95,16 +91,12 @@ public class ItemPortalPlacer extends Item
 			else
 			{
 				for(int y = 1; y < 5; y++)
-				{
 					for (int x = -1; x < 2; x++)
-					{
 						if(par3World.getBlockMetadata(par4 + x, par5 + y, par6) != 0)
 						{
 							FMLClientHandler.instance().getClient().ingameGUI.getChatGUI().printChatMessage(new ChatComponentText("No room for a portal."));
 							return false;
 						}
-					}
-				}
 
 				par3World.setBlock(par4, par5 + 1, par6, AbyssalCraft.abystone);
 				par3World.setBlock(par4 + 1, par5 + 1, par6, AbyssalCraft.abystone);
@@ -131,39 +123,4 @@ public class ItemPortalPlacer extends Item
 		else
 			return false;
 	}
-
-
-	/**  When portal block generation has been changed to match the new design, replace the methods
-         	above with these (keep the Coralium Fire)
-
-         				   par3World.setBlock(par4, par5 + 1, par6 - 2, AbyssalCraft.abystone);
-                           par3World.setBlock(par4, par5 + 2, par6 - 2, AbyssalCraft.abystone);
-                           par3World.setBlock(par4, par5 + 3, par6 - 2, AbyssalCraft.abystone);
-                           par3World.setBlock(par4, par5 + 4, par6 - 2, AbyssalCraft.abystone);
-                           par3World.setBlock(par4, par5 + 5, par6 - 2, AbyssalCraft.abystone);
-
-                           par3World.setBlock(par4, par5 + 2, par6 + 2, AbyssalCraft.abystone);
-                           par3World.setBlock(par4, par5 + 3, par6 + 2, AbyssalCraft.abystone);
-                           par3World.setBlock(par4, par5 + 4, par6 + 2, AbyssalCraft.abystone);
-                           par3World.setBlock(par4, par5 + 5, par6 + 2, AbyssalCraft.abystone);
-
-                           par3World.setBlock(par4, par5 + 5, par6, AbyssalCraft.abystone);
-                           par3World.setBlock(par4, par5 + 5, par6 + 1, AbyssalCraft.abystone);
-                           par3World.setBlock(par4, par5 + 5, par6 - 1, AbyssalCraft.abystone);
-
-						   par3World.setBlock(par4 - 2, par5 + 1, par6, AbyssalCraft.abystone);
-                           par3World.setBlock(par4 - 2, par5 + 2, par6, AbyssalCraft.abystone);
-                           par3World.setBlock(par4 - 2, par5 + 3, par6, AbyssalCraft.abystone);
-                           par3World.setBlock(par4 - 2, par5 + 4, par6, AbyssalCraft.abystone);
-                           par3World.setBlock(par4 - 2, par5 + 5, par6, AbyssalCraft.abystone);
-
-                           par3World.setBlock(par4 + 2, par5 + 2, par6, AbyssalCraft.abystone);
-                           par3World.setBlock(par4 + 2, par5 + 3, par6, AbyssalCraft.abystone);
-                           par3World.setBlock(par4 + 2, par5 + 4, par6, AbyssalCraft.abystone);
-                           par3World.setBlock(par4 + 2, par5 + 5, par6, AbyssalCraft.abystone);
-
-                           par3World.setBlock(par4, par5 + 5, par6, AbyssalCraft.abystone);
-                           par3World.setBlock(par4 + 1, par5 + 5, par6, AbyssalCraft.abystone);
-                           par3World.setBlock(par4 - 1, par5 + 5, par6, AbyssalCraft.abystone);
-	 */
 }
