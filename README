@@ -19,5 +19,7 @@ limitations under the License.
 
 
 If you happen to find any code that's not working correctly, report it here. Feel free to contribute to the mod as well.
+The issue tracker is available here, so report any bugs you find, and I'll be sure to squash them.
 
-Also, certain bugs can be reported as well.
+If you are looking into developing AbyssalCraft Add-ons (eventhough the API isn't complete), or just want to integrate
+it into your mod, check the "dev" branch for compiled mod jars that can be imported into your workspace.
