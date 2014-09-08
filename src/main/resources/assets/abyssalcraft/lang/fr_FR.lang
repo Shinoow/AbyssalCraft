@@ -84,11 +84,17 @@ container.abyssalcraft.crate=
 container.abyssalcraft.crystallizer=
 container.abyssalcraft.transmutator=
 
+#NEI Integration
+container.abyssalcraft.crystallizer.nei=
+container.abyssalcraft.transmutator.nei=
+
 #Damagesources
 death.attack.coralium=%1$s
 death.attack.coralium.player=%1$s %2$s
 death.attack.dread=%1$s
 death.attack.dread.player=%1$s %2$s
+death.attack.antimatter=%1$s
+death.attack.antimatter.player=%1$s %2$s
 
 #Tooltips
 tooltip.portalplacer.1=Clic-droit sur le sol pour
@@ -177,7 +183,7 @@ tile.DLTplanks1.name=Dalle de Bois de Chêne des Terres Sombres
 tile.DLTplanks2.name=Double-Dalle de Bois de Chêne des Terres Sombres
 tile.BOC.name=Bloc de Coralium Raffiné
 tile.PSDL.name=Pierre de Puissance Infusée par les Terres de L'Effroi
-tile.ACO.name=Minerai de Coralium Abyssal
+tile.ACorO.name=Minerai de Coralium Abyssal
 tile.Altar.name=Altar
 tile.ASbb.name=Boutton de Pierre Abyssale
 tile.ASpp.name=Plaque de Pression de Pierre Abyssale
@@ -228,6 +234,12 @@ tile.chagarothspawner.name=
 tile.chagarothfistspawner.name=
 tile.DrTf.name=
 tile.NO.name=
+tile.AIO.name=
+tile.AGO.name=
+tile.ADO.name=
+tile.ANO.name=
+tile.ATO.name=
+tile.ACO.name=
 
 #Items
 item.Sword.name=La Lame du Développeur
@@ -370,6 +382,23 @@ item.ADSB.name=
 item.ADSH.name=
 item.ADSC.name=
 item.ADSP.name=
+item.IT.name=
+item.IC.name=
+item.crystalTin.name=
+item.crystalCopper.name=
+item.crystalSilicon.name=
+item.crystalMagnesium.name=
+item.crystalAluminium.name=
+item.crystalSilica.name=
+item.crystalAlumina.name=
+item.crystalMagnesia.name=
+item.crystalZinc.name=
+item.antiBeef.name=
+item.antiChicken.name=
+item.antiPork.name=
+item.antiFlesh.name=
+item.antiBone.name=
+item.antiSpider_eye.name=
 
 #Entities
 entity.abyssalcraft.depthsghoul.name=Goule des Profondeurs
@@ -394,9 +423,24 @@ entity.abyssalcraft.shadowbeast.name=
 entity.abyssalcraft.shadowboss.name=
 entity.abyssalcraft.gskeleton.name=
 entity.abyssalcraft.chagarothspawn.name=
+entity.abyssalcraft.antiabyssalzombie.name=
+entity.abyssalcraft.antibat.name=
+entity.abyssalcraft.antichicken.name=
+entity.abyssalcraft.anticow.name=
+entity.abyssalcraft.anticreeper.name=
+entity.abyssalcraft.antighoul.name=
+entity.abyssalcraft.antipig.name=
+entity.abyssalcraft.antiplayer.name=
+entity.abyssalcraft.antiskeleton.name=
+entity.abyssalcraft.antispider.name=
+entity.abyssalcraft.antizombie.name=
 
 #Potions
 potion.Cplague=Peste de Coralium
+potion.Cplague.postfix=
 potion.Dplague=Peste Redouté
+potion.Dplague.postfix=
+potion.Antimatter=
+potion.Antimatter.postfix=
 
 #Localization done, Shin out.

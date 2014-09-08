@@ -84,11 +84,17 @@ container.abyssalcraft.crate=板条箱
 container.abyssalcraft.crystallizer=结晶器
 container.abyssalcraft.transmutator=嬗变器
 
+#NEI Integration
+container.abyssalcraft.crystallizer.nei=
+container.abyssalcraft.transmutator.nei=
+
 #Damagesources
 death.attack.coralium=%1$s由于珊瑚侵染而死亡
 death.attack.coralium.player=在逃避%2$s的时候%1$s屈服于珊瑚侵染之下
 death.attack.coralium=%1$s 由于恐惧侵染而死亡
 death.attack.coralium.player=在逃避%2$s的时候%1$s屈服于查加罗特的拳头之下
+death.attack.antimatter=%1$s
+death.attack.antimatter.player=%1$s %2$s
 
 #Tooltips
 tooltip.portalplacer.1=右击地面来
@@ -177,7 +183,7 @@ tile.DLTplanks1.name=黑暗之地橡木台阶
 tile.DLTplanks2.name=黑暗之地橡木双层台阶
 tile.BOC.name=精炼珊瑚石块
 tile.PSDL.name=恐惧之地蕴能石
-tile.ACO.name=深海珊瑚矿
+tile.ACorO.name=深海珊瑚矿
 tile.Altar.name=祭坛
 tile.ASbb.name=深渊石按钮
 tile.ASpp.name=深渊石压力板
@@ -228,6 +234,12 @@ tile.chagarothspawner.name=查加罗特刷怪笼
 tile.chagarothfistspawner.name=触发的查加罗特刷怪笼
 tile.DrTf.name=恐惧之地木栅栏
 tile.NO.name=硝石矿
+tile.AIO.name=
+tile.AGO.name=
+tile.ADO.name=
+tile.ANO.name=
+tile.ATO.name=
+tile.ACO.name=
 
 #Items
 item.Sword.name=恶魔之刃
@@ -370,6 +382,23 @@ item.ADSB.name=可怕的侍魂靴子
 item.ADSH.name=可怕的侍魂头盔
 item.ADSC.name=可怕的侍魂胸甲
 item.ADSP.name=可怕的侍魂护腿
+item.IT.name=
+item.IC.name=
+item.crystalTin.name=
+item.crystalCopper.name=
+item.crystalSilicon.name=
+item.crystalMagnesium.name=
+item.crystalAluminium.name=
+item.crystalSilica.name=
+item.crystalAlumina.name=
+item.crystalMagnesia.name=
+item.crystalZinc.name=
+item.antiBeef.name=
+item.antiChicken.name=
+item.antiPork.name=
+item.antiFlesh.name=
+item.antiBone.name=
+item.antiSpider_eye.name=
 
 #Entities
 entity.abyssalcraft.depthsghoul.name=深渊食尸鬼
@@ -394,10 +423,24 @@ entity.abyssalcraft.shadowbeast.name=阴影野兽
 entity.abyssalcraft.shadowboss.name=末日先驱者萨索斯
 entity.abyssalcraft.gskeleton.name=骷髅哥利亚
 entity.abyssalcraft.chagarothspawn.name=查加罗特的卵
-
+entity.abyssalcraft.antiabyssalzombie.name=
+entity.abyssalcraft.antibat.name=
+entity.abyssalcraft.antichicken.name=
+entity.abyssalcraft.anticow.name=
+entity.abyssalcraft.anticreeper.name=
+entity.abyssalcraft.antighoul.name=
+entity.abyssalcraft.antipig.name=
+entity.abyssalcraft.antiplayer.name=
+entity.abyssalcraft.antiskeleton.name=
+entity.abyssalcraft.antispider.name=
+entity.abyssalcraft.antizombie.name=
 
 #Potions
 potion.Cplague=珊瑚侵染
+potion.Cplague.postfix=
 potion.Dplague=恐惧侵染
+potion.Dplague.postfix=
+potion.Antimatter=
+potion.Antimatter.postfix=
 
 #Localization done, Shin out.

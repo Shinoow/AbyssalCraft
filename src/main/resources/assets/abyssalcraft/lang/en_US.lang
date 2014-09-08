@@ -81,14 +81,20 @@ achievement.killChagaroth.desc=You killed Cha'garoth... nice work.
 
 #Container Inventories
 container.abyssalcraft.crate=Crate
-container.abyssalcraft.crystallizer=Crystalizer
+container.abyssalcraft.crystallizer=Crystallizer
 container.abyssalcraft.transmutator=Transmutator
+
+#NEI Integration
+container.abyssalcraft.crystallizer.nei=Crystallization
+container.abyssalcraft.transmutator.nei=Transmutation
 
 #Damagesources
 death.attack.coralium=%1$s died from the Coralium Plague
 death.attack.coralium.player=%1$s succumbed to the Coralium Plague whilst trying to escape %2$s
 death.attack.dread=%1$s died from Dread Plague
 death.attack.dread.player=%1$s succumbed to the might of Cha'garoth whilst trying to escape %2$s
+death.attack.antimatter=%1$s was molecularly disassembled
+death.attack.antimatter.player=%1$s was molecularly disassembled trying to escape %2$s
 
 #Tooltips
 tooltip.portalplacer.1=Right-click on the ground to
@@ -177,7 +183,7 @@ tile.DLTplanks1.name=Darklands Oak Wood Slab
 tile.DLTplanks2.name=Darklands Oak Wood Doubleslab
 tile.BOC.name=Block of Refined Coralium
 tile.PSDL.name=Dreadlands Infused Powerstone
-tile.ACO.name=Abyssal Coralium Ore
+tile.ACorO.name=Abyssal Coralium Ore
 tile.Altar.name=Altar
 tile.ASbb.name=Abyssal Stone Button
 tile.ASpp.name=Abyssal Stone Pressure Plate
@@ -228,13 +234,20 @@ tile.chagarothspawner.name=Cha'garoth Spawner Block
 tile.chagarothfistspawner.name=Fist of Cha'garoth Spawner Block
 tile.DrTf.name=Dreadlands Wood Fence
 tile.NO.name=Nitre Ore
+tile.AIO.name=Abyssal Iron Ore
+tile.AGO.name=Abyssal Gold Ore
+tile.ADO.name=Abyssal Diamond Ore
+tile.ANO.name=Abyssal Nitre Ore
+tile.ATO.name=Abyssal Tin Ore
+tile.ACO.name=Abyssal Copper Ore
+tile.solidLava.name=Solid lava
 
 #Items
 item.Sword.name=The Dev Blade
 item.OC.name=Oblivion Catalyst
 item.SOTG.name=Staff of The Gatekeeper
 item.GK.name=Gateway Key
-item.Cbucket.name=Bucket of Liquid Coralium
+item.Cbucket.name=Liquid Coralium Bucket
 item.PSDLf.name=Powerstone Tracker
 item.EoA.name=Eye of The Abyss
 item.GKD.name=Asorah's Dreaded Gateway Key
@@ -323,7 +336,7 @@ item.SS.name=Shadow Gem Shard
 item.SG.name=Shadow Gem
 item.OS.name=Shard of Oblivion
 item.Corbow.name=Coralium Longbow
-item.Antibucket.name=Bucket of Liquid Antimatter
+item.Antibucket.name=Liquid Antimatter Bucket
 item.cbrick.name=Coralium Brick
 item.cudgel.name=Cudgel
 item.DI.name=Dreadium Ingot
@@ -370,6 +383,23 @@ item.ADSB.name=Dreadium Samurai Boots
 item.ADSH.name=Dreadium Samurai Helmet
 item.ADSC.name=Dreadium Samurai Chestplate
 item.ADSP.name=Dreadium Samurai Leggings
+item.IT.name=Tin Ingot
+item.IC.name=Copper Ingot
+item.crystalTin.name=Crystallized Tin
+item.crystalCopper.name=Crystallized Copper
+item.crystalSilicon.name=Crystallized Silicon
+item.crystalMagnesium.name=Crystallized Magnesium
+item.crystalAluminium.name=Crystallized Aluminium
+item.crystalSilica.name=Crystallized Silica
+item.crystalAlumina.name=Crystallized Alumina
+item.crystalMagnesia.name=Crystallized Magnesia
+item.crystalZinc.name=Crystallized Zinc
+item.antiBeef.name=Anti-Beef
+item.antiChicken.name=Anti-Chicken
+item.antiPork.name=Anti-Pork
+item.antiFlesh.name=Rotten Anti-Flesh
+item.antiBone.name=Anti-Bone
+item.antiSpider_eye.name=Anti-Spider Eye
 
 #Entities
 entity.abyssalcraft.depthsghoul.name=Depths Ghoul
@@ -394,9 +424,24 @@ entity.abyssalcraft.shadowbeast.name=Shadow Beast
 entity.abyssalcraft.shadowboss.name=Sacthoth, Harbringer of Doom
 entity.abyssalcraft.gskeleton.name=Skeleton Goliath
 entity.abyssalcraft.chagarothspawn.name=Spawn of Cha'garoth
+entity.abyssalcraft.antiabyssalzombie.name=Abyssal Anti-Zombie
+entity.abyssalcraft.antibat.name=Anti-Bat
+entity.abyssalcraft.antichicken.name=Anti-Chicken
+entity.abyssalcraft.anticow.name=Anti-Cow
+entity.abyssalcraft.anticreeper.name=Anti-Creeper
+entity.abyssalcraft.antighoul.name=Anti-Ghoul
+entity.abyssalcraft.antipig.name=Anti-Pig
+entity.abyssalcraft.antiplayer.name=Anti-Player
+entity.abyssalcraft.antiskeleton.name=Anti-Skeleton
+entity.abyssalcraft.antispider.name=Anti-Spider
+entity.abyssalcraft.antizombie.name=Anti-Zombie
 
 #Potions
 potion.Cplague=Coralium Plague
+potion.Cplague.postfix=Potion of Coralium Plague
 potion.Dplague=Dread Plague
+potion.Dplague.postfix=Potion of Dread Plague
+potion.Antimatter=Antimatter
+potion.Antimatter.postfix=Potion of Annihilation
 
 #Localization done, Shin out.
