@@ -37,7 +37,7 @@ public class BiomeGenCorOcean extends BiomeGenBase {
 		spawnableCreatureList.clear();
 		spawnableMonsterList.clear();
 		spawnableMonsterList.add(new SpawnListEntry(EntityDepthsghoul.class, 5, 1, 5));
-		spawnableMonsterList.add(new SpawnListEntry(EntityDepthsZombie.class, 5, 1, 5));
+		spawnableMonsterList.add(new SpawnListEntry(EntityAbyssalZombie.class, 5, 1, 5));
 
 	}
 

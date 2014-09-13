@@ -13,33 +13,32 @@
  *See the License for the specific language governing permissions and
  *limitations under the License.
  */
-package com.shinoow.abyssalcraft.common.blocks;
+package com.shinoow.abyssalcraft.client.config;
 
-import java.util.Random;
+import java.util.Set;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.material.Material;
-import net.minecraft.item.Item;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.GuiScreen;
+import cpw.mods.fml.client.IModGuiFactory;
 
-import com.shinoow.abyssalcraft.AbyssalCraft;
+public class ACGuiFactory implements IModGuiFactory {
+	@Override
+	public void initialize(Minecraft minecraftInstance) {
 
-public class BlockNitreOre extends Block {
-
-	public BlockNitreOre() {
-		super(Material.rock);
-		setCreativeTab(AbyssalCraft.tabBlock);
-		this.setHarvestLevel("pickaxe", 2);
 	}
 
 	@Override
-	public Item getItemDropped(int par1, Random par2Random, int par3)
-	{
-		return AbyssalCraft.nitre;
+	public Class<? extends GuiScreen> mainConfigGuiClass() {
+		return ACConfigGUI.class;
 	}
 
 	@Override
-	public int quantityDropped(Random par1Random)
-	{
-		return 1 + par1Random.nextInt(3);
+	public Set<RuntimeOptionCategoryElement> runtimeGuiCategories() {
+		return null;
+	}
+
+	@Override
+	public RuntimeOptionGuiHandler getHandlerFor(RuntimeOptionCategoryElement element) {
+		return null;
 	}
 }

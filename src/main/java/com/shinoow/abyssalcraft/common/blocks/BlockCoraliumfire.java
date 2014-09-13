@@ -31,8 +31,8 @@ import com.shinoow.abyssalcraft.AbyssalCraft;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class BlockCoraliumfire extends BlockFire
-{
+public class BlockCoraliumfire extends BlockFire {
+
 	@SideOnly(Side.CLIENT)
 	private IIcon[] iconArray;
 	public BlockCoraliumfire()
@@ -40,11 +40,13 @@ public class BlockCoraliumfire extends BlockFire
 		super();
 		setTickRandomly(true);
 	}
+
 	@Override
 	public IIcon getIcon(int par1, int par2)
 	{
 		return iconArray[0];
 	}
+
 	public void initializeBlock()
 	{
 		setFireInfo(Blocks.planks, 5, 20);
@@ -77,38 +79,45 @@ public class BlockCoraliumfire extends BlockFire
 	{
 		return null;
 	}
+
 	@Override
 	public boolean isOpaqueCube()
 	{
 		return false;
 	}
+
 	@Override
 	public boolean renderAsNormalBlock()
 	{
 		return false;
 	}
+
 	@Override
 	public int getRenderType()
 	{
 		return 3;
 	}
+
 	@Override
 	public int quantityDropped(Random par1Random)
 	{
 		return 0;
 	}
+
 	@Override
 	public int tickRate(World par1World)
 	{
 		return 30;
 	}
-	public void func_149674_a(World par1World, int par2, int par3, int par4, Random par5Random)
+
+	@Override
+	public void updateTick(World par1World, int par2, int par3, int par4, Random par5Random)
 	{
 		if (par1World.getGameRules().getGameRuleBooleanValue("doFireTick"))
 		{
 
 			boolean flag = par1World.getBlock(par2, par3 -1, par4).isFireSource(par1World, par2, par3 - 1, par4, ForgeDirection.UP);
-			if (!canBlockCatchFire(par1World, par2, par3, par4))
+			if (!canCatchFire(par1World, par2, par3, par4))
 				par1World.setBlockToAir(par2, par3, par4);
 			if (!flag && par1World.isRaining() && (par1World.canLightningStrikeAt(par2, par3, par4) || par1World.canLightningStrikeAt(par2 - 1, par3, par4) || par1World.canLightningStrikeAt(par2 + 1, par3, par4) || par1World.canLightningStrikeAt(par2, par3, par4 - 1) || par1World.canLightningStrikeAt(par2, par3, par4 + 1)))
 				par1World.setBlockToAir(par2, par3, par4);
@@ -123,7 +132,7 @@ public class BlockCoraliumfire extends BlockFire
 					if (!World.doesBlockHaveSolidTopSurface(par1World ,par2, par3 - 1, par4) || l > 3)
 						par1World.setBlockToAir(par2, par3, par4);
 				}
-				else if (!flag && !canBlockCatchFire(par1World, par2, par3 - 1, par4, ForgeDirection.UP) && l == 15 && par5Random.nextInt(4) == 0)
+				else if (!flag && !canCatchFire(par1World, par2, par3 - 1, par4, ForgeDirection.UP) && l == 15 && par5Random.nextInt(4) == 0)
 					par1World.setBlockToAir(par2, par3, par4);
 				else
 				{
@@ -164,9 +173,11 @@ public class BlockCoraliumfire extends BlockFire
 			}
 		}
 	}
+
 	public boolean func_82506_l() {
-		return true;
+		return false;
 	}
+
 	private void tryToCatchBlockOnFire(World par1World, int par2, int par3, int par4, int par5, Random par6Random, int par7, ForgeDirection face) {
 		int j1 = par1World.getBlock(par2, par3, par4).getFlammability(par1World, par2, par3, par4, face);
 		if (par6Random.nextInt(par5) < j1)
@@ -184,15 +195,17 @@ public class BlockCoraliumfire extends BlockFire
 				Blocks.tnt.onBlockDestroyedByPlayer(par1World, par2, par3, par4, 1);
 		}
 	}
+
 	private boolean canNeighborBurn(World par1World, int par2, int par3, int par4)
 	{
-		return canBlockCatchFire(par1World, par2 + 1, par3, par4, ForgeDirection.WEST) ||
-				canBlockCatchFire(par1World, par2 - 1, par3, par4, ForgeDirection.EAST) ||
-				canBlockCatchFire(par1World, par2, par3 - 1, par4, ForgeDirection.UP) ||
-				canBlockCatchFire(par1World, par2, par3 + 1, par4, ForgeDirection.DOWN) ||
-				canBlockCatchFire(par1World, par2, par3, par4 - 1, ForgeDirection.SOUTH) ||
-				canBlockCatchFire(par1World, par2, par3, par4 + 1, ForgeDirection.NORTH);
+		return canCatchFire(par1World, par2 + 1, par3, par4, ForgeDirection.WEST) ||
+				canCatchFire(par1World, par2 - 1, par3, par4, ForgeDirection.EAST) ||
+				canCatchFire(par1World, par2, par3 - 1, par4, ForgeDirection.UP) ||
+				canCatchFire(par1World, par2, par3 + 1, par4, ForgeDirection.DOWN) ||
+				canCatchFire(par1World, par2, par3, par4 - 1, ForgeDirection.SOUTH) ||
+				canCatchFire(par1World, par2, par3, par4 + 1, ForgeDirection.NORTH);
 	}
+
 	private int getChanceOfNeighborsEncouragingFire(World par1World, int par2, int par3, int par4)
 	{
 		byte b0 = 0;
@@ -206,21 +219,24 @@ public class BlockCoraliumfire extends BlockFire
 		l = getChanceToEncourageFire(par1World, par2, par3, par4 + 1, l, ForgeDirection.NORTH);
 		return l;
 	}
+
 	@Override
 	public boolean isCollidable()
 	{
 		return false;
 	}
 
-	public boolean canBlockCatchFire(World par1World, int par2, int par3, int par4)
+	public boolean canCatchFire(World par1World, int par2, int par3, int par4)
 	{
 		return World.doesBlockHaveSolidTopSurface(par1World, par2, par3 - 1, par4) || canNeighborBurn(par1World, par2, par3, par4);
 	}
+
 	public void onNeighborBlockChange(World par1World, int par2, int par3, int par4, int par5)
 	{
 		if (!World.doesBlockHaveSolidTopSurface(par1World, par2, par3 - 1, par4) && !canNeighborBurn(par1World, par2, par3, par4))
 			par1World.setBlockToAir(par2, par3, par4);
 	}
+
 	@Override
 	public void onBlockAdded(World par1World, int par2, int par3, int par4)
 	{
@@ -231,15 +247,16 @@ public class BlockCoraliumfire extends BlockFire
 			else
 				par1World.scheduleBlockUpdate(par2, par3, par4, this, tickRate(par1World) + par1World.rand.nextInt(10));
 	}
+
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void randomDisplayTick(World par1World, int par2, int par3, int par4, Random par5Random)
 	{
 		if (par5Random.nextInt(24) == 0)
 			par1World.playSound(par2 + 0.5F, par3 + 0.5F, par4 + 0.5F, "fire.fire", 1.0F + par5Random.nextFloat(), par5Random.nextFloat() * 0.7F + 0.3F, false);
-		if (!World.doesBlockHaveSolidTopSurface(par1World, par2, par3 - 1, par4) && !this.canBlockCatchFire(par1World, par2, par3 - 1, par4, ForgeDirection.UP))
+		if (!World.doesBlockHaveSolidTopSurface(par1World, par2, par3 - 1, par4) && !this.canCatchFire(par1World, par2, par3 - 1, par4, ForgeDirection.UP))
 		{
-			if (this.canBlockCatchFire(par1World, par2 - 1, par3, par4, ForgeDirection.EAST))
+			if (this.canCatchFire(par1World, par2 - 1, par3, par4, ForgeDirection.EAST))
 				for (int l = 0; l < 2; l++)
 				{
 					float f = par2 + par5Random.nextFloat() * 0.1F;
@@ -247,7 +264,7 @@ public class BlockCoraliumfire extends BlockFire
 					float f2 = par4 + par5Random.nextFloat();
 					par1World.spawnParticle("largesmoke", f, f1, f2, 0.0D, 0.0D, 0.0D);
 				}
-			if (this.canBlockCatchFire(par1World, par2 + 1, par3, par4, ForgeDirection.WEST))
+			if (this.canCatchFire(par1World, par2 + 1, par3, par4, ForgeDirection.WEST))
 				for (int l = 0; l < 2; l++)
 				{
 					float f = par2 + 1 - par5Random.nextFloat() * 0.1F;
@@ -255,7 +272,7 @@ public class BlockCoraliumfire extends BlockFire
 					float f2 = par4 + par5Random.nextFloat();
 					par1World.spawnParticle("largesmoke", f, f1, f2, 0.0D, 0.0D, 0.0D);
 				}
-			if (this.canBlockCatchFire(par1World, par2, par3, par4 - 1, ForgeDirection.SOUTH))
+			if (this.canCatchFire(par1World, par2, par3, par4 - 1, ForgeDirection.SOUTH))
 				for (int l = 0; l < 2; l++)
 				{
 					float f = par2 + par5Random.nextFloat();
@@ -263,7 +280,7 @@ public class BlockCoraliumfire extends BlockFire
 					float f2 = par4 + par5Random.nextFloat() * 0.1F;
 					par1World.spawnParticle("largesmoke", f, f1, f2, 0.0D, 0.0D, 0.0D);
 				}
-			if (this.canBlockCatchFire(par1World, par2, par3, par4 + 1, ForgeDirection.NORTH))
+			if (this.canCatchFire(par1World, par2, par3, par4 + 1, ForgeDirection.NORTH))
 				for (int l = 0; l < 2; l++)
 				{
 					float f = par2 + par5Random.nextFloat();
@@ -271,7 +288,7 @@ public class BlockCoraliumfire extends BlockFire
 					float f2 = par4 + 1 - par5Random.nextFloat() * 0.1F;
 					par1World.spawnParticle("largesmoke", f, f1, f2, 0.0D, 0.0D, 0.0D);
 				}
-			if (this.canBlockCatchFire(par1World, par2, par3 + 1, par4, ForgeDirection.DOWN))
+			if (this.canCatchFire(par1World, par2, par3 + 1, par4, ForgeDirection.DOWN))
 				for (int l = 0; l < 2; l++)
 				{
 					float f = par2 + par5Random.nextFloat();
@@ -288,11 +305,15 @@ public class BlockCoraliumfire extends BlockFire
 				par1World.spawnParticle("largesmoke", f, f1, f2, 0.0D, 0.0D, 0.0D);
 			}
 	}
-	public boolean canBlockCatchFire(IBlockAccess world, int x, int y, int z, ForgeDirection face)
+
+	@Override
+	public boolean canCatchFire(IBlockAccess world, int x, int y, int z, ForgeDirection face)
 	{
 		return world.getBlock(x, y, z).isFlammable(world, x, y, z, face);
 	}
-	public int getChanceToEncourageFire(World world, int x, int y, int z, int oldChance, ForgeDirection face)
+
+	@Override
+	public int getChanceToEncourageFire(IBlockAccess world, int x, int y, int z, int oldChance, ForgeDirection face)
 	{
 		int newChance = world.getBlock(x, y, z).getFireSpreadSpeed(world, x, y, z, face);
 		return newChance > oldChance ? newChance : oldChance;

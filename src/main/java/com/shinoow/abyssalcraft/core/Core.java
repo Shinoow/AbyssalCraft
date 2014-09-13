@@ -16,8 +16,7 @@
 package com.shinoow.abyssalcraft.core;
 
 import java.io.File;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 import net.minecraftforge.common.config.Configuration;
 
@@ -28,14 +27,18 @@ import com.shinoow.abyssalcraft.core.handlers.CraftingHandler;
 import com.shinoow.abyssalcraft.core.util.CoreLogger;
 
 import cpw.mods.fml.client.*;
+import cpw.mods.fml.client.event.ConfigChangedEvent;
 import cpw.mods.fml.common.*;
 import cpw.mods.fml.common.event.*;
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 
 public class Core extends DummyModContainer {
 
-	public static final String version = "1.1.0";
+	public static final String version = "1.2.0";
 	public static final String modid = "accore";
 	public static final String name = "AbyssalCraft Core";
+
+	public static Configuration cfg;
 
 	public static boolean canRenderStarspawn;
 
@@ -48,8 +51,8 @@ public class Core extends DummyModContainer {
 		meta.credits     = "shinoow (coding)";
 		meta.authorList  = Arrays.asList("shinoow");
 		meta.description = "Library used by AbyssalCraft mods - contains API as well";
-		meta.url         = "http://adf.ly/FQarm";
-		meta.updateUrl   = "http://adf.ly/FQarm";
+		meta.url         = "https://shinoow.github.io/AbyssalCraft/";
+		meta.updateUrl   = "https://shinoow.github.io/AbyssalCraft/";
 		meta.screenshots = new String[0];
 		meta.logoFile    = "assets/abyssalcraft/textures/logo_core.png";
 	}
@@ -64,22 +67,10 @@ public class Core extends DummyModContainer {
 		CoreLogger.info("Pre-initializing Core.");
 		FMLCommonHandler.instance().bus().register(new CraftingHandler());
 
-		Configuration cfg = new Configuration(event.getSuggestedConfigurationFile());
-		try {
-			cfg.load();
+		cfg = new Configuration(event.getSuggestedConfigurationFile());
 
-			canRenderStarspawn = cfg.getBoolean("RenderPlayer Override", "Render", true, "Whether or not to override the player model"
-					+ "(set false for compatibility with other mods that alters the player model)");
+		syncConfig();
 
-		} catch (Exception e) {
-			CoreLogger.severe("AbyssalCraft Core has problems loading Configs.");
-			e.printStackTrace();
-		} finally {
-			cfg.save();
-			if(canRenderStarspawn == true)
-				CoreLogger.info("RenderPlayer Override enabled, the Coralium Longbow will render twice in your hand now.");
-			else CoreLogger.info("RenderPlayer Override disabled, Compatibility level +100.");
-		}
 		proxy.PreInit();
 	}
 
@@ -87,6 +78,7 @@ public class Core extends DummyModContainer {
 	public void Init(FMLInitializationEvent event) {
 
 		CoreLogger.info("Initializing Core.");
+
 		proxy.Init();
 		proxy.registerRenderThings();
 	}
@@ -97,6 +89,25 @@ public class Core extends DummyModContainer {
 		CoreLogger.info("Post-initializing Core.");
 		proxy.PostInit();
 		CoreLogger.info("Core loaded.");
+	}
+
+	public static void syncConfig(){
+
+		canRenderStarspawn = cfg.getBoolean("RenderPlayer Override", "render", true, "Whether or not to override the player model"
+				+ "(set false for compatibility with other mods that alters the player model)");
+
+		if(cfg.hasChanged())
+			cfg.save();
+		if(canRenderStarspawn == true)
+			CoreLogger.info("RenderPlayer Override enabled, the Coralium Longbow will render twice in your hand now.");
+		else CoreLogger.info("RenderPlayer Override disabled, Compatibility level +100.");
+
+	}
+
+	@SubscribeEvent
+	public void onConfigChanged(ConfigChangedEvent.OnConfigChangedEvent eventArgs) {
+		if(eventArgs.modID.equals("accore"))
+			syncConfig();
 	}
 
 	@Override
@@ -113,6 +124,12 @@ public class Core extends DummyModContainer {
 	@Override
 	public Class<?> getCustomResourcePackClass() {
 		return getSource().isDirectory() ? FMLFolderResourcePack.class : FMLFileResourcePack.class;
+	}
+
+	@Override
+	public String getGuiClassName()
+	{
+		return "com.shinoow.abyssalcraft.core.client.config.ACCoreGuiFactory";
 	}
 
 	@Override

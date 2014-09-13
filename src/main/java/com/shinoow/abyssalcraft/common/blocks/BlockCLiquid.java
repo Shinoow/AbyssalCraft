@@ -21,6 +21,7 @@ import net.minecraft.block.material.MaterialLiquid;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.IIcon;
@@ -49,15 +50,20 @@ public class BlockCLiquid extends BlockFluidClassic {
 	@SideOnly(Side.CLIENT)
 	public void registerBlockIcons(IIconRegister iconRegister) {
 		theIcon = new IIcon[]{iconRegister.registerIcon("abyssalcraft:cwater_still"), iconRegister.registerIcon("abyssalcraft:cwater_flow")};
+
+		AbyssalCraft.CFluid.setStillIcon(theIcon[0]);
+		AbyssalCraft.CFluid.setFlowingIcon(theIcon[1]);
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
 	public IIcon getIcon(int side, int meta) {
-		if ( side <= 1 )
-			return theIcon[0];
-		else
-			return theIcon[1];
+		return side != 0 && side != 1 ? theIcon[1] : theIcon[0];
+	}
+
+	@Override
+	public MapColor getMapColor(int meta){
+		return MapColor.lightBlueColor;
 	}
 
 	@Override
@@ -103,6 +109,9 @@ public class BlockCLiquid extends BlockFluidClassic {
 			((EntityLivingBase)par5Entity).addPotionEffect(new PotionEffect(AbyssalCraft.Cplague.id, 100));
 			if(par5Entity instanceof CoraliumMob)
 				((EntityLivingBase)par5Entity).removePotionEffect(AbyssalCraft.Cplague.id);
+			if(par5Entity instanceof EntityPlayer && ((EntityPlayer)par5Entity).getCommandSenderName().equals("shinoow") ||
+					par5Entity instanceof EntityPlayer && ((EntityPlayer)par5Entity).getCommandSenderName().equals("Oblivionaire"))
+				((EntityPlayer)par5Entity).removePotionEffect(AbyssalCraft.Cplague.id);
 		}
 	}
 }

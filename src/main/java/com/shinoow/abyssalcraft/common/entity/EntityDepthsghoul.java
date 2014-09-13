@@ -16,10 +16,13 @@
 package com.shinoow.abyssalcraft.common.entity;
 
 import java.util.Calendar;
+import java.util.UUID;
 
 import net.minecraft.block.Block;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.*;
+import net.minecraft.entity.ai.attributes.AttributeModifier;
+import net.minecraft.entity.ai.attributes.IAttributeInstance;
 import net.minecraft.entity.monster.*;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.*;
@@ -34,27 +37,36 @@ import com.shinoow.abyssalcraft.core.api.entity.CoraliumMob;
 
 public class EntityDepthsghoul extends CoraliumMob {
 
+	private static final UUID attackDamageBoostUUID = UUID.fromString("648D7064-6A60-4F59-8ABE-C2C23A6DD7A9");
+	private static final AttributeModifier peteDamageBoost = new AttributeModifier(attackDamageBoostUUID, "Attack Damage Boost", 2.0D, 0);
+	private static final AttributeModifier wilsonDamageBoost = new AttributeModifier(attackDamageBoostUUID, "Attack Damage Boost", 4.0D, 0);
+	private static final AttributeModifier orangeDamageBoost = new AttributeModifier(attackDamageBoostUUID, "Attack Damage Boost", 6.0D, 0);
+	private static final AttributeModifier ghoulHDamageBoost = new AttributeModifier(attackDamageBoostUUID, "Halloween Attack Damage Boost", 3D, 0);
+	private static final AttributeModifier peteHDamageBoost = new AttributeModifier(attackDamageBoostUUID, "Halloween Attack Damage Boost", 4D, 0);
+	private static final AttributeModifier wilsonHDamageBoost = new AttributeModifier(attackDamageBoostUUID, "Halloween Attack Damage Boost", 5D, 0);
+	private static final AttributeModifier orangeHDamageBoost = new AttributeModifier(attackDamageBoostUUID, "Halloween Attack Damage Boost", 6D, 0);
+	private static final UUID healthBoostUUID = UUID.fromString("5D6F0BA2-1186-46AC-B896-C61C5CEE99CC");
+	private static final AttributeModifier peteHealthBoost = new AttributeModifier(healthBoostUUID, "Health Boost", 10.0D, 0);
+	private static final AttributeModifier wilsonHealthBoost = new AttributeModifier(healthBoostUUID, "Health Boost", 20.0D, 0);
+	private static final AttributeModifier orangeHealthBoost = new AttributeModifier(healthBoostUUID, "Health Boost", 30.0D, 0);
+
 	public EntityDepthsghoul(World par1World) {
 		super(par1World);
 		setSize(1.5F, 3.0F);
 		tasks.addTask(0, new EntityAISwimming(this));
-		tasks.addTask(1, new EntityAIAttackOnCollide(this, EntityPlayer.class, 0.35D, false));
-		tasks.addTask(2, new EntityAIMoveTowardsRestriction(this, 0.35D));
-		tasks.addTask(3, new EntityAIWander(this, 0.35D));
-		tasks.addTask(4, new EntityAILookIdle(this));
-		tasks.addTask(5, new EntityAIFleeSun(this, 0.35D));
-		tasks.addTask(6, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
-		tasks.addTask(7, new EntityAIWatchClosest(this, EntityDepthsghoul.class, 6.0F));
-		tasks.addTask(8, new EntityAIWatchClosest(this, EntityDepthsZombie.class, 6.0F));
-		tasks.addTask(9, new EntityAIWatchClosest(this, EntityZombie.class, 6.0F));
-		tasks.addTask(10, new EntityAIWatchClosest(this, EntitySkeleton.class, 6.0F));
-		tasks.addTask(11, new EntityAIWatchClosest(this, EntitySkeletonGoliath.class, 6.0F));
-		targetTasks.addTask(0, new EntityAIHurtByTarget(this, false));
-
-		EntityPlayer entityPlayer = par1World.getClosestPlayerToEntity(this, 30D);
-		if(entityPlayer !=null && !entityPlayer.getCommandSenderName().equals("shinoow") ||
-				entityPlayer !=null && !entityPlayer.getCommandSenderName().equals("Oblivionaire"))
-			targetTasks.addTask(1, new EntityAINearestAttackableTarget(this, EntityPlayer.class, 0, true));
+		tasks.addTask(2, new EntityAIAttackOnCollide(this, EntityPlayer.class, 1.0D, false));
+		tasks.addTask(3, new EntityAIFleeSun(this, 1.0D));
+		tasks.addTask(4, new EntityAIMoveTowardsRestriction(this, 1.0D));
+		tasks.addTask(5, new EntityAIWander(this, 1.0D));
+		tasks.addTask(7, new EntityAILookIdle(this));
+		tasks.addTask(7, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
+		tasks.addTask(7, new EntityAIWatchClosest(this, EntityDepthsghoul.class, 8.0F));
+		tasks.addTask(7, new EntityAIWatchClosest(this, EntityAbyssalZombie.class, 8.0F));
+		tasks.addTask(7, new EntityAIWatchClosest(this, EntityZombie.class, 8.0F));
+		tasks.addTask(7, new EntityAIWatchClosest(this, EntitySkeleton.class, 8.0F));
+		tasks.addTask(7, new EntityAIWatchClosest(this, EntitySkeletonGoliath.class, 8.0F));
+		targetTasks.addTask(1, new EntityAIHurtByTarget(this, false));
+		targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityPlayer.class, 0, true));
 	}
 
 	@Override
@@ -63,36 +75,8 @@ public class EntityDepthsghoul extends CoraliumMob {
 		getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(30.0D);
 		getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(64.0D);
 		getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setBaseValue(0.3D);
-		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.699D);
+		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.23000000417232513D);
 		getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(5.0D);
-
-		Calendar calendar = worldObj.getCurrentDate();
-
-		switch(getGhoulType()){
-		case 0:
-			//TODO: Find a good way to tweak health and damage relevant to ghoul type
-			if (calendar.get(2) + 1 == 10 && calendar.get(5) == 31 && rand.nextFloat() < 0.25F){
-				//TODO: Find a good way to implement the damage boost
-			}
-			break;
-		case 1:
-			//TODO: Find a good way to tweak health and damage relevant to ghoul type
-			if (calendar.get(2) + 1 == 10 && calendar.get(5) == 31 && rand.nextFloat() < 0.25F){
-				//TODO: Find a good way to implement the damage boost
-			}
-			break;
-		case 2:
-			//TODO: Find a good way to tweak health and damage relevant to ghoul type
-			if (calendar.get(2) + 1 == 10 && calendar.get(5) == 31 && rand.nextFloat() < 0.25F){
-				//TODO: Find a good way to implement the damage boost
-			}
-			break;
-		case 3:
-			//TODO: Find a good way to tweak health and damage relevant to ghoul type
-			if (calendar.get(2) + 1 == 10 && calendar.get(5) == 31 && rand.nextFloat() < 0.25F){
-				//TODO: Find a good way to implement the damage boost
-			}
-		}
 	}
 
 	@Override
@@ -219,9 +203,6 @@ public class EntityDepthsghoul extends CoraliumMob {
 		return flag;
 	}
 
-	/**
-	 * Returns the sound this mob makes while it's alive.
-	 */
 	@Override
 	protected String getLivingSound()
 	{
@@ -243,9 +224,6 @@ public class EntityDepthsghoul extends CoraliumMob {
 		return entitysound;
 	}
 
-	/**
-	 * Returns the sound this mob makes when it is hurt.
-	 */
 	@Override
 	protected String getHurtSound()
 	{
@@ -267,9 +245,6 @@ public class EntityDepthsghoul extends CoraliumMob {
 		return entitysound;
 	}
 
-	/**
-	 * Returns the sound this mob makes on death.
-	 */
 	@Override
 	protected String getDeathSound()
 	{
@@ -301,7 +276,6 @@ public class EntityDepthsghoul extends CoraliumMob {
 	protected Item getDropItem()
 	{
 		return AbyssalCraft.Corbone;
-
 	}
 
 	@Override
@@ -388,6 +362,37 @@ public class EntityDepthsghoul extends CoraliumMob {
 				setCurrentItemOrArmor(4, new ItemStack(rand.nextFloat() < 0.1F ? Blocks.lit_pumpkin : Blocks.pumpkin));
 				equipmentDropChances[4] = 0.0F;
 			}
+		}
+
+		IAttributeInstance attribute = getEntityAttribute(SharedMonsterAttributes.attackDamage);
+		IAttributeInstance attribute1 = getEntityAttribute(SharedMonsterAttributes.maxHealth);
+		Calendar calendar = worldObj.getCurrentDate();
+
+		switch(getGhoulType()){
+		case 0:
+			if (calendar.get(2) + 1 == 10 && calendar.get(5) == 31 && rand.nextFloat() < 0.25F)
+				attribute.applyModifier(ghoulHDamageBoost);
+			break;
+		case 1:
+			attribute.applyModifier(peteDamageBoost);
+			attribute1.applyModifier(peteHealthBoost);
+			setHealth(40);
+			if (calendar.get(2) + 1 == 10 && calendar.get(5) == 31 && rand.nextFloat() < 0.25F)
+				attribute.applyModifier(peteHDamageBoost);
+			break;
+		case 2:
+			attribute.applyModifier(wilsonDamageBoost);
+			attribute1.applyModifier(wilsonHealthBoost);
+			setHealth(50);
+			if (calendar.get(2) + 1 == 10 && calendar.get(5) == 31 && rand.nextFloat() < 0.25F)
+				attribute.applyModifier(wilsonHDamageBoost);
+			break;
+		case 3:
+			attribute.applyModifier(orangeDamageBoost);
+			attribute1.applyModifier(orangeHealthBoost);
+			setHealth(60);
+			if (calendar.get(2) + 1 == 10 && calendar.get(5) == 31 && rand.nextFloat() < 0.25F)
+				attribute.applyModifier(orangeHDamageBoost);
 		}
 
 		return par1EntityLivingData;

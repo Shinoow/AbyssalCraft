@@ -111,4 +111,13 @@ public class BlockList {
 	public static Block fist_of_chagaroth_spawner = GameRegistry.findBlock(modId, "chagarothfistspawner");
 	public static Block dreadlands_wood_fence = GameRegistry.findBlock(modId, "drtfence");
 	public static Block nitre_ore = GameRegistry.findBlock(modId, "nitreore");
+	public static Block abyssal_iron_ore = GameRegistry.findBlock(modId, "abyiroore");
+	public static Block abyssal_gold_ore = GameRegistry.findBlock(modId, "abygolore");
+	public static Block abyssal_diamond_ore = GameRegistry.findBlock(modId, "abydiaore");
+	public static Block abyssal_nitre_ore = GameRegistry.findBlock(modId, "abynitore");
+	public static Block abyssal_tin_ore = GameRegistry.findBlock(modId, "abycopore");
+	public static Block abyssal_copper_ore = GameRegistry.findBlock(modId, "abytinore");
+	public static Block pearlescent_coralium_ore = GameRegistry.findBlock(modId, "abypcorore");
+	public static Block liquified_coralium_ore = GameRegistry.findBlock(modId, "abylcorore");
+	public static Block solid_lava = GameRegistry.findBlock(modId, "solidlava");
 }

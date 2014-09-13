@@ -8,6 +8,7 @@ import net.minecraft.block.Block;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.*;
+import net.minecraft.util.StatCollector;
 import codechicken.nei.ItemList;
 import codechicken.nei.NEIServerUtils;
 import codechicken.nei.PositionedStack;
@@ -19,13 +20,17 @@ import com.shinoow.abyssalcraft.core.util.recipes.CrystallizerRecipes;
 
 public class CrystallizerRecipeHandler extends TemplateRecipeHandler
 {
-	public class SmeltingPair extends CachedRecipe
+	public class CrystallizationPair extends CachedRecipe
 	{
-		public SmeltingPair(ItemStack ingred, ItemStack[] itemStacks) {
+		public CrystallizationPair(ItemStack ingred, ItemStack[] itemStacks) {
 			ingred.stackSize = 1;
 			this.ingred = new PositionedStack(ingred, 51, 6);
-			result = new PositionedStack(new ItemStack[] {itemStacks[0]}, 111, 24);
-			result2 = new PositionedStack(new ItemStack[] {itemStacks[1]}, 128, 24);
+			result = new PositionedStack(itemStacks[0], 111, 24);
+			if(itemStacks[1] != null)
+				result2 = new PositionedStack(itemStacks[1], 128, 24);
+			resultList.add(result);
+			if(result2 != null)
+				resultList.add(result2);
 		}
 
 		@Override
@@ -35,7 +40,9 @@ public class CrystallizerRecipeHandler extends TemplateRecipeHandler
 
 		@Override
 		public PositionedStack getResult() {
-			return result;
+			while(resultList.iterator().hasNext())
+				return resultList.iterator().next();
+			return resultList.iterator().next();
 		}
 
 		@Override
@@ -46,6 +53,7 @@ public class CrystallizerRecipeHandler extends TemplateRecipeHandler
 		PositionedStack ingred;
 		PositionedStack result;
 		PositionedStack result2;
+		private List<PositionedStack> resultList = new ArrayList<PositionedStack>();
 	}
 
 	public static class FuelPair
@@ -65,7 +73,7 @@ public class CrystallizerRecipeHandler extends TemplateRecipeHandler
 	@Override
 	public void loadTransferRects() {
 		transferRects.add(new RecipeTransferRect(new Rectangle(50, 23, 18, 18), "fuel"));
-		transferRects.add(new RecipeTransferRect(new Rectangle(74, 23, 24, 18), "smelting"));
+		transferRects.add(new RecipeTransferRect(new Rectangle(74, 23, 24, 18), "crystallization"));
 	}
 
 	@Override
@@ -75,7 +83,7 @@ public class CrystallizerRecipeHandler extends TemplateRecipeHandler
 
 	@Override
 	public String getRecipeName() {
-		return "Crystallization";
+		return StatCollector.translateToLocal("container.abyssalcraft.crystallizer.nei");
 	}
 
 	@Override
@@ -87,10 +95,10 @@ public class CrystallizerRecipeHandler extends TemplateRecipeHandler
 
 	@Override
 	public void loadCraftingRecipes(String outputId, Object... results) {
-		if (outputId.equals("smelting") && getClass() == CrystallizerRecipeHandler.class) {//don't want subclasses getting a hold of this
+		if (outputId.equals("crystallization") && getClass() == CrystallizerRecipeHandler.class) {//don't want subclasses getting a hold of this
 			Map<ItemStack, ItemStack[]> recipes = CrystallizerRecipes.crystallization().getCrystallizationList();
 			for (Entry<ItemStack, ItemStack[]> recipe : recipes.entrySet())
-				arecipes.add(new SmeltingPair(recipe.getKey(), new ItemStack[] {recipe.getValue()[0], recipe.getValue()[1]}));
+				arecipes.add(new CrystallizationPair(recipe.getKey(), new ItemStack[] {recipe.getValue()[0], recipe.getValue()[1]}));
 		} else
 			super.loadCraftingRecipes(outputId, results);
 	}
@@ -100,13 +108,13 @@ public class CrystallizerRecipeHandler extends TemplateRecipeHandler
 		Map<ItemStack, ItemStack[]> recipes = CrystallizerRecipes.crystallization().getCrystallizationList();
 		for (Entry<ItemStack, ItemStack[]> recipe : recipes.entrySet())
 			if (NEIServerUtils.areStacksSameType(recipe.getValue()[0], result))
-				arecipes.add(new SmeltingPair(recipe.getKey(), new ItemStack[] {recipe.getValue()[0], recipe.getValue()[1]}));
+				arecipes.add(new CrystallizationPair(recipe.getKey(), new ItemStack[] {recipe.getValue()[0], recipe.getValue()[1]}));
 	}
 
 	@Override
 	public void loadUsageRecipes(String inputId, Object... ingredients) {
 		if (inputId.equals("fuel") && getClass() == CrystallizerRecipeHandler.class)//don't want subclasses getting a hold of this
-			loadCraftingRecipes("smelting");
+			loadCraftingRecipes("crystallization");
 		else
 			super.loadUsageRecipes(inputId, ingredients);
 	}
@@ -116,7 +124,7 @@ public class CrystallizerRecipeHandler extends TemplateRecipeHandler
 		Map<ItemStack, ItemStack[]> recipes = CrystallizerRecipes.crystallization().getCrystallizationList();
 		for (Entry<ItemStack, ItemStack[]> recipe : recipes.entrySet())
 			if (NEIServerUtils.areStacksSameTypeCrafting(recipe.getKey(), ingredient)) {
-				SmeltingPair arecipe = new SmeltingPair(recipe.getKey(), new ItemStack[] {recipe.getValue()[0], recipe.getValue()[1]});
+				CrystallizationPair arecipe = new CrystallizationPair(recipe.getKey(), new ItemStack[] {recipe.getValue()[0], recipe.getValue()[1]});
 				arecipe.setIngredientPermutation(Arrays.asList(arecipe.ingred), ingredient);
 				arecipes.add(arecipe);
 			}
@@ -124,7 +132,7 @@ public class CrystallizerRecipeHandler extends TemplateRecipeHandler
 
 	@Override
 	public String getGuiTexture() {
-		return "abyssalcraft:textures/gui/container/crystallizer.png";
+		return "abyssalcraft:textures/gui/container/crystallizer_NEI.png";
 	}
 
 	@Override
@@ -157,6 +165,6 @@ public class CrystallizerRecipeHandler extends TemplateRecipeHandler
 
 	@Override
 	public String getOverlayIdentifier() {
-		return "smelting";
+		return "crystallization";
 	}
 }

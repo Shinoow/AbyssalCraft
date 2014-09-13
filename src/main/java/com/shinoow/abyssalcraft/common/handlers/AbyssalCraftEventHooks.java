@@ -15,76 +15,14 @@
  */
 package com.shinoow.abyssalcraft.common.handlers;
 
-import net.minecraft.entity.IEntityLivingData;
-import net.minecraft.entity.monster.EntityZombie;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
-import net.minecraft.world.EnumDifficulty;
-import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
-import net.minecraftforge.event.entity.player.BonemealEvent;
-import net.minecraftforge.event.entity.player.EntityItemPickupEvent;
-
+import net.minecraftforge.event.entity.player.*;
 import com.shinoow.abyssalcraft.AbyssalCraft;
-import com.shinoow.abyssalcraft.common.blocks.BlockDLTSapling;
-import com.shinoow.abyssalcraft.common.blocks.BlockDreadsapling;
-import com.shinoow.abyssalcraft.common.entity.EntityDepthsZombie;
-import com.shinoow.abyssalcraft.common.entity.EntityDepthsghoul;
-import com.shinoow.abyssalcraft.common.util.ACDamageSource;
-import com.shinoow.abyssalcraft.core.api.entity.CoraliumMob;
-import com.shinoow.abyssalcraft.core.api.entity.DreadMob;
-
+import com.shinoow.abyssalcraft.common.blocks.*;
 import cpw.mods.fml.common.eventhandler.Event.Result;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 
 public class AbyssalCraftEventHooks {
-
-	//Potion stuff
-	@SubscribeEvent
-	public void onEntityUpdate(LivingUpdateEvent event) {
-		if (event.entityLiving.isPotionActive(AbyssalCraft.Cplague))
-			if (event.entityLiving.worldObj.rand.nextInt(20) == 0) {
-				event.entityLiving.attackEntityFrom(ACDamageSource.coralium, 2);
-				if (event.entityLiving instanceof CoraliumMob)
-					event.entityLiving.removePotionEffect(AbyssalCraft.Cplague.id);
-				if(event.entityLiving instanceof EntityZombie) {
-					if(!event.entityLiving.isEntityAlive())
-					{
-						EntityDepthsZombie entityzombie = new EntityDepthsZombie(event.entityLiving.worldObj);
-						if(event.entityLiving.worldObj.difficultySetting == EnumDifficulty.HARD && event.entityLiving.worldObj.rand.nextBoolean()) {
-							entityzombie.copyLocationAndAnglesFrom(event.entityLiving);
-							entityzombie.onSpawnWithEgg((IEntityLivingData)null);
-							entityzombie.setIsZombie(true);
-						}
-						else if(event.entityLiving.worldObj.rand.nextInt(8) == 0) {
-							entityzombie.copyLocationAndAnglesFrom(event.entityLiving);
-							entityzombie.onSpawnWithEgg((IEntityLivingData)null);
-							entityzombie.setIsZombie(true);
-						}
-
-						event.entityLiving.worldObj.removeEntity(event.entityLiving);
-						event.entityLiving.worldObj.spawnEntityInWorld(entityzombie);
-					}
-					if(event.entityLiving.worldObj.getWorldInfo().isHardcoreModeEnabled())
-						if(!event.entityLiving.isEntityAlive() && event.entityLiving.worldObj.rand.nextInt(10) == 0) {
-							EntityDepthsghoul ghoul = new EntityDepthsghoul(event.entityLiving.worldObj);
-							ghoul.copyLocationAndAnglesFrom(event.entityLiving);
-							ghoul.onSpawnWithEgg((IEntityLivingData)null);
-							event.entityLiving.worldObj.removeEntity(event.entityLiving);
-							ghoul.setGhoulType(0);
-							event.entityLiving.worldObj.spawnEntityInWorld(ghoul);
-						}
-				}
-			}
-		if (event.entityLiving.isPotionActive(AbyssalCraft.Dplague)){
-			if(event.entityLiving instanceof EntityPlayer)
-				((EntityPlayer)event.entityLiving).addExhaustion(0.025F * (event.entityLiving.worldObj.rand.nextInt(3)+1));
-			if (event.entityLiving.worldObj.rand.nextInt(20) == 0) {
-				event.entityLiving.attackEntityFrom(ACDamageSource.dread, 1);
-				if (event.entityLiving instanceof DreadMob)
-					event.entityLiving.removePotionEffect(AbyssalCraft.Dplague.id);
-			}
-		}
-	}
 
 	//Bonemeal events
 	@SubscribeEvent
@@ -106,7 +44,7 @@ public class AbyssalCraftEventHooks {
 	public void onItemPickup(EntityItemPickupEvent event) {
 		if(event.item.getEntityItem().getItem() == Item.getItemFromBlock(AbyssalCraft.Darkstone_cobble))
 			event.entityPlayer.addStat(AbyssalCraft.mineDS, 1);
-		if(event.item.getEntityItem().getItem() == AbyssalCraft.abychunk)
+		if(event.item.getEntityItem().getItem() == Item.getItemFromBlock(AbyssalCraft.abyore))
 			event.entityPlayer.addStat(AbyssalCraft.mineAby, 1);
 		if(event.item.getEntityItem().getItem() == AbyssalCraft.Coralium)
 			event.entityPlayer.addStat(AbyssalCraft.mineCorgem, 1);

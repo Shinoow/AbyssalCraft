@@ -3773,14 +3773,18 @@ public class chagarothlair extends WorldGenerator {
 				tileentitychest.setInventorySlotContents(6, new ItemStack(AbyssalCraft.crystalHydrogen, 1));
 				tileentitychest.setInventorySlotContents(7, new ItemStack(AbyssalCraft.crystalIron, 1));
 				tileentitychest.setInventorySlotContents(8, new ItemStack(AbyssalCraft.crystalMethane, 1));
-				tileentitychest.setInventorySlotContents(9, new ItemStack(AbyssalCraft.crystalNitrate, 1));
-				tileentitychest.setInventorySlotContents(10, new ItemStack(AbyssalCraft.crystalNitrogen, 1));
-				tileentitychest.setInventorySlotContents(11, new ItemStack(AbyssalCraft.crystalOxygen, 1));
-				tileentitychest.setInventorySlotContents(12, new ItemStack(AbyssalCraft.crystalPhosphorus, 1));
-				tileentitychest.setInventorySlotContents(14, new ItemStack(AbyssalCraft.crystalPotassium, 1));
-				tileentitychest.setInventorySlotContents(15, new ItemStack(AbyssalCraft.crystalRedstone, 1));
-				tileentitychest.setInventorySlotContents(16, new ItemStack(AbyssalCraft.crystalSulfur, 1));
-				tileentitychest.setInventorySlotContents(17, new ItemStack(AbyssalCraft.OC, 1));
+				tileentitychest.setInventorySlotContents(9, new ItemStack(AbyssalCraft.crystalNitrogen, 1));
+				tileentitychest.setInventorySlotContents(10, new ItemStack(AbyssalCraft.crystalOxygen, 1));
+				tileentitychest.setInventorySlotContents(11, new ItemStack(AbyssalCraft.crystalPhosphorus, 1));
+				tileentitychest.setInventorySlotContents(12, new ItemStack(AbyssalCraft.crystalPotassium, 1));
+				tileentitychest.setInventorySlotContents(14, new ItemStack(AbyssalCraft.crystalRedstone, 1));
+				tileentitychest.setInventorySlotContents(15, new ItemStack(AbyssalCraft.crystalSulfur, 1));
+				tileentitychest.setInventorySlotContents(16, new ItemStack(AbyssalCraft.crystalTin, 1));
+				tileentitychest.setInventorySlotContents(17, new ItemStack(AbyssalCraft.crystalCopper, 1));
+				tileentitychest.setInventorySlotContents(18, new ItemStack(AbyssalCraft.crystalSilicon, 1));
+				tileentitychest.setInventorySlotContents(19, new ItemStack(AbyssalCraft.crystalMagnesium, 1));
+				tileentitychest.setInventorySlotContents(20, new ItemStack(AbyssalCraft.crystalAluminium, 1));
+				tileentitychest.setInventorySlotContents(21, new ItemStack(AbyssalCraft.OC, 1));
 				if(world.rand.nextInt(10000) == 0){
 					tileentitychest.decrStackSize(13, 1);
 					tileentitychest.setInventorySlotContents(13, new ItemStack(AbyssalCraft.devsword, 1));

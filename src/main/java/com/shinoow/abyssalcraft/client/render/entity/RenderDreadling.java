@@ -22,8 +22,7 @@ import net.minecraft.util.ResourceLocation;
 import com.shinoow.abyssalcraft.client.model.entity.ModelDreadling;
 import com.shinoow.abyssalcraft.common.entity.EntityDreadling;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import cpw.mods.fml.relauncher.*;
 
 @SideOnly(Side.CLIENT)
 public class RenderDreadling extends RenderLiving {

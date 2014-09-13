@@ -66,5 +66,11 @@ public class ItemDreadiumArmor extends ItemArmor {
 			if(player.getActivePotionEffect(AbyssalCraft.Dplague) !=null)
 				player.removePotionEffect(AbyssalCraft.Dplague.getId());
 		}
+		if (itemstack.getItem() == AbyssalCraft.dreadiumplate)
+			player.addPotionEffect(new PotionEffect(Potion.resistance.getId(), 20, 0));
+		if (itemstack.getItem() == AbyssalCraft.dreadiumlegs)
+			player.addPotionEffect(new PotionEffect(Potion.regeneration.getId(), 20, 0));
+		if (itemstack.getItem() == AbyssalCraft.dreadiumboots)
+			player.addPotionEffect(new PotionEffect(Potion.moveSpeed.getId(), 20, 1));
 	}
 }

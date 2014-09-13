@@ -27,7 +27,7 @@ import net.minecraft.world.gen.feature.WorldGenMinable;
 import net.minecraft.world.gen.feature.WorldGenerator;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
-import com.shinoow.abyssalcraft.common.entity.EntityDepthsZombie;
+import com.shinoow.abyssalcraft.common.entity.EntityAbyssalZombie;
 import com.shinoow.abyssalcraft.common.entity.EntityDepthsghoul;
 
 import cpw.mods.fml.relauncher.Side;
@@ -60,7 +60,7 @@ public class BiomeGenDarklandsMountains extends BiomeGenBase
 		spawnableMonsterList.add(new SpawnListEntry(EntityZombie.class, 2, 1, 2));
 		spawnableMonsterList.add(new SpawnListEntry(EntitySkeleton.class, 2, 1, 2));
 		spawnableMonsterList.add(new SpawnListEntry(EntityDepthsghoul.class, 2, 1, 2));
-		spawnableMonsterList.add(new SpawnListEntry(EntityDepthsZombie.class, 2, 1, 2));
+		spawnableMonsterList.add(new SpawnListEntry(EntityAbyssalZombie.class, 2, 1, 2));
 	}
 	@Override
 	public void decorate(World par1World, Random par2Random, int par3, int par4)

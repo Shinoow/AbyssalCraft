@@ -24,6 +24,7 @@ import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
+import net.minecraft.item.Item;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
@@ -51,70 +52,52 @@ public class BlockTeleporter extends BlockBreakable
 		blockIcon = par1IconRegister.registerIcon(AbyssalCraft.modid + ":" + "AG");
 	}
 
-	/**
-	 * Ticks the block if it's been scheduled
-	 */
-	@Override
-	public void updateTick(World par1World, int par2, int par3, int par4, Random par5Random)
-	{
-		super.updateTick(par1World, par2, par3, par4, par5Random);
-		if (par1World.provider.isSurfaceWorld() && par5Random.nextInt(2000) < par1World.difficultySetting.getDifficultyId())
-		{
-			int l;
-			for (l = par3; !World.doesBlockHaveSolidTopSurface(par1World, par2, l, par4) && l > 0; --l)
-				;
-		}
-	}
-	/**
-	 * Returns a bounding box from the pool of bounding boxes (this means this box can change after the pool has been
-	 * cleared to be reused)
-	 */
 	@Override
 	public AxisAlignedBB getCollisionBoundingBoxFromPool(World par1World, int par2, int par3, int par4)
 	{
 		return null;
 	}
-	/**
-	 * Updates the blocks bounds based on its current state. Args: world, x, y, z
-	 */
+
 	@Override
-	public void setBlockBoundsBasedOnState(IBlockAccess par1IBlockAccess, int par2, int par3, int par4)
+	public void setBlockBoundsBasedOnState(IBlockAccess par1BlockAccess, int par2, int par3, int par4)
 	{
-		float f;
-		float f1;
-		if (par1IBlockAccess.getBlock(par2 - 1, par3, par4) != this && par1IBlockAccess.getBlock(par2 + 1, par3, par4) != this)
+		int l = func_149999_b(par1BlockAccess.getBlockMetadata(par2, par3, par4));
+
+		if (l == 0)
 		{
-			f = 0.125F;
-			f1 = 0.5F;
-			setBlockBounds(0.5F - f, 0.0F, 0.5F - f1, 0.5F + f, 1.0F, 0.5F + f1);
+			if (par1BlockAccess.getBlock(par2 - 1, par3, par4) != this && par1BlockAccess.getBlock(par2 + 1, par3, par4) != this)
+				l = 2;
+			else
+				l = 1;
+
+			if (par1BlockAccess instanceof World && !((World)par1BlockAccess).isRemote)
+				((World)par1BlockAccess).setBlockMetadataWithNotify(par2, par3, par4, l, 2);
 		}
-		else
-		{
+
+		float f = 0.125F;
+		float f1 = 0.125F;
+
+		if (l == 1)
 			f = 0.5F;
-			f1 = 0.125F;
-			setBlockBounds(0.5F - f, 0.0F, 0.5F - f1, 0.5F + f, 1.0F, 0.5F + f1);
-		}
+
+		if (l == 2)
+			f1 = 0.5F;
+
+		setBlockBounds(0.5F - f, 0.0F, 0.5F - f1, 0.5F + f, 1.0F, 0.5F + f1);
 	}
-	/**
-	 * Is this block (a) opaque and (B) a full 1m cube? This determines whether or not to render the shared face of two
-	 * adjacent blocks and also whether the player can attach torches, redstone wire, etc to this block.
-	 */
+
 	@Override
 	public boolean isOpaqueCube()
 	{
 		return false;
 	}
-	/**
-	 * If this block doesn't render as an ordinary block it will return False (examples: signs, buttons, stairs, etc)
-	 */
+
 	@Override
 	public boolean renderAsNormalBlock()
 	{
 		return false;
 	}
-	/**
-	 * Checks to see if this location is valid to create a portal and will return True if it does. Args: world, x, y, z
-	 */
+
 	public static boolean tryToCreatePortal(World par1World, int par2, int par3, int par4)
 	{
 		byte b0 = 0;
@@ -156,11 +139,9 @@ public class BlockTeleporter extends BlockBreakable
 			return true;
 		}
 	}
-	/**
-	 * Lets the block know when one of its neighbor changes. Doesn't know which neighbor changed (coordinates passed are
-	 * their own) Args: x, y, z, neighbor blockID
-	 */
-	public void onNeighborBlockChange(World par1World, int par2, int par3, int par4, int par5)
+
+	@Override
+	public void onNeighborBlockChange(World par1World, int par2, int par3, int par4, Block par5)
 	{
 		byte b0 = 0;
 		byte b1 = 1;
@@ -191,38 +172,42 @@ public class BlockTeleporter extends BlockBreakable
 				par1World.setBlockToAir(par2, par3, par4);
 		}
 	}
+
 	@Override
 	@SideOnly(Side.CLIENT)
-	/**
-	 * Returns true if the given side of this block type should be rendered, if the adjacent block is at the given
-	 * coordinates. Args: blockAccess, x, y, z, side
-	 */
-	public boolean shouldSideBeRendered(IBlockAccess par1IBlockAccess, int par2, int par3, int par4, int par5)
+	public boolean shouldSideBeRendered(IBlockAccess par1BlockAccess, int par2, int par3, int par4, int par5)
 	{
-		if (par1IBlockAccess.getBlock(par2, par3, par4) == this)
-			return false;
-		else
+		int i1 = 0;
+
+		if (par1BlockAccess.getBlock(par2, par3, par4) == this)
 		{
-			boolean flag = par1IBlockAccess.getBlock(par2 - 1, par3, par4) == this && par1IBlockAccess.getBlock(par2 - 2, par3, par4) != this;
-			boolean flag1 = par1IBlockAccess.getBlock(par2 + 1, par3, par4) == this && par1IBlockAccess.getBlock(par2 + 2, par3, par4) != this;
-			boolean flag2 = par1IBlockAccess.getBlock(par2, par3, par4 - 1) == this && par1IBlockAccess.getBlock(par2, par3, par4 - 2) != this;
-			boolean flag3 = par1IBlockAccess.getBlock(par2, par3, par4 + 1) == this && par1IBlockAccess.getBlock(par2, par3, par4 + 2) != this;
-			boolean flag4 = flag || flag1;
-			boolean flag5 = flag2 || flag3;
-			return flag4 && par5 == 4 ? true : flag4 && par5 == 5 ? true : flag5 && par5 == 2 ? true : flag5 && par5 == 3;
+			i1 = func_149999_b(par1BlockAccess.getBlockMetadata(par2, par3, par4));
+
+			if (i1 == 0)
+				return false;
+
+			if (i1 == 2 && par5 != 5 && par5 != 4)
+				return false;
+
+			if (i1 == 1 && par5 != 3 && par5 != 2)
+				return false;
 		}
+
+		boolean flag = par1BlockAccess.getBlock(par2 - 1, par3, par4) == this && par1BlockAccess.getBlock(par2 - 2, par3, par4) != this;
+		boolean flag1 = par1BlockAccess.getBlock(par2 + 1, par3, par4) == this && par1BlockAccess.getBlock(par2 + 2, par3, par4) != this;
+		boolean flag2 = par1BlockAccess.getBlock(par2, par3, par4 - 1) == this && par1BlockAccess.getBlock(par2, par3, par4 - 2) != this;
+		boolean flag3 = par1BlockAccess.getBlock(par2, par3, par4 + 1) == this && par1BlockAccess.getBlock(par2, par3, par4 + 2) != this;
+		boolean flag4 = flag || flag1 || i1 == 1;
+		boolean flag5 = flag2 || flag3 || i1 == 2;
+		return flag4 && par5 == 4 ? true : flag4 && par5 == 5 ? true : flag5 && par5 == 2 ? true : flag5 && par5 == 3;
 	}
-	/**
-	 * Returns the quantity of items to drop on block destruction.
-	 */
+
 	@Override
 	public int quantityDropped(Random par1Random)
 	{
 		return 0;
 	}
-	/**
-	 * Triggered whenever an entity collides with this block (enters into the block). Args: world, x, y, z, entity
-	 */
+
 	@Override
 	public void onEntityCollidedWithBlock(World par1World, int par2, int par3, int par4, Entity par5Entity)
 	{
@@ -244,22 +229,24 @@ public class BlockTeleporter extends BlockBreakable
 			}
 		}
 	}
+
+	public static int func_149999_b(int p_149999_0_)
+	{
+		return p_149999_0_ & 3;
+	}
+
+
 	@Override
 	@SideOnly(Side.CLIENT)
-	/**
-	 * Returns which pass should this block be rendered on. 0 for solids and 1 for alpha
-	 */
+	public Item getItem(World par1World, int par2, int par3, int par4)
+	{
+		return Item.getItemById(0);
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
 	public int getRenderBlockPass()
 	{
 		return 1;
-	}
-
-	@SideOnly(Side.CLIENT)
-	/**
-	 * only called by clickMiddleMouseButton , and passed to inventory.setCurrentItem (along with isCreative)
-	 */
-	public int idPicked(World par1World, int par2, int par3, int par4)
-	{
-		return 0;
 	}
 }

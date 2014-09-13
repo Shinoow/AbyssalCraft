@@ -37,12 +37,12 @@ public class EntityDemonPig extends EntityMob {
 		isImmuneToFire = true;
 		double var2 = 0.35D;
 		tasks.addTask(0, new EntityAISwimming(this));
-		tasks.addTask(1, new EntityAIAttackOnCollide(this, EntityPlayer.class, var2, true));
-		tasks.addTask(2, new EntityAIWander(this, var2));
-		tasks.addTask(3, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
+		tasks.addTask(2, new EntityAIAttackOnCollide(this, EntityPlayer.class, var2, true));
+		tasks.addTask(3, new EntityAIWander(this, var2));
+		tasks.addTask(4, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
 		tasks.addTask(4, new EntityAILookIdle(this));
-		targetTasks.addTask(0, new EntityAIHurtByTarget(this, false));
-		targetTasks.addTask(1, new EntityAINearestAttackableTarget(this, EntityPlayer.class, 0, true));
+		targetTasks.addTask(1, new EntityAIHurtByTarget(this, false));
+		targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityPlayer.class, 0, true));
 
 	}
 

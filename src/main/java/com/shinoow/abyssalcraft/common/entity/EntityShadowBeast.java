@@ -17,26 +17,26 @@ package com.shinoow.abyssalcraft.common.entity;
 
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.*;
-import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.world.World;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
+import com.shinoow.abyssalcraft.core.api.entity.AntiMob;
 
-public class EntityShadowBeast extends EntityMob {
+public class EntityShadowBeast extends AntiMob {
 
 	public EntityShadowBeast(World par1World) {
 		super(par1World);
 		setSize(1.0F, 2.8F);
-		tasks.addTask(0, new EntityAIAttackOnCollide(this, EntityPlayer.class, 0.35D, true));
-		tasks.addTask(1, new EntityAIMoveTowardsRestriction(this, 0.35D));
-		tasks.addTask(2, new EntityAIWander(this, 0.35D));
-		tasks.addTask(3, new EntityAILookIdle(this));
-		tasks.addTask(4, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
+		tasks.addTask(2, new EntityAIAttackOnCollide(this, EntityPlayer.class, 0.35D, true));
+		tasks.addTask(3, new EntityAIMoveTowardsRestriction(this, 0.35D));
+		tasks.addTask(4, new EntityAIWander(this, 0.35D));
 		tasks.addTask(5, new EntityAIFleeSun(this, 0.35D));
-		targetTasks.addTask(0, new EntityAIHurtByTarget(this, false));
-		targetTasks.addTask(1, new EntityAINearestAttackableTarget(this, EntityPlayer.class, 0, true));
+		tasks.addTask(6, new EntityAILookIdle(this));
+		tasks.addTask(6, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
+		targetTasks.addTask(1, new EntityAIHurtByTarget(this, false));
+		targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityPlayer.class, 0, true));
 	}
 
 	@Override

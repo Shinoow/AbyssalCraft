@@ -22,8 +22,7 @@ import net.minecraft.util.ResourceLocation;
 import com.shinoow.abyssalcraft.client.model.entity.ModelChagarothFist;
 import com.shinoow.abyssalcraft.common.entity.EntityChagarothFist;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import cpw.mods.fml.relauncher.*;
 
 @SideOnly(Side.CLIENT)
 public class RenderChagarothFist extends RenderLiving {

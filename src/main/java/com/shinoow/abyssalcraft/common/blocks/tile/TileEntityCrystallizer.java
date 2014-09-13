@@ -26,7 +26,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 public class TileEntityCrystallizer extends TileEntity implements ISidedInventory {
 
 	private static final int[] slotsTop = new int[] {0};
-	private static final int[] slotsBottom = new int[] {2, 1};
+	private static final int[] slotsBottom = new int[] {2, 1, 3};
 	private static final int[] slotsSides = new int[] {1};
 	/**
 	 * The ItemStacks that hold the items currently being used in the crystallizer
@@ -293,9 +293,13 @@ public class TileEntityCrystallizer extends TileEntity implements ISidedInventor
 			if(CrystallizerRecipes.crystallization().getCrystallizationResult(crystallizerItemStacks[0]) == null) return false;
 			ItemStack[] itemstack = CrystallizerRecipes.crystallization().getCrystallizationResult(crystallizerItemStacks[0]);
 
-			if (itemstack[0] == null && itemstack[1] == null) return false;
-			if (crystallizerItemStacks[2] == null && crystallizerItemStacks[3] == null) return true;
-			if (!crystallizerItemStacks[2].isItemEqual(itemstack[0]) && !crystallizerItemStacks[3].isItemEqual(itemstack[1])) return false;
+			if(itemstack[0] == null && itemstack[1] == null) return false;
+			if(crystallizerItemStacks[2] == null && crystallizerItemStacks[3] == null) return true;
+			if(crystallizerItemStacks[2] == null && crystallizerItemStacks[3] != null && itemstack[1] == null ||
+					crystallizerItemStacks[2].isItemEqual(itemstack[0]) && crystallizerItemStacks[3] != null && itemstack[1] == null) return true;
+			if(crystallizerItemStacks[2].isItemEqual(itemstack[0]) && crystallizerItemStacks[3] == null ||
+					crystallizerItemStacks[2] == null && crystallizerItemStacks[3].isItemEqual(itemstack[1]) && itemstack[1] == null) return true;
+			if(!crystallizerItemStacks[2].isItemEqual(itemstack[0]) && !crystallizerItemStacks[3].isItemEqual(itemstack[1])) return false;
 			int result = crystallizerItemStacks[2].stackSize + itemstack[0].stackSize;
 			int result2 = crystallizerItemStacks[3].stackSize + itemstack[1].stackSize;
 			return result <= getInventoryStackLimit() && result2 <= getInventoryStackLimit() && result <= crystallizerItemStacks[2].getMaxStackSize() && result2 <= crystallizerItemStacks[3].getMaxStackSize();
@@ -351,6 +355,7 @@ public class TileEntityCrystallizer extends TileEntity implements ISidedInventor
 			if (item instanceof ItemCrystal) return 1200;
 			if (item == Items.blaze_powder) return 1200;
 			if (item == Items.blaze_rod) return 2400;
+			if (item == AbyssalCraft.methane) return 10000;
 			return CoreRegistry.getFuelValue(par1ItemStack, FuelType.CRYSTALLIZER);
 		}
 	}

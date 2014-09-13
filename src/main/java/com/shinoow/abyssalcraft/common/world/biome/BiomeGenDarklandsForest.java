@@ -29,7 +29,7 @@ import net.minecraft.world.gen.feature.WorldGenTrees;
 import net.minecraft.world.gen.feature.WorldGenerator;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
-import com.shinoow.abyssalcraft.common.entity.EntityDepthsZombie;
+import com.shinoow.abyssalcraft.common.entity.EntityAbyssalZombie;
 import com.shinoow.abyssalcraft.common.entity.EntityDepthsghoul;
 import com.shinoow.abyssalcraft.common.world.gen.WorldGenDLT;
 
@@ -59,7 +59,7 @@ public class BiomeGenDarklandsForest extends BiomeGenBase
 		spawnableMonsterList.add(new SpawnListEntry(EntityZombie.class, 5, 1, 5));
 		spawnableMonsterList.add(new SpawnListEntry(EntitySkeleton.class, 5, 1, 5));
 		spawnableMonsterList.add(new SpawnListEntry(EntityDepthsghoul.class, 5, 1, 5));
-		spawnableMonsterList.add(new SpawnListEntry(EntityDepthsZombie.class, 3, 1, 3));
+		spawnableMonsterList.add(new SpawnListEntry(EntityAbyssalZombie.class, 3, 1, 3));
 	}
 
 	@Override

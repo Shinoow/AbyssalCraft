@@ -22,8 +22,7 @@ import net.minecraft.util.ResourceLocation;
 import com.shinoow.abyssalcraft.client.model.entity.ModelShadowBeast;
 import com.shinoow.abyssalcraft.common.entity.EntityShadowBeast;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import cpw.mods.fml.relauncher.*;
 
 @SideOnly(Side.CLIENT)
 public class RenderShadowBeast extends RenderLiving {

@@ -348,6 +348,7 @@ public class TileEntityTransmutator extends TileEntity implements ISidedInventor
 			if (item instanceof ItemCrystal) return 1200;
 			if (item == Items.blaze_powder) return 1200;
 			if (item == Items.blaze_rod) return 2400;
+			if (item == AbyssalCraft.methane) return 10000;
 			return CoreRegistry.getFuelValue(par1ItemStack, FuelType.TRANSMUTATOR);
 		}
 	}

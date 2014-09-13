@@ -15,7 +15,12 @@
  */
 package com.shinoow.abyssalcraft.common.potion;
 
+import com.shinoow.abyssalcraft.AbyssalCraft;
+import com.shinoow.abyssalcraft.common.util.ACDamageSource;
+import com.shinoow.abyssalcraft.core.api.entity.DreadMob;
 import net.minecraft.client.Minecraft;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.potion.Potion;
 import net.minecraft.util.ResourceLocation;
 import cpw.mods.fml.relauncher.Side;
@@ -31,6 +36,23 @@ public class PotionDplague extends Potion{
 	public Potion setIconIndex(int par1, int par2) {
 		super.setIconIndex(par1, par2);
 		return this;
+	}
+
+	@Override
+	public void performEffect(EntityLivingBase par1EntityLivingBase, int par2){
+		par1EntityLivingBase.attackEntityFrom(ACDamageSource.dread, 1);
+		if(par1EntityLivingBase instanceof DreadMob){
+			par1EntityLivingBase.removePotionEffect(AbyssalCraft.Dplague.id);
+			par1EntityLivingBase.heal(1);
+		}
+		if(par1EntityLivingBase instanceof EntityPlayer)
+			((EntityPlayer)par1EntityLivingBase).addExhaustion(0.025F * (par2+2));
+	}
+
+	@Override
+	public boolean isReady(int par1, int par2)
+	{
+		return true;
 	}
 
 	@Override

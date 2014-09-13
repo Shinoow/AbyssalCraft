@@ -20,6 +20,8 @@ import java.util.List;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.potion.Potion;
+import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 
@@ -44,10 +46,12 @@ public class ItemCrystal extends Item {
 
 	@Override
 	public ItemStack onItemRightClick(ItemStack par1ItemStack, World par2World, EntityPlayer par3EntityPlayer) {
-		if(isOxygen() && par3EntityPlayer.isInWater() && par3EntityPlayer.getAir() != 300){
+		if(par1ItemStack.getItem() == AbyssalCraft.crystalOxygen && par3EntityPlayer.isInWater() && par3EntityPlayer.getAir() != 300){
 			par3EntityPlayer.setAir(300);
 			par1ItemStack.stackSize--;
 		}
+		if(par1ItemStack.getItem() == AbyssalCraft.crystalSulfur)
+			par3EntityPlayer.addPotionEffect(new PotionEffect(Potion.fireResistance.id, 100));
 		return par1ItemStack;
 	}
 
@@ -62,10 +66,5 @@ public class ItemCrystal extends Item {
 	@Override
 	public void addInformation(ItemStack is, EntityPlayer player, List l, boolean B){
 		l.add(StatCollector.translateToLocal("tooltip.crystal")+ ": " + atoms);
-	}
-
-	private boolean isOxygen(){
-		if(this == AbyssalCraft.crystalOxygen) return true;
-		else return false;
 	}
 }

@@ -16,11 +16,25 @@
 package com.shinoow.abyssalcraft.common.entity;
 
 import java.util.Calendar;
+import java.util.UUID;
 
-import net.minecraft.entity.*;
-import net.minecraft.entity.ai.*;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.EnumCreatureAttribute;
+import net.minecraft.entity.IEntityLivingData;
+import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.ai.EntityAIAttackOnCollide;
+import net.minecraft.entity.ai.EntityAIHurtByTarget;
+import net.minecraft.entity.ai.EntityAILookIdle;
+import net.minecraft.entity.ai.EntityAIMoveTowardsRestriction;
+import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
+import net.minecraft.entity.ai.EntityAIWander;
+import net.minecraft.entity.ai.EntityAIWatchClosest;
+import net.minecraft.entity.ai.attributes.AttributeModifier;
+import net.minecraft.entity.ai.attributes.IAttributeInstance;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.*;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
@@ -30,17 +44,20 @@ import com.shinoow.abyssalcraft.core.api.entity.DreadMob;
 
 public class EntityDreadguard extends DreadMob {
 
+	private static final UUID attackDamageBoostUUID = UUID.fromString("648D7064-6A60-4F59-8ABE-C2C23A6DD7A9");
+	private static final AttributeModifier attackDamageBoost = new AttributeModifier(attackDamageBoostUUID, "Halloween Attack Damage Boost", 5.0D, 0);
+
 	public EntityDreadguard(World par1World) {
 		super(par1World);
 		setSize(1.0F, 3.0F);
 		isImmuneToFire = true;
-		tasks.addTask(0, new EntityAIAttackOnCollide(this, EntityPlayer.class, 0.3D, true));
-		tasks.addTask(1, new EntityAIMoveTowardsRestriction(this, 0.3D));
-		tasks.addTask(2, new EntityAIWander(this, 0.3D));
-		tasks.addTask(3, new EntityAILookIdle(this));
-		tasks.addTask(4, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
-		targetTasks.addTask(0, new EntityAIHurtByTarget(this, false));
-		targetTasks.addTask(1, new EntityAINearestAttackableTarget(this, EntityPlayer.class, 0, true));
+		tasks.addTask(2, new EntityAIAttackOnCollide(this, EntityPlayer.class, 1.0D, true));
+		tasks.addTask(3, new EntityAIMoveTowardsRestriction(this, 1.0D));
+		tasks.addTask(4, new EntityAIWander(this, 1.0D));
+		tasks.addTask(5, new EntityAILookIdle(this));
+		tasks.addTask(5, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
+		targetTasks.addTask(1, new EntityAIHurtByTarget(this, false));
+		targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityPlayer.class, 0, true));
 	}
 
 	@Override
@@ -54,14 +71,9 @@ public class EntityDreadguard extends DreadMob {
 		// Knockback Resistance - default 0.0D - min 0.0D - max 1.0D
 		getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setBaseValue(0.0D);
 		// Movement Speed - default 0.699D - min 0.0D - max Double.MAX_VALUE
-		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.699D);
+		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.23000000417232513D);
 		// Attack Damage - default 2.0D - min 0.0D - max Doubt.MAX_VALUE
 		getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(10.0D);
-		Calendar calendar = worldObj.getCurrentDate();
-
-		if (calendar.get(2) + 1 == 10 && calendar.get(5) == 31 && rand.nextFloat() < 0.25F){
-			//TODO: Find a good way to implement the damage boost
-		}
 	}
 
 	@Override
@@ -87,7 +99,7 @@ public class EntityDreadguard extends DreadMob {
 		if (super.attackEntityAsMob(par1Entity))
 			if (par1Entity instanceof EntityLivingBase)
 				((EntityLivingBase)par1Entity).addPotionEffect(new PotionEffect(AbyssalCraft.Dplague.id, 200));
-		return hasAttacked;
+		return super.attackEntityAsMob(par1Entity);
 	}
 
 	@Override
@@ -152,5 +164,19 @@ public class EntityDreadguard extends DreadMob {
 			setCurrentItemOrArmor(2, new ItemStack(AbyssalCraft.legsD));
 		}
 		super.onLivingUpdate();
+	}
+
+	@Override
+	public IEntityLivingData onSpawnWithEgg(IEntityLivingData par1EntityLivingData)
+	{
+		par1EntityLivingData = super.onSpawnWithEgg(par1EntityLivingData);
+
+		IAttributeInstance attribute = getEntityAttribute(SharedMonsterAttributes.attackDamage);
+		Calendar calendar = worldObj.getCurrentDate();
+
+		if (calendar.get(2) + 1 == 10 && calendar.get(5) == 31 && rand.nextFloat() < 0.25F)
+			attribute.applyModifier(attackDamageBoost);
+
+		return par1EntityLivingData;
 	}
 }

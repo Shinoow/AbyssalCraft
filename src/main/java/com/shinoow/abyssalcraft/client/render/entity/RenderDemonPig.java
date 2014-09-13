@@ -22,8 +22,7 @@ import net.minecraft.util.ResourceLocation;
 
 import com.shinoow.abyssalcraft.common.entity.EntityDemonPig;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import cpw.mods.fml.relauncher.*;
 
 @SideOnly(Side.CLIENT)
 public class RenderDemonPig extends RenderLiving {

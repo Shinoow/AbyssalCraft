@@ -50,7 +50,7 @@ public class ItemWashCloth extends Item {
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@Override
 	public void addInformation(ItemStack is, EntityPlayer player, List l, boolean B){
-		l.add("This item has been used " + getDamage(is) + " out of " + this.getMaxDamage() + " times");
+		l.add("This item has been used " + getDamage(is) + " out of 20 times");
 	}
 
 }

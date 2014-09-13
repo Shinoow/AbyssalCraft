@@ -15,11 +15,14 @@
  */
 package com.shinoow.abyssalcraft.core.util;
 
+import java.util.Iterator;
 import java.util.List;
 
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.FurnaceRecipes;
+import net.minecraftforge.oredict.OreDictionary;
 
 import com.google.common.collect.Lists;
 import com.shinoow.abyssalcraft.core.util.recipes.CrystallizerRecipes;
@@ -87,7 +90,7 @@ public class CoreRegistry {
 	 * @param xp Amount of exp given
 	 */
 	public static void addSingleCrystallization(Block input, ItemStack output, float xp){
-		CrystallizerRecipes.crystallization().crystallize(input, output, null, xp);
+		addCrystallization(input, output, null, xp);
 	}
 
 	/**
@@ -97,7 +100,7 @@ public class CoreRegistry {
 	 * @param xp Amount of exp given
 	 */
 	public static void addSingleCrystallization(Item input, ItemStack output, float xp){
-		CrystallizerRecipes.crystallization().crystallize(input, output, null, xp);
+		addCrystallization(input, output, null, xp);
 	}
 
 	/**
@@ -107,7 +110,7 @@ public class CoreRegistry {
 	 * @param xp Amount of exp given
 	 */
 	public static void addSingleCrystallization(ItemStack input, ItemStack output, float xp){
-		CrystallizerRecipes.crystallization().crystallize(input, output, null, xp);
+		addCrystallization(input, output, null, xp);
 	}
 
 	/**
@@ -162,7 +165,7 @@ public class CoreRegistry {
 	 * Gets the fuel value from an ItemStack, depending on the fuel type
 	 * @param itemStack The ItemStack getting checked
 	 * @param type The fuel type
-	 * @return
+	 * @return The fuel value for the specified machine
 	 */
 	public static int getFuelValue(ItemStack itemStack, FuelType type){
 		int fuelValue = 0;
@@ -179,5 +182,88 @@ public class CoreRegistry {
 			GameRegistry.getFuelValue(itemStack);
 		}
 		return fuelValue;
+	}
+
+	/**
+	 * Smelting through the OreDictionary
+	 * @param input The ore input
+	 * @param output The ore output
+	 * @param xp Amount of exp given
+	 */
+	public static void addOreSmelting(String input, String output, float xp){
+		Iterator<ItemStack> inputIter = OreDictionary.getOres(input).iterator();
+
+		while(inputIter.hasNext())
+			FurnaceRecipes.smelting().func_151394_a(inputIter.next(), OreDictionary.getOres(output).iterator().next(), xp);
+	}
+
+	/**
+	 * OreDictionary specific Crystallization
+	 * @param input The ore input
+	 * @param output1 The first ore output
+	 * @param output2 The second ore output
+	 * @param xp Amount of exp given
+	 */
+	public static void addCrystallization(String input, String output1, String output2, float xp){
+		Iterator<ItemStack> inputIter = OreDictionary.getOres(input).iterator();
+
+		while(inputIter.hasNext())
+			addCrystallization(inputIter.next(), OreDictionary.getOres(output1).iterator().next(), OreDictionary.getOres(output2).iterator().next(), xp);
+	}
+
+	/**
+	 * OreDictionary specific Crystallization
+	 * @param input The ore input
+	 * @param output1 The first ore output
+	 * @param out1 Quantity of the first output
+	 * @param output2 The second ore output
+	 * @param out2 Quantity of the second output
+	 * @param xp Amount of exp given
+	 */
+	public static void addCrystallization(String input, String output1, int out1, String output2, int out2, float xp){
+		Iterator<ItemStack> inputIter = OreDictionary.getOres(input).iterator();
+
+		while(inputIter.hasNext())
+			addCrystallization(inputIter.next(), new ItemStack(OreDictionary.getOres(output1).iterator().next().getItem(), out1), new ItemStack(OreDictionary.getOres(output2).iterator().next().getItem(), out2), xp);
+	}
+
+	/**
+	 * OreDictionary specific single-output Crystallization
+	 * @param input The ore input
+	 * @param output The ore output
+	 * @param xp Amount of exp given
+	 */
+	public static void addSingleCrystallization(String input, String output, float xp){
+		Iterator<ItemStack> inputIter = OreDictionary.getOres(input).iterator();
+
+		while(inputIter.hasNext())
+			addSingleCrystallization(inputIter.next(), OreDictionary.getOres(output).iterator().next(), xp);
+	}
+
+	/**
+	 * OreDictionary specific single-output Crystallization
+	 * @param input The ore input
+	 * @param output The ore output
+	 * @param out The output quantity
+	 * @param xp Amount of exp given
+	 */
+	public static void addSingleCrystallization(String input, String output, int out, float xp){
+		Iterator<ItemStack> inputIter = OreDictionary.getOres(input).iterator();
+
+		while(inputIter.hasNext())
+			addSingleCrystallization(inputIter.next(), new ItemStack(OreDictionary.getOres(output).iterator().next().getItem(), out), xp);
+	}
+
+	/**
+	 * OreDictionary specific Transmutation
+	 * @param input The ore input
+	 * @param output The ore output
+	 * @param xp Amount of exp given
+	 */
+	public static void addTransmutation(String input, String output, float xp){
+		Iterator<ItemStack> inputIter = OreDictionary.getOres(input).iterator();
+
+		while(inputIter.hasNext())
+			addTransmutation(inputIter.next(), OreDictionary.getOres(output).iterator().next(), xp);
 	}
 }

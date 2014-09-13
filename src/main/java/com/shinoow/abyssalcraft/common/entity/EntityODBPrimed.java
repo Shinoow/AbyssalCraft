@@ -15,18 +15,15 @@
  */
 package com.shinoow.abyssalcraft.common.entity;
 
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.*;
 import net.minecraft.init.Blocks;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 
-import com.shinoow.abyssalcraft.common.util.ExplosionUtil;
-import com.shinoow.abyssalcraft.common.util.LogHelper;
-import com.shinoow.abyssalcraft.common.util.SpecialTextUtil;
+import com.shinoow.abyssalcraft.AbyssalCraft;
+import com.shinoow.abyssalcraft.common.util.*;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import cpw.mods.fml.relauncher.*;
 
 public class EntityODBPrimed extends Entity {
 
@@ -98,19 +95,30 @@ public class EntityODBPrimed extends Entity {
 
 			if (!worldObj.isRemote)
 				explode();
+			if (worldObj.isRemote)
+				message();
 		} else if(worldObj.isRemote)
 			worldObj.spawnParticle("portal", posX, posY + 0.5D, posZ, 1.0D, 0.0D, 0.0D);
 	}
 
 	private void explode()
 	{
-		LogHelper.info("Unleashing hell shortly.");
+		ACLogger.info("Unleashing hell shortly.");
 		Blocks.obsidian.setResistance(5.0F);
-		float var0 = 200.0F;
+		Blocks.lava.setResistance(5.0F);
+		Blocks.flowing_lava.setResistance(5.0F);
+		Blocks.water.setResistance(5.0F);
+		Blocks.flowing_water.setResistance(5.0F);
+		AbyssalCraft.Cwater.setResistance(50.0F);
+		float var0 = 100.0F;
 		ExplosionUtil.newODBExplosion(worldObj, (Entity)null, posX, posY, posZ, var0, 128, false, true);
-
 		Blocks.obsidian.setResistance(2000.0F);
-		LogHelper.info("Hell successfully unleashed.");
+		Blocks.lava.setResistance(500.0F);
+		Blocks.flowing_lava.setResistance(500.0F);
+		Blocks.water.setResistance(500.0F);
+		Blocks.flowing_water.setResistance(500.0F);
+		AbyssalCraft.Cwater.setResistance(500.0F);
+		ACLogger.info("Hell successfully unleashed.");
 
 		int x, x1, z, z1;
 		for(x = 0; x < 9; x++)
@@ -125,8 +133,12 @@ public class EntityODBPrimed extends Entity {
 		EntitySacthoth sacthoth = new EntitySacthoth(worldObj);
 		sacthoth.setPosition(posX, posY + 1, posZ);
 		worldObj.spawnEntityInWorld(sacthoth);
-		if(worldObj.isRemote)
-			SpecialTextUtil.SacthothText("I am unleashed! Feel the wrath of The Dark Realm, mortal.");
+	}
+
+	@SideOnly(Side.CLIENT)
+	private void message(){
+		SpecialTextUtil.SacthothText("I am unleashed! Feel the wrath of The Dark Realm, mortal.");
+		SpecialTextUtil.SacthothText("But first, watch the explosion.");
 	}
 
 	@Override

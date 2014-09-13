@@ -5,6 +5,8 @@ import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.*;
 import net.minecraft.entity.monster.*;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Items;
+import net.minecraft.item.Item;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
@@ -15,24 +17,19 @@ public class EntitySkeletonGoliath extends EntityMob {
 	public EntitySkeletonGoliath(World par1World) {
 		super(par1World);
 		setSize(1.6F, 4.5F);
-		tasks.addTask(0, new EntityAIAttackOnCollide(this, EntityPlayer.class, 0.35D, true));
-		tasks.addTask(1, new EntityAIMoveTowardsRestriction(this, 0.35D));
-		tasks.addTask(2, new EntityAIWander(this, 0.35D));
-		tasks.addTask(3, new EntityAILookIdle(this));
-		tasks.addTask(4, new EntityAIFleeSun(this, 0.35D));
-		tasks.addTask(5, new EntityAIAttackOnCollide(this, EntityPlayer.class, 0.35D, true));
-		tasks.addTask(6, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
-		tasks.addTask(7, new EntityAIWatchClosest(this, EntityDepthsZombie.class, 6.0F));
-		tasks.addTask(8, new EntityAIWatchClosest(this, EntityZombie.class, 6.0F));
-		tasks.addTask(9, new EntityAIWatchClosest(this, EntityDepthsghoul.class, 6.0F));
-		tasks.addTask(10, new EntityAIWatchClosest(this, EntitySkeleton.class, 6.0F));
-		tasks.addTask(11, new EntityAIWatchClosest(this, EntitySkeletonGoliath.class, 6.0F));
-		targetTasks.addTask(0, new EntityAIHurtByTarget(this, false));
-
-		EntityPlayer entityPlayer = par1World.getClosestPlayerToEntity(this, 30D);
-		if(entityPlayer !=null && !entityPlayer.getCommandSenderName().equals("shinoow") ||
-				entityPlayer !=null && !entityPlayer.getCommandSenderName().equals("Oblivionaire"))
-			targetTasks.addTask(1, new EntityAINearestAttackableTarget(this, EntityPlayer.class, 0, true));
+		tasks.addTask(2, new EntityAIAttackOnCollide(this, EntityPlayer.class, 1.0D, true));
+		tasks.addTask(3, new EntityAIMoveTowardsRestriction(this, 1.0D));
+		tasks.addTask(4, new EntityAIWander(this, 1.0D));
+		tasks.addTask(5, new EntityAIFleeSun(this, 1.0D));
+		tasks.addTask(7, new EntityAILookIdle(this));
+		tasks.addTask(7, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
+		tasks.addTask(7, new EntityAIWatchClosest(this, EntityAbyssalZombie.class, 8.0F));
+		tasks.addTask(7, new EntityAIWatchClosest(this, EntityZombie.class, 8.0F));
+		tasks.addTask(7, new EntityAIWatchClosest(this, EntityDepthsghoul.class, 8.0F));
+		tasks.addTask(7, new EntityAIWatchClosest(this, EntitySkeleton.class, 8.0F));
+		tasks.addTask(7, new EntityAIWatchClosest(this, EntitySkeletonGoliath.class, 8.0F));
+		targetTasks.addTask(1, new EntityAIHurtByTarget(this, false));
+		targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityPlayer.class, 0, true));
 	}
 
 	@Override
@@ -46,9 +43,9 @@ public class EntitySkeletonGoliath extends EntityMob {
 		// Knockback Resistance - default 0.0D - min 0.0D - max 1.0D
 		getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setBaseValue(0.3D);
 		// Movement Speed - default 0.699D - min 0.0D - max Double.MAX_VALUE
-		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.699D);
+		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.23000000417232513D);
 		// Attack Damage - default 2.0D - min 0.0D - max Doubt.MAX_VALUE
-		getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(10.0D);
+		getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(20.0D);
 	}
 
 	@Override
@@ -85,6 +82,18 @@ public class EntitySkeletonGoliath extends EntityMob {
 	protected void func_145780_a(int par1, int par2, int par3, Block par4)
 	{
 		playSound("mob.skeleton.step", 0.15F, 1.0F);
+	}
+
+	@Override
+	protected Item getDropItem()
+	{
+		return Items.bone;
+	}
+
+	@Override
+	protected void dropRareDrop(int par1)
+	{
+		dropItem(AbyssalCraft.cudgel, 1);
 	}
 
 	@Override

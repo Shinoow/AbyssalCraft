@@ -49,7 +49,6 @@ public class TransmutatorRecipes {
 		transmutate(Blocks.nether_brick, new ItemStack(Items.netherbrick, 4), 0.0F);
 		transmutate(Items.netherbrick, new ItemStack(Blocks.netherrack), 0.0F);
 		transmutate(Blocks.water, new ItemStack(Blocks.ice, 8), 0.0F);
-		transmutate(Blocks.lava, new ItemStack(Blocks.obsidian, 8), 0.0F);
 		transmutate(Items.wheat, new ItemStack(Items.wheat_seeds), 0.0F);
 		transmutate(Items.wheat_seeds, new ItemStack(Items.wheat), 0.0F);
 	}

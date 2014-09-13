@@ -71,10 +71,6 @@ public class ItemAbyssalniteCSword extends ItemSword {
 		l.add(StatCollector.translateToLocal("tooltip.csword.2"));
 	}
 
-	/**
-	 * Current implementations of this method in child classes do not use the entry argument beside ev. They just raise
-	 * the damage on the stack.
-	 */
 	@Override
 	public boolean hitEntity(ItemStack par1ItemStack, EntityLivingBase par2EntityLivingBase, EntityLivingBase par3EntityLivingBase)
 	{
@@ -95,36 +91,24 @@ public class ItemAbyssalniteCSword extends ItemSword {
 		return true;
 	}
 
-	/**
-	 * Returns True is the item is renderer in full 3D when hold.
-	 */
 	@Override
 	public boolean isFull3D()
 	{
 		return true;
 	}
 
-	/**
-	 * returns the action that specifies what animation to play when the items is being used
-	 */
 	@Override
 	public EnumAction getItemUseAction(ItemStack par1ItemStack)
 	{
 		return EnumAction.block;
 	}
 
-	/**
-	 * How long it takes to use or consume an item
-	 */
 	@Override
 	public int getMaxItemUseDuration(ItemStack par1ItemStack)
 	{
 		return 0x11940;
 	}
 
-	/**
-	 * Called whenever this item is equipped and the right mouse button is pressed. Args: itemStack, world, entityPlayer
-	 */
 	@Override
 	public ItemStack onItemRightClick(ItemStack par1ItemStack, World par2World, EntityPlayer par3EntityPlayer)
 	{
@@ -141,9 +125,6 @@ public class ItemAbyssalniteCSword extends ItemSword {
 		return par1Block == Blocks.web;
 	}
 
-	/**
-	 * Return the enchantability factor of the item, most of the time is based on material.
-	 */
 	@Override
 	public int getItemEnchantability()
 	{
@@ -156,9 +137,6 @@ public class ItemAbyssalniteCSword extends ItemSword {
 		return toolMaterial.toString();
 	}
 
-	/**
-	 * Return whether this item is repairable in an anvil.
-	 */
 	@Override
 	public boolean getIsRepairable(ItemStack par1ItemStack, ItemStack par2ItemStack)
 	{

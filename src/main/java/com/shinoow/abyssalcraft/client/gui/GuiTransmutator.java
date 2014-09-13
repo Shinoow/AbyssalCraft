@@ -27,7 +27,7 @@ import com.shinoow.abyssalcraft.common.inventory.ContainerTransmutator;
 
 public class GuiTransmutator extends GuiContainer {
 
-	private static final ResourceLocation furnaceGuiTextures = new ResourceLocation("abyssalcraft:textures/gui/container/transmutator.png");
+	private static final ResourceLocation transmutatorGuiTexture = new ResourceLocation("abyssalcraft:textures/gui/container/transmutator.png");
 	private TileEntityTransmutator tileTransmutator;
 
 	public GuiTransmutator(InventoryPlayer par1InventoryPlayer, TileEntityTransmutator par2TileEntityTransmutator)
@@ -48,7 +48,7 @@ public class GuiTransmutator extends GuiContainer {
 	protected void drawGuiContainerBackgroundLayer(float par1, int par2, int par3)
 	{
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-		mc.getTextureManager().bindTexture(furnaceGuiTextures);
+		mc.getTextureManager().bindTexture(transmutatorGuiTexture);
 		int k = (width - xSize) / 2;
 		int l = (height - ySize) / 2;
 		drawTexturedModalRect(k, l, 0, 0, xSize, ySize);

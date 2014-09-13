@@ -27,13 +27,13 @@ public class EntityChagarothFist extends DreadMob {
 
 	public EntityChagarothFist(World par1World) {
 		super(par1World);
-		tasks.addTask(0, new EntityAIAttackOnCollide(this, EntityPlayer.class, 0.35D, true));
-		tasks.addTask(1, new EntityAIMoveTowardsRestriction(this, 0.35D));
-		tasks.addTask(2, new EntityAIWander(this, 0.35D));
-		tasks.addTask(3, new EntityAILookIdle(this));
-		tasks.addTask(4, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
-		targetTasks.addTask(0, new EntityAIHurtByTarget(this, false));
-		targetTasks.addTask(1, new EntityAINearestAttackableTarget(this, EntityPlayer.class, 0, true));
+		tasks.addTask(2, new EntityAIAttackOnCollide(this, EntityPlayer.class, 1.0D, true));
+		tasks.addTask(3, new EntityAIMoveTowardsRestriction(this, 1.0D));
+		tasks.addTask(4, new EntityAIWander(this, 1.0D));
+		tasks.addTask(5, new EntityAILookIdle(this));
+		tasks.addTask(5, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
+		targetTasks.addTask(1, new EntityAIHurtByTarget(this, false));
+		targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityPlayer.class, 0, true));
 	}
 
 	@Override
@@ -47,7 +47,7 @@ public class EntityChagarothFist extends DreadMob {
 		// Knockback Resistance - default 0.0D - min 0.0D - max 1.0D
 		getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setBaseValue(0.3D);
 		// Movement Speed - default 0.699D - min 0.0D - max Double.MAX_VALUE
-		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.699D);
+		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.23000000417232513D);
 		// Attack Damage - default 2.0D - min 0.0D - max Doubt.MAX_VALUE
 		getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(7.5D);
 	}

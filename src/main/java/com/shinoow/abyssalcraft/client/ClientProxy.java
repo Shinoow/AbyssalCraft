@@ -15,8 +15,7 @@
  */
 package com.shinoow.abyssalcraft.client;
 
-import net.minecraft.client.model.ModelBiped;
-import net.minecraft.client.model.ModelPig;
+import net.minecraft.client.model.*;
 import net.minecraft.client.renderer.entity.RenderSnowball;
 import net.minecraft.item.Item;
 import net.minecraftforge.client.MinecraftForgeClient;
@@ -30,12 +29,11 @@ import com.shinoow.abyssalcraft.client.render.item.*;
 import com.shinoow.abyssalcraft.common.CommonProxy;
 import com.shinoow.abyssalcraft.common.blocks.tile.*;
 import com.shinoow.abyssalcraft.common.entity.*;
+import com.shinoow.abyssalcraft.common.entity.anti.*;
 import com.shinoow.abyssalcraft.core.api.render.Block3DRender;
 
-import cpw.mods.fml.client.registry.ClientRegistry;
-import cpw.mods.fml.client.registry.RenderingRegistry;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import cpw.mods.fml.client.registry.*;
+import cpw.mods.fml.relauncher.*;
 
 public class ClientProxy extends CommonProxy {
 
@@ -48,7 +46,7 @@ public class ClientProxy extends CommonProxy {
 
 		RenderingRegistry.registerEntityRenderingHandler(EntityEvilpig.class, new RenderPig(new ModelPig(), 0.5F));
 		RenderingRegistry.registerEntityRenderingHandler(EntityDepthsghoul.class, new RenderDepthsghoul(new ModelDG(), 0.8F));
-		RenderingRegistry.registerEntityRenderingHandler(EntityDepthsZombie.class, new RenderDepthsZombie(new ModelBiped(), 0.5F));
+		RenderingRegistry.registerEntityRenderingHandler(EntityAbyssalZombie.class, new RenderAbyssalZombie(new ModelBiped(), 0.5F));
 		RenderingRegistry.registerEntityRenderingHandler(EntityODBPrimed.class, new RenderODB());
 		RenderingRegistry.registerEntityRenderingHandler(EntityODBcPrimed.class, new RenderODBc());
 		RenderingRegistry.registerEntityRenderingHandler(EntityJzahar.class, new RenderJzahar(new ModelJzahar(), 1.5F));
@@ -69,6 +67,18 @@ public class ClientProxy extends CommonProxy {
 		RenderingRegistry.registerEntityRenderingHandler(EntityChagaroth.class, new RenderChagaroth());
 		RenderingRegistry.registerEntityRenderingHandler(EntityShadowBeast.class, new RenderShadowBeast());
 		RenderingRegistry.registerEntityRenderingHandler(EntitySacthoth.class, new RenderSacthoth());
+
+		RenderingRegistry.registerEntityRenderingHandler(EntityAntiAbyssalZombie.class, new RenderAntiAbyssalZombie());
+		RenderingRegistry.registerEntityRenderingHandler(EntityAntiBat.class, new RenderAntiBat());
+		RenderingRegistry.registerEntityRenderingHandler(EntityAntiChicken.class, new RenderAntiChicken());
+		RenderingRegistry.registerEntityRenderingHandler(EntityAntiCow.class, new RenderAntiCow());
+		RenderingRegistry.registerEntityRenderingHandler(EntityAntiCreeper.class, new RenderAntiCreeper());
+		RenderingRegistry.registerEntityRenderingHandler(EntityAntiGhoul.class, new RenderAntiGhoul());
+		RenderingRegistry.registerEntityRenderingHandler(EntityAntiPig.class, new RenderAntiPig());
+		RenderingRegistry.registerEntityRenderingHandler(EntityAntiPlayer.class, new RenderAntiPlayer());
+		RenderingRegistry.registerEntityRenderingHandler(EntityAntiSkeleton.class, new RenderAntiSkeleton());
+		RenderingRegistry.registerEntityRenderingHandler(EntityAntiSpider.class, new RenderAntiSpider());
+		RenderingRegistry.registerEntityRenderingHandler(EntityAntiZombie.class, new RenderAntiZombie());
 
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityPSDL.class, new TileEntityPSDLRenderer());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityAltar.class, new TileEntityAltarRenderer());

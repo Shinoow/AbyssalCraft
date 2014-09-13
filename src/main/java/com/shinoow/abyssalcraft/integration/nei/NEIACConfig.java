@@ -1,10 +1,10 @@
 package com.shinoow.abyssalcraft.integration.nei;
 
+import net.minecraft.item.ItemStack;
 import codechicken.nei.api.API;
 import codechicken.nei.api.IConfigureNEI;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
-import com.shinoow.abyssalcraft.client.gui.*;
 
 public class NEIACConfig implements IConfigureNEI {
 
@@ -12,11 +12,11 @@ public class NEIACConfig implements IConfigureNEI {
 	public void loadConfig() {
 		API.registerRecipeHandler(new CrystallizerRecipeHandler());
 		API.registerUsageHandler(new CrystallizerRecipeHandler());
-		API.setGuiOffset(GuiCrystallizer.class, 0, 0);
 
 		API.registerRecipeHandler(new TransmutatorRecipeHandler());
 		API.registerUsageHandler(new TransmutatorRecipeHandler());
-		API.setGuiOffset(GuiTransmutator.class, 0, 0);
+
+		API.hideItem(new ItemStack(AbyssalCraft.devsword));
 	}
 
 	@Override

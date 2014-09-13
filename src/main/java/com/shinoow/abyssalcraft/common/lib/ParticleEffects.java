@@ -18,7 +18,6 @@ package com.shinoow.abyssalcraft.common.lib;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.particle.EntityFX;
 import net.minecraft.world.World;
-
 import com.shinoow.abyssalcraft.common.ACParticleFX;
 
 public class ParticleEffects {

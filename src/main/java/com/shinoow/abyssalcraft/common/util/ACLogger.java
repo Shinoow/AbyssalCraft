@@ -19,7 +19,7 @@ import org.apache.logging.log4j.Level;
 
 import cpw.mods.fml.common.FMLLog;
 
-public class LogHelper {
+public class ACLogger {
 
 	public static void log(Level level, String format, Object... data) {
 		FMLLog.log("AbyssalCraft", level, format, data);

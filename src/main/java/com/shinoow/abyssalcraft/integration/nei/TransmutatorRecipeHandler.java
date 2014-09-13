@@ -8,6 +8,7 @@ import net.minecraft.block.Block;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.*;
+import net.minecraft.util.StatCollector;
 import codechicken.nei.ItemList;
 import codechicken.nei.NEIServerUtils;
 import codechicken.nei.PositionedStack;
@@ -19,9 +20,9 @@ import com.shinoow.abyssalcraft.core.util.recipes.TransmutatorRecipes;
 
 public class TransmutatorRecipeHandler extends TemplateRecipeHandler
 {
-	public class SmeltingPair extends CachedRecipe
+	public class TransmutationPair extends CachedRecipe
 	{
-		public SmeltingPair(ItemStack ingred, ItemStack result) {
+		public TransmutationPair(ItemStack ingred, ItemStack result) {
 			ingred.stackSize = 1;
 			this.ingred = new PositionedStack(ingred, 51, 6);
 			this.result = new PositionedStack(result, 111, 24);
@@ -63,7 +64,7 @@ public class TransmutatorRecipeHandler extends TemplateRecipeHandler
 	@Override
 	public void loadTransferRects() {
 		transferRects.add(new RecipeTransferRect(new Rectangle(50, 23, 18, 18), "fuel"));
-		transferRects.add(new RecipeTransferRect(new Rectangle(74, 23, 24, 18), "smelting"));
+		transferRects.add(new RecipeTransferRect(new Rectangle(74, 23, 24, 18), "transmutation"));
 	}
 
 	@Override
@@ -73,7 +74,7 @@ public class TransmutatorRecipeHandler extends TemplateRecipeHandler
 
 	@Override
 	public String getRecipeName() {
-		return "Transmutation";
+		return StatCollector.translateToLocal("container.abyssalcraft.transmutator.nei");
 	}
 
 	@Override
@@ -85,10 +86,10 @@ public class TransmutatorRecipeHandler extends TemplateRecipeHandler
 
 	@Override
 	public void loadCraftingRecipes(String outputId, Object... results) {
-		if (outputId.equals("smelting") && getClass() == TransmutatorRecipeHandler.class) {//don't want subclasses getting a hold of this
+		if (outputId.equals("transmutation") && getClass() == TransmutatorRecipeHandler.class) {//don't want subclasses getting a hold of this
 			Map<ItemStack, ItemStack> recipes = TransmutatorRecipes.transmutation().getTransmutationList();
 			for (Entry<ItemStack, ItemStack> recipe : recipes.entrySet())
-				arecipes.add(new SmeltingPair(recipe.getKey(), recipe.getValue()));
+				arecipes.add(new TransmutationPair(recipe.getKey(), recipe.getValue()));
 		} else
 			super.loadCraftingRecipes(outputId, results);
 	}
@@ -98,13 +99,13 @@ public class TransmutatorRecipeHandler extends TemplateRecipeHandler
 		Map<ItemStack, ItemStack> recipes = TransmutatorRecipes.transmutation().getTransmutationList();
 		for (Entry<ItemStack, ItemStack> recipe : recipes.entrySet())
 			if (NEIServerUtils.areStacksSameType(recipe.getValue(), result))
-				arecipes.add(new SmeltingPair(recipe.getKey(), recipe.getValue()));
+				arecipes.add(new TransmutationPair(recipe.getKey(), recipe.getValue()));
 	}
 
 	@Override
 	public void loadUsageRecipes(String inputId, Object... ingredients) {
 		if (inputId.equals("fuel") && getClass() == TransmutatorRecipeHandler.class)//don't want subclasses getting a hold of this
-			loadCraftingRecipes("smelting");
+			loadCraftingRecipes("transmutation");
 		else
 			super.loadUsageRecipes(inputId, ingredients);
 	}
@@ -114,7 +115,7 @@ public class TransmutatorRecipeHandler extends TemplateRecipeHandler
 		Map<ItemStack, ItemStack> recipes = TransmutatorRecipes.transmutation().getTransmutationList();
 		for (Entry<ItemStack, ItemStack> recipe : recipes.entrySet())
 			if (NEIServerUtils.areStacksSameTypeCrafting(recipe.getKey(), ingredient)) {
-				SmeltingPair arecipe = new SmeltingPair(recipe.getKey(), recipe.getValue());
+				TransmutationPair arecipe = new TransmutationPair(recipe.getKey(), recipe.getValue());
 				arecipe.setIngredientPermutation(Arrays.asList(arecipe.ingred), ingredient);
 				arecipes.add(arecipe);
 			}
@@ -122,7 +123,7 @@ public class TransmutatorRecipeHandler extends TemplateRecipeHandler
 
 	@Override
 	public String getGuiTexture() {
-		return "textures/gui/container/furnace.png";
+		return "abyssalcraft:textures/gui/container/transmutator.png";
 	}
 
 	@Override
@@ -155,6 +156,6 @@ public class TransmutatorRecipeHandler extends TemplateRecipeHandler
 
 	@Override
 	public String getOverlayIdentifier() {
-		return "smelting";
+		return "transmutation";
 	}
 }

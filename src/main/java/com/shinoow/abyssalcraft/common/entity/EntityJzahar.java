@@ -16,13 +16,18 @@
 package com.shinoow.abyssalcraft.common.entity;
 
 import java.util.Calendar;
+import java.util.UUID;
 
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.*;
+import net.minecraft.entity.ai.attributes.*;
 import net.minecraft.entity.boss.*;
+import net.minecraft.entity.item.EntityItem;
+import net.minecraft.entity.item.EntityXPOrb;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityWitherSkull;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.*;
 import net.minecraft.world.World;
 
@@ -31,22 +36,26 @@ import com.shinoow.abyssalcraft.common.util.SpecialTextUtil;
 
 public class EntityJzahar extends EntityMob implements IBossDisplayData, IRangedAttackMob {
 
+	private static final UUID attackDamageBoostUUID = UUID.fromString("648D7064-6A60-4F59-8ABE-C2C23A6DD7A9");
+	private static final AttributeModifier attackDamageBoost = new AttributeModifier(attackDamageBoostUUID, "Halloween Attack Damage Boost", 10.0D, 0);
+	public int deathTicks;
+
 	public EntityJzahar(World par1World) {
 		super(par1World);
 		setSize(1.8F, 4.0F);
 		tasks.addTask(0, new EntityAISwimming(this));
-		tasks.addTask(1, new EntityAIAttackOnCollide(this, EntityPlayer.class, 0.35D, true));
 		tasks.addTask(2, new EntityAIAttackOnCollide(this, EntityDragon.class, 0.35D, true));
 		tasks.addTask(3, new EntityAIAttackOnCollide(this, EntityWither.class, 0.35D, true));
-		tasks.addTask(4, new EntityAIMoveTowardsRestriction(this, 0.35D));
-		tasks.addTask(5, new EntityAIWander(this, 0.35D));
-		tasks.addTask(6, new EntityAILookIdle(this));
-		tasks.addTask(7, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
-		tasks.addTask(8, new EntityAIArrowAttack(this, 0.35D, 40, 20.0F));
-		targetTasks.addTask(0, new EntityAIHurtByTarget(this, false));
-		targetTasks.addTask(1, new EntityAINearestAttackableTarget(this, EntityPlayer.class, 0, true));
+		tasks.addTask(4, new EntityAIAttackOnCollide(this, EntityPlayer.class, 0.35D, true));
+		tasks.addTask(5, new EntityAIArrowAttack(this, 0.4D, 40, 20.0F));
+		tasks.addTask(6, new EntityAIMoveTowardsRestriction(this, 0.35D));
+		tasks.addTask(7, new EntityAIWander(this, 0.35D));
+		tasks.addTask(8, new EntityAILookIdle(this));
+		tasks.addTask(8, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
+		targetTasks.addTask(1, new EntityAIHurtByTarget(this, false));
 		targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityDragon.class, 0, true));
 		targetTasks.addTask(3, new EntityAINearestAttackableTarget(this, EntityWither.class, 0, true));
+		targetTasks.addTask(4, new EntityAINearestAttackableTarget(this, EntityPlayer.class, 0, true));
 	}
 
 	@Override
@@ -63,11 +72,12 @@ public class EntityJzahar extends EntityMob implements IBossDisplayData, IRanged
 		getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setBaseValue(0.0D);
 		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.699D);
 		getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(20.0D);
+
+		IAttributeInstance attribute = getEntityAttribute(SharedMonsterAttributes.attackDamage);
 		Calendar calendar = worldObj.getCurrentDate();
 
-		if (calendar.get(2) + 1 == 10 && calendar.get(5) == 31 && rand.nextFloat() < 0.25F){
-			//TODO: Find a good way to implement the damage boost
-		}
+		if (calendar.get(2) + 1 == 10 && calendar.get(5) == 31 && rand.nextFloat() < 0.25F)
+			attribute.applyModifier(attackDamageBoost);
 	}
 
 	@Override
@@ -142,6 +152,35 @@ public class EntityJzahar extends EntityMob implements IBossDisplayData, IRanged
 		}
 	}
 
+	@Override
+	protected void onDeathUpdate()
+	{
+		++deathTicks;
+
+		int i;
+		int j;
+
+		if (!worldObj.isRemote)
+			if (deathTicks > 150 && deathTicks % 5 == 0)
+			{
+				i = 500;
+
+				while (i > 0)
+				{
+					j = EntityXPOrb.getXPSplit(i);
+					i -= j;
+					worldObj.spawnEntityInWorld(new EntityXPOrb(worldObj, posX, posY, posZ, j));
+					if(deathTicks == 100 || deathTicks == 120 || deathTicks == 140 || deathTicks == 160 || deathTicks == 180){
+						worldObj.spawnEntityInWorld(new EntityItem(worldObj, posX, posY, posZ, new ItemStack(AbyssalCraft.abyingot)));
+						worldObj.spawnEntityInWorld(new EntityItem(worldObj, posX, posY, posZ, new ItemStack(AbyssalCraft.Cingot)));
+						worldObj.spawnEntityInWorld(new EntityItem(worldObj, posX, posY, posZ, new ItemStack(AbyssalCraft.dreadiumingot)));
+					}
+				}
+			}
+		if(deathTicks == 200 && !worldObj.isRemote)
+			setDead();
+	}
+
 	private void func_82216_a(int par1, EntityLivingBase par2EntityLivingBase) {
 		func_82209_a(par1, par2EntityLivingBase.posX, par2EntityLivingBase.posY + par2EntityLivingBase.getEyeHeight() * 0.35D, par2EntityLivingBase.posZ, par1 == 0 && rand.nextFloat() < 0.001F);
 	}
@@ -166,5 +205,19 @@ public class EntityJzahar extends EntityMob implements IBossDisplayData, IRanged
 	@Override
 	public void attackEntityWithRangedAttack(EntityLivingBase par1EntityLivingBase, float par2) {
 		func_82216_a(0, par1EntityLivingBase);
+	}
+
+	@Override
+	public IEntityLivingData onSpawnWithEgg(IEntityLivingData par1EntityLivingData)
+	{
+		par1EntityLivingData = super.onSpawnWithEgg(par1EntityLivingData);
+
+		IAttributeInstance attribute = getEntityAttribute(SharedMonsterAttributes.attackDamage);
+		Calendar calendar = worldObj.getCurrentDate();
+
+		if (calendar.get(2) + 1 == 10 && calendar.get(5) == 31 && rand.nextFloat() < 0.25F)
+			attribute.applyModifier(attackDamageBoost);
+
+		return par1EntityLivingData;
 	}
 }

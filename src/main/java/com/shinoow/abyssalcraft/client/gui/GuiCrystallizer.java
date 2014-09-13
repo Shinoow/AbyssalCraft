@@ -27,7 +27,7 @@ import com.shinoow.abyssalcraft.common.inventory.ContainerCrystallizer;
 
 public class GuiCrystallizer extends GuiContainer {
 
-	private static final ResourceLocation furnaceGuiTextures = new ResourceLocation("abyssalcraft:textures/gui/container/crystallizer.png");
+	private static final ResourceLocation crystallizerGuiTextures = new ResourceLocation("abyssalcraft:textures/gui/container/crystallizer.png");
 	private TileEntityCrystallizer tileCrystallizer;
 
 	public GuiCrystallizer(InventoryPlayer par1InventoryPlayer, TileEntityCrystallizer par2TileEntityCrystallizer)
@@ -48,7 +48,7 @@ public class GuiCrystallizer extends GuiContainer {
 	protected void drawGuiContainerBackgroundLayer(float par1, int par2, int par3)
 	{
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-		mc.getTextureManager().bindTexture(furnaceGuiTextures);
+		mc.getTextureManager().bindTexture(crystallizerGuiTextures);
 		int k = (width - xSize) / 2;
 		int l = (height - ySize) / 2;
 		drawTexturedModalRect(k, l, 0, 0, xSize, ySize);

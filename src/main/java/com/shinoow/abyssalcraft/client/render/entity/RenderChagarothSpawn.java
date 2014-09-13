@@ -22,8 +22,7 @@ import net.minecraft.util.ResourceLocation;
 import com.shinoow.abyssalcraft.client.model.entity.ModelChagarothSpawn;
 import com.shinoow.abyssalcraft.common.entity.EntityChagarothSpawn;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import cpw.mods.fml.relauncher.*;
 
 @SideOnly(Side.CLIENT)
 public class RenderChagarothSpawn extends RenderLiving {

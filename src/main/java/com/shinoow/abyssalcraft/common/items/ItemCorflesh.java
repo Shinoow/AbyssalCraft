@@ -41,5 +41,4 @@ public class ItemCorflesh extends ItemFood {
 		entityPlayer.addPotionEffect(new PotionEffect(Potion.confusion.id, 600, 0));
 		return;
 	}
-
 }

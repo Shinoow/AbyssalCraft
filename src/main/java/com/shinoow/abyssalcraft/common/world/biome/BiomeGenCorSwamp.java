@@ -53,7 +53,7 @@ public class BiomeGenCorSwamp extends BiomeGenBase {
 		theBiomeDecorator.grassPerChunk = 5;
 		waterColorMultiplier = 0x24FF83;
 		spawnableMonsterList.add(new SpawnListEntry(EntityDepthsghoul.class, 5, 1, 5));
-		spawnableMonsterList.add(new SpawnListEntry(EntityDepthsZombie.class, 5, 1, 5));
+		spawnableMonsterList.add(new SpawnListEntry(EntityAbyssalZombie.class, 5, 1, 5));
 	}
 
 	@Override
@@ -85,37 +85,31 @@ public class BiomeGenCorSwamp extends BiomeGenBase {
 			new WorldGenMinable(AbyssalCraft.Coraliumore, veinSize).generate(par1World, par2Random, x, y, z);
 		}
 
-		for(int k = 0; k < 2; k++)
+		for(int k = 0; k < 1; k++)
 		{
-			int RandPosX = par3 + par2Random.nextInt(5);
+			int RandPosX = par3 + par2Random.nextInt(32);
 			int RandPosY = par2Random.nextInt(60);
-			int RandPosZ = par4 + par2Random.nextInt(5);
+			int RandPosZ = par4 + par2Random.nextInt(32);
 			new WorldGenAntimatterLake(AbyssalCraft.anticwater).generate(par1World, par2Random, RandPosX, RandPosY, RandPosZ);
 		}
 	}
 
 	@Override
-	public WorldGenAbstractTree func_150567_a(Random p_150567_1_)
+	public WorldGenAbstractTree func_150567_a(Random par1Random)
 	{
 		return worldGeneratorSwamp;
 	}
 
-	/**
-	 * Provides the basic grass color based on the biome temperature and rainfall
-	 */
 	@Override
 	@SideOnly(Side.CLIENT)
-	public int getBiomeGrassColor(int p_150558_1_, int p_150558_2_, int p_150558_3_)
+	public int getBiomeGrassColor(int par1, int par2, int par3)
 	{
 		return 0x6EF5DE;
 	}
 
-	/**
-	 * Provides the basic foliage color based on the biome temperature and rainfall
-	 */
 	@Override
 	@SideOnly(Side.CLIENT)
-	public int getBiomeFoliageColor(int p_150571_1_, int p_150571_2_, int p_150571_3_)
+	public int getBiomeFoliageColor(int par1, int par2, int par3)
 	{
 		return 0x6EF5DE;
 	}

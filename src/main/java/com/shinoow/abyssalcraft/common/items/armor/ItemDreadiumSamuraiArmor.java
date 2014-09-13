@@ -22,6 +22,8 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
+import net.minecraft.potion.Potion;
+import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
@@ -77,7 +79,7 @@ public class ItemDreadiumSamuraiArmor extends ItemArmor {
 				armorModel.heldItemRight = entityLiving.getEquipmentInSlot(0) != null ? 1 :0;
 				if(entityLiving instanceof EntityPlayer)
 					armorModel.aimedBow =((EntityPlayer)entityLiving).getItemInUseDuration() > 2;
-				return armorModel;
+					return armorModel;
 			}
 		}
 		return null;
@@ -92,6 +94,21 @@ public class ItemDreadiumSamuraiArmor extends ItemArmor {
 
 	@Override
 	public void onArmorTick(World world, EntityPlayer player, ItemStack itemstack) {
+		if (itemstack.getItem() == AbyssalCraft.dreadiumShelmet) {
+			player.addPotionEffect(new PotionEffect(Potion.nightVision.getId(), 260, 0));
+			player.addPotionEffect(new PotionEffect(Potion.field_76443_y.getId(), 20));
+			if(player.getActivePotionEffect(AbyssalCraft.Dplague) !=null)
+				player.removePotionEffect(AbyssalCraft.Dplague.getId());
+		}
+		if (itemstack.getItem() == AbyssalCraft.dreadiumSplate) {
+			player.addPotionEffect(new PotionEffect(Potion.resistance.getId(), 20));
+			player.addPotionEffect(new PotionEffect(Potion.damageBoost.getId(), 20));
+			player.addPotionEffect(new PotionEffect(Potion.fireResistance.getId(), 20, 1));
+		}
+		if (itemstack.getItem() == AbyssalCraft.dreadiumSlegs)
+			player.addPotionEffect(new PotionEffect(Potion.regeneration.getId(), 20, 0));
+		if (itemstack.getItem() == AbyssalCraft.dreadiumSboots)
+			player.addPotionEffect(new PotionEffect(Potion.moveSpeed.getId(), 20, 1));
 
 	}
 }

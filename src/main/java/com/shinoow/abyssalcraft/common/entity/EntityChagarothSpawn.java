@@ -32,13 +32,13 @@ public class EntityChagarothSpawn extends DreadMob {
 	{
 		super(par1World);
 		setSize(0.6F, 0.6F);
-		tasks.addTask(0, new EntityAIAttackOnCollide(this, EntityPlayer.class, 0.35D, true));
-		tasks.addTask(1, new EntityAIMoveTowardsRestriction(this, 0.35D));
-		tasks.addTask(2, new EntityAIWander(this, 0.35D));
-		tasks.addTask(3, new EntityAILookIdle(this));
-		tasks.addTask(4, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
-		targetTasks.addTask(0, new EntityAIHurtByTarget(this, false));
-		targetTasks.addTask(1, new EntityAINearestAttackableTarget(this, EntityPlayer.class, 0, true));
+		tasks.addTask(1, new EntityAIAttackOnCollide(this, EntityPlayer.class, 0.35D, true));
+		tasks.addTask(2, new EntityAIMoveTowardsRestriction(this, 0.35D));
+		tasks.addTask(3, new EntityAIWander(this, 0.35D));
+		tasks.addTask(4, new EntityAILookIdle(this));
+		tasks.addTask(4, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
+		targetTasks.addTask(1, new EntityAIHurtByTarget(this, false));
+		targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityPlayer.class, 0, true));
 	}
 
 	@Override
@@ -64,13 +64,12 @@ public class EntityChagarothSpawn extends DreadMob {
 	}
 
 	@Override
-	public boolean attackEntityAsMob(Entity par1Entity)
-	{
+	public boolean attackEntityAsMob(Entity par1Entity){
 
 		if (super.attackEntityAsMob(par1Entity))
 			if (par1Entity instanceof EntityLivingBase)
 				((EntityLivingBase)par1Entity).addPotionEffect(new PotionEffect(AbyssalCraft.Dplague.id, 200));
-		return hasAttacked;
+		return super.attackEntityAsMob(par1Entity);
 	}
 
 	@Override

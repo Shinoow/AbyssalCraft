@@ -156,4 +156,27 @@ public class ItemList {
 	public static Item dreadium_katana_blade = GameRegistry.findItem(modId, "dreadblade");
 	public static Item dreadium_katana_hilt = GameRegistry.findItem(modId, "dreadhilt");
 	public static Item dreadium_katana = GameRegistry.findItem(modId, "dreadkatana");
+	public static Item dread_plagued_gateway_key = GameRegistry.findItem(modId, "dreadkey");
+	public static Item rlyehian_gateway_key = GameRegistry.findItem(modId, "portalplacerjzh");
+	public static Item dreadium_samurai_boots = GameRegistry.findItem(modId, "dreadiumsamuraiboots");
+	public static Item dreadium_samurai_helmet = GameRegistry.findItem(modId, "dreadiumsamuraihelmet");
+	public static Item dreadium_samurai_chestplate = GameRegistry.findItem(modId, "dreadiumsamuraiplate");
+	public static Item dreadium_samurai_leggings = GameRegistry.findItem(modId, "dreadiumsamurailegs");
+	public static Item tin_ingot = GameRegistry.findItem(modId, "tiningot");
+	public static Item copper_ingot = GameRegistry.findItem(modId, "copperingot");
+	public static Item crystallized_tin = GameRegistry.findItem(modId, "crystaltin");
+	public static Item crystallized_copper = GameRegistry.findItem(modId, "crystalcopper");
+	public static Item crystallized_silicon = GameRegistry.findItem(modId, "crystalsilicon");
+	public static Item crystallized_magnesium = GameRegistry.findItem(modId, "crystalmagnesium");
+	public static Item crystallized_aluminium = GameRegistry.findItem(modId, "crystalaluminium");
+	public static Item crystallized_silica = GameRegistry.findItem(modId, "crystalsilica");
+	public static Item crystallized_alumina = GameRegistry.findItem(modId, "crystalalumina");
+	public static Item crystallized_magnesia = GameRegistry.findItem(modId, "crystalmagnesia");
+	public static Item crystallized_Zinc = GameRegistry.findItem(modId, "crystalzinc");
+	public static Item anti_beef = GameRegistry.findItem(modId, "antibeef");
+	public static Item anti_chicken = GameRegistry.findItem(modId, "antichicken");
+	public static Item anti_pork = GameRegistry.findItem(modId, "antipork");
+	public static Item rotten_anti_flesh = GameRegistry.findItem(modId, "antiflesh");
+	public static Item anti_bone = GameRegistry.findItem(modId, "antibone");
+	public static Item anti_spider_eye = GameRegistry.findItem(modId, "antispidereye");
 }

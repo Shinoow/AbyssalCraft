@@ -13,34 +13,19 @@
  *See the License for the specific language governing permissions and
  *limitations under the License.
  */
-package com.shinoow.abyssalcraft.common.blocks;
-
-import java.util.Random;
-
-import net.minecraft.block.Block;
-import net.minecraft.block.material.Material;
-import net.minecraft.item.Item;
+package com.shinoow.abyssalcraft.common.handlers;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
 
-public class BlockCoraliumOre extends Block
-{
-	public BlockCoraliumOre()
-	{
-		super(Material.rock);
-		setCreativeTab(AbyssalCraft.tabBlock);
-		this.setHarvestLevel("pickaxe", 2);
-	}
+import net.minecraft.item.ItemStack;
+import cpw.mods.fml.common.IFuelHandler;
+
+public class FurnaceFuelHandler implements IFuelHandler {
 
 	@Override
-	public Item getItemDropped(int par1, Random par2Random, int par3)
-	{
-		return AbyssalCraft.Coralium;
-	}
-
-	@Override
-	public int quantityDropped(Random par1Random)
-	{
-		return 1 + par1Random.nextInt(3);
+	public int getBurnTime(ItemStack fuel) {
+		if(fuel.getItem() == AbyssalCraft.methane)
+			return 10000;
+		return 0;
 	}
 }

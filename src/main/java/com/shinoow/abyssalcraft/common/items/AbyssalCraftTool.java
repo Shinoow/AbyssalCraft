@@ -88,14 +88,14 @@ public class AbyssalCraftTool extends Item {
 				Entity entity = (Entity)list.get(k2);
 
 				if(entity instanceof EntityLiving && !entity.isDead)
-					entity.attackEntityFrom(DamageSource.generic, 50);
+					entity.attackEntityFrom(DamageSource.generic, 50000);
 				else if(entity instanceof EntityPlayer && !entity.isDead)
-					entity.attackEntityFrom(DamageSource.causePlayerDamage(par3EntityPlayer), 50);
+					entity.attackEntityFrom(DamageSource.causePlayerDamage(par3EntityPlayer), 50000);
 				if(entity instanceof EntityJzahar) {
 					par3EntityPlayer.setGameType(GameType.SURVIVAL);
 					par3EntityPlayer.attackTargetEntityWithCurrentItem(par3EntityPlayer);
 					((EntityJzahar)entity).heal(Float.MAX_VALUE);
-					if(!par2World.isRemote)
+					if(par2World.isRemote)
 						Minecraft.getMinecraft().thePlayer.sendChatMessage("I really thought I could do that, didn't I?");
 				}
 			}

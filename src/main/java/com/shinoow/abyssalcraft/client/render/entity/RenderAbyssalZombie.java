@@ -20,37 +20,36 @@ import net.minecraft.client.renderer.entity.RenderBiped;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.util.ResourceLocation;
 
-import com.shinoow.abyssalcraft.common.entity.EntityDepthsZombie;
+import com.shinoow.abyssalcraft.common.entity.EntityAbyssalZombie;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import cpw.mods.fml.relauncher.*;
 
 @SideOnly(Side.CLIENT)
-public class RenderDepthsZombie extends RenderBiped {
+public class RenderAbyssalZombie extends RenderBiped {
 
 	protected ModelBiped model;
 
-	public RenderDepthsZombie (ModelBiped ModelBiped, float f)
+	public RenderAbyssalZombie (ModelBiped ModelBiped, float f)
 	{
 		super(ModelBiped, f);
 		model = (ModelBiped)mainModel;
 	}
 
-	private static final ResourceLocation zombieTexture = new ResourceLocation("abyssalcraft:textures/model/depths_zombie.png");
-	private static final ResourceLocation zombieTexture_end = new ResourceLocation("abyssalcraft:textures/model/depths_zombie_end.png");
+	private static final ResourceLocation zombieTexture = new ResourceLocation("abyssalcraft:textures/model/abyssal_zombie.png");
+	private static final ResourceLocation zombieTexture_end = new ResourceLocation("abyssalcraft:textures/model/abyssal_zombie_end.png");
 
-	public void doRender(EntityDepthsZombie entity, double par2, double par4, double par6, float par8, float par9)
+	public void doRender(EntityAbyssalZombie entity, double par2, double par4, double par6, float par8, float par9)
 	{
 		super.doRender(entity, par2, par4, par6, par8, par9);
 	}
 
-	protected ResourceLocation getZombieTexture(EntityDepthsZombie par1EntityLiving)
+	protected ResourceLocation getZombieTexture(EntityAbyssalZombie par1EntityLiving)
 	{
 		return par1EntityLiving.getZombieType() == 2 ? zombieTexture_end : zombieTexture;
 	}
 	@Override
 	protected ResourceLocation getEntityTexture(EntityLiving par1EntityLiving)
 	{
-		return getZombieTexture((EntityDepthsZombie)par1EntityLiving);
+		return getZombieTexture((EntityAbyssalZombie)par1EntityLiving);
 	}
 }

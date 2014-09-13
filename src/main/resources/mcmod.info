@@ -17,8 +17,8 @@
 				"requiredMods": [  ],
 				"logoFile": "assets/abyssalcraft/textures/logo.png",
 				"screenshots": [  ],
-				"updateUrl": "http://adf.ly/FQarm",
-  				"url": "http://adf.ly/FQarm",
+				"updateUrl": "https://shinoow.github.io/AbyssalCraft/",
+  				"url": "https://shinoow.github.io/AbyssalCraft/",
  				"useDependencyInformation": true
 			}
 	]

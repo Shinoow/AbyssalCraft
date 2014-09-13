@@ -15,21 +15,18 @@
  */
 package com.shinoow.abyssalcraft.common.blocks;
 
-import net.minecraft.block.material.MapColor;
-import net.minecraft.block.material.Material;
-import net.minecraft.block.material.MaterialLiquid;
+import net.minecraft.block.material.*;
 import net.minecraft.client.renderer.texture.IIconRegister;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.*;
+import net.minecraft.entity.item.EntityItem;
 import net.minecraft.init.Blocks;
-import net.minecraft.potion.Potion;
-import net.minecraft.potion.PotionEffect;
+import net.minecraft.potion.*;
 import net.minecraft.util.IIcon;
-import net.minecraft.world.IBlockAccess;
-import net.minecraft.world.World;
+import net.minecraft.world.*;
 import net.minecraftforge.fluids.BlockFluidClassic;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
+import com.shinoow.abyssalcraft.core.api.entity.*;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -49,15 +46,19 @@ public class BlockAntiliquid extends BlockFluidClassic {
 	@SideOnly(Side.CLIENT)
 	public void registerBlockIcons(IIconRegister iconRegister) {
 		theIcon = new IIcon[]{iconRegister.registerIcon("abyssalcraft:anti_still"), iconRegister.registerIcon("abyssalcraft:anti_flow")};
+		AbyssalCraft.antifluid.setStillIcon(theIcon[0]);
+		AbyssalCraft.antifluid.setFlowingIcon(theIcon[1]);
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
 	public IIcon getIcon(int side, int meta) {
-		if ( side <= 1 )
-			return theIcon[0];
-		else
-			return theIcon[1];
+		return side != 0 && side != 1 ? theIcon[1] : theIcon[0];
+	}
+
+	@Override
+	public MapColor getMapColor(int meta){
+		return MapColor.silverColor;
 	}
 
 	@Override
@@ -86,15 +87,24 @@ public class BlockAntiliquid extends BlockFluidClassic {
 	public void onEntityCollidedWithBlock(World par1World, int par2, int par3, int par4, Entity par5Entity) {
 		super.onEntityCollidedWithBlock(par1World, par2, par3, par4, par5Entity);
 
+
 		if(par5Entity instanceof EntityLivingBase){
-			((EntityLivingBase)par5Entity).addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, 100));
-			((EntityLivingBase)par5Entity).addPotionEffect(new PotionEffect(Potion.blindness.id, 100));
-			((EntityLivingBase)par5Entity).addPotionEffect(new PotionEffect(Potion.confusion.id, 100));
-			((EntityLivingBase)par5Entity).addPotionEffect(new PotionEffect(Potion.wither.id, 100));
-			((EntityLivingBase)par5Entity).addPotionEffect(new PotionEffect(Potion.poison.id, 100));
-			((EntityLivingBase)par5Entity).addPotionEffect(new PotionEffect(Potion.weakness.id, 100));
-			((EntityLivingBase)par5Entity).addPotionEffect(new PotionEffect(Potion.hunger.id, 100));
-			((EntityLivingBase)par5Entity).addPotionEffect(new PotionEffect(Potion.digSlowdown.id, 100));
+			((EntityLivingBase)par5Entity).addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, 400));
+			((EntityLivingBase)par5Entity).addPotionEffect(new PotionEffect(Potion.blindness.id, 400));
+			((EntityLivingBase)par5Entity).addPotionEffect(new PotionEffect(Potion.weakness.id, 400));
+			((EntityLivingBase)par5Entity).addPotionEffect(new PotionEffect(Potion.hunger.id, 400));
+			((EntityLivingBase)par5Entity).addPotionEffect(new PotionEffect(Potion.nightVision.id, 400));
+			((EntityLivingBase)par5Entity).addPotionEffect(new PotionEffect(AbyssalCraft.antiMatter.id, 200));
+			if(par5Entity instanceof AntiMob || par5Entity instanceof AntiAnimal || par5Entity instanceof AntiAmbientCreature){
+				((EntityLivingBase)par5Entity).removePotionEffect(Potion.moveSlowdown.id);
+				((EntityLivingBase)par5Entity).removePotionEffect(Potion.blindness.id);
+				((EntityLivingBase)par5Entity).removePotionEffect(Potion.weakness.id);
+				((EntityLivingBase)par5Entity).removePotionEffect(Potion.hunger.id);
+				((EntityLivingBase)par5Entity).removePotionEffect(Potion.nightVision.id);
+				((EntityLivingBase)par5Entity).removePotionEffect(AbyssalCraft.antiMatter.id);
+			}
 		}
+		if(par5Entity instanceof EntityItem)
+			par5Entity.setDead();
 	}
 }

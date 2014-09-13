@@ -16,11 +16,20 @@
 package com.shinoow.abyssalcraft.common.entity;
 
 import java.util.Calendar;
+import java.util.UUID;
 
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.IEntityLivingData;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.*;
+import net.minecraft.entity.ai.attributes.*;
 import net.minecraft.entity.boss.IBossDisplayData;
+import net.minecraft.entity.item.EntityItem;
+import net.minecraft.entity.item.EntityXPOrb;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
+import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.*;
 import net.minecraft.world.World;
 
@@ -30,16 +39,18 @@ import com.shinoow.abyssalcraft.core.api.entity.DreadMob;
 
 public class EntityChagaroth extends DreadMob implements IBossDisplayData {
 
-	private static double attackDamage = 15.0D;
+	private static final UUID attackDamageBoostUUID = UUID.fromString("648D7064-6A60-4F59-8ABE-C2C23A6DD7A9");
+	private static final AttributeModifier attackDamageBoost = new AttributeModifier(attackDamageBoostUUID, "Halloween Attack Damage Boost", 8D, 0);
+	public int deathTicks;
 
 	public EntityChagaroth(World par1World) {
 		super(par1World);
 		setSize(3.5F, 5.0F);
-		tasks.addTask(0, new EntityAIAttackOnCollide(this, EntityPlayer.class, 0.35D, true));
-		tasks.addTask(1, new EntityAILookIdle(this));
-		tasks.addTask(2, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
-		targetTasks.addTask(0, new EntityAIHurtByTarget(this, false));
-		targetTasks.addTask(1, new EntityAINearestAttackableTarget(this, EntityPlayer.class, 0, true));
+		tasks.addTask(2, new EntityAIAttackOnCollide(this, EntityPlayer.class, 1.0D, true));
+		tasks.addTask(3, new EntityAILookIdle(this));
+		tasks.addTask(3, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
+		targetTasks.addTask(1, new EntityAIHurtByTarget(this, false));
+		targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityPlayer.class, 0, true));
 		ignoreFrustumCheck = true;
 	}
 
@@ -47,6 +58,15 @@ public class EntityChagaroth extends DreadMob implements IBossDisplayData {
 	public String getCommandSenderName()
 	{
 		return EnumChatFormatting.DARK_RED + StatCollector.translateToLocalFormatted("entity.abyssalcraft.chagaroth.name");
+	}
+
+	@Override
+	public boolean attackEntityAsMob(Entity par1Entity) {
+
+		if (super.attackEntityAsMob(par1Entity))
+			if (par1Entity instanceof EntityLivingBase)
+				((EntityLivingBase)par1Entity).addPotionEffect(new PotionEffect(AbyssalCraft.Dplague.id, 200));
+		return super.attackEntityAsMob(par1Entity);
 	}
 
 	@Override
@@ -62,11 +82,7 @@ public class EntityChagaroth extends DreadMob implements IBossDisplayData {
 		// Movement Speed - default 0.699D - min 0.0D - max Double.MAX_VALUE
 		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.0D);
 		// Attack Damage - default 2.0D - min 0.0D - max Doubt.MAX_VALUE
-		getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(attackDamage);
-		Calendar calendar = worldObj.getCurrentDate();
-
-		if (calendar.get(2) + 1 == 10 && calendar.get(5) == 31 && rand.nextFloat() < 0.25F)
-			attackDamage = 22.5D;
+		getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(15.0D);
 	}
 
 	@Override
@@ -102,7 +118,7 @@ public class EntityChagaroth extends DreadMob implements IBossDisplayData {
 	@Override
 	public void onLivingUpdate()
 	{
-		EntityPlayer player = worldObj.getClosestPlayerToEntity(this, 30D);
+		EntityPlayer player = worldObj.getClosestPlayerToEntity(this, 32D);
 		if(!worldObj.isRemote){
 			if(rand.nextInt(100) == 0 && player != null){
 				EntityChagarothSpawn mob = new EntityChagarothSpawn(worldObj);
@@ -183,5 +199,62 @@ public class EntityChagaroth extends DreadMob implements IBossDisplayData {
 	{
 		dropItem(AbyssalCraft.dreadKey, 1);
 
+	}
+
+	@Override
+	protected void onDeathUpdate()
+	{
+		++deathTicks;
+
+		if (deathTicks <= 200)
+		{
+			float f = (rand.nextFloat() - 0.5F) * 8.0F;
+			float f1 = (rand.nextFloat() - 0.5F) * 4.0F;
+			float f2 = (rand.nextFloat() - 0.5F) * 8.0F;
+			worldObj.spawnParticle("flame", posX + f, posY + 2.0D + f1, posZ + f2, 0.0D, 0.0D, 0.0D);
+			worldObj.spawnParticle("lava", posX + f, posY + 2.0D + f1, posZ + f2, 0.0D, 0.0D, 0.0D);
+			worldObj.spawnParticle("largesmoke", posX + f, posY + 2.0D + f1, posZ + f2, 0.0D, 0.0D, 0.0D);
+			worldObj.spawnParticle("explode", posX + f, posY + 2.0D + f1, posZ + f2, 0.0D, 0.0D, 0.0D);
+			if (deathTicks >= 190 && deathTicks <= 200)
+				worldObj.spawnParticle("hugeexplosion", posX + f, posY + 2.0D + f1, posZ + f2, 0.0D, 0.0D, 0.0D);
+		}
+
+		int i;
+		int j;
+
+		if (!worldObj.isRemote)
+			if (deathTicks > 150 && deathTicks % 5 == 0)
+			{
+				i = 500;
+
+				while (i > 0)
+				{
+					j = EntityXPOrb.getXPSplit(i);
+					i -= j;
+					worldObj.spawnEntityInWorld(new EntityXPOrb(worldObj, posX, posY, posZ, j));
+					if(deathTicks == 100 || deathTicks == 120 || deathTicks == 140 || deathTicks == 160 || deathTicks == 180){
+						worldObj.spawnEntityInWorld(new EntityItem(worldObj, posX, posY, posZ, new ItemStack(AbyssalCraft.dreadfragment, 4)));
+						worldObj.spawnEntityInWorld(new EntityItem(worldObj, posX, posY, posZ, new ItemStack(AbyssalCraft.dreadchunk, 2)));
+						worldObj.spawnEntityInWorld(new EntityItem(worldObj, posX, posY, posZ, new ItemStack(AbyssalCraft.Dreadshard)));
+						worldObj.spawnEntityInWorld(new EntityItem(worldObj, posX, posY, posZ, new ItemStack(AbyssalCraft.dreadiumingot)));
+					}
+				}
+			}
+		if(deathTicks == 200 && !worldObj.isRemote)
+			setDead();
+	}
+
+	@Override
+	public IEntityLivingData onSpawnWithEgg(IEntityLivingData par1EntityLivingData)
+	{
+		par1EntityLivingData = super.onSpawnWithEgg(par1EntityLivingData);
+
+		IAttributeInstance attribute = getEntityAttribute(SharedMonsterAttributes.attackDamage);
+		Calendar calendar = worldObj.getCurrentDate();
+
+		if (calendar.get(2) + 1 == 10 && calendar.get(5) == 31 && rand.nextFloat() < 0.25F)
+			attribute.applyModifier(attackDamageBoost);
+
+		return par1EntityLivingData;
 	}
 }

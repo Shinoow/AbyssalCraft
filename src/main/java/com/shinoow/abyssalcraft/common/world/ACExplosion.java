@@ -209,12 +209,7 @@ public class ACExplosion extends Explosion
 				}
 
 				if (block.getMaterial() != Material.air)
-				{
-					if (block.canDropFromExplosion(this))
-						block.dropBlockAsItemWithChance(worldObj, i, j, k, worldObj.getBlockMetadata(i, j, k), 1.0F / explosionSize, 0);
-
 					block.onBlockExploded(worldObj, i, j, k, this);
-				}
 			}
 		}
 
