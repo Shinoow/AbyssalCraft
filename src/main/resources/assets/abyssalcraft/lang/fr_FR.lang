@@ -130,6 +130,7 @@ tooltip.odb=Explosif puissant, à utiliser à vos propres risques !
 tooltip.crystal=
 tooltip.portalplacerjzh.1=
 tooltip.portalplacerjzh.2=
+tooltip.soulreaper=
 
 #Creative Tabs
 itemgroup.acblocks= Blocs d'AbyssalCraft
@@ -240,6 +241,9 @@ tile.ADO.name=
 tile.ANO.name=
 tile.ATO.name=
 tile.ACO.name=
+tile.APCorO.name=
+tile.ALCorO.name=
+tile.solidLava.name=
 
 #Items
 item.Sword.name=La Lame du Développeur
@@ -399,6 +403,7 @@ item.antiPork.name=
 item.antiFlesh.name=
 item.antiBone.name=
 item.antiSpider_eye.name=
+item.soulReaper.name=
 
 #Entities
 entity.abyssalcraft.depthsghoul.name=Goule des Profondeurs

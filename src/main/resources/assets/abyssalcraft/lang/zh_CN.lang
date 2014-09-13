@@ -130,6 +130,7 @@ tooltip.odb=巨大的爆炸, 自身也承受危险.
 tooltip.crystal=分子式
 tooltip.portalplacerjzh.1=只能在
 tooltip.portalplacerjzh.2=恐惧之地使用
+tooltip.soulreaper=
 
 #Creative Tabs
 itemgroup.acblocks=深渊国度方块
@@ -240,6 +241,9 @@ tile.ADO.name=
 tile.ANO.name=
 tile.ATO.name=
 tile.ACO.name=
+tile.APCorO.name=
+tile.ALCorO.name=
+tile.solidLava.name=
 
 #Items
 item.Sword.name=恶魔之刃
@@ -399,6 +403,7 @@ item.antiPork.name=
 item.antiFlesh.name=
 item.antiBone.name=
 item.antiSpider_eye.name=
+item.soulReaper.name=
 
 #Entities
 entity.abyssalcraft.depthsghoul.name=深渊食尸鬼

@@ -130,6 +130,7 @@ tooltip.odb=Heavy explosive, use at own risk.
 tooltip.crystal=Molecular formula
 tooltip.portalplacerjzh.1=Can only be used within
 tooltip.portalplacerjzh.2=The Dreadlands.
+tooltip.soulreaper=Souls harvested
 
 #Creative Tabs
 itemgroup.acblocks=AbyssalCraft Blocks
@@ -240,6 +241,8 @@ tile.ADO.name=Abyssal Diamond Ore
 tile.ANO.name=Abyssal Nitre Ore
 tile.ATO.name=Abyssal Tin Ore
 tile.ACO.name=Abyssal Copper Ore
+tile.APCorO.name=Pearlescent Coralium Ore
+tile.ALCorO.name=Liquified Coralium Ore
 tile.solidLava.name=Solid lava
 
 #Items
@@ -400,6 +403,7 @@ item.antiPork.name=Anti-Pork
 item.antiFlesh.name=Rotten Anti-Flesh
 item.antiBone.name=Anti-Bone
 item.antiSpider_eye.name=Anti-Spider Eye
+item.soulReaper.name=Sacthoth's Soul Reaper Blade
 
 #Entities
 entity.abyssalcraft.depthsghoul.name=Depths Ghoul
