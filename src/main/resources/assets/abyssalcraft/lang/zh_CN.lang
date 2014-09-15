@@ -85,16 +85,16 @@ container.abyssalcraft.crystallizer=结晶器
 container.abyssalcraft.transmutator=嬗变器
 
 #NEI Integration
-container.abyssalcraft.crystallizer.nei=
-container.abyssalcraft.transmutator.nei=
+container.abyssalcraft.crystallizer.nei=结晶化
+container.abyssalcraft.transmutator.nei=嬗变化
 
 #Damagesources
 death.attack.coralium=%1$s由于珊瑚侵染而死亡
 death.attack.coralium.player=在逃避%2$s的时候%1$s屈服于珊瑚侵染之下
 death.attack.coralium=%1$s 由于恐惧侵染而死亡
 death.attack.coralium.player=在逃避%2$s的时候%1$s屈服于查加罗特的拳头之下
-death.attack.antimatter=%1$s
-death.attack.antimatter.player=%1$s %2$s
+death.attack.antimatter=%1$s被解离成分子
+death.attack.antimatter.player=%1$s被解离成分子在躲避%2$s的时候
 
 #Tooltips
 tooltip.portalplacer.1=右击地面来
@@ -102,7 +102,7 @@ tooltip.portalplacer.2=创建一个传送门. 无限使用.
 tooltip.portalplacerdl.1=使用时只能在
 tooltip.portalplacerdl.2=深渊荒芜之地.
 tooltip.oc=这个物品蕴藏不可思议的力量.
-tooltip.staff=J'zahar的权杖, 深渊之门的守卫者.
+tooltip.staff=扎哈尔的权杖, 深渊之门的守卫者.
 tooltip.eoa=堕落者阿索拉之眼.
 tooltip.caxe.1=这把斧头能转换
 tooltip.caxe.2=木板, 树叶, 原木和树苗的类型.
@@ -130,7 +130,7 @@ tooltip.odb=巨大的爆炸, 自身也承受危险.
 tooltip.crystal=分子式
 tooltip.portalplacerjzh.1=只能在
 tooltip.portalplacerjzh.2=恐惧之地使用
-tooltip.soulreaper=
+tooltip.soulreaper=灵魂收割
 
 #Creative Tabs
 itemgroup.acblocks=深渊国度方块
@@ -235,15 +235,15 @@ tile.chagarothspawner.name=查加罗特刷怪笼
 tile.chagarothfistspawner.name=触发的查加罗特刷怪笼
 tile.DrTf.name=恐惧之地木栅栏
 tile.NO.name=硝石矿
-tile.AIO.name=
-tile.AGO.name=
-tile.ADO.name=
-tile.ANO.name=
-tile.ATO.name=
-tile.ACO.name=
-tile.APCorO.name=
-tile.ALCorO.name=
-tile.solidLava.name=
+tile.AIO.name=深渊铁矿石
+tile.AGO.name=深渊金矿石
+tile.ADO.name=深渊钻石矿石
+tile.ANO.name=深渊硝石矿石
+tile.ATO.name=深渊锡矿石
+tile.ACO.name=深渊铜矿石
+tile.APCorO.name=珠光四射的珊瑚矿
+tile.ALCorO.name=液化珊瑚矿
+tile.solidLava.name=固态岩浆
 
 #Items
 item.Sword.name=恶魔之刃
@@ -386,24 +386,24 @@ item.ADSB.name=可怕的侍魂靴子
 item.ADSH.name=可怕的侍魂头盔
 item.ADSC.name=可怕的侍魂胸甲
 item.ADSP.name=可怕的侍魂护腿
-item.IT.name=
-item.IC.name=
-item.crystalTin.name=
-item.crystalCopper.name=
-item.crystalSilicon.name=
-item.crystalMagnesium.name=
-item.crystalAluminium.name=
-item.crystalSilica.name=
-item.crystalAlumina.name=
-item.crystalMagnesia.name=
-item.crystalZinc.name=
-item.antiBeef.name=
-item.antiChicken.name=
-item.antiPork.name=
-item.antiFlesh.name=
-item.antiBone.name=
-item.antiSpider_eye.name=
-item.soulReaper.name=
+item.IT.name=锡锭
+item.IC.name=铜锭
+item.crystalTin.name=结晶锡
+item.crystalCopper.name=结晶铜
+item.crystalSilicon.name=结晶硅
+item.crystalMagnesium.name=结晶镁
+item.crystalAluminium.name=结晶铝
+item.crystalSilica.name=结晶二氧化硅
+item.crystalAlumina.name=结晶铝
+item.crystalMagnesia.name=结晶氧化镁
+item.crystalZinc.name=结晶锌
+item.antiBeef.name=反物质牛排
+item.antiChicken.name=反物质鸡肉
+item.antiPork.name=反物质猪肉
+item.antiFlesh.name=反物质腐肉
+item.antiBone.name=反物质骨头
+item.antiSpider_eye.name=反物质蜘蛛眼
+item.soulReaper.name=萨多夫的灵魂收割刀
 
 #Entities
 entity.abyssalcraft.depthsghoul.name=深渊食尸鬼
@@ -428,24 +428,24 @@ entity.abyssalcraft.shadowbeast.name=阴影野兽
 entity.abyssalcraft.shadowboss.name=末日先驱者萨索斯
 entity.abyssalcraft.gskeleton.name=骷髅哥利亚
 entity.abyssalcraft.chagarothspawn.name=查加罗特的卵
-entity.abyssalcraft.antiabyssalzombie.name=
-entity.abyssalcraft.antibat.name=
-entity.abyssalcraft.antichicken.name=
-entity.abyssalcraft.anticow.name=
-entity.abyssalcraft.anticreeper.name=
-entity.abyssalcraft.antighoul.name=
-entity.abyssalcraft.antipig.name=
-entity.abyssalcraft.antiplayer.name=
-entity.abyssalcraft.antiskeleton.name=
-entity.abyssalcraft.antispider.name=
-entity.abyssalcraft.antizombie.name=
+entity.abyssalcraft.antiabyssalzombie.name=反物质深渊僵尸
+entity.abyssalcraft.antibat.name=反物质蝙蝠
+entity.abyssalcraft.antichicken.name=反物质鸡
+entity.abyssalcraft.anticow.name=反物质牛
+entity.abyssalcraft.anticreeper.name=反物质爬行者
+entity.abyssalcraft.antighoul.name=反物质食尸鬼
+entity.abyssalcraft.antipig.name=反物质猪
+entity.abyssalcraft.antiplayer.name=反物质玩家
+entity.abyssalcraft.antiskeleton.name=反物质骷髅
+entity.abyssalcraft.antispider.name=反物质蜘蛛
+entity.abyssalcraft.antizombie.name=反物质僵尸
 
 #Potions
 potion.Cplague=珊瑚侵染
-potion.Cplague.postfix=
+potion.Cplague.postfix=珊瑚侵染药水
 potion.Dplague=恐惧侵染
-potion.Dplague.postfix=
-potion.Antimatter=
-potion.Antimatter.postfix=
+potion.Dplague.postfix=恐惧侵染药水
+potion.Antimatter=反物质
+potion.Antimatter.postfix=湮灭药水
 
 #Localization done, Shin out.
