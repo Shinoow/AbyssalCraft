@@ -1,11 +1,11 @@
-##Welcome to AbyssalCraft on Github
+## Welcome to AbyssalCraft on Github
 
-###Main information
+### Main information
 
 The mod thread can be located at
 http://minecraftforum.net/topic/1582727-/
 
-###Licencing
+### Licencing
 
 Copyright 2012-2014 Shinoow
 
@@ -21,16 +21,16 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 
-###Reporting bugs
+### Reporting bugs
 
 If you happen to find a bug while playing with the mod, report an issue, with a detailed explanation of what triggered the possible crash (or the bug), and the crash report (either as a gist or a site like pastebin).
 If you can track down a bug directly in the code, file a pull request pointing out the incorrect code while providing a fix.
 
-###Contributing
+### Contributing
 
 Contributions are welcome. Most contributions might end up being tweaks and improvements, but that's still a contribution.
 
-###Integrations
+### Integrations
 
 If you are looking into developing AbyssalCraft Add-ons (eventhough the API isn't complete), or just want to integrate
 it into your mod, check the "dev" branch for compiled mod jars that can be imported into your workspace.
