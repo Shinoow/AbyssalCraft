@@ -17,14 +17,15 @@ package com.shinoow.abyssalcraft.common.entity;
 
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.*;
+import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.world.World;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
-import com.shinoow.abyssalcraft.core.api.entity.AntiMob;
+import com.shinoow.abyssalcraft.core.api.entity.*;
 
-public class EntityShadowCreature extends AntiMob {
+public class EntityShadowCreature extends EntityMob implements IAntiEntity, ICoraliumEntity, IDreadEntity {
 
 	public EntityShadowCreature(World par1World) {
 		super(par1World);

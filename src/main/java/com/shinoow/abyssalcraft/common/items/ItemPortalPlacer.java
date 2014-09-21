@@ -18,21 +18,18 @@ package com.shinoow.abyssalcraft.common.items;
 import java.util.List;
 
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
 
-import cpw.mods.fml.client.FMLClientHandler;
+public class ItemPortalPlacer extends Item {
 
-public class ItemPortalPlacer extends Item
-{
-	public ItemPortalPlacer()
-	{
+	public ItemPortalPlacer(){
 		super();
 		maxStackSize = 1;
 		setCreativeTab(AbyssalCraft.tabTools);
@@ -62,11 +59,8 @@ public class ItemPortalPlacer extends Item
 			{
 				for(int y = 1; y < 5; y++)
 					for (int z = -1; z < 2; z++)
-						if(par3World.getBlockMetadata(par4, par5 + y, par6 + z) != 0)
-						{
-							FMLClientHandler.instance().getClient().ingameGUI.getChatGUI().printChatMessage(new ChatComponentText("No room for a portal."));
+						if(par3World.getBlock(par4, par5 + y, par6 + z) != Blocks.air)
 							return false;
-						}
 
 				par3World.setBlock(par4, par5 + 1, par6, AbyssalCraft.abystone);
 				par3World.setBlock(par4, par5 + 1, par6 + 1, AbyssalCraft.abystone);
@@ -92,11 +86,8 @@ public class ItemPortalPlacer extends Item
 			{
 				for(int y = 1; y < 5; y++)
 					for (int x = -1; x < 2; x++)
-						if(par3World.getBlockMetadata(par4 + x, par5 + y, par6) != 0)
-						{
-							FMLClientHandler.instance().getClient().ingameGUI.getChatGUI().printChatMessage(new ChatComponentText("No room for a portal."));
+						if(par3World.getBlock(par4 + x, par5 + y, par6) != Blocks.air)
 							return false;
-						}
 
 				par3World.setBlock(par4, par5 + 1, par6, AbyssalCraft.abystone);
 				par3World.setBlock(par4 + 1, par5 + 1, par6, AbyssalCraft.abystone);

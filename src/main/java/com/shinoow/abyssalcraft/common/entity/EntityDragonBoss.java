@@ -15,34 +15,23 @@
  */
 package com.shinoow.abyssalcraft.common.entity;
 
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.IEntityMultiPart;
-import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.boss.BossStatus;
-import net.minecraft.entity.boss.EntityDragonPart;
-import net.minecraft.entity.boss.IBossDisplayData;
-import net.minecraft.entity.item.EntityItem;
-import net.minecraft.entity.item.EntityXPOrb;
+import net.minecraft.entity.*;
+import net.minecraft.entity.boss.*;
+import net.minecraft.entity.item.*;
+import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.DamageSource;
-import net.minecraft.util.EnumChatFormatting;
-import net.minecraft.util.MathHelper;
-import net.minecraft.util.StatCollector;
-import net.minecraft.util.Vec3;
-import net.minecraft.world.Explosion;
-import net.minecraft.world.World;
+import net.minecraft.util.*;
+import net.minecraft.world.*;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.common.lib.ParticleEffects;
 import com.shinoow.abyssalcraft.common.util.SpecialTextUtil;
-import com.shinoow.abyssalcraft.core.api.entity.CoraliumMob;
+import com.shinoow.abyssalcraft.core.api.entity.ICoraliumEntity;
 
-public class EntityDragonBoss extends CoraliumMob implements IBossDisplayData, IEntityMultiPart
+public class EntityDragonBoss extends EntityMob implements IBossDisplayData, IEntityMultiPart, ICoraliumEntity
 {
 
 	public double targetX;

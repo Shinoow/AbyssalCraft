@@ -29,8 +29,7 @@ import net.minecraft.world.World;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.common.blocks.tile.TileEntityPSDL;
-import com.shinoow.abyssalcraft.common.entity.EntityDreadgolem;
-import com.shinoow.abyssalcraft.core.api.entity.DreadMob;
+import com.shinoow.abyssalcraft.core.api.entity.IDreadEntity;
 
 public class BlockPSDL extends BlockContainer {
 
@@ -73,7 +72,7 @@ public class BlockPSDL extends BlockContainer {
 		super.onEntityCollidedWithBlock(par1World, par2, par3, par4, par5Entity);
 		if(par5Entity instanceof EntityLivingBase){
 			((EntityLivingBase)par5Entity).addPotionEffect(new PotionEffect(AbyssalCraft.Dplague.id, 100));
-			if(par5Entity instanceof DreadMob || par5Entity instanceof EntityDreadgolem)
+			if(par5Entity instanceof IDreadEntity)
 				((EntityLivingBase)par5Entity).removePotionEffect(AbyssalCraft.Dplague.id);
 		}
 	}

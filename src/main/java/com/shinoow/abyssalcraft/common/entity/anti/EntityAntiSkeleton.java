@@ -19,7 +19,7 @@ import net.minecraft.block.Block;
 import net.minecraft.enchantment.*;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.*;
-import net.minecraft.entity.monster.EntitySkeleton;
+import net.minecraft.entity.monster.*;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.init.*;
@@ -27,9 +27,9 @@ import net.minecraft.item.*;
 import net.minecraft.world.*;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
-import com.shinoow.abyssalcraft.core.api.entity.AntiMob;
+import com.shinoow.abyssalcraft.core.api.entity.IAntiEntity;
 
-public class EntityAntiSkeleton extends AntiMob implements IRangedAttackMob {
+public class EntityAntiSkeleton extends EntityMob implements IRangedAttackMob, IAntiEntity {
 
 	private EntityAIArrowAttack aiArrowAttack = new EntityAIArrowAttack(this, 1.0D, 20, 60, 15.0F);
 

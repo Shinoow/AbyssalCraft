@@ -18,6 +18,11 @@ package com.shinoow.abyssalcraft.core.util;
 import net.minecraft.block.Block;
 import cpw.mods.fml.common.registry.GameRegistry;
 
+/**
+ * Contains all blocks added in AbyssalCraft
+ * @author shinoow
+ *
+ */
 public class BlockList {
 
 	/** AbyssalCraft modId */

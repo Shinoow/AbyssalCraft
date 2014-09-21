@@ -237,7 +237,7 @@ public class CoreRegistry {
 		Iterator<ItemStack> inputIter = OreDictionary.getOres(input).iterator();
 
 		while(inputIter.hasNext())
-			addSingleCrystallization(inputIter.next(), OreDictionary.getOres(output).iterator().next(), xp);
+			addSingleCrystallization(inputIter.next(), new ItemStack(OreDictionary.getOres(output).iterator().next().getItem()), xp);
 	}
 
 	/**
@@ -264,6 +264,35 @@ public class CoreRegistry {
 		Iterator<ItemStack> inputIter = OreDictionary.getOres(input).iterator();
 
 		while(inputIter.hasNext())
-			addTransmutation(inputIter.next(), OreDictionary.getOres(output).iterator().next(), xp);
+			addTransmutation(inputIter.next(), new ItemStack(OreDictionary.getOres(output).iterator().next().getItem()), xp);
+	}
+
+	/**
+	 * OreDictionary specific Transmutation
+	 * @param input The ore input
+	 * @param output The ore output
+	 * @param out The output quantity
+	 * @param xp Amount of exp given
+	 */
+	public static void addTransmutation(String input, String output, int out, float xp){
+		Iterator<ItemStack> inputIter = OreDictionary.getOres(input).iterator();
+
+		while(inputIter.hasNext())
+			addTransmutation(inputIter.next(), new ItemStack(OreDictionary.getOres(output).iterator().next().getItem(), out), xp);
+	}
+
+	/**
+	 * OreDictionary specific Transmutation
+	 * @param input The ore input
+	 * @param output The ore output
+	 * @param out The output quantity
+	 * @param meta The output metadata
+	 * @param xp Amount of exp given
+	 */
+	public static void addTransmutation(String input, String output, int out, int meta, float xp){
+		Iterator<ItemStack> inputIter = OreDictionary.getOres(input).iterator();
+
+		while(inputIter.hasNext())
+			addTransmutation(inputIter.next(), new ItemStack(OreDictionary.getOres(output).iterator().next().getItem(), out, meta), xp);
 	}
 }

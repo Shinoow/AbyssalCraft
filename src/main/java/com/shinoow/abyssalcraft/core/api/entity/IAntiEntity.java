@@ -15,18 +15,11 @@
  */
 package com.shinoow.abyssalcraft.core.api.entity;
 
-import net.minecraft.entity.passive.EntityAnimal;
-import net.minecraft.world.World;
-
 /**
- * Bridge class for antimatter animals
+ * Interface to define a entity that's immune to the Antimatter potion effect
+ * @author shinoow
+ *
  */
-public abstract class AntiAnimal extends EntityAnimal{
+public interface IAntiEntity {
 
-	/**
-	 * Bridge class for antimatter animals
-	 */
-	public AntiAnimal(World par1World) {
-		super(par1World);
-	}
 }

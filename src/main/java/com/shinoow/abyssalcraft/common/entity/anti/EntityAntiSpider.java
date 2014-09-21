@@ -19,7 +19,7 @@ import java.util.Random;
 
 import net.minecraft.block.Block;
 import net.minecraft.entity.*;
-import net.minecraft.entity.monster.EntitySpider;
+import net.minecraft.entity.monster.*;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.potion.*;
@@ -27,9 +27,9 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.world.*;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
-import com.shinoow.abyssalcraft.core.api.entity.AntiMob;
+import com.shinoow.abyssalcraft.core.api.entity.IAntiEntity;
 
-public class EntityAntiSpider extends AntiMob {
+public class EntityAntiSpider extends EntityMob implements IAntiEntity {
 
 	public EntityAntiSpider(World par1World)
 	{

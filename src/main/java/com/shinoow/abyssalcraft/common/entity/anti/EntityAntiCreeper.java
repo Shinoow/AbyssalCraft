@@ -18,7 +18,7 @@ package com.shinoow.abyssalcraft.common.entity.anti;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.*;
-import net.minecraft.entity.monster.EntityCreeper;
+import net.minecraft.entity.monster.*;
 import net.minecraft.entity.passive.EntityOcelot;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
@@ -28,11 +28,11 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
 
 import com.shinoow.abyssalcraft.common.entity.ai.EntityAIAntiCreeperSwell;
-import com.shinoow.abyssalcraft.core.api.entity.AntiMob;
+import com.shinoow.abyssalcraft.core.api.entity.IAntiEntity;
 
 import cpw.mods.fml.relauncher.*;
 
-public class EntityAntiCreeper extends AntiMob {
+public class EntityAntiCreeper extends EntityMob implements IAntiEntity {
 
 	/**
 	 * Time when this creeper was last in an active state (Messed up code here, probably causes creeper animation to go

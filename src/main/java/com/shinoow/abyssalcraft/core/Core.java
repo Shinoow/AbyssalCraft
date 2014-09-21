@@ -142,6 +142,7 @@ public class Core extends DummyModContainer {
 				"com.shinoow.abyssalcraft.core.api.item",
 				"com.shinoow.abyssalcraft.core.api.render",
 				"com.shinoow.abyssalcraft.core.client",
+				"com.shinoow.abyssalcraft.core.client.config",
 				"com.shinoow.abyssalcraft.core.client.model",
 				"com.shinoow.abyssalcraft.core.client.render",
 				"com.shinoow.abyssalcraft.core.common",

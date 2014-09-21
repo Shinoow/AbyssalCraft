@@ -25,6 +25,9 @@ import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.common.entity.EntityAbygolem;
 import com.shinoow.abyssalcraft.common.entity.EntityDreadgolem;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+
 public class BiomeGenDreadlands extends BiomeGenBase
 {
 
@@ -62,5 +65,19 @@ public class BiomeGenDreadlands extends BiomeGenBase
 			if (var10 == AbyssalCraft.dreadstone)
 				par1World.setBlock(var7, var8, var9, AbyssalCraft.dreadore);
 		}
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public int getBiomeGrassColor(int par1, int par2, int par3)
+	{
+		return 0x910000;
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public int getBiomeFoliageColor(int par1, int par2, int par3)
+	{
+		return 0x910000;
 	}
 }

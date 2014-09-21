@@ -22,6 +22,7 @@ import net.minecraft.entity.*;
 import net.minecraft.entity.ai.*;
 import net.minecraft.entity.boss.IBossDisplayData;
 import net.minecraft.entity.item.*;
+import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.*;
@@ -32,9 +33,9 @@ import net.minecraftforge.event.entity.living.EnderTeleportEvent;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.common.util.SpecialTextUtil;
-import com.shinoow.abyssalcraft.core.api.entity.AntiMob;
+import com.shinoow.abyssalcraft.core.api.entity.*;
 
-public class EntitySacthoth extends AntiMob implements IBossDisplayData {
+public class EntitySacthoth extends EntityMob implements IBossDisplayData, IAntiEntity, ICoraliumEntity, IDreadEntity {
 
 	public int deathTicks;
 

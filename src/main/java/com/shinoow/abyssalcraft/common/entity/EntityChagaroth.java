@@ -27,6 +27,7 @@ import net.minecraft.entity.ai.attributes.*;
 import net.minecraft.entity.boss.IBossDisplayData;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.item.EntityXPOrb;
+import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionEffect;
@@ -35,9 +36,9 @@ import net.minecraft.world.World;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.common.util.SpecialTextUtil;
-import com.shinoow.abyssalcraft.core.api.entity.DreadMob;
+import com.shinoow.abyssalcraft.core.api.entity.IDreadEntity;
 
-public class EntityChagaroth extends DreadMob implements IBossDisplayData {
+public class EntityChagaroth extends EntityMob implements IBossDisplayData, IDreadEntity {
 
 	private static final UUID attackDamageBoostUUID = UUID.fromString("648D7064-6A60-4F59-8ABE-C2C23A6DD7A9");
 	private static final AttributeModifier attackDamageBoost = new AttributeModifier(attackDamageBoostUUID, "Halloween Attack Damage Boost", 8D, 0);
@@ -52,6 +53,7 @@ public class EntityChagaroth extends DreadMob implements IBossDisplayData {
 		targetTasks.addTask(1, new EntityAIHurtByTarget(this, false));
 		targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityPlayer.class, 0, true));
 		ignoreFrustumCheck = true;
+		isImmuneToFire = true;
 	}
 
 	@Override

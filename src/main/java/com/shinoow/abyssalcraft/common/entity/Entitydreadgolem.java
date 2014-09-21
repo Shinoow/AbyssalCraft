@@ -18,14 +18,15 @@ package com.shinoow.abyssalcraft.common.entity;
 import net.minecraft.block.Block;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.*;
+import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.world.World;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
-import com.shinoow.abyssalcraft.core.api.entity.DreadMob;
+import com.shinoow.abyssalcraft.core.api.entity.IDreadEntity;
 
-public class EntityDreadgolem extends DreadMob {
+public class EntityDreadgolem extends EntityMob implements IDreadEntity {
 
 	public EntityDreadgolem(World par1World) {
 		super(par1World);
@@ -38,6 +39,7 @@ public class EntityDreadgolem extends DreadMob {
 		targetTasks.addTask(1, new EntityAIHurtByTarget(this, true));
 		targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityAbygolem.class, 0, true));
 		targetTasks.addTask(3, new EntityAINearestAttackableTarget(this, EntityPlayer.class, 0, true));
+		isImmuneToFire = true;
 	}
 
 	@Override

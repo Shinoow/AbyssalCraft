@@ -33,8 +33,9 @@ import net.minecraft.world.World;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.common.util.SpecialTextUtil;
+import com.shinoow.abyssalcraft.core.api.entity.*;
 
-public class EntityJzahar extends EntityMob implements IBossDisplayData, IRangedAttackMob {
+public class EntityJzahar extends EntityMob implements IBossDisplayData, IRangedAttackMob, IAntiEntity, ICoraliumEntity, IDreadEntity {
 
 	private static final UUID attackDamageBoostUUID = UUID.fromString("648D7064-6A60-4F59-8ABE-C2C23A6DD7A9");
 	private static final AttributeModifier attackDamageBoost = new AttributeModifier(attackDamageBoostUUID, "Halloween Attack Damage Boost", 10.0D, 0);

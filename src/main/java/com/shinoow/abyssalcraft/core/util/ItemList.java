@@ -18,6 +18,11 @@ package com.shinoow.abyssalcraft.core.util;
 import net.minecraft.item.Item;
 import cpw.mods.fml.common.registry.GameRegistry;
 
+/**
+ * Contains all items added in AbyssalCraft
+ * @author shinoow
+ *
+ */
 public class ItemList {
 
 	/** AbyssalCraft modId */

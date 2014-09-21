@@ -18,6 +18,7 @@ package com.shinoow.abyssalcraft.common.entity.anti;
 import net.minecraft.block.Block;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.*;
+import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.*;
 import net.minecraft.item.*;
@@ -25,9 +26,9 @@ import net.minecraft.world.World;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.common.entity.EntityDepthsghoul;
-import com.shinoow.abyssalcraft.core.api.entity.AntiMob;
+import com.shinoow.abyssalcraft.core.api.entity.IAntiEntity;
 
-public class EntityAntiGhoul extends AntiMob {
+public class EntityAntiGhoul extends EntityMob implements IAntiEntity {
 
 	public EntityAntiGhoul(World par1World) {
 		super(par1World);

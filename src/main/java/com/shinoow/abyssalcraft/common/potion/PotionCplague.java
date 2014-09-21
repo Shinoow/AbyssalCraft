@@ -18,7 +18,7 @@ package com.shinoow.abyssalcraft.common.potion;
 import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.common.entity.*;
 import com.shinoow.abyssalcraft.common.util.ACDamageSource;
-import com.shinoow.abyssalcraft.core.api.entity.CoraliumMob;
+import com.shinoow.abyssalcraft.core.api.entity.ICoraliumEntity;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.*;
@@ -44,7 +44,7 @@ public class PotionCplague extends Potion{
 	@Override
 	public void performEffect(EntityLivingBase par1EntityLivingBase, int par2){
 		par1EntityLivingBase.attackEntityFrom(ACDamageSource.coralium, 2);
-		if(par1EntityLivingBase instanceof CoraliumMob){
+		if(par1EntityLivingBase instanceof ICoraliumEntity){
 			par1EntityLivingBase.removePotionEffect(AbyssalCraft.Cplague.id);
 			par1EntityLivingBase.heal(2);
 		}

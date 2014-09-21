@@ -478,8 +478,8 @@ public class AbyssalCrafting {
 		CoreRegistry.addSingleCrystallization("oreTin", "crystalTin", 0.1F);
 		CoreRegistry.addSingleCrystallization("ingotCopper", "crystalCopper", 0.1F);
 		CoreRegistry.addSingleCrystallization("oreCopper", "crystalCopper", 0.1F);
-		CoreRegistry.addSingleCrystallization("ingotAluminium", "crystalAluminium", 0.1F);
-		CoreRegistry.addSingleCrystallization("oreAluminium", "crystalAluminium", 0.1F);
+		CoreRegistry.addSingleCrystallization("ingotAluminum", "crystalAluminium", 0.1F);
+		CoreRegistry.addSingleCrystallization("oreAluminum", "crystalAluminium", 0.1F);
 		CoreRegistry.addSingleCrystallization("blockCopper", "crystalCopper", 9, 0.9F);
 		CoreRegistry.addSingleCrystallization("blockTin", "crystalTin", 9, 0.9F);
 		CoreRegistry.addSingleCrystallization(Blocks.gold_block, new ItemStack(AbyssalCraft.crystalGold, 9), 0.9F);
@@ -557,7 +557,8 @@ public class AbyssalCrafting {
 		CoreRegistry.addTransmutation(AbyssalCraft.antibucket, new ItemStack(AbyssalCraft.anticwater, 1), 0.0F);
 		CoreRegistry.addTransmutation(AbyssalCraft.denseCarbonCluster, new ItemStack(Items.diamond), 0.5F);
 		CoreRegistry.addTransmutation(AbyssalCraft.dreadKey, new ItemStack(AbyssalCraft.portalPlacerJzh), 1.0F);
-		CoreRegistry.addTransmutation("crystalAluminium", "ingotAluminium", 0.2F);
+		if(!OreDictionary.getOres("ingotAluminium").isEmpty())
+			CoreRegistry.addTransmutation("crystalAluminium", "ingotAluminum", 0.2F);
 		CoreRegistry.addTransmutation(Blocks.lava, new ItemStack(AbyssalCraft.solidLava, 1), 0.0F);
 		//This is for later, I'd say around version 1.8, when you reach the palace of J'zahar
 		//		CoreRegistry.addTransmutation(Blocks.end_stone, new ItemStack(AbyssalCraft.ethaxium, 1), 0.0F);

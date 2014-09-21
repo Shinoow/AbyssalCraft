@@ -18,12 +18,13 @@ package com.shinoow.abyssalcraft.common.entity.anti;
 import net.minecraft.block.Block;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.*;
+import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
 
-import com.shinoow.abyssalcraft.core.api.entity.AntiMob;
+import com.shinoow.abyssalcraft.core.api.entity.IAntiEntity;
 
-public class EntityAntiPlayer extends AntiMob {
+public class EntityAntiPlayer extends EntityMob implements IAntiEntity {
 
 	public EntityAntiPlayer(World par1World) {
 		super(par1World);

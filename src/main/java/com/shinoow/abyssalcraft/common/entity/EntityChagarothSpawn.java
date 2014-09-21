@@ -18,15 +18,16 @@ package com.shinoow.abyssalcraft.common.entity;
 import net.minecraft.block.Block;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.*;
+import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.world.World;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
-import com.shinoow.abyssalcraft.core.api.entity.DreadMob;
+import com.shinoow.abyssalcraft.core.api.entity.IDreadEntity;
 
-public class EntityChagarothSpawn extends DreadMob {
+public class EntityChagarothSpawn extends EntityMob implements IDreadEntity {
 
 	public EntityChagarothSpawn(World par1World)
 	{
@@ -39,6 +40,7 @@ public class EntityChagarothSpawn extends DreadMob {
 		tasks.addTask(4, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
 		targetTasks.addTask(1, new EntityAIHurtByTarget(this, false));
 		targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityPlayer.class, 0, true));
+		isImmuneToFire = true;
 	}
 
 	@Override

@@ -19,7 +19,7 @@ import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.common.entity.*;
 import com.shinoow.abyssalcraft.common.entity.anti.*;
 import com.shinoow.abyssalcraft.common.util.ACDamageSource;
-import com.shinoow.abyssalcraft.core.api.entity.*;
+import com.shinoow.abyssalcraft.core.api.entity.IAntiEntity;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.*;
@@ -45,8 +45,7 @@ public class PotionAntimatter extends Potion{
 	@Override
 	public void performEffect(EntityLivingBase par1EntityLivingBase, int par2){
 		par1EntityLivingBase.attackEntityFrom(ACDamageSource.antimatter, 5);
-		if(par1EntityLivingBase instanceof AntiMob || par1EntityLivingBase instanceof AntiAnimal
-				|| par1EntityLivingBase instanceof AntiAmbientCreature){
+		if(par1EntityLivingBase instanceof IAntiEntity){
 			par1EntityLivingBase.removePotionEffect(AbyssalCraft.antiMatter.id);
 			par1EntityLivingBase.heal(5);
 		}

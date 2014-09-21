@@ -15,12 +15,29 @@
  */
 package com.shinoow.abyssalcraft.core.api.addon;
 
+import com.shinoow.abyssalcraft.core.api.addon.ACAddon.AddonType;
+
 /**
- * Interface for AbyssalCraft add-ons,
- * use for special methods and whatnot
+ * Coremod interface for AbyssalCraft add-ons,
+ * implement it in the dummy class
  * @author shinoow
  *
  */
 public interface IACAddon {
+
+	/**
+	 * ModId, used for indexing multiple add-ons
+	 */
+	String getModId();
+
+	/**
+	 * Name of the add-on (same as mod name)
+	 */
+	String getName();
+
+	/**
+	 * What kind of add-on (can be multiple kinds)
+	 */
+	AddonType[] getType();
 
 }

@@ -25,10 +25,9 @@ import net.minecraft.util.StatCollector;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
 
-public class ItemPortalPlacerJzh extends Item
-{
-	public ItemPortalPlacerJzh()
-	{
+public class ItemPortalPlacerJzh extends Item {
+
+	public ItemPortalPlacerJzh(){
 		super();
 		maxStackSize = 1;
 		setCreativeTab(AbyssalCraft.tabTools);
@@ -72,9 +71,8 @@ public class ItemPortalPlacerJzh extends Item
 	//				{
 	//					for (int z = -1; z < 2; z++)
 	//					{
-	//						if(par3World.getBlockMetadata(par4, par5 + y, par6 + z) != 0)
+	//						if(par3World.getBlock(par4, par5 + y, par6 + z) != Blocks.air)
 	//						{
-	//							FMLClientHandler.instance().getClient().ingameGUI.getChatGUI().printChatMessage(new ChatComponentText("No room for a portal."));
 	//							return false;
 	//						}
 	//					}
@@ -106,9 +104,8 @@ public class ItemPortalPlacerJzh extends Item
 	//				{
 	//					for (int x = -1; x < 2; x++)
 	//					{
-	//						if(par3World.getBlockMetadata(par4 + x, par5 + y, par6) != 0)
+	//						if(par3World.getBlock(par4 + x, par5 + y, par6) != Blocks.air)
 	//						{
-	//							FMLClientHandler.instance().getClient().ingameGUI.getChatGUI().printChatMessage(new ChatComponentText("No room for a portal."));
 	//							return false;
 	//						}
 	//					}

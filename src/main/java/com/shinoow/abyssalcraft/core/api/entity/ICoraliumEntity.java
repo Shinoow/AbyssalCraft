@@ -15,18 +15,11 @@
  */
 package com.shinoow.abyssalcraft.core.api.entity;
 
-import net.minecraft.entity.monster.EntityMob;
-import net.minecraft.world.World;
-
 /**
- * Bridge class for antimatter mobs
+ * Interface to define a entity that's immune to the Coralium Plague
+ * @author shinoow
+ *
  */
-public class AntiMob extends EntityMob {
+public interface ICoraliumEntity {
 
-	/**
-	 * Bridge class for antimatter mobs
-	 */
-	public AntiMob(World par1World) {
-		super(par1World);
-	}
 }

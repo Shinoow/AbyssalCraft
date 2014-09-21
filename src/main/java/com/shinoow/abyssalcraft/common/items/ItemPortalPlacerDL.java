@@ -18,6 +18,7 @@ package com.shinoow.abyssalcraft.common.items;
 import java.util.List;
 
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ChatComponentText;
@@ -75,11 +76,8 @@ public class ItemPortalPlacerDL extends Item {
 			{
 				for(int y = 1; y < 5; y++)
 					for (int z = -1; z < 2; z++)
-						if(par3World.getBlockMetadata(par4, par5 + y, par6 + z) != 0)
-						{
-							FMLClientHandler.instance().getClient().ingameGUI.getChatGUI().printChatMessage(new ChatComponentText("No room for a portal."));
+						if(par3World.getBlock(par4, par5 + y, par6 + z) != Blocks.air && par3World.isRemote)
 							return false;
-						}
 
 				par3World.setBlock(par4, par5 + 1, par6, AbyssalCraft.dreadstone);
 				par3World.setBlock(par4, par5 + 1, par6 + 1, AbyssalCraft.dreadstone);
@@ -105,11 +103,8 @@ public class ItemPortalPlacerDL extends Item {
 			{
 				for(int y = 1; y < 5; y++)
 					for (int x = -1; x < 2; x++)
-						if(par3World.getBlockMetadata(par4 + x, par5 + y, par6) != 0)
-						{
-							FMLClientHandler.instance().getClient().ingameGUI.getChatGUI().printChatMessage(new ChatComponentText("No room for a portal."));
+						if(par3World.getBlock(par4 + x, par5 + y, par6) != Blocks.air && par3World.isRemote)
 							return false;
-						}
 
 				par3World.setBlock(par4, par5 + 1, par6, AbyssalCraft.dreadstone);
 				par3World.setBlock(par4 + 1, par5 + 1, par6, AbyssalCraft.dreadstone);

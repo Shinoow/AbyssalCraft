@@ -123,4 +123,18 @@ public class BiomeGenDarklandsHills extends BiomeGenBase
 	{
 		return 0;
 	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public int getBiomeGrassColor(int par1, int par2, int par3)
+	{
+		return 0x30217A;
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public int getBiomeFoliageColor(int par1, int par2, int par3)
+	{
+		return 0x30217A;
+	}
 }

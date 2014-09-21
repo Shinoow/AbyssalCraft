@@ -26,7 +26,7 @@ import net.minecraft.world.*;
 import net.minecraftforge.fluids.BlockFluidClassic;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
-import com.shinoow.abyssalcraft.core.api.entity.*;
+import com.shinoow.abyssalcraft.core.api.entity.IAntiEntity;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -95,7 +95,7 @@ public class BlockAntiliquid extends BlockFluidClassic {
 			((EntityLivingBase)par5Entity).addPotionEffect(new PotionEffect(Potion.hunger.id, 400));
 			((EntityLivingBase)par5Entity).addPotionEffect(new PotionEffect(Potion.nightVision.id, 400));
 			((EntityLivingBase)par5Entity).addPotionEffect(new PotionEffect(AbyssalCraft.antiMatter.id, 200));
-			if(par5Entity instanceof AntiMob || par5Entity instanceof AntiAnimal || par5Entity instanceof AntiAmbientCreature){
+			if(par5Entity instanceof IAntiEntity){
 				((EntityLivingBase)par5Entity).removePotionEffect(Potion.moveSlowdown.id);
 				((EntityLivingBase)par5Entity).removePotionEffect(Potion.blindness.id);
 				((EntityLivingBase)par5Entity).removePotionEffect(Potion.weakness.id);

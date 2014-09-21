@@ -25,6 +25,9 @@ import net.minecraft.world.gen.feature.*;
 import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.common.entity.*;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+
 public class BiomeGenAbyDreadlands extends BiomeGenBase
 {
 
@@ -90,5 +93,19 @@ public class BiomeGenAbyDreadlands extends BiomeGenBase
 			var8 = par4 + par2Random.nextInt(16);
 			theThirdWorldGenerator.generate(par1World, par2Random, var6, var7, var8);
 		}
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public int getBiomeGrassColor(int par1, int par2, int par3)
+	{
+		return 0x30217A;
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public int getBiomeFoliageColor(int par1, int par2, int par3)
+	{
+		return 0x30217A;
 	}
 }

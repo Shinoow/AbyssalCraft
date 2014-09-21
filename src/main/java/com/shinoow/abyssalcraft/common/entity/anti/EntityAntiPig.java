@@ -18,16 +18,16 @@ package com.shinoow.abyssalcraft.common.entity.anti;
 import net.minecraft.block.Block;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.*;
-import net.minecraft.entity.passive.EntityPig;
+import net.minecraft.entity.passive.*;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.*;
 import net.minecraft.world.World;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
-import com.shinoow.abyssalcraft.core.api.entity.AntiAnimal;
+import com.shinoow.abyssalcraft.core.api.entity.IAntiEntity;
 
-public class EntityAntiPig extends AntiAnimal {
+public class EntityAntiPig extends EntityAnimal implements IAntiEntity {
 
 	public EntityAntiPig(World par1World)
 	{

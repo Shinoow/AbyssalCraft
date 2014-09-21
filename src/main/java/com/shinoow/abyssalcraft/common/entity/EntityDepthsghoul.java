@@ -33,9 +33,9 @@ import net.minecraft.util.*;
 import net.minecraft.world.World;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
-import com.shinoow.abyssalcraft.core.api.entity.CoraliumMob;
+import com.shinoow.abyssalcraft.core.api.entity.ICoraliumEntity;
 
-public class EntityDepthsghoul extends CoraliumMob {
+public class EntityDepthsghoul extends EntityMob implements ICoraliumEntity {
 
 	private static final UUID attackDamageBoostUUID = UUID.fromString("648D7064-6A60-4F59-8ABE-C2C23A6DD7A9");
 	private static final AttributeModifier peteDamageBoost = new AttributeModifier(attackDamageBoostUUID, "Attack Damage Boost", 2.0D, 0);
@@ -77,6 +77,11 @@ public class EntityDepthsghoul extends CoraliumMob {
 		getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setBaseValue(0.3D);
 		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.23000000417232513D);
 		getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(5.0D);
+	}
+
+	@Override
+	public boolean canBreatheUnderwater() {
+		return true;
 	}
 
 	@Override

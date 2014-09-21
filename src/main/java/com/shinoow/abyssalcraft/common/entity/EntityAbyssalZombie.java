@@ -33,9 +33,9 @@ import net.minecraft.world.*;
 import net.minecraftforge.common.ForgeModContainer;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
-import com.shinoow.abyssalcraft.core.api.entity.CoraliumMob;
+import com.shinoow.abyssalcraft.core.api.entity.ICoraliumEntity;
 
-public class EntityAbyssalZombie extends CoraliumMob {
+public class EntityAbyssalZombie extends EntityMob implements ICoraliumEntity {
 
 	private static final UUID babySpeedBoostUUID = UUID.fromString("B9766B59-9566-4402-BC1F-2EE2A276D836");
 	private static final AttributeModifier babySpeedBoostModifier = new AttributeModifier(babySpeedBoostUUID, "Baby speed boost", 0.5D, 1);
@@ -80,6 +80,11 @@ public class EntityAbyssalZombie extends CoraliumMob {
 		getDataWatcher().addObject(13, Byte.valueOf((byte)0));
 		getDataWatcher().addObject(14, Byte.valueOf((byte)0));
 		getDataWatcher().addObject(19, Byte.valueOf((byte)0));
+	}
+
+	@Override
+	public boolean canBreatheUnderwater() {
+		return true;
 	}
 
 	@Override

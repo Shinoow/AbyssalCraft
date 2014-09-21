@@ -18,15 +18,15 @@ package com.shinoow.abyssalcraft.common.entity.anti;
 import java.util.Calendar;
 
 import net.minecraft.entity.*;
-import net.minecraft.entity.passive.EntityBat;
+import net.minecraft.entity.passive.*;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.*;
 import net.minecraft.world.World;
 
-import com.shinoow.abyssalcraft.core.api.entity.AntiAmbientCreature;
+import com.shinoow.abyssalcraft.core.api.entity.IAntiEntity;
 
-public class EntityAntiBat extends AntiAmbientCreature {
+public class EntityAntiBat extends EntityAmbientCreature implements IAntiEntity {
 
 	/** Coordinates of where the bat spawned. */
 	private ChunkCoordinates spawnPosition;

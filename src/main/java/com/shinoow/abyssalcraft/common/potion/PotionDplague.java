@@ -17,7 +17,7 @@ package com.shinoow.abyssalcraft.common.potion;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.common.util.ACDamageSource;
-import com.shinoow.abyssalcraft.core.api.entity.DreadMob;
+import com.shinoow.abyssalcraft.core.api.entity.IDreadEntity;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -41,7 +41,7 @@ public class PotionDplague extends Potion{
 	@Override
 	public void performEffect(EntityLivingBase par1EntityLivingBase, int par2){
 		par1EntityLivingBase.attackEntityFrom(ACDamageSource.dread, 1);
-		if(par1EntityLivingBase instanceof DreadMob){
+		if(par1EntityLivingBase instanceof IDreadEntity){
 			par1EntityLivingBase.removePotionEffect(AbyssalCraft.Dplague.id);
 			par1EntityLivingBase.heal(1);
 		}

@@ -15,24 +15,11 @@
  */
 package com.shinoow.abyssalcraft.core.api.entity;
 
-import net.minecraft.entity.monster.EntityMob;
-import net.minecraft.world.World;
-
 /**
- * Bridge class for mobs that are immune to the Coralium Plague
+ * Interface to define a entity that's immune to the Dread Plague
+ * @author shinoow
+ *
  */
-public class CoraliumMob extends EntityMob {
+public interface IDreadEntity {
 
-	/**
-	 * Bridge class for mobs that are immune to the Coralium Plague
-	 */
-	public CoraliumMob(World par1World) {
-		super(par1World);
-		experienceValue = 10;
-	}
-
-	@Override
-	public boolean canBreatheUnderwater() {
-		return true;
-	}
 }

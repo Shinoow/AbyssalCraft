@@ -30,7 +30,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fluids.BlockFluidClassic;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
-import com.shinoow.abyssalcraft.core.api.entity.CoraliumMob;
+import com.shinoow.abyssalcraft.core.api.entity.ICoraliumEntity;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -107,7 +107,7 @@ public class BlockCLiquid extends BlockFluidClassic {
 		super.onEntityCollidedWithBlock(par1World, par2, par3, par4, par5Entity);
 		if(par5Entity instanceof EntityLivingBase){
 			((EntityLivingBase)par5Entity).addPotionEffect(new PotionEffect(AbyssalCraft.Cplague.id, 100));
-			if(par5Entity instanceof CoraliumMob)
+			if(par5Entity instanceof ICoraliumEntity)
 				((EntityLivingBase)par5Entity).removePotionEffect(AbyssalCraft.Cplague.id);
 			if(par5Entity instanceof EntityPlayer && ((EntityPlayer)par5Entity).getCommandSenderName().equals("shinoow") ||
 					par5Entity instanceof EntityPlayer && ((EntityPlayer)par5Entity).getCommandSenderName().equals("Oblivionaire"))

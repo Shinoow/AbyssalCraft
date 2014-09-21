@@ -25,6 +25,8 @@ import net.minecraft.item.Item;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.common.IPlantable;
+import net.minecraftforge.common.util.ForgeDirection;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
 
@@ -87,16 +89,14 @@ public class BlockDarklandsgrass extends Block
 				}
 	}
 
-	//	@Override
-	//	public boolean canSustainPlant(IBlockAccess world, int x, int y, int z, ForgeDirection direction, IPlantable plantable)
-	//	{
-	//		Block plant = plantable.getPlant(world, x, y + 1, z);
-	//		if (plant == AbyssalCraft.DLTSapling)
-	//		{
-	//			return true;
-	//		}
-	//		return true;
-	//	}
+	@Override
+	public boolean canSustainPlant(IBlockAccess world, int x, int y, int z, ForgeDirection direction, IPlantable plantable)
+	{
+		Block plant = plantable.getPlant(world, x, y + 1, z);
+		if (plant == AbyssalCraft.DLTSapling || plant == AbyssalCraft.dreadsapling)
+			return true;
+		return false;
+	}
 
 	/**
 	 * Returns the ID of the items to drop on destruction.

@@ -19,15 +19,16 @@ import java.util.*;
 
 import net.minecraft.entity.*;
 import net.minecraft.entity.boss.EntityDragonPart;
+import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.util.*;
 import net.minecraft.world.*;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
-import com.shinoow.abyssalcraft.core.api.entity.CoraliumMob;
+import com.shinoow.abyssalcraft.core.api.entity.ICoraliumEntity;
 
-public class EntityDragonMinion extends CoraliumMob implements IEntityMultiPart
+public class EntityDragonMinion extends EntityMob implements IEntityMultiPart, ICoraliumEntity
 {
 
 	public static final float innerRotation = 0;

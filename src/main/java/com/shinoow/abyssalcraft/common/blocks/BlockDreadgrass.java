@@ -25,6 +25,8 @@ import net.minecraft.item.Item;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.common.IPlantable;
+import net.minecraftforge.common.util.ForgeDirection;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
 
@@ -71,16 +73,14 @@ public class BlockDreadgrass extends Block
 				}
 	}
 
-	//	@Override
-	//	public boolean canSustainPlant(IBlockAccess world, int x, int y, int z, ForgeDirection direction, IPlantable plantable)
-	//	{
-	//		Block plant = plantable.getPlant(world, x, y + 1, z);
-	//		if (plant == AbyssalCraft.dreadsapling)
-	//		{
-	//			return true;
-	//		}
-	//		return false;
-	//	}
+	@Override
+	public boolean canSustainPlant(IBlockAccess world, int x, int y, int z, ForgeDirection direction, IPlantable plantable)
+	{
+		Block plant = plantable.getPlant(world, x, y + 1, z);
+		if (plant == AbyssalCraft.dreadsapling || plant == AbyssalCraft.DLTSapling)
+			return true;
+		return false;
+	}
 
 	@Override
 	public Item getItemDropped(int par1, Random par2Random, int par3)

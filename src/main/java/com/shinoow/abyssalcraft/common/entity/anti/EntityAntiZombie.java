@@ -21,7 +21,7 @@ import net.minecraft.block.Block;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.*;
 import net.minecraft.entity.ai.attributes.*;
-import net.minecraft.entity.monster.EntityZombie;
+import net.minecraft.entity.monster.*;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.*;
@@ -31,11 +31,11 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeModContainer;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
-import com.shinoow.abyssalcraft.core.api.entity.AntiMob;
+import com.shinoow.abyssalcraft.core.api.entity.IAntiEntity;
 
 import cpw.mods.fml.relauncher.*;
 
-public class EntityAntiZombie extends AntiMob {
+public class EntityAntiZombie extends EntityMob implements IAntiEntity {
 
 	protected static final IAttribute spawnReinforcementsAttribute = new RangedAttribute("zombie.spawnReinforcements", 0.0D, 0.0D, 1.0D).setDescription("Spawn Reinforcements Chance");
 	private static final UUID babySpeedBoostUUID = UUID.fromString("B9766B59-9566-4402-BC1F-2EE2A276D836");

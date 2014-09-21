@@ -31,7 +31,6 @@ import net.minecraft.item.Item.ToolMaterial;
 import net.minecraft.item.ItemArmor.ArmorMaterial;
 import net.minecraft.potion.*;
 import net.minecraft.stats.*;
-import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.WeightedRandomChestContent;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.gen.structure.MapGenStructureIO;
@@ -75,7 +74,7 @@ import cpw.mods.fml.common.registry.*;
 @Mod(modid = AbyssalCraft.modid, name = AbyssalCraft.name, version = AbyssalCraft.version, dependencies = "required-after:Forge@[10.12.2.1147,)", useMetadata = true, guiFactory = "com.shinoow.abyssalcraft.client.config.ACGuiFactory")
 public class AbyssalCraft {
 
-	public static final String version = "1.7.5";
+	public static final String version = "1.7.6";
 	public static final String modid = "abyssalcraft";
 	public static final String name = "AbyssalCraft";
 
@@ -1207,7 +1206,7 @@ public class AbyssalCraft {
 		OreDictionary.registerOre("crystalCopper", crystalCopper);
 		OreDictionary.registerOre("crystalSilicon", crystalSilicon);
 		OreDictionary.registerOre("crystalMagnesium", crystalMagnesium);
-		OreDictionary.registerOre("crystalAluminum", crystalAluminium);
+		OreDictionary.registerOre("crystalAluminium", crystalAluminium);
 		OreDictionary.registerOre("crystalSilica", crystalSilica);
 		OreDictionary.registerOre("crystalAlumina", crystalAlumina);
 		OreDictionary.registerOre("crystalMagnesia", crystalMagnesia);
@@ -1224,7 +1223,6 @@ public class AbyssalCraft {
 		ChestGenHooks.addItem(ChestGenHooks.BONUS_CHEST, new WeightedRandomChestContent(new ItemStack(AbyssalCraft.sword), 1, 1, 2));
 		ChestGenHooks.addItem(ChestGenHooks.BONUS_CHEST, new WeightedRandomChestContent(new ItemStack(AbyssalCraft.DLTLog), 1, 3, 10));
 		ChestGenHooks.addItem(ChestGenHooks.BONUS_CHEST, new WeightedRandomChestContent(new ItemStack(AbyssalCraft.CobbleU), 1, 2, 2));
-		ChestGenHooks.addItem(ChestGenHooks.BONUS_CHEST, new WeightedRandomChestContent(new ItemStack(AbyssalCraft.OC), 1,1,1));
 		ChestGenHooks.addItem(ChestGenHooks.VILLAGE_BLACKSMITH, new WeightedRandomChestContent(new ItemStack(AbyssalCraft.OC), 1,1,1));
 		ChestGenHooks.addItem(ChestGenHooks.DUNGEON_CHEST, new WeightedRandomChestContent(new ItemStack(AbyssalCraft.abyingot), 1, 5, 5));
 		ChestGenHooks.addItem(ChestGenHooks.MINESHAFT_CORRIDOR, new WeightedRandomChestContent(new ItemStack(AbyssalCraft.abyingot), 1, 5, 5));
@@ -1335,8 +1333,7 @@ public class AbyssalCraft {
 				if(!hasPinged){
 					System.err.println("UpdateChecker encountered an Exception, see following stacktrace:");
 					e.printStackTrace();
-					updateProxy.announce("["+EnumChatFormatting.BLUE
-							+"AbyssalCraft"+EnumChatFormatting.RESET+"] No internet connection found, unable to check mod version.");
+					updateProxy.announce("[\u00A79AbyssalCraft\u00A7r] No internet connection found, unable to check mod version.");
 					hasPinged = true;
 				}
 			}
