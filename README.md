@@ -23,8 +23,11 @@ limitations under the License.
 
 ### Reporting bugs
 
-If you happen to find a bug while playing with the mod, report an issue, with a detailed explanation of what triggered the possible crash (or the bug), and the crash report (either as a gist or a site like pastebin).
-If you can track down a bug directly in the code, file a pull request pointing out the incorrect code while providing a fix.
+If you happen to find a bug while playing with the mod, report an issue, with a detailed explanation of what triggered the possible crash (or the bug), and the crash report (either as a gist or a site like pastebin). If you can track down a bug directly in the code, file a pull request pointing out the incorrect code while providing a fix. Make sure you label the issue with the "bug" label (does not apply for a direct PR).
+
+### Suggestions/Enhancements
+
+If you find something you think I should change in the mod that can enhance the experience for you and other users, make an issue and use the "enhancement" label on it. If you, on the other hand, have a suggestion, use the "suggestion" label instead. In both cases, be detailed about the enhancement/suggestion.
 
 ### Contributing
 
