@@ -65,7 +65,7 @@ achievement.GK2=The Dreaded key
 achievement.GK2.desc=Crafted Asorah's Dreaded Gateway Key
 
 achievement.GK3=The Ancient key
-achievement.GK3.desc=Crafted Cha'garoth's R'lyehian Key
+achievement.GK3.desc=Crafted Cha'garoth's R'lyehian Gateway Key
 
 achievement.Jzhstaff=Wait... THIS IS A KEY?!?!?
 achievement.Jzhstaff.desc=Obtained The Staff of The Gatekeeper
@@ -79,6 +79,15 @@ achievement.summonChagaroth.desc=Entered the lair of Cha'garoth
 achievement.killChagaroth=Fall of the Dreadbeast
 achievement.killChagaroth.desc=You killed Cha'garoth... nice work.
 
+achievement.enterOmothol=Welcome to your end, seriously.
+achievement.enterOmothol.desc=You've reached Omothol, The Realm of J'zahar.
+
+achievement.darkRealm=The bottom of the pit.
+achievement.darkRealm.desc=You just had to fall down, didn't you?
+
+achievement.killJzahar=Roll the credits? Nope.
+achievement.killJzahar.desc=You defeated The Gatekeeper himself. He isn't dead.
+
 #Container Inventories
 container.abyssalcraft.crate=Crate
 container.abyssalcraft.crystallizer=Crystallizer
@@ -87,6 +96,18 @@ container.abyssalcraft.transmutator=Transmutator
 #NEI Integration
 container.abyssalcraft.crystallizer.nei=Crystallization
 container.abyssalcraft.transmutator.nei=Transmutation
+
+#Configuration
+ac_dimensions=Dimensions
+ac_dimensions.tooltip=Dimension ID configuration
+ac_biomes=Biomes
+ac_biomes.tooltip=Biome ID configuration
+ac_biomegen=Biome Generation
+ac_biomegen.tooltip=Biome Generation configuration
+ac_biomespawn=Biome Spawning
+ac_biomespawn.tooltip=Biome Spawning configuration
+ac_general=General
+ac_general.tooltip=General configuration
 
 #Damagesources
 death.attack.coralium=%1$s died from the Coralium Plague
@@ -244,9 +265,21 @@ tile.ACO.name=Abyssal Copper Ore
 tile.APCorO.name=Pearlescent Coralium Ore
 tile.ALCorO.name=Liquified Coralium Ore
 tile.solidLava.name=Solid lava
+tile.Eth.name=Ethaxium
+tile.EB.0.name=Ethaxium Brick
+tile.EB.1.name=Chiseled Ethaxium Brick
+tile.EBP.name=Ethaxium Pillar
+tile.EBs.name=Ethaxium Brick Stairs
+tile.EBs1.name=Ethaxium Brick Slab
+tile.EBs2.name=Ethaxium Brick Doubleslab
+tile.EBf.name=Ethaxium Brick Fence
+tile.OS.name=Omothol Stone
+tile.BOE.name=Block of Ethaxium
+tile.OG.name=Omothol Gateway
+tile.Ofire.name=Omothol Fire
 
 #Items
-item.Sword.name=The Dev Blade
+item.DEV_BLADE.name=The Dev Blade
 item.OC.name=Oblivion Catalyst
 item.SOTG.name=Staff of The Gatekeeper
 item.GK.name=Gateway Key
@@ -404,6 +437,26 @@ item.antiFlesh.name=Rotten Anti-Flesh
 item.antiBone.name=Anti-Bone
 item.antiSpider_eye.name=Anti-Spider Eye
 item.soulReaper.name=Sacthoth's Soul Reaper Blade
+item.EB.name=Ethaxium Brick
+item.EI.name=Ethaxium Ingot
+item.lifeCrystal.name=Life Crystal
+item.EP.name=Ethaxium Pickaxe
+item.EA.name=Ethaxium Axe
+item.ES.name=Ethaxium Shovel
+item.ESW.name=Ethaxium Sword
+item.EH.name=Ethaxium Hoe
+item.AEB.name=Ethaxium Boots
+item.AEH.name=Ethaxium Helmet
+item.AEC.name=Ethaxium Chestplate
+item.AEP.name=Ethaxium Leggings
+item.EthU.name=Ethaxium Upgrade Kit
+item.coin.copper.name=Copper Coin
+item.coin.iron.name=Iron Coin
+item.coin.gold.name=Gold Coin
+item.coin.tin.name=Tin Coin
+item.coin.abyssalnite.name=Abyssalnite Coin
+item.coin.coralium.name=Coralium Coin
+item.coin.dreadium.name=Dreadium Coin
 
 #Entities
 entity.abyssalcraft.depthsghoul.name=Depths Ghoul
@@ -439,6 +492,12 @@ entity.abyssalcraft.antiplayer.name=Anti-Player
 entity.abyssalcraft.antiskeleton.name=Anti-Skeleton
 entity.abyssalcraft.antispider.name=Anti-Spider
 entity.abyssalcraft.antizombie.name=Anti-Zombie
+entity.abyssalcraft.lessershoggoth.name=Lesser Shoggoth
+entity.abyssalcraft.shadowtitan.name=Shadow Titan
+entity.abyssalcraft.omotholwarden.name=Omothol Warden
+entity.abyssalcraft.jzaharminion.name=Minion of The Gatekeeper
+entity.abyssalcraft.omotholghoul.name=Omothol Ghoul
+entity.abyssalcraft.remnant.name=Remnant
 
 #Potions
 potion.Cplague=Coralium Plague
@@ -447,5 +506,11 @@ potion.Dplague=Dread Plague
 potion.Dplague.postfix=Potion of Dread Plague
 potion.Antimatter=Antimatter
 potion.Antimatter.postfix=Potion of Annihilation
+
+#Enchantments
+enchantment.coralium=Coralium
+enchantment.dread=Dread
+enchantment.ironWall=Iron Wall
+enchantment.damage.shadow=Light Pierce
 
 #Localization done, Shin out.

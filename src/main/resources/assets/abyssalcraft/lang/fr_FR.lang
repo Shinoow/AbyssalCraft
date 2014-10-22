@@ -79,6 +79,15 @@ achievement.summonChagaroth.desc=
 achievement.killChagaroth=
 achievement.killChagaroth.desc=
 
+achievement.enterOmothol=
+achievement.enterOmothol.desc=
+
+achievement.darkRealm=
+achievement.darkRealm.desc=
+
+achievement.killJzahar=
+achievement.killJzahar.desc=
+
 #Container Inventories
 container.abyssalcraft.crate=
 container.abyssalcraft.crystallizer=
@@ -87,6 +96,18 @@ container.abyssalcraft.transmutator=
 #NEI Integration
 container.abyssalcraft.crystallizer.nei=
 container.abyssalcraft.transmutator.nei=
+
+#Configuration
+ac_dimensions=
+ac_dimensions.tooltip=
+ac_biomes=
+ac_biomes.tooltip=
+ac_biomegen=
+ac_biomegen.tooltip=
+ac_biomespawn=
+ac_biomespawn.tooltip=
+ac_general=
+ac_general.tooltip=
 
 #Damagesources
 death.attack.coralium=%1$s
@@ -244,9 +265,21 @@ tile.ACO.name=
 tile.APCorO.name=
 tile.ALCorO.name=
 tile.solidLava.name=
+tile.Eth.name=
+tile.EB.0.name=
+tile.EB.1.name=
+tile.EBP.name=
+tile.EBs.name=
+tile.EBs1.name=
+tile.EBs2.name=
+tile.EBf.name=
+tile.OS.name=
+tile.BOE.name=
+tile.OG.name=
+tile.Ofire.name=
 
 #Items
-item.Sword.name=La Lame du Développeur
+item.DEV_BLADE.name=La Lame du Développeur
 item.OC.name=Catalyseur d'Oblivion
 item.SOTG.name=Bâton du Gardien de la Porte
 item.GK.name=Clé de la Porte
@@ -404,6 +437,26 @@ item.antiFlesh.name=
 item.antiBone.name=
 item.antiSpider_eye.name=
 item.soulReaper.name=
+item.EB.name=
+item.EI.name=
+item.lifeCrystal.name=
+item.EP.name=
+item.EA.name=
+item.ES.name=
+item.ESW.name=
+item.EH.name=
+item.AEB.name=
+item.AEH.name=
+item.AEC.name=
+item.AEP.name=
+item.EthU.name=
+item.coin.copper.name=
+item.coin.iron.name=
+item.coin.gold.name=
+item.coin.tin.name=
+item.coin.abyssalnite.name=
+item.coin.coralium.name=
+item.coin.dreadium.name=
 
 #Entities
 entity.abyssalcraft.depthsghoul.name=Goule des Profondeurs
@@ -439,6 +492,12 @@ entity.abyssalcraft.antiplayer.name=
 entity.abyssalcraft.antiskeleton.name=
 entity.abyssalcraft.antispider.name=
 entity.abyssalcraft.antizombie.name=
+entity.abyssalcraft.lessershoggoth.name=
+entity.abyssalcraft.shadowtitan.name=
+entity.abyssalcraft.omotholwarden.name=
+entity.abyssalcraft.jzaharminion.name=
+entity.abyssalcraft.omotholghoul.name=
+entity.abyssalcraft.remnant.name=
 
 #Potions
 potion.Cplague=Peste de Coralium
@@ -447,5 +506,11 @@ potion.Dplague=Peste Redouté
 potion.Dplague.postfix=
 potion.Antimatter=
 potion.Antimatter.postfix=
+
+#Enchantments
+enchantment.coralium=
+enchantment.dread=
+enchantment.ironWall=
+enchantment.damage.shadow=
 
 #Localization done, Shin out.

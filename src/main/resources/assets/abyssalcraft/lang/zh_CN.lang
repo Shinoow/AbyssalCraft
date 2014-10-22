@@ -79,6 +79,15 @@ achievement.summonChagaroth.desc=进入查加罗特的巢穴
 achievement.killChagaroth=恐惧野兽的陨落
 achievement.killChagaroth.desc=你杀死了查加罗特... 干得漂亮.
 
+achievement.enterOmothol=
+achievement.enterOmothol.desc=
+
+achievement.darkRealm=
+achievement.darkRealm.desc=
+
+achievement.killJzahar=
+achievement.killJzahar.desc=
+
 #Container Inventories
 container.abyssalcraft.crate=板条箱
 container.abyssalcraft.crystallizer=结晶器
@@ -87,6 +96,18 @@ container.abyssalcraft.transmutator=嬗变器
 #NEI Integration
 container.abyssalcraft.crystallizer.nei=结晶化
 container.abyssalcraft.transmutator.nei=嬗变化
+
+#Configuration
+ac_dimensions=
+ac_dimensions.tooltip=
+ac_biomes=
+ac_biomes.tooltip=
+ac_biomegen=
+ac_biomegen.tooltip=
+ac_biomespawn=
+ac_biomespawn.tooltip=
+ac_general=
+ac_general.tooltip=
 
 #Damagesources
 death.attack.coralium=%1$s由于珊瑚侵染而死亡
@@ -244,9 +265,21 @@ tile.ACO.name=深渊铜矿石
 tile.APCorO.name=珠光四射的珊瑚矿
 tile.ALCorO.name=液化珊瑚矿
 tile.solidLava.name=固态岩浆
+tile.Eth.name=
+tile.EB.0.name=
+tile.EB.1.name=
+tile.EBP.name=
+tile.EBs.name=
+tile.EBs1.name=
+tile.EBs2.name=
+tile.EBf.name=
+tile.OS.name=
+tile.BOE.name=
+tile.OG.name=
+tile.Ofire.name=
 
 #Items
-item.Sword.name=恶魔之刃
+item.DEV_BLADE.name=恶魔之刃
 item.OC.name=湮没催化剂
 item.SOTG.name=守门者之杖
 item.GK.name=传送门钥匙
@@ -404,6 +437,26 @@ item.antiFlesh.name=反物质腐肉
 item.antiBone.name=反物质骨头
 item.antiSpider_eye.name=反物质蜘蛛眼
 item.soulReaper.name=萨多夫的灵魂收割刀
+item.EB.name=
+item.EI.name=
+item.lifeCrystal.name=
+item.EP.name=
+item.EA.name=
+item.ES.name=
+item.ESW.name=
+item.EH.name=
+item.AEB.name=
+item.AEH.name=
+item.AEC.name=
+item.AEP.name=
+item.EthU.name=
+item.coin.copper.name=
+item.coin.iron.name=
+item.coin.gold.name=
+item.coin.tin.name=
+item.coin.abyssalnite.name=
+item.coin.coralium.name=
+item.coin.dreadium.name=
 
 #Entities
 entity.abyssalcraft.depthsghoul.name=深渊食尸鬼
@@ -439,6 +492,12 @@ entity.abyssalcraft.antiplayer.name=反物质玩家
 entity.abyssalcraft.antiskeleton.name=反物质骷髅
 entity.abyssalcraft.antispider.name=反物质蜘蛛
 entity.abyssalcraft.antizombie.name=反物质僵尸
+entity.abyssalcraft.lessershoggoth.name=
+entity.abyssalcraft.shadowtitan.name=
+entity.abyssalcraft.omotholwarden.name=
+entity.abyssalcraft.jzaharminion.name=
+entity.abyssalcraft.omotholghoul.name=
+entity.abyssalcraft.remnant.name=
 
 #Potions
 potion.Cplague=珊瑚侵染
@@ -447,5 +506,11 @@ potion.Dplague=恐惧侵染
 potion.Dplague.postfix=恐惧侵染药水
 potion.Antimatter=反物质
 potion.Antimatter.postfix=湮灭药水
+
+#Enchantments
+enchantment.coralium=
+enchantment.dread=
+enchantment.ironWall=
+enchantment.damage.shadow=
 
 #Localization done, Shin out.
