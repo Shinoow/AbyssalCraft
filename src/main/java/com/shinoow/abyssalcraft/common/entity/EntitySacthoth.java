@@ -158,8 +158,20 @@ public class EntitySacthoth extends EntityMob implements IBossDisplayData, IAnti
 	}
 
 	@Override
+	public int getTotalArmorValue()
+	{
+		return 20;
+	}
+
+	@Override
 	protected void dropFewItems(boolean par1, int par2) {
 		dropItem(AbyssalCraft.soulReaper, 1);
+	}
+
+	@Override
+	public EnumCreatureAttribute getCreatureAttribute()
+	{
+		return Enum.valueOf(EnumCreatureAttribute.class, "SHADOW");
 	}
 
 	/**
@@ -196,7 +208,7 @@ public class EntitySacthoth extends EntityMob implements IBossDisplayData, IAnti
 		}
 		else if(par1DamageSource.isExplosion()){
 			if(worldObj.isRemote)
-				SpecialTextUtil.SacthothText("I'm not saying you \u00A7ocan't blow me up, it just won't work.");
+				SpecialTextUtil.SacthothText("I'm not saying you \u00A7ocan't\u00A7r blow me up, it just won't work.");
 			return false;
 		}
 		else if(par1DamageSource.isProjectile()){
@@ -321,8 +333,26 @@ public class EntitySacthoth extends EntityMob implements IBossDisplayData, IAnti
 						worldObj.spawnEntityInWorld(new EntityItem(worldObj, posX, posY, posZ, new ItemStack(AbyssalCraft.oblivionshard)));
 					}
 				}
+				if(deathTicks >= 190 && deathTicks <= 200){
+					if(deathTicks <= 200){
+						EntityShadowCreature shadowCreature = new EntityShadowCreature(worldObj);
+						shadowCreature.copyLocationAndAnglesFrom(this);
+						worldObj.spawnEntityInWorld(shadowCreature);
+					}
+					if(deathTicks >= 195 && deathTicks <= 200){
+						EntityShadowMonster shadowMonster = new EntityShadowMonster(worldObj);
+						shadowMonster.copyLocationAndAnglesFrom(this);
+						worldObj.spawnEntityInWorld(shadowMonster);
+					}
+					if(deathTicks == 200){
+						EntityShadowBeast shadowBeast = new EntityShadowBeast(worldObj);
+						shadowBeast.copyLocationAndAnglesFrom(this);
+						worldObj.spawnEntityInWorld(shadowBeast);
+					}
+				}
 			}
 		if(deathTicks == 200 && !worldObj.isRemote)
+
 			setDead();
 	}
 

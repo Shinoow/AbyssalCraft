@@ -16,8 +16,9 @@
 package com.shinoow.abyssalcraft.common.potion;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
-import com.shinoow.abyssalcraft.common.util.ACDamageSource;
+import com.shinoow.abyssalcraft.core.api.damagesource.ACDamageSource;
 import com.shinoow.abyssalcraft.core.api.entity.IDreadEntity;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;

@@ -240,7 +240,7 @@ public class BlockDreadFire extends BlockFire {
 	public void onBlockAdded(World par1World, int par2, int par3, int par4)
 	{
 
-		if (par1World.getBlock(par2, par3 - 1, par4) != AbyssalCraft.dreadstone || !BlockTeleporterDL.tryToCreatePortal(par1World, par2, par3, par4))
+		if (par1World.getBlock(par2, par3 - 1, par4) != AbyssalCraft.dreadstone || !BlockDreadlandsPortal.tryToCreatePortal(par1World, par2, par3, par4))
 			if (!World.doesBlockHaveSolidTopSurface(par1World, par2, par3 - 1, par4) && !canNeighborBurn(par1World, par2, par3, par4))
 				par1World.setBlockToAir(par2, par3, par4);
 			else

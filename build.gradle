@@ -17,58 +17,83 @@ buildscript {
 
 apply plugin: 'forge'
 
-version = "1.7.2-1.7.6"
+ext.propFile = file "build.properties"
+
+propFile.withReader {
+	
+	def prop = new Properties()
+	prop.load(it)
+	project.ext.props = new ConfigSlurper().parse prop
+}
+
+version = props.ac_version
 group= "com.shinoow.abyssalcraft" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = "AbyssalCraft"
+modid = "abyssalcraft"
 
 minecraft {
     version = "1.7.2-10.12.2.1147"
     assetDir = "eclipse/assets"
+	
+		replaceIn "AbyssalCraft.java"
+            replace "forgeversion", props.forge_version
 }
 
 dependencies {
-    // you may put jars on which you depend on in ./libs
-    // or you may define them like so..
-    //compile "some.group:artifact:version:classifier"
-    //compile "some.group:artifact:version"
-      
-    // real examples
-    //compile 'com.mod-buildcraft:buildcraft:6.0.8:dev'  // adds buildcraft to the dev env
-    //compile 'com.googlecode.efficient-java-matrix-library:ejml:0.24' // adds ejml to the dev env
-
-    // for more info...
-    // http://www.gradle.org/docs/current/userguide/artifact_dependencies_tutorial.html
-    // http://www.gradle.org/docs/current/userguide/dependency_management.html
 
 }
+
+version = "${props.mc_version}-${props.ac_version}"
 
 processResources
 {
 	// I really don't want that file to exist anywhere
 	exclude '**/Thumbs.db'
 
-    // this will ensure that this task is redone when the versions change.
-    inputs.property "version", project.version
-    inputs.property "mcversion", project.minecraft.version
-
     // replace stuff in mcmod.info, nothing else
     from(sourceSets.main.resources.srcDirs) {
         include 'mcmod.info'
-                
+		include 'version.properties'
+
         // replace version and mcversion
-        expand 'version':project.version, 'mcversion':project.minecraft.version
+        expand ([
+			'modid':project.modid,
+			'version':project.version,
+			'acversion':project.props.ac_version,
+			'coreversion':project.props.core_version,
+			'mcversion':project.props.mc_version,
+			'forgeversion':project.props.forge_version
+		])
     }
         
     // copy everything else, thats not the mcmod.info
     from(sourceSets.main.resources.srcDirs) {
         exclude 'mcmod.info'
+		exclude 'version.properties'
     }
-
+}
 	jar {
-		manifest 
-		{
+		manifest {
 			attributes("FMLCorePlugin": "com.shinoow.abyssalcraft.core.ACCorePlugin")
-			attributes("FMLCorePluginContainsFMLMod": "com.shinoow.abyssalcraft.AbyssalCraft")
+			attributes("FMLCorePluginContainsFMLMod": "true")
 		}
 	}
+	
+	task srcJar(type: Jar) {
+    from sourceSets.main.allSource
+	
+	extension = 'jar'
+	classifier = 'src'
+}
+
+	task devJar(type: Jar, dependsOn: 'classes') {
+    from(sourceSets.main.output) {
+        include '**'
+    }
+
+    extension = 'jar'
+    classifier = 'dev'
+}
+	artifacts {
+    archives srcJar, devJar
 }

@@ -25,7 +25,7 @@ import net.minecraft.item.*;
 import net.minecraft.world.World;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
-import com.shinoow.abyssalcraft.common.entity.EntityDepthsghoul;
+import com.shinoow.abyssalcraft.common.entity.EntityDepthsGhoul;
 import com.shinoow.abyssalcraft.core.api.entity.IAntiEntity;
 
 public class EntityAntiGhoul extends EntityMob implements IAntiEntity {
@@ -124,7 +124,7 @@ public class EntityAntiGhoul extends EntityMob implements IAntiEntity {
 	@Override
 	protected void collideWithEntity(Entity par1Entity)
 	{
-		if(!worldObj.isRemote && par1Entity instanceof EntityDepthsghoul){
+		if(!worldObj.isRemote && par1Entity instanceof EntityDepthsGhoul){
 			boolean flag = worldObj.getGameRules().getGameRuleBooleanValue("mobGriefing");
 			worldObj.createExplosion(this, posX, posY, posZ, 5, flag);
 			setDead();

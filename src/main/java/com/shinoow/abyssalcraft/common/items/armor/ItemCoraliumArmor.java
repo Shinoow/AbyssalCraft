@@ -34,6 +34,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 public class ItemCoraliumArmor extends ItemArmor {
 	public ItemCoraliumArmor(ArmorMaterial par2EnumArmorMaterial, int par3, int par4){
 		super(par2EnumArmorMaterial, par3, par4);
+		setCreativeTab(AbyssalCraft.tabCombat);
 	}
 
 	@Override
@@ -69,8 +70,6 @@ public class ItemCoraliumArmor extends ItemArmor {
 		}
 		if (itemstack.getItem() == AbyssalCraft.Corplate)
 			player.addPotionEffect(new PotionEffect(Potion.resistance.getId(), 20, 0));
-		if (itemstack.getItem() == AbyssalCraft.Corlegs)
-			player.addPotionEffect(new PotionEffect(Potion.regeneration.getId(), 20, 0));
 		if (itemstack.getItem() == AbyssalCraft.Corboots)
 			player.addPotionEffect(new PotionEffect(Potion.moveSpeed.getId(), 20, 1));
 	}

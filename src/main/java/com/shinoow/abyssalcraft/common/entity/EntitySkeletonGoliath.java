@@ -1,6 +1,7 @@
 package com.shinoow.abyssalcraft.common.entity;
 
 import net.minecraft.block.Block;
+import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.*;
 import net.minecraft.entity.monster.*;
@@ -25,7 +26,7 @@ public class EntitySkeletonGoliath extends EntityMob {
 		tasks.addTask(7, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
 		tasks.addTask(7, new EntityAIWatchClosest(this, EntityAbyssalZombie.class, 8.0F));
 		tasks.addTask(7, new EntityAIWatchClosest(this, EntityZombie.class, 8.0F));
-		tasks.addTask(7, new EntityAIWatchClosest(this, EntityDepthsghoul.class, 8.0F));
+		tasks.addTask(7, new EntityAIWatchClosest(this, EntityDepthsGhoul.class, 8.0F));
 		tasks.addTask(7, new EntityAIWatchClosest(this, EntitySkeleton.class, 8.0F));
 		tasks.addTask(7, new EntityAIWatchClosest(this, EntitySkeletonGoliath.class, 8.0F));
 		targetTasks.addTask(1, new EntityAIHurtByTarget(this, false));
@@ -94,6 +95,12 @@ public class EntitySkeletonGoliath extends EntityMob {
 	protected void dropRareDrop(int par1)
 	{
 		dropItem(AbyssalCraft.cudgel, 1);
+	}
+
+	@Override
+	public EnumCreatureAttribute getCreatureAttribute()
+	{
+		return EnumCreatureAttribute.UNDEAD;
 	}
 
 	@Override

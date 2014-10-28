@@ -30,7 +30,7 @@ import com.shinoow.abyssalcraft.AbyssalCraft;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class BlockDarkstoneslab extends BlockSlab {
+public class BlockDarkstoneSlab extends BlockSlab {
 
 	@SideOnly(Side.CLIENT)
 	private IIcon iconSlabTop;
@@ -39,9 +39,9 @@ public class BlockDarkstoneslab extends BlockSlab {
 	@SideOnly(Side.CLIENT)
 	private static IIcon iconSlabSideOverlay;
 
-	public BlockDarkstoneslab(boolean par2)
+	public BlockDarkstoneSlab()
 	{
-		super(par2, Material.rock);
+		super(false, Material.rock);
 		setCreativeTab(AbyssalCraft.tabBlock);
 		setLightOpacity(0);
 	}
@@ -84,7 +84,7 @@ public class BlockDarkstoneslab extends BlockSlab {
 		blockIcon = par1IconRegister.registerIcon(AbyssalCraft.modid + ":" + "DSsSides");
 		iconSlabTop = par1IconRegister.registerIcon(AbyssalCraft.modid + ":" + "DSsTop");
 		iconSlabBottom = par1IconRegister.registerIcon(AbyssalCraft.modid + ":" + "DSsTop");
-		BlockDarkstoneslab.iconSlabSideOverlay = par1IconRegister.registerIcon(AbyssalCraft.modid + ":" + "DSsSides");
+		BlockDarkstoneSlab.iconSlabSideOverlay = par1IconRegister.registerIcon(AbyssalCraft.modid + ":" + "DSsSides");
 	}
 
 	@SideOnly(Side.CLIENT)

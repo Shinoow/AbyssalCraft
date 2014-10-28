@@ -36,6 +36,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 public class ItemDreadiumSamuraiArmor extends ItemArmor {
 	public ItemDreadiumSamuraiArmor(ArmorMaterial par2EnumArmorMaterial, int par3, int par4){
 		super(par2EnumArmorMaterial, par3, par4);
+		setCreativeTab(AbyssalCraft.tabCombat);
 	}
 
 	@Override
@@ -96,7 +97,6 @@ public class ItemDreadiumSamuraiArmor extends ItemArmor {
 	public void onArmorTick(World world, EntityPlayer player, ItemStack itemstack) {
 		if (itemstack.getItem() == AbyssalCraft.dreadiumShelmet) {
 			player.addPotionEffect(new PotionEffect(Potion.nightVision.getId(), 260, 0));
-			player.addPotionEffect(new PotionEffect(Potion.field_76443_y.getId(), 20));
 			if(player.getActivePotionEffect(AbyssalCraft.Dplague) !=null)
 				player.removePotionEffect(AbyssalCraft.Dplague.getId());
 		}

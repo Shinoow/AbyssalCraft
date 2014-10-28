@@ -32,7 +32,8 @@ public class ItemBlockColorName extends ItemBlock {
 	public String getItemStackDisplayName(ItemStack par1ItemStack) {
 		if(getUnlocalizedName().contains("BOA"))
 			return EnumChatFormatting.DARK_AQUA + StatCollector.translateToLocal(getUnlocalizedName() + ".name");
-		else if(getUnlocalizedName().contains("BOC"))
+		else if(getUnlocalizedName().contains("BOC") || getUnlocalizedName().contains("Eth")
+				|| getUnlocalizedName().contains("EB") || getUnlocalizedName().contains("BOE"))
 			return EnumChatFormatting.AQUA + StatCollector.translateToLocal(getUnlocalizedName() + ".name");
 		else if(getUnlocalizedName().contains("ODB") || getUnlocalizedName().contains("BOD"))
 			return EnumChatFormatting.DARK_RED + StatCollector.translateToLocal(getUnlocalizedName() + ".name");

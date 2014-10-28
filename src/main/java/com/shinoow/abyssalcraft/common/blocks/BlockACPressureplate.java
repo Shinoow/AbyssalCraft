@@ -46,6 +46,13 @@ public class BlockACPressureplate extends BlockBasePressurePlate
 		this.setHarvestLevel(par5, par6);
 	}
 
+	public BlockACPressureplate(String par2Str, Material par3Material, BlockACPressureplate.Sensitivity par4EnumMobType)
+	{
+		super(par2Str, par3Material);
+		triggerMobType = par4EnumMobType;
+		pressurePlateIconName = par2Str;
+	}
+
 	/**
 	 * Argument is weight (0-15). Return the metadata to be set because of it.
 	 */

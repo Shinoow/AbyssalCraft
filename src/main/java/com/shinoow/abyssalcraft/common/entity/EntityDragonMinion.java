@@ -81,7 +81,7 @@ public class EntityDragonMinion extends EntityMob implements IEntityMultiPart, I
 		dragonPartArray = new EntityDragonPart[] {dragonPartHead = new EntityDragonPart(this, "head", 6.0F, 6.0F), dragonPartBody = new EntityDragonPart(this, "body", 8.0F, 8.0F), dragonPartTail1 = new EntityDragonPart(this, "tail", 4.0F, 4.0F), dragonPartTail2 = new EntityDragonPart(this, "tail", 4.0F, 4.0F), dragonPartTail3 = new EntityDragonPart(this, "tail", 4.0F, 4.0F), dragonPartWing1 = new EntityDragonPart(this, "wing", 4.0F, 4.0F), dragonPartWing2 = new EntityDragonPart(this, "wing", 4.0F, 4.0F)};
 		setHealth(getMaxHealth());
 		setSize(7.0F, 3.0F);
-		noClip = false;
+		noClip = true;
 		targetY = 100.0D;
 	}
 
@@ -89,7 +89,7 @@ public class EntityDragonMinion extends EntityMob implements IEntityMultiPart, I
 	protected void applyEntityAttributes()
 	{
 		super.applyEntityAttributes();
-		getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(120.0D);
+		getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(100.0D);
 	}
 
 	@Override

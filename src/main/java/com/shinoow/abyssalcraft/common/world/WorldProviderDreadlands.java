@@ -25,9 +25,6 @@ import cpw.mods.fml.relauncher.*;
 
 public class WorldProviderDreadlands extends WorldProvider {
 
-	/**
-	 * creates a new world chunk manager for WorldProvider
-	 */
 	@Override
 	public void registerWorldChunkManager() {
 		worldChunkMgr = new WorldChunkManagerDreadlands(worldObj.getSeed(), terrainType);
@@ -37,16 +34,10 @@ public class WorldProviderDreadlands extends WorldProvider {
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	/**
-	 * Return Vec3D with biome specific fog color
-	 */
 	public Vec3 getFogColor(float par1, float par2) {
 		return Vec3.createVectorHelper(0.20000000298023224D, 0.029999999329447746D, 0.029999999329447746D);
 	}
 
-	/**
-	 * Creates the light to brightness table
-	 */
 	@Override
 	protected void generateLightBrightnessTable() {
 		float f = 0.35F;
@@ -57,41 +48,26 @@ public class WorldProviderDreadlands extends WorldProvider {
 		}
 	}
 
-	/**
-	 * Returns a new chunk provider which generates chunks for this world
-	 */
 	@Override
 	public IChunkProvider createChunkGenerator() {
 		return new ChunkProviderDreadlands(worldObj, worldObj.getSeed(), true);
 	}
 
-	/**
-	 * Returns 'true' if in the "main surface world", but 'false' if in the Nether or End dimensions.
-	 */
 	@Override
 	public boolean isSurfaceWorld() {
 		return false;
 	}
 
-	/**
-	 * Will check if the x, z position specified is alright to be set as the map spawn point
-	 */
 	@Override
 	public boolean canCoordinateBeSpawn(int par1, int par2) {
 		return false;
 	}
 
-	/**
-	 * Calculates the angle of sun and moon in the sky relative to a specified time (usually worldTime)
-	 */
 	@Override
 	public float calculateCelestialAngle(long par1, float par3) {
 		return 0.5F;
 	}
 
-	/**
-	 * True if the player can respawn in this dimension (true = overworld, false = nether).
-	 */
 	@Override
 	public boolean canRespawnHere() {
 		return false;
@@ -99,9 +75,6 @@ public class WorldProviderDreadlands extends WorldProvider {
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	/**
-	 * Returns true if the given X,Z coordinate should show environmental fog.
-	 */
 	public boolean doesXZShowFog(int par1, int par2) {
 		return true;
 	}
@@ -116,9 +89,6 @@ public class WorldProviderDreadlands extends WorldProvider {
 		return 50;
 	}
 
-	/**
-	 * Returns the dimension's name, e.g. "The End", "Nether", or "Overworld".
-	 */
 	@Override
 	public String getDimensionName() {
 		return "The Dreadlands";

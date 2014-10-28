@@ -15,18 +15,18 @@
  */
 package com.shinoow.abyssalcraft.core.util;
 
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
 import net.minecraft.block.Block;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
+import net.minecraft.item.*;
 import net.minecraft.item.crafting.FurnaceRecipes;
+import net.minecraft.world.*;
+import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.oredict.OreDictionary;
 
 import com.google.common.collect.Lists;
-import com.shinoow.abyssalcraft.core.util.recipes.CrystallizerRecipes;
-import com.shinoow.abyssalcraft.core.util.recipes.TransmutatorRecipes;
+import com.shinoow.abyssalcraft.core.Core;
+import com.shinoow.abyssalcraft.core.util.recipes.*;
 
 import cpw.mods.fml.common.IFuelHandler;
 import cpw.mods.fml.common.registry.GameRegistry;
@@ -40,6 +40,9 @@ public class CoreRegistry {
 
 	private static List<IFuelHandler> crystallizerFuelHandlers = Lists.newArrayList();
 	private static List<IFuelHandler> transmutatorFuelHandlers = Lists.newArrayList();
+
+	/** Hashtable of world providers, will be used for dimension-specific generation */
+	private static Hashtable<String, Class<? extends WorldProvider>> dimensions = new Hashtable<String, Class<? extends WorldProvider>>();
 
 	/**
 	 * Fuel types, also has support for the vanilla furnace.
@@ -192,9 +195,9 @@ public class CoreRegistry {
 	 */
 	public static void addOreSmelting(String input, String output, float xp){
 		Iterator<ItemStack> inputIter = OreDictionary.getOres(input).iterator();
-
-		while(inputIter.hasNext())
-			FurnaceRecipes.smelting().func_151394_a(inputIter.next(), OreDictionary.getOres(output).iterator().next(), xp);
+		if(!OreDictionary.getOres(output).isEmpty())
+			while(inputIter.hasNext())
+				FurnaceRecipes.smelting().func_151394_a(inputIter.next(), OreDictionary.getOres(output).iterator().next(), xp);
 	}
 
 	/**
@@ -206,9 +209,9 @@ public class CoreRegistry {
 	 */
 	public static void addCrystallization(String input, String output1, String output2, float xp){
 		Iterator<ItemStack> inputIter = OreDictionary.getOres(input).iterator();
-
-		while(inputIter.hasNext())
-			addCrystallization(inputIter.next(), OreDictionary.getOres(output1).iterator().next(), OreDictionary.getOres(output2).iterator().next(), xp);
+		if(!OreDictionary.getOres(output1).isEmpty() && !OreDictionary.getOres(output2).isEmpty())
+			while(inputIter.hasNext())
+				addCrystallization(inputIter.next(), OreDictionary.getOres(output1).iterator().next(), OreDictionary.getOres(output2).iterator().next(), xp);
 	}
 
 	/**
@@ -222,9 +225,9 @@ public class CoreRegistry {
 	 */
 	public static void addCrystallization(String input, String output1, int out1, String output2, int out2, float xp){
 		Iterator<ItemStack> inputIter = OreDictionary.getOres(input).iterator();
-
-		while(inputIter.hasNext())
-			addCrystallization(inputIter.next(), new ItemStack(OreDictionary.getOres(output1).iterator().next().getItem(), out1), new ItemStack(OreDictionary.getOres(output2).iterator().next().getItem(), out2), xp);
+		if(!OreDictionary.getOres(output1).isEmpty() && !OreDictionary.getOres(output2).isEmpty())
+			while(inputIter.hasNext())
+				addCrystallization(inputIter.next(), new ItemStack(OreDictionary.getOres(output1).iterator().next().getItem(), out1), new ItemStack(OreDictionary.getOres(output2).iterator().next().getItem(), out2), xp);
 	}
 
 	/**
@@ -235,9 +238,9 @@ public class CoreRegistry {
 	 */
 	public static void addSingleCrystallization(String input, String output, float xp){
 		Iterator<ItemStack> inputIter = OreDictionary.getOres(input).iterator();
-
-		while(inputIter.hasNext())
-			addSingleCrystallization(inputIter.next(), new ItemStack(OreDictionary.getOres(output).iterator().next().getItem()), xp);
+		if(!OreDictionary.getOres(output).isEmpty())
+			while(inputIter.hasNext())
+				addSingleCrystallization(inputIter.next(), new ItemStack(OreDictionary.getOres(output).iterator().next().getItem()), xp);
 	}
 
 	/**
@@ -249,9 +252,9 @@ public class CoreRegistry {
 	 */
 	public static void addSingleCrystallization(String input, String output, int out, float xp){
 		Iterator<ItemStack> inputIter = OreDictionary.getOres(input).iterator();
-
-		while(inputIter.hasNext())
-			addSingleCrystallization(inputIter.next(), new ItemStack(OreDictionary.getOres(output).iterator().next().getItem(), out), xp);
+		if(!OreDictionary.getOres(output).isEmpty())
+			while(inputIter.hasNext())
+				addSingleCrystallization(inputIter.next(), new ItemStack(OreDictionary.getOres(output).iterator().next().getItem(), out), xp);
 	}
 
 	/**
@@ -262,9 +265,9 @@ public class CoreRegistry {
 	 */
 	public static void addTransmutation(String input, String output, float xp){
 		Iterator<ItemStack> inputIter = OreDictionary.getOres(input).iterator();
-
-		while(inputIter.hasNext())
-			addTransmutation(inputIter.next(), new ItemStack(OreDictionary.getOres(output).iterator().next().getItem()), xp);
+		if(!OreDictionary.getOres(output).isEmpty())
+			while(inputIter.hasNext())
+				addTransmutation(inputIter.next(), new ItemStack(OreDictionary.getOres(output).iterator().next().getItem()), xp);
 	}
 
 	/**
@@ -276,9 +279,9 @@ public class CoreRegistry {
 	 */
 	public static void addTransmutation(String input, String output, int out, float xp){
 		Iterator<ItemStack> inputIter = OreDictionary.getOres(input).iterator();
-
-		while(inputIter.hasNext())
-			addTransmutation(inputIter.next(), new ItemStack(OreDictionary.getOres(output).iterator().next().getItem(), out), xp);
+		if(!OreDictionary.getOres(output).isEmpty())
+			while(inputIter.hasNext())
+				addTransmutation(inputIter.next(), new ItemStack(OreDictionary.getOres(output).iterator().next().getItem(), out), xp);
 	}
 
 	/**
@@ -291,8 +294,60 @@ public class CoreRegistry {
 	 */
 	public static void addTransmutation(String input, String output, int out, int meta, float xp){
 		Iterator<ItemStack> inputIter = OreDictionary.getOres(input).iterator();
+		if(!OreDictionary.getOres(output).isEmpty())
+			while(inputIter.hasNext())
+				addTransmutation(inputIter.next(), new ItemStack(OreDictionary.getOres(output).iterator().next().getItem(), out, meta), xp);
+	}
 
-		while(inputIter.hasNext())
-			addTransmutation(inputIter.next(), new ItemStack(OreDictionary.getOres(output).iterator().next().getItem(), out, meta), xp);
+	/**
+	 * Adds a bit sequence used to calculate the status on a potion.
+	 * This description probably hardly makes any sense, deal with it.
+	 * @param id The potion id
+	 * @param requirements A bit sequence
+	 */
+	public static void addPotionRequirements(int id, String requirements){
+		Core.potionRequirements.put(Integer.valueOf(id), requirements);
+	}
+
+	/**
+	 * Adds an amplifier to a potion.
+	 * This description probably hardly makes any sense, deal with it.
+	 * @param id The potion id
+	 * @param amplifier The potion amplifier value (usually 5)
+	 */
+	public static void addPotionAmplifiers(int id, String amplifier){
+		Core.potionAmplifiers.put(Integer.valueOf(id), amplifier);
+	}
+
+	/**
+	 * Bridge method for registering a dimension, used to store dimensions in Core
+	 * @param name The dimension name
+	 * @param id The dimension id
+	 * @param provider World provider used for the dimension
+	 * @param keepLoaded Whether the world should be kept loaded at all times
+	 */
+	public static void registerDimension(String name, int id, Class<? extends WorldProvider> provider, boolean keepLoaded){
+		registerWorldProvider(name, provider);
+		DimensionManager.registerProviderType(id, provider, keepLoaded);
+		DimensionManager.registerDimension(id, id);
+	}
+
+	/**
+	 * Used to add a dimension to {@link Core}'s dimension list
+	 * @param name Dimension name, used to fetch the dimension later
+	 * @param provider The world provider used for the dimension
+	 * @return True if the world provider was successfully added.
+	 */
+	public static boolean registerWorldProvider(String name, Class<? extends WorldProvider> provider){
+		if(dimensions.containsKey(name.toLowerCase()))
+			return false;
+		dimensions.put(name.toLowerCase(), provider);
+		return true;
+	}
+
+	public static void registerVanillaDimensions(){
+		registerWorldProvider("overworld", WorldProviderSurface.class);
+		registerWorldProvider("nether", WorldProviderHell.class);
+		registerWorldProvider("end", WorldProviderEnd.class);
 	}
 }

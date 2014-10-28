@@ -21,7 +21,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
-import com.shinoow.abyssalcraft.common.lib.ParticleEffects;
+import com.shinoow.abyssalcraft.client.lib.ParticleEffects;
 import com.shinoow.abyssalcraft.common.util.ExplosionUtil;
 
 import cpw.mods.fml.relauncher.*;
@@ -109,7 +109,7 @@ public class EntityODBcPrimed extends Entity {
 		Blocks.flowing_water.setResistance(5.0F);
 		AbyssalCraft.Cwater.setResistance(50.0F);
 		float var0 = 20.0F;
-		ExplosionUtil.newODBExplosion(worldObj, (Entity)null, posX, posY, posZ, var0, 32, false, true);
+		ExplosionUtil.newODBExplosion(worldObj, this, posX, posY, posZ, var0, 32, false, true);
 		Blocks.obsidian.setResistance(2000.0F);
 		Blocks.lava.setResistance(500.0F);
 		Blocks.flowing_lava.setResistance(500.0F);

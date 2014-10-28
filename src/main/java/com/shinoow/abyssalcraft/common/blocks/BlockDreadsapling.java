@@ -30,9 +30,9 @@ import com.shinoow.abyssalcraft.common.world.gen.WorldGenDrT;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class BlockDreadsapling extends BlockBush implements IGrowable {
+public class BlockDreadSapling extends BlockBush implements IGrowable {
 
-	public BlockDreadsapling()
+	public BlockDreadSapling()
 	{
 		super();
 		float f = 0.4F;

@@ -118,6 +118,12 @@ public class EntityChagaroth extends EntityMob implements IBossDisplayData, IDre
 	}
 
 	@Override
+	public int getTotalArmorValue()
+	{
+		return 10;
+	}
+
+	@Override
 	public void onLivingUpdate()
 	{
 		EntityPlayer player = worldObj.getClosestPlayerToEntity(this, 32D);
@@ -135,45 +141,53 @@ public class EntityChagaroth extends EntityMob implements IBossDisplayData, IDre
 				EntityChagarothSpawn spawn = new EntityChagarothSpawn(worldObj);
 				spawn.copyLocationAndAnglesFrom(this);
 				worldObj.spawnEntityInWorld(spawn);
-				if(rand.nextInt(1000) == 0){
-					EntityChagarothFist fist = new EntityChagarothFist(worldObj);
-					fist.copyLocationAndAnglesFrom(spawn);
-					worldObj.spawnEntityInWorld(fist);
-				}
 			}
 			EntityChagarothFist fist = new EntityChagarothFist(worldObj);
 			fist.copyLocationAndAnglesFrom(this);
 			EntityDreadguard dreadGuard = new EntityDreadguard(worldObj);
 			dreadGuard.copyLocationAndAnglesFrom(fist);
+			if(rand.nextInt(3600) == 0)
+				worldObj.spawnEntityInWorld(fist);
+			if(rand.nextInt(7200) == 0)
+				worldObj.spawnEntityInWorld(dreadGuard);
 			if(player != null)
 				switch((int)getHealth()){
 				case 900:
 					worldObj.spawnEntityInWorld(fist);
+					damageEntity(DamageSource.generic, 1);
 					break;
 				case 800:
 					worldObj.spawnEntityInWorld(fist);
+					damageEntity(DamageSource.generic, 1);
 					break;
 				case 700:
 					worldObj.spawnEntityInWorld(fist);
+					damageEntity(DamageSource.generic, 1);
 					break;
 				case 600:
 					worldObj.spawnEntityInWorld(fist);
+					damageEntity(DamageSource.generic, 1);
 					break;
 				case 500:
 					worldObj.spawnEntityInWorld(fist);
+					damageEntity(DamageSource.generic, 1);
 					break;
 				case 400:
 					worldObj.spawnEntityInWorld(fist);
+					damageEntity(DamageSource.generic, 1);
 					break;
 				case 300:
 					worldObj.spawnEntityInWorld(fist);
+					damageEntity(DamageSource.generic, 1);
 					break;
 				case 200:
 					worldObj.spawnEntityInWorld(fist);
+					damageEntity(DamageSource.generic, 1);
 					break;
 				case 100:
 					worldObj.spawnEntityInWorld(fist);
 					worldObj.spawnEntityInWorld(dreadGuard);
+					damageEntity(DamageSource.generic, 1);
 					break;
 				}
 		}

@@ -34,6 +34,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 public class ItemDreadiumArmor extends ItemArmor {
 	public ItemDreadiumArmor(ArmorMaterial par2EnumArmorMaterial, int par3, int par4){
 		super(par2EnumArmorMaterial, par3, par4);
+		setCreativeTab(AbyssalCraft.tabCombat);
 	}
 
 	@Override
@@ -68,8 +69,6 @@ public class ItemDreadiumArmor extends ItemArmor {
 		}
 		if (itemstack.getItem() == AbyssalCraft.dreadiumplate)
 			player.addPotionEffect(new PotionEffect(Potion.resistance.getId(), 20, 0));
-		if (itemstack.getItem() == AbyssalCraft.dreadiumlegs)
-			player.addPotionEffect(new PotionEffect(Potion.regeneration.getId(), 20, 0));
 		if (itemstack.getItem() == AbyssalCraft.dreadiumboots)
 			player.addPotionEffect(new PotionEffect(Potion.moveSpeed.getId(), 20, 1));
 	}

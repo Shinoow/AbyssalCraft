@@ -39,4 +39,19 @@ public class BlockACBasic extends Block {
 		setStepSound(stepsound);
 		setCreativeTab(AbyssalCraft.tabBlock);
 	}
+
+	/**
+	 * Ultra-generic AbyssalCraft block
+	 * @param material Block material
+	 * @param hardness Block hardness
+	 * @param resistance Block resistance
+	 * @param stepsound Block step sound
+	 */
+	public BlockACBasic(Material material, float hardness, float resistance, SoundType stepsound) {
+		super(material);
+		setHardness(hardness);
+		setResistance(resistance);
+		setStepSound(stepsound);
+		setCreativeTab(AbyssalCraft.tabBlock);
+	}
 }

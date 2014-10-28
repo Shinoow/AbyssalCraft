@@ -295,10 +295,12 @@ public class TileEntityCrystallizer extends TileEntity implements ISidedInventor
 
 			if(itemstack[0] == null && itemstack[1] == null) return false;
 			if(crystallizerItemStacks[2] == null && crystallizerItemStacks[3] == null) return true;
+			if(!crystallizerItemStacks[2].isItemEqual(itemstack[0]) && crystallizerItemStacks[3] != null && itemstack[1] == null) return false;
+			if(!crystallizerItemStacks[2].isItemEqual(itemstack[0]) && crystallizerItemStacks[3] == null && itemstack[1] != null) return false;
 			if(crystallizerItemStacks[2] == null && crystallizerItemStacks[3] != null && itemstack[1] == null ||
 					crystallizerItemStacks[2].isItemEqual(itemstack[0]) && crystallizerItemStacks[3] != null && itemstack[1] == null) return true;
 			if(crystallizerItemStacks[2].isItemEqual(itemstack[0]) && crystallizerItemStacks[3] == null ||
-					crystallizerItemStacks[2] == null && crystallizerItemStacks[3].isItemEqual(itemstack[1]) && itemstack[1] == null) return true;
+					crystallizerItemStacks[2] == null && crystallizerItemStacks[3].isItemEqual(itemstack[1]) && itemstack[1] != null) return true;
 			if(!crystallizerItemStacks[2].isItemEqual(itemstack[0]) && !crystallizerItemStacks[3].isItemEqual(itemstack[1])) return false;
 			int result = crystallizerItemStacks[2].stackSize + itemstack[0].stackSize;
 			int result2 = crystallizerItemStacks[3].stackSize + itemstack[1].stackSize;

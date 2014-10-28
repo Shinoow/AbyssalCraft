@@ -15,6 +15,7 @@
  */
 package com.shinoow.abyssalcraft.common.items;
 
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.player.EntityPlayer;
@@ -53,6 +54,13 @@ public class ItemDreadiumKatana extends Item {
 	@Override
 	public int getMaxItemUseDuration(ItemStack par1ItemStack) {
 		return 0x11940;
+	}
+
+	@Override
+	public boolean hitEntity(ItemStack par1ItemStack, EntityLivingBase par2EntityLivingBase, EntityLivingBase par3EntityLivingBase)
+	{
+		par1ItemStack.damageItem(1, par3EntityLivingBase);
+		return true;
 	}
 
 	@Override

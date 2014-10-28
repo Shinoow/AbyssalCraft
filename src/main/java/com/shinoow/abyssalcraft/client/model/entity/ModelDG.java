@@ -15,6 +15,8 @@
  */
 package com.shinoow.abyssalcraft.client.model.entity;
 
+import org.lwjgl.opengl.GL11;
+
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
@@ -217,63 +219,129 @@ public class ModelDG extends ModelBase
 		super.render(par1Entity, par2, par3, par4, par5, par6, par7);
 		setRotationAngles(par2, par3, par4, par5, par6, par7, par1Entity);
 
-		Head.render(par7);
+		if (isChild)
+		{
+			float f6 = 2.0F;
+			GL11.glPushMatrix();
+			GL11.glScalef(1.5F / f6, 1.5F / f6, 1.5F / f6);
+			GL11.glTranslatef(0.0F, 21.0F * par7, 0.0F);
+			jaw.rotateAngleX = 0.2365561F;
+			jaw.rotateAngleY = 0F;
+			jaw.rotateAngleZ = 0F;
+			Head.render(par7);
+			GL11.glPopMatrix();
+			GL11.glPushMatrix();
+			GL11.glScalef(1.0F / f6, 1.0F / f6, 1.0F / f6);
+			GL11.glTranslatef(0.0F, 24.0F * par7, 0.0F);
+			Spine1.rotateAngleX = 0.2590069F;
+			Spine1.render(par7);
+			Spine2.render(par7);
+			lrib1.rotateAngleX = -0.07023507F;
+			lrib1.render(par7);
+			lrib2.rotateAngleX = -0.07023507F;
+			lrib2.render(par7);
+			lrib3.rotateAngleX = -0.07023507F;
+			lrib3.render(par7);
+			rrib1.rotateAngleX = -0.07023507F;
+			rrib1.render(par7);
+			rrib2.rotateAngleX = -0.07023507F;
+			rrib2.render(par7);
+			rrib3.rotateAngleX = -0.07023507F;
+			rrib3.render(par7);
+			pelvis.rotateAngleX = -1.637653E-07F;
+			pelvis.render(par7);
+			Spine3.rotateAngleX = 0.1290269F;
+			Spine3.render(par7);
 
-		jaw.rotateAngleX = 0.2365561F;
-		jaw.rotateAngleY = 0F;
-		jaw.rotateAngleZ = 0F;
+			larm1.rotateAngleX = -0.5595525F;
+			larm1.render(par7);
+			larm2.rotateAngleX = -1.44967F;
+			larm2.render(par7);
+			clawl1.rotateAngleX = -1.44967F;
+			clawl1.render(par7);
+			clawl2.rotateAngleX = -1.44967F;
+			clawl2.render(par7);
+			clawl3.rotateAngleX = -1.44967F;
+			clawl3.render(par7);
+			clawl4.rotateAngleX = -1.44967F;
+			clawl4.render(par7);
+			rarm1.rotateAngleX = -0.559472F;
+			rarm1.render(par7);
+			rarm2.rotateAngleX = -1.449542F;
+			rarm2.render(par7);
+			clawr1.rotateAngleX = -1.449542F;
+			clawr1.render(par7);
+			clawr2.rotateAngleX = -1.449542F;
+			clawr2.render(par7);
+			clawr3.rotateAngleX = -1.449542F;
+			clawr3.render(par7);
+			clawr4.rotateAngleX = -1.449542F;
+			clawr4.render(par7);
 
-		Spine1.rotateAngleX = 0.2590069F;
-		Spine1.render(par7);
-		Spine2.render(par7);
-		lrib1.rotateAngleX = -0.07023507F;
-		lrib1.render(par7);
-		lrib2.rotateAngleX = -0.07023507F;
-		lrib2.render(par7);
-		lrib3.rotateAngleX = -0.07023507F;
-		lrib3.render(par7);
-		rrib1.rotateAngleX = -0.07023507F;
-		rrib1.render(par7);
-		rrib2.rotateAngleX = -0.07023507F;
-		rrib2.render(par7);
-		rrib3.rotateAngleX = -0.07023507F;
-		rrib3.render(par7);
-		pelvis.rotateAngleX = -1.637653E-07F;
-		pelvis.render(par7);
-		Spine3.rotateAngleX = 0.1290269F;
-		Spine3.render(par7);
+			lleg.render(par7);
+			rleg.render(par7);
+			back.render(par7);
+			lside.render(par7);
+			rside.render(par7);
+			GL11.glPopMatrix();
+		} else{
+			Head.render(par7);
 
-		larm1.rotateAngleX = -0.5595525F;
-		larm1.render(par7);
-		larm2.rotateAngleX = -1.44967F;
-		larm2.render(par7);
-		clawl1.rotateAngleX = -1.44967F;
-		clawl1.render(par7);
-		clawl2.rotateAngleX = -1.44967F;
-		clawl2.render(par7);
-		clawl3.rotateAngleX = -1.44967F;
-		clawl3.render(par7);
-		clawl4.rotateAngleX = -1.44967F;
-		clawl4.render(par7);
-		rarm1.rotateAngleX = -0.559472F;
-		rarm1.render(par7);
-		rarm2.rotateAngleX = -1.449542F;
-		rarm2.render(par7);
-		clawr1.rotateAngleX = -1.449542F;
-		clawr1.render(par7);
-		clawr2.rotateAngleX = -1.449542F;
-		clawr2.render(par7);
-		clawr3.rotateAngleX = -1.449542F;
-		clawr3.render(par7);
-		clawr4.rotateAngleX = -1.449542F;
-		clawr4.render(par7);
+			jaw.rotateAngleX = 0.2365561F;
+			jaw.rotateAngleY = 0F;
+			jaw.rotateAngleZ = 0F;
 
-		lleg.render(par7);
-		rleg.render(par7);
-		back.render(par7);
-		lside.render(par7);
-		rside.render(par7);
+			Spine1.rotateAngleX = 0.2590069F;
+			Spine1.render(par7);
+			Spine2.render(par7);
+			lrib1.rotateAngleX = -0.07023507F;
+			lrib1.render(par7);
+			lrib2.rotateAngleX = -0.07023507F;
+			lrib2.render(par7);
+			lrib3.rotateAngleX = -0.07023507F;
+			lrib3.render(par7);
+			rrib1.rotateAngleX = -0.07023507F;
+			rrib1.render(par7);
+			rrib2.rotateAngleX = -0.07023507F;
+			rrib2.render(par7);
+			rrib3.rotateAngleX = -0.07023507F;
+			rrib3.render(par7);
+			pelvis.rotateAngleX = -1.637653E-07F;
+			pelvis.render(par7);
+			Spine3.rotateAngleX = 0.1290269F;
+			Spine3.render(par7);
 
+			larm1.rotateAngleX = -0.5595525F;
+			larm1.render(par7);
+			larm2.rotateAngleX = -1.44967F;
+			larm2.render(par7);
+			clawl1.rotateAngleX = -1.44967F;
+			clawl1.render(par7);
+			clawl2.rotateAngleX = -1.44967F;
+			clawl2.render(par7);
+			clawl3.rotateAngleX = -1.44967F;
+			clawl3.render(par7);
+			clawl4.rotateAngleX = -1.44967F;
+			clawl4.render(par7);
+			rarm1.rotateAngleX = -0.559472F;
+			rarm1.render(par7);
+			rarm2.rotateAngleX = -1.449542F;
+			rarm2.render(par7);
+			clawr1.rotateAngleX = -1.449542F;
+			clawr1.render(par7);
+			clawr2.rotateAngleX = -1.449542F;
+			clawr2.render(par7);
+			clawr3.rotateAngleX = -1.449542F;
+			clawr3.render(par7);
+			clawr4.rotateAngleX = -1.449542F;
+			clawr4.render(par7);
+
+			lleg.render(par7);
+			rleg.render(par7);
+			back.render(par7);
+			lside.render(par7);
+			rside.render(par7);
+		}
 	}
 
 	@Override

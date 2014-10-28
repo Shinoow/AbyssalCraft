@@ -21,8 +21,8 @@ import net.minecraftforge.common.MinecraftForge;
 
 import org.lwjgl.opengl.GL11;
 
+import com.shinoow.abyssalcraft.core.api.item.ACItems;
 import com.shinoow.abyssalcraft.core.client.model.ModelStarSpawnPlayer;
-import com.shinoow.abyssalcraft.core.util.ItemList;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -207,7 +207,7 @@ public class RenderPlayerAC extends RenderPlayer {
 				GL11.glRotatef(45.0F, 0.0F, 1.0F, 0.0F);
 				GL11.glScalef(-f3, -f3, f3);
 			}
-			else if (itemstack1.getItem() == Items.bow || itemstack1.getItem() == ItemList.coralium_longbow)
+			else if (itemstack1.getItem() == Items.bow || itemstack1.getItem() == ACItems.coralium_longbow)
 			{
 				f3 = 0.625F;
 				GL11.glTranslatef(0.0F, 0.125F, 0.3125F);

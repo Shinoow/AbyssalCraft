@@ -20,12 +20,12 @@ import net.minecraft.entity.Entity;
 import net.minecraft.util.ResourceLocation;
 
 import com.shinoow.abyssalcraft.client.model.entity.ModelDG;
-import com.shinoow.abyssalcraft.common.entity.EntityDepthsghoul;
+import com.shinoow.abyssalcraft.common.entity.EntityDepthsGhoul;
 
 import cpw.mods.fml.relauncher.*;
 
 @SideOnly(Side.CLIENT)
-public class RenderDepthsghoul extends RenderLiving {
+public class RenderDepthsGhoul extends RenderLiving {
 
 	protected ModelDG model;
 
@@ -35,18 +35,18 @@ public class RenderDepthsghoul extends RenderLiving {
 	private static final ResourceLocation orangeResource = new ResourceLocation("abyssalcraft:textures/model/depths_ghoul_orange.png");
 	private static final ResourceLocation ghoulResource = new ResourceLocation("abyssalcraft:textures/model/depths_ghoul.png");
 
-	public RenderDepthsghoul (ModelDG ModelDG, float f)
+	public RenderDepthsGhoul (ModelDG ModelDG, float f)
 	{
 		super(ModelDG, f);
 		model = (ModelDG)mainModel;
 	}
 
-	public void doRender(EntityDepthsghoul entity, double par2, double par4, double par6, float par8, float par9)
+	public void doRender(EntityDepthsGhoul entity, double par2, double par4, double par6, float par8, float par9)
 	{
 		super.doRender(entity, par2, par4, par6, par8, par9);
 	}
 
-	protected ResourceLocation getGhoulTexture(EntityDepthsghoul par1EntityLiving)
+	protected ResourceLocation getGhoulTexture(EntityDepthsGhoul par1EntityLiving)
 	{
 		switch (par1EntityLiving.getGhoulType())
 		{
@@ -69,6 +69,6 @@ public class RenderDepthsghoul extends RenderLiving {
 	@Override
 	protected ResourceLocation getEntityTexture(Entity entity) {
 
-		return getGhoulTexture((EntityDepthsghoul)entity);
+		return getGhoulTexture((EntityDepthsGhoul)entity);
 	}
 }

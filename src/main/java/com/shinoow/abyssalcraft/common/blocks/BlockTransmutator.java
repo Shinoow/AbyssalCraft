@@ -35,8 +35,8 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
+import com.shinoow.abyssalcraft.client.lib.ParticleEffects;
 import com.shinoow.abyssalcraft.common.blocks.tile.TileEntityTransmutator;
-import com.shinoow.abyssalcraft.common.lib.ParticleEffects;
 
 import cpw.mods.fml.common.network.internal.FMLNetworkHandler;
 import cpw.mods.fml.relauncher.Side;

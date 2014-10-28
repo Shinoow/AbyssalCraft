@@ -22,6 +22,7 @@ import net.minecraft.world.gen.feature.WorldGenAbstractTree;
 import net.minecraft.world.gen.feature.WorldGenTrees;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
+import com.shinoow.abyssalcraft.common.entity.EntityDemonPig;
 import com.shinoow.abyssalcraft.common.world.gen.WorldGenDrT;
 
 import cpw.mods.fml.relauncher.Side;
@@ -32,6 +33,7 @@ public class BiomeGenForestDreadlands extends BiomeGenBase
 
 	private WorldGenTrees WorldGenDreadTrees;
 
+	@SuppressWarnings("unchecked")
 	public BiomeGenForestDreadlands(int par1) {
 		super(par1);
 		topBlock = AbyssalCraft.dreadgrass;
@@ -43,6 +45,7 @@ public class BiomeGenForestDreadlands extends BiomeGenBase
 		spawnableCreatureList.clear();
 		spawnableWaterCreatureList.clear();
 		spawnableCaveCreatureList.clear();
+		spawnableMonsterList.add(new SpawnListEntry(EntityDemonPig.class, 2, 1, 3));
 
 	}
 

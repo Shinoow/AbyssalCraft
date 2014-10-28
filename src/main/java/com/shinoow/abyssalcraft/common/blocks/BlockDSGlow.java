@@ -28,35 +28,30 @@ import cpw.mods.fml.relauncher.SideOnly;
 public class BlockDSGlow extends Block {
 
 	@SideOnly(Side.CLIENT)
-	private IIcon field_94393_a;
-	@SideOnly(Side.CLIENT)
-	private IIcon field_94392_b;
+	private IIcon[] icons;
 	@SideOnly(Side.CLIENT)
 	private static IIcon iconDSGlowSideOverlay;
 
 	public BlockDSGlow() {
 		super(Material.rock);
 		setCreativeTab(AbyssalCraft.tabBlock);
-		this.setHarvestLevel("pickaxe", 3);
+		setHarvestLevel("pickaxe", 3);
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	/**
-	 * From the specified side and block metadata retrieves the blocks texture. Args: side, metadata
-	 */
 	public IIcon getIcon(int par1, int par2) {
-		return par1 == 1 ? field_94393_a : par1 == 0 ? field_94392_b : blockIcon;
+		return par1 == 1 ? icons[1] : par1 == 0 ? icons[1] : icons[0];
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void registerBlockIcons(IIconRegister par1IconRegister)
 	{
-		blockIcon = par1IconRegister.registerIcon(AbyssalCraft.modid + ":" + "DSGlow");
-		field_94393_a = par1IconRegister.registerIcon(AbyssalCraft.modid + ":" + "DSB");
-		field_94392_b = par1IconRegister.registerIcon(AbyssalCraft.modid + ":" + "DSB");
-		BlockDSGlow.iconDSGlowSideOverlay = par1IconRegister.registerIcon(AbyssalCraft.modid + ":" + "DSGlow");
+		icons = new IIcon[2];
+		icons[0] = par1IconRegister.registerIcon("abyssalCraft:DSGlow");
+		icons[1] = par1IconRegister.registerIcon("abyssalcraft:DSB");
+		BlockDSGlow.iconDSGlowSideOverlay = par1IconRegister.registerIcon("abyssalcraft:DSGlow");
 	}
 
 	@SideOnly(Side.CLIENT)

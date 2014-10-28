@@ -38,7 +38,7 @@ public class RenderODBc extends Render {
 		shadowSize = 0.5F;
 	}
 
-	public void renderPrimedODBc(EntityODBcPrimed par1EntityODBcPrimed, double par2, double par4, double par6, float par8, float par9) {
+	public void doRender(EntityODBcPrimed par1EntityODBcPrimed, double par2, double par4, double par6, float par8, float par9) {
 
 		GL11.glPushMatrix();
 		GL11.glTranslatef((float)par2, (float)par4, (float)par6);
@@ -68,7 +68,7 @@ public class RenderODBc extends Render {
 			GL11.glEnable(GL11.GL_BLEND);
 			GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_DST_ALPHA);
 			GL11.glColor4f(1.0F, 1.0F, 1.0F, var10);
-			blockRenderer.renderBlockAsItem(AbyssalCraft.ODB, 0, 1.0F);
+			blockRenderer.renderBlockAsItem(AbyssalCraft.ODBcore, 0, 1.0F);
 			GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 			GL11.glDisable(GL11.GL_BLEND);
 			GL11.glEnable(GL11.GL_LIGHTING);
@@ -90,6 +90,6 @@ public class RenderODBc extends Render {
 
 	@Override
 	public void doRender(Entity par1Entity, double par2, double par4, double par6, float par8, float par9) {
-		renderPrimedODBc((EntityODBcPrimed)par1Entity, par2, par4, par6, par8, par9);
+		doRender((EntityODBcPrimed)par1Entity, par2, par4, par6, par8, par9);
 	}
 }

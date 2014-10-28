@@ -34,6 +34,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 public class ItemAbyssalniteArmor extends ItemArmor {
 	public ItemAbyssalniteArmor(ArmorMaterial par2EnumArmorMaterial, int par3, int par4){
 		super(par2EnumArmorMaterial, par3, par4);
+		setCreativeTab(AbyssalCraft.tabCombat);
 	}
 
 	@Override
@@ -64,8 +65,6 @@ public class ItemAbyssalniteArmor extends ItemArmor {
 	public void onArmorTick(World world, EntityPlayer player, ItemStack itemstack) {
 		if (itemstack.getItem() == AbyssalCraft.helmet)
 			player.addPotionEffect(new PotionEffect(Potion.waterBreathing.getId(), 20, 0));
-		if (itemstack.getItem() == AbyssalCraft.legs)
-			player.addPotionEffect(new PotionEffect(Potion.regeneration.getId(), 20, 0));
 		if (itemstack.getItem() == AbyssalCraft.boots)
 			player.addPotionEffect(new PotionEffect(Potion.moveSpeed.getId(), 20, 0));
 	}

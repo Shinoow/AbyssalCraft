@@ -3785,10 +3785,6 @@ public class chagarothlair extends WorldGenerator {
 				tileentitychest.setInventorySlotContents(19, new ItemStack(AbyssalCraft.crystalMagnesium, 1));
 				tileentitychest.setInventorySlotContents(20, new ItemStack(AbyssalCraft.crystalAluminium, 1));
 				tileentitychest.setInventorySlotContents(21, new ItemStack(AbyssalCraft.OC, 1));
-				if(world.rand.nextInt(10000) == 0){
-					tileentitychest.decrStackSize(13, 1);
-					tileentitychest.setInventorySlotContents(13, new ItemStack(AbyssalCraft.devsword, 1));
-				}
 			}
 		}
 		world.setBlock(i + 0, j - 13, k - 42, AbyssalCraft.abydreadbrick, 0, 2);

@@ -18,7 +18,7 @@ package com.shinoow.abyssalcraft.common.potion;
 import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.common.entity.*;
 import com.shinoow.abyssalcraft.common.entity.anti.*;
-import com.shinoow.abyssalcraft.common.util.ACDamageSource;
+import com.shinoow.abyssalcraft.core.api.damagesource.ACDamageSource;
 import com.shinoow.abyssalcraft.core.api.entity.IAntiEntity;
 
 import net.minecraft.client.Minecraft;
@@ -62,7 +62,7 @@ public class PotionAntimatter extends Potion{
 				par1EntityLivingBase.worldObj.removeEntity(par1EntityLivingBase);
 				entity.onSpawnWithEgg((IEntityLivingData)null);
 				par1EntityLivingBase.worldObj.spawnEntityInWorld(entity);
-			} else if(par1EntityLivingBase instanceof EntityDepthsghoul){
+			} else if(par1EntityLivingBase instanceof EntityDepthsGhoul){
 				EntityAntiGhoul entity = new EntityAntiGhoul(par1EntityLivingBase.worldObj);
 				entity.copyLocationAndAnglesFrom(par1EntityLivingBase);
 				par1EntityLivingBase.worldObj.removeEntity(par1EntityLivingBase);

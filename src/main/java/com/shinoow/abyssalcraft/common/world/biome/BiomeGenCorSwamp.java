@@ -52,7 +52,7 @@ public class BiomeGenCorSwamp extends BiomeGenBase {
 		theBiomeDecorator.sandPerChunk = 0;
 		theBiomeDecorator.grassPerChunk = 5;
 		waterColorMultiplier = 0x24FF83;
-		spawnableMonsterList.add(new SpawnListEntry(EntityDepthsghoul.class, 5, 1, 5));
+		spawnableMonsterList.add(new SpawnListEntry(EntityDepthsGhoul.class, 5, 1, 5));
 		spawnableMonsterList.add(new SpawnListEntry(EntityAbyssalZombie.class, 5, 1, 5));
 	}
 
@@ -87,9 +87,9 @@ public class BiomeGenCorSwamp extends BiomeGenBase {
 
 		for(int k = 0; k < 1; k++)
 		{
-			int RandPosX = par3 + par2Random.nextInt(32);
+			int RandPosX = par3 + par2Random.nextInt(64);
 			int RandPosY = par2Random.nextInt(60);
-			int RandPosZ = par4 + par2Random.nextInt(32);
+			int RandPosZ = par4 + par2Random.nextInt(64);
 			new WorldGenAntimatterLake(AbyssalCraft.anticwater).generate(par1World, par2Random, RandPosX, RandPosY, RandPosZ);
 		}
 	}

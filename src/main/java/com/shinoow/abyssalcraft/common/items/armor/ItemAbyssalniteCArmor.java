@@ -34,6 +34,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 public class ItemAbyssalniteCArmor extends ItemArmor {
 	public ItemAbyssalniteCArmor(ArmorMaterial par2EnumArmorMaterial, int par3, int par4){
 		super(par2EnumArmorMaterial, par3, par4);
+		setCreativeTab(AbyssalCraft.tabCombat);
 	}
 
 	@Override
@@ -66,7 +67,6 @@ public class ItemAbyssalniteCArmor extends ItemArmor {
 		{
 			player.addPotionEffect(new PotionEffect(Potion.waterBreathing.getId(), 20, 1));
 			player.addPotionEffect(new PotionEffect(Potion.nightVision.getId(), 260, 0));
-			player.addPotionEffect(new PotionEffect(Potion.field_76443_y.getId(), 20, 0));
 		}
 		if (itemstack.getItem() == AbyssalCraft.plateC)
 		{

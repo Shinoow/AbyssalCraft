@@ -110,8 +110,16 @@ public class EntityODBPrimed extends Entity {
 		Blocks.water.setResistance(5.0F);
 		Blocks.flowing_water.setResistance(5.0F);
 		AbyssalCraft.Cwater.setResistance(50.0F);
-		float var0 = 100.0F;
-		ExplosionUtil.newODBExplosion(worldObj, (Entity)null, posX, posY, posZ, var0, 128, false, true);
+		float var0 = 30.0F;
+		ExplosionUtil.newODBExplosion(worldObj, this, posX, posY, posZ, var0, 128, false, true);
+		ExplosionUtil.newODBExplosion(worldObj, this, posX + 10, posY, posZ, var0, 128, false, true);
+		ExplosionUtil.newODBExplosion(worldObj, this, posX - 10, posY, posZ, var0, 128, false, true);
+		ExplosionUtil.newODBExplosion(worldObj, this, posX, posY, posZ + 10, var0, 128, false, true);
+		ExplosionUtil.newODBExplosion(worldObj, this, posX, posY, posZ - 10, var0, 128, false, true);
+		ExplosionUtil.newODBExplosion(worldObj, this, posX + 10, posY, posZ - 10, var0, 128, false, true);
+		ExplosionUtil.newODBExplosion(worldObj, this, posX - 10, posY, posZ + 10, var0, 128, false, true);
+		ExplosionUtil.newODBExplosion(worldObj, this, posX + 10, posY, posZ + 10, var0, 128, false, true);
+		ExplosionUtil.newODBExplosion(worldObj, this, posX - 10, posY, posZ - 10, var0, 128, false, true);
 		Blocks.obsidian.setResistance(2000.0F);
 		Blocks.lava.setResistance(500.0F);
 		Blocks.flowing_lava.setResistance(500.0F);

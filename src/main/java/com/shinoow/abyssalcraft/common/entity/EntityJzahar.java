@@ -68,7 +68,7 @@ public class EntityJzahar extends EntityMob implements IBossDisplayData, IRanged
 	@Override
 	protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
-		getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(400.0D);
+		getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(500.0D);
 		getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(32.0D);
 		getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setBaseValue(0.0D);
 		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.699D);
@@ -109,6 +109,12 @@ public class EntityJzahar extends EntityMob implements IBossDisplayData, IRanged
 	protected float getSoundVolume()
 	{
 		return 5.0F;
+	}
+
+	@Override
+	public int getTotalArmorValue()
+	{
+		return 10;
 	}
 
 	@Override

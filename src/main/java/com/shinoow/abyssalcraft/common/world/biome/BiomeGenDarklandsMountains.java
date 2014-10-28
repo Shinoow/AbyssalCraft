@@ -23,23 +23,15 @@ import net.minecraft.entity.monster.EntityZombie;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
-import net.minecraft.world.gen.feature.WorldGenMinable;
-import net.minecraft.world.gen.feature.WorldGenerator;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.common.entity.EntityAbyssalZombie;
-import com.shinoow.abyssalcraft.common.entity.EntityDepthsghoul;
+import com.shinoow.abyssalcraft.common.entity.EntityDepthsGhoul;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class BiomeGenDarklandsMountains extends BiomeGenBase
-{
-
-	private WorldGenerator theWorldGenerator;
-	private WorldGenerator theSecondWorldGenerator;
-	private WorldGenerator theThirdWorldGenerator;
-	private WorldGenerator theFourthWorldGenerator;
+public class BiomeGenDarklandsMountains extends BiomeGenBase {
 
 	@SuppressWarnings("unchecked")
 	public BiomeGenDarklandsMountains(int par1)
@@ -52,14 +44,10 @@ public class BiomeGenDarklandsMountains extends BiomeGenBase
 		topBlock = AbyssalCraft.Darkstone;
 		fillerBlock = AbyssalCraft.Darkstone;
 		waterColorMultiplier = 14745518;
-		theWorldGenerator = new WorldGenMinable(AbyssalCraft.Darkstone, 96);
-		theSecondWorldGenerator = new WorldGenMinable(AbyssalCraft.abydreadstone, 1);
-		theThirdWorldGenerator = new WorldGenMinable(AbyssalCraft.Darkstone, 64);
-		theFourthWorldGenerator = new WorldGenMinable(AbyssalCraft.Darkstone, 32);
 		theBiomeDecorator.treesPerChunk = 0;
 		spawnableMonsterList.add(new SpawnListEntry(EntityZombie.class, 2, 1, 2));
 		spawnableMonsterList.add(new SpawnListEntry(EntitySkeleton.class, 2, 1, 2));
-		spawnableMonsterList.add(new SpawnListEntry(EntityDepthsghoul.class, 2, 1, 2));
+		spawnableMonsterList.add(new SpawnListEntry(EntityDepthsGhoul.class, 2, 1, 2));
 		spawnableMonsterList.add(new SpawnListEntry(EntityAbyssalZombie.class, 2, 1, 2));
 	}
 	@Override
@@ -80,38 +68,6 @@ public class BiomeGenDarklandsMountains extends BiomeGenBase
 
 			if (var10 == Blocks.stone)
 				par1World.setBlock(var7, var8, var9, AbyssalCraft.abyore);
-		}
-
-		for (var5 = 0; var5 < 7; ++var5)
-		{
-			var6 = par3 + par2Random.nextInt(16);
-			var7 = par2Random.nextInt(64);
-			var8 = par4 + par2Random.nextInt(16);
-			theWorldGenerator.generate(par1World, par2Random, var6, var7, var8);
-		}
-
-		for (var5 = 0; var5 < 7; ++var5)
-		{
-			var6 = par3 + par2Random.nextInt(16);
-			var7 = par2Random.nextInt(64);
-			var8 = par4 + par2Random.nextInt(16);
-			theSecondWorldGenerator.generate(par1World, par2Random, var6, var7, var8);
-		}
-
-		for (var5 = 0; var5 < 7; ++var5)
-		{
-			var6 = par3 + par2Random.nextInt(16);
-			var7 = par2Random.nextInt(64);
-			var8 = par4 + par2Random.nextInt(16);
-			theThirdWorldGenerator.generate(par1World, par2Random, var6, var7, var8);
-		}
-
-		for (var5 = 0; var5 < 7; ++var5)
-		{
-			var6 = par3 + par2Random.nextInt(16);
-			var7 = par2Random.nextInt(64);
-			var8 = par4 + par2Random.nextInt(16);
-			theFourthWorldGenerator.generate(par1World, par2Random, var6, var7, var8);
 		}
 	}
 

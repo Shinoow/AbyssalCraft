@@ -37,7 +37,6 @@ public class RenderDragonBoss extends RenderLiving {
 	private float scale = 1.5F;
 
 	private static final ResourceLocation field_110842_f = new ResourceLocation("abyssalcraft:textures/model/boss/dragonboss_exploding.png");
-	private static final ResourceLocation field_110843_g = new ResourceLocation("textures/entity/endercrystal/endercrystal_beam.png");
 	private static final ResourceLocation field_110845_h = new ResourceLocation("abyssalcraft:textures/model/boss/dragonboss_eyes.png");
 	private static final ResourceLocation field_110844_k = new ResourceLocation("abyssalcraft:textures/model/boss/dragonboss.png");
 
@@ -123,48 +122,6 @@ public class RenderDragonBoss extends RenderLiving {
 	{
 		BossStatus.setBossStatus(par1entitydragonboss, false);
 		super.doRender(par1entitydragonboss, par2, par4, par6, par8, par9);
-
-		if (par1entitydragonboss.healingcircle != null)
-		{
-			float f2 = EntityDragonMinion.innerRotation + par9;
-			float f3 = MathHelper.sin(f2 * 0.2F) / 2.0F + 0.5F;
-			f3 = (f3 * f3 + f3) * 0.2F;
-			float f4 = (float)(par1entitydragonboss.healingcircle.posX - par1entitydragonboss.posX - (par1entitydragonboss.prevPosX - par1entitydragonboss.posX) * (1.0F - par9));
-			float f5 = (float)(f3 + par1entitydragonboss.healingcircle.posY - 1.0D - par1entitydragonboss.posY - (par1entitydragonboss.prevPosY - par1entitydragonboss.posY) * (1.0F - par9));
-			float f6 = (float)(par1entitydragonboss.healingcircle.posZ - par1entitydragonboss.posZ - (par1entitydragonboss.prevPosZ - par1entitydragonboss.posZ) * (1.0F - par9));
-			float f7 = MathHelper.sqrt_float(f4 * f4 + f6 * f6);
-			float f8 = MathHelper.sqrt_float(f4 * f4 + f5 * f5 + f6 * f6);
-			GL11.glPushMatrix();
-			GL11.glTranslatef((float)par2, (float)par4 + 2.0F, (float)par6);
-			GL11.glRotatef((float)-Math.atan2(f6, f4) * 180.0F / (float)Math.PI - 90.0F, 0.0F, 1.0F, 0.0F);
-			GL11.glRotatef((float)-Math.atan2(f7, f5) * 180.0F / (float)Math.PI - 90.0F, 1.0F, 0.0F, 0.0F);
-			Tessellator tessellator = Tessellator.instance;
-			RenderHelper.disableStandardItemLighting();
-			GL11.glDisable(GL11.GL_CULL_FACE);
-			bindTexture(field_110843_g);
-			GL11.glShadeModel(GL11.GL_SMOOTH);
-			float f9 = 0.0F - (par1entitydragonboss.ticksExisted + par9) * 0.01F;
-			float f10 = MathHelper.sqrt_float(f4 * f4 + f5 * f5 + f6 * f6) / 32.0F - (par1entitydragonboss.ticksExisted + par9) * 0.01F;
-			tessellator.startDrawing(5);
-			byte b0 = 8;
-
-			for (int i = 0; i <= b0; ++i)
-			{
-				float f11 = MathHelper.sin(i % b0 * (float)Math.PI * 2.0F / b0) * 0.75F;
-				float f12 = MathHelper.cos(i % b0 * (float)Math.PI * 2.0F / b0) * 0.75F;
-				float f13 = i % b0 * 1.0F / b0;
-				tessellator.setColorOpaque_I(0);
-				tessellator.addVertexWithUV(f11 * 0.2F, f12 * 0.2F, 0.0D, f13, f10);
-				tessellator.setColorOpaque_I(16777215);
-				tessellator.addVertexWithUV(f11, f12, f8, f13, f9);
-			}
-
-			tessellator.draw();
-			GL11.glEnable(GL11.GL_CULL_FACE);
-			GL11.glShadeModel(GL11.GL_FLAT);
-			RenderHelper.enableStandardItemLighting();
-			GL11.glPopMatrix();
-		}
 	}
 
 	protected ResourceLocation func_110841_a(EntityDragonBoss par1EntityDragonBoss)

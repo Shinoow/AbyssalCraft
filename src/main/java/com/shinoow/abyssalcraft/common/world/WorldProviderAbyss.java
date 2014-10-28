@@ -28,12 +28,6 @@ import cpw.mods.fml.relauncher.*;
 public class WorldProviderAbyss extends WorldProvider {
 
 	@Override
-	public void setDimension (int dim) {
-		dimensionId = dim;
-		super.setDimension(dim);
-	}
-
-	@Override
 	public IChunkProvider createChunkGenerator() {
 		return new ChunkProviderAbyss(worldObj, worldObj.getSeed(), true);
 	}
@@ -79,9 +73,6 @@ public class WorldProviderAbyss extends WorldProvider {
 		return false;
 	}
 
-	/**
-	 * Calculates the angle of sun and moon in the sky relative to a specified time (usually worldTime)
-	 */
 	@Override
 	public float calculateCelestialAngle(long par1, float par3) {
 		return 0.0F;
@@ -89,9 +80,6 @@ public class WorldProviderAbyss extends WorldProvider {
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	/**
-	 * Returns array with sunrise/sunset colors
-	 */
 	public float[] calcSunriseSunsetColors(float par1, float par2) {
 		return null;
 	}
@@ -109,9 +97,6 @@ public class WorldProviderAbyss extends WorldProvider {
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	/**
-	 * the y level at which clouds are rendered.
-	 */
 	public float getCloudHeight() {
 		return 8.0F;
 	}

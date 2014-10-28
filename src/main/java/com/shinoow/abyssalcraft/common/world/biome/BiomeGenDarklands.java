@@ -30,7 +30,7 @@ import net.minecraft.world.gen.feature.WorldGenerator;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.common.entity.EntityAbyssalZombie;
-import com.shinoow.abyssalcraft.common.entity.EntityDepthsghoul;
+import com.shinoow.abyssalcraft.common.entity.EntityDepthsGhoul;
 import com.shinoow.abyssalcraft.common.world.gen.WorldGenDLT;
 
 import cpw.mods.fml.relauncher.Side;
@@ -58,7 +58,7 @@ public class BiomeGenDarklands extends BiomeGenBase
 		theBiomeDecorator.treesPerChunk = 10;
 		spawnableMonsterList.add(new SpawnListEntry(EntityZombie.class, 5, 1, 5));
 		spawnableMonsterList.add(new SpawnListEntry(EntitySkeleton.class, 5, 1, 5));
-		spawnableMonsterList.add(new SpawnListEntry(EntityDepthsghoul.class, 5, 1, 5));
+		spawnableMonsterList.add(new SpawnListEntry(EntityDepthsGhoul.class, 5, 1, 5));
 		spawnableMonsterList.add(new SpawnListEntry(EntityAbyssalZombie.class, 3, 1, 3));
 	}
 	@Override
@@ -81,20 +81,20 @@ public class BiomeGenDarklands extends BiomeGenBase
 				par1World.setBlock(var7, var8, var9, AbyssalCraft.abyore);
 		}
 
-		for (var5 = 0; var5 < 7; ++var5)
+		for (var6 = 0; var6 < 7; ++var6)
 		{
-			var6 = par3 + par2Random.nextInt(16);
-			var7 = par2Random.nextInt(64);
-			var8 = par4 + par2Random.nextInt(16);
-			theWorldGenerator.generate(par1World, par2Random, var6, var7, var8);
+			var7 = par3 + par2Random.nextInt(16);
+			var8 = par2Random.nextInt(64);
+			int var9 = par4 + par2Random.nextInt(16);
+			theWorldGenerator.generate(par1World, par2Random, var7, var8, var9);
 		}
 
-		for (var5 = 0; var5 < 7; ++var5)
+		for (var6 = 0; var6 < 7; ++var6)
 		{
-			var6 = par3 + par2Random.nextInt(16);
-			var7 = par2Random.nextInt(64);
-			var8 = par4 + par2Random.nextInt(16);
-			theSecondWorldGenerator.generate(par1World, par2Random, var6, var7, var8);
+			var7 = par3 + par2Random.nextInt(16);
+			var8 = par2Random.nextInt(64);
+			int var9 = par4 + par2Random.nextInt(16);
+			theSecondWorldGenerator.generate(par1World, par2Random, var7, var8, var9);
 		}
 	}
 

@@ -1,8 +1,7 @@
 package com.shinoow.abyssalcraft.integration.nei;
 
 import net.minecraft.item.ItemStack;
-import codechicken.nei.api.API;
-import codechicken.nei.api.IConfigureNEI;
+import codechicken.nei.api.*;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
 
@@ -17,6 +16,8 @@ public class NEIACConfig implements IConfigureNEI {
 		API.registerUsageHandler(new TransmutatorRecipeHandler());
 
 		API.hideItem(new ItemStack(AbyssalCraft.devsword));
+		API.hideItem(new ItemStack(AbyssalCraft.crystallizer_on));
+		API.hideItem(new ItemStack(AbyssalCraft.transmutator_on));
 	}
 
 	@Override

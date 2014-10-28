@@ -17,7 +17,7 @@ package com.shinoow.abyssalcraft.common.potion;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.common.entity.*;
-import com.shinoow.abyssalcraft.common.util.ACDamageSource;
+import com.shinoow.abyssalcraft.core.api.damagesource.ACDamageSource;
 import com.shinoow.abyssalcraft.core.api.entity.ICoraliumEntity;
 
 import net.minecraft.client.Minecraft;
@@ -54,26 +54,28 @@ public class PotionCplague extends Potion{
 			par1EntityLivingBase.heal(2);
 		}
 		if(par1EntityLivingBase instanceof EntityZombie) {
-			if(!par1EntityLivingBase.isEntityAlive())
+			if(!par1EntityLivingBase.isEntityAlive() && !par1EntityLivingBase.worldObj.isRemote)
 			{
 				EntityAbyssalZombie entityzombie = new EntityAbyssalZombie(par1EntityLivingBase.worldObj);
 				if(par1EntityLivingBase.worldObj.difficultySetting == EnumDifficulty.HARD && par1EntityLivingBase.worldObj.rand.nextBoolean()) {
 					entityzombie.copyLocationAndAnglesFrom(par1EntityLivingBase);
 					entityzombie.onSpawnWithEgg((IEntityLivingData)null);
-					entityzombie.setIsZombie(true);
+					if(par1EntityLivingBase.isChild())
+						entityzombie.setChild(true);
 				}
 				else if(par1EntityLivingBase.worldObj.rand.nextInt(8) == 0) {
 					entityzombie.copyLocationAndAnglesFrom(par1EntityLivingBase);
 					entityzombie.onSpawnWithEgg((IEntityLivingData)null);
-					entityzombie.setIsZombie(true);
+					if(par1EntityLivingBase.isChild())
+						entityzombie.setChild(true);
 				}
 
 				par1EntityLivingBase.worldObj.removeEntity(par1EntityLivingBase);
 				par1EntityLivingBase.worldObj.spawnEntityInWorld(entityzombie);
 			}
-			if(par1EntityLivingBase.worldObj.getWorldInfo().isHardcoreModeEnabled())
+			if(par1EntityLivingBase.worldObj.getWorldInfo().isHardcoreModeEnabled() && !par1EntityLivingBase.worldObj.isRemote)
 				if(!par1EntityLivingBase.isEntityAlive() && par1EntityLivingBase.worldObj.rand.nextInt(10) == 0) {
-					EntityDepthsghoul ghoul = new EntityDepthsghoul(par1EntityLivingBase.worldObj);
+					EntityDepthsGhoul ghoul = new EntityDepthsGhoul(par1EntityLivingBase.worldObj);
 					ghoul.copyLocationAndAnglesFrom(par1EntityLivingBase);
 					ghoul.onSpawnWithEgg((IEntityLivingData)null);
 					par1EntityLivingBase.worldObj.removeEntity(par1EntityLivingBase);

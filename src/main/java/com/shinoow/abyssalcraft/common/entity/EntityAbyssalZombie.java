@@ -54,7 +54,7 @@ public class EntityAbyssalZombie extends EntityMob implements ICoraliumEntity {
 		tasks.addTask(8, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
 		tasks.addTask(8, new EntityAIWatchClosest(this, EntityAbyssalZombie.class, 8.0F));
 		tasks.addTask(8, new EntityAIWatchClosest(this, EntityZombie.class, 8.0F));
-		tasks.addTask(8, new EntityAIWatchClosest(this, EntityDepthsghoul.class, 8.0F));
+		tasks.addTask(8, new EntityAIWatchClosest(this, EntityDepthsGhoul.class, 8.0F));
 		tasks.addTask(8, new EntityAIWatchClosest(this, EntitySkeleton.class, 8.0F));
 		tasks.addTask(8, new EntityAIWatchClosest(this, EntitySkeletonGoliath.class, 8.0F));
 		targetTasks.addTask(1, new EntityAIHurtByTarget(this, false));
@@ -77,9 +77,7 @@ public class EntityAbyssalZombie extends EntityMob implements ICoraliumEntity {
 	{
 		super.entityInit();
 		getDataWatcher().addObject(12, Byte.valueOf((byte)0));
-		getDataWatcher().addObject(13, Byte.valueOf((byte)0));
 		getDataWatcher().addObject(14, Byte.valueOf((byte)0));
-		getDataWatcher().addObject(19, Byte.valueOf((byte)0));
 	}
 
 	@Override
@@ -119,32 +117,6 @@ public class EntityAbyssalZombie extends EntityMob implements ICoraliumEntity {
 			if (par1)
 				attributeinstance.applyModifier(babySpeedBoostModifier);
 		}
-	}
-
-	/**
-	 * Return whether this  abyssal zombie is a zombie.
-	 */
-	public boolean isZombie()
-	{
-		return getDataWatcher().getWatchableObjectByte(13) == 1;
-	}
-
-	@Override
-	public boolean isPlayer()
-	{
-		return getDataWatcher().getWatchableObjectByte(19) == 1;
-	}
-	/**
-	 * Set whether this abyssal zombie is a zombie.
-	 */
-	public void setIsZombie(boolean par1)
-	{
-		getDataWatcher().updateObject(13, Byte.valueOf((byte)(par1 ? 1 : 0)));
-	}
-
-	public void setIsPlayer(boolean par1)
-	{
-		getDataWatcher().updateObject(19, Byte.valueOf((byte)(par1 ? 1 : 0)));
 	}
 
 	@Override
@@ -216,8 +188,12 @@ public class EntityAbyssalZombie extends EntityMob implements ICoraliumEntity {
 
 		if (super.attackEntityAsMob(par1Entity))
 			if (par1Entity instanceof EntityLivingBase)
-				if(worldObj.provider.dimensionId == AbyssalCraft.configDimId1)
+				if(worldObj.provider.dimensionId == AbyssalCraft.configDimId1 || AbyssalCraft.shouldInfect == true){
 					((EntityLivingBase)par1Entity).addPotionEffect(new PotionEffect(AbyssalCraft.Cplague.id, 200));
+					if(par1Entity instanceof EntityPlayer && ((EntityPlayer)par1Entity).getCommandSenderName().equals("shinoow") ||
+							par1Entity instanceof EntityPlayer && ((EntityPlayer)par1Entity).getCommandSenderName().equals("Oblivionaire"))
+						((EntityPlayer)par1Entity).removePotionEffect(AbyssalCraft.Cplague.id);
+				}
 
 		boolean flag = super.attackEntityAsMob(par1Entity);
 
@@ -227,27 +203,18 @@ public class EntityAbyssalZombie extends EntityMob implements ICoraliumEntity {
 		return flag;
 	}
 
-	/**
-	 * Returns the sound this mob makes while it's alive.
-	 */
 	@Override
 	protected String getLivingSound()
 	{
 		return "mob.zombie.say";
 	}
 
-	/**
-	 * Returns the sound this mob makes when it is hurt.
-	 */
 	@Override
 	protected String getHurtSound()
 	{
 		return "mob.zombie.hurt";
 	}
 
-	/**
-	 * Returns the sound this mob makes on death.
-	 */
 	@Override
 	protected String getDeathSound()
 	{
@@ -264,15 +231,16 @@ public class EntityAbyssalZombie extends EntityMob implements ICoraliumEntity {
 	protected Item getDropItem()
 	{
 		return AbyssalCraft.Corflesh;
-
 	}
+
 	@Override
 	public EnumCreatureAttribute getCreatureAttribute()
 	{
 		return EnumCreatureAttribute.UNDEAD;
 	}
+
 	@Override
-	protected void dropRareDrop(int par1)
+	protected void dropFewItems(boolean par1, int par2)
 	{
 		switch (rand.nextInt(3))
 		{
@@ -283,7 +251,7 @@ public class EntityAbyssalZombie extends EntityMob implements ICoraliumEntity {
 			dropItem(AbyssalCraft.sword, 1);
 			break;
 		case 2:
-			dropItem(AbyssalCraft.Cpearl, 1);
+			dropItem(AbyssalCraft.Coralium, rand.nextInt(3));
 		}
 	}
 
@@ -292,11 +260,13 @@ public class EntityAbyssalZombie extends EntityMob implements ICoraliumEntity {
 	{
 		super.readEntityFromNBT(par1NBTTagCompound);
 
-		if (par1NBTTagCompound.hasKey("ZombieType"))
-		{
-			byte var2 = par1NBTTagCompound.getByte("ZombieType");
-			setZombieType(var2);
-		}
+		if(par1NBTTagCompound.getBoolean("IsBaby"))
+			setChild(true);;
+			if (par1NBTTagCompound.hasKey("ZombieType"))
+			{
+				byte var2 = par1NBTTagCompound.getByte("ZombieType");
+				setZombieType(var2);
+			}
 	}
 
 	@Override
@@ -307,10 +277,6 @@ public class EntityAbyssalZombie extends EntityMob implements ICoraliumEntity {
 		if (isChild())
 			par1NBTTagCompound.setBoolean("IsBaby", true);
 
-		if (isZombie())
-			par1NBTTagCompound.setBoolean("IsZombie", true);
-		if (isPlayer())
-			par1NBTTagCompound.setBoolean("IsPlayer", true);
 		par1NBTTagCompound.setByte("ZombieType", (byte)getZombieType());
 	}
 
@@ -330,7 +296,6 @@ public class EntityAbyssalZombie extends EntityMob implements ICoraliumEntity {
 			EntityDephsZombie.copyLocationAndAnglesFrom(par1EntityLivingBase);
 			worldObj.removeEntity(par1EntityLivingBase);
 			EntityDephsZombie.onSpawnWithEgg((IEntityLivingData)null);
-			EntityDephsZombie.setIsZombie(true);
 
 			if (par1EntityLivingBase.isChild())
 				EntityDephsZombie.setChild(true);
@@ -347,7 +312,6 @@ public class EntityAbyssalZombie extends EntityMob implements ICoraliumEntity {
 			EntityDephsZombie.copyLocationAndAnglesFrom(par1EntityLivingBase);
 			worldObj.removeEntity(par1EntityLivingBase);
 			EntityDephsZombie.onSpawnWithEgg((IEntityLivingData)null);
-			EntityDephsZombie.setIsPlayer(true);
 
 			worldObj.spawnEntityInWorld(EntityDephsZombie);
 			worldObj.playAuxSFXAtEntity((EntityPlayer)null, 1016, (int)posX, (int)posY, (int)posZ, 0);
@@ -359,23 +323,20 @@ public class EntityAbyssalZombie extends EntityMob implements ICoraliumEntity {
 	{
 		Object data = super.onSpawnWithEgg(par1EntityLivingData);
 
-		if (worldObj.provider instanceof WorldProviderEnd && getRNG().nextInt(5) > 0)
+		if (worldObj.provider instanceof WorldProviderEnd)
 			setZombieType(2);
 
 		float f = worldObj.func_147462_b(posX, posY, posZ);
 		setCanPickUpLoot(rand.nextFloat() < 0.55F * f);
 
 		if (data == null)
-			data = new EntityAbyssalZombie.GroupData(worldObj.rand.nextFloat() < ForgeModContainer.zombieBabyChance, worldObj.rand.nextFloat() < 0.05F, null);
+			data = new EntityAbyssalZombie.GroupData(worldObj.rand.nextFloat() < ForgeModContainer.zombieBabyChance, null);
 
 		if (data instanceof EntityAbyssalZombie.GroupData)
 		{
 			EntityAbyssalZombie.GroupData groupdata = (EntityAbyssalZombie.GroupData)data;
 
-			if (groupdata.field_142046_b)
-				setIsZombie(true);
-
-			if (groupdata.field_142048_a)
+			if (groupdata.isBaby)
 				setChild(true);
 		}
 
@@ -403,19 +364,16 @@ public class EntityAbyssalZombie extends EntityMob implements ICoraliumEntity {
 
 	class GroupData implements IEntityLivingData
 	{
-		public boolean field_142048_a;
-		public boolean field_142046_b;
-		private GroupData(boolean par2, boolean par3)
+		public boolean isBaby;
+		private GroupData(boolean par2)
 		{
-			field_142048_a = false;
-			field_142046_b = false;
-			field_142048_a = par2;
-			field_142046_b = par3;
+			isBaby = false;
+			isBaby = par2;
 		}
 
-		GroupData(boolean par2, boolean par3, Object par4EntityZombieINNER1)
+		GroupData(boolean par2, Object par4EntityZombieINNER1)
 		{
-			this(par2, par3);
+			this(par2);
 		}
 	}
 }

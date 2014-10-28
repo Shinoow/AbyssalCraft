@@ -25,6 +25,6 @@ public class ACCoreConfigGUI extends GuiConfig {
 	public ACCoreConfigGUI(GuiScreen parent) {
 		super(parent,
 				new ConfigElement(Core.cfg.getCategory("render")).getChildElements(),
-				"accore", false, false, "AbyssalCraft Core");
+				"accore", true, true, "AbyssalCraft Core");
 	}
 }

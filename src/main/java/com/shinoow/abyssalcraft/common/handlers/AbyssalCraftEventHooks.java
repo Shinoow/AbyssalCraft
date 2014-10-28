@@ -15,10 +15,23 @@
  */
 package com.shinoow.abyssalcraft.common.handlers;
 
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagList;
+import net.minecraft.potion.PotionEffect;
+import net.minecraft.util.EntityDamageSource;
+import net.minecraft.world.chunk.Chunk;
+import net.minecraft.world.chunk.storage.ExtendedBlockStorage;
+import net.minecraftforge.event.entity.living.LivingAttackEvent;
 import net.minecraftforge.event.entity.player.*;
+import net.minecraftforge.event.terraingen.PopulateChunkEvent;
+
 import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.common.blocks.*;
+
 import cpw.mods.fml.common.eventhandler.Event.Result;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 
@@ -35,9 +48,22 @@ public class AbyssalCraftEventHooks {
 
 		if (event.block == AbyssalCraft.dreadsapling) {
 			if (!event.world.isRemote)
-				((BlockDreadsapling)AbyssalCraft.dreadsapling).growTree(event.world, event.x, event.y, event.z, event.world.rand);
+				((BlockDreadSapling)AbyssalCraft.dreadsapling).growTree(event.world, event.x, event.y, event.z, event.world.rand);
 			event.setResult(Result.ALLOW);
 		}
+	}
+
+	@SubscribeEvent
+	public void populateChunk(PopulateChunkEvent.Pre event) {
+		Chunk chunk = event.world.getChunkFromChunkCoords(event.chunkX, event.chunkZ);
+		for (ExtendedBlockStorage storage : chunk.getBlockStorageArray())
+			if (storage != null && storage.getYLocation() >= 60)
+				for (int x = 0; x < 16; ++x)
+					for (int y = 0; y < 16; ++y)
+						for (int z = 0; z < 16; ++z)
+							if(chunk.getBiomeGenForWorldCoords(x, z, event.world.getWorldChunkManager()) == AbyssalCraft.DarklandsMountains)
+								if (storage.getBlockByExtId(x, y, z) == Blocks.stone)
+									storage.func_150818_a(x, y, z, AbyssalCraft.Darkstone);
 	}
 
 	@SubscribeEvent
@@ -66,6 +92,55 @@ public class AbyssalCraftEventHooks {
 			event.entityPlayer.addStat(AbyssalCraft.GK2, 1);
 		if(event.item.getEntityItem().getItem() == Item.getItemFromBlock(AbyssalCraft.PSDL))
 			event.entityPlayer.addStat(AbyssalCraft.findPSDL, 1);
+	}
+
+	/**@SubscribeEvent
+	public void darkRealm(LivingUpdateEvent event){
+		if(event.entityLiving instanceof EntityPlayerMP){
+			WorldServer worldServer = (WorldServer)event.entityLiving.worldObj;
+			EntityPlayerMP player = (EntityPlayerMP)event.entityLiving;
+			if(player.dimension == AbyssalCraft.configDimId3 && player.posY <= 0){
+				player.addPotionEffect(new PotionEffect(Potion.resistance.getId(), 60, 255));
+				player.addPotionEffect(new PotionEffect(Potion.blindness.getId(), 20));
+				player.mcServer.getConfigurationManager().transferPlayerToDimension(player, AbyssalCraft.configDimId4, new TeleporterOmothol(worldServer));
+			}
+		}
+		if(event.entityLiving.worldObj.isRemote && event.entityLiving.dimension == AbyssalCraft.configDimId4){
+			Random rand = new Random();
+			event.entityLiving.worldObj.spawnParticle("largesmoke", event.entityLiving.posX + (rand.nextDouble() - 0.5D) * event.entityLiving.width,
+					event.entityLiving.posY + rand.nextDouble() * event.entityLiving.height,
+					event.entityLiving.posZ + (rand.nextDouble() - 0.5D) * event.entityLiving.width, 0,0,0);
+		}
+	}*/
+
+	@SubscribeEvent
+	public void enchantmentEffects(LivingAttackEvent event){
+		if(event.source instanceof EntityDamageSource){
+			Entity entity = ((EntityDamageSource)event.source).getEntity();
+			if(entity instanceof EntityLivingBase){
+				ItemStack item = ((EntityLivingBase)entity).getHeldItem();
+				if(item != null && item.hasTagCompound()){
+					NBTTagList enchTag = item.getEnchantmentTagList();
+					for(int i = 0; i < enchTag.tagCount(); i++)
+						if(enchTag.getCompoundTagAt(i).getInteger("id") == AbyssalCraft.coraliumE.effectId)
+							event.entityLiving.addPotionEffect(new PotionEffect(AbyssalCraft.Cplague.id, 100));
+						else if(enchTag.getCompoundTagAt(i).getInteger("id") == AbyssalCraft.dreadE.effectId)
+							event.entityLiving.addPotionEffect(new PotionEffect(AbyssalCraft.Dplague.id, 100));
+				}
+			}
+		}
+	}
+
+	/**@SubscribeEvent
+	public void ironWall(LivingHurtEvent event){
+		ItemStack item = event.entityLiving.getEquipmentInSlot(3);
+		if(item != null && item.hasTagCompound()){
+			NBTTagList enchTag = item.getEnchantmentTagList();
+			for(int i = 0; i < enchTag.tagCount(); i++){
+				if(enchTag.getCompoundTagAt(i).getInteger("id") == AbyssalCraft.ironWall.effectId)
+					event.entityLiving.setVelocity(0, 0, 0);
+			}
+		}
 	}
 
 	/**@SubscribeEvent

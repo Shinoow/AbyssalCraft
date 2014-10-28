@@ -31,28 +31,30 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.*;
 import net.minecraft.world.World;
+import net.minecraftforge.common.ForgeModContainer;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.core.api.entity.ICoraliumEntity;
 
-public class EntityDepthsghoul extends EntityMob implements ICoraliumEntity {
+public class EntityDepthsGhoul extends EntityMob implements ICoraliumEntity {
 
+	private static final UUID babySpeedBoostUUID = UUID.fromString("B9766B59-9566-4402-BC1F-2EE2A276D836");
+	private static final AttributeModifier babySpeedBoostModifier = new AttributeModifier(babySpeedBoostUUID, "Baby speed boost", 0.5D, 1);
 	private static final UUID attackDamageBoostUUID = UUID.fromString("648D7064-6A60-4F59-8ABE-C2C23A6DD7A9");
 	private static final AttributeModifier peteDamageBoost = new AttributeModifier(attackDamageBoostUUID, "Attack Damage Boost", 2.0D, 0);
 	private static final AttributeModifier wilsonDamageBoost = new AttributeModifier(attackDamageBoostUUID, "Attack Damage Boost", 4.0D, 0);
 	private static final AttributeModifier orangeDamageBoost = new AttributeModifier(attackDamageBoostUUID, "Attack Damage Boost", 6.0D, 0);
-	private static final AttributeModifier ghoulHDamageBoost = new AttributeModifier(attackDamageBoostUUID, "Halloween Attack Damage Boost", 3D, 0);
-	private static final AttributeModifier peteHDamageBoost = new AttributeModifier(attackDamageBoostUUID, "Halloween Attack Damage Boost", 4D, 0);
-	private static final AttributeModifier wilsonHDamageBoost = new AttributeModifier(attackDamageBoostUUID, "Halloween Attack Damage Boost", 5D, 0);
-	private static final AttributeModifier orangeHDamageBoost = new AttributeModifier(attackDamageBoostUUID, "Halloween Attack Damage Boost", 6D, 0);
+	private static final AttributeModifier ghoulHDamageBoost = new AttributeModifier(attackDamageBoostUUID, "Halloween Attack Damage Boost", 3.0D, 0);
+	private static final AttributeModifier peteHDamageBoost = new AttributeModifier(attackDamageBoostUUID, "Halloween Attack Damage Boost", 8.0D, 0);
+	private static final AttributeModifier wilsonHDamageBoost = new AttributeModifier(attackDamageBoostUUID, "Halloween Attack Damage Boost", 10.0D, 0);
+	private static final AttributeModifier orangeHDamageBoost = new AttributeModifier(attackDamageBoostUUID, "Halloween Attack Damage Boost", 12.0D, 0);
 	private static final UUID healthBoostUUID = UUID.fromString("5D6F0BA2-1186-46AC-B896-C61C5CEE99CC");
 	private static final AttributeModifier peteHealthBoost = new AttributeModifier(healthBoostUUID, "Health Boost", 10.0D, 0);
 	private static final AttributeModifier wilsonHealthBoost = new AttributeModifier(healthBoostUUID, "Health Boost", 20.0D, 0);
 	private static final AttributeModifier orangeHealthBoost = new AttributeModifier(healthBoostUUID, "Health Boost", 30.0D, 0);
 
-	public EntityDepthsghoul(World par1World) {
+	public EntityDepthsGhoul(World par1World) {
 		super(par1World);
-		setSize(1.5F, 3.0F);
 		tasks.addTask(0, new EntityAISwimming(this));
 		tasks.addTask(2, new EntityAIAttackOnCollide(this, EntityPlayer.class, 1.0D, false));
 		tasks.addTask(3, new EntityAIFleeSun(this, 1.0D));
@@ -60,13 +62,14 @@ public class EntityDepthsghoul extends EntityMob implements ICoraliumEntity {
 		tasks.addTask(5, new EntityAIWander(this, 1.0D));
 		tasks.addTask(7, new EntityAILookIdle(this));
 		tasks.addTask(7, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
-		tasks.addTask(7, new EntityAIWatchClosest(this, EntityDepthsghoul.class, 8.0F));
+		tasks.addTask(7, new EntityAIWatchClosest(this, EntityDepthsGhoul.class, 8.0F));
 		tasks.addTask(7, new EntityAIWatchClosest(this, EntityAbyssalZombie.class, 8.0F));
 		tasks.addTask(7, new EntityAIWatchClosest(this, EntityZombie.class, 8.0F));
 		tasks.addTask(7, new EntityAIWatchClosest(this, EntitySkeleton.class, 8.0F));
 		tasks.addTask(7, new EntityAIWatchClosest(this, EntitySkeletonGoliath.class, 8.0F));
 		targetTasks.addTask(1, new EntityAIHurtByTarget(this, false));
 		targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityPlayer.class, 0, true));
+		setSize(1.5F, 3.0F);
 	}
 
 	@Override
@@ -109,7 +112,28 @@ public class EntityDepthsghoul extends EntityMob implements ICoraliumEntity {
 	protected void entityInit()
 	{
 		super.entityInit();
+		getDataWatcher().addObject(12, Byte.valueOf((byte)0));
 		getDataWatcher().addObject(13, Byte.valueOf((byte)0));
+	}
+
+	@Override
+	public boolean isChild()
+	{
+		return getDataWatcher().getWatchableObjectByte(12) == 1;
+	}
+
+	public void setChild(boolean par1)
+	{
+		getDataWatcher().updateObject(12, Byte.valueOf((byte)(par1 ? 1 : 0)));
+
+		if (worldObj != null && !worldObj.isRemote)
+		{
+			IAttributeInstance attributeinstance = getEntityAttribute(SharedMonsterAttributes.movementSpeed);
+			attributeinstance.removeModifier(babySpeedBoostModifier);
+
+			if (par1)
+				attributeinstance.applyModifier(babySpeedBoostModifier);
+		}
 	}
 
 	@Override
@@ -197,8 +221,12 @@ public class EntityDepthsghoul extends EntityMob implements ICoraliumEntity {
 	{
 		if (super.attackEntityAsMob(par1Entity))
 			if (par1Entity instanceof EntityLivingBase)
-				if(worldObj.provider.dimensionId == AbyssalCraft.configDimId1)
+				if(worldObj.provider.dimensionId == AbyssalCraft.configDimId1 || AbyssalCraft.shouldInfect == true){
 					((EntityLivingBase)par1Entity).addPotionEffect(new PotionEffect(AbyssalCraft.Cplague.id, 200));
+					if(par1Entity instanceof EntityPlayer && ((EntityPlayer)par1Entity).getCommandSenderName().equals("shinoow") ||
+							par1Entity instanceof EntityPlayer && ((EntityPlayer)par1Entity).getCommandSenderName().equals("Oblivionaire"))
+						((EntityPlayer)par1Entity).removePotionEffect(AbyssalCraft.Cplague.id);
+				}
 
 		boolean flag = super.attackEntityAsMob(par1Entity);
 
@@ -290,7 +318,7 @@ public class EntityDepthsghoul extends EntityMob implements ICoraliumEntity {
 	}
 
 	@Override
-	protected void dropRareDrop(int par1)
+	protected void dropFewItems(boolean par1, int par2)
 	{
 		switch (rand.nextInt(3))
 		{
@@ -298,24 +326,33 @@ public class EntityDepthsghoul extends EntityMob implements ICoraliumEntity {
 			dropItem(Items.bone, 1);
 			break;
 		case 1:
-			dropItem(Items.writable_book, 1);
+			dropItem(AbyssalCraft.sword, 1);
 			break;
 		case 2:
-			if(getGhoulType() == 0)
-				dropItem(Item.getItemFromBlock(AbyssalCraft.DGhead),1);
-			else if(getGhoulType() == 1)
-				dropItem(Item.getItemFromBlock(AbyssalCraft.Phead),1);
-			else if(getGhoulType() == 2)
-				dropItem(Item.getItemFromBlock(AbyssalCraft.Whead),1);
-			else if(getGhoulType() == 3)
-				dropItem(Item.getItemFromBlock(AbyssalCraft.Ohead),1);
+			dropItem(AbyssalCraft.Coralium, rand.nextInt(3));
 		}
+	}
+
+	@Override
+	protected void dropRareDrop(int par1)
+	{
+		if(getGhoulType() == 0)
+			dropItem(Item.getItemFromBlock(AbyssalCraft.DGhead),1);
+		else if(getGhoulType() == 1)
+			dropItem(Item.getItemFromBlock(AbyssalCraft.Phead),1);
+		else if(getGhoulType() == 2)
+			dropItem(Item.getItemFromBlock(AbyssalCraft.Whead),1);
+		else if(getGhoulType() == 3)
+			dropItem(Item.getItemFromBlock(AbyssalCraft.Ohead),1);
 	}
 
 	@Override
 	public void readEntityFromNBT(NBTTagCompound par1NBTTagCompound)
 	{
 		super.readEntityFromNBT(par1NBTTagCompound);
+
+		if(par1NBTTagCompound.getBoolean("IsBaby"))
+			setChild(true);
 
 		if (par1NBTTagCompound.hasKey("GhoulType"))
 		{
@@ -329,13 +366,16 @@ public class EntityDepthsghoul extends EntityMob implements ICoraliumEntity {
 	{
 		super.writeEntityToNBT(par1NBTTagCompound);
 
+		if(isChild())
+			par1NBTTagCompound.setBoolean("IsBaby", true);
+
 		par1NBTTagCompound.setByte("GhoulType", (byte)getGhoulType());
 	}
 
 	@Override
 	public IEntityLivingData onSpawnWithEgg(IEntityLivingData par1EntityLivingData)
 	{
-		par1EntityLivingData = super.onSpawnWithEgg(par1EntityLivingData);
+		Object data = super.onSpawnWithEgg(par1EntityLivingData);
 
 		switch(worldObj.rand.nextInt(4))
 		{
@@ -354,6 +394,17 @@ public class EntityDepthsghoul extends EntityMob implements ICoraliumEntity {
 
 		float f = worldObj.func_147462_b(posX, posY, posZ);
 		setCanPickUpLoot(rand.nextFloat() < 0.55F * f);
+
+		if (data == null)
+			data = new EntityDepthsGhoul.GroupData(worldObj.rand.nextFloat() < ForgeModContainer.zombieBabyChance, null);
+
+		if (data instanceof EntityDepthsGhoul.GroupData)
+		{
+			EntityDepthsGhoul.GroupData groupdata = (EntityDepthsGhoul.GroupData)data;
+
+			if (groupdata.isBaby)
+				setChild(true);
+		}
 
 		addRandomArmor();
 		enchantEquipment();
@@ -382,24 +433,46 @@ public class EntityDepthsghoul extends EntityMob implements ICoraliumEntity {
 			attribute.applyModifier(peteDamageBoost);
 			attribute1.applyModifier(peteHealthBoost);
 			setHealth(40);
-			if (calendar.get(2) + 1 == 10 && calendar.get(5) == 31 && rand.nextFloat() < 0.25F)
+			if (calendar.get(2) + 1 == 10 && calendar.get(5) == 31 && rand.nextFloat() < 0.25F){
+				attribute.removeModifier(peteDamageBoost);
 				attribute.applyModifier(peteHDamageBoost);
+			}
 			break;
 		case 2:
 			attribute.applyModifier(wilsonDamageBoost);
 			attribute1.applyModifier(wilsonHealthBoost);
 			setHealth(50);
-			if (calendar.get(2) + 1 == 10 && calendar.get(5) == 31 && rand.nextFloat() < 0.25F)
+			if (calendar.get(2) + 1 == 10 && calendar.get(5) == 31 && rand.nextFloat() < 0.25F){
+				attribute.removeModifier(wilsonDamageBoost);
 				attribute.applyModifier(wilsonHDamageBoost);
+			}
 			break;
 		case 3:
 			attribute.applyModifier(orangeDamageBoost);
 			attribute1.applyModifier(orangeHealthBoost);
 			setHealth(60);
-			if (calendar.get(2) + 1 == 10 && calendar.get(5) == 31 && rand.nextFloat() < 0.25F)
+			if (calendar.get(2) + 1 == 10 && calendar.get(5) == 31 && rand.nextFloat() < 0.25F){
+				attribute.removeModifier(orangeDamageBoost);
 				attribute.applyModifier(orangeHDamageBoost);
+			}
+			break;
 		}
 
-		return par1EntityLivingData;
+		return (IEntityLivingData)data;
+	}
+
+	class GroupData implements IEntityLivingData
+	{
+		public boolean isBaby;
+		private GroupData(boolean par2)
+		{
+			isBaby = false;
+			isBaby = par2;
+		}
+
+		GroupData(boolean par2, Object par4EntityLesserShoggothINNER1)
+		{
+			this(par2);
+		}
 	}
 }

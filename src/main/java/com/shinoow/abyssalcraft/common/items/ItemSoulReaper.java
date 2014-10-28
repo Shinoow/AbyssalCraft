@@ -32,8 +32,6 @@ import net.minecraft.world.World;
 public class ItemSoulReaper extends Item {
 
 	private float weaponDamage = 30.0F;
-	/** Amount of souls */
-	private int souls = 0;
 
 	public ItemSoulReaper(String par1Str){
 		super();
@@ -59,30 +57,23 @@ public class ItemSoulReaper extends Item {
 		return 0x11940;
 	}
 
-	/** Gets the current amount of souls */
-	public int getSouls(){
-		NBTTagCompound tag = new ItemStack(this).stackTagCompound;
-		if(!tag.hasKey("souls"))
-			tag.setInteger("souls", 0);
-		return tag.getInteger("souls");
-	}
-
 	/** Increases the amount of souls by 1 */
-	public int increaseSouls(){
-		NBTTagCompound tag = new ItemStack(this).stackTagCompound;
-		if(tag != null)
-			tag.setInteger("souls", 0);
-		tag.setInteger("souls", getSouls() + 1);
-		return tag.getInteger("souls");
+	public int increaseSouls(ItemStack par1ItemStack){
+		if(!par1ItemStack.hasTagCompound())
+			par1ItemStack.setTagCompound(new NBTTagCompound());
+		par1ItemStack.stackTagCompound.setInteger("souls", getSouls(par1ItemStack) + 1);
+		return getSouls(par1ItemStack);
 	}
 
 	/** Sets the amount of souls */
-	public int setSouls(int par1){
-		NBTTagCompound tag = new ItemStack(this).stackTagCompound;
-		if(tag.hasNoTags())
-			tag.setInteger("souls", 0);
-		tag.setInteger("souls", par1);
-		return tag.getInteger("souls");
+	public int setSouls(int par1, ItemStack par2ItemStack){
+		par2ItemStack.stackTagCompound.setInteger("souls", par1);
+		return getSouls(par2ItemStack);
+	}
+
+	public int getSouls(ItemStack par1ItemStack)
+	{
+		return par1ItemStack.hasTagCompound() && par1ItemStack.stackTagCompound.hasKey("souls") ? (int)par1ItemStack.stackTagCompound.getInteger("souls") : 0;
 	}
 
 	@Override
@@ -90,10 +81,8 @@ public class ItemSoulReaper extends Item {
 	{
 		par1ItemStack.damageItem(1, par3EntityLivingBase);
 		if(par2EntityLivingBase.getHealth() == 0){
-			souls++;
-			//			increaseSouls();
-			//TODO: This should be controlled through NBT
-			switch(souls){
+			increaseSouls(par1ItemStack);
+			switch(getSouls(par1ItemStack)){
 			case 32:
 				par3EntityLivingBase.addPotionEffect(new PotionEffect(Potion.damageBoost.getId(), 600));
 				par3EntityLivingBase.heal(20.0F);
@@ -121,7 +110,7 @@ public class ItemSoulReaper extends Item {
 				par3EntityLivingBase.heal(20.0F);
 				break;
 			case 1024:
-				souls = 0;
+				setSouls(0, par1ItemStack);
 				par3EntityLivingBase.addPotionEffect(new PotionEffect(Potion.damageBoost.getId(), 2400, 2));
 				par3EntityLivingBase.addPotionEffect(new PotionEffect(Potion.moveSpeed.getId(), 2400, 2));
 				par3EntityLivingBase.addPotionEffect(new PotionEffect(Potion.resistance.getId(), 1200));
@@ -139,10 +128,9 @@ public class ItemSoulReaper extends Item {
 	@Override
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public void addInformation(ItemStack is, EntityPlayer player, List l, boolean B){
-		//		if (is.stackTagCompound != null){
-		//			int souls = is.stackTagCompound.getInteger("souls");
+		super.addInformation(is, player, l, B);
+		int souls = getSouls(is);
 		l.add(StatCollector.translateToLocal("tooltip.soulreaper") + ": " + souls + "/1024");
-		//		}
 	}
 
 	@Override
@@ -151,6 +139,12 @@ public class ItemSoulReaper extends Item {
 		par3EntityPlayer.setItemInUse(par1ItemStack, getMaxItemUseDuration(par1ItemStack));
 
 		return par1ItemStack;
+	}
+
+	@Override
+	public boolean getIsRepairable(ItemStack par1ItemStack, ItemStack par2ItemStack)
+	{
+		return AbyssalCraft.shadowgem == par2ItemStack.getItem() ? true : super.getIsRepairable(par1ItemStack, par2ItemStack);
 	}
 
 	@Override

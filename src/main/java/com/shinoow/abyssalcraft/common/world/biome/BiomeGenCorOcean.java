@@ -26,6 +26,9 @@ import net.minecraft.world.gen.feature.WorldGenMinable;
 import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.common.entity.*;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+
 public class BiomeGenCorOcean extends BiomeGenBase {
 
 	@SuppressWarnings("unchecked")
@@ -36,7 +39,7 @@ public class BiomeGenCorOcean extends BiomeGenBase {
 		waterColorMultiplier = 0x24FF83;
 		spawnableCreatureList.clear();
 		spawnableMonsterList.clear();
-		spawnableMonsterList.add(new SpawnListEntry(EntityDepthsghoul.class, 5, 1, 5));
+		spawnableMonsterList.add(new SpawnListEntry(EntityDepthsGhoul.class, 5, 1, 5));
 		spawnableMonsterList.add(new SpawnListEntry(EntityAbyssalZombie.class, 5, 1, 5));
 
 	}
@@ -82,5 +85,19 @@ public class BiomeGenCorOcean extends BiomeGenBase {
 	public void genTerrainBlocks(World par1World, Random par2Random, Block[] par3BlockArray, byte[] par4ByteArray, int par5, int par6, double par7)
 	{
 		super.genTerrainBlocks(par1World, par2Random, par3BlockArray, par4ByteArray, par5, par6, par7);
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public int getBiomeGrassColor(int par1, int par2, int par3)
+	{
+		return 0x6EF5DE;
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public int getBiomeFoliageColor(int par1, int par2, int par3)
+	{
+		return 0x6EF5DE;
 	}
 }

@@ -19,14 +19,12 @@ import static net.minecraftforge.common.util.ForgeDirection.DOWN;
 
 import java.util.Random;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockContainer;
+import net.minecraft.block.*;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.Container;
-import net.minecraft.inventory.IInventory;
+import net.minecraft.inventory.*;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
@@ -40,15 +38,11 @@ public class BlockCrate extends BlockContainer
 {
 	private final Random random = new Random();
 
-	public BlockCrate()
-	{
+	public BlockCrate(){
 		super(Material.wood);
 		setCreativeTab(AbyssalCraft.tabDecoration);
 	}
 
-	/**
-	 * Called when the block is placed in the world.
-	 */
 	@Override
 	public void onBlockPlacedBy(World par1World, int par2, int par3, int par4, EntityLivingBase par5EntityLiving, ItemStack par6ItemStack)
 	{
@@ -100,10 +94,6 @@ public class BlockCrate extends BlockContainer
 			((TileEntityCrate)par1World.getTileEntity(par2, par3, par4)).func_94043_a(par6ItemStack.getDisplayName());
 	}
 
-	/**
-	 * Lets the block know when one of its neighbor changes. Doesn't know which neighbor changed (coordinates passed are
-	 * their own) Args: x, y, z, neighbor blockID
-	 */
 	@Override
 	public void onNeighborBlockChange(World par1World, int par2, int par3, int par4, Block par5)
 	{
@@ -114,9 +104,6 @@ public class BlockCrate extends BlockContainer
 			TileEntityCrate.updateContainingBlockInfo();
 	}
 
-	/**
-	 * ejects contained items into the world, and notifies neighbours of an update, as appropriate
-	 */
 	@Override
 	public void breakBlock(World par1World, int par2, int par3, int par4, Block par5, int par6)
 	{
@@ -160,9 +147,6 @@ public class BlockCrate extends BlockContainer
 		super.breakBlock(par1World, par2, par3, par4, par5, par6);
 	}
 
-	/**
-	 * Called upon block activation (right click on the block.)
-	 */
 	@Override
 	public boolean onBlockActivated(World par1World, int par2, int par3, int par4, EntityPlayer par5EntityPlayer, int par6, float par7, float par8, float par9)
 	{
@@ -179,10 +163,6 @@ public class BlockCrate extends BlockContainer
 		}
 	}
 
-	/**
-	 * Gets the inventory of the chest at the specified coords, accounting for blocks or ocelots on top of the chest,
-	 * and double chests.
-	 */
 	public IInventory func_149951_m(World par1World, int par2, int par3, int par4)
 	{
 		Object object = par1World.getTileEntity(par2, par3, par4);
@@ -195,20 +175,12 @@ public class BlockCrate extends BlockContainer
 			return (IInventory)object;
 	}
 
-	/**
-	 * If this returns true, then comparators facing away from this block will use the value from
-	 * getComparatorInputOverride instead of the actual redstone signal strength.
-	 */
 	@Override
 	public boolean hasComparatorInputOverride()
 	{
 		return true;
 	}
 
-	/**
-	 * If hasComparatorInputOverride returns true, the return value from this is used instead of the redstone signal
-	 * strength when this block inputs to a comparator.
-	 */
 	@Override
 	public int getComparatorInputOverride(World par1World, int par2, int par3, int par4, int par5)
 	{

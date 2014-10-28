@@ -759,7 +759,7 @@ public class ModelChagaroth extends ModelBase {
 		righthead.addChild(righteye1);
 		righteye2 = new ModelRenderer(this, 0, 24);
 		righteye2.addBox(0F, 0F, 0F, 3, 3, 1);
-		righteye2.setRotationPoint(-4.5F, -6F, -5.5F);
+		righteye2.setRotationPoint(-3.5F, -6F, -5.5F);
 		righteye2.setTextureSize(128, 64);
 		righteye2.mirror = true;
 		setRotation(righteye2, 0F, 0F, 0F);

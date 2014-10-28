@@ -37,13 +37,12 @@ import com.shinoow.abyssalcraft.AbyssalCraft;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class BlockDLTLeaves extends BlockLeavesBase implements IShearable
-{
-	public static final String[] LEAF_TYPES = new String[] {"DLT"};
+public class BlockDLTLeaves extends BlockLeavesBase implements IShearable {
+
 	int[] adjacentTreeBlocks;
 	@SideOnly(Side.CLIENT)
 	private int iconType;
-	public static final String[][] field_94396_b = new String[][] {{"DLT_L"}, {"DLT_L_opaque"}};
+	public static final String[][] textureNames = new String[][] {{"DLT_L"}, {"DLT_L_opaque"}};
 	private IIcon[][] iconArray = new IIcon[2][];
 
 	public BlockDLTLeaves()
@@ -53,7 +52,8 @@ public class BlockDLTLeaves extends BlockLeavesBase implements IShearable
 		setCreativeTab(AbyssalCraft.tabDecoration);
 	}
 
-	public void func_149749_a(World par1World, int par2, int par3, int par4, Block par5, int par6)
+	@Override
+	public void breakBlock(World par1World, int par2, int par3, int par4, Block par5, int par6)
 	{
 		byte var7 = 1;
 		int var8 = var7 + 1;
@@ -70,7 +70,8 @@ public class BlockDLTLeaves extends BlockLeavesBase implements IShearable
 					}
 	}
 
-	public void func_149674_a(World par1World, int par2, int par3, int par4, Random par5Random)
+	@Override
+	public void updateTick(World par1World, int par2, int par3, int par4, Random par5Random)
 	{
 		if (!par1World.isRemote)
 		{
@@ -145,8 +146,9 @@ public class BlockDLTLeaves extends BlockLeavesBase implements IShearable
 		}
 	}
 
+	@Override
 	@SideOnly(Side.CLIENT)
-	public void func_149734_b(World par1World, int par2, int par3, int par4, Random par5Random)
+	public void randomDisplayTick(World par1World, int par2, int par3, int par4, Random par5Random)
 	{
 		if (par1World.canLightningStrikeAt(par2, par3 + 1, par4) && !World.doesBlockHaveSolidTopSurface(par1World, par2, par3 - 1, par4) && par5Random.nextInt(15) == 1)
 		{
@@ -163,7 +165,8 @@ public class BlockDLTLeaves extends BlockLeavesBase implements IShearable
 		par1World.setBlock(par2, par3, par4, Blocks.air);
 	}
 
-	public int func_149745_a(Random par1Random)
+	@Override
+	public int quantityDropped(Random par1Random)
 	{
 		return par1Random.nextInt(20) == 0 ? 1 : 0;
 	}
@@ -221,22 +224,14 @@ public class BlockDLTLeaves extends BlockLeavesBase implements IShearable
 
 	@Override
 	@SideOnly(Side.CLIENT)
-
-	/**
-	 * From the specified side and block metadata retrieves the blocks texture. Args: side, metadata
-	 */
 	public IIcon getIcon(int par1, int par2)
 	{
 		setGraphicsLevel(Minecraft.getMinecraft().gameSettings.fancyGraphics);
 
-		return (par2 & 3) == 1 ? iconArray[iconType][1] : (par2 & 3) == 3 ? iconArray[iconType][3] : (par2 & 3) == 2 ? iconArray[iconType][2] : iconArray[iconType][0];
+		return (par2 & 3) == 1 ? iconArray[iconType][1] : iconArray[iconType][0];
 	}
 
 	@SideOnly(Side.CLIENT)
-
-	/**
-	 * Pass true to draw this block using fancy graphics, or false for fast graphics.
-	 */
 	public void setGraphicsLevel(boolean par1)
 	{
 		field_150121_P = par1;
@@ -265,19 +260,14 @@ public class BlockDLTLeaves extends BlockLeavesBase implements IShearable
 
 	@Override
 	@SideOnly(Side.CLIENT)
-
-	/**
-	 * When this method is called, your block should register all the icons it needs with the given IconRegister. This
-	 * is the only chance you get to register icons.
-	 */
 	public void registerBlockIcons(IIconRegister par1IconRegister)
 	{
-		for (int i = 0; i < field_94396_b.length; ++i)
+		for (int i = 0; i < textureNames.length; ++i)
 		{
-			iconArray[i] = new IIcon[field_94396_b[i].length];
+			iconArray[i] = new IIcon[textureNames[i].length];
 
-			for (int j = 0; j < field_94396_b[i].length; ++j)
-				iconArray[i][j] = par1IconRegister.registerIcon(AbyssalCraft.modid + ":" + field_94396_b[i][j]);
+			for (int j = 0; j < textureNames[i].length; ++j)
+				iconArray[i][j] = par1IconRegister.registerIcon(AbyssalCraft.modid + ":" + textureNames[i][j]);
 		}
 	}
 }

@@ -33,7 +33,7 @@ import com.shinoow.abyssalcraft.AbyssalCraft;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class BlockDreadgrass extends Block
+public class BlockDreadGrass extends Block
 {
 	@SideOnly(Side.CLIENT)
 	private IIcon iconGrassTop;
@@ -42,7 +42,7 @@ public class BlockDreadgrass extends Block
 	@SideOnly(Side.CLIENT)
 	private static IIcon iconGrassSideOverlay;
 
-	public BlockDreadgrass() {
+	public BlockDreadGrass() {
 		super(Material.grass);
 		setTickRandomly(true);
 		setCreativeTab(AbyssalCraft.tabBlock);
@@ -110,7 +110,7 @@ public class BlockDreadgrass extends Block
 		blockIcon = par1IconRegister.registerIcon(AbyssalCraft.modid + ":" + "DrGsides");
 		iconGrassTop = par1IconRegister.registerIcon(AbyssalCraft.modid + ":" + "DrGtop");
 		iconSnowOverlay = par1IconRegister.registerIcon("grass_side_snowed");
-		BlockDreadgrass.iconGrassSideOverlay = par1IconRegister.registerIcon(AbyssalCraft.modid + ":" + "DrGsides");
+		BlockDreadGrass.iconGrassSideOverlay = par1IconRegister.registerIcon(AbyssalCraft.modid + ":" + "DrGsides");
 	}
 
 	@SideOnly(Side.CLIENT)

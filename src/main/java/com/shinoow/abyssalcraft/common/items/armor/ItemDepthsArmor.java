@@ -34,6 +34,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 public class ItemDepthsArmor extends ItemArmor {
 	public ItemDepthsArmor(ArmorMaterial par2EnumArmorMaterial, int par3, int par4){
 		super(par2EnumArmorMaterial, par3, par4);
+		setCreativeTab(AbyssalCraft.tabCombat);
 	}
 
 	@Override

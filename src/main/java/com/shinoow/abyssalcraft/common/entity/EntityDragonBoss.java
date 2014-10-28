@@ -27,7 +27,7 @@ import net.minecraft.util.*;
 import net.minecraft.world.*;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
-import com.shinoow.abyssalcraft.common.lib.ParticleEffects;
+import com.shinoow.abyssalcraft.client.lib.ParticleEffects;
 import com.shinoow.abyssalcraft.common.util.SpecialTextUtil;
 import com.shinoow.abyssalcraft.core.api.entity.ICoraliumEntity;
 

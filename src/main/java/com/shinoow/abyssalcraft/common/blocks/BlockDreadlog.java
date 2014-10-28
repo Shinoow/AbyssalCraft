@@ -32,7 +32,7 @@ import com.shinoow.abyssalcraft.AbyssalCraft;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class BlockDreadlog extends BlockRotatedPillar
+public class BlockDreadLog extends BlockRotatedPillar
 {
 	@SideOnly(Side.CLIENT)
 	private IIcon iconLogTop;
@@ -41,7 +41,7 @@ public class BlockDreadlog extends BlockRotatedPillar
 	@SideOnly(Side.CLIENT)
 	private static IIcon iconLogSideOverlay;
 
-	public BlockDreadlog() {
+	public BlockDreadLog() {
 		super(Material.wood);
 		setCreativeTab(AbyssalCraft.tabBlock);
 	}
@@ -142,7 +142,7 @@ public class BlockDreadlog extends BlockRotatedPillar
 		blockIcon = par1IconRegister.registerIcon(AbyssalCraft.modid + ":" + "DrTside");
 		iconLogTop = par1IconRegister.registerIcon(AbyssalCraft.modid + ":" + "DrTtop");
 		iconLogSide = par1IconRegister.registerIcon(AbyssalCraft.modid + ":" + "DrTside");
-		BlockDreadlog.iconLogSideOverlay = par1IconRegister.registerIcon(AbyssalCraft.modid + ":" + "DrTside");
+		BlockDreadLog.iconLogSideOverlay = par1IconRegister.registerIcon(AbyssalCraft.modid + ":" + "DrTside");
 	}
 
 	@SideOnly(Side.CLIENT)

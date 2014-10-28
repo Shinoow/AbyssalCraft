@@ -15,6 +15,7 @@
  */
 package com.shinoow.abyssalcraft.common.entity;
 
+import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.*;
 import net.minecraft.entity.monster.EntityMob;
@@ -85,6 +86,12 @@ public class EntityShadowCreature extends EntityMob implements IAntiEntity, ICor
 	{
 		return AbyssalCraft.shadowfragment;
 
+	}
+
+	@Override
+	public EnumCreatureAttribute getCreatureAttribute()
+	{
+		return Enum.valueOf(EnumCreatureAttribute.class, "SHADOW");
 	}
 
 	@Override
