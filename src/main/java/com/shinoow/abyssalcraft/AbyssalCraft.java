@@ -74,7 +74,7 @@ import cpw.mods.fml.common.registry.*;
 @Mod(modid = AbyssalCraft.modid, name = AbyssalCraft.name, version = AbyssalCraft.version, dependencies = "required-after:Forge@[forgeversion,);required-after:accore", useMetadata = false, guiFactory = "com.shinoow.abyssalcraft.client.config.ACGuiFactory")
 public class AbyssalCraft {
 
-	public static final String version = "1.7.8";
+	public static final String version = "1.7.8.1";
 	public static final String modid = "abyssalcraft";
 	public static final String name = "AbyssalCraft";
 
@@ -613,10 +613,10 @@ public class AbyssalCraft {
 		crystalHydrogen.setPotionEffect("-0-1+2+3&4-4+13");
 		crystalNitrogen.setPotionEffect("-0+1-2+3&4-4+13");
 
-		coraliumE = new EnchantmentWeaponInfusion(100, 2, "coralium");
-		dreadE = new EnchantmentWeaponInfusion(101, 2, "dread");
-		lightPierce = new EnchantmentLightPierce(102);
-		//		ironWall = new EnchantmentIronWall(103, 2);
+		coraliumE = new EnchantmentWeaponInfusion(150, 2, "coralium");
+		dreadE = new EnchantmentWeaponInfusion(151, 2, "dread");
+		lightPierce = new EnchantmentLightPierce(152);
+		//		ironWall = new EnchantmentIronWall(153, 2);
 
 		//Block Register
 		GameRegistry.registerBlock(Darkstone, "darkstone");
@@ -1396,7 +1396,7 @@ public class AbyssalCraft {
 				Thread.sleep(10000L);
 
 				if(isUpdateAvailable()) {
-					if(!hasPinged && version.lastIndexOf(".") == 5){
+					if(!hasPinged && version.lastIndexOf("a") == 8 || !hasPinged && version.lastIndexOf("b") == 8){
 						updateProxy.announce("[\u00A79AbyssalCraft\u00A7r] Using a development version, not checking for newer versions. (\u00A7b"+ version + "\u00A7r)");
 						hasPinged = true;
 					}

@@ -24,8 +24,8 @@ import net.minecraft.enchantment.Enchantment;
  */
 public class ACEnchantments {
 
-	public static Enchantment coralium_infusion = Enchantment.enchantmentsList[100];
-	public static Enchantment dread_infusion = Enchantment.enchantmentsList[101];
-	public static Enchantment light_pierce = Enchantment.enchantmentsList[102];
-	//	public static Enchantment iron_wall = Enchantment.enchantmentsList[103];
+	public static Enchantment coralium_infusion = Enchantment.enchantmentsList[150];
+	public static Enchantment dread_infusion = Enchantment.enchantmentsList[151];
+	public static Enchantment light_pierce = Enchantment.enchantmentsList[152];
+	//	public static Enchantment iron_wall = Enchantment.enchantmentsList[153];
 }

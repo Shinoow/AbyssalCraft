@@ -71,8 +71,6 @@ public class BlockCLiquid extends BlockFluidClassic {
 	public boolean canDisplace(IBlockAccess world, int x, int y, int z) {
 		if(world.getBlock(x, y, z).getMaterial().isLiquid() && world.getBlock(x, y, z) != this && world.getBlock(x, y, z) != AbyssalCraft.anticwater)
 			return true;
-		if(world.getBiomeGenForCoords(x, z) instanceof BiomeGenOcean && world.getBlock(x, y, z) == Blocks.water)
-			return false;
 		if(world.getBlock(x, y, z) == Blocks.lava)
 			return true;
 		else if(world.getBlock(x, y, z) == Blocks.stone || world.getBlock(x, y, z) == Blocks.netherrack || world.getBlock(x, y, z) == Blocks.end_stone || world.getBlock(x, y, z) == AbyssalCraft.Darkstone || world.getBlock(x, y, z) == AbyssalCraft.dreadstone || world.getBlock(x, y, z) == AbyssalCraft.abydreadstone)

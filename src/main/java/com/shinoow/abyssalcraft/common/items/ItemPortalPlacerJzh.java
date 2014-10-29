@@ -20,7 +20,6 @@ import java.util.List;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.*;
 import net.minecraft.util.*;
-
 import com.shinoow.abyssalcraft.AbyssalCraft;
 
 public class ItemPortalPlacerJzh extends Item {

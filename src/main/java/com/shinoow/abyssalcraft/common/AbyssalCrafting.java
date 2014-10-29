@@ -125,9 +125,9 @@ public class AbyssalCrafting {
 		GameRegistry.addRecipe(new ItemStack(AbyssalCraft.abydreadbrickstairs, 4), new Object[] {"#  ", "## ", "###", '#', AbyssalCraft.abydreadbrick});
 		GameRegistry.addRecipe(new ItemStack(AbyssalCraft.cstonebrickstairs, 4), new Object[] {"#  ", "## ", "###", '#', AbyssalCraft.cstonebrick});
 		GameRegistry.addRecipe(new ItemStack(AbyssalCraft.ethaxiumblock, 1), new Object[] {"###", "###", "###", '#', AbyssalCraft.ethaxiumIngot});
-		GameRegistry.addRecipe(new ItemStack(AbyssalCraft.ethaxiumstairs, 4), new Object[] {"#  ", "## ", "###", '#', AbyssalCraft.ethaxiumbrick});
-		GameRegistry.addRecipe(new ItemStack(AbyssalCraft.ethaxiumslab1, 6), new Object[] {"AAA", 'A', AbyssalCraft.ethaxiumbrick});
-		GameRegistry.addRecipe(new ItemStack(AbyssalCraft.ethaxiumfence, 6), new Object[] {"###", "###", '#', AbyssalCraft.ethaxiumbrick});
+		GameRegistry.addRecipe(new ItemStack(AbyssalCraft.ethaxiumstairs, 4), new Object[] {"#  ", "## ", "###", '#', new ItemStack(AbyssalCraft.ethaxiumbrick, 0)});
+		GameRegistry.addRecipe(new ItemStack(AbyssalCraft.ethaxiumslab1, 6), new Object[] {"AAA", 'A', new ItemStack(AbyssalCraft.ethaxiumbrick, 0)});
+		GameRegistry.addRecipe(new ItemStack(AbyssalCraft.ethaxiumfence, 6), new Object[] {"###", "###", '#', new ItemStack(AbyssalCraft.ethaxiumbrick, 0)});
 	}
 
 	private static void addBlockSmelting(){

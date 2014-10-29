@@ -358,7 +358,7 @@ public class EntityDragonMinion extends EntityMob implements IEntityMultiPart, I
 
 				healingcircle = null;
 			}
-			else if (ticksExisted % 10 == 0 && getHealth() < getMaxHealth())
+			else if (ticksExisted % 10 == 0 && getHealth() <= getMaxHealth())
 				setHealth(getHealth() - 1.0F);
 
 		if (rand.nextInt(10) == 0)
