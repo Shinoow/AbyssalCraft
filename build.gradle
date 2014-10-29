@@ -29,11 +29,10 @@ propFile.withReader {
 version = props.ac_version
 group= "com.shinoow.abyssalcraft" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = "AbyssalCraft"
-modid = "abyssalcraft"
 
 minecraft {
     version = "1.7.2-10.12.2.1147"
-    assetDir = "eclipse/assets"
+    runDir = "eclipse/assets"
 	
 		replaceIn "AbyssalCraft.java"
             replace "forgeversion", props.forge_version
@@ -61,7 +60,6 @@ processResources
 
         // replace version and mcversion
         expand ([
-			'modid':project.modid,
 			'version':project.version,
 			'acversion':project.props.ac_version,
 			'coreversion':project.props.core_version,
