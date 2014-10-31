@@ -79,14 +79,14 @@ achievement.summonChagaroth.desc=进入查加罗特的巢穴
 achievement.killChagaroth=恐惧野兽的陨落
 achievement.killChagaroth.desc=你杀死了查加罗特... 干得漂亮.
 
-achievement.enterOmothol=
-achievement.enterOmothol.desc=
+achievement.enterOmothol=极度欢迎来到你的末日。
+achievement.enterOmothol.desc=你已经到达了扎哈尔的王国奥穆索
 
-achievement.darkRealm=
-achievement.darkRealm.desc=
+achievement.darkRealm=陷阱之底
+achievement.darkRealm.desc=你刚刚摔倒了，不是吗？
 
-achievement.killJzahar=
-achievement.killJzahar.desc=
+achievement.killJzahar=浮动利率？并非如此。
+achievement.killJzahar.desc=你打败了守门者，可他并没死。
 
 #Container Inventories
 container.abyssalcraft.crate=板条箱
@@ -98,16 +98,16 @@ container.abyssalcraft.crystallizer.nei=结晶化
 container.abyssalcraft.transmutator.nei=嬗变化
 
 #Configuration
-ac_dimensions=
-ac_dimensions.tooltip=
-ac_biomes=
-ac_biomes.tooltip=
-ac_biomegen=
-ac_biomegen.tooltip=
-ac_biomespawn=
-ac_biomespawn.tooltip=
-ac_general=
-ac_general.tooltip=
+ac_dimensions=维度
+ac_dimensions.tooltip=维度ID设置
+ac_biomes=生物群落
+ac_biomes.tooltip=生物群落ID设置
+ac_biomegen=生物群落生成
+ac_biomegen.tooltip=生物群落生成设置
+ac_biomespawn=生物群落生成物
+ac_biomespawn.tooltip=生物群落生成物设置
+ac_general=总体
+ac_general.tooltip=总体设置
 
 #Damagesources
 death.attack.coralium=%1$s由于珊瑚侵染而死亡
@@ -265,18 +265,18 @@ tile.ACO.name=深渊铜矿石
 tile.APCorO.name=珠光四射的珊瑚矿
 tile.ALCorO.name=液化珊瑚矿
 tile.solidLava.name=固态岩浆
-tile.Eth.name=
-tile.EB.0.name=
-tile.EB.1.name=
-tile.EBP.name=
-tile.EBs.name=
-tile.EBs1.name=
-tile.EBs2.name=
-tile.EBf.name=
-tile.OS.name=
-tile.BOE.name=
-tile.OG.name=
-tile.Ofire.name=
+tile.Eth.name=伊桑斯锭
+tile.EB.0.name=伊桑斯砖块
+tile.EB.1.name=錾制伊桑斯砖石
+tile.EBP.name=伊桑斯柱子
+tile.EBs.name=伊桑斯砖石楼梯
+tile.EBs1.name=伊桑斯砖石半阶
+tile.EBs2.name=伊桑斯砖石双半阶
+tile.EBf.name=伊桑斯砖石栅栏
+tile.OS.name=奥穆索石头
+tile.BOE.name=伊桑斯锭块
+tile.OG.name=奥穆索之门
+tile.Ofire.name=奥穆索之火
 
 #Items
 item.DEV_BLADE.name=恶魔之刃
@@ -437,26 +437,26 @@ item.antiFlesh.name=反物质腐肉
 item.antiBone.name=反物质骨头
 item.antiSpider_eye.name=反物质蜘蛛眼
 item.soulReaper.name=萨多夫的灵魂收割刀
-item.EB.name=
-item.EI.name=
-item.lifeCrystal.name=
-item.EP.name=
-item.EA.name=
-item.ES.name=
-item.ESW.name=
-item.EH.name=
-item.AEB.name=
-item.AEH.name=
-item.AEC.name=
-item.AEP.name=
-item.EthU.name=
-item.coin.copper.name=
-item.coin.iron.name=
-item.coin.gold.name=
-item.coin.tin.name=
-item.coin.abyssalnite.name=
-item.coin.coralium.name=
-item.coin.dreadium.name=
+item.EB.name=伊桑斯砖石
+item.EI.name=伊桑斯锭
+item.lifeCrystal.name=生命水晶
+item.EP.name=伊桑斯镐
+item.EA.name=伊桑斯斧
+item.ES.name=伊桑斯锹
+item.ESW.name=伊桑斯剑
+item.EH.name=伊桑斯锄
+item.AEB.name=伊桑斯靴子
+item.AEH.name=伊桑斯头盔
+item.AEC.name=伊桑斯胸甲
+item.AEP.name=伊桑斯护腿
+item.EthU.name=伊桑斯升级套件
+item.coin.copper.name=铜币
+item.coin.iron.name=铁币
+item.coin.gold.name=金币
+item.coin.tin.name=锡币
+item.coin.abyssalnite.name=深渊币
+item.coin.coralium.name=珊瑚币
+item.coin.dreadium.name=恐惧币
 
 #Entities
 entity.abyssalcraft.depthsghoul.name=深渊食尸鬼
@@ -492,12 +492,12 @@ entity.abyssalcraft.antiplayer.name=反物质玩家
 entity.abyssalcraft.antiskeleton.name=反物质骷髅
 entity.abyssalcraft.antispider.name=反物质蜘蛛
 entity.abyssalcraft.antizombie.name=反物质僵尸
-entity.abyssalcraft.lessershoggoth.name=
-entity.abyssalcraft.shadowtitan.name=
-entity.abyssalcraft.omotholwarden.name=
-entity.abyssalcraft.jzaharminion.name=
-entity.abyssalcraft.omotholghoul.name=
-entity.abyssalcraft.remnant.name=
+entity.abyssalcraft.lessershoggoth.name=莱塞修格斯
+entity.abyssalcraft.shadowtitan.name=阴影泰坦
+entity.abyssalcraft.omotholwarden.name=奥穆索守卫
+entity.abyssalcraft.jzaharminion.name=守门者奴仆
+entity.abyssalcraft.omotholghoul.name=奥穆索食尸鬼
+entity.abyssalcraft.remnant.name=雷姆南特
 
 #Potions
 potion.Cplague=珊瑚侵染
@@ -508,9 +508,9 @@ potion.Antimatter=反物质
 potion.Antimatter.postfix=湮灭药水
 
 #Enchantments
-enchantment.coralium=
-enchantment.dread=
-enchantment.ironWall=
-enchantment.damage.shadow=
+enchantment.coralium=珊瑚
+enchantment.dread=恐惧
+enchantment.ironWall=铁墙
+enchantment.damage.shadow=易于穿透
 
 #Localization done, Shin out.
