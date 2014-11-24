@@ -92,10 +92,12 @@ achievement.killJzahar.desc=你打败了守门者，可他并没死。
 container.abyssalcraft.crate=板条箱
 container.abyssalcraft.crystallizer=结晶器
 container.abyssalcraft.transmutator=嬗变器
+container.abyssalcraft.engraver=Engraver
 
 #NEI Integration
 container.abyssalcraft.crystallizer.nei=结晶化
 container.abyssalcraft.transmutator.nei=嬗变化
+container.abyssalcraft.engraver.nei=Coin Engraving
 
 #Configuration
 ac_dimensions=维度
@@ -108,6 +110,10 @@ ac_biomespawn=生物群落生成物
 ac_biomespawn.tooltip=生物群落生成物设置
 ac_general=总体
 ac_general.tooltip=总体设置
+ac_enchantment=Enchantments
+ac_enchantment.tooltip=Enchantment ID configuration
+ac_render=Rendering
+ac_render.tooltip=Rendering configuration
 
 #Damagesources
 death.attack.coralium=%1$s由于珊瑚侵染而死亡
@@ -161,6 +167,7 @@ itemgroup.acctools=深渊国度战斗工具
 itemgroup.acfood=深渊国度食物
 itemgroup.acdblocks=深渊国度装饰方块
 itemgroup.accrystals=深渊国度结晶器水晶
+itemgroup.accoins=Abyssalcraft Coins
 
 #Blocks
 tile.DS.name=黑暗石
@@ -277,6 +284,7 @@ tile.OS.name=奥穆索石头
 tile.BOE.name=伊桑斯锭块
 tile.OG.name=奥穆索之门
 tile.Ofire.name=奥穆索之火
+tile.engraver.name=Engraver
 
 #Items
 item.DEV_BLADE.name=恶魔之刃
@@ -457,6 +465,39 @@ item.coin.tin.name=锡币
 item.coin.abyssalnite.name=深渊币
 item.coin.coralium.name=珊瑚币
 item.coin.dreadium.name=恐惧币
+item.cthulhucoin.copper.name=Cthulhu Engraved Copper Coin
+item.cthulhucoin.iron.name=Cthulhu Engraved Iron Coin
+item.cthulhucoin.gold.name=Cthulhu Engraved Gold Coin
+item.cthulhucoin.tin.name=Cthulhu Engraved Tin Coin
+item.cthulhucoin.abyssalnite.name=Cthulhu Engraved Abyssalnite Coin
+item.cthulhucoin.coralium.name=Cthulhu Engraved Coralium Coin
+item.cthulhucoin.dreadium.name=Cthulhu Engraved Dreadium Coin
+item.eldercoin.copper.name=Elder Engraved Copper Coin
+item.eldercoin.iron.name=Elder Engraved Iron Coin
+item.eldercoin.gold.name=Elder Engraved Gold Coin
+item.eldercoin.tin.name=Elder Engraved Tin Coin
+item.eldercoin.abyssalnite.name=Elder Engraved Abyssalnite Coin
+item.eldercoin.coralium.name=Elder Engraved Coralium Coin
+item.eldercoin.dreadium.name=Elder Engraved Dreadium Coin
+item.jzaharcoin.copper.name=J'zahar Engraved Copper Coin
+item.jzaharcoin.iron.name=J'zahar Engraved Iron Coin
+item.jzaharcoin.gold.name=J'zahar Engraved Gold Coin
+item.jzaharcoin.tin.name=J'zahar Engraved Tin Coin
+item.jzaharcoin.abyssalnite.name=J'zahar Engraved Abyssalnite Coin
+item.jzaharcoin.coralium.name=J'zahar Engraved Coralium Coin
+item.jzaharcoin.dreadium.name=J'zahar Engraved Dreadium Coin
+item.engraving.blank.name=Blank Coin Engraving
+item.engraving.cthulhu.name=Cthulhu Coin Engraving
+item.engraving.elder.name=Elder Coin Engraving
+item.engraving.jzahar.name=J'zahar Coin Engraving
+item.shoggothFlesh.overworld.name=Shoggoth Flesh
+item.shoggothFlesh.abyssalwasteland.name=Abyssal Shoggoth Flesh
+item.shoggothFlesh.dreadlands.name=Dreaded Shoggoth Flesh
+item.shoggothFlesh.omothol.name=Omothol Shoggoth Flesh
+item.shoggothFlesh.darkrealm.name=Shadow Shoggoth Flesh
+item.eldirtchscale.name=Eldritch Scale
+item.omotholflesh.name=Omothol Ghoul Flesh
+item.shadowplate.name=Shadow Titan Armor Plate
 
 #Entities
 entity.abyssalcraft.depthsghoul.name=深渊食尸鬼
@@ -493,6 +534,10 @@ entity.abyssalcraft.antiskeleton.name=反物质骷髅
 entity.abyssalcraft.antispider.name=反物质蜘蛛
 entity.abyssalcraft.antizombie.name=反物质僵尸
 entity.abyssalcraft.lessershoggoth.name=莱塞修格斯
+entity.abyssalcraft.lessershoggoth.abyssal.name=Lesser Abyssal Shoggoth
+entity.abyssalcraft.lessershoggoth.dreaded.name=Lesser Dreaded Shoggoth
+entity.abyssalcraft.lessershoggoth.omothol.name=Lesser Omothol Shoggoth
+entity.abyssalcraft.lessershoggoth.dark.name=Lesser Shadow Shoggoth
 entity.abyssalcraft.shadowtitan.name=阴影泰坦
 entity.abyssalcraft.omotholwarden.name=奥穆索守卫
 entity.abyssalcraft.jzaharminion.name=守门者奴仆
