@@ -1,38 +1,47 @@
-/**AbyssalCraft
- *Copyright 2012-2014 Shinoow
+/**
+ * AbyssalCraft
+ * Copyright 2012-2014 Shinoow
  *
- *Licensed under the Apache License, Version 2.0 (the "License");
- *you may not use this file except in compliance with the License.
- *You may obtain a copy of the License at
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
  *
  *  http://www.apache.org/licenses/LICENSE-2.0
  *
- *Unless required by applicable law or agreed to in writing, software
- *distributed under the License is distributed on an "AS IS" BASIS,
- *WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *See the License for the specific language governing permissions and
- *limitations under the License.
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
 package com.shinoow.abyssalcraft.common.handlers;
 
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLivingBase;
+import java.util.Random;
+
+import net.minecraft.entity.*;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
+import net.minecraft.item.*;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
-import net.minecraft.potion.PotionEffect;
+import net.minecraft.potion.*;
 import net.minecraft.util.EntityDamageSource;
+import net.minecraft.world.WorldServer;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.chunk.storage.ExtendedBlockStorage;
-import net.minecraftforge.event.entity.living.LivingAttackEvent;
+import net.minecraftforge.event.entity.living.*;
+import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import net.minecraftforge.event.entity.player.*;
 import net.minecraftforge.event.terraingen.PopulateChunkEvent;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
+import com.shinoow.abyssalcraft.api.item.ItemUpgradeKit;
 import com.shinoow.abyssalcraft.common.blocks.*;
+import com.shinoow.abyssalcraft.common.world.TeleporterOmothol;
+
 import cpw.mods.fml.common.eventhandler.Event.Result;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import cpw.mods.fml.common.gameevent.PlayerEvent;
 
 public class AbyssalCraftEventHooks {
 
@@ -93,25 +102,6 @@ public class AbyssalCraftEventHooks {
 			event.entityPlayer.addStat(AbyssalCraft.findPSDL, 1);
 	}
 
-	/**@SubscribeEvent
-	public void darkRealm(LivingUpdateEvent event){
-		if(event.entityLiving instanceof EntityPlayerMP){
-			WorldServer worldServer = (WorldServer)event.entityLiving.worldObj;
-			EntityPlayerMP player = (EntityPlayerMP)event.entityLiving;
-			if(player.dimension == AbyssalCraft.configDimId3 && player.posY <= 0){
-				player.addPotionEffect(new PotionEffect(Potion.resistance.getId(), 60, 255));
-				player.addPotionEffect(new PotionEffect(Potion.blindness.getId(), 20));
-				player.mcServer.getConfigurationManager().transferPlayerToDimension(player, AbyssalCraft.configDimId4, new TeleporterOmothol(worldServer));
-			}
-		}
-		if(event.entityLiving.worldObj.isRemote && event.entityLiving.dimension == AbyssalCraft.configDimId4){
-			Random rand = new Random();
-			event.entityLiving.worldObj.spawnParticle("largesmoke", event.entityLiving.posX + (rand.nextDouble() - 0.5D) * event.entityLiving.width,
-					event.entityLiving.posY + rand.nextDouble() * event.entityLiving.height,
-					event.entityLiving.posZ + (rand.nextDouble() - 0.5D) * event.entityLiving.width, 0,0,0);
-		}
-	}*/
-
 	@SubscribeEvent
 	public void enchantmentEffects(LivingAttackEvent event){
 		if(event.source instanceof EntityDamageSource){
@@ -130,47 +120,66 @@ public class AbyssalCraftEventHooks {
 		}
 	}
 
-	/**@SubscribeEvent
+	@SubscribeEvent
 	public void ironWall(LivingHurtEvent event){
 		ItemStack item = event.entityLiving.getEquipmentInSlot(3);
 		if(item != null && item.hasTagCompound()){
 			NBTTagList enchTag = item.getEnchantmentTagList();
-			for(int i = 0; i < enchTag.tagCount(); i++){
+			for(int i = 0; i < enchTag.tagCount(); i++)
 				if(enchTag.getCompoundTagAt(i).getInteger("id") == AbyssalCraft.ironWall.effectId)
-					event.entityLiving.setVelocity(0, 0, 0);
-			}
+					event.entityLiving.setInWeb();
 		}
 	}
 
-	/**@SubscribeEvent
-	public void renderDepthsHelmetOverlay(RenderGameOverlayEvent event) {
-		final ResourceLocation coraliumBlur = new ResourceLocation("abyssalcraft:textures/misc/coraliumblur.png");
-
-		ItemStack helmet = Minecraft.getMinecraft().thePlayer.inventory.armorItemInSlot(3);
-		if(Minecraft.getMinecraft().gameSettings.thirdPersonView == 0 && helmet != null && helmet.getItem() == AbyssalCraft.Depthshelmet) {
-			GL11.glPushAttrib(GL11.GL_ALL_ATTRIB_BITS);
-
-			Tessellator t = Tessellator.instance;
-
-			ScaledResolution scale = new ScaledResolution(Minecraft.getMinecraft().gameSettings, Minecraft.getMinecraft().displayWidth, Minecraft.getMinecraft().displayHeight);
-			int width = scale.getScaledWidth();
-			int height = scale.getScaledHeight();
-
-			GL11.glDisable(GL11.GL_DEPTH_TEST);
-			GL11.glDepthMask(false);
-			GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
-			GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-			GL11.glDisable(GL11.GL_ALPHA_TEST);
-			Minecraft.getMinecraft().renderEngine.bindTexture(coraliumBlur);
-
-			t.startDrawingQuads();
-			t.addVertexWithUV(0.0D, (double)height, 90.0D, 0.0D, 1.0D);
-			t.addVertexWithUV((double)width, (double)height, 90.0D, 1.0D, 1.0D);
-			t.addVertexWithUV((double)width, 0.0D, 90.0D, 1.0D, 0.0D);
-			t.addVertexWithUV(0.0D, 0.0D, 90.0D, 0.0D, 0.0D);
-			t.draw();
-
-			GL11.glPopAttrib();
+	@SubscribeEvent
+	public void darkRealm(LivingUpdateEvent event){
+		if(event.entityLiving instanceof EntityPlayerMP){
+			WorldServer worldServer = (WorldServer)event.entityLiving.worldObj;
+			EntityPlayerMP player = (EntityPlayerMP)event.entityLiving;
+			if(player.dimension == AbyssalCraft.configDimId3 && player.posY <= 0){
+				player.addPotionEffect(new PotionEffect(Potion.resistance.getId(), 60, 255));
+				player.addPotionEffect(new PotionEffect(Potion.blindness.getId(), 20));
+				player.mcServer.getConfigurationManager().transferPlayerToDimension(player, AbyssalCraft.configDimId4, new TeleporterOmothol(worldServer));
+				player.addStat(AbyssalCraft.enterDarkRealm, 1);
+			}
 		}
-	}*/
+		if(event.entityLiving.worldObj.isRemote && event.entityLiving.dimension == AbyssalCraft.configDimId4){
+			Random rand = new Random();
+			event.entityLiving.worldObj.spawnParticle("largesmoke", event.entityLiving.posX + (rand.nextDouble() - 0.5D) * event.entityLiving.width,
+					event.entityLiving.posY + rand.nextDouble() * event.entityLiving.height,
+					event.entityLiving.posZ + (rand.nextDouble() - 0.5D) * event.entityLiving.width, 0,0,0);
+		}
+	}
+
+	@SubscribeEvent
+	public void onCraftingEvent(PlayerEvent.ItemCraftedEvent event)
+	{
+		for(int h=0; h < event.craftMatrix.getSizeInventory(); h++)
+			if(event.craftMatrix.getStackInSlot(h) != null)
+				for(int i=0; i < event.craftMatrix.getSizeInventory(); i++)
+					if(event.craftMatrix.getStackInSlot(i) != null)
+					{
+						ItemStack k = event.craftMatrix.getStackInSlot(h);
+						ItemStack j = event.craftMatrix.getStackInSlot(i);
+
+						if(k.getItem() != null && j.getItem() != null && k.getItem() instanceof ItemUpgradeKit)
+						{
+							NBTTagCompound nbttest = new NBTTagCompound();
+							NBTTagList tag = new NBTTagList();
+
+							if(j.isItemEnchanted())
+							{
+								NBTTagList test = j.stackTagCompound.getTagList("ench", 10);
+								tag = test;
+							}
+							ItemStack l = event.crafting;
+							if(j.isItemEnchanted())
+							{
+								l.stackTagCompound = nbttest;
+								l.stackTagCompound.setTag("ench", tag);
+							}
+							event.craftMatrix.setInventorySlotContents(i, l);
+						}
+					}
+	}
 }

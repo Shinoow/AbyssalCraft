@@ -1,9 +1,26 @@
+/**
+ * AbyssalCraft
+ * Copyright 2012-2014 Shinoow
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.shinoow.abyssalcraft.common.entity;
 
 import java.util.UUID;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
-import com.shinoow.abyssalcraft.core.api.entity.*;
+import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
+import com.shinoow.abyssalcraft.api.entity.*;
 
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
@@ -26,9 +43,11 @@ import net.minecraft.entity.monster.EntitySkeleton;
 import net.minecraft.entity.monster.EntityZombie;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
+import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeModContainer;
 
@@ -83,6 +102,30 @@ public class EntityLesserShoggoth extends EntityMob implements ICoraliumEntity, 
 	@Override
 	public boolean canBreatheUnderwater() {
 		return true;
+	}
+
+	@Override
+	public String getCommandSenderName()
+	{
+		String entityname = StatCollector.translateToLocal("entity.abyssalcraft.lessershoggoth.name");
+		switch (getShoggothType())
+		{
+		case 0:
+			entityname = StatCollector.translateToLocal("entity.abyssalcraft.lessershoggoth.name");
+			break;
+		case 1:
+			entityname = StatCollector.translateToLocal("entity.abyssalcraft.lessershoggoth.abyssal.name");
+			break;
+		case 2:
+			entityname = StatCollector.translateToLocal("entity.abyssalcraft.lessershoggoth.dreaded.name");
+			break;
+		case 3:
+			entityname = StatCollector.translateToLocal("entity.abyssalcraft.lessershoggoth.omothol.name");
+			break;
+		case 4:
+			entityname = StatCollector.translateToLocal("entity.abyssalcraft.lessershoggoth.dark.name");
+		}
+		return entityname;
 	}
 
 	@Override
@@ -166,13 +209,13 @@ public class EntityLesserShoggoth extends EntityMob implements ICoraliumEntity, 
 	@Override
 	protected Item getDropItem()
 	{
-		return AbyssalCraft.Corflesh;
+		return new ItemStack(AbyssalCraft.shoggothFlesh, 1, getShoggothType()).getItem();
 	}
 
 	@Override
 	public EnumCreatureAttribute getCreatureAttribute()
 	{
-		return EnumCreatureAttribute.UNDEAD;
+		return getShoggothType() == 4 ? AbyssalCraftAPI.SHADOW : EnumCreatureAttribute.UNDEAD;
 	}
 
 	@Override

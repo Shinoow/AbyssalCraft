@@ -1,17 +1,18 @@
-/**AbyssalCraft
- *Copyright 2012-2014 Shinoow
+/**
+ * AbyssalCraft
+ * Copyright 2012-2014 Shinoow
  *
- *Licensed under the Apache License, Version 2.0 (the "License");
- *you may not use this file except in compliance with the License.
- *You may obtain a copy of the License at
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
  *
  *  http://www.apache.org/licenses/LICENSE-2.0
  *
- *Unless required by applicable law or agreed to in writing, software
- *distributed under the License is distributed on an "AS IS" BASIS,
- *WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *See the License for the specific language governing permissions and
- *limitations under the License.
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
 package com.shinoow.abyssalcraft.common.world.biome;
 
@@ -25,6 +26,7 @@ import net.minecraft.world.gen.feature.*;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.common.entity.*;
+import com.shinoow.abyssalcraft.common.entity.anti.*;
 import com.shinoow.abyssalcraft.common.world.gen.WorldGenAntimatterLake;
 
 import cpw.mods.fml.relauncher.Side;
@@ -35,8 +37,6 @@ public class BiomeGenCorSwamp extends BiomeGenBase {
 	@SuppressWarnings("unchecked")
 	public BiomeGenCorSwamp(int par1) {
 		super(par1);
-		spawnableCreatureList.clear();
-		spawnableMonsterList.clear();
 		rootHeight = -0.2F;
 		heightVariation = 0.1F;
 		topBlock=Blocks.grass;
@@ -52,8 +52,19 @@ public class BiomeGenCorSwamp extends BiomeGenBase {
 		theBiomeDecorator.sandPerChunk = 0;
 		theBiomeDecorator.grassPerChunk = 5;
 		waterColorMultiplier = 0x24FF83;
-		spawnableMonsterList.add(new SpawnListEntry(EntityDepthsGhoul.class, 5, 1, 5));
-		spawnableMonsterList.add(new SpawnListEntry(EntityAbyssalZombie.class, 5, 1, 5));
+		spawnableMonsterList.add(new SpawnListEntry(EntityDepthsGhoul.class, 60, 1, 5));
+		spawnableMonsterList.add(new SpawnListEntry(EntityAbyssalZombie.class, 60, 1, 5));
+		spawnableCreatureList.add(new SpawnListEntry(EntityAntiPig.class, 5, 1, 2));
+		spawnableCaveCreatureList.add(new SpawnListEntry(EntityAntiBat.class, 10, 1, 2));
+		spawnableCreatureList.add(new SpawnListEntry(EntityAntiChicken.class, 5, 1, 2));
+		spawnableCreatureList.add(new SpawnListEntry(EntityAntiCow.class, 5, 1, 2));
+		spawnableMonsterList.add(new SpawnListEntry(EntityAntiAbyssalZombie.class, 5, 1, 2));
+		spawnableMonsterList.add(new SpawnListEntry(EntityAntiCreeper.class, 5, 1, 2));
+		spawnableMonsterList.add(new SpawnListEntry(EntityAntiGhoul.class, 5, 1, 2));
+		spawnableMonsterList.add(new SpawnListEntry(EntityAntiPlayer.class, 5, 1, 2));
+		spawnableMonsterList.add(new SpawnListEntry(EntityAntiSkeleton.class, 5, 1, 2));
+		spawnableMonsterList.add(new SpawnListEntry(EntityAntiSpider.class, 5, 1, 2));
+		spawnableMonsterList.add(new SpawnListEntry(EntityAntiZombie.class, 5, 1, 2));
 	}
 
 	@Override
@@ -61,18 +72,15 @@ public class BiomeGenCorSwamp extends BiomeGenBase {
 	{
 		super.decorate(par1World, par2Random, par3, par4);
 		int var5 = 3 + par2Random.nextInt(6);
-		int var6;
-		int var7;
-		int var8;
 
-		for (var6 = 0; var6 < var5; ++var6)
+		for (int var6 = 0; var6 < var5; ++var6)
 		{
-			var7 = par3 + par2Random.nextInt(16);
-			var8 = par2Random.nextInt(28) + 4;
+			int var7 = par3 + par2Random.nextInt(16);
+			int var8 = par2Random.nextInt(28) + 4;
 			int var9 = par4 + par2Random.nextInt(16);
 			Block var10 = par1World.getBlock(var7, var8, var9);
 
-			if (var10 == Blocks.stone || var10 == Blocks.iron_ore || var10 == Blocks.coal_ore)
+			if (var10.isReplaceableOreGen(par1World, var7, var8, var9, Blocks.stone) || var10 == Blocks.iron_ore || var10 == Blocks.coal_ore)
 				par1World.setBlock(var7, var8, var9, AbyssalCraft.Coraliumore);
 		}
 		for(int rarity = 0; rarity < 3; rarity++)

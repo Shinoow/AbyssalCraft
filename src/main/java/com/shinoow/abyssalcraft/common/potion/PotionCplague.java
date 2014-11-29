@@ -1,24 +1,25 @@
-/**AbyssalCraft
- *Copyright 2012-2014 Shinoow
+/**
+ * AbyssalCraft
+ * Copyright 2012-2014 Shinoow
  *
- *Licensed under the Apache License, Version 2.0 (the "License");
- *you may not use this file except in compliance with the License.
- *You may obtain a copy of the License at
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
  *
  *  http://www.apache.org/licenses/LICENSE-2.0
  *
- *Unless required by applicable law or agreed to in writing, software
- *distributed under the License is distributed on an "AS IS" BASIS,
- *WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *See the License for the specific language governing permissions and
- *limitations under the License.
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
 package com.shinoow.abyssalcraft.common.potion;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
+import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
+import com.shinoow.abyssalcraft.api.entity.ICoraliumEntity;
 import com.shinoow.abyssalcraft.common.entity.*;
-import com.shinoow.abyssalcraft.core.api.damagesource.ACDamageSource;
-import com.shinoow.abyssalcraft.core.api.entity.ICoraliumEntity;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.*;
@@ -43,7 +44,7 @@ public class PotionCplague extends Potion{
 
 	@Override
 	public void performEffect(EntityLivingBase par1EntityLivingBase, int par2){
-		par1EntityLivingBase.attackEntityFrom(ACDamageSource.coralium, 2);
+		par1EntityLivingBase.attackEntityFrom(AbyssalCraftAPI.coralium, 2);
 		if(par1EntityLivingBase instanceof ICoraliumEntity){
 			par1EntityLivingBase.removePotionEffect(AbyssalCraft.Cplague.id);
 			par1EntityLivingBase.heal(2);

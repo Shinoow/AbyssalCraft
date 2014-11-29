@@ -1,17 +1,18 @@
-/**AbyssalCraft
- *Copyright 2012-2014 Shinoow
+/**
+ * AbyssalCraft
+ * Copyright 2012-2014 Shinoow
  *
- *Licensed under the Apache License, Version 2.0 (the "License");
- *you may not use this file except in compliance with the License.
- *You may obtain a copy of the License at
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
  *
  *  http://www.apache.org/licenses/LICENSE-2.0
  *
- *Unless required by applicable law or agreed to in writing, software
- *distributed under the License is distributed on an "AS IS" BASIS,
- *WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *See the License for the specific language governing permissions and
- *limitations under the License.
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
 package com.shinoow.abyssalcraft.client.config;
 
@@ -40,7 +41,10 @@ public class ACConfigGUI extends GuiConfig {
 		list.add(new DummyCategoryElement<Object>(StatCollector.translateToLocal("ac_biomes"), "ac_biomes", BiomeEntry.class));
 		list.add(new DummyCategoryElement<Object>(StatCollector.translateToLocal("ac_biomegen"), "ac_biomegen", BiomeGenerationEntry.class));
 		list.add(new DummyCategoryElement<Object>(StatCollector.translateToLocal("ac_biomespawn"), "ac_biomespawn", BiomeSpawnEntry.class));
+		list.add(new DummyCategoryElement<Object>(StatCollector.translateToLocal("ac_biomeweight"), "ac_biomeweight", BiomeWeightEntry.class));
 		list.add(new DummyCategoryElement<Object>(StatCollector.translateToLocal("ac_general"), "ac_general", GeneralEntry.class));
+		list.add(new DummyCategoryElement<Object>(StatCollector.translateToLocal("ac_enchantment"), "ac_enchantment", EnchantmentEntry.class));
+		list.add(new DummyCategoryElement<Object>(StatCollector.translateToLocal("ac_render"), "ac_render", RenderEntry.class));
 		return list;
 	}
 
@@ -89,6 +93,17 @@ public class ACConfigGUI extends GuiConfig {
 			return new GuiConfig(owningScreen, new ConfigElement<Object>(AbyssalCraft.cfg.getCategory("biome_spawning")).getChildElements(), "abyssalcraft", "biome_spawning", true, true, StatCollector.translateToLocal("ac_biomespawn"));
 		}
 	}
+	public static class BiomeWeightEntry extends CategoryEntry{
+
+		public BiomeWeightEntry(GuiConfig owningScreen, GuiConfigEntries owningEntryList, IConfigElement<?> configElement) {
+			super(owningScreen, owningEntryList, configElement);
+		}
+
+		@Override
+		protected GuiScreen buildChildScreen(){
+			return new GuiConfig(owningScreen, new ConfigElement<Object>(AbyssalCraft.cfg.getCategory("biome_weight")).getChildElements(), "abyssalcraft", "biome_weight", true, true, StatCollector.translateToLocal("ac_biomeweight"));
+		}
+	}
 	public static class GeneralEntry extends CategoryEntry{
 
 		public GeneralEntry(GuiConfig owningScreen, GuiConfigEntries owningEntryList, IConfigElement<?> configElement) {
@@ -98,6 +113,30 @@ public class ACConfigGUI extends GuiConfig {
 		@Override
 		protected GuiScreen buildChildScreen(){
 			return new GuiConfig(owningScreen, new ConfigElement<Object>(AbyssalCraft.cfg.getCategory("general")).getChildElements(), "abyssalcraft", "general", false, false, StatCollector.translateToLocal("ac_general"));
+
+		}
+	}
+	public static class EnchantmentEntry extends CategoryEntry{
+
+		public EnchantmentEntry(GuiConfig owningScreen, GuiConfigEntries owningEntryList, IConfigElement<?> configElement) {
+			super(owningScreen, owningEntryList, configElement);
+		}
+
+		@Override
+		protected GuiScreen buildChildScreen(){
+			return new GuiConfig(owningScreen, new ConfigElement<Object>(AbyssalCraft.cfg.getCategory("enchantments")).getChildElements(), "abyssalcraft", "enchantments", true, true, StatCollector.translateToLocal("ac_enchantment"));
+
+		}
+	}
+	public static class RenderEntry extends CategoryEntry{
+
+		public RenderEntry(GuiConfig owningScreen, GuiConfigEntries owningEntryList, IConfigElement<?> configElement) {
+			super(owningScreen, owningEntryList, configElement);
+		}
+
+		@Override
+		protected GuiScreen buildChildScreen(){
+			return new GuiConfig(owningScreen, new ConfigElement<Object>(AbyssalCraft.cfg.getCategory("render")).getChildElements(), "abyssalcraft", "render", true, true, StatCollector.translateToLocal("ac_render"));
 
 		}
 	}

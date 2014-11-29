@@ -1,3 +1,19 @@
+/**
+ * AbyssalCraft
+ * Copyright 2012-2014 Shinoow
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.shinoow.abyssalcraft.common.blocks.tile;
 
 import java.util.HashMap;
@@ -14,11 +30,11 @@ import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
+import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
+import com.shinoow.abyssalcraft.api.AbyssalCraftAPI.FuelType;
+import com.shinoow.abyssalcraft.api.recipe.CrystallizerRecipes;
 import com.shinoow.abyssalcraft.common.blocks.BlockCrystallizer;
 import com.shinoow.abyssalcraft.common.items.ItemCrystal;
-import com.shinoow.abyssalcraft.core.util.CoreRegistry;
-import com.shinoow.abyssalcraft.core.util.CoreRegistry.FuelType;
-import com.shinoow.abyssalcraft.core.util.recipes.CrystallizerRecipes;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -286,22 +302,21 @@ public class TileEntityCrystallizer extends TileEntity implements ISidedInventor
 	 */
 	private boolean canCrystallize()
 	{
-		if (crystallizerItemStacks[0] == null)
+		if (crystallizerItemStacks[0] == null || CrystallizerRecipes.crystallization().getCrystallizationResult(crystallizerItemStacks[0]) == null)
 			return false;
 		else
 		{
-			if(CrystallizerRecipes.crystallization().getCrystallizationResult(crystallizerItemStacks[0]) == null) return false;
 			ItemStack[] itemstack = CrystallizerRecipes.crystallization().getCrystallizationResult(crystallizerItemStacks[0]);
 
 			if(itemstack[0] == null && itemstack[1] == null) return false;
 			if(crystallizerItemStacks[2] == null && crystallizerItemStacks[3] == null) return true;
-			if(!crystallizerItemStacks[2].isItemEqual(itemstack[0]) && crystallizerItemStacks[3] != null && itemstack[1] == null) return false;
-			if(!crystallizerItemStacks[2].isItemEqual(itemstack[0]) && crystallizerItemStacks[3] == null && itemstack[1] != null) return false;
 			if(crystallizerItemStacks[2] == null && crystallizerItemStacks[3] != null && itemstack[1] == null ||
-					crystallizerItemStacks[2].isItemEqual(itemstack[0]) && crystallizerItemStacks[3] != null && itemstack[1] == null) return true;
-			if(crystallizerItemStacks[2].isItemEqual(itemstack[0]) && crystallizerItemStacks[3] == null ||
-					crystallizerItemStacks[2] == null && crystallizerItemStacks[3].isItemEqual(itemstack[1]) && itemstack[1] != null) return true;
-			if(!crystallizerItemStacks[2].isItemEqual(itemstack[0]) && !crystallizerItemStacks[3].isItemEqual(itemstack[1])) return false;
+					crystallizerItemStacks[2] == null && crystallizerItemStacks[3].isItemEqual(itemstack[1]) && itemstack[1] != null ||
+					crystallizerItemStacks[2].isItemEqual(itemstack[0]) && crystallizerItemStacks[3] != null && itemstack[1] == null ||
+					crystallizerItemStacks[2].isItemEqual(itemstack[0]) && crystallizerItemStacks[3] == null) return true;
+			if(!crystallizerItemStacks[2].isItemEqual(itemstack[0]) && crystallizerItemStacks[3] != null && itemstack[1] == null ||
+					!crystallizerItemStacks[2].isItemEqual(itemstack[0]) && crystallizerItemStacks[3] == null && itemstack[1] != null ||
+					!crystallizerItemStacks[2].isItemEqual(itemstack[0]) && !crystallizerItemStacks[3].isItemEqual(itemstack[1])) return false;
 			int result = crystallizerItemStacks[2].stackSize + itemstack[0].stackSize;
 			int result2 = crystallizerItemStacks[3].stackSize + itemstack[1].stackSize;
 			return result <= getInventoryStackLimit() && result2 <= getInventoryStackLimit() && result <= crystallizerItemStacks[2].getMaxStackSize() && result2 <= crystallizerItemStacks[3].getMaxStackSize();
@@ -358,7 +373,7 @@ public class TileEntityCrystallizer extends TileEntity implements ISidedInventor
 			if (item == Items.blaze_powder) return 1200;
 			if (item == Items.blaze_rod) return 2400;
 			if (item == AbyssalCraft.methane) return 10000;
-			return CoreRegistry.getFuelValue(par1ItemStack, FuelType.CRYSTALLIZER);
+			return AbyssalCraftAPI.getFuelValue(par1ItemStack, FuelType.CRYSTALLIZER);
 		}
 	}
 

@@ -1,3 +1,19 @@
+/**
+ * AbyssalCraft
+ * Copyright 2012-2014 Shinoow
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.shinoow.abyssalcraft.common.blocks.tile;
 
 import net.minecraft.entity.player.EntityPlayer;
@@ -10,11 +26,11 @@ import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
+import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
+import com.shinoow.abyssalcraft.api.AbyssalCraftAPI.FuelType;
+import com.shinoow.abyssalcraft.api.recipe.TransmutatorRecipes;
 import com.shinoow.abyssalcraft.common.blocks.BlockTransmutator;
 import com.shinoow.abyssalcraft.common.items.ItemCrystal;
-import com.shinoow.abyssalcraft.core.util.CoreRegistry;
-import com.shinoow.abyssalcraft.core.util.CoreRegistry.FuelType;
-import com.shinoow.abyssalcraft.core.util.recipes.TransmutatorRecipes;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -28,7 +44,7 @@ public class TileEntityTransmutator extends TileEntity implements ISidedInventor
 	 * The ItemStacks that hold the items currently being used in the transmutator
 	 */
 	private ItemStack[] transmutatorItemStacks = new ItemStack[3];
-	/** The number of ticks that the furnace will keep burning */
+	/** The number of ticks that the transmutator will keep burning */
 	public int transmutatorBurnTime;
 	/**
 	 * The number of ticks that a fresh copy of the currently-burning item would keep the transmutator burning for
@@ -217,7 +233,7 @@ public class TileEntityTransmutator extends TileEntity implements ISidedInventor
 	}
 
 	/**
-	 * Furnace isTransmutating
+	 * Transmuator is transmutating
 	 */
 	public boolean isTransmutating()
 	{
@@ -278,7 +294,7 @@ public class TileEntityTransmutator extends TileEntity implements ISidedInventor
 	}
 
 	/**
-	 * Returns true if the furnace can smelt an item, i.e. has a source item, destination stack isn't full, etc.
+	 * Returns true if the transmutator can process an item, i.e. has a source item, destination stack isn't full, etc.
 	 */
 	private boolean canProcess()
 	{
@@ -296,7 +312,7 @@ public class TileEntityTransmutator extends TileEntity implements ISidedInventor
 	}
 
 	/**
-	 * Turn one item from the furnace source stack into the appropriate smelted item in the furnace result stack
+	 * Turn one item from the transmutator source stack into the appropriate processed item in the transmutator result stack
 	 */
 	public void processItem()
 	{
@@ -349,14 +365,14 @@ public class TileEntityTransmutator extends TileEntity implements ISidedInventor
 			if (item == Items.blaze_powder) return 1200;
 			if (item == Items.blaze_rod) return 2400;
 			if (item == AbyssalCraft.methane) return 10000;
-			return CoreRegistry.getFuelValue(par1ItemStack, FuelType.TRANSMUTATOR);
+			return AbyssalCraftAPI.getFuelValue(par1ItemStack, FuelType.TRANSMUTATOR);
 		}
 	}
 
 	public static boolean isItemFuel(ItemStack par1ItemStack)
 	{
 		/**
-		 * Returns the number of ticks that the supplied fuel item will keep the furnace burning, or 0 if the item isn't
+		 * Returns the number of ticks that the supplied fuel item will keep the transmutator burning, or 0 if the item isn't
 		 * fuel
 		 */
 		return getItemBurnTime(par1ItemStack) > 0;

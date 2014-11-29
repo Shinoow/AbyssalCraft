@@ -1,17 +1,18 @@
-/**AbyssalCraft
- *Copyright 2012-2014 Shinoow
+/**
+ * AbyssalCraft
+ * Copyright 2012-2014 Shinoow
  *
- *Licensed under the Apache License, Version 2.0 (the "License");
- *you may not use this file except in compliance with the License.
- *You may obtain a copy of the License at
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
  *
  *  http://www.apache.org/licenses/LICENSE-2.0
  *
- *Unless required by applicable law or agreed to in writing, software
- *distributed under the License is distributed on an "AS IS" BASIS,
- *WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *See the License for the specific language governing permissions and
- *limitations under the License.
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
 package com.shinoow.abyssalcraft.common.inventory;
 
@@ -22,8 +23,8 @@ import net.minecraft.inventory.ICrafting;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 
+import com.shinoow.abyssalcraft.api.recipe.TransmutatorRecipes;
 import com.shinoow.abyssalcraft.common.blocks.tile.TileEntityTransmutator;
-import com.shinoow.abyssalcraft.core.util.recipes.TransmutatorRecipes;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -31,7 +32,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 public class ContainerTransmutator extends Container {
 
 	private TileEntityTransmutator tileTransmutator;
-	private int lastCookTime;
+	private int lastProcessTime;
 	private int lastBurnTime;
 	private int lastItemBurnTime;
 
@@ -69,7 +70,7 @@ public class ContainerTransmutator extends Container {
 		{
 			ICrafting icrafting = (ICrafting)crafters.get(i);
 
-			if (lastCookTime != tileTransmutator.transmutatorProcessTime)
+			if (lastProcessTime != tileTransmutator.transmutatorProcessTime)
 				icrafting.sendProgressBarUpdate(this, 0, tileTransmutator.transmutatorProcessTime);
 
 			if (lastBurnTime != tileTransmutator.transmutatorBurnTime)
@@ -79,7 +80,7 @@ public class ContainerTransmutator extends Container {
 				icrafting.sendProgressBarUpdate(this, 2, tileTransmutator.currentItemBurnTime);
 		}
 
-		lastCookTime = tileTransmutator.transmutatorProcessTime;
+		lastProcessTime = tileTransmutator.transmutatorProcessTime;
 		lastBurnTime = tileTransmutator.transmutatorBurnTime;
 		lastItemBurnTime = tileTransmutator.currentItemBurnTime;
 	}

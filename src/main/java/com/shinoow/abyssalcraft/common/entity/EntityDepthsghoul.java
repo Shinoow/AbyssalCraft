@@ -1,17 +1,18 @@
-/**AbyssalCraft
- *Copyright 2012-2014 Shinoow
+/**
+ * AbyssalCraft
+ * Copyright 2012-2014 Shinoow
  *
- *Licensed under the Apache License, Version 2.0 (the "License");
- *you may not use this file except in compliance with the License.
- *You may obtain a copy of the License at
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
  *
  *  http://www.apache.org/licenses/LICENSE-2.0
  *
- *Unless required by applicable law or agreed to in writing, software
- *distributed under the License is distributed on an "AS IS" BASIS,
- *WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *See the License for the specific language governing permissions and
- *limitations under the License.
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
 package com.shinoow.abyssalcraft.common.entity;
 
@@ -34,7 +35,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeModContainer;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
-import com.shinoow.abyssalcraft.core.api.entity.ICoraliumEntity;
+import com.shinoow.abyssalcraft.api.entity.ICoraliumEntity;
 
 public class EntityDepthsGhoul extends EntityMob implements ICoraliumEntity {
 
@@ -239,20 +240,20 @@ public class EntityDepthsGhoul extends EntityMob implements ICoraliumEntity {
 	@Override
 	protected String getLivingSound()
 	{
-		String entitysound = "mob.zombie.say";
+		String entitysound = "abyssalcraft:ghoul.normal.idle";
 		switch (getGhoulType())
 		{
 		case 0:
-			entitysound = "mob.zombie.say"; //abyssalcraft:ghoul.normal.idle
+			entitysound = "abyssalcraft:ghoul.normal.idle";
 			break;
 		case 1:
 			entitysound = "abyssalcraft:ghoul.pete.idle";
 			break;
 		case 2:
-			entitysound = "mob.zombie.say"; //abyssalcraft:ghoul.wilson.idle
+			entitysound = "abyssalcraft:ghoul.normal.idle"; //abyssalcraft:ghoul.wilson.idle
 			break;
 		case 3:
-			entitysound = "mob.zombie.say"; //abyssalcraft:ghoul.orange.idle
+			entitysound = "abyssalcraft:ghoul.normal.idle"; //abyssalcraft:ghoul.orange.idle
 		}
 		return entitysound;
 	}
@@ -281,22 +282,7 @@ public class EntityDepthsGhoul extends EntityMob implements ICoraliumEntity {
 	@Override
 	protected String getDeathSound()
 	{
-		String entitysound = "mob.zombie.death";
-		switch (getGhoulType())
-		{
-		case 0:
-			entitysound = "mob.zombie.death"; //abyssalcraft:ghoul.normal.death
-			break;
-		case 1:
-			entitysound = "abyssalcraft:ghoul.pete.death";
-			break;
-		case 2:
-			entitysound = "mob.zombie.death"; //abyssalcraft:ghoul.wilson.death
-			break;
-		case 3:
-			entitysound = "mob.zombie.death"; //abyssalcraft:ghoul.orange.death
-		}
-		return entitysound;
+		return "abyssalcraft:ghoul.death";
 	}
 
 	@Override
@@ -318,32 +304,22 @@ public class EntityDepthsGhoul extends EntityMob implements ICoraliumEntity {
 	}
 
 	@Override
-	protected void dropFewItems(boolean par1, int par2)
-	{
-		switch (rand.nextInt(3))
-		{
-		case 0:
-			dropItem(Items.bone, 1);
-			break;
-		case 1:
-			dropItem(AbyssalCraft.sword, 1);
-			break;
-		case 2:
-			dropItem(AbyssalCraft.Coralium, rand.nextInt(3));
-		}
-	}
-
-	@Override
 	protected void dropRareDrop(int par1)
 	{
-		if(getGhoulType() == 0)
+		switch(getGhoulType()){
+		case 0:
 			dropItem(Item.getItemFromBlock(AbyssalCraft.DGhead),1);
-		else if(getGhoulType() == 1)
+			break;
+		case 1:
 			dropItem(Item.getItemFromBlock(AbyssalCraft.Phead),1);
-		else if(getGhoulType() == 2)
+			break;
+		case 2:
 			dropItem(Item.getItemFromBlock(AbyssalCraft.Whead),1);
-		else if(getGhoulType() == 3)
+			break;
+		case 3:
 			dropItem(Item.getItemFromBlock(AbyssalCraft.Ohead),1);
+			break;
+		}
 	}
 
 	@Override

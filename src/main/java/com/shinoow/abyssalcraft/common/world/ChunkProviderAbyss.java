@@ -1,17 +1,18 @@
-/**AbyssalCraft
- *Copyright 2012-2014 Shinoow
+/**
+ * AbyssalCraft
+ * Copyright 2012-2014 Shinoow
  *
- *Licensed under the Apache License, Version 2.0 (the "License");
- *you may not use this file except in compliance with the License.
- *You may obtain a copy of the License at
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
  *
  *  http://www.apache.org/licenses/LICENSE-2.0
  *
- *Unless required by applicable law or agreed to in writing, software
- *distributed under the License is distributed on an "AS IS" BASIS,
- *WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *See the License for the specific language governing permissions and
- *limitations under the License.
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
 package com.shinoow.abyssalcraft.common.world;
 
@@ -111,11 +112,11 @@ public class ChunkProviderAbyss implements IChunkProvider
 		mobSpawnerNoise = (NoiseGeneratorOctaves)noiseGens[6];
 	}
 
-	public void generateTerrain(int par1, int par2, Block[] par3BlockArray)
+	public void generateTerrain(int x, int z, Block[] par3BlockArray)
 	{
 		byte b0 = 63;
-		biomesForGeneration = worldObj.getWorldChunkManager().getBiomesForGeneration(biomesForGeneration, par1 * 4 - 2, par2 * 4 - 2, 10, 10);
-		generateNoise(par1 * 4, 0, par2 * 4);
+		biomesForGeneration = worldObj.getWorldChunkManager().getBiomesForGeneration(biomesForGeneration, x * 4 - 2, z * 4 - 2, 10, 10);
+		generateNoise(x * 4, 0, z * 4);
 
 		for (int k = 0; k < 4; ++k)
 		{
@@ -180,20 +181,20 @@ public class ChunkProviderAbyss implements IChunkProvider
 		}
 	}
 
-	public void replaceBlocksForBiome(int par1, int par2, Block[] par3BlockArray, byte[] par4ByteArray, BiomeGenBase[] par5BiomeArray)
+	public void replaceBlocksForBiome(int x, int z, Block[] par3BlockArray, byte[] par4ByteArray, BiomeGenBase[] par5BiomeArray)
 	{
-		ChunkProviderEvent.ReplaceBiomeBlocks event = new ChunkProviderEvent.ReplaceBiomeBlocks(this, par1, par2, par3BlockArray, par5BiomeArray);
+		ChunkProviderEvent.ReplaceBiomeBlocks event = new ChunkProviderEvent.ReplaceBiomeBlocks(this, x, z, par3BlockArray, par5BiomeArray);
 		MinecraftForge.EVENT_BUS.post(event);
 		if (event.getResult() == Result.DENY) return;
 
 		double d0 = 0.03125D;
-		stoneNoise = noiseGen4.func_151599_a(stoneNoise, par1 * 16, par2 * 16, 16, 16, d0 * 2.0D, d0 * 2.0D, 1.0D);
+		stoneNoise = noiseGen4.func_151599_a(stoneNoise, x * 16, z * 16, 16, 16, d0 * 2.0D, d0 * 2.0D, 1.0D);
 
 		for (int k = 0; k < 16; ++k)
 			for (int l = 0; l < 16; ++l)
 			{
 				BiomeGenBase biomegenbase = par5BiomeArray[l + k * 16];
-				biomegenbase.genTerrainBlocks(worldObj, rand, par3BlockArray, par4ByteArray, par1 * 16 + k, par2 * 16 + l, stoneNoise[l + k * 16]);
+				biomegenbase.genTerrainBlocks(worldObj, rand, par3BlockArray, par4ByteArray, x * 16 + k, z * 16 + l, stoneNoise[l + k * 16]);
 			}
 	}
 
@@ -201,9 +202,9 @@ public class ChunkProviderAbyss implements IChunkProvider
 	 * loads or generates the chunk at the chunk location specified
 	 */
 	@Override
-	public Chunk loadChunk(int par1, int par2)
+	public Chunk loadChunk(int x, int z)
 	{
-		return provideChunk(par1, par2);
+		return provideChunk(x, z);
 	}
 
 	/**
@@ -211,24 +212,24 @@ public class ChunkProviderAbyss implements IChunkProvider
 	 * specified chunk from the map seed and chunk seed
 	 */
 	@Override
-	public Chunk provideChunk(int par1, int par2)
+	public Chunk provideChunk(int x, int z)
 	{
-		rand.setSeed(par1 * 341873128712L + par2 * 132897987541L);
+		rand.setSeed(x * 341873128712L + z * 132897987541L);
 		Block[] ablock = new Block[65536];
 		byte[] abyte = new byte[65536];
-		generateTerrain(par1, par2, ablock);
-		biomesForGeneration = worldObj.getWorldChunkManager().loadBlockGeneratorData(biomesForGeneration, par1 * 16, par2 * 16, 16, 16);
-		replaceBlocksForBiome(par1, par2, ablock, abyte, biomesForGeneration);
-		caveGenerator.func_151539_a(this, worldObj, par1, par2, ablock);
-		ravineGenerator.func_151539_a(this, worldObj, par1, par2, ablock);
+		generateTerrain(x, z, ablock);
+		biomesForGeneration = worldObj.getWorldChunkManager().loadBlockGeneratorData(biomesForGeneration, x * 16, z * 16, 16, 16);
+		replaceBlocksForBiome(x, z, ablock, abyte, biomesForGeneration);
+		caveGenerator.func_151539_a(this, worldObj, x, z, ablock);
+		ravineGenerator.func_151539_a(this, worldObj, x, z, ablock);
 
 		if (mapFeaturesEnabled)
 		{
-			strongholdGenerator.func_151539_a(this, worldObj, par1, par2, ablock);
-			scatteredFeatureGenerator.func_151539_a(this, worldObj, par1, par2, ablock);
+			strongholdGenerator.func_151539_a(this, worldObj, x, z, ablock);
+			scatteredFeatureGenerator.func_151539_a(this, worldObj, x, z, ablock);
 		}
 
-		Chunk chunk = new Chunk(worldObj, ablock, abyte, par1, par2);
+		Chunk chunk = new Chunk(worldObj, ablock, abyte, x, z);
 		byte[] abyte1 = chunk.getBiomeArray();
 
 		for (int k = 0; k < abyte1.length; ++k)
@@ -238,12 +239,12 @@ public class ChunkProviderAbyss implements IChunkProvider
 		return chunk;
 	}
 
-	private void generateNoise(int par1, int par2, int par3)
+	private void generateNoise(int x, int y, int z)
 	{
-		doubleArray4 = noiseGen6.generateNoiseOctaves(doubleArray4, par1, par3, 5, 5, 200.0D, 200.0D, 0.5D);
-		doubleArray1 = noiseGen3.generateNoiseOctaves(doubleArray1, par1, par2, par3, 5, 33, 5, 8.555150000000001D, 4.277575000000001D, 8.555150000000001D);
-		doubleArray2 = noiseGen1.generateNoiseOctaves(doubleArray2, par1, par2, par3, 5, 33, 5, 684.412D, 684.412D, 684.412D);
-		doubleArray3 = noiseGen2.generateNoiseOctaves(doubleArray3, par1, par2, par3, 5, 33, 5, 684.412D, 684.412D, 684.412D);
+		doubleArray4 = noiseGen6.generateNoiseOctaves(doubleArray4, x, z, 5, 5, 200.0D, 200.0D, 0.5D);
+		doubleArray1 = noiseGen3.generateNoiseOctaves(doubleArray1, x, y, z, 5, 33, 5, 8.555150000000001D, 4.277575000000001D, 8.555150000000001D);
+		doubleArray2 = noiseGen1.generateNoiseOctaves(doubleArray2, x, y, z, 5, 33, 5, 684.412D, 684.412D, 684.412D);
+		doubleArray3 = noiseGen2.generateNoiseOctaves(doubleArray3, x, y, z, 5, 33, 5, 684.412D, 684.412D, 684.412D);
 		int l = 0;
 		int i1 = 0;
 		for (int j1 = 0; j1 < 5; ++j1)
@@ -342,7 +343,7 @@ public class ChunkProviderAbyss implements IChunkProvider
 	 * Checks to see if a chunk exists at x, y
 	 */
 	@Override
-	public boolean chunkExists(int par1, int par2)
+	public boolean chunkExists(int x, int z)
 	{
 		return true;
 	}
@@ -351,31 +352,31 @@ public class ChunkProviderAbyss implements IChunkProvider
 	 * Populates chunk with ores etc etc
 	 */
 	@Override
-	public void populate(IChunkProvider par1IChunkProvider, int par2, int par3)
+	public void populate(IChunkProvider par1IChunkProvider, int x, int z)
 	{
 		BlockFalling.fallInstantly = true;
-		int k = par2 * 16;
-		int l = par3 * 16;
+		int k = x * 16;
+		int l = z * 16;
 		BiomeGenBase biomegenbase = worldObj.getBiomeGenForCoords(k + 16, l + 16);
 		rand.setSeed(worldObj.getSeed());
 		long i1 = rand.nextLong() / 2L * 2L + 1L;
 		long j1 = rand.nextLong() / 2L * 2L + 1L;
-		rand.setSeed(par2 * i1 + par3 * j1 ^ worldObj.getSeed());
+		rand.setSeed(x * i1 + z * j1 ^ worldObj.getSeed());
 		boolean flag = false;
 
-		MinecraftForge.EVENT_BUS.post(new PopulateChunkEvent.Pre(par1IChunkProvider, worldObj, rand, par2, par3, flag));
+		MinecraftForge.EVENT_BUS.post(new PopulateChunkEvent.Pre(par1IChunkProvider, worldObj, rand, x, z, flag));
 
 		if (mapFeaturesEnabled)
 		{
-			strongholdGenerator.generateStructuresInChunk(worldObj, rand, par2, par3);
-			scatteredFeatureGenerator.generateStructuresInChunk(worldObj, rand, par2, par3);
+			strongholdGenerator.generateStructuresInChunk(worldObj, rand, x, z);
+			scatteredFeatureGenerator.generateStructuresInChunk(worldObj, rand, x, z);
 		}
 
 		int k1;
 		int l1;
 		int i2;
 
-		if (TerrainGen.populate(par1IChunkProvider, worldObj, rand, par2, par3, flag, LAKE) &&
+		if (TerrainGen.populate(par1IChunkProvider, worldObj, rand, x, z, flag, LAKE) &&
 				!flag && rand.nextInt(4) == 0)
 		{
 			k1 = k + rand.nextInt(16) + 8;
@@ -384,17 +385,17 @@ public class ChunkProviderAbyss implements IChunkProvider
 			new WorldGenAbyLake(AbyssalCraft.Cwater).generate(worldObj, rand, k1, l1, i2);
 		}
 
+		for(int i = 0; i < 5; i++) {
+			int Xcoord1 = k + rand.nextInt(16);
+			int Ycoord1 = rand.nextInt(80);
+			int Zcoord1 = l + rand.nextInt(16);
 
-		int Xcoord1 = k + rand.nextInt(16);
-		int Ycoord1 = rand.nextInt(66);
-		int Zcoord1 = l + rand.nextInt(16);
-
-		new Abypillar().generate(worldObj, rand, Xcoord1, Ycoord1, Zcoord1);
+			new Abypillar().generate(worldObj, rand, Xcoord1, Ycoord1, Zcoord1);
+		}
 
 		biomegenbase.decorate(worldObj, rand, k, l);
 
-
-		MinecraftForge.EVENT_BUS.post(new PopulateChunkEvent.Post(par1IChunkProvider, worldObj, rand, par2, par3, flag));
+		MinecraftForge.EVENT_BUS.post(new PopulateChunkEvent.Post(par1IChunkProvider, worldObj, rand, x, z, flag));
 
 		BlockFalling.fallInstantly = false;
 	}
@@ -448,16 +449,16 @@ public class ChunkProviderAbyss implements IChunkProvider
 	 */
 	@Override
 	@SuppressWarnings("rawtypes")
-	public List getPossibleCreatures(EnumCreatureType par1EnumCreatureType, int par2, int par3, int par4)
+	public List getPossibleCreatures(EnumCreatureType par1EnumCreatureType, int x, int y, int z)
 	{
-		BiomeGenBase var5 = worldObj.getBiomeGenForCoords(par2, par4);
-		return var5 == null ? null : var5 == AbyssalCraft.Wastelands && par1EnumCreatureType == EnumCreatureType.monster && scatteredFeatureGenerator.hasStructureAt(par2, par3, par4) ? scatteredFeatureGenerator.getScatteredFeatureSpawnList() : var5.getSpawnableList(par1EnumCreatureType);
+		BiomeGenBase biome = worldObj.getBiomeGenForCoords(x, z);
+		return biome == null ? null : biome == AbyssalCraft.Wastelands && par1EnumCreatureType == EnumCreatureType.monster && scatteredFeatureGenerator.hasStructureAt(x, y, z) ? scatteredFeatureGenerator.getScatteredFeatureSpawnList() : biome.getSpawnableList(par1EnumCreatureType);
 	}
 
 	@Override
-	public ChunkPosition func_147416_a(World par1World, String par2String, int par3, int par4, int par5)
+	public ChunkPosition func_147416_a(World par1World, String par2String, int x, int y, int z)
 	{
-		return "AbyStronghold".equals(par2String) && strongholdGenerator != null ? strongholdGenerator.func_151545_a(par1World, par3, par4, par5) : null;
+		return "AbyStronghold".equals(par2String) && strongholdGenerator != null ? strongholdGenerator.func_151545_a(par1World, x, y, z) : null;
 	}
 
 	@Override
@@ -467,13 +468,13 @@ public class ChunkProviderAbyss implements IChunkProvider
 	}
 
 	@Override
-	public void recreateStructures(int par1, int par2)
+	public void recreateStructures(int x, int z)
 	{
 		if (mapFeaturesEnabled)
 		{
 
-			strongholdGenerator.func_151539_a(this, worldObj, par1, par2, (Block[])null);
-			scatteredFeatureGenerator.func_151539_a(this, worldObj, par1, par2, (Block[])null);
+			strongholdGenerator.func_151539_a(this, worldObj, x, z, (Block[])null);
+			scatteredFeatureGenerator.func_151539_a(this, worldObj, x, z, (Block[])null);
 		}
 	}
 }

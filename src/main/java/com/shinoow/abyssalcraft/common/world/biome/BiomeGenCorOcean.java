@@ -1,17 +1,18 @@
-/**AbyssalCraft
- *Copyright 2012-2014 Shinoow
+/**
+ * AbyssalCraft
+ * Copyright 2012-2014 Shinoow
  *
- *Licensed under the Apache License, Version 2.0 (the "License");
- *you may not use this file except in compliance with the License.
- *You may obtain a copy of the License at
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
  *
  *  http://www.apache.org/licenses/LICENSE-2.0
  *
- *Unless required by applicable law or agreed to in writing, software
- *distributed under the License is distributed on an "AS IS" BASIS,
- *WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *See the License for the specific language governing permissions and
- *limitations under the License.
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
 package com.shinoow.abyssalcraft.common.world.biome;
 
@@ -38,9 +39,8 @@ public class BiomeGenCorOcean extends BiomeGenBase {
 		heightVariation = 0.1F;
 		waterColorMultiplier = 0x24FF83;
 		spawnableCreatureList.clear();
-		spawnableMonsterList.clear();
-		spawnableMonsterList.add(new SpawnListEntry(EntityDepthsGhoul.class, 5, 1, 5));
-		spawnableMonsterList.add(new SpawnListEntry(EntityAbyssalZombie.class, 5, 1, 5));
+		spawnableMonsterList.add(new SpawnListEntry(EntityDepthsGhoul.class, 60, 1, 5));
+		spawnableMonsterList.add(new SpawnListEntry(EntityAbyssalZombie.class, 60, 1, 5));
 
 	}
 
@@ -59,7 +59,7 @@ public class BiomeGenCorOcean extends BiomeGenBase {
 			int var9 = par4 + par2Random.nextInt(16);
 			Block var10 = par1World.getBlock(var7, var8, var9);
 
-			if (var10 == Blocks.stone || var10 == Blocks.iron_ore || var10 == Blocks.coal_ore) {
+			if (var10.isReplaceableOreGen(par1World, var7, var8, var9, Blocks.stone) || var10 == Blocks.iron_ore || var10 == Blocks.coal_ore) {
 				par1World.setBlock(var7, var8, var9, AbyssalCraft.Coraliumore);
 				if(var10 == Blocks.diamond_ore || var10 == Blocks.gold_ore || var10 == Blocks.iron_ore)
 					par1World.setBlock(var7, var8, var9, AbyssalCraft.CoraliumInfusedStone);

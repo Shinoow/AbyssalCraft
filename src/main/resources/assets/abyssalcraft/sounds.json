@@ -22,10 +22,20 @@
 			"dreadguard/hit4"
 		]
 	},
-	"ghoul.pete.death": {
+	"ghoul.normal.idle": {
 		"category": "hostile",
 		"sounds": [
-			"ghoul/pete/death"
+			"ghoul/normal/idle1",
+			"ghoul/normal/idle2",
+			"ghoul/normal/idle3",
+			"ghoul/normal/idle4",
+			"ghoul/normal/idle5"
+		]
+	},
+	"ghoul.death": {
+		"category": "hostile",
+		"sounds": [
+			"ghoul/death"
 		]
 	},
 	"ghoul.pete.hit": {
@@ -68,6 +78,12 @@
 		"category": "hostile",
 		"sounds": [
 			"golem/idle1"
+		]
+	},
+	"sacthoth.death": {
+		"category": "hostile",
+		"sounds": [
+		"shadow/sacthoth/death"
 		]
 	}
 }

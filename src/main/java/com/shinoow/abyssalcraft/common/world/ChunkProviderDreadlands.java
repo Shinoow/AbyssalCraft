@@ -1,17 +1,18 @@
-/**AbyssalCraft
- *Copyright 2012-2014 Shinoow
+/**
+ * AbyssalCraft
+ * Copyright 2012-2014 Shinoow
  *
- *Licensed under the Apache License, Version 2.0 (the "License");
- *you may not use this file except in compliance with the License.
- *You may obtain a copy of the License at
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
  *
  *  http://www.apache.org/licenses/LICENSE-2.0
  *
- *Unless required by applicable law or agreed to in writing, software
- *distributed under the License is distributed on an "AS IS" BASIS,
- *WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *See the License for the specific language governing permissions and
- *limitations under the License.
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
 package com.shinoow.abyssalcraft.common.world;
 
@@ -165,7 +166,7 @@ public class ChunkProviderDreadlands implements IChunkProvider {
 								if ((d15 += d16) > 0.0D)
 									par3BlockArray[j3 += short1] = AbyssalCraft.dreadstone;
 								else if (k2 * 8 + l2 < b0)
-									par3BlockArray[j3 += short1] = AbyssalCraft.dreadgrass;
+									par3BlockArray[j3 += short1] = AbyssalCraft.abydreadstone;
 								else
 									par3BlockArray[j3 += short1] = null;
 
