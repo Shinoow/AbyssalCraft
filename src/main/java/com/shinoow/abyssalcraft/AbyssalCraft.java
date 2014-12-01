@@ -75,7 +75,7 @@ import cpw.mods.fml.common.registry.*;
 @Mod(modid = AbyssalCraft.modid, name = AbyssalCraft.name, version = AbyssalCraft.version, dependencies = "required-after:Forge@[forgeversion,);after:Thaumcraft", useMetadata = false, guiFactory = "com.shinoow.abyssalcraft.client.config.ACGuiFactory")
 public class AbyssalCraft {
 
-	public static final String version = "1.8.0";
+	public static final String version = "1.8.0.1";
 	public static final String modid = "abyssalcraft";
 	public static final String name = "AbyssalCraft";
 
@@ -231,7 +231,7 @@ public class AbyssalCraft {
 
 		cfg = new Configuration(event.getSuggestedConfigurationFile());
 		syncConfig();
-		AbyssalCraftAPI.initPotionReflection(Loader.isModLoaded("DragonAPI"));
+		AbyssalCraftAPI.initPotionReflection();
 		if(canRenderStarspawn == true)
 			ACLogger.info("RenderPlayer Override enabled, the Coralium Longbow will render twice in your hand now.");
 		else ACLogger.info("RenderPlayer Override disabled, Compatibility level +100.");

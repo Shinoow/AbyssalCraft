@@ -34,7 +34,6 @@ import net.minecraftforge.oredict.OreDictionary;
 import com.google.common.collect.Lists;
 import com.shinoow.abyssalcraft.api.item.ItemEngraving;
 import com.shinoow.abyssalcraft.api.recipe.*;
-import com.shinoow.abyssalcraft.common.util.ACLogger;
 
 import cpw.mods.fml.common.IFuelHandler;
 import cpw.mods.fml.common.registry.*;
@@ -87,33 +86,29 @@ public class AbyssalCraftAPI {
 
 	/**
 	 * Initializes the reflection required for the Potion code, ignore it
-	 * @param par1 Whether Reika's DragonAPI is present, will skip some reflection if it is.
 	 */
 	@SuppressWarnings("unchecked")
-	public static void initPotionReflection(boolean par1){
-		if(!par1){
-			Potion[] potionTypes = null;
-			for (Field f : Potion.class.getDeclaredFields()) {
-				f.setAccessible(true);
-				try {
-					if (f.getName().equals("potionTypes") || f.getName().equals("field_76425_a")) {
-						Field modfield = Field.class.getDeclaredField("modifiers");
-						modfield.setAccessible(true);
-						modfield.setInt(f, f.getModifiers() & ~Modifier.FINAL);
+	public static void initPotionReflection(){
+		Potion[] potionTypes = null;
+		for (Field f : Potion.class.getDeclaredFields()) {
+			f.setAccessible(true);
+			try {
+				if (f.getName().equals("potionTypes") || f.getName().equals("field_76425_a")) {
+					Field modfield = Field.class.getDeclaredField("modifiers");
+					modfield.setAccessible(true);
+					modfield.setInt(f, f.getModifiers() & ~Modifier.FINAL);
 
-						potionTypes = (Potion[])f.get(null);
-						final Potion[] newPotionTypes = new Potion[256];
-						System.arraycopy(potionTypes, 0, newPotionTypes, 0, potionTypes.length);
-						f.set(null, newPotionTypes);
-					}
-				}
-				catch (Exception e) {
-					System.err.println("Whoops, something screwed up here, please report this to shinoow:");
-					System.err.println(e);
+					potionTypes = (Potion[])f.get(null);
+					final Potion[] newPotionTypes = new Potion[256];
+					System.arraycopy(potionTypes, 0, newPotionTypes, 0, potionTypes.length);
+					f.set(null, newPotionTypes);
 				}
 			}
-		} else
-			ACLogger.info("DragonAPI is present, skipping Potion array extension.");
+			catch (Exception e) {
+				System.err.println("Whoops, something screwed up here, please report this to shinoow:");
+				System.err.println(e);
+			}
+		}
 		for(Field f : PotionHelper.class.getDeclaredFields())
 			try {
 				if(f.getName().equals("potionRequirements") || f.getName().equals("field_77927_l")){
