@@ -210,12 +210,12 @@ public class EntitySacthoth extends EntityMob implements IBossDisplayData, IAnti
 		}
 		else if(par1DamageSource.isExplosion()){
 			if(worldObj.isRemote)
-				SpecialTextUtil.SacthothText("I'm not saying you \u00A7ocan't\u00A7r blow me up, it just won't work.");
+				SpecialTextUtil.SacthothText(StatCollector.translateToLocal("message.sacthoth.damage.explosion"));
 			return false;
 		}
 		else if(par1DamageSource.isProjectile()){
 			if(worldObj.isRemote)
-				SpecialTextUtil.SacthothText("Ha, your projectiles can't harm me.");
+				SpecialTextUtil.SacthothText(StatCollector.translateToLocal("message.sacthoth.damage.projectile"));
 			return false;
 		}
 		return super.attackEntityFrom(par1DamageSource, par2);

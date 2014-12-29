@@ -132,7 +132,7 @@ public class EntityJzahar extends EntityMob implements IBossDisplayData, IRanged
 	public void onDeath(DamageSource par1DamageSource) {
 
 		if(worldObj.isRemote)
-			SpecialTextUtil.JzaharText("I'm still an in-dev boss, so you didn't exactly achieve anything killing me.");
+			SpecialTextUtil.JzaharText(StatCollector.translateToLocal("message.jzahar.death.dev"));
 		super.onDeath(par1DamageSource);
 	}
 

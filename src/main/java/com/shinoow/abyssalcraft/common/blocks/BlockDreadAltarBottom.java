@@ -23,6 +23,7 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ChatComponentText;
+import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
@@ -63,22 +64,19 @@ public class BlockDreadAltarBottom extends BlockContainer {
 	@Override
 	public int onBlockPlaced(World par1World, int par2, int par3, int par4, int par5, float par6, float par7, float par8, int par9){
 		super.onBlockPlaced(par1World, par2, par3, par4, par5, par6, par7, par8, par9);
-		if(!par1World.isRemote)
-			if(par1World.provider.dimensionId != AbyssalCraft.configDimId2  && par1World.isRemote)
-				FMLClientHandler.instance().getClient().ingameGUI.getChatGUI().printChatMessage(new ChatComponentText("That only works in the Dreadlands"));
+		if(par1World.provider.dimensionId != AbyssalCraft.configDimId2  && par1World.isRemote)
+			FMLClientHandler.instance().getClient().ingameGUI.getChatGUI().printChatMessage(new ChatComponentText(StatCollector.translateToLocal("message.dreadaltar.error.1")));
 		if(par1World.provider.dimensionId == AbyssalCraft.configDimId2 && par1World.getBiomeGenForCoords(par2, par4) != AbyssalCraft.MountainDreadlands  && par1World.isRemote)
-			FMLClientHandler.instance().getClient().ingameGUI.getChatGUI().printChatMessage(new ChatComponentText("You need to be within the Dreadlands Mountains"));
+			FMLClientHandler.instance().getClient().ingameGUI.getChatGUI().printChatMessage(new ChatComponentText(StatCollector.translateToLocal("message.dreadaltar.error.2")));
 		return par9;
 	}
 
 	@Override
-	public void onEntityCollidedWithBlock(World par1World, int par2, int par3, int par4, Entity par5Entity)
-	{
+	public void onEntityCollidedWithBlock(World par1World, int par2, int par3, int par4, Entity par5Entity) {
 		super.onEntityCollidedWithBlock(par1World, par2, par3, par4, par5Entity);
-		if(par5Entity instanceof EntityLivingBase){
+
+		if(par5Entity instanceof IDreadEntity){}
+		else if(par5Entity instanceof EntityLivingBase)
 			((EntityLivingBase)par5Entity).addPotionEffect(new PotionEffect(AbyssalCraft.Dplague.id, 100));
-			if(par5Entity instanceof IDreadEntity)
-				((EntityLivingBase)par5Entity).removePotionEffect(AbyssalCraft.Dplague.id);
-		}
 	}
 }

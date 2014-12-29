@@ -23,7 +23,11 @@ import net.minecraft.util.MathHelper;
 
 import org.lwjgl.opengl.GL11;
 
+import com.shinoow.abyssalcraft.common.entity.EntityChagaroth;
+
 public class ModelChagaroth extends ModelBase {
+
+	private int rot = 0;
 
 	ModelRenderer frontspike1;
 	ModelRenderer frontspike2;
@@ -838,9 +842,9 @@ public class ModelChagaroth extends ModelBase {
 	{
 		GL11.glPushMatrix();
 		super.render(entity, f, f1, f2, f3, f4, f5);
-		setRotationAngles(f, f1, f2, f3, f4, f5, entity);
 		GL11.glScalef(2.0F, 2.0F, 2.0F);
 		GL11.glTranslatef(0F, -0.75F, 0F);
+		setRotationAngles(f, f1, f2, f3, f4, f5, entity);
 		frontspike1.render(f5);
 		frontspike2.render(f5);
 		frontspike3.render(f5);
@@ -919,31 +923,58 @@ public class ModelChagaroth extends ModelBase {
 		righthead.rotateAngleY = f3 / (180F / (float)Math.PI);
 		righthead.rotateAngleX = f4 / (180F / (float)Math.PI);
 
-		walltentacle1.rotateAngleX = MathHelper.cos(f * 0.6662F + (float)Math.PI) * 2.0F * f1 * 0.5F;
-		walltentacle2.rotateAngleX = MathHelper.cos(f * 0.6662F) * 2.0F * f1 * 0.5F;
-		walltentacle3.rotateAngleX = MathHelper.cos(f * 0.6662F + (float)Math.PI) * 2.0F * f1 * 0.5F;
-		walltentacle4.rotateAngleX = MathHelper.cos(f * 0.6662F) * 2.0F * f1 * 0.5F;
-		walltentacle5.rotateAngleX = MathHelper.cos(f * 0.6662F + (float)Math.PI) * 2.0F * f1 * 0.5F;
-		walltentacle6.rotateAngleX = MathHelper.cos(f * 0.6662F) * 2.0F * f1 * 0.5F;
-		walltentacle7.rotateAngleX = MathHelper.cos(f * 0.6662F + (float)Math.PI) * 2.0F * f1 * 0.5F;
-		walltentacle8.rotateAngleX = MathHelper.cos(f * 0.6662F) * 2.0F * f1 * 0.5F;
+		walltentacle1.rotateAngleX = MathHelper.cos(f4 * 0.6662F + (float)Math.PI) * 2.0F * f1 * 0.5F;
+		walltentacle2.rotateAngleX = MathHelper.cos(f4 * 0.6662F) * 2.0F * f1 * 0.5F;
+		walltentacle3.rotateAngleX = MathHelper.cos(f4 * 0.6662F + (float)Math.PI) * 2.0F * f1 * 0.5F;
+		walltentacle4.rotateAngleX = MathHelper.cos(f4 * 0.6662F) * 2.0F * f1 * 0.5F;
+		walltentacle5.rotateAngleX = MathHelper.cos(f4 * 0.6662F + (float)Math.PI) * 2.0F * f1 * 0.5F;
+		walltentacle6.rotateAngleX = MathHelper.cos(f4 * 0.6662F) * 2.0F * f1 * 0.5F;
+		walltentacle7.rotateAngleX = MathHelper.cos(f4 * 0.6662F + (float)Math.PI) * 2.0F * f1 * 0.5F;
+		walltentacle8.rotateAngleX = MathHelper.cos(f4 * 0.6662F) * 2.0F * f1 * 0.5F;
 
-		walltentacle1.rotateAngleY = MathHelper.cos(f * 0.6662F + (float)Math.PI) * 2.0F * f1 * 0.5F;
-		walltentacle2.rotateAngleY = MathHelper.cos(f * 0.6662F) * 2.0F * f1 * 0.5F;
-		walltentacle3.rotateAngleY = MathHelper.cos(f * 0.6662F + (float)Math.PI) * 2.0F * f1 * 0.5F;
-		walltentacle4.rotateAngleY = MathHelper.cos(f * 0.6662F) * 2.0F * f1 * 0.5F;
-		walltentacle5.rotateAngleY = MathHelper.cos(f * 0.6662F + (float)Math.PI) * 2.0F * f1 * 0.5F;
-		walltentacle6.rotateAngleY = MathHelper.cos(f * 0.6662F) * 2.0F * f1 * 0.5F;
-		walltentacle7.rotateAngleY = MathHelper.cos(f * 0.6662F + (float)Math.PI) * 2.0F * f1 * 0.5F;
-		walltentacle8.rotateAngleY = MathHelper.cos(f * 0.6662F) * 2.0F * f1 * 0.5F;
+		walltentacle1.rotateAngleY = MathHelper.cos(f3 * 0.6662F + (float)Math.PI) * 2.0F * f1 * 0.5F;
+		walltentacle2.rotateAngleY = MathHelper.cos(f3 * 0.6662F) * 2.0F * f1 * 0.5F;
+		walltentacle3.rotateAngleY = MathHelper.cos(f3 * 0.6662F + (float)Math.PI) * 2.0F * f1 * 0.5F;
+		walltentacle4.rotateAngleY = MathHelper.cos(f3 * 0.6662F) * 2.0F * f1 * 0.5F;
+		walltentacle5.rotateAngleY = MathHelper.cos(f3 * 0.6662F + (float)Math.PI) * 2.0F * f1 * 0.5F;
+		walltentacle6.rotateAngleY = MathHelper.cos(f3 * 0.6662F) * 2.0F * f1 * 0.5F;
+		walltentacle7.rotateAngleY = MathHelper.cos(f3 * 0.6662F + (float)Math.PI) * 2.0F * f1 * 0.5F;
+		walltentacle8.rotateAngleY = MathHelper.cos(f3 * 0.6662F) * 2.0F * f1 * 0.5F;
 
-		walltentacle1.rotateAngleZ = MathHelper.cos(f * 0.6662F + (float)Math.PI) * 2.0F * f1 * 0.5F;
-		walltentacle2.rotateAngleZ = MathHelper.cos(f * 0.6662F) * 2.0F * f1 * 0.5F;
-		walltentacle3.rotateAngleZ = MathHelper.cos(f * 0.6662F + (float)Math.PI) * 2.0F * f1 * 0.5F;
-		walltentacle4.rotateAngleZ = MathHelper.cos(f * 0.6662F) * 2.0F * f1 * 0.5F;
-		walltentacle5.rotateAngleZ = MathHelper.cos(f * 0.6662F + (float)Math.PI) * 2.0F * f1 * 0.5F;
-		walltentacle6.rotateAngleZ = MathHelper.cos(f * 0.6662F) * 2.0F * f1 * 0.5F;
-		walltentacle7.rotateAngleZ = MathHelper.cos(f * 0.6662F + (float)Math.PI) * 2.0F * f1 * 0.5F;
-		walltentacle8.rotateAngleZ = MathHelper.cos(f * 0.6662F) * 2.0F * f1 * 0.5F;
+		walltentacle1.rotateAngleZ = MathHelper.cos(f5 * 0.6662F + (float)Math.PI) * 2.0F * f1 * 0.5F;
+		walltentacle2.rotateAngleZ = MathHelper.cos(f5 * 0.6662F) * 2.0F * f1 * 0.5F;
+		walltentacle3.rotateAngleZ = MathHelper.cos(f5 * 0.6662F + (float)Math.PI) * 2.0F * f1 * 0.5F;
+		walltentacle4.rotateAngleZ = MathHelper.cos(f5 * 0.6662F) * 2.0F * f1 * 0.5F;
+		walltentacle5.rotateAngleZ = MathHelper.cos(f5 * 0.6662F + (float)Math.PI) * 2.0F * f1 * 0.5F;
+		walltentacle6.rotateAngleZ = MathHelper.cos(f5 * 0.6662F) * 2.0F * f1 * 0.5F;
+		walltentacle7.rotateAngleZ = MathHelper.cos(f5 * 0.6662F + (float)Math.PI) * 2.0F * f1 * 0.5F;
+		walltentacle8.rotateAngleZ = MathHelper.cos(f5 * 0.6662F) * 2.0F * f1 * 0.5F;
+		
+		if(((EntityChagaroth)entity).deathTicks <= 200 && ((EntityChagaroth)entity).deathTicks > 0){
+			++rot;
+			lefthead.rotateAngleY = (180F - rot)  / (float)Math.PI;
+			lefthead.rotateAngleX = (180F + rot) / (float)Math.PI;
+			lefthead.rotateAngleZ = (180F + rot) / (float)Math.PI;
+
+			middlehead.rotateAngleY = (180F + rot) / (float)Math.PI;
+			middlehead.rotateAngleX = (180F - rot) / (float)Math.PI;
+			middlehead.rotateAngleZ = (180F - rot) / (float)Math.PI;
+
+			righthead.rotateAngleY = (180F + rot) / (float)Math.PI;
+			righthead.rotateAngleX = (180F + rot) / (float)Math.PI;
+			righthead.rotateAngleZ = (180F + rot) / (float)Math.PI;
+			
+			walltentacle1.isHidden = true;
+			walltentacle2.isHidden = true;
+			walltentacle3.isHidden = true;
+			walltentacle4.isHidden = true;
+			walltentacle5.isHidden = true;
+			walltentacle6.isHidden = true;
+			walltentacle7.isHidden = true;
+			walltentacle8.isHidden = true;
+			
+			leftwall.isHidden = true;
+			rightwall.isHidden = true;
+		}
 	}
 }

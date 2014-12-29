@@ -88,6 +88,29 @@ achievement.darkRealm.desc=
 achievement.killJzahar=
 achievement.killJzahar.desc=
 
+#Messages
+message.asorah.spawn=
+message.asorah.death.1=
+message.asorah.death.2=
+message.asorah.death.3=
+message.altar.error=
+message.dreadaltar.error.1=
+message.dreadaltar.error.2=
+message.dreadaltar.error.3=
+message.dreadaltartop.enter=
+message.dreadaltartop.spawn=
+message.chagaroth.death.1=
+message.chagaroth.death.2=
+message.chagaroth.death.3=
+message.chagaroth.death.4=
+message.jzahar.death.dev=
+message.sacthoth.spawn.1=
+message.sacthoth.spawn.2=
+message.sacthoth.damage.explosion=
+message.sacthoth.damage.projectile=
+message.portalplacer.error.1=
+message.portalplacer.error.2=
+
 #Container Inventories
 container.abyssalcraft.crate=
 container.abyssalcraft.crystallizer=
@@ -114,6 +137,8 @@ ac_general=
 ac_general.tooltip=
 ac_enchantment=
 ac_enchantment.tooltip=
+ac_potion=
+ac_potion.tooltip=
 ac_render=
 ac_render.tooltip=
 

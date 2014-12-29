@@ -48,9 +48,9 @@ public class EntityChagaroth extends EntityMob implements IBossDisplayData, IDre
 	public EntityChagaroth(World par1World) {
 		super(par1World);
 		setSize(3.5F, 5.0F);
-		tasks.addTask(2, new EntityAIAttackOnCollide(this, EntityPlayer.class, 1.0D, true));
+		tasks.addTask(2, new EntityAIAttackOnCollide(this, EntityPlayer.class, 0.0D, true));
 		tasks.addTask(3, new EntityAILookIdle(this));
-		tasks.addTask(3, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
+		tasks.addTask(3, new EntityAIWatchClosest(this, EntityPlayer.class, 16.0F));
 		targetTasks.addTask(1, new EntityAIHurtByTarget(this, false));
 		targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityPlayer.class, 0, true));
 		ignoreFrustumCheck = true;
@@ -203,10 +203,10 @@ public class EntityChagaroth extends EntityMob implements IBossDisplayData, IDre
 			entityplayer.addStat(AbyssalCraft.killChagaroth, 1);
 		}
 		if(worldObj.isRemote){
-			SpecialTextUtil.ChagarothText("Here, have your key back, transmutate it for a working one.");
-			SpecialTextUtil.ChagarothText("The chest behind me holds \"The Legendary Treasure of The Dreadlands\",");
-			SpecialTextUtil.ChagarothText("left by the ones who ran the mine before I came into the picture.");
-			SpecialTextUtil.ChagarothText("Don't get your hopes up, I bet it's just a block of dirt or something.");
+			SpecialTextUtil.ChagarothText(StatCollector.translateToLocal("message.chagaroth.death.1"));
+			SpecialTextUtil.ChagarothText(StatCollector.translateToLocal("message.chagaroth.death.2"));
+			SpecialTextUtil.ChagarothText(StatCollector.translateToLocal("message.chagaroth.death.3"));
+			SpecialTextUtil.ChagarothText(StatCollector.translateToLocal("message.chagaroth.death.4"));
 		}
 		super.onDeath(par1DamageSource);
 	}

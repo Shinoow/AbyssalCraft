@@ -58,9 +58,14 @@ public class ItemPortalPlacerJzh extends Item {
 	@Override
 	public boolean onItemUse(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, World par3World, int par4, int par5, int par6, int par7, float par8, float par9, float par10)
 	{
+		if(par3World.isRemote && par2EntityPlayer.dimension == -1 || par3World.isRemote && par2EntityPlayer.dimension == 1)
+		{
+			FMLClientHandler.instance().getClient().ingameGUI.getChatGUI().printChatMessage(new ChatComponentText(StatCollector.translateToLocal("message.portalplacer.error.1")));
+			return false;
+		}
 		if(par3World.isRemote && par3World.provider.isSurfaceWorld() || par3World.isRemote && par2EntityPlayer.dimension == AbyssalCraft.configDimId1)
 		{
-			FMLClientHandler.instance().getClient().ingameGUI.getChatGUI().printChatMessage(new ChatComponentText("Nothing happened..."));
+			FMLClientHandler.instance().getClient().ingameGUI.getChatGUI().printChatMessage(new ChatComponentText(StatCollector.translateToLocal("message.portalplacer.error.2")));
 			return false;
 		}
 

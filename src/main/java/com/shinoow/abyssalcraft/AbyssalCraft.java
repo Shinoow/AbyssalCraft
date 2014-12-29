@@ -75,7 +75,7 @@ import cpw.mods.fml.common.registry.*;
 @Mod(modid = AbyssalCraft.modid, name = AbyssalCraft.name, version = AbyssalCraft.version, dependencies = "required-after:Forge@[forgeversion,);after:Thaumcraft", useMetadata = false, guiFactory = "com.shinoow.abyssalcraft.client.config.ACGuiFactory")
 public class AbyssalCraft {
 
-	public static final String version = "1.8.0.1";
+	public static final String version = "1.8.1";
 	public static final String modid = "abyssalcraft";
 	public static final String name = "AbyssalCraft";
 
@@ -208,7 +208,8 @@ public class AbyssalCraft {
 	public static boolean darkspawn1, darkspawn2, darkspawn3, darkspawn4, darkspawn5, coraliumspawn1, coraliumspawn2;
 	public static int darkWeight1, darkWeight2, darkWeight3, darkWeight4, darkWeight5, coraliumWeight;
 
-	public static boolean shouldSpread, shouldInfect, breakLogic, destroyOcean, canRenderStarspawn;
+	public static boolean shouldSpread, shouldInfect, breakLogic, destroyOcean, canRenderStarspawn, demonPigFire;
+	public static int evilPigSpawnRate;
 
 	static int startEntityId = 300;
 
@@ -605,14 +606,14 @@ public class AbyssalCraft {
 		GameRegistry.registerTileEntity(TileEntityODB.class, "tileEntityODB");
 		GameRegistry.registerTileEntity(TileEntityEngraver.class, "tileEntityEngraver");
 
-		Cplague = new PotionCplague(100, true, 0x00FFFF).setIconIndex(1, 0).setPotionName("potion.Cplague");
+		Cplague = new PotionCplague(AbyssalCraftAPI.potionId1, true, 0x00FFFF).setIconIndex(1, 0).setPotionName("potion.Cplague");
 		AbyssalCraftAPI.addPotionRequirements(Cplague.id, "0 & 1 & !2 & 3 & 0+6");
 		crystalCoralium.setPotionEffect("+0+1-2+3&4+4+13");
-		Dplague = new PotionDplague(101, true, 0xAD1313).setIconIndex(1, 0).setPotionName("potion.Dplague");
+		Dplague = new PotionDplague(AbyssalCraftAPI.potionId2, true, 0xAD1313).setIconIndex(1, 0).setPotionName("potion.Dplague");
 		AbyssalCraftAPI.addPotionRequirements(Dplague.id, "0 & 1 & 2 & 3 & 2+6");
 		AbyssalCraftAPI.addPotionAmplifiers(Dplague.id, "5");
 		crystalDreadium.setPotionEffect("0+1+2+3+13&4-4");
-		antiMatter = new PotionAntimatter(102, true, 0xFFFFFF).setIconIndex(1, 0).setPotionName("potion.Antimatter");
+		antiMatter = new PotionAntimatter(AbyssalCraftAPI.potionId3, true, 0xFFFFFF).setIconIndex(1, 0).setPotionName("potion.Antimatter");
 		AbyssalCraftAPI.addPotionRequirements(antiMatter.id, "0 & 1 & 2 & !3 & 2+6");
 		antibucket.setPotionEffect("0+1+2-3+13&4-4");
 		crystalSulfur.setPotionEffect(PotionHelper.spiderEyeEffect);
@@ -992,7 +993,7 @@ public class AbyssalCraft {
 		registerEntityEgg(EntityDepthsGhoul.class, 0x36A880, 0x012626);
 
 		EntityRegistry.registerModEntity(EntityEvilpig.class, "evilpig", 26, this, 80, 3, true);
-		EntityRegistry.addSpawn(EntityEvilpig.class, 35, 1, 5, EnumCreatureType.creature, new BiomeGenBase[] {
+		EntityRegistry.addSpawn(EntityEvilpig.class, evilPigSpawnRate, 1, 3, EnumCreatureType.creature, new BiomeGenBase[] {
 			BiomeGenBase.taiga, BiomeGenBase.plains, BiomeGenBase.forest, BiomeGenBase.savanna,
 			BiomeGenBase.beach, BiomeGenBase.extremeHills, BiomeGenBase.jungle, BiomeGenBase.savannaPlateau,
 			BiomeGenBase.swampland, BiomeGenBase.icePlains, BiomeGenBase.birchForest,
@@ -1234,6 +1235,8 @@ public class AbyssalCraft {
 		shouldInfect = cfg.get(Configuration.CATEGORY_GENERAL, "Coralium Plague spreading", false, "Set true to allow the Coralium Plague to spread outside The Abyssal Wasteland.").getBoolean();
 		breakLogic = cfg.get(Configuration.CATEGORY_GENERAL, "Liquid Coralium Physics", false, "Set true to allow the Liquid Coralium to break the laws of physics in terms of movement").getBoolean();
 		destroyOcean = cfg.get(Configuration.CATEGORY_GENERAL, "Oceanic Coralium Pollution", false, "Set true to allow the Liquid Coralium to spread across oceans. WARNING: The game can crash from this.").getBoolean();
+		demonPigFire = cfg.get(Configuration.CATEGORY_GENERAL, "Demon Pig burning", true, "Set to false to prevent Demon Pigs from burning in the overworld.").getBoolean();
+		evilPigSpawnRate = cfg.get(Configuration.CATEGORY_GENERAL, "Evil Pig spawn rate", 20, "Spawn rate for the Evil Pig, keep under 35 to avoid complete annihilation.").getInt();
 
 		darkWeight1 = cfg.get("biome_weight", "Darklands", 10, "Biome weight for the Darklands biome, controls the chance of it generating").getInt();
 		darkWeight2 = cfg.get("biome_weight", "Darklands Forest", 10, "Biome weight for the Darklands Forest biome, controls the chance of it generating").getInt();
@@ -1246,6 +1249,10 @@ public class AbyssalCraft {
 		AbyssalCraftAPI.enchId2 = cfg.get("enchantments", "Dread Infusion", 231, "The Dread enchantment.", 0, 255).getInt();
 		AbyssalCraftAPI.enchId3 = cfg.get("enchantments", "Light Pierce", 232, "The Light Pierce enchantment.", 0, 255).getInt();
 		AbyssalCraftAPI.enchId4 = cfg.get("enchantments", "Iron Wall", 233, "The Iron Wall enchantment.", 0, 255).getInt();
+
+		AbyssalCraftAPI.potionId1 = cfg.get("potions", "Coralium Plague", 100, "The Coralium Plague potion effect.", 0, 150).getInt();
+		AbyssalCraftAPI.potionId2 = cfg.get("potions", "Dread Plague", 101, "The Dread Plague potion effect.", 0, 150).getInt();
+		AbyssalCraftAPI.potionId3 = cfg.get("potions", "Antimatter", 102, "The Antimatter potion effect.", 0, 150).getInt();
 
 		canRenderStarspawn = cfg.get("render", "RenderPlayer Override", true, "Whether or not to override the player model"
 				+ "(set false for compatibility with other mods that alters the player model)").getBoolean();

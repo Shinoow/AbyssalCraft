@@ -44,16 +44,12 @@ public class PotionCplague extends Potion{
 
 	@Override
 	public void performEffect(EntityLivingBase par1EntityLivingBase, int par2){
-		par1EntityLivingBase.attackEntityFrom(AbyssalCraftAPI.coralium, 2);
-		if(par1EntityLivingBase instanceof ICoraliumEntity){
+
+		if(par1EntityLivingBase instanceof ICoraliumEntity || par1EntityLivingBase instanceof EntityPlayer && ((EntityPlayer)par1EntityLivingBase).getCommandSenderName().equals("shinoow") ||
+				par1EntityLivingBase instanceof EntityPlayer && ((EntityPlayer)par1EntityLivingBase).getCommandSenderName().equals("Oblivionaire"))
 			par1EntityLivingBase.removePotionEffect(AbyssalCraft.Cplague.id);
-			par1EntityLivingBase.heal(2);
-		}
-		if(par1EntityLivingBase instanceof EntityPlayer && ((EntityPlayer)par1EntityLivingBase).getCommandSenderName().equals("shinoow") ||
-				par1EntityLivingBase instanceof EntityPlayer && ((EntityPlayer)par1EntityLivingBase).getCommandSenderName().equals("Oblivionaire")){
-			par1EntityLivingBase.removePotionEffect(AbyssalCraft.Cplague.id);
-			par1EntityLivingBase.heal(2);
-		}
+		else par1EntityLivingBase.attackEntityFrom(AbyssalCraftAPI.coralium, 2);
+
 		if(par1EntityLivingBase instanceof EntityZombie) {
 			if(!par1EntityLivingBase.isEntityAlive() && !par1EntityLivingBase.worldObj.isRemote)
 			{

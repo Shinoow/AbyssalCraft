@@ -406,6 +406,10 @@ public class EntityDepthsGhoul extends EntityMob implements ICoraliumEntity {
 				attribute.applyModifier(ghoulHDamageBoost);
 			break;
 		case 1:
+			if(worldObj.isRemote){
+				attribute.removeAllModifiers();
+				attribute1.removeAllModifiers();
+			}
 			attribute.applyModifier(peteDamageBoost);
 			attribute1.applyModifier(peteHealthBoost);
 			setHealth(40);
@@ -415,6 +419,10 @@ public class EntityDepthsGhoul extends EntityMob implements ICoraliumEntity {
 			}
 			break;
 		case 2:
+			if(worldObj.isRemote){
+				attribute.removeAllModifiers();
+				attribute1.removeAllModifiers();
+			}
 			attribute.applyModifier(wilsonDamageBoost);
 			attribute1.applyModifier(wilsonHealthBoost);
 			setHealth(50);
@@ -424,6 +432,10 @@ public class EntityDepthsGhoul extends EntityMob implements ICoraliumEntity {
 			}
 			break;
 		case 3:
+			if(worldObj.isRemote){
+				attribute.removeAllModifiers();
+				attribute1.removeAllModifiers();
+			}
 			attribute.applyModifier(orangeDamageBoost);
 			attribute1.applyModifier(orangeHealthBoost);
 			setHealth(60);

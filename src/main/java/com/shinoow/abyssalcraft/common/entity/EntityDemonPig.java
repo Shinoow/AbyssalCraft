@@ -18,7 +18,7 @@ package com.shinoow.abyssalcraft.common.entity;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.*;
 import net.minecraft.entity.ai.*;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
@@ -27,8 +27,11 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
+import com.shinoow.abyssalcraft.api.entity.IDreadEntity;
 
-public class EntityDemonPig extends EntityMob {
+public class EntityDemonPig extends EntityMob implements IDreadEntity {
+
+	private boolean canBurn = false;
 
 	public EntityDemonPig(World par1World)
 	{
@@ -105,8 +108,10 @@ public class EntityDemonPig extends EntityMob {
 			j = MathHelper.floor_double(posY);
 			k = MathHelper.floor_double(posZ + (l / 2 % 2 * 2 - 1) * 0.25F);
 
-			if (worldObj.provider.dimensionId != AbyssalCraft.configDimId2 && worldObj.getBlock(i, j, k).getMaterial() == Material.air && worldObj.getBiomeGenForCoords(i, k).getFloatTemperature(i, j, k) < 10.0F && Blocks.fire.canPlaceBlockAt(worldObj, i, j, k))
-				worldObj.setBlock(i, j, k, Blocks.fire);
+			if (worldObj.provider.dimensionId != AbyssalCraft.configDimId2 && worldObj.provider.dimensionId != 0 && worldObj.getBlock(i, j, k).getMaterial() == Material.air &&
+					worldObj.getBiomeGenForCoords(i, k).getFloatTemperature(i, j, k) < 10.0F && Blocks.fire.canPlaceBlockAt(worldObj, i, j, k) || canBurn == true &&
+					worldObj.getBlock(i, j, k).getMaterial() == Material.air && worldObj.getBiomeGenForCoords(i, k).getFloatTemperature(i, j, k) < 10.0F && Blocks.fire.canPlaceBlockAt(worldObj, i, j, k))
+				worldObj.setBlock(i, j, k, AbyssalCraft.dreadfire);
 		}
 	}
 
@@ -115,5 +120,16 @@ public class EntityDemonPig extends EntityMob {
 		int var3 = rand.nextInt(3) + 1 + rand.nextInt(1 + par2);
 		for (int var4 = 0; var4 < var3; ++var4)
 			dropItem(Items.rotten_flesh, 1);
+	}
+
+	@Override
+	public IEntityLivingData onSpawnWithEgg(IEntityLivingData par1EntityLivingData)
+	{
+		Object data = super.onSpawnWithEgg(par1EntityLivingData);
+
+		if(worldObj.provider.dimensionId == 0 && AbyssalCraft.demonPigFire == true && rand.nextInt(3) == 0)
+			canBurn = true;
+
+		return (IEntityLivingData)data;
 	}
 }

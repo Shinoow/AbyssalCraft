@@ -88,6 +88,29 @@ achievement.darkRealm.desc=你刚刚摔倒了，不是吗？
 achievement.killJzahar=浮动利率？并非如此。
 achievement.killJzahar.desc=你打败了守门者，可他并没死。
 
+#Messages
+message.asorah.spawn=Haha, foolish human, I AM UNLEASHED!
+message.asorah.death.1=Asorah? ... Asorah?!
+message.asorah.death.2=YOU, you will pay for this mortal!
+message.asorah.death.3=Besides, you'll never get past The Dreadlands. Have fun digging your own grave.
+message.altar.error=This altar can only be used within the Abyssal Wasteland.
+message.dreadaltar.error.1=That only works in the Dreadlands
+message.dreadaltar.error.2=You need to be within the Dreadlands Mountains
+message.dreadaltar.error.3=That still only works in the Dreadlands
+message.dreadaltartop.enter=Click on the top block to enter the lair of Cha'garoth
+message.dreadaltartop.spawn=Ah, I seem to have a visitor. Dreadguards, please devour our guest, if you may.
+message.chagaroth.death.1=Here, have your key back, transmute it for a working one.
+message.chagaroth.death.2=The chest behind me holds "The Legendary Treasure of The Dreadlands",
+message.chagaroth.death.3=left by the ones who ran the mine before I came into the picture.
+message.chagaroth.death.4=Don't get your hopes up, I bet it's just a block of dirt or something.
+message.jzahar.death.dev=I'm still an in-dev boss, so you didn't exactly achieve anything killing me.
+message.sacthoth.spawn.1=I am unleashed! Feel the wrath of The Dark Realm, mortal.
+message.sacthoth.spawn.2=But first, watch the explosion.
+message.sacthoth.damage.explosion=I'm not saying you \u00A7ocan't\u00A7r blow me up, it just won't work.
+message.sacthoth.damage.projectile=Ha, your projectiles can't harm me.
+message.portalplacer.error.1=You feel a presence of denial, J'zahar does not approve.
+message.portalplacer.error.2=Nothing happened...
+
 #Container Inventories
 container.abyssalcraft.crate=板条箱
 container.abyssalcraft.crystallizer=结晶器
@@ -112,6 +135,8 @@ ac_general=总体
 ac_general.tooltip=总体设置
 ac_enchantment=Enchantments
 ac_enchantment.tooltip=Enchantment ID configuration
+ac_potion=Potions
+ac_potion.tooltip=Potion ID configuration
 ac_render=Rendering
 ac_render.tooltip=Rendering configuration
 

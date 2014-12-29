@@ -26,6 +26,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ChatComponentText;
+import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
@@ -75,26 +76,26 @@ public class BlockDreadAltarTop extends BlockContainer {
 				if(par1World.getBiomeGenForCoords(par2, par4) == AbyssalCraft.MountainDreadlands){
 					if(par1World.getBlock(par2, par3 - 1, par4) == AbyssalCraft.dreadaltarbottom)
 						if(par3 == 41)
-							FMLClientHandler.instance().getClient().ingameGUI.getChatGUI().printChatMessage(new ChatComponentText("Click on the top block to enter the lair of Cha'garoth"));
+							FMLClientHandler.instance().getClient().ingameGUI.getChatGUI().printChatMessage(new ChatComponentText(StatCollector.translateToLocal("message.dreadaltartop.enter")));
 						else if(par3 < 41)
 							FMLClientHandler.instance().getClient().ingameGUI.getChatGUI().printChatMessage(new ChatComponentText("You need to place the altar "+ (41 - par3) +" blocks higher."));
 						else if(par3 > 41)
 							FMLClientHandler.instance().getClient().ingameGUI.getChatGUI().printChatMessage(new ChatComponentText("You need to place the altar "+ (par3 - 41) +" blocks lower."));
-				} else if(par1World.isRemote)
-					FMLClientHandler.instance().getClient().ingameGUI.getChatGUI().printChatMessage(new ChatComponentText("You need to be within the Dreadlands Mountains"));
-			} else if(par1World.isRemote)
-				FMLClientHandler.instance().getClient().ingameGUI.getChatGUI().printChatMessage(new ChatComponentText("That only works in the Dreadlands"));
+				} else
+					FMLClientHandler.instance().getClient().ingameGUI.getChatGUI().printChatMessage(new ChatComponentText(StatCollector.translateToLocal("message.dreadaltar.error.2")));
+			} else
+				FMLClientHandler.instance().getClient().ingameGUI.getChatGUI().printChatMessage(new ChatComponentText(StatCollector.translateToLocal("message.dreadaltar.error.1")));
 		return par9;
 	}
 
 	@Override
 	public boolean onBlockActivated(World par1World, int par2, int par3, int par4, EntityPlayer par5EntityPlayer, int par6, float par7, float par8, float par9) {
-		if(!par1World.isRemote)
-			if(par1World.provider.dimensionId == AbyssalCraft.configDimId2){
-				if(par1World.getBiomeGenForCoords(par2, par4) == AbyssalCraft.MountainDreadlands){
-					if(par1World.getBlock(par2, par3 - 1, par4) == AbyssalCraft.dreadaltarbottom && par3 == 41){
-						if(par1World.isRemote)
-							SpecialTextUtil.ChagarothText("Ah, I seem to have a visitor. Dreadguards, please devour our guest, if you may.");
+		if(par1World.provider.dimensionId == AbyssalCraft.configDimId2){
+			if(par1World.getBiomeGenForCoords(par2, par4) == AbyssalCraft.MountainDreadlands){
+				if(par1World.getBlock(par2, par3 - 1, par4) == AbyssalCraft.dreadaltarbottom && par3 == 41){
+					if(par1World.isRemote)
+						SpecialTextUtil.ChagarothText(StatCollector.translateToLocal("message.dreadaltartop.spawn"));
+					if(!par1World.isRemote){
 						par5EntityPlayer.addStat(AbyssalCraft.summonChagaroth, 1);
 						chagarothlair lair = new chagarothlair();
 						lair.generate(par1World, rand, par2, par3 - 2, par4);
@@ -102,20 +103,20 @@ public class BlockDreadAltarTop extends BlockContainer {
 						par1World.setBlockToAir(par2, par3 - 1, par4);
 						par1World.setBlockToAir(par2, par3, par4);
 					}
-				} else if(par1World.isRemote)
-					FMLClientHandler.instance().getClient().ingameGUI.getChatGUI().printChatMessage(new ChatComponentText("You need to be within the Dreadlands Mountains"));
+				}
 			} else if(par1World.isRemote)
-				FMLClientHandler.instance().getClient().ingameGUI.getChatGUI().printChatMessage(new ChatComponentText("That still only works in the Dreadlands"));
+				FMLClientHandler.instance().getClient().ingameGUI.getChatGUI().printChatMessage(new ChatComponentText(StatCollector.translateToLocal("message.dreadaltar.error.2")));
+		} else if(par1World.isRemote)
+			FMLClientHandler.instance().getClient().ingameGUI.getChatGUI().printChatMessage(new ChatComponentText(StatCollector.translateToLocal("message.dreadaltar.error.3")));
 		return false;
 	}
 
 	@Override
 	public void onEntityCollidedWithBlock(World par1World, int par2, int par3, int par4, Entity par5Entity) {
 		super.onEntityCollidedWithBlock(par1World, par2, par3, par4, par5Entity);
-		if(par5Entity instanceof EntityLivingBase){
+
+		if(par5Entity instanceof IDreadEntity){}
+		else if(par5Entity instanceof EntityLivingBase)
 			((EntityLivingBase)par5Entity).addPotionEffect(new PotionEffect(AbyssalCraft.Dplague.id, 100));
-			if(par5Entity instanceof IDreadEntity)
-				((EntityLivingBase)par5Entity).removePotionEffect(AbyssalCraft.Dplague.id);
-		}
 	}
 }

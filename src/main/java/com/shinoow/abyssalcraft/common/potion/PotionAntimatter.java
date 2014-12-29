@@ -45,11 +45,11 @@ public class PotionAntimatter extends Potion{
 
 	@Override
 	public void performEffect(EntityLivingBase par1EntityLivingBase, int par2){
-		par1EntityLivingBase.attackEntityFrom(AbyssalCraftAPI.antimatter, 5);
-		if(par1EntityLivingBase instanceof IAntiEntity){
+
+		if(par1EntityLivingBase instanceof IAntiEntity)
 			par1EntityLivingBase.removePotionEffect(AbyssalCraft.antiMatter.id);
-			par1EntityLivingBase.heal(5);
-		}
+		else par1EntityLivingBase.attackEntityFrom(AbyssalCraftAPI.antimatter, 5);
+
 		if(!par1EntityLivingBase.worldObj.isRemote && par1EntityLivingBase.isDead)
 			if(par1EntityLivingBase instanceof EntityZombie){
 				EntityAntiZombie entity = new EntityAntiZombie(par1EntityLivingBase.worldObj);

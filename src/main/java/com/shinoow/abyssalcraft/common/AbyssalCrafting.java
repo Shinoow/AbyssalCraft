@@ -547,10 +547,10 @@ public class AbyssalCrafting {
 		AbyssalCraftAPI.addCrystallization(AbyssalCraft.crystalAlumina, new ItemStack(AbyssalCraft.crystalAluminium, 2), new ItemStack(AbyssalCraft.crystalOxygen, 3), 0.1F);
 		AbyssalCraftAPI.addCrystallization(AbyssalCraft.crystalMagnesia, new ItemStack(AbyssalCraft.crystalMagnesium), new ItemStack(AbyssalCraft.crystalOxygen), 0.1F);
 		AbyssalCraftAPI.addCrystallization("ingotBronze", "crystalCopper", 1, "crystalTin", 3, 0.4F);
-		AbyssalCraftAPI.addCrystallization(AbyssalCraft.crystalMethane, new ItemStack(AbyssalCraft.crystalCarbon), new ItemStack(AbyssalCraft.crystalHydrogen), 0.1F);
+		AbyssalCraftAPI.addCrystallization(AbyssalCraft.crystalMethane, new ItemStack(AbyssalCraft.crystalCarbon), new ItemStack(AbyssalCraft.crystalHydrogen, 4), 0.1F);
 		AbyssalCraftAPI.addCrystallization(AbyssalCraft.crystalNitrate, new ItemStack(AbyssalCraft.crystalNitrogen), new ItemStack(AbyssalCraft.crystalOxygen, 3), 0.1F);
 		AbyssalCraftAPI.addCrystallization(Blocks.lapis_ore, new ItemStack(AbyssalCraft.crystalSilica, 6), new ItemStack(AbyssalCraft.crystalSulfur, 4), 0.15F);
-		AbyssalCraftAPI.addCrystallization(Blocks.lapis_block, new ItemStack(AbyssalCraft.crystalSilica, 24), new ItemStack(AbyssalCraft.crystalSulfur, 16), 1.0F);
+		AbyssalCraftAPI.addCrystallization(Blocks.lapis_block, new ItemStack(AbyssalCraft.crystalSilica, 54), new ItemStack(AbyssalCraft.crystalSulfur, 36), 1.0F);
 		AbyssalCraftAPI.addCrystallization("ingotBrass", "crystalCopper", 3, "crystalZinc", 2, 0.5F);
 		AbyssalCraftAPI.addCrystallization("oreBrass", "crystalCopper", 3, "crystalZinc", 2, 0.5F);
 		AbyssalCraftAPI.addSingleCrystallization(Items.rotten_flesh, new ItemStack(AbyssalCraft.crystalPhosphorus, 2), 0.1F);

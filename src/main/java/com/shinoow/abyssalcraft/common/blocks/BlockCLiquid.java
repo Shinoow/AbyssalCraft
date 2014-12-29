@@ -122,13 +122,10 @@ public class BlockCLiquid extends BlockFluidClassic {
 	@Override
 	public void onEntityCollidedWithBlock(World par1World, int par2, int par3, int par4, Entity par5Entity) {
 		super.onEntityCollidedWithBlock(par1World, par2, par3, par4, par5Entity);
-		if(par5Entity instanceof EntityLivingBase){
+
+		if(par5Entity instanceof ICoraliumEntity || par5Entity instanceof EntityPlayer && ((EntityPlayer)par5Entity).getCommandSenderName().equals("shinoow") ||
+				par5Entity instanceof EntityPlayer && ((EntityPlayer)par5Entity).getCommandSenderName().equals("Oblivionaire")){}
+		else if(par5Entity instanceof EntityLivingBase)
 			((EntityLivingBase)par5Entity).addPotionEffect(new PotionEffect(AbyssalCraft.Cplague.id, 100));
-			if(par5Entity instanceof ICoraliumEntity)
-				((EntityLivingBase)par5Entity).removePotionEffect(AbyssalCraft.Cplague.id);
-			if(par5Entity instanceof EntityPlayer && ((EntityPlayer)par5Entity).getCommandSenderName().equals("shinoow") ||
-					par5Entity instanceof EntityPlayer && ((EntityPlayer)par5Entity).getCommandSenderName().equals("Oblivionaire"))
-				((EntityPlayer)par5Entity).removePotionEffect(AbyssalCraft.Cplague.id);
-		}
 	}
 }

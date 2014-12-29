@@ -44,6 +44,7 @@ public class ACConfigGUI extends GuiConfig {
 		list.add(new DummyCategoryElement<Object>(StatCollector.translateToLocal("ac_biomeweight"), "ac_biomeweight", BiomeWeightEntry.class));
 		list.add(new DummyCategoryElement<Object>(StatCollector.translateToLocal("ac_general"), "ac_general", GeneralEntry.class));
 		list.add(new DummyCategoryElement<Object>(StatCollector.translateToLocal("ac_enchantment"), "ac_enchantment", EnchantmentEntry.class));
+		list.add(new DummyCategoryElement<Object>(StatCollector.translateToLocal("ac_potion"), "ac_potion", PotionEntry.class));
 		list.add(new DummyCategoryElement<Object>(StatCollector.translateToLocal("ac_render"), "ac_render", RenderEntry.class));
 		return list;
 	}
@@ -125,6 +126,18 @@ public class ACConfigGUI extends GuiConfig {
 		@Override
 		protected GuiScreen buildChildScreen(){
 			return new GuiConfig(owningScreen, new ConfigElement<Object>(AbyssalCraft.cfg.getCategory("enchantments")).getChildElements(), "abyssalcraft", "enchantments", true, true, StatCollector.translateToLocal("ac_enchantment"));
+
+		}
+	}
+	public static class PotionEntry extends CategoryEntry{
+
+		public PotionEntry(GuiConfig owningScreen, GuiConfigEntries owningEntryList, IConfigElement<?> configElement) {
+			super(owningScreen, owningEntryList, configElement);
+		}
+
+		@Override
+		protected GuiScreen buildChildScreen(){
+			return new GuiConfig(owningScreen, new ConfigElement<Object>(AbyssalCraft.cfg.getCategory("potions")).getChildElements(), "abyssalcraft", "potions", true, true, StatCollector.translateToLocal("ac_potion"));
 
 		}
 	}

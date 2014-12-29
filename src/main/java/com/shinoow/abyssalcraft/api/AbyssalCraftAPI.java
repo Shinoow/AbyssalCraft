@@ -52,6 +52,11 @@ public class AbyssalCraftAPI {
 	 */
 	public static int enchId1, enchId2, enchId3, enchId4;
 
+	/**
+	 * Potion IDs, first one is the Coralium Plague, second Dread Plague, and third Antimatter
+	 */
+	public static int potionId1, potionId2, potionId3;
+
 	private static List<IFuelHandler> crystallizerFuelHandlers = Lists.newArrayList();
 	private static List<IFuelHandler> transmutatorFuelHandlers = Lists.newArrayList();
 
@@ -746,15 +751,16 @@ public class AbyssalCraftAPI {
 	}
 
 	/**
-	 * Contains all potion effects added in AbyssalCraft
+	 * Contains all potion effects added in AbyssalCraft.
+	 * You can reference them from here, or use the ID directly
 	 * 
 	 * @author shinoow
 	 *
 	 */
 	public static class ACPotions {
 
-		public static Potion Coralium_plague = Potion.potionTypes[100];
-		public static Potion Dread_plague = Potion.potionTypes[101];
-		public static Potion Antimatter = Potion.potionTypes[102];
+		public static Potion Coralium_plague = Potion.potionTypes[potionId1];
+		public static Potion Dread_plague = Potion.potionTypes[potionId2];
+		public static Potion Antimatter = Potion.potionTypes[potionId3];
 	}
 }

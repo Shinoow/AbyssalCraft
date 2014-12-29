@@ -68,14 +68,12 @@ public class BlockPSDL extends BlockContainer {
 	}
 
 	@Override
-	public void onEntityCollidedWithBlock(World par1World, int par2, int par3, int par4, Entity par5Entity)
-	{
+	public void onEntityCollidedWithBlock(World par1World, int par2, int par3, int par4, Entity par5Entity) {
 		super.onEntityCollidedWithBlock(par1World, par2, par3, par4, par5Entity);
-		if(par5Entity instanceof EntityLivingBase){
+
+		if(par5Entity instanceof IDreadEntity){}
+		else if(par5Entity instanceof EntityLivingBase)
 			((EntityLivingBase)par5Entity).addPotionEffect(new PotionEffect(AbyssalCraft.Dplague.id, 100));
-			if(par5Entity instanceof IDreadEntity)
-				((EntityLivingBase)par5Entity).removePotionEffect(AbyssalCraft.Dplague.id);
-		}
 	}
 
 	@Override

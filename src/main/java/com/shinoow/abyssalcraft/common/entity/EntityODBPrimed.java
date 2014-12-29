@@ -19,6 +19,7 @@ package com.shinoow.abyssalcraft.common.entity;
 import net.minecraft.entity.*;
 import net.minecraft.init.Blocks;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
@@ -146,8 +147,8 @@ public class EntityODBPrimed extends Entity {
 
 	@SideOnly(Side.CLIENT)
 	private void message(){
-		SpecialTextUtil.SacthothText("I am unleashed! Feel the wrath of The Dark Realm, mortal.");
-		SpecialTextUtil.SacthothText("But first, watch the explosion.");
+		SpecialTextUtil.SacthothText(StatCollector.translateToLocal("message.sacthoth.spawn.1"));
+		SpecialTextUtil.SacthothText(StatCollector.translateToLocal("message.sacthoth.spawn.2"));
 	}
 
 	@Override

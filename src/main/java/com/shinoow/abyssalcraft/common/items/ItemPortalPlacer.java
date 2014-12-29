@@ -57,7 +57,7 @@ public class ItemPortalPlacer extends Item {
 	{
 		if(par3World.isRemote && par2EntityPlayer.dimension == -1 || par3World.isRemote && par2EntityPlayer.dimension == 1)
 		{
-			FMLClientHandler.instance().getClient().ingameGUI.getChatGUI().printChatMessage(new ChatComponentText("You feel a presence of denial, J'zahar does not approve."));
+			FMLClientHandler.instance().getClient().ingameGUI.getChatGUI().printChatMessage(new ChatComponentText(StatCollector.translateToLocal("message.portalplacer.error.1")));
 			return false;
 		}
 		else if(!par3World.isRemote && par3World.provider.isSurfaceWorld() || !par3World.isRemote && par2EntityPlayer.dimension == AbyssalCraft.configDimId1

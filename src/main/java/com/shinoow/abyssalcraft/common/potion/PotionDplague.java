@@ -42,11 +42,11 @@ public class PotionDplague extends Potion{
 
 	@Override
 	public void performEffect(EntityLivingBase par1EntityLivingBase, int par2){
-		par1EntityLivingBase.attackEntityFrom(AbyssalCraftAPI.dread, 1);
-		if(par1EntityLivingBase instanceof IDreadEntity){
+
+		if(par1EntityLivingBase instanceof IDreadEntity)
 			par1EntityLivingBase.removePotionEffect(AbyssalCraft.Dplague.id);
-			par1EntityLivingBase.heal(1);
-		}
+		else par1EntityLivingBase.attackEntityFrom(AbyssalCraftAPI.dread, 1);
+
 		if(par1EntityLivingBase instanceof EntityPlayer)
 			((EntityPlayer)par1EntityLivingBase).addExhaustion(0.025F * (par2+2));
 	}

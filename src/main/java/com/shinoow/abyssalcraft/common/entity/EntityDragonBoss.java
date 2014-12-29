@@ -142,9 +142,9 @@ public class EntityDragonBoss extends EntityMob implements IBossDisplayData, IEn
 			entityplayer.addStat(AbyssalCraft.killAsorah, 1);
 		}
 		if(worldObj.isRemote){
-			SpecialTextUtil.OblivionaireText("Asorah? ... Asorah?!");
-			SpecialTextUtil.OblivionaireText("YOU, you will pay for this mortal!");
-			SpecialTextUtil.OblivionaireText("Besides, you'll never get past The Dreadlands. Have fun digging your own grave.");
+			SpecialTextUtil.OblivionaireText(StatCollector.translateToLocal("message.asorah.death.1"));
+			SpecialTextUtil.OblivionaireText(StatCollector.translateToLocal("message.asorah.death.2"));
+			SpecialTextUtil.OblivionaireText(StatCollector.translateToLocal("message.asorah.death.3"));
 		}
 		super.onDeath(par1DamageSource);
 	}
