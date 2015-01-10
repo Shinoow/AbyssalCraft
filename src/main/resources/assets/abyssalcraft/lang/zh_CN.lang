@@ -89,38 +89,38 @@ achievement.killJzahar=浮动利率？并非如此。
 achievement.killJzahar.desc=你打败了守门者，可他并没死。
 
 #Messages
-message.asorah.spawn=Haha, foolish human, I AM UNLEASHED!
-message.asorah.death.1=Asorah? ... Asorah?!
-message.asorah.death.2=YOU, you will pay for this mortal!
-message.asorah.death.3=Besides, you'll never get past The Dreadlands. Have fun digging your own grave.
-message.altar.error=This altar can only be used within the Abyssal Wasteland.
-message.dreadaltar.error.1=That only works in the Dreadlands
-message.dreadaltar.error.2=You need to be within the Dreadlands Mountains
-message.dreadaltar.error.3=That still only works in the Dreadlands
-message.dreadaltartop.enter=Click on the top block to enter the lair of Cha'garoth
-message.dreadaltartop.spawn=Ah, I seem to have a visitor. Dreadguards, please devour our guest, if you may.
-message.chagaroth.death.1=Here, have your key back, transmute it for a working one.
-message.chagaroth.death.2=The chest behind me holds "The Legendary Treasure of The Dreadlands",
-message.chagaroth.death.3=left by the ones who ran the mine before I came into the picture.
-message.chagaroth.death.4=Don't get your hopes up, I bet it's just a block of dirt or something.
+message.asorah.spawn=哈哈, 愚蠢的人类, 我解放了!
+message.asorah.death.1=阿索拉? ... 阿索拉?!
+message.asorah.death.2=你, 你会为此付出代价的!
+message.asorah.death.3=除此之外, 你将永远无法离开恐惧之地. 尽情地挖掘你自己的坟墓吧.
+message.altar.error=这个祭坛只能在深渊荒芜之地使用.
+message.dreadaltar.error.1=只能在恐惧之地起作用
+message.dreadaltar.error.2=你需要在恐惧之地的山丘之中
+message.dreadaltar.error.3=这依旧只能在恐惧之地中使用
+message.dreadaltartop.enter=点击顶部的方块来进入查加罗特的洞穴
+message.dreadaltartop.spawn=啊, 我似乎有一位来客. 恐惧守卫, 如果可以的话请吞灭我们的客人吧.
+message.chagaroth.death.1=这里, 拿回你的钥匙, 将它变成有用的.
+message.chagaroth.death.2=在我后面的箱子上写着 "恐惧之地的传奇宝藏",
+message.chagaroth.death.3=是在我被牵涉进来之前的挖矿的人所遗留的.
+message.chagaroth.death.4=不要抱太大的希望, 我打赌这只不过是一块泥土或者别的.
 message.jzahar.death.dev=I'm still an in-dev boss, so you didn't exactly achieve anything killing me.
 message.sacthoth.spawn.1=I am unleashed! Feel the wrath of The Dark Realm, mortal.
 message.sacthoth.spawn.2=But first, watch the explosion.
 message.sacthoth.damage.explosion=I'm not saying you \u00A7ocan't\u00A7r blow me up, it just won't work.
 message.sacthoth.damage.projectile=Ha, your projectiles can't harm me.
-message.portalplacer.error.1=You feel a presence of denial, J'zahar does not approve.
-message.portalplacer.error.2=Nothing happened...
+message.portalplacer.error.1=你感受到一种被抛弃的感觉, 扎哈尔并没有批准你.
+message.portalplacer.error.2=没有任何事情发生...
 
 #Container Inventories
 container.abyssalcraft.crate=板条箱
 container.abyssalcraft.crystallizer=结晶器
 container.abyssalcraft.transmutator=嬗变器
-container.abyssalcraft.engraver=Engraver
+container.abyssalcraft.engraver=铸造器
 
 #NEI Integration
 container.abyssalcraft.crystallizer.nei=结晶化
 container.abyssalcraft.transmutator.nei=嬗变化
-container.abyssalcraft.engraver.nei=Coin Engraving
+container.abyssalcraft.engraver.nei=钱币铸造
 
 #Configuration
 ac_dimensions=维度
@@ -133,12 +133,12 @@ ac_biomespawn=生物群落生成物
 ac_biomespawn.tooltip=生物群落生成物设置
 ac_general=总体
 ac_general.tooltip=总体设置
-ac_enchantment=Enchantments
-ac_enchantment.tooltip=Enchantment ID configuration
-ac_potion=Potions
-ac_potion.tooltip=Potion ID configuration
-ac_render=Rendering
-ac_render.tooltip=Rendering configuration
+ac_enchantment=附魔
+ac_enchantment.tooltip=附魔ID设置
+ac_potion=药水
+ac_potion.tooltip=药水ID设置
+ac_render=渲染
+ac_render.tooltip=渲染设置
 
 #Damagesources
 death.attack.coralium=%1$s由于珊瑚侵染而死亡
@@ -192,7 +192,7 @@ itemgroup.acctools=深渊国度战斗工具
 itemgroup.acfood=深渊国度食物
 itemgroup.acdblocks=深渊国度装饰方块
 itemgroup.accrystals=深渊国度结晶器水晶
-itemgroup.accoins=Abyssalcraft Coins
+itemgroup.accoins=深渊国度钱币
 
 #Blocks
 tile.DS.name=黑暗石
@@ -309,7 +309,7 @@ tile.OS.name=奥穆索石头
 tile.BOE.name=伊桑斯锭块
 tile.OG.name=奥穆索之门
 tile.Ofire.name=奥穆索之火
-tile.engraver.name=Engraver
+tile.engraver.name=铸造器
 
 #Items
 item.DEV_BLADE.name=恶魔之刃
@@ -558,11 +558,11 @@ entity.abyssalcraft.antiplayer.name=反物质玩家
 entity.abyssalcraft.antiskeleton.name=反物质骷髅
 entity.abyssalcraft.antispider.name=反物质蜘蛛
 entity.abyssalcraft.antizombie.name=反物质僵尸
-entity.abyssalcraft.lessershoggoth.name=莱塞修格斯
-entity.abyssalcraft.lessershoggoth.abyssal.name=Lesser Abyssal Shoggoth
-entity.abyssalcraft.lessershoggoth.dreaded.name=Lesser Dreaded Shoggoth
-entity.abyssalcraft.lessershoggoth.omothol.name=Lesser Omothol Shoggoth
-entity.abyssalcraft.lessershoggoth.dark.name=Lesser Shadow Shoggoth
+entity.abyssalcraft.lessershoggoth.name=小型修格斯
+entity.abyssalcraft.lessershoggoth.abyssal.name=小型Abyssal 修格斯
+entity.abyssalcraft.lessershoggoth.dreaded.name=小型Dreaded 修格斯
+entity.abyssalcraft.lessershoggoth.omothol.name=小型Omothol 修格斯
+entity.abyssalcraft.lessershoggoth.dark.name=小型阴影修格斯
 entity.abyssalcraft.shadowtitan.name=阴影泰坦
 entity.abyssalcraft.omotholwarden.name=奥穆索守卫
 entity.abyssalcraft.jzaharminion.name=守门者奴仆
