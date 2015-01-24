@@ -1,6 +1,6 @@
 /**
  * AbyssalCraft
- * Copyright 2012-2014 Shinoow
+ * Copyright 2012-2015 Shinoow
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,11 +18,15 @@ package com.shinoow.abyssalcraft.common.entity.anti;
 
 import java.util.Calendar;
 
-import net.minecraft.entity.*;
-import net.minecraft.entity.passive.*;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.passive.EntityAmbientCreature;
+import net.minecraft.entity.passive.EntityBat;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.*;
+import net.minecraft.util.ChunkCoordinates;
+import net.minecraft.util.DamageSource;
+import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
 import com.shinoow.abyssalcraft.api.entity.IAntiEntity;

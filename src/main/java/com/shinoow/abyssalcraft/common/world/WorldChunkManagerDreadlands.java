@@ -1,6 +1,6 @@
 /**
  * AbyssalCraft
- * Copyright 2012-2014 Shinoow
+ * Copyright 2012-2015 Shinoow
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,16 +16,24 @@
  */
 package com.shinoow.abyssalcraft.common.world;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 
-import net.minecraft.world.*;
-import net.minecraft.world.biome.*;
-import net.minecraft.world.gen.layer.*;
+import net.minecraft.world.ChunkPosition;
+import net.minecraft.world.World;
+import net.minecraft.world.WorldType;
+import net.minecraft.world.biome.BiomeCache;
+import net.minecraft.world.biome.BiomeGenBase;
+import net.minecraft.world.biome.WorldChunkManager;
+import net.minecraft.world.gen.layer.GenLayer;
+import net.minecraft.world.gen.layer.IntCache;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.common.world.gen.layer.GenLayerDL;
 
-import cpw.mods.fml.relauncher.*;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class WorldChunkManagerDreadlands extends WorldChunkManager
 {

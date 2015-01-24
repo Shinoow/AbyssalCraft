@@ -1,6 +1,6 @@
 /**
  * AbyssalCraft
- * Copyright 2012-2014 Shinoow
+ * Copyright 2012-2015 Shinoow
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,7 +25,8 @@ import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.gen.feature.WorldGenMinable;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
-import com.shinoow.abyssalcraft.common.entity.*;
+import com.shinoow.abyssalcraft.common.entity.EntityAbyssalZombie;
+import com.shinoow.abyssalcraft.common.entity.EntityDepthsGhoul;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;

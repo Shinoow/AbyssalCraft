@@ -85,5 +85,19 @@
 		"sounds": [
 		"shadow/sacthoth/death"
 		]
+	},
+	"shadow.death": {
+		"category": "hostile",
+		"sounds": [
+		"shadow/death"
+		]
+	},
+	"shadow.hit": {
+		"category": "hostile",
+		"sounds": [
+		"shadow/hurt1",
+		"shadow/hurt2",
+		"shadow/hurt3"
+		]
 	}
 }

@@ -1,6 +1,6 @@
 /**
  * AbyssalCraft
- * Copyright 2012-2014 Shinoow
+ * Copyright 2012-2015 Shinoow
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -24,27 +24,27 @@ import net.minecraft.util.MathHelper;
 public class ModelShadowMonster extends ModelBase
 {
 
-	ModelRenderer Head;
-	ModelRenderer Body1;
-	ModelRenderer Body2;
-	ModelRenderer Body3;
-	ModelRenderer Lshoulder1;
-	ModelRenderer Rshoulder1;
-	ModelRenderer Lshoulder2;
-	ModelRenderer Rshoulder2;
-	ModelRenderer Larm1;
-	ModelRenderer Larm2;
-	ModelRenderer Rarm1;
-	ModelRenderer Rarm2;
-	ModelRenderer Back1;
-	ModelRenderer Back2;
-	ModelRenderer Back3;
-	ModelRenderer Back4;
-	ModelRenderer Back5;
-	ModelRenderer Back6;
-	ModelRenderer Back7;
-	ModelRenderer Back8;
-	ModelRenderer Back9;
+	public ModelRenderer Head;
+	public ModelRenderer Body1;
+	public ModelRenderer Body2;
+	public ModelRenderer Body3;
+	public ModelRenderer Lshoulder1;
+	public ModelRenderer Rshoulder1;
+	public ModelRenderer Lshoulder2;
+	public ModelRenderer Rshoulder2;
+	public ModelRenderer Larm1;
+	public ModelRenderer Larm2;
+	public ModelRenderer Rarm1;
+	public ModelRenderer Rarm2;
+	public ModelRenderer Back1;
+	public ModelRenderer Back2;
+	public ModelRenderer Back3;
+	public ModelRenderer Back4;
+	public ModelRenderer Back5;
+	public ModelRenderer Back6;
+	public ModelRenderer Back7;
+	public ModelRenderer Back8;
+	public ModelRenderer Back9;
 
 	public ModelShadowMonster()
 	{

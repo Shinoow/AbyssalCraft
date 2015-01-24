@@ -1,6 +1,6 @@
 /**
  * AbyssalCraft
- * Copyright 2012-2014 Shinoow
+ * Copyright 2012-2015 Shinoow
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,14 +16,19 @@
  */
 package com.shinoow.abyssalcraft.common.blocks;
 
-import net.minecraft.block.material.*;
+import net.minecraft.block.material.MapColor;
+import net.minecraft.block.material.Material;
+import net.minecraft.block.material.MaterialLiquid;
 import net.minecraft.client.renderer.texture.IIconRegister;
-import net.minecraft.entity.*;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.init.Blocks;
-import net.minecraft.potion.*;
+import net.minecraft.potion.Potion;
+import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.IIcon;
-import net.minecraft.world.*;
+import net.minecraft.world.IBlockAccess;
+import net.minecraft.world.World;
 import net.minecraftforge.fluids.BlockFluidClassic;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;

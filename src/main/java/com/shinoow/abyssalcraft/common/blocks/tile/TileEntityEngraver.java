@@ -1,6 +1,6 @@
 /**
  * AbyssalCraft
- * Copyright 2012-2014 Shinoow
+ * Copyright 2012-2015 Shinoow
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,15 +19,16 @@ package com.shinoow.abyssalcraft.common.blocks.tile;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.*;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
 
-import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.api.item.ItemEngraving;
 import com.shinoow.abyssalcraft.api.recipe.EngraverRecipes;
 import com.shinoow.abyssalcraft.common.blocks.BlockEngraver;
 
-import cpw.mods.fml.relauncher.*;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class TileEntityEngraver extends TileEntity implements ISidedInventory {
 
@@ -195,7 +196,7 @@ public class TileEntityEngraver extends TileEntity implements ISidedInventory {
 			if (engraverProcessTime > 0)
 			{
 				flag1 = true;
-				BlockEngraver.updateEngraverBlockState(engraverProcessTime > 0, worldObj, xCoord, yCoord, zCoord);
+				BlockEngraver.updateEngraverBlockState(worldObj, xCoord, yCoord, zCoord);
 			}
 		}
 
@@ -208,17 +209,13 @@ public class TileEntityEngraver extends TileEntity implements ISidedInventory {
 	 */
 	private boolean canEngrave()
 	{
-		if (engraverItemStacks[0] == null || EngraverRecipes.engraving().getEngravingResult(engraverItemStacks[0]) == null)
+		if (engraverItemStacks[0] == null || EngraverRecipes.engraving().getEngravingResult(engraverItemStacks[0], (ItemEngraving)engraverItemStacks[1].getItem()) == null)
 			return false;
 		else
 		{
-			ItemStack itemstack = EngraverRecipes.engraving().getEngravingResult(engraverItemStacks[0]);
-			boolean blank = engraverItemStacks[1].getItem() == AbyssalCraft.engravingBlank && itemstack.getItem() == AbyssalCraft.coin;
-			boolean cthulhu = engraverItemStacks[1].getItem() == AbyssalCraft.engravingCthulhu && itemstack.getItem() == AbyssalCraft.cthulhuCoin;
+			ItemStack itemstack = EngraverRecipes.engraving().getEngravingResult(engraverItemStacks[0], (ItemEngraving)engraverItemStacks[1].getItem());
 			if (itemstack == null) return false;
-			if(blank == false && cthulhu == false) return false;
-			if (engraverItemStacks[2] == null && blank == true && cthulhu == false) return true;
-			if (engraverItemStacks[2] == null && cthulhu == true && blank == false) return true;
+			if (engraverItemStacks[2] == null) return true;
 			if (!engraverItemStacks[2].isItemEqual(itemstack)) return false;
 			int result = engraverItemStacks[2].stackSize + itemstack.stackSize;
 			return result <= getInventoryStackLimit() && result <= engraverItemStacks[2].getMaxStackSize();
@@ -232,7 +229,7 @@ public class TileEntityEngraver extends TileEntity implements ISidedInventory {
 	{
 		if (canEngrave())
 		{
-			ItemStack itemstack = EngraverRecipes.engraving().getEngravingResult(engraverItemStacks[0]);
+			ItemStack itemstack = EngraverRecipes.engraving().getEngravingResult(engraverItemStacks[0], (ItemEngraving)engraverItemStacks[1].getItem());
 
 			if (engraverItemStacks[2] == null)
 				engraverItemStacks[2] = itemstack.copy();

@@ -1,6 +1,6 @@
 /**
  * AbyssalCraft
- * Copyright 2012-2014 Shinoow
+ * Copyright 2012-2015 Shinoow
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,16 +16,28 @@
  */
 package com.shinoow.abyssalcraft.common.entity;
 
-import java.util.*;
+import java.util.Iterator;
+import java.util.List;
 
-import net.minecraft.entity.*;
-import net.minecraft.entity.boss.*;
-import net.minecraft.entity.item.*;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.IEntityMultiPart;
+import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.boss.BossStatus;
+import net.minecraft.entity.boss.EntityDragonPart;
+import net.minecraft.entity.boss.IBossDisplayData;
+import net.minecraft.entity.item.EntityItem;
+import net.minecraft.entity.item.EntityXPOrb;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.*;
-import net.minecraft.world.*;
+import net.minecraft.util.DamageSource;
+import net.minecraft.util.EnumChatFormatting;
+import net.minecraft.util.MathHelper;
+import net.minecraft.util.StatCollector;
+import net.minecraft.util.Vec3;
+import net.minecraft.world.Explosion;
+import net.minecraft.world.World;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.api.entity.ICoraliumEntity;

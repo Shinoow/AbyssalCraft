@@ -1,6 +1,6 @@
 /**
  * AbyssalCraft
- * Copyright 2012-2014 Shinoow
+ * Copyright 2012-2015 Shinoow
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -199,10 +199,13 @@ public class ACItems {
 	public static Item ethaxium_sword = GameRegistry.findItem(modId, "ethaxiumsword");
 	public static Item ethaxium_hoe = GameRegistry.findItem(modId, "ethaxiumhoe");
 	public static Item ethaxium_upgrade_kit = GameRegistry.findItem(modId, "ethaxiumu");
-	/** Metadata item, has indexes 0, 1, 2, 3, 4, 5, 6 */
 	public static Item coin = GameRegistry.findItem(modId, "coin");
-	/** Metadata item, has indexes 0, 1, 2, 3, 4, 5, 6 */
 	public static Item cthulhu_engraved_coin = GameRegistry.findItem(modId, "cthulhucoin");
+	public static Item elder_engraved_coin = GameRegistry.findItem(modId, "eldercoin");
+	public static Item jzahar_engraved_coin = GameRegistry.findItem(modId, "jzaharcoin");
 	public static Item blank_engraving = GameRegistry.findItem(modId, "engraving_blank");
 	public static Item cthulhu_engraving = GameRegistry.findItem(modId, "engraving_cthulhu");
+	public static Item elder_engraving = GameRegistry.findItem(modId, "engraving_elder");
+	public static Item jzahar_engraving	= GameRegistry.findItem(modId, "engraving_jzahar");
+	public static Item eldritch_scale = GameRegistry.findItem(modId, "eldritchscale");
 }

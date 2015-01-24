@@ -1,6 +1,6 @@
 /**
  * AbyssalCraft
- * Copyright 2012-2014 Shinoow
+ * Copyright 2012-2015 Shinoow
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -138,5 +138,4 @@ public class ACBlocks {
 	public static Block omothol_gateway = GameRegistry.findBlock(modId, "omotholportal");
 	public static Block omothol_fire = GameRegistry.findBlock(modId, "omotholfire");
 	public static Block engraver = GameRegistry.findBlock(modId, "engraver");
-	public static Block engraver_active = GameRegistry.findBlock(modId, "engraver_on");
 }

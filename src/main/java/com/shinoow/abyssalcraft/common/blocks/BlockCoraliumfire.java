@@ -1,6 +1,6 @@
 /**
  * AbyssalCraft
- * Copyright 2012-2014 Shinoow
+ * Copyright 2012-2015 Shinoow
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,9 +20,9 @@ import net.minecraft.block.BlockFire;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.item.EntityItem;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.IIcon;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 
@@ -40,6 +40,12 @@ public class BlockCoraliumfire extends BlockFire {
 	{
 		super();
 		setTickRandomly(true);
+	}
+
+	@Override
+	public boolean isBurning(IBlockAccess world, int x, int y, int z)
+	{
+		return true;
 	}
 
 	@Override
@@ -62,13 +68,9 @@ public class BlockCoraliumfire extends BlockFire {
 	public void onEntityCollidedWithBlock(World par1World, int par2, int par3, int par4, Entity par5Entity) {
 		super.onEntityCollidedWithBlock(par1World, par2, par3, par4, par5Entity);
 
-		if(par5Entity instanceof EntityLivingBase){
-			((EntityLivingBase)par5Entity).setFire(10);
+		if(par5Entity instanceof EntityLivingBase)
 			if(par5Entity instanceof ICoraliumEntity) {}
 			else ((EntityLivingBase)par5Entity).addPotionEffect(new PotionEffect(AbyssalCraft.Cplague.id, 100));
-		}
-		if(par5Entity instanceof EntityItem)
-			par5Entity.setDead();
 	}
 
 	@Override

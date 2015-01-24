@@ -1,6 +1,6 @@
 /**
  * AbyssalCraft
- * Copyright 2012-2014 Shinoow
+ * Copyright 2012-2015 Shinoow
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -24,7 +24,12 @@ import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraft.world.gen.feature.WorldGenMinable;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
-import com.shinoow.abyssalcraft.common.structures.overworld.*;
+import com.shinoow.abyssalcraft.common.structures.overworld.AChouse1;
+import com.shinoow.abyssalcraft.common.structures.overworld.AChouse2;
+import com.shinoow.abyssalcraft.common.structures.overworld.ACplatform1;
+import com.shinoow.abyssalcraft.common.structures.overworld.ACplatform2;
+import com.shinoow.abyssalcraft.common.structures.overworld.ACscion1;
+import com.shinoow.abyssalcraft.common.structures.overworld.ACscion2;
 
 import cpw.mods.fml.common.IWorldGenerator;
 

@@ -1,6 +1,6 @@
 /**
  * AbyssalCraft
- * Copyright 2012-2014 Shinoow
+ * Copyright 2012-2015 Shinoow
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,28 +22,28 @@ import net.minecraft.entity.Entity;
 
 public class ModelChagarothFist extends ModelBase {
 
-	ModelRenderer arm1;
-	ModelRenderer ground;
-	ModelRenderer arm2;
-	ModelRenderer arm3;
-	ModelRenderer palm1;
-	ModelRenderer palm2;
-	ModelRenderer finger1;
-	ModelRenderer finger2;
-	ModelRenderer finger3;
-	ModelRenderer finger4;
-	ModelRenderer finger5;
-	ModelRenderer finger12;
-	ModelRenderer finger22;
-	ModelRenderer finger32;
-	ModelRenderer finger42;
-	ModelRenderer finger52;
-	ModelRenderer finger13;
-	ModelRenderer finger23;
-	ModelRenderer finger33;
-	ModelRenderer finger43;
-	ModelRenderer finger53;
-	ModelRenderer eye;
+	public ModelRenderer arm1;
+	public ModelRenderer ground;
+	public ModelRenderer arm2;
+	public ModelRenderer arm3;
+	public ModelRenderer palm1;
+	public ModelRenderer palm2;
+	public ModelRenderer finger1;
+	public ModelRenderer finger2;
+	public ModelRenderer finger3;
+	public ModelRenderer finger4;
+	public ModelRenderer finger5;
+	public ModelRenderer finger12;
+	public ModelRenderer finger22;
+	public ModelRenderer finger32;
+	public ModelRenderer finger42;
+	public ModelRenderer finger52;
+	public ModelRenderer finger13;
+	public ModelRenderer finger23;
+	public ModelRenderer finger33;
+	public ModelRenderer finger43;
+	public ModelRenderer finger53;
+	public ModelRenderer eye;
 
 	public ModelChagarothFist()
 	{

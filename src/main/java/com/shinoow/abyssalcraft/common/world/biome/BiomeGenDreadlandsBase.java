@@ -1,6 +1,6 @@
 /**
  * AbyssalCraft
- * Copyright 2012-2014 Shinoow
+ * Copyright 2012-2015 Shinoow
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,15 +18,21 @@ package com.shinoow.abyssalcraft.common.world.biome;
 
 import java.util.Random;
 
-import com.shinoow.abyssalcraft.AbyssalCraft;
-import com.shinoow.abyssalcraft.common.entity.*;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.gen.feature.WorldGenMinable;
+
+import com.shinoow.abyssalcraft.AbyssalCraft;
+import com.shinoow.abyssalcraft.common.entity.EntityAbygolem;
+import com.shinoow.abyssalcraft.common.entity.EntityChagarothFist;
+import com.shinoow.abyssalcraft.common.entity.EntityDemonPig;
+import com.shinoow.abyssalcraft.common.entity.EntityDreadSpawn;
+import com.shinoow.abyssalcraft.common.entity.EntityDreadgolem;
+import com.shinoow.abyssalcraft.common.entity.EntityDreadguard;
+import com.shinoow.abyssalcraft.common.entity.EntityDreadling;
 
 public class BiomeGenDreadlandsBase extends BiomeGenBase {
 

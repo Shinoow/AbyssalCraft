@@ -1,6 +1,6 @@
 /**
  * AbyssalCraft
- * Copyright 2012-2014 Shinoow
+ * Copyright 2012-2015 Shinoow
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,10 +19,12 @@ package com.shinoow.abyssalcraft.common.world.biome;
 import java.util.Random;
 
 import net.minecraft.init.Blocks;
-import net.minecraft.world.gen.feature.*;
+import net.minecraft.world.gen.feature.WorldGenAbstractTree;
+import net.minecraft.world.gen.feature.WorldGenTrees;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
-import com.shinoow.abyssalcraft.common.entity.*;
+import com.shinoow.abyssalcraft.common.entity.EntityDemonPig;
+import com.shinoow.abyssalcraft.common.entity.EntityDreadSpawn;
 import com.shinoow.abyssalcraft.common.world.gen.WorldGenDrT;
 
 import cpw.mods.fml.relauncher.Side;

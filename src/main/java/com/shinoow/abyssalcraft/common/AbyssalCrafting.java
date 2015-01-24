@@ -1,6 +1,6 @@
 /**
  * AbyssalCraft
- * Copyright 2012-2014 Shinoow
+ * Copyright 2012-2015 Shinoow
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,9 +16,11 @@
  */
 package com.shinoow.abyssalcraft.common;
 
-import net.minecraft.init.*;
+import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.oredict.*;
+import net.minecraftforge.oredict.OreDictionary;
+import net.minecraftforge.oredict.ShapedOreRecipe;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
@@ -37,7 +39,7 @@ public class AbyssalCrafting {
 		addSalvage();
 		addCrystallization();
 		addTransmutation();
-		addEngraving();
+		//		addEngraving();
 	}
 	private static void addBlockCrafting(){
 
@@ -222,22 +224,20 @@ public class AbyssalCrafting {
 		GameRegistry.addRecipe(new ItemStack(AbyssalCraft.crystalMagnesia), new Object[] {"#%", '#', AbyssalCraft.crystalMagnesium, '%', AbyssalCraft.crystalOxygen});
 		GameRegistry.addRecipe(new ItemStack(AbyssalCraft.ethaxiumIngot), new Object[] {"###", "#%#", "###", '#', AbyssalCraft.ethaxium_brick, '%', AbyssalCraft.lifeCrystal});
 		GameRegistry.addRecipe(new ItemStack(AbyssalCraft.ethaxiumIngot), new Object[] {" # ", "#%#", " # ", '#', AbyssalCraft.ethaxium_brick, '%', AbyssalCraft.OC});
-		GameRegistry.addRecipe(new ItemStack(Items.spawn_egg, 1, 320), new Object[] {"#", '#', AbyssalCraft.ODB});
+		GameRegistry.addRecipe(new ItemStack(Items.spawn_egg, 1, AbyssalCraft.stringtoIDMapping.get("shadowboss")), new Object[] {"#", '#', AbyssalCraft.ODB});
 		GameRegistry.addRecipe(new ItemStack(AbyssalCraft.ethaxiumIngot, 9), new Object[] {"#", '#', AbyssalCraft.ethaxiumblock});
 		GameRegistry.addRecipe(new ItemStack(AbyssalCraft.ethPickaxe, 1), new Object[] {"###", " % ", " % ", '#', AbyssalCraft.ethaxiumIngot, '%', AbyssalCraft.ethaxium_brick});
 		GameRegistry.addRecipe(new ItemStack(AbyssalCraft.ethAxe, 1), new Object[] {"##", "#%", " %", '#', AbyssalCraft.ethaxiumIngot, '%', AbyssalCraft.ethaxium_brick});
 		GameRegistry.addRecipe(new ItemStack(AbyssalCraft.ethShovel, 1), new Object[] {"#", "%", "%", '#', AbyssalCraft.ethaxiumIngot, '%', AbyssalCraft.ethaxium_brick});
 		GameRegistry.addRecipe(new ItemStack(AbyssalCraft.ethSword, 1), new Object[] {"#", "#", "%", '#', AbyssalCraft.ethaxiumIngot, '%', AbyssalCraft.ethaxium_brick});
 		GameRegistry.addRecipe(new ItemStack(AbyssalCraft.ethHoe, 1), new Object[] {"##", " %", " %", '#', AbyssalCraft.ethaxiumIngot, '%', AbyssalCraft.ethaxium_brick});
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(AbyssalCraft.coin, 1, 0), true, new Object[] {" # ", "#%#", " # ", '#', "ingotCopper", '%', Items.flint}));
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(AbyssalCraft.coin, 1, 1), true, new Object[] {" # ", "#%#", " # ", '#', "ingotIron", '%', Items.flint}));
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(AbyssalCraft.coin, 1, 2), true, new Object[] {" # ", "#%#", " # ", '#', "ingotGold", '%', Items.flint}));
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(AbyssalCraft.coin, 1, 3), true, new Object[] {" # ", "#%#", " # ", '#', "ingotTin", '%', Items.flint}));
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(AbyssalCraft.coin, 1, 4), true, new Object[] {" # ", "#%#", " # ", '#', "ingotAbyssalnite", '%', Items.flint}));
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(AbyssalCraft.coin, 1, 5), true, new Object[] {" # ", "#%#", " # ", '#', "ingotCoralium", '%', Items.flint}));
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(AbyssalCraft.coin, 1, 6), true, new Object[] {" # ", "#%#", " # ", '#', "ingotDreadium", '%', Items.flint}));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(AbyssalCraft.coin, 1), true, new Object[] {" # ", "#%#", " # ", '#', "ingotCopper", '%', Items.flint}));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(AbyssalCraft.coin, 1), true, new Object[] {" # ", "#%#", " # ", '#', "ingotIron", '%', Items.flint}));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(AbyssalCraft.coin, 1), true, new Object[] {" # ", "#%#", " # ", '#', "ingotTin", '%', Items.flint}));
 		GameRegistry.addRecipe(new ItemStack(AbyssalCraft.engravingBlank, 1), new Object[] {"###", "#%#", "###", '#', new ItemStack(Blocks.stone_slab, 1, 0), '%', Items.iron_ingot});
 		GameRegistry.addRecipe(new ItemStack(AbyssalCraft.engravingCthulhu, 1), new Object[] {"#", "%", '#', AbyssalCraft.engravingBlank, '%', AbyssalCraft.ethaxiumIngot});
+		GameRegistry.addRecipe(new ItemStack(AbyssalCraft.engravingElder, 1), new Object[] {"#", "%", '#', AbyssalCraft.engravingCthulhu, '%', AbyssalCraft.ethaxiumIngot});
+		GameRegistry.addRecipe(new ItemStack(AbyssalCraft.engravingJzahar, 1), new Object[] {"#", "%", '#', AbyssalCraft.engravingElder, '%', AbyssalCraft.ethaxiumIngot});
 
 		GameRegistry.addShapelessRecipe(new ItemStack(AbyssalCraft.lifeCrystal), AbyssalCraft.crystalCarbon, AbyssalCraft.crystalHydrogen, AbyssalCraft.crystalNitrogen, AbyssalCraft.crystalOxygen, AbyssalCraft.crystalPhosphorus, AbyssalCraft.crystalSulfur);
 
@@ -458,13 +458,7 @@ public class AbyssalCrafting {
 		GameRegistry.addSmelting(AbyssalCraft.dreadchunk, new ItemStack(AbyssalCraft.abyingot), 3F);
 		GameRegistry.addSmelting(AbyssalCraft.Cbucket, new ItemStack(AbyssalCraft.cstone, 1), 0.2F);
 
-		GameRegistry.addSmelting(new ItemStack(AbyssalCraft.coin, 1, 0), new ItemStack(AbyssalCraft.copperIngot, 4), 0.5F);
-		GameRegistry.addSmelting(new ItemStack(AbyssalCraft.coin, 1, 1), new ItemStack(Items.iron_ingot, 4), 0.5F);
-		GameRegistry.addSmelting(new ItemStack(AbyssalCraft.coin, 1, 2), new ItemStack(Items.gold_ingot, 4), 0.5F);
-		GameRegistry.addSmelting(new ItemStack(AbyssalCraft.coin, 1, 3), new ItemStack(AbyssalCraft.tinIngot, 4), 0.5F);
-		GameRegistry.addSmelting(new ItemStack(AbyssalCraft.coin, 1, 4), new ItemStack(AbyssalCraft.abyingot, 4), 0.5F);
-		GameRegistry.addSmelting(new ItemStack(AbyssalCraft.coin, 1, 5), new ItemStack(AbyssalCraft.Cingot, 4), 0.5F);
-		GameRegistry.addSmelting(new ItemStack(AbyssalCraft.coin, 1, 6), new ItemStack(AbyssalCraft.dreadiumingot, 4), 0.5F);
+		GameRegistry.addSmelting(AbyssalCraft.coin, new ItemStack(Items.iron_ingot, 4), 0.5F);
 	}
 
 	private static void addSalvage(){
@@ -610,52 +604,13 @@ public class AbyssalCrafting {
 		AbyssalCraftAPI.addTransmutation(new ItemStack(AbyssalCraft.ethaxiumbrick, 1, 0), new ItemStack(AbyssalCraft.ethaxium), 0.0F);
 	}
 
-	private static void addEngraving(){
-
-		AbyssalCraftAPI.addEngraving(new ItemStack(AbyssalCraft.coin, 1, 0), new ItemStack(AbyssalCraft.cthulhuCoin, 1, 0), AbyssalCraft.engravingCthulhu, 0.5F);
-		AbyssalCraftAPI.addEngraving(new ItemStack(AbyssalCraft.coin, 1, 1), new ItemStack(AbyssalCraft.cthulhuCoin, 1, 1), AbyssalCraft.engravingCthulhu, 0.5F);
-		AbyssalCraftAPI.addEngraving(new ItemStack(AbyssalCraft.coin, 1, 2), new ItemStack(AbyssalCraft.cthulhuCoin, 1, 2), AbyssalCraft.engravingCthulhu, 0.5F);
-		AbyssalCraftAPI.addEngraving(new ItemStack(AbyssalCraft.coin, 1, 3), new ItemStack(AbyssalCraft.cthulhuCoin, 1, 3), AbyssalCraft.engravingCthulhu, 0.5F);
-		AbyssalCraftAPI.addEngraving(new ItemStack(AbyssalCraft.coin, 1, 4), new ItemStack(AbyssalCraft.cthulhuCoin, 1, 4), AbyssalCraft.engravingCthulhu, 0.5F);
-		AbyssalCraftAPI.addEngraving(new ItemStack(AbyssalCraft.coin, 1, 5), new ItemStack(AbyssalCraft.cthulhuCoin, 1, 5), AbyssalCraft.engravingCthulhu, 0.5F);
-		AbyssalCraftAPI.addEngraving(new ItemStack(AbyssalCraft.coin, 1, 6), new ItemStack(AbyssalCraft.cthulhuCoin, 1, 6), AbyssalCraft.engravingCthulhu, 0.5F);
-
-		//		AbyssalCraftAPI.addEngraving(new ItemStack(AbyssalCraft.coin, 1, 0), new ItemStack(AbyssalCraft.elderCoin, 1, 0), AbyssalCraft.engravingElder, 0.5F);
-		//		AbyssalCraftAPI.addEngraving(new ItemStack(AbyssalCraft.coin, 1, 1), new ItemStack(AbyssalCraft.elderCoin, 1, 1), AbyssalCraft.engravingElder, 0.5F);
-		//		AbyssalCraftAPI.addEngraving(new ItemStack(AbyssalCraft.coin, 1, 2), new ItemStack(AbyssalCraft.elderCoin, 1, 2), AbyssalCraft.engravingElder, 0.5F);
-		//		AbyssalCraftAPI.addEngraving(new ItemStack(AbyssalCraft.coin, 1, 3), new ItemStack(AbyssalCraft.elderCoin, 1, 3), AbyssalCraft.engravingElder, 0.5F);
-		//		AbyssalCraftAPI.addEngraving(new ItemStack(AbyssalCraft.coin, 1, 4), new ItemStack(AbyssalCraft.elderCoin, 1, 4), AbyssalCraft.engravingElder, 0.5F);
-		//		AbyssalCraftAPI.addEngraving(new ItemStack(AbyssalCraft.coin, 1, 5), new ItemStack(AbyssalCraft.elderCoin, 1, 5), AbyssalCraft.engravingElder, 0.5F);
-		//		AbyssalCraftAPI.addEngraving(new ItemStack(AbyssalCraft.coin, 1, 6), new ItemStack(AbyssalCraft.elderCoin, 1, 6), AbyssalCraft.engravingElder, 0.5F);
-		//
-		//		AbyssalCraftAPI.addEngraving(new ItemStack(AbyssalCraft.coin, 1, 0), new ItemStack(AbyssalCraft.jzaharCoin, 1, 0), AbyssalCraft.engravingJzahar, 0.5F);
-		//		AbyssalCraftAPI.addEngraving(new ItemStack(AbyssalCraft.coin, 1, 1), new ItemStack(AbyssalCraft.jzaharCoin, 1, 1), AbyssalCraft.engravingJzahar, 0.5F);
-		//		AbyssalCraftAPI.addEngraving(new ItemStack(AbyssalCraft.coin, 1, 2), new ItemStack(AbyssalCraft.jzaharCoin, 1, 2), AbyssalCraft.engravingJzahar, 0.5F);
-		//		AbyssalCraftAPI.addEngraving(new ItemStack(AbyssalCraft.coin, 1, 3), new ItemStack(AbyssalCraft.jzaharCoin, 1, 3), AbyssalCraft.engravingJzahar, 0.5F);
-		//		AbyssalCraftAPI.addEngraving(new ItemStack(AbyssalCraft.coin, 1, 4), new ItemStack(AbyssalCraft.jzaharCoin, 1, 4), AbyssalCraft.engravingJzahar, 0.5F);
-		//		AbyssalCraftAPI.addEngraving(new ItemStack(AbyssalCraft.coin, 1, 5), new ItemStack(AbyssalCraft.jzaharCoin, 1, 5), AbyssalCraft.engravingJzahar, 0.5F);
-		//		AbyssalCraftAPI.addEngraving(new ItemStack(AbyssalCraft.coin, 1, 6), new ItemStack(AbyssalCraft.jzaharCoin, 1, 6), AbyssalCraft.engravingJzahar, 0.5F);
-
-		AbyssalCraftAPI.addEngraving(new ItemStack(AbyssalCraft.cthulhuCoin, 1, 0), new ItemStack(AbyssalCraft.coin, 1, 0), AbyssalCraft.engravingBlank, 0.0F);
-		AbyssalCraftAPI.addEngraving(new ItemStack(AbyssalCraft.cthulhuCoin, 1, 1), new ItemStack(AbyssalCraft.coin, 1, 1), AbyssalCraft.engravingBlank, 0.0F);
-		AbyssalCraftAPI.addEngraving(new ItemStack(AbyssalCraft.cthulhuCoin, 1, 2), new ItemStack(AbyssalCraft.coin, 1, 2), AbyssalCraft.engravingBlank, 0.0F);
-		AbyssalCraftAPI.addEngraving(new ItemStack(AbyssalCraft.cthulhuCoin, 1, 3), new ItemStack(AbyssalCraft.coin, 1, 3), AbyssalCraft.engravingBlank, 0.0F);
-		AbyssalCraftAPI.addEngraving(new ItemStack(AbyssalCraft.cthulhuCoin, 1, 4), new ItemStack(AbyssalCraft.coin, 1, 4), AbyssalCraft.engravingBlank, 0.0F);
-		AbyssalCraftAPI.addEngraving(new ItemStack(AbyssalCraft.cthulhuCoin, 1, 5), new ItemStack(AbyssalCraft.coin, 1, 5), AbyssalCraft.engravingBlank, 0.0F);
-		AbyssalCraftAPI.addEngraving(new ItemStack(AbyssalCraft.cthulhuCoin, 1, 6), new ItemStack(AbyssalCraft.coin, 1, 6), AbyssalCraft.engravingBlank, 0.0F);
-		//		AbyssalCraftAPI.addEngraving(new ItemStack(AbyssalCraft.elderCoin, 1, 0), new ItemStack(AbyssalCraft.coin, 1, 0), AbyssalCraft.engravingBlank, 0.0F);
-		//		AbyssalCraftAPI.addEngraving(new ItemStack(AbyssalCraft.elderCoin, 1, 1), new ItemStack(AbyssalCraft.coin, 1, 1), AbyssalCraft.engravingBlank, 0.0F);
-		//		AbyssalCraftAPI.addEngraving(new ItemStack(AbyssalCraft.elderCoin, 1, 2), new ItemStack(AbyssalCraft.coin, 1, 2), AbyssalCraft.engravingBlank, 0.0F);
-		//		AbyssalCraftAPI.addEngraving(new ItemStack(AbyssalCraft.elderCoin, 1, 3), new ItemStack(AbyssalCraft.coin, 1, 3), AbyssalCraft.engravingBlank, 0.0F);
-		//		AbyssalCraftAPI.addEngraving(new ItemStack(AbyssalCraft.elderCoin, 1, 4), new ItemStack(AbyssalCraft.coin, 1, 4), AbyssalCraft.engravingBlank, 0.0F);
-		//		AbyssalCraftAPI.addEngraving(new ItemStack(AbyssalCraft.elderCoin, 1, 5), new ItemStack(AbyssalCraft.coin, 1, 5), AbyssalCraft.engravingBlank, 0.0F);
-		//		AbyssalCraftAPI.addEngraving(new ItemStack(AbyssalCraft.elderCoin, 1, 6), new ItemStack(AbyssalCraft.coin, 1, 6), AbyssalCraft.engravingBlank, 0.0F);
-		//		AbyssalCraftAPI.addEngraving(new ItemStack(AbyssalCraft.jzaharCoin, 1, 0), new ItemStack(AbyssalCraft.coin, 1, 0), AbyssalCraft.engravingBlank, 0.0F);
-		//		AbyssalCraftAPI.addEngraving(new ItemStack(AbyssalCraft.jzaharCoin, 1, 1), new ItemStack(AbyssalCraft.coin, 1, 1), AbyssalCraft.engravingBlank, 0.0F);
-		//		AbyssalCraftAPI.addEngraving(new ItemStack(AbyssalCraft.jzaharCoin, 1, 2), new ItemStack(AbyssalCraft.coin, 1, 2), AbyssalCraft.engravingBlank, 0.0F);
-		//		AbyssalCraftAPI.addEngraving(new ItemStack(AbyssalCraft.jzaharCoin, 1, 3), new ItemStack(AbyssalCraft.coin, 1, 3), AbyssalCraft.engravingBlank, 0.0F);
-		//		AbyssalCraftAPI.addEngraving(new ItemStack(AbyssalCraft.jzaharCoin, 1, 4), new ItemStack(AbyssalCraft.coin, 1, 4), AbyssalCraft.engravingBlank, 0.0F);
-		//		AbyssalCraftAPI.addEngraving(new ItemStack(AbyssalCraft.jzaharCoin, 1, 5), new ItemStack(AbyssalCraft.coin, 1, 5), AbyssalCraft.engravingBlank, 0.0F);
-		//		AbyssalCraftAPI.addEngraving(new ItemStack(AbyssalCraft.jzaharCoin, 1, 6), new ItemStack(AbyssalCraft.coin, 1, 6), AbyssalCraft.engravingBlank, 0.0F);
-	}
+	//	private static void addEngraving(){
+	//
+	//		AbyssalCraftAPI.addEngraving(new ItemStack(AbyssalCraft.coin, 1), new ItemStack(AbyssalCraft.cthulhuCoin, 1), AbyssalCraft.engravingCthulhu, 0.5F);
+	//		AbyssalCraftAPI.addEngraving(new ItemStack(AbyssalCraft.coin, 1), new ItemStack(AbyssalCraft.elderCoin, 1), AbyssalCraft.engravingElder, 0.5F);
+	//		AbyssalCraftAPI.addEngraving(new ItemStack(AbyssalCraft.coin, 1), new ItemStack(AbyssalCraft.jzaharCoin, 1), AbyssalCraft.engravingJzahar, 0.5F);
+	//		AbyssalCraftAPI.addEngraving(new ItemStack(AbyssalCraft.cthulhuCoin, 1), new ItemStack(AbyssalCraft.coin, 1), AbyssalCraft.engravingBlank, 0.0F);
+	//		AbyssalCraftAPI.addEngraving(new ItemStack(AbyssalCraft.elderCoin, 1), new ItemStack(AbyssalCraft.coin, 1), AbyssalCraft.engravingBlank, 0.0F);
+	//		AbyssalCraftAPI.addEngraving(new ItemStack(AbyssalCraft.jzaharCoin, 1), new ItemStack(AbyssalCraft.coin, 1), AbyssalCraft.engravingBlank, 0.0F);
+	//	}
 }

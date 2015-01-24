@@ -1,6 +1,6 @@
 /**
  * AbyssalCraft
- * Copyright 2012-2014 Shinoow
+ * Copyright 2012-2015 Shinoow
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -29,113 +29,113 @@ public class ModelChagaroth extends ModelBase {
 
 	private int rot = 0;
 
-	ModelRenderer frontspike1;
-	ModelRenderer frontspike2;
-	ModelRenderer frontspike3;
-	ModelRenderer frontspike4;
-	ModelRenderer frontspike5;
-	ModelRenderer leftneck;
-	ModelRenderer middleneck;
-	ModelRenderer rightneck;
-	ModelRenderer body;
-	ModelRenderer tentacle2base;
-	ModelRenderer tentacle1;
-	ModelRenderer tentacle2;
-	ModelRenderer tentacle3;
-	ModelRenderer tentacle4;
-	ModelRenderer tentacle5;
-	ModelRenderer tentacle6;
-	ModelRenderer tentacle7;
-	ModelRenderer tentacle8;
-	ModelRenderer tentacle9;
-	ModelRenderer tentacle10;
-	ModelRenderer tentacle11;
-	ModelRenderer tentacle12;
-	ModelRenderer tentacle13;
-	ModelRenderer tentacle14;
-	ModelRenderer tentacle15;
-	ModelRenderer tentacle16;
-	ModelRenderer tentacle17;
-	ModelRenderer tentacle18;
-	ModelRenderer tentacle19;
-	ModelRenderer tentacle20;
-	ModelRenderer tlib12;
-	ModelRenderer tlib22;
-	ModelRenderer tspike12;
-	ModelRenderer tspike22;
-	ModelRenderer tspike32;
-	ModelRenderer tspike42;
-	ModelRenderer tlib1;
-	ModelRenderer tlib2;
-	ModelRenderer tspike1;
-	ModelRenderer tspike2;
-	ModelRenderer tspike3;
-	ModelRenderer tspike4;
-	ModelRenderer lefthead;
-	ModelRenderer leftjaw;
-	ModelRenderer leftupperjaw;
-	ModelRenderer lstooth1;
-	ModelRenderer lstooth2;
-	ModelRenderer lstooth3;
-	ModelRenderer lstooth4;
-	ModelRenderer lbtooth1;
-	ModelRenderer lbtooth2;
-	ModelRenderer lbtooth3;
-	ModelRenderer lbtooth4;
-	ModelRenderer lbtooth5;
-	ModelRenderer lbackspike1;
-	ModelRenderer lbackspike2;
-	ModelRenderer lbackspike3;
-	ModelRenderer lackspike4;
-	ModelRenderer lefteye1;
-	ModelRenderer lefteye2;
-	ModelRenderer middlehead;
-	ModelRenderer middlejaw;
-	ModelRenderer middleupperjaw;
-	ModelRenderer mstooth1;
-	ModelRenderer mstooth2;
-	ModelRenderer mstooth3;
-	ModelRenderer mstooth4;
-	ModelRenderer mbtooth1;
-	ModelRenderer mbtooth2;
-	ModelRenderer mbtooth3;
-	ModelRenderer mbtooth4;
-	ModelRenderer mbtooth5;
-	ModelRenderer mbackspike1;
-	ModelRenderer mbackspike2;
-	ModelRenderer mbackspike3;
-	ModelRenderer mbackspike4;
-	ModelRenderer middleeye1;
-	ModelRenderer middleeye2;
-	ModelRenderer righthead;
-	ModelRenderer rightjaw;
-	ModelRenderer rightupperjaw;
-	ModelRenderer rstooth1;
-	ModelRenderer rstooth2;
-	ModelRenderer rstooth3;
-	ModelRenderer rstooth4;
-	ModelRenderer rbtooth1;
-	ModelRenderer rbtooth2;
-	ModelRenderer rbtooth3;
-	ModelRenderer rbtooth4;
-	ModelRenderer rbtooth5;
-	ModelRenderer rbackspike1;
-	ModelRenderer rbackspike2;
-	ModelRenderer rbackspike3;
-	ModelRenderer rbackspike4;
-	ModelRenderer righteye1;
-	ModelRenderer righteye2;
-	ModelRenderer middlewall;
-	ModelRenderer rightwall;
-	ModelRenderer leftwall;
-	ModelRenderer walltentacle1;
-	ModelRenderer walltentacle2;
-	ModelRenderer walltentacle3;
-	ModelRenderer walltentacle4;
-	ModelRenderer walltentacle5;
-	ModelRenderer walltentacle6;
-	ModelRenderer walltentacle7;
-	ModelRenderer walltentacle8;
+	public ModelRenderer frontspike1;
+	public ModelRenderer frontspike2;
+	public ModelRenderer frontspike3;
+	public ModelRenderer frontspike4;
+	public ModelRenderer frontspike5;
+	public ModelRenderer leftneck;
+	public ModelRenderer middleneck;
+	public ModelRenderer rightneck;
+	public ModelRenderer body;
+	public ModelRenderer tentacle2base;
+	public ModelRenderer tentacle1;
+	public ModelRenderer tentacle2;
+	public ModelRenderer tentacle3;
+	public ModelRenderer tentacle4;
+	public ModelRenderer tentacle5;
+	public ModelRenderer tentacle6;
+	public ModelRenderer tentacle7;
+	public ModelRenderer tentacle8;
+	public ModelRenderer tentacle9;
+	public ModelRenderer tentacle10;
+	public ModelRenderer tentacle11;
+	public ModelRenderer tentacle12;
+	public ModelRenderer tentacle13;
+	public ModelRenderer tentacle14;
+	public ModelRenderer tentacle15;
+	public ModelRenderer tentacle16;
+	public ModelRenderer tentacle17;
+	public ModelRenderer tentacle18;
+	public ModelRenderer tentacle19;
+	public ModelRenderer tentacle20;
+	public ModelRenderer tlib12;
+	public ModelRenderer tlib22;
+	public ModelRenderer tspike12;
+	public ModelRenderer tspike22;
+	public ModelRenderer tspike32;
+	public ModelRenderer tspike42;
+	public ModelRenderer tlib1;
+	public ModelRenderer tlib2;
+	public ModelRenderer tspike1;
+	public ModelRenderer tspike2;
+	public ModelRenderer tspike3;
+	public ModelRenderer tspike4;
+	public ModelRenderer lefthead;
+	public ModelRenderer leftjaw;
+	public ModelRenderer leftupperjaw;
+	public ModelRenderer lstooth1;
+	public ModelRenderer lstooth2;
+	public ModelRenderer lstooth3;
+	public ModelRenderer lstooth4;
+	public ModelRenderer lbtooth1;
+	public ModelRenderer lbtooth2;
+	public ModelRenderer lbtooth3;
+	public ModelRenderer lbtooth4;
+	public ModelRenderer lbtooth5;
+	public ModelRenderer lbackspike1;
+	public ModelRenderer lbackspike2;
+	public ModelRenderer lbackspike3;
+	public ModelRenderer lackspike4;
+	public ModelRenderer lefteye1;
+	public ModelRenderer lefteye2;
+	public ModelRenderer middlehead;
+	public ModelRenderer middlejaw;
+	public ModelRenderer middleupperjaw;
+	public ModelRenderer mstooth1;
+	public ModelRenderer mstooth2;
+	public ModelRenderer mstooth3;
+	public ModelRenderer mstooth4;
+	public ModelRenderer mbtooth1;
+	public ModelRenderer mbtooth2;
+	public ModelRenderer mbtooth3;
+	public ModelRenderer mbtooth4;
+	public ModelRenderer mbtooth5;
+	public ModelRenderer mbackspike1;
+	public ModelRenderer mbackspike2;
+	public ModelRenderer mbackspike3;
+	public ModelRenderer mbackspike4;
+	public ModelRenderer middleeye1;
+	public ModelRenderer middleeye2;
+	public ModelRenderer righthead;
+	public ModelRenderer rightjaw;
+	public ModelRenderer rightupperjaw;
+	public ModelRenderer rstooth1;
+	public ModelRenderer rstooth2;
+	public ModelRenderer rstooth3;
+	public ModelRenderer rstooth4;
+	public ModelRenderer rbtooth1;
+	public ModelRenderer rbtooth2;
+	public ModelRenderer rbtooth3;
+	public ModelRenderer rbtooth4;
+	public ModelRenderer rbtooth5;
+	public ModelRenderer rbackspike1;
+	public ModelRenderer rbackspike2;
+	public ModelRenderer rbackspike3;
+	public ModelRenderer rbackspike4;
+	public ModelRenderer righteye1;
+	public ModelRenderer righteye2;
+	public ModelRenderer middlewall;
+	public ModelRenderer rightwall;
+	public ModelRenderer leftwall;
+	public ModelRenderer walltentacle1;
+	public ModelRenderer walltentacle2;
+	public ModelRenderer walltentacle3;
+	public ModelRenderer walltentacle4;
+	public ModelRenderer walltentacle5;
+	public ModelRenderer walltentacle6;
+	public ModelRenderer walltentacle7;
+	public ModelRenderer walltentacle8;
 
 	public ModelChagaroth()
 	{
@@ -949,7 +949,7 @@ public class ModelChagaroth extends ModelBase {
 		walltentacle6.rotateAngleZ = MathHelper.cos(f5 * 0.6662F) * 2.0F * f1 * 0.5F;
 		walltentacle7.rotateAngleZ = MathHelper.cos(f5 * 0.6662F + (float)Math.PI) * 2.0F * f1 * 0.5F;
 		walltentacle8.rotateAngleZ = MathHelper.cos(f5 * 0.6662F) * 2.0F * f1 * 0.5F;
-		
+
 		if(((EntityChagaroth)entity).deathTicks <= 200 && ((EntityChagaroth)entity).deathTicks > 0){
 			++rot;
 			lefthead.rotateAngleY = (180F - rot)  / (float)Math.PI;
@@ -963,7 +963,7 @@ public class ModelChagaroth extends ModelBase {
 			righthead.rotateAngleY = (180F + rot) / (float)Math.PI;
 			righthead.rotateAngleX = (180F + rot) / (float)Math.PI;
 			righthead.rotateAngleZ = (180F + rot) / (float)Math.PI;
-			
+
 			walltentacle1.isHidden = true;
 			walltentacle2.isHidden = true;
 			walltentacle3.isHidden = true;
@@ -972,9 +972,35 @@ public class ModelChagaroth extends ModelBase {
 			walltentacle6.isHidden = true;
 			walltentacle7.isHidden = true;
 			walltentacle8.isHidden = true;
-			
+
 			leftwall.isHidden = true;
 			rightwall.isHidden = true;
+		}
+		if(((EntityChagaroth)entity).deathTicks == 0){
+
+			lefthead.rotateAngleY = f3 / (180F / (float)Math.PI);
+			lefthead.rotateAngleX = f4 / (180F / (float)Math.PI);
+			lefthead.rotateAngleZ = 0;
+
+			middlehead.rotateAngleY = f3 / (180F / (float)Math.PI);
+			middlehead.rotateAngleX = f4 / (180F / (float)Math.PI);
+			middlehead.rotateAngleZ = 0;
+
+			righthead.rotateAngleY = f3 / (180F / (float)Math.PI);
+			righthead.rotateAngleX = f4 / (180F / (float)Math.PI);
+			righthead.rotateAngleZ = 0;
+
+			walltentacle1.isHidden = false;
+			walltentacle2.isHidden = false;
+			walltentacle3.isHidden = false;
+			walltentacle4.isHidden = false;
+			walltentacle5.isHidden = false;
+			walltentacle6.isHidden = false;
+			walltentacle7.isHidden = false;
+			walltentacle8.isHidden = false;
+
+			leftwall.isHidden = false;
+			rightwall.isHidden = false;
 		}
 	}
 }

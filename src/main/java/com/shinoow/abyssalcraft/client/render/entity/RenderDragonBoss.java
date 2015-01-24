@@ -1,6 +1,6 @@
 /**
  * AbyssalCraft
- * Copyright 2012-2014 Shinoow
+ * Copyright 2012-2015 Shinoow
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,18 +18,25 @@ package com.shinoow.abyssalcraft.client.render.entity;
 
 import java.util.Random;
 
-import net.minecraft.client.renderer.*;
+import net.minecraft.client.renderer.OpenGlHelper;
+import net.minecraft.client.renderer.RenderHelper;
+import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.entity.RenderLiving;
-import net.minecraft.entity.*;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.boss.BossStatus;
-import net.minecraft.util.*;
+import net.minecraft.util.MathHelper;
+import net.minecraft.util.ResourceLocation;
 
 import org.lwjgl.opengl.GL11;
 
 import com.shinoow.abyssalcraft.client.model.entity.ModelDragonBoss;
-import com.shinoow.abyssalcraft.common.entity.*;
+import com.shinoow.abyssalcraft.common.entity.EntityDragonBoss;
+import com.shinoow.abyssalcraft.common.entity.EntityDragonMinion;
 
-import cpw.mods.fml.relauncher.*;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
 public class RenderDragonBoss extends RenderLiving {

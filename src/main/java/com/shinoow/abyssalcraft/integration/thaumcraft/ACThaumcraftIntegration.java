@@ -1,6 +1,6 @@
 /**
  * AbyssalCraft
- * Copyright 2012-2014 Shinoow
+ * Copyright 2012-2015 Shinoow
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,13 +17,12 @@
 package com.shinoow.abyssalcraft.integration.thaumcraft;
 
 import net.minecraft.item.ItemStack;
-
-import com.shinoow.abyssalcraft.AbyssalCraft;
-import com.shinoow.abyssalcraft.api.AbyssalCraftAPI.ACEntities;
-
 import thaumcraft.api.ThaumcraftApi;
 import thaumcraft.api.aspects.Aspect;
 import thaumcraft.api.aspects.AspectList;
+
+import com.shinoow.abyssalcraft.AbyssalCraft;
+import com.shinoow.abyssalcraft.api.AbyssalCraftAPI.ACEntities;
 
 public class ACThaumcraftIntegration {
 
@@ -103,6 +102,7 @@ public class ACThaumcraftIntegration {
 		ThaumcraftApi.registerEntityTag(getMobName(ACEntities.chagaroth), new AspectList().add(Aspect.DEATH, 5).add(Aspect.FLESH, 5));
 		ThaumcraftApi.registerEntityTag(getMobName(ACEntities.shadow_beast), new AspectList().add(Aspect.DARKNESS, 5));
 		ThaumcraftApi.registerEntityTag(getMobName(ACEntities.sacthoth), new AspectList().add(Aspect.DEATH, 5).add(Aspect.DARKNESS, 5));
+		ThaumcraftApi.registerEntityTag(getMobName(ACEntities.remnant), new AspectList().add(Aspect.DEATH, 5).add(Aspect.DARKNESS, 5).add(Aspect.ELDRITCH, 5));
 	}
 
 	public static String getMobName(String name){

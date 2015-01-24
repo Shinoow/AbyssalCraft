@@ -1,6 +1,6 @@
 /**
  * AbyssalCraft
- * Copyright 2012-2014 Shinoow
+ * Copyright 2012-2015 Shinoow
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,20 +16,43 @@
  */
 package com.shinoow.abyssalcraft.common.potion;
 
-import com.shinoow.abyssalcraft.AbyssalCraft;
-import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
-import com.shinoow.abyssalcraft.api.entity.IAntiEntity;
-import com.shinoow.abyssalcraft.common.entity.*;
-import com.shinoow.abyssalcraft.common.entity.anti.*;
-
 import net.minecraft.client.Minecraft;
-import net.minecraft.entity.*;
-import net.minecraft.entity.monster.*;
-import net.minecraft.entity.passive.*;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.IEntityLivingData;
+import net.minecraft.entity.monster.EntityCreeper;
+import net.minecraft.entity.monster.EntitySkeleton;
+import net.minecraft.entity.monster.EntitySpider;
+import net.minecraft.entity.monster.EntityZombie;
+import net.minecraft.entity.passive.EntityBat;
+import net.minecraft.entity.passive.EntityChicken;
+import net.minecraft.entity.passive.EntityCow;
+import net.minecraft.entity.passive.EntityPig;
+import net.minecraft.entity.passive.EntityVillager;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.potion.Potion;
 import net.minecraft.util.ResourceLocation;
-import cpw.mods.fml.relauncher.*;
+
+import com.shinoow.abyssalcraft.AbyssalCraft;
+import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
+import com.shinoow.abyssalcraft.api.entity.IAntiEntity;
+import com.shinoow.abyssalcraft.common.entity.EntityAbyssalZombie;
+import com.shinoow.abyssalcraft.common.entity.EntityDemonPig;
+import com.shinoow.abyssalcraft.common.entity.EntityDepthsGhoul;
+import com.shinoow.abyssalcraft.common.entity.EntityRemnant;
+import com.shinoow.abyssalcraft.common.entity.anti.EntityAntiAbyssalZombie;
+import com.shinoow.abyssalcraft.common.entity.anti.EntityAntiBat;
+import com.shinoow.abyssalcraft.common.entity.anti.EntityAntiChicken;
+import com.shinoow.abyssalcraft.common.entity.anti.EntityAntiCow;
+import com.shinoow.abyssalcraft.common.entity.anti.EntityAntiCreeper;
+import com.shinoow.abyssalcraft.common.entity.anti.EntityAntiGhoul;
+import com.shinoow.abyssalcraft.common.entity.anti.EntityAntiPig;
+import com.shinoow.abyssalcraft.common.entity.anti.EntityAntiPlayer;
+import com.shinoow.abyssalcraft.common.entity.anti.EntityAntiSkeleton;
+import com.shinoow.abyssalcraft.common.entity.anti.EntityAntiSpider;
+import com.shinoow.abyssalcraft.common.entity.anti.EntityAntiZombie;
+
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class PotionAntimatter extends Potion{
 
@@ -113,6 +136,12 @@ public class PotionAntimatter extends Potion{
 				par1EntityLivingBase.worldObj.spawnEntityInWorld(entity);
 			} else if(par1EntityLivingBase instanceof EntitySpider){
 				EntityAntiSpider entity = new EntityAntiSpider(par1EntityLivingBase.worldObj);
+				entity.copyLocationAndAnglesFrom(par1EntityLivingBase);
+				par1EntityLivingBase.worldObj.removeEntity(par1EntityLivingBase);
+				entity.onSpawnWithEgg((IEntityLivingData)null);
+				par1EntityLivingBase.worldObj.spawnEntityInWorld(entity);
+			} else if(par1EntityLivingBase instanceof EntityVillager){
+				EntityRemnant entity = new EntityRemnant(par1EntityLivingBase.worldObj);
 				entity.copyLocationAndAnglesFrom(par1EntityLivingBase);
 				par1EntityLivingBase.worldObj.removeEntity(par1EntityLivingBase);
 				entity.onSpawnWithEgg((IEntityLivingData)null);

@@ -1,6 +1,6 @@
 /**
  * AbyssalCraft
- * Copyright 2012-2014 Shinoow
+ * Copyright 2012-2015 Shinoow
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,15 +19,20 @@ package com.shinoow.abyssalcraft.common.world.biome;
 import java.util.Random;
 
 import net.minecraft.block.Block;
-import net.minecraft.entity.monster.*;
+import net.minecraft.entity.monster.EntitySkeleton;
+import net.minecraft.entity.monster.EntityZombie;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.gen.feature.WorldGenMinable;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
-import com.shinoow.abyssalcraft.common.entity.*;
+import com.shinoow.abyssalcraft.common.entity.EntityAbyssalZombie;
+import com.shinoow.abyssalcraft.common.entity.EntityDepthsGhoul;
+import com.shinoow.abyssalcraft.common.entity.EntityDragonMinion;
+import com.shinoow.abyssalcraft.common.entity.EntitySkeletonGoliath;
 
-import cpw.mods.fml.relauncher.*;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class BiomeGenAbywasteland extends BiomeGenBase {
 

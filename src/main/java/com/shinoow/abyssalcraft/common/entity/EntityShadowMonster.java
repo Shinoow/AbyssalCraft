@@ -1,6 +1,6 @@
 /**
  * AbyssalCraft
- * Copyright 2012-2014 Shinoow
+ * Copyright 2012-2015 Shinoow
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,7 +18,14 @@ package com.shinoow.abyssalcraft.common.entity;
 
 import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.*;
+import net.minecraft.entity.ai.EntityAIAttackOnCollide;
+import net.minecraft.entity.ai.EntityAIFleeSun;
+import net.minecraft.entity.ai.EntityAIHurtByTarget;
+import net.minecraft.entity.ai.EntityAILookIdle;
+import net.minecraft.entity.ai.EntityAIMoveTowardsRestriction;
+import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
+import net.minecraft.entity.ai.EntityAIWander;
+import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
@@ -26,7 +33,9 @@ import net.minecraft.world.World;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
-import com.shinoow.abyssalcraft.api.entity.*;
+import com.shinoow.abyssalcraft.api.entity.IAntiEntity;
+import com.shinoow.abyssalcraft.api.entity.ICoraliumEntity;
+import com.shinoow.abyssalcraft.api.entity.IDreadEntity;
 
 public class EntityShadowMonster extends EntityMob implements IAntiEntity, ICoraliumEntity, IDreadEntity {
 
@@ -67,13 +76,13 @@ public class EntityShadowMonster extends EntityMob implements IAntiEntity, ICora
 	@Override
 	protected String getHurtSound()
 	{
-		return "mob.blaze.hit";
+		return "abyssalcraft:shadow.hit";
 	}
 
 	@Override
 	protected String getDeathSound()
 	{
-		return "mob.blaze.death";
+		return "abyssalcraft:shadow.death";
 	}
 
 	@Override

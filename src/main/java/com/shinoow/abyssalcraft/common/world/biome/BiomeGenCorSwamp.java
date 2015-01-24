@@ -1,6 +1,6 @@
 /**
  * AbyssalCraft
- * Copyright 2012-2014 Shinoow
+ * Copyright 2012-2015 Shinoow
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,11 +22,23 @@ import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
-import net.minecraft.world.gen.feature.*;
+import net.minecraft.world.gen.feature.WorldGenAbstractTree;
+import net.minecraft.world.gen.feature.WorldGenMinable;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
-import com.shinoow.abyssalcraft.common.entity.*;
-import com.shinoow.abyssalcraft.common.entity.anti.*;
+import com.shinoow.abyssalcraft.common.entity.EntityAbyssalZombie;
+import com.shinoow.abyssalcraft.common.entity.EntityDepthsGhoul;
+import com.shinoow.abyssalcraft.common.entity.anti.EntityAntiAbyssalZombie;
+import com.shinoow.abyssalcraft.common.entity.anti.EntityAntiBat;
+import com.shinoow.abyssalcraft.common.entity.anti.EntityAntiChicken;
+import com.shinoow.abyssalcraft.common.entity.anti.EntityAntiCow;
+import com.shinoow.abyssalcraft.common.entity.anti.EntityAntiCreeper;
+import com.shinoow.abyssalcraft.common.entity.anti.EntityAntiGhoul;
+import com.shinoow.abyssalcraft.common.entity.anti.EntityAntiPig;
+import com.shinoow.abyssalcraft.common.entity.anti.EntityAntiPlayer;
+import com.shinoow.abyssalcraft.common.entity.anti.EntityAntiSkeleton;
+import com.shinoow.abyssalcraft.common.entity.anti.EntityAntiSpider;
+import com.shinoow.abyssalcraft.common.entity.anti.EntityAntiZombie;
 import com.shinoow.abyssalcraft.common.world.gen.WorldGenAntimatterLake;
 
 import cpw.mods.fml.relauncher.Side;

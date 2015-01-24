@@ -1,6 +1,6 @@
 /**
  * AbyssalCraft
- * Copyright 2012-2014 Shinoow
+ * Copyright 2012-2015 Shinoow
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -23,8 +23,13 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.IEntityLivingData;
 import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.*;
-import net.minecraft.entity.ai.attributes.*;
+import net.minecraft.entity.ai.EntityAIAttackOnCollide;
+import net.minecraft.entity.ai.EntityAIHurtByTarget;
+import net.minecraft.entity.ai.EntityAILookIdle;
+import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
+import net.minecraft.entity.ai.EntityAIWatchClosest;
+import net.minecraft.entity.ai.attributes.AttributeModifier;
+import net.minecraft.entity.ai.attributes.IAttributeInstance;
 import net.minecraft.entity.boss.IBossDisplayData;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.item.EntityXPOrb;
@@ -32,7 +37,9 @@ import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionEffect;
-import net.minecraft.util.*;
+import net.minecraft.util.DamageSource;
+import net.minecraft.util.EnumChatFormatting;
+import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
@@ -68,7 +75,7 @@ public class EntityChagaroth extends EntityMob implements IBossDisplayData, IDre
 
 		if (super.attackEntityAsMob(par1Entity))
 			if (par1Entity instanceof EntityLivingBase)
-				((EntityLivingBase)par1Entity).addPotionEffect(new PotionEffect(AbyssalCraft.Dplague.id, 200));
+				((EntityLivingBase)par1Entity).addPotionEffect(new PotionEffect(AbyssalCraft.Dplague.id, 100));
 		return super.attackEntityAsMob(par1Entity);
 	}
 
@@ -128,7 +135,7 @@ public class EntityChagaroth extends EntityMob implements IBossDisplayData, IDre
 	public void onLivingUpdate()
 	{
 		EntityPlayer player = worldObj.getClosestPlayerToEntity(this, 32D);
-		if(!worldObj.isRemote){
+		if(!worldObj.isRemote && deathTicks == 200){
 			if(rand.nextInt(100) == 0 && player != null){
 				EntityChagarothSpawn mob = new EntityChagarothSpawn(worldObj);
 				mob.copyLocationAndAnglesFrom(player);

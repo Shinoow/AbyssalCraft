@@ -1,6 +1,6 @@
 /**
  * AbyssalCraft
- * Copyright 2012-2014 Shinoow
+ * Copyright 2012-2015 Shinoow
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,10 +17,10 @@
 package com.shinoow.abyssalcraft.common.blocks;
 
 import net.minecraft.block.material.Material;
-import net.minecraft.entity.*;
-import net.minecraft.entity.item.EntityItem;
 import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+
 import com.shinoow.abyssalcraft.AbyssalCraft;
 
 public class BlockSolidLava extends BlockACBasic {
@@ -40,12 +40,8 @@ public class BlockSolidLava extends BlockACBasic {
 	}
 
 	@Override
-	public void onEntityCollidedWithBlock(World par1World, int par2, int par3, int par4, Entity par5Entity) {
-		super.onEntityCollidedWithBlock(par1World, par2, par3, par4, par5Entity);
-
-		if(par5Entity instanceof EntityLivingBase)
-			((EntityLivingBase)par5Entity).setFire(30);
-		if(par5Entity instanceof EntityItem)
-			par5Entity.setDead();
+	public boolean isBurning(IBlockAccess world, int x, int y, int z)
+	{
+		return true;
 	}
 }

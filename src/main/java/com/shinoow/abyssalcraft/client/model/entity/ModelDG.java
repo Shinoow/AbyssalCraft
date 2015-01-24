@@ -1,6 +1,6 @@
 /**
  * AbyssalCraft
- * Copyright 2012-2014 Shinoow
+ * Copyright 2012-2015 Shinoow
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,49 +16,49 @@
  */
 package com.shinoow.abyssalcraft.client.model.entity;
 
-import org.lwjgl.opengl.GL11;
-
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.MathHelper;
 
+import org.lwjgl.opengl.GL11;
+
 public class ModelDG extends ModelBase
 {
-	ModelRenderer Head;
-	ModelRenderer jaw;
-	ModelRenderer tooth1;
-	ModelRenderer tooth2;
-	ModelRenderer tooth3;
-	ModelRenderer tooth4;
-	ModelRenderer tooth5;
-	ModelRenderer Spine1;
-	ModelRenderer Spine2;
-	ModelRenderer lrib1;
-	ModelRenderer lrib2;
-	ModelRenderer lrib3;
-	ModelRenderer rrib1;
-	ModelRenderer rrib2;
-	ModelRenderer rrib3;
-	ModelRenderer pelvis;
-	ModelRenderer Spine3;
-	ModelRenderer larm1;
-	ModelRenderer larm2;
-	ModelRenderer clawl1;
-	ModelRenderer clawl2;
-	ModelRenderer clawl3;
-	ModelRenderer clawl4;
-	ModelRenderer rarm1;
-	ModelRenderer rarm2;
-	ModelRenderer clawr1;
-	ModelRenderer clawr2;
-	ModelRenderer clawr3;
-	ModelRenderer clawr4;
-	ModelRenderer lleg;
-	ModelRenderer rleg;
-	ModelRenderer back;
-	ModelRenderer lside;
-	ModelRenderer rside;
+	public ModelRenderer Head;
+	public ModelRenderer jaw;
+	public ModelRenderer tooth1;
+	public ModelRenderer tooth2;
+	public ModelRenderer tooth3;
+	public ModelRenderer tooth4;
+	public ModelRenderer tooth5;
+	public ModelRenderer Spine1;
+	public ModelRenderer Spine2;
+	public ModelRenderer lrib1;
+	public ModelRenderer lrib2;
+	public ModelRenderer lrib3;
+	public ModelRenderer rrib1;
+	public ModelRenderer rrib2;
+	public ModelRenderer rrib3;
+	public ModelRenderer pelvis;
+	public ModelRenderer Spine3;
+	public ModelRenderer larm1;
+	public ModelRenderer larm2;
+	public ModelRenderer clawl1;
+	public ModelRenderer clawl2;
+	public ModelRenderer clawl3;
+	public ModelRenderer clawl4;
+	public ModelRenderer rarm1;
+	public ModelRenderer rarm2;
+	public ModelRenderer clawr1;
+	public ModelRenderer clawr2;
+	public ModelRenderer clawr3;
+	public ModelRenderer clawr4;
+	public ModelRenderer lleg;
+	public ModelRenderer rleg;
+	public ModelRenderer back;
+	public ModelRenderer lside;
+	public ModelRenderer rside;
 
 	public ModelDG()
 	{
@@ -78,6 +78,7 @@ public class ModelDG extends ModelBase
 		jaw.setTextureSize(128, 64);
 		jaw.addBox(-4.5F, -0.5F, -4.5F, 9, 1, 9);
 		jaw.setRotationPoint(0F, 1F, 0F);
+		setRotation(jaw, 0.2365561F, 0, 0);
 		Head.addChild(jaw);
 		tooth1 = new ModelRenderer(this, 48, 11);
 		tooth1.setTextureSize(128, 64);
@@ -108,6 +109,7 @@ public class ModelDG extends ModelBase
 		Spine1.setTextureSize(128, 64);
 		Spine1.addBox(-2.5F, -4F, -3F, 5, 8, 6);
 		Spine1.setRotationPoint(0F, -14F, 2F);
+		setRotation(Spine1, 0.2590069F, 0, 0);
 		Spine2 = new ModelRenderer(this, 0, 42);
 		Spine2.setTextureSize(128, 64);
 		Spine2.addBox(-2.5F, -8F, -3F, 5, 16, 6);
@@ -116,82 +118,94 @@ public class ModelDG extends ModelBase
 		lrib1.setTextureSize(128, 64);
 		lrib1.addBox(-1.5F, -1F, -1F, 3, 2, 2);
 		lrib1.setRotationPoint(4F, -6.977365F, 2.8262F);
+		setRotation(lrib1, -0.07023507F, 0, 0);
 		lrib2 = new ModelRenderer(this, 101, 47);
 		lrib2.setTextureSize(128, 64);
 		lrib2.addBox(-1.5F, -1F, -1F, 3, 2, 2);
 		lrib2.setRotationPoint(4F, -3.821312F, 2.627918F);
+		setRotation(lrib2, -0.07023507F, 0, 0);
 		lrib3 = new ModelRenderer(this, 101, 47);
 		lrib3.setTextureSize(128, 64);
 		lrib3.addBox(-1.5F, -1F, -1F, 3, 2, 2);
 		lrib3.setRotationPoint(4F, -0.6646652F, 2.434038F);
+		setRotation(lrib3, -0.07023507F, 0, 0);
 		rrib1 = new ModelRenderer(this, 101, 47);
 		rrib1.setTextureSize(128, 64);
 		rrib1.addBox(-1.5F, -1F, -1F, 3, 2, 2);
 		rrib1.setRotationPoint(-4F, -6.977365F, 2.826201F);
+		setRotation(rrib1, -0.07023507F, 0, 0);
 		rrib2 = new ModelRenderer(this, 101, 47);
 		rrib2.setTextureSize(128, 64);
 		rrib2.addBox(-1.5F, -1F, -1F, 3, 2, 2);
 		rrib2.setRotationPoint(-4F, -3.82131F, 2.627918F);
+		setRotation(rrib2, -0.07023507F, 0, 0);
 		rrib3 = new ModelRenderer(this, 101, 47);
 		rrib3.setTextureSize(128, 64);
 		rrib3.addBox(-1.5F, -1F, -1F, 3, 2, 2);
 		rrib3.setRotationPoint(-4F, -0.6652546F, 2.429635F);
+		setRotation(rrib3, -0.07023507F, 0, 0);
 		pelvis = new ModelRenderer(this, 80, 14);
 		pelvis.setTextureSize(128, 64);
 		pelvis.addBox(-6F, -1F, -3F, 12, 2, 6);
 		pelvis.setRotationPoint(0F, 5.390734F, 2.999714F);
+		setRotation(pelvis, -1.637653E-07F, 0, 0);
 		Spine3 = new ModelRenderer(this, 76, 28);
 		Spine3.setTextureSize(128, 64);
 		Spine3.addBox(-9F, -2F, -2F, 18, 4, 4);
 		Spine3.setRotationPoint(0F, -11.10007F, 2.768362F);
+		setRotation(Spine3, 0.1290269F, 0, 0);
 		larm1 = new ModelRenderer(this, 46, 48);
 		larm1.setTextureSize(128, 64);
 		larm1.addBox(0F, -2F, -2F, 4, 12, 4);
 		larm1.setRotationPoint(9F, -11F, 2F);
+		setRotation(larm1, -0.5595525F, 0, 0);
 		larm2 = new ModelRenderer(this, 64, 52);
 		larm2.setTextureSize(128, 64);
-		larm2.addBox(-2F, 0F, -2F, 4, 8, 4);
-		larm2.setRotationPoint(11F, -3.689251F, -1.398964F);
+		larm2.addBox(-2F, 1F, 3F, 4, 8, 4);
+		larm2.setRotationPoint(2F,4F,-2F);
+		setRotation(larm2, -1.44967F - larm1.rotateAngleX, 0, 0);
 		clawl1 = new ModelRenderer(this, 110, 57);
 		clawl1.setTextureSize(128, 64);
 		clawl1.addBox(-0.5F, -0.5F, -1F, 1, 5, 1);
-		clawl1.setRotationPoint(10F, -4.828789F, -8.589336F);
+		clawl1.setRotationPoint(-1F,8F,3F);
 		clawl2 = new ModelRenderer(this, 110, 57);
 		clawl2.setTextureSize(128, 64);
 		clawl2.addBox(-0.5F, -0.5F, -1F, 1, 5, 1);
-		clawl2.setRotationPoint(12F, -4.828789F, -8.589336F);
+		clawl2.setRotationPoint(1F,8F,3F);
 		clawl3 = new ModelRenderer(this, 110, 57);
 		clawl3.setTextureSize(128, 64);
 		clawl3.addBox(-1F, -0.5F, -1F, 1, 5, 1);
-		clawl3.setRotationPoint(9F, -2.843443F, -8.347676F);
+		clawl3.setRotationPoint(-2F,8F,5F);
 		clawl4 = new ModelRenderer(this, 110, 57);
 		clawl4.setTextureSize(128, 64);
 		clawl4.addBox(0F, -0.5F, -1F, 1, 5, 1);
-		clawl4.setRotationPoint(13F, -2.843443F, -8.347676F);
+		clawl4.setRotationPoint(2F,8F,5F);
 		rarm1 = new ModelRenderer(this, 46, 48);
 		rarm1.setTextureSize(128, 64);
 		rarm1.addBox(-4F, -2F, -2F, 4, 12, 4);
 		rarm1.setRotationPoint(-9F, -11F, 2F);
+		setRotation(rarm1, -0.559472F, 0, 0);
 		rarm2 = new ModelRenderer(this, 64, 52);
 		rarm2.setTextureSize(128, 64);
-		rarm2.addBox(-2F, 0F, -2F, 4, 8, 4);
-		rarm2.setRotationPoint(-11F, -3.688976F, -1.398375F);
+		rarm2.addBox(-2F, 1F, 3F, 4, 8, 4);
+		rarm2.setRotationPoint(-2F,4F,-2F);
+		setRotation(rarm2, -1.449542F - rarm1.rotateAngleX, 0, 0);
 		clawr1 = new ModelRenderer(this, 110, 57);
 		clawr1.setTextureSize(128, 64);
 		clawr1.addBox(-0.5F, -0.5F, -1F, 1, 5, 1);
-		clawr1.setRotationPoint(-10F, -4.827593F, -8.588894F);
+		clawr1.setRotationPoint(-1F,8F,3F);
 		clawr2 = new ModelRenderer(this, 110, 57);
 		clawr2.setTextureSize(128, 64);
 		clawr2.addBox(-0.5F, -0.5F, -1F, 1, 5, 1);
-		clawr2.setRotationPoint(-12F, -4.827593F, -8.588894F);
+		clawr2.setRotationPoint(1F,8F,3F);
 		clawr3 = new ModelRenderer(this, 110, 57);
 		clawr3.setTextureSize(128, 64);
 		clawr3.addBox(0F, -0.5F, -1F, 1, 5, 1);
-		clawr3.setRotationPoint(-9F, -2.842278F, -8.346979F);
+		clawr3.setRotationPoint(-3F,8F,5F);
 		clawr4 = new ModelRenderer(this, 110, 57);
 		clawr4.setTextureSize(128, 64);
 		clawr4.addBox(-1F, -0.5F, -1F, 1, 5, 1);
-		clawr4.setRotationPoint(-13F, -2.842278F, -8.346979F);
+		clawr4.setRotationPoint(3F,8F,5F);
 		lleg = new ModelRenderer(this, 22, 40);
 		lleg.setTextureSize(128, 64);
 		lleg.addBox(-3F, -1F, -3F, 6, 18, 6);
@@ -212,6 +226,19 @@ public class ModelDG extends ModelBase
 		rside.setTextureSize(128, 64);
 		rside.addBox(0F, -7.5F, -3F, 0, 15, 6);
 		rside.setRotationPoint(-6F, -3F, 3F);
+
+		larm1.addChild(larm2);
+		rarm1.addChild(rarm2);
+
+		larm2.addChild(clawl1);
+		larm2.addChild(clawl2);
+		larm2.addChild(clawl3);
+		larm2.addChild(clawl4);
+
+		rarm2.addChild(clawr1);
+		rarm2.addChild(clawr2);
+		rarm2.addChild(clawr3);
+		rarm2.addChild(clawr4);
 	}
 
 	@Override
@@ -226,59 +253,23 @@ public class ModelDG extends ModelBase
 			GL11.glPushMatrix();
 			GL11.glScalef(1.5F / f6, 1.5F / f6, 1.5F / f6);
 			GL11.glTranslatef(0.0F, 21.0F * par7, 0.0F);
-			jaw.rotateAngleX = 0.2365561F;
-			jaw.rotateAngleY = 0F;
-			jaw.rotateAngleZ = 0F;
 			Head.render(par7);
 			GL11.glPopMatrix();
 			GL11.glPushMatrix();
 			GL11.glScalef(1.0F / f6, 1.0F / f6, 1.0F / f6);
 			GL11.glTranslatef(0.0F, 24.0F * par7, 0.0F);
-			Spine1.rotateAngleX = 0.2590069F;
 			Spine1.render(par7);
 			Spine2.render(par7);
-			lrib1.rotateAngleX = -0.07023507F;
 			lrib1.render(par7);
-			lrib2.rotateAngleX = -0.07023507F;
 			lrib2.render(par7);
-			lrib3.rotateAngleX = -0.07023507F;
 			lrib3.render(par7);
-			rrib1.rotateAngleX = -0.07023507F;
 			rrib1.render(par7);
-			rrib2.rotateAngleX = -0.07023507F;
 			rrib2.render(par7);
-			rrib3.rotateAngleX = -0.07023507F;
 			rrib3.render(par7);
-			pelvis.rotateAngleX = -1.637653E-07F;
 			pelvis.render(par7);
-			Spine3.rotateAngleX = 0.1290269F;
 			Spine3.render(par7);
-
-			larm1.rotateAngleX = -0.5595525F;
 			larm1.render(par7);
-			larm2.rotateAngleX = -1.44967F;
-			larm2.render(par7);
-			clawl1.rotateAngleX = -1.44967F;
-			clawl1.render(par7);
-			clawl2.rotateAngleX = -1.44967F;
-			clawl2.render(par7);
-			clawl3.rotateAngleX = -1.44967F;
-			clawl3.render(par7);
-			clawl4.rotateAngleX = -1.44967F;
-			clawl4.render(par7);
-			rarm1.rotateAngleX = -0.559472F;
 			rarm1.render(par7);
-			rarm2.rotateAngleX = -1.449542F;
-			rarm2.render(par7);
-			clawr1.rotateAngleX = -1.449542F;
-			clawr1.render(par7);
-			clawr2.rotateAngleX = -1.449542F;
-			clawr2.render(par7);
-			clawr3.rotateAngleX = -1.449542F;
-			clawr3.render(par7);
-			clawr4.rotateAngleX = -1.449542F;
-			clawr4.render(par7);
-
 			lleg.render(par7);
 			rleg.render(par7);
 			back.render(par7);
@@ -287,62 +278,31 @@ public class ModelDG extends ModelBase
 			GL11.glPopMatrix();
 		} else{
 			Head.render(par7);
-
-			jaw.rotateAngleX = 0.2365561F;
-			jaw.rotateAngleY = 0F;
-			jaw.rotateAngleZ = 0F;
-
-			Spine1.rotateAngleX = 0.2590069F;
 			Spine1.render(par7);
 			Spine2.render(par7);
-			lrib1.rotateAngleX = -0.07023507F;
 			lrib1.render(par7);
-			lrib2.rotateAngleX = -0.07023507F;
 			lrib2.render(par7);
-			lrib3.rotateAngleX = -0.07023507F;
 			lrib3.render(par7);
-			rrib1.rotateAngleX = -0.07023507F;
 			rrib1.render(par7);
-			rrib2.rotateAngleX = -0.07023507F;
 			rrib2.render(par7);
-			rrib3.rotateAngleX = -0.07023507F;
 			rrib3.render(par7);
-			pelvis.rotateAngleX = -1.637653E-07F;
 			pelvis.render(par7);
-			Spine3.rotateAngleX = 0.1290269F;
 			Spine3.render(par7);
-
-			larm1.rotateAngleX = -0.5595525F;
 			larm1.render(par7);
-			larm2.rotateAngleX = -1.44967F;
-			larm2.render(par7);
-			clawl1.rotateAngleX = -1.44967F;
-			clawl1.render(par7);
-			clawl2.rotateAngleX = -1.44967F;
-			clawl2.render(par7);
-			clawl3.rotateAngleX = -1.44967F;
-			clawl3.render(par7);
-			clawl4.rotateAngleX = -1.44967F;
-			clawl4.render(par7);
-			rarm1.rotateAngleX = -0.559472F;
 			rarm1.render(par7);
-			rarm2.rotateAngleX = -1.449542F;
-			rarm2.render(par7);
-			clawr1.rotateAngleX = -1.449542F;
-			clawr1.render(par7);
-			clawr2.rotateAngleX = -1.449542F;
-			clawr2.render(par7);
-			clawr3.rotateAngleX = -1.449542F;
-			clawr3.render(par7);
-			clawr4.rotateAngleX = -1.449542F;
-			clawr4.render(par7);
-
 			lleg.render(par7);
 			rleg.render(par7);
 			back.render(par7);
 			lside.render(par7);
 			rside.render(par7);
 		}
+	}
+
+	private void setRotation(ModelRenderer model, float x, float y, float z)
+	{
+		model.rotateAngleX = x;
+		model.rotateAngleY = y;
+		model.rotateAngleZ = z;
 	}
 
 	@Override
@@ -359,11 +319,29 @@ public class ModelDG extends ModelBase
 
 		if (isRiding){
 
+			rarm1.rotateAngleX += -((float)Math.PI / 5F);
+			larm1.rotateAngleX += -((float)Math.PI / 5F);
+
 			rleg.rotateAngleX = -((float)Math.PI * 2F / 5F);
 			lleg.rotateAngleX = -((float)Math.PI * 2F / 5F);
 
 			rleg.rotateAngleY = (float)Math.PI / 10F;
 			lleg.rotateAngleY = -((float)Math.PI / 10F);
 		}
+
+		float f6 = MathHelper.sin(onGround * (float)Math.PI);
+		float f7 = MathHelper.sin((1.0F - (1.0F - onGround) * (1.0F - onGround)) * (float)Math.PI);
+		rarm1.rotateAngleZ = 0.0F;
+		larm1.rotateAngleZ = 0.0F;
+		rarm1.rotateAngleY = -(0.1F - f6 * 0.6F);
+		larm1.rotateAngleY = 0.1F - f6 * 0.6F;
+		rarm1.rotateAngleX = -((float)Math.PI / 3.7F);
+		larm1.rotateAngleX = -((float)Math.PI / 3.7F);
+		rarm1.rotateAngleX -= f6 * 1.2F - f7 * 0.4F;
+		larm1.rotateAngleX -= f6 * 1.2F - f7 * 0.4F;
+		rarm1.rotateAngleZ += MathHelper.cos(par3 * 0.09F) * 0.05F + 0.05F;
+		larm1.rotateAngleZ -= MathHelper.cos(par3 * 0.09F) * 0.05F + 0.05F;
+		rarm1.rotateAngleX += MathHelper.sin(par3 * 0.067F) * 0.05F;
+		larm1.rotateAngleX -= MathHelper.sin(par3 * 0.067F) * 0.05F;
 	}
 }

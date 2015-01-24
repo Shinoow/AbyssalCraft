@@ -1,6 +1,6 @@
 /**
  * AbyssalCraft
- * Copyright 2012-2014 Shinoow
+ * Copyright 2012-2015 Shinoow
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -24,12 +24,12 @@ import net.minecraft.util.MathHelper;
 public class ModelDreadling extends ModelBase
 {
 
-	ModelRenderer head;
-	ModelRenderer body;
-	ModelRenderer rightarm;
-	ModelRenderer leftarm;
-	ModelRenderer rightleg;
-	ModelRenderer leftleg;
+	public ModelRenderer head;
+	public ModelRenderer body;
+	public ModelRenderer rightarm;
+	public ModelRenderer leftarm;
+	public ModelRenderer rightleg;
+	public ModelRenderer leftleg;
 
 	public ModelDreadling()
 	{

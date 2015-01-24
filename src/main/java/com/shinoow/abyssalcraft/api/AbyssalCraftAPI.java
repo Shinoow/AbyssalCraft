@@ -1,6 +1,6 @@
 /**
  * AbyssalCraft
- * Copyright 2012-2014 Shinoow
+ * Copyright 2012-2015 Shinoow
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,16 +16,22 @@
  */
 package com.shinoow.abyssalcraft.api;
 
-import java.lang.reflect.*;
-import java.util.*;
+import java.lang.reflect.Field;
+import java.lang.reflect.Modifier;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
 
 import net.minecraft.block.Block;
-import net.minecraft.entity.*;
-import net.minecraft.item.*;
+import net.minecraft.entity.EnumCreatureAttribute;
+import net.minecraft.entity.EnumCreatureType;
+import net.minecraft.item.Item;
 import net.minecraft.item.Item.ToolMaterial;
 import net.minecraft.item.ItemArmor.ArmorMaterial;
+import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.FurnaceRecipes;
-import net.minecraft.potion.*;
+import net.minecraft.potion.Potion;
+import net.minecraft.potion.PotionHelper;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraftforge.common.util.EnumHelper;
@@ -33,10 +39,13 @@ import net.minecraftforge.oredict.OreDictionary;
 
 import com.google.common.collect.Lists;
 import com.shinoow.abyssalcraft.api.item.ItemEngraving;
-import com.shinoow.abyssalcraft.api.recipe.*;
+import com.shinoow.abyssalcraft.api.recipe.CrystallizerRecipes;
+import com.shinoow.abyssalcraft.api.recipe.EngraverRecipes;
+import com.shinoow.abyssalcraft.api.recipe.TransmutatorRecipes;
 
 import cpw.mods.fml.common.IFuelHandler;
-import cpw.mods.fml.common.registry.*;
+import cpw.mods.fml.common.registry.EntityRegistry;
+import cpw.mods.fml.common.registry.GameRegistry;
 
 /**
  * Main API class for AbyssalCraft, has child classes for most features.

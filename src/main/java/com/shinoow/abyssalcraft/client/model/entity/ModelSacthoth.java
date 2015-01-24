@@ -1,6 +1,6 @@
 /**
  * AbyssalCraft
- * Copyright 2012-2014 Shinoow
+ * Copyright 2012-2015 Shinoow
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -23,67 +23,67 @@ import net.minecraft.util.MathHelper;
 
 public class ModelSacthoth extends ModelBase {
 
-	ModelRenderer head;
-	ModelRenderer leftshoulder;
-	ModelRenderer leftarm1;
-	ModelRenderer leftarm2;
-	ModelRenderer rightshoulder;
-	ModelRenderer rightarm1;
-	ModelRenderer rightarm2;
-	ModelRenderer body;
-	ModelRenderer core;
-	ModelRenderer leftleg;
-	ModelRenderer rightleg;
-	ModelRenderer spikerow11;
-	ModelRenderer spikerow12;
-	ModelRenderer spikerow13;
-	ModelRenderer spikerow14;
-	ModelRenderer spikerow15;
-	ModelRenderer spikerow16;
-	ModelRenderer spikerow17;
-	ModelRenderer spikerow18;
-	ModelRenderer spikerow19;
-	ModelRenderer spikerow110;
-	ModelRenderer spikerow111;
-	ModelRenderer spikerow112;
-	ModelRenderer spikerow113;
-	ModelRenderer spikerow114;
-	ModelRenderer spikerow115;
-	ModelRenderer spikerow116;
-	ModelRenderer spikerow21;
-	ModelRenderer spikerow22;
-	ModelRenderer spikerow23;
-	ModelRenderer spikerow24;
-	ModelRenderer spikerow25;
-	ModelRenderer spikerow26;
-	ModelRenderer spikerow27;
-	ModelRenderer spikerow28;
-	ModelRenderer spikerow29;
-	ModelRenderer spikerow210;
-	ModelRenderer spikerow211;
-	ModelRenderer spikerow212;
-	ModelRenderer spikerow31;
-	ModelRenderer spikerow32;
-	ModelRenderer spikerow33;
-	ModelRenderer spikerow34;
-	ModelRenderer spikerow35;
-	ModelRenderer spikerow36;
-	ModelRenderer spikerow37;
-	ModelRenderer spikerow38;
-	ModelRenderer spikerow41;
-	ModelRenderer spikerow42;
-	ModelRenderer spikerow43;
-	ModelRenderer spikerow44;
-	ModelRenderer tbase1;
-	ModelRenderer tbase2;
-	ModelRenderer tbase3;
-	ModelRenderer tbase4;
-	ModelRenderer tbase5;
-	ModelRenderer tentacle1;
-	ModelRenderer tentacle2;
-	ModelRenderer tentacle3;
-	ModelRenderer tentacle4;
-	ModelRenderer tentacle5;
+	public ModelRenderer head;
+	public ModelRenderer leftshoulder;
+	public ModelRenderer leftarm1;
+	public ModelRenderer leftarm2;
+	public ModelRenderer rightshoulder;
+	public ModelRenderer rightarm1;
+	public ModelRenderer rightarm2;
+	public ModelRenderer body;
+	public ModelRenderer core;
+	public ModelRenderer leftleg;
+	public ModelRenderer rightleg;
+	public ModelRenderer spikerow11;
+	public ModelRenderer spikerow12;
+	public ModelRenderer spikerow13;
+	public ModelRenderer spikerow14;
+	public ModelRenderer spikerow15;
+	public ModelRenderer spikerow16;
+	public ModelRenderer spikerow17;
+	public ModelRenderer spikerow18;
+	public ModelRenderer spikerow19;
+	public ModelRenderer spikerow110;
+	public ModelRenderer spikerow111;
+	public ModelRenderer spikerow112;
+	public ModelRenderer spikerow113;
+	public ModelRenderer spikerow114;
+	public ModelRenderer spikerow115;
+	public ModelRenderer spikerow116;
+	public ModelRenderer spikerow21;
+	public ModelRenderer spikerow22;
+	public ModelRenderer spikerow23;
+	public ModelRenderer spikerow24;
+	public ModelRenderer spikerow25;
+	public ModelRenderer spikerow26;
+	public ModelRenderer spikerow27;
+	public ModelRenderer spikerow28;
+	public ModelRenderer spikerow29;
+	public ModelRenderer spikerow210;
+	public ModelRenderer spikerow211;
+	public ModelRenderer spikerow212;
+	public ModelRenderer spikerow31;
+	public ModelRenderer spikerow32;
+	public ModelRenderer spikerow33;
+	public ModelRenderer spikerow34;
+	public ModelRenderer spikerow35;
+	public ModelRenderer spikerow36;
+	public ModelRenderer spikerow37;
+	public ModelRenderer spikerow38;
+	public ModelRenderer spikerow41;
+	public ModelRenderer spikerow42;
+	public ModelRenderer spikerow43;
+	public ModelRenderer spikerow44;
+	public ModelRenderer tbase1;
+	public ModelRenderer tbase2;
+	public ModelRenderer tbase3;
+	public ModelRenderer tbase4;
+	public ModelRenderer tbase5;
+	public ModelRenderer tentacle1;
+	public ModelRenderer tentacle2;
+	public ModelRenderer tentacle3;
+	public ModelRenderer tentacle4;
+	public ModelRenderer tentacle5;
 
 	public ModelSacthoth()
 	{

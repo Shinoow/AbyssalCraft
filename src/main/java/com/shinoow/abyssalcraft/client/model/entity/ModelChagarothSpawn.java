@@ -1,6 +1,6 @@
 /**
  * AbyssalCraft
- * Copyright 2012-2014 Shinoow
+ * Copyright 2012-2015 Shinoow
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -23,27 +23,27 @@ import net.minecraft.util.MathHelper;
 
 public class ModelChagarothSpawn extends ModelBase {
 
-	ModelRenderer body;
-	ModelRenderer smallspike1;
-	ModelRenderer smallspike2;
-	ModelRenderer smallspike3;
-	ModelRenderer smallspike4;
-	ModelRenderer bigspike1;
-	ModelRenderer bigspike2;
-	ModelRenderer bigspike3;
-	ModelRenderer bigspike4;
-	ModelRenderer leftleg1;
-	ModelRenderer leftleg2;
-	ModelRenderer leftleg3;
-	ModelRenderer backleg1;
-	ModelRenderer backleg2;
-	ModelRenderer backleg3;
-	ModelRenderer frontleg1;
-	ModelRenderer frontleg2;
-	ModelRenderer frontleg3;
-	ModelRenderer rightleg1;
-	ModelRenderer rightleg2;
-	ModelRenderer rightleg3;
+	public ModelRenderer body;
+	public ModelRenderer smallspike1;
+	public ModelRenderer smallspike2;
+	public ModelRenderer smallspike3;
+	public ModelRenderer smallspike4;
+	public ModelRenderer bigspike1;
+	public ModelRenderer bigspike2;
+	public ModelRenderer bigspike3;
+	public ModelRenderer bigspike4;
+	public ModelRenderer leftleg1;
+	public ModelRenderer leftleg2;
+	public ModelRenderer leftleg3;
+	public ModelRenderer backleg1;
+	public ModelRenderer backleg2;
+	public ModelRenderer backleg3;
+	public ModelRenderer frontleg1;
+	public ModelRenderer frontleg2;
+	public ModelRenderer frontleg3;
+	public ModelRenderer rightleg1;
+	public ModelRenderer rightleg2;
+	public ModelRenderer rightleg3;
 
 	public ModelChagarothSpawn()
 	{

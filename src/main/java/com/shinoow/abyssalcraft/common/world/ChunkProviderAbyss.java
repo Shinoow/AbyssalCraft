@@ -1,6 +1,6 @@
 /**
  * AbyssalCraft
- * Copyright 2012-2014 Shinoow
+ * Copyright 2012-2015 Shinoow
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,21 +16,37 @@
  */
 package com.shinoow.abyssalcraft.common.world;
 
-import static net.minecraftforge.event.terraingen.InitMapGenEvent.EventType.*;
+import static net.minecraftforge.event.terraingen.InitMapGenEvent.EventType.CAVE;
+import static net.minecraftforge.event.terraingen.InitMapGenEvent.EventType.RAVINE;
+import static net.minecraftforge.event.terraingen.InitMapGenEvent.EventType.SCATTERED_FEATURE;
+import static net.minecraftforge.event.terraingen.InitMapGenEvent.EventType.STRONGHOLD;
 import static net.minecraftforge.event.terraingen.PopulateChunkEvent.Populate.EventType.LAKE;
 
-import java.util.*;
+import java.util.List;
+import java.util.Random;
 
-import net.minecraft.block.*;
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockFalling;
 import net.minecraft.entity.EnumCreatureType;
-import net.minecraft.util.*;
-import net.minecraft.world.*;
+import net.minecraft.util.IProgressUpdate;
+import net.minecraft.util.MathHelper;
+import net.minecraft.world.ChunkPosition;
+import net.minecraft.world.World;
+import net.minecraft.world.WorldType;
 import net.minecraft.world.biome.BiomeGenBase;
-import net.minecraft.world.chunk.*;
-import net.minecraft.world.gen.*;
+import net.minecraft.world.chunk.Chunk;
+import net.minecraft.world.chunk.IChunkProvider;
+import net.minecraft.world.gen.MapGenBase;
+import net.minecraft.world.gen.MapGenCaves;
+import net.minecraft.world.gen.MapGenRavine;
+import net.minecraft.world.gen.NoiseGenerator;
+import net.minecraft.world.gen.NoiseGeneratorOctaves;
+import net.minecraft.world.gen.NoiseGeneratorPerlin;
 import net.minecraft.world.gen.structure.MapGenScatteredFeature;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.event.terraingen.*;
+import net.minecraftforge.event.terraingen.ChunkProviderEvent;
+import net.minecraftforge.event.terraingen.PopulateChunkEvent;
+import net.minecraftforge.event.terraingen.TerrainGen;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.common.structures.abyss.Abypillar;

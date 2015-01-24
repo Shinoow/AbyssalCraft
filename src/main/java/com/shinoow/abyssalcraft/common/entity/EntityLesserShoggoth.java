@@ -1,6 +1,6 @@
 /**
  * AbyssalCraft
- * Copyright 2012-2014 Shinoow
+ * Copyright 2012-2015 Shinoow
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,10 +17,6 @@
 package com.shinoow.abyssalcraft.common.entity;
 
 import java.util.UUID;
-
-import com.shinoow.abyssalcraft.AbyssalCraft;
-import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
-import com.shinoow.abyssalcraft.api.entity.*;
 
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
@@ -50,6 +46,11 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeModContainer;
+
+import com.shinoow.abyssalcraft.AbyssalCraft;
+import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
+import com.shinoow.abyssalcraft.api.entity.ICoraliumEntity;
+import com.shinoow.abyssalcraft.api.entity.IDreadEntity;
 
 public class EntityLesserShoggoth extends EntityMob implements ICoraliumEntity, IDreadEntity {
 
@@ -171,13 +172,13 @@ public class EntityLesserShoggoth extends EntityMob implements ICoraliumEntity, 
 		if (super.attackEntityAsMob(par1Entity))
 			if (par1Entity instanceof EntityLivingBase)
 				if(worldObj.provider.dimensionId == AbyssalCraft.configDimId1)
-					((EntityLivingBase)par1Entity).addPotionEffect(new PotionEffect(AbyssalCraft.Cplague.id, 200));
+					((EntityLivingBase)par1Entity).addPotionEffect(new PotionEffect(AbyssalCraft.Cplague.id, 100));
 				else if(worldObj.provider.dimensionId == AbyssalCraft.configDimId2)
-					((EntityLivingBase)par1Entity).addPotionEffect(new PotionEffect(AbyssalCraft.Dplague.id, 200));
+					((EntityLivingBase)par1Entity).addPotionEffect(new PotionEffect(AbyssalCraft.Dplague.id, 100));
 				else if(worldObj.provider.dimensionId == AbyssalCraft.configDimId3)
-					((EntityLivingBase)par1Entity).addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, 200));
+					((EntityLivingBase)par1Entity).addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, 100));
 				else if(worldObj.provider.dimensionId == AbyssalCraft.configDimId4)
-					((EntityLivingBase)par1Entity).addPotionEffect(new PotionEffect(Potion.blindness.id, 200));
+					((EntityLivingBase)par1Entity).addPotionEffect(new PotionEffect(Potion.blindness.id, 100));
 
 		return super.attackEntityAsMob(par1Entity);
 	}

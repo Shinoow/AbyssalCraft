@@ -1,6 +1,6 @@
 /**
  * AbyssalCraft
- * Copyright 2012-2014 Shinoow
+ * Copyright 2012-2015 Shinoow
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,17 +16,25 @@
  */
 package com.shinoow.abyssalcraft.common.structures.abyss.stronghold;
 
-import static net.minecraftforge.common.ChestGenHooks.*;
+import static net.minecraftforge.common.ChestGenHooks.STRONGHOLD_CORRIDOR;
+import static net.minecraftforge.common.ChestGenHooks.STRONGHOLD_CROSSING;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Random;
 
-import net.minecraft.init.*;
+import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntityMobSpawner;
 import net.minecraft.util.WeightedRandomChestContent;
-import net.minecraft.world.*;
-import net.minecraft.world.gen.structure.*;
+import net.minecraft.world.ChunkPosition;
+import net.minecraft.world.World;
+import net.minecraft.world.gen.structure.MapGenStructureIO;
+import net.minecraft.world.gen.structure.StructureBoundingBox;
+import net.minecraft.world.gen.structure.StructureComponent;
 import net.minecraftforge.common.ChestGenHooks;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;

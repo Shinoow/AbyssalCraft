@@ -1,6 +1,6 @@
 /**
  * AbyssalCraft
- * Copyright 2012-2014 Shinoow
+ * Copyright 2012-2015 Shinoow
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,41 +22,41 @@ import net.minecraft.entity.Entity;
 
 public class ModelShadowBeast extends ModelBase {
 
-	ModelRenderer head;
-	ModelRenderer btooth1;
-	ModelRenderer btooth2;
-	ModelRenderer btooth3;
-	ModelRenderer btooth4;
-	ModelRenderer btooth5;
-	ModelRenderer jaw;
-	ModelRenderer stooth1;
-	ModelRenderer stooth2;
-	ModelRenderer stooth3;
-	ModelRenderer stooth4;
-	ModelRenderer spine;
-	ModelRenderer leftshoulder;
-	ModelRenderer lsspike;
-	ModelRenderer larm1;
-	ModelRenderer larm2;
-	ModelRenderer laspike1;
-	ModelRenderer laspike2;
-	ModelRenderer lfinger1;
-	ModelRenderer lfinger3;
-	ModelRenderer lfinger2;
-	ModelRenderer lfinger4;
-	ModelRenderer rightshoulder;
-	ModelRenderer rsspike;
-	ModelRenderer rarm1;
-	ModelRenderer rarm2;
-	ModelRenderer raspike1;
-	ModelRenderer raspike2;
-	ModelRenderer rfinger1;
-	ModelRenderer fringer2;
-	ModelRenderer rfinger3;
-	ModelRenderer rfinger4;
-	ModelRenderer pelvis;
-	ModelRenderer leftleg;
-	ModelRenderer rightleg;
+	public ModelRenderer head;
+	public ModelRenderer btooth1;
+	public ModelRenderer btooth2;
+	public ModelRenderer btooth3;
+	public ModelRenderer btooth4;
+	public ModelRenderer btooth5;
+	public ModelRenderer jaw;
+	public ModelRenderer stooth1;
+	public ModelRenderer stooth2;
+	public ModelRenderer stooth3;
+	public ModelRenderer stooth4;
+	public ModelRenderer spine;
+	public ModelRenderer leftshoulder;
+	public ModelRenderer lsspike;
+	public ModelRenderer larm1;
+	public ModelRenderer larm2;
+	public ModelRenderer laspike1;
+	public ModelRenderer laspike2;
+	public ModelRenderer lfinger1;
+	public ModelRenderer lfinger3;
+	public ModelRenderer lfinger2;
+	public ModelRenderer lfinger4;
+	public ModelRenderer rightshoulder;
+	public ModelRenderer rsspike;
+	public ModelRenderer rarm1;
+	public ModelRenderer rarm2;
+	public ModelRenderer raspike1;
+	public ModelRenderer raspike2;
+	public ModelRenderer rfinger1;
+	public ModelRenderer fringer2;
+	public ModelRenderer rfinger3;
+	public ModelRenderer rfinger4;
+	public ModelRenderer pelvis;
+	public ModelRenderer leftleg;
+	public ModelRenderer rightleg;
 
 	public ModelShadowBeast()
 	{

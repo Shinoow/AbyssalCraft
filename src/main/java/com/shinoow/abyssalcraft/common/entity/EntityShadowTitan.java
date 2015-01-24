@@ -1,6 +1,6 @@
 /**
  * AbyssalCraft
- * Copyright 2012-2014 Shinoow
+ * Copyright 2012-2015 Shinoow
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,9 +16,6 @@
  */
 package com.shinoow.abyssalcraft.common.entity;
 
-import com.shinoow.abyssalcraft.AbyssalCraft;
-import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
-
 import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIAttackOnCollide;
@@ -33,6 +30,9 @@ import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.world.World;
+
+import com.shinoow.abyssalcraft.AbyssalCraft;
+import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
 
 public class EntityShadowTitan extends EntityMob {
 
@@ -80,13 +80,13 @@ public class EntityShadowTitan extends EntityMob {
 	@Override
 	protected String getDeathSound()
 	{
-		return "mob.blaze.death";
+		return "abyssalcraft:shadow.death";
 	}
 
 	@Override
 	protected Item getDropItem()
 	{
-		return AbyssalCraft.OC;
+		return AbyssalCraft.shadowPlate;
 	}
 
 	@Override

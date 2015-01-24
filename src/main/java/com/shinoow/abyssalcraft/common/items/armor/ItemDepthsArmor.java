@@ -1,6 +1,6 @@
 /**
  * AbyssalCraft
- * Copyright 2012-2014 Shinoow
+ * Copyright 2012-2015 Shinoow
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,18 +18,24 @@ package com.shinoow.abyssalcraft.common.items.armor;
 
 import java.util.List;
 
-import org.lwjgl.opengl.GL11;
-
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.texture.IIconRegister;
-import net.minecraft.entity.*;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.*;
-import net.minecraft.potion.*;
-import net.minecraft.util.*;
+import net.minecraft.item.ItemArmor;
+import net.minecraft.item.ItemStack;
+import net.minecraft.potion.Potion;
+import net.minecraft.potion.PotionEffect;
+import net.minecraft.util.EnumChatFormatting;
+import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
+
+import org.lwjgl.opengl.GL11;
+
 import thaumcraft.api.IVisDiscountGear;
 import thaumcraft.api.aspects.Aspect;
 import thaumcraft.api.nodes.IRevealer;
@@ -37,8 +43,11 @@ import thaumcraft.api.nodes.IRevealer;
 import com.shinoow.abyssalcraft.AbyssalCraft;
 
 import cpw.mods.fml.common.Loader;
-import cpw.mods.fml.common.Optional.*;
-import cpw.mods.fml.relauncher.*;
+import cpw.mods.fml.common.Optional.Interface;
+import cpw.mods.fml.common.Optional.InterfaceList;
+import cpw.mods.fml.common.Optional.Method;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 @InterfaceList(value = { @Interface(iface = "thaumcraft.api.IVisDiscountGear", modid = "Thaumcraft"),
 		@Interface(iface = "thaumcraft.api.nodes.IRevealer", modid = "Thaumcraft")})

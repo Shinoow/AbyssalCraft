@@ -1,6 +1,6 @@
 /**
  * AbyssalCraft
- * Copyright 2012-2014 Shinoow
+ * Copyright 2012-2015 Shinoow
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,12 +17,22 @@
 package com.shinoow.abyssalcraft.common.entity.anti;
 
 import net.minecraft.block.Block;
-import net.minecraft.entity.*;
-import net.minecraft.entity.ai.*;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EnumCreatureAttribute;
+import net.minecraft.entity.IEntityLivingData;
+import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.ai.EntityAIAttackOnCollide;
+import net.minecraft.entity.ai.EntityAIHurtByTarget;
+import net.minecraft.entity.ai.EntityAILookIdle;
+import net.minecraft.entity.ai.EntityAIMoveTowardsRestriction;
+import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
+import net.minecraft.entity.ai.EntityAISwimming;
+import net.minecraft.entity.ai.EntityAIWander;
+import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.*;
-import net.minecraft.item.*;
+import net.minecraft.init.Items;
+import net.minecraft.item.Item;
 import net.minecraft.world.World;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
@@ -69,7 +79,7 @@ public class EntityAntiGhoul extends EntityMob implements IAntiEntity {
 	@Override
 	protected String getLivingSound()
 	{
-		return "mob.zombie.say";
+		return "abyssalcraft:ghoul.normal.idle";
 	}
 
 	@Override
@@ -84,7 +94,7 @@ public class EntityAntiGhoul extends EntityMob implements IAntiEntity {
 	@Override
 	protected String getDeathSound()
 	{
-		return "mob.zombie.death";
+		return "abyssalcraft:ghoul.normal.death";
 	}
 
 	@Override

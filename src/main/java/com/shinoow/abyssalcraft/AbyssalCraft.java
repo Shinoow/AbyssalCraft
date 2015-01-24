@@ -1,6 +1,6 @@
 /**
  * AbyssalCraft
- * Copyright 2012-2014 Shinoow
+ * Copyright 2012-2015 Shinoow
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,6 +18,8 @@ package com.shinoow.abyssalcraft;
 
 import java.io.*;
 import java.net.*;
+import java.util.HashMap;
+import java.util.Map;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -27,6 +29,7 @@ import net.minecraft.entity.*;
 import net.minecraft.entity.EntityList.EntityEggInfo;
 import net.minecraft.init.Items;
 import net.minecraft.item.*;
+import net.minecraft.launchwrapper.Launch;
 import net.minecraft.potion.*;
 import net.minecraft.stats.*;
 import net.minecraft.util.WeightedRandomChestContent;
@@ -61,7 +64,6 @@ import com.shinoow.abyssalcraft.common.structures.dreadlands.mineshaft.*;
 import com.shinoow.abyssalcraft.common.util.*;
 import com.shinoow.abyssalcraft.common.world.*;
 import com.shinoow.abyssalcraft.common.world.biome.*;
-import com.shinoow.abyssalcraft.integration.thaumcraft.ACThaumcraftIntegration;
 import com.shinoow.abyssalcraft.update.IUpdateProxy;
 
 import cpw.mods.fml.client.event.ConfigChangedEvent;
@@ -75,7 +77,7 @@ import cpw.mods.fml.common.registry.*;
 @Mod(modid = AbyssalCraft.modid, name = AbyssalCraft.name, version = AbyssalCraft.version, dependencies = "required-after:Forge@[forgeversion,);after:Thaumcraft", useMetadata = false, guiFactory = "com.shinoow.abyssalcraft.client.config.ACGuiFactory")
 public class AbyssalCraft {
 
-	public static final String version = "1.8.1";
+	public static final String version = "1.8.2";
 	public static final String modid = "abyssalcraft";
 	public static final String name = "AbyssalCraft";
 
@@ -96,6 +98,10 @@ public class AbyssalCraft {
 	/**Update Checker Ping*/
 	private boolean hasPinged = false;
 
+	private boolean dev = (Boolean)Launch.blackboard.get("fml.deobfuscatedEnvironment");
+
+	public static Map<String, Integer> stringtoIDMapping = new HashMap<String, Integer>();
+
 	public static Configuration cfg;
 
 	public static Fluid CFluid, antifluid;
@@ -103,7 +109,7 @@ public class AbyssalCraft {
 	public static Achievement mineDS, mineAby, killghoul, enterabyss, killdragon, summonAsorah,
 	killAsorah, enterdreadlands, killdreadguard, ghoulhead, killPete, killWilson, killOrange,
 	petehead, wilsonhead, orangehead, mineCorgem, mineCor, findPSDL, GK1, GK2, GK3, Jzhstaff,
-	secret1, summonChagaroth, killChagaroth, enterOmothol, enterDarkRealm, killJzahar;
+	summonChagaroth, killChagaroth, enterOmothol, enterDarkRealm, killJzahar;
 
 	public static Block Darkstone, Darkstone_brick, Darkstone_cobble, DSGlow, Darkbrickslab1,
 	Darkbrickslab2, Darkcobbleslab1, Darkcobbleslab2, Darkgrass, DBstairs, DCstairs, DLTLeaves,
@@ -121,7 +127,7 @@ public class AbyssalCraft {
 	chagarothfistspawner, DrTfence, nitreOre, AbyIroOre, AbyGolOre, AbyDiaOre, AbyNitOre, AbyTinOre,
 	AbyCopOre, AbyPCorOre, AbyLCorOre, solidLava, ethaxium, ethaxiumbrick, ethaxiumpillar, ethaxiumstairs,
 	ethaxiumslab1, ethaxiumslab2, ethaxiumfence, omotholstone, ethaxiumblock, omotholportal, omotholfire,
-	engraver, engraver_on;
+	engraver;
 
 	//Overworld biomes
 	public static BiomeGenBase Darklands, DarklandsForest, DarklandsPlains, DarklandsHills,
@@ -208,7 +214,7 @@ public class AbyssalCraft {
 	public static boolean darkspawn1, darkspawn2, darkspawn3, darkspawn4, darkspawn5, coraliumspawn1, coraliumspawn2;
 	public static int darkWeight1, darkWeight2, darkWeight3, darkWeight4, darkWeight5, coraliumWeight;
 
-	public static boolean shouldSpread, shouldInfect, breakLogic, destroyOcean, canRenderStarspawn, demonPigFire;
+	public static boolean shouldSpread, shouldInfect, breakLogic, destroyOcean, canRenderStarspawn, demonPigFire, updateC, darkness;
 	public static int evilPigSpawnRate;
 
 	static int startEntityId = 300;
@@ -221,6 +227,8 @@ public class AbyssalCraft {
 	public void preInit(FMLPreInitializationEvent event) {
 
 		ACLogger.info("Pre-initializing AbyssalCraft.");
+		if(dev)
+			ACLogger.info("We appear to be inside a Dev environment, disabling UpdateChecker!");
 		metadata = event.getModMetadata();
 
 		MinecraftForge.EVENT_BUS.register(new AbyssalCraftEventHooks());
@@ -304,14 +312,14 @@ public class AbyssalCraft {
 		dreadplanks = new BlockACBasic(Material.wood, 2.0F, 5.0F, Block.soundTypeWood).setBlockName("DrTplank").setBlockTextureName(modid + ":" + "DrTplank");
 		dreadportal = new BlockDreadlandsPortal().setBlockName("DG").setBlockTextureName(modid + ":" + "DG");
 		dreadfire = new BlockDreadFire().setLightLevel(1.0F).setBlockName("Dfire");
-		DGhead = new BlockDGhead().setHardness(2.0F).setResistance(6.0F).setStepSound(Block.soundTypeCloth).setCreativeTab(AbyssalCraft.tabDecoration).setBlockName("DGhead").setBlockTextureName(modid + ":" + "DGhead");
+		DGhead = new BlockDGhead().setHardness(1.0F).setResistance(6.0F).setStepSound(Block.soundTypeCloth).setCreativeTab(AbyssalCraft.tabDecoration).setBlockName("DGhead").setBlockTextureName(modid + ":" + "DGhead");
 		Cwater = new BlockCLiquid().setResistance(500.0F).setLightLevel(1.0F).setBlockName("Cwater");
 		dreadstone = new BlockACBasic(Material.rock, "pickaxe", 4, 2.5F, 20.0F, Block.soundTypeStone).setBlockName("DrS").setBlockTextureName(modid + ":" + "DrS");
 		abydreadstone = new BlockACBasic(Material.rock, "pickaxe", 4, 2.5F, 20.0F, Block.soundTypeStone).setBlockName("AbyDrS").setBlockTextureName(modid + ":" + "AbyDrS");
 		dreadgrass = new BlockDreadGrass().setHardness(0.4F).setStepSound(Block.soundTypeGrass).setBlockName("DrG");
-		Phead = new BlockPhead().setHardness(2.0F).setResistance(6.0F).setStepSound(Block.soundTypeCloth).setCreativeTab(AbyssalCraft.tabDecoration).setBlockName("Phead").setBlockTextureName(modid + ":" + "Phead");
-		Whead = new BlockWhead().setHardness(2.0F).setResistance(6.0F).setStepSound(Block.soundTypeCloth).setCreativeTab(AbyssalCraft.tabDecoration).setBlockName("Whead").setBlockTextureName(modid + ":" + "Whead");
-		Ohead = new BlockOhead().setHardness(2.0F).setResistance(6.0F).setStepSound(Block.soundTypeCloth).setCreativeTab(AbyssalCraft.tabDecoration).setBlockName("Ohead").setBlockTextureName(modid + ":" + "Ohead");
+		Phead = new BlockPhead().setHardness(1.0F).setResistance(6.0F).setStepSound(Block.soundTypeCloth).setCreativeTab(AbyssalCraft.tabDecoration).setBlockName("Phead").setBlockTextureName(modid + ":" + "Phead");
+		Whead = new BlockWhead().setHardness(1.0F).setResistance(6.0F).setStepSound(Block.soundTypeCloth).setCreativeTab(AbyssalCraft.tabDecoration).setBlockName("Whead").setBlockTextureName(modid + ":" + "Whead");
+		Ohead = new BlockOhead().setHardness(1.0F).setResistance(6.0F).setStepSound(Block.soundTypeCloth).setCreativeTab(AbyssalCraft.tabDecoration).setBlockName("Ohead").setBlockTextureName(modid + ":" + "Ohead");
 		dreadbrickstairs = new BlockACStairs(dreadbrick, "pickaxe", 4).setHardness(2.5F).setResistance(20.0F).setStepSound(Block.soundTypeStone).setBlockName("DrSBs");
 		dreadbrickfence = new BlockACFence("DrSBf", Material.rock, "pickaxe", 4).setHardness(2.5F).setResistance(20.0F).setStepSound(Block.soundTypeStone).setBlockName("DrSBf");
 		dreadbrickslab1 = new BlockACSingleSlab(dreadbrickslab1, dreadbrickslab2, Material.rock, "pickaxe", 4).setHardness(2.5F).setResistance(20.0F).setStepSound(Block.soundTypeStone).setBlockName("DrSBs1").setBlockTextureName(modid + ":" + "DrSB");
@@ -361,8 +369,7 @@ public class AbyssalCraft {
 		ethaxiumblock = new IngotBlock(8).setResistance(Float.MAX_VALUE).setBlockName("BOE").setBlockTextureName(modid + ":" + "BOE");
 		omotholportal = new BlockOmotholPortal().setBlockName("OG").setBlockTextureName(modid + ":" + "OG");
 		omotholfire = new BlockOmotholFire().setLightLevel(1.0F).setBlockName("Ofire");
-		engraver = new BlockEngraver(false).setHardness(2.5F).setResistance(12.0F).setStepSound(Block.soundTypeStone).setBlockName("engraver");
-		engraver_on = new BlockEngraver(true).setHardness(2.5F).setResistance(12.0F).setStepSound(Block.soundTypeStone).setLightLevel(0.875F).setBlockName("engraver");
+		engraver = new BlockEngraver().setHardness(2.5F).setResistance(12.0F).setStepSound(Block.soundTypeStone).setBlockName("engraver");
 
 		//Biome
 		Darklands = new BiomeGenDarklands(configBiomeId1).setColor(522674).setBiomeName("Darklands");
@@ -743,7 +750,6 @@ public class AbyssalCraft {
 		GameRegistry.registerBlock(omotholportal, "omotholportal");
 		GameRegistry.registerBlock(omotholfire, "omotholfire");
 		GameRegistry.registerBlock(engraver, "engraver");
-		GameRegistry.registerBlock(engraver_on, "engraver_on");
 
 		//Item Register
 		GameRegistry.registerItem(devsword, "devsword");
@@ -919,14 +925,14 @@ public class AbyssalCraft {
 		GameRegistry.registerItem(EthaxiumU, "ethaxiumu");
 		GameRegistry.registerItem(coin, "coin");
 		GameRegistry.registerItem(cthulhuCoin, "cthulhucoin");
-		//		GameRegistry.registerItem(elderCoin, "eldercoin");
-		//		GameRegistry.registerItem(jzaharCoin, "jzaharcoin");
+		GameRegistry.registerItem(elderCoin, "eldercoin");
+		GameRegistry.registerItem(jzaharCoin, "jzaharcoin");
 		GameRegistry.registerItem(engravingBlank, "engraving_blank");
 		GameRegistry.registerItem(engravingCthulhu, "engraving_cthulhu");
-		//		GameRegistry.registerItem(engravingElder, "engraving_elder");
-		//		GameRegistry.registerItem(engravingJzahar, "engraving_jzahar");
+		GameRegistry.registerItem(engravingElder, "engraving_elder");
+		GameRegistry.registerItem(engravingJzahar, "engraving_jzahar");
 		//		GameRegistry.registerItem(shoggothFlesh, "shoggothflesh");
-		//		GameRegistry.registerItem(eldritchScale, "eldritchscale");
+		GameRegistry.registerItem(eldritchScale, "eldritchscale");
 		//		GameRegistry.registerItem(omotholFlesh, "omotholflesh");
 		//		GameRegistry.registerItem(shadowPlate, "shadowplate");
 
@@ -981,16 +987,16 @@ public class AbyssalCraft {
 			BiomeManager.addSpawnBiome(AbyssalCraft.corocean);
 
 		//Dimension
-		registerDimension("abyss", configDimId1, WorldProviderAbyss.class, true);
-		registerDimension("dreadlands", configDimId2, WorldProviderDreadlands.class, true);
-		registerDimension("omothol", configDimId3, WorldProviderOmothol.class, true);
-		registerDimension("darkrealm", configDimId4, WorldProviderDarkRealm.class, true);
+		registerDimension(configDimId1, WorldProviderAbyss.class, true);
+		registerDimension(configDimId2, WorldProviderDreadlands.class, true);
+		registerDimension(configDimId3, WorldProviderOmothol.class, true);
+		registerDimension(configDimId4, WorldProviderDarkRealm.class, true);
 
 		//Mobs
 		EntityRegistry.registerModEntity(EntityDepthsGhoul.class, "depthsghoul", 25, this, 80, 3, true);
 		EntityRegistry.addSpawn(EntityDepthsGhoul.class, 10, 1, 3, EnumCreatureType.monster, new BiomeGenBase[] {
 			BiomeGenBase.swampland, BiomeGenBase.ocean, BiomeGenBase.beach, BiomeGenBase.river});
-		registerEntityEgg(EntityDepthsGhoul.class, 0x36A880, 0x012626);
+		registerEntityEgg(EntityDepthsGhoul.class, 0x36A880, 0x012626, "depthsghoul");
 
 		EntityRegistry.registerModEntity(EntityEvilpig.class, "evilpig", 26, this, 80, 3, true);
 		EntityRegistry.addSpawn(EntityEvilpig.class, evilPigSpawnRate, 1, 3, EnumCreatureType.creature, new BiomeGenBase[] {
@@ -998,117 +1004,123 @@ public class AbyssalCraft {
 			BiomeGenBase.beach, BiomeGenBase.extremeHills, BiomeGenBase.jungle, BiomeGenBase.savannaPlateau,
 			BiomeGenBase.swampland, BiomeGenBase.icePlains, BiomeGenBase.birchForest,
 			BiomeGenBase.birchForestHills, BiomeGenBase.roofedForest});
-		registerEntityEgg(EntityEvilpig.class, 15771042, 14377823);
+		registerEntityEgg(EntityEvilpig.class, 15771042, 14377823, "evilpig");
 
 		EntityRegistry.registerModEntity(EntityAbyssalZombie.class, "abyssalzombie", 27, this, 80, 3, true);
 		EntityRegistry.addSpawn(EntityAbyssalZombie.class, 10, 1, 3, EnumCreatureType.monster, new BiomeGenBase[] {
 			BiomeGenBase.ocean, BiomeGenBase.beach, BiomeGenBase.river, BiomeGenBase.jungle,
 			BiomeGenBase.swampland, BiomeGenBase.sky});
-		registerEntityEgg(EntityAbyssalZombie.class, 0x36A880, 0x052824);
+		registerEntityEgg(EntityAbyssalZombie.class, 0x36A880, 0x052824, "abyssalzombie");
 
 		EntityRegistry.registerModEntity(EntityODBPrimed.class, "Primed ODB", 28, this, 80, 3, true);
 
 		EntityRegistry.registerModEntity(EntityJzahar.class, "Jzahar", 29, this, 80, 3, true);
-		registerEntityEgg(EntityJzahar.class, 0x133133, 0x342122);
+		registerEntityEgg(EntityJzahar.class, 0x133133, 0x342122, "Jzahar");
 
 		EntityRegistry.registerModEntity(EntityAbygolem.class, "abygolem", 30, this, 80, 3, true);
-		registerEntityEgg(EntityAbygolem.class, 0x8A00E6, 0x6100A1);
+		registerEntityEgg(EntityAbygolem.class, 0x8A00E6, 0x6100A1, "abygolem");
 
 		EntityRegistry.registerModEntity(EntityDreadgolem.class, "dreadgolem", 31, this, 80, 3, true);
-		registerEntityEgg(EntityDreadgolem.class, 0x1E60000, 0xCC0000);
+		registerEntityEgg(EntityDreadgolem.class, 0x1E60000, 0xCC0000, "dreadgolem");
 
 		EntityRegistry.registerModEntity(EntityDreadguard.class, "dreadguard", 32, this, 80, 3, true);
-		registerEntityEgg(EntityDreadguard.class, 0xE60000, 0xCC0000);
+		registerEntityEgg(EntityDreadguard.class, 0xE60000, 0xCC0000, "dreadguard");
 
 		EntityRegistry.registerModEntity(EntityPSDLTracker.class, "PowerstoneTracker", 33, this, 64, 10, true);
 
 		EntityRegistry.registerModEntity(EntityDragonMinion.class, "dragonminion", 34, this, 80, 3, true);
-		registerEntityEgg(EntityDragonMinion.class, 0x433434, 0x344344);
+		registerEntityEgg(EntityDragonMinion.class, 0x433434, 0x344344, "dragonminion");
 
 		EntityRegistry.registerModEntity(EntityDragonBoss.class, "dragonboss", 35, this, 80, 3, true);
-		registerEntityEgg(EntityDragonBoss.class, 0x476767, 0x768833);
+		registerEntityEgg(EntityDragonBoss.class, 0x476767, 0x768833, "dragonboss");
 
 		EntityRegistry.registerModEntity(EntityODBcPrimed.class, "Primed ODB Core", 36, this, 80, 3, true);
 
 		EntityRegistry.registerModEntity(EntityShadowCreature.class, "shadowcreature", 37, this, 80, 3, true);
-		registerEntityEgg(EntityShadowCreature.class, 0, 0xFFFFFF);
+		registerEntityEgg(EntityShadowCreature.class, 0, 0xFFFFFF, "shadowcreature");
 
 		EntityRegistry.registerModEntity(EntityShadowMonster.class, "shadowmonster", 38, this, 80, 3, true);
-		registerEntityEgg(EntityShadowMonster.class, 0, 0xFFFFFF);
+		registerEntityEgg(EntityShadowMonster.class, 0, 0xFFFFFF, "shadowmonster");
 
 		EntityRegistry.registerModEntity(EntityDreadling.class, "dreadling", 39, this, 80, 3, true);
-		registerEntityEgg(EntityDreadling.class, 0xE60000, 0xCC0000);
+		registerEntityEgg(EntityDreadling.class, 0xE60000, 0xCC0000, "dreadling");
 
 		EntityRegistry.registerModEntity(EntityDreadSpawn.class, "dreadspawn", 40, this, 80, 3, true);
-		registerEntityEgg(EntityDreadSpawn.class, 0xE60000, 0xCC0000);
+		registerEntityEgg(EntityDreadSpawn.class, 0xE60000, 0xCC0000, "dreadspawn");
 
 		EntityRegistry.registerModEntity(EntityDemonPig.class, "demonpig", 41, this, 80, 3, true);
 		EntityRegistry.addSpawn(EntityDemonPig.class, 30, 1, 3, EnumCreatureType.monster, new BiomeGenBase[] {
 			BiomeGenBase.hell});
-		registerEntityEgg(EntityDemonPig.class, 15771042, 14377823);
+		registerEntityEgg(EntityDemonPig.class, 15771042, 14377823, "demonpig");
 
 		EntityRegistry.registerModEntity(EntitySkeletonGoliath.class, "gskeleton", 42, this, 80, 3, true);
-		registerEntityEgg(EntitySkeletonGoliath.class, 0xD6D6C9, 0xC6C7AD);
+		registerEntityEgg(EntitySkeletonGoliath.class, 0xD6D6C9, 0xC6C7AD, "gskeleton");
 
 		EntityRegistry.registerModEntity(EntityChagarothSpawn.class, "chagarothspawn", 43, this, 80, 3, true);
-		registerEntityEgg(EntityChagarothSpawn.class, 0xE60000, 0xCC0000);
+		registerEntityEgg(EntityChagarothSpawn.class, 0xE60000, 0xCC0000, "chagarothspawn");
 
 		EntityRegistry.registerModEntity(EntityChagarothFist.class, "chagarothfist", 44, this, 80, 3, true);
-		registerEntityEgg(EntityChagarothFist.class, 0xE60000, 0xCC0000);
+		registerEntityEgg(EntityChagarothFist.class, 0xE60000, 0xCC0000, "chagarothfist");
 
 		EntityRegistry.registerModEntity(EntityChagaroth.class, "chagaroth", 45, this, 80, 3, true);
-		registerEntityEgg(EntityChagaroth.class, 0xE60000, 0xCC0000);
+		registerEntityEgg(EntityChagaroth.class, 0xE60000, 0xCC0000, "chagaroth");
 
 		EntityRegistry.registerModEntity(EntityShadowBeast.class, "shadowbeast", 46, this, 80, 3, true);
-		registerEntityEgg(EntityShadowBeast.class, 0, 0xFFFFFF);
+		registerEntityEgg(EntityShadowBeast.class, 0, 0xFFFFFF, "shadowbeast");
 
 		EntityRegistry.registerModEntity(EntitySacthoth.class, "shadowboss", 47, this, 80, 3, true);
-		registerEntityEgg(EntitySacthoth.class, 0, 0xFFFFFF);
+		registerEntityEgg(EntitySacthoth.class, 0, 0xFFFFFF, "shadowboss");
 
 		EntityRegistry.registerModEntity(EntityAntiAbyssalZombie.class, "antiabyssalzombie", 48, this, 80, 3, true);
-		registerEntityEgg(EntityAntiAbyssalZombie.class, 0xFFFFFF, 0xFFFFFF);
+		registerEntityEgg(EntityAntiAbyssalZombie.class, 0xFFFFFF, 0xFFFFFF, "antiabyssalzombie");
 
 		EntityRegistry.registerModEntity(EntityAntiBat.class, "antibat", 49, this, 80, 3, true);
-		registerEntityEgg(EntityAntiBat.class, 0xFFFFFF, 0xFFFFFF);
+		registerEntityEgg(EntityAntiBat.class, 0xFFFFFF, 0xFFFFFF, "antibat");
 
 		EntityRegistry.registerModEntity(EntityAntiChicken.class, "antichicken", 50, this, 80, 3, true);
-		registerEntityEgg(EntityAntiChicken.class, 0xFFFFFF, 0xFFFFFF);
+		registerEntityEgg(EntityAntiChicken.class, 0xFFFFFF, 0xFFFFFF, "antichicken");
 
 		EntityRegistry.registerModEntity(EntityAntiCow.class, "anticow", 51, this, 80, 3, true);
-		registerEntityEgg(EntityAntiCow.class, 0xFFFFFF, 0xFFFFFF);
+		registerEntityEgg(EntityAntiCow.class, 0xFFFFFF, 0xFFFFFF, "anticow");
 
 		EntityRegistry.registerModEntity(EntityAntiCreeper.class, "anticreeper", 52, this, 80, 3, true);
-		registerEntityEgg(EntityAntiCreeper.class, 0xFFFFFF, 0xFFFFFF);
+		registerEntityEgg(EntityAntiCreeper.class, 0xFFFFFF, 0xFFFFFF, "anticreeper");
 
 		EntityRegistry.registerModEntity(EntityAntiGhoul.class, "antighoul", 53, this, 80, 3, true);
-		registerEntityEgg(EntityAntiGhoul.class, 0xFFFFFF, 0xFFFFFF);
+		registerEntityEgg(EntityAntiGhoul.class, 0xFFFFFF, 0xFFFFFF, "antighoul");
 
 		EntityRegistry.registerModEntity(EntityAntiPig.class, "antipig", 54, this, 80, 3, true);
-		registerEntityEgg(EntityAntiPig.class, 0xFFFFFF, 0xFFFFFF);
+		registerEntityEgg(EntityAntiPig.class, 0xFFFFFF, 0xFFFFFF, "antipig");
 
 		EntityRegistry.registerModEntity(EntityAntiPlayer.class, "antiplayer", 55, this, 80, 3, true);
-		registerEntityEgg(EntityAntiPlayer.class, 0xFFFFFF, 0xFFFFFF);
+		registerEntityEgg(EntityAntiPlayer.class, 0xFFFFFF, 0xFFFFFF, "antiplayer");
 
 		EntityRegistry.registerModEntity(EntityAntiSkeleton.class, "antiskeleton", 56, this, 80, 3, true);
-		registerEntityEgg(EntityAntiSkeleton.class, 0xFFFFFF, 0xFFFFFF);
+		registerEntityEgg(EntityAntiSkeleton.class, 0xFFFFFF, 0xFFFFFF, "antiskeleton");
 
 		EntityRegistry.registerModEntity(EntityAntiSpider.class, "antispider", 57, this, 80, 3, true);
-		registerEntityEgg(EntityAntiSpider.class, 0xFFFFFF, 0xFFFFFF);
+		registerEntityEgg(EntityAntiSpider.class, 0xFFFFFF, 0xFFFFFF, "antispider");
 
 		EntityRegistry.registerModEntity(EntityAntiZombie.class, "antizombie", 58, this, 80, 3, true);
-		registerEntityEgg(EntityAntiZombie.class, 0xFFFFFF, 0xFFFFFF);
+		registerEntityEgg(EntityAntiZombie.class, 0xFFFFFF, 0xFFFFFF, "antizombie");
 
-		//		EntityRegistry.registerModEntity(EntityLesserShoggoth.class, "lessershoggoth", 59, this, 80, 3, true);
+		EntityRegistry.registerModEntity(EntityRemnant.class, "remnant", 59, this, 80, 3, true);
+		registerEntityEgg(EntityRemnant.class, 0x133133, 0x342122, "remnant");
+
+		//		EntityRegistry.registerModEntity(EntityLesserShoggoth.class, "lessershoggoth", 60, this, 80, 3, true);
+		//		registerEntityEgg(EntityLesserShoggoth.class, 0x133133, 0x342122);
 		//
-		//		EntityRegistry.registerModEntity(EntityShadowTitan.class, "shadowtitan", 60, this, 80, 3, true);
+		//		EntityRegistry.registerModEntity(EntityShadowTitan.class, "shadowtitan", 61, this, 80, 3, true);
+		//		registerEntityEgg(EntityShadowTitan.class, 0, 0xFFFFFF);
 		//
-		//		EntityRegistry.registerModEntity(EntityOmotholWarden.class, "omotholwarden", 61, this, 80, 3, true);
+		//		EntityRegistry.registerModEntity(EntityOmotholWarden.class, "omotholwarden", 62, this, 80, 3, true);
+		//		registerEntityEgg(EntityOmotholWarden.class, 0x133133, 0x342122);
 		//
-		//		EntityRegistry.registerModEntity(EntityGatekeeperMinion.class, "jzaharminion", 62, this, 80, 3, true);
+		//		EntityRegistry.registerModEntity(EntityGatekeeperMinion.class, "jzaharminion", 63, this, 80, 3, true);
+		//		registerEntityEgg(EntityGatekeeperMinion.class, 0x133133, 0x342122);
 		//
-		//		EntityRegistry.registerModEntity(EntityOmotholGhoul.class, "omotholghoul", 63, this, 80, 3, true);
-		//
-		//		EntityRegistry.registerModEntity(EntityRemnant.class, "remnant", 64, this, 80, 3, true);
+		//		EntityRegistry.registerModEntity(EntityOmotholGhoul.class, "omotholghoul", 64, this, 80, 3, true);
+		//		registerEntityEgg(EntityOmotholGhoul.class, 0x133133, 0x342122);
 
 		proxy.addArmor("Abyssalnite");
 		proxy.addArmor("AbyssalniteC");
@@ -1152,7 +1164,6 @@ public class AbyssalCraft {
 		GK2 = new Achievement("achievement.GK2", "GK2", 0, -5, AbyssalCraft.portalPlacerDL, AbyssalCraft.GK1).registerStat();
 		GK3 = new Achievement("achievement.GK3", "GK3", 0, -7, AbyssalCraft.portalPlacerJzh, AbyssalCraft.GK2).registerStat();
 		Jzhstaff = new Achievement("achievement.Jzhstaff", "Jzhstaff", 0, -9, AbyssalCraft.Staff, AbyssalCraft.GK3).setSpecial().registerStat();
-		secret1 = new Achievement("achievement.secret1", "secret1", 9, -9, AbyssalCraft.devsword, (Achievement)null).initIndependentStat().registerStat();
 		summonChagaroth = new Achievement("achievement.summonChagaroth", "summonChagaroth", 3, 12, AbyssalCraft.dreadaltarbottom, AbyssalCraft.enterdreadlands).registerStat();
 		killChagaroth = new Achievement("achievement.killChagaroth", "killChagaroth", 6, 12, AbyssalCraft.dreadKey, AbyssalCraft.summonChagaroth).setSpecial().registerStat();
 		enterOmothol = new Achievement("achievement.enterOmothol", "enterOmothol", 6, 15, AbyssalCraft.omotholstone, AbyssalCraft.killChagaroth).setSpecial().registerStat();
@@ -1160,7 +1171,7 @@ public class AbyssalCraft {
 
 		AchievementPage.registerAchievementPage(new AchievementPage("AbyssalCraft", new Achievement[]{mineDS, mineAby, killghoul, enterabyss, killdragon, summonAsorah, killAsorah,
 				enterdreadlands, killdreadguard, ghoulhead, killPete, killWilson, killOrange, petehead, wilsonhead, orangehead, mineCorgem, mineCor, findPSDL, GK1, GK2, GK3, Jzhstaff,
-				secret1, summonChagaroth, killChagaroth, enterOmothol, enterDarkRealm}));
+				summonChagaroth, killChagaroth, enterOmothol, enterDarkRealm}));
 
 		proxy.init();
 		FMLCommonHandler.instance().bus().register(instance);
@@ -1180,10 +1191,7 @@ public class AbyssalCraft {
 
 		ACLogger.info("Post-initializing AbyssalCraft");
 		proxy.postInit();
-		if(Loader.isModLoaded("Thaumcraft")){
-			ACLogger.info("Thaumcraft is present, initializing evil stuff.");
-			ACThaumcraftIntegration.init();
-		}
+		IntegrationHandler.init();
 		ACLogger.info("AbyssalCraft loaded.");
 	}
 
@@ -1193,7 +1201,7 @@ public class AbyssalCraft {
 			syncConfig();
 	}
 
-	public static void syncConfig(){
+	private static void syncConfig(){
 
 		configDimId1 = cfg.get("dimensions", "The Abyssal Wasteland", 50, "The first dimension, full of undead monsters.").getInt();
 		configDimId2 = cfg.get("dimensions", "The Dreadlands", 51, "The second dimension, infested with mutated monsters.").getInt();
@@ -1237,6 +1245,8 @@ public class AbyssalCraft {
 		destroyOcean = cfg.get(Configuration.CATEGORY_GENERAL, "Oceanic Coralium Pollution", false, "Set true to allow the Liquid Coralium to spread across oceans. WARNING: The game can crash from this.").getBoolean();
 		demonPigFire = cfg.get(Configuration.CATEGORY_GENERAL, "Demon Pig burning", true, "Set to false to prevent Demon Pigs from burning in the overworld.").getBoolean();
 		evilPigSpawnRate = cfg.get(Configuration.CATEGORY_GENERAL, "Evil Pig spawn rate", 20, "Spawn rate for the Evil Pig, keep under 35 to avoid complete annihilation.").getInt();
+		updateC = cfg.get(Configuration.CATEGORY_GENERAL, "UpdateChecker", true, "Set to false to disable the UpdateChecker.").getBoolean();
+		darkness = cfg.get(Configuration.CATEGORY_GENERAL, "Darkness", true, "Set to false to disable the random blindness within Darklands biomes").getBoolean();
 
 		darkWeight1 = cfg.get("biome_weight", "Darklands", 10, "Biome weight for the Darklands biome, controls the chance of it generating").getInt();
 		darkWeight2 = cfg.get("biome_weight", "Darklands Forest", 10, "Biome weight for the Darklands Forest biome, controls the chance of it generating").getInt();
@@ -1261,10 +1271,10 @@ public class AbyssalCraft {
 			cfg.save();
 	}
 
-	public void addOreDictionaryStuff(){
+	private void addOreDictionaryStuff(){
 
 		OreDictionary.registerOre("ingotAbyssalnite", abyingot);
-		OreDictionary.registerOre("ingotCoralium", Cingot);
+		OreDictionary.registerOre("ingotLiquifiedCoralium", Cingot);
 		OreDictionary.registerOre("gemCoralium", Coralium);
 		OreDictionary.registerOre("oreAbyssalnite", abyore);
 		OreDictionary.registerOre("oreCoralium", Coraliumore);
@@ -1334,7 +1344,7 @@ public class AbyssalCraft {
 		OreDictionary.registerOre("blockEthaxium", ethaxiumblock);
 	}
 
-	public void addChestGenHooks(){
+	private void addChestGenHooks(){
 
 		ChestGenHooks.addItem(ChestGenHooks.BONUS_CHEST, new WeightedRandomChestContent(new ItemStack(AbyssalCraft.axe), 1, 1, 3));
 		ChestGenHooks.addItem(ChestGenHooks.BONUS_CHEST, new WeightedRandomChestContent(new ItemStack(AbyssalCraft.pickaxe), 1, 1, 3));
@@ -1410,7 +1420,7 @@ public class AbyssalCraft {
 		SalvageHandler.INSTANCE.addLeggingsSalvage(Items.diamond_leggings, Items.diamond);
 	}
 
-	public static int getUniqueEntityId() {
+	private static int getUniqueEntityId() {
 		do
 			startEntityId++;
 		while (EntityList.getStringFromID(startEntityId) != null);
@@ -1419,20 +1429,22 @@ public class AbyssalCraft {
 	}
 
 	@SuppressWarnings("unchecked")
-	public static void registerEntityEgg(Class<? extends Entity> entity, int primaryColor, int secondaryColor) {
+	private static void registerEntityEgg(Class<? extends Entity> entity, int primaryColor, int secondaryColor, String name) {
 		int id = getUniqueEntityId();
+		stringtoIDMapping.put(name, id);
 		EntityList.IDtoClassMapping.put(id, entity);
 		EntityList.entityEggs.put(id, new EntityEggInfo(id, primaryColor, secondaryColor));
 	}
 
-	public static void registerDimension(String name, int id, Class<? extends WorldProvider> provider, boolean keepLoaded){
+	private static void registerDimension(int id, Class<? extends WorldProvider> provider, boolean keepLoaded){
 		DimensionManager.registerProviderType(id, provider, keepLoaded);
 		DimensionManager.registerDimension(id, id);
 	}
 
 	@SubscribeEvent
 	public void onWorldLoad(WorldEvent.Load event) {
-		new UpdateCheck().start();
+		if(!dev && updateC)
+			new UpdateCheck().start();
 	}
 
 	/**
@@ -1451,23 +1463,23 @@ public class AbyssalCraft {
 
 				if(isUpdateAvailable()) {
 					if(!hasPinged && version.lastIndexOf("a") == 8 || !hasPinged && version.lastIndexOf("b") == 8){
-						updateProxy.announce("[\u00A79AbyssalCraft\u00A7r] Using a development version, not checking for newer versions. (\u00A7b"+ version + "\u00A7r)");
 						hasPinged = true;
+						updateProxy.announce("[\u00A79AbyssalCraft\u00A7r] Using a development version, not checking for newer versions. (\u00A7b"+ version + "\u00A7r)");
 					}
 					if(!hasPinged){
-						updateProxy.announce("[\u00A79AbyssalCraft\u00A7r] Version \u00A7b"+webVersion+"\u00A7r of AbyssalCraft is available. Check http://adf.ly/FQarm for more info. (Your Version: \u00A7b"+AbyssalCraft.version+"\u00A7r)");
 						hasPinged = true;
+						updateProxy.announce("[\u00A79AbyssalCraft\u00A7r] Version \u00A7b"+webVersion+"\u00A7r of AbyssalCraft is available. Check http://adf.ly/FQarm for more info. (Your Version: \u00A7b"+AbyssalCraft.version+"\u00A7r)");
 					}
 				} else if(!hasPinged){
-					updateProxy.announce("[\u00A79AbyssalCraft\u00A7r] Running the latest version of AbyssalCraft, \u00A7b"+AbyssalCraft.version+"\u00A7r.");
 					hasPinged = true;
+					updateProxy.announce("[\u00A79AbyssalCraft\u00A7r] Running the latest version of AbyssalCraft, \u00A7b"+AbyssalCraft.version+"\u00A7r.");
 				}
 			} catch(Exception e) {
 				if(!hasPinged){
+					hasPinged = true;
 					System.err.println("UpdateChecker encountered an Exception, see following stacktrace:");
 					e.printStackTrace();
 					updateProxy.announce("[\u00A79AbyssalCraft\u00A7r] No internet connection found, unable to check mod version.");
-					hasPinged = true;
 				}
 			}
 		}

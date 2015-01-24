@@ -1,6 +1,6 @@
 /**
  * AbyssalCraft
- * Copyright 2012-2014 Shinoow
+ * Copyright 2012-2015 Shinoow
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,7 +17,8 @@
 package com.shinoow.abyssalcraft.integration.nei;
 
 import net.minecraft.item.ItemStack;
-import codechicken.nei.api.*;
+import codechicken.nei.api.API;
+import codechicken.nei.api.IConfigureNEI;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
 
@@ -37,7 +38,6 @@ public class NEIACConfig implements IConfigureNEI {
 		API.hideItem(new ItemStack(AbyssalCraft.devsword));
 		API.hideItem(new ItemStack(AbyssalCraft.crystallizer_on));
 		API.hideItem(new ItemStack(AbyssalCraft.transmutator_on));
-		API.hideItem(new ItemStack(AbyssalCraft.engraver_on));
 	}
 
 	@Override

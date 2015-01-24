@@ -1,6 +1,6 @@
 /**
  * AbyssalCraft
- * Copyright 2012-2014 Shinoow
+ * Copyright 2012-2015 Shinoow
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -24,80 +24,80 @@ import net.minecraft.util.MathHelper;
 public class ModelSkeletonGoliath extends ModelBase
 {
 
-	ModelRenderer base1;
-	ModelRenderer base2;
-	ModelRenderer base3;
-	ModelRenderer base4;
-	ModelRenderer spike1;
-	ModelRenderer spike2;
-	ModelRenderer spike3;
-	ModelRenderer spike4;
-	ModelRenderer spike5;
-	ModelRenderer spike6;
-	ModelRenderer spike7;
-	ModelRenderer spike8;
-	ModelRenderer spike9;
-	ModelRenderer spike10;
-	ModelRenderer spike11;
-	ModelRenderer thing1;
-	ModelRenderer thing2;
-	ModelRenderer head;
-	ModelRenderer leftjaw;
-	ModelRenderer rightjaw;
-	ModelRenderer jaw1;
-	ModelRenderer jaw2;
-	ModelRenderer jaw3;
-	ModelRenderer tooth1;
-	ModelRenderer tooth2;
-	ModelRenderer tooth3;
-	ModelRenderer tooth4;
-	ModelRenderer tooth5;
-	ModelRenderer shoulders;
-	ModelRenderer spine;
-	ModelRenderer leftarm;
-	ModelRenderer rightarm;
-	ModelRenderer leftrib1;
-	ModelRenderer leftrib12;
-	ModelRenderer leftrib13;
-	ModelRenderer leftrib2;
-	ModelRenderer leftrib22;
-	ModelRenderer leftrib23;
-	ModelRenderer leftrib3;
-	ModelRenderer leftrib32;
-	ModelRenderer leftrib33;
-	ModelRenderer leftrib4;
-	ModelRenderer leftrib42;
-	ModelRenderer leftrib43;
-	ModelRenderer leftrib5;
-	ModelRenderer leftrib52;
-	ModelRenderer leftrib53;
-	ModelRenderer leftrib6;
-	ModelRenderer leftrib62;
-	ModelRenderer leftrib63;
-	ModelRenderer rightrib1;
-	ModelRenderer rightrib12;
-	ModelRenderer rightrib13;
-	ModelRenderer rightrib2;
-	ModelRenderer rightrib22;
-	ModelRenderer rightrib23;
-	ModelRenderer rightrib3;
-	ModelRenderer rightrib32;
-	ModelRenderer rightrib33;
-	ModelRenderer rightrib4;
-	ModelRenderer rightrib42;
-	ModelRenderer rightrib43;
-	ModelRenderer rightrib5;
-	ModelRenderer rightrib52;
-	ModelRenderer rightrib53;
-	ModelRenderer rightrib6;
-	ModelRenderer rightrib62;
-	ModelRenderer rightrib63;
-	ModelRenderer sternum;
-	ModelRenderer pelvis;
-	ModelRenderer leftleg;
-	ModelRenderer rightleg;
+	public ModelRenderer base1;
+	public ModelRenderer base2;
+	public ModelRenderer base3;
+	public ModelRenderer base4;
+	public ModelRenderer spike1;
+	public ModelRenderer spike2;
+	public ModelRenderer spike3;
+	public ModelRenderer spike4;
+	public ModelRenderer spike5;
+	public ModelRenderer spike6;
+	public ModelRenderer spike7;
+	public ModelRenderer spike8;
+	public ModelRenderer spike9;
+	public ModelRenderer spike10;
+	public ModelRenderer spike11;
+	public ModelRenderer thing1;
+	public ModelRenderer thing2;
+	public ModelRenderer head;
+	public ModelRenderer leftjaw;
+	public ModelRenderer rightjaw;
+	public ModelRenderer jaw1;
+	public ModelRenderer jaw2;
+	public ModelRenderer jaw3;
+	public ModelRenderer tooth1;
+	public ModelRenderer tooth2;
+	public ModelRenderer tooth3;
+	public ModelRenderer tooth4;
+	public ModelRenderer tooth5;
+	public ModelRenderer shoulders;
+	public ModelRenderer spine;
+	public ModelRenderer leftarm;
+	public ModelRenderer rightarm;
+	public ModelRenderer leftrib1;
+	public ModelRenderer leftrib12;
+	public ModelRenderer leftrib13;
+	public ModelRenderer leftrib2;
+	public ModelRenderer leftrib22;
+	public ModelRenderer leftrib23;
+	public ModelRenderer leftrib3;
+	public ModelRenderer leftrib32;
+	public ModelRenderer leftrib33;
+	public ModelRenderer leftrib4;
+	public ModelRenderer leftrib42;
+	public ModelRenderer leftrib43;
+	public ModelRenderer leftrib5;
+	public ModelRenderer leftrib52;
+	public ModelRenderer leftrib53;
+	public ModelRenderer leftrib6;
+	public ModelRenderer leftrib62;
+	public ModelRenderer leftrib63;
+	public ModelRenderer rightrib1;
+	public ModelRenderer rightrib12;
+	public ModelRenderer rightrib13;
+	public ModelRenderer rightrib2;
+	public ModelRenderer rightrib22;
+	public ModelRenderer rightrib23;
+	public ModelRenderer rightrib3;
+	public ModelRenderer rightrib32;
+	public ModelRenderer rightrib33;
+	public ModelRenderer rightrib4;
+	public ModelRenderer rightrib42;
+	public ModelRenderer rightrib43;
+	public ModelRenderer rightrib5;
+	public ModelRenderer rightrib52;
+	public ModelRenderer rightrib53;
+	public ModelRenderer rightrib6;
+	public ModelRenderer rightrib62;
+	public ModelRenderer rightrib63;
+	public ModelRenderer sternum;
+	public ModelRenderer pelvis;
+	public ModelRenderer leftleg;
+	public ModelRenderer rightleg;
 
-	public ModelSkeletonGoliath()
+	public ModelSkeletonGoliath(boolean renderCudgel)
 	{
 		textureWidth = 128;
 		textureHeight = 64;
@@ -548,7 +548,8 @@ public class ModelSkeletonGoliath extends ModelBase
 		head.addChild(tooth4);
 		head.addChild(tooth5);
 
-		rightarm.addChild(base1);
+		if(renderCudgel)
+			rightarm.addChild(base1);
 		base1.addChild(base2);
 		base1.addChild(base3);
 		base1.addChild(base4);
@@ -654,6 +655,67 @@ public class ModelSkeletonGoliath extends ModelBase
 
 			rightleg.rotateAngleY = (float)Math.PI / 10F;
 			leftleg.rotateAngleY = -((float)Math.PI / 10F);
+		}
+
+		rightarm.rotateAngleY = 0.0F;
+		leftarm.rotateAngleY = 0.0F;
+		float f6;
+		float f7;
+
+		if (onGround > -9990.0F)
+		{
+			f6 = onGround;
+			shoulders.rotateAngleY = MathHelper.sin(MathHelper.sqrt_float(f6) * (float)Math.PI * 2.0F) * 0.2F;
+			spine.rotateAngleY = MathHelper.sin(MathHelper.sqrt_float(f6) * (float)Math.PI * 2.0F) * 0.2F;
+			leftrib1.rotateAngleY = MathHelper.sin(MathHelper.sqrt_float(f6) * (float)Math.PI * 2.0F) * 0.2F;
+			leftrib12.rotateAngleX = MathHelper.sin(MathHelper.sqrt_float(f6) * (float)Math.PI * 2.0F) * 0.2F;
+			leftrib13.rotateAngleY = MathHelper.sin(MathHelper.sqrt_float(f6) * (float)Math.PI * 2.0F) * 0.2F;
+			leftrib2.rotateAngleY = MathHelper.sin(MathHelper.sqrt_float(f6) * (float)Math.PI * 2.0F) * 0.2F;
+			leftrib22.rotateAngleX = MathHelper.sin(MathHelper.sqrt_float(f6) * (float)Math.PI * 2.0F) * 0.2F;
+			leftrib23.rotateAngleY = MathHelper.sin(MathHelper.sqrt_float(f6) * (float)Math.PI * 2.0F) * 0.2F;
+			leftrib3.rotateAngleY = MathHelper.sin(MathHelper.sqrt_float(f6) * (float)Math.PI * 2.0F) * 0.2F;
+			leftrib32.rotateAngleX = MathHelper.sin(MathHelper.sqrt_float(f6) * (float)Math.PI * 2.0F) * 0.2F;
+			leftrib33.rotateAngleY = MathHelper.sin(MathHelper.sqrt_float(f6) * (float)Math.PI * 2.0F) * 0.2F;
+			leftrib4.rotateAngleY = MathHelper.sin(MathHelper.sqrt_float(f6) * (float)Math.PI * 2.0F) * 0.2F;
+			leftrib42.rotateAngleX = MathHelper.sin(MathHelper.sqrt_float(f6) * (float)Math.PI * 2.0F) * 0.2F;
+			leftrib43.rotateAngleY = MathHelper.sin(MathHelper.sqrt_float(f6) * (float)Math.PI * 2.0F) * 0.2F;
+			leftrib5.rotateAngleY = MathHelper.sin(MathHelper.sqrt_float(f6) * (float)Math.PI * 2.0F) * 0.2F;
+			leftrib52.rotateAngleX = MathHelper.sin(MathHelper.sqrt_float(f6) * (float)Math.PI * 2.0F) * 0.2F;
+			leftrib53.rotateAngleY = MathHelper.sin(MathHelper.sqrt_float(f6) * (float)Math.PI * 2.0F) * 0.2F;
+			leftrib6.rotateAngleY = MathHelper.sin(MathHelper.sqrt_float(f6) * (float)Math.PI * 2.0F) * 0.2F;
+			leftrib62.rotateAngleX = MathHelper.sin(MathHelper.sqrt_float(f6) * (float)Math.PI * 2.0F) * 0.2F;
+			leftrib63.rotateAngleY = MathHelper.sin(MathHelper.sqrt_float(f6) * (float)Math.PI * 2.0F) * 0.2F;
+			rightrib1.rotateAngleY = MathHelper.sin(MathHelper.sqrt_float(f6) * (float)Math.PI * 2.0F) * 0.2F;
+			rightrib12.rotateAngleX = MathHelper.sin(MathHelper.sqrt_float(f6) * (float)Math.PI * 2.0F) * 0.2F;
+			rightrib13.rotateAngleY = MathHelper.sin(MathHelper.sqrt_float(f6) * (float)Math.PI * 2.0F) * 0.2F;
+			rightrib2.rotateAngleY = MathHelper.sin(MathHelper.sqrt_float(f6) * (float)Math.PI * 2.0F) * 0.2F;
+			rightrib22.rotateAngleX = MathHelper.sin(MathHelper.sqrt_float(f6) * (float)Math.PI * 2.0F) * 0.2F;
+			rightrib23.rotateAngleY = MathHelper.sin(MathHelper.sqrt_float(f6) * (float)Math.PI * 2.0F) * 0.2F;
+			rightrib3.rotateAngleY = MathHelper.sin(MathHelper.sqrt_float(f6) * (float)Math.PI * 2.0F) * 0.2F;
+			rightrib32.rotateAngleX = MathHelper.sin(MathHelper.sqrt_float(f6) * (float)Math.PI * 2.0F) * 0.2F;
+			rightrib33.rotateAngleY = MathHelper.sin(MathHelper.sqrt_float(f6) * (float)Math.PI * 2.0F) * 0.2F;
+			rightrib4.rotateAngleY = MathHelper.sin(MathHelper.sqrt_float(f6) * (float)Math.PI * 2.0F) * 0.2F;
+			rightrib42.rotateAngleX = MathHelper.sin(MathHelper.sqrt_float(f6) * (float)Math.PI * 2.0F) * 0.2F;
+			rightrib43.rotateAngleY = MathHelper.sin(MathHelper.sqrt_float(f6) * (float)Math.PI * 2.0F) * 0.2F;
+			rightrib5.rotateAngleY = MathHelper.sin(MathHelper.sqrt_float(f6) * (float)Math.PI * 2.0F) * 0.2F;
+			rightrib52.rotateAngleX = MathHelper.sin(MathHelper.sqrt_float(f6) * (float)Math.PI * 2.0F) * 0.2F;
+			rightrib53.rotateAngleY = MathHelper.sin(MathHelper.sqrt_float(f6) * (float)Math.PI * 2.0F) * 0.2F;
+			rightrib6.rotateAngleY = MathHelper.sin(MathHelper.sqrt_float(f6) * (float)Math.PI * 2.0F) * 0.2F;
+			rightrib62.rotateAngleX = MathHelper.sin(MathHelper.sqrt_float(f6) * (float)Math.PI * 2.0F) * 0.2F;
+			rightrib63.rotateAngleY = MathHelper.sin(MathHelper.sqrt_float(f6) * (float)Math.PI * 2.0F) * 0.2F;
+			sternum.rotateAngleY = MathHelper.sin(MathHelper.sqrt_float(f6) * (float)Math.PI * 2.0F) * 0.2F;
+			rightarm.rotateAngleY += spine.rotateAngleY;
+			leftarm.rotateAngleY += spine.rotateAngleY;
+			leftarm.rotateAngleX += spine.rotateAngleY;
+			f6 = 1.0F - onGround;
+			f6 *= f6;
+			f6 *= f6;
+			f6 = 1.0F - f6;
+			f7 = MathHelper.sin(f6 * (float)Math.PI);
+			float f8 = MathHelper.sin(onGround * (float)Math.PI) * -(head.rotateAngleX - 0.7F) * 0.75F;
+			rightarm.rotateAngleX = (float)(rightarm.rotateAngleX - (f7 * 1.2D + f8));
+			rightarm.rotateAngleY += spine.rotateAngleY * 2.0F;
+			rightarm.rotateAngleZ = MathHelper.sin(onGround * (float)Math.PI) * -0.4F;
 		}
 	}
 }

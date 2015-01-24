@@ -1,6 +1,6 @@
 /**
  * AbyssalCraft
- * Copyright 2012-2014 Shinoow
+ * Copyright 2012-2015 Shinoow
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,11 +17,14 @@
 package com.shinoow.abyssalcraft.common.blocks;
 
 import java.util.Random;
+
 import net.minecraft.block.material.Material;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.util.MathHelper;
-import net.minecraft.world.*;
+import net.minecraft.world.IBlockAccess;
+import net.minecraft.world.World;
+
 import com.shinoow.abyssalcraft.AbyssalCraft;
 
 public class BlockACOre extends BlockACBasic {

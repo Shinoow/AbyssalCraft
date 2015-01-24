@@ -1,6 +1,6 @@
 /**
  * AbyssalCraft
- * Copyright 2012-2014 Shinoow
+ * Copyright 2012-2015 Shinoow
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,13 +19,19 @@ package com.shinoow.abyssalcraft.common.entity.anti;
 import java.util.Random;
 
 import net.minecraft.block.Block;
-import net.minecraft.entity.*;
-import net.minecraft.entity.monster.*;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EnumCreatureAttribute;
+import net.minecraft.entity.IEntityLivingData;
+import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.monster.EntityMob;
+import net.minecraft.entity.monster.EntitySpider;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
-import net.minecraft.potion.*;
+import net.minecraft.potion.Potion;
+import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.MathHelper;
-import net.minecraft.world.*;
+import net.minecraft.world.EnumDifficulty;
+import net.minecraft.world.World;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.api.entity.IAntiEntity;

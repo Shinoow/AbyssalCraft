@@ -1,6 +1,6 @@
 /**
  * AbyssalCraft
- * Copyright 2012-2014 Shinoow
+ * Copyright 2012-2015 Shinoow
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,7 +16,8 @@
  */
 package com.shinoow.abyssalcraft.client.config;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.util.StatCollector;
@@ -25,8 +26,10 @@ import net.minecraftforge.common.config.ConfigElement;
 import com.shinoow.abyssalcraft.AbyssalCraft;
 
 import cpw.mods.fml.client.config.DummyConfigElement.DummyCategoryElement;
-import cpw.mods.fml.client.config.*;
+import cpw.mods.fml.client.config.GuiConfig;
+import cpw.mods.fml.client.config.GuiConfigEntries;
 import cpw.mods.fml.client.config.GuiConfigEntries.CategoryEntry;
+import cpw.mods.fml.client.config.IConfigElement;
 
 public class ACConfigGUI extends GuiConfig {
 

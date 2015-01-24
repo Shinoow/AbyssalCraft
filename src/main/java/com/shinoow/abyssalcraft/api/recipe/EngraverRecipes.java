@@ -1,6 +1,6 @@
 /**
  * AbyssalCraft
- * Copyright 2012-2014 Shinoow
+ * Copyright 2012-2015 Shinoow
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,10 +19,10 @@ package com.shinoow.abyssalcraft.api.recipe;
 import java.util.*;
 import java.util.Map.Entry;
 
-import com.shinoow.abyssalcraft.api.item.ItemEngraving;
-
 import net.minecraft.item.*;
 import net.minecraftforge.oredict.OreDictionary;
+
+import com.shinoow.abyssalcraft.api.item.*;
 
 public class EngraverRecipes {
 
@@ -32,7 +32,7 @@ public class EngraverRecipes {
 	private Map<ItemStack, Float> experienceList = new HashMap<ItemStack, Float>();
 	/** List of Engraving Templates with Associated Engraved Coins */
 	private Map<ItemEngraving, ItemStack> engravingOutputs = new HashMap<ItemEngraving, ItemStack>();
-	private Map<ItemEngraving, ItemStack> engravingInputs = new HashMap<ItemEngraving, ItemStack>();
+	private Map<ItemStack, ItemEngraving> engravingInputs = new HashMap<ItemStack, ItemEngraving>();
 
 	public static EngraverRecipes engraving()
 	{
@@ -51,7 +51,7 @@ public class EngraverRecipes {
 		engravingList.put(input, output);
 		experienceList.put(output, Float.valueOf(xp));
 		engravingOutputs.put(engraving, output);
-		engravingInputs.put(engraving, input);
+		engravingInputs.put(input, engraving);
 	}
 
 	/**
@@ -77,48 +77,42 @@ public class EngraverRecipes {
 	/**
 	 * Returns the engraving result of an item.
 	 */
-	public ItemStack getEngravingResult(ItemStack par1ItemStack, ItemEngraving par2Engraving)
+	public ItemStack getEngravingResult(ItemStack par2, ItemEngraving par1)
 	{
-		ItemEngraving engraving = getEngravingTemplate(par1ItemStack, par2Engraving);
-		Iterator<?> iterator = engravingInputs.entrySet().iterator();
-		Entry<?, ?> entry;
 
-		do
-		{
-			if (!iterator.hasNext())
-				return null;
+		//		Iterator<?> iterator = engravingInputs.entrySet().iterator();
+		//		Entry<?, ?> entry;
+		//
+		//		do
+		//		{
+		//			if(!iterator.hasNext())
+		//				return null;
+		//
+		//			entry = (Entry<?, ?>)iterator.next();
+		//			engravings.add((ItemEngraving)entry.getValue());
+		//		}
+		//		while(!areStacksEqual(par1ItemStack, (ItemStack)entry.getKey()));
+		//
+		//		return getOutput(par2Engraving, (ItemStack)entry.getKey());
 
-			entry = (Entry<?, ?>)iterator.next();
-		}
-		while (!areEngravingsEqual(engraving, (ItemEngraving)entry.getKey()));
+		if(par2.getItem() == ACItems.coin)
+			if(par1 == ACItems.cthulhu_engraving)
+				return new ItemStack(ACItems.cthulhu_engraved_coin);
+			else if(par1 == ACItems.elder_engraving)
+				return new ItemStack(ACItems.elder_engraved_coin);
+			else if(par1 == ACItems.jzahar_engraving)
+				return new ItemStack(ACItems.jzahar_engraved_coin);
+		if(par2.getItem() == ACItems.cthulhu_engraved_coin || par2.getItem() == ACItems.elder_engraved_coin ||
+				par2.getItem() == ACItems.jzahar_engraved_coin)
+			if(par1 == ACItems.blank_engraving)
+				return new ItemStack(ACItems.coin);
 
-		return (ItemStack)entry.getValue();
-	}
-
-	public ItemEngraving getEngravingTemplate(ItemStack par1ItemStack, ItemEngraving engraving)
-	{
-		Iterator<?> iterator = engravingInputs.entrySet().iterator();
-		Entry<?, ?> entry;
-
-		do
-		{
-			if (!iterator.hasNext())
-				return null;
-
-			entry = (Entry<?, ?>)iterator.next();
-		}
-		while (!areStacksEqual(par1ItemStack, (ItemStack)entry.getValue()));
-
-		return (ItemEngraving)entry.getKey() == engraving ? engraving : null;
+		return null;
 	}
 
 	private boolean areStacksEqual(ItemStack par1ItemStack, ItemStack par2ItemStack)
 	{
 		return par2ItemStack.getItem() == par1ItemStack.getItem() && (par2ItemStack.getItemDamage() == OreDictionary.WILDCARD_VALUE || par2ItemStack.getItemDamage() == par1ItemStack.getItemDamage());
-	}
-
-	private boolean areEngravingsEqual(ItemEngraving par1, ItemEngraving par2){
-		return par1 == par2;
 	}
 
 	public Map<ItemStack, ItemStack> getEngravingList()

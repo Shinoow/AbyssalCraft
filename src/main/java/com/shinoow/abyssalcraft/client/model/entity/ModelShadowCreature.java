@@ -1,6 +1,6 @@
 /**
  * AbyssalCraft
- * Copyright 2012-2014 Shinoow
+ * Copyright 2012-2015 Shinoow
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -24,19 +24,19 @@ import net.minecraft.util.MathHelper;
 public class ModelShadowCreature extends ModelBase
 {
 
-	ModelRenderer Body;
-	ModelRenderer Head1;
-	ModelRenderer Tail1;
-	ModelRenderer Tail2;
-	ModelRenderer Tail3;
-	ModelRenderer Tail4;
-	ModelRenderer Tail5;
-	ModelRenderer Tail6;
-	ModelRenderer Tail7;
-	ModelRenderer LeftArm1;
-	ModelRenderer RightArm1;
-	ModelRenderer LeftArm2;
-	ModelRenderer RightArm2;
+	public ModelRenderer Body;
+	public ModelRenderer Head1;
+	public ModelRenderer Tail1;
+	public ModelRenderer Tail2;
+	public ModelRenderer Tail3;
+	public ModelRenderer Tail4;
+	public ModelRenderer Tail5;
+	public ModelRenderer Tail6;
+	public ModelRenderer Tail7;
+	public ModelRenderer LeftArm1;
+	public ModelRenderer RightArm1;
+	public ModelRenderer LeftArm2;
+	public ModelRenderer RightArm2;
 
 	public ModelShadowCreature()
 	{

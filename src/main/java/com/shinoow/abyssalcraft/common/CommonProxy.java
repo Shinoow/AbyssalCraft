@@ -1,6 +1,6 @@
 /**
  * AbyssalCraft
- * Copyright 2012-2014 Shinoow
+ * Copyright 2012-2015 Shinoow
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,9 +22,15 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
-import com.shinoow.abyssalcraft.client.gui.*;
-import com.shinoow.abyssalcraft.common.blocks.tile.*;
-import com.shinoow.abyssalcraft.common.inventory.*;
+import com.shinoow.abyssalcraft.client.gui.GuiCrystallizer;
+import com.shinoow.abyssalcraft.client.gui.GuiEngraver;
+import com.shinoow.abyssalcraft.client.gui.GuiTransmutator;
+import com.shinoow.abyssalcraft.common.blocks.tile.TileEntityCrystallizer;
+import com.shinoow.abyssalcraft.common.blocks.tile.TileEntityEngraver;
+import com.shinoow.abyssalcraft.common.blocks.tile.TileEntityTransmutator;
+import com.shinoow.abyssalcraft.common.inventory.ContainerCrystallizer;
+import com.shinoow.abyssalcraft.common.inventory.ContainerEngraver;
+import com.shinoow.abyssalcraft.common.inventory.ContainerTransmutator;
 
 import cpw.mods.fml.common.network.IGuiHandler;
 

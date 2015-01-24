@@ -1,6 +1,6 @@
 /**
  * AbyssalCraft
- * Copyright 2012-2014 Shinoow
+ * Copyright 2012-2015 Shinoow
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -24,16 +24,14 @@ import net.minecraft.util.MathHelper;
 public class ModelJzahar extends ModelBase
 {
 
-	ModelRenderer head;
-	ModelRenderer body;
-	ModelRenderer bodyr;
-	ModelRenderer bodyl;
-	ModelRenderer rightarm;
-	ModelRenderer leftarm;
-	ModelRenderer rightleg;
-	ModelRenderer leftleg;
-
-	public int heldItemRight;
+	public ModelRenderer head;
+	public ModelRenderer body;
+	public ModelRenderer bodyr;
+	public ModelRenderer bodyl;
+	public ModelRenderer rightarm;
+	public ModelRenderer leftarm;
+	public ModelRenderer rightleg;
+	public ModelRenderer leftleg;
 
 	public ModelJzahar()
 	{
@@ -130,9 +128,6 @@ public class ModelJzahar extends ModelBase
 
 		leftleg.rotateAngleX = MathHelper.cos(par1 * 0.6662F + (float)Math.PI) * 1.4F * par2;
 		leftleg.rotateAngleY = 0.0F;
-
-		if (heldItemRight != 0)
-			rightarm.rotateAngleX = rightarm.rotateAngleX * 0.5F - (float)Math.PI / 10F * heldItemRight;
 
 		if (isRiding)
 		{

@@ -1,6 +1,6 @@
 /**
  * AbyssalCraft
- * Copyright 2012-2014 Shinoow
+ * Copyright 2012-2015 Shinoow
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,10 +16,12 @@
  */
 package com.shinoow.abyssalcraft.common.items;
 
-import com.shinoow.abyssalcraft.AbyssalCraft;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.EnumChatFormatting;
+import net.minecraft.util.StatCollector;
 
-import net.minecraft.item.*;
-import net.minecraft.util.*;
+import com.shinoow.abyssalcraft.AbyssalCraft;
 
 public class ItemACBasic extends Item {
 
