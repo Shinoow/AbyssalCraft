@@ -129,10 +129,8 @@ public class AbyssalCraftAPI {
 					f.setAccessible(true);
 					try {
 						potionRequirements = (HashMap<Integer, String>)f.get(null);
-					} catch (IllegalArgumentException e) {
-						System.err.println("Whoops, something screwed up here, please report this to shinoow:");
-						e.printStackTrace();
-					} catch (IllegalAccessException e) {
+					} catch (IllegalArgumentException
+							| IllegalAccessException e) {
 						System.err.println("Whoops, something screwed up here, please report this to shinoow:");
 						e.printStackTrace();
 					}
@@ -141,10 +139,8 @@ public class AbyssalCraftAPI {
 					f.setAccessible(true);
 					try {
 						potionAmplifiers = (HashMap<Integer, String>)f.get(null);
-					} catch (IllegalArgumentException e) {
-						System.err.println("Whoops, something screwed up here, please report this to shinoow:");
-						e.printStackTrace();
-					} catch (IllegalAccessException e) {
+					} catch (IllegalArgumentException
+							| IllegalAccessException e) {
 						System.err.println("Whoops, something screwed up here, please report this to shinoow:");
 						e.printStackTrace();
 					}

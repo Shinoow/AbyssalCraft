@@ -63,6 +63,8 @@ import com.shinoow.abyssalcraft.common.entity.anti.EntityAntiSpider;
 import com.shinoow.abyssalcraft.common.entity.anti.EntityAntiZombie;
 import com.shinoow.abyssalcraft.common.util.ACLogger;
 
+import cpw.mods.fml.common.FMLCommonHandler;
+
 public class ACMorphIntegration {
 
 	static Ability hostile, sunburn, climb, fallNegate, fly, fireImmunity, flyNerf, water, chicken;
@@ -140,18 +142,19 @@ public class ACMorphIntegration {
 			Ability.mapAbilities(EntityAntiZombie.class, hostile);
 		}
 
-		Api.registerArmForModel(modelRemnant, modelRemnant.rightarm);
-		Api.registerArmForModel(modelSkeletonGoliath, modelSkeletonGoliath.rightarm);
-		Api.registerArmForModel(modelSacthoth, modelSacthoth.rightarm1);
-		Api.registerArmForModel(modelJzahar, modelJzahar.rightarm);
-		Api.registerArmForModel(modelShadowc, modelShadowc.RightArm1);
-		Api.registerArmForModel(modelShadowm, modelShadowm.Rarm1);
-		Api.registerArmForModel(modelShadowb, modelShadowb.rarm1);
-		Api.registerArmForModel(modelDreadling, modelDreadling.rightarm);
-		Api.registerArmForModel(modelDreadSpawn, modelDreadSpawn.arm);
-		Api.registerArmForModel(modelChagarothFist, modelChagarothFist.arm1);
-		Api.registerArmForModel(modelChagarothSpawn, modelChagarothSpawn.smallspike2);
-		Api.registerArmForModel(modelDG, modelDG.rarm1);
-
+		if(FMLCommonHandler.instance().getEffectiveSide().isClient()){
+			Api.registerArmForModel(modelRemnant, modelRemnant.rightarm);
+			Api.registerArmForModel(modelSkeletonGoliath, modelSkeletonGoliath.rightarm);
+			Api.registerArmForModel(modelSacthoth, modelSacthoth.rightarm1);
+			Api.registerArmForModel(modelJzahar, modelJzahar.rightarm);
+			Api.registerArmForModel(modelShadowc, modelShadowc.RightArm1);
+			Api.registerArmForModel(modelShadowm, modelShadowm.Rarm1);
+			Api.registerArmForModel(modelShadowb, modelShadowb.rarm1);
+			Api.registerArmForModel(modelDreadling, modelDreadling.rightarm);
+			Api.registerArmForModel(modelDreadSpawn, modelDreadSpawn.arm);
+			Api.registerArmForModel(modelChagarothFist, modelChagarothFist.arm1);
+			Api.registerArmForModel(modelChagarothSpawn, modelChagarothSpawn.smallspike2);
+			Api.registerArmForModel(modelDG, modelDG.rarm1);
+		}
 	}
 }
