@@ -119,6 +119,30 @@ container.abyssalcraft.crystallizer.nei=Crystallization
 container.abyssalcraft.transmutator.nei=Transmutation
 container.abyssalcraft.engraver.nei=Coin Engraving
 
+#Necronomicon Labels
+necronomicon.index.information=Forbidden Knowledge
+necronomicon.index.spells=Spellbook
+necronomicon.index.rituals=Rituals
+necromonicon.index.huh=What is this book?
+necronomicon.information.ac=AbyssalCraft
+necronomicon.information.goo=Knowledge of The Great Old Ones
+necronomicon.information.abyssalnomicon=The Abyssalnomicon
+necronomicon.information.overworld=Overworld Knowledge
+necronomicon.information.overworld.general=The Overworld
+necronomicon.information.overworld.materials=Overworld Materials
+necronomicon.information.abyssal=Abyssal Wasteland Knowledge
+necronomicon.information.abyssal.general=The Abyssal Wasteland
+necronomicon.information.abyssal.materials=Abyssal Wasteland Materials
+necronomicon.information.dreadlands=Dreadlands Knowledge
+necronomicon.information.dreadlands.general=The Dreadlands
+necronomicon.information.drearlands.materials=Dreadlands Materials
+necronomicon.information.omothol=Omothol Knowledge
+necronomicon.information.omothol.general=Omothol
+necronomicon.information.omothol.materials=Omothol Materials
+necronomicon.information.darkrealm=Dark Realm Knowledge
+necronomicon.information.darkrealm.general=The Dark Realm
+necronomicon.information.darkrealm.materials=Dark Realm Materials
+
 #Configuration
 ac_dimensions=Dimensions
 ac_dimensions.tooltip=Dimension ID configuration
@@ -490,14 +514,21 @@ item.engraving.blank.name=Blank Coin Engraving
 item.engraving.cthulhu.name=Cthulhu Coin Engraving
 item.engraving.elder.name=Elder Coin Engraving
 item.engraving.jzahar.name=J'zahar Coin Engraving
+item.eldirtchScale.name=Eldritch Scale
+item.omotholflesh.name=Omothol Ghoul Flesh
+item.antiCF.name=Anti-plagued Flesh
+item.antiCB.name=Anti-plagued Flesh on A Bone
 item.shoggothFlesh.overworld.name=Shoggoth Flesh
 item.shoggothFlesh.abyssalwasteland.name=Abyssal Shoggoth Flesh
 item.shoggothFlesh.dreadlands.name=Dreaded Shoggoth Flesh
 item.shoggothFlesh.omothol.name=Omothol Shoggoth Flesh
 item.shoggothFlesh.darkrealm.name=Shadow Shoggoth Flesh
-item.eldirtchscale.name=Eldritch Scale
-item.omotholflesh.name=Omothol Ghoul Flesh
 item.shadowplate.name=Shadow Titan Armor Plate
+item.necronomicon.name=Necronomicon
+item.necronomicon_cor.name=Abyssal Wasteland Necronomicon
+item.necronomicon_dre.name=Dreadlands Necronomicon
+item.necronomicon_omt.name=Omothol Necronomicon
+item.abyssalnomicon.name=Abyssalnomicon
 
 #Entities
 entity.abyssalcraft.depthsghoul.name=Goule des Profondeurs

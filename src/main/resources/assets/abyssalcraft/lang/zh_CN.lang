@@ -119,6 +119,30 @@ container.abyssalcraft.crystallizer.nei=结晶化
 container.abyssalcraft.transmutator.nei=嬗变化
 container.abyssalcraft.engraver.nei=钱币铸造
 
+#Necronomicon Labels
+necronomicon.index.information=Forbidden Knowledge
+necronomicon.index.spells=Spellbook
+necronomicon.index.rituals=Rituals
+necromonicon.index.huh=What is this book?
+necronomicon.information.ac=AbyssalCraft
+necronomicon.information.goo=Knowledge of The Great Old Ones
+necronomicon.information.abyssalnomicon=The Abyssalnomicon
+necronomicon.information.overworld=Overworld Knowledge
+necronomicon.information.overworld.general=The Overworld
+necronomicon.information.overworld.materials=Overworld Materials
+necronomicon.information.abyssal=Abyssal Wasteland Knowledge
+necronomicon.information.abyssal.general=The Abyssal Wasteland
+necronomicon.information.abyssal.materials=Abyssal Wasteland Materials
+necronomicon.information.dreadlands=Dreadlands Knowledge
+necronomicon.information.dreadlands.general=The Dreadlands
+necronomicon.information.drearlands.materials=Dreadlands Materials
+necronomicon.information.omothol=Omothol Knowledge
+necronomicon.information.omothol.general=Omothol
+necronomicon.information.omothol.materials=Omothol Materials
+necronomicon.information.darkrealm=Dark Realm Knowledge
+necronomicon.information.darkrealm.general=The Dark Realm
+necronomicon.information.darkrealm.materials=Dark Realm Materials
+
 #Configuration
 ac_dimensions=维度
 ac_dimensions.tooltip=维度ID设置
@@ -480,22 +504,29 @@ item.AEH.name=伊桑斯头盔
 item.AEC.name=伊桑斯胸甲
 item.AEP.name=伊桑斯护腿
 item.EthU.name=伊桑斯升级套件
-item.coin.name=铁币
-item.cthulhucoin.name=刻有克苏鲁的铁币
-item.eldercoin.name=刻有接骨木的铁币
-item.jzaharcoin.name=刻有扎哈尔的铁币
+item.coin.name=Coin
+item.cthulhucoin.name=Cthulhu Engraved Coin
+item.eldercoin.name=Elder Engraved Coin
+item.jzaharcoin.name=J'zahar Engraved Coin
 item.engraving.blank.name=空白硬币雕刻
 item.engraving.cthulhu.name=克苏鲁硬币雕刻
 item.engraving.elder.name=接骨木硬币雕刻
 item.engraving.jzahar.name=扎哈尔硬币雕刻
+item.eldirtchScale.name=邪术鳞片
+item.omotholflesh.name=奥穆索食尸鬼的肉
+item.antiCF.name=Anti-plagued Flesh
+item.antiCB.name=Anti-plagued Flesh on A Bone
 item.shoggothFlesh.overworld.name=修格斯的肉
 item.shoggothFlesh.abyssalwasteland.name=深渊修格斯的肉
 item.shoggothFlesh.dreadlands.name=恐惧修格斯的肉
 item.shoggothFlesh.omothol.name=奥穆索修格斯的肉
 item.shoggothFlesh.darkrealm.name=阴影修格斯的肉
-item.eldirtchscale.name=邪术鳞片
-item.omotholflesh.name=奥穆索食尸鬼的肉
 item.shadowplate.name=阴影泰坦甲板
+item.necronomicon.name=Necronomicon
+item.necronomicon_cor.name=Abyssal Wasteland Necronomicon
+item.necronomicon_dre.name=Dreadlands Necronomicon
+item.necronomicon_omt.name=Omothol Necronomicon
+item.abyssalnomicon.name=Abyssalnomicon
 
 #Entities
 entity.abyssalcraft.depthsghoul.name=深渊食尸鬼

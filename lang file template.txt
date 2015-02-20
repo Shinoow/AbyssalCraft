@@ -113,11 +113,37 @@ container.abyssalcraft.crate=
 container.abyssalcraft.crystallizer=
 container.abyssalcraft.transmutator=
 container.abyssalcraft.engraver=
+container.abyssalcraft.necromonicon=
+conainter.abyssalcraft.abyssalnomicon=
 
 #NEI Integration
 container.abyssalcraft.crystallizer.nei=
 container.abyssalcraft.transmutator.nei=
 container.abyssalcraft.engraver.nei=
+
+#Necronomicon Labels
+necronomicon.index.information=
+necronomicon.index.spells=
+necronomicon.index.rituals=
+necromonicon.index.huh=
+necronomicon.information.ac=
+necronomicon.information.goo=
+necronomicon.information.abyssalnomicon=
+necronomicon.information.overworld=
+necronomicon.information.overworld.general=
+necronomicon.information.overworld.materials=
+necronomicon.information.abyssal=
+necronomicon.information.abyssal.general=
+necronomicon.information.abyssal.materials=
+necronomicon.information.dreadlands=
+necronomicon.information.dreadlands.general=
+necronomicon.information.drearlands.materials=
+necronomicon.information.omothol=
+necronomicon.information.omothol.general=
+necronomicon.information.omothol.materials=
+necronomicon.information.darkrealm=
+necronomicon.information.darkrealm.general=
+necronomicon.information.darkrealm.materials=
 
 #Configuration
 ac_dimensions=
@@ -490,14 +516,21 @@ item.engraving.blank.name=
 item.engraving.cthulhu.name=
 item.engraving.elder.name=
 item.engraving.jzahar.name=
+item.eldirtchscale.name=
+item.omotholflesh.name=
+item.antiCF.name=
+item.antiCB.name=
 item.shoggothFlesh.overworld.name=
 item.shoggothFlesh.abyssalwasteland.name=
 item.shoggothFlesh.dreadlands.name=
 item.shoggothFlesh.omothol.name=
 item.shoggothFlesh.darkrealm.name=
-item.eldirtchscale.name=
-item.omotholflesh.name=
 item.shadowplate.name=
+item.necronomicon.name=
+item.necronomicon_cor.name=
+item.necronomicon_dre.name=
+item.necronomicon_omt.name=
+item.abyssalnomicon.name=
 
 #Entities
 entity.abyssalcraft.depthsghoul.name=
