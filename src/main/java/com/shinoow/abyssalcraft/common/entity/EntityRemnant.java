@@ -53,12 +53,12 @@ import net.minecraft.village.MerchantRecipeList;
 import net.minecraft.world.World;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
-import com.shinoow.abyssalcraft.api.entity.IAntiEntity;
+import com.shinoow.abyssalcraft.api.entity.*;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class EntityRemnant extends EntityMob implements IMerchant, IAntiEntity {
+public class EntityRemnant extends EntityMob implements IMerchant, IAntiEntity, ICoraliumEntity, IDreadEntity {
 
 	private EntityPlayer tradingPlayer;
 	private MerchantRecipeList tradingList;

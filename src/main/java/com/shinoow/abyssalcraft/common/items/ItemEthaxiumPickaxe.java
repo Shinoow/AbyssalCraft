@@ -37,6 +37,7 @@ public class ItemEthaxiumPickaxe extends ItemTool {
 	public ItemEthaxiumPickaxe(ToolMaterial enumToolMaterial)
 	{
 		super(2, enumToolMaterial, blocksEffectiveAgainst);
+		enumToolMaterial.customCraftingMaterial = AbyssalCraft.ethaxiumIngot;
 		setHarvestLevel("pickaxe", 8);
 	}
 

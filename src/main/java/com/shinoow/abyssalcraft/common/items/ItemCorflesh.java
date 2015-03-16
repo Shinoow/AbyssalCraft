@@ -24,12 +24,15 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraft.world.World;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
+import com.shinoow.abyssalcraft.common.util.EntityUtil;
 
 public class ItemCorflesh extends ItemFood {
 
-	public ItemCorflesh(int j, float f, boolean b) {
-		super(j, f, b);
+	private boolean isAnti;
 
+	public ItemCorflesh(int j, float f, boolean b, boolean anti) {
+		super(j, f, b);
+		isAnti = anti;
 	}
 
 	@Override
@@ -37,9 +40,16 @@ public class ItemCorflesh extends ItemFood {
 	{
 		world.playSoundAtEntity(entityPlayer, "random.burp", 0.5F, world.rand.nextFloat() * 0.1F + 0.9F);
 
-		entityPlayer.addPotionEffect(new PotionEffect(Potion.hunger.id, 600, 1));
-		entityPlayer.addPotionEffect(new PotionEffect(AbyssalCraft.Cplague.id, 600, 0));
-		entityPlayer.addPotionEffect(new PotionEffect(Potion.confusion.id, 600, 0));
+		if(!isAnti){
+			entityPlayer.addPotionEffect(new PotionEffect(Potion.hunger.id, 600, 1));
+			if(!EntityUtil.isPlayerCoralium(entityPlayer))
+				entityPlayer.addPotionEffect(new PotionEffect(AbyssalCraft.Cplague.id, 600, 0));
+			entityPlayer.addPotionEffect(new PotionEffect(Potion.confusion.id, 600, 0));
+		} else {
+			entityPlayer.addPotionEffect(new PotionEffect(Potion.field_76443_y.id, 600, 1));
+			entityPlayer.addPotionEffect(new PotionEffect(Potion.regeneration.id, 600, 0));
+		}
+
 		return;
 	}
 }

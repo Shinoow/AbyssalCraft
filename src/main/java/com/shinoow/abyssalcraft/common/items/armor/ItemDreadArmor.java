@@ -38,6 +38,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 public class ItemDreadArmor extends ItemArmor {
 	public ItemDreadArmor(ArmorMaterial par2EnumArmorMaterial, int par3, int par4){
 		super(par2EnumArmorMaterial, par3, par4);
+		par2EnumArmorMaterial.customCraftingMaterial = AbyssalCraft.Dreadshard;
 		setCreativeTab(AbyssalCraft.tabCombat);
 	}
 

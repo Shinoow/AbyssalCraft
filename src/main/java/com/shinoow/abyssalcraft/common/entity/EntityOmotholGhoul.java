@@ -17,6 +17,8 @@
 package com.shinoow.abyssalcraft.common.entity;
 
 import net.minecraft.block.Block;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIAttackOnCollide;
@@ -30,11 +32,14 @@ import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
+import net.minecraft.potion.Potion;
+import net.minecraft.potion.PotionEffect;
 import net.minecraft.world.World;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
+import com.shinoow.abyssalcraft.api.entity.*;
 
-public class EntityOmotholGhoul extends EntityMob {
+public class EntityOmotholGhoul extends EntityMob implements IAntiEntity, ICoraliumEntity, IDreadEntity {
 
 	public EntityOmotholGhoul(World par1World) {
 		super(par1World);
@@ -46,17 +51,18 @@ public class EntityOmotholGhoul extends EntityMob {
 		tasks.addTask(7, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
 		targetTasks.addTask(1, new EntityAIHurtByTarget(this, false));
 		targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityPlayer.class, 0, true));
+		setSize(1.6F, 4.0F);
 	}
 
 	@Override
 	protected void applyEntityAttributes()
 	{
 		super.applyEntityAttributes();
-		getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(100.0D);
+		getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(150.0D);
 		getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(64.0D);
 		getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setBaseValue(0.2D);
 		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.699D);
-		getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(10.0D);
+		getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(15.0D);
 	}
 
 	@Override
@@ -71,9 +77,32 @@ public class EntityOmotholGhoul extends EntityMob {
 	}
 
 	@Override
+	public boolean attackEntityAsMob(Entity par1Entity)
+	{
+		if(super.attackEntityAsMob(par1Entity))
+			if(par1Entity instanceof EntityLivingBase){
+				((EntityLivingBase)par1Entity).addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, 100));
+				((EntityLivingBase)par1Entity).addPotionEffect(new PotionEffect(Potion.blindness.id, 20));
+				((EntityLivingBase)par1Entity).addPotionEffect(new PotionEffect(Potion.nightVision.id, 20));
+			}
+
+
+		swingItem();
+		boolean flag = super.attackEntityAsMob(par1Entity);
+
+		return flag;
+	}
+
+	@Override
+	protected float getSoundPitch()
+	{
+		return rand.nextFloat() - rand.nextFloat() * 0.2F + 0.6F;
+	}
+
+	@Override
 	protected String getLivingSound()
 	{
-		return "mob.zombie.say";
+		return "abyssalcraft:ghoul.normal.idle";
 	}
 
 	@Override
@@ -85,7 +114,7 @@ public class EntityOmotholGhoul extends EntityMob {
 	@Override
 	protected String getDeathSound()
 	{
-		return "mob.zombie.death";
+		return "abyssalcraft:ghoul.death";
 	}
 
 	@Override
@@ -97,7 +126,7 @@ public class EntityOmotholGhoul extends EntityMob {
 	@Override
 	protected Item getDropItem()
 	{
-		return AbyssalCraft.Corflesh;
+		return AbyssalCraft.omotholFlesh;
 	}
 
 	@Override

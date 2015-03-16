@@ -36,6 +36,7 @@ public class ItemDreadiumHoe extends Item {
 	public ItemDreadiumHoe(ToolMaterial enumToolMaterial)
 	{
 		super();
+		enumToolMaterial.customCraftingMaterial = AbyssalCraft.dreadiumingot;
 		maxStackSize = 1;
 		setMaxDamage(enumToolMaterial.getMaxUses());
 	}

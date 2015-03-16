@@ -133,7 +133,6 @@ public class ItemSoulReaper extends Item {
 	@Override
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public void addInformation(ItemStack is, EntityPlayer player, List l, boolean B){
-		super.addInformation(is, player, l, B);
 		int souls = getSouls(is);
 		l.add(StatCollector.translateToLocal("tooltip.soulreaper") + ": " + souls + "/1024");
 	}

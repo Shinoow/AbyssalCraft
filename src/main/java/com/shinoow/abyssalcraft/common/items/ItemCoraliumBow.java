@@ -16,11 +16,12 @@
  */
 package com.shinoow.abyssalcraft.common.items;
 
+import java.util.List;
+
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.init.Items;
 import net.minecraft.item.EnumAction;
 import net.minecraft.item.ItemBow;
@@ -34,6 +35,7 @@ import net.minecraftforge.event.entity.player.ArrowLooseEvent;
 import net.minecraftforge.event.entity.player.ArrowNockEvent;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
+import com.shinoow.abyssalcraft.common.entity.EntityCoraliumArrow;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -93,11 +95,12 @@ public class ItemCoraliumBow extends ItemBow {
 
 	}
 
-	/**@SuppressWarnings({ "unchecked", "rawtypes" })
+	@Override
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public void addInformation(ItemStack par1ItemStack, EntityPlayer entityplayer, List list, boolean is){
 		list.add(StatCollector.translateToLocal("tooltip.corbow.1"));
 		list.add(StatCollector.translateToLocal("tooltip.corbow.2"));
-	}*/
+	}
 
 	/**
 	 * called when the player releases the use item button. Args: itemstack, world, entityplayer, itemInUseCount
@@ -125,18 +128,18 @@ public class ItemCoraliumBow extends ItemBow {
 
 			if (f > 1.0F)
 				f = 1.0F;
-			//TODO add a new arrow entity that inflicts Coralium Plague on hit
-			EntityArrow entityarrow = new EntityArrow(par2World, par3EntityPlayer, f * 2.0F);
+
+			EntityCoraliumArrow entityarrow = new EntityCoraliumArrow(par2World, par3EntityPlayer, f * 2.0F);
 
 			if (f == 1.0F)
 				entityarrow.setIsCritical(true);
 
-			entityarrow.setDamage(entityarrow.getDamage() + 7.0D);
+			entityarrow.setDamage(entityarrow.getDamage() + 3.0D);
 
 			int k = EnchantmentHelper.getEnchantmentLevel(Enchantment.power.effectId, par1ItemStack);
 
 			if (k > 0)
-				entityarrow.setDamage(entityarrow.getDamage() + 7.0D + k * 0.5D + 0.5D);
+				entityarrow.setDamage(entityarrow.getDamage() + 3.0D + k * 0.5D + 0.5D);
 
 			int l = EnchantmentHelper.getEnchantmentLevel(Enchantment.punch.effectId, par1ItemStack);
 
@@ -211,6 +214,12 @@ public class ItemCoraliumBow extends ItemBow {
 	}
 
 	@Override
+	public boolean getIsRepairable(ItemStack par1ItemStack, ItemStack par2ItemStack)
+	{
+		return AbyssalCraft.Cingot == par2ItemStack.getItem() ? true : super.getIsRepairable(par1ItemStack, par2ItemStack);
+	}
+
+	@Override
 	@SideOnly(Side.CLIENT)
 	public void registerIcons(IIconRegister par1IconRegister)
 	{
@@ -220,13 +229,6 @@ public class ItemCoraliumBow extends ItemBow {
 
 		for (int i = 0; i < iconArray.length; ++i)
 			iconArray[i] = par1IconRegister.registerIcon(AbyssalCraft.modid + ":" + getUnlocalizedName().substring(5) + "_" + bowPullIconNameArray[i]);
-	}
-
-	@Override
-	@SideOnly(Side.CLIENT)
-	public boolean isFull3D()
-	{
-		return true;
 	}
 
 	/**

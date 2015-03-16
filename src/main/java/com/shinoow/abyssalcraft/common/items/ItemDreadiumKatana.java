@@ -73,6 +73,12 @@ public class ItemDreadiumKatana extends Item {
 	}
 
 	@Override
+	public boolean getIsRepairable(ItemStack par1ItemStack, ItemStack par2ItemStack)
+	{
+		return AbyssalCraft.crystalDreadium == par2ItemStack.getItem() ? true : super.getIsRepairable(par1ItemStack, par2ItemStack);
+	}
+
+	@Override
 	@SuppressWarnings({ "rawtypes", "unchecked", "deprecation" })
 	public Multimap getItemAttributeModifiers() {
 		Multimap multimap = super.getItemAttributeModifiers();

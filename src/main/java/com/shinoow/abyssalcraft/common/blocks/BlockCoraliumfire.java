@@ -27,7 +27,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
-import com.shinoow.abyssalcraft.api.entity.ICoraliumEntity;
+import com.shinoow.abyssalcraft.common.util.EntityUtil;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -69,7 +69,7 @@ public class BlockCoraliumfire extends BlockFire {
 		super.onEntityCollidedWithBlock(par1World, par2, par3, par4, par5Entity);
 
 		if(par5Entity instanceof EntityLivingBase)
-			if(par5Entity instanceof ICoraliumEntity) {}
+			if(EntityUtil.isEntityCoralium((EntityLivingBase)par5Entity)) {}
 			else ((EntityLivingBase)par5Entity).addPotionEffect(new PotionEffect(AbyssalCraft.Cplague.id, 100));
 	}
 

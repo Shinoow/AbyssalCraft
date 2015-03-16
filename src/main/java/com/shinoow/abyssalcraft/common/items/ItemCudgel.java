@@ -19,6 +19,7 @@ package com.shinoow.abyssalcraft.common.items;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
+import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
@@ -37,6 +38,12 @@ public class ItemCudgel extends Item {
 	{
 		par1ItemStack.damageItem(1, par3EntityLivingBase);
 		return true;
+	}
+
+	@Override
+	public boolean getIsRepairable(ItemStack par1ItemStack, ItemStack par2ItemStack)
+	{
+		return Items.bone == par2ItemStack.getItem() ? true : super.getIsRepairable(par1ItemStack, par2ItemStack);
 	}
 
 	@Override

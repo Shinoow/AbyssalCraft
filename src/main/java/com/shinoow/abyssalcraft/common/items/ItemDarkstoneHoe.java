@@ -36,6 +36,7 @@ public class ItemDarkstoneHoe extends Item
 	public ItemDarkstoneHoe(ToolMaterial enumToolMaterial)
 	{
 		super();
+		enumToolMaterial.customCraftingMaterial = Item.getItemFromBlock(AbyssalCraft.Darkstone_cobble);
 		maxStackSize = 1;
 		setMaxDamage(enumToolMaterial.getMaxUses());
 	}

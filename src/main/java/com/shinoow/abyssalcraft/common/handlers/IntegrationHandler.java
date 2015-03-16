@@ -50,6 +50,7 @@ public class IntegrationHandler {
 			ACMorphIntegration.init();
 			mods.add("Morph");
 		}
-		ACLogger.info("Mod integrations found: %s", mods);
+		if(!mods.isEmpty())
+			ACLogger.info("Mod integrations found: %s", mods);
 	}
 }

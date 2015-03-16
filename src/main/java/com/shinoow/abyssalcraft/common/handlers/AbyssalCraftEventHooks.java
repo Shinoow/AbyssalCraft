@@ -18,35 +18,28 @@ package com.shinoow.abyssalcraft.common.handlers;
 
 import java.util.Random;
 
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.entity.*;
+import net.minecraft.entity.player.*;
 import net.minecraft.init.Blocks;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
+import net.minecraft.item.*;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
-import net.minecraft.potion.Potion;
-import net.minecraft.potion.PotionEffect;
-import net.minecraft.util.EntityDamageSource;
+import net.minecraft.potion.*;
+import net.minecraft.util.*;
 import net.minecraft.world.WorldServer;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.chunk.storage.ExtendedBlockStorage;
-import net.minecraftforge.event.entity.living.LivingAttackEvent;
+import net.minecraftforge.event.entity.living.*;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
-import net.minecraftforge.event.entity.living.LivingHurtEvent;
-import net.minecraftforge.event.entity.player.BonemealEvent;
-import net.minecraftforge.event.entity.player.EntityItemPickupEvent;
-import net.minecraftforge.event.entity.player.PlayerInteractEvent;
+import net.minecraftforge.event.entity.player.*;
 import net.minecraftforge.event.terraingen.PopulateChunkEvent;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
-import com.shinoow.abyssalcraft.api.entity.ICoraliumEntity;
-import com.shinoow.abyssalcraft.api.entity.IDreadEntity;
+import com.shinoow.abyssalcraft.api.entity.*;
 import com.shinoow.abyssalcraft.api.item.ItemUpgradeKit;
 import com.shinoow.abyssalcraft.common.blocks.BlockDLTSapling;
 import com.shinoow.abyssalcraft.common.blocks.BlockDreadSapling;
+import com.shinoow.abyssalcraft.common.util.EntityUtil;
 import com.shinoow.abyssalcraft.common.world.TeleporterOmothol;
 
 import cpw.mods.fml.common.eventhandler.Event.Result;
@@ -120,9 +113,7 @@ public class AbyssalCraftEventHooks {
 					NBTTagList enchTag = item.getEnchantmentTagList();
 					for(int i = 0; i < enchTag.tagCount(); i++)
 						if(enchTag.getCompoundTagAt(i).getInteger("id") == AbyssalCraft.coraliumE.effectId)
-							if(event.entityLiving instanceof ICoraliumEntity || event.entityLiving instanceof EntityPlayer &&
-									((EntityPlayer)event.entityLiving).getCommandSenderName().equals("shinoow") || event.entityLiving instanceof EntityPlayer &&
-									((EntityPlayer)event.entityLiving).getCommandSenderName().equals("Oblivionaire")){}
+							if(EntityUtil.isEntityCoralium(event.entityLiving)){}
 							else event.entityLiving.addPotionEffect(new PotionEffect(AbyssalCraft.Cplague.id, 100));
 						else if(enchTag.getCompoundTagAt(i).getInteger("id") == AbyssalCraft.dreadE.effectId)
 							if(event.entityLiving instanceof IDreadEntity){}
@@ -162,17 +153,18 @@ public class AbyssalCraftEventHooks {
 					event.entityLiving.posZ + (rand.nextDouble() - 0.5D) * event.entityLiving.width, 0,0,0);
 		}
 		if(AbyssalCraft.darkness)
-			if(event.entityLiving.worldObj.isRemote && event.entityLiving instanceof EntityPlayer){
+			if(event.entityLiving instanceof EntityPlayer){
+				EntityPlayer player = (EntityPlayer)event.entityLiving;
 				Random rand = new Random();
-				ItemStack helmet = event.entityLiving.getEquipmentInSlot(4);
-				if(event.entityLiving.worldObj.getBiomeGenForCoords((int)event.entityLiving.posX, (int)event.entityLiving.posZ) == AbyssalCraft.Darklands ||
-						event.entityLiving.worldObj.getBiomeGenForCoords((int)event.entityLiving.posX, (int)event.entityLiving.posZ) == AbyssalCraft.DarklandsPlains ||
-						event.entityLiving.worldObj.getBiomeGenForCoords((int)event.entityLiving.posX, (int)event.entityLiving.posZ) == AbyssalCraft.DarklandsMountains ||
-						event.entityLiving.worldObj.getBiomeGenForCoords((int)event.entityLiving.posX, (int)event.entityLiving.posZ) == AbyssalCraft.DarklandsHills ||
-						event.entityLiving.worldObj.getBiomeGenForCoords((int)event.entityLiving.posX, (int)event.entityLiving.posZ) == AbyssalCraft.DarklandsForest)
+				ItemStack helmet = player.getEquipmentInSlot(4);
+				if(player.worldObj.getBiomeGenForCoords((int)player.posX, (int)player.posZ) == AbyssalCraft.Darklands ||
+						player.worldObj.getBiomeGenForCoords((int)player.posX, (int)player.posZ) == AbyssalCraft.DarklandsPlains ||
+						player.worldObj.getBiomeGenForCoords((int)player.posX, (int)player.posZ) == AbyssalCraft.DarklandsMountains ||
+						player.worldObj.getBiomeGenForCoords((int)player.posX, (int)player.posZ) == AbyssalCraft.DarklandsHills ||
+						player.worldObj.getBiomeGenForCoords((int)player.posX, (int)player.posZ) == AbyssalCraft.DarklandsForest)
 					if(rand.nextInt(1000) == 0)
-						if(helmet != null && helmet.getItem() == AbyssalCraft.helmet){}
-						else event.entityLiving.addPotionEffect(new PotionEffect(Potion.blindness.id, 100));
+						if(helmet != null && helmet.getItem() == AbyssalCraft.helmet || player.capabilities.isCreativeMode){}
+						else player.addPotionEffect(new PotionEffect(Potion.blindness.id, 100));
 			}
 	}
 

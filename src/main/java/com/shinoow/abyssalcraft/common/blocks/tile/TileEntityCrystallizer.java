@@ -308,15 +308,20 @@ public class TileEntityCrystallizer extends TileEntity implements ISidedInventor
 		{
 			ItemStack[] itemstack = CrystallizerRecipes.crystallization().getCrystallizationResult(crystallizerItemStacks[0]);
 
-			if(itemstack[0] == null && itemstack[1] == null) return false;
+			if(itemstack[0] == null && itemstack[1] == null || itemstack[0] == null) return false;
 			if(crystallizerItemStacks[2] == null && crystallizerItemStacks[3] == null) return true;
-			if(crystallizerItemStacks[2] == null && crystallizerItemStacks[3] != null && itemstack[1] == null ||
-					crystallizerItemStacks[2] == null && crystallizerItemStacks[3].isItemEqual(itemstack[1]) && itemstack[1] != null ||
-					crystallizerItemStacks[2].isItemEqual(itemstack[0]) && crystallizerItemStacks[3] != null && itemstack[1] == null ||
-					crystallizerItemStacks[2].isItemEqual(itemstack[0]) && crystallizerItemStacks[3] == null) return true;
-			if(!crystallizerItemStacks[2].isItemEqual(itemstack[0]) && crystallizerItemStacks[3] != null && itemstack[1] == null ||
-					!crystallizerItemStacks[2].isItemEqual(itemstack[0]) && crystallizerItemStacks[3] == null && itemstack[1] != null ||
-					!crystallizerItemStacks[2].isItemEqual(itemstack[0]) && !crystallizerItemStacks[3].isItemEqual(itemstack[1])) return false;
+			if(itemstack[1] == null){
+				if(crystallizerItemStacks[2] == null || crystallizerItemStacks[2].isItemEqual(itemstack[0])) return true;
+				if(!crystallizerItemStacks[2].isItemEqual(itemstack[0])) return false;
+			} else {
+				if(crystallizerItemStacks[2] == null && !crystallizerItemStacks[3].isItemEqual(itemstack[1])) return false;
+				if(crystallizerItemStacks[2] == null && crystallizerItemStacks[3] == null ||
+						crystallizerItemStacks[2] == null && crystallizerItemStacks[3].isItemEqual(itemstack[1]) ||
+						crystallizerItemStacks[2].isItemEqual(itemstack[0]) && crystallizerItemStacks[3] == null && crystallizerItemStacks[2] != null ||
+						crystallizerItemStacks[2].isItemEqual(itemstack[0]) && crystallizerItemStacks[3].isItemEqual(itemstack[1])) return true;
+				if(!crystallizerItemStacks[2].isItemEqual(itemstack[0]) && crystallizerItemStacks[3] == null) return false;
+				if(!crystallizerItemStacks[2].isItemEqual(itemstack[0]) && !crystallizerItemStacks[3].isItemEqual(itemstack[1])) return false;
+			}
 			int result = crystallizerItemStacks[2].stackSize + itemstack[0].stackSize;
 			int result2 = crystallizerItemStacks[3].stackSize + itemstack[1].stackSize;
 			return result <= getInventoryStackLimit() && result2 <= getInventoryStackLimit() && result <= crystallizerItemStacks[2].getMaxStackSize() && result2 <= crystallizerItemStacks[3].getMaxStackSize();

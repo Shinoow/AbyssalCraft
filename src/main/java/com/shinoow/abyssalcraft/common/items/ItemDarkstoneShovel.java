@@ -20,6 +20,7 @@ import java.util.Set;
 
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemTool;
 
 import com.google.common.collect.Sets;
@@ -31,6 +32,7 @@ public class ItemDarkstoneShovel extends ItemTool {
 	public ItemDarkstoneShovel(ToolMaterial enumToolMaterial)
 	{
 		super(1, enumToolMaterial, blocksEffectiveAgainst);
+		enumToolMaterial.customCraftingMaterial = Item.getItemFromBlock(AbyssalCraft.Darkstone_cobble);
 		setHarvestLevel("shovel", 1);
 	}
 	/**

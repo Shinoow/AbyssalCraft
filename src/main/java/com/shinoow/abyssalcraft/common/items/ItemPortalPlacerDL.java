@@ -132,7 +132,6 @@ public class ItemPortalPlacerDL extends Item {
 
 				par3World.setBlock(par4 + 1, par5 + 2, par6, AbyssalCraft.dreadfire);
 			}
-			par1ItemStack.damageItem(1, par2EntityPlayer);
 			return true;
 		}
 		else

@@ -39,6 +39,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeModContainer;
 
@@ -74,7 +75,7 @@ public class EntityAntiAbyssalZombie extends EntityMob implements IAntiEntity {
 	protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
 		getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(50.0D);
-		getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(96.0D);
+		getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(64.0D);
 		getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setBaseValue(0.0D);
 		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.23000000417232513D);
 		getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(6.0D);
@@ -180,7 +181,7 @@ public class EntityAntiAbyssalZombie extends EntityMob implements IAntiEntity {
 	@Override
 	protected Item getDropItem()
 	{
-		return AbyssalCraft.antiFlesh;
+		return AbyssalCraft.antiCorflesh;
 
 	}
 	@Override
@@ -232,9 +233,9 @@ public class EntityAntiAbyssalZombie extends EntityMob implements IAntiEntity {
 	{
 		super.onKillEntity(par1EntityLivingBase);
 
-		if (worldObj.difficultySetting.getDifficultyId() >= 2 && par1EntityLivingBase instanceof EntityAntiZombie)
-		{
-			if (worldObj.difficultySetting.getDifficultyId() == 2 && rand.nextBoolean())
+		if(worldObj.difficultySetting == EnumDifficulty.NORMAL || worldObj.difficultySetting == EnumDifficulty.HARD
+				&& par1EntityLivingBase instanceof EntityAntiZombie) {
+			if (rand.nextBoolean())
 				return;
 
 			EntityAntiAbyssalZombie antiAbyaalZombie = new EntityAntiAbyssalZombie(worldObj);

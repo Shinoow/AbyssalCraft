@@ -30,6 +30,7 @@ import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 
 import com.google.common.collect.Sets;
+import com.shinoow.abyssalcraft.AbyssalCraft;
 
 public class ItemAbyssalniteCAxe extends ItemTool {
 
@@ -37,6 +38,7 @@ public class ItemAbyssalniteCAxe extends ItemTool {
 
 	public ItemAbyssalniteCAxe(ToolMaterial enumToolMaterial) {
 		super(3, enumToolMaterial, blocksEffectiveAgainst);
+		enumToolMaterial.customCraftingMaterial = AbyssalCraft.Corb;
 		setHarvestLevel("axe", 8);
 	}
 

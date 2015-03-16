@@ -19,11 +19,7 @@ package com.shinoow.abyssalcraft.common.world.biome;
 
 import net.minecraft.world.biome.BiomeGenBase;
 
-import com.shinoow.abyssalcraft.common.entity.EntityRemnant;
-import com.shinoow.abyssalcraft.common.entity.EntitySacthoth;
-import com.shinoow.abyssalcraft.common.entity.EntityShadowBeast;
-import com.shinoow.abyssalcraft.common.entity.EntityShadowCreature;
-import com.shinoow.abyssalcraft.common.entity.EntityShadowMonster;
+import com.shinoow.abyssalcraft.common.entity.*;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -39,6 +35,7 @@ public class BiomeGenOmothol extends BiomeGenBase {
 		spawnableWaterCreatureList.clear();
 		spawnableCaveCreatureList.clear();
 		spawnableMonsterList.add(new SpawnListEntry(EntityRemnant.class, 70, 2, 4));
+		spawnableMonsterList.add(new SpawnListEntry(EntityOmotholGhoul.class, 50, 1, 2));
 		spawnableMonsterList.add(new SpawnListEntry(EntityShadowCreature.class, 30, 1, 4));
 		spawnableMonsterList.add(new SpawnListEntry(EntityShadowMonster.class, 20, 1, 2));
 		spawnableMonsterList.add(new SpawnListEntry(EntityShadowBeast.class, 5, 1, 1));

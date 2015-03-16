@@ -27,6 +27,7 @@ import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.StatCollector;
 
 import com.google.common.collect.Sets;
+import com.shinoow.abyssalcraft.AbyssalCraft;
 
 public class ItemEthaxiumAxe extends ItemTool {
 
@@ -34,6 +35,7 @@ public class ItemEthaxiumAxe extends ItemTool {
 
 	public ItemEthaxiumAxe(ToolMaterial enumToolMaterial) {
 		super(3, enumToolMaterial, blocksEffectiveAgainst);
+		enumToolMaterial.customCraftingMaterial = AbyssalCraft.ethaxiumIngot;
 		setHarvestLevel("axe", 8);
 	}
 

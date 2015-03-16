@@ -35,6 +35,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 public class ItemEthaxiumArmor extends ItemArmor {
 	public ItemEthaxiumArmor(ArmorMaterial par2EnumArmorMaterial, int par3, int par4){
 		super(par2EnumArmorMaterial, par3, par4);
+		par2EnumArmorMaterial.customCraftingMaterial = AbyssalCraft.ethaxiumIngot;
 		setCreativeTab(AbyssalCraft.tabCombat);
 	}
 
@@ -76,6 +77,8 @@ public class ItemEthaxiumArmor extends ItemArmor {
 		if(itemstack.getItem() == AbyssalCraft.ethPlate){
 			if(player.isBurning() || world.provider.isHellWorld)
 				player.addPotionEffect(new PotionEffect(Potion.fireResistance.id, 20, 2));
+			if(player.getActivePotionEffect(AbyssalCraft.antiMatter) !=null)
+				player.removePotionEffect(AbyssalCraft.antiMatter.getId());
 			if(world.rand.nextInt(200) == 0)
 				player.addPotionEffect(new PotionEffect(Potion.damageBoost.id, 60));
 		}

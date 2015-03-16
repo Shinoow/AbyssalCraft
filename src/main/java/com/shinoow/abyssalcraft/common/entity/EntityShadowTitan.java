@@ -74,7 +74,7 @@ public class EntityShadowTitan extends EntityMob {
 	@Override
 	protected String getHurtSound()
 	{
-		return "mob.blaze.hit";
+		return "abyssalcraft:shadow.hit";
 	}
 
 	@Override

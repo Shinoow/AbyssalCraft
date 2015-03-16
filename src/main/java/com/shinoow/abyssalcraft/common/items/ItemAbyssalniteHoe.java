@@ -36,6 +36,7 @@ public class ItemAbyssalniteHoe extends Item {
 	public ItemAbyssalniteHoe(ToolMaterial enumToolMaterial)
 	{
 		super();
+		enumToolMaterial.customCraftingMaterial = AbyssalCraft.abyingot;
 		maxStackSize = 1;
 		setMaxDamage(enumToolMaterial.getMaxUses());
 	}

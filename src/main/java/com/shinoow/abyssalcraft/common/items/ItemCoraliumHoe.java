@@ -35,6 +35,7 @@ public class ItemCoraliumHoe extends Item {
 
 	public ItemCoraliumHoe(ToolMaterial enumToolMaterial) {
 		super();
+		enumToolMaterial.customCraftingMaterial = AbyssalCraft.Cingot;
 		maxStackSize = 1;
 		setMaxDamage(enumToolMaterial.getMaxUses());
 	}

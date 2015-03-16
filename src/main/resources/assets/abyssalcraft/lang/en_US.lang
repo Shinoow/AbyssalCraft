@@ -107,14 +107,13 @@ message.sacthoth.damage.explosion=I'm not saying you \u00A7ocan't\u00A7r blow me
 message.sacthoth.damage.projectile=Ha, your projectiles can't harm me.
 message.portalplacer.error.1=You feel a presence of denial, J'zahar does not approve.
 message.portalplacer.error.2=Nothing happened...
+message.necronomicon.nope=It appears that you don't own this book. Ever thought about not trying to read it?
 
 #Container Inventories
 container.abyssalcraft.crate=Crate
 container.abyssalcraft.crystallizer=Crystallizer
 container.abyssalcraft.transmutator=Transmutator
 container.abyssalcraft.engraver=Engraver
-container.abyssalcraft.necromonicon=Necronomicon
-conainter.abyssalcraft.abyssalnomicon=Abyssalnomicon
 
 #NEI Integration
 container.abyssalcraft.crystallizer.nei=Crystallization
@@ -122,28 +121,204 @@ container.abyssalcraft.transmutator.nei=Transmutation
 container.abyssalcraft.engraver.nei=Coin Engraving
 
 #Necronomicon Labels
-necronomicon.index.information=Forbidden Knowledge
-necronomicon.index.spells=Spellbook
-necronomicon.index.rituals=Rituals
-necromonicon.index.huh=What is this book?
+necronomicon.index=Index
+necronomicon.information=Forbidden Knowledge
+necronomicon.spells=Spellbook
+necronomicon.rituals=Rituals
+necronomicon.huh=What is this book?
 necronomicon.information.ac=AbyssalCraft
-necronomicon.information.goo=Knowledge of The Great Old Ones
+necronomicon.information.goo=The Great Old Ones
 necronomicon.information.abyssalnomicon=The Abyssalnomicon
-necronomicon.information.overworld=Overworld Knowledge
-necronomicon.information.overworld.general=The Overworld
-necronomicon.information.overworld.materials=Overworld Materials
-necronomicon.information.abyssal=Abyssal Wasteland Knowledge
-necronomicon.information.abyssal.general=The Abyssal Wasteland
-necronomicon.information.abyssal.materials=Abyssal Wasteland Materials
-necronomicon.information.dreadlands=Dreadlands Knowledge
-necronomicon.information.dreadlands.general=The Dreadlands
-necronomicon.information.drearlands.materials=Dreadlands Materials
-necronomicon.information.omothol=Omothol Knowledge
-necronomicon.information.omothol.general=Omothol
-necronomicon.information.omothol.materials=Omothol Materials
-necronomicon.information.darkrealm=Dark Realm Knowledge
-necronomicon.information.darkrealm.general=The Dark Realm
-necronomicon.information.darkrealm.materials=Dark Realm Materials
+necronomicon.information.overworld=Overworld
+necronomicon.information.overworld.title=The Overworld
+necronomicon.information.abyssal=Abyssal Wasteland
+necronomicon.information.abyssal.title=The Abyssal Wasteland
+necronomicon.information.dreadlands=Dreadlands
+necronomicon.information.dreadlands.title=The Dreadlands
+necronomicon.information.omothol=Omothol
+necronomicon.information.omothol.title=Omothol
+necronomicon.information.darkrealm=Dark Realm
+necronomicon.information.darkrealm.title=The Dark Realm
+necronomicon.information.materials=Materials
+necronomicon.information.progression=Progression
+necronomicon.information.integration=Integrations
+necronomicon.information.entities=Entities
+
+#Necronomicon Text
+#Note: the maximum amount of letters per string is 256
+#The following text example has the letter limit:
+#Lorem ipsum dolor sit amet, ad dicit prompta ullamcorper nam, quando ubique intellegat nam eu, ad dolore mollis has. Sint debet eum te. At dicunt liberavisse mea. Ea minimum sententiae ius, ei duo timeam virtute. Aliquid graecis eu usu, ea dignissim conse.
+#Anything longer than that will trigger a crash when you try to read it
+necronomicon.text.necronomicon.1=This is the Necronomicon, a book written by Abdul Alhazred, also known as "The Mad Arab". The book contains knowledge about The Great Old Ones, their names and how to summon them. There is also information about spells and rituals the book can perform.
+necronomicon.text.necronomicon.2=The Necronomicon itself is a chapter of the Abyssalnomicon, which was read to Alhazred by a demon known as J'zahar, who had composed the Abyssalnomicon from infinite knowledge known to The Great Old Ones.
+necronomicon.text.necronomicon.3=There are 4 types of Necronomicons within the Abyssalnomicon: The Necronomicon, The Abyssal Wasteland Necronomicon, knowledge bound to a specific dimension.
+necronomicon.text.necronomicon.4=In order to unlock the knowledge, one must travel to said dimension and empower the Necronoicon with the flesh of that world. The Abyssalnomicon contains additional knowledge known only to J'zahar, knowledge man was not meant to obtain.
+
+necronomicon.text.abyssalnomicon.1=This is the Abyssalnomicon, a book written by J'zahar, Gatekeeper of The Abyss. The book contains the knowledge of the 4 Necronomicons, as they are in fact chapters of this book. There is also extensive knowledge not mentioned in the others.
+necronomicon.text.abyssalnomicon.2=As the knowledge about spells and rituals is limited to the specified dimension (and previous ones, depending on the Necronomicon type), the Abyssalnomcion has all knowledge collected in one place, with additions.
+necronomicon.text.abyssalnomicon.3=Page 3
+necronomicon.text.abyssalnomicon.4=Page 4
+
+necronomicon.text.abyssalcraft.1=AbyssalCraft is the mod which this book was designed for. It mainly focuses on exploration with the additions of 3 dimensions, all filled with new materials and new monsters to face (who drops new loot). There are also new machines added to the mod.
+necronomicon.text.abyssalcraft.2=They allow the player to bend the elements of nature more than they could before. These include the Crystallizer, the Transmutator and the Engraver (which doesn't bend the elements of nature, as it is used to engrave coins).
+necronomicon.text.abyssalcraft.3=New materials allows you to craft stronger tools and armor, which has special abilities in some cases when wearing a whole set. New building materials are found within the Overworld biomes and the new dimensions. This book enables new usages for the mod.
+necronomicon.text.abyssalcraft.4=With rituals and spells allowing the user to utilize the evil magic contained within the Necronomicon. The end result will render it vital to progression of the mod, adding a larger aspect of magic to the otherwise large exploration aspect of the mod.
+
+necronomicon.text.greatoldones=Before the ages of man, the universe was ruled by a race of ancient demonic gods known as "The Great Old ones". Due to a conflict aeons ago, all of these beings are imprisoned far away where no man has ever set foot.
+necronomicon.text.abyssalnomicon_info=The Abyssalnomicon is the unholy tome from which the Necronomicon was written, when J'zahar read that section to Alhazred.
+necronomicon.text.integration=If one has access to technology unknown to The Great Old Ones, one might utilize them with technology granted from the Abyss for new purposes.
+
+necronomicon.text.overworld=The Overworld has been expanded in new biomes to discover, among them the Darklands biomes and the Coralium Infested Swamp. You may also encounter Depths Ghouls and Abyssal Zombies during your travels, who enter the overworld through the Abyssal Wasteland.
+necronomicon.text.abyssal=This is the first layer of the Abyss, a place that's dark, green, and populated by the undead. Oblivionaire is said to be the one watching over this place, or his dragon, Asorah. Likely where Coralium originates from.
+necronomicon.text.dreadlands=Previously a world of Abyssalnite, the Dreadlands got it's name when the Dread Plague was unleashed on it, killing all miners and corrupting the peaceful Abyssalnite Golems. The second layer of the Abyss holds lost souls of the living.
+necronomicon.text.omothol=A endless temple city built at the very edge of sanity. The Realm of J'zahar holds the only entrance to where The Great Old Ones dwell. The Gatekeeper is always watching, and nobody leaves the final layer of the Abyss alive.
+necronomicon.text.darkrealm=Beneath Omothol lies the realm where the immortal souls of evil demonic gods rest, awaiting their reincarnation. The Dark Realm is where living shadows are born, and the last place a living souls should ever visit, as they will face eternal suffering.
+
+necronomicon.text.materials.abyssalnite.1=Abyssalnite is a new ore found in Darklands biomes. It is stronger than diamonds, and can be used to create tools, weapons and armor. Can be found below Y = 32.
+necronomicon.text.materials.abyssalnite.2=When mined, it drops ore blocks to smelt for ingots. The ingots are purple, much like the ore itself.
+necronomicon.text.materials.darkstone.1=Darkstone is a new type of stone found in Darklands biomes. Majority of Darklands Mountains are made out of this stone. The Dark Realm also consists of this material.
+necronomicon.text.materials.darkstone.2=When mined, it drops Darkstone Cobblestone, and it can be turned into bricks, called Darkstone Bricks. This material is 20% stronger than regular stone, and can be used to make tools that are 20% stronger than their counterparts.
+necronomicon.text.materials.coralium.1=Coralium is a new ore found in ocean biomes and swamp biomes. The gems from it has multiple uses, among them the creation of Coralium Pearls.
+necronomicon.text.materials.coralium.2=Large amounts of gems can be used to create Coralium Chunks, which can be smelted down for Refined Coralium Ingots. Coralium Pearls are required to create the first Gateway Key, used to reach the first dimension, the Abyssal Wasteland.
+necronomicon.text.materials.darklandsoak.1=Darklands Oak is a new tree commonly found in Darklands biomes. It's wood can be used to create planks, which can be used to craft stairs, slabs and fences.
+necronomicon.text.materials.darklandsoak.2=Compared to the normal Oak wood, it's darker in color, and could thus be more stylish in design patterns, shifting the different wood types.
+necronomicon.text.materials.nitre.1=Nitre is a new ore found randomly in the Overworld. It can be used to create gunpowder, but doesn't have that many uses past that. It can be crystallized Potassium and Nitrate crystals.
+necronomicon.text.materials.nitre.2=This material will likely have additional usages in the future.
+necronomicon.text.materials.liquidantimatter.1=Liquid Antimatter is a new liquid found underground in Coralium Infested Swamps. It has the ability to de-materialize entities, and can also force other liquids to solidify upon collision.
+necronomicon.text.materials.liquidantimatter.2=If you happen to fall into a pool of Liquid Antimatter, you will likely die within approximately 5 seconds, as it deals a large amount of damage in a very short time, making it quite hard to avoid certain death when getting in contact with it.
+necronomicon.text.materials.darklandsgrass.1=Darklands Grass is a new type of grass found in Darklands biomes. Compared to regular grass, this one is purple and emits nether portal particles randomly.
+necronomicon.text.materials.darklandsgrass.2=Another difference is that you can't plant regular trees on it, only the ones added in AbyssalCraft (Darklands Oak, Dreadlands Tree). However, flowers, tall grass and mushrooms will grow here.
+necronomicon.text.materials.abyssalstone.1=Abyssal Stone is a new type of stone that the Abyssal Wasteland is made out of. You need iron tools or better to break it.
+necronomicon.text.materials.abyssalstone.2=Compared to other stone types, it is resistant to the transmutation produced by Liquid Coralium, and it can be turned into Abyssal Stone Bricks.
+necronomicon.text.materials.abyssalores.1=Inside the Abyssal Wasteland, you can find "abyssal" versions of ores found in the Overworld, which drops an abyssal version of their overworld counterpart's drops, if not the same.
+necronomicon.text.materials.abyssalores.2=There's an abyssal version of Iron, Gold, Diamond, Copper, Tin and Nitre ores. They generate at a similar heigh to their overworld counterparts.
+necronomicon.text.materials.abyssalcoralium.1=Abyssal Coralium is a variant of Coralium found within the Abyssal Wasteland. It is almost identical to it's overworld counterpart.
+necronomicon.text.materials.abyssalcoralium.2=Much like the regular Coralium Ore, the Abyssal Coralium Ore drops Coralium Pearls, which has multiple uses. Generates around Y = 55 and below.
+necronomicon.text.materials.liquifiedcoralium.1=Liquified Coralium is a variant of Coralium found within the Abyssal Wasteland. Compared to the other variants, it doesn't drop Coralium Gems when mined.
+necronomicon.text.materials.liquifiedcoralium.2=When mined, the dropped ore can be smelted down for Refined Coralium Ingots. Generates around Y = 22 and below.
+necronomicon.text.materials.pearlescentcoralium.1=Pearlescent Coralium is a variant of Coralium found within the Abyssal Wasteland. This variant drops Coralium Pearls when mined, instead of Coralium Gems.
+necronomicon.text.materials.pearlescentcoralium.2=Due to the item gained from the ore, it is quite rare, and generates around Y = 10 and below.
+necronomicon.text.materials.liquidcoralium.1=Liquid Coralium is a new liquid found within the Abyssal Wasteland. It has the ability to transmute elements on contact, as in converting any water-based liquid into itself, and most stone types into Abyssal Stone.
+necronomicon.text.materials.liquidcoralium.2=It also infects entities that touches it with the Coralium Plague, killing them if they aren't immune. Some entities can be converted into Abyssal Zombies on death. If the liquid collides with Liquid Antimatter, it will convert into Coralium Stone.
+necronomicon.text.materials.powerstonedreadlands.1=Dreadlands Infused Powerstone is a special stone found deep within Abyssal Strongholds. You need a pickaxe stronger or equal to a Refined Coralium Pickaxe in order to mine it.
+necronomicon.text.materials.powerstonedreadlands.2=If you collide with it, you will receive the Dread Plague. Once mined, it can be used to upgrade your Gateway Key if you have the other components.
+necronomicon.text.materials.dreadstone.1=Dreadstone is a stone found commonly in the Dreadlands. It was formerly Abyssalnite Stone that was converted by the Dread Plague aeons ago. You can turn it into Dreadstone Bricks.
+necronomicon.text.materials.dreadstone.2=It is also used in when crafting the Altar of Cha'garoth.
+necronomicon.text.materials.abyssalnitestone.1=Abyssalnite Stone is a stone found within the Purified Dreadlands biome inside the Dreadlands. You can turn it into Abyssalnite Stone Bricks.
+necronomicon.text.materials.abyssalnitestone.2=This was formerly what the Dreadlands was made out of before it became the Dreadlands, since the dimension was once a gigantic mine hosting the largest amount of pure Abyssalnite.
+necronomicon.text.materials.dreadlandsabyssalnite.1=Dreadlands Abyssalnite is a variant of Abyssalnite found in the Dreadlands. The ore gained from mining it can be smelted for Abyssalnite Ingots.
+necronomicon.text.materials.dreadlandsabyssalnite.2=Ironically enough, based on the conditions where this ore exist, this is the purest form of Abyssalnite Ore found anywhere.
+necronomicon.text.materials.dreadedabyssalnite.1=Dreaded Abyssalnite is a variant of Abyssalnite found in the Dreadlands. The ore gained from mining it can be smelted for Abyssalnite Ingots.
+necronomicon.text.materials.dreadedabyssalnite.2=If you crystallize this ore, you can get Dreadium Crystals, as this form of Abyssalnite has been corrupted by the Dread Plague.
+necronomicon.text.materials.dreadlandsgrass.1=Dreadlands Grass is a type of grass that grows in Dreadlands Forest biomes within the Dreadlands. Compared to regular grass, it is red.
+necronomicon.text.materials.dreadlandsgrass.2=Only Dreadlands Trees and Darklands Oaks can grow on this grass.
+necronomicon.text.materials.dreadlandstree.1=Dreadlands Tree is a tree commonly found in Dreadlands Forest biomes inside the Dreadlands. It's wood can be used to make planks, which can be used to craft stairs, slabs and fence.
+necronomicon.text.materials.dreadlandstree.2=Compared to the Oak, both the leaves and logs are red.
+necronomicon.text.materials.omotholstone.1=Omothol Stone is a new type of stone that Omothol is made out of. It doesn't have many uses apart from being used as decoration.
+necronomicon.text.materials.omotholstone.2=
+necronomicon.text.materials.ethaxium.1=Ethaxium is a new material most commonly appearing in Omothol as the material used for structures built there. Ethaxium is extremely hard, and can thus only be destroyed with tools made from it.
+necronomicon.text.materials.ethaxium.2=Ethaxium is said to be what souls are made out of, which likely explains why it's almost indestructible. No wonder J'zahar built his temple city from this.
+
+necronomicon.text.overworld.progression.1=In order to reach the new dimensions, one must craft a Gateway Key, which requires one to travel to the Nether, and to visit a Darklands and a water-based biome. The water-based biome can be either a swamp or a ocean biome.
+necronomicon.text.overworld.progression.2=From the Nether you need 2 Blaze Rods, and probably a few more for later. From the Darklnads biome you need to slay living shadows to finally obtain Shadow Gems. From the water-based biome you need Coralium Gems in order to create a Coralium Pearl.
+necronomicon.text.overworld.progression.3=Once you have obtained these items, you can begin crafting Transmutation Gems (four will be needed, and the excess Blaze Rods is used to make powder for these), then you surround each Transmutation Gem with 8 Shadow Gems.
+necronomicon.text.overworld.progression.4=Combining the 4 Shards of Oblivion with 4 units of Redstone Dust around a Eye of Ender will form the Oblivion Catalyst, which you place in the top right corner of the crafting grid, with 2 Blaze Rods in a diagonal from it.
+necronomicon.text.overworld.progression.5=Then you place 1 Coralium Pearl on each empty slot near the Oblivion Catalyst (2 in total). This will allow you to craft a Gateway Key, which is used by right-clicking on the ground at a open area. Doing so will form a portal.
+necronomicon.text.overworld.progression.6=For more information on progression, you need the Abyssal Wasteland Necronomicon.
+
+necronomicon.text.abyssal.progression.1=Once you have reached the Abyssal Wasteland, your next goal is to reach the Dreadlands. You will need 3 components in order to upgrade your Gateway Key, The Eye of The Abyss, a Dreadlands Infused Powerstone and a Transmutation Gem.
+necronomicon.text.abyssal.progression.2=The first is obtained by defeating Asorah, The Fallen. In order to face Asorah you need a Altar, and a Liquid Coralium Bucket. Liquid Coralium is quite easy to obtain, as large amounts of it can be found at the surface of the Abyssal Wasteland.
+necronomicon.text.abyssal.progression.3=The Altar is crafted using 4 Gold Ingots, a Enchantment Table, a Transmutation Gem and a Empty Bucket. Bucket on top middle slot, with the Transmutation Gem and the Enchantment Table under that, then Gold Ingots on each side of the aforementioned objects.
+necronomicon.text.abyssal.progression.4=Place the Altar inside the Abyssal Wasteland and right-click it with the Liquid Coralium Bucket to summon Asorah. Once you have defeated Asorah, he will drop his eye with a large quantity of exp and materials found in the dimension.
+necronomicon.text.abyssal.progression.5=The Dreadlands Infused Powerstone is located inside a Abyssal Stronghold, which can be found using a Powerstone Tracker. Trackers are crafted by surrounding a Eye of Ender with Coralium Gems.
+necronomicon.text.abyssal.progression.6=Once you have tracked down the Powerstone, you can mine it with a Refined Coralium Pickaxe. Lastly you can upgrade the Gateway Key by placing the items as a triangle in the crafting grid, with the Gateway Key in the middle.
+
+necronomicon.text.dreadlands.progression.1=Once you have reached the Dreadlands, your next goal is to reach Omothol. You will need to own a Transmutator, and you need to defeat Cha'garoth, The Dreadbeast. In order to reach Cha'garoth, you need the Altar of Cha'garoth, made out of 2 pieces.
+necronomicon.text.dreadlands.progression.2=The bottom piece is crafted by placing Asorah's Dreaded Gateway Key in the middle, with a Dreadium Ingot on each sides, a Dreaded Shard of Abyssalnite with a Dreadstone on each sides below and a Dread Cloth with a Bone on each side above.
+necronomicon.text.dreadlands.progression.3=The top is crafted by placing 3 Dreadium Ingots in the bottom row, 3 Dread Cloths in the middle row and a Bucket with a Stick on each side at the top. You need to place the Altar at Y = 40 in a Dreadlands Mountains biome and right-click it.
+necronomicon.text.dreadlands.progression.4=Doing so will enable you to enter The Lair of Cha'garoth. Once inside, you need to move forwards fighting the Dreadguards until you reach a pit, which leads to Cha'garoth. Killing the Dreadbeast gets you a Dread-plagued Gateway Key, and loot.
+necronomicon.text.dreadlands.progression.5=In order for the Gateway Key to function, you need to transmute it in a Transmutator. Transmutators are crafted by placing a Transmutation Gem in the middle, a Liquid Coralium Bucket underneath and place Coralium Bricks (item) in the remaining slots.
+necronomicon.text.dreadlands.progression.6=Coralium Bricks are obtained by pouring Liquid Antimatter on Liquid Coralium, then smelting the Coralium Stone the Liquid Coralium turns into. Once transmuted, you will have Cha'garoth's R'lyehian Gateway Key, granting you access to Omothol.
+
+necronomicon.text.omothol.progression.1=Now that you've arrived in Omothol, it's time to battle J'zahar, Gatekeeper of The Abyss. This dimension is currently incomplete, so there isn't that much to do here apart from getting materials to craft the Abyssalnomicon.
+necronomicon.text.omothol.progression.2=This section will be updated when Omothol has been completed. At that point, there will be a gigantic city built upon these floating islands.
+necronomicon.text.omothol.progression.3=
+necronomicon.text.omothol.progression.4=
+necronomicon.text.omothol.progression.5=
+necronomicon.text.omothol.progression.6=
+
+necronomicon.text.darkrealm.progression.1=Once you have reached the Dark Realm, there isn't much to do down here apart from facing infinite waves of Shadow beings and Sacthoth, as this is his natural habitant.
+necronomicon.text.darkrealm.progression.2=Main reason to intentionally fall down here would be to obtain large quantities of Shadow Gems and/or Sacthoth's Soul Reaper Blade.
+
+necronomicon.text.entity.anti.1=Inside the Coralium Infested Swamp you can find several life forms made out of antimatter.
+necronomicon.text.entity.anti.2=If a anti-entity collides with it's normal counterpart, they explode. There are anti-versions of: Zombies, Abyssal Zombies, Skeletons, Depths Ghouls, Bats, Cows, Pigs, Chickens, Creepers, Spiders and Players. Anti-Players don't explode.
+necronomicon.text.entity.evilpig.1=If you encounter one of these pigs, you will quickly notice that it's hostile and screams when you hit it.
+necronomicon.text.entity.evilpig.2=Ths Evil Pig is a pre-evolving Demon Pig, which hatches when you kill the current pig-based organism. They are immune to fire, and spawn in most Overworld biomes.
+necronomicon.text.entity.abyssalzombie.1=Abyssal Zombies can be found in various Ocean, Swamp, Beach and Darklands biomes.
+necronomicon.text.entity.abyssalzombie.2=Abyssal Zombies are formerly Zombies who has been infected with the Coralium Plague, causing them to evolve into these beings. They are hostile against regular Zombies. They also spawn in the Abyssal Wasteland and the End.
+necronomicon.text.entity.depthsghoul.1=Depths Ghouls are evolved Coralium Infested undead. Spawns where Abyssal Zombies spawn.
+necronomicon.text.entity.depthsghoul.2=Depths Ghouls are the masterpiece of Coralium Plague evolution on Zombies, rarely mutating into these behemoths. Some of them gains new forms, such as Pete, Mr. Wilson and Dr. Orange, each stronger than the other.
+necronomicon.text.entity.skeletongoliath.1=Skeleton Goliaths are massive Skeletons with Cudgels roaming the Abyssal Wasteland. Unknown Origin.
+necronomicon.text.entity.skeletongoliath.2=Ever thought what a giant skeleton with a Cudgel would look like in Minecraft? Well, this. Skeleton Goliaths are big and powerful skeletons walking among the dead. They have a small chance of dropping the Cudgel on death.
+necronomicon.text.entity.spectraldragon.1=Spectral Dragons are transparent dragons rarely spawning in the Abyssal Wasteland.
+necronomicon.text.entity.spectraldragon.2=These ghastly dragons are mostly a nuisance to face, but probably more tricky when Asorah devours their life energy in order to regenerate himself. They can fly through solid matter without destroying it, unlike the Ender Dragon.
+necronomicon.text.entity.asorah.1=Asorah, The Fallen, is the first boss encountered in AbyssalCraft. Summoned inside the Abyssal Wasteland.
+necronomicon.text.entity.asorah.2=Asorah was formerly Oblivionaire's dragon, until he passed away aeons ago, after that he has been reanimated through the usage of Coralium until he was destroyed by an unknown enemy. Now his soul resides in the Dark Realm.
+necronomicon.text.entity.abyssalnitegolem.1=Abyssalnite Golems are living ore clusters found in the Dreadlands.
+necronomicon.text.entity.abyssalnitegolem.2=These creatures of solid Abyssalnite were the native population of the dimensional mine that became the Dreadlands. They tend to pick fights with their Dreaded counterpart, to avenge their lost world.
+necronomicon.text.entity.dreadgolem.1=Dreaded Abyssalnite Golems are living ore clusters found in the Dreadlands.
+necronomicon.text.entity.dreadgolem.2=Unlike the pure Abyssalnite Golems, these red chunks of corrupted Abyssalnite are slowly turning into Dreadium, while taking all measures on corrupting any remaining Abyssalnite.
+necronomicon.text.entity.dreadling.1=Dreadlings are mutated beings found in the Dreadlands.
+necronomicon.text.entity.dreadling.2=These beings were once Abyssalnite miners in the dimension that became the Dreadlands. They have no memory of their past, and now lives to worship Cha'garoth, The Dreadbeast, who controls them.
+necronomicon.text.entity.dreadspawn.1=Dread Spawns are mutated beings found in the Dreadlands.
+necronomicon.text.entity.dreadspawn.2=It is not known what these beings are, but one thing is sure, Cha'garoth created them. Dread Spawns are slowly crawling mutants appearing often in Dreadlands Forests.
+necronomicon.text.entity.demonpig.1=Demon Pigs are demonic monsters found in the Nether and the Dreadlands.
+necronomicon.text.entity.demonpig.2=These abominations are commonly found in Dreadlands Forests or randomly in the Nether. How these monsters were created is unknown, but someone hated humans enough to turn pigs hostile against them.
+necronomicon.text.entity.chagarothspawn.1=Spawns of Cha'garoth are mutated beings found in the Dreadlands.
+necronomicon.text.entity.chagarothspawn.2=Compared to the Dread Spawn, these mutated beings are the offspring of Cha'garoth, having a few of his features. They are stronger than their lesser counterpart (the Dread Spawn), and are usually spawned by Cha'garoth.
+necronomicon.text.entity.chagarothfist.1=Fists of Cha'garoths are living hands found in the Dreadlands.
+necronomicon.text.entity.chagarothfist.2=As the Dreadbeast is immobile, he managed to create arms that stretched almost infinitely across the Dreadlands, with empty eyeballs for him to gaze through. This is literally a hand holding a eyeball.  
+necronomicon.text.entity.dreadguard.1=Dreadguards are powerful mutants found in the Dreadlands.
+necronomicon.text.entity.dreadguard.2=These particular beings have been empowered by Cha'garoth, and placed in corrupted Abyssalnite Armor with the task of guarding their master, which they do quite well.
+necronomicon.text.entity.chagaroth.1=Cha'garoth, The Dreadbeast, is the Second boss in AbyssalCraft, encountered in the Dreadlands.
+necronomicon.text.entity.chagaroth.2=Cha'garoth is the result of a new dangerous virus, 3 chopped off hydra heads and a dead Shoggoth. Becoming a health hazard for The Great Old Ones, he was placed in the dimension that became the Dreadlands, killing and corrupting everything.
+necronomicon.text.entity.remnant.1=Remnants are the citizens of Omothol, found there.
+necronomicon.text.entity.remnant.2=Since all Great Old Ones has some type of offspring, J'zahar has the Remnants, whom are lesser beings of himself, incapable of obtaining the power he bears. Instead they worship him like his loyal breed, and trade goods with other life forms.
+necronomicon.text.entity.omotholghoul.1=Omothol ghouls are the final evolution, found in Omothol.
+necronomicon.text.entity.omotholghoul.2=The Omothol Ghoul is the final evolution of the Depths Ghoul, unlocking the full potential of death. Aeons in darkness has made these behemoths immune to fire, while strengthening them greatly.
+necronomicon.text.entity.omotholwarden.1=Omothol Wardens are demons found in Omothol.
+necronomicon.text.entity.omotholwarden.2=Omothol Wardens are demons tasked by J'zahar to patrol Omothol, searching for intruders to eliminate. These demonic beings are powerful guardians of the Abyss.
+necronomicon.text.entity.gatekeeperminion.1=Minions of The Gatekeeper are loyal servants to J'zahar found in Omothol.
+necronomicon.text.entity.gatekeeperminion.2=Minions of The Gatekeeper are an elite of more powerful Remnants serving their master. They are commonly found around The Temple of J'zahar, being loyal minions to the Gatekeeper.
+necronomicon.text.entity.jzahar.1=J'zahar, Gatekeeper of The Abyss, is the final boss in AbyssalCraft, found in Omothol.
+necronomicon.text.entity.jzahar.2=J'zahar was the only one among The Great Old Ones to not get banished to the eternal void. Due to the powers he obtained when he reverted time and space to re-create it, he is tasked with guarding his fellow demonic gods in their eternal slumber.
+necronomicon.text.entity.lessershoggoth.1=Lesser Shoggoths are a smaller breed of Shoggoths found throughout the Abyss.
+necronomicon.text.entity.lessershoggoth.2=Shoggoths are amorphous shapeshifting beings genetically engineered by the Elder Things as a race of servant-tools. Though being mindless, they became conscious and killed their masters. Now they sometimes build monoliths in honor of The Great Old Ones.
+necronomicon.text.entity.shadowcreature.1=Shadow Creatures are inhabitants of The Dark Realm, can be found in Darklands Mountains.
+necronomicon.text.entity.shadowcreature.2=Shadow Creatures are living shadows naturally found in The Dark Realm, but are capable of merging to Omothol and all the way to the Darklands. The Shadow Creature is the smallest evolution of living shadows.
+necronomicon.text.entity.shadowmonster.1=Shadow Monsters are inhabitants of The Dark Realm, can be found in Darklands Mountains.
+necronomicon.text.entity.shadowmonster.2=Shadow Monsters are living shadows naturally found in The Dark Realm, but are capable of merging to Omothol and all the way to the Darklands. The Shadow Monster is the middle evolution of living shadows.
+necronomicon.text.entity.shadowbeast.1=Shadow Beasts are inhabitants of The Dark Realm, can be found in Darklands Mountains.
+necronomicon.text.entity.shadowbeast.2=Shadow Beasts are living shadows naturally found in The Dark Realm, but are capable of merging to Omothol and all the way to the Darklands. The Shadow Beast is the greater evolution of living shadows.
+necronomicon.text.entity.shadowtitan.1=Shadow Titans are inhabitants of The Dark Realm.
+necronomicon.text.entity.shadowtitan.2=Shadow Titans are powerful living shadows roaming The Dark Realm. Compared to the Shadow Beast, Shadow Titans are armored, and more powerful. 
+necronomicon.text.entity.sacthoth.1=Sacthoth, Harbinger of Doom is found in The Dark Realm.
+necronomicon.text.entity.sacthoth.2=Sacthoth is the strongest being in The Dark Realm, and the ruler of living shadows. The only way for him to leave The Dark Realm is through the explosion of a Oblivion Deathbomb. He carries a powerful sword capable of tearing out the souls of the living.
+
+necronomicon.text.integration.nei.1=With Not Enough Items installed, the recipes for the Transmutator can be viewed when pressing the recipe button whilst hovering over a item or block.
+necronomicon.text.integration.nei.2=When the recipe GUI is open, you can also see what items can be used as fuel for transmutation.
+necronomicon.text.integration.nei.3=Recipes for the Crystallizer can also display by pressing the recipe button, but the second output doesn't show due to technical reasons.
+necronomicon.text.integration.nei.4=When the recipe GUI is open, you can also see what items can be used as fuel for crystallization.
+necronomicon.text.integration.nei.5=Recipes for the Engraver can also displayed by pressing the recipe button.
+necronomicon.text.integration.nei.6=
+
+necronomicon.text.integration.tc.1=With Thaumcraft installed, you can now discover aspects in blocks, items and entities added in AbyssalCraft. There are, however, no new aspects. There will probably be more ways to combind the mods later on.
+necronomicon.text.integration.tc.2=You also get a Vis discount and the ability to view nodes when wearing the Depths Armor set.
+
+necronomicon.text.integration.morph.1=With Morph installed, you can get morph abilities when morphing into AbyssalCraft entities. Additional abilities might be added, like plague immunity.
+necronomicon.text.integration.morph.2=When morphed into entities that has special models, your hand will be morphed into the hand used by that model in 1st person view.
+
+necronomicon.text.wip=This section is incomplete.
 
 #Configuration
 ac_dimensions=Dimensions
@@ -162,8 +337,6 @@ ac_enchantment=Enchantments
 ac_enchantment.tooltip=Enchantment ID configuration
 ac_potion=Potions
 ac_potion.tooltip=Potion ID configuration
-ac_render=Rendering
-ac_render.tooltip=Rendering configuration
 
 #Damagesources
 death.attack.coralium=%1$s died from the Coralium Plague
@@ -218,6 +391,10 @@ itemgroup.acfood=AbyssalCraft Foodstuffs
 itemgroup.acdblocks=AbyssalCraft Decoration Blocks
 itemgroup.accrystals=AbyssalCraft Crystallizer Crystals
 itemgroup.accoins=Abyssalcraft Coins
+
+#Fluids
+fluid.liquidcoralium=Liquid Coralium
+fluid.liquidantimatter=Liquid Antimatter
 
 #Blocks
 tile.DS.name=Darkstone
@@ -335,6 +512,7 @@ tile.BOE.name=Block of Ethaxium
 tile.OG.name=Omothol Gateway
 tile.Ofire.name=Omothol Fire
 tile.engraver.name=Engraver
+tile.house.name=A House
 
 #Items
 item.DEV_BLADE.name=The Dev Blade
@@ -552,7 +730,7 @@ entity.abyssalcraft.demonpig.name=Demon Pig
 entity.abyssalcraft.chagaroth.name=Cha'garoth, The Dreadbeast
 entity.abyssalcraft.chagarothfist.name=Fist of Cha'garoth
 entity.abyssalcraft.shadowbeast.name=Shadow Beast
-entity.abyssalcraft.shadowboss.name=Sacthoth, Harbringer of Doom
+entity.abyssalcraft.shadowboss.name=Sacthoth, Harbinger of Doom
 entity.abyssalcraft.gskeleton.name=Skeleton Goliath
 entity.abyssalcraft.chagarothspawn.name=Spawn of Cha'garoth
 entity.abyssalcraft.antiabyssalzombie.name=Abyssal Anti-Zombie

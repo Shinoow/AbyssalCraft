@@ -53,23 +53,24 @@ import net.minecraftforge.common.ForgeModContainer;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.api.entity.ICoraliumEntity;
+import com.shinoow.abyssalcraft.common.util.EntityUtil;
 
 public class EntityDepthsGhoul extends EntityMob implements ICoraliumEntity {
 
 	private static final UUID babySpeedBoostUUID = UUID.fromString("B9766B59-9566-4402-BC1F-2EE2A276D836");
 	private static final AttributeModifier babySpeedBoostModifier = new AttributeModifier(babySpeedBoostUUID, "Baby speed boost", 0.5D, 1);
 	private static final UUID attackDamageBoostUUID = UUID.fromString("648D7064-6A60-4F59-8ABE-C2C23A6DD7A9");
-	private static final AttributeModifier peteDamageBoost = new AttributeModifier(attackDamageBoostUUID, "Attack Damage Boost", 2.0D, 0);
-	private static final AttributeModifier wilsonDamageBoost = new AttributeModifier(attackDamageBoostUUID, "Attack Damage Boost", 4.0D, 0);
-	private static final AttributeModifier orangeDamageBoost = new AttributeModifier(attackDamageBoostUUID, "Attack Damage Boost", 6.0D, 0);
+	private static final AttributeModifier peteDamageBoost = new AttributeModifier(attackDamageBoostUUID, "Pete Attack Damage Boost", 2.0D, 0);
+	private static final AttributeModifier wilsonDamageBoost = new AttributeModifier(attackDamageBoostUUID, "Wilson Attack Damage Boost", 4.0D, 0);
+	private static final AttributeModifier orangeDamageBoost = new AttributeModifier(attackDamageBoostUUID, "Orange Attack Damage Boost", 6.0D, 0);
 	private static final AttributeModifier ghoulHDamageBoost = new AttributeModifier(attackDamageBoostUUID, "Halloween Attack Damage Boost", 3.0D, 0);
-	private static final AttributeModifier peteHDamageBoost = new AttributeModifier(attackDamageBoostUUID, "Halloween Attack Damage Boost", 8.0D, 0);
-	private static final AttributeModifier wilsonHDamageBoost = new AttributeModifier(attackDamageBoostUUID, "Halloween Attack Damage Boost", 10.0D, 0);
-	private static final AttributeModifier orangeHDamageBoost = new AttributeModifier(attackDamageBoostUUID, "Halloween Attack Damage Boost", 12.0D, 0);
+	private static final AttributeModifier peteHDamageBoost = new AttributeModifier(attackDamageBoostUUID, "Pete Halloween Attack Damage Boost", 8.0D, 0);
+	private static final AttributeModifier wilsonHDamageBoost = new AttributeModifier(attackDamageBoostUUID, "Wilson Halloween Attack Damage Boost", 10.0D, 0);
+	private static final AttributeModifier orangeHDamageBoost = new AttributeModifier(attackDamageBoostUUID, "Orange Halloween Attack Damage Boost", 12.0D, 0);
 	private static final UUID healthBoostUUID = UUID.fromString("5D6F0BA2-1186-46AC-B896-C61C5CEE99CC");
-	private static final AttributeModifier peteHealthBoost = new AttributeModifier(healthBoostUUID, "Health Boost", 10.0D, 0);
-	private static final AttributeModifier wilsonHealthBoost = new AttributeModifier(healthBoostUUID, "Health Boost", 20.0D, 0);
-	private static final AttributeModifier orangeHealthBoost = new AttributeModifier(healthBoostUUID, "Health Boost", 30.0D, 0);
+	private static final AttributeModifier peteHealthBoost = new AttributeModifier(healthBoostUUID, "Pete Health Boost", 10.0D, 0);
+	private static final AttributeModifier wilsonHealthBoost = new AttributeModifier(healthBoostUUID, "Wilson Health Boost", 20.0D, 0);
+	private static final AttributeModifier orangeHealthBoost = new AttributeModifier(healthBoostUUID, "Orange Health Boost", 30.0D, 0);
 
 	public EntityDepthsGhoul(World par1World) {
 		super(par1World);
@@ -108,22 +109,19 @@ public class EntityDepthsGhoul extends EntityMob implements ICoraliumEntity {
 	@Override
 	public String getCommandSenderName()
 	{
-		String entityname = StatCollector.translateToLocal("entity.abyssalcraft.depthsghoul.name");
 		switch (getGhoulType())
 		{
 		case 0:
-			entityname = StatCollector.translateToLocal("entity.abyssalcraft.depthsghoul.name");
-			break;
+			return StatCollector.translateToLocal("entity.abyssalcraft.depthsghoul.name");
 		case 1:
-			entityname = "Pete";
-			break;
+			return "Pete";
 		case 2:
-			entityname = "Mr. Wilson";
-			break;
+			return "Mr. Wilson";
 		case 3:
-			entityname = "Dr. Orange";
+			return "Dr. Orange";
+		default:
+			return StatCollector.translateToLocal("entity.abyssalcraft.depthsghoul.name");
 		}
-		return entityname;
 	}
 
 	@Override
@@ -239,12 +237,9 @@ public class EntityDepthsGhoul extends EntityMob implements ICoraliumEntity {
 	{
 		if (super.attackEntityAsMob(par1Entity))
 			if (par1Entity instanceof EntityLivingBase)
-				if(worldObj.provider.dimensionId == AbyssalCraft.configDimId1 || AbyssalCraft.shouldInfect == true){
+				if(worldObj.provider.dimensionId == AbyssalCraft.configDimId1 && !EntityUtil.isEntityCoralium((EntityLivingBase)par1Entity)
+				|| AbyssalCraft.shouldInfect == true && !EntityUtil.isEntityCoralium((EntityLivingBase)par1Entity))
 					((EntityLivingBase)par1Entity).addPotionEffect(new PotionEffect(AbyssalCraft.Cplague.id, 100));
-					if(par1Entity instanceof EntityPlayer && ((EntityPlayer)par1Entity).getCommandSenderName().equals("shinoow") ||
-							par1Entity instanceof EntityPlayer && ((EntityPlayer)par1Entity).getCommandSenderName().equals("Oblivionaire"))
-						((EntityPlayer)par1Entity).removePotionEffect(AbyssalCraft.Cplague.id);
-				}
 		swingItem();
 		boolean flag = super.attackEntityAsMob(par1Entity);
 
@@ -257,43 +252,37 @@ public class EntityDepthsGhoul extends EntityMob implements ICoraliumEntity {
 	@Override
 	protected String getLivingSound()
 	{
-		String entitysound = "abyssalcraft:ghoul.normal.idle";
 		switch (getGhoulType())
 		{
 		case 0:
-			entitysound = "abyssalcraft:ghoul.normal.idle";
-			break;
+			return "abyssalcraft:ghoul.normal.idle";
 		case 1:
-			entitysound = "abyssalcraft:ghoul.pete.idle";
-			break;
+			return "abyssalcraft:ghoul.pete.idle";
 		case 2:
-			entitysound = "abyssalcraft:ghoul.normal.idle"; //abyssalcraft:ghoul.wilson.idle
-			break;
+			return "abyssalcraft:ghoul.normal.idle"; //abyssalcraft:ghoul.wilson.idle
 		case 3:
-			entitysound = "abyssalcraft:ghoul.normal.idle"; //abyssalcraft:ghoul.orange.idle
+			return "abyssalcraft:ghoul.normal.idle"; //abyssalcraft:ghoul.orange.idle
+		default:
+			return "abyssalcraft:ghoul.normal.idle";
 		}
-		return entitysound;
 	}
 
 	@Override
 	protected String getHurtSound()
 	{
-		String entitysound = "mob.zombie.hurt";
 		switch (getGhoulType())
 		{
 		case 0:
-			entitysound = "mob.zombie.hurt"; //abyssalcraft:ghoul.normal.hit
-			break;
+			return "mob.zombie.hurt"; //abyssalcraft:ghoul.normal.hit
 		case 1:
-			entitysound = "abyssalcraft:ghoul.pete.hit";
-			break;
+			return "abyssalcraft:ghoul.pete.hit";
 		case 2:
-			entitysound = "mob.zombie.hurt"; //abyssalcraft:ghoul.wilson.hit
-			break;
+			return "mob.zombie.hurt"; //abyssalcraft:ghoul.wilson.hit
 		case 3:
-			entitysound = "mob.zombie.hurt"; //abyssalcraft:ghoul.orange.hit
+			return "mob.zombie.hurt"; //abyssalcraft:ghoul.orange.hit
+		default:
+			return "mob.zombie.hurt";
 		}
-		return entitysound;
 	}
 
 	@Override
@@ -419,14 +408,14 @@ public class EntityDepthsGhoul extends EntityMob implements ICoraliumEntity {
 
 		switch(getGhoulType()){
 		case 0:
+			if(worldObj != null && !worldObj.isRemote)
+				clearModifiers(attribute, attribute1);
 			if (calendar.get(2) + 1 == 10 && calendar.get(5) == 31 && rand.nextFloat() < 0.25F)
 				attribute.applyModifier(ghoulHDamageBoost);
 			break;
 		case 1:
-			if(worldObj.isRemote){
-				attribute.removeAllModifiers();
-				attribute1.removeAllModifiers();
-			}
+			if(worldObj != null && !worldObj.isRemote)
+				clearModifiers(attribute, attribute1);
 			attribute.applyModifier(peteDamageBoost);
 			attribute1.applyModifier(peteHealthBoost);
 			setHealth(40);
@@ -436,10 +425,8 @@ public class EntityDepthsGhoul extends EntityMob implements ICoraliumEntity {
 			}
 			break;
 		case 2:
-			if(worldObj.isRemote){
-				attribute.removeAllModifiers();
-				attribute1.removeAllModifiers();
-			}
+			if(worldObj != null && !worldObj.isRemote)
+				clearModifiers(attribute, attribute1);
 			attribute.applyModifier(wilsonDamageBoost);
 			attribute1.applyModifier(wilsonHealthBoost);
 			setHealth(50);
@@ -449,10 +436,8 @@ public class EntityDepthsGhoul extends EntityMob implements ICoraliumEntity {
 			}
 			break;
 		case 3:
-			if(worldObj.isRemote){
-				attribute.removeAllModifiers();
-				attribute1.removeAllModifiers();
-			}
+			if(worldObj != null && !worldObj.isRemote)
+				clearModifiers(attribute, attribute1);
 			attribute.applyModifier(orangeDamageBoost);
 			attribute1.applyModifier(orangeHealthBoost);
 			setHealth(60);
@@ -466,6 +451,15 @@ public class EntityDepthsGhoul extends EntityMob implements ICoraliumEntity {
 		return (IEntityLivingData)data;
 	}
 
+	private void clearModifiers(IAttributeInstance dmg, IAttributeInstance hp){
+		dmg.removeModifier(peteDamageBoost);
+		dmg.removeModifier(wilsonDamageBoost);
+		dmg.removeModifier(orangeDamageBoost);
+		hp.removeModifier(peteHealthBoost);
+		hp.removeModifier(wilsonHealthBoost);
+		hp.removeModifier(orangeHealthBoost);
+	}
+
 	class GroupData implements IEntityLivingData
 	{
 		public boolean isBaby;
@@ -475,7 +469,7 @@ public class EntityDepthsGhoul extends EntityMob implements ICoraliumEntity {
 			isBaby = par2;
 		}
 
-		GroupData(boolean par2, Object par4EntityLesserShoggothINNER1)
+		GroupData(boolean par2, Object par4EntityDepthsGhoulINNER1)
 		{
 			this(par2);
 		}

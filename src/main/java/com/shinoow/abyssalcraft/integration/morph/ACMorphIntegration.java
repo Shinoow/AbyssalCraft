@@ -118,8 +118,6 @@ public class ACMorphIntegration {
 			Ability.mapAbilities(EntityJzahar.class, hostile);
 			Ability.mapAbilities(EntityDreadgolem.class, hostile, fireImmunity);
 			Ability.mapAbilities(EntityDreadguard.class, hostile, fireImmunity, water);
-			Ability.mapAbilities(EntityDragonMinion.class, hostile, fly);
-			Ability.mapAbilities(EntityDragonBoss.class, hostile, fly);
 			Ability.mapAbilities(EntityShadowCreature.class, hostile);
 			Ability.mapAbilities(EntityShadowMonster.class, hostile);
 			Ability.mapAbilities(EntityDreadling.class, hostile, fireImmunity);
@@ -156,5 +154,8 @@ public class ACMorphIntegration {
 			Api.registerArmForModel(modelChagarothSpawn, modelChagarothSpawn.smallspike2);
 			Api.registerArmForModel(modelDG, modelDG.rarm1);
 		}
+
+		Api.blacklistEntity(EntityDragonMinion.class);
+		Api.blacklistEntity(EntityDragonBoss.class);
 	}
 }

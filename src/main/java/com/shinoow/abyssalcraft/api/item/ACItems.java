@@ -208,4 +208,14 @@ public class ACItems {
 	public static Item elder_engraving = GameRegistry.findItem(modId, "engraving_elder");
 	public static Item jzahar_engraving	= GameRegistry.findItem(modId, "engraving_jzahar");
 	public static Item eldritch_scale = GameRegistry.findItem(modId, "eldritchscale");
+	public static Item omothol_flesh = GameRegistry.findItem(modId, "omotholflesh");
+	public static Item anti_plagued_flesh = GameRegistry.findItem(modId, "anticorflesh");
+	public static Item anti_plagued_flesh_on_a_bone = GameRegistry.findItem(modId, "anticorbone");
+	//	public static Item necronomicon = GameRegistry.findItem(modId, "necronomicon");
+	//	public static Item abyssal_wasteland_necronomicon = GameRegistry.findItem(modId, "necronomicon_cor");
+	//	public static Item dreadlands_necronomicon = GameRegistry.findItem(modId, "necronomicon_dre");
+	//	public static Item omothol_necronomicon = GameRegistry.findItem(modId, "necronomicon_omt");
+	//	public static Item abyssalnomicon = GameRegistry.findItem(modId, "abyssalnomicon");
+	//	public static Item shoggoth_flesh = GameRegistry.findItem(modId, "shoggothflesh");
+	//	public static Item shadow_titan_armor_plate = GameRegistry.findItem(modId, "shadowplate");
 }

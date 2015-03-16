@@ -124,7 +124,7 @@ public class EntitySacthoth extends EntityMob implements IBossDisplayData, IAnti
 	@Override
 	protected boolean canDespawn()
 	{
-		return false;
+		return worldObj.provider.dimensionId == AbyssalCraft.configDimId3 ? true : false;
 	}
 
 	@Override
@@ -160,7 +160,7 @@ public class EntitySacthoth extends EntityMob implements IBossDisplayData, IAnti
 	@Override
 	protected String getHurtSound()
 	{
-		return "abyssalcraft:shadow.hit";
+		return "mob.blaze.hit";
 	}
 
 	@Override
@@ -334,7 +334,7 @@ public class EntitySacthoth extends EntityMob implements IBossDisplayData, IAnti
 		int i;
 		int j;
 
-		if (!worldObj.isRemote)
+		if (!worldObj.isRemote){
 			if (deathTicks > 150 && deathTicks % 5 == 0)
 			{
 				i = 500;
@@ -351,27 +351,35 @@ public class EntitySacthoth extends EntityMob implements IBossDisplayData, IAnti
 						worldObj.spawnEntityInWorld(new EntityItem(worldObj, posX, posY, posZ, new ItemStack(AbyssalCraft.oblivionshard)));
 					}
 				}
-				if(deathTicks >= 190 && deathTicks <= 200){
-					if(deathTicks <= 200){
-						EntityShadowCreature shadowCreature = new EntityShadowCreature(worldObj);
-						shadowCreature.copyLocationAndAnglesFrom(this);
-						worldObj.spawnEntityInWorld(shadowCreature);
-					}
-					if(deathTicks >= 195 && deathTicks <= 200){
-						EntityShadowMonster shadowMonster = new EntityShadowMonster(worldObj);
-						shadowMonster.copyLocationAndAnglesFrom(this);
-						worldObj.spawnEntityInWorld(shadowMonster);
-					}
-					if(deathTicks == 200){
-						EntityShadowBeast shadowBeast = new EntityShadowBeast(worldObj);
-						shadowBeast.copyLocationAndAnglesFrom(this);
-						worldObj.spawnEntityInWorld(shadowBeast);
-					}
+
+			}
+			if(deathTicks >= 100 && deathTicks <= 200){
+				if(deathTicks <= 110){
+					EntityShadowCreature shadowCreature = new EntityShadowCreature(worldObj);
+					shadowCreature.copyLocationAndAnglesFrom(this);
+					worldObj.spawnEntityInWorld(shadowCreature);
+				}
+				if(deathTicks >= 160 && deathTicks <= 165){
+					EntityShadowMonster shadowMonster = new EntityShadowMonster(worldObj);
+					shadowMonster.copyLocationAndAnglesFrom(this);
+					worldObj.spawnEntityInWorld(shadowMonster);
+				}
+				if(deathTicks == 200){
+					EntityShadowBeast shadowBeast = new EntityShadowBeast(worldObj);
+					shadowBeast.copyLocationAndAnglesFrom(this);
+					worldObj.spawnEntityInWorld(shadowBeast);
 				}
 			}
-		if(deathTicks == 200 && !worldObj.isRemote)
+			if(deathTicks == 200)
 
-			setDead();
+				setDead();
+		}
+	}
+
+	@Override
+	protected void collideWithEntity(Entity par1Entity)
+	{
+		if(deathTicks == 0) par1Entity.applyEntityCollision(this);
 	}
 
 	@SuppressWarnings("rawtypes")
@@ -385,7 +393,7 @@ public class EntitySacthoth extends EntityMob implements IBossDisplayData, IAnti
 		if (list != null)
 			for (int k2 = 0; k2 < list.size(); k2++) {
 				Entity entity = (Entity)list.get(k2);
-				if (entity instanceof EntityPlayer && !entity.isDead && deathTicks == 0)
+				if (entity instanceof EntityPlayer && !entity.isDead && deathTicks == 0 && !((EntityPlayer)entity).capabilities.isCreativeMode)
 					((EntityPlayer)entity).addPotionEffect(new PotionEffect(Potion.blindness.id, 40));
 			}
 		EntityPlayer player = worldObj.getClosestVulnerablePlayerToEntity(this, 160D);

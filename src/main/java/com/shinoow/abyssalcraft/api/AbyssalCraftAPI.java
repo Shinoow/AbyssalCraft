@@ -23,8 +23,8 @@ import java.util.Iterator;
 import java.util.List;
 
 import net.minecraft.block.Block;
-import net.minecraft.entity.EnumCreatureAttribute;
-import net.minecraft.entity.EnumCreatureType;
+import net.minecraft.entity.*;
+import net.minecraft.entity.passive.*;
 import net.minecraft.item.Item;
 import net.minecraft.item.Item.ToolMaterial;
 import net.minecraft.item.ItemArmor.ArmorMaterial;
@@ -39,9 +39,7 @@ import net.minecraftforge.oredict.OreDictionary;
 
 import com.google.common.collect.Lists;
 import com.shinoow.abyssalcraft.api.item.ItemEngraving;
-import com.shinoow.abyssalcraft.api.recipe.CrystallizerRecipes;
-import com.shinoow.abyssalcraft.api.recipe.EngraverRecipes;
-import com.shinoow.abyssalcraft.api.recipe.TransmutatorRecipes;
+import com.shinoow.abyssalcraft.api.recipe.*;
 
 import cpw.mods.fml.common.IFuelHandler;
 import cpw.mods.fml.common.registry.EntityRegistry;
@@ -49,6 +47,7 @@ import cpw.mods.fml.common.registry.GameRegistry;
 
 /**
  * Main API class for AbyssalCraft, has child classes for most features.
+ * Check {@link IMCHelper} for InterModComms registration
  * 
  * @author shinoow
  *
@@ -75,6 +74,8 @@ public class AbyssalCraftAPI {
 	public static DamageSource coralium = new DamageSource("coralium").setDamageBypassesArmor().setMagicDamage();
 	public static DamageSource dread = new DamageSource("dread").setDamageBypassesArmor().setMagicDamage();
 	public static DamageSource antimatter = new DamageSource("antimatter").setDamageBypassesArmor().setMagicDamage();
+
+	private static List<Class<? extends EntityLivingBase>> shoggothFood = Lists.newArrayList();
 
 	/**
 	 *  {@link EnumCreatureAttribute} used for the Shadow mobs
@@ -456,6 +457,24 @@ public class AbyssalCraftAPI {
 			GameRegistry.getFuelValue(itemStack);
 		}
 		return fuelValue;
+	}
+
+	/**
+	 * Adds the entity to a list of entities that the Lesser Shoggoth eats
+	 * (Note: It's useless to add your entity here if it extends {@link EntityAnimal}, {@link EntityAmbientCreature}, {@link EntityWaterMob} or {@link EntityTameable}).
+	 * If your Entity's superclass is a subclass of EntityTameable, you will need to add the superclass.
+	 * @param clazz The potential "food" for the Lesser Shoggoth
+	 */
+	public static void addShoggothFood(Class<? extends EntityLivingBase> clazz){
+		shoggothFood.add(clazz);
+	}
+
+	/**
+	 * Used by the Lesser Shoggoth to fetch a list of things to eat
+	 * @return An ArrayList containing Entity classes
+	 */
+	public static List<Class<? extends EntityLivingBase>> getShoggothFood(){
+		return shoggothFood;
 	}
 
 	/**

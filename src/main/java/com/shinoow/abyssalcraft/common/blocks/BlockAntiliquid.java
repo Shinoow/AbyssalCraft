@@ -32,7 +32,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fluids.BlockFluidClassic;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
-import com.shinoow.abyssalcraft.api.entity.IAntiEntity;
+import com.shinoow.abyssalcraft.common.util.EntityUtil;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -93,8 +93,7 @@ public class BlockAntiliquid extends BlockFluidClassic {
 	public void onEntityCollidedWithBlock(World par1World, int par2, int par3, int par4, Entity par5Entity) {
 		super.onEntityCollidedWithBlock(par1World, par2, par3, par4, par5Entity);
 
-		if(par5Entity instanceof IAntiEntity){}
-		else if(par5Entity instanceof EntityLivingBase){
+		if(par5Entity instanceof EntityLivingBase && !EntityUtil.isEntityAnti((EntityLivingBase)par5Entity)){
 			((EntityLivingBase)par5Entity).addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, 400));
 			((EntityLivingBase)par5Entity).addPotionEffect(new PotionEffect(Potion.blindness.id, 400));
 			((EntityLivingBase)par5Entity).addPotionEffect(new PotionEffect(Potion.weakness.id, 400));
@@ -102,7 +101,6 @@ public class BlockAntiliquid extends BlockFluidClassic {
 			((EntityLivingBase)par5Entity).addPotionEffect(new PotionEffect(Potion.nightVision.id, 400));
 			((EntityLivingBase)par5Entity).addPotionEffect(new PotionEffect(AbyssalCraft.antiMatter.id, 200));
 		}
-
 		if(par5Entity instanceof EntityItem)
 			par5Entity.setDead();
 	}

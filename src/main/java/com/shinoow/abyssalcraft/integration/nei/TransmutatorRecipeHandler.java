@@ -145,7 +145,7 @@ public class TransmutatorRecipeHandler extends TemplateRecipeHandler
 
 	@Override
 	public String getGuiTexture() {
-		return "abyssalcraft:textures/gui/container/transmutator.png";
+		return "abyssalcraft:textures/gui/container/transmutator_NEI.png";
 	}
 
 	@Override

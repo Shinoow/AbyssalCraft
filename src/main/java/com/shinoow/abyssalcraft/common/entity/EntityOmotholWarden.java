@@ -33,8 +33,9 @@ import net.minecraft.item.Item;
 import net.minecraft.world.World;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
+import com.shinoow.abyssalcraft.api.entity.*;
 
-public class EntityOmotholWarden extends EntityMob {
+public class EntityOmotholWarden extends EntityMob implements IAntiEntity, ICoraliumEntity, IDreadEntity {
 
 	public EntityOmotholWarden(World par1World) {
 		super(par1World);
@@ -56,7 +57,7 @@ public class EntityOmotholWarden extends EntityMob {
 		getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(64.0D);
 		getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setBaseValue(0.2D);
 		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.699D);
-		getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(12.0D);
+		getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(20.0D);
 	}
 
 	@Override

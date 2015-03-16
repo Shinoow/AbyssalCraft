@@ -462,7 +462,7 @@ public class ChunkProviderDreadlands implements IChunkProvider {
 	@Override
 	public String makeString()
 	{
-		return "RandomLevelSource";
+		return "ACLevelSource";
 	}
 
 	/**

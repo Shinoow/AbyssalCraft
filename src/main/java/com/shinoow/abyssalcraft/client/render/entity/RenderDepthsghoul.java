@@ -31,7 +31,6 @@ public class RenderDepthsGhoul extends RenderLiving {
 
 	protected ModelDG model;
 
-	private static ResourceLocation defaultResource = new ResourceLocation("abyssalcraft:textures/model/depths_ghoul.png");
 	private static final ResourceLocation peteResource = new ResourceLocation("abyssalcraft:textures/model/depths_ghoul_pete.png");
 	private static final ResourceLocation wilsonResource = new ResourceLocation("abyssalcraft:textures/model/depths_ghoul_wilson.png");
 	private static final ResourceLocation orangeResource = new ResourceLocation("abyssalcraft:textures/model/depths_ghoul_orange.png");
@@ -53,19 +52,16 @@ public class RenderDepthsGhoul extends RenderLiving {
 		switch (par1EntityLiving.getGhoulType())
 		{
 		case 0:
-			defaultResource = ghoulResource;
-			break;
+			return ghoulResource;
 		case 1:
-			defaultResource = peteResource;
-			break;
+			return peteResource;
 		case 2:
-			defaultResource = wilsonResource;
-			break;
+			return wilsonResource;
 		case 3:
-			defaultResource = orangeResource;
-
+			return orangeResource;
+		default:
+			return ghoulResource;
 		}
-		return defaultResource;
 	}
 
 	@Override

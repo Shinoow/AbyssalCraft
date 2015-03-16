@@ -366,7 +366,7 @@ public class ChunkProviderDarkRealm implements IChunkProvider
 	@Override
 	public String makeString()
 	{
-		return "RandomLevelSource";
+		return "ACLevelSource";
 	}
 
 	@Override

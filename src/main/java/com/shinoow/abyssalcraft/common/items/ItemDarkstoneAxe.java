@@ -21,10 +21,12 @@ import java.util.Set;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.init.Blocks;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemTool;
 
 import com.google.common.collect.Sets;
+import com.shinoow.abyssalcraft.AbyssalCraft;
 
 public class ItemDarkstoneAxe extends ItemTool
 {
@@ -34,6 +36,7 @@ public class ItemDarkstoneAxe extends ItemTool
 	public ItemDarkstoneAxe(ToolMaterial enumToolMaterial)
 	{
 		super(3, enumToolMaterial, blocksEffectiveAgainst);
+		enumToolMaterial.customCraftingMaterial = Item.getItemFromBlock(AbyssalCraft.Darkstone_cobble);
 		setHarvestLevel("axe", 1);
 	}
 	/**

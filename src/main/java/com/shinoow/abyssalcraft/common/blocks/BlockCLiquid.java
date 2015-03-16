@@ -16,13 +16,10 @@
  */
 package com.shinoow.abyssalcraft.common.blocks;
 
-import net.minecraft.block.material.MapColor;
-import net.minecraft.block.material.Material;
-import net.minecraft.block.material.MaterialLiquid;
+import net.minecraft.block.material.*;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.IIcon;
@@ -32,7 +29,7 @@ import net.minecraft.world.biome.BiomeGenOcean;
 import net.minecraftforge.fluids.BlockFluidClassic;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
-import com.shinoow.abyssalcraft.api.entity.ICoraliumEntity;
+import com.shinoow.abyssalcraft.common.util.EntityUtil;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -123,9 +120,7 @@ public class BlockCLiquid extends BlockFluidClassic {
 	public void onEntityCollidedWithBlock(World par1World, int par2, int par3, int par4, Entity par5Entity) {
 		super.onEntityCollidedWithBlock(par1World, par2, par3, par4, par5Entity);
 
-		if(par5Entity instanceof ICoraliumEntity || par5Entity instanceof EntityPlayer && ((EntityPlayer)par5Entity).getCommandSenderName().equals("shinoow") ||
-				par5Entity instanceof EntityPlayer && ((EntityPlayer)par5Entity).getCommandSenderName().equals("Oblivionaire")){}
-		else if(par5Entity instanceof EntityLivingBase)
-			((EntityLivingBase)par5Entity).addPotionEffect(new PotionEffect(AbyssalCraft.Cplague.id, 100));
+		if(par5Entity instanceof EntityLivingBase && !EntityUtil.isEntityCoralium((EntityLivingBase)par5Entity) && ((EntityLivingBase)par5Entity).getActivePotionEffect(AbyssalCraft.Cplague) == null)
+			((EntityLivingBase)par5Entity).addPotionEffect(new PotionEffect(AbyssalCraft.Cplague.id, 200));
 	}
 }

@@ -27,6 +27,7 @@ import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.StatCollector;
 
 import com.google.common.collect.Sets;
+import com.shinoow.abyssalcraft.AbyssalCraft;
 
 public class ItemCoraliumPickaxe extends ItemTool {
 
@@ -34,6 +35,7 @@ public class ItemCoraliumPickaxe extends ItemTool {
 
 	public ItemCoraliumPickaxe(ToolMaterial enumToolMaterial) {
 		super(2, enumToolMaterial, blocksEffectiveAgainst);
+		enumToolMaterial.customCraftingMaterial = AbyssalCraft.Cingot;
 		setHarvestLevel("pickaxe", 5);
 	}
 

@@ -4,7 +4,7 @@
   			{
   				"modid": "abyssalcraft",
   				"name": "AbyssalCraft",
-  				"description": "This mod adds new things to the game, including 2 new dimensions and 7 overworld biomes.",
+  				"description": "This mod adds new things to the game, including 3 new dimensions and 7 overworld biomes.",
   				"mcversion": "${mcversion}",
   				"version": "${version}",
   				"authorList": [

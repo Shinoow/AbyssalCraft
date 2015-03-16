@@ -35,6 +35,7 @@ public class ItemAbyssalniteCHoe extends Item {
 
 	public ItemAbyssalniteCHoe(ToolMaterial enumToolMaterial) {
 		super();
+		enumToolMaterial.customCraftingMaterial = AbyssalCraft.Corb;
 		maxStackSize = 1;
 		setMaxDamage(enumToolMaterial.getMaxUses());
 	}

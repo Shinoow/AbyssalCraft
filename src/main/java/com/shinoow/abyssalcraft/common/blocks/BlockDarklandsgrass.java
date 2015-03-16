@@ -19,6 +19,9 @@ package com.shinoow.abyssalcraft.common.blocks;
 import java.util.Random;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockFlower;
+import net.minecraft.block.BlockMushroom;
+import net.minecraft.block.BlockTallGrass;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.init.Blocks;
@@ -94,7 +97,8 @@ public class BlockDarklandsgrass extends Block
 	public boolean canSustainPlant(IBlockAccess world, int x, int y, int z, ForgeDirection direction, IPlantable plantable)
 	{
 		Block plant = plantable.getPlant(world, x, y + 1, z);
-		if (plant == AbyssalCraft.DLTSapling || plant == AbyssalCraft.dreadsapling)
+		if (plant == AbyssalCraft.DLTSapling || plant == AbyssalCraft.dreadsapling || plant instanceof BlockFlower ||
+				plant instanceof BlockMushroom || plant instanceof BlockTallGrass)
 			return true;
 		return false;
 	}

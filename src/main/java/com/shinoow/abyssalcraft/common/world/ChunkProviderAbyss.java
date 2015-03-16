@@ -50,6 +50,7 @@ import net.minecraftforge.event.terraingen.TerrainGen;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.common.structures.abyss.Abypillar;
+import com.shinoow.abyssalcraft.common.structures.abyss.Abyruin;
 import com.shinoow.abyssalcraft.common.structures.abyss.stronghold.MapGenAbyStronghold;
 import com.shinoow.abyssalcraft.common.world.gen.WorldGenAbyLake;
 
@@ -408,6 +409,13 @@ public class ChunkProviderAbyss implements IChunkProvider
 
 			new Abypillar().generate(worldObj, rand, Xcoord1, Ycoord1, Zcoord1);
 		}
+		for(int i = 0; i < 5; i++) {
+			int Xcoord2 = k + rand.nextInt(16);
+			int Ycoord2 = rand.nextInt(70);
+			int Zcoord2 = l + rand.nextInt(16);
+
+			new Abyruin().generate(worldObj, rand, Xcoord2, Ycoord2, Zcoord2);
+		}
 
 		biomegenbase.decorate(worldObj, rand, k, l);
 
@@ -457,7 +465,7 @@ public class ChunkProviderAbyss implements IChunkProvider
 	@Override
 	public String makeString()
 	{
-		return "RandomLevelSource";
+		return "ACLevelSource";
 	}
 
 	/**

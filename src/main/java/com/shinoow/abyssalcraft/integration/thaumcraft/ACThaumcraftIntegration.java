@@ -58,6 +58,11 @@ public class ACThaumcraftIntegration {
 		ThaumcraftApi.registerObjectTag(new ItemStack(AbyssalCraft.shadowgem), new AspectList().add(Aspect.CRYSTAL, 3).add(Aspect.DARKNESS, 2));
 		ThaumcraftApi.registerObjectTag(new ItemStack(AbyssalCraft.shadowshard), new AspectList().add(Aspect.CRYSTAL, 2).add(Aspect.DARKNESS, 2));
 		ThaumcraftApi.registerObjectTag(new ItemStack(AbyssalCraft.shadowfragment), new AspectList().add(Aspect.CRYSTAL, 1).add(Aspect.DARKNESS, 2));
+		ThaumcraftApi.registerObjectTag(new ItemStack(AbyssalCraft.necronomicon), new AspectList().add(Aspect.DEATH, 1).add(Aspect.FLESH, 1).add(Aspect.DARKNESS, 1).add(Aspect.ELDRITCH, 1));
+		ThaumcraftApi.registerObjectTag(new ItemStack(AbyssalCraft.necronomicon_cor), new AspectList().add(Aspect.DEATH, 2).add(Aspect.FLESH, 2).add(Aspect.DARKNESS, 2).add(Aspect.ELDRITCH, 2));
+		ThaumcraftApi.registerObjectTag(new ItemStack(AbyssalCraft.necronomicon_dre), new AspectList().add(Aspect.DEATH, 3).add(Aspect.FLESH, 3).add(Aspect.DARKNESS, 3).add(Aspect.ELDRITCH, 3));
+		ThaumcraftApi.registerObjectTag(new ItemStack(AbyssalCraft.necronomicon_omt), new AspectList().add(Aspect.DEATH, 4).add(Aspect.FLESH, 4).add(Aspect.DARKNESS, 4).add(Aspect.ELDRITCH, 4));
+		ThaumcraftApi.registerObjectTag(new ItemStack(AbyssalCraft.abyssalnomicon), new AspectList().add(Aspect.DEATH, 5).add(Aspect.FLESH, 5).add(Aspect.DARKNESS, 5).add(Aspect.ELDRITCH, 5));
 
 		ThaumcraftApi.registerObjectTag(new ItemStack(AbyssalCraft.crystalIron), new AspectList().add(Aspect.CRYSTAL, 3).add(Aspect.METAL, 1));
 		ThaumcraftApi.registerObjectTag(new ItemStack(AbyssalCraft.crystalSulfur), new AspectList().add(Aspect.CRYSTAL, 3).add(Aspect.FIRE, 1));
@@ -103,6 +108,7 @@ public class ACThaumcraftIntegration {
 		ThaumcraftApi.registerEntityTag(getMobName(ACEntities.shadow_beast), new AspectList().add(Aspect.DARKNESS, 5));
 		ThaumcraftApi.registerEntityTag(getMobName(ACEntities.sacthoth), new AspectList().add(Aspect.DEATH, 5).add(Aspect.DARKNESS, 5));
 		ThaumcraftApi.registerEntityTag(getMobName(ACEntities.remnant), new AspectList().add(Aspect.DEATH, 5).add(Aspect.DARKNESS, 5).add(Aspect.ELDRITCH, 5));
+		ThaumcraftApi.registerEntityTag(getMobName(ACEntities.omothol_ghoul), new AspectList().add(Aspect.DEATH, 5).add(Aspect.DARKNESS, 5).add(Aspect.ELDRITCH, 5));
 	}
 
 	public static String getMobName(String name){

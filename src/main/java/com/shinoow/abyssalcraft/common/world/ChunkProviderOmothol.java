@@ -334,7 +334,7 @@ public class ChunkProviderOmothol implements IChunkProvider
 	@Override
 	public String makeString()
 	{
-		return "RandomLevelSource";
+		return "ACLevelSource";
 	}
 
 	@Override

@@ -143,7 +143,7 @@ public class EngraverRecipeHandler extends TemplateRecipeHandler
 
 	@Override
 	public String getGuiTexture() {
-		return "abyssalcraft:textures/gui/container/engraver.png";
+		return "abyssalcraft:textures/gui/container/engraver_NEI.png";
 	}
 
 	@Override

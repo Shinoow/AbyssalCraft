@@ -18,6 +18,7 @@ package com.shinoow.abyssalcraft.common;
 
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
@@ -25,6 +26,7 @@ import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.client.gui.GuiCrystallizer;
 import com.shinoow.abyssalcraft.client.gui.GuiEngraver;
 import com.shinoow.abyssalcraft.client.gui.GuiTransmutator;
+import com.shinoow.abyssalcraft.client.gui.necronomicon.GuiNecronomicon;
 import com.shinoow.abyssalcraft.common.blocks.tile.TileEntityCrystallizer;
 import com.shinoow.abyssalcraft.common.blocks.tile.TileEntityEngraver;
 import com.shinoow.abyssalcraft.common.blocks.tile.TileEntityTransmutator;
@@ -61,6 +63,7 @@ public class CommonProxy implements IGuiHandler {
 	@Override
 	public Object getClientGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
 		TileEntity entity = world.getTileEntity(x, y, z);
+		ItemStack stack = player.getCurrentEquippedItem();
 
 		if(entity != null)
 			switch(ID) {
@@ -75,6 +78,21 @@ public class CommonProxy implements IGuiHandler {
 			case AbyssalCraft.engraverGuiID:
 				if (entity instanceof TileEntityEngraver)
 					return new GuiEngraver(player.inventory, (TileEntityEngraver) entity);
+				break;
+			}
+		if(stack != null)
+			switch(ID){
+			case AbyssalCraft.necronmiconGuiID:
+				if(stack.getItem() == AbyssalCraft.necronomicon)
+					return new GuiNecronomicon(0);
+				if(stack.getItem() == AbyssalCraft.necronomicon_cor)
+					return new GuiNecronomicon(1);
+				if(stack.getItem() == AbyssalCraft.necronomicon_dre)
+					return new GuiNecronomicon(2);
+				if(stack.getItem() == AbyssalCraft.necronomicon_omt)
+					return new GuiNecronomicon(3);
+				if(stack.getItem() == AbyssalCraft.abyssalnomicon)
+					return new GuiNecronomicon(4);
 				break;
 			}
 		return null;

@@ -47,12 +47,14 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.MathHelper;
+import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldProviderEnd;
 import net.minecraftforge.common.ForgeModContainer;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.api.entity.ICoraliumEntity;
+import com.shinoow.abyssalcraft.common.util.EntityUtil;
 
 public class EntityAbyssalZombie extends EntityMob implements ICoraliumEntity {
 
@@ -85,7 +87,7 @@ public class EntityAbyssalZombie extends EntityMob implements ICoraliumEntity {
 	protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
 		getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(25.0D);
-		getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(96.0D);
+		getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(64.0D);
 		getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setBaseValue(0.0D);
 		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.23000000417232513D);
 		getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(6.0D);
@@ -207,12 +209,9 @@ public class EntityAbyssalZombie extends EntityMob implements ICoraliumEntity {
 
 		if (super.attackEntityAsMob(par1Entity))
 			if (par1Entity instanceof EntityLivingBase)
-				if(worldObj.provider.dimensionId == AbyssalCraft.configDimId1 || AbyssalCraft.shouldInfect == true){
+				if(worldObj.provider.dimensionId == AbyssalCraft.configDimId1 && !EntityUtil.isEntityCoralium((EntityLivingBase)par1Entity)
+				|| AbyssalCraft.shouldInfect == true && !EntityUtil.isEntityCoralium((EntityLivingBase)par1Entity))
 					((EntityLivingBase)par1Entity).addPotionEffect(new PotionEffect(AbyssalCraft.Cplague.id, 100));
-					if(par1Entity instanceof EntityPlayer && ((EntityPlayer)par1Entity).getCommandSenderName().equals("shinoow") ||
-							par1Entity instanceof EntityPlayer && ((EntityPlayer)par1Entity).getCommandSenderName().equals("Oblivionaire"))
-						((EntityPlayer)par1Entity).removePotionEffect(AbyssalCraft.Cplague.id);
-				}
 
 		boolean flag = super.attackEntityAsMob(par1Entity);
 
@@ -306,9 +305,10 @@ public class EntityAbyssalZombie extends EntityMob implements ICoraliumEntity {
 	{
 		super.onKillEntity(par1EntityLivingBase);
 
-		if (worldObj.difficultySetting.getDifficultyId() >= 2 && par1EntityLivingBase instanceof EntityZombie)
-		{
-			if (worldObj.difficultySetting.getDifficultyId() == 2 && rand.nextBoolean())
+		if (worldObj.difficultySetting == EnumDifficulty.NORMAL || worldObj.difficultySetting == EnumDifficulty.HARD
+				&& par1EntityLivingBase instanceof EntityZombie) {
+
+			if (rand.nextBoolean())
 				return;
 
 			EntityAbyssalZombie EntityDephsZombie = new EntityAbyssalZombie(worldObj);
@@ -321,16 +321,20 @@ public class EntityAbyssalZombie extends EntityMob implements ICoraliumEntity {
 
 			worldObj.spawnEntityInWorld(EntityDephsZombie);
 			worldObj.playAuxSFXAtEntity((EntityPlayer)null, 1016, (int)posX, (int)posY, (int)posZ, 0);
+		}
+		else if (worldObj.difficultySetting == EnumDifficulty.NORMAL || worldObj.difficultySetting == EnumDifficulty.HARD
+				&& par1EntityLivingBase instanceof EntityPlayer) {
 
-		}else if (worldObj.difficultySetting.getDifficultyId() >= 2 && par1EntityLivingBase instanceof EntityPlayer)
-		{
-			if (worldObj.difficultySetting.getDifficultyId() == 2 && rand.nextBoolean())
+			if (rand.nextBoolean())
 				return;
 
 			EntityAbyssalZombie EntityDephsZombie = new EntityAbyssalZombie(worldObj);
 			EntityDephsZombie.copyLocationAndAnglesFrom(par1EntityLivingBase);
 			worldObj.removeEntity(par1EntityLivingBase);
 			EntityDephsZombie.onSpawnWithEgg((IEntityLivingData)null);
+
+			if (par1EntityLivingBase.isChild())
+				EntityDephsZombie.setChild(true);
 
 			worldObj.spawnEntityInWorld(EntityDephsZombie);
 			worldObj.playAuxSFXAtEntity((EntityPlayer)null, 1016, (int)posX, (int)posY, (int)posZ, 0);

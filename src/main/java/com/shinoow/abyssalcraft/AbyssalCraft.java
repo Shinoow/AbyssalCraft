@@ -18,7 +18,9 @@ package com.shinoow.abyssalcraft;
 
 import java.io.*;
 import java.net.*;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import net.minecraft.block.Block;
@@ -45,8 +47,8 @@ import net.minecraftforge.fluids.*;
 import net.minecraftforge.oredict.OreDictionary;
 
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
-import com.shinoow.abyssalcraft.api.item.ItemEngraving;
-import com.shinoow.abyssalcraft.api.item.ItemUpgradeKit;
+import com.shinoow.abyssalcraft.api.AbyssalCraftAPI.FuelType;
+import com.shinoow.abyssalcraft.api.item.*;
 import com.shinoow.abyssalcraft.common.*;
 import com.shinoow.abyssalcraft.common.blocks.*;
 import com.shinoow.abyssalcraft.common.blocks.itemblock.*;
@@ -77,7 +79,7 @@ import cpw.mods.fml.common.registry.*;
 @Mod(modid = AbyssalCraft.modid, name = AbyssalCraft.name, version = AbyssalCraft.version, dependencies = "required-after:Forge@[forgeversion,);after:Thaumcraft", useMetadata = false, guiFactory = "com.shinoow.abyssalcraft.client.config.ACGuiFactory")
 public class AbyssalCraft {
 
-	public static final String version = "1.8.2";
+	public static final String version = "1.8.4";
 	public static final String modid = "abyssalcraft";
 	public static final String name = "AbyssalCraft";
 
@@ -127,7 +129,7 @@ public class AbyssalCraft {
 	chagarothfistspawner, DrTfence, nitreOre, AbyIroOre, AbyGolOre, AbyDiaOre, AbyNitOre, AbyTinOre,
 	AbyCopOre, AbyPCorOre, AbyLCorOre, solidLava, ethaxium, ethaxiumbrick, ethaxiumpillar, ethaxiumstairs,
 	ethaxiumslab1, ethaxiumslab2, ethaxiumfence, omotholstone, ethaxiumblock, omotholportal, omotholfire,
-	engraver;
+	engraver, house;
 
 	//Overworld biomes
 	public static BiomeGenBase Darklands, DarklandsForest, DarklandsPlains, DarklandsHills,
@@ -146,7 +148,8 @@ public class AbyssalCraft {
 	//misc items
 	public static Item OC, Staff, portalPlacer, Cbucket, PSDLfinder, EoA, portalPlacerDL,
 	cbrick, cudgel, carbonCluster, denseCarbonCluster, methane, nitre, sulfur, portalPlacerJzh,
-	tinIngot, copperIngot, lifeCrystal, shoggothFlesh, eldritchScale, omotholFlesh;
+	tinIngot, copperIngot, lifeCrystal, shoggothFlesh, eldritchScale, omotholFlesh, necronomicon,
+	necronomicon_cor, necronomicon_dre, necronomicon_omt, abyssalnomicon;
 	//coin stuff
 	public static Item coin, cthulhuCoin, elderCoin, jzaharCoin, engravingBlank, engravingCthulhu, engravingElder, engravingJzahar;
 	//crystals (real elements)
@@ -185,7 +188,8 @@ public class AbyssalCraft {
 	public static Item MRE, ironp, chickenp, porkp, beefp, fishp, dirtyplate, friedegg, eggp,
 	cloth;
 	//Anti-items
-	public static Item antibucket, antiBeef, antiPork, antiChicken, antiFlesh, antiBone, antiSpider_eye;
+	public static Item antibucket, antiBeef, antiPork, antiChicken, antiFlesh, antiBone, antiSpider_eye,
+	antiCorbone, antiCorflesh;
 	//Ethaxium items
 	public static Item ethaxium_brick, ethaxiumIngot;
 
@@ -205,6 +209,8 @@ public class AbyssalCraft {
 	//Dimension Ids
 	public static int configDimId1, configDimId2, configDimId3, configDimId4;
 
+	public static boolean keepLoaded1, keepLoaded2, keepLoaded3, keepLoaded4;
+
 	//Biome Ids
 	public static int configBiomeId1, configBiomeId2, configBiomeId3, configBiomeId4,
 	configBiomeId5, configBiomeId6, configBiomeId7, configBiomeId8, configBiomeId9,
@@ -214,7 +220,7 @@ public class AbyssalCraft {
 	public static boolean darkspawn1, darkspawn2, darkspawn3, darkspawn4, darkspawn5, coraliumspawn1, coraliumspawn2;
 	public static int darkWeight1, darkWeight2, darkWeight3, darkWeight4, darkWeight5, coraliumWeight;
 
-	public static boolean shouldSpread, shouldInfect, breakLogic, destroyOcean, canRenderStarspawn, demonPigFire, updateC, darkness;
+	public static boolean shouldSpread, shouldInfect, breakLogic, destroyOcean, demonPigFire, updateC, darkness;
 	public static int evilPigSpawnRate;
 
 	static int startEntityId = 300;
@@ -222,6 +228,7 @@ public class AbyssalCraft {
 	public static final int crystallizerGuiID = 30;
 	public static final int transmutatorGuiID = 31;
 	public static final int engraverGuiID = 32;
+	public static final int necronmiconGuiID = 33;
 
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
@@ -241,9 +248,6 @@ public class AbyssalCraft {
 		cfg = new Configuration(event.getSuggestedConfigurationFile());
 		syncConfig();
 		AbyssalCraftAPI.initPotionReflection();
-		if(canRenderStarspawn == true)
-			ACLogger.info("RenderPlayer Override enabled, the Coralium Longbow will render twice in your hand now.");
-		else ACLogger.info("RenderPlayer Override disabled, Compatibility level +100.");
 
 		CFluid = new Fluid("liquidcoralium").setDensity(3000).setViscosity(1000).setTemperature(350);
 		antifluid = new Fluid("liquidantimatter").setDensity(4000).setViscosity(1500).setTemperature(100);
@@ -273,7 +277,7 @@ public class AbyssalCraft {
 		abyslab1 = new BlockACSingleSlab(abyslab1, abyslab2, Material.rock, "pickaxe", 2).setCreativeTab(AbyssalCraft.tabBlock).setStepSound(Block.soundTypeStone).setHardness(1.8F).setResistance(12.0F).setBlockName("ASBs1").setBlockTextureName(modid + ":" + "ASB");
 		abyslab2 = new BlockACDoubleSlab(abyslab1, abyslab2, Material.rock, "pickaxe", 2).setStepSound(Block.soundTypeStone).setHardness(1.8F).setResistance(12.0F).setBlockName("ASBs2").setBlockTextureName(modid + ":" + "ASB");
 		abystairs = new BlockACStairs(abybrick, "pickaxe", 2).setStepSound(Block.soundTypeStone).setHardness(1.65F).setResistance(12.0F).setBlockName("ASBs");
-		Coraliumore = new BlockACOre(2, 3.0F, 6000.0F).setBlockName("CO").setBlockTextureName(modid + ":" + "CO");
+		Coraliumore = new BlockACOre(2, 3.0F, 6.0F).setBlockName("CO").setBlockTextureName(modid + ":" + "CO");
 		abyore = new BlockACOre(2, 3.0F, 6.0F).setBlockName("AO").setBlockTextureName(modid + ":" + "AO");
 		abyfence = new BlockACFence("ASBf", Material.rock, "pickaxe", 2).setHardness(1.8F).setResistance(12.0F).setStepSound(Block.soundTypeStone).setBlockName("ASBf").setBlockTextureName(modid + ":" + "ASBf");
 		DSCwall = new BlockDarkstonecobblewall(Darkstone_cobble).setHardness(1.65F).setResistance(12.0F).setStepSound(Block.soundTypeStone).setBlockName("DSCw").setBlockTextureName(modid + ":" + "DSC");
@@ -370,6 +374,7 @@ public class AbyssalCraft {
 		omotholportal = new BlockOmotholPortal().setBlockName("OG").setBlockTextureName(modid + ":" + "OG");
 		omotholfire = new BlockOmotholFire().setLightLevel(1.0F).setBlockName("Ofire");
 		engraver = new BlockEngraver().setHardness(2.5F).setResistance(12.0F).setStepSound(Block.soundTypeStone).setBlockName("engraver");
+		house = new BlockHouse().setHardness(1.0F).setResistance(Float.MAX_VALUE).setStepSound(Block.soundTypeWood).setBlockName("house");
 
 		//Biome
 		Darklands = new BiomeGenDarklands(configBiomeId1).setColor(522674).setBiomeName("Darklands");
@@ -391,7 +396,7 @@ public class AbyssalCraft {
 		devsword = new AbyssalCraftTool().setUnlocalizedName("DEV_BLADE").setTextureName(modid + ":" + "Sword");
 
 		//Misc items
-		OC = new ItemOC(255, 1F, false).setCreativeTab(AbyssalCraft.tabItems).setUnlocalizedName("OC").setTextureName(modid + ":" + "OC");
+		OC = new ItemOC().setCreativeTab(AbyssalCraft.tabItems).setUnlocalizedName("OC").setTextureName(modid + ":" + "OC");
 		Staff = new ItemStaff().setCreativeTab(AbyssalCraft.tabTools).setFull3D().setUnlocalizedName("SOTG").setTextureName(modid + ":" + "SOTG");
 		portalPlacer = new ItemPortalPlacer().setUnlocalizedName("GK").setTextureName(modid + ":" + "GK");
 		Cbucket = new ItemCBucket(Cwater).setCreativeTab(AbyssalCraft.tabItems).setContainerItem(Items.bucket).setUnlocalizedName("Cbucket").setTextureName(modid + ":" + "Cbucket");
@@ -418,8 +423,13 @@ public class AbyssalCraft {
 		engravingElder = new ItemEngraving("elder", 10).setCreativeTab(AbyssalCraft.tabCoins).setTextureName(modid + ":" + "engraving_elder");
 		engravingJzahar = new ItemEngraving("jzahar", 10).setCreativeTab(AbyssalCraft.tabCoins).setTextureName(modid + ":" + "engraving_jzahar");
 		shoggothFlesh = new ItemShoggothFlesh();
-		eldritchScale = new ItemACBasic("eldritchscale");
+		eldritchScale = new ItemACBasic("eldritchScale");
 		omotholFlesh = new ItemACBasic("omotholflesh");
+		necronomicon = new ItemNecronomicon("necronomicon");
+		necronomicon_cor = new ItemNecronomicon("necronomicon_cor");
+		necronomicon_dre = new ItemNecronomicon("necronomicon_dre");
+		necronomicon_omt = new ItemNecronomicon("necronomicon_omt");
+		abyssalnomicon = new ItemNecronomicon("abyssalnomicon");
 
 		//Ethaxium
 		ethaxium_brick = new ItemACBasic("EB");
@@ -432,7 +442,9 @@ public class AbyssalCraft {
 		antiPork = new ItemAntiFood("antiPork");
 		antiFlesh = new ItemAntiFood("antiFlesh");
 		antiBone = new ItemACBasic("antiBone");
-		antiSpider_eye = new ItemAntiFood("antiSpider_eye");
+		antiSpider_eye = new ItemAntiFood("antiSpider_eye", false);
+		antiCorflesh = new ItemCorflesh(0, 0, false, false).setCreativeTab(AbyssalCraft.tabFood).setUnlocalizedName("antiCF").setTextureName(modid + ":" + "antiCF");
+		antiCorbone = new ItemCorbone(0, 0, false, false).setCreativeTab(AbyssalCraft.tabFood).setUnlocalizedName("antiCB").setTextureName(modid + ":" + "antiCB");
 
 		//crystals
 		crystalIron = new ItemCrystal("crystalIron", 0xD9D9D9, "Fe");
@@ -497,8 +509,8 @@ public class AbyssalCraft {
 		Cplate = new ItemACBasic("CPP");
 		Coralium = new ItemACBasic("CG");
 		Corb = new ItemCorb().setCreativeTab(AbyssalCraft.tabTools).setUnlocalizedName("TG").setTextureName(modid + ":" + "TG");
-		Corflesh = new ItemCorflesh(2, 0.1F, false).setCreativeTab(AbyssalCraft.tabFood).setUnlocalizedName("CF").setTextureName(modid + ":" + "CF");
-		Corbone = new ItemCorbone(2, 0.1F, false).setCreativeTab(AbyssalCraft.tabFood).setUnlocalizedName("CB").setTextureName(modid + ":" + "CB");
+		Corflesh = new ItemCorflesh(2, 0.1F, false, false).setCreativeTab(AbyssalCraft.tabFood).setUnlocalizedName("CF").setTextureName(modid + ":" + "CF");
+		Corbone = new ItemCorbone(2, 0.1F, false, false).setCreativeTab(AbyssalCraft.tabFood).setUnlocalizedName("CB").setTextureName(modid + ":" + "CB");
 		corbow = new ItemCoraliumBow(20.0F, 0, 8, 16).setUnlocalizedName("Corbow").setTextureName(modid + ":" + "Corbow");
 
 		//Tools
@@ -750,6 +762,7 @@ public class AbyssalCraft {
 		GameRegistry.registerBlock(omotholportal, "omotholportal");
 		GameRegistry.registerBlock(omotholfire, "omotholfire");
 		GameRegistry.registerBlock(engraver, "engraver");
+		GameRegistry.registerBlock(house, "engraver_on");
 
 		//Item Register
 		GameRegistry.registerItem(devsword, "devsword");
@@ -931,11 +944,20 @@ public class AbyssalCraft {
 		GameRegistry.registerItem(engravingCthulhu, "engraving_cthulhu");
 		GameRegistry.registerItem(engravingElder, "engraving_elder");
 		GameRegistry.registerItem(engravingJzahar, "engraving_jzahar");
-		//		GameRegistry.registerItem(shoggothFlesh, "shoggothflesh");
 		GameRegistry.registerItem(eldritchScale, "eldritchscale");
-		//		GameRegistry.registerItem(omotholFlesh, "omotholflesh");
+		GameRegistry.registerItem(omotholFlesh, "omotholflesh");
+		GameRegistry.registerItem(antiCorflesh, "anticorflesh");
+		GameRegistry.registerItem(antiCorbone, "anticorbone");
+		GameRegistry.registerItem(necronomicon, "necronomicon");
+		GameRegistry.registerItem(necronomicon_cor, "necronomicon_cor");
+		GameRegistry.registerItem(necronomicon_dre, "necronomicon_dre");
+		GameRegistry.registerItem(necronomicon_omt, "necronomicon_omt");
+		GameRegistry.registerItem(abyssalnomicon, "abyssalnomicon");
+		//		GameRegistry.registerItem(shoggothFlesh, "shoggothflesh");
 		//		GameRegistry.registerItem(shadowPlate, "shadowplate");
 
+		CFluid.setBlock(Cwater);
+		antifluid.setBlock(anticwater);
 		FluidContainerRegistry.registerFluidContainer(FluidRegistry.getFluidStack(CFluid.getName(), FluidContainerRegistry.BUCKET_VOLUME), new ItemStack(Cbucket), new ItemStack(Items.bucket));
 		BucketHandler.INSTANCE.buckets.put(Cwater, Cbucket);
 		FluidContainerRegistry.registerFluidContainer(FluidRegistry.getFluidStack(antifluid.getName(), FluidContainerRegistry.BUCKET_VOLUME), new ItemStack(antibucket), new ItemStack(Items.bucket));
@@ -986,16 +1008,25 @@ public class AbyssalCraft {
 		if(coraliumspawn2 == true)
 			BiomeManager.addSpawnBiome(AbyssalCraft.corocean);
 
+		BiomeDictionary.registerBiomeType(Wastelands, Type.MAGICAL);
+		BiomeDictionary.registerBiomeType(Dreadlands, Type.MAGICAL);
+		BiomeDictionary.registerBiomeType(AbyDreadlands, Type.MAGICAL);
+		BiomeDictionary.registerBiomeType(MountainDreadlands, Type.MAGICAL);
+		BiomeDictionary.registerBiomeType(ForestDreadlands, Type.MAGICAL);
+		BiomeDictionary.registerBiomeType(omothol, Type.MAGICAL);
+		BiomeDictionary.registerBiomeType(darkRealm, Type.MAGICAL);
+
 		//Dimension
-		registerDimension(configDimId1, WorldProviderAbyss.class, true);
-		registerDimension(configDimId2, WorldProviderDreadlands.class, true);
-		registerDimension(configDimId3, WorldProviderOmothol.class, true);
-		registerDimension(configDimId4, WorldProviderDarkRealm.class, true);
+		registerDimension(configDimId1, WorldProviderAbyss.class, keepLoaded1);
+		registerDimension(configDimId2, WorldProviderDreadlands.class, keepLoaded2);
+		registerDimension(configDimId3, WorldProviderOmothol.class, keepLoaded3);
+		registerDimension(configDimId4, WorldProviderDarkRealm.class, keepLoaded4);
 
 		//Mobs
 		EntityRegistry.registerModEntity(EntityDepthsGhoul.class, "depthsghoul", 25, this, 80, 3, true);
-		EntityRegistry.addSpawn(EntityDepthsGhoul.class, 10, 1, 3, EnumCreatureType.monster, new BiomeGenBase[] {
-			BiomeGenBase.swampland, BiomeGenBase.ocean, BiomeGenBase.beach, BiomeGenBase.river});
+		EntityRegistry.addSpawn(EntityDepthsGhoul.class, 10, 1, 3, EnumCreatureType.monster, BiomeDictionary.getBiomesForType(Type.WATER));
+		EntityRegistry.addSpawn(EntityDepthsGhoul.class, 10, 1, 3, EnumCreatureType.monster, BiomeDictionary.getBiomesForType(Type.BEACH));
+		EntityRegistry.addSpawn(EntityDepthsGhoul.class, 10, 1, 3, EnumCreatureType.monster, BiomeDictionary.getBiomesForType(Type.SWAMP));
 		registerEntityEgg(EntityDepthsGhoul.class, 0x36A880, 0x012626, "depthsghoul");
 
 		EntityRegistry.registerModEntity(EntityEvilpig.class, "evilpig", 26, this, 80, 3, true);
@@ -1007,9 +1038,10 @@ public class AbyssalCraft {
 		registerEntityEgg(EntityEvilpig.class, 15771042, 14377823, "evilpig");
 
 		EntityRegistry.registerModEntity(EntityAbyssalZombie.class, "abyssalzombie", 27, this, 80, 3, true);
-		EntityRegistry.addSpawn(EntityAbyssalZombie.class, 10, 1, 3, EnumCreatureType.monster, new BiomeGenBase[] {
-			BiomeGenBase.ocean, BiomeGenBase.beach, BiomeGenBase.river, BiomeGenBase.jungle,
-			BiomeGenBase.swampland, BiomeGenBase.sky});
+		EntityRegistry.addSpawn(EntityAbyssalZombie.class, 10, 1, 3, EnumCreatureType.monster, BiomeDictionary.getBiomesForType(Type.WATER));
+		EntityRegistry.addSpawn(EntityAbyssalZombie.class, 10, 1, 3, EnumCreatureType.monster, BiomeDictionary.getBiomesForType(Type.BEACH));
+		EntityRegistry.addSpawn(EntityAbyssalZombie.class, 10, 1, 3, EnumCreatureType.monster, BiomeDictionary.getBiomesForType(Type.SWAMP));
+		EntityRegistry.addSpawn(EntityAbyssalZombie.class, 10, 1, 3, EnumCreatureType.monster, BiomeDictionary.getBiomesForType(Type.END));
 		registerEntityEgg(EntityAbyssalZombie.class, 0x36A880, 0x052824, "abyssalzombie");
 
 		EntityRegistry.registerModEntity(EntityODBPrimed.class, "Primed ODB", 28, this, 80, 3, true);
@@ -1107,20 +1139,22 @@ public class AbyssalCraft {
 		EntityRegistry.registerModEntity(EntityRemnant.class, "remnant", 59, this, 80, 3, true);
 		registerEntityEgg(EntityRemnant.class, 0x133133, 0x342122, "remnant");
 
-		//		EntityRegistry.registerModEntity(EntityLesserShoggoth.class, "lessershoggoth", 60, this, 80, 3, true);
-		//		registerEntityEgg(EntityLesserShoggoth.class, 0x133133, 0x342122);
+		EntityRegistry.registerModEntity(EntityOmotholGhoul.class, "omotholghoul", 60, this, 80, 3, true);
+		registerEntityEgg(EntityOmotholGhoul.class, 0x133133, 0x342122, "omotholghoul");
+
+		EntityRegistry.registerModEntity(EntityCoraliumArrow.class, "CoraliumArrow", 61, this, 64, 10, true);
+
+		//		EntityRegistry.registerModEntity(EntityLesserShoggoth.class, "lessershoggoth", 62, this, 80, 3, true);
+		//		registerEntityEgg(EntityLesserShoggoth.class, 0x133133, 0x342122, "lessershoggoth");
 		//
-		//		EntityRegistry.registerModEntity(EntityShadowTitan.class, "shadowtitan", 61, this, 80, 3, true);
-		//		registerEntityEgg(EntityShadowTitan.class, 0, 0xFFFFFF);
+		//		EntityRegistry.registerModEntity(EntityShadowTitan.class, "shadowtitan", 63, this, 80, 3, true);
+		//		registerEntityEgg(EntityShadowTitan.class, 0, 0xFFFFFF, "shadowtitan");
 		//
-		//		EntityRegistry.registerModEntity(EntityOmotholWarden.class, "omotholwarden", 62, this, 80, 3, true);
-		//		registerEntityEgg(EntityOmotholWarden.class, 0x133133, 0x342122);
+		//		EntityRegistry.registerModEntity(EntityOmotholWarden.class, "omotholwarden", 64, this, 80, 3, true);
+		//		registerEntityEgg(EntityOmotholWarden.class, 0x133133, 0x342122, "omotholwarden");
 		//
-		//		EntityRegistry.registerModEntity(EntityGatekeeperMinion.class, "jzaharminion", 63, this, 80, 3, true);
-		//		registerEntityEgg(EntityGatekeeperMinion.class, 0x133133, 0x342122);
-		//
-		//		EntityRegistry.registerModEntity(EntityOmotholGhoul.class, "omotholghoul", 64, this, 80, 3, true);
-		//		registerEntityEgg(EntityOmotholGhoul.class, 0x133133, 0x342122);
+		//		EntityRegistry.registerModEntity(EntityGatekeeperMinion.class, "jzaharminion", 65, this, 80, 3, true);
+		//		registerEntityEgg(EntityGatekeeperMinion.class, 0x133133, 0x342122, "jzaharminion");
 
 		proxy.addArmor("Abyssalnite");
 		proxy.addArmor("AbyssalniteC");
@@ -1134,6 +1168,8 @@ public class AbyssalCraft {
 
 		addOreDictionaryStuff();
 		addChestGenHooks();
+		addDungeonHooks();
+		sendIMC();
 	}
 
 	@EventHandler
@@ -1195,6 +1231,51 @@ public class AbyssalCraft {
 		ACLogger.info("AbyssalCraft loaded.");
 	}
 
+	@SuppressWarnings("unchecked")
+	@EventHandler
+	public void handleIMC(FMLInterModComms.IMCEvent event){
+
+		List<String> senders = new ArrayList<String>();
+		for (final FMLInterModComms.IMCMessage imcMessage : event.getMessages())
+			if(imcMessage.key.equalsIgnoreCase("shoggothFood"))
+				try {
+					AbyssalCraftAPI.addShoggothFood((Class<? extends EntityLivingBase>)Class.forName(imcMessage.getStringValue()));
+					ACLogger.info("Received Shoggoth Food addition %s from mod %s", imcMessage.getStringValue(), imcMessage.getSender());
+					if(!senders.contains(imcMessage.getSender()))
+						senders.add(imcMessage.getSender());
+				} catch (ClassNotFoundException e) {
+					ACLogger.severe("Could not find class %s", imcMessage.getStringValue());
+				}
+			else if(imcMessage.key.equalsIgnoreCase("registerTransmutatorFuel"))
+				try {
+					AbyssalCraftAPI.registerFuelHandler((IFuelHandler)Class.forName(imcMessage.getStringValue()).newInstance(), FuelType.TRANSMUTATOR);
+					ACLogger.info("Recieved Transmutator fuel handler %s from mod %s", imcMessage.getStringValue(), imcMessage.getSender());
+					if(!senders.contains(imcMessage.getSender()))
+						senders.add(imcMessage.getSender());
+				} catch (InstantiationException e) {
+					ACLogger.severe("Could not create a instance of class %s (not a IFuelHandler?)", imcMessage.getStringValue());
+				} catch (IllegalAccessException e) {
+					ACLogger.severe("Unable to access class %s", imcMessage.getStringValue());
+				} catch (ClassNotFoundException e) {
+					ACLogger.severe("Could not find class %s", imcMessage.getStringValue());
+				}
+			else if(imcMessage.key.equalsIgnoreCase("registerCrystallizerFuel"))
+				try {
+					AbyssalCraftAPI.registerFuelHandler((IFuelHandler)Class.forName(imcMessage.getStringValue()).newInstance(), FuelType.CRYSTALLIZER);
+					ACLogger.info("Recieved Crystallizer fuel handler %s from mod %s", imcMessage.getStringValue(), imcMessage.getSender());
+					if(!senders.contains(imcMessage.getSender()))
+						senders.add(imcMessage.getSender());
+				} catch (InstantiationException e) {
+					ACLogger.severe("Could not create a instance of class %s (not a IFuelHandler?)", imcMessage.getStringValue());
+				} catch (IllegalAccessException e) {
+					ACLogger.severe("Unable to access class %s", imcMessage.getStringValue());
+				} catch (ClassNotFoundException e) {
+					ACLogger.severe("Could not find class %s", imcMessage.getStringValue());
+				}
+		if(!senders.isEmpty())
+			ACLogger.info("Recieved messages from the following mods: %s", senders);
+	}
+
 	@SubscribeEvent
 	public void onConfigChanged(ConfigChangedEvent.OnConfigChangedEvent eventArgs) {
 		if(eventArgs.modID.equals("abyssalcraft"))
@@ -1207,6 +1288,11 @@ public class AbyssalCraft {
 		configDimId2 = cfg.get("dimensions", "The Dreadlands", 51, "The second dimension, infested with mutated monsters.").getInt();
 		configDimId3 = cfg.get("dimensions", "Omothol", 52, "The third dimension, also known as \u00A7oThe Realm of J'zahar\u00A7r.").getInt();
 		configDimId4 = cfg.get("dimensions", "The Dark Realm", 53, "Hidden fourth dimension, reached by falling down from Omothol").getInt();
+
+		keepLoaded1 = cfg.get("dimensions", "Prevent unloading: The Abyssal Wasteland", false, "Set true to prevent The Abyssal Wasteland from automatically unloading (might affect performance)").getBoolean();
+		keepLoaded2 = cfg.get("dimensions", "Prevent unloading: The Dreadlands", false, "Set true to prevent The Dreadlands from automatically unloading (might affect performance)").getBoolean();
+		keepLoaded3 = cfg.get("dimensions", "Prevent unloading: Omothol", false, "Set true to prevent Omothol from automatically unloading (might affect performance)").getBoolean();
+		keepLoaded4 = cfg.get("dimensions", "Prevent unloading: The Dark Realm", false, "Set true to prevent The Dark Realm from automatically unloading (might affect performance)").getBoolean();
 
 		configBiomeId1 = cfg.get("biomes", "Darklands", 100, "Dark biome that contains Abyssalnite", 0, 255).getInt();
 		configBiomeId2 = cfg.get("biomes", "Abyssal Wasteland", 101, "Abyssal Wasteland biome, contains large quantities of Coralium", 0, 255).getInt();
@@ -1263,9 +1349,6 @@ public class AbyssalCraft {
 		AbyssalCraftAPI.potionId1 = cfg.get("potions", "Coralium Plague", 100, "The Coralium Plague potion effect.", 0, 150).getInt();
 		AbyssalCraftAPI.potionId2 = cfg.get("potions", "Dread Plague", 101, "The Dread Plague potion effect.", 0, 150).getInt();
 		AbyssalCraftAPI.potionId3 = cfg.get("potions", "Antimatter", 102, "The Antimatter potion effect.", 0, 150).getInt();
-
-		canRenderStarspawn = cfg.get("render", "RenderPlayer Override", true, "Whether or not to override the player model"
-				+ "(set false for compatibility with other mods that alters the player model)").getBoolean();
 
 		if(cfg.hasChanged())
 			cfg.save();
@@ -1397,6 +1480,94 @@ public class AbyssalCraft {
 		ChestGenHooks.addItem(ChestGenHooks.DUNGEON_CHEST, new WeightedRandomChestContent(new ItemStack(AbyssalCraft.Coralium), 1, 5, 8));
 	}
 
+	private void addDungeonHooks(){
+		DungeonHooks.addDungeonMob("abyssalzombie", 150);
+		DungeonHooks.addDungeonMob("depthsghoul", 100);
+		DungeonHooks.addDungeonMob("shadowcreature", 120);
+		DungeonHooks.addDungeonMob("shadowmonster", 100);
+		DungeonHooks.addDungeonMob("shadowbeast", 30);
+		DungeonHooks.addDungeonMob("antiabyssalzombie", 50);
+		DungeonHooks.addDungeonMob("antighoul", 50);
+		DungeonHooks.addDungeonMob("antiskeleton", 50);
+		DungeonHooks.addDungeonMob("antispider", 50);
+		DungeonHooks.addDungeonMob("antizombie", 50);
+	}
+
+	private void sendIMC(){
+		FMLInterModComms.sendMessage("arsmagica2", "dbs", "am2.entities.EntityDryad|"+ String.valueOf(configDimId1));
+		FMLInterModComms.sendMessage("arsmagica2", "dbs", "am2.entities.EntityDryad|"+ String.valueOf(configDimId2));
+		FMLInterModComms.sendMessage("arsmagica2", "dbs", "am2.entities.EntityDryad|"+ String.valueOf(configDimId3));
+		FMLInterModComms.sendMessage("arsmagica2", "dbs", "am2.entities.EntityDryad|"+ String.valueOf(configDimId4));
+		FMLInterModComms.sendMessage("arsmagica2", "dbs", "am2.entities.EntityManaElemental|"+ String.valueOf(configDimId1));
+		FMLInterModComms.sendMessage("arsmagica2", "dbs", "am2.entities.EntityManaElemental|"+ String.valueOf(configDimId2));
+		FMLInterModComms.sendMessage("arsmagica2", "dbs", "am2.entities.EntityManaElemental|"+ String.valueOf(configDimId3));
+		FMLInterModComms.sendMessage("arsmagica2", "dbs", "am2.entities.EntityManaElemental|"+ String.valueOf(configDimId4));
+		FMLInterModComms.sendMessage("BuildCraft|Core", "blacklist-facade", new ItemStack(AbyssalCraft.abyslab1));
+		FMLInterModComms.sendMessage("BuildCraft|Core", "blacklist-facade", new ItemStack(AbyssalCraft.abyslab2));
+		FMLInterModComms.sendMessage("BuildCraft|Core", "blacklist-facade", new ItemStack(AbyssalCraft.Darkstoneslab1));
+		FMLInterModComms.sendMessage("BuildCraft|Core", "blacklist-facade", new ItemStack(AbyssalCraft.Darkstoneslab2));
+		FMLInterModComms.sendMessage("BuildCraft|Core", "blacklist-facade", new ItemStack(AbyssalCraft.Darkcobbleslab1));
+		FMLInterModComms.sendMessage("BuildCraft|Core", "blacklist-facade", new ItemStack(AbyssalCraft.Darkcobbleslab2));
+		FMLInterModComms.sendMessage("BuildCraft|Core", "blacklist-facade", new ItemStack(AbyssalCraft.Darkbrickslab1));
+		FMLInterModComms.sendMessage("BuildCraft|Core", "blacklist-facade", new ItemStack(AbyssalCraft.Darkbrickslab2));
+		FMLInterModComms.sendMessage("BuildCraft|Core", "blacklist-facade", new ItemStack(AbyssalCraft.DLTslab1));
+		FMLInterModComms.sendMessage("BuildCraft|Core", "blacklist-facade", new ItemStack(AbyssalCraft.DLTslab2));
+		FMLInterModComms.sendMessage("BuildCraft|Core", "blacklist-facade", new ItemStack(AbyssalCraft.abydreadbrickslab1));
+		FMLInterModComms.sendMessage("BuildCraft|Core", "blacklist-facade", new ItemStack(AbyssalCraft.abydreadbrickslab2));
+		FMLInterModComms.sendMessage("BuildCraft|Core", "blacklist-facade", new ItemStack(AbyssalCraft.dreadbrickslab1));
+		FMLInterModComms.sendMessage("BuildCraft|Core", "blacklist-facade", new ItemStack(AbyssalCraft.dreadbrickslab2));
+		FMLInterModComms.sendMessage("BuildCraft|Core", "blacklist-facade", new ItemStack(AbyssalCraft.cstonebrickslab1));
+		FMLInterModComms.sendMessage("BuildCraft|Core", "blacklist-facade", new ItemStack(AbyssalCraft.cstonebrickslab2));
+		FMLInterModComms.sendMessage("BuildCraft|Core", "blacklist-facade", new ItemStack(AbyssalCraft.ethaxiumslab1));
+		FMLInterModComms.sendMessage("BuildCraft|Core", "blacklist-facade", new ItemStack(AbyssalCraft.ethaxiumslab2));
+		FMLInterModComms.sendMessage("BuildCraft|Core", "blacklist-facade", new ItemStack(AbyssalCraft.portal));
+		FMLInterModComms.sendMessage("BuildCraft|Core", "blacklist-facade", new ItemStack(AbyssalCraft.dreadportal));
+		FMLInterModComms.sendMessage("BuildCraft|Core", "blacklist-facade", new ItemStack(AbyssalCraft.omotholportal));
+		FMLInterModComms.sendMessage("BuildCraft|Core", "blacklist-facade", new ItemStack(AbyssalCraft.Coraliumfire));
+		FMLInterModComms.sendMessage("BuildCraft|Core", "blacklist-facade", new ItemStack(AbyssalCraft.dreadfire));
+		FMLInterModComms.sendMessage("BuildCraft|Core", "blacklist-facade", new ItemStack(AbyssalCraft.omotholfire));
+		FMLInterModComms.sendMessage("BuildCraft|Core", "blacklist-facade", new ItemStack(AbyssalCraft.transmutator_on));
+		FMLInterModComms.sendMessage("BuildCraft|Core", "blacklist-facade", new ItemStack(AbyssalCraft.crystallizer_on));
+		FMLInterModComms.sendMessage("BuildCraft|Core", "blacklist-facade", new ItemStack(AbyssalCraft.engraver));
+		FMLInterModComms.sendMessage("BuildCraft|Core", "blacklist-facade", new ItemStack(AbyssalCraft.ODB));
+		FMLInterModComms.sendMessage("BuildCraft|Core", "blacklist-facade", new ItemStack(AbyssalCraft.ODBcore));
+		FMLInterModComms.sendMessage("BuildCraft|Core", "blacklist-facade", new ItemStack(AbyssalCraft.DSBfence));
+		FMLInterModComms.sendMessage("BuildCraft|Core", "blacklist-facade", new ItemStack(AbyssalCraft.DSCwall));
+		FMLInterModComms.sendMessage("BuildCraft|Core", "blacklist-facade", new ItemStack(AbyssalCraft.abyfence));
+		FMLInterModComms.sendMessage("BuildCraft|Core", "blacklist-facade", new ItemStack(AbyssalCraft.DLTfence));
+		FMLInterModComms.sendMessage("BuildCraft|Core", "blacklist-facade", new ItemStack(AbyssalCraft.abydreadbrickfence));
+		FMLInterModComms.sendMessage("BuildCraft|Core", "blacklist-facade", new ItemStack(AbyssalCraft.dreadbrickfence));
+		FMLInterModComms.sendMessage("BuildCraft|Core", "blacklist-facade", new ItemStack(AbyssalCraft.cstonebrickfence));
+		FMLInterModComms.sendMessage("BuildCraft|Core", "blacklist-facade", new ItemStack(AbyssalCraft.ethaxiumfence));
+		FMLInterModComms.sendMessage("BuildCraft|Core", "blacklist-facade", new ItemStack(AbyssalCraft.DrTfence));
+		FMLInterModComms.sendMessage("BuildCraft|Core", "blacklist-facade", new ItemStack(AbyssalCraft.abystairs));
+		FMLInterModComms.sendMessage("BuildCraft|Core", "blacklist-facade", new ItemStack(AbyssalCraft.DBstairs));
+		FMLInterModComms.sendMessage("BuildCraft|Core", "blacklist-facade", new ItemStack(AbyssalCraft.DCstairs));
+		FMLInterModComms.sendMessage("BuildCraft|Core", "blacklist-facade", new ItemStack(AbyssalCraft.DLTstairs));
+		FMLInterModComms.sendMessage("BuildCraft|Core", "blacklist-facade", new ItemStack(AbyssalCraft.abydreadbrickstairs));
+		FMLInterModComms.sendMessage("BuildCraft|Core", "blacklist-facade", new ItemStack(AbyssalCraft.dreadbrickstairs));
+		FMLInterModComms.sendMessage("BuildCraft|Core", "blacklist-facade", new ItemStack(AbyssalCraft.cstonebrickstairs));
+		FMLInterModComms.sendMessage("BuildCraft|Core", "blacklist-facade", new ItemStack(AbyssalCraft.ethaxiumstairs));
+		FMLInterModComms.sendMessage("BuildCraft|Core", "blacklist-facade", new ItemStack(AbyssalCraft.Abybutton));
+		FMLInterModComms.sendMessage("BuildCraft|Core", "blacklist-facade", new ItemStack(AbyssalCraft.DSbutton));
+		FMLInterModComms.sendMessage("BuildCraft|Core", "blacklist-facade", new ItemStack(AbyssalCraft.DLTbutton));
+		FMLInterModComms.sendMessage("BuildCraft|Core", "blacklist-facade", new ItemStack(AbyssalCraft.cstonebutton));
+		FMLInterModComms.sendMessage("BuildCraft|Core", "blacklist-facade", new ItemStack(AbyssalCraft.Abypplate));
+		FMLInterModComms.sendMessage("BuildCraft|Core", "blacklist-facade", new ItemStack(AbyssalCraft.DSpplate));
+		FMLInterModComms.sendMessage("BuildCraft|Core", "blacklist-facade", new ItemStack(AbyssalCraft.DLTpplate));
+		FMLInterModComms.sendMessage("BuildCraft|Core", "blacklist-facade", new ItemStack(AbyssalCraft.cstonepplate));
+		FMLInterModComms.sendMessage("BuildCraft|Core", "blacklist-facade", new ItemStack(AbyssalCraft.Altar));
+		FMLInterModComms.sendMessage("BuildCraft|Core", "blacklist-facade", new ItemStack(AbyssalCraft.dreadaltartop));
+		FMLInterModComms.sendMessage("BuildCraft|Core", "blacklist-facade", new ItemStack(AbyssalCraft.dreadaltarbottom));
+		FMLInterModComms.sendMessage("BuildCraft|Core", "blacklist-facade", new ItemStack(AbyssalCraft.PSDL));
+		FMLInterModComms.sendMessage("BuildCraft|Core", "blacklist-facade", new ItemStack(AbyssalCraft.DGhead));
+		FMLInterModComms.sendMessage("BuildCraft|Core", "blacklist-facade", new ItemStack(AbyssalCraft.Phead));
+		FMLInterModComms.sendMessage("BuildCraft|Core", "blacklist-facade", new ItemStack(AbyssalCraft.Whead));
+		FMLInterModComms.sendMessage("BuildCraft|Core", "blacklist-facade", new ItemStack(AbyssalCraft.Ohead));
+		FMLInterModComms.sendMessage("BuildCraft|Core", "blacklist-facade", new ItemStack(AbyssalCraft.DLTSapling));
+		FMLInterModComms.sendMessage("BuildCraft|Core", "blacklist-facade", new ItemStack(AbyssalCraft.dreadsapling));
+	}
+
 	private void registerVanillaSalvage(){
 
 		SalvageHandler.INSTANCE.addBootsSalvage(Items.leather_boots, Items.leather);
@@ -1462,7 +1633,7 @@ public class AbyssalCraft {
 				Thread.sleep(10000L);
 
 				if(isUpdateAvailable()) {
-					if(!hasPinged && version.lastIndexOf("a") == 8 || !hasPinged && version.lastIndexOf("b") == 8){
+					if(!hasPinged && version.length() > 7){
 						hasPinged = true;
 						updateProxy.announce("[\u00A79AbyssalCraft\u00A7r] Using a development version, not checking for newer versions. (\u00A7b"+ version + "\u00A7r)");
 					}

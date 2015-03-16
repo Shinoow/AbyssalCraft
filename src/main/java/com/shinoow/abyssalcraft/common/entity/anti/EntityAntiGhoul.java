@@ -33,11 +33,14 @@ import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
+import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
+import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
 import com.shinoow.abyssalcraft.api.entity.IAntiEntity;
 import com.shinoow.abyssalcraft.common.entity.EntityDepthsGhoul;
+import com.shinoow.abyssalcraft.common.entity.EntityOmotholGhoul;
 
 public class EntityAntiGhoul extends EntityMob implements IAntiEntity {
 
@@ -106,7 +109,7 @@ public class EntityAntiGhoul extends EntityMob implements IAntiEntity {
 	@Override
 	protected Item getDropItem()
 	{
-		return AbyssalCraft.antiFlesh;
+		return AbyssalCraft.antiCorbone;
 	}
 
 	@Override
@@ -141,6 +144,20 @@ public class EntityAntiGhoul extends EntityMob implements IAntiEntity {
 			setDead();
 		}
 		else par1Entity.applyEntityCollision(this);
+	}
+
+	@Override
+	public void onDeath(DamageSource par1DamageSource) {
+
+		super.onDeath(par1DamageSource);
+
+		if(par1DamageSource == AbyssalCraftAPI.coralium || par1DamageSource == AbyssalCraftAPI.dread){
+			EntityOmotholGhoul entity = new EntityOmotholGhoul(worldObj);
+			entity.copyLocationAndAnglesFrom(this);
+			worldObj.removeEntity(this);
+			entity.onSpawnWithEgg((IEntityLivingData)null);
+			worldObj.spawnEntityInWorld(entity);
+		}
 	}
 
 	@Override

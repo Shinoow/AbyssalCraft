@@ -27,11 +27,15 @@ import com.shinoow.abyssalcraft.AbyssalCraft;
 
 public class ItemAntiFood extends ItemFood {
 
-	public ItemAntiFood(String par1) {
-		super(0, 0, true);
+	public ItemAntiFood(String par1, boolean par2) {
+		super(0, 0, par2);
 		setUnlocalizedName(par1);
 		setTextureName("abyssalcraft:" + par1);
 		setCreativeTab(AbyssalCraft.tabFood);
+	}
+
+	public ItemAntiFood(String par1) {
+		this(par1, true);
 	}
 
 	@Override
