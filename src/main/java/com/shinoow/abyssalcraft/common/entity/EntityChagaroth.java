@@ -135,7 +135,7 @@ public class EntityChagaroth extends EntityMob implements IBossDisplayData, IDre
 	public void onLivingUpdate()
 	{
 		EntityPlayer player = worldObj.getClosestPlayerToEntity(this, 32D);
-		if(!worldObj.isRemote && deathTicks == 200){
+		if(!worldObj.isRemote && deathTicks == 0){
 			if(rand.nextInt(100) == 0 && player != null){
 				EntityChagarothSpawn mob = new EntityChagarothSpawn(worldObj);
 				mob.copyLocationAndAnglesFrom(player);

@@ -163,8 +163,11 @@ public class AbyssalCraftEventHooks {
 						player.worldObj.getBiomeGenForCoords((int)player.posX, (int)player.posZ) == AbyssalCraft.DarklandsHills ||
 						player.worldObj.getBiomeGenForCoords((int)player.posX, (int)player.posZ) == AbyssalCraft.DarklandsForest)
 					if(rand.nextInt(1000) == 0)
-						if(helmet != null && helmet.getItem() == AbyssalCraft.helmet || player.capabilities.isCreativeMode){}
-						else player.addPotionEffect(new PotionEffect(Potion.blindness.id, 100));
+						if(helmet == null || helmet != null && helmet.getItem() != AbyssalCraft.helmet)
+							if(!player.capabilities.isCreativeMode)
+								player.addPotionEffect(new PotionEffect(Potion.blindness.id, 100));
+				if(player.getActivePotionEffect(Potion.blindness) != null && player.getActivePotionEffect(Potion.blindness).getDuration() == 0)
+					player.removePotionEffect(Potion.blindness.id);
 			}
 	}
 

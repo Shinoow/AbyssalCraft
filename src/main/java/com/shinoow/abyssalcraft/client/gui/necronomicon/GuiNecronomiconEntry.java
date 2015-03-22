@@ -157,38 +157,40 @@ public class GuiNecronomiconEntry extends GuiNecronomicon {
 				break;
 			}
 			if(currnTurnup == 0){
+				if(page.getPages().length > 1)
+					writeText(2, page.getPages()[1]);
 				switch(page.getPageType()){
 				case NORMAL:
 					writeText(1, page.getPages()[0]);
 					break;
 				case ENTRY:
 					if(icons != null && icons[0] != null){
+						writeText(1, page.getPages()[0], 50);
 						itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), (ItemStack)icons[0], k + 60, b0 + 28);
 						RenderHelper.disableStandardItemLighting();
-						writeText(1, page.getPages()[0], 50);
 					} else writeText(1, page.getPages()[0]);
 					break;
 				case INFO:
 					if(icons != null && icons[0] != null){
+						writeText(1, page.getPages()[0], 100);
 						GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 						mc.renderEngine.bindTexture((ResourceLocation)icons[0]);
 						drawTexturedModalRect(k, b0, 0, 0, 256, 256);
-						writeText(1, page.getPages()[0], 100);
 					} else writeText(1, page.getPages()[0]);
 					break;
 				}
-				if(page.getPages().length > 1)
-					writeText(2, page.getPages()[1]);
 			} else if(currnTurnup == 1 && page.getPageAmount() >= 2){
+				if(page.getPages().length > 3)
+					writeText(2, page.getPages()[3]);
 				switch(page.getPageType()){
 				case NORMAL:
 					writeText(1, page.getPages()[2]);
 					break;
 				case ENTRY:
 					if(icons != null && icons[1] != null){
+						writeText(1, page.getPages()[2], 50);
 						itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), (ItemStack)icons[1], k + 60, b0 + 28);
 						RenderHelper.disableStandardItemLighting();
-						writeText(1, page.getPages()[2], 50);
 					} else writeText(1, page.getPages()[2]);
 					break;
 				case INFO:
@@ -200,18 +202,18 @@ public class GuiNecronomiconEntry extends GuiNecronomicon {
 					} else writeText(1, page.getPages()[2]);
 					break;
 				}
-				if(page.getPages().length > 3)
-					writeText(2, page.getPages()[3]);
 			} else if(currnTurnup == 2 && page.getPageAmount() >= 3){
+				if(page.getPages().length > 5)
+					writeText(2, page.getPages()[5]);
 				switch(page.getPageType()){
 				case NORMAL:
 					writeText(1, page.getPages()[4]);
 					break;
 				case ENTRY:
 					if(icons != null && icons[2] != null){
+						writeText(1, page.getPages()[4], 50);
 						itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), (ItemStack)icons[2], k + 60, b0 + 28);
 						RenderHelper.disableStandardItemLighting();
-						writeText(1, page.getPages()[4], 50);
 					} else writeText(1, page.getPages()[4]);
 					break;
 				case INFO:
@@ -223,18 +225,18 @@ public class GuiNecronomiconEntry extends GuiNecronomicon {
 					} else writeText(1, page.getPages()[4]);
 					break;
 				}
-				if(page.getPages().length > 5)
-					writeText(2, page.getPages()[5]);
 			} else if(currnTurnup == 3 && page.getPageAmount() >= 4){
+				if(page.getPages().length > 7)
+					writeText(2, page.getPages()[7]);
 				switch(page.getPageType()){
 				case NORMAL:
 					writeText(1, page.getPages()[6]);
 					break;
 				case ENTRY:
 					if(icons != null && icons[3] != null){
+						writeText(1, page.getPages()[6], 50);
 						itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), (ItemStack)icons[3], k + 60, b0 + 28);
 						RenderHelper.disableStandardItemLighting();
-						writeText(1, page.getPages()[6], 50);
 					} else writeText(1, page.getPages()[6]);
 					break;
 				case INFO:
@@ -246,18 +248,18 @@ public class GuiNecronomiconEntry extends GuiNecronomicon {
 					} else writeText(1, page.getPages()[6]);
 					break;
 				}
-				if(page.getPages().length > 7)
-					writeText(2, page.getPages()[7]);
 			} else if(currnTurnup == 4 && page.getPageAmount() >= 5){
+				if(page.getPages().length > 9)
+					writeText(2, page.getPages()[9]);
 				switch(page.getPageType()){
 				case NORMAL:
 					writeText(1, page.getPages()[8]);
 					break;
 				case ENTRY:
 					if(icons != null && icons[4] != null){
+						writeText(1, page.getPages()[8], 50);
 						itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), (ItemStack)icons[4], k + 60, b0 + 28);
 						RenderHelper.disableStandardItemLighting();
-						writeText(1, page.getPages()[8], 50);
 					} else writeText(1, page.getPages()[8]);
 					break;
 				case INFO:
@@ -269,18 +271,18 @@ public class GuiNecronomiconEntry extends GuiNecronomicon {
 					} else writeText(1, page.getPages()[8]);
 					break;
 				}
-				if(page.getPages().length > 9)
-					writeText(2, page.getPages()[9]);
 			} else if(currnTurnup == 5 && page.getPageAmount() >= 6){
+				if(page.getPages().length > 11)
+					writeText(2, page.getPages()[11]);
 				switch(page.getPageType()){
 				case NORMAL:
 					writeText(1, page.getPages()[10]);
 					break;
 				case ENTRY:
 					if(icons != null && icons[5] != null){
+						writeText(1, page.getPages()[10], 50);
 						itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), (ItemStack)icons[5], k + 60, b0 + 28);
 						RenderHelper.disableStandardItemLighting();
-						writeText(1, page.getPages()[10], 50);
 					} else writeText(1, page.getPages()[10]);
 					break;
 				case INFO:
@@ -292,18 +294,18 @@ public class GuiNecronomiconEntry extends GuiNecronomicon {
 					} else writeText(1, page.getPages()[10]);
 					break;
 				}
-				if(page.getPages().length > 11)
-					writeText(2, page.getPages()[11]);
 			} else if(currnTurnup == 6 && page.getPageAmount() >= 7){
+				if(page.getPages().length > 13)
+					writeText(2, page.getPages()[13]);
 				switch(page.getPageType()){
 				case NORMAL:
 					writeText(1, page.getPages()[12]);
 					break;
 				case ENTRY:
 					if(icons != null && icons[6] != null){
+						writeText(1, page.getPages()[12], 50);
 						itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), (ItemStack)icons[6], k + 60, b0 + 28);
 						RenderHelper.disableStandardItemLighting();
-						writeText(1, page.getPages()[12], 50);
 					} else writeText(1, page.getPages()[12]);
 					break;
 				case INFO:
@@ -315,18 +317,18 @@ public class GuiNecronomiconEntry extends GuiNecronomicon {
 					} else writeText(1, page.getPages()[12]);
 					break;
 				}
-				if(page.getPages().length > 13)
-					writeText(2, page.getPages()[13]);
 			} else if(currnTurnup == 7 && page.getPageAmount() >= 8){
+				if(page.getPages().length > 15)
+					writeText(2, page.getPages()[15]);
 				switch(page.getPageType()){
 				case NORMAL:
 					writeText(1, page.getPages()[14]);
 					break;
 				case ENTRY:
 					if(icons != null && icons[7] != null){
+						writeText(1, page.getPages()[14], 50);
 						itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), (ItemStack)icons[7], k + 60, b0 + 28);
 						RenderHelper.disableStandardItemLighting();
-						writeText(1, page.getPages()[14], 50);
 					} else writeText(1, page.getPages()[14]);
 					break;
 				case INFO:
@@ -338,18 +340,18 @@ public class GuiNecronomiconEntry extends GuiNecronomicon {
 					} else writeText(1, page.getPages()[14]);
 					break;
 				}
-				if(page.getPages().length > 15)
-					writeText(2, page.getPages()[15]);
 			} else if(currnTurnup == 8 && page.getPageAmount() >= 9){
+				if(page.getPages().length > 17)
+					writeText(2, page.getPages()[17]);
 				switch(page.getPageType()){
 				case NORMAL:
 					writeText(1, page.getPages()[16]);
 					break;
 				case ENTRY:
 					if(icons != null && icons[8] != null){
+						writeText(1, page.getPages()[16], 50);
 						itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), (ItemStack)icons[8], k + 60, b0 + 28);
 						RenderHelper.disableStandardItemLighting();
-						writeText(1, page.getPages()[16], 50);
 					} else writeText(1, page.getPages()[16]);
 					break;
 				case INFO:
@@ -361,18 +363,18 @@ public class GuiNecronomiconEntry extends GuiNecronomicon {
 					} else writeText(1, page.getPages()[16]);
 					break;
 				}
-				if(page.getPages().length > 17)
-					writeText(2, page.getPages()[17]);
 			} else if(currnTurnup == 9 && page.getPageAmount() >= 10){
+				if(page.getPages().length > 19)
+					writeText(2, page.getPages()[19]);
 				switch(page.getPageType()){
 				case NORMAL:
 					writeText(1, page.getPages()[18]);
 					break;
 				case ENTRY:
 					if(icons != null && icons[9] != null){
+						writeText(1, page.getPages()[18], 50);
 						itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), (ItemStack)icons[9], k + 60, b0 + 28);
 						RenderHelper.disableStandardItemLighting();
-						writeText(1, page.getPages()[18], 50);
 					} else writeText(1, page.getPages()[18]);
 					break;
 				case INFO:
@@ -384,8 +386,6 @@ public class GuiNecronomiconEntry extends GuiNecronomicon {
 					} else writeText(1, page.getPages()[18]);
 					break;
 				}
-				if(page.getPages().length > 19)
-					writeText(2, page.getPages()[19]);
 			}
 		} else if(bool2){
 			page = data.getPageData()[1];
@@ -403,38 +403,40 @@ public class GuiNecronomiconEntry extends GuiNecronomicon {
 				break;
 			}
 			if(currnTurnup == 0){
+				if(page.getPages().length > 1)
+					writeText(2, page.getPages()[1]);
 				switch(page.getPageType()){
 				case NORMAL:
 					writeText(1, page.getPages()[0]);
 					break;
 				case ENTRY:
 					if(icons != null && icons[0] != null){
+						writeText(1, page.getPages()[0], 50);
 						itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), (ItemStack)icons[0], k + 60, b0 + 28);
 						RenderHelper.disableStandardItemLighting();
-						writeText(1, page.getPages()[0], 50);
 					} else writeText(1, page.getPages()[0]);
 					break;
 				case INFO:
 					if(icons != null && icons[0] != null){
+						writeText(1, page.getPages()[0], 100);
 						GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 						mc.renderEngine.bindTexture((ResourceLocation)icons[0]);
 						drawTexturedModalRect(k, b0, 0, 0, 256, 256);
-						writeText(1, page.getPages()[0], 100);
 					} else writeText(1, page.getPages()[0]);
 					break;
 				}
-				if(page.getPages().length > 1)
-					writeText(2, page.getPages()[1]);
 			} else if(currnTurnup == 1 && page.getPageAmount() >= 2){
+				if(page.getPages().length > 3)
+					writeText(2, page.getPages()[3]);
 				switch(page.getPageType()){
 				case NORMAL:
 					writeText(1, page.getPages()[2]);
 					break;
 				case ENTRY:
 					if(icons != null && icons[1] != null){
+						writeText(1, page.getPages()[2], 50);
 						itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), (ItemStack)icons[1], k + 60, b0 + 28);
 						RenderHelper.disableStandardItemLighting();
-						writeText(1, page.getPages()[2], 50);
 					} else writeText(1, page.getPages()[2]);
 					break;
 				case INFO:
@@ -446,18 +448,18 @@ public class GuiNecronomiconEntry extends GuiNecronomicon {
 					} else writeText(1, page.getPages()[2]);
 					break;
 				}
-				if(page.getPages().length > 3)
-					writeText(2, page.getPages()[3]);
 			} else if(currnTurnup == 2 && page.getPageAmount() >= 3){
+				if(page.getPages().length > 5)
+					writeText(2, page.getPages()[5]);
 				switch(page.getPageType()){
 				case NORMAL:
 					writeText(1, page.getPages()[4]);
 					break;
 				case ENTRY:
 					if(icons != null && icons[2] != null){
+						writeText(1, page.getPages()[4], 50);
 						itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), (ItemStack)icons[2], k + 60, b0 + 28);
 						RenderHelper.disableStandardItemLighting();
-						writeText(1, page.getPages()[4], 50);
 					} else writeText(1, page.getPages()[4]);
 					break;
 				case INFO:
@@ -469,18 +471,18 @@ public class GuiNecronomiconEntry extends GuiNecronomicon {
 					} else writeText(1, page.getPages()[4]);
 					break;
 				}
-				if(page.getPages().length > 5)
-					writeText(2, page.getPages()[5]);
 			} else if(currnTurnup == 3 && page.getPageAmount() >= 4){
+				if(page.getPages().length > 7)
+					writeText(2, page.getPages()[7]);
 				switch(page.getPageType()){
 				case NORMAL:
 					writeText(1, page.getPages()[6]);
 					break;
 				case ENTRY:
 					if(icons != null && icons[3] != null){
+						writeText(1, page.getPages()[6], 50);
 						itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), (ItemStack)icons[3], k + 60, b0 + 28);
 						RenderHelper.disableStandardItemLighting();
-						writeText(1, page.getPages()[6], 50);
 					} else writeText(1, page.getPages()[6]);
 					break;
 				case INFO:
@@ -492,18 +494,18 @@ public class GuiNecronomiconEntry extends GuiNecronomicon {
 					} else writeText(1, page.getPages()[6]);
 					break;
 				}
-				if(page.getPages().length > 7)
-					writeText(2, page.getPages()[7]);
 			} else if(currnTurnup == 4 && page.getPageAmount() >= 5){
+				if(page.getPages().length > 9)
+					writeText(2, page.getPages()[9]);
 				switch(page.getPageType()){
 				case NORMAL:
 					writeText(1, page.getPages()[8]);
 					break;
 				case ENTRY:
 					if(icons != null && icons[4] != null){
+						writeText(1, page.getPages()[8], 50);
 						itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), (ItemStack)icons[4], k + 60, b0 + 28);
 						RenderHelper.disableStandardItemLighting();
-						writeText(1, page.getPages()[8], 50);
 					} else writeText(1, page.getPages()[8]);
 					break;
 				case INFO:
@@ -515,18 +517,18 @@ public class GuiNecronomiconEntry extends GuiNecronomicon {
 					} else writeText(1, page.getPages()[8]);
 					break;
 				}
-				if(page.getPages().length > 9)
-					writeText(2, page.getPages()[9]);
 			} else if(currnTurnup == 5 && page.getPageAmount() >= 6){
+				if(page.getPages().length > 11)
+					writeText(2, page.getPages()[11]);
 				switch(page.getPageType()){
 				case NORMAL:
 					writeText(1, page.getPages()[10]);
 					break;
 				case ENTRY:
 					if(icons != null && icons[5] != null){
+						writeText(1, page.getPages()[10], 50);
 						itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), (ItemStack)icons[5], k + 60, b0 + 28);
 						RenderHelper.disableStandardItemLighting();
-						writeText(1, page.getPages()[10], 50);
 					} else writeText(1, page.getPages()[10]);
 					break;
 				case INFO:
@@ -538,18 +540,18 @@ public class GuiNecronomiconEntry extends GuiNecronomicon {
 					} else writeText(1, page.getPages()[10]);
 					break;
 				}
-				if(page.getPages().length > 11)
-					writeText(2, page.getPages()[11]);
 			} else if(currnTurnup == 6 && page.getPageAmount() >= 7){
+				if(page.getPages().length > 13)
+					writeText(2, page.getPages()[13]);
 				switch(page.getPageType()){
 				case NORMAL:
 					writeText(1, page.getPages()[12]);
 					break;
 				case ENTRY:
 					if(icons != null && icons[6] != null){
+						writeText(1, page.getPages()[12], 50);
 						itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), (ItemStack)icons[6], k + 60, b0 + 28);
 						RenderHelper.disableStandardItemLighting();
-						writeText(1, page.getPages()[12], 50);
 					} else writeText(1, page.getPages()[12]);
 					break;
 				case INFO:
@@ -561,18 +563,18 @@ public class GuiNecronomiconEntry extends GuiNecronomicon {
 					} else writeText(1, page.getPages()[12]);
 					break;
 				}
-				if(page.getPages().length > 13)
-					writeText(2, page.getPages()[13]);
 			} else if(currnTurnup == 7 && page.getPageAmount() >= 8){
+				if(page.getPages().length > 15)
+					writeText(2, page.getPages()[15]);
 				switch(page.getPageType()){
 				case NORMAL:
 					writeText(1, page.getPages()[14]);
 					break;
 				case ENTRY:
 					if(icons != null && icons[7] != null){
+						writeText(1, page.getPages()[14], 50);
 						itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), (ItemStack)icons[7], k + 60, b0 + 28);
 						RenderHelper.disableStandardItemLighting();
-						writeText(1, page.getPages()[14], 50);
 					} else writeText(1, page.getPages()[14]);
 					break;
 				case INFO:
@@ -584,18 +586,18 @@ public class GuiNecronomiconEntry extends GuiNecronomicon {
 					} else writeText(1, page.getPages()[14]);
 					break;
 				}
-				if(page.getPages().length > 15)
-					writeText(2, page.getPages()[15]);
 			} else if(currnTurnup == 8 && page.getPageAmount() >= 9){
+				if(page.getPages().length > 17)
+					writeText(2, page.getPages()[17]);
 				switch(page.getPageType()){
 				case NORMAL:
 					writeText(1, page.getPages()[16]);
 					break;
 				case ENTRY:
 					if(icons != null && icons[8] != null){
+						writeText(1, page.getPages()[16], 50);
 						itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), (ItemStack)icons[8], k + 60, b0 + 28);
 						RenderHelper.disableStandardItemLighting();
-						writeText(1, page.getPages()[16], 50);
 					} else writeText(1, page.getPages()[16]);
 					break;
 				case INFO:
@@ -607,18 +609,18 @@ public class GuiNecronomiconEntry extends GuiNecronomicon {
 					} else writeText(1, page.getPages()[16]);
 					break;
 				}
-				if(page.getPages().length > 17)
-					writeText(2, page.getPages()[17]);
 			} else if(currnTurnup == 9 && page.getPageAmount() >= 10){
+				if(page.getPages().length > 19)
+					writeText(2, page.getPages()[19]);
 				switch(page.getPageType()){
 				case NORMAL:
 					writeText(1, page.getPages()[18]);
 					break;
 				case ENTRY:
 					if(icons != null && icons[9] != null){
+						writeText(1, page.getPages()[18], 50);
 						itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), (ItemStack)icons[9], k + 60, b0 + 28);
 						RenderHelper.disableStandardItemLighting();
-						writeText(1, page.getPages()[18], 50);
 					} else writeText(1, page.getPages()[18]);
 					break;
 				case INFO:
@@ -630,8 +632,6 @@ public class GuiNecronomiconEntry extends GuiNecronomicon {
 					} else writeText(1, page.getPages()[18]);
 					break;
 				}
-				if(page.getPages().length > 19)
-					writeText(2, page.getPages()[19]);
 			}
 		} else if(bool3){
 			page = data.getPageData()[2];
@@ -649,38 +649,40 @@ public class GuiNecronomiconEntry extends GuiNecronomicon {
 				break;
 			}
 			if(currnTurnup == 0){
+				if(page.getPages().length > 1)
+					writeText(2, page.getPages()[1]);
 				switch(page.getPageType()){
 				case NORMAL:
 					writeText(1, page.getPages()[0]);
 					break;
 				case ENTRY:
 					if(icons != null && icons[0] != null){
+						writeText(1, page.getPages()[0], 50);
 						itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), (ItemStack)icons[0], k + 60, b0 + 28);
 						RenderHelper.disableStandardItemLighting();
-						writeText(1, page.getPages()[0], 50);
 					} else writeText(1, page.getPages()[0]);
 					break;
 				case INFO:
 					if(icons != null && icons[0] != null){
+						writeText(1, page.getPages()[0], 100);
 						GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 						mc.renderEngine.bindTexture((ResourceLocation)icons[0]);
 						drawTexturedModalRect(k, b0, 0, 0, 256, 256);
-						writeText(1, page.getPages()[0], 100);
 					} else writeText(1, page.getPages()[0]);
 					break;
 				}
-				if(page.getPages().length > 1)
-					writeText(2, page.getPages()[1]);
 			} else if(currnTurnup == 1 && page.getPageAmount() >= 2){
+				if(page.getPages().length > 3)
+					writeText(2, page.getPages()[3]);
 				switch(page.getPageType()){
 				case NORMAL:
 					writeText(1, page.getPages()[2]);
 					break;
 				case ENTRY:
 					if(icons != null && icons[1] != null){
+						writeText(1, page.getPages()[2], 50);
 						itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), (ItemStack)icons[1], k + 60, b0 + 28);
 						RenderHelper.disableStandardItemLighting();
-						writeText(1, page.getPages()[2], 50);
 					} else writeText(1, page.getPages()[2]);
 					break;
 				case INFO:
@@ -692,18 +694,18 @@ public class GuiNecronomiconEntry extends GuiNecronomicon {
 					} else writeText(1, page.getPages()[2]);
 					break;
 				}
-				if(page.getPages().length > 3)
-					writeText(2, page.getPages()[3]);
 			} else if(currnTurnup == 2 && page.getPageAmount() >= 3){
+				if(page.getPages().length > 5)
+					writeText(2, page.getPages()[5]);
 				switch(page.getPageType()){
 				case NORMAL:
 					writeText(1, page.getPages()[4]);
 					break;
 				case ENTRY:
 					if(icons != null && icons[2] != null){
+						writeText(1, page.getPages()[4], 50);
 						itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), (ItemStack)icons[2], k + 60, b0 + 28);
 						RenderHelper.disableStandardItemLighting();
-						writeText(1, page.getPages()[4], 50);
 					} else writeText(1, page.getPages()[4]);
 					break;
 				case INFO:
@@ -715,18 +717,18 @@ public class GuiNecronomiconEntry extends GuiNecronomicon {
 					} else writeText(1, page.getPages()[4]);
 					break;
 				}
-				if(page.getPages().length > 5)
-					writeText(2, page.getPages()[5]);
 			} else if(currnTurnup == 3 && page.getPageAmount() >= 4){
+				if(page.getPages().length > 7)
+					writeText(2, page.getPages()[7]);
 				switch(page.getPageType()){
 				case NORMAL:
 					writeText(1, page.getPages()[6]);
 					break;
 				case ENTRY:
 					if(icons != null && icons[3] != null){
+						writeText(1, page.getPages()[6], 50);
 						itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), (ItemStack)icons[3], k + 60, b0 + 28);
 						RenderHelper.disableStandardItemLighting();
-						writeText(1, page.getPages()[6], 50);
 					} else writeText(1, page.getPages()[6]);
 					break;
 				case INFO:
@@ -738,18 +740,18 @@ public class GuiNecronomiconEntry extends GuiNecronomicon {
 					} else writeText(1, page.getPages()[6]);
 					break;
 				}
-				if(page.getPages().length > 7)
-					writeText(2, page.getPages()[7]);
 			} else if(currnTurnup == 4 && page.getPageAmount() >= 5){
+				if(page.getPages().length > 9)
+					writeText(2, page.getPages()[9]);
 				switch(page.getPageType()){
 				case NORMAL:
 					writeText(1, page.getPages()[8]);
 					break;
 				case ENTRY:
 					if(icons != null && icons[4] != null){
+						writeText(1, page.getPages()[8], 50);
 						itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), (ItemStack)icons[4], k + 60, b0 + 28);
 						RenderHelper.disableStandardItemLighting();
-						writeText(1, page.getPages()[8], 50);
 					} else writeText(1, page.getPages()[8]);
 					break;
 				case INFO:
@@ -761,18 +763,18 @@ public class GuiNecronomiconEntry extends GuiNecronomicon {
 					} else writeText(1, page.getPages()[8]);
 					break;
 				}
-				if(page.getPages().length > 9)
-					writeText(2, page.getPages()[9]);
 			} else if(currnTurnup == 5 && page.getPageAmount() >= 6){
+				if(page.getPages().length > 11)
+					writeText(2, page.getPages()[11]);
 				switch(page.getPageType()){
 				case NORMAL:
 					writeText(1, page.getPages()[10]);
 					break;
 				case ENTRY:
 					if(icons != null && icons[5] != null){
+						writeText(1, page.getPages()[10], 50);
 						itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), (ItemStack)icons[5], k + 60, b0 + 28);
 						RenderHelper.disableStandardItemLighting();
-						writeText(1, page.getPages()[10], 50);
 					} else writeText(1, page.getPages()[10]);
 					break;
 				case INFO:
@@ -784,18 +786,18 @@ public class GuiNecronomiconEntry extends GuiNecronomicon {
 					} else writeText(1, page.getPages()[10]);
 					break;
 				}
-				if(page.getPages().length > 11)
-					writeText(2, page.getPages()[11]);
 			} else if(currnTurnup == 6 && page.getPageAmount() >= 7){
+				if(page.getPages().length > 13)
+					writeText(2, page.getPages()[13]);
 				switch(page.getPageType()){
 				case NORMAL:
 					writeText(1, page.getPages()[12]);
 					break;
 				case ENTRY:
 					if(icons != null && icons[6] != null){
+						writeText(1, page.getPages()[12], 50);
 						itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), (ItemStack)icons[6], k + 60, b0 + 28);
 						RenderHelper.disableStandardItemLighting();
-						writeText(1, page.getPages()[12], 50);
 					} else writeText(1, page.getPages()[12]);
 					break;
 				case INFO:
@@ -807,18 +809,18 @@ public class GuiNecronomiconEntry extends GuiNecronomicon {
 					} else writeText(1, page.getPages()[12]);
 					break;
 				}
-				if(page.getPages().length > 13)
-					writeText(2, page.getPages()[13]);
 			} else if(currnTurnup == 7 && page.getPageAmount() >= 8){
+				if(page.getPages().length > 15)
+					writeText(2, page.getPages()[15]);
 				switch(page.getPageType()){
 				case NORMAL:
 					writeText(1, page.getPages()[14]);
 					break;
 				case ENTRY:
 					if(icons != null && icons[7] != null){
+						writeText(1, page.getPages()[14], 50);
 						itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), (ItemStack)icons[7], k + 60, b0 + 28);
 						RenderHelper.disableStandardItemLighting();
-						writeText(1, page.getPages()[14], 50);
 					} else writeText(1, page.getPages()[14]);
 					break;
 				case INFO:
@@ -830,18 +832,18 @@ public class GuiNecronomiconEntry extends GuiNecronomicon {
 					} else writeText(1, page.getPages()[14]);
 					break;
 				}
-				if(page.getPages().length > 15)
-					writeText(2, page.getPages()[15]);
 			} else if(currnTurnup == 8 && page.getPageAmount() >= 9){
+				if(page.getPages().length > 17)
+					writeText(2, page.getPages()[17]);
 				switch(page.getPageType()){
 				case NORMAL:
 					writeText(1, page.getPages()[16]);
 					break;
 				case ENTRY:
 					if(icons != null && icons[8] != null){
+						writeText(1, page.getPages()[16], 50);
 						itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), (ItemStack)icons[8], k + 60, b0 + 28);
 						RenderHelper.disableStandardItemLighting();
-						writeText(1, page.getPages()[16], 50);
 					} else writeText(1, page.getPages()[16]);
 					break;
 				case INFO:
@@ -853,18 +855,18 @@ public class GuiNecronomiconEntry extends GuiNecronomicon {
 					} else writeText(1, page.getPages()[16]);
 					break;
 				}
-				if(page.getPages().length > 17)
-					writeText(2, page.getPages()[17]);
 			} else if(currnTurnup == 9 && page.getPageAmount() >= 10){
+				if(page.getPages().length > 19)
+					writeText(2, page.getPages()[19]);
 				switch(page.getPageType()){
 				case NORMAL:
 					writeText(1, page.getPages()[18]);
 					break;
 				case ENTRY:
 					if(icons != null && icons[9] != null){
+						writeText(1, page.getPages()[18], 50);
 						itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), (ItemStack)icons[9], k + 60, b0 + 28);
 						RenderHelper.disableStandardItemLighting();
-						writeText(1, page.getPages()[18], 50);
 					} else writeText(1, page.getPages()[18]);
 					break;
 				case INFO:
@@ -876,8 +878,6 @@ public class GuiNecronomiconEntry extends GuiNecronomicon {
 					} else writeText(1, page.getPages()[18]);
 					break;
 				}
-				if(page.getPages().length > 19)
-					writeText(2, page.getPages()[19]);
 			}
 		} else if(bool4){
 			page = data.getPageData()[3];
@@ -895,38 +895,40 @@ public class GuiNecronomiconEntry extends GuiNecronomicon {
 				break;
 			}
 			if(currnTurnup == 0){
+				if(page.getPages().length > 1)
+					writeText(2, page.getPages()[1]);
 				switch(page.getPageType()){
 				case NORMAL:
 					writeText(1, page.getPages()[0]);
 					break;
 				case ENTRY:
 					if(icons != null && icons[0] != null){
+						writeText(1, page.getPages()[0], 50);
 						itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), (ItemStack)icons[0], k + 60, b0 + 28);
 						RenderHelper.disableStandardItemLighting();
-						writeText(1, page.getPages()[0], 50);
 					} else writeText(1, page.getPages()[0]);
 					break;
 				case INFO:
 					if(icons != null && icons[0] != null){
+						writeText(1, page.getPages()[0], 100);
 						GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 						mc.renderEngine.bindTexture((ResourceLocation)icons[0]);
 						drawTexturedModalRect(k, b0, 0, 0, 256, 256);
-						writeText(1, page.getPages()[0], 100);
 					} else writeText(1, page.getPages()[0]);
 					break;
 				}
-				if(page.getPages().length > 1)
-					writeText(2, page.getPages()[1]);
 			} else if(currnTurnup == 1 && page.getPageAmount() >= 2){
+				if(page.getPages().length > 3)
+					writeText(2, page.getPages()[3]);
 				switch(page.getPageType()){
 				case NORMAL:
 					writeText(1, page.getPages()[2]);
 					break;
 				case ENTRY:
 					if(icons != null && icons[1] != null){
+						writeText(1, page.getPages()[2], 50);
 						itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), (ItemStack)icons[1], k + 60, b0 + 28);
 						RenderHelper.disableStandardItemLighting();
-						writeText(1, page.getPages()[2], 50);
 					} else writeText(1, page.getPages()[2]);
 					break;
 				case INFO:
@@ -938,18 +940,18 @@ public class GuiNecronomiconEntry extends GuiNecronomicon {
 					} else writeText(1, page.getPages()[2]);
 					break;
 				}
-				if(page.getPages().length > 3)
-					writeText(2, page.getPages()[3]);
 			} else if(currnTurnup == 2 && page.getPageAmount() >= 3){
+				if(page.getPages().length > 5)
+					writeText(2, page.getPages()[5]);
 				switch(page.getPageType()){
 				case NORMAL:
 					writeText(1, page.getPages()[4]);
 					break;
 				case ENTRY:
 					if(icons != null && icons[2] != null){
+						writeText(1, page.getPages()[4], 50);
 						itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), (ItemStack)icons[2], k + 60, b0 + 28);
 						RenderHelper.disableStandardItemLighting();
-						writeText(1, page.getPages()[4], 50);
 					} else writeText(1, page.getPages()[4]);
 					break;
 				case INFO:
@@ -961,18 +963,18 @@ public class GuiNecronomiconEntry extends GuiNecronomicon {
 					} else writeText(1, page.getPages()[4]);
 					break;
 				}
-				if(page.getPages().length > 5)
-					writeText(2, page.getPages()[5]);
 			} else if(currnTurnup == 3 && page.getPageAmount() >= 4){
+				if(page.getPages().length > 7)
+					writeText(2, page.getPages()[7]);
 				switch(page.getPageType()){
 				case NORMAL:
 					writeText(1, page.getPages()[6]);
 					break;
 				case ENTRY:
 					if(icons != null && icons[3] != null){
+						writeText(1, page.getPages()[6], 50);
 						itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), (ItemStack)icons[3], k + 60, b0 + 28);
 						RenderHelper.disableStandardItemLighting();
-						writeText(1, page.getPages()[6], 50);
 					} else writeText(1, page.getPages()[6]);
 					break;
 				case INFO:
@@ -984,18 +986,18 @@ public class GuiNecronomiconEntry extends GuiNecronomicon {
 					} else writeText(1, page.getPages()[6]);
 					break;
 				}
-				if(page.getPages().length > 7)
-					writeText(2, page.getPages()[7]);
 			} else if(currnTurnup == 4 && page.getPageAmount() >= 5){
+				if(page.getPages().length > 9)
+					writeText(2, page.getPages()[9]);
 				switch(page.getPageType()){
 				case NORMAL:
 					writeText(1, page.getPages()[8]);
 					break;
 				case ENTRY:
 					if(icons != null && icons[4] != null){
+						writeText(1, page.getPages()[8], 50);
 						itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), (ItemStack)icons[4], k + 60, b0 + 28);
 						RenderHelper.disableStandardItemLighting();
-						writeText(1, page.getPages()[8], 50);
 					} else writeText(1, page.getPages()[8]);
 					break;
 				case INFO:
@@ -1007,18 +1009,18 @@ public class GuiNecronomiconEntry extends GuiNecronomicon {
 					} else writeText(1, page.getPages()[8]);
 					break;
 				}
-				if(page.getPages().length > 9)
-					writeText(2, page.getPages()[9]);
 			} else if(currnTurnup == 5 && page.getPageAmount() >= 6){
+				if(page.getPages().length > 11)
+					writeText(2, page.getPages()[11]);
 				switch(page.getPageType()){
 				case NORMAL:
 					writeText(1, page.getPages()[10]);
 					break;
 				case ENTRY:
 					if(icons != null && icons[5] != null){
+						writeText(1, page.getPages()[10], 50);
 						itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), (ItemStack)icons[5], k + 60, b0 + 28);
 						RenderHelper.disableStandardItemLighting();
-						writeText(1, page.getPages()[10], 50);
 					} else writeText(1, page.getPages()[10]);
 					break;
 				case INFO:
@@ -1030,18 +1032,18 @@ public class GuiNecronomiconEntry extends GuiNecronomicon {
 					} else writeText(1, page.getPages()[10]);
 					break;
 				}
-				if(page.getPages().length > 11)
-					writeText(2, page.getPages()[11]);
 			} else if(currnTurnup == 6 && page.getPageAmount() >= 7){
+				if(page.getPages().length > 13)
+					writeText(2, page.getPages()[13]);
 				switch(page.getPageType()){
 				case NORMAL:
 					writeText(1, page.getPages()[12]);
 					break;
 				case ENTRY:
 					if(icons != null && icons[6] != null){
+						writeText(1, page.getPages()[12], 50);
 						itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), (ItemStack)icons[6], k + 60, b0 + 28);
 						RenderHelper.disableStandardItemLighting();
-						writeText(1, page.getPages()[12], 50);
 					} else writeText(1, page.getPages()[12]);
 					break;
 				case INFO:
@@ -1053,18 +1055,18 @@ public class GuiNecronomiconEntry extends GuiNecronomicon {
 					} else writeText(1, page.getPages()[12]);
 					break;
 				}
-				if(page.getPages().length > 13)
-					writeText(2, page.getPages()[13]);
 			} else if(currnTurnup == 7 && page.getPageAmount() >= 8){
+				if(page.getPages().length > 15)
+					writeText(2, page.getPages()[15]);
 				switch(page.getPageType()){
 				case NORMAL:
 					writeText(1, page.getPages()[14]);
 					break;
 				case ENTRY:
 					if(icons != null && icons[7] != null){
+						writeText(1, page.getPages()[14], 50);
 						itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), (ItemStack)icons[7], k + 60, b0 + 28);
 						RenderHelper.disableStandardItemLighting();
-						writeText(1, page.getPages()[14], 50);
 					} else writeText(1, page.getPages()[14]);
 					break;
 				case INFO:
@@ -1076,18 +1078,18 @@ public class GuiNecronomiconEntry extends GuiNecronomicon {
 					} else writeText(1, page.getPages()[14]);
 					break;
 				}
-				if(page.getPages().length > 15)
-					writeText(2, page.getPages()[15]);
 			} else if(currnTurnup == 8 && page.getPageAmount() >= 9){
+				if(page.getPages().length > 17)
+					writeText(2, page.getPages()[17]);
 				switch(page.getPageType()){
 				case NORMAL:
 					writeText(1, page.getPages()[16]);
 					break;
 				case ENTRY:
 					if(icons != null && icons[8] != null){
+						writeText(1, page.getPages()[16], 50);
 						itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), (ItemStack)icons[8], k + 60, b0 + 28);
 						RenderHelper.disableStandardItemLighting();
-						writeText(1, page.getPages()[16], 50);
 					} else writeText(1, page.getPages()[16]);
 					break;
 				case INFO:
@@ -1099,18 +1101,18 @@ public class GuiNecronomiconEntry extends GuiNecronomicon {
 					} else writeText(1, page.getPages()[16]);
 					break;
 				}
-				if(page.getPages().length > 17)
-					writeText(2, page.getPages()[17]);
 			} else if(currnTurnup == 9 && page.getPageAmount() >= 10){
+				if(page.getPages().length > 19)
+					writeText(2, page.getPages()[19]);
 				switch(page.getPageType()){
 				case NORMAL:
 					writeText(1, page.getPages()[18]);
 					break;
 				case ENTRY:
 					if(icons != null && icons[9] != null){
+						writeText(1, page.getPages()[18], 50);
 						itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), (ItemStack)icons[9], k + 60, b0 + 28);
 						RenderHelper.disableStandardItemLighting();
-						writeText(1, page.getPages()[18], 50);
 					} else writeText(1, page.getPages()[18]);
 					break;
 				case INFO:
@@ -1122,8 +1124,6 @@ public class GuiNecronomiconEntry extends GuiNecronomicon {
 					} else writeText(1, page.getPages()[18]);
 					break;
 				}
-				if(page.getPages().length > 19)
-					writeText(2, page.getPages()[19]);
 			}
 		} else if(bool5){
 			page = data.getPageData()[4];
@@ -1141,38 +1141,40 @@ public class GuiNecronomiconEntry extends GuiNecronomicon {
 				break;
 			}
 			if(currnTurnup == 0){
+				if(page.getPages().length > 1)
+					writeText(2, page.getPages()[1]);
 				switch(page.getPageType()){
 				case NORMAL:
 					writeText(1, page.getPages()[0]);
 					break;
 				case ENTRY:
 					if(icons != null && icons[0] != null){
+						writeText(1, page.getPages()[0], 50);
 						itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), (ItemStack)icons[0], k + 60, b0 + 28);
 						RenderHelper.disableStandardItemLighting();
-						writeText(1, page.getPages()[0], 50);
 					} else writeText(1, page.getPages()[0]);
 					break;
 				case INFO:
 					if(icons != null && icons[0] != null){
+						writeText(1, page.getPages()[0], 100);
 						GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 						mc.renderEngine.bindTexture((ResourceLocation)icons[0]);
 						drawTexturedModalRect(k, b0, 0, 0, 256, 256);
-						writeText(1, page.getPages()[0], 100);
 					} else writeText(1, page.getPages()[0]);
 					break;
 				}
-				if(page.getPages().length > 1)
-					writeText(2, page.getPages()[1]);
 			} else if(currnTurnup == 1 && page.getPageAmount() >= 2){
+				if(page.getPages().length > 3)
+					writeText(2, page.getPages()[3]);
 				switch(page.getPageType()){
 				case NORMAL:
 					writeText(1, page.getPages()[2]);
 					break;
 				case ENTRY:
 					if(icons != null && icons[1] != null){
+						writeText(1, page.getPages()[2], 50);
 						itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), (ItemStack)icons[1], k + 60, b0 + 28);
 						RenderHelper.disableStandardItemLighting();
-						writeText(1, page.getPages()[2], 50);
 					} else writeText(1, page.getPages()[2]);
 					break;
 				case INFO:
@@ -1184,18 +1186,18 @@ public class GuiNecronomiconEntry extends GuiNecronomicon {
 					} else writeText(1, page.getPages()[2]);
 					break;
 				}
-				if(page.getPages().length > 3)
-					writeText(2, page.getPages()[3]);
 			} else if(currnTurnup == 2 && page.getPageAmount() >= 3){
+				if(page.getPages().length > 5)
+					writeText(2, page.getPages()[5]);
 				switch(page.getPageType()){
 				case NORMAL:
 					writeText(1, page.getPages()[4]);
 					break;
 				case ENTRY:
 					if(icons != null && icons[2] != null){
+						writeText(1, page.getPages()[4], 50);
 						itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), (ItemStack)icons[2], k + 60, b0 + 28);
 						RenderHelper.disableStandardItemLighting();
-						writeText(1, page.getPages()[4], 50);
 					} else writeText(1, page.getPages()[4]);
 					break;
 				case INFO:
@@ -1207,18 +1209,18 @@ public class GuiNecronomiconEntry extends GuiNecronomicon {
 					} else writeText(1, page.getPages()[4]);
 					break;
 				}
-				if(page.getPages().length > 5)
-					writeText(2, page.getPages()[5]);
 			} else if(currnTurnup == 3 && page.getPageAmount() >= 4){
+				if(page.getPages().length > 7)
+					writeText(2, page.getPages()[7]);
 				switch(page.getPageType()){
 				case NORMAL:
 					writeText(1, page.getPages()[6]);
 					break;
 				case ENTRY:
 					if(icons != null && icons[3] != null){
+						writeText(1, page.getPages()[6], 50);
 						itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), (ItemStack)icons[3], k + 60, b0 + 28);
 						RenderHelper.disableStandardItemLighting();
-						writeText(1, page.getPages()[6], 50);
 					} else writeText(1, page.getPages()[6]);
 					break;
 				case INFO:
@@ -1230,18 +1232,18 @@ public class GuiNecronomiconEntry extends GuiNecronomicon {
 					} else writeText(1, page.getPages()[6]);
 					break;
 				}
-				if(page.getPages().length > 7)
-					writeText(2, page.getPages()[7]);
 			} else if(currnTurnup == 4 && page.getPageAmount() >= 5){
+				if(page.getPages().length > 9)
+					writeText(2, page.getPages()[9]);
 				switch(page.getPageType()){
 				case NORMAL:
 					writeText(1, page.getPages()[8]);
 					break;
 				case ENTRY:
 					if(icons != null && icons[4] != null){
+						writeText(1, page.getPages()[8], 50);
 						itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), (ItemStack)icons[4], k + 60, b0 + 28);
 						RenderHelper.disableStandardItemLighting();
-						writeText(1, page.getPages()[8], 50);
 					} else writeText(1, page.getPages()[8]);
 					break;
 				case INFO:
@@ -1253,18 +1255,18 @@ public class GuiNecronomiconEntry extends GuiNecronomicon {
 					} else writeText(1, page.getPages()[8]);
 					break;
 				}
-				if(page.getPages().length > 9)
-					writeText(2, page.getPages()[9]);
 			} else if(currnTurnup == 5 && page.getPageAmount() >= 6){
+				if(page.getPages().length > 11)
+					writeText(2, page.getPages()[11]);
 				switch(page.getPageType()){
 				case NORMAL:
 					writeText(1, page.getPages()[10]);
 					break;
 				case ENTRY:
 					if(icons != null && icons[5] != null){
+						writeText(1, page.getPages()[10], 50);
 						itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), (ItemStack)icons[5], k + 60, b0 + 28);
 						RenderHelper.disableStandardItemLighting();
-						writeText(1, page.getPages()[10], 50);
 					} else writeText(1, page.getPages()[10]);
 					break;
 				case INFO:
@@ -1276,18 +1278,18 @@ public class GuiNecronomiconEntry extends GuiNecronomicon {
 					} else writeText(1, page.getPages()[10]);
 					break;
 				}
-				if(page.getPages().length > 11)
-					writeText(2, page.getPages()[11]);
 			} else if(currnTurnup == 6 && page.getPageAmount() >= 7){
+				if(page.getPages().length > 13)
+					writeText(2, page.getPages()[13]);
 				switch(page.getPageType()){
 				case NORMAL:
 					writeText(1, page.getPages()[12]);
 					break;
 				case ENTRY:
 					if(icons != null && icons[6] != null){
+						writeText(1, page.getPages()[12], 50);
 						itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), (ItemStack)icons[6], k + 60, b0 + 28);
 						RenderHelper.disableStandardItemLighting();
-						writeText(1, page.getPages()[12], 50);
 					} else writeText(1, page.getPages()[12]);
 					break;
 				case INFO:
@@ -1299,18 +1301,18 @@ public class GuiNecronomiconEntry extends GuiNecronomicon {
 					} else writeText(1, page.getPages()[12]);
 					break;
 				}
-				if(page.getPages().length > 13)
-					writeText(2, page.getPages()[13]);
 			} else if(currnTurnup == 7 && page.getPageAmount() >= 8){
+				if(page.getPages().length > 15)
+					writeText(2, page.getPages()[15]);
 				switch(page.getPageType()){
 				case NORMAL:
 					writeText(1, page.getPages()[14]);
 					break;
 				case ENTRY:
 					if(icons != null && icons[7] != null){
+						writeText(1, page.getPages()[14], 50);
 						itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), (ItemStack)icons[7], k + 60, b0 + 28);
 						RenderHelper.disableStandardItemLighting();
-						writeText(1, page.getPages()[14], 50);
 					} else writeText(1, page.getPages()[14]);
 					break;
 				case INFO:
@@ -1322,18 +1324,18 @@ public class GuiNecronomiconEntry extends GuiNecronomicon {
 					} else writeText(1, page.getPages()[14]);
 					break;
 				}
-				if(page.getPages().length > 15)
-					writeText(2, page.getPages()[15]);
 			} else if(currnTurnup == 8 && page.getPageAmount() >= 9){
+				if(page.getPages().length > 17)
+					writeText(2, page.getPages()[17]);
 				switch(page.getPageType()){
 				case NORMAL:
 					writeText(1, page.getPages()[16]);
 					break;
 				case ENTRY:
 					if(icons != null && icons[8] != null){
+						writeText(1, page.getPages()[16], 50);
 						itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), (ItemStack)icons[8], k + 60, b0 + 28);
 						RenderHelper.disableStandardItemLighting();
-						writeText(1, page.getPages()[16], 50);
 					} else writeText(1, page.getPages()[16]);
 					break;
 				case INFO:
@@ -1345,18 +1347,18 @@ public class GuiNecronomiconEntry extends GuiNecronomicon {
 					} else writeText(1, page.getPages()[16]);
 					break;
 				}
-				if(page.getPages().length > 17)
-					writeText(2, page.getPages()[17]);
 			} else if(currnTurnup == 9 && page.getPageAmount() >= 10){
+				if(page.getPages().length > 19)
+					writeText(2, page.getPages()[19]);
 				switch(page.getPageType()){
 				case NORMAL:
 					writeText(1, page.getPages()[18]);
 					break;
 				case ENTRY:
 					if(icons != null && icons[9] != null){
+						writeText(1, page.getPages()[18], 50);
 						itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), (ItemStack)icons[9], k + 60, b0 + 28);
 						RenderHelper.disableStandardItemLighting();
-						writeText(1, page.getPages()[18], 50);
 					} else writeText(1, page.getPages()[18]);
 					break;
 				case INFO:
@@ -1368,8 +1370,6 @@ public class GuiNecronomiconEntry extends GuiNecronomicon {
 					} else writeText(1, page.getPages()[18]);
 					break;
 				}
-				if(page.getPages().length > 19)
-					writeText(2, page.getPages()[19]);
 			}
 		}
 		updateButtons();
