@@ -101,23 +101,31 @@ message.chagaroth.death.2=在我后面的箱子上写着 "恐惧之地的传奇�
 message.chagaroth.death.3=是在我被牵涉进来之前的挖矿的人所遗留的.
 message.chagaroth.death.4=不要抱太大的希望, 我打赌这只不过是一块泥土或者别的.
 message.jzahar.death.dev=我依旧是一个in-dev boss, 所以你无法确切地杀死我.
+message.jzahar.banish.vanilla=I never asked to be within the same dimension as you. Begone, foul beast!
+message.jzahar.banish.ac=Ahem... I thought I gave you an assignment aeons ago, did it ever occur to you that it was permanent?
+message.jzahar.banish.jzh=There can only be ONE! *Creates sword out of thin air*
+message.jzahar.creative.1=%s, you do realize I could simply switch your Gamemode and slaughter you right now? I'm that kind of Entity.
+message.jzahar.creative.2=But yeah... that would technically be cheating, so I'll just stick to the "rules" and do nothing.
 message.sacthoth.spawn.1=我解放了! 凡人, 感受黑暗之域的愤怒吧.
 message.sacthoth.spawn.2=但首先, 观看这爆炸吧.
 message.sacthoth.damage.explosion=我忘了告诉你\u00A7o并不能\u00A7r把我炸伤, 这并没有用.
 message.sacthoth.damage.projectile=哈, 你的投射物对我无效.
 message.portalplacer.error.1=你感受到一种被抛弃的感觉, 扎哈尔并没有批准你.
 message.portalplacer.error.2=没有任何事情发生...
+message.necronomicon.nope=It appears that you don't own this book. Ever thought about not trying to read it?
 
 #Container Inventories
 container.abyssalcraft.crate=板条箱
 container.abyssalcraft.crystallizer=结晶器
 container.abyssalcraft.transmutator=嬗变器
 container.abyssalcraft.engraver=铸造器
+container.abyssalcraft.materializer=Materializer
 
 #NEI Integration
 container.abyssalcraft.crystallizer.nei=结晶化
 container.abyssalcraft.transmutator.nei=嬗变化
 container.abyssalcraft.engraver.nei=钱币铸造
+container.abyssalcraft.materializer.nei=Materialization
 
 #Necronomicon Labels
 necronomicon.index=Index
@@ -217,6 +225,8 @@ necronomicon.text.materials.omotholstone.1=Omothol Stone is a new type of stone 
 necronomicon.text.materials.omotholstone.2=
 necronomicon.text.materials.ethaxium.1=Ethaxium is a new material most commonly appearing in Omothol as the material used for structures built there. Ethaxium is extremely hard, and can thus only be destroyed with tools made from it.
 necronomicon.text.materials.ethaxium.2=Ethaxium is said to be what souls are made out of, which likely explains why it's almost indestructible. No wonder J'zahar built his temple city from this.
+necronomicon.text.materials.darkethaxium.1=Dark Ethaxium is a stronger version of Ethaxium created by combining regular Ethaxium with Omothol Stone. This kind of Ethaxium is harder than it's normal counterpart.
+necronomicon.text.materials.darkethaxium.2=This material is only used in one structure, the Temple of J'zahar.
 
 necronomicon.text.overworld.progression.1=In order to reach the new dimensions, one must craft a Gateway Key, which requires one to travel to the Nether, and to visit a Darklands and a water-based biome. The water-based biome can be either a swamp or a ocean biome.
 necronomicon.text.overworld.progression.2=From the Nether you need 2 Blaze Rods, and probably a few more for later. From the Darklnads biome you need to slay living shadows to finally obtain Shadow Gems. From the water-based biome you need Coralium Gems in order to create a Coralium Pearl.
@@ -309,13 +319,17 @@ necronomicon.text.integration.nei.2=When the recipe GUI is open, you can also se
 necronomicon.text.integration.nei.3=Recipes for the Crystallizer can also display by pressing the recipe button, but the second output doesn't show due to technical reasons.
 necronomicon.text.integration.nei.4=When the recipe GUI is open, you can also see what items can be used as fuel for crystallization.
 necronomicon.text.integration.nei.5=Recipes for the Engraver can also displayed by pressing the recipe button.
-necronomicon.text.integration.nei.6=
+necronomicon.text.integration.nei.6=The Engraver uses Coin Engravings as "fuel", in the sense that they lose durability after each engraving made with them.
+necronomicon.text.integration.nei.7=Recipes for the Materializer can also be displayed by pressing the recipe button. They have a special display screen showing the required Crystals.
+necronomicon.text.integration.nei.8=You can also see which Necronomicon you need in order to materialize the specific material. The Materializer uses no fuel.
 
 necronomicon.text.integration.tc.1=With Thaumcraft installed, you can now discover aspects in blocks, items and entities added in AbyssalCraft. There are, however, no new aspects. There will probably be more ways to combind the mods later on.
 necronomicon.text.integration.tc.2=You also get a Vis discount and the ability to view nodes when wearing the Depths Armor set.
 
 necronomicon.text.integration.morph.1=With Morph installed, you can get morph abilities when morphing into AbyssalCraft entities. Additional abilities might be added, like plague immunity.
 necronomicon.text.integration.morph.2=When morphed into entities that has special models, your hand will be morphed into the hand used by that model in 1st person view.
+
+necronomicon.text.integration.invtweaks.1=With Inventory Tweaks installed, you can sort items kept in the Crystal Bags with sorting buttons like with any other supported container.
 
 necronomicon.text.wip=This section is incomplete.
 
@@ -380,6 +394,7 @@ tooltip.crystal=分子式
 tooltip.portalplacerjzh.1=只能在
 tooltip.portalplacerjzh.2=恐惧之地使用
 tooltip.soulreaper=灵魂收割
+tooltip.crystalbag=This bag holds crystallized elements
 
 #Creative Tabs
 itemgroup.acblocks=深渊国度方块
@@ -390,6 +405,10 @@ itemgroup.acfood=深渊国度食物
 itemgroup.acdblocks=深渊国度装饰方块
 itemgroup.accrystals=深渊国度结晶器水晶
 itemgroup.accoins=深渊国度钱币
+
+#Fluids
+fluid.liquidcoralium=流动的液态珊瑚石
+fluid.liquidantimatter=液态反物质
 
 #Blocks
 tile.DS.name=黑暗石
@@ -507,6 +526,15 @@ tile.BOE.name=伊桑斯锭块
 tile.OG.name=奥穆索之门
 tile.Ofire.name=奥穆索之火
 tile.engraver.name=铸造器
+tile.house.name=A House
+tile.materializer.name=Materializer
+tile.DEB.0.name=Dark Ethaxium Brick
+tile.DEB.1.name=Chiseled Dark Ethaxium Brick
+tile.DEBP.name=Dark Ethaxium Pillar
+tile.DEBs.name=Dark Ethaxium Brick Stairs
+tile.DEBs1.name=Dark Ethaxium Brick Slab
+tile.DEBs2.name=Dark Ethaxium Brick Doubleslab
+tile.DEBf.name=Dark Ethaxium Brick Fence
 
 #Items
 item.DEV_BLADE.name=恶魔之刃
@@ -703,6 +731,10 @@ item.necronomicon_cor.name=Abyssal Wasteland Necronomicon
 item.necronomicon_dre.name=Dreadlands Necronomicon
 item.necronomicon_omt.name=Omothol Necronomicon
 item.abyssalnomicon.name=Abyssalnomicon
+item.crystalbag_small.name=Small Crystal Bag
+item.crystalbag_medium.name=Medium Crystal Bag
+item.crystalbag_large.name=Large Crystal Bag
+item.crystalbag_huge.name=Huge Crystal Bag
 
 #Entities
 entity.abyssalcraft.depthsghoul.name=深渊食尸鬼

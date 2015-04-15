@@ -33,7 +33,6 @@ public class ItemEthaxiumShovel extends ItemTool {
 	private static Set<Block> blocksEffectiveAgainst = Sets.newHashSet(new Block[] {Blocks.grass, Blocks.dirt, Blocks.sand, Blocks.gravel, Blocks.snow_layer, Blocks.snow, Blocks.clay, Blocks.farmland, Blocks.soul_sand, Blocks.mycelium, AbyssalCraft.Darkgrass});
 	public ItemEthaxiumShovel(ToolMaterial enumToolMaterial) {
 		super(1, enumToolMaterial, blocksEffectiveAgainst);
-		enumToolMaterial.customCraftingMaterial = AbyssalCraft.ethaxiumIngot;
 		setHarvestLevel("shovel", 8);
 	}
 

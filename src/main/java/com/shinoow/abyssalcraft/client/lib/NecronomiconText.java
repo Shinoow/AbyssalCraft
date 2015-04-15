@@ -96,6 +96,8 @@ public class NecronomiconText {
 	public static String MATERIAL_OMOTHOL_STONE_2 = StatCollector.translateToLocal("necronomicon.text.materials.omotholstone.2");
 	public static String MATERIAL_ETHAXIUM_1 = StatCollector.translateToLocal("necronomicon.text.materials.ethaxium.1");
 	public static String MATERIAL_ETHAXIUM_2 = StatCollector.translateToLocal("necronomicon.text.materials.ethaxium.2");
+	public static String MATERIAL_DARK_ETHAXIUM_1 = StatCollector.translateToLocal("necronomicon.text.materials.darkethaxium.1");
+	public static String MATERIAL_DARK_ETHAXIUM_2 = StatCollector.translateToLocal("necronomicon.text.materials.darkethaxium.2");
 
 	public static String PROGRESSION_OVERWORLD_1 = StatCollector.translateToLocal("necronomicon.text.overworld.progression.1");
 	public static String PROGRESSION_OVERWORLD_2 = StatCollector.translateToLocal("necronomicon.text.overworld.progression.2");
@@ -189,12 +191,16 @@ public class NecronomiconText {
 	public static String INTEGRATION_NEI_4 = StatCollector.translateToLocal("necronomicon.text.integration.nei.4");
 	public static String INTEGRATION_NEI_5 = StatCollector.translateToLocal("necronomicon.text.integration.nei.5");
 	public static String INTEGRATION_NEI_6 = StatCollector.translateToLocal("necronomicon.text.integration.nei.6");
+	public static String INTEGRATION_NEI_7 = StatCollector.translateToLocal("necronomicon.text.integration.nei.7");
+	public static String INTEGRATION_NEI_8 = StatCollector.translateToLocal("necronomicon.text.integration.nei.8");
 
 	public static String INTEGRATION_TC_1 = StatCollector.translateToLocal("necronomicon.text.integration.tc.1");
 	public static String INTEGRATION_TC_2 = StatCollector.translateToLocal("necronomicon.text.integration.tc.2");
 
 	public static String INTEGRATION_MORPH_1 = StatCollector.translateToLocal("necronomicon.text.integration.morph.1");
 	public static String INTEGRATION_MORPH_2 = StatCollector.translateToLocal("necronomicon.text.integration.morph.2");
+
+	public static String INTEGRATION_INVTWEAKS_1 = StatCollector.translateToLocal("necronomicon.text.integration.invtweaks.1");
 
 	public static String[] OVERWORLD_MATERIALS = {MATERIAL_ABYSSALNITE_1, MATERIAL_ABYSSALNITE_2, MATERIAL_DARKSTONE_1,
 		MATERIAL_DARKSTONE_2, MATERIAL_CORALIUM_1, MATERIAL_CORALIUM_2, MATERIAL_DARKLANDS_OAK_1, MATERIAL_DARKLANDS_OAK_2,
@@ -208,7 +214,8 @@ public class NecronomiconText {
 		MATERIAL_ABYSSALNITE_STONE_2, MATERIAL_DREADLANDS_ABYSSALNITE_1, MATERIAL_DREADLANDS_ABYSSALNITE_2, MATERIAL_DREADED_ABYSSALNITE_1,
 		MATERIAL_DREADED_ABYSSALNITE_2, MATERIAL_DREADLANDS_GRASS_1, MATERIAL_DREADLANDS_GRASS_2, MATERIAL_DREADLANDS_TREE_1,
 		MATERIAL_DREADLANDS_TREE_2};
-	public static String[] OMOTHOL_MATERIALS = {MATERIAL_OMOTHOL_STONE_1, MATERIAL_OMOTHOL_STONE_2, MATERIAL_ETHAXIUM_1, MATERIAL_ETHAXIUM_2};
+	public static String[] OMOTHOL_MATERIALS = {MATERIAL_OMOTHOL_STONE_1, MATERIAL_OMOTHOL_STONE_2, MATERIAL_ETHAXIUM_1, MATERIAL_ETHAXIUM_2,
+		MATERIAL_DARK_ETHAXIUM_1, MATERIAL_DARK_ETHAXIUM_2};
 	public static String[] DARK_REALM_MATERIALS = {MATERIAL_DARKSTONE_1, MATERIAL_DARKSTONE_2};
 
 	public static String[] OVERWORLD_PROGRESSION = {PROGRESSION_OVERWORLD_1, PROGRESSION_OVERWORLD_2, PROGRESSION_OVERWORLD_3,
@@ -238,7 +245,7 @@ public class NecronomiconText {
 		ENTITY_SACTHOTH_1, ENTITY_SACTHOTH_2};
 
 	public static String[] NEI_INTEGRATION = {INTEGRATION_NEI_1, INTEGRATION_NEI_2, INTEGRATION_NEI_3, INTEGRATION_NEI_4,
-		INTEGRATION_NEI_5, INTEGRATION_NEI_6};
+		INTEGRATION_NEI_5, INTEGRATION_NEI_6, INTEGRATION_NEI_7, INTEGRATION_NEI_8};
 
 	public static String WIP = StatCollector.translateToLocal("necronomicon.text.wip");
 
@@ -274,6 +281,7 @@ public class NecronomiconText {
 	public static String LABEL_INTEGRATION_NEI = "Not Enough Items";
 	public static String LABEL_INTEGRATION_TC = "Thaumcraft";
 	public static String LABEL_INTEGRATION_MORPH = "Morph";
+	public static String LABEL_INTEGRATION_INVTWEAKS = "Inventory Tweaks";
 
 	/**
 	 * The best way to drown an array of strings with nonsense

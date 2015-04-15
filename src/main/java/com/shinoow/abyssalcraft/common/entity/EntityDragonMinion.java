@@ -80,13 +80,12 @@ public class EntityDragonMinion extends EntityMob implements IEntityMultiPart, I
 	public boolean forceNewTarget;
 
 	private Entity target;
-	public int deathTicks;
 
 	public EntityDragonBoss healingcircle;
 
 	public EntityDragonMinion(World par1World) {
 		super(par1World);
-		dragonPartArray = new EntityDragonPart[] {dragonPartHead = new EntityDragonPart(this, "head", 6.0F, 6.0F), dragonPartBody = new EntityDragonPart(this, "body", 8.0F, 8.0F), dragonPartTail1 = new EntityDragonPart(this, "tail", 4.0F, 4.0F), dragonPartTail2 = new EntityDragonPart(this, "tail", 4.0F, 4.0F), dragonPartTail3 = new EntityDragonPart(this, "tail", 4.0F, 4.0F), dragonPartWing1 = new EntityDragonPart(this, "wing", 4.0F, 4.0F), dragonPartWing2 = new EntityDragonPart(this, "wing", 4.0F, 4.0F)};
+		dragonPartArray = new EntityDragonPart[] {dragonPartHead = new EntityDragonPart(this, "head", 4.0F, 4.0F), dragonPartBody = new EntityDragonPart(this, "body", 6.0F, 6.0F), dragonPartTail1 = new EntityDragonPart(this, "tail", 2.0F, 2.0F), dragonPartTail2 = new EntityDragonPart(this, "tail", 2.0F, 2.0F), dragonPartTail3 = new EntityDragonPart(this, "tail", 2.0F, 2.0F), dragonPartWing1 = new EntityDragonPart(this, "wing", 2.0F, 2.0F), dragonPartWing2 = new EntityDragonPart(this, "wing", 2.0F, 2.0F)};
 		setHealth(getMaxHealth());
 		setSize(7.0F, 3.0F);
 		noClip = true;
@@ -358,16 +357,19 @@ public class EntityDragonMinion extends EntityMob implements IEntityMultiPart, I
 
 	private void updateHealingCircle()
 	{
-		if (healingcircle != null)
+		if (healingcircle != null){
 			if (healingcircle.isDead)
 			{
 				if (!worldObj.isRemote)
-					attackEntityFromPart(dragonPartHead, DamageSource.setExplosionSource((Explosion)null), 10.0F);
+					attackEntityFromPart(dragonPartHead, DamageSource.setExplosionSource((Explosion)null), 100.0F);
 
 				healingcircle = null;
 			}
 			else if (ticksExisted % 10 == 0 && getHealth() <= getMaxHealth())
 				setHealth(getHealth() - 1.0F);
+		}
+		else if(rand.nextInt(100) == 0)
+			setHealth(getHealth() - 1);
 
 		if (rand.nextInt(10) == 0)
 		{
@@ -441,7 +443,7 @@ public class EntityDragonMinion extends EntityMob implements IEntityMultiPart, I
 	public boolean attackEntityFromPart(EntityDragonPart par1EntityDragonPart, DamageSource par2DamageSource, float par3)
 	{
 		if (par1EntityDragonPart != dragonPartHead)
-			par3 = par3 / 4.0F + 1.0F;
+			par3 = par3 / 2.0F;
 
 		float f1 = rotationYaw * (float)Math.PI / 180.0F;
 		float f2 = MathHelper.sin(f1);

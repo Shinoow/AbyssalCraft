@@ -22,6 +22,8 @@ import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraft.world.gen.feature.WorldGenMinable;
+import net.minecraftforge.common.BiomeDictionary;
+import net.minecraftforge.common.BiomeDictionary.Type;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.common.structures.overworld.AChouse1;
@@ -105,18 +107,28 @@ public class AbyssalCraftWorldGenerator implements IWorldGenerator {
 		}
 
 		for(int rarity = 0; rarity < 3; rarity++) {
-			int veinSize = 4;
+			int veinSize = 2 + random.nextInt(2);
 			int x = chunkX + random.nextInt(16);
 			int y = random.nextInt(40);
 			int z = chunkZ + random.nextInt(16);
-			if(world.getBiomeGenForCoords(chunkX, chunkZ)==BiomeGenBase.ocean)
+			if(BiomeDictionary.isBiomeOfType(world.getBiomeGenForCoords(chunkX, chunkZ), Type.SWAMP))
+				new WorldGenMinable(AbyssalCraft.Coraliumore, veinSize).generate(world, random, x, y, z);
+		}
+
+		for(int rarity = 0; rarity < 6; rarity++) {
+			int veinSize = 4 + random.nextInt(2);
+			int x = chunkX + random.nextInt(16);
+			int y = random.nextInt(40);
+			int z = chunkZ + random.nextInt(16);
+			if(BiomeDictionary.isBiomeOfType(world.getBiomeGenForCoords(chunkX, chunkZ), Type.OCEAN) &&
+					world.getBiomeGenForCoords(chunkX, chunkZ)!=BiomeGenBase.deepOcean)
 				new WorldGenMinable(AbyssalCraft.Coraliumore, veinSize).generate(world, random, x, y, z);
 			if(world.getBiomeGenForCoords(chunkX, chunkZ)==BiomeGenBase.deepOcean)
 				new WorldGenMinable(AbyssalCraft.Coraliumore, veinSize).generate(world, random, x, y-20, z);
 		}
 
 		for(int rarity = 0; rarity < 3; rarity++) {
-			int veinSize = 4;
+			int veinSize = 4 + random.nextInt(2);
 			int x = chunkX + random.nextInt(16);
 			int y = random.nextInt(30);
 			int z = chunkZ + random.nextInt(16);

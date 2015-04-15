@@ -18,7 +18,6 @@ package com.shinoow.abyssalcraft.common.world.biome;
 
 import java.util.Random;
 
-import net.minecraft.block.Block;
 import net.minecraft.entity.monster.EntitySkeleton;
 import net.minecraft.entity.monster.EntityZombie;
 import net.minecraft.world.World;
@@ -57,14 +56,13 @@ public class BiomeGenAbywasteland extends BiomeGenBase {
 		super.decorate(par1World, par2Random, par3, par4);
 		int var5 = 3 + par2Random.nextInt(6);
 
-		for (int rarity = 0; rarity < var5; ++rarity){
+		for (int rarity = 0; rarity < 8; rarity++){
+			int veinSize = 1 + par2Random.nextInt(3);
 			int x = par3 + par2Random.nextInt(16);
 			int y = par2Random.nextInt(18) + 4;
 			int z = par4 + par2Random.nextInt(16);
-			Block var10 = par1World.getBlock(x, y, z);
 
-			if (var10 == AbyssalCraft.abystone)
-				par1World.setBlock(x, y, z, AbyssalCraft.AbyLCorOre);
+			new WorldGenMinable(AbyssalCraft.AbyLCorOre, veinSize, AbyssalCraft.abystone).generate(par1World, par2Random, x, y, z);
 		}
 		for(int rarity = 0; rarity < 8; rarity++) {
 			int veinSize =  2 + par2Random.nextInt(6);
@@ -107,7 +105,7 @@ public class BiomeGenAbywasteland extends BiomeGenBase {
 			new WorldGenMinable(AbyssalCraft.AbyGolOre, veinSize, AbyssalCraft.abystone).generate(par1World, par2Random, x, y, z);
 		}
 		for(int rarity = 0; rarity < var5; rarity++) {
-			int veinSize = 1 + par2Random.nextInt(3);
+			int veinSize = 1 + par2Random.nextInt(7);
 			int x = par3 + par2Random.nextInt(16);
 			int y = par2Random.nextInt(10);
 			int z = par4 + par2Random.nextInt(16);

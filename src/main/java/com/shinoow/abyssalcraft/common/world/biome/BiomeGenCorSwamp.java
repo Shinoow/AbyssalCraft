@@ -92,10 +92,10 @@ public class BiomeGenCorSwamp extends BiomeGenBase {
 			int var9 = par4 + par2Random.nextInt(16);
 			Block var10 = par1World.getBlock(var7, var8, var9);
 
-			if (var10.isReplaceableOreGen(par1World, var7, var8, var9, Blocks.stone) || var10 == Blocks.iron_ore || var10 == Blocks.coal_ore)
-				par1World.setBlock(var7, var8, var9, AbyssalCraft.Coraliumore);
+			if (var10 != null && var10.isReplaceableOreGen(par1World, var7, var8, var9, Blocks.stone) || var10 == Blocks.iron_ore || var10 == Blocks.coal_ore)
+				par1World.setBlock(var7, var8, var9, AbyssalCraft.Coraliumore, 0, 2);
 		}
-		for(int rarity = 0; rarity < 3; rarity++)
+		for(int rarity = 0; rarity < 6; rarity++)
 		{
 			int veinSize = 4;
 			int x = par3 + par2Random.nextInt(16);

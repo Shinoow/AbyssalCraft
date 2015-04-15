@@ -27,11 +27,12 @@ import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
+import com.shinoow.abyssalcraft.api.item.ICrystal;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class ItemCrystal extends Item {
+public class ItemCrystal extends Item implements ICrystal {
 
 	private String atoms;
 	private int crystalColor;

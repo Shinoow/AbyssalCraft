@@ -101,12 +101,18 @@ message.chagaroth.death.2=
 message.chagaroth.death.3=
 message.chagaroth.death.4=
 message.jzahar.death.dev=
+message.jzahar.banish.vanilla=
+message.jzahar.banish.ac=
+message.jzahar.banish.jzh=
+message.jzahar.creative.1=
+message.jzahar.creative.2=
 message.sacthoth.spawn.1=
 message.sacthoth.spawn.2=
 message.sacthoth.damage.explosion=
 message.sacthoth.damage.projectile=
 message.portalplacer.error.1=
 message.portalplacer.error.2=
+message.necronomicon.nope=
 
 #Container Inventories
 container.abyssalcraft.crate=
@@ -115,11 +121,13 @@ container.abyssalcraft.transmutator=
 container.abyssalcraft.engraver=
 container.abyssalcraft.necromonicon=
 conainter.abyssalcraft.abyssalnomicon=
+container.abyssalcraft.materializer=
 
 #NEI Integration
 container.abyssalcraft.crystallizer.nei=
 container.abyssalcraft.transmutator.nei=
 container.abyssalcraft.engraver.nei=
+container.abyssalcraft.materializer.nei=
 
 #Necronomicon Labels
 necronomicon.index=
@@ -219,6 +227,8 @@ necronomicon.text.materials.omotholstone.1=
 necronomicon.text.materials.omotholstone.2=
 necronomicon.text.materials.ethaxium.1=
 necronomicon.text.materials.ethaxium.2=
+necronomicon.text.materials.darkethaxium.1=
+necronomicon.text.materials.darkethaxium.2=
 
 necronomicon.text.overworld.progression.1=
 necronomicon.text.overworld.progression.2=
@@ -312,12 +322,16 @@ necronomicon.text.integration.nei.3=
 necronomicon.text.integration.nei.4=
 necronomicon.text.integration.nei.5=
 necronomicon.text.integration.nei.6=
+necronomicon.text.integration.nei.7=
+necronomicon.text.integration.nei.8=
 
 necronomicon.text.integration.tc.1=
 necronomicon.text.integration.tc.2=
 
 necronomicon.text.integration.morph.1=
 necronomicon.text.integration.morph.2=
+
+necronomicon.text.integration.invtweaks.1=
 
 necronomicon.text.wip=
 
@@ -384,6 +398,7 @@ tooltip.crystal=
 tooltip.portalplacerjzh.1=
 tooltip.portalplacerjzh.2=
 tooltip.soulreaper=
+tooltip.crystalbag=
 
 #Creative Tabs
 itemgroup.acblocks=
@@ -512,6 +527,14 @@ tile.OG.name=
 tile.Ofire.name=
 tile.engraver.name=
 tile.house.name=
+tile.materializer.name=
+tile.DEB.0.name=
+tile.DEB.1.name=
+tile.DEBP.name=
+tile.DEBs.name=
+tile.DEBs1.name=
+tile.DEBs2.name=
+tile.DEBf.name=
 
 #Items
 item.DEV_SWORD.name=
@@ -708,6 +731,10 @@ item.necronomicon_cor.name=
 item.necronomicon_dre.name=
 item.necronomicon_omt.name=
 item.abyssalnomicon.name=
+item.crystalbag_small.name=
+item.crystalbag_medium.name=
+item.crystalbag_large.name=
+item.crystalbag_huge.name=
 
 #Entities
 entity.abyssalcraft.depthsghoul.name=

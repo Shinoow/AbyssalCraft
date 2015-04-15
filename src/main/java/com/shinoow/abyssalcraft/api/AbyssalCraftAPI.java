@@ -38,6 +38,9 @@ import net.minecraftforge.common.util.EnumHelper;
 import net.minecraftforge.oredict.OreDictionary;
 
 import com.google.common.collect.Lists;
+import com.shinoow.abyssalcraft.api.block.ACBlocks;
+import com.shinoow.abyssalcraft.api.integration.IACPlugin;
+import com.shinoow.abyssalcraft.api.item.ACItems;
 import com.shinoow.abyssalcraft.api.item.ItemEngraving;
 import com.shinoow.abyssalcraft.api.recipe.*;
 
@@ -53,6 +56,11 @@ import cpw.mods.fml.common.registry.GameRegistry;
  *
  */
 public class AbyssalCraftAPI {
+
+	/**
+	 * String used to specify the API version in the "package-info.java" classes
+	 */
+	public static final String API_VERSION = "1.3.0";
 
 	/**
 	 * Enchantment IDs, first one is the Coralium enchantment, second Dread enchantment,
@@ -77,6 +85,10 @@ public class AbyssalCraftAPI {
 
 	private static List<Class<? extends EntityLivingBase>> shoggothFood = Lists.newArrayList();
 
+	private static List<ItemStack> crystals = Lists.newArrayList();
+
+	private static List<IACPlugin> integrations = Lists.newArrayList();
+
 	/**
 	 *  {@link EnumCreatureAttribute} used for the Shadow mobs
 	 */
@@ -92,12 +104,12 @@ public class AbyssalCraftAPI {
 	public static ArmorMaterial dreadiumSamuraiArmor = EnumHelper.addArmorMaterial("DreadiumS", 45, new int[]{3, 8, 6, 3}, 20);
 	public static ArmorMaterial ethaxiumArmor = EnumHelper.addArmorMaterial("Ethaxium", 50, new int[]{3, 8, 6, 3}, 25);
 
-	public static ToolMaterial darkstoneTool = EnumHelper.addToolMaterial("DARKSTONE", 1, 180, 5.0F, 1, 5);
-	public static ToolMaterial abyssalniteTool = EnumHelper.addToolMaterial("ABYSSALNITE", 4, 1261, 13.0F, 4, 13);
-	public static ToolMaterial refinedCoraliumTool = EnumHelper.addToolMaterial("CORALIUM", 5, 2000, 14.0F, 5, 14);
-	public static ToolMaterial dreadiumTool = EnumHelper.addToolMaterial("DREADIUM", 6, 3000, 15.0F, 6, 15);
-	public static ToolMaterial coraliumInfusedAbyssalniteTool = EnumHelper.addToolMaterial("ABYSSALNITE_C", 8, 8000, 20.0F, 8, 30);
-	public static ToolMaterial ethaxiumTool = EnumHelper.addToolMaterial("ETHAXIUM", 8, 4000, 16.0F, 8, 20);
+	public static ToolMaterial darkstoneTool = EnumHelper.addToolMaterial("DARKSTONE", 1, 180, 5.0F, 1, 5).setRepairItem(new ItemStack(ACBlocks.darkstone_cobblestone));
+	public static ToolMaterial abyssalniteTool = EnumHelper.addToolMaterial("ABYSSALNITE", 4, 1261, 13.0F, 4, 13).setRepairItem(new ItemStack(ACItems.abyssalnite_ingot));
+	public static ToolMaterial refinedCoraliumTool = EnumHelper.addToolMaterial("CORALIUM", 5, 2000, 14.0F, 5, 14).setRepairItem(new ItemStack(ACItems.refined_coralium_ingot));
+	public static ToolMaterial dreadiumTool = EnumHelper.addToolMaterial("DREADIUM", 6, 3000, 15.0F, 6, 15).setRepairItem(new ItemStack(ACItems.dreadium_ingot));
+	public static ToolMaterial coraliumInfusedAbyssalniteTool = EnumHelper.addToolMaterial("ABYSSALNITE_C", 8, 8000, 20.0F, 8, 30).setRepairItem(new ItemStack(ACItems.transmutation_gem));
+	public static ToolMaterial ethaxiumTool = EnumHelper.addToolMaterial("ETHAXIUM", 8, 4000, 16.0F, 8, 20).setRepairItem(new ItemStack(ACItems.ethaxium_ingot));
 
 	/**
 	 * Initializes the reflection required for the Potion code, ignore it
@@ -309,6 +321,24 @@ public class AbyssalCraftAPI {
 	}
 
 	/**
+	 * OreDictionary specific Crystallization
+	 * @param input The ore input
+	 * @param output1 The first ore output
+	 * @param out1 Quantity of the first output
+	 * @param meta1 Metadata for the first output
+	 * @param output2 The second ore output
+	 * @param out2 Quantity of the second output
+	 * @param meta2 Metadata for the second output
+	 * @param xp Amount of exp given
+	 */
+	public static void addCrystallization(String input, String output1, int out1, int meta1, String output2, int out2, int meta2, float xp){
+		Iterator<ItemStack> inputIter = OreDictionary.getOres(input).iterator();
+		if(!OreDictionary.getOres(output1).isEmpty() && !OreDictionary.getOres(output2).isEmpty())
+			while(inputIter.hasNext())
+				addCrystallization(inputIter.next(), new ItemStack(OreDictionary.getOres(output1).iterator().next().getItem(), out1, meta1), new ItemStack(OreDictionary.getOres(output2).iterator().next().getItem(), out2, meta2), xp);
+	}
+
+	/**
 	 * OreDictionary specific single-output Crystallization
 	 * @param input The ore input
 	 * @param output The ore output
@@ -318,7 +348,7 @@ public class AbyssalCraftAPI {
 		Iterator<ItemStack> inputIter = OreDictionary.getOres(input).iterator();
 		if(!OreDictionary.getOres(output).isEmpty())
 			while(inputIter.hasNext())
-				addSingleCrystallization(inputIter.next(), new ItemStack(OreDictionary.getOres(output).iterator().next().getItem()), xp);
+				addSingleCrystallization(inputIter.next(), OreDictionary.getOres(output).iterator().next(), xp);
 	}
 
 	/**
@@ -336,6 +366,21 @@ public class AbyssalCraftAPI {
 	}
 
 	/**
+	 * OreDictionary specific single-output Crystallization
+	 * @param input The ore input
+	 * @param output The ore output
+	 * @param out The output quantity
+	 * @param meta The output metadata
+	 * @param xp Amount of exp given
+	 */
+	public static void addSingleCrystallization(String input, String output, int out, int meta, float xp){
+		Iterator<ItemStack> inputIter = OreDictionary.getOres(input).iterator();
+		if(!OreDictionary.getOres(output).isEmpty())
+			while(inputIter.hasNext())
+				addSingleCrystallization(inputIter.next(), new ItemStack(OreDictionary.getOres(output).iterator().next().getItem(), out, meta), xp);
+	}
+
+	/**
 	 * OreDictionary specific Transmutation
 	 * @param input The ore input
 	 * @param output The ore output
@@ -345,7 +390,7 @@ public class AbyssalCraftAPI {
 		Iterator<ItemStack> inputIter = OreDictionary.getOres(input).iterator();
 		if(!OreDictionary.getOres(output).isEmpty())
 			while(inputIter.hasNext())
-				addTransmutation(inputIter.next(), new ItemStack(OreDictionary.getOres(output).iterator().next().getItem()), xp);
+				addTransmutation(inputIter.next(), OreDictionary.getOres(output).iterator().next(), xp);
 	}
 
 	/**
@@ -407,6 +452,86 @@ public class AbyssalCraftAPI {
 			System.err.println("You're doing it wrong!");
 			e.printStackTrace();
 		}
+	}
+
+	/**
+	 * Basic Materialization.
+	 * Note: all inputs has to be {@link ICrystal}s
+	 * @param input1 The first input
+	 * @param input2 The second input
+	 * @param input3 The third input
+	 * @param input4 The fourth input
+	 * @param input5 The fifth input
+	 * @param output The output
+	 * @param level Required Necronomicon level
+	 */
+	public static void addMaterialization(ItemStack input1, ItemStack input2, ItemStack input3, ItemStack input4, ItemStack input5, ItemStack output, int level){
+		//do stuff
+	}
+
+	/**
+	 * Basic Materialization.
+	 * Note: all inputs has to be {@link ICrystal}s
+	 * @param input1 The first input
+	 * @param input2 The second input
+	 * @param input3 The third input
+	 * @param input4 The fourth input
+	 * @param output The output
+	 * @param level Required Necronomicon level
+	 */
+	public static void addMaterialization(ItemStack input1, ItemStack input2, ItemStack input3, ItemStack input4, ItemStack output, int level){
+		addMaterialization(input1, input2, input3, input4, null, output, level);
+	}
+
+	/**
+	 * Basic Materialization.
+	 * Note: all inputs has to be {@link ICrystal}s
+	 * @param input1 The first input
+	 * @param input2 The second input
+	 * @param input3 The third input
+	 * @param output The output
+	 * @param level Required Necronomicon level
+	 */
+	public static void addMaterialization(ItemStack input1, ItemStack input2, ItemStack input3, ItemStack output, int level){
+		addMaterialization(input1, input2, input3, null, output, level);
+	}
+
+	/**
+	 * Basic Materialization.
+	 * Note: all inputs has to be {@link ICrystal}s
+	 * @param input1 The first input
+	 * @param input2 The second input
+	 * @param output The output
+	 * @param level Required Necronomicon level
+	 */
+	public static void addMaterialization(ItemStack input1, ItemStack input2, ItemStack output, int level){
+		addMaterialization(input1, input2, null, output, level);
+	}
+
+	/**
+	 * Basic Materialization.
+	 * Note: all inputs has to be {@link ICrystal}s
+	 * @param input The input
+	 * @param output The output
+	 * @param level Required Necronomicon level
+	 */
+	public static void addMaterialization(ItemStack input, ItemStack output, int level){
+		addMaterialization(input, null, output, level);
+	}
+
+	/**
+	 * Basic OreDictionary Materialization.
+	 * Note: all inputs has to be {@link ICrystal}s
+	 * @param input1 The first input
+	 * @param input2 The second input
+	 * @param input3 The third input
+	 * @param input4 The fourth input
+	 * @param input5 The fifth input
+	 * @param output The output
+	 * @param level Required Necronomicon level
+	 */
+	public static void addMaterialization(String input1, String input2, String input3, String input4, String input5, String output, int level){
+		//do stuff
 	}
 
 	/**
@@ -475,6 +600,42 @@ public class AbyssalCraftAPI {
 	 */
 	public static List<Class<? extends EntityLivingBase>> getShoggothFood(){
 		return shoggothFood;
+	}
+
+	/**
+	 * Adds the ItemStack to the crystal list. Anything added to this list will function like a {@link ICrystal}
+	 * @param crystal The ItemStack to be added
+	 */
+	public static void addCrystal(ItemStack crystal){
+		crystals.add(crystal);
+	}
+
+	/**
+	 * Used by various things to fetch a list of ItemStacks that should function like {@link ICrystal}s
+	 * @return An ArrayList of ItemStacks
+	 */
+	public static List<ItemStack> getCrystals(){
+		return crystals;
+	}
+
+	/**
+	 * Method used to register AbyssalCraft integrations by other mods.
+	 * This can be useful if you want to have a weak dependency (you could do all the
+	 * integration stuff in a class that's only called when AC is loaded)
+	 * NOTE: Should be registered in either Pre-init or Init
+	 * @param plugin A class that implements the {@link IACPlugin} interface
+	 */
+	public static void registerACIntegration(IACPlugin plugin){
+		integrations.add(plugin);
+	}
+
+	/**
+	 * Used by the IntegrationHandler to fetch a list of integrations made
+	 * by other mods
+	 * @return An ArrayList of IACPlugins
+	 */
+	public static List<IACPlugin> getIntegrations(){
+		return integrations;
 	}
 
 	/**

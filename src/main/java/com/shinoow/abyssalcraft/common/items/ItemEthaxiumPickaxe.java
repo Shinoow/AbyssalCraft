@@ -33,11 +33,11 @@ import com.shinoow.abyssalcraft.AbyssalCraft;
 public class ItemEthaxiumPickaxe extends ItemTool {
 
 	private static Set<Block> blocksEffectiveAgainst = Sets.newHashSet(new Block[] {Blocks.cobblestone, Blocks.double_stone_slab, Blocks.stone_slab, Blocks.stone, Blocks.sandstone, Blocks.mossy_cobblestone, Blocks.iron_ore, Blocks.iron_block, Blocks.coal_ore, Blocks.gold_block, Blocks.gold_ore, Blocks.diamond_ore, Blocks.diamond_block, Blocks.ice, Blocks.netherrack, Blocks.lapis_ore, Blocks.lapis_block, Blocks.redstone_ore, Blocks.lit_redstone_ore, Blocks.rail, Blocks.detector_rail, Blocks.golden_rail, Blocks.activator_rail});
+	private static Set<Block> effectiveBlocks = Sets.newHashSet( new Block[] {AbyssalCraft.ethaxium, AbyssalCraft.ethaxiumbrick, AbyssalCraft.ethaxiumpillar, AbyssalCraft.ethaxiumfence, AbyssalCraft.ethaxiumslab1, AbyssalCraft.ethaxiumslab2, AbyssalCraft.ethaxiumstairs, AbyssalCraft.ethaxiumblock, AbyssalCraft.materializer, AbyssalCraft.darkethaxiumbrick, AbyssalCraft.darkethaxiumpillar, AbyssalCraft.darkethaxiumstairs, AbyssalCraft.darkethaxiumslab1, AbyssalCraft.darkethaxiumslab2, AbyssalCraft.darkethaxiumfence});
 
 	public ItemEthaxiumPickaxe(ToolMaterial enumToolMaterial)
 	{
 		super(2, enumToolMaterial, blocksEffectiveAgainst);
-		enumToolMaterial.customCraftingMaterial = AbyssalCraft.ethaxiumIngot;
 		setHarvestLevel("pickaxe", 8);
 	}
 
@@ -73,9 +73,7 @@ public class ItemEthaxiumPickaxe extends ItemTool {
 	@Override
 	public float getDigSpeed(ItemStack stack, Block block, int meta)
 	{
-		if(block == AbyssalCraft.ethaxium || block == AbyssalCraft.ethaxiumbrick || block == AbyssalCraft.ethaxiumpillar
-				|| block == AbyssalCraft.ethaxiumfence || block == AbyssalCraft.ethaxiumslab1 || block == AbyssalCraft.ethaxiumslab2
-				|| block == AbyssalCraft.ethaxiumstairs)
+		if(effectiveBlocks.contains(block))
 			return efficiencyOnProperMaterial * 10;
 		if (ForgeHooks.isToolEffective(stack, block, meta))
 			return efficiencyOnProperMaterial;

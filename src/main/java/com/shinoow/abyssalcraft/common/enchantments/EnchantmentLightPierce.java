@@ -18,7 +18,7 @@ package com.shinoow.abyssalcraft.common.enchantments;
 
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentDamage;
-import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.item.ItemAxe;
 import net.minecraft.item.ItemStack;
 
@@ -50,9 +50,9 @@ public class EnchantmentLightPierce extends EnchantmentDamage {
 	}
 
 	@Override
-	public float calcModifierLiving(int par1, EntityLivingBase par2EntityLivingBase)
+	public float func_152376_a(int par1, EnumCreatureAttribute par2CreatureAttribute)
 	{
-		return par2EntityLivingBase.getCreatureAttribute() == AbyssalCraftAPI.SHADOW ? par1 * 2.5F : 0.0F;
+		return par2CreatureAttribute == AbyssalCraftAPI.SHADOW ? par1 * 2.5F : 0.0F;
 	}
 
 	@Override

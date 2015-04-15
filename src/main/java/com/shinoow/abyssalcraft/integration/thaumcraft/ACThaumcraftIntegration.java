@@ -23,10 +23,22 @@ import thaumcraft.api.aspects.AspectList;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI.ACEntities;
+import com.shinoow.abyssalcraft.api.integration.IACPlugin;
 
-public class ACThaumcraftIntegration {
+public class ACThaumcraftIntegration implements IACPlugin {
 
-	public static void init(){
+	@Override
+	public String getModName(){
+		return "Thaumcraft";
+	}
+
+	@Override
+	public void preInit() {
+
+	}
+
+	@Override
+	public void init(){
 		ThaumcraftApi.registerObjectTag(new ItemStack(AbyssalCraft.Darkstone), new AspectList().add(Aspect.EARTH, 2).add(Aspect.DARKNESS, 1));
 		ThaumcraftApi.registerObjectTag(new ItemStack(AbyssalCraft.Darkgrass), new AspectList().add(Aspect.EARTH, 1).add(Aspect.PLANT, 1).add(Aspect.DARKNESS, 1));
 		ThaumcraftApi.registerObjectTag(new ItemStack(AbyssalCraft.Darkstone_brick), new AspectList().add(Aspect.EARTH, 2).add(Aspect.DARKNESS, 1));
@@ -109,6 +121,11 @@ public class ACThaumcraftIntegration {
 		ThaumcraftApi.registerEntityTag(getMobName(ACEntities.sacthoth), new AspectList().add(Aspect.DEATH, 5).add(Aspect.DARKNESS, 5));
 		ThaumcraftApi.registerEntityTag(getMobName(ACEntities.remnant), new AspectList().add(Aspect.DEATH, 5).add(Aspect.DARKNESS, 5).add(Aspect.ELDRITCH, 5));
 		ThaumcraftApi.registerEntityTag(getMobName(ACEntities.omothol_ghoul), new AspectList().add(Aspect.DEATH, 5).add(Aspect.DARKNESS, 5).add(Aspect.ELDRITCH, 5));
+	}
+
+	@Override
+	public void postInit() {
+
 	}
 
 	public static String getMobName(String name){

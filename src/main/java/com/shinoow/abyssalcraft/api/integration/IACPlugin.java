@@ -14,31 +14,36 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.shinoow.abyssalcraft.api.addon;
+package com.shinoow.abyssalcraft.api.integration;
 
-import com.shinoow.abyssalcraft.api.addon.ACAddon.AddonType;
+import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
 
 /**
- * Coremod interface for AbyssalCraft add-ons,
- * implement it in the dummy class
+ * Simple interface to handle integrations. If used by another mod, register the
+ * file implementing this interface in {@link AbyssalCraftAPI} or through a IMC message
  * @author shinoow
  *
  */
-public interface IACAddon {
+public interface IACPlugin {
 
 	/**
-	 * ModId, used for indexing multiple add-ons
+	 * Used to fetch the mod name
+	 * @return A String representing the mod's name
 	 */
-	String getModId();
+	public String getModName();
 
 	/**
-	 * Name of the add-on (same as mod name)
+	 * Will be called at the end of the pre-init stage
 	 */
-	String getName();
+	public void preInit();
 
 	/**
-	 * What kind of add-on (can be multiple kinds)
+	 * Will be called at the end of the init stage
 	 */
-	AddonType[] getType();
+	public void init();
 
+	/**
+	 * Will be called at the post-init stage
+	 */
+	public void postInit();
 }

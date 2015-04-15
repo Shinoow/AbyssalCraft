@@ -18,10 +18,9 @@ package com.shinoow.abyssalcraft.common.world.biome;
 
 import java.util.Random;
 
-import net.minecraft.block.Block;
-import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
+import net.minecraft.world.gen.feature.WorldGenMinable;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.common.entity.EntityAbyssalZombie;
@@ -59,13 +58,12 @@ public class BiomeGenDarklandsMountains extends BiomeGenBase {
 
 		for (int rarity = 0; rarity < var5; ++rarity)
 		{
+			int veinSize = 1 + par2Random.nextInt(3);
 			int x = par3 + par2Random.nextInt(16);
 			int y = par2Random.nextInt(28) + 4;
 			int z = par4 + par2Random.nextInt(16);
-			Block var10 = par1World.getBlock(x, y, z);
 
-			if (var10.isReplaceableOreGen(par1World, x, y, z, Blocks.stone))
-				par1World.setBlock(x, y, z, AbyssalCraft.abyore);
+			new WorldGenMinable(AbyssalCraft.abyore, veinSize).generate(par1World, par2Random, x, y, z);
 		}
 	}
 

@@ -16,11 +16,7 @@
  */
 package com.shinoow.abyssalcraft.client.render.entity;
 
-import java.util.Random;
-
 import net.minecraft.client.renderer.OpenGlHelper;
-import net.minecraft.client.renderer.RenderHelper;
-import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
@@ -91,17 +87,6 @@ public class RenderDragonMinion extends RenderLiving {
 	 */
 	protected void renderDragonModel(EntityDragonMinion par1EntityDragonMinion, float par2, float par3, float par4, float par5, float par6, float par7)
 	{
-		if (par1EntityDragonMinion.deathTicks > 0)
-		{
-			float f6 = par1EntityDragonMinion.deathTicks / 200.0F;
-			GL11.glDepthFunc(GL11.GL_LEQUAL);
-			GL11.glEnable(GL11.GL_ALPHA_TEST);
-			GL11.glAlphaFunc(GL11.GL_GREATER, f6);
-			mainModel.render(par1EntityDragonMinion, par2, par3, par4, par5, par6, par7);
-			GL11.glAlphaFunc(GL11.GL_GREATER, 0.1F);
-			GL11.glDepthFunc(GL11.GL_EQUAL);
-		}
-
 		bindEntityTexture(par1EntityDragonMinion);
 		GL11.glEnable(GL11.GL_BLEND);
 		GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
@@ -136,67 +121,6 @@ public class RenderDragonMinion extends RenderLiving {
 	protected ResourceLocation func_110841_a(EntityDragonMinion par1EntityDragonMinion)
 	{
 		return field_110844_k;
-	}
-
-	/**
-	 * Renders the animation for when an enderdragon dies
-	 */
-	protected void renderDragonDying(EntityDragonMinion par1EntityDragonMinion, float par2)
-	{
-		super.renderEquippedItems(par1EntityDragonMinion, par2);
-		Tessellator tessellator = Tessellator.instance;
-
-		if (par1EntityDragonMinion.deathTicks > 0)
-		{
-			RenderHelper.disableStandardItemLighting();
-			float f1 = (par1EntityDragonMinion.deathTicks + par2) / 200.0F;
-			float f2 = 0.0F;
-
-			if (f1 > 0.8F)
-				f2 = (f1 - 0.8F) / 0.2F;
-
-			Random random = new Random(432L);
-			GL11.glDisable(GL11.GL_TEXTURE_2D);
-			GL11.glShadeModel(GL11.GL_SMOOTH);
-			GL11.glEnable(GL11.GL_BLEND);
-			GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE);
-			GL11.glDisable(GL11.GL_ALPHA_TEST);
-			GL11.glEnable(GL11.GL_CULL_FACE);
-			GL11.glDepthMask(false);
-			GL11.glPushMatrix();
-			GL11.glTranslatef(0.0F, -1.0F, -2.0F);
-
-			for (int i = 0; i < (f1 + f1 * f1) / 2.0F * 60.0F; ++i)
-			{
-				GL11.glRotatef(random.nextFloat() * 360.0F, 1.0F, 0.0F, 0.0F);
-				GL11.glRotatef(random.nextFloat() * 360.0F, 0.0F, 1.0F, 0.0F);
-				GL11.glRotatef(random.nextFloat() * 360.0F, 0.0F, 0.0F, 1.0F);
-				GL11.glRotatef(random.nextFloat() * 360.0F, 1.0F, 0.0F, 0.0F);
-				GL11.glRotatef(random.nextFloat() * 360.0F, 0.0F, 1.0F, 0.0F);
-				GL11.glRotatef(random.nextFloat() * 360.0F + f1 * 90.0F, 0.0F, 0.0F, 1.0F);
-				tessellator.startDrawing(6);
-				float f3 = random.nextFloat() * 20.0F + 5.0F + f2 * 10.0F;
-				float f4 = random.nextFloat() * 2.0F + 1.0F + f2 * 2.0F;
-				tessellator.setColorRGBA_I(16777215, (int)(255.0F * (1.0F - f2)));
-				tessellator.addVertex(0.0D, 0.0D, 0.0D);
-				tessellator.setColorRGBA_I(16711935, 0);
-				tessellator.addVertex(-0.866D * f4, f3, -0.5F * f4);
-				tessellator.addVertex(0.866D * f4, f3, -0.5F * f4);
-				tessellator.addVertex(0.0D, f3, 1.0F * f4);
-				tessellator.addVertex(-0.866D * f4, f3, -0.5F * f4);
-				tessellator.draw();
-			}
-
-			GL11.glPopMatrix();
-			GL11.glDepthMask(true);
-			GL11.glDisable(GL11.GL_CULL_FACE);
-			GL11.glDisable(GL11.GL_BLEND);
-			GL11.glShadeModel(GL11.GL_FLAT);
-			GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-			GL11.glEnable(GL11.GL_TEXTURE_2D);
-			GL11.glEnable(GL11.GL_ALPHA_TEST);
-			RenderHelper.enableStandardItemLighting();
-		}
 	}
 
 	/**
@@ -241,12 +165,6 @@ public class RenderDragonMinion extends RenderLiving {
 	protected int shouldRenderPass(EntityLivingBase par1EntityLivingBase, int par2, float par3)
 	{
 		return renderGlow((EntityDragonMinion)par1EntityLivingBase, par2, par3);
-	}
-
-	@Override
-	protected void renderEquippedItems(EntityLivingBase par1EntityLivingBase, float par2)
-	{
-		renderDragonDying((EntityDragonMinion)par1EntityLivingBase, par2);
 	}
 
 	@Override

@@ -45,4 +45,28 @@ public class ACLogger {
 	public static void finer(String format, Object... data) {
 		log(Level.TRACE, format, data);
 	}
+
+	public static void imcLog(Level level, String format, Object... data){
+		FMLLog.log("AbyssalCraft|IMC", level, format, data);
+	}
+
+	public static void imcSevere(String format, Object... data) {
+		imcLog(Level.ERROR, format, data);
+	}
+
+	public static void imcWarning(String format, Object... data) {
+		imcLog(Level.WARN, format, data);
+	}
+
+	public static void imcInfo(String format, Object... data) {
+		imcLog(Level.INFO, format, data);
+	}
+
+	public static void imcFine(String format, Object... data) {
+		imcLog(Level.DEBUG, format, data);
+	}
+
+	public static void imcFiner(String format, Object... data) {
+		imcLog(Level.TRACE, format, data);
+	}
 }

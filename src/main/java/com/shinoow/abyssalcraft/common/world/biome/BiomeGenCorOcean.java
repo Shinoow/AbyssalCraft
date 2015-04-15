@@ -60,10 +60,10 @@ public class BiomeGenCorOcean extends BiomeGenBase {
 			int var9 = par4 + par2Random.nextInt(16);
 			Block var10 = par1World.getBlock(var7, var8, var9);
 
-			if (var10.isReplaceableOreGen(par1World, var7, var8, var9, Blocks.stone) || var10 == Blocks.iron_ore || var10 == Blocks.coal_ore) {
+			if (var10 != null && var10.isReplaceableOreGen(par1World, var7, var8, var9, Blocks.stone) || var10 == Blocks.iron_ore || var10 == Blocks.coal_ore) {
 				par1World.setBlock(var7, var8, var9, AbyssalCraft.Coraliumore);
 				if(var10 == Blocks.diamond_ore || var10 == Blocks.gold_ore || var10 == Blocks.iron_ore)
-					par1World.setBlock(var7, var8, var9, AbyssalCraft.CoraliumInfusedStone);
+					par1World.setBlock(var7, var8, var9, AbyssalCraft.CoraliumInfusedStone, 0, 2);
 			}
 		}
 		for(int rarity = 0; rarity < 3; rarity++) {

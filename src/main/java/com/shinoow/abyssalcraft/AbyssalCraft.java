@@ -32,8 +32,10 @@ import net.minecraft.entity.EntityList.EntityEggInfo;
 import net.minecraft.init.Items;
 import net.minecraft.item.*;
 import net.minecraft.launchwrapper.Launch;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.*;
 import net.minecraft.stats.*;
+import net.minecraft.util.StatCollector;
 import net.minecraft.util.WeightedRandomChestContent;
 import net.minecraft.world.WorldProvider;
 import net.minecraft.world.biome.BiomeGenBase;
@@ -41,6 +43,7 @@ import net.minecraft.world.gen.structure.MapGenStructureIO;
 import net.minecraftforge.common.*;
 import net.minecraftforge.common.BiomeDictionary.Type;
 import net.minecraftforge.common.BiomeManager.BiomeEntry;
+import net.minecraftforge.common.BiomeManager.BiomeType;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.event.world.WorldEvent;
 import net.minecraftforge.fluids.*;
@@ -48,6 +51,7 @@ import net.minecraftforge.oredict.OreDictionary;
 
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI.FuelType;
+import com.shinoow.abyssalcraft.api.integration.IACPlugin;
 import com.shinoow.abyssalcraft.api.item.*;
 import com.shinoow.abyssalcraft.common.*;
 import com.shinoow.abyssalcraft.common.blocks.*;
@@ -79,7 +83,7 @@ import cpw.mods.fml.common.registry.*;
 @Mod(modid = AbyssalCraft.modid, name = AbyssalCraft.name, version = AbyssalCraft.version, dependencies = "required-after:Forge@[forgeversion,);after:Thaumcraft", useMetadata = false, guiFactory = "com.shinoow.abyssalcraft.client.config.ACGuiFactory")
 public class AbyssalCraft {
 
-	public static final String version = "1.8.4.1";
+	public static final String version = "1.8.5";
 	public static final String modid = "abyssalcraft";
 	public static final String name = "AbyssalCraft";
 
@@ -108,6 +112,19 @@ public class AbyssalCraft {
 
 	public static Fluid CFluid, antifluid;
 
+	public static final Fluid LIQUID_CORALIUM = new Fluid("liquidcoralium"){
+		@Override
+		public String getLocalizedName() {
+			return StatCollector.translateToLocal("tile.Cwater.name");
+		}
+	}.setDensity(3000).setTemperature(350);
+	public static final Fluid LIQUID_ANTIMATTER = new Fluid("liquidantimatter"){
+		@Override
+		public String getLocalizedName() {
+			return StatCollector.translateToLocal("tile.antiliquid.name");
+		}
+	}.setDensity(4000).setViscosity(1500).setTemperature(100);
+
 	public static Achievement mineDS, mineAby, killghoul, enterabyss, killdragon, summonAsorah,
 	killAsorah, enterdreadlands, killdreadguard, ghoulhead, killPete, killWilson, killOrange,
 	petehead, wilsonhead, orangehead, mineCorgem, mineCor, findPSDL, GK1, GK2, GK3, Jzhstaff,
@@ -129,7 +146,8 @@ public class AbyssalCraft {
 	chagarothfistspawner, DrTfence, nitreOre, AbyIroOre, AbyGolOre, AbyDiaOre, AbyNitOre, AbyTinOre,
 	AbyCopOre, AbyPCorOre, AbyLCorOre, solidLava, ethaxium, ethaxiumbrick, ethaxiumpillar, ethaxiumstairs,
 	ethaxiumslab1, ethaxiumslab2, ethaxiumfence, omotholstone, ethaxiumblock, omotholportal, omotholfire,
-	engraver, house;
+	engraver, house, materializer, darkethaxiumbrick, darkethaxiumpillar, darkethaxiumstairs,
+	darkethaxiumslab1, darkethaxiumslab2, darkethaxiumfence;
 
 	//Overworld biomes
 	public static BiomeGenBase Darklands, DarklandsForest, DarklandsPlains, DarklandsHills,
@@ -149,7 +167,8 @@ public class AbyssalCraft {
 	public static Item OC, Staff, portalPlacer, Cbucket, PSDLfinder, EoA, portalPlacerDL,
 	cbrick, cudgel, carbonCluster, denseCarbonCluster, methane, nitre, sulfur, portalPlacerJzh,
 	tinIngot, copperIngot, lifeCrystal, shoggothFlesh, eldritchScale, omotholFlesh, necronomicon,
-	necronomicon_cor, necronomicon_dre, necronomicon_omt, abyssalnomicon;
+	necronomicon_cor, necronomicon_dre, necronomicon_omt, abyssalnomicon, crystalbag_s, crystalbag_m,
+	crystalbag_l, crystalbag_h;
 	//coin stuff
 	public static Item coin, cthulhuCoin, elderCoin, jzaharCoin, engravingBlank, engravingCthulhu, engravingElder, engravingJzahar;
 	//crystals (real elements)
@@ -229,6 +248,8 @@ public class AbyssalCraft {
 	public static final int transmutatorGuiID = 31;
 	public static final int engraverGuiID = 32;
 	public static final int necronmiconGuiID = 33;
+	public static final int crystalbagGuiID = 34;
+	public static final int materializerGuiID = 35;
 
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
@@ -249,13 +270,23 @@ public class AbyssalCraft {
 		syncConfig();
 		AbyssalCraftAPI.initPotionReflection();
 
-		CFluid = new Fluid("liquidcoralium").setDensity(3000).setViscosity(1000).setTemperature(350);
-		antifluid = new Fluid("liquidantimatter").setDensity(4000).setViscosity(1500).setTemperature(100);
+		if(!FluidRegistry.isFluidRegistered("liquidcoralium")){
+			CFluid = LIQUID_CORALIUM;
+			FluidRegistry.registerFluid(CFluid);
+		} else {
+			ACLogger.warning("Liquid Coralium was already registered by another mod, adding ours as alternative.");
+			CFluid = FluidRegistry.getFluid("liquidcoralium");
+			FluidRegistry.registerFluid(LIQUID_CORALIUM);
+		}
 
-		Fluid.registerLegacyName(CFluid.getName(), CFluid.getName());
-		FluidRegistry.registerFluid(CFluid);
-		Fluid.registerLegacyName(antifluid.getName(), antifluid.getName());
-		FluidRegistry.registerFluid(antifluid);
+		if(!FluidRegistry.isFluidRegistered("liquidantimatter")){
+			antifluid = LIQUID_ANTIMATTER;
+			FluidRegistry.registerFluid(antifluid);
+		} else {
+			ACLogger.warning("Liquid Antimatter was already registered by another mod, adding ours as alternative.");
+			antifluid = FluidRegistry.getFluid("liquidantimatter");
+			FluidRegistry.registerFluid(LIQUID_ANTIMATTER);
+		}
 
 		//Blocks
 		Darkstone = new BlockDarkstone().setCreativeTab(AbyssalCraft.tabBlock).setStepSound(Block.soundTypeStone).setHardness(1.65F).setResistance(12.0F).setBlockName("DS").setBlockTextureName(modid + ":" + "DS");
@@ -375,6 +406,13 @@ public class AbyssalCraft {
 		omotholfire = new BlockOmotholFire().setLightLevel(1.0F).setBlockName("Ofire");
 		engraver = new BlockEngraver().setHardness(2.5F).setResistance(12.0F).setStepSound(Block.soundTypeStone).setBlockName("engraver");
 		house = new BlockHouse().setHardness(1.0F).setResistance(Float.MAX_VALUE).setStepSound(Block.soundTypeWood).setBlockName("house");
+		materializer = new BlockMaterializer().setBlockName("materializer");
+		darkethaxiumbrick = new BlockDarkEthaxiumBrick().setBlockName("DEB");
+		darkethaxiumpillar = new BlockDarkEthaxiumPillar().setBlockName("DEBP");
+		darkethaxiumstairs = new BlockACStairs(darkethaxiumbrick, "pickaxe", 8).setHardness(150.0F).setResistance(Float.MAX_VALUE).setStepSound(Block.soundTypeStone).setBlockName("DEBs");
+		darkethaxiumslab1 = new BlockACSingleSlab(darkethaxiumslab1, darkethaxiumslab2, Material.rock, "pickaxe", 8).setHardness(150.0F).setResistance(Float.MAX_VALUE).setStepSound(Block.soundTypeStone).setBlockName("DEBs1").setBlockTextureName(modid + ":" + "DEB");
+		darkethaxiumslab2 = new BlockACDoubleSlab(darkethaxiumslab1, darkethaxiumslab2, Material.rock, "pickaxe", 8).setHardness(150.0F).setResistance(Float.MAX_VALUE).setStepSound(Block.soundTypeStone).setBlockName("DEBs2").setBlockTextureName(modid + ":" + "DEB");
+		darkethaxiumfence = new BlockACFence("DEB", Material.rock, "pickaxe", 8).setHardness(150.0F).setResistance(Float.MAX_VALUE).setStepSound(Block.soundTypeStone).setBlockName("DEBf");
 
 		//Biome
 		Darklands = new BiomeGenDarklands(configBiomeId1).setColor(522674).setBiomeName("Darklands");
@@ -424,12 +462,16 @@ public class AbyssalCraft {
 		engravingJzahar = new ItemEngraving("jzahar", 10).setCreativeTab(AbyssalCraft.tabCoins).setTextureName(modid + ":" + "engraving_jzahar");
 		shoggothFlesh = new ItemShoggothFlesh();
 		eldritchScale = new ItemACBasic("eldritchScale");
-		omotholFlesh = new ItemACBasic("omotholflesh");
+		omotholFlesh = new ItemOmotholFlesh(3, 0.3F, false);
 		necronomicon = new ItemNecronomicon("necronomicon");
 		necronomicon_cor = new ItemNecronomicon("necronomicon_cor");
 		necronomicon_dre = new ItemNecronomicon("necronomicon_dre");
 		necronomicon_omt = new ItemNecronomicon("necronomicon_omt");
 		abyssalnomicon = new ItemNecronomicon("abyssalnomicon");
+		crystalbag_s = new ItemCrystalBag("crystalbag_small");
+		crystalbag_m = new ItemCrystalBag("crystalbag_medium");
+		crystalbag_l = new ItemCrystalBag("crystalbag_large");
+		crystalbag_h = new ItemCrystalBag("crystalbag_huge");
 
 		//Ethaxium
 		ethaxium_brick = new ItemACBasic("EB");
@@ -604,7 +646,7 @@ public class AbyssalCraft {
 		beefp = new ItemPlatefood(6, 0.6F, false).setUnlocalizedName("BeeP").setTextureName(modid + ":" + "BeeP");
 		fishp = new ItemPlatefood(10, 1.2F, false).setUnlocalizedName("FisP").setTextureName(modid + ":" + "FisP");
 		dirtyplate = new ItemACBasic("dirtyplate");
-		friedegg = new ItemFriedegg(5, 0.6F, false).setCreativeTab(AbyssalCraft.tabFood).setUnlocalizedName("friedegg").setTextureName(modid + ":" + "friedegg");
+		friedegg = new ItemFood(5, 0.6F, false).setCreativeTab(AbyssalCraft.tabFood).setUnlocalizedName("friedegg").setTextureName(modid + ":" + "friedegg");
 		eggp = new ItemPlatefood(10, 1.2F, false).setUnlocalizedName("eggp").setTextureName(modid + ":" + "eggp");
 		cloth = new ItemWashCloth().setCreativeTab(AbyssalCraft.tabItems).setUnlocalizedName("cloth").setTextureName(modid + ":" + "cloth");
 
@@ -624,6 +666,7 @@ public class AbyssalCraft {
 		GameRegistry.registerTileEntity(TileEntityChagarothFistSpawner.class, "tileEntityChagarothFistSpawner");
 		GameRegistry.registerTileEntity(TileEntityODB.class, "tileEntityODB");
 		GameRegistry.registerTileEntity(TileEntityEngraver.class, "tileEntityEngraver");
+		GameRegistry.registerTileEntity(TileEntityMaterializer.class, "tileEntityMaterializer");
 
 		Cplague = new PotionCplague(AbyssalCraftAPI.potionId1, true, 0x00FFFF).setIconIndex(1, 0).setPotionName("potion.Cplague");
 		AbyssalCraftAPI.addPotionRequirements(Cplague.id, "0 & 1 & !2 & 3 & 0+6");
@@ -763,6 +806,13 @@ public class AbyssalCraft {
 		GameRegistry.registerBlock(omotholfire, "omotholfire");
 		GameRegistry.registerBlock(engraver, "engraver");
 		GameRegistry.registerBlock(house, "engraver_on");
+		GameRegistry.registerBlock(materializer, "materializer");
+		GameRegistry.registerBlock(darkethaxiumbrick, ItemMetadataBlock.class, "darkethaxiumbrick");
+		GameRegistry.registerBlock(darkethaxiumpillar, ItemBlockColorName.class, "darkethaxiumpillar");
+		GameRegistry.registerBlock(darkethaxiumstairs, ItemBlockColorName.class, "darkethaxiumbrickstairs");
+		GameRegistry.registerBlock(darkethaxiumslab1, ItemBlockColorName.class, "darkethaxiumbrickslab1");
+		GameRegistry.registerBlock(darkethaxiumslab2, ItemBlockColorName.class, "darkethaxiumbrickslab2");
+		GameRegistry.registerBlock(darkethaxiumfence, ItemBlockColorName.class, "darkethaxiumfence");
 
 		//Item Register
 		GameRegistry.registerItem(devsword, "devsword");
@@ -953,42 +1003,38 @@ public class AbyssalCraft {
 		GameRegistry.registerItem(necronomicon_dre, "necronomicon_dre");
 		GameRegistry.registerItem(necronomicon_omt, "necronomicon_omt");
 		GameRegistry.registerItem(abyssalnomicon, "abyssalnomicon");
+		GameRegistry.registerItem(crystalbag_s, "crystalbag_small");
+		GameRegistry.registerItem(crystalbag_m, "crystalbag_medium");
+		GameRegistry.registerItem(crystalbag_l, "crystalbag_large");
+		GameRegistry.registerItem(crystalbag_h, "crystalbag_huge");
 		//		GameRegistry.registerItem(shoggothFlesh, "shoggothflesh");
 		//		GameRegistry.registerItem(shadowPlate, "shadowplate");
 
-		CFluid.setBlock(Cwater);
-		antifluid.setBlock(anticwater);
+		LIQUID_CORALIUM.setBlock(Cwater).setUnlocalizedName(Cwater.getUnlocalizedName());
+		LIQUID_ANTIMATTER.setBlock(anticwater).setUnlocalizedName(anticwater.getUnlocalizedName());
+		if(CFluid.getBlock() == null)
+			CFluid.setBlock(Cwater);
+		if(antifluid.getBlock() == null)
+			antifluid.setBlock(anticwater);
 		FluidContainerRegistry.registerFluidContainer(FluidRegistry.getFluidStack(CFluid.getName(), FluidContainerRegistry.BUCKET_VOLUME), new ItemStack(Cbucket), new ItemStack(Items.bucket));
-		BucketHandler.INSTANCE.buckets.put(Cwater, Cbucket);
+		BucketHandler.INSTANCE.buckets.put(CFluid.getBlock(), Cbucket);
 		FluidContainerRegistry.registerFluidContainer(FluidRegistry.getFluidStack(antifluid.getName(), FluidContainerRegistry.BUCKET_VOLUME), new ItemStack(antibucket), new ItemStack(Items.bucket));
-		BucketHandler.INSTANCE.buckets.put(anticwater, antibucket);
+		BucketHandler.INSTANCE.buckets.put(antifluid.getBlock(), antibucket);
 		MinecraftForge.EVENT_BUS.register(BucketHandler.INSTANCE);
 
 		//Biome
-		if(dark1 == true){
-			BiomeDictionary.registerBiomeType(Darklands, Type.WASTELAND);
-			BiomeManager.warmBiomes.add(new BiomeEntry(AbyssalCraft.Darklands, darkWeight1));
-		}
-		if(dark2 == true){
-			BiomeDictionary.registerBiomeType(DarklandsForest, Type.FOREST);
-			BiomeManager.warmBiomes.add(new BiomeEntry(AbyssalCraft.DarklandsForest, darkWeight2));
-		}
-		if(dark3 == true){
-			BiomeDictionary.registerBiomeType(DarklandsPlains, Type.PLAINS);
-			BiomeManager.warmBiomes.add(new BiomeEntry(AbyssalCraft.DarklandsPlains, darkWeight3));
-		}
-		if(dark4 == true){
-			BiomeDictionary.registerBiomeType(DarklandsHills, Type.HILLS);
-			BiomeManager.warmBiomes.add(new BiomeEntry(AbyssalCraft.DarklandsHills, darkWeight4));
-		}
-		if(dark5 == true){
-			BiomeDictionary.registerBiomeType(DarklandsMountains, Type.MOUNTAIN);
-			BiomeManager.warmBiomes.add(new BiomeEntry(AbyssalCraft.DarklandsMountains, darkWeight5));
-		}
-		if(coralium1 == true){
-			BiomeDictionary.registerBiomeType(corswamp, Type.SWAMP);
-			BiomeManager.warmBiomes.add(new BiomeEntry(AbyssalCraft.corswamp, coraliumWeight));
-		}
+		if(dark1 == true)
+			registerBiomeWithTypes(Darklands, darkWeight1, BiomeType.WARM, Type.WASTELAND, Type.SPOOKY);
+		if(dark2 == true)
+			registerBiomeWithTypes(DarklandsForest, darkWeight2, BiomeType.WARM, Type.FOREST, Type.SPOOKY);
+		if(dark3 == true)
+			registerBiomeWithTypes(DarklandsPlains, darkWeight3, BiomeType.WARM, Type.PLAINS, Type.SPOOKY);
+		if(dark4 == true)
+			registerBiomeWithTypes(DarklandsHills, darkWeight4, BiomeType.WARM, Type.HILLS, Type.SPOOKY);
+		if(dark5 == true)
+			registerBiomeWithTypes(DarklandsMountains, darkWeight5, BiomeType.WARM, Type.MOUNTAIN, Type.SPOOKY);
+		if(coralium1 == true)
+			registerBiomeWithTypes(corswamp, coraliumWeight, BiomeType.WARM, Type.SWAMP);
 		if(coralium2 == true){
 			BiomeDictionary.registerBiomeType(corocean, Type.WATER);
 			BiomeManager.oceanBiomes.add(AbyssalCraft.corocean);
@@ -1008,13 +1054,13 @@ public class AbyssalCraft {
 		if(coraliumspawn2 == true)
 			BiomeManager.addSpawnBiome(AbyssalCraft.corocean);
 
-		BiomeDictionary.registerBiomeType(Wastelands, Type.MAGICAL);
-		BiomeDictionary.registerBiomeType(Dreadlands, Type.MAGICAL);
-		BiomeDictionary.registerBiomeType(AbyDreadlands, Type.MAGICAL);
-		BiomeDictionary.registerBiomeType(MountainDreadlands, Type.MAGICAL);
-		BiomeDictionary.registerBiomeType(ForestDreadlands, Type.MAGICAL);
-		BiomeDictionary.registerBiomeType(omothol, Type.MAGICAL);
-		BiomeDictionary.registerBiomeType(darkRealm, Type.MAGICAL);
+		BiomeDictionary.registerBiomeType(Wastelands, Type.DEAD);
+		BiomeDictionary.registerBiomeType(Dreadlands, Type.DEAD);
+		BiomeDictionary.registerBiomeType(AbyDreadlands, Type.DEAD);
+		BiomeDictionary.registerBiomeType(MountainDreadlands, Type.DEAD);
+		BiomeDictionary.registerBiomeType(ForestDreadlands, Type.DEAD);
+		BiomeDictionary.registerBiomeType(omothol, Type.DEAD);
+		BiomeDictionary.registerBiomeType(darkRealm, Type.DEAD);
 
 		//Dimension
 		registerDimension(configDimId1, WorldProviderAbyss.class, keepLoaded1);
@@ -1170,6 +1216,7 @@ public class AbyssalCraft {
 		addChestGenHooks();
 		addDungeonHooks();
 		sendIMC();
+		IntegrationHandler.preInit();
 	}
 
 	@EventHandler
@@ -1220,6 +1267,7 @@ public class AbyssalCraft {
 		registerVanillaSalvage();
 		AbyssalCrafting.addRecipes();
 		proxy.registerRenderThings();
+		IntegrationHandler.init();
 	}
 
 	@EventHandler
@@ -1227,7 +1275,7 @@ public class AbyssalCraft {
 
 		ACLogger.info("Post-initializing AbyssalCraft");
 		proxy.postInit();
-		IntegrationHandler.init();
+		IntegrationHandler.postInit();
 		ACLogger.info("AbyssalCraft loaded.");
 	}
 
@@ -1237,43 +1285,284 @@ public class AbyssalCraft {
 
 		List<String> senders = new ArrayList<String>();
 		for (final FMLInterModComms.IMCMessage imcMessage : event.getMessages())
-			if(imcMessage.key.equalsIgnoreCase("shoggothFood"))
+			if(imcMessage.key.equals("shoggothFood"))
 				try {
 					AbyssalCraftAPI.addShoggothFood((Class<? extends EntityLivingBase>)Class.forName(imcMessage.getStringValue()));
-					ACLogger.info("Received Shoggoth Food addition %s from mod %s", imcMessage.getStringValue(), imcMessage.getSender());
+					ACLogger.imcInfo("Received Shoggoth Food addition %s from mod %s", imcMessage.getStringValue(), imcMessage.getSender());
 					if(!senders.contains(imcMessage.getSender()))
 						senders.add(imcMessage.getSender());
 				} catch (ClassNotFoundException e) {
-					ACLogger.severe("Could not find class %s", imcMessage.getStringValue());
+					ACLogger.imcWarning("Could not find class %s", imcMessage.getStringValue());
 				}
-			else if(imcMessage.key.equalsIgnoreCase("registerTransmutatorFuel"))
+			else if(imcMessage.key.equals("registerTransmutatorFuel"))
 				try {
 					AbyssalCraftAPI.registerFuelHandler((IFuelHandler)Class.forName(imcMessage.getStringValue()).newInstance(), FuelType.TRANSMUTATOR);
-					ACLogger.info("Recieved Transmutator fuel handler %s from mod %s", imcMessage.getStringValue(), imcMessage.getSender());
+					ACLogger.imcInfo("Recieved Transmutator fuel handler %s from mod %s", imcMessage.getStringValue(), imcMessage.getSender());
 					if(!senders.contains(imcMessage.getSender()))
 						senders.add(imcMessage.getSender());
 				} catch (InstantiationException e) {
-					ACLogger.severe("Could not create a instance of class %s (not a IFuelHandler?)", imcMessage.getStringValue());
+					ACLogger.imcWarning("Could not create a instance of class %s (not a IFuelHandler?)", imcMessage.getStringValue());
 				} catch (IllegalAccessException e) {
-					ACLogger.severe("Unable to access class %s", imcMessage.getStringValue());
+					ACLogger.imcWarning("Unable to access class %s", imcMessage.getStringValue());
 				} catch (ClassNotFoundException e) {
-					ACLogger.severe("Could not find class %s", imcMessage.getStringValue());
+					ACLogger.imcWarning("Could not find class %s", imcMessage.getStringValue());
 				}
-			else if(imcMessage.key.equalsIgnoreCase("registerCrystallizerFuel"))
+			else if(imcMessage.key.equals("registerCrystallizerFuel"))
 				try {
 					AbyssalCraftAPI.registerFuelHandler((IFuelHandler)Class.forName(imcMessage.getStringValue()).newInstance(), FuelType.CRYSTALLIZER);
-					ACLogger.info("Recieved Crystallizer fuel handler %s from mod %s", imcMessage.getStringValue(), imcMessage.getSender());
+					ACLogger.imcInfo("Recieved Crystallizer fuel handler %s from mod %s", imcMessage.getStringValue(), imcMessage.getSender());
 					if(!senders.contains(imcMessage.getSender()))
 						senders.add(imcMessage.getSender());
 				} catch (InstantiationException e) {
-					ACLogger.severe("Could not create a instance of class %s (not a IFuelHandler?)", imcMessage.getStringValue());
+					ACLogger.imcWarning("Could not create a instance of class %s (not a IFuelHandler?)", imcMessage.getStringValue());
 				} catch (IllegalAccessException e) {
-					ACLogger.severe("Unable to access class %s", imcMessage.getStringValue());
+					ACLogger.imcWarning("Unable to access class %s", imcMessage.getStringValue());
 				} catch (ClassNotFoundException e) {
-					ACLogger.severe("Could not find class %s", imcMessage.getStringValue());
+					ACLogger.imcWarning("Could not find class %s", imcMessage.getStringValue());
 				}
+			else if(imcMessage.key.equals("addCrystal")){
+				boolean failed = false;
+				if(!imcMessage.isItemStackMessage())
+					failed = true;
+				else{
+					ItemStack crystal = imcMessage.getItemStackValue();
+					if(crystal == null){
+						failed = true;
+						return;
+					}
+					AbyssalCraftAPI.addCrystal(crystal);
+				}
+				if(failed)
+					ACLogger.imcWarning("Received invalid Crystal addition from mo %s", imcMessage.getSender());
+				else ACLogger.imcInfo("Received Crystal addition from mo %s", imcMessage.getSender());
+			}
+			else if(imcMessage.key.equals("addCrystallization")){
+				boolean failed = false;
+				if(!imcMessage.isNBTMessage())
+					failed = true;
+				else {
+					if(!senders.contains(imcMessage.getSender()))
+						senders.add(imcMessage.getSender());
+					NBTTagCompound stuff = imcMessage.getNBTValue();
+					if(!stuff.hasKey("input") || !stuff.hasKey("output1") || !stuff.hasKey("output2") || !stuff.hasKey("xp")){
+						failed = true;
+						return;
+					}
+					ItemStack input = ItemStack.loadItemStackFromNBT(stuff.getCompoundTag("input"));
+					ItemStack output1 = ItemStack.loadItemStackFromNBT(stuff.getCompoundTag("output1"));
+					ItemStack output2 = ItemStack.loadItemStackFromNBT(stuff.getCompoundTag("output2"));
+					if(input == null || output1 == null || output2 == null){
+						failed = true;
+						return;
+					}
+					AbyssalCraftAPI.addCrystallization(input, output1, output2, stuff.getFloat("xp"));
+				}
+				if(failed)
+					ACLogger.imcWarning("Received invalid Crystallizer recipe from mod %s!", imcMessage.getSender());
+				else ACLogger.imcInfo("Received Crystallizer recipe from mod %s", imcMessage.getSender());
+			}
+			else if(imcMessage.key.equals("addSingleCrystallization")){
+				boolean failed = false;
+				if(!imcMessage.isNBTMessage())
+					failed = true;
+				else {
+					if(!senders.contains(imcMessage.getSender()))
+						senders.add(imcMessage.getSender());
+					NBTTagCompound stuff = imcMessage.getNBTValue();
+					if(!stuff.hasKey("input") || !stuff.hasKey("output") || !stuff.hasKey("xp")){
+						failed = true;
+						return;
+					}
+					ItemStack input = ItemStack.loadItemStackFromNBT(stuff.getCompoundTag("input"));
+					ItemStack output = ItemStack.loadItemStackFromNBT(stuff.getCompoundTag("output"));
+					if(input == null || output == null){
+						failed = true;
+						return;
+					}
+					AbyssalCraftAPI.addSingleCrystallization(input, output, stuff.getFloat("xp"));
+				}
+				if(failed)
+					ACLogger.imcWarning("Received invalid Single Crystallizer recipe from mod %s!", imcMessage.getSender());
+				else ACLogger.imcInfo("Received Single Crystallizer recipe from mod %s", imcMessage.getSender());
+			}
+			else if(imcMessage.key.equals("addOredictCrystallization")){
+				boolean failed = false;
+				if(!imcMessage.isNBTMessage())
+					failed = true;
+				else {
+					if(!senders.contains(imcMessage.getSender()))
+						senders.add(imcMessage.getSender());
+					NBTTagCompound stuff = imcMessage.getNBTValue();
+					if(!stuff.hasKey("input") || !stuff.hasKey("output1") || !stuff.hasKey("output2") || !stuff.hasKey("xp")){
+						failed = true;
+						return;
+					}
+					String input = stuff.getString("input");
+					String output1 = stuff.getString("output1");
+					String output2 = stuff.getString("output2");
+					if(input == null || output1 == null || output2 == null){
+						failed = true;
+						return;
+					}
+					if(stuff.hasKey("quantity1") && stuff.hasKey("quantity2"))
+						AbyssalCraftAPI.addCrystallization(input, output1, stuff.getInteger("quantity1"), output2, stuff.getInteger("quantity2"), stuff.getFloat("xp"));
+					else AbyssalCraftAPI.addCrystallization(input, output1, output2, stuff.getFloat("xp"));
+				}
+				if(failed)
+					ACLogger.imcWarning("Received invalid OreDictionary Crystallizer recipe from mod %s!", imcMessage.getSender());
+				else ACLogger.imcInfo("Received OreDictionary Crystallizer recipe from mod %s", imcMessage.getSender());
+			}
+			else if(imcMessage.key.equals("addSingleOredictCrystallization")){
+				boolean failed = false;
+				if(!imcMessage.isNBTMessage())
+					failed = true;
+				else {
+					if(!senders.contains(imcMessage.getSender()))
+						senders.add(imcMessage.getSender());
+					NBTTagCompound stuff = imcMessage.getNBTValue();
+					if(!stuff.hasKey("input") || !stuff.hasKey("output") || !stuff.hasKey("xp")){
+						failed = true;
+						return;
+					}
+					String input = stuff.getString("input");
+					String output = stuff.getString("output");
+					if(input == null || output == null){
+						failed = true;
+						return;
+					}
+					if(stuff.hasKey("quantity"))
+						AbyssalCraftAPI.addSingleCrystallization(input, output, stuff.getInteger("quantity"), stuff.getFloat("xp"));
+					else AbyssalCraftAPI.addSingleCrystallization(input, output, stuff.getFloat("xp"));
+				}
+				if(failed)
+					ACLogger.imcWarning("Received invalid Single OreDictionary Crystallizer recipe from mod %s!", imcMessage.getSender());
+				else ACLogger.imcInfo("Received Single OreDictionary Crystallizer recipe from mod %s", imcMessage.getSender());
+
+			}
+			else if(imcMessage.key.equals("addTransmutation")){
+				boolean failed = false;
+				if(!imcMessage.isNBTMessage())
+					failed = true;
+				else {
+					if(!senders.contains(imcMessage.getSender()))
+						senders.add(imcMessage.getSender());
+					NBTTagCompound stuff = imcMessage.getNBTValue();
+					if(!stuff.hasKey("input") || !stuff.hasKey("output") || !stuff.hasKey("xp")){
+						failed = true;
+						return;
+					}
+					ItemStack input = ItemStack.loadItemStackFromNBT(stuff.getCompoundTag("input"));
+					ItemStack output = ItemStack.loadItemStackFromNBT(stuff.getCompoundTag("output"));
+					if(input == null || output == null){
+						failed = true;
+						return;
+					}
+					AbyssalCraftAPI.addTransmutation(input, output, stuff.getFloat("xp"));
+				}
+				if(failed)
+					ACLogger.imcWarning("Received invalid Transmutator recipe from mod %s!", imcMessage.getSender());
+				else ACLogger.imcInfo("Received Transmutator recipe from mod %s", imcMessage.getSender());
+			}
+			else if(imcMessage.key.equals("addOredictTransmutation")){
+				boolean failed = false;
+				if(!imcMessage.isNBTMessage())
+					failed = true;
+				else {
+					if(!senders.contains(imcMessage.getSender()))
+						senders.add(imcMessage.getSender());
+					NBTTagCompound stuff = imcMessage.getNBTValue();
+					if(!stuff.hasKey("input") || !stuff.hasKey("output") || !stuff.hasKey("xp")){
+						failed = true;
+						return;
+					}
+					String input = stuff.getString("input");
+					String output = stuff.getString("output");
+					if(input == null || output == null){
+						failed = true;
+						return;
+					}
+					if(stuff.hasKey("quantity") && stuff.hasKey("meta"))
+						AbyssalCraftAPI.addTransmutation(input, output, stuff.getInteger("quantity"), stuff.getInteger("meta"), stuff.getFloat("xp"));
+					else if(stuff.hasKey("quantity"))
+						AbyssalCraftAPI.addTransmutation(input, output, stuff.getInteger("quantity"), stuff.getFloat("xp"));
+					else AbyssalCraftAPI.addTransmutation(input, output, stuff.getFloat("xp"));
+				}
+				if(failed)
+					ACLogger.imcWarning("Received invalid OreDictionary Transmutator recipe from mod %s!", imcMessage.getSender());
+				else ACLogger.imcInfo("Received OreDictionary Transmutator recipe from mod %s", imcMessage.getSender());
+			}
+			else if(imcMessage.key.equals("addMaterialization")){ //TODO: rewrite this
+				boolean failed = false;
+				if(!imcMessage.isNBTMessage())
+					failed = true;
+				else {
+					if(!senders.contains(imcMessage.getSender()))
+						senders.add(imcMessage.getSender());
+					NBTTagCompound stuff = imcMessage.getNBTValue();
+					if(!stuff.hasKey("input1") || !stuff.hasKey("output") || !stuff.hasKey("level")){
+						failed = true;
+						return;
+					}
+					ItemStack input1 = ItemStack.loadItemStackFromNBT(stuff.getCompoundTag("input1"));
+					ItemStack input2 = ItemStack.loadItemStackFromNBT(stuff.getCompoundTag("input2"));
+					ItemStack input3 = ItemStack.loadItemStackFromNBT(stuff.getCompoundTag("input3"));
+					ItemStack input4 = ItemStack.loadItemStackFromNBT(stuff.getCompoundTag("input4"));
+					ItemStack input5 = ItemStack.loadItemStackFromNBT(stuff.getCompoundTag("input5"));
+					ItemStack output = ItemStack.loadItemStackFromNBT(stuff.getCompoundTag("output"));
+					if(input1 == null || output == null){
+						failed = true;
+						return;
+					}
+					AbyssalCraftAPI.addMaterialization(input1, input2, input3, input4, input5, output, stuff.getInteger("level"));
+				}
+				if(failed)
+					ACLogger.imcWarning("Received invalid Materializer recipe from mod %s!", imcMessage.getSender());
+				else ACLogger.imcInfo("Received Materializer recipe from mod %s", imcMessage.getSender());
+			}
+			else if(imcMessage.key.equals("addOredictMaterialization")){ //TODO: rewrite this
+				boolean failed = false;
+				if(!imcMessage.isNBTMessage())
+					failed = true;
+				else {
+					if(!senders.contains(imcMessage.getSender()))
+						senders.add(imcMessage.getSender());
+					NBTTagCompound stuff = imcMessage.getNBTValue();
+					if(!stuff.hasKey("input1") || !stuff.hasKey("output") || !stuff.hasKey("level")){
+						failed = true;
+						return;
+					}
+					String input1 = stuff.getString("input1");
+					String input2 = stuff.getString("input2");
+					String input3 = stuff.getString("input3");
+					String input4 = stuff.getString("input4");
+					String input5 = stuff.getString("input5");
+					String output = stuff.getString("output");
+					if(input1 == null || output == null){
+						failed = true;
+						return;
+					}
+					AbyssalCraftAPI.addMaterialization(input1, input2, input3, input4, input5, output, stuff.getInteger("level"));
+				}
+				if(failed)
+					ACLogger.imcWarning("Received invalid OreDictionary Materializer recipe from mod %s!", imcMessage.getSender());
+				else ACLogger.imcInfo("Received OreDictionary Materializer recipe from mod %s", imcMessage.getSender());
+			}
+			else if(imcMessage.key.equals("registerACIntegration"))
+				try {
+					AbyssalCraftAPI.registerACIntegration((IACPlugin)Class.forName(imcMessage.getStringValue()).newInstance());
+					ACLogger.imcInfo("Recieved Integration %s from mod %s", imcMessage.getStringValue(), imcMessage.getSender());
+					if(!senders.contains(imcMessage.getSender()))
+						senders.add(imcMessage.getSender());
+				} catch (InstantiationException e) {
+					ACLogger.imcWarning("Could not create a instance of class %s (not a IACPlugin?)", imcMessage.getStringValue());
+				} catch (IllegalAccessException e) {
+					ACLogger.imcWarning("Unable to access class %s", imcMessage.getStringValue());
+				} catch (ClassNotFoundException e) {
+					ACLogger.imcWarning("Could not find class %s", imcMessage.getStringValue());
+				}
+			else ACLogger.imcWarning("Received an IMC Message with unknown key (%s) from mod %s!", imcMessage.key, imcMessage.getSender());
 		if(!senders.isEmpty())
-			ACLogger.info("Recieved messages from the following mods: %s", senders);
+			ACLogger.imcInfo("Recieved messages from the following mods: %s", senders);
 	}
 
 	@SubscribeEvent
@@ -1610,6 +1899,11 @@ public class AbyssalCraft {
 	private static void registerDimension(int id, Class<? extends WorldProvider> provider, boolean keepLoaded){
 		DimensionManager.registerProviderType(id, provider, keepLoaded);
 		DimensionManager.registerDimension(id, id);
+	}
+
+	private static void registerBiomeWithTypes(BiomeGenBase biome, int weight, BiomeType btype, Type...types){
+		BiomeDictionary.registerBiomeType(biome, types);
+		BiomeManager.addBiome(btype, new BiomeEntry(biome, weight));
 	}
 
 	@SubscribeEvent

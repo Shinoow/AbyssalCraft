@@ -1,0 +1,27 @@
+-The Crate now has 36 slots (instead of 27)
+-Added Crystal Bags (small, medium, large, huge)
+-Added Materializer (turns crystals into materials) (WIP)
+-Omothol Ghoul Flesh can now be eaten
+-Plate food (and MREs) can now stack up to 4
+-Picking up Cha'garoth's R'lyehian Gateway Key now unlocks an achievement
+-Added Inventory Tweaks integration (you can sort the Crystal Bags)
+-OreDictionary Transmutation will now return the correct metadata on the output (where quantity and metadata isn't specified)
+-Added IMC message handling for adding Crystallizer, Transmutator and Materializer recipes
+-Added a new Item interface for Crystals (so other mods can add their own crystallized elements) and a API method that does the same.
+-Added Dark Ethaxium (a stronger, darker version of Ethaxium, exists as bricks, pillar, stairs, slabs and fence)
+-Liquified Coralium Ore now generates in clusters with up to 4 blocks (and generates more commonly)
+-Abyssalnite Ore now generates in clusters with up to 4 blocks (in Darklands biomes)
+-Increased the amount of Abyssalnite that generates within Purified Dreadlands biomes (this will not increase the load time when entering the Dreadlands for the first time)
+-Doubled the chance of Coralium Ore generating in the Overworld (and it now has a chance of generating in regular swamps)
+-Reduced the rate of Abyssalnite Stone generating within Purified Dreadlands biomes (which should reduce the load time by a bit when entering the Dreadlands for the first time)
+-Abyssalnite Stone now has a small chance of generating in all Dreadlands biomes
+-Made J'zahar a bit more "social" towards other bosses and nearby players in Creative mode
+-Updated NEI integration (now runs on NEI 1.0.4.95)
+-Updated Thaumcraft integration (now runs on Thaumcraft 4.2.3.5)
+-Fixed the block orientation in Abyssal Strongholds (buttons and stairs)
+-Tweaked Asorah and the Spectral Dragon (actually changed the sizes, and reduced damage reduction on the Spectral Dragon)
+-Liquified Coralium Ore now generates in small amounts around pools of Liquid Coralium underground in the Abyssal Wasteland
+-Now runs on forge 10.13.3.1370 (works with 10.13.3.1355 and above)
+-Improved Fluid registration
+-The base upgrade kit can now be crafted using any type of wood
+-Integrations can now be registered directly to AbyssalCraft from other mods

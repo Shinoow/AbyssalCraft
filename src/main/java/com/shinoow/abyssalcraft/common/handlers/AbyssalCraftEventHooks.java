@@ -39,6 +39,7 @@ import com.shinoow.abyssalcraft.api.entity.*;
 import com.shinoow.abyssalcraft.api.item.ItemUpgradeKit;
 import com.shinoow.abyssalcraft.common.blocks.BlockDLTSapling;
 import com.shinoow.abyssalcraft.common.blocks.BlockDreadSapling;
+import com.shinoow.abyssalcraft.common.items.ItemCrystalBag;
 import com.shinoow.abyssalcraft.common.util.EntityUtil;
 import com.shinoow.abyssalcraft.common.world.TeleporterOmothol;
 
@@ -99,6 +100,8 @@ public class AbyssalCraftEventHooks {
 			event.entityPlayer.addStat(AbyssalCraft.GK1, 1);
 		if(event.item.getEntityItem().getItem() == AbyssalCraft.portalPlacerDL)
 			event.entityPlayer.addStat(AbyssalCraft.GK2, 1);
+		if(event.item.getEntityItem().getItem() == AbyssalCraft.portalPlacerJzh)
+			event.entityPlayer.addStat(AbyssalCraft.GK3, 1);
 		if(event.item.getEntityItem().getItem() == Item.getItemFromBlock(AbyssalCraft.PSDL))
 			event.entityPlayer.addStat(AbyssalCraft.findPSDL, 1);
 	}
@@ -207,6 +210,19 @@ public class AbyssalCraftEventHooks {
 								l.stackTagCompound = nbttest;
 								l.stackTagCompound.setTag("ench", tag);
 							}
+							event.craftMatrix.setInventorySlotContents(i, l);
+						}
+						else if(k.getItem() != null && k.getItem() instanceof ItemCrystalBag){
+							NBTTagCompound compound = new NBTTagCompound();
+							NBTTagList items = new NBTTagList();
+
+							items = k.stackTagCompound.getTagList("ItemInventory", 10);
+							ItemStack l = event.crafting;
+							((ItemCrystalBag)l.getItem()).setInventorySize(l);
+							if(l.stackTagCompound == null)
+								l.stackTagCompound = compound;
+							l.stackTagCompound.setTag("ItemInventory", items);
+
 							event.craftMatrix.setInventorySlotContents(i, l);
 						}
 					}

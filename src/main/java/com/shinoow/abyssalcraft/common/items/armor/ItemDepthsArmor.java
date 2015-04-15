@@ -111,7 +111,7 @@ public class ItemDepthsArmor extends ItemArmor implements IVisDiscountGear, IRev
 
 			Tessellator t = Tessellator.instance;
 
-			ScaledResolution scale = new ScaledResolution(Minecraft.getMinecraft().gameSettings, Minecraft.getMinecraft().displayWidth, Minecraft.getMinecraft().displayHeight);
+			ScaledResolution scale = new ScaledResolution(Minecraft.getMinecraft(), Minecraft.getMinecraft().displayWidth, Minecraft.getMinecraft().displayHeight);
 			int width = scale.getScaledWidth();
 			int height = scale.getScaledHeight();
 

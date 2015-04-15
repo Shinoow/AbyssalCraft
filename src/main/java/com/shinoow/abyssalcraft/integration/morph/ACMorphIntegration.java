@@ -21,6 +21,7 @@ import java.lang.reflect.InvocationTargetException;
 import morph.api.Ability;
 import morph.api.Api;
 
+import com.shinoow.abyssalcraft.api.integration.IACPlugin;
 import com.shinoow.abyssalcraft.client.model.entity.ModelChagarothFist;
 import com.shinoow.abyssalcraft.client.model.entity.ModelChagarothSpawn;
 import com.shinoow.abyssalcraft.client.model.entity.ModelDG;
@@ -65,28 +66,59 @@ import com.shinoow.abyssalcraft.common.util.ACLogger;
 
 import cpw.mods.fml.common.FMLCommonHandler;
 
-public class ACMorphIntegration {
+public class ACMorphIntegration implements IACPlugin {
 
-	static Ability hostile, sunburn, climb, fallNegate, fly, fireImmunity, flyNerf, water, chicken;
+	Ability hostile, sunburn, climb, fallNegate, fly, fireImmunity, flyNerf, water, chicken;
 
-	static ModelRemnant modelRemnant = new ModelRemnant();
-	static ModelSkeletonGoliath modelSkeletonGoliath = new ModelSkeletonGoliath(false);
-	static ModelSacthoth modelSacthoth = new ModelSacthoth();
-	static ModelJzahar modelJzahar = new ModelJzahar();
-	static ModelShadowCreature modelShadowc = new ModelShadowCreature();
-	static ModelShadowMonster modelShadowm = new ModelShadowMonster();
-	static ModelShadowBeast modelShadowb = new ModelShadowBeast();
-	static ModelDreadling modelDreadling = new ModelDreadling();
-	static ModelDreadSpawn modelDreadSpawn = new ModelDreadSpawn();
-	static ModelChagarothFist modelChagarothFist = new ModelChagarothFist();
-	static ModelChagarothSpawn modelChagarothSpawn = new ModelChagarothSpawn();
-	static ModelDG modelDG = new ModelDG();
+	ModelRemnant modelRemnant = new ModelRemnant();
+	ModelSkeletonGoliath modelSkeletonGoliath = new ModelSkeletonGoliath(false);
+	ModelSacthoth modelSacthoth = new ModelSacthoth();
+	ModelJzahar modelJzahar = new ModelJzahar();
+	ModelShadowCreature modelShadowc = new ModelShadowCreature();
+	ModelShadowMonster modelShadowm = new ModelShadowMonster();
+	ModelShadowBeast modelShadowb = new ModelShadowBeast();
+	ModelDreadling modelDreadling = new ModelDreadling();
+	ModelDreadSpawn modelDreadSpawn = new ModelDreadSpawn();
+	ModelChagarothFist modelChagarothFist = new ModelChagarothFist();
+	ModelChagarothSpawn modelChagarothSpawn = new ModelChagarothSpawn();
+	ModelDG modelDG = new ModelDG();
 
-	public static void init(){
-		getAbilities();
+	@Override
+	public String getModName(){
+		return "Morph";
 	}
 
-	private static void getAbilities(){
+	@Override
+	public void preInit(){}
+
+	@Override
+	public void init(){
+		getAbilities();
+
+		if(FMLCommonHandler.instance().getEffectiveSide().isClient()){
+			Api.registerArmForModel(modelRemnant, modelRemnant.rightarm);
+			Api.registerArmForModel(modelSkeletonGoliath, modelSkeletonGoliath.rightarm);
+			Api.registerArmForModel(modelSacthoth, modelSacthoth.rightarm1);
+			Api.registerArmForModel(modelJzahar, modelJzahar.rightarm);
+			Api.registerArmForModel(modelShadowc, modelShadowc.RightArm1);
+			Api.registerArmForModel(modelShadowm, modelShadowm.Rarm1);
+			Api.registerArmForModel(modelShadowb, modelShadowb.rarm1);
+			Api.registerArmForModel(modelDreadling, modelDreadling.rightarm);
+			Api.registerArmForModel(modelDreadSpawn, modelDreadSpawn.arm);
+			Api.registerArmForModel(modelChagarothFist, modelChagarothFist.arm1);
+			Api.registerArmForModel(modelChagarothSpawn, modelChagarothSpawn.smallspike2);
+			Api.registerArmForModel(modelDG, modelDG.rarm1);
+		}
+
+		Api.blacklistEntity(EntityDragonMinion.class);
+		Api.blacklistEntity(EntityDragonBoss.class);
+	}
+
+	@Override
+	public void postInit(){
+	}
+
+	private void getAbilities(){
 		boolean failed = false;
 		try {
 			hostile = (Ability)Class.forName("morph.common.ability.AbilityHostile").newInstance();
@@ -104,10 +136,10 @@ public class ACMorphIntegration {
 			e.printStackTrace();
 			failed = true;
 		}
-		integrate(failed);
+		loadAbilities(failed);
 	}
 
-	private static void integrate(boolean loadingFailed){
+	private void loadAbilities(boolean loadingFailed){
 
 		if(loadingFailed)
 			ACLogger.info("Something screwed up when getting the Abilities, so they will not be added.");
@@ -139,23 +171,5 @@ public class ACMorphIntegration {
 			Ability.mapAbilities(EntityAntiSpider.class, hostile, climb);
 			Ability.mapAbilities(EntityAntiZombie.class, hostile);
 		}
-
-		if(FMLCommonHandler.instance().getEffectiveSide().isClient()){
-			Api.registerArmForModel(modelRemnant, modelRemnant.rightarm);
-			Api.registerArmForModel(modelSkeletonGoliath, modelSkeletonGoliath.rightarm);
-			Api.registerArmForModel(modelSacthoth, modelSacthoth.rightarm1);
-			Api.registerArmForModel(modelJzahar, modelJzahar.rightarm);
-			Api.registerArmForModel(modelShadowc, modelShadowc.RightArm1);
-			Api.registerArmForModel(modelShadowm, modelShadowm.Rarm1);
-			Api.registerArmForModel(modelShadowb, modelShadowb.rarm1);
-			Api.registerArmForModel(modelDreadling, modelDreadling.rightarm);
-			Api.registerArmForModel(modelDreadSpawn, modelDreadSpawn.arm);
-			Api.registerArmForModel(modelChagarothFist, modelChagarothFist.arm1);
-			Api.registerArmForModel(modelChagarothSpawn, modelChagarothSpawn.smallspike2);
-			Api.registerArmForModel(modelDG, modelDG.rarm1);
-		}
-
-		Api.blacklistEntity(EntityDragonMinion.class);
-		Api.blacklistEntity(EntityDragonBoss.class);
 	}
 }

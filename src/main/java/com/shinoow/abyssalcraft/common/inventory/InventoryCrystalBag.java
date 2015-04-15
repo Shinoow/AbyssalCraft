@@ -1,0 +1,173 @@
+/**
+ * AbyssalCraft
+ * Copyright 2012-2015 Shinoow
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+package com.shinoow.abyssalcraft.common.inventory;
+
+import com.shinoow.abyssalcraft.common.items.ItemCrystal;
+
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.IInventory;
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.NBTTagList;
+import net.minecraftforge.common.util.Constants;
+
+public class InventoryCrystalBag implements IInventory
+{
+	private String name;
+
+	public static int INV_SIZE;
+
+	private ItemStack[] inventory;
+
+	private final ItemStack invItem;
+
+	/**
+	 * @param itemstack - the ItemStack to which this inventory belongs
+	 */
+	public InventoryCrystalBag(ItemStack stack)
+	{
+		invItem = stack;
+		if (!stack.hasTagCompound())
+			stack.setTagCompound(new NBTTagCompound());
+		INV_SIZE = stack.stackTagCompound.getInteger("InvSize");
+		inventory = new ItemStack[INV_SIZE];
+		name = stack.getDisplayName();
+
+		readFromNBT(stack.getTagCompound());
+	}
+
+	@Override
+	public int getSizeInventory()
+	{
+		return inventory.length;
+	}
+
+	@Override
+	public ItemStack getStackInSlot(int slot)
+	{
+		return inventory[slot];
+	}
+
+	@Override
+	public ItemStack decrStackSize(int slot, int amount)
+	{
+		ItemStack stack = getStackInSlot(slot);
+		if(stack != null)
+			if(stack.stackSize > amount)
+			{
+				stack = stack.splitStack(amount);
+				markDirty();
+			} else
+				setInventorySlotContents(slot, null);
+		return stack;
+	}
+
+	@Override
+	public ItemStack getStackInSlotOnClosing(int slot)
+	{
+		ItemStack stack = getStackInSlot(slot);
+		if(stack != null)
+			setInventorySlotContents(slot, null);
+		return stack;
+	}
+
+	@Override
+	public void setInventorySlotContents(int slot, ItemStack itemstack)
+	{
+		inventory[slot] = itemstack;
+
+		if (itemstack != null && itemstack.stackSize > getInventoryStackLimit())
+			itemstack.stackSize = getInventoryStackLimit();
+
+		markDirty();
+	}
+
+	@Override
+	public String getInventoryName()
+	{
+		return name;
+	}
+
+	@Override
+	public boolean hasCustomInventoryName()
+	{
+		return name.length() > 0;
+	}
+
+	@Override
+	public int getInventoryStackLimit()
+	{
+		return 64;
+	}
+
+	@Override
+	public void markDirty()
+	{
+		for (int i = 0; i < getSizeInventory(); ++i)
+			if (getStackInSlot(i) != null && getStackInSlot(i).stackSize == 0)
+				inventory[i] = null;
+		writeToNBT(invItem.getTagCompound());
+	}
+
+	@Override
+	public boolean isUseableByPlayer(EntityPlayer player)
+	{
+		return player.getHeldItem() == invItem;
+	}
+
+	@Override
+	public void openInventory() {}
+
+	@Override
+	public void closeInventory() {}
+
+	@Override
+	public boolean isItemValidForSlot(int slot, ItemStack itemstack)
+	{
+		return itemstack.getItem() instanceof ItemCrystal;
+	}
+
+	public void readFromNBT(NBTTagCompound tagcompound)
+	{
+		NBTTagList items = tagcompound.getTagList("ItemInventory", Constants.NBT.TAG_COMPOUND);
+
+		for (int i = 0; i < items.tagCount(); ++i)
+		{
+			NBTTagCompound item = items.getCompoundTagAt(i);
+			byte slot = item.getByte("Slot");
+
+			if (slot >= 0 && slot < getSizeInventory())
+				inventory[slot] = ItemStack.loadItemStackFromNBT(item);
+		}
+	}
+
+	public void writeToNBT(NBTTagCompound tagcompound)
+	{
+		NBTTagList items = new NBTTagList();
+
+		for (int i = 0; i < getSizeInventory(); ++i)
+			if (getStackInSlot(i) != null)
+			{
+				NBTTagCompound item = new NBTTagCompound();
+				item.setInteger("Slot", i);
+				getStackInSlot(i).writeToNBT(item);
+
+				items.appendTag(item);
+			}
+		tagcompound.setTag("ItemInventory", items);
+	}
+}

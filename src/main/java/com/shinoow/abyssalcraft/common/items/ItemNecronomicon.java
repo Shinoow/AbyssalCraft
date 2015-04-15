@@ -41,10 +41,13 @@ public class ItemNecronomicon extends ItemACBasic {
 			par1ItemStack.setTagCompound(new NBTTagCompound());
 		if(!par1ItemStack.stackTagCompound.hasKey("owner")){
 			par1ItemStack.stackTagCompound.setString("owner", par3EntityPlayer.getCommandSenderName());
-			par3EntityPlayer.openGui(AbyssalCraft.instance, AbyssalCraft.necronmiconGuiID, par2World, 0, 0, 0);
+			if(!par3EntityPlayer.isSneaking())
+				par3EntityPlayer.openGui(AbyssalCraft.instance, AbyssalCraft.necronmiconGuiID, par2World, 0, 0, 0);
 		}
-		if(par1ItemStack.stackTagCompound.getString("owner").equals(par3EntityPlayer.getCommandSenderName()))
-			par3EntityPlayer.openGui(AbyssalCraft.instance, AbyssalCraft.necronmiconGuiID, par2World, 0, 0, 0);
+		if(par1ItemStack.stackTagCompound.getString("owner").equals(par3EntityPlayer.getCommandSenderName())){
+			if(!par3EntityPlayer.isSneaking())
+				par3EntityPlayer.openGui(AbyssalCraft.instance, AbyssalCraft.necronmiconGuiID, par2World, 0, 0, 0);
+		}
 		else if(par2World.isRemote)
 			SpecialTextUtil.JzaharText(StatCollector.translateToLocal("message.necronomicon.nope"));
 		return par1ItemStack;

@@ -14,27 +14,23 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.shinoow.abyssalcraft.common.items;
+package com.shinoow.abyssalcraft.common.inventory;
 
-import net.minecraft.client.renderer.texture.IIconRegister;
-import net.minecraft.item.ItemFood;
+import net.minecraft.inventory.IInventory;
+import net.minecraft.inventory.Slot;
+import net.minecraft.item.ItemStack;
 
-import com.shinoow.abyssalcraft.AbyssalCraft;
+import com.shinoow.abyssalcraft.common.items.ItemCrystalBag;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+public class SlotCrystalBag extends Slot {
 
-public class ItemFriedegg extends ItemFood {
-
-	public ItemFriedegg(int j, float f, boolean b) {
-		super(j, f, b);
-
+	public SlotCrystalBag(IInventory par1iInventory, int par2, int par3, int par4) {
+		super(par1iInventory, par2, par3, par4);
 	}
 
 	@Override
-	@SideOnly(Side.CLIENT)
-	public void registerIcons(IIconRegister par1IconRegister)
+	public boolean isItemValid(ItemStack par1ItemStack)
 	{
-		itemIcon = par1IconRegister.registerIcon(AbyssalCraft.modid + ":" + this.getUnlocalizedName().substring(5));
+		return par1ItemStack.getItem() instanceof ItemCrystalBag;
 	}
 }

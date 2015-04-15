@@ -29,7 +29,7 @@ public class ItemPlatefood extends ItemFood
 	public ItemPlatefood(int j, float f, boolean b) {
 		super(j, f, b);
 		setCreativeTab(AbyssalCraft.tabFood);
-		setMaxStackSize(1);
+		setMaxStackSize(4);
 
 	}
 

@@ -38,7 +38,6 @@ public class ItemAbyssalniteCPickaxe extends ItemTool {
 
 	public ItemAbyssalniteCPickaxe(ToolMaterial enumToolMaterial) {
 		super(2, enumToolMaterial, blocksEffectiveAgainst);
-		enumToolMaterial.customCraftingMaterial = AbyssalCraft.Corb;
 		setHarvestLevel("pickaxe", 8);
 	}
 

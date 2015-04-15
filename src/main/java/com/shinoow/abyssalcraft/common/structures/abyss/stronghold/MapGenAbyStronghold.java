@@ -60,10 +60,7 @@ public class MapGenAbyStronghold extends MapGenStructure
 	@SuppressWarnings("rawtypes")
 	public MapGenAbyStronghold(Map par1Map)
 	{
-		allowedBiomeGenBases = allowedBiomes.toArray(new BiomeGenBase[0]);
-		structureCoords = new ChunkCoordIntPair[3];
-		field_82671_h = 32.0D;
-		field_82672_i = 3;
+		this();
 		Iterator var2 = par1Map.entrySet().iterator();
 
 		while (var2.hasNext())

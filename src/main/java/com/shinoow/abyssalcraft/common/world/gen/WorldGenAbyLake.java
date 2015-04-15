@@ -23,7 +23,6 @@ import net.minecraft.block.material.Material;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.World;
-import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.gen.feature.WorldGenerator;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
@@ -41,6 +40,7 @@ public class WorldGenAbyLake extends WorldGenerator
 	@Override
 	public boolean generate(World par1World, Random par2Random, int par3, int par4, int par5)
 	{
+		int n = par4;
 		par3 -= 8;
 
 		for (par5 -= 8; par4 > 5 && par1World.isAirBlock(par3, par4, par5); --par4)
@@ -110,14 +110,9 @@ public class WorldGenAbyLake extends WorldGenerator
 				for (j2 = 0; j2 < 16; ++j2)
 					for (i2 = 4; i2 < 8; ++i2)
 						if (aboolean[(i1 * 16 + j2) * 8 + i2] && par1World.getBlock(par3 + i1, par4 + i2 - 1, par5 + j2) == AbyssalCraft.abystone && par1World.getSavedLightValue(EnumSkyBlock.Sky, par3 + i1, par4 + i2, par5 + j2) > 0)
-						{
-							BiomeGenBase biomegenbase = par1World.getBiomeGenForCoords(par3 + i1, par5 + j2);
-
-							if (biomegenbase.topBlock == AbyssalCraft.abystone)
-								par1World.setBlock(par3 + i1, par4 + i2 - 1, par5 + j2, AbyssalCraft.abystone, 0, 2);
-							else
-								par1World.setBlock(par3 + i1, par4 + i2 - 1, par5 + j2, AbyssalCraft.abystone, 0, 2);
-						}
+							if(n <= 32)
+								par1World.setBlock(par3 + i1, par4 + i2 - 1, par5 + j2, AbyssalCraft.AbyLCorOre, 0, 2);
+							else par1World.setBlock(par3 + i1, par4 + i2 - 1, par5 + j2, AbyssalCraft.abystone, 0, 2);
 
 			if (blockIndex.getMaterial() == BlockCLiquid.Cwater)
 				for (i1 = 0; i1 < 16; ++i1)
@@ -127,7 +122,9 @@ public class WorldGenAbyLake extends WorldGenerator
 							flag = !aboolean[(i1 * 16 + j2) * 8 + i2] && (i1 < 15 && aboolean[((i1 + 1) * 16 + j2) * 8 + i2] || i1 > 0 && aboolean[((i1 - 1) * 16 + j2) * 8 + i2] || j2 < 15 && aboolean[(i1 * 16 + j2 + 1) * 8 + i2] || j2 > 0 && aboolean[(i1 * 16 + j2 - 1) * 8 + i2] || i2 < 7 && aboolean[(i1 * 16 + j2) * 8 + i2 + 1] || i2 > 0 && aboolean[(i1 * 16 + j2) * 8 + i2 - 1]);
 
 							if (flag && (i2 < 4 || par2Random.nextInt(2) != 0) && par1World.getBlock(par3 + i1, par4 + i2, par5 + j2).getMaterial().isSolid())
-								par1World.setBlock(par3 + i1, par4 + i2, par5 + j2, AbyssalCraft.abystone, 0, 2);
+								if(n <= 32)
+									par1World.setBlock(par3 + i1, par4 + i2, par5 + j2, AbyssalCraft.AbyLCorOre, 0, 2);
+								else par1World.setBlock(par3 + i1, par4 + i2, par5 + j2, AbyssalCraft.abystone, 0, 2);
 						}
 
 			return true;

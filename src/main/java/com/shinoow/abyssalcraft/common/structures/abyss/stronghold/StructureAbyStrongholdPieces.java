@@ -24,11 +24,15 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockDirectional;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntityMobSpawner;
+import net.minecraft.util.Direction;
+import net.minecraft.util.Facing;
 import net.minecraft.util.WeightedRandomChestContent;
 import net.minecraft.world.ChunkPosition;
 import net.minecraft.world.World;
@@ -1306,6 +1310,229 @@ public class StructureAbyStrongholdPieces
 			WOOD_DOOR,
 			GRATES,
 			IRON_DOOR
+		}
+
+		@Override
+		protected int getMetadataWithOffset(Block block, int meta)
+		{
+			if (block == Blocks.rail)
+			{
+				if (coordBaseMode == 1 || coordBaseMode == 3)
+				{
+					if (meta == 1)
+						return 0;
+
+					return 1;
+				}
+			}
+			else if (block != Blocks.wooden_door && block != Blocks.iron_door)
+			{
+				if (block != Blocks.stone_stairs && block != Blocks.oak_stairs && block != Blocks.nether_brick_stairs && block != Blocks.stone_brick_stairs && block != Blocks.sandstone_stairs && block != AbyssalCraft.abystairs && block != AbyssalCraft.DCstairs)
+				{
+					if (block == Blocks.ladder)
+					{
+						if (coordBaseMode == 0)
+						{
+							if (meta == 2)
+								return 3;
+
+							if (meta == 3)
+								return 2;
+						}
+						else if (coordBaseMode == 1)
+						{
+							if (meta == 2)
+								return 4;
+
+							if (meta == 3)
+								return 5;
+
+							if (meta == 4)
+								return 2;
+
+							if (meta == 5)
+								return 3;
+						}
+						else if (coordBaseMode == 3)
+						{
+							if (meta == 2)
+								return 5;
+
+							if (meta == 3)
+								return 4;
+
+							if (meta == 4)
+								return 2;
+
+							if (meta == 5)
+								return 3;
+						}
+					}
+					else if (block == Blocks.stone_button || block == AbyssalCraft.Abybutton)
+					{
+						if (coordBaseMode == 0)
+						{
+							if (meta == 3)
+								return 4;
+
+							if (meta == 4)
+								return 3;
+						}
+						else if (coordBaseMode == 1)
+						{
+							if (meta == 3)
+								return 1;
+
+							if (meta == 4)
+								return 2;
+
+							if (meta == 2)
+								return 3;
+
+							if (meta == 1)
+								return 4;
+						}
+						else if (coordBaseMode == 3)
+						{
+							if (meta == 3)
+								return 2;
+
+							if (meta == 4)
+								return 1;
+
+							if (meta == 2)
+								return 3;
+
+							if (meta == 1)
+								return 4;
+						}
+					}
+					else if (block != Blocks.tripwire_hook && !(block instanceof BlockDirectional))
+					{
+						if (block == Blocks.piston || block == Blocks.sticky_piston || block == Blocks.lever || block == Blocks.dispenser)
+							if (coordBaseMode == 0)
+							{
+								if (meta == 2 || meta == 3)
+									return Facing.oppositeSide[meta];
+							}
+							else if (coordBaseMode == 1)
+							{
+								if (meta == 2)
+									return 4;
+
+								if (meta == 3)
+									return 5;
+
+								if (meta == 4)
+									return 2;
+
+								if (meta == 5)
+									return 3;
+							}
+							else if (coordBaseMode == 3)
+							{
+								if (meta == 2)
+									return 5;
+
+								if (meta == 3)
+									return 4;
+
+								if (meta == 4)
+									return 2;
+
+								if (meta == 5)
+									return 3;
+							}
+					}
+					else if (coordBaseMode == 0)
+					{
+						if (meta == 0 || meta == 2)
+							return Direction.rotateOpposite[meta];
+					}
+					else if (coordBaseMode == 1)
+					{
+						if (meta == 2)
+							return 1;
+
+						if (meta == 0)
+							return 3;
+
+						if (meta == 1)
+							return 2;
+
+						if (meta == 3)
+							return 0;
+					}
+					else if (coordBaseMode == 3)
+					{
+						if (meta == 2)
+							return 3;
+
+						if (meta == 0)
+							return 1;
+
+						if (meta == 1)
+							return 2;
+
+						if (meta == 3)
+							return 0;
+					}
+				}
+				else if (coordBaseMode == 0)
+				{
+					if (meta == 2)
+						return 3;
+
+					if (meta == 3)
+						return 2;
+				}
+				else if (coordBaseMode == 1)
+				{
+					if (meta == 0)
+						return 2;
+
+					if (meta == 1)
+						return 3;
+
+					if (meta == 2)
+						return 0;
+
+					if (meta == 3)
+						return 1;
+				}
+				else if (coordBaseMode == 3)
+				{
+					if (meta == 0)
+						return 2;
+
+					if (meta == 1)
+						return 3;
+
+					if (meta == 2)
+						return 1;
+
+					if (meta == 3)
+						return 0;
+				}
+			}
+			else if (coordBaseMode == 0)
+			{
+				if (meta == 0)
+					return 2;
+
+				if (meta == 2)
+					return 0;
+			}
+			else
+			{
+				if (coordBaseMode == 1)
+					return meta + 1 & 3;
+
+				if (coordBaseMode == 3)
+					return meta + 3 & 3;
+			}
+
+			return meta;
 		}
 	}
 

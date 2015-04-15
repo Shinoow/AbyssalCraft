@@ -36,7 +36,6 @@ public class ItemEthaxiumHoe extends Item {
 	public ItemEthaxiumHoe(ToolMaterial enumToolMaterial)
 	{
 		super();
-		enumToolMaterial.customCraftingMaterial = AbyssalCraft.ethaxiumIngot;
 		maxStackSize = 1;
 		setMaxDamage(enumToolMaterial.getMaxUses());
 	}

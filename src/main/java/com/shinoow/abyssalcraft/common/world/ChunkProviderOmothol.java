@@ -194,6 +194,7 @@ public class ChunkProviderOmothol implements IChunkProvider
 		biomesForGeneration = worldObj.getWorldChunkManager().loadBlockGeneratorData(biomesForGeneration, x * 16, z * 16, 16, 16);
 		generateTerrain(x, z, ablock, biomesForGeneration);
 		replaceBlocksForBiome(x, z, ablock, biomesForGeneration);
+
 		Chunk chunk = new Chunk(worldObj, ablock, x, z);
 		byte[] abyte = chunk.getBiomeArray();
 
@@ -303,6 +304,7 @@ public class ChunkProviderOmothol implements IChunkProvider
 		int k = x * 16;
 		int l = z * 16;
 		BiomeGenBase biomegenbase = worldObj.getBiomeGenForCoords(k + 16, l + 16);
+
 		biomegenbase.decorate(worldObj, worldObj.rand, k, l);
 
 		MinecraftForge.EVENT_BUS.post(new PopulateChunkEvent.Post(par1IChunkProvider, worldObj, worldObj.rand, x, z, false));

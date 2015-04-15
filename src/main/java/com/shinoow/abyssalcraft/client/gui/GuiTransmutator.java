@@ -55,7 +55,7 @@ public class GuiTransmutator extends GuiContainer {
 		drawTexturedModalRect(k, l, 0, 0, xSize, ySize);
 		int i1;
 
-		if (tileTransmutator.isTransmutating())
+		if (tileTransmutator.isTransmuting())
 		{
 			i1 = tileTransmutator.getBurnTimeRemainingScaled(12);
 			drawTexturedModalRect(k + 56, l + 36 + 12 - i1, 176, 12 - i1, 14, i1 + 2);

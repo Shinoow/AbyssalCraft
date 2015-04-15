@@ -48,7 +48,7 @@ public class TileEntityCrate extends TileEntity implements IInventory
 	@Override
 	public int getSizeInventory()
 	{
-		return 27;
+		return 36;
 	}
 
 	@Override
