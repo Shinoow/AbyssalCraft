@@ -5,7 +5,7 @@
 The mod thread can be located at
 http://minecraftforum.net/topic/1582727-/
 
-### Licencing
+### Licensing
 
 Copyright 2012-2015 Shinoow
 
