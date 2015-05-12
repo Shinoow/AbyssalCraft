@@ -150,6 +150,7 @@ necronomicon.information.materials=Materials
 necronomicon.information.progression=Progression
 necronomicon.information.integration=Integrations
 necronomicon.information.entities=Entities
+necronomicon.information.outergods=The Outer Gods
 
 #Necronomicon Text
 #Note: the maximum amount of letters per string is 256
@@ -159,17 +160,30 @@ necronomicon.information.entities=Entities
 necronomicon.text.necronomicon.1=This is the Necronomicon, a book written by Abdul Alhazred, also known as "The Mad Arab". The book contains knowledge about The Great Old Ones, their names and how to summon them. There is also information about spells and rituals the book can perform.
 necronomicon.text.necronomicon.2=The Necronomicon itself is a chapter of the Abyssalnomicon, which was read to Alhazred by a demon known as J'zahar, who had composed the Abyssalnomicon from infinite knowledge known to The Great Old Ones.
 necronomicon.text.necronomicon.3=There are 4 types of Necronomicons within the Abyssalnomicon: The Necronomicon, The Abyssal Wasteland Necronomicon, knowledge bound to a specific dimension.
-necronomicon.text.necronomicon.4=In order to unlock the knowledge, one must travel to said dimension and empower the Necronoicon with the flesh of that world. The Abyssalnomicon contains additional knowledge known only to J'zahar, knowledge man was not meant to obtain.
+necronomicon.text.necronomicon.4=In order to unlock the knowledge, one must travel to said dimension and empower the Necronomicon with the flesh of that world. The Abyssalnomicon contains additional knowledge known only to J'zahar, knowledge man was not meant to obtain.
 
 necronomicon.text.abyssalnomicon.1=This is the Abyssalnomicon, a book written by J'zahar, Gatekeeper of The Abyss. The book contains the knowledge of the 4 Necronomicons, as they are in fact chapters of this book. There is also extensive knowledge not mentioned in the others.
 necronomicon.text.abyssalnomicon.2=As the knowledge about spells and rituals is limited to the specified dimension (and previous ones, depending on the Necronomicon type), the Abyssalnomcion has all knowledge collected in one place, with additions.
-necronomicon.text.abyssalnomicon.3=Page 3
-necronomicon.text.abyssalnomicon.4=Page 4
 
 necronomicon.text.abyssalcraft.1=AbyssalCraft is the mod which this book was designed for. It mainly focuses on exploration with the additions of 3 dimensions, all filled with new materials and new monsters to face (who drops new loot). There are also new machines added to the mod.
 necronomicon.text.abyssalcraft.2=They allow the player to bend the elements of nature more than they could before. These include the Crystallizer, the Transmutator and the Engraver (which doesn't bend the elements of nature, as it is used to engrave coins).
 necronomicon.text.abyssalcraft.3=New materials allows you to craft stronger tools and armor, which has special abilities in some cases when wearing a whole set. New building materials are found within the Overworld biomes and the new dimensions. This book enables new usages for the mod.
 necronomicon.text.abyssalcraft.4=With rituals and spells allowing the user to utilize the evil magic contained within the Necronomicon. The end result will render it vital to progression of the mod, adding a larger aspect of magic to the otherwise large exploration aspect of the mod.
+
+necronomicon.text.azathoth.1=Azathoth, The Daemon Sultan, is the ruler and possibly creator of all existence. 
+necronomicon.text.azathoth.2=It resides outside of the universe, sedated by the eternal sound of pipes and drums. Despite that, it has a will of it's own, and issues commands to Nyarlathotep.
+necronomicon.text.nyarlathotep.1=Nyarlathotep, The Crawling Chaos, is an Outer God who isn't exiled nor imprisoned.
+necronomicon.text.nyarlathotep.2=He walks the earth hidden among the humans, spreading madness. Apart from serving cults of the Outer Gods, he fulfills the wishes of Azathoth, whom he serves.
+necronomicon.text.yog-sothoth.1=Yog-Sothoth, The Lurker at the Threshold, is an Outer God, and the offspring of the Nameless Mist.
+necronomicon.text.yog-sothoth.2=It is heavily implied, if not outright stated, that Yog-Sothoth is omniscient, and is locked outside the universe, meaning he knows and can see all of space-time all at once, that there is no secret hidden from Yog-Sothoth.
+necronomicon.text.shub-niggurath.1=Shub-Niggurath, The Black Goat of the Woods with a Thousand Young, is an Outer God in the pantheon.
+necronomicon.text.shub-niggurath.2=She is a perverse fertility deity, said to appear as an enormous cloudy mass which extrudes black tentacles, slime-dripping mouths, and short, writhing goat legs. Small creatures are continually spat forth by the monstrosity, which are reconsumed or escape
+necronomicon.text.cthulhu.1=Cthulhu is a Great Old One, trapped in a endless sleep underneath the sea in the city R'lyeh.
+necronomicon.text.cthulhu.2=He has the head of a octopus, and a scaly body with wings on his back. His state of endless sleep comes from a war against the Elder Beings, which ended with R'lyeh sinking to the bottom of the sea. One day he will rise to rule over the earth.
+necronomicon.text.hastur.1=Hastur, The Unspeakable, is a Great Old One and Cthulhu's half-brother.
+necronomicon.text.hastur.2=Not much is known about Hastur, but he is known to take the form of a king in yellow robes, wearing a mask. Like most Great Old Ones, he is capable of taking any form he desires.
+necronomicon.text.jzahar.1=J'zahar, Gatekeeper of The Abyss, is the bastard offspring of Hastur.
+necronomicon.text.jzahar.2=Having a desire for power, and not wanting exile to the stars, J'zahar reached out beyond time and space to achieve his freedom. The results were similar powers to that of Yog-Sothoth, and the punishment of eternally guarding his imprisoned fellow deities.
 
 necronomicon.text.greatoldones=Before the ages of man, the universe was ruled by a race of ancient demonic gods known as "The Great Old ones". Due to a conflict aeons ago, all of these beings are imprisoned far away where no man has ever set foot.
 necronomicon.text.abyssalnomicon_info=The Abyssalnomicon is the unholy tome from which the Necronomicon was written, when J'zahar read that section to Alhazred.
@@ -323,8 +337,14 @@ necronomicon.text.integration.nei.6=The Engraver uses Coin Engravings as "fuel",
 necronomicon.text.integration.nei.7=Recipes for the Materializer can also be displayed by pressing the recipe button. They have a special display screen showing the required Crystals.
 necronomicon.text.integration.nei.8=You can also see which Necronomicon you need in order to materialize the specific material. The Materializer uses no fuel.
 
-necronomicon.text.integration.tc.1=With Thaumcraft installed, you can now discover aspects in blocks, items and entities added in AbyssalCraft. There are, however, no new aspects. There will probably be more ways to combine the mods later on.
-necronomicon.text.integration.tc.2=You also get a Vis discount and the ability to view nodes when wearing the Depths Armor set.
+necronomicon.text.integration.tc.1=With Thaumcraft installed, you can now discover aspects in blocks, items and entities added in AbyssalCraft. There is also 2 new aspects, Coralos and Dreadia. You also get a Vis discount and the ability to view nodes when wearing the Depths Armor set.
+necronomicon.text.integration.tc.2=Infusion Enchanting has been added for all enchantments added in AbyssalCraft. Light Pierce requires 1 Glowstone Dust, 1 Arrow, and 10 Lux. Iron Wall requires 1 Block of Iron, 1 Cobblestone Wall, 10 Tutamen and 10 Terra.
+necronomicon.text.integration.tc.3=Coralium requires 1 Refined Coralium Ingot, 1 Coralium Plagued Flesh, 10 Coralos and 10 Potentia. Dread requires 1 Dreadium Ingot, 1 Dread Fragment, 10 Dreadia and 10 Potentia.
+necronomicon.text.integration.tc.4=There are also wand parts added in the integration. Wand Caps can be made from Abyssalnite, Refined Coralium, Dreadium and Ethaxium Nuggets. Wand Rods can be made from Darklands Oak Logs, Coralium Stone, Dreadlands Tree Logs and Omothol stone.
+necronomicon.text.integration.tc.5=Wands can be made by combining the Abyssalnite Cap with the Darklands Rod, Coralium Cap with the Coralium Rod, Dreadium Cap with the Dreadlands Rod, the Ethaxium Cap with the Omothol Rod and the Voidmetal Cap with the Omothol Rod.
+necronomicon.text.integration.tc.6=The Darklands Rod regenerates up to 10% of the wand's Vis inside Darklands biomes. The Dreadlands Rod does the same inside Dreadlands biomes. The Omothol Rod provides infinite Vis in Omothol (with the Ethaxium Cap) and the End (with the Voidmetal Cap).
+necronomicon.text.integration.tc.7=The Darklands and Dreadlands Wands are crafted like normal wands, through Arcane Crafting. The Coralium Wand is crafted through Infusion Crafting, with the Rod in the middle, the Caps in the other slots, 10 Perditio, 10 Coralos and 10 Tenebrae.
+necronomicon.text.integration.tc.8=The Ethaxium Empowered Omothol Wand is crafted through Infusion Crafting with the Rod in the middle, the Caps in the other slots, 10 Perditio, 10 Spiritus and 10 Tenebrae. The Voidmetal Aspected is the same, but with Alienis instead of Spiritus.
 
 necronomicon.text.integration.morph.1=With Morph installed, you can get morph abilities when morphing into AbyssalCraft entities. Additional abilities might be added, like plague immunity.
 necronomicon.text.integration.morph.2=When morphed into entities that has special models, your hand will be morphed into the hand used by that model in 1st person view.
@@ -350,6 +370,8 @@ ac_enchantment=Enchantments
 ac_enchantment.tooltip=Enchantment ID configuration
 ac_potion=Potions
 ac_potion.tooltip=Potion ID configuration
+ac_integration=Integrations
+ac_integration.tooltip=Integration configuration
 
 #Damagesources
 death.attack.coralium=%1$s died from the Coralium Plague
@@ -397,14 +419,14 @@ tooltip.soulreaper=Souls harvested
 tooltip.crystalbag=This bag holds crystallized elements
 
 #Creative Tabs
-itemgroup.acblocks=AbyssalCraft Blocks
-itemgroup.acitems=AbyssalCraft Items
-itemgroup.actools=AbyssalCraft Tools
-itemgroup.acctools=AbyssalCraft Combat Tools
-itemgroup.acfood=AbyssalCraft Foodstuffs
-itemgroup.acdblocks=AbyssalCraft Decoration Blocks
-itemgroup.accrystals=AbyssalCraft Crystallizer Crystals
-itemgroup.accoins=Abyssalcraft Coins
+itemGroup.acblocks=AbyssalCraft Blocks
+itemGroup.acitems=AbyssalCraft Items
+itemGroup.actools=AbyssalCraft Tools
+itemGroup.acctools=AbyssalCraft Combat Tools
+itemGroup.acfood=AbyssalCraft Foodstuffs
+itemGroup.acdblocks=AbyssalCraft Decoration Blocks
+itemGroup.accrystals=AbyssalCraft Crystallizer Crystals
+itemGroup.accoins=Abyssalcraft Coins
 
 #Fluids
 fluid.liquidcoralium=Liquid Coralium
@@ -794,5 +816,32 @@ enchantment.coralium=Coralium
 enchantment.dread=Dread
 enchantment.ironWall=Iron Wall
 enchantment.damage.shadow=Light Pierce
+
+#Thaumcraft integration
+item.nugget.abyssalnite.name=Abyssalnite Nugget
+item.nugget.coralium.name=Refined Coralium Nugget
+item.nugget.dreadium.name=Dreadium Nugget
+item.nugget.ethaxium.name=Ethaxium Nugget
+item.wandcap.abyssalnite.name=Abyssalnite Cap
+item.wandcap.coralium.name=Refined Coralium Cap
+item.wandcap.dreadium.name=Dreadium Cap
+item.wandcap.ethaxium.name=Ethaxium Cap
+item.wandcore.darklands.name=Darklands Oak Rod
+item.wandcore.coralium.name=Coralium Stone Rod
+item.wandcore.dreadlands.name=Dreadlands Wood Rod
+item.wandcore.omothol.name=Omothol Stone Rod
+item.Wand.abyssalnite.cap=Abyssalnite Bound
+item.Wand.darklands.rod=Darklands Oak
+item.Wand.coralium.cap=Coralium Empowered
+item.Wand.coralium.rod=Coralium Stone
+item.Wand.dreadium.cap=Dreadium Bound
+item.Wand.dreadlands.rod=Dreadlands Wood
+item.Wand.ethaxium.cap=Ethaxium Empowered
+item.Wand.omothol.rod=Omothol Stone
+
+itemGroup.acthaum=AbyssalCraft Thaumcraft Integration
+
+tc.aspect.coralos=Coralium
+tc.aspect.dreadia=Dread
 
 #Localization done, Shin out.

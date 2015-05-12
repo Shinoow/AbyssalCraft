@@ -23,6 +23,7 @@ import net.minecraft.util.ResourceLocation;
  * Base data structure for Necronomicon information pages
  * @author shinoow
  *
+ * @since 1.2
  */
 public class NecroData {
 

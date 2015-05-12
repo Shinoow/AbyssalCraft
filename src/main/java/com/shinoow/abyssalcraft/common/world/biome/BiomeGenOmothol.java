@@ -36,10 +36,10 @@ public class BiomeGenOmothol extends BiomeGenBase {
 		spawnableCaveCreatureList.clear();
 		spawnableMonsterList.add(new SpawnListEntry(EntityRemnant.class, 70, 2, 4));
 		spawnableMonsterList.add(new SpawnListEntry(EntityOmotholGhoul.class, 50, 1, 2));
-		spawnableMonsterList.add(new SpawnListEntry(EntityShadowCreature.class, 30, 1, 4));
-		spawnableMonsterList.add(new SpawnListEntry(EntityShadowMonster.class, 20, 1, 2));
-		spawnableMonsterList.add(new SpawnListEntry(EntityShadowBeast.class, 5, 1, 1));
-		spawnableMonsterList.add(new SpawnListEntry(EntitySacthoth.class, 1, 0, 1));
+		spawnableMonsterList.add(new SpawnListEntry(EntityGatekeeperMinion.class, 30, 1, 2));
+		spawnableMonsterList.add(new SpawnListEntry(EntityShadowCreature.class, 18, 1, 4));
+		spawnableMonsterList.add(new SpawnListEntry(EntityShadowMonster.class, 12, 1, 2));
+		spawnableMonsterList.add(new SpawnListEntry(EntityShadowBeast.class, 3, 1, 1));
 	}
 
 	@Override

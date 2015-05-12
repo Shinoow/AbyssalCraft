@@ -33,7 +33,6 @@ import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionHelper;
 import net.minecraft.util.DamageSource;
-import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraftforge.common.util.EnumHelper;
 import net.minecraftforge.oredict.OreDictionary;
 
@@ -45,7 +44,6 @@ import com.shinoow.abyssalcraft.api.item.ItemEngraving;
 import com.shinoow.abyssalcraft.api.recipe.*;
 
 import cpw.mods.fml.common.IFuelHandler;
-import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 
 /**
@@ -104,12 +102,12 @@ public class AbyssalCraftAPI {
 	public static ArmorMaterial dreadiumSamuraiArmor = EnumHelper.addArmorMaterial("DreadiumS", 45, new int[]{3, 8, 6, 3}, 20);
 	public static ArmorMaterial ethaxiumArmor = EnumHelper.addArmorMaterial("Ethaxium", 50, new int[]{3, 8, 6, 3}, 25);
 
-	public static ToolMaterial darkstoneTool = EnumHelper.addToolMaterial("DARKSTONE", 1, 180, 5.0F, 1, 5).setRepairItem(new ItemStack(ACBlocks.darkstone_cobblestone));
-	public static ToolMaterial abyssalniteTool = EnumHelper.addToolMaterial("ABYSSALNITE", 4, 1261, 13.0F, 4, 13).setRepairItem(new ItemStack(ACItems.abyssalnite_ingot));
-	public static ToolMaterial refinedCoraliumTool = EnumHelper.addToolMaterial("CORALIUM", 5, 2000, 14.0F, 5, 14).setRepairItem(new ItemStack(ACItems.refined_coralium_ingot));
-	public static ToolMaterial dreadiumTool = EnumHelper.addToolMaterial("DREADIUM", 6, 3000, 15.0F, 6, 15).setRepairItem(new ItemStack(ACItems.dreadium_ingot));
-	public static ToolMaterial coraliumInfusedAbyssalniteTool = EnumHelper.addToolMaterial("ABYSSALNITE_C", 8, 8000, 20.0F, 8, 30).setRepairItem(new ItemStack(ACItems.transmutation_gem));
-	public static ToolMaterial ethaxiumTool = EnumHelper.addToolMaterial("ETHAXIUM", 8, 4000, 16.0F, 8, 20).setRepairItem(new ItemStack(ACItems.ethaxium_ingot));
+	public static ToolMaterial darkstoneTool = EnumHelper.addToolMaterial("DARKSTONE", 1, 180, 5.0F, 1, 5);
+	public static ToolMaterial abyssalniteTool = EnumHelper.addToolMaterial("ABYSSALNITE", 4, 1261, 13.0F, 4, 13);
+	public static ToolMaterial refinedCoraliumTool = EnumHelper.addToolMaterial("CORALIUM", 5, 2000, 14.0F, 5, 14);
+	public static ToolMaterial dreadiumTool = EnumHelper.addToolMaterial("DREADIUM", 6, 3000, 15.0F, 6, 15);
+	public static ToolMaterial coraliumInfusedAbyssalniteTool = EnumHelper.addToolMaterial("ABYSSALNITE_C", 8, 8000, 20.0F, 8, 30);
+	public static ToolMaterial ethaxiumTool = EnumHelper.addToolMaterial("ETHAXIUM", 8, 4000, 16.0F, 8, 20);
 
 	/**
 	 * Initializes the reflection required for the Potion code, ignore it
@@ -165,10 +163,35 @@ public class AbyssalCraftAPI {
 	}
 
 	/**
+	 * Sets the repair items for each armor/tool material
+	 */
+	public static void setRepairItems(){
+
+		abyssalniteArmor.customCraftingMaterial = ACItems.abyssalnite_ingot;
+		coraliumInfusedAbyssalniteArmor.customCraftingMaterial = ACItems.transmutation_gem;
+		dreadedAbyssalniteArmor.customCraftingMaterial = ACItems.dreaded_shard_of_abyssalnite;
+		refinedCoraliumArmor.customCraftingMaterial = ACItems.refined_coralium_ingot;
+		platedCoraliumArmor.customCraftingMaterial = ACItems.coralium_plate;
+		depthsArmor.customCraftingMaterial = ACItems.coralium_gem_cluster_9;
+		dreadiumArmor.customCraftingMaterial = ACItems.dreadium_ingot;
+		dreadiumSamuraiArmor.customCraftingMaterial = ACItems.dreadium_plate;
+		ethaxiumArmor.customCraftingMaterial = ACItems.ethaxium_ingot;
+
+		darkstoneTool.setRepairItem(new ItemStack(ACBlocks.darkstone_cobblestone));
+		abyssalniteTool.setRepairItem(new ItemStack(ACItems.abyssalnite_ingot));
+		refinedCoraliumTool.setRepairItem(new ItemStack(ACItems.refined_coralium_ingot));
+		dreadiumTool.setRepairItem(new ItemStack(ACItems.dreadium_ingot));
+		coraliumInfusedAbyssalniteTool.setRepairItem(new ItemStack(ACItems.transmutation_gem));
+		ethaxiumTool.setRepairItem(new ItemStack(ACItems.ethaxium_ingot));
+	}
+
+	/**
 	 * Adds a bit sequence used to calculate the status on a potion.
 	 * This description probably hardly makes any sense, deal with it.
 	 * @param id The potion id
 	 * @param requirements A bit sequence
+	 * 
+	 * @since 1.1
 	 */
 	public static void addPotionRequirements(int id, String requirements){
 		potionRequirements.put(Integer.valueOf(id), requirements);
@@ -179,6 +202,8 @@ public class AbyssalCraftAPI {
 	 * This description probably hardly makes any sense, deal with it.
 	 * @param id The potion id
 	 * @param amplifier The potion amplifier value (usually 5)
+	 * 
+	 * @since 1.1
 	 */
 	public static void addPotionAmplifiers(int id, String amplifier){
 		potionAmplifiers.put(Integer.valueOf(id), amplifier);
@@ -190,6 +215,8 @@ public class AbyssalCraftAPI {
 	 * @param output1 The first crystal output
 	 * @param output2 The second crystal output
 	 * @param xp Amount of exp given
+	 * 
+	 * @since 1.0
 	 */
 	public static void addCrystallization(Block input, ItemStack output1, ItemStack output2, float xp){
 		CrystallizerRecipes.crystallization().crystallize(input, output1, output2, xp);
@@ -201,6 +228,8 @@ public class AbyssalCraftAPI {
 	 * @param output1 The first crystal output
 	 * @param output2 The second crystal output
 	 * @param xp Amount of exp given
+	 * 
+	 * @since 1.0
 	 */
 	public static void addCrystallization(Item input, ItemStack output1, ItemStack output2, float xp){
 		CrystallizerRecipes.crystallization().crystallize(input, output1, output2, xp);
@@ -212,6 +241,8 @@ public class AbyssalCraftAPI {
 	 * @param output1 The first crystal output
 	 * @param output2 The second crystal output
 	 * @param xp Amount of exp given
+	 * 
+	 * @since 1.0
 	 */
 	public static void addCrystallization(ItemStack input, ItemStack output1, ItemStack output2, float xp){
 		CrystallizerRecipes.crystallization().crystallize(input, output1, output2, xp);
@@ -222,6 +253,8 @@ public class AbyssalCraftAPI {
 	 * @param input The block to crystallize
 	 * @param output The crystal output
 	 * @param xp Amount of exp given
+	 * 
+	 * @since 1.0
 	 */
 	public static void addSingleCrystallization(Block input, ItemStack output, float xp){
 		addCrystallization(input, output, null, xp);
@@ -232,6 +265,8 @@ public class AbyssalCraftAPI {
 	 * @param input The item to crystallize
 	 * @param output The crystal output
 	 * @param xp Amount of exp given
+	 * 
+	 * @since 1.0
 	 */
 	public static void addSingleCrystallization(Item input, ItemStack output, float xp){
 		addCrystallization(input, output, null, xp);
@@ -242,6 +277,8 @@ public class AbyssalCraftAPI {
 	 * @param input The itemstack to crystallize
 	 * @param output The crystal output
 	 * @param xp Amount of exp given
+	 * 
+	 * @since 1.0
 	 */
 	public static void addSingleCrystallization(ItemStack input, ItemStack output, float xp){
 		addCrystallization(input, output, null, xp);
@@ -252,6 +289,8 @@ public class AbyssalCraftAPI {
 	 * @param input The block to transmutate
 	 * @param output The transmutated output
 	 * @param xp Amount of exp given
+	 * 
+	 * @since 1.0
 	 */
 	public static void addTransmutation(Block input, ItemStack output, float xp){
 		TransmutatorRecipes.transmutation().transmutate(input, output, xp);
@@ -262,6 +301,8 @@ public class AbyssalCraftAPI {
 	 * @param input The item to transmutate
 	 * @param output The transmutated output
 	 * @param xp Amount of exp given
+	 * 
+	 * @since 1.0
 	 */
 	public static void addTransmutation(Item input, ItemStack output, float xp){
 		TransmutatorRecipes.transmutation().transmutate(input, output, xp);
@@ -272,6 +313,8 @@ public class AbyssalCraftAPI {
 	 * @param input The itemstack to transmutate
 	 * @param output The transmutated output
 	 * @param xp Amount of exp given
+	 * 
+	 * @since 1.0
 	 */
 	public static void addTransmutation(ItemStack input, ItemStack output, float xp){
 		TransmutatorRecipes.transmutation().transmutate(input, output, xp);
@@ -282,6 +325,8 @@ public class AbyssalCraftAPI {
 	 * @param input The ore input
 	 * @param output The ore output
 	 * @param xp Amount of exp given
+	 * 
+	 * @since 1.0
 	 */
 	public static void addOreSmelting(String input, String output, float xp){
 		Iterator<ItemStack> inputIter = OreDictionary.getOres(input).iterator();
@@ -296,6 +341,8 @@ public class AbyssalCraftAPI {
 	 * @param output1 The first ore output
 	 * @param output2 The second ore output
 	 * @param xp Amount of exp given
+	 * 
+	 * @since 1.0
 	 */
 	public static void addCrystallization(String input, String output1, String output2, float xp){
 		Iterator<ItemStack> inputIter = OreDictionary.getOres(input).iterator();
@@ -312,6 +359,8 @@ public class AbyssalCraftAPI {
 	 * @param output2 The second ore output
 	 * @param out2 Quantity of the second output
 	 * @param xp Amount of exp given
+	 * 
+	 * @since 1.0
 	 */
 	public static void addCrystallization(String input, String output1, int out1, String output2, int out2, float xp){
 		Iterator<ItemStack> inputIter = OreDictionary.getOres(input).iterator();
@@ -330,6 +379,8 @@ public class AbyssalCraftAPI {
 	 * @param out2 Quantity of the second output
 	 * @param meta2 Metadata for the second output
 	 * @param xp Amount of exp given
+	 * 
+	 * @since 1.0
 	 */
 	public static void addCrystallization(String input, String output1, int out1, int meta1, String output2, int out2, int meta2, float xp){
 		Iterator<ItemStack> inputIter = OreDictionary.getOres(input).iterator();
@@ -343,6 +394,8 @@ public class AbyssalCraftAPI {
 	 * @param input The ore input
 	 * @param output The ore output
 	 * @param xp Amount of exp given
+	 * 
+	 * @since 1.0
 	 */
 	public static void addSingleCrystallization(String input, String output, float xp){
 		Iterator<ItemStack> inputIter = OreDictionary.getOres(input).iterator();
@@ -357,6 +410,8 @@ public class AbyssalCraftAPI {
 	 * @param output The ore output
 	 * @param out The output quantity
 	 * @param xp Amount of exp given
+	 * 
+	 * @since 1.0
 	 */
 	public static void addSingleCrystallization(String input, String output, int out, float xp){
 		Iterator<ItemStack> inputIter = OreDictionary.getOres(input).iterator();
@@ -372,6 +427,8 @@ public class AbyssalCraftAPI {
 	 * @param out The output quantity
 	 * @param meta The output metadata
 	 * @param xp Amount of exp given
+	 * 
+	 * @since 1.0
 	 */
 	public static void addSingleCrystallization(String input, String output, int out, int meta, float xp){
 		Iterator<ItemStack> inputIter = OreDictionary.getOres(input).iterator();
@@ -385,6 +442,8 @@ public class AbyssalCraftAPI {
 	 * @param input The ore input
 	 * @param output The ore output
 	 * @param xp Amount of exp given
+	 * 
+	 * @since 1.0
 	 */
 	public static void addTransmutation(String input, String output, float xp){
 		Iterator<ItemStack> inputIter = OreDictionary.getOres(input).iterator();
@@ -399,6 +458,8 @@ public class AbyssalCraftAPI {
 	 * @param output The ore output
 	 * @param out The output quantity
 	 * @param xp Amount of exp given
+	 * 
+	 * @since 1.0
 	 */
 	public static void addTransmutation(String input, String output, int out, float xp){
 		Iterator<ItemStack> inputIter = OreDictionary.getOres(input).iterator();
@@ -414,6 +475,8 @@ public class AbyssalCraftAPI {
 	 * @param out The output quantity
 	 * @param meta The output metadata
 	 * @param xp Amount of exp given
+	 * 
+	 * @since 1.0
 	 */
 	public static void addTransmutation(String input, String output, int out, int meta, float xp){
 		Iterator<ItemStack> inputIter = OreDictionary.getOres(input).iterator();
@@ -428,6 +491,8 @@ public class AbyssalCraftAPI {
 	 * @param output The ItemStack output
 	 * @param engraving The engraving template (must be an {@link ItemEngraving})
 	 * @param xp Amount of exp given
+	 * 
+	 * @since 1.1
 	 */
 	public static void addEngraving(ItemStack input, ItemStack output, Item engraving, float xp){
 		try{
@@ -444,6 +509,8 @@ public class AbyssalCraftAPI {
 	 * @param output The ItemStack output
 	 * @param engraving The engraving template (must be an {@link ItemEngraving})
 	 * @param xp Amount of exp given
+	 * 
+	 * @since 1.1
 	 */
 	public static void addEngraving(Item input, ItemStack output, Item engraving, float xp){
 		try{
@@ -464,6 +531,8 @@ public class AbyssalCraftAPI {
 	 * @param input5 The fifth input
 	 * @param output The output
 	 * @param level Required Necronomicon level
+	 * 
+	 * @since 1.3
 	 */
 	public static void addMaterialization(ItemStack input1, ItemStack input2, ItemStack input3, ItemStack input4, ItemStack input5, ItemStack output, int level){
 		//do stuff
@@ -478,6 +547,8 @@ public class AbyssalCraftAPI {
 	 * @param input4 The fourth input
 	 * @param output The output
 	 * @param level Required Necronomicon level
+	 * 
+	 * @since 1.3
 	 */
 	public static void addMaterialization(ItemStack input1, ItemStack input2, ItemStack input3, ItemStack input4, ItemStack output, int level){
 		addMaterialization(input1, input2, input3, input4, null, output, level);
@@ -491,6 +562,8 @@ public class AbyssalCraftAPI {
 	 * @param input3 The third input
 	 * @param output The output
 	 * @param level Required Necronomicon level
+	 * 
+	 * @since 1.3
 	 */
 	public static void addMaterialization(ItemStack input1, ItemStack input2, ItemStack input3, ItemStack output, int level){
 		addMaterialization(input1, input2, input3, null, output, level);
@@ -503,6 +576,8 @@ public class AbyssalCraftAPI {
 	 * @param input2 The second input
 	 * @param output The output
 	 * @param level Required Necronomicon level
+	 * 
+	 * @since 1.3
 	 */
 	public static void addMaterialization(ItemStack input1, ItemStack input2, ItemStack output, int level){
 		addMaterialization(input1, input2, null, output, level);
@@ -514,6 +589,8 @@ public class AbyssalCraftAPI {
 	 * @param input The input
 	 * @param output The output
 	 * @param level Required Necronomicon level
+	 * 
+	 * @since 1.3
 	 */
 	public static void addMaterialization(ItemStack input, ItemStack output, int level){
 		addMaterialization(input, null, output, level);
@@ -529,6 +606,8 @@ public class AbyssalCraftAPI {
 	 * @param input5 The fifth input
 	 * @param output The output
 	 * @param level Required Necronomicon level
+	 * 
+	 * @since 1.3
 	 */
 	public static void addMaterialization(String input1, String input2, String input3, String input4, String input5, String output, int level){
 		//do stuff
@@ -547,6 +626,8 @@ public class AbyssalCraftAPI {
 	 * Registers a fuel handler for an AbyssalCraft fuel type
 	 * @param handler The file that implements {@link IFuelHandler}
 	 * @param type The fuel type
+	 * 
+	 * @since 1.0
 	 */
 	public static void registerFuelHandler(IFuelHandler handler, FuelType type){
 		switch(type){
@@ -566,6 +647,8 @@ public class AbyssalCraftAPI {
 	 * @param itemStack The ItemStack getting checked
 	 * @param type The fuel type
 	 * @return The fuel value for the specified machine
+	 * 
+	 * @since 1.0
 	 */
 	public static int getFuelValue(ItemStack itemStack, FuelType type){
 		int fuelValue = 0;
@@ -589,6 +672,8 @@ public class AbyssalCraftAPI {
 	 * (Note: It's useless to add your entity here if it extends {@link EntityAnimal}, {@link EntityAmbientCreature}, {@link EntityWaterMob} or {@link EntityTameable}).
 	 * If your Entity's superclass is a subclass of EntityTameable, you will need to add the superclass.
 	 * @param clazz The potential "food" for the Lesser Shoggoth
+	 * 
+	 * @since 1.2
 	 */
 	public static void addShoggothFood(Class<? extends EntityLivingBase> clazz){
 		shoggothFood.add(clazz);
@@ -597,6 +682,8 @@ public class AbyssalCraftAPI {
 	/**
 	 * Used by the Lesser Shoggoth to fetch a list of things to eat
 	 * @return An ArrayList containing Entity classes
+	 * 
+	 * @since 1.2
 	 */
 	public static List<Class<? extends EntityLivingBase>> getShoggothFood(){
 		return shoggothFood;
@@ -605,6 +692,8 @@ public class AbyssalCraftAPI {
 	/**
 	 * Adds the ItemStack to the crystal list. Anything added to this list will function like a {@link ICrystal}
 	 * @param crystal The ItemStack to be added
+	 * 
+	 * @since 1.3
 	 */
 	public static void addCrystal(ItemStack crystal){
 		crystals.add(crystal);
@@ -613,6 +702,8 @@ public class AbyssalCraftAPI {
 	/**
 	 * Used by various things to fetch a list of ItemStacks that should function like {@link ICrystal}s
 	 * @return An ArrayList of ItemStacks
+	 * 
+	 * @since 1.3
 	 */
 	public static List<ItemStack> getCrystals(){
 		return crystals;
@@ -624,6 +715,8 @@ public class AbyssalCraftAPI {
 	 * integration stuff in a class that's only called when AC is loaded)
 	 * NOTE: Should be registered in either Pre-init or Init
 	 * @param plugin A class that implements the {@link IACPlugin} interface
+	 * 
+	 * @since 1.3
 	 */
 	public static void registerACIntegration(IACPlugin plugin){
 		integrations.add(plugin);
@@ -633,256 +726,15 @@ public class AbyssalCraftAPI {
 	 * Used by the IntegrationHandler to fetch a list of integrations made
 	 * by other mods
 	 * @return An ArrayList of IACPlugins
+	 * 
+	 * @since 1.3
 	 */
 	public static List<IACPlugin> getIntegrations(){
 		return integrations;
 	}
 
 	/**
-	 * Adds biomes for a Depths Ghoul to spawn in
-	 * @param weightedProb The chance of this mob spawning
-	 * @param min Min mobs to spawn
-	 * @param max Max mobs to spawn
-	 * @param biomes Biomes where the mob will spawn
-	 */
-	public static void addDepthsGhoulSpawning(int weightedProb, int min, int max, BiomeGenBase[] biomes){
-		EntityRegistry.addSpawn(ACEntities.mobNames[0], weightedProb, min, max, EnumCreatureType.monster, biomes);
-	}
-
-	/**
-	 * Adds biomes for a Evil Pig to spawn in
-	 * @param weightedProb The chance of this mob spawning
-	 * @param min Min mobs to spawn
-	 * @param max Max mobs to spawn
-	 * @param biomes Biomes where the mob will spawn
-	 */
-	public static void addEvilPigSpawning(int weightedProb, int min, int max, BiomeGenBase[] biomes){
-		EntityRegistry.addSpawn(ACEntities.mobNames[1], weightedProb, min, max, EnumCreatureType.creature, biomes);
-	}
-
-	/**
-	 * Adds biomes for a Abyssal Zombie to spawn in
-	 * @param weightedProb The chance of this mob spawning
-	 * @param min Min mobs to spawn
-	 * @param max Max mobs to spawn
-	 * @param biomes Biomes where the mob will spawn
-	 */
-	public static void addAbyssalZombieSpawning(int weightedProb, int min, int max, BiomeGenBase[] biomes){
-		EntityRegistry.addSpawn(ACEntities.mobNames[2], weightedProb, min, max, EnumCreatureType.monster, biomes);
-	}
-
-	/**
-	 * Adds biomes for a Abyssalnite Golem to spawn in
-	 * @param weightedProb The chance of this mob spawning
-	 * @param min Min mobs to spawn
-	 * @param max Max mobs to spawn
-	 * @param biomes Biomes where the mob will spawn
-	 */
-	public static void addAbyssalniteGolemSpawning(int weightedProb, int min, int max, BiomeGenBase[] biomes){
-		EntityRegistry.addSpawn(ACEntities.mobNames[4], weightedProb, min, max, EnumCreatureType.creature, biomes);
-	}
-
-	/**
-	 * Adds biomes for a Dreaded Abyssalnite Golem to spawn in
-	 * @param weightedProb The chance of this mob spawning
-	 * @param min Min mobs to spawn
-	 * @param max Max mobs to spawn
-	 * @param biomes Biomes where the mob will spawn
-	 */
-	public static void addDreadedAbyssalniteGolemSpawning(int weightedProb, int min, int max, BiomeGenBase[] biomes){
-		EntityRegistry.addSpawn(ACEntities.mobNames[5], weightedProb, min, max, EnumCreatureType.monster, biomes);
-	}
-
-	/**
-	 * Adds biomes for a Dreadguard to spawn in
-	 * @param weightedProb The chance of this mob spawning
-	 * @param min Min mobs to spawn
-	 * @param max Max mobs to spawn
-	 * @param biomes Biomes where the mob will spawn
-	 */
-	public static void addDreadguardSpawning(int weightedProb, int min, int max, BiomeGenBase[] biomes){
-		EntityRegistry.addSpawn(ACEntities.mobNames[6], weightedProb, min, max, EnumCreatureType.monster, biomes);
-	}
-
-	/**
-	 * Adds biomes for a Spectral Dragon to spawn in
-	 * @param weightedProb The chance of this mob spawning
-	 * @param min Min mobs to spawn
-	 * @param max Max mobs to spawn
-	 * @param biomes Biomes where the mob will spawn
-	 */
-	public static void addSpectralDragonSpawning(int weightedProb, int min, int max, BiomeGenBase[] biomes){
-		EntityRegistry.addSpawn(ACEntities.mobNames[7], weightedProb, min, max, EnumCreatureType.monster, biomes);
-	}
-
-	/**
-	 * Adds biomes for a Shadow Creature to spawn in
-	 * @param weightedProb The chance of this mob spawning
-	 * @param min Min mobs to spawn
-	 * @param max Max mobs to spawn
-	 * @param biomes Biomes where the mob will spawn
-	 */
-	public static void addShadowCreatureSpawning(int weightedProb, int min, int max, BiomeGenBase[] biomes){
-		EntityRegistry.addSpawn(ACEntities.mobNames[9], weightedProb, min, max, EnumCreatureType.monster, biomes);
-	}
-
-	/**
-	 * Adds biomes for a Shadow Monster to spawn in
-	 * @param weightedProb The chance of this mob spawning
-	 * @param min Min mobs to spawn
-	 * @param max Max mobs to spawn
-	 * @param biomes Biomes where the mob will spawn
-	 */
-	public static void addShadowMonsterSpawning(int weightedProb, int min, int max, BiomeGenBase[] biomes){
-		EntityRegistry.addSpawn(ACEntities.mobNames[10], weightedProb, min, max, EnumCreatureType.monster, biomes);
-	}
-
-	/**
-	 * Adds biomes for a Dreadling to spawn in
-	 * @param weightedProb The chance of this mob spawning
-	 * @param min Min mobs to spawn
-	 * @param max Max mobs to spawn
-	 * @param biomes Biomes where the mob will spawn
-	 */
-	public static void addDreadlingSpawning(int weightedProb, int min, int max, BiomeGenBase[] biomes){
-		EntityRegistry.addSpawn(ACEntities.mobNames[11], weightedProb, min, max, EnumCreatureType.monster, biomes);
-	}
-
-	/**
-	 * Adds biomes for a Dread Spawn to spawn in
-	 * @param weightedProb The chance of this mob spawning
-	 * @param min Min mobs to spawn
-	 * @param max Max mobs to spawn
-	 * @param biomes Biomes where the mob will spawn
-	 */
-	public static void addDreadSpawnSpawning(int weightedProb, int min, int max, BiomeGenBase[] biomes){
-		EntityRegistry.addSpawn(ACEntities.mobNames[12], weightedProb, min, max, EnumCreatureType.monster, biomes);
-	}
-
-	/**
-	 * Adds biomes for a Demon Pig to spawn in
-	 * @param weightedProb The chance of this mob spawning
-	 * @param min Min mobs to spawn
-	 * @param max Max mobs to spawn
-	 * @param biomes Biomes where the mob will spawn
-	 */
-	public static void addDemonPigSpawning(int weightedProb, int min, int max, BiomeGenBase[] biomes){
-		EntityRegistry.addSpawn(ACEntities.mobNames[13], weightedProb, min, max, EnumCreatureType.monster, biomes);
-	}
-
-	/**
-	 * Adds biomes for a Skeleton Goliath to spawn in
-	 * @param weightedProb The chance of this mob spawning
-	 * @param min Min mobs to spawn
-	 * @param max Max mobs to spawn
-	 * @param biomes Biomes where the mob will spawn
-	 */
-	public static void addSkeletonGoliathSpawning(int weightedProb, int min, int max, BiomeGenBase[] biomes){
-		EntityRegistry.addSpawn(ACEntities.mobNames[14], weightedProb, min, max, EnumCreatureType.monster, biomes);
-	}
-
-	/**
-	 * Adds biomes for a Spawn of Cha'garoth to spawn in
-	 * @param weightedProb The chance of this mob spawning
-	 * @param min Min mobs to spawn
-	 * @param max Max mobs to spawn
-	 * @param biomes Biomes where the mob will spawn
-	 */
-	public static void addSpawnofChagarothSpawning(int weightedProb, int min, int max, BiomeGenBase[] biomes){
-		EntityRegistry.addSpawn(ACEntities.mobNames[15], weightedProb, min, max, EnumCreatureType.monster, biomes);
-	}
-
-	/**
-	 * Adds biomes for a Fist of Cha'garoth to spawn in
-	 * @param weightedProb The chance of this mob spawning
-	 * @param min Min mobs to spawn
-	 * @param max Max mobs to spawn
-	 * @param biomes Biomes where the mob will spawn
-	 */
-	public static void addFistofChagarothSpawning(int weightedProb, int min, int max, BiomeGenBase[] biomes){
-		EntityRegistry.addSpawn(ACEntities.mobNames[16], weightedProb, min, max, EnumCreatureType.monster, biomes);
-	}
-
-	/**
-	 * Adds biomes for a Shadow Beast to spawn in
-	 * @param weightedProb The chance of this mob spawning
-	 * @param min Min mobs to spawn
-	 * @param max Max mobs to spawn
-	 * @param biomes Biomes where the mob will spawn
-	 */
-	public static void addShadowBeastSpawning(int weightedProb, int min, int max, BiomeGenBase[] biomes){
-		EntityRegistry.addSpawn(ACEntities.mobNames[18], weightedProb, min, max, EnumCreatureType.monster, biomes);
-	}
-
-	/**
-	 * Adds biomes for a Lesser Shoggoth to spawn in
-	 * @param weightedProb The chance of this mob spawning
-	 * @param min Min mobs to spawn
-	 * @param max Max mobs to spawn
-	 * @param biomes Biomes where the mob will spawn
-	 */
-	public static void addLesserShoggothSpawning(int weightedProb, int min, int max, BiomeGenBase[] biomes){
-		EntityRegistry.addSpawn(ACEntities.mobNames[31], weightedProb, min, max, EnumCreatureType.monster, biomes);
-	}
-
-	/**
-	 * Adds biomes for a Shadow Titan to spawn in
-	 * @param weightedProb The chance of this mob spawning
-	 * @param min Min mobs to spawn
-	 * @param max Max mobs to spawn
-	 * @param biomes Biomes where the mob will spawn
-	 */
-	public static void addShadowTitanSpawning(int weightedProb, int min, int max, BiomeGenBase[] biomes){
-		EntityRegistry.addSpawn(ACEntities.mobNames[32], weightedProb, min, max, EnumCreatureType.monster, biomes);
-	}
-
-	/**
-	 * Adds biomes for a Omothol Warden to spawn in
-	 * @param weightedProb The chance of this mob spawning
-	 * @param min Min mobs to spawn
-	 * @param max Max mobs to spawn
-	 * @param biomes Biomes where the mob will spawn
-	 */
-	public static void addOmotholWardenSpawning(int weightedProb, int min, int max, BiomeGenBase[] biomes){
-		EntityRegistry.addSpawn(ACEntities.mobNames[33], weightedProb, min, max, EnumCreatureType.monster, biomes);
-	}
-
-	/**
-	 * Adds biomes for a Minion of The Gatekeeper to spawn in
-	 * @param weightedProb The chance of this mob spawning
-	 * @param min Min mobs to spawn
-	 * @param max Max mobs to spawn
-	 * @param biomes Biomes where the mob will spawn
-	 */
-	public static void addGatekeeperMinionSpawning(int weightedProb, int min, int max, BiomeGenBase[] biomes){
-		EntityRegistry.addSpawn(ACEntities.mobNames[34], weightedProb, min, max, EnumCreatureType.monster, biomes);
-	}
-
-	/**
-	 * Adds biomes for a Omothol Ghoul to spawn in
-	 * @param weightedProb The chance of this mob spawning
-	 * @param min Min mobs to spawn
-	 * @param max Max mobs to spawn
-	 * @param biomes Biomes where the mob will spawn
-	 */
-	public static void addOmotholGhoulSpawning(int weightedProb, int min, int max, BiomeGenBase[] biomes){
-		EntityRegistry.addSpawn(ACEntities.mobNames[35], weightedProb, min, max, EnumCreatureType.monster, biomes);
-	}
-
-	/**
-	 * Adds biomes for a Remnant to spawn in
-	 * @param weightedProb The chance of this mob spawning
-	 * @param min Min mobs to spawn
-	 * @param max Max mobs to spawn
-	 * @param biomes Biomes where the mob will spawn
-	 */
-	public static void addRemnantSpawning(int weightedProb, int min, int max, BiomeGenBase[] biomes){
-		EntityRegistry.addSpawn(ACEntities.mobNames[36], weightedProb, min, max, EnumCreatureType.monster, biomes);
-	}
-
-	/**
 	 * Contains the names of all mobs added in AbyssalCraft.
-	 * Use the methods in the main API class to make them spawn in your biome(s).
 	 * 
 	 * @author shinoow
 	 *

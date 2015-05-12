@@ -164,11 +164,13 @@ public class EntityPSDLTracker extends Entity {
 
 		float f3 = 0.25F;
 
-		if (isInWater())
+		if (isInWater()){
 			for (int i = 0; i < 4; ++i)
-				worldObj.spawnParticle("bubble", posX - motionX * f3, posY - motionY * f3, posZ - motionZ * f3, motionX, motionY, motionZ);
-		else
-			worldObj.spawnParticle("smoke", posX - motionX * f3 + rand.nextDouble() * 0.6D - 0.3D, posY - motionY * f3 - 0.5D, posZ - motionZ * f3 + rand.nextDouble() * 0.6D - 0.3D, motionX, motionY, motionZ);
+				if(AbyssalCraft.particleEntity)
+					worldObj.spawnParticle("bubble", posX - motionX * f3, posY - motionY * f3, posZ - motionZ * f3, motionX, motionY, motionZ);
+		} else
+			if(AbyssalCraft.particleEntity)
+				worldObj.spawnParticle("smoke", posX - motionX * f3 + rand.nextDouble() * 0.6D - 0.3D, posY - motionY * f3 - 0.5D, posZ - motionZ * f3 + rand.nextDouble() * 0.6D - 0.3D, motionX, motionY, motionZ);
 
 		if (!worldObj.isRemote)
 		{

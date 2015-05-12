@@ -19,7 +19,6 @@ package com.shinoow.abyssalcraft.client.gui.necronomicon;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.resources.I18n;
-import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.ResourceLocation;
 
 import org.lwjgl.input.Keyboard;
@@ -42,7 +41,6 @@ public class GuiNecronomicon extends GuiScreen {
 	private int bookTotalTurnups = 2;
 	/** Current turn-up, use to switch text between multiple pages */
 	protected int currnTurnup;
-	private NBTTagList bookPages;
 	private ButtonNextPage buttonNextPage;
 	private ButtonNextPage buttonPreviousPage;
 	private ButtonCategory buttonCat1;
@@ -172,6 +170,9 @@ public class GuiNecronomicon extends GuiScreen {
 			{
 				isInfo = true;
 				isNecroInfo = true;
+				if(bookType == 4)
+					bookTotalTurnups = 1;
+				else bookTotalTurnups = 2;
 				drawButtons();
 			}
 			updateButtons();
@@ -216,9 +217,6 @@ public class GuiNecronomicon extends GuiScreen {
 			if(bookType < 4){
 				writeText(1, NecronomiconText.NECRONOMICON_PAGE_3);
 				writeText(2, NecronomiconText.NECRONOMICON_PAGE_4);
-			} else {
-				writeText(1, NecronomiconText.TEST);
-				writeText(2, NecronomiconText.TEST);
 			}
 	}
 	/**
@@ -262,7 +260,6 @@ public class GuiNecronomicon extends GuiScreen {
 		byte b0 = 2;
 		drawTexturedModalRect(k, b0, 0, 0, guiWidth, guiHeight);
 		String s;
-		String s1;
 		int l;
 		String stuff;
 
@@ -273,14 +270,9 @@ public class GuiNecronomicon extends GuiScreen {
 			}
 			drawInformationText();
 			s = I18n.format("book.pageIndicator", new Object[] {Integer.valueOf(currnTurnup + 1), Integer.valueOf(bookTotalTurnups)});
-			s1 = "";
-
-			if (bookPages != null && currnTurnup >= 0 && currnTurnup < bookPages.tagCount())
-				s1 = bookPages.getStringTagAt(currnTurnup);
 
 			l = fontRendererObj.getStringWidth(s);
 			fontRendererObj.drawString(s, k - l + guiWidth - 22, b0 + 16, 0);
-			fontRendererObj.drawSplitString(s1, k + 36, b0 + 16 + 16, 116, 0);
 		} else
 			drawIndexText();
 

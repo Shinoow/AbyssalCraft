@@ -1,27 +1,26 @@
--The Crate now has 36 slots (instead of 27)
--Added Crystal Bags (small, medium, large, huge)
--Added Materializer (turns crystals into materials) (WIP)
--Omothol Ghoul Flesh can now be eaten
--Plate food (and MREs) can now stack up to 4
--Picking up Cha'garoth's R'lyehian Gateway Key now unlocks an achievement
--Added Inventory Tweaks integration (you can sort the Crystal Bags)
--OreDictionary Transmutation will now return the correct metadata on the output (where quantity and metadata isn't specified)
--Added IMC message handling for adding Crystallizer, Transmutator and Materializer recipes
--Added a new Item interface for Crystals (so other mods can add their own crystallized elements) and a API method that does the same.
--Added Dark Ethaxium (a stronger, darker version of Ethaxium, exists as bricks, pillar, stairs, slabs and fence)
--Liquified Coralium Ore now generates in clusters with up to 4 blocks (and generates more commonly)
--Abyssalnite Ore now generates in clusters with up to 4 blocks (in Darklands biomes)
--Increased the amount of Abyssalnite that generates within Purified Dreadlands biomes (this will not increase the load time when entering the Dreadlands for the first time)
--Doubled the chance of Coralium Ore generating in the Overworld (and it now has a chance of generating in regular swamps)
--Reduced the rate of Abyssalnite Stone generating within Purified Dreadlands biomes (which should reduce the load time by a bit when entering the Dreadlands for the first time)
--Abyssalnite Stone now has a small chance of generating in all Dreadlands biomes
--Made J'zahar a bit more "social" towards other bosses and nearby players in Creative mode
--Updated NEI integration (now runs on NEI 1.0.4.95)
--Updated Thaumcraft integration (now runs on Thaumcraft 4.2.3.5)
--Fixed the block orientation in Abyssal Strongholds (buttons and stairs)
--Tweaked Asorah and the Spectral Dragon (actually changed the sizes, and reduced damage reduction on the Spectral Dragon)
--Liquified Coralium Ore now generates in small amounts around pools of Liquid Coralium underground in the Abyssal Wasteland
--Now runs on forge 10.13.3.1370 (works with 10.13.3.1355 and above)
--Improved Fluid registration
--The base upgrade kit can now be crafted using any type of wood
--Integrations can now be registered directly to AbyssalCraft from other mods
+-Fixed a couple of food-related bugs
+-Renamed the block id for Dark Ethaxium Brick Fence ("darkethaxiumbrickfence", previously "darkethaxiumfence")
+-Added Minion of The Gatekeeper
+-Remnants now turn completely hostile when attacked, but goes back to normal after 120 seconds of non-violence
+-Changed the OreDictionary name for the Block of Refined Coralium from "blockCoralium" to "blockLiquifiedCoralium" (now the name matches the ore and ingot)
+-Added Infusion Enchantment Recipes for all enchantment (Thaumcraft integration only, check Necronomicon for more info)
+-Added Abyssalnite, Refined Coralium, Dreadium and Ethaxium Nuggets (Thaumcraft integration only)
+-Added Abyssalnite, Refined Coralium, Dreadium and Ethaxium Wand Caps (Thaumcraft integration only)
+-Added Darklands Oak, Coralium Stone, Dreadlands Wood and Omothol Stone Wand Cores (Thaumcraft integration only)
+-Changed the OreDictionary names for Nitre and Sulfur (previously "materialSaltpeter" and "materialSulfur", now "dustSaltpeter" and "dustSulfur")
+-Added 2 new Aspects: Coralos (Coralium) and Dreadia (Dread) (Thaumcraft integration only)
+-Added a configuration option regarding the addition of items through the Thaumcraft integration (only has any effect when Thaumcraft is loaded)
+-Added more blocks to the BuildCraft facades blacklist
+-Added more pictures to the entity section of the Necronomicon
+-Added a "missing" texture to display on pages where a picture is absent
+-Added more information to the "The Great Old Ones" section
+-Removed scattered feature generator from The Abyssal Wasteland and The Dreadlands
+-Sacthoth no longer has a chance of spawning in Omothol
+-Improved the Gateway Keys (now prints error messages when they're supposed to)
+-All tools should now be treated as their respective tool types (this ensures higher compatibility with anything tool-related)
+-Removed the mob spawning section of the API
+-Added API version tags to classes and methods in the API (mainly to show in which version they were implemented)
+-Added configuration options to toggle particle rendering for blocks and entities
+-Sacthoth turns the time to night in the world where he is spawned (forgotten feature)
+-Improved the trees (bonemeal doesn't grow a sapling instantly, extra log block doesn't replace the dirt underneath the tree when grown)
+-Reduced the pitch on the trading sounds made by the Remnant (will replace the villager sounds entirely)

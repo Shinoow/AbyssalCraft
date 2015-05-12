@@ -104,7 +104,8 @@ public class EntityODBPrimed extends Entity {
 			if (worldObj.isRemote)
 				message();
 		} else if(worldObj.isRemote)
-			worldObj.spawnParticle("portal", posX, posY + 0.5D, posZ, 1.0D, 0.0D, 0.0D);
+			if(AbyssalCraft.particleEntity)
+				worldObj.spawnParticle("portal", posX, posY + 0.5D, posZ, 1.0D, 0.0D, 0.0D);
 	}
 
 	private void explode()

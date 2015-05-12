@@ -18,8 +18,10 @@ package com.shinoow.abyssalcraft.api.item;
 
 /**
  * Items with this interface are recognized as crystallized elements by AbyssalCraft.
+ * 
  * @author shinoow
  *
+ * @since 1.3
  */
 public interface ICrystal {
 

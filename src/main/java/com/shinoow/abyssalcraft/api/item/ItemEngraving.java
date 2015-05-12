@@ -24,8 +24,10 @@ import net.minecraft.item.ItemStack;
 
 /**
  * The "fuel" in Coin Engraving. Use this class if you want to make your own engravings.
+ * 
  * @author shinoow
  *
+ * @since 1.1
  */
 public class ItemEngraving extends Item {
 

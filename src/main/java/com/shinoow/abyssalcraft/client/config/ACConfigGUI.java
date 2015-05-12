@@ -48,6 +48,7 @@ public class ACConfigGUI extends GuiConfig {
 		list.add(new DummyCategoryElement<Object>(StatCollector.translateToLocal("ac_general"), "ac_general", GeneralEntry.class));
 		list.add(new DummyCategoryElement<Object>(StatCollector.translateToLocal("ac_enchantment"), "ac_enchantment", EnchantmentEntry.class));
 		list.add(new DummyCategoryElement<Object>(StatCollector.translateToLocal("ac_potion"), "ac_potion", PotionEntry.class));
+		list.add(new DummyCategoryElement<Object>(StatCollector.translateToLocal("ac_integration"), "ac_integration", IntegrationEntry.class));
 		return list;
 	}
 
@@ -140,6 +141,18 @@ public class ACConfigGUI extends GuiConfig {
 		@Override
 		protected GuiScreen buildChildScreen(){
 			return new GuiConfig(owningScreen, new ConfigElement<Object>(AbyssalCraft.cfg.getCategory("potions")).getChildElements(), "abyssalcraft", "potions", true, true, StatCollector.translateToLocal("ac_potion"));
+
+		}
+	}
+	public static class IntegrationEntry extends CategoryEntry{
+
+		public IntegrationEntry(GuiConfig owningScreen, GuiConfigEntries owningEntryList, IConfigElement<?> configElement) {
+			super(owningScreen, owningEntryList, configElement);
+		}
+
+		@Override
+		protected GuiScreen buildChildScreen(){
+			return new GuiConfig(owningScreen, new ConfigElement<Object>(AbyssalCraft.cfg.getCategory("integrations")).getChildElements(), "abyssalcraft", "integrations", true, true, StatCollector.translateToLocal("ac_integration"));
 
 		}
 	}

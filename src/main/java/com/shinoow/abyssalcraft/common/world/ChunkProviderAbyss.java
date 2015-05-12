@@ -18,7 +18,6 @@ package com.shinoow.abyssalcraft.common.world;
 
 import static net.minecraftforge.event.terraingen.InitMapGenEvent.EventType.CAVE;
 import static net.minecraftforge.event.terraingen.InitMapGenEvent.EventType.RAVINE;
-import static net.minecraftforge.event.terraingen.InitMapGenEvent.EventType.SCATTERED_FEATURE;
 import static net.minecraftforge.event.terraingen.InitMapGenEvent.EventType.STRONGHOLD;
 import static net.minecraftforge.event.terraingen.PopulateChunkEvent.Populate.EventType.LAKE;
 
@@ -42,7 +41,6 @@ import net.minecraft.world.gen.MapGenRavine;
 import net.minecraft.world.gen.NoiseGenerator;
 import net.minecraft.world.gen.NoiseGeneratorOctaves;
 import net.minecraft.world.gen.NoiseGeneratorPerlin;
-import net.minecraft.world.gen.structure.MapGenScatteredFeature;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.terraingen.ChunkProviderEvent;
 import net.minecraftforge.event.terraingen.PopulateChunkEvent;
@@ -79,7 +77,6 @@ public class ChunkProviderAbyss implements IChunkProvider
 	private MapGenBase caveGenerator = new MapGenCaves();
 
 	private MapGenAbyStronghold strongholdGenerator = new MapGenAbyStronghold();
-	private MapGenScatteredFeature scatteredFeatureGenerator = new MapGenScatteredFeature();
 	private MapGenBase ravineGenerator = new MapGenRavine();
 	private BiomeGenBase[] biomesForGeneration;
 
@@ -91,7 +88,6 @@ public class ChunkProviderAbyss implements IChunkProvider
 	{
 		caveGenerator = TerrainGen.getModdedMapGen(caveGenerator, CAVE);
 		strongholdGenerator = (MapGenAbyStronghold) TerrainGen.getModdedMapGen(strongholdGenerator, STRONGHOLD);
-		scatteredFeatureGenerator = (MapGenScatteredFeature) TerrainGen.getModdedMapGen(scatteredFeatureGenerator, SCATTERED_FEATURE);
 		ravineGenerator = TerrainGen.getModdedMapGen(ravineGenerator, RAVINE);
 	}
 
@@ -241,10 +237,7 @@ public class ChunkProviderAbyss implements IChunkProvider
 		ravineGenerator.func_151539_a(this, worldObj, x, z, ablock);
 
 		if (mapFeaturesEnabled)
-		{
 			strongholdGenerator.func_151539_a(this, worldObj, x, z, ablock);
-			scatteredFeatureGenerator.func_151539_a(this, worldObj, x, z, ablock);
-		}
 
 		Chunk chunk = new Chunk(worldObj, ablock, abyte, x, z);
 		byte[] abyte1 = chunk.getBiomeArray();
@@ -384,10 +377,7 @@ public class ChunkProviderAbyss implements IChunkProvider
 		MinecraftForge.EVENT_BUS.post(new PopulateChunkEvent.Pre(par1IChunkProvider, worldObj, rand, x, z, flag));
 
 		if (mapFeaturesEnabled)
-		{
 			strongholdGenerator.generateStructuresInChunk(worldObj, rand, x, z);
-			scatteredFeatureGenerator.generateStructuresInChunk(worldObj, rand, x, z);
-		}
 
 		int k1;
 		int l1;
@@ -476,7 +466,7 @@ public class ChunkProviderAbyss implements IChunkProvider
 	public List getPossibleCreatures(EnumCreatureType par1EnumCreatureType, int x, int y, int z)
 	{
 		BiomeGenBase biome = worldObj.getBiomeGenForCoords(x, z);
-		return biome == null ? null : biome == AbyssalCraft.Wastelands && par1EnumCreatureType == EnumCreatureType.monster && scatteredFeatureGenerator.hasStructureAt(x, y, z) ? scatteredFeatureGenerator.getScatteredFeatureSpawnList() : biome.getSpawnableList(par1EnumCreatureType);
+		return biome == null ? null : biome.getSpawnableList(par1EnumCreatureType);
 	}
 
 	@Override
@@ -495,10 +485,6 @@ public class ChunkProviderAbyss implements IChunkProvider
 	public void recreateStructures(int x, int z)
 	{
 		if (mapFeaturesEnabled)
-		{
-
 			strongholdGenerator.func_151539_a(this, worldObj, x, z, (Block[])null);
-			scatteredFeatureGenerator.func_151539_a(this, worldObj, x, z, (Block[])null);
-		}
 	}
 }

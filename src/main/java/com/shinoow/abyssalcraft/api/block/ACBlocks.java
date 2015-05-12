@@ -21,6 +21,7 @@ import cpw.mods.fml.common.registry.GameRegistry;
 
 /**
  * Contains all blocks added in AbyssalCraft
+ * 
  * @author shinoow
  *
  */
@@ -138,4 +139,11 @@ public class ACBlocks {
 	public static Block omothol_gateway = GameRegistry.findBlock(modId, "omotholportal");
 	public static Block omothol_fire = GameRegistry.findBlock(modId, "omotholfire");
 	public static Block engraver = GameRegistry.findBlock(modId, "engraver");
+	public static Block materializer = GameRegistry.findBlock(modId, "materializer");
+	/** Metadata block, has indexes 0, 1 */
+	public static Block dark_ethaxium_brick = GameRegistry.findBlock(modId, "darkethaxiumbrick");
+	public static Block dark_ethaxium_pillar = GameRegistry.findBlock(modId, "darkethaxiumpillar");
+	public static Block dark_ethaxium_brick_stairs = GameRegistry.findBlock(modId, "darkethaxiumbrickstairs");
+	public static Block dark_ethaxium_brick_slab = GameRegistry.findBlock(modId, "darkethaxiumbrickslab1");
+	public static Block dark_ethaxium_brick_fence = GameRegistry.findBlock(modId, "darkethaxiumbrickfence");
 }

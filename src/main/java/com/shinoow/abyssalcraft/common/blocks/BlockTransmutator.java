@@ -214,7 +214,7 @@ public class BlockTransmutator extends BlockContainer {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void randomDisplayTick(World par1World, int par2, int par3, int par4, Random par5Random) {
-		if (isLit){
+		if (isLit && AbyssalCraft.particleBlock){
 			int l = par1World.getBlockMetadata(par2, par3, par4);
 			float f = par2 + 0.5F;
 			float f1 = par3 + 0.0F + par5Random.nextFloat() * 6.0F / 16.0F;

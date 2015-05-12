@@ -20,7 +20,6 @@ import static net.minecraftforge.event.terraingen.InitMapGenEvent.EventType.CAVE
 import static net.minecraftforge.event.terraingen.InitMapGenEvent.EventType.MINESHAFT;
 import static net.minecraftforge.event.terraingen.InitMapGenEvent.EventType.NETHER_CAVE;
 import static net.minecraftforge.event.terraingen.InitMapGenEvent.EventType.RAVINE;
-import static net.minecraftforge.event.terraingen.InitMapGenEvent.EventType.SCATTERED_FEATURE;
 import static net.minecraftforge.event.terraingen.PopulateChunkEvent.Populate.EventType.LAVA;
 import static net.minecraftforge.event.terraingen.PopulateChunkEvent.Populate.EventType.NETHER_LAVA;
 
@@ -47,7 +46,6 @@ import net.minecraft.world.gen.NoiseGenerator;
 import net.minecraft.world.gen.NoiseGeneratorOctaves;
 import net.minecraft.world.gen.NoiseGeneratorPerlin;
 import net.minecraft.world.gen.feature.WorldGenHellLava;
-import net.minecraft.world.gen.structure.MapGenScatteredFeature;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.terraingen.ChunkProviderEvent;
 import net.minecraftforge.event.terraingen.PopulateChunkEvent;
@@ -80,7 +78,6 @@ public class ChunkProviderDreadlands implements IChunkProvider {
 	private MapGenBase netherCaveGenerator = new MapGenCavesHell();
 
 	private MapGenDreadlandsMine dmGenerator = new MapGenDreadlandsMine();
-	private MapGenScatteredFeature scatteredFeatureGenerator = new MapGenScatteredFeature();
 
 	/** Holds ravine generator */
 	private MapGenBase ravineGenerator = new MapGenRavine();
@@ -97,7 +94,6 @@ public class ChunkProviderDreadlands implements IChunkProvider {
 	{
 		caveGenerator = TerrainGen.getModdedMapGen(caveGenerator, CAVE);
 		dmGenerator = (MapGenDreadlandsMine) TerrainGen.getModdedMapGen(dmGenerator, MINESHAFT);
-		scatteredFeatureGenerator = (MapGenScatteredFeature) TerrainGen.getModdedMapGen(scatteredFeatureGenerator, SCATTERED_FEATURE);
 		ravineGenerator = TerrainGen.getModdedMapGen(ravineGenerator, RAVINE);
 		netherCaveGenerator = TerrainGen.getModdedMapGen(netherCaveGenerator, NETHER_CAVE);
 	}
@@ -247,10 +243,7 @@ public class ChunkProviderDreadlands implements IChunkProvider {
 		netherCaveGenerator.func_151539_a(this, worldObj, par1, par2, ablock);
 
 		if (mapFeaturesEnabled)
-		{
 			dmGenerator.func_151539_a(this, worldObj, par1, par2, ablock);
-			scatteredFeatureGenerator.func_151539_a(this, worldObj, par1, par2, ablock);
-		}
 
 		Chunk chunk = new Chunk(worldObj, ablock, abyte, par1, par2);
 		byte[] abyte1 = chunk.getBiomeArray();
@@ -390,10 +383,7 @@ public class ChunkProviderDreadlands implements IChunkProvider {
 		MinecraftForge.EVENT_BUS.post(new PopulateChunkEvent.Pre(par1IChunkProvider, worldObj, rand, par2, par3, flag));
 
 		if (mapFeaturesEnabled)
-		{
 			dmGenerator.generateStructuresInChunk(worldObj, rand, par2, par3);
-			scatteredFeatureGenerator.generateStructuresInChunk(worldObj, rand, par2, par3);
-		}
 
 		int k1;
 		int l1;
@@ -472,8 +462,8 @@ public class ChunkProviderDreadlands implements IChunkProvider {
 	@SuppressWarnings("rawtypes")
 	public List getPossibleCreatures(EnumCreatureType par1EnumCreatureType, int par2, int par3, int par4)
 	{
-		BiomeGenBase var5 = worldObj.getBiomeGenForCoords(par2, par4);
-		return var5 == null ? null : var5 == AbyssalCraft.Dreadlands && par1EnumCreatureType == EnumCreatureType.monster && scatteredFeatureGenerator.hasStructureAt(par2, par3, par4) ? scatteredFeatureGenerator.getScatteredFeatureSpawnList() : var5.getSpawnableList(par1EnumCreatureType);
+		BiomeGenBase biome = worldObj.getBiomeGenForCoords(par2, par4);
+		return biome == null ? null : biome.getSpawnableList(par1EnumCreatureType);
 	}
 
 	@Override
@@ -492,9 +482,6 @@ public class ChunkProviderDreadlands implements IChunkProvider {
 	public void recreateStructures(int par1, int par2)
 	{
 		if (mapFeaturesEnabled)
-		{
 			dmGenerator.func_151539_a(this, worldObj, par1, par2, (Block[])null);
-			scatteredFeatureGenerator.func_151539_a(this, worldObj, par1, par2, (Block[])null);
-		}
 	}
 }

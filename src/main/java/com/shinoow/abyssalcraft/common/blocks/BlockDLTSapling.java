@@ -52,54 +52,40 @@ public class BlockDLTSapling extends BlockBush implements IGrowable
 	@Override
 	public void updateTick(World world, int i, int j, int k, Random random)
 	{
-		if(world.isRemote)
+		if(!world.isRemote)
 		{
-
 			super.updateTick(world, i, j, k, random);
-
 			if(world.getBlockLightValue(i, j + 1, k) >= 9 && random.nextInt(7) == 0)
-			{
-				int l = world.getBlockMetadata(i, j, k);
-				if((l & 8) == 0)
-					world.setBlockMetadataWithNotify(i, j, k, l | 8, l);
-				else
-					growTree(world, i, j, k, random);
-			}
+				growTree(world, i, j, k, random);
 		}
 	}
 
-	public void growTree(World world, int i, int j, int k, Random random)
+	public void growTree(World world, int x, int y, int z, Random random)
 	{
-		int l = world.getBlockMetadata(i, j, k) & 3;
-		world.setBlock(i, j, k, Blocks.air, 0, l);
-		Object obj = null;
-		obj = new WorldGenDLT(true);
-		if(!((WorldGenerator) obj).generate(world, random, i, j, k))
-			world.setBlock(i, j, k, this, l, l);
-	}
+		if (!net.minecraftforge.event.terraingen.TerrainGen.saplingGrowTree(world, random, x, y, z)) return;
 
-
-	public void fertilize(World world, int x, int y, int z)
-	{
-
+		world.setBlock(x, y, z, Blocks.air, 0, 1);
+		Object obj = new WorldGenDLT(true);
+		if(!((WorldGenerator) obj).generate(world, random, x, y, z))
+			world.setBlock(x, y, z, this, 0, 4);
 	}
 
 	@Override
 	public boolean func_149851_a(World var1, int var2, int var3, int var4,
 			boolean var5) {
 
-		return false;
+		return true;
 	}
 
 	@Override
 	public boolean func_149852_a(World var1, Random var2, int var3, int var4,
 			int var5) {
 
-		return false;
+		return var1.rand.nextFloat() < 0.45D;
 	}
 
 	@Override
 	public void func_149853_b(World var1, Random var2, int var3, int var4, int var5) {
-
+		growTree(var1, var3, var4, var5, var2);
 	}
 }

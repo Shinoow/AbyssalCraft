@@ -101,7 +101,8 @@ public class EntityShadowMonster extends EntityMob implements IAntiEntity, ICora
 	public void onLivingUpdate()
 	{
 		for (int i = 0; i < 2; ++i)
-			worldObj.spawnParticle("largesmoke", posX + (rand.nextDouble() - 0.5D) * width, posY + rand.nextDouble() * height, posZ + (rand.nextDouble() - 0.5D) * width, 0.0D, 0.0D, 0.0D);
+			if(AbyssalCraft.particleEntity)
+				worldObj.spawnParticle("largesmoke", posX + (rand.nextDouble() - 0.5D) * width, posY + rand.nextDouble() * height, posZ + (rand.nextDouble() - 0.5D) * width, 0.0D, 0.0D, 0.0D);
 
 		super.onLivingUpdate();
 	}

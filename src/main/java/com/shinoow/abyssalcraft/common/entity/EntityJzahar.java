@@ -187,6 +187,11 @@ public class EntityJzahar extends EntityMob implements IBossDisplayData, IRanged
 	{
 		if(talkTimer > 0)
 			talkTimer--;
+
+		float f = (rand.nextFloat() - 0.5F) * 8.0F;
+		float f1 = (rand.nextFloat() - 0.5F) * 4.0F;
+		float f2 = (rand.nextFloat() - 0.5F) * 8.0F;
+
 		List list = worldObj.getEntitiesWithinAABBExcludingEntity(this, boundingBox.expand(64.0D, 64.0D, 64.0D));
 		if (list != null)
 			for (int k2 = 0; k2 < list.size(); k2++) {
@@ -195,10 +200,8 @@ public class EntityJzahar extends EntityMob implements IBossDisplayData, IRanged
 					if(!worldObj.isRemote)
 						worldObj.removeEntity(entity);
 					else {
-						float f = (rand.nextFloat() - 0.5F) * 8.0F;
-						float f1 = (rand.nextFloat() - 0.5F) * 4.0F;
-						float f2 = (rand.nextFloat() - 0.5F) * 8.0F;
-						worldObj.spawnParticle("hugeexplosion", entity.posX + f, entity.posY + 2.0D + f1, entity.posZ + f2, 0.0D, 0.0D, 0.0D);
+						if(AbyssalCraft.particleEntity)
+							worldObj.spawnParticle("hugeexplosion", entity.posX + f, entity.posY + 2.0D + f1, entity.posZ + f2, 0.0D, 0.0D, 0.0D);
 						if(entity.isDead)
 							SpecialTextUtil.JzaharText(StatCollector.translateToLocal("message.jzahar.banish.vanilla"));
 					}
@@ -207,10 +210,8 @@ public class EntityJzahar extends EntityMob implements IBossDisplayData, IRanged
 					if(!worldObj.isRemote)
 						worldObj.removeEntity(entity);
 					else {
-						float f = (rand.nextFloat() - 0.5F) * 8.0F;
-						float f1 = (rand.nextFloat() - 0.5F) * 4.0F;
-						float f2 = (rand.nextFloat() - 0.5F) * 8.0F;
-						worldObj.spawnParticle("hugeexplosion", entity.posX + f, entity.posY + 2.0D + f1, entity.posZ + f2, 0.0D, 0.0D, 0.0D);
+						if(AbyssalCraft.particleEntity)
+							worldObj.spawnParticle("hugeexplosion", entity.posX + f, entity.posY + 2.0D + f1, entity.posZ + f2, 0.0D, 0.0D, 0.0D);
 						if(entity.isDead)
 							SpecialTextUtil.JzaharText(StatCollector.translateToLocal("message.jzahar.banish.ac"));
 					}
@@ -224,11 +225,10 @@ public class EntityJzahar extends EntityMob implements IBossDisplayData, IRanged
 						worldObj.spawnEntityInWorld(newgatekeeper);
 					}
 					else {
-						float f = (rand.nextFloat() - 0.5F) * 8.0F;
-						float f1 = (rand.nextFloat() - 0.5F) * 4.0F;
-						float f2 = (rand.nextFloat() - 0.5F) * 8.0F;
-						worldObj.spawnParticle("hugeexplosion", entity.posX + f, entity.posY + 2.0D + f1, entity.posZ + f2, 0.0D, 0.0D, 0.0D);
-						worldObj.spawnParticle("hugeexplosion", posX + f, posY + 2.0D + f1, posZ + f2, 0.0D, 0.0D, 0.0D);
+						if(AbyssalCraft.particleEntity){
+							worldObj.spawnParticle("hugeexplosion", entity.posX + f, entity.posY + 2.0D + f1, entity.posZ + f2, 0.0D, 0.0D, 0.0D);
+							worldObj.spawnParticle("hugeexplosion", posX + f, posY + 2.0D + f1, posZ + f2, 0.0D, 0.0D, 0.0D);
+						}
 						if(!that){
 							that = true;
 							SpecialTextUtil.JzaharText(StatCollector.translateToLocal("message.jzahar.banish.jzh"));

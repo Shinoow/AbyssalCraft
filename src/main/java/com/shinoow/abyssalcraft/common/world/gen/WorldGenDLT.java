@@ -27,10 +27,10 @@ import com.shinoow.abyssalcraft.AbyssalCraft;
 
 public class WorldGenDLT extends WorldGenTrees
 {
-	private final int field_48202_a;
-	private final boolean field_48200_b;
-	private final int field_48201_c;
-	private final int field_48199_d;
+	private final int minTreeHeight;
+	private final boolean vinesGrow;
+	private final int metaWood;
+	private final int metaLeaves;
 
 	public WorldGenDLT(boolean flag)
 	{
@@ -40,16 +40,16 @@ public class WorldGenDLT extends WorldGenTrees
 	public WorldGenDLT(boolean flag, int i, int j, int k, boolean flag1)
 	{
 		super(flag);
-		field_48202_a = i;
-		field_48201_c = j;
-		field_48199_d = k;
-		field_48200_b = flag1;
+		minTreeHeight = i;
+		metaWood = j;
+		metaLeaves = k;
+		vinesGrow = flag1;
 	}
 
 	@Override
 	public boolean generate(World world, Random random, int i, int j, int k)
 	{
-		int l = random.nextInt(3) + field_48202_a;
+		int l = random.nextInt(3) + minTreeHeight;
 		boolean flag = true;
 
 		if (j < 1 || j + l + 1 > 256)
@@ -85,7 +85,7 @@ public class WorldGenDLT extends WorldGenTrees
 		if (j1 != Blocks.dirt && j1 != AbyssalCraft.Darkgrass && j1 != Blocks.grass && j1 != AbyssalCraft.dreadgrass || j >= 256 - l - 1)
 			return false;
 
-		setBlockAndNotifyAdequately(world, i, j - 1, k, AbyssalCraft.DLTLog, l);
+		setBlockAndNotifyAdequately(world, i, j - 1, k, Blocks.dirt, l);
 		byte byte1 = 3;
 		int l1 = 0;
 
@@ -103,7 +103,7 @@ public class WorldGenDLT extends WorldGenTrees
 					int l5 = k5 - k;
 
 					if (Math.abs(i5) != i4 || Math.abs(l5) != i4 || random.nextInt(2) != 0 && j3 != 0)
-						setBlockAndNotifyAdequately(world, k4, j2, k5, AbyssalCraft.DLTLeaves, field_48199_d);
+						setBlockAndNotifyAdequately(world, k4, j2, k5, AbyssalCraft.DLTLeaves, metaLeaves);
 				}
 			}
 		}
@@ -115,9 +115,9 @@ public class WorldGenDLT extends WorldGenTrees
 			if (k3 != Blocks.air && k3 != AbyssalCraft.DLTLeaves)
 				continue;
 
-			setBlockAndNotifyAdequately(world, i, j + k2, k, AbyssalCraft.DLTLog, field_48201_c);
+			setBlockAndNotifyAdequately(world, i, j + k2, k, AbyssalCraft.DLTLog, metaWood);
 
-			if (!field_48200_b || k2 <= 0)
+			if (!vinesGrow || k2 <= 0)
 				continue;
 
 			if (random.nextInt(3) > 0 && world.isAirBlock(i - 1, j + k2, k))
@@ -133,7 +133,7 @@ public class WorldGenDLT extends WorldGenTrees
 				setBlockAndNotifyAdequately(world, i, j + k2, k + 1, Blocks.dirt, 4);
 		}
 
-		if (field_48200_b)
+		if (vinesGrow)
 			for (int l2 = j - 3 + l; l2 <= j + l; l2++)
 			{
 				int l3 = l2 - (j + l);
@@ -146,32 +146,27 @@ public class WorldGenDLT extends WorldGenTrees
 							continue;
 
 						if (random.nextInt(4) == 0 && world.getBlock(l4 - 1, l2, j5) == Blocks.air)
-							func_48198_a(world, l4 - 1, l2, j5, 8);
+							growVines(world, l4 - 1, l2, j5, 8);
 
 						if (random.nextInt(4) == 0 && world.getBlock(l4 + 1, l2, j5) == Blocks.air)
-							func_48198_a(world, l4 + 1, l2, j5, 2);
+							growVines(world, l4 + 1, l2, j5, 2);
 
 						if (random.nextInt(4) == 0 && world.getBlock(l4, l2, j5 - 1) == Blocks.air)
-							func_48198_a(world, l4, l2, j5 - 1, 1);
+							growVines(world, l4, l2, j5 - 1, 1);
 
 						if (random.nextInt(4) == 0 && world.getBlock(l4, l2, j5 + 1) == Blocks.air)
-							func_48198_a(world, l4, l2, j5 + 1, 4);
+							growVines(world, l4, l2, j5 + 1, 4);
 					}
 			}
 
 		return true;
 	}
 
-	private void func_48198_a(World world, int i, int j, int k, int l)
+	private void growVines(World world, int i, int j, int k, int l)
 	{
 		setBlockAndNotifyAdequately(world, i, j, k, Blocks.dirt, l);
 
 		for (int i1 = 4; world.getBlockMetadata(i, --j, k) == 0 && i1 > 0; i1--)
 			setBlockAndNotifyAdequately(world, i, j, k, Blocks.dirt, l);
 	}
-
-	public void fertilize(World world, int x, int y, int z) {
-
-	}
-
 }

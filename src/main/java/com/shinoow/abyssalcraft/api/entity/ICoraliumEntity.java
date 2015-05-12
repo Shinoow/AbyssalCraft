@@ -18,8 +18,10 @@ package com.shinoow.abyssalcraft.api.entity;
 
 /**
  * Interface to define a entity that's immune to the Coralium Plague
+ * 
  * @author shinoow
  *
+ * @since 1.0
  */
 public interface ICoraliumEntity {
 

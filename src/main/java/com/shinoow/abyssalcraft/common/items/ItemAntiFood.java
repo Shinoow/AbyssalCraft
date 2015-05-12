@@ -41,8 +41,6 @@ public class ItemAntiFood extends ItemFood {
 	@Override
 	public void onFoodEaten(ItemStack itemStack, World world, EntityPlayer entityPlayer)
 	{
-		world.playSoundAtEntity(entityPlayer, "random.burp", 0.5F, world.rand.nextFloat() * 0.1F + 0.9F);
-
 		if(itemStack.getItem() == AbyssalCraft.antiFlesh)
 			entityPlayer.addPotionEffect(new PotionEffect(Potion.field_76443_y.id, 600, 1));
 		else if(itemStack.getItem() == AbyssalCraft.antiSpider_eye)

@@ -19,9 +19,11 @@ package com.shinoow.abyssalcraft.common.entity;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
+import net.minecraft.block.Block;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentData;
 import net.minecraft.enchantment.EnchantmentHelper;
@@ -33,6 +35,7 @@ import net.minecraft.entity.ai.EntityAIAttackOnCollide;
 import net.minecraft.entity.ai.EntityAIHurtByTarget;
 import net.minecraft.entity.ai.EntityAILookIdle;
 import net.minecraft.entity.ai.EntityAIMoveTowardsRestriction;
+import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
 import net.minecraft.entity.ai.EntityAISwimming;
 import net.minecraft.entity.ai.EntityAIWander;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
@@ -45,6 +48,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
+import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.StatCollector;
 import net.minecraft.util.Tuple;
@@ -65,6 +69,8 @@ public class EntityRemnant extends EntityMob implements IMerchant, IAntiEntity, 
 	private int timeUntilReset;
 	private boolean needsInitilization;
 	private int wealth;
+	private boolean isAngry;
+	private int timer;
 	private float field_82191_bN;
 	public static final Map<Item, Tuple> itemSellingList = new HashMap<Item, Tuple>();
 	public static final Map<Item, Tuple> coinSellingList = new HashMap<Item, Tuple>();
@@ -78,7 +84,7 @@ public class EntityRemnant extends EntityMob implements IMerchant, IAntiEntity, 
 		tasks.addTask(7, new EntityAILookIdle(this));
 		tasks.addTask(7, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
 		tasks.addTask(7, new EntityAIWatchClosest(this, EntityRemnant.class, 8.0F));
-		targetTasks.addTask(1, new EntityAIHurtByTarget(this, true));
+		targetTasks.addTask(1, new EntityAIHurtByTarget(this, false));
 	}
 
 	@Override
@@ -95,6 +101,11 @@ public class EntityRemnant extends EntityMob implements IMerchant, IAntiEntity, 
 	@Override
 	protected boolean isAIEnabled()
 	{
+		return true;
+	}
+
+	@Override
+	public boolean canBreatheUnderwater() {
 		return true;
 	}
 
@@ -146,7 +157,7 @@ public class EntityRemnant extends EntityMob implements IMerchant, IAntiEntity, 
 	@Override
 	public boolean interact(EntityPlayer par1EntityPlayer)
 	{
-		if(isEntityAlive() && !isTrading() && !par1EntityPlayer.isSneaking()){
+		if(isEntityAlive() && !isTrading() && !par1EntityPlayer.isSneaking() && !isAngry){
 			if(!worldObj.isRemote){
 				setCustomer(par1EntityPlayer);
 				par1EntityPlayer.displayGUIMerchant(this, StatCollector.translateToLocal("entity.abyssalcraft.remnant.name"));
@@ -165,12 +176,56 @@ public class EntityRemnant extends EntityMob implements IMerchant, IAntiEntity, 
 		dataWatcher.addObject(16, Integer.valueOf(0));
 	}
 
+	/**
+	 * Calling this method will make the Remnant hostile.
+	 * Ever wanted to see a angry Remnant? No you don't.
+	 * @param call If the Remnant should call for backup
+	 */
+	public void enrage(boolean call){
+		if(call){
+			List<EntityRemnant> friends = worldObj.getEntitiesWithinAABB(getClass(), boundingBox.expand(16D, 16D, 16D));
+			if(friends != null){
+				Iterator<EntityRemnant> iter = friends.iterator();
+				while(iter.hasNext())
+					iter.next().enrage(false);
+			}
+			worldObj.playSoundAtEntity(this, "abyssalcraft:remnant.scream", 3F, 1F);
+		}
+
+		isAngry = true;
+		timer = 0;
+		targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityPlayer.class, 0, true));
+	}
+
+	@Override
+	public boolean attackEntityFrom(DamageSource par1DamageSource, float par2)
+	{
+		if(par1DamageSource.getEntity() instanceof EntityPlayer)
+			if(!isAngry) enrage(true);
+			else enrage(rand.nextInt(10) == 0);
+		return super.attackEntityFrom(par1DamageSource, par2);
+	}
+
+	@Override
+	public void onLivingUpdate(){
+		super.onLivingUpdate();
+		if(isAngry){
+			targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityPlayer.class, 0, true));
+			timer++;
+			if(timer == 2400){
+				isAngry = false;
+				targetTasks.removeTask(new EntityAINearestAttackableTarget(this, EntityPlayer.class, 0, true));
+			}
+		}
+	}
+
 	@Override
 	public void writeEntityToNBT(NBTTagCompound par1NBTTagCompound)
 	{
 		super.writeEntityToNBT(par1NBTTagCompound);
 		par1NBTTagCompound.setInteger("Profession", getProfession());
 		par1NBTTagCompound.setInteger("Money", wealth);
+		par1NBTTagCompound.setBoolean("IsAngry", isAngry);
 
 		if (tradingList != null)
 			par1NBTTagCompound.setTag("Offers", tradingList.getRecipiesAsTags());
@@ -182,6 +237,7 @@ public class EntityRemnant extends EntityMob implements IMerchant, IAntiEntity, 
 		super.readEntityFromNBT(par1NBTTagCompound);
 		setProfession(par1NBTTagCompound.getInteger("Profession"));
 		wealth = par1NBTTagCompound.getInteger("Money");
+		isAngry = par1NBTTagCompound.getBoolean("IsAngry");
 
 		if (par1NBTTagCompound.hasKey("Offers", 10))
 		{
@@ -200,6 +256,12 @@ public class EntityRemnant extends EntityMob implements IMerchant, IAntiEntity, 
 	protected String getDeathSound()
 	{
 		return "abyssalcraft:shadow.death";
+	}
+
+	@Override
+	protected void func_145780_a(int par1, int par2, int par3, Block par4)
+	{
+		playSound("mob.spider.step", 0.15F, 1.0F);
 	}
 
 	public void setProfession(int par1)
@@ -418,7 +480,7 @@ public class EntityRemnant extends EntityMob implements IMerchant, IAntiEntity, 
 	public void useRecipe(MerchantRecipe var1) {
 		var1.incrementToolUses();
 		livingSoundTime = -getTalkInterval();
-		playSound("mob.villager.yes", getSoundVolume(), getSoundPitch());
+		playSound("mob.villager.yes", getSoundVolume(), getSoundPitch() * 0.5F);
 
 		if (var1.hasSameIDsAs((MerchantRecipe)tradingList.get(tradingList.size() - 1)))
 		{
@@ -486,9 +548,9 @@ public class EntityRemnant extends EntityMob implements IMerchant, IAntiEntity, 
 			livingSoundTime = -getTalkInterval();
 
 			if (par1ItemStack != null)
-				playSound("mob.villager.yes", getSoundVolume(), getSoundPitch());
+				playSound("mob.villager.yes", getSoundVolume(), getSoundPitch() * 0.5F);
 			else
-				playSound("mob.villager.no", getSoundVolume(), getSoundPitch());
+				playSound("mob.villager.no", getSoundVolume(), getSoundPitch() * 0.5F);
 		}
 	}
 

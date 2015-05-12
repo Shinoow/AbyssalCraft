@@ -37,9 +37,10 @@ public class ItemACBasic extends Item {
 		if(this.getUnlocalizedName().contains("DSOA") || this.getUnlocalizedName().contains("DAC") ||
 				this.getUnlocalizedName().contains("DI") || this.getUnlocalizedName().contains("DF"))
 			return EnumChatFormatting.DARK_RED + StatCollector.translateToLocal(this.getUnlocalizedName() + ".name");
-		else if(this.getUnlocalizedName().contains("AI") || this.getUnlocalizedName().contains("EI"))
+		else if(this.getUnlocalizedName().contains("AI"))
 			return EnumChatFormatting.DARK_AQUA + StatCollector.translateToLocal(this.getUnlocalizedName() + ".name");
-		else if(this.getUnlocalizedName().contains("CP") || this.getUnlocalizedName().contains("RCI"))
+		else if(this.getUnlocalizedName().contains("CP") || this.getUnlocalizedName().contains("RCI")
+				|| this.getUnlocalizedName().contains("EI"))
 			return EnumChatFormatting.AQUA + StatCollector.translateToLocal(this.getUnlocalizedName() + ".name");
 
 		return StatCollector.translateToLocal(this.getUnlocalizedName() + ".name");

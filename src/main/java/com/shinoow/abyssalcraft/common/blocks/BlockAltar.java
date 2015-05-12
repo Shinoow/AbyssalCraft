@@ -92,10 +92,11 @@ public class BlockAltar extends BlockContainer {
 	public void randomDisplayTick(World par1World, int par2, int par3, int par4, Random par5Random) {
 		super.randomDisplayTick(par1World, par2, par3, par4, par5Random);
 
-		if (par5Random.nextInt(10) == 0) {
-			par1World.spawnParticle("enchantmenttable", par2 + par5Random.nextFloat(), par3 + 1.1F, par4 + par5Random.nextFloat(), 0.0D, 0.0D, 0.0D);
-			par1World.spawnParticle("smoke", par2 + par5Random.nextFloat(), par3 + 1.1F, par4 + par5Random.nextFloat(), 0.0D, 0.0D, 0.0D);
-		}
+		if(AbyssalCraft.particleBlock)
+			if (par5Random.nextInt(10) == 0) {
+				par1World.spawnParticle("enchantmenttable", par2 + par5Random.nextFloat(), par3 + 1.1F, par4 + par5Random.nextFloat(), 0.0D, 0.0D, 0.0D);
+				par1World.spawnParticle("smoke", par2 + par5Random.nextFloat(), par3 + 1.1F, par4 + par5Random.nextFloat(), 0.0D, 0.0D, 0.0D);
+			}
 	}
 
 	@Override

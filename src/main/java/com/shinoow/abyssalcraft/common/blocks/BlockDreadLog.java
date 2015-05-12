@@ -130,6 +130,12 @@ public class BlockDreadLog extends BlockRotatedPillar
 	}
 
 	@Override
+	public boolean isWood(IBlockAccess world, int x, int y, int z)
+	{
+		return true;
+	}
+
+	@Override
 	@SideOnly(Side.CLIENT)
 	public IIcon getIcon(int par1, int par2)
 	{

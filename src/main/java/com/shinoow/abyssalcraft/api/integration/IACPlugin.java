@@ -21,8 +21,10 @@ import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
 /**
  * Simple interface to handle integrations. If used by another mod, register the
  * file implementing this interface in {@link AbyssalCraftAPI} or through a IMC message
+ * 
  * @author shinoow
  *
+ * @since 1.3
  */
 public interface IACPlugin {
 

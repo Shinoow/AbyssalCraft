@@ -69,8 +69,9 @@ public class BlockDarklandsgrass extends Block
 	{
 		super.randomDisplayTick(par1World, par2, par3, par4, par5Random);
 
-		if (par5Random.nextInt(10) == 0)
-			par1World.spawnParticle("portal", par2 + par5Random.nextFloat(), par3 + 1.1F, par4 + par5Random.nextFloat(), 0.0D, 0.0D, 0.0D);
+		if(AbyssalCraft.particleBlock)
+			if (par5Random.nextInt(10) == 0)
+				par1World.spawnParticle("portal", par2 + par5Random.nextFloat(), par3 + 1.1F, par4 + par5Random.nextFloat(), 0.0D, 0.0D, 0.0D);
 	}
 	/**
 	 * Ticks the block if it's been scheduled

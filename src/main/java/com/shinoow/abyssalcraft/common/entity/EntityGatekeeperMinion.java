@@ -16,7 +16,11 @@
  */
 package com.shinoow.abyssalcraft.common.entity;
 
+import java.util.Iterator;
+import java.util.List;
+
 import net.minecraft.block.Block;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIAttackOnCollide;
@@ -30,6 +34,7 @@ import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
+import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
@@ -49,6 +54,7 @@ public class EntityGatekeeperMinion extends EntityMob implements ICoraliumEntity
 		tasks.addTask(7, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
 		targetTasks.addTask(1, new EntityAIHurtByTarget(this, false));
 		targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityPlayer.class, 0, true));
+		setSize(1.4F, 2.8F);
 	}
 
 	@Override
@@ -59,12 +65,7 @@ public class EntityGatekeeperMinion extends EntityMob implements ICoraliumEntity
 		getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(64.0D);
 		getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setBaseValue(0.2D);
 		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.699D);
-		getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(15.0D);
-	}
-
-	@Override
-	public boolean canBreatheUnderwater() {
-		return true;
+		getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(18.0D);
 	}
 
 	@Override
@@ -74,27 +75,44 @@ public class EntityGatekeeperMinion extends EntityMob implements ICoraliumEntity
 	}
 
 	@Override
-	protected String getLivingSound()
-	{
-		return "mob.zombie.say";
+	public boolean canBreatheUnderwater() {
+		return true;
 	}
 
 	@Override
-	protected String getHurtSound()
+	public boolean attackEntityAsMob(Entity par1Entity)
 	{
-		return "mob.zombie.hurt";
+		swingItem();
+		boolean flag = super.attackEntityAsMob(par1Entity);
+
+		return flag;
 	}
 
 	@Override
 	protected String getDeathSound()
 	{
-		return "mob.zombie.death";
+		return "abyssalcraft:shadow.death";
 	}
 
 	@Override
 	protected void func_145780_a(int par1, int par2, int par3, Block par4)
 	{
-		playSound("mob.zombie.step", 0.15F, 1.0F);
+		playSound("mob.spider.step", 0.15F, 1.0F);
+	}
+
+	@Override
+	public boolean attackEntityFrom(DamageSource par1DamageSource, float par2)
+	{
+		if(rand.nextInt(10) == 0){
+			List<EntityRemnant> remnants = worldObj.getEntitiesWithinAABB(EntityRemnant.class, boundingBox.expand(16D, 16D, 16D));
+			if(remnants != null){
+				Iterator<EntityRemnant> iter = remnants.iterator();
+				while(iter.hasNext())
+					iter.next().enrage(false);
+			}
+			worldObj.playSoundAtEntity(this, "abyssalcraft:remnant.scream", 3F, 1F);
+		}
+		return super.attackEntityFrom(par1DamageSource, par2);
 	}
 
 	@Override

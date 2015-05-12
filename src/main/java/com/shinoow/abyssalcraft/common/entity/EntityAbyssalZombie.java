@@ -115,12 +115,7 @@ public class EntityAbyssalZombie extends EntityMob implements ICoraliumEntity {
 	@Override
 	protected float getSoundPitch()
 	{
-		float pitch;
-		if(isChild())
-			pitch = rand.nextFloat() - rand.nextFloat() * 0.2F + 1.3F;
-		else
-			pitch = 0.9F;
-		return pitch;
+		return isChild() ? rand.nextFloat() - rand.nextFloat() * 0.2F + 1.3F : 0.9F;
 	}
 
 	/**

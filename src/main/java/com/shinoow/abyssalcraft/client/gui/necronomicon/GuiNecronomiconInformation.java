@@ -48,7 +48,6 @@ public class GuiNecronomiconInformation extends GuiNecronomicon {
 	private ButtonCategory buttonCat9;
 	private GuiButton buttonDone;
 	private boolean isAC = false;
-	private boolean isGOO = false;
 	private boolean isAN = false;
 
 	public GuiNecronomiconInformation(int bookType){
@@ -87,7 +86,7 @@ public class GuiNecronomiconInformation extends GuiNecronomicon {
 
 	private void updateButtons()
 	{
-		buttonNextPage.visible = currnTurnup < getTurnupLimit() - 1 && isInfo && !isAN && !isGOO;
+		buttonNextPage.visible = currnTurnup < getTurnupLimit() - 1 && isInfo && !isAN;
 		buttonPreviousPage.visible = true;
 		buttonDone.visible = true;
 		buttonCat1.visible = true;
@@ -121,7 +120,7 @@ public class GuiNecronomiconInformation extends GuiNecronomicon {
 					mc.displayGuiScreen(new GuiNecronomicon(getBookType()));
 				else if(currnTurnup == 0 && isInfo){
 					initGui();
-					isInfo = isAC = isGOO = isAN = false;
+					isInfo = isAC = isAN = false;
 					setTurnupLimit(2);
 				} else if (currnTurnup > 0)
 					--currnTurnup;
@@ -130,9 +129,10 @@ public class GuiNecronomiconInformation extends GuiNecronomicon {
 				isAC = true;
 				drawButtons();
 			} else if(button.id == 4){
-				isInfo = true;
-				isGOO = true;
-				drawButtons();
+				PageData og = new PageData(4, NecronomiconText.LABEL_OUTER_GODS, PageType.INFO, NecronomiconResources.OUTER_GODS, NecronomiconText.OUTER_GODS);
+				PageData goo = new PageData(3, NecronomiconText.LABEL_INFORMATION_GREAT_OLD_ONES, PageType.INFO, NecronomiconResources.GREAT_OLD_ONES, NecronomiconText.GREAT_OLD_ONES);
+				NecroData data = new NecroData(NecronomiconText.LABEL_INFORMATION_GREAT_OLD_ONES, NecronomiconText.INFORMATION_GREAT_OLD_ONES, og, goo);
+				mc.displayGuiScreen(new GuiNecronomiconEntry(getBookType(), data, new GuiNecronomiconInformation(getBookType()), AbyssalCraft.necronomicon));
 			} else if(button.id == 5){
 				isInfo = true;
 				isAN = true;
@@ -140,7 +140,7 @@ public class GuiNecronomiconInformation extends GuiNecronomicon {
 			} else if(button.id == 6){
 				ItemStack[] neistuff = {new ItemStack(AbyssalCraft.transmutator), new ItemStack(AbyssalCraft.crystallizer), new ItemStack(AbyssalCraft.engraver), new ItemStack(AbyssalCraft.materializer)};
 				PageData nei = new PageData(4, NecronomiconText.LABEL_INTEGRATION_NEI, PageType.ENTRY, neistuff, NecronomiconText.NEI_INTEGRATION);
-				PageData tc = new PageData(1, NecronomiconText.LABEL_INTEGRATION_TC, NecronomiconText.INTEGRATION_TC_1, NecronomiconText.INTEGRATION_TC_2);
+				PageData tc = new PageData(4, NecronomiconText.LABEL_INTEGRATION_TC, NecronomiconText.TC_INTEGRATION);
 				PageData morph = new PageData(1, NecronomiconText.LABEL_INTEGRATION_MORPH, NecronomiconText.INTEGRATION_MORPH_1, NecronomiconText.INTEGRATION_MORPH_2);
 				PageData invtweaks = new PageData(1, NecronomiconText.LABEL_INTEGRATION_INVTWEAKS, NecronomiconText.INTEGRATION_INVTWEAKS_1);
 				NecroData data = new NecroData(NecronomiconText.LABEL_INFORMATION_INTEGRATION, NecronomiconText.INFORMATION_INTEGRATION, nei, tc, morph, invtweaks);
@@ -215,11 +215,6 @@ public class GuiNecronomiconInformation extends GuiNecronomicon {
 				writeText(1, NecronomiconText.INFORMATION_ABYSSALCRAFT_PAGE_3);
 				writeText(2, NecronomiconText.INFORMATION_ABYSSALCRAFT_PAGE_4);
 			}
-		} else if(isGOO){
-			stuff = StatCollector.translateToLocal(NecronomiconText.LABEL_INFORMATION_GREAT_OLD_ONES);
-			fontRendererObj.drawSplitString(stuff, k + 20, b0 + 16, 116, 0xC40000);
-			setTurnupLimit(1);
-			writeText(1, NecronomiconText.INFORMATION_GREAT_OLD_ONES);
 		} else if(isAN){
 			stuff = StatCollector.translateToLocal(NecronomiconText.LABEL_INFORMATION_ABYSSALNOMICON);
 			fontRendererObj.drawSplitString(stuff, k + 20, b0 + 16, 116, 0xC40000);

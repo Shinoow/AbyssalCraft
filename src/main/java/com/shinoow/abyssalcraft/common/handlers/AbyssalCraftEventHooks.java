@@ -52,16 +52,19 @@ public class AbyssalCraftEventHooks {
 	//Bonemeal events
 	@SubscribeEvent
 	public void bonemealUsed(BonemealEvent event) {
-		if (event.block == AbyssalCraft.DLTSapling) {
-			if (!event.world.isRemote)
-				((BlockDLTSapling)AbyssalCraft.DLTSapling).growTree(event.world, event.x, event.y, event.z, event.world.rand);
-			event.setResult(Result.ALLOW);
-		}
-
-		if (event.block == AbyssalCraft.dreadsapling) {
-			if (!event.world.isRemote)
-				((BlockDreadSapling)AbyssalCraft.dreadsapling).growTree(event.world, event.x, event.y, event.z, event.world.rand);
-			event.setResult(Result.ALLOW);
+		if(event.getResult() == Result.DEFAULT){
+			if (event.block == AbyssalCraft.DLTSapling) {
+				if (!event.world.isRemote)
+					if(event.world.rand.nextFloat() < 0.45D)
+						((BlockDLTSapling)AbyssalCraft.DLTSapling).growTree(event.world, event.x, event.y, event.z, event.world.rand);
+				event.setResult(Result.ALLOW);
+			}
+			if (event.block == AbyssalCraft.dreadsapling) {
+				if (!event.world.isRemote)
+					if(event.world.rand.nextFloat() < 0.45D)
+						((BlockDreadSapling)AbyssalCraft.dreadsapling).growTree(event.world, event.x, event.y, event.z, event.world.rand);
+				event.setResult(Result.ALLOW);
+			}
 		}
 	}
 
@@ -151,9 +154,10 @@ public class AbyssalCraftEventHooks {
 		}
 		if(event.entityLiving.worldObj.isRemote && event.entityLiving.dimension == AbyssalCraft.configDimId4){
 			Random rand = new Random();
-			event.entityLiving.worldObj.spawnParticle("largesmoke", event.entityLiving.posX + (rand.nextDouble() - 0.5D) * event.entityLiving.width,
-					event.entityLiving.posY + rand.nextDouble() * event.entityLiving.height,
-					event.entityLiving.posZ + (rand.nextDouble() - 0.5D) * event.entityLiving.width, 0,0,0);
+			if(AbyssalCraft.particleEntity)
+				event.entityLiving.worldObj.spawnParticle("largesmoke", event.entityLiving.posX + (rand.nextDouble() - 0.5D) * event.entityLiving.width,
+						event.entityLiving.posY + rand.nextDouble() * event.entityLiving.height,
+						event.entityLiving.posZ + (rand.nextDouble() - 0.5D) * event.entityLiving.width, 0,0,0);
 		}
 		if(AbyssalCraft.darkness)
 			if(event.entityLiving instanceof EntityPlayer){

@@ -30,14 +30,11 @@ public class ItemPlatefood extends ItemFood
 		super(j, f, b);
 		setCreativeTab(AbyssalCraft.tabFood);
 		setMaxStackSize(4);
-
 	}
 
 	@Override
-	public ItemStack onEaten(ItemStack par1ItemStack, World par2World, EntityPlayer par3EntityPlayer)
+	public void onFoodEaten(ItemStack itemStack, World world, EntityPlayer entityPlayer)
 	{
-		super.onEaten(par1ItemStack, par2World, par3EntityPlayer);
-		return new ItemStack(AbyssalCraft.dirtyplate);
+		entityPlayer.inventory.addItemStackToInventory(new ItemStack(AbyssalCraft.dirtyplate));
 	}
-
 }

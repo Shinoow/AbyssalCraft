@@ -35,7 +35,6 @@ import cpw.mods.fml.relauncher.SideOnly;
 public class ItemDreadiumArmor extends ItemArmor {
 	public ItemDreadiumArmor(ArmorMaterial par2EnumArmorMaterial, int par3, int par4){
 		super(par2EnumArmorMaterial, par3, par4);
-		par2EnumArmorMaterial.customCraftingMaterial = AbyssalCraft.dreadiumingot;
 		setCreativeTab(AbyssalCraft.tabCombat);
 	}
 

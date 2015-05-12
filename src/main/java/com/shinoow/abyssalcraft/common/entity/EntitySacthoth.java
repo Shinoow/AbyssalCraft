@@ -22,6 +22,7 @@ import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureAttribute;
+import net.minecraft.entity.IEntityLivingData;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIAttackOnCollide;
 import net.minecraft.entity.ai.EntityAIHurtByTarget;
@@ -124,7 +125,7 @@ public class EntitySacthoth extends EntityMob implements IBossDisplayData, IAnti
 	@Override
 	protected boolean canDespawn()
 	{
-		return worldObj.provider.dimensionId == AbyssalCraft.configDimId3 ? true : false;
+		return worldObj.provider.dimensionId == AbyssalCraft.configDimId4 ? true : false;
 	}
 
 	@Override
@@ -305,7 +306,8 @@ public class EntitySacthoth extends EntityMob implements IBossDisplayData, IAnti
 				double d7 = d3 + (posX - d3) * d6 + (rand.nextDouble() - 0.5D) * width * 2.0D;
 				double d8 = d4 + (posY - d4) * d6 + rand.nextDouble() * height;
 				double d9 = d5 + (posZ - d5) * d6 + (rand.nextDouble() - 0.5D) * width * 2.0D;
-				worldObj.spawnParticle("largesmoke", d7, d8, d9, f, f1, f2);
+				if(AbyssalCraft.particleEntity)
+					worldObj.spawnParticle("largesmoke", d7, d8, d9, f, f1, f2);
 			}
 
 			worldObj.playSoundEffect(d3, d4, d5, "mob.endermen.portal", 1.0F, 1.0F);
@@ -324,11 +326,13 @@ public class EntitySacthoth extends EntityMob implements IBossDisplayData, IAnti
 			float f = (rand.nextFloat() - 0.5F) * 8.0F;
 			float f1 = (rand.nextFloat() - 0.5F) * 4.0F;
 			float f2 = (rand.nextFloat() - 0.5F) * 8.0F;
-			worldObj.spawnParticle("smoke", posX + f, posY + 2.0D + f1, posZ + f2, 0.0D, 0.0D, 0.0D);
-			worldObj.spawnParticle("largesmoke", posX + f, posY + 2.0D + f1, posZ + f2, 0.0D, 0.0D, 0.0D);
-			worldObj.spawnParticle("explode", posX + f, posY + 2.0D + f1, posZ + f2, 0.0D, 0.0D, 0.0D);
-			if (deathTicks >= 190 && deathTicks <= 200)
-				worldObj.spawnParticle("hugeexplosion", posX + f, posY + 2.0D + f1, posZ + f2, 0.0D, 0.0D, 0.0D);
+			if(AbyssalCraft.particleEntity){
+				worldObj.spawnParticle("smoke", posX + f, posY + 2.0D + f1, posZ + f2, 0.0D, 0.0D, 0.0D);
+				worldObj.spawnParticle("largesmoke", posX + f, posY + 2.0D + f1, posZ + f2, 0.0D, 0.0D, 0.0D);
+				worldObj.spawnParticle("explode", posX + f, posY + 2.0D + f1, posZ + f2, 0.0D, 0.0D, 0.0D);
+				if (deathTicks >= 190 && deathTicks <= 200)
+					worldObj.spawnParticle("hugeexplosion", posX + f, posY + 2.0D + f1, posZ + f2, 0.0D, 0.0D, 0.0D);
+			}
 		}
 
 		int i;
@@ -387,7 +391,8 @@ public class EntitySacthoth extends EntityMob implements IBossDisplayData, IAnti
 	public void onLivingUpdate()
 	{
 		for (int i = 0; i < 2; ++i)
-			worldObj.spawnParticle("largesmoke", posX + (rand.nextDouble() - 0.5D) * width, posY + rand.nextDouble() * height, posZ + (rand.nextDouble() - 0.5D) * width, 0.0D, 0.0D, 0.0D);
+			if(AbyssalCraft.particleEntity)
+				worldObj.spawnParticle("largesmoke", posX + (rand.nextDouble() - 0.5D) * width, posY + rand.nextDouble() * height, posZ + (rand.nextDouble() - 0.5D) * width, 0.0D, 0.0D, 0.0D);
 
 		List list = worldObj.getEntitiesWithinAABBExcludingEntity(this, boundingBox.expand(30.0D, 30.0D, 30.0D));
 		if (list != null)
@@ -413,5 +418,16 @@ public class EntitySacthoth extends EntityMob implements IBossDisplayData, IAnti
 		}
 
 		super.onLivingUpdate();
+	}
+
+	@Override
+	public IEntityLivingData onSpawnWithEgg(IEntityLivingData par1EntityLivingData)
+	{
+		par1EntityLivingData = super.onSpawnWithEgg(par1EntityLivingData);
+
+		if(worldObj.isDaytime())
+			worldObj.setWorldTime(14000L);
+
+		return par1EntityLivingData;
 	}
 }

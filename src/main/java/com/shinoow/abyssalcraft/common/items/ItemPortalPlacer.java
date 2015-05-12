@@ -60,8 +60,12 @@ public class ItemPortalPlacer extends Item {
 			FMLClientHandler.instance().getClient().ingameGUI.getChatGUI().printChatMessage(new ChatComponentText(StatCollector.translateToLocal("message.portalplacer.error.1")));
 			return false;
 		}
-		else if(!par3World.isRemote && par3World.provider.isSurfaceWorld() || !par3World.isRemote && par2EntityPlayer.dimension == AbyssalCraft.configDimId1
-				|| !par3World.isRemote && par2EntityPlayer.dimension == AbyssalCraft.configDimId2)
+		else if(par3World.isRemote && par2EntityPlayer.dimension != 0 || par3World.isRemote && par2EntityPlayer.dimension != AbyssalCraft.configDimId1)
+		{
+			FMLClientHandler.instance().getClient().ingameGUI.getChatGUI().printChatMessage(new ChatComponentText(StatCollector.translateToLocal("message.portalplacer.error.2")));
+			return false;
+		}
+		else if(!par3World.isRemote && par2EntityPlayer.dimension == 0 || !par3World.isRemote && par2EntityPlayer.dimension == AbyssalCraft.configDimId1)
 		{
 			int direction = MathHelper.floor_double(par2EntityPlayer.rotationYaw * 4.0F / 360.0F + 0.5D) & 3;
 

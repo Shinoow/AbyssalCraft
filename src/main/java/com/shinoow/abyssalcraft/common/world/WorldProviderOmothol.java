@@ -41,7 +41,7 @@ public class WorldProviderOmothol extends WorldProvider {
 	@Override
 	public IChunkProvider createChunkGenerator()
 	{
-		return new ChunkProviderOmothol(worldObj, worldObj.getSeed());
+		return new ChunkProviderOmothol(worldObj, 1251393890L);
 	}
 
 	@Override

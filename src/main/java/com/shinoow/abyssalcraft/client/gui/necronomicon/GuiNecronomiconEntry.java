@@ -359,7 +359,7 @@ public class GuiNecronomiconEntry extends GuiNecronomicon {
 						GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 						mc.renderEngine.bindTexture((ResourceLocation)icons[8]);
 						drawTexturedModalRect(k, b0, 0, 0, 256, 256);
-						writeText(1, page.getPages()[17], 100);
+						writeText(1, page.getPages()[16], 100);
 					} else writeText(1, page.getPages()[16]);
 					break;
 				}
@@ -605,7 +605,7 @@ public class GuiNecronomiconEntry extends GuiNecronomicon {
 						GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 						mc.renderEngine.bindTexture((ResourceLocation)icons[8]);
 						drawTexturedModalRect(k, b0, 0, 0, 256, 256);
-						writeText(1, page.getPages()[17], 100);
+						writeText(1, page.getPages()[16], 100);
 					} else writeText(1, page.getPages()[16]);
 					break;
 				}
@@ -851,7 +851,7 @@ public class GuiNecronomiconEntry extends GuiNecronomicon {
 						GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 						mc.renderEngine.bindTexture((ResourceLocation)icons[8]);
 						drawTexturedModalRect(k, b0, 0, 0, 256, 256);
-						writeText(1, page.getPages()[17], 100);
+						writeText(1, page.getPages()[16], 100);
 					} else writeText(1, page.getPages()[16]);
 					break;
 				}
@@ -1097,7 +1097,7 @@ public class GuiNecronomiconEntry extends GuiNecronomicon {
 						GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 						mc.renderEngine.bindTexture((ResourceLocation)icons[8]);
 						drawTexturedModalRect(k, b0, 0, 0, 256, 256);
-						writeText(1, page.getPages()[17], 100);
+						writeText(1, page.getPages()[16], 100);
 					} else writeText(1, page.getPages()[16]);
 					break;
 				}
@@ -1343,7 +1343,7 @@ public class GuiNecronomiconEntry extends GuiNecronomicon {
 						GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 						mc.renderEngine.bindTexture((ResourceLocation)icons[8]);
 						drawTexturedModalRect(k, b0, 0, 0, 256, 256);
-						writeText(1, page.getPages()[17], 100);
+						writeText(1, page.getPages()[16], 100);
 					} else writeText(1, page.getPages()[16]);
 					break;
 				}

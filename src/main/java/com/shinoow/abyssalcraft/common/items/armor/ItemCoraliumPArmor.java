@@ -39,7 +39,6 @@ import cpw.mods.fml.relauncher.SideOnly;
 public class ItemCoraliumPArmor extends ItemArmor {
 	public ItemCoraliumPArmor(ArmorMaterial par2EnumArmorMaterial, int par3, int par4){
 		super(par2EnumArmorMaterial, par3, par4);
-		par2EnumArmorMaterial.customCraftingMaterial = AbyssalCraft.Cplate;
 		setCreativeTab(AbyssalCraft.tabCombat);
 	}
 

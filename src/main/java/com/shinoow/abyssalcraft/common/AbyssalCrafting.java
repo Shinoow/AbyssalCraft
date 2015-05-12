@@ -225,7 +225,7 @@ public class AbyssalCrafting {
 		GameRegistry.addRecipe(new ItemStack(AbyssalCraft.dreadblade, 1), new Object[] {"##", "##", "##", '#', AbyssalCraft.crystalDreadium});
 		GameRegistry.addRecipe(new ItemStack(AbyssalCraft.dreadhilt, 1), new Object[] {"###", "%&%", "%&%", '#', AbyssalCraft.dreadiumingot, '%', AbyssalCraft.dreadcloth, '&', AbyssalCraft.dreadplanks});
 		GameRegistry.addRecipe(new ItemStack(AbyssalCraft.dreadkatana, 1), new Object[] {"#", "%", '#', AbyssalCraft.dreadblade, '%', AbyssalCraft.dreadhilt});
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(Items.gunpowder, 4), true, new Object[] {"#&#", "#%#", "###", '#', "materialSaltpeter", '%', new ItemStack(Items.coal, 1, 1), '&', "materialSulfur"}));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(Items.gunpowder, 4), true, new Object[] {"#&#", "#%#", "###", '#', "dustSaltpeter", '%', new ItemStack(Items.coal, 1, 1), '&', "dustSulfur"}));
 		GameRegistry.addRecipe(new ItemStack(AbyssalCraft.crystalMethane), new Object[] {" # ", "#%#", " # ", '#', AbyssalCraft.crystalHydrogen, '%', AbyssalCraft.crystalCarbon});
 		GameRegistry.addRecipe(new ItemStack(AbyssalCraft.crystalNitrate), new Object[] {" # ", "%%%", '#', AbyssalCraft.crystalNitrogen, '%', AbyssalCraft.crystalOxygen});
 		GameRegistry.addRecipe(new ItemStack(AbyssalCraft.crystalAlumina), new Object[] {" # ", "%%%", " # ", '#', AbyssalCraft.crystalAluminium, '%', AbyssalCraft.crystalOxygen});
@@ -551,7 +551,7 @@ public class AbyssalCrafting {
 		AbyssalCraftAPI.addCrystallization(new ItemStack(Items.dye, 1, 4), new ItemStack(AbyssalCraft.crystalSilica, 6), new ItemStack(AbyssalCraft.crystalSulfur, 4), 0.15F);
 		AbyssalCraftAPI.addCrystallization(AbyssalCraft.methane, new ItemStack(AbyssalCraft.crystalCarbon), new ItemStack(AbyssalCraft.crystalHydrogen, 4), 0.1F);
 		AbyssalCraftAPI.addCrystallization(Items.gunpowder, new ItemStack(AbyssalCraft.crystalNitrate, 4), new ItemStack(AbyssalCraft.crystalSulfur), 0.1F);
-		AbyssalCraftAPI.addCrystallization("materialSaltpeter", "crystalPotassium", "crystalNitrate", 0.1F);
+		AbyssalCraftAPI.addCrystallization("dustSaltpeter", "crystalPotassium", "crystalNitrate", 0.1F);
 		AbyssalCraftAPI.addCrystallization("oreSaltpeter", "crystalPotassium", "crystalNitrate", 0.1F);
 		AbyssalCraftAPI.addCrystallization(Blocks.obsidian, new ItemStack(AbyssalCraft.crystalSilica), new ItemStack(AbyssalCraft.crystalMagnesia), 0.1F);
 		AbyssalCraftAPI.addCrystallization(Blocks.stone, new ItemStack(AbyssalCraft.crystalSilica), new ItemStack(AbyssalCraft.crystalAlumina), 0.1F);

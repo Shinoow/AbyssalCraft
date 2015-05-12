@@ -344,7 +344,7 @@ public class ChunkProviderOmothol implements IChunkProvider
 	public List getPossibleCreatures(EnumCreatureType par1EnumCreatureType, int x, int y, int z)
 	{
 		BiomeGenBase biomegenbase = worldObj.getBiomeGenForCoords(x, z);
-		return biomegenbase.getSpawnableList(par1EnumCreatureType);
+		return biomegenbase == null ? null : biomegenbase.getSpawnableList(par1EnumCreatureType);
 	}
 
 	@Override

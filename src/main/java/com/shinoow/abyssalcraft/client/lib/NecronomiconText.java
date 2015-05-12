@@ -32,13 +32,26 @@ public class NecronomiconText {
 
 	public static String ABYSSALNOMICON_PAGE_1 = StatCollector.translateToLocal("necronomicon.text.abyssalnomicon.1");
 	public static String ABYSSALNOMICON_PAGE_2 = StatCollector.translateToLocal("necronomicon.text.abyssalnomicon.2");
-	public static String ABYSSALNOMICON_PAGE_3 = StatCollector.translateToLocal("necronomicon.text.abyssalnomicon.3");
-	public static String ABYSSALNOMICON_PAGE_4 = StatCollector.translateToLocal("necronomicon.text.abyssalnomicon.4");
 
 	public static String INFORMATION_ABYSSALCRAFT_PAGE_1 = StatCollector.translateToLocal("necronomicon.text.abyssalcraft.1");
 	public static String INFORMATION_ABYSSALCRAFT_PAGE_2 = StatCollector.translateToLocal("necronomicon.text.abyssalcraft.2");
 	public static String INFORMATION_ABYSSALCRAFT_PAGE_3 = StatCollector.translateToLocal("necronomicon.text.abyssalcraft.3");
 	public static String INFORMATION_ABYSSALCRAFT_PAGE_4 = StatCollector.translateToLocal("necronomicon.text.abyssalcraft.4");
+
+	public static String AZATHOTH_1 = StatCollector.translateToLocal("necronomicon.text.azathoth.1");
+	public static String AZATHOTH_2 = StatCollector.translateToLocal("necronomicon.text.azathoth.2");
+	public static String NYARLATHOTEP_1 = StatCollector.translateToLocal("necronomicon.text.nyarlathotep.1");
+	public static String NYARLATHOTEP_2 = StatCollector.translateToLocal("necronomicon.text.nyarlathotep.2");
+	public static String YOG_SOTHOTH_1 = StatCollector.translateToLocal("necronomicon.text.yog-sothoth.1");
+	public static String YOG_SOTHOTH_2 = StatCollector.translateToLocal("necronomicon.text.yog-sothoth.1");
+	public static String SHUB_NIGGURATH_1 = StatCollector.translateToLocal("necronomicon.text.shub-niggurath.1");
+	public static String SHUB_NIGGURATH_2 = StatCollector.translateToLocal("necronomicon.text.shub-niggurath.2");
+	public static String CTHULHU_1 = StatCollector.translateToLocal("necronomicon.text.cthulhu.1");
+	public static String CTHULHU_2 = StatCollector.translateToLocal("necronomicon.text.cthulhu.2");
+	public static String HASTUR_1 = StatCollector.translateToLocal("necronomicon.text.hastur.1");
+	public static String HASTUR_2 = StatCollector.translateToLocal("necronomicon.text.hastur.2");
+	public static String JZAHAR_1 = StatCollector.translateToLocal("necronomicon.text.jzahar.1");
+	public static String JZAHAR_2 = StatCollector.translateToLocal("necronomicon.text.jzahar.2");
 
 	public static String INFORMATION_GREAT_OLD_ONES = StatCollector.translateToLocal("necronomicon.text.greatoldones");
 
@@ -196,11 +209,22 @@ public class NecronomiconText {
 
 	public static String INTEGRATION_TC_1 = StatCollector.translateToLocal("necronomicon.text.integration.tc.1");
 	public static String INTEGRATION_TC_2 = StatCollector.translateToLocal("necronomicon.text.integration.tc.2");
+	public static String INTEGRATION_TC_3 = StatCollector.translateToLocal("necronomicon.text.integration.tc.3");
+	public static String INTEGRATION_TC_4 = StatCollector.translateToLocal("necronomicon.text.integration.tc.4");
+	public static String INTEGRATION_TC_5 = StatCollector.translateToLocal("necronomicon.text.integration.tc.5");
+	public static String INTEGRATION_TC_6 = StatCollector.translateToLocal("necronomicon.text.integration.tc.6");
+	public static String INTEGRATION_TC_7 = StatCollector.translateToLocal("necronomicon.text.integration.tc.7");
+	public static String INTEGRATION_TC_8 = StatCollector.translateToLocal("necronomicon.text.integration.tc.8");
 
 	public static String INTEGRATION_MORPH_1 = StatCollector.translateToLocal("necronomicon.text.integration.morph.1");
 	public static String INTEGRATION_MORPH_2 = StatCollector.translateToLocal("necronomicon.text.integration.morph.2");
 
 	public static String INTEGRATION_INVTWEAKS_1 = StatCollector.translateToLocal("necronomicon.text.integration.invtweaks.1");
+
+	public static String[] OUTER_GODS = {AZATHOTH_1, AZATHOTH_2, NYARLATHOTEP_1, NYARLATHOTEP_2, YOG_SOTHOTH_1, YOG_SOTHOTH_2,
+		SHUB_NIGGURATH_1, SHUB_NIGGURATH_2};
+
+	public static String[] GREAT_OLD_ONES = {CTHULHU_1, CTHULHU_2, HASTUR_1, HASTUR_2, JZAHAR_1, JZAHAR_2};
 
 	public static String[] OVERWORLD_MATERIALS = {MATERIAL_ABYSSALNITE_1, MATERIAL_ABYSSALNITE_2, MATERIAL_DARKSTONE_1,
 		MATERIAL_DARKSTONE_2, MATERIAL_CORALIUM_1, MATERIAL_CORALIUM_2, MATERIAL_DARKLANDS_OAK_1, MATERIAL_DARKLANDS_OAK_2,
@@ -246,6 +270,8 @@ public class NecronomiconText {
 
 	public static String[] NEI_INTEGRATION = {INTEGRATION_NEI_1, INTEGRATION_NEI_2, INTEGRATION_NEI_3, INTEGRATION_NEI_4,
 		INTEGRATION_NEI_5, INTEGRATION_NEI_6, INTEGRATION_NEI_7, INTEGRATION_NEI_8};
+	public static String[] TC_INTEGRATION = {INTEGRATION_TC_1, INTEGRATION_TC_2, INTEGRATION_TC_3, INTEGRATION_TC_4,
+		INTEGRATION_TC_5, INTEGRATION_TC_6, INTEGRATION_TC_7, INTEGRATION_TC_8};
 
 	public static String WIP = StatCollector.translateToLocal("necronomicon.text.wip");
 
@@ -282,6 +308,7 @@ public class NecronomiconText {
 	public static String LABEL_INTEGRATION_TC = "Thaumcraft";
 	public static String LABEL_INTEGRATION_MORPH = "Morph";
 	public static String LABEL_INTEGRATION_INVTWEAKS = "Inventory Tweaks";
+	public static String LABEL_OUTER_GODS = StatCollector.translateToLocal("necronomicon.information.outergods");
 
 	/**
 	 * The best way to drown an array of strings with nonsense

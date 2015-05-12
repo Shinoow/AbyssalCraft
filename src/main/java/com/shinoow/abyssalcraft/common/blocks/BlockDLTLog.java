@@ -141,6 +141,11 @@ public class BlockDLTLog extends BlockRotatedPillar
 		return true;
 	}
 
+	@Override
+	public boolean isWood(IBlockAccess world, int x, int y, int z)
+	{
+		return true;
+	}
 
 	@Override
 	@SideOnly(Side.CLIENT)

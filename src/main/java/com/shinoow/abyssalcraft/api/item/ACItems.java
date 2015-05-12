@@ -21,6 +21,7 @@ import cpw.mods.fml.common.registry.GameRegistry;
 
 /**
  * Contains all items added in AbyssalCraft
+ * 
  * @author shinoow
  *
  */
@@ -216,6 +217,10 @@ public class ACItems {
 	public static Item dreadlands_necronomicon = GameRegistry.findItem(modId, "necronomicon_dre");
 	public static Item omothol_necronomicon = GameRegistry.findItem(modId, "necronomicon_omt");
 	public static Item abyssalnomicon = GameRegistry.findItem(modId, "abyssalnomicon");
+	public static Item small_crystal_bag = GameRegistry.findItem(modId, "crystalbag_small");
+	public static Item medium_crystal_bag = GameRegistry.findItem(modId, "crystalbag_medium");
+	public static Item large_crystal_bag = GameRegistry.findItem(modId, "crystalbag_large");
+	public static Item huge_crystal_bag = GameRegistry.findItem(modId, "crystalbag_huge");
 	//	public static Item shoggoth_flesh = GameRegistry.findItem(modId, "shoggothflesh");
 	//	public static Item shadow_titan_armor_plate = GameRegistry.findItem(modId, "shadowplate");
 }

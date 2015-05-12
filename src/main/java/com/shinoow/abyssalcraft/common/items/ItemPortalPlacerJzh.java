@@ -67,12 +67,12 @@ public class ItemPortalPlacerJzh extends Item {
 			FMLClientHandler.instance().getClient().ingameGUI.getChatGUI().printChatMessage(new ChatComponentText(StatCollector.translateToLocal("message.portalplacer.error.1")));
 			return false;
 		}
-		if(par3World.isRemote && par3World.provider.isSurfaceWorld() || par3World.isRemote && par2EntityPlayer.dimension == AbyssalCraft.configDimId1)
+		else if(par3World.isRemote && par2EntityPlayer.dimension != AbyssalCraft.configDimId2 || par3World.isRemote && par2EntityPlayer.dimension != AbyssalCraft.configDimId3
+				|| par3World.isRemote && par2EntityPlayer.dimension != AbyssalCraft.configDimId4)
 		{
 			FMLClientHandler.instance().getClient().ingameGUI.getChatGUI().printChatMessage(new ChatComponentText(StatCollector.translateToLocal("message.portalplacer.error.2")));
 			return false;
 		}
-
 		else if(!par3World.isRemote && par2EntityPlayer.dimension == AbyssalCraft.configDimId2 || !par3World.isRemote && par2EntityPlayer.dimension == AbyssalCraft.configDimId3
 				|| !par3World.isRemote && par2EntityPlayer.dimension == AbyssalCraft.configDimId4)
 		{
