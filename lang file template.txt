@@ -119,8 +119,6 @@ container.abyssalcraft.crate=
 container.abyssalcraft.crystallizer=
 container.abyssalcraft.transmutator=
 container.abyssalcraft.engraver=
-container.abyssalcraft.necromonicon=
-conainter.abyssalcraft.abyssalnomicon=
 container.abyssalcraft.materializer=
 
 #NEI Integration
@@ -152,6 +150,7 @@ necronomicon.information.materials=
 necronomicon.information.progression=
 necronomicon.information.integration=
 necronomicon.information.entities=
+necronomicon.information.outergods=
 
 #Necronomicon Text
 #Note: the maximum amount of letters per string is 256
@@ -165,13 +164,26 @@ necronomicon.text.necronomicon.4=
 
 necronomicon.text.abyssalnomicon.1=
 necronomicon.text.abyssalnomicon.2=
-necronomicon.text.abyssalnomicon.3=
-necronomicon.text.abyssalnomicon.4=
 
 necronomicon.text.abyssalcraft.1=
 necronomicon.text.abyssalcraft.2=
 necronomicon.text.abyssalcraft.3=
 necronomicon.text.abyssalcraft.4=
+
+necronomicon.text.azathoth.1=
+necronomicon.text.azathoth.2=
+necronomicon.text.nyarlathotep.1=
+necronomicon.text.nyarlathotep.2=
+necronomicon.text.yog-sothoth.1=
+necronomicon.text.yog-sothoth.2=
+necronomicon.text.shub-niggurath.1=
+necronomicon.text.shub-niggurath.2=
+necronomicon.text.cthulhu.1=
+necronomicon.text.cthulhu.2=
+necronomicon.text.hastur.1=
+necronomicon.text.hastur.2=
+necronomicon.text.jzahar.1=
+necronomicon.text.jzahar.2=
 
 necronomicon.text.greatoldones=
 necronomicon.text.abyssalnomicon_info=
@@ -327,6 +339,12 @@ necronomicon.text.integration.nei.8=
 
 necronomicon.text.integration.tc.1=
 necronomicon.text.integration.tc.2=
+necronomicon.text.integration.tc.3=
+necronomicon.text.integration.tc.4=
+necronomicon.text.integration.tc.5=
+necronomicon.text.integration.tc.6=
+necronomicon.text.integration.tc.7=
+necronomicon.text.integration.tc.8=
 
 necronomicon.text.integration.morph.1=
 necronomicon.text.integration.morph.2=
@@ -352,8 +370,8 @@ ac_enchantment=
 ac_enchantment.tooltip=
 ac_potion=
 ac_potion.tooltip=
-ac_render=
-ac_render.tooltip=
+ac_integration=
+ac_integration.tooltip=
 
 #Damagesources
 death.attack.coralium=%1$s
@@ -401,14 +419,18 @@ tooltip.soulreaper=
 tooltip.crystalbag=
 
 #Creative Tabs
-itemgroup.acblocks=
-itemgroup.acitems=
-itemgroup.actools=
-itemgroup.acctools=
-itemgroup.acfood=
-itemgroup.acdblocks=
-itemgroup.accrystals=
-itemgroup.accoins=
+itemGroup.acblocks=
+itemGroup.acitems=
+itemGroup.actools=
+itemGroup.acctools=
+itemGroup.acfood=
+itemGroup.acdblocks=
+itemGroup.accrystals=
+itemGroup.accoins=
+
+#Fluids
+fluid.liquidcoralium=
+fluid.liquidantimatter=
 
 #Blocks
 tile.DS.name=
@@ -794,5 +816,32 @@ enchantment.coralium=
 enchantment.dread=
 enchantment.ironWall=
 enchantment.damage.shadow=
+
+#Thaumcraft integration
+item.nugget.abyssalnite.name=
+item.nugget.coralium.name=
+item.nugget.dreadium.name=
+item.nugget.ethaxium.name=
+item.wandcap.abyssalnite.name=
+item.wandcap.coralium.name=
+item.wandcap.dreadium.name=
+item.wandcap.ethaxium.name=
+item.wandcore.darklands.name=
+item.wandcore.coralium.name=
+item.wandcore.dreadlands.name=
+item.wandcore.omothol.name=
+item.Wand.abyssalnite.cap=
+item.Wand.darklands.rod=
+item.Wand.coralium.cap=
+item.Wand.coralium.rod=
+item.Wand.dreadium.cap=
+item.Wand.dreadlands.rod=
+item.Wand.ethaxium.cap=
+item.Wand.omothol.rod=
+
+itemGroup.acthaum=
+
+tc.aspect.coralos=
+tc.aspect.dreadia=
 
 #Localization done, Shin out.
