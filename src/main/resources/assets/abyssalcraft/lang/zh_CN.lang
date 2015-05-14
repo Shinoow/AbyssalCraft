@@ -156,7 +156,7 @@ necronomicon.information.entities=实体
 #The following text example has the letter limit:
 #Lorem ipsum dolor sit amet, ad dicit prompta ullamcorper nam, quando ubique intellegat nam eu, ad dolore mollis has. Sint debet eum te. At dicunt liberavisse mea. Ea minimum sententiae ius, ei duo timeam virtute. Aliquid graecis eu usu, ea dignissim conse.
 #Anything longer than that will trigger a crash when you try to read it
-necronomicon.text.necronomicon.1=This is the Necronomicon, a book written by Abdul Alhazred, also known as "The Mad Arab". The book contains knowledge about The Great Old Ones, their names and how to summon them. There is also information about spells and rituals the book can perform.
+necronomicon.text.necronomicon.1=这是死灵之书, 一本由Abdul Alhazred所写的书, 熟知为 "The Mad Arab". 这本书囊括了旧日支配者的知识, 他们的名字和怎么去召唤他们. 里面同样有关于这本书所能举行的咒语和仪式的信息.
 necronomicon.text.necronomicon.2=The Necronomicon itself is a chapter of the Abyssalnomicon, which was read to Alhazred by a demon known as J'zahar, who had composed the Abyssalnomicon from infinite knowledge known to The Great Old Ones.
 necronomicon.text.necronomicon.3=There are 4 types of Necronomicons within the Abyssalnomicon: The Necronomicon, The Abyssal Wasteland Necronomicon, knowledge bound to a specific dimension.
 necronomicon.text.necronomicon.4=In order to unlock the knowledge, one must travel to said dimension and empower the Necronoicon with the flesh of that world. The Abyssalnomicon contains additional knowledge known only to J'zahar, knowledge man was not meant to obtain.
@@ -331,7 +331,7 @@ necronomicon.text.integration.morph.2=When morphed into entities that has specia
 
 necronomicon.text.integration.invtweaks.1=With Inventory Tweaks installed, you can sort items kept in the Crystal Bags with sorting buttons like with any other supported container.
 
-necronomicon.text.wip=This section is incomplete.
+necronomicon.text.wip=这部分还未完成.
 
 #Configuration
 ac_dimensions=维度
