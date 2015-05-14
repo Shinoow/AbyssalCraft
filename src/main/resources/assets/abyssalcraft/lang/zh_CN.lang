@@ -100,19 +100,19 @@ message.chagaroth.death.1=这里, 拿回你的钥匙, 将它变成有用的.
 message.chagaroth.death.2=在我后面的箱子上写着 "恐惧之地的传奇宝藏",
 message.chagaroth.death.3=是在我被牵涉进来之前的挖矿的人所遗留的.
 message.chagaroth.death.4=不要抱太大的希望, 我打赌这只不过是一块泥土或者别的.
-message.jzahar.death.dev=我依旧是一个in-dev boss, 所以你无法确切地杀死我.
-message.jzahar.banish.vanilla=I never asked to be within the same dimension as you. Begone, foul beast!
-message.jzahar.banish.ac=Ahem... I thought I gave you an assignment aeons ago, did it ever occur to you that it was permanent?
-message.jzahar.banish.jzh=There can only be ONE! *Creates sword out of thin air*
-message.jzahar.creative.1=%s, you do realize I could simply switch your Gamemode and slaughter you right now? I'm that kind of Entity.
-message.jzahar.creative.2=But yeah... that would technically be cheating, so I'll just stick to the "rules" and do nothing.
+message.jzahar.death.dev=我依旧是一个在发展中的boss, 所以你无法确切地杀死我.
+message.jzahar.banish.vanilla=我从未想过和你待在同一个维度里. 滚开, 恶心的怪物!
+message.jzahar.banish.ac=呃哼... 我想起在亿万年前我曾给过你一个任命 , 你可曾想到那是永远存在的?
+message.jzahar.banish.jzh=那只有唯一的一个! *凭空创造出剑来*
+message.jzahar.creative.1=%s, 你可否意识到现在我就可以轻松地切换你的游戏模式并杀死你? 我就是那样的实体.
+message.jzahar.creative.2=不过... 严格上说那是作弊, 所以我还是会坚守 "规则" 和不做任何事情.
 message.sacthoth.spawn.1=我解放了! 凡人, 感受黑暗之域的愤怒吧.
 message.sacthoth.spawn.2=但首先, 观看这爆炸吧.
 message.sacthoth.damage.explosion=我忘了告诉你\u00A7o并不能\u00A7r把我炸伤, 这并没有用.
 message.sacthoth.damage.projectile=哈, 你的投射物对我无效.
 message.portalplacer.error.1=你感受到一种被抛弃的感觉, 扎哈尔并没有批准你.
 message.portalplacer.error.2=没有任何事情发生...
-message.necronomicon.nope=It appears that you don't own this book. Ever thought about not trying to read it?
+message.necronomicon.nope=似乎你还没拥有这本书. 你可曾想过不去尝试读它?
 
 #Container Inventories
 container.abyssalcraft.crate=板条箱
@@ -125,38 +125,38 @@ container.abyssalcraft.materializer=Materializer
 container.abyssalcraft.crystallizer.nei=结晶化
 container.abyssalcraft.transmutator.nei=嬗变化
 container.abyssalcraft.engraver.nei=钱币铸造
-container.abyssalcraft.materializer.nei=Materialization
+container.abyssalcraft.materializer.nei=具现化
 
 #Necronomicon Labels
-necronomicon.index=Index
-necronomicon.information=Forbidden Knowledge
-necronomicon.spells=Spellbook
-necronomicon.rituals=Rituals
-necronomicon.huh=What is this book?
-necronomicon.information.ac=AbyssalCraft
-necronomicon.information.goo=The Great Old Ones
-necronomicon.information.abyssalnomicon=The Abyssalnomicon
-necronomicon.information.overworld=Overworld
-necronomicon.information.overworld.title=The Overworld
-necronomicon.information.abyssal=Abyssal Wasteland
-necronomicon.information.abyssal.title=The Abyssal Wasteland
-necronomicon.information.dreadlands=Dreadlands
-necronomicon.information.dreadlands.title=The Dreadlands
-necronomicon.information.omothol=Omothol
-necronomicon.information.omothol.title=Omothol
-necronomicon.information.darkrealm=Dark Realm
-necronomicon.information.darkrealm.title=The Dark Realm
-necronomicon.information.materials=Materials
-necronomicon.information.progression=Progression
-necronomicon.information.integration=Integrations
-necronomicon.information.entities=Entities
+necronomicon.index=索引
+necronomicon.information=禁忌知识
+necronomicon.spells=咒语书
+necronomicon.rituals=仪式
+necronomicon.huh=这本书是什么?
+necronomicon.information.ac=深渊国度
+necronomicon.information.goo=旧日支配者
+necronomicon.information.abyssalnomicon=深渊之书
+necronomicon.information.overworld=主世界
+necronomicon.information.overworld.title=主世界
+necronomicon.information.abyssal=深渊荒芜之地
+necronomicon.information.abyssal.title=深渊荒芜之地
+necronomicon.information.dreadlands=恐惧之地
+necronomicon.information.dreadlands.title=恐惧之地
+necronomicon.information.omothol=奥穆索
+necronomicon.information.omothol.title=奥穆索
+necronomicon.information.darkrealm=暗黑王国
+necronomicon.information.darkrealm.title=暗黑王国
+necronomicon.information.materials=材料
+necronomicon.information.progression=发展
+necronomicon.information.integration=整合
+necronomicon.information.entities=实体
 
 #Necronomicon Text
 #Note: the maximum amount of letters per string is 256
 #The following text example has the letter limit:
 #Lorem ipsum dolor sit amet, ad dicit prompta ullamcorper nam, quando ubique intellegat nam eu, ad dolore mollis has. Sint debet eum te. At dicunt liberavisse mea. Ea minimum sententiae ius, ei duo timeam virtute. Aliquid graecis eu usu, ea dignissim conse.
 #Anything longer than that will trigger a crash when you try to read it
-necronomicon.text.necronomicon.1=This is the Necronomicon, a book written by Abdul Alhazred, also known as "The Mad Arab". The book contains knowledge about The Great Old Ones, their names and how to summon them. There is also information about spells and rituals the book can perform.
+necronomicon.text.necronomicon.1=这是死灵之书, 一本由Abdul Alhazred所写的书, 熟知为 "The Mad Arab". 这本书囊括了旧日支配者的知识, 他们的名字和怎么去召唤他们. 里面同样有关于这本书所能举行的咒语和仪式的信息.
 necronomicon.text.necronomicon.2=The Necronomicon itself is a chapter of the Abyssalnomicon, which was read to Alhazred by a demon known as J'zahar, who had composed the Abyssalnomicon from infinite knowledge known to The Great Old Ones.
 necronomicon.text.necronomicon.3=There are 4 types of Necronomicons within the Abyssalnomicon: The Necronomicon, The Abyssal Wasteland Necronomicon, knowledge bound to a specific dimension.
 necronomicon.text.necronomicon.4=In order to unlock the knowledge, one must travel to said dimension and empower the Necronoicon with the flesh of that world. The Abyssalnomicon contains additional knowledge known only to J'zahar, knowledge man was not meant to obtain.
@@ -331,7 +331,7 @@ necronomicon.text.integration.morph.2=When morphed into entities that has specia
 
 necronomicon.text.integration.invtweaks.1=With Inventory Tweaks installed, you can sort items kept in the Crystal Bags with sorting buttons like with any other supported container.
 
-necronomicon.text.wip=This section is incomplete.
+necronomicon.text.wip=这部分还未完成.
 
 #Configuration
 ac_dimensions=维度
@@ -342,8 +342,8 @@ ac_biomegen=生物群落生成
 ac_biomegen.tooltip=生物群落生成设置
 ac_biomespawn=生物群落生成物
 ac_biomespawn.tooltip=生物群落生成物设置
-ac_biomeweight=Biome Weight
-ac_biomeweight.tooltip=Biome Weight Configuration
+ac_biomeweight=生物群落权重
+ac_biomeweight.tooltip=生物群落权重设置
 ac_general=总体
 ac_general.tooltip=总体设置
 ac_enchantment=附魔
@@ -394,7 +394,7 @@ tooltip.crystal=分子式
 tooltip.portalplacerjzh.1=只能在
 tooltip.portalplacerjzh.2=恐惧之地使用
 tooltip.soulreaper=灵魂收割
-tooltip.crystalbag=This bag holds crystallized elements
+tooltip.crystalbag=这个背包可存储结晶化的元素
 
 #Creative Tabs
 itemgroup.acblocks=深渊国度方块
@@ -526,15 +526,15 @@ tile.BOE.name=伊桑斯锭块
 tile.OG.name=奥穆索之门
 tile.Ofire.name=奥穆索之火
 tile.engraver.name=铸造器
-tile.house.name=A House
-tile.materializer.name=Materializer
-tile.DEB.0.name=Dark Ethaxium Brick
-tile.DEB.1.name=Chiseled Dark Ethaxium Brick
-tile.DEBP.name=Dark Ethaxium Pillar
-tile.DEBs.name=Dark Ethaxium Brick Stairs
-tile.DEBs1.name=Dark Ethaxium Brick Slab
-tile.DEBs2.name=Dark Ethaxium Brick Doubleslab
-tile.DEBf.name=Dark Ethaxium Brick Fence
+tile.house.name=一个房子
+tile.materializer.name=具现化器
+tile.DEB.0.name=深色伊桑斯砖块
+tile.DEB.1.name=錾制深色伊桑斯砖块
+tile.DEBP.name=深色伊桑斯柱
+tile.DEBs.name=深色伊桑斯砖块楼梯
+tile.DEBs1.name=深色伊桑斯砖块台阶
+tile.DEBs2.name=深色伊桑斯砖块双层台阶
+tile.DEBf.name=深色伊桑斯砖块栅栏
 
 #Items
 item.DEV_BLADE.name=恶魔之刃
@@ -708,33 +708,33 @@ item.AEH.name=伊桑斯头盔
 item.AEC.name=伊桑斯胸甲
 item.AEP.name=伊桑斯护腿
 item.EthU.name=伊桑斯升级套件
-item.coin.name=Coin
-item.cthulhucoin.name=Cthulhu Engraved Coin
-item.eldercoin.name=Elder Engraved Coin
-item.jzaharcoin.name=J'zahar Engraved Coin
+item.coin.name=硬币
+item.cthulhucoin.name=刻有克苏鲁的硬币
+item.eldercoin.name=刻有接骨木的硬币
+item.jzaharcoin.name=刻有扎哈尔的硬币
 item.engraving.blank.name=空白硬币雕刻
 item.engraving.cthulhu.name=克苏鲁硬币雕刻
 item.engraving.elder.name=接骨木硬币雕刻
 item.engraving.jzahar.name=扎哈尔硬币雕刻
 item.eldirtchScale.name=邪术鳞片
 item.omotholflesh.name=奥穆索食尸鬼的肉
-item.antiCF.name=Anti-plagued Flesh
-item.antiCB.name=Anti-plagued Flesh on A Bone
+item.antiCF.name=反物质腐肉
+item.antiCB.name=反物质带骨头的腐肉
 item.shoggothFlesh.overworld.name=修格斯的肉
 item.shoggothFlesh.abyssalwasteland.name=深渊修格斯的肉
 item.shoggothFlesh.dreadlands.name=恐惧修格斯的肉
 item.shoggothFlesh.omothol.name=奥穆索修格斯的肉
 item.shoggothFlesh.darkrealm.name=阴影修格斯的肉
 item.shadowplate.name=阴影泰坦甲板
-item.necronomicon.name=Necronomicon
-item.necronomicon_cor.name=Abyssal Wasteland Necronomicon
-item.necronomicon_dre.name=Dreadlands Necronomicon
-item.necronomicon_omt.name=Omothol Necronomicon
-item.abyssalnomicon.name=Abyssalnomicon
-item.crystalbag_small.name=Small Crystal Bag
-item.crystalbag_medium.name=Medium Crystal Bag
-item.crystalbag_large.name=Large Crystal Bag
-item.crystalbag_huge.name=Huge Crystal Bag
+item.necronomicon.name=死灵之书
+item.necronomicon_cor.name=深渊荒芜之地死灵之书
+item.necronomicon_dre.name=恐惧之地死灵之书
+item.necronomicon_omt.name=奥穆索死灵之书
+item.abyssalnomicon.name=深渊之书
+item.crystalbag_small.name=小型晶体背包
+item.crystalbag_medium.name=中型型晶体背包
+item.crystalbag_large.name=大型型晶体背包
+item.crystalbag_huge.name=超大型型晶体背包
 
 #Entities
 entity.abyssalcraft.depthsghoul.name=深渊食尸鬼
