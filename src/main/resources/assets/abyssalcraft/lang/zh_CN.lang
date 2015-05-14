@@ -128,7 +128,7 @@ container.abyssalcraft.engraver.nei=钱币铸造
 container.abyssalcraft.materializer.nei=Materialization
 
 #Necronomicon Labels
-necronomicon.index=Index
+necronomicon.index=目录
 necronomicon.information=Forbidden Knowledge
 necronomicon.spells=Spellbook
 necronomicon.rituals=Rituals
