@@ -288,8 +288,6 @@ public class AbyssalCraft {
 	particleBlock, particleEntity;
 	public static int evilPigSpawnRate;
 
-	static int startEntityId = 300;
-
 	public static final int crystallizerGuiID = 30;
 	public static final int transmutatorGuiID = 31;
 	public static final int engraverGuiID = 32;
@@ -1894,17 +1892,9 @@ public class AbyssalCraft {
 		SalvageHandler.INSTANCE.addLeggingsSalvage(Items.diamond_leggings, Items.diamond);
 	}
 
-	private static int getUniqueEntityId() {
-		do
-			startEntityId++;
-		while (EntityList.getStringFromID(startEntityId) != null);
-
-		return startEntityId;
-	}
-
 	@SuppressWarnings("unchecked")
 	private static void registerEntityWithEgg(Class<? extends Entity> entity, String name, int modid, int trackingRange, int updateFrequency, boolean sendsVelocityUpdates, int primaryColor, int secondaryColor) {
-		int id = getUniqueEntityId();
+		int id = EntityRegistry.findGlobalUniqueEntityId();
 		stringtoIDMapping.put(name, id);
 		EntityRegistry.registerGlobalEntityID(entity, name, id);
 		EntityRegistry.registerModEntity(entity, name, modid, AbyssalCraft.instance, trackingRange, updateFrequency, sendsVelocityUpdates);
