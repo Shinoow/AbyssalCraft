@@ -67,7 +67,7 @@ public class EntityChagaroth extends EntityMob implements IBossDisplayData, IDre
 	@Override
 	public String getCommandSenderName()
 	{
-		return EnumChatFormatting.DARK_RED + StatCollector.translateToLocalFormatted("entity.abyssalcraft.chagaroth.name");
+		return EnumChatFormatting.DARK_RED + StatCollector.translateToLocalFormatted("entity.chagaroth.name");
 	}
 
 	@Override

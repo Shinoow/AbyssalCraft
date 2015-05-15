@@ -18,7 +18,6 @@ package com.shinoow.abyssalcraft.common.blocks;
 
 import java.util.Random;
 
-import net.minecraft.block.Block;
 import net.minecraft.block.BlockSlab;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -53,17 +52,11 @@ public class BlockDarkstoneSlabDouble extends BlockSlab {
 		return AbyssalCraft.Darkstoneslab1.getItemDropped(par1, par2Random, par3);
 	}
 
-	@SideOnly(Side.CLIENT)
-	private static boolean func_150003_a(Block p_150003_0_)
-	{
-		return p_150003_0_ == AbyssalCraft.Darkstoneslab2;
-	}
-
 	@Override
 	@SideOnly(Side.CLIENT)
 	public Item getItem(World par1World, int par2, int par3, int par4)
 	{
-		return func_150003_a(this) ? Item.getItemFromBlock(this) : this == AbyssalCraft.Darkstoneslab2 ? Item.getItemFromBlock(AbyssalCraft.Darkstoneslab1) : Item.getItemFromBlock(AbyssalCraft.Darkstoneslab1);
+		return Item.getItemFromBlock(AbyssalCraft.Darkstoneslab1);
 	}
 
 	@Override

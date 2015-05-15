@@ -111,17 +111,17 @@ public class EntityLesserShoggoth extends EntityMob implements ICoraliumEntity, 
 		switch (getShoggothType())
 		{
 		case 0:
-			return StatCollector.translateToLocal("entity.abyssalcraft.lessershoggoth.name");
+			return StatCollector.translateToLocal("entity.lessershoggoth.name");
 		case 1:
-			return StatCollector.translateToLocal("entity.abyssalcraft.lessershoggoth.abyssal.name");
+			return StatCollector.translateToLocal("entity.lessershoggoth.abyssal.name");
 		case 2:
-			return StatCollector.translateToLocal("entity.abyssalcraft.lessershoggoth.dreaded.name");
+			return StatCollector.translateToLocal("entity.lessershoggoth.dreaded.name");
 		case 3:
-			return StatCollector.translateToLocal("entity.abyssalcraft.lessershoggoth.omothol.name");
+			return StatCollector.translateToLocal("entity.lessershoggoth.omothol.name");
 		case 4:
-			return StatCollector.translateToLocal("entity.abyssalcraft.lessershoggoth.dark.name");
+			return StatCollector.translateToLocal("entity.lessershoggoth.dark.name");
 		default:
-			return StatCollector.translateToLocal("entity.abyssalcraft.lessershoggoth.name");
+			return StatCollector.translateToLocal("entity.lessershoggoth.name");
 		}
 	}
 

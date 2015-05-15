@@ -88,7 +88,7 @@ public class EntitySacthoth extends EntityMob implements IBossDisplayData, IAnti
 	@Override
 	public String getCommandSenderName()
 	{
-		return EnumChatFormatting.DARK_RED + StatCollector.translateToLocalFormatted("entity.abyssalcraft.shadowboss.name");
+		return EnumChatFormatting.DARK_RED + StatCollector.translateToLocalFormatted("entity.shadowboss.name");
 	}
 
 	@Override

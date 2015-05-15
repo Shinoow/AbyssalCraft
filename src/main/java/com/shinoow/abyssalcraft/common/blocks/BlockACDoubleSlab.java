@@ -28,26 +28,23 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockACDoubleSlab extends BlockSlab {
 
-	private static Block singleSlab;
-	private static Block doubleSlab;
+	private Block singleSlab;
 
-	public BlockACDoubleSlab(Block par1SingleSlab, Block par2DoubleSlab, Material par3Material, String tooltype, int harvestlevel)
+	public BlockACDoubleSlab(Block par1SingleSlab, Material par3Material, String tooltype, int harvestlevel)
 	{
 		super(true, par3Material);
 		setCreativeTab(null);
 		setLightOpacity(0);
 		singleSlab = par1SingleSlab;
-		doubleSlab = par2DoubleSlab;
 		setHarvestLevel(tooltype, harvestlevel);
 	}
 
-	public BlockACDoubleSlab(Block par1SingleSlab, Block par2DoubleSlab, Material par3Material)
+	public BlockACDoubleSlab(Block par1SingleSlab, Material par3Material)
 	{
 		super(true, par3Material);
 		setCreativeTab(null);
 		setLightOpacity(0);
 		singleSlab = par1SingleSlab;
-		doubleSlab = par2DoubleSlab;
 	}
 
 	@Override
@@ -56,17 +53,11 @@ public class BlockACDoubleSlab extends BlockSlab {
 		return singleSlab.getItemDropped(par1, par2Random, par3);
 	}
 
-	@SideOnly(Side.CLIENT)
-	private static boolean func_150003_a(Block p_150003_0_)
-	{
-		return p_150003_0_ == doubleSlab;
-	}
-
 	@Override
 	@SideOnly(Side.CLIENT)
 	public Item getItem(World par1World, int par2, int par3, int par4)
 	{
-		return func_150003_a(this) ? Item.getItemFromBlock(this) : this == doubleSlab ? Item.getItemFromBlock(singleSlab) : Item.getItemFromBlock(doubleSlab);
+		return Item.getItemFromBlock(singleSlab);
 	}
 
 	@Override

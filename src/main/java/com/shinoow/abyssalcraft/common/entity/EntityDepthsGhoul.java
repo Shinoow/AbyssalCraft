@@ -112,7 +112,7 @@ public class EntityDepthsGhoul extends EntityMob implements ICoraliumEntity {
 		switch (getGhoulType())
 		{
 		case 0:
-			return StatCollector.translateToLocal("entity.abyssalcraft.depthsghoul.name");
+			return StatCollector.translateToLocal("entity.depthsghoul.name");
 		case 1:
 			return "Pete";
 		case 2:
@@ -120,7 +120,7 @@ public class EntityDepthsGhoul extends EntityMob implements ICoraliumEntity {
 		case 3:
 			return "Dr. Orange";
 		default:
-			return StatCollector.translateToLocal("entity.abyssalcraft.depthsghoul.name");
+			return StatCollector.translateToLocal("entity.depthsghoul.name");
 		}
 	}
 

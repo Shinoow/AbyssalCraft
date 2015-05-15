@@ -84,7 +84,7 @@ public class EntityJzahar extends EntityMob implements IBossDisplayData, IRanged
 	@Override
 	public String getCommandSenderName()
 	{
-		return EnumChatFormatting.BLUE + StatCollector.translateToLocalFormatted("entity.abyssalcraft.Jzahar.name");
+		return EnumChatFormatting.BLUE + StatCollector.translateToLocalFormatted("entity.Jzahar.name");
 	}
 
 	@Override

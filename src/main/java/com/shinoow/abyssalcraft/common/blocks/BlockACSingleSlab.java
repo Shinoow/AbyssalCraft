@@ -18,7 +18,6 @@ package com.shinoow.abyssalcraft.common.blocks;
 
 import java.util.Random;
 
-import net.minecraft.block.Block;
 import net.minecraft.block.BlockSlab;
 import net.minecraft.block.material.Material;
 import net.minecraft.item.Item;
@@ -31,26 +30,19 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockACSingleSlab extends BlockSlab {
 
-	private static Block singleSlab;
-	private static Block doubleSlab;
-
-	public BlockACSingleSlab(Block par1SingleSlab, Block par2DoubleSlab, Material par3Material, String tooltype, int harvestlevel)
+	public BlockACSingleSlab(Material par3Material, String tooltype, int harvestlevel)
 	{
 		super(false, par3Material);
 		setCreativeTab(AbyssalCraft.tabBlock);
 		setLightOpacity(0);
-		singleSlab = par1SingleSlab;
-		doubleSlab = par2DoubleSlab;
 		setHarvestLevel(tooltype, harvestlevel);
 	}
 
-	public BlockACSingleSlab(Block par1SingleSlab, Block par2DoubleSlab, Material par3Material)
+	public BlockACSingleSlab(Material par3Material)
 	{
 		super(false, par3Material);
 		setCreativeTab(AbyssalCraft.tabBlock);
 		setLightOpacity(0);
-		singleSlab = par1SingleSlab;
-		doubleSlab = par2DoubleSlab;
 	}
 
 	@Override
@@ -59,17 +51,11 @@ public class BlockACSingleSlab extends BlockSlab {
 		return Item.getItemFromBlock(this);
 	}
 
-	@SideOnly(Side.CLIENT)
-	private static boolean func_150003_a(Block p_150003_0_)
-	{
-		return p_150003_0_ == singleSlab;
-	}
-
 	@Override
 	@SideOnly(Side.CLIENT)
 	public Item getItem(World par1World, int par2, int par3, int par4)
 	{
-		return func_150003_a(this) ? Item.getItemFromBlock(this) : this == doubleSlab ? Item.getItemFromBlock(singleSlab) : Item.getItemFromBlock(singleSlab);
+		return Item.getItemFromBlock(this);
 	}
 
 	@Override

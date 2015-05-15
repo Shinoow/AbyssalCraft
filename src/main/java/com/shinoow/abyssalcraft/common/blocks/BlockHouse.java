@@ -52,7 +52,8 @@ public class BlockHouse extends Block {
 				par1World.setBlock(par2, par3, par4 - 1, Blocks.stone_stairs, 3, 3);
 				for(int i = 0; i <= 4; i++)
 					for(int j = 0; j <= 4; j++)
-						par1World.setBlock(par2 -2 + i, par3, par4 - (2 + j), Blocks.cobblestone); for(int i = 0; i <= 2; i++){
+						par1World.setBlock(par2 -2 + i, par3, par4 - (2 + j), Blocks.cobblestone);
+				for(int i = 0; i <= 2; i++){
 					par1World.setBlock(par2 - 1, par3 + 1 + i, par4 - 2, Blocks.planks);
 					par1World.setBlock(par2 + 1, par3 + 1 + i, par4 - 2, Blocks.planks);
 					for(int j = 0; j <= 2; j++)
@@ -72,10 +73,10 @@ public class BlockHouse extends Block {
 				for(int i = 0; i <= 2; i++)
 					for(int j = 0; j <= 2; j++)
 						par1World.setBlock(par2 -1 + i, par3 + 4, par4 - (3 + j), Blocks.planks); for(int i = 0; i <= 2; i++)
-					for(int j = 0; j <= 1; j++){
-						par1World.setBlock(par2 - 2, par3 + 1 + i, par4 - (2 + j*4), Blocks.cobblestone);
-						par1World.setBlock(par2 + 2, par3 + 1 + i, par4 - (2 + j*4), Blocks.cobblestone);
-					}
+							for(int j = 0; j <= 1; j++){
+								par1World.setBlock(par2 - 2, par3 + 1 + i, par4 - (2 + j*4), Blocks.cobblestone);
+								par1World.setBlock(par2 + 2, par3 + 1 + i, par4 - (2 + j*4), Blocks.cobblestone);
+							}
 			}
 		}
 		return false;

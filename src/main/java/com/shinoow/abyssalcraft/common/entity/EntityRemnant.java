@@ -16,44 +16,21 @@
  */
 package com.shinoow.abyssalcraft.common.entity;
 
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.Random;
+import java.util.*;
 
 import net.minecraft.block.Block;
-import net.minecraft.enchantment.Enchantment;
-import net.minecraft.enchantment.EnchantmentData;
-import net.minecraft.enchantment.EnchantmentHelper;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.IEntityLivingData;
-import net.minecraft.entity.IMerchant;
-import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.EntityAIAttackOnCollide;
-import net.minecraft.entity.ai.EntityAIHurtByTarget;
-import net.minecraft.entity.ai.EntityAILookIdle;
-import net.minecraft.entity.ai.EntityAIMoveTowardsRestriction;
-import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
-import net.minecraft.entity.ai.EntityAISwimming;
-import net.minecraft.entity.ai.EntityAIWander;
-import net.minecraft.entity.ai.EntityAIWatchClosest;
+import net.minecraft.enchantment.*;
+import net.minecraft.entity.*;
+import net.minecraft.entity.ai.*;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
+import net.minecraft.item.*;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.potion.Potion;
-import net.minecraft.potion.PotionEffect;
-import net.minecraft.util.DamageSource;
-import net.minecraft.util.MathHelper;
-import net.minecraft.util.StatCollector;
-import net.minecraft.util.Tuple;
-import net.minecraft.village.MerchantRecipe;
-import net.minecraft.village.MerchantRecipeList;
+import net.minecraft.potion.*;
+import net.minecraft.util.*;
+import net.minecraft.village.*;
 import net.minecraft.world.World;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
@@ -78,12 +55,13 @@ public class EntityRemnant extends EntityMob implements IMerchant, IAntiEntity, 
 	public EntityRemnant(World par1World) {
 		super(par1World);
 		tasks.addTask(0, new EntityAISwimming(this));
-		tasks.addTask(3, new EntityAIAttackOnCollide(this, EntityPlayer.class, 0.35D, false));
+		tasks.addTask(3, new EntityAIAttackOnCollide(this, EntityLivingBase.class, 0.35D, false));
 		tasks.addTask(4, new EntityAIMoveTowardsRestriction(this, 0.35D));
 		tasks.addTask(5, new EntityAIWander(this, 0.35D));
 		tasks.addTask(7, new EntityAILookIdle(this));
 		tasks.addTask(7, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
 		tasks.addTask(7, new EntityAIWatchClosest(this, EntityRemnant.class, 8.0F));
+		tasks.addTask(7, new EntityAIWatchClosest(this, EntityGatekeeperMinion.class, 8.0F));
 		targetTasks.addTask(1, new EntityAIHurtByTarget(this, false));
 	}
 
@@ -160,7 +138,7 @@ public class EntityRemnant extends EntityMob implements IMerchant, IAntiEntity, 
 		if(isEntityAlive() && !isTrading() && !par1EntityPlayer.isSneaking() && !isAngry){
 			if(!worldObj.isRemote){
 				setCustomer(par1EntityPlayer);
-				par1EntityPlayer.displayGUIMerchant(this, StatCollector.translateToLocal("entity.abyssalcraft.remnant.name"));
+				par1EntityPlayer.displayGUIMerchant(this, StatCollector.translateToLocal("entity.remnant.name"));
 			}
 
 			return true;
@@ -177,6 +155,16 @@ public class EntityRemnant extends EntityMob implements IMerchant, IAntiEntity, 
 	}
 
 	/**
+	 * Used by Minions of The Gatekeeper to set the attack target and enrage the Remnant
+	 * @param call If the Remnant should call for backup
+	 * @param enemy The target
+	 */
+	public void enrage(boolean call, EntityLivingBase enemy){
+		setTarget(enemy);
+		enrage(call);
+	}
+
+	/**
 	 * Calling this method will make the Remnant hostile.
 	 * Ever wanted to see a angry Remnant? No you don't.
 	 * @param call If the Remnant should call for backup
@@ -187,22 +175,27 @@ public class EntityRemnant extends EntityMob implements IMerchant, IAntiEntity, 
 			if(friends != null){
 				Iterator<EntityRemnant> iter = friends.iterator();
 				while(iter.hasNext())
-					iter.next().enrage(false);
+					iter.next().enrage(false, (EntityLivingBase) entityToAttack);
 			}
 			worldObj.playSoundAtEntity(this, "abyssalcraft:remnant.scream", 3F, 1F);
 		}
 
 		isAngry = true;
 		timer = 0;
-		targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityPlayer.class, 0, true));
+		if(entityToAttack != null)
+			targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, entityToAttack.getClass(), 0, true));
 	}
 
 	@Override
 	public boolean attackEntityFrom(DamageSource par1DamageSource, float par2)
 	{
-		if(par1DamageSource.getEntity() instanceof EntityPlayer)
-			if(!isAngry) enrage(true);
-			else enrage(rand.nextInt(10) == 0);
+		if(par1DamageSource.getSourceOfDamage() instanceof EntityLivingBase)
+			if(entityToAttack != par1DamageSource.getSourceOfDamage()){
+				entityToAttack = par1DamageSource.getEntity();
+				enrage(true, (EntityLivingBase) entityToAttack);
+			}
+		if(!isAngry) enrage(true);
+		else enrage(rand.nextInt(10) == 0);
 		return super.attackEntityFrom(par1DamageSource, par2);
 	}
 
@@ -210,11 +203,12 @@ public class EntityRemnant extends EntityMob implements IMerchant, IAntiEntity, 
 	public void onLivingUpdate(){
 		super.onLivingUpdate();
 		if(isAngry){
-			targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityPlayer.class, 0, true));
+			if(entityToAttack != null)
+				targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, entityToAttack.getClass(), 0, true));
 			timer++;
 			if(timer == 2400){
 				isAngry = false;
-				targetTasks.removeTask(new EntityAINearestAttackableTarget(this, EntityPlayer.class, 0, true));
+				targetTasks.removeTask(new EntityAINearestAttackableTarget(this, entityToAttack.getClass(), 0, true));
 			}
 		}
 	}

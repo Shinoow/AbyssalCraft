@@ -104,7 +104,7 @@ public class EntityDragonBoss extends EntityMob implements IBossDisplayData, IEn
 	@Override
 	public String getCommandSenderName()
 	{
-		return EnumChatFormatting.AQUA + StatCollector.translateToLocal("entity.abyssalcraft.dragonboss.name");
+		return EnumChatFormatting.AQUA + StatCollector.translateToLocal("entity.dragonboss.name");
 	}
 
 	@Override

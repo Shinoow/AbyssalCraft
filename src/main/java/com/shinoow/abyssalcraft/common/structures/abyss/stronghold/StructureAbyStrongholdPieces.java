@@ -593,7 +593,7 @@ public class StructureAbyStrongholdPieces
 					TileEntityMobSpawner tileentitymobspawner = (TileEntityMobSpawner)par1World.getTileEntity(k, i1, l);
 
 					if (tileentitymobspawner != null)
-						tileentitymobspawner.func_145881_a().setEntityName("Zombie");
+						tileentitymobspawner.func_145881_a().setEntityName("dreadspawn");
 				}
 			}
 

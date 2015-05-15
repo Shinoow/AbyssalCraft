@@ -21,6 +21,7 @@ import java.util.List;
 
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIAttackOnCollide;
@@ -47,11 +48,13 @@ public class EntityGatekeeperMinion extends EntityMob implements ICoraliumEntity
 	public EntityGatekeeperMinion(World par1World) {
 		super(par1World);
 		tasks.addTask(0, new EntityAISwimming(this));
-		tasks.addTask(2, new EntityAIAttackOnCollide(this, EntityPlayer.class, 0.35D, false));
+		tasks.addTask(2, new EntityAIAttackOnCollide(this, EntityLivingBase.class, 0.35D, false));
 		tasks.addTask(3, new EntityAIMoveTowardsRestriction(this, 0.35D));
 		tasks.addTask(4, new EntityAIWander(this, 0.35D));
 		tasks.addTask(7, new EntityAILookIdle(this));
 		tasks.addTask(7, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
+		tasks.addTask(7, new EntityAIWatchClosest(this, EntityGatekeeperMinion.class, 8.0F));
+		tasks.addTask(7, new EntityAIWatchClosest(this, EntityRemnant.class, 8.0F));
 		targetTasks.addTask(1, new EntityAIHurtByTarget(this, false));
 		targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityPlayer.class, 0, true));
 		setSize(1.4F, 2.8F);
@@ -103,13 +106,17 @@ public class EntityGatekeeperMinion extends EntityMob implements ICoraliumEntity
 	@Override
 	public boolean attackEntityFrom(DamageSource par1DamageSource, float par2)
 	{
+		EntityLivingBase enemy = null;
+		if(par1DamageSource.getSourceOfDamage() != null && par1DamageSource.getSourceOfDamage() instanceof EntityLivingBase)
+			enemy = (EntityLivingBase) par1DamageSource.getSourceOfDamage();
 		if(rand.nextInt(10) == 0){
 			List<EntityRemnant> remnants = worldObj.getEntitiesWithinAABB(EntityRemnant.class, boundingBox.expand(16D, 16D, 16D));
-			if(remnants != null){
-				Iterator<EntityRemnant> iter = remnants.iterator();
-				while(iter.hasNext())
-					iter.next().enrage(false);
-			}
+			if(remnants != null)
+				if(enemy != null){
+					Iterator<EntityRemnant> iter = remnants.iterator();
+					while(iter.hasNext())
+						iter.next().enrage(false, enemy);
+				}
 			worldObj.playSoundAtEntity(this, "abyssalcraft:remnant.scream", 3F, 1F);
 		}
 		return super.attackEntityFrom(par1DamageSource, par2);
