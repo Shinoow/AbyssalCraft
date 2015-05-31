@@ -1,19 +1,14 @@
-/**
+/*******************************************************************************
  * AbyssalCraft
- * Copyright 2012-2015 Shinoow
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *  http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
+ * Copyright (c) 2012 - 2015 Shinoow.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the GNU Lesser Public License v3
+ * which accompanies this distribution, and is available at
+ * http://www.gnu.org/licenses/lgpl-3.0.txt
+ * 
+ * Contributors:
+ *     Shinoow -  implementation
+ ******************************************************************************/
 package com.shinoow.abyssalcraft.api.necronomicon;
 
 import net.minecraft.item.ItemStack;
@@ -41,6 +36,15 @@ public class NecroData {
 		this.title = title;
 		pageData = datas;
 		information = info;
+	}
+
+	/**
+	 * The base data structure for Necronomicon information pages
+	 * @param title Title to display on the "Index" for the information page
+	 * @param datas Page data for sub-category pages
+	 */
+	public NecroData(String title,PageData...datas){
+		this(title, null, datas);
 	}
 
 	/**
@@ -79,6 +83,8 @@ public class NecroData {
 			return pageData[index].icons;
 		case INFO:
 			return pageData[index].pictures;
+		case CRAFTING:
+			return pageData[index].recipes;
 		default:
 			return null;
 		}
@@ -114,16 +120,22 @@ public class NecroData {
 		return datas[index].pageNumber;
 	}
 
+	@Override
+	public String toString(){
+		return "NecroData{Title: "+title + ",Information: "+(information != null ? "Yes" : "No") +",PageData: "+pageData.toString() +"}";
+	}
+
 	public static class PageData{
 		private String[] pages;
 		private int pageNumber;
 		private String title;
 		private ItemStack[] icons;
+		private CraftingStack[] recipes;
 		private ResourceLocation[] pictures;
 		private PageType type;
 
 		public enum PageType {
-			NORMAL, ENTRY, INFO
+			NORMAL, ENTRY, INFO, CRAFTING
 		}
 
 		/**
@@ -157,6 +169,8 @@ public class NecroData {
 						icons = (ItemStack[])stuff;
 					else if(type.equals(PageType.INFO))
 						pictures = (ResourceLocation[])stuff;
+					else if(type.equals(PageType.CRAFTING))
+						recipes = (CraftingStack[])stuff;
 				} else throw new IndexOutOfBoundsException("Not enough elements in the Object array! ("+num+" turn-up(s), "+icons.length+" Objects");
 			if(strings.length/2 <= num)
 				pages = strings;
@@ -198,6 +212,8 @@ public class NecroData {
 				return icons[index];
 			case INFO:
 				return pictures[index];
+			case CRAFTING:
+				return recipes[index];
 			default:
 				return null;
 			}
@@ -213,6 +229,8 @@ public class NecroData {
 				return icons;
 			case INFO:
 				return pictures;
+			case CRAFTING:
+				return recipes;
 			default:
 				return null;
 			}
@@ -224,6 +242,11 @@ public class NecroData {
 		 */
 		public PageType getPageType(){
 			return type;
+		}
+
+		@Override
+		public String toString(){
+			return "PageData{PageType: "+ type + ",Pages: "+pageNumber/2 +",Objects:"+getIcons().toString() +"}";
 		}
 	}
 }

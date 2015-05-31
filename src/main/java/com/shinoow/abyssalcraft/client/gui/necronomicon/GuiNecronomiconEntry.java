@@ -1,28 +1,25 @@
-/**
+/*******************************************************************************
  * AbyssalCraft
- * Copyright 2012-2015 Shinoow
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *  http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
+ * Copyright (c) 2012 - 2015 Shinoow.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the GNU Lesser Public License v3
+ * which accompanies this distribution, and is available at
+ * http://www.gnu.org/licenses/lgpl-3.0.txt
+ * 
+ * Contributors:
+ *     Shinoow -  implementation
+ ******************************************************************************/
 package com.shinoow.abyssalcraft.client.gui.necronomicon;
 
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.GL11;
 
+import com.shinoow.abyssalcraft.api.necronomicon.CraftingStack;
 import com.shinoow.abyssalcraft.api.necronomicon.NecroData;
 import com.shinoow.abyssalcraft.api.necronomicon.NecroData.PageData;
 import com.shinoow.abyssalcraft.client.gui.necronomicon.buttons.ButtonCategory;
 import com.shinoow.abyssalcraft.client.gui.necronomicon.buttons.ButtonNextPage;
+import com.shinoow.abyssalcraft.client.lib.NecronomiconResources;
 
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
@@ -153,6 +150,9 @@ public class GuiNecronomiconEntry extends GuiNecronomicon {
 			case INFO:
 				icons = page.getIcons();
 				break;
+			case CRAFTING:
+				icons = page.getIcons();
+				break;
 			case NORMAL:
 				break;
 			}
@@ -178,6 +178,23 @@ public class GuiNecronomiconEntry extends GuiNecronomicon {
 						drawTexturedModalRect(k, b0, 0, 0, 256, 256);
 					} else writeText(1, page.getPages()[0]);
 					break;
+				case CRAFTING:
+					if(icons != null && icons[0] != null){
+						writeText(1, page.getPages()[0], 100);
+						GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+						mc.renderEngine.bindTexture(NecronomiconResources.CRAFTING);
+						drawTexturedModalRect(k, b0, 0, 0, 256, 256);
+						itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), ((CraftingStack)icons[0]).getOutput(), k + 93, b0 + 52);
+						for(int i = 0; i <= 2; i++){
+							itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), ((CraftingStack)icons[0]).getFirstArray()[i], k + 24 +i*21, b0 + 31);
+							RenderHelper.disableStandardItemLighting();
+							itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), ((CraftingStack)icons[0]).getSecondArray()[i], k + 24 +i*21, b0 + 52);
+							RenderHelper.disableStandardItemLighting();
+							itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), ((CraftingStack)icons[0]).getThirdArray()[i], k + 24 +i*21, b0 + 73);
+							RenderHelper.disableStandardItemLighting();
+						}
+					} else writeText(1, page.getPages()[0]);
+					break;
 				}
 			} else if(currnTurnup == 1 && page.getPageAmount() >= 2){
 				if(page.getPages().length > 3)
@@ -199,6 +216,23 @@ public class GuiNecronomiconEntry extends GuiNecronomicon {
 						mc.renderEngine.bindTexture((ResourceLocation)icons[1]);
 						drawTexturedModalRect(k, b0, 0, 0, 256, 256);
 						writeText(1, page.getPages()[2], 100);
+					} else writeText(1, page.getPages()[2]);
+					break;
+				case CRAFTING:
+					if(icons != null && icons[1] != null){
+						writeText(1, page.getPages()[2], 100);
+						GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+						mc.renderEngine.bindTexture(NecronomiconResources.CRAFTING);
+						drawTexturedModalRect(k, b0, 0, 0, 256, 256);
+						itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), ((CraftingStack)icons[1]).getOutput(), k + 93, b0 + 52);
+						for(int i = 0; i <= 2; i++){
+							itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), ((CraftingStack)icons[1]).getFirstArray()[i], k + 24 +i*21, b0 + 31);
+							RenderHelper.disableStandardItemLighting();
+							itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), ((CraftingStack)icons[1]).getSecondArray()[i], k + 24 +i*21, b0 + 52);
+							RenderHelper.disableStandardItemLighting();
+							itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), ((CraftingStack)icons[1]).getThirdArray()[i], k + 24 +i*21, b0 + 73);
+							RenderHelper.disableStandardItemLighting();
+						}
 					} else writeText(1, page.getPages()[2]);
 					break;
 				}
@@ -224,6 +258,23 @@ public class GuiNecronomiconEntry extends GuiNecronomicon {
 						writeText(1, page.getPages()[4], 100);
 					} else writeText(1, page.getPages()[4]);
 					break;
+				case CRAFTING:
+					if(icons != null && icons[2] != null){
+						writeText(1, page.getPages()[4], 100);
+						GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+						mc.renderEngine.bindTexture(NecronomiconResources.CRAFTING);
+						drawTexturedModalRect(k, b0, 0, 0, 256, 256);
+						itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), ((CraftingStack)icons[2]).getOutput(), k + 93, b0 + 52);
+						for(int i = 0; i <= 2; i++){
+							itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), ((CraftingStack)icons[2]).getFirstArray()[i], k + 24 +i*21, b0 + 31);
+							RenderHelper.disableStandardItemLighting();
+							itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), ((CraftingStack)icons[2]).getSecondArray()[i], k + 24 +i*21, b0 + 52);
+							RenderHelper.disableStandardItemLighting();
+							itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), ((CraftingStack)icons[2]).getThirdArray()[i], k + 24 +i*21, b0 + 73);
+							RenderHelper.disableStandardItemLighting();
+						}
+					} else writeText(1, page.getPages()[4]);
+					break;
 				}
 			} else if(currnTurnup == 3 && page.getPageAmount() >= 4){
 				if(page.getPages().length > 7)
@@ -245,6 +296,23 @@ public class GuiNecronomiconEntry extends GuiNecronomicon {
 						mc.renderEngine.bindTexture((ResourceLocation)icons[3]);
 						drawTexturedModalRect(k, b0, 0, 0, 256, 256);
 						writeText(1, page.getPages()[6], 100);
+					} else writeText(1, page.getPages()[6]);
+					break;
+				case CRAFTING:
+					if(icons != null && icons[3] != null){
+						writeText(1, page.getPages()[6], 100);
+						GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+						mc.renderEngine.bindTexture(NecronomiconResources.CRAFTING);
+						drawTexturedModalRect(k, b0, 0, 0, 256, 256);
+						itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), ((CraftingStack)icons[3]).getOutput(), k + 93, b0 + 52);
+						for(int i = 0; i <= 2; i++){
+							itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), ((CraftingStack)icons[3]).getFirstArray()[i], k + 24 +i*21, b0 + 31);
+							RenderHelper.disableStandardItemLighting();
+							itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), ((CraftingStack)icons[3]).getSecondArray()[i], k + 24 +i*21, b0 + 52);
+							RenderHelper.disableStandardItemLighting();
+							itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), ((CraftingStack)icons[3]).getThirdArray()[i], k + 24 +i*21, b0 + 73);
+							RenderHelper.disableStandardItemLighting();
+						}
 					} else writeText(1, page.getPages()[6]);
 					break;
 				}
@@ -270,6 +338,23 @@ public class GuiNecronomiconEntry extends GuiNecronomicon {
 						writeText(1, page.getPages()[8], 100);
 					} else writeText(1, page.getPages()[8]);
 					break;
+				case CRAFTING:
+					if(icons != null && icons[4] != null){
+						writeText(1, page.getPages()[8], 100);
+						GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+						mc.renderEngine.bindTexture(NecronomiconResources.CRAFTING);
+						drawTexturedModalRect(k, b0, 0, 0, 256, 256);
+						itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), ((CraftingStack)icons[4]).getOutput(), k + 93, b0 + 52);
+						for(int i = 0; i <= 2; i++){
+							itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), ((CraftingStack)icons[4]).getFirstArray()[i], k + 24 +i*21, b0 + 31);
+							RenderHelper.disableStandardItemLighting();
+							itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), ((CraftingStack)icons[4]).getSecondArray()[i], k + 24 +i*21, b0 + 52);
+							RenderHelper.disableStandardItemLighting();
+							itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), ((CraftingStack)icons[4]).getThirdArray()[i], k + 24 +i*21, b0 + 73);
+							RenderHelper.disableStandardItemLighting();
+						}
+					} else writeText(1, page.getPages()[8]);
+					break;
 				}
 			} else if(currnTurnup == 5 && page.getPageAmount() >= 6){
 				if(page.getPages().length > 11)
@@ -291,6 +376,23 @@ public class GuiNecronomiconEntry extends GuiNecronomicon {
 						mc.renderEngine.bindTexture((ResourceLocation)icons[5]);
 						drawTexturedModalRect(k, b0, 0, 0, 256, 256);
 						writeText(1, page.getPages()[10], 100);
+					} else writeText(1, page.getPages()[10]);
+					break;
+				case CRAFTING:
+					if(icons != null && icons[5] != null){
+						writeText(1, page.getPages()[10], 100);
+						GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+						mc.renderEngine.bindTexture(NecronomiconResources.CRAFTING);
+						drawTexturedModalRect(k, b0, 0, 0, 256, 256);
+						itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), ((CraftingStack)icons[5]).getOutput(), k + 93, b0 + 52);
+						for(int i = 0; i <= 2; i++){
+							itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), ((CraftingStack)icons[5]).getFirstArray()[i], k + 24 +i*21, b0 + 31);
+							RenderHelper.disableStandardItemLighting();
+							itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), ((CraftingStack)icons[5]).getSecondArray()[i], k + 24 +i*21, b0 + 52);
+							RenderHelper.disableStandardItemLighting();
+							itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), ((CraftingStack)icons[5]).getThirdArray()[i], k + 24 +i*21, b0 + 73);
+							RenderHelper.disableStandardItemLighting();
+						}
 					} else writeText(1, page.getPages()[10]);
 					break;
 				}
@@ -316,6 +418,23 @@ public class GuiNecronomiconEntry extends GuiNecronomicon {
 						writeText(1, page.getPages()[12], 100);
 					} else writeText(1, page.getPages()[12]);
 					break;
+				case CRAFTING:
+					if(icons != null && icons[6] != null){
+						writeText(1, page.getPages()[12], 100);
+						GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+						mc.renderEngine.bindTexture(NecronomiconResources.CRAFTING);
+						drawTexturedModalRect(k, b0, 0, 0, 256, 256);
+						itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), ((CraftingStack)icons[6]).getOutput(), k + 93, b0 + 52);
+						for(int i = 0; i <= 2; i++){
+							itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), ((CraftingStack)icons[6]).getFirstArray()[i], k + 24 +i*21, b0 + 31);
+							RenderHelper.disableStandardItemLighting();
+							itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), ((CraftingStack)icons[6]).getSecondArray()[i], k + 24 +i*21, b0 + 52);
+							RenderHelper.disableStandardItemLighting();
+							itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), ((CraftingStack)icons[6]).getThirdArray()[i], k + 24 +i*21, b0 + 73);
+							RenderHelper.disableStandardItemLighting();
+						}
+					} else writeText(1, page.getPages()[12]);
+					break;
 				}
 			} else if(currnTurnup == 7 && page.getPageAmount() >= 8){
 				if(page.getPages().length > 15)
@@ -337,6 +456,23 @@ public class GuiNecronomiconEntry extends GuiNecronomicon {
 						mc.renderEngine.bindTexture((ResourceLocation)icons[7]);
 						drawTexturedModalRect(k, b0, 0, 0, 256, 256);
 						writeText(1, page.getPages()[14], 100);
+					} else writeText(1, page.getPages()[14]);
+					break;
+				case CRAFTING:
+					if(icons != null && icons[7] != null){
+						writeText(1, page.getPages()[14], 100);
+						GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+						mc.renderEngine.bindTexture(NecronomiconResources.CRAFTING);
+						drawTexturedModalRect(k, b0, 0, 0, 256, 256);
+						itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), ((CraftingStack)icons[7]).getOutput(), k + 93, b0 + 52);
+						for(int i = 0; i <= 2; i++){
+							itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), ((CraftingStack)icons[7]).getFirstArray()[i], k + 24 +i*21, b0 + 31);
+							RenderHelper.disableStandardItemLighting();
+							itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), ((CraftingStack)icons[7]).getSecondArray()[i], k + 24 +i*21, b0 + 52);
+							RenderHelper.disableStandardItemLighting();
+							itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), ((CraftingStack)icons[7]).getThirdArray()[i], k + 24 +i*21, b0 + 73);
+							RenderHelper.disableStandardItemLighting();
+						}
 					} else writeText(1, page.getPages()[14]);
 					break;
 				}
@@ -362,6 +498,23 @@ public class GuiNecronomiconEntry extends GuiNecronomicon {
 						writeText(1, page.getPages()[16], 100);
 					} else writeText(1, page.getPages()[16]);
 					break;
+				case CRAFTING:
+					if(icons != null && icons[8] != null){
+						writeText(1, page.getPages()[16], 100);
+						GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+						mc.renderEngine.bindTexture(NecronomiconResources.CRAFTING);
+						drawTexturedModalRect(k, b0, 0, 0, 256, 256);
+						itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), ((CraftingStack)icons[8]).getOutput(), k + 93, b0 + 52);
+						for(int i = 0; i <= 2; i++){
+							itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), ((CraftingStack)icons[8]).getFirstArray()[i], k + 24 +i*21, b0 + 31);
+							RenderHelper.disableStandardItemLighting();
+							itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), ((CraftingStack)icons[8]).getSecondArray()[i], k + 24 +i*21, b0 + 52);
+							RenderHelper.disableStandardItemLighting();
+							itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), ((CraftingStack)icons[8]).getThirdArray()[i], k + 24 +i*21, b0 + 73);
+							RenderHelper.disableStandardItemLighting();
+						}
+					} else writeText(1, page.getPages()[16]);
+					break;
 				}
 			} else if(currnTurnup == 9 && page.getPageAmount() >= 10){
 				if(page.getPages().length > 19)
@@ -383,6 +536,23 @@ public class GuiNecronomiconEntry extends GuiNecronomicon {
 						mc.renderEngine.bindTexture((ResourceLocation)icons[9]);
 						drawTexturedModalRect(k, b0, 0, 0, 256, 256);
 						writeText(1, page.getPages()[18], 100);
+					} else writeText(1, page.getPages()[18]);
+					break;
+				case CRAFTING:
+					if(icons != null && icons[9] != null){
+						writeText(1, page.getPages()[18], 100);
+						GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+						mc.renderEngine.bindTexture(NecronomiconResources.CRAFTING);
+						drawTexturedModalRect(k, b0, 0, 0, 256, 256);
+						itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), ((CraftingStack)icons[9]).getOutput(), k + 93, b0 + 52);
+						for(int i = 0; i <= 2; i++){
+							itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), ((CraftingStack)icons[9]).getFirstArray()[i], k + 24 +i*21, b0 + 31);
+							RenderHelper.disableStandardItemLighting();
+							itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), ((CraftingStack)icons[9]).getSecondArray()[i], k + 24 +i*21, b0 + 52);
+							RenderHelper.disableStandardItemLighting();
+							itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), ((CraftingStack)icons[9]).getThirdArray()[i], k + 24 +i*21, b0 + 73);
+							RenderHelper.disableStandardItemLighting();
+						}
 					} else writeText(1, page.getPages()[18]);
 					break;
 				}
@@ -399,6 +569,9 @@ public class GuiNecronomiconEntry extends GuiNecronomicon {
 			case INFO:
 				icons = page.getIcons();
 				break;
+			case CRAFTING:
+				icons = page.getIcons();
+				break;
 			case NORMAL:
 				break;
 			}
@@ -424,6 +597,23 @@ public class GuiNecronomiconEntry extends GuiNecronomicon {
 						drawTexturedModalRect(k, b0, 0, 0, 256, 256);
 					} else writeText(1, page.getPages()[0]);
 					break;
+				case CRAFTING:
+					if(icons != null && icons[0] != null){
+						writeText(1, page.getPages()[0], 100);
+						GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+						mc.renderEngine.bindTexture(NecronomiconResources.CRAFTING);
+						drawTexturedModalRect(k, b0, 0, 0, 256, 256);
+						itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), ((CraftingStack)icons[0]).getOutput(), k + 93, b0 + 52);
+						for(int i = 0; i <= 2; i++){
+							itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), ((CraftingStack)icons[0]).getFirstArray()[i], k + 24 +i*21, b0 + 31);
+							RenderHelper.disableStandardItemLighting();
+							itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), ((CraftingStack)icons[0]).getSecondArray()[i], k + 24 +i*21, b0 + 52);
+							RenderHelper.disableStandardItemLighting();
+							itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), ((CraftingStack)icons[0]).getThirdArray()[i], k + 24 +i*21, b0 + 73);
+							RenderHelper.disableStandardItemLighting();
+						}
+					} else writeText(1, page.getPages()[0]);
+					break;
 				}
 			} else if(currnTurnup == 1 && page.getPageAmount() >= 2){
 				if(page.getPages().length > 3)
@@ -445,6 +635,23 @@ public class GuiNecronomiconEntry extends GuiNecronomicon {
 						mc.renderEngine.bindTexture((ResourceLocation)icons[1]);
 						drawTexturedModalRect(k, b0, 0, 0, 256, 256);
 						writeText(1, page.getPages()[2], 100);
+					} else writeText(1, page.getPages()[2]);
+					break;
+				case CRAFTING:
+					if(icons != null && icons[1] != null){
+						writeText(1, page.getPages()[2], 100);
+						GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+						mc.renderEngine.bindTexture(NecronomiconResources.CRAFTING);
+						drawTexturedModalRect(k, b0, 0, 0, 256, 256);
+						itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), ((CraftingStack)icons[1]).getOutput(), k + 93, b0 + 52);
+						for(int i = 0; i <= 2; i++){
+							itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), ((CraftingStack)icons[1]).getFirstArray()[i], k + 24 +i*21, b0 + 31);
+							RenderHelper.disableStandardItemLighting();
+							itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), ((CraftingStack)icons[1]).getSecondArray()[i], k + 24 +i*21, b0 + 52);
+							RenderHelper.disableStandardItemLighting();
+							itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), ((CraftingStack)icons[1]).getThirdArray()[i], k + 24 +i*21, b0 + 73);
+							RenderHelper.disableStandardItemLighting();
+						}
 					} else writeText(1, page.getPages()[2]);
 					break;
 				}
@@ -470,6 +677,23 @@ public class GuiNecronomiconEntry extends GuiNecronomicon {
 						writeText(1, page.getPages()[4], 100);
 					} else writeText(1, page.getPages()[4]);
 					break;
+				case CRAFTING:
+					if(icons != null && icons[2] != null){
+						writeText(1, page.getPages()[4], 100);
+						GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+						mc.renderEngine.bindTexture(NecronomiconResources.CRAFTING);
+						drawTexturedModalRect(k, b0, 0, 0, 256, 256);
+						itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), ((CraftingStack)icons[2]).getOutput(), k + 93, b0 + 52);
+						for(int i = 0; i <= 2; i++){
+							itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), ((CraftingStack)icons[2]).getFirstArray()[i], k + 24 +i*21, b0 + 31);
+							RenderHelper.disableStandardItemLighting();
+							itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), ((CraftingStack)icons[2]).getSecondArray()[i], k + 24 +i*21, b0 + 52);
+							RenderHelper.disableStandardItemLighting();
+							itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), ((CraftingStack)icons[2]).getThirdArray()[i], k + 24 +i*21, b0 + 73);
+							RenderHelper.disableStandardItemLighting();
+						}
+					} else writeText(1, page.getPages()[4]);
+					break;
 				}
 			} else if(currnTurnup == 3 && page.getPageAmount() >= 4){
 				if(page.getPages().length > 7)
@@ -491,6 +715,23 @@ public class GuiNecronomiconEntry extends GuiNecronomicon {
 						mc.renderEngine.bindTexture((ResourceLocation)icons[3]);
 						drawTexturedModalRect(k, b0, 0, 0, 256, 256);
 						writeText(1, page.getPages()[6], 100);
+					} else writeText(1, page.getPages()[6]);
+					break;
+				case CRAFTING:
+					if(icons != null && icons[3] != null){
+						writeText(1, page.getPages()[6], 100);
+						GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+						mc.renderEngine.bindTexture(NecronomiconResources.CRAFTING);
+						drawTexturedModalRect(k, b0, 0, 0, 256, 256);
+						itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), ((CraftingStack)icons[3]).getOutput(), k + 93, b0 + 52);
+						for(int i = 0; i <= 2; i++){
+							itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), ((CraftingStack)icons[3]).getFirstArray()[i], k + 24 +i*21, b0 + 31);
+							RenderHelper.disableStandardItemLighting();
+							itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), ((CraftingStack)icons[3]).getSecondArray()[i], k + 24 +i*21, b0 + 52);
+							RenderHelper.disableStandardItemLighting();
+							itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), ((CraftingStack)icons[3]).getThirdArray()[i], k + 24 +i*21, b0 + 73);
+							RenderHelper.disableStandardItemLighting();
+						}
 					} else writeText(1, page.getPages()[6]);
 					break;
 				}
@@ -516,6 +757,23 @@ public class GuiNecronomiconEntry extends GuiNecronomicon {
 						writeText(1, page.getPages()[8], 100);
 					} else writeText(1, page.getPages()[8]);
 					break;
+				case CRAFTING:
+					if(icons != null && icons[4] != null){
+						writeText(1, page.getPages()[8], 100);
+						GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+						mc.renderEngine.bindTexture(NecronomiconResources.CRAFTING);
+						drawTexturedModalRect(k, b0, 0, 0, 256, 256);
+						itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), ((CraftingStack)icons[4]).getOutput(), k + 93, b0 + 52);
+						for(int i = 0; i <= 2; i++){
+							itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), ((CraftingStack)icons[4]).getFirstArray()[i], k + 24 +i*21, b0 + 31);
+							RenderHelper.disableStandardItemLighting();
+							itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), ((CraftingStack)icons[4]).getSecondArray()[i], k + 24 +i*21, b0 + 52);
+							RenderHelper.disableStandardItemLighting();
+							itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), ((CraftingStack)icons[4]).getThirdArray()[i], k + 24 +i*21, b0 + 73);
+							RenderHelper.disableStandardItemLighting();
+						}
+					} else writeText(1, page.getPages()[8]);
+					break;
 				}
 			} else if(currnTurnup == 5 && page.getPageAmount() >= 6){
 				if(page.getPages().length > 11)
@@ -537,6 +795,23 @@ public class GuiNecronomiconEntry extends GuiNecronomicon {
 						mc.renderEngine.bindTexture((ResourceLocation)icons[5]);
 						drawTexturedModalRect(k, b0, 0, 0, 256, 256);
 						writeText(1, page.getPages()[10], 100);
+					} else writeText(1, page.getPages()[10]);
+					break;
+				case CRAFTING:
+					if(icons != null && icons[5] != null){
+						writeText(1, page.getPages()[10], 100);
+						GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+						mc.renderEngine.bindTexture(NecronomiconResources.CRAFTING);
+						drawTexturedModalRect(k, b0, 0, 0, 256, 256);
+						itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), ((CraftingStack)icons[5]).getOutput(), k + 93, b0 + 52);
+						for(int i = 0; i <= 2; i++){
+							itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), ((CraftingStack)icons[5]).getFirstArray()[i], k + 24 +i*21, b0 + 31);
+							RenderHelper.disableStandardItemLighting();
+							itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), ((CraftingStack)icons[5]).getSecondArray()[i], k + 24 +i*21, b0 + 52);
+							RenderHelper.disableStandardItemLighting();
+							itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), ((CraftingStack)icons[5]).getThirdArray()[i], k + 24 +i*21, b0 + 73);
+							RenderHelper.disableStandardItemLighting();
+						}
 					} else writeText(1, page.getPages()[10]);
 					break;
 				}
@@ -562,6 +837,23 @@ public class GuiNecronomiconEntry extends GuiNecronomicon {
 						writeText(1, page.getPages()[12], 100);
 					} else writeText(1, page.getPages()[12]);
 					break;
+				case CRAFTING:
+					if(icons != null && icons[6] != null){
+						writeText(1, page.getPages()[12], 100);
+						GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+						mc.renderEngine.bindTexture(NecronomiconResources.CRAFTING);
+						drawTexturedModalRect(k, b0, 0, 0, 256, 256);
+						itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), ((CraftingStack)icons[6]).getOutput(), k + 93, b0 + 52);
+						for(int i = 0; i <= 2; i++){
+							itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), ((CraftingStack)icons[6]).getFirstArray()[i], k + 24 +i*21, b0 + 31);
+							RenderHelper.disableStandardItemLighting();
+							itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), ((CraftingStack)icons[6]).getSecondArray()[i], k + 24 +i*21, b0 + 52);
+							RenderHelper.disableStandardItemLighting();
+							itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), ((CraftingStack)icons[6]).getThirdArray()[i], k + 24 +i*21, b0 + 73);
+							RenderHelper.disableStandardItemLighting();
+						}
+					} else writeText(1, page.getPages()[12]);
+					break;
 				}
 			} else if(currnTurnup == 7 && page.getPageAmount() >= 8){
 				if(page.getPages().length > 15)
@@ -583,6 +875,23 @@ public class GuiNecronomiconEntry extends GuiNecronomicon {
 						mc.renderEngine.bindTexture((ResourceLocation)icons[7]);
 						drawTexturedModalRect(k, b0, 0, 0, 256, 256);
 						writeText(1, page.getPages()[14], 100);
+					} else writeText(1, page.getPages()[14]);
+					break;
+				case CRAFTING:
+					if(icons != null && icons[7] != null){
+						writeText(1, page.getPages()[14], 100);
+						GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+						mc.renderEngine.bindTexture(NecronomiconResources.CRAFTING);
+						drawTexturedModalRect(k, b0, 0, 0, 256, 256);
+						itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), ((CraftingStack)icons[7]).getOutput(), k + 93, b0 + 52);
+						for(int i = 0; i <= 2; i++){
+							itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), ((CraftingStack)icons[7]).getFirstArray()[i], k + 24 +i*21, b0 + 31);
+							RenderHelper.disableStandardItemLighting();
+							itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), ((CraftingStack)icons[7]).getSecondArray()[i], k + 24 +i*21, b0 + 52);
+							RenderHelper.disableStandardItemLighting();
+							itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), ((CraftingStack)icons[7]).getThirdArray()[i], k + 24 +i*21, b0 + 73);
+							RenderHelper.disableStandardItemLighting();
+						}
 					} else writeText(1, page.getPages()[14]);
 					break;
 				}
@@ -608,6 +917,23 @@ public class GuiNecronomiconEntry extends GuiNecronomicon {
 						writeText(1, page.getPages()[16], 100);
 					} else writeText(1, page.getPages()[16]);
 					break;
+				case CRAFTING:
+					if(icons != null && icons[8] != null){
+						writeText(1, page.getPages()[16], 100);
+						GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+						mc.renderEngine.bindTexture(NecronomiconResources.CRAFTING);
+						drawTexturedModalRect(k, b0, 0, 0, 256, 256);
+						itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), ((CraftingStack)icons[8]).getOutput(), k + 93, b0 + 52);
+						for(int i = 0; i <= 2; i++){
+							itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), ((CraftingStack)icons[8]).getFirstArray()[i], k + 24 +i*21, b0 + 31);
+							RenderHelper.disableStandardItemLighting();
+							itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), ((CraftingStack)icons[8]).getSecondArray()[i], k + 24 +i*21, b0 + 52);
+							RenderHelper.disableStandardItemLighting();
+							itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), ((CraftingStack)icons[8]).getThirdArray()[i], k + 24 +i*21, b0 + 73);
+							RenderHelper.disableStandardItemLighting();
+						}
+					} else writeText(1, page.getPages()[16]);
+					break;
 				}
 			} else if(currnTurnup == 9 && page.getPageAmount() >= 10){
 				if(page.getPages().length > 19)
@@ -629,6 +955,23 @@ public class GuiNecronomiconEntry extends GuiNecronomicon {
 						mc.renderEngine.bindTexture((ResourceLocation)icons[9]);
 						drawTexturedModalRect(k, b0, 0, 0, 256, 256);
 						writeText(1, page.getPages()[18], 100);
+					} else writeText(1, page.getPages()[18]);
+					break;
+				case CRAFTING:
+					if(icons != null && icons[9] != null){
+						writeText(1, page.getPages()[18], 100);
+						GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+						mc.renderEngine.bindTexture(NecronomiconResources.CRAFTING);
+						drawTexturedModalRect(k, b0, 0, 0, 256, 256);
+						itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), ((CraftingStack)icons[9]).getOutput(), k + 93, b0 + 52);
+						for(int i = 0; i <= 2; i++){
+							itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), ((CraftingStack)icons[9]).getFirstArray()[i], k + 24 +i*21, b0 + 31);
+							RenderHelper.disableStandardItemLighting();
+							itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), ((CraftingStack)icons[9]).getSecondArray()[i], k + 24 +i*21, b0 + 52);
+							RenderHelper.disableStandardItemLighting();
+							itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), ((CraftingStack)icons[9]).getThirdArray()[i], k + 24 +i*21, b0 + 73);
+							RenderHelper.disableStandardItemLighting();
+						}
 					} else writeText(1, page.getPages()[18]);
 					break;
 				}
@@ -645,6 +988,9 @@ public class GuiNecronomiconEntry extends GuiNecronomicon {
 			case INFO:
 				icons = page.getIcons();
 				break;
+			case CRAFTING:
+				icons = page.getIcons();
+				break;
 			case NORMAL:
 				break;
 			}
@@ -670,6 +1016,23 @@ public class GuiNecronomiconEntry extends GuiNecronomicon {
 						drawTexturedModalRect(k, b0, 0, 0, 256, 256);
 					} else writeText(1, page.getPages()[0]);
 					break;
+				case CRAFTING:
+					if(icons != null && icons[0] != null){
+						writeText(1, page.getPages()[0], 100);
+						GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+						mc.renderEngine.bindTexture(NecronomiconResources.CRAFTING);
+						drawTexturedModalRect(k, b0, 0, 0, 256, 256);
+						itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), ((CraftingStack)icons[0]).getOutput(), k + 93, b0 + 52);
+						for(int i = 0; i <= 2; i++){
+							itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), ((CraftingStack)icons[0]).getFirstArray()[i], k + 24 +i*21, b0 + 31);
+							RenderHelper.disableStandardItemLighting();
+							itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), ((CraftingStack)icons[0]).getSecondArray()[i], k + 24 +i*21, b0 + 52);
+							RenderHelper.disableStandardItemLighting();
+							itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), ((CraftingStack)icons[0]).getThirdArray()[i], k + 24 +i*21, b0 + 73);
+							RenderHelper.disableStandardItemLighting();
+						}
+					} else writeText(1, page.getPages()[0]);
+					break;
 				}
 			} else if(currnTurnup == 1 && page.getPageAmount() >= 2){
 				if(page.getPages().length > 3)
@@ -691,6 +1054,23 @@ public class GuiNecronomiconEntry extends GuiNecronomicon {
 						mc.renderEngine.bindTexture((ResourceLocation)icons[1]);
 						drawTexturedModalRect(k, b0, 0, 0, 256, 256);
 						writeText(1, page.getPages()[2], 100);
+					} else writeText(1, page.getPages()[2]);
+					break;
+				case CRAFTING:
+					if(icons != null && icons[1] != null){
+						writeText(1, page.getPages()[2], 100);
+						GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+						mc.renderEngine.bindTexture(NecronomiconResources.CRAFTING);
+						drawTexturedModalRect(k, b0, 0, 0, 256, 256);
+						itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), ((CraftingStack)icons[1]).getOutput(), k + 93, b0 + 52);
+						for(int i = 0; i <= 2; i++){
+							itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), ((CraftingStack)icons[1]).getFirstArray()[i], k + 24 +i*21, b0 + 31);
+							RenderHelper.disableStandardItemLighting();
+							itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), ((CraftingStack)icons[1]).getSecondArray()[i], k + 24 +i*21, b0 + 52);
+							RenderHelper.disableStandardItemLighting();
+							itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), ((CraftingStack)icons[1]).getThirdArray()[i], k + 24 +i*21, b0 + 73);
+							RenderHelper.disableStandardItemLighting();
+						}
 					} else writeText(1, page.getPages()[2]);
 					break;
 				}
@@ -716,6 +1096,23 @@ public class GuiNecronomiconEntry extends GuiNecronomicon {
 						writeText(1, page.getPages()[4], 100);
 					} else writeText(1, page.getPages()[4]);
 					break;
+				case CRAFTING:
+					if(icons != null && icons[2] != null){
+						writeText(1, page.getPages()[4], 100);
+						GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+						mc.renderEngine.bindTexture(NecronomiconResources.CRAFTING);
+						drawTexturedModalRect(k, b0, 0, 0, 256, 256);
+						itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), ((CraftingStack)icons[2]).getOutput(), k + 93, b0 + 52);
+						for(int i = 0; i <= 2; i++){
+							itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), ((CraftingStack)icons[2]).getFirstArray()[i], k + 24 +i*21, b0 + 31);
+							RenderHelper.disableStandardItemLighting();
+							itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), ((CraftingStack)icons[2]).getSecondArray()[i], k + 24 +i*21, b0 + 52);
+							RenderHelper.disableStandardItemLighting();
+							itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), ((CraftingStack)icons[2]).getThirdArray()[i], k + 24 +i*21, b0 + 73);
+							RenderHelper.disableStandardItemLighting();
+						}
+					} else writeText(1, page.getPages()[4]);
+					break;
 				}
 			} else if(currnTurnup == 3 && page.getPageAmount() >= 4){
 				if(page.getPages().length > 7)
@@ -737,6 +1134,23 @@ public class GuiNecronomiconEntry extends GuiNecronomicon {
 						mc.renderEngine.bindTexture((ResourceLocation)icons[3]);
 						drawTexturedModalRect(k, b0, 0, 0, 256, 256);
 						writeText(1, page.getPages()[6], 100);
+					} else writeText(1, page.getPages()[6]);
+					break;
+				case CRAFTING:
+					if(icons != null && icons[3] != null){
+						writeText(1, page.getPages()[6], 100);
+						GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+						mc.renderEngine.bindTexture(NecronomiconResources.CRAFTING);
+						drawTexturedModalRect(k, b0, 0, 0, 256, 256);
+						itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), ((CraftingStack)icons[3]).getOutput(), k + 93, b0 + 52);
+						for(int i = 0; i <= 2; i++){
+							itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), ((CraftingStack)icons[3]).getFirstArray()[i], k + 24 +i*21, b0 + 31);
+							RenderHelper.disableStandardItemLighting();
+							itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), ((CraftingStack)icons[3]).getSecondArray()[i], k + 24 +i*21, b0 + 52);
+							RenderHelper.disableStandardItemLighting();
+							itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), ((CraftingStack)icons[3]).getThirdArray()[i], k + 24 +i*21, b0 + 73);
+							RenderHelper.disableStandardItemLighting();
+						}
 					} else writeText(1, page.getPages()[6]);
 					break;
 				}
@@ -762,6 +1176,23 @@ public class GuiNecronomiconEntry extends GuiNecronomicon {
 						writeText(1, page.getPages()[8], 100);
 					} else writeText(1, page.getPages()[8]);
 					break;
+				case CRAFTING:
+					if(icons != null && icons[4] != null){
+						writeText(1, page.getPages()[8], 100);
+						GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+						mc.renderEngine.bindTexture(NecronomiconResources.CRAFTING);
+						drawTexturedModalRect(k, b0, 0, 0, 256, 256);
+						itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), ((CraftingStack)icons[4]).getOutput(), k + 93, b0 + 52);
+						for(int i = 0; i <= 2; i++){
+							itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), ((CraftingStack)icons[4]).getFirstArray()[i], k + 24 +i*21, b0 + 31);
+							RenderHelper.disableStandardItemLighting();
+							itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), ((CraftingStack)icons[4]).getSecondArray()[i], k + 24 +i*21, b0 + 52);
+							RenderHelper.disableStandardItemLighting();
+							itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), ((CraftingStack)icons[4]).getThirdArray()[i], k + 24 +i*21, b0 + 73);
+							RenderHelper.disableStandardItemLighting();
+						}
+					} else writeText(1, page.getPages()[8]);
+					break;
 				}
 			} else if(currnTurnup == 5 && page.getPageAmount() >= 6){
 				if(page.getPages().length > 11)
@@ -783,6 +1214,23 @@ public class GuiNecronomiconEntry extends GuiNecronomicon {
 						mc.renderEngine.bindTexture((ResourceLocation)icons[5]);
 						drawTexturedModalRect(k, b0, 0, 0, 256, 256);
 						writeText(1, page.getPages()[10], 100);
+					} else writeText(1, page.getPages()[10]);
+					break;
+				case CRAFTING:
+					if(icons != null && icons[5] != null){
+						writeText(1, page.getPages()[10], 100);
+						GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+						mc.renderEngine.bindTexture(NecronomiconResources.CRAFTING);
+						drawTexturedModalRect(k, b0, 0, 0, 256, 256);
+						itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), ((CraftingStack)icons[5]).getOutput(), k + 93, b0 + 52);
+						for(int i = 0; i <= 2; i++){
+							itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), ((CraftingStack)icons[5]).getFirstArray()[i], k + 24 +i*21, b0 + 31);
+							RenderHelper.disableStandardItemLighting();
+							itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), ((CraftingStack)icons[5]).getSecondArray()[i], k + 24 +i*21, b0 + 52);
+							RenderHelper.disableStandardItemLighting();
+							itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), ((CraftingStack)icons[5]).getThirdArray()[i], k + 24 +i*21, b0 + 73);
+							RenderHelper.disableStandardItemLighting();
+						}
 					} else writeText(1, page.getPages()[10]);
 					break;
 				}
@@ -808,6 +1256,23 @@ public class GuiNecronomiconEntry extends GuiNecronomicon {
 						writeText(1, page.getPages()[12], 100);
 					} else writeText(1, page.getPages()[12]);
 					break;
+				case CRAFTING:
+					if(icons != null && icons[6] != null){
+						writeText(1, page.getPages()[12], 100);
+						GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+						mc.renderEngine.bindTexture(NecronomiconResources.CRAFTING);
+						drawTexturedModalRect(k, b0, 0, 0, 256, 256);
+						itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), ((CraftingStack)icons[6]).getOutput(), k + 93, b0 + 52);
+						for(int i = 0; i <= 2; i++){
+							itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), ((CraftingStack)icons[6]).getFirstArray()[i], k + 24 +i*21, b0 + 31);
+							RenderHelper.disableStandardItemLighting();
+							itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), ((CraftingStack)icons[6]).getSecondArray()[i], k + 24 +i*21, b0 + 52);
+							RenderHelper.disableStandardItemLighting();
+							itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), ((CraftingStack)icons[6]).getThirdArray()[i], k + 24 +i*21, b0 + 73);
+							RenderHelper.disableStandardItemLighting();
+						}
+					} else writeText(1, page.getPages()[12]);
+					break;
 				}
 			} else if(currnTurnup == 7 && page.getPageAmount() >= 8){
 				if(page.getPages().length > 15)
@@ -829,6 +1294,23 @@ public class GuiNecronomiconEntry extends GuiNecronomicon {
 						mc.renderEngine.bindTexture((ResourceLocation)icons[7]);
 						drawTexturedModalRect(k, b0, 0, 0, 256, 256);
 						writeText(1, page.getPages()[14], 100);
+					} else writeText(1, page.getPages()[14]);
+					break;
+				case CRAFTING:
+					if(icons != null && icons[7] != null){
+						writeText(1, page.getPages()[14], 100);
+						GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+						mc.renderEngine.bindTexture(NecronomiconResources.CRAFTING);
+						drawTexturedModalRect(k, b0, 0, 0, 256, 256);
+						itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), ((CraftingStack)icons[7]).getOutput(), k + 93, b0 + 52);
+						for(int i = 0; i <= 2; i++){
+							itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), ((CraftingStack)icons[7]).getFirstArray()[i], k + 24 +i*21, b0 + 31);
+							RenderHelper.disableStandardItemLighting();
+							itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), ((CraftingStack)icons[7]).getSecondArray()[i], k + 24 +i*21, b0 + 52);
+							RenderHelper.disableStandardItemLighting();
+							itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), ((CraftingStack)icons[7]).getThirdArray()[i], k + 24 +i*21, b0 + 73);
+							RenderHelper.disableStandardItemLighting();
+						}
 					} else writeText(1, page.getPages()[14]);
 					break;
 				}
@@ -854,6 +1336,23 @@ public class GuiNecronomiconEntry extends GuiNecronomicon {
 						writeText(1, page.getPages()[16], 100);
 					} else writeText(1, page.getPages()[16]);
 					break;
+				case CRAFTING:
+					if(icons != null && icons[8] != null){
+						writeText(1, page.getPages()[16], 100);
+						GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+						mc.renderEngine.bindTexture(NecronomiconResources.CRAFTING);
+						drawTexturedModalRect(k, b0, 0, 0, 256, 256);
+						itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), ((CraftingStack)icons[8]).getOutput(), k + 93, b0 + 52);
+						for(int i = 0; i <= 2; i++){
+							itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), ((CraftingStack)icons[8]).getFirstArray()[i], k + 24 +i*21, b0 + 31);
+							RenderHelper.disableStandardItemLighting();
+							itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), ((CraftingStack)icons[8]).getSecondArray()[i], k + 24 +i*21, b0 + 52);
+							RenderHelper.disableStandardItemLighting();
+							itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), ((CraftingStack)icons[8]).getThirdArray()[i], k + 24 +i*21, b0 + 73);
+							RenderHelper.disableStandardItemLighting();
+						}
+					} else writeText(1, page.getPages()[16]);
+					break;
 				}
 			} else if(currnTurnup == 9 && page.getPageAmount() >= 10){
 				if(page.getPages().length > 19)
@@ -875,6 +1374,23 @@ public class GuiNecronomiconEntry extends GuiNecronomicon {
 						mc.renderEngine.bindTexture((ResourceLocation)icons[9]);
 						drawTexturedModalRect(k, b0, 0, 0, 256, 256);
 						writeText(1, page.getPages()[18], 100);
+					} else writeText(1, page.getPages()[18]);
+					break;
+				case CRAFTING:
+					if(icons != null && icons[9] != null){
+						writeText(1, page.getPages()[18], 100);
+						GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+						mc.renderEngine.bindTexture(NecronomiconResources.CRAFTING);
+						drawTexturedModalRect(k, b0, 0, 0, 256, 256);
+						itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), ((CraftingStack)icons[9]).getOutput(), k + 93, b0 + 52);
+						for(int i = 0; i <= 2; i++){
+							itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), ((CraftingStack)icons[9]).getFirstArray()[i], k + 24 +i*21, b0 + 31);
+							RenderHelper.disableStandardItemLighting();
+							itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), ((CraftingStack)icons[9]).getSecondArray()[i], k + 24 +i*21, b0 + 52);
+							RenderHelper.disableStandardItemLighting();
+							itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), ((CraftingStack)icons[9]).getThirdArray()[i], k + 24 +i*21, b0 + 73);
+							RenderHelper.disableStandardItemLighting();
+						}
 					} else writeText(1, page.getPages()[18]);
 					break;
 				}
@@ -891,6 +1407,9 @@ public class GuiNecronomiconEntry extends GuiNecronomicon {
 			case INFO:
 				icons = page.getIcons();
 				break;
+			case CRAFTING:
+				icons = page.getIcons();
+				break;
 			case NORMAL:
 				break;
 			}
@@ -916,6 +1435,23 @@ public class GuiNecronomiconEntry extends GuiNecronomicon {
 						drawTexturedModalRect(k, b0, 0, 0, 256, 256);
 					} else writeText(1, page.getPages()[0]);
 					break;
+				case CRAFTING:
+					if(icons != null && icons[0] != null){
+						writeText(1, page.getPages()[0], 100);
+						GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+						mc.renderEngine.bindTexture(NecronomiconResources.CRAFTING);
+						drawTexturedModalRect(k, b0, 0, 0, 256, 256);
+						itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), ((CraftingStack)icons[0]).getOutput(), k + 93, b0 + 52);
+						for(int i = 0; i <= 2; i++){
+							itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), ((CraftingStack)icons[0]).getFirstArray()[i], k + 24 +i*21, b0 + 31);
+							RenderHelper.disableStandardItemLighting();
+							itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), ((CraftingStack)icons[0]).getSecondArray()[i], k + 24 +i*21, b0 + 52);
+							RenderHelper.disableStandardItemLighting();
+							itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), ((CraftingStack)icons[0]).getThirdArray()[i], k + 24 +i*21, b0 + 73);
+							RenderHelper.disableStandardItemLighting();
+						}
+					} else writeText(1, page.getPages()[0]);
+					break;
 				}
 			} else if(currnTurnup == 1 && page.getPageAmount() >= 2){
 				if(page.getPages().length > 3)
@@ -937,6 +1473,23 @@ public class GuiNecronomiconEntry extends GuiNecronomicon {
 						mc.renderEngine.bindTexture((ResourceLocation)icons[1]);
 						drawTexturedModalRect(k, b0, 0, 0, 256, 256);
 						writeText(1, page.getPages()[2], 100);
+					} else writeText(1, page.getPages()[2]);
+					break;
+				case CRAFTING:
+					if(icons != null && icons[1] != null){
+						writeText(1, page.getPages()[2], 100);
+						GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+						mc.renderEngine.bindTexture(NecronomiconResources.CRAFTING);
+						drawTexturedModalRect(k, b0, 0, 0, 256, 256);
+						itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), ((CraftingStack)icons[1]).getOutput(), k + 93, b0 + 52);
+						for(int i = 0; i <= 2; i++){
+							itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), ((CraftingStack)icons[1]).getFirstArray()[i], k + 24 +i*21, b0 + 31);
+							RenderHelper.disableStandardItemLighting();
+							itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), ((CraftingStack)icons[1]).getSecondArray()[i], k + 24 +i*21, b0 + 52);
+							RenderHelper.disableStandardItemLighting();
+							itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), ((CraftingStack)icons[1]).getThirdArray()[i], k + 24 +i*21, b0 + 73);
+							RenderHelper.disableStandardItemLighting();
+						}
 					} else writeText(1, page.getPages()[2]);
 					break;
 				}
@@ -962,6 +1515,23 @@ public class GuiNecronomiconEntry extends GuiNecronomicon {
 						writeText(1, page.getPages()[4], 100);
 					} else writeText(1, page.getPages()[4]);
 					break;
+				case CRAFTING:
+					if(icons != null && icons[2] != null){
+						writeText(1, page.getPages()[4], 100);
+						GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+						mc.renderEngine.bindTexture(NecronomiconResources.CRAFTING);
+						drawTexturedModalRect(k, b0, 0, 0, 256, 256);
+						itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), ((CraftingStack)icons[2]).getOutput(), k + 93, b0 + 52);
+						for(int i = 0; i <= 2; i++){
+							itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), ((CraftingStack)icons[2]).getFirstArray()[i], k + 24 +i*21, b0 + 31);
+							RenderHelper.disableStandardItemLighting();
+							itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), ((CraftingStack)icons[2]).getSecondArray()[i], k + 24 +i*21, b0 + 52);
+							RenderHelper.disableStandardItemLighting();
+							itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), ((CraftingStack)icons[2]).getThirdArray()[i], k + 24 +i*21, b0 + 73);
+							RenderHelper.disableStandardItemLighting();
+						}
+					} else writeText(1, page.getPages()[4]);
+					break;
 				}
 			} else if(currnTurnup == 3 && page.getPageAmount() >= 4){
 				if(page.getPages().length > 7)
@@ -983,6 +1553,23 @@ public class GuiNecronomiconEntry extends GuiNecronomicon {
 						mc.renderEngine.bindTexture((ResourceLocation)icons[3]);
 						drawTexturedModalRect(k, b0, 0, 0, 256, 256);
 						writeText(1, page.getPages()[6], 100);
+					} else writeText(1, page.getPages()[6]);
+					break;
+				case CRAFTING:
+					if(icons != null && icons[3] != null){
+						writeText(1, page.getPages()[6], 100);
+						GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+						mc.renderEngine.bindTexture(NecronomiconResources.CRAFTING);
+						drawTexturedModalRect(k, b0, 0, 0, 256, 256);
+						itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), ((CraftingStack)icons[3]).getOutput(), k + 93, b0 + 52);
+						for(int i = 0; i <= 2; i++){
+							itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), ((CraftingStack)icons[3]).getFirstArray()[i], k + 24 +i*21, b0 + 31);
+							RenderHelper.disableStandardItemLighting();
+							itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), ((CraftingStack)icons[3]).getSecondArray()[i], k + 24 +i*21, b0 + 52);
+							RenderHelper.disableStandardItemLighting();
+							itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), ((CraftingStack)icons[3]).getThirdArray()[i], k + 24 +i*21, b0 + 73);
+							RenderHelper.disableStandardItemLighting();
+						}
 					} else writeText(1, page.getPages()[6]);
 					break;
 				}
@@ -1008,6 +1595,23 @@ public class GuiNecronomiconEntry extends GuiNecronomicon {
 						writeText(1, page.getPages()[8], 100);
 					} else writeText(1, page.getPages()[8]);
 					break;
+				case CRAFTING:
+					if(icons != null && icons[4] != null){
+						writeText(1, page.getPages()[8], 100);
+						GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+						mc.renderEngine.bindTexture(NecronomiconResources.CRAFTING);
+						drawTexturedModalRect(k, b0, 0, 0, 256, 256);
+						itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), ((CraftingStack)icons[4]).getOutput(), k + 93, b0 + 52);
+						for(int i = 0; i <= 2; i++){
+							itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), ((CraftingStack)icons[4]).getFirstArray()[i], k + 24 +i*21, b0 + 31);
+							RenderHelper.disableStandardItemLighting();
+							itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), ((CraftingStack)icons[4]).getSecondArray()[i], k + 24 +i*21, b0 + 52);
+							RenderHelper.disableStandardItemLighting();
+							itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), ((CraftingStack)icons[4]).getThirdArray()[i], k + 24 +i*21, b0 + 73);
+							RenderHelper.disableStandardItemLighting();
+						}
+					} else writeText(1, page.getPages()[8]);
+					break;
 				}
 			} else if(currnTurnup == 5 && page.getPageAmount() >= 6){
 				if(page.getPages().length > 11)
@@ -1029,6 +1633,23 @@ public class GuiNecronomiconEntry extends GuiNecronomicon {
 						mc.renderEngine.bindTexture((ResourceLocation)icons[5]);
 						drawTexturedModalRect(k, b0, 0, 0, 256, 256);
 						writeText(1, page.getPages()[10], 100);
+					} else writeText(1, page.getPages()[10]);
+					break;
+				case CRAFTING:
+					if(icons != null && icons[5] != null){
+						writeText(1, page.getPages()[10], 100);
+						GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+						mc.renderEngine.bindTexture(NecronomiconResources.CRAFTING);
+						drawTexturedModalRect(k, b0, 0, 0, 256, 256);
+						itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), ((CraftingStack)icons[5]).getOutput(), k + 93, b0 + 52);
+						for(int i = 0; i <= 2; i++){
+							itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), ((CraftingStack)icons[5]).getFirstArray()[i], k + 24 +i*21, b0 + 31);
+							RenderHelper.disableStandardItemLighting();
+							itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), ((CraftingStack)icons[5]).getSecondArray()[i], k + 24 +i*21, b0 + 52);
+							RenderHelper.disableStandardItemLighting();
+							itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), ((CraftingStack)icons[5]).getThirdArray()[i], k + 24 +i*21, b0 + 73);
+							RenderHelper.disableStandardItemLighting();
+						}
 					} else writeText(1, page.getPages()[10]);
 					break;
 				}
@@ -1054,6 +1675,23 @@ public class GuiNecronomiconEntry extends GuiNecronomicon {
 						writeText(1, page.getPages()[12], 100);
 					} else writeText(1, page.getPages()[12]);
 					break;
+				case CRAFTING:
+					if(icons != null && icons[6] != null){
+						writeText(1, page.getPages()[12], 100);
+						GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+						mc.renderEngine.bindTexture(NecronomiconResources.CRAFTING);
+						drawTexturedModalRect(k, b0, 0, 0, 256, 256);
+						itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), ((CraftingStack)icons[6]).getOutput(), k + 93, b0 + 52);
+						for(int i = 0; i <= 2; i++){
+							itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), ((CraftingStack)icons[6]).getFirstArray()[i], k + 24 +i*21, b0 + 31);
+							RenderHelper.disableStandardItemLighting();
+							itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), ((CraftingStack)icons[6]).getSecondArray()[i], k + 24 +i*21, b0 + 52);
+							RenderHelper.disableStandardItemLighting();
+							itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), ((CraftingStack)icons[6]).getThirdArray()[i], k + 24 +i*21, b0 + 73);
+							RenderHelper.disableStandardItemLighting();
+						}
+					} else writeText(1, page.getPages()[12]);
+					break;
 				}
 			} else if(currnTurnup == 7 && page.getPageAmount() >= 8){
 				if(page.getPages().length > 15)
@@ -1075,6 +1713,23 @@ public class GuiNecronomiconEntry extends GuiNecronomicon {
 						mc.renderEngine.bindTexture((ResourceLocation)icons[7]);
 						drawTexturedModalRect(k, b0, 0, 0, 256, 256);
 						writeText(1, page.getPages()[14], 100);
+					} else writeText(1, page.getPages()[14]);
+					break;
+				case CRAFTING:
+					if(icons != null && icons[7] != null){
+						writeText(1, page.getPages()[14], 100);
+						GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+						mc.renderEngine.bindTexture(NecronomiconResources.CRAFTING);
+						drawTexturedModalRect(k, b0, 0, 0, 256, 256);
+						itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), ((CraftingStack)icons[7]).getOutput(), k + 93, b0 + 52);
+						for(int i = 0; i <= 2; i++){
+							itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), ((CraftingStack)icons[7]).getFirstArray()[i], k + 24 +i*21, b0 + 31);
+							RenderHelper.disableStandardItemLighting();
+							itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), ((CraftingStack)icons[7]).getSecondArray()[i], k + 24 +i*21, b0 + 52);
+							RenderHelper.disableStandardItemLighting();
+							itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), ((CraftingStack)icons[7]).getThirdArray()[i], k + 24 +i*21, b0 + 73);
+							RenderHelper.disableStandardItemLighting();
+						}
 					} else writeText(1, page.getPages()[14]);
 					break;
 				}
@@ -1100,6 +1755,23 @@ public class GuiNecronomiconEntry extends GuiNecronomicon {
 						writeText(1, page.getPages()[16], 100);
 					} else writeText(1, page.getPages()[16]);
 					break;
+				case CRAFTING:
+					if(icons != null && icons[8] != null){
+						writeText(1, page.getPages()[16], 100);
+						GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+						mc.renderEngine.bindTexture(NecronomiconResources.CRAFTING);
+						drawTexturedModalRect(k, b0, 0, 0, 256, 256);
+						itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), ((CraftingStack)icons[8]).getOutput(), k + 93, b0 + 52);
+						for(int i = 0; i <= 2; i++){
+							itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), ((CraftingStack)icons[8]).getFirstArray()[i], k + 24 +i*21, b0 + 31);
+							RenderHelper.disableStandardItemLighting();
+							itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), ((CraftingStack)icons[8]).getSecondArray()[i], k + 24 +i*21, b0 + 52);
+							RenderHelper.disableStandardItemLighting();
+							itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), ((CraftingStack)icons[8]).getThirdArray()[i], k + 24 +i*21, b0 + 73);
+							RenderHelper.disableStandardItemLighting();
+						}
+					} else writeText(1, page.getPages()[16]);
+					break;
 				}
 			} else if(currnTurnup == 9 && page.getPageAmount() >= 10){
 				if(page.getPages().length > 19)
@@ -1121,6 +1793,23 @@ public class GuiNecronomiconEntry extends GuiNecronomicon {
 						mc.renderEngine.bindTexture((ResourceLocation)icons[9]);
 						drawTexturedModalRect(k, b0, 0, 0, 256, 256);
 						writeText(1, page.getPages()[18], 100);
+					} else writeText(1, page.getPages()[18]);
+					break;
+				case CRAFTING:
+					if(icons != null && icons[9] != null){
+						writeText(1, page.getPages()[18], 100);
+						GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+						mc.renderEngine.bindTexture(NecronomiconResources.CRAFTING);
+						drawTexturedModalRect(k, b0, 0, 0, 256, 256);
+						itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), ((CraftingStack)icons[9]).getOutput(), k + 93, b0 + 52);
+						for(int i = 0; i <= 2; i++){
+							itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), ((CraftingStack)icons[9]).getFirstArray()[i], k + 24 +i*21, b0 + 31);
+							RenderHelper.disableStandardItemLighting();
+							itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), ((CraftingStack)icons[9]).getSecondArray()[i], k + 24 +i*21, b0 + 52);
+							RenderHelper.disableStandardItemLighting();
+							itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), ((CraftingStack)icons[9]).getThirdArray()[i], k + 24 +i*21, b0 + 73);
+							RenderHelper.disableStandardItemLighting();
+						}
 					} else writeText(1, page.getPages()[18]);
 					break;
 				}
@@ -1137,6 +1826,9 @@ public class GuiNecronomiconEntry extends GuiNecronomicon {
 			case INFO:
 				icons = page.getIcons();
 				break;
+			case CRAFTING:
+				icons = page.getIcons();
+				break;
 			case NORMAL:
 				break;
 			}
@@ -1162,6 +1854,23 @@ public class GuiNecronomiconEntry extends GuiNecronomicon {
 						drawTexturedModalRect(k, b0, 0, 0, 256, 256);
 					} else writeText(1, page.getPages()[0]);
 					break;
+				case CRAFTING:
+					if(icons != null && icons[0] != null){
+						writeText(1, page.getPages()[0], 100);
+						GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+						mc.renderEngine.bindTexture(NecronomiconResources.CRAFTING);
+						drawTexturedModalRect(k, b0, 0, 0, 256, 256);
+						itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), ((CraftingStack)icons[0]).getOutput(), k + 93, b0 + 52);
+						for(int i = 0; i <= 2; i++){
+							itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), ((CraftingStack)icons[0]).getFirstArray()[i], k + 24 +i*21, b0 + 31);
+							RenderHelper.disableStandardItemLighting();
+							itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), ((CraftingStack)icons[0]).getSecondArray()[i], k + 24 +i*21, b0 + 52);
+							RenderHelper.disableStandardItemLighting();
+							itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), ((CraftingStack)icons[0]).getThirdArray()[i], k + 24 +i*21, b0 + 73);
+							RenderHelper.disableStandardItemLighting();
+						}
+					} else writeText(1, page.getPages()[0]);
+					break;
 				}
 			} else if(currnTurnup == 1 && page.getPageAmount() >= 2){
 				if(page.getPages().length > 3)
@@ -1183,6 +1892,23 @@ public class GuiNecronomiconEntry extends GuiNecronomicon {
 						mc.renderEngine.bindTexture((ResourceLocation)icons[1]);
 						drawTexturedModalRect(k, b0, 0, 0, 256, 256);
 						writeText(1, page.getPages()[2], 100);
+					} else writeText(1, page.getPages()[2]);
+					break;
+				case CRAFTING:
+					if(icons != null && icons[1] != null){
+						writeText(1, page.getPages()[2], 100);
+						GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+						mc.renderEngine.bindTexture(NecronomiconResources.CRAFTING);
+						drawTexturedModalRect(k, b0, 0, 0, 256, 256);
+						itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), ((CraftingStack)icons[1]).getOutput(), k + 93, b0 + 52);
+						for(int i = 0; i <= 2; i++){
+							itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), ((CraftingStack)icons[1]).getFirstArray()[i], k + 24 +i*21, b0 + 31);
+							RenderHelper.disableStandardItemLighting();
+							itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), ((CraftingStack)icons[1]).getSecondArray()[i], k + 24 +i*21, b0 + 52);
+							RenderHelper.disableStandardItemLighting();
+							itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), ((CraftingStack)icons[1]).getThirdArray()[i], k + 24 +i*21, b0 + 73);
+							RenderHelper.disableStandardItemLighting();
+						}
 					} else writeText(1, page.getPages()[2]);
 					break;
 				}
@@ -1208,6 +1934,23 @@ public class GuiNecronomiconEntry extends GuiNecronomicon {
 						writeText(1, page.getPages()[4], 100);
 					} else writeText(1, page.getPages()[4]);
 					break;
+				case CRAFTING:
+					if(icons != null && icons[2] != null){
+						writeText(1, page.getPages()[4], 100);
+						GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+						mc.renderEngine.bindTexture(NecronomiconResources.CRAFTING);
+						drawTexturedModalRect(k, b0, 0, 0, 256, 256);
+						itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), ((CraftingStack)icons[2]).getOutput(), k + 93, b0 + 52);
+						for(int i = 0; i <= 2; i++){
+							itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), ((CraftingStack)icons[2]).getFirstArray()[i], k + 24 +i*21, b0 + 31);
+							RenderHelper.disableStandardItemLighting();
+							itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), ((CraftingStack)icons[2]).getSecondArray()[i], k + 24 +i*21, b0 + 52);
+							RenderHelper.disableStandardItemLighting();
+							itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), ((CraftingStack)icons[2]).getThirdArray()[i], k + 24 +i*21, b0 + 73);
+							RenderHelper.disableStandardItemLighting();
+						}
+					} else writeText(1, page.getPages()[4]);
+					break;
 				}
 			} else if(currnTurnup == 3 && page.getPageAmount() >= 4){
 				if(page.getPages().length > 7)
@@ -1229,6 +1972,23 @@ public class GuiNecronomiconEntry extends GuiNecronomicon {
 						mc.renderEngine.bindTexture((ResourceLocation)icons[3]);
 						drawTexturedModalRect(k, b0, 0, 0, 256, 256);
 						writeText(1, page.getPages()[6], 100);
+					} else writeText(1, page.getPages()[6]);
+					break;
+				case CRAFTING:
+					if(icons != null && icons[3] != null){
+						writeText(1, page.getPages()[6], 100);
+						GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+						mc.renderEngine.bindTexture(NecronomiconResources.CRAFTING);
+						drawTexturedModalRect(k, b0, 0, 0, 256, 256);
+						itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), ((CraftingStack)icons[3]).getOutput(), k + 93, b0 + 52);
+						for(int i = 0; i <= 2; i++){
+							itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), ((CraftingStack)icons[3]).getFirstArray()[i], k + 24 +i*21, b0 + 31);
+							RenderHelper.disableStandardItemLighting();
+							itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), ((CraftingStack)icons[3]).getSecondArray()[i], k + 24 +i*21, b0 + 52);
+							RenderHelper.disableStandardItemLighting();
+							itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), ((CraftingStack)icons[3]).getThirdArray()[i], k + 24 +i*21, b0 + 73);
+							RenderHelper.disableStandardItemLighting();
+						}
 					} else writeText(1, page.getPages()[6]);
 					break;
 				}
@@ -1254,6 +2014,23 @@ public class GuiNecronomiconEntry extends GuiNecronomicon {
 						writeText(1, page.getPages()[8], 100);
 					} else writeText(1, page.getPages()[8]);
 					break;
+				case CRAFTING:
+					if(icons != null && icons[4] != null){
+						writeText(1, page.getPages()[8], 100);
+						GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+						mc.renderEngine.bindTexture(NecronomiconResources.CRAFTING);
+						drawTexturedModalRect(k, b0, 0, 0, 256, 256);
+						itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), ((CraftingStack)icons[4]).getOutput(), k + 93, b0 + 52);
+						for(int i = 0; i <= 2; i++){
+							itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), ((CraftingStack)icons[4]).getFirstArray()[i], k + 24 +i*21, b0 + 31);
+							RenderHelper.disableStandardItemLighting();
+							itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), ((CraftingStack)icons[4]).getSecondArray()[i], k + 24 +i*21, b0 + 52);
+							RenderHelper.disableStandardItemLighting();
+							itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), ((CraftingStack)icons[4]).getThirdArray()[i], k + 24 +i*21, b0 + 73);
+							RenderHelper.disableStandardItemLighting();
+						}
+					} else writeText(1, page.getPages()[8]);
+					break;
 				}
 			} else if(currnTurnup == 5 && page.getPageAmount() >= 6){
 				if(page.getPages().length > 11)
@@ -1275,6 +2052,23 @@ public class GuiNecronomiconEntry extends GuiNecronomicon {
 						mc.renderEngine.bindTexture((ResourceLocation)icons[5]);
 						drawTexturedModalRect(k, b0, 0, 0, 256, 256);
 						writeText(1, page.getPages()[10], 100);
+					} else writeText(1, page.getPages()[10]);
+					break;
+				case CRAFTING:
+					if(icons != null && icons[5] != null){
+						writeText(1, page.getPages()[10], 100);
+						GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+						mc.renderEngine.bindTexture(NecronomiconResources.CRAFTING);
+						drawTexturedModalRect(k, b0, 0, 0, 256, 256);
+						itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), ((CraftingStack)icons[5]).getOutput(), k + 93, b0 + 52);
+						for(int i = 0; i <= 2; i++){
+							itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), ((CraftingStack)icons[5]).getFirstArray()[i], k + 24 +i*21, b0 + 31);
+							RenderHelper.disableStandardItemLighting();
+							itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), ((CraftingStack)icons[5]).getSecondArray()[i], k + 24 +i*21, b0 + 52);
+							RenderHelper.disableStandardItemLighting();
+							itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), ((CraftingStack)icons[5]).getThirdArray()[i], k + 24 +i*21, b0 + 73);
+							RenderHelper.disableStandardItemLighting();
+						}
 					} else writeText(1, page.getPages()[10]);
 					break;
 				}
@@ -1300,6 +2094,23 @@ public class GuiNecronomiconEntry extends GuiNecronomicon {
 						writeText(1, page.getPages()[12], 100);
 					} else writeText(1, page.getPages()[12]);
 					break;
+				case CRAFTING:
+					if(icons != null && icons[6] != null){
+						writeText(1, page.getPages()[12], 100);
+						GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+						mc.renderEngine.bindTexture(NecronomiconResources.CRAFTING);
+						drawTexturedModalRect(k, b0, 0, 0, 256, 256);
+						itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), ((CraftingStack)icons[6]).getOutput(), k + 93, b0 + 52);
+						for(int i = 0; i <= 2; i++){
+							itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), ((CraftingStack)icons[6]).getFirstArray()[i], k + 24 +i*21, b0 + 31);
+							RenderHelper.disableStandardItemLighting();
+							itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), ((CraftingStack)icons[6]).getSecondArray()[i], k + 24 +i*21, b0 + 52);
+							RenderHelper.disableStandardItemLighting();
+							itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), ((CraftingStack)icons[6]).getThirdArray()[i], k + 24 +i*21, b0 + 73);
+							RenderHelper.disableStandardItemLighting();
+						}
+					} else writeText(1, page.getPages()[12]);
+					break;
 				}
 			} else if(currnTurnup == 7 && page.getPageAmount() >= 8){
 				if(page.getPages().length > 15)
@@ -1321,6 +2132,23 @@ public class GuiNecronomiconEntry extends GuiNecronomicon {
 						mc.renderEngine.bindTexture((ResourceLocation)icons[7]);
 						drawTexturedModalRect(k, b0, 0, 0, 256, 256);
 						writeText(1, page.getPages()[14], 100);
+					} else writeText(1, page.getPages()[14]);
+					break;
+				case CRAFTING:
+					if(icons != null && icons[7] != null){
+						writeText(1, page.getPages()[14], 100);
+						GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+						mc.renderEngine.bindTexture(NecronomiconResources.CRAFTING);
+						drawTexturedModalRect(k, b0, 0, 0, 256, 256);
+						itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), ((CraftingStack)icons[7]).getOutput(), k + 93, b0 + 52);
+						for(int i = 0; i <= 2; i++){
+							itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), ((CraftingStack)icons[7]).getFirstArray()[i], k + 24 +i*21, b0 + 31);
+							RenderHelper.disableStandardItemLighting();
+							itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), ((CraftingStack)icons[7]).getSecondArray()[i], k + 24 +i*21, b0 + 52);
+							RenderHelper.disableStandardItemLighting();
+							itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), ((CraftingStack)icons[7]).getThirdArray()[i], k + 24 +i*21, b0 + 73);
+							RenderHelper.disableStandardItemLighting();
+						}
 					} else writeText(1, page.getPages()[14]);
 					break;
 				}
@@ -1346,6 +2174,23 @@ public class GuiNecronomiconEntry extends GuiNecronomicon {
 						writeText(1, page.getPages()[16], 100);
 					} else writeText(1, page.getPages()[16]);
 					break;
+				case CRAFTING:
+					if(icons != null && icons[8] != null){
+						writeText(1, page.getPages()[16], 100);
+						GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+						mc.renderEngine.bindTexture(NecronomiconResources.CRAFTING);
+						drawTexturedModalRect(k, b0, 0, 0, 256, 256);
+						itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), ((CraftingStack)icons[8]).getOutput(), k + 93, b0 + 52);
+						for(int i = 0; i <= 2; i++){
+							itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), ((CraftingStack)icons[8]).getFirstArray()[i], k + 24 +i*21, b0 + 31);
+							RenderHelper.disableStandardItemLighting();
+							itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), ((CraftingStack)icons[8]).getSecondArray()[i], k + 24 +i*21, b0 + 52);
+							RenderHelper.disableStandardItemLighting();
+							itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), ((CraftingStack)icons[8]).getThirdArray()[i], k + 24 +i*21, b0 + 73);
+							RenderHelper.disableStandardItemLighting();
+						}
+					} else writeText(1, page.getPages()[16]);
+					break;
 				}
 			} else if(currnTurnup == 9 && page.getPageAmount() >= 10){
 				if(page.getPages().length > 19)
@@ -1367,6 +2212,23 @@ public class GuiNecronomiconEntry extends GuiNecronomicon {
 						mc.renderEngine.bindTexture((ResourceLocation)icons[9]);
 						drawTexturedModalRect(k, b0, 0, 0, 256, 256);
 						writeText(1, page.getPages()[18], 100);
+					} else writeText(1, page.getPages()[18]);
+					break;
+				case CRAFTING:
+					if(icons != null && icons[9] != null){
+						writeText(1, page.getPages()[18], 100);
+						GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+						mc.renderEngine.bindTexture(NecronomiconResources.CRAFTING);
+						drawTexturedModalRect(k, b0, 0, 0, 256, 256);
+						itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), ((CraftingStack)icons[9]).getOutput(), k + 93, b0 + 52);
+						for(int i = 0; i <= 2; i++){
+							itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), ((CraftingStack)icons[9]).getFirstArray()[i], k + 24 +i*21, b0 + 31);
+							RenderHelper.disableStandardItemLighting();
+							itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), ((CraftingStack)icons[9]).getSecondArray()[i], k + 24 +i*21, b0 + 52);
+							RenderHelper.disableStandardItemLighting();
+							itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), ((CraftingStack)icons[9]).getThirdArray()[i], k + 24 +i*21, b0 + 73);
+							RenderHelper.disableStandardItemLighting();
+						}
 					} else writeText(1, page.getPages()[18]);
 					break;
 				}

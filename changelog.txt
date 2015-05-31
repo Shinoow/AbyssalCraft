@@ -1,6 +1,16 @@
--Added entity mappings for all entities (they can now be spawned through mob spawners, any existing entity will despawn when a world is loaded with this version)
--Replaced the Zombie spawner in the Abyssal Stronghold with a Dread Spawn Spawner
--Fixed a minor bug in the slab blocks
--Fixed a minor glitch in the Gateway Keys
--Improved the anger system for Remnants (whatever attacks one of them becomes the target for all of them, and a Minion of The Gatekeeper can tell them what to attack)
--Nerfed the ChestGenHook treasure (Dreadium Ingot no longer appear, and Refined Coralium and Abyssalnite Ingots have both been reduced the amount that can appear)
+-Switched license, AbyssalCraft is now licensed under the GNU Lesser Public License v3
+-Altered the Potion reflection (only extends the array to 128, and skips if it's already extended)
+-Added a new PageType, CRAFTING
+-Added the ability to add Necronomicon pages with crafting recipes
+-You can now register your own Necronomicon pages
+-Added a special section for pages made by other mods (only shows when a mod that has added pages is loaded)
+-The random blindness effect inside the Darklands can now be repelled by any AbyssalCraft helmet
+-Added Crafting pages for all things used in progression on each dimension page
+-Undid the previous mappings, fixes incompatibilities with other mob spawning mods
+-Added Greater Dread Spawn
+-Added Lesser Dreadbeast
+-Coins and Engraving recipes can now be registered (and they will work)
+-The NEI integration now shows more clearly which engraving templates gives what coin
+-Partial implementation of Ritual Altars (Very W.I.P)
+-Added Ritual Altar
+-Added Ritual Pedestal

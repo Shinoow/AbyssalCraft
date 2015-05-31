@@ -1,19 +1,14 @@
-/**
+/*******************************************************************************
  * AbyssalCraft
- * Copyright 2012-2015 Shinoow
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *  http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
+ * Copyright (c) 2012 - 2015 Shinoow.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the GNU Lesser Public License v3
+ * which accompanies this distribution, and is available at
+ * http://www.gnu.org/licenses/lgpl-3.0.txt
+ * 
+ * Contributors:
+ *     Shinoow -  implementation
+ ******************************************************************************/
 package com.shinoow.abyssalcraft.api;
 
 import java.lang.reflect.Field;
@@ -21,6 +16,8 @@ import java.lang.reflect.Modifier;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+
+import org.apache.logging.log4j.Level;
 
 import net.minecraft.block.Block;
 import net.minecraft.entity.*;
@@ -37,12 +34,15 @@ import net.minecraftforge.common.util.EnumHelper;
 import net.minecraftforge.oredict.OreDictionary;
 
 import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.api.integration.IACPlugin;
 import com.shinoow.abyssalcraft.api.item.ACItems;
 import com.shinoow.abyssalcraft.api.item.ItemEngraving;
+import com.shinoow.abyssalcraft.api.necronomicon.NecroData;
 import com.shinoow.abyssalcraft.api.recipe.*;
 
+import cpw.mods.fml.common.FMLLog;
 import cpw.mods.fml.common.IFuelHandler;
 import cpw.mods.fml.common.registry.GameRegistry;
 
@@ -58,7 +58,7 @@ public class AbyssalCraftAPI {
 	/**
 	 * String used to specify the API version in the "package-info.java" classes
 	 */
-	public static final String API_VERSION = "1.3.0";
+	public static final String API_VERSION = "1.3.5";
 
 	/**
 	 * Enchantment IDs, first one is the Coralium enchantment, second Dread enchantment,
@@ -87,6 +87,8 @@ public class AbyssalCraftAPI {
 
 	private static List<IACPlugin> integrations = Lists.newArrayList();
 
+	private static HashMap<NecroData, Integer> necroData = Maps.newHashMap();
+
 	/**
 	 *  {@link EnumCreatureAttribute} used for the Shadow mobs
 	 */
@@ -114,24 +116,26 @@ public class AbyssalCraftAPI {
 	 */
 	@SuppressWarnings("unchecked")
 	public static void initPotionReflection(){
-		Potion[] potionTypes = null;
-		for (Field f : Potion.class.getDeclaredFields()) {
-			f.setAccessible(true);
-			try {
-				if (f.getName().equals("potionTypes") || f.getName().equals("field_76425_a")) {
-					Field modfield = Field.class.getDeclaredField("modifiers");
-					modfield.setAccessible(true);
-					modfield.setInt(f, f.getModifiers() & ~Modifier.FINAL);
+		if(Potion.potionTypes.length < 128){
+			Potion[] potionTypes = null;
+			for (Field f : Potion.class.getDeclaredFields()) {
+				f.setAccessible(true);
+				try {
+					if (f.getName().equals("potionTypes") || f.getName().equals("field_76425_a")) {
+						Field modfield = Field.class.getDeclaredField("modifiers");
+						modfield.setAccessible(true);
+						modfield.setInt(f, f.getModifiers() & ~Modifier.FINAL);
 
-					potionTypes = (Potion[])f.get(null);
-					final Potion[] newPotionTypes = new Potion[256];
-					System.arraycopy(potionTypes, 0, newPotionTypes, 0, potionTypes.length);
-					f.set(null, newPotionTypes);
+						potionTypes = (Potion[])f.get(null);
+						final Potion[] newPotionTypes = new Potion[128];
+						System.arraycopy(potionTypes, 0, newPotionTypes, 0, potionTypes.length);
+						f.set(null, newPotionTypes);
+					}
 				}
-			}
-			catch (Exception e) {
-				System.err.println("Whoops, something screwed up here, please report this to shinoow:");
-				System.err.println(e);
+				catch (Exception e) {
+					System.err.println("Whoops, something screwed up here, please report this to shinoow:");
+					System.err.println(e);
+				}
 			}
 		}
 		for(Field f : PotionHelper.class.getDeclaredFields())
@@ -486,7 +490,8 @@ public class AbyssalCraftAPI {
 	}
 
 	/**
-	 * Basic Engraving
+	 * Basic Engraving (deprecated, use {@link #addCoin(ItemStack)} for the coin, and
+	 * {@link #addEngraving(ItemStack, ItemEngraving, float)} for the engraving template and engraved coin)
 	 * @param input The ItemStack to engrave
 	 * @param output The ItemStack output
 	 * @param engraving The engraving template (must be an {@link ItemEngraving})
@@ -494,17 +499,15 @@ public class AbyssalCraftAPI {
 	 * 
 	 * @since 1.1
 	 */
+	@Deprecated
 	public static void addEngraving(ItemStack input, ItemStack output, Item engraving, float xp){
-		try{
-			EngraverRecipes.engraving().engrave(input, output, (ItemEngraving)engraving, xp);
-		} catch(ClassCastException e){
-			System.err.println("You're doing it wrong!");
-			e.printStackTrace();
-		}
+		addCoin(input);
+		addEngraving(output, (ItemEngraving)engraving, xp);
 	}
 
 	/**
-	 * Basic Engraving
+	 * Basic Engraving (deprecated, use {@link #addCoin(Item)} for the coin, and
+	 * {@link #addEngraving(Item, ItemEngraving, float)} for the engraving template and engraved coin)
 	 * @param input The Item to engrave
 	 * @param output The ItemStack output
 	 * @param engraving The engraving template (must be an {@link ItemEngraving})
@@ -512,13 +515,68 @@ public class AbyssalCraftAPI {
 	 * 
 	 * @since 1.1
 	 */
+	@Deprecated
 	public static void addEngraving(Item input, ItemStack output, Item engraving, float xp){
-		try{
-			EngraverRecipes.engraving().engrave(input, output, (ItemEngraving)engraving, xp);
-		} catch(ClassCastException e){
-			System.err.println("You're doing it wrong!");
-			e.printStackTrace();
-		}
+		addCoin(input);
+		addEngraving(output, (ItemEngraving)engraving, xp);
+	}
+
+	/**
+	 * Registers a coin to the coin list (use {@link #addEngraving(ItemStack, ItemEngraving, float)}.
+	 * Both regular coins and engraved coins should be registered here
+	 * to register the engraving template and engraved coin)
+	 * @param coin The ItemStack containing a coin
+	 * 
+	 * @since 1.3.5
+	 */
+	public static void addCoin(ItemStack coin){
+		if(!EngraverRecipes.engraving().getCoinList().contains(coin))
+			EngraverRecipes.engraving().addCoin(coin);
+		else FMLLog.log("AbyssalCraftAPI", Level.ERROR, "This Coin is already registered!");
+	}
+
+	/**
+	 * Registers a coin to the coin list (use {@link #addEngraving(Item, ItemEngraving, float)}.
+	 * Both regular coins and engraved coins should be registered here
+	 * to register the engraving template and engraved coin)
+	 * @param coin The Item representing a coin
+	 * 
+	 * @since 1.3.5
+	 */
+	public static void addCoin(Item coin){
+		if(!EngraverRecipes.engraving().getCoinList().contains(new ItemStack(coin)))
+			EngraverRecipes.engraving().addCoin(coin);
+		else FMLLog.log("AbyssalCraftAPI", Level.ERROR, "This Coin is already registered!");
+	}
+
+	/**
+	 * Registers a coin engraving (use {@link #addCoin(ItemStack)} to register the coin)
+	 * @param coin The Engraved Coin
+	 * @param engraving The Engraving Template
+	 * @param xp Amount of exp given
+	 * 
+	 * @since 1.3.5
+	 */
+	public static void addEngraving(ItemStack coin, ItemEngraving engraving, float xp){
+		if(!EngraverRecipes.engraving().getEngravingList().containsKey(engraving) &&
+				!EngraverRecipes.engraving().getEngravingList().containsValue(coin))
+			EngraverRecipes.engraving().addEngraving(coin, engraving, xp);
+		else FMLLog.log("AbyssalCraftAPI", Level.ERROR, "This Engraving Template and/or Engraved Coin is already registered!");
+	}
+
+	/**
+	 * Registers a coin engraving (use {@link #addCoin(Item)} to register the coin)
+	 * @param coin The Engraved Coin
+	 * @param engraving The Engraving Template
+	 * @param xp Amount of exp given
+	 * 
+	 * @since 1.3.5
+	 */
+	public static void addEngraving(Item coin, ItemEngraving engraving, float xp){
+		if(!EngraverRecipes.engraving().getEngravingList().containsKey(engraving) &&
+				!EngraverRecipes.engraving().getEngravingList().containsValue(new ItemStack(coin)))
+			EngraverRecipes.engraving().addEngraving(coin, engraving, xp);
+		else FMLLog.log("AbyssalCraftAPI", Level.ERROR, "This Engraving Template and/or Engraved Coin is already registered!");
 	}
 
 	/**
@@ -734,6 +792,34 @@ public class AbyssalCraftAPI {
 	}
 
 	/**
+	 * Method used to register pages to the Necronomicon
+	 * @param data The NecroData instance, with page data
+	 * @param bookType The Necronomicon "level" required in order to read this.
+	 * <ul>
+	 * <li>0 = Necronomicon</li>
+	 * <li>1 = Abyssal Wasteland Necronomicon</li>
+	 * <li>2 = Dreadlands Necronomicon</li>
+	 * <li>3 = Omothol Necronomicon</li>
+	 * <li>4 = Abyssalnomicon</li>
+	 * </ul>
+	 * 
+	 * @since 1.3.5
+	 */
+	public static void registerNecronomiconData(NecroData data, int bookType){
+		necroData.put(data, bookType);
+	}
+
+	/**
+	 * Used by the Necronomicon for fetching pages made outside of AbyssalCraft
+	 * @return A HashMap of NecroDatas and Integers
+	 * 
+	 * @since 1.3.5
+	 */
+	public static HashMap<NecroData,Integer> getNecronomiconData(){
+		return necroData;
+	}
+
+	/**
 	 * Contains the names of all mobs added in AbyssalCraft.
 	 * 
 	 * @author shinoow
@@ -746,7 +832,7 @@ public class AbyssalCraftAPI {
 			"demonpig", "gskeleton", "chagarothspawn", "chagarothfist", "chagaroth", "shadowbeast", "shadowboss",
 			"antiabyssalzombie", "antibat", "antichicken", "anticow", "anticreeper", "antighoul", "antipig", "antiplayer",
 			"antiskeleton", "antispider", "antizombie", "lessershoggoth", "shadowtitan", "omotholwarden", "jzaharminion",
-			"omotholghoul", "remnant"};
+			"omotholghoul", "remnant", "greaterdreadspawn", "lesserdreadbeast"};
 
 		public static String depths_ghoul = mobNames[0];
 		public static String evil_pig = mobNames[1];
@@ -785,6 +871,8 @@ public class AbyssalCraftAPI {
 		public static String minion_of_the_gatekeeper = mobNames[34];
 		public static String omothol_ghoul = mobNames[35];
 		public static String remnant = mobNames[36];
+		public static String greater_dread_spawn = mobNames[37];
+		public static String lesser_dreadbeast = mobNames[38];
 	}
 
 	/**

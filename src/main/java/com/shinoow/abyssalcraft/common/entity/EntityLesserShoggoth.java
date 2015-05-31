@@ -1,19 +1,14 @@
-/**
+/*******************************************************************************
  * AbyssalCraft
- * Copyright 2012-2015 Shinoow
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *  http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
+ * Copyright (c) 2012 - 2015 Shinoow.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the GNU Lesser Public License v3
+ * which accompanies this distribution, and is available at
+ * http://www.gnu.org/licenses/lgpl-3.0.txt
+ * 
+ * Contributors:
+ *     Shinoow -  implementation
+ ******************************************************************************/
 package com.shinoow.abyssalcraft.common.entity;
 
 import java.util.ArrayList;
@@ -111,17 +106,17 @@ public class EntityLesserShoggoth extends EntityMob implements ICoraliumEntity, 
 		switch (getShoggothType())
 		{
 		case 0:
-			return StatCollector.translateToLocal("entity.lessershoggoth.name");
+			return StatCollector.translateToLocal("entity.abyssalcraft.lessershoggoth.name");
 		case 1:
-			return StatCollector.translateToLocal("entity.lessershoggoth.abyssal.name");
+			return StatCollector.translateToLocal("entity.abyssalcraft.lessershoggoth.abyssal.name");
 		case 2:
-			return StatCollector.translateToLocal("entity.lessershoggoth.dreaded.name");
+			return StatCollector.translateToLocal("entity.abyssalcraft.lessershoggoth.dreaded.name");
 		case 3:
-			return StatCollector.translateToLocal("entity.lessershoggoth.omothol.name");
+			return StatCollector.translateToLocal("entity.abyssalcraft.lessershoggoth.omothol.name");
 		case 4:
-			return StatCollector.translateToLocal("entity.lessershoggoth.dark.name");
+			return StatCollector.translateToLocal("entity.abyssalcraft.lessershoggoth.dark.name");
 		default:
-			return StatCollector.translateToLocal("entity.lessershoggoth.name");
+			return StatCollector.translateToLocal("entity.abyssalcraft.lessershoggoth.name");
 		}
 	}
 

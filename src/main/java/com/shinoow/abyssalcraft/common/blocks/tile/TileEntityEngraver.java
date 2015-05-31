@@ -1,19 +1,14 @@
-/**
+/*******************************************************************************
  * AbyssalCraft
- * Copyright 2012-2015 Shinoow
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *  http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
+ * Copyright (c) 2012 - 2015 Shinoow.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the GNU Lesser Public License v3
+ * which accompanies this distribution, and is available at
+ * http://www.gnu.org/licenses/lgpl-3.0.txt
+ * 
+ * Contributors:
+ *     Shinoow -  implementation
+ ******************************************************************************/
 package com.shinoow.abyssalcraft.common.blocks.tile;
 
 import net.minecraft.entity.player.EntityPlayer;
@@ -23,6 +18,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
 
+import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.api.item.ItemEngraving;
 import com.shinoow.abyssalcraft.api.recipe.EngraverRecipes;
 import com.shinoow.abyssalcraft.common.blocks.BlockEngraver;
@@ -247,6 +243,14 @@ public class TileEntityEngraver extends TileEntity implements ISidedInventory {
 	public boolean isUseableByPlayer(EntityPlayer par1EntityPlayer)
 	{
 		return worldObj.getTileEntity(xCoord, yCoord, zCoord) != this ? false : par1EntityPlayer.getDistanceSq(xCoord + 0.5D, yCoord + 0.5D, zCoord + 0.5D) <= 64.0D;
+	}
+
+	public static boolean isCoin(ItemStack par1){
+		if(par1.getItem() == AbyssalCraft.coin) return true;
+		if(par1.getItem() == AbyssalCraft.cthulhuCoin) return true;
+		if(par1.getItem() == AbyssalCraft.elderCoin) return true;
+		if(par1.getItem() == AbyssalCraft.jzaharCoin) return true;
+		return EngraverRecipes.engraving().getCoinList().contains(par1);
 	}
 
 	@Override

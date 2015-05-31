@@ -1,19 +1,14 @@
-/**
+/*******************************************************************************
  * AbyssalCraft
- * Copyright 2012-2015 Shinoow
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *  http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
+ * Copyright (c) 2012 - 2015 Shinoow.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the GNU Lesser Public License v3
+ * which accompanies this distribution, and is available at
+ * http://www.gnu.org/licenses/lgpl-3.0.txt
+ * 
+ * Contributors:
+ *     Shinoow -  implementation
+ ******************************************************************************/
 package com.shinoow.abyssalcraft.common;
 
 import net.minecraft.client.model.ModelBiped;
@@ -27,6 +22,7 @@ import com.shinoow.abyssalcraft.client.gui.*;
 import com.shinoow.abyssalcraft.client.gui.necronomicon.GuiNecronomicon;
 import com.shinoow.abyssalcraft.common.blocks.tile.*;
 import com.shinoow.abyssalcraft.common.inventory.*;
+import com.shinoow.abyssalcraft.common.items.ItemNecronomicon;
 
 import cpw.mods.fml.common.network.IGuiHandler;
 
@@ -92,16 +88,8 @@ public class CommonProxy implements IGuiHandler {
 		if(stack != null)
 			switch(ID){
 			case AbyssalCraft.necronmiconGuiID:
-				if(stack.getItem() == AbyssalCraft.necronomicon)
-					return new GuiNecronomicon(0);
-				if(stack.getItem() == AbyssalCraft.necronomicon_cor)
-					return new GuiNecronomicon(1);
-				if(stack.getItem() == AbyssalCraft.necronomicon_dre)
-					return new GuiNecronomicon(2);
-				if(stack.getItem() == AbyssalCraft.necronomicon_omt)
-					return new GuiNecronomicon(3);
-				if(stack.getItem() == AbyssalCraft.abyssalnomicon)
-					return new GuiNecronomicon(4);
+				if(stack.getItem() instanceof ItemNecronomicon)
+					return new GuiNecronomicon(((ItemNecronomicon)stack.getItem()).getBookType());
 				break;
 			case AbyssalCraft.crystalbagGuiID:
 				return new GuiCrystalBag(new ContainerCrystalBag(player.inventory, new InventoryCrystalBag(player.getHeldItem())));

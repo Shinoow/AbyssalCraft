@@ -1,20 +1,17 @@
-/**
+/*******************************************************************************
  * AbyssalCraft
- * Copyright 2012-2015 Shinoow
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *  http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
+ * Copyright (c) 2012 - 2015 Shinoow.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the GNU Lesser Public License v3
+ * which accompanies this distribution, and is available at
+ * http://www.gnu.org/licenses/lgpl-3.0.txt
+ * 
+ * Contributors:
+ *     Shinoow -  implementation
+ ******************************************************************************/
 package com.shinoow.abyssalcraft.common.entity;
+
+import java.util.List;
 
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
@@ -39,6 +36,7 @@ import com.shinoow.abyssalcraft.api.entity.IDreadEntity;
 
 public class EntityDreadSpawn extends EntityMob implements IDreadEntity
 {
+	private static boolean hasMerged;
 
 	public EntityDreadSpawn(World par1World)
 	{
@@ -120,5 +118,26 @@ public class EntityDreadSpawn extends EntityMob implements IDreadEntity
 	public EnumCreatureAttribute getCreatureAttribute()
 	{
 		return EnumCreatureAttribute.UNDEAD;
+	}
+
+	@Override
+	public void onLivingUpdate()
+	{
+		super.onLivingUpdate();
+
+		List<EntityDreadSpawn> dreadspawns = worldObj.getEntitiesWithinAABB(getClass(), boundingBox.expand(2D, 2D, 2D));
+
+		if(!worldObj.isRemote)
+			if(!dreadspawns.isEmpty())
+				if(dreadspawns.size() >= 5 && !hasMerged){
+					hasMerged = true;
+					for(int i = 0; i < 5; i++)
+						worldObj.removeEntity(dreadspawns.get(i));
+					EntityGreaterDreadSpawn greaterspawn = new EntityGreaterDreadSpawn(worldObj);
+					greaterspawn.copyLocationAndAnglesFrom(this);
+					worldObj.removeEntity(this);
+					worldObj.spawnEntityInWorld(greaterspawn);
+					hasMerged = false;
+				}
 	}
 }

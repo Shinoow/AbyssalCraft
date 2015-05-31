@@ -1,19 +1,14 @@
-/**
+/*******************************************************************************
  * AbyssalCraft
- * Copyright 2012-2015 Shinoow
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *  http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
+ * Copyright (c) 2012 - 2015 Shinoow.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the GNU Lesser Public License v3
+ * which accompanies this distribution, and is available at
+ * http://www.gnu.org/licenses/lgpl-3.0.txt
+ * 
+ * Contributors:
+ *     Shinoow -  implementation
+ ******************************************************************************/
 package com.shinoow.abyssalcraft;
 
 import java.io.*;
@@ -51,6 +46,7 @@ import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI.FuelType;
 import com.shinoow.abyssalcraft.api.integration.IACPlugin;
 import com.shinoow.abyssalcraft.api.item.*;
+import com.shinoow.abyssalcraft.api.necronomicon.RitualAltar;
 import com.shinoow.abyssalcraft.common.*;
 import com.shinoow.abyssalcraft.common.blocks.*;
 import com.shinoow.abyssalcraft.common.blocks.itemblock.*;
@@ -80,7 +76,7 @@ import cpw.mods.fml.common.registry.*;
 @Mod(modid = AbyssalCraft.modid, name = AbyssalCraft.name, version = AbyssalCraft.version, dependencies = "required-after:Forge@[forgeversion,);after:Thaumcraft", useMetadata = false, guiFactory = "com.shinoow.abyssalcraft.client.config.ACGuiFactory")
 public class AbyssalCraft {
 
-	public static final String version = "1.8.6.1";
+	public static final String version = "1.8.7";
 	public static final String modid = "abyssalcraft";
 	public static final String name = "AbyssalCraft";
 
@@ -144,7 +140,7 @@ public class AbyssalCraft {
 	AbyCopOre, AbyPCorOre, AbyLCorOre, solidLava, ethaxium, ethaxiumbrick, ethaxiumpillar, ethaxiumstairs,
 	ethaxiumslab1, ethaxiumslab2, ethaxiumfence, omotholstone, ethaxiumblock, omotholportal, omotholfire,
 	engraver, house, materializer, darkethaxiumbrick, darkethaxiumpillar, darkethaxiumstairs,
-	darkethaxiumslab1, darkethaxiumslab2, darkethaxiumfence;
+	darkethaxiumslab1, darkethaxiumslab2, darkethaxiumfence, ritualaltar, ritualpedestal;
 
 	//Overworld biomes
 	public static BiomeGenBase Darklands, DarklandsForest, DarklandsPlains, DarklandsHills,
@@ -288,6 +284,8 @@ public class AbyssalCraft {
 	particleBlock, particleEntity;
 	public static int evilPigSpawnRate;
 
+	static int startEntityId = 300;
+
 	public static final int crystallizerGuiID = 30;
 	public static final int transmutatorGuiID = 31;
 	public static final int engraverGuiID = 32;
@@ -312,6 +310,8 @@ public class AbyssalCraft {
 
 		cfg = new Configuration(event.getSuggestedConfigurationFile());
 		syncConfig();
+		if(Potion.potionTypes.length >= 128)
+			ACLogger.info("The potion array has already been extended (%d), so we're not doing it again.", Potion.potionTypes.length);
 		AbyssalCraftAPI.initPotionReflection();
 
 		if(!FluidRegistry.isFluidRegistered("liquidcoralium")){
@@ -457,6 +457,8 @@ public class AbyssalCraft {
 		darkethaxiumslab1 = new BlockACSingleSlab(Material.rock, "pickaxe", 8).setHardness(150.0F).setResistance(Float.MAX_VALUE).setStepSound(Block.soundTypeStone).setBlockName("DEBs1").setBlockTextureName(modid + ":" + "DEB");
 		darkethaxiumslab2 = new BlockACDoubleSlab(darkethaxiumslab1, Material.rock, "pickaxe", 8).setHardness(150.0F).setResistance(Float.MAX_VALUE).setStepSound(Block.soundTypeStone).setBlockName("DEBs2").setBlockTextureName(modid + ":" + "DEB");
 		darkethaxiumfence = new BlockACFence("DEB", Material.rock, "pickaxe", 8).setHardness(150.0F).setResistance(Float.MAX_VALUE).setStepSound(Block.soundTypeStone).setBlockName("DEBf");
+		ritualaltar = new BlockRitualAltar().setBlockName("ritualaltar");
+		ritualpedestal = new BlockRitualPedestal().setBlockName("ritualpedestal");
 
 		//Biome
 		Darklands = new BiomeGenDarklands(configBiomeId1).setColor(522674).setBiomeName("Darklands");
@@ -507,11 +509,11 @@ public class AbyssalCraft {
 		shoggothFlesh = new ItemShoggothFlesh();
 		eldritchScale = new ItemACBasic("eldritchScale");
 		omotholFlesh = new ItemOmotholFlesh(3, 0.3F, false);
-		necronomicon = new ItemNecronomicon("necronomicon");
-		necronomicon_cor = new ItemNecronomicon("necronomicon_cor");
-		necronomicon_dre = new ItemNecronomicon("necronomicon_dre");
-		necronomicon_omt = new ItemNecronomicon("necronomicon_omt");
-		abyssalnomicon = new ItemNecronomicon("abyssalnomicon");
+		necronomicon = new ItemNecronomicon("necronomicon", 0);
+		necronomicon_cor = new ItemNecronomicon("necronomicon_cor", 1);
+		necronomicon_dre = new ItemNecronomicon("necronomicon_dre", 2);
+		necronomicon_omt = new ItemNecronomicon("necronomicon_omt", 3);
+		abyssalnomicon = new ItemNecronomicon("abyssalnomicon", 4);
 		crystalbag_s = new ItemCrystalBag("crystalbag_small");
 		crystalbag_m = new ItemCrystalBag("crystalbag_medium");
 		crystalbag_l = new ItemCrystalBag("crystalbag_large");
@@ -857,6 +859,8 @@ public class AbyssalCraft {
 		GameRegistry.registerBlock(darkethaxiumslab1, ItemDarkEthaxiumSlab.class, "darkethaxiumbrickslab1");
 		GameRegistry.registerBlock(darkethaxiumslab2, ItemDarkEthaxiumSlab.class, "darkethaxiumbrickslab2");
 		GameRegistry.registerBlock(darkethaxiumfence, ItemBlockColorName.class, "darkethaxiumbrickfence");
+		GameRegistry.registerBlock(ritualaltar, ItemRitualBlock.class, "ritualaltar");
+		GameRegistry.registerBlock(ritualpedestal, ItemRitualBlock.class, "ritualpedestal");
 
 		//Item Register
 		GameRegistry.registerItem(devsword, "devsword");
@@ -1204,11 +1208,17 @@ public class AbyssalCraft {
 
 		registerEntityWithEgg(EntityGatekeeperMinion.class, "jzaharminion", 62, 80, 3, true, 0x133133, 0x342122);
 
-		//		registerEntityWithEgg(EntityLesserShoggoth.class, "lessershoggoth", 63, 80, 3, true, 0x133133, 0x342122);
+		registerEntityWithEgg(EntityGreaterDreadSpawn.class, "greaterdreadspawn", 63, 80, 3, true, 0xE60000, 0xCC0000);
+
+		registerEntityWithEgg(EntityLesserDreadbeast.class, "lesserdreadbeast", 64, 80, 3, true, 0xE60000, 0xCC0000);
+
+		EntityRegistry.registerModEntity(EntityDreadSlug.class, "DreadSlug", 65, this, 64, 10, true);
+
+		//		registerEntityWithEgg(EntityLesserShoggoth.class, "lessershoggoth", 66, 80, 3, true, 0x133133, 0x342122);
 		//
-		//		registerEntityWithEgg(EntityShadowTitan.class, "shadowtitan", 64, 80, 3, true, 0, 0xFFFFFF);
+		//		registerEntityWithEgg(EntityShadowTitan.class, "shadowtitan", 67, 80, 3, true, 0, 0xFFFFFF);
 		//
-		//		registerEntityWithEgg(EntityOmotholWarden.class, "omotholwarden", 65, 80, 3, true, 0x133133, 0x342122);
+		//		registerEntityWithEgg(EntityOmotholWarden.class, "omotholwarden", 68, 80, 3, true, 0x133133, 0x342122);
 
 		proxy.addArmor("Abyssalnite");
 		proxy.addArmor("AbyssalniteC");
@@ -1220,6 +1230,7 @@ public class AbyssalCraft {
 		proxy.addArmor("DreadiumS");
 		proxy.addArmor("Ethaxium");
 
+		RitualAltar.addBlocks();
 		addOreDictionaryStuff();
 		addChestGenHooks();
 		addDungeonHooks();
@@ -1777,16 +1788,16 @@ public class AbyssalCraft {
 	}
 
 	private void addDungeonHooks(){
-		DungeonHooks.addDungeonMob("abyssalzombie", 150);
-		DungeonHooks.addDungeonMob("depthsghoul", 100);
-		DungeonHooks.addDungeonMob("shadowcreature", 120);
-		DungeonHooks.addDungeonMob("shadowmonster", 100);
-		DungeonHooks.addDungeonMob("shadowbeast", 30);
-		DungeonHooks.addDungeonMob("antiabyssalzombie", 50);
-		DungeonHooks.addDungeonMob("antighoul", 50);
-		DungeonHooks.addDungeonMob("antiskeleton", 50);
-		DungeonHooks.addDungeonMob("antispider", 50);
-		DungeonHooks.addDungeonMob("antizombie", 50);
+		DungeonHooks.addDungeonMob("abyssalcraft.abyssalzombie", 150);
+		DungeonHooks.addDungeonMob("abyssalcraft.depthsghoul", 100);
+		DungeonHooks.addDungeonMob("abyssalcraft.shadowcreature", 120);
+		DungeonHooks.addDungeonMob("abyssalcraft.shadowmonster", 100);
+		DungeonHooks.addDungeonMob("abyssalcraft.shadowbeast", 30);
+		DungeonHooks.addDungeonMob("abyssalcraft.antiabyssalzombie", 50);
+		DungeonHooks.addDungeonMob("abyssalcraft.antighoul", 50);
+		DungeonHooks.addDungeonMob("abyssalcraft.antiskeleton", 50);
+		DungeonHooks.addDungeonMob("abyssalcraft.antispider", 50);
+		DungeonHooks.addDungeonMob("abyssalcraft.antizombie", 50);
 	}
 
 	private void sendIMC(){
@@ -1892,12 +1903,20 @@ public class AbyssalCraft {
 		SalvageHandler.INSTANCE.addLeggingsSalvage(Items.diamond_leggings, Items.diamond);
 	}
 
+	private static int getUniqueEntityId() {
+		do
+			startEntityId++;
+		while (EntityList.getStringFromID(startEntityId) != null);
+
+		return startEntityId;
+	}
+
 	@SuppressWarnings("unchecked")
 	private static void registerEntityWithEgg(Class<? extends Entity> entity, String name, int modid, int trackingRange, int updateFrequency, boolean sendsVelocityUpdates, int primaryColor, int secondaryColor) {
-		int id = EntityRegistry.findGlobalUniqueEntityId();
+		int id = getUniqueEntityId();
 		stringtoIDMapping.put(name, id);
-		EntityRegistry.registerGlobalEntityID(entity, name, id);
 		EntityRegistry.registerModEntity(entity, name, modid, AbyssalCraft.instance, trackingRange, updateFrequency, sendsVelocityUpdates);
+		EntityList.IDtoClassMapping.put(id, entity);
 		EntityList.entityEggs.put(id, new EntityEggInfo(id, primaryColor, secondaryColor));
 	}
 

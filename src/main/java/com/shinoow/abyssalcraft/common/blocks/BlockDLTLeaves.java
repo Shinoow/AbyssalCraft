@@ -1,19 +1,14 @@
-/**
+/*******************************************************************************
  * AbyssalCraft
- * Copyright 2012-2015 Shinoow
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *  http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
+ * Copyright (c) 2012 - 2015 Shinoow.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the GNU Lesser Public License v3
+ * which accompanies this distribution, and is available at
+ * http://www.gnu.org/licenses/lgpl-3.0.txt
+ * 
+ * Contributors:
+ *     Shinoow -  implementation
+ ******************************************************************************/
 package com.shinoow.abyssalcraft.common.blocks;
 
 import java.util.ArrayList;
@@ -43,7 +38,7 @@ public class BlockDLTLeaves extends BlockLeavesBase implements IShearable {
 	int[] adjacentTreeBlocks;
 	@SideOnly(Side.CLIENT)
 	private int iconType;
-	public static final String[][] textureNames = new String[][] {{"DLT_L"}, {"DLT_L_opaque"}};
+	public static final String[] textureNames = new String[] {"DLT_L", "DLT_L_opaque"};
 	private IIcon[][] iconArray = new IIcon[2][];
 
 	public BlockDLTLeaves()
@@ -229,7 +224,7 @@ public class BlockDLTLeaves extends BlockLeavesBase implements IShearable {
 	{
 		setGraphicsLevel(Minecraft.getMinecraft().gameSettings.fancyGraphics);
 
-		return (par2 & 3) == 1 ? iconArray[iconType][1] : iconArray[iconType][0];
+		return iconArray[iconType][0];
 	}
 
 	@SideOnly(Side.CLIENT)
@@ -265,10 +260,10 @@ public class BlockDLTLeaves extends BlockLeavesBase implements IShearable {
 	{
 		for (int i = 0; i < textureNames.length; ++i)
 		{
-			iconArray[i] = new IIcon[textureNames[i].length];
+			iconArray[i] = new IIcon[textureNames[i].length()];
 
-			for (int j = 0; j < textureNames[i].length; ++j)
-				iconArray[i][j] = par1IconRegister.registerIcon(AbyssalCraft.modid + ":" + textureNames[i][j]);
+			for (int j = 0; j < textureNames[i].length(); ++j)
+				iconArray[i][0] = par1IconRegister.registerIcon(AbyssalCraft.modid + ":" + textureNames[i]);
 		}
 	}
 }

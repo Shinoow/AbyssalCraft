@@ -1,19 +1,14 @@
-/**
+/*******************************************************************************
  * AbyssalCraft
- * Copyright 2012-2015 Shinoow
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *  http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
+ * Copyright (c) 2012 - 2015 Shinoow.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the GNU Lesser Public License v3
+ * which accompanies this distribution, and is available at
+ * http://www.gnu.org/licenses/lgpl-3.0.txt
+ * 
+ * Contributors:
+ *     Shinoow -  implementation
+ ******************************************************************************/
 package com.shinoow.abyssalcraft.client.gui.necronomicon;
 
 import net.minecraft.client.gui.GuiButton;
@@ -25,6 +20,7 @@ import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.GL11;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
+import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
 import com.shinoow.abyssalcraft.client.gui.necronomicon.buttons.ButtonCategory;
 import com.shinoow.abyssalcraft.client.gui.necronomicon.buttons.ButtonNextPage;
 import com.shinoow.abyssalcraft.client.lib.NecronomiconText;
@@ -47,6 +43,7 @@ public class GuiNecronomicon extends GuiScreen {
 	private ButtonCategory buttonCat2;
 	private ButtonCategory buttonCat3;
 	private ButtonCategory buttonCat4;
+	private ButtonCategory buttonCat5;
 	private GuiButton buttonDone;
 	private int bookType;
 	/** Used to check if we're at a text entry (true), or a index (false) */
@@ -109,6 +106,8 @@ public class GuiNecronomicon extends GuiScreen {
 		if(bookType == 4)
 			buttonList.add(buttonCat4 = new ButtonCategory(6, i + 10, b0 + 105, this, NecronomiconText.LABEL_HUH, AbyssalCraft.abyssalnomicon));
 		else buttonList.add(buttonCat4 = new ButtonCategory(6, i + 10, b0 + 105, this, NecronomiconText.LABEL_HUH, AbyssalCraft.necronomicon));
+		if(!AbyssalCraftAPI.getNecronomiconData().isEmpty())
+			buttonList.add(buttonCat5 = new ButtonCategory(7, i + 10, b0 + 130, this, NecronomiconText.LABEL_OTHER, AbyssalCraft.necronomicon));
 		updateButtons();
 	}
 
@@ -135,6 +134,8 @@ public class GuiNecronomicon extends GuiScreen {
 		buttonCat2.visible = true;
 		buttonCat3.visible = true;
 		buttonCat4.visible = true;
+		if(!AbyssalCraftAPI.getNecronomiconData().isEmpty())
+			buttonCat5.visible = true;
 
 	}
 
@@ -174,7 +175,8 @@ public class GuiNecronomicon extends GuiScreen {
 					bookTotalTurnups = 1;
 				else bookTotalTurnups = 2;
 				drawButtons();
-			}
+			} else if (button.id == 7)
+				mc.displayGuiScreen(new GuiNecronomiconOther(bookType));
 			updateButtons();
 		}
 	}

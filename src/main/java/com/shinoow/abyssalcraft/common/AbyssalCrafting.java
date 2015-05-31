@@ -1,19 +1,14 @@
-/**
+/*******************************************************************************
  * AbyssalCraft
- * Copyright 2012-2015 Shinoow
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *  http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
+ * Copyright (c) 2012 - 2015 Shinoow.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the GNU Lesser Public License v3
+ * which accompanies this distribution, and is available at
+ * http://www.gnu.org/licenses/lgpl-3.0.txt
+ * 
+ * Contributors:
+ *     Shinoow -  implementation
+ ******************************************************************************/
 package com.shinoow.abyssalcraft.common;
 
 import net.minecraft.init.Blocks;
@@ -25,6 +20,7 @@ import net.minecraftforge.oredict.ShapelessOreRecipe;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
+import com.shinoow.abyssalcraft.api.item.ItemEngraving;
 import com.shinoow.abyssalcraft.common.util.SalvageHandler;
 
 import cpw.mods.fml.common.registry.GameRegistry;
@@ -40,7 +36,7 @@ public class AbyssalCrafting {
 		addSalvage();
 		addCrystallization();
 		addTransmutation();
-		//		addEngraving();
+		addEngraving();
 	}
 	private static void addBlockCrafting(){
 
@@ -622,13 +618,15 @@ public class AbyssalCrafting {
 		AbyssalCraftAPI.addTransmutation(new ItemStack(AbyssalCraft.ethaxiumbrick, 1, 0), new ItemStack(AbyssalCraft.ethaxium), 0.0F);
 	}
 
-	//	private static void addEngraving(){
-	//
-	//		AbyssalCraftAPI.addEngraving(new ItemStack(AbyssalCraft.coin, 1), new ItemStack(AbyssalCraft.cthulhuCoin, 1), AbyssalCraft.engravingCthulhu, 0.5F);
-	//		AbyssalCraftAPI.addEngraving(new ItemStack(AbyssalCraft.coin, 1), new ItemStack(AbyssalCraft.elderCoin, 1), AbyssalCraft.engravingElder, 0.5F);
-	//		AbyssalCraftAPI.addEngraving(new ItemStack(AbyssalCraft.coin, 1), new ItemStack(AbyssalCraft.jzaharCoin, 1), AbyssalCraft.engravingJzahar, 0.5F);
-	//		AbyssalCraftAPI.addEngraving(new ItemStack(AbyssalCraft.cthulhuCoin, 1), new ItemStack(AbyssalCraft.coin, 1), AbyssalCraft.engravingBlank, 0.0F);
-	//		AbyssalCraftAPI.addEngraving(new ItemStack(AbyssalCraft.elderCoin, 1), new ItemStack(AbyssalCraft.coin, 1), AbyssalCraft.engravingBlank, 0.0F);
-	//		AbyssalCraftAPI.addEngraving(new ItemStack(AbyssalCraft.jzaharCoin, 1), new ItemStack(AbyssalCraft.coin, 1), AbyssalCraft.engravingBlank, 0.0F);
-	//	}
+	private static void addEngraving(){
+
+		AbyssalCraftAPI.addCoin(AbyssalCraft.coin);
+		AbyssalCraftAPI.addCoin(AbyssalCraft.cthulhuCoin);
+		AbyssalCraftAPI.addCoin(AbyssalCraft.elderCoin);
+		AbyssalCraftAPI.addCoin(AbyssalCraft.jzaharCoin);
+		AbyssalCraftAPI.addEngraving(AbyssalCraft.coin, (ItemEngraving)AbyssalCraft.engravingBlank, 0.0F);
+		AbyssalCraftAPI.addEngraving(AbyssalCraft.cthulhuCoin, (ItemEngraving)AbyssalCraft.engravingCthulhu, 0.5F);
+		AbyssalCraftAPI.addEngraving(AbyssalCraft.elderCoin, (ItemEngraving)AbyssalCraft.engravingElder, 0.5F);
+		AbyssalCraftAPI.addEngraving(AbyssalCraft.jzaharCoin, (ItemEngraving)AbyssalCraft.engravingJzahar, 0.5F);
+	}
 }

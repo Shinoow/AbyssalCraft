@@ -1,19 +1,14 @@
-/**
+/*******************************************************************************
  * AbyssalCraft
- * Copyright 2012-2015 Shinoow
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *  http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
+ * Copyright (c) 2012 - 2015 Shinoow.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the GNU Lesser Public License v3
+ * which accompanies this distribution, and is available at
+ * http://www.gnu.org/licenses/lgpl-3.0.txt
+ * 
+ * Contributors:
+ *     Shinoow -  implementation
+ ******************************************************************************/
 package com.shinoow.abyssalcraft.integration.nei;
 
 import java.awt.Rectangle;
@@ -25,7 +20,6 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
-import net.minecraft.block.Block;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
@@ -38,6 +32,7 @@ import codechicken.nei.recipe.TemplateRecipeHandler;
 
 import com.shinoow.abyssalcraft.api.recipe.EngraverRecipes;
 import com.shinoow.abyssalcraft.client.gui.GuiEngraver;
+import com.shinoow.abyssalcraft.common.blocks.tile.TileEntityEngraver;
 
 public class EngraverRecipeHandler extends TemplateRecipeHandler
 {
@@ -45,7 +40,7 @@ public class EngraverRecipeHandler extends TemplateRecipeHandler
 	{
 		public EngravingPair(ItemStack ingred, ItemStack result) {
 			ingred.stackSize = 1;
-			this.ingred = new PositionedStack(ingred, 51, 6);
+			this.ingred = new PositionedStack(ingred, 51, 42);
 			this.result = new PositionedStack(result, 111, 24);
 		}
 
@@ -71,7 +66,7 @@ public class EngraverRecipeHandler extends TemplateRecipeHandler
 	public static class FuelPair
 	{
 		public FuelPair(ItemStack ingred) {
-			stack = new PositionedStack(ingred, 51, 42, false);
+			stack = new PositionedStack(ingred, 51, 6, false);
 		}
 
 		public PositionedStack stack;
@@ -79,7 +74,6 @@ public class EngraverRecipeHandler extends TemplateRecipeHandler
 	}
 
 	public static ArrayList<FuelPair> afuels;
-	public static HashSet<Block> efuels;
 
 	@Override
 	public void loadTransferRects() {
@@ -167,11 +161,9 @@ public class EngraverRecipeHandler extends TemplateRecipeHandler
 		afuels = new ArrayList<FuelPair>();
 		Set<Item> efuels = excludedFuels();
 		for (ItemStack item : ItemList.items)
-			if (!efuels.contains(item.getItem())) {
-				boolean test = EngraverRecipes.engraving().getEngravingTemplates().containsKey(item.getItem());
-				if (test)
+			if (!efuels.contains(item.getItem()))
+				if (TileEntityEngraver.isCoin(item))
 					afuels.add(new FuelPair(item.copy()));
-			}
 	}
 
 	@Override
