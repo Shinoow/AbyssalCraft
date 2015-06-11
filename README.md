@@ -14,6 +14,10 @@ are made available under the terms of the GNU Lesser Public License v3
 which accompanies this distribution, and is available at
 http://www.gnu.org/licenses/lgpl-3.0.txt
 
+###Support Development
+
+[![](https://s3.amazonaws.com/patreon_public_assets/kaGh5_patreon_name_and_message.png)](https://www.patreon.com/Shinoow)
+
 ### Reporting bugs
 
 If you happen to find a bug while playing with the mod, report an issue, with a detailed explanation of what triggered the possible crash (or the bug), and the crash report (either as a gist or a site like pastebin). If you can track down a bug directly in the code, file a pull request pointing out the incorrect code while providing a fix. Make sure you label the issue with the "bug" label (does not apply for a direct PR).
@@ -29,4 +33,4 @@ Contributions are welcome. Most contributions might end up being tweaks and impr
 ### Integrations
 
 If you are looking into developing AbyssalCraft Add-ons (eventhough the API isn't complete), or just want to integrate
-it into your mod, check the "dev" branch for compiled mod jars that can be imported into your workspace.
+it into your mod, check the "dev" branch for compiled mod jars that can be imported into your workspace. It is, of course, also possible to only use the API by itself, in which case you can download the API alone from the "dev" branch, then just extract the contents of the zip file into src/api/java.
