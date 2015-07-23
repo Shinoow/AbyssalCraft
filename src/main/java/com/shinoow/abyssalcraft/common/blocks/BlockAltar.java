@@ -72,7 +72,7 @@ public class BlockAltar extends BlockContainer {
 				EntityDragonBoss.setLocationAndAngles(par2, par3, par4, MathHelper.wrapAngleTo180_float(par1World.rand.nextFloat() * 360.0F), 10.0F);
 				par1World.spawnEntityInWorld(EntityDragonBoss);
 				par5EntityPlayer.addPotionEffect(new PotionEffect(Potion.confusion.id, 200));
-				removedByPlayer(par1World, par5EntityPlayer, par2, par3, par4);
+				removedByPlayer(par1World, par5EntityPlayer, par2, par3, par4, false);
 				par1World.spawnParticle("hugeexplosion", maxX, maxY, maxZ, 0.0D, 0.0D, 0.0D);
 				par5EntityPlayer.addStat(AbyssalCraft.summonAsorah, 1);
 			}
@@ -88,9 +88,11 @@ public class BlockAltar extends BlockContainer {
 		super.randomDisplayTick(par1World, par2, par3, par4, par5Random);
 
 		if(AbyssalCraft.particleBlock)
-			if (par5Random.nextInt(10) == 0) {
-				par1World.spawnParticle("enchantmenttable", par2 + par5Random.nextFloat(), par3 + 1.1F, par4 + par5Random.nextFloat(), 0.0D, 0.0D, 0.0D);
-				par1World.spawnParticle("smoke", par2 + par5Random.nextFloat(), par3 + 1.1F, par4 + par5Random.nextFloat(), 0.0D, 0.0D, 0.0D);
+			if (par5Random.nextInt(3) == 0) {
+				par1World.spawnParticle("smoke", par2 + 0.75F, par3 + 0.7F, par4 + 0.75F, 0.0D, 0.0D, 0.0D);
+				par1World.spawnParticle("smoke", par2 + 0.2F, par3 + 0.7F, par4 + 0.75F, 0.0D, 0.0D, 0.0D);
+				par1World.spawnParticle("smoke", par2 + 0.2F, par3 + 0.7F, par4 + 0.2F, 0.0D, 0.0D, 0.0D);
+				par1World.spawnParticle("smoke", par2 + 0.75F, par3 + 0.7F, par4 + 0.2F, 0.0D, 0.0D, 0.0D);
 			}
 	}
 

@@ -205,25 +205,10 @@ public class EntityDepthsGhoul extends EntityMob implements ICoraliumEntity {
 	{
 		super.onDeath(par1DamageSource);
 
-		if (par1DamageSource.getEntity() instanceof EntityPlayer && getGhoulType() == 0)
+		if (par1DamageSource.getEntity() instanceof EntityPlayer)
 		{
 			EntityPlayer entityplayer = (EntityPlayer)par1DamageSource.getEntity();
 			entityplayer.addStat(AbyssalCraft.killghoul,1);
-		}
-		if (par1DamageSource.getEntity() instanceof EntityPlayer && getGhoulType() == 1)
-		{
-			EntityPlayer entityplayer = (EntityPlayer)par1DamageSource.getEntity();
-			entityplayer.addStat(AbyssalCraft.killPete,1);
-		}
-		if (par1DamageSource.getEntity() instanceof EntityPlayer && getGhoulType() == 2)
-		{
-			EntityPlayer entityplayer = (EntityPlayer)par1DamageSource.getEntity();
-			entityplayer.addStat(AbyssalCraft.killWilson,1);
-		}
-		if (par1DamageSource.getEntity() instanceof EntityPlayer && getGhoulType() == 3)
-		{
-			EntityPlayer entityplayer = (EntityPlayer)par1DamageSource.getEntity();
-			entityplayer.addStat(AbyssalCraft.killOrange,1);
 		}
 	}
 

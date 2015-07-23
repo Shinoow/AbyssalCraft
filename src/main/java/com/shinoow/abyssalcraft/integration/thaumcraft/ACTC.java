@@ -34,7 +34,7 @@ import com.shinoow.abyssalcraft.integration.thaumcraft.wands.*;
 
 import cpw.mods.fml.common.registry.GameRegistry;
 
-public class ACThaumcraftIntegration implements IACPlugin {
+public class ACTC implements IACPlugin {
 
 	public static WandCap abyssalniteCap, coraliumCap, dreadiumCap, ethaxiumCap;
 	public static WandRod darklandsRod, coraliumRod, dreadlandsRod, omotholRod;
@@ -63,10 +63,10 @@ public class ACThaumcraftIntegration implements IACPlugin {
 			GameRegistry.registerItem(wandCap, "wandcap");
 			GameRegistry.registerItem(wandCore, "wandcore");
 
-			darklandsRod = new WandRodAC("darklands", 50, new ItemStack(wandCore, 1, 0), 1, new DarklandsRodOnUpdate());
-			coraliumRod = new WandRodAC("coralium", 75, new ItemStack(wandCore, 1, 1), 3, new CoraliumRodOnUpdate());
-			dreadlandsRod = new WandRodAC("dreadlands", 100, new ItemStack(wandCore, 1, 2), 5, new DreadlandsRodOnUpdate());
-			omotholRod = new WandRodAC("omothol", 0, new ItemStack(wandCore, 1, 3), 7, new OmotholRodOnUpdate());
+			darklandsRod = new WandRodAC("darklands", 50, new ItemStack(wandCore, 1, 0), 1, new DarklandsRodOnUpdate(), new ResourceLocation("abyssalcraft","textures/model/wands/wand_rod_darklands.png"));
+			coraliumRod = new WandRodAC("coralium", 75, new ItemStack(wandCore, 1, 1), 3, new CoraliumRodOnUpdate(), new ResourceLocation("abyssalcraft","textures/model/wands/wand_rod_coralium.png"));
+			dreadlandsRod = new WandRodAC("dreadlands", 100, new ItemStack(wandCore, 1, 2), 5, new DreadlandsRodOnUpdate(), new ResourceLocation("abyssalcraft","textures/model/wands/wand_rod_dreadlands.png"));
+			omotholRod = new WandRodAC("omothol", 0, new ItemStack(wandCore, 1, 3), 7, new OmotholRodOnUpdate(), new ResourceLocation("abyssalcraft","textures/model/wands/wand_rod_omothol.png"));
 
 			abyssalniteCap = new WandCapAC("abyssalnite", 0.95F, new ItemStack(wandCap, 1, 0), 1);
 			coraliumCap = new WandCapAC("coralium", 0.9F, new ItemStack(wandCap, 1, 1), 3);

@@ -109,22 +109,21 @@ public class IMCHelper {
 
 	/**
 	 * This is a IMC version of AbyssalCraftAPI#addMaterialization
-	 * It has the following IMC messages:
-	 * "addMaterialization" - used for normal materialization
-	 * "addOredictMaterialization" - used for OreDictionary materialization
+	 * It has the following IMC message:
+	 * "addMaterialization"
 	 * 
 	 * The IMC message should contain a NBTTagCompound with the following tags:
-	 * "input1" - the first output, either a ItemStack or a String
+	 * "input1" - the first output, a ItemStack, can't be null
 	 * "input2" - the second output, same as above. Can be null
 	 * "input3" - the third output, same as above. Can be null
 	 * "input4" - the fourth output, same as above. Can be null
 	 * "input5" - the fifth output, same as above. Can be null
-	 * "output" - the output, same as above
+	 * "output" - the output, same as above, can't be null
 	 * "level" - required Necronomicon level (Necronomicon = 0, Abyssal Wasteland Necronomicon = 1,
 	 * Dreadlands Necronomicon = 2, Omothol Necronomicon = 3, Abyssalnomicon = 4)
 	 * 
 	 * The message is sent this way:
-	 * FMLInterModComms.sendMessage("abyssalcraft", <whichever message you picked>, <a NBTTagCompound with the aforementioned tags>);
+	 * FMLInterModComms.sendMessage("abyssalcraft", "addMaterialization", <a NBTTagCompound with the aforementioned tags>);
 	 */
 
 	//INTEGRATIONS /////////////////////////////////////////////////////////////////////////////

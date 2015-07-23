@@ -22,7 +22,7 @@ import net.minecraft.entity.ai.EntityAIWander;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
+import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
@@ -84,15 +84,15 @@ public class EntityDreadgolem extends EntityMob implements IDreadEntity {
 	}
 
 	@Override
-	protected void func_145780_a(int par1, int par2, int par3, Block par4)
-	{
-		worldObj.playSoundAtEntity(this, "mob.zombie.step", 0.15F, 1.0F);
+	public void onDeath(DamageSource par1DamageSource) {
+		if(par1DamageSource.getEntity() instanceof EntityPlayer)
+			dropItem(AbyssalCraft.dreadchunk, worldObj.rand.nextInt(3));
+		super.onDeath(par1DamageSource);
 	}
 
 	@Override
-	protected Item getDropItem()
+	protected void func_145780_a(int par1, int par2, int par3, Block par4)
 	{
-		return AbyssalCraft.dreadchunk;
-
+		worldObj.playSoundAtEntity(this, "mob.zombie.step", 0.15F, 1.0F);
 	}
 }

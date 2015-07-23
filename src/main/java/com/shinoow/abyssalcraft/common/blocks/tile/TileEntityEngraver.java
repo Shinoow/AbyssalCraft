@@ -205,11 +205,11 @@ public class TileEntityEngraver extends TileEntity implements ISidedInventory {
 	 */
 	private boolean canEngrave()
 	{
-		if (engraverItemStacks[0] == null || EngraverRecipes.engraving().getEngravingResult(engraverItemStacks[0], (ItemEngraving)engraverItemStacks[1].getItem()) == null)
+		if (engraverItemStacks[0] == null || EngraverRecipes.instance().getEngravingResult(engraverItemStacks[0], (ItemEngraving)engraverItemStacks[1].getItem()) == null)
 			return false;
 		else
 		{
-			ItemStack itemstack = EngraverRecipes.engraving().getEngravingResult(engraverItemStacks[0], (ItemEngraving)engraverItemStacks[1].getItem());
+			ItemStack itemstack = EngraverRecipes.instance().getEngravingResult(engraverItemStacks[0], (ItemEngraving)engraverItemStacks[1].getItem());
 			if (itemstack == null) return false;
 			if (engraverItemStacks[2] == null) return true;
 			if (!engraverItemStacks[2].isItemEqual(itemstack)) return false;
@@ -225,7 +225,7 @@ public class TileEntityEngraver extends TileEntity implements ISidedInventory {
 	{
 		if (canEngrave())
 		{
-			ItemStack itemstack = EngraverRecipes.engraving().getEngravingResult(engraverItemStacks[0], (ItemEngraving)engraverItemStacks[1].getItem());
+			ItemStack itemstack = EngraverRecipes.instance().getEngravingResult(engraverItemStacks[0], (ItemEngraving)engraverItemStacks[1].getItem());
 
 			if (engraverItemStacks[2] == null)
 				engraverItemStacks[2] = itemstack.copy();
@@ -250,7 +250,7 @@ public class TileEntityEngraver extends TileEntity implements ISidedInventory {
 		if(par1.getItem() == AbyssalCraft.cthulhuCoin) return true;
 		if(par1.getItem() == AbyssalCraft.elderCoin) return true;
 		if(par1.getItem() == AbyssalCraft.jzaharCoin) return true;
-		return EngraverRecipes.engraving().getCoinList().contains(par1);
+		return EngraverRecipes.instance().getCoinList().contains(par1);
 	}
 
 	@Override

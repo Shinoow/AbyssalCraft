@@ -129,6 +129,23 @@ public class EntityJzahar extends EntityMob implements IBossDisplayData, IRanged
 	}
 
 	@Override
+	protected boolean canDespawn()
+	{
+		return false;
+	}
+
+	@Override
+	public boolean attackEntityFrom(DamageSource par1DamageSource, float par2)
+	{
+		if(par2 > 50)
+			if(par2 > 500001 || par2 < 500000)
+				if(par2 > 750001.5F || par2 < 750001)
+					par2 = 30 + worldObj.rand.nextInt(20);
+
+		return super.attackEntityFrom(par1DamageSource, par2);
+	}
+
+	@Override
 	public EnumCreatureAttribute getCreatureAttribute() {
 		return EnumCreatureAttribute.UNDEAD;
 	}
@@ -231,9 +248,7 @@ public class EntityJzahar extends EntityMob implements IBossDisplayData, IRanged
 							if(EntityUtil.isPlayerCoralium((EntityPlayer)entity))
 								SpecialTextUtil.JzaharText("<insert generic text here>");
 							else {
-								StringBuilder sb = new StringBuilder();
-								sb.append(String.format(StatCollector.translateToLocal("message.jzahar.creative.1"), entity.getCommandSenderName()));
-								SpecialTextUtil.JzaharText(sb.toString());
+								SpecialTextUtil.JzaharText(String.format(StatCollector.translateToLocal("message.jzahar.creative.1"), entity.getCommandSenderName()));
 								SpecialTextUtil.JzaharText(StatCollector.translateToLocal("message.jzahar.creative.2"));
 							}
 					}

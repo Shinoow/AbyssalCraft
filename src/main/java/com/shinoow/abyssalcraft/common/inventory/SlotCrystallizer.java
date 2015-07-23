@@ -17,7 +17,10 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.MathHelper;
+import net.minecraftforge.common.MinecraftForge;
 
+import com.shinoow.abyssalcraft.AbyssalCraft;
+import com.shinoow.abyssalcraft.api.event.ACEvents;
 import com.shinoow.abyssalcraft.api.recipe.CrystallizerRecipes;
 
 public class SlotCrystallizer extends Slot
@@ -69,7 +72,7 @@ public class SlotCrystallizer extends Slot
 		if (!thePlayer.worldObj.isRemote)
 		{
 			int i = stackSize;
-			float f = CrystallizerRecipes.crystallization().getExperience(par1ItemStack);
+			float f = CrystallizerRecipes.instance().getExperience(par1ItemStack);
 			int j;
 
 			if (f == 0.0F)
@@ -93,5 +96,10 @@ public class SlotCrystallizer extends Slot
 		}
 
 		stackSize = 0;
+
+		MinecraftForge.EVENT_BUS.post(new ACEvents.ItemCrystallizedEvent(thePlayer, par1ItemStack));
+
+		if(par1ItemStack.getItem() == AbyssalCraft.shadowgem)
+			thePlayer.addStat(AbyssalCraft.shadowGems, 1);
 	}
 }

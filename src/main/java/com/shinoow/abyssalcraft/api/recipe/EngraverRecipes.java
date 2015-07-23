@@ -30,7 +30,7 @@ public class EngraverRecipes {
 	private Map<ItemStack, ItemStack> engravingList = Maps.newHashMap();
 	private Map<ItemStack, Float> experienceList = Maps.newHashMap();
 
-	public static EngraverRecipes engraving()
+	public static EngraverRecipes instance()
 	{
 		return engravingBase;
 	}

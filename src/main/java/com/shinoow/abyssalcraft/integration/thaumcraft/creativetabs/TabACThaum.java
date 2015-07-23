@@ -19,7 +19,7 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
-import com.shinoow.abyssalcraft.integration.thaumcraft.ACThaumcraftIntegration;
+import com.shinoow.abyssalcraft.integration.thaumcraft.ACTC;
 
 public class TabACThaum extends CreativeTabs {
 
@@ -35,7 +35,7 @@ public class TabACThaum extends CreativeTabs {
 	@Override
 	public Item getTabIconItem() {
 
-		return ACThaumcraftIntegration.wandCap;
+		return ACTC.wandCap;
 	}
 
 	@Override
@@ -44,11 +44,11 @@ public class TabACThaum extends CreativeTabs {
 	}
 
 	public void addWands(){
-		list.add(ACThaumcraftIntegration.darkWand);
-		list.add(ACThaumcraftIntegration.corWand);
-		list.add(ACThaumcraftIntegration.dreadWand);
-		list.add(ACThaumcraftIntegration.omotholWand);
-		list.add(ACThaumcraftIntegration.endWand);
+		list.add(ACTC.darkWand);
+		list.add(ACTC.corWand);
+		list.add(ACTC.dreadWand);
+		list.add(ACTC.omotholWand);
+		list.add(ACTC.endWand);
 	}
 
 	public void addItem(Item item) {

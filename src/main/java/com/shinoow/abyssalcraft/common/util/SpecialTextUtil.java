@@ -35,4 +35,8 @@ public class SpecialTextUtil {
 	public static void SacthothText(String par1){
 		FMLClientHandler.instance().getClient().ingameGUI.getChatGUI().printChatMessage(new ChatComponentText("Sacthoth: " + par1));
 	}
+
+	public static void customText(String name, String text){
+		FMLClientHandler.instance().getClient().ingameGUI.getChatGUI().printChatMessage(new ChatComponentText(name + ": " + text));
+	}
 }

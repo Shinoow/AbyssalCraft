@@ -28,8 +28,8 @@ public class BiomeGenMountainDreadlands extends BiomeGenDreadlandsBase {
 		rootHeight = 1.3F;
 		heightVariation = 0.9F;
 		spawnableMonsterList.add(new SpawnListEntry(EntityDreadling.class, 40, 1, 3));
-		spawnableMonsterList.add(new SpawnListEntry(EntityDreadguard.class, 15, 1, 1));
-		spawnableMonsterList.add(new SpawnListEntry(EntityChagarothFist.class, 20, 1, 2));
+		spawnableMonsterList.add(new SpawnListEntry(EntityDreadguard.class, 20, 1, 2));
+		spawnableMonsterList.add(new SpawnListEntry(EntityChagarothFist.class, 25, 1, 2));
 		spawnableMonsterList.add(new SpawnListEntry(EntityChagarothSpawn.class, 30, 1, 2));
 	}
 

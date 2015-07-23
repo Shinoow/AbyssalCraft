@@ -97,6 +97,12 @@ public class EntityChagaroth extends EntityMob implements IBossDisplayData, IDre
 	}
 
 	@Override
+	public boolean canBreatheUnderwater()
+	{
+		return true;
+	}
+
+	@Override
 	protected String getLivingSound()
 	{
 		return "abyssalcraft:dreadguard.idle";
@@ -124,6 +130,12 @@ public class EntityChagaroth extends EntityMob implements IBossDisplayData, IDre
 	public int getTotalArmorValue()
 	{
 		return 10;
+	}
+
+	@Override
+	protected boolean canDespawn()
+	{
+		return false;
 	}
 
 	@Override
@@ -218,6 +230,17 @@ public class EntityChagaroth extends EntityMob implements IBossDisplayData, IDre
 	{
 		dropItem(AbyssalCraft.dreadKey, 1);
 
+	}
+
+	@Override
+	public boolean attackEntityFrom(DamageSource par1DamageSource, float par2)
+	{
+		if(par2 > 50)
+			if(par2 > 500001 || par2 < 500000)
+				if(par2 > 750001.5F || par2 < 750001)
+					par2 = 30 + worldObj.rand.nextInt(20);
+
+		return super.attackEntityFrom(par1DamageSource, par2);
 	}
 
 	@Override

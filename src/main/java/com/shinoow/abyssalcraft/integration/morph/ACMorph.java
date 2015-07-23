@@ -63,7 +63,7 @@ import com.shinoow.abyssalcraft.common.util.ACLogger;
 
 import cpw.mods.fml.common.FMLCommonHandler;
 
-public class ACMorphIntegration implements IACPlugin {
+public class ACMorph implements IACPlugin {
 
 	Ability hostile, sunburn, climb, fallNegate, fly, fireImmunity, flyNerf, water, chicken;
 

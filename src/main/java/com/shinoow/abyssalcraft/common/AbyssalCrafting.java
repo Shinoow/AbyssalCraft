@@ -13,15 +13,17 @@ package com.shinoow.abyssalcraft.common;
 
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.oredict.OreDictionary;
-import net.minecraftforge.oredict.ShapedOreRecipe;
-import net.minecraftforge.oredict.ShapelessOreRecipe;
+import net.minecraftforge.oredict.*;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
 import com.shinoow.abyssalcraft.api.item.ItemEngraving;
-import com.shinoow.abyssalcraft.common.util.SalvageHandler;
+import com.shinoow.abyssalcraft.api.ritual.*;
+import com.shinoow.abyssalcraft.common.entity.EntityDragonBoss;
+import com.shinoow.abyssalcraft.common.entity.EntitySacthoth;
+import com.shinoow.abyssalcraft.common.ritual.NecronomiconBreedingRitual;
 
 import cpw.mods.fml.common.registry.GameRegistry;
 
@@ -33,10 +35,10 @@ public class AbyssalCrafting {
 		addBlockSmelting();
 		addItemCrafting();
 		addItemSmelting();
-		addSalvage();
 		addCrystallization();
 		addTransmutation();
 		addEngraving();
+		addRitualRecipes();
 	}
 	private static void addBlockCrafting(){
 
@@ -166,10 +168,6 @@ public class AbyssalCrafting {
 		GameRegistry.addRecipe(new ItemStack(AbyssalCraft.shovel, 1), new Object[] {"#", "%", "%", '#', AbyssalCraft.Darkstone_cobble, '%', Items.stick});
 		GameRegistry.addRecipe(new ItemStack(AbyssalCraft.sword, 1), new Object[] {"#", "#", "%", '#', AbyssalCraft.Darkstone_cobble, '%', Items.stick});
 		GameRegistry.addRecipe(new ItemStack(AbyssalCraft.hoe, 1), new Object[] {"##", " %", " %", '#', AbyssalCraft.Darkstone_cobble, '%', Items.stick});
-		GameRegistry.addRecipe(new ItemStack(AbyssalCraft.OC, 1), new Object[] {"@#@", "#$#", "@#@", '$', Items.ender_eye, '#', AbyssalCraft.oblivionshard, '@', Items.redstone});
-		GameRegistry.addRecipe(new ItemStack(AbyssalCraft.OC, 1), new Object[] {"@#@", "#$#", "@#@", '$', Items.ender_eye, '#', Items.redstone, '@', AbyssalCraft.oblivionshard});
-		GameRegistry.addRecipe(new ItemStack(AbyssalCraft.OC, 1), new Object[] {"@#@", "#$#", "@#@", '$', Items.nether_star, '#', Items.ender_eye, '@', Items.redstone});
-		GameRegistry.addRecipe(new ItemStack(AbyssalCraft.OC, 1), new Object[] {"@#@", "#$#", "@#@", '$', Items.nether_star, '#', Items.redstone, '@', Items.ender_eye});
 		GameRegistry.addRecipe(new ItemStack(AbyssalCraft.pickaxeA, 1), new Object[] {"###", " % ", " % ", '#', AbyssalCraft.abyingot, '%', Items.stick});
 		GameRegistry.addRecipe(new ItemStack(AbyssalCraft.axeA, 1), new Object[] {"##", "#%", " %", '#', AbyssalCraft.abyingot, '%', Items.stick});
 		GameRegistry.addRecipe(new ItemStack(AbyssalCraft.shovelA, 1), new Object[] {"#", "%", "%", '#', AbyssalCraft.abyingot, '%', Items.stick});
@@ -177,13 +175,6 @@ public class AbyssalCrafting {
 		GameRegistry.addRecipe(new ItemStack(AbyssalCraft.hoeA, 1), new Object[] {"##", " %", " %", '#', AbyssalCraft.abyingot, '%', Items.stick});
 		GameRegistry.addRecipe(new ItemStack(AbyssalCraft.portalPlacer, 1), new Object[] {" #%", " &#", "&  ", '#', AbyssalCraft.Cpearl, '%', AbyssalCraft.OC, '&', Items.blaze_rod});
 		GameRegistry.addRecipe(new ItemStack(AbyssalCraft.abyingot, 9), new Object[] {"#", '#', AbyssalCraft.abyblock});
-		GameRegistry.addRecipe(new ItemStack(AbyssalCraft.Corb, 1), new Object[] {"#%#", "@$@", "#%#", '#', Items.blaze_powder, '%', Items.diamond, '@', Items.ender_pearl, '$', AbyssalCraft.Cpearl});
-		GameRegistry.addRecipe(new ItemStack(AbyssalCraft.Corb, 1), new Object[] {"#%#", "@$@", "#%#", '#', Items.blaze_powder, '%', Items.ender_pearl, '@', Items.diamond, '$', AbyssalCraft.Cpearl});
-		GameRegistry.addRecipe(new ItemStack(AbyssalCraft.pickaxeC, 1), new Object[] {"#%#", " & ", " @ ", '#', AbyssalCraft.abyblock, '%', new ItemStack(AbyssalCraft.Corb, 1, OreDictionary.WILDCARD_VALUE), '&', new ItemStack(AbyssalCraft.pickaxeA, 1, OreDictionary.WILDCARD_VALUE), '@', Items.blaze_rod});
-		GameRegistry.addRecipe(new ItemStack(AbyssalCraft.axeC, 1), new Object[] {"#% ", "#& ", " @ ", '#', AbyssalCraft.abyblock, '%', new ItemStack(AbyssalCraft.Corb, 1, OreDictionary.WILDCARD_VALUE), '&', new ItemStack(AbyssalCraft.axeA, 1, OreDictionary.WILDCARD_VALUE), '@', Items.blaze_rod});
-		GameRegistry.addRecipe(new ItemStack(AbyssalCraft.shovelC, 1), new Object[] {"#%#", " & ", " @ ", '#', AbyssalCraft.abyblock, '%', new ItemStack(AbyssalCraft.Corb, 1, OreDictionary.WILDCARD_VALUE), '&', new ItemStack(AbyssalCraft.shovelA, 1, OreDictionary.WILDCARD_VALUE), '@', Items.blaze_rod});
-		GameRegistry.addRecipe(new ItemStack(AbyssalCraft.swordC, 1), new Object[] {"#%#", "#&#", " @ ", '#', AbyssalCraft.abyblock, '%', new ItemStack(AbyssalCraft.Corb, 1, OreDictionary.WILDCARD_VALUE), '&', new ItemStack(AbyssalCraft.swordA, 1, OreDictionary.WILDCARD_VALUE), '@', Items.blaze_rod});
-		GameRegistry.addRecipe(new ItemStack(AbyssalCraft.hoeC, 1), new Object[] {"#% ", " & ", " @ ", '#', AbyssalCraft.abyblock, '%', new ItemStack(AbyssalCraft.Corb, 1, OreDictionary.WILDCARD_VALUE), '&', new ItemStack(AbyssalCraft.hoeA, 1, OreDictionary.WILDCARD_VALUE), '@', Items.blaze_rod});
 		GameRegistry.addRecipe(new ItemStack(AbyssalCraft.Cplate, 1), new Object[] {"#%#", "#%#", "#%#", '#', AbyssalCraft.Cingot, '%', AbyssalCraft.Cpearl});
 		GameRegistry.addRecipe(new ItemStack(AbyssalCraft.Cchunk, 1), new Object[] {"###", "#%#", "###", '#', AbyssalCraft.Coraliumcluster9, '%', AbyssalCraft.abystone});
 		GameRegistry.addRecipe(new ItemStack(AbyssalCraft.PSDLfinder, 4), new Object[] {"###", "#%#", "###", '#', AbyssalCraft.Coralium, '%', Items.ender_eye});
@@ -193,16 +184,10 @@ public class AbyssalCrafting {
 		GameRegistry.addRecipe(new ItemStack(AbyssalCraft.Corshovel, 1), new Object[] {"#", "%", "%", '#', AbyssalCraft.Cingot, '%', Items.stick});
 		GameRegistry.addRecipe(new ItemStack(AbyssalCraft.Corsword, 1), new Object[] {"#", "#", "%", '#', AbyssalCraft.Cingot, '%', Items.stick});
 		GameRegistry.addRecipe(new ItemStack(AbyssalCraft.Corhoe, 1), new Object[] {"##", " %", " %", '#', AbyssalCraft.Cingot, '%', Items.stick});
-		GameRegistry.addRecipe(new ItemStack(AbyssalCraft.portalPlacerDL, 1), new Object[] {" # ", "@%&", '#', AbyssalCraft.EoA, '@', new ItemStack(AbyssalCraft.Corb, 1, OreDictionary.WILDCARD_VALUE), '%', AbyssalCraft.portalPlacer, '&', AbyssalCraft.PSDL});
-		GameRegistry.addRecipe(new ItemStack(AbyssalCraft.portalPlacerDL, 1), new Object[] {" # ", "@%&", '#', AbyssalCraft.EoA, '@', AbyssalCraft.PSDL, '%', AbyssalCraft.portalPlacer, '&', new ItemStack(AbyssalCraft.Corb, 1, OreDictionary.WILDCARD_VALUE)});
-		GameRegistry.addRecipe(new ItemStack(AbyssalCraft.portalPlacerDL, 1), new Object[] {" # ", "@%&", '#', new ItemStack(AbyssalCraft.Corb, 1, OreDictionary.WILDCARD_VALUE), '@', AbyssalCraft.EoA, '%', AbyssalCraft.portalPlacer, '&', AbyssalCraft.PSDL});
-		GameRegistry.addRecipe(new ItemStack(AbyssalCraft.portalPlacerDL, 1), new Object[] {" # ", "@%&", '#', new ItemStack(AbyssalCraft.Corb, 1, OreDictionary.WILDCARD_VALUE), '@', AbyssalCraft.PSDL, '%', AbyssalCraft.portalPlacer, '&', AbyssalCraft.EoA});
-		GameRegistry.addRecipe(new ItemStack(AbyssalCraft.portalPlacerDL, 1), new Object[] {" # ", "@%&", '#', AbyssalCraft.PSDL, '@', AbyssalCraft.EoA, '%', AbyssalCraft.portalPlacer, '&', new ItemStack(AbyssalCraft.Corb, 1, OreDictionary.WILDCARD_VALUE)});
-		GameRegistry.addRecipe(new ItemStack(AbyssalCraft.portalPlacerDL, 1), new Object[] {" # ", "@%&", '#', AbyssalCraft.PSDL, '@', new ItemStack(AbyssalCraft.Corb, 1, OreDictionary.WILDCARD_VALUE), '%', AbyssalCraft.portalPlacer, '&', AbyssalCraft.EoA});
 		GameRegistry.addRecipe(new ItemStack(AbyssalCraft.shadowshard, 1), new Object[] {"###", "###", "###", '#', AbyssalCraft.shadowfragment});
 		GameRegistry.addRecipe(new ItemStack(AbyssalCraft.shadowgem, 1), new Object[] {"###", "###", "###", '#', AbyssalCraft.shadowshard});
 		GameRegistry.addRecipe(new ItemStack(AbyssalCraft.oblivionshard, 1), new Object[] {"###", "#%#", "###", '#', AbyssalCraft.shadowgem, '%', new ItemStack(AbyssalCraft.Corb, 1, OreDictionary.WILDCARD_VALUE)});
-		GameRegistry.addRecipe(new ItemStack(AbyssalCraft.corbow, 1), new Object[] {" #%", "&$%", " #%", '#', AbyssalCraft.Cingot, '%', Items.string, '&', AbyssalCraft.Cpearl, '$', Items.bow});
+		GameRegistry.addRecipe(new ItemStack(AbyssalCraft.corbow, 1), new Object[] {" #%", "&$%", " #%", '#', AbyssalCraft.Cingot, '%', Items.string, '&', AbyssalCraft.Cpearl, '$', new ItemStack(Items.bow, 1, OreDictionary.WILDCARD_VALUE)});
 		GameRegistry.addRecipe(new ItemStack(AbyssalCraft.dreadiumingot, 9), new Object[] {"#", '#', AbyssalCraft.dreadiumblock});
 		GameRegistry.addRecipe(new ItemStack(AbyssalCraft.dreadiumpickaxe, 1), new Object[] {"###", " % ", " % ", '#', AbyssalCraft.dreadiumingot, '%', Items.stick});
 		GameRegistry.addRecipe(new ItemStack(AbyssalCraft.dreadiumaxe, 1), new Object[] {"##", "#%", " %", '#', AbyssalCraft.dreadiumingot, '%', Items.stick});
@@ -316,40 +301,27 @@ public class AbyssalCrafting {
 		GameRegistry.addShapelessRecipe(new ItemStack(AbyssalCraft.Coraliumcluster8, 1),AbyssalCraft.Coraliumcluster2, AbyssalCraft.Coraliumcluster6);
 		GameRegistry.addShapelessRecipe(new ItemStack(AbyssalCraft.Coraliumcluster9, 1),AbyssalCraft.Coraliumcluster2, AbyssalCraft.Coraliumcluster6, AbyssalCraft.Coralium);
 		GameRegistry.addShapelessRecipe(new ItemStack(AbyssalCraft.Coraliumcluster9, 1),AbyssalCraft.Coraliumcluster2, AbyssalCraft.Coraliumcluster7);
+		GameRegistry.addRecipe(new ItemStack(AbyssalCraft.Coralium, 2), new Object[] {"#", '#', AbyssalCraft.Coraliumcluster2});
+		GameRegistry.addRecipe(new ItemStack(AbyssalCraft.Coralium, 3), new Object[] {"#", '#', AbyssalCraft.Coraliumcluster3});
+		GameRegistry.addRecipe(new ItemStack(AbyssalCraft.Coralium, 4), new Object[] {"#", '#', AbyssalCraft.Coraliumcluster4});
+		GameRegistry.addRecipe(new ItemStack(AbyssalCraft.Coralium, 5), new Object[] {"#", '#', AbyssalCraft.Coraliumcluster5});
+		GameRegistry.addRecipe(new ItemStack(AbyssalCraft.Coralium, 6), new Object[] {"#", '#', AbyssalCraft.Coraliumcluster6});
+		GameRegistry.addRecipe(new ItemStack(AbyssalCraft.Coralium, 7), new Object[] {"#", '#', AbyssalCraft.Coraliumcluster7});
+		GameRegistry.addRecipe(new ItemStack(AbyssalCraft.Coralium, 8), new Object[] {"#", '#', AbyssalCraft.Coraliumcluster8});
+		GameRegistry.addRecipe(new ItemStack(AbyssalCraft.Coralium, 9), new Object[] {"#", '#', AbyssalCraft.Coraliumcluster9});
 
-		GameRegistry.addRecipe(new ItemStack(AbyssalCraft.boots, 1), new Object[] {"# #", "# #", '#', AbyssalCraft.abyingot});
-		GameRegistry.addRecipe(new ItemStack(AbyssalCraft.helmet, 1), new Object[] {"###", "# #", '#', AbyssalCraft.abyingot});
-		GameRegistry.addRecipe(new ItemStack(AbyssalCraft.plate, 1), new Object[] {"# #", "###", "###",'#', AbyssalCraft.abyingot});
-		GameRegistry.addRecipe(new ItemStack(AbyssalCraft.legs, 1), new Object[] {"###", "# #", "# #",'#', AbyssalCraft.abyingot});
-		GameRegistry.addRecipe(new ItemStack(AbyssalCraft.bootsC, 1), new Object[] {"#%#", "#&#", '#', AbyssalCraft.abyblock, '%', new ItemStack(AbyssalCraft.Corb, 1, OreDictionary.WILDCARD_VALUE), '&', new ItemStack(AbyssalCraft.boots, 1, OreDictionary.WILDCARD_VALUE)});
-		GameRegistry.addRecipe(new ItemStack(AbyssalCraft.helmetC, 1), new Object[] {"###", "#%#", " & ", '#', AbyssalCraft.abyblock, '%', new ItemStack(AbyssalCraft.Corb, 1, OreDictionary.WILDCARD_VALUE), '&', new ItemStack(AbyssalCraft.helmet, 1, OreDictionary.WILDCARD_VALUE)});
-		GameRegistry.addRecipe(new ItemStack(AbyssalCraft.plateC, 1), new Object[] {"#%#", "#&#", "###", '#', AbyssalCraft.abyblock, '%', new ItemStack(AbyssalCraft.plate, 1, OreDictionary.WILDCARD_VALUE), '&', new ItemStack(AbyssalCraft.Corb, 1, OreDictionary.WILDCARD_VALUE)});
-		GameRegistry.addRecipe(new ItemStack(AbyssalCraft.legsC, 1), new Object[] {"#%#", "#&#", "# #", '#', AbyssalCraft.abyblock, '%', new ItemStack(AbyssalCraft.Corb, 1, OreDictionary.WILDCARD_VALUE), '&', new ItemStack(AbyssalCraft.legs, 1, OreDictionary.WILDCARD_VALUE)});
-		GameRegistry.addRecipe(new ItemStack(AbyssalCraft.Corboots, 1), new Object[] {"# #", "# #", '#', AbyssalCraft.Cingot});
-		GameRegistry.addRecipe(new ItemStack(AbyssalCraft.Corhelmet, 1), new Object[] {"###", "# #", '#', AbyssalCraft.Cingot});
-		GameRegistry.addRecipe(new ItemStack(AbyssalCraft.Corplate, 1), new Object[] {"# #", "###", "###",'#', AbyssalCraft.Cingot});
-		GameRegistry.addRecipe(new ItemStack(AbyssalCraft.Corlegs, 1), new Object[] {"###", "# #", "# #",'#', AbyssalCraft.Cingot});
+		addArmor(AbyssalCraft.helmet, AbyssalCraft.plate, AbyssalCraft.legs, AbyssalCraft.boots, AbyssalCraft.abyingot, AbyssalCraft.AbyssalniteU, Items.diamond_helmet, Items.diamond_chestplate, Items.diamond_leggings, Items.diamond_boots);
+		addArmor(AbyssalCraft.Corhelmet, AbyssalCraft.Corplate, AbyssalCraft.Corlegs, AbyssalCraft.Corboots, AbyssalCraft.Cingot, AbyssalCraft.CoraliumU, AbyssalCraft.helmet, AbyssalCraft.plate, AbyssalCraft.legs, AbyssalCraft.boots);
 		GameRegistry.addRecipe(new ItemStack(AbyssalCraft.CorbootsP, 1), new Object[] {"# #", "%&%", '#', AbyssalCraft.Cingot, '%', AbyssalCraft.Cplate, '&', AbyssalCraft.Corboots});
 		GameRegistry.addRecipe(new ItemStack(AbyssalCraft.CorhelmetP, 1), new Object[] {"&#&", "#@#", "%%%", '#', AbyssalCraft.Cplate, '&', AbyssalCraft.Cpearl, '@', AbyssalCraft.Corhelmet, '%', AbyssalCraft.Cingot});
 		GameRegistry.addRecipe(new ItemStack(AbyssalCraft.CorplateP, 1), new Object[] {"# #", "%@%", "%#%",'#', AbyssalCraft.Cplate, '%', AbyssalCraft.Cingot, '@', AbyssalCraft.Corplate});
 		GameRegistry.addRecipe(new ItemStack(AbyssalCraft.CorlegsP, 1), new Object[] {"%&%", "# #", "# #",'#', AbyssalCraft.Cingot, '%', AbyssalCraft.Cplate, '&', AbyssalCraft.Corlegs});
-		GameRegistry.addRecipe(new ItemStack(AbyssalCraft.dreadiumboots, 1), new Object[] {"# #", "# #", '#', AbyssalCraft.dreadiumingot});
-		GameRegistry.addRecipe(new ItemStack(AbyssalCraft.dreadiumhelmet, 1), new Object[] {"###", "# #", '#', AbyssalCraft.dreadiumingot});
-		GameRegistry.addRecipe(new ItemStack(AbyssalCraft.dreadiumplate, 1), new Object[] {"# #", "###", "###",'#', AbyssalCraft.dreadiumingot});
-		GameRegistry.addRecipe(new ItemStack(AbyssalCraft.dreadiumlegs, 1), new Object[] {"###", "# #", "# #",'#', AbyssalCraft.dreadiumingot});
+		addArmor(AbyssalCraft.dreadiumhelmet, AbyssalCraft.dreadiumplate, AbyssalCraft.dreadiumlegs, AbyssalCraft.dreadiumboots, AbyssalCraft.dreadiumingot, AbyssalCraft.DreadiumU, AbyssalCraft.Corhelmet, AbyssalCraft.Corplate, AbyssalCraft.Corlegs, AbyssalCraft.Corboots);
 		GameRegistry.addRecipe(new ItemStack(AbyssalCraft.dreadiumSboots, 1), new Object[] {"#%#", "&&&", '#', AbyssalCraft.dreadcloth, '%', new ItemStack(AbyssalCraft.dreadiumboots, 1, OreDictionary.WILDCARD_VALUE), '&', AbyssalCraft.dreadplanks});
 		GameRegistry.addRecipe(new ItemStack(AbyssalCraft.dreadiumShelmet, 1), new Object[] {" # ", "%&%", '#', AbyssalCraft.dreadiumingot, '%', AbyssalCraft.dreadplate, '&', new ItemStack(AbyssalCraft.dreadiumhelmet, 1, OreDictionary.WILDCARD_VALUE)});
 		GameRegistry.addRecipe(new ItemStack(AbyssalCraft.dreadiumSplate, 1), new Object[] {"#%#", "#&#", "@@@", '#', AbyssalCraft.dreadplate, '%', AbyssalCraft.dreadiumingot, '&', new ItemStack(AbyssalCraft.dreadiumplate, 1, OreDictionary.WILDCARD_VALUE), '@', AbyssalCraft.dreadcloth});
 		GameRegistry.addRecipe(new ItemStack(AbyssalCraft.dreadiumSlegs, 1), new Object[] {"#%#", "&&&", '#', AbyssalCraft.dreadplate, '%', new ItemStack(AbyssalCraft.dreadiumlegs, 1, OreDictionary.WILDCARD_VALUE), '&', AbyssalCraft.dreadcloth});
-		GameRegistry.addRecipe(new ItemStack(AbyssalCraft.ethBoots, 1), new Object[] {"# #", "# #", '#', AbyssalCraft.ethaxiumIngot});
-		GameRegistry.addRecipe(new ItemStack(AbyssalCraft.ethHelmet, 1), new Object[] {"###", "# #", '#', AbyssalCraft.ethaxiumIngot});
-		GameRegistry.addRecipe(new ItemStack(AbyssalCraft.ethPlate, 1), new Object[] {"# #", "###", "###",'#', AbyssalCraft.ethaxiumIngot});
-		GameRegistry.addRecipe(new ItemStack(AbyssalCraft.ethLegs, 1), new Object[] {"###", "# #", "# #",'#', AbyssalCraft.ethaxiumIngot});
-
-		GameRegistry.addShapelessRecipe(new ItemStack(AbyssalCraft.Depthsboots, 1), AbyssalCraft.Coraliumcluster9, AbyssalCraft.Corboots, Blocks.vine, Blocks.waterlily, AbyssalCraft.Cchunk, AbyssalCraft.Corflesh, AbyssalCraft.Coraliumcluster9, new ItemStack(AbyssalCraft.Corb, 1, OreDictionary.WILDCARD_VALUE));
-		GameRegistry.addShapelessRecipe(new ItemStack(AbyssalCraft.Depthshelmet, 1), AbyssalCraft.Coraliumcluster9, AbyssalCraft.Corhelmet, Blocks.vine, Blocks.waterlily, AbyssalCraft.Cchunk, AbyssalCraft.Corflesh, AbyssalCraft.Coraliumcluster9, AbyssalCraft.Cbucket, new ItemStack(AbyssalCraft.Corb, 1, OreDictionary.WILDCARD_VALUE));
-		GameRegistry.addShapelessRecipe(new ItemStack(AbyssalCraft.Depthsplate, 1), AbyssalCraft.Coraliumcluster9, AbyssalCraft.Corplate, Blocks.vine, Blocks.waterlily, AbyssalCraft.Cchunk, AbyssalCraft.Corflesh, AbyssalCraft.Coraliumcluster9, new ItemStack(AbyssalCraft.Corb, 1, OreDictionary.WILDCARD_VALUE));
-		GameRegistry.addShapelessRecipe(new ItemStack(AbyssalCraft.Depthslegs, 1), AbyssalCraft.Coraliumcluster9, AbyssalCraft.Corlegs, Blocks.vine, Blocks.waterlily, AbyssalCraft.Cchunk, AbyssalCraft.Corflesh, AbyssalCraft.Coraliumcluster9, new ItemStack(AbyssalCraft.Corb, 1, OreDictionary.WILDCARD_VALUE));
+		addArmor(AbyssalCraft.ethHelmet, AbyssalCraft.ethPlate, AbyssalCraft.ethLegs, AbyssalCraft.ethBoots, AbyssalCraft.ethaxiumIngot, AbyssalCraft.EthaxiumU, AbyssalCraft.dreadiumhelmet, AbyssalCraft.dreadiumplate, AbyssalCraft.dreadiumlegs, AbyssalCraft.dreadiumboots);
 
 		GameRegistry.addRecipe(new ItemStack(AbyssalCraft.ironp, 2), new Object[] {"#", "#", '#', Items.iron_ingot});
 		GameRegistry.addRecipe(new ItemStack(AbyssalCraft.cloth, 1), new Object[] {"###", "#%#", "###", '#', Blocks.web, '%', Blocks.wool});
@@ -438,30 +410,6 @@ public class AbyssalCrafting {
 		GameRegistry.addRecipe(new ItemStack(Items.diamond_chestplate, 1), new Object[] {"#", "@", '#', new ItemStack(Items.golden_chestplate, 1, OreDictionary.WILDCARD_VALUE), '@', AbyssalCraft.DiamondU});
 		GameRegistry.addRecipe(new ItemStack(Items.diamond_leggings, 1), new Object[] {"#", "@", '#', new ItemStack(Items.golden_leggings, 1, OreDictionary.WILDCARD_VALUE), '@', AbyssalCraft.DiamondU});
 		GameRegistry.addRecipe(new ItemStack(Items.diamond_boots, 1), new Object[] {"#", "@", '#', new ItemStack(Items.golden_boots, 1, OreDictionary.WILDCARD_VALUE), '@', AbyssalCraft.DiamondU});
-
-		//Diamond to Abyssalnite armor
-		GameRegistry.addRecipe(new ItemStack(AbyssalCraft.helmet, 1), new Object[] {"#", "@", '#', new ItemStack(Items.diamond_helmet, 1, OreDictionary.WILDCARD_VALUE), '@', AbyssalCraft.AbyssalniteU});
-		GameRegistry.addRecipe(new ItemStack(AbyssalCraft.plate, 1), new Object[] {"#", "@", '#', new ItemStack(Items.diamond_chestplate, 1, OreDictionary.WILDCARD_VALUE), '@', AbyssalCraft.AbyssalniteU});
-		GameRegistry.addRecipe(new ItemStack(AbyssalCraft.legs, 1), new Object[] {"#", "@", '#', new ItemStack(Items.diamond_leggings, 1, OreDictionary.WILDCARD_VALUE), '@', AbyssalCraft.AbyssalniteU});
-		GameRegistry.addRecipe(new ItemStack(AbyssalCraft.boots, 1), new Object[] {"#", "@", '#', new ItemStack(Items.diamond_boots, 1, OreDictionary.WILDCARD_VALUE), '@', AbyssalCraft.AbyssalniteU});
-
-		//Abyssalnite to Coralium armor
-		GameRegistry.addRecipe(new ItemStack(AbyssalCraft.Corhelmet, 1), new Object[] {"#", "@", '#', new ItemStack(AbyssalCraft.helmet, 1, OreDictionary.WILDCARD_VALUE), '@', AbyssalCraft.CoraliumU});
-		GameRegistry.addRecipe(new ItemStack(AbyssalCraft.Corplate, 1), new Object[] {"#", "@", '#', new ItemStack(AbyssalCraft.plate, 1, OreDictionary.WILDCARD_VALUE), '@', AbyssalCraft.CoraliumU});
-		GameRegistry.addRecipe(new ItemStack(AbyssalCraft.Corlegs, 1), new Object[] {"#", "@", '#', new ItemStack(AbyssalCraft.legs, 1, OreDictionary.WILDCARD_VALUE), '@', AbyssalCraft.CoraliumU});
-		GameRegistry.addRecipe(new ItemStack(AbyssalCraft.Corboots, 1), new Object[] {"#", "@", '#', new ItemStack(AbyssalCraft.boots, 1, OreDictionary.WILDCARD_VALUE), '@', AbyssalCraft.CoraliumU});
-
-		//Coralium to Dreadium armor
-		GameRegistry.addRecipe(new ItemStack(AbyssalCraft.dreadiumhelmet, 1), new Object[] {"#", "@", '#', new ItemStack(AbyssalCraft.Corhelmet, 1, OreDictionary.WILDCARD_VALUE), '@', AbyssalCraft.DreadiumU});
-		GameRegistry.addRecipe(new ItemStack(AbyssalCraft.dreadiumplate, 1), new Object[] {"#", "@", '#', new ItemStack(AbyssalCraft.Corplate, 1, OreDictionary.WILDCARD_VALUE), '@', AbyssalCraft.DreadiumU});
-		GameRegistry.addRecipe(new ItemStack(AbyssalCraft.dreadiumlegs, 1), new Object[] {"#", "@", '#', new ItemStack(AbyssalCraft.Corlegs, 1, OreDictionary.WILDCARD_VALUE), '@', AbyssalCraft.DreadiumU});
-		GameRegistry.addRecipe(new ItemStack(AbyssalCraft.dreadiumboots, 1), new Object[] {"#", "@", '#', new ItemStack(AbyssalCraft.Corboots, 1, OreDictionary.WILDCARD_VALUE), '@', AbyssalCraft.DreadiumU});
-
-		//Dreadium to Ethaxium armor
-		GameRegistry.addRecipe(new ItemStack(AbyssalCraft.ethHelmet, 1), new Object[] {"#", "@", '#', new ItemStack(AbyssalCraft.dreadiumhelmet, 1, OreDictionary.WILDCARD_VALUE), '@', AbyssalCraft.EthaxiumU});
-		GameRegistry.addRecipe(new ItemStack(AbyssalCraft.ethPlate, 1), new Object[] {"#", "@", '#', new ItemStack(AbyssalCraft.dreadiumplate, 1, OreDictionary.WILDCARD_VALUE), '@', AbyssalCraft.EthaxiumU});
-		GameRegistry.addRecipe(new ItemStack(AbyssalCraft.ethLegs, 1), new Object[] {"#", "@", '#', new ItemStack(AbyssalCraft.dreadiumlegs, 1, OreDictionary.WILDCARD_VALUE), '@', AbyssalCraft.EthaxiumU});
-		GameRegistry.addRecipe(new ItemStack(AbyssalCraft.ethBoots, 1), new Object[] {"#", "@", '#', new ItemStack(AbyssalCraft.dreadiumboots, 1, OreDictionary.WILDCARD_VALUE), '@', AbyssalCraft.EthaxiumU});
 	}
 
 	private static void addItemSmelting(){
@@ -473,29 +421,26 @@ public class AbyssalCrafting {
 		GameRegistry.addSmelting(AbyssalCraft.Cbucket, new ItemStack(AbyssalCraft.cstone, 1), 0.2F);
 
 		GameRegistry.addSmelting(AbyssalCraft.coin, new ItemStack(Items.iron_ingot, 4), 0.5F);
-	}
 
-	private static void addSalvage(){
+		GameRegistry.addSmelting(Items.leather_helmet, new ItemStack(Items.leather), 1F);
+		GameRegistry.addSmelting(Items.leather_chestplate, new ItemStack(Items.leather), 1F);
+		GameRegistry.addSmelting(Items.leather_leggings, new ItemStack(Items.leather), 1F);
+		GameRegistry.addSmelting(Items.leather_boots, new ItemStack(Items.leather), 1F);
 
-		SalvageHandler.INSTANCE.addBootsSalvage(AbyssalCraft.boots, AbyssalCraft.abyingot);
-		SalvageHandler.INSTANCE.addHelmetSalvage(AbyssalCraft.helmet, AbyssalCraft.abyingot);
-		SalvageHandler.INSTANCE.addChestplateSalvage(AbyssalCraft.plate, AbyssalCraft.abyingot);
-		SalvageHandler.INSTANCE.addLeggingsSalvage(AbyssalCraft.legs, AbyssalCraft.abyingot);
+		GameRegistry.addSmelting(Items.iron_helmet, new ItemStack(Items.iron_ingot), 1F);
+		GameRegistry.addSmelting(Items.iron_chestplate, new ItemStack(Items.iron_ingot), 1F);
+		GameRegistry.addSmelting(Items.iron_leggings, new ItemStack(Items.iron_ingot), 1F);
+		GameRegistry.addSmelting(Items.iron_boots, new ItemStack(Items.iron_ingot), 1F);
 
-		SalvageHandler.INSTANCE.addBootsSalvage(AbyssalCraft.Corboots, AbyssalCraft.Cingot);
-		SalvageHandler.INSTANCE.addHelmetSalvage(AbyssalCraft.Corhelmet, AbyssalCraft.Cingot);
-		SalvageHandler.INSTANCE.addChestplateSalvage(AbyssalCraft.Corplate, AbyssalCraft.Cingot);
-		SalvageHandler.INSTANCE.addLeggingsSalvage(AbyssalCraft.Corlegs, AbyssalCraft.Cingot);
+		GameRegistry.addSmelting(Items.golden_helmet, new ItemStack(Items.gold_ingot), 1F);
+		GameRegistry.addSmelting(Items.golden_chestplate, new ItemStack(Items.gold_ingot), 1F);
+		GameRegistry.addSmelting(Items.golden_leggings, new ItemStack(Items.gold_ingot), 1F);
+		GameRegistry.addSmelting(Items.golden_boots, new ItemStack(Items.gold_ingot), 1F);
 
-		SalvageHandler.INSTANCE.addBootsSalvage(AbyssalCraft.dreadiumboots, AbyssalCraft.dreadiumingot);
-		SalvageHandler.INSTANCE.addHelmetSalvage(AbyssalCraft.dreadiumhelmet, AbyssalCraft.dreadiumingot);
-		SalvageHandler.INSTANCE.addChestplateSalvage(AbyssalCraft.dreadiumplate, AbyssalCraft.dreadiumingot);
-		SalvageHandler.INSTANCE.addLeggingsSalvage(AbyssalCraft.dreadiumlegs, AbyssalCraft.dreadiumingot);
-
-		SalvageHandler.INSTANCE.addBootsSalvage(AbyssalCraft.ethBoots, AbyssalCraft.ethaxiumIngot);
-		SalvageHandler.INSTANCE.addHelmetSalvage(AbyssalCraft.ethHelmet, AbyssalCraft.ethaxiumIngot);
-		SalvageHandler.INSTANCE.addChestplateSalvage(AbyssalCraft.ethPlate, AbyssalCraft.ethaxiumIngot);
-		SalvageHandler.INSTANCE.addLeggingsSalvage(AbyssalCraft.ethLegs, AbyssalCraft.ethaxiumIngot);
+		GameRegistry.addSmelting(Items.diamond_helmet, new ItemStack(Items.diamond), 1F);
+		GameRegistry.addSmelting(Items.diamond_chestplate, new ItemStack(Items.diamond), 1F);
+		GameRegistry.addSmelting(Items.diamond_leggings, new ItemStack(Items.diamond), 1F);
+		GameRegistry.addSmelting(Items.diamond_boots, new ItemStack(Items.diamond), 1F);
 	}
 
 	private static void addCrystallization(){
@@ -567,6 +512,7 @@ public class AbyssalCrafting {
 		//		AbyssalCraftAPI.addCrystallization(new ItemStack(AbyssalCraft.shoggothFlesh, 1, 2), new ItemStack(AbyssalCraft.crystalPhosphorus, 2), new ItemStack(AbyssalCraft.crystalDreadium, 1), 0.2F);
 		//		AbyssalCraftAPI.addCrystallization(new ItemStack(AbyssalCraft.shoggothFlesh, 1, 3), new ItemStack(AbyssalCraft.crystalPhosphorus, 2), new ItemStack(AbyssalCraft.crystalCarbon, 2), 0.2F);
 		//		AbyssalCraftAPI.addCrystallization(new ItemStack(AbyssalCraft.shoggothFlesh, 1, 4), new ItemStack(AbyssalCraft.crystalPhosphorus, 2), new ItemStack(AbyssalCraft.shadowgem, 1), 0.2F);
+		//TODO: Uncomment when shoggoths are released
 
 		//Crystallization for dusts
 		AbyssalCraftAPI.addSingleCrystallization("dustIron", "crystalIron", 0.1F);
@@ -616,6 +562,9 @@ public class AbyssalCrafting {
 		AbyssalCraftAPI.addTransmutation(Blocks.end_stone, new ItemStack(AbyssalCraft.ethaxium), 0.0F);
 		AbyssalCraftAPI.addTransmutation(AbyssalCraft.ethaxium, new ItemStack(Blocks.end_stone), 0.0F);
 		AbyssalCraftAPI.addTransmutation(new ItemStack(AbyssalCraft.ethaxiumbrick, 1, 0), new ItemStack(AbyssalCraft.ethaxium), 0.0F);
+		AbyssalCraftAPI.addTransmutation(AbyssalCraft.antiBeef, new ItemStack(Items.cooked_beef), 0.3F);
+		AbyssalCraftAPI.addTransmutation(AbyssalCraft.antiPork, new ItemStack(Items.cooked_porkchop), 0.3F);
+		AbyssalCraftAPI.addTransmutation(AbyssalCraft.antiChicken, new ItemStack(Items.cooked_chicken), 0.3F);
 	}
 
 	private static void addEngraving(){
@@ -628,5 +577,53 @@ public class AbyssalCrafting {
 		AbyssalCraftAPI.addEngraving(AbyssalCraft.cthulhuCoin, (ItemEngraving)AbyssalCraft.engravingCthulhu, 0.5F);
 		AbyssalCraftAPI.addEngraving(AbyssalCraft.elderCoin, (ItemEngraving)AbyssalCraft.engravingElder, 0.5F);
 		AbyssalCraftAPI.addEngraving(AbyssalCraft.jzaharCoin, (ItemEngraving)AbyssalCraft.engravingJzahar, 0.5F);
+	}
+
+	private static void addRitualRecipes(){
+		RitualRegistry.instance().addDimensionToBookType(0, 0);
+		RitualRegistry.instance().addDimensionToBookType(AbyssalCraft.configDimId1, 1);
+		RitualRegistry.instance().addDimensionToBookType(AbyssalCraft.configDimId2, 2);
+		RitualRegistry.instance().addDimensionToBookType(AbyssalCraft.configDimId3, 3);
+		RitualRegistry.instance().addDimensionToBookType(AbyssalCraft.configDimId4, 3);
+
+		ItemStack[] gk2offerings = new ItemStack[]{new ItemStack(AbyssalCraft.Corb), new ItemStack(AbyssalCraft.PSDL), new ItemStack(AbyssalCraft.EoA)};
+		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("asorahGatewayKey", 1, AbyssalCraft.configDimId1, new ItemStack(AbyssalCraft.portalPlacerDL), new ItemStack(AbyssalCraft.portalPlacer), gk2offerings));
+		ItemStack[] ocofferings = new ItemStack[]{new ItemStack(Items.redstone), new ItemStack(AbyssalCraft.oblivionshard), new ItemStack(Items.redstone), new ItemStack(AbyssalCraft.oblivionshard),
+				new ItemStack(Items.redstone), new ItemStack(AbyssalCraft.oblivionshard), new ItemStack(Items.redstone), new ItemStack(AbyssalCraft.oblivionshard)};
+		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("oblivionCatalyst", 0, new ItemStack(AbyssalCraft.OC), new ItemStack(Items.ender_eye), ocofferings));
+		ItemStack[] tgofferings = new ItemStack[]{new ItemStack(Items.diamond), new ItemStack(Items.blaze_powder), new ItemStack(Items.ender_pearl), new ItemStack(Items.blaze_powder),
+				new ItemStack(Items.diamond), new ItemStack(Items.blaze_powder), new ItemStack(Items.ender_pearl), new ItemStack(Items.blaze_powder)};
+		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("transmutationGem", 0, new ItemStack(AbyssalCraft.Corb), new ItemStack(AbyssalCraft.Cpearl), tgofferings));
+		ItemStack[] depthsofferings = new ItemStack[]{ new ItemStack(AbyssalCraft.Coraliumcluster9), new ItemStack(AbyssalCraft.Cbucket),
+				new ItemStack(Blocks.vine), new ItemStack(Blocks.waterlily), new ItemStack(AbyssalCraft.Corb), new ItemStack(AbyssalCraft.Corflesh)};
+		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("depthsHelmet", 1, AbyssalCraft.configDimId1, new ItemStack(AbyssalCraft.Depthshelmet), new ItemStack(AbyssalCraft.Corhelmet), depthsofferings));
+		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("depthsChestplate", 1, AbyssalCraft.configDimId1, new ItemStack(AbyssalCraft.Depthsplate), new ItemStack(AbyssalCraft.Corplate), depthsofferings));
+		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("depthsLeggings", 1, AbyssalCraft.configDimId1, new ItemStack(AbyssalCraft.Depthslegs), new ItemStack(AbyssalCraft.Corlegs), depthsofferings));
+		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("depthsBoots", 1, AbyssalCraft.configDimId1, new ItemStack(AbyssalCraft.Depthsboots), new ItemStack(AbyssalCraft.Corboots), depthsofferings));
+		ItemStack[] asorahofferings = new ItemStack[]{new ItemStack(Items.gold_ingot), new ItemStack(AbyssalCraft.Corb), new ItemStack(Items.gold_ingot), new ItemStack(AbyssalCraft.Cbucket),
+				new ItemStack(Items.gold_ingot), new ItemStack(Blocks.enchanting_table), new ItemStack(Items.gold_ingot)};
+		RitualRegistry.instance().registerRitual(new NecronomiconSummonRitual("summonAsorah", 1, AbyssalCraft.configDimId1, EntityDragonBoss.class, asorahofferings));
+		RitualRegistry.instance().registerRitual(new NecronomiconBreedingRitual());
+		ItemStack[] sacthothofferings = new ItemStack[]{new ItemStack(AbyssalCraft.OC), new ItemStack(Blocks.obsidian), new ItemStack(AbyssalCraft.Cbucket), new ItemStack(Blocks.obsidian),
+				new ItemStack(AbyssalCraft.antibucket), new ItemStack(Blocks.obsidian), new ItemStack(AbyssalCraft.ODBcore), new ItemStack(Blocks.obsidian)};
+		RitualRegistry.instance().registerRitual(new NecronomiconSummonRitual("summonSacthoth", 1, EntitySacthoth.class, sacthothofferings));
+	}
+
+	private static void addArmor(Item helmet, Item chestplate, Item pants, Item boots, Item material, Item upgrade, Item oldh, Item oldc, Item oldp, Item oldb){
+
+		GameRegistry.addRecipe(new ItemStack(helmet), new Object[] {"###", "# #", '#', material});
+		GameRegistry.addRecipe(new ItemStack(chestplate), new Object[] {"# #", "###", "###", '#', material});
+		GameRegistry.addRecipe(new ItemStack(pants), new Object[] {"###", "# #", "# #", '#', material});
+		GameRegistry.addRecipe(new ItemStack(boots), new Object[] {"# #", "# #", '#', material});
+
+		GameRegistry.addRecipe(new ItemStack(helmet, 1), new Object[] {"#", "@", '#', new ItemStack(oldh, 1, OreDictionary.WILDCARD_VALUE), '@', upgrade});
+		GameRegistry.addRecipe(new ItemStack(chestplate, 1), new Object[] {"#", "@", '#', new ItemStack(oldc, 1, OreDictionary.WILDCARD_VALUE), '@', upgrade});
+		GameRegistry.addRecipe(new ItemStack(pants, 1), new Object[] {"#", "@", '#', new ItemStack(oldp, 1, OreDictionary.WILDCARD_VALUE), '@', upgrade});
+		GameRegistry.addRecipe(new ItemStack(boots, 1), new Object[] {"#", "@", '#', new ItemStack(oldb, 1, OreDictionary.WILDCARD_VALUE), '@', upgrade});
+
+		GameRegistry.addSmelting(helmet, new ItemStack(material), 1F);
+		GameRegistry.addSmelting(chestplate, new ItemStack(material), 1F);
+		GameRegistry.addSmelting(pants, new ItemStack(material), 1F);
+		GameRegistry.addSmelting(boots, new ItemStack(material), 1F);
 	}
 }

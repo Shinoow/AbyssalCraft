@@ -19,10 +19,15 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
+import thaumcraft.api.crafting.IInfusionStabiliser;
 
 import com.shinoow.abyssalcraft.common.blocks.tile.TileEntityWhead;
 
-public class BlockWhead extends BlockContainer {
+import cpw.mods.fml.common.Optional.Interface;
+import cpw.mods.fml.common.Optional.Method;
+
+@Interface(modid = "Thaumcraft", iface = "thaumcraft.api.crafting.IInfusionStabiliser", striprefs = true)
+public class BlockWhead extends BlockContainer implements IInfusionStabiliser {
 
 	public BlockWhead() {
 		super(Material.cloth);
@@ -65,5 +70,12 @@ public class BlockWhead extends BlockContainer {
 
 		TileEntityWhead tile = (TileEntityWhead) par1World.getTileEntity(par2, par3, par4);
 		tile.direction = MathHelper.floor_double(par5EntityLivingBase.rotationYaw * 4.0F / 360.0F + 0.5D) & 3;
+	}
+
+	@Override
+	@Method(modid = "Thaumcraft")
+	public boolean canStabaliseInfusion(World world, int x, int y, int z) {
+
+		return true;
 	}
 }

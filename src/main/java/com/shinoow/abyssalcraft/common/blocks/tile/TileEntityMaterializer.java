@@ -297,7 +297,7 @@ public class TileEntityMaterializer extends TileEntity implements ISidedInventor
 			return false;
 		else
 		{
-			ItemStack itemstack = MaterializerRecipes.materialization().getMaterializationResult(materializerItemStacks[0]);
+			ItemStack itemstack = MaterializerRecipes.instance().getMaterializationResult(materializerItemStacks[0]);
 			if (itemstack == null) return false;
 			if (materializerItemStacks[2] == null) return true;
 			if (!materializerItemStacks[2].isItemEqual(itemstack)) return false;
@@ -313,7 +313,7 @@ public class TileEntityMaterializer extends TileEntity implements ISidedInventor
 	{
 		if (canMaterialize())
 		{
-			ItemStack itemstack = MaterializerRecipes.materialization().getMaterializationResult(materializerItemStacks[0]);
+			ItemStack itemstack = MaterializerRecipes.instance().getMaterializationResult(materializerItemStacks[0]);
 
 			if (materializerItemStacks[2] == null)
 				materializerItemStacks[2] = itemstack.copy();

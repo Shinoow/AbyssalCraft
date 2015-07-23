@@ -91,7 +91,7 @@ public class EntityDragonMinion extends EntityMob implements IEntityMultiPart, I
 	protected void applyEntityAttributes()
 	{
 		super.applyEntityAttributes();
-		getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(100.0D);
+		getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(30.0D);
 	}
 
 	@Override
@@ -129,6 +129,8 @@ public class EntityDragonMinion extends EntityMob implements IEntityMultiPart, I
 	@Override
 	public void onDeath(DamageSource par1DamageSource)
 	{
+		super.onDeath(par1DamageSource);
+
 		if (par1DamageSource.getEntity() instanceof EntityPlayer)
 		{
 			EntityPlayer entityplayer = (EntityPlayer)par1DamageSource.getEntity();
@@ -289,16 +291,16 @@ public class EntityDragonMinion extends EntityMob implements IEntityMultiPart, I
 			}
 
 			renderYawOffset = rotationYaw;
-			dragonPartHead.width = dragonPartHead.height = 3.0F;
-			dragonPartTail1.width = dragonPartTail1.height = 2.0F;
-			dragonPartTail2.width = dragonPartTail2.height = 2.0F;
-			dragonPartTail3.width = dragonPartTail3.height = 2.0F;
-			dragonPartBody.height = 3.0F;
-			dragonPartBody.width = 5.0F;
-			dragonPartWing1.height = 2.0F;
-			dragonPartWing1.width = 4.0F;
-			dragonPartWing2.height = 3.0F;
-			dragonPartWing2.width = 4.0F;
+			dragonPartHead.width = dragonPartHead.height = 1.5F;
+			dragonPartTail1.width = dragonPartTail1.height = 1.0F;
+			dragonPartTail2.width = dragonPartTail2.height = 1.0F;
+			dragonPartTail3.width = dragonPartTail3.height = 1.0F;
+			dragonPartBody.height = 1.5F;
+			dragonPartBody.width = 2.5F;
+			dragonPartWing1.height = 1.0F;
+			dragonPartWing1.width = 2.0F;
+			dragonPartWing2.height = 1.5F;
+			dragonPartWing2.width = 2.0F;
 			f1 = (float)(getMovementOffsets(5, 1.0F)[1] - getMovementOffsets(10, 1.0F)[1]) * 10.0F / 180.0F * (float)Math.PI;
 			f2 = MathHelper.cos(f1);
 			float f9 = -MathHelper.sin(f1);
@@ -314,9 +316,9 @@ public class EntityDragonMinion extends EntityMob implements IEntityMultiPart, I
 
 			if (!worldObj.isRemote && hurtTime == 0)
 			{
-				attackEntitiesInList(worldObj.getEntitiesWithinAABBExcludingEntity(this, dragonPartWing1.boundingBox.expand(4.0D, 2.0D, 4.0D).offset(0.0D, -2.0D, 0.0D)));
-				attackEntitiesInList(worldObj.getEntitiesWithinAABBExcludingEntity(this, dragonPartWing2.boundingBox.expand(4.0D, 2.0D, 4.0D).offset(0.0D, -2.0D, 0.0D)));
-				attackEntitiesInList(worldObj.getEntitiesWithinAABBExcludingEntity(this, dragonPartHead.boundingBox.expand(1.0D, 1.0D, 1.0D)));
+				attackEntitiesInList(worldObj.getEntitiesWithinAABBExcludingEntity(this, dragonPartWing1.boundingBox.expand(2.0D, 1.0D, 2.0D).offset(0.0D, -3.0D, 0.0D)));
+				attackEntitiesInList(worldObj.getEntitiesWithinAABBExcludingEntity(this, dragonPartWing2.boundingBox.expand(2.0D, 1.0D, 2.0D).offset(0.0D, -3.0D, 0.0D)));
+				attackEntitiesInList(worldObj.getEntitiesWithinAABBExcludingEntity(this, dragonPartHead.boundingBox.expand(0.5D, 0.5D, 0.5D)));
 			}
 
 			double[] adouble = getMovementOffsets(5, 1.0F);
@@ -353,7 +355,7 @@ public class EntityDragonMinion extends EntityMob implements IEntityMultiPart, I
 
 	private void updateHealingCircle()
 	{
-		if (healingcircle != null){
+		if (healingcircle != null)
 			if (healingcircle.isDead)
 			{
 				if (!worldObj.isRemote)
@@ -363,9 +365,6 @@ public class EntityDragonMinion extends EntityMob implements IEntityMultiPart, I
 			}
 			else if (ticksExisted % 10 == 0 && getHealth() <= getMaxHealth())
 				setHealth(getHealth() - 1.0F);
-		}
-		else if(rand.nextInt(100) == 0)
-			setHealth(getHealth() - 1);
 
 		if (rand.nextInt(10) == 0)
 		{

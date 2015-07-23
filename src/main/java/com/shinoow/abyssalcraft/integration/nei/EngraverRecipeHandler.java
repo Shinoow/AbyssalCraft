@@ -101,7 +101,7 @@ public class EngraverRecipeHandler extends TemplateRecipeHandler
 	@Override
 	public void loadCraftingRecipes(String outputId, Object... results) {
 		if (outputId.equals("engraving") && getClass() == EngraverRecipeHandler.class) {//don't want subclasses getting a hold of this
-			Map<ItemStack, ItemStack> recipes = EngraverRecipes.engraving().getEngravingList();
+			Map<ItemStack, ItemStack> recipes = EngraverRecipes.instance().getEngravingList();
 			for (Entry<ItemStack, ItemStack> recipe : recipes.entrySet())
 				arecipes.add(new EngravingPair(recipe.getKey(), recipe.getValue()));
 		} else
@@ -110,7 +110,7 @@ public class EngraverRecipeHandler extends TemplateRecipeHandler
 
 	@Override
 	public void loadCraftingRecipes(ItemStack result) {
-		Map<ItemStack, ItemStack> recipes = EngraverRecipes.engraving().getEngravingList();
+		Map<ItemStack, ItemStack> recipes = EngraverRecipes.instance().getEngravingList();
 		for (Entry<ItemStack, ItemStack> recipe : recipes.entrySet())
 			if (NEIServerUtils.areStacksSameType(recipe.getValue(), result))
 				arecipes.add(new EngravingPair(recipe.getKey(), recipe.getValue()));
@@ -126,7 +126,7 @@ public class EngraverRecipeHandler extends TemplateRecipeHandler
 
 	@Override
 	public void loadUsageRecipes(ItemStack ingredient) {
-		Map<ItemStack, ItemStack> recipes = EngraverRecipes.engraving().getEngravingList();
+		Map<ItemStack, ItemStack> recipes = EngraverRecipes.instance().getEngravingList();
 		for (Entry<ItemStack, ItemStack> recipe : recipes.entrySet())
 			if (NEIServerUtils.areStacksSameTypeCrafting(recipe.getKey(), ingredient)) {
 				EngravingPair arecipe = new EngravingPair(recipe.getKey(), recipe.getValue());

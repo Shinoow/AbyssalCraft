@@ -135,6 +135,12 @@ public class EntityDragonBoss extends EntityMob implements IBossDisplayData, IEn
 	}
 
 	@Override
+	protected boolean canDespawn()
+	{
+		return false;
+	}
+
+	@Override
 	protected void dropFewItems(boolean par1, int par2)
 	{
 		dropItem(AbyssalCraft.EoA, 1);
@@ -315,16 +321,16 @@ public class EntityDragonBoss extends EntityMob implements IBossDisplayData, IEn
 			}
 
 			renderYawOffset = rotationYaw;
-			dragonPartHead.width = dragonPartHead.height = 3.0F;
-			dragonPartTail1.width = dragonPartTail1.height = 2.0F;
-			dragonPartTail2.width = dragonPartTail2.height = 2.0F;
-			dragonPartTail3.width = dragonPartTail3.height = 2.0F;
-			dragonPartBody.height = 3.0F;
-			dragonPartBody.width = 5.0F;
-			dragonPartWing1.height = 2.0F;
-			dragonPartWing1.width = 4.0F;
-			dragonPartWing2.height = 3.0F;
-			dragonPartWing2.width = 4.0F;
+			dragonPartHead.width = dragonPartHead.height = 4.5F;
+			dragonPartTail1.width = dragonPartTail1.height = 3.0F;
+			dragonPartTail2.width = dragonPartTail2.height = 3.0F;
+			dragonPartTail3.width = dragonPartTail3.height = 3.0F;
+			dragonPartBody.height = 4.5F;
+			dragonPartBody.width = 7.5F;
+			dragonPartWing1.height = 3.0F;
+			dragonPartWing1.width = 6.0F;
+			dragonPartWing2.height = 4.5F;
+			dragonPartWing2.width = 6.0F;
 			f1 = (float)(getMovementOffsets(5, 1.0F)[1] - getMovementOffsets(10, 1.0F)[1]) * 10.0F / 180.0F * (float)Math.PI;
 			f2 = MathHelper.cos(f1);
 			float f9 = -MathHelper.sin(f1);
@@ -340,9 +346,9 @@ public class EntityDragonBoss extends EntityMob implements IBossDisplayData, IEn
 
 			if (!worldObj.isRemote && hurtTime == 0)
 			{
-				collideWithEntities(worldObj.getEntitiesWithinAABBExcludingEntity(this, dragonPartWing1.boundingBox.expand(4.0D, 2.0D, 4.0D).offset(0.0D, -2.0D, 0.0D)));
-				collideWithEntities(worldObj.getEntitiesWithinAABBExcludingEntity(this, dragonPartWing2.boundingBox.expand(4.0D, 2.0D, 4.0D).offset(0.0D, -2.0D, 0.0D)));
-				attackEntitiesInList(worldObj.getEntitiesWithinAABBExcludingEntity(this, dragonPartHead.boundingBox.expand(1.0D, 1.0D, 1.0D)));
+				collideWithEntities(worldObj.getEntitiesWithinAABBExcludingEntity(this, dragonPartWing1.boundingBox.expand(6.0D, 4.0D, 6.0D).offset(0.0D, -1.0D, 0.0D)));
+				collideWithEntities(worldObj.getEntitiesWithinAABBExcludingEntity(this, dragonPartWing2.boundingBox.expand(6.0D, 4.0D, 6.0D).offset(0.0D, -1.0D, 0.0D)));
+				attackEntitiesInList(worldObj.getEntitiesWithinAABBExcludingEntity(this, dragonPartHead.boundingBox.expand(2.0D, 2.0D, 2.0D)));
 			}
 
 			double[] adouble = getMovementOffsets(5, 1.0F);
@@ -490,6 +496,11 @@ public class EntityDragonBoss extends EntityMob implements IBossDisplayData, IEn
 	{
 		if (par1EntityDragonPart != dragonPartHead)
 			par3 = par3 / 4.0F + 1.0F;
+
+		if(par3 > 50)
+			if(par3 > 500001 || par3 < 500000)
+				if(par3 > 750001.5F || par3 < 750001)
+					par3 = 30 + worldObj.rand.nextInt(20);
 
 		float f1 = rotationYaw * (float)Math.PI / 180.0F;
 		float f2 = MathHelper.sin(f1);

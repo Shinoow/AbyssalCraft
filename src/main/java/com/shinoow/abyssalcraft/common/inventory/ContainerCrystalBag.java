@@ -13,8 +13,8 @@ package com.shinoow.abyssalcraft.common.inventory;
 
 import invtweaks.api.container.ChestContainer;
 
-import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
-import com.shinoow.abyssalcraft.api.item.ICrystal;
+import com.shinoow.abyssalcraft.api.APIUtils;
+import com.shinoow.abyssalcraft.common.items.ItemCrystalBag;
 
 import cpw.mods.fml.common.Optional.Interface;
 import net.minecraft.entity.player.EntityPlayer;
@@ -44,7 +44,7 @@ public class ContainerCrystalBag extends Container
 
 		for (j = 0; j < rows; ++j)
 			for (k = 0; k < 9; ++k)
-				addSlotToContainer(new SlotCrystal(inventoryItem, k + j * 9, 8 + k * 18, 18 + j * 18));
+				addSlotToContainer(new SlotCrystal(inventoryItem, k + j * 9, 8 + k * 18, 17 + j * 18));
 
 		for (j = 0; j < 3; ++j)
 			for (k = 0; k < 9; ++k)
@@ -79,7 +79,7 @@ public class ContainerCrystalBag extends Container
 					return null;
 
 				slot.onSlotChange(itemstack1, itemstack);
-			} else if (itemstack1.getItem() instanceof ICrystal || AbyssalCraftAPI.getCrystals().contains(itemstack1))
+			} else if (APIUtils.isCrystal(itemstack1))
 				if (!mergeItemStack(itemstack1, 0, InventoryCrystalBag.INV_SIZE, false))
 					return null;
 
@@ -100,8 +100,7 @@ public class ContainerCrystalBag extends Container
 	public ItemStack slotClick(int slot, int button, int flag, EntityPlayer player) {
 
 		if (slot >= 0 && getSlot(slot) != null && getSlot(slot).getStack() != null)
-			if(!(getSlot(slot).getStack().getItem() instanceof ICrystal) ||
-					!AbyssalCraftAPI.getCrystals().contains(getSlot(slot).getStack()))
+			if(getSlot(slot).getStack().getItem() instanceof ItemCrystalBag)
 				return null;
 		return super.slotClick(slot, button, flag, player);
 	}

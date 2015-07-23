@@ -13,6 +13,7 @@ package com.shinoow.abyssalcraft.common.util;
 
 import java.util.UUID;
 
+import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.api.entity.*;
 
 import net.minecraft.entity.EntityLivingBase;
@@ -59,6 +60,17 @@ public final class EntityUtil {
 	 */
 	public static boolean isEntityAnti(EntityLivingBase par1){
 		return par1 instanceof IAntiEntity;
+	}
+
+	/**
+	 * Checks if a Player has a Necronomicon
+	 * @param player The Player to check
+	 * @return True if the Player has a Necronomicon, otherwise false
+	 */
+	public static boolean hasNecronomicon(EntityPlayer player){
+		return player.inventory.hasItem(AbyssalCraft.necronomicon) || player.inventory.hasItem(AbyssalCraft.necronomicon_cor) ||
+				player.inventory.hasItem(AbyssalCraft.necronomicon_dre) || player.inventory.hasItem(AbyssalCraft.necronomicon_omt) ||
+				player.inventory.hasItem(AbyssalCraft.abyssalnomicon);
 	}
 
 	static class Vars{

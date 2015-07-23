@@ -216,6 +216,11 @@ public class EntitySacthoth extends EntityMob implements IBossDisplayData, IAnti
 	@Override
 	public boolean attackEntityFrom(DamageSource par1DamageSource, float par2)
 	{
+		if(par2 > 50)
+			if(par2 > 500001 || par2 < 500000)
+				if(par2 > 750001.5F || par2 < 750001)
+					par2 = 30 + worldObj.rand.nextInt(20);
+
 		if(par1DamageSource == DamageSource.inWall){
 			teleportRandomly();
 			return false;

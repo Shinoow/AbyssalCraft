@@ -15,8 +15,7 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 
-import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
-import com.shinoow.abyssalcraft.api.item.ICrystal;
+import com.shinoow.abyssalcraft.api.APIUtils;
 
 public class SlotCrystal extends Slot {
 
@@ -27,6 +26,6 @@ public class SlotCrystal extends Slot {
 	@Override
 	public boolean isItemValid(ItemStack par1ItemStack)
 	{
-		return par1ItemStack.getItem() instanceof ICrystal || AbyssalCraftAPI.getCrystals().contains(par1ItemStack);
+		return APIUtils.isCrystal(par1ItemStack);
 	}
 }

@@ -11,6 +11,7 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.common.blocks;
 
+import thaumcraft.api.crafting.IInfusionStabiliser;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.EntityLivingBase;
@@ -22,7 +23,11 @@ import net.minecraft.world.World;
 
 import com.shinoow.abyssalcraft.common.blocks.tile.TileEntityDGhead;
 
-public class BlockDGhead extends BlockContainer {
+import cpw.mods.fml.common.Optional.Interface;
+import cpw.mods.fml.common.Optional.Method;
+
+@Interface(modid = "Thaumcraft", iface = "thaumcraft.api.crafting.IInfusionStabiliser", striprefs = true)
+public class BlockDGhead extends BlockContainer implements IInfusionStabiliser {
 
 	public BlockDGhead() {
 		super(Material.cloth);
@@ -67,4 +72,10 @@ public class BlockDGhead extends BlockContainer {
 		tile.direction = MathHelper.floor_double(par5EntityLivingBase.rotationYaw * 4.0F / 360.0F + 0.5D) & 3;
 	}
 
+	@Override
+	@Method(modid = "Thaumcraft")
+	public boolean canStabaliseInfusion(World world, int x, int y, int z) {
+
+		return true;
+	}
 }

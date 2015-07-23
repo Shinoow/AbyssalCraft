@@ -51,7 +51,7 @@ public class BiomeGenDreadlandsBase extends BiomeGenBase {
 		spawnableMonsterList.add(new SpawnListEntry(EntityChagarothFist.class, 2, 1, 1));
 		spawnableMonsterList.add(new SpawnListEntry(EntityDemonPig.class, 5, 1, 2));
 		spawnableMonsterList.add(new SpawnListEntry(EntityGreaterDreadSpawn.class, 5, 1, 1));
-		spawnableMonsterList.add(new SpawnListEntry(EntityDreadguard.class, 1, 1, 1));
+		spawnableMonsterList.add(new SpawnListEntry(EntityDreadguard.class, 8, 1, 1));
 		spawnableMonsterList.add(new SpawnListEntry(EntityLesserDreadbeast.class, 1, 0, 1));
 	}
 

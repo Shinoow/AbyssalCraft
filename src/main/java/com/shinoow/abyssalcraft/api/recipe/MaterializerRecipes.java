@@ -11,24 +11,28 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.api.recipe;
 
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import net.minecraft.block.Block;
-import net.minecraft.item.Item;
+import com.google.common.collect.Maps;
+import com.shinoow.abyssalcraft.api.APIUtils;
+import com.shinoow.abyssalcraft.common.items.ItemCrystalBag;
+
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.NBTTagList;
 import net.minecraftforge.oredict.OreDictionary;
 
 public class MaterializerRecipes {
 
 	private static final MaterializerRecipes materializerBase = new MaterializerRecipes();
 	/** The list of materialization results. */
-	private Map<ItemStack, ItemStack> materializationList = new HashMap<ItemStack, ItemStack>();
-	private Map<ItemStack, Float> experienceList = new HashMap<ItemStack, Float>();
+	private Map<ItemStack[], ItemStack> materializationList = Maps.newHashMap();
+	private Map<ItemStack, Float> experienceList = Maps.newHashMap();
+	private Map<ItemStack, Integer> levelList = Maps.newHashMap();
 
-	public static MaterializerRecipes materialization()
+	public static MaterializerRecipes instance()
 	{
 		return materializerBase;
 	}
@@ -38,20 +42,13 @@ public class MaterializerRecipes {
 
 	}
 
-	public void transmutate(Block input, ItemStack output, float xp)
-	{
-		transmutate(Item.getItemFromBlock(input), output, xp);
-	}
+	public void materialize(ItemStack[] input, ItemStack output, int level){
 
-	public void transmutate(Item input, ItemStack output, float xp)
-	{
-		transmutate(new ItemStack(input, 1, OreDictionary.WILDCARD_VALUE), output, xp);
-	}
-
-	public void transmutate(ItemStack input, ItemStack output, float xp)
-	{
+		for(ItemStack item : input)
+			if(APIUtils.isCrystal(item)) throw new ClassCastException("All of the input items has to be Crystals!");
 		materializationList.put(input, output);
-		experienceList.put(output, Float.valueOf(xp));
+		levelList.put(output, level);
+		experienceList.put(output, Float.valueOf(level/2));
 	}
 
 	/**
@@ -74,12 +71,37 @@ public class MaterializerRecipes {
 		return (ItemStack)entry.getValue();
 	}
 
+	public ItemStack getMaterializationResult(ItemStack stack, int book){
+
+		NBTTagList items = new NBTTagList();
+		ItemStack[] inventory;
+
+		if(stack.getItem() instanceof ItemCrystalBag){
+			if(stack.stackTagCompound == null)
+				stack.stackTagCompound = new NBTTagCompound();
+			if(stack.stackTagCompound.hasKey("ItemInventory", 10)){
+				items = stack.stackTagCompound.getTagList("ItemInventory", 10);
+
+				inventory = new ItemStack[items.tagCount()];
+				for (int i = 0; i < items.tagCount(); ++i)
+				{
+					NBTTagCompound item = items.getCompoundTagAt(i);
+					byte slot = item.getByte("Slot");
+
+					inventory[slot] = ItemStack.loadItemStackFromNBT(item);
+				}
+			}
+		}
+
+		return null;
+	}
+
 	private boolean areStacksEqual(ItemStack par1ItemStack, ItemStack par2ItemStack)
 	{
 		return par2ItemStack.getItem() == par1ItemStack.getItem() && (par2ItemStack.getItemDamage() == OreDictionary.WILDCARD_VALUE || par2ItemStack.getItemDamage() == par1ItemStack.getItemDamage());
 	}
 
-	public Map<ItemStack, ItemStack> getMaterializationList()
+	public Map<ItemStack[], ItemStack> getMaterializationList()
 	{
 		return materializationList;
 	}

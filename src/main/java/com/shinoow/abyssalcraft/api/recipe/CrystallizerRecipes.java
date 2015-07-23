@@ -28,7 +28,7 @@ public class CrystallizerRecipes {
 	private Map<ItemStack, ItemStack[]> crystallizationList = new HashMap<ItemStack, ItemStack[]>();
 	private Map<ItemStack, Float> experienceList = new HashMap<ItemStack, Float>();
 
-	public static CrystallizerRecipes crystallization()
+	public static CrystallizerRecipes instance()
 	{
 		return crystallizationBase;
 	}

@@ -114,7 +114,7 @@ public class EntityDemonPig extends EntityMob implements IDreadEntity {
 			if (worldObj.provider.dimensionId != AbyssalCraft.configDimId2 && worldObj.provider.dimensionId != 0 && worldObj.getBlock(i, j, k).getMaterial() == Material.air &&
 					worldObj.getBiomeGenForCoords(i, k).getFloatTemperature(i, j, k) < 10.0F && Blocks.fire.canPlaceBlockAt(worldObj, i, j, k) || canBurn == true &&
 					worldObj.getBlock(i, j, k).getMaterial() == Material.air && worldObj.getBiomeGenForCoords(i, k).getFloatTemperature(i, j, k) < 10.0F && Blocks.fire.canPlaceBlockAt(worldObj, i, j, k))
-				worldObj.setBlock(i, j, k, AbyssalCraft.dreadfire);
+				worldObj.setBlock(i, j, k, Blocks.fire);
 		}
 	}
 

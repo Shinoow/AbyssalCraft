@@ -11,27 +11,45 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.common.blocks;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Random;
+
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockContainer;
+import net.minecraft.block.material.Material;
+import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.IIcon;
+import net.minecraft.world.World;
+
+import com.google.common.collect.Maps;
+import com.shinoow.abyssalcraft.AbyssalCraft;
+import com.shinoow.abyssalcraft.common.blocks.tile.TileEntityRitualAltar;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.block.Block;
-import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IIconRegister;
-import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.IIcon;
 
-public class BlockRitualAltar extends BlockACBasic {
+public class BlockRitualAltar extends BlockContainer {
+
+	private static HashMap<Integer, Block> blockMeta = Maps.newHashMap();
 
 	@SideOnly(Side.CLIENT)
 	private IIcon[] icons;
 
 	public BlockRitualAltar() {
-		super(Material.rock, 6.0F, 12.0F, Block.soundTypeStone);
+		super(Material.rock);
+		setHardness(6.0F);
+		setResistance(12.0F);
+		setStepSound(Block.soundTypeStone);
 		setBlockBounds(0.15F, 0.0F, 0.15F, 0.85F, 1.0F, 0.85F);
+		setBlockTextureName("anvil_top_damaged_0");
 		setCreativeTab(null);
+		setLightLevel(0.375F);
 	}
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })
@@ -58,29 +76,87 @@ public class BlockRitualAltar extends BlockACBasic {
 	}
 
 	@Override
-	@SideOnly(Side.CLIENT)
-	public void registerBlockIcons(IIconRegister par1IconRegister) {
-		icons = new IIcon[8];
-		icons[0] = par1IconRegister.registerIcon("minecraft:cobblestone");
-		icons[1] = par1IconRegister.registerIcon("abyssalcraft:DSC");
-		icons[2] = par1IconRegister.registerIcon("abyssalcraft:ASB");
-		icons[3] = par1IconRegister.registerIcon("abyssalcraft:cstonebrick");
-		icons[4] = par1IconRegister.registerIcon("abyssalcraft:DrSB");
-		icons[5] = par1IconRegister.registerIcon("abyssalcraft:AbyDrSB");
-		icons[6] = par1IconRegister.registerIcon("abyssalcraft:EB");
-		icons[7] = par1IconRegister.registerIcon("abyssalcraft:DEB");
+	public int damageDropped(int meta) {
+		return meta;
 	}
+
 	@Override
-	@SideOnly(Side.CLIENT)
-	public IIcon getIcon(int par1, int par2) {
-		if(par2 == 0) return icons[0];
-		if(par2 == 1) return icons[1];
-		if(par2 == 2) return icons[2];
-		if(par2 == 3) return icons[3];
-		if(par2 == 4) return icons[4];
-		if(par2 == 5) return icons[5];
-		if(par2 == 6) return icons[6];
-		if(par2 == 7) return icons[7];
-		return super.getIcon(par1, par2);
+	public TileEntity createNewTileEntity(World p_149915_1_, int p_149915_2_) {
+
+		return new TileEntityRitualAltar();
+	}
+
+	@Override
+	public Item getItemDropped(int i, Random random, int j)
+	{
+		return Item.getItemFromBlock(blockMeta.get(j));
+	}
+
+	@Override
+	public int getRenderType() {
+		return -7;
+	}
+
+	@Override
+	public void randomDisplayTick(World par1World, int par2, int par3, int par4, Random par5Random) {
+		super.randomDisplayTick(par1World, par2, par3, par4, par5Random);
+		int timer = 0;
+		TileEntity altar = par1World.getTileEntity(par2, par3, par4);
+		if(altar instanceof TileEntityRitualAltar)
+			timer = ((TileEntityRitualAltar)altar).getRitualCooldown();
+
+		if(AbyssalCraft.particleBlock){
+			par1World.spawnParticle("flame", par2 + 0.75F, par3 + 1.05F, par4 + 0.75F, 0.0D, 0.0D, 0.0D);
+			par1World.spawnParticle("flame", par2 + 0.25F, par3 + 1.05F, par4 + 0.75F, 0.0D, 0.0D, 0.0D);
+			par1World.spawnParticle("flame", par2 + 0.25F, par3 + 1.05F, par4 + 0.25F, 0.0D, 0.0D, 0.0D);
+			par1World.spawnParticle("flame", par2 + 0.75F, par3 + 1.05F, par4 + 0.25F, 0.0D, 0.0D, 0.0D);
+			par1World.spawnParticle("smoke", par2 + 0.75F, par3 + 1.05F, par4 + 0.75F, 0.0D, 0.0D, 0.0D);
+			par1World.spawnParticle("smoke", par2 + 0.25F, par3 + 1.05F, par4 + 0.75F, 0.0D, 0.0D, 0.0D);
+			par1World.spawnParticle("smoke", par2 + 0.25F, par3 + 1.05F, par4 + 0.25F, 0.0D, 0.0D, 0.0D);
+			par1World.spawnParticle("smoke", par2 + 0.75F, par3 + 1.05F, par4 + 0.25F, 0.0D, 0.0D, 0.0D);
+			if(timer < 200 && timer > 0){
+				par1World.spawnParticle("largesmoke", par2 - 2.5, par3 + 1, par4 + 0.5, 0,0,0);
+				par1World.spawnParticle("largesmoke", par2 + 0.5, par3 + 1, par4 - 2.5, 0,0,0);
+				par1World.spawnParticle("largesmoke", par2 + 3.5, par3 + 1, par4 + 0.5, 0,0,0);
+				par1World.spawnParticle("largesmoke", par2 + 0.5, par3 + 1, par4 + 3.5, 0,0,0);
+				par1World.spawnParticle("largesmoke", par2 - 1.5, par3 + 1, par4 + 2.5, 0,0,0);
+				par1World.spawnParticle("largesmoke", par2 - 1.5, par3 + 1, par4 - 1.5, 0,0,0);
+				par1World.spawnParticle("largesmoke", par2 + 2.5, par3 + 1, par4 + 2.5, 0,0,0);
+				par1World.spawnParticle("largesmoke", par2 + 2.5, par3 + 1, par4 - 1.5, 0,0,0);
+				par1World.spawnParticle("largesmoke", par2 + 0.5, par3 + 1, par4 + 0.5, 0,0,0);
+			}
+		}
+	}
+
+	@Override
+	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int meta, float hitX, float hitY, float hitZ) {
+		TileEntity tile = world.getTileEntity(x, y, z);
+		if(tile != null && tile instanceof TileEntityRitualAltar)
+			if(((TileEntityRitualAltar)tile).getItem() != null){
+				player.inventory.addItemStackToInventory(((TileEntityRitualAltar)tile).getItem());
+				((TileEntityRitualAltar)tile).setItem(null);
+				return true;
+			} else {
+				ItemStack heldItem = player.getHeldItem();
+				if(heldItem != null){
+					ItemStack newItem = heldItem.copy();
+					newItem.stackSize = 1;
+					((TileEntityRitualAltar)tile).setItem(newItem);
+					player.inventory.decrStackSize(player.inventory.currentItem, 1);
+					return true;
+				}
+			}
+		return false;
+	}
+
+	static {
+		blockMeta.put(0, Blocks.cobblestone);
+		blockMeta.put(1, AbyssalCraft.Darkstone_cobble);
+		blockMeta.put(2, AbyssalCraft.abybrick);
+		blockMeta.put(3, AbyssalCraft.cstonebrick);
+		blockMeta.put(4, AbyssalCraft.dreadbrick);
+		blockMeta.put(5, AbyssalCraft.abydreadbrick);
+		blockMeta.put(6, AbyssalCraft.ethaxiumbrick);
+		blockMeta.put(7, AbyssalCraft.darkethaxiumbrick);
 	}
 }

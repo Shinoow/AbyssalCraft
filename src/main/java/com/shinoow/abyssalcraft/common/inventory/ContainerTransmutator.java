@@ -123,7 +123,7 @@ public class ContainerTransmutator extends Container {
 			}
 			else if (par2 != 1 && par2 != 0)
 			{
-				if (TransmutatorRecipes.transmutation().getTransmutationResult(itemstack1) != null)
+				if (TransmutatorRecipes.instance().getTransmutationResult(itemstack1) != null)
 				{
 					if (!mergeItemStack(itemstack1, 0, 1, false))
 						return null;

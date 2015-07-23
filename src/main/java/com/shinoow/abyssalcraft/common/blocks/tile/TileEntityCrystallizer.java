@@ -297,11 +297,11 @@ public class TileEntityCrystallizer extends TileEntity implements ISidedInventor
 	 */
 	private boolean canCrystallize()
 	{
-		if (crystallizerItemStacks[0] == null || CrystallizerRecipes.crystallization().getCrystallizationResult(crystallizerItemStacks[0]) == null)
+		if (crystallizerItemStacks[0] == null || CrystallizerRecipes.instance().getCrystallizationResult(crystallizerItemStacks[0]) == null)
 			return false;
 		else
 		{
-			ItemStack[] itemstack = CrystallizerRecipes.crystallization().getCrystallizationResult(crystallizerItemStacks[0]);
+			ItemStack[] itemstack = CrystallizerRecipes.instance().getCrystallizationResult(crystallizerItemStacks[0]);
 
 			if(itemstack[0] == null && itemstack[1] == null || itemstack[0] == null) return false;
 			if(crystallizerItemStacks[2] == null && crystallizerItemStacks[3] == null) return true;
@@ -330,7 +330,7 @@ public class TileEntityCrystallizer extends TileEntity implements ISidedInventor
 	{
 		if (canCrystallize())
 		{
-			ItemStack[] itemstack = CrystallizerRecipes.crystallization().getCrystallizationResult(crystallizerItemStacks[0]);
+			ItemStack[] itemstack = CrystallizerRecipes.instance().getCrystallizationResult(crystallizerItemStacks[0]);
 			Map<ItemStack, ItemStack> testList = new HashMap<ItemStack, ItemStack>();
 			testList.put(itemstack[0], itemstack[1]);
 			Iterator<?> iterator = testList.entrySet().iterator();

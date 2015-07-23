@@ -38,6 +38,6 @@ public class ItemACBasic extends Item {
 				|| this.getUnlocalizedName().contains("EI"))
 			return EnumChatFormatting.AQUA + StatCollector.translateToLocal(this.getUnlocalizedName() + ".name");
 
-		return StatCollector.translateToLocal(this.getUnlocalizedName() + ".name");
+		return super.getItemStackDisplayName(par1ItemStack);
 	}
 }

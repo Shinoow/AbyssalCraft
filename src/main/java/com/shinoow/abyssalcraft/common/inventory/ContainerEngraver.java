@@ -105,7 +105,7 @@ public class ContainerEngraver extends Container {
 			}
 			else if (par2 != 1 && par2 != 0)
 			{
-				if (EngraverRecipes.engraving().getEngravingResult(itemstack1) != null)
+				if (EngraverRecipes.instance().getEngravingResult(itemstack1) != null)
 				{
 					if (!mergeItemStack(itemstack1, 0, 1, false))
 						return null;

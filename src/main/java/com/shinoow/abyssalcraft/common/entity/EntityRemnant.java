@@ -30,6 +30,8 @@ import net.minecraft.world.World;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.api.entity.*;
+import com.shinoow.abyssalcraft.common.util.EntityUtil;
+import com.shinoow.abyssalcraft.common.util.SpecialTextUtil;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -130,14 +132,14 @@ public class EntityRemnant extends EntityMob implements IMerchant, IAntiEntity, 
 	@Override
 	public boolean interact(EntityPlayer par1EntityPlayer)
 	{
-		if(isEntityAlive() && !isTrading() && !par1EntityPlayer.isSneaking() && !isAngry){
-			if(!worldObj.isRemote){
-				setCustomer(par1EntityPlayer);
-				par1EntityPlayer.displayGUIMerchant(this, StatCollector.translateToLocal("entity.abyssalcraft.remnant.name"));
-			}
-
-			return true;
-		}
+		if(isEntityAlive() && !isTrading() && !par1EntityPlayer.isSneaking() && !isAngry)
+			if(EntityUtil.hasNecronomicon(par1EntityPlayer)){
+				if(!worldObj.isRemote){
+					setCustomer(par1EntityPlayer);
+					par1EntityPlayer.displayGUIMerchant(this, StatCollector.translateToLocal("entity.abyssalcraft.remnant.name"));
+				}
+				return true;
+			} else insult(par1EntityPlayer);
 
 		return super.interact(par1EntityPlayer);
 	}
@@ -147,6 +149,51 @@ public class EntityRemnant extends EntityMob implements IMerchant, IAntiEntity, 
 	{
 		super.entityInit();
 		dataWatcher.addObject(16, Integer.valueOf(0));
+	}
+
+	/**
+	 * Used by Remnants to insult oblivious Players
+	 * @param player The target to insult
+	 */
+	private void insult(EntityPlayer player){
+		int insultNum = worldObj.rand.nextInt(3);
+		String insult = getCommandSenderName()+": "+String.format(getInsult(insultNum), player.getCommandSenderName());
+		String translated = getCommandSenderName()+": "+String.format(StatCollector.translateToLocal("message.remnant.insult."+insultNum), player.getCommandSenderName());
+
+		if(worldObj.isRemote){
+			List<EntityPlayer> players = worldObj.getEntitiesWithinAABB(EntityPlayer.class, player.boundingBox.expand(16D, 16D, 16D));
+			if(players != null){
+				Iterator<EntityPlayer> i = players.iterator();
+				while(i.hasNext()){
+					EntityPlayer player1 = i.next();
+					if(EntityUtil.hasNecronomicon(player1))
+						player1.addChatMessage(new ChatComponentText(translated));
+					else player1.addChatMessage(new ChatComponentText(insult));
+				}
+			}
+		}
+	}
+
+	/**
+	 * Insult generator
+	 * @param num Which insult to pick, number should be generated through Random.nextInt(3)
+	 * @return A insult that humans don't understand
+	 */
+	private String getInsult(int num){
+		switch(num){
+		case 0:
+			return "%s, Aklo g'ai ftrr nfto lagln f'tifh mtli ot aishgft 'ai.";
+		case 1:
+			return "%s ukhoyah g'ka-dish-tu.";
+		case 2:
+			return "%s go-tha ukhoyah Necronomicon g'mnahn'.";
+			//		case 3:
+			//			return "test %s";
+			//		case 4:
+			//			return "test %s";
+		default:
+			return getInsult(0);
+		}
 	}
 
 	/**
@@ -184,13 +231,14 @@ public class EntityRemnant extends EntityMob implements IMerchant, IAntiEntity, 
 	@Override
 	public boolean attackEntityFrom(DamageSource par1DamageSource, float par2)
 	{
-		if(par1DamageSource.getSourceOfDamage() instanceof EntityLivingBase)
+		if(par1DamageSource.getSourceOfDamage() instanceof EntityLivingBase){
 			if(entityToAttack != par1DamageSource.getSourceOfDamage()){
 				entityToAttack = par1DamageSource.getEntity();
 				enrage(true, (EntityLivingBase) entityToAttack);
 			}
-		if(!isAngry) enrage(true);
-		else enrage(rand.nextInt(10) == 0);
+			if(!isAngry) enrage(true);
+			else enrage(rand.nextInt(10) == 0);
+		}
 		return super.attackEntityFrom(par1DamageSource, par2);
 	}
 
@@ -203,7 +251,8 @@ public class EntityRemnant extends EntityMob implements IMerchant, IAntiEntity, 
 			timer++;
 			if(timer == 2400){
 				isAngry = false;
-				targetTasks.removeTask(new EntityAINearestAttackableTarget(this, entityToAttack.getClass(), 0, true));
+				if(entityToAttack != null)
+					targetTasks.removeTask(new EntityAINearestAttackableTarget(this, entityToAttack.getClass(), 0, true));
 			}
 		}
 	}

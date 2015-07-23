@@ -126,7 +126,7 @@ public class ContainerMaterializer extends Container {
 			}
 			else if (par2 != 1 && par2 != 0)
 			{
-				if (MaterializerRecipes.materialization().getMaterializationResult(itemstack1) != null)
+				if (MaterializerRecipes.instance().getMaterializationResult(itemstack1) != null)
 				{
 					if (!mergeItemStack(itemstack1, 0, 1, false))
 						return null;

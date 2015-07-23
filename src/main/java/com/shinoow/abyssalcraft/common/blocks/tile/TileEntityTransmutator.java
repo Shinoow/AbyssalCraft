@@ -297,7 +297,7 @@ public class TileEntityTransmutator extends TileEntity implements ISidedInventor
 			return false;
 		else
 		{
-			ItemStack itemstack = TransmutatorRecipes.transmutation().getTransmutationResult(transmutatorItemStacks[0]);
+			ItemStack itemstack = TransmutatorRecipes.instance().getTransmutationResult(transmutatorItemStacks[0]);
 			if (itemstack == null) return false;
 			if (transmutatorItemStacks[2] == null) return true;
 			if (!transmutatorItemStacks[2].isItemEqual(itemstack)) return false;
@@ -313,7 +313,7 @@ public class TileEntityTransmutator extends TileEntity implements ISidedInventor
 	{
 		if (canProcess())
 		{
-			ItemStack itemstack = TransmutatorRecipes.transmutation().getTransmutationResult(transmutatorItemStacks[0]);
+			ItemStack itemstack = TransmutatorRecipes.instance().getTransmutationResult(transmutatorItemStacks[0]);
 
 			if (transmutatorItemStacks[2] == null)
 				transmutatorItemStacks[2] = itemstack.copy();

@@ -7,8 +7,80 @@ achievement.mineDS.desc=挖掘一些黑暗石
 achievement.mineAby=比钻石好！
 achievement.mineAby.desc=挖掘一些深渊石
 
+achievement.mineCorgem=海洋宝石
+achievement.mineCorgem.desc=挖掘一些珊瑚宝石
+
+achievement.shadowGems=Gems of pure darkness
+achievement.shadowGems.desc=Obtained a Shadow Gem.
+
+achievement.mineCor=绿色的材料
+achievement.mineCor.desc=挖掘一些深渊珊瑚石
+
+achievement.mineAbyOres=Didn't I see these in the overworld?
+achievement.mineAbyOres.desc=Mined some Abyssal Ores.
+
+achievement.mineDread=Minerals of the Dreadlands
+achievement.mineDread.desc=Mined some Dreadlands Ores
+
+achievement.dreadium=Plague-free Ingots
+achievement.dreadium.desc=Transmuted some Dreadium
+
+achievement.ethaxium=What souls are made out of...
+achievement.ethaxium.desc=Crafted a Ethaxium Ingot
+
 achievement.killghoul=杀死一个深渊食尸鬼
 achievement.killghoul.desc=噢耶... 可是为什么这也是个成就呢？
+
+achievement.ghoulhead=狩猎开始
+achievement.ghoulhead.desc=那里有一个大脑袋...
+
+achievement.petehead=头颅...
+achievement.petehead.desc=哇, 我们可以成为永远的朋友了 :D
+
+achievement.wilsonhead=暴戾的头颅
+achievement.wilsonhead.desc=我的身体去哪了？
+
+achievement.orangehead=内侧的头颅
+achievement.orangehead.desc=你的诊断已确定, 你有传染病。
+
+achievement.necro=Book of The Dead, and knowledge
+achievement.necro.desc=Crafted a Necronomicon, now what?
+
+achievement.necrou1=Knowledge of the Wasteland
+achievement.necrou1.desc=Crafted a Abyssal Wasteland Necronomicon.
+
+achievement.necrou2=Knowledge of the Corrupted
+achievement.necrou2.desc=Crafted a Dreadlands Necronomicon.
+
+achievement.necrou3=Knowledge of the Unknown
+achievement.necrou3.desc=Crafted a Omothol Necronomicon.
+
+achievement.abyssaln=Everything you weren't meant to know
+achievement.abyssaln.desc=Crafted The Abyssalnomicon. J'zahar is somewhat proud of you.
+
+achievement.ritual=The Dark Arts
+achievement.ritual.desc=You have no idea what you're getting into, do you?
+
+achievement.ritualSummon=Behold the wrath of the Necronomicon!
+achievement.ritualSummon.desc=Performed a Summoning Ritual.
+
+achievement.ritualCreate=No need for a Workbench
+achievement.ritualCreate.desc=Performed a Creation Ritual.
+
+achievement.ritualBreed=Reproduction through magic
+achievement.ritualBreed.desc=Performed a Breeding Ritual.
+
+achievement.ritualPotion=Occult alchemy
+achievement.ritualPotion.desc=Performed a Potion Ritual.
+
+achievement.ritualPotionAoE=Temporary beacon
+achievement.ritualPotionAoE.desc=Performed a Area-of-Effect Potion Ritual.
+
+achievement.ritualInfusion=Power merging
+achievement.ritualInfusion.desc=Performed a Infusion Ritual.
+
+achievement.shoggothInfestation=Shoggoth infestation
+achievement.shoggothInfestation.desc=You could not have expected this to end well...
 
 achievement.enterabyss=欢迎来到荒芜之地
 achievement.enterabyss.desc=进入第一个维度
@@ -28,48 +100,6 @@ achievement.enterdreadlands.desc=进入第二个维度
 achievement.killdreadguard=打倒瘟疫
 achievement.killdreadguard.dsec=你杀死了一个恐惧守卫
 
-achievement.ghoulhead=狩猎开始
-achievement.ghoulhead.desc=那里有一个大脑袋...
-
-achievement.killPete=皮特再次死亡... 
-achievement.killPete.desc=你杀死了皮特... 他到底怎么了？！？
-
-achievement.killWilson=威尔逊的终结
-achievement.killWilson.desc=从这里出去了！！！
-
-achievement.killorange=医生最终的诊断
-achievement.killorange.desc=奥兰治医生去世了，他有传染病。
-
-achievement.petehead=头颅...
-achievement.petehead.desc=哇, 我们可以成为永远的朋友了 :D
-
-achievement.wilsonhead=暴戾的头颅
-achievement.wilsonhead.desc=我的身体去哪了？
-
-achievement.orangehead=内侧的头颅
-achievement.orangehead.desc=你的诊断已确定, 你有传染病。
-
-achievement.mineCorgem=海洋宝石
-achievement.mineCorgem.desc=挖掘一些珊瑚宝石
-
-achievement.mineCor=绿色的材料
-achievement.mineCor.desc=挖掘一些深渊珊瑚石
-
-achievement.findPSDL=现在那里有一个零散的岩石
-achievement.findPSDL.desc=找到一个恐惧之地蕴能石
-
-achievement.GK1=第一把钥匙
-achievement.GK1.desc=合成一把传送门钥匙
-
-achievement.GK2=恐惧之地钥匙
-achievement.GK2.desc=合成阿索拉的恐惧传送门钥匙
-
-achievement.GK3=古老的钥匙
-achievement.GK3.desc=合成查加罗特的瑞尔森钥匙
-
-achievement.Jzhstaff=等一下... 这是一把钥匙?!?!?
-achievement.Jzhstaff.desc=获得守门者之杖
-
 achievement.summonChagaroth=恐惧野兽的巢穴
 achievement.summonChagaroth.desc=进入查加罗特的巢穴
 
@@ -82,8 +112,41 @@ achievement.enterOmothol.desc=你已经到达了扎哈尔的王国奥穆索
 achievement.darkRealm=陷阱之底
 achievement.darkRealm.desc=你刚刚摔倒了，不是吗？
 
+achievement.killOmotholelite=That thing was awfully strong
+achievement.killOmotholelite.desc=You killed a powerful being from Omothol.
+
+achievement.locateJzahar=A wild J'zahar appears
+achievement.locateJzahar.desc=I hope you brought potions, or something.
+
 achievement.killJzahar=浮动利率？并非如此。
 achievement.killJzahar.desc=你打败了守门者，可他并没死。
+
+achievement.GK1=亡灵关键
+achievement.GK1.desc=合成一把传送门钥匙
+
+achievement.findPSDL=现在那里有一个零散的岩石
+achievement.findPSDL.desc=找到一个恐惧之地蕴能石
+
+achievement.GK2=恐惧之地钥匙
+achievement.GK2.desc=合成阿索拉的恐惧传送门钥匙
+
+achievement.GK3=古老的钥匙
+achievement.GK3.desc=合成查加罗特的瑞尔森钥匙
+
+achievement.makeTransmutator=Break all laws of physic!
+achievement.makeTransmutator.desc=Crafted a Transmutator.
+
+achievement.makeCrystallizer=Crystallize everything
+achievement.makeCrystallizer.desc=Crafted a Crystallizer.
+
+achievement.makeMaterializer=Create your own materials
+achievement.makeMaterializer.desc=Crafted a Materializer.
+
+achievement.makeCrystalBag=Store all of your crystals here!
+achievement.makeCrystalBag.desc=Crafted a Crystal Bag. They can be upgraded.
+
+achievement.makeEngraver=Infinite counterfeit coins!
+achievement.makeEngraver.desc=Craft an Engraver.
 
 #Messages
 message.asorah.spawn=哈哈, 愚蠢的人类, 我解放了!
@@ -113,6 +176,10 @@ message.sacthoth.damage.projectile=哈, 你的投射物对我无效.
 message.portalplacer.error.1=你感受到一种被抛弃的感觉, 扎哈尔并没有批准你.
 message.portalplacer.error.2=没有任何事情发生...
 message.necronomicon.nope=似乎你还没拥有这本书. 你可曾想过不去尝试读它?
+message.remnant.busy=Sorry, I'm currently busy with a customer, come back later.
+message.remnant.insult.0=%s, you speak Aklo just as well as modders speak 1.8.
+message.remnant.insult.1=You know nothing, %s.
+message.remnant.insult.2=You're worthless without a Necronomicon, %s.
 
 #Container Inventories
 container.abyssalcraft.crate=板条箱
@@ -154,6 +221,10 @@ necronomicon.information.outergods=The Outer Gods
 necronomicon.other=Other Information
 necronomicon.locked=Locked
 necronomicon.information.specialmaterials=Special Materials
+necronomicon.anywhere=Anywhere
+necronomicon.location=Location
+necronomicon.info=Information
+necronomicon.normal=Normal
 
 #Necronomicon Text
 #Note: the maximum amount of letters per string is 256
@@ -247,11 +318,9 @@ necronomicon.text.materials.darkethaxium.2=This material is only used in one str
 
 necronomicon.text.crafting.coraliuminfusedstone.1=Coralium Infused Stone is crafted with Coralium Gem Clusters and Stone. The three clusters can be of any size, but must add up to 9.
 necronomicon.text.crafting.coraliuminfusedstone.2=If you use a 9-gem cluster, surround it with Stone blocks instead of 2 rows. When this block is broken (or smelt) you get a Coralium Pearl.
-necronomicon.text.crafting.transmutationgem=A Transmutation Gem is crafted with Coralium Pearls, Diamonds, Ender Pearls and Blaze Powder.
-necronomicon.text.crafting.shadowgem=A Shadow Gem is crafted with Shadow Gem Shards. The Shards are crafted the same way, but with Shadow Fragments.
+necronomicon.text.crafting.shadowgem.1=A Shadow Gem is crafted with Shadow Gem Shards. The Shards are crafted the same way, but with Shadow Fragments.
+necronomicon.text.crafting.shadowgem.2=Shadow Fragments are dropped by Shadow Creatures, Shadow Gem Shards are dropped by Shadow Monsters and Shadow Gems are dropped by Shadow Beasts. They spawn in Darklands Mountains biomes and the Dark Realm.
 necronomicon.text.crafting.oblivionshard=A Shard of Oblivion is crafted with Shadow Gems and a Transmutation Gem.
-necronomicon.text.crafting.oblivioncatalyst.1=A Oblivion Catalyst is crafted with Shards of Oblivion, Redstone Dust and a Eye of Ender.
-necronomicon.text.crafting.oblivioncatalyst.2=It can also be crafted by surrounding a Nether Star with Redstone Dust and Eyes of Ender. That recipe is more end-game, but can be easier compared to obtaining large amounts of Shadow Gems.
 necronomicon.text.crafting.gk1=The Gateway Key is crafted with Blaze Rods, Coralium Pearls and a Oblivion Catalyst.
 necronomicon.text.crafting.necro_c=A Abyssal Wasteland Necronomicon is crafted with Coralium Plagued Flesh and a Necronomicon. It contains more knowledge.
 necronomicon.text.crafting.altar.1=An Altar is crafted with Gold Ingots, a Bucket, a Enchantment Table and a Transmutation Gem.
@@ -391,7 +460,38 @@ necronomicon.text.integration.morph.2=When morphed into entities that has specia
 
 necronomicon.text.integration.invtweaks.1=With Inventory Tweaks installed, you can sort items kept in the Crystal Bags with sorting buttons like with any other supported container.
 
+necronomicon.text.rituals.info=Check the information section for information regarding rituals, or the other sections for information about available rituals. "Location" specifies where the ritual can be performed.
+
+necronomicon.text.rituals.1=In order to get started with rituals you need to create the altar to perform them at.
+necronomicon.text.rituals.2=There is a total of 8 materials you can create your Ritual Altar from. Those are: Cobblestone, Darkstone Cobblestone, Abyssal Stone Brick, Coralium Stone Brick, Dreadstone Brick, Abyssalnite Stone Brick, Ethaxium Brick and Dark Ethaxium Brick.
+necronomicon.text.rituals.3=To create the altar, simply place the blocks in the formation showed above and shift right-click on the center block.
+necronomicon.text.rituals.4=The aforementioned materials can only be used in their specific dimension (eg. Cobblestone and Darkstone Cobblestone in the Overworld, Abyssal Stone Brick and Coralium Stone Brick in the Abyssal Wasteland etc).
+necronomicon.text.rituals.5=Once the altar and pedestals has formed, you can start performing rituals!
+necronomicon.text.rituals.6=All rituals requires you to place items on the pedestals, while some also requires a sacrifice placed on the altar. To perform a ritual, place the items, then shift right-click the altar, then wait for the smoke to end.
+
 necronomicon.text.wip=这部分还未完成.
+
+#Rituals
+ac.ritual.oblivionCatalyst=Oblivion Catalyst
+ac.ritual.oblivionCatalyst.desc=A Oblivion Catalyst is created by infusing an Eye of Ender with Shards of Oblivion and Redstone Dust.
+ac.ritual.transmutationGem=Transmutation Gem
+ac.ritual.transmutationGem.desc=A Transmutation Gem is created by infusing a Coralium Pearl with Diamonds, Ender Pearls and Blaze Powder.
+ac.ritual.asorahGatewayKey=Asorah's Dreaded Gateway Key
+ac.ritual.asorahGatewayKey.desc=Asorah's Dreaded Gateway Key is created by infusing a Gateway Key with an Eye of The Abyss, a Dreadlands Infused Powerstone and a Transmutation Gem.
+ac.ritual.summonAsorah=Ritual of The Sleeper
+ac.ritual.summonAsorah.desc=Summons Asorah, The Fallen, from the Dark Realm. The afterlife is commonly referred to as an eternal slumber, in which a sleeper is a entity beyond life and death.
+ac.ritual.summonSacthoth=Ritual of Shadows
+ac.ritual.summonSacthoth.desc=Summons Sacthoth, Harbinger of Doom, from the Dark Realm.
+ac.ritual.breeding=Ritual of Fertility
+ac.ritual.breeding.desc=Breeds nearby animals. Might also kill all of them, if unlucky enough.
+ac.ritual.depthsHelmet=Helmet of The Depths
+ac.ritual.depthsHelmet.desc=A Helmet of The Depths is created by infusing a Refined Coralium Helmet with 2 Coralium Gem Cluster (9 gems), Coralium Plagued Flesh, a Transmuttion Gem, a Lily Pad, a Vine and a Liquid Coralium Bucket.
+ac.ritual.depthsChestplate=Chestplate of The Depths
+ac.ritual.depthsChestplate.desc=A Chestplate of The Depths is created by infusing a Refined Coralium Chestplate with 2 Coralium Gem Cluster (9 gems), Coralium Plagued Flesh, a Transmuttion Gem, a Lily Pad, a Vine and a Liquid Coralium Bucket.
+ac.ritual.depthsLeggings=Leggings of The Depths
+ac.ritual.depthsLeggings.desc=A Leggings of The Depths is created by infusing a Refined Coralium Leggings with 2 Coralium Gem Cluster (9 gems), Coralium Plagued Flesh, a Transmuttion Gem, a Lily Pad, a Vine and a Liquid Coralium Bucket.
+ac.ritual.depthsBoots=Boots of The Depths
+ac.ritual.depthsBoots.desc=A Boots of The Depths is created by infusing a Refined Coralium Boots with 2 Coralium Gem Cluster (9 gems), Coralium Plagued Flesh, a Transmuttion Gem, a Lily Pad, a Vine and a Liquid Coralium Bucket.
 
 #Configuration
 ac_dimensions=维度
@@ -429,14 +529,6 @@ tooltip.portalplacerdl.2=深渊荒芜之地.
 tooltip.oc=这个物品蕴藏不可思议的力量.
 tooltip.staff=扎哈尔的权杖, 深渊之门的守卫者.
 tooltip.eoa=堕落者阿索拉之眼.
-tooltip.caxe.1=这把斧头能转换
-tooltip.caxe.2=木板, 树叶, 原木和树苗的类型.
-tooltip.cpickaxe.1=这把镐子能转换
-tooltip.cpickaxe.2=矿石和一些石头的类型.
-tooltip.cshovel.1=这把铲子能转换
-tooltip.cshovel.2=草地类型, 沙砾和沙子.
-tooltip.csword.1=在用这把剑攻击时会导致
-tooltip.csword.2=敌人着火和中毒效果
 tooltip.devblade.1=这把刀刃是如此邪恶以致
 tooltip.devblade.2=当你握着它时你的手开始腐烂
 tooltip.antibucket=这种液体能使其他液体凝固.
@@ -844,6 +936,8 @@ entity.abyssalcraft.omotholwarden.name=奥穆索守卫
 entity.abyssalcraft.jzaharminion.name=守门者奴仆
 entity.abyssalcraft.omotholghoul.name=奥穆索食尸鬼
 entity.abyssalcraft.remnant.name=雷姆南特
+entity.abyssalcraft.greaterdreadspawn.name=Greater Dread Spawn
+entity.abyssalcraft.lesserdreadbeast.name=Lesser Dreadbeast
 
 #Potions
 potion.Cplague=珊瑚侵染

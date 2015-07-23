@@ -17,8 +17,9 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.MathHelper;
+import net.minecraftforge.common.MinecraftForge;
 
-import com.shinoow.abyssalcraft.AbyssalCraft;
+import com.shinoow.abyssalcraft.api.event.ACEvents;
 import com.shinoow.abyssalcraft.api.recipe.EngraverRecipes;
 
 public class SlotEngraverOutput extends Slot
@@ -70,7 +71,7 @@ public class SlotEngraverOutput extends Slot
 		if (!thePlayer.worldObj.isRemote)
 		{
 			int i = stackSize;
-			float f = EngraverRecipes.engraving().getExperience(par1ItemStack);
+			float f = EngraverRecipes.instance().getExperience(par1ItemStack);
 			int j;
 
 			if (f == 0.0F)
@@ -95,7 +96,6 @@ public class SlotEngraverOutput extends Slot
 
 		stackSize = 0;
 
-		if (par1ItemStack.getItem() == AbyssalCraft.portalPlacerJzh)
-			thePlayer.addStat(AbyssalCraft.GK3, 1);
+		MinecraftForge.EVENT_BUS.post(new ACEvents.ItemEngravedEvent(thePlayer, par1ItemStack));
 	}
 }

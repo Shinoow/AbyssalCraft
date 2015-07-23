@@ -11,7 +11,7 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.common.inventory;
 
-import com.shinoow.abyssalcraft.common.items.ItemCrystal;
+import com.shinoow.abyssalcraft.api.APIUtils;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
@@ -133,7 +133,7 @@ public class InventoryCrystalBag implements IInventory
 	@Override
 	public boolean isItemValidForSlot(int slot, ItemStack itemstack)
 	{
-		return itemstack.getItem() instanceof ItemCrystal;
+		return APIUtils.isCrystal(itemstack);
 	}
 
 	public void readFromNBT(NBTTagCompound tagcompound)

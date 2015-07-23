@@ -104,7 +104,7 @@ public class TransmutatorRecipeHandler extends TemplateRecipeHandler
 	@Override
 	public void loadCraftingRecipes(String outputId, Object... results) {
 		if (outputId.equals("transmutation") && getClass() == TransmutatorRecipeHandler.class) {//don't want subclasses getting a hold of this
-			Map<ItemStack, ItemStack> recipes = TransmutatorRecipes.transmutation().getTransmutationList();
+			Map<ItemStack, ItemStack> recipes = TransmutatorRecipes.instance().getTransmutationList();
 			for (Entry<ItemStack, ItemStack> recipe : recipes.entrySet())
 				arecipes.add(new TransmutationPair(recipe.getKey(), recipe.getValue()));
 		} else
@@ -113,7 +113,7 @@ public class TransmutatorRecipeHandler extends TemplateRecipeHandler
 
 	@Override
 	public void loadCraftingRecipes(ItemStack result) {
-		Map<ItemStack, ItemStack> recipes = TransmutatorRecipes.transmutation().getTransmutationList();
+		Map<ItemStack, ItemStack> recipes = TransmutatorRecipes.instance().getTransmutationList();
 		for (Entry<ItemStack, ItemStack> recipe : recipes.entrySet())
 			if (NEIServerUtils.areStacksSameType(recipe.getValue(), result))
 				arecipes.add(new TransmutationPair(recipe.getKey(), recipe.getValue()));
@@ -129,7 +129,7 @@ public class TransmutatorRecipeHandler extends TemplateRecipeHandler
 
 	@Override
 	public void loadUsageRecipes(ItemStack ingredient) {
-		Map<ItemStack, ItemStack> recipes = TransmutatorRecipes.transmutation().getTransmutationList();
+		Map<ItemStack, ItemStack> recipes = TransmutatorRecipes.instance().getTransmutationList();
 		for (Entry<ItemStack, ItemStack> recipe : recipes.entrySet())
 			if (NEIServerUtils.areStacksSameTypeCrafting(recipe.getKey(), ingredient)) {
 				TransmutationPair arecipe = new TransmutationPair(recipe.getKey(), recipe.getValue());

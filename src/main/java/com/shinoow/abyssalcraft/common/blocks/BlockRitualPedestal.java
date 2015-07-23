@@ -11,26 +11,36 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.common.blocks;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Random;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.IIcon;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.world.World;
 
-public class BlockRitualPedestal extends BlockACBasic {
+import com.google.common.collect.Maps;
+import com.shinoow.abyssalcraft.AbyssalCraft;
+import com.shinoow.abyssalcraft.common.blocks.tile.TileEntityRitualPedestal;
 
-	@SideOnly(Side.CLIENT)
-	private IIcon[] icons;
+public class BlockRitualPedestal extends BlockContainer {
+
+	private static HashMap<Integer, Block> blockMeta = Maps.newHashMap();
 
 	public BlockRitualPedestal() {
-		super(Material.rock, 6.0F, 12.0F, Block.soundTypeStone);
+		super(Material.rock);
+		setHardness(6.0F);
+		setResistance(12.0F);
+		setStepSound(Block.soundTypeStone);
 		setBlockBounds(0.25F, 0.0F, 0.25F, 0.75F, 1.0F, 0.75F);
+		setBlockTextureName("anvil_top_damaged_0");
 		setCreativeTab(null);
 	}
 
@@ -58,29 +68,56 @@ public class BlockRitualPedestal extends BlockACBasic {
 	}
 
 	@Override
-	@SideOnly(Side.CLIENT)
-	public void registerBlockIcons(IIconRegister par1IconRegister) {
-		icons = new IIcon[8];
-		icons[0] = par1IconRegister.registerIcon("minecraft:cobblestone");
-		icons[1] = par1IconRegister.registerIcon("abyssalcraft:DSC");
-		icons[2] = par1IconRegister.registerIcon("abyssalcraft:ASB");
-		icons[3] = par1IconRegister.registerIcon("abyssalcraft:cstonebrick");
-		icons[4] = par1IconRegister.registerIcon("abyssalcraft:DrSB");
-		icons[5] = par1IconRegister.registerIcon("abyssalcraft:AbyDrSB");
-		icons[6] = par1IconRegister.registerIcon("abyssalcraft:EB");
-		icons[7] = par1IconRegister.registerIcon("abyssalcraft:DEB");
+	public int damageDropped(int meta) {
+		return meta;
 	}
+
 	@Override
-	@SideOnly(Side.CLIENT)
-	public IIcon getIcon(int par1, int par2) {
-		if(par2 == 0) return icons[0];
-		if(par2 == 1) return icons[1];
-		if(par2 == 2) return icons[2];
-		if(par2 == 3) return icons[3];
-		if(par2 == 4) return icons[4];
-		if(par2 == 5) return icons[5];
-		if(par2 == 6) return icons[6];
-		if(par2 == 7) return icons[7];
-		return super.getIcon(par1, par2);
+	public TileEntity createNewTileEntity(World p_149915_1_, int p_149915_2_) {
+
+		return new TileEntityRitualPedestal();
+	}
+
+	@Override
+	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int meta, float hitX, float hitY, float hitZ) {
+		TileEntity tile = world.getTileEntity(x, y, z);
+		if(tile != null && tile instanceof TileEntityRitualPedestal)
+			if(((TileEntityRitualPedestal)tile).getItem() != null){
+				player.inventory.addItemStackToInventory(((TileEntityRitualPedestal)tile).getItem());
+				((TileEntityRitualPedestal)tile).setItem(null);
+				return true;
+			} else {
+				ItemStack heldItem = player.getHeldItem();
+				if(heldItem != null){
+					ItemStack newItem = heldItem.copy();
+					newItem.stackSize = 1;
+					((TileEntityRitualPedestal)tile).setItem(newItem);
+					player.inventory.decrStackSize(player.inventory.currentItem, 1);
+					return true;
+				}
+			}
+		return false;
+	}
+
+	@Override
+	public Item getItemDropped(int i, Random random, int j)
+	{
+		return Item.getItemFromBlock(blockMeta.get(i));
+	}
+
+	@Override
+	public int getRenderType() {
+		return -8;
+	}
+
+	static {
+		blockMeta.put(0, Blocks.cobblestone);
+		blockMeta.put(1, AbyssalCraft.Darkstone_cobble);
+		blockMeta.put(2, AbyssalCraft.abybrick);
+		blockMeta.put(3, AbyssalCraft.cstonebrick);
+		blockMeta.put(4, AbyssalCraft.dreadbrick);
+		blockMeta.put(5, AbyssalCraft.abydreadbrick);
+		blockMeta.put(6, AbyssalCraft.ethaxiumbrick);
+		blockMeta.put(7, AbyssalCraft.darkethaxiumbrick);
 	}
 }

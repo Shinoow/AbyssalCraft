@@ -18,6 +18,7 @@ import net.minecraft.world.gen.feature.WorldGenMinable;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.common.entity.EntityAbygolem;
+import com.shinoow.abyssalcraft.common.entity.EntityDreadguard;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -30,6 +31,7 @@ public class BiomeGenAbyDreadlands extends BiomeGenDreadlandsBase {
 		topBlock = AbyssalCraft.abydreadstone;
 		fillerBlock = AbyssalCraft.abydreadstone;
 		spawnableCreatureList.add(new SpawnListEntry(EntityAbygolem.class, 100, 3, 8));
+		spawnableMonsterList.add(new SpawnListEntry(EntityDreadguard.class, 1, 1, 1));
 	}
 
 	@Override

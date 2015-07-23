@@ -47,7 +47,7 @@ public class NecronomiconResources {
 	public static final ResourceLocation OMOTHOL_GHOUL = new ResourceLocation("abyssalcraft", "textures/gui/necronomicon/omothol-ghoul.png");
 	public static final ResourceLocation OMOTHOL_WARDEN = new ResourceLocation("abyssalcraft", "textures/gui/necronomicon/missing.png"); //TODO: fix
 	public static final ResourceLocation MINION_OF_THE_GATEKEEPER = new ResourceLocation("abyssalcraft", "textures/gui/necronomicon/minion-of-the-gatekeeper.png");
-	public static final ResourceLocation JZAHAR = new ResourceLocation("abyssalcraft", "textures/gui/necronomicon/jzahar.png"); //TODO: fix
+	public static final ResourceLocation JZAHAR = new ResourceLocation("abyssalcraft", "textures/gui/necronomicon/jzahar.png");
 	public static final ResourceLocation LESSER_SHOGGOTH = new ResourceLocation("abyssalcraft", "textures/gui/necronomicon/missing.png"); //TODO: fix
 
 	//Dark Realm entities
@@ -68,6 +68,19 @@ public class NecronomiconResources {
 
 	//Crafting grid
 	public static final ResourceLocation CRAFTING = new ResourceLocation("abyssalcraft", "textures/gui/necronomicon/crafting.png");
+
+	//Ritual grid
+	public static final ResourceLocation RITUAL = new ResourceLocation("abyssalcraft", "textures/gui/necronomicon/ritual.png");
+
+	//Creation Ritual slot
+	public static final ResourceLocation RITUAL_CREATION = new ResourceLocation("abyssalcraft", "textures/gui/necronomicon/ritual_creation.png");
+
+	//Infusion Ritual slot
+	public static final ResourceLocation RITUAL_INFUSION = new ResourceLocation("abyssalcraft", "textures/gui/necronomicon/ritual_infusion.png");
+
+	public static final ResourceLocation RITUAL_TUT_1 = new ResourceLocation("abyssalcraft", "textures/gui/necronomicon/ritual_1.png");
+	public static final ResourceLocation RITUAL_TUT_2 = new ResourceLocation("abyssalcraft", "textures/gui/necronomicon/ritual_2.png");
+	public static final ResourceLocation RITUAL_TUT_3 = new ResourceLocation("abyssalcraft", "textures/gui/necronomicon/ritual_3.png");
 
 	public static final ResourceLocation[] OVERWORLD_ENTITIES = {ABYSSAL_ZOMBIE, DEPTHS_GHOUL, SHADOW_CREATURE, SHADOW_MONSTER, SHADOW_BEAST,
 		ANTI_ENTITIES, EVIL_PIG};

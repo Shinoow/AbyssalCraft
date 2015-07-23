@@ -32,11 +32,11 @@ import cpw.mods.fml.relauncher.SideOnly;
 public class GuiNecronomicon extends GuiScreen {
 
 	private static ResourceLocation bookGuiTextures = new ResourceLocation("abyssalcraft:textures/gui/necronomicon.png");
-	public final int guiWidth = 254;
+	public final int guiWidth = 255;
 	public final int guiHeight = 192;
 	private int bookTotalTurnups = 2;
 	/** Current turn-up, use to switch text between multiple pages */
-	protected int currnTurnup;
+	protected int currTurnup;
 	private ButtonNextPage buttonNextPage;
 	private ButtonNextPage buttonPreviousPage;
 	private ButtonCategory buttonCat1;
@@ -127,7 +127,7 @@ public class GuiNecronomicon extends GuiScreen {
 
 	private void updateButtons()
 	{
-		buttonNextPage.visible = currnTurnup < bookTotalTurnups - 1 && isInfo;
+		buttonNextPage.visible = currTurnup < bookTotalTurnups - 1 && isInfo;
 		buttonPreviousPage.visible = isInfo;
 		buttonDone.visible = true;
 		buttonCat1.visible = true;
@@ -148,18 +148,18 @@ public class GuiNecronomicon extends GuiScreen {
 				mc.displayGuiScreen((GuiScreen)null);
 			else if (button.id == 1)
 			{
-				if (currnTurnup < bookTotalTurnups - 1)
-					++currnTurnup;
+				if (currTurnup < bookTotalTurnups - 1)
+					++currTurnup;
 
 			} else if (button.id == 2)
 			{
-				if(isInfo && currnTurnup == 0){
+				if(isInfo && currTurnup == 0){
 					initGui();
 					isInfo = false;
 					isNecroInfo = false;
 				}
-				else if (currnTurnup > 0)
-					--currnTurnup;
+				else if (currTurnup > 0)
+					--currTurnup;
 
 			} else if (button.id == 3)
 				mc.displayGuiScreen(new GuiNecronomiconInformation(bookType));
@@ -206,7 +206,7 @@ public class GuiNecronomicon extends GuiScreen {
 	 * Method used to write text on the page, override to add your own text to pages.
 	 */
 	protected void drawInformationText(){
-		if(currnTurnup == 0){
+		if(currTurnup == 0){
 			if(bookType < 4){
 				writeText(1, NecronomiconText.NECRONOMICON_PAGE_1);
 				writeText(2, NecronomiconText.NECRONOMICON_PAGE_2);
@@ -215,7 +215,7 @@ public class GuiNecronomicon extends GuiScreen {
 				writeText(2, NecronomiconText.ABYSSALNOMICON_PAGE_2);
 			}
 		}
-		else if(currnTurnup == 1)
+		else if(currTurnup == 1)
 			if(bookType < 4){
 				writeText(1, NecronomiconText.NECRONOMICON_PAGE_3);
 				writeText(2, NecronomiconText.NECRONOMICON_PAGE_4);
@@ -271,7 +271,7 @@ public class GuiNecronomicon extends GuiScreen {
 				fontRendererObj.drawSplitString(stuff, k + 20, b0 + 16, 116, 0xC40000);
 			}
 			drawInformationText();
-			s = I18n.format("book.pageIndicator", new Object[] {Integer.valueOf(currnTurnup + 1), Integer.valueOf(bookTotalTurnups)});
+			s = I18n.format("book.pageIndicator", new Object[] {Integer.valueOf(currTurnup + 1), Integer.valueOf(bookTotalTurnups)});
 
 			l = fontRendererObj.getStringWidth(s);
 			fontRendererObj.drawString(s, k - l + guiWidth - 22, b0 + 16, 0);
@@ -293,7 +293,7 @@ public class GuiNecronomicon extends GuiScreen {
 	/**
 	 * Writes a bunch of text on a Necronomicon page.
 	 * @param page Which open page to write in (can be either 1 or 2)
-	 * @param text A long string of text (max is 256 characters)
+	 * @param text A long string of text (max is 255 characters)
 	 * @param height The height where the text will appear at (0 is the top of the GUI)
 	 */
 	protected void writeText(int page, String text, int height){
@@ -308,7 +308,7 @@ public class GuiNecronomicon extends GuiScreen {
 			if(page == 1)
 				fontRendererObj.drawSplitString(text, k + 20, height, 107, 0);
 			if(page == 2)
-				fontRendererObj.drawSplitString(text, k + 140, height, 107, 0);
+				fontRendererObj.drawSplitString(text, k + 138, height, 107, 0);
 		}
 	}
 }

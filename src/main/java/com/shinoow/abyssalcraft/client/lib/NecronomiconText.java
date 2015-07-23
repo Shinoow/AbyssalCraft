@@ -109,11 +109,9 @@ public class NecronomiconText {
 
 	public static String CRAFTING_CORALIUM_INFUSED_STONE_1 = translate("necronomicon.text.crafting.coraliuminfusedstone.1");
 	public static String CRAFTING_CORALIUM_INFUSED_STONE_2 = translate("necronomicon.text.crafting.coraliuminfusedstone.2");
-	public static String CRAFTING_TRANSMUTATION_GEM = translate("necronomicon.text.crafting.transmutationgem");
-	public static String CRAFTING_SHADOW_GEM = translate("necronomicon.text.crafting.shadowgem");
+	public static String CRAFTING_SHADOW_GEM_1 = translate("necronomicon.text.crafting.shadowgem.1");
+	public static String CRAFTING_SHADOW_GEM_2 = translate("necronomicon.text.crafting.shadowgem.2");
 	public static String CRAFTING_SHARD_OF_OBLIVION = translate("necronomicon.text.crafting.oblivionshard");
-	public static String CRAFTING_OBLIVION_CATALYST_1 = translate("necronomicon.text.crafting.oblivioncatalyst.1");
-	public static String CRAFTING_OBLIVION_CATALYST_2 = translate("necronomicon.text.crafting.oblivioncatalyst.2");
 	public static String CRAFTING_GATEWAY_KEY = translate("necronomicon.text.crafting.gk1");
 	public static String CRAFTING_NECRONOMICON_C = translate("necronomicon.text.crafting.necro_c");
 	public static String CRAFTING_ALTAR_1 = translate("necronomicon.text.crafting.altar.1");
@@ -253,6 +251,15 @@ public class NecronomiconText {
 
 	public static String INTEGRATION_INVTWEAKS_1 = translate("necronomicon.text.integration.invtweaks.1");
 
+	public static String RITUAL_INFO = translate("necronomicon.text.rituals.info");
+
+	public static String RITUAL_TUT_1 = translate("necronomicon.text.rituals.1");
+	public static String RITUAL_TUT_2 = translate("necronomicon.text.rituals.2");
+	public static String RITUAL_TUT_3 = translate("necronomicon.text.rituals.3");
+	public static String RITUAL_TUT_4 = translate("necronomicon.text.rituals.4");
+	public static String RITUAL_TUT_5 = translate("necronomicon.text.rituals.5");
+	public static String RITUAL_TUT_6 = translate("necronomicon.text.rituals.6");
+
 	public static String[] OUTER_GODS = {AZATHOTH_1, AZATHOTH_2, NYARLATHOTEP_1, NYARLATHOTEP_2, YOG_SOTHOTH_1, YOG_SOTHOTH_2,
 		SHUB_NIGGURATH_1, SHUB_NIGGURATH_2};
 
@@ -275,8 +282,8 @@ public class NecronomiconText {
 	public static String[] DARK_REALM_MATERIALS = {MATERIAL_DARKSTONE_1, MATERIAL_DARKSTONE_2};
 
 	public static String[] OVERWORLD_CRAFTING = {CRAFTING_CORALIUM_INFUSED_STONE_1, CRAFTING_CORALIUM_INFUSED_STONE_2,
-		CRAFTING_TRANSMUTATION_GEM, "", CRAFTING_SHADOW_GEM, "", CRAFTING_SHARD_OF_OBLIVION, "",
-		CRAFTING_OBLIVION_CATALYST_1, CRAFTING_OBLIVION_CATALYST_2, CRAFTING_GATEWAY_KEY, "", CRAFTING_NECRONOMICON_C, ""};
+		CRAFTING_SHADOW_GEM_1, CRAFTING_SHADOW_GEM_2, CRAFTING_SHARD_OF_OBLIVION, "", CRAFTING_GATEWAY_KEY, "",
+		CRAFTING_NECRONOMICON_C, ""};
 	public static String[] ABYSSAL_WASTELAND_CRAFTING = {CRAFTING_ALTAR_1, CRAFTING_ALTAR_2, CRAFTING_POWERSTONE_TRACKER, "",
 		CRAFTING_ASORAH_GATEWAY_KEY, "", CRAFTING_NECRONOMICON_D, ""};
 	public static String[] DREADLANDS_CRAFTING = {CRAFTING_TRANSMUTATOR_1, CRAFTING_TRANSMUTATOR_2, CRAFTING_CRYSTALLIZER_1,
@@ -357,6 +364,10 @@ public class NecronomiconText {
 	public static String LABEL_OTHER = translate("necronomicon.other");
 	public static String LABEL_LOCKED = translate("necronomicon.locked");
 	public static String LABEL_INFORMATION_SPECIAL_MATERIALS = translate("necronomicon.information.specialmaterials");
+	public static String LABEL_ANYWHERE = translate("necronomicon.anywhere");
+	public static String LABEL_LOCATION = translate("necronomicon.location");
+	public static String LABEL_INFO = translate("necronomicon.info");
+	public static String LABEL_NORMAL = translate("necronomicon.normal");
 
 	/**
 	 * The best way to drown an array of strings with nonsense

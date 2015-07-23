@@ -84,7 +84,7 @@ public class AbyssalCraftTool extends Item {
 				Entity entity = (Entity)list.get(k2);
 
 				if(entity instanceof EntityLiving && !entity.isDead)
-					entity.attackEntityFrom(DamageSource.generic, 50000);
+					entity.attackEntityFrom(DamageSource.causePlayerDamage(par3EntityPlayer), 50000);
 				else if(entity instanceof EntityPlayer && !entity.isDead)
 					entity.attackEntityFrom(DamageSource.causePlayerDamage(par3EntityPlayer), 50000);
 				if(entity instanceof EntityJzahar) {

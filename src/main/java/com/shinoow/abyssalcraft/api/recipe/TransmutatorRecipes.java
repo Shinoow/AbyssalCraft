@@ -30,37 +30,37 @@ public class TransmutatorRecipes {
 	private Map<ItemStack, ItemStack> transmutationList = new HashMap<ItemStack, ItemStack>();
 	private Map<ItemStack, Float> experienceList = new HashMap<ItemStack, Float>();
 
-	public static TransmutatorRecipes transmutation()
+	public static TransmutatorRecipes instance()
 	{
 		return transmutationBase;
 	}
 
 	private TransmutatorRecipes()
 	{
-		transmutate(Items.diamond, new ItemStack(Items.coal, 64), 0.2F);
-		transmutate(Items.water_bucket, new ItemStack(Blocks.water, 1), 0.0F);
-		transmutate(Items.lava_bucket, new ItemStack(Blocks.lava, 1), 0.0F);
-		transmutate(Blocks.wool, new ItemStack(Items.string, 9), 0.0F);
-		transmutate(Blocks.gravel, new ItemStack(Items.flint, 2), 0.0F);
-		transmutate(Blocks.quartz_block, new ItemStack(Items.quartz, 4), 0.0F);
-		transmutate(Blocks.nether_brick, new ItemStack(Items.netherbrick, 4), 0.0F);
-		transmutate(Items.netherbrick, new ItemStack(Blocks.netherrack), 0.0F);
-		transmutate(Blocks.water, new ItemStack(Blocks.ice, 8), 0.0F);
-		transmutate(Items.wheat, new ItemStack(Items.wheat_seeds), 0.0F);
-		transmutate(Items.wheat_seeds, new ItemStack(Items.wheat), 0.0F);
+		transmute(Items.diamond, new ItemStack(Items.coal, 64), 0.2F);
+		transmute(Items.water_bucket, new ItemStack(Blocks.water, 1), 0.0F);
+		transmute(Items.lava_bucket, new ItemStack(Blocks.lava, 1), 0.0F);
+		transmute(Blocks.wool, new ItemStack(Items.string, 4), 0.0F);
+		transmute(Blocks.gravel, new ItemStack(Items.flint, 2), 0.0F);
+		transmute(Blocks.quartz_block, new ItemStack(Items.quartz, 4), 0.0F);
+		transmute(Blocks.nether_brick, new ItemStack(Items.netherbrick, 4), 0.0F);
+		transmute(Items.netherbrick, new ItemStack(Blocks.netherrack), 0.0F);
+		transmute(Blocks.water, new ItemStack(Blocks.ice, 8), 0.0F);
+		transmute(Items.wheat, new ItemStack(Items.wheat_seeds), 0.0F);
+		transmute(Items.wheat_seeds, new ItemStack(Items.wheat), 0.0F);
 	}
 
-	public void transmutate(Block input, ItemStack output, float xp)
+	public void transmute(Block input, ItemStack output, float xp)
 	{
-		transmutate(Item.getItemFromBlock(input), output, xp);
+		transmute(Item.getItemFromBlock(input), output, xp);
 	}
 
-	public void transmutate(Item input, ItemStack output, float xp)
+	public void transmute(Item input, ItemStack output, float xp)
 	{
-		transmutate(new ItemStack(input, 1, OreDictionary.WILDCARD_VALUE), output, xp);
+		transmute(new ItemStack(input, 1, OreDictionary.WILDCARD_VALUE), output, xp);
 	}
 
-	public void transmutate(ItemStack input, ItemStack output, float xp)
+	public void transmute(ItemStack input, ItemStack output, float xp)
 	{
 		transmutationList.put(input, output);
 		experienceList.put(output, Float.valueOf(xp));

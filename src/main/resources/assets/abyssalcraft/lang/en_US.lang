@@ -2,43 +2,37 @@
 
 #Achievements
 achievement.mineDS=Welcome to AbyssalCraft!
-achievement.mineDS.desc=Mined some Darkstone
+achievement.mineDS.desc=Mined some Darkstone.
 
 achievement.mineAby=Better than diamonds!
-achievement.mineAby.desc=Mined some Abyssalnite
+achievement.mineAby.desc=Mined some Abyssalnite.
+
+achievement.mineCorgem=Gems of the ocean
+achievement.mineCorgem.desc=Mined some Coralium Gems.
+
+achievement.shadowGems=Gems of pure darkness
+achievement.shadowGems.desc=Obtained a Shadow Gem.
+
+achievement.mineCor=Green stuff
+achievement.mineCor.desc=Mined some Abyssal Coralium.
+
+achievement.mineAbyOres=Didn't I see these in the overworld?
+achievement.mineAbyOres.desc=Mined some Abyssal Ores.
+
+achievement.mineDread=Minerals of the Dreadlands
+achievement.mineDread.desc=Mined some Dreadlands Ores
+
+achievement.dreadium=Plague-free Ingots
+achievement.dreadium.desc=Transmuted some Dreadium
+
+achievement.ethaxium=What souls are made out of...
+achievement.ethaxium.desc=Crafted a Ethaxium Ingot
 
 achievement.killghoul=Killed a Depths Ghoul
 achievement.killghoul.desc=Yay... why is this an achievement?
 
-achievement.enterabyss=Welcome to the wasteland
-achievement.enterabyss.desc=Entered the first dimension
-
-achievement.killdragon=Undead undead redead
-achievement.killdragon.desc=You killed a Spectral Dragon
-
-achievement.summonAsorah=The fallen has returned!
-achievement.summonAsorah.desc=You summoned Asorah, RUN!!
-
-achievement.killAsorah=One down, 2 more to go
-achievement.killAsorah.desc=You killed Asorah... Oblivionaire hates you now.
-
-achievement.enterdreadlands=Welcome to hell... erm The Dreadlands
-achievement.enterdreadlands.desc=Entered the second dimension
-
-achievement.killdreadguard=Smite the plague
-achievement.killdreadguard.dsec=You killed a Dreadguard
-
 achievement.ghoulhead=The hunt begins
 achievement.ghoulhead.desc=That's one big head...
-
-achievement.killPete=The Pete who died... again
-achievement.killPete.desc=You killed Pete... WHAT THE HELL MAN?!?
-
-achievement.killWilson=Wilson's demise
-achievement.killWilson.desc=GET OUTTA HERE!!!
-
-achievement.killorange=The Doctor's final diagnose
-achievement.killorange.desc=Dr. Orange passed away, he had Squaids
 
 achievement.petehead=That head...
 achievement.petehead.desc=Yay, we can be friends forever :D
@@ -49,29 +43,65 @@ achievement.wilsonhead.desc=Where's my body?
 achievement.orangehead=The medical head
 achievement.orangehead.desc=Your diagnose has come back, you have Squaids.
 
-achievement.mineCorgem=Gems of the ocean
-achievement.mineCorgem.desc=Mined some Coralium Gems
+achievement.necro=Book of The Dead, and knowledge
+achievement.necro.desc=Crafted a Necronomicon, now what?
 
-achievement.mineCor=Green stuff
-achievement.mineCor.desc=Mined some Abyssal Coralium
+achievement.necrou1=Knowledge of the Wasteland
+achievement.necrou1.desc=Crafted a Abyssal Wasteland Necronomicon.
 
-achievement.findPSDL=Now that's one odd rock
-achievement.findPSDL.desc=Found a Dreadlands Infused Powerstone
+achievement.necrou2=Knowledge of the Corrupted
+achievement.necrou2.desc=Crafted a Dreadlands Necronomicon.
 
-achievement.GK1=The first key
-achievement.GK1.desc=Crafted a Gateway key
+achievement.necrou3=Knowledge of the Unknown
+achievement.necrou3.desc=Crafted a Omothol Necronomicon.
 
-achievement.GK2=The Dreaded key
-achievement.GK2.desc=Crafted Asorah's Dreaded Gateway Key
+achievement.abyssaln=Everything you weren't meant to know
+achievement.abyssaln.desc=Crafted The Abyssalnomicon. J'zahar is somewhat proud of you.
 
-achievement.GK3=The Ancient key
-achievement.GK3.desc=Crafted Cha'garoth's R'lyehian Gateway Key
+achievement.ritual=The Dark Arts
+achievement.ritual.desc=You have no idea what you're getting into, do you?
 
-achievement.Jzhstaff=Wait... THIS IS A KEY?!?!?
-achievement.Jzhstaff.desc=Obtained The Staff of The Gatekeeper
+achievement.ritualSummon=Behold the wrath of the Necronomicon!
+achievement.ritualSummon.desc=Performed a Summoning Ritual.
+
+achievement.ritualCreate=No need for a Workbench
+achievement.ritualCreate.desc=Performed a Creation Ritual.
+
+achievement.ritualBreed=Reproduction through magic
+achievement.ritualBreed.desc=Performed a Breeding Ritual.
+
+achievement.ritualPotion=Occult alchemy
+achievement.ritualPotion.desc=Performed a Potion Ritual.
+
+achievement.ritualPotionAoE=Temporary beacon
+achievement.ritualPotionAoE.desc=Performed a Area-of-Effect Potion Ritual.
+
+achievement.ritualInfusion=Power merging
+achievement.ritualInfusion.desc=Performed a Infusion Ritual.
+
+achievement.shoggothInfestation=Shoggoth infestation
+achievement.shoggothInfestation.desc=You could not have expected this to end well...
+
+achievement.enterabyss=Welcome to the wasteland
+achievement.enterabyss.desc=Entered the first dimension.
+
+achievement.killdragon=Undead undead redead
+achievement.killdragon.desc=You killed a Spectral Dragon.
+
+achievement.summonAsorah=The fallen has returned!
+achievement.summonAsorah.desc=You summoned Asorah, RUN!!
+
+achievement.killAsorah=One down, 2 more to go
+achievement.killAsorah.desc=You killed Asorah... Oblivionaire hates you now.
+
+achievement.enterdreadlands=Welcome to hell... erm The Dreadlands
+achievement.enterdreadlands.desc=Entered the second dimension.
+
+achievement.killdreadguard=Smite the plague
+achievement.killdreadguard.dsec=You killed a Dreadguard.
 
 achievement.summonChagaroth=Lair of The Dreadbeast
-achievement.summonChagaroth.desc=Entered the lair of Cha'garoth
+achievement.summonChagaroth.desc=Entered the lair of Cha'garoth.
 
 achievement.killChagaroth=Fall of the Dreadbeast
 achievement.killChagaroth.desc=You killed Cha'garoth... nice work.
@@ -79,11 +109,44 @@ achievement.killChagaroth.desc=You killed Cha'garoth... nice work.
 achievement.enterOmothol=Welcome to your end, seriously.
 achievement.enterOmothol.desc=You've reached Omothol, The Realm of J'zahar.
 
-achievement.darkRealm=The bottom of the pit.
+achievement.darkRealm=Bottom of the pit.
 achievement.darkRealm.desc=You just had to fall down, didn't you?
 
+achievement.killOmotholelite=That thing was awfully strong
+achievement.killOmotholelite.desc=You killed a powerful being from Omothol.
+
+achievement.locateJzahar=A wild J'zahar appears
+achievement.locateJzahar.desc=I hope you brought potions, or something.
+
 achievement.killJzahar=Roll the credits? Nope.
-achievement.killJzahar.desc=You defeated The Gatekeeper himself. He isn't dead.
+achievement.killJzahar.desc=You defeated The Gatekeeper himself. He isn't dead, however.
+
+achievement.GK1=The undead key
+achievement.GK1.desc=Crafted a Gateway key.
+
+achievement.findPSDL=Now that's one odd rock
+achievement.findPSDL.desc=Found a Dreadlands Infused Powerstone.
+
+achievement.GK2=The Dreaded key
+achievement.GK2.desc=Crafted Asorah's Dreaded Gateway Key.
+
+achievement.GK3=The Ancient key
+achievement.GK3.desc=Transmuted Cha'garoth's R'lyehian Gateway Key.
+
+achievement.makeTransmutator=Break all laws of physic!
+achievement.makeTransmutator.desc=Crafted a Transmutator.
+
+achievement.makeCrystallizer=Crystallize everything
+achievement.makeCrystallizer.desc=Crafted a Crystallizer.
+
+achievement.makeMaterializer=Create your own materials
+achievement.makeMaterializer.desc=Crafted a Materializer.
+
+achievement.makeCrystalBag=Store all of your crystals here!
+achievement.makeCrystalBag.desc=Crafted a Crystal Bag. They can be upgraded.
+
+achievement.makeEngraver=Infinite counterfeit coins!
+achievement.makeEngraver.desc=Craft an Engraver.
 
 #Messages
 message.asorah.spawn=Haha, foolish human, I AM UNLEASHED!
@@ -113,6 +176,10 @@ message.sacthoth.damage.projectile=Ha, your projectiles can't harm me.
 message.portalplacer.error.1=You feel a presence of denial, J'zahar does not approve.
 message.portalplacer.error.2=Nothing happened...
 message.necronomicon.nope=It appears that you don't own this book. Ever thought about not trying to read it?
+message.remnant.busy=Sorry, I'm currently busy with a customer, come back later.
+message.remnant.insult.0=%s, you speak Aklo just as well as modders speak 1.8.
+message.remnant.insult.1=You know nothing, %s.
+message.remnant.insult.2=You're worthless without a Necronomicon, %s.
 
 #Container Inventories
 container.abyssalcraft.crate=Crate
@@ -154,6 +221,10 @@ necronomicon.information.outergods=The Outer Gods
 necronomicon.other=Other Information
 necronomicon.locked=Locked
 necronomicon.information.specialmaterials=Special Materials
+necronomicon.anywhere=Anywhere
+necronomicon.location=Location
+necronomicon.info=Information
+necronomicon.normal=Normal
 
 #Necronomicon Text
 #Note: the maximum amount of letters per string is 256
@@ -247,11 +318,9 @@ necronomicon.text.materials.darkethaxium.2=This material is only used in one str
 
 necronomicon.text.crafting.coraliuminfusedstone.1=Coralium Infused Stone is crafted with Coralium Gem Clusters and Stone. The three clusters can be of any size, but must add up to 9.
 necronomicon.text.crafting.coraliuminfusedstone.2=If you use a 9-gem cluster, surround it with Stone blocks instead of 2 rows. When this block is broken (or smelt) you get a Coralium Pearl.
-necronomicon.text.crafting.transmutationgem=A Transmutation Gem is crafted with Coralium Pearls, Diamonds, Ender Pearls and Blaze Powder.
-necronomicon.text.crafting.shadowgem=A Shadow Gem is crafted with Shadow Gem Shards. The Shards are crafted the same way, but with Shadow Fragments.
+necronomicon.text.crafting.shadowgem.1=A Shadow Gem is crafted with Shadow Gem Shards. The Shards are crafted the same way, but with Shadow Fragments.
+necronomicon.text.crafting.shadowgem.2=Shadow Fragments are dropped by Shadow Creatures, Shadow Gem Shards are dropped by Shadow Monsters and Shadow Gems are dropped by Shadow Beasts. They spawn in Darklands Mountains biomes and the Dark Realm.
 necronomicon.text.crafting.oblivionshard=A Shard of Oblivion is crafted with Shadow Gems and a Transmutation Gem.
-necronomicon.text.crafting.oblivioncatalyst.1=A Oblivion Catalyst is crafted with Shards of Oblivion, Redstone Dust and a Eye of Ender.
-necronomicon.text.crafting.oblivioncatalyst.2=It can also be crafted by surrounding a Nether Star with Redstone Dust and Eyes of Ender. That recipe is more end-game, but can be easier compared to obtaining large amounts of Shadow Gems.
 necronomicon.text.crafting.gk1=The Gateway Key is crafted with Blaze Rods, Coralium Pearls and a Oblivion Catalyst.
 necronomicon.text.crafting.necro_c=A Abyssal Wasteland Necronomicon is crafted with Coralium Plagued Flesh and a Necronomicon. It contains more knowledge.
 necronomicon.text.crafting.altar.1=An Altar is crafted with Gold Ingots, a Bucket, a Enchantment Table and a Transmutation Gem.
@@ -342,7 +411,7 @@ necronomicon.text.entity.chagarothspawn.2=Compared to the Dread Spawn, these mut
 necronomicon.text.entity.chagarothfist.1=Fists of Cha'garoths are living hands found in the Dreadlands.
 necronomicon.text.entity.chagarothfist.2=As the Dreadbeast is immobile, he managed to create arms that stretched almost infinitely across the Dreadlands, with empty eyeballs for him to gaze through. This is literally a hand holding a eyeball.  
 necronomicon.text.entity.dreadguard.1=Dreadguards are powerful mutants found in the Dreadlands.
-necronomicon.text.entity.dreadguard.2=These particular beings have been empowered by Cha'garoth, and placed in corrupted Abyssalnite Armor with the task of guarding their master, which they do quite well.
+necronomicon.text.entity.dreadguard.2=These particular beings have been empowered by Cha'garoth, and placed in corrupted Abyssalnite Armor with the task of guarding their master, which they do quite well. They drop Dreaded Shards of Abyssalnite.
 necronomicon.text.entity.chagaroth.1=Cha'garoth, The Dreadbeast, is the Second boss in AbyssalCraft, encountered in the Dreadlands.
 necronomicon.text.entity.chagaroth.2=Cha'garoth is the result of a new dangerous virus, 3 chopped off hydra heads and a dead Shoggoth. Becoming a health hazard for The Great Old Ones, he was placed in the dimension that became the Dreadlands, killing and corrupting everything.
 necronomicon.text.entity.remnant.1=Remnants are the citizens of Omothol, found there.
@@ -391,7 +460,38 @@ necronomicon.text.integration.morph.2=When morphed into entities that has specia
 
 necronomicon.text.integration.invtweaks.1=With Inventory Tweaks installed, you can sort items kept in the Crystal Bags with sorting buttons like with any other supported container.
 
+necronomicon.text.rituals.info=Check the information section for information regarding rituals, or the other sections for information about available rituals. "Location" specifies where the ritual can be performed.
+
+necronomicon.text.rituals.1=In order to get started with rituals you need to create the altar to perform them at.
+necronomicon.text.rituals.2=There is a total of 8 materials you can create your Ritual Altar from. Those are: Cobblestone, Darkstone Cobblestone, Abyssal Stone Brick, Coralium Stone Brick, Dreadstone Brick, Abyssalnite Stone Brick, Ethaxium Brick and Dark Ethaxium Brick.
+necronomicon.text.rituals.3=To create the altar, simply place the blocks in the formation showed above and shift right-click on the center block.
+necronomicon.text.rituals.4=The aforementioned materials can only be used in their specific dimension (eg. Cobblestone and Darkstone Cobblestone in the Overworld, Abyssal Stone Brick and Coralium Stone Brick in the Abyssal Wasteland etc).
+necronomicon.text.rituals.5=Once the altar and pedestals has formed, you can start performing rituals!
+necronomicon.text.rituals.6=All rituals requires you to place items on the pedestals, while some also requires a sacrifice placed on the altar. To perform a ritual, place the items, then shift right-click the altar, then wait for the smoke to end.
+
 necronomicon.text.wip=This section is incomplete.
+
+#Rituals
+ac.ritual.oblivionCatalyst=Oblivion Catalyst
+ac.ritual.oblivionCatalyst.desc=A Oblivion Catalyst is created by infusing an Eye of Ender with Shards of Oblivion and Redstone Dust.
+ac.ritual.transmutationGem=Transmutation Gem
+ac.ritual.transmutationGem.desc=A Transmutation Gem is created by infusing a Coralium Pearl with Diamonds, Ender Pearls and Blaze Powder.
+ac.ritual.asorahGatewayKey=Asorah's Dreaded Gateway Key
+ac.ritual.asorahGatewayKey.desc=Asorah's Dreaded Gateway Key is created by infusing a Gateway Key with an Eye of The Abyss, a Dreadlands Infused Powerstone and a Transmutation Gem.
+ac.ritual.summonAsorah=Ritual of The Sleeper
+ac.ritual.summonAsorah.desc=Summons Asorah, The Fallen, from the Dark Realm. The afterlife is commonly referred to as an eternal slumber, in which a sleeper is a entity beyond life and death.
+ac.ritual.summonSacthoth=Ritual of Shadows
+ac.ritual.summonSacthoth.desc=Summons Sacthoth, Harbinger of Doom, from the Dark Realm.
+ac.ritual.breeding=Ritual of Fertility
+ac.ritual.breeding.desc=Breeds nearby animals. Might also kill all of them, if unlucky enough.
+ac.ritual.depthsHelmet=Helmet of The Depths
+ac.ritual.depthsHelmet.desc=A Helmet of The Depths is created by infusing a Refined Coralium Helmet with 2 Coralium Gem Cluster (9 gems), Coralium Plagued Flesh, a Transmuttion Gem, a Lily Pad, a Vine and a Liquid Coralium Bucket.
+ac.ritual.depthsChestplate=Chestplate of The Depths
+ac.ritual.depthsChestplate.desc=A Chestplate of The Depths is created by infusing a Refined Coralium Chestplate with 2 Coralium Gem Cluster (9 gems), Coralium Plagued Flesh, a Transmuttion Gem, a Lily Pad, a Vine and a Liquid Coralium Bucket.
+ac.ritual.depthsLeggings=Leggings of The Depths
+ac.ritual.depthsLeggings.desc=A Leggings of The Depths is created by infusing a Refined Coralium Leggings with 2 Coralium Gem Cluster (9 gems), Coralium Plagued Flesh, a Transmuttion Gem, a Lily Pad, a Vine and a Liquid Coralium Bucket.
+ac.ritual.depthsBoots=Boots of The Depths
+ac.ritual.depthsBoots.desc=A Boots of The Depths is created by infusing a Refined Coralium Boots with 2 Coralium Gem Cluster (9 gems), Coralium Plagued Flesh, a Transmuttion Gem, a Lily Pad, a Vine and a Liquid Coralium Bucket.
 
 #Configuration
 ac_dimensions=Dimensions
@@ -429,14 +529,6 @@ tooltip.portalplacerdl.2=the Abyssal Wasteland.
 tooltip.oc=This item contains incredible powers.
 tooltip.staff=The staff of J'zahar, Gatekeeper of the Abyss.
 tooltip.eoa=Eye of Asorah, The Fallen.
-tooltip.caxe.1=This axe can transmutate
-tooltip.caxe.2=planks, leaves, logs and saplings.
-tooltip.cpickaxe.1=This pickaxe can transmutate
-tooltip.cpickaxe.2=ores and certain stone types.
-tooltip.cshovel.1=This shovel can transmutate
-tooltip.cshovel.2=grass types, gravel and sand.
-tooltip.csword.1=This sword applies fire and
-tooltip.csword.2=potion effects on hit.
 tooltip.devblade.1=This blade is so unholy that your
 tooltip.devblade.2=hand starts to decay while holding it.
 tooltip.antibucket=This liquid can make any other liquid harden.

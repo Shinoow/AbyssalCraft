@@ -14,14 +14,15 @@ package com.shinoow.abyssalcraft.common.items;
 import java.util.List;
 
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
-import com.shinoow.abyssalcraft.api.necronomicon.RitualAltar;
+import com.shinoow.abyssalcraft.common.blocks.BlockRitualAltar;
+import com.shinoow.abyssalcraft.common.blocks.tile.TileEntityRitualAltar;
+import com.shinoow.abyssalcraft.common.util.RitualUtil;
 import com.shinoow.abyssalcraft.common.util.SpecialTextUtil;
 
 public class ItemNecronomicon extends ItemACBasic {
@@ -54,13 +55,19 @@ public class ItemNecronomicon extends ItemACBasic {
 	}
 
 	@Override
-	public boolean onItemUse(ItemStack is, EntityPlayer player, World w, int x, int y, int z, int l, float f, float f1, float f3){
+	public boolean onItemUse(ItemStack is, EntityPlayer player, World w, int x, int y, int z, int meta, float hitX, float hitY, float hitZ){
 		if(player.isSneaking())
-			if(w.getBlock(x, y, z) != Blocks.dirt) //TODO: replace with altar block and a instanceof call merhaps?
-				if(RitualAltar.tryAltar(w, x, y, z, bookType)) w.playSoundAtEntity(player, "abyssalcraft:remnant.scream", 3F, 1F);
-				else {
-					//open ritual GUI?
+			if(!(w.getBlock(x, y, z) instanceof BlockRitualAltar)){
+				if(RitualUtil.tryAltar(w, x, y, z, bookType)){
+					w.playSoundAtEntity(player, "abyssalcraft:remnant.scream", 3F, 1F);
+					player.addStat(AbyssalCraft.ritual, 1);
+					return true;
 				}
+			} else if(w.getTileEntity(x, y, z) instanceof TileEntityRitualAltar){
+				TileEntityRitualAltar altar = (TileEntityRitualAltar) w.getTileEntity(x, y, z);
+				altar.performRitual(w, x, y, z, player);
+				return true;
+			}
 		return false;
 	}
 
