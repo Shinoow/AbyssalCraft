@@ -47,16 +47,11 @@ public class EntityDreadgolem extends EntityMob implements IDreadEntity {
 	@Override
 	protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
-		// Max Health - default 20.0D - min 0.0D - max Double.MAX_VALUE
-		getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(20.0D);
-		// Follow Range - default 32.0D - min 0.0D - max 2048.0D
-		getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(32.0D);
-		// Knockback Resistance - default 0.0D - min 0.0D - max 1.0D
-		getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setBaseValue(0.0D);
-		// Movement Speed - default 0.699D - min 0.0D - max Double.MAX_VALUE
-		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.699D);
-		// Attack Damage - default 2.0D - min 0.0D - max Doubt.MAX_VALUE
-		getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(4.0D);
+
+		if(AbyssalCraft.hardcoreMode){
+			getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(40.0D);
+			getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(8.0D);
+		} else getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(4.0D);
 	}
 
 	@Override

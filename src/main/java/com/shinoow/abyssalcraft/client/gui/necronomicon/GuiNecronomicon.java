@@ -100,14 +100,14 @@ public class GuiNecronomicon extends GuiScreen {
 		byte b0 = 2;
 		buttonList.add(buttonNextPage = new ButtonNextPage(1, i + 215, b0 + 154, true));
 		buttonList.add(buttonPreviousPage = new ButtonNextPage(2, i + 18, b0 + 154, false));
-		buttonList.add(buttonCat1 = new ButtonCategory(3, i + 10, b0 + 30, this, NecronomiconText.LABEL_INFORMATION, AbyssalCraft.necronomicon));
-		buttonList.add(buttonCat2 = new ButtonCategory(4, i + 10, b0 + 55, this, NecronomiconText.LABEL_SPELLBOOK, AbyssalCraft.necronomicon));
-		buttonList.add(buttonCat3 = new ButtonCategory(5, i + 10, b0 + 80, this, NecronomiconText.LABEL_RITUALS, AbyssalCraft.necronomicon));
+		buttonList.add(buttonCat1 = new ButtonCategory(3, i + 10, b0 + 20, this, NecronomiconText.LABEL_INFORMATION, AbyssalCraft.necronomicon));
+		buttonList.add(buttonCat2 = new ButtonCategory(4, i + 10, b0 + 37, this, NecronomiconText.LABEL_SPELLBOOK, AbyssalCraft.necronomicon));
+		buttonList.add(buttonCat3 = new ButtonCategory(5, i + 10, b0 + 54, this, NecronomiconText.LABEL_RITUALS, AbyssalCraft.necronomicon));
 		if(bookType == 4)
-			buttonList.add(buttonCat4 = new ButtonCategory(6, i + 10, b0 + 105, this, NecronomiconText.LABEL_HUH, AbyssalCraft.abyssalnomicon));
-		else buttonList.add(buttonCat4 = new ButtonCategory(6, i + 10, b0 + 105, this, NecronomiconText.LABEL_HUH, AbyssalCraft.necronomicon));
+			buttonList.add(buttonCat4 = new ButtonCategory(6, i + 10, b0 + 71, this, NecronomiconText.LABEL_HUH, AbyssalCraft.abyssalnomicon));
+		else buttonList.add(buttonCat4 = new ButtonCategory(6, i + 10, b0 + 71, this, NecronomiconText.LABEL_HUH, AbyssalCraft.necronomicon));
 		if(!AbyssalCraftAPI.getNecronomiconData().isEmpty())
-			buttonList.add(buttonCat5 = new ButtonCategory(7, i + 10, b0 + 130, this, NecronomiconText.LABEL_OTHER, AbyssalCraft.necronomicon));
+			buttonList.add(buttonCat5 = new ButtonCategory(7, i + 10, b0 + 88, this, NecronomiconText.LABEL_OTHER, AbyssalCraft.necronomicon));
 		updateButtons();
 	}
 
@@ -256,6 +256,8 @@ public class GuiNecronomicon extends GuiScreen {
 	@Override
 	public void drawScreen(int par1, int par2, float par3)
 	{
+		boolean unicode = fontRendererObj.getUnicodeFlag();
+		fontRendererObj.setUnicodeFlag(true);
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 		mc.getTextureManager().bindTexture(bookGuiTextures);
 		int k = (width - guiWidth) / 2;
@@ -279,6 +281,7 @@ public class GuiNecronomicon extends GuiScreen {
 			drawIndexText();
 
 		super.drawScreen(par1, par2, par3);
+		fontRendererObj.setUnicodeFlag(unicode);
 	}
 
 	/**

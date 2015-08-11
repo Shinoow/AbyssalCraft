@@ -59,8 +59,10 @@ public class EntityAntiSpider extends EntityMob implements IAntiEntity {
 	protected void applyEntityAttributes()
 	{
 		super.applyEntityAttributes();
-		getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(32.0D);
+
 		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.800000011920929D);
+		if(AbyssalCraft.hardcoreMode) getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(64.0D);
+		else getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(32.0D);
 	}
 
 	@Override

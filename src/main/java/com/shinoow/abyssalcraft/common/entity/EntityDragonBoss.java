@@ -106,7 +106,8 @@ public class EntityDragonBoss extends EntityMob implements IBossDisplayData, IEn
 	protected void applyEntityAttributes()
 	{
 		super.applyEntityAttributes();
-		getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(400.0D);
+		if(AbyssalCraft.hardcoreMode) getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(800.0D);
+		else getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(400.0D);
 	}
 
 	@Override

@@ -79,10 +79,17 @@ public class EntityAntiZombie extends EntityMob implements IAntiEntity {
 	protected void applyEntityAttributes()
 	{
 		super.applyEntityAttributes();
-		getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(40.0D);
+
 		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.23000000417232513D);
-		getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(3.0D);
 		getAttributeMap().registerAttribute(spawnReinforcementsAttribute).setBaseValue(rand.nextDouble() * ForgeModContainer.zombieSummonBaseChance);
+
+		if(AbyssalCraft.hardcoreMode){
+			getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(80.0D);
+			getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(6.0D);
+		} else {
+			getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(40.0D);
+			getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(3.0D);
+		}
 	}
 
 	@Override

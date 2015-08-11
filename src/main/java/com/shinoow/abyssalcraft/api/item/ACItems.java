@@ -216,6 +216,9 @@ public class ACItems {
 	public static Item medium_crystal_bag = GameRegistry.findItem(modId, "crystalbag_medium");
 	public static Item large_crystal_bag = GameRegistry.findItem(modId, "crystalbag_large");
 	public static Item huge_crystal_bag = GameRegistry.findItem(modId, "crystalbag_huge");
-	//	public static Item shoggoth_flesh = GameRegistry.findItem(modId, "shoggothflesh");
+	/** Metadata Item, 0 = normal, 1 = Abyssal Wasteland, 2 = Dreadlands, 3 = Omothol, 4 = Dark Realm*/
+	public static Item shoggoth_flesh = GameRegistry.findItem(modId, "shoggothflesh");
+	/** Metadata Item, 0 = Abyssalnite, 1 = Refined Coralium, 2 = Dreadium, 3 = Ethaxium */
+	public static Item ingot_nugget = GameRegistry.findItem(modId, "ingotnugget");
 	//	public static Item shadow_titan_armor_plate = GameRegistry.findItem(modId, "shadowplate");
 }

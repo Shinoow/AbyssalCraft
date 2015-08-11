@@ -16,6 +16,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.util.ResourceLocation;
 
 import com.shinoow.abyssalcraft.client.model.entity.ModelDG;
+import com.shinoow.abyssalcraft.client.model.entity.ModelLesserShoggoth;
 import com.shinoow.abyssalcraft.common.entity.EntityLesserShoggoth;
 
 import cpw.mods.fml.relauncher.Side;
@@ -24,18 +25,18 @@ import cpw.mods.fml.relauncher.SideOnly;
 @SideOnly(Side.CLIENT)
 public class RenderLesserShoggoth extends RenderLiving {
 
-	protected ModelDG model;
+	protected ModelLesserShoggoth model;
 
-	private static final ResourceLocation shoggothResource = new ResourceLocation("abyssalcraft:textures/model/depths_ghoul.png");
-	private static final ResourceLocation abyssalResource = new ResourceLocation("abyssalcraft:textures/model/depths_ghoul_pete.png");
-	private static final ResourceLocation dreadedResource = new ResourceLocation("abyssalcraft:textures/model/depths_ghoul_wilson.png");
-	private static final ResourceLocation omotholResource = new ResourceLocation("abyssalcraft:textures/model/depths_ghoul_orange.png");
-	private static final ResourceLocation darkResource = new ResourceLocation("abyssalcraft:textures/model/omothol_ghoul.png");
+	private static final ResourceLocation shoggothResource = new ResourceLocation("abyssalcraft:textures/model/shoggoth/LesserShoggoth.png");
+	private static final ResourceLocation abyssalResource = new ResourceLocation("abyssalcraft:textures/model/shoggoth/AbyssalShoggoth.png");
+	private static final ResourceLocation dreadedResource = new ResourceLocation("abyssalcraft:textures/model/shoggoth/DreadedShoggoth.png");
+	private static final ResourceLocation omotholResource = new ResourceLocation("abyssalcraft:textures/model/shoggoth/OmotholShoggoth.png");
+	private static final ResourceLocation darkResource = new ResourceLocation("abyssalcraft:textures/model/shoggoth/ShadowShoggoth.png");
 
 	public RenderLesserShoggoth ()
 	{
-		super(new ModelDG(), 0.8F);
-		model = (ModelDG)mainModel;
+		super(new ModelLesserShoggoth(), 1.6F);
+		model = (ModelLesserShoggoth)mainModel;
 	}
 
 	public void doRender(EntityLesserShoggoth entity, double par2, double par4, double par6, float par8, float par9)
@@ -43,7 +44,7 @@ public class RenderLesserShoggoth extends RenderLiving {
 		super.doRender(entity, par2, par4, par6, par8, par9);
 	}
 
-	protected ResourceLocation getGhoulTexture(EntityLesserShoggoth par1EntityLiving)
+	protected ResourceLocation getShoggothTexture(EntityLesserShoggoth par1EntityLiving)
 	{
 		switch (par1EntityLiving.getShoggothType())
 		{
@@ -65,6 +66,6 @@ public class RenderLesserShoggoth extends RenderLiving {
 	@Override
 	protected ResourceLocation getEntityTexture(Entity entity) {
 
-		return getGhoulTexture((EntityLesserShoggoth)entity);
+		return getShoggothTexture((EntityLesserShoggoth)entity);
 	}
 }

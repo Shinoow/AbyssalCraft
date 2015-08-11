@@ -84,5 +84,14 @@ public class ItemEthaxiumArmor extends ItemArmor {
 				player.addPotionEffect(new PotionEffect(Potion.moveSpeed.id, 20, 2));
 				player.addPotionEffect(new PotionEffect(Potion.waterBreathing.id, 20, 1));
 			}
+
+		if(player.getActivePotionEffect(Potion.field_76443_y) != null && player.getActivePotionEffect(Potion.field_76443_y).getDuration() == 0)
+			player.removePotionEffect(Potion.field_76443_y.id);
+		if(player.getActivePotionEffect(Potion.damageBoost) != null && player.getActivePotionEffect(Potion.damageBoost).getDuration() == 0)
+			player.removePotionEffect(Potion.damageBoost.id);
+		if(player.getActivePotionEffect(Potion.regeneration) != null && player.getActivePotionEffect(Potion.regeneration).getDuration() == 0)
+			player.removePotionEffect(Potion.regeneration.id);
+		if(player.getActivePotionEffect(Potion.fireResistance) != null && player.getActivePotionEffect(Potion.fireResistance).getDuration() == 0)
+			player.removePotionEffect(Potion.fireResistance.id);
 	}
 }

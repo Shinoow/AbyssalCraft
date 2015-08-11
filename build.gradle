@@ -20,10 +20,6 @@ repositories {
 			name 'CB Repo'
 			url "http://chickenbones.net/maven/"
 		}
-	maven {
-			name "Mobius Repo"
-			url "http://mobiusstrip.eu/maven"
-		}
 }
 
 apply plugin: 'java'
@@ -58,7 +54,6 @@ dependencies {
 	compile "codechicken:CodeChickenLib:1.7.10-1.1.3.138:dev"
 	compile "codechicken:CodeChickenCore:1.7.10-1.0.7.46:dev"
 	compile "codechicken:NotEnoughItems:1.7.10-1.0.5.110:dev"
-	compile "com.pahimar.ee3:EquivalentExchange3:1.7.10-0.3.507:dev"
 }
 
 version = "${props.mc_version}-${props.ac_version}"
@@ -94,7 +89,7 @@ processResources
 }
 	
 	curse {
-    apiKey      = project.curseForgeApiKey // gradle curse -Pcurseforge_key=your-api-key
+    apiKey = project.hasProperty('curseForgeApiKey') ? project.curseForgeApiKey : '' // gradle curse -Pcurseforge_key=your-api-key
     projectId   = "53686" // http://minecraft.curseforge.com/mc-mods/"xxxxxx"-projectname
     releaseType = project.props.release_type //alpha beta release
     changelog   = new File('changelog.txt').text //must have at least an empty string

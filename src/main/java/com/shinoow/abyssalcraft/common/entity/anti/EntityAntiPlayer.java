@@ -12,6 +12,7 @@
 package com.shinoow.abyssalcraft.common.entity.anti;
 
 import net.minecraft.block.Block;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.IEntityLivingData;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -24,9 +25,11 @@ import net.minecraft.entity.ai.EntityAISwimming;
 import net.minecraft.entity.ai.EntityAIWander;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.monster.EntityMob;
+import net.minecraft.entity.monster.EntityZombie;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
 
+import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.api.entity.IAntiEntity;
 
 public class EntityAntiPlayer extends EntityMob implements IAntiEntity {
@@ -48,7 +51,12 @@ public class EntityAntiPlayer extends EntityMob implements IAntiEntity {
 	{
 		super.applyEntityAttributes();
 
-		getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(40.0D);
+		if(AbyssalCraft.hardcoreMode){
+			getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(80.0D);
+			getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(4.0D);
+		} else {
+			getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(40.0D);
+		}
 	}
 
 	@Override
@@ -87,6 +95,17 @@ public class EntityAntiPlayer extends EntityMob implements IAntiEntity {
 			worldObj.playAuxSFXAtEntity((EntityPlayer)null, 1016, (int)posX, (int)posY, (int)posZ, 0);
 
 		}
+	}
+
+	@Override
+	protected void collideWithEntity(Entity par1Entity)
+	{
+		if(!worldObj.isRemote && par1Entity instanceof EntityPlayer && AbyssalCraft.hardcoreMode){
+			boolean flag = worldObj.getGameRules().getGameRuleBooleanValue("mobGriefing");
+			worldObj.createExplosion(this, posX, posY, posZ, 5, flag);
+			setDead();
+		}
+		else par1Entity.applyEntityCollision(this);
 	}
 
 	@Override

@@ -81,11 +81,17 @@ public class EntityAbyssalZombie extends EntityMob implements ICoraliumEntity {
 	@Override
 	protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
-		getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(25.0D);
+
 		getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(64.0D);
-		getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setBaseValue(0.0D);
 		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.23000000417232513D);
-		getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(6.0D);
+
+		if(AbyssalCraft.hardcoreMode){
+			getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(50.0D);
+			getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(12.0D);
+		} else {
+			getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(25.0D);
+			getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(6.0D);
+		}
 	}
 
 	@Override

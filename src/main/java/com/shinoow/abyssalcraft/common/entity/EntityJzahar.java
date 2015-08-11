@@ -85,11 +85,14 @@ public class EntityJzahar extends EntityMob implements IBossDisplayData, IRanged
 	@Override
 	protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
-		getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(500.0D);
-		getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(32.0D);
-		getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setBaseValue(0.0D);
-		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.699D);
-		getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(20.0D);
+
+		if(AbyssalCraft.hardcoreMode){
+			getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(1000.0D);
+			getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(40.0D);
+		} else {
+			getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(500.0D);
+			getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(20.0D);
+		}
 	}
 
 	@Override

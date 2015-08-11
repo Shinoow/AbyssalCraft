@@ -50,8 +50,8 @@ public class NecronomiconBreedingRitual extends NecronomiconRitual {
 		shoggoth.onSpawnWithEgg((IEntityLivingData)null);
 		shoggoth.setChild(true);
 		shoggoth.copyLocationAndAnglesFrom(host);
-		//		shoggothInfestation = true;
-		//		world.spawnEntityInWorld(shoggoth); //TODO: Finish shoggoth for release so they can spawn
+		shoggothInfestation = true;
+		world.spawnEntityInWorld(shoggoth);
 	}
 
 	@Override

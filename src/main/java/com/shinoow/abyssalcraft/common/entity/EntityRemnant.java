@@ -66,11 +66,17 @@ public class EntityRemnant extends EntityMob implements IMerchant, IAntiEntity, 
 	protected void applyEntityAttributes()
 	{
 		super.applyEntityAttributes();
-		getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(100.0D);
+
 		getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(64.0D);
 		getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setBaseValue(0.2D);
-		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.699D);
-		getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(10.0D);
+
+		if(AbyssalCraft.hardcoreMode){
+			getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(200.0D);
+			getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(20.0D);
+		} else {
+			getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(100.0D);
+			getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(10.0D);
+		}
 	}
 
 	@Override

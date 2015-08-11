@@ -143,4 +143,5 @@ public class ACBlocks {
 	public static Block dark_ethaxium_brick_fence = GameRegistry.findBlock(modId, "darkethaxiumbrickfence");
 	public static Block ritual_altar = GameRegistry.findBlock(modId, "ritualaltar");
 	public static Block ritual_pedestal = GameRegistry.findBlock(modId, "ritualpedestal");
+	public static Block shoggoth_ooze = GameRegistry.findBlock(modId, "shoggothblock");
 }

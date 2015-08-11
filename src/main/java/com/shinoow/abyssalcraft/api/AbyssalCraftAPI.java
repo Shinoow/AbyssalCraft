@@ -83,6 +83,8 @@ public class AbyssalCraftAPI {
 
 	private static List<Class<? extends EntityLivingBase>> shoggothFood = Lists.newArrayList();
 
+	private static List<Block> shoggothBlockBlacklist = Lists.newArrayList();
+
 	private static List<ItemStack> crystals = Lists.newArrayList();
 
 	private static List<IACPlugin> integrations = Lists.newArrayList();
@@ -118,28 +120,6 @@ public class AbyssalCraftAPI {
 	 */
 	@SuppressWarnings("unchecked")
 	public static void initPotionReflection(){
-		if(Potion.potionTypes.length < 128){
-			Potion[] potionTypes = null;
-			for (Field f : Potion.class.getDeclaredFields()) {
-				f.setAccessible(true);
-				try {
-					if (f.getName().equals("potionTypes") || f.getName().equals("field_76425_a")) {
-						Field modfield = Field.class.getDeclaredField("modifiers");
-						modfield.setAccessible(true);
-						modfield.setInt(f, f.getModifiers() & ~Modifier.FINAL);
-
-						potionTypes = (Potion[])f.get(null);
-						final Potion[] newPotionTypes = new Potion[128];
-						System.arraycopy(potionTypes, 0, newPotionTypes, 0, potionTypes.length);
-						f.set(null, newPotionTypes);
-					}
-				}
-				catch (Exception e) {
-					System.err.println("Whoops, something screwed up here, please report this to shinoow:");
-					System.err.println(e);
-				}
-			}
-		}
 		for(Field f : PotionHelper.class.getDeclaredFields())
 			try {
 				if(f.getName().equals("potionRequirements") || f.getName().equals("field_77927_l")){
@@ -608,7 +588,7 @@ public class AbyssalCraftAPI {
 	}
 
 	/**
-	 * Basic Materialization. (deprecated, use {@link AbyssalCraftAPI#addMaterialization(ItemStack, ItemStack, int)} instead)
+	 * Basic Materialization. (deprecated, use {@link AbyssalCraftAPI#addMaterialization(ItemStack[], ItemStack, int)} instead)
 	 * Note: all inputs has to be {@link ICrystal}s
 	 * 
 	 * @since 1.3
@@ -619,7 +599,7 @@ public class AbyssalCraftAPI {
 	}
 
 	/**
-	 * Basic Materialization. (deprecated, use {@link AbyssalCraftAPI#addMaterialization(ItemStack, ItemStack, int)} instead)
+	 * Basic Materialization. (deprecated, use {@link AbyssalCraftAPI#addMaterialization(ItemStack[], ItemStack, int)} instead)
 	 * Note: all inputs has to be {@link ICrystal}s
 	 * 
 	 * @since 1.3
@@ -630,7 +610,7 @@ public class AbyssalCraftAPI {
 	}
 
 	/**
-	 * Basic Materialization. (deprecated, use {@link AbyssalCraftAPI#addMaterialization(ItemStack, ItemStack, int)} instead)
+	 * Basic Materialization. (deprecated, use {@link AbyssalCraftAPI#addMaterialization(ItemStack[], ItemStack, int)} instead)
 	 * Note: all inputs has to be {@link ICrystal}s
 	 * 
 	 * @since 1.3
@@ -641,7 +621,7 @@ public class AbyssalCraftAPI {
 	}
 
 	/**
-	 * Basic Materialization. (deprecated, use {@link AbyssalCraftAPI#addMaterialization(ItemStack, ItemStack, int)} instead)
+	 * Basic Materialization. (deprecated, use {@link AbyssalCraftAPI#addMaterialization(ItemStack[], ItemStack, int)} instead)
 	 * Note: all inputs has to be {@link ICrystal}s
 	 * 
 	 * @since 1.3
@@ -652,7 +632,7 @@ public class AbyssalCraftAPI {
 	}
 
 	/**
-	 * Basic Materialization. (deprecated, use {@link AbyssalCraftAPI#addMaterialization(ItemStack, ItemStack, int)} instead)
+	 * Basic Materialization. (deprecated, use {@link AbyssalCraftAPI#addMaterialization(ItemStack[], ItemStack, int)} instead)
 	 * Note: all inputs has to be {@link ICrystal}s
 	 * 
 	 * @since 1.3
@@ -747,6 +727,29 @@ public class AbyssalCraftAPI {
 	 */
 	public static List<Class<? extends EntityLivingBase>> getShoggothFood(){
 		return shoggothFood;
+	}
+
+	/**
+	 * Adds the block to a list of blocks that won't turn into
+	 * a fleshy soil when a Lesser Shoggoth walks over it
+	 * (Note: Any liquid block and tile entity block will automatically be blacklisted)
+	 * @param block The block to blacklist
+	 * 
+	 * @since 1.4
+	 */
+	public static void addShoggothBlacklist(Block block){
+		shoggothBlockBlacklist.add(block);
+	}
+
+	/**
+	 * Used by the Lesser Shoggoth to fetch a list of blocks that won't be converted when
+	 * it walks over them
+	 * @return An ArrayList containing Blocks
+	 * 
+	 * @since 1.4
+	 */
+	public static List<Block> getShoggothBlockBlacklist(){
+		return shoggothBlockBlacklist;
 	}
 
 	/**

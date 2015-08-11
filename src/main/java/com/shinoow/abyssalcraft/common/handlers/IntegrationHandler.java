@@ -17,19 +17,13 @@ import java.util.List;
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
 import com.shinoow.abyssalcraft.api.integration.IACPlugin;
 import com.shinoow.abyssalcraft.common.util.ACLogger;
-import com.shinoow.abyssalcraft.integration.ee3.ACEE3;
-import com.shinoow.abyssalcraft.integration.morph.ACMorph;
-import com.shinoow.abyssalcraft.integration.thaumcraft.ACTC;
 
 import cpw.mods.fml.common.Loader;
 
 public class IntegrationHandler {
 
 	static boolean isNEILoaded = Loader.isModLoaded("NotEnoughItems");
-	static boolean isThaumcraftLoaded = Loader.isModLoaded("Thaumcraft");
-	static boolean isMorhpLoaded = Loader.isModLoaded("Morph");
 	static boolean isInvTweaksLoaded = Loader.isModLoaded("inventorytweaks");
-	static boolean isEE3Loaded = Loader.isModLoaded("EE3");
 
 	static List<String> mods = new ArrayList<String>();
 	static List<IACPlugin> integrations = new ArrayList<IACPlugin>();
@@ -44,24 +38,9 @@ public class IntegrationHandler {
 			//This part is handled by NEI, so this message is essentially useless :P
 			mods.add("Not Enough Items");
 		}
-		if(isThaumcraftLoaded){
-			ACLogger.info("Thaumcraft is present, initializing evil stuff.");
-			integrations.add(new ACTC());
-			mods.add("Thaumcraft");
-		}
-		if(isMorhpLoaded){
-			ACLogger.info("Morph is present, initializing weird shape-shifting stuff.");
-			integrations.add(new ACMorph());
-			mods.add("Morph");
-		}
 		if(isInvTweaksLoaded){
 			ACLogger.info("Inventory Tweaks is present, initializing sorting stuff.");
 			mods.add("Inventory Tweaks");
-		}
-		if(isEE3Loaded){
-			ACLogger.info("Equivalent Exchange 3 is present, initializing transmutive stuff.");
-			integrations.add(new ACEE3());
-			mods.add("Equivalent Exchange 3");
 		}
 		if(!AbyssalCraftAPI.getIntegrations().isEmpty()){
 			ACLogger.info("Searching the AbyssalCraftAPI list for integrations.");

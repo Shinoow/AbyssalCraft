@@ -1,33 +1,13 @@
--Fixed a slight derp in the Ritual Altar and Ritual Pedestal code (now drops the correct block when broken)
--Improved the smoke rendering on the Altar
--Changed max/min values for some configuration items
--Ownership is automatically transfered to the new Necronomicon when upgrading (prevents anyone from stealing your Necronomicon)
--Fixed a bug where you couldn't craft several higher tier Upgrade Kits at the same time
--The Coralium Longbow can now be crafted using a Bow that has taken durability damage
--Added EE3 integration, EMC values has been mapped to AbyssalCraft items/blocks
--Remnants only trade with Players who carry a Necronomicon, otherwise they say things in Aklo (which is hard to understand unless you can translate it)
--Remnants will now alert a Player if they already busy with a customer
--The Dreadguard entry in the Necronomicon now mentions that they drop Dreaded Shards of Abyssalnite
--Dreadguards now spawn more frequently (a slight buff in the spawn rate)
--Abyssalnite/Dreaded Abyssalnite Golems only drops Chunks/Dreaded Chunks of Abyssalnite when killed by a Player
--Teleportation with Ender Pearls (or similar conditions) no longer works inside Omothol
--Villages can now generate in all Darklands biome types (and Strongholds can generate in Darklands Mountain biomes)
--Villages generating in Darklands biomes use Darklands blocks for the buildings, instead of vanilla blocks
--Crystal Bags can now be used (previously unable to move any item while inside the GUI)
--You can't deal more than 50 damage per hit to any AbyssalCraft boss
--Achievement overhaul (lots of new achievements, some old ones have been removed)
--Spectral Dragons should be easier to hit now (bounding box improvements)
--Rituals have been implemented (check the Ritual section in the Necronomicon for more info)
--Added Ritual section to the Necronomicon
--The Oblivion Catalyst can no longer be crafted with a Nether Star, and is now created through a ritual (with the same components)
--Anti-food can now be transmuted into cooked versions of it's regular counterparts
--Added events that fire when the specific AbyssalCraft machine processes something
--Added events that fire when a ritual is about to be performed and when it's about to complete (both can be cancelled)
--Removed RitualAltar from the API (had only internal use, so wasn't useful for the API)
--Smelting a piece of armor now only returns 1 material (prevents exploit related to smelting armor pieces)
--Asorah is now summoned using a Summoning Ritual instead of the previously used Altar.
--Sacthoth can now be summoned through a Summoning Ritual. The previous ways of summoning him still works.
--Demon Pigs will now spread regular fire (the Dreaded Fire brought the Dread Plague outside the Dreadlands, which is a big no-no)
--Cha'garoth, Asorah and J'zahar will no longer de-spawn
--Removed the Coralium Infused Abyssalnite set (armor and tools), temporary replaced by a deprecation token that when right-clicked gives the crafting components
--The health of Spectral Dragons has been reduced to 30
+-Fixed a minor bug with potion effects given from the Ethaxium armor sticking around after the duration has run out
+-Removed the Coralium Infested Ocean biome (hasn't generated in a long time)
+-Potion and Enchantment IDs are now auto-assigned
+-Rituals can only be performed if you own the Necronomicon (same with setting up the altar)
+-Added Lesser Shoggoth
+-Added Shoggoth Flesh (dropped by lesser shoggoths)
+-Any Sulfur registered in the OreDictionary can now be crystallized
+-Added Hardcore Mode config option (if set to true, all mobs become tougher)
+-Necronomicon GUI makeover (improved the layout, among things)
+-A NecroData instance can now carry up to 7 PageData instances
+-Integrations has been moved over to a separate mod (called AbyssalCraft Integrations)
+-Added Abyssalnite/Refined Coralium/Dreadium/Ethaxium Nuggets (previously part of the Thaumcraft integration)
+-Added Shoggoth Ooze (appears on the ground where Lesser Shoggoths have walked)

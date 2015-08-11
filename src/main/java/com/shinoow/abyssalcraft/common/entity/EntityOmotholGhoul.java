@@ -53,11 +53,17 @@ public class EntityOmotholGhoul extends EntityMob implements IAntiEntity, ICoral
 	protected void applyEntityAttributes()
 	{
 		super.applyEntityAttributes();
-		getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(150.0D);
+
 		getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(64.0D);
 		getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setBaseValue(0.2D);
-		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.699D);
-		getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(15.0D);
+
+		if(AbyssalCraft.hardcoreMode){
+			getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(300.0D);
+			getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(30.0D);
+		} else {
+			getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(150.0D);
+			getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(15.0D);
+		}
 	}
 
 	@Override

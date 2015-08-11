@@ -56,8 +56,11 @@ public class EntityDemonPig extends EntityMob implements IDreadEntity {
 	@Override
 	protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
-		getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(15.0D);
-		getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(2.0D);
+
+		if(AbyssalCraft.hardcoreMode){
+			getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(30.0D);
+			getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(4.0D);
+		} else getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(15.0D);
 	}
 
 	@Override

@@ -50,15 +50,13 @@ public class ButtonCategory extends GuiButton {
 
 		mc.renderEngine.bindTexture(res);
 
-		float s = 1F / 48F;
+		float s = 1F / 16F;
 
 		GL11.glPushMatrix();
 		GL11.glColor4f(1F, 1F, 1F, 1);
 		GL11.glEnable(GL11.GL_BLEND);
 		GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
-		GL11.glScalef(0.5F, 0.5F, 0.5F);
-		drawTexturedModalRect(xPosition * 2, yPosition * 2, zLevel * 2, 0, 0, 48, 48, s, s);
-		//		drawTexturedModalRect(xPosition, yPosition, 0, 16, 48, 48);
+		drawTexturedModalRect(xPosition + 5, yPosition + 5, zLevel, 0, 0, 16, 16, s, s);
 		GL11.glPopMatrix();
 		fr.drawString(displayString, xPosition + 20, yPosition + 10, 0);
 	}

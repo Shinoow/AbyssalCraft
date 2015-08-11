@@ -153,7 +153,6 @@ message.asorah.spawn=哈哈, 愚蠢的人类, 我解放了!
 message.asorah.death.1=阿索拉? ... 阿索拉?!
 message.asorah.death.2=你, 你会为此付出代价的!
 message.asorah.death.3=除此之外, 你将永远无法离开恐惧之地. 尽情地挖掘你自己的坟墓吧.
-message.altar.error=这个祭坛只能在深渊荒芜之地使用.
 message.dreadaltar.error.1=只能在恐惧之地起作用
 message.dreadaltar.error.2=你需要在恐惧之地的山丘之中
 message.dreadaltar.error.3=这依旧只能在恐惧之地中使用
@@ -323,10 +322,7 @@ necronomicon.text.crafting.shadowgem.2=Shadow Fragments are dropped by Shadow Cr
 necronomicon.text.crafting.oblivionshard=A Shard of Oblivion is crafted with Shadow Gems and a Transmutation Gem.
 necronomicon.text.crafting.gk1=The Gateway Key is crafted with Blaze Rods, Coralium Pearls and a Oblivion Catalyst.
 necronomicon.text.crafting.necro_c=A Abyssal Wasteland Necronomicon is crafted with Coralium Plagued Flesh and a Necronomicon. It contains more knowledge.
-necronomicon.text.crafting.altar.1=An Altar is crafted with Gold Ingots, a Bucket, a Enchantment Table and a Transmutation Gem.
-necronomicon.text.crafting.altar.2=To summon Asorah, The Fallen, right-click it with a Liquid Coralium Bucket
 necronomicon.text.crafting.psdltracker=A Powerstone Tracker is crafted with Coralium Gems and a Eye of Ender.
-necronomicon.text.crafting.gk2=Asorah's Dreaded Gateway Key is crafted with a Gateway Key, a Dreadlands Infused Powerstone and a Transmutation Gem.
 necronomicon.text.crafting.necro_d=A Dreadlands Necronomicon is crafted with Dread Fragments and a Abyssal Wasteland Necronomicon.
 necronomicon.text.crafting.transmutator.1=A Transmutator is crafted with Coralium Bricks, Blocks of Refined Coralium, a Transutation Gem and a Liquid Coralium Bucket.
 necronomicon.text.crafting.transmutator.2=To obtain Coralium Bricks, you must pour Liquid Antimatter on Liquid Coralium, then harvest the stone formed from the Liquid Coralium. Then you must smelt the Coralium Stone for Coralium Ingots.
@@ -446,18 +442,6 @@ necronomicon.text.integration.nei.6=The Engraver uses Coin Engravings as "fuel",
 necronomicon.text.integration.nei.7=Recipes for the Materializer can also be displayed by pressing the recipe button. They have a special display screen showing the required Crystals.
 necronomicon.text.integration.nei.8=You can also see which Necronomicon you need in order to materialize the specific material. The Materializer uses no fuel.
 
-necronomicon.text.integration.tc.1=With Thaumcraft installed, you can now discover aspects in blocks, items and entities added in AbyssalCraft. There is also 2 new aspects, Coralos and Dreadia. You also get a Vis discount and the ability to view nodes when wearing the Depths Armor set.
-necronomicon.text.integration.tc.2=Infusion Enchanting has been added for all enchantments added in AbyssalCraft. Light Pierce requires 1 Glowstone Dust, 1 Arrow, and 10 Lux. Iron Wall requires 1 Block of Iron, 1 Cobblestone Wall, 10 Tutamen and 10 Terra.
-necronomicon.text.integration.tc.3=Coralium requires 1 Refined Coralium Ingot, 1 Coralium Plagued Flesh, 10 Coralos and 10 Potentia. Dread requires 1 Dreadium Ingot, 1 Dread Fragment, 10 Dreadia and 10 Potentia.
-necronomicon.text.integration.tc.4=There are also wand parts added in the integration. Wand Caps can be made from Abyssalnite, Refined Coralium, Dreadium and Ethaxium Nuggets. Wand Rods can be made from Darklands Oak Logs, Coralium Stone, Dreadlands Tree Logs and Omothol stone.
-necronomicon.text.integration.tc.5=Wands can be made by combining the Abyssalnite Cap with the Darklands Rod, Coralium Cap with the Coralium Rod, Dreadium Cap with the Dreadlands Rod, the Ethaxium Cap with the Omothol Rod and the Voidmetal Cap with the Omothol Rod.
-necronomicon.text.integration.tc.6=The Darklands Rod regenerates up to 10% of the wand's Vis inside Darklands biomes. The Dreadlands Rod does the same inside Dreadlands biomes. The Omothol Rod provides infinite Vis in Omothol (with the Ethaxium Cap) and the End (with the Voidmetal Cap).
-necronomicon.text.integration.tc.7=The Darklands and Dreadlands Wands are crafted like normal wands, through Arcane Crafting. The Coralium Wand is crafted through Infusion Crafting, with the Rod in the middle, the Caps in the other slots, 10 Perditio, 10 Coralos and 10 Tenebrae.
-necronomicon.text.integration.tc.8=The Ethaxium Empowered Omothol Wand is crafted through Infusion Crafting with the Rod in the middle, the Caps in the other slots, 10 Perditio, 10 Spiritus and 10 Tenebrae. The Voidmetal Aspected is the same, but with Alienis instead of Spiritus.
-
-necronomicon.text.integration.morph.1=With Morph installed, you can get morph abilities when morphing into AbyssalCraft entities. Additional abilities might be added, like plague immunity.
-necronomicon.text.integration.morph.2=When morphed into entities that has special models, your hand will be morphed into the hand used by that model in 1st person view.
-
 necronomicon.text.integration.invtweaks.1=With Inventory Tweaks installed, you can sort items kept in the Crystal Bags with sorting buttons like with any other supported container.
 
 necronomicon.text.rituals.info=Check the information section for information regarding rituals, or the other sections for information about available rituals. "Location" specifies where the ritual can be performed.
@@ -506,12 +490,6 @@ ac_biomeweight=生物群落权重
 ac_biomeweight.tooltip=生物群落权重设置
 ac_general=总体
 ac_general.tooltip=总体设置
-ac_enchantment=附魔
-ac_enchantment.tooltip=附魔ID设置
-ac_potion=药水
-ac_potion.tooltip=药水ID设置
-ac_integration=Integrations
-ac_integration.tooltip=Integration configuration
 
 #Damagesources
 death.attack.coralium=%1$s由于珊瑚侵染而死亡
@@ -541,8 +519,6 @@ tooltip.corb.1=该物品能注能入深渊类物品,
 tooltip.corb.2=给它们新添能力.
 tooltip.corb.3=它也能改动一些主世界
 tooltip.corb.4=的成分(方块).
-tooltip.altar.1=用来召唤堕落者阿索拉, 
-tooltip.altar.2=阿索拉来自黑暗之域.
 tooltip.odb=巨大的爆炸, 自身也承受危险.
 tooltip.crystal=分子式
 tooltip.portalplacerjzh.1=只能在
@@ -691,6 +667,7 @@ tile.DEBs2.name=深色伊桑斯砖块双层台阶
 tile.DEBf.name=深色伊桑斯砖块栅栏
 tile.ritualaltar.name=Ritual Altar
 tile.ritualpedestal.name=Ritual Pedestal
+tile.shoggothBlock.name=Shoggoth Ooze
 
 #Items
 item.DEV_BLADE.name=恶魔之刃
@@ -891,6 +868,10 @@ item.crystalbag_small.name=小型晶体背包
 item.crystalbag_medium.name=中型型晶体背包
 item.crystalbag_large.name=大型型晶体背包
 item.crystalbag_huge.name=超大型型晶体背包
+item.nugget.abyssalnite.name=Abyssalnite Nugget
+item.nugget.coralium.name=Refined Coralium Nugget
+item.nugget.dreadium.name=Dreadium Nugget
+item.nugget.ethaxium.name=Ethaxium Nugget
 
 #Entities
 entity.abyssalcraft.depthsghoul.name=深渊食尸鬼
@@ -927,10 +908,6 @@ entity.abyssalcraft.antiskeleton.name=反物质骷髅
 entity.abyssalcraft.antispider.name=反物质蜘蛛
 entity.abyssalcraft.antizombie.name=反物质僵尸
 entity.abyssalcraft.lessershoggoth.name=小型修格斯
-entity.abyssalcraft.lessershoggoth.abyssal.name=小型深渊修格斯
-entity.abyssalcraft.lessershoggoth.dreaded.name=小型恐惧修格斯
-entity.abyssalcraft.lessershoggoth.omothol.name=小型奥穆索修格斯
-entity.abyssalcraft.lessershoggoth.dark.name=小型阴影修格斯
 entity.abyssalcraft.shadowtitan.name=阴影泰坦
 entity.abyssalcraft.omotholwarden.name=奥穆索守卫
 entity.abyssalcraft.jzaharminion.name=守门者奴仆
@@ -952,32 +929,5 @@ enchantment.coralium=珊瑚
 enchantment.dread=恐惧
 enchantment.ironWall=铁墙
 enchantment.damage.shadow=易于穿透
-
-#Thaumcraft integration
-item.nugget.abyssalnite.name=Abyssalnite Nugget
-item.nugget.coralium.name=Refined Coralium Nugget
-item.nugget.dreadium.name=Dreadium Nugget
-item.nugget.ethaxium.name=Ethaxium Nugget
-item.wandcap.abyssalnite.name=Abyssalnite Cap
-item.wandcap.coralium.name=Refined Coralium Cap
-item.wandcap.dreadium.name=Dreadium Cap
-item.wandcap.ethaxium.name=Ethaxium Cap
-item.wandcore.darklands.name=Darklands Oak Rod
-item.wandcore.coralium.name=Coralium Stone Rod
-item.wandcore.dreadlands.name=Dreadlands Wood Rod
-item.wandcore.omothol.name=Omothol Stone Rod
-item.Wand.abyssalnite.cap=Abyssalnite Bound
-item.Wand.darklands.rod=Darklands Oak
-item.Wand.coralium.cap=Coralium Empowered
-item.Wand.coralium.rod=Coralium Stone
-item.Wand.dreadium.cap=Dreadium Bound
-item.Wand.dreadlands.rod=Dreadlands Wood
-item.Wand.ethaxium.cap=Ethaxium Empowered
-item.Wand.omothol.rod=Omothol Stone
-
-itemGroup.acthaum=AbyssalCraft Thaumcraft Integration
-
-tc.aspect.coralos=Coralium
-tc.aspect.dreadia=Dread
 
 #Localization done, Shin out.

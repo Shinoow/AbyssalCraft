@@ -25,7 +25,6 @@ import com.google.common.collect.Maps;
 
 import cpw.mods.fml.common.FMLLog;
 
-
 /**
  * Registry class for Necronomicon Rituals
  * @author shinoow
@@ -91,8 +90,13 @@ public class RitualRegistry {
 	 */
 	public void registerRitual(NecronomiconRitual ritual){
 		if(ritual.getBookType() <= 4 && ritual.getBookType() >= 0){
-			if(!rituals.contains(ritual))
-				rituals.add(ritual);
+			if(!rituals.isEmpty()){
+				for(NecronomiconRitual compare : rituals)
+					if(!compare.getUnlocalizedName().equals(ritual.getUnlocalizedName())){
+						rituals.add(ritual);
+						break;
+					} else FMLLog.log("RitualRegistry", Level.ERROR, "Necronomicon Ritual already registered: %s", ritual.getUnlocalizedName());
+			} else rituals.add(ritual);
 		} else FMLLog.log("RitualRegistry", Level.ERROR, "Necronomicon book type does not exist: %d", ritual.getBookType());
 	}
 

@@ -94,7 +94,6 @@ public class AbyssalCrafting {
 		GameRegistry.addRecipe(new ItemStack(AbyssalCraft.Abypplate, 1), new Object[] {"##", '#', AbyssalCraft.abystone});
 		GameRegistry.addRecipe(new ItemStack(AbyssalCraft.DSBfence, 6), new Object[] {"###", "###", '#', AbyssalCraft.Darkstone_brick});
 		GameRegistry.addRecipe(new ItemStack(AbyssalCraft.DLTfence, 4), new Object[] {"###", "###", '#', AbyssalCraft.DLTplank});
-		GameRegistry.addRecipe(new ItemStack(AbyssalCraft.Altar, 1), new Object[] {" # ", "%&%", "%@%", '#', Items.bucket, '%', Items.gold_ingot, '&', new ItemStack(AbyssalCraft.Corb, 1, OreDictionary.WILDCARD_VALUE), '@', Blocks.enchanting_table});
 		GameRegistry.addRecipe(new ItemStack(AbyssalCraft.dreadbrick, 4), new Object[] {"##", "##", '#', AbyssalCraft.dreadstone});
 		GameRegistry.addRecipe(new ItemStack(AbyssalCraft.abydreadbrick, 4), new Object[] {"##", "##", '#', AbyssalCraft.abydreadstone});
 		GameRegistry.addRecipe(new ItemStack(AbyssalCraft.dreadplanks, 4), new Object[] {"%", '%', AbyssalCraft.dreadlog});
@@ -237,6 +236,14 @@ public class AbyssalCrafting {
 		GameRegistry.addRecipe(new ItemStack(AbyssalCraft.crystalbag_m, 1), new Object[] {"###", "#%#", "###", '#', AbyssalCraft.Corflesh, '%', AbyssalCraft.crystalbag_s});
 		GameRegistry.addRecipe(new ItemStack(AbyssalCraft.crystalbag_l, 1), new Object[] {"###", "#%#", "###", '#', AbyssalCraft.dreadfragment, '%', AbyssalCraft.crystalbag_m});
 		GameRegistry.addRecipe(new ItemStack(AbyssalCraft.crystalbag_h, 1), new Object[] {"###", "#%#", "###", '#', AbyssalCraft.omotholFlesh, '%', AbyssalCraft.crystalbag_l});
+		GameRegistry.addRecipe(new ItemStack(AbyssalCraft.nugget, 9, 0), new Object[] {"#", '#', AbyssalCraft.abyingot});
+		GameRegistry.addRecipe(new ItemStack(AbyssalCraft.nugget, 9, 1), new Object[] {"#", '#', AbyssalCraft.Cingot});
+		GameRegistry.addRecipe(new ItemStack(AbyssalCraft.nugget, 9, 2), new Object[] {"#", '#', AbyssalCraft.dreadiumingot});
+		GameRegistry.addRecipe(new ItemStack(AbyssalCraft.nugget, 9, 3), new Object[] {"#", '#', AbyssalCraft.ethaxiumIngot});
+		GameRegistry.addRecipe(new ItemStack(AbyssalCraft.abyingot), new Object[] {"###", "###", "###", '#', new ItemStack(AbyssalCraft.nugget, 1, 0)});
+		GameRegistry.addRecipe(new ItemStack(AbyssalCraft.Cingot), new Object[] {"###", "###", "###", '#', new ItemStack(AbyssalCraft.nugget, 1, 1)});
+		GameRegistry.addRecipe(new ItemStack(AbyssalCraft.dreadiumingot), new Object[] {"###", "###", "###", '#', new ItemStack(AbyssalCraft.nugget, 1, 2)});
+		GameRegistry.addRecipe(new ItemStack(AbyssalCraft.ethaxiumIngot), new Object[] {"###", "###", "###", '#', new ItemStack(AbyssalCraft.nugget, 1, 3)});
 
 		GameRegistry.addShapelessRecipe(new ItemStack(AbyssalCraft.lifeCrystal), AbyssalCraft.crystalCarbon, AbyssalCraft.crystalHydrogen, AbyssalCraft.crystalNitrogen, AbyssalCraft.crystalOxygen, AbyssalCraft.crystalPhosphorus, AbyssalCraft.crystalSulfur);
 
@@ -453,7 +460,6 @@ public class AbyssalCrafting {
 		AbyssalCraftAPI.addSingleCrystallization(AbyssalCraft.abyingot, new ItemStack(AbyssalCraft.crystalAbyssalnite), 0.1F);
 		AbyssalCraftAPI.addSingleCrystallization(AbyssalCraft.abychunk, new ItemStack(AbyssalCraft.crystalAbyssalnite), 0.1F);
 		AbyssalCraftAPI.addSingleCrystallization(AbyssalCraft.dreadiumingot, new ItemStack(AbyssalCraft.crystalDreadium), 0.1F);
-		AbyssalCraftAPI.addSingleCrystallization(AbyssalCraft.sulfur, new ItemStack(AbyssalCraft.crystalSulfur), 0.1F);
 		AbyssalCraftAPI.addSingleCrystallization(Items.iron_ingot, new ItemStack(AbyssalCraft.crystalIron), 0.1F);
 		AbyssalCraftAPI.addSingleCrystallization(Items.gold_ingot, new ItemStack(AbyssalCraft.crystalGold), 0.1F);
 		AbyssalCraftAPI.addSingleCrystallization(Items.redstone, new ItemStack(AbyssalCraft.crystalRedstone), 0.1F);
@@ -507,12 +513,11 @@ public class AbyssalCrafting {
 		AbyssalCraftAPI.addCrystallization("ingotBrass", "crystalCopper", 3, "crystalZinc", 2, 0.5F);
 		AbyssalCraftAPI.addCrystallization("oreBrass", "crystalCopper", 3, "crystalZinc", 2, 0.5F);
 		AbyssalCraftAPI.addSingleCrystallization(Items.rotten_flesh, new ItemStack(AbyssalCraft.crystalPhosphorus, 2), 0.1F);
-		//		AbyssalCraftAPI.addSingleCrystallization(new ItemStack(AbyssalCraft.shoggothFlesh, 1, 0), new ItemStack(AbyssalCraft.crystalPhosphorus, 2), 0.2F);
-		//		AbyssalCraftAPI.addCrystallization(new ItemStack(AbyssalCraft.shoggothFlesh, 1, 1), new ItemStack(AbyssalCraft.crystalPhosphorus, 2), new ItemStack(AbyssalCraft.crystalCoralium, 1), 0.2F);
-		//		AbyssalCraftAPI.addCrystallization(new ItemStack(AbyssalCraft.shoggothFlesh, 1, 2), new ItemStack(AbyssalCraft.crystalPhosphorus, 2), new ItemStack(AbyssalCraft.crystalDreadium, 1), 0.2F);
-		//		AbyssalCraftAPI.addCrystallization(new ItemStack(AbyssalCraft.shoggothFlesh, 1, 3), new ItemStack(AbyssalCraft.crystalPhosphorus, 2), new ItemStack(AbyssalCraft.crystalCarbon, 2), 0.2F);
-		//		AbyssalCraftAPI.addCrystallization(new ItemStack(AbyssalCraft.shoggothFlesh, 1, 4), new ItemStack(AbyssalCraft.crystalPhosphorus, 2), new ItemStack(AbyssalCraft.shadowgem, 1), 0.2F);
-		//TODO: Uncomment when shoggoths are released
+		AbyssalCraftAPI.addSingleCrystallization(new ItemStack(AbyssalCraft.shoggothFlesh, 1, 0), new ItemStack(AbyssalCraft.crystalPhosphorus, 2), 0.2F);
+		AbyssalCraftAPI.addCrystallization(new ItemStack(AbyssalCraft.shoggothFlesh, 1, 1), new ItemStack(AbyssalCraft.crystalPhosphorus, 2), new ItemStack(AbyssalCraft.crystalCoralium, 1), 0.2F);
+		AbyssalCraftAPI.addCrystallization(new ItemStack(AbyssalCraft.shoggothFlesh, 1, 2), new ItemStack(AbyssalCraft.crystalPhosphorus, 2), new ItemStack(AbyssalCraft.crystalDreadium, 1), 0.2F);
+		AbyssalCraftAPI.addCrystallization(new ItemStack(AbyssalCraft.shoggothFlesh, 1, 3), new ItemStack(AbyssalCraft.crystalPhosphorus, 2), new ItemStack(AbyssalCraft.crystalCarbon, 2), 0.2F);
+		AbyssalCraftAPI.addCrystallization(new ItemStack(AbyssalCraft.shoggothFlesh, 1, 4), new ItemStack(AbyssalCraft.crystalPhosphorus, 2), new ItemStack(AbyssalCraft.shadowgem, 1), 0.2F);
 
 		//Crystallization for dusts
 		AbyssalCraftAPI.addSingleCrystallization("dustIron", "crystalIron", 0.1F);
@@ -521,6 +526,7 @@ public class AbyssalCrafting {
 		AbyssalCraftAPI.addSingleCrystallization("dustCopper", "crystalCopper", 0.1F);
 		AbyssalCraftAPI.addSingleCrystallization("dustCoal", "crystalCarbon", 0.1F);
 		AbyssalCraftAPI.addSingleCrystallization("dustAluminium", "crystalAluminium", 0.1F);
+		AbyssalCraftAPI.addSingleCrystallization("dustSulfur", "crystalSulfur", 0.1F);
 		AbyssalCraftAPI.addCrystallization("dustBronze", "crystalCopper", 1, "crystalTin", 3, 0.1F);
 		AbyssalCraftAPI.addCrystallization("dustBrass", "crystalCopper", 3, "crystalZinc", 2, 0.1F);
 	}
@@ -594,7 +600,7 @@ public class AbyssalCrafting {
 		ItemStack[] tgofferings = new ItemStack[]{new ItemStack(Items.diamond), new ItemStack(Items.blaze_powder), new ItemStack(Items.ender_pearl), new ItemStack(Items.blaze_powder),
 				new ItemStack(Items.diamond), new ItemStack(Items.blaze_powder), new ItemStack(Items.ender_pearl), new ItemStack(Items.blaze_powder)};
 		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("transmutationGem", 0, new ItemStack(AbyssalCraft.Corb), new ItemStack(AbyssalCraft.Cpearl), tgofferings));
-		ItemStack[] depthsofferings = new ItemStack[]{ new ItemStack(AbyssalCraft.Coraliumcluster9), new ItemStack(AbyssalCraft.Cbucket),
+		ItemStack[] depthsofferings = new ItemStack[]{new ItemStack(AbyssalCraft.Coraliumcluster9), new ItemStack(AbyssalCraft.Coraliumcluster9), new ItemStack(AbyssalCraft.Cbucket),
 				new ItemStack(Blocks.vine), new ItemStack(Blocks.waterlily), new ItemStack(AbyssalCraft.Corb), new ItemStack(AbyssalCraft.Corflesh)};
 		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("depthsHelmet", 1, AbyssalCraft.configDimId1, new ItemStack(AbyssalCraft.Depthshelmet), new ItemStack(AbyssalCraft.Corhelmet), depthsofferings));
 		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("depthsChestplate", 1, AbyssalCraft.configDimId1, new ItemStack(AbyssalCraft.Depthsplate), new ItemStack(AbyssalCraft.Corplate), depthsofferings));

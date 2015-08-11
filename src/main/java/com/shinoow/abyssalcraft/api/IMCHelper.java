@@ -140,4 +140,14 @@ public class IMCHelper {
 	 * The message is sent this way:
 	 * FMLInterModComms.sendMessage("abyssalcraft", "registerACIntegration", "path.to.your.integration.plugin");
 	 */
+
+	//SHOGGOTH BLOCK BLACKLIST /////////////////////////////////////////////////////////////////
+	/**
+	 * This is a IMC version of AbyssalCraftAPI#addShoggothBlacklist
+	 * You can use the IMC message "shoggothBlacklist" to add a Block to the Shoggoth Block Blacklist
+	 * The format for the message should be a ItemStack containing a Block
+	 * 
+	 * Example of how it would look like if I added Darkstone Bricks to the food list:
+	 * FMLInterModComms.sendMessage("abyssalcraft", "shoggothBlacklist", new ItemStack(AbyssalCraft.Darkstone_brick));
+	 */
 }

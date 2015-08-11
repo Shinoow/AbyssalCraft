@@ -55,16 +55,16 @@ public class GuiNecronomiconRituals extends GuiNecronomicon {
 		byte b0 = 2;
 		buttonList.add(buttonNextPage = new ButtonNextPage(1, i + 220, b0 + 154, true));
 		buttonList.add(buttonPreviousPage = new ButtonNextPage(2, i + 18, b0 + 154, false));
-		buttonList.add(info = new ButtonCategory(3, i + 10, b0 + 30, this, NecronomiconText.LABEL_INFO, AbyssalCraft.necronomicon));
-		buttonList.add(ritual0 = new ButtonCategory(4, i + 10, b0 + 55, this, NecronomiconText.LABEL_NORMAL, hasRituals(0) ? AbyssalCraft.necronomicon : AbyssalCraft.OC));
+		buttonList.add(info = new ButtonCategory(3, i + 10, b0 + 20, this, NecronomiconText.LABEL_INFO, AbyssalCraft.necronomicon));
+		buttonList.add(ritual0 = new ButtonCategory(4, i + 10, b0 + 37, this, NecronomiconText.LABEL_NORMAL, hasRituals(0) ? AbyssalCraft.necronomicon : AbyssalCraft.OC));
 		if(getBookType() >= 1)
-			buttonList.add(ritual1 = new ButtonCategory(5, i + 10, b0 + 80, this, NecronomiconText.LABEL_INFORMATION_ABYSSAL_WASTELAND, hasRituals(1) ? AbyssalCraft.necronomicon_cor : AbyssalCraft.OC));
+			buttonList.add(ritual1 = new ButtonCategory(5, i + 10, b0 + 54, this, NecronomiconText.LABEL_INFORMATION_ABYSSAL_WASTELAND, hasRituals(1) ? AbyssalCraft.necronomicon_cor : AbyssalCraft.OC));
 		if(getBookType() >= 2)
-			buttonList.add(ritual2 = new ButtonCategory(6, i + 10, b0 + 105, this, NecronomiconText.LABEL_INFORMATION_DREADLANDS, hasRituals(2) ? AbyssalCraft.necronomicon_dre : AbyssalCraft.OC));
+			buttonList.add(ritual2 = new ButtonCategory(6, i + 10, b0 + 71, this, NecronomiconText.LABEL_INFORMATION_DREADLANDS, hasRituals(2) ? AbyssalCraft.necronomicon_dre : AbyssalCraft.OC));
 		if(getBookType() >= 3)
-			buttonList.add(ritual3 = new ButtonCategory(7, i + 10, b0 + 130, this, NecronomiconText.LABEL_INFORMATION_OMOTHOL, hasRituals(3) ? AbyssalCraft.necronomicon_omt : AbyssalCraft.OC));
+			buttonList.add(ritual3 = new ButtonCategory(7, i + 10, b0 + 88, this, NecronomiconText.LABEL_INFORMATION_OMOTHOL, hasRituals(3) ? AbyssalCraft.necronomicon_omt : AbyssalCraft.OC));
 		if(getBookType() == 4)
-			buttonList.add(ritual4 = new ButtonCategory(8, i + 130, b0 + 130, this, StatCollector.translateToLocal(AbyssalCraft.abyssalnomicon.getUnlocalizedName() + ".name"), hasRituals(4) ? AbyssalCraft.abyssalnomicon : AbyssalCraft.OC));
+			buttonList.add(ritual4 = new ButtonCategory(8, i + 10, b0 + 105, this, StatCollector.translateToLocal(AbyssalCraft.abyssalnomicon.getUnlocalizedName() + ".name"), hasRituals(4) ? AbyssalCraft.abyssalnomicon : AbyssalCraft.OC));
 		updateButtons();
 	}
 

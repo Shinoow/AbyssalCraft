@@ -59,11 +59,17 @@ public class EntityGatekeeperMinion extends EntityMob implements ICoraliumEntity
 	protected void applyEntityAttributes()
 	{
 		super.applyEntityAttributes();
-		getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(250.0D);
+
 		getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(64.0D);
 		getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setBaseValue(0.2D);
-		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.699D);
-		getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(18.0D);
+
+		if(AbyssalCraft.hardcoreMode){
+			getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(500.0D);
+			getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(36.0D);
+		} else {
+			getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(250.0D);
+			getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(18.0D);
+		}
 	}
 
 	@Override

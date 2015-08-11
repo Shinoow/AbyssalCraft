@@ -79,7 +79,7 @@ public class ClientProxy extends CommonProxy {
 		RenderingRegistry.registerEntityRenderingHandler(EntityGreaterDreadSpawn.class, new RenderGreaterDreadSpawn());
 		RenderingRegistry.registerEntityRenderingHandler(EntityLesserDreadbeast.class, new RenderLesserDreadbeast());
 		RenderingRegistry.registerEntityRenderingHandler(EntityDreadSlug.class, new RenderSnowball(AbyssalCraft.dreadfragment));
-		//		RenderingRegistry.registerEntityRenderingHandler(EntityLesserShoggoth.class, new RenderLesserShoggoth());
+		RenderingRegistry.registerEntityRenderingHandler(EntityLesserShoggoth.class, new RenderLesserShoggoth());
 
 		RenderingRegistry.registerEntityRenderingHandler(EntityAntiAbyssalZombie.class, new RenderAntiAbyssalZombie());
 		RenderingRegistry.registerEntityRenderingHandler(EntityAntiBat.class, new RenderAntiBat());

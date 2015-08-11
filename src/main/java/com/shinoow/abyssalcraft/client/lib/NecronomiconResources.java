@@ -48,7 +48,7 @@ public class NecronomiconResources {
 	public static final ResourceLocation OMOTHOL_WARDEN = new ResourceLocation("abyssalcraft", "textures/gui/necronomicon/missing.png"); //TODO: fix
 	public static final ResourceLocation MINION_OF_THE_GATEKEEPER = new ResourceLocation("abyssalcraft", "textures/gui/necronomicon/minion-of-the-gatekeeper.png");
 	public static final ResourceLocation JZAHAR = new ResourceLocation("abyssalcraft", "textures/gui/necronomicon/jzahar.png");
-	public static final ResourceLocation LESSER_SHOGGOTH = new ResourceLocation("abyssalcraft", "textures/gui/necronomicon/missing.png"); //TODO: fix
+	public static final ResourceLocation LESSER_SHOGGOTH = new ResourceLocation("abyssalcraft", "textures/gui/necronomicon/lesser-shoggoth.png");
 
 	//Dark Realm entities
 	public static final ResourceLocation SHADOW_CREATURE = new ResourceLocation("abyssalcraft", "textures/gui/necronomicon/shadow-creature.png");

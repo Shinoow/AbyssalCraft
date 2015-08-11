@@ -153,7 +153,6 @@ message.asorah.spawn=Haha, foolish human, I AM UNLEASHED!
 message.asorah.death.1=Asorah? ... Asorah?!
 message.asorah.death.2=YOU, you will pay for this mortal!
 message.asorah.death.3=Besides, you'll never get past The Dreadlands. Have fun digging your own grave.
-message.altar.error=This altar can only be used within the Abyssal Wasteland.
 message.dreadaltar.error.1=That only works in the Dreadlands
 message.dreadaltar.error.2=You need to be within the Dreadlands Mountains
 message.dreadaltar.error.3=That still only works in the Dreadlands
@@ -323,10 +322,7 @@ necronomicon.text.crafting.shadowgem.2=Shadow Fragments are dropped by Shadow Cr
 necronomicon.text.crafting.oblivionshard=A Shard of Oblivion is crafted with Shadow Gems and a Transmutation Gem.
 necronomicon.text.crafting.gk1=The Gateway Key is crafted with Blaze Rods, Coralium Pearls and a Oblivion Catalyst.
 necronomicon.text.crafting.necro_c=A Abyssal Wasteland Necronomicon is crafted with Coralium Plagued Flesh and a Necronomicon. It contains more knowledge.
-necronomicon.text.crafting.altar.1=An Altar is crafted with Gold Ingots, a Bucket, a Enchantment Table and a Transmutation Gem.
-necronomicon.text.crafting.altar.2=To summon Asorah, The Fallen, right-click it with a Liquid Coralium Bucket
 necronomicon.text.crafting.psdltracker=A Powerstone Tracker is crafted with Coralium Gems and a Eye of Ender.
-necronomicon.text.crafting.gk2=Asorah's Dreaded Gateway Key is crafted with a Gateway Key, a Dreadlands Infused Powerstone and a Transmutation Gem.
 necronomicon.text.crafting.necro_d=A Dreadlands Necronomicon is crafted with Dread Fragments and a Abyssal Wasteland Necronomicon.
 necronomicon.text.crafting.transmutator.1=A Transmutator is crafted with Coralium Bricks, Blocks of Refined Coralium, a Transutation Gem and a Liquid Coralium Bucket.
 necronomicon.text.crafting.transmutator.2=To obtain Coralium Bricks, you must pour Liquid Antimatter on Liquid Coralium, then harvest the stone formed from the Liquid Coralium. Then you must smelt the Coralium Stone for Coralium Ingots.
@@ -446,18 +442,6 @@ necronomicon.text.integration.nei.6=The Engraver uses Coin Engravings as "fuel",
 necronomicon.text.integration.nei.7=Recipes for the Materializer can also be displayed by pressing the recipe button. They have a special display screen showing the required Crystals.
 necronomicon.text.integration.nei.8=You can also see which Necronomicon you need in order to materialize the specific material. The Materializer uses no fuel.
 
-necronomicon.text.integration.tc.1=With Thaumcraft installed, you can now discover aspects in blocks, items and entities added in AbyssalCraft. There is also 2 new aspects, Coralos and Dreadia. You also get a Vis discount and the ability to view nodes when wearing the Depths Armor set.
-necronomicon.text.integration.tc.2=Infusion Enchanting has been added for all enchantments added in AbyssalCraft. Light Pierce requires 1 Glowstone Dust, 1 Arrow, and 10 Lux. Iron Wall requires 1 Block of Iron, 1 Cobblestone Wall, 10 Tutamen and 10 Terra.
-necronomicon.text.integration.tc.3=Coralium requires 1 Refined Coralium Ingot, 1 Coralium Plagued Flesh, 10 Coralos and 10 Potentia. Dread requires 1 Dreadium Ingot, 1 Dread Fragment, 10 Dreadia and 10 Potentia.
-necronomicon.text.integration.tc.4=There are also wand parts added in the integration. Wand Caps can be made from Abyssalnite, Refined Coralium, Dreadium and Ethaxium Nuggets. Wand Rods can be made from Darklands Oak Logs, Coralium Stone, Dreadlands Tree Logs and Omothol stone.
-necronomicon.text.integration.tc.5=Wands can be made by combining the Abyssalnite Cap with the Darklands Rod, Coralium Cap with the Coralium Rod, Dreadium Cap with the Dreadlands Rod, the Ethaxium Cap with the Omothol Rod and the Voidmetal Cap with the Omothol Rod.
-necronomicon.text.integration.tc.6=The Darklands Rod regenerates up to 10% of the wand's Vis inside Darklands biomes. The Dreadlands Rod does the same inside Dreadlands biomes. The Omothol Rod provides infinite Vis in Omothol (with the Ethaxium Cap) and the End (with the Voidmetal Cap).
-necronomicon.text.integration.tc.7=The Darklands and Dreadlands Wands are crafted like normal wands, through Arcane Crafting. The Coralium Wand is crafted through Infusion Crafting, with the Rod in the middle, the Caps in the other slots, 10 Perditio, 10 Coralos and 10 Tenebrae.
-necronomicon.text.integration.tc.8=The Ethaxium Empowered Omothol Wand is crafted through Infusion Crafting with the Rod in the middle, the Caps in the other slots, 10 Perditio, 10 Spiritus and 10 Tenebrae. The Voidmetal Aspected is the same, but with Alienis instead of Spiritus.
-
-necronomicon.text.integration.morph.1=With Morph installed, you can get morph abilities when morphing into AbyssalCraft entities. Additional abilities might be added, like plague immunity.
-necronomicon.text.integration.morph.2=When morphed into entities that has special models, your hand will be morphed into the hand used by that model in 1st person view.
-
 necronomicon.text.integration.invtweaks.1=With Inventory Tweaks installed, you can sort items kept in the Crystal Bags with sorting buttons like with any other supported container.
 
 necronomicon.text.rituals.info=Check the information section for information regarding rituals, or the other sections for information about available rituals. "Location" specifies where the ritual can be performed.
@@ -506,12 +490,6 @@ ac_biomeweight=Biome Weight
 ac_biomeweight.tooltip=Biome Weight Configuration
 ac_general=General
 ac_general.tooltip=General configuration
-ac_enchantment=Enchantments
-ac_enchantment.tooltip=Enchantment ID configuration
-ac_potion=Potions
-ac_potion.tooltip=Potion ID configuration
-ac_integration=Integrations
-ac_integration.tooltip=Integration configuration
 
 #Damagesources
 death.attack.coralium=%1$s died from the Coralium Plague
@@ -541,8 +519,6 @@ tooltip.corb.1=Cet item peut infuser les items d'Abyssalnite,
 tooltip.corb.2=ce qui leur ajoutera de nouveaux pouvoirs.
 tooltip.corb.3=Il peut aussi modifier des éléments(Blocs)
 tooltip.corb.4=de l'Overworld.
-tooltip.altar.1=Utilisé pour invoquer Asorah, Le Déchu,
-tooltip.altar.2=depuis le royaume des ténèbres.
 tooltip.odb=Explosif puissant, à utiliser à vos propres risques !
 tooltip.crystal=Molecular formula
 tooltip.portalplacerjzh.1=Can only be used within
@@ -691,6 +667,7 @@ tile.DEBs2.name=Dark Ethaxium Brick Doubleslab
 tile.DEBf.name=Dark Ethaxium Brick Fence
 tile.ritualaltar.name=Ritual Altar
 tile.ritualpedestal.name=Ritual Pedestal
+tile.shoggothBlock.name=Shoggoth Ooze
 
 #Items
 item.DEV_BLADE.name=La Lame du Développeur
@@ -891,6 +868,10 @@ item.crystalbag_small.name=Small Crystal Bag
 item.crystalbag_medium.name=Medium Crystal Bag
 item.crystalbag_large.name=Large Crystal Bag
 item.crystalbag_huge.name=Huge Crystal Bag
+item.nugget.abyssalnite.name=Abyssalnite Nugget
+item.nugget.coralium.name=Refined Coralium Nugget
+item.nugget.dreadium.name=Dreadium Nugget
+item.nugget.ethaxium.name=Ethaxium Nugget
 
 #Entities
 entity.abyssalcraft.depthsghoul.name=Goule des Profondeurs
@@ -927,10 +908,6 @@ entity.abyssalcraft.antiskeleton.name=Anti-Skeleton
 entity.abyssalcraft.antispider.name=Anti-Spider
 entity.abyssalcraft.antizombie.name=Anti-Zombie
 entity.abyssalcraft.lessershoggoth.name=Lesser Shoggoth
-entity.abyssalcraft.lessershoggoth.abyssal.name=Lesser Abyssal Shoggoth
-entity.abyssalcraft.lessershoggoth.dreaded.name=Lesser Dreaded Shoggoth
-entity.abyssalcraft.lessershoggoth.omothol.name=Lesser Omothol Shoggoth
-entity.abyssalcraft.lessershoggoth.dark.name=Lesser Shadow Shoggoth
 entity.abyssalcraft.shadowtitan.name=Shadow Titan
 entity.abyssalcraft.omotholwarden.name=Omothol Warden
 entity.abyssalcraft.jzaharminion.name=Minion of The Gatekeeper
@@ -952,32 +929,5 @@ enchantment.coralium=Coralium
 enchantment.dread=Dread
 enchantment.ironWall=Iron Wall
 enchantment.damage.shadow=Light Pierce
-
-#Thaumcraft integration
-item.nugget.abyssalnite.name=Abyssalnite Nugget
-item.nugget.coralium.name=Refined Coralium Nugget
-item.nugget.dreadium.name=Dreadium Nugget
-item.nugget.ethaxium.name=Ethaxium Nugget
-item.wandcap.abyssalnite.name=Abyssalnite Cap
-item.wandcap.coralium.name=Refined Coralium Cap
-item.wandcap.dreadium.name=Dreadium Cap
-item.wandcap.ethaxium.name=Ethaxium Cap
-item.wandcore.darklands.name=Darklands Oak Rod
-item.wandcore.coralium.name=Coralium Stone Rod
-item.wandcore.dreadlands.name=Dreadlands Wood Rod
-item.wandcore.omothol.name=Omothol Stone Rod
-item.Wand.abyssalnite.cap=Abyssalnite Bound
-item.Wand.darklands.rod=Darklands Oak
-item.Wand.coralium.cap=Coralium Empowered
-item.Wand.coralium.rod=Coralium Stone
-item.Wand.dreadium.cap=Dreadium Bound
-item.Wand.dreadlands.rod=Dreadlands Wood
-item.Wand.ethaxium.cap=Ethaxium Empowered
-item.Wand.omothol.rod=Omothol Stone
-
-itemGroup.acthaum=AbyssalCraft Thaumcraft Integration
-
-tc.aspect.coralos=Coralium
-tc.aspect.dreadia=Dread
 
 #Localization done, Shin out.

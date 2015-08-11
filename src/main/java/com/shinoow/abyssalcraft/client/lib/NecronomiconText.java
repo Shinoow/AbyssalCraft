@@ -114,10 +114,7 @@ public class NecronomiconText {
 	public static String CRAFTING_SHARD_OF_OBLIVION = translate("necronomicon.text.crafting.oblivionshard");
 	public static String CRAFTING_GATEWAY_KEY = translate("necronomicon.text.crafting.gk1");
 	public static String CRAFTING_NECRONOMICON_C = translate("necronomicon.text.crafting.necro_c");
-	public static String CRAFTING_ALTAR_1 = translate("necronomicon.text.crafting.altar.1");
-	public static String CRAFTING_ALTAR_2 = translate("necronomicon.text.crafting.altar.2");
 	public static String CRAFTING_POWERSTONE_TRACKER = translate("necronomicon.text.crafting.psdltracker");
-	public static String CRAFTING_ASORAH_GATEWAY_KEY = translate("necronomicon.text.crafting.gk2");
 	public static String CRAFTING_NECRONOMICON_D = translate("necronomicon.text.crafting.necro_d");
 	public static String CRAFTING_TRANSMUTATOR_1 = translate("necronomicon.text.crafting.transmutator.1");
 	public static String CRAFTING_TRANSMUTATOR_2 = translate("necronomicon.text.crafting.transmutator.2");
@@ -237,18 +234,6 @@ public class NecronomiconText {
 	public static String INTEGRATION_NEI_7 = translate("necronomicon.text.integration.nei.7");
 	public static String INTEGRATION_NEI_8 = translate("necronomicon.text.integration.nei.8");
 
-	public static String INTEGRATION_TC_1 = translate("necronomicon.text.integration.tc.1");
-	public static String INTEGRATION_TC_2 = translate("necronomicon.text.integration.tc.2");
-	public static String INTEGRATION_TC_3 = translate("necronomicon.text.integration.tc.3");
-	public static String INTEGRATION_TC_4 = translate("necronomicon.text.integration.tc.4");
-	public static String INTEGRATION_TC_5 = translate("necronomicon.text.integration.tc.5");
-	public static String INTEGRATION_TC_6 = translate("necronomicon.text.integration.tc.6");
-	public static String INTEGRATION_TC_7 = translate("necronomicon.text.integration.tc.7");
-	public static String INTEGRATION_TC_8 = translate("necronomicon.text.integration.tc.8");
-
-	public static String INTEGRATION_MORPH_1 = translate("necronomicon.text.integration.morph.1");
-	public static String INTEGRATION_MORPH_2 = translate("necronomicon.text.integration.morph.2");
-
 	public static String INTEGRATION_INVTWEAKS_1 = translate("necronomicon.text.integration.invtweaks.1");
 
 	public static String RITUAL_INFO = translate("necronomicon.text.rituals.info");
@@ -284,11 +269,10 @@ public class NecronomiconText {
 	public static String[] OVERWORLD_CRAFTING = {CRAFTING_CORALIUM_INFUSED_STONE_1, CRAFTING_CORALIUM_INFUSED_STONE_2,
 		CRAFTING_SHADOW_GEM_1, CRAFTING_SHADOW_GEM_2, CRAFTING_SHARD_OF_OBLIVION, "", CRAFTING_GATEWAY_KEY, "",
 		CRAFTING_NECRONOMICON_C, ""};
-	public static String[] ABYSSAL_WASTELAND_CRAFTING = {CRAFTING_ALTAR_1, CRAFTING_ALTAR_2, CRAFTING_POWERSTONE_TRACKER, "",
-		CRAFTING_ASORAH_GATEWAY_KEY, "", CRAFTING_NECRONOMICON_D, ""};
-	public static String[] DREADLANDS_CRAFTING = {CRAFTING_TRANSMUTATOR_1, CRAFTING_TRANSMUTATOR_2, CRAFTING_CRYSTALLIZER_1,
-		CRAFTING_CRYSTALLIZER_2, CRAFTING_DREAD_ALTAR_BOTTOM_1, CRAFTING_DREAD_ALTAR_BOTTOM_2, CRAFTING_DREAD_ALTAR_TOP, "",
-		CRAFTING_NECRONOMICON_O, ""};
+	public static String[] ABYSSAL_WASTELAND_CRAFTING = {CRAFTING_POWERSTONE_TRACKER, "", CRAFTING_TRANSMUTATOR_1, CRAFTING_TRANSMUTATOR_2,
+		CRAFTING_NECRONOMICON_D, ""};
+	public static String[] DREADLANDS_CRAFTING = {CRAFTING_CRYSTALLIZER_1, CRAFTING_CRYSTALLIZER_2, CRAFTING_DREAD_ALTAR_BOTTOM_1,
+		CRAFTING_DREAD_ALTAR_BOTTOM_2, CRAFTING_DREAD_ALTAR_TOP, "", CRAFTING_NECRONOMICON_O, ""};
 	public static String[] OMOTHOL_CRAFTING = {CRAFTING_LIFE_CRYSTAL_1, CRAFTING_LIFE_CRYSTAL_2, CRAFTING_ETHAXIUM_INGOT_1,
 		CRAFTING_ETHAXIUM_INGOT_2, CRAFTING_BLANK_ENGRAVING_1, CRAFTING_BLANK_ENGRAVING_2, CRAFTING_COIN, "", CRAFTING_ENGRAVER, "",
 		CRAFTING_CRYSTAL_BAG_1, CRAFTING_CRYSTAL_BAG_2, CRAFTING_MATERIALIZER_1, CRAFTING_MATERIALIZER_2, CRAFTING_ABYSSALNOMICON_1,
@@ -322,8 +306,6 @@ public class NecronomiconText {
 
 	public static String[] NEI_INTEGRATION = {INTEGRATION_NEI_1, INTEGRATION_NEI_2, INTEGRATION_NEI_3, INTEGRATION_NEI_4,
 		INTEGRATION_NEI_5, INTEGRATION_NEI_6, INTEGRATION_NEI_7, INTEGRATION_NEI_8};
-	public static String[] TC_INTEGRATION = {INTEGRATION_TC_1, INTEGRATION_TC_2, INTEGRATION_TC_3, INTEGRATION_TC_4,
-		INTEGRATION_TC_5, INTEGRATION_TC_6, INTEGRATION_TC_7, INTEGRATION_TC_8};
 
 	public static String WIP = translate("necronomicon.text.wip");
 
@@ -357,8 +339,6 @@ public class NecronomiconText {
 	public static String LABEL_INFORMATION_INTEGRATION = translate("necronomicon.information.integration");
 	public static String LABEL_INFORMATION_ENTITIES = translate("necronomicon.information.entities");
 	public static String LABEL_INTEGRATION_NEI = "Not Enough Items";
-	public static String LABEL_INTEGRATION_TC = "Thaumcraft";
-	public static String LABEL_INTEGRATION_MORPH = "Morph";
 	public static String LABEL_INTEGRATION_INVTWEAKS = "Inventory Tweaks";
 	public static String LABEL_OUTER_GODS = translate("necronomicon.information.outergods");
 	public static String LABEL_OTHER = translate("necronomicon.other");

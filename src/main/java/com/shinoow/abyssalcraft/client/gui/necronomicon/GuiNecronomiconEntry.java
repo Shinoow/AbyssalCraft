@@ -40,7 +40,7 @@ public class GuiNecronomiconEntry extends GuiNecronomicon {
 	private NecroData data;
 	private GuiNecronomicon parent;
 	private Item icon;
-	private boolean bool1, bool2, bool3, bool4, bool5;
+	private boolean bool1, bool2, bool3, bool4, bool5, bool6, bool7;
 
 	public GuiNecronomiconEntry(int bookType, NecroData nd, GuiNecronomicon gui, Item item){
 		super(bookType);
@@ -63,7 +63,7 @@ public class GuiNecronomiconEntry extends GuiNecronomicon {
 		buttonList.add(buttonPreviousPage = new ButtonNextPage(2, i + 18, b0 + 154, false));
 		if(data != null)
 			for(int n = 0; n < data.getPageData().length; n++)
-				buttonList.add(buttons[n] = new ButtonCategory(3 + n, i + 10, b0 + 30 + 25*n,this, data.getPageData()[n].getTitle(), icon));
+				buttonList.add(buttons[n] = new ButtonCategory(3 + n, i + 10, b0 + 20 + 17*n,this, data.getPageData()[n].getTitle(), icon));
 		updateButtons();
 	}
 
@@ -116,6 +116,14 @@ public class GuiNecronomiconEntry extends GuiNecronomicon {
 				bool5 = true;
 				isInfo = true;
 				drawButtons();
+			} else if(button.id == 8){
+				bool6 = true;
+				isInfo = true;
+				drawButtons();
+			} else if(button.id == 9){
+				bool7 = true;
+				isInfo = true;
+				drawButtons();
 			}
 			updateButtons();
 		}
@@ -144,6 +152,10 @@ public class GuiNecronomiconEntry extends GuiNecronomicon {
 			drawPageData(data.getPageData()[3]);
 		else if(bool5)
 			drawPageData(data.getPageData()[4]);
+		else if(bool6)
+			drawPageData(data.getPageData()[5]);
+		else if(bool7)
+			drawPageData(data.getPageData()[6]);
 		updateButtons();
 	}
 
@@ -171,25 +183,45 @@ public class GuiNecronomiconEntry extends GuiNecronomicon {
 			break;
 		}
 		if(currTurnup == 0)
-			addPage(page.getPageType(), page.getPages()[0], page.getPages()[1], icons[0], page.getPages().length, 1);
+			if(page.getPages().length >= 2)
+				addPage(page.getPageType(), page.getPages()[0], page.getPages()[1], icons[0], page.getPages().length, 1);
+			else addPage(page.getPageType(), page.getPages()[0], "", icons[0], page.getPages().length, 1);
 		else if(currTurnup == 1 && page.getPageAmount() >= 2)
-			addPage(page.getPageType(), page.getPages()[2], page.getPages()[3], icons[1], page.getPages().length, 3);
+			if(page.getPages().length >= 4)
+				addPage(page.getPageType(), page.getPages()[2], page.getPages()[3], icons[1], page.getPages().length, 3);
+			else addPage(page.getPageType(), page.getPages()[2], "", icons[1], page.getPages().length, 3);
 		else if(currTurnup == 2 && page.getPageAmount() >= 3)
-			addPage(page.getPageType(), page.getPages()[4], page.getPages()[5], icons[2], page.getPages().length, 5);
+			if(page.getPages().length >= 6)
+				addPage(page.getPageType(), page.getPages()[4], page.getPages()[5], icons[2], page.getPages().length, 5);
+			else addPage(page.getPageType(), page.getPages()[4], "", icons[2], page.getPages().length, 5);
 		else if(currTurnup == 3 && page.getPageAmount() >= 4)
-			addPage(page.getPageType(), page.getPages()[6], page.getPages()[7], icons[3], page.getPages().length, 7);
+			if(page.getPages().length >= 8)
+				addPage(page.getPageType(), page.getPages()[6], page.getPages()[7], icons[3], page.getPages().length, 7);
+			else addPage(page.getPageType(), page.getPages()[6], "", icons[3], page.getPages().length, 7);
 		else if(currTurnup == 4 && page.getPageAmount() >= 5)
-			addPage(page.getPageType(), page.getPages()[8], page.getPages()[9], icons[4], page.getPages().length, 9);
+			if(page.getPages().length >= 10)
+				addPage(page.getPageType(), page.getPages()[8], page.getPages()[9], icons[4], page.getPages().length, 9);
+			else addPage(page.getPageType(), page.getPages()[8], "", icons[4], page.getPages().length, 9);
 		else if(currTurnup == 5 && page.getPageAmount() >= 6)
-			addPage(page.getPageType(), page.getPages()[10], page.getPages()[11], icons[5], page.getPages().length, 11);
+			if(page.getPages().length >= 12)
+				addPage(page.getPageType(), page.getPages()[10], page.getPages()[11], icons[5], page.getPages().length, 11);
+			else addPage(page.getPageType(), page.getPages()[10], "", icons[5], page.getPages().length, 11);
 		else if(currTurnup == 6 && page.getPageAmount() >= 7)
-			addPage(page.getPageType(), page.getPages()[12], page.getPages()[13], icons[6], page.getPages().length, 13);
+			if(page.getPages().length >= 14)
+				addPage(page.getPageType(), page.getPages()[12], page.getPages()[13], icons[6], page.getPages().length, 13);
+			else addPage(page.getPageType(), page.getPages()[12], "", icons[6], page.getPages().length, 13);
 		else if(currTurnup == 7 && page.getPageAmount() >= 8)
-			addPage(page.getPageType(), page.getPages()[14], page.getPages()[15], icons[7], page.getPages().length, 15);
+			if(page.getPages().length >= 16)
+				addPage(page.getPageType(), page.getPages()[14], page.getPages()[15], icons[7], page.getPages().length, 15);
+			else addPage(page.getPageType(), page.getPages()[14], "", icons[7], page.getPages().length, 15);
 		else if(currTurnup == 8 && page.getPageAmount() >= 9)
-			addPage(page.getPageType(), page.getPages()[16], page.getPages()[17], icons[8], page.getPages().length, 17);
+			if(page.getPages().length >= 18)
+				addPage(page.getPageType(), page.getPages()[16], page.getPages()[17], icons[8], page.getPages().length, 17);
+			else addPage(page.getPageType(), page.getPages()[16], "", icons[8], page.getPages().length, 17);
 		else if(currTurnup == 9 && page.getPageAmount() >= 10)
-			addPage(page.getPageType(), page.getPages()[18], page.getPages()[19], icons[9], page.getPages().length, 19);
+			if(page.getPages().length >= 20)
+				addPage(page.getPageType(), page.getPages()[18], page.getPages()[19], icons[9], page.getPages().length, 19);
+			else addPage(page.getPageType(), page.getPages()[18], "", icons[9], page.getPages().length, 19);
 	}
 
 	private void addPage(PageType pageType, String text1, String text2, Object icon, int pageAmount, int limit){

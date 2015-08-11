@@ -39,7 +39,6 @@ public class BlockAltar extends BlockContainer {
 		super(Material.rock);
 		setHarvestLevel("pickaxe", 3);
 		setBlockBounds(0.1F, 0.0F, 0.1F, 0.9F, 0.7F, 0.9F);
-
 	}
 
 	@Override
@@ -56,44 +55,6 @@ public class BlockAltar extends BlockContainer {
 	@Override
 	public int getRenderType() {
 		return -2;
-	}
-
-	@Override
-	public boolean onBlockActivated(World par1World, int par2, int par3, int par4, EntityPlayer par5EntityPlayer, int par6, float par7, float par8, float par9) {
-		ItemStack stack = par5EntityPlayer.inventory.getCurrentItem();
-
-		if(par1World.provider.dimensionId == AbyssalCraft.configDimId1){
-			if(par1World.isRemote && stack != null && stack.getItem() == AbyssalCraft.Cbucket)
-				SpecialTextUtil.AsorahText(StatCollector.translateToLocal("message.asorah.spawn"));
-			if(!par1World.isRemote && stack != null && stack.getItem() == AbyssalCraft.Cbucket){
-				if (stack.stackSize-- == 1)
-					par5EntityPlayer.inventory.setInventorySlotContents(par5EntityPlayer.inventory.currentItem, new ItemStack(Items.bucket));
-				EntityDragonBoss EntityDragonBoss = new EntityDragonBoss(par1World);
-				EntityDragonBoss.setLocationAndAngles(par2, par3, par4, MathHelper.wrapAngleTo180_float(par1World.rand.nextFloat() * 360.0F), 10.0F);
-				par1World.spawnEntityInWorld(EntityDragonBoss);
-				par5EntityPlayer.addPotionEffect(new PotionEffect(Potion.confusion.id, 200));
-				removedByPlayer(par1World, par5EntityPlayer, par2, par3, par4, false);
-				par1World.spawnParticle("hugeexplosion", maxX, maxY, maxZ, 0.0D, 0.0D, 0.0D);
-				par5EntityPlayer.addStat(AbyssalCraft.summonAsorah, 1);
-			}
-		}
-		else if(par1World.isRemote)
-			FMLClientHandler.instance().getClient().ingameGUI.getChatGUI().printChatMessage(new ChatComponentText(StatCollector.translateToLocal("message.altar.error")));
-
-		return false;
-	}
-
-	@Override
-	public void randomDisplayTick(World par1World, int par2, int par3, int par4, Random par5Random) {
-		super.randomDisplayTick(par1World, par2, par3, par4, par5Random);
-
-		if(AbyssalCraft.particleBlock)
-			if (par5Random.nextInt(3) == 0) {
-				par1World.spawnParticle("smoke", par2 + 0.75F, par3 + 0.7F, par4 + 0.75F, 0.0D, 0.0D, 0.0D);
-				par1World.spawnParticle("smoke", par2 + 0.2F, par3 + 0.7F, par4 + 0.75F, 0.0D, 0.0D, 0.0D);
-				par1World.spawnParticle("smoke", par2 + 0.2F, par3 + 0.7F, par4 + 0.2F, 0.0D, 0.0D, 0.0D);
-				par1World.spawnParticle("smoke", par2 + 0.75F, par3 + 0.7F, par4 + 0.2F, 0.0D, 0.0D, 0.0D);
-			}
 	}
 
 	@Override

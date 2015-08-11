@@ -12,9 +12,11 @@
 package com.shinoow.abyssalcraft.api.recipe;
 
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.shinoow.abyssalcraft.api.APIUtils;
 import com.shinoow.abyssalcraft.common.items.ItemCrystalBag;
@@ -45,10 +47,10 @@ public class MaterializerRecipes {
 	public void materialize(ItemStack[] input, ItemStack output, int level){
 
 		for(ItemStack item : input)
-			if(APIUtils.isCrystal(item)) throw new ClassCastException("All of the input items has to be Crystals!");
+			if(!APIUtils.isCrystal(item)) throw new ClassCastException("All of the input items has to be Crystals!");
 		materializationList.put(input, output);
 		levelList.put(output, level);
-		experienceList.put(output, Float.valueOf(level/2));
+		experienceList.put(output, Float.valueOf(level == 0 ? 0.25F : level/2));
 	}
 
 	/**
@@ -74,7 +76,7 @@ public class MaterializerRecipes {
 	public ItemStack getMaterializationResult(ItemStack stack, int book){
 
 		NBTTagList items = new NBTTagList();
-		ItemStack[] inventory;
+		ItemStack[] inventory = null;
 
 		if(stack.getItem() instanceof ItemCrystalBag){
 			if(stack.stackTagCompound == null)
@@ -91,6 +93,21 @@ public class MaterializerRecipes {
 					inventory[slot] = ItemStack.loadItemStackFromNBT(item);
 				}
 			}
+
+			Iterator<Entry<ItemStack[], ItemStack>> iterator = materializationList.entrySet().iterator();
+			Entry<ItemStack[], ItemStack> entry;
+
+			do
+			{
+				if(!iterator.hasNext())
+					return null;
+
+				entry = iterator.next();
+			}
+			while(!arrayContainsOtherArray(inventory, entry.getKey()));
+
+			return entry.getValue();
+
 		}
 
 		return null;
@@ -99,6 +116,21 @@ public class MaterializerRecipes {
 	private boolean areStacksEqual(ItemStack par1ItemStack, ItemStack par2ItemStack)
 	{
 		return par2ItemStack.getItem() == par1ItemStack.getItem() && (par2ItemStack.getItemDamage() == OreDictionary.WILDCARD_VALUE || par2ItemStack.getItemDamage() == par1ItemStack.getItemDamage());
+	}
+
+	private boolean arrayContainsOtherArray(ItemStack[] array1, ItemStack[] array2){
+		List<ItemStack> inventory = Lists.newArrayList(array1);
+		List<ItemStack> recipe = Lists.newArrayList(array2);
+
+		if(inventory.size() >= recipe.size())
+			for(ItemStack invItem : inventory)
+				for(ItemStack recipeItem : recipe)
+					if(areStacksEqual(invItem, recipeItem) && invItem.stackSize >= recipeItem.stackSize){
+						recipe.remove(recipeItem);
+						break;
+					}
+
+		return recipe.isEmpty();
 	}
 
 	public Map<ItemStack[], ItemStack> getMaterializationList()

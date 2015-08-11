@@ -53,7 +53,7 @@ public class AbyssalCraftClientEventHooks {
 			GL11.glRotatef(f2, 1.0F, 0.0F, 0.0F);
 			GL11.glTranslatef(0, -0.22F, 0);
 			GL11.glScalef(1, 1, 1);
-			model.renderTentacles(0.0625F);
+			model.renderTentacles(0.0625F, player);
 			GL11.glFrontFace(GL11.GL_CCW);
 			GL11.glPopMatrix();
 		}

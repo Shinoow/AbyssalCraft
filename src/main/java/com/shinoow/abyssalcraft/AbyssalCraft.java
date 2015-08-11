@@ -12,6 +12,8 @@
 package com.shinoow.abyssalcraft;
 
 import java.io.*;
+import java.lang.reflect.Field;
+import java.lang.reflect.Modifier;
 import java.net.*;
 import java.util.*;
 
@@ -75,7 +77,7 @@ import cpw.mods.fml.common.registry.*;
 @Mod(modid = AbyssalCraft.modid, name = AbyssalCraft.name, version = AbyssalCraft.version, dependencies = "required-after:Forge@[forgeversion,);after:Thaumcraft", useMetadata = false, guiFactory = "com.shinoow.abyssalcraft.client.config.ACGuiFactory")
 public class AbyssalCraft {
 
-	public static final String version = "1.8.8b";
+	public static final String version = "1.8.8";
 	public static final String modid = "abyssalcraft";
 	public static final String name = "AbyssalCraft";
 
@@ -142,11 +144,11 @@ public class AbyssalCraft {
 	AbyCopOre, AbyPCorOre, AbyLCorOre, solidLava, ethaxium, ethaxiumbrick, ethaxiumpillar, ethaxiumstairs,
 	ethaxiumslab1, ethaxiumslab2, ethaxiumfence, omotholstone, ethaxiumblock, omotholportal, omotholfire,
 	engraver, house, materializer, darkethaxiumbrick, darkethaxiumpillar, darkethaxiumstairs,
-	darkethaxiumslab1, darkethaxiumslab2, darkethaxiumfence, ritualaltar, ritualpedestal;
+	darkethaxiumslab1, darkethaxiumslab2, darkethaxiumfence, ritualaltar, ritualpedestal, shoggothBlock;
 
 	//Overworld biomes
 	public static BiomeGenBase Darklands, DarklandsForest, DarklandsPlains, DarklandsHills,
-	DarklandsMountains, corswamp, corocean;
+	DarklandsMountains, corswamp;
 	//Abyssal Wastelands biome
 	public static BiomeGenBase Wastelands;
 	//Dreadlands biomes
@@ -163,7 +165,7 @@ public class AbyssalCraft {
 	cbrick, cudgel, carbonCluster, denseCarbonCluster, methane, nitre, sulfur, portalPlacerJzh,
 	tinIngot, copperIngot, lifeCrystal, shoggothFlesh, eldritchScale, omotholFlesh, necronomicon,
 	necronomicon_cor, necronomicon_dre, necronomicon_omt, abyssalnomicon, crystalbag_s, crystalbag_m,
-	crystalbag_l, crystalbag_h;
+	crystalbag_l, crystalbag_h, nugget;
 	//coin stuff
 	public static Item coin, cthulhuCoin, elderCoin, jzaharCoin, engravingBlank, engravingCthulhu, engravingElder, engravingJzahar;
 	//crystals (real elements)
@@ -279,14 +281,14 @@ public class AbyssalCraft {
 	//Biome Ids
 	public static int configBiomeId1, configBiomeId2, configBiomeId3, configBiomeId4,
 	configBiomeId5, configBiomeId6, configBiomeId7, configBiomeId8, configBiomeId9,
-	configBiomeId10, configBiomeId11, configBiomeId12, configBiomeId13, configBiomeId14;
+	configBiomeId10, configBiomeId11, configBiomeId13, configBiomeId14;
 
-	public static boolean dark1, dark2, dark3, dark4, dark5, coralium1, coralium2;
-	public static boolean darkspawn1, darkspawn2, darkspawn3, darkspawn4, darkspawn5, coraliumspawn1, coraliumspawn2;
+	public static boolean dark1, dark2, dark3, dark4, dark5, coralium1;
+	public static boolean darkspawn1, darkspawn2, darkspawn3, darkspawn4, darkspawn5, coraliumspawn1;
 	public static int darkWeight1, darkWeight2, darkWeight3, darkWeight4, darkWeight5, coraliumWeight;
 
-	public static boolean shouldSpread, shouldInfect, breakLogic, destroyOcean, demonPigFire, updateC, darkness, tcitems,
-	particleBlock, particleEntity;
+	public static boolean shouldSpread, shouldInfect, breakLogic, destroyOcean, demonPigFire, updateC, darkness,
+	particleBlock, particleEntity, hardcoreMode;
 	public static int evilPigSpawnRate;
 
 	static int startEntityId = 300;
@@ -317,8 +319,6 @@ public class AbyssalCraft {
 
 		cfg = new Configuration(event.getSuggestedConfigurationFile());
 		syncConfig();
-		if(Potion.potionTypes.length >= 128)
-			ACLogger.info("The potion array has already been extended (%d), so we're not doing it again.", Potion.potionTypes.length);
 		AbyssalCraftAPI.initPotionReflection();
 
 		if(!FluidRegistry.isFluidRegistered("liquidcoralium")){
@@ -383,7 +383,7 @@ public class AbyssalCraft {
 		corblock = new IngotBlock(5).setBlockName("BOC").setBlockTextureName(modid + ":" + "BOC");
 		PSDL = new BlockPSDL().setHardness(50.0F).setResistance(3000F).setCreativeTab(tabDecoration).setBlockName("PSDL").setBlockTextureName(modid + ":" + "PSDL");
 		AbyCorOre = new BlockACOre(3, 3.0F, 6.0F).setBlockName("ACorO").setBlockTextureName(modid + ":" + "ACorO");
-		Altar = new BlockAltar().setStepSound(Block.soundTypeStone).setHardness(4.0F).setResistance(300.0F).setCreativeTab(tabDecoration).setBlockName("Altar").setBlockTextureName(modid + ":" + "Altar");
+		Altar = new BlockAltar().setStepSound(Block.soundTypeStone).setHardness(4.0F).setResistance(300.0F).setBlockName("Altar").setBlockTextureName(modid + ":" + "Altar");
 		Abybutton = new BlockACButton(false, "pickaxe", 2, "AS").setHardness(0.8F).setResistance(12.0F).setBlockName("ASbb").setBlockTextureName(modid + ":" + "AS");
 		Abypplate = new BlockACPressureplate("AS", Material.rock, BlockACPressureplate.Sensitivity.mobs, "pickaxe", 2).setHardness(0.8F).setResistance(12.0F).setStepSound(Block.soundTypeStone).setBlockName("ASpp").setBlockTextureName(modid + ":" + "AS");
 		DSBfence = new BlockACFence("DSBf", Material.rock).setHardness(1.65F).setResistance(12.0F).setStepSound(Block.soundTypeStone).setBlockName("DSBf");
@@ -466,6 +466,7 @@ public class AbyssalCraft {
 		darkethaxiumfence = new BlockACFence("DEB", Material.rock, "pickaxe", 8).setHardness(150.0F).setResistance(Float.MAX_VALUE).setStepSound(Block.soundTypeStone).setBlockName("DEBf");
 		ritualaltar = new BlockRitualAltar().setBlockName("ritualaltar");
 		ritualpedestal = new BlockRitualPedestal().setBlockName("ritualpedestal");
+		shoggothBlock = new BlockShoggothOoze().setBlockName("shoggothBlock").setBlockTextureName(modid + ":" + "shoggothOoze");
 
 		//Biome
 		Darklands = new BiomeGenDarklands(configBiomeId1).setColor(522674).setBiomeName("Darklands");
@@ -479,7 +480,6 @@ public class AbyssalCraft {
 		DarklandsHills = new BiomeGenDarklandsHills(configBiomeId9).setColor(522674).setBiomeName("Darklands Highland");
 		DarklandsMountains = new BiomeGenDarklandsMountains(configBiomeId10).setColor(522674).setBiomeName("Darklands Mountains").setDisableRain();
 		corswamp = new BiomeGenCorSwamp(configBiomeId11).setColor(522674).setBiomeName("Coralium Infested Swamp");
-		corocean = new BiomeGenCorOcean(configBiomeId12).setColor(522674).setBiomeName("Coralium Infested Ocean");
 		omothol = new BiomeGenOmothol(configBiomeId13).setColor(5522674).setBiomeName("Omothol").setDisableRain();
 		darkRealm = new BiomeGenDarkRealm(configBiomeId14).setColor(522674).setBiomeName("Dark Realm").setDisableRain();
 
@@ -525,6 +525,7 @@ public class AbyssalCraft {
 		crystalbag_m = new ItemCrystalBag("crystalbag_medium");
 		crystalbag_l = new ItemCrystalBag("crystalbag_large");
 		crystalbag_h = new ItemCrystalBag("crystalbag_huge");
+		nugget = new ItemNugget();
 
 		//Ethaxium
 		ethaxium_brick = new ItemACBasic("EB");
@@ -723,14 +724,14 @@ public class AbyssalCraft {
 		GameRegistry.registerTileEntity(TileEntityRitualAltar.class, "tileEntityRitualAltar");
 		GameRegistry.registerTileEntity(TileEntityRitualPedestal.class, "tileEntityRitualPedestal");
 
-		Cplague = new PotionCplague(AbyssalCraftAPI.potionId1, true, 0x00FFFF).setIconIndex(1, 0).setPotionName("potion.Cplague");
+		Cplague = new PotionCplague(getNextAvailablePotionId(), true, 0x00FFFF).setIconIndex(1, 0).setPotionName("potion.Cplague");
 		AbyssalCraftAPI.addPotionRequirements(Cplague.id, "0 & 1 & !2 & 3 & 0+6");
 		crystalCoralium.setPotionEffect("+0+1-2+3&4+4+13");
-		Dplague = new PotionDplague(AbyssalCraftAPI.potionId2, true, 0xAD1313).setIconIndex(1, 0).setPotionName("potion.Dplague");
+		Dplague = new PotionDplague(getNextAvailablePotionId(), true, 0xAD1313).setIconIndex(1, 0).setPotionName("potion.Dplague");
 		AbyssalCraftAPI.addPotionRequirements(Dplague.id, "0 & 1 & 2 & 3 & 2+6");
 		AbyssalCraftAPI.addPotionAmplifiers(Dplague.id, "5");
 		crystalDreadium.setPotionEffect("0+1+2+3+13&4-4");
-		antiMatter = new PotionAntimatter(AbyssalCraftAPI.potionId3, true, 0xFFFFFF).setIconIndex(1, 0).setPotionName("potion.Antimatter");
+		antiMatter = new PotionAntimatter(getNextAvailablePotionId(), true, 0xFFFFFF).setIconIndex(1, 0).setPotionName("potion.Antimatter");
 		AbyssalCraftAPI.addPotionRequirements(antiMatter.id, "0 & 1 & 2 & !3 & 2+6");
 		antibucket.setPotionEffect("0+1+2-3+13&4-4");
 		crystalSulfur.setPotionEffect(PotionHelper.spiderEyeEffect);
@@ -738,10 +739,19 @@ public class AbyssalCraft {
 		crystalHydrogen.setPotionEffect("-0-1+2+3&4-4+13");
 		crystalNitrogen.setPotionEffect("-0+1-2+3&4-4+13");
 
-		coraliumE = new EnchantmentWeaponInfusion(AbyssalCraftAPI.enchId1, 2, "coralium");
-		dreadE = new EnchantmentWeaponInfusion(AbyssalCraftAPI.enchId2, 2, "dread");
-		lightPierce = new EnchantmentLightPierce(AbyssalCraftAPI.enchId3);
-		ironWall = new EnchantmentIronWall(AbyssalCraftAPI.enchId4, 2);
+		coraliumE = new EnchantmentWeaponInfusion(getNextAvailableEnchantmentId(), 2, "coralium");
+		dreadE = new EnchantmentWeaponInfusion(getNextAvailableEnchantmentId(), 2, "dread");
+		lightPierce = new EnchantmentLightPierce(getNextAvailableEnchantmentId());
+		ironWall = new EnchantmentIronWall(getNextAvailableEnchantmentId(), 2);
+
+		AbyssalCraftAPI.enchId1 = coraliumE.effectId;
+		AbyssalCraftAPI.enchId2 = dreadE.effectId;
+		AbyssalCraftAPI.enchId3 = lightPierce.effectId;
+		AbyssalCraftAPI.enchId4 = ironWall.effectId;
+
+		AbyssalCraftAPI.potionId1 = Cplague.id;
+		AbyssalCraftAPI.potionId2 = Dplague.id;
+		AbyssalCraftAPI.potionId3 = antiMatter.id;
 
 		//Block Register
 		GameRegistry.registerBlock(Darkstone, "darkstone");
@@ -788,7 +798,7 @@ public class AbyssalCraft {
 		GameRegistry.registerBlock(corblock, ItemBlockColorName.class, "corblock");
 		GameRegistry.registerBlock(PSDL, "psdl");
 		GameRegistry.registerBlock(AbyCorOre, "abycorore");
-		GameRegistry.registerBlock(Altar, ItemAltar.class, "altar");
+		GameRegistry.registerBlock(Altar, "altar");
 		GameRegistry.registerBlock(Abybutton, ItemBlockColorName.class, "abybutton");
 		GameRegistry.registerBlock(Abypplate, ItemBlockColorName.class, "abypplate");
 		GameRegistry.registerBlock(DSBfence, "dsbfence");
@@ -870,6 +880,7 @@ public class AbyssalCraft {
 		GameRegistry.registerBlock(darkethaxiumfence, ItemBlockColorName.class, "darkethaxiumbrickfence");
 		GameRegistry.registerBlock(ritualaltar, ItemRitualBlock.class, "ritualaltar");
 		GameRegistry.registerBlock(ritualpedestal, ItemRitualBlock.class, "ritualpedestal");
+		GameRegistry.registerBlock(shoggothBlock, "shoggothblock");
 
 		//Item Register
 		GameRegistry.registerItem(devsword, "devsword");
@@ -1064,7 +1075,8 @@ public class AbyssalCraft {
 		GameRegistry.registerItem(crystalbag_m, "crystalbag_medium");
 		GameRegistry.registerItem(crystalbag_l, "crystalbag_large");
 		GameRegistry.registerItem(crystalbag_h, "crystalbag_huge");
-		//		GameRegistry.registerItem(shoggothFlesh, "shoggothflesh");
+		GameRegistry.registerItem(shoggothFlesh, "shoggothflesh");
+		GameRegistry.registerItem(nugget, "ingotnugget");
 		//		GameRegistry.registerItem(shadowPlate, "shadowplate");
 
 		AbyssalCraftAPI.setRepairItems();
@@ -1104,10 +1116,6 @@ public class AbyssalCraft {
 		}
 		if(coralium1 == true)
 			registerBiomeWithTypes(corswamp, coraliumWeight, BiomeType.WARM, Type.SWAMP);
-		if(coralium2 == true){
-			BiomeDictionary.registerBiomeType(corocean, Type.WATER);
-			BiomeManager.oceanBiomes.add(corocean);
-		}
 		if(darkspawn1 == true)
 			BiomeManager.addSpawnBiome(Darklands);
 		if(darkspawn2 == true)
@@ -1120,8 +1128,6 @@ public class AbyssalCraft {
 			BiomeManager.addSpawnBiome(DarklandsMountains);
 		if(coraliumspawn1 == true)
 			BiomeManager.addSpawnBiome(corswamp);
-		if(coraliumspawn2 == true)
-			BiomeManager.addSpawnBiome(corocean);
 
 		BiomeDictionary.registerBiomeType(Wastelands, Type.DEAD);
 		BiomeDictionary.registerBiomeType(Dreadlands, Type.DEAD);
@@ -1145,10 +1151,10 @@ public class AbyssalCraft {
 
 		registerEntityWithEgg(EntityEvilpig.class, "evilpig", 26, 80, 3, true, 15771042, 14377823);
 		EntityRegistry.addSpawn(EntityEvilpig.class, evilPigSpawnRate, 1, 3, EnumCreatureType.creature, new BiomeGenBase[] {
-			BiomeGenBase.taiga, BiomeGenBase.plains, BiomeGenBase.forest, BiomeGenBase.savanna,
-			BiomeGenBase.beach, BiomeGenBase.extremeHills, BiomeGenBase.jungle, BiomeGenBase.savannaPlateau,
-			BiomeGenBase.swampland, BiomeGenBase.icePlains, BiomeGenBase.birchForest,
-			BiomeGenBase.birchForestHills, BiomeGenBase.roofedForest});
+				BiomeGenBase.taiga, BiomeGenBase.plains, BiomeGenBase.forest, BiomeGenBase.savanna,
+				BiomeGenBase.beach, BiomeGenBase.extremeHills, BiomeGenBase.jungle, BiomeGenBase.savannaPlateau,
+				BiomeGenBase.swampland, BiomeGenBase.icePlains, BiomeGenBase.birchForest,
+				BiomeGenBase.birchForestHills, BiomeGenBase.roofedForest});
 
 		registerEntityWithEgg(EntityAbyssalZombie.class , "abyssalzombie", 27, 80, 3, true, 0x36A880, 0x052824);
 		EntityRegistry.addSpawn(EntityAbyssalZombie.class, 10, 1, 3, EnumCreatureType.monster, BiomeDictionary.getBiomesForType(Type.WATER));
@@ -1184,7 +1190,7 @@ public class AbyssalCraft {
 
 		registerEntityWithEgg(EntityDemonPig.class, "demonpig", 41, 80, 3, true, 15771042, 14377823);
 		EntityRegistry.addSpawn(EntityDemonPig.class, 30, 1, 3, EnumCreatureType.monster, new BiomeGenBase[] {
-			BiomeGenBase.hell});
+				BiomeGenBase.hell});
 
 		registerEntityWithEgg(EntitySkeletonGoliath.class, "gskeleton", 42, 80, 3, true, 0xD6D6C9, 0xC6C7AD);
 
@@ -1234,8 +1240,14 @@ public class AbyssalCraft {
 
 		EntityRegistry.registerModEntity(EntityDreadSlug.class, "DreadSlug", 65, this, 64, 10, true);
 
-		//		registerEntityWithEgg(EntityLesserShoggoth.class, "lessershoggoth", 66, 80, 3, true, 0x133133, 0x342122);
-		//
+		registerEntityWithEgg(EntityLesserShoggoth.class, "lessershoggoth", 66, 80, 3, true, 0x133133, 0x342122);
+		EntityRegistry.addSpawn(EntityLesserShoggoth.class, 3, 1, 1, EnumCreatureType.monster, BiomeDictionary.getBiomesForType(Type.WATER));
+		EntityRegistry.addSpawn(EntityLesserShoggoth.class, 3, 1, 1, EnumCreatureType.monster, BiomeDictionary.getBiomesForType(Type.BEACH));
+		EntityRegistry.addSpawn(EntityLesserShoggoth.class, 3, 1, 1, EnumCreatureType.monster, BiomeDictionary.getBiomesForType(Type.SWAMP));
+		EntityRegistry.addSpawn(EntityLesserShoggoth.class, 3, 1, 1, EnumCreatureType.monster, new BiomeGenBase[]{
+				AbyssalCraft.Wastelands, AbyssalCraft.Dreadlands, AbyssalCraft.AbyDreadlands, AbyssalCraft.MountainDreadlands,
+				AbyssalCraft.ForestDreadlands, AbyssalCraft.omothol, AbyssalCraft.darkRealm});
+
 		//		registerEntityWithEgg(EntityShadowTitan.class, "shadowtitan", 67, 80, 3, true, 0, 0xFFFFFF);
 		//
 		//		registerEntityWithEgg(EntityOmotholWarden.class, "omotholwarden", 68, 80, 3, true, 0x133133, 0x342122);
@@ -1629,6 +1641,21 @@ public class AbyssalCraft {
 				} catch (ClassNotFoundException e) {
 					ACLogger.imcWarning("Could not find class %s", imcMessage.getStringValue());
 				}
+			else if(imcMessage.key.equals("shoggothBlacklist")){
+				boolean failed = false;
+				if(!imcMessage.isItemStackMessage())
+					failed = true;
+				else{
+					if(Block.getBlockFromItem(imcMessage.getItemStackValue().getItem()) != null){
+						if(!senders.contains(imcMessage.getSender()))
+							senders.add(imcMessage.getSender());
+						AbyssalCraftAPI.addShoggothBlacklist(Block.getBlockFromItem(imcMessage.getItemStackValue().getItem()));
+					} else failed = true;
+				}
+				if(failed)
+					ACLogger.imcWarning("Received invalid Shoggoth Block Blacklist from mod %s!", imcMessage.getSender());
+				else ACLogger.imcInfo("Received Shoggoth Block Blacklist from mod %s", imcMessage.getSender());
+			}
 			else ACLogger.imcWarning("Received an IMC Message with unknown key (%s) from mod %s!", imcMessage.key, imcMessage.getSender());
 		if(!senders.isEmpty())
 			ACLogger.imcInfo("Recieved messages from the following mods: %s", senders);
@@ -1663,7 +1690,6 @@ public class AbyssalCraft {
 		configBiomeId9 = cfg.get("biomes", "Darklands Highland", 108, "Plateau version of the Darklands Plains biome.", 0, 255).getInt();
 		configBiomeId10 = cfg.get("biomes", "Darklands Mountains", 109, "Mountain equivalent to the Darklands biome.", 0, 255).getInt();
 		configBiomeId11 = cfg.get("biomes", "Coralium Infested Swamp", 110, "A swamp biome infested with Coralium.", 0, 255).getInt();
-		configBiomeId12 = cfg.get("biomes", "Coralium Infested Ocean", 111, "A ocean biome infested with Coralium.", 0, 255).getInt();
 		configBiomeId13 = cfg.get("biomes", "Omothol", 112, "Main biome in Omothol, the realm of J'zahar.", 0, 255).getInt();
 		configBiomeId14 = cfg.get("biomes", "Dark Realm", 113, "Dark Realm biome, made out of Darkstone.", 0, 255).getInt();
 
@@ -1673,7 +1699,6 @@ public class AbyssalCraft {
 		dark4 = cfg.get("biome_generation", "Darklands Highland", true, "Set true for the Darklands Highland biome to generate.").getBoolean();
 		dark5 = cfg.get("biome_generation", "Darklands Mountain", true, "Set true for the Darklands Mountain biome to generate.").getBoolean();
 		coralium1 = cfg.get("biome_generation", "Coralium Infested Swamp", true, "Set true for the Coralium Infested Swamp to generate.").getBoolean();
-		coralium2 = cfg.get("biome_generation", "Coralium Infested Ocean", true, "Set true for the Coralium Infested Ocean to generate.").getBoolean();
 
 		darkspawn1 = cfg.get("biome_spawning", "Darklands", true, "If true, you can spawn in the Darklands biome.").getBoolean();
 		darkspawn2 = cfg.get("biome_spawning", "Darklands Forest", true, "If true, you can spawn in the Darklands Forest biome.").getBoolean();
@@ -1681,7 +1706,6 @@ public class AbyssalCraft {
 		darkspawn4 = cfg.get("biome_spawning", "Darklands Highland", true, "If true, you can spawn in the Darklands Highland biome.").getBoolean();
 		darkspawn5 = cfg.get("biome_spawning", "Darklands Mountain", true, "If true, you can spawn in the Darklands Mountain biome.").getBoolean();
 		coraliumspawn1 = cfg.get("biome_spawning", "Coralium Infested Swamp", true, "If true, you can spawn in the Coralium Infested Swamp biome.").getBoolean();
-		coraliumspawn2 = cfg.get("biome_spawning", "Coralium Infested Ocean", true, "If true, you can spawn in the Coralium Infested Ocean biome.").getBoolean();
 
 		shouldSpread = cfg.get(Configuration.CATEGORY_GENERAL, "Liquid Coralium transmutation", true, "Set true for the Liquid Coralium to convert other liquids into itself in the overworld.").getBoolean();
 		shouldInfect = cfg.get(Configuration.CATEGORY_GENERAL, "Coralium Plague spreading", false, "Set true to allow the Coralium Plague to spread outside The Abyssal Wasteland.").getBoolean();
@@ -1693,6 +1717,7 @@ public class AbyssalCraft {
 		darkness = cfg.get(Configuration.CATEGORY_GENERAL, "Darkness", true, "Set to false to disable the random blindness within Darklands biomes").getBoolean();
 		particleBlock = cfg.get(Configuration.CATEGORY_GENERAL, "Block particles", true, "Toggles whether blocks that emits particles should do so.").getBoolean();
 		particleEntity = cfg.get(Configuration.CATEGORY_GENERAL, "Entity particles", true, "Toggles whether entities that emits particles should do so.").getBoolean();
+		hardcoreMode = cfg.get(Configuration.CATEGORY_GENERAL, "Hardcore Mode", false, "Toggles Hardcore mode. If set to true, all mobs will become tougher.").getBoolean();
 
 		darkWeight1 = cfg.get("biome_weight", "Darklands", 10, "Biome weight for the Darklands biome, controls the chance of it generating", 0, 100).getInt();
 		darkWeight2 = cfg.get("biome_weight", "Darklands Forest", 10, "Biome weight for the Darklands Forest biome, controls the chance of it generating", 0, 100).getInt();
@@ -1700,17 +1725,6 @@ public class AbyssalCraft {
 		darkWeight4 = cfg.get("biome_weight", "Darklands Highland", 10, "Biome weight for the Darklands Highland biome, controls the chance of it generating", 0, 100).getInt();
 		darkWeight5 = cfg.get("biome_weight", "Darklands Mountain", 10, "Biome weight for the Darklands Mountain biome, controls the chance of it generating").getInt();
 		coraliumWeight = cfg.get("biome_weight", "Coralium Infested Swamp", 10, "Biome weight for the Coralium Infested Swamp biome, controls the chance of it generating", 0, 100).getInt();
-
-		AbyssalCraftAPI.enchId1 = cfg.get("enchantments", "Coralium Infusion", 230, "The Coralium enchantment.", 0, 255).getInt();
-		AbyssalCraftAPI.enchId2 = cfg.get("enchantments", "Dread Infusion", 231, "The Dread enchantment.", 0, 255).getInt();
-		AbyssalCraftAPI.enchId3 = cfg.get("enchantments", "Light Pierce", 232, "The Light Pierce enchantment.", 0, 255).getInt();
-		AbyssalCraftAPI.enchId4 = cfg.get("enchantments", "Iron Wall", 233, "The Iron Wall enchantment.", 0, 255).getInt();
-
-		AbyssalCraftAPI.potionId1 = cfg.get("potions", "Coralium Plague", 100, "The Coralium Plague potion effect.", 0, 127).getInt();
-		AbyssalCraftAPI.potionId2 = cfg.get("potions", "Dread Plague", 101, "The Dread Plague potion effect.", 0, 127).getInt();
-		AbyssalCraftAPI.potionId3 = cfg.get("potions", "Antimatter", 102, "The Antimatter potion effect.", 0, 127).getInt();
-
-		tcitems = cfg.get("integrations", "Thaumcraft integration items", true, "Used to toggle if you want to have additonal items added through the Thaumcraft integration.").getBoolean();
 
 		if(cfg.hasChanged())
 			cfg.save();
@@ -1787,6 +1801,10 @@ public class AbyssalCraft {
 		OreDictionary.registerOre("ingotEthaxiumBrick", ethaxium_brick);
 		OreDictionary.registerOre("ingotEthaxium", ethaxiumIngot);
 		OreDictionary.registerOre("blockEthaxium", ethaxiumblock);
+		OreDictionary.registerOre("nuggetAbyssalnite", new ItemStack(nugget, 1, 0));
+		OreDictionary.registerOre("nuggetLiquifiedCoralium", new ItemStack(nugget, 1, 1));
+		OreDictionary.registerOre("nuggetDreadium", new ItemStack(nugget, 1, 2));
+		OreDictionary.registerOre("nuggetEthaxium", new ItemStack(nugget, 1, 3));
 	}
 
 	private void addChestGenHooks(){
@@ -1928,6 +1946,8 @@ public class AbyssalCraft {
 		FMLInterModComms.sendMessage("BuildCraft|Core", "blacklist-facade", new ItemStack(darkethaxiumslab1));
 		FMLInterModComms.sendMessage("BuildCraft|Core", "blacklist-facade", new ItemStack(darkethaxiumslab2));
 		FMLInterModComms.sendMessage("BuildCraft|Core", "blacklist-facade", new ItemStack(darkethaxiumfence));
+		FMLInterModComms.sendMessage("BuildCraft|Core", "blacklist-facade", new ItemStack(ritualaltar));
+		FMLInterModComms.sendMessage("BuildCraft|Core", "blacklist-facade", new ItemStack(ritualpedestal));
 	}
 
 	private static int getUniqueEntityId() {
@@ -1938,11 +1958,59 @@ public class AbyssalCraft {
 		return startEntityId;
 	}
 
+	private static int getNextAvailablePotionId(){
+
+		int pot = Potion.potionTypes.length;
+		int i = 1;
+
+		do{
+			i++;
+			if (i >= 128) throw new RuntimeException("Out of available Potion IDs, AbyssalCraft can't load unless some IDs are freed up!");
+			if(i == pot){
+				for (Field f : Potion.class.getDeclaredFields()) {
+					f.setAccessible(true);
+					try {
+						if (f.getName().equals("potionTypes") || f.getName().equals("field_76425_a")) {
+							Field modfield = Field.class.getDeclaredField("modifiers");
+							modfield.setAccessible(true);
+							modfield.setInt(f, f.getModifiers() & ~Modifier.FINAL);
+
+							Potion[] potionTypes = (Potion[])f.get(null);
+							final Potion[] newPotionTypes = new Potion[pot++];
+							System.arraycopy(potionTypes, 0, newPotionTypes, 0, potionTypes.length);
+							f.set(null, newPotionTypes);
+						}
+					}
+					catch (Exception e) {
+						System.err.println("Whoops, something screwed up here, please report this to shinoow:");
+						System.err.println(e);
+					}
+				}
+			}
+
+		} while(Potion.potionTypes[i] != null);
+
+		return i;
+	}
+
+	private static int getNextAvailableEnchantmentId(){
+
+		int i = 0;
+
+		do{
+			i++;
+			if(i >= 256) throw new RuntimeException("Out of available Enchantment IDs, AbyssalCraft can't load unless some IDs are freed up!");
+
+		} while(Enchantment.enchantmentsList[i] != null);
+
+		return i;
+	}
+
 	@SuppressWarnings("unchecked")
 	private static void registerEntityWithEgg(Class<? extends Entity> entity, String name, int modid, int trackingRange, int updateFrequency, boolean sendsVelocityUpdates, int primaryColor, int secondaryColor) {
 		int id = getUniqueEntityId();
 		stringtoIDMapping.put(name, id);
-		EntityRegistry.registerModEntity(entity, name, modid, AbyssalCraft.instance, trackingRange, updateFrequency, sendsVelocityUpdates);
+		EntityRegistry.registerModEntity(entity, name, modid, instance, trackingRange, updateFrequency, sendsVelocityUpdates);
 		EntityList.IDtoClassMapping.put(id, entity);
 		EntityList.entityEggs.put(id, new EntityEggInfo(id, primaryColor, secondaryColor));
 	}

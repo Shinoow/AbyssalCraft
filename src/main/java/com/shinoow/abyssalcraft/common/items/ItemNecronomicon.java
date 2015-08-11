@@ -58,17 +58,24 @@ public class ItemNecronomicon extends ItemACBasic {
 	public boolean onItemUse(ItemStack is, EntityPlayer player, World w, int x, int y, int z, int meta, float hitX, float hitY, float hitZ){
 		if(player.isSneaking())
 			if(!(w.getBlock(x, y, z) instanceof BlockRitualAltar)){
-				if(RitualUtil.tryAltar(w, x, y, z, bookType)){
-					w.playSoundAtEntity(player, "abyssalcraft:remnant.scream", 3F, 1F);
-					player.addStat(AbyssalCraft.ritual, 1);
+				if(isOwner(player, is))
+					if(RitualUtil.tryAltar(w, x, y, z, bookType)){
+						w.playSoundAtEntity(player, "abyssalcraft:remnant.scream", 3F, 1F);
+						player.addStat(AbyssalCraft.ritual, 1);
+						return true;
+					}
+			} else if(w.getTileEntity(x, y, z) instanceof TileEntityRitualAltar)
+				if(isOwner(player, is)){
+					TileEntityRitualAltar altar = (TileEntityRitualAltar) w.getTileEntity(x, y, z);
+					altar.performRitual(w, x, y, z, player);
 					return true;
 				}
-			} else if(w.getTileEntity(x, y, z) instanceof TileEntityRitualAltar){
-				TileEntityRitualAltar altar = (TileEntityRitualAltar) w.getTileEntity(x, y, z);
-				altar.performRitual(w, x, y, z, player);
-				return true;
-			}
 		return false;
+	}
+
+	private boolean isOwner(EntityPlayer player, ItemStack stack){
+		if(!stack.hasTagCompound()) return false;
+		return stack.stackTagCompound.getString("owner").equals(player.getCommandSenderName());
 	}
 
 	@Override

@@ -61,8 +61,10 @@ public class EntityAntiSkeleton extends EntityMob implements IRangedAttackMob, I
 	protected void applyEntityAttributes()
 	{
 		super.applyEntityAttributes();
-		getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(40.0D);
+
 		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.25D);
+		if(AbyssalCraft.hardcoreMode) getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(80.0D);
+		else getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(40.0D);
 	}
 
 	@Override

@@ -34,6 +34,7 @@ public class NEIACConfig implements IConfigureNEI {
 		API.hideItem(new ItemStack(AbyssalCraft.crystallizer_on));
 		API.hideItem(new ItemStack(AbyssalCraft.transmutator_on));
 		API.hideItem(new ItemStack(AbyssalCraft.house));
+		API.hideItem(new ItemStack(AbyssalCraft.Altar));
 
 		API.hideItem(new ItemStack(AbyssalCraft.pickaxeC));
 		API.hideItem(new ItemStack(AbyssalCraft.axeC));
