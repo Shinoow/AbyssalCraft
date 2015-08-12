@@ -24,7 +24,7 @@ If you happen to find a bug while playing with the mod, report an issue, with a 
 
 ### Suggestions/Enhancements
 
-If you find something you think I should change in the mod that can enhance the experience for you and other users, make an issue and use the "enhancement" label on it. If you, on the other hand, have a suggestion, use the "suggestion" label instead. In both cases, be detailed about the enhancement/suggestion. I have a little list here of things that I need suggestions and feedback on, so if you're up for that, check it out: http://pastebin.com/5asBefVV
+If you find something you think I should change in the mod that can enhance the experience for you and other users, make an issue and use the "enhancement" label on it. If you, on the other hand, have a suggestion, use the "suggestion" label instead. In both cases, be detailed about the enhancement/suggestion. I have a little list here of things that I need suggestions and feedback on, so if you're up for that, check it out: https://github.com/Shinoow/AbyssalCraft/blob/master/ideas.md
 
 ### Contributing
 
