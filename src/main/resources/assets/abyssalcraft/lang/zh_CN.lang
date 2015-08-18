@@ -7,8 +7,80 @@ achievement.mineDS.desc=挖掘一些黑暗石
 achievement.mineAby=比钻石好！
 achievement.mineAby.desc=挖掘一些深渊石
 
+achievement.mineCorgem=海洋宝石
+achievement.mineCorgem.desc=挖掘一些珊瑚宝石
+
+achievement.shadowGems=纯粹黑暗的宝石
+achievement.shadowGems.desc=获得一个阴影宝石.
+
+achievement.mineCor=绿色的材料
+achievement.mineCor.desc=挖掘一些深渊珊瑚石
+
+achievement.mineAbyOres=难道我在主世界见过这些矿石?
+achievement.mineAbyOres.desc=挖掘一些深渊之地的矿石.
+
+achievement.mineDread=恐惧之地的矿产
+achievement.mineDread.desc=挖掘一些恐惧之地的矿石
+
+achievement.dreadium=Plague-免费的锭
+achievement.dreadium.desc=嬗变一些恐惧锭
+
+achievement.ethaxium=是由谁的灵魂制成的...
+achievement.ethaxium.desc=合成一个伊修斯锭
+
 achievement.killghoul=杀死一个深渊食尸鬼
 achievement.killghoul.desc=噢耶... 可是为什么这也是个成就呢？
+
+achievement.ghoulhead=狩猎开始
+achievement.ghoulhead.desc=那里有一个大脑袋...
+
+achievement.petehead=头颅...
+achievement.petehead.desc=哇, 我们可以成为永远的朋友了 :D
+
+achievement.wilsonhead=暴戾的头颅
+achievement.wilsonhead.desc=我的身体去哪了？
+
+achievement.orangehead=内侧的头颅
+achievement.orangehead.desc=你的诊断已确定, 你有传染病。
+
+achievement.necro=亡者之书, 和知识
+achievement.necro.desc=合成一本死灵之书, 然后呢?
+
+achievement.necrou1=荒芜之地的知识
+achievement.necrou1.desc=合成一本深渊荒芜之地死灵之书.
+
+achievement.necrou2=腐败的知识
+achievement.necrou2.desc=合成一本恐惧之地死灵之书.
+
+achievement.necrou3=未知的知识
+achievement.necrou3.desc=合成一本奥穆索死灵之书.
+
+achievement.abyssaln=你必须知道的事情
+achievement.abyssaln.desc=合成深渊之书. 扎哈尔有几分欣赏你.
+
+achievement.ritual=黑暗艺术
+achievement.ritual.desc=你不知道你将要到哪里, 不是吗?
+
+achievement.ritualSummon=看那死灵之书的愤怒!
+achievement.ritualSummon.desc=进行一次召唤仪式.
+
+achievement.ritualCreate=不需要工作台
+achievement.ritualCreate.desc=进行一次创造仪式.
+
+achievement.ritualBreed=利用魔法的复制
+achievement.ritualBreed.desc=进行一次复制仪式.
+
+achievement.ritualPotion=神秘炼金术
+achievement.ritualPotion.desc=进行一次药水仪式.
+
+achievement.ritualPotionAoE=暂时的信标
+achievement.ritualPotionAoE.desc=进行一次范围效果的药水仪式.
+
+achievement.ritualInfusion=力量融合
+achievement.ritualInfusion.desc=进行一次注魔仪式.
+
+achievement.shoggothInfestation=修格斯群袭
+achievement.shoggothInfestation.desc=你不能期望这是一个好的结束...
 
 achievement.enterabyss=欢迎来到荒芜之地
 achievement.enterabyss.desc=进入第一个维度
@@ -28,48 +100,6 @@ achievement.enterdreadlands.desc=进入第二个维度
 achievement.killdreadguard=打倒瘟疫
 achievement.killdreadguard.dsec=你杀死了一个恐惧守卫
 
-achievement.ghoulhead=狩猎开始
-achievement.ghoulhead.desc=那里有一个大脑袋...
-
-achievement.killPete=皮特再次死亡... 
-achievement.killPete.desc=你杀死了皮特... 他到底怎么了？！？
-
-achievement.killWilson=威尔逊的终结
-achievement.killWilson.desc=从这里出去了！！！
-
-achievement.killorange=医生最终的诊断
-achievement.killorange.desc=奥兰治医生去世了，他有传染病。
-
-achievement.petehead=头颅...
-achievement.petehead.desc=哇, 我们可以成为永远的朋友了 :D
-
-achievement.wilsonhead=暴戾的头颅
-achievement.wilsonhead.desc=我的身体去哪了？
-
-achievement.orangehead=内侧的头颅
-achievement.orangehead.desc=你的诊断已确定, 你有传染病。
-
-achievement.mineCorgem=海洋宝石
-achievement.mineCorgem.desc=挖掘一些珊瑚宝石
-
-achievement.mineCor=绿色的材料
-achievement.mineCor.desc=挖掘一些深渊珊瑚石
-
-achievement.findPSDL=现在那里有一个零散的岩石
-achievement.findPSDL.desc=找到一个恐惧之地蕴能石
-
-achievement.GK1=第一把钥匙
-achievement.GK1.desc=合成一把传送门钥匙
-
-achievement.GK2=恐惧之地钥匙
-achievement.GK2.desc=合成阿索拉的恐惧传送门钥匙
-
-achievement.GK3=古老的钥匙
-achievement.GK3.desc=合成查加罗特的瑞尔森钥匙
-
-achievement.Jzhstaff=等一下... 这是一把钥匙?!?!?
-achievement.Jzhstaff.desc=获得守门者之杖
-
 achievement.summonChagaroth=恐惧野兽的巢穴
 achievement.summonChagaroth.desc=进入查加罗特的巢穴
 
@@ -82,15 +112,47 @@ achievement.enterOmothol.desc=你已经到达了扎哈尔的王国奥穆索
 achievement.darkRealm=陷阱之底
 achievement.darkRealm.desc=你刚刚摔倒了，不是吗？
 
+achievement.killOmotholelite=那东西极其强大
+achievement.killOmotholelite.desc=你杀死了一个来自奥穆索的强大生物.
+
+achievement.locateJzahar=一个野生的扎哈尔出现了
+achievement.locateJzahar.desc=我希望你带了药水或者别的.
+
 achievement.killJzahar=浮动利率？并非如此。
 achievement.killJzahar.desc=你打败了守门者，可他并没死。
+
+achievement.GK1=亡灵关键
+achievement.GK1.desc=合成一把传送门钥匙
+
+achievement.findPSDL=现在那里有一个零散的岩石
+achievement.findPSDL.desc=找到一个恐惧之地蕴能石
+
+achievement.GK2=恐惧之地钥匙
+achievement.GK2.desc=合成阿索拉的恐惧传送门钥匙
+
+achievement.GK3=古老的钥匙
+achievement.GK3.desc=合成查加罗特的瑞尔森钥匙
+
+achievement.makeTransmutator=破坏所有的物理定律!
+achievement.makeTransmutator.desc=合成一个嬗变器.
+
+achievement.makeCrystallizer=晶体化一切
+achievement.makeCrystallizer.desc=合成一个结晶器.
+
+achievement.makeMaterializer=创造属于你的物质
+achievement.makeMaterializer.desc=合成一个具现化器.
+
+achievement.makeCrystalBag=将你所有的晶体存储在这!
+achievement.makeCrystalBag.desc=合成一个晶体袋. 他们能够进行升级.
+
+achievement.makeEngraver=无限的伪造钱币!
+achievement.makeEngraver.desc=合成一个铸造器.
 
 #Messages
 message.asorah.spawn=哈哈, 愚蠢的人类, 我解放了!
 message.asorah.death.1=阿索拉? ... 阿索拉?!
 message.asorah.death.2=你, 你会为此付出代价的!
 message.asorah.death.3=除此之外, 你将永远无法离开恐惧之地. 尽情地挖掘你自己的坟墓吧.
-message.altar.error=这个祭坛只能在深渊荒芜之地使用.
 message.dreadaltar.error.1=只能在恐惧之地起作用
 message.dreadaltar.error.2=你需要在恐惧之地的山丘之中
 message.dreadaltar.error.3=这依旧只能在恐惧之地中使用
@@ -100,76 +162,101 @@ message.chagaroth.death.1=这里, 拿回你的钥匙, 将它变成有用的.
 message.chagaroth.death.2=在我后面的箱子上写着 "恐惧之地的传奇宝藏",
 message.chagaroth.death.3=是在我被牵涉进来之前的挖矿的人所遗留的.
 message.chagaroth.death.4=不要抱太大的希望, 我打赌这只不过是一块泥土或者别的.
-message.jzahar.death.dev=我依旧是一个in-dev boss, 所以你无法确切地杀死我.
-message.jzahar.banish.vanilla=I never asked to be within the same dimension as you. Begone, foul beast!
-message.jzahar.banish.ac=Ahem... I thought I gave you an assignment aeons ago, did it ever occur to you that it was permanent?
-message.jzahar.banish.jzh=There can only be ONE! *Creates sword out of thin air*
-message.jzahar.creative.1=%s, you do realize I could simply switch your Gamemode and slaughter you right now? I'm that kind of Entity.
-message.jzahar.creative.2=But yeah... that would technically be cheating, so I'll just stick to the "rules" and do nothing.
+message.jzahar.death.dev=我依旧是一个在发展中的boss, 所以你无法确切地杀死我.
+message.jzahar.banish.vanilla=我从未想过和你待在同一个维度里. 滚开, 恶心的怪物!
+message.jzahar.banish.ac=呃哼... 我想起在亿万年前我曾给过你一个任命 , 你可曾想到那是永远存在的?
+message.jzahar.banish.jzh=那只有唯一的一个! *凭空创造出剑来*
+message.jzahar.creative.1=%s, 你可否意识到现在我就可以轻松地切换你的游戏模式并杀死你? 我就是那样的实体.
+message.jzahar.creative.2=不过... 严格上说那是作弊, 所以我还是会坚守 "规则" 和不做任何事情.
 message.sacthoth.spawn.1=我解放了! 凡人, 感受黑暗之域的愤怒吧.
 message.sacthoth.spawn.2=但首先, 观看这爆炸吧.
 message.sacthoth.damage.explosion=我忘了告诉你\u00A7o并不能\u00A7r把我炸伤, 这并没有用.
 message.sacthoth.damage.projectile=哈, 你的投射物对我无效.
 message.portalplacer.error.1=你感受到一种被抛弃的感觉, 扎哈尔并没有批准你.
 message.portalplacer.error.2=没有任何事情发生...
-message.necronomicon.nope=It appears that you don't own this book. Ever thought about not trying to read it?
+message.necronomicon.nope=似乎你还没拥有这本书. 你可曾想过不去尝试读它?
+message.remnant.busy=对不起, 我正在招待一个客人, 不久会回来的.
+message.remnant.insult.0=%s, 你说Aklo就像mod制作者说1.8一样.
+message.remnant.insult.1=你什么都不知道, %s.
+message.remnant.insult.2=没有了死灵之书你什么都不是, %s.
 
 #Container Inventories
 container.abyssalcraft.crate=板条箱
 container.abyssalcraft.crystallizer=结晶器
 container.abyssalcraft.transmutator=嬗变器
 container.abyssalcraft.engraver=铸造器
-container.abyssalcraft.materializer=Materializer
+container.abyssalcraft.materializer=具现化器
 
 #NEI Integration
 container.abyssalcraft.crystallizer.nei=结晶化
 container.abyssalcraft.transmutator.nei=嬗变化
 container.abyssalcraft.engraver.nei=钱币铸造
-container.abyssalcraft.materializer.nei=Materialization
+container.abyssalcraft.materializer.nei=具现化
 
 #Necronomicon Labels
-necronomicon.index=目录
-necronomicon.information=Forbidden Knowledge
-necronomicon.spells=Spellbook
-necronomicon.rituals=Rituals
-necronomicon.huh=What is this book?
-necronomicon.information.ac=AbyssalCraft
-necronomicon.information.goo=The Great Old Ones
-necronomicon.information.abyssalnomicon=The Abyssalnomicon
-necronomicon.information.overworld=Overworld
-necronomicon.information.overworld.title=The Overworld
-necronomicon.information.abyssal=Abyssal Wasteland
-necronomicon.information.abyssal.title=The Abyssal Wasteland
-necronomicon.information.dreadlands=Dreadlands
-necronomicon.information.dreadlands.title=The Dreadlands
-necronomicon.information.omothol=Omothol
-necronomicon.information.omothol.title=Omothol
-necronomicon.information.darkrealm=Dark Realm
-necronomicon.information.darkrealm.title=The Dark Realm
-necronomicon.information.materials=Materials
-necronomicon.information.progression=Progression
-necronomicon.information.integration=Integrations
-necronomicon.information.entities=Entities
+necronomicon.index=索引
+necronomicon.information=禁忌知识
+necronomicon.spells=咒语书
+necronomicon.rituals=仪式
+necronomicon.huh=这本书是什么?
+necronomicon.information.ac=深渊国度
+necronomicon.information.goo=旧日支配者
+necronomicon.information.abyssalnomicon=深渊之书
+necronomicon.information.overworld=主世界
+necronomicon.information.overworld.title=主世界
+necronomicon.information.abyssal=深渊荒芜之地
+necronomicon.information.abyssal.title=深渊荒芜之地
+necronomicon.information.dreadlands=恐惧之地
+necronomicon.information.dreadlands.title=恐惧之地
+necronomicon.information.omothol=奥穆索
+necronomicon.information.omothol.title=奥穆索
+necronomicon.information.darkrealm=暗黑王国
+necronomicon.information.darkrealm.title=暗黑王国
+necronomicon.information.materials=材料
+necronomicon.information.progression=发展
+necronomicon.information.integration=整合
+necronomicon.information.entities=实体
+necronomicon.information.outergods=外神
+necronomicon.other=其他信息
+necronomicon.locked=锁住
+necronomicon.information.specialmaterials=特殊的材料
+necronomicon.anywhere=任何地方
+necronomicon.location=位置
+necronomicon.info=信息
+necronomicon.normal=正常
 
 #Necronomicon Text
 #Note: the maximum amount of letters per string is 256
 #The following text example has the letter limit:
 #Lorem ipsum dolor sit amet, ad dicit prompta ullamcorper nam, quando ubique intellegat nam eu, ad dolore mollis has. Sint debet eum te. At dicunt liberavisse mea. Ea minimum sententiae ius, ei duo timeam virtute. Aliquid graecis eu usu, ea dignissim conse.
 #Anything longer than that will trigger a crash when you try to read it
-necronomicon.text.necronomicon.1=This is the Necronomicon, a book written by Abdul Alhazred, also known as "The Mad Arab". The book contains knowledge about The Great Old Ones, their names and how to summon them. There is also information about spells and rituals the book can perform.
-necronomicon.text.necronomicon.2=The Necronomicon itself is a chapter of the Abyssalnomicon, which was read to Alhazred by a demon known as J'zahar, who had composed the Abyssalnomicon from infinite knowledge known to The Great Old Ones.
+necronomicon.text.necronomicon.1=这是死灵之书, 一本由阿卜杜·阿尔哈兹莱德所写的书, 熟知为 "The Mad Arab". 这本书囊括了旧日支配者的知识, 他们的名字和怎么去召唤他们. 里面同样有关于这本书所能举行的咒语和仪式的信息.
+necronomicon.text.necronomicon.2=死灵之书是深渊之书中的一章, 被阿尔哈兹莱德所解读 by a demon known as J'zahar, who had composed the Abyssalnomicon from infinite knowledge known to The Great Old Ones.
 necronomicon.text.necronomicon.3=There are 4 types of Necronomicons within the Abyssalnomicon: The Necronomicon, The Abyssal Wasteland Necronomicon, knowledge bound to a specific dimension.
 necronomicon.text.necronomicon.4=In order to unlock the knowledge, one must travel to said dimension and empower the Necronoicon with the flesh of that world. The Abyssalnomicon contains additional knowledge known only to J'zahar, knowledge man was not meant to obtain.
 
 necronomicon.text.abyssalnomicon.1=This is the Abyssalnomicon, a book written by J'zahar, Gatekeeper of The Abyss. The book contains the knowledge of the 4 Necronomicons, as they are in fact chapters of this book. There is also extensive knowledge not mentioned in the others.
 necronomicon.text.abyssalnomicon.2=As the knowledge about spells and rituals is limited to the specified dimension (and previous ones, depending on the Necronomicon type), the Abyssalnomcion has all knowledge collected in one place, with additions.
-necronomicon.text.abyssalnomicon.3=Page 3
-necronomicon.text.abyssalnomicon.4=Page 4
 
 necronomicon.text.abyssalcraft.1=AbyssalCraft is the mod which this book was designed for. It mainly focuses on exploration with the additions of 3 dimensions, all filled with new materials and new monsters to face (who drops new loot). There are also new machines added to the mod.
 necronomicon.text.abyssalcraft.2=They allow the player to bend the elements of nature more than they could before. These include the Crystallizer, the Transmutator and the Engraver (which doesn't bend the elements of nature, as it is used to engrave coins).
 necronomicon.text.abyssalcraft.3=New materials allows you to craft stronger tools and armor, which has special abilities in some cases when wearing a whole set. New building materials are found within the Overworld biomes and the new dimensions. This book enables new usages for the mod.
 necronomicon.text.abyssalcraft.4=With rituals and spells allowing the user to utilize the evil magic contained within the Necronomicon. The end result will render it vital to progression of the mod, adding a larger aspect of magic to the otherwise large exploration aspect of the mod.
+
+necronomicon.text.azathoth.1=Azathoth, The Daemon Sultan, is the ruler and possibly creator of all existence. 
+necronomicon.text.azathoth.2=It resides outside of the universe, sedated by the eternal sound of pipes and drums. Despite that, it has a will of it's own, and issues commands to Nyarlathotep.
+necronomicon.text.nyarlathotep.1=Nyarlathotep, The Crawling Chaos, is an Outer God who isn't exiled nor imprisoned.
+necronomicon.text.nyarlathotep.2=He walks the earth hidden among the humans, spreading madness. Apart from serving cults of the Outer Gods, he fulfills the wishes of Azathoth, whom he serves.
+necronomicon.text.yog-sothoth.1=Yog-Sothoth, The Lurker at the Threshold, is an Outer God, and the offspring of the Nameless Mist.
+necronomicon.text.yog-sothoth.2=It is heavily implied, if not outright stated, that Yog-Sothoth is omniscient, and is locked outside the universe, meaning he knows and can see all of space-time all at once, that there is no secret hidden from Yog-Sothoth.
+necronomicon.text.shub-niggurath.1=Shub-Niggurath, The Black Goat of the Woods with a Thousand Young, is an Outer God in the pantheon.
+necronomicon.text.shub-niggurath.2=She is a perverse fertility deity, said to appear as an enormous cloudy mass which extrudes black tentacles, slime-dripping mouths, and short, writhing goat legs. Small creatures are continually spat forth by the monstrosity, which are reconsumed or escape
+necronomicon.text.cthulhu.1=Cthulhu is a Great Old One, trapped in a endless sleep underneath the sea in the city R'lyeh.
+necronomicon.text.cthulhu.2=He has the head of a octopus, and a scaly body with wings on his back. His state of endless sleep comes from a war against the Elder Beings, which ended with R'lyeh sinking to the bottom of the sea. One day he will rise to rule over the earth.
+necronomicon.text.hastur.1=Hastur, The Unspeakable, is a Great Old One and Cthulhu's half-brother.
+necronomicon.text.hastur.2=Not much is known about Hastur, but he is known to take the form of a king in yellow robes, wearing a mask. Like most Great Old Ones, he is capable of taking any form he desires.
+necronomicon.text.jzahar.1=J'zahar, Gatekeeper of The Abyss, is the bastard offspring of Hastur.
+necronomicon.text.jzahar.2=Having a desire for power, and not wanting exile to the stars, J'zahar reached out beyond time and space to achieve his freedom. The results were similar powers to that of Yog-Sothoth, and the punishment of eternally guarding his imprisoned fellow deities.
 
 necronomicon.text.greatoldones=Before the ages of man, the universe was ruled by a race of ancient demonic gods known as "The Great Old ones". Due to a conflict aeons ago, all of these beings are imprisoned far away where no man has ever set foot.
 necronomicon.text.abyssalnomicon_info=The Abyssalnomicon is the unholy tome from which the Necronomicon was written, when J'zahar read that section to Alhazred.
@@ -227,6 +314,38 @@ necronomicon.text.materials.ethaxium.1=Ethaxium is a new material most commonly 
 necronomicon.text.materials.ethaxium.2=Ethaxium is said to be what souls are made out of, which likely explains why it's almost indestructible. No wonder J'zahar built his temple city from this.
 necronomicon.text.materials.darkethaxium.1=Dark Ethaxium is a stronger version of Ethaxium created by combining regular Ethaxium with Omothol Stone. This kind of Ethaxium is harder than it's normal counterpart.
 necronomicon.text.materials.darkethaxium.2=This material is only used in one structure, the Temple of J'zahar.
+
+necronomicon.text.crafting.coraliuminfusedstone.1=Coralium Infused Stone is crafted with Coralium Gem Clusters and Stone. The three clusters can be of any size, but must add up to 9.
+necronomicon.text.crafting.coraliuminfusedstone.2=If you use a 9-gem cluster, surround it with Stone blocks instead of 2 rows. When this block is broken (or smelt) you get a Coralium Pearl.
+necronomicon.text.crafting.shadowgem.1=A Shadow Gem is crafted with Shadow Gem Shards. The Shards are crafted the same way, but with Shadow Fragments.
+necronomicon.text.crafting.shadowgem.2=Shadow Fragments are dropped by Shadow Creatures, Shadow Gem Shards are dropped by Shadow Monsters and Shadow Gems are dropped by Shadow Beasts. They spawn in Darklands Mountains biomes and the Dark Realm.
+necronomicon.text.crafting.oblivionshard=A Shard of Oblivion is crafted with Shadow Gems and a Transmutation Gem.
+necronomicon.text.crafting.gk1=The Gateway Key is crafted with Blaze Rods, Coralium Pearls and a Oblivion Catalyst.
+necronomicon.text.crafting.necro_c=A Abyssal Wasteland Necronomicon is crafted with Coralium Plagued Flesh and a Necronomicon. It contains more knowledge.
+necronomicon.text.crafting.psdltracker=A Powerstone Tracker is crafted with Coralium Gems and a Eye of Ender.
+necronomicon.text.crafting.necro_d=A Dreadlands Necronomicon is crafted with Dread Fragments and a Abyssal Wasteland Necronomicon.
+necronomicon.text.crafting.transmutator.1=A Transmutator is crafted with Coralium Bricks, Blocks of Refined Coralium, a Transutation Gem and a Liquid Coralium Bucket.
+necronomicon.text.crafting.transmutator.2=To obtain Coralium Bricks, you must pour Liquid Antimatter on Liquid Coralium, then harvest the stone formed from the Liquid Coralium. Then you must smelt the Coralium Stone for Coralium Ingots.
+necronomicon.text.crafting.crystallizer.1=A Crystallizer is crafted using Dreadstone Bricks, Blocks of Dreadium and a Furnace.
+necronomicon.text.crafting.crystallizer.2=Dreadium Ingots are obtained by transmuting Dreaded Shards of Abyssalnite, which are dropped by Dreadguards inside the Dreadlands. Dreadium is a lot easier to obtain once you have a Crystallizer.
+necronomicon.text.crafting.dreadaltarbot.1=An Altar of Cha'garoth (Bottom) is crafted with Dreadstone, Dreadium Ingots, Asorah's Dreaded Gateway Key, Bones,
+necronomicon.text.crafting.dreadaltarbot.2=Dread Cloth and a Dreaded Shard of Abyssalnite. Dread Cloth is crafted by surrounding a piece of Leather with Dread Fragments, dropped by many mobs inside the Dreadlands.
+necronomicon.text.crafting.dreadaltartop=An Altar of Cha'garoth (Top) is crafted with Sticks, a Bucket, Dread Cloths and Dreadium Ingots.
+necronomicon.text.crafting.necro_o=A Omothol Necronomicon is crafted with Omothol Ghoul Flesh and a Dreadlands Necronomicon.
+necronomicon.text.crafting.lifecrystal.1=A Life Crystal is crafted with a Carbon, a Hydrogen, a Nitrogen, a Oxygen, a Phosphorus and a Sulfur Crystal.
+necronomicon.text.crafting.lifecrystal.2=The Crystals are gained from crystallizing Coal, Water, Nitre, Rotten Flesh and Lapis Lazuli. The Nitrogen Crystal comes from Crystallizing the Nitrate Crystal from the Nitre.
+necronomicon.text.crafting.ethaxiumingot.1=A Ethaxium Ingot is crafted with Ethaxium Bricks and a Life Crystal.
+necronomicon.text.crafting.ethaxiumingot.2=Ethaxium Bricks are gained from smelting Ethaxium, which is obtained by transmuting End Stone. Ethaxium Ingots can also be crafted with a Oblivion Catalyst surrounded by 4 Ethaxium Bricks, sparing 4 Ethaxium Bricks.
+necronomicon.text.crafting.engravingblank.1=A Blank Coin Engraving is crafted with Stone Slabs and a Iron Ingot.
+necronomicon.text.crafting.engravingblank.2=There are current 4 Coin Engravings: Blank, Cthulhu, Elder and J'zahar. Upgrading a Engraving Template (in the previous order), requires a Ethaxium Ingot.
+necronomicon.text.crafting.coin=A Coin is crafted with a piece of Flint and Iron Ingots. Can also be crafted with Tin and Copper Ingots.
+necronomicon.text.crafting.engraver=A Engraver is crafted with Stone, a Lever, an Anvil and Blank Coin Engravings.
+necronomicon.text.crafting.crystalbag.1=A Crystal bag is crafted with Leather and a Gold Ingot.
+necronomicon.text.crafting.crystalbag.2=They can be upgraded to hold more crystals by surrounding it with Coralium Plagued Flesh, Dread Fragments, then Omothol Ghoul Flesh.
+necronomicon.text.crafting.materializer.1=A Materializer is crafted with Ethaxium Bricks, Obsidian, Blocks of Ethaxium and a Liquid Antimatter Bucket.
+necronomicon.text.crafting.materializer.2=To use a Materializer, you need to place a Crystal Bag in the first slot, then a Necronomicon in the second, then you can create materials using the crystals inside the bag.
+necronomicon.text.crafting.abyssalnomicon.1=An Abyssalnomicon is crafted with Ethaxium Bricks, Eldritch Scales, a Oblivion Catalyst and a Omothol Necronomicon.
+necronomicon.text.crafting.abyssalnomicon.2=Eldritch Scales are gained from killing Remnants and Minions of The Gatekeeper.
 
 necronomicon.text.overworld.progression.1=In order to reach the new dimensions, one must craft a Gateway Key, which requires one to travel to the Nether, and to visit a Darklands and a water-based biome. The water-based biome can be either a swamp or a ocean biome.
 necronomicon.text.overworld.progression.2=From the Nether you need 2 Blaze Rods, and probably a few more for later. From the Darklnads biome you need to slay living shadows to finally obtain Shadow Gems. From the water-based biome you need Coralium Gems in order to create a Coralium Pearl.
@@ -323,15 +442,40 @@ necronomicon.text.integration.nei.6=The Engraver uses Coin Engravings as "fuel",
 necronomicon.text.integration.nei.7=Recipes for the Materializer can also be displayed by pressing the recipe button. They have a special display screen showing the required Crystals.
 necronomicon.text.integration.nei.8=You can also see which Necronomicon you need in order to materialize the specific material. The Materializer uses no fuel.
 
-necronomicon.text.integration.tc.1=With Thaumcraft installed, you can now discover aspects in blocks, items and entities added in AbyssalCraft. There are, however, no new aspects. There will probably be more ways to combind the mods later on.
-necronomicon.text.integration.tc.2=You also get a Vis discount and the ability to view nodes when wearing the Depths Armor set.
-
-necronomicon.text.integration.morph.1=With Morph installed, you can get morph abilities when morphing into AbyssalCraft entities. Additional abilities might be added, like plague immunity.
-necronomicon.text.integration.morph.2=When morphed into entities that has special models, your hand will be morphed into the hand used by that model in 1st person view.
-
 necronomicon.text.integration.invtweaks.1=With Inventory Tweaks installed, you can sort items kept in the Crystal Bags with sorting buttons like with any other supported container.
 
-necronomicon.text.wip=This section is incomplete.
+necronomicon.text.rituals.info=Check the information section for information regarding rituals, or the other sections for information about available rituals. "Location" specifies where the ritual can be performed.
+
+necronomicon.text.rituals.1=In order to get started with rituals you need to create the altar to perform them at.
+necronomicon.text.rituals.2=There is a total of 8 materials you can create your Ritual Altar from. Those are: Cobblestone, Darkstone Cobblestone, Abyssal Stone Brick, Coralium Stone Brick, Dreadstone Brick, Abyssalnite Stone Brick, Ethaxium Brick and Dark Ethaxium Brick.
+necronomicon.text.rituals.3=To create the altar, simply place the blocks in the formation showed above and shift right-click on the center block.
+necronomicon.text.rituals.4=The aforementioned materials can only be used in their specific dimension (eg. Cobblestone and Darkstone Cobblestone in the Overworld, Abyssal Stone Brick and Coralium Stone Brick in the Abyssal Wasteland etc).
+necronomicon.text.rituals.5=Once the altar and pedestals has formed, you can start performing rituals!
+necronomicon.text.rituals.6=All rituals requires you to place items on the pedestals, while some also requires a sacrifice placed on the altar. To perform a ritual, place the items, then shift right-click the altar, then wait for the smoke to end.
+
+necronomicon.text.wip=这部分还未完成.
+
+#Rituals
+ac.ritual.oblivionCatalyst=Oblivion Catalyst
+ac.ritual.oblivionCatalyst.desc=A Oblivion Catalyst is created by infusing an Eye of Ender with Shards of Oblivion and Redstone Dust.
+ac.ritual.transmutationGem=Transmutation Gem
+ac.ritual.transmutationGem.desc=A Transmutation Gem is created by infusing a Coralium Pearl with Diamonds, Ender Pearls and Blaze Powder.
+ac.ritual.asorahGatewayKey=Asorah's Dreaded Gateway Key
+ac.ritual.asorahGatewayKey.desc=Asorah's Dreaded Gateway Key is created by infusing a Gateway Key with an Eye of The Abyss, a Dreadlands Infused Powerstone and a Transmutation Gem.
+ac.ritual.summonAsorah=Ritual of The Sleeper
+ac.ritual.summonAsorah.desc=Summons Asorah, The Fallen, from the Dark Realm. The afterlife is commonly referred to as an eternal slumber, in which a sleeper is a entity beyond life and death.
+ac.ritual.summonSacthoth=Ritual of Shadows
+ac.ritual.summonSacthoth.desc=Summons Sacthoth, Harbinger of Doom, from the Dark Realm.
+ac.ritual.breeding=Ritual of Fertility
+ac.ritual.breeding.desc=Breeds nearby animals. Might also kill all of them, if unlucky enough.
+ac.ritual.depthsHelmet=Helmet of The Depths
+ac.ritual.depthsHelmet.desc=A Helmet of The Depths is created by infusing a Refined Coralium Helmet with 2 Coralium Gem Cluster (9 gems), Coralium Plagued Flesh, a Transmuttion Gem, a Lily Pad, a Vine and a Liquid Coralium Bucket.
+ac.ritual.depthsChestplate=Chestplate of The Depths
+ac.ritual.depthsChestplate.desc=A Chestplate of The Depths is created by infusing a Refined Coralium Chestplate with 2 Coralium Gem Cluster (9 gems), Coralium Plagued Flesh, a Transmuttion Gem, a Lily Pad, a Vine and a Liquid Coralium Bucket.
+ac.ritual.depthsLeggings=Leggings of The Depths
+ac.ritual.depthsLeggings.desc=A Leggings of The Depths is created by infusing a Refined Coralium Leggings with 2 Coralium Gem Cluster (9 gems), Coralium Plagued Flesh, a Transmuttion Gem, a Lily Pad, a Vine and a Liquid Coralium Bucket.
+ac.ritual.depthsBoots=Boots of The Depths
+ac.ritual.depthsBoots.desc=A Boots of The Depths is created by infusing a Refined Coralium Boots with 2 Coralium Gem Cluster (9 gems), Coralium Plagued Flesh, a Transmuttion Gem, a Lily Pad, a Vine and a Liquid Coralium Bucket.
 
 #Configuration
 ac_dimensions=维度
@@ -342,14 +486,10 @@ ac_biomegen=生物群落生成
 ac_biomegen.tooltip=生物群落生成设置
 ac_biomespawn=生物群落生成物
 ac_biomespawn.tooltip=生物群落生成物设置
-ac_biomeweight=Biome Weight
-ac_biomeweight.tooltip=Biome Weight Configuration
+ac_biomeweight=生物群落权重
+ac_biomeweight.tooltip=生物群落权重设置
 ac_general=总体
 ac_general.tooltip=总体设置
-ac_enchantment=附魔
-ac_enchantment.tooltip=附魔ID设置
-ac_potion=药水
-ac_potion.tooltip=药水ID设置
 
 #Damagesources
 death.attack.coralium=%1$s由于珊瑚侵染而死亡
@@ -367,14 +507,6 @@ tooltip.portalplacerdl.2=深渊荒芜之地.
 tooltip.oc=这个物品蕴藏不可思议的力量.
 tooltip.staff=扎哈尔的权杖, 深渊之门的守卫者.
 tooltip.eoa=堕落者阿索拉之眼.
-tooltip.caxe.1=这把斧头能转换
-tooltip.caxe.2=木板, 树叶, 原木和树苗的类型.
-tooltip.cpickaxe.1=这把镐子能转换
-tooltip.cpickaxe.2=矿石和一些石头的类型.
-tooltip.cshovel.1=这把铲子能转换
-tooltip.cshovel.2=草地类型, 沙砾和沙子.
-tooltip.csword.1=在用这把剑攻击时会导致
-tooltip.csword.2=敌人着火和中毒效果
 tooltip.devblade.1=这把刀刃是如此邪恶以致
 tooltip.devblade.2=当你握着它时你的手开始腐烂
 tooltip.antibucket=这种液体能使其他液体凝固.
@@ -387,24 +519,22 @@ tooltip.corb.1=该物品能注能入深渊类物品,
 tooltip.corb.2=给它们新添能力.
 tooltip.corb.3=它也能改动一些主世界
 tooltip.corb.4=的成分(方块).
-tooltip.altar.1=用来召唤堕落者阿索拉, 
-tooltip.altar.2=阿索拉来自黑暗之域.
 tooltip.odb=巨大的爆炸, 自身也承受危险.
 tooltip.crystal=分子式
 tooltip.portalplacerjzh.1=只能在
 tooltip.portalplacerjzh.2=恐惧之地使用
 tooltip.soulreaper=灵魂收割
-tooltip.crystalbag=This bag holds crystallized elements
+tooltip.crystalbag=这个背包可存储结晶化的元素
 
 #Creative Tabs
-itemgroup.acblocks=深渊国度方块
-itemgroup.acitems=深渊国度物品
-itemgroup.actools=深渊国度工具
-itemgroup.acctools=深渊国度战斗工具
-itemgroup.acfood=深渊国度食物
-itemgroup.acdblocks=深渊国度装饰方块
-itemgroup.accrystals=深渊国度结晶器水晶
-itemgroup.accoins=深渊国度钱币
+itemGroup.acblocks=深渊国度方块
+itemGroup.acitems=深渊国度物品
+itemGroup.actools=深渊国度工具
+itemGroup.acctools=深渊国度战斗工具
+itemGroup.acfood=深渊国度食物
+itemGroup.acdblocks=深渊国度装饰方块
+itemGroup.accrystals=深渊国度结晶器水晶
+itemGroup.accoins=深渊国度钱币
 
 #Fluids
 fluid.liquidcoralium=流动的液态珊瑚石
@@ -513,28 +643,31 @@ tile.ACO.name=深渊铜矿石
 tile.APCorO.name=珠光四射的珊瑚矿
 tile.ALCorO.name=液化珊瑚矿
 tile.solidLava.name=固态岩浆
-tile.Eth.name=伊桑斯锭
-tile.EB.0.name=伊桑斯砖块
-tile.EB.1.name=錾制伊桑斯砖石
-tile.EBP.name=伊桑斯柱子
-tile.EBs.name=伊桑斯砖石楼梯
-tile.EBs1.name=伊桑斯砖石半阶
-tile.EBs2.name=伊桑斯砖石双半阶
-tile.EBf.name=伊桑斯砖石栅栏
+tile.Eth.name=伊修斯锭
+tile.EB.0.name=伊修斯砖块
+tile.EB.1.name=錾制伊修斯砖石
+tile.EBP.name=伊修斯柱子
+tile.EBs.name=伊修斯砖石楼梯
+tile.EBs1.name=伊修斯砖石半阶
+tile.EBs2.name=伊修斯砖石双半阶
+tile.EBf.name=伊修斯砖石栅栏
 tile.OS.name=奥穆索石头
-tile.BOE.name=伊桑斯锭块
+tile.BOE.name=伊修斯锭块
 tile.OG.name=奥穆索之门
 tile.Ofire.name=奥穆索之火
 tile.engraver.name=铸造器
-tile.house.name=A House
-tile.materializer.name=Materializer
-tile.DEB.0.name=Dark Ethaxium Brick
-tile.DEB.1.name=Chiseled Dark Ethaxium Brick
-tile.DEBP.name=Dark Ethaxium Pillar
-tile.DEBs.name=Dark Ethaxium Brick Stairs
-tile.DEBs1.name=Dark Ethaxium Brick Slab
-tile.DEBs2.name=Dark Ethaxium Brick Doubleslab
-tile.DEBf.name=Dark Ethaxium Brick Fence
+tile.house.name=一个房子
+tile.materializer.name=具现化器
+tile.DEB.0.name=深色伊修斯砖块
+tile.DEB.1.name=錾制深色伊修斯砖块
+tile.DEBP.name=深色伊修斯柱
+tile.DEBs.name=深色伊修斯砖块楼梯
+tile.DEBs1.name=深色伊修斯砖块台阶
+tile.DEBs2.name=深色伊修斯砖块双层台阶
+tile.DEBf.name=深色伊修斯砖块栅栏
+tile.ritualaltar.name=仪式祭坛
+tile.ritualpedestal.name=仪式基座
+tile.shoggothBlock.name=修格斯渗出物
 
 #Items
 item.DEV_BLADE.name=恶魔之刃
@@ -695,46 +828,50 @@ item.antiFlesh.name=反物质腐肉
 item.antiBone.name=反物质骨头
 item.antiSpider_eye.name=反物质蜘蛛眼
 item.soulReaper.name=萨多夫的灵魂收割刀
-item.EB.name=伊桑斯砖石
-item.EI.name=伊桑斯锭
+item.EB.name=伊修斯砖石
+item.EI.name=伊修斯锭
 item.lifeCrystal.name=生命水晶
-item.EP.name=伊桑斯镐
-item.EA.name=伊桑斯斧
-item.ES.name=伊桑斯锹
-item.ESW.name=伊桑斯剑
-item.EH.name=伊桑斯锄
-item.AEB.name=伊桑斯靴子
-item.AEH.name=伊桑斯头盔
-item.AEC.name=伊桑斯胸甲
-item.AEP.name=伊桑斯护腿
-item.EthU.name=伊桑斯升级套件
-item.coin.name=Coin
-item.cthulhucoin.name=Cthulhu Engraved Coin
-item.eldercoin.name=Elder Engraved Coin
-item.jzaharcoin.name=J'zahar Engraved Coin
+item.EP.name=伊修斯镐
+item.EA.name=伊修斯斧
+item.ES.name=伊修斯锹
+item.ESW.name=伊修斯剑
+item.EH.name=伊修斯锄
+item.AEB.name=伊修斯靴子
+item.AEH.name=伊修斯头盔
+item.AEC.name=伊修斯胸甲
+item.AEP.name=伊修斯护腿
+item.EthU.name=伊修斯升级套件
+item.coin.name=硬币
+item.cthulhucoin.name=刻有克苏鲁的硬币
+item.eldercoin.name=刻有接骨木的硬币
+item.jzaharcoin.name=刻有扎哈尔的硬币
 item.engraving.blank.name=空白硬币雕刻
 item.engraving.cthulhu.name=克苏鲁硬币雕刻
 item.engraving.elder.name=接骨木硬币雕刻
 item.engraving.jzahar.name=扎哈尔硬币雕刻
 item.eldirtchScale.name=邪术鳞片
 item.omotholflesh.name=奥穆索食尸鬼的肉
-item.antiCF.name=Anti-plagued Flesh
-item.antiCB.name=Anti-plagued Flesh on A Bone
+item.antiCF.name=反物质腐肉
+item.antiCB.name=反物质带骨头的腐肉
 item.shoggothFlesh.overworld.name=修格斯的肉
 item.shoggothFlesh.abyssalwasteland.name=深渊修格斯的肉
 item.shoggothFlesh.dreadlands.name=恐惧修格斯的肉
 item.shoggothFlesh.omothol.name=奥穆索修格斯的肉
 item.shoggothFlesh.darkrealm.name=阴影修格斯的肉
 item.shadowplate.name=阴影泰坦甲板
-item.necronomicon.name=Necronomicon
-item.necronomicon_cor.name=Abyssal Wasteland Necronomicon
-item.necronomicon_dre.name=Dreadlands Necronomicon
-item.necronomicon_omt.name=Omothol Necronomicon
-item.abyssalnomicon.name=Abyssalnomicon
-item.crystalbag_small.name=Small Crystal Bag
-item.crystalbag_medium.name=Medium Crystal Bag
-item.crystalbag_large.name=Large Crystal Bag
-item.crystalbag_huge.name=Huge Crystal Bag
+item.necronomicon.name=死灵之书
+item.necronomicon_cor.name=深渊荒芜之地死灵之书
+item.necronomicon_dre.name=恐惧之地死灵之书
+item.necronomicon_omt.name=奥穆索死灵之书
+item.abyssalnomicon.name=深渊之书
+item.crystalbag_small.name=小型晶体背包
+item.crystalbag_medium.name=中型型晶体背包
+item.crystalbag_large.name=大型型晶体背包
+item.crystalbag_huge.name=超大型型晶体背包
+item.nugget.abyssalnite.name=深渊锭粒
+item.nugget.coralium.name=精炼珊瑚锭粒
+item.nugget.dreadium.name=恐惧锭粒
+item.nugget.ethaxium.name=伊修斯锭粒
 
 #Entities
 entity.abyssalcraft.depthsghoul.name=深渊食尸鬼
@@ -771,15 +908,13 @@ entity.abyssalcraft.antiskeleton.name=反物质骷髅
 entity.abyssalcraft.antispider.name=反物质蜘蛛
 entity.abyssalcraft.antizombie.name=反物质僵尸
 entity.abyssalcraft.lessershoggoth.name=小型修格斯
-entity.abyssalcraft.lessershoggoth.abyssal.name=小型深渊修格斯
-entity.abyssalcraft.lessershoggoth.dreaded.name=小型恐惧修格斯
-entity.abyssalcraft.lessershoggoth.omothol.name=小型奥穆索修格斯
-entity.abyssalcraft.lessershoggoth.dark.name=小型阴影修格斯
 entity.abyssalcraft.shadowtitan.name=阴影泰坦
 entity.abyssalcraft.omotholwarden.name=奥穆索守卫
 entity.abyssalcraft.jzaharminion.name=守门者奴仆
 entity.abyssalcraft.omotholghoul.name=奥穆索食尸鬼
 entity.abyssalcraft.remnant.name=雷姆南特
+entity.abyssalcraft.greaterdreadspawn.name=大型恐惧卵
+entity.abyssalcraft.lesserdreadbeast.name=小型恐惧野兽
 
 #Potions
 potion.Cplague=珊瑚侵染
