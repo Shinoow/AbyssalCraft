@@ -10,23 +10,23 @@ achievement.mineAby.desc=挖掘一些深渊石
 achievement.mineCorgem=海洋宝石
 achievement.mineCorgem.desc=挖掘一些珊瑚宝石
 
-achievement.shadowGems=Gems of pure darkness
-achievement.shadowGems.desc=Obtained a Shadow Gem.
+achievement.shadowGems=纯粹黑暗的宝石
+achievement.shadowGems.desc=获得一个阴影宝石.
 
 achievement.mineCor=绿色的材料
 achievement.mineCor.desc=挖掘一些深渊珊瑚石
 
-achievement.mineAbyOres=Didn't I see these in the overworld?
-achievement.mineAbyOres.desc=Mined some Abyssal Ores.
+achievement.mineAbyOres=难道我在主世界见过这些矿石?
+achievement.mineAbyOres.desc=挖掘一些深渊之地的矿石.
 
-achievement.mineDread=Minerals of the Dreadlands
-achievement.mineDread.desc=Mined some Dreadlands Ores
+achievement.mineDread=恐惧之地的矿产
+achievement.mineDread.desc=挖掘一些恐惧之地的矿石
 
-achievement.dreadium=Plague-free Ingots
-achievement.dreadium.desc=Transmuted some Dreadium
+achievement.dreadium=Plague-免费的锭
+achievement.dreadium.desc=嬗变一些恐惧锭
 
-achievement.ethaxium=What souls are made out of...
-achievement.ethaxium.desc=Crafted a Ethaxium Ingot
+achievement.ethaxium=是由谁的灵魂制成的...
+achievement.ethaxium.desc=合成一个伊修斯锭
 
 achievement.killghoul=杀死一个深渊食尸鬼
 achievement.killghoul.desc=噢耶... 可是为什么这也是个成就呢？
@@ -43,44 +43,44 @@ achievement.wilsonhead.desc=我的身体去哪了？
 achievement.orangehead=内侧的头颅
 achievement.orangehead.desc=你的诊断已确定, 你有传染病。
 
-achievement.necro=Book of The Dead, and knowledge
-achievement.necro.desc=Crafted a Necronomicon, now what?
+achievement.necro=亡者之书, 和知识
+achievement.necro.desc=合成一本死灵之书, 然后呢?
 
-achievement.necrou1=Knowledge of the Wasteland
-achievement.necrou1.desc=Crafted a Abyssal Wasteland Necronomicon.
+achievement.necrou1=荒芜之地的知识
+achievement.necrou1.desc=合成一本深渊荒芜之地死灵之书.
 
-achievement.necrou2=Knowledge of the Corrupted
-achievement.necrou2.desc=Crafted a Dreadlands Necronomicon.
+achievement.necrou2=腐败的知识
+achievement.necrou2.desc=合成一本恐惧之地死灵之书.
 
-achievement.necrou3=Knowledge of the Unknown
-achievement.necrou3.desc=Crafted a Omothol Necronomicon.
+achievement.necrou3=未知的知识
+achievement.necrou3.desc=合成一本奥穆索死灵之书.
 
-achievement.abyssaln=Everything you weren't meant to know
-achievement.abyssaln.desc=Crafted The Abyssalnomicon. J'zahar is somewhat proud of you.
+achievement.abyssaln=你必须知道的事情
+achievement.abyssaln.desc=合成深渊之书. 扎哈尔有几分欣赏你.
 
-achievement.ritual=The Dark Arts
-achievement.ritual.desc=You have no idea what you're getting into, do you?
+achievement.ritual=黑暗艺术
+achievement.ritual.desc=你不知道你将要到哪里, 不是吗?
 
-achievement.ritualSummon=Behold the wrath of the Necronomicon!
-achievement.ritualSummon.desc=Performed a Summoning Ritual.
+achievement.ritualSummon=看那死灵之书的愤怒!
+achievement.ritualSummon.desc=进行一次召唤仪式.
 
-achievement.ritualCreate=No need for a Workbench
-achievement.ritualCreate.desc=Performed a Creation Ritual.
+achievement.ritualCreate=不需要工作台
+achievement.ritualCreate.desc=进行一次创造仪式.
 
-achievement.ritualBreed=Reproduction through magic
-achievement.ritualBreed.desc=Performed a Breeding Ritual.
+achievement.ritualBreed=利用魔法的复制
+achievement.ritualBreed.desc=进行一次复制仪式.
 
-achievement.ritualPotion=Occult alchemy
-achievement.ritualPotion.desc=Performed a Potion Ritual.
+achievement.ritualPotion=神秘炼金术
+achievement.ritualPotion.desc=进行一次药水仪式.
 
-achievement.ritualPotionAoE=Temporary beacon
-achievement.ritualPotionAoE.desc=Performed a Area-of-Effect Potion Ritual.
+achievement.ritualPotionAoE=暂时的信标
+achievement.ritualPotionAoE.desc=进行一次范围效果的药水仪式.
 
-achievement.ritualInfusion=Power merging
-achievement.ritualInfusion.desc=Performed a Infusion Ritual.
+achievement.ritualInfusion=力量融合
+achievement.ritualInfusion.desc=进行一次注魔仪式.
 
-achievement.shoggothInfestation=Shoggoth infestation
-achievement.shoggothInfestation.desc=You could not have expected this to end well...
+achievement.shoggothInfestation=修格斯群袭
+achievement.shoggothInfestation.desc=你不能期望这是一个好的结束...
 
 achievement.enterabyss=欢迎来到荒芜之地
 achievement.enterabyss.desc=进入第一个维度
@@ -112,11 +112,11 @@ achievement.enterOmothol.desc=你已经到达了扎哈尔的王国奥穆索
 achievement.darkRealm=陷阱之底
 achievement.darkRealm.desc=你刚刚摔倒了，不是吗？
 
-achievement.killOmotholelite=That thing was awfully strong
-achievement.killOmotholelite.desc=You killed a powerful being from Omothol.
+achievement.killOmotholelite=那东西极其强大
+achievement.killOmotholelite.desc=你杀死了一个来自奥穆索的强大生物.
 
-achievement.locateJzahar=A wild J'zahar appears
-achievement.locateJzahar.desc=I hope you brought potions, or something.
+achievement.locateJzahar=一个野生的扎哈尔出现了
+achievement.locateJzahar.desc=我希望你带了药水或者别的.
 
 achievement.killJzahar=浮动利率？并非如此。
 achievement.killJzahar.desc=你打败了守门者，可他并没死。
@@ -133,20 +133,20 @@ achievement.GK2.desc=合成阿索拉的恐惧传送门钥匙
 achievement.GK3=古老的钥匙
 achievement.GK3.desc=合成查加罗特的瑞尔森钥匙
 
-achievement.makeTransmutator=Break all laws of physic!
-achievement.makeTransmutator.desc=Crafted a Transmutator.
+achievement.makeTransmutator=破坏所有的物理定律!
+achievement.makeTransmutator.desc=合成一个嬗变器.
 
-achievement.makeCrystallizer=Crystallize everything
-achievement.makeCrystallizer.desc=Crafted a Crystallizer.
+achievement.makeCrystallizer=晶体化一切
+achievement.makeCrystallizer.desc=合成一个结晶器.
 
-achievement.makeMaterializer=Create your own materials
-achievement.makeMaterializer.desc=Crafted a Materializer.
+achievement.makeMaterializer=创造属于你的物质
+achievement.makeMaterializer.desc=合成一个具现化器.
 
-achievement.makeCrystalBag=Store all of your crystals here!
-achievement.makeCrystalBag.desc=Crafted a Crystal Bag. They can be upgraded.
+achievement.makeCrystalBag=将你所有的晶体存储在这!
+achievement.makeCrystalBag.desc=合成一个晶体袋. 他们能够进行升级.
 
-achievement.makeEngraver=Infinite counterfeit coins!
-achievement.makeEngraver.desc=Craft an Engraver.
+achievement.makeEngraver=无限的伪造钱币!
+achievement.makeEngraver.desc=合成一个铸造器.
 
 #Messages
 message.asorah.spawn=哈哈, 愚蠢的人类, 我解放了!
@@ -175,17 +175,17 @@ message.sacthoth.damage.projectile=哈, 你的投射物对我无效.
 message.portalplacer.error.1=你感受到一种被抛弃的感觉, 扎哈尔并没有批准你.
 message.portalplacer.error.2=没有任何事情发生...
 message.necronomicon.nope=似乎你还没拥有这本书. 你可曾想过不去尝试读它?
-message.remnant.busy=Sorry, I'm currently busy with a customer, come back later.
-message.remnant.insult.0=%s, you speak Aklo just as well as modders speak 1.8.
-message.remnant.insult.1=You know nothing, %s.
-message.remnant.insult.2=You're worthless without a Necronomicon, %s.
+message.remnant.busy=对不起, 我正在招待一个客人, 不久会回来的.
+message.remnant.insult.0=%s, 你说Aklo就像mod制作者说1.8一样.
+message.remnant.insult.1=你什么都不知道, %s.
+message.remnant.insult.2=没有了死灵之书你什么都不是, %s.
 
 #Container Inventories
 container.abyssalcraft.crate=板条箱
 container.abyssalcraft.crystallizer=结晶器
 container.abyssalcraft.transmutator=嬗变器
 container.abyssalcraft.engraver=铸造器
-container.abyssalcraft.materializer=Materializer
+container.abyssalcraft.materializer=具现化器
 
 #NEI Integration
 container.abyssalcraft.crystallizer.nei=结晶化
@@ -216,22 +216,22 @@ necronomicon.information.materials=材料
 necronomicon.information.progression=发展
 necronomicon.information.integration=整合
 necronomicon.information.entities=实体
-necronomicon.information.outergods=The Outer Gods
-necronomicon.other=Other Information
-necronomicon.locked=Locked
-necronomicon.information.specialmaterials=Special Materials
-necronomicon.anywhere=Anywhere
-necronomicon.location=Location
-necronomicon.info=Information
-necronomicon.normal=Normal
+necronomicon.information.outergods=外神
+necronomicon.other=其他信息
+necronomicon.locked=锁住
+necronomicon.information.specialmaterials=特殊的材料
+necronomicon.anywhere=任何地方
+necronomicon.location=位置
+necronomicon.info=信息
+necronomicon.normal=正常
 
 #Necronomicon Text
 #Note: the maximum amount of letters per string is 256
 #The following text example has the letter limit:
 #Lorem ipsum dolor sit amet, ad dicit prompta ullamcorper nam, quando ubique intellegat nam eu, ad dolore mollis has. Sint debet eum te. At dicunt liberavisse mea. Ea minimum sententiae ius, ei duo timeam virtute. Aliquid graecis eu usu, ea dignissim conse.
 #Anything longer than that will trigger a crash when you try to read it
-necronomicon.text.necronomicon.1=这是死灵之书, 一本由Abdul Alhazred所写的书, 熟知为 "The Mad Arab". 这本书囊括了旧日支配者的知识, 他们的名字和怎么去召唤他们. 里面同样有关于这本书所能举行的咒语和仪式的信息.
-necronomicon.text.necronomicon.2=The Necronomicon itself is a chapter of the Abyssalnomicon, which was read to Alhazred by a demon known as J'zahar, who had composed the Abyssalnomicon from infinite knowledge known to The Great Old Ones.
+necronomicon.text.necronomicon.1=这是死灵之书, 一本由阿卜杜·阿尔哈兹莱德所写的书, 熟知为 "The Mad Arab". 这本书囊括了旧日支配者的知识, 他们的名字和怎么去召唤他们. 里面同样有关于这本书所能举行的咒语和仪式的信息.
+necronomicon.text.necronomicon.2=死灵之书是深渊之书中的一章, 被阿尔哈兹莱德所解读 by a demon known as J'zahar, who had composed the Abyssalnomicon from infinite knowledge known to The Great Old Ones.
 necronomicon.text.necronomicon.3=There are 4 types of Necronomicons within the Abyssalnomicon: The Necronomicon, The Abyssal Wasteland Necronomicon, knowledge bound to a specific dimension.
 necronomicon.text.necronomicon.4=In order to unlock the knowledge, one must travel to said dimension and empower the Necronoicon with the flesh of that world. The Abyssalnomicon contains additional knowledge known only to J'zahar, knowledge man was not meant to obtain.
 
@@ -643,31 +643,31 @@ tile.ACO.name=深渊铜矿石
 tile.APCorO.name=珠光四射的珊瑚矿
 tile.ALCorO.name=液化珊瑚矿
 tile.solidLava.name=固态岩浆
-tile.Eth.name=伊桑斯锭
-tile.EB.0.name=伊桑斯砖块
-tile.EB.1.name=錾制伊桑斯砖石
-tile.EBP.name=伊桑斯柱子
-tile.EBs.name=伊桑斯砖石楼梯
-tile.EBs1.name=伊桑斯砖石半阶
-tile.EBs2.name=伊桑斯砖石双半阶
-tile.EBf.name=伊桑斯砖石栅栏
+tile.Eth.name=伊修斯锭
+tile.EB.0.name=伊修斯砖块
+tile.EB.1.name=錾制伊修斯砖石
+tile.EBP.name=伊修斯柱子
+tile.EBs.name=伊修斯砖石楼梯
+tile.EBs1.name=伊修斯砖石半阶
+tile.EBs2.name=伊修斯砖石双半阶
+tile.EBf.name=伊修斯砖石栅栏
 tile.OS.name=奥穆索石头
-tile.BOE.name=伊桑斯锭块
+tile.BOE.name=伊修斯锭块
 tile.OG.name=奥穆索之门
 tile.Ofire.name=奥穆索之火
 tile.engraver.name=铸造器
 tile.house.name=一个房子
 tile.materializer.name=具现化器
-tile.DEB.0.name=深色伊桑斯砖块
-tile.DEB.1.name=錾制深色伊桑斯砖块
-tile.DEBP.name=深色伊桑斯柱
-tile.DEBs.name=深色伊桑斯砖块楼梯
-tile.DEBs1.name=深色伊桑斯砖块台阶
-tile.DEBs2.name=深色伊桑斯砖块双层台阶
-tile.DEBf.name=深色伊桑斯砖块栅栏
-tile.ritualaltar.name=Ritual Altar
-tile.ritualpedestal.name=Ritual Pedestal
-tile.shoggothBlock.name=Shoggoth Ooze
+tile.DEB.0.name=深色伊修斯砖块
+tile.DEB.1.name=錾制深色伊修斯砖块
+tile.DEBP.name=深色伊修斯柱
+tile.DEBs.name=深色伊修斯砖块楼梯
+tile.DEBs1.name=深色伊修斯砖块台阶
+tile.DEBs2.name=深色伊修斯砖块双层台阶
+tile.DEBf.name=深色伊修斯砖块栅栏
+tile.ritualaltar.name=仪式祭坛
+tile.ritualpedestal.name=仪式基座
+tile.shoggothBlock.name=修格斯渗出物
 
 #Items
 item.DEV_BLADE.name=恶魔之刃
@@ -828,19 +828,19 @@ item.antiFlesh.name=反物质腐肉
 item.antiBone.name=反物质骨头
 item.antiSpider_eye.name=反物质蜘蛛眼
 item.soulReaper.name=萨多夫的灵魂收割刀
-item.EB.name=伊桑斯砖石
-item.EI.name=伊桑斯锭
+item.EB.name=伊修斯砖石
+item.EI.name=伊修斯锭
 item.lifeCrystal.name=生命水晶
-item.EP.name=伊桑斯镐
-item.EA.name=伊桑斯斧
-item.ES.name=伊桑斯锹
-item.ESW.name=伊桑斯剑
-item.EH.name=伊桑斯锄
-item.AEB.name=伊桑斯靴子
-item.AEH.name=伊桑斯头盔
-item.AEC.name=伊桑斯胸甲
-item.AEP.name=伊桑斯护腿
-item.EthU.name=伊桑斯升级套件
+item.EP.name=伊修斯镐
+item.EA.name=伊修斯斧
+item.ES.name=伊修斯锹
+item.ESW.name=伊修斯剑
+item.EH.name=伊修斯锄
+item.AEB.name=伊修斯靴子
+item.AEH.name=伊修斯头盔
+item.AEC.name=伊修斯胸甲
+item.AEP.name=伊修斯护腿
+item.EthU.name=伊修斯升级套件
 item.coin.name=硬币
 item.cthulhucoin.name=刻有克苏鲁的硬币
 item.eldercoin.name=刻有接骨木的硬币
@@ -868,10 +868,10 @@ item.crystalbag_small.name=小型晶体背包
 item.crystalbag_medium.name=中型型晶体背包
 item.crystalbag_large.name=大型型晶体背包
 item.crystalbag_huge.name=超大型型晶体背包
-item.nugget.abyssalnite.name=Abyssalnite Nugget
-item.nugget.coralium.name=Refined Coralium Nugget
-item.nugget.dreadium.name=Dreadium Nugget
-item.nugget.ethaxium.name=Ethaxium Nugget
+item.nugget.abyssalnite.name=深渊锭粒
+item.nugget.coralium.name=精炼珊瑚锭粒
+item.nugget.dreadium.name=恐惧锭粒
+item.nugget.ethaxium.name=伊修斯锭粒
 
 #Entities
 entity.abyssalcraft.depthsghoul.name=深渊食尸鬼
@@ -913,8 +913,8 @@ entity.abyssalcraft.omotholwarden.name=奥穆索守卫
 entity.abyssalcraft.jzaharminion.name=守门者奴仆
 entity.abyssalcraft.omotholghoul.name=奥穆索食尸鬼
 entity.abyssalcraft.remnant.name=雷姆南特
-entity.abyssalcraft.greaterdreadspawn.name=Greater Dread Spawn
-entity.abyssalcraft.lesserdreadbeast.name=Lesser Dreadbeast
+entity.abyssalcraft.greaterdreadspawn.name=大型恐惧卵
+entity.abyssalcraft.lesserdreadbeast.name=小型恐惧野兽
 
 #Potions
 potion.Cplague=珊瑚侵染
