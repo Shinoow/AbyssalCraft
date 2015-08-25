@@ -226,9 +226,9 @@ necronomicon.info=Information
 necronomicon.normal=Normal
 
 #Necronomicon Text
-#Note: the maximum amount of letters per string is 256
+#Note: the maximum amount of letters per string is 368
 #The following text example has the letter limit:
-#Lorem ipsum dolor sit amet, ad dicit prompta ullamcorper nam, quando ubique intellegat nam eu, ad dolore mollis has. Sint debet eum te. At dicunt liberavisse mea. Ea minimum sententiae ius, ei duo timeam virtute. Aliquid graecis eu usu, ea dignissim conse.
+#Lorem ipsum dolor sit amet, nam an mutat eripuit temporibus. Eu eius luptatum similique eam. Erat euismod bonorum cu vis, malis salutatus neglegentur mea no. His et abhorreant conclusionemque, has prima movet dignissim an, vitae deleniti theophrastus ad mea. Est no offendit incorrupte, ferri illum labores qui ut. Sanctus adipisci eum ex, cu falli virtute dissentias.
 #Anything longer than that will trigger a crash when you try to read it
 necronomicon.text.necronomicon.1=This is the Necronomicon, a book written by Abdul Alhazred, also known as "The Mad Arab". The book contains knowledge about The Great Old Ones, their names and how to summon them. There is also information about spells and rituals the book can perform.
 necronomicon.text.necronomicon.2=The Necronomicon itself is a chapter of the Abyssalnomicon, which was read to Alhazred by a demon known as J'zahar, who had composed the Abyssalnomicon from infinite knowledge known to The Great Old Ones.
@@ -321,17 +321,16 @@ necronomicon.text.crafting.shadowgem.1=A Shadow Gem is crafted with Shadow Gem S
 necronomicon.text.crafting.shadowgem.2=Shadow Fragments are dropped by Shadow Creatures, Shadow Gem Shards are dropped by Shadow Monsters and Shadow Gems are dropped by Shadow Beasts. They spawn in Darklands Mountains biomes and the Dark Realm.
 necronomicon.text.crafting.oblivionshard=A Shard of Oblivion is crafted with Shadow Gems and a Transmutation Gem.
 necronomicon.text.crafting.gk1=The Gateway Key is crafted with Blaze Rods, Coralium Pearls and a Oblivion Catalyst.
-necronomicon.text.crafting.necro_c=A Abyssal Wasteland Necronomicon is crafted with Coralium Plagued Flesh and a Necronomicon. It contains more knowledge.
+necronomicon.text.crafting.necro_c=A Abyssal Wasteland Necronomicon is crafted with Skin of The Abyssal Wasteland and a Necronomicon. It contains more knowledge.
 necronomicon.text.crafting.psdltracker=A Powerstone Tracker is crafted with Coralium Gems and a Eye of Ender.
-necronomicon.text.crafting.necro_d=A Dreadlands Necronomicon is crafted with Dread Fragments and a Abyssal Wasteland Necronomicon.
+necronomicon.text.crafting.necro_d=A Dreadlands Necronomicon is crafted with Skin of The Dreadlands and a Abyssal Wasteland Necronomicon.
 necronomicon.text.crafting.transmutator.1=A Transmutator is crafted with Coralium Bricks, Blocks of Refined Coralium, a Transutation Gem and a Liquid Coralium Bucket.
 necronomicon.text.crafting.transmutator.2=To obtain Coralium Bricks, you must pour Liquid Antimatter on Liquid Coralium, then harvest the stone formed from the Liquid Coralium. Then you must smelt the Coralium Stone for Coralium Ingots.
 necronomicon.text.crafting.crystallizer.1=A Crystallizer is crafted using Dreadstone Bricks, Blocks of Dreadium and a Furnace.
 necronomicon.text.crafting.crystallizer.2=Dreadium Ingots are obtained by transmuting Dreaded Shards of Abyssalnite, which are dropped by Dreadguards inside the Dreadlands. Dreadium is a lot easier to obtain once you have a Crystallizer.
-necronomicon.text.crafting.dreadaltarbot.1=An Altar of Cha'garoth (Bottom) is crafted with Dreadstone, Dreadium Ingots, Asorah's Dreaded Gateway Key, Bones,
-necronomicon.text.crafting.dreadaltarbot.2=Dread Cloth and a Dreaded Shard of Abyssalnite. Dread Cloth is crafted by surrounding a piece of Leather with Dread Fragments, dropped by many mobs inside the Dreadlands.
+necronomicon.text.crafting.dreadaltarbot=An Altar of Cha'garoth (Bottom) is crafted with Dreadstone, Dreadium Ingots, Asorah's Dreaded Gateway Key, Bones, Dread Cloth and a Dreaded Shard of Abyssalnite.
 necronomicon.text.crafting.dreadaltartop=An Altar of Cha'garoth (Top) is crafted with Sticks, a Bucket, Dread Cloths and Dreadium Ingots.
-necronomicon.text.crafting.necro_o=A Omothol Necronomicon is crafted with Omothol Ghoul Flesh and a Dreadlands Necronomicon.
+necronomicon.text.crafting.necro_o=A Omothol Necronomicon is crafted with Skin of Omothol and a Dreadlands Necronomicon.
 necronomicon.text.crafting.lifecrystal.1=A Life Crystal is crafted with a Carbon, a Hydrogen, a Nitrogen, a Oxygen, a Phosphorus and a Sulfur Crystal.
 necronomicon.text.crafting.lifecrystal.2=The Crystals are gained from crystallizing Coal, Water, Nitre, Rotten Flesh and Lapis Lazuli. The Nitrogen Crystal comes from Crystallizing the Nitrate Crystal from the Nitre.
 necronomicon.text.crafting.ethaxiumingot.1=A Ethaxium Ingot is crafted with Ethaxium Bricks and a Life Crystal.
@@ -344,29 +343,28 @@ necronomicon.text.crafting.crystalbag.1=A Crystal bag is crafted with Leather an
 necronomicon.text.crafting.crystalbag.2=They can be upgraded to hold more crystals by surrounding it with Coralium Plagued Flesh, Dread Fragments, then Omothol Ghoul Flesh.
 necronomicon.text.crafting.materializer.1=A Materializer is crafted with Ethaxium Bricks, Obsidian, Blocks of Ethaxium and a Liquid Antimatter Bucket.
 necronomicon.text.crafting.materializer.2=To use a Materializer, you need to place a Crystal Bag in the first slot, then a Necronomicon in the second, then you can create materials using the crystals inside the bag.
-necronomicon.text.crafting.abyssalnomicon.1=An Abyssalnomicon is crafted with Ethaxium Bricks, Eldritch Scales, a Oblivion Catalyst and a Omothol Necronomicon.
+necronomicon.text.crafting.abyssalnomicon.1=An Abyssalnomicon is crafted with Ethaxium Ingots, Eldritch Scales, a Oblivion Catalyst and a Omothol Necronomicon.
 necronomicon.text.crafting.abyssalnomicon.2=Eldritch Scales are gained from killing Remnants and Minions of The Gatekeeper.
+necronomicon.text.crafting.rendingstaff.1=A Staff of Rending is crafted with Shadow Gem Shards and a Shard of Oblivion. It can harvest energy from certain entities (by right clicking).
+necronomicon.text.crafting.rendingstaff.2=Abyssal Wasteland Energy can be harvested from any Coralium entity inside the Abyssal Wasteland. Dreadlands Energy can be harvested from any Dread entity inside the Dreadlands. Omothol Energy can be harvested from any entity inside Omothol. Shadow Energy are harvested from any living shadow. Essences are created when sufficient energy is collected.
+necronomicon.text.crafting.skin_aby=A Skin of The Abyssal Wasteland is crafted with Coralium-plagued Flesh and a Essence of The Abyssal Wasteland. The essence is obtained through the use of a Staff of Rending.
+necronomicon.text.crafting.skin_dre=A Skin of The Dreadlands is crafted with Dread Fragment and a Essence of The Dreadlands. The essence is obtained through the use of a Staff of Rending.
+necronomicon.text.crafting.skin_omt=A Skin of Omothol is crafted with Omothol Ghoul Flesh and a Essence of Omothol. The essence is obtained through the use of a Staff of Rending.
+necronomicon.text.crafting.dreadcloth=Dread Cloth is crafted with Dread Fragments, Strings and a piece of Leather.
 
-necronomicon.text.overworld.progression.1=In order to reach the new dimensions, one must craft a Gateway Key, which requires one to travel to the Nether, and to visit a Darklands and a water-based biome. The water-based biome can be either a swamp or a ocean biome.
-necronomicon.text.overworld.progression.2=From the Nether you need 2 Blaze Rods, and probably a few more for later. From the Darklnads biome you need to slay living shadows to finally obtain Shadow Gems. From the water-based biome you need Coralium Gems in order to create a Coralium Pearl.
-necronomicon.text.overworld.progression.3=Once you have obtained these items, you can begin crafting Transmutation Gems (four will be needed, and the excess Blaze Rods is used to make powder for these), then you surround each Transmutation Gem with 8 Shadow Gems.
-necronomicon.text.overworld.progression.4=Combining the 4 Shards of Oblivion with 4 units of Redstone Dust around a Eye of Ender will form the Oblivion Catalyst, which you place in the top right corner of the crafting grid, with 2 Blaze Rods in a diagonal from it.
-necronomicon.text.overworld.progression.5=Then you place 1 Coralium Pearl on each empty slot near the Oblivion Catalyst (2 in total). This will allow you to craft a Gateway Key, which is used by right-clicking on the ground at a open area. Doing so will form a portal.
-necronomicon.text.overworld.progression.6=For more information on progression, you need the Abyssal Wasteland Necronomicon.
+necronomicon.text.overworld.progression.1=In order to reach the Abyssal Wasteland, one must craft a Gateway Key, which requires one to travel to the Nether, and to visit a Darklands and a water-based biome. The water-based biome can be either a swamp or a ocean biome.
+necronomicon.text.overworld.progression.2=From the Nether you need 2 Blaze Rods, and probably a few more for later. From the Darklands biome you need to slay living shadows to finally obtain Shadow Gems. They are most commonly found in Darklands Mountains biomes. It is recommended to obtain a Staff of Rending in order to obtain Shadow Gems faster (more information in the special materials section).
+necronomicon.text.overworld.progression.3=From the water-based biome you need Coralium Gems in order to create Coralium Pearls. Once you have obtained these items, you can begin crafting Transmutation Gems (4 will be needed, and the excess Blaze Rods is used to make powder for these). Recipes for this and Shards of Oblivion can be found in the special materials section.
+necronomicon.text.overworld.progression.4=When you have 4 Shards of Oblivion, use those and 4 units of Redstone Dust to infuse a Eye of Ender (through an infusion ritual, found in the ritual section of the Necronomicon) in order to create an Oblivion Catalyst, main component of the Gateway Key (the special materials section has the recipe).
+necronomicon.text.overworld.progression.5=Once the Gateway Key is crafted, simply right-click on the ground to form a portal. For more information, you will need the Abyssal Wasteland Necronomicon, which requires 8 Skins of The Abyssal Wasteland in order to upgrade. The Staff of Rending is needed in order to obtain essences used to craft those.
 
-necronomicon.text.abyssal.progression.1=Once you have reached the Abyssal Wasteland, your next goal is to reach the Dreadlands. You will need 3 components in order to upgrade your Gateway Key, The Eye of The Abyss, a Dreadlands Infused Powerstone and a Transmutation Gem.
-necronomicon.text.abyssal.progression.2=The first is obtained by defeating Asorah, The Fallen. In order to face Asorah you need a Altar, and a Liquid Coralium Bucket. Liquid Coralium is quite easy to obtain, as large amounts of it can be found at the surface of the Abyssal Wasteland.
-necronomicon.text.abyssal.progression.3=The Altar is crafted using 4 Gold Ingots, a Enchantment Table, a Transmutation Gem and a Empty Bucket. Bucket on top middle slot, with the Transmutation Gem and the Enchantment Table under that, then Gold Ingots on each side of the aforementioned objects.
-necronomicon.text.abyssal.progression.4=Place the Altar inside the Abyssal Wasteland and right-click it with the Liquid Coralium Bucket to summon Asorah. Once you have defeated Asorah, he will drop his eye with a large quantity of exp and materials found in the dimension.
-necronomicon.text.abyssal.progression.5=The Dreadlands Infused Powerstone is located inside a Abyssal Stronghold, which can be found using a Powerstone Tracker. Trackers are crafted by surrounding a Eye of Ender with Coralium Gems.
-necronomicon.text.abyssal.progression.6=Once you have tracked down the Powerstone, you can mine it with a Refined Coralium Pickaxe. Lastly you can upgrade the Gateway Key by placing the items as a triangle in the crafting grid, with the Gateway Key in the middle.
+necronomicon.text.abyssal.progression.1=Once you have reached the Abyssal Wasteland, your next goal is to reach the Dreadlands. You will need 3 components in order to upgrade your Gateway Key, an Eye of The Abyss, a Dreadlands Infused Powerstone and a Transmutation Gem. The first is obtained by defeating Asorah, The Fallen, summoned through the ritual "Ritual of The Sleeper" (in ritual section).
+necronomicon.text.abyssal.progression.2=Asorah uses Spectral Dragons to heal himself, so they should be taken out quickly throughout the fight. Once defeated, Asorah will drop his eye with a large quantity of exp and materials found in the dimension. The Dreadlands Infused Powerstone is located inside a Abyssal Stronghold, which can be found using Powerstone Trackers (recipe in special materials section).
+necronomicon.text.abyssal.progression.3=Once you have tracked down the Powerstone, you can mine it with a Refined Coralium Pickaxe. Lastly you can upgrade your Gateway Key by infusing it with the required components ("Asorah's Dreaded Gateway Key" ritual). Upgrading your Necronomicon to the Dreadlands Necronomicon requires 8 Skins of The Dreadlands.
 
-necronomicon.text.dreadlands.progression.1=Once you have reached the Dreadlands, your next goal is to reach Omothol. You will need to own a Transmutator, and you need to defeat Cha'garoth, The Dreadbeast. In order to reach Cha'garoth, you need the Altar of Cha'garoth, made out of 2 pieces.
-necronomicon.text.dreadlands.progression.2=The bottom piece is crafted by placing Asorah's Dreaded Gateway Key in the middle, with a Dreadium Ingot on each sides, a Dreaded Shard of Abyssalnite with a Dreadstone on each sides below and a Dread Cloth with a Bone on each side above.
-necronomicon.text.dreadlands.progression.3=The top is crafted by placing 3 Dreadium Ingots in the bottom row, 3 Dread Cloths in the middle row and a Bucket with a Stick on each side at the top. You need to place the Altar at Y = 40 in a Dreadlands Mountains biome and right-click it.
-necronomicon.text.dreadlands.progression.4=Doing so will enable you to enter The Lair of Cha'garoth. Once inside, you need to move forwards fighting the Dreadguards until you reach a pit, which leads to Cha'garoth. Killing the Dreadbeast gets you a Dread-plagued Gateway Key, and loot.
-necronomicon.text.dreadlands.progression.5=In order for the Gateway Key to function, you need to transmute it in a Transmutator. Transmutators are crafted by placing a Transmutation Gem in the middle, a Liquid Coralium Bucket underneath and place Coralium Bricks (item) in the remaining slots.
-necronomicon.text.dreadlands.progression.6=Coralium Bricks are obtained by pouring Liquid Antimatter on Liquid Coralium, then smelting the Coralium Stone the Liquid Coralium turns into. Once transmuted, you will have Cha'garoth's R'lyehian Gateway Key, granting you access to Omothol.
+necronomicon.text.dreadlands.progression.1=Once you have reached the Dreadlands, your next goal is to reach Omothol. You will need to own a Transmutator, and you need to defeat Cha'garoth, The Dreadbeast. In order to reach Cha'garoth, you need the Altar of Cha'garoth, made out of 2 pieces. Both recipes are found in the special materials section.
+necronomicon.text.dreadlands.progression.2=Once you have both Altar pieces, you need to place them at Y = 40 inside a Dreadlands Mountain biome and right-click it. Doing so will grant you entry to The Lair of Cha'garoth. After fighting through Dreadguards and eventually killing Cha'garoth, you will receive a Dread-plagued Gateway Key, along with loot. The key needs to be transmuted into a functioning one.
+necronomicon.text.dreadlands.progression.3=With the aforementioned Transmutator (recipe in Abyssal Wasteland special materials section) you can transmute the Dread-plagued Gateway Key into Cha'garoth's R'lyehian Gateway Key, granting you access to Omothol. Upgrading your Necronomicon to the Omothol Necronomicon requires 8 Skins of Omothol.
 
 necronomicon.text.omothol.progression.1=Now that you've arrived in Omothol, it's time to battle J'zahar, Gatekeeper of The Abyss. This dimension is currently incomplete, so there isn't that much to do here apart from getting materials to craft the Abyssalnomicon.
 necronomicon.text.omothol.progression.2=This section will be updated when Omothol has been completed. At that point, there will be a gigantic city built upon these floating islands.
@@ -465,7 +463,7 @@ ac.ritual.asorahGatewayKey.desc=Asorah's Dreaded Gateway Key is created by infus
 ac.ritual.summonAsorah=Ritual of The Sleeper
 ac.ritual.summonAsorah.desc=Summons Asorah, The Fallen, from the Dark Realm. The afterlife is commonly referred to as an eternal slumber, in which a sleeper is a entity beyond life and death.
 ac.ritual.summonSacthoth=Ritual of Shadows
-ac.ritual.summonSacthoth.desc=Summons Sacthoth, Harbinger of Doom, from the Dark Realm.
+ac.ritual.summonSacthoth.desc=Summons Sacthoth, Harbinger of Doom, from the Dark Realm. Offer 4 pieces of Obsidian, a Liquid Coralium Bucket, a Liquid Antimatter Bucket, a ODB Core and a Oblivion Catalyst.
 ac.ritual.breeding=Ritual of Fertility
 ac.ritual.breeding.desc=Breeds nearby animals. Might also kill all of them, if unlucky enough.
 ac.ritual.depthsHelmet=Helmet of The Depths
@@ -476,6 +474,14 @@ ac.ritual.depthsLeggings=Leggings of The Depths
 ac.ritual.depthsLeggings.desc=A Leggings of The Depths is created by infusing a Refined Coralium Leggings with 2 Coralium Gem Cluster (9 gems), Coralium Plagued Flesh, a Transmuttion Gem, a Lily Pad, a Vine and a Liquid Coralium Bucket.
 ac.ritual.depthsBoots=Boots of The Depths
 ac.ritual.depthsBoots.desc=A Boots of The Depths is created by infusing a Refined Coralium Boots with 2 Coralium Gem Cluster (9 gems), Coralium Plagued Flesh, a Transmuttion Gem, a Lily Pad, a Vine and a Liquid Coralium Bucket.
+ac.ritual.dreadSpawn=Ritual of Evolving
+ac.ritual.dreadSpawn.desc=All nearby Dread Spawns (regardless of evolution stage) is cloned to produce a double. Offer a Dread Fragment, a Dreadstone, an Abyssalnite Stone, a Chunk of Abyssalnite, a Dreaded Chunk of Abyssalnite, a piece of Rotten Flesh, a Dreaded Shard of Abyssalnite and a Abyssalnite Ingot.
+ac.ritual.corPotionAoE=Corealium Plague Infection
+ac.ritual.corPotionAoE.desc=Spreads the Coralium Plague to nearby entities. Offer 4 Coralium Plagued Flesh, 3 Water Bottles and a piece of Gunpowder.
+ac.ritual.drePotionAoE=Dread Plague Infection
+ac.ritual.drePotionAoE.desc=Spreads the Dread Plague to nearby entities. Offer 4 Dread Fragments, 3 Water Bottles and a piece of Gunpowder.
+ac.ritual.antiPotionAoE=Antimatter Eradication
+ac.ritual.antiPotionAoE.desc=Exposes nearby entities to Liquid Antimatter. Offer 4 Rotten Anti-Flesh, 3 Water Bottles and a piece of Gunpowder.
 
 #Configuration
 ac_dimensions=Dimensions
@@ -490,6 +496,8 @@ ac_biomeweight=Biome Weight
 ac_biomeweight.tooltip=Biome Weight Configuration
 ac_general=General
 ac_general.tooltip=General configuration
+ac_potion=Potions
+ac_potion.tooltip=Potion ID configuration
 
 #Damagesources
 death.attack.coralium=%1$s died from the Coralium Plague
@@ -525,6 +533,10 @@ tooltip.portalplacerjzh.1=Can only be used within
 tooltip.portalplacerjzh.2=The Dreadlands.
 tooltip.soulreaper=Souls harvested
 tooltip.crystalbag=This bag holds crystallized elements
+tooltip.drainstaff.energy.1=Abyssal Wasteland Energy
+tooltip.drainstaff.energy.2=Dreadlands Energy
+tooltip.drainstaff.energy.3=Omothol Energy
+tooltip.drainstaff.energy.4=Shadow Energy
 
 #Creative Tabs
 itemGroup.acblocks=AbyssalCraft Blocks
@@ -668,6 +680,8 @@ tile.DEBf.name=Dark Ethaxium Brick Fence
 tile.ritualaltar.name=Ritual Altar
 tile.ritualpedestal.name=Ritual Pedestal
 tile.shoggothBlock.name=Shoggoth Ooze
+tile.cthulhuStatue.name=Cthulhu Statue
+tile.hasturStatue.name=Hastur Statue
 
 #Items
 item.DEV_BLADE.name=The Dev Blade
@@ -783,22 +797,31 @@ item.DCarbC.name=Dense Carbon Cluster
 item.methane.name=Methane
 item.nitre.name=Nitre
 item.sulfur.name=Sulfur
-item.crystalIron.name=Crystallized Iron
-item.crystalGold.name=Crystallized Gold
-item.crystalSulfur.name=Crystallized Sulfur
-item.crystalCarbon.name=Crystallized Carbon
-item.crystalOxygen.name=Crystallized Oxygen
-item.crystalHydrogen.name=Crystallized Hydrogen
-item.crystalNitrogen.name=Crystallized Nitrogen
-item.crystalPhosphorus.name=Crystallized Phosphorus
-item.crystalPotassium.name=Crystallized Potassium
-item.crystalNitrate.name=Crystallized Nitrate
-item.crystalMethane.name=Crystallized Methane
-item.crystalRedstone.name=Crystallized Redstone
-item.crystalAbyssalnite.name=Crystallized Abyssalnite
-item.crystalCoralium.name=Crystallized Coralium
-item.crystalDreadium.name=Crystallized Dreadium
-item.crystalBlaze.name=Crystallized Blaze
+item.crystal.Iron.name=Crystallized Iron
+item.crystal.Gold.name=Crystallized Gold
+item.crystal.Sulfur.name=Crystallized Sulfur
+item.crystal.Carbon.name=Crystallized Carbon
+item.crystal.Oxygen.name=Crystallized Oxygen
+item.crystal.Hydrogen.name=Crystallized Hydrogen
+item.crystal.Nitrogen.name=Crystallized Nitrogen
+item.crystal.Phosphorus.name=Crystallized Phosphorus
+item.crystal.Potassium.name=Crystallized Potassium
+item.crystal.Nitrate.name=Crystallized Nitrate
+item.crystal.Methane.name=Crystallized Methane
+item.crystal.Redstone.name=Crystallized Redstone
+item.crystal.Abyssalnite.name=Crystallized Abyssalnite
+item.crystal.Coralium.name=Crystallized Coralium
+item.crystal.Dreadium.name=Crystallized Dreadium
+item.crystal.Blaze.name=Crystallized Blaze
+item.crystal.Tin.name=Crystallized Tin
+item.crystal.Copper.name=Crystallized Copper
+item.crystal.Silicon.name=Crystallized Silicon
+item.crystal.Magnesium.name=Crystallized Magnesium
+item.crystal.Aluminium.name=Crystallized Aluminium
+item.crystal.Silica.name=Crystallized Silica
+item.crystal.Alumina.name=Crystallized Alumina
+item.crystal.Magnesia.name=Crystallized Magnesia
+item.crystal.Zinc.name=Crystallized Zinc
 item.DC.name=Dread Cloth
 item.DPP.name=Dreadium Plate
 item.DB.name=Dreadium Katana Blade
@@ -812,15 +835,6 @@ item.ADSC.name=Dreadium Samurai Chestplate
 item.ADSP.name=Dreadium Samurai Leggings
 item.IT.name=Tin Ingot
 item.IC.name=Copper Ingot
-item.crystalTin.name=Crystallized Tin
-item.crystalCopper.name=Crystallized Copper
-item.crystalSilicon.name=Crystallized Silicon
-item.crystalMagnesium.name=Crystallized Magnesium
-item.crystalAluminium.name=Crystallized Aluminium
-item.crystalSilica.name=Crystallized Silica
-item.crystalAlumina.name=Crystallized Alumina
-item.crystalMagnesia.name=Crystallized Magnesia
-item.crystalZinc.name=Crystallized Zinc
 item.antiBeef.name=Anti-Beef
 item.antiChicken.name=Anti-Chicken
 item.antiPork.name=Anti-Pork
@@ -872,6 +886,38 @@ item.nugget.abyssalnite.name=Abyssalnite Nugget
 item.nugget.coralium.name=Refined Coralium Nugget
 item.nugget.dreadium.name=Dreadium Nugget
 item.nugget.ethaxium.name=Ethaxium Nugget
+item.crystalshard.Iron.name=Crystallized Iron Shard
+item.crystalshard.Gold.name=Crystallized Gold Shard
+item.crystalshard.Sulfur.name=Crystallized Sulfur Shard
+item.crystalshard.Carbon.name=Crystallized Carbon Shard
+item.crystalshard.Oxygen.name=Crystallized Oxygen Shard
+item.crystalshard.Hydrogen.name=Crystallized Hydrogen Shard
+item.crystalshard.Nitrogen.name=Crystallized Nitrogen Shard
+item.crystalshard.Phosphorus.name=Crystallized Phosphorus Shard
+item.crystalshard.Potassium.name=Crystallized Potassium Shard
+item.crystalshard.Nitrate.name=Crystallized Nitrate Shard
+item.crystalshard.Methane.name=Crystallized Methane Shard
+item.crystalshard.Redstone.name=Crystallized Redstone Shard
+item.crystalshard.Abyssalnite.name=Crystallized Abyssalnite Shard
+item.crystalshard.Coralium.name=Crystallized Coralium Shard
+item.crystalshard.Dreadium.name=Crystallized Dreadium Shard
+item.crystalshard.Blaze.name=Crystallized Blaze Shard
+item.crystalshard.Tin.name=Crystallized Tin Shard
+item.crystalshard.Copper.name=Crystallized Copper Shard
+item.crystalshard.Silicon.name=Crystallized Silicon Shard
+item.crystalshard.Magnesium.name=Crystallized Magnesium Shard
+item.crystalshard.Aluminium.name=Crystallized Aluminium Shard
+item.crystalshard.Silica.name=Crystallized Silica Shard
+item.crystalshard.Alumina.name=Crystallized Alumina Shard
+item.crystalshard.Magnesia.name=Crystallized Magnesia Shard
+item.crystalshard.Zinc.name=Crystallized Zinc Shard
+item.drainStaff.name=Staff of Rending
+item.essence.abyssalwasteland.name=Abyssal Wasteland Essence
+item.essence.dreadlands.name=Dreadlands Essence
+item.essence.omothol.name=Omothol Essence
+item.skin.abyssalwasteland.name=Skin of The Abyssal Wasteland
+item.skin.dreadlands.name=Skin of The Dreadlands
+item.skin.omothol.name=Skin of Omothol
 
 #Entities
 entity.abyssalcraft.depthsghoul.name=Depths Ghoul

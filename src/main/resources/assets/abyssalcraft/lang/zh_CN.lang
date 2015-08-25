@@ -226,9 +226,9 @@ necronomicon.info=信息
 necronomicon.normal=正常
 
 #Necronomicon Text
-#Note: the maximum amount of letters per string is 256
+#Note: the maximum amount of letters per string is 368
 #The following text example has the letter limit:
-#Lorem ipsum dolor sit amet, ad dicit prompta ullamcorper nam, quando ubique intellegat nam eu, ad dolore mollis has. Sint debet eum te. At dicunt liberavisse mea. Ea minimum sententiae ius, ei duo timeam virtute. Aliquid graecis eu usu, ea dignissim conse.
+#Lorem ipsum dolor sit amet, nam an mutat eripuit temporibus. Eu eius luptatum similique eam. Erat euismod bonorum cu vis, malis salutatus neglegentur mea no. His et abhorreant conclusionemque, has prima movet dignissim an, vitae deleniti theophrastus ad mea. Est no offendit incorrupte, ferri illum labores qui ut. Sanctus adipisci eum ex, cu falli virtute dissentias.
 #Anything longer than that will trigger a crash when you try to read it
 necronomicon.text.necronomicon.1=这是死灵之书, 一本由阿卜杜·阿尔哈兹莱德所写的书, 熟知为 "疯狂的阿拉伯". 这本书囊括了旧日支配者的知识, 他们的名字和怎么去召唤他们. 里面同样有关于这本书所能举行的咒语和仪式的信息.
 necronomicon.text.necronomicon.2=死灵之书是深渊之书中的一章, 被阿尔哈兹莱德所解读作为一名出名的恶魔名叫扎哈尔, 同时也是深渊之书的作者, 该书有着无穷的来自旧日支配者的知识 .
@@ -321,17 +321,16 @@ necronomicon.text.crafting.shadowgem.1=一个阴影宝石能由阴影宝石碎�
 necronomicon.text.crafting.shadowgem.2=阴影碎片能从阴影生物上掉落, 阴影宝石碎片能从阴影怪物上掉落, 阴影宝石能从阴影野兽上掉落. 它们生成在黑暗之地山脉和黑暗领域里.
 necronomicon.text.crafting.oblivionshard=一个湮灭碎片能用阴影宝石和一个嬗变宝石合成.
 necronomicon.text.crafting.gk1=门钥匙是由烈焰棒, 珊瑚珍珠和一个湮灭媒介合成.
-necronomicon.text.crafting.necro_c=一个深渊荒芜之地死灵之书能用珊瑚侵染腐肉和一本死灵之书合成. 有着更多的知识.
+necronomicon.text.crafting.necro_c=A Abyssal Wasteland Necronomicon is crafted with Skin of The Abyssal Wasteland and a Necronomicon. 有着更多的知识.
 necronomicon.text.crafting.psdltracker=一个蕴能石追踪器由珊瑚宝石和一个末影之眼合成.
-necronomicon.text.crafting.necro_d=一个恐惧之地死灵之书由恐惧碎片和一个深渊荒芜之地死灵之书合成.
+necronomicon.text.crafting.necro_d=A Dreadlands Necronomicon is crafted with Skin of The Dreadlands and a Abyssal Wasteland Necronomicon.
 necronomicon.text.crafting.transmutator.1=一个嬗变器由珊瑚石砖, 精炼珊瑚锭块, 一个嬗变宝石和一个液态珊瑚桶合成.
 necronomicon.text.crafting.transmutator.2=要获得珊瑚砖块, 你必须将液态反物质倒在液态珊瑚上面, 然后挖掘由液态珊瑚变成的石头. 然后你必须将珊瑚锭石头烧炼成珊瑚锭.
 necronomicon.text.crafting.crystallizer.1=一个结晶器由恐惧石砖, 恐惧锭块和一个熔炉合成.
 necronomicon.text.crafting.crystallizer.2=恐惧锭是从深渊锭的恐惧碎片嬗变而来, 深渊锭的恐惧碎片是从在恐惧之地的恐惧守卫掉落. 恐惧锭用结晶器很容易就获得.
-necronomicon.text.crafting.dreadaltarbot.1=查加洛斯祭坛(底部) 由恐惧石, 恐惧锭, 阿索拉的恐惧之门钥匙和骨头合成,
-necronomicon.text.crafting.dreadaltarbot.2=恐惧之布和深渊锭的恐惧碎片. 恐惧之布由恐惧碎片周围一圈皮革合成, 恐惧碎片由恐惧之地里的很多怪物掉落.
+necronomicon.text.crafting.dreadaltarbot=查加洛斯祭坛(底部) 由恐惧石, 恐惧锭, 阿索拉的恐惧之门钥匙和骨头合成, 恐惧之布和深渊锭的恐惧碎片.
 necronomicon.text.crafting.dreadaltartop=查加洛斯祭坛(顶部)由木棍, 一个桶, 恐惧之布和恐惧锭合成.
-necronomicon.text.crafting.necro_o=奥穆索死灵之书由奥穆索食尸鬼腐肉和一个恐惧之地死灵之书合成.
+necronomicon.text.crafting.necro_o=A Omothol Necronomicon is crafted with Skin of Omothol and a Dreadlands Necronomicon.
 necronomicon.text.crafting.lifecrystal.1=生命结晶由一个结晶碳, 一个结晶氢, 一个结晶氮, 一个结晶氧, 一个结晶磷和一个结晶硫合成.
 necronomicon.text.crafting.lifecrystal.2=上述结晶能通过分别晶体化煤炭, 水, 硝石, 腐肉, 青金石来获得. 结晶氮来自晶体化结晶硝酸(来自硝石).
 necronomicon.text.crafting.ethaxiumingot.1=伊桑斯锭由伊桑斯砖块和一个生命结晶合成.
@@ -344,29 +343,28 @@ necronomicon.text.crafting.crystalbag.1=晶体袋由皮革和一个金锭合成.
 necronomicon.text.crafting.crystalbag.2=能升级到持有更多晶体通过围绕晶体袋用珊瑚侵染腐肉, 恐惧碎片和奥穆索食尸鬼腐肉.
 necronomicon.text.crafting.materializer.1=物质化器由伊桑斯石砖, 黑曜石, 伊桑斯锭块和一个液态反物质桶合成.
 necronomicon.text.crafting.materializer.2=要使用一个物质化器, 你需要将晶体袋放在第一个栏, 然后死灵之书在第二个栏, 接着你能用晶体袋里的结晶来合成物质.
-necronomicon.text.crafting.abyssalnomicon.1=深渊之书由伊桑斯石砖, 邪术鳞片, 一个湮灭媒介合一个奥穆索死灵之书合成.
+necronomicon.text.crafting.abyssalnomicon.1=An Abyssalnomicon is crafted with Ethaxium Ingots, Eldritch Scales, a Oblivion Catalyst and a Omothol Necronomicon.
 necronomicon.text.crafting.abyssalnomicon.2=邪术鳞片通过杀死遗孽或奴仆守门者获得.
+necronomicon.text.crafting.rendingstaff.1=A Staff of Rending is crafted with Shadow Gem Shards and a Shard of Oblivion. It can harvest essences from certain entities (by right clicking).
+necronomicon.text.crafting.rendingstaff.2=Abyssal Wasteland Energy can be harvested from any Coralium entity inside the Abyssal Wasteland. Dreadlands Energy can be harvested from any Dread entity inside the Dreadlands. Omothol Energy can be harvested from any entity inside Omothol. Shadow Energy are harvested from any living shadow. Essences are created when sufficient energy is collected.
+necronomicon.text.crafting.skin_aby=A Skin of The Abyssal Wasteland is crafted with Coralium-plagued Flesh and a Essence of The Abyssal Wasteland. The essence is obtained through the use of a Staff of Rending.
+necronomicon.text.crafting.skin_dre=A Skin of The Dreadlands is crafted with Dread Fragment and a Essence of The Dreadlands. The essence is obtained through the use of a Staff of Rending.
+necronomicon.text.crafting.skin_omt=A Skin of Omothol is crafted with Omothol Ghoul Flesh and a Essence of Omothol. The essence is obtained through the use of a Staff of Rending.
+necronomicon.text.crafting.dreadcloth=Dread Cloth is crafted with Dread Fragments, Strings and a piece of Leather.
 
-necronomicon.text.overworld.progression.1=要到达新的世界, 你必须合成一把门钥匙, 这需要你旅行过下界和黑暗之地和水域. 水域可以是沼泽或者海洋.
-necronomicon.text.overworld.progression.2=从下界你需要获得2根烈焰棒, 最好是更多的留备以后用. 从黑暗之地你需要杀死活阴影来获得阴影宝石. 从水域你需要获得珊瑚宝石来合成珊瑚珍珠.
-necronomicon.text.overworld.progression.3=一旦你获得了上述物品, 你能开始合成嬗变宝石(需要4个, 为此额外的烈焰棒要合成烈焰粉), 然后你将嬗变宝石围8个阴影宝石合成.
-necronomicon.text.overworld.progression.4=将4个湮灭碎片和4个红石粉围绕1个末影之眼会合成湮灭媒介, 然后将湮灭媒介放在合成栏的右上,还要2个烈焰棒在同一斜角线上.
-necronomicon.text.overworld.progression.5=接着你在1个珊瑚珍珠两旁放下2个湮灭媒介. 就能合成一把门钥匙了, 将门钥匙右击在空敞的地面上. 就能生成一个传送门.
-necronomicon.text.overworld.progression.6=要获得更多信息则需要升级, 你需要深渊荒芜之地死灵之书.
+necronomicon.text.overworld.progression.1=In order to reach the Abyssal Wasteland, one must craft a Gateway Key, which requires one to travel to the Nether, and to visit a Darklands and a water-based biome. The water-based biome can be either a swamp or a ocean biome.
+necronomicon.text.overworld.progression.2=From the Nether you need 2 Blaze Rods, and probably a few more for later. From the Darklands biome you need to slay living shadows to finally obtain Shadow Gems. They are most commonly found in Darklands Mountains biomes. It is recommended to obtain a Staff of Rending in order to obtain Shadow Gems faster (more information in the special materials section).
+necronomicon.text.overworld.progression.3=From the water-based biome you need Coralium Gems in order to create Coralium Pearls. Once you have obtained these items, you can begin crafting Transmutation Gems (4 will be needed, and the excess Blaze Rods is used to make powder for these). Recipes for this and Shards of Oblivion can be found in the special materials section.
+necronomicon.text.overworld.progression.4=When you have 4 Shards of Oblivion, use those and 4 units of Redstone Dust to infuse a Eye of Ender (through an infusion ritual, found in the ritual section of the Necronomicon) in order to create an Oblivion Catalyst, main component of the Gateway Key (the special materials section has the recipe).
+necronomicon.text.overworld.progression.5=Once the Gateway Key is crafted, simply right-click on the ground to form a portal. For more information, you will need the Abyssal Wasteland Necronomicon, which requires 8 Skins of The Abyssal Wasteland in order to upgrade. The Staff of Rending is needed in order to obtain essences used to craft those.
 
-necronomicon.text.abyssal.progression.1=在你到达了深渊荒芜之地后, 你下一个目标就是到达恐惧之地. 你需要3个东西来升级你的门钥匙, 深渊之眼, 一个恐惧之地蕴能石和一个嬗变宝石.
-necronomicon.text.abyssal.progression.2=第一个需要打败堕落者阿索拉来获得. 要召唤阿索拉你需要一个祭坛和液态珊瑚桶. 液态珊瑚容易获得, 能在深渊荒芜之地的表面找到.
-necronomicon.text.abyssal.progression.3=祭坛由4个金锭, 1个附魔台, 1个嬗变宝石和一个空桶合成. 空桶在中上栏, 嬗变宝石和附魔台在其下, 金锭在上述物品的两边.
-necronomicon.text.abyssal.progression.4=将祭坛放在深渊荒芜之地上并用液态珊瑚桶右击祭坛会召唤阿索拉. 在你打败了阿索拉后, 它会掉落它的眼睛和大量经验和这个世界里的一些材料.
-necronomicon.text.abyssal.progression.5=恐惧之地蕴能石在深渊要塞里, 能通过使用蕴能石追踪器找到. 追踪器由末影之眼围一圈珊瑚宝石合成.
-necronomicon.text.abyssal.progression.6=在你追踪到蕴能石之后, 你能用一个精炼珊瑚镐来挖掘它. 最终你能升级你的门钥匙. 合成时将门钥匙放在中央. 其它3个物品放成三角形状.
+necronomicon.text.abyssal.progression.1=Once you have reached the Abyssal Wasteland, your next goal is to reach the Dreadlands. You will need 3 components in order to upgrade your Gateway Key, an Eye of The Abyss, a Dreadlands Infused Powerstone and a Transmutation Gem. The first is obtained by defeating Asorah, The Fallen, summoned through the ritual "Ritual of The Sleeper" (in ritual section).
+necronomicon.text.abyssal.progression.2=Asorah uses Spectral Dragons to heal himself, so they should be taken out quickly throughout the fight. Once defeated, Asorah will drop his eye with a large quantity of exp and materials found in the dimension. The Dreadlands Infused Powerstone is located inside a Abyssal Stronghold, which can be found using Powerstone Trackers (recipe in special materials section).
+necronomicon.text.abyssal.progression.3=Once you have tracked down the Powerstone, you can mine it with a Refined Coralium Pickaxe. Lastly you can upgrade your Gateway Key by infusing it with the required components ("Asorah's Dreaded Gateway Key" ritual). Upgrading your Necronomicon to the Dreadlands Necronomicon requires 8 Skins of The Dreadlands.
 
-necronomicon.text.dreadlands.progression.1=在你到达恐惧之地后, 你下一个目标是到达奥穆索. 你需要一个嬗变器, 同时你要打败恐惧野兽查加罗特. 要见到查加罗特, 你需要查加罗特祭坛,祭坛由两个方块组成.
-necronomicon.text.dreadlands.progression.2=底部方块的合成是, 阿索拉的恐惧之门钥匙在中央, 恐惧锭在两边, 1个深渊锭的恐惧碎片和1个恐惧石分别在下面两边, 1个恐惧之布和1个骨头分别在上面两边.
-necronomicon.text.dreadlands.progression.3=顶部方块的合成是, 3个恐惧锭在最下面一行, 3个恐惧之布在中间一行, 1个桶和1个木棍在上面的两边. 你要将祭坛放在恐惧之地山脉的Y=40的高度并且右击它.
-necronomicon.text.dreadlands.progression.4=做完后你就能进入到查加罗特的巢穴. 进入里面之后,你需要往前走来抵抗恐惧守卫直到你到达一个深坑, 深坑里就是查加罗特. 杀死恐惧野兽会给你一把恐惧侵染的门钥匙和一些战利品.
-necronomicon.text.dreadlands.progression.5=要使门钥匙有功能, 你需要将它在嬗变器里进行嬗变. 嬗变器的合成是, 嬗变宝石在中央, 一桶液态珊瑚在下面, 珊瑚石砖在其他残余的位置.
-necronomicon.text.dreadlands.progression.6=珊瑚石砖由将液态反物质倒在液态珊瑚上获得, 然后烧炼液态珊瑚所变成的珊瑚石. 嬗变完后, 你会获得查加罗特的拉莱尔门钥匙, 允许你到达奥穆索.
+necronomicon.text.dreadlands.progression.1=Once you have reached the Dreadlands, your next goal is to reach Omothol. You will need to own a Transmutator, and you need to defeat Cha'garoth, The Dreadbeast. In order to reach Cha'garoth, you need the Altar of Cha'garoth, made out of 2 pieces. Both recipes are found in the special materials section.
+necronomicon.text.dreadlands.progression.2=Once you have both Altar pieces, you need to place them at Y = 40 inside a Dreadlands Mountain biome and right-click it. Doing so will grant you entry to The Lair of Cha'garoth. After fighting through Dreadguards and eventually killing Cha'garoth, you will receive a Dread-plagued Gateway Key, along with loot. The key needs to be transmuted into a functioning one.
+necronomicon.text.dreadlands.progression.3=With the aforementioned Transmutator (recipe in Abyssal Wasteland special materials section) you can transmute the Dread-plagued Gateway Key into Cha'garoth's R'lyehian Gateway Key, granting you access to Omothol. Upgrading your Necronomicon to the Omothol Necronomicon requires 8 Skins of Omothol.
 
 necronomicon.text.omothol.progression.1=现在你到达了奥穆索, 是时候去和深渊守门者扎哈尔战斗了. 这个维度仍未完成, 所以在这没有很多的事情可以做除了获得一些材料来合成深渊之书.
 necronomicon.text.omothol.progression.2=这部分在奥穆索完成后会升级. 那时候, 这里会有一个巨大的城市建筑在浮空岛上.
@@ -476,6 +474,14 @@ ac.ritual.depthsLeggings=深渊护腿
 ac.ritual.depthsLeggings.desc=深渊护腿通过将2个珊瑚宝石簇(9个宝石)、珊瑚侵染腐肉、一个嬗变宝石、一个莲叶、一个藤蔓和一个液态珊瑚桶注入到一个精炼珊瑚护腿获得.
 ac.ritual.depthsBoots=深渊靴子
 ac.ritual.depthsBoots.desc=深渊靴子通过将2个珊瑚宝石簇(9个宝石)、珊瑚侵染腐肉、一个嬗变宝石、一个莲叶、一个藤蔓和一个液态珊瑚桶注入到一个精炼珊瑚靴子获得.
+ac.ritual.dreadSpawn=Ritual of Evolving
+ac.ritual.dreadSpawn.desc=All nearby Dread Spawns (regardless of evolution stage) is cloned to produce a double. Offer a Dread Fragment, a Dreadstone, an Abyssalnite Stone, a Chunk of Abyssalnite, a Dreaded Chunk of Abyssalnite, a piece of Rotten Flesh, a Dreaded Shard of Abyssalnite and a Abyssalnite Ingot.
+ac.ritual.corPotionAoE=Corealium Plague Infection
+ac.ritual.corPotionAoE.desc=Spreads the Coralium Plague to nearby entities. Offer 4 Coralium Plagued Flesh, 3 Water Bottles and a piece of Gunpowder.
+ac.ritual.drePotionAoE=Dread Plague Infection
+ac.ritual.drePotionAoE.desc=Spreads the Dread Plague to nearby entities. Offer 4 Dread Fragments, 3 Water Bottles and a piece of Gunpowder.
+ac.ritual.antiPotionAoE=Antimatter Eradication
+ac.ritual.antiPotionAoE.desc=Exposes nearby entities to Liquid Antimatter. Offer 4 Rotten Anti-Flesh, 3 Water Bottles and a piece of Gunpowder.
 
 #Configuration
 ac_dimensions=维度
@@ -490,6 +496,8 @@ ac_biomeweight=生物群落权重
 ac_biomeweight.tooltip=生物群落权重设置
 ac_general=总体
 ac_general.tooltip=总体设置
+ac_potion=药水
+ac_potion.tooltip=药水ID设置
 
 #Damagesources
 death.attack.coralium=%1$s 由于珊瑚侵染而死亡
@@ -525,6 +533,10 @@ tooltip.portalplacerjzh.1=只能在
 tooltip.portalplacerjzh.2=恐惧之地使用
 tooltip.soulreaper=灵魂收割
 tooltip.crystalbag=这个背包可存储结晶化的元素
+tooltip.drainstaff.energy.1=Abyssal Wasteland Energy
+tooltip.drainstaff.energy.2=Dreadlands Energy
+tooltip.drainstaff.energy.3=Omothol Energy
+tooltip.drainstaff.energy.4=Shadow Energy
 
 #Creative Tabs
 itemGroup.acblocks=深渊国度方块
@@ -668,6 +680,8 @@ tile.DEBf.name=黑暗伊桑斯砖块栅栏
 tile.ritualaltar.name=仪式祭坛
 tile.ritualpedestal.name=仪式基座
 tile.shoggothBlock.name=修格斯渗出物
+tile.cthulhuStatue.name=Cthulhu Statue
+tile.hasturStatue.name=Hastur Statue
 
 #Items
 item.DEV_BLADE.name=恶魔之刃
@@ -783,22 +797,31 @@ item.DCarbC.name=高密碳簇
 item.methane.name=甲烷
 item.nitre.name=硝石
 item.sulfur.name=硫磺
-item.crystalIron.name=结晶铁
-item.crystalGold.name=结晶金
-item.crystalSulfur.name=结晶硫磺
-item.crystalCarbon.name=结晶碳
-item.crystalOxygen.name=结晶氧
-item.crystalHydrogen.name=结晶氢
-item.crystalNitrogen.name=结晶氮
-item.crystalPhosphorus.name=结晶磷
-item.crystalPotassium.name=结晶钾
-item.crystalNitrate.name=结晶硝酸
-item.crystalMethane.name=结晶甲烷
-item.crystalRedstone.name=结晶红石
-item.crystalAbyssalnite.name=结晶深渊
-item.crystalCoralium.name=结晶珊瑚
-item.crystalDreadium.name=结晶恐惧
-item.crystalBlaze.name=结晶烈焰
+item.crystal.Iron.name=结晶铁
+item.crystal.Gold.name=结晶金
+item.crystal.Sulfur.name=结晶硫磺
+item.crystal.Carbon.name=结晶碳
+item.crystal.Oxygen.name=结晶氧
+item.crystal.Hydrogen.name=结晶氢
+item.crystal.Nitrogen.name=结晶氮
+item.crystal.Phosphorus.name=结晶磷
+item.crystal.Potassium.name=结晶钾
+item.crystal.Nitrate.name=结晶硝酸
+item.crystal.Methane.name=结晶甲烷
+item.crystal.Redstone.name=结晶红石
+item.crystal.Abyssalnite.name=结晶深渊
+item.crystal.Coralium.name=结晶珊瑚
+item.crystal.Dreadium.name=结晶恐惧
+item.crystal.Blaze.name=结晶烈焰
+item.crystal.Tin.name=结晶锡
+item.crystal.Copper.name=结晶铜
+item.crystal.Silicon.name=结晶硅
+item.crystal.Magnesium.name=结晶镁
+item.crystal.Aluminium.name=结晶铝
+item.crystal.Silica.name=结晶二氧化硅
+item.crystal.Alumina.name=结晶铝
+item.crystal.Magnesia.name=结晶氧化镁
+item.crystal.Zinc.name=结晶锌
 item.DC.name=恐惧之布
 item.DPP.name=恐惧锭盘子
 item.DB.name=恐惧武士刀刀刃
@@ -812,15 +835,6 @@ item.ADSC.name=恐惧侍魂胸甲
 item.ADSP.name=恐惧侍魂护腿
 item.IT.name=锡锭
 item.IC.name=铜锭
-item.crystalTin.name=结晶锡
-item.crystalCopper.name=结晶铜
-item.crystalSilicon.name=结晶硅
-item.crystalMagnesium.name=结晶镁
-item.crystalAluminium.name=结晶铝
-item.crystalSilica.name=结晶二氧化硅
-item.crystalAlumina.name=结晶铝
-item.crystalMagnesia.name=结晶氧化镁
-item.crystalZinc.name=结晶锌
 item.antiBeef.name=反物质牛排
 item.antiChicken.name=反物质鸡肉
 item.antiPork.name=反物质猪肉
@@ -872,6 +886,38 @@ item.nugget.abyssalnite.name=深渊锭粒
 item.nugget.coralium.name=精炼珊瑚粒
 item.nugget.dreadium.name=恐惧锭粒
 item.nugget.ethaxium.name=伊桑斯锭粒
+item.crystalshard.Iron.name=Crystallized Iron Shard
+item.crystalshard.Gold.name=Crystallized Gold Shard
+item.crystalshard.Sulfur.name=Crystallized Sulfur Shard
+item.crystalshard.Carbon.name=Crystallized Carbon Shard
+item.crystalshard.Oxygen.name=Crystallized Oxygen Shard
+item.crystalshard.Hydrogen.name=Crystallized Hydrogen Shard
+item.crystalshard.Nitrogen.name=Crystallized Nitrogen Shard
+item.crystalshard.Phosphorus.name=Crystallized Phosphorus Shard
+item.crystalshard.Potassium.name=Crystallized Potassium Shard
+item.crystalshard.Nitrate.name=Crystallized Nitrate Shard
+item.crystalshard.Methane.name=Crystallized Methane Shard
+item.crystalshard.Redstone.name=Crystallized Redstone Shard
+item.crystalshard.Abyssalnite.name=Crystallized Abyssalnite Shard
+item.crystalshard.Coralium.name=Crystallized Coralium Shard
+item.crystalshard.Dreadium.name=Crystallized Dreadium Shard
+item.crystalshard.Blaze.name=Crystallized Blaze Shard
+item.crystalshard.Tin.name=Crystallized Tin Shard
+item.crystalshard.Copper.name=Crystallized Copper Shard
+item.crystalshard.Silicon.name=Crystallized Silicon Shard
+item.crystalshard.Magnesium.name=Crystallized Magnesium Shard
+item.crystalshard.Aluminium.name=Crystallized Aluminium Shard
+item.crystalshard.Silica.name=Crystallized Silica Shard
+item.crystalshard.Alumina.name=Crystallized Alumina Shard
+item.crystalshard.Magnesia.name=Crystallized Magnesia Shard
+item.crystalshard.Zinc.name=Crystallized Zinc Shard
+item.drainStaff.name=Staff of Rending
+item.essence.abyssalwasteland.name=Abyssal Wasteland Essence
+item.essence.dreadlands.name=Dreadlands Essence
+item.essence.omothol.name=Omothol Essence
+item.skin.abyssalwasteland.name=Skin of The Abyssal Wasteland
+item.skin.dreadlands.name=Skin of The Dreadlands
+item.skin.omothol.name=Skin of Omothol
 
 #Entities
 entity.abyssalcraft.depthsghoul.name=深渊食尸鬼
