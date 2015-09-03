@@ -82,6 +82,12 @@ public class NecronomiconResources {
 	public static final ResourceLocation RITUAL_TUT_2 = new ResourceLocation("abyssalcraft", "textures/gui/necronomicon/ritual_2.png");
 	public static final ResourceLocation RITUAL_TUT_3 = new ResourceLocation("abyssalcraft", "textures/gui/necronomicon/ritual_3.png");
 
+	//Transmutation grid
+	public static final ResourceLocation TRANSMUTATION = new ResourceLocation("abyssalcraft", "textures/gui/necronomicon/transmutation.png");
+
+	//Crystallization grid (additional slot to Transmutation grid)
+	public static final ResourceLocation CRYSTALLIZATION = new ResourceLocation("abyssalcraft", "textures/gui/necronomicon/crystallization.png");
+
 	public static final ResourceLocation[] OVERWORLD_ENTITIES = {ABYSSAL_ZOMBIE, DEPTHS_GHOUL, SHADOW_CREATURE, SHADOW_MONSTER, SHADOW_BEAST,
 		ANTI_ENTITIES, EVIL_PIG};
 

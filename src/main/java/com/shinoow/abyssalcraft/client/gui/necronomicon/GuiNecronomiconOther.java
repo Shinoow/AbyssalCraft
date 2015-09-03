@@ -224,21 +224,21 @@ public class GuiNecronomiconOther extends GuiNecronomicon {
 					if(n < 5)
 						buttonList.add(buttons[n] = new ButtonCategory(3 + n, i + 10, b0 + 30 + 25*n,this, getTitle(((NecroData)map.keySet().toArray()[n]).getTitle(), (int)map.values().toArray()[n]), getItem((int)map.values().toArray()[n])));
 					else if(n > 4 && n < 10)
-						buttonList.add(buttons[n] = new ButtonCategory(3 + n, i + 130, b0 + 30 + 25*n,this, getTitle(((NecroData)map.keySet().toArray()[n]).getTitle(), (int)map.values().toArray()[n]), getItem((int)map.values().toArray()[n])));
+						buttonList.add(buttons[n] = new ButtonCategory(3 + n, i + 130, b0 + 30 + 25*(n-5) + n,this, getTitle(((NecroData)map.keySet().toArray()[n]).getTitle(), (int)map.values().toArray()[n]), getItem((int)map.values().toArray()[n])));
 					else if(n == 10)
 						break;
 				} else if(currTurnup == 1){
-					if(n < 15)
-						buttonList.add(buttons[n] = new ButtonCategory(3 + n, i + 10, b0 + 30 + 25*n,this, getTitle(((NecroData)map.keySet().toArray()[n]).getTitle(), (int)map.values().toArray()[n]), getItem((int)map.values().toArray()[n])));
+					if(n < 15 && n > 9)
+						buttonList.add(buttons[n] = new ButtonCategory(3 + n, i + 10, b0 + 30 + 25*(n-10) + n,this, getTitle(((NecroData)map.keySet().toArray()[n]).getTitle(), (int)map.values().toArray()[n]), getItem((int)map.values().toArray()[n])));
 					else if(n > 14 && n < 20)
-						buttonList.add(buttons[n] = new ButtonCategory(3 + n, i + 130, b0 + 30 + 25*n,this, getTitle(((NecroData)map.keySet().toArray()[n]).getTitle(), (int)map.values().toArray()[n]), getItem((int)map.values().toArray()[n])));
+						buttonList.add(buttons[n] = new ButtonCategory(3 + n, i + 130, b0 + 30 + 25*(n-15) + n,this, getTitle(((NecroData)map.keySet().toArray()[n]).getTitle(), (int)map.values().toArray()[n]), getItem((int)map.values().toArray()[n])));
 					else if(n == 20)
 						break;
 				} else if(currTurnup == 2)
-					if(n < 25)
-						buttonList.add(buttons[n] = new ButtonCategory(3 + n, i + 10, b0 + 30 + 25*n,this, getTitle(((NecroData)map.keySet().toArray()[n]).getTitle(), (int)map.values().toArray()[n]), getItem((int)map.values().toArray()[n])));
+					if(n < 25 && n > 19)
+						buttonList.add(buttons[n] = new ButtonCategory(3 + n, i + 10, b0 + 30 + 25*(n-20) + n,this, getTitle(((NecroData)map.keySet().toArray()[n]).getTitle(), (int)map.values().toArray()[n]), getItem((int)map.values().toArray()[n])));
 					else if(n > 24 && n < 30)
-						buttonList.add(buttons[n] = new ButtonCategory(3 + n, i + 130, b0 + 30 + 25*n,this, getTitle(((NecroData)map.keySet().toArray()[n]).getTitle(), (int)map.values().toArray()[n]), getItem((int)map.values().toArray()[n])));
+						buttonList.add(buttons[n] = new ButtonCategory(3 + n, i + 130, b0 + 30 + 25*(n-25) + n,this, getTitle(((NecroData)map.keySet().toArray()[n]).getTitle(), (int)map.values().toArray()[n]), getItem((int)map.values().toArray()[n])));
 					else if(n == 30)
 						break;
 	}

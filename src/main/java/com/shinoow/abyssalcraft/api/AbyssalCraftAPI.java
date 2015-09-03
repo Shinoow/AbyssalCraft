@@ -12,7 +12,6 @@
 package com.shinoow.abyssalcraft.api;
 
 import java.lang.reflect.Field;
-import java.lang.reflect.Modifier;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -58,7 +57,7 @@ public class AbyssalCraftAPI {
 	/**
 	 * String used to specify the API version in the "package-info.java" classes
 	 */
-	public static final String API_VERSION = "1.4";
+	public static final String API_VERSION = "1.4.5";
 
 	/**
 	 * Enchantment IDs, first one is the Coralium enchantment, second Dread enchantment,
@@ -97,8 +96,6 @@ public class AbyssalCraftAPI {
 	public static EnumCreatureAttribute SHADOW = EnumHelper.addCreatureAttribute("SHADOW");
 
 	public static ArmorMaterial abyssalniteArmor = EnumHelper.addArmorMaterial("Abyssalnite", 35, new int[]{3, 8, 6, 3}, 13);
-	@Deprecated
-	public static ArmorMaterial coraliumInfusedAbyssalniteArmor = EnumHelper.addArmorMaterial("AbyssalniteC", 36, new int[]{3, 8, 6, 3}, 30);
 	public static ArmorMaterial dreadedAbyssalniteArmor = EnumHelper.addArmorMaterial("Dread", 36, new int[]{3, 8, 6, 3}, 15);
 	public static ArmorMaterial refinedCoraliumArmor = EnumHelper.addArmorMaterial("Coralium", 37, new int[]{3, 8, 6, 3}, 14);
 	public static ArmorMaterial platedCoraliumArmor = EnumHelper.addArmorMaterial("CoraliumP", 55, new int[]{4, 9, 7, 4}, 14);
@@ -111,8 +108,6 @@ public class AbyssalCraftAPI {
 	public static ToolMaterial abyssalniteTool = EnumHelper.addToolMaterial("ABYSSALNITE", 4, 1261, 13.0F, 4, 13);
 	public static ToolMaterial refinedCoraliumTool = EnumHelper.addToolMaterial("CORALIUM", 5, 2000, 14.0F, 5, 14);
 	public static ToolMaterial dreadiumTool = EnumHelper.addToolMaterial("DREADIUM", 6, 3000, 15.0F, 6, 15);
-	@Deprecated
-	public static ToolMaterial coraliumInfusedAbyssalniteTool = EnumHelper.addToolMaterial("ABYSSALNITE_C", 8, 8000, 20.0F, 8, 30);
 	public static ToolMaterial ethaxiumTool = EnumHelper.addToolMaterial("ETHAXIUM", 8, 4000, 16.0F, 8, 20);
 
 	/**
@@ -470,38 +465,6 @@ public class AbyssalCraftAPI {
 	}
 
 	/**
-	 * Basic Engraving (deprecated, use {@link #addCoin(ItemStack)} for the coin, and
-	 * {@link #addEngraving(ItemStack, ItemEngraving, float)} for the engraving template and engraved coin)
-	 * @param input The ItemStack to engrave
-	 * @param output The ItemStack output
-	 * @param engraving The engraving template (must be an {@link ItemEngraving})
-	 * @param xp Amount of exp given
-	 * 
-	 * @since 1.1
-	 */
-	@Deprecated //TODO: Remove in API 1.5
-	public static void addEngraving(ItemStack input, ItemStack output, Item engraving, float xp){
-		addCoin(input);
-		addEngraving(output, (ItemEngraving)engraving, xp);
-	}
-
-	/**
-	 * Basic Engraving (deprecated, use {@link #addCoin(Item)} for the coin, and
-	 * {@link #addEngraving(Item, ItemEngraving, float)} for the engraving template and engraved coin)
-	 * @param input The Item to engrave
-	 * @param output The ItemStack output
-	 * @param engraving The engraving template (must be an {@link ItemEngraving})
-	 * @param xp Amount of exp given
-	 * 
-	 * @since 1.1
-	 */
-	@Deprecated //TODO: Remove in API 1.5
-	public static void addEngraving(Item input, ItemStack output, Item engraving, float xp){
-		addCoin(input);
-		addEngraving(output, (ItemEngraving)engraving, xp);
-	}
-
-	/**
 	 * Registers a coin to the coin list (use {@link #addEngraving(ItemStack, ItemEngraving, float)}.
 	 * Both regular coins and engraved coins should be registered here
 	 * to register the engraving template and engraved coin)
@@ -564,93 +527,18 @@ public class AbyssalCraftAPI {
 	 * Note: all inputs has to be either {@link ICrystal}s or be registered in the Crystal List {@link AbyssalCraftAPI#addCrystal(ItemStack)}
 	 * @param input An array of ItemStacks (maximum is 5)
 	 * @param output The output
-	 * @param level The Necronomicon "level" required for this recipe.
-	 * <ul>
-	 * <li>0 = Necronomicon</li>
-	 * <li>1 = Abyssal Wasteland Necronomicon</li>
-	 * <li>2 = Dreadlands Necronomicon</li>
-	 * <li>3 = Omothol Necronomicon</li>
-	 * <li>4 = Abyssalnomicon</li>
-	 * </ul>
+	 * @param xp Amount of exp given
 	 * 
-	 * @since 1.4
+	 * @since 1.4.5
 	 */
-	public static void addMaterialization(ItemStack[] input, ItemStack output, int level){
+	public static void addMaterialization(ItemStack[] input, ItemStack output, float xp){
 		for(ItemStack item : input)
 			if(APIUtils.isCrystal(item)) throw new ClassCastException("All of the input items has to be Crystals!");
 		if(input.length > 0 || input == null)
 			if(input.length <= 5)
-				if(level <= 4 && level >= 0)
-					MaterializerRecipes.instance().materialize(input, output, level);
-				else FMLLog.log("AbyssalCraftAPI", Level.ERROR, "Necronomicon book type does not exist: %d", level);
+				MaterializerRecipes.instance().materialize(input, output, xp);
 			else FMLLog.log("AbyssalCraftAPI", Level.ERROR, "This Materializer recipe has more than 5 inputs! (%d)", input.length);
 		else FMLLog.log("AbyssalCraftAPI", Level.ERROR, "This Materializer recipe has no inputs!");
-	}
-
-	/**
-	 * Basic Materialization. (deprecated, use {@link AbyssalCraftAPI#addMaterialization(ItemStack[], ItemStack, int)} instead)
-	 * Note: all inputs has to be {@link ICrystal}s
-	 * 
-	 * @since 1.3
-	 */
-	@Deprecated //TODO: Remove in API 1.5
-	public static void addMaterialization(ItemStack input1, ItemStack input2, ItemStack input3, ItemStack input4, ItemStack input5, ItemStack output, int level){
-		addMaterialization(new ItemStack[]{input1, input2, input3, input4, input5}, output, level);
-	}
-
-	/**
-	 * Basic Materialization. (deprecated, use {@link AbyssalCraftAPI#addMaterialization(ItemStack[], ItemStack, int)} instead)
-	 * Note: all inputs has to be {@link ICrystal}s
-	 * 
-	 * @since 1.3
-	 */
-	@Deprecated //TODO: Remove in API 1.5
-	public static void addMaterialization(ItemStack input1, ItemStack input2, ItemStack input3, ItemStack input4, ItemStack output, int level){
-		addMaterialization(input1, input2, input3, input4, null, output, level);
-	}
-
-	/**
-	 * Basic Materialization. (deprecated, use {@link AbyssalCraftAPI#addMaterialization(ItemStack[], ItemStack, int)} instead)
-	 * Note: all inputs has to be {@link ICrystal}s
-	 * 
-	 * @since 1.3
-	 */
-	@Deprecated //TODO: Remove in API 1.5
-	public static void addMaterialization(ItemStack input1, ItemStack input2, ItemStack input3, ItemStack output, int level){
-		addMaterialization(input1, input2, input3, null, output, level);
-	}
-
-	/**
-	 * Basic Materialization. (deprecated, use {@link AbyssalCraftAPI#addMaterialization(ItemStack[], ItemStack, int)} instead)
-	 * Note: all inputs has to be {@link ICrystal}s
-	 * 
-	 * @since 1.3
-	 */
-	@Deprecated //TODO: Remove in API 1.5
-	public static void addMaterialization(ItemStack input1, ItemStack input2, ItemStack output, int level){
-		addMaterialization(input1, input2, null, output, level);
-	}
-
-	/**
-	 * Basic Materialization. (deprecated, use {@link AbyssalCraftAPI#addMaterialization(ItemStack[], ItemStack, int)} instead)
-	 * Note: all inputs has to be {@link ICrystal}s
-	 * 
-	 * @since 1.3
-	 */
-	@Deprecated //TODO: Remove in API 1.5
-	public static void addMaterialization(ItemStack input, ItemStack output, int level){
-		addMaterialization(input, null, output, level);
-	}
-
-	/**
-	 * Basic OreDictionary Materialization.
-	 * Note: all inputs has to be {@link ICrystal}s
-	 * 
-	 * @since 1.3
-	 */
-	@Deprecated //TODO: Remove in API 1.5
-	public static void addMaterialization(String input1, String input2, String input3, String input4, String input5, String output, int level){
-		//do stuff
 	}
 
 	/**

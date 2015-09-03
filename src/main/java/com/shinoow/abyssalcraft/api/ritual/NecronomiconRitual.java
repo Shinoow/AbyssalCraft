@@ -30,19 +30,22 @@ public abstract class NecronomiconRitual {
 	private int bookType;
 	private int dimension;
 	private String unlocalizedName;
+	private float requiredEnergy;
 
 	/**
 	 * A Necronomicon Ritual
 	 * @param unlocalizedName A string representing the ritual name
 	 * @param bookType Necronomicon book type required
 	 * @param dimension Dimension where the ritual can be peformed
+	 * @param requiredEnergy Amount of Potential Energy required to perform
 	 * @param remnantHelp If Remnants can aid you when performing the ritual
 	 * @param offerings Components used to perform the ritual, are consumed afterwards
 	 */
-	public NecronomiconRitual(String unlocalizedName, int bookType, int dimension, boolean remnantHelp, ItemStack...offerings){
+	public NecronomiconRitual(String unlocalizedName, int bookType, int dimension, float requiredEnergy, boolean remnantHelp, ItemStack...offerings){
 		this.unlocalizedName = unlocalizedName;
 		this.bookType = bookType;
 		this.dimension = dimension;
+		this.requiredEnergy = requiredEnergy;
 		this.remnantHelp = remnantHelp;
 		if(offerings.length < 8){
 			this.offerings = new ItemStack[offerings.length];
@@ -57,8 +60,45 @@ public abstract class NecronomiconRitual {
 	 * @param unlocalizedName A string representing the ritual name
 	 * @param bookType Necronomicon book type required
 	 * @param dimension Dimension where the ritual can be peformed
+	 * @param requiredEnergy Amount of Potential Energy required to perform
 	 * @param offerings Components used to perform the ritual, are consumed afterwards
 	 */
+	public NecronomiconRitual(String unlocalizedName, int bookType, int dimension, float requiredEnergy, ItemStack...offerings){
+		this(unlocalizedName, bookType, dimension, requiredEnergy, false, offerings);
+	}
+
+	/**
+	 * A Necronomicon Ritual
+	 * @param unlocalizedName A string representing the ritual name
+	 * @param bookType Necronomicon book type required
+	 * @param requiredEnergy Amount of Potential Energy required to perform
+	 * @param offerings Components used to perform the ritual, are consumed afterwards
+	 */
+	public NecronomiconRitual(String unlocalizedName, int bookType, float requiredEnergy, ItemStack...offerings){
+		this(unlocalizedName, bookType, -1, requiredEnergy, offerings);
+	}
+
+	/**
+	 * A Necronomicon Ritual
+	 * @param unlocalizedName A string representing the ritual name
+	 * @param bookType Necronomicon book type required
+	 * @param dimension Dimension where the ritual can be peformed
+	 * @param remnantHelp If Remnants can aid you when performing the ritual
+	 * @param offerings Components used to perform the ritual, are consumed afterwards
+	 */
+	@Deprecated //TODO remove in AC 1.9
+	public NecronomiconRitual(String unlocalizedName, int bookType, int dimension, boolean remnantHelp, ItemStack...offerings){
+		this(unlocalizedName, bookType, dimension, 0, remnantHelp, offerings);
+	}
+
+	/**
+	 * A Necronomicon Ritual
+	 * @param unlocalizedName A string representing the ritual name
+	 * @param bookType Necronomicon book type required
+	 * @param dimension Dimension where the ritual can be peformed
+	 * @param offerings Components used to perform the ritual, are consumed afterwards
+	 */
+	@Deprecated //TODO remove in AC 1.9
 	public NecronomiconRitual(String unlocalizedName, int bookType, int dimension, ItemStack...offerings){
 		this(unlocalizedName, bookType, dimension, false, offerings);
 	}
@@ -69,6 +109,7 @@ public abstract class NecronomiconRitual {
 	 * @param bookType Necronomicon book type required
 	 * @param offerings Components used to perform the ritual, are consumed afterwards
 	 */
+	@Deprecated //TODO remove in AC 1.9
 	public NecronomiconRitual(String unlocalizedName, int bookType, ItemStack...offerings){
 		this(unlocalizedName, bookType, -1, offerings);
 	}
@@ -103,6 +144,14 @@ public abstract class NecronomiconRitual {
 	 */
 	public int getDimension(){
 		return dimension;
+	}
+
+	/**
+	 * Used to fetch the required Potential Energy for the ritual
+	 * @return A Float representing the amount of Potential Energy required to perform the ritual
+	 */
+	public float getReqEnergy(){
+		return requiredEnergy;
 	}
 
 	/**

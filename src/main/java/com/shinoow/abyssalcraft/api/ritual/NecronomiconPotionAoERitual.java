@@ -40,13 +40,53 @@ public class NecronomiconPotionAoERitual extends NecronomiconRitual {
 	 * @param unlocalizedName A string representing the ritual name
 	 * @param bookType Necronomicon book type required
 	 * @param dimension Dimension where the ritual can be peformed
+	 * @param requiredEnergy Amount of Potential Energy required to perform
 	 * @param remnantHelp If Remnants can aid you when performing the ritual
 	 * @param potions Either a Potion effect or a Potion ID (will last for 20 seconds)
 	 * @param offerings Components used to perform the ritual, are consumed afterwards
 	 */
-	public NecronomiconPotionAoERitual(String unlocalizedName, int bookType, int dimension, boolean remnantHelp, Object potion, ItemStack...offerings) {
-		super(unlocalizedName, bookType, dimension, remnantHelp, offerings);
+	public NecronomiconPotionAoERitual(String unlocalizedName, int bookType, int dimension, float requiredEnergy, boolean remnantHelp, Object potion, ItemStack...offerings) {
+		super(unlocalizedName, bookType, dimension, requiredEnergy, remnantHelp, offerings);
 		this.potion = potion;
+	}
+
+	/**
+	 * A Necronomicon Potion Area-of-Effect Ritual
+	 * @param unlocalizedName A string representing the ritual name
+	 * @param bookType Necronomicon book type required
+	 * @param dimension Dimension where the ritual can be peformed
+	 * @param requiredEnergy Amount of Potential Energy required to perform
+	 * @param potions Either a Potion effect or a Potion ID (will last for 20 seconds)
+	 * @param offerings Components used to perform the ritual, are consumed afterwards
+	 */
+	public NecronomiconPotionAoERitual(String unlocalizedName, int bookType, int dimension, float requiredEnergy, Object potion, ItemStack...offerings) {
+		this(unlocalizedName, bookType, dimension, requiredEnergy, false, potion, offerings);
+	}
+
+	/**
+	 * A Necronomicon Potion Area-of-Effect Ritual
+	 * @param unlocalizedName A string representing the ritual name
+	 * @param bookType Necronomicon book type required
+	 * @param requiredEnergy Amount of Potential Energy required to perform
+	 * @param potions Either a Potion effect or a Potion ID (will last for 20 seconds)
+	 * @param offerings Components used to perform the ritual, are consumed afterwards
+	 */
+	public NecronomiconPotionAoERitual(String unlocalizedName, int bookType, float requiredEnergy, Object potion, ItemStack...offerings) {
+		this(unlocalizedName, bookType, -1, requiredEnergy, potion, offerings);
+	}
+
+	/**
+	 * A Necronomicon Potion Area-of-Effect Ritual
+	 * @param unlocalizedName A string representing the ritual name
+	 * @param bookType Necronomicon book type required
+	 * @param dimension Dimension where the ritual can be peformed
+	 * @param remnantHelp If Remnants can aid you when performing the ritual
+	 * @param potions Either a Potion effect or a Potion ID (will last for 20 seconds)
+	 * @param offerings Components used to perform the ritual, are consumed afterwards
+	 */
+	@Deprecated //TODO remove in AC 1.9
+	public NecronomiconPotionAoERitual(String unlocalizedName, int bookType, int dimension, boolean remnantHelp, Object potion, ItemStack...offerings) {
+		this(unlocalizedName, bookType, dimension, 0, remnantHelp, potion, offerings);
 	}
 
 	/**
@@ -57,9 +97,9 @@ public class NecronomiconPotionAoERitual extends NecronomiconRitual {
 	 * @param potions Either a Potion effect or a Potion ID (will last for 20 seconds)
 	 * @param offerings Components used to perform the ritual, are consumed afterwards
 	 */
+	@Deprecated //TODO remove in AC 1.9
 	public NecronomiconPotionAoERitual(String unlocalizedName, int bookType, int dimension, Object potion, ItemStack...offerings) {
 		this(unlocalizedName, bookType, dimension, false, potion, offerings);
-
 	}
 
 	/**
@@ -69,9 +109,9 @@ public class NecronomiconPotionAoERitual extends NecronomiconRitual {
 	 * @param potions Either a Potion effect or a Potion ID (will last for 20 seconds)
 	 * @param offerings Components used to perform the ritual, are consumed afterwards
 	 */
+	@Deprecated //TODO remove in AC 1.9
 	public NecronomiconPotionAoERitual(String unlocalizedName, int bookType, Object potion, ItemStack...offerings) {
 		this(unlocalizedName, bookType, -1, potion, offerings);
-
 	}
 
 	/**

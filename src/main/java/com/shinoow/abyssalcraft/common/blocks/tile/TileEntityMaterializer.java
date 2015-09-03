@@ -25,7 +25,6 @@ import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI.FuelType;
 import com.shinoow.abyssalcraft.api.recipe.MaterializerRecipes;
 import com.shinoow.abyssalcraft.common.blocks.BlockMaterializer;
-import com.shinoow.abyssalcraft.common.items.ItemCrystal;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -356,7 +355,7 @@ public class TileEntityMaterializer extends TileEntity implements ISidedInventor
 			if (item == AbyssalCraft.Cchunk) return 16200;
 			if (item == AbyssalCraft.Cbucket) return 20000;
 			if (item == Item.getItemFromBlock(AbyssalCraft.Cwater)) return 22000;
-			if (item instanceof ItemCrystal) return 1200;
+			if (AbyssalCraftAPI.getCrystals().contains(par1ItemStack)) return 1200;
 			if (item == Items.blaze_powder) return 1200;
 			if (item == Items.blaze_rod) return 2400;
 			if (item == AbyssalCraft.methane) return 10000;

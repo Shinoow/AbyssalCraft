@@ -151,7 +151,7 @@ public class NecroData {
 
 		/**
 		 * Page data for the NecroData structure
-		 * @param num Amount of turn-ups for the sub-category
+		 * @param num Amount of turn-ups for the sub-category (max 10)
 		 * @param title A title to display on the top of the page
 		 * @param pagetype A PageType, mainly used for the Object array
 		 * @param stuff An array of Objects used as a icons/pictures for the page (has to be the same amount
@@ -160,6 +160,7 @@ public class NecroData {
 		 * the two open pages, leave a empty string for a empty page)
 		 */
 		public PageData(int num, String title, PageType pagetype, Object[] stuff, String...strings){
+			if(num > 10) throw new IndexOutOfBoundsException("Too many turn-ups! Maximum is 10! ("+num+")");
 			pageNumber = num;
 			this.title = title;
 			type = pagetype;
@@ -171,7 +172,7 @@ public class NecroData {
 						pictures = (ResourceLocation[])stuff;
 					else if(type.equals(PageType.CRAFTING))
 						recipes = (CraftingStack[])stuff;
-				} else throw new IndexOutOfBoundsException("Not enough elements in the Object array! ("+num+" turn-up(s), "+icons.length+" Objects");
+				} else throw new IndexOutOfBoundsException("Not enough elements in the Object array! ("+num+" turn-up(s), "+stuff.length+" Objects");
 			if(strings.length/2 <= num)
 				pages = strings;
 			else throw new IndexOutOfBoundsException("Not enough pages to write on! ("+num+" turn-ups, "+strings.length+" pages)");

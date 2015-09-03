@@ -11,8 +11,6 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.common.blocks;
 
-import static net.minecraftforge.common.util.ForgeDirection.DOWN;
-
 import java.util.Random;
 
 import net.minecraft.block.Block;
@@ -167,10 +165,7 @@ public class BlockCrate extends BlockContainer
 
 		if (object == null)
 			return null;
-		else if (par1World.isSideSolid(par2, par3 + 1, par4, DOWN))
-			return null;
-		else
-			return (IInventory)object;
+		else return (IInventory)object;
 	}
 
 	@Override

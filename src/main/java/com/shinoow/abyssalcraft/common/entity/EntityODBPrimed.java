@@ -147,8 +147,8 @@ public class EntityODBPrimed extends Entity {
 
 	@SideOnly(Side.CLIENT)
 	private void message(){
-		SpecialTextUtil.SacthothText(StatCollector.translateToLocal("message.sacthoth.spawn.1"));
-		SpecialTextUtil.SacthothText(StatCollector.translateToLocal("message.sacthoth.spawn.2"));
+		SpecialTextUtil.SacthothGroup(worldObj, StatCollector.translateToLocal("message.sacthoth.spawn.1"));
+		SpecialTextUtil.SacthothGroup(worldObj, StatCollector.translateToLocal("message.sacthoth.spawn.2"));
 	}
 
 	@Override

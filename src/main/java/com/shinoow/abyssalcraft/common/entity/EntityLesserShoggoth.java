@@ -31,7 +31,6 @@ import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
-import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeModContainer;
 
@@ -39,6 +38,7 @@ import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
 import com.shinoow.abyssalcraft.api.entity.*;
 import com.shinoow.abyssalcraft.common.util.EntityUtil;
+import com.shinoow.abyssalcraft.common.world.gen.WorldGenShoggothMonolith;
 
 public class EntityLesserShoggoth extends EntityMob implements ICoraliumEntity, IDreadEntity {
 
@@ -47,6 +47,8 @@ public class EntityLesserShoggoth extends EntityMob implements ICoraliumEntity, 
 
 	private static List<Class<? extends EntityLivingBase>> noms = new ArrayList<Class<? extends EntityLivingBase>>();
 	private static List<Block> blockBlacklist = new ArrayList<Block>();
+
+	private int monolithTimer;
 
 	public EntityLesserShoggoth(World par1World) {
 		super(par1World);
@@ -100,14 +102,24 @@ public class EntityLesserShoggoth extends EntityMob implements ICoraliumEntity, 
 	protected void entityInit()
 	{
 		super.entityInit();
-		getDataWatcher().addObject(12, Byte.valueOf((byte)0));
-		getDataWatcher().addObject(14, Byte.valueOf((byte)0));
-		getDataWatcher().addObject(16, Byte.valueOf((byte)0));
+		dataWatcher.addObject(12, Byte.valueOf((byte)0));
+		dataWatcher.addObject(14, Byte.valueOf((byte)0));
+		dataWatcher.addObject(16, Byte.valueOf((byte)0));
+		dataWatcher.addObject(18, Byte.valueOf((byte)0));
 	}
 
 	@Override
 	public boolean canBreatheUnderwater() {
 		return true;
+	}
+
+	@Override
+	public void onUpdate()
+	{
+		super.onUpdate();
+
+		if (!worldObj.isRemote)
+			setBesideClimbableBlock(isCollidedHorizontally);
 	}
 
 	@Override
@@ -162,9 +174,26 @@ public class EntityLesserShoggoth extends EntityMob implements ICoraliumEntity, 
 	}
 
 	@Override
+	public boolean isOnLadder()
+	{
+		return isBesideClimbableBlock();
+	}
+
+	/**
+	 * Reduces this Shoggoth's monolith timer
+	 */
+	public void reduceMonolithTimer(){
+		if(monolithTimer - 200 >= 200)
+			monolithTimer -= 200;
+		else monolithTimer = 0;
+	}
+
+	@Override
 	public void onLivingUpdate()
 	{
 		super.onLivingUpdate();
+
+		monolithTimer++;
 
 		if(getFoodLevel() == 3 && !worldObj.isRemote){
 			setFoodLevel(0);
@@ -193,7 +222,56 @@ public class EntityLesserShoggoth extends EntityMob implements ICoraliumEntity, 
 					&& !worldObj.getBlock(x, y - 1, z).hasTileEntity(worldObj.getBlockMetadata(x, y - 1, z)) && !blockBlacklist.contains(worldObj.getBlock(x, y - 1, z))
 					&& worldObj.getBlock(x, y - 1, z).isOpaqueCube() && worldObj.getBlock(x, y - 1, z).renderAsNormalBlock())
 				worldObj.setBlock(x, y - 1, z, AbyssalCraft.shoggothBlock);
+			if(!isChild()){
+				if(!worldObj.getBlock(x - 1, y - 1, z).getMaterial().isLiquid() && worldObj.getBlock(x - 1, y - 1, z).getMaterial() != Material.air
+						&& !worldObj.getBlock(x - 1, y - 1, z).hasTileEntity(worldObj.getBlockMetadata(x - 1, y - 1, z)) && !blockBlacklist.contains(worldObj.getBlock(x - 1, y - 1, z))
+						&& worldObj.getBlock(x - 1, y - 1, z).isOpaqueCube() && worldObj.getBlock(x - 1, y - 1, z).renderAsNormalBlock())
+					worldObj.setBlock(x - 1, y - 1, z, AbyssalCraft.shoggothBlock);
+				if(!worldObj.getBlock(x, y - 1, z - 1).getMaterial().isLiquid() && worldObj.getBlock(x, y - 1, z - 1).getMaterial() != Material.air
+						&& !worldObj.getBlock(x, y - 1, z - 1).hasTileEntity(worldObj.getBlockMetadata(x, y - 1, z - 1)) && !blockBlacklist.contains(worldObj.getBlock(x, y - 1, z - 1))
+						&& worldObj.getBlock(x, y - 1, z - 1).isOpaqueCube() && worldObj.getBlock(x, y - 1, z - 1).renderAsNormalBlock())
+					worldObj.setBlock(x, y - 1, z - 1, AbyssalCraft.shoggothBlock);
+				if(!worldObj.getBlock(x - 1, y - 1, z - 1).getMaterial().isLiquid() && worldObj.getBlock(x - 1, y - 1, z - 1).getMaterial() != Material.air
+						&& !worldObj.getBlock(x - 1, y - 1, z - 1).hasTileEntity(worldObj.getBlockMetadata(x - 1, y - 1, z - 1)) && !blockBlacklist.contains(worldObj.getBlock(x - 1, y - 1, z - 1))
+						&& worldObj.getBlock(x - 1, y - 1, z - 1).isOpaqueCube() && worldObj.getBlock(x - 1, y - 1, z - 1).renderAsNormalBlock())
+					worldObj.setBlock(x - 1, y - 1, z - 1, AbyssalCraft.shoggothBlock);
+			}
 		}
+
+		if(monolithTimer >= 1800){
+			monolithTimer = 0;
+			if(worldObj.getEntitiesWithinAABB(getClass(), boundingBox.expand(32D, 32D, 32D)).size() > 5 && !isChild()){
+				for(EntityLesserShoggoth shoggoth : (List<EntityLesserShoggoth>)worldObj.getEntitiesWithinAABB(getClass(), boundingBox.expand(30F, 30F, 30F)))
+					shoggoth.reduceMonolithTimer();
+				if(!worldObj.isRemote)
+					new WorldGenShoggothMonolith().generate(worldObj, rand, x + 3, y, z + 3);
+			}
+		}
+	}
+
+	/**
+	 * Returns true if the WatchableObject (Byte) is 0x01 otherwise returns false. The WatchableObject is updated using
+	 * setBesideClimableBlock.
+	 */
+	public boolean isBesideClimbableBlock()
+	{
+		return (dataWatcher.getWatchableObjectByte(18) & 1) != 0;
+	}
+
+	/**
+	 * Updates the WatchableObject (Byte) created in entityInit(), setting it to 0x01 if par1 is true or 0x00 if it is
+	 * false.
+	 */
+	public void setBesideClimbableBlock(boolean par1)
+	{
+		byte b0 = dataWatcher.getWatchableObjectByte(18);
+
+		if (par1)
+			b0 = (byte)(b0 | 1);
+		else
+			b0 &= -2;
+
+		dataWatcher.updateObject(18, Byte.valueOf(b0));
 	}
 
 	@Override
@@ -225,6 +303,9 @@ public class EntityLesserShoggoth extends EntityMob implements ICoraliumEntity, 
 
 		return super.attackEntityFrom(par1DamageSource, par2);
 	}
+
+	@Override
+	protected void fall(float par1) {}
 
 	@Override
 	protected String getLivingSound()
@@ -280,6 +361,8 @@ public class EntityLesserShoggoth extends EntityMob implements ICoraliumEntity, 
 			byte var2 = par1NBTTagCompound.getByte("FoodLevel");
 			setFoodLevel(var2);
 		}
+
+		monolithTimer = par1NBTTagCompound.getInteger("MonolithTimer");
 	}
 
 	@Override
@@ -293,6 +376,8 @@ public class EntityLesserShoggoth extends EntityMob implements ICoraliumEntity, 
 		par1NBTTagCompound.setByte("ShoggothType", (byte)getShoggothType());
 
 		par1NBTTagCompound.setByte("FoodLevel", (byte)getFoodLevel());
+
+		par1NBTTagCompound.setInteger("MonolithTimer", monolithTimer);
 	}
 
 	@Override

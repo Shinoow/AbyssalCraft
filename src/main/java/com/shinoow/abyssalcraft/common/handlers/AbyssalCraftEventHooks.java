@@ -40,6 +40,7 @@ import com.shinoow.abyssalcraft.common.blocks.BlockDreadSapling;
 import com.shinoow.abyssalcraft.common.entity.EntityJzahar;
 import com.shinoow.abyssalcraft.common.items.*;
 import com.shinoow.abyssalcraft.common.ritual.NecronomiconBreedingRitual;
+import com.shinoow.abyssalcraft.common.ritual.NecronomiconDreadSpawnRitual;
 import com.shinoow.abyssalcraft.common.util.EntityUtil;
 import com.shinoow.abyssalcraft.common.util.SpecialTextUtil;
 import com.shinoow.abyssalcraft.common.world.TeleporterOmothol;
@@ -195,11 +196,10 @@ public class AbyssalCraftEventHooks {
 						player.worldObj.getBiomeGenForCoords((int)player.posX, (int)player.posZ) == AbyssalCraft.DarklandsHills ||
 						player.worldObj.getBiomeGenForCoords((int)player.posX, (int)player.posZ) == AbyssalCraft.DarklandsForest)
 					if(rand.nextInt(1000) == 0)
-						if(helmet == null || helmet != null && helmet.getItem() != AbyssalCraft.helmet || helmet != null && helmet.getItem() != AbyssalCraft.helmetC
-						|| helmet != null && helmet.getItem() != AbyssalCraft.helmetD || helmet != null && helmet.getItem() != AbyssalCraft.Corhelmet
-						|| helmet != null && helmet.getItem() != AbyssalCraft.CorhelmetP || helmet != null && helmet.getItem() != AbyssalCraft.Depthshelmet
-						|| helmet != null && helmet.getItem() != AbyssalCraft.dreadiumhelmet  || helmet != null && helmet.getItem() != AbyssalCraft.dreadiumShelmet
-						|| helmet != null && helmet.getItem() != AbyssalCraft.ethHelmet)
+						if(helmet == null || helmet != null && helmet.getItem() != AbyssalCraft.helmet || helmet != null && helmet.getItem() != AbyssalCraft.helmetD
+						|| helmet != null && helmet.getItem() != AbyssalCraft.Corhelmet || helmet != null && helmet.getItem() != AbyssalCraft.CorhelmetP
+						|| helmet != null && helmet.getItem() != AbyssalCraft.Depthshelmet || helmet != null && helmet.getItem() != AbyssalCraft.dreadiumhelmet
+						|| helmet != null && helmet.getItem() != AbyssalCraft.dreadiumShelmet || helmet != null && helmet.getItem() != AbyssalCraft.ethHelmet)
 							if(!player.capabilities.isCreativeMode)
 								player.addPotionEffect(new PotionEffect(Potion.blindness.id, 100));
 				if(player.getActivePotionEffect(Potion.blindness) != null && player.getActivePotionEffect(Potion.blindness).getDuration() == 0)
@@ -372,16 +372,17 @@ public class AbyssalCraftEventHooks {
 			event.entityPlayer.addStat(AbyssalCraft.ritualSummon, 1);
 			if(event.ritual.getUnlocalizedName().endsWith("summonSacthoth"))
 				if(event.world.isRemote)
-					SpecialTextUtil.SacthothText(StatCollector.translateToLocal("message.sacthoth.spawn.1"));
+					SpecialTextUtil.SacthothGroup(event.world, StatCollector.translateToLocal("message.sacthoth.spawn.1"));
 			if(event.ritual.getUnlocalizedName().endsWith("summonAsorah")){
 				if(event.world.isRemote)
-					SpecialTextUtil.AsorahText(StatCollector.translateToLocal("message.asorah.spawn"));
+					SpecialTextUtil.AsorahGroup(event.world, StatCollector.translateToLocal("message.asorah.spawn"));
 				event.entityPlayer.addStat(AbyssalCraft.summonAsorah, 1);
 			}
 		}
 		if(event.ritual instanceof NecronomiconCreationRitual)
 			event.entityPlayer.addStat(AbyssalCraft.ritualCreate, 1);
-		if(event.ritual instanceof NecronomiconBreedingRitual)
+		if(event.ritual instanceof NecronomiconBreedingRitual
+				|| event.ritual instanceof NecronomiconDreadSpawnRitual)
 			event.entityPlayer.addStat(AbyssalCraft.ritualBreed, 1);
 		if(event.ritual instanceof NecronomiconPotionRitual)
 			event.entityPlayer.addStat(AbyssalCraft.ritualPotion, 1);

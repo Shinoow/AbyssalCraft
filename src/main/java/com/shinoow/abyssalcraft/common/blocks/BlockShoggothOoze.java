@@ -1,3 +1,14 @@
+/*******************************************************************************
+ * AbyssalCraft
+ * Copyright (c) 2012 - 2015 Shinoow.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the GNU Lesser Public License v3
+ * which accompanies this distribution, and is available at
+ * http://www.gnu.org/licenses/lgpl-3.0.txt
+ * 
+ * Contributors:
+ *     Shinoow -  implementation
+ ******************************************************************************/
 package com.shinoow.abyssalcraft.common.blocks;
 
 import java.util.Random;
@@ -16,10 +27,11 @@ public class BlockShoggothOoze extends BlockACBasic {
 		super(Material.ground, 1.0F, 1.0F, Block.soundTypeSand);
 	}
 
+	@Override
 	public AxisAlignedBB getCollisionBoundingBoxFromPool(World world, int x, int y, int z)
 	{
-		float f = 0.125F;
-		return AxisAlignedBB.getBoundingBox((double)x, (double)y, (double)z, (double)(x + 1), (double)((float)(y + 1) - f), (double)(z + 1));
+		float f = 0.25F;
+		return AxisAlignedBB.getBoundingBox(x, y, z, x + 1, y + 1 - f, z + 1);
 	}
 
 	@Override
@@ -27,7 +39,8 @@ public class BlockShoggothOoze extends BlockACBasic {
 	{
 		return 0;
 	}
-	
+
+	@Override
 	public void onEntityCollidedWithBlock(World world, int x, int y, int z, Entity entity)
 	{
 		if(!(entity instanceof EntityLesserShoggoth)){

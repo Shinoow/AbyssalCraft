@@ -1,13 +1,23 @@
--Fixed a minor bug with potion effects given from the Ethaxium armor sticking around after the duration has run out
--Removed the Coralium Infested Ocean biome (hasn't generated in a long time)
--Potion and Enchantment IDs are now auto-assigned
--Rituals can only be performed if you own the Necronomicon (same with setting up the altar)
--Added Lesser Shoggoth
--Added Shoggoth Flesh (dropped by lesser shoggoths)
--Any Sulfur registered in the OreDictionary can now be crystallized
--Added Hardcore Mode config option (if set to true, all mobs become tougher)
--Necronomicon GUI makeover (improved the layout, among things)
--A NecroData instance can now carry up to 7 PageData instances
--Integrations has been moved over to a separate mod (called AbyssalCraft Integrations)
--Added Abyssalnite/Refined Coralium/Dreadium/Ethaxium Nuggets (previously part of the Thaumcraft integration)
--Added Shoggoth Ooze (appears on the ground where Lesser Shoggoths have walked)
+- Removed the Coralium Infused Abyssalnite set (armor and tools)
+- Added Ritual used to multiply Dread Spawns
+- Added Aoe Potion Rituals for all AbyssalCraft Potion effects
+- Reimplemented Potion IDs (only use this if the Dynamic Potion ID fails, which most likely is caused by another mod hardcoding it's Potion IDs)
+- IntegrationHandler now does a final scan in post-init for integrations (in case any integrations came through IMC)
+- Added Cthulhu Statue
+- Added Hastur Statue
+- Adult Lesser Shoggoths spread their ooze over a larger area
+- If enough Lesser Shoggoths are in one area, one of them might try to construct a monolith
+- Crystals have turned into a single item (all old crystals have been replaced with the deprecation item)
+- Added Crystal Shards (Crystal Equivalent to Nuggets)
+- Added Staff of Rending (used to obtain Essences, and Shadow Gems)
+- Added Dimensional Essences (Abyssal Wasteland, Dreadlands and Omothol, obtained through the Staff of Rending)
+- Added Skin of the Abyssal Wasteland/Dreadlands/Omothol
+- Added config option for Abyssal Zombies spawning in The End
+- The progression sections of the Necronomicon has been rewritten
+- Added more Crystallization and Transmutation options (with the addition of crystal shards)
+- Crates with solid blocks on top of them can now be opened
+- Added Patron section to the Necronomicon
+- Added Special Armor and Tools section to the Necronomicon
+- Added more crafting recipes to the Special Materials sections of the Necronomicon
+- Added a Machine section to the Necronomicon (which contains information about all machines)
+- Boss messages will now display for all players in the same dimension as the one who triggered the message

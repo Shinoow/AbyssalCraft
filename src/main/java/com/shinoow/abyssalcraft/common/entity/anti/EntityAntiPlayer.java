@@ -25,7 +25,6 @@ import net.minecraft.entity.ai.EntityAISwimming;
 import net.minecraft.entity.ai.EntityAIWander;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.monster.EntityMob;
-import net.minecraft.entity.monster.EntityZombie;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
 
@@ -54,9 +53,8 @@ public class EntityAntiPlayer extends EntityMob implements IAntiEntity {
 		if(AbyssalCraft.hardcoreMode){
 			getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(80.0D);
 			getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(4.0D);
-		} else {
+		} else
 			getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(40.0D);
-		}
 	}
 
 	@Override

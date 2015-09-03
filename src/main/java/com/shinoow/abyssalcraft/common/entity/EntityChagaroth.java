@@ -218,10 +218,10 @@ public class EntityChagaroth extends EntityMob implements IBossDisplayData, IDre
 			entityplayer.addStat(AbyssalCraft.killChagaroth, 1);
 		}
 		if(worldObj.isRemote){
-			SpecialTextUtil.ChagarothText(StatCollector.translateToLocal("message.chagaroth.death.1"));
-			SpecialTextUtil.ChagarothText(StatCollector.translateToLocal("message.chagaroth.death.2"));
-			SpecialTextUtil.ChagarothText(StatCollector.translateToLocal("message.chagaroth.death.3"));
-			SpecialTextUtil.ChagarothText(StatCollector.translateToLocal("message.chagaroth.death.4"));
+			SpecialTextUtil.ChagarothGroup(worldObj, StatCollector.translateToLocal("message.chagaroth.death.1"));
+			SpecialTextUtil.ChagarothGroup(worldObj, StatCollector.translateToLocal("message.chagaroth.death.2"));
+			SpecialTextUtil.ChagarothGroup(worldObj, StatCollector.translateToLocal("message.chagaroth.death.3"));
+			SpecialTextUtil.ChagarothGroup(worldObj, StatCollector.translateToLocal("message.chagaroth.death.4"));
 		}
 		super.onDeath(par1DamageSource);
 	}

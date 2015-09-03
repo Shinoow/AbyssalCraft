@@ -250,7 +250,7 @@ public class GuiNecronomiconEntry extends GuiNecronomicon {
 			break;
 		case CRAFTING:
 			if(icon != null){
-				writeText(1, text1, 100);
+				writeText(1, text1, 95);
 				GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 				mc.renderEngine.bindTexture(NecronomiconResources.CRAFTING);
 				drawTexturedModalRect(k, b0, 0, 0, 256, 256);

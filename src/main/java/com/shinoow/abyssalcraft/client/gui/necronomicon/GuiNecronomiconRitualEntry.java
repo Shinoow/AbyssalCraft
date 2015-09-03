@@ -90,6 +90,7 @@ public class GuiNecronomiconRitualEntry extends GuiNecronomicon {
 					mc.displayGuiScreen(parent);
 				} else if (currTurnup > 0)
 					--currTurnup;
+		updateButtons();
 	}
 
 	@Override

@@ -15,7 +15,6 @@ import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.ResourceLocation;
 
-import com.shinoow.abyssalcraft.client.model.entity.ModelDG;
 import com.shinoow.abyssalcraft.client.model.entity.ModelLesserShoggoth;
 import com.shinoow.abyssalcraft.common.entity.EntityLesserShoggoth;
 

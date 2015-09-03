@@ -156,9 +156,9 @@ public class EntityDragonBoss extends EntityMob implements IBossDisplayData, IEn
 			entityplayer.addStat(AbyssalCraft.killAsorah, 1);
 		}
 		if(worldObj.isRemote){
-			SpecialTextUtil.OblivionaireText(StatCollector.translateToLocal("message.asorah.death.1"));
-			SpecialTextUtil.OblivionaireText(StatCollector.translateToLocal("message.asorah.death.2"));
-			SpecialTextUtil.OblivionaireText(StatCollector.translateToLocal("message.asorah.death.3"));
+			SpecialTextUtil.OblivionaireGroup(worldObj, StatCollector.translateToLocal("message.asorah.death.1"));
+			SpecialTextUtil.OblivionaireGroup(worldObj, StatCollector.translateToLocal("message.asorah.death.2"));
+			SpecialTextUtil.OblivionaireGroup(worldObj, StatCollector.translateToLocal("message.asorah.death.3"));
 		}
 		super.onDeath(par1DamageSource);
 	}

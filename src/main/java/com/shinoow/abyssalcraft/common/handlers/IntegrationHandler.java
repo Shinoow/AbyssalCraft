@@ -94,6 +94,7 @@ public class IntegrationHandler {
 	}
 
 	public static void postInit(){
+		searchAgain();
 		if(!integrations.isEmpty()){
 			ACLogger.info("Post-initializing integrations!");
 			for(IACPlugin plugin : integrations)

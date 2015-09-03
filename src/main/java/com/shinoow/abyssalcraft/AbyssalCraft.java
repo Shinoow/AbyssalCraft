@@ -77,7 +77,7 @@ import cpw.mods.fml.common.registry.*;
 @Mod(modid = AbyssalCraft.modid, name = AbyssalCraft.name, version = AbyssalCraft.version, dependencies = "required-after:Forge@[forgeversion,);after:Thaumcraft", useMetadata = false, guiFactory = "com.shinoow.abyssalcraft.client.config.ACGuiFactory")
 public class AbyssalCraft {
 
-	public static final String version = "1.8.8";
+	public static final String version = "1.8.9";
 	public static final String modid = "abyssalcraft";
 	public static final String name = "AbyssalCraft";
 
@@ -144,7 +144,8 @@ public class AbyssalCraft {
 	AbyCopOre, AbyPCorOre, AbyLCorOre, solidLava, ethaxium, ethaxiumbrick, ethaxiumpillar, ethaxiumstairs,
 	ethaxiumslab1, ethaxiumslab2, ethaxiumfence, omotholstone, ethaxiumblock, omotholportal, omotholfire,
 	engraver, house, materializer, darkethaxiumbrick, darkethaxiumpillar, darkethaxiumstairs,
-	darkethaxiumslab1, darkethaxiumslab2, darkethaxiumfence, ritualaltar, ritualpedestal, shoggothBlock;
+	darkethaxiumslab1, darkethaxiumslab2, darkethaxiumfence, ritualaltar, ritualpedestal, shoggothBlock,
+	cthulhuStatue, hasturStatue;
 
 	//Overworld biomes
 	public static BiomeGenBase Darklands, DarklandsForest, DarklandsPlains, DarklandsHills,
@@ -165,20 +166,20 @@ public class AbyssalCraft {
 	cbrick, cudgel, carbonCluster, denseCarbonCluster, methane, nitre, sulfur, portalPlacerJzh,
 	tinIngot, copperIngot, lifeCrystal, shoggothFlesh, eldritchScale, omotholFlesh, necronomicon,
 	necronomicon_cor, necronomicon_dre, necronomicon_omt, abyssalnomicon, crystalbag_s, crystalbag_m,
-	crystalbag_l, crystalbag_h, nugget;
+	crystalbag_l, crystalbag_h, nugget, essence, skin;
 	//coin stuff
 	public static Item coin, cthulhuCoin, elderCoin, jzaharCoin, engravingBlank, engravingCthulhu, engravingElder, engravingJzahar;
-	//crystals (real elements)
+	//crystals
+	public static Item crystal, crystalShard;
+	//crystals (old)
+	@Deprecated
 	public static Item crystalIron, crystalGold, crystalSulfur, crystalCarbon, crystalOxygen,
 	crystalHydrogen, crystalNitrogen, crystalPhosphorus, crystalPotassium, crystalTin, crystalCopper,
-	crystalSilicon, crystalMagnesium, crystalAluminium, crystalZinc;
-	//crystals (ions/molecules)
-	public static Item crystalNitrate, crystalMethane, crystalSilica, crystalAlumina, crystalMagnesia;
-	//crystals (Minecraft/AbyssalCraft elements)
-	public static Item crystalRedstone, crystalAbyssalnite, crystalCoralium, crystalDreadium,
-	crystalBlaze;
+	crystalSilicon, crystalMagnesium, crystalAluminium, crystalZinc, crystalNitrate, crystalMethane,
+	crystalSilica, crystalAlumina, crystalMagnesia, crystalRedstone, crystalAbyssalnite, crystalCoralium,
+	crystalDreadium, crystalBlaze;
 	//shadow items
-	public static Item shadowfragment, shadowshard, shadowgem, oblivionshard, soulReaper, shadowPlate;
+	public static Item shadowfragment, shadowshard, shadowgem, oblivionshard, soulReaper, shadowPlate, drainStaff;
 	//dread items
 	public static Item Dreadshard, dreadchunk, dreadiumingot, dreadfragment, dreadcloth, dreadplate, dreadblade, dreadKey;
 	//abyssalnite items
@@ -208,9 +209,6 @@ public class AbyssalCraft {
 	antiCorbone, antiCorflesh;
 	//Ethaxium items
 	public static Item ethaxium_brick, ethaxiumIngot;
-	//Items to be removed
-	@Deprecated
-	public static Item pickaxeC, axeC, shovelC, swordC, hoeC, helmetC, plateC, legsC, bootsC;
 
 	public static Potion Cplague, Dplague, antiMatter;
 
@@ -288,7 +286,7 @@ public class AbyssalCraft {
 	public static int darkWeight1, darkWeight2, darkWeight3, darkWeight4, darkWeight5, coraliumWeight;
 
 	public static boolean shouldSpread, shouldInfect, breakLogic, destroyOcean, demonPigFire, updateC, darkness,
-	particleBlock, particleEntity, hardcoreMode;
+	particleBlock, particleEntity, hardcoreMode, useDynamicPotionIds, endAbyssalZombie;
 	public static int evilPigSpawnRate;
 
 	static int startEntityId = 300;
@@ -467,6 +465,8 @@ public class AbyssalCraft {
 		ritualaltar = new BlockRitualAltar().setBlockName("ritualaltar");
 		ritualpedestal = new BlockRitualPedestal().setBlockName("ritualpedestal");
 		shoggothBlock = new BlockShoggothOoze().setBlockName("shoggothBlock").setBlockTextureName(modid + ":" + "shoggothOoze");
+		cthulhuStatue = new BlockCthulhuStatue().setBlockName("cthulhuStatue").setBlockTextureName(modid + ":" + "OS");
+		hasturStatue = new BlockHasturStatue().setBlockName("hasturStatue").setBlockTextureName(modid + ":" + "OS");
 
 		//Biome
 		Darklands = new BiomeGenDarklands(configBiomeId1).setColor(522674).setBiomeName("Darklands");
@@ -513,7 +513,7 @@ public class AbyssalCraft {
 		engravingCthulhu = new ItemEngraving("cthulhu", 10).setCreativeTab(tabCoins).setTextureName(modid + ":" + "engraving_cthulhu");
 		engravingElder = new ItemEngraving("elder", 10).setCreativeTab(tabCoins).setTextureName(modid + ":" + "engraving_elder");
 		engravingJzahar = new ItemEngraving("jzahar", 10).setCreativeTab(tabCoins).setTextureName(modid + ":" + "engraving_jzahar");
-		shoggothFlesh = new ItemShoggothFlesh();
+		shoggothFlesh = new ItemMetadata("shoggothFlesh", true, "overworld", "abyssalwasteland", "dreadlands", "omothol", "darkrealm");
 		eldritchScale = new ItemACBasic("eldritchScale");
 		omotholFlesh = new ItemOmotholFlesh(3, 0.3F, false);
 		necronomicon = new ItemNecronomicon("necronomicon", 0);
@@ -525,7 +525,9 @@ public class AbyssalCraft {
 		crystalbag_m = new ItemCrystalBag("crystalbag_medium");
 		crystalbag_l = new ItemCrystalBag("crystalbag_large");
 		crystalbag_h = new ItemCrystalBag("crystalbag_huge");
-		nugget = new ItemNugget();
+		nugget = new ItemMetadata("nugget", true, "abyssalnite", "coralium", "dreadium", "ethaxium");
+		essence = new ItemMetadata("essence", true, "abyssalwasteland", "dreadlands", "omothol");
+		skin = new ItemMetadata("skin", true, "abyssalwasteland", "dreadlands", "omothol");
 
 		//Ethaxium
 		ethaxium_brick = new ItemACBasic("EB");
@@ -543,31 +545,33 @@ public class AbyssalCraft {
 		antiCorbone = new ItemCorbone(0, 0, false, "antiCB");
 
 		//crystals
-		crystalIron = new ItemCrystal("crystalIron", 0xD9D9D9, "Fe");
-		crystalGold = new ItemCrystal("crystalGold", 0xF3CC3E, "Au");
-		crystalSulfur = new ItemCrystal("crystalSulfur", 0xF6FF00, "S");
-		crystalCarbon = new ItemCrystal("crystalCarbon", 0x3D3D36, "C");
-		crystalOxygen = new ItemCrystal("crystalOxygen", 16777215, "O");
-		crystalHydrogen = new ItemCrystal("crystalHydrogen", 16777215, "H");
-		crystalNitrogen = new ItemCrystal("crystalNitrogen", 16777215, "N");
-		crystalPhosphorus = new ItemCrystal("crystalPhosphorus", 0x996A18, "P");
-		crystalPotassium = new ItemCrystal("crystalPotassium", 0xD9D9D9, "K");
-		crystalNitrate = new ItemCrystal("crystalNitrate", 0x1500FF, "NO\u2083");
-		crystalMethane = new ItemCrystal("crystalMethane", 0x19FC00, "CH\u2084");
-		crystalRedstone = new ItemCrystal("crystalRedstone", 0xFF0000, "none");
-		crystalAbyssalnite = new ItemCrystal("crystalAbyssalnite", 0x8002BF, "An");
-		crystalCoralium = new ItemCrystal("crystalCoralium", 0x00FFEE, "Cor");
-		crystalDreadium = new ItemCrystal("crystalDreadium", 0xB00000, "Dr");
-		crystalBlaze = new ItemCrystal("crystalBlaze", 0xFFCC00, "none");
-		crystalTin = new ItemCrystal("crystalTin", 0xD9D8D7, "Sn");
-		crystalCopper = new ItemCrystal("crystalCopper", 0xE89207, "Cu");
-		crystalSilicon = new ItemCrystal("crystalSilicon", 0xD9D9D9, "Si");
-		crystalMagnesium = new ItemCrystal("crystalMagnesium", 0xD9D9D9, "Mg");
-		crystalAluminium = new ItemCrystal("crystalAluminium", 0xD9D9D9, "Al");
-		crystalSilica = new ItemCrystal("crystalSilica", 16777215, "SiO\u2082");
-		crystalAlumina = new ItemCrystal("crystalAlumina", 0xD9D8D9, "Al\u2082O\u2083");
-		crystalMagnesia = new ItemCrystal("crystalMagnesia", 16777215, "MgO");
-		crystalZinc = new ItemCrystal("crystalZinc", 0xD7D8D9, "Zn");
+		crystalIron = new ItemDeprecated("crystal.Iron");
+		crystalGold = new ItemDeprecated("crystal.Gold");
+		crystalSulfur = new ItemDeprecated("crystal.Sulfur");
+		crystalCarbon = new ItemDeprecated("crystal.Carbon");
+		crystalOxygen = new ItemDeprecated("crystal.Oxygen");
+		crystalHydrogen = new ItemDeprecated("crystal.Hydrogen");
+		crystalNitrogen = new ItemDeprecated("crystal.Nitrogen");
+		crystalPhosphorus = new ItemDeprecated("crystal.Phosphorus");
+		crystalPotassium = new ItemDeprecated("crystal.Potassium");
+		crystalNitrate = new ItemDeprecated("crystal.Nitrate");
+		crystalMethane = new ItemDeprecated("crystal.Methane");
+		crystalRedstone = new ItemDeprecated("crystal.Redstone");
+		crystalAbyssalnite = new ItemDeprecated("crystal.Abyssalnite");
+		crystalCoralium = new ItemDeprecated("crystal.Coralium");
+		crystalDreadium = new ItemDeprecated("crystal.Dreadium");
+		crystalBlaze = new ItemDeprecated("crystal.Blaze");
+		crystalTin = new ItemDeprecated("crystal.Tin");
+		crystalCopper = new ItemDeprecated("crystal.Copper");
+		crystalSilicon = new ItemDeprecated("crystal.Silicon");
+		crystalMagnesium = new ItemDeprecated("crystal.Magnesium");
+		crystalAluminium = new ItemDeprecated("crystal.Aluminium");
+		crystalSilica = new ItemDeprecated("crystal.Silica");
+		crystalAlumina = new ItemDeprecated("crystal.Alumina");
+		crystalMagnesia = new ItemDeprecated("crystal.Magnesia");
+		crystalZinc = new ItemDeprecated("crystal.Zinc");
+		crystal = new ItemCrystal().setUnlocalizedName("crystal").setTextureName(AbyssalCraft.modid + ":" + "crystal");
+		crystalShard = new ItemCrystal().setUnlocalizedName("crystalshard").setTextureName(AbyssalCraft.modid + ":" + "crystal_shard");
 
 		//Shadow items
 		shadowfragment = new ItemACBasic("SF");
@@ -620,11 +624,6 @@ public class AbyssalCraft {
 		shovelA = new ItemACShovel(AbyssalCraftAPI.abyssalniteTool, "AS", 4, EnumChatFormatting.DARK_AQUA);
 		swordA = new ItemACSword(AbyssalCraftAPI.abyssalniteTool, "ASW", EnumChatFormatting.DARK_AQUA);
 		hoeA = new ItemACHoe(AbyssalCraftAPI.abyssalniteTool, "AH", EnumChatFormatting.DARK_AQUA);
-		pickaxeC = new ItemDeprecated("CIAP");
-		axeC = new ItemDeprecated("CIAA");
-		shovelC = new ItemDeprecated("CIAS");
-		swordC = new ItemDeprecated("CIASW");
-		hoeC = new ItemDeprecated("CIAH");
 		Corpickaxe = new ItemACPickaxe(AbyssalCraftAPI.refinedCoraliumTool, "RCP", 5, EnumChatFormatting.AQUA);
 		Coraxe = new ItemACAxe(AbyssalCraftAPI.refinedCoraliumTool, "RCA", 5, EnumChatFormatting.AQUA);
 		Corshovel = new ItemACShovel(AbyssalCraftAPI.refinedCoraliumTool, "RCS", 5, EnumChatFormatting.AQUA);
@@ -643,16 +642,13 @@ public class AbyssalCraft {
 		ethShovel = new ItemACShovel(AbyssalCraftAPI.ethaxiumTool, "ES", 8, EnumChatFormatting.AQUA);
 		ethSword = new ItemACSword(AbyssalCraftAPI.ethaxiumTool, "ESW", EnumChatFormatting.AQUA);
 		ethHoe = new ItemACHoe(AbyssalCraftAPI.ethaxiumTool, "EH", EnumChatFormatting.AQUA);
+		drainStaff = new ItemDrainStaff();
 
 		//Armor
 		boots = new ItemAbyssalniteArmor(AbyssalCraftAPI.abyssalniteArmor, 5, 3).setUnlocalizedName("AAB").setTextureName(modid + ":" + "AAB");
 		helmet = new ItemAbyssalniteArmor(AbyssalCraftAPI.abyssalniteArmor, 5, 0).setUnlocalizedName("AAH").setTextureName(modid + ":" + "AAh");
 		plate = new ItemAbyssalniteArmor(AbyssalCraftAPI.abyssalniteArmor, 5, 1).setUnlocalizedName("AAC").setTextureName(modid + ":" + "AAC");
 		legs = new ItemAbyssalniteArmor(AbyssalCraftAPI.abyssalniteArmor, 5, 2).setUnlocalizedName("AAP").setTextureName(modid + ":" + "AAP");
-		bootsC = new ItemDeprecated("ACIAB");
-		helmetC = new ItemDeprecated("ACIAH");
-		plateC = new ItemDeprecated("ACIAC");
-		legsC = new ItemDeprecated("ACIAP");
 		bootsD = new ItemDreadArmor(AbyssalCraftAPI.dreadedAbyssalniteArmor, 5, 3).setUnlocalizedName("ADAB").setTextureName(modid + ":" + "ADAB");
 		helmetD = new ItemDreadArmor(AbyssalCraftAPI.dreadedAbyssalniteArmor, 5, 0).setUnlocalizedName("ADAH").setTextureName(modid + ":" + "ADAH");
 		plateD = new ItemDreadArmor(AbyssalCraftAPI.dreadedAbyssalniteArmor, 5, 1).setUnlocalizedName("ADAC").setTextureName(modid + ":" + "ADAC");
@@ -723,15 +719,17 @@ public class AbyssalCraft {
 		GameRegistry.registerTileEntity(TileEntityMaterializer.class, "tileEntityMaterializer");
 		GameRegistry.registerTileEntity(TileEntityRitualAltar.class, "tileEntityRitualAltar");
 		GameRegistry.registerTileEntity(TileEntityRitualPedestal.class, "tileEntityRitualPedestal");
+		GameRegistry.registerTileEntity(TileEntityCthulhuStatue.class, "tileEntityCthulhuStatue");
+		GameRegistry.registerTileEntity(TileEntityHasturStatue.class, "tileEntityHasturStatue");
 
-		Cplague = new PotionCplague(getNextAvailablePotionId(), true, 0x00FFFF).setIconIndex(1, 0).setPotionName("potion.Cplague");
+		Cplague = new PotionCplague(useDynamicPotionIds ? getNextAvailablePotionId() : AbyssalCraftAPI.potionId1, true, 0x00FFFF).setIconIndex(1, 0).setPotionName("potion.Cplague");
 		AbyssalCraftAPI.addPotionRequirements(Cplague.id, "0 & 1 & !2 & 3 & 0+6");
 		crystalCoralium.setPotionEffect("+0+1-2+3&4+4+13");
-		Dplague = new PotionDplague(getNextAvailablePotionId(), true, 0xAD1313).setIconIndex(1, 0).setPotionName("potion.Dplague");
+		Dplague = new PotionDplague(useDynamicPotionIds ? getNextAvailablePotionId() : AbyssalCraftAPI.potionId2, true, 0xAD1313).setIconIndex(1, 0).setPotionName("potion.Dplague");
 		AbyssalCraftAPI.addPotionRequirements(Dplague.id, "0 & 1 & 2 & 3 & 2+6");
 		AbyssalCraftAPI.addPotionAmplifiers(Dplague.id, "5");
 		crystalDreadium.setPotionEffect("0+1+2+3+13&4-4");
-		antiMatter = new PotionAntimatter(getNextAvailablePotionId(), true, 0xFFFFFF).setIconIndex(1, 0).setPotionName("potion.Antimatter");
+		antiMatter = new PotionAntimatter(useDynamicPotionIds ? getNextAvailablePotionId() : AbyssalCraftAPI.potionId3, true, 0xFFFFFF).setIconIndex(1, 0).setPotionName("potion.Antimatter");
 		AbyssalCraftAPI.addPotionRequirements(antiMatter.id, "0 & 1 & 2 & !3 & 2+6");
 		antibucket.setPotionEffect("0+1+2-3+13&4-4");
 		crystalSulfur.setPotionEffect(PotionHelper.spiderEyeEffect);
@@ -749,9 +747,11 @@ public class AbyssalCraft {
 		AbyssalCraftAPI.enchId3 = lightPierce.effectId;
 		AbyssalCraftAPI.enchId4 = ironWall.effectId;
 
-		AbyssalCraftAPI.potionId1 = Cplague.id;
-		AbyssalCraftAPI.potionId2 = Dplague.id;
-		AbyssalCraftAPI.potionId3 = antiMatter.id;
+		if(useDynamicPotionIds){
+			AbyssalCraftAPI.potionId1 = Cplague.id;
+			AbyssalCraftAPI.potionId2 = Dplague.id;
+			AbyssalCraftAPI.potionId3 = antiMatter.id;
+		}
 
 		//Block Register
 		GameRegistry.registerBlock(Darkstone, "darkstone");
@@ -881,6 +881,8 @@ public class AbyssalCraft {
 		GameRegistry.registerBlock(ritualaltar, ItemRitualBlock.class, "ritualaltar");
 		GameRegistry.registerBlock(ritualpedestal, ItemRitualBlock.class, "ritualpedestal");
 		GameRegistry.registerBlock(shoggothBlock, "shoggothblock");
+		GameRegistry.registerBlock(cthulhuStatue, "cthulhustatue");
+		GameRegistry.registerBlock(hasturStatue, "hasturstatue");
 
 		//Item Register
 		GameRegistry.registerItem(devsword, "devsword");
@@ -921,11 +923,6 @@ public class AbyssalCraft {
 		GameRegistry.registerItem(shovelA, "ashovel");
 		GameRegistry.registerItem(swordA, "asword");
 		GameRegistry.registerItem(hoeA, "ahoe");
-		GameRegistry.registerItem(pickaxeC, "cpickaxe");
-		GameRegistry.registerItem(axeC, "caxe");
-		GameRegistry.registerItem(shovelC, "cshovel");
-		GameRegistry.registerItem(swordC, "csword");
-		GameRegistry.registerItem(hoeC, "choe");
 		GameRegistry.registerItem(Corpickaxe, "corpick");
 		GameRegistry.registerItem(Coraxe, "coraxe");
 		GameRegistry.registerItem(Corshovel, "corshovel");
@@ -935,10 +932,6 @@ public class AbyssalCraft {
 		GameRegistry.registerItem(helmet, "ahelmet");
 		GameRegistry.registerItem(plate, "aplate");
 		GameRegistry.registerItem(legs, "alegs");
-		GameRegistry.registerItem(bootsC, "cboots");
-		GameRegistry.registerItem(helmetC, "chelmet");
-		GameRegistry.registerItem(plateC, "cplate");
-		GameRegistry.registerItem(legsC, "clegs");
 		GameRegistry.registerItem(bootsD, "dboots");
 		GameRegistry.registerItem(helmetD, "dhelmet");
 		GameRegistry.registerItem(plateD, "dplate");
@@ -996,6 +989,8 @@ public class AbyssalCraft {
 		GameRegistry.registerItem(methane, "methane");
 		GameRegistry.registerItem(nitre, "nitre");
 		GameRegistry.registerItem(sulfur, "sulfur");
+		GameRegistry.registerItem(crystal, "crystal");
+		GameRegistry.registerItem(crystalShard, "crystalshard");
 		GameRegistry.registerItem(crystalIron, "crystaliron");
 		GameRegistry.registerItem(crystalGold, "crystalgold");
 		GameRegistry.registerItem(crystalSulfur, "crystalsulfur");
@@ -1077,6 +1072,9 @@ public class AbyssalCraft {
 		GameRegistry.registerItem(crystalbag_h, "crystalbag_huge");
 		GameRegistry.registerItem(shoggothFlesh, "shoggothflesh");
 		GameRegistry.registerItem(nugget, "ingotnugget");
+		GameRegistry.registerItem(drainStaff, "drainstaff");
+		GameRegistry.registerItem(essence, "essence");
+		GameRegistry.registerItem(skin, "skin");
 		//		GameRegistry.registerItem(shadowPlate, "shadowplate");
 
 		AbyssalCraftAPI.setRepairItems();
@@ -1151,16 +1149,17 @@ public class AbyssalCraft {
 
 		registerEntityWithEgg(EntityEvilpig.class, "evilpig", 26, 80, 3, true, 15771042, 14377823);
 		EntityRegistry.addSpawn(EntityEvilpig.class, evilPigSpawnRate, 1, 3, EnumCreatureType.creature, new BiomeGenBase[] {
-				BiomeGenBase.taiga, BiomeGenBase.plains, BiomeGenBase.forest, BiomeGenBase.savanna,
-				BiomeGenBase.beach, BiomeGenBase.extremeHills, BiomeGenBase.jungle, BiomeGenBase.savannaPlateau,
-				BiomeGenBase.swampland, BiomeGenBase.icePlains, BiomeGenBase.birchForest,
-				BiomeGenBase.birchForestHills, BiomeGenBase.roofedForest});
+			BiomeGenBase.taiga, BiomeGenBase.plains, BiomeGenBase.forest, BiomeGenBase.savanna,
+			BiomeGenBase.beach, BiomeGenBase.extremeHills, BiomeGenBase.jungle, BiomeGenBase.savannaPlateau,
+			BiomeGenBase.swampland, BiomeGenBase.icePlains, BiomeGenBase.birchForest,
+			BiomeGenBase.birchForestHills, BiomeGenBase.roofedForest});
 
 		registerEntityWithEgg(EntityAbyssalZombie.class , "abyssalzombie", 27, 80, 3, true, 0x36A880, 0x052824);
 		EntityRegistry.addSpawn(EntityAbyssalZombie.class, 10, 1, 3, EnumCreatureType.monster, BiomeDictionary.getBiomesForType(Type.WATER));
 		EntityRegistry.addSpawn(EntityAbyssalZombie.class, 10, 1, 3, EnumCreatureType.monster, BiomeDictionary.getBiomesForType(Type.BEACH));
 		EntityRegistry.addSpawn(EntityAbyssalZombie.class, 10, 1, 3, EnumCreatureType.monster, BiomeDictionary.getBiomesForType(Type.SWAMP));
-		EntityRegistry.addSpawn(EntityAbyssalZombie.class, 10, 1, 3, EnumCreatureType.monster, BiomeDictionary.getBiomesForType(Type.END));
+		if(endAbyssalZombie)
+			EntityRegistry.addSpawn(EntityAbyssalZombie.class, 10, 1, 3, EnumCreatureType.monster, BiomeDictionary.getBiomesForType(Type.END));
 
 		EntityRegistry.registerModEntity(EntityODBPrimed.class, "Primed ODB", 28, this, 80, 3, true);
 
@@ -1190,7 +1189,7 @@ public class AbyssalCraft {
 
 		registerEntityWithEgg(EntityDemonPig.class, "demonpig", 41, 80, 3, true, 15771042, 14377823);
 		EntityRegistry.addSpawn(EntityDemonPig.class, 30, 1, 3, EnumCreatureType.monster, new BiomeGenBase[] {
-				BiomeGenBase.hell});
+			BiomeGenBase.hell});
 
 		registerEntityWithEgg(EntitySkeletonGoliath.class, "gskeleton", 42, 80, 3, true, 0xD6D6C9, 0xC6C7AD);
 
@@ -1245,8 +1244,8 @@ public class AbyssalCraft {
 		EntityRegistry.addSpawn(EntityLesserShoggoth.class, 3, 1, 1, EnumCreatureType.monster, BiomeDictionary.getBiomesForType(Type.BEACH));
 		EntityRegistry.addSpawn(EntityLesserShoggoth.class, 3, 1, 1, EnumCreatureType.monster, BiomeDictionary.getBiomesForType(Type.SWAMP));
 		EntityRegistry.addSpawn(EntityLesserShoggoth.class, 3, 1, 1, EnumCreatureType.monster, new BiomeGenBase[]{
-				AbyssalCraft.Wastelands, AbyssalCraft.Dreadlands, AbyssalCraft.AbyDreadlands, AbyssalCraft.MountainDreadlands,
-				AbyssalCraft.ForestDreadlands, AbyssalCraft.omothol, AbyssalCraft.darkRealm});
+			AbyssalCraft.Wastelands, AbyssalCraft.Dreadlands, AbyssalCraft.AbyDreadlands, AbyssalCraft.MountainDreadlands,
+			AbyssalCraft.ForestDreadlands, AbyssalCraft.omothol, AbyssalCraft.darkRealm});
 
 		//		registerEntityWithEgg(EntityShadowTitan.class, "shadowtitan", 67, 80, 3, true, 0, 0xFFFFFF);
 		//
@@ -1645,13 +1644,11 @@ public class AbyssalCraft {
 				boolean failed = false;
 				if(!imcMessage.isItemStackMessage())
 					failed = true;
-				else{
-					if(Block.getBlockFromItem(imcMessage.getItemStackValue().getItem()) != null){
-						if(!senders.contains(imcMessage.getSender()))
-							senders.add(imcMessage.getSender());
-						AbyssalCraftAPI.addShoggothBlacklist(Block.getBlockFromItem(imcMessage.getItemStackValue().getItem()));
-					} else failed = true;
-				}
+				else if(Block.getBlockFromItem(imcMessage.getItemStackValue().getItem()) != null){
+					if(!senders.contains(imcMessage.getSender()))
+						senders.add(imcMessage.getSender());
+					AbyssalCraftAPI.addShoggothBlacklist(Block.getBlockFromItem(imcMessage.getItemStackValue().getItem()));
+				} else failed = true;
 				if(failed)
 					ACLogger.imcWarning("Received invalid Shoggoth Block Blacklist from mod %s!", imcMessage.getSender());
 				else ACLogger.imcInfo("Received Shoggoth Block Blacklist from mod %s", imcMessage.getSender());
@@ -1718,6 +1715,7 @@ public class AbyssalCraft {
 		particleBlock = cfg.get(Configuration.CATEGORY_GENERAL, "Block particles", true, "Toggles whether blocks that emits particles should do so.").getBoolean();
 		particleEntity = cfg.get(Configuration.CATEGORY_GENERAL, "Entity particles", true, "Toggles whether entities that emits particles should do so.").getBoolean();
 		hardcoreMode = cfg.get(Configuration.CATEGORY_GENERAL, "Hardcore Mode", false, "Toggles Hardcore mode. If set to true, all mobs will become tougher.").getBoolean();
+		endAbyssalZombie = cfg.get(Configuration.CATEGORY_GENERAL, "End Abyssal Zombies", true, "Toggles whether Abyssal Zombies should spawn in The End. Takes effect after restart.").getBoolean();
 
 		darkWeight1 = cfg.get("biome_weight", "Darklands", 10, "Biome weight for the Darklands biome, controls the chance of it generating", 0, 100).getInt();
 		darkWeight2 = cfg.get("biome_weight", "Darklands Forest", 10, "Biome weight for the Darklands Forest biome, controls the chance of it generating", 0, 100).getInt();
@@ -1725,6 +1723,12 @@ public class AbyssalCraft {
 		darkWeight4 = cfg.get("biome_weight", "Darklands Highland", 10, "Biome weight for the Darklands Highland biome, controls the chance of it generating", 0, 100).getInt();
 		darkWeight5 = cfg.get("biome_weight", "Darklands Mountain", 10, "Biome weight for the Darklands Mountain biome, controls the chance of it generating").getInt();
 		coraliumWeight = cfg.get("biome_weight", "Coralium Infested Swamp", 10, "Biome weight for the Coralium Infested Swamp biome, controls the chance of it generating", 0, 100).getInt();
+
+		useDynamicPotionIds = cfg.get("potions", "Dynamic Potion IDs", true, "Toggles whether to use the dynamic potion ID assigner, or to manually assign them (disable this if you get potion ID conflict with a mod that doesn't have config options for them)").getBoolean();
+
+		AbyssalCraftAPI.potionId1 = cfg.get("potions", "Coralium Plague", 100, "The Coralium Plague potion effect. (Only use this if Dynamic Potion IDs is disabled)", 0, 127).getInt();
+		AbyssalCraftAPI.potionId2 = cfg.get("potions", "Dread Plague", 101, "The Dread Plague potion effect. (Only use this if Dynamic Potion IDs is disabled)", 0, 127).getInt();
+		AbyssalCraftAPI.potionId3 = cfg.get("potions", "Antimatter", 102, "The Antimatter potion effect. (Only use this if Dynamic Potion IDs is disabled)", 0, 127).getInt();
 
 		if(cfg.hasChanged())
 			cfg.save();
@@ -1762,22 +1766,31 @@ public class AbyssalCraft {
 		OreDictionary.registerOre("dustSaltpeter", nitre);
 		OreDictionary.registerOre("materialMethane", methane);
 		OreDictionary.registerOre("oreSaltpeter", nitreOre);
-		OreDictionary.registerOre("crystalIron", crystalIron);
-		OreDictionary.registerOre("crystalGold", crystalGold);
-		OreDictionary.registerOre("crystalSulfur", crystalSulfur);
-		OreDictionary.registerOre("crystalCarbon", crystalCarbon);
-		OreDictionary.registerOre("crystalOxygen", crystalOxygen);
-		OreDictionary.registerOre("crystalHydrogen", crystalHydrogen);
-		OreDictionary.registerOre("crystalNitrogen", crystalNitrogen);
-		OreDictionary.registerOre("crystalPhosphorus", crystalPhosphorus);
-		OreDictionary.registerOre("crystalPotassium", crystalPotassium);
-		OreDictionary.registerOre("crystalNitrate", crystalNitrate);
-		OreDictionary.registerOre("crystalMethane", crystalMethane);
-		OreDictionary.registerOre("crystalRedstone", crystalRedstone);
-		OreDictionary.registerOre("crystalAbyssalnite", crystalAbyssalnite);
-		OreDictionary.registerOre("crystalCoralium", crystalCoralium);
-		OreDictionary.registerOre("crystalDreadium", crystalDreadium);
-		OreDictionary.registerOre("crystalBlaze", crystalBlaze);
+		OreDictionary.registerOre("crystalIron", new ItemStack(crystal, 1, 0));
+		OreDictionary.registerOre("crystalGold", new ItemStack(crystal, 1, 1));
+		OreDictionary.registerOre("crystalSulfur", new ItemStack(crystal, 1, 2));
+		OreDictionary.registerOre("crystalCarbon", new ItemStack(crystal, 1, 3));
+		OreDictionary.registerOre("crystalOxygen", new ItemStack(crystal, 1, 4));
+		OreDictionary.registerOre("crystalHydrogen", new ItemStack(crystal, 1, 5));
+		OreDictionary.registerOre("crystalNitrogen", new ItemStack(crystal, 1, 6));
+		OreDictionary.registerOre("crystalPhosphorus", new ItemStack(crystal, 1, 7));
+		OreDictionary.registerOre("crystalPotassium", new ItemStack(crystal, 1, 8));
+		OreDictionary.registerOre("crystalNitrate", new ItemStack(crystal, 1, 9));
+		OreDictionary.registerOre("crystalMethane", new ItemStack(crystal, 1, 10));
+		OreDictionary.registerOre("crystalRedstone", new ItemStack(crystal, 1, 11));
+		OreDictionary.registerOre("crystalAbyssalnite", new ItemStack(crystal, 1, 12));
+		OreDictionary.registerOre("crystalCoralium", new ItemStack(crystal, 1, 13));
+		OreDictionary.registerOre("crystalDreadium", new ItemStack(crystal, 1, 14));
+		OreDictionary.registerOre("crystalBlaze", new ItemStack(crystal, 1, 15));
+		OreDictionary.registerOre("crystalTin", new ItemStack(crystal, 1, 16));
+		OreDictionary.registerOre("crystalCopper", new ItemStack(crystal, 1, 17));
+		OreDictionary.registerOre("crystalSilicon", new ItemStack(crystal, 1, 18));
+		OreDictionary.registerOre("crystalMagnesium", new ItemStack(crystal, 1, 19));
+		OreDictionary.registerOre("crystalAluminium", new ItemStack(crystal, 1, 20));
+		OreDictionary.registerOre("crystalSilica", new ItemStack(crystal, 1, 21));
+		OreDictionary.registerOre("crystalAlumina", new ItemStack(crystal, 1, 22));
+		OreDictionary.registerOre("crystalMagnesia", new ItemStack(crystal, 1, 23));
+		OreDictionary.registerOre("crystalZinc", new ItemStack(crystal, 1, 24));
 		OreDictionary.registerOre("foodFriedEgg", friedegg);
 		OreDictionary.registerOre("oreIron", AbyIroOre);
 		OreDictionary.registerOre("oreGold", AbyGolOre);
@@ -1787,15 +1800,6 @@ public class AbyssalCraft {
 		OreDictionary.registerOre("oreCopper", AbyCopOre);
 		OreDictionary.registerOre("ingotTin", tinIngot);
 		OreDictionary.registerOre("ingotCopper", copperIngot);
-		OreDictionary.registerOre("crystalTin", crystalTin);
-		OreDictionary.registerOre("crystalCopper", crystalCopper);
-		OreDictionary.registerOre("crystalSilicon", crystalSilicon);
-		OreDictionary.registerOre("crystalMagnesium", crystalMagnesium);
-		OreDictionary.registerOre("crystalAluminium", crystalAluminium);
-		OreDictionary.registerOre("crystalSilica", crystalSilica);
-		OreDictionary.registerOre("crystalAlumina", crystalAlumina);
-		OreDictionary.registerOre("crystalMagnesia", crystalMagnesia);
-		OreDictionary.registerOre("crystalZinc", crystalZinc);
 		OreDictionary.registerOre("orePearlescentCoralium", AbyPCorOre);
 		OreDictionary.registerOre("oreLiquifiedCoralium", AbyLCorOre);
 		OreDictionary.registerOre("ingotEthaxiumBrick", ethaxium_brick);
@@ -1805,6 +1809,31 @@ public class AbyssalCraft {
 		OreDictionary.registerOre("nuggetLiquifiedCoralium", new ItemStack(nugget, 1, 1));
 		OreDictionary.registerOre("nuggetDreadium", new ItemStack(nugget, 1, 2));
 		OreDictionary.registerOre("nuggetEthaxium", new ItemStack(nugget, 1, 3));
+		OreDictionary.registerOre("crystalShardIron", new ItemStack(crystalShard, 1, 0));
+		OreDictionary.registerOre("crystalShardGold", new ItemStack(crystalShard, 1, 1));
+		OreDictionary.registerOre("crystalShardSulfur", new ItemStack(crystalShard, 1, 2));
+		OreDictionary.registerOre("crystalShardCarbon", new ItemStack(crystalShard, 1, 3));
+		OreDictionary.registerOre("crystalShardOxygen", new ItemStack(crystalShard, 1, 4));
+		OreDictionary.registerOre("crystalShardHydrogen", new ItemStack(crystalShard, 1, 5));
+		OreDictionary.registerOre("crystalShardNitrogen", new ItemStack(crystalShard, 1, 6));
+		OreDictionary.registerOre("crystalShardPhosphorus", new ItemStack(crystalShard, 1, 7));
+		OreDictionary.registerOre("crystalShardPotassium", new ItemStack(crystalShard, 1, 8));
+		OreDictionary.registerOre("crystalShardNitrate", new ItemStack(crystalShard, 1, 9));
+		OreDictionary.registerOre("crystalShardMethane", new ItemStack(crystalShard, 1, 10));
+		OreDictionary.registerOre("crystalShardRedstone", new ItemStack(crystalShard, 1, 11));
+		OreDictionary.registerOre("crystalShardAbyssalnite", new ItemStack(crystalShard, 1, 12));
+		OreDictionary.registerOre("crystalShardCoralium", new ItemStack(crystalShard, 1, 13));
+		OreDictionary.registerOre("crystalShardDreadium", new ItemStack(crystalShard, 1, 14));
+		OreDictionary.registerOre("crystalShardBlaze", new ItemStack(crystalShard, 1, 15));
+		OreDictionary.registerOre("crystalShardTin", new ItemStack(crystalShard, 1, 16));
+		OreDictionary.registerOre("crystalShardCopper", new ItemStack(crystalShard, 1, 17));
+		OreDictionary.registerOre("crystalShardSilicon", new ItemStack(crystalShard, 1, 18));
+		OreDictionary.registerOre("crystalShardMagnesium", new ItemStack(crystalShard, 1, 19));
+		OreDictionary.registerOre("crystalShardAluminium", new ItemStack(crystalShard, 1, 20));
+		OreDictionary.registerOre("crystalShardSilica", new ItemStack(crystalShard, 1, 21));
+		OreDictionary.registerOre("crystalShardAlumina", new ItemStack(crystalShard, 1, 22));
+		OreDictionary.registerOre("crystalShardMagnesia", new ItemStack(crystalShard, 1, 23));
+		OreDictionary.registerOre("crystalShardZinc", new ItemStack(crystalShard, 1, 24));
 	}
 
 	private void addChestGenHooks(){
@@ -1836,11 +1865,11 @@ public class AbyssalCraft {
 		ChestGenHooks.addItem(ChestGenHooks.PYRAMID_DESERT_CHEST, new WeightedRandomChestContent(new ItemStack(tinIngot), 1, 5, 7));
 		ChestGenHooks.addItem(ChestGenHooks.STRONGHOLD_CORRIDOR, new WeightedRandomChestContent(new ItemStack(tinIngot), 1, 5, 7));
 		ChestGenHooks.addItem(ChestGenHooks.VILLAGE_BLACKSMITH, new WeightedRandomChestContent(new ItemStack(tinIngot), 1, 5, 7));
-		ChestGenHooks.addItem(ChestGenHooks.DUNGEON_CHEST, new WeightedRandomChestContent(new ItemStack(crystalZinc), 1, 5, 8));
-		ChestGenHooks.addItem(ChestGenHooks.MINESHAFT_CORRIDOR, new WeightedRandomChestContent(new ItemStack(crystalZinc), 1, 5, 8));
-		ChestGenHooks.addItem(ChestGenHooks.PYRAMID_DESERT_CHEST, new WeightedRandomChestContent(new ItemStack(crystalZinc), 1, 5, 8));
-		ChestGenHooks.addItem(ChestGenHooks.STRONGHOLD_CORRIDOR, new WeightedRandomChestContent(new ItemStack(crystalZinc), 1, 5, 8));
-		ChestGenHooks.addItem(ChestGenHooks.VILLAGE_BLACKSMITH, new WeightedRandomChestContent(new ItemStack(crystalZinc), 1, 5, 8));
+		ChestGenHooks.addItem(ChestGenHooks.DUNGEON_CHEST, new WeightedRandomChestContent(new ItemStack(crystal, 1, 24), 1, 5, 8));
+		ChestGenHooks.addItem(ChestGenHooks.MINESHAFT_CORRIDOR, new WeightedRandomChestContent(new ItemStack(crystal, 1, 24), 1, 5, 8));
+		ChestGenHooks.addItem(ChestGenHooks.PYRAMID_DESERT_CHEST, new WeightedRandomChestContent(new ItemStack(crystal, 1, 24), 1, 5, 8));
+		ChestGenHooks.addItem(ChestGenHooks.STRONGHOLD_CORRIDOR, new WeightedRandomChestContent(new ItemStack(crystal, 1, 24), 1, 5, 8));
+		ChestGenHooks.addItem(ChestGenHooks.VILLAGE_BLACKSMITH, new WeightedRandomChestContent(new ItemStack(crystal, 1, 24), 1, 5, 8));
 		ChestGenHooks.addItem(ChestGenHooks.VILLAGE_BLACKSMITH, new WeightedRandomChestContent(new ItemStack(pickaxeA), 1, 1, 2));
 		ChestGenHooks.addItem(ChestGenHooks.VILLAGE_BLACKSMITH, new WeightedRandomChestContent(new ItemStack(Corpickaxe), 1, 1, 1));
 		ChestGenHooks.addItem(ChestGenHooks.VILLAGE_BLACKSMITH, new WeightedRandomChestContent(new ItemStack(helmet), 1, 1, 2));
@@ -1966,7 +1995,7 @@ public class AbyssalCraft {
 		do{
 			i++;
 			if (i >= 128) throw new RuntimeException("Out of available Potion IDs, AbyssalCraft can't load unless some IDs are freed up!");
-			if(i == pot){
+			if(i == pot)
 				for (Field f : Potion.class.getDeclaredFields()) {
 					f.setAccessible(true);
 					try {
@@ -1986,7 +2015,6 @@ public class AbyssalCraft {
 						System.err.println(e);
 					}
 				}
-			}
 
 		} while(Potion.potionTypes[i] != null);
 
@@ -2036,7 +2064,7 @@ public class AbyssalCraft {
 
 		} catch (IOException e) {
 			ACLogger.severe("Failed to fetch supporter list, using local version!");
-			names = "Enfalas";
+			names = "Enfalas, Saice Shoop";
 		}
 
 		return names;
@@ -2069,7 +2097,7 @@ public class AbyssalCraft {
 					}
 					if(!hasPinged){
 						hasPinged = true;
-						updateProxy.announce("[\u00A79AbyssalCraft\u00A7r] Version \u00A7b"+webVersion+"\u00A7r of AbyssalCraft is available. Check http://adf.ly/FQarm for more info. (Your Version: \u00A7b"+AbyssalCraft.version+"\u00A7r)");
+						updateProxy.announce("[\u00A79AbyssalCraft\u00A7r] Version \u00A7b"+webVersion+"\u00A7r of AbyssalCraft is available. Check https://shinoow.github.io/AbyssalCraft/ for more info. (Your Version: \u00A7b"+AbyssalCraft.version+"\u00A7r)");
 					}
 				} else if(!hasPinged){
 					hasPinged = true;

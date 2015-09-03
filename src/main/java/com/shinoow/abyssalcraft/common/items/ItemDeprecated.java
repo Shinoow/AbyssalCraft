@@ -16,7 +16,6 @@ import java.util.List;
 import com.shinoow.abyssalcraft.AbyssalCraft;
 
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumChatFormatting;
@@ -49,57 +48,56 @@ public class ItemDeprecated extends Item {
 	@SuppressWarnings("rawtypes")
 	public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player) {
 
-		if(stack.getItem() == AbyssalCraft.pickaxeC){
-			player.inventory.addItemStackToInventory(new ItemStack(AbyssalCraft.abyblock, 2));
-			player.inventory.addItemStackToInventory(new ItemStack(AbyssalCraft.Corb));
-			player.inventory.addItemStackToInventory(new ItemStack(AbyssalCraft.pickaxeA));
-			player.inventory.addItemStackToInventory(new ItemStack(Items.blaze_rod));
-		}
-		if(stack.getItem() == AbyssalCraft.axeC){
-			player.inventory.addItemStackToInventory(new ItemStack(AbyssalCraft.abyblock, 2));
-			player.inventory.addItemStackToInventory(new ItemStack(AbyssalCraft.Corb));
-			player.inventory.addItemStackToInventory(new ItemStack(AbyssalCraft.axeA));
-			player.inventory.addItemStackToInventory(new ItemStack(Items.blaze_rod));
-		}
-		if(stack.getItem() == AbyssalCraft.shovelC){
-			player.inventory.addItemStackToInventory(new ItemStack(AbyssalCraft.abyblock, 2));
-			player.inventory.addItemStackToInventory(new ItemStack(AbyssalCraft.Corb));
-			player.inventory.addItemStackToInventory(new ItemStack(AbyssalCraft.shovelA));
-			player.inventory.addItemStackToInventory(new ItemStack(Items.blaze_rod));
-		}
-		if(stack.getItem() == AbyssalCraft.swordC){
-			player.inventory.addItemStackToInventory(new ItemStack(AbyssalCraft.abyblock, 4));
-			player.inventory.addItemStackToInventory(new ItemStack(AbyssalCraft.Corb));
-			player.inventory.addItemStackToInventory(new ItemStack(AbyssalCraft.swordA));
-			player.inventory.addItemStackToInventory(new ItemStack(Items.blaze_rod));
-		}
-		if(stack.getItem() == AbyssalCraft.hoeC){
-			player.inventory.addItemStackToInventory(new ItemStack(AbyssalCraft.abyblock));
-			player.inventory.addItemStackToInventory(new ItemStack(AbyssalCraft.Corb));
-			player.inventory.addItemStackToInventory(new ItemStack(AbyssalCraft.hoeA));
-			player.inventory.addItemStackToInventory(new ItemStack(Items.blaze_rod));
-		}
-		if(stack.getItem() == AbyssalCraft.helmetC){
-			player.inventory.addItemStackToInventory(new ItemStack(AbyssalCraft.abyblock, 5));
-			player.inventory.addItemStackToInventory(new ItemStack(AbyssalCraft.Corb));
-			player.inventory.addItemStackToInventory(new ItemStack(AbyssalCraft.helmet));
-
-		}
-		if(stack.getItem() == AbyssalCraft.plateC){
-			player.inventory.addItemStackToInventory(new ItemStack(AbyssalCraft.abyblock, 7));
-			player.inventory.addItemStackToInventory(new ItemStack(AbyssalCraft.Corb));
-			player.inventory.addItemStackToInventory(new ItemStack(AbyssalCraft.plate));
-		}
-		if(stack.getItem() == AbyssalCraft.legsC){
-			player.inventory.addItemStackToInventory(new ItemStack(AbyssalCraft.abyblock, 6));
-			player.inventory.addItemStackToInventory(new ItemStack(AbyssalCraft.Corb));
-			player.inventory.addItemStackToInventory(new ItemStack(AbyssalCraft.legs));
-		}
-		if(stack.getItem() == AbyssalCraft.bootsC){
-			player.inventory.addItemStackToInventory(new ItemStack(AbyssalCraft.abyblock, 4));
-			player.inventory.addItemStackToInventory(new ItemStack(AbyssalCraft.Corb));
-			player.inventory.addItemStackToInventory(new ItemStack(AbyssalCraft.boots));
-		}
+		if(stack.getItem() == AbyssalCraft.crystalIron)
+			player.inventory.addItemStackToInventory(new ItemStack(AbyssalCraft.crystal, 1, 0));
+		if(stack.getItem() == AbyssalCraft.crystalGold)
+			player.inventory.addItemStackToInventory(new ItemStack(AbyssalCraft.crystal, 1, 1));
+		if(stack.getItem() == AbyssalCraft.crystalSulfur)
+			player.inventory.addItemStackToInventory(new ItemStack(AbyssalCraft.crystal, 1, 2));
+		if(stack.getItem() == AbyssalCraft.crystalCarbon)
+			player.inventory.addItemStackToInventory(new ItemStack(AbyssalCraft.crystal, 1, 3));
+		if(stack.getItem() == AbyssalCraft.crystalOxygen)
+			player.inventory.addItemStackToInventory(new ItemStack(AbyssalCraft.crystal, 1, 4));
+		if(stack.getItem() == AbyssalCraft.crystalHydrogen)
+			player.inventory.addItemStackToInventory(new ItemStack(AbyssalCraft.crystal, 1, 5));
+		if(stack.getItem() == AbyssalCraft.crystalNitrogen)
+			player.inventory.addItemStackToInventory(new ItemStack(AbyssalCraft.crystal, 1, 6));
+		if(stack.getItem() == AbyssalCraft.crystalPhosphorus)
+			player.inventory.addItemStackToInventory(new ItemStack(AbyssalCraft.crystal, 1, 7));
+		if(stack.getItem() == AbyssalCraft.crystalPotassium)
+			player.inventory.addItemStackToInventory(new ItemStack(AbyssalCraft.crystal, 1, 8));
+		if(stack.getItem() == AbyssalCraft.crystalNitrate)
+			player.inventory.addItemStackToInventory(new ItemStack(AbyssalCraft.crystal, 1, 9));
+		if(stack.getItem() == AbyssalCraft.crystalMethane)
+			player.inventory.addItemStackToInventory(new ItemStack(AbyssalCraft.crystal, 1, 10));
+		if(stack.getItem() == AbyssalCraft.crystalRedstone)
+			player.inventory.addItemStackToInventory(new ItemStack(AbyssalCraft.crystal, 1, 11));
+		if(stack.getItem() == AbyssalCraft.crystalAbyssalnite)
+			player.inventory.addItemStackToInventory(new ItemStack(AbyssalCraft.crystal, 1, 12));
+		if(stack.getItem() == AbyssalCraft.crystalCoralium)
+			player.inventory.addItemStackToInventory(new ItemStack(AbyssalCraft.crystal, 1, 13));
+		if(stack.getItem() == AbyssalCraft.crystalDreadium)
+			player.inventory.addItemStackToInventory(new ItemStack(AbyssalCraft.crystal, 1, 14));
+		if(stack.getItem() == AbyssalCraft.crystalBlaze)
+			player.inventory.addItemStackToInventory(new ItemStack(AbyssalCraft.crystal, 1, 15));
+		if(stack.getItem() == AbyssalCraft.crystalTin)
+			player.inventory.addItemStackToInventory(new ItemStack(AbyssalCraft.crystal, 1, 16));
+		if(stack.getItem() == AbyssalCraft.crystalCopper)
+			player.inventory.addItemStackToInventory(new ItemStack(AbyssalCraft.crystal, 1, 17));
+		if(stack.getItem() == AbyssalCraft.crystalSilicon)
+			player.inventory.addItemStackToInventory(new ItemStack(AbyssalCraft.crystal, 1, 18));
+		if(stack.getItem() == AbyssalCraft.crystalMagnesium)
+			player.inventory.addItemStackToInventory(new ItemStack(AbyssalCraft.crystal, 1, 19));
+		if(stack.getItem() == AbyssalCraft.crystalAluminium)
+			player.inventory.addItemStackToInventory(new ItemStack(AbyssalCraft.crystal, 1, 20));
+		if(stack.getItem() == AbyssalCraft.crystalSilica)
+			player.inventory.addItemStackToInventory(new ItemStack(AbyssalCraft.crystal, 1, 21));
+		if(stack.getItem() == AbyssalCraft.crystalAlumina)
+			player.inventory.addItemStackToInventory(new ItemStack(AbyssalCraft.crystal, 1, 22));
+		if(stack.getItem() == AbyssalCraft.crystalMagnesia)
+			player.inventory.addItemStackToInventory(new ItemStack(AbyssalCraft.crystal, 1, 23));
+		if(stack.getItem() == AbyssalCraft.crystalZinc)
+			player.inventory.addItemStackToInventory(new ItemStack(AbyssalCraft.crystal, 1, 24));
 
 		stack.stackSize--;
 

@@ -36,15 +36,31 @@ public class NEIACConfig implements IConfigureNEI {
 		API.hideItem(new ItemStack(AbyssalCraft.house));
 		API.hideItem(new ItemStack(AbyssalCraft.Altar));
 
-		API.hideItem(new ItemStack(AbyssalCraft.pickaxeC));
-		API.hideItem(new ItemStack(AbyssalCraft.axeC));
-		API.hideItem(new ItemStack(AbyssalCraft.shovelC));
-		API.hideItem(new ItemStack(AbyssalCraft.swordC));
-		API.hideItem(new ItemStack(AbyssalCraft.hoeC));
-		API.hideItem(new ItemStack(AbyssalCraft.helmetC));
-		API.hideItem(new ItemStack(AbyssalCraft.plateC));
-		API.hideItem(new ItemStack(AbyssalCraft.legsC));
-		API.hideItem(new ItemStack(AbyssalCraft.bootsC));
+		API.hideItem(new ItemStack(AbyssalCraft.crystalIron));
+		API.hideItem(new ItemStack(AbyssalCraft.crystalGold));
+		API.hideItem(new ItemStack(AbyssalCraft.crystalSulfur));
+		API.hideItem(new ItemStack(AbyssalCraft.crystalCarbon));
+		API.hideItem(new ItemStack(AbyssalCraft.crystalOxygen));
+		API.hideItem(new ItemStack(AbyssalCraft.crystalHydrogen));
+		API.hideItem(new ItemStack(AbyssalCraft.crystalNitrogen));
+		API.hideItem(new ItemStack(AbyssalCraft.crystalPhosphorus));
+		API.hideItem(new ItemStack(AbyssalCraft.crystalPotassium));
+		API.hideItem(new ItemStack(AbyssalCraft.crystalNitrate));
+		API.hideItem(new ItemStack(AbyssalCraft.crystalMethane));
+		API.hideItem(new ItemStack(AbyssalCraft.crystalRedstone));
+		API.hideItem(new ItemStack(AbyssalCraft.crystalAbyssalnite));
+		API.hideItem(new ItemStack(AbyssalCraft.crystalCoralium));
+		API.hideItem(new ItemStack(AbyssalCraft.crystalDreadium));
+		API.hideItem(new ItemStack(AbyssalCraft.crystalBlaze));
+		API.hideItem(new ItemStack(AbyssalCraft.crystalTin));
+		API.hideItem(new ItemStack(AbyssalCraft.crystalCopper));
+		API.hideItem(new ItemStack(AbyssalCraft.crystalSilicon));
+		API.hideItem(new ItemStack(AbyssalCraft.crystalMagnesium));
+		API.hideItem(new ItemStack(AbyssalCraft.crystalAluminium));
+		API.hideItem(new ItemStack(AbyssalCraft.crystalSilica));
+		API.hideItem(new ItemStack(AbyssalCraft.crystalAlumina));
+		API.hideItem(new ItemStack(AbyssalCraft.crystalMagnesia));
+		API.hideItem(new ItemStack(AbyssalCraft.crystalZinc));
 	}
 
 	@Override

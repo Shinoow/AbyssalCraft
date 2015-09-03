@@ -42,20 +42,12 @@ public class AbyssalCraftWorldGenerator implements IWorldGenerator {
 			generateSurface(world, random, chunkX*16, chunkZ*16);
 		case 1:
 			generateEnd(world, random, chunkX*16, chunkZ*16);
-		case 50:
-			generateAbyss(world, random, chunkX*16, chunkZ*16);
-		case 51:
-			generateDreadlands(world, random, chunkX*16, chunkZ*16);
 		}
 	}
 
 	private void generateEnd(World world, Random random, int chunkX, int chunkZ) {}
 
 	private void generateNether(World world, Random random, int chunkX, int chunkZ) {}
-
-	private void generateAbyss(World world, Random random, int chunkX, int chunkZ) {}
-
-	private void generateDreadlands(World world, Random random, int chunkX, int chunkZ) {}
 
 	public void generateSurface(World world, Random random, int chunkX, int chunkZ) {
 

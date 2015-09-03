@@ -27,6 +27,7 @@ import net.minecraft.item.Item;
 import net.minecraft.world.World;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
+import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
 import com.shinoow.abyssalcraft.api.entity.IAntiEntity;
 import com.shinoow.abyssalcraft.api.entity.ICoraliumEntity;
 import com.shinoow.abyssalcraft.api.entity.IDreadEntity;
@@ -87,13 +88,12 @@ public class EntityShadowCreature extends EntityMob implements IAntiEntity, ICor
 	protected Item getDropItem()
 	{
 		return AbyssalCraft.shadowfragment;
-
 	}
 
 	@Override
 	public EnumCreatureAttribute getCreatureAttribute()
 	{
-		return Enum.valueOf(EnumCreatureAttribute.class, "SHADOW");
+		return AbyssalCraftAPI.SHADOW;
 	}
 
 	@Override

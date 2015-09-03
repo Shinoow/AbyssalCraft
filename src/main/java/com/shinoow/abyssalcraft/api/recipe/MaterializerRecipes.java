@@ -32,7 +32,6 @@ public class MaterializerRecipes {
 	/** The list of materialization results. */
 	private Map<ItemStack[], ItemStack> materializationList = Maps.newHashMap();
 	private Map<ItemStack, Float> experienceList = Maps.newHashMap();
-	private Map<ItemStack, Integer> levelList = Maps.newHashMap();
 
 	public static MaterializerRecipes instance()
 	{
@@ -44,13 +43,12 @@ public class MaterializerRecipes {
 
 	}
 
-	public void materialize(ItemStack[] input, ItemStack output, int level){
+	public void materialize(ItemStack[] input, ItemStack output, float xp){
 
 		for(ItemStack item : input)
 			if(!APIUtils.isCrystal(item)) throw new ClassCastException("All of the input items has to be Crystals!");
 		materializationList.put(input, output);
-		levelList.put(output, level);
-		experienceList.put(output, Float.valueOf(level == 0 ? 0.25F : level/2));
+		experienceList.put(output, xp);
 	}
 
 	/**

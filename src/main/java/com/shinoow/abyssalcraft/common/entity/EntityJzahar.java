@@ -162,7 +162,7 @@ public class EntityJzahar extends EntityMob implements IBossDisplayData, IRanged
 	public void onDeath(DamageSource par1DamageSource) {
 
 		if(worldObj.isRemote)
-			SpecialTextUtil.JzaharText(StatCollector.translateToLocal("message.jzahar.death.dev"));
+			SpecialTextUtil.JzaharGroup(worldObj, StatCollector.translateToLocal("message.jzahar.death.dev"));
 		super.onDeath(par1DamageSource);
 	}
 
@@ -212,7 +212,7 @@ public class EntityJzahar extends EntityMob implements IBossDisplayData, IRanged
 						if(AbyssalCraft.particleEntity)
 							worldObj.spawnParticle("hugeexplosion", entity.posX + f, entity.posY + 2.0D + f1, entity.posZ + f2, 0.0D, 0.0D, 0.0D);
 						if(entity.isDead)
-							SpecialTextUtil.JzaharText(StatCollector.translateToLocal("message.jzahar.banish.vanilla"));
+							SpecialTextUtil.JzaharGroup(worldObj, StatCollector.translateToLocal("message.jzahar.banish.vanilla"));
 					}
 				}
 				else if(entity instanceof EntityDragonBoss || entity instanceof EntitySacthoth || entity instanceof EntityChagaroth){
@@ -222,7 +222,7 @@ public class EntityJzahar extends EntityMob implements IBossDisplayData, IRanged
 						if(AbyssalCraft.particleEntity)
 							worldObj.spawnParticle("hugeexplosion", entity.posX + f, entity.posY + 2.0D + f1, entity.posZ + f2, 0.0D, 0.0D, 0.0D);
 						if(entity.isDead)
-							SpecialTextUtil.JzaharText(StatCollector.translateToLocal("message.jzahar.banish.ac"));
+							SpecialTextUtil.JzaharGroup(worldObj, StatCollector.translateToLocal("message.jzahar.banish.ac"));
 					}
 				}
 				else if(entity instanceof EntityJzahar){
@@ -240,7 +240,7 @@ public class EntityJzahar extends EntityMob implements IBossDisplayData, IRanged
 						}
 						if(!that){
 							that = true;
-							SpecialTextUtil.JzaharText(StatCollector.translateToLocal("message.jzahar.banish.jzh"));
+							SpecialTextUtil.JzaharGroup(worldObj, StatCollector.translateToLocal("message.jzahar.banish.jzh"));
 						}
 					}
 				}

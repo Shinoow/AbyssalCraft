@@ -1,3 +1,14 @@
+/*******************************************************************************
+ * AbyssalCraft
+ * Copyright (c) 2012 - 2015 Shinoow.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the GNU Lesser Public License v3
+ * which accompanies this distribution, and is available at
+ * http://www.gnu.org/licenses/lgpl-3.0.txt
+ * 
+ * Contributors:
+ *     Shinoow -  implementation
+ ******************************************************************************/
 package com.shinoow.abyssalcraft.client.model.entity;
 
 import org.lwjgl.opengl.GL11;
@@ -549,6 +560,7 @@ public class ModelLesserShoggoth extends ModelBase
 		setRotation(buldge4, 0F, 0F, 0F);
 	}
 
+	@Override
 	public void render(Entity par1Entity, float par2, float par3, float par4, float par5, float par6, float par7)
 	{
 		super.render(par1Entity, par2, par3, par4, par5, par6, par7);
@@ -677,6 +689,7 @@ public class ModelLesserShoggoth extends ModelBase
 		model.rotateAngleZ = z;
 	}
 
+	@Override
 	public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5, Entity entity)
 	{
 		eye1.rotateAngleY = f3 / (180F / (float)Math.PI);

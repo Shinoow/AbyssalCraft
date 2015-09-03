@@ -214,7 +214,6 @@ necronomicon.information.darkrealm=黑暗领域
 necronomicon.information.darkrealm.title=黑暗领域
 necronomicon.information.materials=物质
 necronomicon.information.progression=进展
-necronomicon.information.integration=关联
 necronomicon.information.entities=实体
 necronomicon.information.outergods=外神
 necronomicon.other=其他信息
@@ -224,6 +223,9 @@ necronomicon.anywhere=任何地方
 necronomicon.location=位置
 necronomicon.info=信息
 necronomicon.normal=正常
+necronomicon.patrons=Patrons
+necronomicon.information.armortools=Special Armor and Tools
+necronomicon.information.machines=Machines
 
 #Necronomicon Text
 #Note: the maximum amount of letters per string is 368
@@ -351,6 +353,21 @@ necronomicon.text.crafting.skin_aby=A Skin of The Abyssal Wasteland is crafted w
 necronomicon.text.crafting.skin_dre=A Skin of The Dreadlands is crafted with Dread Fragment and a Essence of The Dreadlands. The essence is obtained through the use of a Staff of Rending.
 necronomicon.text.crafting.skin_omt=A Skin of Omothol is crafted with Omothol Ghoul Flesh and a Essence of Omothol. The essence is obtained through the use of a Staff of Rending.
 necronomicon.text.crafting.dreadcloth=Dread Cloth is crafted with Dread Fragments, Strings and a piece of Leather.
+necronomicon.text.crafting.dreadplate=A Dreadium Plate is crafted with Dreadium Ingots and a Dread Cloth.
+necronomicon.text.crafting.dreadiumhilt=A Dreadium Katana Hilt is crafted with Dreadium Ingots, Dreadlands Wood Planks and Dread Cloth.
+necronomicon.text.crafting.dreadiumblade=A Dreadium Katana Blade is crafted with Dreadium Crystals.
+necronomicon.text.crafting.dreadiumshelmet=A Dreadium Samurai Helmet is crafted with Dreadium Plates, a Dreadium Ingot and a Dreadium Helmet.
+necronomicon.text.crafting.dreadiumsplate=A Dreadium Samurai Chestplate is crafted with Dreadium Plates, Dread Cloth, a Dreadium Ingot and a Dreadium Chestplate.
+necronomicon.text.crafting.dreadiumslegs=Dreadium Samurai Leggings are crafted with Dreadium Plates, Dread Cloth and Dreadium Leggings.
+necronomicon.text.crafting.dreadiumsboots=Dreadium Boots are crafted with Dread Cloth, Dreadlands Wood Planks and Dreadium Boots.
+necronomicon.text.crafting.dreadiumkatana=A Dreadium Katana is crafted with a Dreadium Katana Blade and a Dreadium Katana Hilt.
+necronomicon.text.crafting.coraliumchunk=A Chunk of Coralium is crafted with 9-gem Coralium Clusters and an Abyssal Stone.
+necronomicon.text.crafting.coraliumplate=A Coralium Plate is crafted with Refined Coralium Ingots and Coralium Pearls.
+necronomicon.text.crafting.corhelmetp=A Plated Coralium Helmet is crafted with Coralium Pearls, Refined Coralium Ingots, Coralium Plates and a Refined Coralium Helmet.
+necronomicon.text.crafting.corplatep=A Plated Coralium Chestplate is crafted with Refined Coralium Ingots, Coralium Plates and a Refined Coralium Chestplate.
+necronomicon.text.crafting.corlegsp=Plated Coralium Leggings are crafted with Refined Coralium Ingots, Coralium Plates and Refined Coralium Leggings.
+necronomicon.text.crafting.corbootsp=Plated Coralium Boots are crafted with Refined Coralium Ingots, Coralium Plates and Refined Coralium Boots.
+necronomicon.text.crafting.corbow=A Coralium Longbow is crafted with Strings, Refined Coralium Ingots, a Coralium Pearl and a Bow.
 
 necronomicon.text.overworld.progression.1=In order to reach the Abyssal Wasteland, one must craft a Gateway Key, which requires one to travel to the Nether, and to visit a Darklands and a water-based biome. The water-based biome can be either a swamp or a ocean biome.
 necronomicon.text.overworld.progression.2=From the Nether you need 2 Blaze Rods, and probably a few more for later. From the Darklands biome you need to slay living shadows to finally obtain Shadow Gems. They are most commonly found in Darklands Mountains biomes. It is recommended to obtain a Staff of Rending in order to obtain Shadow Gems faster (more information in the special materials section).
@@ -431,17 +448,6 @@ necronomicon.text.entity.shadowtitan.2=阴影泰坦是游荡在黑暗领域的�
 necronomicon.text.entity.sacthoth.1=末日先驱萨多斯能在黑暗领域中找到.
 necronomicon.text.entity.sacthoth.2=萨多斯是在黑暗领域里的最为强大的生物, 同时也是活阴影的统治者. 他离开黑暗领域的唯一方法就是通过湮灭死亡弹的爆炸. 他有一把能撕裂活物灵魂的强大的剑.
 
-necronomicon.text.integration.nei.1=如果安装了Not Enough Items, 当将鼠标悬停在一个物品或方块上时, 按下查看合成按键能看到相关嬗变器的合成表.
-necronomicon.text.integration.nei.2=当合成的GUI打开时, 你也同样能看到什么物品用作燃料来进行嬗变.
-necronomicon.text.integration.nei.3=结晶器的合成表也同样能用查看合成按键查看, 但是因为一些技术原因用查看用途按键不能显示合成表.
-necronomicon.text.integration.nei.4=当合成的GUI打开时, 你也同样能看到什么物品用作燃料来进行晶体化.
-necronomicon.text.integration.nei.5=铸造器的合成表同样能用查看合成按键查看.
-necronomicon.text.integration.nei.6=铸造器将钱币铸造作为"燃料", 广义上说它们在每次铸造后会减少耐久.
-necronomicon.text.integration.nei.7=物质化器的合成表同样能用查看合成按键查看. 它们有一个特殊的显示屏幕来显示需要的结晶.
-necronomicon.text.integration.nei.8=你同样能看到哪一本你需要的死灵之书用来进行物质化的特殊原料. 物质化器不需要燃料.
-
-necronomicon.text.integration.invtweaks.1=如果安装了Inventory Tweaks, 你能像其他支持的容器里一样用排序按钮来排序在结晶背包里的物品.
-
 necronomicon.text.rituals.info=检查关于仪式的部分信息, 或者其它部分有关可用仪式的信息. "位置" 指定仪式能在哪里进行.
 
 necronomicon.text.rituals.1=要想开始仪式你需要创造祭坛来执行.
@@ -450,6 +456,13 @@ necronomicon.text.rituals.3=要创造祭坛, 简单地将方块放成上面展�
 necronomicon.text.rituals.4=上述的材料只能在他们所指定的维度进行仪式(例如. 圆石和黑暗圆石在主世界, 深渊石砖和珊瑚石砖在深渊荒芜之地 etc).
 necronomicon.text.rituals.5=当祭坛和基座放好后, 你能开始进行仪式了!
 necronomicon.text.rituals.6=所有仪式都需要你去放置物品在基座上, 有些还需要将祭品放在祭坛上. 要进行一个仪式, 放置好物品, 然后按住shift右击祭坛, 然后等待烟雾的消失
+
+necronomicon.text.machines.info=Check the information section for information regarding the different machines, or the other sections for all recipes for the specified machine. The recipes aren't sorted in any way.
+
+necronomicon.text.machines.1=The Transmutator is used to transmute objects into other objects, which can revert a process or simply convert an object into it's opposite. It's fueled by any Coralium materials, Coralium-plagued Flesh and any Crystallized element (full crystal or shard).
+necronomicon.text.machines.2=The Crystallizer is used to crystallize elements, isolating the base elements (or molecules) they're made from. It's fueled by any Dreaded material, Dread Fragments and any Crystallized element (full crystal or shard).
+necronomicon.text.machines.3=The Engraver is used to engrave coins, allowing you to trade things with Remnant. The "fuel" used in engraving is engraving templates, that wear out after a certain amount of uses. If you want to re-engrave a coin, you have to use a blank engraving on it first (to un-engrave it).
+necronomicon.text.machines.4=The Materializer is used to create objects by combining base elements (obtained through crystallization). The Materializer uses no fuel, but requires a Necronomicon to function, and a Crystal Bag with crystals to materialize objects from.
 
 necronomicon.text.wip=这部分还未完成.
 
@@ -722,11 +735,6 @@ item.AA.name=深渊锭斧
 item.AS.name=深渊锭锹
 item.ASW.name=深渊锭剑
 item.AH.name=深渊锭锄
-item.CIAP.name=蕴含珊瑚的深渊锭镐
-item.CIAA.name=蕴含珊瑚的深渊锭斧
-item.CIAS.name=蕴含珊瑚的深渊锭锹
-item.CIASW.name=蕴含珊瑚的深渊锭剑
-item.CIAH.name=蕴含珊瑚的深渊锭锄
 item.RCP.name=精炼珊瑚镐
 item.RCA.name=精炼珊瑚斧
 item.RCS.name=精炼珊瑚锹
@@ -736,10 +744,6 @@ item.AAB.name=深渊锭靴子
 item.AAH.name=深渊锭头盔
 item.AAC.name=深渊锭胸甲
 item.AAP.name=深渊锭护腿
-item.ACIAB.name=蕴含珊瑚的深渊锭靴子
-item.ACIAH.name=蕴含珊瑚的深渊锭头盔
-item.ACIAC.name=蕴含珊瑚的深渊锭胸甲
-item.ACIAP.name=蕴含珊瑚的深渊锭护腿
 item.ADAB.name=恐惧深渊锭靴子
 item.ADAH.name=恐惧深渊锭头盔
 item.ADAC.name=恐惧深渊锭胸甲
