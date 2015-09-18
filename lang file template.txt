@@ -192,6 +192,7 @@ container.abyssalcraft.crystallizer.nei=Crystallization
 container.abyssalcraft.transmutator.nei=Transmutation
 container.abyssalcraft.engraver.nei=Coin Engraving
 container.abyssalcraft.materializer.nei=Materialization
+container.abyssalcraft.rituals.nei=Necronomicon Ritual
 
 #Necronomicon Labels
 necronomicon.index=Index
@@ -226,6 +227,8 @@ necronomicon.normal=Normal
 necronomicon.patrons=Patrons
 necronomicon.information.armortools=Special Armor and Tools
 necronomicon.information.machines=Machines
+necronomicon.reqenergy=Required Energy
+necronomicon.remnanthelp=Remnant help needed
 
 #Necronomicon Text
 #Note: the maximum amount of letters per string is 368
@@ -480,13 +483,13 @@ ac.ritual.summonSacthoth.desc=Summons Sacthoth, Harbinger of Doom, from the Dark
 ac.ritual.breeding=Ritual of Fertility
 ac.ritual.breeding.desc=Breeds nearby animals. Might also kill all of them, if unlucky enough.
 ac.ritual.depthsHelmet=Helmet of The Depths
-ac.ritual.depthsHelmet.desc=A Helmet of The Depths is created by infusing a Refined Coralium Helmet with 2 Coralium Gem Cluster (9 gems), Coralium Plagued Flesh, a Transmuttion Gem, a Lily Pad, a Vine and a Liquid Coralium Bucket.
+ac.ritual.depthsHelmet.desc=A Helmet of The Depths is created by infusing a Refined Coralium Helmet with 2 Coralium Gem Cluster (9 gems), Coralium Plagued Flesh, a Transmutation Gem, a Lily Pad, a Vine and a Liquid Coralium Bucket.
 ac.ritual.depthsChestplate=Chestplate of The Depths
-ac.ritual.depthsChestplate.desc=A Chestplate of The Depths is created by infusing a Refined Coralium Chestplate with 2 Coralium Gem Cluster (9 gems), Coralium Plagued Flesh, a Transmuttion Gem, a Lily Pad, a Vine and a Liquid Coralium Bucket.
+ac.ritual.depthsChestplate.desc=A Chestplate of The Depths is created by infusing a Refined Coralium Chestplate with 2 Coralium Gem Cluster (9 gems), Coralium Plagued Flesh, a Transmutation Gem, a Lily Pad, a Vine and a Liquid Coralium Bucket.
 ac.ritual.depthsLeggings=Leggings of The Depths
-ac.ritual.depthsLeggings.desc=Leggings of The Depths are created by infusing a Refined Coralium Leggings with 2 Coralium Gem Cluster (9 gems), Coralium Plagued Flesh, a Transmuttion Gem, a Lily Pad, a Vine and a Liquid Coralium Bucket.
+ac.ritual.depthsLeggings.desc=Leggings of The Depths are created by infusing a Refined Coralium Leggings with 2 Coralium Gem Cluster (9 gems), Coralium Plagued Flesh, a Transmutation Gem, a Lily Pad, a Vine and a Liquid Coralium Bucket.
 ac.ritual.depthsBoots=Boots of The Depths
-ac.ritual.depthsBoots.desc=Boots of The Depths are created by infusing a Refined Coralium Boots with 2 Coralium Gem Cluster (9 gems), Coralium Plagued Flesh, a Transmuttion Gem, a Lily Pad, a Vine and a Liquid Coralium Bucket.
+ac.ritual.depthsBoots.desc=Boots of The Depths are created by infusing a Refined Coralium Boots with 2 Coralium Gem Cluster (9 gems), Coralium Plagued Flesh, a Transmutation Gem, a Lily Pad, a Vine and a Liquid Coralium Bucket.
 ac.ritual.dreadSpawn=Ritual of Evolving
 ac.ritual.dreadSpawn.desc=All nearby Dread Spawns (regardless of evolution stage) is cloned to produce a double. Offer a Dread Fragment, a Dreadstone, an Abyssalnite Stone, a Chunk of Abyssalnite, a Dreaded Chunk of Abyssalnite, a piece of Rotten Flesh, a Dreaded Shard of Abyssalnite and a Abyssalnite Ingot.
 ac.ritual.corPotionAoE=Corealium Plague Infection
@@ -495,6 +498,32 @@ ac.ritual.drePotionAoE=Dread Plague Infection
 ac.ritual.drePotionAoE.desc=Spreads the Dread Plague to nearby entities. Offer 4 Dread Fragments, 3 Water Bottles and a piece of Gunpowder.
 ac.ritual.antiPotionAoE=Antimatter Eradication
 ac.ritual.antiPotionAoE.desc=Exposes nearby entities to Liquid Antimatter. Offer 4 Rotten Anti-Flesh, 3 Water Bottles and a piece of Gunpowder.
+ac.ritual.cthulhuStatue=Cthulhu Statue
+ac.ritual.cthulhuStatue.desc=A Cthulhu Statue is created by infusing a Monolith Stone with Shoggoth Flesh, a Abyssal Wasteland Essence, a Dreadlands Essence and a Omothol Essence.
+ac.ritual.hasturStatue=Hastur Statue
+ac.ritual.hasturStatue.desc=A Hastur Statue is created by infusing a Monolith Stone with Abyssal Shoggoth Flesh, a Abyssal Wasteland Essence, a Dreadlands Essence and a Omothol Essence.
+ac.ritual.jzaharStatue=J'zahar Statue
+ac.ritual.jzaharStatue.desc=A J'zahar Statue is created by infusing a Monolith Stone with Eldritch Scales, a Abyssal Wasteland Essence, a Dreadlands Essence and a Omothol Essence.
+ac.ritual.azathothStatue=Azathoth Statue
+ac.ritual.azathothStatue.desc=A Azathoth Statue is created by infusing a Monolith Stone with Shoggoth Flesh of The Overworld (normal), Abyssal Wasteland, Dreadlands, Omothol and The Dark Realm, a Abyssal Wasteland Essence, a Dreadlands Essence and a Omothol Essence.
+ac.ritual.nyarlathotepStatue=Nyarlathotep Statue
+ac.ritual.nyarlathotepStatue.desc=A Nyarlathotep Statue is created by infusing a Monolith Stone with Dreaded Shoggoth Flesh, a Abyssal Wasteland Essence, a Dreadlands Essence and a Omothol Essence.
+ac.ritual.yogsothothStatue=Yog-Sothoth Statue
+ac.ritual.yogsothothStatue.desc=A Yog-Sothoth Statue is created by infusing a Monolith Stone with Omothol Shoggoth Flesh, a Abyssal Wasteland Essence, a Dreadlands Essence and a Omothol Essence.
+ac.ritual.shubniggurathStatue=Shub-Niggurath Statue
+ac.ritual.shubniggurathStatue.desc=A Shub-Niggurath Statue is created by infusing a Monolith Stone with Shadow Shoggoth Flesh, a Abyssal Wasteland Essence, a Dreadlands Essence and a Omothol Essence.
+ac.ritual.powerStone=Dreadlands Infused Powerstone
+ac.ritual.powerStone.desc=A Dreadlands Infused Powerstone is created by infusing Coralium Infused Stone with Dreadlands Essences.
+ac.ritual.ethaxiumIngot=Ethaxium Ingot
+ac.ritual.ethaxiumIngot.desc=A Ethaxium Ingot is created by Infusing a Life Crystal with Ethaxium Bricks
+ac.ritual.dreadHelmet=Dreaded Abyssalnite Helmet
+ac.ritual.dreadHelmet.desc=A Dreaded Abyssalnite Helmet is created by infusing a Abyssalnite Helmet with Dreaded Shards of Abyssalnite and a Dreadlands Essence.
+ac.ritual.dreadChestplate=Dreaded Abyssalnite Chestplate
+ac.ritual.dreadChestplate.desc=A Dreaded Abyssalnite Chestplate is created by infusing a Abyssalnite Chestplate with Dreaded Shards of Abyssalnite and a Dreadlands Essence.
+ac.ritual.dreadLeggings=Dreaded Abyssalnite Leggings
+ac.ritual.dreadLeggings.desc=Dreaded Abyssalnite Leggings is created by infusing Abyssalnite Leggings with Dreaded Shards of Abyssalnite and a Dreadlands Essence.
+ac.ritual.dreadBoots=Dreaded Abyssalnite Boots
+ac.ritual.dreadBoots.desc=Dreaded Abyssalnite Boots is created by infusing Abyssalnite Boots with Dreaded Shards of Abyssalnite and a Dreadlands Essence.
 
 #Configuration
 ac_dimensions=Dimensions
@@ -695,6 +724,13 @@ tile.ritualpedestal.name=Ritual Pedestal
 tile.shoggothBlock.name=Shoggoth Ooze
 tile.cthulhuStatue.name=Cthulhu Statue
 tile.hasturStatue.name=Hastur Statue
+tile.jzaharStatue.name=J'zahar Statue
+tile.azathothStatue.name=Azathoth Statue
+tile.nyarlathotepStatue.name=Nyarlathotep Statue
+tile.yogsothothStatue.name=Yog-Sothoth Statue
+tile.shubniggurathStatue.name=Shub-Niggurath Statue
+tile.monolithStone.name=Monolith Stone
+tile.shoggothBiomass.name=Shoggoth Biomass
 
 #Items
 item.DEV_BLADE.name=The Dev Blade

@@ -192,6 +192,7 @@ container.abyssalcraft.crystallizer.nei=结晶化
 container.abyssalcraft.transmutator.nei=嬗变化
 container.abyssalcraft.engraver.nei=钱币铸造
 container.abyssalcraft.materializer.nei=物质化
+container.abyssalcraft.rituals.nei=Necronomicon Ritual
 
 #Necronomicon Labels
 necronomicon.index=索引
@@ -226,6 +227,8 @@ necronomicon.normal=正常
 necronomicon.patrons=庇护
 necronomicon.information.armortools=特殊的盔甲和工具
 necronomicon.information.machines=机器
+necronomicon.reqenergy=Required Energy
+necronomicon.remnanthelp=Remnant help needed
 
 #Necronomicon Text
 #Note: the maximum amount of letters per string is 368
@@ -495,6 +498,32 @@ ac.ritual.drePotionAoE=恐惧瘟疫感染
 ac.ritual.drePotionAoE.desc=传播恐惧瘟疫到附近实体. 需要4个恐惧碎片, 3个水瓶和一个火药.
 ac.ritual.antiPotionAoE=反物质灭绝
 ac.ritual.antiPotionAoE.desc=附近实体受到液态反物质的侵袭. 需要4个反物质腐肉, 3个水瓶和一个火药.
+ac.ritual.cthulhuStatue=Cthulhu Statue
+ac.ritual.cthulhuStatue.desc=A Cthulhu Statue is created by infusing a Monolith Stone with Shoggoth Flesh, a Abyssal Wasteland Essence, a Dreadlands Essence and a Omothol Essence.
+ac.ritual.hasturStatue=Hastur Statue
+ac.ritual.hasturStatue.desc=A Hastur Statue is created by infusing a Monolith Stone with Abyssal Shoggoth Flesh, a Abyssal Wasteland Essence, a Dreadlands Essence and a Omothol Essence.
+ac.ritual.jzaharStatue=J'zahar Statue
+ac.ritual.jzaharStatue.desc=A J'zahar Statue is created by infusing a Monolith Stone with Eldritch Scales, a Abyssal Wasteland Essence, a Dreadlands Essence and a Omothol Essence.
+ac.ritual.azathothStatue=Azathoth Statue
+ac.ritual.azathothStatue.desc=A Azathoth Statue is created by infusing a Monolith Stone with Shoggoth Flesh of The Overworld (normal), Abyssal Wasteland, Dreadlands, Omothol and The Dark Realm, a Abyssal Wasteland Essence, a Dreadlands Essence and a Omothol Essence.
+ac.ritual.nyarlathotepStatue=Nyarlathotep Statue
+ac.ritual.nyarlathotepStatue.desc=A Nyarlathotep Statue is created by infusing a Monolith Stone with Dreaded Shoggoth Flesh, a Abyssal Wasteland Essence, a Dreadlands Essence and a Omothol Essence.
+ac.ritual.yogsothothStatue=Yog-Sothoth Statue
+ac.ritual.yogsothothStatue.desc=A Yog-Sothoth Statue is created by infusing a Monolith Stone with Omothol Shoggoth Flesh, a Abyssal Wasteland Essence, a Dreadlands Essence and a Omothol Essence.
+ac.ritual.shubniggurathStatue=Shub-Niggurath Statue
+ac.ritual.shubniggurathStatue.desc=A Shub-Niggurath Statue is created by infusing a Monolith Stone with Shadow Shoggoth Flesh, a Abyssal Wasteland Essence, a Dreadlands Essence and a Omothol Essence.
+ac.ritual.powerStone=Dreadlands Infused Powerstone
+ac.ritual.powerStone.desc=A Dreadlands Infused Powerstone is created by infusing Coralium Infused Stone with Dreadlands Essences.
+ac.ritual.ethaxiumIngot=Ethaxium Ingot
+ac.ritual.ethaxiumIngot.desc=A Ethaxium Ingot is created by Infusing a Life Crystal with Ethaxium Bricks
+ac.ritual.dreadHelmet=Dreaded Abyssalnite Helmet
+ac.ritual.dreadHelmet.desc=A Dreaded Abyssalnite Helmet is created by infusing a Abyssalnite Helmet with Dreaded Shards of Abyssalnite and a Dreadlands Essence.
+ac.ritual.dreadChestplate=Dreaded Abyssalnite Chestplate
+ac.ritual.dreadChestplate.desc=A Dreaded Abyssalnite Chestplate is created by infusing a Abyssalnite Chestplate with Dreaded Shards of Abyssalnite and a Dreadlands Essence.
+ac.ritual.dreadLeggings=Dreaded Abyssalnite Leggings
+ac.ritual.dreadLeggings.desc=Dreaded Abyssalnite Leggings is created by infusing Abyssalnite Leggings with Dreaded Shards of Abyssalnite and a Dreadlands Essence.
+ac.ritual.dreadBoots=Dreaded Abyssalnite Boots
+ac.ritual.dreadBoots.desc=Dreaded Abyssalnite Boots is created by infusing Abyssalnite Boots with Dreaded Shards of Abyssalnite and a Dreadlands Essence.
 
 #Configuration
 ac_dimensions=维度
@@ -695,6 +724,13 @@ tile.ritualpedestal.name=仪式基座
 tile.shoggothBlock.name=修格斯渗出物
 tile.cthulhuStatue.name=克苏鲁雕像
 tile.hasturStatue.name=哈斯塔雕像
+tile.jzaharStatue.name=J'zahar Statue
+tile.azathothStatue.name=Azathoth Statue
+tile.nyarlathotepStatue.name=Nyarlathotep Statue
+tile.yogsothothStatue.name=Yog-Sothoth Statue
+tile.shubniggurathStatue.name=Shub-Niggurath Statue
+tile.monolithStone.name=Monolith Stone
+tile.shoggothBiomass.name=Shoggoth Biomass
 
 #Items
 item.DEV_BLADE.name=恶魔之刃
