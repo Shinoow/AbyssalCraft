@@ -19,6 +19,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
@@ -106,24 +107,46 @@ public class BlockRitualAltar extends BlockContainer {
 			timer = ((TileEntityRitualAltar)altar).getRitualCooldown();
 
 		if(AbyssalCraft.particleBlock){
-			par1World.spawnParticle("flame", par2 + 0.75F, par3 + 1.05F, par4 + 0.75F, 0.0D, 0.0D, 0.0D);
-			par1World.spawnParticle("flame", par2 + 0.25F, par3 + 1.05F, par4 + 0.75F, 0.0D, 0.0D, 0.0D);
-			par1World.spawnParticle("flame", par2 + 0.25F, par3 + 1.05F, par4 + 0.25F, 0.0D, 0.0D, 0.0D);
-			par1World.spawnParticle("flame", par2 + 0.75F, par3 + 1.05F, par4 + 0.25F, 0.0D, 0.0D, 0.0D);
-			par1World.spawnParticle("smoke", par2 + 0.75F, par3 + 1.05F, par4 + 0.75F, 0.0D, 0.0D, 0.0D);
-			par1World.spawnParticle("smoke", par2 + 0.25F, par3 + 1.05F, par4 + 0.75F, 0.0D, 0.0D, 0.0D);
-			par1World.spawnParticle("smoke", par2 + 0.25F, par3 + 1.05F, par4 + 0.25F, 0.0D, 0.0D, 0.0D);
-			par1World.spawnParticle("smoke", par2 + 0.75F, par3 + 1.05F, par4 + 0.25F, 0.0D, 0.0D, 0.0D);
+			par1World.spawnParticle("flame", par2 + 0.75, par3 + 1.05, par4 + 0.75, 0.0D, 0.0D, 0.0D);
+			par1World.spawnParticle("flame", par2 + 0.25, par3 + 1.05, par4 + 0.75, 0.0D, 0.0D, 0.0D);
+			par1World.spawnParticle("flame", par2 + 0.25, par3 + 1.05, par4 + 0.25, 0.0D, 0.0D, 0.0D);
+			par1World.spawnParticle("flame", par2 + 0.75, par3 + 1.05, par4 + 0.25, 0.0D, 0.0D, 0.0D);
+			par1World.spawnParticle("smoke", par2 + 0.75, par3 + 1.05, par4 + 0.75, 0.0D, 0.0D, 0.0D);
+			par1World.spawnParticle("smoke", par2 + 0.25, par3 + 1.05, par4 + 0.75, 0.0D, 0.0D, 0.0D);
+			par1World.spawnParticle("smoke", par2 + 0.25, par3 + 1.05, par4 + 0.25, 0.0D, 0.0D, 0.0D);
+			par1World.spawnParticle("smoke", par2 + 0.75, par3 + 1.05, par4 + 0.25, 0.0D, 0.0D, 0.0D);
 			if(timer < 200 && timer > 0){
-				par1World.spawnParticle("largesmoke", par2 - 2.5, par3 + 1, par4 + 0.5, 0,0,0);
-				par1World.spawnParticle("largesmoke", par2 + 0.5, par3 + 1, par4 - 2.5, 0,0,0);
-				par1World.spawnParticle("largesmoke", par2 + 3.5, par3 + 1, par4 + 0.5, 0,0,0);
-				par1World.spawnParticle("largesmoke", par2 + 0.5, par3 + 1, par4 + 3.5, 0,0,0);
-				par1World.spawnParticle("largesmoke", par2 - 1.5, par3 + 1, par4 + 2.5, 0,0,0);
-				par1World.spawnParticle("largesmoke", par2 - 1.5, par3 + 1, par4 - 1.5, 0,0,0);
-				par1World.spawnParticle("largesmoke", par2 + 2.5, par3 + 1, par4 + 2.5, 0,0,0);
-				par1World.spawnParticle("largesmoke", par2 + 2.5, par3 + 1, par4 - 1.5, 0,0,0);
-				par1World.spawnParticle("largesmoke", par2 + 0.5, par3 + 1, par4 + 0.5, 0,0,0);
+				par1World.spawnParticle("lava", par2 + 0.5, par3 + 1, par4 + 0.5, 0,0,0);
+
+				for(double i = 0; i <= 0.7; i += 0.03) {
+					double x = i * Math.cos(i) / 2, z = i * Math.sin(i) / 2, o = i * Math.tan(i) / 2;
+					par1World.spawnParticle("largesmoke", par2 - 2.5, par3 + 0.95, par4 + 0.5, x,0,0);
+					par1World.spawnParticle("largesmoke", par2 + 0.5, par3 + 0.95, par4 - 2.5, 0,0,z);
+					par1World.spawnParticle("largesmoke", par2 + 3.5, par3 + 0.95, par4 + 0.5, -x,0,0);
+					par1World.spawnParticle("largesmoke", par2 + 0.5, par3 + 0.95, par4 + 3.5, 0,0,-z);
+					par1World.spawnParticle("largesmoke", par2 - 1.5, par3 + 0.95, par4 + 2.5, o,0,-o);
+					par1World.spawnParticle("largesmoke", par2 - 1.5, par3 + 0.95, par4 - 1.5, o,0,o);
+					par1World.spawnParticle("largesmoke", par2 + 2.5, par3 + 0.95, par4 + 2.5, -o,0,-o);
+					par1World.spawnParticle("largesmoke", par2 + 2.5, par3 + 0.95, par4 - 1.5, -o,0,o);
+				}
+
+				par1World.spawnParticle("flame", par2 - 2.5, par3 + 1.05, par4 + 0.5, 0,0,0);
+				par1World.spawnParticle("flame", par2 + 0.5, par3 + 1.05, par4 - 2.5, 0,0,0);
+				par1World.spawnParticle("flame", par2 + 3.5, par3 + 1.05, par4 + 0.5, 0,0,0);
+				par1World.spawnParticle("flame", par2 + 0.5, par3 + 1.05, par4 + 3.5, 0,0,0);
+				par1World.spawnParticle("flame", par2 - 1.5, par3 + 1.05, par4 + 2.5, 0,0,0);
+				par1World.spawnParticle("flame", par2 - 1.5, par3 + 1.05, par4 - 1.5, 0,0,0);
+				par1World.spawnParticle("flame", par2 + 2.5, par3 + 1.05, par4 + 2.5, 0,0,0);
+				par1World.spawnParticle("flame", par2 + 2.5, par3 + 1.05, par4 - 1.5, 0,0,0);
+
+				par1World.spawnParticle("smoke", par2 - 2.5, par3 + 1.05, par4 + 0.5, 0,0,0);
+				par1World.spawnParticle("smoke", par2 + 0.5, par3 + 1.05, par4 - 2.5, 0,0,0);
+				par1World.spawnParticle("smoke", par2 + 3.5, par3 + 1.05, par4 + 0.5, 0,0,0);
+				par1World.spawnParticle("smoke", par2 + 0.5, par3 + 1.05, par4 + 3.5, 0,0,0);
+				par1World.spawnParticle("smoke", par2 - 1.5, par3 + 1.05, par4 + 2.5, 0,0,0);
+				par1World.spawnParticle("smoke", par2 - 1.5, par3 + 1.05, par4 - 1.5, 0,0,0);
+				par1World.spawnParticle("smoke", par2 + 2.5, par3 + 1.05, par4 + 2.5, 0,0,0);
+				par1World.spawnParticle("smoke", par2 + 2.5, par3 + 1.05, par4 - 1.5, 0,0,0);
 			}
 		}
 	}
@@ -147,6 +170,29 @@ public class BlockRitualAltar extends BlockContainer {
 				}
 			}
 		return false;
+	}
+
+	@Override
+	public void breakBlock(World world, int x, int y, int z, Block block, int meta)
+	{
+		Random rand = new Random();
+		TileEntityRitualAltar altar = (TileEntityRitualAltar) world.getTileEntity(x, y, z);
+
+		if(altar != null)
+			if(altar.getItem() != null){
+				float f = rand.nextFloat() * 0.8F + 0.1F;
+				float f1 = rand.nextFloat() * 0.8F + 0.1F;
+				float f2 = rand.nextFloat() * 0.8F + 0.1F;
+
+				EntityItem item = new EntityItem(world, x + f, y + f1, z + f2, altar.getItem());
+				float f3 = 0.05F;
+				item.motionX = (float)rand.nextGaussian() * f3;
+				item.motionY = (float)rand.nextGaussian() * f3 + 0.2F;
+				item.motionZ = (float)rand.nextGaussian() * f3;
+				world.spawnEntityInWorld(item);
+			}
+
+		super.breakBlock(world, x, y, z, block, meta);
 	}
 
 	static {

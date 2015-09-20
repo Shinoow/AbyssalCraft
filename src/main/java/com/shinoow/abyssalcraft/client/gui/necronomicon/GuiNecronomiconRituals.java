@@ -165,7 +165,7 @@ public class GuiNecronomiconRituals extends GuiNecronomicon {
 		int k = (width - guiWidth) / 2;
 		byte b0 = 2;
 		String stuff;
-		setTurnupLimit(3);
+		setTurnupLimit(4);
 		if(isRitualInfo){
 			stuff = NecronomiconText.LABEL_INFO;
 			fontRendererObj.drawSplitString(stuff, k + 20, b0 + 16, 116, 0xC40000);
@@ -177,7 +177,7 @@ public class GuiNecronomiconRituals extends GuiNecronomicon {
 				drawTexturedModalRect(k, b0, 0, 0, 256, 256);
 			} if(currTurnup == 1){
 				writeText(1, NecronomiconText.RITUAL_TUT_3, 100);
-				writeText(2, NecronomiconText.RITUAL_TUT_4);
+				writeText(2, NecronomiconText.RITUAL_TUT_4, 100);
 				GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 				mc.renderEngine.bindTexture(NecronomiconResources.RITUAL_TUT_2);
 				drawTexturedModalRect(k, b0, 0, 0, 256, 256);
@@ -186,6 +186,12 @@ public class GuiNecronomiconRituals extends GuiNecronomicon {
 				writeText(2, NecronomiconText.RITUAL_TUT_6);
 				GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 				mc.renderEngine.bindTexture(NecronomiconResources.RITUAL_TUT_3);
+				drawTexturedModalRect(k, b0, 0, 0, 256, 256);
+			} if(currTurnup == 3){
+				writeText(1, NecronomiconText.RITUAL_TUT_7, 100);
+				writeText(2, NecronomiconText.RITUAL_TUT_8, 100);
+				GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+				mc.renderEngine.bindTexture(NecronomiconResources.RITUAL_TUT_4);
 				drawTexturedModalRect(k, b0, 0, 0, 256, 256);
 			}
 		}

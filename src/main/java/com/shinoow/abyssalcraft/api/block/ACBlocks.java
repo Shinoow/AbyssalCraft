@@ -142,6 +142,13 @@ public class ACBlocks {
 	public static Block shoggoth_ooze = getBlock("shoggothblock");
 	public static Block cthulhu_statue = getBlock("cthulhustatue");
 	public static Block hastur_statue = getBlock("hasturstatue");
+	public static Block jzahar_statue = getBlock("jzaharstatue");
+	public static Block azathoth_statue = getBlock("azathothstatue");
+	public static Block nyarlathotep_statue = getBlock("nyarlathotepstatue");
+	public static Block yog_sothoth_statue = getBlock("yogsothothstatue");
+	public static Block shub_niggurath_statue = getBlock("shubniggurathstatue");
+	public static Block monolith_stone = getBlock("monolithstone");
+	public static Block energy_pedestal = getBlock("energypedestal");
 
 	private static Block getBlock(String name){
 		return GameRegistry.findBlock("abyssalcraft", name);

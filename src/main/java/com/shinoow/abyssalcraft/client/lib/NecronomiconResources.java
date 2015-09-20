@@ -20,9 +20,14 @@ import net.minecraft.util.ResourceLocation;
  */
 public class NecronomiconResources {
 
+	public static final ResourceLocation ABYSSALCRAFT_1 = new ResourceLocation("abyssalcraft", "textures/gui/necronomicon/abyssalcraft_1.png");
+	public static final ResourceLocation ABYSSALCRAFT_2 = new ResourceLocation("abyssalcraft", "textures/gui/necronomicon/abyssalcraft_2.png");
+	public static final ResourceLocation ABYSSALCRAFT_3 = new ResourceLocation("abyssalcraft", "textures/gui/necronomicon/abyssalcraft_3.png");
+
 	//Overworld entities (only going to use one picture for the anti-entities)
 	public static final ResourceLocation ANTI_ENTITIES = new ResourceLocation("abyssalcraft", "textures/gui/necronomicon/anti-entities.png");
 	public static final ResourceLocation EVIL_PIG = new ResourceLocation("abyssalcraft", "textures/gui/necronomicon/evil-pig.png");
+	public static final ResourceLocation LESSER_SHOGGOTH = new ResourceLocation("abyssalcraft", "textures/gui/necronomicon/lesser-shoggoth.png");
 
 	//Abyssal Wasteland entities (making entries for vanilla mobs is lethally hipster)
 	public static final ResourceLocation ABYSSAL_ZOMBIE = new ResourceLocation("abyssalcraft", "textures/gui/necronomicon/abyssal-zombie.png");
@@ -30,6 +35,7 @@ public class NecronomiconResources {
 	public static final ResourceLocation SKELETON_GOLIATH = new ResourceLocation("abyssalcraft", "textures/gui/necronomicon/skeleton-goliath.png");
 	public static final ResourceLocation SPECTRAL_DRAGON = new ResourceLocation("abyssalcraft", "textures/gui/necronomicon/spectral-dragon.png");
 	public static final ResourceLocation ASORAH = new ResourceLocation("abyssalcraft", "textures/gui/necronomicon/asorah.png");
+	public static final ResourceLocation LESSER_SHOGGOTH_ABYSSAL = new ResourceLocation("abyssalcraft", "textures/gui/necronomicon/lesser-shoggoth-abyssal.png");
 
 	//Dreadlands entities
 	public static final ResourceLocation ABYSSALNITE_GOLEM = new ResourceLocation("abyssalcraft", "textures/gui/necronomicon/abyssalnite-golem.png");
@@ -41,6 +47,7 @@ public class NecronomiconResources {
 	public static final ResourceLocation FIST_OF_CHAGAROTH = new ResourceLocation("abyssalcraft", "textures/gui/necronomicon/fist-of-chagaroth.png");
 	public static final ResourceLocation DREADGUARD = new ResourceLocation("abyssalcraft", "textures/gui/necronomicon/dreadguard.png");
 	public static final ResourceLocation CHAGAROTH = new ResourceLocation("abyssalcraft", "textures/gui/necronomicon/chagaroth.png");
+	public static final ResourceLocation LESSER_SHOGGOTH_DREADED = new ResourceLocation("abyssalcraft", "textures/gui/necronomicon/lesser-shoggoth-dreaded.png");
 
 	//Omothol entities
 	public static final ResourceLocation REMNANT = new ResourceLocation("abyssalcraft", "textures/gui/necronomicon/remnant.png");
@@ -48,7 +55,7 @@ public class NecronomiconResources {
 	public static final ResourceLocation OMOTHOL_WARDEN = new ResourceLocation("abyssalcraft", "textures/gui/necronomicon/missing.png"); //TODO: fix
 	public static final ResourceLocation MINION_OF_THE_GATEKEEPER = new ResourceLocation("abyssalcraft", "textures/gui/necronomicon/minion-of-the-gatekeeper.png");
 	public static final ResourceLocation JZAHAR = new ResourceLocation("abyssalcraft", "textures/gui/necronomicon/jzahar.png");
-	public static final ResourceLocation LESSER_SHOGGOTH = new ResourceLocation("abyssalcraft", "textures/gui/necronomicon/lesser-shoggoth.png");
+	public static final ResourceLocation LESSER_SHOGGOTH_OMOTHOL = new ResourceLocation("abyssalcraft", "textures/gui/necronomicon/lesser-shoggoth-omothol.png");
 
 	//Dark Realm entities
 	public static final ResourceLocation SHADOW_CREATURE = new ResourceLocation("abyssalcraft", "textures/gui/necronomicon/shadow-creature.png");
@@ -56,6 +63,7 @@ public class NecronomiconResources {
 	public static final ResourceLocation SHADOW_BEAST = new ResourceLocation("abyssalcraft", "textures/gui/necronomicon/shadow-beast.png");
 	public static final ResourceLocation SHADOW_TITAN = new ResourceLocation("abyssalcraft", "textures/gui/necronomicon/missing.png"); //TODO: fix
 	public static final ResourceLocation SACTHOTH = new ResourceLocation("abyssalcraft", "textures/gui/necronomicon/sacthoth.png");
+	public static final ResourceLocation LESSER_SHOGGOTH_SHADOW = new ResourceLocation("abyssalcraft", "textures/gui/necronomicon/lesser-shoggoth-shadow.png");
 
 	//Seals representing The Great Old Ones, no idea how many I'm going to do
 	public static final ResourceLocation AZATHOTH_SEAL = new ResourceLocation("abyssalcraft", "textures/gui/necronomicon/azathoth.png");
@@ -81,6 +89,7 @@ public class NecronomiconResources {
 	public static final ResourceLocation RITUAL_TUT_1 = new ResourceLocation("abyssalcraft", "textures/gui/necronomicon/ritual_1.png");
 	public static final ResourceLocation RITUAL_TUT_2 = new ResourceLocation("abyssalcraft", "textures/gui/necronomicon/ritual_2.png");
 	public static final ResourceLocation RITUAL_TUT_3 = new ResourceLocation("abyssalcraft", "textures/gui/necronomicon/ritual_3.png");
+	public static final ResourceLocation RITUAL_TUT_4 = new ResourceLocation("abyssalcraft", "textures/gui/necronomicon/ritual_4.png");
 
 	//Transmutation grid
 	public static final ResourceLocation TRANSMUTATION = new ResourceLocation("abyssalcraft", "textures/gui/necronomicon/transmutation.png");
@@ -89,17 +98,19 @@ public class NecronomiconResources {
 	public static final ResourceLocation CRYSTALLIZATION = new ResourceLocation("abyssalcraft", "textures/gui/necronomicon/crystallization.png");
 
 	public static final ResourceLocation[] OVERWORLD_ENTITIES = {ABYSSAL_ZOMBIE, DEPTHS_GHOUL, SHADOW_CREATURE, SHADOW_MONSTER, SHADOW_BEAST,
-		ANTI_ENTITIES, EVIL_PIG};
+		ANTI_ENTITIES, EVIL_PIG, LESSER_SHOGGOTH};
 
-	public static final ResourceLocation[] ABYSSAL_WASTELAND_ENTITIES = {ABYSSAL_ZOMBIE, DEPTHS_GHOUL, SKELETON_GOLIATH, SPECTRAL_DRAGON, ASORAH};
+	public static final ResourceLocation[] ABYSSAL_WASTELAND_ENTITIES = {ABYSSAL_ZOMBIE, DEPTHS_GHOUL, SKELETON_GOLIATH, SPECTRAL_DRAGON, ASORAH,
+		LESSER_SHOGGOTH_ABYSSAL};
 
 	public static final ResourceLocation[] DREADLANDS_ENTITIES = {ABYSSALNITE_GOLEM, DREADED_ABYSSALNITE_GOLEM, DREADLING, DREAD_SPAWN,
-		DEMON_PIG, SPAWN_OF_CHAGAROTH, FIST_OF_CHAGAROTH, DREADGUARD, CHAGAROTH};
+		DEMON_PIG, SPAWN_OF_CHAGAROTH, FIST_OF_CHAGAROTH, DREADGUARD, CHAGAROTH, LESSER_SHOGGOTH_DREADED};
 
 	public static final ResourceLocation[] OMOTHOL_ENTITIES = {REMNANT, OMOTHOL_GHOUL, OMOTHOL_WARDEN, MINION_OF_THE_GATEKEEPER, JZAHAR,
-		LESSER_SHOGGOTH};
+		LESSER_SHOGGOTH_OMOTHOL};
 
-	public static final ResourceLocation[] DARK_REALM_ENTITIES = {SHADOW_CREATURE, SHADOW_MONSTER, SHADOW_BEAST, SHADOW_TITAN, SACTHOTH};
+	public static final ResourceLocation[] DARK_REALM_ENTITIES = {SHADOW_CREATURE, SHADOW_MONSTER, SHADOW_BEAST, SHADOW_TITAN, SACTHOTH,
+		LESSER_SHOGGOTH_SHADOW};
 
 	public static final ResourceLocation[] OUTER_GODS = {AZATHOTH_SEAL, NYARLATHOTEP_SEAL, YOG_SOTHOTH_SEAL, SHUB_NIGGURATH_SEAL};
 

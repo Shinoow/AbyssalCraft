@@ -18,6 +18,8 @@ import net.minecraftforge.client.IItemRenderer;
 
 import org.lwjgl.opengl.GL11;
 
+import com.shinoow.abyssalcraft.common.blocks.tile.TileStatueDirectional;
+
 public class Block3DRender implements IItemRenderer {
 
 	TileEntitySpecialRenderer render;
@@ -47,6 +49,10 @@ public class Block3DRender implements IItemRenderer {
 	public void renderItem(ItemRenderType type, ItemStack item, Object... data) {
 		if (type == IItemRenderer.ItemRenderType.ENTITY)
 			GL11.glTranslatef(-0.5F, 0.0F, -0.5F);
+		if (type == IItemRenderer.ItemRenderType.INVENTORY && tile instanceof TileStatueDirectional){
+			GL11.glTranslatef(0, -1, 0);
+			GL11.glRotatef(180, 0, 1, 0);
+		}
 		render.renderTileEntityAt(tile, 0.0D, 0.0D, 0.0D, 0.0F);
 	}
 }

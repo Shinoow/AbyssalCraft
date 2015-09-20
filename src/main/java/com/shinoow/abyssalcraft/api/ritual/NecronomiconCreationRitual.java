@@ -11,6 +11,7 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.api.ritual;
 
+import net.minecraft.entity.effect.EntityLightningBolt;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -37,7 +38,7 @@ public class NecronomiconCreationRitual extends NecronomiconRitual {
 	 * @param item The Item given from the ritual
 	 * @param offerings Components used to perform the ritual, are consumed afterwards
 	 */
-	public NecronomiconCreationRitual(String unlocalizedName, int bookType, int dimension, float requiredEnergy, boolean remnantHelp, ItemStack item, ItemStack...offerings) {
+	public NecronomiconCreationRitual(String unlocalizedName, int bookType, int dimension, float requiredEnergy, boolean remnantHelp, ItemStack item, Object...offerings) {
 		super(unlocalizedName, bookType, dimension, requiredEnergy, remnantHelp, offerings);
 		this.item = item;
 		if(item.stackSize > 1)
@@ -53,7 +54,7 @@ public class NecronomiconCreationRitual extends NecronomiconRitual {
 	 * @param item The Item given from the ritual
 	 * @param offerings Components used to perform the ritual, are consumed afterwards
 	 */
-	public NecronomiconCreationRitual(String unlocalizedName, int bookType, int dimension, float requiredEnergy, ItemStack item, ItemStack...offerings) {
+	public NecronomiconCreationRitual(String unlocalizedName, int bookType, int dimension, float requiredEnergy, ItemStack item, Object...offerings) {
 		this(unlocalizedName, bookType, dimension, requiredEnergy, false, item, offerings);
 	}
 
@@ -65,47 +66,8 @@ public class NecronomiconCreationRitual extends NecronomiconRitual {
 	 * @param item The Item given from the ritual
 	 * @param offerings Components used to perform the ritual, are consumed afterwards
 	 */
-	public NecronomiconCreationRitual(String unlocalizedName, int bookType, float requiredEnergy, ItemStack item, ItemStack...offerings) {
+	public NecronomiconCreationRitual(String unlocalizedName, int bookType, float requiredEnergy, ItemStack item, Object...offerings) {
 		this(unlocalizedName, bookType, -1, requiredEnergy, item, offerings);
-	}
-
-	/**
-	 * A Necronomicon Creation Ritual
-	 * @param unlocalizedName A string representing the ritual name
-	 * @param bookType Necronomicon book type required
-	 * @param dimension Dimension where the ritual can be peformed
-	 * @param remnantHelp If Remnants can aid you when performing the ritual
-	 * @param item The Item given from the ritual
-	 * @param offerings Components used to perform the ritual, are consumed afterwards
-	 */
-	@Deprecated //TODO remove in AC 1.9
-	public NecronomiconCreationRitual(String unlocalizedName, int bookType, int dimension, boolean remnantHelp, ItemStack item, ItemStack...offerings) {
-		this(unlocalizedName, bookType, dimension, 0, remnantHelp, item, offerings);
-	}
-
-	/**
-	 * A Necronomicon Creation Ritual
-	 * @param unlocalizedName A string representing the ritual name
-	 * @param bookType Necronomicon book type required
-	 * @param dimension Dimension where the ritual can be peformed
-	 * @param item The Item given from the ritual
-	 * @param offerings Components used to perform the ritual, are consumed afterwards
-	 */
-	@Deprecated //TODO remove in AC 1.9
-	public NecronomiconCreationRitual(String unlocalizedName, int bookType, int dimension, ItemStack item, ItemStack...offerings) {
-		this(unlocalizedName, bookType, dimension, false, item, offerings);
-	}
-
-	/**
-	 * A Necronomicon Creation Ritual
-	 * @param unlocalizedName A string representing the ritual name
-	 * @param bookType Necronomicon book type required
-	 * @param item The Item given from the ritual
-	 * @param offerings Components used to perform the ritual, are consumed afterwards
-	 */
-	@Deprecated //TODO remove in AC 1.9
-	public NecronomiconCreationRitual(String unlocalizedName, int bookType, ItemStack item, ItemStack...offerings) {
-		this(unlocalizedName, bookType, -1, item, offerings);
 	}
 
 	/**
@@ -124,6 +86,8 @@ public class NecronomiconCreationRitual extends NecronomiconRitual {
 
 	@Override
 	protected void completeRitualServer(World world, int x, int y, int z, EntityPlayer player){
+
+		world.addWeatherEffect(new EntityLightningBolt(world, x, y + 1, z));
 
 		TileEntity altar = world.getTileEntity(x, y, z);
 

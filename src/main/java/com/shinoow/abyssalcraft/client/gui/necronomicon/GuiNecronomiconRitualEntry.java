@@ -14,18 +14,20 @@ package com.shinoow.abyssalcraft.client.gui.necronomicon;
 import java.util.List;
 import java.util.Map;
 
+import net.minecraft.block.Block;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.resources.I18n;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.oredict.OreDictionary;
 
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.GL11;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
-import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.api.ritual.NecronomiconCreationRitual;
 import com.shinoow.abyssalcraft.api.ritual.NecronomiconInfusionRitual;
 import com.shinoow.abyssalcraft.api.ritual.NecronomiconRitual;
@@ -144,11 +146,14 @@ public class GuiNecronomiconRitualEntry extends GuiNecronomicon {
 		ItemStack[] offerings = new ItemStack[8];
 		if(ritual.getOfferings().length < 8)
 			for(int i = 0; i < ritual.getOfferings().length; i++)
-				offerings[i] = ritual.getOfferings()[i];
-		else offerings = ritual.getOfferings();
+				offerings[i] = getStack(ritual.getOfferings()[i]);
+		else offerings = getStacks(ritual.getOfferings());
 		fontRendererObj.drawSplitString(title, k + 20, b0 + 16, 116, 0xC40000);
 
-		writeText(2, NecronomiconText.LABEL_LOCATION + ": " + dimToString.get(ritual.getDimension()));
+		if(ritual.canRemnantAid())
+			fontRendererObj.drawSplitString(NecronomiconText.LABEL_REMNANT_HELP, k + 138, 164, 107, 0xC40000);
+		writeText(1, NecronomiconText.LABEL_REQUIRED_ENERGY + ": " + ritual.getReqEnergy() + " PE", 125);
+		writeText(2, NecronomiconText.LABEL_LOCATION + ": " + getDimension(ritual.getDimension()));
 		writeText(2, ritual.getDescription(), 48);
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 		mc.renderEngine.bindTexture(NecronomiconResources.RITUAL);
@@ -191,19 +196,39 @@ public class GuiNecronomiconRitualEntry extends GuiNecronomicon {
 			itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), ((NecronomiconCreationRitual) ritual).getItem(), k + 58, b0 + 139);
 			RenderHelper.disableStandardItemLighting();
 			if(ritual instanceof NecronomiconInfusionRitual){
-				itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), ((NecronomiconInfusionRitual) ritual).getSacrifice(), k + 58, b0 + 66);
+				itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), getStack(((NecronomiconInfusionRitual) ritual).getSacrifice()), k + 58, b0 + 66);
 				RenderHelper.disableStandardItemLighting();
 			}
 		}
 	}
 
+	private ItemStack getStack(Object object){
+		if(object instanceof ItemStack)
+			return (ItemStack) object;
+		else if(object instanceof Item)
+			return new ItemStack((Item) object);
+		else if(object instanceof Block)
+			return new ItemStack((Block) object);
+		else if(object instanceof String)
+			return OreDictionary.getOres((String)object).iterator().next();
+		return null;
+	}
+	private ItemStack[] getStacks(Object[] objects){
+		ItemStack[] stacks = new ItemStack[objects.length];
+		for(int i = 0; i < objects.length; i++)
+			stacks[i] = getStack(objects[i]);
+		return stacks;
+	}
+
+	private String getDimension(int dim){
+		if(!dimToString.containsKey(dim))
+			dimToString.put(dim, "DIM"+dim);
+		return dimToString.get(dim);
+	}
+
 	private void initStuff(){
 		dimToString.put(-1, NecronomiconText.LABEL_ANYWHERE);
-		dimToString.put(0, NecronomiconText.LABEL_INFORMATION_OVERWORLD_TITLE);
-		dimToString.put(AbyssalCraft.configDimId1, NecronomiconText.LABEL_INFORMATION_ABYSSAL_WASTELAND_TITLE);
-		dimToString.put(AbyssalCraft.configDimId2, NecronomiconText.LABEL_INFORMATION_DREADLANDS_TITLE);
-		dimToString.put(AbyssalCraft.configDimId3, NecronomiconText.LABEL_INFORMATION_OMOTHOL_TITLE);
-		dimToString.put(AbyssalCraft.configDimId4, NecronomiconText.LABEL_INFORMATION_DARK_REALM_TITLE);
+		dimToString.putAll(RitualRegistry.instance().getDimensionNameMappings());
 
 		for(NecronomiconRitual ritual : RitualRegistry.instance().getRituals())
 			if(ritual.getBookType() == ritualnum)

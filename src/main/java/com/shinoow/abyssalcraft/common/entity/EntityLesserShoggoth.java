@@ -300,6 +300,7 @@ public class EntityLesserShoggoth extends EntityMob implements ICoraliumEntity, 
 			playSound("mob.slime.small", getSoundVolume(), ((rand.nextFloat() - rand.nextFloat()) * 0.2F + 1.0F) / 0.8F);
 			return false;
 		}
+		if(par1DamageSource == DamageSource.cactus) return false;
 
 		return super.attackEntityFrom(par1DamageSource, par2);
 	}
@@ -435,6 +436,8 @@ public class EntityLesserShoggoth extends EntityMob implements ICoraliumEntity, 
 		blockBlacklist.add(AbyssalCraft.ethaxiumpillar);
 		blockBlacklist.add(AbyssalCraft.darkethaxiumbrick);
 		blockBlacklist.add(AbyssalCraft.darkethaxiumpillar);
+		blockBlacklist.add(AbyssalCraft.monolithStone);
+		blockBlacklist.add(AbyssalCraft.shoggothBiomass);
 		blockBlacklist.addAll(AbyssalCraftAPI.getShoggothBlockBlacklist());
 	}
 

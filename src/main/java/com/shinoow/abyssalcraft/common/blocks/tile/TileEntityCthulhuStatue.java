@@ -11,4 +11,4 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.common.blocks.tile;
 
-public class TileEntityCthulhuStatue extends TEDirectional {}
+public class TileEntityCthulhuStatue extends TileStatueDirectional {}

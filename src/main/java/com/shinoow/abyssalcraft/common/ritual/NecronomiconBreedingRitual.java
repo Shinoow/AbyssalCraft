@@ -19,7 +19,6 @@ import net.minecraft.entity.passive.*;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
-import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
 import com.google.common.collect.Lists;
@@ -32,9 +31,8 @@ public class NecronomiconBreedingRitual extends NecronomiconRitual {
 	private boolean shoggothInfestation;
 
 	public NecronomiconBreedingRitual() {
-		super("breeding", 0, 500F, new ItemStack[]{new ItemStack(Items.wheat), new ItemStack(Items.potato), new ItemStack(Items.carrot),
-				new ItemStack(Items.melon), new ItemStack(Blocks.pumpkin), new ItemStack(Items.wheat_seeds),
-				new ItemStack(Items.melon_seeds), new ItemStack(Items.pumpkin_seeds)});
+		super("breeding", 0, 500F, new Object[]{Items.wheat, Items.potato, Items.carrot, Items.melon,
+				Blocks.pumpkin, Items.wheat_seeds, Items.melon_seeds, Items.pumpkin_seeds});
 	}
 
 	/**

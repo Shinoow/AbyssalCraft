@@ -32,6 +32,7 @@ import net.minecraftforge.event.terraingen.PopulateChunkEvent;
 import net.minecraftforge.event.terraingen.TerrainGen;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
+import com.shinoow.abyssalcraft.common.structures.StructureShoggothPit;
 
 import cpw.mods.fml.common.eventhandler.Event.Result;
 
@@ -299,6 +300,15 @@ public class ChunkProviderOmothol implements IChunkProvider
 		int k = x * 16;
 		int l = z * 16;
 		BiomeGenBase biomegenbase = worldObj.getBiomeGenForCoords(k + 16, l + 16);
+
+		for(int i = 0; i < 1; i++) {
+			int Xcoord2 = k + rand.nextInt(16);
+			int Zcoord2 = l + rand.nextInt(16);
+			int Ycoord2 = worldObj.getHeightValue(Xcoord2, Zcoord2);
+
+			if(rand.nextInt(200) == 0)
+				new StructureShoggothPit().generate(worldObj, rand, Xcoord2, Ycoord2, Zcoord2);
+		}
 
 		biomegenbase.decorate(worldObj, worldObj.rand, k, l);
 

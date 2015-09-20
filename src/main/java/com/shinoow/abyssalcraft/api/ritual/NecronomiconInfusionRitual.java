@@ -25,7 +25,7 @@ import net.minecraft.world.World;
  */
 public class NecronomiconInfusionRitual extends NecronomiconCreationRitual {
 
-	private ItemStack sacrifice;
+	private Object sacrifice;
 
 	/**
 	 * A Necronomicon Infusion Ritual
@@ -39,7 +39,7 @@ public class NecronomiconInfusionRitual extends NecronomiconCreationRitual {
 	 * @param offerings Components used to perform the ritual, are consumed afterwards
 	 */
 	public NecronomiconInfusionRitual(String unlocalizedName, int bookType, int dimension, float requiredEnergy,
-			boolean remnantHelp, ItemStack item, ItemStack sacrifice, ItemStack...offerings) {
+			boolean remnantHelp, ItemStack item, Object sacrifice, Object...offerings) {
 		super(unlocalizedName, bookType, dimension, requiredEnergy, remnantHelp, item, offerings);
 		this.sacrifice = sacrifice;
 	}
@@ -55,7 +55,7 @@ public class NecronomiconInfusionRitual extends NecronomiconCreationRitual {
 	 * @param offerings Components used to perform the ritual, are consumed afterwards
 	 */
 	public NecronomiconInfusionRitual(String unlocalizedName, int bookType, int dimension, float requiredEnergy,
-			ItemStack item, ItemStack sacrifice, ItemStack...offerings) {
+			ItemStack item, Object sacrifice, Object...offerings) {
 		this(unlocalizedName, bookType, dimension, requiredEnergy, false, item, sacrifice, offerings);
 
 	}
@@ -69,60 +69,15 @@ public class NecronomiconInfusionRitual extends NecronomiconCreationRitual {
 	 * @param sacrifice Item to upgrade
 	 * @param offerings Components used to perform the ritual, are consumed afterwards
 	 */
-	public NecronomiconInfusionRitual(String unlocalizedName, int bookType, float requiredEnergy, ItemStack item, ItemStack sacrifice, ItemStack...offerings) {
+	public NecronomiconInfusionRitual(String unlocalizedName, int bookType, float requiredEnergy, ItemStack item, Object sacrifice, Object...offerings) {
 		this(unlocalizedName, bookType, -1, requiredEnergy, item, sacrifice, offerings);
-	}
-
-	/**
-	 * A Necronomicon Infusion Ritual
-	 * @param unlocalizedName A string representing the ritual name
-	 * @param bookType Necronomicon book type required
-	 * @param dimension Dimension where the ritual can be peformed
-	 * @param remnantHelp If Remnants can aid you when performing the ritual
-	 * @param item The Item given from the ritual
-	 * @param sacrifice Item to upgrade
-	 * @param offerings Components used to perform the ritual, are consumed afterwards
-	 */
-	@Deprecated //TODO remove in AC 1.9
-	public NecronomiconInfusionRitual(String unlocalizedName, int bookType, int dimension, boolean remnantHelp, ItemStack item,
-			ItemStack sacrifice, ItemStack...offerings) {
-		this(unlocalizedName, bookType, dimension, 0, remnantHelp, item, sacrifice, offerings);
-	}
-
-	/**
-	 * A Necronomicon Infusion Ritual
-	 * @param unlocalizedName A string representing the ritual name
-	 * @param bookType Necronomicon book type required
-	 * @param dimension Dimension where the ritual can be peformed
-	 * @param item The Item given from the ritual
-	 * @param sacrifice Item to upgrade
-	 * @param offerings Components used to perform the ritual, are consumed afterwards
-	 */
-	@Deprecated //TODO remove in AC 1.9
-	public NecronomiconInfusionRitual(String unlocalizedName, int bookType, int dimension, ItemStack item,
-			ItemStack sacrifice, ItemStack...offerings) {
-		this(unlocalizedName, bookType, dimension, false, item, sacrifice, offerings);
-
-	}
-
-	/**
-	 * A Necronomicon Infusion Ritual
-	 * @param unlocalizedName A string representing the ritual name
-	 * @param bookType Necronomicon book type required
-	 * @param item The Item given from the ritual
-	 * @param sacrifice Item to upgrade
-	 * @param offerings Components used to perform the ritual, are consumed afterwards
-	 */
-	@Deprecated //TODO remove in AC 1.9
-	public NecronomiconInfusionRitual(String unlocalizedName, int bookType, ItemStack item, ItemStack sacrifice, ItemStack...offerings) {
-		this(unlocalizedName, bookType, -1, item, sacrifice, offerings);
 	}
 
 	/**
 	 * Getter for the sacrifice
 	 * @return A ItemStack representing the item to be infused
 	 */
-	public ItemStack getSacrifice(){
+	public Object getSacrifice(){
 		return sacrifice;
 	}
 
@@ -135,7 +90,7 @@ public class NecronomiconInfusionRitual extends NecronomiconCreationRitual {
 		altar.writeToNBT(compound);
 		NBTTagCompound nbtItem = compound.getCompoundTag("Item");
 
-		return RitualRegistry.instance().areStacksEqual(ItemStack.loadItemStackFromNBT(nbtItem), sacrifice);
+		return RitualRegistry.instance().areObjectsEqual(ItemStack.loadItemStackFromNBT(nbtItem), sacrifice);
 	}
 
 	@Override

@@ -42,6 +42,7 @@ import net.minecraftforge.event.terraingen.PopulateChunkEvent;
 import net.minecraftforge.event.terraingen.TerrainGen;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
+import com.shinoow.abyssalcraft.common.structures.StructureShoggothPit;
 import com.shinoow.abyssalcraft.common.structures.abyss.Abypillar;
 import com.shinoow.abyssalcraft.common.structures.abyss.Abyruin;
 import com.shinoow.abyssalcraft.common.structures.abyss.stronghold.MapGenAbyStronghold;
@@ -400,6 +401,14 @@ public class ChunkProviderAbyss implements IChunkProvider
 			int Zcoord2 = l + rand.nextInt(16);
 
 			new Abyruin().generate(worldObj, rand, Xcoord2, Ycoord2, Zcoord2);
+		}
+		for(int i = 0; i < 1; i++) {
+			int Xcoord2 = k + rand.nextInt(16);
+			int Zcoord2 = l + rand.nextInt(16);
+			int Ycoord2 = worldObj.getHeightValue(Xcoord2, Zcoord2);
+
+			if(rand.nextInt(200) == 0)
+				new StructureShoggothPit().generate(worldObj, rand, Xcoord2, Ycoord2, Zcoord2);
 		}
 
 		biomegenbase.decorate(worldObj, rand, k, l);

@@ -21,9 +21,11 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 
+import com.shinoow.abyssalcraft.api.energy.IEnergyTransporter;
 import com.shinoow.abyssalcraft.api.event.ACEvents.RitualEvent;
 import com.shinoow.abyssalcraft.api.ritual.NecronomiconRitual;
 import com.shinoow.abyssalcraft.api.ritual.RitualRegistry;
+import com.shinoow.abyssalcraft.common.entity.EntityRemnant;
 import com.shinoow.abyssalcraft.common.items.ItemNecronomicon;
 
 public class TileEntityRitualAltar extends TileEntity {
@@ -74,22 +76,38 @@ public class TileEntityRitualAltar extends TileEntity {
 	@Override
 	public void updateEntity()
 	{
+		super.updateEntity();
+
 		if(isPerformingRitual()){
 			ritualTimer++;
 
 			if(ritual != null){
-				if(ritualTimer == 200){
-					if(user == null)
-						user = worldObj.getClosestPlayer(xCoord, yCoord, zCoord, 3);
-					if(user != null)
+				if(user != null){
+					for(ItemStack item : user.inventory.mainInventory)
+						if(item.getItem() instanceof ItemNecronomicon){
+							((IEnergyTransporter) item.getItem()).consumeEnergy(item, ritual.getReqEnergy()/200);
+							break;
+						}
+				} else user = worldObj.getClosestPlayer(xCoord, yCoord, zCoord, 5);
+				if(ritualTimer == 200)
+					if(user != null){
 						if(!MinecraftForge.EVENT_BUS.post(new RitualEvent.Post(user, ritual, worldObj, xCoord, yCoord, zCoord))){
+							for(ItemStack item : user.inventory.mainInventory)
+								if(item.getItem() instanceof ItemNecronomicon){
+									((IEnergyTransporter) item.getItem()).consumeEnergy(item, ritual.getReqEnergy()/200);
+									break;
+								}
 							ritual.completeRitual(worldObj, xCoord, yCoord, zCoord, user);
 							ritualTimer = 0;
 							user = null;
 							ritual = null;
 							markDirty();
 						}
-				}
+					} else {
+						ritualTimer = 0;
+						ritual = null;
+						markDirty();
+					}
 			} else ritualTimer = 0;
 		}
 
@@ -167,14 +185,30 @@ public class TileEntityRitualAltar extends TileEntity {
 					if(canPerform()){
 						ritual = RitualRegistry.instance().getRitual(world.provider.dimensionId, ((ItemNecronomicon)item.getItem()).getBookType(), offers);
 						if(ritual != null)
-							if(ritual.canCompleteRitual(world, x, y, z, player))
-								if(!MinecraftForge.EVENT_BUS.post(new RitualEvent.Pre(player, ritual, world, x, y, z))){
-									ritualTimer = 1;
-									resetPedestals(world, x, y, z);
-									user = player;
-								}
+							if(((IEnergyTransporter)item.getItem()).getContainedEnergy(item) >= ritual.getReqEnergy())
+								if(ritual.canRemnantAid()){
+									if(!world.getEntitiesWithinAABB(EntityRemnant.class, world.getBlock(x, y, z).getCollisionBoundingBoxFromPool(world, x, y, z).expand(32, 32, 32)).isEmpty()
+											&& world.getEntitiesWithinAABB(EntityRemnant.class, world.getBlock(x, y, z).getCollisionBoundingBoxFromPool(world, x, y, z).expand(32, 32, 32)).size() >= ritual.getBookType() + 1)
+										if(ritual.canCompleteRitual(world, x, y, z, player))
+											if(!MinecraftForge.EVENT_BUS.post(new RitualEvent.Pre(player, ritual, world, x, y, z))){
+												summonRemnants(world, x, y, z);
+												ritualTimer = 1;
+												resetPedestals(world, x, y, z);
+												user = player;
+											}
+								} else if(ritual.canCompleteRitual(world, x, y, z, player))
+									if(!MinecraftForge.EVENT_BUS.post(new RitualEvent.Pre(player, ritual, world, x, y, z))){
+										ritualTimer = 1;
+										resetPedestals(world, x, y, z);
+										user = player;
+									}
+
 					}
 		}
+	}
+
+	private void summonRemnants(World world, int x, int y, int z){
+		//		List<EntityRemnant> remnants = world.getEntitiesWithinAABB(EntityRemnant.class, world.getBlock(x, y, z).getCollisionBoundingBoxFromPool(world, x, y, z).expand(32, 32, 32));
 	}
 
 	public int getRitualCooldown(){

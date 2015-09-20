@@ -32,6 +32,8 @@ public class NecronomiconText {
 	public static String INFORMATION_ABYSSALCRAFT_PAGE_2 = translate("necronomicon.text.abyssalcraft.2");
 	public static String INFORMATION_ABYSSALCRAFT_PAGE_3 = translate("necronomicon.text.abyssalcraft.3");
 	public static String INFORMATION_ABYSSALCRAFT_PAGE_4 = translate("necronomicon.text.abyssalcraft.4");
+	public static String INFORMATION_ABYSSALCRAFT_PAGE_5 = translate("necronomicon.text.abyssalcraft.5");
+	public static String INFORMATION_ABYSSALCRAFT_PAGE_6 = translate("necronomicon.text.abyssalcraft.6");
 
 	public static String AZATHOTH_1 = translate("necronomicon.text.azathoth.1");
 	public static String AZATHOTH_2 = translate("necronomicon.text.azathoth.2");
@@ -158,6 +160,8 @@ public class NecronomiconText {
 	public static String CRAFTING_PLATED_CORALIUM_LEGGINGS = translate("necronomicon.text.crafting.corhelmetp");
 	public static String CRAFTING_PLATED_CORALIUM_BOOTS = translate("necronomicon.text.crafting.corhelmetp");
 	public static String CRAFTING_CORALIUM_LONGBOW = translate("necronomicon.text.crafting.corbow");
+	public static String CRAFTING_ENERGY_PEDESTAL_1 = translate("necronomicon.text.crafting.energypedestal.1");
+	public static String CRAFTING_ENERGY_PEDESTAL_2 = translate("necronomicon.text.crafting.energypedestal.2");
 
 	public static String PROGRESSION_OVERWORLD_1 = translate("necronomicon.text.overworld.progression.1");
 	public static String PROGRESSION_OVERWORLD_2 = translate("necronomicon.text.overworld.progression.2");
@@ -246,6 +250,8 @@ public class NecronomiconText {
 	public static String RITUAL_TUT_4 = translate("necronomicon.text.rituals.4");
 	public static String RITUAL_TUT_5 = translate("necronomicon.text.rituals.5");
 	public static String RITUAL_TUT_6 = translate("necronomicon.text.rituals.6");
+	public static String RITUAL_TUT_7 = translate("necronomicon.text.rituals.7");
+	public static String RITUAL_TUT_8 = translate("necronomicon.text.rituals.8");
 
 	public static String MACHINES_INFO = translate("necronomicon.text.machines.info");
 
@@ -276,8 +282,8 @@ public class NecronomiconText {
 	public static String[] DARK_REALM_MATERIALS = {MATERIAL_DARKSTONE_1, MATERIAL_DARKSTONE_2};
 
 	public static String[] OVERWORLD_CRAFTING = {CRAFTING_CORALIUM_INFUSED_STONE_1, CRAFTING_CORALIUM_INFUSED_STONE_2,
-		CRAFTING_SHADOW_GEM_1, CRAFTING_SHADOW_GEM_2, CRAFTING_SHARD_OF_OBLIVION, "", CRAFTING_GATEWAY_KEY, "",
-		CRAFTING_SKIN_OF_THE_ABYSSAL_WASTELAND_1, "", CRAFTING_NECRONOMICON_C};
+		CRAFTING_SHADOW_GEM_1, CRAFTING_SHADOW_GEM_2, CRAFTING_SHARD_OF_OBLIVION, "", CRAFTING_ENERGY_PEDESTAL_1,
+		CRAFTING_ENERGY_PEDESTAL_2, CRAFTING_GATEWAY_KEY, "", CRAFTING_SKIN_OF_THE_ABYSSAL_WASTELAND_1, "", CRAFTING_NECRONOMICON_C};
 	public static String[] OVERWORLD_ARMOR_TOOLS = {CRAFTING_STAFF_OF_RENDING_1, CRAFTING_STAFF_OF_RENDING_2};
 	public static String[] ABYSSAL_WASTELAND_CRAFTING = {CRAFTING_POWERSTONE_TRACKER, "", CRAFTING_TRANSMUTATOR_1, CRAFTING_TRANSMUTATOR_2,
 		CRAFTING_CORALIUM_CHUNK, "", CRAFTING_CORALIUM_PLATE, "", CRAFTING_SKIN_OF_THE_DREADLANDS_1, "", CRAFTING_NECRONOMICON_D};
@@ -302,20 +308,22 @@ public class NecronomiconText {
 
 	public static String[] OVERWORLD_ENTITIES = {ENTITY_ABYSSAL_ZOMBIE_1, ENTITY_ABYSSAL_ZOMBIE_2, ENTITY_DEPTHS_GHOUL_1, ENTITY_DEPTHS_GHOUL_2,
 		ENTITY_SHADOW_CREATURE_1, ENTITY_SHADOW_CREATURE_2, ENTITY_SHADOW_MONSTER_1, ENTITY_SHADOW_MONSTER_2, ENTITY_SHADOW_BEAST_1,
-		ENTITY_SHADOW_BEAST_2, ENTITY_ANTI_1, ENTITY_ANTI_2, ENTITY_EVIL_PIG_1, ENTITY_EVIL_PIG_2};
+		ENTITY_SHADOW_BEAST_2, ENTITY_ANTI_1, ENTITY_ANTI_2, ENTITY_EVIL_PIG_1, ENTITY_EVIL_PIG_2, ENTITY_LESSER_SHOGGOTH_1,
+		ENTITY_LESSER_SHOGGOTH_2};
 	public static String[] ABYSSAL_WASTELAND_ENTITIES = {ENTITY_ABYSSAL_ZOMBIE_1, ENTITY_ABYSSAL_ZOMBIE_2, ENTITY_DEPTHS_GHOUL_1,
 		ENTITY_DEPTHS_GHOUL_2, ENTITY_SKELETON_GOLIATH_1, ENTITY_SKELETON_GOLIATH_2, ENTITY_SPECTRAL_DRAGON_1, ENTITY_SPECTRAL_DRAGON_2,
-		ENTITY_ASORAH_1, ENTITY_ASORAH_2};
+		ENTITY_ASORAH_1, ENTITY_ASORAH_2, ENTITY_LESSER_SHOGGOTH_1, ENTITY_LESSER_SHOGGOTH_2};
 	public static String[] DREADLANDS_ENTITIES = {ENTITY_ABYSSALNITE_GOLEM_1, ENTITY_ABYSSALNITE_GOLEM_2, ENTITY_DREADED_ABYSSALNITE_GOLEM_1,
 		ENTITY_DREADED_ABYSSALNITE_GOLEM_2, ENTITY_DREADLING_1, ENTITY_DREADLING_2, ENTITY_DREAD_SPAWN_1, ENTITY_DREAD_SPAWN_2,
 		ENTITY_DEMON_PIG_1, ENTITY_DEMON_PIG_2, ENTITY_SPAWN_OF_CHAGAROTH_1, ENTITY_SPAWN_OF_CHAGAROTH_2, ENTITY_FIST_OF_CHAGAROTH_1,
-		ENTITY_FIST_OF_CHAGAROTH_2, ENTITY_DREADGUARD_1, ENTITY_DREADGUARD_2, ENTITY_CHAGAROTH_1, ENTITY_CHAGAROTH_2};
+		ENTITY_FIST_OF_CHAGAROTH_2, ENTITY_DREADGUARD_1, ENTITY_DREADGUARD_2, ENTITY_CHAGAROTH_1, ENTITY_CHAGAROTH_2,
+		ENTITY_LESSER_SHOGGOTH_1, ENTITY_LESSER_SHOGGOTH_2};
 	public static String[] OMOTHOL_ENTITIES = {ENTITY_REMNANT_1, ENTITY_REMNANT_2, ENTITY_OMOTHOL_GHOUL_1, ENTITY_OMOTHOL_GHOUL_2,
 		ENTITY_OMOTHOL_WARDEN_1, ENTITY_OMOTHOL_WARDEN_2, ENTITY_MINION_OF_THE_GATEKEEPER_1, ENTITY_MINION_OF_THE_GATEKEEPER_2,
 		ENTITY_JZAHAR_1, ENTITY_JZAHAR_2, ENTITY_LESSER_SHOGGOTH_1, ENTITY_LESSER_SHOGGOTH_2};
 	public static String[] DARK_REALM_ENTITIES = {ENTITY_SHADOW_CREATURE_1, ENTITY_SHADOW_CREATURE_2, ENTITY_SHADOW_MONSTER_1,
 		ENTITY_SHADOW_MONSTER_2, ENTITY_SHADOW_BEAST_1, ENTITY_SHADOW_BEAST_2, ENTITY_SHADOW_TITAN_1, ENTITY_SHADOW_TITAN_2,
-		ENTITY_SACTHOTH_1, ENTITY_SACTHOTH_2};
+		ENTITY_SACTHOTH_1, ENTITY_SACTHOTH_2, ENTITY_LESSER_SHOGGOTH_1, ENTITY_LESSER_SHOGGOTH_2};
 
 	public static String WIP = translate("necronomicon.text.wip");
 
@@ -356,6 +364,8 @@ public class NecronomiconText {
 	public static String LABEL_PATRONS = translate("necronomicon.patrons");
 	public static String LABEL_INFORMATION_ARMOR_TOOLS = translate("necronomicon.information.armortools");
 	public static String LABEL_INFORMATION_MACHINES = translate("necronomicon.information.machines");
+	public static String LABEL_REQUIRED_ENERGY = translate("necronomicon.reqenergy");
+	public static String LABEL_REMNANT_HELP = translate("necronomicon.remnanthelp");
 
 	/**
 	 * The best way to drown an array of strings with nonsense

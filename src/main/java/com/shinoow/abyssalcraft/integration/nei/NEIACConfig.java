@@ -30,6 +30,9 @@ public class NEIACConfig implements IConfigureNEI {
 		API.registerRecipeHandler(new EngraverRecipeHandler());
 		API.registerUsageHandler(new EngraverRecipeHandler());
 
+		API.registerRecipeHandler(new RitualRecipeHandler());
+		API.registerUsageHandler(new RitualRecipeHandler());
+
 		API.hideItem(new ItemStack(AbyssalCraft.devsword));
 		API.hideItem(new ItemStack(AbyssalCraft.crystallizer_on));
 		API.hideItem(new ItemStack(AbyssalCraft.transmutator_on));

@@ -19,6 +19,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
@@ -108,6 +109,29 @@ public class BlockRitualPedestal extends BlockContainer {
 	@Override
 	public int getRenderType() {
 		return -8;
+	}
+
+	@Override
+	public void breakBlock(World world, int x, int y, int z, Block block, int meta)
+	{
+		Random rand = new Random();
+		TileEntityRitualPedestal pedestal = (TileEntityRitualPedestal) world.getTileEntity(x, y, z);
+
+		if(pedestal != null)
+			if(pedestal.getItem() != null){
+				float f = rand.nextFloat() * 0.8F + 0.1F;
+				float f1 = rand.nextFloat() * 0.8F + 0.1F;
+				float f2 = rand.nextFloat() * 0.8F + 0.1F;
+
+				EntityItem item = new EntityItem(world, x + f, y + f1, z + f2, pedestal.getItem());
+				float f3 = 0.05F;
+				item.motionX = (float)rand.nextGaussian() * f3;
+				item.motionY = (float)rand.nextGaussian() * f3 + 0.2F;
+				item.motionZ = (float)rand.nextGaussian() * f3;
+				world.spawnEntityInWorld(item);
+			}
+
+		super.breakBlock(world, x, y, z, block, meta);
 	}
 
 	static {

@@ -25,7 +25,7 @@ import net.minecraft.world.World;
  */
 public abstract class NecronomiconRitual {
 
-	private ItemStack[] offerings = new ItemStack[8];
+	private Object[] offerings = new Object[8];
 	private boolean remnantHelp;
 	private int bookType;
 	private int dimension;
@@ -41,14 +41,14 @@ public abstract class NecronomiconRitual {
 	 * @param remnantHelp If Remnants can aid you when performing the ritual
 	 * @param offerings Components used to perform the ritual, are consumed afterwards
 	 */
-	public NecronomiconRitual(String unlocalizedName, int bookType, int dimension, float requiredEnergy, boolean remnantHelp, ItemStack...offerings){
+	public NecronomiconRitual(String unlocalizedName, int bookType, int dimension, float requiredEnergy, boolean remnantHelp, Object...offerings){
 		this.unlocalizedName = unlocalizedName;
 		this.bookType = bookType;
 		this.dimension = dimension;
 		this.requiredEnergy = requiredEnergy;
 		this.remnantHelp = remnantHelp;
 		if(offerings.length < 8){
-			this.offerings = new ItemStack[offerings.length];
+			this.offerings = new Object[offerings.length];
 			for(int i = 0; i < offerings.length; i++)
 				this.offerings[i] = offerings[i];
 		}
@@ -63,7 +63,7 @@ public abstract class NecronomiconRitual {
 	 * @param requiredEnergy Amount of Potential Energy required to perform
 	 * @param offerings Components used to perform the ritual, are consumed afterwards
 	 */
-	public NecronomiconRitual(String unlocalizedName, int bookType, int dimension, float requiredEnergy, ItemStack...offerings){
+	public NecronomiconRitual(String unlocalizedName, int bookType, int dimension, float requiredEnergy, Object...offerings){
 		this(unlocalizedName, bookType, dimension, requiredEnergy, false, offerings);
 	}
 
@@ -74,51 +74,15 @@ public abstract class NecronomiconRitual {
 	 * @param requiredEnergy Amount of Potential Energy required to perform
 	 * @param offerings Components used to perform the ritual, are consumed afterwards
 	 */
-	public NecronomiconRitual(String unlocalizedName, int bookType, float requiredEnergy, ItemStack...offerings){
+	public NecronomiconRitual(String unlocalizedName, int bookType, float requiredEnergy, Object...offerings){
 		this(unlocalizedName, bookType, -1, requiredEnergy, offerings);
-	}
-
-	/**
-	 * A Necronomicon Ritual
-	 * @param unlocalizedName A string representing the ritual name
-	 * @param bookType Necronomicon book type required
-	 * @param dimension Dimension where the ritual can be peformed
-	 * @param remnantHelp If Remnants can aid you when performing the ritual
-	 * @param offerings Components used to perform the ritual, are consumed afterwards
-	 */
-	@Deprecated //TODO remove in AC 1.9
-	public NecronomiconRitual(String unlocalizedName, int bookType, int dimension, boolean remnantHelp, ItemStack...offerings){
-		this(unlocalizedName, bookType, dimension, 0, remnantHelp, offerings);
-	}
-
-	/**
-	 * A Necronomicon Ritual
-	 * @param unlocalizedName A string representing the ritual name
-	 * @param bookType Necronomicon book type required
-	 * @param dimension Dimension where the ritual can be peformed
-	 * @param offerings Components used to perform the ritual, are consumed afterwards
-	 */
-	@Deprecated //TODO remove in AC 1.9
-	public NecronomiconRitual(String unlocalizedName, int bookType, int dimension, ItemStack...offerings){
-		this(unlocalizedName, bookType, dimension, false, offerings);
-	}
-
-	/**
-	 * A Necronomicon Ritual
-	 * @param unlocalizedName A string representing the ritual name
-	 * @param bookType Necronomicon book type required
-	 * @param offerings Components used to perform the ritual, are consumed afterwards
-	 */
-	@Deprecated //TODO remove in AC 1.9
-	public NecronomiconRitual(String unlocalizedName, int bookType, ItemStack...offerings){
-		this(unlocalizedName, bookType, -1, offerings);
 	}
 
 	/**
 	 * Used to fetch the offerings
 	 * @return An array of ItemStacks representing offerings
 	 */
-	public ItemStack[] getOfferings(){
+	public Object[] getOfferings(){
 		return offerings;
 	}
 

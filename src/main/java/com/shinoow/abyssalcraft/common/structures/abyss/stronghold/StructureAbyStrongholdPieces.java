@@ -397,10 +397,6 @@ public class StructureAbyStrongholdPieces
 				fillWithRandomizedBlocks(par1World, par3StructureBoundingBox, 0, 0, 0, 4, 4, 6, true, par2Random, StructureAbyStrongholdPieces.strongholdStones);
 				placeDoor(par1World, par2Random, par3StructureBoundingBox, field_143013_d, 1, 1, 0);
 				placeDoor(par1World, par2Random, par3StructureBoundingBox, StructureAbyStrongholdPieces.Stronghold.Door.OPENING, 1, 1, 6);
-				func_151552_a(par1World, par3StructureBoundingBox, par2Random, 0.1F, 1, 2, 1, Blocks.torch, 0);
-				func_151552_a(par1World, par3StructureBoundingBox, par2Random, 0.1F, 3, 2, 1, Blocks.torch, 0);
-				func_151552_a(par1World, par3StructureBoundingBox, par2Random, 0.1F, 1, 2, 5, Blocks.torch, 0);
-				func_151552_a(par1World, par3StructureBoundingBox, par2Random, 0.1F, 3, 2, 5, Blocks.torch, 0);
 
 				if (expandsX)
 					fillWithBlocks(par1World, par3StructureBoundingBox, 0, 1, 2, 0, 3, 4, Blocks.air, Blocks.air, false);
@@ -1425,7 +1421,6 @@ public class StructureAbyStrongholdPieces
 				fillWithBlocks(par1World, par3StructureBoundingBox, 4, 5, 7, 4, 5, 9, AbyssalCraft.abyslab1, AbyssalCraft.abyslab1, false);
 				fillWithBlocks(par1World, par3StructureBoundingBox, 8, 5, 7, 8, 5, 9, AbyssalCraft.abyslab1, AbyssalCraft.abyslab1, false);
 				fillWithBlocks(par1World, par3StructureBoundingBox, 5, 5, 7, 7, 5, 9, AbyssalCraft.abyslab2, AbyssalCraft.abyslab2, false);
-				placeBlockAtCurrentPosition(par1World, Blocks.torch, 0, 6, 5, 6, par3StructureBoundingBox);
 				return true;
 			}
 		}

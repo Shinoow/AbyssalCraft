@@ -74,10 +74,10 @@ import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.*;
 
-@Mod(modid = AbyssalCraft.modid, name = AbyssalCraft.name, version = AbyssalCraft.version, dependencies = "required-after:Forge@[forgeversion,);after:Thaumcraft", useMetadata = false, guiFactory = "com.shinoow.abyssalcraft.client.config.ACGuiFactory")
+@Mod(modid = AbyssalCraft.modid, name = AbyssalCraft.name, version = AbyssalCraft.version, dependencies = "required-after:Forge@[forgeversion,)", useMetadata = false, guiFactory = "com.shinoow.abyssalcraft.client.config.ACGuiFactory")
 public class AbyssalCraft {
 
-	public static final String version = "1.8.9";
+	public static final String version = "1.8.9.5";
 	public static final String modid = "abyssalcraft";
 	public static final String name = "AbyssalCraft";
 
@@ -145,7 +145,8 @@ public class AbyssalCraft {
 	ethaxiumslab1, ethaxiumslab2, ethaxiumfence, omotholstone, ethaxiumblock, omotholportal, omotholfire,
 	engraver, house, materializer, darkethaxiumbrick, darkethaxiumpillar, darkethaxiumstairs,
 	darkethaxiumslab1, darkethaxiumslab2, darkethaxiumfence, ritualaltar, ritualpedestal, shoggothBlock,
-	cthulhuStatue, hasturStatue;
+	cthulhuStatue, hasturStatue, jzaharStatue, azathothStatue, nyarlathotepStatue, yogsothothStatue,
+	shubniggurathStatue, monolithStone, shoggothBiomass, energyPedestal;
 
 	//Overworld biomes
 	public static BiomeGenBase Darklands, DarklandsForest, DarklandsPlains, DarklandsHills,
@@ -465,8 +466,16 @@ public class AbyssalCraft {
 		ritualaltar = new BlockRitualAltar().setBlockName("ritualaltar");
 		ritualpedestal = new BlockRitualPedestal().setBlockName("ritualpedestal");
 		shoggothBlock = new BlockShoggothOoze().setBlockName("shoggothBlock").setBlockTextureName(modid + ":" + "shoggothOoze");
-		cthulhuStatue = new BlockCthulhuStatue().setBlockName("cthulhuStatue").setBlockTextureName(modid + ":" + "OS");
-		hasturStatue = new BlockHasturStatue().setBlockName("hasturStatue").setBlockTextureName(modid + ":" + "OS");
+		cthulhuStatue = new BlockCthulhuStatue().setBlockName("cthulhuStatue").setBlockTextureName(modid + ":" + "monolithStone");
+		hasturStatue = new BlockHasturStatue().setBlockName("hasturStatue").setBlockTextureName(modid + ":" + "monolithStone");
+		jzaharStatue = new BlockJzaharStatue().setBlockName("jzaharStatue").setBlockTextureName(modid + ":" + "monolithStone");
+		azathothStatue = new BlockAzathothStatue().setBlockName("azathothStatue").setBlockTextureName(modid + ":" + "monolithStone");
+		nyarlathotepStatue = new BlockNyarlathotepStatue().setBlockName("nyarlathotepStatue").setBlockTextureName(modid + ":" + "monolithStone");
+		yogsothothStatue = new BlockYogsothothStatue().setBlockName("yogsothothStatue").setBlockTextureName(modid + ":" + "monolithStone");
+		shubniggurathStatue = new BlockShubniggurathStatue().setBlockName("shubniggurathStatue").setBlockTextureName(modid + ":" + "monolithStone");
+		monolithStone = new BlockACBasic(Material.rock, 6.0F, 24.0F, Block.soundTypeStone).setBlockName("monolithStone").setBlockTextureName(modid + ":" + "monolithStone");
+		shoggothBiomass = new BlockShoggothBiomass();
+		energyPedestal = new BlockEnergyPedestal();
 
 		//Biome
 		Darklands = new BiomeGenDarklands(configBiomeId1).setColor(522674).setBiomeName("Darklands");
@@ -721,21 +730,31 @@ public class AbyssalCraft {
 		GameRegistry.registerTileEntity(TileEntityRitualPedestal.class, "tileEntityRitualPedestal");
 		GameRegistry.registerTileEntity(TileEntityCthulhuStatue.class, "tileEntityCthulhuStatue");
 		GameRegistry.registerTileEntity(TileEntityHasturStatue.class, "tileEntityHasturStatue");
+		GameRegistry.registerTileEntity(TileEntityJzaharStatue.class, "tileEntityJzaharStatue");
+		GameRegistry.registerTileEntity(TileEntityAzathothStatue.class, "tileEntityAzathothStatue");
+		GameRegistry.registerTileEntity(TileEntityNyarlathotepStatue.class, "tileEntityNyarlathotepStatue");
+		GameRegistry.registerTileEntity(TileEntityYogsothothStatue.class, "tileEntityyogsothothStatue");
+		GameRegistry.registerTileEntity(TileEntityShubniggurathStatue.class, "tileEntityShubniggurathStatue");
+		GameRegistry.registerTileEntity(TileEntityShoggothBiomass.class, "tileEntityShoggothBiomass");
+		GameRegistry.registerTileEntity(TileEntityEnergyPedestal.class, "tileEntityEnergyPedestal");
 
 		Cplague = new PotionCplague(useDynamicPotionIds ? getNextAvailablePotionId() : AbyssalCraftAPI.potionId1, true, 0x00FFFF).setIconIndex(1, 0).setPotionName("potion.Cplague");
 		AbyssalCraftAPI.addPotionRequirements(Cplague.id, "0 & 1 & !2 & 3 & 0+6");
-		crystalCoralium.setPotionEffect("+0+1-2+3&4+4+13");
+		Corflesh.setPotionEffect("+0+1-2+3&4+4+13");
+		Corbone.setPotionEffect("+0+1-2+3&4+4+13");
 		Dplague = new PotionDplague(useDynamicPotionIds ? getNextAvailablePotionId() : AbyssalCraftAPI.potionId2, true, 0xAD1313).setIconIndex(1, 0).setPotionName("potion.Dplague");
 		AbyssalCraftAPI.addPotionRequirements(Dplague.id, "0 & 1 & 2 & 3 & 2+6");
 		AbyssalCraftAPI.addPotionAmplifiers(Dplague.id, "5");
-		crystalDreadium.setPotionEffect("0+1+2+3+13&4-4");
+		dreadfragment.setPotionEffect("0+1+2+3+13&4-4");
 		antiMatter = new PotionAntimatter(useDynamicPotionIds ? getNextAvailablePotionId() : AbyssalCraftAPI.potionId3, true, 0xFFFFFF).setIconIndex(1, 0).setPotionName("potion.Antimatter");
 		AbyssalCraftAPI.addPotionRequirements(antiMatter.id, "0 & 1 & 2 & !3 & 2+6");
-		antibucket.setPotionEffect("0+1+2-3+13&4-4");
-		crystalSulfur.setPotionEffect(PotionHelper.spiderEyeEffect);
-		crystalOxygen.setPotionEffect(PotionHelper.field_151423_m);
-		crystalHydrogen.setPotionEffect("-0-1+2+3&4-4+13");
-		crystalNitrogen.setPotionEffect("-0+1-2+3&4-4+13");
+		antiFlesh.setPotionEffect("0+1+2-3+13&4-4");
+		antiCorflesh.setPotionEffect("0+1+2-3+13&4-4");
+		antiCorbone.setPotionEffect("0+1+2-3+13&4-4");
+		sulfur.setPotionEffect(PotionHelper.spiderEyeEffect);
+		//		crystalOxygen.setPotionEffect(PotionHelper.field_151423_m);
+		//		crystalHydrogen.setPotionEffect("-0-1+2+3&4-4+13");
+		//		crystalNitrogen.setPotionEffect("-0+1-2+3&4-4+13");
 
 		coraliumE = new EnchantmentWeaponInfusion(getNextAvailableEnchantmentId(), 2, "coralium");
 		dreadE = new EnchantmentWeaponInfusion(getNextAvailableEnchantmentId(), 2, "dread");
@@ -883,6 +902,14 @@ public class AbyssalCraft {
 		GameRegistry.registerBlock(shoggothBlock, "shoggothblock");
 		GameRegistry.registerBlock(cthulhuStatue, "cthulhustatue");
 		GameRegistry.registerBlock(hasturStatue, "hasturstatue");
+		GameRegistry.registerBlock(jzaharStatue, "jzahatstatue");
+		GameRegistry.registerBlock(azathothStatue, "azathothstatue");
+		GameRegistry.registerBlock(nyarlathotepStatue, "nyarlathotepstatue");
+		GameRegistry.registerBlock(yogsothothStatue, "yogsothothstatue");
+		GameRegistry.registerBlock(shubniggurathStatue, "shubniggurathstatue");
+		GameRegistry.registerBlock(monolithStone, "monolithstone");
+		GameRegistry.registerBlock(shoggothBiomass, "shoggothbiomass");
+		GameRegistry.registerBlock(energyPedestal, "energypedestal");
 
 		//Item Register
 		GameRegistry.registerItem(devsword, "devsword");
@@ -1977,6 +2004,13 @@ public class AbyssalCraft {
 		FMLInterModComms.sendMessage("BuildCraft|Core", "blacklist-facade", new ItemStack(darkethaxiumfence));
 		FMLInterModComms.sendMessage("BuildCraft|Core", "blacklist-facade", new ItemStack(ritualaltar));
 		FMLInterModComms.sendMessage("BuildCraft|Core", "blacklist-facade", new ItemStack(ritualpedestal));
+		FMLInterModComms.sendMessage("BuildCraft|Core", "blacklist-facade", new ItemStack(cthulhuStatue));
+		FMLInterModComms.sendMessage("BuildCraft|Core", "blacklist-facade", new ItemStack(hasturStatue));
+		FMLInterModComms.sendMessage("BuildCraft|Core", "blacklist-facade", new ItemStack(jzaharStatue));
+		FMLInterModComms.sendMessage("BuildCraft|Core", "blacklist-facade", new ItemStack(azathothStatue));
+		FMLInterModComms.sendMessage("BuildCraft|Core", "blacklist-facade", new ItemStack(nyarlathotepStatue));
+		FMLInterModComms.sendMessage("BuildCraft|Core", "blacklist-facade", new ItemStack(yogsothothStatue));
+		FMLInterModComms.sendMessage("BuildCraft|Core", "blacklist-facade", new ItemStack(shubniggurathStatue));
 	}
 
 	private static int getUniqueEntityId() {

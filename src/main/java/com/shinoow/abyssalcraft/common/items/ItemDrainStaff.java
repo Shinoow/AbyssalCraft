@@ -20,6 +20,7 @@ import com.shinoow.abyssalcraft.api.entity.ICoraliumEntity;
 import com.shinoow.abyssalcraft.api.entity.IDreadEntity;
 
 import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.boss.IBossDisplayData;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumAction;
 import net.minecraft.item.Item;
@@ -87,7 +88,7 @@ public class ItemDrainStaff extends Item {
 			if(list.iterator().hasNext()){
 				EntityLiving target = (EntityLiving)list.get(0);
 
-				if(target.getCreatureAttribute() == AbyssalCraftAPI.SHADOW){
+				if(target.getCreatureAttribute() == AbyssalCraftAPI.SHADOW && !(target instanceof IBossDisplayData)){
 					if(!target.isDead){
 						if(target.attackEntityFrom(DamageSource.causePlayerDamage(player), 1))
 							increaseEnergy(stack, "Shadow");
@@ -96,7 +97,8 @@ public class ItemDrainStaff extends Item {
 							player.inventory.addItemStackToInventory(new ItemStack(AbyssalCraft.shadowgem));
 						}
 					}
-				} else if(world.provider.dimensionId == AbyssalCraft.configDimId1 && target instanceof ICoraliumEntity){
+				} else if(world.provider.dimensionId == AbyssalCraft.configDimId1 && target instanceof ICoraliumEntity &&
+						!(target instanceof IBossDisplayData)){
 					if(!target.isDead){
 						if(target.attackEntityFrom(DamageSource.causePlayerDamage(player), 1))
 							increaseEnergy(stack, "Abyssal");
@@ -105,7 +107,8 @@ public class ItemDrainStaff extends Item {
 							player.inventory.addItemStackToInventory(new ItemStack(AbyssalCraft.essence, 1, 0));
 						}
 					}
-				} else if(world.provider.dimensionId == AbyssalCraft.configDimId2 && target instanceof IDreadEntity){
+				} else if(world.provider.dimensionId == AbyssalCraft.configDimId2 && target instanceof IDreadEntity &&
+						!(target instanceof IBossDisplayData)){
 					if(!target.isDead){
 						if(target.attackEntityFrom(DamageSource.causePlayerDamage(player), 1))
 							increaseEnergy(stack, "Dread");
@@ -116,7 +119,7 @@ public class ItemDrainStaff extends Item {
 					}
 				} else if(world.provider.dimensionId == AbyssalCraft.configDimId3 && target instanceof ICoraliumEntity
 						&& target instanceof IDreadEntity && target instanceof IAntiEntity &&
-						target.getCreatureAttribute() != AbyssalCraftAPI.SHADOW)
+						target.getCreatureAttribute() != AbyssalCraftAPI.SHADOW && !(target instanceof IBossDisplayData))
 					if(!target.isDead){
 						if(target.attackEntityFrom(DamageSource.causePlayerDamage(player), 1))
 							increaseEnergy(stack, "Omothol");

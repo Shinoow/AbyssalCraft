@@ -21,6 +21,7 @@ import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
 import com.shinoow.abyssalcraft.api.item.ItemEngraving;
 import com.shinoow.abyssalcraft.api.ritual.*;
+import com.shinoow.abyssalcraft.client.lib.NecronomiconText;
 import com.shinoow.abyssalcraft.common.entity.EntityDragonBoss;
 import com.shinoow.abyssalcraft.common.entity.EntitySacthoth;
 import com.shinoow.abyssalcraft.common.ritual.NecronomiconBreedingRitual;
@@ -136,6 +137,7 @@ public class AbyssalCrafting {
 		GameRegistry.addRecipe(new ItemStack(AbyssalCraft.darkethaxiumstairs, 4), new Object[] {"#  ", "## ", "###", '#', new ItemStack(AbyssalCraft.darkethaxiumbrick, 0)});
 		GameRegistry.addRecipe(new ItemStack(AbyssalCraft.darkethaxiumslab1, 6), new Object[] {"AAA", 'A', new ItemStack(AbyssalCraft.darkethaxiumbrick, 0)});
 		GameRegistry.addRecipe(new ItemStack(AbyssalCraft.darkethaxiumfence, 6), new Object[] {"###", "###", '#', new ItemStack(AbyssalCraft.darkethaxiumbrick, 0)});
+		GameRegistry.addRecipe(new ItemStack(AbyssalCraft.energyPedestal), new Object[]{"#%#", "#&#", "###", '#', AbyssalCraft.monolithStone, '%', AbyssalCraft.Cpearl, '&', AbyssalCraft.shadowgem});
 	}
 
 	private static void addBlockSmelting(){
@@ -687,43 +689,81 @@ public class AbyssalCrafting {
 	}
 
 	private static void addRitualRecipes(){
-		RitualRegistry.instance().addDimensionToBookType(0, 0);
-		RitualRegistry.instance().addDimensionToBookType(AbyssalCraft.configDimId1, 1);
-		RitualRegistry.instance().addDimensionToBookType(AbyssalCraft.configDimId2, 2);
-		RitualRegistry.instance().addDimensionToBookType(AbyssalCraft.configDimId3, 3);
-		RitualRegistry.instance().addDimensionToBookType(AbyssalCraft.configDimId4, 3);
+		RitualRegistry.instance().addDimensionToBookTypeAndName(0, 0, NecronomiconText.LABEL_INFORMATION_OVERWORLD_TITLE);
+		RitualRegistry.instance().addDimensionToBookTypeAndName(AbyssalCraft.configDimId1, 1, NecronomiconText.LABEL_INFORMATION_ABYSSAL_WASTELAND_TITLE);
+		RitualRegistry.instance().addDimensionToBookTypeAndName(AbyssalCraft.configDimId2, 2, NecronomiconText.LABEL_INFORMATION_DREADLANDS_TITLE);
+		RitualRegistry.instance().addDimensionToBookTypeAndName(AbyssalCraft.configDimId3, 3, NecronomiconText.LABEL_INFORMATION_OMOTHOL_TITLE);
+		RitualRegistry.instance().addDimensionToBookTypeAndName(AbyssalCraft.configDimId4, 3, NecronomiconText.LABEL_INFORMATION_DARK_REALM_TITLE);
 
-		ItemStack[] gk2offerings = new ItemStack[]{new ItemStack(AbyssalCraft.Corb), new ItemStack(AbyssalCraft.PSDL), new ItemStack(AbyssalCraft.EoA)};
+		Object[] gk2offerings = new Object[]{new ItemStack(AbyssalCraft.Corb), new ItemStack(AbyssalCraft.PSDL), new ItemStack(AbyssalCraft.EoA)};
 		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("asorahGatewayKey", 1, AbyssalCraft.configDimId1, 3000F, new ItemStack(AbyssalCraft.portalPlacerDL), new ItemStack(AbyssalCraft.portalPlacer), gk2offerings));
-		ItemStack[] ocofferings = new ItemStack[]{new ItemStack(Items.redstone), new ItemStack(AbyssalCraft.oblivionshard), new ItemStack(Items.redstone), new ItemStack(AbyssalCraft.oblivionshard),
+		Object[] ocofferings = new Object[]{new ItemStack(Items.redstone), new ItemStack(AbyssalCraft.oblivionshard), new ItemStack(Items.redstone), new ItemStack(AbyssalCraft.oblivionshard),
 				new ItemStack(Items.redstone), new ItemStack(AbyssalCraft.oblivionshard), new ItemStack(Items.redstone), new ItemStack(AbyssalCraft.oblivionshard)};
 		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("oblivionCatalyst", 0, 2000F, new ItemStack(AbyssalCraft.OC), new ItemStack(Items.ender_eye), ocofferings));
-		ItemStack[] tgofferings = new ItemStack[]{new ItemStack(Items.diamond), new ItemStack(Items.blaze_powder), new ItemStack(Items.ender_pearl), new ItemStack(Items.blaze_powder),
+		Object[] tgofferings = new Object[]{new ItemStack(Items.diamond), new ItemStack(Items.blaze_powder), new ItemStack(Items.ender_pearl), new ItemStack(Items.blaze_powder),
 				new ItemStack(Items.diamond), new ItemStack(Items.blaze_powder), new ItemStack(Items.ender_pearl), new ItemStack(Items.blaze_powder)};
 		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("transmutationGem", 0, 300F, new ItemStack(AbyssalCraft.Corb), new ItemStack(AbyssalCraft.Cpearl), tgofferings));
-		ItemStack[] depthsofferings = new ItemStack[]{new ItemStack(AbyssalCraft.Coraliumcluster9), new ItemStack(AbyssalCraft.Coraliumcluster9), new ItemStack(AbyssalCraft.Cbucket),
+		Object[] depthsofferings = new Object[]{new ItemStack(AbyssalCraft.Coraliumcluster9), new ItemStack(AbyssalCraft.Coraliumcluster9), new ItemStack(AbyssalCraft.Cbucket),
 				new ItemStack(Blocks.vine), new ItemStack(Blocks.waterlily), new ItemStack(AbyssalCraft.Corb), new ItemStack(AbyssalCraft.Corflesh)};
 		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("depthsHelmet", 1, AbyssalCraft.configDimId1, 300F, new ItemStack(AbyssalCraft.Depthshelmet), new ItemStack(AbyssalCraft.Corhelmet), depthsofferings));
 		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("depthsChestplate", 1, AbyssalCraft.configDimId1, 300F, new ItemStack(AbyssalCraft.Depthsplate), new ItemStack(AbyssalCraft.Corplate), depthsofferings));
 		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("depthsLeggings", 1, AbyssalCraft.configDimId1, 300F, new ItemStack(AbyssalCraft.Depthslegs), new ItemStack(AbyssalCraft.Corlegs), depthsofferings));
 		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("depthsBoots", 1, AbyssalCraft.configDimId1, 300F, new ItemStack(AbyssalCraft.Depthsboots), new ItemStack(AbyssalCraft.Corboots), depthsofferings));
-		ItemStack[] asorahofferings = new ItemStack[]{new ItemStack(Items.gold_ingot), new ItemStack(AbyssalCraft.Corb), new ItemStack(Items.gold_ingot), new ItemStack(AbyssalCraft.Cbucket),
+		Object[] asorahofferings = new Object[]{new ItemStack(Items.gold_ingot), new ItemStack(AbyssalCraft.Corb), new ItemStack(Items.gold_ingot), new ItemStack(AbyssalCraft.Cbucket),
 				new ItemStack(Items.gold_ingot), new ItemStack(Blocks.enchanting_table), new ItemStack(Items.gold_ingot)};
 		RitualRegistry.instance().registerRitual(new NecronomiconSummonRitual("summonAsorah", 1, AbyssalCraft.configDimId1, 1000F, EntityDragonBoss.class, asorahofferings));
 		RitualRegistry.instance().registerRitual(new NecronomiconBreedingRitual());
-		ItemStack[] sacthothofferings = new ItemStack[]{new ItemStack(AbyssalCraft.OC), new ItemStack(Blocks.obsidian), new ItemStack(AbyssalCraft.Cbucket), new ItemStack(Blocks.obsidian),
+		Object[] sacthothofferings = new Object[]{new ItemStack(AbyssalCraft.OC), new ItemStack(Blocks.obsidian), new ItemStack(AbyssalCraft.Cbucket), new ItemStack(Blocks.obsidian),
 				new ItemStack(AbyssalCraft.antibucket), new ItemStack(Blocks.obsidian), new ItemStack(AbyssalCraft.ODBcore), new ItemStack(Blocks.obsidian)};
 		RitualRegistry.instance().registerRitual(new NecronomiconSummonRitual("summonSacthoth", 1, 1000F, EntitySacthoth.class, sacthothofferings));
 		RitualRegistry.instance().registerRitual(new NecronomiconDreadSpawnRitual());
-		ItemStack[] coraoeofferings = new ItemStack[]{new ItemStack(AbyssalCraft.Corflesh), new ItemStack(Items.potionitem, 1, 0), new ItemStack(AbyssalCraft.Corflesh), new ItemStack(Items.potionitem, 1, 0),
+		Object[] coraoeofferings = new Object[]{new ItemStack(AbyssalCraft.Corflesh), new ItemStack(Items.potionitem, 1, 0), new ItemStack(AbyssalCraft.Corflesh), new ItemStack(Items.potionitem, 1, 0),
 				new ItemStack(AbyssalCraft.Corflesh), new ItemStack(Items.potionitem, 1, 0),new ItemStack(AbyssalCraft.Corflesh), new ItemStack(Items.gunpowder)};
 		RitualRegistry.instance().registerRitual(new NecronomiconPotionAoERitual("corPotionAoE", 1, 300F, AbyssalCraft.Cplague, coraoeofferings));
-		ItemStack[] dreaoeofferings = new ItemStack[]{new ItemStack(AbyssalCraft.dreadfragment), new ItemStack(Items.potionitem, 1, 0), new ItemStack(AbyssalCraft.dreadfragment), new ItemStack(Items.potionitem, 1, 0),
+		Object[] dreaoeofferings = new Object[]{new ItemStack(AbyssalCraft.dreadfragment), new ItemStack(Items.potionitem, 1, 0), new ItemStack(AbyssalCraft.dreadfragment), new ItemStack(Items.potionitem, 1, 0),
 				new ItemStack(AbyssalCraft.dreadfragment), new ItemStack(Items.potionitem, 1, 0), new ItemStack(AbyssalCraft.dreadfragment), new ItemStack(Items.gunpowder)};
 		RitualRegistry.instance().registerRitual(new NecronomiconPotionAoERitual("drePotionAoE", 2, 300F, AbyssalCraft.Dplague, dreaoeofferings));
-		ItemStack[] antiaoeofferings = new ItemStack[]{new ItemStack(AbyssalCraft.antiFlesh), new ItemStack(Items.potionitem, 1, 0), new ItemStack(AbyssalCraft.antiFlesh), new ItemStack(Items.potionitem, 1, 0),
+		Object[] antiaoeofferings = new Object[]{new ItemStack(AbyssalCraft.antiFlesh), new ItemStack(Items.potionitem, 1, 0), new ItemStack(AbyssalCraft.antiFlesh), new ItemStack(Items.potionitem, 1, 0),
 				new ItemStack(AbyssalCraft.antiFlesh), new ItemStack(Items.potionitem, 1, 0), new ItemStack(AbyssalCraft.antiFlesh), new ItemStack(Items.gunpowder)};
 		RitualRegistry.instance().registerRitual(new NecronomiconPotionAoERitual("antiPotionAoE", 0, 300F, AbyssalCraft.antiMatter, antiaoeofferings));
+		Object[] cthulhuofferings = new Object[]{new ItemStack(AbyssalCraft.shoggothFlesh, 1, 0), new ItemStack(AbyssalCraft.shoggothFlesh, 1, 0), new ItemStack(AbyssalCraft.shoggothFlesh, 1, 0),
+				new ItemStack(AbyssalCraft.shoggothFlesh, 1, 0), new ItemStack(AbyssalCraft.shoggothFlesh, 1, 0), new ItemStack(AbyssalCraft.essence, 1, 0), new ItemStack(AbyssalCraft.essence, 1, 1),
+				new ItemStack(AbyssalCraft.essence, 1, 2)};
+		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("cthulhuStatue", 4, AbyssalCraft.configDimId3, 20000F, true, new ItemStack(AbyssalCraft.cthulhuStatue), AbyssalCraft.monolithStone, cthulhuofferings));
+		Object[] hasturofferings = new Object[]{new ItemStack(AbyssalCraft.shoggothFlesh, 1, 1), new ItemStack(AbyssalCraft.shoggothFlesh, 1, 1), new ItemStack(AbyssalCraft.shoggothFlesh, 1, 1),
+				new ItemStack(AbyssalCraft.shoggothFlesh, 1, 1), new ItemStack(AbyssalCraft.shoggothFlesh, 1, 1), new ItemStack(AbyssalCraft.essence, 1, 0), new ItemStack(AbyssalCraft.essence, 1, 1),
+				new ItemStack(AbyssalCraft.essence, 1, 2)};
+		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("hasturStatue", 4, AbyssalCraft.configDimId3, 20000F, true, new ItemStack(AbyssalCraft.hasturStatue), AbyssalCraft.monolithStone, hasturofferings));
+		Object[] jzaharofferings = new Object[]{AbyssalCraft.eldritchScale, AbyssalCraft.eldritchScale, AbyssalCraft.eldritchScale, AbyssalCraft.eldritchScale, AbyssalCraft.eldritchScale,
+				new ItemStack(AbyssalCraft.essence, 1, 0), new ItemStack(AbyssalCraft.essence, 1, 1), new ItemStack(AbyssalCraft.essence, 1, 2)};
+		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("jzaharStatue", 4, AbyssalCraft.configDimId3, 20000F, true, new ItemStack(AbyssalCraft.jzaharStatue), AbyssalCraft.monolithStone, jzaharofferings));
+		Object[] azathothofferings = new Object[]{new ItemStack(AbyssalCraft.shoggothFlesh, 1, 0), new ItemStack(AbyssalCraft.shoggothFlesh, 1, 1), new ItemStack(AbyssalCraft.shoggothFlesh, 1, 2),
+				new ItemStack(AbyssalCraft.shoggothFlesh, 1, 3), new ItemStack(AbyssalCraft.shoggothFlesh, 1, 4), new ItemStack(AbyssalCraft.essence, 1, 0), new ItemStack(AbyssalCraft.essence, 1, 1),
+				new ItemStack(AbyssalCraft.essence, 1, 2)};
+		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("azathothStatue", 4, AbyssalCraft.configDimId3, 20000F, true, new ItemStack(AbyssalCraft.azathothStatue), AbyssalCraft.monolithStone, azathothofferings));
+		Object[] nyarlathotepofferings = new Object[]{new ItemStack(AbyssalCraft.shoggothFlesh, 1, 2), new ItemStack(AbyssalCraft.shoggothFlesh, 1, 2), new ItemStack(AbyssalCraft.shoggothFlesh, 1, 2),
+				new ItemStack(AbyssalCraft.shoggothFlesh, 1, 2), new ItemStack(AbyssalCraft.shoggothFlesh, 1, 2), new ItemStack(AbyssalCraft.essence, 1, 0), new ItemStack(AbyssalCraft.essence, 1, 1),
+				new ItemStack(AbyssalCraft.essence, 1, 2)};
+		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("nyarlathotepStatue", 4, AbyssalCraft.configDimId3, 20000F, true, new ItemStack(AbyssalCraft.nyarlathotepStatue), AbyssalCraft.monolithStone, nyarlathotepofferings));
+		Object[] yogsothothofferings = new Object[]{new ItemStack(AbyssalCraft.shoggothFlesh, 1, 3), new ItemStack(AbyssalCraft.shoggothFlesh, 1, 3), new ItemStack(AbyssalCraft.shoggothFlesh, 1, 3),
+				new ItemStack(AbyssalCraft.shoggothFlesh, 1, 3), new ItemStack(AbyssalCraft.shoggothFlesh, 1, 3), new ItemStack(AbyssalCraft.essence, 1, 0), new ItemStack(AbyssalCraft.essence, 1, 1),
+				new ItemStack(AbyssalCraft.essence, 1, 2)};
+		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("yogsothothStatue", 4, AbyssalCraft.configDimId3, 20000F, true, new ItemStack(AbyssalCraft.yogsothothStatue), AbyssalCraft.monolithStone, yogsothothofferings));
+		Object[] shubniggurathofferings = new Object[]{new ItemStack(AbyssalCraft.shoggothFlesh, 1, 4), new ItemStack(AbyssalCraft.shoggothFlesh, 1, 4), new ItemStack(AbyssalCraft.shoggothFlesh, 1, 4),
+				new ItemStack(AbyssalCraft.shoggothFlesh, 1, 4), new ItemStack(AbyssalCraft.shoggothFlesh, 1, 4), new ItemStack(AbyssalCraft.essence, 1, 0), new ItemStack(AbyssalCraft.essence, 1, 1),
+				new ItemStack(AbyssalCraft.essence, 1, 2)};
+		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("shubniggurathStatue", 4, AbyssalCraft.configDimId3, 20000F, true, new ItemStack(AbyssalCraft.shubniggurathStatue), AbyssalCraft.monolithStone, shubniggurathofferings));
+		Object[] psdlofferings = new Object[]{new ItemStack(AbyssalCraft.essence, 1, 1), new ItemStack(AbyssalCraft.essence, 1, 1), new ItemStack(AbyssalCraft.essence, 1, 1), new ItemStack(AbyssalCraft.essence, 1, 1),
+				new ItemStack(AbyssalCraft.essence, 1, 1), new ItemStack(AbyssalCraft.essence, 1, 1), new ItemStack(AbyssalCraft.essence, 1, 1), new ItemStack(AbyssalCraft.essence, 1, 1)};
+		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("powerStone", 4, AbyssalCraft.configDimId2, 5000F, new ItemStack(AbyssalCraft.PSDL), AbyssalCraft.CoraliumInfusedStone, psdlofferings));
+		Object[] ethofferings = new Object[]{AbyssalCraft.ethaxium_brick, AbyssalCraft.ethaxium_brick, AbyssalCraft.lifeCrystal, AbyssalCraft.ethaxium_brick, AbyssalCraft.ethaxium_brick};
+		RitualRegistry.instance().registerRitual(new NecronomiconCreationRitual("ethaxiumIngot", 3, AbyssalCraft.configDimId3, 1000F, new ItemStack(AbyssalCraft.ethaxiumIngot), ethofferings));
+		Object[] dreadofferings = new Object[]{new ItemStack(AbyssalCraft.essence, 1, 1), AbyssalCraft.Dreadshard, AbyssalCraft.Dreadshard, AbyssalCraft.Dreadshard, AbyssalCraft.Dreadshard,
+				AbyssalCraft.Dreadshard, AbyssalCraft.Dreadshard, AbyssalCraft.Dreadshard};
+		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("dreadHelmet", 2, AbyssalCraft.configDimId2, 500F, new ItemStack(AbyssalCraft.helmetD), AbyssalCraft.helmet, dreadofferings));
+		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("dreadChestplate", 2, AbyssalCraft.configDimId2, 500F, new ItemStack(AbyssalCraft.plateD), AbyssalCraft.plate, dreadofferings));
+		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("dreadLeggings", 2, AbyssalCraft.configDimId2, 500F, new ItemStack(AbyssalCraft.legsD), AbyssalCraft.legs, dreadofferings));
+		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("dreadBoots", 2, AbyssalCraft.configDimId2, 500F, new ItemStack(AbyssalCraft.bootsD), AbyssalCraft.boots, dreadofferings));
 	}
 
 	private static void addArmor(Item helmet, Item chestplate, Item pants, Item boots, Item material, Item upgrade, Item oldh, Item oldc, Item oldp, Item oldb){

@@ -21,6 +21,7 @@ import net.minecraftforge.common.BiomeDictionary;
 import net.minecraftforge.common.BiomeDictionary.Type;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
+import com.shinoow.abyssalcraft.common.structures.StructureShoggothPit;
 import com.shinoow.abyssalcraft.common.structures.overworld.AChouse1;
 import com.shinoow.abyssalcraft.common.structures.overworld.AChouse2;
 import com.shinoow.abyssalcraft.common.structures.overworld.ACplatform1;
@@ -121,6 +122,16 @@ public class AbyssalCraftWorldGenerator implements IWorldGenerator {
 			int z = chunkZ + random.nextInt(16);
 
 			new WorldGenMinable(AbyssalCraft.nitreOre, veinSize).generate(world, random, x, y, z);
+		}
+
+		for(int i = 0; i < 1; i++){
+			int x = chunkX + random.nextInt(16);
+			int z = chunkZ + random.nextInt(16);
+			int y = world.getHeightValue(x, z);
+			if(BiomeDictionary.isBiomeOfType(world.getBiomeGenForCoords(x, z), Type.SWAMP) ||
+					BiomeDictionary.isBiomeOfType(world.getBiomeGenForCoords(x, z), Type.RIVER))
+				if(random.nextInt(100) == 0)
+					new StructureShoggothPit().generate(world, random, x, y, z);
 		}
 	}
 }

@@ -43,8 +43,7 @@ import com.shinoow.abyssalcraft.common.ritual.NecronomiconBreedingRitual;
 import com.shinoow.abyssalcraft.common.ritual.NecronomiconDreadSpawnRitual;
 import com.shinoow.abyssalcraft.common.util.EntityUtil;
 import com.shinoow.abyssalcraft.common.util.SpecialTextUtil;
-import com.shinoow.abyssalcraft.common.world.TeleporterOmothol;
-
+import com.shinoow.abyssalcraft.common.world.TeleporterDarkRealm;
 import cpw.mods.fml.common.eventhandler.Event.Result;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.PlayerEvent;
@@ -172,9 +171,9 @@ public class AbyssalCraftEventHooks {
 			WorldServer worldServer = (WorldServer)event.entityLiving.worldObj;
 			EntityPlayerMP player = (EntityPlayerMP)event.entityLiving;
 			if(player.dimension == AbyssalCraft.configDimId3 && player.posY <= 0){
-				player.addPotionEffect(new PotionEffect(Potion.resistance.getId(), 60, 255));
+				player.addPotionEffect(new PotionEffect(Potion.resistance.getId(), 80, 255));
 				player.addPotionEffect(new PotionEffect(Potion.blindness.getId(), 20));
-				player.mcServer.getConfigurationManager().transferPlayerToDimension(player, AbyssalCraft.configDimId4, new TeleporterOmothol(worldServer));
+				player.mcServer.getConfigurationManager().transferPlayerToDimension(player, AbyssalCraft.configDimId4, new TeleporterDarkRealm(worldServer));
 				player.addStat(AbyssalCraft.enterDarkRealm, 1);
 			}
 		}
@@ -266,10 +265,12 @@ public class AbyssalCraftEventHooks {
 						else if(k.getItem() != null && k.getItem() instanceof ItemNecronomicon){
 							NBTTagCompound compound = new NBTTagCompound();
 							String owner = "";
+							float energy = 0;
 
 							if(k.stackTagCompound == null)
 								k.stackTagCompound = compound;
 							owner = k.stackTagCompound.getString("owner");
+							energy = k.stackTagCompound.getFloat("PotEnergy");
 
 							ItemStack l = event.crafting;
 
@@ -278,6 +279,8 @@ public class AbyssalCraftEventHooks {
 									l.stackTagCompound = compound;
 								if(!owner.equals(""))
 									l.stackTagCompound.setString("owner", owner);
+								if(energy != 0)
+									l.stackTagCompound.setFloat("PotEnergy", energy);
 
 								event.craftMatrix.setInventorySlotContents(i, l);
 							}

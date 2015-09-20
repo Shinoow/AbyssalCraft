@@ -107,6 +107,12 @@ public class ClientProxy extends CommonProxy {
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityRitualPedestal.class, new TileEntityRitualPedestalRenderer());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityCthulhuStatue.class, new TileEntityCthulhuStatueRenderer());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityHasturStatue.class, new TileEntityHasturStatueRenderer());
+		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityJzaharStatue.class, new TileEntityJzaharStatueRenderer());
+		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityAzathothStatue.class, new TileEntityAzathothStatueRenderer());
+		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityNyarlathotepStatue.class, new TileEntityNyarlathotepStatueRenderer());
+		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityYogsothothStatue.class, new TileEntityYogsothothStatueRenderer());
+		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityShubniggurathStatue.class, new TileEntityShubniggurathStatueRenderer());
+		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityEnergyPedestal.class, new TileEntityEnergyPedestalRenderer());
 
 		MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(AbyssalCraft.PSDL), new Block3DRender(new TileEntityPSDLRenderer(), new TileEntityPSDL()));
 		MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(AbyssalCraft.Altar), new Block3DRender(new TileEntityAltarRenderer(), new TileEntityAltar()));
@@ -123,6 +129,12 @@ public class ClientProxy extends CommonProxy {
 		MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(AbyssalCraft.ritualpedestal), new RenderRitualPedestal());
 		MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(AbyssalCraft.cthulhuStatue), new Block3DRender(new TileEntityCthulhuStatueRenderer(), new TileEntityCthulhuStatue()));
 		MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(AbyssalCraft.hasturStatue), new Block3DRender(new TileEntityHasturStatueRenderer(), new TileEntityHasturStatue()));
+		MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(AbyssalCraft.jzaharStatue), new Block3DRender(new TileEntityJzaharStatueRenderer(), new TileEntityJzaharStatue()));
+		MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(AbyssalCraft.azathothStatue), new Block3DRender(new TileEntityAzathothStatueRenderer(), new TileEntityAzathothStatue()));
+		MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(AbyssalCraft.nyarlathotepStatue), new Block3DRender(new TileEntityNyarlathotepStatueRenderer(), new TileEntityNyarlathotepStatue()));
+		MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(AbyssalCraft.yogsothothStatue), new Block3DRender(new TileEntityYogsothothStatueRenderer(), new TileEntityYogsothothStatue()));
+		MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(AbyssalCraft.shubniggurathStatue), new Block3DRender(new TileEntityShubniggurathStatueRenderer(), new TileEntityShubniggurathStatue()));
+		MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(AbyssalCraft.energyPedestal), new Block3DRender(new TileEntityEnergyPedestalRenderer(), new TileEntityEnergyPedestal()));
 	}
 
 	@Override

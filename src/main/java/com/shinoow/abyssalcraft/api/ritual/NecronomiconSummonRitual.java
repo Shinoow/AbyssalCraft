@@ -41,7 +41,7 @@ public class NecronomiconSummonRitual extends NecronomiconRitual {
 	 * @param entity Class representing the entity this ritual summons
 	 * @param offerings Components used to perform the ritual, are consumed afterwards
 	 */
-	public NecronomiconSummonRitual(String unlocalizedName, int bookType, int dimension, float requiredEnergy, boolean remnantHelp, Class<? extends EntityLivingBase> entity, ItemStack...offerings) {
+	public NecronomiconSummonRitual(String unlocalizedName, int bookType, int dimension, float requiredEnergy, boolean remnantHelp, Class<? extends EntityLivingBase> entity, Object...offerings) {
 		super(unlocalizedName, bookType, dimension, requiredEnergy, remnantHelp, offerings);
 		this.entity = entity;
 	}
@@ -55,7 +55,7 @@ public class NecronomiconSummonRitual extends NecronomiconRitual {
 	 * @param entity Class representing the entity this ritual summons
 	 * @param offerings Components used to perform the ritual, are consumed afterwards
 	 */
-	public NecronomiconSummonRitual(String unlocalizedName, int bookType, int dimension, float requiredEnergy, Class<? extends EntityLivingBase> entity, ItemStack...offerings) {
+	public NecronomiconSummonRitual(String unlocalizedName, int bookType, int dimension, float requiredEnergy, Class<? extends EntityLivingBase> entity, Object...offerings) {
 		this(unlocalizedName, bookType, dimension, requiredEnergy, false, entity, offerings);
 	}
 
@@ -67,47 +67,8 @@ public class NecronomiconSummonRitual extends NecronomiconRitual {
 	 * @param entity Class representing the entity this ritual summons
 	 * @param offerings Components used to perform the ritual, are consumed afterwards
 	 */
-	public NecronomiconSummonRitual(String unlocalizedName, int bookType, float requiredEnergy, Class<? extends EntityLivingBase> entity, ItemStack...offerings) {
+	public NecronomiconSummonRitual(String unlocalizedName, int bookType, float requiredEnergy, Class<? extends EntityLivingBase> entity, Object...offerings) {
 		this(unlocalizedName, bookType, -1, requiredEnergy, entity, offerings);
-	}
-
-	/**
-	 * A Necronomicon Ritual
-	 * @param unlocalizedName A string representing the ritual name
-	 * @param bookType Necronomicon book type required
-	 * @param dimension Dimension where the ritual can be peformed
-	 * @param remnantHelp If Remnants can aid you when performing the ritual
-	 * @param entity Class representing the entity this ritual summons
-	 * @param offerings Components used to perform the ritual, are consumed afterwards
-	 */
-	@Deprecated //TODO remove in AC 1.9
-	public NecronomiconSummonRitual(String unlocalizedName, int bookType, int dimension, boolean remnantHelp, Class<? extends EntityLivingBase> entity, ItemStack...offerings) {
-		this(unlocalizedName, bookType, dimension, 0, remnantHelp, entity, offerings);
-	}
-
-	/**
-	 * A Necronomicon Ritual
-	 * @param unlocalizedName A string representing the ritual name
-	 * @param bookType Necronomicon book type required
-	 * @param dimension Dimension where the ritual can be peformed
-	 * @param entity Class representing the entity this ritual summons
-	 * @param offerings Components used to perform the ritual, are consumed afterwards
-	 */
-	@Deprecated //TODO remove in AC 1.9
-	public NecronomiconSummonRitual(String unlocalizedName, int bookType, int dimension, Class<? extends EntityLivingBase> entity, ItemStack...offerings) {
-		this(unlocalizedName, bookType, dimension, false, entity, offerings);
-	}
-
-	/**
-	 * A Necronomicon Ritual
-	 * @param unlocalizedName A string representing the ritual name
-	 * @param bookType Necronomicon book type required
-	 * @param entity Class representing the entity this ritual summons
-	 * @param offerings Components used to perform the ritual, are consumed afterwards
-	 */
-	@Deprecated //TODO remove in AC 1.9
-	public NecronomiconSummonRitual(String unlocalizedName, int bookType, Class<? extends EntityLivingBase> entity, ItemStack...offerings) {
-		this(unlocalizedName, bookType, -1, entity, offerings);
 	}
 
 	/**

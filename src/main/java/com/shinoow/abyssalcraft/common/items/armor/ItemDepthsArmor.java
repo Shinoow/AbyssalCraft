@@ -140,13 +140,13 @@ public class ItemDepthsArmor extends ItemArmor implements IVisDiscountGear, IRev
 	public void addInformation(ItemStack is, EntityPlayer player, List l, boolean B){
 		if(Loader.isModLoaded("Thaumcraft")){
 			if(is.getItem() == AbyssalCraft.Depthshelmet)
-				l.add("\u00A75Vis discount: 5%");
+				l.add("\u00A75"+StatCollector.translateToLocal("tc.visdiscount")+": 5%");
 			if(is.getItem() == AbyssalCraft.Depthsplate)
-				l.add("\u00A75Vis discount: 2%");
+				l.add("\u00A75"+StatCollector.translateToLocal("tc.visdiscount")+": 2%");
 			if(is.getItem() == AbyssalCraft.Depthslegs)
-				l.add("\u00A75Vis discount: 2%");
+				l.add("\u00A75"+StatCollector.translateToLocal("tc.visdiscount")+": 2%");
 			if(is.getItem() == AbyssalCraft.Depthsboots)
-				l.add("\u00A75Vis discount: 1%");
+				l.add("\u00A75"+StatCollector.translateToLocal("tc.visdiscount")+": 1%");
 		}
 	}
 

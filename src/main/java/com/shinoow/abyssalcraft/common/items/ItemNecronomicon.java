@@ -20,12 +20,13 @@ import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
+import com.shinoow.abyssalcraft.api.energy.IEnergyTransporter;
 import com.shinoow.abyssalcraft.common.blocks.BlockRitualAltar;
 import com.shinoow.abyssalcraft.common.blocks.tile.TileEntityRitualAltar;
 import com.shinoow.abyssalcraft.common.util.RitualUtil;
 import com.shinoow.abyssalcraft.common.util.SpecialTextUtil;
 
-public class ItemNecronomicon extends ItemACBasic {
+public class ItemNecronomicon extends ItemACBasic implements IEnergyTransporter {
 
 	private int bookType;
 
@@ -83,6 +84,7 @@ public class ItemNecronomicon extends ItemACBasic {
 	public void addInformation(ItemStack is, EntityPlayer player, List l, boolean B){
 		if(is.hasTagCompound() && is.stackTagCompound.hasKey("owner"))
 			l.add("Owner: " + is.stackTagCompound.getString("owner"));
+		l.add(String.format("%d/%d PE", (int)getContainedEnergy(is), getMaxEnergy(is)));
 	}
 
 	@Override
@@ -93,5 +95,46 @@ public class ItemNecronomicon extends ItemACBasic {
 
 	public int getBookType(){
 		return bookType;
+	}
+
+	@Override
+	public float getContainedEnergy(ItemStack stack) {
+		float energy;
+		if(!stack.hasTagCompound())
+			stack.setTagCompound(new NBTTagCompound());
+		if(stack.stackTagCompound.hasKey("PotEnergy"))
+			energy = stack.stackTagCompound.getFloat("PotEnergy");
+		else {
+			energy = 0;
+			stack.stackTagCompound.setFloat("PotEnergy", energy);
+		}
+		return energy;
+	}
+
+	@Override
+	public int getMaxEnergy(ItemStack stack) {
+		if(this == AbyssalCraft.necronomicon)
+			return 5000;
+		if(this == AbyssalCraft.necronomicon_cor)
+			return 10000;
+		if(this == AbyssalCraft.necronomicon_dre)
+			return 20000;
+		if(this == AbyssalCraft.necronomicon_omt)
+			return 40000;
+		if(this == AbyssalCraft.abyssalnomicon)
+			return 100000;
+		return 0;
+	}
+
+	@Override
+	public void addEnergy(ItemStack stack, float energy) {
+		float contained = getContainedEnergy(stack);
+		stack.stackTagCompound.setFloat("PotEnergy", contained += energy);
+	}
+
+	@Override
+	public void consumeEnergy(ItemStack stack, float energy) {
+		float contained = getContainedEnergy(stack);
+		stack.stackTagCompound.setFloat("PotEnergy", contained -= energy);
 	}
 }

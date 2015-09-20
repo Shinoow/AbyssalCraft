@@ -11,4 +11,4 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.common.blocks.tile;
 
-public class TileEntityHasturStatue extends TEDirectional {}
+public class TileEntityHasturStatue extends TileStatueDirectional {}

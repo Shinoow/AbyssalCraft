@@ -52,14 +52,15 @@ public class CrystallizerRecipeHandler extends TemplateRecipeHandler
 
 		@Override
 		public List<PositionedStack> getIngredients() {
-			return getCycledIngredients(cycleticks / 48, Arrays.asList(ingred));
+			return getCycledIngredients(cycleticks / 48, resultList);
 		}
 
 		@Override
 		public PositionedStack getResult() {
-			while(resultList.iterator().hasNext())
-				return resultList.iterator().next();
-			return resultList.iterator().next();
+			List<PositionedStack> list = getCycledIngredients(cycleticks / 48, Arrays.asList(ingred));
+			while(list.iterator().hasNext())
+				return list.iterator().next();
+			return ingred;
 		}
 
 		@Override
@@ -124,7 +125,7 @@ public class CrystallizerRecipeHandler extends TemplateRecipeHandler
 	public void loadCraftingRecipes(ItemStack result) {
 		Map<ItemStack, ItemStack[]> recipes = CrystallizerRecipes.instance().getCrystallizationList();
 		for (Entry<ItemStack, ItemStack[]> recipe : recipes.entrySet())
-			if (NEIServerUtils.areStacksSameType(recipe.getValue()[0], result))
+			if (NEIServerUtils.areStacksSameType(recipe.getValue()[0], result) || NEIServerUtils.areStacksSameType(recipe.getValue()[1], result))
 				arecipes.add(new CrystallizationPair(recipe.getKey(), new ItemStack[] {recipe.getValue()[0], recipe.getValue()[1]}));
 	}
 

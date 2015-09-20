@@ -15,6 +15,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import net.minecraft.block.Block;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
 
@@ -34,6 +36,7 @@ import cpw.mods.fml.common.FMLLog;
 public class RitualRegistry {
 
 	private Map<Integer, Integer> dimToBookType = Maps.newHashMap();
+	private Map<Integer, String> dimToName = Maps.newHashMap();
 	private Map<NecronomiconRitual, Integer> ritualToBookType = Maps.newHashMap();
 	private ArrayList<NecronomiconRitual> rituals = Lists.newArrayList();
 
@@ -44,7 +47,7 @@ public class RitualRegistry {
 	}
 
 	/**
-	 * Adds a dimension to the list of dimensions where a ritual of the specific book type can be performed
+	 * Maps a dimension to a book type, in order to specify dimensions where a ritual of that book type can be performed
 	 * @param dim The Dimension ID
 	 * @param bookType The Necronomicon book type required
 	 * 
@@ -52,8 +55,37 @@ public class RitualRegistry {
 	 */
 	public void addDimensionToBookType(int dim, int bookType){
 		if(bookType <= 4 && bookType >= 0)
-			dimToBookType.put(dim, bookType);
+			if(dim != -1 && dim != 1)
+				dimToBookType.put(dim, bookType);
+			else FMLLog.log("RitualRegistry", Level.ERROR, "You're not allowed to register that Dimension ID: %d", dim);
 		else FMLLog.log("RitualRegistry", Level.ERROR, "Necronomicon book type does not exist: %d", bookType);
+	}
+
+	/**
+	 * Maps a dimension to a name, in order to display it in the Necronomicon if rituals can only be performed in said dimension
+	 * @param dim The Dimension ID
+	 * @param name A String representing the name
+	 * 
+	 * @since 1.4.5
+	 */
+	public void addDimensionToName(int dim, String name){
+		if(dim != -1 && dim != 1)
+			dimToName.put(dim, name);
+		else FMLLog.log("RitualRegistry", Level.ERROR, "You're not allowed to register that Dimension ID: %d", dim);
+	}
+
+	/**
+	 * Maps a dimension to a book type, in order to specify dimensions where a ritual of that book type can be performed,<br>
+	 * and maps it to a name, in order to display it in the Necronomicon if rituals can only be performed in said dimension
+	 * @param dim The Dimension ID
+	 * @param bookType The Necronomicon book type required
+	 * @param name A String representing the name
+	 * 
+	 * @since 1.4.5
+	 */
+	public void addDimensionToBookTypeAndName(int dim, int bookType, String name){
+		addDimensionToBookType(dim, bookType);
+		addDimensionToName(dim, name);
 	}
 
 	/**
@@ -103,9 +135,19 @@ public class RitualRegistry {
 	/**
 	 * Used to fetch a list of rituals
 	 * @return An ArrayList containing all registered Necronomicon Rituals
+	 * 
+	 * @since 1.4
 	 */
 	public List<NecronomiconRitual> getRituals(){
 		return rituals;
+	}
+
+	/**
+	 * Used to fetch the dimension/name mappings
+	 * @return A HashMap containing Dimension IDs and Strings associated with them
+	 */
+	public Map<Integer, String> getDimensionNameMappings(){
+		return dimToName;
 	}
 
 	/**
@@ -144,9 +186,9 @@ public class RitualRegistry {
 		return false;
 	}
 
-	private boolean areItemStackArraysEqual(ItemStack[] array1, ItemStack[] array2){
+	private boolean areItemStackArraysEqual(Object[] array1, ItemStack[] array2){
 
-		List<ItemStack> compareList = Lists.newArrayList(array1);
+		List<Object> compareList = Lists.newArrayList(array1);
 		List<ItemStack> itemList = Lists.newArrayList();
 
 		for(ItemStack item : array2)
@@ -155,13 +197,26 @@ public class RitualRegistry {
 
 		if(itemList.size() == compareList.size())
 			for(ItemStack item : itemList)
-				for(ItemStack compare : compareList)
-					if(areStacksEqual(item, compare)){
+				for(Object compare : compareList)
+					if(areObjectsEqual(item, compare)){
 						compareList.remove(compare);
 						break;
 					}
 
 		return compareList.isEmpty();
+	}
+
+	public boolean areObjectsEqual(ItemStack stack, Object obj){
+		if(obj instanceof ItemStack)
+			return areStacksEqual(stack, (ItemStack)obj);
+		else if(obj instanceof Item)
+			return areStacksEqual(stack, new ItemStack((Item)obj));
+		else if(obj instanceof Block)
+			return areStacksEqual(stack, new ItemStack((Block)obj));
+		else if(obj instanceof String)
+			for(ItemStack item : OreDictionary.getOres((String)obj))
+				return areStacksEqual(stack, item);
+		return false;
 	}
 
 	public boolean areStacksEqual(ItemStack stack1, ItemStack stack2)

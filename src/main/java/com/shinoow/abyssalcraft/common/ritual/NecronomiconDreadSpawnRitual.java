@@ -16,7 +16,6 @@ import java.util.List;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
-import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
 import com.google.common.collect.Lists;
@@ -29,9 +28,8 @@ import com.shinoow.abyssalcraft.common.entity.EntityLesserDreadbeast;
 public class NecronomiconDreadSpawnRitual extends NecronomiconRitual {
 
 	public NecronomiconDreadSpawnRitual() {
-		super("dreadSpawn", 2, 500F, new ItemStack[]{new ItemStack(AbyssalCraft.dreadfragment), new ItemStack(AbyssalCraft.dreadstone), new ItemStack(AbyssalCraft.abydreadstone),
-				new ItemStack(AbyssalCraft.abychunk), new ItemStack(AbyssalCraft.dreadchunk), new ItemStack(Items.rotten_flesh), new ItemStack(AbyssalCraft.Dreadshard),
-				new ItemStack(AbyssalCraft.abyingot)});
+		super("dreadSpawn", 2, 500F, new Object[]{AbyssalCraft.dreadfragment, AbyssalCraft.dreadstone, AbyssalCraft.abydreadstone,
+				AbyssalCraft.abychunk, AbyssalCraft.dreadchunk, Items.rotten_flesh, AbyssalCraft.Dreadshard, AbyssalCraft.abyingot});
 	}
 
 	@Override
@@ -43,7 +41,7 @@ public class NecronomiconDreadSpawnRitual extends NecronomiconRitual {
 	}
 
 	@Override
-	protected void completeRitualClient(World world, int x, int y, int z, EntityPlayer player) {
+	protected void completeRitualServer(World world, int x, int y, int z, EntityPlayer player) {
 		List<EntityDreadSpawn> dreadSpawns = Lists.newArrayList();
 		List<EntityGreaterDreadSpawn> greaterDreadSpawns = Lists.newArrayList();
 		List<EntityLesserDreadbeast> lesserDreadBeasts = Lists.newArrayList();
@@ -79,5 +77,5 @@ public class NecronomiconDreadSpawnRitual extends NecronomiconRitual {
 	}
 
 	@Override
-	protected void completeRitualServer(World world, int x, int y, int z, EntityPlayer player) {}
+	protected void completeRitualClient(World world, int x, int y, int z, EntityPlayer player) {}
 }

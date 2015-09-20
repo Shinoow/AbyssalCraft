@@ -12,18 +12,35 @@
 package com.shinoow.abyssalcraft.api.energy;
 
 /**
- * Interface to use on blocks/items that can hold Potential Energy (WIP)
+ * Interface to use on blocks that can hold Potential Energy (WIP)<br>
+ * WARNING: Any methods in this interface might end up getting removed,<br>
+ * so I would suggest not using it until this text (and the WIP part) is removed.
+ * 
  * @author shinoow
  *
  * @since 1.4.5
  */
 public interface IEnergyContainer {
 
-	public int getContainedEnergy();
+	/**
+	 * Gets the Potential Energy contained within the block
+	 */
+	public float getContainedEnergy();
 
-	public int getmaxEnergy();
+	/**
+	 * Gets the maximum Potential Energy the block can hold
+	 */
+	public int getMaxEnergy();
 
+	/**
+	 * Adds Potential Energy to the block
+	 * @param energy Energy quanta to add
+	 */
 	public void addEnergy(float energy);
 
+	/**
+	 * Consumes (removes) Potential Energy from the block
+	 * @param energy Energy quanta to consume
+	 */
 	public void consumeEnergy(float energy);
 }
