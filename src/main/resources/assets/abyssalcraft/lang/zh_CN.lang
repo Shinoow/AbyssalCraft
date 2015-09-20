@@ -243,10 +243,12 @@ necronomicon.text.necronomicon.4=要想解锁这些知识, 必须要旅行到上
 necronomicon.text.abyssalnomicon.1=这是深渊之书, 是由作为深渊的守门者扎哈尔所写的. 这本书囊括了四本死灵之书的知识, 实际上它们只是其中的章节. 同样这里有大量的在其它地方没有提及的知识.
 necronomicon.text.abyssalnomicon.2=虽然关于咒语和仪式的知识受限于特殊的世界(和之前的世界, 取决于死灵之书的类型), 但是深渊之书在同一个地方有着所有的知识, 包括附加的知识.
 
-necronomicon.text.abyssalcraft.1=这本书设计来就是为了深渊国度这个mod. 主要专注于探索新增的3个世界, 这几个世界都有着新的材料和怪物(有新的掉落物). 这个mod还新增了新的机器.
-necronomicon.text.abyssalcraft.2=玩家能比以前更能扭曲自然的元素. 其中包括结晶器, 嬗变器和铸造器 (铸造器并不能扭曲自然的元素, 而是用来铸造钱币).
-necronomicon.text.abyssalcraft.3=新的材料允许你合成更强力的工具和盔甲, 有些穿戴一套后在某些场合会有特殊的能力. 新的建筑材料能在主世界的新增生物群落和新的世界里找到. 这本书使得这个mod有新的用途.
-necronomicon.text.abyssalcraft.4=通过仪式和咒语，玩家能使用包括死灵之书在内的邪恶魔法. 最终结果将是对mod重要的过程, 添加大量的魔法在大量其他探索这个mod.
+necronomicon.text.abyssalcraft.1=AbyssalCraft is the mod which this book is used to guide you through. It's mainly focused on exploration, with 4 new dimensions you can explore.
+necronomicon.text.abyssalcraft.2=The dimensions are reached through the use of "Gateway Keys", which are keys designed to create portals between dimensions (the 4th dimension is reached by falling out of the 3rd).
+necronomicon.text.abyssalcraft.3=The Overworld has been expanded with 6 new biomes: the Darklands (normal, plains, forest, highlands, mountain) and the Coralium Infested Swamp.
+necronomicon.text.abyssalcraft.4=There's also 5 new types of stone and 15 new ores found throughout the Overworld and the dimensions.
+necronomicon.text.abyssalcraft.5=Apart from exploring, AbyssalCraft introduces it's own type of magic, through the use of rituals in order to worship The Great Old Ones.
+necronomicon.text.abyssalcraft.6=Apart from magic and exploration, there's also machines, allowing you to transmute, crystallize and materialize objects. There's also a coin engraver.
 
 necronomicon.text.azathoth.1=魔神之首——阿撒托斯, 是所有存在的统治者和创造者. 
 necronomicon.text.azathoth.2=它居住在世界之外, 沉睡在不朽的笛鼓声中. 尽管如此, 它有着自己的意志, 并且问题会反馈到奈亚拉托提普.
@@ -371,6 +373,8 @@ necronomicon.text.crafting.corplatep=珊瑚板胸甲是由精炼珊瑚锭, 珊�
 necronomicon.text.crafting.corlegsp=珊瑚板护腿是由精炼珊瑚锭, 珊瑚板和一个精炼珊瑚护腿合成.
 necronomicon.text.crafting.corbootsp=珊瑚板靴子是由精炼珊瑚锭, 珊瑚板和一个精炼珊瑚靴子合成.
 necronomicon.text.crafting.corbow=珊瑚长弓是由线, 精炼珊瑚锭, 一个珊瑚珍珠和一把弓合成.
+necronomicon.text.crafting.energypedestal.1=A Energy Pedestal is crafted with Monolith Stones, A Shadow Gem and a Coralium Pearl. It collects Potential Energy while under a clear sky.
+necronomicon.text.crafting.energypedestal.2=This block serves as a method for obtaining Potential Energy. If you place Statues 3 blocks away from it (on the x or z axis), they will transfer energy to it at a fast rate. Place a Necronomicon (or other source that can hold Potential Energy) on it in order to drain it.
 
 necronomicon.text.overworld.progression.1=要想到达深渊荒芜之地, 你必须合成一把门钥匙, 这需要你旅行过下界和黑暗之地和水域. 水域可以是沼泽或者海洋.
 necronomicon.text.overworld.progression.2=从下界你需要获得2根烈焰棒, 最好是更多的留备以后用. 从黑暗之地你需要杀死活阴影来获得阴影宝石. 它们最有可能在黑暗之地山脉群落找到. 推荐获得一把撕裂法杖来更快获取阴影宝石(更多信息在特殊材料章节).
@@ -453,12 +457,14 @@ necronomicon.text.entity.sacthoth.2=萨多斯是在黑暗领域里的最为强�
 
 necronomicon.text.rituals.info=检查关于仪式的部分信息, 或者其它章节有关可用仪式的信息. "位置" 指定仪式能在哪里进行.
 
-necronomicon.text.rituals.1=要想开始仪式你需要创造祭坛来执行.
-necronomicon.text.rituals.2=共有8种原料你能创造你的仪式祭坛. 分别是: 圆石, 黑暗圆石, 深渊石砖, 珊瑚石砖, 恐惧石砖, 深渊锭石砖, 伊桑斯石砖和黑暗伊桑斯石砖.
-necronomicon.text.rituals.3=要创造祭坛, 简单地将方块放成上面展示的形状然后按住shift右击中央的方块.
-necronomicon.text.rituals.4=上述的材料只能在他们所指定的维度进行仪式(例如. 圆石和黑暗圆石在主世界, 深渊石砖和珊瑚石砖在深渊荒芜之地 etc).
-necronomicon.text.rituals.5=当祭坛和基座放好后, 你能开始进行仪式了!
-necronomicon.text.rituals.6=所有仪式都需要你去放置物品在基座上, 有些还需要将祭品放在祭坛上. 要进行一个仪式, 放置好物品, 然后按住shift右击祭坛, 然后等待烟雾的消失
+necronomicon.text.rituals.1=In order to get started with rituals you need to create the altar to perform them at. There is a total of 8 materials you can create your Ritual Altar from.
+necronomicon.text.rituals.2=Those are: Cobblestone, Darkstone Cobblestone, Abyssal Stone Brick, Coralium Brick, Dreadstone Brick, Abyssalnite Stone Brick, Ethaxium Brick and Dark Ethaxium Brick. The materials can only be used in their specific dimension (eg. Cobblestone and Darkstone Cobblestone in the Overworld, Abyssal Stone Brick and Coralium Brick in the Abyssal Wasteland etc).
+necronomicon.text.rituals.3=To create the altar, simply place the blocks in the above formation (keep the red area clear) and shift right-click the center block with a Necronomicon.
+necronomicon.text.rituals.4=After that, you can start performing rituals! In order to perform a ritual, place objects on the pedestals and shift right-click the altar with a Necronomicon.
+necronomicon.text.rituals.5=When peforming, the pedestals project smoke towards the altar. Rituals where you gain objects always end with a flash of lightning hitting the altar.
+necronomicon.text.rituals.6=Potential Energy is required in order to perform rituals (each ritual entry shows how much you need). Potential Energy is a pure form of untapped energy originating from a higher plane of existence. It's mainly used to fuel sacrifices made to The Great Old Ones (any ritual). Statues placed on Shoggoth Monoliths are said to be capable of draining it.
+necronomicon.text.rituals.7=The two primary ways (currently) of collecting Potential Energy is to either stand near a Statue (Cthulhu, Hastur etc) holding a Necronomicon.
+necronomicon.text.rituals.8=There's also the option of crafting a Energy Pedestal, then placing Statues as showed in the picture above (3 blocks from the pedestal) so it can collect energy from them.
 
 necronomicon.text.machines.info=查看信息章节来获得有关不同机器的信息, 或者其他章节来获得特定机器的合成表. 合成表并没有以任何方式进行分类.
 
@@ -731,6 +737,7 @@ tile.yogsothothStatue.name=Yog-Sothoth Statue
 tile.shubniggurathStatue.name=Shub-Niggurath Statue
 tile.monolithStone.name=Monolith Stone
 tile.shoggothBiomass.name=Shoggoth Biomass
+tile.energyPedestal.name=Energy Pedestal
 
 #Items
 item.DEV_BLADE.name=恶魔之刃
