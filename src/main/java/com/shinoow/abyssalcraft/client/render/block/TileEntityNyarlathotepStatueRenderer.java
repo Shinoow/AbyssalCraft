@@ -23,13 +23,13 @@ import net.minecraft.world.World;
 
 import org.lwjgl.opengl.GL11;
 
-import com.shinoow.abyssalcraft.client.model.block.ModelTemp;
+import com.shinoow.abyssalcraft.client.model.block.ModelNyarlathotepStatue;
 import com.shinoow.abyssalcraft.common.blocks.tile.TileEntityNyarlathotepStatue;
 
 public class TileEntityNyarlathotepStatueRenderer extends TileEntitySpecialRenderer {
 
-	ModelTemp model = new ModelTemp();
-	private static final ResourceLocation texture = new ResourceLocation("abyssalcraft:textures/model/blocks/CthulhuStatue.png");
+	ModelNyarlathotepStatue model = new ModelNyarlathotepStatue();
+	private static final ResourceLocation texture = new ResourceLocation("abyssalcraft:textures/model/blocks/NyarlathotepStatue.png");
 
 	@Override
 	public void renderTileEntityAt(TileEntity te, double x, double y, double z, float scale) {
@@ -42,7 +42,7 @@ public class TileEntityNyarlathotepStatueRenderer extends TileEntitySpecialRende
 		Minecraft.getMinecraft().renderEngine.bindTexture(texture);
 		TileEntityNyarlathotepStatue tile = (TileEntityNyarlathotepStatue) te;
 		int direction = tile.getDirection();
-		GL11.glRotatef(direction * 90, 0.0F, 1.0F, 0.0F);
+		GL11.glRotatef(direction * 90 + 90, 0.0F, 1.0F, 0.0F);
 		model.render((Entity)null, 0.0F, 0.0F, -0.1F, 0.0F, 0.0F, 0.0625F);
 
 		GL11.glPopMatrix();

@@ -375,6 +375,8 @@ necronomicon.text.crafting.corbootsp=珊瑚板靴子是由精炼珊瑚锭, 珊�
 necronomicon.text.crafting.corbow=珊瑚长弓是由线, 精炼珊瑚锭, 一个珊瑚珍珠和一把弓合成.
 necronomicon.text.crafting.energypedestal.1=A Energy Pedestal is crafted with Monolith Stones, A Shadow Gem and a Coralium Pearl. It collects Potential Energy while under a clear sky.
 necronomicon.text.crafting.energypedestal.2=This block serves as a method for obtaining Potential Energy. If you place Statues 3 blocks away from it (on the x or z axis), they will transfer energy to it at a fast rate. Place a Necronomicon (or other source that can hold Potential Energy) on it in order to drain it.
+necronomicon.text.crafting.dreadium.1=Dreadium can be obtained in numerous ways. The first method is to transmute Dreaded Shards of Abyssalnite (dropped by Dreadguards).
+necronomicon.text.crafting.dreadium.2=When you have enough Dreadium Ingots to craft a Crystallizer, you can crystallize Dreaded materials to obtain Dreadium Crystals (mostly shards which you can combine into crystals that can be transmuted for Dreadium Ingots).
 
 necronomicon.text.overworld.progression.1=要想到达深渊荒芜之地, 你必须合成一把门钥匙, 这需要你旅行过下界和黑暗之地和水域. 水域可以是沼泽或者海洋.
 necronomicon.text.overworld.progression.2=从下界你需要获得2根烈焰棒, 最好是更多的留备以后用. 从黑暗之地你需要杀死活阴影来获得阴影宝石. 它们最有可能在黑暗之地山脉群落找到. 推荐获得一把撕裂法杖来更快获取阴影宝石(更多信息在特殊材料章节).

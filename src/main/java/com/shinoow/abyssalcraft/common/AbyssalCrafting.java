@@ -604,6 +604,10 @@ public class AbyssalCrafting {
 		AbyssalCraftAPI.addSingleCrystallization("nuggetZinc", "crystalShardZinc", 0.1F);
 		AbyssalCraftAPI.addSingleCrystallization("nuggetMagnesium", "crystalShardMagnesium", 0.1F);
 		AbyssalCraftAPI.addSingleCrystallization("ingotMagnesium", "crystalShardMagnesium", 4, 19, 0.1F);
+		AbyssalCraftAPI.addCrystallization(new ItemStack(AbyssalCraft.skin, 1, 0), new ItemStack(AbyssalCraft.crystalShard, 8, 7), new ItemStack(AbyssalCraft.essence, 1, 0), 0.2F);
+		AbyssalCraftAPI.addCrystallization(new ItemStack(AbyssalCraft.skin, 1, 1), new ItemStack(AbyssalCraft.crystalShard, 8, 7), new ItemStack(AbyssalCraft.essence, 1, 1), 0.2F);
+		AbyssalCraftAPI.addCrystallization(new ItemStack(AbyssalCraft.skin, 1, 2), new ItemStack(AbyssalCraft.crystalShard, 8, 7), new ItemStack(AbyssalCraft.essence, 1, 2), 0.2F);
+		AbyssalCraftAPI.addCrystallization(AbyssalCraft.Dreadshard, new ItemStack(AbyssalCraft.crystalShard, 1, 12), new ItemStack(AbyssalCraft.crystalShard, 4, 14), 0.2F);
 
 		//Crystallization for dusts
 		AbyssalCraftAPI.addSingleCrystallization("dustIron", "crystalShardIron", 4, 0, 0.1F);

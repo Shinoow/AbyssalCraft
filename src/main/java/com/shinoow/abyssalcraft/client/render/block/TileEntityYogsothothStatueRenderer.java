@@ -23,13 +23,13 @@ import net.minecraft.world.World;
 
 import org.lwjgl.opengl.GL11;
 
-import com.shinoow.abyssalcraft.client.model.block.ModelTemp;
+import com.shinoow.abyssalcraft.client.model.block.ModelYogsothothStatue;
 import com.shinoow.abyssalcraft.common.blocks.tile.TileEntityYogsothothStatue;
 
 public class TileEntityYogsothothStatueRenderer extends TileEntitySpecialRenderer {
 
-	ModelTemp model = new ModelTemp();
-	private static final ResourceLocation texture = new ResourceLocation("abyssalcraft:textures/model/blocks/CthulhuStatue.png");
+	ModelYogsothothStatue model = new ModelYogsothothStatue();
+	private static final ResourceLocation texture = new ResourceLocation("abyssalcraft:textures/model/blocks/YogsothothStatue.png");
 
 	@Override
 	public void renderTileEntityAt(TileEntity te, double x, double y, double z, float scale) {

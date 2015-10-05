@@ -19,6 +19,7 @@ import net.minecraft.world.gen.feature.WorldGenMinable;
 import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.common.entity.EntityAbygolem;
 import com.shinoow.abyssalcraft.common.entity.EntityDreadguard;
+import com.shinoow.abyssalcraft.common.world.gen.WorldGenDreadlandsStalagmite;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -39,10 +40,10 @@ public class BiomeGenAbyDreadlands extends BiomeGenDreadlandsBase {
 	{
 		super.decorate(par1World, par2Random, par3, par4);
 
-		for(int rarity = 0; rarity < 8; rarity++) {
-			int veinSize =  2 + par2Random.nextInt(4);
+		for(int rarity = 0; rarity < 10; rarity++) {
+			int veinSize =  8 + par2Random.nextInt(12);
 			int x = par3 + par2Random.nextInt(16);
-			int y = par2Random.nextInt(55);
+			int y = par2Random.nextInt(60);
 			int z = par4 + par2Random.nextInt(16);
 
 			new WorldGenMinable(AbyssalCraft.abydreadore, veinSize, AbyssalCraft.dreadstone).generate(par1World, par2Random, x, y, z);
@@ -78,6 +79,11 @@ public class BiomeGenAbyDreadlands extends BiomeGenDreadlandsBase {
 			int z = par4 + par2Random.nextInt(16);
 
 			new WorldGenMinable(AbyssalCraft.abydreadore, veinSize, AbyssalCraft.abydreadstone).generate(par1World, par2Random, x, y, z);
+		}
+		for(int i = 0; i < 1; i++){
+			int xPos = par3 + par2Random.nextInt(16) + 8;
+			int zPos = par4 + par2Random.nextInt(16) + 8;
+			new WorldGenDreadlandsStalagmite().generate(par1World, par2Random, xPos, par1World.getHeightValue(xPos, zPos), zPos);
 		}
 	}
 

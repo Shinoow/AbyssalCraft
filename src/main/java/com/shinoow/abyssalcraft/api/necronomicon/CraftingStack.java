@@ -68,7 +68,6 @@ public class CraftingStack {
 					} else throw new ClassCastException("Not a Item, Block or ItemStack!");
 				} else throw new ArrayIndexOutOfBoundsException("The array must contain preciesly 9 elements, not "+recipe.length+"!");
 			} else throw new NullPointerException("This array can't be empty!");
-
 		} else throw new NullPointerException("Output can't be null!");
 	}
 

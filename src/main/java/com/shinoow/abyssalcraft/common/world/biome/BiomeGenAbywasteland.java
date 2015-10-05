@@ -54,7 +54,7 @@ public class BiomeGenAbywasteland extends BiomeGenBase {
 		for (int rarity = 0; rarity < 8; rarity++){
 			int veinSize = 1 + par2Random.nextInt(3);
 			int x = par3 + par2Random.nextInt(16);
-			int y = par2Random.nextInt(18) + 4;
+			int y = par2Random.nextInt(30);
 			int z = par4 + par2Random.nextInt(16);
 
 			new WorldGenMinable(AbyssalCraft.AbyLCorOre, veinSize, AbyssalCraft.abystone).generate(par1World, par2Random, x, y, z);
@@ -62,7 +62,7 @@ public class BiomeGenAbywasteland extends BiomeGenBase {
 		for(int rarity = 0; rarity < 8; rarity++) {
 			int veinSize =  2 + par2Random.nextInt(6);
 			int x = par3 + par2Random.nextInt(16);
-			int y = par2Random.nextInt(55);
+			int y = par2Random.nextInt(75);
 			int z = par4 + par2Random.nextInt(16);
 
 			new WorldGenMinable(AbyssalCraft.AbyCorOre, veinSize, AbyssalCraft.abystone).generate(par1World, par2Random, x, y, z);
@@ -70,7 +70,7 @@ public class BiomeGenAbywasteland extends BiomeGenBase {
 		for(int rarity = 0; rarity < 8; rarity++) {
 			int veinSize =  2 + par2Random.nextInt(6);
 			int x = par3 + par2Random.nextInt(16);
-			int y = par2Random.nextInt(40);
+			int y = par2Random.nextInt(60);
 			int z = par4 + par2Random.nextInt(16);
 
 			new WorldGenMinable(AbyssalCraft.AbyNitOre, veinSize, AbyssalCraft.abystone).generate(par1World, par2Random, x, y, z);
@@ -78,7 +78,7 @@ public class BiomeGenAbywasteland extends BiomeGenBase {
 		for(int rarity = 0; rarity < 8; rarity++) {
 			int veinSize = 2 + par2Random.nextInt(6);
 			int x = par3 + par2Random.nextInt(16);
-			int y = par2Random.nextInt(40);
+			int y = par2Random.nextInt(60);
 			int z = par4 + par2Random.nextInt(16);
 
 			new WorldGenMinable(AbyssalCraft.AbyIroOre, veinSize, AbyssalCraft.abystone).generate(par1World, par2Random, x, y, z);
@@ -86,7 +86,7 @@ public class BiomeGenAbywasteland extends BiomeGenBase {
 		for(int rarity = 0; rarity < 8; rarity++) {
 			int veinSize = 2 + par2Random.nextInt(6);
 			int x = par3 + par2Random.nextInt(16);
-			int y = par2Random.nextInt(40);
+			int y = par2Random.nextInt(60);
 			int z = par4 + par2Random.nextInt(16);
 
 			new WorldGenMinable(AbyssalCraft.AbyCopOre, veinSize, AbyssalCraft.abystone).generate(par1World, par2Random, x, y, z);
@@ -94,7 +94,7 @@ public class BiomeGenAbywasteland extends BiomeGenBase {
 		for(int rarity = 0; rarity < 5; rarity++) {
 			int veinSize = 2 + par2Random.nextInt(3);
 			int x = par3 + par2Random.nextInt(16);
-			int y = par2Random.nextInt(20);
+			int y = par2Random.nextInt(35);
 			int z = par4 + par2Random.nextInt(16);
 
 			new WorldGenMinable(AbyssalCraft.AbyGolOre, veinSize, AbyssalCraft.abystone).generate(par1World, par2Random, x, y, z);
@@ -102,7 +102,7 @@ public class BiomeGenAbywasteland extends BiomeGenBase {
 		for(int rarity = 0; rarity < var5; rarity++) {
 			int veinSize = 1 + par2Random.nextInt(7);
 			int x = par3 + par2Random.nextInt(16);
-			int y = par2Random.nextInt(10);
+			int y = par2Random.nextInt(20);
 			int z = par4 + par2Random.nextInt(16);
 
 			new WorldGenMinable(AbyssalCraft.AbyDiaOre, veinSize, AbyssalCraft.abystone).generate(par1World, par2Random, x, y, z);
@@ -110,7 +110,7 @@ public class BiomeGenAbywasteland extends BiomeGenBase {
 		for(int rarity = 0; rarity < var5; rarity++) {
 			int veinSize = 1 + par2Random.nextInt(3);
 			int x = par3 + par2Random.nextInt(16);
-			int y = par2Random.nextInt(10);
+			int y = par2Random.nextInt(15);
 			int z = par4 + par2Random.nextInt(16);
 
 			new WorldGenMinable(AbyssalCraft.AbyPCorOre, veinSize, AbyssalCraft.abystone).generate(par1World, par2Random, x, y, z);
@@ -118,7 +118,7 @@ public class BiomeGenAbywasteland extends BiomeGenBase {
 		for(int rarity = 0; rarity < 8; rarity++) {
 			int veinSize = 2 + par2Random.nextInt(6);
 			int x = par3 + par2Random.nextInt(16);
-			int y = par2Random.nextInt(40);
+			int y = par2Random.nextInt(60);
 			int z = par4 + par2Random.nextInt(16);
 
 			new WorldGenMinable(AbyssalCraft.AbyTinOre, veinSize, AbyssalCraft.abystone).generate(par1World, par2Random, x, y, z);

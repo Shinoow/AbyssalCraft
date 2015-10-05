@@ -1,28 +1,11 @@
-- Added J'zahar Statue
-- Added Azathoth Statue
-- Added Nyarlathotep Statue
-- Added Yog-Sothoth Statue
-- Added Shub-Niggurath Statue
-- Altered the particle effects when performing rituals
-- When a Creation Ritual (or any child ritual of it) is completed, a bolt of lightning will hit the altar
-- Added Monolith Stone (replaced Omothol Stone as material for Shoggoth Monoliths)
-- Added Shoggoth Biomass (spawns Lesser Shoggoths)
-- Added Shoggoth Pits (generates randomly throughout the Overworld and all AbyssalCraft dimensions)
-- Shoggoth Monoliths can now spawn 5 Lesser Shoggoths each
-- The Lesser Shoggoth is now displayed on all entity pages in the Necronomicon
-- Replaced all entity pictures in the Necronomicon with new ones
-- Entering the Dark Realm shouldn't result in suffocating inside a block anymore
-- Items placed on Ritual Altars and Ritual Pedestals will drop when broken
-- Statues will drop their block directly when mined
-- NEI integration now shows both outputs in Crystallizer recipes
-- Replaced old potion ingredients
-- Any dimension where you can perform rituals will display on ritual pages, but as DIM<id> if a name hasn't been mapped
-- NecronomiconRitual instances now uses an array of Objects instead of ItemStacks (introduces OreDictionary support)
-- The Dread Spawn Ritual should work now (accidentally ran all the spawning code client-side)
-- A lot of new rituals have been added
-- Rituals now have NEI support (pressing R while hovering an item/block made from a ritual shows the "recipe" for said ritual)
-- Implemented Potential Energy (new WIP energy type)
-- Added Energy Pedestals (temporary solution for gathering Potential Energy, apart from standing within 16 blocks of a statue)
-- Rewrote the Ritual section of the Necronomicon (and added pictures)
-- Rewrote the AbyssalCraft section of the Necronomicon (and added pictures)
-- Now runs on Forge 10.13.4.1448
+- The Azathoth, Nyarlathotep and Yog-Sothoth Statues now have models
+- AbyssalCraft will now crash if a biome ID is already occupied
+- If dynamic Potion IDs is disabled, the Potion array extension will run
+- A "pop" sounds is now played when a Item is placed/removed from a Ritual Altar/Pedestal or Energy Pedestal
+- AbyssalCraft pressure plates can now be placed on AbyssalCraft fences
+- Added a entry about Dreadium in the Special Materials section in the Dreadlands section
+- Morph integration is now part of AbyssalCraft again (easier to maintain model and entity changes)
+- Possibly fixed random crashes related to statues (no idea how they're triggered)
+- The terrain of the Dreadlands has been improved
+- Wearing any AbyssalCraft helmet actually repels blindness in Darklands biomes
+- All ores in the Abyssal Wasteland now generate higher up

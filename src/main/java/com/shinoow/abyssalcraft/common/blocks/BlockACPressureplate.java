@@ -14,7 +14,9 @@ package com.shinoow.abyssalcraft.common.blocks;
 import java.util.Iterator;
 import java.util.List;
 
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockBasePressurePlate;
+import net.minecraft.block.BlockFence;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.Entity;
@@ -65,6 +67,29 @@ public class BlockACPressureplate extends BlockBasePressurePlate
 	protected int func_150060_c(int par1)
 	{
 		return par1 == 1 ? 15 : 0;
+	}
+
+	@Override
+	public boolean canPlaceBlockAt(World world, int x, int y, int z)
+	{
+		return World.doesBlockHaveSolidTopSurface(world, x, y - 1, z) || BlockFence.func_149825_a(world.getBlock(x, y - 1, z))
+				|| BlockACFence.func_149825_a(world.getBlock(x, y - 1, z));
+	}
+
+	@Override
+	public void onNeighborBlockChange(World world, int x, int y, int z, Block block)
+	{
+		boolean flag = false;
+
+		if (!World.doesBlockHaveSolidTopSurface(world, x, y - 1, z) && !BlockFence.func_149825_a(world.getBlock(x, y - 1, z))
+				&& !BlockACFence.func_149825_a(world.getBlock(x, y - 1, z)))
+			flag = true;
+
+		if (flag)
+		{
+			this.dropBlockAsItem(world, x, y, z, world.getBlockMetadata(x, y, z), 0);
+			world.setBlockToAir(x, y, z);
+		}
 	}
 
 	/**

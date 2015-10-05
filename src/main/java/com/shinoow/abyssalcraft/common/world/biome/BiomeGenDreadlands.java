@@ -11,10 +11,14 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.common.world.biome;
 
+import java.util.Random;
+
 import com.shinoow.abyssalcraft.common.entity.EntityDreadgolem;
+import com.shinoow.abyssalcraft.common.world.gen.WorldGenDreadlandsStalagmite;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.world.World;
 
 public class BiomeGenDreadlands extends BiomeGenDreadlandsBase
 {
@@ -23,6 +27,18 @@ public class BiomeGenDreadlands extends BiomeGenDreadlandsBase
 	public BiomeGenDreadlands(int par1) {
 		super(par1);
 		spawnableMonsterList.add(new SpawnListEntry(EntityDreadgolem.class, 100, 1, 5));
+	}
+
+	@Override
+	public void decorate(World world, Random rand, int x, int z)
+	{
+		super.decorate(world, rand, x, z);
+
+		for(int i = 0; i < 1; i++){
+			int xPos = x + rand.nextInt(16) + 8;
+			int zPos = z + rand.nextInt(16) + 8;
+			new WorldGenDreadlandsStalagmite().generate(world, rand, xPos, world.getHeightValue(xPos, zPos), zPos);
+		}
 	}
 
 	@Override

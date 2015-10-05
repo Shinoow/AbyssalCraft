@@ -77,7 +77,7 @@ import cpw.mods.fml.common.registry.*;
 @Mod(modid = AbyssalCraft.modid, name = AbyssalCraft.name, version = AbyssalCraft.version, dependencies = "required-after:Forge@[forgeversion,)", useMetadata = false, guiFactory = "com.shinoow.abyssalcraft.client.config.ACGuiFactory")
 public class AbyssalCraft {
 
-	public static final String version = "1.8.9.5";
+	public static final String version = "1.8.9.6";
 	public static final String modid = "abyssalcraft";
 	public static final String name = "AbyssalCraft";
 
@@ -320,6 +320,9 @@ public class AbyssalCraft {
 		syncConfig();
 		AbyssalCraftAPI.initPotionReflection();
 
+		if(!useDynamicPotionIds)
+			extendPotionArray();
+
 		if(!FluidRegistry.isFluidRegistered("liquidcoralium")){
 			CFluid = LIQUID_CORALIUM;
 			FluidRegistry.registerFluid(CFluid);
@@ -476,6 +479,8 @@ public class AbyssalCraft {
 		monolithStone = new BlockACBasic(Material.rock, 6.0F, 24.0F, Block.soundTypeStone).setBlockName("monolithStone").setBlockTextureName(modid + ":" + "monolithStone");
 		shoggothBiomass = new BlockShoggothBiomass();
 		energyPedestal = new BlockEnergyPedestal();
+
+		checkBiomeIds(true);
 
 		//Biome
 		Darklands = new BiomeGenDarklands(configBiomeId1).setColor(522674).setBiomeName("Darklands");
@@ -1384,6 +1389,8 @@ public class AbyssalCraft {
 		ACLogger.info("Post-initializing AbyssalCraft");
 		proxy.postInit();
 		IntegrationHandler.postInit();
+		((BlockCLiquid) Cwater).addBlocks();
+		checkBiomeIds(false);
 		ACLogger.info("AbyssalCraft loaded.");
 	}
 
@@ -2011,6 +2018,99 @@ public class AbyssalCraft {
 		FMLInterModComms.sendMessage("BuildCraft|Core", "blacklist-facade", new ItemStack(nyarlathotepStatue));
 		FMLInterModComms.sendMessage("BuildCraft|Core", "blacklist-facade", new ItemStack(yogsothothStatue));
 		FMLInterModComms.sendMessage("BuildCraft|Core", "blacklist-facade", new ItemStack(shubniggurathStatue));
+		FMLInterModComms.sendMessage("BuildCraft|Core", "blacklist-facade", new ItemStack(energyPedestal));
+	}
+
+	private void checkBiomeIds(boolean first){
+		if(first){
+			ACLogger.info("Scanning biome IDs to see if the ones needed are available.");
+
+			if(BiomeGenBase.getBiomeGenArray()[configBiomeId1] != null)
+				throw new RuntimeException(String.format("Biome ID %d is already occupied by the biome %s (%s)!", configBiomeId1, BiomeGenBase.getBiome(configBiomeId1).biomeName,
+						BiomeGenBase.getBiome(configBiomeId1).getBiomeClass().getName()));
+			if(BiomeGenBase.getBiomeGenArray()[configBiomeId2] != null)
+				throw new RuntimeException(String.format("Biome ID %d is already occupied by the biome %s (%s)!", configBiomeId2, BiomeGenBase.getBiome(configBiomeId2).biomeName,
+						BiomeGenBase.getBiome(configBiomeId2).getBiomeClass().getName()));
+			if(BiomeGenBase.getBiomeGenArray()[configBiomeId3] != null)
+				throw new RuntimeException(String.format("Biome ID %d is already occupied by the biome %s (%s)!", configBiomeId3, BiomeGenBase.getBiome(configBiomeId3).biomeName,
+						BiomeGenBase.getBiome(configBiomeId3).getBiomeClass().getName()));
+			if(BiomeGenBase.getBiomeGenArray()[configBiomeId4] != null)
+				throw new RuntimeException(String.format("Biome ID %d is already occupied by the biome %s (%s)!", configBiomeId4, BiomeGenBase.getBiome(configBiomeId4).biomeName,
+						BiomeGenBase.getBiome(configBiomeId4).getBiomeClass().getName()));
+			if(BiomeGenBase.getBiomeGenArray()[configBiomeId5] != null)
+				throw new RuntimeException(String.format("Biome ID %d is already occupied by the biome %s (%s)!", configBiomeId5, BiomeGenBase.getBiome(configBiomeId5).biomeName,
+						BiomeGenBase.getBiome(configBiomeId5).getBiomeClass().getName()));
+			if(BiomeGenBase.getBiomeGenArray()[configBiomeId6] != null)
+				throw new RuntimeException(String.format("Biome ID %d is already occupied by the biome %s (%s)!", configBiomeId6, BiomeGenBase.getBiome(configBiomeId6).biomeName,
+						BiomeGenBase.getBiome(configBiomeId6).getBiomeClass().getName()));
+			if(BiomeGenBase.getBiomeGenArray()[configBiomeId7] != null)
+				throw new RuntimeException(String.format("Biome ID %d is already occupied by the biome %s (%s)!", configBiomeId7, BiomeGenBase.getBiome(configBiomeId7).biomeName,
+						BiomeGenBase.getBiome(configBiomeId7).getBiomeClass().getName()));
+			if(BiomeGenBase.getBiomeGenArray()[configBiomeId8] != null)
+				throw new RuntimeException(String.format("Biome ID %d is already occupied by the biome %s (%s)!", configBiomeId8, BiomeGenBase.getBiome(configBiomeId8).biomeName,
+						BiomeGenBase.getBiome(configBiomeId8).getBiomeClass().getName()));
+			if(BiomeGenBase.getBiomeGenArray()[configBiomeId9] != null)
+				throw new RuntimeException(String.format("Biome ID %d is already occupied by the biome %s (%s)!", configBiomeId9, BiomeGenBase.getBiome(configBiomeId9).biomeName,
+						BiomeGenBase.getBiome(configBiomeId9).getBiomeClass().getName()));
+			if(BiomeGenBase.getBiomeGenArray()[configBiomeId10] != null)
+				throw new RuntimeException(String.format("Biome ID %d is already occupied by the biome %s (%s)!", configBiomeId10, BiomeGenBase.getBiome(configBiomeId10).biomeName,
+						BiomeGenBase.getBiome(configBiomeId10).getBiomeClass().getName()));
+			if(BiomeGenBase.getBiomeGenArray()[configBiomeId11] != null)
+				throw new RuntimeException(String.format("Biome ID %d is already occupied by the biome %s (%s)!", configBiomeId11, BiomeGenBase.getBiome(configBiomeId11).biomeName,
+						BiomeGenBase.getBiome(configBiomeId11).getBiomeClass().getName()));
+			if(BiomeGenBase.getBiomeGenArray()[configBiomeId13] != null)
+				throw new RuntimeException(String.format("Biome ID %d is already occupied by the biome %s (%s)!", configBiomeId13, BiomeGenBase.getBiome(configBiomeId13).biomeName,
+						BiomeGenBase.getBiome(configBiomeId13).getBiomeClass().getName()));
+			if(BiomeGenBase.getBiomeGenArray()[configBiomeId14] != null)
+				throw new RuntimeException(String.format("Biome ID %d is already occupied by the biome %s (%s)!", configBiomeId14, BiomeGenBase.getBiome(configBiomeId14).biomeName,
+						BiomeGenBase.getBiome(configBiomeId14).getBiomeClass().getName()));
+
+			ACLogger.info("None of the needed biome IDs are occupied!");
+		} else {
+			ACLogger.info("Checking so that no other mod has overridden a used biome ID.");
+
+			if(BiomeGenBase.getBiomeGenArray()[configBiomeId1] != Darklands)
+				throw new RuntimeException(String.format("Biome ID %d was overridden by the biome %s (%s)!", configBiomeId1, BiomeGenBase.getBiome(configBiomeId1).biomeName,
+						BiomeGenBase.getBiome(configBiomeId1).getBiomeClass().getName()));
+			if(BiomeGenBase.getBiomeGenArray()[configBiomeId2] != Wastelands)
+				throw new RuntimeException(String.format("Biome ID %d was overridden by the biome %s (%s)!", configBiomeId2, BiomeGenBase.getBiome(configBiomeId2).biomeName,
+						BiomeGenBase.getBiome(configBiomeId2).getBiomeClass().getName()));
+			if(BiomeGenBase.getBiomeGenArray()[configBiomeId3] != Dreadlands)
+				throw new RuntimeException(String.format("Biome ID %d was overridden by the biome %s (%s)!", configBiomeId3, BiomeGenBase.getBiome(configBiomeId3).biomeName,
+						BiomeGenBase.getBiome(configBiomeId3).getBiomeClass().getName()));
+			if(BiomeGenBase.getBiomeGenArray()[configBiomeId4] != AbyDreadlands)
+				throw new RuntimeException(String.format("Biome ID %d was overridden by the biome %s (%s)!", configBiomeId4, BiomeGenBase.getBiome(configBiomeId4).biomeName,
+						BiomeGenBase.getBiome(configBiomeId4).getBiomeClass().getName()));
+			if(BiomeGenBase.getBiomeGenArray()[configBiomeId5] != ForestDreadlands)
+				throw new RuntimeException(String.format("Biome ID %d was overridden by the biome %s (%s)!", configBiomeId5, BiomeGenBase.getBiome(configBiomeId5).biomeName,
+						BiomeGenBase.getBiome(configBiomeId5).getBiomeClass().getName()));
+			if(BiomeGenBase.getBiomeGenArray()[configBiomeId6] != MountainDreadlands)
+				throw new RuntimeException(String.format("Biome ID %d was overridden by the biome %s (%s)!", configBiomeId6, BiomeGenBase.getBiome(configBiomeId6).biomeName,
+						BiomeGenBase.getBiome(configBiomeId6).getBiomeClass().getName()));
+			if(BiomeGenBase.getBiomeGenArray()[configBiomeId7] != DarklandsForest)
+				throw new RuntimeException(String.format("Biome ID %d was overridden by the biome %s (%s)!", configBiomeId7, BiomeGenBase.getBiome(configBiomeId7).biomeName,
+						BiomeGenBase.getBiome(configBiomeId7).getBiomeClass().getName()));
+			if(BiomeGenBase.getBiomeGenArray()[configBiomeId8] != DarklandsPlains)
+				throw new RuntimeException(String.format("Biome ID %d was overridden by the biome %s (%s)!", configBiomeId8, BiomeGenBase.getBiome(configBiomeId8).biomeName,
+						BiomeGenBase.getBiome(configBiomeId8).getBiomeClass().getName()));
+			if(BiomeGenBase.getBiomeGenArray()[configBiomeId9] != DarklandsHills)
+				throw new RuntimeException(String.format("Biome ID %d was overridden by the biome %s (%s)!", configBiomeId9, BiomeGenBase.getBiome(configBiomeId9).biomeName,
+						BiomeGenBase.getBiome(configBiomeId9).getBiomeClass().getName()));
+			if(BiomeGenBase.getBiomeGenArray()[configBiomeId10] != DarklandsMountains)
+				throw new RuntimeException(String.format("Biome ID %d was overridden by the biome %s (%s)!", configBiomeId10, BiomeGenBase.getBiome(configBiomeId10).biomeName,
+						BiomeGenBase.getBiome(configBiomeId10).getBiomeClass().getName()));
+			if(BiomeGenBase.getBiomeGenArray()[configBiomeId11] != corswamp)
+				throw new RuntimeException(String.format("Biome ID %d was overridden by the biome %s (%s)!", configBiomeId11, BiomeGenBase.getBiome(configBiomeId11).biomeName,
+						BiomeGenBase.getBiome(configBiomeId11).getBiomeClass().getName()));
+			if(BiomeGenBase.getBiomeGenArray()[configBiomeId13] != omothol)
+				throw new RuntimeException(String.format("Biome ID %d was overridden by the biome %s (%s)!", configBiomeId13, BiomeGenBase.getBiome(configBiomeId13).biomeName,
+						BiomeGenBase.getBiome(configBiomeId13).getBiomeClass().getName()));
+			if(BiomeGenBase.getBiomeGenArray()[configBiomeId14] != darkRealm)
+				throw new RuntimeException(String.format("Biome ID %d was overridden by the biome %s (%s)!", configBiomeId14, BiomeGenBase.getBiome(configBiomeId14).biomeName,
+						BiomeGenBase.getBiome(configBiomeId14).getBiomeClass().getName()));
+
+			ACLogger.info("None of the biome IDs has been overridden.");
+		}
 	}
 
 	private static int getUniqueEntityId() {
@@ -2021,7 +2121,7 @@ public class AbyssalCraft {
 		return startEntityId;
 	}
 
-	private static int getNextAvailablePotionId(){
+	private int getNextAvailablePotionId(){
 
 		int pot = Potion.potionTypes.length;
 		int i = 1;
@@ -2055,7 +2155,7 @@ public class AbyssalCraft {
 		return i;
 	}
 
-	private static int getNextAvailableEnchantmentId(){
+	private int getNextAvailableEnchantmentId(){
 
 		int i = 0;
 
@@ -2066,6 +2166,31 @@ public class AbyssalCraft {
 		} while(Enchantment.enchantmentsList[i] != null);
 
 		return i;
+	}
+
+	private void extendPotionArray(){
+		if(Potion.potionTypes.length < 128){
+			Potion[] potionTypes = null;
+			for (Field f : Potion.class.getDeclaredFields()) {
+				f.setAccessible(true);
+				try {
+					if (f.getName().equals("potionTypes") || f.getName().equals("field_76425_a")) {
+						Field modfield = Field.class.getDeclaredField("modifiers");
+						modfield.setAccessible(true);
+						modfield.setInt(f, f.getModifiers() & ~Modifier.FINAL);
+
+						potionTypes = (Potion[])f.get(null);
+						final Potion[] newPotionTypes = new Potion[128];
+						System.arraycopy(potionTypes, 0, newPotionTypes, 0, potionTypes.length);
+						f.set(null, newPotionTypes);
+					}
+				}
+				catch (Exception e) {
+					System.err.println("Whoops, something screwed up here, please report this to shinoow:");
+					System.err.println(e);
+				}
+			}
+		} else ACLogger.info("The potion array has already been extended (%d), so we're not doing it again.", Potion.potionTypes.length);
 	}
 
 	@SuppressWarnings("unchecked")

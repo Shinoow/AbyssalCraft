@@ -12,7 +12,6 @@
 package com.shinoow.abyssalcraft.api.ritual;
 
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemStack;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 

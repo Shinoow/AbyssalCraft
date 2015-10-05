@@ -69,28 +69,30 @@ public class TileStatueDirectional extends TEDirectional implements IEnergyManip
 	public void updateEntity(){
 		super.updateEntity();
 
-		List<EntityPlayer> players = worldObj.getEntitiesWithinAABB(EntityPlayer.class, worldObj.getBlock(xCoord, yCoord, zCoord).getCollisionBoundingBoxFromPool(worldObj, xCoord, yCoord, zCoord).expand(16, 16, 16));
+		if(worldObj.getBlock(xCoord, yCoord, zCoord).getCollisionBoundingBoxFromPool(worldObj, xCoord, yCoord, zCoord) != null){
+			List<EntityPlayer> players = worldObj.getEntitiesWithinAABB(EntityPlayer.class, worldObj.getBlock(xCoord, yCoord, zCoord).getCollisionBoundingBoxFromPool(worldObj, xCoord, yCoord, zCoord).expand(16, 16, 16));
 
-		for(EntityPlayer player : players)
-			if(EntityUtil.hasNecronomicon(player)){
-				ItemStack item = player.getCurrentEquippedItem();
-				if(item != null && item.getItem() instanceof IEnergyTransporter){
-					timer++;
-					if(timer >= 60){
-						timer = worldObj.rand.nextInt(10);
-						((IEnergyTransporter) item.getItem()).addEnergy(item, energyQuanta());
-						for(double i = 0; i <= 0.7; i += 0.03) {
-							int xPos = xCoord < player.posX ? 1 : xCoord > player.posX ? -1 : 0;
-							int yPos = yCoord < player.posY ? 1 : yCoord > player.posY ? -1 : 0;
-							int zPos = zCoord < player.posZ ? 1 : zCoord > player.posZ ? -1 : 0;
-							double x = i * Math.cos(i) / 2 * xPos;
-							double y = i * Math.tan(i) / 2 * yPos;
-							double z = i * Math.sin(i) / 2 * zPos;
-							worldObj.spawnParticle("largesmoke", xCoord + 0.5, yCoord + 0.5, zCoord + 0.5, x, y, z);
+			for(EntityPlayer player : players)
+				if(EntityUtil.hasNecronomicon(player)){
+					ItemStack item = player.getCurrentEquippedItem();
+					if(item != null && item.getItem() instanceof IEnergyTransporter){
+						timer++;
+						if(timer >= 60){
+							timer = worldObj.rand.nextInt(10);
+							((IEnergyTransporter) item.getItem()).addEnergy(item, energyQuanta());
+							for(double i = 0; i <= 0.7; i += 0.03) {
+								int xPos = xCoord < player.posX ? 1 : xCoord > player.posX ? -1 : 0;
+								int yPos = yCoord < player.posY ? 1 : yCoord > player.posY ? -1 : 0;
+								int zPos = zCoord < player.posZ ? 1 : zCoord > player.posZ ? -1 : 0;
+								double x = i * Math.cos(i) / 2 * xPos;
+								double y = i * Math.tan(i) / 2 * yPos;
+								double z = i * Math.sin(i) / 2 * zPos;
+								worldObj.spawnParticle("largesmoke", xCoord + 0.5, yCoord + 0.5, zCoord + 0.5, x, y, z);
+							}
 						}
 					}
 				}
-			}
+		}
 
 		TileEntity pedestal1 = worldObj.getTileEntity(xCoord, yCoord, zCoord + 3);
 		TileEntity pedestal2 = worldObj.getTileEntity(xCoord, yCoord, zCoord - 3);

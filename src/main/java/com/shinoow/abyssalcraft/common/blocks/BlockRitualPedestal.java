@@ -86,6 +86,7 @@ public class BlockRitualPedestal extends BlockContainer {
 			if(((TileEntityRitualPedestal)tile).getItem() != null){
 				player.inventory.addItemStackToInventory(((TileEntityRitualPedestal)tile).getItem());
 				((TileEntityRitualPedestal)tile).setItem(null);
+				world.playSoundEffect(x + 0.5, y + 0.5, z + 0.5, "random.pop", 0.5F, world.rand.nextFloat() - world.rand.nextFloat() * 0.2F + 1);
 				return true;
 			} else {
 				ItemStack heldItem = player.getHeldItem();
@@ -94,6 +95,7 @@ public class BlockRitualPedestal extends BlockContainer {
 					newItem.stackSize = 1;
 					((TileEntityRitualPedestal)tile).setItem(newItem);
 					player.inventory.decrStackSize(player.inventory.currentItem, 1);
+					world.playSoundEffect(x + 0.5, y + 0.5, z + 0.5, "random.pop", 0.5F, world.rand.nextFloat() - world.rand.nextFloat() * 0.2F + 1);
 					return true;
 				}
 			}

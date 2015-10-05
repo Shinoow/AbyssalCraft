@@ -195,10 +195,10 @@ public class AbyssalCraftEventHooks {
 						player.worldObj.getBiomeGenForCoords((int)player.posX, (int)player.posZ) == AbyssalCraft.DarklandsHills ||
 						player.worldObj.getBiomeGenForCoords((int)player.posX, (int)player.posZ) == AbyssalCraft.DarklandsForest)
 					if(rand.nextInt(1000) == 0)
-						if(helmet == null || helmet != null && helmet.getItem() != AbyssalCraft.helmet || helmet != null && helmet.getItem() != AbyssalCraft.helmetD
-						|| helmet != null && helmet.getItem() != AbyssalCraft.Corhelmet || helmet != null && helmet.getItem() != AbyssalCraft.CorhelmetP
-						|| helmet != null && helmet.getItem() != AbyssalCraft.Depthshelmet || helmet != null && helmet.getItem() != AbyssalCraft.dreadiumhelmet
-						|| helmet != null && helmet.getItem() != AbyssalCraft.dreadiumShelmet || helmet != null && helmet.getItem() != AbyssalCraft.ethHelmet)
+						if(helmet == null || helmet != null && helmet.getItem() != AbyssalCraft.helmet && helmet.getItem() != AbyssalCraft.helmetD
+						&& helmet.getItem() != AbyssalCraft.Corhelmet && helmet.getItem() != AbyssalCraft.CorhelmetP
+						&& helmet.getItem() != AbyssalCraft.Depthshelmet && helmet.getItem() != AbyssalCraft.dreadiumhelmet
+						&& helmet.getItem() != AbyssalCraft.dreadiumShelmet && helmet.getItem() != AbyssalCraft.ethHelmet)
 							if(!player.capabilities.isCreativeMode)
 								player.addPotionEffect(new PotionEffect(Potion.blindness.id, 100));
 				if(player.getActivePotionEffect(Potion.blindness) != null && player.getActivePotionEffect(Potion.blindness).getDuration() == 0)

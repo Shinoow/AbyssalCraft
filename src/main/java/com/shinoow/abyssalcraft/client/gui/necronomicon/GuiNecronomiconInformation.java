@@ -203,6 +203,8 @@ public class GuiNecronomiconInformation extends GuiNecronomicon {
 			} else if(button.id == 10){
 				ItemStack[] materials = {new ItemStack(AbyssalCraft.dreadstone), new ItemStack(AbyssalCraft.abydreadstone), new ItemStack(AbyssalCraft.abydreadore),
 						new ItemStack(AbyssalCraft.dreadore), new ItemStack(AbyssalCraft.dreadgrass), new ItemStack(AbyssalCraft.dreadsapling)};
+				CraftingStack dreadium = new CraftingStack(AbyssalCraft.dreadiumblock, AbyssalCraft.dreadiumingot, AbyssalCraft.dreadiumingot, AbyssalCraft.dreadiumingot, AbyssalCraft.dreadiumingot,
+						AbyssalCraft.dreadiumingot, AbyssalCraft.dreadiumingot, AbyssalCraft.dreadiumingot, AbyssalCraft.dreadiumingot, AbyssalCraft.dreadiumingot);
 				CraftingStack cryst = new CraftingStack(AbyssalCraft.crystallizer_on, AbyssalCraft.dreadbrick, AbyssalCraft.dreadbrick, AbyssalCraft.dreadbrick, AbyssalCraft.dreadiumblock,
 						Blocks.furnace, AbyssalCraft.dreadiumblock, AbyssalCraft.dreadbrick, AbyssalCraft.dreadbrick, AbyssalCraft.dreadbrick);
 				CraftingStack drc = new CraftingStack(AbyssalCraft.dreadcloth, Items.string, AbyssalCraft.dreadfragment, Items.string, AbyssalCraft.dreadfragment, Items.leather, AbyssalCraft.dreadfragment,
@@ -223,7 +225,7 @@ public class GuiNecronomiconInformation extends GuiNecronomicon {
 				CraftingStack omn = new CraftingStack(AbyssalCraft.necronomicon_omt, new ItemStack(AbyssalCraft.skin, 1, 2), new ItemStack(AbyssalCraft.skin, 1, 2), new ItemStack(AbyssalCraft.skin, 1, 2),
 						new ItemStack(AbyssalCraft.skin, 1, 2), AbyssalCraft.necronomicon_dre, new ItemStack(AbyssalCraft.skin, 1, 2), new ItemStack(AbyssalCraft.skin, 1, 2), new ItemStack(AbyssalCraft.skin, 1, 2),
 						new ItemStack(AbyssalCraft.skin, 1, 2));
-				CraftingStack[] recipes = CraftingStack.arrayFrom(cryst, drc, daltarb, daltart, dp, dh, db, oms, omn);
+				CraftingStack[] recipes = CraftingStack.arrayFrom(dreadium, cryst, drc, daltarb, daltart, dp, dh, db, oms, omn);
 				CraftingStack sh = new CraftingStack(AbyssalCraft.dreadiumShelmet, null, AbyssalCraft.dreadiumingot, null, AbyssalCraft.dreadplate, AbyssalCraft.dreadiumhelmet,
 						AbyssalCraft.dreadplate, null, null, null);
 				CraftingStack sp = new CraftingStack(AbyssalCraft.dreadiumSplate, AbyssalCraft.dreadplate, AbyssalCraft.dreadiumingot, AbyssalCraft.dreadplate, AbyssalCraft.dreadplate,
@@ -237,7 +239,7 @@ public class GuiNecronomiconInformation extends GuiNecronomicon {
 				PageData test1 = new PageData(6, NecronomiconText.LABEL_INFORMATION_MATERIALS, PageType.ENTRY, materials, NecronomiconText.DREADLANDS_MATERIALS);
 				PageData test2 = new PageData(2, NecronomiconText.LABEL_INFORMATION_PROGRESSION, NecronomiconText.DREADLANDS_PROGRESSION);
 				PageData test3 = new PageData(10, NecronomiconText.LABEL_INFORMATION_ENTITIES, PageType.INFO, NecronomiconResources.DREADLANDS_ENTITIES, NecronomiconText.DREADLANDS_ENTITIES);
-				PageData test4 = new PageData(9, NecronomiconText.LABEL_INFORMATION_SPECIAL_MATERIALS, PageType.CRAFTING, recipes, NecronomiconText.DREADLANDS_CRAFTING);
+				PageData test4 = new PageData(10, NecronomiconText.LABEL_INFORMATION_SPECIAL_MATERIALS, PageType.CRAFTING, recipes, NecronomiconText.DREADLANDS_CRAFTING);
 				PageData test5 = new PageData(5, NecronomiconText.LABEL_INFORMATION_ARMOR_TOOLS, PageType.CRAFTING, special, NecronomiconText.DREADLANDS_ARMOR_TOOLS);
 				NecroData data = new NecroData(NecronomiconText.LABEL_INFORMATION_DREADLANDS_TITLE, NecronomiconText.INFORMATION_DREADLANDS, test1, test2, test3, test4, test5);
 				mc.displayGuiScreen(new GuiNecronomiconEntry(getBookType(), data, new GuiNecronomiconInformation(getBookType()), AbyssalCraft.necronomicon_dre));

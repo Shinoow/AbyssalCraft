@@ -17,12 +17,14 @@ import java.util.List;
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
 import com.shinoow.abyssalcraft.api.integration.IACPlugin;
 import com.shinoow.abyssalcraft.common.util.ACLogger;
+import com.shinoow.abyssalcraft.integration.morph.ACMorph;
 
 import cpw.mods.fml.common.Loader;
 
 public class IntegrationHandler {
 
 	static boolean isNEILoaded = Loader.isModLoaded("NotEnoughItems");
+	static boolean isMorhpLoaded = Loader.isModLoaded("Morph");
 	static boolean isInvTweaksLoaded = Loader.isModLoaded("inventorytweaks");
 
 	static List<String> mods = new ArrayList<String>();
@@ -37,6 +39,11 @@ public class IntegrationHandler {
 			ACLogger.info("Not Enough Items is present, initializing informative stuff.");
 			//This part is handled by NEI, so this message is essentially useless :P
 			mods.add("Not Enough Items");
+		}
+		if(isMorhpLoaded){
+			ACLogger.info("Morph is present, initializing weird shape-shifting stuff.");
+			integrations.add(new ACMorph());
+			mods.add("Morph");
 		}
 		if(isInvTweaksLoaded){
 			ACLogger.info("Inventory Tweaks is present, initializing sorting stuff.");
