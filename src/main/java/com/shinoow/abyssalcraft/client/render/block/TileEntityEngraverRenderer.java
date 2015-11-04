@@ -44,6 +44,9 @@ public class TileEntityEngraverRenderer extends TileEntitySpecialRenderer {
 		GL11.glRotatef(180F, 0.0F, 0.0F, 1.0F);
 
 		Minecraft.getMinecraft().renderEngine.bindTexture(Resourcelocation);
+		TileEntityEngraver tile = (TileEntityEngraver)te;
+		int direction = tile.getDirection();
+		GL11.glRotatef(direction * 90, 0.0F, 1.0F, 0.0F);
 		model.render((Entity)null, 0.0F, 0.0F, -0.1F, 0.0F, 0.0F, 0.0625F);
 
 		GL11.glPopMatrix();

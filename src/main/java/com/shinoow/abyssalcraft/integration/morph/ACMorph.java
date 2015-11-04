@@ -20,6 +20,7 @@ import com.shinoow.abyssalcraft.api.integration.IACPlugin;
 import com.shinoow.abyssalcraft.client.model.entity.*;
 import com.shinoow.abyssalcraft.common.entity.*;
 import com.shinoow.abyssalcraft.common.entity.anti.*;
+import com.shinoow.abyssalcraft.common.entity.demon.*;
 import com.shinoow.abyssalcraft.common.util.ACLogger;
 
 import cpw.mods.fml.common.FMLCommonHandler;
@@ -31,7 +32,7 @@ public class ACMorph implements IACPlugin {
 	ModelRemnant modelRemnant = new ModelRemnant();
 	ModelSkeletonGoliath modelSkeletonGoliath = new ModelSkeletonGoliath(false);
 	ModelSacthoth modelSacthoth = new ModelSacthoth();
-	ModelJzahar modelJzahar = new ModelJzahar();
+	ModelJzahar modelJzahar = new ModelJzahar(false);
 	ModelShadowCreature modelShadowc = new ModelShadowCreature();
 	ModelShadowMonster modelShadowm = new ModelShadowMonster();
 	ModelShadowBeast modelShadowb = new ModelShadowBeast();
@@ -58,7 +59,7 @@ public class ACMorph implements IACPlugin {
 			Api.registerArmForModel(modelRemnant, modelRemnant.rightarm);
 			Api.registerArmForModel(modelSkeletonGoliath, modelSkeletonGoliath.rightarm);
 			Api.registerArmForModel(modelSacthoth, modelSacthoth.rightarm1);
-			Api.registerArmForModel(modelJzahar, modelJzahar.rightarm);
+			Api.registerArmForModel(modelJzahar, modelJzahar.arm);
 			Api.registerArmForModel(modelShadowc, modelShadowc.RightArm1);
 			Api.registerArmForModel(modelShadowm, modelShadowm.Rarm1);
 			Api.registerArmForModel(modelShadowb, modelShadowb.rarm1);
@@ -133,6 +134,10 @@ public class ACMorph implements IACPlugin {
 			Ability.mapAbilities(EntityGreaterDreadSpawn.class, hostile, fireImmunity);
 			Ability.mapAbilities(EntityLesserDreadbeast.class, hostile, fireImmunity);
 			Ability.mapAbilities(EntityLesserShoggoth.class, hostile, water);
+			Ability.mapAbilities(EntityEvilCow.class, hostile, fireImmunity);
+			Ability.mapAbilities(EntityEvilChicken.class, hostile, fireImmunity, chicken);
+			Ability.mapAbilities(EntityDemonCow.class, hostile, fireImmunity);
+			Ability.mapAbilities(EntityDemonChicken.class, hostile, fireImmunity, chicken);
 		}
 	}
 }

@@ -15,16 +15,13 @@ import java.util.Random;
 
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemStack;
-import net.minecraft.potion.PotionEffect;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
-import com.shinoow.abyssalcraft.api.entity.IDreadEntity;
 import com.shinoow.abyssalcraft.common.blocks.tile.TileEntityPSDL;
 
 public class BlockPSDL extends BlockContainer {
@@ -61,15 +58,6 @@ public class BlockPSDL extends BlockContainer {
 		if(AbyssalCraft.particleBlock)
 			if (par5Random.nextInt(10) == 0)
 				par1World.spawnParticle("largesmoke", par2 + par5Random.nextFloat(), par3 + 1.1F, par4 + par5Random.nextFloat(), 0.0D, 0.0D, 0.0D);
-	}
-
-	@Override
-	public void onEntityCollidedWithBlock(World par1World, int par2, int par3, int par4, Entity par5Entity) {
-		super.onEntityCollidedWithBlock(par1World, par2, par3, par4, par5Entity);
-
-		if(par5Entity instanceof IDreadEntity){}
-		else if(par5Entity instanceof EntityLivingBase)
-			((EntityLivingBase)par5Entity).addPotionEffect(new PotionEffect(AbyssalCraft.Dplague.id, 100));
 	}
 
 	@Override

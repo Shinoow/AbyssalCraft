@@ -30,9 +30,9 @@ import codechicken.nei.NEIServerUtils;
 import codechicken.nei.PositionedStack;
 import codechicken.nei.recipe.TemplateRecipeHandler;
 
+import com.shinoow.abyssalcraft.api.APIUtils;
 import com.shinoow.abyssalcraft.api.recipe.EngraverRecipes;
 import com.shinoow.abyssalcraft.client.gui.GuiEngraver;
-import com.shinoow.abyssalcraft.common.blocks.tile.TileEntityEngraver;
 
 public class EngraverRecipeHandler extends TemplateRecipeHandler
 {
@@ -162,7 +162,7 @@ public class EngraverRecipeHandler extends TemplateRecipeHandler
 		Set<Item> efuels = excludedFuels();
 		for (ItemStack item : ItemList.items)
 			if (!efuels.contains(item.getItem()))
-				if (TileEntityEngraver.isCoin(item))
+				if (APIUtils.isCoin(item))
 					afuels.add(new FuelPair(item.copy()));
 	}
 

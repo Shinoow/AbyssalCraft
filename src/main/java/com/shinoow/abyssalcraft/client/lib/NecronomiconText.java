@@ -191,8 +191,8 @@ public class NecronomiconText {
 
 	public static String ENTITY_ANTI_1 = translate("necronomicon.text.entity.anti.1");
 	public static String ENTITY_ANTI_2 = translate("necronomicon.text.entity.anti.2");
-	public static String ENTITY_EVIL_PIG_1 = translate("necronomicon.text.entity.evilpig.1");
-	public static String ENTITY_EVIL_PIG_2 = translate("necronomicon.text.entity.evilpig.2");
+	public static String ENTITY_EVIL_ANIMALS_1 = translate("necronomicon.text.entity.evilanimals.1");
+	public static String ENTITY_EVIL_ANIMALS_2 = translate("necronomicon.text.entity.evilanimals.2");
 	public static String ENTITY_ABYSSAL_ZOMBIE_1 = translate("necronomicon.text.entity.abyssalzombie.1");
 	public static String ENTITY_ABYSSAL_ZOMBIE_2 = translate("necronomicon.text.entity.abyssalzombie.2");
 	public static String ENTITY_DEPTHS_GHOUL_1 = translate("necronomicon.text.entity.depthsghoul.1");
@@ -211,8 +211,8 @@ public class NecronomiconText {
 	public static String ENTITY_DREADLING_2 = translate("necronomicon.text.entity.dreadling.2");
 	public static String ENTITY_DREAD_SPAWN_1 = translate("necronomicon.text.entity.dreadspawn.1");
 	public static String ENTITY_DREAD_SPAWN_2 = translate("necronomicon.text.entity.dreadspawn.2");
-	public static String ENTITY_DEMON_PIG_1 = translate("necronomicon.text.entity.demonpig.1");
-	public static String ENTITY_DEMON_PIG_2 = translate("necronomicon.text.entity.demonpig.2");
+	public static String ENTITY_DEMON_ANIMALS_1 = translate("necronomicon.text.entity.demonanimals.1");
+	public static String ENTITY_DEMON_ANIMALS_2 = translate("necronomicon.text.entity.demonanimals.2");
 	public static String ENTITY_SPAWN_OF_CHAGAROTH_1 = translate("necronomicon.text.entity.chagarothspawn.1");
 	public static String ENTITY_SPAWN_OF_CHAGAROTH_2 = translate("necronomicon.text.entity.chagarothspawn.2");
 	public static String ENTITY_FIST_OF_CHAGAROTH_1 = translate("necronomicon.text.entity.chagarothfist.1");
@@ -310,14 +310,14 @@ public class NecronomiconText {
 
 	public static String[] OVERWORLD_ENTITIES = {ENTITY_ABYSSAL_ZOMBIE_1, ENTITY_ABYSSAL_ZOMBIE_2, ENTITY_DEPTHS_GHOUL_1, ENTITY_DEPTHS_GHOUL_2,
 		ENTITY_SHADOW_CREATURE_1, ENTITY_SHADOW_CREATURE_2, ENTITY_SHADOW_MONSTER_1, ENTITY_SHADOW_MONSTER_2, ENTITY_SHADOW_BEAST_1,
-		ENTITY_SHADOW_BEAST_2, ENTITY_ANTI_1, ENTITY_ANTI_2, ENTITY_EVIL_PIG_1, ENTITY_EVIL_PIG_2, ENTITY_LESSER_SHOGGOTH_1,
+		ENTITY_SHADOW_BEAST_2, ENTITY_ANTI_1, ENTITY_ANTI_2, ENTITY_EVIL_ANIMALS_1, ENTITY_EVIL_ANIMALS_2, ENTITY_LESSER_SHOGGOTH_1,
 		ENTITY_LESSER_SHOGGOTH_2};
 	public static String[] ABYSSAL_WASTELAND_ENTITIES = {ENTITY_ABYSSAL_ZOMBIE_1, ENTITY_ABYSSAL_ZOMBIE_2, ENTITY_DEPTHS_GHOUL_1,
 		ENTITY_DEPTHS_GHOUL_2, ENTITY_SKELETON_GOLIATH_1, ENTITY_SKELETON_GOLIATH_2, ENTITY_SPECTRAL_DRAGON_1, ENTITY_SPECTRAL_DRAGON_2,
 		ENTITY_ASORAH_1, ENTITY_ASORAH_2, ENTITY_LESSER_SHOGGOTH_1, ENTITY_LESSER_SHOGGOTH_2};
 	public static String[] DREADLANDS_ENTITIES = {ENTITY_ABYSSALNITE_GOLEM_1, ENTITY_ABYSSALNITE_GOLEM_2, ENTITY_DREADED_ABYSSALNITE_GOLEM_1,
 		ENTITY_DREADED_ABYSSALNITE_GOLEM_2, ENTITY_DREADLING_1, ENTITY_DREADLING_2, ENTITY_DREAD_SPAWN_1, ENTITY_DREAD_SPAWN_2,
-		ENTITY_DEMON_PIG_1, ENTITY_DEMON_PIG_2, ENTITY_SPAWN_OF_CHAGAROTH_1, ENTITY_SPAWN_OF_CHAGAROTH_2, ENTITY_FIST_OF_CHAGAROTH_1,
+		ENTITY_DEMON_ANIMALS_1, ENTITY_DEMON_ANIMALS_2, ENTITY_SPAWN_OF_CHAGAROTH_1, ENTITY_SPAWN_OF_CHAGAROTH_2, ENTITY_FIST_OF_CHAGAROTH_1,
 		ENTITY_FIST_OF_CHAGAROTH_2, ENTITY_DREADGUARD_1, ENTITY_DREADGUARD_2, ENTITY_CHAGAROTH_1, ENTITY_CHAGAROTH_2,
 		ENTITY_LESSER_SHOGGOTH_1, ENTITY_LESSER_SHOGGOTH_2};
 	public static String[] OMOTHOL_ENTITIES = {ENTITY_REMNANT_1, ENTITY_REMNANT_2, ENTITY_OMOTHOL_GHOUL_1, ENTITY_OMOTHOL_GHOUL_2,

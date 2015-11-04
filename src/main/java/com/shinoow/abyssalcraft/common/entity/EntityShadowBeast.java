@@ -11,6 +11,7 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.common.entity;
 
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIAttackOnCollide;
@@ -67,6 +68,15 @@ public class EntityShadowBeast extends EntityMob implements IAntiEntity, ICorali
 	protected boolean isAIEnabled()
 	{
 		return true;
+	}
+
+	@Override
+	public boolean attackEntityAsMob(Entity par1Entity)
+	{
+		swingItem();
+		boolean flag = super.attackEntityAsMob(par1Entity);
+
+		return flag;
 	}
 
 	@Override

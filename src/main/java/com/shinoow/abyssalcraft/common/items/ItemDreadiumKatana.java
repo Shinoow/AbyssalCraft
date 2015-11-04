@@ -70,7 +70,7 @@ public class ItemDreadiumKatana extends Item {
 	@Override
 	public boolean getIsRepairable(ItemStack par1ItemStack, ItemStack par2ItemStack)
 	{
-		return AbyssalCraft.crystalDreadium == par2ItemStack.getItem() ? true : super.getIsRepairable(par1ItemStack, par2ItemStack);
+		return new ItemStack(AbyssalCraft.crystal, 1, 14) == par2ItemStack ? true : super.getIsRepairable(par1ItemStack, par2ItemStack);
 	}
 
 	@Override

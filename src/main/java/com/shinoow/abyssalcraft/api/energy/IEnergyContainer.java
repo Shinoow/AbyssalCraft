@@ -12,7 +12,7 @@
 package com.shinoow.abyssalcraft.api.energy;
 
 /**
- * Interface to use on blocks that can hold Potential Energy (WIP)<br>
+ * Interface to use on tile entities that can hold Potential Energy (WIP)<br>
  * WARNING: Any methods in this interface might end up getting removed,<br>
  * so I would suggest not using it until this text (and the WIP part) is removed.
  * 
@@ -23,23 +23,23 @@ package com.shinoow.abyssalcraft.api.energy;
 public interface IEnergyContainer {
 
 	/**
-	 * Gets the Potential Energy contained within the block
+	 * Gets the Potential Energy contained within the tile entity
 	 */
 	public float getContainedEnergy();
 
 	/**
-	 * Gets the maximum Potential Energy the block can hold
+	 * Gets the maximum Potential Energy the tile entity can hold
 	 */
 	public int getMaxEnergy();
 
 	/**
-	 * Adds Potential Energy to the block
+	 * Adds Potential Energy to the tile entity
 	 * @param energy Energy quanta to add
 	 */
 	public void addEnergy(float energy);
 
 	/**
-	 * Consumes (removes) Potential Energy from the block
+	 * Consumes (removes) Potential Energy from the tile entity
 	 * @param energy Energy quanta to consume
 	 */
 	public void consumeEnergy(float energy);

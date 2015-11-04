@@ -142,12 +142,6 @@ public class EntityDragonBoss extends EntityMob implements IBossDisplayData, IEn
 	}
 
 	@Override
-	protected void dropFewItems(boolean par1, int par2)
-	{
-		dropItem(AbyssalCraft.EoA, 1);
-	}
-
-	@Override
 	public void onDeath(DamageSource par1DamageSource)
 	{
 		if (par1DamageSource.getEntity() instanceof EntityPlayer)
@@ -557,9 +551,9 @@ public class EntityDragonBoss extends EntityMob implements IBossDisplayData, IEn
 					i -= j;
 					worldObj.spawnEntityInWorld(new EntityXPOrb(worldObj, posX, posY, posZ, j));
 					if(deathTicks == 100 || deathTicks == 120 || deathTicks == 140 || deathTicks == 160 || deathTicks == 180){
-						worldObj.spawnEntityInWorld(new EntityItem(worldObj, posX, posY, posZ, new ItemStack(AbyssalCraft.Cchunk)));
-						worldObj.spawnEntityInWorld(new EntityItem(worldObj, posX, posY, posZ, new ItemStack(AbyssalCraft.Cingot)));
-						worldObj.spawnEntityInWorld(new EntityItem(worldObj, posX, posY, posZ, new ItemStack(AbyssalCraft.Corflesh)));
+						worldObj.spawnEntityInWorld(new EntityItem(worldObj, posX + posneg(3), posY + rand.nextInt(3), posZ + posneg(3), new ItemStack(AbyssalCraft.Cchunk)));
+						worldObj.spawnEntityInWorld(new EntityItem(worldObj, posX + posneg(3), posY + rand.nextInt(3), posZ + posneg(3), new ItemStack(AbyssalCraft.Cingot)));
+						worldObj.spawnEntityInWorld(new EntityItem(worldObj, posX + posneg(3), posY + rand.nextInt(3), posZ + posneg(3), new ItemStack(AbyssalCraft.Corflesh)));
 					}
 				}
 			}
@@ -571,19 +565,14 @@ public class EntityDragonBoss extends EntityMob implements IBossDisplayData, IEn
 		moveEntity(0.0D, 0.10000000149011612D, 0.0D);
 		renderYawOffset = rotationYaw += 20.0F;
 
-		if (deathTicks == 200 && !worldObj.isRemote)
-		{
-			i = 1000;
-
-			while (i > 0)
-			{
-				j = EntityXPOrb.getXPSplit(i);
-				i -= j;
-				worldObj.spawnEntityInWorld(new EntityXPOrb(worldObj, posX, posY, posZ, j));
-			}
-
+		if (deathTicks == 200 && !worldObj.isRemote){
 			setDead();
+			worldObj.spawnEntityInWorld(new EntityItem(worldObj, posX, posY, posZ, new ItemStack(AbyssalCraft.EoA)));
 		}
+	}
+
+	private int posneg(int num){
+		return rand.nextBoolean() ? rand.nextInt(num) : -1 * rand.nextInt(num);
 	}
 
 	@Override

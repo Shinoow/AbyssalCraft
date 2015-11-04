@@ -129,12 +129,16 @@ public class ItemNecronomicon extends ItemACBasic implements IEnergyTransporter 
 	@Override
 	public void addEnergy(ItemStack stack, float energy) {
 		float contained = getContainedEnergy(stack);
-		stack.stackTagCompound.setFloat("PotEnergy", contained += energy);
+		if(contained + energy >= getMaxEnergy(stack))
+			stack.stackTagCompound.setFloat("PotEnergy", getMaxEnergy(stack));
+		else stack.stackTagCompound.setFloat("PotEnergy", contained += energy);
 	}
 
 	@Override
 	public void consumeEnergy(ItemStack stack, float energy) {
 		float contained = getContainedEnergy(stack);
-		stack.stackTagCompound.setFloat("PotEnergy", contained -= energy);
+		if(contained - energy < 0)
+			stack.stackTagCompound.setFloat("PotEnergy", 0);
+		else stack.stackTagCompound.setFloat("PotEnergy", contained -= energy);
 	}
 }

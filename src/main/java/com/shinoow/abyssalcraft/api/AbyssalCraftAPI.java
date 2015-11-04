@@ -57,7 +57,7 @@ public class AbyssalCraftAPI {
 	/**
 	 * String used to specify the API version in the "package-info.java" classes
 	 */
-	public static final String API_VERSION = "1.4.5";
+	public static final String API_VERSION = "1.5";
 
 	/**
 	 * Enchantment IDs, first one is the Coralium enchantment, second Dread enchantment,
@@ -727,7 +727,8 @@ public class AbyssalCraftAPI {
 			"demonpig", "gskeleton", "chagarothspawn", "chagarothfist", "chagaroth", "shadowbeast", "shadowboss",
 			"antiabyssalzombie", "antibat", "antichicken", "anticow", "anticreeper", "antighoul", "antipig", "antiplayer",
 			"antiskeleton", "antispider", "antizombie", "lessershoggoth", "shadowtitan", "omotholwarden", "jzaharminion",
-			"omotholghoul", "remnant", "greaterdreadspawn", "lesserdreadbeast"};
+			"omotholghoul", "remnant", "greaterdreadspawn", "lesserdreadbeast", "evilcow", "evilchicken", "demoncow",
+		"demonchicken"};
 
 		public static String depths_ghoul = mobNames[0];
 		public static String evil_pig = mobNames[1];
@@ -768,6 +769,10 @@ public class AbyssalCraftAPI {
 		public static String remnant = mobNames[36];
 		public static String greater_dread_spawn = mobNames[37];
 		public static String lesser_dreadbeast = mobNames[38];
+		public static String evil_cow = mobNames[39];
+		public static String evil_chicken = mobNames[40];
+		public static String demon_cow = mobNames[41];
+		public static String demon_chicken = mobNames[42];
 	}
 
 	/**

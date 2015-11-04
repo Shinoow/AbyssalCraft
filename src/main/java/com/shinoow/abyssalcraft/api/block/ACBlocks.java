@@ -149,6 +149,7 @@ public class ACBlocks {
 	public static Block shub_niggurath_statue = getBlock("shubniggurathstatue");
 	public static Block monolith_stone = getBlock("monolithstone");
 	public static Block energy_pedestal = getBlock("energypedestal");
+	public static Block monolith_pillar = getBlock("monolithpillar");
 
 	private static Block getBlock(String name){
 		return GameRegistry.findBlock("abyssalcraft", name);

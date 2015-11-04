@@ -37,6 +37,7 @@ import net.minecraftforge.common.ForgeModContainer;
 import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
 import com.shinoow.abyssalcraft.api.entity.*;
+import com.shinoow.abyssalcraft.common.entity.demon.*;
 import com.shinoow.abyssalcraft.common.util.EntityUtil;
 import com.shinoow.abyssalcraft.common.world.gen.WorldGenShoggothMonolith;
 
@@ -218,35 +219,43 @@ public class EntityLesserShoggoth extends EntityMob implements ICoraliumEntity, 
 			y = MathHelper.floor_double(posY);
 			z = MathHelper.floor_double(posZ + (l / 2 % 2 * 2 - 1) * 0.25F);
 
-			if(!worldObj.getBlock(x, y - 1, z).getMaterial().isLiquid() && worldObj.getBlock(x, y - 1, z).getMaterial() != Material.air
-					&& !worldObj.getBlock(x, y - 1, z).hasTileEntity(worldObj.getBlockMetadata(x, y - 1, z)) && !blockBlacklist.contains(worldObj.getBlock(x, y - 1, z))
-					&& worldObj.getBlock(x, y - 1, z).isOpaqueCube() && worldObj.getBlock(x, y - 1, z).renderAsNormalBlock())
-				worldObj.setBlock(x, y - 1, z, AbyssalCraft.shoggothBlock);
+			spawnOoze(x, y - 1, z);
 			if(!isChild()){
-				if(!worldObj.getBlock(x - 1, y - 1, z).getMaterial().isLiquid() && worldObj.getBlock(x - 1, y - 1, z).getMaterial() != Material.air
-						&& !worldObj.getBlock(x - 1, y - 1, z).hasTileEntity(worldObj.getBlockMetadata(x - 1, y - 1, z)) && !blockBlacklist.contains(worldObj.getBlock(x - 1, y - 1, z))
-						&& worldObj.getBlock(x - 1, y - 1, z).isOpaqueCube() && worldObj.getBlock(x - 1, y - 1, z).renderAsNormalBlock())
-					worldObj.setBlock(x - 1, y - 1, z, AbyssalCraft.shoggothBlock);
-				if(!worldObj.getBlock(x, y - 1, z - 1).getMaterial().isLiquid() && worldObj.getBlock(x, y - 1, z - 1).getMaterial() != Material.air
-						&& !worldObj.getBlock(x, y - 1, z - 1).hasTileEntity(worldObj.getBlockMetadata(x, y - 1, z - 1)) && !blockBlacklist.contains(worldObj.getBlock(x, y - 1, z - 1))
-						&& worldObj.getBlock(x, y - 1, z - 1).isOpaqueCube() && worldObj.getBlock(x, y - 1, z - 1).renderAsNormalBlock())
-					worldObj.setBlock(x, y - 1, z - 1, AbyssalCraft.shoggothBlock);
-				if(!worldObj.getBlock(x - 1, y - 1, z - 1).getMaterial().isLiquid() && worldObj.getBlock(x - 1, y - 1, z - 1).getMaterial() != Material.air
-						&& !worldObj.getBlock(x - 1, y - 1, z - 1).hasTileEntity(worldObj.getBlockMetadata(x - 1, y - 1, z - 1)) && !blockBlacklist.contains(worldObj.getBlock(x - 1, y - 1, z - 1))
-						&& worldObj.getBlock(x - 1, y - 1, z - 1).isOpaqueCube() && worldObj.getBlock(x - 1, y - 1, z - 1).renderAsNormalBlock())
-					worldObj.setBlock(x - 1, y - 1, z - 1, AbyssalCraft.shoggothBlock);
+				spawnOoze(x - 1, y - 1, z);
+				spawnOoze(x, y - 1, z - 1);
+				spawnOoze(x - 1, y - 1, z - 1);
 			}
 		}
 
 		if(monolithTimer >= 1800){
 			monolithTimer = 0;
 			if(worldObj.getEntitiesWithinAABB(getClass(), boundingBox.expand(32D, 32D, 32D)).size() > 5 && !isChild()){
-				for(EntityLesserShoggoth shoggoth : (List<EntityLesserShoggoth>)worldObj.getEntitiesWithinAABB(getClass(), boundingBox.expand(30F, 30F, 30F)))
+				for(EntityLesserShoggoth shoggoth : (List<EntityLesserShoggoth>)worldObj.getEntitiesWithinAABB(getClass(), boundingBox.expand(32D, 32D, 32D)))
 					shoggoth.reduceMonolithTimer();
 				if(!worldObj.isRemote)
 					new WorldGenShoggothMonolith().generate(worldObj, rand, x + 3, y, z + 3);
 			}
 		}
+	}
+
+	/**
+	 * Checks if a Lesser Shoggoth can generate ooze at the specific coordinates
+	 * @param x X-coord
+	 * @param y Y-coord
+	 * @param z Z-coord
+	 */
+	private void spawnOoze(int x, int y, int z){
+		Block block = worldObj.getBlock(x, y, z);
+		if(AbyssalCraft.shoggothOoze)
+			if(!block.getMaterial().isLiquid() && block.getMaterial() != Material.air && !block.hasTileEntity(worldObj.getBlockMetadata(x, y, z))
+			&& block.isOpaqueCube() && block.renderAsNormalBlock() && block.getCollisionBoundingBoxFromPool(worldObj, x, y, z) != null)
+				if(block.getMaterial() == Material.leaves && AbyssalCraft.oozeLeaves || block.getMaterial() == Material.grass && AbyssalCraft.oozeGrass
+				|| block.getMaterial() == Material.ground && AbyssalCraft.oozeGround || block.getMaterial() == Material.sand && AbyssalCraft.oozeSand
+				|| block.getMaterial() == Material.rock && AbyssalCraft.oozeRock || block.getMaterial() == Material.cloth && AbyssalCraft.oozeCloth
+				|| block.getMaterial() == Material.wood && AbyssalCraft.oozeWood || block.getMaterial() == Material.gourd && AbyssalCraft.oozeGourd
+				|| block.getMaterial() == Material.iron && AbyssalCraft.oozeIron || block.getMaterial() == Material.clay && AbyssalCraft.oozeClay)
+					if(!blockBlacklist.contains(block) && !worldObj.isRemote)
+						worldObj.setBlock(x, y, z, AbyssalCraft.shoggothBlock);
 	}
 
 	/**
@@ -425,7 +434,9 @@ public class EntityLesserShoggoth extends EntityMob implements ICoraliumEntity, 
 		noms.add(EntityAmbientCreature.class);
 		noms.add(EntityWaterMob.class);
 		noms.add(EntityEvilpig.class);
-		noms.add(EntityDemonPig.class);
+		noms.add(EntityEvilCow.class);
+		noms.add(EntityEvilChicken.class);
+		noms.add(EntityDemonAnimal.class);
 		noms.addAll(AbyssalCraftAPI.getShoggothFood());
 
 		blockBlacklist.add(AbyssalCraft.shoggothBlock);

@@ -23,13 +23,13 @@ import net.minecraft.world.gen.feature.WorldGenMinable;
 import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.common.entity.EntityAbygolem;
 import com.shinoow.abyssalcraft.common.entity.EntityChagarothFist;
-import com.shinoow.abyssalcraft.common.entity.EntityDemonPig;
 import com.shinoow.abyssalcraft.common.entity.EntityDreadSpawn;
 import com.shinoow.abyssalcraft.common.entity.EntityDreadgolem;
 import com.shinoow.abyssalcraft.common.entity.EntityDreadguard;
 import com.shinoow.abyssalcraft.common.entity.EntityDreadling;
 import com.shinoow.abyssalcraft.common.entity.EntityGreaterDreadSpawn;
 import com.shinoow.abyssalcraft.common.entity.EntityLesserDreadbeast;
+import com.shinoow.abyssalcraft.common.entity.demon.EntityDemonPig;
 
 public class BiomeGenDreadlandsBase extends BiomeGenBase {
 

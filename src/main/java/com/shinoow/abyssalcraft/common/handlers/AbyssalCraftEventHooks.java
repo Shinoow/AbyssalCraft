@@ -88,9 +88,20 @@ public class AbyssalCraftEventHooks {
 			event.entityPlayer.addStat(AbyssalCraft.mineDS, 1);
 		if(event.item.getEntityItem().getItem() == Item.getItemFromBlock(AbyssalCraft.abyore))
 			event.entityPlayer.addStat(AbyssalCraft.mineAby, 1);
-		if(event.item.getEntityItem().getItem() == AbyssalCraft.Coralium)
+		if(event.item.getEntityItem().getItem() == AbyssalCraft.Coralium ||
+				event.item.getEntityItem().getItem() == AbyssalCraft.Coraliumcluster2 ||
+				event.item.getEntityItem().getItem() == AbyssalCraft.Coraliumcluster3 ||
+				event.item.getEntityItem().getItem() == AbyssalCraft.Coraliumcluster4 ||
+				event.item.getEntityItem().getItem() == AbyssalCraft.Coraliumcluster5 ||
+				event.item.getEntityItem().getItem() == AbyssalCraft.Coraliumcluster6 ||
+				event.item.getEntityItem().getItem() == AbyssalCraft.Coraliumcluster7 ||
+				event.item.getEntityItem().getItem() == AbyssalCraft.Coraliumcluster8 ||
+				event.item.getEntityItem().getItem() == AbyssalCraft.Coraliumcluster9 ||
+				event.item.getEntityItem().getItem() == Item.getItemFromBlock(AbyssalCraft.Coraliumore))
 			event.entityPlayer.addStat(AbyssalCraft.mineCorgem, 1);
-		if(event.item.getEntityItem().getItem() == Item.getItemFromBlock(AbyssalCraft.AbyLCorOre))
+		if(event.item.getEntityItem().getItem() == Item.getItemFromBlock(AbyssalCraft.AbyLCorOre) ||
+				event.item.getEntityItem().getItem() == Item.getItemFromBlock(AbyssalCraft.AbyPCorOre) ||
+				event.item.getEntityItem().getItem() == Item.getItemFromBlock(AbyssalCraft.AbyCorOre))
 			event.entityPlayer.addStat(AbyssalCraft.mineCor, 1);
 		if(event.item.getEntityItem().getItem() == AbyssalCraft.shadowgem)
 			event.entityPlayer.addStat(AbyssalCraft.shadowGems, 1);
@@ -108,6 +119,8 @@ public class AbyssalCraftEventHooks {
 			event.entityPlayer.addStat(AbyssalCraft.dreadium, 1);
 		if(event.item.getEntityItem().getItem() == AbyssalCraft.ethaxiumIngot)
 			event.entityPlayer.addStat(AbyssalCraft.eth, 1);
+		if(event.item.getEntityItem().getItem() == AbyssalCraft.necronomicon)
+			event.entityPlayer.addStat(AbyssalCraft.necro, 1);
 		if(event.item.getEntityItem().getItem() == Item.getItemFromBlock(AbyssalCraft.DGhead))
 			event.entityPlayer.addStat(AbyssalCraft.ghoulhead, 1);
 		if(event.item.getEntityItem().getItem() == Item.getItemFromBlock(AbyssalCraft.Phead))
@@ -373,10 +386,10 @@ public class AbyssalCraftEventHooks {
 	public void onRitualPerformed(RitualEvent.Post event){
 		if(event.ritual instanceof NecronomiconSummonRitual){
 			event.entityPlayer.addStat(AbyssalCraft.ritualSummon, 1);
-			if(event.ritual.getUnlocalizedName().endsWith("summonSacthoth"))
+			if(event.ritual.getUnlocalizedName().substring(10).equals("summonSacthoth"))
 				if(event.world.isRemote)
 					SpecialTextUtil.SacthothGroup(event.world, StatCollector.translateToLocal("message.sacthoth.spawn.1"));
-			if(event.ritual.getUnlocalizedName().endsWith("summonAsorah")){
+			if(event.ritual.getUnlocalizedName().substring(10).equals("summonAsorah")){
 				if(event.world.isRemote)
 					SpecialTextUtil.AsorahGroup(event.world, StatCollector.translateToLocal("message.asorah.spawn"));
 				event.entityPlayer.addStat(AbyssalCraft.summonAsorah, 1);

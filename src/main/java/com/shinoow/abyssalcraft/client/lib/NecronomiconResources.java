@@ -26,7 +26,7 @@ public class NecronomiconResources {
 
 	//Overworld entities (only going to use one picture for the anti-entities)
 	public static final ResourceLocation ANTI_ENTITIES = new ResourceLocation("abyssalcraft", "textures/gui/necronomicon/anti-entities.png");
-	public static final ResourceLocation EVIL_PIG = new ResourceLocation("abyssalcraft", "textures/gui/necronomicon/evil-pig.png");
+	public static final ResourceLocation EVIL_ANIMALS = new ResourceLocation("abyssalcraft", "textures/gui/necronomicon/evil-animals.png");
 	public static final ResourceLocation LESSER_SHOGGOTH = new ResourceLocation("abyssalcraft", "textures/gui/necronomicon/lesser-shoggoth.png");
 
 	//Abyssal Wasteland entities (making entries for vanilla mobs is lethally hipster)
@@ -42,7 +42,7 @@ public class NecronomiconResources {
 	public static final ResourceLocation DREADED_ABYSSALNITE_GOLEM = new ResourceLocation("abyssalcraft", "textures/gui/necronomicon/dreaded-abyssalnite-golem.png");
 	public static final ResourceLocation DREADLING = new ResourceLocation("abyssalcraft", "textures/gui/necronomicon/dreadling.png");
 	public static final ResourceLocation DREAD_SPAWN = new ResourceLocation("abyssalcraft", "textures/gui/necronomicon/dread-spawn.png");
-	public static final ResourceLocation DEMON_PIG = new ResourceLocation("abyssalcraft", "textures/gui/necronomicon/demon-pig.png");
+	public static final ResourceLocation DEMON_ANIMALS = new ResourceLocation("abyssalcraft", "textures/gui/necronomicon/demon-animals.png");
 	public static final ResourceLocation SPAWN_OF_CHAGAROTH = new ResourceLocation("abyssalcraft", "textures/gui/necronomicon/spawn-of-chagaroth.png");
 	public static final ResourceLocation FIST_OF_CHAGAROTH = new ResourceLocation("abyssalcraft", "textures/gui/necronomicon/fist-of-chagaroth.png");
 	public static final ResourceLocation DREADGUARD = new ResourceLocation("abyssalcraft", "textures/gui/necronomicon/dreadguard.png");
@@ -98,13 +98,13 @@ public class NecronomiconResources {
 	public static final ResourceLocation CRYSTALLIZATION = new ResourceLocation("abyssalcraft", "textures/gui/necronomicon/crystallization.png");
 
 	public static final ResourceLocation[] OVERWORLD_ENTITIES = {ABYSSAL_ZOMBIE, DEPTHS_GHOUL, SHADOW_CREATURE, SHADOW_MONSTER, SHADOW_BEAST,
-		ANTI_ENTITIES, EVIL_PIG, LESSER_SHOGGOTH};
+		ANTI_ENTITIES, EVIL_ANIMALS, LESSER_SHOGGOTH};
 
 	public static final ResourceLocation[] ABYSSAL_WASTELAND_ENTITIES = {ABYSSAL_ZOMBIE, DEPTHS_GHOUL, SKELETON_GOLIATH, SPECTRAL_DRAGON, ASORAH,
 		LESSER_SHOGGOTH_ABYSSAL};
 
 	public static final ResourceLocation[] DREADLANDS_ENTITIES = {ABYSSALNITE_GOLEM, DREADED_ABYSSALNITE_GOLEM, DREADLING, DREAD_SPAWN,
-		DEMON_PIG, SPAWN_OF_CHAGAROTH, FIST_OF_CHAGAROTH, DREADGUARD, CHAGAROTH, LESSER_SHOGGOTH_DREADED};
+		DEMON_ANIMALS, SPAWN_OF_CHAGAROTH, FIST_OF_CHAGAROTH, DREADGUARD, CHAGAROTH, LESSER_SHOGGOTH_DREADED};
 
 	public static final ResourceLocation[] OMOTHOL_ENTITIES = {REMNANT, OMOTHOL_GHOUL, OMOTHOL_WARDEN, MINION_OF_THE_GATEKEEPER, JZAHAR,
 		LESSER_SHOGGOTH_OMOTHOL};

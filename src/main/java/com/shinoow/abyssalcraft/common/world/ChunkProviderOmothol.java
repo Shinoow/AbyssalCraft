@@ -14,6 +14,9 @@ package com.shinoow.abyssalcraft.common.world;
 import java.util.List;
 import java.util.Random;
 
+import com.shinoow.abyssalcraft.AbyssalCraft;
+import com.shinoow.abyssalcraft.common.structures.StructureShoggothPit;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockFalling;
 import net.minecraft.block.material.Material;
@@ -26,15 +29,7 @@ import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraft.world.gen.NoiseGenerator;
 import net.minecraft.world.gen.NoiseGeneratorOctaves;
-import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.event.terraingen.ChunkProviderEvent;
-import net.minecraftforge.event.terraingen.PopulateChunkEvent;
 import net.minecraftforge.event.terraingen.TerrainGen;
-
-import com.shinoow.abyssalcraft.AbyssalCraft;
-import com.shinoow.abyssalcraft.common.structures.StructureShoggothPit;
-
-import cpw.mods.fml.common.eventhandler.Event.Result;
 
 public class ChunkProviderOmothol implements IChunkProvider
 {
@@ -130,9 +125,6 @@ public class ChunkProviderOmothol implements IChunkProvider
 
 	public void replaceBlocksForBiome(int x, int z, Block[] par3BlockArray, BiomeGenBase[] par4BiomeArray)
 	{
-		ChunkProviderEvent.ReplaceBiomeBlocks event = new ChunkProviderEvent.ReplaceBiomeBlocks(this, x, z, par3BlockArray, par4BiomeArray);
-		MinecraftForge.EVENT_BUS.post(event);
-		if (event.getResult() == Result.DENY) return;
 
 		for (int k = 0; k < 16; ++k)
 			for (int l = 0; l < 16; ++l)
@@ -295,8 +287,6 @@ public class ChunkProviderOmothol implements IChunkProvider
 	{
 		BlockFalling.fallInstantly = true;
 
-		MinecraftForge.EVENT_BUS.post(new PopulateChunkEvent.Pre(par1IChunkProvider, worldObj, worldObj.rand, x, z, false));
-
 		int k = x * 16;
 		int l = z * 16;
 		BiomeGenBase biomegenbase = worldObj.getBiomeGenForCoords(k + 16, l + 16);
@@ -311,8 +301,6 @@ public class ChunkProviderOmothol implements IChunkProvider
 		}
 
 		biomegenbase.decorate(worldObj, worldObj.rand, k, l);
-
-		MinecraftForge.EVENT_BUS.post(new PopulateChunkEvent.Post(par1IChunkProvider, worldObj, worldObj.rand, x, z, false));
 
 		BlockFalling.fallInstantly = false;
 	}

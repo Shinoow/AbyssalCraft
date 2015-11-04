@@ -11,9 +11,13 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.api;
 
-import com.shinoow.abyssalcraft.api.item.ICrystal;
-
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.oredict.OreDictionary;
+
+import com.shinoow.abyssalcraft.api.item.ACItems;
+import com.shinoow.abyssalcraft.api.item.ICrystal;
+import com.shinoow.abyssalcraft.api.recipe.EngraverRecipes;
 
 /**
  * Utilities for the AbyssalCraft API
@@ -36,5 +40,34 @@ public class APIUtils {
 		for(ItemStack crystal: AbyssalCraftAPI.getCrystals())
 			return crystal.isItemEqual(item);
 		return false;
+	}
+
+	/**
+	 * Checks if the ItemStack is a Coin
+	 * @param item ItemStack to check
+	 * @return True if the ItemStack is a Coin, otherwise false
+	 * 
+	 * @since 1.5
+	 */
+	public static boolean isCoin(ItemStack item){
+		for(ItemStack coin : EngraverRecipes.instance().getCoinList())
+			if(coin.getItem() == item.getItem() && (coin.getItemDamage() == OreDictionary.WILDCARD_VALUE
+			|| coin.getItemDamage() == item.getItemDamage()))
+				return true;
+		return false;
+	}
+
+	/**
+	 * Checks if the Player has a Necronomicon<br>
+	 * (Copy of EntityUtil.hasNecronomicon())
+	 * @param player The Player to check
+	 * @return True if the Player has a Necronomicon, otherwise false
+	 * 
+	 * @since 1.5
+	 */
+	public static boolean hasNecronomicon(EntityPlayer player){
+		return player.inventory.hasItem(ACItems.necronomicon) || player.inventory.hasItem(ACItems.abyssal_wasteland_necronomicon)
+				|| player.inventory.hasItem(ACItems.dreadlands_necronomicon) || player.inventory.hasItem(ACItems.omothol_necronomicon)
+				|| player.inventory.hasItem(ACItems.abyssalnomicon);
 	}
 }

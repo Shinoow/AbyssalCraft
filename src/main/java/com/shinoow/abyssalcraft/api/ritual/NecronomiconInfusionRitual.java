@@ -25,8 +25,6 @@ import net.minecraft.world.World;
  */
 public class NecronomiconInfusionRitual extends NecronomiconCreationRitual {
 
-	private Object sacrifice;
-
 	/**
 	 * A Necronomicon Infusion Ritual
 	 * @param unlocalizedName A string representing the ritual name
@@ -71,14 +69,6 @@ public class NecronomiconInfusionRitual extends NecronomiconCreationRitual {
 	 */
 	public NecronomiconInfusionRitual(String unlocalizedName, int bookType, float requiredEnergy, ItemStack item, Object sacrifice, Object...offerings) {
 		this(unlocalizedName, bookType, -1, requiredEnergy, item, sacrifice, offerings);
-	}
-
-	/**
-	 * Getter for the sacrifice
-	 * @return A ItemStack representing the item to be infused
-	 */
-	public Object getSacrifice(){
-		return sacrifice;
 	}
 
 	@Override

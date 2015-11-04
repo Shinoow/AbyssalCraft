@@ -23,6 +23,7 @@ import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.world.EnumDifficulty;
 
 public class TileEntityShoggothBiomass extends TileEntity {
 
@@ -60,21 +61,22 @@ public class TileEntityShoggothBiomass extends TileEntity {
 
 	@Override
 	public void updateEntity() {
-		cooldown++;
-		if (cooldown >= 400) {
-			cooldown = worldObj.rand.nextInt(10);
-			resetNearbyBiomass(true);
-			if(!worldObj.isRemote)
-				if(worldObj.getEntitiesWithinAABB(EntityLesserShoggoth.class, worldObj.getBlock(xCoord, yCoord, zCoord).getCollisionBoundingBoxFromPool(worldObj, xCoord, yCoord, zCoord).expand(16, 16, 16)).size() <= 6){
-					EntityLesserShoggoth mob = new EntityLesserShoggoth(worldObj);
-					setPosition(mob, xCoord, yCoord, zCoord);
-					mob.onSpawnWithEgg((IEntityLivingData)null);
-					worldObj.spawnEntityInWorld(mob);
-					spawnedShoggoths++;
-					if(spawnedShoggoths >= 5)
-						worldObj.setBlock(xCoord, yCoord, zCoord, AbyssalCraft.monolithStone, 0, 2);
-				}
-
+		if(worldObj.difficultySetting != EnumDifficulty.PEACEFUL){
+			cooldown++;
+			if (cooldown >= 400) {
+				cooldown = worldObj.rand.nextInt(10);
+				resetNearbyBiomass(true);
+				if(!worldObj.isRemote)
+					if(worldObj.getEntitiesWithinAABB(EntityLesserShoggoth.class, worldObj.getBlock(xCoord, yCoord, zCoord).getCollisionBoundingBoxFromPool(worldObj, xCoord, yCoord, zCoord).expand(16, 16, 16)).size() <= 6){
+						EntityLesserShoggoth mob = new EntityLesserShoggoth(worldObj);
+						setPosition(mob, xCoord, yCoord, zCoord);
+						mob.onSpawnWithEgg((IEntityLivingData)null);
+						worldObj.spawnEntityInWorld(mob);
+						spawnedShoggoths++;
+						if(spawnedShoggoths >= 5)
+							worldObj.setBlock(xCoord, yCoord, zCoord, AbyssalCraft.monolithStone, 0, 2);
+					}
+			}
 		}
 	}
 

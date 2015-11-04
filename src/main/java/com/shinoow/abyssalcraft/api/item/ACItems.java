@@ -196,23 +196,33 @@ public class ACItems {
 	public static Item essence = getItem("essence");
 	/** Metadata Item, 0 = Abyssal Wasteland, 1 = Dreadlands, 2 = Omothol */
 	public static Item skin = getItem("skin");
+	/** Metadata Item, 0 = empty, 1 = range, 2 = duration, 3 = power */
+	public static Item ritual_charm = getItem("charm");
+	/** Metadata Item, 0 = empty, 1 = range, 2 = duration, 3 = power */
+	public static Item cthulhu_charm = getItem("cthulhucharm");
+	/** Metadata Item, 0 = empty, 1 = range, 2 = duration, 3 = power */
+	public static Item hastur_charm = getItem("hasturcharm");
+	/** Metadata Item, 0 = empty, 1 = range, 2 = duration, 3 = power */
+	public static Item jzahar_charm = getItem("jzaharcharm");
+	/** Metadata Item, 0 = empty, 1 = range, 2 = duration, 3 = power */
+	public static Item azathoth_charm = getItem("azathothcharm");
+	/** Metadata Item, 0 = empty, 1 = range, 2 = duration, 3 = power */
+	public static Item nyarlathotep_charm = getItem("nyarlathotepcharm");
+	/** Metadata Item, 0 = empty, 1 = range, 2 = duration, 3 = power */
+	public static Item yog_sothoth_charm = getItem("yogsothothcharm");
+	/** Metadata Item, 0 = empty, 1 = range, 2 = duration, 3 = power */
+	public static Item shub_niggurath_charm = getItem("shubniggurathcharm");
+	public static Item hastur_engraved_coin = getItem("hasturcoin");
+	public static Item azathoth_engraved_coin = getItem("azathothcoin");
+	public static Item nyarlathotep_engraved_coin = getItem("nyarlathotepcoin");
+	public static Item yog_sothoth_engraved_coin = getItem("yogsothothcoin");
+	public static Item shub_niggurath_engraved_coin = getItem("shubniggurathcoin");
+	public static Item hastur_engraving = getItem("engraving_hastur");
+	public static Item azathoth_engraving = getItem("engraving_azathoth");
+	public static Item nyarlathotep_engraving = getItem("engraving_nyarlathotep");
+	public static Item yog_sothoth_engraving = getItem("engraving_yogsothoth");
+	public static Item shub_niggurath_engraving = getItem("engraving_shubniggurath");
 	//	public static Item shadow_titan_armor_plate = getItem("shadowplate");
-
-	//TODO Remove in next version
-	@Deprecated
-	public static Item crystallized_iron = getItem("crystaliron"), crystallized_gold = getItem("crystalgold"),
-	crystallized_sulfur = getItem("crystalsulfur"), crystallized_carbon = getItem("crystalcarbon"),
-	crystallized_oxygen = getItem("crystaloxygen"), crystallized_hydrogen = getItem("crystalhydrogen"),
-	crystallized_nitrogen = getItem("crystalnitrogen"), crystallized_phosphorus = getItem("crystalphosporus"),
-	crystallized_potassium = getItem("crystalpotassium"), crystallized_nitrate = getItem("crystalnitrate"),
-	crystallized_methane = getItem("crystalmethane"), crystallized_redstone = getItem("crystalredstone"),
-	crystallized_abyssalnite = getItem("crystalabyssalnite"), crystallized_coralium = getItem("crystalcoralium"),
-	crystallized_dreadium = getItem("crystaldreadium"), crystallized_blaze = getItem("crystalblaze"),
-	crystallized_tin = getItem("crystaltin"), crystallized_copper = getItem("crystalcopper"),
-	crystallized_silicon = getItem("crystalsilicon"), crystallized_magnesium = getItem("crystalmagnesium"),
-	crystallized_aluminium = getItem("crystalaluminium"), crystallized_silica = getItem("crystalsilica"),
-	crystallized_alumina = getItem("crystalalumina"), crystallized_magnesia = getItem("crystalmagnesia"),
-	crystallized_Zinc = getItem("crystalzinc");
 
 	private static Item getItem(String name){
 		return GameRegistry.findItem("abyssalcraft", name);

@@ -42,7 +42,6 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
-import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeModContainer;
 
@@ -114,7 +113,7 @@ public class EntityDepthsGhoul extends EntityMob implements ICoraliumEntity {
 		switch (getGhoulType())
 		{
 		case 0:
-			return StatCollector.translateToLocal("entity.abyssalcraft.depthsghoul.name");
+			return super.getCommandSenderName();
 		case 1:
 			return "Pete";
 		case 2:
@@ -122,7 +121,7 @@ public class EntityDepthsGhoul extends EntityMob implements ICoraliumEntity {
 		case 3:
 			return "Dr. Orange";
 		default:
-			return StatCollector.translateToLocal("entity.abyssalcraft.depthsghoul.name");
+			return super.getCommandSenderName();
 		}
 	}
 

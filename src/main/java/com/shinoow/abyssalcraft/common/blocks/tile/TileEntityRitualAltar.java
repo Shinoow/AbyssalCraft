@@ -36,6 +36,7 @@ public class TileEntityRitualAltar extends TileEntity {
 	private ItemStack item;
 	private int rot;
 	private EntityPlayer user;
+	private float consumedEnergy;
 
 
 	@Override
@@ -84,8 +85,11 @@ public class TileEntityRitualAltar extends TileEntity {
 			if(ritual != null){
 				if(user != null){
 					for(ItemStack item : user.inventory.mainInventory)
-						if(item.getItem() instanceof ItemNecronomicon){
-							((IEnergyTransporter) item.getItem()).consumeEnergy(item, ritual.getReqEnergy()/200);
+						if(item != null && item.getItem() instanceof IEnergyTransporter &&
+						((IEnergyTransporter) item.getItem()).getContainedEnergy(item) > 0){
+							if(!worldObj.isRemote)
+								((IEnergyTransporter) item.getItem()).consumeEnergy(item, ritual.getReqEnergy()/200);
+							consumedEnergy += ritual.getReqEnergy()/200;
 							break;
 						}
 				} else user = worldObj.getClosestPlayer(xCoord, yCoord, zCoord, 5);
@@ -93,19 +97,25 @@ public class TileEntityRitualAltar extends TileEntity {
 					if(user != null){
 						if(!MinecraftForge.EVENT_BUS.post(new RitualEvent.Post(user, ritual, worldObj, xCoord, yCoord, zCoord))){
 							for(ItemStack item : user.inventory.mainInventory)
-								if(item.getItem() instanceof ItemNecronomicon){
-									((IEnergyTransporter) item.getItem()).consumeEnergy(item, ritual.getReqEnergy()/200);
+								if(item != null && item.getItem() instanceof IEnergyTransporter &&
+								((IEnergyTransporter) item.getItem()).getContainedEnergy(item) > 0){
+									if(!worldObj.isRemote)
+										((IEnergyTransporter) item.getItem()).consumeEnergy(item, ritual.getReqEnergy()/200);
+									consumedEnergy += ritual.getReqEnergy()/200;
 									break;
 								}
-							ritual.completeRitual(worldObj, xCoord, yCoord, zCoord, user);
+							if(consumedEnergy == ritual.getReqEnergy())
+								ritual.completeRitual(worldObj, xCoord, yCoord, zCoord, user);
 							ritualTimer = 0;
 							user = null;
 							ritual = null;
+							consumedEnergy = 0;
 							markDirty();
 						}
 					} else {
 						ritualTimer = 0;
 						ritual = null;
+						consumedEnergy = 0;
 						markDirty();
 					}
 			} else ritualTimer = 0;
@@ -183,7 +193,7 @@ public class TileEntityRitualAltar extends TileEntity {
 			if(item.getItem() instanceof ItemNecronomicon)
 				if(RitualRegistry.instance().canPerformAction(world.provider.dimensionId, ((ItemNecronomicon)item.getItem()).getBookType()))
 					if(canPerform()){
-						ritual = RitualRegistry.instance().getRitual(world.provider.dimensionId, ((ItemNecronomicon)item.getItem()).getBookType(), offers);
+						ritual = RitualRegistry.instance().getRitual(world.provider.dimensionId, ((ItemNecronomicon)item.getItem()).getBookType(), offers, this.item);
 						if(ritual != null)
 							if(((IEnergyTransporter)item.getItem()).getContainedEnergy(item) >= ritual.getReqEnergy())
 								if(ritual.canRemnantAid()){
@@ -195,14 +205,15 @@ public class TileEntityRitualAltar extends TileEntity {
 												ritualTimer = 1;
 												resetPedestals(world, x, y, z);
 												user = player;
+												consumedEnergy = 0;
 											}
 								} else if(ritual.canCompleteRitual(world, x, y, z, player))
 									if(!MinecraftForge.EVENT_BUS.post(new RitualEvent.Pre(player, ritual, world, x, y, z))){
 										ritualTimer = 1;
 										resetPedestals(world, x, y, z);
 										user = player;
+										consumedEnergy = 0;
 									}
-
 					}
 		}
 	}

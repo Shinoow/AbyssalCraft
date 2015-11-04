@@ -62,7 +62,7 @@ public class EntityChagaroth extends EntityMob implements IBossDisplayData, IDre
 	@Override
 	public String getCommandSenderName()
 	{
-		return EnumChatFormatting.DARK_RED + StatCollector.translateToLocal("entity.abyssalcraft.chagaroth.name");
+		return EnumChatFormatting.DARK_RED + super.getCommandSenderName();
 	}
 
 	@Override
@@ -227,13 +227,6 @@ public class EntityChagaroth extends EntityMob implements IBossDisplayData, IDre
 	}
 
 	@Override
-	protected void dropFewItems(boolean par1, int par2)
-	{
-		dropItem(AbyssalCraft.dreadKey, 1);
-
-	}
-
-	@Override
 	public boolean attackEntityFrom(DamageSource par1DamageSource, float par2)
 	{
 		if(par2 > 50)
@@ -278,15 +271,21 @@ public class EntityChagaroth extends EntityMob implements IBossDisplayData, IDre
 					i -= j;
 					worldObj.spawnEntityInWorld(new EntityXPOrb(worldObj, posX, posY, posZ, j));
 					if(deathTicks == 100 || deathTicks == 120 || deathTicks == 140 || deathTicks == 160 || deathTicks == 180){
-						worldObj.spawnEntityInWorld(new EntityItem(worldObj, posX, posY, posZ, new ItemStack(AbyssalCraft.dreadfragment, 4)));
-						worldObj.spawnEntityInWorld(new EntityItem(worldObj, posX, posY, posZ, new ItemStack(AbyssalCraft.dreadchunk, 2)));
-						worldObj.spawnEntityInWorld(new EntityItem(worldObj, posX, posY, posZ, new ItemStack(AbyssalCraft.Dreadshard)));
-						worldObj.spawnEntityInWorld(new EntityItem(worldObj, posX, posY, posZ, new ItemStack(AbyssalCraft.dreadiumingot)));
+						worldObj.spawnEntityInWorld(new EntityItem(worldObj, posX + posneg(3), posY + rand.nextInt(3), posZ + posneg(3), new ItemStack(AbyssalCraft.dreadfragment, 4)));
+						worldObj.spawnEntityInWorld(new EntityItem(worldObj, posX + posneg(3), posY + rand.nextInt(3), posZ + posneg(3), new ItemStack(AbyssalCraft.dreadchunk, 2)));
+						worldObj.spawnEntityInWorld(new EntityItem(worldObj, posX + posneg(3), posY + rand.nextInt(3), posZ + posneg(3), new ItemStack(AbyssalCraft.Dreadshard)));
+						worldObj.spawnEntityInWorld(new EntityItem(worldObj, posX + posneg(3), posY + rand.nextInt(3), posZ + posneg(3), new ItemStack(AbyssalCraft.dreadiumingot)));
 					}
 				}
 			}
-		if(deathTicks == 200 && !worldObj.isRemote)
+		if(deathTicks == 200 && !worldObj.isRemote){
 			setDead();
+			worldObj.spawnEntityInWorld(new EntityItem(worldObj, posX, posY, posZ, new ItemStack(AbyssalCraft.dreadKey)));
+		}
+	}
+
+	private int posneg(int num){
+		return rand.nextBoolean() ? rand.nextInt(num) : -1 * rand.nextInt(num);
 	}
 
 	@Override

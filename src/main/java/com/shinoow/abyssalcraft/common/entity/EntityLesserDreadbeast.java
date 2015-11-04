@@ -87,6 +87,22 @@ public class EntityLesserDreadbeast extends EntityMob implements IDreadEntity, I
 	}
 
 	@Override
+	protected void entityInit()
+	{
+		super.entityInit();
+		dataWatcher.addObject(18, Byte.valueOf((byte)0));
+	}
+
+	@Override
+	public void onUpdate()
+	{
+		super.onUpdate();
+
+		if (!worldObj.isRemote)
+			setBesideClimbableBlock(isCollidedHorizontally);
+	}
+
+	@Override
 	protected String getLivingSound()
 	{
 		return "mob.zombie.say";
@@ -109,6 +125,40 @@ public class EntityLesserDreadbeast extends EntityMob implements IDreadEntity, I
 	{
 		worldObj.playSoundAtEntity(this, "mob.zombie.step", 0.15F, 1.0F);
 	}
+
+	@Override
+	public boolean isOnLadder()
+	{
+		return isBesideClimbableBlock();
+	}
+
+	/**
+	 * Returns true if the WatchableObject (Byte) is 0x01 otherwise returns false. The WatchableObject is updated using
+	 * setBesideClimableBlock.
+	 */
+	public boolean isBesideClimbableBlock()
+	{
+		return (dataWatcher.getWatchableObjectByte(18) & 1) != 0;
+	}
+
+	/**
+	 * Updates the WatchableObject (Byte) created in entityInit(), setting it to 0x01 if par1 is true or 0x00 if it is
+	 * false.
+	 */
+	public void setBesideClimbableBlock(boolean par1)
+	{
+		byte b0 = dataWatcher.getWatchableObjectByte(18);
+
+		if (par1)
+			b0 = (byte)(b0 | 1);
+		else
+			b0 &= -2;
+
+		dataWatcher.updateObject(18, Byte.valueOf(b0));
+	}
+
+	@Override
+	protected void fall(float par1) {}
 
 	@Override
 	protected Item getDropItem()

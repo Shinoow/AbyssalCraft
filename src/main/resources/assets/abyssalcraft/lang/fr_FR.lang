@@ -404,8 +404,8 @@ necronomicon.text.darkrealm.progression.2=Main reason to intentionally fall down
 
 necronomicon.text.entity.anti.1=Inside the Coralium Infested Swamp you can find several life forms made out of antimatter.
 necronomicon.text.entity.anti.2=If a anti-entity collides with it's normal counterpart, they explode. There are anti-versions of: Zombies, Abyssal Zombies, Skeletons, Depths Ghouls, Bats, Cows, Pigs, Chickens, Creepers, Spiders and Players. Anti-Players don't explode.
-necronomicon.text.entity.evilpig.1=If you encounter one of these pigs, you will quickly notice that it's hostile and screams when you hit it.
-necronomicon.text.entity.evilpig.2=Ths Evil Pig is a pre-evolving Demon Pig, which hatches when you kill the current pig-based organism. They are immune to fire, and spawn in most Overworld biomes.
+necronomicon.text.entity.evilanimals.1=If you encounter any of these animals, you will quickly notice that it's hostile and screams when you hit it.
+necronomicon.text.entity.evilanimals.2=The Evil Animals are pre-evolving Demon Animals, which hatches when you kill the current animal-based organism. They are immune to fire, and spawn in most Overworld biomes.
 necronomicon.text.entity.abyssalzombie.1=Abyssal Zombies can be found in various Ocean, Swamp, Beach and Darklands biomes.
 necronomicon.text.entity.abyssalzombie.2=Abyssal Zombies are formerly Zombies who has been infected with the Coralium Plague, causing them to evolve into these beings. They are hostile against regular Zombies. They also spawn in the Abyssal Wasteland and the End.
 necronomicon.text.entity.depthsghoul.1=Depths Ghouls are evolved Coralium Infested undead. Spawns where Abyssal Zombies spawn.
@@ -422,10 +422,10 @@ necronomicon.text.entity.dreadgolem.1=Dreaded Abyssalnite Golems are living ore 
 necronomicon.text.entity.dreadgolem.2=Unlike the pure Abyssalnite Golems, these red chunks of corrupted Abyssalnite are slowly turning into Dreadium, while taking all measures on corrupting any remaining Abyssalnite.
 necronomicon.text.entity.dreadling.1=Dreadlings are mutated beings found in the Dreadlands.
 necronomicon.text.entity.dreadling.2=These beings were once Abyssalnite miners in the dimension that became the Dreadlands. They have no memory of their past, and now lives to worship Cha'garoth, The Dreadbeast, who controls them.
-necronomicon.text.entity.dreadspawn.1=Dread Spawns are mutated beings found in the Dreadlands.
-necronomicon.text.entity.dreadspawn.2=It is not known what these beings are, but one thing is sure, Cha'garoth created them. Dread Spawns are slowly crawling mutants appearing often in Dreadlands Forests.
-necronomicon.text.entity.demonpig.1=Demon Pigs are demonic monsters found in the Nether and the Dreadlands.
-necronomicon.text.entity.demonpig.2=These abominations are commonly found in Dreadlands Forests or randomly in the Nether. How these monsters were created is unknown, but someone hated humans enough to turn pigs hostile against them.
+necronomicon.text.entity.dreadspawn.1=Dread Spawns are mutated beings found in the Dreadlands. They are rumored to share certain genetic features with Shoggoths.
+necronomicon.text.entity.dreadspawn.2=It is not known what these beings are, but one thing is sure, Cha'garoth created them. Dread Spawns are slowly crawling mutants appearing often in Dreadlands Forests. If enough of them group up at one spot, they might merge, growing into a larger mass.
+necronomicon.text.entity.demonanimals.1=Demon Animals are demonic monsters found in the Nether and the Dreadlands.
+necronomicon.text.entity.demonanimals.2=These abominations are commonly found in Dreadlands Forests or randomly in the Nether. How these monsters were created is unknown, but someone hated humans enough to turn farm animals hostile against them.
 necronomicon.text.entity.chagarothspawn.1=Spawns of Cha'garoth are mutated beings found in the Dreadlands.
 necronomicon.text.entity.chagarothspawn.2=Compared to the Dread Spawn, these mutated beings are the offspring of Cha'garoth, having a few of his features. They are stronger than their lesser counterpart (the Dread Spawn), and are usually spawned by Cha'garoth.
 necronomicon.text.entity.chagarothfist.1=Fists of Cha'garoths are living hands found in the Dreadlands.
@@ -548,6 +548,8 @@ ac_general=General
 ac_general.tooltip=General configuration
 ac_potion=Potions
 ac_potion.tooltip=Potion ID configuration
+ac_shoggoth=Shoggoth Ooze
+ac_shoggoth.tooltip=Shoggoth Ooze Configuration
 
 #Damagesources
 death.attack.coralium=%1$s died from the Coralium Plague
@@ -740,6 +742,7 @@ tile.shubniggurathStatue.name=Shub-Niggurath Statue
 tile.monolithStone.name=Monolith Stone
 tile.shoggothBiomass.name=Shoggoth Biomass
 tile.energyPedestal.name=Energy Pedestal
+tile.monolithPillar.name=Monolith Stone Pillar
 
 #Items
 item.DEV_BLADE.name=La Lame du Développeur
@@ -1010,6 +1013,10 @@ entity.abyssalcraft.omotholghoul.name=Omothol Ghoul
 entity.abyssalcraft.remnant.name=Remnant
 entity.abyssalcraft.greaterdreadspawn.name=Greater Dread Spawn
 entity.abyssalcraft.lesserdreadbeast.name=Lesser Dreadbeast
+entity.abyssalcraft.evilcow.name=Cow
+entity.abyssalcraft.evilchicken.name=Chicken
+entity.abyssalcraft.demoncow.name=Demon Cow
+entity.abyssalcraft.demonchicken.name=Demon Chicken
 
 #Potions
 potion.Cplague=Peste de Coralium

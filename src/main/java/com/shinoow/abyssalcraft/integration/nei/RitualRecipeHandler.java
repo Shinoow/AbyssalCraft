@@ -48,27 +48,20 @@ public class RitualRecipeHandler extends TemplateRecipeHandler {
 		public int xBoost = 15, yBoost = -24;
 		public NecronomiconRitual ritual;
 
-		public CachedRitual(int bookType, Object[] offerings, ItemStack output){
+		public CachedRitual(int bookType, Object[] offerings, Object sacrifice, ItemStack output){
 			result = new PositionedStack(output, 58 + xBoost, 139 + yBoost);
 			ingredients = new ArrayList<PositionedStack>();
 			ingredients.add(new PositionedStack(new ItemStack(getItem(bookType)), 0 + xBoost, 133 + yBoost));
+			if(sacrifice != null)
+				ingredients.add(new PositionedStack(getStack(sacrifice), 58 + xBoost, 66 + yBoost));
 			setOfferings(offerings);
 		}
 
-		public CachedRitual(int bookType, Object[] offerings, Object sacrifice, ItemStack output){
-			this(bookType, offerings, output);
-			ingredients.add(new PositionedStack(getStack(sacrifice), 58 + xBoost, 66 + yBoost));
-		}
-
 		public CachedRitual(NecronomiconCreationRitual ritual){
-			this(ritual.getBookType(), ritual.getOfferings(), ritual.getItem());
-			this.ritual = ritual;
-		}
-
-		public CachedRitual(NecronomiconInfusionRitual ritual){
 			this(ritual.getBookType(), ritual.getOfferings(), ritual.getSacrifice(), ritual.getItem());
 			this.ritual = ritual;
 		}
+
 
 		public void setOfferings(Object[] offerings){
 			if(offerings.length >= 1){
@@ -175,10 +168,8 @@ public class RitualRecipeHandler extends TemplateRecipeHandler {
 		if (outputId.equals("ritual") && getClass() == RitualRecipeHandler.class)
 			for(NecronomiconRitual nritual : RitualRegistry.instance().getRituals()){
 				CachedRitual ritual = null;
-				if(nritual instanceof NecronomiconCreationRitual && !(nritual instanceof NecronomiconInfusionRitual))
+				if(nritual instanceof NecronomiconCreationRitual)
 					ritual = new CachedRitual((NecronomiconCreationRitual) nritual);
-				else if(nritual instanceof NecronomiconInfusionRitual)
-					ritual = new CachedRitual((NecronomiconInfusionRitual) nritual);
 				if(ritual == null) continue;
 
 				ritual.computeVisuals();
@@ -194,10 +185,8 @@ public class RitualRecipeHandler extends TemplateRecipeHandler {
 			if(nritual instanceof NecronomiconCreationRitual &&
 					NEIServerUtils.areStacksSameTypeCrafting(((NecronomiconCreationRitual) nritual).getItem(), result)) {
 				CachedRitual ritual = null;
-				if(nritual instanceof NecronomiconCreationRitual && !(nritual instanceof NecronomiconInfusionRitual))
+				if(nritual instanceof NecronomiconCreationRitual)
 					ritual = new CachedRitual((NecronomiconCreationRitual) nritual);
-				else if(nritual instanceof NecronomiconInfusionRitual)
-					ritual = new CachedRitual((NecronomiconInfusionRitual) nritual);
 				if(ritual == null) continue;
 
 				ritual.computeVisuals();
@@ -209,10 +198,8 @@ public class RitualRecipeHandler extends TemplateRecipeHandler {
 	public void loadUsageRecipes(ItemStack ingredient) {
 		for(NecronomiconRitual nritual : RitualRegistry.instance().getRituals()){
 			CachedRitual ritual = null;
-			if(nritual instanceof NecronomiconCreationRitual && !(nritual instanceof NecronomiconInfusionRitual))
+			if(nritual instanceof NecronomiconCreationRitual)
 				ritual = new CachedRitual((NecronomiconCreationRitual) nritual);
-			else if(nritual instanceof NecronomiconInfusionRitual)
-				ritual = new CachedRitual((NecronomiconInfusionRitual) nritual);
 			if(ritual == null || !ritual.contains(ritual.ingredients, ingredient.getItem())) continue;
 
 			ritual.computeVisuals();

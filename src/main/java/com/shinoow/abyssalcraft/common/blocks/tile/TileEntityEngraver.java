@@ -16,9 +16,6 @@ import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
-import net.minecraft.tileentity.TileEntity;
-
-import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.api.item.ItemEngraving;
 import com.shinoow.abyssalcraft.api.recipe.EngraverRecipes;
 import com.shinoow.abyssalcraft.common.blocks.BlockEngraver;
@@ -26,7 +23,7 @@ import com.shinoow.abyssalcraft.common.blocks.BlockEngraver;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class TileEntityEngraver extends TileEntity implements ISidedInventory {
+public class TileEntityEngraver extends TEDirectional implements ISidedInventory {
 
 	private static final int[] slotsTop = new int[] {0};
 	private static final int[] slotsBottom = new int[] {2, 1};
@@ -243,14 +240,6 @@ public class TileEntityEngraver extends TileEntity implements ISidedInventory {
 	public boolean isUseableByPlayer(EntityPlayer par1EntityPlayer)
 	{
 		return worldObj.getTileEntity(xCoord, yCoord, zCoord) != this ? false : par1EntityPlayer.getDistanceSq(xCoord + 0.5D, yCoord + 0.5D, zCoord + 0.5D) <= 64.0D;
-	}
-
-	public static boolean isCoin(ItemStack par1){
-		if(par1.getItem() == AbyssalCraft.coin) return true;
-		if(par1.getItem() == AbyssalCraft.cthulhuCoin) return true;
-		if(par1.getItem() == AbyssalCraft.elderCoin) return true;
-		if(par1.getItem() == AbyssalCraft.jzaharCoin) return true;
-		return EngraverRecipes.instance().getCoinList().contains(par1);
 	}
 
 	@Override

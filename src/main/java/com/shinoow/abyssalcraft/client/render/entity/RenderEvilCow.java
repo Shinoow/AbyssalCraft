@@ -11,37 +11,26 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.client.render.entity;
 
-import net.minecraft.client.model.ModelPig;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.ResourceLocation;
 
-import com.shinoow.abyssalcraft.common.entity.EntityEvilpig;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-
 @SideOnly(Side.CLIENT)
-public class RenderPig extends RenderLiving {
+public class RenderEvilCow extends RenderLiving
+{
+	private static final ResourceLocation cowTextures = new ResourceLocation("textures/entity/cow/cow.png");
 
-	protected ModelPig model;
-
-	private static final ResourceLocation mobTexture = new ResourceLocation("textures/entity/pig/pig.png");
-
-	public RenderPig (ModelPig ModelPig, float f)
+	public RenderEvilCow(ModelBase model, float par2)
 	{
-		super(ModelPig, f);
-		model = (ModelPig)mainModel;
-	}
-
-	public void doRender(EntityEvilpig entity, double par2, double par4, double par6, float par8, float par9)
-	{
-		super.doRender(entity, par2, par4, par6, par8, par9);
+		super(model, par2);
 	}
 
 	@Override
-	protected ResourceLocation getEntityTexture(Entity entity) {
-
-		return mobTexture;
+	protected ResourceLocation getEntityTexture(Entity entity)
+	{
+		return cowTextures;
 	}
 }

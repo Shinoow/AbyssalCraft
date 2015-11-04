@@ -18,8 +18,8 @@ import net.minecraft.world.gen.feature.WorldGenAbstractTree;
 import net.minecraft.world.gen.feature.WorldGenTrees;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
-import com.shinoow.abyssalcraft.common.entity.EntityDemonPig;
 import com.shinoow.abyssalcraft.common.entity.EntityDreadSpawn;
+import com.shinoow.abyssalcraft.common.entity.demon.*;
 import com.shinoow.abyssalcraft.common.world.gen.WorldGenDrT;
 
 import cpw.mods.fml.relauncher.Side;
@@ -38,6 +38,8 @@ public class BiomeGenForestDreadlands extends BiomeGenDreadlandsBase
 		WorldGenDreadTrees = new WorldGenDrT(false);
 		theBiomeDecorator.treesPerChunk = 20;
 		spawnableMonsterList.add(new SpawnListEntry(EntityDemonPig.class, 40, 1, 3));
+		spawnableMonsterList.add(new SpawnListEntry(EntityDemonCow.class, 40, 1, 3));
+		spawnableMonsterList.add(new SpawnListEntry(EntityDemonChicken.class, 40, 1, 3));
 		spawnableMonsterList.add(new SpawnListEntry(EntityDreadSpawn.class, 50, 1, 2));
 
 	}

@@ -41,6 +41,8 @@ import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityWitherSkull;
 import net.minecraft.item.ItemStack;
+import net.minecraft.potion.Potion;
+import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.MathHelper;
@@ -79,7 +81,7 @@ public class EntityJzahar extends EntityMob implements IBossDisplayData, IRanged
 	@Override
 	public String getCommandSenderName()
 	{
-		return EnumChatFormatting.BLUE + StatCollector.translateToLocal("entity.abyssalcraft.Jzahar.name");
+		return EnumChatFormatting.BLUE + super.getCommandSenderName();
 	}
 
 	@Override
@@ -138,6 +140,15 @@ public class EntityJzahar extends EntityMob implements IBossDisplayData, IRanged
 	}
 
 	@Override
+	public boolean attackEntityAsMob(Entity par1Entity)
+	{
+		swingItem();
+		boolean flag = super.attackEntityAsMob(par1Entity);
+
+		return flag;
+	}
+
+	@Override
 	public boolean attackEntityFrom(DamageSource par1DamageSource, float par2)
 	{
 		if(par2 > 50)
@@ -151,11 +162,6 @@ public class EntityJzahar extends EntityMob implements IBossDisplayData, IRanged
 	@Override
 	public EnumCreatureAttribute getCreatureAttribute() {
 		return EnumCreatureAttribute.UNDEAD;
-	}
-
-	@Override
-	protected void dropFewItems(boolean par1, int par2) {
-		dropItem(AbyssalCraft.Staff, 1);
 	}
 
 	@Override
@@ -246,7 +252,7 @@ public class EntityJzahar extends EntityMob implements IBossDisplayData, IRanged
 				}
 				else if(entity instanceof EntityPlayer)
 					if(((EntityPlayer)entity).capabilities.isCreativeMode && talkTimer == 0 && getDistanceToEntity(entity) <= 5){
-						talkTimer = 300;
+						talkTimer = 1200;
 						if(worldObj.isRemote)
 							if(EntityUtil.isPlayerCoralium((EntityPlayer)entity))
 								SpecialTextUtil.JzaharText("<insert generic text here>");
@@ -264,6 +270,14 @@ public class EntityJzahar extends EntityMob implements IBossDisplayData, IRanged
 	{
 		++deathTicks;
 
+		if(deathTicks <= 200){
+			worldObj.spawnParticle("largesmoke", posX, posY + 1.5D, posZ, 0, 0, 0);
+			if (deathTicks >= 190 && deathTicks <= 200){
+				worldObj.spawnParticle("hugeexplosion", posX, posY + 1.5D, posZ, 0.0D, 0.0D, 0.0D);
+				worldObj.playSoundAtEntity(this, "random.explode", 4, (1.0F + (rand.nextFloat() - rand.nextFloat()) * 0.2F) * 0.7F);
+			}
+		}
+
 		int i;
 		int j;
 
@@ -278,14 +292,33 @@ public class EntityJzahar extends EntityMob implements IBossDisplayData, IRanged
 					i -= j;
 					worldObj.spawnEntityInWorld(new EntityXPOrb(worldObj, posX, posY, posZ, j));
 					if(deathTicks == 100 || deathTicks == 120 || deathTicks == 140 || deathTicks == 160 || deathTicks == 180){
-						worldObj.spawnEntityInWorld(new EntityItem(worldObj, posX, posY, posZ, new ItemStack(AbyssalCraft.abyingot)));
-						worldObj.spawnEntityInWorld(new EntityItem(worldObj, posX, posY, posZ, new ItemStack(AbyssalCraft.Cingot)));
-						worldObj.spawnEntityInWorld(new EntityItem(worldObj, posX, posY, posZ, new ItemStack(AbyssalCraft.dreadiumingot)));
+						worldObj.spawnEntityInWorld(new EntityItem(worldObj, posX + posneg(3), posY + rand.nextInt(3), posZ + posneg(3), new ItemStack(AbyssalCraft.abyingot)));
+						worldObj.spawnEntityInWorld(new EntityItem(worldObj, posX + posneg(3), posY + rand.nextInt(3), posZ + posneg(3), new ItemStack(AbyssalCraft.Cingot)));
+						worldObj.spawnEntityInWorld(new EntityItem(worldObj, posX + posneg(3), posY + rand.nextInt(3), posZ + posneg(3), new ItemStack(AbyssalCraft.dreadiumingot)));
+						worldObj.spawnEntityInWorld(new EntityItem(worldObj, posX + posneg(3), posY + rand.nextInt(3), posZ + posneg(3), new ItemStack(AbyssalCraft.ethaxiumIngot)));
 					}
 				}
 			}
-		if(deathTicks == 200 && !worldObj.isRemote)
+		if(deathTicks == 200 && !worldObj.isRemote){
 			setDead();
+			worldObj.spawnEntityInWorld(new EntityItem(worldObj, posX, posY, posZ, new ItemStack(AbyssalCraft.Staff)));
+			if(!worldObj.getEntitiesWithinAABB(EntityPlayer.class, boundingBox.expand(3,1,3)).isEmpty()){
+				List<EntityPlayer> players = worldObj.getEntitiesWithinAABB(EntityPlayer.class, boundingBox.expand(3,1,3));
+				for(EntityPlayer player: players){
+					player.attackEntityFrom(DamageSource.causeMobDamage(this).setDamageBypassesArmor(), 20F);
+					player.addPotionEffect(new PotionEffect(Potion.blindness.id, 2400, 3));
+					player.addPotionEffect(new PotionEffect(Potion.nightVision.id, 2400, 3));
+					player.addPotionEffect(new PotionEffect(Potion.confusion.id, 2400, 3));
+					player.addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, 2400, 3));
+					player.addPotionEffect(new PotionEffect(Potion.weakness.id, 2400, 3));
+					player.addPotionEffect(new PotionEffect(Potion.hunger.id, 2400, 3));
+				}
+			}
+		}
+	}
+
+	private int posneg(int num){
+		return rand.nextBoolean() ? rand.nextInt(num) : -1 * rand.nextInt(num);
 	}
 
 	private void func_82216_a(int par1, EntityLivingBase par2EntityLivingBase) {

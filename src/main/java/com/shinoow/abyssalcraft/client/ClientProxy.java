@@ -29,6 +29,7 @@ import com.shinoow.abyssalcraft.common.CommonProxy;
 import com.shinoow.abyssalcraft.common.blocks.tile.*;
 import com.shinoow.abyssalcraft.common.entity.*;
 import com.shinoow.abyssalcraft.common.entity.anti.*;
+import com.shinoow.abyssalcraft.common.entity.demon.*;
 
 import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.client.registry.RenderingRegistry;
@@ -49,12 +50,12 @@ public class ClientProxy extends CommonProxy {
 	@SideOnly(Side.CLIENT)
 	public void registerRenderThings() {
 
-		RenderingRegistry.registerEntityRenderingHandler(EntityEvilpig.class, new RenderPig(new ModelPig(), 0.5F));
+		RenderingRegistry.registerEntityRenderingHandler(EntityEvilpig.class, new RenderEvilPig(new ModelPig(), 0.5F));
 		RenderingRegistry.registerEntityRenderingHandler(EntityDepthsGhoul.class, new RenderDepthsGhoul(new ModelDG(), 0.8F));
 		RenderingRegistry.registerEntityRenderingHandler(EntityAbyssalZombie.class, new RenderAbyssalZombie(new ModelBiped(), 0.5F));
 		RenderingRegistry.registerEntityRenderingHandler(EntityODBPrimed.class, new RenderODB());
 		RenderingRegistry.registerEntityRenderingHandler(EntityODBcPrimed.class, new RenderODBc());
-		RenderingRegistry.registerEntityRenderingHandler(EntityJzahar.class, new RenderJzahar(new ModelJzahar(), 1.5F));
+		RenderingRegistry.registerEntityRenderingHandler(EntityJzahar.class, new RenderJzahar(new ModelJzahar(true), 1.5F));
 		RenderingRegistry.registerEntityRenderingHandler(EntityAbygolem.class, new Renderabygolem(new ModelBiped(), 0.5F));
 		RenderingRegistry.registerEntityRenderingHandler(EntityDreadgolem.class, new Renderdreadgolem(new ModelBiped(), 0.5F));
 		RenderingRegistry.registerEntityRenderingHandler(EntityDreadguard.class, new Renderdreadguard());
@@ -80,6 +81,10 @@ public class ClientProxy extends CommonProxy {
 		RenderingRegistry.registerEntityRenderingHandler(EntityLesserDreadbeast.class, new RenderLesserDreadbeast());
 		RenderingRegistry.registerEntityRenderingHandler(EntityDreadSlug.class, new RenderSnowball(AbyssalCraft.dreadfragment));
 		RenderingRegistry.registerEntityRenderingHandler(EntityLesserShoggoth.class, new RenderLesserShoggoth());
+		RenderingRegistry.registerEntityRenderingHandler(EntityEvilCow.class, new RenderEvilCow(new ModelCow(), 0.5F));
+		RenderingRegistry.registerEntityRenderingHandler(EntityEvilChicken.class, new RenderEvilChicken(new ModelChicken(), 0.5F));
+		RenderingRegistry.registerEntityRenderingHandler(EntityDemonCow.class, new RenderDemonCow(new ModelCow(), 0.5F));
+		RenderingRegistry.registerEntityRenderingHandler(EntityDemonChicken.class, new RenderDemonChicken(new ModelChicken(), 0.5F));
 
 		RenderingRegistry.registerEntityRenderingHandler(EntityAntiAbyssalZombie.class, new RenderAntiAbyssalZombie());
 		RenderingRegistry.registerEntityRenderingHandler(EntityAntiBat.class, new RenderAntiBat());

@@ -30,6 +30,7 @@ public abstract class NecronomiconRitual {
 	private int dimension;
 	private String unlocalizedName;
 	private float requiredEnergy;
+	protected Object sacrifice;
 
 	/**
 	 * A Necronomicon Ritual
@@ -118,7 +119,7 @@ public abstract class NecronomiconRitual {
 	}
 
 	/**
-	 * Used to fetch the unlocalized name for a Ritual
+	 * Used to fetch the unlocalized name for a ritual
 	 * @return A string prefixed by "ac.ritual."
 	 */
 	public String getUnlocalizedName(){
@@ -139,6 +140,16 @@ public abstract class NecronomiconRitual {
 	 */
 	public String getDescription(){
 		return StatCollector.translateToLocal(getUnlocalizedName() + ".desc");
+	}
+
+	/**
+	 * Getter for the sacrifice (mainly used by Infusion Rituals)
+	 * @return An Object representing an item placed on the altar
+	 * (should be removed/replaced in both completeRitual methods, like
+	 * {@link NecronomiconCreationRitual#completeRitualClient(World, int, int, int, EntityPlayer)})
+	 */
+	public Object getSacrifice(){
+		return sacrifice;
 	}
 
 	/**

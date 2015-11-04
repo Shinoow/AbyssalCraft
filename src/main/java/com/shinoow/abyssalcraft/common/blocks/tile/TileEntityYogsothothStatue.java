@@ -11,4 +11,13 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.common.blocks.tile;
 
-public class TileEntityYogsothothStatue extends TileStatueDirectional {}
+import com.shinoow.abyssalcraft.api.energy.EnergyEnum.DeityType;
+
+public class TileEntityYogsothothStatue extends TileStatueDirectional {
+
+	@Override
+	public DeityType getDeity() {
+
+		return DeityType.YOGSOTHOTH;
+	}
+}

@@ -404,8 +404,8 @@ necronomicon.text.darkrealm.progression.2=主要来到这里的原因是能获�
 
 necronomicon.text.entity.anti.1=在珊瑚侵染沼泽里你能找到多种由反物质构成的生命形式.
 necronomicon.text.entity.anti.2=如果一个反物质生物接触到相应的正常生物会发生爆炸. 有反物质版本的有: 僵尸, 深渊僵尸, 骷髅, 深渊食尸鬼, 蝙蝠, 牛, 猪, 鸡, 爬行者, 蜘蛛和玩家. 反物质玩家不会爆炸.
-necronomicon.text.entity.evilpig.1=如果你见到这种猪, 你会很快发现它们是敌对并在你攻击它的时候会尖叫.
-necronomicon.text.entity.evilpig.2=魔鬼猪是快进化成恶魔猪的前体, 会在你杀死附近有关猪的生物的时候孵化出来. 它们免疫火焰, 并生成在大多数主世界的生物群落.
+necronomicon.text.entity.evilanimals.1=If you encounter any of these animals, you will quickly notice that it's hostile and screams when you hit it.
+necronomicon.text.entity.evilanimals.2=The Evil Animals are pre-evolving Demon Animals, which hatches when you kill the current animal-based organism. They are immune to fire, and spawn in most Overworld biomes.
 necronomicon.text.entity.abyssalzombie.1=深渊僵尸能在海洋, 沼泽, 沙滩和黑暗之地生物群落里找到.
 necronomicon.text.entity.abyssalzombie.2=深渊僵尸是僵尸受到珊瑚侵染后变成的. 深渊僵尸对正常的僵尸有敌意. 它们还生成在深渊荒芜之地和末地.
 necronomicon.text.entity.depthsghoul.1=深渊食尸鬼是受珊瑚侵染的不死生物进化的. 生成同深渊僵尸.
@@ -422,10 +422,10 @@ necronomicon.text.entity.dreadgolem.1=恐惧深渊锭傀儡居住在恐惧之地
 necronomicon.text.entity.dreadgolem.2=不像净化的深渊锭傀儡, 这些红色块的受侵染的深渊锭正在缓慢变成恐惧锭, 并会采取一切措施来侵染任何残余的深渊锭.
 necronomicon.text.entity.dreadling.1=惧魔是在恐惧之地的变异生物.
 necronomicon.text.entity.dreadling.2=这些生物是未变成恐惧之地之前的深渊锭矿工. 他们对过去没有任何记忆, 现在活着是崇拜控制着他们的查加罗特.
-necronomicon.text.entity.dreadspawn.1=恐惧卵是在恐惧之地的变异生物.
-necronomicon.text.entity.dreadspawn.2=没有人知道这些生物到底是什么, 但有一样事情可以确认, 查加罗特创造了它们. 恐惧卵是在恐惧之地森林里经常出现的缓慢爬行的变异生物.
-necronomicon.text.entity.demonpig.1=恶魔猪是生成在下界和恐惧之地里的恶魔生物.
-necronomicon.text.entity.demonpig.2=这些令人厌恶的生物能常常在恐惧之地森林里或者随机在下界里找到. 这些怪物是怎么诞生的并不知道, 但肯定有人讨厌人类并将猪转变为敌对人类的生物.
+necronomicon.text.entity.dreadspawn.1=Dread Spawns are mutated beings found in the Dreadlands. They are rumored to share certain genetic features with Shoggoths.
+necronomicon.text.entity.dreadspawn.2=It is not known what these beings are, but one thing is sure, Cha'garoth created them. Dread Spawns are slowly crawling mutants appearing often in Dreadlands Forests. If enough of them group up at one spot, they might merge, growing into a larger mass.
+necronomicon.text.entity.demonanimals.1=Demon Animals are demonic monsters found in the Nether and the Dreadlands.
+necronomicon.text.entity.demonanimals.2=These abominations are commonly found in Dreadlands Forests or randomly in the Nether. How these monsters were created is unknown, but someone hated humans enough to turn farm animals hostile against them.
 necronomicon.text.entity.chagarothspawn.1=查加罗特的卵是在恐惧之地里能找到的变异生物.
 necronomicon.text.entity.chagarothspawn.2=相比于恐惧卵, 这些变异生物是查加罗特的后代, 有着一些查加罗特的特点. 他们比恐惧卵更为强大, 通常是由查加罗特生成的.
 necronomicon.text.entity.chagarothfist.1=查加罗特的拳头是在恐惧之地里的活着的手.
@@ -548,6 +548,8 @@ ac_general=总体
 ac_general.tooltip=总体设置
 ac_potion=药水
 ac_potion.tooltip=药水ID设置
+ac_shoggoth=Shoggoth Ooze
+ac_shoggoth.tooltip=Shoggoth Ooze Configuration
 
 #Damagesources
 death.attack.coralium=%1$s 由于珊瑚侵染而死亡
@@ -740,6 +742,7 @@ tile.shubniggurathStatue.name=Shub-Niggurath Statue
 tile.monolithStone.name=Monolith Stone
 tile.shoggothBiomass.name=Shoggoth Biomass
 tile.energyPedestal.name=Energy Pedestal
+tile.monolithPillar.name=Monolith Stone Pillar
 
 #Items
 item.DEV_BLADE.name=恶魔之刃
@@ -1010,6 +1013,10 @@ entity.abyssalcraft.omotholghoul.name=奥穆索食尸鬼
 entity.abyssalcraft.remnant.name=遗孽
 entity.abyssalcraft.greaterdreadspawn.name=大型恐惧卵
 entity.abyssalcraft.lesserdreadbeast.name=小型恐惧野兽
+entity.abyssalcraft.evilcow.name=Cow
+entity.abyssalcraft.evilchicken.name=Chicken
+entity.abyssalcraft.demoncow.name=Demon Cow
+entity.abyssalcraft.demonchicken.name=Demon Chicken
 
 #Potions
 potion.Cplague=珊瑚侵染

@@ -29,7 +29,6 @@ import org.lwjgl.opengl.GL11;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.shinoow.abyssalcraft.api.ritual.NecronomiconCreationRitual;
-import com.shinoow.abyssalcraft.api.ritual.NecronomiconInfusionRitual;
 import com.shinoow.abyssalcraft.api.ritual.NecronomiconRitual;
 import com.shinoow.abyssalcraft.api.ritual.RitualRegistry;
 import com.shinoow.abyssalcraft.client.gui.necronomicon.buttons.ButtonNextPage;
@@ -158,13 +157,12 @@ public class GuiNecronomiconRitualEntry extends GuiNecronomicon {
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 		mc.renderEngine.bindTexture(NecronomiconResources.RITUAL);
 		drawTexturedModalRect(k, b0, 0, 0, 256, 256);
-		if(ritual instanceof NecronomiconCreationRitual){
+		if(ritual.getSacrifice() != null){
+			mc.renderEngine.bindTexture(NecronomiconResources.RITUAL_INFUSION);
+			drawTexturedModalRect(k, b0, 0, 0, 256, 256);
+		} if(ritual instanceof NecronomiconCreationRitual){
 			mc.renderEngine.bindTexture(NecronomiconResources.RITUAL_CREATION);
 			drawTexturedModalRect(k, b0, 0, 0, 256, 256);
-			if(ritual instanceof NecronomiconInfusionRitual){
-				mc.renderEngine.bindTexture(NecronomiconResources.RITUAL_INFUSION);
-				drawTexturedModalRect(k, b0, 0, 0, 256, 256);
-			}
 		}
 
 		//north
@@ -191,14 +189,13 @@ public class GuiNecronomiconRitualEntry extends GuiNecronomicon {
 		//north-west
 		itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), offerings[7], k + 32, b0 + 40);
 		RenderHelper.disableStandardItemLighting();
+		//center
+		itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), getStack(ritual.getSacrifice()), k + 58, b0 + 66);
+		RenderHelper.disableStandardItemLighting();
 
 		if(ritual instanceof NecronomiconCreationRitual){
 			itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), ((NecronomiconCreationRitual) ritual).getItem(), k + 58, b0 + 139);
 			RenderHelper.disableStandardItemLighting();
-			if(ritual instanceof NecronomiconInfusionRitual){
-				itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), getStack(((NecronomiconInfusionRitual) ritual).getSacrifice()), k + 58, b0 + 66);
-				RenderHelper.disableStandardItemLighting();
-			}
 		}
 	}
 

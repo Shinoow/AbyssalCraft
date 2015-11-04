@@ -9,10 +9,12 @@
  * Contributors:
  *     Shinoow -  implementation
  ******************************************************************************/
-package com.shinoow.abyssalcraft.common.entity;
+package com.shinoow.abyssalcraft.common.entity.demon;
+
+import com.shinoow.abyssalcraft.AbyssalCraft;
+import com.shinoow.abyssalcraft.common.entity.EntityLesserShoggoth;
 
 import net.minecraft.block.Block;
-import net.minecraft.block.material.Material;
 import net.minecraft.entity.IEntityLivingData;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIAttackOnCollide;
@@ -24,19 +26,14 @@ import net.minecraft.entity.ai.EntityAIWander;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
-import net.minecraft.util.MathHelper;
+import net.minecraft.util.DamageSource;
+import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 
-import com.shinoow.abyssalcraft.AbyssalCraft;
-import com.shinoow.abyssalcraft.api.entity.IDreadEntity;
+public class EntityEvilpig extends EntityMob {
 
-public class EntityDemonPig extends EntityMob implements IDreadEntity {
-
-	private boolean canBurn = false;
-
-	public EntityDemonPig(World par1World)
+	public EntityEvilpig(World par1World)
 	{
 		super(par1World);
 		setSize(0.9F, 0.9F);
@@ -50,7 +47,6 @@ public class EntityDemonPig extends EntityMob implements IDreadEntity {
 		tasks.addTask(4, new EntityAILookIdle(this));
 		targetTasks.addTask(1, new EntityAIHurtByTarget(this, false));
 		targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityPlayer.class, 0, true));
-
 	}
 
 	@Override
@@ -61,6 +57,12 @@ public class EntityDemonPig extends EntityMob implements IDreadEntity {
 			getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(30.0D);
 			getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(4.0D);
 		} else getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(15.0D);
+	}
+
+	@Override
+	public String getCommandSenderName()
+	{
+		return StatCollector.translateToLocal("entity.Pig.name");
 	}
 
 	@Override
@@ -94,48 +96,28 @@ public class EntityDemonPig extends EntityMob implements IDreadEntity {
 	}
 
 	@Override
-	protected float getSoundPitch()
+	public void onDeath(DamageSource par1DamageSource)
 	{
-		return 0.2F;
+		super.onDeath(par1DamageSource);
+
+		if(!worldObj.isRemote)
+			if(!(par1DamageSource.getEntity() instanceof EntityLesserShoggoth))
+			{
+				EntityDemonPig demonpig = new EntityDemonPig(worldObj);
+				demonpig.copyLocationAndAnglesFrom(this);
+				worldObj.removeEntity(this);
+				demonpig.onSpawnWithEgg((IEntityLivingData)null);
+				worldObj.spawnEntityInWorld(demonpig);
+			}
 	}
 
-	@Override
-	public void onLivingUpdate()
-	{
-		super.onLivingUpdate();
-
-		int i = MathHelper.floor_double(posX);
-		int j = MathHelper.floor_double(posY);
-		int k = MathHelper.floor_double(posZ);
-
-		for (int l = 0; l < 4; ++l)
-		{
-			i = MathHelper.floor_double(posX + (l % 2 * 2 - 1) * 0.25F);
-			j = MathHelper.floor_double(posY);
-			k = MathHelper.floor_double(posZ + (l / 2 % 2 * 2 - 1) * 0.25F);
-
-			if (worldObj.provider.dimensionId != AbyssalCraft.configDimId2 && worldObj.provider.dimensionId != 0 && worldObj.getBlock(i, j, k).getMaterial() == Material.air &&
-					worldObj.getBiomeGenForCoords(i, k).getFloatTemperature(i, j, k) < 10.0F && Blocks.fire.canPlaceBlockAt(worldObj, i, j, k) || canBurn == true &&
-					worldObj.getBlock(i, j, k).getMaterial() == Material.air && worldObj.getBiomeGenForCoords(i, k).getFloatTemperature(i, j, k) < 10.0F && Blocks.fire.canPlaceBlockAt(worldObj, i, j, k))
-				worldObj.setBlock(i, j, k, Blocks.fire);
-		}
-	}
-
+	/**
+	 * Drop 0-2 items of this living's type
+	 */
 	@Override
 	protected void dropFewItems(boolean par1, int par2){
 		int var3 = rand.nextInt(3) + 1 + rand.nextInt(1 + par2);
 		for (int var4 = 0; var4 < var3; ++var4)
-			dropItem(Items.rotten_flesh, 1);
-	}
-
-	@Override
-	public IEntityLivingData onSpawnWithEgg(IEntityLivingData par1EntityLivingData)
-	{
-		Object data = super.onSpawnWithEgg(par1EntityLivingData);
-
-		if(worldObj.provider.dimensionId == 0 && AbyssalCraft.demonPigFire == true && rand.nextInt(3) == 0)
-			canBurn = true;
-
-		return (IEntityLivingData)data;
+			dropItem(Items.porkchop, 1);
 	}
 }

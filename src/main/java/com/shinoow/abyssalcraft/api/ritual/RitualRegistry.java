@@ -12,6 +12,7 @@
 package com.shinoow.abyssalcraft.api.ritual;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -122,13 +123,19 @@ public class RitualRegistry {
 	 */
 	public void registerRitual(NecronomiconRitual ritual){
 		if(ritual.getBookType() <= 4 && ritual.getBookType() >= 0){
-			if(!rituals.isEmpty()){
-				for(NecronomiconRitual compare : rituals)
-					if(!compare.getUnlocalizedName().equals(ritual.getUnlocalizedName())){
-						rituals.add(ritual);
-						break;
-					} else FMLLog.log("RitualRegistry", Level.ERROR, "Necronomicon Ritual already registered: %s", ritual.getUnlocalizedName());
-			} else rituals.add(ritual);
+			Iterator<NecronomiconRitual> iter = rituals.iterator();
+			NecronomiconRitual compare;
+			do {
+				if(!iter.hasNext()){
+					rituals.add(ritual);
+					return;
+				}
+				compare = iter.next();
+				if(ritual.getUnlocalizedName().equals(compare.getUnlocalizedName())){
+					FMLLog.log("RitualRegistry", Level.ERROR, "Necronomicon Ritual already registered: %s", ritual.getUnlocalizedName());
+					return;
+				}
+			} while (!ritual.getUnlocalizedName().equals(compare.getUnlocalizedName()));
 		} else FMLLog.log("RitualRegistry", Level.ERROR, "Necronomicon book type does not exist: %d", ritual.getBookType());
 	}
 
@@ -155,14 +162,15 @@ public class RitualRegistry {
 	 * @param dimension The provided dimension
 	 * @param bookType The provided book type
 	 * @param offerings The provided offerings
+	 * @param sacrifice The provided sacrifice (object placed on the altar)
 	 * @return A Necronomicon Ritual, or null if none was found
 	 * 
 	 * @since 1.4
 	 */
-	public NecronomiconRitual getRitual(int dimension, int bookType, ItemStack[] offerings){
+	public NecronomiconRitual getRitual(int dimension, int bookType, ItemStack[] offerings, ItemStack sacrifice){
 
 		for(NecronomiconRitual ritual : rituals)
-			if(areRitualsSame(ritual, dimension, bookType, offerings)) return ritual;
+			if(areRitualsSame(ritual, dimension, bookType, offerings, sacrifice)) return ritual;
 
 		return null;
 	}
@@ -173,16 +181,19 @@ public class RitualRegistry {
 	 * @param dimension The supplied dimension ID
 	 * @param bookType The supplied book type
 	 * @param offerings The supplied offerings
+	 * @param sacrifice The supplied sacrifice
 	 * @return True if the rituals match, otherwise false
 	 * 
 	 * @since 1.4
 	 */
-	private boolean areRitualsSame(NecronomiconRitual ritual, int dimension, int bookType, ItemStack[] offerings){
+	private boolean areRitualsSame(NecronomiconRitual ritual, int dimension, int bookType, ItemStack[] offerings, ItemStack sacrifice){
 		if(ritual.getDimension() == dimension || ritual.getDimension() == -1)
 			if(ritual.getBookType() <= bookType)
 				if(ritual.getOfferings() != null && offerings != null)
 					if(areItemStackArraysEqual(ritual.getOfferings(), offerings))
-						return true;
+						if(ritual.getSacrifice() == null && sacrifice == null ||
+						areObjectsEqual(sacrifice, ritual.getSacrifice()))
+							return true;
 		return false;
 	}
 

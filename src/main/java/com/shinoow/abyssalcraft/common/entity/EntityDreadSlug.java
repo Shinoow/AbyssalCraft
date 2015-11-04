@@ -43,7 +43,7 @@ public class EntityDreadSlug extends EntityThrowable {
 		{
 			byte b0 = 6;
 
-			if(!EntityUtil.isEntityDread((EntityLivingBase) mop.entityHit))
+			if(mop.entityHit instanceof EntityLivingBase && !EntityUtil.isEntityDread((EntityLivingBase) mop.entityHit))
 				((EntityLivingBase)mop.entityHit).addPotionEffect(new PotionEffect(AbyssalCraft.Dplague.id, 100));
 
 			mop.entityHit.attackEntityFrom(DamageSource.causeThrownDamage(this, getThrower()), b0);

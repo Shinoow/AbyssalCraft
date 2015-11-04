@@ -83,7 +83,7 @@ public class EntitySacthoth extends EntityMob implements IBossDisplayData, IAnti
 	@Override
 	public String getCommandSenderName()
 	{
-		return EnumChatFormatting.DARK_RED + StatCollector.translateToLocalFormatted("entity.abyssalcraft.shadowboss.name");
+		return EnumChatFormatting.DARK_RED + super.getCommandSenderName();
 	}
 
 	@Override
@@ -177,11 +177,6 @@ public class EntitySacthoth extends EntityMob implements IBossDisplayData, IAnti
 	public int getTotalArmorValue()
 	{
 		return 20;
-	}
-
-	@Override
-	protected void dropFewItems(boolean par1, int par2) {
-		dropItem(AbyssalCraft.soulReaper, 1);
 	}
 
 	@Override
@@ -351,13 +346,12 @@ public class EntitySacthoth extends EntityMob implements IBossDisplayData, IAnti
 					i -= j;
 					worldObj.spawnEntityInWorld(new EntityXPOrb(worldObj, posX, posY, posZ, j));
 					if(deathTicks == 100 || deathTicks == 120 || deathTicks == 140 || deathTicks == 160 || deathTicks == 180){
-						worldObj.spawnEntityInWorld(new EntityItem(worldObj, posX, posY, posZ, new ItemStack(AbyssalCraft.shadowfragment, 4)));
-						worldObj.spawnEntityInWorld(new EntityItem(worldObj, posX, posY, posZ, new ItemStack(AbyssalCraft.shadowshard, 2)));
-						worldObj.spawnEntityInWorld(new EntityItem(worldObj, posX, posY, posZ, new ItemStack(AbyssalCraft.shadowgem)));
-						worldObj.spawnEntityInWorld(new EntityItem(worldObj, posX, posY, posZ, new ItemStack(AbyssalCraft.oblivionshard)));
+						worldObj.spawnEntityInWorld(new EntityItem(worldObj, posX + posneg(3), posY + rand.nextInt(3), posZ + posneg(3), new ItemStack(AbyssalCraft.shadowfragment, 4)));
+						worldObj.spawnEntityInWorld(new EntityItem(worldObj, posX + posneg(3), posY + rand.nextInt(3), posZ + posneg(3), new ItemStack(AbyssalCraft.shadowshard, 2)));
+						worldObj.spawnEntityInWorld(new EntityItem(worldObj, posX + posneg(3), posY + rand.nextInt(3), posZ + posneg(3), new ItemStack(AbyssalCraft.shadowgem)));
+						worldObj.spawnEntityInWorld(new EntityItem(worldObj, posX + posneg(3), posY + rand.nextInt(3), posZ + posneg(3), new ItemStack(AbyssalCraft.oblivionshard)));
 					}
 				}
-
 			}
 			if(deathTicks >= 100 && deathTicks <= 200){
 				if(deathTicks <= 110){
@@ -376,10 +370,15 @@ public class EntitySacthoth extends EntityMob implements IBossDisplayData, IAnti
 					worldObj.spawnEntityInWorld(shadowBeast);
 				}
 			}
-			if(deathTicks == 200)
-
+			if(deathTicks == 200 && !worldObj.isRemote){
 				setDead();
+				worldObj.spawnEntityInWorld(new EntityItem(worldObj, posX, posY, posZ, new ItemStack(AbyssalCraft.soulReaper)));
+			}
 		}
+	}
+
+	private int posneg(int num){
+		return rand.nextBoolean() ? rand.nextInt(num) : -1 * rand.nextInt(num);
 	}
 
 	@Override

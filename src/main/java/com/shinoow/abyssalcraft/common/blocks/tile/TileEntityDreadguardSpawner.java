@@ -31,9 +31,10 @@ public class TileEntityDreadguardSpawner extends TileEntity {
 	}
 
 	public boolean isActivated() {
-		return worldObj.getClosestPlayer(xCoord + 0.5D,
-				yCoord + 0.5D, zCoord + 0.5D,
-				activatingRangeFromPlayer) != null;
+		return worldObj.getClosestPlayer(xCoord + 0.5D, yCoord + 0.5D, zCoord + 0.5D,
+				activatingRangeFromPlayer) != null &&
+				!worldObj.getClosestPlayer(xCoord + 0.5D, yCoord + 0.5D, zCoord + 0.5D,
+						activatingRangeFromPlayer).capabilities.isCreativeMode;
 	}
 
 	@Override

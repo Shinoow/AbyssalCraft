@@ -1,11 +1,47 @@
-- The Azathoth, Nyarlathotep and Yog-Sothoth Statues now have models
-- AbyssalCraft will now crash if a biome ID is already occupied
-- If dynamic Potion IDs is disabled, the Potion array extension will run
-- A "pop" sounds is now played when a Item is placed/removed from a Ritual Altar/Pedestal or Energy Pedestal
-- AbyssalCraft pressure plates can now be placed on AbyssalCraft fences
-- Added a entry about Dreadium in the Special Materials section in the Dreadlands section
-- Morph integration is now part of AbyssalCraft again (easier to maintain model and entity changes)
-- Possibly fixed random crashes related to statues (no idea how they're triggered)
-- The terrain of the Dreadlands has been improved
-- Wearing any AbyssalCraft helmet actually repels blindness in Darklands biomes
-- All ores in the Abyssal Wasteland now generate higher up
+- J'zahar has a new model
+- The biome ID checker won't crash if the overridden/occupied biome ID is disabled
+- Shoggoth biomass doesn't spawn anything on peaceful
+- The spawner blocks in Cha'garoth's lair won't spawn anything if the closest player is in creative mode
+- The Dreadlands Infused Powerstone no longer infects the Dread Plague on touch
+- The mob spawner in Abyssal Strongholds no longer spawn Dread Spawns
+- Depths Ghouls no longer morph into Dreadguards when killed by the Dread Plague
+- When a Anti-Ghoul dies from the Dread Plague, a Dread Spawn won't spawn
+- J'zahar now has a death animation
+- All bosses now drops their special item after the death animation has finished (10 seconds post-mortem)
+- Asorah now drops a smaller amount of exp on death (same amount that the other bosses drop)
+- Engravers now rotate when placed (instead of always facing the same direction)
+- Added Evil Cow
+- Added Evil Chicken
+- Added Demon Cow
+- Added Demon Chicken
+- Added animations to the Shadow Beast (legs flail a bit when moving, arms swing when attacking)
+- Dread Spawns can now climb walls, and receives no fall damage
+- Added config options regarding Shoggoth Ooze (can blacklist certain materials or disable it altogether)
+- Fixed a few bugs related to Infusion Rituals and improved some sections of the Ritual API code
+- Statues now produce smaller amounts of Potential Energy, but can be amplified by Charms (Range, Power, Duration)
+- Added Monolith Stone Pillar
+- Removed old Crystals entirely
+- Added Ritual Charms (allows you to temporarily boost statues)
+- Added Cthulhu Charms
+- Added Hastur Charms
+- Added J'zahar Charms
+- Added Azathoth Charms
+- Added Nyarlathotep Charms
+- Added Yog-Sothoth Charms
+- Added Shub-Niggurath Charms
+- Added Hastur Coins
+- Added Azathoth Coins
+- Added Nyarlathotep Coins
+- Added Yog-Sothoth Coins
+- Added Shub-Niggurath Coins
+- Added Hastur Coin Engravings
+- Added Azathoth Coin Engravings
+- Added Nyarlathotep Coin Engravings
+- Added Yog-Sothoth Coin Engravings
+- Added Shub-Niggurath Coin Engravings
+- Rituals won't complete if the required Potential Energy quanta isn't supplied
+- Added a lot more Rituals (related to charms)
+- Added Disruptions (bad things that can happen around Statues and other things capable of manipulating Potential Energy)
+- Greatly improved Remnant trades
+- Remnants will now alert a Player if they already busy with a customer (for real this time)
+- Changed the recipe for Coin Engravings (Elder is now Blank + Ethaxium Ingot, while the others are Elder + 5 Shoggoth Flesh of the same type, and J'zahar is Elder + 5 Eldritch Scales)

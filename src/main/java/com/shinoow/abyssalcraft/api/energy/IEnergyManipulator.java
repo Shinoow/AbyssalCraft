@@ -11,8 +11,11 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.api.energy;
 
+import com.shinoow.abyssalcraft.api.energy.EnergyEnum.AmplifierType;
+import com.shinoow.abyssalcraft.api.energy.EnergyEnum.DeityType;
+
 /**
- * Interface to use on blocks that can manipulate Ley Lines (WIP)<br>
+ * Interface to use on tile entities that can manipulate Ley Lines (WIP)<br>
  * WARNING: Any methods in this interface might end up getting removed,<br>
  * so I would suggest not using it until this text (and the WIP part) is removed.
  * 
@@ -23,17 +26,44 @@ package com.shinoow.abyssalcraft.api.energy;
 public interface IEnergyManipulator {
 
 	/**
-	 * Gets the speed at which the block can drain Potential Energy
-	 */
-	public int drainSpeed();
-
-	/**
-	 * Gets the quanta of Potential Energy that the block can drain
+	 * Gets the quanta of Potential Energy that the tile entity can drain
 	 */
 	public float energyQuanta();
 
 	/**
-	 * Returns the stability (the higher, the smaller chance of bad things happening)
+	 * Activates the Amplifier boost
+	 * @param amp Current Amplifier
+	 * @param deity Current Deity
 	 */
-	public int stability();
+	public void setActive(AmplifierType amp, DeityType deity);
+
+	/**
+	 * Checks if the Amplifier boost is active
+	 */
+	public boolean isActive();
+
+	/**
+	 * Returns the Deity associated with this manipulator (can be null)
+	 */
+	public DeityType getDeity();
+
+	/**
+	 * Used to calculate Amplification through Charms.<br>
+	 * Should be called whenever something that can be amplified is calculated.
+	 * @param type Type to check
+	 */
+	public float getAmplifier(AmplifierType type);
+
+	/**
+	 * Something bad that has the potential of happening
+	 * @param factor A random occasion (could be 5% trigger chance if activated etc)
+	 */
+	public void disrupt(boolean factor);
+
+	/**
+	 * Should be run at the end of updateEntity() and clear the<br>
+	 * stored NBT data and variables for the AmplifierType and<br>
+	 * DeityType if isActive() is false.
+	 */
+	public void clearData();
 }
