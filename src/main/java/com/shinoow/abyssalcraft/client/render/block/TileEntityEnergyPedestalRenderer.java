@@ -34,7 +34,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 @SideOnly(Side.CLIENT)
 public class TileEntityEnergyPedestalRenderer extends TileEntitySpecialRenderer {
 
-	ModelRitualPedestal model = new ModelRitualPedestal();
+	ModelRitualPedestal model = new ModelRitualPedestal(false);
 
 	@Override
 	public void renderTileEntityAt(TileEntity te, double x, double y, double z, float scale) {

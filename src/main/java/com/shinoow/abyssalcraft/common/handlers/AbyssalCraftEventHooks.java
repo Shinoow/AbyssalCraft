@@ -84,8 +84,6 @@ public class AbyssalCraftEventHooks {
 
 	@SubscribeEvent
 	public void onItemPickup(EntityItemPickupEvent event) {
-		if(event.item.getEntityItem().getItem() == Item.getItemFromBlock(AbyssalCraft.Darkstone_cobble))
-			event.entityPlayer.addStat(AbyssalCraft.mineDS, 1);
 		if(event.item.getEntityItem().getItem() == Item.getItemFromBlock(AbyssalCraft.abyore))
 			event.entityPlayer.addStat(AbyssalCraft.mineAby, 1);
 		if(event.item.getEntityItem().getItem() == AbyssalCraft.Coralium ||

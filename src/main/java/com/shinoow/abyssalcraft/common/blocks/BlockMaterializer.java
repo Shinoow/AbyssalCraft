@@ -114,14 +114,12 @@ public class BlockMaterializer extends BlockContainer {
 	}
 
 	public static void updateMaterializerBlockState(boolean par0, World par1World, int par2, int par3, int par4) {
-		int l = par1World.getBlockMetadata(par2, par3, par4);
 		TileEntity tileentity = par1World.getTileEntity(par2, par3, par4);
 		keepInventory = true;
 
 		par1World.setBlock(par2, par3, par4, AbyssalCraft.materializer);
 
 		keepInventory = false;
-		par1World.setBlockMetadataWithNotify(par2, par3, par4, l, 2);
 
 		if (tileentity != null){
 			tileentity.validate();

@@ -35,8 +35,15 @@ public class ModelRitualPedestal extends ModelBase {
 	ModelRenderer side3;
 	ModelRenderer side4;
 
-	public ModelRitualPedestal()
+	private final boolean renderPoint;
+
+	public ModelRitualPedestal(){
+		this(true);
+	}
+	
+	public ModelRitualPedestal(boolean renderPoint)
 	{
+		this.renderPoint = renderPoint;
 		textureWidth = 32;
 		textureHeight = 32;
 
@@ -154,14 +161,16 @@ public class ModelRitualPedestal extends ModelBase {
 		bottom2.render(f5);
 		top1.render(f5);
 		top2.render(f5);
-		point1.render(f5);
-		point2.render(f5);
-		point3.render(f5);
-		point4.render(f5);
-		point5.render(f5);
-		point6.render(f5);
-		point7.render(f5);
-		point8.render(f5);
+		if(renderPoint){
+			point1.render(f5);
+			point2.render(f5);
+			point3.render(f5);
+			point4.render(f5);
+			point5.render(f5);
+			point6.render(f5);
+			point7.render(f5);
+			point8.render(f5);
+		}
 		side1.render(f5);
 		side2.render(f5);
 		side3.render(f5);

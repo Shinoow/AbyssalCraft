@@ -27,9 +27,6 @@ import cpw.mods.fml.relauncher.SideOnly;
 public class ContainerMaterializer extends Container {
 
 	private TileEntityMaterializer tileMaterializer;
-	private int lastProcessTime;
-	private int lastBurnTime;
-	private int lastItemBurnTime;
 
 	public ContainerMaterializer(InventoryPlayer par1InventoryPlayer, TileEntityMaterializer par2TileEntityMaterializer)
 	{
@@ -54,9 +51,6 @@ public class ContainerMaterializer extends Container {
 	public void addCraftingToCrafters(ICrafting par1ICrafting)
 	{
 		super.addCraftingToCrafters(par1ICrafting);
-		par1ICrafting.sendProgressBarUpdate(this, 0, tileMaterializer.materializerProcessTime);
-		par1ICrafting.sendProgressBarUpdate(this, 1, tileMaterializer.materializerBurnTime);
-		par1ICrafting.sendProgressBarUpdate(this, 2, tileMaterializer.currentItemBurnTime);
 	}
 
 	@Override
@@ -64,41 +58,11 @@ public class ContainerMaterializer extends Container {
 	{
 		super.detectAndSendChanges();
 
-		for (int i = 0; i < crafters.size(); ++i)
-		{
-			ICrafting icrafting = (ICrafting)crafters.get(i);
-
-			if (lastProcessTime != tileMaterializer.materializerProcessTime)
-				icrafting.sendProgressBarUpdate(this, 0, tileMaterializer.materializerProcessTime);
-
-			if (lastBurnTime != tileMaterializer.materializerBurnTime)
-				icrafting.sendProgressBarUpdate(this, 1, tileMaterializer.materializerBurnTime);
-
-			if (lastItemBurnTime != tileMaterializer.currentItemBurnTime)
-				icrafting.sendProgressBarUpdate(this, 2, tileMaterializer.currentItemBurnTime);
-		}
-
-		lastProcessTime = tileMaterializer.materializerProcessTime;
-		lastBurnTime = tileMaterializer.materializerBurnTime;
-		lastItemBurnTime = tileMaterializer.currentItemBurnTime;
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void updateProgressBar(int par1, int par2)
-	{
-		if (par1 == 0)
-			tileMaterializer.materializerProcessTime = par2;
-
-		if (par1 == 1)
-			tileMaterializer.materializerBurnTime = par2;
-
-		if (par1 == 2)
-			tileMaterializer.currentItemBurnTime = par2;
-
-		if (par1 == 3)
-			tileMaterializer.materializerProcessTime = par2;
-	}
+	public void updateProgressBar(int par1, int par2){}
 
 	@Override
 	public boolean canInteractWith(EntityPlayer par1EntityPlayer)
@@ -126,17 +90,12 @@ public class ContainerMaterializer extends Container {
 			}
 			else if (par2 != 1 && par2 != 0)
 			{
-				if (MaterializerRecipes.instance().getMaterializationResult(itemstack1) != null)
-				{
-					if (!mergeItemStack(itemstack1, 0, 1, false))
-						return null;
-				}
-				else if (TileEntityMaterializer.isItemFuel(itemstack1))
-				{
-					if (!mergeItemStack(itemstack1, 1, 2, false))
-						return null;
-				}
-				else if (par2 >= 3 && par2 < 30)
+//				if (MaterializerRecipes.instance().getMaterializationResult(itemstack1) != null)
+//				{
+//					if (!mergeItemStack(itemstack1, 0, 1, false))
+//						return null;
+//				}
+				if (par2 >= 3 && par2 < 30)
 				{
 					if (!mergeItemStack(itemstack1, 30, 39, false))
 						return null;

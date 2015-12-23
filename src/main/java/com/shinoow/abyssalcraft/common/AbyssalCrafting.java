@@ -52,6 +52,7 @@ public class AbyssalCrafting {
 		addCrystallization();
 		addTransmutation();
 		addEngraving();
+		addMaterialization();
 		addRitualRecipes();
 		addDisruptions();
 	}
@@ -153,6 +154,7 @@ public class AbyssalCrafting {
 		GameRegistry.addRecipe(new ItemStack(AbyssalCraft.darkethaxiumfence, 6), new Object[] {"###", "###", '#', new ItemStack(AbyssalCraft.darkethaxiumbrick, 0)});
 		GameRegistry.addRecipe(new ItemStack(AbyssalCraft.energyPedestal), new Object[]{"#%#", "#&#", "###", '#', AbyssalCraft.monolithStone, '%', AbyssalCraft.Cpearl, '&', AbyssalCraft.shadowgem});
 		GameRegistry.addRecipe(new ItemStack(AbyssalCraft.monolithPillar), new Object[]{"##", "##", '#', AbyssalCraft.monolithStone});
+		GameRegistry.addRecipe(new ItemStack(AbyssalCraft.sacrificialAltar), new Object[]{"#%#", "&$&", "&&&", '#', Blocks.torch, '%', AbyssalCraft.Cpearl, '$', AbyssalCraft.shadowgem, '&', AbyssalCraft.monolithStone});
 	}
 
 	private static void addBlockSmelting(){
@@ -724,6 +726,12 @@ public class AbyssalCrafting {
 		AbyssalCraftAPI.addEngraving(AbyssalCraft.shubniggurathCoin, (ItemEngraving)AbyssalCraft.engravingShubniggurath, 0.5F);
 	}
 
+	private static void addMaterialization(){
+		AbyssalCraftAPI.addMaterialization(new ItemStack[]{new ItemStack(AbyssalCraft.crystal, 8)}, new ItemStack(Items.bone));
+		AbyssalCraftAPI.addMaterialization(new ItemStack[]{new ItemStack(AbyssalCraft.crystal, 8, 2)}, new ItemStack(Items.rotten_flesh));
+		AbyssalCraftAPI.addMaterialization(new ItemStack[]{new ItemStack(AbyssalCraft.crystal, 8), new ItemStack(AbyssalCraft.crystal, 13)}, new ItemStack(AbyssalCraft.Corflesh));
+	}
+
 	private static void addRitualRecipes(){
 		RitualRegistry.instance().addDimensionToBookTypeAndName(0, 0, NecronomiconText.LABEL_INFORMATION_OVERWORLD_TITLE);
 		RitualRegistry.instance().addDimensionToBookTypeAndName(AbyssalCraft.configDimId1, 1, NecronomiconText.LABEL_INFORMATION_ABYSSAL_WASTELAND_TITLE);
@@ -850,6 +858,22 @@ public class AbyssalCrafting {
 		Object[] scoffers = new Object[]{AbyssalCraft.shubniggurathCoin, AbyssalCraft.shubniggurathCoin, AbyssalCraft.shubniggurathCoin, AbyssalCraft.shubniggurathCoin, AbyssalCraft.shubniggurathCoin,
 				AbyssalCraft.shubniggurathCoin, AbyssalCraft.shubniggurathCoin, AbyssalCraft.shubniggurathCoin};
 		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("shubniggurathCharm", 4, 2000F, new ItemStack(AbyssalCraft.shubniggurathCharm, 1, 0), new ItemStack(AbyssalCraft.charm, 1, 0), scoffers));
+		Object[] owoffers = new Object[]{AbyssalCraft.shadowshard, Blocks.cobblestone, AbyssalCraft.Coralium, AbyssalCraft.Darkstone_cobble, AbyssalCraft.shadowshard, Blocks.cobblestone,
+				AbyssalCraft.Coralium, AbyssalCraft.Darkstone_cobble};
+		Object[] awoffers = new Object[]{AbyssalCraft.shadowshard, AbyssalCraft.abybrick, AbyssalCraft.Coralium, AbyssalCraft.cstonebrick, AbyssalCraft.shadowshard, AbyssalCraft.abybrick,
+				AbyssalCraft.Coralium, AbyssalCraft.cstonebrick};
+		Object[] dloffers = new Object[]{AbyssalCraft.shadowshard, AbyssalCraft.dreadbrick, AbyssalCraft.Coralium, AbyssalCraft.abydreadbrick, AbyssalCraft.shadowshard, AbyssalCraft.dreadbrick,
+				AbyssalCraft.Coralium, AbyssalCraft.abydreadbrick};
+		Object[] omtoffers = new Object[]{AbyssalCraft.shadowshard, new ItemStack(AbyssalCraft.ethaxiumbrick, 1, 0), AbyssalCraft.Coralium, new ItemStack(AbyssalCraft.darkethaxiumbrick, 1, 0),
+				AbyssalCraft.shadowshard, new ItemStack(AbyssalCraft.ethaxiumbrick, 1, 0), AbyssalCraft.Coralium, new ItemStack(AbyssalCraft.darkethaxiumbrick, 1, 0)};
+		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("epOWupgrade", 0, 400F, new ItemStack(AbyssalCraft.tieredEnergyPedestal, 1, 0), AbyssalCraft.energyPedestal, owoffers));
+		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("epAWupgrade", 1, 800F, new ItemStack(AbyssalCraft.tieredEnergyPedestal, 1, 1), new ItemStack(AbyssalCraft.tieredEnergyPedestal, 1, 0), awoffers));
+		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("epDLupgrade", 2, 1200F, new ItemStack(AbyssalCraft.tieredEnergyPedestal, 1, 2), new ItemStack(AbyssalCraft.tieredEnergyPedestal, 1, 1), dloffers));
+		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("epOMTupgrade", 3, 1600F, new ItemStack(AbyssalCraft.tieredEnergyPedestal, 1, 3), new ItemStack(AbyssalCraft.tieredEnergyPedestal, 1, 2), omtoffers));
+		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("saOWupgrade", 0, 400F, new ItemStack(AbyssalCraft.tieredSacrificialAltar, 1, 0), AbyssalCraft.sacrificialAltar, owoffers));
+		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("saAWupgrade", 1, 800F, new ItemStack(AbyssalCraft.tieredSacrificialAltar, 1, 1), new ItemStack(AbyssalCraft.tieredSacrificialAltar, 1, 0), awoffers));
+		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("saDLupgrade", 2, 1200F, new ItemStack(AbyssalCraft.tieredSacrificialAltar, 1, 2), new ItemStack(AbyssalCraft.tieredSacrificialAltar, 1, 1), dloffers));
+		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("saOMTupgrade", 3, 1600F, new ItemStack(AbyssalCraft.tieredSacrificialAltar, 1, 3), new ItemStack(AbyssalCraft.tieredSacrificialAltar, 1, 2), omtoffers));
 	}
 
 	private static void addDisruptions(){

@@ -11,9 +11,13 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.api.necronomicon;
 
+import java.util.List;
+
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.CraftingManager;
+import net.minecraft.item.crafting.IRecipe;
 
 /**
  * Simple collection of ItemStacks used for displaying crafting recipes in the Necronomicon

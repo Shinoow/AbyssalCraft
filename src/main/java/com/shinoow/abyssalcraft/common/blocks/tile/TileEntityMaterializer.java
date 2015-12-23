@@ -20,6 +20,9 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
 
+import java.util.Iterator;
+import java.util.List;
+
 import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI.FuelType;
@@ -38,14 +41,7 @@ public class TileEntityMaterializer extends TileEntity implements ISidedInventor
 	 * The ItemStacks that hold the items currently being used in the materializer
 	 */
 	private ItemStack[] materializerItemStacks = new ItemStack[30];
-	/** The number of ticks that the materializer will keep burning */
-	public int materializerBurnTime;
-	/**
-	 * The number of ticks that a fresh copy of the currently-burning item would keep the materializer burning for
-	 */
-	public int currentItemBurnTime;
-	/** The number of ticks that the current item has been processing for */
-	public int materializerProcessTime;
+
 	private String containerName;
 
 	/**
@@ -163,10 +159,6 @@ public class TileEntityMaterializer extends TileEntity implements ISidedInventor
 				materializerItemStacks[b0] = ItemStack.loadItemStackFromNBT(nbttagcompound1);
 		}
 
-		materializerBurnTime = par1.getShort("BurnTime");
-		materializerProcessTime = par1.getShort("ProcessTime");
-		currentItemBurnTime = getItemBurnTime(materializerItemStacks[1]);
-
 		if (par1.hasKey("CustomName", 8))
 			containerName = par1.getString("CustomName");
 	}
@@ -175,11 +167,9 @@ public class TileEntityMaterializer extends TileEntity implements ISidedInventor
 	public void writeToNBT(NBTTagCompound par1)
 	{
 		super.writeToNBT(par1);
-		par1.setShort("BurnTime", (short)materializerBurnTime);
-		par1.setShort("ProcessTime", (short)materializerProcessTime);
 		NBTTagList nbttaglist = new NBTTagList();
 
-		for (int i = 0; i < materializerItemStacks.length; ++i)
+		for (int i = 0; i < getSizeInventory(); ++i)
 			if (materializerItemStacks[i] != null)
 			{
 				NBTTagCompound nbttagcompound1 = new NBTTagCompound();
@@ -203,88 +193,75 @@ public class TileEntityMaterializer extends TileEntity implements ISidedInventor
 		return 64;
 	}
 
-	/**
-	 * Returns an integer between 0 and the passed value representing how close the current item is to being completely
-	 * cooked
-	 */
-	@SideOnly(Side.CLIENT)
-	public int getProcessProgressScaled(int par1)
-	{
-		return materializerProcessTime * par1 / 200;
-	}
-
-	/**
-	 * Returns an integer between 0 and the passed value representing how much burn time is left on the current fuel
-	 * item, where 0 means that the item is exhausted and the passed value means that the item is fresh
-	 */
-	@SideOnly(Side.CLIENT)
-	public int getBurnTimeRemainingScaled(int par1)
-	{
-		if (currentItemBurnTime == 0)
-			currentItemBurnTime = 200;
-
-		return materializerBurnTime * par1 / currentItemBurnTime;
-	}
-
-	/**
-	 * Materializer is materializing
-	 */
-	public boolean isMaterializing()
-	{
-		return materializerBurnTime > 0;
-	}
-
 	@Override
 	public void updateEntity()
 	{
-		boolean flag = materializerBurnTime > 0;
-		boolean flag1 = false;
+//		boolean flag = materializerBurnTime > 0;
+//		boolean flag1 = false;
+//
+//		if (materializerBurnTime > 0)
+//			--materializerBurnTime;
+//
+//		if (!worldObj.isRemote)
+//		{
+//			if (materializerBurnTime == 0 && canMaterialize())
+//			{
+//				currentItemBurnTime = materializerBurnTime = getItemBurnTime(materializerItemStacks[1]);
+//
+//				if (materializerBurnTime > 0)
+//				{
+//					flag1 = true;
+//
+//					if (materializerItemStacks[1] != null)
+//					{
+//						--materializerItemStacks[1].stackSize;
+//
+//						if (materializerItemStacks[1].stackSize == 0)
+//							materializerItemStacks[1] = materializerItemStacks[1].getItem().getContainerItem(materializerItemStacks[1]);
+//					}
+//				}
+//			}
+//
+//			if (isMaterializing() && canMaterialize())
+//			{
+//				++materializerProcessTime;
+//
+//				if (materializerProcessTime == 200)
+//				{
+//					materializerProcessTime = 0;
+//					processItem();
+//					flag1 = true;
+//				}
+//			} else
+//				materializerProcessTime = 0;
+//
+//			if (flag != materializerBurnTime > 0)
+//			{
+//				flag1 = true;
+//				BlockMaterializer.updateMaterializerBlockState(materializerBurnTime > 0, worldObj, xCoord, yCoord, zCoord);
+//			}
+//		}
+//
+//		if (flag1)
+//			markDirty();
+		test();
+	}
 
-		if (materializerBurnTime > 0)
-			--materializerBurnTime;
-
-		if (!worldObj.isRemote)
+	private void test()
+	{
+		if (materializerItemStacks[0] != null)
 		{
-			if (materializerBurnTime == 0 && canMaterialize())
-			{
-				currentItemBurnTime = materializerBurnTime = getItemBurnTime(materializerItemStacks[1]);
-
-				if (materializerBurnTime > 0)
-				{
-					flag1 = true;
-
-					if (materializerItemStacks[1] != null)
-					{
-						--materializerItemStacks[1].stackSize;
-
-						if (materializerItemStacks[1].stackSize == 0)
-							materializerItemStacks[1] = materializerItemStacks[1].getItem().getContainerItem(materializerItemStacks[1]);
-					}
-				}
+			List<ItemStack> list = MaterializerRecipes.instance().getMaterializationResult(materializerItemStacks[0]);
+			
+			if(list != null){
+				Iterator<ItemStack> iter = list.iterator();
+			
+			for(int i = 2; i < materializerItemStacks.length; i++){
+				if(iter.hasNext())
+					materializerItemStacks[i] = iter.next();
 			}
-
-			if (isMaterializing() && canMaterialize())
-			{
-				++materializerProcessTime;
-
-				if (materializerProcessTime == 200)
-				{
-					materializerProcessTime = 0;
-					processItem();
-					flag1 = true;
-				}
-			} else
-				materializerProcessTime = 0;
-
-			if (flag != materializerBurnTime > 0)
-			{
-				flag1 = true;
-				BlockMaterializer.updateMaterializerBlockState(materializerBurnTime > 0, worldObj, xCoord, yCoord, zCoord);
 			}
 		}
-
-		if (flag1)
-			markDirty();
 	}
 
 	/**
@@ -296,12 +273,24 @@ public class TileEntityMaterializer extends TileEntity implements ISidedInventor
 			return false;
 		else
 		{
-			ItemStack itemstack = MaterializerRecipes.instance().getMaterializationResult(materializerItemStacks[0]);
-			if (itemstack == null) return false;
-			if (materializerItemStacks[2] == null) return true;
-			if (!materializerItemStacks[2].isItemEqual(itemstack)) return false;
-			int result = materializerItemStacks[2].stackSize + itemstack.stackSize;
-			return result <= getInventoryStackLimit() && result <= materializerItemStacks[2].getMaxStackSize();
+//			ItemStack itemstack = MaterializerRecipes.instance().getMaterializationResult(materializerItemStacks[0]);
+//			if (itemstack == null) return false;
+//			if (materializerItemStacks[2] == null) return true;
+//			if (!materializerItemStacks[2].isItemEqual(itemstack)) return false;
+//			int result = materializerItemStacks[2].stackSize + itemstack.stackSize;
+//			return result <= getInventoryStackLimit() && result <= materializerItemStacks[2].getMaxStackSize();
+			List<ItemStack> list = MaterializerRecipes.instance().getMaterializationResult(materializerItemStacks[0]);
+			
+			if(list == null) return false;
+			
+			Iterator<ItemStack> iter = list.iterator();
+			
+			for(int i = 2; i < materializerItemStacks.length; i++){
+				if(iter.hasNext())
+					materializerItemStacks[i] = iter.next();
+			}
+			
+			return !list.isEmpty();
 		}
 	}
 
@@ -310,66 +299,20 @@ public class TileEntityMaterializer extends TileEntity implements ISidedInventor
 	 */
 	public void processItem()
 	{
-		if (canMaterialize())
-		{
-			ItemStack itemstack = MaterializerRecipes.instance().getMaterializationResult(materializerItemStacks[0]);
-
-			if (materializerItemStacks[2] == null)
-				materializerItemStacks[2] = itemstack.copy();
-			else if (materializerItemStacks[2].getItem() == itemstack.getItem())
-				materializerItemStacks[2].stackSize += itemstack.stackSize;
-
-			--materializerItemStacks[0].stackSize;
-
-			if (materializerItemStacks[0].stackSize <= 0)
-				materializerItemStacks[0] = null;
-		}
-	}
-
-	/**
-	 * Returns the number of ticks that the supplied fuel item will keep the materializer burning, or 0 if the item isn't
-	 * fuel
-	 */
-	public static int getItemBurnTime(ItemStack par1ItemStack)
-	{
-		if (par1ItemStack == null)
-			return 0;
-		else
-		{
-			Item item = par1ItemStack.getItem();
-
-			if (item == AbyssalCraft.Corflesh) return 100;
-			if (item == AbyssalCraft.Corbone) return 100;
-			if (item == AbyssalCraft.cbrick) return 200;
-			if (item == AbyssalCraft.Coralium) return 200;
-			if (item == AbyssalCraft.Coraliumcluster2) return 400;
-			if (item == AbyssalCraft.Coraliumcluster3) return 600;
-			if (item == AbyssalCraft.Coraliumcluster4) return 800;
-			if (item == AbyssalCraft.Coraliumcluster5) return 1000;
-			if (item == AbyssalCraft.Coraliumcluster6) return 1200;
-			if (item == AbyssalCraft.Coraliumcluster7) return 1400;
-			if (item == AbyssalCraft.Coraliumcluster8) return 1600;
-			if (item == AbyssalCraft.Coraliumcluster9) return 1800;
-			if (item == AbyssalCraft.Cpearl) return 2000;
-			if (item == AbyssalCraft.Corb) return 10000;
-			if (item == AbyssalCraft.Cchunk) return 16200;
-			if (item == AbyssalCraft.Cbucket) return 20000;
-			if (item == Item.getItemFromBlock(AbyssalCraft.Cwater)) return 22000;
-			if (AbyssalCraftAPI.getCrystals().contains(par1ItemStack)) return 1200;
-			if (item == Items.blaze_powder) return 1200;
-			if (item == Items.blaze_rod) return 2400;
-			if (item == AbyssalCraft.methane) return 10000;
-			return AbyssalCraftAPI.getFuelValue(par1ItemStack, FuelType.TRANSMUTATOR);
-		}
-	}
-
-	public static boolean isItemFuel(ItemStack par1ItemStack)
-	{
-		/**
-		 * Returns the number of ticks that the supplied fuel item will keep the materializer burning, or 0 if the item isn't
-		 * fuel
-		 */
-		return getItemBurnTime(par1ItemStack) > 0;
+//		if (canMaterialize())
+//		{
+//			ItemStack itemstack = MaterializerRecipes.instance().getMaterializationResult(materializerItemStacks[0]);
+//
+//			if (materializerItemStacks[2] == null)
+//				materializerItemStacks[2] = itemstack.copy();
+//			else if (materializerItemStacks[2].getItem() == itemstack.getItem())
+//				materializerItemStacks[2].stackSize += itemstack.stackSize;
+//
+//			--materializerItemStacks[0].stackSize;
+//
+//			if (materializerItemStacks[0].stackSize <= 0)
+//				materializerItemStacks[0] = null;
+//		}
 	}
 
 	/**
@@ -393,7 +336,7 @@ public class TileEntityMaterializer extends TileEntity implements ISidedInventor
 	@Override
 	public boolean isItemValidForSlot(int par1, ItemStack par2ItemStack)
 	{
-		return par1 == 2 ? false : par1 == 1 ? isItemFuel(par2ItemStack) : true;
+		return false;
 	}
 
 	/**
@@ -413,7 +356,7 @@ public class TileEntityMaterializer extends TileEntity implements ISidedInventor
 	@Override
 	public boolean canInsertItem(int par1, ItemStack par2ItemStack, int par3)
 	{
-		return isItemValidForSlot(par1, par2ItemStack);
+		return false;
 	}
 
 	/**
@@ -423,7 +366,7 @@ public class TileEntityMaterializer extends TileEntity implements ISidedInventor
 	@Override
 	public boolean canExtractItem(int par1, ItemStack par2ItemStack, int par3)
 	{
-		return par3 != 0 || par1 != 1 || par2ItemStack.getItem() == Items.bucket;
+		return false;
 	}
 
 }

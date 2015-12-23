@@ -89,13 +89,23 @@ public class NecronomiconResources {
 	public static final ResourceLocation RITUAL_TUT_1 = new ResourceLocation("abyssalcraft", "textures/gui/necronomicon/ritual_1.png");
 	public static final ResourceLocation RITUAL_TUT_2 = new ResourceLocation("abyssalcraft", "textures/gui/necronomicon/ritual_2.png");
 	public static final ResourceLocation RITUAL_TUT_3 = new ResourceLocation("abyssalcraft", "textures/gui/necronomicon/ritual_3.png");
-	public static final ResourceLocation RITUAL_TUT_4 = new ResourceLocation("abyssalcraft", "textures/gui/necronomicon/ritual_4.png");
+
+	public static final ResourceLocation PE_TUT_1 = new ResourceLocation("abyssalcraft", "textures/gui/necronomicon/pe/shoggoth_lair.png");
+	public static final ResourceLocation PE_TUT_2 = new ResourceLocation("abyssalcraft", "textures/gui/necronomicon/pe/monoliths.png");
+	public static final ResourceLocation PE_TUT_3 = new ResourceLocation("abyssalcraft", "textures/gui/necronomicon/pe/statues.png");
+	public static final ResourceLocation PE_TUT_4 = new ResourceLocation("abyssalcraft", "textures/gui/necronomicon/pe/charms.png");
+	public static final ResourceLocation PE_TUT_5 = new ResourceLocation("abyssalcraft", "textures/gui/necronomicon/pe/energy_pedestal.png");
+	public static final ResourceLocation PE_TUT_6 = new ResourceLocation("abyssalcraft", "textures/gui/necronomicon/pe/sacrificial_altar.png");
+	public static final ResourceLocation PE_TUT_7 = new ResourceLocation("abyssalcraft", "textures/gui/necronomicon/pe/tiers.png");
 
 	//Transmutation grid
 	public static final ResourceLocation TRANSMUTATION = new ResourceLocation("abyssalcraft", "textures/gui/necronomicon/transmutation.png");
 
 	//Crystallization grid (additional slot to Transmutation grid)
 	public static final ResourceLocation CRYSTALLIZATION = new ResourceLocation("abyssalcraft", "textures/gui/necronomicon/crystallization.png");
+
+	//Blank image
+	public static final ResourceLocation BLANK = new ResourceLocation("abyssalcraft", "textures/gui/necronomicon/blank.png");
 
 	public static final ResourceLocation[] OVERWORLD_ENTITIES = {ABYSSAL_ZOMBIE, DEPTHS_GHOUL, SHADOW_CREATURE, SHADOW_MONSTER, SHADOW_BEAST,
 		ANTI_ENTITIES, EVIL_ANIMALS, LESSER_SHOGGOTH};
@@ -115,4 +125,6 @@ public class NecronomiconResources {
 	public static final ResourceLocation[] OUTER_GODS = {AZATHOTH_SEAL, NYARLATHOTEP_SEAL, YOG_SOTHOTH_SEAL, SHUB_NIGGURATH_SEAL};
 
 	public static final ResourceLocation[] GREAT_OLD_ONES = {CTHULHU_SEAL, HASTUR_SEAL, JZAHAR_SEAL};
+	
+	public static final ResourceLocation[] RITUAL_TUT = {RITUAL_TUT_1, RITUAL_TUT_2, RITUAL_TUT_3};
 }

@@ -132,4 +132,9 @@ public class TileEntityEnergyPedestal extends TileEntity implements IEnergyConta
 	public void consumeEnergy(float energy) {
 		this.energy -= energy;
 	}
+
+	@Override
+	public boolean canAcceptPE() {
+		return true;
+	}
 }

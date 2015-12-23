@@ -13,6 +13,7 @@ package com.shinoow.abyssalcraft.api.necronomicon;
 
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.Tuple;
 
 /**
  * Base data structure for Necronomicon information pages
@@ -78,16 +79,7 @@ public class NecroData {
 	 * @return An array of Objects representing the page icons/pictures, if any
 	 */
 	public Object[] getPageIcons(int index){
-		switch(pageData[index].type){
-		case ENTRY:
-			return pageData[index].icons;
-		case INFO:
-			return pageData[index].pictures;
-		case CRAFTING:
-			return pageData[index].recipes;
-		default:
-			return null;
-		}
+		return pageData[index].icons;
 	}
 
 	/**
@@ -129,29 +121,27 @@ public class NecroData {
 		private String[] pages;
 		private int pageNumber;
 		private String title;
-		private ItemStack[] icons;
-		private CraftingStack[] recipes;
-		private ResourceLocation[] pictures;
-		private PageType type;
+		private Object[] icons;
 
+		@Deprecated
 		public enum PageType {
-			NORMAL, ENTRY, INFO, CRAFTING
+			NORMAL, ENTRY, INFO, CRAFTING, MULTI
 		}
 
 		/**
 		 * Page data for the NecroData structure
-		 * @param num Amount of turn-ups for the sub-category
+		 * @param num Amount of turn-ups for the sub-category (max 20)
 		 * @param title A title to display on the top of the page
 		 * @param strings Text to be written on the pages (each string will represent one of
 		 * the two open pages, leave a empty string for a empty page)
 		 */
 		public PageData(int num, String title, String...strings){
-			this(num, title, PageType.NORMAL, null, strings);
+			this(num, title, null, strings);
 		}
 
 		/**
 		 * Page data for the NecroData structure
-		 * @param num Amount of turn-ups for the sub-category (max 10)
+		 * @param num Amount of turn-ups for the sub-category (max 20)
 		 * @param title A title to display on the top of the page
 		 * @param pagetype A PageType, mainly used for the Object array
 		 * @param stuff An array of Objects used as a icons/pictures for the page (has to be the same amount
@@ -159,19 +149,27 @@ public class NecroData {
 		 * @param strings Text to be written on the pages (each string will represent one of
 		 * the two open pages, leave a empty string for a empty page)
 		 */
+		@Deprecated
 		public PageData(int num, String title, PageType pagetype, Object[] stuff, String...strings){
-			if(num > 10) throw new IndexOutOfBoundsException("Too many turn-ups! Maximum is 10! ("+num+")");
+			this(num, title, stuff, strings);
+		}
+		
+		/**
+		 * Page data for the NecroData structure
+		 * @param num Amount of turn-ups for the sub-category (max 20)
+		 * @param title A title to display on the top of the page
+		 * @param stuff An array of Objects used as a icons/pictures for the page (has to be the same amount
+		 * as the turn-up amount, can contain null elements if you don't want a icon/picture on a certain page)
+		 * @param strings Text to be written on the pages (each string will represent one of
+		 * the two open pages, leave a empty string for a empty page)
+		 */
+		public PageData(int num, String title, Object[] stuff, String...strings){
+			if(num > 20) throw new IndexOutOfBoundsException("Too many turn-ups! Maximum is 20! ("+num+")");
 			pageNumber = num;
 			this.title = title;
-			type = pagetype;
 			if(stuff != null)
 				if(stuff.length == num){
-					if(type.equals(PageType.ENTRY))
-						icons = (ItemStack[])stuff;
-					else if(type.equals(PageType.INFO))
-						pictures = (ResourceLocation[])stuff;
-					else if(type.equals(PageType.CRAFTING))
-						recipes = (CraftingStack[])stuff;
+					icons = stuff;
 				} else throw new IndexOutOfBoundsException("Not enough elements in the Object array! ("+num+" turn-up(s), "+stuff.length+" Objects");
 			if(strings.length/2 <= num)
 				pages = strings;
@@ -208,16 +206,7 @@ public class NecroData {
 		 * @return A Object representing a specific page icon/picture
 		 */
 		public Object getIcon(int index){
-			switch(type){
-			case ENTRY:
-				return icons[index];
-			case INFO:
-				return pictures[index];
-			case CRAFTING:
-				return recipes[index];
-			default:
-				return null;
-			}
+			return icons[index];
 		}
 
 		/**
@@ -225,29 +214,12 @@ public class NecroData {
 		 * @return An array of Object representing page icons/pictures
 		 */
 		public Object[] getIcons(){
-			switch(type){
-			case ENTRY:
-				return icons;
-			case INFO:
-				return pictures;
-			case CRAFTING:
-				return recipes;
-			default:
-				return null;
-			}
-		}
-
-		/**
-		 * Getter for the PageType
-		 * @return The PageType assigned to the sub-category
-		 */
-		public PageType getPageType(){
-			return type;
+			return icons;
 		}
 
 		@Override
 		public String toString(){
-			return "PageData{PageType: "+ type + ",Pages: "+pageNumber/2 +",Objects:"+getIcons().toString() +"}";
+			return "PageData{Pages: "+pageNumber/2 +",Objects:"+getIcons().toString() +"}";
 		}
 	}
 }

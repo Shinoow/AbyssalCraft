@@ -25,6 +25,7 @@ import com.shinoow.abyssalcraft.common.inventory.*;
 import com.shinoow.abyssalcraft.common.items.ItemNecronomicon;
 
 import cpw.mods.fml.common.network.IGuiHandler;
+import cpw.mods.fml.common.network.simpleimpl.MessageContext;
 
 public class CommonProxy implements IGuiHandler {
 
@@ -115,5 +116,12 @@ public class CommonProxy implements IGuiHandler {
 
 	public ModelBiped getArmorModel(int id){
 		return null;
+	}
+
+	/**
+	 * Returns a side-appropriate EntityPlayer for use during message handling
+	 */
+	public EntityPlayer getPlayerEntity(MessageContext ctx) {
+	 return ctx.getServerHandler().playerEntity;
 	}
 }

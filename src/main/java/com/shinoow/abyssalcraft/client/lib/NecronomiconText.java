@@ -108,6 +108,9 @@ public class NecronomiconText {
 	public static String MATERIAL_ETHAXIUM_2 = translate("necronomicon.text.materials.ethaxium.2");
 	public static String MATERIAL_DARK_ETHAXIUM_1 = translate("necronomicon.text.materials.darkethaxium.1");
 	public static String MATERIAL_DARK_ETHAXIUM_2 = translate("necronomicon.text.materials.darkethaxium.2");
+	public static String MATERIAL_RITUAL_ALTAR_1 = translate("necronomicon.text.materials.ritualaltar.1");
+	public static String MATERIAL_RITUAL_PEDESTAL_1 = translate("necronomicon.text.materials.ritualpedestal.1");
+	public static String MATERIAL_MONOLITH_STONE_1 = translate("necronomicon.text.materials.monolithstone.1");
 
 	public static String CRAFTING_CORALIUM_INFUSED_STONE_1 = translate("necronomicon.text.crafting.coraliuminfusedstone.1");
 	public static String CRAFTING_CORALIUM_INFUSED_STONE_2 = translate("necronomicon.text.crafting.coraliuminfusedstone.2");
@@ -164,6 +167,12 @@ public class NecronomiconText {
 	public static String CRAFTING_ENERGY_PEDESTAL_2 = translate("necronomicon.text.crafting.energypedestal.2");
 	public static String CRAFTING_DREADIUM_1 = translate("necronomicon.text.crafting.dreadium.1");
 	public static String CRAFTING_DREADIUM_2 = translate("necronomicon.text.crafting.dreadium.2");
+	public static String CRAFTING_MONOLITH_PILLAR_1 = translate("necronomicon.text.crafting.monolithpillar.1");
+	public static String CRAFTING_MONOLITH_PILLAR_2 = translate("necronomicon.text.crafting.monolithpillar.2");
+	public static String CRAFTING_RITUAL_CHARM_1 = translate("necronomicon.text.crafting.ritualcharm.1");
+	public static String CRAFTING_RITUAL_CHARM_2 = translate("necronomicon.text.crafting.ritualcharm.2");
+	public static String CRAFTING_SACRIFICIAL_ALTAR_1 = translate("necronomicon.text.crafting.sacrificialaltar.1");
+	public static String CRAFTING_SACRIFICIAL_ALTAR_2 = translate("necronomicon.text.crafting.sacrificialaltar.2");
 
 	public static String PROGRESSION_OVERWORLD_1 = translate("necronomicon.text.overworld.progression.1");
 	public static String PROGRESSION_OVERWORLD_2 = translate("necronomicon.text.overworld.progression.2");
@@ -252,8 +261,17 @@ public class NecronomiconText {
 	public static String RITUAL_TUT_4 = translate("necronomicon.text.rituals.4");
 	public static String RITUAL_TUT_5 = translate("necronomicon.text.rituals.5");
 	public static String RITUAL_TUT_6 = translate("necronomicon.text.rituals.6");
-	public static String RITUAL_TUT_7 = translate("necronomicon.text.rituals.7");
-	public static String RITUAL_TUT_8 = translate("necronomicon.text.rituals.8");
+
+	public static String PE_TUT_1 = translate("necronomicon.text.pe.1");
+	public static String PE_TUT_2 = translate("necronomicon.text.pe.2");
+	public static String PE_TUT_3 = translate("necronomicon.text.pe.3");
+	public static String PE_TUT_4 = translate("necronomicon.text.pe.4");
+	public static String PE_TUT_5 = translate("necronomicon.text.pe.5");
+	public static String PE_TUT_6 = translate("necronomicon.text.pe.6");
+	public static String PE_TUT_7 = translate("necronomicon.text.pe.7");
+	public static String PE_TUT_8 = translate("necronomicon.text.pe.8");
+	public static String PE_TUT_9 = translate("necronomicon.text.pe.9");
+	public static String PE_TUT_10 = translate("necronomicon.text.pe.10");
 
 	public static String MACHINES_INFO = translate("necronomicon.text.machines.info");
 
@@ -284,8 +302,8 @@ public class NecronomiconText {
 	public static String[] DARK_REALM_MATERIALS = {MATERIAL_DARKSTONE_1, MATERIAL_DARKSTONE_2};
 
 	public static String[] OVERWORLD_CRAFTING = {CRAFTING_CORALIUM_INFUSED_STONE_1, CRAFTING_CORALIUM_INFUSED_STONE_2,
-		CRAFTING_SHADOW_GEM_1, CRAFTING_SHADOW_GEM_2, CRAFTING_SHARD_OF_OBLIVION, "", CRAFTING_ENERGY_PEDESTAL_1,
-		CRAFTING_ENERGY_PEDESTAL_2, CRAFTING_GATEWAY_KEY, "", CRAFTING_SKIN_OF_THE_ABYSSAL_WASTELAND_1, "", CRAFTING_NECRONOMICON_C};
+		CRAFTING_SHADOW_GEM_1, CRAFTING_SHADOW_GEM_2, CRAFTING_SHARD_OF_OBLIVION, "", CRAFTING_GATEWAY_KEY, "",
+		CRAFTING_SKIN_OF_THE_ABYSSAL_WASTELAND_1, "", CRAFTING_NECRONOMICON_C};
 	public static String[] OVERWORLD_ARMOR_TOOLS = {CRAFTING_STAFF_OF_RENDING_1, CRAFTING_STAFF_OF_RENDING_2};
 	public static String[] ABYSSAL_WASTELAND_CRAFTING = {CRAFTING_POWERSTONE_TRACKER, "", CRAFTING_TRANSMUTATOR_1, CRAFTING_TRANSMUTATOR_2,
 		CRAFTING_CORALIUM_CHUNK, "", CRAFTING_CORALIUM_PLATE, "", CRAFTING_SKIN_OF_THE_DREADLANDS_1, "", CRAFTING_NECRONOMICON_D};
@@ -326,6 +344,13 @@ public class NecronomiconText {
 	public static String[] DARK_REALM_ENTITIES = {ENTITY_SHADOW_CREATURE_1, ENTITY_SHADOW_CREATURE_2, ENTITY_SHADOW_MONSTER_1,
 		ENTITY_SHADOW_MONSTER_2, ENTITY_SHADOW_BEAST_1, ENTITY_SHADOW_BEAST_2, ENTITY_SHADOW_TITAN_1, ENTITY_SHADOW_TITAN_2,
 		ENTITY_SACTHOTH_1, ENTITY_SACTHOTH_2, ENTITY_LESSER_SHOGGOTH_1, ENTITY_LESSER_SHOGGOTH_2};
+
+	public static String[] RITUAL_TUT = {RITUAL_TUT_1, RITUAL_TUT_2, RITUAL_TUT_3, RITUAL_TUT_4, RITUAL_TUT_5, RITUAL_TUT_6};
+	public static String[] RITUAL_MATERIALS = {MATERIAL_RITUAL_ALTAR_1, MATERIAL_RITUAL_PEDESTAL_1, MATERIAL_MONOLITH_STONE_1};
+	public static String[] RITUAL_CRAFTING = {CRAFTING_ENERGY_PEDESTAL_1, CRAFTING_ENERGY_PEDESTAL_2, CRAFTING_MONOLITH_PILLAR_1,
+		CRAFTING_RITUAL_CHARM_1, CRAFTING_SACRIFICIAL_ALTAR_1, CRAFTING_SACRIFICIAL_ALTAR_2};
+	public static String[] PE_TUT = {PE_TUT_1, PE_TUT_2, PE_TUT_3, PE_TUT_4, PE_TUT_5, PE_TUT_6, PE_TUT_7, PE_TUT_8, PE_TUT_9,
+		PE_TUT_10};
 
 	public static String WIP = translate("necronomicon.text.wip");
 
@@ -368,6 +393,8 @@ public class NecronomiconText {
 	public static String LABEL_INFORMATION_MACHINES = translate("necronomicon.information.machines");
 	public static String LABEL_REQUIRED_ENERGY = translate("necronomicon.reqenergy");
 	public static String LABEL_REMNANT_HELP = translate("necronomicon.remnanthelp");
+	public static String LABEL_GETTING_STARTED = translate("necronomicon.gettingstarted");
+	public static String LABEL_POTENTIAL_ENERGY = translate("necronomicon.potentialenergy");
 
 	/**
 	 * The best way to drown an array of strings with nonsense

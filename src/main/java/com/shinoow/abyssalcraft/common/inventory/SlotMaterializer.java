@@ -67,32 +67,6 @@ public class SlotMaterializer extends Slot
 	{
 		par1ItemStack.onCrafting(thePlayer.worldObj, thePlayer, stackSize);
 
-		if (!thePlayer.worldObj.isRemote)
-		{
-			int i = stackSize;
-			float f = MaterializerRecipes.instance().getExperience(par1ItemStack);
-			int j;
-
-			if (f == 0.0F)
-				i = 0;
-			else if (f < 1.0F)
-			{
-				j = MathHelper.floor_float(i * f);
-
-				if (j < MathHelper.ceiling_float_int(i * f) && (float)Math.random() < i * f - j)
-					++j;
-
-				i = j;
-			}
-
-			while (i > 0)
-			{
-				j = EntityXPOrb.getXPSplit(i);
-				i -= j;
-				thePlayer.worldObj.spawnEntityInWorld(new EntityXPOrb(thePlayer.worldObj, thePlayer.posX, thePlayer.posY + 0.5D, thePlayer.posZ + 0.5D, j));
-			}
-		}
-
 		stackSize = 0;
 
 		MinecraftForge.EVENT_BUS.post(new ACEvents.ItemMaterializedEvent(thePlayer, par1ItemStack));

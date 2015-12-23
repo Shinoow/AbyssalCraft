@@ -165,85 +165,126 @@ public class TileStatueDirectional extends TEDirectional implements IEnergyManip
 
 		int range = (int) (7 + getPillarMultiplier() + getAmplifier(AmplifierType.RANGE));
 
-		if(worldObj.getBlock(xCoord, yCoord, zCoord).getCollisionBoundingBoxFromPool(worldObj, xCoord, yCoord, zCoord) != null){
-			List<EntityPlayer> players = worldObj.getEntitiesWithinAABB(EntityPlayer.class, worldObj.getBlock(xCoord, yCoord, zCoord).getCollisionBoundingBoxFromPool(worldObj, xCoord, yCoord, zCoord).expand(range, range, range));
+		if(!(worldObj.getTileEntity(xCoord, yCoord + 1, zCoord) instanceof IEnergyManipulator) &&
+				!(worldObj.getTileEntity(xCoord, yCoord - 1, zCoord) instanceof IEnergyManipulator) &&
+				!(worldObj.getTileEntity(xCoord, yCoord + 2, zCoord) instanceof IEnergyManipulator) &&
+				!(worldObj.getTileEntity(xCoord, yCoord - 2, zCoord) instanceof IEnergyManipulator)){
+			if(worldObj.getBlock(xCoord, yCoord, zCoord).getCollisionBoundingBoxFromPool(worldObj, xCoord, yCoord, zCoord) != null){
+				List<EntityPlayer> players = worldObj.getEntitiesWithinAABB(EntityPlayer.class, worldObj.getBlock(xCoord, yCoord, zCoord).getCollisionBoundingBoxFromPool(worldObj, xCoord, yCoord, zCoord).expand(range, range, range));
 
-			for(EntityPlayer player : players)
-				if(EntityUtil.hasNecronomicon(player)){
-					ItemStack item = player.getCurrentEquippedItem();
-					if(item != null && item.getItem() instanceof IEnergyTransporter){
-						timer++;
-						if(timer >= (int)(timerMax / getAmplifier(AmplifierType.DURATION))){
-							timer = worldObj.rand.nextInt(10);
-							if(!worldObj.isRemote && ((IEnergyTransporter) item.getItem()).getContainedEnergy(item) < ((IEnergyTransporter) item.getItem()).getMaxEnergy(item))
-								((IEnergyTransporter) item.getItem()).addEnergy(item, energyQuanta());
-							for(double i = 0; i <= 0.7; i += 0.03) {
-								int xPos = xCoord < player.posX ? 1 : xCoord > player.posX ? -1 : 0;
-								int yPos = yCoord < player.posY ? 1 : yCoord > player.posY ? -1 : 0;
-								int zPos = zCoord < player.posZ ? 1 : zCoord > player.posZ ? -1 : 0;
-								double x = i * Math.cos(i) / 2 * xPos;
-								double y = i * Math.tan(i) / 2 * yPos;
-								double z = i * Math.sin(i) / 2 * zPos;
-								worldObj.spawnParticle("largesmoke", xCoord + 0.5, yCoord + 0.5, zCoord + 0.5, x, y, z);
+				for(EntityPlayer player : players)
+					if(EntityUtil.hasNecronomicon(player)){
+						ItemStack item = player.getCurrentEquippedItem();
+						if(item != null && item.getItem() instanceof IEnergyTransporter){
+							timer++;
+							if(timer >= (int)(timerMax / getAmplifier(AmplifierType.DURATION))){
+								timer = worldObj.rand.nextInt(10);
+								if(!worldObj.isRemote && ((IEnergyTransporter) item.getItem()).getContainedEnergy(item) < ((IEnergyTransporter) item.getItem()).getMaxEnergy(item))
+									((IEnergyTransporter) item.getItem()).addEnergy(item, energyQuanta());
+								for(double i = 0; i <= 0.7; i += 0.03) {
+									int xPos = xCoord < (int) player.posX ? 1 : xCoord > (int) player.posX ? -1 : 0;
+									int yPos = yCoord < (int) player.posY ? 1 : yCoord > (int) player.posY ? -1 : 0;
+									int zPos = zCoord < (int) player.posZ ? 1 : zCoord > (int) player.posZ ? -1 : 0;
+									double x = i * Math.cos(i) / 2 * xPos;
+									double y = i * Math.sin(i) / 2 * yPos;
+									double z = i * Math.sin(i) / 2 * zPos;
+									worldObj.spawnParticle("largesmoke", xCoord + 0.5, yCoord + 0.5, zCoord + 0.5, x, y, z);
+								}
 							}
 						}
 					}
-				}
+			}
+
+			TileEntity pedestal1 = null;
+			TileEntity pedestal2 = null;
+			TileEntity pedestal3 = null;
+			TileEntity pedestal4 = null;
+			
+			if(worldObj.getTileEntity(xCoord, yCoord, zCoord + 3) != null)
+				pedestal1 = worldObj.getTileEntity(xCoord, yCoord, zCoord + 3);
+			if(worldObj.getTileEntity(xCoord, yCoord - 1, zCoord + 3) != null && pedestal1 == null)
+				pedestal1 = worldObj.getTileEntity(xCoord, yCoord - 1, zCoord + 3);
+			if(worldObj.getTileEntity(xCoord, yCoord - 2, zCoord + 3) != null && pedestal1 == null)
+				pedestal1 = worldObj.getTileEntity(xCoord, yCoord - 2, zCoord + 3);
+			
+			if(worldObj.getTileEntity(xCoord, yCoord, zCoord - 3) != null)
+				pedestal2 = worldObj.getTileEntity(xCoord, yCoord, zCoord - 3);
+			if(worldObj.getTileEntity(xCoord, yCoord - 1, zCoord - 3) != null && pedestal2 == null)
+				pedestal2 = worldObj.getTileEntity(xCoord, yCoord - 1, zCoord - 3);
+			if(worldObj.getTileEntity(xCoord, yCoord - 2, zCoord - 3) != null && pedestal2 == null)
+				pedestal2 = worldObj.getTileEntity(xCoord, yCoord - 2, zCoord - 3);
+			
+			if(worldObj.getTileEntity(xCoord + 3, yCoord, zCoord) != null)
+				pedestal3 = worldObj.getTileEntity(xCoord + 3, yCoord, zCoord);
+			if(worldObj.getTileEntity(xCoord + 3, yCoord - 1, zCoord) != null && pedestal3 == null)
+				pedestal3 = worldObj.getTileEntity(xCoord + 3, yCoord - 1, zCoord);
+			if(worldObj.getTileEntity(xCoord + 3, yCoord - 2, zCoord) != null && pedestal3 == null)
+				pedestal3 = worldObj.getTileEntity(xCoord + 3, yCoord - 2, zCoord);
+			
+			if(worldObj.getTileEntity(xCoord - 3, yCoord, zCoord) != null)
+				pedestal4 = worldObj.getTileEntity(xCoord - 3, yCoord, zCoord);
+			if(worldObj.getTileEntity(xCoord - 3, yCoord - 1, zCoord) != null && pedestal4 == null)
+				pedestal4 = worldObj.getTileEntity(xCoord - 3, yCoord - 1, zCoord);
+			if(worldObj.getTileEntity(xCoord - 3, yCoord - 2, zCoord) != null && pedestal4 == null)
+				pedestal4 = worldObj.getTileEntity(xCoord - 3, yCoord - 2, zCoord);
+
+			if(pedestal1 != null && pedestal1 instanceof IEnergyContainer && ((IEnergyContainer) pedestal1).canAcceptPE())
+				if(worldObj.rand.nextInt(timerMax-(int)(20 * getAmplifier(AmplifierType.DURATION))) == 0)
+					if(((IEnergyContainer) pedestal1).getContainedEnergy() < ((IEnergyContainer) pedestal1).getMaxEnergy()){
+						((IEnergyContainer) pedestal1).addEnergy(energyQuanta());
+						for(double i = 0; i <= 0.7; i += 0.03) {
+							int xPos = xCoord < pedestal1.xCoord ? 1 : xCoord > pedestal1.xCoord ? -1 : 0;
+							int yPos = yCoord < pedestal1.yCoord ? 1 : yCoord > pedestal1.yCoord ? -1 : 0;
+							int zPos = zCoord < pedestal1.zCoord ? 1 : zCoord > pedestal1.zCoord ? -1 : 0;
+							double x = i * Math.cos(i) / 2 * xPos;
+							double y = i * Math.sin(i) / 2 * yPos;
+							double z = i * Math.sin(i) / 2 * zPos;
+							worldObj.spawnParticle("largesmoke", xCoord + 0.5, yCoord + 0.5, zCoord + 0.5, x, y, z);
+						}
+					}
+			if(pedestal2 != null && pedestal2 instanceof IEnergyContainer && ((IEnergyContainer) pedestal2).canAcceptPE())
+				if(worldObj.rand.nextInt(timerMax-(int)(20 * getAmplifier(AmplifierType.DURATION))) == 0)
+					if(((IEnergyContainer) pedestal2).getContainedEnergy() < ((IEnergyContainer) pedestal2).getMaxEnergy()){
+						((IEnergyContainer) pedestal2).addEnergy(energyQuanta());
+						for(double i = 0; i <= 0.7; i += 0.03) {
+							int xPos = xCoord < pedestal2.xCoord ? 1 : xCoord > pedestal2.xCoord ? -1 : 0;
+							int yPos = yCoord < pedestal2.yCoord ? 1 : yCoord > pedestal2.yCoord ? -1 : 0;
+							int zPos = zCoord < pedestal2.zCoord ? 1 : zCoord > pedestal2.zCoord ? -1 : 0;
+							double x = i * Math.cos(i) / 2 * xPos;
+							double y = i * Math.sin(i) / 2 * yPos;
+							double z = i * Math.sin(i) / 2 * zPos;
+							worldObj.spawnParticle("largesmoke", xCoord + 0.5, yCoord + 0.5, zCoord + 0.5, x, y, z);
+						}
+					}
+			if(pedestal3 != null && pedestal3 instanceof IEnergyContainer && ((IEnergyContainer) pedestal3).canAcceptPE())
+				if(worldObj.rand.nextInt(timerMax-(int)(20 * getAmplifier(AmplifierType.DURATION))) == 0)
+					if(((IEnergyContainer) pedestal3).getContainedEnergy() < ((IEnergyContainer) pedestal3).getMaxEnergy()){
+						((IEnergyContainer) pedestal3).addEnergy(energyQuanta());
+						for(double i = 0; i <= 0.7; i += 0.03) {
+							int xPos = xCoord < pedestal3.xCoord ? 1 : xCoord > pedestal3.xCoord ? -1 : 0;
+							int yPos = yCoord < pedestal3.yCoord ? 1 : yCoord > pedestal3.yCoord ? -1 : 0;
+							int zPos = zCoord < pedestal3.zCoord ? 1 : zCoord > pedestal3.zCoord ? -1 : 0;
+							double x = i * Math.cos(i) / 2 * xPos;
+							double y = i * Math.sin(i) / 2 * yPos;
+							double z = i * Math.sin(i) / 2 * zPos;
+							worldObj.spawnParticle("largesmoke", xCoord + 0.5, yCoord + 0.5, zCoord + 0.5, x, y, z);
+						}
+					}
+			if(pedestal4 != null && pedestal4 instanceof IEnergyContainer && ((IEnergyContainer) pedestal4).canAcceptPE())
+				if(worldObj.rand.nextInt(timerMax-(int)(20 * getAmplifier(AmplifierType.DURATION))) == 0)
+					if(((IEnergyContainer) pedestal4).getContainedEnergy() < ((IEnergyContainer) pedestal4).getMaxEnergy()){
+						((IEnergyContainer) pedestal4).addEnergy(energyQuanta());
+						for(double i = 0; i <= 0.7; i += 0.03) {
+							int xPos = xCoord < pedestal4.xCoord ? 1 : xCoord > pedestal4.xCoord ? -1 : 0;
+							int yPos = yCoord < pedestal4.yCoord ? 1 : yCoord > pedestal4.yCoord ? -1 : 0;
+							int zPos = zCoord < pedestal4.zCoord ? 1 : zCoord > pedestal4.zCoord ? -1 : 0;
+							double x = i * Math.cos(i) / 2 * xPos;
+							double y = i * Math.sin(i) / 2 * yPos;
+							double z = i * Math.sin(i) / 2 * zPos;
+							worldObj.spawnParticle("largesmoke", xCoord + 0.5, yCoord + 0.5, zCoord + 0.5, x, y, z);
+						}
+					}
 		}
-
-		TileEntity pedestal1 = worldObj.getTileEntity(xCoord, yCoord, zCoord + 3);
-		TileEntity pedestal2 = worldObj.getTileEntity(xCoord, yCoord, zCoord - 3);
-		TileEntity pedestal3 = worldObj.getTileEntity(xCoord + 3, yCoord, zCoord);
-		TileEntity pedestal4 = worldObj.getTileEntity(xCoord - 3, yCoord, zCoord);
-
-		if(pedestal1 != null && pedestal1 instanceof IEnergyContainer)
-			if(worldObj.rand.nextInt(timerMax-(int)(20 * getAmplifier(AmplifierType.DURATION))) == 0)
-				if(((IEnergyContainer) pedestal1).getContainedEnergy() < ((IEnergyContainer) pedestal1).getMaxEnergy()){
-					((IEnergyContainer) pedestal1).addEnergy(energyQuanta());
-					for(double i = 0; i <= 0.7; i += 0.03) {
-						int xPos = xCoord < pedestal1.xCoord ? 1 : xCoord > pedestal1.xCoord ? -1 : 0;
-						int zPos = zCoord < pedestal1.zCoord ? 1 : zCoord > pedestal1.zCoord ? -1 : 0;
-						double x = i * Math.cos(i) / 2 * xPos;
-						double z = i * Math.sin(i) / 2 * zPos;
-						worldObj.spawnParticle("largesmoke", xCoord + 0.5, yCoord + 0.5, zCoord + 0.5, x, 0, z);
-					}
-				}
-		if(pedestal2 != null && pedestal2 instanceof IEnergyContainer)
-			if(worldObj.rand.nextInt(timerMax-(int)(20 * getAmplifier(AmplifierType.DURATION))) == 0)
-				if(((IEnergyContainer) pedestal2).getContainedEnergy() < ((IEnergyContainer) pedestal2).getMaxEnergy()){
-					((IEnergyContainer) pedestal2).addEnergy(energyQuanta());
-					for(double i = 0; i <= 0.7; i += 0.03) {
-						int xPos = xCoord < pedestal2.xCoord ? 1 : xCoord > pedestal2.xCoord ? -1 : 0;
-						int zPos = zCoord < pedestal2.zCoord ? 1 : zCoord > pedestal2.zCoord ? -1 : 0;
-						double x = i * Math.cos(i) / 2 * xPos;
-						double z = i * Math.sin(i) / 2 * zPos;
-						worldObj.spawnParticle("largesmoke", xCoord + 0.5, yCoord + 0.5, zCoord + 0.5, x, 0, z);
-					}
-				}
-		if(pedestal3 != null && pedestal3 instanceof IEnergyContainer)
-			if(worldObj.rand.nextInt(timerMax-(int)(20 * getAmplifier(AmplifierType.DURATION))) == 0)
-				if(((IEnergyContainer) pedestal3).getContainedEnergy() < ((IEnergyContainer) pedestal3).getMaxEnergy()){
-					((IEnergyContainer) pedestal3).addEnergy(energyQuanta());
-					for(double i = 0; i <= 0.7; i += 0.03) {
-						int xPos = xCoord < pedestal3.xCoord ? 1 : xCoord > pedestal3.xCoord ? -1 : 0;
-						int zPos = zCoord < pedestal3.zCoord ? 1 : zCoord > pedestal3.zCoord ? -1 : 0;
-						double x = i * Math.cos(i) / 2 * xPos;
-						double z = i * Math.sin(i) / 2 * zPos;
-						worldObj.spawnParticle("largesmoke", xCoord + 0.5, yCoord + 0.5, zCoord + 0.5, x, 0, z);
-					}
-				}
-		if(pedestal4 != null && pedestal4 instanceof IEnergyContainer)
-			if(worldObj.rand.nextInt(timerMax-(int)(20 * getAmplifier(AmplifierType.DURATION))) == 0)
-				if(((IEnergyContainer) pedestal4).getContainedEnergy() < ((IEnergyContainer) pedestal4).getMaxEnergy()){
-					((IEnergyContainer) pedestal4).addEnergy(energyQuanta());
-					for(double i = 0; i <= 0.7; i += 0.03) {
-						int xPos = xCoord < pedestal4.xCoord ? 1 : xCoord > pedestal4.xCoord ? -1 : 0;
-						int zPos = zCoord < pedestal4.zCoord ? 1 : zCoord > pedestal4.zCoord ? -1 : 0;
-						double x = i * Math.cos(i) / 2 * xPos;
-						double z = i * Math.sin(i) / 2 * zPos;
-						worldObj.spawnParticle("largesmoke", xCoord + 0.5, yCoord + 0.5, zCoord + 0.5, x, 0, z);
-					}
-				}
 		disrupt(worldObj.rand.nextInt(20 * (isActive() ? 40 : 200) * (worldObj.getClosestPlayer(xCoord, yCoord, zCoord, range * 2) != null ? 1 : 10)) == 0);
 		clearData();
 	}

@@ -150,6 +150,11 @@ public class ACBlocks {
 	public static Block monolith_stone = getBlock("monolithstone");
 	public static Block energy_pedestal = getBlock("energypedestal");
 	public static Block monolith_pillar = getBlock("monolithpillar");
+	public static Block sacrificial_altar = getBlock("sacrificialaltar");
+	/** Metadata block, 0 = Overworld, 1 = Abyssal Wasteland, 2 = Dreadlands, 3 = Omothol */
+	public static Block tiered_energy_pedestal = getBlock("tieredenergypedestal");
+	/** Metadata block, 0 = Overworld, 1 = Abyssal Wasteland, 2 = Dreadlands, 3 = Omothol */
+	public static Block tiered_sacrificial_altar = getBlock("tieredsacrificialaltar");
 
 	private static Block getBlock(String name){
 		return GameRegistry.findBlock("abyssalcraft", name);

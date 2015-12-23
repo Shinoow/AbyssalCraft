@@ -11,8 +11,10 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.client;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.*;
 import net.minecraft.client.renderer.entity.RenderSnowball;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraftforge.client.MinecraftForgeClient;
 import net.minecraftforge.common.MinecraftForge;
@@ -33,6 +35,7 @@ import com.shinoow.abyssalcraft.common.entity.demon.*;
 
 import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.client.registry.RenderingRegistry;
+import cpw.mods.fml.common.network.simpleimpl.MessageContext;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -118,6 +121,9 @@ public class ClientProxy extends CommonProxy {
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityYogsothothStatue.class, new TileEntityYogsothothStatueRenderer());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityShubniggurathStatue.class, new TileEntityShubniggurathStatueRenderer());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityEnergyPedestal.class, new TileEntityEnergyPedestalRenderer());
+		ClientRegistry.bindTileEntitySpecialRenderer(TileEntitySacrificialAltar.class, new TileEntitySacrificialAltarRenderer());
+		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityTieredEnergyPedestal.class, new TileEntityTieredEnergyPedestalRenderer());
+		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityTieredSacrificialAltar.class, new TileEntityTieredSacrificialAltarRenderer());
 
 		MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(AbyssalCraft.PSDL), new Block3DRender(new TileEntityPSDLRenderer(), new TileEntityPSDL()));
 		MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(AbyssalCraft.Altar), new Block3DRender(new TileEntityAltarRenderer(), new TileEntityAltar()));
@@ -140,6 +146,9 @@ public class ClientProxy extends CommonProxy {
 		MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(AbyssalCraft.yogsothothStatue), new Block3DRender(new TileEntityYogsothothStatueRenderer(), new TileEntityYogsothothStatue()));
 		MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(AbyssalCraft.shubniggurathStatue), new Block3DRender(new TileEntityShubniggurathStatueRenderer(), new TileEntityShubniggurathStatue()));
 		MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(AbyssalCraft.energyPedestal), new Block3DRender(new TileEntityEnergyPedestalRenderer(), new TileEntityEnergyPedestal()));
+		MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(AbyssalCraft.sacrificialAltar), new Block3DRender(new TileEntitySacrificialAltarRenderer(), new TileEntitySacrificialAltar()));
+		MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(AbyssalCraft.tieredEnergyPedestal), new RenderTieredEnergyPedestal());
+		MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(AbyssalCraft.tieredSacrificialAltar), new RenderTieredSacrificialAltar());
 	}
 
 	@Override
@@ -158,5 +167,15 @@ public class ClientProxy extends CommonProxy {
 			break;
 		}
 		return chestPlate;
+	}
+
+	@Override
+	public EntityPlayer getPlayerEntity(MessageContext ctx) {
+	 // Note that if you simply return 'Minecraft.getMinecraft().thePlayer',
+	 // your packets will not work because you will be getting a client
+	 // player even when you are on the server! Sounds absurd, but it's true.
+
+	 // Solution is to double-check side before returning the player:
+	 return (ctx.side.isClient() ? Minecraft.getMinecraft().thePlayer : super.getPlayerEntity(ctx));
 	}
 }

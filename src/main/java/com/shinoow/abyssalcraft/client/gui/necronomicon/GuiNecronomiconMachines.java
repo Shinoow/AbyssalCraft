@@ -11,18 +11,24 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.client.gui.necronomicon;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.GL11;
+import org.lwjgl.opengl.GL12;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.renderer.RenderHelper;
+import net.minecraft.client.renderer.entity.RenderItem;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.StatCollector;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
@@ -30,6 +36,7 @@ import com.shinoow.abyssalcraft.api.recipe.CrystallizerRecipes;
 import com.shinoow.abyssalcraft.api.recipe.TransmutatorRecipes;
 import com.shinoow.abyssalcraft.client.gui.necronomicon.buttons.ButtonCategory;
 import com.shinoow.abyssalcraft.client.gui.necronomicon.buttons.ButtonNextPage;
+import com.shinoow.abyssalcraft.client.lib.GuiRenderHelper;
 import com.shinoow.abyssalcraft.client.lib.NecronomiconResources;
 import com.shinoow.abyssalcraft.client.lib.NecronomiconText;
 
@@ -204,30 +211,29 @@ public class GuiNecronomiconMachines extends GuiNecronomicon {
 	}
 
 	@Override
-	protected void drawInformationText(){
+	protected void drawInformationText(int x, int y){
 		int k = (width - guiWidth) / 2;
 		byte b0 = 2;
 		String stuff;
+
+		tooltipStack = null;
+
 		if(isMInfo){
 			stuff = NecronomiconText.LABEL_INFO;
 			fontRendererObj.drawSplitString(stuff, k + 20, b0 + 16, 116, 0xC40000);
 			setTurnupLimit(4);
 			if(currTurnup == 0){
 				writeText(1, NecronomiconText.MACHINE_INFO_1, 50);
-				itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), new ItemStack(AbyssalCraft.transmutator), k + 60, b0 + 28);
-				RenderHelper.disableStandardItemLighting();
+				renderItem(k + 60, b0 + 28, new ItemStack(AbyssalCraft.transmutator), x, y);
 			} else if(currTurnup == 1){
 				writeText(1, NecronomiconText.MACHINE_INFO_2, 50);
-				itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), new ItemStack(AbyssalCraft.crystallizer), k + 60, b0 + 28);
-				RenderHelper.disableStandardItemLighting();
+				renderItem(k + 60, b0 + 28, new ItemStack(AbyssalCraft.crystallizer), x, y);
 			} else if(currTurnup == 2){
 				writeText(1, NecronomiconText.MACHINE_INFO_3, 50);
-				itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), new ItemStack(AbyssalCraft.engraver), k + 60, b0 + 28);
-				RenderHelper.disableStandardItemLighting();
+				renderItem(k + 60, b0 + 28, new ItemStack(AbyssalCraft.engraver), x, y);
 			} else if(currTurnup == 3){
 				writeText(1, NecronomiconText.MACHINE_INFO_4, 50);
-				itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), new ItemStack(AbyssalCraft.materializer), k + 60, b0 + 28);
-				RenderHelper.disableStandardItemLighting();
+				renderItem(k + 60, b0 + 28, new ItemStack(AbyssalCraft.materializer), x, y);
 			}
 		}
 		if(isTra){
@@ -241,64 +247,64 @@ public class GuiNecronomiconMachines extends GuiNecronomicon {
 			for(int n = 0; n < trans.size(); n++){
 				Entry<ItemStack, ItemStack> entry = (Entry<ItemStack, ItemStack>) trans.entrySet().toArray()[n];
 				if(currTurnup == 0){
-					drawTItems(entry, n, 0, 6, 12);
+					drawTItems(entry, n, 0, 6, 12, x, y);
 					if(n == 12) break;
 				} else if(currTurnup == 1){
-					drawTItems(entry, n, 12, 18, 24);
+					drawTItems(entry, n, 12, 18, 24, x, y);
 					if(n == 24) break;
 				} else if(currTurnup == 2){
-					drawTItems(entry, n, 24, 30, 36);
+					drawTItems(entry, n, 24, 30, 36, x, y);
 					if(n == 36) break;
 				} else if(currTurnup == 3){
-					drawTItems(entry, n, 36, 42, 48);
+					drawTItems(entry, n, 36, 42, 48, x, y);
 					if(n == 48) break;
 				} else if(currTurnup == 4){
-					drawTItems(entry, n, 48, 54, 60);
+					drawTItems(entry, n, 48, 54, 60, x, y);
 					if(n == 60) break;
 				} else if(currTurnup == 5){
-					drawTItems(entry, n, 60, 66, 72);
+					drawTItems(entry, n, 60, 66, 72, x, y);
 					if(n == 72) break;
 				} else if(currTurnup == 6){
-					drawTItems(entry, n, 72, 78, 84);
+					drawTItems(entry, n, 72, 78, 84, x, y);
 					if(n == 84) break;
 				} else if(currTurnup == 7){
-					drawTItems(entry, n, 84, 90, 96);
+					drawTItems(entry, n, 84, 90, 96, x, y);
 					if(n == 96) break;
 				} else if(currTurnup == 8){
-					drawTItems(entry, n, 96, 102, 108);
+					drawTItems(entry, n, 96, 102, 108, x, y);
 					if(n == 108) break;
 				} else if(currTurnup == 9){
-					drawTItems(entry, n, 108, 114, 120);
+					drawTItems(entry, n, 108, 114, 120, x, y);
 					if(n == 120) break;
 				} else if(currTurnup == 10){
-					drawTItems(entry, n, 120, 126, 132);
+					drawTItems(entry, n, 120, 126, 132, x, y);
 					if(n == 132) break;
 				} else if(currTurnup == 11){
-					drawTItems(entry, n, 132, 138, 144);
+					drawTItems(entry, n, 132, 138, 144, x, y);
 					if(n == 144) break;
 				} else if(currTurnup == 12){
-					drawTItems(entry, n, 144, 150, 156);
+					drawTItems(entry, n, 144, 150, 156, x, y);
 					if(n == 156) break;
 				} else if(currTurnup == 13){
-					drawTItems(entry, n, 156, 162, 168);
+					drawTItems(entry, n, 156, 162, 168, x, y);
 					if(n == 168) break;
 				} else if(currTurnup == 14){
-					drawTItems(entry, n, 168, 174, 180);
+					drawTItems(entry, n, 168, 174, 180, x, y);
 					if(n == 180) break;
 				} else if(currTurnup == 15){
-					drawTItems(entry, n, 180, 186, 192);
+					drawTItems(entry, n, 180, 186, 192, x, y);
 					if(n == 192) break;
 				} else if(currTurnup == 16){
-					drawTItems(entry, n, 192, 198, 204);
+					drawTItems(entry, n, 192, 198, 204, x, y);
 					if(n == 204) break;
 				} else if(currTurnup == 17){
-					drawTItems(entry, n, 204, 210, 216);
+					drawTItems(entry, n, 204, 210, 216, x, y);
 					if(n == 216) break;
 				} else if(currTurnup == 18){
-					drawTItems(entry, n, 216, 222, 228);
+					drawTItems(entry, n, 216, 222, 228, x, y);
 					if(n == 228) break;
 				} else if(currTurnup == 19){
-					drawTItems(entry, n, 228, 234, 240);
+					drawTItems(entry, n, 228, 234, 240, x, y);
 					if(n == 240) break;
 				}
 			}
@@ -316,141 +322,138 @@ public class GuiNecronomiconMachines extends GuiNecronomicon {
 			for(int n = 0; n < cryst.size(); n++){
 				Entry<ItemStack, ItemStack[]> entry = (Entry<ItemStack, ItemStack[]>) cryst.entrySet().toArray()[n];
 				if(currTurnup == 0){
-					drawCItems(entry, n, 0, 6, 12);
+					drawCItems(entry, n, 0, 6, 12, x, y);
 					if(n == 12) break;
 				} else if(currTurnup == 1){
-					drawCItems(entry, n, 12, 18, 24);
+					drawCItems(entry, n, 12, 18, 24, x, y);
 					if(n == 24) break;
 				} else if(currTurnup == 2){
-					drawCItems(entry, n, 24, 30, 36);
+					drawCItems(entry, n, 24, 30, 36, x, y);
 					if(n == 36) break;
 				} else if(currTurnup == 3){
-					drawCItems(entry, n, 36, 42, 48);
+					drawCItems(entry, n, 36, 42, 48, x, y);
 					if(n == 48) break;
 				} else if(currTurnup == 4){
-					drawCItems(entry, n, 48, 54, 60);
+					drawCItems(entry, n, 48, 54, 60, x, y);
 					if(n == 60) break;
 				} else if(currTurnup == 5){
-					drawCItems(entry, n, 60, 66, 72);
+					drawCItems(entry, n, 60, 66, 72, x, y);
 					if(n == 72) break;
 				} else if(currTurnup == 6){
-					drawCItems(entry, n, 72, 78, 84);
+					drawCItems(entry, n, 72, 78, 84, x, y);
 					if(n == 84) break;
 				} else if(currTurnup == 7){
-					drawCItems(entry, n, 84, 90, 96);
+					drawCItems(entry, n, 84, 90, 96, x, y);
 					if(n == 96) break;
 				} else if(currTurnup == 8){
-					drawCItems(entry, n, 96, 102, 108);
+					drawCItems(entry, n, 96, 102, 108, x, y);
 					if(n == 108) break;
 				} else if(currTurnup == 9){
-					drawCItems(entry, n, 108, 114, 120);
+					drawCItems(entry, n, 108, 114, 120, x, y);
 					if(n == 120) break;
 				} else if(currTurnup == 10){
-					drawCItems(entry, n, 120, 126, 132);
+					drawCItems(entry, n, 120, 126, 132, x, y);
 					if(n == 132) break;
 				} else if(currTurnup == 11){
-					drawCItems(entry, n, 132, 138, 144);
+					drawCItems(entry, n, 132, 138, 144, x, y);
 					if(n == 144) break;
 				} else if(currTurnup == 12){
-					drawCItems(entry, n, 144, 150, 156);
+					drawCItems(entry, n, 144, 150, 156, x, y);
 					if(n == 156) break;
 				} else if(currTurnup == 13){
-					drawCItems(entry, n, 156, 162, 168);
+					drawCItems(entry, n, 156, 162, 168, x, y);
 					if(n == 168) break;
 				} else if(currTurnup == 14){
-					drawCItems(entry, n, 168, 174, 180);
+					drawCItems(entry, n, 168, 174, 180, x, y);
 					if(n == 180) break;
 				} else if(currTurnup == 15){
-					drawCItems(entry, n, 180, 186, 192);
+					drawCItems(entry, n, 180, 186, 192, x, y);
 					if(n == 192) break;
 				} else if(currTurnup == 16){
-					drawCItems(entry, n, 192, 198, 204);
+					drawCItems(entry, n, 192, 198, 204, x, y);
 					if(n == 204) break;
 				} else if(currTurnup == 17){
-					drawCItems(entry, n, 204, 210, 216);
+					drawCItems(entry, n, 204, 210, 216, x, y);
 					if(n == 216) break;
 				} else if(currTurnup == 18){
-					drawCItems(entry, n, 216, 222, 228);
+					drawCItems(entry, n, 216, 222, 228, x, y);
 					if(n == 228) break;
 				} else if(currTurnup == 19){
-					drawCItems(entry, n, 228, 234, 240);
+					drawCItems(entry, n, 228, 234, 240, x, y);
 					if(n == 240) break;
 				}
 			}
 		}
-	}
+		
+		if(tooltipStack != null)
+        {
+			List<String> tooltipData = tooltipStack.getTooltip(Minecraft.getMinecraft().thePlayer, false);
+			List<String> parsedTooltip = new ArrayList();
+			boolean first = true;
 
-	private void drawTItems(Entry<ItemStack, ItemStack> entry, int num, int low, int mid, int high){
-		int k = (width - guiWidth) / 2;
-		byte b0 = 2;
-		if(num < mid && num > low-1){
-			itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), entry.getKey(), k + 18, b0 + 28 + (num-low)*20 + num-low);
-			RenderHelper.disableStandardItemLighting();
-			itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), entry.getValue(), k + 62, b0 + 28 + (num-low)*20 + num-low);
-			RenderHelper.disableStandardItemLighting();
-			if(entry.getValue().stackSize > 1){
-				boolean unicode = fontRendererObj.getUnicodeFlag();
-				fontRendererObj.setUnicodeFlag(false);
-				fontRendererObj.drawString(String.valueOf(entry.getValue().stackSize), k + 81, b0 + 28 + (num-low)*20 + num-low + 5, 0);
-				fontRendererObj.setUnicodeFlag(unicode);
+			for(String s : tooltipData) 
+			{
+				String s_ = s;
+				if(!first)
+					s_ = EnumChatFormatting.GRAY + s;
+				parsedTooltip.add(s_);
+				first = false;
 			}
-		} else if(num > mid-1 && num < high){
-			itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), entry.getKey(), k + 141, b0 + 28 + (num-mid)*20 + num-mid);
-			RenderHelper.disableStandardItemLighting();
-			itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), entry.getValue(), k + 185, b0 + 28 + (num-mid)*20 + num-mid);
-			RenderHelper.disableStandardItemLighting();
-			if(entry.getValue().stackSize > 1){
-				boolean unicode = fontRendererObj.getUnicodeFlag();
-				fontRendererObj.setUnicodeFlag(false);
-				fontRendererObj.drawString(String.valueOf(entry.getValue().stackSize), k + 204, b0 + 33 + (num-mid)*20 + num-mid, 0);
-				fontRendererObj.setUnicodeFlag(unicode);
-			}
+			GuiRenderHelper.renderTooltip(x, y, parsedTooltip);
 		}
 	}
 
-	private void drawCItems(Entry<ItemStack, ItemStack[]> entry, int num, int low, int mid, int high){
+	private void drawTItems(Entry<ItemStack, ItemStack> entry, int num, int low, int mid, int high, int x, int y){
+		boolean unicode = fontRendererObj.getUnicodeFlag();
+		fontRendererObj.setUnicodeFlag(false);
 		int k = (width - guiWidth) / 2;
 		byte b0 = 2;
 		if(num < mid && num > low-1){
-			itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), entry.getKey(), k + 18, b0 + 28 + (num-low)*20 + num-low);
-			RenderHelper.disableStandardItemLighting();
-			itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), entry.getValue()[0], k + 62, b0 + 28 + (num-low)*20 + num-low);
-			RenderHelper.disableStandardItemLighting();
-			if(entry.getValue()[0].stackSize > 1){
-				boolean unicode = fontRendererObj.getUnicodeFlag();
-				fontRendererObj.setUnicodeFlag(false);
-				fontRendererObj.drawString(String.valueOf(entry.getValue()[0].stackSize), k + 81, b0 + 28 + (num-low)*20 + num-low + 5, 0);
-				fontRendererObj.setUnicodeFlag(unicode);
-			}
-			itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), entry.getValue()[1], k + 62 + 33, b0 + 28 + (num-low)*20 + num-low);
-			RenderHelper.disableStandardItemLighting();
-			if(entry.getValue()[1] != null)
-				if(entry.getValue()[1].stackSize > 1){
-					boolean unicode = fontRendererObj.getUnicodeFlag();
-					fontRendererObj.setUnicodeFlag(false);
-					fontRendererObj.drawString(String.valueOf(entry.getValue()[1].stackSize), k + 81 + 33, b0 + 28 + (num-low)*20 + num-low + 5, 0);
-					fontRendererObj.setUnicodeFlag(unicode);
-				}
+			renderItem(k + 18, b0 + 28 + (num-low)*20 + num-low, entry.getKey(), x, y);
+			renderItem(k + 62, b0 + 28 + (num-low)*20 + num-low, entry.getValue(), x, y);
 		} else if(num > mid-1 && num < high){
-			itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), entry.getKey(), k + 141, b0 + 28 + (num-mid)*20 + num-mid);
-			RenderHelper.disableStandardItemLighting();
-			itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), entry.getValue()[0], k + 185, b0 + 28 + (num-mid)*20 + num-mid);
-			RenderHelper.disableStandardItemLighting();
-			if(entry.getValue()[0].stackSize > 1){
-				boolean unicode = fontRendererObj.getUnicodeFlag();
-				fontRendererObj.setUnicodeFlag(false);
-				fontRendererObj.drawString(String.valueOf(entry.getValue()[0].stackSize), k + 204, b0 + 28 + (num-mid)*20 + num-mid + 5, 0);
-				fontRendererObj.setUnicodeFlag(unicode);
-			}
-			itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.getTextureManager(), entry.getValue()[1], k + 185 + 34, b0 + 28 + (num-mid)*20 + num-mid);
-			RenderHelper.disableStandardItemLighting();
-			if(entry.getValue()[1] != null)
-				if(entry.getValue()[1].stackSize > 1){
-					boolean unicode = fontRendererObj.getUnicodeFlag();
-					fontRendererObj.setUnicodeFlag(false);
-					fontRendererObj.drawString(String.valueOf(entry.getValue()[1].stackSize), k + 204 + 34, b0 + 28 + (num-mid)*20 + num-mid + 5, String.valueOf(entry.getValue()[1].stackSize).length()>1 ? 0x04BF1A : 0);
-					fontRendererObj.setUnicodeFlag(unicode);
-				}
+			renderItem(k + 141, b0 + 28 + (num-mid)*20 + num-mid, entry.getKey(), x, y);
+			renderItem(k + 185, b0 + 28 + (num-mid)*20 + num-mid, entry.getValue(), x, y);
 		}
+		fontRendererObj.setUnicodeFlag(unicode);
+	}
+
+	private void drawCItems(Entry<ItemStack, ItemStack[]> entry, int num, int low, int mid, int high, int x, int y){
+		boolean unicode = fontRendererObj.getUnicodeFlag();
+		fontRendererObj.setUnicodeFlag(false);
+		int k = (width - guiWidth) / 2;
+		byte b0 = 2;
+		if(num < mid && num > low-1){
+			renderItem(k + 18, b0 + 28 + (num-low)*20 + num-low, entry.getKey(), x, y);
+			renderItem(k + 62, b0 + 28 + (num-low)*20 + num-low, entry.getValue()[0], x, y);
+
+			renderItem(k + 62 + 33, b0 + 28 + (num-low)*20 + num-low, entry.getValue()[1], x, y);
+		} else if(num > mid-1 && num < high){
+			renderItem(k + 141, b0 + 28 + (num-mid)*20 + num-mid, entry.getKey(), x, y);
+			renderItem(k + 185, b0 + 28 + (num-mid)*20 + num-mid, entry.getValue()[0], x, y);
+			renderItem(k + 185 + 34, b0 + 28 + (num-mid)*20 + num-mid, entry.getValue()[1], x, y);
+		}
+		fontRendererObj.setUnicodeFlag(unicode);
+	}
+	
+	private ItemStack tooltipStack;
+	public void renderItem(int xPos, int yPos, ItemStack stack, int mx, int my) 
+	{
+		RenderItem render = new RenderItem();
+		if(mx > xPos && mx < (xPos+16) && my > yPos && my < (yPos+16))
+			tooltipStack = stack;
+
+		GL11.glPushMatrix();
+		GL11.glEnable(GL11.GL_BLEND);
+		GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
+		RenderHelper.enableGUIStandardItemLighting();
+		GL11.glEnable(GL12.GL_RESCALE_NORMAL);
+		GL11.glEnable(GL11.GL_DEPTH_TEST);
+		render.renderItemAndEffectIntoGUI(Minecraft.getMinecraft().fontRenderer, Minecraft.getMinecraft().getTextureManager(), stack, xPos, yPos);
+		render.renderItemOverlayIntoGUI(Minecraft.getMinecraft().fontRenderer, Minecraft.getMinecraft().getTextureManager(), stack, xPos, yPos);
+		RenderHelper.disableStandardItemLighting();
+		GL11.glPopMatrix();
+
+		GL11.glDisable(GL11.GL_LIGHTING);
 	}
 }

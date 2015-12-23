@@ -204,8 +204,10 @@ public class GuiNecronomicon extends GuiScreen {
 
 	/**
 	 * Method used to write text on the page, override to add your own text to pages.
+	 * @param x X-coordinate on screen
+	 * @param y Y-coordinate on screen
 	 */
-	protected void drawInformationText(){
+	protected void drawInformationText(int x, int y){
 		if(currTurnup == 0){
 			if(bookType < 4){
 				writeText(1, NecronomiconText.NECRONOMICON_PAGE_1);
@@ -233,7 +235,7 @@ public class GuiNecronomicon extends GuiScreen {
 		length = fontRendererObj.getStringWidth(stuff);
 		fontRendererObj.drawString(stuff, k + 50 - length, b0 + 16, 0);
 	}
-
+	
 	public int getBookType(){
 		return bookType;
 	}
@@ -266,21 +268,21 @@ public class GuiNecronomicon extends GuiScreen {
 		String s;
 		int l;
 		String stuff;
+		super.drawScreen(par1, par2, par3);
 
 		if(isInfo){
 			if(isNecroInfo){
 				stuff = NecronomiconText.LABEL_HUH;
 				fontRendererObj.drawSplitString(stuff, k + 20, b0 + 16, 116, 0xC40000);
 			}
-			drawInformationText();
-			s = I18n.format("book.pageIndicator", new Object[] {Integer.valueOf(currTurnup + 1), Integer.valueOf(bookTotalTurnups)});
+			drawInformationText(par1, par2);
+			s = I18n.format("necronomicon.turnupindicator", new Object[] {Integer.valueOf(currTurnup + 1), Integer.valueOf(bookTotalTurnups)});
 
 			l = fontRendererObj.getStringWidth(s);
 			fontRendererObj.drawString(s, k - l + guiWidth - 22, b0 + 16, 0);
 		} else
 			drawIndexText();
 
-		super.drawScreen(par1, par2, par3);
 		fontRendererObj.setUnicodeFlag(unicode);
 	}
 

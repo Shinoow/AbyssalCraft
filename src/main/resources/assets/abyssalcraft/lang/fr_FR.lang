@@ -1,8 +1,8 @@
 #Start of localization file
 
 #Achievements
-achievement.mineDS=Bienvenue à AbyssalCraft!
-achievement.mineDS.desc=A Miné de la Pierre Sombre
+achievement.necro=Bienvenue à AbyssalCraft!
+achievement.necro.desc=Crafted a Necronomicon, now what?
 
 achievement.mineAby=Mieux que les diamants !
 achievement.mineAby.desc=A Miné de l'Abyssalnite
@@ -42,9 +42,6 @@ achievement.wilsonhead.desc=Où est mon corps ?
 
 achievement.orangehead=La tête médiane
 achievement.orangehead.desc=Votre diagnostic est de retour, vous avez le VIH
-
-achievement.necro=Book of The Dead, and knowledge
-achievement.necro.desc=Crafted a Necronomicon, now what?
 
 achievement.necrou1=Knowledge of the Wasteland
 achievement.necrou1.desc=Crafted a Abyssal Wasteland Necronomicon.
@@ -239,6 +236,9 @@ necronomicon.information.armortools=Special Armor and Tools
 necronomicon.information.machines=Machines
 necronomicon.reqenergy=Required Energy
 necronomicon.remnanthelp=Remnant help needed
+necronomicon.gettingstarted=Getting Started
+necronomicon.potentialenergy=Potential Energy
+necronomicon.turnupindicator=Turn-up %1$s of %2$s
 
 #Necronomicon Text
 #Note: the maximum amount of letters per string is 368
@@ -331,6 +331,9 @@ necronomicon.text.materials.ethaxium.1=Ethaxium is a new material most commonly 
 necronomicon.text.materials.ethaxium.2=Ethaxium is said to be what souls are made out of, which likely explains why it's almost indestructible. No wonder J'zahar built his temple city from this.
 necronomicon.text.materials.darkethaxium.1=Dark Ethaxium is a stronger version of Ethaxium created by combining regular Ethaxium with Omothol Stone. This kind of Ethaxium is harder than it's normal counterpart.
 necronomicon.text.materials.darkethaxium.2=This material is only used in one structure, the Temple of J'zahar.
+necronomicon.text.materials.ritualaltar.1=The Ritual Altar is the main component in performing rituals. It's used by shift right-clicking on it with a Necronomicon that has sufficient Potential Energy. For successful rituals, the nearby Ritual Pedestals will need the correct offerings placed on them.
+necronomicon.text.materials.ritualpedestal.1=Ritual Pedestals are used to place offerings when performing rituals. This is done by interacting with the pedestal while holding the offering you wish to place.
+necronomicon.text.materials.monolithstone.1=Monolith Stone is a material used to some extent with Potential Energy. It's origins are unknown, other than that Shoggoths are capable of creating it. It can be obtained from Monoliths or Shoggoth Lairs scattered about.
 
 necronomicon.text.crafting.coraliuminfusedstone.1=Coralium Infused Stone is crafted with Coralium Gem Clusters and Stone. The three clusters can be of any size, but must add up to 9.
 necronomicon.text.crafting.coraliuminfusedstone.2=If you use a 9-gem cluster, surround it with Stone blocks instead of 2 rows. When this block is broken (or smelt) you get a Coralium Pearl.
@@ -387,6 +390,10 @@ necronomicon.text.crafting.energypedestal.1=A Energy Pedestal is crafted with Mo
 necronomicon.text.crafting.energypedestal.2=This block serves as a method for obtaining Potential Energy. If you place Statues 3 blocks away from it (on the x or z axis), they will transfer energy to it at a fast rate. Place a Necronomicon (or other source that can hold Potential Energy) on it in order to drain it.
 necronomicon.text.crafting.dreadium.1=Dreadium can be obtained in numerous ways. The first method is to transmute Dreaded Shards of Abyssalnite (dropped by Dreadguards).
 necronomicon.text.crafting.dreadium.2=When you have enough Dreadium Ingots to craft a Crystallizer, you can crystallize Dreaded materials to obtain Dreadium Crystals (mostly shards which you can combine into crystals that can be transmuted for Dreadium Ingots).
+necronomicon.text.crafting.monolithpillar.1=A Monolith Stone Pillar is crafted with Monolith Stone. It's primary use is to amplify the range of Potential Energy Manipulators (statues for example).
+necronomicon.text.crafting.ritualcharm.1=A Ritual Charm is crafted with Gold Ingots and a Diamond. By itself it has no effect, but through rituals it can amplify various stats of Potential Energy Manipulators.
+necronomicon.text.crafting.sacrificialaltar.1=A Sacrificial Altar is crafted with Torches, Monolith Stone, A Shadow Gem and a Coralium Pearl. They convert life-force into Potential Energy.
+necronomicon.text.crafting.sacrificialaltar.2=When a entity is targeted, it will emit smoke particles. Once the entity dies, an amount of PE equal to it's max health will be collected. It only targets non-undead adult entities that aren't players. It should be noted that the altar goes on a cooldown after collecting a certain amount of PE, preventing collection for a minute.
 
 necronomicon.text.overworld.progression.1=In order to reach the Abyssal Wasteland, one must craft a Gateway Key, which requires one to travel to the Nether, and to visit a Darklands and a water-based biome. The water-based biome can be either a swamp or a ocean biome.
 necronomicon.text.overworld.progression.2=From the Nether you need 2 Blaze Rods, and probably a few more for later. From the Darklands biome you need to slay living shadows to finally obtain Shadow Gems. They are most commonly found in Darklands Mountains biomes. It is recommended to obtain a Staff of Rending in order to obtain Shadow Gems faster (more information in the special materials section).
@@ -473,10 +480,19 @@ necronomicon.text.rituals.1=In order to get started with rituals you need to cre
 necronomicon.text.rituals.2=Those are: Cobblestone, Darkstone Cobblestone, Abyssal Stone Brick, Coralium Brick, Dreadstone Brick, Abyssalnite Stone Brick, Ethaxium Brick and Dark Ethaxium Brick. The materials can only be used in their specific dimension (eg. Cobblestone and Darkstone Cobblestone in the Overworld, Abyssal Stone Brick and Coralium Brick in the Abyssal Wasteland etc).
 necronomicon.text.rituals.3=To create the altar, simply place the blocks in the above formation (keep the red area clear) and shift right-click the center block with a Necronomicon.
 necronomicon.text.rituals.4=After that, you can start performing rituals! In order to perform a ritual, place objects on the pedestals and shift right-click the altar with a Necronomicon.
-necronomicon.text.rituals.5=When peforming, the pedestals project smoke towards the altar. Rituals where you gain objects always end with a flash of lightning hitting the altar.
+necronomicon.text.rituals.5=When peforming, the pedestals project smoke towards the altar. Rituals where you gain objects always end with a bolt of lightning striking the altar.
 necronomicon.text.rituals.6=Potential Energy is required in order to perform rituals (each ritual entry shows how much you need). Potential Energy is a pure form of untapped energy originating from a higher plane of existence. It's mainly used to fuel sacrifices made to The Great Old Ones (any ritual). Statues placed on Shoggoth Monoliths are said to be capable of draining it.
-necronomicon.text.rituals.7=The two primary ways (currently) of collecting Potential Energy is to either stand near a Statue (Cthulhu, Hastur etc) holding a Necronomicon.
-necronomicon.text.rituals.8=There's also the option of crafting a Energy Pedestal, then placing Statues as showed in the picture above (3 blocks from the pedestal) so it can collect energy from them.
+
+necronomicon.text.pe.1=Potential Energy (PE) is a new form of energy presented in AbyssalCraft. It originates from a higher plane of existence (where no mortal has wandered), and can only be collected by tapping into Ley Lines using various methods. There exist objects capable of doing so, which will be explained here.
+necronomicon.text.pe.2=A good place to start obtaining materials required to create some of the PE collecting objects is Shoggoth Lairs, found in swamps and rivers.
+necronomicon.text.pe.3=Shoggoth Monoliths are also constructed with Monolith Stone (hence the name), while having statues placed on them. These statues can collect PE.
+necronomicon.text.pe.4=The statues come in different shapes, all depicting Great Old Ones. Standing close to one while holding a Necronomicon allows it to transport PE to you.
+necronomicon.text.pe.5=It should be noted that you harvesting PE isn't appreciated. This causes disruptions to occur (displayed by a bolt of lightning striking the statue, or other PE manipulator). Disruptions are random events that can affect the player, other entities or the environment. Their purpose is to punish those who tries to drain PE from the higher plane.
+necronomicon.text.pe.6=One way to boost the efficiency of statues (and other PE manipulators) is through the use of Ritual Charms. They can boost various stats (check the tooltip).
+necronomicon.text.pe.7=You can also craft a Energy Pedestal, which can collect PE from statues (and other PE manipulators) that are placed 3 blocks from the pedestal.
+necronomicon.text.pe.8=Along with the Energy Pedestal there's the Sacrificial Altar, which can convert life-force from dying entities into PE (targeted entities emit smoke).
+necronomicon.text.pe.9=If the PE production still is too slow, you can also upgrade Energy Pedestals and Sacrificial Altars through infusion rituals.
+necronomicon.text.pe.10=Upon reaching Omothol, you will be able to create deity-specific Ritual Charms (with an Abyssalnomicon), or buy them from Remnant Priests. Those charms will give an additional boost if used on manipulators associated with the same deity as the one displayed on the charm.
 
 necronomicon.text.machines.info=Check the information section for information regarding the different machines, or the other sections for all recipes for the specified machine. The recipes aren't sorted in any way.
 
@@ -604,6 +620,22 @@ ac.ritual.yogsothothCharm=Yog-Sothoth Charm
 ac.ritual.yogsothothCharm.desc=A Yog-Sothoth Charm is made by infusing a Ritual Charm with Yog-Sothoth Engraved Coins.
 ac.ritual.shubniggurathCharm=Shub-Niggurath Charm
 ac.ritual.shubniggurathCharm.desc=A Shub-Niggurath Charm is made by infusing a Ritual Charm with Shub-Niggurath Engraved Coins.
+ac.ritual.epOWupgrade=Overworld Energy Pedestal
+ac.ritual.epOWupgrade.desc=A Overworld Energy Pedestal is created by infusing a Energy Pedestal with Cobblestone, Darkstone Cobblestone, Shadow Gem Shards and Coralium Gems.
+ac.ritual.epAWupgrade=Abyssal Wasteland Energy Pedestal
+ac.ritual.epAWupgrade.desc=A Abyssal Wasteland Energy Pedestal is created by infusing a Overworld Energy Pedestal with Abyssal Stone Bricks, Coralium Bricks, Shadow Gem Shards and Coralium Gems.
+ac.ritual.epDLupgrade=Dreadlands Energy Pedestal
+ac.ritual.epDLupgrade.desc=A Dreadlands Energy Pedestal is created by infusing a Abyssal Wasteland Energy Pedestal with Dreadstone Bricks, Abyssalnite Stone Bricks, Shadow Gem Shards and Coralium Gems.
+ac.ritual.epOMTupgrade=Omothol Energy Pedestal
+ac.ritual.epOMTupgrade.desc=A Omothol Energy Pedestal is created by infusing a Dreadlands Energy Pedestal with Ethaxium Bricks, Dark Ethaxium Bricks, Shadow Gem Shards and Coralium Gems.
+ac.ritual.saOWupgrade=Overworld Sacrificial Altar
+ac.ritual.saOWupgrade.desc=A Overworld Sacrificial Altar is created by infusing a Sacrificial Altar with Cobblestone, Darkstone Cobblestone, Shadow Gem Shards and Coralium Gems.
+ac.ritual.saAWupgrade=Abyssal Wasteland Sacrificial Altar
+ac.ritual.saAWupgrade.desc=A Abyssal Wasteland Sacrificial Altar is created by infusing a Overworld Sacrificial Altar with Abyssal Stone Bricks, Coralium Bricks, Shadow Gem Shards and Coralium Gems.
+ac.ritual.saDLupgrade=Dreadlands Sacrificial Altar
+ac.ritual.saDLupgrade.desc=A Dreadlands Sacrificial Altar is created by infusing a Abyssal Wasteland Sacrificial Altar with Dreadstone Bricks, Abyssalnite Stone Bricks, Shadow Gem Shards and Coralium Gems.
+ac.ritual.saOMTupgrade=Omothol Sacrificial Altar
+ac.ritual.saOMTupgrade.desc=A Omothol Sacrificial is created by infusing a Dreadlands Sacrificial Altar with Ethaxium Bricks, Dark Ethaxium Bricks, Shadow Gem Shards and Coralium Gems.
 
 #Configuration
 ac_dimensions=Dimensions
@@ -815,6 +847,15 @@ tile.monolithStone.name=Monolith Stone
 tile.shoggothBiomass.name=Shoggoth Biomass
 tile.energyPedestal.name=Energy Pedestal
 tile.monolithPillar.name=Monolith Stone Pillar
+tile.sacrificialaltar.name=Sacrificial Altar
+tile.tieredEnergyPedestal.0.name=Overworld Energy Pedestal
+tile.tieredEnergyPedestal.1.name=Abyssal Wasteland Energy Pedestal
+tile.tieredEnergyPedestal.2.name=Dreadlands Energy Pedestal
+tile.tieredEnergyPedestal.3.name=Omothol Energy Pedestal
+tile.tieredSacrificialAltar.0.name=Overworld Sacrificial Altar
+tile.tieredSacrificialAltar.1.name=Abyssal Wasteland Sacrificial Altar
+tile.tieredSacrificialAltar.2.name=Dreadlands Sacrificial Altar
+tile.tieredSacrificialAltar.3.name=Omothol Sacrificial Altar
 
 #Items
 item.DEV_BLADE.name=La Lame du Développeur

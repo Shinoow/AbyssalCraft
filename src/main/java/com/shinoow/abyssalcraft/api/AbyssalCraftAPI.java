@@ -523,7 +523,7 @@ public class AbyssalCraftAPI {
 	}
 
 	/**
-	 * Basic Materialization.
+	 * Basic Materialization.<br>
 	 * Note: all inputs has to be either {@link ICrystal}s or be registered in the Crystal List {@link AbyssalCraftAPI#addCrystal(ItemStack)}
 	 * @param input An array of ItemStacks (maximum is 5)
 	 * @param output The output
@@ -531,14 +531,24 @@ public class AbyssalCraftAPI {
 	 * 
 	 * @since 1.4.5
 	 */
-	public static void addMaterialization(ItemStack[] input, ItemStack output, float xp){
+	public static void addMaterialization(ItemStack[] input, ItemStack output){
 		for(ItemStack item : input)
-			if(APIUtils.isCrystal(item)) throw new ClassCastException("All of the input items has to be Crystals!");
+			if(!APIUtils.isCrystal(item)) throw new ClassCastException("All of the input items has to be Crystals!");
 		if(input.length > 0 || input == null)
 			if(input.length <= 5)
-				MaterializerRecipes.instance().materialize(input, output, xp);
+				MaterializerRecipes.instance().materialize(input, output);
 			else FMLLog.log("AbyssalCraftAPI", Level.ERROR, "This Materializer recipe has more than 5 inputs! (%d)", input.length);
 		else FMLLog.log("AbyssalCraftAPI", Level.ERROR, "This Materializer recipe has no inputs!");
+	}
+
+	/**
+	 * Basic Materialization.
+	 * @param materialization A Materializer Recipe
+	 * 
+	 * @since 1.5
+	 */
+	public static void addMaterialization(Materialization materialization){
+		MaterializerRecipes.instance().materialize(materialization);
 	}
 
 	/**

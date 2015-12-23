@@ -43,4 +43,9 @@ public interface IEnergyContainer {
 	 * @param energy Energy quanta to consume
 	 */
 	public void consumeEnergy(float energy);
+	
+	/**
+	 * Returns Whether or not this container can accept Potential Energy
+	 */
+	public boolean canAcceptPE();
 }

@@ -13,25 +13,20 @@ package com.shinoow.abyssalcraft.api.recipe;
 
 import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-
-import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
-import com.shinoow.abyssalcraft.api.APIUtils;
-import com.shinoow.abyssalcraft.common.items.ItemCrystalBag;
 
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraftforge.oredict.OreDictionary;
 
+import com.google.common.collect.Lists;
+import com.shinoow.abyssalcraft.api.APIUtils;
+
 public class MaterializerRecipes {
 
 	private static final MaterializerRecipes materializerBase = new MaterializerRecipes();
 	/** The list of materialization results. */
-	private Map<ItemStack[], ItemStack> materializationList = Maps.newHashMap();
-	private Map<ItemStack, Float> experienceList = Maps.newHashMap();
+	private List<Materialization> materializationList = Lists.newArrayList();
 
 	public static MaterializerRecipes instance()
 	{
@@ -43,76 +38,66 @@ public class MaterializerRecipes {
 
 	}
 
-	public void materialize(ItemStack[] input, ItemStack output, float xp){
+	public void materialize(ItemStack[] input, ItemStack output){
 
-		for(ItemStack item : input)
-			if(!APIUtils.isCrystal(item)) throw new ClassCastException("All of the input items has to be Crystals!");
-		materializationList.put(input, output);
-		experienceList.put(output, xp);
+		materialize(new Materialization(input, output));
 	}
 
-	/**
-	 * Returns the materialization result of an item.
-	 */
-	public ItemStack getMaterializationResult(ItemStack par1ItemStack)
-	{
-		Iterator<?> iterator = materializationList.entrySet().iterator();
-		Entry<?, ?> entry;
+	public void materialize(Materialization materialization){
+		materializationList.add(materialization);
+	}
+
+	public List<ItemStack> getMaterializationResult(ItemStack stack){
+
+		ItemStack[] inventory = null;
+
+		if(stack.stackTagCompound == null)
+			stack.stackTagCompound = new NBTTagCompound();
+		if(stack.stackTagCompound.hasKey("ItemInventory")){
+			NBTTagList items = stack.stackTagCompound.getTagList("ItemInventory", 10);
+
+			inventory = new ItemStack[items.tagCount()];
+			for (int i = 0; i < items.tagCount(); ++i)
+			{
+				NBTTagCompound item = items.getCompoundTagAt(i);
+				byte slot = item.getByte("Slot");
+
+				inventory[slot] = ItemStack.loadItemStackFromNBT(item);
+			}
+		}
+		
+		if(inventory == null) return null;
+
+		for(ItemStack item : inventory)
+			if(!APIUtils.isCrystal(item)) return null;
+
+		List<ItemStack> displayList = Lists.newArrayList();
+
+		Iterator<Materialization> iterator = materializationList.iterator();
+		Materialization entry;
 
 		do
 		{
-			if (!iterator.hasNext())
-				return null;
+			if(!iterator.hasNext())
+				return displayList;
 
-			entry = (Entry<?, ?>)iterator.next();
+			entry = iterator.next();
+			if(arrayContainsOtherArray(inventory, entry.input))
+				displayList.add(entry.output);
 		}
-		while (!areStacksEqual(par1ItemStack, (ItemStack)entry.getKey()));
+		while(!arrayContainsOtherArray(inventory, entry.input));
 
-		return (ItemStack)entry.getValue();
-	}
+//		for(Materialization mat : materializationList){
+//			if(arrayContainsOtherArray(inventory, mat.input))
+//				displayList.add(mat.output);
+//		}
 
-	public ItemStack getMaterializationResult(ItemStack stack, int book){
-
-		NBTTagList items = new NBTTagList();
-		ItemStack[] inventory = null;
-
-		if(stack.getItem() instanceof ItemCrystalBag){
-			if(stack.stackTagCompound == null)
-				stack.stackTagCompound = new NBTTagCompound();
-			if(stack.stackTagCompound.hasKey("ItemInventory", 10)){
-				items = stack.stackTagCompound.getTagList("ItemInventory", 10);
-
-				inventory = new ItemStack[items.tagCount()];
-				for (int i = 0; i < items.tagCount(); ++i)
-				{
-					NBTTagCompound item = items.getCompoundTagAt(i);
-					byte slot = item.getByte("Slot");
-
-					inventory[slot] = ItemStack.loadItemStackFromNBT(item);
-				}
-			}
-
-			Iterator<Entry<ItemStack[], ItemStack>> iterator = materializationList.entrySet().iterator();
-			Entry<ItemStack[], ItemStack> entry;
-
-			do
-			{
-				if(!iterator.hasNext())
-					return null;
-
-				entry = iterator.next();
-			}
-			while(!arrayContainsOtherArray(inventory, entry.getKey()));
-
-			return entry.getValue();
-
-		}
-
-		return null;
+		return displayList;
 	}
 
 	private boolean areStacksEqual(ItemStack par1ItemStack, ItemStack par2ItemStack)
 	{
+		if(par1ItemStack == null || par2ItemStack == null) return false;
 		return par2ItemStack.getItem() == par1ItemStack.getItem() && (par2ItemStack.getItemDamage() == OreDictionary.WILDCARD_VALUE || par2ItemStack.getItemDamage() == par1ItemStack.getItemDamage());
 	}
 
@@ -131,28 +116,8 @@ public class MaterializerRecipes {
 		return recipe.isEmpty();
 	}
 
-	public Map<ItemStack[], ItemStack> getMaterializationList()
+	public List<Materialization> getMaterializationList()
 	{
 		return materializationList;
-	}
-
-	public float getExperience(ItemStack par1ItemStack)
-	{
-		float ret = par1ItemStack.getItem().getSmeltingExperience(par1ItemStack);
-		if (ret != -1) return ret;
-
-		Iterator<?> iterator = experienceList.entrySet().iterator();
-		Entry<?, ?> entry;
-
-		do
-		{
-			if (!iterator.hasNext())
-				return 0.0F;
-
-			entry = (Entry<?, ?>)iterator.next();
-		}
-		while (!areStacksEqual(par1ItemStack, (ItemStack)entry.getKey()));
-
-		return ((Float)entry.getValue()).floatValue();
 	}
 }

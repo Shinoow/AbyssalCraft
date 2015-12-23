@@ -39,9 +39,6 @@ public class BlockRitualAltar extends BlockContainer {
 
 	private static HashMap<Integer, Block> blockMeta = Maps.newHashMap();
 
-	@SideOnly(Side.CLIENT)
-	private IIcon[] icons;
-
 	public BlockRitualAltar() {
 		super(Material.rock);
 		setHardness(6.0F);
