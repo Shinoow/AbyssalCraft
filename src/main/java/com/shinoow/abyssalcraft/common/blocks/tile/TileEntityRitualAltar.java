@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2015 Shinoow.
+ * Copyright (c) 2012 - 2016 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -195,7 +195,6 @@ public class TileEntityRitualAltar extends TileEntity {
 					if(canPerform()){
 						ritual = RitualRegistry.instance().getRitual(world.provider.dimensionId, ((ItemNecronomicon)item.getItem()).getBookType(), offers, this.item);
 						if(ritual != null)
-							if(((IEnergyTransporter)item.getItem()).getContainedEnergy(item) >= ritual.getReqEnergy())
 								if(ritual.canRemnantAid()){
 									if(!world.getEntitiesWithinAABB(EntityRemnant.class, world.getBlock(x, y, z).getCollisionBoundingBoxFromPool(world, x, y, z).expand(32, 32, 32)).isEmpty()
 											&& world.getEntitiesWithinAABB(EntityRemnant.class, world.getBlock(x, y, z).getCollisionBoundingBoxFromPool(world, x, y, z).expand(32, 32, 32)).size() >= ritual.getBookType() + 1)

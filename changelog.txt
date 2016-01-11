@@ -1,17 +1,4 @@
-- Removed the achievement for mining Darkstone (the first achievement is now crafting a Necronomicon)
-- Setting "Evil Animal spawn rate" to 0 will actually disable them from spawning (instead of crashing the game when attempting to spawn one of them)
-- Items displayed in the Necronomicon now displays tooltips when hovered over
-- The smoke fired from statues when channeling PE to players is a bit more accurate now
-- Statues can now transfer PE to pedestals that are on a lower y-axis (up to 2 blocks lower down)
-- Stacked Statues won't transfer PE to anything (but can still trigger Disruptions)
-- Added a reputation system (ties your actions to worshipping a single Great Old One)
-- Rewrote the information part of the ritual section
-- Rewrote the majority of code realted to PageDatas (and removed the PageType enum)
-- A single turn-up can now display items/pictures/crafting recipes on both pages
-- Added Sacrificial Altars (allows you to draw PE from dying mobs)
-- Added tiered Energy Pedestals (Overworld, Abyssal Wasteland, Dreadlands, Omothol)
-- Added tiered Sacrificial Altars (Overworld, Abyssal Wasteland, Dreadlands, Omothol)
-- The Ritual section can now display up to 100 rituals per Necronomicon type (previously 20)
-- The page indicator in the Necronomicon has been replaced by a turn-up indicator (since it's not displaying pages, but full turn-ups)
-- Increased the amount of turn-ups per PageData to 20 (previously 10)
-- When a Monolith is constructed, the same sound as when you remove an item from the Anvil output slot will play
+- Rituals can now be performed even if there isn't enough PE (in which case the ritual will fail to complete)
+- Fixed server crashes related to Fireball rain Disruptions (had code that only ran client-side)
+- Somewhat fixed the hitbox issues with Lesser Shoggoths and Cha'garoth (reduced the bounding box width to 2 on both of them, makes it possible to land a hit)
+- Now runs on Forge 10.13.4.1558

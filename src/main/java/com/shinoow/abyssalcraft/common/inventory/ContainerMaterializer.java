@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2015 Shinoow.
+ * Copyright (c) 2012 - 2016 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -18,7 +18,6 @@ import net.minecraft.inventory.ICrafting;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 
-import com.shinoow.abyssalcraft.api.recipe.MaterializerRecipes;
 import com.shinoow.abyssalcraft.common.blocks.tile.TileEntityMaterializer;
 
 import cpw.mods.fml.relauncher.Side;
@@ -90,11 +89,11 @@ public class ContainerMaterializer extends Container {
 			}
 			else if (par2 != 1 && par2 != 0)
 			{
-//				if (MaterializerRecipes.instance().getMaterializationResult(itemstack1) != null)
-//				{
-//					if (!mergeItemStack(itemstack1, 0, 1, false))
-//						return null;
-//				}
+				//				if (MaterializerRecipes.instance().getMaterializationResult(itemstack1) != null)
+				//				{
+				//					if (!mergeItemStack(itemstack1, 0, 1, false))
+				//						return null;
+				//				}
 				if (par2 >= 3 && par2 < 30)
 				{
 					if (!mergeItemStack(itemstack1, 30, 39, false))

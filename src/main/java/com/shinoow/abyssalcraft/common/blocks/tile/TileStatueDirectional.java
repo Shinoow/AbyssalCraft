@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2015 Shinoow.
+ * Copyright (c) 2012 - 2016 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -199,28 +199,28 @@ public class TileStatueDirectional extends TEDirectional implements IEnergyManip
 			TileEntity pedestal2 = null;
 			TileEntity pedestal3 = null;
 			TileEntity pedestal4 = null;
-			
+
 			if(worldObj.getTileEntity(xCoord, yCoord, zCoord + 3) != null)
 				pedestal1 = worldObj.getTileEntity(xCoord, yCoord, zCoord + 3);
 			if(worldObj.getTileEntity(xCoord, yCoord - 1, zCoord + 3) != null && pedestal1 == null)
 				pedestal1 = worldObj.getTileEntity(xCoord, yCoord - 1, zCoord + 3);
 			if(worldObj.getTileEntity(xCoord, yCoord - 2, zCoord + 3) != null && pedestal1 == null)
 				pedestal1 = worldObj.getTileEntity(xCoord, yCoord - 2, zCoord + 3);
-			
+
 			if(worldObj.getTileEntity(xCoord, yCoord, zCoord - 3) != null)
 				pedestal2 = worldObj.getTileEntity(xCoord, yCoord, zCoord - 3);
 			if(worldObj.getTileEntity(xCoord, yCoord - 1, zCoord - 3) != null && pedestal2 == null)
 				pedestal2 = worldObj.getTileEntity(xCoord, yCoord - 1, zCoord - 3);
 			if(worldObj.getTileEntity(xCoord, yCoord - 2, zCoord - 3) != null && pedestal2 == null)
 				pedestal2 = worldObj.getTileEntity(xCoord, yCoord - 2, zCoord - 3);
-			
+
 			if(worldObj.getTileEntity(xCoord + 3, yCoord, zCoord) != null)
 				pedestal3 = worldObj.getTileEntity(xCoord + 3, yCoord, zCoord);
 			if(worldObj.getTileEntity(xCoord + 3, yCoord - 1, zCoord) != null && pedestal3 == null)
 				pedestal3 = worldObj.getTileEntity(xCoord + 3, yCoord - 1, zCoord);
 			if(worldObj.getTileEntity(xCoord + 3, yCoord - 2, zCoord) != null && pedestal3 == null)
 				pedestal3 = worldObj.getTileEntity(xCoord + 3, yCoord - 2, zCoord);
-			
+
 			if(worldObj.getTileEntity(xCoord - 3, yCoord, zCoord) != null)
 				pedestal4 = worldObj.getTileEntity(xCoord - 3, yCoord, zCoord);
 			if(worldObj.getTileEntity(xCoord - 3, yCoord - 1, zCoord) != null && pedestal4 == null)

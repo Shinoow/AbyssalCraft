@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2015 Shinoow.
+ * Copyright (c) 2012 - 2016 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -125,6 +125,6 @@ public class NecronomiconResources {
 	public static final ResourceLocation[] OUTER_GODS = {AZATHOTH_SEAL, NYARLATHOTEP_SEAL, YOG_SOTHOTH_SEAL, SHUB_NIGGURATH_SEAL};
 
 	public static final ResourceLocation[] GREAT_OLD_ONES = {CTHULHU_SEAL, HASTUR_SEAL, JZAHAR_SEAL};
-	
+
 	public static final ResourceLocation[] RITUAL_TUT = {RITUAL_TUT_1, RITUAL_TUT_2, RITUAL_TUT_3};
 }

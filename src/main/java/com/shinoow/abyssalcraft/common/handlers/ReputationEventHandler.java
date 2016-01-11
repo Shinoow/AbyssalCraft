@@ -1,3 +1,14 @@
+/*******************************************************************************
+ * AbyssalCraft
+ * Copyright (c) 2012 - 2016 Shinoow.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the GNU Lesser Public License v3
+ * which accompanies this distribution, and is available at
+ * http://www.gnu.org/licenses/lgpl-3.0.txt
+ * 
+ * Contributors:
+ *     Shinoow -  implementation
+ ******************************************************************************/
 package com.shinoow.abyssalcraft.common.handlers;
 
 import net.minecraft.entity.player.EntityPlayer;
@@ -21,17 +32,15 @@ public class ReputationEventHandler {
 
 	@SubscribeEvent
 	public void onEntityConstructing(EntityConstructing event) {
-		if (event.entity instanceof EntityPlayer) {
+		if (event.entity instanceof EntityPlayer)
 			if (ReputationProps.get((EntityPlayer) event.entity) == null)
 				ReputationProps.register((EntityPlayer) event.entity);
-		}
 	}
 
 	@SubscribeEvent
 	public void onEntityJoinWorld(EntityJoinWorldEvent event) {
-		if (event.entity instanceof EntityPlayer && !event.entity.worldObj.isRemote) {
+		if (event.entity instanceof EntityPlayer && !event.entity.worldObj.isRemote)
 			PacketDispatcher.sendTo(new SyncPlayerPropsMessage((EntityPlayer) event.entity), (EntityPlayerMP) event.entity);
-		}
 	}
 
 	@SubscribeEvent

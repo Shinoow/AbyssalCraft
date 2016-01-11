@@ -1,3 +1,14 @@
+/*******************************************************************************
+ * AbyssalCraft
+ * Copyright (c) 2012 - 2016 Shinoow.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the GNU Lesser Public License v3
+ * which accompanies this distribution, and is available at
+ * http://www.gnu.org/licenses/lgpl-3.0.txt
+ * 
+ * Contributors:
+ *     Shinoow -  implementation
+ ******************************************************************************/
 package com.shinoow.abyssalcraft.common.network;
 
 import net.minecraft.entity.player.EntityPlayer;
@@ -17,7 +28,7 @@ import cpw.mods.fml.relauncher.Side;
  * This class will house the SimpleNetworkWrapper instance, which I will name 'dispatcher',
  * as well as give us a logical place from which to register our packets. These two things
  * could be done anywhere, however, even in your Main class, but I will be adding other
- * functionality (see below) that gives this class a bit more utility. 
+ * functionality (see below) that gives this class a bit more utility.
  * 
  * While unnecessary, I'm going to turn this class into a 'wrapper' for SimpleNetworkWrapper
  * so that instead of writing "PacketDispatcher.dispatcher.{method}" I can simply write
@@ -57,11 +68,11 @@ public class PacketDispatcher
 	private static final <T extends AbstractMessage<T> & IMessageHandler<T, IMessage>> void registerMessage(Class<T> clazz) {
 		// We can tell by the message class which side to register it on by using #isAssignableFrom (google it)
 
-		if (AbstractMessage.AbstractClientMessage.class.isAssignableFrom(clazz)) {
+		if (AbstractMessage.AbstractClientMessage.class.isAssignableFrom(clazz))
 			PacketDispatcher.dispatcher.registerMessage(clazz, clazz, packetId++, Side.CLIENT);
-		} else if (AbstractMessage.AbstractServerMessage.class.isAssignableFrom(clazz)) {
+		else if (AbstractMessage.AbstractServerMessage.class.isAssignableFrom(clazz))
 			PacketDispatcher.dispatcher.registerMessage(clazz, clazz, packetId++, Side.SERVER);
-		} else {
+		else {
 			PacketDispatcher.dispatcher.registerMessage(clazz, clazz, packetId, Side.CLIENT);
 			PacketDispatcher.dispatcher.registerMessage(clazz, clazz, packetId++, Side.SERVER);
 		}
@@ -100,7 +111,7 @@ public class PacketDispatcher
 	 * Sends a message to everyone within a certain range of the player provided.
 	 */
 	public static final void sendToAllAround(IMessage message, EntityPlayer player, double range) {
-		PacketDispatcher.sendToAllAround(message, player.worldObj.provider.dimensionId, player.posX, 
+		PacketDispatcher.sendToAllAround(message, player.worldObj.provider.dimensionId, player.posX,
 
 				player.posY, player.posZ, range);
 	}

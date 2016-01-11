@@ -1,28 +1,32 @@
+/*******************************************************************************
+ * AbyssalCraft
+ * Copyright (c) 2012 - 2016 Shinoow.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the GNU Lesser Public License v3
+ * which accompanies this distribution, and is available at
+ * http://www.gnu.org/licenses/lgpl-3.0.txt
+ * 
+ * Contributors:
+ *     Shinoow -  implementation
+ ******************************************************************************/
 package com.shinoow.abyssalcraft.common.entity.props;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.nbt.NBTTagList;
 import net.minecraft.world.World;
 import net.minecraftforge.common.IExtendedEntityProperties;
 
 import com.shinoow.abyssalcraft.api.energy.EnergyEnum.DeityType;
-import com.shinoow.abyssalcraft.common.network.PacketDispatcher;
-import com.shinoow.abyssalcraft.common.network.client.SyncPlayerPropsMessage;
 import com.shinoow.abyssalcraft.common.util.ACLogger;
 
 public class ReputationProps implements IExtendedEntityProperties
 {
 	public final static String EXT_PROP_NAME = "DeityReputation";
 
-	private final EntityPlayer player;
-
 	private int cthulhuRep, hasturRep, jzaharRep, azathothRep, nyarlathotepRep, shubniggurathRep, yogsothothRep;
-	
+
 	public ReputationProps(EntityPlayer player) {
-		this.player = player;
 	}
 
 	/**
@@ -57,7 +61,7 @@ public class ReputationProps implements IExtendedEntityProperties
 	public final void saveNBTData(NBTTagCompound compound) {
 
 		NBTTagCompound properties = new NBTTagCompound();
-		
+
 		properties.setInteger(DeityType.CTHULHU.getName(), cthulhuRep);
 		properties.setInteger(DeityType.HASTUR.getName(), hasturRep);
 		properties.setInteger(DeityType.JZAHAR.getName(), jzaharRep);
@@ -65,7 +69,7 @@ public class ReputationProps implements IExtendedEntityProperties
 		properties.setInteger(DeityType.NYARLATHOTEP.getName(), nyarlathotepRep);
 		properties.setInteger(DeityType.SHUBNIGGURATH.getName(), shubniggurathRep);
 		properties.setInteger(DeityType.YOGSOTHOTH.getName(), yogsothothRep);
-		
+
 
 		compound.setTag(EXT_PROP_NAME, properties);
 	}
@@ -75,18 +79,25 @@ public class ReputationProps implements IExtendedEntityProperties
 
 		NBTTagCompound properties = (NBTTagCompound) compound.getTag(EXT_PROP_NAME);
 
-		cthulhuRep = properties.getInteger(DeityType.CTHULHU.getName());
-		hasturRep = properties.getInteger(DeityType.HASTUR.getName());
-		jzaharRep = properties.getInteger(DeityType.JZAHAR.getName());
-		azathothRep = properties.getInteger(DeityType.AZATHOTH.getName());
-		nyarlathotepRep = properties.getInteger(DeityType.NYARLATHOTEP.getName());
-		shubniggurathRep = properties.getInteger(DeityType.SHUBNIGGURATH.getName());
-		yogsothothRep = properties.getInteger(DeityType.YOGSOTHOTH.getName());
+		if(properties.hasKey(DeityType.CTHULHU.getName()))
+			cthulhuRep = properties.getInteger(DeityType.CTHULHU.getName());
+		if(properties.hasKey(DeityType.HASTUR.getName()))
+			hasturRep = properties.getInteger(DeityType.HASTUR.getName());
+		if(properties.hasKey(DeityType.JZAHAR.getName()))
+			jzaharRep = properties.getInteger(DeityType.JZAHAR.getName());
+		if(properties.hasKey(DeityType.AZATHOTH.getName()))
+			azathothRep = properties.getInteger(DeityType.AZATHOTH.getName());
+		if(properties.hasKey(DeityType.NYARLATHOTEP.getName()))
+			nyarlathotepRep = properties.getInteger(DeityType.NYARLATHOTEP.getName());
+		if(properties.hasKey(DeityType.SHUBNIGGURATH.getName()))
+			shubniggurathRep = properties.getInteger(DeityType.SHUBNIGGURATH.getName());
+		if(properties.hasKey(DeityType.YOGSOTHOTH.getName()))
+			yogsothothRep = properties.getInteger(DeityType.YOGSOTHOTH.getName());
 	}
 
 	@Override
 	public void init(Entity entity, World world) {}
-	
+
 
 	public void onUpdate() {
 
@@ -198,7 +209,7 @@ public class ReputationProps implements IExtendedEntityProperties
 			break;
 		}
 	}
-	
+
 	/**
 	 * Resets the reputation of all deities
 	 */

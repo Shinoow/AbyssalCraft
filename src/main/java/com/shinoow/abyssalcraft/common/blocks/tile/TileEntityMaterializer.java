@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2015 Shinoow.
+ * Copyright (c) 2012 - 2016 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -12,9 +12,7 @@
 package com.shinoow.abyssalcraft.common.blocks.tile;
 
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Items;
 import net.minecraft.inventory.ISidedInventory;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
@@ -23,14 +21,7 @@ import net.minecraft.tileentity.TileEntity;
 import java.util.Iterator;
 import java.util.List;
 
-import com.shinoow.abyssalcraft.AbyssalCraft;
-import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
-import com.shinoow.abyssalcraft.api.AbyssalCraftAPI.FuelType;
 import com.shinoow.abyssalcraft.api.recipe.MaterializerRecipes;
-import com.shinoow.abyssalcraft.common.blocks.BlockMaterializer;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 public class TileEntityMaterializer extends TileEntity implements ISidedInventory {
 
@@ -196,54 +187,54 @@ public class TileEntityMaterializer extends TileEntity implements ISidedInventor
 	@Override
 	public void updateEntity()
 	{
-//		boolean flag = materializerBurnTime > 0;
-//		boolean flag1 = false;
-//
-//		if (materializerBurnTime > 0)
-//			--materializerBurnTime;
-//
-//		if (!worldObj.isRemote)
-//		{
-//			if (materializerBurnTime == 0 && canMaterialize())
-//			{
-//				currentItemBurnTime = materializerBurnTime = getItemBurnTime(materializerItemStacks[1]);
-//
-//				if (materializerBurnTime > 0)
-//				{
-//					flag1 = true;
-//
-//					if (materializerItemStacks[1] != null)
-//					{
-//						--materializerItemStacks[1].stackSize;
-//
-//						if (materializerItemStacks[1].stackSize == 0)
-//							materializerItemStacks[1] = materializerItemStacks[1].getItem().getContainerItem(materializerItemStacks[1]);
-//					}
-//				}
-//			}
-//
-//			if (isMaterializing() && canMaterialize())
-//			{
-//				++materializerProcessTime;
-//
-//				if (materializerProcessTime == 200)
-//				{
-//					materializerProcessTime = 0;
-//					processItem();
-//					flag1 = true;
-//				}
-//			} else
-//				materializerProcessTime = 0;
-//
-//			if (flag != materializerBurnTime > 0)
-//			{
-//				flag1 = true;
-//				BlockMaterializer.updateMaterializerBlockState(materializerBurnTime > 0, worldObj, xCoord, yCoord, zCoord);
-//			}
-//		}
-//
-//		if (flag1)
-//			markDirty();
+		//		boolean flag = materializerBurnTime > 0;
+		//		boolean flag1 = false;
+		//
+		//		if (materializerBurnTime > 0)
+		//			--materializerBurnTime;
+		//
+		//		if (!worldObj.isRemote)
+		//		{
+		//			if (materializerBurnTime == 0 && canMaterialize())
+		//			{
+		//				currentItemBurnTime = materializerBurnTime = getItemBurnTime(materializerItemStacks[1]);
+		//
+		//				if (materializerBurnTime > 0)
+		//				{
+		//					flag1 = true;
+		//
+		//					if (materializerItemStacks[1] != null)
+		//					{
+		//						--materializerItemStacks[1].stackSize;
+		//
+		//						if (materializerItemStacks[1].stackSize == 0)
+		//							materializerItemStacks[1] = materializerItemStacks[1].getItem().getContainerItem(materializerItemStacks[1]);
+		//					}
+		//				}
+		//			}
+		//
+		//			if (isMaterializing() && canMaterialize())
+		//			{
+		//				++materializerProcessTime;
+		//
+		//				if (materializerProcessTime == 200)
+		//				{
+		//					materializerProcessTime = 0;
+		//					processItem();
+		//					flag1 = true;
+		//				}
+		//			} else
+		//				materializerProcessTime = 0;
+		//
+		//			if (flag != materializerBurnTime > 0)
+		//			{
+		//				flag1 = true;
+		//				BlockMaterializer.updateMaterializerBlockState(materializerBurnTime > 0, worldObj, xCoord, yCoord, zCoord);
+		//			}
+		//		}
+		//
+		//		if (flag1)
+		//			markDirty();
 		test();
 	}
 
@@ -252,45 +243,14 @@ public class TileEntityMaterializer extends TileEntity implements ISidedInventor
 		if (materializerItemStacks[0] != null)
 		{
 			List<ItemStack> list = MaterializerRecipes.instance().getMaterializationResult(materializerItemStacks[0]);
-			
+
 			if(list != null){
 				Iterator<ItemStack> iter = list.iterator();
-			
-			for(int i = 2; i < materializerItemStacks.length; i++){
-				if(iter.hasNext())
-					materializerItemStacks[i] = iter.next();
-			}
-			}
-		}
-	}
 
-	/**
-	 * Returns true if the materializer can materialize an item, i.e. has a source item, destination stack isn't full, etc.
-	 */
-	private boolean canMaterialize()
-	{
-		if (materializerItemStacks[0] == null)
-			return false;
-		else
-		{
-//			ItemStack itemstack = MaterializerRecipes.instance().getMaterializationResult(materializerItemStacks[0]);
-//			if (itemstack == null) return false;
-//			if (materializerItemStacks[2] == null) return true;
-//			if (!materializerItemStacks[2].isItemEqual(itemstack)) return false;
-//			int result = materializerItemStacks[2].stackSize + itemstack.stackSize;
-//			return result <= getInventoryStackLimit() && result <= materializerItemStacks[2].getMaxStackSize();
-			List<ItemStack> list = MaterializerRecipes.instance().getMaterializationResult(materializerItemStacks[0]);
-			
-			if(list == null) return false;
-			
-			Iterator<ItemStack> iter = list.iterator();
-			
-			for(int i = 2; i < materializerItemStacks.length; i++){
-				if(iter.hasNext())
-					materializerItemStacks[i] = iter.next();
+				for(int i = 2; i < materializerItemStacks.length; i++)
+					if(iter.hasNext())
+						materializerItemStacks[i] = iter.next();
 			}
-			
-			return !list.isEmpty();
 		}
 	}
 
@@ -299,20 +259,20 @@ public class TileEntityMaterializer extends TileEntity implements ISidedInventor
 	 */
 	public void processItem()
 	{
-//		if (canMaterialize())
-//		{
-//			ItemStack itemstack = MaterializerRecipes.instance().getMaterializationResult(materializerItemStacks[0]);
-//
-//			if (materializerItemStacks[2] == null)
-//				materializerItemStacks[2] = itemstack.copy();
-//			else if (materializerItemStacks[2].getItem() == itemstack.getItem())
-//				materializerItemStacks[2].stackSize += itemstack.stackSize;
-//
-//			--materializerItemStacks[0].stackSize;
-//
-//			if (materializerItemStacks[0].stackSize <= 0)
-//				materializerItemStacks[0] = null;
-//		}
+		//		if (canMaterialize())
+		//		{
+		//			ItemStack itemstack = MaterializerRecipes.instance().getMaterializationResult(materializerItemStacks[0]);
+		//
+		//			if (materializerItemStacks[2] == null)
+		//				materializerItemStacks[2] = itemstack.copy();
+		//			else if (materializerItemStacks[2].getItem() == itemstack.getItem())
+		//				materializerItemStacks[2].stackSize += itemstack.stackSize;
+		//
+		//			--materializerItemStacks[0].stackSize;
+		//
+		//			if (materializerItemStacks[0].stackSize <= 0)
+		//				materializerItemStacks[0] = null;
+		//		}
 	}
 
 	/**

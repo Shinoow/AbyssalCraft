@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2015 Shinoow.
+ * Copyright (c) 2012 - 2016 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -384,14 +384,14 @@ public class GuiNecronomiconMachines extends GuiNecronomicon {
 				}
 			}
 		}
-		
+
 		if(tooltipStack != null)
-        {
+		{
 			List<String> tooltipData = tooltipStack.getTooltip(Minecraft.getMinecraft().thePlayer, false);
 			List<String> parsedTooltip = new ArrayList();
 			boolean first = true;
 
-			for(String s : tooltipData) 
+			for(String s : tooltipData)
 			{
 				String s_ = s;
 				if(!first)
@@ -435,12 +435,12 @@ public class GuiNecronomiconMachines extends GuiNecronomicon {
 		}
 		fontRendererObj.setUnicodeFlag(unicode);
 	}
-	
+
 	private ItemStack tooltipStack;
-	public void renderItem(int xPos, int yPos, ItemStack stack, int mx, int my) 
+	public void renderItem(int xPos, int yPos, ItemStack stack, int mx, int my)
 	{
 		RenderItem render = new RenderItem();
-		if(mx > xPos && mx < (xPos+16) && my > yPos && my < (yPos+16))
+		if(mx > xPos && mx < xPos+16 && my > yPos && my < yPos+16)
 			tooltipStack = stack;
 
 		GL11.glPushMatrix();

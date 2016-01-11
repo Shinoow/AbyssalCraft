@@ -1,3 +1,14 @@
+/*******************************************************************************
+ * AbyssalCraft
+ * Copyright (c) 2012 - 2016 Shinoow.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the GNU Lesser Public License v3
+ * which accompanies this distribution, and is available at
+ * http://www.gnu.org/licenses/lgpl-3.0.txt
+ * 
+ * Contributors:
+ *     Shinoow -  implementation
+ ******************************************************************************/
 package com.shinoow.abyssalcraft.common.blocks.tile;
 
 import java.util.List;
@@ -5,9 +16,6 @@ import java.util.Random;
 
 import com.shinoow.abyssalcraft.api.energy.IEnergyContainer;
 import com.shinoow.abyssalcraft.api.energy.IEnergyTransporter;
-import com.shinoow.abyssalcraft.common.util.ACLogger;
-import com.shinoow.abyssalcraft.common.util.SpecialTextUtil;
-
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.entity.player.EntityPlayer;
@@ -53,7 +61,7 @@ public class TileEntityTieredSacrificialAltar extends TileEntity implements IEne
 		nbttagcompound.setInteger("CollectionLimit", collectionLimit);
 		nbttagcompound.setInteger("CoolDown", coolDown);
 	}
-	
+
 	@Override
 	public Packet getDescriptionPacket() {
 		NBTTagCompound nbtTag = new NBTTagCompound();
@@ -66,7 +74,7 @@ public class TileEntityTieredSacrificialAltar extends TileEntity implements IEne
 	{
 		readFromNBT(packet.func_148857_g());
 	}
-	
+
 	@Override
 	public void updateEntity()
 	{
@@ -78,7 +86,7 @@ public class TileEntityTieredSacrificialAltar extends TileEntity implements IEne
 
 		if(isCoolingDown())
 			coolDown--;
-		
+
 		if(item != null)
 			if(item.getItem() instanceof IEnergyTransporter)
 				if(getContainedEnergy() > 0 && ((IEnergyTransporter) item.getItem()).getContainedEnergy(item) < ((IEnergyTransporter) item.getItem()).getMaxEnergy(item)){
@@ -202,7 +210,7 @@ public class TileEntityTieredSacrificialAltar extends TileEntity implements IEne
 			multiplier = 2.0F;
 			break;
 		}
-		this.energy += (energy * multiplier);
+		this.energy += energy * multiplier;
 	}
 
 	@Override

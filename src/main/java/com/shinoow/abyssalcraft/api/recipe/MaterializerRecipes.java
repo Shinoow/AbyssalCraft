@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2015 Shinoow.
+ * Copyright (c) 2012 - 2016 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -65,7 +65,7 @@ public class MaterializerRecipes {
 				inventory[slot] = ItemStack.loadItemStackFromNBT(item);
 			}
 		}
-		
+
 		if(inventory == null) return null;
 
 		for(ItemStack item : inventory)
@@ -87,10 +87,10 @@ public class MaterializerRecipes {
 		}
 		while(!arrayContainsOtherArray(inventory, entry.input));
 
-//		for(Materialization mat : materializationList){
-//			if(arrayContainsOtherArray(inventory, mat.input))
-//				displayList.add(mat.output);
-//		}
+		//		for(Materialization mat : materializationList){
+		//			if(arrayContainsOtherArray(inventory, mat.input))
+		//				displayList.add(mat.output);
+		//		}
 
 		return displayList;
 	}

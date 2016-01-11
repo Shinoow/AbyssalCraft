@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2015 Shinoow.
+ * Copyright (c) 2012 - 2016 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -28,7 +28,6 @@ import net.minecraft.util.EnumChatFormatting;
 import net.minecraftforge.oredict.OreDictionary;
 
 import org.lwjgl.input.Keyboard;
-import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
@@ -100,7 +99,7 @@ public class GuiNecronomiconRitualEntry extends GuiNecronomicon {
 					--currTurnup;
 		updateButtons();
 	}
-	
+
 	@Override
 	protected void drawInformationText(int x, int y){
 		if(currTurnup == 0)
@@ -326,15 +325,15 @@ public class GuiNecronomiconRitualEntry extends GuiNecronomicon {
 			mc.renderEngine.bindTexture(NecronomiconResources.RITUAL_CREATION);
 			drawTexturedModalRect(k, b0, 0, 0, 256, 256);
 		}
-		
+
 		tooltipStack = null;
-		
+
 		ItemStack[] offerings = new ItemStack[8];
 		if(ritual.getOfferings().length < 8)
 			for(int i = 0; i < ritual.getOfferings().length; i++)
 				offerings[i] = getStack(ritual.getOfferings()[i]);
 		else offerings = getStacks(ritual.getOfferings());
-		
+
 		//north
 		renderItem(k + 58, b0 + 30, offerings[0], x, y);
 		//north-east
@@ -354,17 +353,16 @@ public class GuiNecronomiconRitualEntry extends GuiNecronomicon {
 		//center
 		renderItem(k + 58, b0 + 66, getStack(ritual.getSacrifice()), x, y);
 
-		if(ritual instanceof NecronomiconCreationRitual){
+		if(ritual instanceof NecronomiconCreationRitual)
 			renderItem(k + 58, b0 + 139, ((NecronomiconCreationRitual) ritual).getItem(), x, y);
-		}
-		
+
 		if(tooltipStack != null)
-        {
+		{
 			List<String> tooltipData = tooltipStack.getTooltip(Minecraft.getMinecraft().thePlayer, false);
 			List<String> parsedTooltip = new ArrayList();
 			boolean first = true;
 
-			for(String s : tooltipData) 
+			for(String s : tooltipData)
 			{
 				String s_ = s;
 				if(!first)
@@ -401,10 +399,10 @@ public class GuiNecronomiconRitualEntry extends GuiNecronomicon {
 	}
 
 	private ItemStack tooltipStack;
-	public void renderItem(int xPos, int yPos, ItemStack stack, int mx, int my) 
+	public void renderItem(int xPos, int yPos, ItemStack stack, int mx, int my)
 	{
 		RenderItem render = new RenderItem();
-		if(mx > xPos && mx < (xPos+16) && my > yPos && my < (yPos+16))
+		if(mx > xPos && mx < xPos+16 && my > yPos && my < yPos+16)
 			tooltipStack = stack;
 
 		GL11.glPushMatrix();

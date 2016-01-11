@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2015 Shinoow.
+ * Copyright (c) 2012 - 2016 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -171,11 +171,11 @@ public class ClientProxy extends CommonProxy {
 
 	@Override
 	public EntityPlayer getPlayerEntity(MessageContext ctx) {
-	 // Note that if you simply return 'Minecraft.getMinecraft().thePlayer',
-	 // your packets will not work because you will be getting a client
-	 // player even when you are on the server! Sounds absurd, but it's true.
+		// Note that if you simply return 'Minecraft.getMinecraft().thePlayer',
+		// your packets will not work because you will be getting a client
+		// player even when you are on the server! Sounds absurd, but it's true.
 
-	 // Solution is to double-check side before returning the player:
-	 return (ctx.side.isClient() ? Minecraft.getMinecraft().thePlayer : super.getPlayerEntity(ctx));
+		// Solution is to double-check side before returning the player:
+		return ctx.side.isClient() ? Minecraft.getMinecraft().thePlayer : super.getPlayerEntity(ctx);
 	}
 }

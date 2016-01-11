@@ -1,3 +1,14 @@
+/*******************************************************************************
+ * AbyssalCraft
+ * Copyright (c) 2012 - 2016 Shinoow.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the GNU Lesser Public License v3
+ * which accompanies this distribution, and is available at
+ * http://www.gnu.org/licenses/lgpl-3.0.txt
+ * 
+ * Contributors:
+ *     Shinoow -  implementation
+ ******************************************************************************/
 package com.shinoow.abyssalcraft.common.blocks;
 
 import java.util.List;
@@ -28,7 +39,7 @@ public class BlockTieredSacrificialAltar extends BlockContainer {
 		setBlockBounds(0.15F, 0.0F, 0.15F, 0.85F, 1.0F, 0.85F);
 		setBlockTextureName("anvil_top_damaged_0");
 		setCreativeTab(AbyssalCraft.tabDecoration);
-//		setLightLevel(0.375F);
+		//		setLightLevel(0.375F);
 	}
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })
@@ -75,14 +86,13 @@ public class BlockTieredSacrificialAltar extends BlockContainer {
 			world.spawnParticle("smoke", x + 0.25, y + 1.05, z + 0.25, 0.0D, 0.0D, 0.0D);
 			world.spawnParticle("smoke", x + 0.75, y + 1.05, z + 0.25, 0.0D, 0.0D, 0.0D);
 		}
-		
+
 		TileEntity tile = world.getTileEntity(x, y, z);
 		if(tile != null && tile instanceof TileEntityTieredSacrificialAltar){
 			int timer = ((TileEntityTieredSacrificialAltar) tile).getCooldownTimer();
-			
-			if(timer > 0){
+
+			if(timer > 0)
 				world.spawnParticle("lava", x + 0.5, y + 1, z + 0.5, 0, 0, 0);
-			}
 		}
 	}
 

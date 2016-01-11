@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2015 Shinoow.
+ * Copyright (c) 2012 - 2016 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -80,7 +80,7 @@ public class EntityLesserShoggoth extends EntityMob implements ICoraliumEntity, 
 		targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityPlayer.class, 0, true));
 		for(int i = 0; i < noms.size(); i++)
 			targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, noms.get(i), 0, true));
-		setSize(2.8F, 2.8F);
+		setSize(2.0F, 2.8F);
 	}
 
 	@Override

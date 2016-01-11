@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2015 Shinoow.
+ * Copyright (c) 2012 - 2016 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -21,7 +21,6 @@ import org.lwjgl.opengl.GL12;
 import com.shinoow.abyssalcraft.api.necronomicon.CraftingStack;
 import com.shinoow.abyssalcraft.api.necronomicon.NecroData;
 import com.shinoow.abyssalcraft.api.necronomicon.NecroData.PageData;
-import com.shinoow.abyssalcraft.api.necronomicon.NecroData.PageData.PageType;
 import com.shinoow.abyssalcraft.client.gui.necronomicon.buttons.ButtonCategory;
 import com.shinoow.abyssalcraft.client.gui.necronomicon.buttons.ButtonNextPage;
 import com.shinoow.abyssalcraft.client.lib.GuiRenderHelper;
@@ -363,14 +362,14 @@ public class GuiNecronomiconEntry extends GuiNecronomicon {
 				writeText(2, text2);
 			writeText(1, text1);
 		}
-		
+
 		if(tooltipStack != null)
-        {
+		{
 			List<String> tooltipData = tooltipStack.getTooltip(Minecraft.getMinecraft().thePlayer, false);
 			List<String> parsedTooltip = new ArrayList();
 			boolean first = true;
 
-			for(String s : tooltipData) 
+			for(String s : tooltipData)
 			{
 				String s_ = s;
 				if(!first)
@@ -393,10 +392,10 @@ public class GuiNecronomiconEntry extends GuiNecronomicon {
 	}
 
 	private ItemStack tooltipStack;
-	public void renderItem(int xPos, int yPos, ItemStack stack, int mx, int my) 
+	public void renderItem(int xPos, int yPos, ItemStack stack, int mx, int my)
 	{
 		RenderItem render = new RenderItem();
-		if(mx > xPos && mx < (xPos+16) && my > yPos && my < (yPos+16))
+		if(mx > xPos && mx < xPos+16 && my > yPos && my < yPos+16)
 			tooltipStack = stack;
 
 		GL11.glPushMatrix();

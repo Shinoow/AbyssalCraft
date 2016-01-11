@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2015 Shinoow.
+ * Copyright (c) 2012 - 2016 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -10,10 +10,6 @@
  *     Shinoow -  implementation
  ******************************************************************************/
 package com.shinoow.abyssalcraft.api.necronomicon;
-
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.Tuple;
 
 /**
  * Base data structure for Necronomicon information pages
@@ -153,7 +149,7 @@ public class NecroData {
 		public PageData(int num, String title, PageType pagetype, Object[] stuff, String...strings){
 			this(num, title, stuff, strings);
 		}
-		
+
 		/**
 		 * Page data for the NecroData structure
 		 * @param num Amount of turn-ups for the sub-category (max 20)
@@ -168,9 +164,9 @@ public class NecroData {
 			pageNumber = num;
 			this.title = title;
 			if(stuff != null)
-				if(stuff.length == num){
+				if(stuff.length == num)
 					icons = stuff;
-				} else throw new IndexOutOfBoundsException("Not enough elements in the Object array! ("+num+" turn-up(s), "+stuff.length+" Objects");
+				else throw new IndexOutOfBoundsException("Not enough elements in the Object array! ("+num+" turn-up(s), "+stuff.length+" Objects");
 			if(strings.length/2 <= num)
 				pages = strings;
 			else throw new IndexOutOfBoundsException("Not enough pages to write on! ("+num+" turn-ups, "+strings.length+" pages)");

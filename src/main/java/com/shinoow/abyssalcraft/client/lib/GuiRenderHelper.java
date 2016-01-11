@@ -1,3 +1,14 @@
+/*******************************************************************************
+ * AbyssalCraft
+ * Copyright (c) 2012 - 2016 Shinoow.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the GNU Lesser Public License v3
+ * which accompanies this distribution, and is available at
+ * http://www.gnu.org/licenses/lgpl-3.0.txt
+ * 
+ * Contributors:
+ *     Shinoow -  implementation
+ ******************************************************************************/
 package com.shinoow.abyssalcraft.client.lib;
 
 import java.util.List;
@@ -13,7 +24,7 @@ import org.lwjgl.opengl.GL11;
 public final class GuiRenderHelper
 {
 
-	public static void renderTooltip(int x, int y, List<String> tooltipData) 
+	public static void renderTooltip(int x, int y, List<String> tooltipData)
 	{
 		int color = 0x505000ff;
 		int color2 = 0xf0100010;

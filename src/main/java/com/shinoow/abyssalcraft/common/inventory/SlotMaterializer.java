@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2015 Shinoow.
+ * Copyright (c) 2012 - 2016 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -11,16 +11,13 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.common.inventory;
 
-import net.minecraft.entity.item.EntityXPOrb;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.MathHelper;
 import net.minecraftforge.common.MinecraftForge;
 
 import com.shinoow.abyssalcraft.api.event.ACEvents;
-import com.shinoow.abyssalcraft.api.recipe.MaterializerRecipes;
 
 public class SlotMaterializer extends Slot
 {
