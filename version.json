@@ -1,0 +1,10 @@
+{
+  "homepage": "https://shinoow.github.io/AbyssalCraft/",
+  "promos": {
+    "1.8.9-latest": "1.9.0-pre-3",
+    "1.8.9-recommended": "1.9.0-pre-3"
+  },
+  "1.8.9": {
+	"1.9.0-pre-3": "- Removed all Transmutator/Crystallizer recipes involving Water of Lava (in block forms)\n- Fixed bug where some text in the Necronomicon didn't display\n- All explosives explode again\n- Fixed the third person rendering on all tools and weapons (swords are held by the hilt etc)\n- Fixed crashes related to missing classes (file paths to come Thaumcraft interfaces have changed, and I was checking for the old path)\n- The Depths Helmet overlay is displaying again\n- Fixed a glitch where walking into blocks that aren't full cubes would cause entities to suffocate\n- Monolith Disruptions shouldn't crash the game (and they work a bit better now)\n- All custom block and item models are now used (but the Staff of The Gatekeeper, the Cudgel and the Dreadlands Infused Powerstone currently has no models)\n- Added a JEI (Just Enough Items) integration (does exactly everything the NEI integration did)"
+  }
+}
