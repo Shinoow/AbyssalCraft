@@ -26,7 +26,7 @@ public class MapGenDreadlandsMine extends MapGenStructure
 	public MapGenDreadlandsMine() {}
 
 	@Override
-	public String func_143025_a()
+	public String getStructureName()
 	{
 		return "Dreadlands Mineshaft";
 	}

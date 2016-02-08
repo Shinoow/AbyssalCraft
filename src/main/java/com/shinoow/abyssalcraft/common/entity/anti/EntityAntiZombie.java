@@ -15,7 +15,6 @@ import java.util.UUID;
 
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.entity.IEntityLivingData;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -39,19 +38,20 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.DamageSource;
+import net.minecraft.pathfinding.PathNavigateGround;
+import net.minecraft.util.BlockPos;
+import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeModContainer;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.api.entity.IAntiEntity;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-
 public class EntityAntiZombie extends EntityMob implements IAntiEntity {
 
-	protected static final IAttribute spawnReinforcementsAttribute = new RangedAttribute("zombie.spawnReinforcements", 0.0D, 0.0D, 1.0D).setDescription("Spawn Reinforcements Chance");
+	protected static final IAttribute spawnReinforcementsAttribute = new RangedAttribute((IAttribute)null, "zombie.spawnReinforcements", 0.0D, 0.0D, 1.0D).setDescription("Spawn Reinforcements Chance");
 	private static final UUID babySpeedBoostUUID = UUID.fromString("B9766B59-9566-4402-BC1F-2EE2A276D836");
 	private static final AttributeModifier babySpeedBoostModifier = new AttributeModifier(babySpeedBoostUUID, "Baby speed boost", 0.5D, 1);
 	private final EntityAIBreakDoor breakDoors = new EntityAIBreakDoor(this);
@@ -62,7 +62,7 @@ public class EntityAntiZombie extends EntityMob implements IAntiEntity {
 	public EntityAntiZombie(World par1World)
 	{
 		super(par1World);
-		getNavigator().setBreakDoors(true);
+		((PathNavigateGround)getNavigator()).setBreakDoors(true);
 		tasks.addTask(0, new EntityAISwimming(this));
 		tasks.addTask(2, new EntityAIAttackOnCollide(this, EntityPlayer.class, 1.0D, false));
 		tasks.addTask(5, new EntityAIMoveTowardsRestriction(this, 1.0D));
@@ -71,7 +71,7 @@ public class EntityAntiZombie extends EntityMob implements IAntiEntity {
 		tasks.addTask(8, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
 		tasks.addTask(8, new EntityAILookIdle(this));
 		targetTasks.addTask(1, new EntityAIHurtByTarget(this, true));
-		targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityPlayer.class, 0, true));
+		targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityPlayer.class, true));
 		setSize(0.6F, 1.8F);
 	}
 
@@ -99,12 +99,6 @@ public class EntityAntiZombie extends EntityMob implements IAntiEntity {
 		getDataWatcher().addObject(12, Byte.valueOf((byte)0));
 		getDataWatcher().addObject(13, Byte.valueOf((byte)0));
 		getDataWatcher().addObject(14, Byte.valueOf((byte)0));
-	}
-
-	@Override
-	protected boolean isAIEnabled()
-	{
-		return true;
 	}
 
 	public boolean canBearkDoors()
@@ -159,24 +153,24 @@ public class EntityAntiZombie extends EntityMob implements IAntiEntity {
 		this.isChild(par1);
 	}
 
-	@Override
-	public boolean attackEntityFrom(DamageSource par1DamageSource, float par2)
-	{
-		if (!super.attackEntityFrom(par1DamageSource, par2))
-			return false;
-		else
-		{
-			EntityLivingBase entitylivingbase = getAttackTarget();
-
-			if (entitylivingbase == null && getEntityToAttack() instanceof EntityLivingBase)
-				entitylivingbase = (EntityLivingBase)getEntityToAttack();
-
-			if (entitylivingbase == null && par1DamageSource.getEntity() instanceof EntityLivingBase)
-				entitylivingbase = (EntityLivingBase)par1DamageSource.getEntity();
-
-			return true;
-		}
-	}
+	//	@Override
+	//	public boolean attackEntityFrom(DamageSource par1DamageSource, float par2)
+	//	{
+	//		if (!super.attackEntityFrom(par1DamageSource, par2))
+	//			return false;
+	//		else
+	//		{
+	//			EntityLivingBase entitylivingbase = getAttackTarget();
+	//
+	//			if (entitylivingbase == null && getEntityToAttack() instanceof EntityLivingBase)
+	//				entitylivingbase = (EntityLivingBase)getEntityToAttack();
+	//
+	//			if (entitylivingbase == null && par1DamageSource.getEntity() instanceof EntityLivingBase)
+	//				entitylivingbase = (EntityLivingBase)par1DamageSource.getEntity();
+	//
+	//			return true;
+	//		}
+	//	}
 
 	@Override
 	public boolean attackEntityAsMob(Entity par1Entity)
@@ -185,7 +179,7 @@ public class EntityAntiZombie extends EntityMob implements IAntiEntity {
 
 		if (flag)
 		{
-			int i = worldObj.difficultySetting.getDifficultyId();
+			int i = worldObj.getDifficulty().getDifficultyId();
 
 			if (getHeldItem() == null && isBurning() && rand.nextFloat() < i * 0.3F)
 				par1Entity.setFire(2 * i);
@@ -213,7 +207,7 @@ public class EntityAntiZombie extends EntityMob implements IAntiEntity {
 	}
 
 	@Override
-	protected void func_145780_a(int par1, int par2, int par3, Block par4Block)
+	protected void playStepSound(BlockPos pos, Block par4Block)
 	{
 		playSound("mob.zombie.step", 0.15F, 1.0F);
 	}
@@ -231,7 +225,7 @@ public class EntityAntiZombie extends EntityMob implements IAntiEntity {
 	}
 
 	@Override
-	protected void dropRareDrop(int par1)
+	protected void addRandomDrop()
 	{
 		switch (rand.nextInt(3))
 		{
@@ -272,7 +266,7 @@ public class EntityAntiZombie extends EntityMob implements IAntiEntity {
 	protected void collideWithEntity(Entity par1Entity)
 	{
 		if(!worldObj.isRemote && par1Entity instanceof EntityZombie){
-			boolean flag = worldObj.getGameRules().getGameRuleBooleanValue("mobGriefing");
+			boolean flag = worldObj.getGameRules().getBoolean("mobGriefing");
 			worldObj.createExplosion(this, posX, posY, posZ, 5, flag);
 			setDead();
 		}
@@ -280,10 +274,10 @@ public class EntityAntiZombie extends EntityMob implements IAntiEntity {
 	}
 
 	@Override
-	public IEntityLivingData onSpawnWithEgg(IEntityLivingData par1EntityLivingData)
+	public IEntityLivingData onInitialSpawn(DifficultyInstance difficulty, IEntityLivingData par1EntityLivingData)
 	{
-		Object entity = super.onSpawnWithEgg(par1EntityLivingData);
-		float f = worldObj.func_147462_b(posX, posY, posZ);
+		Object entity = super.onInitialSpawn(difficulty, par1EntityLivingData);
+		float f = difficulty.getClampedAdditionalDifficulty();
 		setCanPickUpLoot(rand.nextFloat() < 0.55F * f);
 
 		if (entity == null)
@@ -300,7 +294,7 @@ public class EntityAntiZombie extends EntityMob implements IAntiEntity {
 		func_146070_a(rand.nextFloat() < f * 0.1F);
 
 		getEntityAttribute(SharedMonsterAttributes.knockbackResistance).applyModifier(new AttributeModifier("Random spawn bonus", rand.nextDouble() * 0.05000000074505806D, 0));
-		double d0 = rand.nextDouble() * 1.5D * worldObj.func_147462_b(posX, posY, posZ);
+		double d0 = rand.nextDouble() * 1.5D * difficulty.getClampedAdditionalDifficulty();
 
 		if (d0 > 1.0D)
 			getEntityAttribute(SharedMonsterAttributes.followRange).applyModifier(new AttributeModifier("Random zombie-spawn bonus", d0, 2));
@@ -318,12 +312,12 @@ public class EntityAntiZombie extends EntityMob implements IAntiEntity {
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void handleHealthUpdate(byte par1)
+	public void handleStatusUpdate(byte par1)
 	{
 		if (par1 == 16)
 			worldObj.playSound(posX + 0.5D, posY + 0.5D, posZ + 0.5D, "mob.zombie.remedy", 1.0F + rand.nextFloat(), rand.nextFloat() * 0.7F + 0.3F, false);
 		else
-			super.handleHealthUpdate(par1);
+			super.handleStatusUpdate(par1);
 	}
 
 	public void isChild(boolean par1)

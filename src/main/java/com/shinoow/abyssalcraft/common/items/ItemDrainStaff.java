@@ -36,9 +36,10 @@ public class ItemDrainStaff extends Item {
 
 	public ItemDrainStaff(){
 		super();
-		setUnlocalizedName("drainStaff");
+		//		GameRegistry.registerItem(this, "drainstaff");
+		setUnlocalizedName("drainstaff");
 		setCreativeTab(AbyssalCraft.tabTools);
-		setTextureName("abyssalcraft:DrainStaff");
+		//		setTextureName("abyssalcraft:DrainStaff");
 		setMaxStackSize(1);
 	}
 
@@ -49,7 +50,7 @@ public class ItemDrainStaff extends Item {
 
 	@Override
 	public EnumAction getItemUseAction(ItemStack par1ItemStack) {
-		return EnumAction.block;
+		return EnumAction.BLOCK;
 	}
 
 	@Override
@@ -60,16 +61,16 @@ public class ItemDrainStaff extends Item {
 	public void increaseEnergy(ItemStack stack, String type){
 		if(!stack.hasTagCompound())
 			stack.setTagCompound(new NBTTagCompound());
-		stack.stackTagCompound.setInteger("energy"+type, getEnergy(stack, type) + 1);
+		stack.getTagCompound().setInteger("energy"+type, getEnergy(stack, type) + 1);
 	}
 
 	public void setEnergy(int amount, ItemStack stack, String type){
-		stack.stackTagCompound.setInteger("energy"+type, amount);
+		stack.getTagCompound().setInteger("energy"+type, amount);
 	}
 
 	public int getEnergy(ItemStack par1ItemStack, String type)
 	{
-		return par1ItemStack.hasTagCompound() && par1ItemStack.stackTagCompound.hasKey("energy"+type) ? (int)par1ItemStack.stackTagCompound.getInteger("energy"+type) : 0;
+		return par1ItemStack.hasTagCompound() && par1ItemStack.getTagCompound().hasKey("energy"+type) ? (int)par1ItemStack.getTagCompound().getInteger("energy"+type) : 0;
 	}
 
 	@Override
@@ -83,7 +84,7 @@ public class ItemDrainStaff extends Item {
 		Vec3 v = player.getLookVec().normalize();
 		for(int i = 1;i<range;i++){
 
-			AxisAlignedBB aabb = AxisAlignedBB.getBoundingBox(player.posX + v.xCoord * i, player.posY + v.yCoord * i, player.posZ + v.zCoord * i, player.posX + v.xCoord * i, player.posY + v.yCoord * i, player.posZ + v.zCoord * i);
+			AxisAlignedBB aabb = AxisAlignedBB.fromBounds(player.posX + v.xCoord * i, player.posY + v.yCoord * i, player.posZ + v.zCoord * i, player.posX + v.xCoord * i, player.posY + v.yCoord * i, player.posZ + v.zCoord * i);
 			List list = world.getEntitiesWithinAABB(EntityLiving.class, aabb);
 			if(list.iterator().hasNext()){
 				EntityLiving target = (EntityLiving)list.get(0);
@@ -97,7 +98,7 @@ public class ItemDrainStaff extends Item {
 							player.inventory.addItemStackToInventory(new ItemStack(AbyssalCraft.shadowgem));
 						}
 					}
-				} else if(world.provider.dimensionId == AbyssalCraft.configDimId1 && target instanceof ICoraliumEntity &&
+				} else if(world.provider.getDimensionId() == AbyssalCraft.configDimId1 && target instanceof ICoraliumEntity &&
 						!(target instanceof IBossDisplayData)){
 					if(!target.isDead){
 						if(target.attackEntityFrom(DamageSource.causePlayerDamage(player), 1))
@@ -107,7 +108,7 @@ public class ItemDrainStaff extends Item {
 							player.inventory.addItemStackToInventory(new ItemStack(AbyssalCraft.essence, 1, 0));
 						}
 					}
-				} else if(world.provider.dimensionId == AbyssalCraft.configDimId2 && target instanceof IDreadEntity &&
+				} else if(world.provider.getDimensionId() == AbyssalCraft.configDimId2 && target instanceof IDreadEntity &&
 						!(target instanceof IBossDisplayData)){
 					if(!target.isDead){
 						if(target.attackEntityFrom(DamageSource.causePlayerDamage(player), 1))
@@ -117,7 +118,7 @@ public class ItemDrainStaff extends Item {
 							player.inventory.addItemStackToInventory(new ItemStack(AbyssalCraft.essence, 1, 1));
 						}
 					}
-				} else if(world.provider.dimensionId == AbyssalCraft.configDimId3 && target instanceof ICoraliumEntity
+				} else if(world.provider.getDimensionId() == AbyssalCraft.configDimId3 && target instanceof ICoraliumEntity
 						&& target instanceof IDreadEntity && target instanceof IAntiEntity &&
 						target.getCreatureAttribute() != AbyssalCraftAPI.SHADOW && !(target instanceof IBossDisplayData))
 					if(!target.isDead){

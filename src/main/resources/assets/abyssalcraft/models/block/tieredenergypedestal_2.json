@@ -1,0 +1,7 @@
+{
+	"parent": "abyssalcraft:block/energypedestal",
+	"textures": {
+		"0": "abyssalcraft:blocks/drs",
+		"particle": "abyssalcraft:blocks/drs"
+	}
+}

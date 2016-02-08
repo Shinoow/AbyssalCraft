@@ -13,24 +13,24 @@ package com.shinoow.abyssalcraft.client.render.entity;
 
 import net.minecraft.client.model.ModelChicken;
 import net.minecraft.client.renderer.entity.RenderLiving;
+import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import com.shinoow.abyssalcraft.common.entity.anti.EntityAntiChicken;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
 public class RenderAntiChicken extends RenderLiving
 {
 	private static final ResourceLocation chickenTextures = new ResourceLocation("abyssalcraft:textures/model/anti/chicken.png");
 
-	public RenderAntiChicken()
+	public RenderAntiChicken(RenderManager manager)
 	{
-		super(new ModelChicken(), 0.5F);
+		super(manager, new ModelChicken(), 0.5F);
 	}
 
 	public void doRender(EntityAntiChicken par1EntityAntiChicken, double par2, double par4, double par6, float par8, float par9)

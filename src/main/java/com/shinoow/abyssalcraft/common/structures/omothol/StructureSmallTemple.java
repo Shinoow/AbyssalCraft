@@ -1,25 +1,37 @@
+/*******************************************************************************
+ * AbyssalCraft
+ * Copyright (c) 2012 - 2016 Shinoow.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the GNU Lesser Public License v3
+ * which accompanies this distribution, and is available at
+ * http://www.gnu.org/licenses/lgpl-3.0.txt
+ * 
+ * Contributors:
+ *     Shinoow -  implementation
+ ******************************************************************************/
 package com.shinoow.abyssalcraft.common.structures.omothol;
 
 import java.util.Random;
 
-import com.shinoow.abyssalcraft.common.structures.IOmotholBuilding;
-import com.shinoow.abyssalcraft.common.structures.StructureData;
-
+import net.minecraft.util.BlockPos;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
-import net.minecraftforge.common.util.ForgeDirection;
+
+import com.shinoow.abyssalcraft.common.structures.IOmotholBuilding;
+import com.shinoow.abyssalcraft.common.structures.StructureData;
 
 public class StructureSmallTemple extends WorldGenerator implements IOmotholBuilding {
 
 	@Override
-	public boolean generate(World p_76484_1_, Random p_76484_2_, int p_76484_3_, int p_76484_4_, int p_76484_5_) {
+	public boolean generate(World world, Random rand, BlockPos pos) {
 		return false;
 	}
 
 	@Override
-	public boolean generate(World world, Random rand, int x, int y, int z, ForgeDirection dir) {
+	public boolean generate(World world, Random rand, BlockPos pos, EnumFacing face) {
 
-		switch(dir){
+		switch(face){
 		case EAST:
 			break;
 		case NORTH:
@@ -30,16 +42,16 @@ public class StructureSmallTemple extends WorldGenerator implements IOmotholBuil
 			break;
 		default:
 			break;
-		
+
 		}
-		
+
 		return false;
 	}
 
 	@Override
-	public StructureData getStructureData(ForgeDirection dir) {
+	public StructureData getStructureData(EnumFacing face) {
 
-		switch(dir){
+		switch(face){
 		case EAST:
 			return new StructureData(-5, 0, -4, 5, 10, 5);
 		case NORTH:

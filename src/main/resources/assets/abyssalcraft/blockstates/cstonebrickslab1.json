@@ -1,0 +1,14 @@
+{
+	"forge_marker": 1,
+	"defaults": {
+		"textures" : {
+			"bottom": "abyssalcraft:blocks/cstonebrick",
+			"top": "abyssalcraft:blocks/cstonebrick",
+			"side": "abyssalcraft:blocks/cstonebrick"
+		}
+	},
+	"variants": {
+		"half=bottom,variant=false": { "model": "abyssalcraft:cstonebrickslab1" },
+		"half=top,variant=false": { "model": "upper_slab" }
+	}
+}

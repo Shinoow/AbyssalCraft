@@ -1,0 +1,14 @@
+{
+	"forge_marker": 1,
+	"defaults": {
+		"textures" : {
+			"bottom": "abyssalcraft:blocks/dltplank",
+			"top": "abyssalcraft:blocks/dltplank",
+			"side": "abyssalcraft:blocks/dltplank"
+		}
+	},
+	"variants": {
+		"half_bottom,variant=false": { "model": "abyssalcraft:dltslab1" },
+		"half=top,variant=false": { "model": "upper_slab" }
+	}
+}

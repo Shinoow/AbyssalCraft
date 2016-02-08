@@ -1,0 +1,14 @@
+{
+	"forge_marker": 1,
+	"defaults": {
+		"textures" : {
+			"bottom": "abyssalcraft:blocks/eb",
+			"top": "abyssalcraft:blocks/eb",
+			"side": "abyssalcraft:blocks/eb"
+		}
+	},
+	"variants": {
+		"half=bottom,variant=false": { "model": "abyssalcraft:ethaxiumbrickslab1" },
+		"half=top,variant=false": { "model": "upper_slab" }
+	}
+}

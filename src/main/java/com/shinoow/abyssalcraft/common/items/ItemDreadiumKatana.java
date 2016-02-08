@@ -19,7 +19,6 @@ import net.minecraft.item.EnumAction;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
-
 import com.google.common.collect.Multimap;
 import com.shinoow.abyssalcraft.AbyssalCraft;
 
@@ -29,9 +28,10 @@ public class ItemDreadiumKatana extends Item {
 
 	public ItemDreadiumKatana(String par1Str, float par2, int par3){
 		super();
+		//		GameRegistry.registerItem(this, par1Str);
 		setUnlocalizedName(par1Str);
 		setCreativeTab(AbyssalCraft.tabCombat);
-		setTextureName("abyssalcraft:" + par1Str);
+		//		setTextureName("abyssalcraft:" + par1Str);
 		weaponDamage = par2;
 		setMaxDamage(par3);
 		setMaxStackSize(1);
@@ -44,7 +44,7 @@ public class ItemDreadiumKatana extends Item {
 
 	@Override
 	public EnumAction getItemUseAction(ItemStack par1ItemStack) {
-		return EnumAction.block;
+		return EnumAction.BLOCK;
 	}
 
 	@Override
@@ -77,7 +77,7 @@ public class ItemDreadiumKatana extends Item {
 	@SuppressWarnings({ "rawtypes", "unchecked", "deprecation" })
 	public Multimap getItemAttributeModifiers() {
 		Multimap multimap = super.getItemAttributeModifiers();
-		multimap.put(SharedMonsterAttributes.attackDamage.getAttributeUnlocalizedName(), new AttributeModifier(field_111210_e, "Weapon modifier", weaponDamage, 0));
+		multimap.put(SharedMonsterAttributes.attackDamage.getAttributeUnlocalizedName(), new AttributeModifier(itemModifierUUID, "Weapon modifier", weaponDamage, 0));
 		return multimap;
 	}
 }

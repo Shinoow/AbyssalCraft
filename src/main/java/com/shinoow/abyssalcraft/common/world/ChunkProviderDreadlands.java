@@ -15,23 +15,23 @@ import static net.minecraftforge.event.terraingen.InitMapGenEvent.EventType.CAVE
 import static net.minecraftforge.event.terraingen.InitMapGenEvent.EventType.MINESHAFT;
 import static net.minecraftforge.event.terraingen.InitMapGenEvent.EventType.NETHER_CAVE;
 import static net.minecraftforge.event.terraingen.InitMapGenEvent.EventType.RAVINE;
-import static net.minecraftforge.event.terraingen.PopulateChunkEvent.Populate.EventType.LAVA;
 import static net.minecraftforge.event.terraingen.PopulateChunkEvent.Populate.EventType.NETHER_LAVA;
 
 import java.util.List;
 import java.util.Random;
 
-import net.minecraft.block.Block;
 import net.minecraft.block.BlockFalling;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.init.Blocks;
+import net.minecraft.util.BlockPos;
 import net.minecraft.util.IProgressUpdate;
 import net.minecraft.util.MathHelper;
-import net.minecraft.world.ChunkPosition;
+import net.minecraft.world.ChunkCoordIntPair;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldType;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.chunk.Chunk;
+import net.minecraft.world.chunk.ChunkPrimer;
 import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraft.world.gen.MapGenBase;
 import net.minecraft.world.gen.MapGenCaves;
@@ -49,8 +49,6 @@ import net.minecraftforge.event.terraingen.TerrainGen;
 import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.common.structures.StructureShoggothPit;
 import com.shinoow.abyssalcraft.common.structures.dreadlands.mineshaft.MapGenDreadlandsMine;
-
-import cpw.mods.fml.common.eventhandler.Event.Result;
 
 public class ChunkProviderDreadlands implements IChunkProvider {
 
@@ -126,7 +124,7 @@ public class ChunkProviderDreadlands implements IChunkProvider {
 		noiseGen6 = (NoiseGeneratorOctaves)noiseGens[5];
 	}
 
-	public void generateTerrain(int par1, int par2, Block[] par3BlockArray)
+	public void setBlocksInChunk(int par1, int par2, ChunkPrimer primer)
 	{
 		byte b0 = 63;
 		biomesForGeneration = worldObj.getWorldChunkManager().getBiomesForGeneration(biomesForGeneration, par1 * 4 - 2, par2 * 4 - 2, 10, 10);
@@ -166,20 +164,15 @@ public class ChunkProviderDreadlands implements IChunkProvider {
 
 						for (int i3 = 0; i3 < 4; ++i3)
 						{
-							int j3 = i3 + k * 4 << 12 | 0 + j1 * 4 << 8 | k2 * 8 + l2;
-							short short1 = 256;
-							j3 -= short1;
 							double d14 = 0.25D;
 							double d16 = (d11 - d10) * d14;
 							double d15 = d10 - d16;
 
 							for (int k3 = 0; k3 < 4; ++k3)
 								if ((d15 += d16) > 0.0D)
-									par3BlockArray[j3 += short1] = AbyssalCraft.dreadstone;
+									primer.setBlockState(k * 4 + i3, k2 * 8 + l2, j1 * 4 + k3, AbyssalCraft.dreadstone.getDefaultState());
 								else if (k2 * 8 + l2 < b0)
-									par3BlockArray[j3 += short1] = AbyssalCraft.abydreadstone;
-								else
-									par3BlockArray[j3 += short1] = null;
+									primer.setBlockState(k * 4 + i3, k2 * 8 + l2, j1 * 4 + k3, AbyssalCraft.abydreadstone.getDefaultState());
 
 							d10 += d12;
 							d11 += d13;
@@ -195,11 +188,11 @@ public class ChunkProviderDreadlands implements IChunkProvider {
 		}
 	}
 
-	public void replaceBlocksForBiome(int par1, int par2, Block[] par3BlockArray, byte[] par4ByteArray, BiomeGenBase[] par5BiomeArray)
+	public void replaceBlocksForBiome(int par1, int par2, ChunkPrimer primer, BiomeGenBase[] par5BiomeArray)
 	{
-		ChunkProviderEvent.ReplaceBiomeBlocks event = new ChunkProviderEvent.ReplaceBiomeBlocks(this, par1, par2, par3BlockArray, par4ByteArray, par5BiomeArray, worldObj);
+		ChunkProviderEvent.ReplaceBiomeBlocks event = new ChunkProviderEvent.ReplaceBiomeBlocks(this, par1, par2, primer, worldObj);
 		MinecraftForge.EVENT_BUS.post(event);
-		if (event.getResult() == Result.DENY) return;
+		if (event.getResult() == net.minecraftforge.fml.common.eventhandler.Event.Result.DENY) return;
 
 		double d0 = 0.03125D;
 		stoneNoise = noiseGen4.func_151599_a(stoneNoise, par1 * 16, par2 * 16, 16, 16, d0 * 2.0D, d0 * 2.0D, 1.0D);
@@ -208,17 +201,8 @@ public class ChunkProviderDreadlands implements IChunkProvider {
 			for (int l = 0; l < 16; ++l)
 			{
 				BiomeGenBase biomegenbase = par5BiomeArray[l + k * 16];
-				biomegenbase.genTerrainBlocks(worldObj, rand, par3BlockArray, par4ByteArray, par1 * 16 + k, par2 * 16 + l, stoneNoise[l + k * 16]);
+				biomegenbase.genTerrainBlocks(worldObj, rand, primer, par1 * 16 + k, par2 * 16 + l, stoneNoise[l + k * 16]);
 			}
-	}
-
-	/**
-	 * loads or generates the chunk at the chunk location specified
-	 */
-	@Override
-	public Chunk loadChunk(int par1, int par2)
-	{
-		return provideChunk(par1, par2);
 	}
 
 	/**
@@ -229,19 +213,18 @@ public class ChunkProviderDreadlands implements IChunkProvider {
 	public Chunk provideChunk(int par1, int par2)
 	{
 		rand.setSeed(par1 * 341873128712L + par2 * 132897987541L);
-		Block[] ablock = new Block[65536];
-		byte[] abyte = new byte[65536];
-		generateTerrain(par1, par2, ablock);
+		ChunkPrimer primer = new ChunkPrimer();
+		setBlocksInChunk(par1, par2, primer);
 		biomesForGeneration = worldObj.getWorldChunkManager().loadBlockGeneratorData(biomesForGeneration, par1 * 16, par2 * 16, 16, 16);
-		replaceBlocksForBiome(par1, par2, ablock, abyte, biomesForGeneration);
-		caveGenerator.func_151539_a(this, worldObj, par1, par2, ablock);
-		ravineGenerator.func_151539_a(this, worldObj, par1, par2, ablock);
-		netherCaveGenerator.func_151539_a(this, worldObj, par1, par2, ablock);
+		replaceBlocksForBiome(par1, par2, primer, biomesForGeneration);
+		caveGenerator.generate(this, worldObj, par1, par2, primer);
+		ravineGenerator.generate(this, worldObj, par1, par2, primer);
+		netherCaveGenerator.generate(this, worldObj, par1, par2, primer);
 
 		if (mapFeaturesEnabled)
-			dmGenerator.func_151539_a(this, worldObj, par1, par2, ablock);
+			dmGenerator.generate(this, worldObj, par1, par2, primer);
 
-		Chunk chunk = new Chunk(worldObj, ablock, abyte, par1, par2);
+		Chunk chunk = new Chunk(worldObj, primer, par1, par2);
 		byte[] abyte1 = chunk.getBiomeArray();
 
 		for (int k = 0; k < abyte1.length; ++k)
@@ -272,8 +255,8 @@ public class ChunkProviderDreadlands implements IChunkProvider {
 					for (int i2 = -b0; i2 <= b0; ++i2)
 					{
 						BiomeGenBase biomegenbase1 = biomesForGeneration[j1 + l1 + 2 + (k1 + i2 + 2) * 10];
-						float f3 = biomegenbase1.rootHeight;
-						float f4 = biomegenbase1.heightVariation;
+						float f3 = biomegenbase1.minHeight;
+						float f4 = biomegenbase1.maxHeight;
 
 						if (worldType == WorldType.AMPLIFIED && f3 > 0.0F)
 						{
@@ -283,7 +266,7 @@ public class ChunkProviderDreadlands implements IChunkProvider {
 
 						float f5 = parabolicField[l1 + 2 + (i2 + 2) * 5] / (f3 + 2.0F);
 
-						if (biomegenbase1.rootHeight > biomegenbase.rootHeight)
+						if (biomegenbase1.minHeight > biomegenbase.minHeight)
 							f5 /= 2.0F;
 
 						f += f4 * f5;
@@ -369,7 +352,7 @@ public class ChunkProviderDreadlands implements IChunkProvider {
 		BlockFalling.fallInstantly = true;
 		int k = par2 * 16;
 		int l = par3 * 16;
-		BiomeGenBase biomegenbase = worldObj.getBiomeGenForCoords(k + 16, l + 16);
+		BiomeGenBase biomegenbase = worldObj.getBiomeGenForCoords(new BlockPos(k + 16, 0, l + 16));
 		rand.setSeed(worldObj.getSeed());
 		long i1 = rand.nextLong() / 2L * 2L + 1L;
 		long j1 = rand.nextLong() / 2L * 2L + 1L;
@@ -379,7 +362,7 @@ public class ChunkProviderDreadlands implements IChunkProvider {
 		MinecraftForge.EVENT_BUS.post(new PopulateChunkEvent.Pre(par1IChunkProvider, worldObj, rand, par2, par3, flag));
 
 		if (mapFeaturesEnabled)
-			dmGenerator.generateStructuresInChunk(worldObj, rand, par2, par3);
+			dmGenerator.generateStructure(worldObj, rand, new ChunkCoordIntPair(par2, par3));
 
 		int k1;
 		int l1;
@@ -391,24 +374,18 @@ public class ChunkProviderDreadlands implements IChunkProvider {
 			k1 = k + rand.nextInt(16) + 8;
 			l1 = rand.nextInt(120) + 4;
 			i2 = l + rand.nextInt(16) + 8;
-			new WorldGenHellLava(Blocks.lava, false).generate(worldObj, rand, k1, l1, i2);
-		}
-
-		if (TerrainGen.populate(par1IChunkProvider, worldObj, rand, par2, par3, flag, LAVA) &&
-				!flag && rand.nextInt(8) == 0)
-		{
+			new WorldGenHellLava(Blocks.lava, false).generate(worldObj, rand, new BlockPos(k1, l1, i2));
 		}
 
 		for(int i = 0; i < 1; i++) {
 			int Xcoord2 = k + rand.nextInt(16);
 			int Zcoord2 = l + rand.nextInt(16);
-			int Ycoord2 = worldObj.getHeightValue(Xcoord2, Zcoord2);
 
 			if(rand.nextInt(200) == 0)
-				new StructureShoggothPit().generate(worldObj, rand, Xcoord2, Ycoord2, Zcoord2);
+				new StructureShoggothPit().generate(worldObj, rand, worldObj.getHeight(new BlockPos(Xcoord2, 0, Zcoord2)));
 		}
 
-		biomegenbase.decorate(worldObj, rand, k, l);
+		biomegenbase.decorate(worldObj, rand, new BlockPos(k, 0, l));
 
 
 		MinecraftForge.EVENT_BUS.post(new PopulateChunkEvent.Post(par1IChunkProvider, worldObj, rand, par2, par3, flag));
@@ -465,14 +442,14 @@ public class ChunkProviderDreadlands implements IChunkProvider {
 	 */
 	@Override
 	@SuppressWarnings("rawtypes")
-	public List getPossibleCreatures(EnumCreatureType par1EnumCreatureType, int par2, int par3, int par4)
+	public List getPossibleCreatures(EnumCreatureType par1EnumCreatureType, BlockPos pos)
 	{
-		BiomeGenBase biome = worldObj.getBiomeGenForCoords(par2, par4);
+		BiomeGenBase biome = worldObj.getBiomeGenForCoords(pos);
 		return biome == null ? null : biome.getSpawnableList(par1EnumCreatureType);
 	}
 
 	@Override
-	public ChunkPosition func_147416_a(World p_147416_1_, String p_147416_2_, int p_147416_3_, int p_147416_4_, int p_147416_5_)
+	public BlockPos getStrongholdGen(World p_147416_1_, String p_147416_2_, BlockPos pos)
 	{
 		return null;
 	}
@@ -484,9 +461,22 @@ public class ChunkProviderDreadlands implements IChunkProvider {
 	}
 
 	@Override
-	public void recreateStructures(int par1, int par2)
+	public void recreateStructures(Chunk chunk, int par1, int par2)
 	{
 		if (mapFeaturesEnabled)
-			dmGenerator.func_151539_a(this, worldObj, par1, par2, (Block[])null);
+			dmGenerator.generate(this, worldObj, par1, par2, (ChunkPrimer)null);
+	}
+
+	@Override
+	public Chunk provideChunk(BlockPos blockPosIn) {
+
+		return provideChunk(blockPosIn.getX() >> 4, blockPosIn.getZ() >> 4);
+	}
+
+	@Override
+	public boolean func_177460_a(IChunkProvider p_177460_1_, Chunk p_177460_2_,
+			int p_177460_3_, int p_177460_4_) {
+
+		return false;
 	}
 }

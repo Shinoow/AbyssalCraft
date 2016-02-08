@@ -12,14 +12,14 @@
 package com.shinoow.abyssalcraft.client.render.entity;
 
 import net.minecraft.client.renderer.entity.RenderLiving;
+import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import com.shinoow.abyssalcraft.client.model.entity.ModelLesserShoggoth;
 import com.shinoow.abyssalcraft.common.entity.EntityLesserShoggoth;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
 public class RenderLesserShoggoth extends RenderLiving {
@@ -32,9 +32,9 @@ public class RenderLesserShoggoth extends RenderLiving {
 	private static final ResourceLocation omotholResource = new ResourceLocation("abyssalcraft:textures/model/shoggoth/OmotholShoggoth.png");
 	private static final ResourceLocation darkResource = new ResourceLocation("abyssalcraft:textures/model/shoggoth/ShadowShoggoth.png");
 
-	public RenderLesserShoggoth ()
+	public RenderLesserShoggoth(RenderManager manager)
 	{
-		super(new ModelLesserShoggoth(), 1.6F);
+		super(manager, new ModelLesserShoggoth(), 1.6F);
 		model = (ModelLesserShoggoth)mainModel;
 	}
 

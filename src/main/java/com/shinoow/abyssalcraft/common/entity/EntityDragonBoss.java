@@ -26,8 +26,10 @@ import net.minecraft.entity.item.EntityXPOrb;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.BlockPos;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumChatFormatting;
+import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.StatCollector;
 import net.minecraft.util.Vec3;
@@ -97,7 +99,7 @@ public class EntityDragonBoss extends EntityMob implements IBossDisplayData, IEn
 	}
 
 	@Override
-	public String getCommandSenderName()
+	public String getName()
 	{
 		return EnumChatFormatting.AQUA + StatCollector.translateToLocal("entity.abyssalcraft.dragonboss.name");
 	}
@@ -183,7 +185,7 @@ public class EntityDragonBoss extends EntityMob implements IBossDisplayData, IEn
 			f1 = (rand.nextFloat() - 0.5F) * 4.0F;
 			f2 = (rand.nextFloat() - 0.5F) * 8.0F;
 			if(AbyssalCraft.particleEntity)
-				worldObj.spawnParticle("largeexplode", posX + f, posY + 2.0D + f1, posZ + f2, 0.0D, 0.0D, 0.0D);
+				worldObj.spawnParticle(EnumParticleTypes.EXPLOSION_LARGE, posX + f, posY + 2.0D + f1, posZ + f2, 0.0D, 0.0D, 0.0D);
 		}
 		else
 		{
@@ -252,7 +254,7 @@ public class EntityDragonBoss extends EntityMob implements IBossDisplayData, IEn
 					if (d7 > 10.0D)
 						d7 = 10.0D;
 
-					targetY = target.boundingBox.minY + d7;
+					targetY = target.getEntityBoundingBox().minY + d7;
 				}
 				else
 				{
@@ -283,8 +285,8 @@ public class EntityDragonBoss extends EntityMob implements IBossDisplayData, IEn
 				if (d9 < -50.0D)
 					d9 = -50.0D;
 
-				Vec3 vec3 = Vec3.createVectorHelper(targetX - posX, targetY - posY, targetZ - posZ).normalize();
-				Vec3 vec31 = Vec3.createVectorHelper(MathHelper.sin(rotationYaw * (float)Math.PI / 180.0F), motionY, -MathHelper.cos(rotationYaw * (float)Math.PI / 180.0F)).normalize();
+				Vec3 vec3 = new Vec3(targetX - posX, targetY - posY, targetZ - posZ).normalize();
+				Vec3 vec31 = new Vec3(MathHelper.sin(rotationYaw * (float)Math.PI / 180.0F), motionY, -MathHelper.cos(rotationYaw * (float)Math.PI / 180.0F)).normalize();
 				float f4 = (float)(vec31.dotProduct(vec3) + 0.5D) / 1.5F;
 
 				if (f4 < 0.0F)
@@ -307,7 +309,7 @@ public class EntityDragonBoss extends EntityMob implements IBossDisplayData, IEn
 				moveEntity(motionX, motionY, motionZ);
 
 
-				Vec3 vec32 = Vec3.createVectorHelper(motionX, motionY, motionZ).normalize();
+				Vec3 vec32 = new Vec3(motionX, motionY, motionZ).normalize();
 				float f8 = (float)(vec32.dotProduct(vec31) + 1.0D) / 2.0F;
 				f8 = 0.8F + 0.15F * f8;
 				motionX *= f8;
@@ -341,9 +343,9 @@ public class EntityDragonBoss extends EntityMob implements IBossDisplayData, IEn
 
 			if (!worldObj.isRemote && hurtTime == 0)
 			{
-				collideWithEntities(worldObj.getEntitiesWithinAABBExcludingEntity(this, dragonPartWing1.boundingBox.expand(6.0D, 4.0D, 6.0D).offset(0.0D, -1.0D, 0.0D)));
-				collideWithEntities(worldObj.getEntitiesWithinAABBExcludingEntity(this, dragonPartWing2.boundingBox.expand(6.0D, 4.0D, 6.0D).offset(0.0D, -1.0D, 0.0D)));
-				attackEntitiesInList(worldObj.getEntitiesWithinAABBExcludingEntity(this, dragonPartHead.boundingBox.expand(2.0D, 2.0D, 2.0D)));
+				collideWithEntities(worldObj.getEntitiesWithinAABBExcludingEntity(this, dragonPartWing1.getEntityBoundingBox().expand(6.0D, 4.0D, 6.0D).offset(0.0D, -1.0D, 0.0D)));
+				collideWithEntities(worldObj.getEntitiesWithinAABBExcludingEntity(this, dragonPartWing2.getEntityBoundingBox().expand(6.0D, 4.0D, 6.0D).offset(0.0D, -1.0D, 0.0D)));
+				attackEntitiesInList(worldObj.getEntitiesWithinAABBExcludingEntity(this, dragonPartHead.getEntityBoundingBox().expand(2.0D, 2.0D, 2.0D)));
 			}
 
 			double[] adouble = getMovementOffsets(5, 1.0F);
@@ -401,7 +403,7 @@ public class EntityDragonBoss extends EntityMob implements IBossDisplayData, IEn
 		if (rand.nextInt(10) == 0)
 		{
 			float f = 32.0F;
-			List<?> list = worldObj.getEntitiesWithinAABB(EntityDragonMinion.class, boundingBox.expand(f, f, f));
+			List<?> list = worldObj.getEntitiesWithinAABB(EntityDragonMinion.class, getEntityBoundingBox().expand(f, f, f));
 			EntityDragonMinion entitydragonminion = null;
 			double d0 = Double.MAX_VALUE;
 			Iterator<?> iterator = list.iterator();
@@ -424,8 +426,8 @@ public class EntityDragonBoss extends EntityMob implements IBossDisplayData, IEn
 
 	private void collideWithEntities(List<?> par1List)
 	{
-		double d0 = (dragonPartBody.boundingBox.minX + dragonPartBody.boundingBox.maxX) / 2.0D;
-		double d1 = (dragonPartBody.boundingBox.minZ + dragonPartBody.boundingBox.maxZ) / 2.0D;
+		double d0 = (dragonPartBody.getEntityBoundingBox().minX + dragonPartBody.getEntityBoundingBox().maxX) / 2.0D;
+		double d1 = (dragonPartBody.getEntityBoundingBox().minZ + dragonPartBody.getEntityBoundingBox().maxZ) / 2.0D;
 		Iterator<?> iterator = par1List.iterator();
 
 		while (iterator.hasNext())
@@ -458,7 +460,7 @@ public class EntityDragonBoss extends EntityMob implements IBossDisplayData, IEn
 		forceNewTarget = false;
 
 		if (rand.nextInt(2) == 0 && !worldObj.playerEntities.isEmpty())
-			target = (Entity)worldObj.playerEntities.get(rand.nextInt(worldObj.playerEntities.size()));
+			target = worldObj.playerEntities.get(rand.nextInt(worldObj.playerEntities.size()));
 		else
 		{
 			boolean flag = false;
@@ -533,7 +535,7 @@ public class EntityDragonBoss extends EntityMob implements IBossDisplayData, IEn
 			float f1 = (rand.nextFloat() - 0.5F) * 4.0F;
 			float f2 = (rand.nextFloat() - 0.5F) * 8.0F;
 			if(AbyssalCraft.particleEntity)
-				worldObj.spawnParticle("hugeexplosion", posX + f, posY + 2.0D + f1, posZ + f2, 0.0D, 0.0D, 0.0D);
+				worldObj.spawnParticle(EnumParticleTypes.EXPLOSION_HUGE, posX + f, posY + 2.0D + f1, posZ + f2, 0.0D, 0.0D, 0.0D);
 		}
 
 		int i;
@@ -559,7 +561,7 @@ public class EntityDragonBoss extends EntityMob implements IBossDisplayData, IEn
 			}
 
 			if (deathTicks == 1)
-				worldObj.playBroadcastSound(1018, (int)posX, (int)posY, (int)posZ, 0);
+				worldObj.playBroadcastSound(1018, new BlockPos(posX, posY, posZ), 0);
 		}
 
 		moveEntity(0.0D, 0.10000000149011612D, 0.0D);
@@ -588,7 +590,7 @@ public class EntityDragonBoss extends EntityMob implements IBossDisplayData, IEn
 	}
 
 	@Override
-	public World func_82194_d()
+	public World getWorld()
 	{
 		return worldObj;
 	}

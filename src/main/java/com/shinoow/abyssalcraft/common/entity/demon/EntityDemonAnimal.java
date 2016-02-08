@@ -24,7 +24,10 @@ import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
+import net.minecraft.pathfinding.PathNavigateGround;
+import net.minecraft.util.BlockPos;
 import net.minecraft.util.MathHelper;
+import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.World;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
@@ -37,7 +40,7 @@ public class EntityDemonAnimal extends EntityMob implements IDreadEntity {
 	public EntityDemonAnimal(World par1World)
 	{
 		super(par1World);
-		getNavigator().setAvoidsWater(true);
+		((PathNavigateGround)getNavigator()).setAvoidsWater(true);
 		isImmuneToFire = true;
 		double var2 = 0.35D;
 		tasks.addTask(0, new EntityAISwimming(this));
@@ -46,13 +49,7 @@ public class EntityDemonAnimal extends EntityMob implements IDreadEntity {
 		tasks.addTask(4, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
 		tasks.addTask(4, new EntityAILookIdle(this));
 		targetTasks.addTask(1, new EntityAIHurtByTarget(this, false));
-		targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityPlayer.class, 0, true));
-	}
-
-	@Override
-	public boolean isAIEnabled()
-	{
-		return true;
+		targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityPlayer.class, true));
 	}
 
 	@Override
@@ -75,11 +72,12 @@ public class EntityDemonAnimal extends EntityMob implements IDreadEntity {
 			i = MathHelper.floor_double(posX + (l % 2 * 2 - 1) * 0.25F);
 			j = MathHelper.floor_double(posY);
 			k = MathHelper.floor_double(posZ + (l / 2 % 2 * 2 - 1) * 0.25F);
+			BlockPos pos = new BlockPos(i, j, k);
 
-			if (worldObj.provider.dimensionId != AbyssalCraft.configDimId2 && worldObj.provider.dimensionId != 0 && worldObj.getBlock(i, j, k).getMaterial() == Material.air &&
-					worldObj.getBiomeGenForCoords(i, k).getFloatTemperature(i, j, k) < 10.0F && Blocks.fire.canPlaceBlockAt(worldObj, i, j, k) || canBurn == true &&
-					worldObj.getBlock(i, j, k).getMaterial() == Material.air && worldObj.getBiomeGenForCoords(i, k).getFloatTemperature(i, j, k) < 10.0F && Blocks.fire.canPlaceBlockAt(worldObj, i, j, k))
-				worldObj.setBlock(i, j, k, Blocks.fire);
+			if (worldObj.provider.getDimensionId() != AbyssalCraft.configDimId2 && worldObj.provider.getDimensionId() != 0 && worldObj.getBlockState(pos).getBlock().getMaterial() == Material.air &&
+					worldObj.getBiomeGenForCoords(pos).getFloatTemperature(pos) < 10.0F && Blocks.fire.canPlaceBlockAt(worldObj, pos) || canBurn == true &&
+					worldObj.getBlockState(pos).getBlock().getMaterial() == Material.air && worldObj.getBiomeGenForCoords(pos).getFloatTemperature(pos) < 10.0F && Blocks.fire.canPlaceBlockAt(worldObj, pos))
+				worldObj.setBlockState(pos, Blocks.fire.getDefaultState());
 		}
 	}
 
@@ -91,11 +89,11 @@ public class EntityDemonAnimal extends EntityMob implements IDreadEntity {
 	}
 
 	@Override
-	public IEntityLivingData onSpawnWithEgg(IEntityLivingData par1EntityLivingData)
+	public IEntityLivingData onInitialSpawn(DifficultyInstance difficulty, IEntityLivingData par1EntityLivingData)
 	{
-		Object data = super.onSpawnWithEgg(par1EntityLivingData);
+		Object data = super.onInitialSpawn(difficulty, par1EntityLivingData);
 
-		if(worldObj.provider.dimensionId == 0 && AbyssalCraft.demonAnimalFire == true && rand.nextInt(3) == 0)
+		if(worldObj.provider.getDimensionId() == 0 && AbyssalCraft.demonAnimalFire == true && rand.nextInt(3) == 0)
 			canBurn = true;
 
 		return (IEntityLivingData)data;

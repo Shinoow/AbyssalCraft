@@ -16,6 +16,8 @@ import java.util.List;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.BlockPos;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 
@@ -41,12 +43,12 @@ public class ItemNecronomicon extends ItemACBasic implements IEnergyTransporter 
 	{
 		if(!par1ItemStack.hasTagCompound())
 			par1ItemStack.setTagCompound(new NBTTagCompound());
-		if(!par1ItemStack.stackTagCompound.hasKey("owner")){
-			par1ItemStack.stackTagCompound.setString("owner", par3EntityPlayer.getCommandSenderName());
+		if(!par1ItemStack.getTagCompound().hasKey("owner")){
+			par1ItemStack.getTagCompound().setString("owner", par3EntityPlayer.getName());
 			if(!par3EntityPlayer.isSneaking())
 				par3EntityPlayer.openGui(AbyssalCraft.instance, AbyssalCraft.necronmiconGuiID, par2World, 0, 0, 0);
 		}
-		if(par1ItemStack.stackTagCompound.getString("owner").equals(par3EntityPlayer.getCommandSenderName())){
+		if(par1ItemStack.getTagCompound().getString("owner").equals(par3EntityPlayer.getName())){
 			if(!par3EntityPlayer.isSneaking())
 				par3EntityPlayer.openGui(AbyssalCraft.instance, AbyssalCraft.necronmiconGuiID, par2World, 0, 0, 0);
 		}
@@ -56,19 +58,19 @@ public class ItemNecronomicon extends ItemACBasic implements IEnergyTransporter 
 	}
 
 	@Override
-	public boolean onItemUse(ItemStack is, EntityPlayer player, World w, int x, int y, int z, int meta, float hitX, float hitY, float hitZ){
+	public boolean onItemUse(ItemStack is, EntityPlayer player, World w, BlockPos pos, EnumFacing side, float hitX, float hitY, float hitZ){
 		if(player.isSneaking())
-			if(!(w.getBlock(x, y, z) instanceof BlockRitualAltar)){
+			if(!(w.getBlockState(pos).getBlock() instanceof BlockRitualAltar)){
 				if(isOwner(player, is))
-					if(RitualUtil.tryAltar(w, x, y, z, bookType)){
+					if(RitualUtil.tryAltar(w, pos, bookType)){
 						w.playSoundAtEntity(player, "abyssalcraft:remnant.scream", 3F, 1F);
 						player.addStat(AbyssalCraft.ritual, 1);
 						return true;
 					}
-			} else if(w.getTileEntity(x, y, z) instanceof TileEntityRitualAltar)
+			} else if(w.getTileEntity(pos) instanceof TileEntityRitualAltar)
 				if(isOwner(player, is)){
-					TileEntityRitualAltar altar = (TileEntityRitualAltar) w.getTileEntity(x, y, z);
-					altar.performRitual(w, x, y, z, player);
+					TileEntityRitualAltar altar = (TileEntityRitualAltar) w.getTileEntity(pos);
+					altar.performRitual(w, pos, player);
 					return true;
 				}
 		return false;
@@ -76,14 +78,14 @@ public class ItemNecronomicon extends ItemACBasic implements IEnergyTransporter 
 
 	private boolean isOwner(EntityPlayer player, ItemStack stack){
 		if(!stack.hasTagCompound()) return false;
-		return stack.stackTagCompound.getString("owner").equals(player.getCommandSenderName());
+		return stack.getTagCompound().getString("owner").equals(player.getName());
 	}
 
 	@Override
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public void addInformation(ItemStack is, EntityPlayer player, List l, boolean B){
-		if(is.hasTagCompound() && is.stackTagCompound.hasKey("owner"))
-			l.add("Owner: " + is.stackTagCompound.getString("owner"));
+		if(is.hasTagCompound() && is.getTagCompound().hasKey("owner"))
+			l.add("Owner: " + is.getTagCompound().getString("owner"));
 		l.add(String.format("%d/%d PE", (int)getContainedEnergy(is), getMaxEnergy(is)));
 	}
 
@@ -102,11 +104,11 @@ public class ItemNecronomicon extends ItemACBasic implements IEnergyTransporter 
 		float energy;
 		if(!stack.hasTagCompound())
 			stack.setTagCompound(new NBTTagCompound());
-		if(stack.stackTagCompound.hasKey("PotEnergy"))
-			energy = stack.stackTagCompound.getFloat("PotEnergy");
+		if(stack.getTagCompound().hasKey("PotEnergy"))
+			energy = stack.getTagCompound().getFloat("PotEnergy");
 		else {
 			energy = 0;
-			stack.stackTagCompound.setFloat("PotEnergy", energy);
+			stack.getTagCompound().setFloat("PotEnergy", energy);
 		}
 		return energy;
 	}
@@ -130,15 +132,15 @@ public class ItemNecronomicon extends ItemACBasic implements IEnergyTransporter 
 	public void addEnergy(ItemStack stack, float energy) {
 		float contained = getContainedEnergy(stack);
 		if(contained + energy >= getMaxEnergy(stack))
-			stack.stackTagCompound.setFloat("PotEnergy", getMaxEnergy(stack));
-		else stack.stackTagCompound.setFloat("PotEnergy", contained += energy);
+			stack.getTagCompound().setFloat("PotEnergy", getMaxEnergy(stack));
+		else stack.getTagCompound().setFloat("PotEnergy", contained += energy);
 	}
 
 	@Override
 	public void consumeEnergy(ItemStack stack, float energy) {
 		float contained = getContainedEnergy(stack);
 		if(contained - energy < 0)
-			stack.stackTagCompound.setFloat("PotEnergy", 0);
-		else stack.stackTagCompound.setFloat("PotEnergy", contained -= energy);
+			stack.getTagCompound().setFloat("PotEnergy", 0);
+		else stack.getTagCompound().setFloat("PotEnergy", contained -= energy);
 	}
 }

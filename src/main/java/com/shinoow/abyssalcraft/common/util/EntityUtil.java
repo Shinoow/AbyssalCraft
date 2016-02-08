@@ -40,7 +40,7 @@ public final class EntityUtil {
 	 */
 	public static final boolean isPlayerCoralium(EntityPlayer par1){
 		if(Vars.dev)
-			return par1.getCommandSenderName().equals("shinoow") || par1.getCommandSenderName().equals("Oblivionaire");
+			return par1.getName().equals("shinoow") || par1.getName().equals("Oblivionaire");
 		else return par1.getUniqueID().equals(Vars.uuid1) || par1.getUniqueID().equals(Vars.uuid2);
 	}
 

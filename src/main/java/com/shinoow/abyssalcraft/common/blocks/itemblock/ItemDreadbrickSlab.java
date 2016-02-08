@@ -20,7 +20,7 @@ import com.shinoow.abyssalcraft.AbyssalCraft;
 public class ItemDreadbrickSlab extends ItemSlab {
 
 	public ItemDreadbrickSlab(Block block) {
-		super(block, (BlockSlab)AbyssalCraft.dreadbrickslab1, (BlockSlab)AbyssalCraft.dreadbrickslab2, false);
+		super(block, (BlockSlab)AbyssalCraft.dreadbrickslab1, (BlockSlab)AbyssalCraft.dreadbrickslab2);
 		setMaxDamage(0);
 		setHasSubtypes(true);
 	}

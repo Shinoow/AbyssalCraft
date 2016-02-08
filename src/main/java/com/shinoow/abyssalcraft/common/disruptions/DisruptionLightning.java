@@ -15,6 +15,7 @@ import java.util.List;
 
 import net.minecraft.entity.effect.EntityLightningBolt;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;
 
 import com.shinoow.abyssalcraft.api.energy.disruption.DisruptionEntry;
@@ -27,7 +28,7 @@ public class DisruptionLightning extends DisruptionEntry {
 	}
 
 	@Override
-	public void disrupt(World world, int x, int y, int z,List<EntityPlayer> players) {
+	public void disrupt(World world, BlockPos pos,List<EntityPlayer> players) {
 		if(!players.isEmpty())
 			for(EntityPlayer player : players)
 				if(world.rand.nextInt(10) == 0)

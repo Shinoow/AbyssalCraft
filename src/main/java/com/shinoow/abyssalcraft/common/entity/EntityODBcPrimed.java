@@ -21,9 +21,6 @@ import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.client.lib.ParticleEffects;
 import com.shinoow.abyssalcraft.common.util.ExplosionUtil;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-
 public class EntityODBcPrimed extends Entity {
 
 	/** How long the fuse is */
@@ -36,7 +33,6 @@ public class EntityODBcPrimed extends Entity {
 		fuse = 0;
 		preventEntitySpawning = true;
 		setSize(0.98F, 0.98F);
-		yOffset = height / 2.0F;
 	}
 
 	public EntityODBcPrimed(World par1World, double par2, double par4, double par6, EntityLivingBase par8EntityLivingBase)
@@ -129,18 +125,17 @@ public class EntityODBcPrimed extends Entity {
 		fuse = par1NBTTagCompound.getByte("Fuse");
 	}
 
-	@Override
-	@SideOnly(Side.CLIENT)
-	public float getShadowSize()
-	{
-		return 0.0F;
-	}
-
 	/**
 	 * returns null or the entityliving it was placed or ignited by
 	 */
 	public EntityLivingBase getODBCPlacedBy()
 	{
 		return odbcPlacedBy;
+	}
+
+	@Override
+	public float getEyeHeight()
+	{
+		return 0.0F;
 	}
 }

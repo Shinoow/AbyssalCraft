@@ -1,0 +1,7 @@
+{
+	"parent": "block/cube_column",
+	"textures": {
+		"side": "abyssalcraft:blocks/drtside",
+        "end": "abyssalcraft:blocks/drttop"
+	}
+}

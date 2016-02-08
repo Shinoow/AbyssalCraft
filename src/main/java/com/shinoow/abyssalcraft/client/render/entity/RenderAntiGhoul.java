@@ -12,14 +12,14 @@
 package com.shinoow.abyssalcraft.client.render.entity;
 
 import net.minecraft.client.renderer.entity.RenderLiving;
+import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import com.shinoow.abyssalcraft.client.model.entity.ModelDG;
 import com.shinoow.abyssalcraft.common.entity.anti.EntityAntiGhoul;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
 public class RenderAntiGhoul extends RenderLiving {
@@ -28,9 +28,9 @@ public class RenderAntiGhoul extends RenderLiving {
 
 	private static final ResourceLocation ghoulResource = new ResourceLocation("abyssalcraft:textures/model/anti/depths_ghoul.png");
 
-	public RenderAntiGhoul ()
+	public RenderAntiGhoul(RenderManager manager)
 	{
-		super(new ModelDG(), 0.5F);
+		super(manager, new ModelDG(), 0.5F);
 		model = (ModelDG)mainModel;
 	}
 

@@ -34,6 +34,8 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.BlockPos;
+import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeModContainer;
@@ -62,8 +64,8 @@ public class EntityAntiAbyssalZombie extends EntityMob implements IAntiEntity {
 		tasks.addTask(8, new EntityAIWatchClosest(this, EntityAntiGhoul.class, 8.0F));
 		tasks.addTask(8, new EntityAIWatchClosest(this, EntityAntiSkeleton.class, 8.0F));
 		targetTasks.addTask(1, new EntityAIHurtByTarget(this, false));
-		targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityAntiZombie.class, 0, true));
-		targetTasks.addTask(3, new EntityAINearestAttackableTarget(this, EntityPlayer.class, 0, true));
+		targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityAntiZombie.class, true));
+		targetTasks.addTask(3, new EntityAINearestAttackableTarget(this, EntityPlayer.class, true));
 	}
 
 	@Override
@@ -141,12 +143,6 @@ public class EntityAntiAbyssalZombie extends EntityMob implements IAntiEntity {
 		getDataWatcher().updateObject(13, Byte.valueOf((byte)(par1 ? 1 : 0)));
 	}
 
-	@Override
-	protected boolean isAIEnabled()
-	{
-		return true;
-	}
-
 	/**
 	 * Returns the sound this mob makes while it's alive.
 	 */
@@ -175,7 +171,7 @@ public class EntityAntiAbyssalZombie extends EntityMob implements IAntiEntity {
 	}
 
 	@Override
-	protected void func_145780_a(int par1, int par2, int par3, Block par4)
+	protected void playStepSound(BlockPos pos, Block par4)
 	{
 		playSound("mob.zombie.step", 0.15F, 1.0F);
 	}
@@ -192,7 +188,7 @@ public class EntityAntiAbyssalZombie extends EntityMob implements IAntiEntity {
 		return EnumCreatureAttribute.UNDEAD;
 	}
 	@Override
-	protected void dropRareDrop(int par1)
+	protected void addRandomDrop()
 	{
 		switch (rand.nextInt(3))
 		{
@@ -223,7 +219,7 @@ public class EntityAntiAbyssalZombie extends EntityMob implements IAntiEntity {
 	protected void collideWithEntity(Entity par1Entity)
 	{
 		if(!worldObj.isRemote && par1Entity instanceof EntityAbyssalZombie){
-			boolean flag = worldObj.getGameRules().getGameRuleBooleanValue("mobGriefing");
+			boolean flag = worldObj.getGameRules().getBoolean("mobGriefing");
 			worldObj.createExplosion(this, posX, posY, posZ, 5, flag);
 			setDead();
 		}
@@ -235,7 +231,7 @@ public class EntityAntiAbyssalZombie extends EntityMob implements IAntiEntity {
 	{
 		super.onKillEntity(par1EntityLivingBase);
 
-		if(worldObj.difficultySetting == EnumDifficulty.NORMAL || worldObj.difficultySetting == EnumDifficulty.HARD
+		if(worldObj.getDifficulty() == EnumDifficulty.NORMAL || worldObj.getDifficulty() == EnumDifficulty.HARD
 				&& par1EntityLivingBase instanceof EntityAntiZombie) {
 			if (rand.nextBoolean())
 				return;
@@ -243,24 +239,24 @@ public class EntityAntiAbyssalZombie extends EntityMob implements IAntiEntity {
 			EntityAntiAbyssalZombie antiAbyaalZombie = new EntityAntiAbyssalZombie(worldObj);
 			antiAbyaalZombie.copyLocationAndAnglesFrom(par1EntityLivingBase);
 			worldObj.removeEntity(par1EntityLivingBase);
-			antiAbyaalZombie.onSpawnWithEgg((IEntityLivingData)null);
+			antiAbyaalZombie.onInitialSpawn(worldObj.getDifficultyForLocation(new BlockPos(posX, posY, posZ)), (IEntityLivingData)null);
 			antiAbyaalZombie.setIsZombie(true);
 
 			if (par1EntityLivingBase.isChild())
 				antiAbyaalZombie.setChild(true);
 
 			worldObj.spawnEntityInWorld(antiAbyaalZombie);
-			worldObj.playAuxSFXAtEntity((EntityPlayer)null, 1016, (int)posX, (int)posY, (int)posZ, 0);
+			worldObj.playAuxSFXAtEntity((EntityPlayer)null, 1016, new BlockPos(posX, posY, posZ), 0);
 
 		}
 	}
 
 	@Override
-	public IEntityLivingData onSpawnWithEgg(IEntityLivingData par1EntityLivingData)
+	public IEntityLivingData onInitialSpawn(DifficultyInstance difficulty, IEntityLivingData par1EntityLivingData)
 	{
-		Object data = super.onSpawnWithEgg(par1EntityLivingData);
+		Object data = super.onInitialSpawn(difficulty, par1EntityLivingData);
 
-		float f = worldObj.func_147462_b(posX, posY, posZ);
+		float f = difficulty.getClampedAdditionalDifficulty();
 		setCanPickUpLoot(rand.nextFloat() < 0.55F * f);
 
 		if (data == null)

@@ -11,36 +11,32 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.common.blocks;
 
+import java.util.List;
+
 import net.minecraft.block.Block;
-import net.minecraft.block.material.*;
-import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.block.material.MapColor;
+import net.minecraft.block.material.Material;
+import net.minecraft.block.material.MaterialLiquid;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionEffect;
-import net.minecraft.util.IIcon;
+import net.minecraft.util.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenOcean;
 import net.minecraftforge.fluids.BlockFluidClassic;
 import net.minecraftforge.oredict.OreDictionary;
 
-import java.util.List;
-
 import com.google.common.collect.Lists;
 import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.common.util.EntityUtil;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-
 public class BlockCLiquid extends BlockFluidClassic {
 
 	public static final MaterialLiquid Cwater = new MaterialLiquid(MapColor.lightBlueColor);
-
-	@SideOnly(Side.CLIENT)
-	protected IIcon[] theIcon;
 
 	List<Block> dusts = Lists.newArrayList();
 	List<Block> metalloids = Lists.newArrayList();
@@ -54,90 +50,77 @@ public class BlockCLiquid extends BlockFluidClassic {
 	}
 
 	@Override
-	@SideOnly(Side.CLIENT)
-	public void registerBlockIcons(IIconRegister iconRegister) {
-		theIcon = new IIcon[]{iconRegister.registerIcon("abyssalcraft:cwater_still"), iconRegister.registerIcon("abyssalcraft:cwater_flow")};
-
-		AbyssalCraft.CFluid.setStillIcon(theIcon[0]);
-		AbyssalCraft.CFluid.setFlowingIcon(theIcon[1]);
-	}
-
-	@Override
-	@SideOnly(Side.CLIENT)
-	public IIcon getIcon(int side, int meta) {
-		return side != 0 && side != 1 ? theIcon[1] : theIcon[0];
-	}
-
-	@Override
-	public MapColor getMapColor(int meta){
+	public MapColor getMapColor(IBlockState state){
 		return MapColor.lightBlueColor;
 	}
 
 	@Override
-	public boolean canDisplace(IBlockAccess world, int x, int y, int z) {
-		if(world.getBlock(x, y, z).getMaterial().isLiquid() && world.getBlock(x, y, z) != this && world.getBlock(x, y, z) != AbyssalCraft.anticwater)
+	public boolean canDisplace(IBlockAccess world, BlockPos pos) {
+		if(world.getBlockState(pos).getBlock().getMaterial().isLiquid() && world.getBlockState(pos).getBlock() != this && world.getBlockState(pos).getBlock() != AbyssalCraft.anticwater)
 			return true;
-		if(world.getBlock(x, y, z) == Blocks.lava)
+		if(world.getBlockState(pos).getBlock() == Blocks.lava)
 			return true;
-		else if(dusts.contains(world.getBlock(x, y, z)) || metalloids.contains(world.getBlock(x, y, z)) || gems.contains(world.getBlock(x, y, z)) ||
-				stones.contains(world.getBlock(x, y, z)) || bricks.contains(world.getBlock(x, y, z)))
+		else if(dusts.contains(world.getBlockState(pos).getBlock()) || metalloids.contains(world.getBlockState(pos).getBlock()) || gems.contains(world.getBlockState(pos).getBlock()) ||
+				stones.contains(world.getBlockState(pos).getBlock()) || bricks.contains(world.getBlockState(pos).getBlock()))
 			return true;
-		return super.canDisplace(world, x, y, z);
+		return super.canDisplace(world, pos);
 	}
 
 	@Override
-	public boolean displaceIfPossible(World world, int x, int y, int z) {
+	public boolean displaceIfPossible(World world, BlockPos pos) {
 
 		if(!world.isRemote){
 			if(!world.provider.isSurfaceWorld()){
-				if(world.getBlock(x, y, z) == Blocks.water && AbyssalCraft.shouldSpread == false) return false;
-				if(world.getBlock(x, y, z).getMaterial().isLiquid() && world.getBlock(x, y, z) != this && world.getBlock(x, y, z) != AbyssalCraft.anticwater)
-					world.setBlock(x, y, z, this);
-				if(AbyssalCraft.breakLogic == true && world.getBlock(x, y+1, z).getMaterial().isLiquid()  && world.getBlock(x, y+1, z) != this && world.getBlock(x, y+1, z) != AbyssalCraft.anticwater)
-					world.setBlock(x, y+1, z, this);
+				if(world.getBlockState(pos).getBlock() == Blocks.water && AbyssalCraft.shouldSpread == false) return false;
+				if(world.getBlockState(pos).getBlock().getMaterial().isLiquid() && world.getBlockState(pos).getBlock() != this && world.getBlockState(pos).getBlock() != AbyssalCraft.anticwater)
+					world.setBlockState(pos, getDefaultState());
+				if(AbyssalCraft.breakLogic == true && world.getBlockState(new BlockPos(pos.getX(), pos.getY()+1, pos.getZ())).getBlock().getMaterial().isLiquid()
+						&& world.getBlockState(new BlockPos(pos.getX(), pos.getY()+1, pos.getZ())).getBlock() != this && world.getBlockState(new BlockPos(pos.getX(), pos.getY()+1, pos.getZ())).getBlock() != AbyssalCraft.anticwater)
+					world.setBlockState(new BlockPos(pos.getX(), pos.getY()+1, pos.getZ()), getDefaultState());
 			} else {
-				if(world.getBiomeGenForCoords(x, z) instanceof BiomeGenOcean && world.getBlock(x, y, z) == this)
+				if(world.getBiomeGenForCoords(pos) instanceof BiomeGenOcean && world.getBlockState(pos) == this)
 					if(AbyssalCraft.destroyOcean)
-						world.setBlock(x, y, z, this);
-					else world.setBlock(x, y, z, Blocks.cobblestone);
+						world.setBlockState(pos, getDefaultState());
+					else world.setBlockState(pos, Blocks.cobblestone.getDefaultState());
 
 				if(AbyssalCraft.shouldSpread){
-					if(world.getBlock(x, y, z).getMaterial().isLiquid() && world.getBlock(x, y, z) != this && world.getBlock(x, y, z) != AbyssalCraft.anticwater)
-						world.setBlock(x, y, z, this);
-					if(AbyssalCraft.breakLogic == true && world.getBlock(x, y+1, z).getMaterial().isLiquid()  && world.getBlock(x, y+1, z) != this && world.getBlock(x, y+1, z) != AbyssalCraft.anticwater)
-						world.setBlock(x, y+1, z, this);
+					if(world.getBlockState(pos).getBlock().getMaterial().isLiquid() && world.getBlockState(pos).getBlock() != this && world.getBlockState(pos).getBlock() != AbyssalCraft.anticwater)
+						world.setBlockState(pos, getDefaultState());
+					if(AbyssalCraft.breakLogic == true && world.getBlockState(new BlockPos(pos.getX(), pos.getY()+1, pos.getZ())).getBlock().getMaterial().isLiquid()
+							&& world.getBlockState(new BlockPos(pos.getX(), pos.getY()+1, pos.getZ())).getBlock() != this && world.getBlockState(new BlockPos(pos.getX(), pos.getY()+1, pos.getZ())).getBlock() != AbyssalCraft.anticwater)
+						world.setBlockState(new BlockPos(pos.getX(), pos.getY()+1, pos.getZ()), getDefaultState());
 				}
 			}
-			if(dusts.contains(world.getBlock(x, y, z)) && world.getBlock(x, y, z) != AbyssalCraft.AbyNitOre &&
-					world.getBlock(x, y, z) != AbyssalCraft.AbyCorOre)
-				if(oresToBlocks(OreDictionary.getOres("oreSaltpeter")).contains(world.getBlock(x, y, z)))
-					world.setBlock(x, y, z, AbyssalCraft.AbyNitOre);
-				else world.setBlock(x, y, z, AbyssalCraft.AbyCorOre);
-			else if(metalloids.contains(world.getBlock(x, y, z)) && !metals.contains(world.getBlock(x, y, z)))
-				if(oresToBlocks(OreDictionary.getOres("oreIron")).contains(world.getBlock(x, y, z)))
-					world.setBlock(x, y, z, AbyssalCraft.AbyIroOre);
-				else if(oresToBlocks(OreDictionary.getOres("oreGold")).contains(world.getBlock(x, y, z)))
-					world.setBlock(x, y, z, AbyssalCraft.AbyGolOre);
-				else if(oresToBlocks(OreDictionary.getOres("oreTin")).contains(world.getBlock(x, y, z)))
-					world.setBlock(x, y, z, AbyssalCraft.AbyTinOre);
-				else if(oresToBlocks(OreDictionary.getOres("oreCopper")).contains(world.getBlock(x, y, z)))
-					world.setBlock(x, y, z, AbyssalCraft.AbyCopOre);
-				else world.setBlock(x, y, z, AbyssalCraft.AbyLCorOre);
-			else if(gems.contains(world.getBlock(x, y, z)) && world.getBlock(x, y, z) != AbyssalCraft.AbyDiaOre)
-				if(oresToBlocks(OreDictionary.getOres("oreDiamond")).contains(world.getBlock(x, y, z)))
-					world.setBlock(x, y, z, AbyssalCraft.AbyDiaOre);
-				else world.setBlock(x, y, z, AbyssalCraft.AbyPCorOre);
-			else if(stones.contains(world.getBlock(x, y, z)))
-				world.setBlock(x, y, z, AbyssalCraft.abystone);
-			else if(bricks.contains(world.getBlock(x, y, z)))
-				world.setBlock(x, y, z, AbyssalCraft.abybrick);
+			if(dusts.contains(world.getBlockState(pos).getBlock()) && world.getBlockState(pos) != AbyssalCraft.AbyNitOre.getDefaultState() &&
+					world.getBlockState(pos) != AbyssalCraft.AbyCorOre)
+				if(oresToBlocks(OreDictionary.getOres("oreSaltpeter")).contains(world.getBlockState(pos).getBlock()))
+					world.setBlockState(pos, AbyssalCraft.AbyNitOre.getDefaultState());
+				else world.setBlockState(pos, AbyssalCraft.AbyCorOre.getDefaultState());
+			else if(metalloids.contains(world.getBlockState(pos).getBlock()) && !metals.contains(world.getBlockState(pos).getBlock()))
+				if(oresToBlocks(OreDictionary.getOres("oreIron")).contains(world.getBlockState(pos).getBlock()))
+					world.setBlockState(pos, AbyssalCraft.AbyIroOre.getDefaultState());
+				else if(oresToBlocks(OreDictionary.getOres("oreGold")).contains(world.getBlockState(pos).getBlock()))
+					world.setBlockState(pos, AbyssalCraft.AbyGolOre.getDefaultState());
+				else if(oresToBlocks(OreDictionary.getOres("oreTin")).contains(world.getBlockState(pos).getBlock()))
+					world.setBlockState(pos, AbyssalCraft.AbyTinOre.getDefaultState());
+				else if(oresToBlocks(OreDictionary.getOres("oreCopper")).contains(world.getBlockState(pos).getBlock()))
+					world.setBlockState(pos, AbyssalCraft.AbyCopOre.getDefaultState());
+				else world.setBlockState(pos, AbyssalCraft.AbyLCorOre.getDefaultState());
+			else if(gems.contains(world.getBlockState(pos).getBlock()) && world.getBlockState(pos) != AbyssalCraft.AbyDiaOre.getDefaultState())
+				if(oresToBlocks(OreDictionary.getOres("oreDiamond")).contains(world.getBlockState(pos).getBlock()))
+					world.setBlockState(pos, AbyssalCraft.AbyDiaOre.getDefaultState());
+				else world.setBlockState(pos, AbyssalCraft.AbyPCorOre.getDefaultState());
+			else if(stones.contains(world.getBlockState(pos).getBlock()))
+				world.setBlockState(pos, AbyssalCraft.abystone.getDefaultState());
+			else if(bricks.contains(world.getBlockState(pos).getBlock()))
+				world.setBlockState(pos, AbyssalCraft.abybrick.getDefaultState());
 		}
-		return super.displaceIfPossible(world, x, y, z);
+		return super.displaceIfPossible(world, pos);
 	}
 
 	@Override
-	public void onEntityCollidedWithBlock(World par1World, int par2, int par3, int par4, Entity par5Entity) {
-		super.onEntityCollidedWithBlock(par1World, par2, par3, par4, par5Entity);
+	public void onEntityCollidedWithBlock(World par1World, BlockPos pos, IBlockState state, Entity par5Entity) {
+		super.onEntityCollidedWithBlock(par1World, pos, state, par5Entity);
 
 		if(par5Entity instanceof EntityLivingBase && !EntityUtil.isEntityCoralium((EntityLivingBase)par5Entity) && ((EntityLivingBase)par5Entity).getActivePotionEffect(AbyssalCraft.Cplague) == null)
 			((EntityLivingBase)par5Entity).addPotionEffect(new PotionEffect(AbyssalCraft.Cplague.id, 200));

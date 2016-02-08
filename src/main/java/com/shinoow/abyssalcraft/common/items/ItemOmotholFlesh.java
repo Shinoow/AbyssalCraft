@@ -25,8 +25,9 @@ public class ItemOmotholFlesh extends ItemFood {
 
 	public ItemOmotholFlesh(int par1, float par2, boolean par3) {
 		super(par1, par2, par3);
+		//		GameRegistry.registerItem(this, "omotholflesh");
 		setUnlocalizedName("omotholflesh");
-		setTextureName("abyssalcraft:" + "omotholflesh");
+		//		setTextureName("abyssalcraft:" + "omotholflesh");
 		setCreativeTab(AbyssalCraft.tabFood);
 	}
 

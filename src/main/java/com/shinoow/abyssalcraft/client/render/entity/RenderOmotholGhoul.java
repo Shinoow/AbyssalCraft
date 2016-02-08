@@ -12,17 +12,17 @@
 package com.shinoow.abyssalcraft.client.render.entity;
 
 import net.minecraft.client.renderer.entity.RenderLiving;
+import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import org.lwjgl.opengl.GL11;
 
 import com.shinoow.abyssalcraft.client.model.entity.ModelDG;
 import com.shinoow.abyssalcraft.common.entity.EntityOmotholGhoul;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
 public class RenderOmotholGhoul extends RenderLiving {
@@ -33,9 +33,9 @@ public class RenderOmotholGhoul extends RenderLiving {
 
 	private static final ResourceLocation ghoulResource = new ResourceLocation("abyssalcraft:textures/model/omothol_ghoul.png");
 
-	public RenderOmotholGhoul ()
+	public RenderOmotholGhoul(RenderManager manager)
 	{
-		super(new ModelDG(), 0.8F);
+		super(manager, new ModelDG(), 0.8F);
 		model = (ModelDG)mainModel;
 	}
 

@@ -30,6 +30,7 @@ import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
+import net.minecraft.util.BlockPos;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
 
@@ -51,7 +52,7 @@ public class EntityGatekeeperMinion extends EntityMob implements ICoraliumEntity
 		tasks.addTask(7, new EntityAIWatchClosest(this, EntityGatekeeperMinion.class, 8.0F));
 		tasks.addTask(7, new EntityAIWatchClosest(this, EntityRemnant.class, 8.0F));
 		targetTasks.addTask(1, new EntityAIHurtByTarget(this, false));
-		targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityPlayer.class, 0, true));
+		targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityPlayer.class, true));
 		setSize(1.4F, 2.8F);
 	}
 
@@ -70,12 +71,6 @@ public class EntityGatekeeperMinion extends EntityMob implements ICoraliumEntity
 			getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(250.0D);
 			getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(18.0D);
 		}
-	}
-
-	@Override
-	protected boolean isAIEnabled()
-	{
-		return true;
 	}
 
 	@Override
@@ -99,7 +94,7 @@ public class EntityGatekeeperMinion extends EntityMob implements ICoraliumEntity
 	}
 
 	@Override
-	protected void func_145780_a(int par1, int par2, int par3, Block par4)
+	protected void playStepSound(BlockPos pos, Block par4)
 	{
 		playSound("mob.spider.step", 0.15F, 1.0F);
 	}
@@ -111,7 +106,7 @@ public class EntityGatekeeperMinion extends EntityMob implements ICoraliumEntity
 		if(par1DamageSource.getSourceOfDamage() != null && par1DamageSource.getSourceOfDamage() instanceof EntityLivingBase)
 			enemy = (EntityLivingBase) par1DamageSource.getSourceOfDamage();
 		if(rand.nextInt(10) == 0){
-			List<EntityRemnant> remnants = worldObj.getEntitiesWithinAABB(EntityRemnant.class, boundingBox.expand(16D, 16D, 16D));
+			List<EntityRemnant> remnants = worldObj.getEntitiesWithinAABB(EntityRemnant.class, getEntityBoundingBox().expand(16D, 16D, 16D));
 			if(remnants != null)
 				if(enemy != null){
 					Iterator<EntityRemnant> iter = remnants.iterator();

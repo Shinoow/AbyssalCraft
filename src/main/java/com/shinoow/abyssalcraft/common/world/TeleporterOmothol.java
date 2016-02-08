@@ -11,29 +11,31 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.common.world;
 
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
+import net.minecraft.block.BlockPortal;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.init.Blocks;
-import net.minecraft.util.Direction;
+import net.minecraft.util.BlockPos;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.LongHashMap;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.ChunkCoordIntPair;
 import net.minecraft.world.Teleporter;
 import net.minecraft.world.WorldServer;
 
+import com.google.common.collect.Lists;
 import com.shinoow.abyssalcraft.AbyssalCraft;
 
 public class TeleporterOmothol extends Teleporter
 {
 	private final WorldServer worldServerInstance;
 	private final Random random;
-	private final LongHashMap destinationCoordinateCache = new LongHashMap();
-	@SuppressWarnings("rawtypes")
-	private final List destinationCoordinateKeys = new ArrayList();
+	private final LongHashMap<Teleporter.PortalPosition> destinationCoordinateCache = new LongHashMap();
+	private final List<Long> destinationCoordinateKeys = Lists.<Long>newArrayList();
 
 	public TeleporterOmothol(WorldServer par1WorldServer)
 	{
@@ -43,275 +45,241 @@ public class TeleporterOmothol extends Teleporter
 	}
 
 	@Override
-	public void placeInPortal(Entity par1Entity, double par2, double par4, double par6, float par8)
+	public void placeInPortal(Entity entityIn, float rotationYaw)
 	{
-		if (worldServerInstance.provider.dimensionId != 1)
+		if (worldServerInstance.provider.getDimensionId() != 1)
 		{
-			if (!placeInExistingPortal(par1Entity, par2, par4, par6, par8))
+			if (!placeInExistingPortal(entityIn, rotationYaw))
 			{
-				makePortal(par1Entity);
-				placeInExistingPortal(par1Entity, par2, par4, par6, par8);
+				makePortal(entityIn);
+				placeInExistingPortal(entityIn, rotationYaw);
 			}
 		}
 		else
 		{
-			int i = MathHelper.floor_double(par1Entity.posX);
-			int j = MathHelper.floor_double(par1Entity.posY) - 1;
-			int k = MathHelper.floor_double(par1Entity.posZ);
-			byte b0 = 1;
-			byte b1 = 0;
+			int i = MathHelper.floor_double(entityIn.posX);
+			int j = MathHelper.floor_double(entityIn.posY) - 1;
+			int k = MathHelper.floor_double(entityIn.posZ);
+			int l = 1;
+			int i1 = 0;
 
-			for (int l = -2; l <= 2; ++l)
-				for (int i1 = -2; i1 <= 2; ++i1)
-					for (int j1 = -1; j1 < 3; ++j1)
+			for (int j1 = -2; j1 <= 2; ++j1)
+				for (int k1 = -2; k1 <= 2; ++k1)
+					for (int l1 = -1; l1 < 3; ++l1)
 					{
-						int k1 = i + i1 * b0 + l * b1;
-						int l1 = j + j1;
-						int i2 = k + i1 * b1 - l * b0;
-						boolean flag = j1 < 0;
-						worldServerInstance.setBlock(k1, l1, i2, flag ? AbyssalCraft.omotholstone : Blocks.air);
+						int i2 = i + k1 * l + j1 * i1;
+						int j2 = j + l1;
+						int k2 = k + k1 * i1 - j1 * l;
+						boolean flag = l1 < 0;
+						worldServerInstance.setBlockState(new BlockPos(i2, j2, k2), flag ? AbyssalCraft.omotholstone.getDefaultState() : Blocks.air.getDefaultState());
 					}
 
-			par1Entity.setLocationAndAngles(i, j, k, par1Entity.rotationYaw, 0.0F);
-			par1Entity.motionX = par1Entity.motionY = par1Entity.motionZ = 0.0D;
+			entityIn.setLocationAndAngles(i, j, k, entityIn.rotationYaw, 0.0F);
+			entityIn.motionX = entityIn.motionY = entityIn.motionZ = 0.0D;
 		}
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public boolean placeInExistingPortal(Entity par1Entity, double par2, double par4, double par6, float par8)
-	{
-		short short1 = 128;
-		double d3 = -1.0D;
-		int i = 0;
-		int j = 0;
-		int k = 0;
-		int l = MathHelper.floor_double(par1Entity.posX);
-		int i1 = MathHelper.floor_double(par1Entity.posZ);
-		long j1 = ChunkCoordIntPair.chunkXZ2Int(l, i1);
-		boolean flag = true;
-		double d4;
-		int k1;
+	public boolean placeInExistingPortal(Entity entityIn, float p_180620_2_) {
+		double d0 = -1.0D;
+		int i = MathHelper.floor_double(entityIn.posX);
+		int j = MathHelper.floor_double(entityIn.posZ);
+		boolean flag1 = true;
+		Object object = BlockPos.ORIGIN;
+		long k = ChunkCoordIntPair.chunkXZ2Int(i, j);
 
-		if (destinationCoordinateCache.containsItem(j1))
-		{
-			PortalPosition portalposition = (PortalPosition)destinationCoordinateCache.getValueByKey(j1);
-			d3 = 0.0D;
-			i = portalposition.posX;
-			j = portalposition.posY;
-			k = portalposition.posZ;
+		if (destinationCoordinateCache.containsItem(k)) {
+			Teleporter.PortalPosition portalposition = destinationCoordinateCache.getValueByKey(k);
+			d0 = 0.0D;
+			object = portalposition;
 			portalposition.lastUpdateTime = worldServerInstance.getTotalWorldTime();
-			flag = false;
-		} else
-			for (k1 = l - short1; k1 <= l + short1; ++k1)
-			{
-				double d5 = k1 + 0.5D - par1Entity.posX;
+			flag1 = false;
+		}
+		else {
+			BlockPos blockpos4 = new BlockPos(entityIn);
 
-				for (int l1 = i1 - short1; l1 <= i1 + short1; ++l1)
-				{
-					double d6 = l1 + 0.5D - par1Entity.posZ;
+			for (int l = -128; l <= 128; ++l) {
+				BlockPos blockpos1;
 
-					for (int i2 = worldServerInstance.getActualHeight() - 1; i2 >= 0; --i2)
-						if (worldServerInstance.getBlock(k1, i2, l1) == AbyssalCraft.omotholportal)
-						{
-							while (worldServerInstance.getBlock(k1, i2 - 1, l1) == AbyssalCraft.omotholportal)
-								--i2;
+				for (int i1 = -128; i1 <= 128; ++i1)
+					for (BlockPos blockpos = blockpos4.add(l, worldServerInstance.getActualHeight() - 1 - blockpos4.getY(), i1); blockpos.getY() >= 0; blockpos = blockpos1) {
+						blockpos1 = blockpos.down();
 
-							d4 = i2 + 0.5D - par1Entity.posY;
-							double d7 = d5 * d5 + d4 * d4 + d6 * d6;
+						if (worldServerInstance.getBlockState(blockpos).getBlock() == AbyssalCraft.omotholportal) {
+							while (worldServerInstance.getBlockState(blockpos1 = blockpos.down()).getBlock() == AbyssalCraft.omotholportal)
+								blockpos = blockpos1;
 
-							if (d3 < 0.0D || d7 < d3)
-							{
-								d3 = d7;
-								i = k1;
-								j = i2;
-								k = l1;
+							double d1 = blockpos.distanceSq(blockpos4);
+
+							if (d0 < 0.0D || d1 < d0) {
+								d0 = d1;
+								object = blockpos;
 							}
 						}
-				}
+					}
+			}
+		}
+
+		if (d0 >= 0.0D) {
+			if (flag1) {
+				destinationCoordinateCache.add(k, new Teleporter.PortalPosition((BlockPos) object, worldServerInstance.getTotalWorldTime()));
+				destinationCoordinateKeys.add(Long.valueOf(k));
 			}
 
-		if (d3 >= 0.0D)
-		{
-			if (flag)
-			{
-				destinationCoordinateCache.add(j1, new PortalPosition(i, j, k, worldServerInstance.getTotalWorldTime()));
-				destinationCoordinateKeys.add(Long.valueOf(j1));
-			}
+			double d4 = ((BlockPos) object).getX() + 0.5D;
+			double d5 = ((BlockPos) object).getY() + 0.5D;
+			double d6 = ((BlockPos) object).getZ() + 0.5D;
+			EnumFacing enumfacing = null;
 
-			double d8 = i + 0.5D;
-			double d9 = j + 0.5D;
-			d4 = k + 0.5D;
-			int j2 = -1;
+			if (worldServerInstance.getBlockState(((BlockPos) object).west()).getBlock() == AbyssalCraft.omotholportal)
+				enumfacing = EnumFacing.NORTH;
 
-			if (worldServerInstance.getBlock(i - 1, j, k) == AbyssalCraft.omotholportal)
-				j2 = 2;
+			if (worldServerInstance.getBlockState(((BlockPos) object).east()).getBlock() == AbyssalCraft.omotholportal)
+				enumfacing = EnumFacing.SOUTH;
 
-			if (worldServerInstance.getBlock(i + 1, j, k) == AbyssalCraft.omotholportal)
-				j2 = 0;
+			if (worldServerInstance.getBlockState(((BlockPos) object).north()).getBlock() == AbyssalCraft.omotholportal)
+				enumfacing = EnumFacing.EAST;
 
-			if (worldServerInstance.getBlock(i, j, k - 1) == AbyssalCraft.omotholportal)
-				j2 = 3;
+			if (worldServerInstance.getBlockState(((BlockPos) object).south()).getBlock() == AbyssalCraft.omotholportal)
+				enumfacing = EnumFacing.WEST;
 
-			if (worldServerInstance.getBlock(i, j, k + 1) == AbyssalCraft.omotholportal)
-				j2 = 1;
+			EnumFacing enumfacing1 = EnumFacing.getHorizontal(MathHelper.floor_double(entityIn.rotationYaw * 4.0F / 360.0F + 0.5D) & 3);
 
-			int k2 = par1Entity.getTeleportDirection();
+			if (enumfacing != null) {
+				EnumFacing enumfacing2 = enumfacing.rotateYCCW();
+				BlockPos blockpos2 = ((BlockPos) object).offset(enumfacing);
+				boolean flag2 = func_180265_a(blockpos2);
+				boolean flag3 = func_180265_a(blockpos2.offset(enumfacing2));
 
-			if (j2 > -1)
-			{
-				int l2 = Direction.rotateLeft[j2];
-				int i3 = Direction.offsetX[j2];
-				int j3 = Direction.offsetZ[j2];
-				int k3 = Direction.offsetX[l2];
-				int l3 = Direction.offsetZ[l2];
-				boolean flag1 = !worldServerInstance.isAirBlock(i + i3 + k3, j, k + j3 + l3) || !worldServerInstance.isAirBlock(i + i3 + k3, j + 1, k + j3 + l3);
-				boolean flag2 = !worldServerInstance.isAirBlock(i + i3, j, k + j3) || !worldServerInstance.isAirBlock(i + i3, j + 1, k + j3);
-
-				if (flag1 && flag2)
-				{
-					j2 = Direction.rotateOpposite[j2];
-					l2 = Direction.rotateOpposite[l2];
-					i3 = Direction.offsetX[j2];
-					j3 = Direction.offsetZ[j2];
-					k3 = Direction.offsetX[l2];
-					l3 = Direction.offsetZ[l2];
-					k1 = i - k3;
-					d8 -= k3;
-					int i4 = k - l3;
-					d4 -= l3;
-					flag1 = !worldServerInstance.isAirBlock(k1 + i3 + k3, j, i4 + j3 + l3) || !worldServerInstance.isAirBlock(k1 + i3 + k3, j + 1, i4 + j3 + l3);
-					flag2 = !worldServerInstance.isAirBlock(k1 + i3, j, i4 + j3) || !worldServerInstance.isAirBlock(k1 + i3, j + 1, i4 + j3);
+				if (flag3 && flag2) {
+					object = ((BlockPos) object).offset(enumfacing2);
+					enumfacing = enumfacing.getOpposite();
+					enumfacing2 = enumfacing2.getOpposite();
+					BlockPos blockpos3 = ((BlockPos) object).offset(enumfacing);
+					flag2 = func_180265_a(blockpos3);
+					flag3 = func_180265_a(blockpos3.offset(enumfacing2));
 				}
 
+				float f6 = 0.5F;
 				float f1 = 0.5F;
-				float f2 = 0.5F;
 
-				if (!flag1 && flag2)
-					f1 = 1.0F;
-				else if (flag1 && !flag2)
+				if (!flag3 && flag2)
+					f6 = 1.0F;
+				else if (flag3 && !flag2)
+					f6 = 0.0F;
+				else if (flag3)
 					f1 = 0.0F;
-				else if (flag1 && flag2)
-					f2 = 0.0F;
 
-				d8 += k3 * f1 + f2 * i3;
-				d4 += l3 * f1 + f2 * j3;
+				d4 = ((BlockPos) object).getX() + 0.5D;
+				d5 = ((BlockPos) object).getY() + 0.5D;
+				d6 = ((BlockPos) object).getZ() + 0.5D;
+				d4 += enumfacing2.getFrontOffsetX() * f6 + enumfacing.getFrontOffsetX() * f1;
+				d6 += enumfacing2.getFrontOffsetZ() * f6 + enumfacing.getFrontOffsetZ() * f1;
+				float f2 = 0.0F;
 				float f3 = 0.0F;
 				float f4 = 0.0F;
 				float f5 = 0.0F;
-				float f6 = 0.0F;
 
-				if (j2 == k2)
-				{
+				if (enumfacing == enumfacing1) {
+					f2 = 1.0F;
 					f3 = 1.0F;
-					f4 = 1.0F;
 				}
-				else if (j2 == Direction.rotateOpposite[k2])
-				{
+				else if (enumfacing == enumfacing1.getOpposite()) {
+					f2 = -1.0F;
 					f3 = -1.0F;
-					f4 = -1.0F;
 				}
-				else if (j2 == Direction.rotateRight[k2])
-				{
-					f5 = 1.0F;
-					f6 = -1.0F;
-				}
-				else
-				{
+				else if (enumfacing == enumfacing1.rotateY()) {
+					f4 = 1.0F;
 					f5 = -1.0F;
-					f6 = 1.0F;
+				}
+				else {
+					f4 = -1.0F;
+					f5 = 1.0F;
 				}
 
-				double d10 = par1Entity.motionX;
-				double d11 = par1Entity.motionZ;
-				par1Entity.motionX = d10 * f3 + d11 * f6;
-				par1Entity.motionZ = d10 * f5 + d11 * f4;
-				par1Entity.rotationYaw = par8 - k2 * 90 + j2 * 90;
+				double d2 = entityIn.motionX;
+				double d3 = entityIn.motionZ;
+				entityIn.motionX = d2 * f2 + d3 * f5;
+				entityIn.motionZ = d2 * f4 + d3 * f3;
+				entityIn.rotationYaw = p_180620_2_ - enumfacing1.getHorizontalIndex() * 90 + enumfacing.getHorizontalIndex() * 90;
 			} else
-				par1Entity.motionX = par1Entity.motionY = par1Entity.motionZ = 0.0D;
+				entityIn.motionX = entityIn.motionY = entityIn.motionZ = 0.0D;
 
-			par1Entity.setLocationAndAngles(d8, d9, d4, par1Entity.rotationYaw, par1Entity.rotationPitch);
+			entityIn.setLocationAndAngles(d4, d5, d6, entityIn.rotationYaw, entityIn.rotationPitch);
 			return true;
 		} else
 			return false;
 	}
+
+	private boolean func_180265_a(BlockPos p_180265_1_) {
+		return !worldServerInstance.isAirBlock(p_180265_1_) || !worldServerInstance.isAirBlock(p_180265_1_.up());
+	}
+
 	@Override
-	public boolean makePortal(Entity par1Entity)
+	public boolean makePortal(Entity p_85188_1_)
 	{
-		byte b0 = 16;
+		int i = 16;
 		double d0 = -1.0D;
-		int i = MathHelper.floor_double(par1Entity.posX);
-		int j = MathHelper.floor_double(par1Entity.posY);
-		int k = MathHelper.floor_double(par1Entity.posZ);
-		int l = i;
+		int j = MathHelper.floor_double(p_85188_1_.posX);
+		int k = MathHelper.floor_double(p_85188_1_.posY);
+		int l = MathHelper.floor_double(p_85188_1_.posZ);
 		int i1 = j;
 		int j1 = k;
-		int k1 = 0;
-		int l1 = random.nextInt(4);
-		int i2;
-		double d1;
-		double d2;
-		int j2;
-		int k2;
-		int l2;
-		int i3;
-		int j3;
-		int k3;
-		int l3;
-		int i4;
-		int j4;
-		int k4;
-		double d3;
-		double d4;
+		int k1 = l;
+		int l1 = 0;
+		int i2 = random.nextInt(4);
+		BlockPos.MutableBlockPos blockpos$mutableblockpos = new BlockPos.MutableBlockPos();
 
-		for (i2 = i - b0; i2 <= i + b0; ++i2)
+		for (int j2 = j - i; j2 <= j + i; ++j2)
 		{
-			d1 = i2 + 0.5D - par1Entity.posX;
+			double d1 = j2 + 0.5D - p_85188_1_.posX;
 
-			for (j2 = k - b0; j2 <= k + b0; ++j2)
+			for (int l2 = l - i; l2 <= l + i; ++l2)
 			{
-				d2 = j2 + 0.5D - par1Entity.posZ;
-				label274:
+				double d2 = l2 + 0.5D - p_85188_1_.posZ;
+				label142:
 
-					for (k2 = worldServerInstance.getActualHeight() - 1; k2 >= 0; --k2)
-						if (worldServerInstance.isAirBlock(i2, k2, j2))
+					for (int j3 = worldServerInstance.getActualHeight() - 1; j3 >= 0; --j3)
+						if (worldServerInstance.isAirBlock(blockpos$mutableblockpos.set(j2, j3, l2)))
 						{
-							while (k2 > 0 && worldServerInstance.isAirBlock(i2, k2 - 1, j2))
-								--k2;
+							while (j3 > 0 && worldServerInstance.isAirBlock(blockpos$mutableblockpos.set(j2, j3 - 1, l2)))
+								--j3;
 
-							for (i3 = l1; i3 < l1 + 4; ++i3)
+							for (int k3 = i2; k3 < i2 + 4; ++k3)
 							{
-								l2 = i3 % 2;
-								k3 = 1 - l2;
+								int l3 = k3 % 2;
+								int i4 = 1 - l3;
 
-								if (i3 % 4 >= 2)
+								if (k3 % 4 >= 2)
 								{
-									l2 = -l2;
-									k3 = -k3;
+									l3 = -l3;
+									i4 = -i4;
 								}
 
-								for (j3 = 0; j3 < 3; ++j3)
-									for (i4 = 0; i4 < 4; ++i4)
-										for (l3 = -1; l3 < 4; ++l3)
+								for (int j4 = 0; j4 < 3; ++j4)
+									for (int k4 = 0; k4 < 4; ++k4)
+										for (int l4 = -1; l4 < 4; ++l4)
 										{
-											k4 = i2 + (i4 - 1) * l2 + j3 * k3;
-											j4 = k2 + l3;
-											int l4 = j2 + (i4 - 1) * k3 - j3 * l2;
+											int i5 = j2 + (k4 - 1) * l3 + j4 * i4;
+											int j5 = j3 + l4;
+											int k5 = l2 + (k4 - 1) * i4 - j4 * l3;
+											blockpos$mutableblockpos.set(i5, j5, k5);
 
-											if (l3 < 0 && !worldServerInstance.getBlock(k4, j4, l4).getMaterial().isSolid() || l3 >= 0 && !worldServerInstance.isAirBlock(k4, j4, l4))
-												continue label274;
+											if (l4 < 0 && !worldServerInstance.getBlockState(blockpos$mutableblockpos).getBlock().getMaterial().isSolid() || l4 >= 0 && !worldServerInstance.isAirBlock(blockpos$mutableblockpos))
+												continue label142;
 										}
 
-								d4 = k2 + 0.5D - par1Entity.posY;
-								d3 = d1 * d1 + d4 * d4 + d2 * d2;
+								double d5 = j3 + 0.5D - p_85188_1_.posY;
+								double d7 = d1 * d1 + d5 * d5 + d2 * d2;
 
-								if (d0 < 0.0D || d3 < d0)
+								if (d0 < 0.0D || d7 < d0)
 								{
-									d0 = d3;
-									l = i2;
-									i1 = k2;
-									j1 = j2;
-									k1 = i3 % 4;
+									d0 = d7;
+									i1 = j2;
+									j1 = j3;
+									k1 = l2;
+									l1 = k3 % 4;
 								}
 							}
 						}
@@ -319,108 +287,105 @@ public class TeleporterOmothol extends Teleporter
 		}
 
 		if (d0 < 0.0D)
-			for (i2 = i - b0; i2 <= i + b0; ++i2)
+			for (int l5 = j - i; l5 <= j + i; ++l5)
 			{
-				d1 = i2 + 0.5D - par1Entity.posX;
+				double d3 = l5 + 0.5D - p_85188_1_.posX;
 
-				for (j2 = k - b0; j2 <= k + b0; ++j2)
+				for (int j6 = l - i; j6 <= l + i; ++j6)
 				{
-					d2 = j2 + 0.5D - par1Entity.posZ;
-					label222:
+					double d4 = j6 + 0.5D - p_85188_1_.posZ;
+					label562:
 
-						for (k2 = worldServerInstance.getActualHeight() - 1; k2 >= 0; --k2)
-							if (worldServerInstance.isAirBlock(i2, k2, j2))
+						for (int i7 = worldServerInstance.getActualHeight() - 1; i7 >= 0; --i7)
+							if (worldServerInstance.isAirBlock(blockpos$mutableblockpos.set(l5, i7, j6)))
 							{
-								while (k2 > 0 && worldServerInstance.isAirBlock(i2, k2 - 1, j2))
-									--k2;
+								while (i7 > 0 && worldServerInstance.isAirBlock(blockpos$mutableblockpos.set(l5, i7 - 1, j6)))
+									--i7;
 
-								for (i3 = l1; i3 < l1 + 2; ++i3)
+								for (int k7 = i2; k7 < i2 + 2; ++k7)
 								{
-									l2 = i3 % 2;
-									k3 = 1 - l2;
+									int j8 = k7 % 2;
+									int j9 = 1 - j8;
 
-									for (j3 = 0; j3 < 4; ++j3)
-										for (i4 = -1; i4 < 4; ++i4)
+									for (int j10 = 0; j10 < 4; ++j10)
+										for (int j11 = -1; j11 < 4; ++j11)
 										{
-											l3 = i2 + (j3 - 1) * l2;
-											k4 = k2 + i4;
-											j4 = j2 + (j3 - 1) * k3;
+											int j12 = l5 + (j10 - 1) * j8;
+											int i13 = i7 + j11;
+											int j13 = j6 + (j10 - 1) * j9;
+											blockpos$mutableblockpos.set(j12, i13, j13);
 
-											if (i4 < 0 && !worldServerInstance.getBlock(l3, k4, j4).getMaterial().isSolid() || i4 >= 0 && !worldServerInstance.isAirBlock(l3, k4, j4))
-												continue label222;
+											if (j11 < 0 && !worldServerInstance.getBlockState(blockpos$mutableblockpos).getBlock().getMaterial().isSolid() || j11 >= 0 && !worldServerInstance.isAirBlock(blockpos$mutableblockpos))
+												continue label562;
 										}
 
-									d4 = k2 + 0.5D - par1Entity.posY;
-									d3 = d1 * d1 + d4 * d4 + d2 * d2;
+									double d6 = i7 + 0.5D - p_85188_1_.posY;
+									double d8 = d3 * d3 + d6 * d6 + d4 * d4;
 
-									if (d0 < 0.0D || d3 < d0)
+									if (d0 < 0.0D || d8 < d0)
 									{
-										d0 = d3;
-										l = i2;
-										i1 = k2;
-										j1 = j2;
-										k1 = i3 % 2;
+										d0 = d8;
+										i1 = l5;
+										j1 = i7;
+										k1 = j6;
+										l1 = k7 % 2;
 									}
 								}
 							}
 				}
 			}
 
-		int i5 = l;
-		int j5 = i1;
-		j2 = j1;
-		int k5 = k1 % 2;
-		int l5 = 1 - k5;
+		int i6 = i1;
+		int k2 = j1;
+		int k6 = k1;
+		int l6 = l1 % 2;
+		int i3 = 1 - l6;
 
-		if (k1 % 4 >= 2)
+		if (l1 % 4 >= 2)
 		{
-			k5 = -k5;
-			l5 = -l5;
+			l6 = -l6;
+			i3 = -i3;
 		}
-
-		boolean flag;
 
 		if (d0 < 0.0D)
 		{
-			if (i1 < 70)
-				i1 = 70;
+			j1 = MathHelper.clamp_int(j1, 70, worldServerInstance.getActualHeight() - 10);
+			k2 = j1;
 
-			if (i1 > worldServerInstance.getActualHeight() - 10)
-				i1 = worldServerInstance.getActualHeight() - 10;
-
-			j5 = i1;
-
-			for (k2 = -1; k2 <= 1; ++k2)
-				for (i3 = 1; i3 < 3; ++i3)
-					for (l2 = -1; l2 < 3; ++l2)
+			for (int j7 = -1; j7 <= 1; ++j7)
+				for (int l7 = 1; l7 < 3; ++l7)
+					for (int k8 = -1; k8 < 3; ++k8)
 					{
-						k3 = i5 + (i3 - 1) * k5 + k2 * l5;
-						j3 = j5 + l2;
-						i4 = j2 + (i3 - 1) * l5 - k2 * k5;
-						flag = l2 < 0;
-						worldServerInstance.setBlock(k3, j3, i4, flag ? AbyssalCraft.omotholstone : Blocks.air);
+						int k9 = i6 + (l7 - 1) * l6 + j7 * i3;
+						int k10 = k2 + k8;
+						int k11 = k6 + (l7 - 1) * i3 - j7 * l6;
+						boolean flag = k8 < 0;
+						worldServerInstance.setBlockState(new BlockPos(k9, k10, k11), flag ? AbyssalCraft.omotholstone.getDefaultState() : Blocks.air.getDefaultState());
 					}
 		}
 
-		for (k2 = 0; k2 < 4; ++k2)
+		IBlockState iblockstate = AbyssalCraft.omotholportal.getDefaultState().withProperty(BlockPortal.AXIS, l6 != 0 ? EnumFacing.Axis.X : EnumFacing.Axis.Z);
+
+		for (int i8 = 0; i8 < 4; ++i8)
 		{
-			for (i3 = 0; i3 < 4; ++i3)
-				for (l2 = -1; l2 < 4; ++l2)
+			for (int l8 = 0; l8 < 4; ++l8)
+				for (int l9 = -1; l9 < 4; ++l9)
 				{
-					k3 = i5 + (i3 - 1) * k5;
-					j3 = j5 + l2;
-					i4 = j2 + (i3 - 1) * l5;
-					flag = i3 == 0 || i3 == 3 || l2 == -1 || l2 == 3;
-					worldServerInstance.setBlock(k3, j3, i4, flag ? AbyssalCraft.omotholstone : AbyssalCraft.omotholportal, 0, 2);
+					int l10 = i6 + (l8 - 1) * l6;
+					int l11 = k2 + l9;
+					int k12 = k6 + (l8 - 1) * i3;
+					boolean flag1 = l8 == 0 || l8 == 3 || l9 == -1 || l9 == 3;
+					worldServerInstance.setBlockState(new BlockPos(l10, l11, k12), flag1 ? AbyssalCraft.omotholstone.getDefaultState() : iblockstate, 2);
 				}
 
-			for (i3 = 0; i3 < 4; ++i3)
-				for (l2 = -1; l2 < 4; ++l2)
+			for (int i9 = 0; i9 < 4; ++i9)
+				for (int i10 = -1; i10 < 4; ++i10)
 				{
-					k3 = i5 + (i3 - 1) * k5;
-					j3 = j5 + l2;
-					i4 = j2 + (i3 - 1) * l5;
-					worldServerInstance.notifyBlocksOfNeighborChange(k3, j3, i4, worldServerInstance.getBlock(k3, j3, i4));
+					int i11 = i6 + (i9 - 1) * l6;
+					int i12 = k2 + i10;
+					int l12 = k6 + (i9 - 1) * i3;
+					BlockPos blockpos = new BlockPos(i11, i12, l12);
+					worldServerInstance.notifyNeighborsOfStateChange(blockpos, worldServerInstance.getBlockState(blockpos).getBlock());
 				}
 		}
 
@@ -439,7 +404,7 @@ public class TeleporterOmothol extends Teleporter
 			while (iterator.hasNext())
 			{
 				Long olong = (Long)iterator.next();
-				PortalPosition portalposition = (PortalPosition)destinationCoordinateCache.getValueByKey(olong.longValue());
+				PortalPosition portalposition = destinationCoordinateCache.getValueByKey(olong.longValue());
 
 				if (portalposition == null || portalposition.lastUpdateTime < j)
 				{

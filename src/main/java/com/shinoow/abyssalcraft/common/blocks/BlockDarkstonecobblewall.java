@@ -15,16 +15,14 @@ import java.util.List;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockWall;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.IIcon;
-import net.minecraft.world.World;
+import net.minecraft.util.BlockPos;
+import net.minecraft.world.IBlockAccess;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockDarkstonecobblewall extends BlockWall{
 
@@ -41,14 +39,13 @@ public class BlockDarkstonecobblewall extends BlockWall{
 	}
 
 	@Override
-	public boolean canPlaceTorchOnTop(World world, int x, int y, int z) {
-		return true;
+	public int damageDropped(IBlockState state)
+	{
+		return 0;
 	}
 
-	@SideOnly(Side.CLIENT)
 	@Override
-	public IIcon getIcon(int par1, int par2)
-	{
-		return AbyssalCraft.Darkstone_cobble.getBlockTextureFromSide(par1);
+	public boolean canPlaceTorchOnTop(IBlockAccess world, BlockPos pos) {
+		return true;
 	}
 }

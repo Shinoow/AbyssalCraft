@@ -1,4 +1,0 @@
-- Rituals can now be performed even if there isn't enough PE (in which case the ritual will fail to complete)
-- Fixed server crashes related to Fireball rain Disruptions (had code that only ran client-side)
-- Somewhat fixed the hitbox issues with Lesser Shoggoths and Cha'garoth (reduced the bounding box width to 2 on both of them, makes it possible to land a hit)
-- Now runs on Forge 10.13.4.1558

@@ -14,7 +14,6 @@ package com.shinoow.abyssalcraft.common.items;
 import java.util.List;
 
 import net.minecraft.block.Block;
-import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -28,10 +27,8 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
-import net.minecraft.world.WorldSettings.GameType;
 
 import com.google.common.collect.Multimap;
-import com.shinoow.abyssalcraft.common.entity.EntityJzahar;
 
 public class AbyssalCraftTool extends Item {
 
@@ -40,6 +37,8 @@ public class AbyssalCraftTool extends Item {
 		super();
 		maxStackSize = 1;
 		weaponDamage = 500000;
+		//		GameRegistry.registerItem(this, "devsword");
+		setUnlocalizedName("devsword");
 		setCreativeTab(null);
 	}
 
@@ -63,7 +62,7 @@ public class AbyssalCraftTool extends Item {
 
 	@Override
 	public EnumAction getItemUseAction(ItemStack par1ItemStack) {
-		return EnumAction.block;
+		return EnumAction.BLOCK;
 	}
 
 	@Override
@@ -77,7 +76,7 @@ public class AbyssalCraftTool extends Item {
 
 		par3EntityPlayer.setItemInUse(par1ItemStack, getMaxItemUseDuration(par1ItemStack));
 
-		List list = par3EntityPlayer.worldObj.getEntitiesWithinAABBExcludingEntity(par3EntityPlayer, par3EntityPlayer.boundingBox.expand(40D, 40D, 40D));
+		List list = par3EntityPlayer.worldObj.getEntitiesWithinAABBExcludingEntity(par3EntityPlayer, par3EntityPlayer.getCollisionBoundingBox().expand(40D, 40D, 40D));
 
 		if(list != null)
 			for(int k2 = 0; k2 < list.size(); k2++) {
@@ -87,19 +86,19 @@ public class AbyssalCraftTool extends Item {
 					entity.attackEntityFrom(DamageSource.causePlayerDamage(par3EntityPlayer), 50000);
 				else if(entity instanceof EntityPlayer && !entity.isDead)
 					entity.attackEntityFrom(DamageSource.causePlayerDamage(par3EntityPlayer), 50000);
-				if(entity instanceof EntityJzahar) {
-					par3EntityPlayer.setGameType(GameType.SURVIVAL);
-					par3EntityPlayer.attackTargetEntityWithCurrentItem(par3EntityPlayer);
-					((EntityJzahar)entity).heal(Float.MAX_VALUE);
-					if(par2World.isRemote)
-						Minecraft.getMinecraft().thePlayer.sendChatMessage("I really thought I could do that, didn't I?");
-				}
+				//				if(entity instanceof EntityJzahar) {
+				//					par3EntityPlayer.setGameType(GameType.SURVIVAL);
+				//					par3EntityPlayer.attackTargetEntityWithCurrentItem(par3EntityPlayer);
+				//					((EntityJzahar)entity).heal(Float.MAX_VALUE);
+				//					if(par2World.isRemote)
+				//						Minecraft.getMinecraft().thePlayer.sendChatMessage("I really thought I could do that, didn't I?");
+				//				}
 			}
 		return par1ItemStack;
 	}
 
 	@Override
-	public boolean func_150897_b(Block par1Block) {
+	public boolean canHarvestBlock(Block par1Block) {
 		return par1Block == Blocks.web;
 	}
 
@@ -107,7 +106,7 @@ public class AbyssalCraftTool extends Item {
 	@SuppressWarnings({ "rawtypes", "unchecked", "deprecation" })
 	public Multimap getItemAttributeModifiers() {
 		Multimap multimap = super.getItemAttributeModifiers();
-		multimap.put(SharedMonsterAttributes.attackDamage.getAttributeUnlocalizedName(), new AttributeModifier(field_111210_e, "Weapon modifier", weaponDamage, 0));
+		multimap.put(SharedMonsterAttributes.attackDamage.getAttributeUnlocalizedName(), new AttributeModifier(itemModifierUUID, "Weapon modifier", weaponDamage, 0));
 		return multimap;
 	}
 }

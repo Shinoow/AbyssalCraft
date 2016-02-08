@@ -1,0 +1,20 @@
+{
+    "textures": {
+        "particle": "abyssalcraft:blocks/odbcsides",
+		"wall": "abyssalcraft:blocks/odbcsides",
+		"end": "abyssalcraft:blocks/boa"
+    },
+    "elements": [
+        {   "from": [ 4, 0, 4 ],
+            "to": [ 12, 16, 12 ],
+            "faces": {
+                "down":  { "uv": [ 4, 4, 12, 12 ], "texture": "#end", "cullface": "down" },
+                "up":    { "uv": [ 4, 4, 12, 12 ], "texture": "#end", "cullface": "up"   },
+                "north": { "uv": [ 4, 0, 12, 16 ], "texture": "#wall" },
+                "south": { "uv": [ 4, 0, 12, 16 ], "texture": "#wall" },
+                "west":  { "uv": [ 4, 0, 12, 16 ], "texture": "#wall" },
+                "east":  { "uv": [ 4, 0, 12, 16 ], "texture": "#wall" }
+            }
+        }
+    ]
+}

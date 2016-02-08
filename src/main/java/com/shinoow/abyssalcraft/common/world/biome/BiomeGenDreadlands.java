@@ -13,12 +13,10 @@ package com.shinoow.abyssalcraft.common.world.biome;
 
 import java.util.Random;
 
+import net.minecraft.util.BlockPos;
+import net.minecraft.world.World;
 import com.shinoow.abyssalcraft.common.entity.EntityDreadgolem;
 import com.shinoow.abyssalcraft.common.world.gen.WorldGenDreadlandsStalagmite;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.world.World;
 
 public class BiomeGenDreadlands extends BiomeGenDreadlandsBase
 {
@@ -30,28 +28,14 @@ public class BiomeGenDreadlands extends BiomeGenDreadlandsBase
 	}
 
 	@Override
-	public void decorate(World world, Random rand, int x, int z)
+	public void decorate(World world, Random rand, BlockPos pos)
 	{
-		super.decorate(world, rand, x, z);
+		super.decorate(world, rand, pos);
 
 		for(int i = 0; i < 1; i++){
-			int xPos = x + rand.nextInt(16) + 8;
-			int zPos = z + rand.nextInt(16) + 8;
-			new WorldGenDreadlandsStalagmite().generate(world, rand, xPos, world.getHeightValue(xPos, zPos), zPos);
+			int xPos = rand.nextInt(16) + 8;
+			int zPos = rand.nextInt(16) + 8;
+			new WorldGenDreadlandsStalagmite().generate(world, rand, world.getHeight(pos.add(xPos, 0, zPos)));
 		}
-	}
-
-	@Override
-	@SideOnly(Side.CLIENT)
-	public int getBiomeGrassColor(int par1, int par2, int par3)
-	{
-		return 0x910000;
-	}
-
-	@Override
-	@SideOnly(Side.CLIENT)
-	public int getBiomeFoliageColor(int par1, int par2, int par3)
-	{
-		return 0x910000;
 	}
 }

@@ -14,11 +14,15 @@ package com.shinoow.abyssalcraft.common.world.biome;
 import java.util.Random;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.state.pattern.BlockHelper;
 import net.minecraft.init.Blocks;
+import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.gen.feature.WorldGenAbstractTree;
 import net.minecraft.world.gen.feature.WorldGenMinable;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.common.entity.EntityAbyssalZombie;
@@ -36,18 +40,15 @@ import com.shinoow.abyssalcraft.common.entity.anti.EntityAntiSpider;
 import com.shinoow.abyssalcraft.common.entity.anti.EntityAntiZombie;
 import com.shinoow.abyssalcraft.common.world.gen.WorldGenAntimatterLake;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-
 public class BiomeGenCorSwamp extends BiomeGenBase {
 
 	@SuppressWarnings("unchecked")
 	public BiomeGenCorSwamp(int par1) {
 		super(par1);
-		rootHeight = -0.2F;
-		heightVariation = 0.1F;
-		topBlock=Blocks.grass;
-		fillerBlock=Blocks.dirt;
+		minHeight = -0.2F;
+		maxHeight = 0.1F;
+		topBlock=Blocks.grass.getDefaultState();
+		fillerBlock=Blocks.dirt.getDefaultState();
 		theBiomeDecorator.treesPerChunk = 2;
 		theBiomeDecorator.flowersPerChunk = 1;
 		theBiomeDecorator.deadBushPerChunk = 1;
@@ -75,56 +76,56 @@ public class BiomeGenCorSwamp extends BiomeGenBase {
 	}
 
 	@Override
-	public void decorate(World par1World, Random par2Random, int par3, int par4)
+	public void decorate(World par1World, Random par2Random, BlockPos pos)
 	{
-		super.decorate(par1World, par2Random, par3, par4);
+		super.decorate(par1World, par2Random, pos);
 		int var5 = 3 + par2Random.nextInt(6);
 
 		for (int var6 = 0; var6 < var5; ++var6)
 		{
-			int var7 = par3 + par2Random.nextInt(16);
+			int var7 = par2Random.nextInt(16);
 			int var8 = par2Random.nextInt(28) + 4;
-			int var9 = par4 + par2Random.nextInt(16);
-			Block var10 = par1World.getBlock(var7, var8, var9);
+			int var9 = par2Random.nextInt(16);
+			Block var10 = par1World.getBlockState(pos.add(var7, var8, var9)).getBlock();
 
-			if (var10 != null && var10.isReplaceableOreGen(par1World, var7, var8, var9, Blocks.stone) || var10 == Blocks.iron_ore || var10 == Blocks.coal_ore)
-				par1World.setBlock(var7, var8, var9, AbyssalCraft.Coraliumore, 0, 2);
+			if (var10 != null && var10.isReplaceableOreGen(par1World, pos.add(var7, var8, var9), BlockHelper.forBlock(Blocks.stone)) || var10 == Blocks.iron_ore || var10 == Blocks.coal_ore)
+				par1World.setBlockState(pos.add(var7, var8, var9), AbyssalCraft.Coraliumore.getDefaultState(), 2);
 		}
 		for(int rarity = 0; rarity < 6; rarity++)
 		{
 			int veinSize = 4;
-			int x = par3 + par2Random.nextInt(16);
+			int x = par2Random.nextInt(16);
 			int y = par2Random.nextInt(40);
-			int z = par4 + par2Random.nextInt(16);
+			int z = par2Random.nextInt(16);
 
-			new WorldGenMinable(AbyssalCraft.Coraliumore, veinSize).generate(par1World, par2Random, x, y, z);
+			new WorldGenMinable(AbyssalCraft.Coraliumore.getDefaultState(), veinSize).generate(par1World, par2Random, pos.add(x, y, z));
 		}
 
 		for(int k = 0; k < 1; k++)
 		{
-			int RandPosX = par3 + par2Random.nextInt(64);
+			int RandPosX = par2Random.nextInt(64);
 			int RandPosY = par2Random.nextInt(60);
-			int RandPosZ = par4 + par2Random.nextInt(64);
-			new WorldGenAntimatterLake(AbyssalCraft.anticwater).generate(par1World, par2Random, RandPosX, RandPosY, RandPosZ);
+			int RandPosZ = par2Random.nextInt(64);
+			new WorldGenAntimatterLake(AbyssalCraft.anticwater).generate(par1World, par2Random, pos.add(RandPosX, RandPosY, RandPosZ));
 		}
 	}
 
 	@Override
-	public WorldGenAbstractTree func_150567_a(Random par1Random)
+	public WorldGenAbstractTree genBigTreeChance(Random par1Random)
 	{
 		return worldGeneratorSwamp;
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public int getBiomeGrassColor(int par1, int par2, int par3)
+	public int getGrassColorAtPos(BlockPos pos)
 	{
 		return 0x6EF5DE;
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public int getBiomeFoliageColor(int par1, int par2, int par3)
+	public int getFoliageColorAtPos(BlockPos pos)
 	{
 		return 0x6EF5DE;
 	}

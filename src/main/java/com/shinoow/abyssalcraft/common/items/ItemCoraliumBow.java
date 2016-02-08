@@ -13,7 +13,7 @@ package com.shinoow.abyssalcraft.common.items;
 
 import java.util.List;
 
-import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.player.EntityPlayer;
@@ -22,7 +22,6 @@ import net.minecraft.item.EnumAction;
 import net.minecraft.item.ItemBow;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumChatFormatting;
-import net.minecraft.util.IIcon;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
@@ -31,9 +30,6 @@ import net.minecraftforge.event.entity.player.ArrowNockEvent;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.common.entity.EntityCoraliumArrow;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 public class ItemCoraliumBow extends ItemBow {
 
@@ -61,6 +57,7 @@ public class ItemCoraliumBow extends ItemBow {
 	 */
 	public ItemCoraliumBow(float chargeTime, int anim_0, int anim_1, int anim_2) {
 		maxStackSize = 1;
+		setUnlocalizedName("corbow");
 		setCreativeTab(AbyssalCraft.tabCombat);
 
 		charge = chargeTime;
@@ -81,13 +78,26 @@ public class ItemCoraliumBow extends ItemBow {
 	}
 
 	public String[] bowPullIconNameArray;
-	@SideOnly(Side.CLIENT)
-	private IIcon[] iconArray;
 
 	public void getBowPullIconNameArray(){
 
 		bowPullIconNameArray = new String[] {"pulling_0", "pulling_1", "pulling_2" };
 
+	}
+
+	@Override
+	public ModelResourceLocation getModel(ItemStack stack, EntityPlayer player, int useRemaining)
+	{
+		ModelResourceLocation modelresourcelocation = new ModelResourceLocation("abyssalcraft:corbow", "inventory");
+
+		if(stack.getItem() == this && player.getItemInUse() != null)
+			if(useRemaining >= 18)
+				modelresourcelocation = new ModelResourceLocation("abyssalcraft:corbow_pulling_0", "inventory");
+			else if(useRemaining > 13)
+				modelresourcelocation = new ModelResourceLocation("abyssalcraft:corbow_pulling_1", "inventory");
+			else if(useRemaining > 0)
+				modelresourcelocation = new ModelResourceLocation("abyssalcraft:corbow_pulling_2", "inventory");
+		return modelresourcelocation;
 	}
 
 	@Override
@@ -158,7 +168,7 @@ public class ItemCoraliumBow extends ItemBow {
 	}
 
 	@Override
-	public ItemStack onEaten(ItemStack par1ItemStack, World par2World, EntityPlayer par3EntityPlayer)
+	public ItemStack onItemUseFinish(ItemStack par1ItemStack, World par2World, EntityPlayer par3EntityPlayer)
 	{
 		return par1ItemStack;
 	}
@@ -178,7 +188,7 @@ public class ItemCoraliumBow extends ItemBow {
 	@Override
 	public EnumAction getItemUseAction(ItemStack par1ItemStack)
 	{
-		return EnumAction.bow;
+		return EnumAction.BOW;
 	}
 
 	/**
@@ -212,35 +222,5 @@ public class ItemCoraliumBow extends ItemBow {
 	public boolean getIsRepairable(ItemStack par1ItemStack, ItemStack par2ItemStack)
 	{
 		return AbyssalCraft.Cingot == par2ItemStack.getItem() ? true : super.getIsRepairable(par1ItemStack, par2ItemStack);
-	}
-
-	@Override
-	@SideOnly(Side.CLIENT)
-	public void registerIcons(IIconRegister par1IconRegister)
-	{
-		getBowPullIconNameArray();
-		itemIcon = par1IconRegister.registerIcon(AbyssalCraft.modid + ":" + getUnlocalizedName().substring(5));
-		iconArray = new IIcon[bowPullIconNameArray.length];
-
-		for (int i = 0; i < iconArray.length; ++i)
-			iconArray[i] = par1IconRegister.registerIcon(AbyssalCraft.modid + ":" + getUnlocalizedName().substring(5) + "_" + bowPullIconNameArray[i]);
-	}
-
-	/**
-	 * used to cycle through icons based on their used duration, i.e. for the bow
-	 */
-	@Override
-	@SideOnly(Side.CLIENT)
-	public IIcon getIcon(ItemStack stack, int renderPass, EntityPlayer player, ItemStack usingItem, int useRemaining)
-	{
-		if(player.getItemInUse() == null) return itemIcon;
-		int Pulling = stack.getMaxItemUseDuration() - useRemaining;
-		if (Pulling >= anim_2)
-			return iconArray[2];
-		else if (Pulling > anim_1)
-			return iconArray[1];
-		else if (Pulling > anim_0)
-			return iconArray[0];
-		return itemIcon;
 	}
 }

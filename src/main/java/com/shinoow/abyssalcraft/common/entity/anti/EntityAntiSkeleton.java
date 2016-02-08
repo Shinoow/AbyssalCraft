@@ -36,6 +36,8 @@ import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.BlockPos;
+import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.World;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
@@ -53,7 +55,7 @@ public class EntityAntiSkeleton extends EntityMob implements IRangedAttackMob, I
 		tasks.addTask(6, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
 		tasks.addTask(6, new EntityAILookIdle(this));
 		targetTasks.addTask(1, new EntityAIHurtByTarget(this, false));
-		targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityPlayer.class, 0, true));
+		targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityPlayer.class, true));
 		tasks.addTask(4, aiArrowAttack);
 	}
 
@@ -75,12 +77,6 @@ public class EntityAntiSkeleton extends EntityMob implements IRangedAttackMob, I
 	}
 
 	@Override
-	public boolean isAIEnabled()
-	{
-		return true;
-	}
-
-	@Override
 	protected String getLivingSound()
 	{
 		return "mob.skeleton.say";
@@ -99,7 +95,7 @@ public class EntityAntiSkeleton extends EntityMob implements IRangedAttackMob, I
 	}
 
 	@Override
-	protected void func_145780_a(int par1, int par2, int par3, Block par4Block)
+	protected void playStepSound(BlockPos pos, Block par4Block)
 	{
 		playSound("mob.skeleton.step", 0.15F, 1.0F);
 	}
@@ -149,7 +145,7 @@ public class EntityAntiSkeleton extends EntityMob implements IRangedAttackMob, I
 	protected void collideWithEntity(Entity par1Entity)
 	{
 		if(!worldObj.isRemote && par1Entity instanceof EntitySkeleton){
-			boolean flag = worldObj.getGameRules().getGameRuleBooleanValue("mobGriefing");
+			boolean flag = worldObj.getGameRules().getBoolean("mobGriefing");
 			worldObj.createExplosion(this, posX, posY, posZ, 5, flag);
 			setDead();
 		}
@@ -157,15 +153,15 @@ public class EntityAntiSkeleton extends EntityMob implements IRangedAttackMob, I
 	}
 
 	@Override
-	public IEntityLivingData onSpawnWithEgg(IEntityLivingData par1EntityLivingData)
+	public IEntityLivingData onInitialSpawn(DifficultyInstance difficulty, IEntityLivingData par1EntityLivingData)
 	{
-		par1EntityLivingData = super.onSpawnWithEgg(par1EntityLivingData);
+		par1EntityLivingData = super.onInitialSpawn(difficulty, par1EntityLivingData);
 
 		tasks.addTask(4, aiArrowAttack);
 		setCurrentItemOrArmor(0, new ItemStack(Items.bow));
-		enchantEquipment();
+		setEnchantmentBasedOnDifficulty(difficulty);
 
-		setCanPickUpLoot(rand.nextFloat() < 0.55F * worldObj.func_147462_b(posX, posY, posZ));
+		setCanPickUpLoot(rand.nextFloat() < 0.55F * difficulty.getClampedAdditionalDifficulty());
 
 		return par1EntityLivingData;
 	}
@@ -176,10 +172,10 @@ public class EntityAntiSkeleton extends EntityMob implements IRangedAttackMob, I
 	@Override
 	public void attackEntityWithRangedAttack(EntityLivingBase par1EntityLivingBase, float par2)
 	{
-		EntityArrow entityarrow = new EntityArrow(worldObj, this, par1EntityLivingBase, 1.6F, 14 - worldObj.difficultySetting.getDifficultyId() * 4);
+		EntityArrow entityarrow = new EntityArrow(worldObj, this, par1EntityLivingBase, 1.6F, 14 - worldObj.getDifficulty().getDifficultyId() * 4);
 		int i = EnchantmentHelper.getEnchantmentLevel(Enchantment.power.effectId, getHeldItem());
 		int j = EnchantmentHelper.getEnchantmentLevel(Enchantment.punch.effectId, getHeldItem());
-		entityarrow.setDamage(par2 * 2.0F + rand.nextGaussian() * 0.25D + worldObj.difficultySetting.getDifficultyId() * 0.11F);
+		entityarrow.setDamage(par2 * 2.0F + rand.nextGaussian() * 0.25D + worldObj.getDifficulty().getDifficultyId() * 0.11F);
 
 		if (i > 0)
 			entityarrow.setDamage(entityarrow.getDamage() + i * 0.5D + 0.5D);

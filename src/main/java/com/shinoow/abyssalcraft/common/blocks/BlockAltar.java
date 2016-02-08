@@ -11,14 +11,10 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.common.blocks;
 
-import net.minecraft.block.BlockContainer;
+import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.world.World;
 
-import com.shinoow.abyssalcraft.common.blocks.tile.TileEntityAltar;
-
-public class BlockAltar extends BlockContainer {
+public class BlockAltar extends Block {
 
 	public BlockAltar() {
 		super(Material.rock);
@@ -27,23 +23,18 @@ public class BlockAltar extends BlockContainer {
 	}
 
 	@Override
-	public TileEntity createNewTileEntity(World world, int var2) {
-
-		return new TileEntityAltar();
-	}
-
-	@Override
-	public boolean renderAsNormalBlock() {
-		return false;
-	}
-
-	@Override
 	public int getRenderType() {
-		return -2;
+		return 3;
 	}
 
 	@Override
 	public boolean isOpaqueCube() {
+		return false;
+	}
+
+	@Override
+	public boolean isFullCube()
+	{
 		return false;
 	}
 }

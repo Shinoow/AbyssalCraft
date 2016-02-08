@@ -148,7 +148,7 @@ public class GuiNecronomiconInformation extends GuiNecronomicon {
 						AbyssalCraft.shadowshard, AbyssalCraft.shadowshard, AbyssalCraft.shadowshard, AbyssalCraft.shadowshard, AbyssalCraft.shadowshard);
 				CraftingStack soo = new CraftingStack(AbyssalCraft.oblivionshard, AbyssalCraft.shadowgem, AbyssalCraft.shadowgem, AbyssalCraft.shadowgem, AbyssalCraft.shadowgem,
 						AbyssalCraft.Corb, AbyssalCraft.shadowgem, AbyssalCraft.shadowgem, AbyssalCraft.shadowgem, AbyssalCraft.shadowgem);
-				CraftingStack gk = new CraftingStack(AbyssalCraft.portalPlacer, null, AbyssalCraft.Cpearl, AbyssalCraft.OC, null, Items.blaze_rod, AbyssalCraft.Cpearl, Items.blaze_rod, null, null);
+				CraftingStack gk = new CraftingStack(AbyssalCraft.gatewayKey, null, AbyssalCraft.Cpearl, AbyssalCraft.OC, null, Items.blaze_rod, AbyssalCraft.Cpearl, Items.blaze_rod, null, null);
 				CraftingStack aws = new CraftingStack(new ItemStack(AbyssalCraft.skin, 1, 0), AbyssalCraft.Corflesh, AbyssalCraft.Corflesh, AbyssalCraft.Corflesh, AbyssalCraft.Corflesh,
 						new ItemStack(AbyssalCraft.essence, 1, 0), AbyssalCraft.Corflesh, AbyssalCraft.Corflesh, AbyssalCraft.Corflesh, AbyssalCraft.Corflesh);
 				CraftingStack awn = new CraftingStack(AbyssalCraft.necronomicon_cor, new ItemStack(AbyssalCraft.skin, 1, 0), new ItemStack(AbyssalCraft.skin, 1, 0), new ItemStack(AbyssalCraft.skin, 1, 0),
@@ -169,7 +169,7 @@ public class GuiNecronomiconInformation extends GuiNecronomicon {
 						new ItemStack(AbyssalCraft.AbyLCorOre), new ItemStack(AbyssalCraft.AbyPCorOre), new ItemStack(AbyssalCraft.Cwater), new ItemStack(AbyssalCraft.PSDL)};
 				CraftingStack psdlf = new CraftingStack(new ItemStack(AbyssalCraft.PSDLfinder, 4), AbyssalCraft.Coralium, AbyssalCraft.Coralium, AbyssalCraft.Coralium, AbyssalCraft.Coralium, Items.ender_eye,
 						AbyssalCraft.Coralium, AbyssalCraft.Coralium, AbyssalCraft.Coralium, AbyssalCraft.Coralium);
-				CraftingStack trans = new CraftingStack(AbyssalCraft.transmutator_on, AbyssalCraft.cbrick, AbyssalCraft.cbrick, AbyssalCraft.cbrick, AbyssalCraft.cbrick, AbyssalCraft.Corb,
+				CraftingStack trans = new CraftingStack(AbyssalCraft.transmutator, AbyssalCraft.cbrick, AbyssalCraft.cbrick, AbyssalCraft.cbrick, AbyssalCraft.cbrick, AbyssalCraft.Corb,
 						AbyssalCraft.cbrick, AbyssalCraft.corblock, AbyssalCraft.Cbucket, AbyssalCraft.corblock);
 				CraftingStack cc = new CraftingStack(AbyssalCraft.Cchunk, AbyssalCraft.Coraliumcluster9, AbyssalCraft.Coraliumcluster9, AbyssalCraft.Coraliumcluster9, AbyssalCraft.Coraliumcluster9,
 						AbyssalCraft.abystone, AbyssalCraft.Coraliumcluster9, AbyssalCraft.Coraliumcluster9, AbyssalCraft.Coraliumcluster9, AbyssalCraft.Coraliumcluster9);
@@ -202,11 +202,11 @@ public class GuiNecronomiconInformation extends GuiNecronomicon {
 						new ItemStack(AbyssalCraft.dreadore), new ItemStack(AbyssalCraft.dreadgrass), new ItemStack(AbyssalCraft.dreadsapling)};
 				CraftingStack dreadium = new CraftingStack(AbyssalCraft.dreadiumblock, AbyssalCraft.dreadiumingot, AbyssalCraft.dreadiumingot, AbyssalCraft.dreadiumingot, AbyssalCraft.dreadiumingot,
 						AbyssalCraft.dreadiumingot, AbyssalCraft.dreadiumingot, AbyssalCraft.dreadiumingot, AbyssalCraft.dreadiumingot, AbyssalCraft.dreadiumingot);
-				CraftingStack cryst = new CraftingStack(AbyssalCraft.crystallizer_on, AbyssalCraft.dreadbrick, AbyssalCraft.dreadbrick, AbyssalCraft.dreadbrick, AbyssalCraft.dreadiumblock,
+				CraftingStack cryst = new CraftingStack(AbyssalCraft.crystallizer, AbyssalCraft.dreadbrick, AbyssalCraft.dreadbrick, AbyssalCraft.dreadbrick, AbyssalCraft.dreadiumblock,
 						Blocks.furnace, AbyssalCraft.dreadiumblock, AbyssalCraft.dreadbrick, AbyssalCraft.dreadbrick, AbyssalCraft.dreadbrick);
 				CraftingStack drc = new CraftingStack(AbyssalCraft.dreadcloth, Items.string, AbyssalCraft.dreadfragment, Items.string, AbyssalCraft.dreadfragment, Items.leather, AbyssalCraft.dreadfragment,
 						Items.string, AbyssalCraft.dreadfragment, Items.string);
-				CraftingStack daltarb = new CraftingStack(AbyssalCraft.dreadaltarbottom, Items.bone, AbyssalCraft.dreadcloth, Items.bone, AbyssalCraft.dreadiumingot, AbyssalCraft.portalPlacerDL,
+				CraftingStack daltarb = new CraftingStack(AbyssalCraft.dreadaltarbottom, Items.bone, AbyssalCraft.dreadcloth, Items.bone, AbyssalCraft.dreadiumingot, AbyssalCraft.gatewayKeyDL,
 						AbyssalCraft.dreadiumingot, AbyssalCraft.dreadstone, AbyssalCraft.Dreadshard, AbyssalCraft.dreadstone);
 				CraftingStack daltart = new CraftingStack(AbyssalCraft.dreadaltartop, Items.stick, Items.bucket, Items.stick, AbyssalCraft.dreadcloth, AbyssalCraft.dreadcloth, AbyssalCraft.dreadcloth,
 						AbyssalCraft.dreadiumingot, AbyssalCraft.dreadiumingot, AbyssalCraft.dreadiumingot);

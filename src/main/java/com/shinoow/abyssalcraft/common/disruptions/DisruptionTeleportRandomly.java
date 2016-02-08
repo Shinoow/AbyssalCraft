@@ -15,7 +15,8 @@ import java.util.List;
 
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.util.MathHelper;
+import net.minecraft.util.BlockPos;
+import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.living.EnderTeleportEvent;
@@ -29,7 +30,7 @@ public class DisruptionTeleportRandomly extends DisruptionEntry {
 	}
 
 	@Override
-	public void disrupt(World world, int x, int y, int z, List<EntityPlayer> players) {
+	public void disrupt(World world, BlockPos pos, List<EntityPlayer> players) {
 		if(!players.isEmpty())
 			for(EntityPlayer player : players)
 				teleportRandomly(player, world);
@@ -55,24 +56,23 @@ public class DisruptionTeleportRandomly extends DisruptionEntry {
 		player.posY = event.targetY;
 		player.posZ = event.targetZ;
 		boolean flag = false;
-		int i = MathHelper.floor_double(player.posX);
-		int j = MathHelper.floor_double(player.posY);
-		int k = MathHelper.floor_double(player.posZ);
+		BlockPos pos = new BlockPos(player.posX, player.posY, player.posZ);
 
-		if (world.blockExists(i, j, k))
+		if (world.isBlockLoaded(pos))
 		{
 			boolean flag1 = false;
 
-			while (!flag1 && j > 0)
+			while (!flag1 && pos.getY() > 0)
 			{
-				Block block = world.getBlock(i, j - 1, k);
+				BlockPos pos1 = pos.down();
+				Block block = world.getBlockState(pos1).getBlock();
 
 				if (block.getMaterial().blocksMovement())
 					flag1 = true;
 				else
 				{
 					--player.posY;
-					--j;
+					pos = pos1;
 				}
 			}
 
@@ -80,7 +80,7 @@ public class DisruptionTeleportRandomly extends DisruptionEntry {
 			{
 				player.setPosition(player.posX, player.posY, player.posZ);
 
-				if (world.getCollidingBoundingBoxes(player, player.boundingBox).isEmpty() && !world.isAnyLiquid(player.boundingBox))
+				if (world.getCollidingBoundingBoxes(player, player.getEntityBoundingBox()).isEmpty() && !world.isAnyLiquid(player.getEntityBoundingBox()))
 					flag = true;
 			}
 		}
@@ -103,7 +103,7 @@ public class DisruptionTeleportRandomly extends DisruptionEntry {
 				double d7 = d3 + (player.posX - d3) * d6 + (world.rand.nextDouble() - 0.5D) * player.width * 2.0D;
 				double d8 = d4 + (player.posY - d4) * d6 + world.rand.nextDouble() * player.height;
 				double d9 = d5 + (player.posZ - d5) * d6 + (world.rand.nextDouble() - 0.5D) * player.width * 2.0D;
-				world.spawnParticle("portal", d7, d8, d9, f, f1, f2);
+				world.spawnParticle(EnumParticleTypes.PORTAL, d7, d8, d9, f, f1, f2);
 			}
 
 			world.playSoundEffect(d3, d4, d5, "mob.endermen.portal", 1.0F, 1.0F);

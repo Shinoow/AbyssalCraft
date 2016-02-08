@@ -1,0 +1,14 @@
+{
+	"forge_marker": 1,
+	"defaults": {
+		"textures" : {
+			"bottom": "abyssalcraft:blocks/dsc",
+			"top": "abyssalcraft:blocks/dsc",
+			"side": "abyssalcraft:blocks/dsc"
+		}
+	},
+	"variants": {
+		"half=bottom,variant=false": { "model": "abyssalcraft:darkcobbleslab1" },
+		"half=top,variant=false": { "model": "upper_slab" }
+	}
+}

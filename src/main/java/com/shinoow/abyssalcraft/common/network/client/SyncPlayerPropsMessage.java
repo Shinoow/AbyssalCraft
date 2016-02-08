@@ -19,7 +19,7 @@ import com.shinoow.abyssalcraft.common.network.AbstractMessage.AbstractClientMes
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.PacketBuffer;
-import cpw.mods.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.Side;
 
 /**
  * 

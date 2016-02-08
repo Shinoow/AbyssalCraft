@@ -14,10 +14,9 @@ package com.shinoow.abyssalcraft.common.items;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.BlockPos;
 import net.minecraft.util.MovingObjectPosition;
-import net.minecraft.world.ChunkPosition;
 import net.minecraft.world.World;
-
 import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.common.entity.EntityPSDLTracker;
 
@@ -25,7 +24,9 @@ public class ItemTrackerPSDL extends Item {
 
 	public ItemTrackerPSDL() {
 		super();
-
+		//		GameRegistry.registerItem(this, "powerstonetracker");
+		setUnlocalizedName("powerstonetracker");
+		setCreativeTab(AbyssalCraft.tabItems);
 	}
 
 	@Override
@@ -33,20 +34,20 @@ public class ItemTrackerPSDL extends Item {
 	{
 		MovingObjectPosition movingobjectposition = getMovingObjectPositionFromPlayer(par2World, par3EntityPlayer, false);
 
-		if (movingobjectposition != null && movingobjectposition.typeOfHit == MovingObjectPosition.MovingObjectType.BLOCK && par2World.getBlock(movingobjectposition.blockX, movingobjectposition.blockY, movingobjectposition.blockZ) == AbyssalCraft.PSDL)
+		if (movingobjectposition != null && movingobjectposition.typeOfHit == MovingObjectPosition.MovingObjectType.BLOCK && par2World.getBlockState(movingobjectposition.getBlockPos()) == AbyssalCraft.PSDL)
 			return par1ItemStack;
 
 		if (!par2World.isRemote)
 		{
-			ChunkPosition chunkposition = par2World.findClosestStructure("AbyStronghold", (int)par3EntityPlayer.posX, (int)par3EntityPlayer.posY, (int)par3EntityPlayer.posZ);
+			BlockPos blockpos = par2World.getStrongholdPos("AbyStronghold", new BlockPos(par3EntityPlayer));
 
-			if (chunkposition != null)
+			if (blockpos != null)
 			{
-				EntityPSDLTracker entitypsdltracker = new EntityPSDLTracker(par2World, par3EntityPlayer.posX, par3EntityPlayer.posY + 1.62D - par3EntityPlayer.yOffset, par3EntityPlayer.posZ);
-				entitypsdltracker.moveTowards(chunkposition.chunkPosX, chunkposition.chunkPosY, chunkposition.chunkPosZ);
+				EntityPSDLTracker entitypsdltracker = new EntityPSDLTracker(par2World, par3EntityPlayer.posX, par3EntityPlayer.posY, par3EntityPlayer.posZ);
+				entitypsdltracker.moveTowards(blockpos);
 				par2World.spawnEntityInWorld(entitypsdltracker);
 				par2World.playSoundAtEntity(par3EntityPlayer, "random.bow", 0.5F, 0.4F / (itemRand.nextFloat() * 0.4F + 0.8F));
-				par2World.playAuxSFXAtEntity((EntityPlayer)null, 1002, (int)par3EntityPlayer.posX, (int)par3EntityPlayer.posY, (int)par3EntityPlayer.posZ, 0);
+				par2World.playAuxSFXAtEntity((EntityPlayer)null, 1002, new BlockPos(par3EntityPlayer), 0);
 
 				if (!par3EntityPlayer.capabilities.isCreativeMode)
 					--par1ItemStack.stackSize;
@@ -57,7 +58,7 @@ public class ItemTrackerPSDL extends Item {
 	}
 
 	@Override
-	public boolean hasEffect(ItemStack is, int pass){
+	public boolean hasEffect(ItemStack is){
 		return true;
 	}
 }

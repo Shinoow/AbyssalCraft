@@ -11,9 +11,6 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.common.blocks.tile;
 
-import com.shinoow.abyssalcraft.AbyssalCraft;
-import com.shinoow.abyssalcraft.common.entity.EntityLesserShoggoth;
-
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.IEntityLivingData;
 import net.minecraft.nbt.NBTTagCompound;
@@ -23,9 +20,15 @@ import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.BlockPos;
+import net.minecraft.util.EnumParticleTypes;
+import net.minecraft.util.ITickable;
 import net.minecraft.world.EnumDifficulty;
 
-public class TileEntityShoggothBiomass extends TileEntity {
+import com.shinoow.abyssalcraft.AbyssalCraft;
+import com.shinoow.abyssalcraft.common.entity.EntityLesserShoggoth;
+
+public class TileEntityShoggothBiomass extends TileEntity implements ITickable {
 
 	private int cooldown;
 	private int spawnedShoggoths;
@@ -50,46 +53,49 @@ public class TileEntityShoggothBiomass extends TileEntity {
 	public Packet getDescriptionPacket() {
 		NBTTagCompound nbtTag = new NBTTagCompound();
 		writeToNBT(nbtTag);
-		return new S35PacketUpdateTileEntity(xCoord, yCoord, zCoord, 1, nbtTag);
+		return new S35PacketUpdateTileEntity(pos, 1, nbtTag);
 	}
 
 	@Override
 	public void onDataPacket(NetworkManager net, S35PacketUpdateTileEntity packet)
 	{
-		readFromNBT(packet.func_148857_g());
+		readFromNBT(packet.getNbtCompound());
 	}
 
 	@Override
-	public void updateEntity() {
-		if(worldObj.difficultySetting != EnumDifficulty.PEACEFUL){
+	public void update() {
+		if(worldObj.getDifficulty() != EnumDifficulty.PEACEFUL){
 			cooldown++;
 			if (cooldown >= 400) {
 				cooldown = worldObj.rand.nextInt(10);
 				resetNearbyBiomass(true);
 				if(!worldObj.isRemote)
-					if(worldObj.getEntitiesWithinAABB(EntityLesserShoggoth.class, worldObj.getBlock(xCoord, yCoord, zCoord).getCollisionBoundingBoxFromPool(worldObj, xCoord, yCoord, zCoord).expand(16, 16, 16)).size() <= 6){
+					if(worldObj.getEntitiesWithinAABB(EntityLesserShoggoth.class, worldObj.getBlockState(pos).getBlock().getCollisionBoundingBox(worldObj, pos, worldObj.getBlockState(pos)).expand(16, 16, 16)).size() <= 6){
 						EntityLesserShoggoth mob = new EntityLesserShoggoth(worldObj);
-						setPosition(mob, xCoord, yCoord, zCoord);
-						mob.onSpawnWithEgg((IEntityLivingData)null);
+						setPosition(mob, pos.getX(), pos.getY(), pos.getZ());
+						mob.onInitialSpawn(worldObj.getDifficultyForLocation(pos), (IEntityLivingData)null);
 						worldObj.spawnEntityInWorld(mob);
 						spawnedShoggoths++;
 						if(spawnedShoggoths >= 5)
-							worldObj.setBlock(xCoord, yCoord, zCoord, AbyssalCraft.monolithStone, 0, 2);
+							worldObj.setBlockState(pos, AbyssalCraft.monolithStone.getDefaultState(), 2);
 					}
 			}
 		}
 	}
 
 	public void resetNearbyBiomass(boolean again){
-		worldObj.spawnParticle("largesmoke", xCoord, yCoord, zCoord, 0, 0, 0);
-		TileEntity tile1 = worldObj.getTileEntity(xCoord - 1, yCoord, zCoord);
-		TileEntity tile2 = worldObj.getTileEntity(xCoord, yCoord, zCoord - 1);
-		TileEntity tile3 = worldObj.getTileEntity(xCoord - 1, yCoord, zCoord - 1);
-		TileEntity tile4 = worldObj.getTileEntity(xCoord + 1, yCoord, zCoord);
-		TileEntity tile5 = worldObj.getTileEntity(xCoord, yCoord, zCoord + 1);
-		TileEntity tile6 = worldObj.getTileEntity(xCoord + 1, yCoord, zCoord + 1);
-		TileEntity tile7 = worldObj.getTileEntity(xCoord - 1, yCoord, zCoord + 1);
-		TileEntity tile8 = worldObj.getTileEntity(xCoord + 1, yCoord, zCoord - 1);
+		int x = pos.getX();
+		int y = pos.getY();
+		int z = pos.getZ();
+		worldObj.spawnParticle(EnumParticleTypes.SMOKE_LARGE, x, y, z, 0, 0, 0);
+		TileEntity tile1 = worldObj.getTileEntity(new BlockPos(x - 1, y, z));
+		TileEntity tile2 = worldObj.getTileEntity(new BlockPos(x, y, z - 1));
+		TileEntity tile3 = worldObj.getTileEntity(new BlockPos(x - 1, y, z - 1));
+		TileEntity tile4 = worldObj.getTileEntity(new BlockPos(x + 1, y, z));
+		TileEntity tile5 = worldObj.getTileEntity(new BlockPos(x, y, z + 1));
+		TileEntity tile6 = worldObj.getTileEntity(new BlockPos(x + 1, y, z + 1));
+		TileEntity tile7 = worldObj.getTileEntity(new BlockPos(x - 1, y, z + 1));
+		TileEntity tile8 = worldObj.getTileEntity(new BlockPos(x + 1, y, z - 1));
 		if(again){
 			if(tile1 != null && tile1 instanceof TileEntityShoggothBiomass){
 				((TileEntityShoggothBiomass) tile1).setCooldown(worldObj.rand.nextInt(10));
@@ -139,21 +145,21 @@ public class TileEntityShoggothBiomass extends TileEntity {
 	}
 
 	private void setPosition(EntityLiving entity, int x, int y, int z){
-		if(worldObj.getBlock(x, y + 1, z).getMaterial().isSolid()){
-			if(worldObj.getBlock(x, y + 2, z).getMaterial().isSolid()){
-				if(worldObj.getBlock(x + 1, y + 1, z).getMaterial().isSolid()){
-					if(worldObj.getBlock(x, y + 1, z + 1).getMaterial().isSolid()){
-						if(worldObj.getBlock(x + 1, y + 1, z + 1).getMaterial().isSolid()){
-							if(worldObj.getBlock(x - 1, y + 1, z).getMaterial().isSolid()){
-								if(worldObj.getBlock(x, y + 1, z - 1).getMaterial().isSolid()){
-									if(worldObj.getBlock(x - 1, y + 1, z - 1).getMaterial().isSolid()){
-										if(worldObj.getBlock(x + 4, y + 1, z).getMaterial().isSolid()){
-											if(worldObj.getBlock(x, y + 1, z + 4).getMaterial().isSolid()){
-												if(worldObj.getBlock(x + 4, y + 1, z + 4).getMaterial().isSolid()){
-													if(worldObj.getBlock(x - 4, y + 1, z).getMaterial().isSolid()){
-														if(worldObj.getBlock(x, y + 1, z - 4).getMaterial().isSolid()){
-															if(worldObj.getBlock(x - 4, y + 1, z - 4).getMaterial().isSolid()){
-																if(worldObj.getBlock(x, y + 15, z).getMaterial().isSolid()){
+		if(worldObj.getBlockState(new BlockPos(x, y + 1, z)).getBlock().getMaterial().isSolid()){
+			if(worldObj.getBlockState(new BlockPos(x, y + 2, z)).getBlock().getMaterial().isSolid()){
+				if(worldObj.getBlockState(new BlockPos(x + 1, y + 1, z)).getBlock().getMaterial().isSolid()){
+					if(worldObj.getBlockState(new BlockPos(x, y + 1, z + 1)).getBlock().getMaterial().isSolid()){
+						if(worldObj.getBlockState(new BlockPos(x + 1, y + 1, z + 1)).getBlock().getMaterial().isSolid()){
+							if(worldObj.getBlockState(new BlockPos(x - 1, y + 1, z)).getBlock().getMaterial().isSolid()){
+								if(worldObj.getBlockState(new BlockPos(x, y + 1, z - 1)).getBlock().getMaterial().isSolid()){
+									if(worldObj.getBlockState(new BlockPos(x - 1, y + 1, z - 1)).getBlock().getMaterial().isSolid()){
+										if(worldObj.getBlockState(new BlockPos(x + 4, y + 1, z)).getBlock().getMaterial().isSolid()){
+											if(worldObj.getBlockState(new BlockPos(x, y + 1, z + 4)).getBlock().getMaterial().isSolid()){
+												if(worldObj.getBlockState(new BlockPos(x + 4, y + 1, z + 4)).getBlock().getMaterial().isSolid()){
+													if(worldObj.getBlockState(new BlockPos(x - 4, y + 1, z)).getBlock().getMaterial().isSolid()){
+														if(worldObj.getBlockState(new BlockPos(x, y + 1, z - 4)).getBlock().getMaterial().isSolid()){
+															if(worldObj.getBlockState(new BlockPos(x - 4, y + 1, z - 4)).getBlock().getMaterial().isSolid()){
+																if(worldObj.getBlockState(new BlockPos(x, y + 15, z)).getBlock().getMaterial().isSolid()){
 																	entity.addPotionEffect(new PotionEffect(Potion.resistance.id, 10, 100));
 																	entity.setLocationAndAngles(x, y + 20, z, entity.rotationYaw, entity.rotationPitch);
 																} else {

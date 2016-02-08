@@ -12,6 +12,8 @@
 package com.shinoow.abyssalcraft.common.items;
 import java.util.List;
 
+import com.shinoow.abyssalcraft.AbyssalCraft;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -22,8 +24,11 @@ public class ItemStaff extends Item {
 
 	public ItemStaff() {
 		super();
+		//		GameRegistry.registerItem(this, "staff");
+		setUnlocalizedName("staff");
+		setCreativeTab(AbyssalCraft.tabTools);
+		setFull3D();
 		setMaxStackSize(1);
-
 	}
 
 	@Override

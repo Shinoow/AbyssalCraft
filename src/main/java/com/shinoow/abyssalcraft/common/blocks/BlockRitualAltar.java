@@ -18,6 +18,10 @@ import java.util.Random;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.properties.IProperty;
+import net.minecraft.block.properties.PropertyEnum;
+import net.minecraft.block.state.BlockState;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
@@ -25,6 +29,10 @@ import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.BlockPos;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumParticleTypes;
+import net.minecraft.util.IStringSerializable;
 import net.minecraft.world.World;
 
 import com.google.common.collect.Maps;
@@ -34,6 +42,7 @@ import com.shinoow.abyssalcraft.common.blocks.tile.TileEntityRitualAltar;
 public class BlockRitualAltar extends BlockContainer {
 
 	private static HashMap<Integer, Block> blockMeta = Maps.newHashMap();
+	public static final PropertyEnum MATERIAL = PropertyEnum.create("material", EnumRitualMatType.class);
 
 	public BlockRitualAltar() {
 		super(Material.rock);
@@ -41,9 +50,9 @@ public class BlockRitualAltar extends BlockContainer {
 		setResistance(12.0F);
 		setStepSound(Block.soundTypeStone);
 		setBlockBounds(0.15F, 0.0F, 0.15F, 0.85F, 1.0F, 0.85F);
-		setBlockTextureName("anvil_top_damaged_0");
 		setCreativeTab(null);
 		setLightLevel(0.375F);
+		setDefaultState(blockState.getBaseState().withProperty(MATERIAL, EnumRitualMatType.COBBLESTONE));
 	}
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })
@@ -65,13 +74,9 @@ public class BlockRitualAltar extends BlockContainer {
 	}
 
 	@Override
-	public boolean renderAsNormalBlock(){
+	public boolean isFullCube()
+	{
 		return false;
-	}
-
-	@Override
-	public int damageDropped(int meta) {
-		return meta;
 	}
 
 	@Override
@@ -81,77 +86,77 @@ public class BlockRitualAltar extends BlockContainer {
 	}
 
 	@Override
-	public Item getItemDropped(int i, Random random, int j)
+	public Item getItemDropped(IBlockState state, Random random, int j)
 	{
-		return Item.getItemFromBlock(blockMeta.get(j));
+		return Item.getItemFromBlock(blockMeta.get(((EnumRitualMatType)state.getValue(MATERIAL)).getMeta()));
 	}
 
 	@Override
 	public int getRenderType() {
-		return -7;
+		return 3;
 	}
 
 	@Override
-	public void randomDisplayTick(World par1World, int par2, int par3, int par4, Random par5Random) {
-		super.randomDisplayTick(par1World, par2, par3, par4, par5Random);
+	public void randomDisplayTick(World par1World, BlockPos pos, IBlockState state, Random par5Random) {
+		super.randomDisplayTick(par1World, pos, state, par5Random);
 		int timer = 0;
-		TileEntity altar = par1World.getTileEntity(par2, par3, par4);
+		TileEntity altar = par1World.getTileEntity(pos);
 		if(altar instanceof TileEntityRitualAltar)
 			timer = ((TileEntityRitualAltar)altar).getRitualCooldown();
 
 		if(AbyssalCraft.particleBlock){
-			par1World.spawnParticle("flame", par2 + 0.75, par3 + 1.05, par4 + 0.75, 0.0D, 0.0D, 0.0D);
-			par1World.spawnParticle("flame", par2 + 0.25, par3 + 1.05, par4 + 0.75, 0.0D, 0.0D, 0.0D);
-			par1World.spawnParticle("flame", par2 + 0.25, par3 + 1.05, par4 + 0.25, 0.0D, 0.0D, 0.0D);
-			par1World.spawnParticle("flame", par2 + 0.75, par3 + 1.05, par4 + 0.25, 0.0D, 0.0D, 0.0D);
-			par1World.spawnParticle("smoke", par2 + 0.75, par3 + 1.05, par4 + 0.75, 0.0D, 0.0D, 0.0D);
-			par1World.spawnParticle("smoke", par2 + 0.25, par3 + 1.05, par4 + 0.75, 0.0D, 0.0D, 0.0D);
-			par1World.spawnParticle("smoke", par2 + 0.25, par3 + 1.05, par4 + 0.25, 0.0D, 0.0D, 0.0D);
-			par1World.spawnParticle("smoke", par2 + 0.75, par3 + 1.05, par4 + 0.25, 0.0D, 0.0D, 0.0D);
+			par1World.spawnParticle(EnumParticleTypes.FLAME, pos.getX() + 0.75, pos.getY() + 1.05, pos.getZ() + 0.75, 0.0D, 0.0D, 0.0D);
+			par1World.spawnParticle(EnumParticleTypes.FLAME, pos.getX() + 0.25, pos.getY() + 1.05, pos.getZ() + 0.75, 0.0D, 0.0D, 0.0D);
+			par1World.spawnParticle(EnumParticleTypes.FLAME, pos.getX() + 0.25, pos.getY() + 1.05, pos.getZ() + 0.25, 0.0D, 0.0D, 0.0D);
+			par1World.spawnParticle(EnumParticleTypes.FLAME, pos.getX() + 0.75, pos.getY() + 1.05, pos.getZ() + 0.25, 0.0D, 0.0D, 0.0D);
+			par1World.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, pos.getX() + 0.75, pos.getY() + 1.05, pos.getZ() + 0.75, 0.0D, 0.0D, 0.0D);
+			par1World.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, pos.getX() + 0.25, pos.getY() + 1.05, pos.getZ() + 0.75, 0.0D, 0.0D, 0.0D);
+			par1World.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, pos.getX() + 0.25, pos.getY() + 1.05, pos.getZ() + 0.25, 0.0D, 0.0D, 0.0D);
+			par1World.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, pos.getX() + 0.75, pos.getY() + 1.05, pos.getZ() + 0.25, 0.0D, 0.0D, 0.0D);
 			if(timer < 200 && timer > 0){
-				par1World.spawnParticle("lava", par2 + 0.5, par3 + 1, par4 + 0.5, 0,0,0);
+				par1World.spawnParticle(EnumParticleTypes.LAVA, pos.getX() + 0.5, pos.getY() + 1, pos.getZ() + 0.5, 0,0,0);
 
 				for(double i = 0; i <= 0.7; i += 0.03) {
 					double x = i * Math.cos(i) / 2, z = i * Math.sin(i) / 2, o = i * Math.tan(i) / 2;
-					par1World.spawnParticle("largesmoke", par2 - 2.5, par3 + 0.95, par4 + 0.5, x,0,0);
-					par1World.spawnParticle("largesmoke", par2 + 0.5, par3 + 0.95, par4 - 2.5, 0,0,z);
-					par1World.spawnParticle("largesmoke", par2 + 3.5, par3 + 0.95, par4 + 0.5, -x,0,0);
-					par1World.spawnParticle("largesmoke", par2 + 0.5, par3 + 0.95, par4 + 3.5, 0,0,-z);
-					par1World.spawnParticle("largesmoke", par2 - 1.5, par3 + 0.95, par4 + 2.5, o,0,-o);
-					par1World.spawnParticle("largesmoke", par2 - 1.5, par3 + 0.95, par4 - 1.5, o,0,o);
-					par1World.spawnParticle("largesmoke", par2 + 2.5, par3 + 0.95, par4 + 2.5, -o,0,-o);
-					par1World.spawnParticle("largesmoke", par2 + 2.5, par3 + 0.95, par4 - 1.5, -o,0,o);
+					par1World.spawnParticle(EnumParticleTypes.SMOKE_LARGE, pos.getX() - 2.5, pos.getY() + 0.95, pos.getZ() + 0.5, x,0,0);
+					par1World.spawnParticle(EnumParticleTypes.SMOKE_LARGE, pos.getX() + 0.5, pos.getY() + 0.95, pos.getZ() - 2.5, 0,0,z);
+					par1World.spawnParticle(EnumParticleTypes.SMOKE_LARGE, pos.getX() + 3.5, pos.getY() + 0.95, pos.getZ() + 0.5, -x,0,0);
+					par1World.spawnParticle(EnumParticleTypes.SMOKE_LARGE, pos.getX() + 0.5, pos.getY() + 0.95, pos.getZ() + 3.5, 0,0,-z);
+					par1World.spawnParticle(EnumParticleTypes.SMOKE_LARGE, pos.getX() - 1.5, pos.getY() + 0.95, pos.getZ() + 2.5, o,0,-o);
+					par1World.spawnParticle(EnumParticleTypes.SMOKE_LARGE, pos.getX() - 1.5, pos.getY() + 0.95, pos.getZ() - 1.5, o,0,o);
+					par1World.spawnParticle(EnumParticleTypes.SMOKE_LARGE, pos.getX() + 2.5, pos.getY() + 0.95, pos.getZ() + 2.5, -o,0,-o);
+					par1World.spawnParticle(EnumParticleTypes.SMOKE_LARGE, pos.getX() + 2.5, pos.getY() + 0.95, pos.getZ() - 1.5, -o,0,o);
 				}
 
-				par1World.spawnParticle("flame", par2 - 2.5, par3 + 1.05, par4 + 0.5, 0,0,0);
-				par1World.spawnParticle("flame", par2 + 0.5, par3 + 1.05, par4 - 2.5, 0,0,0);
-				par1World.spawnParticle("flame", par2 + 3.5, par3 + 1.05, par4 + 0.5, 0,0,0);
-				par1World.spawnParticle("flame", par2 + 0.5, par3 + 1.05, par4 + 3.5, 0,0,0);
-				par1World.spawnParticle("flame", par2 - 1.5, par3 + 1.05, par4 + 2.5, 0,0,0);
-				par1World.spawnParticle("flame", par2 - 1.5, par3 + 1.05, par4 - 1.5, 0,0,0);
-				par1World.spawnParticle("flame", par2 + 2.5, par3 + 1.05, par4 + 2.5, 0,0,0);
-				par1World.spawnParticle("flame", par2 + 2.5, par3 + 1.05, par4 - 1.5, 0,0,0);
+				par1World.spawnParticle(EnumParticleTypes.FLAME, pos.getX() - 2.5, pos.getY() + 1.05, pos.getZ() + 0.5, 0,0,0);
+				par1World.spawnParticle(EnumParticleTypes.FLAME, pos.getX() + 0.5, pos.getY() + 1.05, pos.getZ() - 2.5, 0,0,0);
+				par1World.spawnParticle(EnumParticleTypes.FLAME, pos.getX() + 3.5, pos.getY() + 1.05, pos.getZ() + 0.5, 0,0,0);
+				par1World.spawnParticle(EnumParticleTypes.FLAME, pos.getX() + 0.5, pos.getY() + 1.05, pos.getZ() + 3.5, 0,0,0);
+				par1World.spawnParticle(EnumParticleTypes.FLAME, pos.getX() - 1.5, pos.getY() + 1.05, pos.getZ() + 2.5, 0,0,0);
+				par1World.spawnParticle(EnumParticleTypes.FLAME, pos.getX() - 1.5, pos.getY() + 1.05, pos.getZ() - 1.5, 0,0,0);
+				par1World.spawnParticle(EnumParticleTypes.FLAME, pos.getX() + 2.5, pos.getY() + 1.05, pos.getZ() + 2.5, 0,0,0);
+				par1World.spawnParticle(EnumParticleTypes.FLAME, pos.getX() + 2.5, pos.getY() + 1.05, pos.getZ() - 1.5, 0,0,0);
 
-				par1World.spawnParticle("smoke", par2 - 2.5, par3 + 1.05, par4 + 0.5, 0,0,0);
-				par1World.spawnParticle("smoke", par2 + 0.5, par3 + 1.05, par4 - 2.5, 0,0,0);
-				par1World.spawnParticle("smoke", par2 + 3.5, par3 + 1.05, par4 + 0.5, 0,0,0);
-				par1World.spawnParticle("smoke", par2 + 0.5, par3 + 1.05, par4 + 3.5, 0,0,0);
-				par1World.spawnParticle("smoke", par2 - 1.5, par3 + 1.05, par4 + 2.5, 0,0,0);
-				par1World.spawnParticle("smoke", par2 - 1.5, par3 + 1.05, par4 - 1.5, 0,0,0);
-				par1World.spawnParticle("smoke", par2 + 2.5, par3 + 1.05, par4 + 2.5, 0,0,0);
-				par1World.spawnParticle("smoke", par2 + 2.5, par3 + 1.05, par4 - 1.5, 0,0,0);
+				par1World.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, pos.getX() - 2.5, pos.getY() + 1.05, pos.getZ() + 0.5, 0,0,0);
+				par1World.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, pos.getX() + 0.5, pos.getY() + 1.05, pos.getZ() - 2.5, 0,0,0);
+				par1World.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, pos.getX() + 3.5, pos.getY() + 1.05, pos.getZ() + 0.5, 0,0,0);
+				par1World.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, pos.getX() + 0.5, pos.getY() + 1.05, pos.getZ() + 3.5, 0,0,0);
+				par1World.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, pos.getX() - 1.5, pos.getY() + 1.05, pos.getZ() + 2.5, 0,0,0);
+				par1World.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, pos.getX() - 1.5, pos.getY() + 1.05, pos.getZ() - 1.5, 0,0,0);
+				par1World.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, pos.getX() + 2.5, pos.getY() + 1.05, pos.getZ() + 2.5, 0,0,0);
+				par1World.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, pos.getX() + 2.5, pos.getY() + 1.05, pos.getZ() - 1.5, 0,0,0);
 			}
 		}
 	}
 
 	@Override
-	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int meta, float hitX, float hitY, float hitZ) {
-		TileEntity tile = world.getTileEntity(x, y, z);
+	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumFacing side, float hitX, float hitY, float hitZ) {
+		TileEntity tile = world.getTileEntity(pos);
 		if(tile != null && tile instanceof TileEntityRitualAltar)
 			if(((TileEntityRitualAltar)tile).getItem() != null){
 				player.inventory.addItemStackToInventory(((TileEntityRitualAltar)tile).getItem());
 				((TileEntityRitualAltar)tile).setItem(null);
-				world.playSoundEffect(x + 0.5, y + 0.5, z + 0.5, "random.pop", 0.5F, world.rand.nextFloat() - world.rand.nextFloat() * 0.2F + 1);
+				world.playSoundEffect(pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, "random.pop", 0.5F, world.rand.nextFloat() - world.rand.nextFloat() * 0.2F + 1);
 				return true;
 			} else {
 				ItemStack heldItem = player.getHeldItem();
@@ -160,7 +165,7 @@ public class BlockRitualAltar extends BlockContainer {
 					newItem.stackSize = 1;
 					((TileEntityRitualAltar)tile).setItem(newItem);
 					player.inventory.decrStackSize(player.inventory.currentItem, 1);
-					world.playSoundEffect(x + 0.5, y + 0.5, z + 0.5, "random.pop", 0.5F, world.rand.nextFloat() - world.rand.nextFloat() * 0.2F + 1);
+					world.playSoundEffect(pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, "random.pop", 0.5F, world.rand.nextFloat() - world.rand.nextFloat() * 0.2F + 1);
 					return true;
 				}
 			}
@@ -168,10 +173,10 @@ public class BlockRitualAltar extends BlockContainer {
 	}
 
 	@Override
-	public void breakBlock(World world, int x, int y, int z, Block block, int meta)
+	public void breakBlock(World world, BlockPos pos, IBlockState state)
 	{
 		Random rand = new Random();
-		TileEntityRitualAltar altar = (TileEntityRitualAltar) world.getTileEntity(x, y, z);
+		TileEntityRitualAltar altar = (TileEntityRitualAltar) world.getTileEntity(pos);
 
 		if(altar != null)
 			if(altar.getItem() != null){
@@ -179,7 +184,7 @@ public class BlockRitualAltar extends BlockContainer {
 				float f1 = rand.nextFloat() * 0.8F + 0.1F;
 				float f2 = rand.nextFloat() * 0.8F + 0.1F;
 
-				EntityItem item = new EntityItem(world, x + f, y + f1, z + f2, altar.getItem());
+				EntityItem item = new EntityItem(world, pos.getX() + f, pos.getY() + f1, pos.getZ() + f2, altar.getItem());
 				float f3 = 0.05F;
 				item.motionX = (float)rand.nextGaussian() * f3;
 				item.motionY = (float)rand.nextGaussian() * f3 + 0.2F;
@@ -187,7 +192,22 @@ public class BlockRitualAltar extends BlockContainer {
 				world.spawnEntityInWorld(item);
 			}
 
-		super.breakBlock(world, x, y, z, block, meta);
+		super.breakBlock(world, pos, state);
+	}
+
+	@Override
+	public IBlockState getStateFromMeta(int meta) {
+		return getDefaultState().withProperty(MATERIAL, EnumRitualMatType.byMetadata(meta));
+	}
+
+	@Override
+	public int getMetaFromState(IBlockState state) {
+		return ((EnumRitualMatType)state.getValue(MATERIAL)).getMeta();
+	}
+
+	@Override
+	protected BlockState createBlockState() {
+		return new BlockState(this, new IProperty[] { MATERIAL });
 	}
 
 	static {
@@ -199,5 +219,53 @@ public class BlockRitualAltar extends BlockContainer {
 		blockMeta.put(5, AbyssalCraft.abydreadbrick);
 		blockMeta.put(6, AbyssalCraft.ethaxiumbrick);
 		blockMeta.put(7, AbyssalCraft.darkethaxiumbrick);
+	}
+
+	public enum EnumRitualMatType implements IStringSerializable {
+		COBBLESTONE(0, "cobblestone"),
+		DARKSTONE_COBBLESTONE(1, "darkstone_cobblestone"),
+		ABYSSAL_STONE_BRICK(2, "abyssal_stone_brick"),
+		CORALIUM_STONE_BRICK(3, "coralium_stone_brick"),
+		DREADSTONE_BRICK(4, "dreadstone_brick"),
+		ABYSSALNITE_STONE_BRICK(5, "abyssalnite_stone_brick"),
+		ETHAXIUM_BRICK(6, "ethaxium_brick"),
+		DARK_ETHAXIUM_BRICK(7, "dark_ethaxium_brick");
+
+		private static final EnumRitualMatType[] META_LOOKUP = new EnumRitualMatType[values().length];
+
+		private int meta;
+		private String name;
+
+		private EnumRitualMatType(int meta, String name) {
+			this.meta = meta;
+			this.name = name;
+		}
+
+		public static EnumRitualMatType byMetadata(int meta)
+		{
+			if (meta < 0 || meta >= META_LOOKUP.length)
+				meta = 0;
+
+			return META_LOOKUP[meta];
+		}
+
+		@Override
+		public String getName() {
+			return name;
+		}
+
+		public int getMeta() {
+			return meta;
+		}
+
+		@Override
+		public String toString() {
+			return getName();
+		}
+
+		static {
+			for(EnumRitualMatType type : values())
+				META_LOOKUP[type.getMeta()] = type;
+		}
 	}
 }

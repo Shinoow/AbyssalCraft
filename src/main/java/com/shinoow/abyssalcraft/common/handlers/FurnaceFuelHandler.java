@@ -15,7 +15,7 @@ import net.minecraft.item.ItemStack;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
 
-import cpw.mods.fml.common.IFuelHandler;
+import net.minecraftforge.fml.common.IFuelHandler;
 
 public class FurnaceFuelHandler implements IFuelHandler {
 

@@ -13,16 +13,19 @@ package com.shinoow.abyssalcraft.common.blocks;
 
 import java.util.Random;
 
-import com.shinoow.abyssalcraft.common.structures.StructureHouse;
-import com.shinoow.abyssalcraft.common.util.EntityUtil;
-
-import cpw.mods.fml.client.FMLClientHandler;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
+import net.minecraft.util.BlockPos;
 import net.minecraft.util.ChatComponentText;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.client.FMLClientHandler;
+
+import com.shinoow.abyssalcraft.common.structures.StructureHouse;
+import com.shinoow.abyssalcraft.common.util.EntityUtil;
 
 public class BlockHouse extends Block {
 
@@ -31,7 +34,7 @@ public class BlockHouse extends Block {
 	public BlockHouse() {
 		super(Material.wood);
 		setBlockBounds(0.2F, 0.0F, 0.2F, 0.8F, 0.8F, 0.8F);
-		setBlockTextureName("abyssalcraft:Crate");
+		//		setBlockTextureName("abyssalcraft:Crate");
 	}
 
 	@Override
@@ -40,54 +43,59 @@ public class BlockHouse extends Block {
 	}
 
 	@Override
-	public boolean renderAsNormalBlock(){
+	public boolean isFullCube()
+	{
 		return false;
 	}
 
 	@Override
-	public boolean onBlockActivated(World par1World, int par2, int par3, int par4, EntityPlayer par5EntityPlayer, int par6, float par7, float par8, float par9)
+	public boolean onBlockActivated(World par1World, BlockPos pos, IBlockState state, EntityPlayer par5EntityPlayer, EnumFacing side, float par7, float par8, float par9)
 	{
 		if(EntityUtil.isPlayerCoralium(par5EntityPlayer)){
 			if(par1World.isRemote)
 				FMLClientHandler.instance().getClient().ingameGUI.getChatGUI().printChatMessage(new ChatComponentText("Whoppidy-doo, a house."));
 			if(!par1World.isRemote){
 				StructureHouse house = new StructureHouse();
-				house.generate(par1World, rand, par2, par3, par4);
-				par1World.getChunkFromBlockCoords(par2, par4).setChunkModified();
+				house.generate(par1World, rand, pos);
+				par1World.getChunkFromBlockCoords(pos).setChunkModified();
 			}
 		} else{
 			if(par1World.isRemote)
 				FMLClientHandler.instance().getClient().ingameGUI.getChatGUI().printChatMessage(new ChatComponentText("Whoppidy-doo, a house."));
 			if(!par1World.isRemote){
-				par1World.setBlock(par2, par3, par4, Blocks.air);
-				par1World.setBlock(par2, par3, par4 - 1, Blocks.stone_stairs, 3, 3);
+				int x = pos.getX();
+				int y = pos.getY();
+				int z = pos.getZ();
+				par1World.setBlockToAir(pos);
+				par1World.setBlockState(new BlockPos(x, y, z - 1), Blocks.stone_stairs.getStateFromMeta(3), 2);
 				for(int i = 0; i <= 4; i++)
 					for(int j = 0; j <= 4; j++)
-						par1World.setBlock(par2 -2 + i, par3, par4 - (2 + j), Blocks.cobblestone);
+						par1World.setBlockState(new BlockPos(x -2 + i, y, z - (2 + j)), Blocks.cobblestone.getDefaultState(), 2);
 				for(int i = 0; i <= 2; i++){
-					par1World.setBlock(par2 - 1, par3 + 1 + i, par4 - 2, Blocks.planks);
-					par1World.setBlock(par2 + 1, par3 + 1 + i, par4 - 2, Blocks.planks);
+					par1World.setBlockState(new BlockPos(x - 1, y + 1 + i, z - 2), Blocks.planks.getDefaultState(), 2);
+					par1World.setBlockState(new BlockPos(x + 1, y + 1 + i, z - 2), Blocks.planks.getDefaultState(), 2);
 					for(int j = 0; j <= 2; j++)
-						par1World.setBlock(par2 - 1 + j, par3 + 1 + i, par4 - 6, Blocks.planks);
+						par1World.setBlockState(new BlockPos(x - 1 + j, y + 1 + i, z - 6), Blocks.planks.getDefaultState(), 2);
 				} for(int i = 0; i <= 4; i++)
 					for(int j = 0; j <= 2; j++){
-						par1World.setBlock(par2 - 2, par3 + 1 + j, par4 - 2 - i, Blocks.planks);
-						par1World.setBlock(par2 + 2, par3 + 1 + j, par4 - 2 - i, Blocks.planks);
+						par1World.setBlockState(new BlockPos(x - 2, y + 1 + j, z - 2 - i), Blocks.planks.getDefaultState(), 2);
+						par1World.setBlockState(new BlockPos(x + 2, y + 1 + j, z - 2 - i), Blocks.planks.getDefaultState(), 2);
 					}
-				par1World.setBlock(par2, par3 + 3, par4 - 2, Blocks.planks);
+				par1World.setBlockState(new BlockPos(x, y + 3, z - 2), Blocks.planks.getDefaultState(), 2);
 				for(int i = 0; i <= 4; i++){
-					par1World.setBlock(par2 - 2, par3 + 4, par4 - 2 - i, Blocks.log);
-					par1World.setBlock(par2 + 2, par3 + 4, par4 - 2 - i, Blocks.log);
+					par1World.setBlockState(new BlockPos(x - 2, y + 4, z - 2 - i), Blocks.log.getDefaultState(), 2);
+					par1World.setBlockState(new BlockPos(x + 2, y + 4, z - 2 - i), Blocks.log.getDefaultState(), 2);
 				} for(int i = 0; i <= 2; i++)
 					for(int j = 0; j <= 1; j++)
-						par1World.setBlock(par2 - 1 + i, par3 + 4, par4 - (2 + j*4), Blocks.log);
+						par1World.setBlockState(new BlockPos(x - 1 + i, y + 4, z - (2 + j*4)), Blocks.log.getDefaultState(), 2);
 				for(int i = 0; i <= 2; i++)
 					for(int j = 0; j <= 2; j++)
-						par1World.setBlock(par2 -1 + i, par3 + 4, par4 - (3 + j), Blocks.planks); for(int i = 0; i <= 2; i++)
-							for(int j = 0; j <= 1; j++){
-								par1World.setBlock(par2 - 2, par3 + 1 + i, par4 - (2 + j*4), Blocks.cobblestone);
-								par1World.setBlock(par2 + 2, par3 + 1 + i, par4 - (2 + j*4), Blocks.cobblestone);
-							}
+						par1World.setBlockState(new BlockPos(x -1 + i, y + 4, z - (3 + j)), Blocks.planks.getDefaultState(), 2);
+				for(int i = 0; i <= 2; i++)
+					for(int j = 0; j <= 1; j++){
+						par1World.setBlockState(new BlockPos(x - 2, y + 1 + i, z - (2 + j*4)), Blocks.cobblestone.getDefaultState(), 2);
+						par1World.setBlockState(new BlockPos(x + 2, y + 1 + i, z - (2 + j*4)), Blocks.cobblestone.getDefaultState(), 2);
+					}
 			}
 		}
 		return false;

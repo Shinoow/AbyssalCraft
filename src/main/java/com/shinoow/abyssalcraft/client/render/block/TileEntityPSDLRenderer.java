@@ -11,51 +11,42 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.client.render.block;
 
-import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.OpenGlHelper;
-import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.world.World;
-import net.minecraftforge.client.model.AdvancedModelLoader;
-import net.minecraftforge.client.model.IModelCustom;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import org.lwjgl.opengl.GL11;
-
-import com.shinoow.abyssalcraft.common.blocks.tile.TileEntityPSDL;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
 public class TileEntityPSDLRenderer extends TileEntitySpecialRenderer {
 
-	IModelCustom model = AdvancedModelLoader.loadModel(modelresource);
+	//	IModelCustom model = AdvancedModelLoader.loadModel(modelresource);
 	private static final ResourceLocation modelresource = new ResourceLocation("abyssalcraft:models/PSDL.obj");
 	private static final ResourceLocation Resourcelocation = new ResourceLocation("abyssalcraft:textures/model/blocks/PSDL.png");
 
 	@Override
-	public void renderTileEntityAt(TileEntity te, double x, double y, double z, float scale) {
+	public void renderTileEntityAt(TileEntity te, double x, double y, double z, float partialTicks, int destroyStage) {
 
 		GL11.glPushMatrix();
 		GL11.glTranslated(x + 0.5D, y, z + 0.75D);
 
 		Minecraft.getMinecraft().renderEngine.bindTexture(Resourcelocation);
-		model.renderAll();
+		//		model.renderAll();
 
 		GL11.glPopMatrix();
 	}
 
-	public void renderBlockPSDL(TileEntityPSDL tl, World world, int i, int j, int k, Block block) {
-		Tessellator tessellator = Tessellator.instance;
-
-		float f = block.getLightOpacity(world, i, j, k);
-		int l = world.getLightBrightnessForSkyBlocks(i, j, k, 0);
-		int l1 = l % 65536;
-		int l2 = l / 65536;
-		tessellator.setColorOpaque_F(f, f, f);
-		OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, l1, l2);
-	}
+	//	public void renderBlockPSDL(TileEntityPSDL tl, World world, int i, int j, int k, Block block) {
+	//		Tessellator tessellator = Tessellator.instance;
+	//
+	//		float f = block.getLightOpacity(world, i, j, k);
+	//		int l = world.getLightBrightnessForSkyBlocks(i, j, k, 0);
+	//		int l1 = l % 65536;
+	//		int l2 = l / 65536;
+	//		tessellator.setColorOpaque_F(f, f, f);
+	//		OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, l1, l2);
+	//	}
 }

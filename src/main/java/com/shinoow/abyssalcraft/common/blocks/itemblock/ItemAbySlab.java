@@ -23,7 +23,7 @@ import com.shinoow.abyssalcraft.AbyssalCraft;
 public class ItemAbySlab extends ItemSlab {
 
 	public ItemAbySlab(Block block) {
-		super(block, (BlockSlab)AbyssalCraft.abyslab1, (BlockSlab)AbyssalCraft.abyslab2, false);
+		super(block, (BlockSlab)AbyssalCraft.abyslab1, (BlockSlab)AbyssalCraft.abyslab2);
 		setMaxDamage(0);
 		setHasSubtypes(true);
 	}

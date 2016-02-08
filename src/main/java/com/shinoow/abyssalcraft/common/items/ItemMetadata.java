@@ -13,42 +13,36 @@ package com.shinoow.abyssalcraft.common.items;
 
 import java.util.List;
 
-import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.IIcon;
-import net.minecraft.util.MathHelper;
 import net.minecraft.util.StatCollector;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ItemMetadata extends ItemACBasic {
 
 	private String[] names;
 
-	@SideOnly(Side.CLIENT)
-	private IIcon[] icons;
-
-	private boolean moreIcons;
+	//	@SideOnly(Side.CLIENT)
+	//	private IIcon[] icons;
 
 	public ItemMetadata(String name, boolean icons, String...names){
 		super(name);
 		setMaxDamage(0);
 		setHasSubtypes(true);
 		this.names = names;
-		moreIcons = icons;
 	}
 
-	@Override
-	@SideOnly(Side.CLIENT)
-	public IIcon getIconFromDamage(int i)
-	{
-		if(moreIcons){
-			int j = MathHelper.clamp_int(i, 0, names.length);
-			return icons[j];
-		} else return super.getIconFromDamage(i);
-	}
+	//	@Override
+	//	@SideOnly(Side.CLIENT)
+	//	public IIcon getIconFromDamage(int i)
+	//	{
+	//		if(moreIcons){
+	//			int j = MathHelper.clamp_int(i, 0, names.length);
+	//			return icons[j];
+	//		} else return super.getIconFromDamage(i);
+	//	}
 
 	@Override
 	public int getMetadata(int meta) {
@@ -63,17 +57,17 @@ public class ItemMetadata extends ItemACBasic {
 			par3List.add(new ItemStack(par1Item, 1, i));
 	}
 
-	@Override
-	@SideOnly(Side.CLIENT)
-	public void registerIcons(IIconRegister par1IconRegister)
-	{
-		if(moreIcons){
-			icons = new IIcon[names.length];
-			for(int i = 0; i < names.length; i++)
-				icons[i] = par1IconRegister.registerIcon(getIconString() + "_" + names[i]);
-		}
-		else super.registerIcons(par1IconRegister);
-	}
+	//	@Override
+	//	@SideOnly(Side.CLIENT)
+	//	public void registerIcons(IIconRegister par1IconRegister)
+	//	{
+	//		if(moreIcons){
+	//			icons = new IIcon[names.length];
+	//			for(int i = 0; i < names.length; i++)
+	//				icons[i] = par1IconRegister.registerIcon(getIconString() + "_" + names[i]);
+	//		}
+	//		else super.registerIcons(par1IconRegister);
+	//	}
 
 	@Override
 	public String getItemStackDisplayName(ItemStack par1ItemStack) {

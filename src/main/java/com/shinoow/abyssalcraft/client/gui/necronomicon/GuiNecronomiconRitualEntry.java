@@ -401,7 +401,10 @@ public class GuiNecronomiconRitualEntry extends GuiNecronomicon {
 	private ItemStack tooltipStack;
 	public void renderItem(int xPos, int yPos, ItemStack stack, int mx, int my)
 	{
-		RenderItem render = new RenderItem();
+		if(stack != null && stack.getItemDamage() == OreDictionary.WILDCARD_VALUE)
+			stack.setItemDamage(0);
+
+		RenderItem render = Minecraft.getMinecraft().getRenderItem();
 		if(mx > xPos && mx < xPos+16 && my > yPos && my < yPos+16)
 			tooltipStack = stack;
 
@@ -411,8 +414,8 @@ public class GuiNecronomiconRitualEntry extends GuiNecronomicon {
 		RenderHelper.enableGUIStandardItemLighting();
 		GL11.glEnable(GL12.GL_RESCALE_NORMAL);
 		GL11.glEnable(GL11.GL_DEPTH_TEST);
-		render.renderItemAndEffectIntoGUI(Minecraft.getMinecraft().fontRenderer, Minecraft.getMinecraft().getTextureManager(), stack, xPos, yPos);
-		render.renderItemOverlayIntoGUI(Minecraft.getMinecraft().fontRenderer, Minecraft.getMinecraft().getTextureManager(), stack, xPos, yPos);
+		render.renderItemAndEffectIntoGUI(stack, xPos, yPos);
+		render.renderItemOverlayIntoGUI(Minecraft.getMinecraft().fontRendererObj, stack, xPos, yPos, null);
 		RenderHelper.disableStandardItemLighting();
 		GL11.glPopMatrix();
 

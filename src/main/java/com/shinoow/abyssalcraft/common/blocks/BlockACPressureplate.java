@@ -11,85 +11,49 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.common.blocks;
 
-import java.util.Iterator;
 import java.util.List;
 
-import net.minecraft.block.Block;
 import net.minecraft.block.BlockBasePressurePlate;
-import net.minecraft.block.BlockFence;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.block.properties.IProperty;
+import net.minecraft.block.properties.PropertyBool;
+import net.minecraft.block.state.BlockState;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;
-
-import com.shinoow.abyssalcraft.AbyssalCraft;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockACPressureplate extends BlockBasePressurePlate
 {
-	/** The mob type that can trigger this pressure plate. */
-	private BlockACPressureplate.Sensitivity triggerMobType;
+	public static final PropertyBool POWERED = PropertyBool.create("powered");
+	private BlockACPressureplate.Sensitivity sensitivity;
 
-	private String pressurePlateIconName;
 
 	public BlockACPressureplate(String par2Str, Material par3Material, BlockACPressureplate.Sensitivity par4EnumMobType, String par5, int par6)
 	{
-		super(par2Str, par3Material);
-		triggerMobType = par4EnumMobType;
-		pressurePlateIconName = par2Str;
+		super(par3Material);
+		sensitivity = par4EnumMobType;
 		this.setHarvestLevel(par5, par6);
 	}
 
 	public BlockACPressureplate(String par2Str, Material par3Material, BlockACPressureplate.Sensitivity par4EnumMobType)
 	{
-		super(par2Str, par3Material);
-		triggerMobType = par4EnumMobType;
-		pressurePlateIconName = par2Str;
-	}
-
-	/**
-	 * Argument is weight (0-15). Return the metadata to be set because of it.
-	 */
-	@Override
-	protected int func_150066_d(int par1)
-	{
-		return par1 > 0 ? 1 : 0;
-	}
-
-	/**
-	 * Argument is metadata. Returns power level (0-15)
-	 */
-	@Override
-	protected int func_150060_c(int par1)
-	{
-		return par1 == 1 ? 15 : 0;
+		super(par3Material);
+		sensitivity = par4EnumMobType;
 	}
 
 	@Override
-	public boolean canPlaceBlockAt(World world, int x, int y, int z)
+	protected int getRedstoneStrength(IBlockState state)
 	{
-		return World.doesBlockHaveSolidTopSurface(world, x, y - 1, z) || BlockFence.func_149825_a(world.getBlock(x, y - 1, z))
-				|| BlockACFence.func_149825_a(world.getBlock(x, y - 1, z));
+		return state.getValue(POWERED).booleanValue() ? 15 : 0;
 	}
 
 	@Override
-	public void onNeighborBlockChange(World world, int x, int y, int z, Block block)
+	protected IBlockState setRedstoneStrength(IBlockState state, int strength)
 	{
-		boolean flag = false;
-
-		if (!World.doesBlockHaveSolidTopSurface(world, x, y - 1, z) && !BlockFence.func_149825_a(world.getBlock(x, y - 1, z))
-				&& !BlockACFence.func_149825_a(world.getBlock(x, y - 1, z)))
-			flag = true;
-
-		if (flag)
-		{
-			this.dropBlockAsItem(world, x, y, z, world.getBlockMetadata(x, y, z), 0);
-			world.setBlockToAir(x, y, z);
-		}
+		return state.withProperty(POWERED, Boolean.valueOf(strength > 0));
 	}
 
 	/**
@@ -98,46 +62,58 @@ public class BlockACPressureplate extends BlockBasePressurePlate
 	 */
 	@Override
 	@SuppressWarnings("rawtypes")
-	protected int func_150065_e(World p_150065_1_, int p_150065_2_, int p_150065_3_, int p_150065_4_)
+	protected int computeRedstoneStrength(World worldIn, BlockPos pos)
 	{
-		List list = null;
+		AxisAlignedBB axisalignedbb = getSensitiveAABB(pos);
+		List <? extends Entity > list;
 
-		if (triggerMobType == BlockACPressureplate.Sensitivity.everything)
-			list = p_150065_1_.getEntitiesWithinAABBExcludingEntity((Entity)null, func_150061_a(p_150065_2_, p_150065_3_, p_150065_4_));
-
-		if (triggerMobType == BlockACPressureplate.Sensitivity.mobs)
-			list = p_150065_1_.getEntitiesWithinAABB(EntityLivingBase.class, func_150061_a(p_150065_2_, p_150065_3_, p_150065_4_));
-
-		if (triggerMobType == BlockACPressureplate.Sensitivity.players)
-			list = p_150065_1_.getEntitiesWithinAABB(EntityPlayer.class, func_150061_a(p_150065_2_, p_150065_3_, p_150065_4_));
-
-		if (list != null && !list.isEmpty())
+		switch (sensitivity)
 		{
-			Iterator iterator = list.iterator();
+		case EVERYTHING:
+			list = worldIn.getEntitiesWithinAABBExcludingEntity((Entity)null, axisalignedbb);
+			break;
+		case MOBS:
+			list = worldIn.<Entity>getEntitiesWithinAABB(EntityLivingBase.class, axisalignedbb);
+			break;
+		default:
+			return 0;
+		}
 
-			while (iterator.hasNext())
-			{
-				Entity entity = (Entity)iterator.next();
-
+		if (!list.isEmpty())
+			for (Entity entity : list)
 				if (!entity.doesEntityNotTriggerPressurePlate())
 					return 15;
-			}
-		}
 
 		return 0;
 	}
 
-	public static enum Sensitivity
-	{
-		everything,
-		mobs,
-		players;
-	}
+	/**
+	 * Convert the given metadata into a BlockState for this Block
+	 */
 	@Override
-	@SideOnly(Side.CLIENT)
-	public void registerBlockIcons(IIconRegister par1IconRegister)
+	public IBlockState getStateFromMeta(int meta)
 	{
-		blockIcon = par1IconRegister.registerIcon(AbyssalCraft.modid + ":" + pressurePlateIconName);
+		return getDefaultState().withProperty(POWERED, Boolean.valueOf(meta == 1));
 	}
 
+	/**
+	 * Convert the BlockState into the correct metadata value
+	 */
+	@Override
+	public int getMetaFromState(IBlockState state)
+	{
+		return state.getValue(POWERED).booleanValue() ? 1 : 0;
+	}
+
+	@Override
+	protected BlockState createBlockState()
+	{
+		return new BlockState(this, new IProperty[] {POWERED});
+	}
+
+	public static enum Sensitivity
+	{
+		EVERYTHING,
+		MOBS;
+	}
 }

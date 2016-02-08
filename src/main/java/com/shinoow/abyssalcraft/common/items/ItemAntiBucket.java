@@ -13,8 +13,11 @@ package com.shinoow.abyssalcraft.common.items;
 
 import java.util.List;
 
+import com.shinoow.abyssalcraft.AbyssalCraft;
+
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Items;
 import net.minecraft.item.ItemBucket;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.StatCollector;
@@ -24,6 +27,11 @@ public class ItemAntiBucket extends ItemBucket{
 	public ItemAntiBucket(Block par1){
 		super(par1);
 		setMaxStackSize(1);
+		//		GameRegistry.registerItem(this, "antibucket");
+		setUnlocalizedName("antibucket");
+		setCreativeTab(AbyssalCraft.tabItems);
+		setContainerItem(Items.bucket);
+		//		setTextureName(modid + ":" + "Antibucket")
 	}
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })

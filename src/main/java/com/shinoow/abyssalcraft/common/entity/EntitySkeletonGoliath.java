@@ -29,6 +29,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.BlockPos;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
@@ -51,7 +52,7 @@ public class EntitySkeletonGoliath extends EntityMob {
 		tasks.addTask(7, new EntityAIWatchClosest(this, EntitySkeleton.class, 8.0F));
 		tasks.addTask(7, new EntityAIWatchClosest(this, EntitySkeletonGoliath.class, 8.0F));
 		targetTasks.addTask(1, new EntityAIHurtByTarget(this, false));
-		targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityPlayer.class, 0, true));
+		targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityPlayer.class, true));
 	}
 
 	@Override
@@ -69,12 +70,6 @@ public class EntitySkeletonGoliath extends EntityMob {
 			getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(100.0D);
 			getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(20.0D);
 		}
-	}
-
-	@Override
-	protected boolean isAIEnabled()
-	{
-		return true;
 	}
 
 	@Override
@@ -102,7 +97,7 @@ public class EntitySkeletonGoliath extends EntityMob {
 	}
 
 	@Override
-	protected void func_145780_a(int par1, int par2, int par3, Block par4)
+	protected void playStepSound(BlockPos pos, Block par4)
 	{
 		playSound("mob.skeleton.step", 0.15F, 1.0F);
 	}
@@ -120,7 +115,7 @@ public class EntitySkeletonGoliath extends EntityMob {
 	}
 
 	@Override
-	protected void dropRareDrop(int par1)
+	protected void addRandomDrop()
 	{
 		dropItem(AbyssalCraft.cudgel, 1);
 	}
@@ -134,11 +129,11 @@ public class EntitySkeletonGoliath extends EntityMob {
 	@Override
 	public void onLivingUpdate()
 	{
-		if (worldObj.isDaytime() && !worldObj.isRemote && worldObj.provider.dimensionId != AbyssalCraft.configDimId1)
+		if (worldObj.isDaytime() && !worldObj.isRemote && worldObj.provider.getDimensionId() != AbyssalCraft.configDimId1)
 		{
 			float f = getBrightness(1.0F);
 
-			if (f > 0.5F && rand.nextFloat() * 30.0F < (f - 0.4F) * 2.0F && worldObj.canBlockSeeTheSky(MathHelper.floor_double(posX), MathHelper.floor_double(posY), MathHelper.floor_double(posZ)))
+			if (f > 0.5F && rand.nextFloat() * 30.0F < (f - 0.4F) * 2.0F && worldObj.canSeeSky(new BlockPos(MathHelper.floor_double(posX), MathHelper.floor_double(posY), MathHelper.floor_double(posZ))))
 			{
 				boolean flag = true;
 

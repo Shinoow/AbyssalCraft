@@ -79,20 +79,22 @@ public class ReputationProps implements IExtendedEntityProperties
 
 		NBTTagCompound properties = (NBTTagCompound) compound.getTag(EXT_PROP_NAME);
 
-		if(properties.hasKey(DeityType.CTHULHU.getName()))
-			cthulhuRep = properties.getInteger(DeityType.CTHULHU.getName());
-		if(properties.hasKey(DeityType.HASTUR.getName()))
-			hasturRep = properties.getInteger(DeityType.HASTUR.getName());
-		if(properties.hasKey(DeityType.JZAHAR.getName()))
-			jzaharRep = properties.getInteger(DeityType.JZAHAR.getName());
-		if(properties.hasKey(DeityType.AZATHOTH.getName()))
-			azathothRep = properties.getInteger(DeityType.AZATHOTH.getName());
-		if(properties.hasKey(DeityType.NYARLATHOTEP.getName()))
-			nyarlathotepRep = properties.getInteger(DeityType.NYARLATHOTEP.getName());
-		if(properties.hasKey(DeityType.SHUBNIGGURATH.getName()))
-			shubniggurathRep = properties.getInteger(DeityType.SHUBNIGGURATH.getName());
-		if(properties.hasKey(DeityType.YOGSOTHOTH.getName()))
-			yogsothothRep = properties.getInteger(DeityType.YOGSOTHOTH.getName());
+		if(properties != null){
+			if(properties.hasKey(DeityType.CTHULHU.getName()))
+				cthulhuRep = properties.getInteger(DeityType.CTHULHU.getName());
+			if(properties.hasKey(DeityType.HASTUR.getName()))
+				hasturRep = properties.getInteger(DeityType.HASTUR.getName());
+			if(properties.hasKey(DeityType.JZAHAR.getName()))
+				jzaharRep = properties.getInteger(DeityType.JZAHAR.getName());
+			if(properties.hasKey(DeityType.AZATHOTH.getName()))
+				azathothRep = properties.getInteger(DeityType.AZATHOTH.getName());
+			if(properties.hasKey(DeityType.NYARLATHOTEP.getName()))
+				nyarlathotepRep = properties.getInteger(DeityType.NYARLATHOTEP.getName());
+			if(properties.hasKey(DeityType.SHUBNIGGURATH.getName()))
+				shubniggurathRep = properties.getInteger(DeityType.SHUBNIGGURATH.getName());
+			if(properties.hasKey(DeityType.YOGSOTHOTH.getName()))
+				yogsothothRep = properties.getInteger(DeityType.YOGSOTHOTH.getName());
+		}
 	}
 
 	@Override

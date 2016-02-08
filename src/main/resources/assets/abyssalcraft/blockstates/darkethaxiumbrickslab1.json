@@ -1,0 +1,14 @@
+{
+	"forge_marker": 1,
+	"defaults": {
+		"textures" : {
+			"bottom": "abyssalcraft:blocks/deb",
+			"top": "abyssalcraft:blocks/deb",
+			"side": "abyssalcraft:blocks/deb"
+		}
+	},
+	"variants": {
+		"half=bottom,variant=false": { "model": "abyssalcraft:darkethaxiumbrickslab1" },
+		"half=top,variant=false": { "model": "upper_slab" }
+	}
+}

@@ -1,0 +1,6 @@
+{
+	"variants": {
+		"type=normal": { "model": "abyssalcraft:darkethaxiumbrick_0" },
+		"type=chiseled": { "model": "abyssalcraft:darkethaxiumbrick_1" }
+	}
+}

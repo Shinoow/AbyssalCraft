@@ -20,7 +20,7 @@ import com.shinoow.abyssalcraft.AbyssalCraft;
 public class ItemDarkcobbleSlab extends ItemSlab {
 
 	public ItemDarkcobbleSlab(Block block) {
-		super(block, (BlockSlab)AbyssalCraft.Darkcobbleslab1, (BlockSlab)AbyssalCraft.Darkcobbleslab2, false);
+		super(block, (BlockSlab)AbyssalCraft.Darkcobbleslab1, (BlockSlab)AbyssalCraft.Darkcobbleslab2);
 		setMaxDamage(0);
 		setHasSubtypes(true);
 	}

@@ -1,0 +1,61 @@
+{
+    "__comment": "Model generated using MrCrayfish's Model Creator (http://mrcrayfish.com/modelcreator/)",
+    "textures": {
+        "0": "abyssalcraft:items/katana"
+    },
+    "elements": [
+        {
+            "name": "handle",
+            "from": [ 7.0, 9.0, 4.0 ], 
+            "to": [ 9.0, 11.0, 11.0 ], 
+            "faces": {
+                "north": { "texture": "#0", "uv": [ 7.0, 0.0, 9.0, 2.0 ] },
+                "east": { "texture": "#0", "uv": [ 0.0, 2.0, 7.0, 4.0 ] },
+                "south": { "texture": "#0", "uv": [ 7.0, 0.0, 3.0, 2.0 ] },
+                "west": { "texture": "#0", "uv": [ 0.0, 0.0, 7.0, 2.0 ] },
+                "up": { "texture": "#0", "uv": [ 0.0, 4.0, 2.0, 11.0 ] },
+                "down": { "texture": "#0", "uv": [ 2.0, 4.0, 4.0, 11.0 ] }
+            }
+        },
+        {
+            "name": "tsuba",
+            "from": [ 6.0, 8.0, 11.0 ], 
+            "to": [ 10.0, 12.0, 12.0 ], 
+            "faces": {
+                "north": { "texture": "#0", "uv": [ 10.0, 5.0, 14.0, 9.0 ] },
+                "east": { "texture": "#0", "uv": [ 4.0, 5.0, 5.0, 9.0 ] },
+                "south": { "texture": "#0", "uv": [ 5.0, 5.0, 9.0, 9.0 ] },
+                "west": { "texture": "#0", "uv": [ 9.0, 5.0, 10.0, 9.0 ] },
+                "up": { "texture": "#0", "uv": [ 5.0, 4.0, 9.0, 5.0 ] },
+                "down": { "texture": "#0", "uv": [ 9.0, 4.0, 13.0, 5.0 ] }
+            }
+        }
+	],
+	"display": {
+        "thirdperson": {
+            "rotation": [ 0, 180, -180 ],
+            "translation": [ -0.2, 1.5, 0 ],
+            "scale": [ 1.1, 1.1, 1.1 ]
+        },
+        "firstperson": {
+            "rotation": [ -90, 125, 0 ],
+            "translation": [ -0.1, 1.5, 0 ],
+            "scale": [ 1.1, 1.1, 1.1 ]
+        },
+		"ground": {
+			"rotation": [ 0, 90, 90 ],
+			"translation": [ 0.5, -0.5, 0.1 ],
+			"scale": [ 1.5, 1.5, 1.5 ]
+		},
+		"gui": {
+			"rotation": [ 0, 180, 80 ],
+			"translation": [ 3.0, 2.0, 0 ],
+			"scale": [ 1.0, 1.0, 1.0 ]
+		},
+		"fixed": {
+			"rotation": [ 0, 90, 0 ],
+			"translation": [ 0.5, -0.5, 0.1 ],
+			"scale": [ 1.5, 1.5, 1.5 ]
+		}
+    }
+}

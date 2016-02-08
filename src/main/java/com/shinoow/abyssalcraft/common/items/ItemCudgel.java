@@ -17,8 +17,8 @@ import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-
 import com.google.common.collect.Multimap;
+import com.shinoow.abyssalcraft.AbyssalCraft;
 
 public class ItemCudgel extends Item {
 
@@ -26,6 +26,10 @@ public class ItemCudgel extends Item {
 		super();
 		setMaxDamage(2000);
 		setMaxStackSize(1);
+		//		GameRegistry.registerItem(this, "cudgel");
+		setUnlocalizedName("cudgel");
+		setCreativeTab(AbyssalCraft.tabCombat);
+		setFull3D();
 	}
 
 	@Override
@@ -45,7 +49,7 @@ public class ItemCudgel extends Item {
 	@SuppressWarnings({ "rawtypes", "unchecked", "deprecation" })
 	public Multimap getItemAttributeModifiers() {
 		Multimap multimap = super.getItemAttributeModifiers();
-		multimap.put(SharedMonsterAttributes.attackDamage.getAttributeUnlocalizedName(), new AttributeModifier(field_111210_e, "Weapon modifier", 20, 0));
+		multimap.put(SharedMonsterAttributes.attackDamage.getAttributeUnlocalizedName(), new AttributeModifier(itemModifierUUID, "Weapon modifier", 20, 0));
 		return multimap;
 	}
 }

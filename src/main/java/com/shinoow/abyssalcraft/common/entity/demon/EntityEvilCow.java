@@ -27,6 +27,8 @@ import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
+import net.minecraft.pathfinding.PathNavigateGround;
+import net.minecraft.util.BlockPos;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
@@ -36,7 +38,7 @@ public class EntityEvilCow extends EntityMob {
 	public EntityEvilCow(World par1World) {
 		super(par1World);
 		setSize(0.9F, 1.3F);
-		getNavigator().setAvoidsWater(true);
+		((PathNavigateGround)getNavigator()).setAvoidsWater(true);
 		isImmuneToFire = true;
 		double var2 = 0.35D;
 		tasks.addTask(0, new EntityAISwimming(this));
@@ -45,7 +47,7 @@ public class EntityEvilCow extends EntityMob {
 		tasks.addTask(4, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
 		tasks.addTask(4, new EntityAILookIdle(this));
 		targetTasks.addTask(1, new EntityAIHurtByTarget(this, false));
-		targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityPlayer.class, 0, true));
+		targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityPlayer.class, true));
 	}
 
 	@Override
@@ -60,15 +62,9 @@ public class EntityEvilCow extends EntityMob {
 	}
 
 	@Override
-	public String getCommandSenderName()
+	public String getName()
 	{
 		return StatCollector.translateToLocal("entity.Cow.name");
-	}
-
-	@Override
-	public boolean isAIEnabled()
-	{
-		return true;
 	}
 
 	@Override
@@ -90,7 +86,7 @@ public class EntityEvilCow extends EntityMob {
 	}
 
 	@Override
-	protected void func_145780_a(int p_145780_1_, int p_145780_2_, int p_145780_3_, Block p_145780_4_)
+	protected void playStepSound(BlockPos pos, Block p_145780_4_)
 	{
 		playSound("mob.cow.step", 0.15F, 1.0F);
 	}
@@ -112,7 +108,7 @@ public class EntityEvilCow extends EntityMob {
 				EntityDemonCow demoncow = new EntityDemonCow(worldObj);
 				demoncow.copyLocationAndAnglesFrom(this);
 				worldObj.removeEntity(this);
-				demoncow.onSpawnWithEgg((IEntityLivingData)null);
+				demoncow.onInitialSpawn(worldObj.getDifficultyForLocation(new BlockPos(posX, posY, posZ)), (IEntityLivingData)null);
 				worldObj.spawnEntityInWorld(demoncow);
 			}
 	}

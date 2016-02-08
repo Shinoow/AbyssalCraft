@@ -27,6 +27,7 @@ import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.potion.PotionEffect;
+import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
@@ -45,7 +46,7 @@ public class EntityDreadling extends EntityMob implements IDreadEntity
 		tasks.addTask(5, new EntityAILookIdle(this));
 		tasks.addTask(5, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
 		targetTasks.addTask(1, new EntityAIHurtByTarget(this, false));
-		targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityPlayer.class, 0, true));
+		targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityPlayer.class, true));
 		isImmuneToFire = true;
 	}
 
@@ -61,12 +62,6 @@ public class EntityDreadling extends EntityMob implements IDreadEntity
 			getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(30.0D);
 			getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(6.0D);
 		}
-	}
-
-	@Override
-	protected boolean isAIEnabled()
-	{
-		return true;
 	}
 
 	@Override
@@ -103,7 +98,7 @@ public class EntityDreadling extends EntityMob implements IDreadEntity
 	}
 
 	@Override
-	protected void func_145780_a(int par1, int par2, int par3, Block par4)
+	protected void playStepSound(BlockPos pos, Block par4)
 	{
 		worldObj.playSoundAtEntity(this, "mob.zombie.step", 0.15F, 1.0F);
 	}

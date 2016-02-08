@@ -1,0 +1,6 @@
+{
+	"variants": {
+		"variant=false": { "model": "abyssalcraft:dltslab2" },
+		"variant=true": { "model": "abyssalcraft:dltslab2" }
+	}
+}

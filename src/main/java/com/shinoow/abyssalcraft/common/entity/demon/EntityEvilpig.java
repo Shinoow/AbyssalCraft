@@ -27,6 +27,8 @@ import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
+import net.minecraft.pathfinding.PathNavigateGround;
+import net.minecraft.util.BlockPos;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
@@ -37,7 +39,7 @@ public class EntityEvilpig extends EntityMob {
 	{
 		super(par1World);
 		setSize(0.9F, 0.9F);
-		getNavigator().setAvoidsWater(true);
+		((PathNavigateGround)getNavigator()).setAvoidsWater(true);
 		isImmuneToFire = true;
 		double var2 = 0.35D;
 		tasks.addTask(0, new EntityAISwimming(this));
@@ -46,7 +48,7 @@ public class EntityEvilpig extends EntityMob {
 		tasks.addTask(4, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
 		tasks.addTask(4, new EntityAILookIdle(this));
 		targetTasks.addTask(1, new EntityAIHurtByTarget(this, false));
-		targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityPlayer.class, 0, true));
+		targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityPlayer.class, true));
 	}
 
 	@Override
@@ -60,15 +62,9 @@ public class EntityEvilpig extends EntityMob {
 	}
 
 	@Override
-	public String getCommandSenderName()
+	public String getName()
 	{
 		return StatCollector.translateToLocal("entity.Pig.name");
-	}
-
-	@Override
-	public boolean isAIEnabled()
-	{
-		return true;
 	}
 
 	@Override
@@ -90,7 +86,7 @@ public class EntityEvilpig extends EntityMob {
 	}
 
 	@Override
-	protected void func_145780_a(int par1, int par2, int par3, Block par4)
+	protected void playStepSound(BlockPos pos, Block par4)
 	{
 		playSound("mob.pig.step", 0.15F, 1.0F);
 	}
@@ -106,7 +102,7 @@ public class EntityEvilpig extends EntityMob {
 				EntityDemonPig demonpig = new EntityDemonPig(worldObj);
 				demonpig.copyLocationAndAnglesFrom(this);
 				worldObj.removeEntity(this);
-				demonpig.onSpawnWithEgg((IEntityLivingData)null);
+				demonpig.onInitialSpawn(worldObj.getDifficultyForLocation(new BlockPos(posX, posY, posZ)), (IEntityLivingData)null);
 				worldObj.spawnEntityInWorld(demonpig);
 			}
 	}

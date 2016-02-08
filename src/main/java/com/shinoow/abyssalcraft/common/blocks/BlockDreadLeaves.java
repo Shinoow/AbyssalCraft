@@ -17,146 +17,157 @@ import java.util.Random;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLeavesBase;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.properties.IProperty;
+import net.minecraft.block.properties.PropertyBool;
+import net.minecraft.block.state.BlockState;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.texture.IIconRegister;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.IIcon;
+import net.minecraft.util.BlockPos;
+import net.minecraft.util.EnumParticleTypes;
+import net.minecraft.util.EnumWorldBlockLayer;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.IShearable;
+import net.minecraftforge.fml.common.FMLCommonHandler;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-
 public class BlockDreadLeaves extends BlockLeavesBase implements IShearable {
 
-	int[] adjacentTreeBlocks;
+	public static final PropertyBool DECAYABLE = PropertyBool.create("decayable");
+	public static final PropertyBool CHECK_DECAY = PropertyBool.create("check_decay");
+	int[] surroundings;
 	@SideOnly(Side.CLIENT)
-	private int iconType;
-	public static final String[] textureNames = new String[] {"DrT_L","DrT_L_opaque"};
-	private IIcon[][] iconArray = new IIcon[2][];
+	protected int iconIndex;
+	@SideOnly(Side.CLIENT)
+	protected boolean isTransparent;
 
-	public BlockDreadLeaves(boolean par3) {
-		super(Material.leaves , par3);
+	public BlockDreadLeaves() {
+		super(Material.leaves , false);
 		setTickRandomly(true);
 		setCreativeTab(AbyssalCraft.tabDecoration);
+		setDefaultState(blockState.getBaseState().withProperty(CHECK_DECAY, Boolean.valueOf(true)).withProperty(DECAYABLE, Boolean.valueOf(true)));
+
+		if(FMLCommonHandler.instance().getEffectiveSide().equals(Side.CLIENT))
+			setGraphicsLevel(Minecraft.getMinecraft().isFancyGraphicsEnabled());
 	}
 
 	@Override
-	public void breakBlock(World par1World, int par2, int par3, int par4, Block par5, int par6)
+	public void breakBlock(World worldIn, BlockPos pos, IBlockState state)
 	{
-		byte var7 = 1;
-		int var8 = var7 + 1;
+		int i = 1;
+		int j = i + 1;
+		int k = pos.getX();
+		int l = pos.getY();
+		int i1 = pos.getZ();
 
-		if (par1World.checkChunksExist(par2 - var8, par3 - var8, par4 - var8, par2 + var8, par3 + var8, par4 + var8))
-			for (int var9 = -var7; var9 <= var7; ++var9)
-				for (int var10 = -var7; var10 <= var7; ++var10)
-					for (int var11 = -var7; var11 <= var7; ++var11)
+		if (worldIn.isAreaLoaded(new BlockPos(k - j, l - j, i1 - j), new BlockPos(k + j, l + j, i1 + j)))
+			for (int j1 = -i; j1 <= i; ++j1)
+				for (int k1 = -i; k1 <= i; ++k1)
+					for (int l1 = -i; l1 <= i; ++l1)
 					{
-						Block var12 = par1World.getBlock(par2 + var9, par3 + var10, par4 + var11);
+						BlockPos blockpos = pos.add(j1, k1, l1);
+						IBlockState iblockstate = worldIn.getBlockState(blockpos);
 
-						if (var12.isLeaves(par1World, par2 +var9, par3 +var10, par4 +var11))
-							var12.beginLeavesDecay(par1World, par2 + var9, par3 + var10, par4 + var11);
+						if (iblockstate.getBlock().isLeaves(worldIn, blockpos))
+							iblockstate.getBlock().beginLeavesDecay(worldIn, blockpos);
 					}
 	}
 
 	@Override
-	public void updateTick(World par1World, int par2, int par3, int par4, Random par5Random)
+	public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand)
 	{
-		if (!par1World.isRemote)
-		{
-			int var6 = par1World.getBlockMetadata(par2, par3, par4);
-
-			if ((var6 & 8) != 0 && (var6 & 4) == 0)
+		if (!worldIn.isRemote)
+			if (state.getValue(CHECK_DECAY).booleanValue() && state.getValue(DECAYABLE).booleanValue())
 			{
-				byte var7 = 4;
-				int var8 = var7 + 1;
-				byte var9 = 32;
-				int var10 = var9 * var9;
-				int var11 = var9 / 2;
+				int i = 4;
+				int j = i + 1;
+				int k = pos.getX();
+				int l = pos.getY();
+				int i1 = pos.getZ();
+				int j1 = 32;
+				int k1 = j1 * j1;
+				int l1 = j1 / 2;
 
-				if (adjacentTreeBlocks == null)
-					adjacentTreeBlocks = new int[var9 * var9 * var9];
+				if (surroundings == null)
+					surroundings = new int[j1 * j1 * j1];
 
-				int var12;
-
-				if (par1World.checkChunksExist(par2 - var8, par3 - var8, par4 - var8, par2 + var8, par3 + var8, par4 + var8))
+				if (worldIn.isAreaLoaded(new BlockPos(k - j, l - j, i1 - j), new BlockPos(k + j, l + j, i1 + j)))
 				{
-					int var13;
-					int var14;
+					BlockPos.MutableBlockPos blockpos$mutableblockpos = new BlockPos.MutableBlockPos();
 
-					for (var12 = -var7; var12 <= var7; ++var12)
-						for (var13 = -var7; var13 <= var7; ++var13)
-							for (var14 = -var7; var14 <= var7; ++var14)
+					for (int i2 = -i; i2 <= i; ++i2)
+						for (int j2 = -i; j2 <= i; ++j2)
+							for (int k2 = -i; k2 <= i; ++k2)
 							{
-								Block block = par1World.getBlock(par2 + var12, par3 + var13, par4 + var14);
+								Block block = worldIn.getBlockState(blockpos$mutableblockpos.set(k + i2, l + j2, i1 + k2)).getBlock();
 
-								if (block.canSustainLeaves(par1World, par2 + var12, par3 + var13, par4 + var14))
-									adjacentTreeBlocks[(var12 + var11) * var10 + (var13 + var11) * var9 + var14 + var11] = 0;
-								else if (block.isLeaves(par1World, par2 + var12, par3 + var13, par4 + var14))
-									adjacentTreeBlocks[(var12 + var11) * var10 + (var13 + var11) * var9 + var14 + var11] = -2;
-								else
-									adjacentTreeBlocks[(var12 + var11) * var10 + (var13 + var11) * var9 + var14 + var11] = -1;
+								if (!block.canSustainLeaves(worldIn, blockpos$mutableblockpos.set(k + i2, l + j2, i1 + k2)))
+								{
+									if (block.isLeaves(worldIn, blockpos$mutableblockpos.set(k + i2, l + j2, i1 + k2)))
+										surroundings[(i2 + l1) * k1 + (j2 + l1) * j1 + k2 + l1] = -2;
+									else
+										surroundings[(i2 + l1) * k1 + (j2 + l1) * j1 + k2 + l1] = -1;
+								} else
+									surroundings[(i2 + l1) * k1 + (j2 + l1) * j1 + k2 + l1] = 0;
 							}
 
-					for (var12 = 1; var12 <= 4; ++var12)
-						for (var13 = -var7; var13 <= var7; ++var13)
-							for (var14 = -var7; var14 <= var7; ++var14)
-								for (int var15 = -var7; var15 <= var7; ++var15)
-									if (adjacentTreeBlocks[(var13 + var11) * var10 + (var14 + var11) * var9 + var15 + var11] == var12 - 1)
+					for (int i3 = 1; i3 <= 4; ++i3)
+						for (int j3 = -i; j3 <= i; ++j3)
+							for (int k3 = -i; k3 <= i; ++k3)
+								for (int l3 = -i; l3 <= i; ++l3)
+									if (surroundings[(j3 + l1) * k1 + (k3 + l1) * j1 + l3 + l1] == i3 - 1)
 									{
-										if (adjacentTreeBlocks[(var13 + var11 - 1) * var10 + (var14 + var11) * var9 + var15 + var11] == -2)
-											adjacentTreeBlocks[(var13 + var11 - 1) * var10 + (var14 + var11) * var9 + var15 + var11] = var12;
+										if (surroundings[(j3 + l1 - 1) * k1 + (k3 + l1) * j1 + l3 + l1] == -2)
+											surroundings[(j3 + l1 - 1) * k1 + (k3 + l1) * j1 + l3 + l1] = i3;
 
-										if (adjacentTreeBlocks[(var13 + var11 + 1) * var10 + (var14 + var11) * var9 + var15 + var11] == -2)
-											adjacentTreeBlocks[(var13 + var11 + 1) * var10 + (var14 + var11) * var9 + var15 + var11] = var12;
+										if (surroundings[(j3 + l1 + 1) * k1 + (k3 + l1) * j1 + l3 + l1] == -2)
+											surroundings[(j3 + l1 + 1) * k1 + (k3 + l1) * j1 + l3 + l1] = i3;
 
-										if (adjacentTreeBlocks[(var13 + var11) * var10 + (var14 + var11 - 1) * var9 + var15 + var11] == -2)
-											adjacentTreeBlocks[(var13 + var11) * var10 + (var14 + var11 - 1) * var9 + var15 + var11] = var12;
+										if (surroundings[(j3 + l1) * k1 + (k3 + l1 - 1) * j1 + l3 + l1] == -2)
+											surroundings[(j3 + l1) * k1 + (k3 + l1 - 1) * j1 + l3 + l1] = i3;
 
-										if (adjacentTreeBlocks[(var13 + var11) * var10 + (var14 + var11 + 1) * var9 + var15 + var11] == -2)
-											adjacentTreeBlocks[(var13 + var11) * var10 + (var14 + var11 + 1) * var9 + var15 + var11] = var12;
+										if (surroundings[(j3 + l1) * k1 + (k3 + l1 + 1) * j1 + l3 + l1] == -2)
+											surroundings[(j3 + l1) * k1 + (k3 + l1 + 1) * j1 + l3 + l1] = i3;
 
-										if (adjacentTreeBlocks[(var13 + var11) * var10 + (var14 + var11) * var9 + var15 + var11 - 1] == -2)
-											adjacentTreeBlocks[(var13 + var11) * var10 + (var14 + var11) * var9 + var15 + var11 - 1] = var12;
+										if (surroundings[(j3 + l1) * k1 + (k3 + l1) * j1 + l3 + l1 - 1] == -2)
+											surroundings[(j3 + l1) * k1 + (k3 + l1) * j1 + l3 + l1 - 1] = i3;
 
-										if (adjacentTreeBlocks[(var13 + var11) * var10 + (var14 + var11) * var9 + var15 + var11 + 1] == -2)
-											adjacentTreeBlocks[(var13 + var11) * var10 + (var14 + var11) * var9 + var15 + var11 + 1] = var12;
+										if (surroundings[(j3 + l1) * k1 + (k3 + l1) * j1 + l3 + l1 + 1] == -2)
+											surroundings[(j3 + l1) * k1 + (k3 + l1) * j1 + l3 + l1 + 1] = i3;
 									}
 				}
 
-				var12 = adjacentTreeBlocks[var11 * var10 + var11 * var9 + var11];
+				int l2 = surroundings[l1 * k1 + l1 * j1 + l1];
 
-				if (var12 >= 0)
-					par1World.setBlockMetadataWithNotify(par2, par3, par4, var6 & -9, 4);
+				if (l2 >= 0)
+					worldIn.setBlockState(pos, state.withProperty(CHECK_DECAY, Boolean.valueOf(false)), 4);
 				else
-					removeLeaves(par1World, par2, par3, par4);
+					destroy(worldIn, pos);
 			}
-		}
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void randomDisplayTick(World par1World, int par2, int par3, int par4, Random par5Random)
+	public void randomDisplayTick(World worldIn, BlockPos pos, IBlockState state, Random rand)
 	{
-		if (par1World.canLightningStrikeAt(par2, par3 + 1, par4) && !World.doesBlockHaveSolidTopSurface(par1World, par2, par3 - 1, par4) && par5Random.nextInt(15) == 1)
+		if (worldIn.canLightningStrike(pos.up()) && !World.doesBlockHaveSolidTopSurface(worldIn, pos.down()) && rand.nextInt(15) == 1)
 		{
-			double var6 = par2 + par5Random.nextFloat();
-			double var8 = par3 - 0.05D;
-			double var10 = par4 + par5Random.nextFloat();
-			par1World.spawnParticle("dripWater", var6, var8, var10, 0.0D, 0.0D, 0.0D);
+			double d0 = pos.getX() + rand.nextFloat();
+			double d1 = pos.getY() - 0.05D;
+			double d2 = pos.getZ() + rand.nextFloat();
+			worldIn.spawnParticle(EnumParticleTypes.DRIP_WATER, d0, d1, d2, 0.0D, 0.0D, 0.0D, new int[0]);
 		}
 	}
 
-	private void removeLeaves(World par1World, int par2, int par3, int par4)
+	private void destroy(World worldIn, BlockPos pos)
 	{
-		this.dropBlockAsItem(par1World, par2, par3, par4, par1World.getBlockMetadata(par2, par3, par4), 0);
-		par1World.setBlock(par2, par3, par4, Blocks.air);
+		dropBlockAsItem(worldIn, pos, worldIn.getBlockState(pos), 0);
+		worldIn.setBlockToAir(pos);
 	}
 
 	@Override
@@ -166,102 +177,97 @@ public class BlockDreadLeaves extends BlockLeavesBase implements IShearable {
 	}
 
 	@Override
-	public Item getItemDropped(int par1, Random par2Random, int par3)
+	public Item getItemDropped(IBlockState state, Random par2Random, int par3)
 	{
 		return Item.getItemFromBlock(AbyssalCraft.dreadsapling);
 	}
 
 	@Override
-	public void dropBlockAsItemWithChance(World par1World, int par2, int par3, int par4, int par5, float par6, int par7)
+	public void dropBlockAsItemWithChance(World worldIn, BlockPos pos, IBlockState state, float chance, int fortune)
 	{
-		if (!par1World.isRemote)
-		{
-			byte var8 = 20;
-
-			if ((par5 & 3) == 3)
-				var8 = 40;
-
-			if (par1World.rand.nextInt(var8) == 0)
-			{
-				Item var9 = getItemDropped(par5, par1World.rand, par7);
-				this.dropBlockAsItem(par1World, par2, par3, par4, new ItemStack(var9, 1, damageDropped(par5)));
-			}
-
-			if ((par5 & 3) == 0 && par1World.rand.nextInt(200) == 0)
-				this.dropBlockAsItem(par1World, par2, par3, par4, new ItemStack(AbyssalCraft.DLTSapling, 1, 0));
-		}
+		super.dropBlockAsItemWithChance(worldIn, pos, state, chance, fortune);
 	}
 
-	@Override
-	public void harvestBlock(World par1World, EntityPlayer par2EntityPlayer, int par3, int par4, int par5, int par6)
+	protected int getSaplingDropChance(IBlockState state)
 	{
-		super.harvestBlock(par1World, par2EntityPlayer, par3, par4, par5, par6);
-	}
-
-	@Override
-	public int damageDropped(int par1)
-	{
-		return par1 & 3;
+		return 20;
 	}
 
 	@Override
 	public boolean isOpaqueCube()
 	{
+		return !fancyGraphics;
+	}
+
+	@Override
+	public boolean isShearable(ItemStack item, IBlockAccess world, BlockPos pos)
+	{
+		return true;
+	}
+
+	@SideOnly(Side.CLIENT)
+	public void setGraphicsLevel(boolean fancy)
+	{
+		isTransparent = fancy;
+		fancyGraphics = fancy;
+		iconIndex = fancy ? 0 : 1;
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public EnumWorldBlockLayer getBlockLayer()
+	{
+		return isTransparent ? EnumWorldBlockLayer.CUTOUT_MIPPED : EnumWorldBlockLayer.SOLID;
+	}
+
+	@Override
+	public boolean isVisuallyOpaque()
+	{
 		return false;
 	}
 
 	@Override
-	public boolean isShearable(ItemStack item, IBlockAccess world, int x, int y, int z) {
-
-		return true;
-	}
-
-	@Override
-	@SideOnly(Side.CLIENT)
-	public IIcon getIcon(int par1, int par2)
-	{
-		setGraphicsLevel(Minecraft.getMinecraft().gameSettings.fancyGraphics);
-
-		return iconArray[iconType][0];
-	}
-
-	@SideOnly(Side.CLIENT)
-	public void setGraphicsLevel(boolean par1)
-	{
-		field_150121_P = par1;
-		iconType = par1 ? 0 : 1;
-	}
-
-	@Override
-	protected ItemStack createStackedBlock(int par1)
-	{
-		return new ItemStack(this, 1, par1 & 3);
-	}
-
-	@Override
-	public ArrayList<ItemStack> onSheared(ItemStack item, IBlockAccess world, int x, int y, int z, int fortune)
+	public ArrayList<ItemStack> onSheared(ItemStack item, IBlockAccess world, BlockPos pos, int fortune)
 	{
 		ArrayList<ItemStack> ret = new ArrayList<ItemStack>();
-		ret.add(new ItemStack(this, 1, world.getBlockMetadata(x, y, z) & 3));
+		ret.add(new ItemStack(this, 1));
 		return ret;
 	}
 
 	@Override
-	public void beginLeavesDecay(World world, int x, int y, int z)
+	public void beginLeavesDecay(World world, BlockPos pos)
 	{
-		world.setBlockMetadataWithNotify(x, y, z, world.getBlockMetadata(x, y, z) | 8, 4);
+		IBlockState state = world.getBlockState(pos);
+		if (!(Boolean)state.getValue(CHECK_DECAY))
+			world.setBlockState(pos, state.withProperty(CHECK_DECAY, true), 4);
 	}
 
 	@Override
-	@SideOnly(Side.CLIENT)
-	public void registerBlockIcons(IIconRegister par1IconRegister)
+	public IBlockState getStateFromMeta(int meta)
 	{
-		for (int i = 0; i < textureNames.length; ++i)
-		{
-			iconArray[i] = new IIcon[textureNames[i].length()];
+		return getDefaultState().withProperty(DECAYABLE, Boolean.valueOf((meta & 4) == 0)).withProperty(CHECK_DECAY, Boolean.valueOf((meta & 8) > 0));
+	}
 
-			for (int j = 0; j < textureNames[i].length(); ++j)
-				iconArray[i][0] = par1IconRegister.registerIcon(AbyssalCraft.modid + ":" + textureNames[i]);
-		}
+	/**
+	 * Convert the BlockState into the correct metadata value
+	 */
+	@Override
+	public int getMetaFromState(IBlockState state)
+	{
+		int i = 0;
+
+		if (!state.getValue(DECAYABLE).booleanValue())
+			i |= 4;
+
+		if (state.getValue(CHECK_DECAY).booleanValue())
+			i |= 8;
+
+		return i;
+	}
+
+	@Override
+	protected BlockState createBlockState()
+	{
+		return new BlockState(this, new IProperty[] {CHECK_DECAY, DECAYABLE});
 	}
 }

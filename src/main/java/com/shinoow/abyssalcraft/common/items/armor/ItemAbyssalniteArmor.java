@@ -11,7 +11,6 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.common.items.armor;
 
-import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemArmor;
@@ -21,15 +20,13 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
-
 import com.shinoow.abyssalcraft.AbyssalCraft;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-
 public class ItemAbyssalniteArmor extends ItemArmor {
-	public ItemAbyssalniteArmor(ArmorMaterial par2EnumArmorMaterial, int par3, int par4){
+	public ItemAbyssalniteArmor(ArmorMaterial par2EnumArmorMaterial, int par3, int par4, String name){
 		super(par2EnumArmorMaterial, par3, par4);
+		//		GameRegistry.registerItem(this, name);
+		setUnlocalizedName(name);
 		setCreativeTab(AbyssalCraft.tabCombat);
 	}
 
@@ -50,12 +47,12 @@ public class ItemAbyssalniteArmor extends ItemArmor {
 		else return null;
 	}
 
-	@Override
-	@SideOnly(Side.CLIENT)
-	public void registerIcons(IIconRegister par1IconRegister)
-	{
-		itemIcon = par1IconRegister.registerIcon(AbyssalCraft.modid + ":" + this.getUnlocalizedName().substring(5));
-	}
+	//	@Override
+	//	@SideOnly(Side.CLIENT)
+	//	public void registerIcons(IIconRegister par1IconRegister)
+	//	{
+	//		itemIcon = par1IconRegister.registerIcon(AbyssalCraft.modid + ":" + this.getUnlocalizedName().substring(5));
+	//	}
 
 	@Override
 	public void onArmorTick(World world, EntityPlayer player, ItemStack itemstack) {

@@ -22,6 +22,7 @@ import net.minecraft.entity.ai.EntityAIWander;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.util.BlockPos;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
 
@@ -39,8 +40,8 @@ public class EntityDreadgolem extends EntityMob implements IDreadEntity {
 		tasks.addTask(6, new EntityAILookIdle(this));
 		tasks.addTask(6, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
 		targetTasks.addTask(1, new EntityAIHurtByTarget(this, true));
-		targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityAbygolem.class, 0, true));
-		targetTasks.addTask(3, new EntityAINearestAttackableTarget(this, EntityPlayer.class, 0, true));
+		targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityAbygolem.class, true));
+		targetTasks.addTask(3, new EntityAINearestAttackableTarget(this, EntityPlayer.class, true));
 		isImmuneToFire = true;
 	}
 
@@ -52,12 +53,6 @@ public class EntityDreadgolem extends EntityMob implements IDreadEntity {
 			getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(40.0D);
 			getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(8.0D);
 		} else getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(4.0D);
-	}
-
-	@Override
-	protected boolean isAIEnabled()
-	{
-		return true;
 	}
 
 	@Override
@@ -86,7 +81,7 @@ public class EntityDreadgolem extends EntityMob implements IDreadEntity {
 	}
 
 	@Override
-	protected void func_145780_a(int par1, int par2, int par3, Block par4)
+	protected void playStepSound(BlockPos pos, Block par4)
 	{
 		worldObj.playSoundAtEntity(this, "mob.zombie.step", 0.15F, 1.0F);
 	}

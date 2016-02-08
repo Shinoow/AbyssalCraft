@@ -11,20 +11,17 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.common.inventory;
 
-import invtweaks.api.container.ChestContainer;
-
-import com.shinoow.abyssalcraft.api.APIUtils;
-import com.shinoow.abyssalcraft.common.items.ItemCrystalBag;
-
-import cpw.mods.fml.common.Optional.Interface;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 
-@Interface(iface = "invtweaks.api.container.ChestContainer", modid = "inventorytweaks")
-@ChestContainer
+import com.shinoow.abyssalcraft.api.APIUtils;
+import com.shinoow.abyssalcraft.common.items.ItemCrystalBag;
+
+//@Interface(iface = "invtweaks.api.container.ChestContainer", modid = "inventorytweaks")
+//@ChestContainer
 public class ContainerCrystalBag extends Container
 {
 	/** The Item Inventory for this Container */
@@ -64,7 +61,7 @@ public class ContainerCrystalBag extends Container
 	public ItemStack transferStackInSlot(EntityPlayer par1EntityPlayer, int par2)
 	{
 		ItemStack itemstack = null;
-		Slot slot = (Slot) inventorySlots.get(par2);
+		Slot slot = inventorySlots.get(par2);
 
 		if (slot != null && slot.getHasStack())
 		{

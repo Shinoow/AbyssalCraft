@@ -30,8 +30,9 @@ public class ItemACAxe extends ItemAxe {
 		super(mat);
 		setCreativeTab(AbyssalCraft.tabTools);
 		setHarvestLevel("axe", harvestlevel);
+		//		GameRegistry.registerItem(this, name);
 		setUnlocalizedName(name);
-		setTextureName(AbyssalCraft.modid + ":" + name);
+		//		setTextureName(AbyssalCraft.modid + ":" + name);
 		this.format = format;
 	}
 

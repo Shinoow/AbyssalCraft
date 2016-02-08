@@ -18,16 +18,16 @@ import net.minecraft.tileentity.TileEntity;
 
 public class TileEntityPSDL extends TileEntity {
 
-	@Override
-	public boolean canUpdate()
-	{
-		return false;
-	}
+	//	@Override
+	//	public boolean canUpdate()
+	//	{
+	//		return false;
+	//	}
 
 	@Override
 	public Packet getDescriptionPacket() {
 		NBTTagCompound nbtTag = new NBTTagCompound();
 		writeToNBT(nbtTag);
-		return new S35PacketUpdateTileEntity(xCoord, yCoord, zCoord, 1, nbtTag);
+		return new S35PacketUpdateTileEntity(pos, 1, nbtTag);
 	}
 }

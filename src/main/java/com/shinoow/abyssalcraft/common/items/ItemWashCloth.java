@@ -13,6 +13,8 @@ package com.shinoow.abyssalcraft.common.items;
 
 import java.util.List;
 
+import com.shinoow.abyssalcraft.AbyssalCraft;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -21,6 +23,9 @@ public class ItemWashCloth extends Item {
 
 	public ItemWashCloth() {
 		super();
+		//		GameRegistry.registerItem(this, "washcloth");
+		setUnlocalizedName("cloth");
+		setCreativeTab(AbyssalCraft.tabItems);
 		setMaxDamage(20);
 		setMaxStackSize(1);
 	}
@@ -32,11 +37,11 @@ public class ItemWashCloth extends Item {
 		return result;
 	}
 
-	@Override
-	public boolean doesContainerItemLeaveCraftingGrid(ItemStack itemstack)
-	{
-		return false;
-	}
+	//	@Override
+	//	public boolean doesContainerItemLeaveCraftingGrid(ItemStack itemstack)
+	//	{
+	//		return false;
+	//	}
 
 	@Override
 	public boolean hasContainerItem(ItemStack stack) {

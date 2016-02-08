@@ -13,6 +13,8 @@ package com.shinoow.abyssalcraft.common.items;
 
 import java.util.List;
 
+import com.shinoow.abyssalcraft.AbyssalCraft;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -21,13 +23,16 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ItemOC extends Item {
 
 	public ItemOC() {
 		super();
+		//		GameRegistry.registerItem(this, "oc");
+		setUnlocalizedName("oc");
+		setCreativeTab(AbyssalCraft.tabItems);
 	}
 
 	@Override
@@ -63,7 +68,7 @@ public class ItemOC extends Item {
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public boolean hasEffect(ItemStack stack, int pass)
+	public boolean hasEffect(ItemStack stack)
 	{
 		return true;
 	}

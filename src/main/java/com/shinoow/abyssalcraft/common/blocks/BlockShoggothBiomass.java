@@ -13,17 +13,19 @@ package com.shinoow.abyssalcraft.common.blocks;
 
 import java.util.Random;
 
-import com.shinoow.abyssalcraft.AbyssalCraft;
-import com.shinoow.abyssalcraft.common.blocks.tile.TileEntityShoggothBiomass;
-import com.shinoow.abyssalcraft.common.entity.EntityLesserShoggoth;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;
+
+import com.shinoow.abyssalcraft.AbyssalCraft;
+import com.shinoow.abyssalcraft.common.blocks.tile.TileEntityShoggothBiomass;
+import com.shinoow.abyssalcraft.common.entity.EntityLesserShoggoth;
 
 public class BlockShoggothBiomass extends BlockContainer {
 
@@ -32,8 +34,7 @@ public class BlockShoggothBiomass extends BlockContainer {
 		setHardness(1.0F);
 		setResistance(18.0F);
 		setStepSound(Block.soundTypeSand);
-		setBlockName("shoggothBiomass");
-		setBlockTextureName("abyssalcraft:shoggothBiomass");
+		setUnlocalizedName("shoggothbiomass");
 		setCreativeTab(AbyssalCraft.tabBlock);
 		setLightLevel(0.5F);
 	}
@@ -45,10 +46,10 @@ public class BlockShoggothBiomass extends BlockContainer {
 	}
 
 	@Override
-	public AxisAlignedBB getCollisionBoundingBoxFromPool(World world, int x, int y, int z)
+	public AxisAlignedBB getCollisionBoundingBox(World world, BlockPos pos, IBlockState state)
 	{
 		float f = 0.15F;
-		return AxisAlignedBB.getBoundingBox(x, y, z, x + 1, y + 1 - f, z + 1);
+		return AxisAlignedBB.fromBounds(pos.getX(), pos.getY(), pos.getZ(), pos.getX() + 1, pos.getY() + 1 - f, pos.getZ() + 1);
 	}
 
 	@Override
@@ -58,7 +59,13 @@ public class BlockShoggothBiomass extends BlockContainer {
 	}
 
 	@Override
-	public void onEntityCollidedWithBlock(World world, int x, int y, int z, Entity entity)
+	public int getRenderType()
+	{
+		return 3;
+	}
+
+	@Override
+	public void onEntityCollidedWithBlock(World world, BlockPos pos, Entity entity)
 	{
 		if(!(entity instanceof EntityLesserShoggoth)){
 			entity.motionX *= 0.4D;

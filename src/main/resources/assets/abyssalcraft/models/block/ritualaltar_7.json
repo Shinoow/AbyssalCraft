@@ -1,0 +1,6 @@
+{
+	"parent": "abyssalcraft:block/ritualaltar",
+	"textures": {
+		"0": "abyssalcraft:blocks/deb"
+	}
+}

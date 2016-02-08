@@ -11,18 +11,17 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.common.util;
 
-import net.minecraft.entity.Entity;
-import net.minecraft.world.World;
-
 import com.shinoow.abyssalcraft.common.world.ACExplosion;
+
+import net.minecraft.entity.Entity;
+import net.minecraft.world.Explosion;
+import net.minecraft.world.World;
 
 public class ExplosionUtil {
 
-	public static ACExplosion newODBExplosion(World par0World, Entity par1Entity, double par2, double par4, double par6, float par8, int par9, boolean par10, boolean par11)
+	public static Explosion newODBExplosion(World par0World, Entity par1Entity, double par2, double par4, double par6, float par8, int par9, boolean par10, boolean par11)
 	{
-		ACExplosion explosion = new ACExplosion(par0World, par1Entity, par2, par4, par6, par8, par9);
-		explosion.isAntimatter = par10;
-		explosion.isSmoking = par11;
+		ACExplosion explosion = new ACExplosion(par0World, par1Entity, par2, par4, par6, par8, par9, par10, par11);
 		explosion.doExplosionA();
 		explosion.doExplosionB(true);
 		return explosion;

@@ -17,11 +17,10 @@ import net.minecraft.world.WorldProvider;
 import net.minecraft.world.biome.WorldChunkManagerHell;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.chunk.IChunkProvider;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 public class WorldProviderAbyss extends WorldProvider {
 
@@ -90,7 +89,7 @@ public class WorldProviderAbyss extends WorldProvider {
 
 	@Override
 	public Vec3 getSkyColor(Entity cameraEntity, float partialTicks) {
-		return Vec3.createVectorHelper(0, 180, 50);
+		return new Vec3(0, 180, 50);
 	}
 
 	@Override
@@ -101,11 +100,17 @@ public class WorldProviderAbyss extends WorldProvider {
 
 	@Override
 	public String getSaveFolder() {
-		return "The_Abyss";
+		return "Abyssal_Wasteland";
 	}
 
 	@Override
 	public int getAverageGroundLevel() {
 		return 50;
+	}
+
+	@Override
+	public String getInternalNameSuffix() {
+
+		return "_aw";
 	}
 }

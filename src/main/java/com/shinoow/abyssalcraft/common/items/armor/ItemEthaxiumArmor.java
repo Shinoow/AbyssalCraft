@@ -11,7 +11,6 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.common.items.armor;
 
-import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemArmor;
@@ -21,15 +20,13 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
-
 import com.shinoow.abyssalcraft.AbyssalCraft;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-
 public class ItemEthaxiumArmor extends ItemArmor {
-	public ItemEthaxiumArmor(ArmorMaterial par2EnumArmorMaterial, int par3, int par4){
+	public ItemEthaxiumArmor(ArmorMaterial par2EnumArmorMaterial, int par3, int par4, String name){
 		super(par2EnumArmorMaterial, par3, par4);
+		//		GameRegistry.registerItem(this, name);
+		setUnlocalizedName(name);
 		setCreativeTab(AbyssalCraft.tabCombat);
 	}
 
@@ -49,12 +46,12 @@ public class ItemEthaxiumArmor extends ItemArmor {
 		else return null;
 	}
 
-	@Override
-	@SideOnly(Side.CLIENT)
-	public void registerIcons(IIconRegister par1IconRegister)
-	{
-		itemIcon = par1IconRegister.registerIcon(AbyssalCraft.modid + ":" + this.getUnlocalizedName().substring(5));
-	}
+	//	@Override
+	//	@SideOnly(Side.CLIENT)
+	//	public void registerIcons(IIconRegister par1IconRegister)
+	//	{
+	//		itemIcon = par1IconRegister.registerIcon(AbyssalCraft.modid + ":" + this.getUnlocalizedName().substring(5));
+	//	}
 
 	@Override
 	public void onArmorTick(World world, EntityPlayer player, ItemStack itemstack) {
@@ -66,10 +63,10 @@ public class ItemEthaxiumArmor extends ItemArmor {
 			if(player.getActivePotionEffect(Potion.poison) !=null)
 				player.removePotionEffect(Potion.poison.getId());
 			if(world.rand.nextInt(300) == 0)
-				player.addPotionEffect(new PotionEffect(Potion.field_76443_y.getId(), 60, 0));
+				player.addPotionEffect(new PotionEffect(Potion.saturation.getId(), 60, 0));
 		}
 		if(itemstack.getItem() == AbyssalCraft.ethPlate){
-			if(player.isBurning() || world.provider.isHellWorld)
+			if(player.isBurning() || world.provider.doesWaterVaporize())
 				player.addPotionEffect(new PotionEffect(Potion.fireResistance.id, 20, 2));
 			if(player.getActivePotionEffect(AbyssalCraft.antiMatter) !=null)
 				player.removePotionEffect(AbyssalCraft.antiMatter.getId());
@@ -85,8 +82,8 @@ public class ItemEthaxiumArmor extends ItemArmor {
 				player.addPotionEffect(new PotionEffect(Potion.waterBreathing.id, 20, 1));
 			}
 
-		if(player.getActivePotionEffect(Potion.field_76443_y) != null && player.getActivePotionEffect(Potion.field_76443_y).getDuration() == 0)
-			player.removePotionEffect(Potion.field_76443_y.id);
+		if(player.getActivePotionEffect(Potion.saturation) != null && player.getActivePotionEffect(Potion.saturation).getDuration() == 0)
+			player.removePotionEffect(Potion.saturation.id);
 		if(player.getActivePotionEffect(Potion.damageBoost) != null && player.getActivePotionEffect(Potion.damageBoost).getDuration() == 0)
 			player.removePotionEffect(Potion.damageBoost.id);
 		if(player.getActivePotionEffect(Potion.regeneration) != null && player.getActivePotionEffect(Potion.regeneration).getDuration() == 0)

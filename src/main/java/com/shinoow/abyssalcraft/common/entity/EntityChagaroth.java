@@ -34,7 +34,9 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumChatFormatting;
+import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.StatCollector;
+import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.World;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
@@ -54,15 +56,15 @@ public class EntityChagaroth extends EntityMob implements IBossDisplayData, IDre
 		tasks.addTask(3, new EntityAILookIdle(this));
 		tasks.addTask(3, new EntityAIWatchClosest(this, EntityPlayer.class, 16.0F));
 		targetTasks.addTask(1, new EntityAIHurtByTarget(this, false));
-		targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityPlayer.class, 0, true));
+		targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityPlayer.class, true));
 		ignoreFrustumCheck = true;
 		isImmuneToFire = true;
 	}
 
 	@Override
-	public String getCommandSenderName()
+	public String getName()
 	{
-		return EnumChatFormatting.DARK_RED + super.getCommandSenderName();
+		return EnumChatFormatting.DARK_RED + super.getName();
 	}
 
 	@Override
@@ -89,12 +91,6 @@ public class EntityChagaroth extends EntityMob implements IBossDisplayData, IDre
 			getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(1000.0D);
 			getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(15.0D);
 		}
-	}
-
-	@Override
-	protected boolean isAIEnabled()
-	{
-		return true;
 	}
 
 	@Override
@@ -248,12 +244,12 @@ public class EntityChagaroth extends EntityMob implements IBossDisplayData, IDre
 			float f1 = (rand.nextFloat() - 0.5F) * 4.0F;
 			float f2 = (rand.nextFloat() - 0.5F) * 8.0F;
 			if(AbyssalCraft.particleEntity){
-				worldObj.spawnParticle("flame", posX + f, posY + 2.0D + f1, posZ + f2, 0.0D, 0.0D, 0.0D);
-				worldObj.spawnParticle("lava", posX + f, posY + 2.0D + f1, posZ + f2, 0.0D, 0.0D, 0.0D);
-				worldObj.spawnParticle("largesmoke", posX + f, posY + 2.0D + f1, posZ + f2, 0.0D, 0.0D, 0.0D);
-				worldObj.spawnParticle("explode", posX + f, posY + 2.0D + f1, posZ + f2, 0.0D, 0.0D, 0.0D);
+				worldObj.spawnParticle(EnumParticleTypes.FLAME, posX + f, posY + 2.0D + f1, posZ + f2, 0.0D, 0.0D, 0.0D);
+				worldObj.spawnParticle(EnumParticleTypes.LAVA, posX + f, posY + 2.0D + f1, posZ + f2, 0.0D, 0.0D, 0.0D);
+				worldObj.spawnParticle(EnumParticleTypes.SMOKE_LARGE, posX + f, posY + 2.0D + f1, posZ + f2, 0.0D, 0.0D, 0.0D);
+				worldObj.spawnParticle(EnumParticleTypes.EXPLOSION_NORMAL, posX + f, posY + 2.0D + f1, posZ + f2, 0.0D, 0.0D, 0.0D);
 				if (deathTicks >= 190 && deathTicks <= 200)
-					worldObj.spawnParticle("hugeexplosion", posX + f, posY + 2.0D + f1, posZ + f2, 0.0D, 0.0D, 0.0D);
+					worldObj.spawnParticle(EnumParticleTypes.EXPLOSION_HUGE, posX + f, posY + 2.0D + f1, posZ + f2, 0.0D, 0.0D, 0.0D);
 			}
 		}
 
@@ -289,9 +285,9 @@ public class EntityChagaroth extends EntityMob implements IBossDisplayData, IDre
 	}
 
 	@Override
-	public IEntityLivingData onSpawnWithEgg(IEntityLivingData par1EntityLivingData)
+	public IEntityLivingData onInitialSpawn(DifficultyInstance difficulty, IEntityLivingData par1EntityLivingData)
 	{
-		par1EntityLivingData = super.onSpawnWithEgg(par1EntityLivingData);
+		par1EntityLivingData = super.onInitialSpawn(difficulty, par1EntityLivingData);
 
 		IAttributeInstance attribute = getEntityAttribute(SharedMonsterAttributes.attackDamage);
 		Calendar calendar = worldObj.getCurrentDate();

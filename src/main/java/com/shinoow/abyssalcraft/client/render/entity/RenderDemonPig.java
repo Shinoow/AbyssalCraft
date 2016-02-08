@@ -13,13 +13,13 @@ package com.shinoow.abyssalcraft.client.render.entity;
 
 import net.minecraft.client.model.ModelPig;
 import net.minecraft.client.renderer.entity.RenderLiving;
+import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import com.shinoow.abyssalcraft.common.entity.demon.EntityDemonPig;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
 public class RenderDemonPig extends RenderLiving {
@@ -28,9 +28,9 @@ public class RenderDemonPig extends RenderLiving {
 
 	private static final ResourceLocation mobTexture = new ResourceLocation("abyssalcraft:textures/model/demon_pig.png");
 
-	public RenderDemonPig (ModelPig ModelPig, float f)
+	public RenderDemonPig(RenderManager manager, ModelPig ModelPig, float f)
 	{
-		super(ModelPig, f);
+		super(manager, ModelPig, f);
 		model = (ModelPig)mainModel;
 	}
 

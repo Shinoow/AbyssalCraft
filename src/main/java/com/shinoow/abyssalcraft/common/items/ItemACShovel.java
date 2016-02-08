@@ -30,8 +30,9 @@ public class ItemACShovel extends ItemSpade {
 		super(mat);
 		setCreativeTab(AbyssalCraft.tabTools);
 		setHarvestLevel("shovel", harvestlevel);
+		//		GameRegistry.registerItem(this, name);
 		setUnlocalizedName(name);
-		setTextureName(AbyssalCraft.modid + ":" + name);
+		//		setTextureName(AbyssalCraft.modid + ":" + name);
 		this.format = format;
 	}
 

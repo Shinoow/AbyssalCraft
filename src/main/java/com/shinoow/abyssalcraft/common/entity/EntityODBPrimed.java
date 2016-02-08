@@ -15,16 +15,17 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.init.Blocks;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.BlockPos;
+import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.common.util.ACLogger;
 import com.shinoow.abyssalcraft.common.util.ExplosionUtil;
 import com.shinoow.abyssalcraft.common.util.SpecialTextUtil;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 public class EntityODBPrimed extends Entity {
 
@@ -38,7 +39,6 @@ public class EntityODBPrimed extends Entity {
 		fuse = 0;
 		preventEntitySpawning = true;
 		setSize(0.98F, 0.98F);
-		yOffset = height / 2.0F;
 	}
 
 	public EntityODBPrimed(World par1World, double par2, double par4, double par6, EntityLivingBase par8EntityLivingBase)
@@ -100,7 +100,7 @@ public class EntityODBPrimed extends Entity {
 				message();
 		} else if(worldObj.isRemote)
 			if(AbyssalCraft.particleEntity)
-				worldObj.spawnParticle("portal", posX, posY + 0.5D, posZ, 1.0D, 0.0D, 0.0D);
+				worldObj.spawnParticle(EnumParticleTypes.PORTAL, posX, posY + 0.5D, posZ, 1.0D, 0.0D, 0.0D);
 	}
 
 	private void explode()
@@ -135,10 +135,10 @@ public class EntityODBPrimed extends Entity {
 			for(z = 0; z < 9; z++)
 				for(x1 = 0; x1 < 9; x1++)
 					for(z1 = 0; z1 < 9; z1++){
-						worldObj.setBlock((int)posX + x, (int)posY, (int)posZ + z, Blocks.obsidian);
-						worldObj.setBlock((int)posX - x1, (int)posY, (int)posZ - z1, Blocks.obsidian);
-						worldObj.setBlock((int)posX + x, (int)posY, (int)posZ - z1, Blocks.obsidian);
-						worldObj.setBlock((int)posX - x1, (int)posY, (int)posZ  + z, Blocks.obsidian);
+						worldObj.setBlockState(new BlockPos(posX + x, posY, posZ + z), Blocks.obsidian.getDefaultState());
+						worldObj.setBlockState(new BlockPos(posX - x1, posY, posZ - z1), Blocks.obsidian.getDefaultState());
+						worldObj.setBlockState(new BlockPos(posX + x, posY, posZ - z1), Blocks.obsidian.getDefaultState());
+						worldObj.setBlockState(new BlockPos(posX - x1, posY, posZ  + z), Blocks.obsidian.getDefaultState());
 					}
 		EntitySacthoth sacthoth = new EntitySacthoth(worldObj);
 		sacthoth.setPosition(posX, posY + 1, posZ);
@@ -163,18 +163,17 @@ public class EntityODBPrimed extends Entity {
 		fuse = par1NBTTagCompound.getByte("Fuse");
 	}
 
-	@Override
-	@SideOnly(Side.CLIENT)
-	public float getShadowSize()
-	{
-		return 0.0F;
-	}
-
 	/**
 	 * returns null or the entityliving it was placed or ignited by
 	 */
 	public EntityLivingBase getODBPlacedBy()
 	{
 		return odbPlacedBy;
+	}
+
+	@Override
+	public float getEyeHeight()
+	{
+		return 0.0F;
 	}
 }

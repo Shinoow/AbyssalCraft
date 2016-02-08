@@ -34,6 +34,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
+import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.World;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
@@ -54,7 +55,7 @@ public class EntityDreadguard extends EntityMob implements IDreadEntity {
 		tasks.addTask(5, new EntityAILookIdle(this));
 		tasks.addTask(5, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
 		targetTasks.addTask(1, new EntityAIHurtByTarget(this, false));
-		targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityPlayer.class, 0, true));
+		targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityPlayer.class, true));
 	}
 
 	@Override
@@ -111,12 +112,6 @@ public class EntityDreadguard extends EntityMob implements IDreadEntity {
 	}
 
 	@Override
-	protected boolean isAIEnabled()
-	{
-		return true;
-	}
-
-	@Override
 	protected String getLivingSound()
 	{
 		return "abyssalcraft:dreadguard.idle";
@@ -164,9 +159,9 @@ public class EntityDreadguard extends EntityMob implements IDreadEntity {
 	}
 
 	@Override
-	public IEntityLivingData onSpawnWithEgg(IEntityLivingData par1EntityLivingData)
+	public IEntityLivingData onInitialSpawn(DifficultyInstance difficulty, IEntityLivingData par1EntityLivingData)
 	{
-		par1EntityLivingData = super.onSpawnWithEgg(par1EntityLivingData);
+		par1EntityLivingData = super.onInitialSpawn(difficulty, par1EntityLivingData);
 
 		IAttributeInstance attribute = getEntityAttribute(SharedMonsterAttributes.attackDamage);
 		Calendar calendar = worldObj.getCurrentDate();

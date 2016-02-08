@@ -16,38 +16,38 @@ import java.util.Random;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.block.properties.IProperty;
+import net.minecraft.block.properties.PropertyDirection;
+import net.minecraft.block.state.BlockState;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
-import net.minecraft.inventory.IInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.IIcon;
-import net.minecraft.util.MathHelper;
+import net.minecraft.util.BlockPos;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.common.network.internal.FMLNetworkHandler;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.common.blocks.tile.TileEntityMaterializer;
 
-import cpw.mods.fml.common.network.internal.FMLNetworkHandler;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-
 public class BlockMaterializer extends BlockContainer {
+
+	public static final PropertyDirection FACING = PropertyDirection.create("facing", EnumFacing.Plane.HORIZONTAL);
 
 	private final Random rand = new Random();
 	private static boolean keepInventory;
-	@SideOnly(Side.CLIENT)
-	private IIcon iconTop;
-	@SideOnly(Side.CLIENT)
-	private IIcon iconFront;
 
 	public BlockMaterializer() {
 		super(Material.rock);
+		setDefaultState(blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH));
 		setHarvestLevel("pickaxe", 8);
 		setHardness(100);
 		setResistance(Float.MAX_VALUE);
@@ -56,76 +56,61 @@ public class BlockMaterializer extends BlockContainer {
 	}
 
 	@Override
-	public Item getItemDropped(int par1, Random par1Random, int par3)
+	public Item getItemDropped(IBlockState state, Random par1Random, int par3)
 	{
 		return Item.getItemFromBlock(AbyssalCraft.materializer);
 	}
 
 	@Override
-	public void onBlockAdded(World par1World, int par2, int par3, int par4)
+	public void onBlockAdded(World worldIn, BlockPos pos, IBlockState state)
 	{
-		super.onBlockAdded(par1World, par2, par3, par4);
-		getDirection(par1World, par2, par3, par4);
+		setDefaultFacing(worldIn, pos, state);
 	}
 
-	private void getDirection(World par1World, int par2, int par3, int par4) {
-		if (!par1World.isRemote){
-			Block block = par1World.getBlock(par2, par3, par4 - 1);
-			Block block1 = par1World.getBlock(par2, par3, par4 + 1);
-			Block block2 = par1World.getBlock(par2 - 1, par3, par4);
-			Block block3 = par1World.getBlock(par2 + 1, par3, par4);
-			byte b0 = 3;
+	private void setDefaultFacing(World worldIn, BlockPos pos, IBlockState state)
+	{
+		if (!worldIn.isRemote)
+		{
+			Block block = worldIn.getBlockState(pos.north()).getBlock();
+			Block block1 = worldIn.getBlockState(pos.south()).getBlock();
+			Block block2 = worldIn.getBlockState(pos.west()).getBlock();
+			Block block3 = worldIn.getBlockState(pos.east()).getBlock();
+			EnumFacing enumfacing = state.getValue(FACING);
 
-			if (block.func_149730_j() && !block1.func_149730_j())
-				b0 = 3;
+			if (enumfacing == EnumFacing.NORTH && block.isFullBlock() && !block1.isFullBlock())
+				enumfacing = EnumFacing.SOUTH;
+			else if (enumfacing == EnumFacing.SOUTH && block1.isFullBlock() && !block.isFullBlock())
+				enumfacing = EnumFacing.NORTH;
+			else if (enumfacing == EnumFacing.WEST && block2.isFullBlock() && !block3.isFullBlock())
+				enumfacing = EnumFacing.EAST;
+			else if (enumfacing == EnumFacing.EAST && block3.isFullBlock() && !block2.isFullBlock())
+				enumfacing = EnumFacing.WEST;
 
-			if (block1.func_149730_j() && !block.func_149730_j())
-				b0 = 2;
-
-			if (block2.func_149730_j() && !block3.func_149730_j())
-				b0 = 5;
-
-			if (block3.func_149730_j() && !block2.func_149730_j())
-				b0 = 4;
-
-			par1World.setBlockMetadataWithNotify(par2, par3, par4, b0, 2);
+			worldIn.setBlockState(pos, state.withProperty(FACING, enumfacing), 2);
 		}
 	}
+	//	}
 
 	@Override
-	@SideOnly(Side.CLIENT)
-	public IIcon getIcon(int par1, int par2) {
-		return par1 == 1 ? iconTop : par1 == 0 ? iconTop : par1 != par2 ? blockIcon : iconFront;
-	}
-
-	@Override
-	@SideOnly(Side.CLIENT)
-	public void registerBlockIcons(IIconRegister par1IIconRegister) {
-		blockIcon = par1IIconRegister.registerIcon("abyssalcraft:materializer_side");
-		iconFront = par1IIconRegister.registerIcon("abyssalcraft:materializer_front");
-		iconTop = par1IIconRegister.registerIcon("abyssalcraft:materializer_top");
-	}
-
-	@Override
-	public boolean onBlockActivated(World par1World, int par2, int par3, int par4, EntityPlayer par5EntityPlayer, int par6, float par7, float par8, float par9) {
+	public boolean onBlockActivated(World par1World, BlockPos pos, IBlockState state, EntityPlayer par5EntityPlayer, EnumFacing side, float par7, float par8, float par9) {
 		if(!par1World.isRemote)
-			FMLNetworkHandler.openGui(par5EntityPlayer, AbyssalCraft.instance, AbyssalCraft.materializerGuiID, par1World, par2, par3, par4);
+			FMLNetworkHandler.openGui(par5EntityPlayer, AbyssalCraft.instance, AbyssalCraft.materializerGuiID, par1World, pos.getX(), pos.getY(), pos.getZ());
 		return true;
 	}
 
-	public static void updateMaterializerBlockState(boolean par0, World par1World, int par2, int par3, int par4) {
-		TileEntity tileentity = par1World.getTileEntity(par2, par3, par4);
-		keepInventory = true;
-
-		par1World.setBlock(par2, par3, par4, AbyssalCraft.materializer);
-
-		keepInventory = false;
-
-		if (tileentity != null){
-			tileentity.validate();
-			par1World.setTileEntity(par2, par3, par4, tileentity);
-		}
-	}
+	//	public static void updateMaterializerBlockState(boolean par0, World par1World, int par2, int par3, int par4) {
+	//		TileEntity tileentity = par1World.getTileEntity(par2, par3, par4);
+	//		keepInventory = true;
+	//
+	//		par1World.setBlock(par2, par3, par4, AbyssalCraft.materializer);
+	//
+	//		keepInventory = false;
+	//
+	//		if (tileentity != null){
+	//			tileentity.validate();
+	//			par1World.setTileEntity(par2, par3, par4, tileentity);
+	//		}
+	//	}
 
 	/**
 	 * Returns a new instance of a block's tile entity class. Called on placing the block.
@@ -140,29 +125,18 @@ public class BlockMaterializer extends BlockContainer {
 	 * Called when the block is placed in the world.
 	 */
 	@Override
-	public void onBlockPlacedBy(World par1World, int par2, int par3, int par4, EntityLivingBase par5EntityLivingBase, ItemStack par6ItemStack) {
-		int l = MathHelper.floor_double(par5EntityLivingBase.rotationYaw * 4.0F / 360.0F + 0.5D) & 3;
+	public void onBlockPlacedBy(World par1World, BlockPos pos, IBlockState state, EntityLivingBase par5EntityLivingBase, ItemStack par6ItemStack) {
 
-		if (l == 0)
-			par1World.setBlockMetadataWithNotify(par2, par3, par4, 2, 2);
-
-		if (l == 1)
-			par1World.setBlockMetadataWithNotify(par2, par3, par4, 5, 2);
-
-		if (l == 2)
-			par1World.setBlockMetadataWithNotify(par2, par3, par4, 3, 2);
-
-		if (l == 3)
-			par1World.setBlockMetadataWithNotify(par2, par3, par4, 4, 2);
+		par1World.setBlockState(pos, state.withProperty(FACING, par5EntityLivingBase.getHorizontalFacing().getOpposite()), 2);
 
 		if (par6ItemStack.hasDisplayName())
-			((TileEntityMaterializer)par1World.getTileEntity(par2, par3, par4)).func_145951_a(par6ItemStack.getDisplayName());
+			((TileEntityMaterializer)par1World.getTileEntity(pos)).func_145951_a(par6ItemStack.getDisplayName());
 	}
 
 	@Override
-	public void breakBlock(World par1World, int par2, int par3, int par4, Block par5Block, int par6) {
+	public void breakBlock(World par1World, BlockPos pos, IBlockState state) {
 		if (!keepInventory){
-			TileEntityMaterializer tileentitymaterializer = (TileEntityMaterializer)par1World.getTileEntity(par2, par3, par4);
+			TileEntityMaterializer tileentitymaterializer = (TileEntityMaterializer)par1World.getTileEntity(pos);
 
 			if (tileentitymaterializer != null){
 				for (int i1 = 0; i1 < tileentitymaterializer.getSizeInventory(); ++i1){
@@ -180,7 +154,7 @@ public class BlockMaterializer extends BlockContainer {
 								j1 = itemstack.stackSize;
 
 							itemstack.stackSize -= j1;
-							EntityItem entityitem = new EntityItem(par1World, par2 + f, par3 + f1, par4 + f2, new ItemStack(itemstack.getItem(), j1, itemstack.getItemDamage()));
+							EntityItem entityitem = new EntityItem(par1World, pos.getX() + f, pos.getY() + f1, pos.getZ() + f2, new ItemStack(itemstack.getItem(), j1, itemstack.getItemDamage()));
 
 							if (itemstack.hasTagCompound())
 								entityitem.getEntityItem().setTagCompound((NBTTagCompound)itemstack.getTagCompound().copy());
@@ -194,11 +168,11 @@ public class BlockMaterializer extends BlockContainer {
 					}
 				}
 
-				par1World.func_147453_f(par2, par3, par4, par5Block);
+				par1World.updateComparatorOutputLevel(pos, this);
 			}
 		}
 
-		super.breakBlock(par1World, par2, par3, par4, par5Block, par6);
+		super.breakBlock(par1World, pos, state);
 	}
 
 	@Override
@@ -208,15 +182,60 @@ public class BlockMaterializer extends BlockContainer {
 	}
 
 	@Override
-	public int getComparatorInputOverride(World par1World, int par2, int par3, int par4, int par5)
+	public int getComparatorInputOverride(World par1World, BlockPos pos)
 	{
-		return Container.calcRedstoneFromInventory((IInventory)par1World.getTileEntity(par2, par3, par4));
+		return Container.calcRedstone(par1World.getTileEntity(pos));
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public Item getItem(World par1World, int par2, int par3, int par4)
+	public Item getItem(World par1World, BlockPos pos)
 	{
 		return Item.getItemFromBlock(AbyssalCraft.materializer);
+	}
+
+	@Override
+	public int getRenderType()
+	{
+		return 3;
+	}
+
+	/**
+	 * Possibly modify the given BlockState before rendering it on an Entity (Minecarts, Endermen, ...)
+	 */
+	@Override
+	@SideOnly(Side.CLIENT)
+	public IBlockState getStateForEntityRender(IBlockState state)
+	{
+		return getDefaultState().withProperty(FACING, EnumFacing.SOUTH);
+	}
+
+	/**
+	 * Convert the given metadata into a BlockState for this Block
+	 */
+	@Override
+	public IBlockState getStateFromMeta(int meta)
+	{
+		EnumFacing enumfacing = EnumFacing.getFront(meta);
+
+		if (enumfacing.getAxis() == EnumFacing.Axis.Y)
+			enumfacing = EnumFacing.NORTH;
+
+		return getDefaultState().withProperty(FACING, enumfacing);
+	}
+
+	/**
+	 * Convert the BlockState into the correct metadata value
+	 */
+	@Override
+	public int getMetaFromState(IBlockState state)
+	{
+		return state.getValue(FACING).getIndex();
+	}
+
+	@Override
+	protected BlockState createBlockState()
+	{
+		return new BlockState(this, new IProperty[] {FACING});
 	}
 }

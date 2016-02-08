@@ -16,6 +16,7 @@ import java.util.Random;
 
 import com.shinoow.abyssalcraft.api.energy.IEnergyContainer;
 import com.shinoow.abyssalcraft.api.energy.IEnergyTransporter;
+
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.entity.player.EntityPlayer;
@@ -25,8 +26,10 @@ import net.minecraft.network.NetworkManager;
 import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.EnumParticleTypes;
+import net.minecraft.util.ITickable;
 
-public class TileEntityTieredSacrificialAltar extends TileEntity implements IEnergyContainer {
+public class TileEntityTieredSacrificialAltar extends TileEntity implements IEnergyContainer, ITickable {
 
 	private ItemStack item;
 	private int rot;
@@ -66,19 +69,18 @@ public class TileEntityTieredSacrificialAltar extends TileEntity implements IEne
 	public Packet getDescriptionPacket() {
 		NBTTagCompound nbtTag = new NBTTagCompound();
 		writeToNBT(nbtTag);
-		return new S35PacketUpdateTileEntity(xCoord, yCoord, zCoord, 1, nbtTag);
+		return new S35PacketUpdateTileEntity(pos, 1, nbtTag);
 	}
 
 	@Override
 	public void onDataPacket(NetworkManager net, S35PacketUpdateTileEntity packet)
 	{
-		readFromNBT(packet.func_148857_g());
+		readFromNBT(packet.getNbtCompound());
 	}
 
 	@Override
-	public void updateEntity()
+	public void update()
 	{
-		super.updateEntity();
 		if(rot == 360)
 			rot = 0;
 		if(item != null)
@@ -95,8 +97,8 @@ public class TileEntityTieredSacrificialAltar extends TileEntity implements IEne
 				}
 
 		if(entity == null)
-			if(worldObj.getBlock(xCoord, yCoord, zCoord).getCollisionBoundingBoxFromPool(worldObj, xCoord, yCoord, zCoord) != null){
-				List<EntityLivingBase> mobs = worldObj.getEntitiesWithinAABB(EntityLivingBase.class, worldObj.getBlock(xCoord, yCoord, zCoord).getCollisionBoundingBoxFromPool(worldObj, xCoord, yCoord, zCoord).expand(8, 3, 8));
+			if(worldObj.getBlockState(pos).getBlock().getCollisionBoundingBox(worldObj, pos, worldObj.getBlockState(pos)) != null){
+				List<EntityLivingBase> mobs = worldObj.getEntitiesWithinAABB(EntityLivingBase.class, worldObj.getBlockState(pos).getBlock().getCollisionBoundingBox(worldObj, pos, worldObj.getBlockState(pos)).expand(8, 3, 8));
 
 				for(EntityLivingBase mob : mobs)
 					if(!(mob instanceof EntityPlayer))
@@ -110,7 +112,7 @@ public class TileEntityTieredSacrificialAltar extends TileEntity implements IEne
 
 		if(entity != null){
 			if(getContainedEnergy() < getMaxEnergy())
-				worldObj.spawnParticle("largesmoke", entity.posX, entity.posY, entity.posZ, 0, 0, 0);
+				worldObj.spawnParticle(EnumParticleTypes.SMOKE_LARGE, entity.posX, entity.posY, entity.posZ, 0, 0, 0);
 			if(!entity.isEntityAlive()){
 				float num = entity.getMaxHealth();
 				entity = null;
@@ -137,7 +139,7 @@ public class TileEntityTieredSacrificialAltar extends TileEntity implements IEne
 
 	private int getCooldown(){
 		int base = 1200;
-		switch(worldObj.getBlockMetadata(xCoord, yCoord, zCoord)){
+		switch(getBlockMetadata()){
 		case 0:
 			return  (int) (base * 1.5);
 		case 1:
@@ -179,7 +181,7 @@ public class TileEntityTieredSacrificialAltar extends TileEntity implements IEne
 	@Override
 	public int getMaxEnergy() {
 		int base = 5000;
-		switch(worldObj.getBlockMetadata(xCoord, yCoord, zCoord)){
+		switch(getBlockMetadata()){
 		case 0:
 			return  (int) (base * 1.5);
 		case 1:
@@ -196,7 +198,7 @@ public class TileEntityTieredSacrificialAltar extends TileEntity implements IEne
 	@Override
 	public void addEnergy(float energy) {
 		float multiplier = 1.0F;
-		switch(worldObj.getBlockMetadata(xCoord, yCoord, zCoord)){
+		switch(getBlockMetadata()){
 		case 0:
 			multiplier = 1.25F;
 			break;

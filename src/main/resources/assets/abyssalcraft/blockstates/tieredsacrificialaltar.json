@@ -1,0 +1,8 @@
+{
+	"variants": {
+		"dimension=overworld": { "model": "abyssalcraft:tieredsacrificialaltar_0" },
+		"dimension=abyssal_wasteland": { "model": "abyssalcraft:tieredsacrificialaltar_1" },
+		"dimension=dreadlands": { "model": "abyssalcraft:tieredsacrificialaltar_2" },
+		"dimension=omothol": { "model": "abyssalcraft:tieredsacrificialaltar_3" }
+	}
+}

@@ -14,11 +14,16 @@ package com.shinoow.abyssalcraft.common.potion;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.IEntityLivingData;
-import net.minecraft.entity.monster.*;
-import net.minecraft.entity.passive.*;
+import net.minecraft.entity.monster.EntitySkeleton;
+import net.minecraft.entity.monster.EntityZombie;
+import net.minecraft.entity.passive.EntityChicken;
+import net.minecraft.entity.passive.EntityCow;
+import net.minecraft.entity.passive.EntityPig;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.potion.Potion;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
@@ -27,12 +32,9 @@ import com.shinoow.abyssalcraft.common.entity.*;
 import com.shinoow.abyssalcraft.common.entity.anti.*;
 import com.shinoow.abyssalcraft.common.entity.demon.*;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-
 public class PotionDplague extends Potion{
 
-	public PotionDplague(int par1, boolean par2, int par3) {
+	public PotionDplague(ResourceLocation par1, boolean par2, int par3) {
 		super(par1, par2, par3);
 	}
 
@@ -60,42 +62,42 @@ public class PotionDplague extends Potion{
 				EntityDreadling dreadling = new EntityDreadling(par1EntityLivingBase.worldObj);
 				dreadling.copyLocationAndAnglesFrom(par1EntityLivingBase);
 				par1EntityLivingBase.worldObj.removeEntity(par1EntityLivingBase);
-				dreadling.onSpawnWithEgg((IEntityLivingData)null);
+				dreadling.onInitialSpawn(null, null);
 				par1EntityLivingBase.worldObj.spawnEntityInWorld(dreadling);
 			}
 			else if(par1EntityLivingBase instanceof EntitySkeletonGoliath){
 				EntityDreadguard dg = new EntityDreadguard(par1EntityLivingBase.worldObj);
 				dg.copyLocationAndAnglesFrom(par1EntityLivingBase);
 				par1EntityLivingBase.worldObj.removeEntity(par1EntityLivingBase);
-				dg.onSpawnWithEgg((IEntityLivingData)null);
+				dg.onInitialSpawn(par1EntityLivingBase.worldObj.getDifficultyForLocation(par1EntityLivingBase.getPosition()),(IEntityLivingData)null);
 				par1EntityLivingBase.worldObj.spawnEntityInWorld(dg);
 			}
 			else if(par1EntityLivingBase instanceof EntityPig){
 				EntityDemonPig dp = new EntityDemonPig(par1EntityLivingBase.worldObj);
 				dp.copyLocationAndAnglesFrom(par1EntityLivingBase);
 				par1EntityLivingBase.worldObj.removeEntity(par1EntityLivingBase);
-				dp.onSpawnWithEgg((IEntityLivingData)null);
+				dp.onInitialSpawn(par1EntityLivingBase.worldObj.getDifficultyForLocation(par1EntityLivingBase.getPosition()),(IEntityLivingData)null);
 				par1EntityLivingBase.worldObj.spawnEntityInWorld(dp);
 			}
 			else if(par1EntityLivingBase instanceof EntityCow){
 				EntityDemonCow dc = new EntityDemonCow(par1EntityLivingBase.worldObj);
 				dc.copyLocationAndAnglesFrom(par1EntityLivingBase);
 				par1EntityLivingBase.worldObj.removeEntity(par1EntityLivingBase);
-				dc.onSpawnWithEgg((IEntityLivingData)null);
+				dc.onInitialSpawn(par1EntityLivingBase.worldObj.getDifficultyForLocation(par1EntityLivingBase.getPosition()),(IEntityLivingData)null);
 				par1EntityLivingBase.worldObj.spawnEntityInWorld(dc);
 			}
 			else if(par1EntityLivingBase instanceof EntityChicken){
 				EntityDemonChicken dc = new EntityDemonChicken(par1EntityLivingBase.worldObj);
 				dc.copyLocationAndAnglesFrom(par1EntityLivingBase);
 				par1EntityLivingBase.worldObj.removeEntity(par1EntityLivingBase);
-				dc.onSpawnWithEgg((IEntityLivingData)null);
+				dc.onInitialSpawn(par1EntityLivingBase.worldObj.getDifficultyForLocation(par1EntityLivingBase.getPosition()),(IEntityLivingData)null);
 				par1EntityLivingBase.worldObj.spawnEntityInWorld(dc);
 			}
 			else if(par1EntityLivingBase instanceof EntityLivingBase && !(par1EntityLivingBase instanceof EntityAntiGhoul)){
 				EntityDreadSpawn spawn = new EntityDreadSpawn(par1EntityLivingBase.worldObj);
 				spawn.copyLocationAndAnglesFrom(par1EntityLivingBase);
 				par1EntityLivingBase.worldObj.removeEntity(par1EntityLivingBase);
-				spawn.onSpawnWithEgg((IEntityLivingData)null);
+				spawn.onInitialSpawn(null, null);
 				par1EntityLivingBase.worldObj.spawnEntityInWorld(spawn);
 			}
 	}

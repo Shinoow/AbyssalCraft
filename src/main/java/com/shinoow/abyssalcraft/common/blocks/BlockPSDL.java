@@ -15,10 +15,10 @@ import java.util.Random;
 
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.item.ItemStack;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.MathHelper;
+import net.minecraft.util.BlockPos;
+import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.world.World;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
@@ -46,30 +46,36 @@ public class BlockPSDL extends BlockContainer {
 	}
 
 	@Override
-	public int getRenderType() {
-		return -1;
-	}
-
-	@Override
-	public void randomDisplayTick(World par1World, int par2, int par3, int par4, Random par5Random)
+	public boolean isFullCube()
 	{
-		super.randomDisplayTick(par1World, par2, par3, par4, par5Random);
-
-		if(AbyssalCraft.particleBlock)
-			if (par5Random.nextInt(10) == 0)
-				par1World.spawnParticle("largesmoke", par2 + par5Random.nextFloat(), par3 + 1.1F, par4 + par5Random.nextFloat(), 0.0D, 0.0D, 0.0D);
-	}
-
-	@Override
-	public boolean renderAsNormalBlock() {
 		return false;
 	}
 
 	@Override
-	public void onBlockPlacedBy(World par1World, int par2, int par3, int par4, EntityLivingBase par5EntityLivingBase, ItemStack par6ItemStack)
-	{
-		int dir = MathHelper.floor_double(par5EntityLivingBase.rotationYaw * 4F / 360F + 0.5D) & 3;
-		par1World.setBlockMetadataWithNotify(par2, par3, par4, dir, 0);
+	public int getRenderType() {
+		return 2;
 	}
+
+	@Override
+	public void randomDisplayTick(World par1World, BlockPos pos, IBlockState state, Random par5Random)
+	{
+		super.randomDisplayTick(par1World, pos, state, par5Random);
+
+		if(AbyssalCraft.particleBlock)
+			if (par5Random.nextInt(10) == 0)
+				par1World.spawnParticle(EnumParticleTypes.SMOKE_LARGE, pos.getX() + par5Random.nextFloat(), pos.getY() + 1.1F, pos.getZ() + par5Random.nextFloat(), 0.0D, 0.0D, 0.0D);
+	}
+
+	//	@Override
+	//	public boolean renderAsNormalBlock() {
+	//		return false;
+	//	}
+
+	//	@Override
+	//	public void onBlockPlacedBy(World par1World, BlockPos pos, IBlockState state, EntityLivingBase par5EntityLivingBase, ItemStack par6ItemStack)
+	//	{
+	//		int dir = MathHelper.floor_double(par5EntityLivingBase.rotationYaw * 4F / 360F + 0.5D) & 3;
+	//		par1World.setBlockMetadataWithNotify(par2, par3, par4, dir, 0);
+	//	}
 
 }

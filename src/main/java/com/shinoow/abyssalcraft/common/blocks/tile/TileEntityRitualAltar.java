@@ -18,6 +18,8 @@ import net.minecraft.network.NetworkManager;
 import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.BlockPos;
+import net.minecraft.util.ITickable;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 
@@ -28,7 +30,7 @@ import com.shinoow.abyssalcraft.api.ritual.RitualRegistry;
 import com.shinoow.abyssalcraft.common.entity.EntityRemnant;
 import com.shinoow.abyssalcraft.common.items.ItemNecronomicon;
 
-public class TileEntityRitualAltar extends TileEntity {
+public class TileEntityRitualAltar extends TileEntity implements ITickable {
 
 	private int ritualTimer;
 	private ItemStack[] offers = new ItemStack[8];
@@ -65,20 +67,18 @@ public class TileEntityRitualAltar extends TileEntity {
 	public Packet getDescriptionPacket() {
 		NBTTagCompound nbtTag = new NBTTagCompound();
 		writeToNBT(nbtTag);
-		return new S35PacketUpdateTileEntity(xCoord, yCoord, zCoord, 1, nbtTag);
+		return new S35PacketUpdateTileEntity(pos, 1, nbtTag);
 	}
 
 	@Override
 	public void onDataPacket(NetworkManager net, S35PacketUpdateTileEntity packet)
 	{
-		readFromNBT(packet.func_148857_g());
+		readFromNBT(packet.getNbtCompound());
 	}
 
 	@Override
-	public void updateEntity()
+	public void update()
 	{
-		super.updateEntity();
-
 		if(isPerformingRitual()){
 			ritualTimer++;
 
@@ -92,10 +92,10 @@ public class TileEntityRitualAltar extends TileEntity {
 							consumedEnergy += ritual.getReqEnergy()/200;
 							break;
 						}
-				} else user = worldObj.getClosestPlayer(xCoord, yCoord, zCoord, 5);
+				} else user = worldObj.getClosestPlayer(pos.getX(), pos.getY(), pos.getZ(), 5);
 				if(ritualTimer == 200)
 					if(user != null){
-						if(!MinecraftForge.EVENT_BUS.post(new RitualEvent.Post(user, ritual, worldObj, xCoord, yCoord, zCoord))){
+						if(!MinecraftForge.EVENT_BUS.post(new RitualEvent.Post(user, ritual, worldObj, pos))){
 							for(ItemStack item : user.inventory.mainInventory)
 								if(item != null && item.getItem() instanceof IEnergyTransporter &&
 								((IEnergyTransporter) item.getItem()).getContainedEnergy(item) > 0){
@@ -105,7 +105,7 @@ public class TileEntityRitualAltar extends TileEntity {
 									break;
 								}
 							if(consumedEnergy == ritual.getReqEnergy())
-								ritual.completeRitual(worldObj, xCoord, yCoord, zCoord, user);
+								ritual.completeRitual(worldObj, pos, user);
 							ritualTimer = 0;
 							user = null;
 							ritual = null;
@@ -130,19 +130,22 @@ public class TileEntityRitualAltar extends TileEntity {
 
 	private boolean canPerform(){
 
-		if(checkSurroundings(worldObj, xCoord, yCoord, zCoord)) return true;
+		if(checkSurroundings(worldObj, pos)) return true;
 		return false;
 	}
 
-	private boolean checkSurroundings(World world, int x, int y, int z){
-		TileEntity ped1 = world.getTileEntity(x - 3, y, z);
-		TileEntity ped2 = world.getTileEntity(x, y, z - 3);
-		TileEntity ped3 = world.getTileEntity(x + 3, y, z);
-		TileEntity ped4 = world.getTileEntity(x, y, z + 3);
-		TileEntity ped5 = world.getTileEntity(x - 2, y, z + 2);
-		TileEntity ped6 = world.getTileEntity(x - 2, y, z - 2);
-		TileEntity ped7 = world.getTileEntity(x + 2, y, z + 2);
-		TileEntity ped8 = world.getTileEntity(x + 2, y, z - 2);
+	private boolean checkSurroundings(World world, BlockPos pos){
+		int x = pos.getX();
+		int y = pos.getY();
+		int z = pos.getZ();
+		TileEntity ped1 = world.getTileEntity(new BlockPos(x - 3, y, z));
+		TileEntity ped2 = world.getTileEntity(new BlockPos(x, y, z - 3));
+		TileEntity ped3 = world.getTileEntity(new BlockPos(x + 3, y, z));
+		TileEntity ped4 = world.getTileEntity(new BlockPos(x, y, z + 3));
+		TileEntity ped5 = world.getTileEntity(new BlockPos(x - 2, y, z + 2));
+		TileEntity ped6 = world.getTileEntity(new BlockPos(x - 2, y, z - 2));
+		TileEntity ped7 = world.getTileEntity(new BlockPos(x + 2, y, z + 2));
+		TileEntity ped8 = world.getTileEntity(new BlockPos(x + 2, y, z - 2));
 		if(ped1 != null && ped2 != null && ped3 != null && ped4 != null && ped5 != null && ped6 != null && ped7 != null && ped8 != null)
 			if(ped1 instanceof TileEntityRitualPedestal && ped2 instanceof TileEntityRitualPedestal && ped3 instanceof TileEntityRitualPedestal
 					&& ped4 instanceof TileEntityRitualPedestal && ped5 instanceof TileEntityRitualPedestal && ped6 instanceof TileEntityRitualPedestal
@@ -162,15 +165,19 @@ public class TileEntityRitualAltar extends TileEntity {
 		return false;
 	}
 
-	private void resetPedestals(World world, int x, int y, int z){
-		TileEntity ped1 = world.getTileEntity(x - 3, y, z);
-		TileEntity ped2 = world.getTileEntity(x, y, z - 3);
-		TileEntity ped3 = world.getTileEntity(x + 3, y, z);
-		TileEntity ped4 = world.getTileEntity(x, y, z + 3);
-		TileEntity ped5 = world.getTileEntity(x - 2, y, z + 2);
-		TileEntity ped6 = world.getTileEntity(x - 2, y, z - 2);
-		TileEntity ped7 = world.getTileEntity(x + 2, y, z + 2);
-		TileEntity ped8 = world.getTileEntity(x + 2, y, z - 2);
+	private void resetPedestals(World world, BlockPos pos){
+		int x = pos.getX();
+		int y = pos.getY();
+		int z = pos.getZ();
+
+		TileEntity ped1 = world.getTileEntity(new BlockPos(x-3, y, z));
+		TileEntity ped2 = world.getTileEntity(new BlockPos(x, y, z - 3));
+		TileEntity ped3 = world.getTileEntity(new BlockPos(x + 3, y, z));
+		TileEntity ped4 = world.getTileEntity(new BlockPos(x, y, z + 3));
+		TileEntity ped5 = world.getTileEntity(new BlockPos(x - 2, y, z + 2));
+		TileEntity ped6 = world.getTileEntity(new BlockPos(x - 2, y, z - 2));
+		TileEntity ped7 = world.getTileEntity(new BlockPos(x + 2, y, z + 2));
+		TileEntity ped8 = world.getTileEntity(new BlockPos(x + 2, y, z - 2));
 		if(ped1 != null && ped2 != null && ped3 != null && ped4 != null && ped5 != null && ped6 != null && ped7 != null && ped8 != null)
 			if(ped1 instanceof TileEntityRitualPedestal && ped2 instanceof TileEntityRitualPedestal && ped3 instanceof TileEntityRitualPedestal
 					&& ped4 instanceof TileEntityRitualPedestal && ped5 instanceof TileEntityRitualPedestal && ped6 instanceof TileEntityRitualPedestal
@@ -186,39 +193,35 @@ public class TileEntityRitualAltar extends TileEntity {
 			}
 	}
 
-	public void performRitual(World world, int x, int y, int z, EntityPlayer player){
+	public void performRitual(World world, BlockPos pos, EntityPlayer player){
 
 		if(!isPerformingRitual()){
 			ItemStack item = player.getCurrentEquippedItem();
 			if(item.getItem() instanceof ItemNecronomicon)
-				if(RitualRegistry.instance().canPerformAction(world.provider.dimensionId, ((ItemNecronomicon)item.getItem()).getBookType()))
+				if(RitualRegistry.instance().canPerformAction(world.provider.getDimensionId(), ((ItemNecronomicon)item.getItem()).getBookType()))
 					if(canPerform()){
-						ritual = RitualRegistry.instance().getRitual(world.provider.dimensionId, ((ItemNecronomicon)item.getItem()).getBookType(), offers, this.item);
+						ritual = RitualRegistry.instance().getRitual(world.provider.getDimensionId(), ((ItemNecronomicon)item.getItem()).getBookType(), offers, this.item);
 						if(ritual != null)
-								if(ritual.canRemnantAid()){
-									if(!world.getEntitiesWithinAABB(EntityRemnant.class, world.getBlock(x, y, z).getCollisionBoundingBoxFromPool(world, x, y, z).expand(32, 32, 32)).isEmpty()
-											&& world.getEntitiesWithinAABB(EntityRemnant.class, world.getBlock(x, y, z).getCollisionBoundingBoxFromPool(world, x, y, z).expand(32, 32, 32)).size() >= ritual.getBookType() + 1)
-										if(ritual.canCompleteRitual(world, x, y, z, player))
-											if(!MinecraftForge.EVENT_BUS.post(new RitualEvent.Pre(player, ritual, world, x, y, z))){
-												summonRemnants(world, x, y, z);
-												ritualTimer = 1;
-												resetPedestals(world, x, y, z);
-												user = player;
-												consumedEnergy = 0;
-											}
-								} else if(ritual.canCompleteRitual(world, x, y, z, player))
-									if(!MinecraftForge.EVENT_BUS.post(new RitualEvent.Pre(player, ritual, world, x, y, z))){
-										ritualTimer = 1;
-										resetPedestals(world, x, y, z);
-										user = player;
-										consumedEnergy = 0;
-									}
+							if(ritual.canRemnantAid()){
+								if(!world.getEntitiesWithinAABB(EntityRemnant.class, world.getBlockState(pos).getBlock().getCollisionBoundingBox(world, pos, world.getBlockState(pos)).expand(32, 32, 32)).isEmpty()
+										&& world.getEntitiesWithinAABB(EntityRemnant.class, world.getBlockState(pos).getBlock().getCollisionBoundingBox(world, pos, world.getBlockState(pos)).expand(32, 32, 32)).size() >= ritual.getBookType() + 1)
+									if(ritual.canCompleteRitual(world, pos, player))
+										if(!MinecraftForge.EVENT_BUS.post(new RitualEvent.Pre(player, ritual, world, pos))){
+											//											summonRemnants(world, pos);
+											ritualTimer = 1;
+											resetPedestals(world, pos);
+											user = player;
+											consumedEnergy = 0;
+										}
+							} else if(ritual.canCompleteRitual(world, pos, player))
+								if(!MinecraftForge.EVENT_BUS.post(new RitualEvent.Pre(player, ritual, world, pos))){
+									ritualTimer = 1;
+									resetPedestals(world, pos);
+									user = player;
+									consumedEnergy = 0;
+								}
 					}
 		}
-	}
-
-	private void summonRemnants(World world, int x, int y, int z){
-		//		List<EntityRemnant> remnants = world.getEntitiesWithinAABB(EntityRemnant.class, world.getBlock(x, y, z).getCollisionBoundingBoxFromPool(world, x, y, z).expand(32, 32, 32));
 	}
 
 	public int getRitualCooldown(){

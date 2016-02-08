@@ -14,7 +14,9 @@ package com.shinoow.abyssalcraft.common.util;
 import java.util.Map;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
+import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;
 
 import com.google.common.collect.Maps;
@@ -55,46 +57,49 @@ public class RitualUtil {
 	 * @param bookType Level of the current Necronomicon held
 	 * @return True if a Ritual Altar can be constructed, otherwise false
 	 */
-	public static boolean tryAltar(World world, int x, int y, int z, int bookType){
-		Block ritualBlock = world.getBlock(x, y, z);
-		if(ritualBlock != null && ritualBlocks.containsKey(ritualBlock))
-			if(bookType >= ritualBlocks.get(ritualBlock))
-				if(world.getBlock(x - 3, y, z) == ritualBlock &&
-				world.getBlock(x, y, z - 3) == ritualBlock &&
-				world.getBlock(x + 3, y, z) == ritualBlock &&
-				world.getBlock(x, y, z + 3) == ritualBlock &&
-				world.getBlock(x - 2, y, z + 2) == ritualBlock &&
-				world.getBlock(x - 2, y, z - 2) == ritualBlock &&
-				world.getBlock(x + 2, y, z + 2) == ritualBlock &&
-				world.getBlock(x + 2, y, z - 2) == ritualBlock)
-					if(world.isAirBlock(x - 3, y, z - 1) && world.isAirBlock(x - 3, y, z + 1) &&
-							world.isAirBlock(x - 4, y, z) && world.isAirBlock(x - 4, y, z - 1) &&
-							world.isAirBlock(x - 4, y, z + 1) && world.isAirBlock(x - 3, y, z - 2) &&
-							world.isAirBlock(x - 3, y, z - 3) && world.isAirBlock(x - 2, y, z - 3) &&
-							world.isAirBlock(x - 1, y, z - 3) && world.isAirBlock(x - 1, y, z - 4) &&
-							world.isAirBlock(x, y, z - 4) && world.isAirBlock(x + 1, y, z - 4) &&
-							world.isAirBlock(x + 1, y, z - 3) && world.isAirBlock(x + 2, y, z - 3) &&
-							world.isAirBlock(x + 3, y, z - 3) && world.isAirBlock(x + 3, y, z - 2) &&
-							world.isAirBlock(x + 3, y, z - 1) && world.isAirBlock(x + 4, y, z - 1) &&
-							world.isAirBlock(x + 4, y, z) && world.isAirBlock(x + 4, y, z + 1) &&
-							world.isAirBlock(x + 3, y, z + 1) && world.isAirBlock(x + 3, y, z + 2) &&
-							world.isAirBlock(x + 3, y, z + 3) && world.isAirBlock(x + 2, y, z + 3) &&
-							world.isAirBlock(x + 1, y, z + 3) && world.isAirBlock(x + 1, y, z + 4) &&
-							world.isAirBlock(x, y, z + 4) && world.isAirBlock(x - 1, y, z + 4) &&
-							world.isAirBlock(x - 1, y, z + 3) && world.isAirBlock(x - 2, y, z + 3) &&
-							world.isAirBlock(x - 3, y, z + 3) && world.isAirBlock(x - 3, y, z + 2) &&
-							world.isAirBlock(x - 1, y, z) && world.isAirBlock(x + 1, y, z) &&
-							world.isAirBlock(x, y, z - 1) && world.isAirBlock(x, y, z + 1) &&
-							world.isAirBlock(x - 1, y, z + 1) && world.isAirBlock(x - 2, y, z) &&
-							world.isAirBlock(x - 2, y, z) && world.isAirBlock(x - 2, y, z - 1) &&
-							world.isAirBlock(x - 1, y, z - 1) && world.isAirBlock(x - 1, y, z - 2) &&
-							world.isAirBlock(x, y, z - 2) && world.isAirBlock(x + 1, y, z - 2) &&
-							world.isAirBlock(x + 1, y, z - 1) && world.isAirBlock(x + 2, y, z - 1) &&
-							world.isAirBlock(x + 2, y, z) && world.isAirBlock(x + 2, y, z + 1) &&
-							world.isAirBlock(x + 1, y, z + 1) && world.isAirBlock(x + 1, y, z + 2) &&
-							world.isAirBlock(x, y, z + 2) && world.isAirBlock(x - 1, y, z + 2))
-						if(RitualRegistry.instance().sameBookType(world.provider.dimensionId, ritualBlocks.get(ritualBlock))){
-							createAltar(world, x, y, z, ritualBlock);
+	public static boolean tryAltar(World world, BlockPos pos, int bookType){
+		IBlockState ritualBlock = world.getBlockState(pos);
+		int x = 0;
+		int y = 0;
+		int z = 0;
+		if(ritualBlock != null && ritualBlocks.containsKey(ritualBlock.getBlock()))
+			if(bookType >= ritualBlocks.get(ritualBlock.getBlock()))
+				if(world.getBlockState(pos.add(x -3, y, z)) == ritualBlock &&
+				world.getBlockState(pos.add(x, y, z -3)) == ritualBlock &&
+				world.getBlockState(pos.add(x + 3, y, z)) == ritualBlock &&
+				world.getBlockState(pos.add(x, y, z + 3)) == ritualBlock &&
+				world.getBlockState(pos.add(x -2, y,z + 2)) == ritualBlock &&
+				world.getBlockState(pos.add(x -2, y, z -2)) == ritualBlock &&
+				world.getBlockState(pos.add(x + 2, y, z + 2)) == ritualBlock &&
+				world.getBlockState(pos.add(x + 2, y, z -2)) == ritualBlock)
+					if(world.isAirBlock(pos.add(x -3, y, z -1)) && world.isAirBlock(pos.add(x -3, y, z + 1)) &&
+							world.isAirBlock(pos.add(x -4, y, z)) && world.isAirBlock(pos.add(x -4, y, z -1)) &&
+							world.isAirBlock(pos.add(x -4, y, z + 1)) && world.isAirBlock(pos.add(x -3, y, z -2)) &&
+							world.isAirBlock(pos.add(x -3, y, z -3)) && world.isAirBlock(pos.add(x -2, y, z -3)) &&
+							world.isAirBlock(pos.add(x -1, y, z -3)) && world.isAirBlock(pos.add(x -1, y, z -4)) &&
+							world.isAirBlock(pos.add(x, y, z -4)) && world.isAirBlock(pos.add(x + 1, y, z -4)) &&
+							world.isAirBlock(pos.add(x + 1, y, z -3)) && world.isAirBlock(pos.add(x + 2, y, z -3)) &&
+							world.isAirBlock(pos.add(x + 3, y, z -3)) && world.isAirBlock(pos.add(x + 3, y, z -2)) &&
+							world.isAirBlock(pos.add(x + 3, y, z -1)) && world.isAirBlock(pos.add(x + 4, y, z -1)) &&
+							world.isAirBlock(pos.add(x + 4, y, z)) && world.isAirBlock(pos.add(x + 4, y, z + 1)) &&
+							world.isAirBlock(pos.add(x + 3, y, z + 1)) && world.isAirBlock(pos.add(x + 3, y, z + 2)) &&
+							world.isAirBlock(pos.add(x + 3, y, z + 3)) && world.isAirBlock(pos.add(x + 2, y, z + 3)) &&
+							world.isAirBlock(pos.add(x + 1, y, z + 3)) && world.isAirBlock(pos.add(x + 1, y, z + 4)) &&
+							world.isAirBlock(pos.add(x, y, z + 4)) && world.isAirBlock(pos.add(x -1, y, z + 4)) &&
+							world.isAirBlock(pos.add(x -1, y, z + 3)) && world.isAirBlock(pos.add(x -2, y, z + 3)) &&
+							world.isAirBlock(pos.add(x-3, y, z + 3)) && world.isAirBlock(pos.add(x -3, y, z + 2)) &&
+							world.isAirBlock(pos.add(x-1, y, z + 0)) && world.isAirBlock(pos.add(x + 1, y, z)) &&
+							world.isAirBlock(pos.add(x, y, z -1)) && world.isAirBlock(pos.add(x, y, z + 1)) &&
+							world.isAirBlock(pos.add(x-1, y, z + 1)) && world.isAirBlock(pos.add(x -2, y, z)) &&
+							world.isAirBlock(pos.add(x-2, y, z)) && world.isAirBlock(pos.add(x -2, y, z -1)) &&
+							world.isAirBlock(pos.add(x-1, y, z -1)) && world.isAirBlock(pos.add(x -1, y, z -2)) &&
+							world.isAirBlock(pos.add(x, y, z -2)) && world.isAirBlock(pos.add(x + 1, y, z -2)) &&
+							world.isAirBlock(pos.add(x + 1, y, z -1)) && world.isAirBlock(pos.add(x + 2, y, z -1)) &&
+							world.isAirBlock(pos.add(x + 2, y, z)) && world.isAirBlock(pos.add(x + 2, y, z + 1)) &&
+							world.isAirBlock(pos.add(x + 1, y, z + 1)) && world.isAirBlock(pos.add(x + 1, y, z + 2)) &&
+							world.isAirBlock(pos.add(x, y, z + 2)) && world.isAirBlock(pos.add(x -1, y, z + 2)))
+						if(RitualRegistry.instance().sameBookType(world.provider.getDimensionId(), ritualBlocks.get(ritualBlock.getBlock()))){
+							createAltar(world, pos, ritualBlock.getBlock());
 							return true;
 						}
 		return false;
@@ -108,19 +113,22 @@ public class RitualUtil {
 	 * @param z Z coordinate
 	 * @param block Ritual Block
 	 */
-	private static void createAltar(World world, int x, int y, int z, Block block){
+	private static void createAltar(World world, BlockPos pos, Block block){
 		if(altarMeta.containsKey(block)){
 			int meta = altarMeta.get(block);
+			int x = 0;
+			int y = 0;
+			int z = 0;
 
-			world.setBlock(x, y, z, AbyssalCraft.ritualaltar, meta, 2);
-			world.setBlock(x - 3, y, z, AbyssalCraft.ritualpedestal, meta, 2);
-			world.setBlock(x, y, z - 3, AbyssalCraft.ritualpedestal, meta, 2);
-			world.setBlock(x + 3, y, z, AbyssalCraft.ritualpedestal, meta, 2);
-			world.setBlock(x, y, z + 3, AbyssalCraft.ritualpedestal, meta, 2);
-			world.setBlock(x - 2, y, z + 2, AbyssalCraft.ritualpedestal, meta, 2);
-			world.setBlock(x - 2, y, z - 2, AbyssalCraft.ritualpedestal, meta, 2);
-			world.setBlock(x + 2, y, z + 2, AbyssalCraft.ritualpedestal, meta, 2);
-			world.setBlock(x + 2, y, z - 2, AbyssalCraft.ritualpedestal, meta, 2);
+			world.setBlockState(pos, AbyssalCraft.ritualaltar.getStateFromMeta(meta), 2);
+			world.setBlockState(pos.add(x -3, y, z), AbyssalCraft.ritualpedestal.getStateFromMeta(meta), 2);
+			world.setBlockState(pos.add(x, y, z -3), AbyssalCraft.ritualpedestal.getStateFromMeta(meta), 2);
+			world.setBlockState(pos.add(x + 3, y, z), AbyssalCraft.ritualpedestal.getStateFromMeta(meta), 2);
+			world.setBlockState(pos.add(x, y, z + 3), AbyssalCraft.ritualpedestal.getStateFromMeta(meta), 2);
+			world.setBlockState(pos.add(x -2, y, z + 2), AbyssalCraft.ritualpedestal.getStateFromMeta(meta), 2);
+			world.setBlockState(pos.add(x -2, y, z -2), AbyssalCraft.ritualpedestal.getStateFromMeta(meta), 2);
+			world.setBlockState(pos.add(x + 2, y, z + 2), AbyssalCraft.ritualpedestal.getStateFromMeta(meta), 2);
+			world.setBlockState(pos.add(x + 2, y, z -2), AbyssalCraft.ritualpedestal.getStateFromMeta(meta), 2);
 		}
 	}
 }

@@ -26,6 +26,8 @@ import net.minecraft.entity.ai.EntityAIWander;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.util.BlockPos;
+import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.World;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
@@ -42,7 +44,7 @@ public class EntityAntiPlayer extends EntityMob implements IAntiEntity {
 		tasks.addTask(5, new EntityAILookIdle(this));
 		tasks.addTask(5, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
 		targetTasks.addTask(1, new EntityAIHurtByTarget(this, false));
-		targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityPlayer.class, 0, true));
+		targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityPlayer.class, true));
 	}
 
 	@Override
@@ -58,18 +60,12 @@ public class EntityAntiPlayer extends EntityMob implements IAntiEntity {
 	}
 
 	@Override
-	protected boolean isAIEnabled()
-	{
-		return true;
-	}
-
-	@Override
 	public boolean canDespawn(){
 		return false;
 	}
 
 	@Override
-	protected void func_145780_a(int par1, int par2, int par3, Block par4)
+	protected void playStepSound(BlockPos pos, Block par4)
 	{
 		worldObj.playSoundAtEntity(this, "mob.zombie.step", 0.15F, 1.0F);
 	}
@@ -87,10 +83,10 @@ public class EntityAntiPlayer extends EntityMob implements IAntiEntity {
 			EntityAntiPlayer antiPlayer = new EntityAntiPlayer(worldObj);
 			antiPlayer.copyLocationAndAnglesFrom(par1EntityLivingBase);
 			worldObj.removeEntity(par1EntityLivingBase);
-			antiPlayer.onSpawnWithEgg((IEntityLivingData)null);
+			antiPlayer.onInitialSpawn(worldObj.getDifficultyForLocation(new BlockPos(posX, posY, posZ)), (IEntityLivingData)null);
 
 			worldObj.spawnEntityInWorld(antiPlayer);
-			worldObj.playAuxSFXAtEntity((EntityPlayer)null, 1016, (int)posX, (int)posY, (int)posZ, 0);
+			worldObj.playAuxSFXAtEntity((EntityPlayer)null, 1016, new BlockPos(posX, posY, posZ), 0);
 
 		}
 	}
@@ -99,7 +95,7 @@ public class EntityAntiPlayer extends EntityMob implements IAntiEntity {
 	protected void collideWithEntity(Entity par1Entity)
 	{
 		if(!worldObj.isRemote && par1Entity instanceof EntityPlayer && AbyssalCraft.hardcoreMode){
-			boolean flag = worldObj.getGameRules().getGameRuleBooleanValue("mobGriefing");
+			boolean flag = worldObj.getGameRules().getBoolean("mobGriefing");
 			worldObj.createExplosion(this, posX, posY, posZ, 5, flag);
 			setDead();
 		}
@@ -107,14 +103,14 @@ public class EntityAntiPlayer extends EntityMob implements IAntiEntity {
 	}
 
 	@Override
-	public IEntityLivingData onSpawnWithEgg(IEntityLivingData par1EntityLivingData)
+	public IEntityLivingData onInitialSpawn(DifficultyInstance difficulty, IEntityLivingData par1EntityLivingData)
 	{
-		par1EntityLivingData = super.onSpawnWithEgg(par1EntityLivingData);
+		par1EntityLivingData = super.onInitialSpawn(difficulty, par1EntityLivingData);
 
 		setCanPickUpLoot(true);
 
-		addRandomArmor();
-		enchantEquipment();
+		setEquipmentBasedOnDifficulty(difficulty);
+		setEnchantmentBasedOnDifficulty(difficulty);
 
 		return par1EntityLivingData;
 	}

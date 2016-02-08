@@ -11,53 +11,13 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.client.handlers;
 
-import net.minecraft.client.Minecraft;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.event.FOVUpdateEvent;
-import net.minecraftforge.client.event.RenderPlayerEvent;
-
-import org.lwjgl.opengl.GL11;
+import net.minecraftforge.client.event.ModelBakeEvent;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
-import com.shinoow.abyssalcraft.client.model.player.ModelStarSpawnPlayer;
-import com.shinoow.abyssalcraft.common.util.EntityUtil;
-
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 
 public class AbyssalCraftClientEventHooks {
-
-	private ModelStarSpawnPlayer model = new ModelStarSpawnPlayer();
-
-	Minecraft mc = Minecraft.getMinecraft();
-
-	@SubscribeEvent
-	public void renderPlayer(RenderPlayerEvent.SetArmorModel event){
-
-		if(EntityUtil.isPlayerCoralium(event.entityPlayer))
-			renderStarSpawnPlayer(event.entityPlayer, event.partialRenderTick);
-
-	}
-
-	private void renderStarSpawnPlayer(EntityPlayer player, float partialTicks){
-
-		mc.renderEngine.bindTexture(new ResourceLocation("abyssalcraft:textures/model/tentacles.png"));
-
-		for (int j = 0; j < 1; ++j) {
-			GL11.glColor4f(1F, 1F, 1F, 1F);
-			float f10 = player.prevRotationYawHead + (player.rotationYawHead - player.prevRotationYawHead) * partialTicks - (player.prevRenderYawOffset + (player.renderYawOffset - player.prevRenderYawOffset) * partialTicks);
-			float f2 = player.prevRotationPitch + (player.rotationPitch - player.prevRotationPitch) * partialTicks;
-			GL11.glPushMatrix();
-			GL11.glFrontFace(GL11.GL_CW);
-			GL11.glRotatef(f10, 0.0F, 1.0F, 0.0F);
-			GL11.glRotatef(f2, 1.0F, 0.0F, 0.0F);
-			GL11.glTranslatef(0, -0.22F, 0);
-			GL11.glScalef(1, 1, 1);
-			model.renderTentacles(0.0625F, player);
-			GL11.glFrontFace(GL11.GL_CCW);
-			GL11.glPopMatrix();
-		}
-	}
 
 	@SubscribeEvent
 	public void onUpdateFOV(FOVUpdateEvent event) {
@@ -76,5 +36,13 @@ public class AbyssalCraftClientEventHooks {
 		}
 
 		event.newfov = fov;
+	}
+
+	@SubscribeEvent
+	public void onModelBakeEvent(ModelBakeEvent event)
+	{
+		event.modelManager.getBlockModelShapes().registerBuiltInBlocks(AbyssalCraft.dreadaltarbottom, AbyssalCraft.dreadaltartop, AbyssalCraft.ODB,
+				AbyssalCraft.engraver, AbyssalCraft.cthulhuStatue, AbyssalCraft.hasturStatue, AbyssalCraft.jzaharStatue, AbyssalCraft.azathothStatue,
+				AbyssalCraft.nyarlathotepStatue, AbyssalCraft.yogsothothStatue, AbyssalCraft.shubniggurathStatue);
 	}
 }

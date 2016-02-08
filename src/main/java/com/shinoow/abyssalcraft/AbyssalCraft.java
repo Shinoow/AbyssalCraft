@@ -12,9 +12,7 @@
 package com.shinoow.abyssalcraft;
 
 import java.io.*;
-import java.lang.reflect.Field;
-import java.lang.reflect.Modifier;
-import java.net.*;
+import java.net.URL;
 import java.util.*;
 
 import net.minecraft.block.Block;
@@ -25,13 +23,11 @@ import net.minecraft.entity.*;
 import net.minecraft.entity.EntityList.EntityEggInfo;
 import net.minecraft.init.Items;
 import net.minecraft.item.*;
-import net.minecraft.launchwrapper.Launch;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.potion.*;
-import net.minecraft.stats.*;
-import net.minecraft.util.EnumChatFormatting;
-import net.minecraft.util.StatCollector;
-import net.minecraft.util.WeightedRandomChestContent;
+import net.minecraft.potion.Potion;
+import net.minecraft.stats.Achievement;
+import net.minecraft.stats.AchievementList;
+import net.minecraft.util.*;
 import net.minecraft.world.WorldProvider;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.gen.structure.MapGenStructureIO;
@@ -40,16 +36,25 @@ import net.minecraftforge.common.BiomeDictionary.Type;
 import net.minecraftforge.common.BiomeManager.BiomeEntry;
 import net.minecraftforge.common.BiomeManager.BiomeType;
 import net.minecraftforge.common.config.Configuration;
-import net.minecraftforge.event.world.WorldEvent;
 import net.minecraftforge.fluids.*;
+import net.minecraftforge.fml.client.event.ConfigChangedEvent;
+import net.minecraftforge.fml.common.*;
+import net.minecraftforge.fml.common.Mod.*;
+import net.minecraftforge.fml.common.event.*;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.network.NetworkRegistry;
+import net.minecraftforge.fml.common.registry.EntityRegistry;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.oredict.OreDictionary;
 
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI.FuelType;
 import com.shinoow.abyssalcraft.api.energy.EnergyEnum.DeityType;
 import com.shinoow.abyssalcraft.api.integration.IACPlugin;
-import com.shinoow.abyssalcraft.api.item.*;
-import com.shinoow.abyssalcraft.common.*;
+import com.shinoow.abyssalcraft.api.item.ItemEngraving;
+import com.shinoow.abyssalcraft.api.item.ItemUpgradeKit;
+import com.shinoow.abyssalcraft.common.AbyssalCrafting;
+import com.shinoow.abyssalcraft.common.CommonProxy;
 import com.shinoow.abyssalcraft.common.blocks.*;
 import com.shinoow.abyssalcraft.common.blocks.itemblock.*;
 import com.shinoow.abyssalcraft.common.blocks.tile.*;
@@ -62,22 +67,20 @@ import com.shinoow.abyssalcraft.common.items.*;
 import com.shinoow.abyssalcraft.common.items.armor.*;
 import com.shinoow.abyssalcraft.common.network.PacketDispatcher;
 import com.shinoow.abyssalcraft.common.potion.*;
-import com.shinoow.abyssalcraft.common.structures.abyss.stronghold.*;
-import com.shinoow.abyssalcraft.common.structures.dreadlands.mineshaft.*;
-import com.shinoow.abyssalcraft.common.util.*;
-import com.shinoow.abyssalcraft.common.world.*;
+import com.shinoow.abyssalcraft.common.structures.abyss.stronghold.MapGenAbyStronghold;
+import com.shinoow.abyssalcraft.common.structures.abyss.stronghold.StructureAbyStrongholdPieces;
+import com.shinoow.abyssalcraft.common.structures.dreadlands.mineshaft.StructureDreadlandsMinePieces;
+import com.shinoow.abyssalcraft.common.structures.dreadlands.mineshaft.StructureDreadlandsMineStart;
+import com.shinoow.abyssalcraft.common.util.ACLogger;
+import com.shinoow.abyssalcraft.common.util.RitualUtil;
+import com.shinoow.abyssalcraft.common.world.AbyssalCraftWorldGenerator;
+import com.shinoow.abyssalcraft.common.world.WorldProviderAbyss;
+import com.shinoow.abyssalcraft.common.world.WorldProviderDarkRealm;
+import com.shinoow.abyssalcraft.common.world.WorldProviderDreadlands;
+import com.shinoow.abyssalcraft.common.world.WorldProviderOmothol;
 import com.shinoow.abyssalcraft.common.world.biome.*;
-import com.shinoow.abyssalcraft.update.IUpdateProxy;
 
-import cpw.mods.fml.client.event.ConfigChangedEvent;
-import cpw.mods.fml.common.*;
-import cpw.mods.fml.common.Mod.*;
-import cpw.mods.fml.common.event.*;
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import cpw.mods.fml.common.network.NetworkRegistry;
-import cpw.mods.fml.common.registry.*;
-
-@Mod(modid = AbyssalCraft.modid, name = AbyssalCraft.name, version = AbyssalCraft.version, dependencies = "required-after:Forge@[forgeversion,)", useMetadata = false, guiFactory = "com.shinoow.abyssalcraft.client.config.ACGuiFactory")
+@Mod(modid = AbyssalCraft.modid, name = AbyssalCraft.name, version = AbyssalCraft.version,dependencies = "required-after:Forge@[forgeversion,);after:JEI@[2.25,)", useMetadata = false, guiFactory = "com.shinoow.abyssalcraft.client.config.ACGuiFactory", acceptedMinecraftVersions = "[1.8.9]", updateJSON = "https://raw.githubusercontent.com/Shinoow/AbyssalCraft/master/version.json")
 public class AbyssalCraft {
 
 	public static final String version = "1.9.0-pre-3";
@@ -94,33 +97,16 @@ public class AbyssalCraft {
 			serverSide = "com.shinoow.abyssalcraft.common.CommonProxy")
 	public static CommonProxy proxy;
 
-	//Update Checker proxy
-	@SidedProxy(clientSide = "com.shinoow.abyssalcraft.update.UpdateProxyClient",
-			serverSide = "com.shinoow.abyssalcraft.update.UpdateProxyServer")
-	public static IUpdateProxy updateProxy;
-	/**Update Checker Ping*/
-	private boolean hasPinged = false;
-
-	private boolean dev = (Boolean)Launch.blackboard.get("fml.deobfuscatedEnvironment");
-
 	public static Map<String, Integer> stringtoIDMapping = new HashMap<String, Integer>();
 
 	public static Configuration cfg;
 
 	public static Fluid CFluid, antifluid;
 
-	public static final Fluid LIQUID_CORALIUM = new Fluid("liquidcoralium"){
-		@Override
-		public String getLocalizedName(FluidStack stack) {
-			return StatCollector.translateToLocal("tile.Cwater.name");
-		}
-	}.setDensity(3000).setTemperature(350);
-	public static final Fluid LIQUID_ANTIMATTER = new Fluid("liquidantimatter"){
-		@Override
-		public String getLocalizedName(FluidStack stack) {
-			return StatCollector.translateToLocal("tile.antiliquid.name");
-		}
-	}.setDensity(4000).setViscosity(1500).setTemperature(100);
+	public static final Fluid LIQUID_CORALIUM = new Fluid("liquidcoralium", new ResourceLocation("abyssalcraft", "blocks/cwater_still"),
+			new ResourceLocation("abyssalcraft", "blocks/cwater_flow")).setDensity(3000).setTemperature(350);
+	public static final Fluid LIQUID_ANTIMATTER = new Fluid("liquidantimatter", new ResourceLocation("abyssalcraft", "blocks/anti_still"),
+			new ResourceLocation("abyssalcraft", "blocks/anti_flow")).setDensity(4000).setViscosity(1500).setTemperature(100);
 
 	public static Achievement mineAby, killghoul, enterabyss, killdragon, summonAsorah,
 	killAsorah, enterdreadlands, killdreadguard, ghoulhead, petehead, wilsonhead, orangehead,
@@ -167,8 +153,8 @@ public class AbyssalCraft {
 	//"secret" dev stuff
 	public static Item devsword;
 	//misc items
-	public static Item OC, Staff, portalPlacer, Cbucket, PSDLfinder, EoA, portalPlacerDL,
-	cbrick, cudgel, carbonCluster, denseCarbonCluster, methane, nitre, sulfur, portalPlacerJzh,
+	public static Item OC, Staff, gatewayKey, Cbucket, PSDLfinder, EoA, gatewayKeyDL,
+	cbrick, cudgel, carbonCluster, denseCarbonCluster, methane, nitre, sulfur, gatewayKeyJzh,
 	tinIngot, copperIngot, lifeCrystal, shoggothFlesh, eldritchScale, omotholFlesh, necronomicon,
 	necronomicon_cor, necronomicon_dre, necronomicon_omt, abyssalnomicon, crystalbag_s, crystalbag_m,
 	crystalbag_l, crystalbag_h, nugget, essence, skin, charm, cthulhuCharm, hasturCharm, jzaharCharm,
@@ -305,25 +291,17 @@ public class AbyssalCraft {
 	public void preInit(FMLPreInitializationEvent event) {
 
 		ACLogger.info("Pre-initializing AbyssalCraft.");
-		if(dev)
-			ACLogger.info("We appear to be inside a Dev environment, disabling UpdateChecker!");
 		metadata = event.getModMetadata();
 		metadata.description = metadata.description +"\n\n\u00a76Supporters: "+getSupporterList()+"\u00a7r";
 
 		MinecraftForge.EVENT_BUS.register(new AbyssalCraftEventHooks());
-		FMLCommonHandler.instance().bus().register(new AbyssalCraftEventHooks());
 		MinecraftForge.TERRAIN_GEN_BUS.register(new AbyssalCraftEventHooks());
 		MinecraftForge.EVENT_BUS.register(this);
 		NetworkRegistry.INSTANCE.registerGuiHandler(this, new CommonProxy());
 		instance = this;
-		proxy.preInit();
 
 		cfg = new Configuration(event.getSuggestedConfigurationFile());
 		syncConfig();
-		AbyssalCraftAPI.initPotionReflection();
-
-		if(!useDynamicPotionIds)
-			extendPotionArray();
 
 		if(!FluidRegistry.isFluidRegistered("liquidcoralium")){
 			CFluid = LIQUID_CORALIUM;
@@ -344,141 +322,141 @@ public class AbyssalCraft {
 		}
 
 		//Blocks
-		Darkstone = new BlockDarkstone().setCreativeTab(tabBlock).setStepSound(Block.soundTypeStone).setHardness(1.65F).setResistance(12.0F).setBlockName("DS").setBlockTextureName(modid + ":" + "DS");
-		Darkstone_brick = new BlockACBasic(Material.rock, 1.65F, 12.0F, Block.soundTypeStone).setBlockName("DSB").setBlockTextureName(modid + ":" + "DSB");
-		Darkstone_cobble = new BlockACBasic(Material.rock, 2.2F, 12.0F, Block.soundTypeStone).setBlockName("DSC").setBlockTextureName(modid + ":" + "DSC");
-		DSGlow = new BlockDSGlow().setCreativeTab(tabBlock).setStepSound(Block.soundTypeStone).setHardness(55F).setResistance(3000F).setLightLevel(1.0F).setBlockName("DSGlow");
-		Darkbrickslab1 = new BlockACSingleSlab(Material.rock).setStepSound(Block.soundTypeStone).setHardness(1.65F).setResistance(12.0F).setBlockName("DSBs1").setBlockTextureName(modid + ":" + "DSB");
-		Darkbrickslab2 = new BlockACDoubleSlab(Darkbrickslab1, Material.rock).setStepSound(Block.soundTypeStone).setHardness(1.65F).setResistance(12.0F).setBlockName("DSBs2").setBlockTextureName(modid + ":" + "DSB");
-		Darkcobbleslab1 = new BlockACSingleSlab(Material.rock).setStepSound(Block.soundTypeStone).setHardness(1.65F) .setResistance(12.0F).setBlockName("DSCs1").setBlockTextureName(modid + ":" + "DSC");
-		Darkcobbleslab2 = new BlockACDoubleSlab(Darkcobbleslab1, Material.rock).setStepSound(Block.soundTypeStone).setHardness(1.65F) .setResistance(12.0F).setBlockName("DSCs2").setBlockTextureName(modid + ":" + "DSC");
-		Darkgrass = new BlockDarklandsgrass().setStepSound(Block.soundTypeGrass).setCreativeTab(tabBlock).setHardness(0.4F).setBlockName("DLG");
-		DBstairs = new BlockACStairs(Darkstone_brick).setStepSound(Block.soundTypeStone).setHardness(1.65F).setResistance(12.0F).setBlockName("DSBs");
-		DCstairs = new BlockACStairs(Darkstone_cobble).setStepSound(Block.soundTypeStone).setHardness(1.65F).setResistance(12.0F).setBlockName("DSCs");
-		DLTLeaves = new BlockDLTLeaves().setStepSound(Block.soundTypeGrass).setHardness(0.2F).setResistance(1.0F).setBlockName("DLTL").setBlockTextureName(modid + ":" + "DLTL");
-		DLTLog = new BlockDLTLog().setStepSound(Block.soundTypeWood).setHardness(2.0F).setResistance(1.0F).setBlockName("DLTT");
-		DLTSapling = new BlockDLTSapling().setStepSound(Block.soundTypeGrass).setHardness(0.0F).setResistance(0.0F).setBlockName("DLTS").setBlockTextureName(modid + ":" + "DLTS");
-		abystone = new BlockACBasic(Material.rock, "pickaxe", 2, 1.8F, 12.0F, Block.soundTypeStone).setBlockName("AS").setBlockTextureName(modid + ":" + "AS");
-		abybrick = new BlockACBasic(Material.rock, "pickaxe", 2, 1.8F, 12.0F, Block.soundTypeStone).setBlockName("ASB").setBlockTextureName(modid + ":" + "ASB");
-		abyslab1 = new BlockACSingleSlab(Material.rock, "pickaxe", 2).setCreativeTab(tabBlock).setStepSound(Block.soundTypeStone).setHardness(1.8F).setResistance(12.0F).setBlockName("ASBs1").setBlockTextureName(modid + ":" + "ASB");
-		abyslab2 = new BlockACDoubleSlab(abyslab1, Material.rock, "pickaxe", 2).setStepSound(Block.soundTypeStone).setHardness(1.8F).setResistance(12.0F).setBlockName("ASBs2").setBlockTextureName(modid + ":" + "ASB");
-		abystairs = new BlockACStairs(abybrick, "pickaxe", 2).setStepSound(Block.soundTypeStone).setHardness(1.65F).setResistance(12.0F).setBlockName("ASBs");
-		Coraliumore = new BlockACOre(2, 3.0F, 6.0F).setBlockName("CO").setBlockTextureName(modid + ":" + "CO");
-		abyore = new BlockACOre(2, 3.0F, 6.0F).setBlockName("AO").setBlockTextureName(modid + ":" + "AO");
-		abyfence = new BlockACFence("ASBf", Material.rock, "pickaxe", 2).setHardness(1.8F).setResistance(12.0F).setStepSound(Block.soundTypeStone).setBlockName("ASBf").setBlockTextureName(modid + ":" + "ASBf");
-		DSCwall = new BlockDarkstonecobblewall(Darkstone_cobble).setHardness(1.65F).setResistance(12.0F).setStepSound(Block.soundTypeStone).setBlockName("DSCw").setBlockTextureName(modid + ":" + "DSC");
-		Crate = new BlockCrate().setStepSound(Block.soundTypeStone).setHardness(3.0F).setResistance(6.0F).setBlockName("Crate").setBlockTextureName(modid + ":" + "Crate");
-		ODB = new BlockODB().setStepSound(Block.soundTypeMetal).setHardness(3.0F).setResistance(0F).setBlockName("ODB").setBlockTextureName(modid + ":" + "ODBsides");
-		abyblock = new IngotBlock(2).setBlockName("BOA").setBlockTextureName(modid + ":" + "BOA");
-		CoraliumInfusedStone = new BlockACOre(3, 3.0F, 6.0F).setBlockName("CIS").setBlockTextureName(modid + ":" + "CIS");
-		ODBcore = new BlockODBcore().setStepSound(Block.soundTypeMetal).setHardness(3.0F).setResistance(0F).setBlockName("ODBC");
-		portal = new BlockAbyssPortal().setBlockName("AG").setBlockTextureName(modid + ":" + "AG");
-		Darkstoneslab1 = new BlockDarkstoneSlab().setStepSound(Block.soundTypeStone).setCreativeTab(tabBlock).setHardness(1.65F).setResistance(12.0F).setBlockName("DSs1");
-		Darkstoneslab2 = new BlockDarkstoneSlabDouble().setStepSound(Block.soundTypeStone).setHardness(1.65F).setResistance(12.0F).setBlockName("DSs2");
-		Coraliumfire = new BlockCoraliumfire().setLightLevel(1.0F).setBlockName("Cfire");
-		DSbutton = new BlockACButton(true, "DS").setHardness(0.6F).setResistance(12.0F).setBlockName("DSbb").setBlockTextureName(modid + ":" + "DS");
-		DSpplate = new BlockACPressureplate("DS", Material.rock, BlockACPressureplate.Sensitivity.mobs).setHardness(0.6F).setResistance(12.0F).setStepSound(Block.soundTypeStone).setBlockName("DSpp").setBlockTextureName(modid + ":" + "DS");
-		DLTplank = new BlockACBasic(Material.wood, 2.0F, 5.0F, Block.soundTypeWood).setBlockName("DLTplank").setBlockTextureName(modid + ":" + "DLTplank");
-		DLTbutton = new BlockACButton(true, "DLTplank").setHardness(0.5F).setBlockName("DLTplankb").setBlockTextureName(modid + ":" + "DLTplank");
-		DLTpplate = new BlockACPressureplate("DLTplank", Material.wood, BlockACPressureplate.Sensitivity.everything).setHardness(0.5F).setStepSound(Block.soundTypeWood).setBlockName("DLTpp").setBlockTextureName(modid + ":" + "DLTplank");
-		DLTstairs = new BlockACStairs(DLTplank).setHardness(2.0F).setResistance(5.0F).setStepSound(Block.soundTypeWood).setBlockName("DLTplanks");
-		DLTslab1 = new BlockACSingleSlab(Material.rock).setHardness(2.0F).setResistance(5.0F).setStepSound(Block.soundTypeWood).setBlockName("DLTplanks1").setBlockTextureName(modid + ":" + "DLTplank");
-		DLTslab2 = new BlockACDoubleSlab(DLTslab1, Material.rock).setHardness(2.0F).setResistance(5.0F).setStepSound(Block.soundTypeWood).setBlockName("DLTplanks2").setBlockTextureName(modid + ":" + "DLTplank");
-		corblock = new IngotBlock(5).setBlockName("BOC").setBlockTextureName(modid + ":" + "BOC");
-		PSDL = new BlockPSDL().setHardness(50.0F).setResistance(3000F).setCreativeTab(tabDecoration).setBlockName("PSDL").setBlockTextureName(modid + ":" + "PSDL");
-		AbyCorOre = new BlockACOre(3, 3.0F, 6.0F).setBlockName("ACorO").setBlockTextureName(modid + ":" + "ACorO");
-		Altar = new BlockAltar().setStepSound(Block.soundTypeStone).setHardness(4.0F).setResistance(300.0F).setBlockName("Altar").setBlockTextureName(modid + ":" + "Altar");
-		Abybutton = new BlockACButton(false, "pickaxe", 2, "AS").setHardness(0.8F).setResistance(12.0F).setBlockName("ASbb").setBlockTextureName(modid + ":" + "AS");
-		Abypplate = new BlockACPressureplate("AS", Material.rock, BlockACPressureplate.Sensitivity.mobs, "pickaxe", 2).setHardness(0.8F).setResistance(12.0F).setStepSound(Block.soundTypeStone).setBlockName("ASpp").setBlockTextureName(modid + ":" + "AS");
-		DSBfence = new BlockACFence("DSBf", Material.rock).setHardness(1.65F).setResistance(12.0F).setStepSound(Block.soundTypeStone).setBlockName("DSBf");
-		DLTfence = new BlockACFence("DLTplank", Material.wood).setHardness(2.0F).setResistance(5.0F).setStepSound(Block.soundTypeWood).setBlockName("DLTf");
-		dreadore = new BlockACOre(4, 2.5F, 20.0F).setBlockName("DrSO").setBlockTextureName(modid + ":" + "DrSO");
-		abydreadore = new BlockACOre(4, 2.5F, 20.0F).setBlockName("AbyDrSO").setBlockTextureName(modid + ":" + "AbyDrSO");
-		dreadbrick = new BlockACBasic(Material.rock, "pickaxe", 4, 2.5F, 20.0F, Block.soundTypeStone).setBlockName("DrSB").setBlockTextureName(modid + ":" + "DrSB");
-		abydreadbrick = new BlockACBasic(Material.rock, "pickaxe", 4, 2.5F, 20.0F, Block.soundTypeStone).setBlockName("AbyDrSB").setBlockTextureName(modid + ":" + "AbyDrSB");
-		dreadlog = new BlockDreadLog().setHardness(2.0F).setResistance(12.0F).setStepSound(Block.soundTypeWood).setBlockName("DrT");
-		dreadleaves = new BlockDreadLeaves(false).setStepSound(Block.soundTypeGrass).setHardness(0.2F).setResistance(1.0F).setBlockName("DrTL");
-		dreadsapling = new BlockDreadSapling().setStepSound(Block.soundTypeGrass).setHardness(0.0F).setResistance(0.0F).setBlockName("DrTS").setBlockTextureName(modid + ":" + "DrTS");
-		dreadplanks = new BlockACBasic(Material.wood, 2.0F, 5.0F, Block.soundTypeWood).setBlockName("DrTplank").setBlockTextureName(modid + ":" + "DrTplank");
-		dreadportal = new BlockDreadlandsPortal().setBlockName("DG").setBlockTextureName(modid + ":" + "DG");
-		dreadfire = new BlockDreadFire().setLightLevel(1.0F).setBlockName("Dfire");
-		DGhead = new BlockDGhead().setHardness(1.0F).setResistance(6.0F).setStepSound(Block.soundTypeCloth).setCreativeTab(tabDecoration).setBlockName("DGhead").setBlockTextureName(modid + ":" + "DGhead");
-		Cwater = new BlockCLiquid().setResistance(500.0F).setLightLevel(1.0F).setBlockName("Cwater");
-		dreadstone = new BlockACBasic(Material.rock, "pickaxe", 4, 2.5F, 20.0F, Block.soundTypeStone).setBlockName("DrS").setBlockTextureName(modid + ":" + "DrS");
-		abydreadstone = new BlockACBasic(Material.rock, "pickaxe", 4, 2.5F, 20.0F, Block.soundTypeStone).setBlockName("AbyDrS").setBlockTextureName(modid + ":" + "AbyDrS");
-		dreadgrass = new BlockDreadGrass().setHardness(0.4F).setStepSound(Block.soundTypeGrass).setBlockName("DrG");
-		Phead = new BlockPhead().setHardness(1.0F).setResistance(6.0F).setStepSound(Block.soundTypeCloth).setCreativeTab(tabDecoration).setBlockName("Phead").setBlockTextureName(modid + ":" + "Phead");
-		Whead = new BlockWhead().setHardness(1.0F).setResistance(6.0F).setStepSound(Block.soundTypeCloth).setCreativeTab(tabDecoration).setBlockName("Whead").setBlockTextureName(modid + ":" + "Whead");
-		Ohead = new BlockOhead().setHardness(1.0F).setResistance(6.0F).setStepSound(Block.soundTypeCloth).setCreativeTab(tabDecoration).setBlockName("Ohead").setBlockTextureName(modid + ":" + "Ohead");
-		dreadbrickstairs = new BlockACStairs(dreadbrick, "pickaxe", 4).setHardness(2.5F).setResistance(20.0F).setStepSound(Block.soundTypeStone).setBlockName("DrSBs");
-		dreadbrickfence = new BlockACFence("DrSBf", Material.rock, "pickaxe", 4).setHardness(2.5F).setResistance(20.0F).setStepSound(Block.soundTypeStone).setBlockName("DrSBf");
-		dreadbrickslab1 = new BlockACSingleSlab(Material.rock, "pickaxe", 4).setHardness(2.5F).setResistance(20.0F).setStepSound(Block.soundTypeStone).setBlockName("DrSBs1").setBlockTextureName(modid + ":" + "DrSB");
-		dreadbrickslab2 = new BlockACDoubleSlab(dreadbrickslab1, Material.rock, "pickaxe", 4).setHardness(2.5F).setResistance(20.0F).setStepSound(Block.soundTypeStone).setBlockName("DrSBs2").setBlockTextureName(modid + ":" + "DrSB");
-		abydreadbrickstairs = new BlockACStairs(abydreadbrick, "pickaxe", 4).setHardness(2.5F).setResistance(20.0F).setStepSound(Block.soundTypeStone).setBlockName("AbyDrSBs");
-		abydreadbrickfence = new BlockACFence("AbyDrSBf", Material.rock, "pickaxe", 4).setHardness(2.5F).setResistance(20.0F).setStepSound(Block.soundTypeStone).setBlockName("AbyDrSBf");
-		abydreadbrickslab1 = new BlockACSingleSlab(Material.rock, "pickaxe", 4).setHardness(2.5F).setResistance(20.0F).setStepSound(Block.soundTypeStone).setBlockName("AbyDrSBs1").setBlockTextureName(modid + ":" + "AbyDrSB");
-		abydreadbrickslab2 = new BlockACDoubleSlab(abydreadbrickslab1, Material.rock, "pickaxe", 4).setHardness(2.5F).setResistance(20.0F).setStepSound(Block.soundTypeStone).setBlockName("AbyDrSBs2").setBlockTextureName(modid + ":" + "AbyDrSB");
-		anticwater = new BlockAntiliquid().setResistance(500.0F).setLightLevel(0.5F).setBlockName("antiliquid");
-		cstone = new BlockCoraliumstone().setHardness(1.5F).setResistance(10.0F).setStepSound(Block.soundTypeStone).setBlockName("cstone").setBlockTextureName(modid + ":" + "cstone");
-		cstonebrick = new BlockACBasic(Material.rock, 1.5F, 10.0F, Block.soundTypeStone).setBlockName("cstonebrick").setBlockTextureName(modid + ":" + "cstonebrick");
-		cstonebrickfence = new BlockACFence("cstonebrick", Material.rock).setHardness(1.5F).setResistance(10.0F).setStepSound(Block.soundTypeStone).setBlockName("cstonebrickf");
-		cstonebrickslab1 = new BlockACSingleSlab(Material.rock).setHardness(1.5F).setResistance(10.0F).setStepSound(Block.soundTypeStone).setBlockName("cstonebricks1").setBlockTextureName(modid + ":" + "cstonebrick");
-		cstonebrickslab2 = new BlockACDoubleSlab(cstonebrickslab1, Material.rock).setHardness(1.5F).setResistance(10.0F).setStepSound(Block.soundTypeStone).setBlockName("cstonebricks2").setBlockTextureName(modid + ":" + "cstonebrick");
-		cstonebrickstairs = new BlockACStairs(cstonebrick, "pickaxe", 0).setHardness(1.5F).setResistance(10.0F).setStepSound(Block.soundTypeStone).setBlockName("cstonebricks");
-		cstonebutton = new BlockACButton(false, "cstone").setHardness(0.6F).setResistance(12.0F).setBlockName("cstonebutton");
-		cstonepplate = new BlockACPressureplate("cstone", Material.rock, BlockACPressureplate.Sensitivity.mobs).setHardness(0.6F).setResistance(12.0F).setStepSound(Block.soundTypeStone).setBlockName("cstonepplate");
-		dreadaltartop = new BlockDreadAltarTop().setHardness(30.0F).setResistance(300.0F).setStepSound(Block.soundTypeStone).setCreativeTab(tabDecoration).setBlockName("dreadaltar1").setBlockTextureName(modid + ":" + "PSDL");
-		dreadaltarbottom = new BlockDreadAltarBottom().setHardness(30.0F).setResistance(300.0F).setStepSound(Block.soundTypeStone).setCreativeTab(tabDecoration).setBlockName("dreadaltar2").setBlockTextureName(modid + ":" + "PSDL");
-		crystallizer = new BlockCrystallizer(false).setHardness(2.5F).setResistance(12.0F).setStepSound(Block.soundTypeStone).setBlockName("crystallizer");
-		crystallizer_on = new BlockCrystallizer(true).setHardness(2.5F).setResistance(12.0F).setStepSound(Block.soundTypeStone).setLightLevel(0.875F).setBlockName("crystallizer");
-		dreadiumblock = new IngotBlock(6).setBlockName("BOD").setBlockTextureName(modid + ":" + "BOD");
-		transmutator = new BlockTransmutator(false).setHardness(2.5F).setResistance(12.0F).setStepSound(Block.soundTypeStone).setBlockName("transmutator");
-		transmutator_on = new BlockTransmutator(true).setHardness(2.5F).setResistance(12.0F).setStepSound(Block.soundTypeStone).setLightLevel(0.875F).setBlockName("transmutator");
-		dreadguardspawner = new BlockDreadguardSpawner().setBlockName("dreadguardspawner").setBlockTextureName(modid + ":" + "PSDL");
-		chagarothspawner = new BlockChagarothSpawner().setBlockName("chagarothspawner").setBlockTextureName(modid + ":" + "PSDL");
-		chagarothfistspawner = new BlockChagarothFistSpawner().setBlockName("chagarothfistspawner").setBlockTextureName(modid + ":" + "PSDL");
-		DrTfence = new BlockACFence("DrTplank", Material.wood).setHardness(2.0F).setResistance(5.0F).setStepSound(Block.soundTypeWood).setBlockName("DrTf");
-		nitreOre = new BlockACOre(2, 3.0F, 6.0F).setBlockName("NO").setBlockTextureName(modid + ":" + "NO");
-		AbyIroOre = new BlockACOre(2, 3.0F, 6.0F).setBlockName("AIO").setBlockTextureName(modid + ":" + "AIO");
-		AbyGolOre = new BlockACOre(2, 5.0F, 10.0F).setBlockName("AGO").setBlockTextureName(modid + ":" + "AGO");
-		AbyDiaOre = new BlockACOre(2, 5.0F, 10.0F).setBlockName("ADO").setBlockTextureName(modid + ":" + "ADO");
-		AbyNitOre = new BlockACOre(2, 3.0F, 6.0F).setBlockName("ANO").setBlockTextureName(modid + ":" + "ANO");
-		AbyTinOre = new BlockACOre(2, 3.0F, 6.0F).setBlockName("ATO").setBlockTextureName(modid + ":" + "ATO");
-		AbyCopOre = new BlockACOre(2, 3.0F, 6.0F).setBlockName("ACO").setBlockTextureName(modid + ":" + "ACO");
-		AbyPCorOre = new BlockACOre(5, 8.0F, 10.0F).setBlockName("APCorO").setBlockTextureName(modid + ":" + "APCorO");
-		AbyLCorOre = new BlockACOre(4, 10.0F, 12.0F).setBlockName("ALCorO").setBlockTextureName(modid + ":" + "ALCorO");
-		solidLava = new BlockSolidLava("solidLava");
-		ethaxium = new BlockACBasic(Material.rock, "pickaxe", 8, 100.0F, Float.MAX_VALUE, Block.soundTypeStone).setBlockName("Eth").setBlockTextureName(modid + ":" + "Eth");
-		ethaxiumbrick = new BlockEthaxiumBrick().setBlockName("EB");
-		ethaxiumpillar = new BlockEthaxiumPillar().setBlockName("EBP");
-		ethaxiumstairs = new BlockACStairs(ethaxiumbrick, "pickaxe", 8).setHardness(100.0F).setResistance(Float.MAX_VALUE).setStepSound(Block.soundTypeStone).setBlockName("EBs");
-		ethaxiumslab1 = new BlockACSingleSlab(Material.rock, "pickaxe", 8).setHardness(100.0F).setResistance(Float.MAX_VALUE).setStepSound(Block.soundTypeStone).setBlockName("EBs1").setBlockTextureName(modid + ":" + "EB");
-		ethaxiumslab2 = new BlockACDoubleSlab(ethaxiumslab1, Material.rock, "pickaxe", 8).setHardness(100.0F).setResistance(Float.MAX_VALUE).setStepSound(Block.soundTypeStone).setBlockName("EBs2").setBlockTextureName(modid + ":" + "EB");
-		ethaxiumfence = new BlockACFence("EB", Material.rock, "pickaxe", 8).setHardness(100.0F).setResistance(Float.MAX_VALUE).setStepSound(Block.soundTypeStone).setBlockName("EBf");
-		omotholstone = new BlockACBasic(Material.rock, "pickaxe", 6, 10.0F, 12.0F, Block.soundTypeStone).setBlockName("OS").setBlockTextureName(modid + ":" + "OS");
-		ethaxiumblock = new IngotBlock(8).setResistance(Float.MAX_VALUE).setBlockName("BOE").setBlockTextureName(modid + ":" + "BOE");
-		omotholportal = new BlockOmotholPortal().setBlockName("OG").setBlockTextureName(modid + ":" + "OG");
-		omotholfire = new BlockOmotholFire().setLightLevel(1.0F).setBlockName("Ofire");
-		engraver = new BlockEngraver().setHardness(2.5F).setResistance(12.0F).setStepSound(Block.soundTypeStone).setBlockName("engraver");
-		house = new BlockHouse().setHardness(1.0F).setResistance(Float.MAX_VALUE).setStepSound(Block.soundTypeWood).setBlockName("house");
-		materializer = new BlockMaterializer().setBlockName("materializer");
-		darkethaxiumbrick = new BlockDarkEthaxiumBrick().setBlockName("DEB");
-		darkethaxiumpillar = new BlockDarkEthaxiumPillar().setBlockName("DEBP");
-		darkethaxiumstairs = new BlockACStairs(darkethaxiumbrick, "pickaxe", 8).setHardness(150.0F).setResistance(Float.MAX_VALUE).setStepSound(Block.soundTypeStone).setBlockName("DEBs");
-		darkethaxiumslab1 = new BlockACSingleSlab(Material.rock, "pickaxe", 8).setHardness(150.0F).setResistance(Float.MAX_VALUE).setStepSound(Block.soundTypeStone).setBlockName("DEBs1").setBlockTextureName(modid + ":" + "DEB");
-		darkethaxiumslab2 = new BlockACDoubleSlab(darkethaxiumslab1, Material.rock, "pickaxe", 8).setHardness(150.0F).setResistance(Float.MAX_VALUE).setStepSound(Block.soundTypeStone).setBlockName("DEBs2").setBlockTextureName(modid + ":" + "DEB");
-		darkethaxiumfence = new BlockACFence("DEB", Material.rock, "pickaxe", 8).setHardness(150.0F).setResistance(Float.MAX_VALUE).setStepSound(Block.soundTypeStone).setBlockName("DEBf");
-		ritualaltar = new BlockRitualAltar().setBlockName("ritualaltar");
-		ritualpedestal = new BlockRitualPedestal().setBlockName("ritualpedestal");
-		shoggothBlock = new BlockShoggothOoze().setBlockName("shoggothBlock").setBlockTextureName(modid + ":" + "shoggothOoze");
-		cthulhuStatue = new BlockCthulhuStatue().setBlockName("cthulhuStatue").setBlockTextureName(modid + ":" + "monolithStone");
-		hasturStatue = new BlockHasturStatue().setBlockName("hasturStatue").setBlockTextureName(modid + ":" + "monolithStone");
-		jzaharStatue = new BlockJzaharStatue().setBlockName("jzaharStatue").setBlockTextureName(modid + ":" + "monolithStone");
-		azathothStatue = new BlockAzathothStatue().setBlockName("azathothStatue").setBlockTextureName(modid + ":" + "monolithStone");
-		nyarlathotepStatue = new BlockNyarlathotepStatue().setBlockName("nyarlathotepStatue").setBlockTextureName(modid + ":" + "monolithStone");
-		yogsothothStatue = new BlockYogsothothStatue().setBlockName("yogsothothStatue").setBlockTextureName(modid + ":" + "monolithStone");
-		shubniggurathStatue = new BlockShubniggurathStatue().setBlockName("shubniggurathStatue").setBlockTextureName(modid + ":" + "monolithStone");
-		monolithStone = new BlockACBasic(Material.rock, 6.0F, 24.0F, Block.soundTypeStone).setBlockName("monolithStone").setBlockTextureName(modid + ":" + "monolithStone");
+		Darkstone = new BlockDarkstone().setCreativeTab(tabBlock).setStepSound(Block.soundTypeStone).setHardness(1.65F).setResistance(12.0F).setUnlocalizedName("darkstone");
+		Darkstone_brick = new BlockACBasic(Material.rock, 1.65F, 12.0F, Block.soundTypeStone).setUnlocalizedName("darkstone_brick");
+		Darkstone_cobble = new BlockACBasic(Material.rock, 2.2F, 12.0F, Block.soundTypeStone).setUnlocalizedName("darkstone_cobble");
+		DSGlow = new BlockDSGlow().setCreativeTab(tabBlock).setStepSound(Block.soundTypeStone).setHardness(55F).setResistance(3000F).setLightLevel(1.0F).setUnlocalizedName("dsglow");
+		Darkbrickslab1 = new BlockACSingleSlab(Material.rock).setStepSound(Block.soundTypeStone).setHardness(1.65F).setResistance(12.0F).setUnlocalizedName("darkbrickslab1");
+		Darkbrickslab2 = new BlockACDoubleSlab(Darkbrickslab1, Material.rock).setStepSound(Block.soundTypeStone).setHardness(1.65F).setResistance(12.0F).setUnlocalizedName("darkbrickslab2");
+		Darkcobbleslab1 = new BlockACSingleSlab(Material.rock).setStepSound(Block.soundTypeStone).setHardness(1.65F) .setResistance(12.0F).setUnlocalizedName("darkcobbleslab1");
+		Darkcobbleslab2 = new BlockACDoubleSlab(Darkcobbleslab1, Material.rock).setStepSound(Block.soundTypeStone).setHardness(1.65F) .setResistance(12.0F).setUnlocalizedName("darkcobbleslab2");
+		Darkgrass = new BlockDarklandsgrass().setStepSound(Block.soundTypeGrass).setCreativeTab(tabBlock).setHardness(0.4F).setUnlocalizedName("darkgrass");
+		DBstairs = new BlockACStairs(Darkstone_brick).setStepSound(Block.soundTypeStone).setHardness(1.65F).setResistance(12.0F).setUnlocalizedName("dbstairs");
+		DCstairs = new BlockACStairs(Darkstone_cobble).setStepSound(Block.soundTypeStone).setHardness(1.65F).setResistance(12.0F).setUnlocalizedName("dcstairs");
+		DLTLeaves = new BlockDLTLeaves().setStepSound(Block.soundTypeGrass).setHardness(0.2F).setResistance(1.0F).setUnlocalizedName("dltleaves");
+		DLTLog = new BlockDLTLog().setStepSound(Block.soundTypeWood).setHardness(2.0F).setResistance(1.0F).setUnlocalizedName("dltlog");
+		DLTSapling = new BlockDLTSapling().setStepSound(Block.soundTypeGrass).setHardness(0.0F).setResistance(0.0F).setUnlocalizedName("dltsapling");
+		abystone = new BlockACBasic(Material.rock, "pickaxe", 2, 1.8F, 12.0F, Block.soundTypeStone).setUnlocalizedName("abystone");
+		abybrick = new BlockACBasic(Material.rock, "pickaxe", 2, 1.8F, 12.0F, Block.soundTypeStone).setUnlocalizedName("abybrick");
+		abyslab1 = new BlockACSingleSlab(Material.rock, "pickaxe", 2).setCreativeTab(tabBlock).setStepSound(Block.soundTypeStone).setHardness(1.8F).setResistance(12.0F).setUnlocalizedName("abyslab1");
+		abyslab2 = new BlockACDoubleSlab(abyslab1, Material.rock, "pickaxe", 2).setStepSound(Block.soundTypeStone).setHardness(1.8F).setResistance(12.0F).setUnlocalizedName("abyslab2");
+		abystairs = new BlockACStairs(abybrick, "pickaxe", 2).setStepSound(Block.soundTypeStone).setHardness(1.65F).setResistance(12.0F).setUnlocalizedName("abystairs");
+		Coraliumore = new BlockACOre(2, 3.0F, 6.0F).setUnlocalizedName("coraliumore");
+		abyore = new BlockACOre(2, 3.0F, 6.0F).setUnlocalizedName("abyore");
+		abyfence = new BlockACFence(Material.rock, "pickaxe", 2).setHardness(1.8F).setResistance(12.0F).setStepSound(Block.soundTypeStone).setUnlocalizedName("abyfence");
+		DSCwall = new BlockDarkstonecobblewall(Darkstone_cobble).setHardness(1.65F).setResistance(12.0F).setStepSound(Block.soundTypeStone).setUnlocalizedName("dscwall");
+		Crate = new BlockCrate().setStepSound(Block.soundTypeStone).setHardness(3.0F).setResistance(6.0F).setUnlocalizedName("crate");
+		ODB = new BlockODB().setStepSound(Block.soundTypeMetal).setHardness(3.0F).setResistance(0F).setUnlocalizedName("odb");
+		abyblock = new IngotBlock(2).setUnlocalizedName("abyblock");
+		CoraliumInfusedStone = new BlockACOre(3, 3.0F, 6.0F).setUnlocalizedName("coraliumstone");
+		ODBcore = new BlockODBcore().setStepSound(Block.soundTypeMetal).setHardness(3.0F).setResistance(0F).setUnlocalizedName("odbcore");
+		portal = new BlockAbyssPortal().setUnlocalizedName("abyportal");
+		Darkstoneslab1 = new BlockACSingleSlab(Material.rock).setStepSound(Block.soundTypeStone).setCreativeTab(tabBlock).setHardness(1.65F).setResistance(12.0F).setUnlocalizedName("darkstoneslab1");
+		Darkstoneslab2 = new BlockACDoubleSlab(Darkstoneslab1, Material.rock).setStepSound(Block.soundTypeStone).setHardness(1.65F).setResistance(12.0F).setUnlocalizedName("darkstoneslab2");
+		Coraliumfire = new BlockCoraliumfire().setLightLevel(1.0F).setUnlocalizedName("coraliumfire");
+		DSbutton = new BlockACButton(true, "DS").setHardness(0.6F).setResistance(12.0F).setUnlocalizedName("dsbutton");
+		DSpplate = new BlockACPressureplate("DS", Material.rock, BlockACPressureplate.Sensitivity.MOBS).setHardness(0.6F).setResistance(12.0F).setStepSound(Block.soundTypeStone).setUnlocalizedName("dspplate");
+		DLTplank = new BlockACBasic(Material.wood, 2.0F, 5.0F, Block.soundTypeWood).setUnlocalizedName("dltplank");
+		DLTbutton = new BlockACButton(true, "DLTplank").setHardness(0.5F).setUnlocalizedName("dltbutton");
+		DLTpplate = new BlockACPressureplate("DLTplank", Material.wood, BlockACPressureplate.Sensitivity.EVERYTHING).setHardness(0.5F).setStepSound(Block.soundTypeWood).setUnlocalizedName("dltpplate");
+		DLTstairs = new BlockACStairs(DLTplank).setHardness(2.0F).setResistance(5.0F).setStepSound(Block.soundTypeWood).setUnlocalizedName("dltstairs");
+		DLTslab1 = new BlockACSingleSlab(Material.rock).setHardness(2.0F).setResistance(5.0F).setStepSound(Block.soundTypeWood).setUnlocalizedName("dltslab1");
+		DLTslab2 = new BlockACDoubleSlab(DLTslab1, Material.rock).setHardness(2.0F).setResistance(5.0F).setStepSound(Block.soundTypeWood).setUnlocalizedName("dltslab2");
+		corblock = new IngotBlock(5).setUnlocalizedName("corblock");
+		PSDL = new BlockPSDL().setHardness(50.0F).setResistance(3000F).setCreativeTab(tabDecoration).setUnlocalizedName("psdl");
+		AbyCorOre = new BlockACOre(3, 3.0F, 6.0F).setUnlocalizedName("abycorore");
+		Altar = new BlockAltar().setStepSound(Block.soundTypeStone).setHardness(4.0F).setResistance(300.0F).setUnlocalizedName("altar");
+		Abybutton = new BlockACButton(false, "pickaxe", 2, "AS").setHardness(0.8F).setResistance(12.0F).setUnlocalizedName("abybutton");
+		Abypplate = new BlockACPressureplate("AS", Material.rock, BlockACPressureplate.Sensitivity.MOBS, "pickaxe", 2).setHardness(0.8F).setResistance(12.0F).setStepSound(Block.soundTypeStone).setUnlocalizedName("abypplate");
+		DSBfence = new BlockACFence(Material.rock).setHardness(1.65F).setResistance(12.0F).setStepSound(Block.soundTypeStone).setUnlocalizedName("dsbfence");
+		DLTfence = new BlockACFence(Material.wood).setHardness(2.0F).setResistance(5.0F).setStepSound(Block.soundTypeWood).setUnlocalizedName("dltfence");
+		dreadore = new BlockACOre(4, 2.5F, 20.0F).setUnlocalizedName("dreadore");
+		abydreadore = new BlockACOre(4, 2.5F, 20.0F).setUnlocalizedName("abydreadore");
+		dreadbrick = new BlockACBasic(Material.rock, "pickaxe", 4, 2.5F, 20.0F, Block.soundTypeStone).setUnlocalizedName("dreadbrick");
+		abydreadbrick = new BlockACBasic(Material.rock, "pickaxe", 4, 2.5F, 20.0F, Block.soundTypeStone).setUnlocalizedName("abydreadbrick");
+		dreadlog = new BlockDreadLog().setHardness(2.0F).setResistance(12.0F).setStepSound(Block.soundTypeWood).setUnlocalizedName("dreadlog");
+		dreadleaves = new BlockDreadLeaves().setStepSound(Block.soundTypeGrass).setHardness(0.2F).setResistance(1.0F).setUnlocalizedName("dreadleaves");
+		dreadsapling = new BlockDreadSapling().setStepSound(Block.soundTypeGrass).setHardness(0.0F).setResistance(0.0F).setUnlocalizedName("dreadsapling");
+		dreadplanks = new BlockACBasic(Material.wood, 2.0F, 5.0F, Block.soundTypeWood).setUnlocalizedName("dreadplanks");
+		dreadportal = new BlockDreadlandsPortal().setUnlocalizedName("dreadportal");
+		dreadfire = new BlockDreadFire().setLightLevel(1.0F).setUnlocalizedName("dreadfire");
+		DGhead = new BlockDGhead().setHardness(1.0F).setResistance(6.0F).setStepSound(Block.soundTypeCloth).setCreativeTab(tabDecoration).setUnlocalizedName("dghead");
+		Cwater = new BlockCLiquid().setResistance(500.0F).setLightLevel(1.0F).setUnlocalizedName("cwater");
+		dreadstone = new BlockACBasic(Material.rock, "pickaxe", 4, 2.5F, 20.0F, Block.soundTypeStone).setUnlocalizedName("dreadstone");
+		abydreadstone = new BlockACBasic(Material.rock, "pickaxe", 4, 2.5F, 20.0F, Block.soundTypeStone).setUnlocalizedName("abydreadstone");
+		dreadgrass = new BlockDreadGrass().setHardness(0.4F).setStepSound(Block.soundTypeGrass).setUnlocalizedName("dreadgrass");
+		Phead = new BlockPhead().setHardness(1.0F).setResistance(6.0F).setStepSound(Block.soundTypeCloth).setCreativeTab(tabDecoration).setUnlocalizedName("phead");
+		Whead = new BlockWhead().setHardness(1.0F).setResistance(6.0F).setStepSound(Block.soundTypeCloth).setCreativeTab(tabDecoration).setUnlocalizedName("whead");
+		Ohead = new BlockOhead().setHardness(1.0F).setResistance(6.0F).setStepSound(Block.soundTypeCloth).setCreativeTab(tabDecoration).setUnlocalizedName("ohead");
+		dreadbrickstairs = new BlockACStairs(dreadbrick, "pickaxe", 4).setHardness(2.5F).setResistance(20.0F).setStepSound(Block.soundTypeStone).setUnlocalizedName("dreadbrickstairs");
+		dreadbrickfence = new BlockACFence(Material.rock, "pickaxe", 4).setHardness(2.5F).setResistance(20.0F).setStepSound(Block.soundTypeStone).setUnlocalizedName("dreadbrickfence");
+		dreadbrickslab1 = new BlockACSingleSlab(Material.rock, "pickaxe", 4).setHardness(2.5F).setResistance(20.0F).setStepSound(Block.soundTypeStone).setUnlocalizedName("dreadbrickslab1");
+		dreadbrickslab2 = new BlockACDoubleSlab(dreadbrickslab1, Material.rock, "pickaxe", 4).setHardness(2.5F).setResistance(20.0F).setStepSound(Block.soundTypeStone).setUnlocalizedName("dreadbrickslab2");
+		abydreadbrickstairs = new BlockACStairs(abydreadbrick, "pickaxe", 4).setHardness(2.5F).setResistance(20.0F).setStepSound(Block.soundTypeStone).setUnlocalizedName("abydreadbrickstairs");
+		abydreadbrickfence = new BlockACFence(Material.rock, "pickaxe", 4).setHardness(2.5F).setResistance(20.0F).setStepSound(Block.soundTypeStone).setUnlocalizedName("abydreadbrickfence");
+		abydreadbrickslab1 = new BlockACSingleSlab(Material.rock, "pickaxe", 4).setHardness(2.5F).setResistance(20.0F).setStepSound(Block.soundTypeStone).setUnlocalizedName("abydreadbrickslab1");
+		abydreadbrickslab2 = new BlockACDoubleSlab(abydreadbrickslab1, Material.rock, "pickaxe", 4).setHardness(2.5F).setResistance(20.0F).setStepSound(Block.soundTypeStone).setUnlocalizedName("abydreadbrickslab2");
+		anticwater = new BlockAntiliquid().setResistance(500.0F).setLightLevel(0.5F).setUnlocalizedName("antiwater");
+		cstone = new BlockCoraliumstone().setHardness(1.5F).setResistance(10.0F).setStepSound(Block.soundTypeStone).setUnlocalizedName("cstone");
+		cstonebrick = new BlockACBasic(Material.rock, 1.5F, 10.0F, Block.soundTypeStone).setUnlocalizedName("cstonebrick");
+		cstonebrickfence = new BlockACFence(Material.rock).setHardness(1.5F).setResistance(10.0F).setStepSound(Block.soundTypeStone).setUnlocalizedName("cstonebrickfence");
+		cstonebrickslab1 = new BlockACSingleSlab(Material.rock).setHardness(1.5F).setResistance(10.0F).setStepSound(Block.soundTypeStone).setUnlocalizedName("cstonebrickslab1");
+		cstonebrickslab2 = new BlockACDoubleSlab(cstonebrickslab1, Material.rock).setHardness(1.5F).setResistance(10.0F).setStepSound(Block.soundTypeStone).setUnlocalizedName("cstonebrickslab2");
+		cstonebrickstairs = new BlockACStairs(cstonebrick, "pickaxe", 0).setHardness(1.5F).setResistance(10.0F).setStepSound(Block.soundTypeStone).setUnlocalizedName("cstonebrickstairs");
+		cstonebutton = new BlockACButton(false, "cstone").setHardness(0.6F).setResistance(12.0F).setUnlocalizedName("cstonebutton");
+		cstonepplate = new BlockACPressureplate("cstone", Material.rock, BlockACPressureplate.Sensitivity.MOBS).setHardness(0.6F).setResistance(12.0F).setStepSound(Block.soundTypeStone).setUnlocalizedName("cstonepplate");
+		dreadaltartop = new BlockDreadAltarTop().setHardness(30.0F).setResistance(300.0F).setStepSound(Block.soundTypeStone).setCreativeTab(tabDecoration).setUnlocalizedName("dreadaltartop");
+		dreadaltarbottom = new BlockDreadAltarBottom().setHardness(30.0F).setResistance(300.0F).setStepSound(Block.soundTypeStone).setCreativeTab(tabDecoration).setUnlocalizedName("dreadaltarbottom");
+		crystallizer = new BlockCrystallizer(false).setHardness(2.5F).setResistance(12.0F).setStepSound(Block.soundTypeStone).setUnlocalizedName("crystallizer");
+		crystallizer_on = new BlockCrystallizer(true).setHardness(2.5F).setResistance(12.0F).setStepSound(Block.soundTypeStone).setLightLevel(0.875F).setUnlocalizedName("crystallizer_on");
+		dreadiumblock = new IngotBlock(6).setUnlocalizedName("dreadiumblock");
+		transmutator = new BlockTransmutator(false).setHardness(2.5F).setResistance(12.0F).setStepSound(Block.soundTypeStone).setUnlocalizedName("transmutator");
+		transmutator_on = new BlockTransmutator(true).setHardness(2.5F).setResistance(12.0F).setStepSound(Block.soundTypeStone).setLightLevel(0.875F).setUnlocalizedName("transmutator_on");
+		dreadguardspawner = new BlockDreadguardSpawner().setUnlocalizedName("dreadguardspawner");
+		chagarothspawner = new BlockChagarothSpawner().setUnlocalizedName("chagarothspawner");
+		chagarothfistspawner = new BlockChagarothFistSpawner().setUnlocalizedName("chagarothfistspawner");
+		DrTfence = new BlockACFence(Material.wood).setHardness(2.0F).setResistance(5.0F).setStepSound(Block.soundTypeWood).setUnlocalizedName("drtfence");
+		nitreOre = new BlockACOre(2, 3.0F, 6.0F).setUnlocalizedName("nitreore");
+		AbyIroOre = new BlockACOre(2, 3.0F, 6.0F).setUnlocalizedName("abyiroore");
+		AbyGolOre = new BlockACOre(2, 5.0F, 10.0F).setUnlocalizedName("abygolore");
+		AbyDiaOre = new BlockACOre(2, 5.0F, 10.0F).setUnlocalizedName("abydiaore");
+		AbyNitOre = new BlockACOre(2, 3.0F, 6.0F).setUnlocalizedName("abynitore");
+		AbyTinOre = new BlockACOre(2, 3.0F, 6.0F).setUnlocalizedName("abytinore");
+		AbyCopOre = new BlockACOre(2, 3.0F, 6.0F).setUnlocalizedName("abycopore");
+		AbyPCorOre = new BlockACOre(5, 8.0F, 10.0F).setUnlocalizedName("abypcorore");
+		AbyLCorOre = new BlockACOre(4, 10.0F, 12.0F).setUnlocalizedName("abylcorore");
+		solidLava = new BlockSolidLava("solidlava");
+		ethaxium = new BlockACBasic(Material.rock, "pickaxe", 8, 100.0F, Float.MAX_VALUE, Block.soundTypeStone).setUnlocalizedName("ethaxium");
+		ethaxiumbrick = new BlockEthaxiumBrick().setUnlocalizedName("ethaxiumbrick");
+		ethaxiumpillar = new BlockEthaxiumPillar().setUnlocalizedName("ethaxiumpillar");
+		ethaxiumstairs = new BlockACStairs(ethaxiumbrick, "pickaxe", 8).setHardness(100.0F).setResistance(Float.MAX_VALUE).setStepSound(Block.soundTypeStone).setUnlocalizedName("ethaxiumbrickstairs");
+		ethaxiumslab1 = new BlockACSingleSlab(Material.rock, "pickaxe", 8).setHardness(100.0F).setResistance(Float.MAX_VALUE).setStepSound(Block.soundTypeStone).setUnlocalizedName("ethaxiumbrickslab1");
+		ethaxiumslab2 = new BlockACDoubleSlab(ethaxiumslab1, Material.rock, "pickaxe", 8).setHardness(100.0F).setResistance(Float.MAX_VALUE).setStepSound(Block.soundTypeStone).setUnlocalizedName("ethaxiumbrickslab2");
+		ethaxiumfence = new BlockACFence(Material.rock, "pickaxe", 8).setHardness(100.0F).setResistance(Float.MAX_VALUE).setStepSound(Block.soundTypeStone).setUnlocalizedName("ethaxiumfence");
+		omotholstone = new BlockACBasic(Material.rock, "pickaxe", 6, 10.0F, 12.0F, Block.soundTypeStone).setUnlocalizedName("omotholstone");
+		ethaxiumblock = new IngotBlock(8).setResistance(Float.MAX_VALUE).setUnlocalizedName("ethaxiumblock");
+		omotholportal = new BlockOmotholPortal().setUnlocalizedName("omotholportal");
+		omotholfire = new BlockOmotholFire().setLightLevel(1.0F).setUnlocalizedName("omotholfire");
+		engraver = new BlockEngraver().setHardness(2.5F).setResistance(12.0F).setStepSound(Block.soundTypeStone).setUnlocalizedName("engraver");
+		house = new BlockHouse().setHardness(1.0F).setResistance(Float.MAX_VALUE).setStepSound(Block.soundTypeWood).setUnlocalizedName("engraver_on");
+		materializer = new BlockMaterializer().setUnlocalizedName("materializer");
+		darkethaxiumbrick = new BlockDarkEthaxiumBrick().setUnlocalizedName("darkethaxiumbrick");
+		darkethaxiumpillar = new BlockDarkEthaxiumPillar().setUnlocalizedName("darkethaxiumpillar");
+		darkethaxiumstairs = new BlockACStairs(darkethaxiumbrick, "pickaxe", 8).setHardness(150.0F).setResistance(Float.MAX_VALUE).setStepSound(Block.soundTypeStone).setUnlocalizedName("darkethaxiumbrickstairs");
+		darkethaxiumslab1 = new BlockACSingleSlab(Material.rock, "pickaxe", 8).setHardness(150.0F).setResistance(Float.MAX_VALUE).setStepSound(Block.soundTypeStone).setUnlocalizedName("darkethaxiumbrickslab1");
+		darkethaxiumslab2 = new BlockACDoubleSlab(darkethaxiumslab1, Material.rock, "pickaxe", 8).setHardness(150.0F).setResistance(Float.MAX_VALUE).setStepSound(Block.soundTypeStone).setUnlocalizedName("darkethaxiumbrickslab2");
+		darkethaxiumfence = new BlockACFence(Material.rock, "pickaxe", 8).setHardness(150.0F).setResistance(Float.MAX_VALUE).setStepSound(Block.soundTypeStone).setUnlocalizedName("darkethaxiumbrickfence");
+		ritualaltar = new BlockRitualAltar().setUnlocalizedName("ritualaltar");
+		ritualpedestal = new BlockRitualPedestal().setUnlocalizedName("ritualpedestal");
+		shoggothBlock = new BlockShoggothOoze().setUnlocalizedName("shoggothblock");
+		cthulhuStatue = new BlockCthulhuStatue().setUnlocalizedName("cthulhustatue");
+		hasturStatue = new BlockHasturStatue().setUnlocalizedName("hasturstatue");
+		jzaharStatue = new BlockJzaharStatue().setUnlocalizedName("jzaharstatue");
+		azathothStatue = new BlockAzathothStatue().setUnlocalizedName("azathothstatue");
+		nyarlathotepStatue = new BlockNyarlathotepStatue().setUnlocalizedName("nyarlathotepstatue");
+		yogsothothStatue = new BlockYogsothothStatue().setUnlocalizedName("yogsothothstatue");
+		shubniggurathStatue = new BlockShubniggurathStatue().setUnlocalizedName("shubniggurathstatue");
+		monolithStone = new BlockACBasic(Material.rock, 6.0F, 24.0F, Block.soundTypeStone).setUnlocalizedName("monolithstone");
 		shoggothBiomass = new BlockShoggothBiomass();
 		energyPedestal = new BlockEnergyPedestal();
 		monolithPillar = new BlockMonolithPillar();
@@ -504,29 +482,29 @@ public class AbyssalCraft {
 		darkRealm = new BiomeGenDarkRealm(configBiomeId13).setColor(522674).setBiomeName("Dark Realm").setDisableRain();
 
 		//"secret" dev stuff
-		devsword = new AbyssalCraftTool().setUnlocalizedName("DEV_BLADE").setTextureName(modid + ":" + "Sword");
+		devsword = new AbyssalCraftTool();
 
 		//Misc items
-		OC = new ItemOC().setCreativeTab(tabItems).setUnlocalizedName("OC").setTextureName(modid + ":" + "OC");
-		Staff = new ItemStaff().setCreativeTab(tabTools).setFull3D().setUnlocalizedName("SOTG").setTextureName(modid + ":" + "SOTG");
-		portalPlacer = new ItemPortalPlacer().setUnlocalizedName("GK").setTextureName(modid + ":" + "GK");
-		Cbucket = new ItemCBucket(Cwater).setCreativeTab(tabItems).setContainerItem(Items.bucket).setUnlocalizedName("Cbucket").setTextureName(modid + ":" + "Cbucket");
-		PSDLfinder = new ItemTrackerPSDL().setCreativeTab(tabItems).setUnlocalizedName("PSDLf").setTextureName(modid + ":" + "PSDLf");
-		EoA = new ItemEoA().setCreativeTab(tabItems).setUnlocalizedName("EoA").setTextureName(modid + ":" + "EoA");
-		portalPlacerDL = new ItemPortalPlacerDL().setUnlocalizedName("GKD").setTextureName(modid + ":" + "GKD");
+		OC = new ItemOC();
+		Staff = new ItemStaff();
+		gatewayKey = new ItemPortalPlacer();
+		Cbucket = new ItemCBucket(Cwater);
+		PSDLfinder = new ItemTrackerPSDL();
+		EoA = new ItemEoA();
+		gatewayKeyDL = new ItemPortalPlacerDL();
 		cbrick = new ItemACBasic("cbrick");
-		cudgel = new ItemCudgel().setCreativeTab(tabCombat).setFull3D().setUnlocalizedName("cudgel").setTextureName(modid + ":" + "cudgel");
-		carbonCluster = new ItemACBasic("CarbC");
-		denseCarbonCluster = new ItemACBasic("DCarbC");
+		cudgel = new ItemCudgel();
+		carbonCluster = new ItemACBasic("carboncluster");
+		denseCarbonCluster = new ItemACBasic("densecarboncluster");
 		methane = new ItemACBasic("methane");
 		nitre = new ItemACBasic("nitre");
 		sulfur = new ItemACBasic("sulfur");
-		portalPlacerJzh = new ItemPortalPlacerJzh().setUnlocalizedName("GKJ").setTextureName(modid + ":" + "GKJ");
-		tinIngot = new ItemACBasic("IT");
-		copperIngot = new ItemACBasic("IC");
-		lifeCrystal = new ItemACBasic("lifeCrystal");
-		shoggothFlesh = new ItemMetadata("shoggothFlesh", true, "overworld", "abyssalwasteland", "dreadlands", "omothol", "darkrealm");
-		eldritchScale = new ItemACBasic("eldritchScale");
+		gatewayKeyJzh = new ItemPortalPlacerJzh();
+		tinIngot = new ItemACBasic("tiningot");
+		copperIngot = new ItemACBasic("copperingot");
+		lifeCrystal = new ItemACBasic("lifecrystal");
+		shoggothFlesh = new ItemMetadata("shoggothflesh", true, "overworld", "abyssalwasteland", "dreadlands", "omothol", "darkrealm");
+		eldritchScale = new ItemACBasic("eldritchscale");
 		omotholFlesh = new ItemOmotholFlesh(3, 0.3F, false);
 		necronomicon = new ItemNecronomicon("necronomicon", 0);
 		necronomicon_cor = new ItemNecronomicon("necronomicon_cor", 1);
@@ -546,180 +524,179 @@ public class AbyssalCraft {
 		cthulhuCoin = new ItemCoin("cthulhucoin");
 		elderCoin = new ItemCoin("eldercoin");
 		jzaharCoin = new ItemCoin("jzaharcoin");
-		engravingBlank = new ItemEngraving("blank", 50).setCreativeTab(tabCoins).setTextureName(modid + ":" + "engraving_blank");
-		engravingCthulhu = new ItemEngraving("cthulhu", 10).setCreativeTab(tabCoins).setTextureName(modid + ":" + "engraving_cthulhu");
-		engravingElder = new ItemEngraving("elder", 10).setCreativeTab(tabCoins).setTextureName(modid + ":" + "engraving_elder");
-		engravingJzahar = new ItemEngraving("jzahar", 10).setCreativeTab(tabCoins).setTextureName(modid + ":" + "engraving_jzahar");
+		engravingBlank = new ItemEngraving("blank", 50).setCreativeTab(tabCoins);
+		engravingCthulhu = new ItemEngraving("cthulhu", 10).setCreativeTab(tabCoins);
+		engravingElder = new ItemEngraving("elder", 10).setCreativeTab(tabCoins);
+		engravingJzahar = new ItemEngraving("jzahar", 10).setCreativeTab(tabCoins);
 		hasturCoin = new ItemCoin("hasturcoin");
 		azathothCoin = new ItemCoin("azathothcoin");
 		nyarlathotepCoin = new ItemCoin("nyarlathotepcoin");
 		yogsothothCoin = new ItemCoin("yogsothothcoin");
 		shubniggurathCoin = new ItemCoin("shubniggurathcoin");
-		engravingHastur = new ItemEngraving("hastur", 10).setCreativeTab(tabCoins).setTextureName(modid + ":" + "engraving_hastur");
-		engravingAzathoth = new ItemEngraving("azathoth", 10).setCreativeTab(tabCoins).setTextureName(modid + ":" + "engraving_azathoth");
-		engravingNyarlathotep = new ItemEngraving("nyarlathotep", 10).setCreativeTab(tabCoins).setTextureName(modid + ":" + "engraving_nyarlathotep");
-		engravingYogsothoth = new ItemEngraving("yogsothoth", 10).setCreativeTab(tabCoins).setTextureName(modid + ":" + "engraving_yogsothoth");
-		engravingShubniggurath = new ItemEngraving("shubniggurath", 10).setCreativeTab(tabCoins).setTextureName(modid + ":" + "engraving_shubniggurath");
+		engravingHastur = new ItemEngraving("hastur", 10).setCreativeTab(tabCoins);
+		engravingAzathoth = new ItemEngraving("azathoth", 10).setCreativeTab(tabCoins);
+		engravingNyarlathotep = new ItemEngraving("nyarlathotep", 10).setCreativeTab(tabCoins);
+		engravingYogsothoth = new ItemEngraving("yogsothoth", 10).setCreativeTab(tabCoins);
+		engravingShubniggurath = new ItemEngraving("shubniggurath", 10).setCreativeTab(tabCoins);
 
 		//Charms
-		charm = new ItemCharm("ritualCharm", true, null);
-		cthulhuCharm = new ItemCharm("cthulhuCharm", false, DeityType.CTHULHU).setTextureName(modid + ":" + "charm_cthulhu");
-		hasturCharm = new ItemCharm("hasturCharm", false, DeityType.HASTUR).setTextureName(modid + ":" + "charm_hastur");
-		jzaharCharm = new ItemCharm("jzaharCharm", false, DeityType.JZAHAR).setTextureName(modid + ":" + "charm_jzahar");
-		azathothCharm = new ItemCharm("azathothCharm", false, DeityType.AZATHOTH).setTextureName(modid + ":" + "charm_azathoth");
-		nyarlathotepCharm = new ItemCharm("nyarlathotepCharm", false, DeityType.NYARLATHOTEP).setTextureName(modid + ":" + "charm_nyarlathotep");
-		yogsothothCharm = new ItemCharm("yogsothothCharm", false, DeityType.YOGSOTHOTH).setTextureName(modid + ":" + "charm_yogsothoth");
-		shubniggurathCharm = new ItemCharm("shubniggurathCharm", false, DeityType.SHUBNIGGURATH).setTextureName(modid + ":" + "charm_shubniggurath");
+		charm = new ItemCharm("ritualcharm", true, null);
+		cthulhuCharm = new ItemCharm("cthulhucharm", false, DeityType.CTHULHU);
+		hasturCharm = new ItemCharm("hasturcharm", false, DeityType.HASTUR);
+		jzaharCharm = new ItemCharm("jzaharcharm", false, DeityType.JZAHAR);
+		azathothCharm = new ItemCharm("azathothcharm", false, DeityType.AZATHOTH);
+		nyarlathotepCharm = new ItemCharm("nyarlathotepcharm", false, DeityType.NYARLATHOTEP);
+		yogsothothCharm = new ItemCharm("yogsothothcharm", false, DeityType.YOGSOTHOTH);
+		shubniggurathCharm = new ItemCharm("shubniggurathcharm", false, DeityType.SHUBNIGGURATH);
 
 		//Ethaxium
-		ethaxium_brick = new ItemACBasic("EB");
-		ethaxiumIngot = new ItemACBasic("EI");
+		ethaxium_brick = new ItemACBasic("ethbrick");
+		ethaxiumIngot = new ItemACBasic("ethaxiumingot");
 
 		//anti-items
-		antibucket = new ItemAntiBucket(anticwater).setCreativeTab(tabItems).setContainerItem(Items.bucket).setUnlocalizedName("Antibucket").setTextureName(modid + ":" + "Antibucket");
-		antiBeef = new ItemAntiFood("antiBeef");
-		antiChicken = new ItemAntiFood("antiChicken");
-		antiPork = new ItemAntiFood("antiPork");
-		antiFlesh = new ItemAntiFood("antiFlesh");
-		antiBone = new ItemACBasic("antiBone");
-		antiSpider_eye = new ItemAntiFood("antiSpider_eye", false);
-		antiCorflesh = new ItemCorflesh(0, 0, false, "antiCF");
-		antiCorbone = new ItemCorbone(0, 0, false, "antiCB");
+		antibucket = new ItemAntiBucket(anticwater);
+		antiBeef = new ItemAntiFood("antibeef");
+		antiChicken = new ItemAntiFood("antichicken");
+		antiPork = new ItemAntiFood("antipork");
+		antiFlesh = new ItemAntiFood("antiflesh");
+		antiBone = new ItemACBasic("antibone");
+		antiSpider_eye = new ItemAntiFood("antispidereye", false);
+		antiCorflesh = new ItemCorflesh(0, 0, false, "anticorflesh");
+		antiCorbone = new ItemCorbone(0, 0, false, "anticorbone");
 
 		//crystals
-		crystal = new ItemCrystal().setUnlocalizedName("crystal").setTextureName(AbyssalCraft.modid + ":" + "crystal");
-		crystalShard = new ItemCrystal().setUnlocalizedName("crystalshard").setTextureName(AbyssalCraft.modid + ":" + "crystal_shard");
+		crystal = new ItemCrystal("crystal");
+		crystalShard = new ItemCrystal("crystalshard");
 
 		//Shadow items
-		shadowfragment = new ItemACBasic("SF");
-		shadowshard = new ItemACBasic("SS");
-		shadowgem = new ItemACBasic("SG");
-		oblivionshard = new ItemACBasic("OS");
+		shadowfragment = new ItemACBasic("shadowfragment");
+		shadowshard = new ItemACBasic("shadowshard");
+		shadowgem = new ItemACBasic("shadowgem");
+		oblivionshard = new ItemACBasic("oblivionshard");
 		shadowPlate = new ItemACBasic("shadowplate");
 
 		//Dread items
-		Dreadshard = new ItemACBasic("DSOA");
-		dreadchunk = new ItemACBasic("DAC");
-		dreadiumingot = new ItemACBasic("DI");
-		dreadfragment = new ItemACBasic("DF");
-		dreadcloth = new ItemACBasic("DC");
-		dreadplate = new ItemACBasic("DPP");
-		dreadblade = new ItemACBasic("DB");
-		dreadKey = new ItemACBasic("DK");
+		Dreadshard = new ItemACBasic("dreadshard");
+		dreadchunk = new ItemACBasic("dreadchunk");
+		dreadiumingot = new ItemACBasic("dreadiumingot");
+		dreadfragment = new ItemACBasic("dreadfragment");
+		dreadcloth = new ItemACBasic("dreadcloth");
+		dreadplate = new ItemACBasic("dreadplate");
+		dreadblade = new ItemACBasic("dreadblade");
+		dreadKey = new ItemACBasic("dreadkey");
 
 		//Abyssalnite items
-		abychunk = new ItemACBasic("AC");
-		abyingot = new ItemACBasic("AI");
+		abychunk = new ItemACBasic("abychunk");
+		abyingot = new ItemACBasic("abyingot");
 
 		//Coralium items
-		Coraliumcluster2 = new ItemCoraliumcluster("2").setCreativeTab(tabItems).setUnlocalizedName("CGCA").setTextureName(modid + ":" + "CGCA");
-		Coraliumcluster3 = new ItemCoraliumcluster("3").setCreativeTab(tabItems).setUnlocalizedName("CGCB").setTextureName(modid + ":" + "CGCB");
-		Coraliumcluster4 = new ItemCoraliumcluster("4").setCreativeTab(tabItems).setUnlocalizedName("CGCC").setTextureName(modid + ":" + "CGCC");
-		Coraliumcluster5 = new ItemCoraliumcluster("5").setCreativeTab(tabItems).setUnlocalizedName("CGCD").setTextureName(modid + ":" + "CGCD");
-		Coraliumcluster6 = new ItemCoraliumcluster("6").setCreativeTab(tabItems).setUnlocalizedName("CGCE").setTextureName(modid + ":" + "CGCE");
-		Coraliumcluster7 = new ItemCoraliumcluster("7").setCreativeTab(tabItems).setUnlocalizedName("CGCF").setTextureName(modid + ":" + "CGCF");
-		Coraliumcluster8 = new ItemCoraliumcluster("8").setCreativeTab(tabItems).setUnlocalizedName("CGCG").setTextureName(modid + ":" + "CGCG");
-		Coraliumcluster9 = new ItemCoraliumcluster("9").setCreativeTab(tabItems).setUnlocalizedName("CGCH").setTextureName(modid + ":" + "CGCH");
-		Cpearl = new ItemACBasic("CP");
-		Cchunk = new ItemACBasic("CC");
-		Cingot = new ItemACBasic("RCI");
-		Cplate = new ItemACBasic("CPP");
-		Coralium = new ItemACBasic("CG");
-		Corb = new ItemCorb().setCreativeTab(tabTools).setUnlocalizedName("TG").setTextureName(modid + ":" + "TG");
-		Corflesh = new ItemCorflesh(2, 0.1F, false, "CF");
-		Corbone = new ItemCorbone(2, 0.1F, false, "CB");
-		corbow = new ItemCoraliumBow(20.0F, 0, 8, 16).setUnlocalizedName("Corbow").setTextureName(modid + ":" + "Corbow");
+		Coraliumcluster2 = new ItemCoraliumcluster("ccluster2", "2");
+		Coraliumcluster3 = new ItemCoraliumcluster("ccluster3", "3");
+		Coraliumcluster4 = new ItemCoraliumcluster("ccluster4", "4");
+		Coraliumcluster5 = new ItemCoraliumcluster("ccluster5", "5");
+		Coraliumcluster6 = new ItemCoraliumcluster("ccluster6", "6");
+		Coraliumcluster7 = new ItemCoraliumcluster("ccluster7", "7");
+		Coraliumcluster8 = new ItemCoraliumcluster("ccluster8", "8");
+		Coraliumcluster9 = new ItemCoraliumcluster("ccluster9", "9");
+		Cpearl = new ItemACBasic("cpearl");
+		Cchunk = new ItemACBasic("cchunk");
+		Cingot = new ItemACBasic("cingot");
+		Cplate = new ItemACBasic("platec");
+		Coralium = new ItemACBasic("coralium");
+		Corb = new ItemCorb();
+		Corflesh = new ItemCorflesh(2, 0.1F, false, "corflesh");
+		Corbone = new ItemCorbone(2, 0.1F, false, "corbone");
+		corbow = new ItemCoraliumBow(20.0F, 0, 8, 16);
 
 		//Tools
-		pickaxe = new ItemACPickaxe(AbyssalCraftAPI.darkstoneTool, "DP", 1);
-		axe = new ItemACAxe(AbyssalCraftAPI.darkstoneTool, "DA", 1);
-		shovel = new ItemACShovel(AbyssalCraftAPI.darkstoneTool, "DS", 1);
-		sword = new ItemACSword(AbyssalCraftAPI.darkstoneTool, "DSW");
-		hoe = new ItemACHoe(AbyssalCraftAPI.darkstoneTool, "DH");
-		pickaxeA = new ItemACPickaxe(AbyssalCraftAPI.abyssalniteTool, "AP", 4, EnumChatFormatting.DARK_AQUA);
-		axeA = new ItemACAxe(AbyssalCraftAPI.abyssalniteTool, "AA", 4, EnumChatFormatting.DARK_AQUA);
-		shovelA = new ItemACShovel(AbyssalCraftAPI.abyssalniteTool, "AS", 4, EnumChatFormatting.DARK_AQUA);
-		swordA = new ItemACSword(AbyssalCraftAPI.abyssalniteTool, "ASW", EnumChatFormatting.DARK_AQUA);
-		hoeA = new ItemACHoe(AbyssalCraftAPI.abyssalniteTool, "AH", EnumChatFormatting.DARK_AQUA);
-		Corpickaxe = new ItemACPickaxe(AbyssalCraftAPI.refinedCoraliumTool, "RCP", 5, EnumChatFormatting.AQUA);
-		Coraxe = new ItemACAxe(AbyssalCraftAPI.refinedCoraliumTool, "RCA", 5, EnumChatFormatting.AQUA);
-		Corshovel = new ItemACShovel(AbyssalCraftAPI.refinedCoraliumTool, "RCS", 5, EnumChatFormatting.AQUA);
-		Corsword = new ItemACSword(AbyssalCraftAPI.refinedCoraliumTool, "RCSW", EnumChatFormatting.AQUA);
-		Corhoe = new ItemACHoe(AbyssalCraftAPI.refinedCoraliumTool, "RCH", EnumChatFormatting.AQUA);
-		dreadiumpickaxe = new ItemACPickaxe(AbyssalCraftAPI.dreadiumTool, "DDP", 6, EnumChatFormatting.DARK_RED);
-		dreadiumaxe = new ItemACAxe(AbyssalCraftAPI.dreadiumTool, "DDA", 6, EnumChatFormatting.DARK_RED);
-		dreadiumshovel = new ItemACShovel(AbyssalCraftAPI.dreadiumTool, "DDS", 6, EnumChatFormatting.DARK_RED);
-		dreadiumsword = new ItemACSword(AbyssalCraftAPI.dreadiumTool, "DDSW", EnumChatFormatting.DARK_RED);
-		dreadiumhoe = new ItemACHoe(AbyssalCraftAPI.dreadiumTool, "DDH", EnumChatFormatting.DARK_RED);
-		dreadhilt = new ItemDreadiumKatana("hilt", 5.0F, 200);
-		dreadkatana = new ItemDreadiumKatana("katana", 20.0F, 2000);
-		soulReaper = new ItemSoulReaper("soulReaper");
-		ethPickaxe = new ItemEthaxiumPickaxe(AbyssalCraftAPI.ethaxiumTool, "EP");
-		ethAxe = new ItemACAxe(AbyssalCraftAPI.ethaxiumTool, "EA", 8, EnumChatFormatting.AQUA);
-		ethShovel = new ItemACShovel(AbyssalCraftAPI.ethaxiumTool, "ES", 8, EnumChatFormatting.AQUA);
-		ethSword = new ItemACSword(AbyssalCraftAPI.ethaxiumTool, "ESW", EnumChatFormatting.AQUA);
-		ethHoe = new ItemACHoe(AbyssalCraftAPI.ethaxiumTool, "EH", EnumChatFormatting.AQUA);
+		pickaxe = new ItemACPickaxe(AbyssalCraftAPI.darkstoneTool, "dpick", 1);
+		axe = new ItemACAxe(AbyssalCraftAPI.darkstoneTool, "daxe", 1);
+		shovel = new ItemACShovel(AbyssalCraftAPI.darkstoneTool, "dshovel", 1);
+		sword = new ItemACSword(AbyssalCraftAPI.darkstoneTool, "dsword");
+		hoe = new ItemACHoe(AbyssalCraftAPI.darkstoneTool, "dhoe");
+		pickaxeA = new ItemACPickaxe(AbyssalCraftAPI.abyssalniteTool, "apick", 4, EnumChatFormatting.DARK_AQUA);
+		axeA = new ItemACAxe(AbyssalCraftAPI.abyssalniteTool, "aaxe", 4, EnumChatFormatting.DARK_AQUA);
+		shovelA = new ItemACShovel(AbyssalCraftAPI.abyssalniteTool, "ashovel", 4, EnumChatFormatting.DARK_AQUA);
+		swordA = new ItemACSword(AbyssalCraftAPI.abyssalniteTool, "asword", EnumChatFormatting.DARK_AQUA);
+		hoeA = new ItemACHoe(AbyssalCraftAPI.abyssalniteTool, "ahoe", EnumChatFormatting.DARK_AQUA);
+		Corpickaxe = new ItemACPickaxe(AbyssalCraftAPI.refinedCoraliumTool, "corpick", 5, EnumChatFormatting.AQUA);
+		Coraxe = new ItemACAxe(AbyssalCraftAPI.refinedCoraliumTool, "coraxe", 5, EnumChatFormatting.AQUA);
+		Corshovel = new ItemACShovel(AbyssalCraftAPI.refinedCoraliumTool, "corshovel", 5, EnumChatFormatting.AQUA);
+		Corsword = new ItemACSword(AbyssalCraftAPI.refinedCoraliumTool, "corsword", EnumChatFormatting.AQUA);
+		Corhoe = new ItemACHoe(AbyssalCraftAPI.refinedCoraliumTool, "corhoe", EnumChatFormatting.AQUA);
+		dreadiumpickaxe = new ItemACPickaxe(AbyssalCraftAPI.dreadiumTool, "dreadiumpickaxe", 6, EnumChatFormatting.DARK_RED);
+		dreadiumaxe = new ItemACAxe(AbyssalCraftAPI.dreadiumTool, "dreadiumaxe", 6, EnumChatFormatting.DARK_RED);
+		dreadiumshovel = new ItemACShovel(AbyssalCraftAPI.dreadiumTool, "dreadiumshovel", 6, EnumChatFormatting.DARK_RED);
+		dreadiumsword = new ItemACSword(AbyssalCraftAPI.dreadiumTool, "dreadiumsword", EnumChatFormatting.DARK_RED);
+		dreadiumhoe = new ItemACHoe(AbyssalCraftAPI.dreadiumTool, "dreadiumhoe", EnumChatFormatting.DARK_RED);
+		dreadhilt = new ItemDreadiumKatana("dreadhilt", 5.0F, 200);
+		dreadkatana = new ItemDreadiumKatana("dreadkatana", 20.0F, 2000);
+		soulReaper = new ItemSoulReaper("soulreaper");
+		ethPickaxe = new ItemEthaxiumPickaxe(AbyssalCraftAPI.ethaxiumTool, "ethaxiumpickaxe");
+		ethAxe = new ItemACAxe(AbyssalCraftAPI.ethaxiumTool, "ethaxiumaxe", 8, EnumChatFormatting.AQUA);
+		ethShovel = new ItemACShovel(AbyssalCraftAPI.ethaxiumTool, "ethaxiumshovel", 8, EnumChatFormatting.AQUA);
+		ethSword = new ItemACSword(AbyssalCraftAPI.ethaxiumTool, "ethaxiumsword", EnumChatFormatting.AQUA);
+		ethHoe = new ItemACHoe(AbyssalCraftAPI.ethaxiumTool, "ethaxiumhoe", EnumChatFormatting.AQUA);
 		drainStaff = new ItemDrainStaff();
 
 		//Armor
-		boots = new ItemAbyssalniteArmor(AbyssalCraftAPI.abyssalniteArmor, 5, 3).setUnlocalizedName("AAB").setTextureName(modid + ":" + "AAB");
-		helmet = new ItemAbyssalniteArmor(AbyssalCraftAPI.abyssalniteArmor, 5, 0).setUnlocalizedName("AAH").setTextureName(modid + ":" + "AAh");
-		plate = new ItemAbyssalniteArmor(AbyssalCraftAPI.abyssalniteArmor, 5, 1).setUnlocalizedName("AAC").setTextureName(modid + ":" + "AAC");
-		legs = new ItemAbyssalniteArmor(AbyssalCraftAPI.abyssalniteArmor, 5, 2).setUnlocalizedName("AAP").setTextureName(modid + ":" + "AAP");
-		bootsD = new ItemDreadArmor(AbyssalCraftAPI.dreadedAbyssalniteArmor, 5, 3).setUnlocalizedName("ADAB").setTextureName(modid + ":" + "ADAB");
-		helmetD = new ItemDreadArmor(AbyssalCraftAPI.dreadedAbyssalniteArmor, 5, 0).setUnlocalizedName("ADAH").setTextureName(modid + ":" + "ADAH");
-		plateD = new ItemDreadArmor(AbyssalCraftAPI.dreadedAbyssalniteArmor, 5, 1).setUnlocalizedName("ADAC").setTextureName(modid + ":" + "ADAC");
-		legsD = new ItemDreadArmor(AbyssalCraftAPI.dreadedAbyssalniteArmor, 5, 2).setUnlocalizedName("ADAP").setTextureName(modid + ":" + "ADAP");
-		Corboots = new ItemCoraliumArmor(AbyssalCraftAPI.refinedCoraliumArmor, 5, 3).setUnlocalizedName("ACB").setTextureName(modid + ":" + "ACB");
-		Corhelmet = new ItemCoraliumArmor(AbyssalCraftAPI.refinedCoraliumArmor, 5, 0).setUnlocalizedName("ACH").setTextureName(modid + ":" + "ACH");
-		Corplate = new ItemCoraliumArmor(AbyssalCraftAPI.refinedCoraliumArmor, 5, 1).setUnlocalizedName("ACC").setTextureName(modid + ":" + "ACC");
-		Corlegs = new ItemCoraliumArmor(AbyssalCraftAPI.refinedCoraliumArmor, 5, 2).setUnlocalizedName("ACP").setTextureName(modid + ":" + "ACP");
-		CorbootsP = new ItemCoraliumPArmor(AbyssalCraftAPI.platedCoraliumArmor, 5, 3).setUnlocalizedName("ACBP").setTextureName(modid + ":" + "ACBP");
-		CorhelmetP = new ItemCoraliumPArmor(AbyssalCraftAPI.platedCoraliumArmor, 5, 0).setUnlocalizedName("ACHP").setTextureName(modid + ":" + "ACHP");
-		CorplateP = new ItemCoraliumPArmor(AbyssalCraftAPI.platedCoraliumArmor, 5, 1).setUnlocalizedName("ACCP").setTextureName(modid + ":" + "ACCP");
-		CorlegsP = new ItemCoraliumPArmor(AbyssalCraftAPI.platedCoraliumArmor, 5, 2).setUnlocalizedName("ACPP").setTextureName(modid + ":" + "ACPP");
-		Depthsboots = new ItemDepthsArmor(AbyssalCraftAPI.depthsArmor, 5, 3).setUnlocalizedName("ADB").setTextureName(modid + ":" + "ADB");
-		Depthshelmet = new ItemDepthsArmor(AbyssalCraftAPI.depthsArmor, 5, 0).setUnlocalizedName("ADH").setTextureName(modid + ":" + "ADH");
-		Depthsplate = new ItemDepthsArmor(AbyssalCraftAPI.depthsArmor, 5, 1).setUnlocalizedName("ADC").setTextureName(modid + ":" + "ADC");
-		Depthslegs = new ItemDepthsArmor(AbyssalCraftAPI.depthsArmor, 5, 2).setUnlocalizedName("ADP").setTextureName(modid + ":" + "ADP");
-		dreadiumboots = new ItemDreadiumArmor(AbyssalCraftAPI.dreadiumArmor, 5, 3).setUnlocalizedName("ADDB").setTextureName(modid + ":" + "ADDB");
-		dreadiumhelmet = new ItemDreadiumArmor(AbyssalCraftAPI.dreadiumArmor, 5, 0).setUnlocalizedName("ADDH").setTextureName(modid + ":" + "ADDH");
-		dreadiumplate = new ItemDreadiumArmor(AbyssalCraftAPI.dreadiumArmor, 5, 1).setUnlocalizedName("ADDC").setTextureName(modid + ":" + "ADDC");
-		dreadiumlegs = new ItemDreadiumArmor(AbyssalCraftAPI.dreadiumArmor, 5, 2).setUnlocalizedName("ADDP").setTextureName(modid + ":" + "ADDP");
-		dreadiumSboots = new ItemDreadiumSamuraiArmor(AbyssalCraftAPI.dreadiumSamuraiArmor, 5, 3).setUnlocalizedName("ADSB").setTextureName(modid + ":" + "ADSB");
-		dreadiumShelmet = new ItemDreadiumSamuraiArmor(AbyssalCraftAPI.dreadiumSamuraiArmor, 5, 0).setUnlocalizedName("ADSH").setTextureName(modid + ":" + "ADSH");
-		dreadiumSplate = new ItemDreadiumSamuraiArmor(AbyssalCraftAPI.dreadiumSamuraiArmor, 5, 1).setUnlocalizedName("ADSC").setTextureName(modid + ":" + "ADSC");
-		dreadiumSlegs = new ItemDreadiumSamuraiArmor(AbyssalCraftAPI.dreadiumSamuraiArmor, 5, 2).setUnlocalizedName("ADSP").setTextureName(modid + ":" + "ADSP");
-		ethBoots = new ItemEthaxiumArmor(AbyssalCraftAPI.ethaxiumArmor, 5, 3).setUnlocalizedName("AEB").setTextureName(modid + ":" + "AEB");
-		ethHelmet = new ItemEthaxiumArmor(AbyssalCraftAPI.ethaxiumArmor, 5, 0).setUnlocalizedName("AEH").setTextureName(modid + ":" + "AEH");
-		ethPlate = new ItemEthaxiumArmor(AbyssalCraftAPI.ethaxiumArmor, 5, 1).setUnlocalizedName("AEC").setTextureName(modid + ":" + "AEC");
-		ethLegs = new ItemEthaxiumArmor(AbyssalCraftAPI.ethaxiumArmor, 5, 2).setUnlocalizedName("AEP").setTextureName(modid + ":" + "AEP");
+		helmet = new ItemAbyssalniteArmor(AbyssalCraftAPI.abyssalniteArmor, 5, 0, "ahelmet");
+		plate = new ItemAbyssalniteArmor(AbyssalCraftAPI.abyssalniteArmor, 5, 1, "aplate");
+		legs = new ItemAbyssalniteArmor(AbyssalCraftAPI.abyssalniteArmor, 5, 2, "alegs");
+		boots = new ItemAbyssalniteArmor(AbyssalCraftAPI.abyssalniteArmor, 5, 3, "aboots");
+		helmetD = new ItemDreadArmor(AbyssalCraftAPI.dreadedAbyssalniteArmor, 5, 0, "dhelmet");
+		plateD = new ItemDreadArmor(AbyssalCraftAPI.dreadedAbyssalniteArmor, 5, 1, "dplate");
+		legsD = new ItemDreadArmor(AbyssalCraftAPI.dreadedAbyssalniteArmor, 5, 2, "dlegs");
+		bootsD = new ItemDreadArmor(AbyssalCraftAPI.dreadedAbyssalniteArmor, 5, 3, "dboots");
+		Corhelmet = new ItemCoraliumArmor(AbyssalCraftAPI.refinedCoraliumArmor, 5, 0, "corhelmet");
+		Corplate = new ItemCoraliumArmor(AbyssalCraftAPI.refinedCoraliumArmor, 5, 1, "corplate");
+		Corlegs = new ItemCoraliumArmor(AbyssalCraftAPI.refinedCoraliumArmor, 5, 2, "corlegs");
+		Corboots = new ItemCoraliumArmor(AbyssalCraftAPI.refinedCoraliumArmor, 5, 3, "corboots");
+		CorhelmetP = new ItemCoraliumPArmor(AbyssalCraftAPI.platedCoraliumArmor, 5, 0, "corhelmetp");
+		CorplateP = new ItemCoraliumPArmor(AbyssalCraftAPI.platedCoraliumArmor, 5, 1, "corplatep");
+		CorlegsP = new ItemCoraliumPArmor(AbyssalCraftAPI.platedCoraliumArmor, 5, 2, "corlegsp");
+		CorbootsP = new ItemCoraliumPArmor(AbyssalCraftAPI.platedCoraliumArmor, 5, 3, "corbootsp");
+		Depthshelmet = new ItemDepthsArmor(AbyssalCraftAPI.depthsArmor, 5, 0, "depthshelmet");
+		Depthsplate = new ItemDepthsArmor(AbyssalCraftAPI.depthsArmor, 5, 1, "depthsplate");
+		Depthslegs = new ItemDepthsArmor(AbyssalCraftAPI.depthsArmor, 5, 2, "depthslegs");
+		Depthsboots = new ItemDepthsArmor(AbyssalCraftAPI.depthsArmor, 5, 3, "depthsboots");
+		dreadiumhelmet = new ItemDreadiumArmor(AbyssalCraftAPI.dreadiumArmor, 5, 0, "dreadiumhelmet");
+		dreadiumplate = new ItemDreadiumArmor(AbyssalCraftAPI.dreadiumArmor, 5, 1, "dreadiumplate");
+		dreadiumlegs = new ItemDreadiumArmor(AbyssalCraftAPI.dreadiumArmor, 5, 2, "dreadiumlegs");
+		dreadiumboots = new ItemDreadiumArmor(AbyssalCraftAPI.dreadiumArmor, 5, 3, "dreadiumboots");
+		dreadiumShelmet = new ItemDreadiumSamuraiArmor(AbyssalCraftAPI.dreadiumSamuraiArmor, 5, 0, "dreadiumsamuraihelmet");
+		dreadiumSplate = new ItemDreadiumSamuraiArmor(AbyssalCraftAPI.dreadiumSamuraiArmor, 5, 1, "dreadiumsamuraiplate");
+		dreadiumSlegs = new ItemDreadiumSamuraiArmor(AbyssalCraftAPI.dreadiumSamuraiArmor, 5, 2, "dreadiumsamurailegs");
+		dreadiumSboots = new ItemDreadiumSamuraiArmor(AbyssalCraftAPI.dreadiumSamuraiArmor, 5, 3, "dreadiumsamuraiboots");
+		ethHelmet = new ItemEthaxiumArmor(AbyssalCraftAPI.ethaxiumArmor, 5, 0, "ethaxiumhelmet");
+		ethPlate = new ItemEthaxiumArmor(AbyssalCraftAPI.ethaxiumArmor, 5, 1, "ethaxiumplate");
+		ethLegs = new ItemEthaxiumArmor(AbyssalCraftAPI.ethaxiumArmor, 5, 2, "ethaxiumlegs");
+		ethBoots = new ItemEthaxiumArmor(AbyssalCraftAPI.ethaxiumArmor, 5, 3, "ethaxiumboots");
 
 		//Upgrade kits
-		CobbleU = new ItemUpgradeKit("Wood", "Cobblestone").setCreativeTab(tabItems).setUnlocalizedName("CobU").setTextureName(modid + ":" + "CobU");
-		IronU = new ItemUpgradeKit("Cobblestone", "Iron").setCreativeTab(tabItems).setUnlocalizedName("IroU").setTextureName(modid + ":" + "IroU");
-		GoldU = new ItemUpgradeKit("Iron", "Gold").setCreativeTab(tabItems).setUnlocalizedName("GolU").setTextureName(modid + ":" + "GolU");
-		DiamondU = new ItemUpgradeKit("Gold", "Diamond").setCreativeTab(tabItems).setUnlocalizedName("DiaU").setTextureName(modid + ":" + "DiaU");
-		AbyssalniteU = new ItemUpgradeKit("Diamond", "Abyssalnite").setCreativeTab(tabItems).setUnlocalizedName("AbyU").setTextureName(modid + ":" + "AbyU");
-		CoraliumU = new ItemUpgradeKit("Abyssalnite", "Coralium").setCreativeTab(tabItems).setUnlocalizedName("CorU").setTextureName(modid + ":" + "CorU");
-		DreadiumU = new ItemUpgradeKit("Coralium", "Dreadium").setCreativeTab(tabItems).setUnlocalizedName("DreU").setTextureName(modid + ":" + "DreU");
-		EthaxiumU = new ItemUpgradeKit("Dreadium", "Ethaxium").setCreativeTab(tabItems).setUnlocalizedName("EthU").setTextureName(modid + ":" + "EthU");
+		CobbleU = new ItemUpgradeKit("Wood", "Cobblestone").setUnlocalizedName("cobbleu").setCreativeTab(tabItems);
+		IronU = new ItemUpgradeKit("Cobblestone", "Iron").setUnlocalizedName("ironu").setCreativeTab(tabItems);
+		GoldU = new ItemUpgradeKit("Iron", "Gold").setUnlocalizedName("goldu").setCreativeTab(tabItems);
+		DiamondU = new ItemUpgradeKit("Gold", "Diamond").setUnlocalizedName("diamondu").setCreativeTab(tabItems);
+		AbyssalniteU = new ItemUpgradeKit("Diamond", "Abyssalnite").setUnlocalizedName("abyssalniteu").setCreativeTab(tabItems);
+		CoraliumU = new ItemUpgradeKit("Abyssalnite", "Coralium").setUnlocalizedName("coraliumu").setCreativeTab(tabItems);
+		DreadiumU = new ItemUpgradeKit("Coralium", "Dreadium").setUnlocalizedName("dreadiumu").setCreativeTab(tabItems);
+		EthaxiumU = new ItemUpgradeKit("Dreadium", "Ethaxium").setUnlocalizedName("ethaxiumu").setCreativeTab(tabItems);
 
 		//Foodstuffs
-		ironp = new ItemACBasic("plate");
-		MRE = new ItemPlatefood(20, 1F, false).setUnlocalizedName("MRE").setTextureName(modid + ":" + "MRE");
-		chickenp = new ItemPlatefood(12, 1.2F, false).setUnlocalizedName("ChiP").setTextureName(modid + ":" + "ChiP");
-		porkp = new ItemPlatefood(16, 1.6F, false).setUnlocalizedName("PorP").setTextureName(modid + ":" + "PorP");
-		beefp = new ItemPlatefood(6, 0.6F, false).setUnlocalizedName("BeeP").setTextureName(modid + ":" + "BeeP");
-		fishp = new ItemPlatefood(10, 1.2F, false).setUnlocalizedName("FisP").setTextureName(modid + ":" + "FisP");
+		ironp = new ItemACBasic("ironp");
+		MRE = new ItemPlatefood(20, 1F, false, "mre");
+		chickenp = new ItemPlatefood(12, 1.2F, false, "chickenp");
+		porkp = new ItemPlatefood(16, 1.6F, false, "porkp");
+		beefp = new ItemPlatefood(6, 0.6F, false, "beefp");
+		fishp = new ItemPlatefood(10, 1.2F, false, "fishp");
 		dirtyplate = new ItemACBasic("dirtyplate");
-		friedegg = new ItemFood(5, 0.6F, false).setCreativeTab(tabFood).setUnlocalizedName("friedegg").setTextureName(modid + ":" + "friedegg");
-		eggp = new ItemPlatefood(10, 1.2F, false).setUnlocalizedName("eggp").setTextureName(modid + ":" + "eggp");
-		cloth = new ItemWashCloth().setCreativeTab(tabItems).setUnlocalizedName("cloth").setTextureName(modid + ":" + "cloth");
+		friedegg = new ItemFood(5, 0.6F, false).setCreativeTab(tabFood).setUnlocalizedName("friedegg");
+		eggp = new ItemPlatefood(10, 1.2F, false, "eggp");
+		cloth = new ItemWashCloth();
 
 		GameRegistry.registerTileEntity(TileEntityCrate.class, "tileEntityCrate");
 		GameRegistry.registerTileEntity(TileEntityPSDL.class, "tileEntityPSDL");
-		GameRegistry.registerTileEntity(TileEntityAltar.class, "tileEntityAltar");
 		GameRegistry.registerTileEntity(TileEntityDGhead.class, "tileEntityDGhead");
 		GameRegistry.registerTileEntity(TileEntityPhead.class, "tileEntityPhead");
 		GameRegistry.registerTileEntity(TileEntityWhead.class, "tileEntityWhead");
@@ -749,20 +726,21 @@ public class AbyssalCraft {
 		GameRegistry.registerTileEntity(TileEntityTieredEnergyPedestal.class, "tileEntityTieredEnergyPedestal");
 		GameRegistry.registerTileEntity(TileEntityTieredSacrificialAltar.class, "tileEntityTieredSacrificialAltar");
 
-		Cplague = new PotionCplague(useDynamicPotionIds ? getNextAvailablePotionId() : AbyssalCraftAPI.potionId1, true, 0x00FFFF).setIconIndex(1, 0).setPotionName("potion.Cplague");
-		AbyssalCraftAPI.addPotionRequirements(Cplague.id, "0 & 1 & !2 & 3 & 0+6");
-		Corflesh.setPotionEffect("+0+1-2+3&4+4+13");
-		Corbone.setPotionEffect("+0+1-2+3&4+4+13");
-		Dplague = new PotionDplague(useDynamicPotionIds ? getNextAvailablePotionId() : AbyssalCraftAPI.potionId2, true, 0xAD1313).setIconIndex(1, 0).setPotionName("potion.Dplague");
-		AbyssalCraftAPI.addPotionRequirements(Dplague.id, "0 & 1 & 2 & 3 & 2+6");
-		AbyssalCraftAPI.addPotionAmplifiers(Dplague.id, "5");
+		//TODO: uncomment stuff here
+		Cplague = new PotionCplague(new ResourceLocation("abyssalcraft", "Cplague"), true, 0x00FFFF).setIconIndex(1, 0).setPotionName("potion.Cplague");
+		//		AbyssalCraftAPI.addPotionRequirements(Cplague.id, "0 & 1 & !2 & 3 & 0+6");
+		//		Corflesh.setPotionEffect("+0+1-2+3&4+4+13");
+		//		Corbone.setPotionEffect("+0+1-2+3&4+4+13");
+		Dplague = new PotionDplague(new ResourceLocation("abyssalcraft", "Dplague"), true, 0xAD1313).setIconIndex(1, 0).setPotionName("potion.Dplague");
+		//		AbyssalCraftAPI.addPotionRequirements(Dplague.id, "0 & 1 & 2 & 3 & 2+6");
+		//		AbyssalCraftAPI.addPotionAmplifiers(Dplague.id, "5");
 		dreadfragment.setPotionEffect("0+1+2+3+13&4-4");
-		antiMatter = new PotionAntimatter(useDynamicPotionIds ? getNextAvailablePotionId() : AbyssalCraftAPI.potionId3, true, 0xFFFFFF).setIconIndex(1, 0).setPotionName("potion.Antimatter");
-		AbyssalCraftAPI.addPotionRequirements(antiMatter.id, "0 & 1 & 2 & !3 & 2+6");
-		antiFlesh.setPotionEffect("0+1+2-3+13&4-4");
-		antiCorflesh.setPotionEffect("0+1+2-3+13&4-4");
-		antiCorbone.setPotionEffect("0+1+2-3+13&4-4");
-		sulfur.setPotionEffect(PotionHelper.spiderEyeEffect);
+		antiMatter = new PotionAntimatter(new ResourceLocation("abyssalcraft", "Antimatter"), true, 0xFFFFFF).setIconIndex(1, 0).setPotionName("potion.Antimatter");
+		//		AbyssalCraftAPI.addPotionRequirements(antiMatter.id, "0 & 1 & 2 & !3 & 2+6");
+		//		antiFlesh.setPotionEffect("0+1+2-3+13&4-4");
+		//		antiCorflesh.setPotionEffect("0+1+2-3+13&4-4");
+		//		antiCorbone.setPotionEffect("0+1+2-3+13&4-4");
+		//		sulfur.setPotionEffect(PotionHelper.spiderEyeEffect);
 		//		crystalOxygen.setPotionEffect(PotionHelper.field_151423_m);
 		//		crystalHydrogen.setPotionEffect("-0-1+2+3&4-4+13");
 		//		crystalNitrogen.setPotionEffect("-0+1-2+3&4-4+13");
@@ -777,11 +755,9 @@ public class AbyssalCraft {
 		AbyssalCraftAPI.enchId3 = lightPierce.effectId;
 		AbyssalCraftAPI.enchId4 = ironWall.effectId;
 
-		if(useDynamicPotionIds){
-			AbyssalCraftAPI.potionId1 = Cplague.id;
-			AbyssalCraftAPI.potionId2 = Dplague.id;
-			AbyssalCraftAPI.potionId3 = antiMatter.id;
-		}
+		AbyssalCraftAPI.potionId1 = Cplague.id;
+		AbyssalCraftAPI.potionId2 = Dplague.id;
+		AbyssalCraftAPI.potionId3 = antiMatter.id;
 
 		//Block Register
 		GameRegistry.registerBlock(Darkstone, "darkstone");
@@ -790,8 +766,8 @@ public class AbyssalCraft {
 		GameRegistry.registerBlock(DSGlow, "dsglow");
 		GameRegistry.registerBlock(Darkbrickslab1, ItemDarkbrickSlab.class, "darkbrickslab1");
 		GameRegistry.registerBlock(Darkbrickslab2, ItemDarkbrickSlab.class, "darkbrickslab2");
-		GameRegistry.registerBlock(Darkcobbleslab1, ItemDarkcobbleSlab.class, "darkcobblelsab1");
-		GameRegistry.registerBlock(Darkcobbleslab2, ItemDarkcobbleSlab.class, "darkcobblelsab2");
+		GameRegistry.registerBlock(Darkcobbleslab1, ItemDarkcobbleSlab.class, "darkcobbleslab1");
+		GameRegistry.registerBlock(Darkcobbleslab2, ItemDarkcobbleSlab.class, "darkcobbleslab2");
 		GameRegistry.registerBlock(Darkgrass, "darkgrass");
 		GameRegistry.registerBlock(DBstairs, "dbstairs");
 		GameRegistry.registerBlock(DCstairs, "dcstairs");
@@ -811,8 +787,8 @@ public class AbyssalCraft {
 		GameRegistry.registerBlock(abyblock, ItemBlockColorName.class, "abyblock");
 		GameRegistry.registerBlock(CoraliumInfusedStone, "coraliumstone");
 		GameRegistry.registerBlock(ODBcore, ItemBlockColorName.class, "odbcore");
-		GameRegistry.registerBlock(Crate, "Crate");
-		GameRegistry.registerBlock(portal, "portal");
+		GameRegistry.registerBlock(Crate, "crate");
+		GameRegistry.registerBlock(portal, "abyportal");
 		GameRegistry.registerBlock(Darkstoneslab1, ItemDarkstoneSlab.class, "darkstoneslab1");
 		GameRegistry.registerBlock(Darkstoneslab2, ItemDarkstoneSlab.class, "darkstoneslab2");
 		GameRegistry.registerBlock(Coraliumfire, "coraliumfire");
@@ -856,14 +832,14 @@ public class AbyssalCraft {
 		GameRegistry.registerBlock(dreadbrickslab2, ItemDreadbrickSlab.class, "dreadbrickslab2");
 		GameRegistry.registerBlock(abydreadbrickstairs, "abydreadbrickstairs");
 		GameRegistry.registerBlock(abydreadbrickfence, "abydreadbrickfence");
-		GameRegistry.registerBlock(abydreadbrickslab1, ItemAbyDreadbrickSlab.class, "abydreadbrick1");
-		GameRegistry.registerBlock(abydreadbrickslab2, ItemAbyDreadbrickSlab.class, "abydreadbrick2");
+		GameRegistry.registerBlock(abydreadbrickslab1, ItemAbyDreadbrickSlab.class, "abydreadbrickslab1");
+		GameRegistry.registerBlock(abydreadbrickslab2, ItemAbyDreadbrickSlab.class, "abydreadbrickslab2");
 		GameRegistry.registerBlock(anticwater, "antiwater");
 		GameRegistry.registerBlock(cstone, "cstone");
 		GameRegistry.registerBlock(cstonebrick, "cstonebrick");
 		GameRegistry.registerBlock(cstonebrickfence, "cstonebrickfence");
 		GameRegistry.registerBlock(cstonebrickslab1, ItemCstonebrickSlab.class, "cstonebrickslab1");
-		GameRegistry.registerBlock(cstonebrickslab2, ItemCstonebrickSlab.class, "cstobebrickslab2");
+		GameRegistry.registerBlock(cstonebrickslab2, ItemCstonebrickSlab.class, "cstonebrickslab2");
 		GameRegistry.registerBlock(cstonebrickstairs, "cstonebrickstairs");
 		GameRegistry.registerBlock(cstonebutton, "cstonebutton");
 		GameRegistry.registerBlock(cstonepplate, "cstonepplate");
@@ -913,7 +889,7 @@ public class AbyssalCraft {
 		GameRegistry.registerBlock(shoggothBlock, "shoggothblock");
 		GameRegistry.registerBlock(cthulhuStatue, "cthulhustatue");
 		GameRegistry.registerBlock(hasturStatue, "hasturstatue");
-		GameRegistry.registerBlock(jzaharStatue, "jzahatstatue");
+		GameRegistry.registerBlock(jzaharStatue, "jzaharstatue");
 		GameRegistry.registerBlock(azathothStatue, "azathothstatue");
 		GameRegistry.registerBlock(nyarlathotepStatue, "nyarlathotepstatue");
 		GameRegistry.registerBlock(yogsothothStatue, "yogsothothstatue");
@@ -928,13 +904,13 @@ public class AbyssalCraft {
 
 		//Item Register
 		GameRegistry.registerItem(devsword, "devsword");
-		GameRegistry.registerItem(OC, "OC");
-		GameRegistry.registerItem(portalPlacer, "portalplacer");
+		GameRegistry.registerItem(OC, "oc");
+		GameRegistry.registerItem(gatewayKey, "gatewaykey");
 		GameRegistry.registerItem(Staff, "staff");
 		GameRegistry.registerItem(Cbucket, "cbucket");
-		GameRegistry.registerItem(PSDLfinder, "psdlfinder");
+		GameRegistry.registerItem(PSDLfinder, "powerstonetracker");
 		GameRegistry.registerItem(EoA, "eoa");
-		GameRegistry.registerItem(portalPlacerDL, "portalplacerdl");
+		GameRegistry.registerItem(gatewayKeyDL, "gatewaykeydl");
 		GameRegistry.registerItem(Dreadshard, "dreadshard");
 		GameRegistry.registerItem(dreadchunk, "dreadchunk");
 		GameRegistry.registerItem(abychunk, "abychunk");
@@ -952,7 +928,7 @@ public class AbyssalCraft {
 		GameRegistry.registerItem(Cchunk, "cchunk");
 		GameRegistry.registerItem(Cingot, "cingot");
 		GameRegistry.registerItem(Cplate, "platec");
-		GameRegistry.registerItem(Corb, "corb");
+		GameRegistry.registerItem(Corb, "transmutationgem");
 		GameRegistry.registerItem(Corflesh, "corflesh");
 		GameRegistry.registerItem(Corbone, "corbone");
 		GameRegistry.registerItem(pickaxe, "dpick");
@@ -970,26 +946,26 @@ public class AbyssalCraft {
 		GameRegistry.registerItem(Corshovel, "corshovel");
 		GameRegistry.registerItem(Corsword, "corsword");
 		GameRegistry.registerItem(Corhoe, "corhoe");
-		GameRegistry.registerItem(boots, "aboots");
 		GameRegistry.registerItem(helmet, "ahelmet");
 		GameRegistry.registerItem(plate, "aplate");
 		GameRegistry.registerItem(legs, "alegs");
-		GameRegistry.registerItem(bootsD, "dboots");
+		GameRegistry.registerItem(boots, "aboots");
 		GameRegistry.registerItem(helmetD, "dhelmet");
 		GameRegistry.registerItem(plateD, "dplate");
 		GameRegistry.registerItem(legsD, "dlegs");
-		GameRegistry.registerItem(Corboots, "corboots");
+		GameRegistry.registerItem(bootsD, "dboots");
 		GameRegistry.registerItem(Corhelmet, "corhelmet");
 		GameRegistry.registerItem(Corplate, "corplate");
 		GameRegistry.registerItem(Corlegs, "corlegs");
-		GameRegistry.registerItem(CorbootsP, "corbootsp");
+		GameRegistry.registerItem(Corboots, "corboots");
 		GameRegistry.registerItem(CorhelmetP, "corhelmetp");
 		GameRegistry.registerItem(CorplateP, "corplatep");
 		GameRegistry.registerItem(CorlegsP, "corlegsp");
-		GameRegistry.registerItem(Depthsboots, "depthsboots");
+		GameRegistry.registerItem(CorbootsP, "corbootsp");
 		GameRegistry.registerItem(Depthshelmet, "depthshelmet");
 		GameRegistry.registerItem(Depthsplate, "depthsplate");
 		GameRegistry.registerItem(Depthslegs, "depthslegs");
+		GameRegistry.registerItem(Depthsboots, "depthsboots");
 		GameRegistry.registerItem(CobbleU, "cobbleu");
 		GameRegistry.registerItem(IronU, "ironu");
 		GameRegistry.registerItem(GoldU, "goldu");
@@ -1014,12 +990,12 @@ public class AbyssalCraft {
 		GameRegistry.registerItem(antibucket, "antibucket");
 		GameRegistry.registerItem(cbrick, "cbrick");
 		GameRegistry.registerItem(cudgel, "cudgel");
-		GameRegistry.registerItem(dreadiumingot, "dreadumingot");
+		GameRegistry.registerItem(dreadiumingot, "dreadiumingot");
 		GameRegistry.registerItem(dreadfragment, "dreadfragment");
-		GameRegistry.registerItem(dreadiumboots, "dreadiumboots");
 		GameRegistry.registerItem(dreadiumhelmet, "dreadiumhelmet");
 		GameRegistry.registerItem(dreadiumplate, "dreadiumplate");
 		GameRegistry.registerItem(dreadiumlegs, "dreadiumlegs");
+		GameRegistry.registerItem(dreadiumboots, "dreadiumboots");
 		GameRegistry.registerItem(dreadiumpickaxe, "dreadiumpickaxe");
 		GameRegistry.registerItem(dreadiumaxe, "dreadiumaxe");
 		GameRegistry.registerItem(dreadiumshovel, "dreadiumshovel");
@@ -1039,12 +1015,12 @@ public class AbyssalCraft {
 		GameRegistry.registerItem(dreadhilt, "dreadhilt");
 		GameRegistry.registerItem(dreadkatana, "dreadkatana");
 		GameRegistry.registerItem(dreadKey, "dreadkey");
-		GameRegistry.registerItem(portalPlacerJzh, "portalplacerjzh");
-		GameRegistry.registerItem(dreadiumSboots, "dreadiumsamuraiboots");
+		GameRegistry.registerItem(gatewayKeyJzh, "gatewaykeyjzh");
 		GameRegistry.registerItem(dreadiumShelmet, "dreadiumsamuraihelmet");
 		GameRegistry.registerItem(dreadiumSplate, "dreadiumsamuraiplate");
 		GameRegistry.registerItem(dreadiumSlegs, "dreadiumsamurailegs");
-		GameRegistry.registerItem(tinIngot, "tingingot");
+		GameRegistry.registerItem(dreadiumSboots, "dreadiumsamuraiboots");
+		GameRegistry.registerItem(tinIngot, "tiningot");
 		GameRegistry.registerItem(copperIngot, "copperingot");
 		GameRegistry.registerItem(antiBeef, "antibeef");
 		GameRegistry.registerItem(antiChicken, "antichicken");
@@ -1056,10 +1032,10 @@ public class AbyssalCraft {
 		GameRegistry.registerItem(ethaxium_brick, "ethbrick");
 		GameRegistry.registerItem(ethaxiumIngot, "ethaxiumingot");
 		GameRegistry.registerItem(lifeCrystal, "lifecrystal");
-		GameRegistry.registerItem(ethBoots, "ethaxiumboots");
 		GameRegistry.registerItem(ethHelmet, "ethaxiumhelmet");
 		GameRegistry.registerItem(ethPlate, "ethaxiumplate");
 		GameRegistry.registerItem(ethLegs, "ethaxiumlegs");
+		GameRegistry.registerItem(ethBoots, "ethaxiumboots");
 		GameRegistry.registerItem(ethPickaxe, "ethaxiumpickaxe");
 		GameRegistry.registerItem(ethAxe, "ethaxiumaxe");
 		GameRegistry.registerItem(ethShovel, "ethaxiumshovel");
@@ -1120,9 +1096,9 @@ public class AbyssalCraft {
 		if(antifluid.getBlock() == null)
 			antifluid.setBlock(anticwater);
 		FluidContainerRegistry.registerFluidContainer(FluidRegistry.getFluidStack(CFluid.getName(), FluidContainerRegistry.BUCKET_VOLUME), new ItemStack(Cbucket), new ItemStack(Items.bucket));
-		BucketHandler.INSTANCE.buckets.put(CFluid.getBlock(), Cbucket);
+		BucketHandler.INSTANCE.buckets.put(Cwater.getDefaultState(), Cbucket);
 		FluidContainerRegistry.registerFluidContainer(FluidRegistry.getFluidStack(antifluid.getName(), FluidContainerRegistry.BUCKET_VOLUME), new ItemStack(antibucket), new ItemStack(Items.bucket));
-		BucketHandler.INSTANCE.buckets.put(antifluid.getBlock(), antibucket);
+		BucketHandler.INSTANCE.buckets.put(anticwater.getDefaultState(), antibucket);
 		MinecraftForge.EVENT_BUS.register(BucketHandler.INSTANCE);
 
 		//Biome
@@ -1178,24 +1154,24 @@ public class AbyssalCraft {
 
 		//Mobs
 		registerEntityWithEgg(EntityDepthsGhoul.class, "depthsghoul", 25, 80, 3, true, 0x36A880, 0x012626);
-		EntityRegistry.addSpawn(EntityDepthsGhoul.class, 10, 1, 3, EnumCreatureType.monster, BiomeDictionary.getBiomesForType(Type.WATER));
-		EntityRegistry.addSpawn(EntityDepthsGhoul.class, 10, 1, 3, EnumCreatureType.monster, BiomeDictionary.getBiomesForType(Type.BEACH));
-		EntityRegistry.addSpawn(EntityDepthsGhoul.class, 10, 1, 3, EnumCreatureType.monster, BiomeDictionary.getBiomesForType(Type.SWAMP));
+		EntityRegistry.addSpawn(EntityDepthsGhoul.class, 10, 1, 3, EnumCreatureType.MONSTER, BiomeDictionary.getBiomesForType(Type.WATER));
+		EntityRegistry.addSpawn(EntityDepthsGhoul.class, 10, 1, 3, EnumCreatureType.MONSTER, BiomeDictionary.getBiomesForType(Type.BEACH));
+		EntityRegistry.addSpawn(EntityDepthsGhoul.class, 10, 1, 3, EnumCreatureType.MONSTER, BiomeDictionary.getBiomesForType(Type.SWAMP));
 
 		registerEntityWithEgg(EntityEvilpig.class, "evilpig", 26, 80, 3, true, 15771042, 14377823);
 		if(evilAnimalSpawnRate > 0)
-			EntityRegistry.addSpawn(EntityEvilpig.class, evilAnimalSpawnRate, 1, 3, EnumCreatureType.creature, new BiomeGenBase[] {
+			EntityRegistry.addSpawn(EntityEvilpig.class, evilAnimalSpawnRate, 1, 3, EnumCreatureType.CREATURE, new BiomeGenBase[] {
 				BiomeGenBase.taiga, BiomeGenBase.plains, BiomeGenBase.forest, BiomeGenBase.savanna,
 				BiomeGenBase.beach, BiomeGenBase.extremeHills, BiomeGenBase.jungle, BiomeGenBase.savannaPlateau,
 				BiomeGenBase.swampland, BiomeGenBase.icePlains, BiomeGenBase.birchForest,
 				BiomeGenBase.birchForestHills, BiomeGenBase.roofedForest});
 
 		registerEntityWithEgg(EntityAbyssalZombie.class , "abyssalzombie", 27, 80, 3, true, 0x36A880, 0x052824);
-		EntityRegistry.addSpawn(EntityAbyssalZombie.class, 10, 1, 3, EnumCreatureType.monster, BiomeDictionary.getBiomesForType(Type.WATER));
-		EntityRegistry.addSpawn(EntityAbyssalZombie.class, 10, 1, 3, EnumCreatureType.monster, BiomeDictionary.getBiomesForType(Type.BEACH));
-		EntityRegistry.addSpawn(EntityAbyssalZombie.class, 10, 1, 3, EnumCreatureType.monster, BiomeDictionary.getBiomesForType(Type.SWAMP));
+		EntityRegistry.addSpawn(EntityAbyssalZombie.class, 10, 1, 3, EnumCreatureType.MONSTER, BiomeDictionary.getBiomesForType(Type.WATER));
+		EntityRegistry.addSpawn(EntityAbyssalZombie.class, 10, 1, 3, EnumCreatureType.MONSTER, BiomeDictionary.getBiomesForType(Type.BEACH));
+		EntityRegistry.addSpawn(EntityAbyssalZombie.class, 10, 1, 3, EnumCreatureType.MONSTER, BiomeDictionary.getBiomesForType(Type.SWAMP));
 		if(endAbyssalZombie)
-			EntityRegistry.addSpawn(EntityAbyssalZombie.class, 10, 1, 3, EnumCreatureType.monster, BiomeDictionary.getBiomesForType(Type.END));
+			EntityRegistry.addSpawn(EntityAbyssalZombie.class, 10, 1, 3, EnumCreatureType.MONSTER, BiomeDictionary.getBiomesForType(Type.END));
 
 		EntityRegistry.registerModEntity(EntityODBPrimed.class, "Primed ODB", 28, this, 80, 3, true);
 
@@ -1224,7 +1200,7 @@ public class AbyssalCraft {
 		registerEntityWithEgg(EntityDreadSpawn.class, "dreadspawn", 40, 80, 3, true, 0xE60000, 0xCC0000);
 
 		registerEntityWithEgg(EntityDemonPig.class, "demonpig", 41, 80, 3, true, 15771042, 14377823);
-		EntityRegistry.addSpawn(EntityDemonPig.class, 30, 1, 3, EnumCreatureType.monster, new BiomeGenBase[] {
+		EntityRegistry.addSpawn(EntityDemonPig.class, 30, 1, 3, EnumCreatureType.MONSTER, new BiomeGenBase[] {
 			BiomeGenBase.hell});
 
 		registerEntityWithEgg(EntitySkeletonGoliath.class, "gskeleton", 42, 80, 3, true, 0xD6D6C9, 0xC6C7AD);
@@ -1276,16 +1252,16 @@ public class AbyssalCraft {
 		EntityRegistry.registerModEntity(EntityDreadSlug.class, "DreadSlug", 65, this, 64, 10, true);
 
 		registerEntityWithEgg(EntityLesserShoggoth.class, "lessershoggoth", 66, 80, 3, true, 0x133133, 0x342122);
-		EntityRegistry.addSpawn(EntityLesserShoggoth.class, 3, 1, 1, EnumCreatureType.monster, BiomeDictionary.getBiomesForType(Type.WATER));
-		EntityRegistry.addSpawn(EntityLesserShoggoth.class, 3, 1, 1, EnumCreatureType.monster, BiomeDictionary.getBiomesForType(Type.BEACH));
-		EntityRegistry.addSpawn(EntityLesserShoggoth.class, 3, 1, 1, EnumCreatureType.monster, BiomeDictionary.getBiomesForType(Type.SWAMP));
-		EntityRegistry.addSpawn(EntityLesserShoggoth.class, 3, 1, 1, EnumCreatureType.monster, new BiomeGenBase[]{
+		EntityRegistry.addSpawn(EntityLesserShoggoth.class, 3, 1, 1, EnumCreatureType.MONSTER, BiomeDictionary.getBiomesForType(Type.WATER));
+		EntityRegistry.addSpawn(EntityLesserShoggoth.class, 3, 1, 1, EnumCreatureType.MONSTER, BiomeDictionary.getBiomesForType(Type.BEACH));
+		EntityRegistry.addSpawn(EntityLesserShoggoth.class, 3, 1, 1, EnumCreatureType.MONSTER, BiomeDictionary.getBiomesForType(Type.SWAMP));
+		EntityRegistry.addSpawn(EntityLesserShoggoth.class, 3, 1, 1, EnumCreatureType.MONSTER, new BiomeGenBase[]{
 			AbyssalCraft.Wastelands, AbyssalCraft.Dreadlands, AbyssalCraft.AbyDreadlands, AbyssalCraft.MountainDreadlands,
 			AbyssalCraft.ForestDreadlands, AbyssalCraft.omothol, AbyssalCraft.darkRealm});
 
 		registerEntityWithEgg(EntityEvilCow.class, "evilcow", 67, 80, 3, true, 4470310, 10592673);
 		if(evilAnimalSpawnRate > 0)
-			EntityRegistry.addSpawn(EntityEvilCow.class, evilAnimalSpawnRate, 1, 3, EnumCreatureType.creature, new BiomeGenBase[] {
+			EntityRegistry.addSpawn(EntityEvilCow.class, evilAnimalSpawnRate, 1, 3, EnumCreatureType.CREATURE, new BiomeGenBase[] {
 				BiomeGenBase.taiga, BiomeGenBase.plains, BiomeGenBase.forest, BiomeGenBase.savanna,
 				BiomeGenBase.beach, BiomeGenBase.extremeHills, BiomeGenBase.jungle, BiomeGenBase.savannaPlateau,
 				BiomeGenBase.swampland, BiomeGenBase.icePlains, BiomeGenBase.birchForest,
@@ -1293,33 +1269,25 @@ public class AbyssalCraft {
 
 		registerEntityWithEgg(EntityEvilChicken.class, "evilchicken", 68, 80, 3, true, 10592673, 16711680);
 		if(evilAnimalSpawnRate > 0)
-			EntityRegistry.addSpawn(EntityEvilChicken.class, evilAnimalSpawnRate, 1, 3, EnumCreatureType.creature, new BiomeGenBase[] {
+			EntityRegistry.addSpawn(EntityEvilChicken.class, evilAnimalSpawnRate, 1, 3, EnumCreatureType.CREATURE, new BiomeGenBase[] {
 				BiomeGenBase.taiga, BiomeGenBase.plains, BiomeGenBase.forest, BiomeGenBase.savanna,
 				BiomeGenBase.beach, BiomeGenBase.extremeHills, BiomeGenBase.jungle, BiomeGenBase.savannaPlateau,
 				BiomeGenBase.swampland, BiomeGenBase.icePlains, BiomeGenBase.birchForest,
 				BiomeGenBase.birchForestHills, BiomeGenBase.roofedForest});
 
 		registerEntityWithEgg(EntityDemonCow.class, "demoncow", 69, 80, 3, true, 4470310, 10592673);
-		EntityRegistry.addSpawn(EntityDemonCow.class, 30, 1, 3, EnumCreatureType.monster, new BiomeGenBase[] {
+		EntityRegistry.addSpawn(EntityDemonCow.class, 30, 1, 3, EnumCreatureType.MONSTER, new BiomeGenBase[] {
 			BiomeGenBase.hell});
 
 		registerEntityWithEgg(EntityDemonChicken.class, "demonchicken", 70, 80, 3, true, 10592673, 16711680);
-		EntityRegistry.addSpawn(EntityDemonChicken.class, 30, 1, 3, EnumCreatureType.monster, new BiomeGenBase[] {
+		EntityRegistry.addSpawn(EntityDemonChicken.class, 30, 1, 3, EnumCreatureType.MONSTER, new BiomeGenBase[] {
 			BiomeGenBase.hell});
 
 		//		registerEntityWithEgg(EntityShadowTitan.class, "shadowtitan", 71, 80, 3, true, 0, 0xFFFFFF);
 		//
 		//		registerEntityWithEgg(EntityOmotholWarden.class, "omotholwarden", 72, 80, 3, true, 0x133133, 0x342122);
 
-		proxy.addArmor("Abyssalnite");
-		proxy.addArmor("Dread");
-		proxy.addArmor("Coralium");
-		proxy.addArmor("CoraliumP");
-		proxy.addArmor("Depths");
-		proxy.addArmor("Dreadium");
-		proxy.addArmor("DreadiumS");
-		proxy.addArmor("Ethaxium");
-
+		proxy.preInit();
 		RitualUtil.addBlocks();
 		addOreDictionaryStuff();
 		addChestGenHooks();
@@ -1381,10 +1349,10 @@ public class AbyssalCraft {
 		killJzahar = new Achievement("achievement.killJzahar", "killJzahar", 6, 12, Staff, locateJzahar).setSpecial().registerStat();
 		//nowwhat
 		//Gateway Key Achievements
-		GK1 = new Achievement("achievement.GK1", "GK1", 0, -2, portalPlacer, necro).registerStat();
+		GK1 = new Achievement("achievement.GK1", "GK1", 0, -2, gatewayKey, necro).registerStat();
 		findPSDL = new Achievement("achievement.findPSDL", "findPSDL", -2, -2, PSDL, GK1).registerStat();
-		GK2 = new Achievement("achievement.GK2", "GK2", 0, -4, portalPlacerDL, GK1).registerStat();
-		GK3 = new Achievement("achievement.GK3", "GK3", 0, -6, portalPlacerJzh, GK2).registerStat();
+		GK2 = new Achievement("achievement.GK2", "GK2", 0, -4, gatewayKeyDL, GK1).registerStat();
+		GK3 = new Achievement("achievement.GK3", "GK3", 0, -6, gatewayKeyJzh, GK2).registerStat();
 		//Machinery Achievements
 		makeTransmutator = new Achievement("achievement.makeTransmutator", "makeTransmutator", 2, -1, transmutator, necro).registerStat();
 		makeCrystallizer = new Achievement("achievement.makeCrystallizer", "makeCrystallizer", 4, -2, crystallizer, makeTransmutator).registerStat();
@@ -1399,7 +1367,6 @@ public class AbyssalCraft {
 				ritualInfusion, shoggothInfestation}));
 
 		proxy.init();
-		FMLCommonHandler.instance().bus().register(instance);
 		MinecraftForge.EVENT_BUS.register(new ReputationEventHandler());
 		MapGenStructureIO.registerStructure(MapGenAbyStronghold.Start.class, "AbyStronghold");
 		StructureAbyStrongholdPieces.registerStructurePieces();
@@ -1408,7 +1375,6 @@ public class AbyssalCraft {
 		GameRegistry.registerWorldGenerator(new AbyssalCraftWorldGenerator(), 0);
 		GameRegistry.registerFuelHandler(new FurnaceFuelHandler());
 		AbyssalCrafting.addRecipes();
-		proxy.registerRenderThings();
 		IntegrationHandler.init();
 	}
 
@@ -1773,7 +1739,6 @@ public class AbyssalCraft {
 		destroyOcean = cfg.get(Configuration.CATEGORY_GENERAL, "Oceanic Coralium Pollution", false, "Set true to allow the Liquid Coralium to spread across oceans. WARNING: The game can crash from this.").getBoolean();
 		demonAnimalFire = cfg.get(Configuration.CATEGORY_GENERAL, "Demon Animal burning", true, "Set to false to prevent Demon Animals (Pigs, Cows, Chickens) from burning in the overworld.").getBoolean();
 		evilAnimalSpawnRate = cfg.get(Configuration.CATEGORY_GENERAL, "Evil Animal spawn rate", 20, "Spawn rate for the Evil Animals (Pigs, Cows, Chickens), keep under 35 to avoid complete annihilation.").getInt();
-		updateC = cfg.get(Configuration.CATEGORY_GENERAL, "UpdateChecker", true, "Set to false to disable the UpdateChecker.").getBoolean();
 		darkness = cfg.get(Configuration.CATEGORY_GENERAL, "Darkness", true, "Set to false to disable the random blindness within Darklands biomes").getBoolean();
 		particleBlock = cfg.get(Configuration.CATEGORY_GENERAL, "Block particles", true, "Toggles whether blocks that emits particles should do so.").getBoolean();
 		particleEntity = cfg.get(Configuration.CATEGORY_GENERAL, "Entity particles", true, "Toggles whether entities that emits particles should do so.").getBoolean();
@@ -1786,12 +1751,6 @@ public class AbyssalCraft {
 		darkWeight4 = cfg.get("biome_weight", "Darklands Highland", 10, "Biome weight for the Darklands Highland biome, controls the chance of it generating", 0, 100).getInt();
 		darkWeight5 = cfg.get("biome_weight", "Darklands Mountain", 10, "Biome weight for the Darklands Mountain biome, controls the chance of it generating").getInt();
 		coraliumWeight = cfg.get("biome_weight", "Coralium Infested Swamp", 10, "Biome weight for the Coralium Infested Swamp biome, controls the chance of it generating", 0, 100).getInt();
-
-		useDynamicPotionIds = cfg.get("potions", "Dynamic Potion IDs", true, "Toggles whether to use the dynamic potion ID assigner, or to manually assign them (disable this if you get potion ID conflict with a mod that doesn't have config options for them)").getBoolean();
-
-		AbyssalCraftAPI.potionId1 = cfg.get("potions", "Coralium Plague", 100, "The Coralium Plague potion effect. (Only use this if Dynamic Potion IDs is disabled)", 0, 127).getInt();
-		AbyssalCraftAPI.potionId2 = cfg.get("potions", "Dread Plague", 101, "The Dread Plague potion effect. (Only use this if Dynamic Potion IDs is disabled)", 0, 127).getInt();
-		AbyssalCraftAPI.potionId3 = cfg.get("potions", "Antimatter", 102, "The Antimatter potion effect. (Only use this if Dynamic Potion IDs is disabled)", 0, 127).getInt();
 
 		shoggothOoze = cfg.get("shoggoth", "Shoggoth Ooze Spread", true, "Toggles whether or not Lesser Shoggoths should spread their ooze when walking around. (Overrides all the Ooze Spread options)").getBoolean();
 		oozeLeaves = cfg.get("shoggoth", "Ooze Spread: Leaves", true, "Toggles ooze spreading on blocks with the Leaves material (Leaf blocks).").getBoolean();
@@ -2162,40 +2121,6 @@ public class AbyssalCraft {
 		return startEntityId;
 	}
 
-	private int getNextAvailablePotionId(){
-
-		int pot = Potion.potionTypes.length;
-		int i = 1;
-
-		do{
-			i++;
-			if (i >= 128) throw new RuntimeException("Out of available Potion IDs, AbyssalCraft can't load unless some IDs are freed up!");
-			if(i == pot)
-				for (Field f : Potion.class.getDeclaredFields()) {
-					f.setAccessible(true);
-					try {
-						if (f.getName().equals("potionTypes") || f.getName().equals("field_76425_a")) {
-							Field modfield = Field.class.getDeclaredField("modifiers");
-							modfield.setAccessible(true);
-							modfield.setInt(f, f.getModifiers() & ~Modifier.FINAL);
-
-							Potion[] potionTypes = (Potion[])f.get(null);
-							final Potion[] newPotionTypes = new Potion[pot++];
-							System.arraycopy(potionTypes, 0, newPotionTypes, 0, potionTypes.length);
-							f.set(null, newPotionTypes);
-						}
-					}
-					catch (Exception e) {
-						System.err.println("Whoops, something screwed up here, please report this to shinoow:");
-						System.err.println(e);
-					}
-				}
-
-		} while(Potion.potionTypes[i] != null);
-
-		return i;
-	}
-
 	private int getNextAvailableEnchantmentId(){
 
 		int i = 0;
@@ -2204,34 +2129,9 @@ public class AbyssalCraft {
 			i++;
 			if(i >= 256) throw new RuntimeException("Out of available Enchantment IDs, AbyssalCraft can't load unless some IDs are freed up!");
 
-		} while(Enchantment.enchantmentsList[i] != null);
+		} while(Enchantment.getEnchantmentById(i) != null);
 
 		return i;
-	}
-
-	private void extendPotionArray(){
-		if(Potion.potionTypes.length < 128){
-			Potion[] potionTypes = null;
-			for (Field f : Potion.class.getDeclaredFields()) {
-				f.setAccessible(true);
-				try {
-					if (f.getName().equals("potionTypes") || f.getName().equals("field_76425_a")) {
-						Field modfield = Field.class.getDeclaredField("modifiers");
-						modfield.setAccessible(true);
-						modfield.setInt(f, f.getModifiers() & ~Modifier.FINAL);
-
-						potionTypes = (Potion[])f.get(null);
-						final Potion[] newPotionTypes = new Potion[128];
-						System.arraycopy(potionTypes, 0, newPotionTypes, 0, potionTypes.length);
-						f.set(null, newPotionTypes);
-					}
-				}
-				catch (Exception e) {
-					System.err.println("Whoops, something screwed up here, please report this to shinoow:");
-					System.err.println(e);
-				}
-			}
-		} else ACLogger.info("The potion array has already been extended (%d), so we're not doing it again.", Potion.potionTypes.length);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -2239,7 +2139,7 @@ public class AbyssalCraft {
 		int id = getUniqueEntityId();
 		stringtoIDMapping.put(name, id);
 		EntityRegistry.registerModEntity(entity, name, modid, instance, trackingRange, updateFrequency, sendsVelocityUpdates);
-		EntityList.IDtoClassMapping.put(id, entity);
+		EntityList.idToClassMapping.put(id, entity);
 		EntityList.entityEggs.put(id, new EntityEggInfo(id, primaryColor, secondaryColor));
 	}
 
@@ -2268,61 +2168,5 @@ public class AbyssalCraft {
 		}
 
 		return names;
-	}
-
-	@SubscribeEvent
-	public void onWorldLoad(WorldEvent.Load event) {
-		if(!dev && updateC)
-			new UpdateCheck().start();
-	}
-
-	/**
-	 * Update checker for AbyssalCraft,
-	 * based on code from AtomicStryker's UpdateChecker mod (proxy part)
-	 * @author shinoow
-	 */
-	private class UpdateCheck extends Thread {
-
-		private String webVersion;
-
-		@Override
-		public void run() {
-			try {
-				Thread.sleep(10000L);
-
-				if(isUpdateAvailable()) {
-					if(!hasPinged && version.length() > 7){
-						hasPinged = true;
-						updateProxy.announce("[\u00A79AbyssalCraft\u00A7r] Using a development version, not checking for newer versions. (\u00A7b"+ version + "\u00A7r)");
-					}
-					if(!hasPinged){
-						hasPinged = true;
-						updateProxy.announce("[\u00A79AbyssalCraft\u00A7r] Version \u00A7b"+webVersion+"\u00A7r of AbyssalCraft is available. Check https://shinoow.github.io/AbyssalCraft/ for more info. (Your Version: \u00A7b"+AbyssalCraft.version+"\u00A7r)");
-					}
-				} else if(!hasPinged){
-					hasPinged = true;
-					updateProxy.announce("[\u00A79AbyssalCraft\u00A7r] Running the latest version of AbyssalCraft, \u00A7b"+AbyssalCraft.version+"\u00A7r.");
-				}
-			} catch(Exception e) {
-				if(!hasPinged){
-					hasPinged = true;
-					System.err.println("UpdateChecker encountered an Exception, see following stacktrace:");
-					e.printStackTrace();
-					updateProxy.announce("[\u00A79AbyssalCraft\u00A7r] No internet connection found, unable to check mod version.");
-				}
-			}
-		}
-
-		public boolean isUpdateAvailable() throws IOException, MalformedURLException {
-			BufferedReader versionFile = new BufferedReader(new InputStreamReader(new URL("https://raw.githubusercontent.com/Shinoow/AbyssalCraft/master/version.txt").openStream()));
-			String curVersion = versionFile.readLine();
-			webVersion = curVersion;
-			versionFile.close();
-
-			if (!curVersion.equals(AbyssalCraft.version))
-				return true;
-
-			return false;
-		}
 	}
 }

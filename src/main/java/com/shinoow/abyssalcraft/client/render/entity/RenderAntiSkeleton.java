@@ -11,51 +11,50 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.client.render.entity;
 
+import net.minecraft.client.model.ModelSkeleton;
 import net.minecraft.client.renderer.entity.RenderBiped;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLiving;
+import net.minecraft.client.renderer.entity.RenderManager;
+import net.minecraft.client.renderer.entity.layers.LayerBipedArmor;
+import net.minecraft.client.renderer.entity.layers.LayerHeldItem;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import org.lwjgl.opengl.GL11;
 
 import com.shinoow.abyssalcraft.client.model.entity.ModelAntiSkeleton;
 import com.shinoow.abyssalcraft.common.entity.anti.EntityAntiSkeleton;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-
 @SideOnly(Side.CLIENT)
-public class RenderAntiSkeleton extends RenderBiped
+public class RenderAntiSkeleton extends RenderBiped<EntityAntiSkeleton>
 {
 	private static final ResourceLocation skeletonTextures = new ResourceLocation("abyssalcraft:textures/model/anti/skeleton.png");
 
 
-	public RenderAntiSkeleton()
+	public RenderAntiSkeleton(RenderManager manager)
 	{
-		super(new ModelAntiSkeleton(), 0.5F);
+		super(manager, new ModelAntiSkeleton(), 0.5F);
+		this.addLayer(new LayerHeldItem(this));
+		this.addLayer(new LayerBipedArmor(this)
+		{
+			@Override
+			protected void initArmor()
+			{
+				field_177189_c = new ModelSkeleton(0.5F, true);
+				field_177186_d = new ModelSkeleton(1.0F, true);
+			}
+		});
 	}
 
 	@Override
-	protected void func_82422_c()
+	public void transformHeldFull3DItemLayer()
 	{
 		GL11.glTranslatef(0.09375F, 0.1875F, 0.0F);
 	}
 
+	@Override
 	protected ResourceLocation getEntityTexture(EntityAntiSkeleton par1EntityAntiSkeleton)
 	{
 		return skeletonTextures;
-	}
-
-	@Override
-	protected ResourceLocation getEntityTexture(EntityLiving par1EntityLiving)
-	{
-		return this.getEntityTexture((EntityAntiSkeleton)par1EntityLiving);
-	}
-
-
-	@Override
-	protected ResourceLocation getEntityTexture(Entity par1Entity)
-	{
-		return this.getEntityTexture((EntityAntiSkeleton)par1Entity);
 	}
 }

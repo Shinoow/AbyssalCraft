@@ -21,7 +21,7 @@ import com.shinoow.abyssalcraft.common.entity.props.ReputationProps;
 import com.shinoow.abyssalcraft.common.network.PacketDispatcher;
 import com.shinoow.abyssalcraft.common.network.client.SyncPlayerPropsMessage;
 
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 /**
  * Handles everything event-based related to the reputation system, ALL OF IT.

@@ -13,9 +13,9 @@ package com.shinoow.abyssalcraft.common.blocks;
 
 import java.util.Random;
 
-import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
@@ -25,15 +25,16 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.BlockPos;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.common.network.internal.FMLNetworkHandler;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.common.blocks.tile.TileEntityEngraver;
-
-import cpw.mods.fml.common.network.internal.FMLNetworkHandler;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockEngraver extends BlockContainer {
 
@@ -42,18 +43,12 @@ public class BlockEngraver extends BlockContainer {
 
 	public BlockEngraver() {
 		super(Material.rock);
-		setBlockTextureName("anvil_top_damaged_0");
 		setCreativeTab(AbyssalCraft.tabDecoration);
 	}
 
 	@Override
-	public boolean renderAsNormalBlock() {
-		return false;
-	}
-
-	@Override
 	public int getRenderType() {
-		return -6;
+		return 2;
 	}
 
 	@Override
@@ -62,30 +57,30 @@ public class BlockEngraver extends BlockContainer {
 	}
 
 	@Override
-	public Item getItemDropped(int par1, Random par1Random, int par3)
+	public Item getItemDropped(IBlockState state, Random par1Random, int par3)
 	{
 		return Item.getItemFromBlock(AbyssalCraft.engraver);
 	}
 
 	@Override
-	public boolean onBlockActivated(World par1World, int par2, int par3, int par4, EntityPlayer par5EntityPlayer, int par6, float par7, float par8, float par9) {
+	public boolean onBlockActivated(World par1World, BlockPos pos, IBlockState state, EntityPlayer par5EntityPlayer, EnumFacing side, float par7, float par8, float par9) {
 		if(!par1World.isRemote)
-			FMLNetworkHandler.openGui(par5EntityPlayer, AbyssalCraft.instance, AbyssalCraft.engraverGuiID, par1World, par2, par3, par4);
+			FMLNetworkHandler.openGui(par5EntityPlayer, AbyssalCraft.instance, AbyssalCraft.engraverGuiID, par1World, pos.getX(), pos.getY(), pos.getZ());
 		return true;
 	}
 
-	public static void updateEngraverBlockState(World par1World, int par2, int par3, int par4) {
+	public static void updateEngraverBlockState(World par1World, BlockPos pos) {
 
-		TileEntity tileentity = par1World.getTileEntity(par2, par3, par4);
+		TileEntity tileentity = par1World.getTileEntity(pos);
 		keepInventory = true;
 
-		par1World.setBlock(par2, par3, par4, AbyssalCraft.engraver);
+		par1World.setBlockState(pos, AbyssalCraft.engraver.getDefaultState());
 
 		keepInventory = false;
 
 		if (tileentity != null){
 			tileentity.validate();
-			par1World.setTileEntity(par2, par3, par4, tileentity);
+			par1World.setTileEntity(pos, tileentity);
 		}
 	}
 
@@ -95,12 +90,12 @@ public class BlockEngraver extends BlockContainer {
 	}
 
 	@Override
-	public void onBlockPlacedBy(World par1World, int par2, int par3, int par4, EntityLivingBase par5EntityLivingBase, ItemStack par6ItemStack) {
+	public void onBlockPlacedBy(World par1World, BlockPos pos, IBlockState state, EntityLivingBase par5EntityLivingBase, ItemStack par6ItemStack) {
 
 		if (par5EntityLivingBase == null)
 			return;
 
-		TileEntityEngraver tile = (TileEntityEngraver) par1World.getTileEntity(par2, par3, par4);
+		TileEntityEngraver tile = (TileEntityEngraver) par1World.getTileEntity(pos);
 		tile.direction = MathHelper.floor_double(par5EntityLivingBase.rotationYaw * 4.0F / 360.0F + 0.5D) & 3;
 
 		if (par6ItemStack.hasDisplayName())
@@ -108,9 +103,9 @@ public class BlockEngraver extends BlockContainer {
 	}
 
 	@Override
-	public void breakBlock(World par1World, int par2, int par3, int par4, Block par5Block, int par6) {
+	public void breakBlock(World par1World, BlockPos pos, IBlockState state) {
 		if (!keepInventory){
-			TileEntityEngraver tileentityengraver = (TileEntityEngraver)par1World.getTileEntity(par2, par3, par4);
+			TileEntityEngraver tileentityengraver = (TileEntityEngraver)par1World.getTileEntity(pos);
 
 			if (tileentityengraver != null){
 				for (int i1 = 0; i1 < tileentityengraver.getSizeInventory(); ++i1){
@@ -128,7 +123,7 @@ public class BlockEngraver extends BlockContainer {
 								j1 = itemstack.stackSize;
 
 							itemstack.stackSize -= j1;
-							EntityItem entityitem = new EntityItem(par1World, par2 + f, par3 + f1, par4 + f2, new ItemStack(itemstack.getItem(), j1, itemstack.getItemDamage()));
+							EntityItem entityitem = new EntityItem(par1World, pos.getX() + f, pos.getY() + f1, pos.getZ() + f2, new ItemStack(itemstack.getItem(), j1, itemstack.getItemDamage()));
 
 							if (itemstack.hasTagCompound())
 								entityitem.getEntityItem().setTagCompound((NBTTagCompound)itemstack.getTagCompound().copy());
@@ -142,11 +137,11 @@ public class BlockEngraver extends BlockContainer {
 					}
 				}
 
-				par1World.func_147453_f(par2, par3, par4, par5Block);
+				par1World.updateComparatorOutputLevel(pos, this);
 			}
 		}
 
-		super.breakBlock(par1World, par2, par3, par4, par5Block, par6);
+		super.breakBlock(par1World, pos, state);
 	}
 
 	@Override
@@ -156,14 +151,14 @@ public class BlockEngraver extends BlockContainer {
 	}
 
 	@Override
-	public int getComparatorInputOverride(World par1World, int par2, int par3, int par4, int par5)
+	public int getComparatorInputOverride(World par1World, BlockPos pos)
 	{
-		return Container.calcRedstoneFromInventory((IInventory)par1World.getTileEntity(par2, par3, par4));
+		return Container.calcRedstoneFromInventory((IInventory)par1World.getTileEntity(pos));
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public Item getItem(World par1World, int par2, int par3, int par4)
+	public Item getItem(World par1World, BlockPos pos)
 	{
 		return Item.getItemFromBlock(AbyssalCraft.engraver);
 	}

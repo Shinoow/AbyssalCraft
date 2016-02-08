@@ -324,24 +324,24 @@ public class ModelGatekeeperMinion extends ModelBase {
 		float f6;
 		float f7;
 
-		if (onGround > -9990.0F)
+		if (swingProgress > -9990.0F)
 		{
-			f6 = onGround;
+			f6 = swingProgress;
 			body.rotateAngleY = MathHelper.sin(MathHelper.sqrt_float(f6) * (float)Math.PI * 2.0F) * 0.2F;
 			rightarm1.rotateAngleY += body.rotateAngleY;
 			leftarm1.rotateAngleY += body.rotateAngleY;
-			f6 = 1.0F - onGround;
+			f6 = 1.0F - swingProgress;
 			f6 *= f6;
 			f6 *= f6;
 			f6 = 1.0F - f6;
 			f7 = MathHelper.sin(f6 * (float)Math.PI);
-			float f8 = MathHelper.sin(onGround * (float)Math.PI) * -(head.rotateAngleX - 0.7F) * 0.75F;
+			float f8 = MathHelper.sin(swingProgress * (float)Math.PI) * -(head.rotateAngleX - 0.7F) * 0.75F;
 			rightarm1.rotateAngleX = (float)(rightarm1.rotateAngleX - (f7 * 1.2D + f8));
 			rightarm1.rotateAngleY += body.rotateAngleY * 2.0F;
-			rightarm1.rotateAngleZ = MathHelper.sin(onGround * (float)Math.PI) * -0.4F;
+			rightarm1.rotateAngleZ = MathHelper.sin(swingProgress * (float)Math.PI) * -0.4F;
 			leftarm1.rotateAngleX = (float)(leftarm1.rotateAngleX - (f7 * 1.2D + f8));
 			leftarm1.rotateAngleY += body.rotateAngleY * -2.0F;
-			leftarm1.rotateAngleZ = MathHelper.sin(onGround * (float)Math.PI) * 0.4F;
+			leftarm1.rotateAngleZ = MathHelper.sin(swingProgress * (float)Math.PI) * 0.4F;
 		}
 	}
 }

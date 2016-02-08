@@ -11,17 +11,17 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.common.world;
 
+import net.minecraft.util.BlockPos;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.WorldProvider;
 import net.minecraft.world.biome.WorldChunkManagerHell;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.chunk.IChunkProvider;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 public class WorldProviderOmothol extends WorldProvider {
 
@@ -87,7 +87,7 @@ public class WorldProviderOmothol extends WorldProvider {
 		f3 *= f2 * 0.0F + 0.15F;
 		f4 *= f2 * 0.0F + 0.15F;
 		f5 *= f2 * 0.0F + 0.15F;
-		return Vec3.createVectorHelper(f3, f4, f5);
+		return new Vec3(f3, f4, f5);
 	}
 
 	@Override
@@ -122,9 +122,9 @@ public class WorldProviderOmothol extends WorldProvider {
 	}
 
 	@Override
-	public boolean canCoordinateBeSpawn(int par1, int par2)
+	public boolean canCoordinateBeSpawn(int x, int z)
 	{
-		return worldObj.getTopBlock(par1, par2).getMaterial().blocksMovement();
+		return worldObj.getGroundAboveSeaLevel(new BlockPos(x, 0, z)) == AbyssalCraft.omotholstone;
 	}
 
 	@Override
@@ -143,5 +143,11 @@ public class WorldProviderOmothol extends WorldProvider {
 	public boolean doesXZShowFog(int par1, int par2)
 	{
 		return true;
+	}
+
+	@Override
+	public String getInternalNameSuffix() {
+
+		return "_omt";
 	}
 }

@@ -20,7 +20,7 @@ import com.shinoow.abyssalcraft.AbyssalCraft;
 public class ItemDLTSlab extends ItemSlab {
 
 	public ItemDLTSlab(Block block) {
-		super(block, (BlockSlab)AbyssalCraft.DLTslab1, (BlockSlab)AbyssalCraft.DLTslab2, false);
+		super(block, (BlockSlab)AbyssalCraft.DLTslab1, (BlockSlab)AbyssalCraft.DLTslab2);
 		setMaxDamage(0);
 		setHasSubtypes(true);
 	}

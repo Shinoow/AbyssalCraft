@@ -13,9 +13,12 @@ package com.shinoow.abyssalcraft.common.world.biome;
 
 import java.util.Random;
 
+import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.gen.feature.WorldGenMinable;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.common.entity.EntityAbyssalZombie;
@@ -24,19 +27,16 @@ import com.shinoow.abyssalcraft.common.entity.EntityShadowBeast;
 import com.shinoow.abyssalcraft.common.entity.EntityShadowCreature;
 import com.shinoow.abyssalcraft.common.entity.EntityShadowMonster;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-
 public class BiomeGenDarklandsMountains extends BiomeGenBase {
 
 	@SuppressWarnings("unchecked")
 	public BiomeGenDarklandsMountains(int par1)
 	{
 		super(par1);
-		rootHeight = 1.3F;
-		heightVariation = 0.9F;
-		topBlock = AbyssalCraft.Darkstone;
-		fillerBlock = AbyssalCraft.Darkstone;
+		minHeight = 1.3F;
+		maxHeight = 0.9F;
+		topBlock = AbyssalCraft.Darkstone.getDefaultState();
+		fillerBlock = AbyssalCraft.Darkstone.getDefaultState();
 		waterColorMultiplier = 14745518;
 		theBiomeDecorator.treesPerChunk = 0;
 		spawnableMonsterList.add(new SpawnListEntry(EntityDepthsGhoul.class, 45, 1, 2));
@@ -46,19 +46,19 @@ public class BiomeGenDarklandsMountains extends BiomeGenBase {
 		spawnableMonsterList.add(new SpawnListEntry(EntityShadowBeast.class, 15, 1, 1));
 	}
 	@Override
-	public void decorate(World par1World, Random par2Random, int par3, int par4)
+	public void decorate(World par1World, Random par2Random, BlockPos pos)
 	{
-		super.decorate(par1World, par2Random, par3, par4);
+		super.decorate(par1World, par2Random, pos);
 		int var5 = 3 + par2Random.nextInt(6);
 
 		for (int rarity = 0; rarity < var5; ++rarity)
 		{
 			int veinSize = 1 + par2Random.nextInt(3);
-			int x = par3 + par2Random.nextInt(16);
+			int x = par2Random.nextInt(16);
 			int y = par2Random.nextInt(28) + 4;
-			int z = par4 + par2Random.nextInt(16);
+			int z = par2Random.nextInt(16);
 
-			new WorldGenMinable(AbyssalCraft.abyore, veinSize).generate(par1World, par2Random, x, y, z);
+			new WorldGenMinable(AbyssalCraft.abyore.getDefaultState(), veinSize).generate(par1World, par2Random, pos.add(x, y, z));
 		}
 	}
 
@@ -72,14 +72,14 @@ public class BiomeGenDarklandsMountains extends BiomeGenBase {
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public int getBiomeGrassColor(int par1, int par2, int par3)
+	public int getGrassColorAtPos(BlockPos pos)
 	{
 		return 0x30217A;
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public int getBiomeFoliageColor(int par1, int par2, int par3)
+	public int getFoliageColorAtPos(BlockPos pos)
 	{
 		return 0x30217A;
 	}

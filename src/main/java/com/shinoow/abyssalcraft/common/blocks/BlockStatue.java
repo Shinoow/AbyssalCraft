@@ -14,9 +14,11 @@ package com.shinoow.abyssalcraft.common.blocks;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.BlockPos;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
@@ -41,22 +43,23 @@ public abstract class BlockStatue extends BlockContainer {
 	}
 
 	@Override
-	public int getRenderType() {
-		return -9;
-	}
-
-	@Override
-	public boolean renderAsNormalBlock() {
+	public boolean isFullCube()
+	{
 		return false;
 	}
 
 	@Override
-	public void onBlockPlacedBy(World par1World, int par2, int par3, int par4, EntityLivingBase par5EntityLivingBase, ItemStack par6ItemStack)
+	public int getRenderType() {
+		return 2;
+	}
+
+	@Override
+	public void onBlockPlacedBy(World par1World, BlockPos pos, IBlockState state, EntityLivingBase par5EntityLivingBase, ItemStack par6ItemStack)
 	{
 		if (par5EntityLivingBase == null)
 			return;
 
-		TileEntity tile = par1World.getTileEntity(par2, par3, par4);
+		TileEntity tile = par1World.getTileEntity(pos);
 		if(tile instanceof TileStatueDirectional)
 			((TileStatueDirectional)tile).direction = MathHelper.floor_double(par5EntityLivingBase.rotationYaw * 4.0F / 360.0F + 0.5D) & 3;
 	}

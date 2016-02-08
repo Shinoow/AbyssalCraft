@@ -18,14 +18,15 @@ import java.io.IOException;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.network.Packet;
 import net.minecraft.network.PacketBuffer;
+import net.minecraft.util.IThreadListener;
 
 import com.google.common.base.Throwables;
 import com.shinoow.abyssalcraft.AbyssalCraft;
 
-import cpw.mods.fml.common.network.simpleimpl.IMessage;
-import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
-import cpw.mods.fml.common.network.simpleimpl.MessageContext;
-import cpw.mods.fml.relauncher.Side;
+import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
+import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
+import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
+import net.minecraftforge.fml.relauncher.Side;
 
 /**
  * 
@@ -76,6 +77,14 @@ public abstract class AbstractMessage<T extends AbstractMessage<T>> implements I
 		return true; // default allows handling on both sides, i.e. a bidirectional packet
 	}
 
+	/**
+	 * Whether this message requires the main thread to be processed (i.e. it
+	 * requires that the world, player, and other objects are in a valid state).
+	 */
+	protected boolean requiresMainThread() {
+		return true;
+	}
+
 	@Override
 	public void fromBytes(ByteBuf buffer) {
 		try {
@@ -108,8 +117,24 @@ public abstract class AbstractMessage<T extends AbstractMessage<T>> implements I
 	public final IMessage onMessage(T msg, MessageContext ctx) {
 		if (!msg.isValidOnSide(ctx.side))
 			throw new RuntimeException("Invalid side " + ctx.side.name() + " for " + msg.getClass().getSimpleName());
-		msg.process(AbyssalCraft.proxy.getPlayerEntity(ctx), ctx.side);
+		else if(msg.requiresMainThread())
+			checkThreadAndEnqueue(msg, ctx);
+		else msg.process(AbyssalCraft.proxy.getPlayerEntity(ctx), ctx.side);
 		return null;
+	}
+
+	/**
+	 * Ensures that the message is being handled on the main thread
+	 */
+	private static final <T extends AbstractMessage<T>> void checkThreadAndEnqueue(final AbstractMessage<T> msg, final MessageContext ctx) {
+		IThreadListener thread = AbyssalCraft.proxy.getThreadFromContext(ctx);
+		if (!thread.isCallingFromMinecraftThread())
+			thread.addScheduledTask(new Runnable() {
+				@Override
+				public void run() {
+					msg.process(AbyssalCraft.proxy.getPlayerEntity(ctx), ctx.side);
+				}
+			});
 	}
 
 	/**

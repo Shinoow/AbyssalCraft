@@ -13,22 +13,22 @@ package com.shinoow.abyssalcraft.client.render.entity;
 
 import net.minecraft.client.model.ModelCow;
 import net.minecraft.client.renderer.entity.RenderLiving;
+import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import com.shinoow.abyssalcraft.common.entity.anti.EntityAntiCow;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
 public class RenderAntiCow extends RenderLiving
 {
 	private static final ResourceLocation cowTextures = new ResourceLocation("abyssalcraft:textures/model/anti/cow.png");
 
-	public RenderAntiCow()
+	public RenderAntiCow(RenderManager manager)
 	{
-		super(new ModelCow(), 0.5F);
+		super(manager, new ModelCow(), 0.5F);
 	}
 
 	public void doRender(EntityAntiCow par1EntityEntityAntiCow, double par2, double par4, double par6, float par8, float par9)

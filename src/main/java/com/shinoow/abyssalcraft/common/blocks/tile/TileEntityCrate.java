@@ -17,13 +17,15 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.BlockPos;
+import net.minecraft.util.IChatComponent;
+import net.minecraft.util.ITickable;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import com.shinoow.abyssalcraft.common.blocks.BlockCrate;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-
-public class TileEntityCrate extends TileEntity implements IInventory
+public class TileEntityCrate extends TileEntity implements IInventory, ITickable
 {
 	private ItemStack[] crateContents = new ItemStack[36];
 	public int numUsingPlayers;
@@ -81,7 +83,7 @@ public class TileEntityCrate extends TileEntity implements IInventory
 	}
 
 	@Override
-	public ItemStack getStackInSlotOnClosing(int par1)
+	public ItemStack removeStackFromSlot(int par1)
 	{
 		if (crateContents[par1] != null)
 		{
@@ -104,13 +106,13 @@ public class TileEntityCrate extends TileEntity implements IInventory
 	}
 
 	@Override
-	public String getInventoryName()
+	public String getName()
 	{
-		return hasCustomInventoryName() ? customName : "container.abyssalcraft.crate";
+		return hasCustomName() ? customName : "container.abyssalcraft.crate";
 	}
 
 	@Override
-	public boolean hasCustomInventoryName()
+	public boolean hasCustomName()
 	{
 		return customName != null && customName.length() > 0;
 	}
@@ -157,7 +159,7 @@ public class TileEntityCrate extends TileEntity implements IInventory
 
 		par1NBTTagCompound.setTag("Items", nbttaglist);
 
-		if (hasCustomInventoryName())
+		if (hasCustomName())
 			par1NBTTagCompound.setString("CustomName", customName);
 	}
 
@@ -170,7 +172,7 @@ public class TileEntityCrate extends TileEntity implements IInventory
 	@Override
 	public boolean isUseableByPlayer(EntityPlayer par1EntityPlayer)
 	{
-		return worldObj.getTileEntity(xCoord, yCoord, zCoord) != this ? false : par1EntityPlayer.getDistanceSq(xCoord + 0.5D, yCoord + 0.5D, zCoord + 0.5D) <= 64.0D;
+		return worldObj.getTileEntity(pos) != this ? false : par1EntityPlayer.getDistanceSq(pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D) <= 64.0D;
 	}
 
 	@Override
@@ -180,11 +182,10 @@ public class TileEntityCrate extends TileEntity implements IInventory
 	}
 
 	@Override
-	public void updateEntity()
+	public void update()
 	{
-		super.updateEntity();
 		++ticksSinceSync;
-		if (!worldObj.isRemote && numUsingPlayers != 0 && (ticksSinceSync + xCoord + yCoord + zCoord) % 200 == 0)
+		if (!worldObj.isRemote && numUsingPlayers != 0 && (ticksSinceSync + pos.getX() + pos.getY() + pos.getZ()) % 200 == 0)
 			numUsingPlayers = 0;
 	}
 
@@ -200,26 +201,26 @@ public class TileEntityCrate extends TileEntity implements IInventory
 	}
 
 	@Override
-	public void openInventory()
+	public void openInventory(EntityPlayer player)
 	{
 		if (numUsingPlayers < 0)
 			numUsingPlayers = 0;
 
 		++numUsingPlayers;
-		worldObj.addBlockEvent(xCoord, yCoord, zCoord, getBlockType(), 1, numUsingPlayers);
-		worldObj.notifyBlocksOfNeighborChange(xCoord, yCoord, zCoord, getBlockType());
-		worldObj.notifyBlocksOfNeighborChange(xCoord, yCoord - 1, zCoord, getBlockType());
+		worldObj.addBlockEvent(pos, getBlockType(), 1, numUsingPlayers);
+		worldObj.notifyBlockOfStateChange(pos, getBlockType());
+		worldObj.notifyBlockOfStateChange(new BlockPos(pos.getX(), pos.getY() - 1, pos.getZ()), getBlockType());
 	}
 
 	@Override
-	public void closeInventory()
+	public void closeInventory(EntityPlayer player)
 	{
 		if (getBlockType() != null && getBlockType() instanceof BlockCrate)
 		{
 			--numUsingPlayers;
-			worldObj.addBlockEvent(xCoord, yCoord, zCoord, getBlockType(), 1, numUsingPlayers);
-			worldObj.notifyBlocksOfNeighborChange(xCoord, yCoord, zCoord, getBlockType());
-			worldObj.notifyBlocksOfNeighborChange(xCoord, yCoord - 1, zCoord, getBlockType());
+			worldObj.addBlockEvent(pos, getBlockType(), 1, numUsingPlayers);
+			worldObj.notifyBlockOfStateChange(pos, getBlockType());
+			worldObj.notifyBlockOfStateChange(new BlockPos(pos.getX(), pos.getY() - 1, pos.getZ()), getBlockType());
 		}
 	}
 
@@ -243,6 +244,36 @@ public class TileEntityCrate extends TileEntity implements IInventory
 				return 0;
 
 		return cachedCrateType;
+	}
+
+	@Override
+	public IChatComponent getDisplayName() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public int getField(int id) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public void setField(int id, int value) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public int getFieldCount() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public void clear() {
+		// TODO Auto-generated method stub
+
 	}
 
 }

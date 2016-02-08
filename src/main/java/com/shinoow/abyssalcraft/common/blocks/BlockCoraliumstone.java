@@ -15,6 +15,8 @@ import java.util.Random;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.state.IBlockState;
+import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
@@ -28,15 +30,15 @@ public class BlockCoraliumstone extends Block {
 	}
 
 	@Override
-	public void updateTick(World par1World, int par2, int par3, int par4, Random par5Random) {
+	public void updateTick(World par1World, BlockPos pos, IBlockState state, Random par5Random) {
 		if (!par1World.isRemote)
 			for (int l = 0; l < 1; ++l) {
-				int i1 = par2 + par5Random.nextInt(3) - 1;
-				int j1 = par3 + par5Random.nextInt(5) - 3;
-				int k1 = par4 + par5Random.nextInt(3) - 1;
+				int i1 = pos.getX() + par5Random.nextInt(3) - 1;
+				int j1 = pos.getY() + par5Random.nextInt(5) - 3;
+				int k1 = pos.getZ() + par5Random.nextInt(3) - 1;
 
-				if (par1World.getBlock(i1, j1, k1) == AbyssalCraft.Cwater && par1World.getBlockMetadata(i1, j1, k1) == 0)
-					par1World.setBlock(i1, j1, k1, AbyssalCraft.cstone);
+				if (par1World.getBlockState(new BlockPos(i1, j1, k1)) == AbyssalCraft.Cwater)
+					par1World.setBlockState(new BlockPos(i1, j1, k1), AbyssalCraft.cstone.getDefaultState());
 			}
 	}
 }

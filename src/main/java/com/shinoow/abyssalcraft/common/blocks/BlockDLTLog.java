@@ -13,40 +13,30 @@ package com.shinoow.abyssalcraft.common.blocks;
 
 import java.util.Random;
 
-import net.minecraft.block.Block;
+import net.minecraft.block.BlockLog;
 import net.minecraft.block.BlockRotatedPillar;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.block.properties.IProperty;
+import net.minecraft.block.properties.PropertyEnum;
+import net.minecraft.block.state.BlockState;
+import net.minecraft.block.state.IBlockState;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.IIcon;
+import net.minecraft.util.BlockPos;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+public class BlockDLTLog extends BlockRotatedPillar {
 
-public class BlockDLTLog extends BlockRotatedPillar
-{
-	@SideOnly(Side.CLIENT)
-	private IIcon iconLogTop;
-	@SideOnly(Side.CLIENT)
-	private IIcon iconLogSide;
-	@SideOnly(Side.CLIENT)
-	private static IIcon iconLogSideOverlay;
+	public static final PropertyEnum<BlockLog.EnumAxis> LOG_AXIS = PropertyEnum.<BlockLog.EnumAxis>create("axis", BlockLog.EnumAxis.class);
 
-	public BlockDLTLog()
-	{
+	public BlockDLTLog() {
 		super(Material.wood);
+		setDefaultState(blockState.getBaseState().withProperty(LOG_AXIS, BlockLog.EnumAxis.Y));
 		setCreativeTab(AbyssalCraft.tabBlock);
-	}
-
-	@Override
-	public int getRenderType()
-	{
-		return 31;
 	}
 
 	@Override
@@ -56,118 +46,92 @@ public class BlockDLTLog extends BlockRotatedPillar
 	}
 
 	@Override
-	public Item getItemDropped(int par1, Random par2Random, int par3)
+	public Item getItemDropped(IBlockState state, Random par2Random, int par3)
 	{
 		return Item.getItemFromBlock(this);
 	}
 
-	public void breakBlock(World par1World, int par2, int par3, int par4, int par5, int par6)
+	@Override
+	public void breakBlock(World worldIn, BlockPos pos, IBlockState state)
 	{
-		byte var7 = 4;
-		int var8 = var7 + 1;
+		int i = 4;
+		int j = i + 1;
 
-		if (par1World.checkChunksExist(par2 - var8, par3 - var8, par4 - var8, par2 + var8, par3 + var8, par4 + var8))
-			for (int var9 = -var7; var9 <= var7; ++var9)
-				for (int var10 = -var7; var10 <= var7; ++var10)
-					for (int var11 = -var7; var11 <= var7; ++var11)
-					{
-						Block var12 = par1World.getBlock(par2 + var9, par3 + var10, par4 + var11);
+		if (worldIn.isAreaLoaded(pos.add(-j, -j, -j), pos.add(j, j, j)))
+			for (BlockPos blockpos : BlockPos.getAllInBox(pos.add(-i, -i, -i), pos.add(i, i, i)))
+			{
+				IBlockState iblockstate = worldIn.getBlockState(blockpos);
 
-						if (var12.isLeaves(par1World, par2 + var9, par3 + var10, par4 + var11))
-							var12.beginLeavesDecay(par1World, par2 + var9, par3 + var10, par4 + var11);
-					}
+				if (iblockstate.getBlock().isLeaves(worldIn, blockpos))
+					iblockstate.getBlock().beginLeavesDecay(worldIn, blockpos);
+			}
 	}
 
-	public void updateBlockMetadata(World par1World, int par2, int par3, int par4, int par5, float par6, float par7, float par8)
+	@Override
+	public IBlockState getStateFromMeta(int meta)
 	{
-		int var9 = par1World.getBlockMetadata(par2, par3, par4) & 3;
-		byte var10 = 0;
+		IBlockState iblockstate = getDefaultState();
 
-		switch (par5)
+		switch (meta & 12)
 		{
 		case 0:
-		case 1:
-			var10 = 0;
-			break;
-		case 2:
-		case 3:
-			var10 = 8;
+			iblockstate = iblockstate.withProperty(LOG_AXIS, BlockLog.EnumAxis.Y);
 			break;
 		case 4:
-		case 5:
-			var10 = 4;
+			iblockstate = iblockstate.withProperty(LOG_AXIS, BlockLog.EnumAxis.X);
+			break;
+		case 8:
+			iblockstate = iblockstate.withProperty(LOG_AXIS, BlockLog.EnumAxis.Z);
+			break;
+		default:
+			iblockstate = iblockstate.withProperty(LOG_AXIS, BlockLog.EnumAxis.NONE);
 		}
 
-		par1World.setBlockMetadataWithNotify(par2, par3, par4, var9 | var10, var9);
-	}
-
-
-	@Override
-	public int damageDropped(int par1)
-	{
-		return par1 & 3;
-	}
-
-	public static int limitToValidMetadata(int par0)
-	{
-		return par0 & 3;
+		return iblockstate;
 	}
 
 	@Override
-	protected ItemStack createStackedBlock(int par1)
+	@SuppressWarnings("incomplete-switch")
+	public int getMetaFromState(IBlockState state)
 	{
-		return new ItemStack(this, 1, limitToValidMetadata(par1));
+		int i = 0;
+
+		switch (state.getValue(LOG_AXIS))
+		{
+		case X:
+			i |= 4;
+			break;
+		case Z:
+			i |= 8;
+			break;
+		case NONE:
+			i |= 12;
+		}
+
+		return i;
 	}
 
 	@Override
-	@SideOnly(Side.CLIENT)
-
-	/**
-	 * From the specified side and block metadata retrieves the blocks texture. Args: side, metadata
-	 */
-	public IIcon getIcon(int par1, int par2)
+	public IBlockState onBlockPlaced(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer)
 	{
-		return par1 == 1 ? iconLogTop : par1 == 0 ? iconLogTop : blockIcon;
+		return super.onBlockPlaced(worldIn, pos, facing, hitX, hitY, hitZ, meta, placer).withProperty(LOG_AXIS, BlockLog.EnumAxis.fromFacingAxis(facing.getAxis()));
 	}
 
 	@Override
-	public boolean canSustainLeaves(IBlockAccess world, int x, int y, int z)
+	public boolean canSustainLeaves(IBlockAccess world, BlockPos pos)
 	{
 		return true;
 	}
 
 	@Override
-	public boolean isWood(IBlockAccess world, int x, int y, int z)
+	public boolean isWood(IBlockAccess world, BlockPos pos)
 	{
 		return true;
 	}
 
 	@Override
-	@SideOnly(Side.CLIENT)
-
-	/**
-	 * When this method is called, your block should register all the icons it needs with the given IconRegister. This
-	 * is the only chance you get to register icons.
-	 */
-	public void registerBlockIcons(IIconRegister par1IconRegister)
+	protected BlockState createBlockState()
 	{
-		blockIcon = par1IconRegister.registerIcon(AbyssalCraft.modid + ":" + "DLTTside");
-		iconLogTop = par1IconRegister.registerIcon(AbyssalCraft.modid + ":" + "DLTTtop");
-		iconLogSide = par1IconRegister.registerIcon(AbyssalCraft.modid + ":" + "DLTTside");
-		BlockDLTLog.iconLogSideOverlay = par1IconRegister.registerIcon(AbyssalCraft.modid + ":" + "DLTTside");
+		return new BlockState(this, new IProperty[] {LOG_AXIS});
 	}
-
-	@SideOnly(Side.CLIENT)
-	public static IIcon getIconSideOverlay()
-	{
-		return iconLogSideOverlay;
-	}
-
-	@Override
-	@SideOnly(Side.CLIENT)
-	protected IIcon getSideIcon(int i) {
-
-		return iconLogSide;
-	}
-
 }

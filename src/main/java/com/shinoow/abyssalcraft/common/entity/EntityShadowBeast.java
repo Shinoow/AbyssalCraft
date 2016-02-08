@@ -25,6 +25,7 @@ import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
+import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.world.World;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
@@ -45,7 +46,7 @@ public class EntityShadowBeast extends EntityMob implements IAntiEntity, ICorali
 		tasks.addTask(6, new EntityAILookIdle(this));
 		tasks.addTask(6, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
 		targetTasks.addTask(1, new EntityAIHurtByTarget(this, false));
-		targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityPlayer.class, 0, true));
+		targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityPlayer.class, true));
 	}
 
 	@Override
@@ -62,12 +63,6 @@ public class EntityShadowBeast extends EntityMob implements IAntiEntity, ICorali
 			getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(100.0D);
 			getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(10.0D);
 		}
-	}
-
-	@Override
-	protected boolean isAIEnabled()
-	{
-		return true;
 	}
 
 	@Override
@@ -114,7 +109,7 @@ public class EntityShadowBeast extends EntityMob implements IAntiEntity, ICorali
 	{
 		for (int i = 0; i < 2; ++i)
 			if(AbyssalCraft.particleEntity)
-				worldObj.spawnParticle("largesmoke", posX + (rand.nextDouble() - 0.5D) * width, posY + rand.nextDouble() * height, posZ + (rand.nextDouble() - 0.5D) * width, 0.0D, 0.0D, 0.0D);
+				worldObj.spawnParticle(EnumParticleTypes.SMOKE_LARGE, posX + (rand.nextDouble() - 0.5D) * width, posY + rand.nextDouble() * height, posZ + (rand.nextDouble() - 0.5D) * width, 0.0D, 0.0D, 0.0D);
 
 		super.onLivingUpdate();
 	}

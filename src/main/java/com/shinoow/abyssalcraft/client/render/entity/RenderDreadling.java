@@ -12,14 +12,14 @@
 package com.shinoow.abyssalcraft.client.render.entity;
 
 import net.minecraft.client.renderer.entity.RenderLiving;
+import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import com.shinoow.abyssalcraft.client.model.entity.ModelDreadling;
 import com.shinoow.abyssalcraft.common.entity.EntityDreadling;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
 public class RenderDreadling extends RenderLiving {
@@ -28,9 +28,9 @@ public class RenderDreadling extends RenderLiving {
 
 	private static final ResourceLocation field_110865_p = new ResourceLocation("abyssalcraft:textures/model/Dreadling.png");
 
-	public RenderDreadling (ModelDreadling ModelDreadling, float f)
+	public RenderDreadling (RenderManager manager, ModelDreadling ModelDreadling, float f)
 	{
-		super(ModelDreadling, f);
+		super(manager, ModelDreadling, f);
 		model = (ModelDreadling)mainModel;
 	}
 

@@ -13,30 +13,25 @@ package com.shinoow.abyssalcraft.common.world;
 
 import java.util.Random;
 
+import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraft.world.gen.feature.WorldGenMinable;
 import net.minecraftforge.common.BiomeDictionary;
 import net.minecraftforge.common.BiomeDictionary.Type;
+import net.minecraftforge.fml.common.IWorldGenerator;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.common.structures.StructureShoggothPit;
-import com.shinoow.abyssalcraft.common.structures.overworld.AChouse1;
-import com.shinoow.abyssalcraft.common.structures.overworld.AChouse2;
-import com.shinoow.abyssalcraft.common.structures.overworld.ACplatform1;
-import com.shinoow.abyssalcraft.common.structures.overworld.ACplatform2;
-import com.shinoow.abyssalcraft.common.structures.overworld.ACscion1;
-import com.shinoow.abyssalcraft.common.structures.overworld.ACscion2;
-
-import cpw.mods.fml.common.IWorldGenerator;
+import com.shinoow.abyssalcraft.common.structures.overworld.*;
 
 public class AbyssalCraftWorldGenerator implements IWorldGenerator {
 
 	@Override
 	public void generate(Random random, int chunkX, int chunkZ, World world, IChunkProvider
 			chunkGenerator, IChunkProvider chunkProvider) {
-		switch(world.provider.dimensionId) {
+		switch(world.provider.getDimensionId()) {
 		case -1:
 			generateNether(world, random, chunkX*16, chunkZ*16);
 		case 0:
@@ -56,42 +51,42 @@ public class AbyssalCraftWorldGenerator implements IWorldGenerator {
 			int RandPosX = chunkX + random.nextInt(5);
 			int RandPosY = random.nextInt(75);
 			int RandPosZ = chunkZ + random.nextInt(5);
-			new AChouse1().generate(world, random, RandPosX, RandPosY, RandPosZ);
+			new AChouse1().generate(world, random, new BlockPos(RandPosX, RandPosY, RandPosZ));
 		}
 
 		for(int k = 0; k < 2; k++) {
 			int RandPosX = chunkX + random.nextInt(5);
 			int RandPosY = random.nextInt(75);
 			int RandPosZ = chunkZ + random.nextInt(5);
-			new AChouse2().generate(world, random, RandPosX, RandPosY, RandPosZ);
+			new AChouse2().generate(world, random, new BlockPos(RandPosX, RandPosY, RandPosZ));
 		}
 
 		for(int k = 0; k < 2; k++) {
 			int RandPosX = chunkX + random.nextInt(5);
 			int RandPosY = random.nextInt(75);
 			int RandPosZ = chunkZ + random.nextInt(5);
-			new ACplatform1().generate(world, random, RandPosX, RandPosY, RandPosZ);
+			new ACplatform1().generate(world, random, new BlockPos(RandPosX, RandPosY, RandPosZ));
 		}
 
 		for(int k = 0; k < 2; k++) {
 			int RandPosX = chunkX + random.nextInt(5);
 			int RandPosY = random.nextInt(75);
 			int RandPosZ = chunkZ + random.nextInt(5);
-			new ACplatform2().generate(world, random, RandPosX, RandPosY, RandPosZ);
+			new ACplatform2().generate(world, random, new BlockPos(RandPosX, RandPosY, RandPosZ));
 		}
 
 		for(int k = 0; k < 2; k++) {
 			int RandPosX = chunkX + random.nextInt(5);
 			int RandPosY = random.nextInt(75);
 			int RandPosZ = chunkZ + random.nextInt(5);
-			new ACscion1().generate(world, random, RandPosX, RandPosY, RandPosZ);
+			new ACscion1().generate(world, random, new BlockPos(RandPosX, RandPosY, RandPosZ));
 		}
 
 		for(int k = 0; k < 2; k++) {
 			int RandPosX = chunkX + random.nextInt(5);
 			int RandPosY = random.nextInt(75);
 			int RandPosZ = chunkZ + random.nextInt(5);
-			new ACscion2().generate(world, random, RandPosX, RandPosY, RandPosZ);
+			new ACscion2().generate(world, random, new BlockPos(RandPosX, RandPosY, RandPosZ));
 		}
 
 		for(int rarity = 0; rarity < 3; rarity++) {
@@ -99,8 +94,8 @@ public class AbyssalCraftWorldGenerator implements IWorldGenerator {
 			int x = chunkX + random.nextInt(16);
 			int y = random.nextInt(40);
 			int z = chunkZ + random.nextInt(16);
-			if(BiomeDictionary.isBiomeOfType(world.getBiomeGenForCoords(chunkX, chunkZ), Type.SWAMP))
-				new WorldGenMinable(AbyssalCraft.Coraliumore, veinSize).generate(world, random, x, y, z);
+			if(BiomeDictionary.isBiomeOfType(world.getBiomeGenForCoords(new BlockPos(x, 0, z)), Type.SWAMP))
+				new WorldGenMinable(AbyssalCraft.Coraliumore.getDefaultState(), veinSize).generate(world, random, new BlockPos(x, y, z));
 		}
 
 		for(int rarity = 0; rarity < 6; rarity++) {
@@ -108,11 +103,11 @@ public class AbyssalCraftWorldGenerator implements IWorldGenerator {
 			int x = chunkX + random.nextInt(16);
 			int y = random.nextInt(40);
 			int z = chunkZ + random.nextInt(16);
-			if(BiomeDictionary.isBiomeOfType(world.getBiomeGenForCoords(chunkX, chunkZ), Type.OCEAN) &&
-					world.getBiomeGenForCoords(chunkX, chunkZ)!=BiomeGenBase.deepOcean)
-				new WorldGenMinable(AbyssalCraft.Coraliumore, veinSize).generate(world, random, x, y, z);
-			if(world.getBiomeGenForCoords(chunkX, chunkZ)==BiomeGenBase.deepOcean)
-				new WorldGenMinable(AbyssalCraft.Coraliumore, veinSize).generate(world, random, x, y-20, z);
+			if(BiomeDictionary.isBiomeOfType(world.getBiomeGenForCoords(new BlockPos(x, 0, z)), Type.OCEAN) &&
+					world.getBiomeGenForCoords(new BlockPos(x, 0, z))!=BiomeGenBase.deepOcean)
+				new WorldGenMinable(AbyssalCraft.Coraliumore.getDefaultState(), veinSize).generate(world, random, new BlockPos(x, y, z));
+			if(world.getBiomeGenForCoords(new BlockPos(x, 0, z))==BiomeGenBase.deepOcean)
+				new WorldGenMinable(AbyssalCraft.Coraliumore.getDefaultState(), veinSize).generate(world, random, new BlockPos(x, y-20, z));
 		}
 
 		for(int rarity = 0; rarity < 3; rarity++) {
@@ -121,17 +116,16 @@ public class AbyssalCraftWorldGenerator implements IWorldGenerator {
 			int y = random.nextInt(30);
 			int z = chunkZ + random.nextInt(16);
 
-			new WorldGenMinable(AbyssalCraft.nitreOre, veinSize).generate(world, random, x, y, z);
+			new WorldGenMinable(AbyssalCraft.nitreOre.getDefaultState(), veinSize).generate(world, random, new BlockPos(x, y, z));
 		}
 
 		for(int i = 0; i < 1; i++){
 			int x = chunkX + random.nextInt(16);
 			int z = chunkZ + random.nextInt(16);
-			int y = world.getHeightValue(x, z);
-			if(BiomeDictionary.isBiomeOfType(world.getBiomeGenForCoords(x, z), Type.SWAMP) ||
-					BiomeDictionary.isBiomeOfType(world.getBiomeGenForCoords(x, z), Type.RIVER))
+			if(BiomeDictionary.isBiomeOfType(world.getBiomeGenForCoords(new BlockPos(x, 0, z)), Type.SWAMP) ||
+					BiomeDictionary.isBiomeOfType(world.getBiomeGenForCoords(new BlockPos(x, 0, z)), Type.RIVER))
 				if(random.nextInt(100) == 0)
-					new StructureShoggothPit().generate(world, random, x, y, z);
+					new StructureShoggothPit().generate(world, random, world.getHeight(new BlockPos(x, 0, z)));
 		}
 	}
 }

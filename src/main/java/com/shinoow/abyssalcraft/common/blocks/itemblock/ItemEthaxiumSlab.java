@@ -23,7 +23,7 @@ import com.shinoow.abyssalcraft.AbyssalCraft;
 public class ItemEthaxiumSlab extends ItemSlab {
 
 	public ItemEthaxiumSlab(Block block) {
-		super(block, (BlockSlab)AbyssalCraft.ethaxiumslab1, (BlockSlab)AbyssalCraft.ethaxiumslab2, false);
+		super(block, (BlockSlab)AbyssalCraft.ethaxiumslab1, (BlockSlab)AbyssalCraft.ethaxiumslab2);
 		setMaxDamage(0);
 		setHasSubtypes(true);
 	}

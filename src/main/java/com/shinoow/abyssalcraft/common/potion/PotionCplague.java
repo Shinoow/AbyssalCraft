@@ -19,6 +19,8 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.potion.Potion;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.EnumDifficulty;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
@@ -26,12 +28,9 @@ import com.shinoow.abyssalcraft.common.entity.EntityAbyssalZombie;
 import com.shinoow.abyssalcraft.common.entity.EntityDepthsGhoul;
 import com.shinoow.abyssalcraft.common.util.EntityUtil;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-
 public class PotionCplague extends Potion{
 
-	public PotionCplague(int par1, boolean par2, int par3) {
+	public PotionCplague(ResourceLocation par1, boolean par2, int par3) {
 		super(par1, par2, par3);
 	}
 
@@ -53,27 +52,27 @@ public class PotionCplague extends Potion{
 				if(par1EntityLivingBase.worldObj.getWorldInfo().isHardcoreModeEnabled() && par1EntityLivingBase.worldObj.rand.nextInt(10) == 0) {
 					EntityDepthsGhoul ghoul = new EntityDepthsGhoul(par1EntityLivingBase.worldObj);
 					ghoul.copyLocationAndAnglesFrom(par1EntityLivingBase);
-					ghoul.onSpawnWithEgg((IEntityLivingData)null);
+					ghoul.onInitialSpawn(par1EntityLivingBase.worldObj.getDifficultyForLocation(par1EntityLivingBase.getPosition()),(IEntityLivingData)null);
 					par1EntityLivingBase.worldObj.removeEntity(par1EntityLivingBase);
 					ghoul.setGhoulType(0);
 					par1EntityLivingBase.worldObj.spawnEntityInWorld(ghoul);
 				}
-				else if(par1EntityLivingBase.worldObj.difficultySetting == EnumDifficulty.HARD && par1EntityLivingBase.worldObj.rand.nextBoolean()
+				else if(par1EntityLivingBase.worldObj.getDifficulty() == EnumDifficulty.HARD && par1EntityLivingBase.worldObj.rand.nextBoolean()
 						|| par1EntityLivingBase.worldObj.rand.nextInt(8) == 0) {
 					EntityAbyssalZombie entityzombie = new EntityAbyssalZombie(par1EntityLivingBase.worldObj);
 					entityzombie.copyLocationAndAnglesFrom(par1EntityLivingBase);
-					entityzombie.onSpawnWithEgg((IEntityLivingData)null);
+					entityzombie.onInitialSpawn(par1EntityLivingBase.worldObj.getDifficultyForLocation(par1EntityLivingBase.getPosition()),(IEntityLivingData)null);
 					if(par1EntityLivingBase.isChild())
 						entityzombie.setChild(true);
 					par1EntityLivingBase.worldObj.removeEntity(par1EntityLivingBase);
 					par1EntityLivingBase.worldObj.spawnEntityInWorld(entityzombie);
 				}
 			} else if(par1EntityLivingBase instanceof EntityPlayer)
-				if(par1EntityLivingBase.worldObj.difficultySetting == EnumDifficulty.HARD && par1EntityLivingBase.worldObj.rand.nextBoolean()
+				if(par1EntityLivingBase.worldObj.getDifficulty() == EnumDifficulty.HARD && par1EntityLivingBase.worldObj.rand.nextBoolean()
 				|| par1EntityLivingBase.worldObj.rand.nextInt(8) == 0) {
 					EntityAbyssalZombie entityzombie = new EntityAbyssalZombie(par1EntityLivingBase.worldObj);
 					entityzombie.copyLocationAndAnglesFrom(par1EntityLivingBase);
-					entityzombie.onSpawnWithEgg((IEntityLivingData)null);
+					entityzombie.onInitialSpawn(par1EntityLivingBase.worldObj.getDifficultyForLocation(par1EntityLivingBase.getPosition()),(IEntityLivingData)null);
 					if(par1EntityLivingBase.isChild())
 						entityzombie.setChild(true);
 					par1EntityLivingBase.worldObj.removeEntity(par1EntityLivingBase);

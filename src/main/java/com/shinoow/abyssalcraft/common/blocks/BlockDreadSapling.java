@@ -15,18 +15,21 @@ import java.util.Random;
 
 import net.minecraft.block.BlockBush;
 import net.minecraft.block.IGrowable;
-import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.block.properties.IProperty;
+import net.minecraft.block.properties.PropertyInteger;
+import net.minecraft.block.state.BlockState;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
+import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.common.world.gen.WorldGenDrT;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-
 public class BlockDreadSapling extends BlockBush implements IGrowable {
+
+	public static final PropertyInteger STAGE = PropertyInteger.create("stage", 0, 1);
 
 	public BlockDreadSapling()
 	{
@@ -37,49 +40,73 @@ public class BlockDreadSapling extends BlockBush implements IGrowable {
 	}
 
 	@Override
-	@SideOnly(Side.CLIENT)
-	public void registerBlockIcons(IIconRegister par1IconRegister)
+	public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand)
 	{
-		blockIcon = par1IconRegister.registerIcon(AbyssalCraft.modid + ":" + "DrTS");
-	}
-
-	@Override
-	public void updateTick(World world, int i, int j, int k, Random random)
-	{
-		if(!world.isRemote)
+		if (!worldIn.isRemote)
 		{
-			super.updateTick(world, i, j, k, random);
-			if(world.getBlockLightValue(i, j + 1, k) >= 9 && random.nextInt(7) == 0)
-				growTree(world, i, j, k, random);
+			super.updateTick(worldIn, pos, state, rand);
+
+			if (worldIn.getLightFromNeighbors(pos.up()) >= 9 && rand.nextInt(7) == 0)
+				grow(worldIn, rand, pos, state);
 		}
 	}
 
-	public void growTree(World world, int x, int y, int z, Random random)
+	public void growTree(World world, BlockPos pos, IBlockState state, Random rand)
 	{
-		if (!net.minecraftforge.event.terraingen.TerrainGen.saplingGrowTree(world, random, x, y, z)) return;
+		if (!net.minecraftforge.event.terraingen.TerrainGen.saplingGrowTree(world, rand, pos)) return;
 
-		world.setBlock(x, y, z, Blocks.air, 0, 1);
+		world.setBlockState(pos, Blocks.air.getDefaultState(), 1);
 		Object obj = new WorldGenDrT(true);
-		if(!((WorldGenerator) obj).generate(world, random, x, y, z))
-			world.setBlock(x, y, z, this, 0, 4);
+		if(!((WorldGenerator) obj).generate(world, rand, pos))
+			world.setBlockState(pos, getDefaultState(), 4);
 	}
 
 	@Override
-	public boolean func_149851_a(World var1, int var2, int var3, int var4,
-			boolean var5) {
+	public boolean canGrow(World worldIn, BlockPos pos, IBlockState state,
+			boolean isClient) {
 
 		return true;
 	}
 
 	@Override
-	public boolean func_149852_a(World var1, Random var2, int var3, int var4,
-			int var5) {
+	public boolean canUseBonemeal(World worldIn, Random rand, BlockPos pos,
+			IBlockState state) {
 
-		return var1.rand.nextFloat() < 0.45D;
+		return worldIn.rand.nextFloat() < 0.45D;
 	}
 
 	@Override
-	public void func_149853_b(World var1, Random var2, int var3, int var4, int var5) {
-		growTree(var1, var3, var4, var5, var2);
+	public void grow(World worldIn, Random rand, BlockPos pos, IBlockState state) {
+
+		if (state.getValue(STAGE).intValue() == 0)
+			worldIn.setBlockState(pos, state.cycleProperty(STAGE), 4);
+		else
+			growTree(worldIn, pos, state, rand);
+	}
+
+	/**
+	 * Convert the given metadata into a BlockState for this Block
+	 */
+	@Override
+	public IBlockState getStateFromMeta(int meta)
+	{
+		return getDefaultState().withProperty(STAGE, Integer.valueOf((meta & 8) >> 3));
+	}
+
+	/**
+	 * Convert the BlockState into the correct metadata value
+	 */
+	@Override
+	public int getMetaFromState(IBlockState state)
+	{
+		int i = 0;
+		i = i | state.getValue(STAGE).intValue() << 3;
+		return i;
+	}
+
+	@Override
+	protected BlockState createBlockState()
+	{
+		return new BlockState(this, new IProperty[] {STAGE});
 	}
 }

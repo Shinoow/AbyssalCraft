@@ -16,6 +16,8 @@ import java.util.List;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.BlockPos;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 
@@ -65,13 +67,13 @@ public class ItemCharm extends ItemMetadata implements IAmplifierCharm {
 	}
 
 	@Override
-	public boolean onItemUse(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int meta, float par7, float par8, float par9){
-		TileEntity tile = world.getTileEntity(x, y, z);
+	public boolean onItemUse(ItemStack stack, EntityPlayer player, World world, BlockPos pos, EnumFacing side, float hitX, float hitY, float hitZ){
+		TileEntity tile = world.getTileEntity(pos);
 		if(tile instanceof IEnergyManipulator && !((IEnergyManipulator) tile).isActive()){
 			((IEnergyManipulator) tile).setActive(getAmplifier(stack), getDeity(stack));
 			if(!world.isRemote)
 				stack.stackSize--;
-			world.playSoundEffect(x + 0.5, y + 0.5, z + 0.5, "random.pop", 0.5F, world.rand.nextFloat() - world.rand.nextFloat() * 0.2F + 1);
+			world.playSoundEffect(pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, "random.pop", 0.5F, world.rand.nextFloat() - world.rand.nextFloat() * 0.2F + 1);
 			return true;
 		}
 		return false;

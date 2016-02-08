@@ -15,6 +15,7 @@ import java.util.List;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityLargeFireball;
+import net.minecraft.util.BlockPos;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
@@ -27,7 +28,10 @@ public class DisruptionFireRain extends DisruptionEntry {
 	}
 
 	@Override
-	public void disrupt(World world, int x, int y, int z, List<EntityPlayer> players) {
+	public void disrupt(World world, BlockPos pos, List<EntityPlayer> players) {
+		int x = pos.getX();
+		int y = pos.getY();
+		int z = pos.getZ();
 		EntityLargeFireball fireball1 = positionFireball(world, x + 5, y + 10, z + 5, 0, -0.5, 0);
 		EntityLargeFireball fireball2 = positionFireball(world, x - 5, y + 10, z + 5, 0, -0.5, 0);
 		EntityLargeFireball fireball3 = positionFireball(world, x + 5, y + 10, z - 5, 0, -0.5, 0);
@@ -77,11 +81,11 @@ public class DisruptionFireRain extends DisruptionEntry {
 		EntityLargeFireball fireball = new EntityLargeFireball(world);
 		fireball.setLocationAndAngles(x, y, z, fireball.rotationYaw, fireball.rotationPitch);
 		fireball.setPosition(x, y, z);
-		double d6 = (double)MathHelper.sqrt_double(accx * accx + accy * accy + accz * accz);
+		double d6 = MathHelper.sqrt_double(accx * accx + accy * accy + accz * accz);
 		fireball.accelerationX = accx / d6 * 0.1D;
 		fireball.accelerationY = accy / d6 * 0.1D;
 		fireball.accelerationZ = accz / d6 * 0.1D;
-		
+
 		return fireball;
 	}
 }

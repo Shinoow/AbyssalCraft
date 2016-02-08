@@ -1,0 +1,10 @@
+{
+	"parent": "block/grass",
+	"textures": {
+		"particle": "blocks/dirt",
+        "bottom": "blocks/dirt",
+        "top": "abyssalcraft:blocks/dlgtop",
+        "side": "abyssalcraft:blocks/dlgsides",
+        "overlay": "abyssalcraft:blocks/dlgsides"
+	}
+}

@@ -13,32 +13,21 @@ package com.shinoow.abyssalcraft.common.blocks;
 
 import net.minecraft.block.BlockButton;
 
-import com.shinoow.abyssalcraft.AbyssalCraft;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-
-import net.minecraft.client.renderer.texture.IIconRegister;
-
 public class BlockACButton extends BlockButton {
-
-	private String blockTexture;
 
 	public BlockACButton(boolean par1, String tooltype, int harvestlevel, String texture) {
 		super(par1);
 		setHarvestLevel(tooltype, harvestlevel);
-		blockTexture = texture;
 	}
 
 	public BlockACButton(boolean par1, String texture) {
 		super(par1);
-		blockTexture = texture;
 	}
 
-	@Override
-	@SideOnly(Side.CLIENT)
-	public void registerBlockIcons(IIconRegister par1IconRegister)
-	{
-		blockIcon = par1IconRegister.registerIcon(AbyssalCraft.modid + ":" + blockTexture);
-	}
+	//	@Override
+	//	@SideOnly(Side.CLIENT)
+	//	public void registerBlockIcons(IIconRegister par1IconRegister)
+	//	{
+	//		blockIcon = par1IconRegister.registerIcon(AbyssalCraft.modid + ":" + blockTexture);
+	//	}
 }

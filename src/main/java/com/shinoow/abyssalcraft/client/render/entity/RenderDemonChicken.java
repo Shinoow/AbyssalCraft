@@ -11,25 +11,26 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.client.render.entity;
 
-import com.shinoow.abyssalcraft.common.entity.demon.EntityDemonChicken;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.renderer.entity.RenderLiving;
+import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
+
+import com.shinoow.abyssalcraft.common.entity.demon.EntityDemonChicken;
 
 @SideOnly(Side.CLIENT)
 public class RenderDemonChicken extends RenderLiving
 {
 	private static final ResourceLocation chickenTextures = new ResourceLocation("abyssalcraft:textures/model/demon_chicken.png");
 
-	public RenderDemonChicken(ModelBase model, float par2)
+	public RenderDemonChicken(RenderManager manager, ModelBase model, float par2)
 	{
-		super(model, par2);
+		super(manager, model, par2);
 	}
 
 	public void doRender(EntityDemonChicken entity, double par2, double par3, double par4, float par5, float par6)

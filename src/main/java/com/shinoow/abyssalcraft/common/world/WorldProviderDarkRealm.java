@@ -18,11 +18,10 @@ import net.minecraft.world.WorldProvider;
 import net.minecraft.world.biome.WorldChunkManagerHell;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.chunk.IChunkProvider;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 public class WorldProviderDarkRealm extends WorldProvider {
 
@@ -77,7 +76,7 @@ public class WorldProviderDarkRealm extends WorldProvider {
 		f3 *= f2 * 0.0F + 0.15F;
 		f4 *= f2 * 0.0F + 0.15F;
 		f5 *= f2 * 0.0F + 0.15F;
-		return Vec3.createVectorHelper(f3, f4, f5);
+		return new Vec3(f3, f4, f5);
 	}
 
 	@Override
@@ -109,7 +108,7 @@ public class WorldProviderDarkRealm extends WorldProvider {
 
 	@Override
 	public Vec3 getSkyColor(Entity cameraEntity, float partialTicks) {
-		return Vec3.createVectorHelper(0, 0, 0);
+		return new Vec3(0, 0, 0);
 	}
 
 	@Override
@@ -126,5 +125,11 @@ public class WorldProviderDarkRealm extends WorldProvider {
 	@Override
 	public int getAverageGroundLevel() {
 		return 50;
+	}
+
+	@Override
+	public String getInternalNameSuffix() {
+
+		return "_dr";
 	}
 }

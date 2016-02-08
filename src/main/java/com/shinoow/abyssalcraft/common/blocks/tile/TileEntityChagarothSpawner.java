@@ -15,11 +15,12 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.ITickable;
 import net.minecraft.util.MathHelper;
 
 import com.shinoow.abyssalcraft.common.entity.EntityChagaroth;
 
-public class TileEntityChagarothSpawner extends TileEntity {
+public class TileEntityChagarothSpawner extends TileEntity implements ITickable {
 
 	private int activatingRangeFromPlayer = 32;
 
@@ -27,24 +28,23 @@ public class TileEntityChagarothSpawner extends TileEntity {
 	public Packet getDescriptionPacket() {
 		NBTTagCompound nbtTag = new NBTTagCompound();
 		writeToNBT(nbtTag);
-		return new S35PacketUpdateTileEntity(xCoord, yCoord, zCoord, 1, nbtTag);
+		return new S35PacketUpdateTileEntity(pos, 1, nbtTag);
 	}
 
 	public boolean isActivated() {
-		return worldObj.getClosestPlayer(xCoord + 0.5D, yCoord + 0.5D, zCoord + 0.5D,
+		return worldObj.getClosestPlayer(pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D,
 				activatingRangeFromPlayer) != null &&
-				!worldObj.getClosestPlayer(xCoord + 0.5D, yCoord + 0.5D, zCoord + 0.5D,
+				!worldObj.getClosestPlayer(pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D,
 						activatingRangeFromPlayer).capabilities.isCreativeMode;
 	}
 
 	@Override
-	public void updateEntity() {
+	public void update() {
 		if (!worldObj.isRemote && isActivated()) {
 			EntityChagaroth mob = new EntityChagaroth(worldObj);
-			mob.setLocationAndAngles(xCoord, yCoord, zCoord, MathHelper.wrapAngleTo180_float(worldObj.rand.nextFloat() * 360.0F), 10.0F);
+			mob.setLocationAndAngles(pos.getX(), pos.getY(), pos.getZ(), MathHelper.wrapAngleTo180_float(worldObj.rand.nextFloat() * 360.0F), 10.0F);
 			worldObj.spawnEntityInWorld(mob);
-			worldObj.setBlockToAir(xCoord, yCoord, zCoord);
+			worldObj.setBlockToAir(pos);
 		}
-
 	}
 }

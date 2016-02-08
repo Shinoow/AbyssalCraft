@@ -30,6 +30,8 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.pathfinding.PathNavigateGround;
+import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
@@ -41,7 +43,7 @@ public class EntityAntiPig extends EntityAnimal implements IAntiEntity {
 	{
 		super(par1World);
 		setSize(0.9F, 0.9F);
-		getNavigator().setAvoidsWater(true);
+		((PathNavigateGround)getNavigator()).setAvoidsWater(true);
 		tasks.addTask(0, new EntityAISwimming(this));
 		tasks.addTask(1, new EntityAIPanic(this, 1.25D));
 		tasks.addTask(2, new EntityAIControlledByPlayer(this, 0.3F));
@@ -52,12 +54,6 @@ public class EntityAntiPig extends EntityAnimal implements IAntiEntity {
 		tasks.addTask(6, new EntityAIWander(this, 1.0D));
 		tasks.addTask(7, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
 		tasks.addTask(8, new EntityAILookIdle(this));
-	}
-
-	@Override
-	public boolean isAIEnabled()
-	{
-		return true;
 	}
 
 	@Override
@@ -93,7 +89,7 @@ public class EntityAntiPig extends EntityAnimal implements IAntiEntity {
 	}
 
 	@Override
-	protected void func_145780_a(int par1, int par2, int par3, Block par4Block)
+	protected void playStepSound(BlockPos pos, Block par4Block)
 	{
 		playSound("mob.pig.step", 0.15F, 1.0F);
 	}
@@ -120,7 +116,7 @@ public class EntityAntiPig extends EntityAnimal implements IAntiEntity {
 	protected void collideWithEntity(Entity par1Entity)
 	{
 		if(!worldObj.isRemote && par1Entity instanceof EntityPig){
-			boolean flag = worldObj.getGameRules().getGameRuleBooleanValue("mobGriefing");
+			boolean flag = worldObj.getGameRules().getBoolean("mobGriefing");
 			worldObj.createExplosion(this, posX, posY, posZ, 5, flag);
 			setDead();
 		}

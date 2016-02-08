@@ -324,8 +324,8 @@ public class ModelDG extends ModelBase
 			lleg.rotateAngleY = -((float)Math.PI / 10F);
 		}
 
-		float f6 = MathHelper.sin(onGround * (float)Math.PI);
-		float f7 = MathHelper.sin((1.0F - (1.0F - onGround) * (1.0F - onGround)) * (float)Math.PI);
+		float f6 = MathHelper.sin(swingProgress * (float)Math.PI);
+		float f7 = MathHelper.sin((1.0F - (1.0F - swingProgress) * (1.0F - swingProgress)) * (float)Math.PI);
 		rarm1.rotateAngleZ = 0.0F;
 		larm1.rotateAngleZ = 0.0F;
 		rarm1.rotateAngleY = -(0.1F - f6 * 0.6F);

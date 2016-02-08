@@ -13,11 +13,12 @@ package com.shinoow.abyssalcraft.common.enchantments;
 
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnumEnchantmentType;
+import net.minecraft.util.ResourceLocation;
 
 public class EnchantmentIronWall extends Enchantment {
 
 	public EnchantmentIronWall(int par1, int par2) {
-		super(par1, par2, EnumEnchantmentType.armor_torso);
+		super(par1, new ResourceLocation("abyssalcraft", "iron_wall"), par2, EnumEnchantmentType.ARMOR_TORSO);
 		setName("ironWall");
 	}
 

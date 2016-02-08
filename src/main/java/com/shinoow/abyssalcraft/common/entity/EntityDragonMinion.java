@@ -23,6 +23,7 @@ import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.Explosion;
@@ -163,7 +164,7 @@ public class EntityDragonMinion extends EntityMob implements IEntityMultiPart, I
 			f1 = (rand.nextFloat() - 0.5F) * 4.0F;
 			f2 = (rand.nextFloat() - 0.5F) * 8.0F;
 			if(AbyssalCraft.particleEntity)
-				worldObj.spawnParticle("largeexplode", posX + f, posY + 2.0D + f1, posZ + f2, 0.0D, 0.0D, 0.0D);
+				worldObj.spawnParticle(EnumParticleTypes.EXPLOSION_LARGE, posX + f, posY + 2.0D + f1, posZ + f2, 0.0D, 0.0D, 0.0D);
 		}
 		else
 		{
@@ -228,7 +229,7 @@ public class EntityDragonMinion extends EntityMob implements IEntityMultiPart, I
 					if (d7 > 10.0D)
 						d7 = 10.0D;
 
-					targetY = target.boundingBox.minY + d7;
+					targetY = target.getEntityBoundingBox().minY + d7;
 				}
 				else
 				{
@@ -259,8 +260,8 @@ public class EntityDragonMinion extends EntityMob implements IEntityMultiPart, I
 				if (d9 < -50.0D)
 					d9 = -50.0D;
 
-				Vec3 vec3 = Vec3.createVectorHelper(targetX - posX, targetY - posY, targetZ - posZ).normalize();
-				Vec3 vec31 = Vec3.createVectorHelper(MathHelper.sin(rotationYaw * (float)Math.PI / 180.0F), motionY, -MathHelper.cos(rotationYaw * (float)Math.PI / 180.0F)).normalize();
+				Vec3 vec3 = new Vec3(targetX - posX, targetY - posY, targetZ - posZ).normalize();
+				Vec3 vec31 = new Vec3(MathHelper.sin(rotationYaw * (float)Math.PI / 180.0F), motionY, -MathHelper.cos(rotationYaw * (float)Math.PI / 180.0F)).normalize();
 				float f4 = (float)(vec31.dotProduct(vec3) + 0.5D) / 1.5F;
 
 				if (f4 < 0.0F)
@@ -283,7 +284,7 @@ public class EntityDragonMinion extends EntityMob implements IEntityMultiPart, I
 				moveEntity(motionX, motionY, motionZ);
 
 
-				Vec3 vec32 = Vec3.createVectorHelper(motionX, motionY, motionZ).normalize();
+				Vec3 vec32 = new Vec3(motionX, motionY, motionZ).normalize();
 				float f8 = (float)(vec32.dotProduct(vec31) + 1.0D) / 2.0F;
 				f8 = 0.8F + 0.15F * f8;
 				motionX *= f8;
@@ -317,9 +318,9 @@ public class EntityDragonMinion extends EntityMob implements IEntityMultiPart, I
 
 			if (!worldObj.isRemote && hurtTime == 0)
 			{
-				attackEntitiesInList(worldObj.getEntitiesWithinAABBExcludingEntity(this, dragonPartWing1.boundingBox.expand(2.0D, 1.0D, 2.0D).offset(0.0D, -3.0D, 0.0D)));
-				attackEntitiesInList(worldObj.getEntitiesWithinAABBExcludingEntity(this, dragonPartWing2.boundingBox.expand(2.0D, 1.0D, 2.0D).offset(0.0D, -3.0D, 0.0D)));
-				attackEntitiesInList(worldObj.getEntitiesWithinAABBExcludingEntity(this, dragonPartHead.boundingBox.expand(0.5D, 0.5D, 0.5D)));
+				attackEntitiesInList(worldObj.getEntitiesWithinAABBExcludingEntity(this, dragonPartWing1.getEntityBoundingBox().expand(2.0D, 1.0D, 2.0D).offset(0.0D, -3.0D, 0.0D)));
+				attackEntitiesInList(worldObj.getEntitiesWithinAABBExcludingEntity(this, dragonPartWing2.getEntityBoundingBox().expand(2.0D, 1.0D, 2.0D).offset(0.0D, -3.0D, 0.0D)));
+				attackEntitiesInList(worldObj.getEntitiesWithinAABBExcludingEntity(this, dragonPartHead.getEntityBoundingBox().expand(0.5D, 0.5D, 0.5D)));
 			}
 
 			double[] adouble = getMovementOffsets(5, 1.0F);
@@ -370,7 +371,7 @@ public class EntityDragonMinion extends EntityMob implements IEntityMultiPart, I
 		if (rand.nextInt(10) == 0)
 		{
 			float f = 32.0F;
-			List<?> list = worldObj.getEntitiesWithinAABB(EntityDragonBoss.class, boundingBox.expand(f, f, f));
+			List<?> list = worldObj.getEntitiesWithinAABB(EntityDragonBoss.class, getEntityBoundingBox().expand(f, f, f));
 			EntityDragonBoss entitydragonboss = null;
 			double d0 = Double.MAX_VALUE;
 			Iterator<?> iterator = list.iterator();
@@ -407,7 +408,7 @@ public class EntityDragonMinion extends EntityMob implements IEntityMultiPart, I
 		forceNewTarget = false;
 
 		if (rand.nextInt(2) == 0 && !worldObj.playerEntities.isEmpty())
-			target = (Entity)worldObj.playerEntities.get(rand.nextInt(worldObj.playerEntities.size()));
+			target = worldObj.playerEntities.get(rand.nextInt(worldObj.playerEntities.size()));
 		else
 		{
 			boolean flag = false;
@@ -479,7 +480,7 @@ public class EntityDragonMinion extends EntityMob implements IEntityMultiPart, I
 	}
 
 	@Override
-	public World func_82194_d()
+	public World getWorld()
 	{
 		return worldObj;
 	}

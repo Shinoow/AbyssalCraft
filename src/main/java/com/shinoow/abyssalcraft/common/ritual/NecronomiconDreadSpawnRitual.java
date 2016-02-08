@@ -16,6 +16,7 @@ import java.util.List;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
+import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;
 
 import com.google.common.collect.Lists;
@@ -33,20 +34,20 @@ public class NecronomiconDreadSpawnRitual extends NecronomiconRitual {
 	}
 
 	@Override
-	public boolean canCompleteRitual(World world, int x, int y, int z, EntityPlayer player) {
-		List<EntityDreadSpawn> dreadSpawns = world.getEntitiesWithinAABB(EntityDreadSpawn.class, world.getBlock(x, y, z).getCollisionBoundingBoxFromPool(world, x, y, z).expand(16, 3, 16));
-		List<EntityGreaterDreadSpawn> greaterDreadSpawns = world.getEntitiesWithinAABB(EntityGreaterDreadSpawn.class, world.getBlock(x, y, z).getCollisionBoundingBoxFromPool(world, x, y, z).expand(16, 3, 16));
-		List<EntityLesserDreadbeast> lesserDreadBeasts = world.getEntitiesWithinAABB(EntityLesserDreadbeast.class, world.getBlock(x, y, z).getCollisionBoundingBoxFromPool(world, x, y, z).expand(16, 3, 16));
+	public boolean canCompleteRitual(World world, BlockPos pos, EntityPlayer player) {
+		List<EntityDreadSpawn> dreadSpawns = world.getEntitiesWithinAABB(EntityDreadSpawn.class, world.getBlockState(pos).getBlock().getCollisionBoundingBox(world, pos, world.getBlockState(pos)).expand(16, 3, 16));
+		List<EntityGreaterDreadSpawn> greaterDreadSpawns = world.getEntitiesWithinAABB(EntityGreaterDreadSpawn.class, world.getBlockState(pos).getBlock().getCollisionBoundingBox(world, pos, world.getBlockState(pos)).expand(16, 3, 16));
+		List<EntityLesserDreadbeast> lesserDreadBeasts = world.getEntitiesWithinAABB(EntityLesserDreadbeast.class, world.getBlockState(pos).getBlock().getCollisionBoundingBox(world, pos, world.getBlockState(pos)).expand(16, 3, 16));
 		return !dreadSpawns.isEmpty() || !greaterDreadSpawns.isEmpty() || !lesserDreadBeasts.isEmpty();
 	}
 
 	@Override
-	protected void completeRitualServer(World world, int x, int y, int z, EntityPlayer player) {
+	protected void completeRitualServer(World world, BlockPos pos, EntityPlayer player) {
 		List<EntityDreadSpawn> dreadSpawns = Lists.newArrayList();
 		List<EntityGreaterDreadSpawn> greaterDreadSpawns = Lists.newArrayList();
 		List<EntityLesserDreadbeast> lesserDreadBeasts = Lists.newArrayList();
 
-		List<Entity> entities = world.getEntitiesWithinAABBExcludingEntity(player, world.getBlock(x, y, z).getCollisionBoundingBoxFromPool(world, x, y, z).expand(16, 3, 16));
+		List<Entity> entities = world.getEntitiesWithinAABBExcludingEntity(player, world.getBlockState(pos).getBlock().getCollisionBoundingBox(world, pos, world.getBlockState(pos)).expand(16, 3, 16));
 		for(Entity entity : entities){
 			if(entity instanceof EntityDreadSpawn)
 				dreadSpawns.add((EntityDreadSpawn) entity);
@@ -77,5 +78,5 @@ public class NecronomiconDreadSpawnRitual extends NecronomiconRitual {
 	}
 
 	@Override
-	protected void completeRitualClient(World world, int x, int y, int z, EntityPlayer player) {}
+	protected void completeRitualClient(World world, BlockPos pos, EntityPlayer player) {}
 }

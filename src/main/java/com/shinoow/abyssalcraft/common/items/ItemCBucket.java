@@ -13,8 +13,11 @@ package com.shinoow.abyssalcraft.common.items;
 
 import java.util.List;
 
+import com.shinoow.abyssalcraft.AbyssalCraft;
+
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Items;
 import net.minecraft.item.ItemBucket;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.StatCollector;
@@ -24,6 +27,11 @@ public class ItemCBucket extends ItemBucket{
 	public ItemCBucket(Block par1){
 		super(par1);
 		setMaxStackSize(1);
+		//		GameRegistry.registerItem(this, "cbucket");
+		setUnlocalizedName("cbucket");
+		setCreativeTab(AbyssalCraft.tabItems);
+		setContainerItem(Items.bucket);
+		//		setTextureName(modid + ":" + "Cbucket")
 	}
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })
@@ -36,7 +44,7 @@ public class ItemCBucket extends ItemBucket{
 	}
 
 	@Override
-	public boolean hasEffect(ItemStack is, int pass){
+	public boolean hasEffect(ItemStack is){
 		return true;
 	}
 }

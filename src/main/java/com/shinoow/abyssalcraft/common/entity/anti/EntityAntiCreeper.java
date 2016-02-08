@@ -31,13 +31,12 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.api.entity.IAntiEntity;
 import com.shinoow.abyssalcraft.common.entity.ai.EntityAIAntiCreeperSwell;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 public class EntityAntiCreeper extends EntityMob implements IAntiEntity {
 
@@ -63,7 +62,7 @@ public class EntityAntiCreeper extends EntityMob implements IAntiEntity {
 		tasks.addTask(5, new EntityAIWander(this, 0.8D));
 		tasks.addTask(6, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
 		tasks.addTask(6, new EntityAILookIdle(this));
-		targetTasks.addTask(1, new EntityAINearestAttackableTarget(this, EntityPlayer.class, 0, true));
+		targetTasks.addTask(1, new EntityAINearestAttackableTarget(this, EntityPlayer.class, true));
 		targetTasks.addTask(2, new EntityAIHurtByTarget(this, false));
 	}
 
@@ -79,21 +78,15 @@ public class EntityAntiCreeper extends EntityMob implements IAntiEntity {
 	}
 
 	@Override
-	public boolean isAIEnabled()
-	{
-		return true;
-	}
-
-	@Override
-	public int getMaxSafePointTries()
+	public int getMaxFallHeight()
 	{
 		return getAttackTarget() == null ? 3 : 3 + (int)(getHealth() - 1.0F);
 	}
 
 	@Override
-	protected void fall(float par1)
+	public void fall(float par1, float par2)
 	{
-		super.fall(par1);
+		super.fall(par1, par2);
 		timeSinceIgnited = (int)(timeSinceIgnited + par1 * 1.5F);
 
 		if (timeSinceIgnited > fuseTime - 5)
@@ -193,7 +186,7 @@ public class EntityAntiCreeper extends EntityMob implements IAntiEntity {
 	protected void collideWithEntity(Entity par1Entity)
 	{
 		if(!worldObj.isRemote && par1Entity instanceof EntityCreeper){
-			boolean flag = worldObj.getGameRules().getGameRuleBooleanValue("mobGriefing");
+			boolean flag = worldObj.getGameRules().getBoolean("mobGriefing");
 			worldObj.createExplosion(this, posX, posY, posZ, 5, flag);
 			setDead();
 		}
@@ -261,7 +254,7 @@ public class EntityAntiCreeper extends EntityMob implements IAntiEntity {
 	private void explode()
 	{
 		if (!worldObj.isRemote){
-			boolean flag = worldObj.getGameRules().getGameRuleBooleanValue("mobGriefing");
+			boolean flag = worldObj.getGameRules().getBoolean("mobGriefing");
 			worldObj.createExplosion(this, posX, posY, posZ, explosionRadius, flag);
 			setDead();
 		}

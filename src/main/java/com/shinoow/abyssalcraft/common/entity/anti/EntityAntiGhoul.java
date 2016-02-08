@@ -28,7 +28,9 @@ import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
+import net.minecraft.util.BlockPos;
 import net.minecraft.util.DamageSource;
+import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.World;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
@@ -54,7 +56,7 @@ public class EntityAntiGhoul extends EntityMob implements IAntiEntity {
 		tasks.addTask(6, new EntityAIWatchClosest(this, EntityAntiZombie.class, 8.0F));
 		tasks.addTask(6, new EntityAIWatchClosest(this, EntityAntiSkeleton.class, 8.0F));
 		targetTasks.addTask(1, new EntityAIHurtByTarget(this, false));
-		targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityPlayer.class, 0, true));
+		targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityPlayer.class, true));
 	}
 
 	@Override
@@ -72,13 +74,6 @@ public class EntityAntiGhoul extends EntityMob implements IAntiEntity {
 			getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(60.0D);
 			getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(5.0D);
 		}
-	}
-
-
-	@Override
-	protected boolean isAIEnabled()
-	{
-		return true;
 	}
 
 	@Override
@@ -103,7 +98,7 @@ public class EntityAntiGhoul extends EntityMob implements IAntiEntity {
 	}
 
 	@Override
-	protected void func_145780_a(int par1, int par2, int par3, Block par4)
+	protected void playStepSound(BlockPos pos, Block par4)
 	{
 		playSound("mob.zombie.step", 0.15F, 1.0F);
 	}
@@ -121,7 +116,7 @@ public class EntityAntiGhoul extends EntityMob implements IAntiEntity {
 	}
 
 	@Override
-	protected void dropRareDrop(int par1)
+	protected void addRandomDrop()
 	{
 		switch (rand.nextInt(3))
 		{
@@ -141,7 +136,7 @@ public class EntityAntiGhoul extends EntityMob implements IAntiEntity {
 	protected void collideWithEntity(Entity par1Entity)
 	{
 		if(!worldObj.isRemote && par1Entity instanceof EntityDepthsGhoul){
-			boolean flag = worldObj.getGameRules().getGameRuleBooleanValue("mobGriefing");
+			boolean flag = worldObj.getGameRules().getBoolean("mobGriefing");
 			worldObj.createExplosion(this, posX, posY, posZ, 5, flag);
 			setDead();
 		}
@@ -157,17 +152,17 @@ public class EntityAntiGhoul extends EntityMob implements IAntiEntity {
 			EntityOmotholGhoul entity = new EntityOmotholGhoul(worldObj);
 			entity.copyLocationAndAnglesFrom(this);
 			worldObj.removeEntity(this);
-			entity.onSpawnWithEgg((IEntityLivingData)null);
+			entity.onInitialSpawn(worldObj.getDifficultyForLocation(new BlockPos(posX, posY, posZ)), (IEntityLivingData)null);
 			worldObj.spawnEntityInWorld(entity);
 		}
 	}
 
 	@Override
-	public IEntityLivingData onSpawnWithEgg(IEntityLivingData par1EntityLivingData)
+	public IEntityLivingData onInitialSpawn(DifficultyInstance difficulty, IEntityLivingData par1EntityLivingData)
 	{
-		par1EntityLivingData = super.onSpawnWithEgg(par1EntityLivingData);
+		par1EntityLivingData = super.onInitialSpawn(difficulty, par1EntityLivingData);
 
-		float f = worldObj.func_147462_b(posX, posY, posZ);
+		float f = difficulty.getClampedAdditionalDifficulty();
 		setCanPickUpLoot(rand.nextFloat() < 0.55F * f);
 
 		return par1EntityLivingData;

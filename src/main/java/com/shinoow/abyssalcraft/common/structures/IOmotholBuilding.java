@@ -13,8 +13,9 @@ package com.shinoow.abyssalcraft.common.structures;
 
 import java.util.Random;
 
+import net.minecraft.util.BlockPos;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.world.World;
-import net.minecraftforge.common.util.ForgeDirection;
 
 /**
  * Implement on any building generated in Omothol
@@ -24,13 +25,13 @@ import net.minecraftforge.common.util.ForgeDirection;
 public interface IOmotholBuilding {
 
 	/**
-	 * Custom generate method, works like the regular one does, with the addition of a ForgeDirection param
+	 * Custom generate method, works like the regular one does, with the addition of a EnumFacing param
 	 */
-	public boolean generate(World world, Random rand, int x, int y, int z, ForgeDirection dir);
+	public boolean generate(World world, Random rand, BlockPos pos, EnumFacing face);
 
 	/**
 	 * Used to fetch Structure Data for the building
 	 * @param dir Current direction
 	 */
-	public StructureData getStructureData(ForgeDirection dir);
+	public StructureData getStructureData(EnumFacing face);
 }

@@ -34,7 +34,7 @@ public class GuiEngraver extends GuiContainer {
 	@Override
 	protected void drawGuiContainerForegroundLayer(int par1, int par2)
 	{
-		String s = tileEngraver.hasCustomInventoryName() ? tileEngraver.getInventoryName() : I18n.format(tileEngraver.getInventoryName(), new Object[0]);
+		String s = tileEngraver.hasCustomName() ? tileEngraver.getName() : I18n.format(tileEngraver.getName(), new Object[0]);
 		fontRendererObj.drawString(s, xSize / 2 - fontRendererObj.getStringWidth(s) / 2, 6, 4210752);
 		fontRendererObj.drawString(I18n.format("container.inventory", new Object[0]), 8, ySize - 96 + 2, 4210752);
 	}

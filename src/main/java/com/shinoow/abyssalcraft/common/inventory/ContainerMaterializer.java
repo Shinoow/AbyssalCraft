@@ -20,8 +20,8 @@ import net.minecraft.item.ItemStack;
 
 import com.shinoow.abyssalcraft.common.blocks.tile.TileEntityMaterializer;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ContainerMaterializer extends Container {
 
@@ -47,9 +47,9 @@ public class ContainerMaterializer extends Container {
 	}
 
 	@Override
-	public void addCraftingToCrafters(ICrafting par1ICrafting)
+	public void onCraftGuiOpened(ICrafting par1ICrafting)
 	{
-		super.addCraftingToCrafters(par1ICrafting);
+		super.onCraftGuiOpened(par1ICrafting);
 	}
 
 	@Override
@@ -73,7 +73,7 @@ public class ContainerMaterializer extends Container {
 	public ItemStack transferStackInSlot(EntityPlayer par1EntityPlayer, int par2)
 	{
 		ItemStack itemstack = null;
-		Slot slot = (Slot)inventorySlots.get(par2);
+		Slot slot = inventorySlots.get(par2);
 
 		if (slot != null && slot.getHasStack())
 		{

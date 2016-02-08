@@ -13,22 +13,22 @@ package com.shinoow.abyssalcraft.client.render.entity;
 
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.renderer.entity.RenderBiped;
+import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import com.shinoow.abyssalcraft.common.entity.anti.EntityAntiAbyssalZombie;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
 public class RenderAntiAbyssalZombie extends RenderBiped {
 
 	protected ModelBiped model;
 
-	public RenderAntiAbyssalZombie()
+	public RenderAntiAbyssalZombie(RenderManager manager)
 	{
-		super(new ModelBiped(), 0.5F);
+		super(manager, new ModelBiped(), 0.5F);
 		model = (ModelBiped)mainModel;
 	}
 

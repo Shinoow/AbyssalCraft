@@ -21,8 +21,8 @@ import net.minecraft.item.ItemStack;
 import com.shinoow.abyssalcraft.api.recipe.TransmutatorRecipes;
 import com.shinoow.abyssalcraft.common.blocks.tile.TileEntityTransmutator;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ContainerTransmutator extends Container {
 
@@ -48,9 +48,9 @@ public class ContainerTransmutator extends Container {
 	}
 
 	@Override
-	public void addCraftingToCrafters(ICrafting par1ICrafting)
+	public void onCraftGuiOpened(ICrafting par1ICrafting)
 	{
-		super.addCraftingToCrafters(par1ICrafting);
+		super.onCraftGuiOpened(par1ICrafting);
 		par1ICrafting.sendProgressBarUpdate(this, 0, tileTransmutator.transmutatorProcessTime);
 		par1ICrafting.sendProgressBarUpdate(this, 1, tileTransmutator.transmutatorBurnTime);
 		par1ICrafting.sendProgressBarUpdate(this, 2, tileTransmutator.currentItemBurnTime);
@@ -63,7 +63,7 @@ public class ContainerTransmutator extends Container {
 
 		for (int i = 0; i < crafters.size(); ++i)
 		{
-			ICrafting icrafting = (ICrafting)crafters.get(i);
+			ICrafting icrafting = crafters.get(i);
 
 			if (lastProcessTime != tileTransmutator.transmutatorProcessTime)
 				icrafting.sendProgressBarUpdate(this, 0, tileTransmutator.transmutatorProcessTime);
@@ -107,7 +107,7 @@ public class ContainerTransmutator extends Container {
 	public ItemStack transferStackInSlot(EntityPlayer par1EntityPlayer, int par2)
 	{
 		ItemStack itemstack = null;
-		Slot slot = (Slot)inventorySlots.get(par2);
+		Slot slot = inventorySlots.get(par2);
 
 		if (slot != null && slot.getHasStack())
 		{

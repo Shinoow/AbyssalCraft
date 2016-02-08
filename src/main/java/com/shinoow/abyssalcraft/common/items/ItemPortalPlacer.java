@@ -14,23 +14,24 @@ package com.shinoow.abyssalcraft.common.items;
 import java.util.List;
 
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.BlockPos;
 import net.minecraft.util.ChatComponentText;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.client.FMLClientHandler;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
-
-import cpw.mods.fml.client.FMLClientHandler;
 
 public class ItemPortalPlacer extends Item {
 
 	public ItemPortalPlacer(){
 		super();
 		maxStackSize = 1;
+		setUnlocalizedName("gatewaykey");
 		setCreativeTab(AbyssalCraft.tabTools);
 	}
 
@@ -48,75 +49,74 @@ public class ItemPortalPlacer extends Item {
 	}
 
 	@Override
-	public boolean onItemUse(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, World par3World, int par4, int par5, int par6, int par7, float par8, float par9, float par10)
-	{
-		if(!par3World.isRemote){
-			if(par2EntityPlayer.dimension == 0 || par2EntityPlayer.dimension == AbyssalCraft.configDimId1)
+	public boolean onItemUse(ItemStack is, EntityPlayer player, World world, BlockPos pos, EnumFacing side, float hitX, float hitY, float hitZ){
+		if(!world.isRemote){
+			if(player.dimension == 0 || player.dimension == AbyssalCraft.configDimId1)
 			{
-				int direction = MathHelper.floor_double(par2EntityPlayer.rotationYaw * 4.0F / 360.0F + 0.5D) & 3;
+				int direction = MathHelper.floor_double(player.rotationYaw * 4.0F / 360.0F + 0.5D) & 3;
 
 				if(direction == 1 || direction == 3)
 				{
 					for(int y = 1; y < 5; y++)
 						for (int z = -1; z < 2; z++)
-							if(par3World.getBlock(par4, par5 + y, par6 + z) != Blocks.air)
+							if(!world.isAirBlock(pos.add(0, y, z)))
 								return false;
 
-					par3World.setBlock(par4, par5 + 1, par6, AbyssalCraft.abystone);
-					par3World.setBlock(par4, par5 + 1, par6 + 1, AbyssalCraft.abystone);
-					par3World.setBlock(par4, par5 + 1, par6 + 2, AbyssalCraft.abystone);
-					par3World.setBlock(par4, par5 + 1, par6 - 1, AbyssalCraft.abystone);
+					world.setBlockState(pos.add(0, 1, 0), AbyssalCraft.abystone.getDefaultState());
+					world.setBlockState(pos.add(0, 1, 1), AbyssalCraft.abystone.getDefaultState());
+					world.setBlockState(pos.add(0, 1, 2), AbyssalCraft.abystone.getDefaultState());
+					world.setBlockState(pos.add(0, 1, -1), AbyssalCraft.abystone.getDefaultState());
 
-					par3World.setBlock(par4, par5 + 2, par6 - 1, AbyssalCraft.abystone);
-					par3World.setBlock(par4, par5 + 3, par6 - 1, AbyssalCraft.abystone);
-					par3World.setBlock(par4, par5 + 4, par6 - 1, AbyssalCraft.abystone);
-					par3World.setBlock(par4, par5 + 5, par6 - 1, AbyssalCraft.abystone);
+					world.setBlockState(pos.add(0, 2, -1), AbyssalCraft.abystone.getDefaultState());
+					world.setBlockState(pos.add(0, 3, -1), AbyssalCraft.abystone.getDefaultState());
+					world.setBlockState(pos.add(0, 4, -1), AbyssalCraft.abystone.getDefaultState());
+					world.setBlockState(pos.add(0, 5, -1), AbyssalCraft.abystone.getDefaultState());
 
-					par3World.setBlock(par4, par5 + 2, par6 + 2, AbyssalCraft.abystone);
-					par3World.setBlock(par4, par5 + 3, par6 + 2, AbyssalCraft.abystone);
-					par3World.setBlock(par4, par5 + 4, par6 + 2, AbyssalCraft.abystone);
-					par3World.setBlock(par4, par5 + 5, par6 + 2, AbyssalCraft.abystone);
+					world.setBlockState(pos.add(0, 2, 2), AbyssalCraft.abystone.getDefaultState());
+					world.setBlockState(pos.add(0, 3, 2), AbyssalCraft.abystone.getDefaultState());
+					world.setBlockState(pos.add(0, 4, 2), AbyssalCraft.abystone.getDefaultState());
+					world.setBlockState(pos.add(0, 5, 2), AbyssalCraft.abystone.getDefaultState());
 
-					par3World.setBlock(par4, par5 + 5, par6, AbyssalCraft.abystone);
-					par3World.setBlock(par4, par5 + 5, par6 + 1, AbyssalCraft.abystone);
+					world.setBlockState(pos.add(0, 5, 0), AbyssalCraft.abystone.getDefaultState());
+					world.setBlockState(pos.add(0, 5, 1), AbyssalCraft.abystone.getDefaultState());
 
-					par3World.setBlock(par4, par5 + 2, par6 + 1, AbyssalCraft.Coraliumfire);
+					world.setBlockState(pos.add(0, 2, 1), AbyssalCraft.Coraliumfire.getDefaultState());
 				}
 				else
 				{
 					for(int y = 1; y < 5; y++)
 						for (int x = -1; x < 2; x++)
-							if(par3World.getBlock(par4 + x, par5 + y, par6) != Blocks.air)
+							if(!world.isAirBlock(pos.add(x, y, 0)))
 								return false;
 
-					par3World.setBlock(par4, par5 + 1, par6, AbyssalCraft.abystone);
-					par3World.setBlock(par4 + 1, par5 + 1, par6, AbyssalCraft.abystone);
-					par3World.setBlock(par4 + 2, par5 + 1, par6, AbyssalCraft.abystone);
-					par3World.setBlock(par4 - 1, par5 + 1, par6, AbyssalCraft.abystone);
+					world.setBlockState(pos.add(0, 1, 0), AbyssalCraft.abystone.getDefaultState());
+					world.setBlockState(pos.add(1, 1, 0), AbyssalCraft.abystone.getDefaultState());
+					world.setBlockState(pos.add(2, 1, 0), AbyssalCraft.abystone.getDefaultState());
+					world.setBlockState(pos.add(-1, 1, 0), AbyssalCraft.abystone.getDefaultState());
 
-					par3World.setBlock(par4 - 1, par5 + 2, par6, AbyssalCraft.abystone);
-					par3World.setBlock(par4 - 1, par5 + 3, par6, AbyssalCraft.abystone);
-					par3World.setBlock(par4 - 1, par5 + 4, par6, AbyssalCraft.abystone);
-					par3World.setBlock(par4 - 1, par5 + 5, par6, AbyssalCraft.abystone);
+					world.setBlockState(pos.add(-1, 2, 0), AbyssalCraft.abystone.getDefaultState());
+					world.setBlockState(pos.add(-1, 3, 0), AbyssalCraft.abystone.getDefaultState());
+					world.setBlockState(pos.add(-1, 4, 0), AbyssalCraft.abystone.getDefaultState());
+					world.setBlockState(pos.add(-1, 5, 0), AbyssalCraft.abystone.getDefaultState());
 
-					par3World.setBlock(par4 + 2, par5 + 2, par6, AbyssalCraft.abystone);
-					par3World.setBlock(par4 + 2, par5 + 3, par6, AbyssalCraft.abystone);
-					par3World.setBlock(par4 + 2, par5 + 4, par6, AbyssalCraft.abystone);
-					par3World.setBlock(par4 + 2, par5 + 5, par6, AbyssalCraft.abystone);
+					world.setBlockState(pos.add(2, 2, 0), AbyssalCraft.abystone.getDefaultState());
+					world.setBlockState(pos.add(2, 3, 0), AbyssalCraft.abystone.getDefaultState());
+					world.setBlockState(pos.add(2, 4, 0), AbyssalCraft.abystone.getDefaultState());
+					world.setBlockState(pos.add(2, 5, 0), AbyssalCraft.abystone.getDefaultState());
 
-					par3World.setBlock(par4, par5 + 5, par6, AbyssalCraft.abystone);
-					par3World.setBlock(par4 + 1, par5 + 5, par6, AbyssalCraft.abystone);
+					world.setBlockState(pos.add(0, 5, 0), AbyssalCraft.abystone.getDefaultState());
+					world.setBlockState(pos.add(1, 5, 0), AbyssalCraft.abystone.getDefaultState());
 
-					par3World.setBlock(par4 + 1, par5 + 2, par6, AbyssalCraft.Coraliumfire);
+					world.setBlockState(pos.add(1, 2, 0), AbyssalCraft.Coraliumfire.getDefaultState());
 				}
 				return true;
 			}
-		} else if(par2EntityPlayer.dimension == AbyssalCraft.configDimId2 || par2EntityPlayer.dimension == AbyssalCraft.configDimId3 || par2EntityPlayer.dimension == AbyssalCraft.configDimId4)
+		} else if(player.dimension == AbyssalCraft.configDimId2 || player.dimension == AbyssalCraft.configDimId3 || player.dimension == AbyssalCraft.configDimId4)
 		{
 			FMLClientHandler.instance().getClient().ingameGUI.getChatGUI().printChatMessage(new ChatComponentText(StatCollector.translateToLocal("message.portalplacer.error.2")));
 			return false;
 		}
-		else if(par2EntityPlayer.dimension == 0 || par2EntityPlayer.dimension == AbyssalCraft.configDimId1){}
+		else if(player.dimension == 0 || player.dimension == AbyssalCraft.configDimId1){}
 		else{
 			FMLClientHandler.instance().getClient().ingameGUI.getChatGUI().printChatMessage(new ChatComponentText(StatCollector.translateToLocal("message.portalplacer.error.1")));
 			return false;

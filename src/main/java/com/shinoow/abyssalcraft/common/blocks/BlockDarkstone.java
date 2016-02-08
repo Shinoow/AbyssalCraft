@@ -15,6 +15,7 @@ import java.util.Random;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.Item;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
@@ -27,7 +28,7 @@ public class BlockDarkstone extends Block {
 	}
 
 	@Override
-	public Item getItemDropped(int i, Random random, int j)
+	public Item getItemDropped(IBlockState state, Random random, int j)
 	{
 		return Item.getItemFromBlock(AbyssalCraft.Darkstone_cobble);
 	}

@@ -17,13 +17,16 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.IChatComponent;
+import net.minecraft.util.ITickable;
 
 import java.util.Iterator;
 import java.util.List;
 
 import com.shinoow.abyssalcraft.api.recipe.MaterializerRecipes;
 
-public class TileEntityMaterializer extends TileEntity implements ISidedInventory {
+public class TileEntityMaterializer extends TileEntity implements ISidedInventory, ITickable {
 
 	private static final int[] slotsTop = new int[] {0};
 	private static final int[] slotsBottom = new int[] {2, 1};
@@ -88,7 +91,7 @@ public class TileEntityMaterializer extends TileEntity implements ISidedInventor
 	 * like when you close a workbench GUI.
 	 */
 	@Override
-	public ItemStack getStackInSlotOnClosing(int par1)
+	public ItemStack removeStackFromSlot(int par1)
 	{
 		if (materializerItemStacks[par1] != null)
 		{
@@ -115,18 +118,24 @@ public class TileEntityMaterializer extends TileEntity implements ISidedInventor
 	 * Returns the name of the inventory
 	 */
 	@Override
-	public String getInventoryName()
+	public String getName()
 	{
-		return hasCustomInventoryName() ? containerName : "container.abyssalcraft.materializer";
+		return hasCustomName() ? containerName : "container.abyssalcraft.materializer";
 	}
 
 	/**
 	 * Returns if the inventory is named
 	 */
 	@Override
-	public boolean hasCustomInventoryName()
+	public boolean hasCustomName()
 	{
 		return containerName != null && containerName.length() > 0;
+	}
+
+	@Override
+	public IChatComponent getDisplayName() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	public void func_145951_a(String par1)
@@ -171,7 +180,7 @@ public class TileEntityMaterializer extends TileEntity implements ISidedInventor
 
 		par1.setTag("Items", nbttaglist);
 
-		if (hasCustomInventoryName())
+		if (hasCustomName())
 			par1.setString("CustomName", containerName);
 	}
 
@@ -185,7 +194,7 @@ public class TileEntityMaterializer extends TileEntity implements ISidedInventor
 	}
 
 	@Override
-	public void updateEntity()
+	public void update()
 	{
 		//		boolean flag = materializerBurnTime > 0;
 		//		boolean flag1 = false;
@@ -281,14 +290,14 @@ public class TileEntityMaterializer extends TileEntity implements ISidedInventor
 	@Override
 	public boolean isUseableByPlayer(EntityPlayer par1EntityPlayer)
 	{
-		return worldObj.getTileEntity(xCoord, yCoord, zCoord) != this ? false : par1EntityPlayer.getDistanceSq(xCoord + 0.5D, yCoord + 0.5D, zCoord + 0.5D) <= 64.0D;
+		return worldObj.getTileEntity(pos) != this ? false : par1EntityPlayer.getDistanceSq(pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D) <= 64.0D;
 	}
 
 	@Override
-	public void openInventory() {}
+	public void openInventory(EntityPlayer player) {}
 
 	@Override
-	public void closeInventory() {}
+	public void closeInventory(EntityPlayer player) {}
 
 	/**
 	 * Returns true if automation is allowed to insert the given stack (ignoring stack size) into the given slot.
@@ -304,9 +313,9 @@ public class TileEntityMaterializer extends TileEntity implements ISidedInventor
 	 * block.
 	 */
 	@Override
-	public int[] getAccessibleSlotsFromSide(int par1)
+	public int[] getSlotsForFace(EnumFacing face)
 	{
-		return par1 == 0 ? slotsBottom : par1 == 1 ? slotsTop : slotsSides;
+		return face == EnumFacing.DOWN ? slotsBottom : face == EnumFacing.UP ? slotsTop : slotsSides;
 	}
 
 	/**
@@ -314,7 +323,7 @@ public class TileEntityMaterializer extends TileEntity implements ISidedInventor
 	 * side
 	 */
 	@Override
-	public boolean canInsertItem(int par1, ItemStack par2ItemStack, int par3)
+	public boolean canInsertItem(int par1, ItemStack par2ItemStack, EnumFacing facing)
 	{
 		return false;
 	}
@@ -324,9 +333,32 @@ public class TileEntityMaterializer extends TileEntity implements ISidedInventor
 	 * side
 	 */
 	@Override
-	public boolean canExtractItem(int par1, ItemStack par2ItemStack, int par3)
+	public boolean canExtractItem(int par1, ItemStack par2ItemStack, EnumFacing facing)
 	{
 		return false;
 	}
 
+	@Override
+	public int getField(int id) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public void setField(int id, int value) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public int getFieldCount() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public void clear() {
+		// TODO Auto-generated method stub
+
+	}
 }

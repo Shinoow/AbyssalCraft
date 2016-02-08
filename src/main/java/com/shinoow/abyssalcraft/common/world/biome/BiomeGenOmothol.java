@@ -12,12 +12,17 @@
 package com.shinoow.abyssalcraft.common.world.biome;
 
 
+import net.minecraft.util.BlockPos;
 import net.minecraft.world.biome.BiomeGenBase;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
-import com.shinoow.abyssalcraft.common.entity.*;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import com.shinoow.abyssalcraft.common.entity.EntityGatekeeperMinion;
+import com.shinoow.abyssalcraft.common.entity.EntityOmotholGhoul;
+import com.shinoow.abyssalcraft.common.entity.EntityRemnant;
+import com.shinoow.abyssalcraft.common.entity.EntityShadowBeast;
+import com.shinoow.abyssalcraft.common.entity.EntityShadowCreature;
+import com.shinoow.abyssalcraft.common.entity.EntityShadowMonster;
 
 public class BiomeGenOmothol extends BiomeGenBase {
 
@@ -46,14 +51,14 @@ public class BiomeGenOmothol extends BiomeGenBase {
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public int getBiomeGrassColor(int par1, int par2, int par3)
+	public int getGrassColorAtPos(BlockPos pos)
 	{
 		return 0x30217A;
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public int getBiomeFoliageColor(int par1, int par2, int par3)
+	public int getFoliageColorAtPos(BlockPos pos)
 	{
 		return 0x30217A;
 	}

@@ -12,6 +12,7 @@
 package com.shinoow.abyssalcraft.common.world;
 
 import net.minecraft.entity.Entity;
+import net.minecraft.util.MathHelper;
 import net.minecraft.world.Teleporter;
 import net.minecraft.world.WorldServer;
 
@@ -22,8 +23,8 @@ public class TeleporterDarkRealm extends Teleporter {
 	}
 
 	@Override
-	public void placeInPortal(Entity entity, double par2, double par4, double par6, float par8){
-		entity.setPosition(par2, 80, par6);
+	public void placeInPortal(Entity entity, float par8){
+		entity.setPosition(MathHelper.floor_double(entity.posX), 80, MathHelper.floor_double(entity.posZ));
 		entity.setVelocity(0, 0, 0);
 	}
 }

@@ -12,14 +12,14 @@
 package com.shinoow.abyssalcraft.client.render.entity;
 
 import net.minecraft.client.renderer.entity.RenderLiving;
+import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import com.shinoow.abyssalcraft.client.model.entity.ModelShadowMonster;
 import com.shinoow.abyssalcraft.common.entity.EntityShadowMonster;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
 public class RenderShadowMonster extends RenderLiving {
@@ -28,9 +28,9 @@ public class RenderShadowMonster extends RenderLiving {
 
 	private static final ResourceLocation mobTexture = new ResourceLocation("abyssalcraft:textures/model/ShadowMonster.png");
 
-	public RenderShadowMonster (ModelShadowMonster ModelShadowMonster, float f)
+	public RenderShadowMonster(RenderManager manager, ModelShadowMonster ModelShadowMonster, float f)
 	{
-		super(ModelShadowMonster, f);
+		super(manager, ModelShadowMonster, f);
 		model = (ModelShadowMonster)mainModel;
 	}
 

@@ -11,19 +11,19 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.common.items;
 
-import com.shinoow.abyssalcraft.AbyssalCraft;
-
-import cpw.mods.fml.common.eventhandler.Event.Result;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockDirt;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemHoe;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumChatFormatting;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
-import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.event.entity.player.UseHoeEvent;
+import com.shinoow.abyssalcraft.AbyssalCraft;
 
 public class ItemACHoe extends ItemHoe {
 
@@ -36,8 +36,9 @@ public class ItemACHoe extends ItemHoe {
 	public ItemACHoe(ToolMaterial mat, String name, EnumChatFormatting format) {
 		super(mat);
 		setCreativeTab(AbyssalCraft.tabTools);
+		//		GameRegistry.registerItem(this, name);
 		setUnlocalizedName(name);
-		setTextureName(AbyssalCraft.modid + ":" + name);
+		//		setTextureName(AbyssalCraft.modid + ":" + name);
 		this.format = format;
 	}
 
@@ -48,39 +49,35 @@ public class ItemACHoe extends ItemHoe {
 	}
 
 	@Override
-	public boolean onItemUse(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int par7, float par8, float par9, float par10)
+	@SuppressWarnings("incomplete-switch")
+	public boolean onItemUse(ItemStack stack, EntityPlayer playerIn, World worldIn, BlockPos pos, EnumFacing side, float hitX, float hitY, float hitZ)
 	{
-		if (!player.canPlayerEdit(x, y, z, par7, stack))
+		if (!playerIn.canPlayerEdit(pos.offset(side), side, stack))
 			return false;
 		else
 		{
-			UseHoeEvent event = new UseHoeEvent(player, stack, world, x, y, z);
-			if (MinecraftForge.EVENT_BUS.post(event))
-				return false;
+			int hook = net.minecraftforge.event.ForgeEventFactory.onHoeUse(stack, playerIn, worldIn, pos);
+			if (hook != 0) return hook > 0;
 
-			if (event.getResult() == Result.ALLOW)
+			IBlockState iblockstate = worldIn.getBlockState(pos);
+			Block block = iblockstate.getBlock();
+
+			if (side != EnumFacing.DOWN && worldIn.isAirBlock(pos.up()))
 			{
-				stack.damageItem(1, player);
-				return true;
+				if (block == Blocks.grass || block == AbyssalCraft.Darkgrass || block == AbyssalCraft.dreadgrass)
+					return useHoe(stack, playerIn, worldIn, pos, Blocks.farmland.getDefaultState());
+
+				if (block == Blocks.dirt)
+					switch (iblockstate.getValue(BlockDirt.VARIANT))
+					{
+					case DIRT:
+						return useHoe(stack, playerIn, worldIn, pos, Blocks.farmland.getDefaultState());
+					case COARSE_DIRT:
+						return useHoe(stack, playerIn, worldIn, pos, Blocks.dirt.getDefaultState().withProperty(BlockDirt.VARIANT, BlockDirt.DirtType.DIRT));
+					}
 			}
 
-			Block block = world.getBlock(x, y, z);
-
-			if (par7 != 0 && world.getBlock(x, y + 1, z).isAir(world, x, y + 1, z) && (block == Blocks.grass || block == Blocks.dirt || block == AbyssalCraft.Darkgrass || block == AbyssalCraft.dreadgrass))
-			{
-				Block block1 = Blocks.farmland;
-				world.playSoundEffect(x + 0.5F, y + 0.5F, z + 0.5F, block1.stepSound.getStepResourcePath(), (block1.stepSound.getVolume() + 1.0F) / 2.0F, block1.stepSound.getPitch() * 0.8F);
-
-				if (world.isRemote)
-					return true;
-				else
-				{
-					world.setBlock(x, y, z, block1);
-					stack.damageItem(1, player);
-					return true;
-				}
-			} else
-				return false;
+			return false;
 		}
 	}
 }

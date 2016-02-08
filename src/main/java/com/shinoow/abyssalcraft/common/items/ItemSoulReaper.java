@@ -25,7 +25,6 @@ import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
-
 import com.google.common.collect.Multimap;
 import com.shinoow.abyssalcraft.AbyssalCraft;
 
@@ -35,9 +34,10 @@ public class ItemSoulReaper extends Item {
 
 	public ItemSoulReaper(String par1Str){
 		super();
+		//		GameRegistry.registerItem(this, par1Str);
 		setUnlocalizedName(par1Str);
 		setCreativeTab(AbyssalCraft.tabCombat);
-		setTextureName("abyssalcraft:" + par1Str);
+		//		setTextureName("abyssalcraft:" + par1Str);
 		setMaxDamage(2000);
 		setMaxStackSize(1);
 	}
@@ -49,7 +49,7 @@ public class ItemSoulReaper extends Item {
 
 	@Override
 	public EnumAction getItemUseAction(ItemStack par1ItemStack) {
-		return EnumAction.block;
+		return EnumAction.BLOCK;
 	}
 
 	@Override
@@ -61,19 +61,19 @@ public class ItemSoulReaper extends Item {
 	public int increaseSouls(ItemStack par1ItemStack){
 		if(!par1ItemStack.hasTagCompound())
 			par1ItemStack.setTagCompound(new NBTTagCompound());
-		par1ItemStack.stackTagCompound.setInteger("souls", getSouls(par1ItemStack) + 1);
+		par1ItemStack.getTagCompound().setInteger("souls", getSouls(par1ItemStack) + 1);
 		return getSouls(par1ItemStack);
 	}
 
 	/** Sets the amount of souls */
 	public int setSouls(int par1, ItemStack par2ItemStack){
-		par2ItemStack.stackTagCompound.setInteger("souls", par1);
+		par2ItemStack.getTagCompound().setInteger("souls", par1);
 		return getSouls(par2ItemStack);
 	}
 
 	public int getSouls(ItemStack par1ItemStack)
 	{
-		return par1ItemStack.hasTagCompound() && par1ItemStack.stackTagCompound.hasKey("souls") ? (int)par1ItemStack.stackTagCompound.getInteger("souls") : 0;
+		return par1ItemStack.hasTagCompound() && par1ItemStack.getTagCompound().hasKey("souls") ? (int)par1ItemStack.getTagCompound().getInteger("souls") : 0;
 	}
 
 	@Override
@@ -115,8 +115,8 @@ public class ItemSoulReaper extends Item {
 				par3EntityLivingBase.addPotionEffect(new PotionEffect(Potion.moveSpeed.getId(), 2400, 2));
 				par3EntityLivingBase.addPotionEffect(new PotionEffect(Potion.resistance.getId(), 1200));
 				par3EntityLivingBase.addPotionEffect(new PotionEffect(Potion.fireResistance.getId(), 600));
-				par3EntityLivingBase.addPotionEffect(new PotionEffect(Potion.field_76443_y.getId(), 300));
-				par3EntityLivingBase.addPotionEffect(new PotionEffect(Potion.field_76434_w.getId(), 2400, 2));
+				par3EntityLivingBase.addPotionEffect(new PotionEffect(Potion.saturation.getId(), 300));
+				par3EntityLivingBase.addPotionEffect(new PotionEffect(Potion.healthBoost.getId(), 2400, 2));
 				par3EntityLivingBase.heal(20.0F);
 				break;
 			}
@@ -150,7 +150,7 @@ public class ItemSoulReaper extends Item {
 	@SuppressWarnings({ "rawtypes", "unchecked", "deprecation" })
 	public Multimap getItemAttributeModifiers() {
 		Multimap multimap = super.getItemAttributeModifiers();
-		multimap.put(SharedMonsterAttributes.attackDamage.getAttributeUnlocalizedName(), new AttributeModifier(field_111210_e, "Weapon modifier", weaponDamage, 0));
+		multimap.put(SharedMonsterAttributes.attackDamage.getAttributeUnlocalizedName(), new AttributeModifier(itemModifierUUID, "Weapon modifier", weaponDamage, 0));
 		return multimap;
 	}
 }

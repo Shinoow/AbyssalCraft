@@ -12,14 +12,14 @@
 package com.shinoow.abyssalcraft.client.render.entity;
 
 import net.minecraft.client.renderer.entity.RenderLiving;
+import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import com.shinoow.abyssalcraft.client.model.entity.ModelShadowCreature;
 import com.shinoow.abyssalcraft.common.entity.EntityShadowCreature;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
 public class RenderShadowCreature extends RenderLiving {
@@ -28,9 +28,9 @@ public class RenderShadowCreature extends RenderLiving {
 
 	private static final ResourceLocation mobTexture = new ResourceLocation("abyssalcraft:textures/model/ShadowCreature.png");
 
-	public RenderShadowCreature (ModelShadowCreature ModelShadowCreature, float f)
+	public RenderShadowCreature(RenderManager manager, ModelShadowCreature ModelShadowCreature, float f)
 	{
-		super(ModelShadowCreature, f);
+		super(manager, ModelShadowCreature, f);
 		model = (ModelShadowCreature)mainModel;
 	}
 

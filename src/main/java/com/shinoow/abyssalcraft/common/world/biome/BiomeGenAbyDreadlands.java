@@ -13,90 +13,93 @@ package com.shinoow.abyssalcraft.common.world.biome;
 
 import java.util.Random;
 
+import net.minecraft.block.state.pattern.BlockHelper;
+import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenMinable;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.common.entity.EntityAbygolem;
 import com.shinoow.abyssalcraft.common.entity.EntityDreadguard;
 import com.shinoow.abyssalcraft.common.world.gen.WorldGenDreadlandsStalagmite;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-
 public class BiomeGenAbyDreadlands extends BiomeGenDreadlandsBase {
 
 	@SuppressWarnings("unchecked")
 	public BiomeGenAbyDreadlands(int par1) {
 		super(par1);
-		topBlock = AbyssalCraft.abydreadstone;
-		fillerBlock = AbyssalCraft.abydreadstone;
+		topBlock = AbyssalCraft.abydreadstone.getDefaultState();
+		fillerBlock = AbyssalCraft.abydreadstone.getDefaultState();
 		spawnableCreatureList.add(new SpawnListEntry(EntityAbygolem.class, 100, 3, 8));
 		spawnableMonsterList.add(new SpawnListEntry(EntityDreadguard.class, 1, 1, 1));
 	}
 
 	@Override
-	public void decorate(World par1World, Random par2Random, int par3, int par4)
+	public void decorate(World par1World, Random par2Random, BlockPos pos)
 	{
-		super.decorate(par1World, par2Random, par3, par4);
+		super.decorate(par1World, par2Random, pos);
 
 		for(int rarity = 0; rarity < 10; rarity++) {
 			int veinSize =  8 + par2Random.nextInt(12);
-			int x = par3 + par2Random.nextInt(16);
+			int x = par2Random.nextInt(16);
 			int y = par2Random.nextInt(60);
-			int z = par4 + par2Random.nextInt(16);
+			int z = par2Random.nextInt(16);
 
-			new WorldGenMinable(AbyssalCraft.abydreadore, veinSize, AbyssalCraft.dreadstone).generate(par1World, par2Random, x, y, z);
+			new WorldGenMinable(AbyssalCraft.abydreadore.getDefaultState(), veinSize,
+					BlockHelper.forBlock(AbyssalCraft.dreadstone)).generate(par1World, par2Random, pos.add(x, y, z));
 		}
 		for (int rarity = 0; rarity < 7; ++rarity)
 		{
-			int x = par3 + par2Random.nextInt(16);
+			int x = par2Random.nextInt(16);
 			int y = par2Random.nextInt(64);
-			int z = par4 + par2Random.nextInt(16);
-			new WorldGenMinable(AbyssalCraft.abydreadstone, 64,
-					AbyssalCraft.dreadstone).generate(par1World, par2Random, x, y, z);
+			int z = par2Random.nextInt(16);
+			new WorldGenMinable(AbyssalCraft.abydreadstone.getDefaultState(), 64,
+					BlockHelper.forBlock(AbyssalCraft.dreadstone)).generate(par1World, par2Random, pos.add(x, y, z));
 		}
 		for (int rarity = 0; rarity < 7; ++rarity)
 		{
-			int x = par3 + par2Random.nextInt(16);
+			int x = par2Random.nextInt(16);
 			int y = par2Random.nextInt(64);
-			int z = par4 + par2Random.nextInt(16);
-			new WorldGenMinable(AbyssalCraft.abydreadstone, 48,
-					AbyssalCraft.dreadstone).generate(par1World, par2Random, x, y, z);
+			int z = par2Random.nextInt(16);
+			new WorldGenMinable(AbyssalCraft.abydreadstone.getDefaultState(), 48,
+					BlockHelper.forBlock(AbyssalCraft.dreadstone)).generate(par1World, par2Random, pos.add(x, y, z));
 		}
 		for (int rarity = 0; rarity < 7; ++rarity)
 		{
-			int x = par3 + par2Random.nextInt(16);
+			int x = par2Random.nextInt(16);
 			int y = par2Random.nextInt(64);
-			int z = par4 + par2Random.nextInt(16);
-			new WorldGenMinable(AbyssalCraft.abydreadstone, 32,
-					AbyssalCraft.dreadstone).generate(par1World, par2Random, x, y, z);
+			int z = par2Random.nextInt(16);
+			new WorldGenMinable(AbyssalCraft.abydreadstone.getDefaultState(), 32,
+					BlockHelper.forBlock(AbyssalCraft.dreadstone)).generate(par1World, par2Random, pos.add(x, y, z));
 		}
 		for(int rarity = 0; rarity < 8; rarity++) {
 			int veinSize =  2 + par2Random.nextInt(4);
-			int x = par3 + par2Random.nextInt(16);
+			int x = par2Random.nextInt(16);
 			int y = par2Random.nextInt(55);
-			int z = par4 + par2Random.nextInt(16);
+			int z = par2Random.nextInt(16);
 
-			new WorldGenMinable(AbyssalCraft.abydreadore, veinSize, AbyssalCraft.abydreadstone).generate(par1World, par2Random, x, y, z);
+			new WorldGenMinable(AbyssalCraft.abydreadore.getDefaultState(), veinSize,
+					BlockHelper.forBlock(AbyssalCraft.dreadstone)).generate(par1World, par2Random, pos.add(x, y, z));
 		}
 		for(int i = 0; i < 1; i++){
-			int xPos = par3 + par2Random.nextInt(16) + 8;
-			int zPos = par4 + par2Random.nextInt(16) + 8;
-			new WorldGenDreadlandsStalagmite().generate(par1World, par2Random, xPos, par1World.getHeightValue(xPos, zPos), zPos);
+			int xPos = par2Random.nextInt(16) + 8;
+			int zPos = par2Random.nextInt(16) + 8;
+			new WorldGenDreadlandsStalagmite().generate(par1World, par2Random, par1World.getHeight(pos.add(xPos, 0, zPos)));
 		}
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public int getBiomeGrassColor(int par1, int par2, int par3)
+	public int getGrassColorAtPos(BlockPos pos)
 	{
 		return 0x30217A;
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public int getBiomeFoliageColor(int par1, int par2, int par3)
+	public int getFoliageColorAtPos(BlockPos pos)
 	{
 		return 0x30217A;
 	}

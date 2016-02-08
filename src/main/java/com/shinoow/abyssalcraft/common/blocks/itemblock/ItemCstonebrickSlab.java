@@ -20,7 +20,7 @@ import com.shinoow.abyssalcraft.AbyssalCraft;
 public class ItemCstonebrickSlab extends ItemSlab {
 
 	public ItemCstonebrickSlab(Block block) {
-		super(block, (BlockSlab)AbyssalCraft.cstonebrickslab1, (BlockSlab)AbyssalCraft.cstonebrickslab2, false);
+		super(block, (BlockSlab)AbyssalCraft.cstonebrickslab1, (BlockSlab)AbyssalCraft.cstonebrickslab2);
 		setMaxDamage(0);
 		setHasSubtypes(true);
 	}

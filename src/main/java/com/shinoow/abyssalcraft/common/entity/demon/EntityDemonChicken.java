@@ -15,6 +15,7 @@ import com.shinoow.abyssalcraft.AbyssalCraft;
 
 import net.minecraft.block.Block;
 import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;
 
 public class EntityDemonChicken extends EntityDemonAnimal {
@@ -59,13 +60,13 @@ public class EntityDemonChicken extends EntityDemonAnimal {
 	}
 
 	@Override
-	protected void func_145780_a(int par1, int par2, int par3, Block par4)
+	protected void playStepSound(BlockPos pos, Block par4)
 	{
 		playSound("mob.chicken.step", 0.15F, 1.0F);
 	}
 
 	@Override
-	protected void fall(float p_70069_1_) {}
+	public void fall(float p_70069_1_, float par2) {}
 
 	@Override
 	public void onLivingUpdate()

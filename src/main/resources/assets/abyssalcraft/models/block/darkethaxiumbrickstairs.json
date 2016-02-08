@@ -1,0 +1,8 @@
+{
+	"parent": "block/stairs",
+	"textures": {
+		"bottom": "abyssalcraft:blocks/deb",
+        "top": "abyssalcraft:blocks/deb",
+        "side": "abyssalcraft:blocks/deb"
+	}
+}

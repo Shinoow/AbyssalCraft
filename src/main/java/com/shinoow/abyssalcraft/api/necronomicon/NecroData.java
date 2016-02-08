@@ -119,11 +119,6 @@ public class NecroData {
 		private String title;
 		private Object[] icons;
 
-		@Deprecated
-		public enum PageType {
-			NORMAL, ENTRY, INFO, CRAFTING, MULTI
-		}
-
 		/**
 		 * Page data for the NecroData structure
 		 * @param num Amount of turn-ups for the sub-category (max 20)
@@ -133,21 +128,6 @@ public class NecroData {
 		 */
 		public PageData(int num, String title, String...strings){
 			this(num, title, null, strings);
-		}
-
-		/**
-		 * Page data for the NecroData structure
-		 * @param num Amount of turn-ups for the sub-category (max 20)
-		 * @param title A title to display on the top of the page
-		 * @param pagetype A PageType, mainly used for the Object array
-		 * @param stuff An array of Objects used as a icons/pictures for the page (has to be the same amount
-		 * as the turn-up amount, can contain null elements if you don't want a icon/picture on a certain page)
-		 * @param strings Text to be written on the pages (each string will represent one of
-		 * the two open pages, leave a empty string for a empty page)
-		 */
-		@Deprecated
-		public PageData(int num, String title, PageType pagetype, Object[] stuff, String...strings){
-			this(num, title, stuff, strings);
 		}
 
 		/**
@@ -166,10 +146,10 @@ public class NecroData {
 			if(stuff != null)
 				if(stuff.length == num)
 					icons = stuff;
-				else throw new IndexOutOfBoundsException("Not enough elements in the Object array! ("+num+" turn-up(s), "+stuff.length+" Objects");
+				else throw new ArrayIndexOutOfBoundsException("Not enough elements in the Object array! ("+num+" turn-up(s), "+stuff.length+" Objects");
 			if(strings.length/2 <= num)
 				pages = strings;
-			else throw new IndexOutOfBoundsException("Not enough pages to write on! ("+num+" turn-ups, "+strings.length+" pages)");
+			else throw new ArrayIndexOutOfBoundsException("Not enough pages to write on! ("+num+" turn-ups, "+strings.length+" pages)");
 		}
 
 		/**

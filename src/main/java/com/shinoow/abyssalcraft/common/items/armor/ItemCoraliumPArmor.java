@@ -13,7 +13,6 @@ package com.shinoow.abyssalcraft.common.items.armor;
 
 import java.util.List;
 
-import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.player.EntityPlayer;
@@ -25,15 +24,13 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
-
 import com.shinoow.abyssalcraft.AbyssalCraft;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-
 public class ItemCoraliumPArmor extends ItemArmor {
-	public ItemCoraliumPArmor(ArmorMaterial par2EnumArmorMaterial, int par3, int par4){
+	public ItemCoraliumPArmor(ArmorMaterial par2EnumArmorMaterial, int par3, int par4, String name){
 		super(par2EnumArmorMaterial, par3, par4);
+		//		GameRegistry.registerItem(this, name);
+		setUnlocalizedName(name);
 		setCreativeTab(AbyssalCraft.tabCombat);
 	}
 
@@ -53,12 +50,12 @@ public class ItemCoraliumPArmor extends ItemArmor {
 		else return null;
 	}
 
-	@Override
-	@SideOnly(Side.CLIENT)
-	public void registerIcons(IIconRegister par1IconRegister)
-	{
-		itemIcon = par1IconRegister.registerIcon(AbyssalCraft.modid + ":" + this.getUnlocalizedName().substring(5));
-	}
+	//	@Override
+	//	@SideOnly(Side.CLIENT)
+	//	public void registerIcons(IIconRegister par1IconRegister)
+	//	{
+	//		itemIcon = par1IconRegister.registerIcon(AbyssalCraft.modid + ":" + this.getUnlocalizedName().substring(5));
+	//	}
 
 	@SuppressWarnings("rawtypes")
 	@Override
@@ -69,7 +66,7 @@ public class ItemCoraliumPArmor extends ItemArmor {
 				player.removePotionEffect(AbyssalCraft.Cplague.getId());
 		}
 		if (itemstack.getItem() == AbyssalCraft.CorplateP) {
-			List list = player.worldObj.getEntitiesWithinAABBExcludingEntity(player, player.boundingBox.expand(4D, 0.0D, 4D));
+			List list = player.worldObj.getEntitiesWithinAABBExcludingEntity(player, player.getCollisionBoundingBox().expand(4D, 0.0D, 4D));
 
 			if (list != null)
 				for (int k2 = 0; k2 < list.size(); k2++) {

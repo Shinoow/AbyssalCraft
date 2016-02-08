@@ -1,0 +1,6 @@
+{
+	"variants": {
+		"stage=0": { "model": "abyssalcraft:dltsapling" },
+		"stage=1": { "model": "abyssalcraft:dltsapling" }
+	}
+}

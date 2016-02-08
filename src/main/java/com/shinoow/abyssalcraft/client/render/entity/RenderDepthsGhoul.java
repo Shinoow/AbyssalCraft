@@ -12,37 +12,30 @@
 package com.shinoow.abyssalcraft.client.render.entity;
 
 import net.minecraft.client.renderer.entity.RenderLiving;
-import net.minecraft.entity.Entity;
+import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import com.shinoow.abyssalcraft.client.model.entity.ModelDG;
 import com.shinoow.abyssalcraft.common.entity.EntityDepthsGhoul;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-
 @SideOnly(Side.CLIENT)
-public class RenderDepthsGhoul extends RenderLiving {
-
-	protected ModelDG model;
+public class RenderDepthsGhoul extends RenderLiving<EntityDepthsGhoul> {
 
 	private static final ResourceLocation peteResource = new ResourceLocation("abyssalcraft:textures/model/depths_ghoul_pete.png");
 	private static final ResourceLocation wilsonResource = new ResourceLocation("abyssalcraft:textures/model/depths_ghoul_wilson.png");
 	private static final ResourceLocation orangeResource = new ResourceLocation("abyssalcraft:textures/model/depths_ghoul_orange.png");
 	private static final ResourceLocation ghoulResource = new ResourceLocation("abyssalcraft:textures/model/depths_ghoul.png");
 
-	public RenderDepthsGhoul (ModelDG ModelDG, float f)
+	public RenderDepthsGhoul(RenderManager manager, ModelDG ModelDG, float f)
 	{
-		super(ModelDG, f);
-		model = (ModelDG)mainModel;
+		super(manager, ModelDG, f);
+
 	}
 
-	public void doRender(EntityDepthsGhoul entity, double par2, double par4, double par6, float par8, float par9)
-	{
-		super.doRender(entity, par2, par4, par6, par8, par9);
-	}
-
-	protected ResourceLocation getGhoulTexture(EntityDepthsGhoul par1EntityLiving)
+	@Override
+	protected ResourceLocation getEntityTexture(EntityDepthsGhoul par1EntityLiving)
 	{
 		switch (par1EntityLiving.getGhoulType())
 		{
@@ -57,11 +50,5 @@ public class RenderDepthsGhoul extends RenderLiving {
 		default:
 			return ghoulResource;
 		}
-	}
-
-	@Override
-	protected ResourceLocation getEntityTexture(Entity entity) {
-
-		return getGhoulTexture((EntityDepthsGhoul)entity);
 	}
 }

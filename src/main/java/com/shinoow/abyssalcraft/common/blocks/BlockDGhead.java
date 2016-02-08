@@ -11,20 +11,21 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.common.blocks;
 
-import thaumcraft.api.crafting.IInfusionStabiliser;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.util.BlockPos;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.common.Optional.Interface;
+import net.minecraftforge.fml.common.Optional.Method;
+import thaumcraft.api.crafting.IInfusionStabiliser;
 
 import com.shinoow.abyssalcraft.common.blocks.tile.TileEntityDGhead;
-
-import cpw.mods.fml.common.Optional.Interface;
-import cpw.mods.fml.common.Optional.Method;
 
 @Interface(modid = "Thaumcraft", iface = "thaumcraft.api.crafting.IInfusionStabiliser", striprefs = true)
 public class BlockDGhead extends BlockContainer implements IInfusionStabiliser {
@@ -40,14 +41,8 @@ public class BlockDGhead extends BlockContainer implements IInfusionStabiliser {
 	}
 
 	@Override
-	public boolean renderAsNormalBlock()
-	{
-		return false;
-	}
-
-	@Override
 	public int getRenderType() {
-		return -3;
+		return 2;
 	}
 
 	@Override
@@ -56,25 +51,31 @@ public class BlockDGhead extends BlockContainer implements IInfusionStabiliser {
 	}
 
 	@Override
-	public AxisAlignedBB getCollisionBoundingBoxFromPool(World par1World, int par2, int par3, int par4)
+	public boolean isFullCube()
 	{
-		setBlockBoundsBasedOnState(par1World, par2, par3, par4);
-		return super.getCollisionBoundingBoxFromPool(par1World, par2, par3, par4);
+		return false;
 	}
 
 	@Override
-	public void onBlockPlacedBy(World par1World, int par2, int par3, int par4, EntityLivingBase par5EntityLivingBase, ItemStack par6ItemStack)
+	public AxisAlignedBB getCollisionBoundingBox(World par1World, BlockPos pos, IBlockState state)
+	{
+		setBlockBoundsBasedOnState(par1World, pos);
+		return super.getCollisionBoundingBox(par1World, pos, state);
+	}
+
+	@Override
+	public void onBlockPlacedBy(World par1World, BlockPos pos, IBlockState state, EntityLivingBase par5EntityLivingBase, ItemStack par6ItemStack)
 	{
 		if (par5EntityLivingBase == null)
 			return;
 
-		TileEntityDGhead tile = (TileEntityDGhead) par1World.getTileEntity(par2, par3, par4);
+		TileEntityDGhead tile = (TileEntityDGhead) par1World.getTileEntity(pos);
 		tile.direction = MathHelper.floor_double(par5EntityLivingBase.rotationYaw * 4.0F / 360.0F + 0.5D) & 3;
 	}
 
 	@Override
 	@Method(modid = "Thaumcraft")
-	public boolean canStabaliseInfusion(World world, int x, int y, int z) {
+	public boolean canStabaliseInfusion(World world, BlockPos pos) {
 
 		return true;
 	}

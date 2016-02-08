@@ -1,0 +1,24 @@
+{
+	"forge_marker": 1,
+	"defaults": {
+		"textures" : { "texture": "abyssalcraft:blocks/dsbf" }
+	},
+    "variants": {
+        "east=false,north=false,south=false,west=false": { "model": "fence_post" },
+        "east=false,north=true,south=false,west=false": { "model": "fence_n", "uvlock": true },
+        "east=true,north=false,south=false,west=false": { "model": "fence_n", "y": 90, "uvlock": true },
+        "east=false,north=false,south=true,west=false": { "model": "fence_n", "y": 180, "uvlock": true },
+        "east=false,north=false,south=false,west=true": { "model": "fence_n", "y": 270, "uvlock": true },
+        "east=true,north=true,south=false,west=false": { "model": "fence_ne", "uvlock": true },
+        "east=true,north=false,south=true,west=false": { "model": "fence_ne", "y": 90, "uvlock": true },
+        "east=false,north=false,south=true,west=true": { "model": "fence_ne", "y": 180, "uvlock": true },
+        "east=false,north=true,south=false,west=true": { "model": "fence_ne", "y": 270, "uvlock": true },
+        "east=false,north=true,south=true,west=false": { "model": "fence_ns", "uvlock": true },
+        "east=true,north=false,south=false,west=true": { "model": "fence_ns", "y": 90, "uvlock": true },
+        "east=true,north=true,south=true,west=false": { "model": "fence_nse", "uvlock": true },
+        "east=true,north=false,south=true,west=true": { "model": "fence_nse", "y": 90, "uvlock": true },
+        "east=false,north=true,south=true,west=true": { "model": "fence_nse", "y": 180, "uvlock": true },
+        "east=true,north=true,south=false,west=true": { "model": "fence_nse", "y": 270, "uvlock": true },
+        "east=true,north=true,south=true,west=true": { "model": "fence_nsew", "uvlock": true }
+    }
+}

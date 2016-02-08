@@ -1,0 +1,8 @@
+{
+	"variants": {
+	    "facing=north": { "model": "abyssalcraft:transmutator" },
+        "facing=south": { "model": "abyssalcraft:transmutator", "y": 180 },
+        "facing=west":  { "model": "abyssalcraft:transmutator", "y": 270 },
+        "facing=east":  { "model": "abyssalcraft:transmutator", "y": 90 }
+	}
+}

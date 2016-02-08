@@ -15,6 +15,7 @@ import java.util.List;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.BlockPos;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
 
@@ -28,7 +29,7 @@ public class DisruptionPotentialEnergy extends DisruptionEntry {
 	}
 
 	@Override
-	public void disrupt(World world, int x, int y, int z, List<EntityPlayer> players) {
+	public void disrupt(World world, BlockPos pos, List<EntityPlayer> players) {
 
 		for(EntityPlayer player : players)
 			for(ItemStack item : player.inventory.mainInventory)

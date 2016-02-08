@@ -14,27 +14,28 @@ package com.shinoow.abyssalcraft.common.blocks;
 import java.util.List;
 
 import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.block.properties.IProperty;
+import net.minecraft.block.properties.PropertyEnum;
+import net.minecraft.block.state.BlockState;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.IIcon;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.util.IStringSerializable;
 
 public class BlockEthaxiumBrick extends BlockACBasic {
 
-	@SideOnly(Side.CLIENT)
-	private IIcon[] icons;
+	public static final PropertyEnum TYPE = PropertyEnum.create("type", BlockEthaxiumBrick.EnumBrickType.class);
 
 	public BlockEthaxiumBrick() {
 		super(Material.rock, "pickaxe", 8, 100.0F, Float.MAX_VALUE, soundTypeStone);
+		setDefaultState(blockState.getBaseState().withProperty(TYPE, EnumBrickType.NORMAL));
 
 	}
 
 	@Override
-	public int damageDropped (int meta) {
-		return meta;
+	public int damageDropped (IBlockState state) {
+		return ((EnumBrickType)state.getValue(TYPE)).getMeta();
 	}
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })
@@ -45,16 +46,59 @@ public class BlockEthaxiumBrick extends BlockACBasic {
 	}
 
 	@Override
-	@SideOnly(Side.CLIENT)
-	public void registerBlockIcons(IIconRegister par1IconRegister) {
-		icons = new IIcon[2];
-		icons[0] = par1IconRegister.registerIcon("abyssalcraft:EB");
-		icons[1] = par1IconRegister.registerIcon("abyssalcraft:EBC");
+	public IBlockState getStateFromMeta(int meta) {
+		return getDefaultState().withProperty(TYPE, EnumBrickType.byMetadata(meta));
 	}
 
 	@Override
-	@SideOnly(Side.CLIENT)
-	public IIcon getIcon(int par1, int par2) {
-		return par2 == 1 ? icons[1]: icons[0];
+	public int getMetaFromState(IBlockState state) {
+		return ((EnumBrickType)state.getValue(TYPE)).getMeta();
+	}
+
+	@Override
+	protected BlockState createBlockState() {
+		return new BlockState(this, new IProperty[] { TYPE });
+	}
+
+	public enum EnumBrickType implements IStringSerializable {
+		NORMAL(0, "normal"),
+		CHISELED(1, "chiseled");
+
+		private static final BlockEthaxiumBrick.EnumBrickType[] META_LOOKUP = new BlockEthaxiumBrick.EnumBrickType[values().length];
+
+		private int meta;
+		private String name;
+
+		private EnumBrickType(int meta, String name) {
+			this.meta = meta;
+			this.name = name;
+		}
+
+		public static BlockEthaxiumBrick.EnumBrickType byMetadata(int meta)
+		{
+			if (meta < 0 || meta >= META_LOOKUP.length)
+				meta = 0;
+
+			return META_LOOKUP[meta];
+		}
+
+		@Override
+		public String getName() {
+			return name;
+		}
+
+		public int getMeta() {
+			return meta;
+		}
+
+		@Override
+		public String toString() {
+			return getName();
+		}
+
+		static {
+			for(BlockEthaxiumBrick.EnumBrickType type : values())
+				META_LOOKUP[type.getMeta()] = type;
+		}
 	}
 }

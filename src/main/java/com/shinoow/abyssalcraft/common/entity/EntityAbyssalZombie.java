@@ -41,7 +41,9 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.PotionEffect;
+import net.minecraft.util.BlockPos;
 import net.minecraft.util.MathHelper;
+import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldProviderEnd;
@@ -74,8 +76,8 @@ public class EntityAbyssalZombie extends EntityMob implements ICoraliumEntity {
 		tasks.addTask(8, new EntityAIWatchClosest(this, EntitySkeleton.class, 8.0F));
 		tasks.addTask(8, new EntityAIWatchClosest(this, EntitySkeletonGoliath.class, 8.0F));
 		targetTasks.addTask(1, new EntityAIHurtByTarget(this, false));
-		targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityZombie.class, 0, true));
-		targetTasks.addTask(3, new EntityAINearestAttackableTarget(this, EntityPlayer.class, 0, true));
+		targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityZombie.class, true));
+		targetTasks.addTask(3, new EntityAINearestAttackableTarget(this, EntityPlayer.class, true));
 	}
 
 	@Override
@@ -147,12 +149,6 @@ public class EntityAbyssalZombie extends EntityMob implements ICoraliumEntity {
 		return var1;
 	}
 
-	@Override
-	protected boolean isAIEnabled()
-	{
-		return true;
-	}
-
 	public int getZombieType()
 	{
 		return dataWatcher.getWatchableObjectByte(14);
@@ -166,11 +162,11 @@ public class EntityAbyssalZombie extends EntityMob implements ICoraliumEntity {
 	@Override
 	public void onLivingUpdate()
 	{
-		if (worldObj.isDaytime() && !worldObj.isRemote && !isChild() && worldObj.provider.dimensionId != AbyssalCraft.configDimId1)
+		if (worldObj.isDaytime() && !worldObj.isRemote && !isChild() && worldObj.provider.getDimensionId() != AbyssalCraft.configDimId1)
 		{
 			float var1 = getBrightness(1.0F);
 
-			if (var1 > 0.5F && rand.nextFloat() * 30.0F < (var1 - 0.4F) * 2.0F && worldObj.canBlockSeeTheSky(MathHelper.floor_double(posX), MathHelper.floor_double(posY), MathHelper.floor_double(posZ)))
+			if (var1 > 0.5F && rand.nextFloat() * 30.0F < (var1 - 0.4F) * 2.0F && worldObj.canSeeSky(new BlockPos(MathHelper.floor_double(posX), MathHelper.floor_double(posY), MathHelper.floor_double(posZ))))
 			{
 				boolean var2 = true;
 				ItemStack var3 = getEquipmentInSlot(4);
@@ -179,9 +175,9 @@ public class EntityAbyssalZombie extends EntityMob implements ICoraliumEntity {
 				{
 					if (var3.isItemStackDamageable())
 					{
-						var3.setItemDamage(var3.getItemDamageForDisplay() + rand.nextInt(2));
+						var3.setItemDamage(var3.getItemDamage() + rand.nextInt(2));
 
-						if (var3.getItemDamageForDisplay() >= var3.getMaxDamage())
+						if (var3.getItemDamage() >= var3.getMaxDamage())
 						{
 							renderBrokenItemStack(var3);
 							setCurrentItemOrArmor(4, (ItemStack)null);
@@ -205,14 +201,14 @@ public class EntityAbyssalZombie extends EntityMob implements ICoraliumEntity {
 
 		if (super.attackEntityAsMob(par1Entity))
 			if (par1Entity instanceof EntityLivingBase)
-				if(worldObj.provider.dimensionId == AbyssalCraft.configDimId1 && !EntityUtil.isEntityCoralium((EntityLivingBase)par1Entity)
+				if(worldObj.provider.getDimensionId() == AbyssalCraft.configDimId1 && !EntityUtil.isEntityCoralium((EntityLivingBase)par1Entity)
 				|| AbyssalCraft.shouldInfect == true && !EntityUtil.isEntityCoralium((EntityLivingBase)par1Entity))
 					((EntityLivingBase)par1Entity).addPotionEffect(new PotionEffect(AbyssalCraft.Cplague.id, 100));
 
 		boolean flag = super.attackEntityAsMob(par1Entity);
 
-		if (flag && getHeldItem() == null && isBurning() && rand.nextFloat() < worldObj.difficultySetting.getDifficultyId() * 0.3F)
-			par1Entity.setFire(2 * worldObj.difficultySetting.getDifficultyId());
+		if (flag && getHeldItem() == null && isBurning() && rand.nextFloat() < worldObj.getDifficulty().getDifficultyId() * 0.3F)
+			par1Entity.setFire(2 * worldObj.getDifficulty().getDifficultyId());
 
 		return flag;
 	}
@@ -236,7 +232,7 @@ public class EntityAbyssalZombie extends EntityMob implements ICoraliumEntity {
 	}
 
 	@Override
-	protected void func_145780_a(int par1, int par2, int par3, Block par4)
+	protected void playStepSound(BlockPos pos, Block par4)
 	{
 		playSound("mob.zombie.step", 0.15F, 1.0F);
 	}
@@ -254,7 +250,7 @@ public class EntityAbyssalZombie extends EntityMob implements ICoraliumEntity {
 	}
 
 	@Override
-	protected void dropRareDrop(int par1)
+	protected void addRandomDrop()
 	{
 		switch (rand.nextInt(3))
 		{
@@ -301,7 +297,7 @@ public class EntityAbyssalZombie extends EntityMob implements ICoraliumEntity {
 	{
 		super.onKillEntity(par1EntityLivingBase);
 
-		if (worldObj.difficultySetting == EnumDifficulty.NORMAL || worldObj.difficultySetting == EnumDifficulty.HARD
+		if (worldObj.getDifficulty() == EnumDifficulty.NORMAL || worldObj.getDifficulty() == EnumDifficulty.HARD
 				&& par1EntityLivingBase instanceof EntityZombie) {
 
 			if (rand.nextBoolean())
@@ -310,15 +306,15 @@ public class EntityAbyssalZombie extends EntityMob implements ICoraliumEntity {
 			EntityAbyssalZombie EntityDephsZombie = new EntityAbyssalZombie(worldObj);
 			EntityDephsZombie.copyLocationAndAnglesFrom(par1EntityLivingBase);
 			worldObj.removeEntity(par1EntityLivingBase);
-			EntityDephsZombie.onSpawnWithEgg((IEntityLivingData)null);
+			EntityDephsZombie.onInitialSpawn(worldObj.getDifficultyForLocation(new BlockPos(EntityDephsZombie)), (IEntityLivingData)null);
 
 			if (par1EntityLivingBase.isChild())
 				EntityDephsZombie.setChild(true);
 
 			worldObj.spawnEntityInWorld(EntityDephsZombie);
-			worldObj.playAuxSFXAtEntity((EntityPlayer)null, 1016, (int)posX, (int)posY, (int)posZ, 0);
+			worldObj.playAuxSFXAtEntity((EntityPlayer)null, 1016, new BlockPos(posX, posY, posZ), 0);
 		}
-		else if (worldObj.difficultySetting == EnumDifficulty.NORMAL || worldObj.difficultySetting == EnumDifficulty.HARD
+		else if (worldObj.getDifficulty() == EnumDifficulty.NORMAL || worldObj.getDifficulty() == EnumDifficulty.HARD
 				&& par1EntityLivingBase instanceof EntityPlayer) {
 
 			if (rand.nextBoolean())
@@ -327,25 +323,25 @@ public class EntityAbyssalZombie extends EntityMob implements ICoraliumEntity {
 			EntityAbyssalZombie EntityDephsZombie = new EntityAbyssalZombie(worldObj);
 			EntityDephsZombie.copyLocationAndAnglesFrom(par1EntityLivingBase);
 			worldObj.removeEntity(par1EntityLivingBase);
-			EntityDephsZombie.onSpawnWithEgg((IEntityLivingData)null);
+			EntityDephsZombie.onInitialSpawn(worldObj.getDifficultyForLocation(new BlockPos(EntityDephsZombie)), (IEntityLivingData)null);
 
 			if (par1EntityLivingBase.isChild())
 				EntityDephsZombie.setChild(true);
 
 			worldObj.spawnEntityInWorld(EntityDephsZombie);
-			worldObj.playAuxSFXAtEntity((EntityPlayer)null, 1016, (int)posX, (int)posY, (int)posZ, 0);
+			worldObj.playAuxSFXAtEntity((EntityPlayer)null, 1016, new BlockPos(posX, posY, posZ), 0);
 		}
 	}
 
 	@Override
-	public IEntityLivingData onSpawnWithEgg(IEntityLivingData par1EntityLivingData)
+	public IEntityLivingData onInitialSpawn(DifficultyInstance difficulty, IEntityLivingData par1EntityLivingData)
 	{
-		Object data = super.onSpawnWithEgg(par1EntityLivingData);
+		Object data = super.onInitialSpawn(difficulty, par1EntityLivingData);
 
 		if (worldObj.provider instanceof WorldProviderEnd)
 			setZombieType(2);
 
-		float f = worldObj.func_147462_b(posX, posY, posZ);
+		float f = difficulty.getClampedAdditionalDifficulty();
 		setCanPickUpLoot(rand.nextFloat() < 0.55F * f);
 
 		if (data == null)
@@ -359,8 +355,8 @@ public class EntityAbyssalZombie extends EntityMob implements ICoraliumEntity {
 				setChild(true);
 		}
 
-		addRandomArmor();
-		enchantEquipment();
+		setEquipmentBasedOnDifficulty(difficulty);
+		setEnchantmentBasedOnDifficulty(difficulty);
 
 		if (getEquipmentInSlot(4) == null)
 		{

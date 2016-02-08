@@ -15,7 +15,10 @@ import java.util.List;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
+import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.client.renderer.WorldRenderer;
+import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.client.settings.KeyBinding;
 
 import org.lwjgl.input.Keyboard;
@@ -41,7 +44,7 @@ public final class GuiRenderHelper
 			int var5 = 0;
 			int var6;
 			int var7;
-			FontRenderer fontRenderer = Minecraft.getMinecraft().fontRenderer;
+			FontRenderer fontRenderer = Minecraft.getMinecraft().fontRendererObj;
 			for (var6 = 0; var6 < tooltipData.size(); ++var6) {
 				var7 = fontRenderer.getStringWidth(tooltipData.get(var6));
 				if (var7 > var5)
@@ -79,46 +82,47 @@ public final class GuiRenderHelper
 		GL11.glColor4f(1F, 1F, 1F, 1F);
 	}
 
-	public static void drawGradientRect(int par1, int par2, float z, int par3, int par4, int par5, int par6) {
-		float var7 = (par5 >> 24 & 255) / 255F;
-		float var8 = (par5 >> 16 & 255) / 255F;
-		float var9 = (par5 >> 8 & 255) / 255F;
-		float var10 = (par5 & 255) / 255F;
-		float var11 = (par6 >> 24 & 255) / 255F;
-		float var12 = (par6 >> 16 & 255) / 255F;
-		float var13 = (par6 >> 8 & 255) / 255F;
-		float var14 = (par6 & 255) / 255F;
-		GL11.glDisable(GL11.GL_TEXTURE_2D);
-		GL11.glEnable(GL11.GL_BLEND);
-		GL11.glDisable(GL11.GL_ALPHA_TEST);
-		GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
-		GL11.glShadeModel(GL11.GL_SMOOTH);
-		Tessellator var15 = Tessellator.instance;
-		var15.startDrawingQuads();
-		var15.setColorRGBA_F(var8, var9, var10, var7);
-		var15.addVertex(par3, par2, z);
-		var15.addVertex(par1, par2, z);
-		var15.setColorRGBA_F(var12, var13, var14, var11);
-		var15.addVertex(par1, par4, z);
-		var15.addVertex(par3, par4, z);
-		var15.draw();
-		GL11.glShadeModel(GL11.GL_FLAT);
-		GL11.glDisable(GL11.GL_BLEND);
-		GL11.glEnable(GL11.GL_ALPHA_TEST);
-		GL11.glEnable(GL11.GL_TEXTURE_2D);
+	public static void drawGradientRect(int left, int top, float z, int right, int bottom, int startColor, int endColor)
+	{
+		float f = (startColor >> 24 & 255) / 255.0F;
+		float f1 = (startColor >> 16 & 255) / 255.0F;
+		float f2 = (startColor >> 8 & 255) / 255.0F;
+		float f3 = (startColor & 255) / 255.0F;
+		float f4 = (endColor >> 24 & 255) / 255.0F;
+		float f5 = (endColor >> 16 & 255) / 255.0F;
+		float f6 = (endColor >> 8 & 255) / 255.0F;
+		float f7 = (endColor & 255) / 255.0F;
+		GlStateManager.disableTexture2D();
+		GlStateManager.enableBlend();
+		GlStateManager.disableAlpha();
+		GlStateManager.tryBlendFuncSeparate(770, 771, 1, 0);
+		GlStateManager.shadeModel(7425);
+		Tessellator tessellator = Tessellator.getInstance();
+		WorldRenderer worldrenderer = tessellator.getWorldRenderer();
+		worldrenderer.begin(7, DefaultVertexFormats.POSITION_COLOR);
+		worldrenderer.pos(right, top, z).color(f1, f2, f3, f).endVertex();
+		worldrenderer.pos(left, top, z).color(f1, f2, f3, f).endVertex();
+		worldrenderer.pos(left, bottom, z).color(f5, f6, f7, f4).endVertex();
+		worldrenderer.pos(right, bottom, z).color(f5, f6, f7, f4).endVertex();
+		tessellator.draw();
+		GlStateManager.shadeModel(7424);
+		GlStateManager.disableBlend();
+		GlStateManager.enableAlpha();
+		GlStateManager.enableTexture2D();
 	}
 
-	public static void drawTexturedModalRect(int par1, int par2, float z, int par3, int par4, int par5, int par6) {
-		drawTexturedModalRect(par1, par2, z, par3, par4, par5, par6, 0.00390625F, 0.00390625F);
+	public static void drawTexturedModalRect(int x, int y, float z, int textureX, int textureY, int width, int height) {
+		drawTexturedModalRect(x, y, z, textureX, textureY, width, height, 0.00390625F, 0.00390625F);
 	}
 
-	public static void drawTexturedModalRect(int par1, int par2, float z, int par3, int par4, int par5, int par6, float f, float f1) {
-		Tessellator tessellator = Tessellator.instance;
-		tessellator.startDrawingQuads();
-		tessellator.addVertexWithUV(par1 + 0, par2 + par6, z, (par3 + 0) * f, (par4 + par6) * f1);
-		tessellator.addVertexWithUV(par1 + par5, par2 + par6, z, (par3 + par5) * f, (par4 + par6) * f1);
-		tessellator.addVertexWithUV(par1 + par5, par2 + 0, z, (par3 + par5) * f, (par4 + 0) * f1);
-		tessellator.addVertexWithUV(par1 + 0, par2 + 0, z, (par3 + 0) * f, (par4 + 0) * f1);
+	public static void drawTexturedModalRect(int x, int y, float z, int textureX, int textureY, int width, int height, float f, float f1) {
+		Tessellator tessellator = Tessellator.getInstance();
+		WorldRenderer worldrenderer = tessellator.getWorldRenderer();
+		worldrenderer.begin(7, DefaultVertexFormats.POSITION_TEX);
+		worldrenderer.pos(x + 0, y + height, z).tex((textureX + 0) * f, (textureY + height) * f1).endVertex();
+		worldrenderer.pos(x + width, y + height, z).tex((textureX + width) * f, (textureY + height) * f1).endVertex();
+		worldrenderer.pos(x + width, y + 0, z).tex((textureX + width) * f, (textureY + 0) * f1).endVertex();
+		worldrenderer.pos(x + 0, y + 0, z).tex((textureX + 0) * f, (textureY + 0) * f1).endVertex();
 		tessellator.draw();
 	}
 

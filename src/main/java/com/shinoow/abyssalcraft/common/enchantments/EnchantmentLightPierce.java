@@ -16,6 +16,7 @@ import net.minecraft.enchantment.EnchantmentDamage;
 import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.item.ItemAxe;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.ResourceLocation;
 
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
 
@@ -23,7 +24,7 @@ public class EnchantmentLightPierce extends EnchantmentDamage {
 
 	public EnchantmentLightPierce(int par1)
 	{
-		super(par1, 5, 3);
+		super(par1, new ResourceLocation("abyssalcraft", "light_pierce"), 5, 3);
 	}
 
 	@Override
@@ -45,7 +46,7 @@ public class EnchantmentLightPierce extends EnchantmentDamage {
 	}
 
 	@Override
-	public float func_152376_a(int par1, EnumCreatureAttribute par2CreatureAttribute)
+	public float calcDamageByCreature(int par1, EnumCreatureAttribute par2CreatureAttribute)
 	{
 		return par2CreatureAttribute == AbyssalCraftAPI.SHADOW ? par1 * 2.5F : 0.0F;
 	}

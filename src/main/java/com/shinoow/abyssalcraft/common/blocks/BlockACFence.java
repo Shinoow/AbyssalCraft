@@ -14,33 +14,26 @@ package com.shinoow.abyssalcraft.common.blocks;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockFence;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IIconRegister;
-import net.minecraft.world.World;
+import net.minecraft.util.BlockPos;
+import net.minecraft.world.IBlockAccess;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-
 public class BlockACFence extends BlockFence {
 
-	private String fenceIconName;
-
-	public BlockACFence(String par2, Material par3Material, String par4, int par5) {
-		super(par2, par3Material);
-		fenceIconName = par2;
+	public BlockACFence(Material par3Material, String par4, int par5) {
+		super(par3Material);
 		setCreativeTab(AbyssalCraft.tabDecoration);
 		this.setHarvestLevel(par4, par5);
 	}
 
-	public BlockACFence(String par2, Material par3Material) {
-		super(par2, par3Material);
-		fenceIconName = par2;
+	public BlockACFence(Material par3Material) {
+		super(par3Material);
 		setCreativeTab(AbyssalCraft.tabDecoration);
 	}
 
 	@Override
-	public boolean canPlaceTorchOnTop(World world, int x, int y, int z) {
+	public boolean canPlaceTorchOnTop(IBlockAccess world, BlockPos pos) {
 		return true;
 	}
 
@@ -49,9 +42,9 @@ public class BlockACFence extends BlockFence {
 				|| par0 == AbyssalCraft.cstonebrickfence || par0 == AbyssalCraft.DrTfence || par0 == AbyssalCraft.ethaxiumfence || par0 == AbyssalCraft.darkethaxiumfence;
 	}
 
-	@Override
-	@SideOnly(Side.CLIENT)
-	public void registerBlockIcons(IIconRegister par1IconRegister) {
-		blockIcon = par1IconRegister.registerIcon(AbyssalCraft.modid + ":" + fenceIconName);
-	}
+	//	@Override
+	//	@SideOnly(Side.CLIENT)
+	//	public void registerBlockIcons(IIconRegister par1IconRegister) {
+	//		blockIcon = par1IconRegister.registerIcon(AbyssalCraft.modid + ":" + fenceIconName);
+	//	}
 }

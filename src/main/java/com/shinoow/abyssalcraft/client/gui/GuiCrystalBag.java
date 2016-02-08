@@ -41,7 +41,7 @@ public class GuiCrystalBag extends GuiContainer
 	@Override
 	protected void drawGuiContainerForegroundLayer(int par1, int par2)
 	{
-		String s = inventory.hasCustomInventoryName() ? inventory.getInventoryName() : I18n.format(inventory.getInventoryName());
+		String s = inventory.hasCustomName() ? inventory.getName() : I18n.format(inventory.getName());
 		fontRendererObj.drawString(s, 6, 6, 4210752);
 		fontRendererObj.drawString(I18n.format("container.inventory"), 6, ySize - 102 + 4, 4210752);
 	}

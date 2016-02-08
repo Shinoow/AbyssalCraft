@@ -1,0 +1,8 @@
+{
+	"variants": {
+		"facing=north": { "model": "abyssalcraft:crystallizer" },
+        "facing=south": { "model": "abyssalcraft:crystallizer", "y": 180 },
+        "facing=west":  { "model": "abyssalcraft:crystallizer", "y": 270 },
+        "facing=east":  { "model": "abyssalcraft:crystallizer", "y": 90 }
+	}
+}

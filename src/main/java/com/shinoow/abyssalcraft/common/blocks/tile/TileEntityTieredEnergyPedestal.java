@@ -19,11 +19,13 @@ import net.minecraft.network.NetworkManager;
 import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.EnumParticleTypes;
+import net.minecraft.util.ITickable;
 
 import com.shinoow.abyssalcraft.api.energy.IEnergyContainer;
 import com.shinoow.abyssalcraft.api.energy.IEnergyTransporter;
 
-public class TileEntityTieredEnergyPedestal extends TileEntity implements IEnergyContainer {
+public class TileEntityTieredEnergyPedestal extends TileEntity implements IEnergyContainer, ITickable {
 
 	private ItemStack item;
 	private int rot;
@@ -56,36 +58,35 @@ public class TileEntityTieredEnergyPedestal extends TileEntity implements IEnerg
 	public Packet getDescriptionPacket() {
 		NBTTagCompound nbtTag = new NBTTagCompound();
 		writeToNBT(nbtTag);
-		return new S35PacketUpdateTileEntity(xCoord, yCoord, zCoord, 1, nbtTag);
+		return new S35PacketUpdateTileEntity(pos, 1, nbtTag);
 	}
 
 	@Override
 	public void onDataPacket(NetworkManager net, S35PacketUpdateTileEntity packet)
 	{
-		readFromNBT(packet.func_148857_g());
+		readFromNBT(packet.getNbtCompound());
 	}
 
 	@Override
-	public void updateEntity()
+	public void update()
 	{
-		super.updateEntity();
 		if(rot == 360)
 			rot = 0;
 		if(item != null)
 			rot++;
 
-		if(worldObj.canBlockSeeTheSky(xCoord, yCoord, zCoord))
+		if(worldObj.canBlockSeeSky(pos))
 			if(rand.nextInt(40) == 0 && getContainedEnergy() < getMaxEnergy()){
 				if(worldObj.isDaytime()){
 					addEnergy(1);
-					worldObj.spawnParticle("smoke", xCoord + 0.5, yCoord + 0.95, zCoord + 0.5, 0, 0, 0);
+					worldObj.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, pos.getX() + 0.5, pos.getY() + 0.95, pos.getZ() + 0.5, 0, 0, 0);
 				} else {
 					if(worldObj.getCurrentMoonPhaseFactor() == 1)
 						addEnergy(3);
 					else if(worldObj.getCurrentMoonPhaseFactor() == 0)
 						addEnergy(1);
 					else addEnergy(2);
-					worldObj.spawnParticle("smoke", xCoord + 0.5, yCoord + 0.95, zCoord + 0.5, 0, 0, 0);
+					worldObj.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, pos.getX() + 0.5, pos.getY() + 0.95, pos.getZ() + 0.5, 0, 0, 0);
 				}
 				if(getContainedEnergy() > getMaxEnergy())
 					energy = getMaxEnergy();
@@ -119,7 +120,7 @@ public class TileEntityTieredEnergyPedestal extends TileEntity implements IEnerg
 	@Override
 	public int getMaxEnergy() {
 		int base = 5000;
-		switch(worldObj.getBlockMetadata(xCoord, yCoord, zCoord)){
+		switch(getBlockMetadata()){
 		case 0:
 			return  (int) (base * 1.5);
 		case 1:
@@ -136,7 +137,7 @@ public class TileEntityTieredEnergyPedestal extends TileEntity implements IEnerg
 	@Override
 	public void addEnergy(float energy) {
 		int multiplier = 1;
-		switch(worldObj.getBlockMetadata(xCoord, yCoord, zCoord)){
+		switch(getBlockMetadata()){
 		case 0:
 			multiplier = 2;
 			break;

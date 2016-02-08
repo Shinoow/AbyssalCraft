@@ -16,12 +16,11 @@ import java.util.Random;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.init.Blocks;
+import net.minecraft.util.BlockPos;
 import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.gen.feature.WorldGenerator;
-
-import com.shinoow.abyssalcraft.common.blocks.BlockAntiliquid;
 
 public class WorldGenAntimatterLake extends WorldGenerator
 {
@@ -33,95 +32,82 @@ public class WorldGenAntimatterLake extends WorldGenerator
 	}
 
 	@Override
-	public boolean generate(World par1World, Random par2Random, int par3, int par4, int par5)
+	public boolean generate(World worldIn, Random rand, BlockPos position)
 	{
-		par3 -= 8;
-
-		for (par5 -= 8; par4 > 5 && par1World.isAirBlock(par3, par4, par5); --par4)
+		for (position = position.add(-8, 0, -8); position.getY() > 5 && worldIn.isAirBlock(position); position = position.down())
 			;
 
-		if (par4 <= 4)
+		if (position.getY() <= 4)
 			return false;
 		else
 		{
-			par4 -= 4;
+			position = position.down(4);
 			boolean[] aboolean = new boolean[2048];
-			int l = par2Random.nextInt(4) + 4;
-			int i1;
+			int i = rand.nextInt(4) + 4;
 
-			for (i1 = 0; i1 < l; ++i1)
+			for (int j = 0; j < i; ++j)
 			{
-				double d0 = par2Random.nextDouble() * 6.0D + 3.0D;
-				double d1 = par2Random.nextDouble() * 4.0D + 2.0D;
-				double d2 = par2Random.nextDouble() * 6.0D + 3.0D;
-				double d3 = par2Random.nextDouble() * (16.0D - d0 - 2.0D) + 1.0D + d0 / 2.0D;
-				double d4 = par2Random.nextDouble() * (8.0D - d1 - 4.0D) + 2.0D + d1 / 2.0D;
-				double d5 = par2Random.nextDouble() * (16.0D - d2 - 2.0D) + 1.0D + d2 / 2.0D;
+				double d0 = rand.nextDouble() * 6.0D + 3.0D;
+				double d1 = rand.nextDouble() * 4.0D + 2.0D;
+				double d2 = rand.nextDouble() * 6.0D + 3.0D;
+				double d3 = rand.nextDouble() * (16.0D - d0 - 2.0D) + 1.0D + d0 / 2.0D;
+				double d4 = rand.nextDouble() * (8.0D - d1 - 4.0D) + 2.0D + d1 / 2.0D;
+				double d5 = rand.nextDouble() * (16.0D - d2 - 2.0D) + 1.0D + d2 / 2.0D;
 
-				for (int j1 = 1; j1 < 15; ++j1)
-					for (int k1 = 1; k1 < 15; ++k1)
-						for (int l1 = 1; l1 < 7; ++l1)
+				for (int l = 1; l < 15; ++l)
+					for (int i1 = 1; i1 < 15; ++i1)
+						for (int j1 = 1; j1 < 7; ++j1)
 						{
-							double d6 = (j1 - d3) / (d0 / 2.0D);
-							double d7 = (l1 - d4) / (d1 / 2.0D);
-							double d8 = (k1 - d5) / (d2 / 2.0D);
+							double d6 = (l - d3) / (d0 / 2.0D);
+							double d7 = (j1 - d4) / (d1 / 2.0D);
+							double d8 = (i1 - d5) / (d2 / 2.0D);
 							double d9 = d6 * d6 + d7 * d7 + d8 * d8;
 
 							if (d9 < 1.0D)
-								aboolean[(j1 * 16 + k1) * 8 + l1] = true;
+								aboolean[(l * 16 + i1) * 8 + j1] = true;
 						}
 			}
 
-			int i2;
-			int j2;
-			boolean flag;
-
-			for (i1 = 0; i1 < 16; ++i1)
-				for (j2 = 0; j2 < 16; ++j2)
-					for (i2 = 0; i2 < 8; ++i2)
+			for (int k1 = 0; k1 < 16; ++k1)
+				for (int l2 = 0; l2 < 16; ++l2)
+					for (int k = 0; k < 8; ++k)
 					{
-						flag = !aboolean[(i1 * 16 + j2) * 8 + i2] && (i1 < 15 && aboolean[((i1 + 1) * 16 + j2) * 8 + i2] || i1 > 0 && aboolean[((i1 - 1) * 16 + j2) * 8 + i2] || j2 < 15 && aboolean[(i1 * 16 + j2 + 1) * 8 + i2] || j2 > 0 && aboolean[(i1 * 16 + j2 - 1) * 8 + i2] || i2 < 7 && aboolean[(i1 * 16 + j2) * 8 + i2 + 1] || i2 > 0 && aboolean[(i1 * 16 + j2) * 8 + i2 - 1]);
+						boolean flag = !aboolean[(k1 * 16 + l2) * 8 + k] && (k1 < 15 && aboolean[((k1 + 1) * 16 + l2) * 8 + k] || k1 > 0 && aboolean[((k1 - 1) * 16 + l2) * 8 + k] || l2 < 15 && aboolean[(k1 * 16 + l2 + 1) * 8 + k] || l2 > 0 && aboolean[(k1 * 16 + l2 - 1) * 8 + k] || k < 7 && aboolean[(k1 * 16 + l2) * 8 + k + 1] || k > 0 && aboolean[(k1 * 16 + l2) * 8 + k - 1]);
 
 						if (flag)
 						{
-							Material material = par1World.getBlock(par3 + i1, par4 + i2, par5 + j2).getMaterial();
+							Material material = worldIn.getBlockState(position.add(k1, k, l2)).getBlock().getMaterial();
 
-							if (i2 >= 4 && material.isLiquid())
+							if (k >= 4 && material.isLiquid())
 								return false;
 
-							if (i2 < 4 && !material.isSolid() && par1World.getBlock(par3 + i1, par4 + i2, par5 + j2) != blockIndex)
+							if (k < 4 && !material.isSolid() && worldIn.getBlockState(position.add(k1, k, l2)).getBlock() != blockIndex)
 								return false;
 						}
 					}
 
-			for (i1 = 0; i1 < 16; ++i1)
-				for (j2 = 0; j2 < 16; ++j2)
-					for (i2 = 0; i2 < 8; ++i2)
-						if (aboolean[(i1 * 16 + j2) * 8 + i2])
-							par1World.setBlock(par3 + i1, par4 + i2, par5 + j2, i2 >= 4 ? Blocks.air : blockIndex, 0, 2);
+			for (int l1 = 0; l1 < 16; ++l1)
+				for (int i3 = 0; i3 < 16; ++i3)
+					for (int i4 = 0; i4 < 8; ++i4)
+						if (aboolean[(l1 * 16 + i3) * 8 + i4])
+							worldIn.setBlockState(position.add(l1, i4, i3), i4 >= 4 ? Blocks.air.getDefaultState() : blockIndex.getDefaultState(), 2);
 
-			for (i1 = 0; i1 < 16; ++i1)
-				for (j2 = 0; j2 < 16; ++j2)
-					for (i2 = 4; i2 < 8; ++i2)
-						if (aboolean[(i1 * 16 + j2) * 8 + i2] && par1World.getBlock(par3 + i1, par4 + i2 - 1, par5 + j2) == Blocks.stone && par1World.getSavedLightValue(EnumSkyBlock.Sky, par3 + i1, par4 + i2, par5 + j2) > 0)
+			for (int i2 = 0; i2 < 16; ++i2)
+				for (int j3 = 0; j3 < 16; ++j3)
+					for (int j4 = 4; j4 < 8; ++j4)
+						if (aboolean[(i2 * 16 + j3) * 8 + j4])
 						{
-							BiomeGenBase biomegenbase = par1World.getBiomeGenForCoords(par3 + i1, par5 + j2);
+							BlockPos blockpos = position.add(i2, j4 - 1, j3);
 
-							if (biomegenbase.topBlock == Blocks.stone)
-								par1World.setBlock(par3 + i1, par4 + i2 - 1, par5 + j2, Blocks.stone, 0, 2);
-							else
-								par1World.setBlock(par3 + i1, par4 + i2 - 1, par5 + j2, Blocks.stone, 0, 2);
-						}
+							if (worldIn.getBlockState(blockpos).getBlock() == Blocks.dirt && worldIn.getLightFor(EnumSkyBlock.SKY, position.add(i2, j4, j3)) > 0)
+							{
+								BiomeGenBase biomegenbase = worldIn.getBiomeGenForCoords(blockpos);
 
-			if (blockIndex.getMaterial() == BlockAntiliquid.antimatter)
-				for (i1 = 0; i1 < 16; ++i1)
-					for (j2 = 0; j2 < 16; ++j2)
-						for (i2 = 0; i2 < 8; ++i2)
-						{
-							flag = !aboolean[(i1 * 16 + j2) * 8 + i2] && (i1 < 15 && aboolean[((i1 + 1) * 16 + j2) * 8 + i2] || i1 > 0 && aboolean[((i1 - 1) * 16 + j2) * 8 + i2] || j2 < 15 && aboolean[(i1 * 16 + j2 + 1) * 8 + i2] || j2 > 0 && aboolean[(i1 * 16 + j2 - 1) * 8 + i2] || i2 < 7 && aboolean[(i1 * 16 + j2) * 8 + i2 + 1] || i2 > 0 && aboolean[(i1 * 16 + j2) * 8 + i2 - 1]);
-
-							if (flag && (i2 < 4 || par2Random.nextInt(2) != 0) && par1World.getBlock(par3 + i1, par4 + i2, par5 + j2).getMaterial().isSolid())
-								par1World.setBlock(par3 + i1, par4 + i2, par5 + j2, Blocks.stone, 0, 2);
+								if (biomegenbase.topBlock.getBlock() == Blocks.mycelium)
+									worldIn.setBlockState(blockpos, Blocks.mycelium.getDefaultState(), 2);
+								else
+									worldIn.setBlockState(blockpos, Blocks.grass.getDefaultState(), 2);
+							}
 						}
 
 			return true;

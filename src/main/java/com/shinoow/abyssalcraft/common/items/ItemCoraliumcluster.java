@@ -16,20 +16,22 @@ import java.util.List;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.StatCollector;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 public class ItemCoraliumcluster extends Item {
 
 	public final String gemName;
 
-	public ItemCoraliumcluster(String par2Str) {
+	public ItemCoraliumcluster(String name, String par2Str) {
 		super();
 		gemName = par2Str;
 		maxStackSize = 16;
+		//		GameRegistry.registerItem(this, name);
+		setUnlocalizedName(name);
 		setCreativeTab(AbyssalCraft.tabItems);
 	}
 
@@ -42,5 +44,10 @@ public class ItemCoraliumcluster extends Item {
 	public void addInformation(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, List par3List, boolean par4)
 	{
 		par3List.add(gemName + " Gems");
+	}
+
+	@Override
+	public String getItemStackDisplayName(ItemStack par1ItemStack) {
+		return StatCollector.translateToLocal("item.ccluster.name");
 	}
 }

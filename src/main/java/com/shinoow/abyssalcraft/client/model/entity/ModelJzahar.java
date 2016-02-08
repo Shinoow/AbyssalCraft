@@ -495,16 +495,16 @@ public class ModelJzahar extends ModelBase
 		float f6;
 		float f7;
 
-		if (onGround > -9990.0F)
+		if (swingProgress > -9990.0F)
 		{
-			f6 = onGround;
+			f6 = swingProgress;
 			arm.rotateAngleY += MathHelper.sin(MathHelper.sqrt_float(f6) * (float)Math.PI * 2.0F) * 0.2F;
-			f6 = 1.0F - onGround;
+			f6 = 1.0F - swingProgress;
 			f6 *= f6;
 			f6 *= f6;
 			f6 = 1.0F - f6;
 			f7 = MathHelper.sin(f6 * (float)Math.PI);
-			float f8 = MathHelper.sin(onGround * (float)Math.PI) * 0.75F;
+			float f8 = MathHelper.sin(swingProgress * (float)Math.PI) * 0.75F;
 			arm.rotateAngleX = (float)(arm.rotateAngleX + (f7 * 1.2D + f8));
 			arm.rotateAngleY += MathHelper.sin(MathHelper.sqrt_float(f6) * (float)Math.PI * 2.0F) * 0.2F * 2.0F;
 		}

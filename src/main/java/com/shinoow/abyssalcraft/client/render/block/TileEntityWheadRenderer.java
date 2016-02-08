@@ -11,15 +11,11 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.client.render.block;
 
-import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.OpenGlHelper;
-import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.world.World;
 
 import org.lwjgl.opengl.GL11;
 
@@ -32,7 +28,7 @@ public class TileEntityWheadRenderer extends TileEntitySpecialRenderer {
 	private static final ResourceLocation texture = new ResourceLocation("abyssalcraft:textures/model/depths_ghoul_wilson.png");
 
 	@Override
-	public void renderTileEntityAt(TileEntity te, double x, double y, double z, float scale) {
+	public void renderTileEntityAt(TileEntity te, double x, double y, double z, float partialTicks, int destroyStage) {
 
 		GL11.glPushMatrix();
 		GL11.glTranslatef((float) x + 0.5F, (float) y + 1.5F, (float) z + 0.5F);
@@ -49,14 +45,14 @@ public class TileEntityWheadRenderer extends TileEntitySpecialRenderer {
 		GL11.glPopMatrix();
 	}
 
-	public void renderBlockDGhead(TileEntityWhead tl, World world, int i, int j, int k, Block block) {
-		Tessellator tessellator = Tessellator.instance;
-
-		float f = block.getLightOpacity(world, i, j, k);
-		int l = world.getLightBrightnessForSkyBlocks(i, j, k, 0);
-		int l1 = l % 65536;
-		int l2 = l / 65536;
-		tessellator.setColorOpaque_F(f, f, f);
-		OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, l1, l2);
-	}
+	//	public void renderBlockDGhead(TileEntityWhead tl, World world, int i, int j, int k, Block block) {
+	//		Tessellator tessellator = Tessellator.instance;
+	//
+	//		float f = block.getLightOpacity(world, i, j, k);
+	//		int l = world.getLightBrightnessForSkyBlocks(i, j, k, 0);
+	//		int l1 = l % 65536;
+	//		int l2 = l / 65536;
+	//		tessellator.setColorOpaque_F(f, f, f);
+	//		OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, l1, l2);
+	//	}
 }

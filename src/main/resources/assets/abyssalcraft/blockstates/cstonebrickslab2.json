@@ -1,0 +1,6 @@
+{
+	"variants": {
+		"variant=false": { "model": "abyssalcraft:cstonebrickslab2" },
+		"variant=true": { "model": "abyssalcraft:cstonebrickslab2" }
+	}
+}

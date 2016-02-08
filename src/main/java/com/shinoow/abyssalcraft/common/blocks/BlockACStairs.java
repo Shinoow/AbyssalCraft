@@ -19,14 +19,14 @@ import com.shinoow.abyssalcraft.AbyssalCraft;
 public class BlockACStairs extends BlockStairs {
 
 	public BlockACStairs(Block par1Block, String tooltype, int harvestlevel){
-		super(par1Block, 0);
+		super(par1Block.getDefaultState());
 		setLightOpacity(0);
 		setCreativeTab(AbyssalCraft.tabBlock);
 		setHarvestLevel(tooltype, harvestlevel);
 	}
 
 	public BlockACStairs(Block par1Block){
-		super(par1Block, 0);
+		super(par1Block.getDefaultState());
 		setLightOpacity(0);
 		setCreativeTab(AbyssalCraft.tabBlock);
 	}

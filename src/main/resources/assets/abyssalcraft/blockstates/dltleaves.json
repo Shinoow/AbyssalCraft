@@ -1,0 +1,9 @@
+{
+	"variants": {
+		"normal": { "model": "abyssalcraft:dltleaves" },
+        "check_decay=false,decayable=false": { "model": "abyssalcraft:dltleaves" },
+        "check_decay=true,decayable=false": { "model": "abyssalcraft:dltleaves" },
+        "check_decay=true,decayable=true": { "model": "abyssalcraft:dltleaves" },
+        "check_decay=false,decayable=true": { "model": "abyssalcraft:dltleaves" }
+	}
+}

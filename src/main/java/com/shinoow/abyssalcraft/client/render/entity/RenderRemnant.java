@@ -12,17 +12,16 @@
 package com.shinoow.abyssalcraft.client.render.entity;
 
 import net.minecraft.client.renderer.entity.RenderLiving;
-import net.minecraft.entity.Entity;
+import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import com.shinoow.abyssalcraft.client.model.entity.ModelRemnant;
 import com.shinoow.abyssalcraft.common.entity.EntityRemnant;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-
 @SideOnly(Side.CLIENT)
-public class RenderRemnant extends RenderLiving {
+public class RenderRemnant extends RenderLiving<EntityRemnant> {
 
 	private static ResourceLocation defaultTexture = new ResourceLocation("abyssalcraft:textures/model/remnant/Remnant.png");
 	private static final ResourceLocation remnantTexture = new ResourceLocation("abyssalcraft:textures/model/remnant/Remnant.png");
@@ -33,23 +32,24 @@ public class RenderRemnant extends RenderLiving {
 	private static final ResourceLocation bankerTexture = new ResourceLocation("abyssalcraft:textures/model/remnant/Remnant_banker.png");
 	private static final ResourceLocation masterBlacksmithTexture = new ResourceLocation("abyssalcraft:textures/model/remnant/Remnant_master_blacksmith.png");
 
-	public RenderRemnant()
+	public RenderRemnant(RenderManager manager)
 	{
-		super(new ModelRemnant(), 0.5F);
+		super(manager, new ModelRemnant(), 0.5F);
 	}
 
-	public void doRender(EntityRemnant entity, double par2, double par4, double par6, float par8, float par9)
-	{
-		super.doRender(entity, par2, par4, par6, par8, par9);
-	}
+	//	public void doRender(EntityRemnant entity, double par2, double par4, double par6, float par8, float par9)
+	//	{
+	//		super.doRender(entity, par2, par4, par6, par8, par9);
+	//	}
+	//
+	//	@Override
+	//	public void doRender(Entity par1Entity, double par2, double par4, double par6, float par8, float par9)
+	//	{
+	//		doRender((EntityRemnant)par1Entity, par2, par4, par6, par8, par9);
+	//	}
 
 	@Override
-	public void doRender(Entity par1Entity, double par2, double par4, double par6, float par8, float par9)
-	{
-		doRender((EntityRemnant)par1Entity, par2, par4, par6, par8, par9);
-	}
-
-	protected ResourceLocation getRemnantTexture(EntityRemnant entity){
+	protected ResourceLocation getEntityTexture(EntityRemnant entity){
 
 		switch(entity.getProfession()){
 		case 0:
@@ -76,11 +76,5 @@ public class RenderRemnant extends RenderLiving {
 		}
 
 		return defaultTexture;
-	}
-
-	@Override
-	protected ResourceLocation getEntityTexture(Entity entity) {
-
-		return getRemnantTexture((EntityRemnant)entity);
 	}
 }

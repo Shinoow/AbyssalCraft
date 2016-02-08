@@ -38,6 +38,7 @@ import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.StatCollector;
 import net.minecraft.util.Tuple;
+import net.minecraftforge.oredict.OreDictionary;
 
 public class GuiNecronomiconEntry extends GuiNecronomicon {
 
@@ -300,47 +301,187 @@ public class GuiNecronomiconEntry extends GuiNecronomicon {
 					renderItem(k + 24 +i*21, b0 + 73,((CraftingStack)icon).getThirdArray()[i], x, y);
 				}
 			}
-			if(icon instanceof Tuple){
+			if(icon instanceof Tuple)
 				if(((Tuple) icon).getFirst() != null){
 					if(((Tuple) icon).getFirst() instanceof ItemStack){
-						writeText(1, text1, 50);
-						renderItem(k + 60, b0 + 28,(ItemStack)((Tuple) icon).getFirst(), x, y);
-					}
-					else if(((Tuple) icon).getFirst() instanceof ResourceLocation){
-						writeText(1, text1, 100);
-						GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-						mc.renderEngine.bindTexture((ResourceLocation)((Tuple) icon).getFirst());
-						drawTexturedModalRect(k, b0, 0, 0, 256, 256);
-					}
-					else if(((Tuple) icon).getFirst() instanceof CraftingStack){
-						writeText(1, text1, 95);
-						GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-						mc.renderEngine.bindTexture(NecronomiconResources.CRAFTING);
-						drawTexturedModalRect(k, b0, 0, 0, 256, 256);
-						boolean unicode = fontRendererObj.getUnicodeFlag();
-						fontRendererObj.setUnicodeFlag(false);
-						renderItem(k + 93, b0 + 52,((CraftingStack)((Tuple) icon).getFirst()).getOutput(), x, y);
-						fontRendererObj.setUnicodeFlag(unicode);
-						for(int i = 0; i <= 2; i++){
-							renderItem(k + 24 +i*21, b0 + 31,((CraftingStack)((Tuple) icon).getFirst()).getFirstArray()[i], x, y);
-							renderItem(k + 24 +i*21, b0 + 52,((CraftingStack)((Tuple) icon).getFirst()).getSecondArray()[i], x, y);
-							renderItem(k + 24 +i*21, b0 + 73,((CraftingStack)((Tuple) icon).getFirst()).getThirdArray()[i], x, y);
+						if(((Tuple) icon).getSecond() == null){
+							writeText(1, text1, 50);
+							renderItem(k + 60, b0 + 28,(ItemStack)((Tuple) icon).getFirst(), x, y);
+						} else {
+							int n = 123;
+							if(((Tuple) icon).getSecond() instanceof ItemStack){
+								writeText(1, text1, 50);
+								writeText(2, text2, 50);
+								renderItem(k + 60, b0 + 28,(ItemStack)((Tuple) icon).getFirst(), x, y);
+								renderItem(k + 60 + n, b0 + 28,(ItemStack)((Tuple) icon).getSecond(), x, y);
+							}
+							else if(((Tuple) icon).getSecond() instanceof ResourceLocation){
+								writeText(1, text1, 50);
+								writeText(2, text2, 100);
+								renderItem(k + 60, b0 + 28,(ItemStack)((Tuple) icon).getFirst(), x, y);
+								GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+								mc.renderEngine.bindTexture((ResourceLocation)((Tuple) icon).getSecond());
+								drawTexturedModalRect(k + n, b0, 0, 0, 256, 256);
+							}
+							else if(((Tuple) icon).getSecond() instanceof CraftingStack){
+								writeText(1, text1, 50);
+								writeText(2, text2, 95);
+								renderItem(k + 60, b0 + 28,(ItemStack)((Tuple) icon).getFirst(), x, y);
+								GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+								mc.renderEngine.bindTexture(NecronomiconResources.CRAFTING);
+								drawTexturedModalRect(k + n, b0, 0, 0, 256, 256);
+								boolean unicode = fontRendererObj.getUnicodeFlag();
+								fontRendererObj.setUnicodeFlag(false);
+								renderItem(k + 93 + n, b0 + 52,((CraftingStack)((Tuple) icon).getSecond()).getOutput(), x, y);
+								fontRendererObj.setUnicodeFlag(unicode);
+								for(int i = 0; i <= 2; i++){
+									renderItem(k + 24 + n +i*21, b0 + 31,((CraftingStack)((Tuple) icon).getSecond()).getFirstArray()[i], x, y);
+									renderItem(k + 24 + n +i*21, b0 + 52,((CraftingStack)((Tuple) icon).getSecond()).getSecondArray()[i], x, y);
+									renderItem(k + 24 + n +i*21, b0 + 73,((CraftingStack)((Tuple) icon).getSecond()).getThirdArray()[i], x, y);
+								}
+							}
 						}
 					}
-				} else writeText(1, text1);
-				if(((Tuple) icon).getSecond() != null){
+					else if(((Tuple) icon).getFirst() instanceof ResourceLocation){
+						if(((Tuple) icon).getSecond() == null){
+							writeText(1, text1, 100);
+							GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+							mc.renderEngine.bindTexture((ResourceLocation)((Tuple) icon).getFirst());
+							drawTexturedModalRect(k, b0, 0, 0, 256, 256);
+						} else {
+							int n = 123;
+							if(((Tuple) icon).getSecond() instanceof ItemStack){
+								writeText(2, text2, 50);
+								writeText(1, text1, 100);
+								GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+								mc.renderEngine.bindTexture((ResourceLocation)((Tuple) icon).getFirst());
+								drawTexturedModalRect(k, b0, 0, 0, 256, 256);
+								renderItem(k + 60 + n, b0 + 28,(ItemStack)((Tuple) icon).getSecond(), x, y);
+							}
+							else if(((Tuple) icon).getSecond() instanceof ResourceLocation){
+								writeText(1, text1, 100);
+								writeText(2, text2, 100);
+								GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+								mc.renderEngine.bindTexture((ResourceLocation)((Tuple) icon).getFirst());
+								drawTexturedModalRect(k, b0, 0, 0, 256, 256);
+								mc.renderEngine.bindTexture((ResourceLocation)((Tuple) icon).getSecond());
+								drawTexturedModalRect(k + n, b0, 0, 0, 256, 256);
+							}
+							else if(((Tuple) icon).getSecond() instanceof CraftingStack){
+								writeText(1, text1, 100);
+								writeText(2, text2, 95);
+								GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+								mc.renderEngine.bindTexture((ResourceLocation)((Tuple) icon).getFirst());
+								drawTexturedModalRect(k, b0, 0, 0, 256, 256);
+								mc.renderEngine.bindTexture(NecronomiconResources.CRAFTING);
+								drawTexturedModalRect(k + n, b0, 0, 0, 256, 256);
+								boolean unicode = fontRendererObj.getUnicodeFlag();
+								fontRendererObj.setUnicodeFlag(false);
+								renderItem(k + 93 + n, b0 + 52,((CraftingStack)((Tuple) icon).getSecond()).getOutput(), x, y);
+								fontRendererObj.setUnicodeFlag(unicode);
+								for(int i = 0; i <= 2; i++){
+									renderItem(k + 24 + n +i*21, b0 + 31,((CraftingStack)((Tuple) icon).getSecond()).getFirstArray()[i], x, y);
+									renderItem(k + 24 + n +i*21, b0 + 52,((CraftingStack)((Tuple) icon).getSecond()).getSecondArray()[i], x, y);
+									renderItem(k + 24 + n +i*21, b0 + 73,((CraftingStack)((Tuple) icon).getSecond()).getThirdArray()[i], x, y);
+								}
+							}
+						}
+					}
+					else if(((Tuple) icon).getFirst() instanceof CraftingStack)
+						if(((Tuple) icon).getSecond() == null){
+							writeText(1, text1, 95);
+							GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+							mc.renderEngine.bindTexture(NecronomiconResources.CRAFTING);
+							drawTexturedModalRect(k, b0, 0, 0, 256, 256);
+							boolean unicode = fontRendererObj.getUnicodeFlag();
+							fontRendererObj.setUnicodeFlag(false);
+							renderItem(k + 93, b0 + 52,((CraftingStack)((Tuple) icon).getFirst()).getOutput(), x, y);
+							fontRendererObj.setUnicodeFlag(unicode);
+							for(int i = 0; i <= 2; i++){
+								renderItem(k + 24 +i*21, b0 + 31,((CraftingStack)((Tuple) icon).getFirst()).getFirstArray()[i], x, y);
+								renderItem(k + 24 +i*21, b0 + 52,((CraftingStack)((Tuple) icon).getFirst()).getSecondArray()[i], x, y);
+								renderItem(k + 24 +i*21, b0 + 73,((CraftingStack)((Tuple) icon).getFirst()).getThirdArray()[i], x, y);
+							}
+						} else {
+							int n = 123;
+							if(((Tuple) icon).getSecond() instanceof ItemStack){
+								writeText(1, text1, 95);
+								writeText(2, text2, 50);
+								GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+								mc.renderEngine.bindTexture(NecronomiconResources.CRAFTING);
+								drawTexturedModalRect(k, b0, 0, 0, 256, 256);
+								boolean unicode = fontRendererObj.getUnicodeFlag();
+								fontRendererObj.setUnicodeFlag(false);
+								renderItem(k + 93, b0 + 52,((CraftingStack)((Tuple) icon).getFirst()).getOutput(), x, y);
+								fontRendererObj.setUnicodeFlag(unicode);
+								for(int i = 0; i <= 2; i++){
+									renderItem(k + 24 +i*21, b0 + 31,((CraftingStack)((Tuple) icon).getFirst()).getFirstArray()[i], x, y);
+									renderItem(k + 24 +i*21, b0 + 52,((CraftingStack)((Tuple) icon).getFirst()).getSecondArray()[i], x, y);
+									renderItem(k + 24 +i*21, b0 + 73,((CraftingStack)((Tuple) icon).getFirst()).getThirdArray()[i], x, y);
+								}
+								renderItem(k + 60 + n, b0 + 28,(ItemStack)((Tuple) icon).getSecond(), x, y);
+							}
+							else if(((Tuple) icon).getSecond() instanceof ResourceLocation){
+								writeText(1, text1, 95);
+								writeText(2, text2, 100);
+								GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+								mc.renderEngine.bindTexture(NecronomiconResources.CRAFTING);
+								drawTexturedModalRect(k, b0, 0, 0, 256, 256);
+								boolean unicode = fontRendererObj.getUnicodeFlag();
+								fontRendererObj.setUnicodeFlag(false);
+								renderItem(k + 93, b0 + 52,((CraftingStack)((Tuple) icon).getFirst()).getOutput(), x, y);
+								fontRendererObj.setUnicodeFlag(unicode);
+								for(int i = 0; i <= 2; i++){
+									renderItem(k + 24 +i*21, b0 + 31,((CraftingStack)((Tuple) icon).getFirst()).getFirstArray()[i], x, y);
+									renderItem(k + 24 +i*21, b0 + 52,((CraftingStack)((Tuple) icon).getFirst()).getSecondArray()[i], x, y);
+									renderItem(k + 24 +i*21, b0 + 73,((CraftingStack)((Tuple) icon).getFirst()).getThirdArray()[i], x, y);
+								}
+								mc.renderEngine.bindTexture((ResourceLocation)((Tuple) icon).getSecond());
+								drawTexturedModalRect(k + n, b0, 0, 0, 256, 256);
+							}
+							else if(((Tuple) icon).getSecond() instanceof CraftingStack){
+								writeText(1, text1, 95);
+								writeText(2, text2, 95);
+								GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+								mc.renderEngine.bindTexture(NecronomiconResources.CRAFTING);
+								drawTexturedModalRect(k, b0, 0, 0, 256, 256);
+								boolean unicode = fontRendererObj.getUnicodeFlag();
+								fontRendererObj.setUnicodeFlag(false);
+								renderItem(k + 93, b0 + 52,((CraftingStack)((Tuple) icon).getFirst()).getOutput(), x, y);
+								fontRendererObj.setUnicodeFlag(unicode);
+								for(int i = 0; i <= 2; i++){
+									renderItem(k + 24 +i*21, b0 + 31,((CraftingStack)((Tuple) icon).getFirst()).getFirstArray()[i], x, y);
+									renderItem(k + 24 +i*21, b0 + 52,((CraftingStack)((Tuple) icon).getFirst()).getSecondArray()[i], x, y);
+									renderItem(k + 24 +i*21, b0 + 73,((CraftingStack)((Tuple) icon).getFirst()).getThirdArray()[i], x, y);
+								}
+								mc.renderEngine.bindTexture(NecronomiconResources.CRAFTING);
+								drawTexturedModalRect(k + n, b0, 0, 0, 256, 256);
+								fontRendererObj.setUnicodeFlag(false);
+								renderItem(k + 93 + n, b0 + 52,((CraftingStack)((Tuple) icon).getSecond()).getOutput(), x, y);
+								fontRendererObj.setUnicodeFlag(unicode);
+								for(int i = 0; i <= 2; i++){
+									renderItem(k + 24 + n +i*21, b0 + 31,((CraftingStack)((Tuple) icon).getSecond()).getFirstArray()[i], x, y);
+									renderItem(k + 24 + n +i*21, b0 + 52,((CraftingStack)((Tuple) icon).getSecond()).getSecondArray()[i], x, y);
+									renderItem(k + 24 + n +i*21, b0 + 73,((CraftingStack)((Tuple) icon).getSecond()).getThirdArray()[i], x, y);
+								}
+							}
+						}
+				} else if(((Tuple) icon).getSecond() != null){
 					int n = 123;
 					if(((Tuple) icon).getSecond() instanceof ItemStack){
+						writeText(1, text1);
 						writeText(2, text2, 50);
 						renderItem(k + 60 + n, b0 + 28,(ItemStack)((Tuple) icon).getSecond(), x, y);
 					}
 					else if(((Tuple) icon).getSecond() instanceof ResourceLocation){
+						writeText(1, text1);
 						writeText(2, text2, 100);
 						GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 						mc.renderEngine.bindTexture((ResourceLocation)((Tuple) icon).getSecond());
 						drawTexturedModalRect(k + n, b0, 0, 0, 256, 256);
 					}
 					else if(((Tuple) icon).getSecond() instanceof CraftingStack){
+						writeText(1, text1);
 						writeText(2, text2, 95);
 						GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 						mc.renderEngine.bindTexture(NecronomiconResources.CRAFTING);
@@ -354,9 +495,12 @@ public class GuiNecronomiconEntry extends GuiNecronomicon {
 							renderItem(k + 24 + n +i*21, b0 + 52,((CraftingStack)((Tuple) icon).getSecond()).getSecondArray()[i], x, y);
 							renderItem(k + 24 + n +i*21, b0 + 73,((CraftingStack)((Tuple) icon).getSecond()).getThirdArray()[i], x, y);
 						}
-					} else writeText(2, text2);
+					}
+				} else {
+					if(pageAmount > limit)
+						writeText(2, text2);
+					writeText(1, text1);
 				}
-			}
 		} else {
 			if(pageAmount > limit)
 				writeText(2, text2);
@@ -394,7 +538,11 @@ public class GuiNecronomiconEntry extends GuiNecronomicon {
 	private ItemStack tooltipStack;
 	public void renderItem(int xPos, int yPos, ItemStack stack, int mx, int my)
 	{
-		RenderItem render = new RenderItem();
+
+		if(stack != null && stack.getItemDamage() == OreDictionary.WILDCARD_VALUE)
+			stack.setItemDamage(0);
+
+		RenderItem render = Minecraft.getMinecraft().getRenderItem();
 		if(mx > xPos && mx < xPos+16 && my > yPos && my < yPos+16)
 			tooltipStack = stack;
 
@@ -404,8 +552,8 @@ public class GuiNecronomiconEntry extends GuiNecronomicon {
 		RenderHelper.enableGUIStandardItemLighting();
 		GL11.glEnable(GL12.GL_RESCALE_NORMAL);
 		GL11.glEnable(GL11.GL_DEPTH_TEST);
-		render.renderItemAndEffectIntoGUI(Minecraft.getMinecraft().fontRenderer, Minecraft.getMinecraft().getTextureManager(), stack, xPos, yPos);
-		render.renderItemOverlayIntoGUI(Minecraft.getMinecraft().fontRenderer, Minecraft.getMinecraft().getTextureManager(), stack, xPos, yPos);
+		render.renderItemAndEffectIntoGUI(stack, xPos, yPos);
+		render.renderItemOverlayIntoGUI(Minecraft.getMinecraft().fontRendererObj, stack, xPos, yPos, null);
 		RenderHelper.disableStandardItemLighting();
 		GL11.glPopMatrix();
 

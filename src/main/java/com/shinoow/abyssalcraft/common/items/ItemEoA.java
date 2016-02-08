@@ -13,20 +13,22 @@ package com.shinoow.abyssalcraft.common.items;
 
 import java.util.List;
 
-import net.minecraft.client.renderer.texture.IIconRegister;
+import com.shinoow.abyssalcraft.AbyssalCraft;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.StatCollector;
 
-import com.shinoow.abyssalcraft.AbyssalCraft;
-
 public class ItemEoA extends Item {
 
 	public ItemEoA() {
 		super();
 		setMaxStackSize(1);
+		//		GameRegistry.registerItem(this, "eoa");
+		setUnlocalizedName("eoa");
+		setCreativeTab(AbyssalCraft.tabItems);
 	}
 
 	@Override
@@ -39,11 +41,5 @@ public class ItemEoA extends Item {
 	@Override
 	public void addInformation(ItemStack is, EntityPlayer player, List l, boolean B){
 		l.add(StatCollector.translateToLocal("tooltip.eoa"));
-	}
-
-	@Override
-	public void registerIcons(IIconRegister par1IconRegister)
-	{
-		itemIcon = par1IconRegister.registerIcon(AbyssalCraft.modid + ":" + this.getUnlocalizedName().substring(5));
 	}
 }

@@ -15,57 +15,55 @@ import java.util.Random;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.block.properties.IProperty;
+import net.minecraft.block.properties.PropertyBool;
+import net.minecraft.block.state.BlockState;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.init.Items;
-import net.minecraft.util.IIcon;
+import net.minecraft.item.Item;
+import net.minecraft.util.BlockPos;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.common.entity.EntityODBcPrimed;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-
 public class BlockODBcore extends Block {
 
-	@SideOnly(Side.CLIENT)
-	private IIcon ODBcTopIcon;
-	@SideOnly(Side.CLIENT)
-	private IIcon ODBcBottomIcon;
-	@SideOnly(Side.CLIENT)
-	private static IIcon iconODBcSideOverlay;
+	public static final PropertyBool EXPLODE = PropertyBool.create("explode");
 
 	public BlockODBcore() {
 		super(Material.iron);
+		setDefaultState(blockState.getBaseState().withProperty(EXPLODE, Boolean.valueOf(false)));
 		setCreativeTab(AbyssalCraft.tabBlock);
 		setHarvestLevel("pickaxe", 3);
 		setBlockBounds(0.25F, 0.0F, 0.25F, 0.75F, 1.0F, 0.75F);
 	}
 
 	@Override
-	public void onBlockAdded(World par1World, int par2, int par3, int par4)
+	public void onBlockAdded(World par1World, BlockPos pos, IBlockState state)
 	{
-		super.onBlockAdded(par1World, par2, par3, par4);
+		super.onBlockAdded(par1World, pos, state);
 
-		if (par1World.isBlockIndirectlyGettingPowered(par2, par3, par4))
+		if (par1World.isBlockPowered(pos))
 		{
-			onBlockDestroyedByPlayer(par1World, par2, par3, par4, 1);
-			par1World.setBlockToAir(par2, par3, par4);
+			onBlockDestroyedByPlayer(par1World, pos, state.withProperty(EXPLODE, Boolean.valueOf(true)));
+			par1World.setBlockToAir(pos);
 		}
 	}
 
 	@Override
-	public void onNeighborBlockChange(World par1World, int par2, int par3, int par4, Block par5Block)
+	public void onNeighborBlockChange(World par1World, BlockPos pos, IBlockState state, Block par5Block)
 	{
-		if (par1World.isBlockIndirectlyGettingPowered(par2, par3, par4))
+		if (par1World.isBlockPowered(pos))
 		{
-			onBlockDestroyedByPlayer(par1World, par2, par3, par4, 1);
-			par1World.setBlockToAir(par2, par3, par4);
+			onBlockDestroyedByPlayer(par1World, pos, state.withProperty(EXPLODE, Boolean.valueOf(true)));
+			par1World.setBlockToAir(pos);
 		}
 	}
 
@@ -75,7 +73,8 @@ public class BlockODBcore extends Block {
 	}
 
 	@Override
-	public boolean renderAsNormalBlock(){
+	public boolean isFullCube()
+	{
 		return false;
 	}
 
@@ -86,48 +85,59 @@ public class BlockODBcore extends Block {
 	}
 
 	@Override
-	public void onBlockDestroyedByExplosion(World par1World, int par2, int par3, int par4, Explosion par5Explosion)
+	public void onBlockDestroyedByExplosion(World par1World, BlockPos pos, Explosion par5Explosion)
 	{
 		if (!par1World.isRemote)
 		{
-			EntityODBcPrimed var6 = new EntityODBcPrimed(par1World, par2 + 0.5F, par3 + 0.5F, par4 + 0.5F, par5Explosion.getExplosivePlacedBy());
+			EntityODBcPrimed var6 = new EntityODBcPrimed(par1World, pos.getX() + 0.5F, pos.getY() + 0.5F, pos.getZ() + 0.5F, par5Explosion.getExplosivePlacedBy());
 			var6.fuse = par1World.rand.nextInt(var6.fuse / 4) + var6.fuse / 8;
 			par1World.spawnEntityInWorld(var6);
 		}
 	}
 
 	@Override
-	public void onBlockDestroyedByPlayer(World par1World, int par2, int par3, int par4, int par5)
+	public void onBlockDestroyedByPlayer(World par1World, BlockPos pos, IBlockState state)
 	{
-		onExplosionPrimed(par1World, par2, par3, par4, par5, (EntityLivingBase)null);
+		explode(par1World, pos, state, (EntityLivingBase)null);
 	}
 
-	public void onExplosionPrimed(World par1World, int par2, int par3, int par4, int par5, EntityLivingBase par6)
+	public void explode(World par1World, BlockPos pos, IBlockState state, EntityLivingBase par6)
 	{
 		if (!par1World.isRemote)
-			if ((par5 & 1) == 1)
+			if (state.getValue(EXPLODE).booleanValue())
 			{
-				EntityODBcPrimed var7 = new EntityODBcPrimed(par1World, par2 + 0.5F, par3 + 0.5F, par4 + 0.5F, par6);
+				EntityODBcPrimed var7 = new EntityODBcPrimed(par1World, pos.getX() + 0.5F, pos.getY() + 0.5F, pos.getZ() + 0.5F, par6);
 				par1World.spawnEntityInWorld(var7);
 				par1World.playSoundAtEntity(var7, "game.tnt.primed", 1.0F, 1.0F);
 			}
 	}
 
 	@Override
-	public boolean onBlockActivated(World par1World, int par2, int par3, int par4, EntityPlayer par5EntityPlayer, int par6, float par7, float par8, float par9)
+	public boolean onBlockActivated(World par1World, BlockPos pos, IBlockState state, EntityPlayer par5EntityPlayer, EnumFacing side, float hitX, float hitY, float hitZ)
 	{
-		if (par5EntityPlayer.getCurrentEquippedItem() != null && par5EntityPlayer.getCurrentEquippedItem().getItem() == Items.flint_and_steel)
+		if (par5EntityPlayer.getCurrentEquippedItem() != null)
 		{
-			onExplosionPrimed(par1World, par2, par3, par4, 1, par5EntityPlayer);
-			par1World.setBlockToAir(par2, par3, par4);
-			par5EntityPlayer.getCurrentEquippedItem().damageItem(1, par5EntityPlayer);
-			return true;
-		} else
-			return super.onBlockActivated(par1World, par2, par3, par4, par5EntityPlayer, par6, par7, par8, par9);
+			Item item = par5EntityPlayer.getCurrentEquippedItem().getItem();
+
+			if (item == Items.flint_and_steel || item == Items.fire_charge)
+			{
+				explode(par1World, pos, state.withProperty(EXPLODE, Boolean.valueOf(true)), par5EntityPlayer);
+				par1World.setBlockToAir(pos);
+
+				if (item == Items.flint_and_steel)
+					par5EntityPlayer.getCurrentEquippedItem().damageItem(1, par5EntityPlayer);
+				else if (!par5EntityPlayer.capabilities.isCreativeMode)
+					--par5EntityPlayer.getCurrentEquippedItem().stackSize;
+
+				return true;
+			}
+		}
+
+		return super.onBlockActivated(par1World, pos, state, par5EntityPlayer, side, hitX, hitY, hitZ);
 	}
 
 	@Override
-	public void onEntityCollidedWithBlock(World par1World, int par2, int par3, int par4, Entity par5Entity)
+	public void onEntityCollidedWithBlock(World par1World, BlockPos pos, Entity par5Entity)
 	{
 		if (par5Entity instanceof EntityArrow && !par1World.isRemote)
 		{
@@ -135,8 +145,8 @@ public class BlockODBcore extends Block {
 
 			if (var6.isBurning())
 			{
-				onExplosionPrimed(par1World, par2, par3, par4, 1, var6.shootingEntity instanceof EntityLivingBase ? (EntityLivingBase)var6.shootingEntity : null);
-				par1World.setBlockToAir(par2, par3, par4);
+				explode(par1World, pos, par1World.getBlockState(pos).withProperty(EXPLODE, Boolean.valueOf(true)), var6.shootingEntity instanceof EntityLivingBase ? (EntityLivingBase)var6.shootingEntity : null);
+				par1World.setBlockToAir(pos);
 			}
 		}
 	}
@@ -147,27 +157,27 @@ public class BlockODBcore extends Block {
 		return false;
 	}
 
+	/**
+	 * Convert the given metadata into a BlockState for this Block
+	 */
 	@Override
-	@SideOnly(Side.CLIENT)
-	public IIcon getIcon(int par1, int par2)
+	public IBlockState getStateFromMeta(int meta)
 	{
-		return par1 == 1 ? ODBcTopIcon : par1 == 0 ? ODBcBottomIcon : blockIcon;
+		return getDefaultState().withProperty(EXPLODE, Boolean.valueOf((meta & 1) > 0));
 	}
 
-
+	/**
+	 * Convert the BlockState into the correct metadata value
+	 */
 	@Override
-	@SideOnly(Side.CLIENT)
-	public void registerBlockIcons(IIconRegister par1IconRegister)
+	public int getMetaFromState(IBlockState state)
 	{
-		blockIcon = par1IconRegister.registerIcon(AbyssalCraft.modid + ":" + "ODBCsides");
-		ODBcTopIcon = par1IconRegister.registerIcon(AbyssalCraft.modid + ":" + "BOA");
-		ODBcBottomIcon = par1IconRegister.registerIcon(AbyssalCraft.modid + ":" + "BOA");
-		BlockODBcore.iconODBcSideOverlay = par1IconRegister.registerIcon(AbyssalCraft.modid + ":" + "ODBsides");
+		return state.getValue(EXPLODE).booleanValue() ? 1 : 0;
 	}
 
-	@SideOnly(Side.CLIENT)
-	public static IIcon getIconSideOverlay()
+	@Override
+	protected BlockState createBlockState()
 	{
-		return iconODBcSideOverlay;
+		return new BlockState(this, new IProperty[] {EXPLODE});
 	}
 }

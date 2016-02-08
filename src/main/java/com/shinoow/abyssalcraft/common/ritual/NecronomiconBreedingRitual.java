@@ -15,10 +15,18 @@ import java.util.List;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.IEntityLivingData;
-import net.minecraft.entity.passive.*;
+import net.minecraft.entity.passive.EntityAnimal;
+import net.minecraft.entity.passive.EntityChicken;
+import net.minecraft.entity.passive.EntityCow;
+import net.minecraft.entity.passive.EntityHorse;
+import net.minecraft.entity.passive.EntityOcelot;
+import net.minecraft.entity.passive.EntityPig;
+import net.minecraft.entity.passive.EntitySheep;
+import net.minecraft.entity.passive.EntityWolf;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
+import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;
 
 import com.google.common.collect.Lists;
@@ -45,7 +53,7 @@ public class NecronomiconBreedingRitual extends NecronomiconRitual {
 
 	private void makeShoggoth(World world, Entity host){
 		EntityLesserShoggoth shoggoth = new EntityLesserShoggoth(world);
-		shoggoth.onSpawnWithEgg((IEntityLivingData)null);
+		shoggoth.onInitialSpawn(world.getDifficultyForLocation(new BlockPos(host.posX, host.posY, host.posZ)), (IEntityLivingData)null);
 		shoggoth.setChild(true);
 		shoggoth.copyLocationAndAnglesFrom(host);
 		shoggothInfestation = true;
@@ -53,14 +61,14 @@ public class NecronomiconBreedingRitual extends NecronomiconRitual {
 	}
 
 	@Override
-	public boolean canCompleteRitual(World world, int x, int y, int z, EntityPlayer player) {
+	public boolean canCompleteRitual(World world, BlockPos pos, EntityPlayer player) {
 
-		List<EntityAnimal> animals = world.getEntitiesWithinAABB(EntityAnimal.class, world.getBlock(x, y, z).getCollisionBoundingBoxFromPool(world, x, y, z).expand(16, 3, 16));
+		List<EntityAnimal> animals = world.getEntitiesWithinAABB(EntityAnimal.class, world.getBlockState(pos).getBlock().getCollisionBoundingBox(world, pos, world.getBlockState(pos)).expand(16, 3, 16));
 		return !animals.isEmpty();
 	}
 
 	@Override
-	protected void completeRitualServer(World world, int x, int y, int z, EntityPlayer player){
+	protected void completeRitualServer(World world, BlockPos pos, EntityPlayer player){
 
 		List<EntityCow> cows = Lists.newArrayList();
 		List<EntityChicken> chickens = Lists.newArrayList();
@@ -70,7 +78,7 @@ public class NecronomiconBreedingRitual extends NecronomiconRitual {
 		List<EntityOcelot> ocelots = Lists.newArrayList();
 		List<EntityWolf> wolves = Lists.newArrayList();
 
-		List<Entity> entities = world.getEntitiesWithinAABBExcludingEntity(player, world.getBlock(x, y, z).getCollisionBoundingBoxFromPool(world, x, y, z).expand(16, 3, 16));
+		List<Entity> entities = world.getEntitiesWithinAABBExcludingEntity(player, world.getBlockState(pos).getBlock().getCollisionBoundingBox(world, pos, world.getBlockState(pos)).expand(16, 3, 16));
 		for(Entity entity : entities){
 			if(entity instanceof EntityCow)
 				cows.add((EntityCow) entity);
@@ -239,5 +247,5 @@ public class NecronomiconBreedingRitual extends NecronomiconRitual {
 	}
 
 	@Override
-	protected void completeRitualClient(World world, int x, int y, int z, EntityPlayer player){}
+	protected void completeRitualClient(World world, BlockPos pos, EntityPlayer player){}
 }

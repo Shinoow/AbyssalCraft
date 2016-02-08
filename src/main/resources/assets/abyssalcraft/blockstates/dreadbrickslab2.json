@@ -1,0 +1,6 @@
+{
+	"variants": {
+		"variant=false": { "model": "abyssalcraft:dreadbrickslab2" },
+		"variant=true": { "model": "abyssalcraft:dreadbrickslab2" }
+	}
+}

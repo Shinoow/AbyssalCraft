@@ -18,22 +18,27 @@ import com.shinoow.abyssalcraft.common.blocks.tile.TEDirectional;
 
 import net.minecraft.block.Block;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
 
 public class WorldGenShoggothMonolith extends WorldGenerator {
 
 	@Override
-	public boolean generate(World world, Random rand, int x, int y, int z) {
+	public boolean generate(World world, Random rand, BlockPos pos) {
 
-		while(world.isAirBlock(x, y, z) && y > 2)
-			--y;
+		while(world.isAirBlock(pos) && pos.getY() > 2)
+			pos = pos.down();
 
 		//	if(world.getBlock(x, y, z).getMaterial() != Material.grass ||
 		//	world.getBlock(x, y, z).getMaterial() != Material.ground)
-		if(world.getBlock(x, y, z) != AbyssalCraft.shoggothBlock)
+		if(world.getBlockState(pos) != AbyssalCraft.shoggothBlock.getDefaultState())
 			return false;
 		else {
+
+			int x = pos.getX();
+			int y = pos.getY();
+			int z = pos.getZ();
 
 			//	for(int x1 = 0; x1 < 7; x1++)
 			//	for(int z1 = 0; z1 < 7; z1++)
@@ -56,24 +61,24 @@ public class WorldGenShoggothMonolith extends WorldGenerator {
 
 			int max = rand.nextInt(8) + 5;
 			for(int i = 0; i < max; i++){
-				setBlockAndNotifyAdequately(world, x, y + i, z, AbyssalCraft.monolithStone, 0);
-				setBlockAndNotifyAdequately(world, x + 1, y + i, z, AbyssalCraft.monolithStone, 0);
-				setBlockAndNotifyAdequately(world, x - 1, y + i, z, AbyssalCraft.monolithStone, 0);
-				setBlockAndNotifyAdequately(world, x, y + i, z + 1, AbyssalCraft.monolithStone, 0);
-				setBlockAndNotifyAdequately(world, x, y + i, z - 1, AbyssalCraft.monolithStone, 0);
-				setBlockAndNotifyAdequately(world, x + 1, y + i, z + 1, AbyssalCraft.monolithStone, 0);
-				setBlockAndNotifyAdequately(world, x - 1, y + i, z - 1, AbyssalCraft.monolithStone, 0);
-				setBlockAndNotifyAdequately(world, x + 1, y + i, z - 1, AbyssalCraft.monolithStone, 0);
-				setBlockAndNotifyAdequately(world, x - 1, y + i, z + 1, AbyssalCraft.monolithStone, 0);
+				setBlockAndNotifyAdequately(world, new BlockPos(x, y + i, z), AbyssalCraft.monolithStone.getDefaultState());
+				setBlockAndNotifyAdequately(world, new BlockPos(x + 1, y + i, z), AbyssalCraft.monolithStone.getDefaultState());
+				setBlockAndNotifyAdequately(world, new BlockPos(x -1, y + i, z), AbyssalCraft.monolithStone.getDefaultState());
+				setBlockAndNotifyAdequately(world, new BlockPos(x, y + i, z + 1), AbyssalCraft.monolithStone.getDefaultState());
+				setBlockAndNotifyAdequately(world, new BlockPos(x, y + i, z -1), AbyssalCraft.monolithStone.getDefaultState());
+				setBlockAndNotifyAdequately(world, new BlockPos(x + 1, y + i, z + 1), AbyssalCraft.monolithStone.getDefaultState());
+				setBlockAndNotifyAdequately(world, new BlockPos(x -1, y + i, z -1), AbyssalCraft.monolithStone.getDefaultState());
+				setBlockAndNotifyAdequately(world, new BlockPos(x + 1, y + i, z -1), AbyssalCraft.monolithStone.getDefaultState());
+				setBlockAndNotifyAdequately(world, new BlockPos(x -1, y + i, z + 1), AbyssalCraft.monolithStone.getDefaultState());
 			}
-			setBlockAndNotifyAdequately(world, x, y, z, AbyssalCraft.shoggothBiomass, 0);
-			setBlockAndNotifyAdequately(world, x, y + max, z, getStatue(rand), 0);
-			TileEntity te = world.getTileEntity(x, y + max, z);
+			setBlockAndNotifyAdequately(world, pos, AbyssalCraft.shoggothBiomass.getDefaultState());
+			setBlockAndNotifyAdequately(world, new BlockPos(x, y + max, z), getStatue(rand).getDefaultState());
+			TileEntity te = world.getTileEntity(new BlockPos(x, y + max, z));
 
 			if(te != null && te instanceof TEDirectional)
 				((TEDirectional) te).setDirection(rand.nextInt(3));
 
-			world.playSoundEffect(x, y, z, "random.anvil_use", 2, world.rand.nextFloat() * 0.1F * 0.9F);
+			world.playSoundEffect(pos.getX(), pos.getY(), pos.getZ(), "random.anvil_use", 2, world.rand.nextFloat() * 0.1F * 0.9F);
 
 			return true;
 		}

@@ -14,10 +14,9 @@ package com.shinoow.abyssalcraft.common.items;
 import java.util.Set;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumChatFormatting;
-import net.minecraftforge.common.ForgeHooks;
-
 import com.google.common.collect.Sets;
 import com.shinoow.abyssalcraft.AbyssalCraft;
 
@@ -31,12 +30,12 @@ public class ItemEthaxiumPickaxe extends ItemACPickaxe {
 	}
 
 	@Override
-	public float getDigSpeed(ItemStack stack, Block block, int meta)
+	public float getDigSpeed(ItemStack stack, IBlockState state)
 	{
-		if(effectiveBlocks.contains(block))
+		if(effectiveBlocks.contains(state.getBlock()))
 			return efficiencyOnProperMaterial * 10;
-		if (ForgeHooks.isToolEffective(stack, block, meta))
+		if (state.getBlock().isToolEffective("pickaxe", state))
 			return efficiencyOnProperMaterial;
-		return super.getDigSpeed(stack, block, meta);
+		return super.getDigSpeed(stack, state);
 	}
 }

@@ -13,6 +13,7 @@ package com.shinoow.abyssalcraft.common.blocks;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
+import net.minecraft.util.BlockPos;
 import net.minecraft.world.IBlockAccess;
 
 public class IngotBlock extends BlockACBasic {
@@ -22,7 +23,7 @@ public class IngotBlock extends BlockACBasic {
 	}
 
 	@Override
-	public boolean isBeaconBase(IBlockAccess world, int x, int y, int z, int beaconX, int beaconY, int beaconZ) {
+	public boolean isBeaconBase(IBlockAccess world, BlockPos pos, BlockPos beaconpos) {
 		return true;
 	}
 }

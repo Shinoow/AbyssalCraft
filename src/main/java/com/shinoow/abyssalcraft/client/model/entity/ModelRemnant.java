@@ -211,24 +211,24 @@ public class ModelRemnant extends ModelBase {
 		float f6;
 		float f7;
 
-		if (onGround > -9990.0F)
+		if (swingProgress > -9990.0F)
 		{
-			f6 = onGround;
+			f6 = swingProgress;
 			body.rotateAngleY = MathHelper.sin(MathHelper.sqrt_float(f6) * (float)Math.PI * 2.0F) * 0.2F;
 			rightarm.rotateAngleY += body.rotateAngleY;
 			leftarm.rotateAngleY += body.rotateAngleY;
-			f6 = 1.0F - onGround;
+			f6 = 1.0F - swingProgress;
 			f6 *= f6;
 			f6 *= f6;
 			f6 = 1.0F - f6;
 			f7 = MathHelper.sin(f6 * (float)Math.PI);
-			float f8 = MathHelper.sin(onGround * (float)Math.PI) * -(head.rotateAngleX - 0.7F) * 0.75F;
+			float f8 = MathHelper.sin(swingProgress * (float)Math.PI) * -(head.rotateAngleX - 0.7F) * 0.75F;
 			rightarm.rotateAngleX = (float)(rightarm.rotateAngleX - (f7 * 1.2D + f8));
 			rightarm.rotateAngleY += body.rotateAngleY * 2.0F;
-			rightarm.rotateAngleZ = MathHelper.sin(onGround * (float)Math.PI) * -0.4F;
+			rightarm.rotateAngleZ = MathHelper.sin(swingProgress * (float)Math.PI) * -0.4F;
 			leftarm.rotateAngleX = (float)(leftarm.rotateAngleX - (f7 * 1.2D + f8));
 			leftarm.rotateAngleY += body.rotateAngleY * -2.0F;
-			leftarm.rotateAngleZ = MathHelper.sin(onGround * (float)Math.PI) * 0.4F;
+			leftarm.rotateAngleZ = MathHelper.sin(swingProgress * (float)Math.PI) * 0.4F;
 		}
 	}
 }

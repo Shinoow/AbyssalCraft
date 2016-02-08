@@ -25,6 +25,7 @@ import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
+import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
@@ -41,7 +42,7 @@ public class EntityOmotholWarden extends EntityMob implements IAntiEntity, ICora
 		tasks.addTask(7, new EntityAILookIdle(this));
 		tasks.addTask(7, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
 		targetTasks.addTask(1, new EntityAIHurtByTarget(this, false));
-		targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityPlayer.class, 0, true));
+		targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityPlayer.class, true));
 	}
 
 	@Override
@@ -67,12 +68,6 @@ public class EntityOmotholWarden extends EntityMob implements IAntiEntity, ICora
 	}
 
 	@Override
-	protected boolean isAIEnabled()
-	{
-		return true;
-	}
-
-	@Override
 	protected String getLivingSound()
 	{
 		return "mob.zombie.say";
@@ -91,7 +86,7 @@ public class EntityOmotholWarden extends EntityMob implements IAntiEntity, ICora
 	}
 
 	@Override
-	protected void func_145780_a(int par1, int par2, int par3, Block par4)
+	protected void playStepSound(BlockPos pos, Block par4)
 	{
 		playSound("mob.zombie.step", 0.15F, 1.0F);
 	}

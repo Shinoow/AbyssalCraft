@@ -18,6 +18,7 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
+import net.minecraft.util.IChatComponent;
 import net.minecraftforge.common.util.Constants;
 
 public class InventoryCrystalBag implements IInventory
@@ -38,7 +39,7 @@ public class InventoryCrystalBag implements IInventory
 		invItem = stack;
 		if (!stack.hasTagCompound())
 			stack.setTagCompound(new NBTTagCompound());
-		INV_SIZE = stack.stackTagCompound.getInteger("InvSize");
+		INV_SIZE = stack.getTagCompound().getInteger("InvSize");
 		inventory = new ItemStack[INV_SIZE];
 		name = stack.getDisplayName();
 
@@ -72,7 +73,7 @@ public class InventoryCrystalBag implements IInventory
 	}
 
 	@Override
-	public ItemStack getStackInSlotOnClosing(int slot)
+	public ItemStack removeStackFromSlot(int slot)
 	{
 		ItemStack stack = getStackInSlot(slot);
 		if(stack != null)
@@ -92,15 +93,21 @@ public class InventoryCrystalBag implements IInventory
 	}
 
 	@Override
-	public String getInventoryName()
+	public String getName()
 	{
 		return name;
 	}
 
 	@Override
-	public boolean hasCustomInventoryName()
+	public boolean hasCustomName()
 	{
 		return name.length() > 0;
+	}
+
+	@Override
+	public IChatComponent getDisplayName() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	@Override
@@ -125,10 +132,10 @@ public class InventoryCrystalBag implements IInventory
 	}
 
 	@Override
-	public void openInventory() {}
+	public void openInventory(EntityPlayer player) {}
 
 	@Override
-	public void closeInventory() {}
+	public void closeInventory(EntityPlayer player) {}
 
 	@Override
 	public boolean isItemValidForSlot(int slot, ItemStack itemstack)
@@ -164,5 +171,29 @@ public class InventoryCrystalBag implements IInventory
 				items.appendTag(item);
 			}
 		tagcompound.setTag("ItemInventory", items);
+	}
+
+	@Override
+	public int getField(int id) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public void setField(int id, int value) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public int getFieldCount() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public void clear() {
+		// TODO Auto-generated method stub
+
 	}
 }

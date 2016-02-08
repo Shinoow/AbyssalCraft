@@ -30,6 +30,7 @@ import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemSeeds;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
@@ -58,12 +59,6 @@ public class EntityAntiChicken extends EntityAnimal implements IAntiEntity {
 		tasks.addTask(5, new EntityAIWander(this, 1.0D));
 		tasks.addTask(6, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
 		tasks.addTask(7, new EntityAILookIdle(this));
-	}
-
-	@Override
-	public boolean isAIEnabled()
-	{
-		return true;
 	}
 
 	@Override
@@ -107,7 +102,7 @@ public class EntityAntiChicken extends EntityAnimal implements IAntiEntity {
 	}
 
 	@Override
-	protected void fall(float par1) {}
+	public void fall(float par1, float par2) {}
 
 	@Override
 	protected String getLivingSound()
@@ -128,7 +123,7 @@ public class EntityAntiChicken extends EntityAnimal implements IAntiEntity {
 	}
 
 	@Override
-	protected void func_145780_a(int p_145780_1_, int p_145780_2_, int p_145780_3_, Block p_145780_4_)
+	protected void playStepSound(BlockPos pos, Block p_145780_4_)
 	{
 		playSound("mob.chicken.step", 0.15F, 1.0F);
 	}
@@ -157,7 +152,7 @@ public class EntityAntiChicken extends EntityAnimal implements IAntiEntity {
 	protected void collideWithEntity(Entity par1Entity)
 	{
 		if(!worldObj.isRemote && par1Entity instanceof EntityChicken){
-			boolean flag = worldObj.getGameRules().getGameRuleBooleanValue("mobGriefing");
+			boolean flag = worldObj.getGameRules().getBoolean("mobGriefing");
 			worldObj.createExplosion(this, posX, posY, posZ, 5, flag);
 			setDead();
 		}

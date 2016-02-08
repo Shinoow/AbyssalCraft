@@ -29,6 +29,7 @@ import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.potion.PotionEffect;
+import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
@@ -48,7 +49,7 @@ public class EntityDreadSpawn extends EntityMob implements IDreadEntity
 		tasks.addTask(5, new EntityAILookIdle(this));
 		tasks.addTask(5, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
 		targetTasks.addTask(1, new EntityAIHurtByTarget(this, false));
-		targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityPlayer.class, 0, true));
+		targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityPlayer.class, true));
 		isImmuneToFire = true;
 	}
 
@@ -63,12 +64,6 @@ public class EntityDreadSpawn extends EntityMob implements IDreadEntity
 			getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(40.0D);
 			getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(12.0D);
 		} else getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(6.0D);
-	}
-
-	@Override
-	protected boolean isAIEnabled()
-	{
-		return true;
 	}
 
 	@Override
@@ -115,7 +110,7 @@ public class EntityDreadSpawn extends EntityMob implements IDreadEntity
 	}
 
 	@Override
-	protected void func_145780_a(int par1, int par2, int par3, Block par4)
+	protected void playStepSound(BlockPos pos, Block par4)
 	{
 		worldObj.playSoundAtEntity(this, "mob.zombie.step", 0.15F, 1.0F);
 	}
@@ -152,7 +147,7 @@ public class EntityDreadSpawn extends EntityMob implements IDreadEntity
 	}
 
 	@Override
-	protected void fall(float par1) {}
+	public void fall(float par1, float par2) {}
 
 	@Override
 	protected Item getDropItem()
@@ -171,7 +166,7 @@ public class EntityDreadSpawn extends EntityMob implements IDreadEntity
 	{
 		super.onLivingUpdate();
 
-		List<EntityDreadSpawn> dreadspawns = worldObj.getEntitiesWithinAABB(getClass(), boundingBox.expand(2D, 2D, 2D));
+		List<EntityDreadSpawn> dreadspawns = worldObj.getEntitiesWithinAABB(getClass(), getEntityBoundingBox().expand(2D, 2D, 2D));
 
 		if(!worldObj.isRemote)
 			if(!dreadspawns.isEmpty())

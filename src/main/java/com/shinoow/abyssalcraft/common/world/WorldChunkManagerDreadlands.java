@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import net.minecraft.world.ChunkPosition;
+import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldType;
 import net.minecraft.world.biome.BiomeCache;
@@ -23,12 +23,11 @@ import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.biome.WorldChunkManager;
 import net.minecraft.world.gen.layer.GenLayer;
 import net.minecraft.world.gen.layer.IntCache;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.common.world.gen.layer.GenLayerDL;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 public class WorldChunkManagerDreadlands extends WorldChunkManager
 {
@@ -58,7 +57,7 @@ public class WorldChunkManagerDreadlands extends WorldChunkManager
 
 	public WorldChunkManagerDreadlands(World par1world)
 	{
-		this(par1world.getSeed(), par1world.provider.terrainType);
+		this(par1world.getSeed(), par1world.getWorldInfo().getTerrainType());
 	}
 
 	@Override
@@ -68,9 +67,15 @@ public class WorldChunkManagerDreadlands extends WorldChunkManager
 	}
 
 	@Override
-	public BiomeGenBase getBiomeGenAt(int par1, int par2)
+	public BiomeGenBase getBiomeGenerator(BlockPos pos)
 	{
-		BiomeGenBase biome = biomeCache.getBiomeGenAt(par1, par2);
+		return this.getBiomeGenerator(pos, (BiomeGenBase)null);
+	}
+
+	@Override
+	public BiomeGenBase getBiomeGenerator(BlockPos pos, BiomeGenBase biomegen)
+	{
+		BiomeGenBase biome = biomeCache.func_180284_a(pos.getX(), pos.getZ(), biomegen);
 		if (biome == null)
 			return AbyssalCraft.Dreadlands;
 
@@ -144,7 +149,7 @@ public class WorldChunkManagerDreadlands extends WorldChunkManager
 	@Override
 	public BiomeGenBase[] loadBlockGeneratorData(BiomeGenBase[] par1ArrayOfBiomeGenBase, int par2, int par3, int par4, int par5)
 	{
-		return this.getBiomeGenAt(par1ArrayOfBiomeGenBase, par2, par3, par4, par5, true);
+		return getBiomeGenAt(par1ArrayOfBiomeGenBase, par2, par3, par4, par5, true);
 	}
 
 	@Override
@@ -196,7 +201,7 @@ public class WorldChunkManagerDreadlands extends WorldChunkManager
 
 	@Override
 	@SuppressWarnings("rawtypes")
-	public ChunkPosition findBiomePosition(int par1, int par2, int par3, List par4List, Random par5Random) {
+	public BlockPos findBiomePosition(int par1, int par2, int par3, List par4List, Random par5Random) {
 		IntCache.resetIntCache();
 		int l = par1 - par3 >> 2;
 		int i1 = par2 - par3 >> 2;
@@ -205,7 +210,7 @@ public class WorldChunkManagerDreadlands extends WorldChunkManager
 		int l1 = j1 - l + 1;
 		int i2 = k1 - i1 + 1;
 		int[] aint = biomeToUse.getInts(l, i1, l1, i2);
-		ChunkPosition chunkposition = null;
+		BlockPos blockpos = null;
 		int j2 = 0;
 
 		for (int k2 = 0; k2 < l1 * i2; ++k2) {
@@ -213,13 +218,13 @@ public class WorldChunkManagerDreadlands extends WorldChunkManager
 			int i3 = i1 + k2 / l1 << 2;
 			BiomeGenBase biomegenbase = BiomeGenBase.getBiome(aint[k2]);
 
-			if (par4List.contains(biomegenbase) && (chunkposition == null || par5Random.nextInt(j2 + 1) == 0)) {
-				chunkposition = new ChunkPosition(l2, 0, i3);
+			if (par4List.contains(biomegenbase) && (blockpos == null || par5Random.nextInt(j2 + 1) == 0)) {
+				blockpos = new BlockPos(l2, 0, i3);
 				++j2;
 			}
 		}
 
-		return chunkposition;
+		return blockpos;
 	}
 
 	@Override

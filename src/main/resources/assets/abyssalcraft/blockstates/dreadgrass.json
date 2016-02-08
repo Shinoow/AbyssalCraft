@@ -1,0 +1,11 @@
+{
+    "variants": {
+        "snowy=false": [
+            { "model": "abyssalcraft:dreadgrass" },
+            { "model": "abyssalcraft:dreadgrass", "y": 90 },
+            { "model": "abyssalcraft:dreadgrass", "y": 180 },
+            { "model": "abyssalcraft:dreadgrass", "y": 270 }
+        ],
+        "snowy=true":  { "model": "grass_snowed" }
+    }
+}

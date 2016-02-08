@@ -14,17 +14,16 @@ package com.shinoow.abyssalcraft.common.world;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.WorldProvider;
 import net.minecraft.world.chunk.IChunkProvider;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 public class WorldProviderDreadlands extends WorldProvider {
 
 	@Override
 	public void registerWorldChunkManager() {
-		worldChunkMgr = new WorldChunkManagerDreadlands(worldObj.getSeed(), terrainType);
+		worldChunkMgr = new WorldChunkManagerDreadlands(worldObj.getSeed(), worldObj.getWorldInfo().getTerrainType());
 		hasNoSky = true;
 		dimensionId = AbyssalCraft.configDimId2;
 	}
@@ -32,7 +31,7 @@ public class WorldProviderDreadlands extends WorldProvider {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public Vec3 getFogColor(float par1, float par2) {
-		return Vec3.createVectorHelper(0.20000000298023224D, 0.029999999329447746D, 0.029999999329447746D);
+		return new Vec3(0.20000000298023224D, 0.029999999329447746D, 0.029999999329447746D);
 	}
 
 	@Override
@@ -89,5 +88,11 @@ public class WorldProviderDreadlands extends WorldProvider {
 	@Override
 	public String getDimensionName() {
 		return "The Dreadlands";
+	}
+
+	@Override
+	public String getInternalNameSuffix() {
+
+		return "_dl";
 	}
 }

@@ -15,6 +15,8 @@ import net.minecraft.client.model.ModelBiped;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.BlockPos;
+import net.minecraft.util.IThreadListener;
 import net.minecraft.world.World;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
@@ -24,14 +26,14 @@ import com.shinoow.abyssalcraft.common.blocks.tile.*;
 import com.shinoow.abyssalcraft.common.inventory.*;
 import com.shinoow.abyssalcraft.common.items.ItemNecronomicon;
 
-import cpw.mods.fml.common.network.IGuiHandler;
-import cpw.mods.fml.common.network.simpleimpl.MessageContext;
+import net.minecraftforge.fml.common.network.IGuiHandler;
+import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 
 public class CommonProxy implements IGuiHandler {
 
 	@Override
 	public Object getServerGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
-		TileEntity entity = world.getTileEntity(x, y, z);
+		TileEntity entity = world.getTileEntity(new BlockPos(x, y, z));
 		ItemStack stack = player.getCurrentEquippedItem();
 
 		if(entity != null)
@@ -64,7 +66,7 @@ public class CommonProxy implements IGuiHandler {
 
 	@Override
 	public Object getClientGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
-		TileEntity entity = world.getTileEntity(x, y, z);
+		TileEntity entity = world.getTileEntity(new BlockPos(x, y, z));
 		ItemStack stack = player.getCurrentEquippedItem();
 
 		if(entity != null)
@@ -98,21 +100,11 @@ public class CommonProxy implements IGuiHandler {
 		return null;
 	}
 
-	public void registerRenderThings() {
-	}
+	public void preInit() {}
 
-	public void preInit() {
-	}
+	public void init() {}
 
-	public void init() {
-	}
-
-	public void postInit() {
-	}
-
-	public int addArmor(String armor) {
-		return 0;
-	}
+	public void postInit() {}
 
 	public ModelBiped getArmorModel(int id){
 		return null;
@@ -123,5 +115,13 @@ public class CommonProxy implements IGuiHandler {
 	 */
 	public EntityPlayer getPlayerEntity(MessageContext ctx) {
 		return ctx.getServerHandler().playerEntity;
+	}
+
+	/**
+	 * Returns the current thread based on side during message handling,
+	 * used for ensuring that the message is being handled by the main thread
+	 */
+	public IThreadListener getThreadFromContext(MessageContext ctx) {
+		return ctx.getServerHandler().playerEntity.getServerForPlayer();
 	}
 }

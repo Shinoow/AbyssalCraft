@@ -52,15 +52,15 @@ public class ItemCrystalBag extends ItemACBasic {
 	public void setInventorySize(ItemStack stack){
 		if(!stack.hasTagCompound())
 			stack.setTagCompound(new NBTTagCompound());
-		if(!stack.stackTagCompound.hasKey("InvSize")){
+		if(!stack.getTagCompound().hasKey("InvSize")){
 			if(stack.getItem() == AbyssalCraft.crystalbag_s)
-				stack.stackTagCompound.setInteger("InvSize", 18);
+				stack.getTagCompound().setInteger("InvSize", 18);
 			if(stack.getItem() == AbyssalCraft.crystalbag_m)
-				stack.stackTagCompound.setInteger("InvSize", 36);
+				stack.getTagCompound().setInteger("InvSize", 36);
 			if(stack.getItem() == AbyssalCraft.crystalbag_l)
-				stack.stackTagCompound.setInteger("InvSize", 54);
+				stack.getTagCompound().setInteger("InvSize", 54);
 			if(stack.getItem() == AbyssalCraft.crystalbag_h)
-				stack.stackTagCompound.setInteger("InvSize", 72);
+				stack.getTagCompound().setInteger("InvSize", 72);
 		}
 	}
 }

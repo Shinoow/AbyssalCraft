@@ -1,0 +1,6 @@
+{
+	"variants": {
+		"variant=false": { "model": "abyssalcraft:darkcobbleslab2" },
+		"variant=true": { "model": "abyssalcraft:darkcobbleslab2" }
+	}
+}

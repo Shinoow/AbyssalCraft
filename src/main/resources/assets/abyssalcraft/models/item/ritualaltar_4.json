@@ -1,0 +1,8 @@
+{
+	"parent": "abyssalcraft:block/ritualaltar_4",
+	"display": {
+		"thirdperson": {
+			"translation": [ 0, 1.5, -2.75 ]
+		}
+	}
+}

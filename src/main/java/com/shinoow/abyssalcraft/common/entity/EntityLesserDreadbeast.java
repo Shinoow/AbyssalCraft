@@ -29,6 +29,7 @@ import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.potion.PotionEffect;
+import net.minecraft.util.BlockPos;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
@@ -50,7 +51,7 @@ public class EntityLesserDreadbeast extends EntityMob implements IDreadEntity, I
 		tasks.addTask(5, new EntityAILookIdle(this));
 		tasks.addTask(5, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
 		targetTasks.addTask(1, new EntityAIHurtByTarget(this, false));
-		targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityPlayer.class, 0, true));
+		targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityPlayer.class, true));
 		isImmuneToFire = true;
 	}
 
@@ -69,12 +70,6 @@ public class EntityLesserDreadbeast extends EntityMob implements IDreadEntity, I
 			getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(300.0D);
 			getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(18.0D);
 		}
-	}
-
-	@Override
-	protected boolean isAIEnabled()
-	{
-		return true;
 	}
 
 	@Override
@@ -121,7 +116,7 @@ public class EntityLesserDreadbeast extends EntityMob implements IDreadEntity, I
 	}
 
 	@Override
-	protected void func_145780_a(int par1, int par2, int par3, Block par4)
+	protected void playStepSound(BlockPos pos, Block par4)
 	{
 		worldObj.playSoundAtEntity(this, "mob.zombie.step", 0.15F, 1.0F);
 	}
@@ -158,7 +153,7 @@ public class EntityLesserDreadbeast extends EntityMob implements IDreadEntity, I
 	}
 
 	@Override
-	protected void fall(float par1) {}
+	public void fall(float par1, float par2) {}
 
 	@Override
 	protected Item getDropItem()
@@ -178,7 +173,7 @@ public class EntityLesserDreadbeast extends EntityMob implements IDreadEntity, I
 	{
 		super.onLivingUpdate();
 
-		if(entityToAttack != null && getDistanceToEntity(entityToAttack) >= 2)
+		if(getAttackTarget() != null && getDistanceToEntity(getAttackTarget()) >= 2)
 			setAttackMode(true);
 		else setAttackMode(false);
 

@@ -11,10 +11,14 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.client.gui.necronomicon;
 
+import java.io.IOException;
+
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.GL11;
@@ -24,9 +28,6 @@ import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
 import com.shinoow.abyssalcraft.client.gui.necronomicon.buttons.ButtonCategory;
 import com.shinoow.abyssalcraft.client.gui.necronomicon.buttons.ButtonNextPage;
 import com.shinoow.abyssalcraft.client.lib.NecronomiconText;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
 public class GuiNecronomicon extends GuiScreen {
@@ -185,7 +186,7 @@ public class GuiNecronomicon extends GuiScreen {
 	 * Fired when a key is typed. This is the equivalent of KeyListener.keyTyped(KeyEvent e).
 	 */
 	@Override
-	protected void keyTyped(char par1, int par2)
+	protected void keyTyped(char par1, int par2) throws IOException
 	{
 		super.keyTyped(par1, par2);
 
@@ -275,11 +276,12 @@ public class GuiNecronomicon extends GuiScreen {
 				stuff = NecronomiconText.LABEL_HUH;
 				fontRendererObj.drawSplitString(stuff, k + 20, b0 + 16, 116, 0xC40000);
 			}
-			drawInformationText(par1, par2);
 			s = I18n.format("necronomicon.turnupindicator", new Object[] {Integer.valueOf(currTurnup + 1), Integer.valueOf(bookTotalTurnups)});
 
 			l = fontRendererObj.getStringWidth(s);
-			fontRendererObj.drawString(s, k - l + guiWidth - 22, b0 + 16, 0);
+			if(getTurnupLimit() > 1)
+				fontRendererObj.drawString(s, k - l + guiWidth - 22, b0 + 16, 0);
+			drawInformationText(par1, par2);
 		} else
 			drawIndexText();
 

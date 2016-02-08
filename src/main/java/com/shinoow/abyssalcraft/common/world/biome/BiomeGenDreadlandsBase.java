@@ -13,12 +13,17 @@ package com.shinoow.abyssalcraft.common.world.biome;
 
 import java.util.Random;
 
-import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.state.IBlockState;
+import net.minecraft.block.state.pattern.BlockHelper;
 import net.minecraft.init.Blocks;
+import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
+import net.minecraft.world.chunk.ChunkPrimer;
 import net.minecraft.world.gen.feature.WorldGenMinable;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.common.entity.EntityAbygolem;
@@ -36,8 +41,8 @@ public class BiomeGenDreadlandsBase extends BiomeGenBase {
 	@SuppressWarnings("unchecked")
 	public BiomeGenDreadlandsBase(int par1) {
 		super(par1);
-		topBlock = AbyssalCraft.dreadstone;
-		fillerBlock = AbyssalCraft.dreadstone;
+		topBlock = AbyssalCraft.dreadstone.getDefaultState();
+		fillerBlock = AbyssalCraft.dreadstone.getDefaultState();
 		spawnableMonsterList.clear();
 		spawnableCreatureList.clear();
 		spawnableWaterCreatureList.clear();
@@ -56,115 +61,119 @@ public class BiomeGenDreadlandsBase extends BiomeGenBase {
 	}
 
 	@Override
-	public void decorate(World par1World, Random par2Random, int par3, int par4)
+	public void decorate(World par1World, Random par2Random, BlockPos pos)
 	{
-		super.decorate(par1World, par2Random, par3, par4);
+		super.decorate(par1World, par2Random, pos);
 
 		for(int rarity = 0; rarity < 8; rarity++) {
 			int veinSize =  4 + par2Random.nextInt(12);
-			int x = par3 + par2Random.nextInt(16);
+			int x = par2Random.nextInt(16) + 8;
 			int y = par2Random.nextInt(60);
-			int z = par4 + par2Random.nextInt(16);
+			int z = par2Random.nextInt(16) + 8;
 
-			new WorldGenMinable(AbyssalCraft.dreadore, veinSize, AbyssalCraft.dreadstone).generate(par1World, par2Random, x, y, z);
+			new WorldGenMinable(AbyssalCraft.dreadore.getDefaultState(), veinSize, BlockHelper.forBlock(AbyssalCraft.dreadstone)).generate(par1World, par2Random, pos.add(x, y, z));
 		}
 
 		for (int rarity = 0; rarity < 3; ++rarity)
 		{
-			int x = par3 + par2Random.nextInt(16);
+			int x = par2Random.nextInt(16) + 8;
 			int y = par2Random.nextInt(55);
-			int z = par4 + par2Random.nextInt(16);
-			new WorldGenMinable(AbyssalCraft.abydreadstone, 16,
-					AbyssalCraft.dreadstone).generate(par1World, par2Random, x, y, z);
+			int z = par2Random.nextInt(16) + 8;
+			new WorldGenMinable(AbyssalCraft.abydreadstone.getDefaultState(), 16,
+					BlockHelper.forBlock(AbyssalCraft.dreadstone)).generate(par1World, par2Random, pos.add(x, y, z));
 		}
 	}
 
 	@Override
-	public void genTerrainBlocks(World world, Random rand, Block[] blockArray, byte[] byteArray, int x, int z, double d)
+	@SideOnly(Side.CLIENT)
+	public int getSkyColorByTemp(float par1)
 	{
-		genDreadlandsTerrain(world, rand, blockArray, byteArray, x, z, d);
+		return 0;
 	}
 
-	public final void genDreadlandsTerrain(World world, Random rand, Block[] blockArray, byte[] byteArray, int x, int z, double d)
+	@Override
+	@SideOnly(Side.CLIENT)
+	public int getGrassColorAtPos(BlockPos pos)
 	{
-		Block block = topBlock;
-		byte b0 = (byte)(field_150604_aj & 255);
-		Block block1 = fillerBlock;
-		int k = -1;
-		int l = (int)(d / 3.0D + 3.0D + rand.nextDouble() * 0.25D);
-		int i1 = x & 15;
-		int j1 = z & 15;
-		int k1 = blockArray.length / 256;
+		return 0x910000;
+	}
 
-		for (int l1 = 255; l1 >= 0; --l1)
-		{
-			int i2 = (j1 * 16 + i1) * k1 + l1;
+	@Override
+	@SideOnly(Side.CLIENT)
+	public int getFoliageColorAtPos(BlockPos pos)
+	{
+		return 0x910000;
+	}
 
-			if (l1 <= 0 + rand.nextInt(5))
-				blockArray[i2] = Blocks.bedrock;
+	@Override
+	public void genTerrainBlocks(World world, Random rand, ChunkPrimer chunkPrimer, int x, int z, double d)
+	{
+		genDreadlandsTerrain(world, rand, chunkPrimer, x, z, d);
+	}
+
+	public final void genDreadlandsTerrain(World worldIn, Random rand, ChunkPrimer chunkPrimerIn, int x, int z, double d)
+	{
+		int i = worldIn.getSeaLevel();
+		IBlockState iblockstate = topBlock;
+		IBlockState iblockstate1 = fillerBlock;
+		int j = -1;
+		int k = (int)(d / 3.0D + 3.0D + rand.nextDouble() * 0.25D);
+		int l = x & 15;
+		int i1 = z & 15;
+		new BlockPos.MutableBlockPos();
+
+		for (int j1 = 255; j1 >= 0; --j1)
+			if (j1 <= rand.nextInt(5))
+				chunkPrimerIn.setBlockState(i1, j1, l, Blocks.bedrock.getDefaultState());
 			else
 			{
-				Block block2 = blockArray[i2];
+				IBlockState iblockstate2 = chunkPrimerIn.getBlockState(i1, j1, l);
 
-				if (block2 != null && block2.getMaterial() != Material.air)
-				{
-					if (block2 == AbyssalCraft.dreadstone)
-						if (k == -1)
+				if (iblockstate2.getBlock().getMaterial() == Material.air)
+					j = -1;
+				else if (iblockstate2.getBlock() == AbyssalCraft.dreadstone)
+					if (j == -1)
+					{
+						if (k <= 0)
 						{
-							if (l <= 0)
-							{
-								block = null;
-								b0 = 0;
-								block1 = AbyssalCraft.dreadstone;
-							}
-							else if (l1 >= 59 && l1 <= 64)
-							{
-								block = topBlock;
-								b0 = (byte)(field_150604_aj & 255);
-								block1 = fillerBlock;
-							}
-
-							if (l1 < 63 && (block == null || block.getMaterial() == Material.air))
-								if (getFloatTemperature(x, l1, z) < 0.15F)
-								{
-									block = AbyssalCraft.dreadstone;
-									b0 = 0;
-								}
-								else
-								{
-									block = AbyssalCraft.dreadstone;
-									b0 = 0;
-								}
-
-							k = l;
-
-							if (l1 >= 62)
-							{
-								blockArray[i2] = block;
-								byteArray[i2] = b0;
-							}
-							else if (l1 < 56 - l)
-							{
-								block = null;
-								block1 = AbyssalCraft.dreadstone;
-								blockArray[i2] = AbyssalCraft.dreadstone;
-							} else
-								blockArray[i2] = block1;
+							iblockstate = null;
+							iblockstate1 = AbyssalCraft.dreadstone.getDefaultState();
 						}
-						else if (k > 0)
+						else if (j1 >= i - 4 && j1 <= i + 1)
 						{
-							--k;
-							blockArray[i2] = block1;
-
-							if (k == 0 && block1 == AbyssalCraft.dreadstone)
-							{
-								k = rand.nextInt(4) + Math.max(0, l1 - 63);
-								block1 = AbyssalCraft.dreadstone;
-							}
+							iblockstate = topBlock;
+							iblockstate1 = fillerBlock;
 						}
-				} else
-					k = -1;
+
+						//						if (j1 < i && (iblockstate == null || iblockstate.getBlock().getMaterial() == Material.air))
+						//							if (getFloatTemperature(blockpos$mutableblockpos.set(x, j1, z)) < 0.15F)
+						//								iblockstate = Blocks.ice.getDefaultState();
+						//							else
+						//								iblockstate = Blocks.water.getDefaultState();
+
+						j = k;
+
+						if (j1 >= i - 1)
+							chunkPrimerIn.setBlockState(i1, j1, l, iblockstate);
+						else if (j1 < i - 7 - k)
+						{
+							iblockstate = null;
+							iblockstate1 = AbyssalCraft.dreadstone.getDefaultState();
+							chunkPrimerIn.setBlockState(i1, j1, l, AbyssalCraft.dreadstone.getDefaultState());
+						} else
+							chunkPrimerIn.setBlockState(i1, j1, l, iblockstate1);
+					}
+					else if (j > 0)
+					{
+						--j;
+						chunkPrimerIn.setBlockState(i1, j1, l, iblockstate1);
+
+						//						if (j == 0 && iblockstate1.getBlock() == Blocks.sand)
+						//						{
+						//							j = rand.nextInt(4) + Math.max(0, j1 - 63);
+						//							iblockstate1 = iblockstate1.getValue(BlockSand.VARIANT) == BlockSand.EnumType.RED_SAND ? Blocks.red_sandstone.getDefaultState() : Blocks.sandstone.getDefaultState();
+						//						}
+					}
 			}
-		}
 	}
 }

@@ -13,8 +13,9 @@ package com.shinoow.abyssalcraft.common.structures.overworld;
 
 import java.util.Random;
 
-import net.minecraft.block.Block;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
+import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
 
@@ -22,35 +23,35 @@ import com.shinoow.abyssalcraft.AbyssalCraft;
 
 public class ACplatform2 extends WorldGenerator
 {
-	protected Block[] GetValidSpawnBlocks() {
-		return new Block[] {
-				AbyssalCraft.Darkstone,
-				AbyssalCraft.Darkgrass
+	protected IBlockState[] GetValidSpawnBlocks() {
+		return new IBlockState[] {
+				AbyssalCraft.Darkstone.getDefaultState(),
+				AbyssalCraft.Darkgrass.getDefaultState()
 		};
 	}
 
-	public boolean LocationIsValidSpawn(World world, int i, int j, int k){
+	public boolean LocationIsValidSpawn(World world, BlockPos pos){
 		int distanceToAir = 0;
-		int checkID = world.getBlockMetadata(i, j, k);
+		IBlockState checkID = world.getBlockState(pos);
 
-		while (checkID != 0){
+		while (checkID != Blocks.air.getDefaultState()){
 			distanceToAir++;
-			checkID = world.getBlockMetadata(i, j + distanceToAir, k);
+			checkID = world.getBlockState(pos.up(distanceToAir));
 		}
 
 		if (distanceToAir > 1)
 			return false;
-		j += distanceToAir - 1;
+		pos.up(distanceToAir - 1);
 
-		Block blockID = world.getBlock(i, j, k);
-		Block blockIDAbove = world.getBlock(i, j+1, k);
-		Block blockIDBelow = world.getBlock(i, j-1, k);
-		for (Block x : GetValidSpawnBlocks()){
-			if (blockIDAbove != Blocks.air)
+		IBlockState blockID = world.getBlockState(pos);
+		IBlockState blockIDAbove = world.getBlockState(pos.up(1));
+		IBlockState blockIDBelow = world.getBlockState(pos.down(1));
+		for (IBlockState x : GetValidSpawnBlocks()){
+			if (blockIDAbove != Blocks.air.getDefaultState())
 				return false;
 			if (blockID == x)
 				return true;
-			else if (blockID == Blocks.snow && blockIDBelow == x)
+			else if (blockID == Blocks.snow.getDefaultState() && blockIDBelow == x)
 				return true;
 		}
 		return false;
@@ -59,162 +60,163 @@ public class ACplatform2 extends WorldGenerator
 	public ACplatform2() { }
 
 	@Override
-	public boolean generate(World world, Random random, int i, int j, int k) {
+	public boolean generate(World world, Random random, BlockPos pos) {
 
-		if(!LocationIsValidSpawn(world, i, j, k) || !LocationIsValidSpawn(world, i + 6, j, k) || !LocationIsValidSpawn(world, i + 6, j, k + 6) || !LocationIsValidSpawn(world, i, j, k + 6))
+		if(!LocationIsValidSpawn(world, pos) || !LocationIsValidSpawn(world, pos.east(7)) || !LocationIsValidSpawn(world, pos.add(7, 0, 8)) || !LocationIsValidSpawn(world, pos.south(8)))
 			return false;
 
-		world.setBlock(i + 0, j + 0, k + 0, Blocks.air, 0, k);
-		world.setBlock(i + 0, j + 0, k + 1, Blocks.air, 0, k);
-		world.setBlock(i + 0, j + 0, k + 2, AbyssalCraft.Darkstone, k, k);
-		world.setBlock(i + 0, j + 0, k + 3, AbyssalCraft.Darkstone, k, k);
-		world.setBlock(i + 0, j + 0, k + 4, AbyssalCraft.Darkstone, k, k);
-		world.setBlock(i + 0, j + 0, k + 5, Blocks.air, 0, k);
-		world.setBlock(i + 0, j + 0, k + 6, Blocks.air, 0, k);
-		world.setBlock(i + 0, j + 1, k + 0, Blocks.air, 0, k);
-		world.setBlock(i + 0, j + 1, k + 1, Blocks.air, 0, k);
-		world.setBlock(i + 0, j + 1, k + 2, Blocks.air, 0, k);
-		world.setBlock(i + 0, j + 1, k + 3, Blocks.air, 0, k);
-		world.setBlock(i + 0, j + 1, k + 4, Blocks.air, 0, k);
-		world.setBlock(i + 0, j + 1, k + 5, Blocks.air, 0, k);
-		world.setBlock(i + 0, j + 1, k + 6, Blocks.air, 0, k);
-		world.setBlock(i + 0, j + 2, k + 0, Blocks.air, 0, k);
-		world.setBlock(i + 0, j + 2, k + 1, Blocks.air, 0, k);
-		world.setBlock(i + 0, j + 2, k + 2, Blocks.air, 0, k);
-		world.setBlock(i + 0, j + 2, k + 3, Blocks.air, 0, k);
-		world.setBlock(i + 0, j + 2, k + 4, Blocks.air, 0, k);
-		world.setBlock(i + 0, j + 2, k + 5, Blocks.air, 0, k);
-		world.setBlock(i + 0, j + 2, k + 6, Blocks.air, 0, k);
-		world.setBlock(i + 1, j + 0, k + 0, Blocks.air, 0, k);
-		world.setBlock(i + 1, j + 0, k + 1, AbyssalCraft.Darkstone, k, k);
-		world.setBlock(i + 1, j + 0, k + 2, AbyssalCraft.Darkstone, k, k);
-		world.setBlock(i + 1, j + 0, k + 3, AbyssalCraft.Darkstone, k, k);
-		world.setBlock(i + 1, j + 0, k + 4, AbyssalCraft.Darkstone, k, k);
-		world.setBlock(i + 1, j + 0, k + 5, AbyssalCraft.Darkstone, k, k);
-		world.setBlock(i + 1, j + 0, k + 6, Blocks.air, 0, k);
-		world.setBlock(i + 1, j + 1, k + 0, Blocks.air, 0, k);
-		world.setBlock(i + 1, j + 1, k + 2, AbyssalCraft.Darkstone, k, k);
-		world.setBlock(i + 1, j + 1, k + 3, AbyssalCraft.Darkstone, k, k);
-		world.setBlock(i + 1, j + 1, k + 4, AbyssalCraft.Darkstone, k, k);
-		world.setBlock(i + 1, j + 1, k + 6, Blocks.air, 0, k);
-		world.setBlock(i + 1, j + 2, k + 0, Blocks.air, 0, k);
-		world.setBlock(i + 1, j + 2, k + 1, Blocks.air, 0, k);
-		world.setBlock(i + 1, j + 2, k + 2, Blocks.air, 0, k);
-		world.setBlock(i + 1, j + 2, k + 3, Blocks.air, 0, k);
-		world.setBlock(i + 1, j + 2, k + 4, Blocks.air, 0, k);
-		world.setBlock(i + 1, j + 2, k + 5, Blocks.air, 0, k);
-		world.setBlock(i + 1, j + 2, k + 6, Blocks.air, 0, k);
-		world.setBlock(i + 2, j + 0, k + 0, AbyssalCraft.Darkstone, k, k);
-		world.setBlock(i + 2, j + 0, k + 1, AbyssalCraft.Darkstone, k, k);
-		world.setBlock(i + 2, j + 0, k + 2, AbyssalCraft.Darkstone, k, k);
-		world.setBlock(i + 2, j + 0, k + 3, AbyssalCraft.Darkstone, k, k);
-		world.setBlock(i + 2, j + 0, k + 4, AbyssalCraft.Darkstone, k, k);
-		world.setBlock(i + 2, j + 0, k + 5, AbyssalCraft.Darkstone, k, k);
-		world.setBlock(i + 2, j + 0, k + 6, AbyssalCraft.Darkstone, k, k);
-		world.setBlock(i + 2, j + 1, k + 0, Blocks.air, 0, k);
-		world.setBlock(i + 2, j + 1, k + 1, AbyssalCraft.Darkstone, k, k);
-		world.setBlock(i + 2, j + 1, k + 2, AbyssalCraft.Darkstone, k, k);
-		world.setBlock(i + 2, j + 1, k + 3, AbyssalCraft.Darkstone, k, k);
-		world.setBlock(i + 2, j + 1, k + 4, AbyssalCraft.Darkstone, k, k);
-		world.setBlock(i + 2, j + 1, k + 5, AbyssalCraft.Darkstone, k, k);
-		world.setBlock(i + 2, j + 1, k + 6, Blocks.air, 0, k);
-		world.setBlock(i + 2, j + 2, k + 0, Blocks.air, 0, k);
-		world.setBlock(i + 2, j + 2, k + 1, Blocks.air, 0, k);
-		world.setBlock(i + 2, j + 2, k + 2, AbyssalCraft.Darkstone, k, k);
-		world.setBlock(i + 2, j + 2, k + 3, AbyssalCraft.Darkstone, k, k);
-		world.setBlock(i + 2, j + 2, k + 4, AbyssalCraft.Darkstone, k, k);
-		world.setBlock(i + 2, j + 2, k + 5, Blocks.air, 0, k);
-		world.setBlock(i + 2, j + 2, k + 6, Blocks.air, 0, k);
-		world.setBlock(i + 3, j + 0, k + 0, AbyssalCraft.Darkstone, k, k);
-		world.setBlock(i + 3, j + 0, k + 1, AbyssalCraft.Darkstone, k, k);
-		world.setBlock(i + 3, j + 0, k + 2, AbyssalCraft.Darkstone, k, k);
-		world.setBlock(i + 3, j + 0, k + 3, AbyssalCraft.Darkstone, k, k);
-		world.setBlock(i + 3, j + 0, k + 4, AbyssalCraft.Darkstone, k, k);
-		world.setBlock(i + 3, j + 0, k + 5, AbyssalCraft.Darkstone, k, k);
-		world.setBlock(i + 3, j + 0, k + 6, AbyssalCraft.Darkstone, k, k);
-		world.setBlock(i + 3, j + 1, k + 0, Blocks.air, 0, k);
-		world.setBlock(i + 3, j + 1, k + 1, AbyssalCraft.Darkstone, k, k);
-		world.setBlock(i + 3, j + 1, k + 2, AbyssalCraft.Darkstone, k, k);
-		world.setBlock(i + 3, j + 1, k + 3, Blocks.glowstone, k, k);
-		world.setBlock(i + 3, j + 1, k + 4, AbyssalCraft.Darkstone, k, k);
-		world.setBlock(i + 3, j + 1, k + 5, AbyssalCraft.Darkstone, k, k);
-		world.setBlock(i + 3, j + 1, k + 6, Blocks.air, 0, k);
-		world.setBlock(i + 3, j + 2, k + 0, Blocks.air, 0, k);
-		world.setBlock(i + 3, j + 2, k + 1, Blocks.air, 0, k);
-		world.setBlock(i + 3, j + 2, k + 2, AbyssalCraft.Darkstone, k, k);
-		world.setBlock(i + 3, j + 2, k + 3, Blocks.air, 0, k);
-		world.setBlock(i + 3, j + 2, k + 4, AbyssalCraft.Darkstone, k, k);
-		world.setBlock(i + 3, j + 2, k + 5, Blocks.air, 0, k);
-		world.setBlock(i + 3, j + 2, k + 6, Blocks.air, 0, k);
-		world.setBlock(i + 4, j + 0, k + 0, AbyssalCraft.Darkstone, k, k);
-		world.setBlock(i + 4, j + 0, k + 1, AbyssalCraft.Darkstone, k, k);
-		world.setBlock(i + 4, j + 0, k + 2, AbyssalCraft.Darkstone, k, k);
-		world.setBlock(i + 4, j + 0, k + 3, AbyssalCraft.Darkstone, k, k);
-		world.setBlock(i + 4, j + 0, k + 4, AbyssalCraft.Darkstone, k, k);
-		world.setBlock(i + 4, j + 0, k + 5, AbyssalCraft.Darkstone, k, k);
-		world.setBlock(i + 4, j + 0, k + 6, AbyssalCraft.Darkstone, k, k);
-		world.setBlock(i + 4, j + 1, k + 0, Blocks.air, 0, k);
-		world.setBlock(i + 4, j + 1, k + 1, AbyssalCraft.Darkstone, k, k);
-		world.setBlock(i + 4, j + 1, k + 2, AbyssalCraft.Darkstone, k, k);
-		world.setBlock(i + 4, j + 1, k + 3, AbyssalCraft.Darkstone, k, k);
-		world.setBlock(i + 4, j + 1, k + 4, AbyssalCraft.Darkstone, k, k);
-		world.setBlock(i + 4, j + 1, k + 5, AbyssalCraft.Darkstone, k, k);
-		world.setBlock(i + 4, j + 1, k + 6, Blocks.air, 0, k);
-		world.setBlock(i + 4, j + 2, k + 0, Blocks.air, 0, k);
-		world.setBlock(i + 4, j + 2, k + 1, Blocks.air, 0, k);
-		world.setBlock(i + 4, j + 2, k + 2, AbyssalCraft.Darkstone, k, k);
-		world.setBlock(i + 4, j + 2, k + 3, AbyssalCraft.Darkstone, k, k);
-		world.setBlock(i + 4, j + 2, k + 4, AbyssalCraft.Darkstone, k, k);
-		world.setBlock(i + 4, j + 2, k + 5, Blocks.air, 0, k);
-		world.setBlock(i + 4, j + 2, k + 6, Blocks.air, 0, k);
-		world.setBlock(i + 5, j + 0, k + 0, Blocks.air, 0, k);
-		world.setBlock(i + 5, j + 0, k + 1, AbyssalCraft.Darkstone, k, k);
-		world.setBlock(i + 5, j + 0, k + 2, AbyssalCraft.Darkstone, k, k);
-		world.setBlock(i + 5, j + 0, k + 3, AbyssalCraft.Darkstone, k, k);
-		world.setBlock(i + 5, j + 0, k + 4, AbyssalCraft.Darkstone, k, k);
-		world.setBlock(i + 5, j + 0, k + 5, AbyssalCraft.Darkstone, k, k);
-		world.setBlock(i + 5, j + 0, k + 6, Blocks.air, 0, k);
-		world.setBlock(i + 5, j + 1, k + 0, Blocks.air, 0, k);
-		world.setBlock(i + 5, j + 1, k + 2, AbyssalCraft.Darkstone, k, k);
-		world.setBlock(i + 5, j + 1, k + 3, AbyssalCraft.Darkstone, k, k);
-		world.setBlock(i + 5, j + 1, k + 4, AbyssalCraft.Darkstone, k, k);
-		world.setBlock(i + 5, j + 1, k + 6, Blocks.air, 0, k);
-		world.setBlock(i + 5, j + 2, k + 0, Blocks.air, 0, k);
-		world.setBlock(i + 5, j + 2, k + 1, Blocks.air, 0, k);
-		world.setBlock(i + 5, j + 2, k + 2, Blocks.air, 0, k);
-		world.setBlock(i + 5, j + 2, k + 3, Blocks.air, 0, k);
-		world.setBlock(i + 5, j + 2, k + 4, Blocks.air, 0, k);
-		world.setBlock(i + 5, j + 2, k + 5, Blocks.air, 0, k);
-		world.setBlock(i + 5, j + 2, k + 6, Blocks.air, 0, k);
-		world.setBlock(i + 6, j + 0, k + 0, Blocks.air, 0, k);
-		world.setBlock(i + 6, j + 0, k + 1, Blocks.air, 0, k);
-		world.setBlock(i + 6, j + 0, k + 2, AbyssalCraft.Darkstone, k, k);
-		world.setBlock(i + 6, j + 0, k + 3, AbyssalCraft.Darkstone, k, k);
-		world.setBlock(i + 6, j + 0, k + 4, AbyssalCraft.Darkstone, k, k);
-		world.setBlock(i + 6, j + 0, k + 5, Blocks.air, 0, k);
-		world.setBlock(i + 6, j + 0, k + 6, Blocks.air, 0, k);
-		world.setBlock(i + 6, j + 1, k + 0, Blocks.air, 0, k);
-		world.setBlock(i + 6, j + 1, k + 1, Blocks.air, 0, k);
-		world.setBlock(i + 6, j + 1, k + 2, Blocks.air, 0, k);
-		world.setBlock(i + 6, j + 1, k + 3, Blocks.air, 0, k);
-		world.setBlock(i + 6, j + 1, k + 4, Blocks.air, 0, k);
-		world.setBlock(i + 6, j + 1, k + 5, Blocks.air, 0, k);
-		world.setBlock(i + 6, j + 1, k + 6, Blocks.air, 0, k);
-		world.setBlock(i + 6, j + 2, k + 0, Blocks.air, 0, k);
-		world.setBlock(i + 6, j + 2, k + 1, Blocks.air, 0, k);
-		world.setBlock(i + 6, j + 2, k + 2, Blocks.air, 0, k);
-		world.setBlock(i + 6, j + 2, k + 3, Blocks.air, 0, k);
-		world.setBlock(i + 6, j + 2, k + 4, Blocks.air, 0, k);
-		world.setBlock(i + 6, j + 2, k + 5, Blocks.air, 0, k);
-		world.setBlock(i + 6, j + 2, k + 6, Blocks.air, 0, k);
-		world.setBlock(i + 1, j + 1, k + 1, Blocks.redstone_torch, 5, 5);
-		world.setBlock(i + 1, j + 1, k + 5, Blocks.redstone_torch, 5, 5);
-		world.setBlock(i + 5, j + 1, k + 1, Blocks.redstone_torch, 5, 5);
-		world.setBlock(i + 5, j + 1, k + 5, Blocks.redstone_torch, 5, 5);
+		int i = pos.getX();
+		int j = pos.getY();
+		int k = pos.getZ();
+
+		world.setBlockState(new BlockPos(i + 0, j + 0, k + 0), Blocks.air.getDefaultState(), 2);
+		world.setBlockState(new BlockPos(i + 0, j + 0, k + 1), Blocks.air.getDefaultState(), 2);
+		world.setBlockState(new BlockPos(i + 0, j + 0, k + 2), AbyssalCraft.Darkstone.getDefaultState(), 2);
+		world.setBlockState(new BlockPos(i + 0, j + 0, k + 3), AbyssalCraft.Darkstone.getDefaultState(), 2);
+		world.setBlockState(new BlockPos(i + 0, j + 0, k + 4), AbyssalCraft.Darkstone.getDefaultState(), 2);
+		world.setBlockState(new BlockPos(i + 0, j + 0, k + 5), Blocks.air.getDefaultState(), 2);
+		world.setBlockState(new BlockPos(i + 0, j + 0, k + 6), Blocks.air.getDefaultState(), 2);
+		world.setBlockState(new BlockPos(i + 0, j + 1, k + 0), Blocks.air.getDefaultState(), 2);
+		world.setBlockState(new BlockPos(i + 0, j + 1, k + 1), Blocks.air.getDefaultState(), 2);
+		world.setBlockState(new BlockPos(i + 0, j + 1, k + 2), Blocks.air.getDefaultState(), 2);
+		world.setBlockState(new BlockPos(i + 0, j + 1, k + 3), Blocks.air.getDefaultState(), 2);
+		world.setBlockState(new BlockPos(i + 0, j + 1, k + 4), Blocks.air.getDefaultState(), 2);
+		world.setBlockState(new BlockPos(i + 0, j + 1, k + 5), Blocks.air.getDefaultState(), 2);
+		world.setBlockState(new BlockPos(i + 0, j + 1, k + 6), Blocks.air.getDefaultState(), 2);
+		world.setBlockState(new BlockPos(i + 0, j + 2, k + 0), Blocks.air.getDefaultState(), 2);
+		world.setBlockState(new BlockPos(i + 0, j + 2, k + 1), Blocks.air.getDefaultState(), 2);
+		world.setBlockState(new BlockPos(i + 0, j + 2, k + 2), Blocks.air.getDefaultState(), 2);
+		world.setBlockState(new BlockPos(i + 0, j + 2, k + 3), Blocks.air.getDefaultState(), 2);
+		world.setBlockState(new BlockPos(i + 0, j + 2, k + 4), Blocks.air.getDefaultState(), 2);
+		world.setBlockState(new BlockPos(i + 0, j + 2, k + 5), Blocks.air.getDefaultState(), 2);
+		world.setBlockState(new BlockPos(i + 0, j + 2, k + 6), Blocks.air.getDefaultState(), 2);
+		world.setBlockState(new BlockPos(i + 1, j + 0, k + 0), Blocks.air.getDefaultState(), 2);
+		world.setBlockState(new BlockPos(i + 1, j + 0, k + 1), AbyssalCraft.Darkstone.getDefaultState(), 2);
+		world.setBlockState(new BlockPos(i + 1, j + 0, k + 2), AbyssalCraft.Darkstone.getDefaultState(), 2);
+		world.setBlockState(new BlockPos(i + 1, j + 0, k + 3), AbyssalCraft.Darkstone.getDefaultState(), 2);
+		world.setBlockState(new BlockPos(i + 1, j + 0, k + 4), AbyssalCraft.Darkstone.getDefaultState(), 2);
+		world.setBlockState(new BlockPos(i + 1, j + 0, k + 5), AbyssalCraft.Darkstone.getDefaultState(), 2);
+		world.setBlockState(new BlockPos(i + 1, j + 0, k + 6), Blocks.air.getDefaultState(), 2);
+		world.setBlockState(new BlockPos(i + 1, j + 1, k + 0), Blocks.air.getDefaultState(), 2);
+		world.setBlockState(new BlockPos(i + 1, j + 1, k + 2), AbyssalCraft.Darkstone.getDefaultState(), 2);
+		world.setBlockState(new BlockPos(i + 1, j + 1, k + 3), AbyssalCraft.Darkstone.getDefaultState(), 2);
+		world.setBlockState(new BlockPos(i + 1, j + 1, k + 4), AbyssalCraft.Darkstone.getDefaultState(), 2);
+		world.setBlockState(new BlockPos(i + 1, j + 1, k + 6), Blocks.air.getDefaultState(), 2);
+		world.setBlockState(new BlockPos(i + 1, j + 2, k + 0), Blocks.air.getDefaultState(), 2);
+		world.setBlockState(new BlockPos(i + 1, j + 2, k + 1), Blocks.air.getDefaultState(), 2);
+		world.setBlockState(new BlockPos(i + 1, j + 2, k + 2), Blocks.air.getDefaultState(), 2);
+		world.setBlockState(new BlockPos(i + 1, j + 2, k + 3), Blocks.air.getDefaultState(), 2);
+		world.setBlockState(new BlockPos(i + 1, j + 2, k + 4), Blocks.air.getDefaultState(), 2);
+		world.setBlockState(new BlockPos(i + 1, j + 2, k + 5), Blocks.air.getDefaultState(), 2);
+		world.setBlockState(new BlockPos(i + 1, j + 2, k + 6), Blocks.air.getDefaultState(), 2);
+		world.setBlockState(new BlockPos(i + 2, j + 0, k + 0), AbyssalCraft.Darkstone.getDefaultState(), 2);
+		world.setBlockState(new BlockPos(i + 2, j + 0, k + 1), AbyssalCraft.Darkstone.getDefaultState(), 2);
+		world.setBlockState(new BlockPos(i + 2, j + 0, k + 2), AbyssalCraft.Darkstone.getDefaultState(), 2);
+		world.setBlockState(new BlockPos(i + 2, j + 0, k + 3), AbyssalCraft.Darkstone.getDefaultState(), 2);
+		world.setBlockState(new BlockPos(i + 2, j + 0, k + 4), AbyssalCraft.Darkstone.getDefaultState(), 2);
+		world.setBlockState(new BlockPos(i + 2, j + 0, k + 5), AbyssalCraft.Darkstone.getDefaultState(), 2);
+		world.setBlockState(new BlockPos(i + 2, j + 0, k + 6), AbyssalCraft.Darkstone.getDefaultState(), 2);
+		world.setBlockState(new BlockPos(i + 2, j + 1, k + 0), Blocks.air.getDefaultState(), 2);
+		world.setBlockState(new BlockPos(i + 2, j + 1, k + 1), AbyssalCraft.Darkstone.getDefaultState(), 2);
+		world.setBlockState(new BlockPos(i + 2, j + 1, k + 2), AbyssalCraft.Darkstone.getDefaultState(), 2);
+		world.setBlockState(new BlockPos(i + 2, j + 1, k + 3), AbyssalCraft.Darkstone.getDefaultState(), 2);
+		world.setBlockState(new BlockPos(i + 2, j + 1, k + 4), AbyssalCraft.Darkstone.getDefaultState(), 2);
+		world.setBlockState(new BlockPos(i + 2, j + 1, k + 5), AbyssalCraft.Darkstone.getDefaultState(), 2);
+		world.setBlockState(new BlockPos(i + 2, j + 1, k + 6), Blocks.air.getDefaultState(), 2);
+		world.setBlockState(new BlockPos(i + 2, j + 2, k + 0), Blocks.air.getDefaultState(), 2);
+		world.setBlockState(new BlockPos(i + 2, j + 2, k + 1), Blocks.air.getDefaultState(), 2);
+		world.setBlockState(new BlockPos(i + 2, j + 2, k + 2), AbyssalCraft.Darkstone.getDefaultState(), 2);
+		world.setBlockState(new BlockPos(i + 2, j + 2, k + 3), AbyssalCraft.Darkstone.getDefaultState(), 2);
+		world.setBlockState(new BlockPos(i + 2, j + 2, k + 4), AbyssalCraft.Darkstone.getDefaultState(), 2);
+		world.setBlockState(new BlockPos(i + 2, j + 2, k + 5), Blocks.air.getDefaultState(), 2);
+		world.setBlockState(new BlockPos(i + 2, j + 2, k + 6), Blocks.air.getDefaultState(), 2);
+		world.setBlockState(new BlockPos(i + 3, j + 0, k + 0), AbyssalCraft.Darkstone.getDefaultState(), 2);
+		world.setBlockState(new BlockPos(i + 3, j + 0, k + 1), AbyssalCraft.Darkstone.getDefaultState(), 2);
+		world.setBlockState(new BlockPos(i + 3, j + 0, k + 2), AbyssalCraft.Darkstone.getDefaultState(), 2);
+		world.setBlockState(new BlockPos(i + 3, j + 0, k + 3), AbyssalCraft.Darkstone.getDefaultState(), 2);
+		world.setBlockState(new BlockPos(i + 3, j + 0, k + 4), AbyssalCraft.Darkstone.getDefaultState(), 2);
+		world.setBlockState(new BlockPos(i + 3, j + 0, k + 5), AbyssalCraft.Darkstone.getDefaultState(), 2);
+		world.setBlockState(new BlockPos(i + 3, j + 0, k + 6), AbyssalCraft.Darkstone.getDefaultState(), 2);
+		world.setBlockState(new BlockPos(i + 3, j + 1, k + 0), Blocks.air.getDefaultState(), 2);
+		world.setBlockState(new BlockPos(i + 3, j + 1, k + 1), AbyssalCraft.Darkstone.getDefaultState(), 2);
+		world.setBlockState(new BlockPos(i + 3, j + 1, k + 2), AbyssalCraft.Darkstone.getDefaultState(), 2);
+		world.setBlockState(new BlockPos(i + 3, j + 1, k + 3), Blocks.glowstone.getDefaultState(), 2);
+		world.setBlockState(new BlockPos(i + 3, j + 1, k + 4), AbyssalCraft.Darkstone.getDefaultState(), 2);
+		world.setBlockState(new BlockPos(i + 3, j + 1, k + 5), AbyssalCraft.Darkstone.getDefaultState(), 2);
+		world.setBlockState(new BlockPos(i + 3, j + 1, k + 6), Blocks.air.getDefaultState(), 2);
+		world.setBlockState(new BlockPos(i + 3, j + 2, k + 0), Blocks.air.getDefaultState(), 2);
+		world.setBlockState(new BlockPos(i + 3, j + 2, k + 1), Blocks.air.getDefaultState(), 2);
+		world.setBlockState(new BlockPos(i + 3, j + 2, k + 2), AbyssalCraft.Darkstone.getDefaultState(), 2);
+		world.setBlockState(new BlockPos(i + 3, j + 2, k + 3), Blocks.air.getDefaultState(), 2);
+		world.setBlockState(new BlockPos(i + 3, j + 2, k + 4), AbyssalCraft.Darkstone.getDefaultState(), 2);
+		world.setBlockState(new BlockPos(i + 3, j + 2, k + 5), Blocks.air.getDefaultState(), 2);
+		world.setBlockState(new BlockPos(i + 3, j + 2, k + 6), Blocks.air.getDefaultState(), 2);
+		world.setBlockState(new BlockPos(i + 4, j + 0, k + 0), AbyssalCraft.Darkstone.getDefaultState(), 2);
+		world.setBlockState(new BlockPos(i + 4, j + 0, k + 1), AbyssalCraft.Darkstone.getDefaultState(), 2);
+		world.setBlockState(new BlockPos(i + 4, j + 0, k + 2), AbyssalCraft.Darkstone.getDefaultState(), 2);
+		world.setBlockState(new BlockPos(i + 4, j + 0, k + 3), AbyssalCraft.Darkstone.getDefaultState(), 2);
+		world.setBlockState(new BlockPos(i + 4, j + 0, k + 4), AbyssalCraft.Darkstone.getDefaultState(), 2);
+		world.setBlockState(new BlockPos(i + 4, j + 0, k + 5), AbyssalCraft.Darkstone.getDefaultState(), 2);
+		world.setBlockState(new BlockPos(i + 4, j + 0, k + 6), AbyssalCraft.Darkstone.getDefaultState(), 2);
+		world.setBlockState(new BlockPos(i + 4, j + 1, k + 0), Blocks.air.getDefaultState(), 2);
+		world.setBlockState(new BlockPos(i + 4, j + 1, k + 1), AbyssalCraft.Darkstone.getDefaultState(), 2);
+		world.setBlockState(new BlockPos(i + 4, j + 1, k + 2), AbyssalCraft.Darkstone.getDefaultState(), 2);
+		world.setBlockState(new BlockPos(i + 4, j + 1, k + 3), AbyssalCraft.Darkstone.getDefaultState(), 2);
+		world.setBlockState(new BlockPos(i + 4, j + 1, k + 4), AbyssalCraft.Darkstone.getDefaultState(), 2);
+		world.setBlockState(new BlockPos(i + 4, j + 1, k + 5), AbyssalCraft.Darkstone.getDefaultState(), 2);
+		world.setBlockState(new BlockPos(i + 4, j + 1, k + 6), Blocks.air.getDefaultState(), 2);
+		world.setBlockState(new BlockPos(i + 4, j + 2, k + 0), Blocks.air.getDefaultState(), 2);
+		world.setBlockState(new BlockPos(i + 4, j + 2, k + 1), Blocks.air.getDefaultState(), 2);
+		world.setBlockState(new BlockPos(i + 4, j + 2, k + 2), AbyssalCraft.Darkstone.getDefaultState(), 2);
+		world.setBlockState(new BlockPos(i + 4, j + 2, k + 3), AbyssalCraft.Darkstone.getDefaultState(), 2);
+		world.setBlockState(new BlockPos(i + 4, j + 2, k + 4), AbyssalCraft.Darkstone.getDefaultState(), 2);
+		world.setBlockState(new BlockPos(i + 4, j + 2, k + 5), Blocks.air.getDefaultState(), 2);
+		world.setBlockState(new BlockPos(i + 4, j + 2, k + 6), Blocks.air.getDefaultState(), 2);
+		world.setBlockState(new BlockPos(i + 5, j + 0, k + 0), Blocks.air.getDefaultState(), 2);
+		world.setBlockState(new BlockPos(i + 5, j + 0, k + 1), AbyssalCraft.Darkstone.getDefaultState(), 2);
+		world.setBlockState(new BlockPos(i + 5, j + 0, k + 2), AbyssalCraft.Darkstone.getDefaultState(), 2);
+		world.setBlockState(new BlockPos(i + 5, j + 0, k + 3), AbyssalCraft.Darkstone.getDefaultState(), 2);
+		world.setBlockState(new BlockPos(i + 5, j + 0, k + 4), AbyssalCraft.Darkstone.getDefaultState(), 2);
+		world.setBlockState(new BlockPos(i + 5, j + 0, k + 5), AbyssalCraft.Darkstone.getDefaultState(), 2);
+		world.setBlockState(new BlockPos(i + 5, j + 0, k + 6), Blocks.air.getDefaultState(), 2);
+		world.setBlockState(new BlockPos(i + 5, j + 1, k + 0), Blocks.air.getDefaultState(), 2);
+		world.setBlockState(new BlockPos(i + 5, j + 1, k + 2), AbyssalCraft.Darkstone.getDefaultState(), 2);
+		world.setBlockState(new BlockPos(i + 5, j + 1, k + 3), AbyssalCraft.Darkstone.getDefaultState(), 2);
+		world.setBlockState(new BlockPos(i + 5, j + 1, k + 4), AbyssalCraft.Darkstone.getDefaultState(), 2);
+		world.setBlockState(new BlockPos(i + 5, j + 1, k + 6), Blocks.air.getDefaultState(), 2);
+		world.setBlockState(new BlockPos(i + 5, j + 2, k + 0), Blocks.air.getDefaultState(), 2);
+		world.setBlockState(new BlockPos(i + 5, j + 2, k + 1), Blocks.air.getDefaultState(), 2);
+		world.setBlockState(new BlockPos(i + 5, j + 2, k + 2), Blocks.air.getDefaultState(), 2);
+		world.setBlockState(new BlockPos(i + 5, j + 2, k + 3), Blocks.air.getDefaultState(), 2);
+		world.setBlockState(new BlockPos(i + 5, j + 2, k + 4), Blocks.air.getDefaultState(), 2);
+		world.setBlockState(new BlockPos(i + 5, j + 2, k + 5), Blocks.air.getDefaultState(), 2);
+		world.setBlockState(new BlockPos(i + 5, j + 2, k + 6), Blocks.air.getDefaultState(), 2);
+		world.setBlockState(new BlockPos(i + 6, j + 0, k + 0), Blocks.air.getDefaultState(), 2);
+		world.setBlockState(new BlockPos(i + 6, j + 0, k + 1), Blocks.air.getDefaultState(), 2);
+		world.setBlockState(new BlockPos(i + 6, j + 0, k + 2), AbyssalCraft.Darkstone.getDefaultState(), 2);
+		world.setBlockState(new BlockPos(i + 6, j + 0, k + 3), AbyssalCraft.Darkstone.getDefaultState(), 2);
+		world.setBlockState(new BlockPos(i + 6, j + 0, k + 4), AbyssalCraft.Darkstone.getDefaultState(), 2);
+		world.setBlockState(new BlockPos(i + 6, j + 0, k + 5), Blocks.air.getDefaultState(), 2);
+		world.setBlockState(new BlockPos(i + 6, j + 0, k + 6), Blocks.air.getDefaultState(), 2);
+		world.setBlockState(new BlockPos(i + 6, j + 1, k + 0), Blocks.air.getDefaultState(), 2);
+		world.setBlockState(new BlockPos(i + 6, j + 1, k + 1), Blocks.air.getDefaultState(), 2);
+		world.setBlockState(new BlockPos(i + 6, j + 1, k + 2), Blocks.air.getDefaultState(), 2);
+		world.setBlockState(new BlockPos(i + 6, j + 1, k + 3), Blocks.air.getDefaultState(), 2);
+		world.setBlockState(new BlockPos(i + 6, j + 1, k + 4), Blocks.air.getDefaultState(), 2);
+		world.setBlockState(new BlockPos(i + 6, j + 1, k + 5), Blocks.air.getDefaultState(), 2);
+		world.setBlockState(new BlockPos(i + 6, j + 1, k + 6), Blocks.air.getDefaultState(), 2);
+		world.setBlockState(new BlockPos(i + 6, j + 2, k + 0), Blocks.air.getDefaultState(), 2);
+		world.setBlockState(new BlockPos(i + 6, j + 2, k + 1), Blocks.air.getDefaultState(), 2);
+		world.setBlockState(new BlockPos(i + 6, j + 2, k + 2), Blocks.air.getDefaultState(), 2);
+		world.setBlockState(new BlockPos(i + 6, j + 2, k + 3), Blocks.air.getDefaultState(), 2);
+		world.setBlockState(new BlockPos(i + 6, j + 2, k + 4), Blocks.air.getDefaultState(), 2);
+		world.setBlockState(new BlockPos(i + 6, j + 2, k + 5), Blocks.air.getDefaultState(), 2);
+		world.setBlockState(new BlockPos(i + 6, j + 2, k + 6), Blocks.air.getDefaultState(), 2);
+		world.setBlockState(new BlockPos(i + 1, j + 1, k + 1), Blocks.redstone_torch.getStateFromMeta(5), 2); //TODO: 5
+		world.setBlockState(new BlockPos(i + 1, j + 1, k + 5), Blocks.redstone_torch.getStateFromMeta(5), 2); //TODO: 5
+		world.setBlockState(new BlockPos(i + 5, j + 1, k + 1), Blocks.redstone_torch.getStateFromMeta(5), 2); //TODO: 5
+		world.setBlockState(new BlockPos(i + 5, j + 1, k + 5), Blocks.redstone_torch.getStateFromMeta(5), 2); //TODO: 5
 
 		return true;
 	}
-
-
-
 }

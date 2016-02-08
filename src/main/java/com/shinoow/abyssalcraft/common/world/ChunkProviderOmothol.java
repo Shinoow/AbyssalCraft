@@ -17,15 +17,17 @@ import java.util.Random;
 import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.common.structures.StructureShoggothPit;
 
-import net.minecraft.block.Block;
 import net.minecraft.block.BlockFalling;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EnumCreatureType;
+import net.minecraft.init.Blocks;
+import net.minecraft.util.BlockPos;
 import net.minecraft.util.IProgressUpdate;
-import net.minecraft.world.ChunkPosition;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.chunk.Chunk;
+import net.minecraft.world.chunk.ChunkPrimer;
 import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraft.world.gen.NoiseGenerator;
 import net.minecraft.world.gen.NoiseGeneratorOctaves;
@@ -61,27 +63,27 @@ public class ChunkProviderOmothol implements IChunkProvider
 		noiseGen5 = (NoiseGeneratorOctaves)noiseGens[4];
 	}
 
-	public void generateTerrain(int x, int z, Block[] par3BlockArray, BiomeGenBase[] par4BiomeArray)
+	public void setBlocksInChunk(int x, int z, ChunkPrimer primer)
 	{
-		byte b0 = 2;
-		int k = b0 + 1;
-		byte b1 = 33;
-		int l = b0 + 1;
-		densities = initializeNoiseField(densities, x * b0, 0, z * b0, k, b1, l);
+		int i = 2;
+		int j = i + 1;
+		int k = 33;
+		int l = i + 1;
+		densities = initializeNoiseField(densities, x * i, 0, z * i, j, k, l);
 
-		for (int i1 = 0; i1 < b0; ++i1)
-			for (int j1 = 0; j1 < b0; ++j1)
+		for (int i1 = 0; i1 < i; ++i1)
+			for (int j1 = 0; j1 < i; ++j1)
 				for (int k1 = 0; k1 < 32; ++k1)
 				{
 					double d0 = 0.25D;
-					double d1 = densities[((i1 + 0) * l + j1 + 0) * b1 + k1 + 0];
-					double d2 = densities[((i1 + 0) * l + j1 + 1) * b1 + k1 + 0];
-					double d3 = densities[((i1 + 1) * l + j1 + 0) * b1 + k1 + 0];
-					double d4 = densities[((i1 + 1) * l + j1 + 1) * b1 + k1 + 0];
-					double d5 = (densities[((i1 + 0) * l + j1 + 0) * b1 + k1 + 1] - d1) * d0;
-					double d6 = (densities[((i1 + 0) * l + j1 + 1) * b1 + k1 + 1] - d2) * d0;
-					double d7 = (densities[((i1 + 1) * l + j1 + 0) * b1 + k1 + 1] - d3) * d0;
-					double d8 = (densities[((i1 + 1) * l + j1 + 1) * b1 + k1 + 1] - d4) * d0;
+					double d1 = densities[((i1 + 0) * l + j1 + 0) * k + k1 + 0];
+					double d2 = densities[((i1 + 0) * l + j1 + 1) * k + k1 + 0];
+					double d3 = densities[((i1 + 1) * l + j1 + 0) * k + k1 + 0];
+					double d4 = densities[((i1 + 1) * l + j1 + 1) * k + k1 + 0];
+					double d5 = (densities[((i1 + 0) * l + j1 + 0) * k + k1 + 1] - d1) * d0;
+					double d6 = (densities[((i1 + 0) * l + j1 + 1) * k + k1 + 1] - d2) * d0;
+					double d7 = (densities[((i1 + 1) * l + j1 + 0) * k + k1 + 1] - d3) * d0;
+					double d8 = (densities[((i1 + 1) * l + j1 + 1) * k + k1 + 1] - d4) * d0;
 
 					for (int l1 = 0; l1 < 4; ++l1)
 					{
@@ -93,21 +95,21 @@ public class ChunkProviderOmothol implements IChunkProvider
 
 						for (int i2 = 0; i2 < 8; ++i2)
 						{
-							int j2 = i2 + i1 * 8 << 11 | 0 + j1 * 8 << 7 | k1 * 4 + l1;
-							short short1 = 128;
 							double d14 = 0.125D;
 							double d15 = d10;
 							double d16 = (d11 - d10) * d14;
 
-							for (int k2 = 0; k2 < 8; ++k2)
+							for (int j2 = 0; j2 < 8; ++j2)
 							{
-								Block block = null;
+								IBlockState iblockstate = null;
 
 								if (d15 > 0.0D)
-									block = AbyssalCraft.omotholstone;
+									iblockstate = AbyssalCraft.omotholstone.getDefaultState();
 
-								par3BlockArray[j2] = block;
-								j2 += short1;
+								int k2 = i2 + i1 * 8;
+								int l2 = l1 + k1 * 4;
+								int i3 = j2 + j1 * 8;
+								primer.setBlockState(k2, l2, i3, iblockstate);
 								d15 += d16;
 							}
 
@@ -123,67 +125,58 @@ public class ChunkProviderOmothol implements IChunkProvider
 				}
 	}
 
-	public void replaceBlocksForBiome(int x, int z, Block[] par3BlockArray, BiomeGenBase[] par4BiomeArray)
+	public void replaceBlocksForBiome(ChunkPrimer primer)
 	{
 
-		for (int k = 0; k < 16; ++k)
-			for (int l = 0; l < 16; ++l)
+		for (int i = 0; i < 16; ++i)
+			for (int j = 0; j < 16; ++j)
 			{
-				byte b0 = 1;
-				int i1 = -1;
-				Block block = AbyssalCraft.omotholstone;
-				Block block1 = AbyssalCraft.omotholstone;
+				int k = 1;
+				int l = -1;
+				IBlockState iblockstate = AbyssalCraft.omotholstone.getDefaultState();
+				IBlockState iblockstate1 = AbyssalCraft.omotholstone.getDefaultState();
 
-				for (int j1 = 127; j1 >= 0; --j1)
+				for (int i1 = 127; i1 >= 0; --i1)
 				{
-					int k1 = (l * 16 + k) * 128 + j1;
-					Block block2 = par3BlockArray[k1];
+					IBlockState iblockstate2 = primer.getBlockState(i, i1, j);
 
-					if (block2 != null && block2.getMaterial() != Material.air)
-					{
-						if (block2 == AbyssalCraft.omotholstone)
-							if (i1 == -1)
+					if (iblockstate2.getBlock().getMaterial() == Material.air)
+						l = -1;
+					else if (iblockstate2.getBlock() == Blocks.stone)
+						if (l == -1)
+						{
+							if (k <= 0)
 							{
-								if (b0 <= 0)
-								{
-									block = null;
-									block1 = AbyssalCraft.omotholstone;
-								}
-
-								i1 = b0;
-
-								if (j1 >= 0)
-									par3BlockArray[k1] = block;
-								else
-									par3BlockArray[k1] = block1;
+								iblockstate = Blocks.air.getDefaultState();
+								iblockstate1 = AbyssalCraft.omotholstone.getDefaultState();
 							}
-							else if (i1 > 0)
-							{
-								--i1;
-								par3BlockArray[k1] = block1;
-							}
-					} else
-						i1 = -1;
+
+							l = k;
+
+							if (i1 >= 0)
+								primer.setBlockState(i, i1, j, iblockstate);
+							else
+								primer.setBlockState(i, i1, j, iblockstate1);
+						}
+						else if (l > 0)
+						{
+							--l;
+							primer.setBlockState(i, i1, j, iblockstate1);
+						}
 				}
 			}
-	}
-
-	@Override
-	public Chunk loadChunk(int x, int z)
-	{
-		return provideChunk(x, z);
 	}
 
 	@Override
 	public Chunk provideChunk(int x, int z)
 	{
 		rand.setSeed(x * 341873128712L + z * 132897987541L);
-		Block[] ablock = new Block[32768];
+		ChunkPrimer primer = new ChunkPrimer();
 		biomesForGeneration = worldObj.getWorldChunkManager().loadBlockGeneratorData(biomesForGeneration, x * 16, z * 16, 16, 16);
-		generateTerrain(x, z, ablock, biomesForGeneration);
-		replaceBlocksForBiome(x, z, ablock, biomesForGeneration);
+		setBlocksInChunk(x, z, primer);
+		replaceBlocksForBiome(primer);
 
-		Chunk chunk = new Chunk(worldObj, ablock, x, z);
+		Chunk chunk = new Chunk(worldObj, primer, x, z);
 		byte[] abyte = chunk.getBiomeArray();
 
 		for (int k = 0; k < abyte.length; ++k)
@@ -289,18 +282,17 @@ public class ChunkProviderOmothol implements IChunkProvider
 
 		int k = x * 16;
 		int l = z * 16;
-		BiomeGenBase biomegenbase = worldObj.getBiomeGenForCoords(k + 16, l + 16);
+		BiomeGenBase biomegenbase = worldObj.getBiomeGenForCoords(new BlockPos(k + 16, 0, l + 16));
 
 		for(int i = 0; i < 1; i++) {
 			int Xcoord2 = k + rand.nextInt(16);
 			int Zcoord2 = l + rand.nextInt(16);
-			int Ycoord2 = worldObj.getHeightValue(Xcoord2, Zcoord2);
 
 			if(rand.nextInt(200) == 0)
-				new StructureShoggothPit().generate(worldObj, rand, Xcoord2, Ycoord2, Zcoord2);
+				new StructureShoggothPit().generate(worldObj, rand, worldObj.getHeight(new BlockPos(Xcoord2, 0, Zcoord2)));
 		}
 
-		biomegenbase.decorate(worldObj, worldObj.rand, k, l);
+		biomegenbase.decorate(worldObj, worldObj.rand, new BlockPos(k, 0, l));
 
 		BlockFalling.fallInstantly = false;
 	}
@@ -334,14 +326,14 @@ public class ChunkProviderOmothol implements IChunkProvider
 
 	@Override
 	@SuppressWarnings("rawtypes")
-	public List getPossibleCreatures(EnumCreatureType par1EnumCreatureType, int x, int y, int z)
+	public List getPossibleCreatures(EnumCreatureType par1EnumCreatureType, BlockPos pos)
 	{
-		BiomeGenBase biomegenbase = worldObj.getBiomeGenForCoords(x, z);
+		BiomeGenBase biomegenbase = worldObj.getBiomeGenForCoords(pos);
 		return biomegenbase == null ? null : biomegenbase.getSpawnableList(par1EnumCreatureType);
 	}
 
 	@Override
-	public ChunkPosition func_147416_a(World par1World, String par2String, int x, int y, int z)
+	public BlockPos getStrongholdGen(World par1World, String par2String, BlockPos pos)
 	{
 		return null;
 	}
@@ -353,5 +345,18 @@ public class ChunkProviderOmothol implements IChunkProvider
 	}
 
 	@Override
-	public void recreateStructures(int x, int z) {}
+	public void recreateStructures(Chunk chunk, int x, int z) {}
+
+	@Override
+	public Chunk provideChunk(BlockPos blockPosIn) {
+
+		return provideChunk(blockPosIn.getX() >> 4, blockPosIn.getZ() >> 4);
+	}
+
+	@Override
+	public boolean func_177460_a(IChunkProvider p_177460_1_, Chunk p_177460_2_,
+			int p_177460_3_, int p_177460_4_) {
+
+		return false;
+	}
 }

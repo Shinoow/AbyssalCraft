@@ -15,14 +15,15 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemFood;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
-
 import com.shinoow.abyssalcraft.AbyssalCraft;
 
 public class ItemPlatefood extends ItemFood
 {
 
-	public ItemPlatefood(int j, float f, boolean b) {
+	public ItemPlatefood(int j, float f, boolean b, String name) {
 		super(j, f, b);
+		//		GameRegistry.registerItem(this, name);
+		setUnlocalizedName(name);
 		setCreativeTab(AbyssalCraft.tabFood);
 		setMaxStackSize(4);
 	}

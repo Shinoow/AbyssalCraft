@@ -20,9 +20,9 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Random;
 
+import net.minecraft.util.BlockPos;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.ChunkCoordIntPair;
-import net.minecraft.world.ChunkPosition;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.gen.structure.MapGenStructure;
@@ -73,7 +73,7 @@ public class MapGenAbyStronghold extends MapGenStructure
 
 
 	@Override
-	public String func_143025_a() {
+	public String getStructureName() {
 
 		return "AbyStronghold";
 	}
@@ -96,12 +96,12 @@ public class MapGenAbyStronghold extends MapGenStructure
 				int var11 = (int)Math.round(Math.sin(var4) * var8);
 				ArrayList var12 = new ArrayList();
 				Collections.addAll(var12, allowedBiomeGenBases);
-				ChunkPosition var13 = worldObj.getWorldChunkManager().findBiomePosition((var10 << 4) + 8, (var11 << 4) + 8, 112, var12, var3);
+				BlockPos var13 = worldObj.getWorldChunkManager().findBiomePosition((var10 << 4) + 8, (var11 << 4) + 8, 112, var12, var3);
 
 				if (var13 != null)
 				{
-					var10 = var13.chunkPosX >> 4;
-				var11 = var13.chunkPosY >> 4;
+					var10 = var13.getX() >> 4;
+				var11 = var13.getY() >> 4;
 				}
 
 				structureCoords[var7] = new ChunkCoordIntPair(var10, var11);
@@ -148,7 +148,7 @@ public class MapGenAbyStronghold extends MapGenStructure
 			ChunkCoordIntPair var5 = var2[var4];
 
 			if (var5 != null)
-				var1.add(var5.func_151349_a(64));
+				var1.add(var5.getCenterBlock(64));
 		}
 
 		return var1;

@@ -119,20 +119,6 @@ public class ModelStarSpawnPlayer extends ModelBiped {
 
 	public void setRotationAngles(Entity entity)
 	{
-		if (isSneak)
-		{
-			tentacle1.rotationPointY = 1.0F;
-			tentacle2.rotationPointY = 1.0F;
-			tentacle3.rotationPointY = 1.0F;
-			tentacle4.rotationPointY = 1.0F;
-		}
-		else
-		{
-			tentacle1.rotationPointY = 0.0F;
-			tentacle2.rotationPointY = 0.0F;
-			tentacle3.rotationPointY = 0.0F;
-			tentacle4.rotationPointY = 0.0F;
-		}
 
 		float f16 = 0.0299F;
 		limb1.rotateAngleX = MathHelper.sin(entity.ticksExisted * f16) * 4.5F * (float)Math.PI / 180.0F;
@@ -157,6 +143,15 @@ public class ModelStarSpawnPlayer extends ModelBiped {
 		limb4_2.rotateAngleX = MathHelper.sin(entity.ticksExisted * f19) * 4.5F * (float)Math.PI / 180.0F;
 		limb4_3.rotateAngleX = MathHelper.sin(entity.ticksExisted * f19) * 4.5F * (float)Math.PI / 180.0F;
 		limb4_4.rotateAngleX = MathHelper.sin(entity.ticksExisted * f19) * 4.5F * (float)Math.PI / 180.0F;
+	}
+
+	@Override
+	public void setInvisible(boolean invisible){
+		super.setInvisible(invisible);
+		tentacle1.showModel = invisible;
+		tentacle2.showModel = invisible;
+		tentacle3.showModel = invisible;
+		tentacle4.showModel = invisible;
 	}
 
 	public void renderTentacles(float par1, Entity entity){

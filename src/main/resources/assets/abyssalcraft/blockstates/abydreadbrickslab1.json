@@ -1,0 +1,14 @@
+{
+	"forge_marker": 1,
+	"defaults": {
+		"textures" : {
+			"bottom": "abyssalcraft:blocks/abydrsb",
+			"top": "abyssalcraft:blocks/abydrsb",
+			"side": "abyssalcraft:blocks/abydrsb"
+		}
+	},
+	"variants": {
+		"half=bottom,variant=false": { "model": "abyssalcraft:abydreadbrickslab1" },
+		"half=top,variant=false": { "model": "upper_slab" }
+	}
+}

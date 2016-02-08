@@ -18,7 +18,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.world.World;
-
 import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.common.util.EntityUtil;
 
@@ -29,7 +28,9 @@ public class ItemCorbone extends ItemFood {
 	public ItemCorbone(int j, float f, boolean b, String name) {
 		super(j, f, b);
 		setUnlocalizedName(name);
-		setTextureName("abyssalcraft:" + name);
+		//		setTextureName("abyssalcraft:" + name);
+		//		GameRegistry.registerItem(this, name);
+		setUnlocalizedName(name);
 		setCreativeTab(AbyssalCraft.tabFood);
 	}
 
@@ -37,7 +38,7 @@ public class ItemCorbone extends ItemFood {
 	public void onFoodEaten(ItemStack itemStack, World world, EntityPlayer entityPlayer)
 	{
 		if(itemStack.getItem() == AbyssalCraft.antiCorbone){
-			entityPlayer.addPotionEffect(new PotionEffect(Potion.field_76443_y.id, 600, 1));
+			entityPlayer.addPotionEffect(new PotionEffect(Potion.saturation.id, 600, 1));
 			entityPlayer.addPotionEffect(new PotionEffect(Potion.regeneration.id, 600, 0));
 			entityPlayer.inventory.addItemStackToInventory(new ItemStack(AbyssalCraft.antiBone));
 		} else {

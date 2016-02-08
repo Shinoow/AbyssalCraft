@@ -15,6 +15,7 @@ import java.util.List;
 
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;
 
 import com.shinoow.abyssalcraft.api.energy.disruption.DisruptionEntry;
@@ -26,8 +27,8 @@ public class DisruptionDisplaceEntities extends DisruptionEntry {
 	}
 
 	@Override
-	public void disrupt(World world, int x, int y, int z, List<EntityPlayer> players) {
-		List<EntityLivingBase> entities = world.getEntitiesWithinAABB(EntityLivingBase.class, world.getBlock(x, y, z).getCollisionBoundingBoxFromPool(world, x, y, z).expand(16, 16, 16));
+	public void disrupt(World world, BlockPos pos, List<EntityPlayer> players) {
+		List<EntityLivingBase> entities = world.getEntitiesWithinAABB(EntityLivingBase.class, world.getBlockState(pos).getBlock().getCollisionBoundingBox(world, pos, world.getBlockState(pos)).expand(16, 16, 16));
 
 		if(!entities.isEmpty())
 			for(EntityLivingBase entity : entities){

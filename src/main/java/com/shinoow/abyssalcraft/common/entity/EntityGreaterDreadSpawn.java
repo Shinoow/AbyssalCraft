@@ -31,6 +31,7 @@ import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.potion.PotionEffect;
+import net.minecraft.util.BlockPos;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
@@ -55,7 +56,7 @@ public class EntityGreaterDreadSpawn extends EntityMob implements IDreadEntity, 
 		tasks.addTask(6, new EntityAILookIdle(this));
 		tasks.addTask(6, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
 		targetTasks.addTask(1, new EntityAIHurtByTarget(this, false));
-		targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityPlayer.class, 0, true));
+		targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityPlayer.class, true));
 		isImmuneToFire = true;
 	}
 
@@ -74,12 +75,6 @@ public class EntityGreaterDreadSpawn extends EntityMob implements IDreadEntity, 
 			getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(100.0D);
 			getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(12.0D);
 		}
-	}
-
-	@Override
-	protected boolean isAIEnabled()
-	{
-		return true;
 	}
 
 	@Override
@@ -126,7 +121,7 @@ public class EntityGreaterDreadSpawn extends EntityMob implements IDreadEntity, 
 	}
 
 	@Override
-	protected void func_145780_a(int par1, int par2, int par3, Block par4)
+	protected void playStepSound(BlockPos pos, Block par4)
 	{
 		worldObj.playSoundAtEntity(this, "mob.zombie.step", 0.15F, 1.0F);
 	}
@@ -163,7 +158,7 @@ public class EntityGreaterDreadSpawn extends EntityMob implements IDreadEntity, 
 	}
 
 	@Override
-	protected void fall(float par1) {}
+	public void fall(float par1, float par2) {}
 
 	@Override
 	protected Item getDropItem()
@@ -183,12 +178,12 @@ public class EntityGreaterDreadSpawn extends EntityMob implements IDreadEntity, 
 	{
 		super.onLivingUpdate();
 
-		if(entityToAttack != null && getDistanceToEntity(entityToAttack) >= 5)
+		if(getAttackTarget() != null && getDistanceToEntity(getAttackTarget()) >= 5)
 			if(worldObj.rand.nextInt(1000) == 0)
-				attackEntityWithRangedAttack((EntityLivingBase) entityToAttack, 4);
+				attackEntityWithRangedAttack(getAttackTarget(), 4);
 
 
-		List<EntityGreaterDreadSpawn> greaterspawns = worldObj.getEntitiesWithinAABB(getClass(), boundingBox.expand(5D, 5D, 5D));
+		List<EntityGreaterDreadSpawn> greaterspawns = worldObj.getEntitiesWithinAABB(getClass(), getEntityBoundingBox().expand(5D, 5D, 5D));
 
 		if(!worldObj.isRemote)
 			if(!greaterspawns.isEmpty())

@@ -11,21 +11,22 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.client.render.entity;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.renderer.entity.RenderLiving;
+import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
 public class RenderEvilCow extends RenderLiving
 {
 	private static final ResourceLocation cowTextures = new ResourceLocation("textures/entity/cow/cow.png");
 
-	public RenderEvilCow(ModelBase model, float par2)
+	public RenderEvilCow(RenderManager manager, ModelBase model, float par2)
 	{
-		super(model, par2);
+		super(manager, model, par2);
 	}
 
 	@Override

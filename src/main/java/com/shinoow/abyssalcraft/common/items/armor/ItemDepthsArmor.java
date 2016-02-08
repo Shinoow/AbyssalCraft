@@ -16,7 +16,8 @@ import java.util.List;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.client.renderer.WorldRenderer;
+import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -28,27 +29,28 @@ import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.common.Loader;
+import net.minecraftforge.fml.common.Optional.Interface;
+import net.minecraftforge.fml.common.Optional.InterfaceList;
+import net.minecraftforge.fml.common.Optional.Method;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import org.lwjgl.opengl.GL11;
 
-import thaumcraft.api.IVisDiscountGear;
 import thaumcraft.api.aspects.Aspect;
-import thaumcraft.api.nodes.IRevealer;
+import thaumcraft.api.items.IRevealer;
+import thaumcraft.api.items.IVisDiscountGear;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
 
-import cpw.mods.fml.common.Loader;
-import cpw.mods.fml.common.Optional.Interface;
-import cpw.mods.fml.common.Optional.InterfaceList;
-import cpw.mods.fml.common.Optional.Method;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-
-@InterfaceList(value = { @Interface(iface = "thaumcraft.api.IVisDiscountGear", modid = "Thaumcraft"),
-		@Interface(iface = "thaumcraft.api.nodes.IRevealer", modid = "Thaumcraft")})
+@InterfaceList(value = { @Interface(iface = "thaumcraft.api.items.IVisDiscountGear", modid = "Thaumcraft"),
+		@Interface(iface = "thaumcraft.api.items.IRevealer", modid = "Thaumcraft")})
 public class ItemDepthsArmor extends ItemArmor implements IVisDiscountGear, IRevealer {
-	public ItemDepthsArmor(ArmorMaterial par2EnumArmorMaterial, int par3, int par4){
+	public ItemDepthsArmor(ArmorMaterial par2EnumArmorMaterial, int par3, int par4, String name){
 		super(par2EnumArmorMaterial, par3, par4);
+		//		GameRegistry.registerItem(this, name);
+		setUnlocalizedName(name);
 		setCreativeTab(AbyssalCraft.tabCombat);
 	}
 
@@ -70,19 +72,12 @@ public class ItemDepthsArmor extends ItemArmor implements IVisDiscountGear, IRev
 	}
 
 	@Override
-	@SideOnly(Side.CLIENT)
-	public void registerIcons(IIconRegister par1IconRegister)
-	{
-		itemIcon = par1IconRegister.registerIcon(AbyssalCraft.modid + ":" + this.getUnlocalizedName().substring(5));
-	}
-
-	@Override
 	public void onArmorTick(World world, EntityPlayer player, ItemStack itemstack) {
 		if (itemstack.getItem() == AbyssalCraft.Depthshelmet)
 		{
 			player.addPotionEffect(new PotionEffect(Potion.waterBreathing.getId(), 20, 0));
 			player.addPotionEffect(new PotionEffect(Potion.nightVision.getId(), 260, 0));
-			player.addPotionEffect(new PotionEffect(Potion.field_76443_y.getId(), 20, 0));
+			player.addPotionEffect(new PotionEffect(Potion.saturation.getId(), 20, 0));
 			if(player.getActivePotionEffect(AbyssalCraft.Cplague) !=null)
 				player.removePotionEffect(AbyssalCraft.Cplague.getId());
 		}
@@ -96,16 +91,16 @@ public class ItemDepthsArmor extends ItemArmor implements IVisDiscountGear, IRev
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void renderHelmetOverlay(ItemStack stack, EntityPlayer player, ScaledResolution resolution, float partialTicks, boolean hasScreen, int mouseX, int mouseY){
+	public void renderHelmetOverlay(ItemStack stack, EntityPlayer player, ScaledResolution resolution, float partialTicks){
 		final ResourceLocation coraliumBlur = new ResourceLocation("abyssalcraft:textures/misc/coraliumblur.png");
 
 
 		if(Minecraft.getMinecraft().gameSettings.thirdPersonView == 0 && stack != null && stack.getItem() == AbyssalCraft.Depthshelmet) {
 			GL11.glPushAttrib(GL11.GL_ALL_ATTRIB_BITS);
 
-			Tessellator t = Tessellator.instance;
+			Tessellator t = Tessellator.getInstance();
 
-			ScaledResolution scale = new ScaledResolution(Minecraft.getMinecraft(), Minecraft.getMinecraft().displayWidth, Minecraft.getMinecraft().displayHeight);
+			ScaledResolution scale = new ScaledResolution(Minecraft.getMinecraft());
 			int width = scale.getScaledWidth();
 			int height = scale.getScaledHeight();
 
@@ -116,11 +111,13 @@ public class ItemDepthsArmor extends ItemArmor implements IVisDiscountGear, IRev
 			GL11.glDisable(GL11.GL_ALPHA_TEST);
 			Minecraft.getMinecraft().renderEngine.bindTexture(coraliumBlur);
 
-			t.startDrawingQuads();
-			t.addVertexWithUV(0.0D, height, 90.0D, 0.0D, 1.0D);
-			t.addVertexWithUV(width, height, 90.0D, 1.0D, 1.0D);
-			t.addVertexWithUV(width, 0.0D, 90.0D, 1.0D, 0.0D);
-			t.addVertexWithUV(0.0D, 0.0D, 90.0D, 0.0D, 0.0D);
+			WorldRenderer wr = t.getWorldRenderer();
+
+			wr.begin(7, DefaultVertexFormats.POSITION_TEX);
+			wr.pos(0.0D, height, 90.0D).tex(0.0D, 1.0D).endVertex();;
+			wr.pos(width, height, 90.0D).tex(1.0D, 1.0D).endVertex();;
+			wr.pos(width, 0.0D, 90.0D).tex(1.0D, 0.0D).endVertex();;
+			wr.pos(0.0D, 0.0D, 90.0D).tex(0.0D, 0.0D).endVertex();;
 			t.draw();
 
 			GL11.glPopAttrib();

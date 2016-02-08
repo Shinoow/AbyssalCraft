@@ -38,9 +38,9 @@ public class ItemMetadataBlock extends ItemBlock {
 	@Override
 	public String getItemStackDisplayName(ItemStack par1ItemStack) {
 
-		if(getUnlocalizedName().contains("DEB"))
+		if(getUnlocalizedName().contains("darkethaxiumbrick"))
 			return EnumChatFormatting.DARK_RED + StatCollector.translateToLocal(getUnlocalizedName() + "." + subNames[par1ItemStack.getItemDamage()] + ".name");
-		else if(getUnlocalizedName().contains("EB"))
+		else if(getUnlocalizedName().contains("ethaxiumbrick"))
 			return EnumChatFormatting.AQUA + StatCollector.translateToLocal(getUnlocalizedName() + "." + subNames[par1ItemStack.getItemDamage()] + ".name");
 		return StatCollector.translateToLocal(getUnlocalizedName() + "." + subNames[par1ItemStack.getItemDamage()] + ".name");
 	}

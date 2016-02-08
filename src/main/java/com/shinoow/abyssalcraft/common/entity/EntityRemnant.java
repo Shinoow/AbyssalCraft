@@ -11,32 +11,62 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.common.entity;
 
-import java.util.*;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.Random;
 
 import net.minecraft.block.Block;
-import net.minecraft.enchantment.*;
-import net.minecraft.entity.*;
-import net.minecraft.entity.ai.*;
+import net.minecraft.enchantment.Enchantment;
+import net.minecraft.enchantment.EnchantmentData;
+import net.minecraft.enchantment.EnchantmentHelper;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.IEntityLivingData;
+import net.minecraft.entity.IMerchant;
+import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.ai.EntityAIAttackOnCollide;
+import net.minecraft.entity.ai.EntityAIHurtByTarget;
+import net.minecraft.entity.ai.EntityAILookIdle;
+import net.minecraft.entity.ai.EntityAIMoveTowardsRestriction;
+import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
+import net.minecraft.entity.ai.EntityAISwimming;
+import net.minecraft.entity.ai.EntityAIWander;
+import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
-import net.minecraft.item.*;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemArmor;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.ItemTool;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.potion.*;
-import net.minecraft.util.*;
-import net.minecraft.village.*;
+import net.minecraft.potion.Potion;
+import net.minecraft.potion.PotionEffect;
+import net.minecraft.util.BlockPos;
+import net.minecraft.util.ChatComponentText;
+import net.minecraft.util.DamageSource;
+import net.minecraft.util.MathHelper;
+import net.minecraft.util.StatCollector;
+import net.minecraft.util.Tuple;
+import net.minecraft.village.MerchantRecipe;
+import net.minecraft.village.MerchantRecipeList;
+import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.api.APIUtils;
-import com.shinoow.abyssalcraft.api.entity.*;
+import com.shinoow.abyssalcraft.api.entity.IAntiEntity;
+import com.shinoow.abyssalcraft.api.entity.ICoraliumEntity;
+import com.shinoow.abyssalcraft.api.entity.IDreadEntity;
 import com.shinoow.abyssalcraft.common.items.ItemDrainStaff;
 import com.shinoow.abyssalcraft.common.items.ItemNecronomicon;
 import com.shinoow.abyssalcraft.common.util.EntityUtil;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 public class EntityRemnant extends EntityMob implements IMerchant, IAntiEntity, ICoraliumEntity, IDreadEntity {
 
@@ -82,12 +112,6 @@ public class EntityRemnant extends EntityMob implements IMerchant, IAntiEntity, 
 	}
 
 	@Override
-	protected boolean isAIEnabled()
-	{
-		return true;
-	}
-
-	@Override
 	public boolean canBreatheUnderwater() {
 		return true;
 	}
@@ -122,7 +146,7 @@ public class EntityRemnant extends EntityMob implements IMerchant, IAntiEntity, 
 							MerchantRecipe merchantrecipe = (MerchantRecipe)iterator.next();
 
 							if (merchantrecipe.isRecipeDisabled())
-								merchantrecipe.func_82783_a(rand.nextInt(6) + rand.nextInt(6) + 2);
+								merchantrecipe.increaseMaxTradeUses(rand.nextInt(6) + rand.nextInt(6) + 2);
 						}
 					}
 
@@ -145,10 +169,10 @@ public class EntityRemnant extends EntityMob implements IMerchant, IAntiEntity, 
 				if(!isTrading()){
 					if(!worldObj.isRemote){
 						setCustomer(par1EntityPlayer);
-						par1EntityPlayer.displayGUIMerchant(this, StatCollector.translateToLocal("entity.abyssalcraft.remnant.name"));
+						par1EntityPlayer.displayVillagerTradeGui(this);
 						return true;
 					}
-				} else par1EntityPlayer.addChatMessage(new ChatComponentText(getCommandSenderName()+": "+StatCollector.translateToLocal("message.remnant.busy")));
+				} else par1EntityPlayer.addChatMessage(new ChatComponentText(getName()+": "+StatCollector.translateToLocal("message.remnant.busy")));
 			} else insult(par1EntityPlayer);
 
 		return super.interact(par1EntityPlayer);
@@ -167,11 +191,11 @@ public class EntityRemnant extends EntityMob implements IMerchant, IAntiEntity, 
 	 */
 	private void insult(EntityPlayer player){
 		int insultNum = worldObj.rand.nextInt(3);
-		String insult = getCommandSenderName()+": "+String.format(getInsult(insultNum), player.getCommandSenderName());
-		String translated = getCommandSenderName()+": "+String.format(StatCollector.translateToLocal("message.remnant.insult."+insultNum), player.getCommandSenderName());
+		String insult = getName()+": "+String.format(getInsult(insultNum), player.getName());
+		String translated = getName()+": "+String.format(StatCollector.translateToLocal("message.remnant.insult."+insultNum), player.getName());
 
 		if(worldObj.isRemote){
-			List<EntityPlayer> players = worldObj.getEntitiesWithinAABB(EntityPlayer.class, player.boundingBox.expand(16D, 16D, 16D));
+			List<EntityPlayer> players = worldObj.getEntitiesWithinAABB(EntityPlayer.class, player.getEntityBoundingBox().expand(16D, 16D, 16D));
 			if(players != null){
 				Iterator<EntityPlayer> i = players.iterator();
 				while(i.hasNext()){
@@ -212,7 +236,7 @@ public class EntityRemnant extends EntityMob implements IMerchant, IAntiEntity, 
 	 * @param enemy The target
 	 */
 	public void enrage(boolean call, EntityLivingBase enemy){
-		setTarget(enemy);
+		setAttackTarget(enemy);
 		enrage(call);
 	}
 
@@ -223,28 +247,28 @@ public class EntityRemnant extends EntityMob implements IMerchant, IAntiEntity, 
 	 */
 	public void enrage(boolean call){
 		if(call){
-			List<EntityRemnant> friends = worldObj.getEntitiesWithinAABB(getClass(), boundingBox.expand(16D, 16D, 16D));
+			List<EntityRemnant> friends = worldObj.getEntitiesWithinAABB(getClass(), getEntityBoundingBox().expand(16D, 16D, 16D));
 			if(friends != null){
 				Iterator<EntityRemnant> iter = friends.iterator();
 				while(iter.hasNext())
-					iter.next().enrage(false, (EntityLivingBase) entityToAttack);
+					iter.next().enrage(false, getAttackTarget());
 			}
 			worldObj.playSoundAtEntity(this, "abyssalcraft:remnant.scream", 3F, 1F);
 		}
 
 		isAngry = true;
 		timer = 0;
-		if(entityToAttack != null)
-			targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, entityToAttack.getClass(), 0, true));
+		if(getAttackTarget() != null)
+			targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, getAttackTarget().getClass(), true));
 	}
 
 	@Override
 	public boolean attackEntityFrom(DamageSource par1DamageSource, float par2)
 	{
 		if(par1DamageSource.getSourceOfDamage() instanceof EntityLivingBase){
-			if(entityToAttack != par1DamageSource.getSourceOfDamage()){
-				entityToAttack = par1DamageSource.getEntity();
-				enrage(true, (EntityLivingBase) entityToAttack);
+			if(getAttackTarget() != par1DamageSource.getSourceOfDamage()){
+				setAttackTarget((EntityLivingBase) par1DamageSource.getEntity());
+				enrage(true, getAttackTarget());
 			}
 			if(!isAngry) enrage(true);
 			else enrage(rand.nextInt(10) == 0);
@@ -256,13 +280,13 @@ public class EntityRemnant extends EntityMob implements IMerchant, IAntiEntity, 
 	public void onLivingUpdate(){
 		super.onLivingUpdate();
 		if(isAngry){
-			if(entityToAttack != null)
-				targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, entityToAttack.getClass(), 0, true));
+			if(getAttackTarget() != null)
+				targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, getAttackTarget().getClass(), true));
 			timer++;
 			if(timer == 2400){
 				isAngry = false;
-				if(entityToAttack != null)
-					targetTasks.removeTask(new EntityAINearestAttackableTarget(this, entityToAttack.getClass(), 0, true));
+				if(getAttackTarget() != null)
+					targetTasks.removeTask(new EntityAINearestAttackableTarget(this, getAttackTarget().getClass(), true));
 			}
 		}
 	}
@@ -307,7 +331,7 @@ public class EntityRemnant extends EntityMob implements IMerchant, IAntiEntity, 
 	}
 
 	@Override
-	protected void func_145780_a(int par1, int par2, int par3, Block par4)
+	protected void playStepSound(BlockPos pos, Block par4)
 	{
 		playSound("mob.spider.step", 0.15F, 1.0F);
 	}
@@ -372,7 +396,7 @@ public class EntityRemnant extends EntityMob implements IMerchant, IAntiEntity, 
 				addItemTrade(list, Items.wheat, rand, adjustProbability(0.9F));
 				addItemTrade(list, Item.getItemFromBlock(Blocks.wool), rand, adjustProbability(0.5F));
 				addItemTrade(list, Items.chicken, rand, adjustProbability(0.5F));
-				addItemTrade(list, Items.cooked_fished, rand, adjustProbability(0.4F));
+				addItemTrade(list, Items.cooked_fish, rand, adjustProbability(0.4F));
 				addCoinTrade(list, Items.bread, rand, adjustProbability(0.9F));
 				addCoinTrade(list, Items.melon, rand, adjustProbability(0.3F));
 				addCoinTrade(list, Items.apple, rand, adjustProbability(0.3F));
@@ -537,7 +561,7 @@ public class EntityRemnant extends EntityMob implements IMerchant, IAntiEntity, 
 			tradingList = new MerchantRecipeList();
 
 		for (int l = 0; l < par1 && l < list.size(); ++l)
-			tradingList.addToListWithCheck((MerchantRecipe)list.get(l));
+			addToListWithCheck(tradingList,list.get(l));
 	}
 
 	@Override
@@ -555,11 +579,11 @@ public class EntityRemnant extends EntityMob implements IMerchant, IAntiEntity, 
 		}
 		if(var1.getItemToBuy().getItem() instanceof ItemNecronomicon ||
 				var1.getItemToBuy().getItem() instanceof ItemDrainStaff)
-			var1.func_82785_h();
+			var1.compensateToolUses();
 		livingSoundTime = -getTalkInterval();
 		playSound("mob.villager.yes", getSoundVolume(), getSoundPitch() * 0.5F);
 
-		if (var1.hasSameIDsAs((MerchantRecipe)tradingList.get(tradingList.size() - 1)))
+		if (hasSameIDsAs(var1, tradingList.get(tradingList.size() - 1)))
 		{
 			timeUntilReset = 40;
 			needsInitilization = true;
@@ -568,6 +592,41 @@ public class EntityRemnant extends EntityMob implements IMerchant, IAntiEntity, 
 		if (APIUtils.isCoin(var1.getItemToBuy()))
 			wealth += var1.getItemToBuy().stackSize;
 	}
+
+	/****************** START OF VANILLA CODE FROM 1.7.10 ******************/
+
+	private void addToListWithCheck(MerchantRecipeList list, MerchantRecipe recipe)
+	{
+		for (int i = 0; i < list.size(); ++i)
+		{
+			MerchantRecipe merchantrecipe1 = list.get(i);
+
+			if (hasSameIDsAs(recipe, merchantrecipe1))
+			{
+				if (hasSameItemsAs(recipe, merchantrecipe1))
+					list.set(i, recipe);
+
+				return;
+			}
+		}
+
+		list.add(recipe);
+	}
+
+	private boolean hasSameIDsAs(MerchantRecipe r1, MerchantRecipe r2)
+	{
+		return r1.getItemToBuy().getItem() == r2.getItemToBuy().getItem() && r1.getItemToSell().getItem() == r2.getItemToSell().getItem() ?
+				r1.getSecondItemToBuy() == null && r2.getSecondItemToBuy() == null || r1.getSecondItemToBuy() != null && r2.getSecondItemToBuy() != null
+				&& r1.getSecondItemToBuy().getItem() == r2.getSecondItemToBuy().getItem() : false;
+	}
+
+	private boolean hasSameItemsAs(MerchantRecipe r1, MerchantRecipe r2)
+	{
+		return hasSameIDsAs(r1, r2) && (r1.getItemToBuy().stackSize < r2.getItemToBuy().stackSize ||
+				r1.getSecondItemToBuy() != null && r1.getSecondItemToBuy().stackSize < r2.getSecondItemToBuy().stackSize);
+	}
+
+	/****************** END OF VANILLA CODE FROM 1.7.10 ******************/
 
 	@SuppressWarnings("unchecked")
 	public static void addItemTrade(MerchantRecipeList list, Item item, Random rand, float probability)
@@ -618,7 +677,7 @@ public class EntityRemnant extends EntityMob implements IMerchant, IAntiEntity, 
 	}
 
 	@Override
-	public void func_110297_a_(ItemStack par1ItemStack)
+	public void verifySellingItem(ItemStack par1ItemStack)
 	{
 		if (!worldObj.isRemote && livingSoundTime > -getTalkInterval() + 20)
 		{
@@ -649,8 +708,8 @@ public class EntityRemnant extends EntityMob implements IMerchant, IAntiEntity, 
 	}
 
 	@Override
-	public IEntityLivingData onSpawnWithEgg(IEntityLivingData data){
-		data = super.onSpawnWithEgg(data);
+	public IEntityLivingData onInitialSpawn(DifficultyInstance difficulty, IEntityLivingData data){
+		data = super.onInitialSpawn(difficulty, data);
 		applyRandomTrade(worldObj.rand);
 		return data;
 	}
@@ -670,7 +729,7 @@ public class EntityRemnant extends EntityMob implements IMerchant, IAntiEntity, 
 		itemSellingList.put(Items.porkchop, new Tuple(Integer.valueOf(14), Integer.valueOf(18)));
 		itemSellingList.put(Items.beef, new Tuple(Integer.valueOf(14), Integer.valueOf(18)));
 		itemSellingList.put(Items.chicken, new Tuple(Integer.valueOf(14), Integer.valueOf(18)));
-		itemSellingList.put(Items.cooked_fished, new Tuple(Integer.valueOf(9), Integer.valueOf(13)));
+		itemSellingList.put(Items.cooked_fish, new Tuple(Integer.valueOf(9), Integer.valueOf(13)));
 		itemSellingList.put(Items.wheat_seeds, new Tuple(Integer.valueOf(34), Integer.valueOf(48)));
 		itemSellingList.put(Items.melon_seeds, new Tuple(Integer.valueOf(30), Integer.valueOf(38)));
 		itemSellingList.put(Items.pumpkin_seeds, new Tuple(Integer.valueOf(30), Integer.valueOf(38)));

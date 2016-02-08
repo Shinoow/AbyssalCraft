@@ -23,8 +23,7 @@ public class BlockMonolithPillar extends BlockACBasic implements IEnergyAmplifie
 	public BlockMonolithPillar() {
 		super(Material.rock, 6.0F, 24.0F, Block.soundTypeStone);
 		setBlockBounds(0.25F, 0.0F, 0.25F, 0.75F, 1.0F, 0.75F);
-		setBlockName("monolithPillar");
-		setBlockTextureName("abyssalcraft:monolithPillar");
+		setUnlocalizedName("monolithpillar");
 		setCreativeTab(AbyssalCraft.tabDecoration);
 	}
 
@@ -34,7 +33,8 @@ public class BlockMonolithPillar extends BlockACBasic implements IEnergyAmplifie
 	}
 
 	@Override
-	public boolean renderAsNormalBlock(){
+	public boolean isFullCube()
+	{
 		return false;
 	}
 

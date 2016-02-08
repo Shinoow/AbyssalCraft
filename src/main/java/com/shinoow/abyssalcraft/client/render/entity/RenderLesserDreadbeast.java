@@ -12,28 +12,26 @@
 package com.shinoow.abyssalcraft.client.render.entity;
 
 import net.minecraft.client.renderer.entity.RenderLiving;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import org.lwjgl.opengl.GL11;
 
 import com.shinoow.abyssalcraft.client.model.entity.ModelChagarothSpawn;
 import com.shinoow.abyssalcraft.common.entity.EntityLesserDreadbeast;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-
 @SideOnly(Side.CLIENT)
-public class RenderLesserDreadbeast extends RenderLiving {
+public class RenderLesserDreadbeast extends RenderLiving<EntityLesserDreadbeast> {
 
 	private float scale = 3.0F;
 
 	private static final ResourceLocation mobTexture = new ResourceLocation("abyssalcraft:textures/model/elite/Dread_guard.png");
 
-	public RenderLesserDreadbeast()
+	public RenderLesserDreadbeast(RenderManager manager)
 	{
-		super(new ModelChagarothSpawn(), 0.5F);
+		super(manager, new ModelChagarothSpawn(), 0.5F);
 	}
 
 	/**
@@ -44,25 +42,25 @@ public class RenderLesserDreadbeast extends RenderLiving {
 		GL11.glScalef(scale, scale, scale);
 	}
 
-	public void doRender(EntityLesserDreadbeast entity, double par2, double par4, double par6, float par8, float par9)
+	//	public void doRender(EntityLesserDreadbeast entity, double par2, double par4, double par6, float par8, float par9)
+	//	{
+	//		super.doRender(entity, par2, par4, par6, par8, par9);
+	//	}
+	//
+	//	@Override
+	//	public void doRender(Entity par1Entity, double par2, double par4, double par6, float par8, float par9)
+	//	{
+	//		doRender((EntityLesserDreadbeast)par1Entity, par2, par4, par6, par8, par9);
+	//	}
+
+	@Override
+	protected void preRenderCallback(EntityLesserDreadbeast par1EntityLivingBase, float par2)
 	{
-		super.doRender(entity, par2, par4, par6, par8, par9);
+		preRenderScale(par1EntityLivingBase, par2);
 	}
 
 	@Override
-	public void doRender(Entity par1Entity, double par2, double par4, double par6, float par8, float par9)
-	{
-		doRender((EntityLesserDreadbeast)par1Entity, par2, par4, par6, par8, par9);
-	}
-
-	@Override
-	protected void preRenderCallback(EntityLivingBase par1EntityLivingBase, float par2)
-	{
-		preRenderScale((EntityLesserDreadbeast)par1EntityLivingBase, par2);
-	}
-
-	@Override
-	protected ResourceLocation getEntityTexture(Entity entity) {
+	protected ResourceLocation getEntityTexture(EntityLesserDreadbeast entity) {
 
 		return mobTexture;
 	}

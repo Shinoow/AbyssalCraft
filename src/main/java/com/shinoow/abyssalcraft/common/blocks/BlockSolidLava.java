@@ -12,7 +12,9 @@
 package com.shinoow.abyssalcraft.common.blocks;
 
 import net.minecraft.block.material.Material;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.util.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
@@ -22,20 +24,20 @@ public class BlockSolidLava extends BlockACBasic {
 
 	public BlockSolidLava(String par1) {
 		super(Material.lava, "pickaxe", 2, 10F, 100F, soundTypeStone);
-		setBlockName(par1);
-		setBlockTextureName("lava_still");
+		setUnlocalizedName(par1);
+		//		setBlockTextureName("lava_still");
 		setCreativeTab(AbyssalCraft.tabDecoration);
 	}
 
 	@Override
-	public AxisAlignedBB getCollisionBoundingBoxFromPool(World par1World, int par2, int par3, int par4)
+	public AxisAlignedBB getCollisionBoundingBox(World par1World, BlockPos pos, IBlockState state)
 	{
 		float f = 0.125F;
-		return AxisAlignedBB.getBoundingBox(par2, par3, par4, par2 + 1, par3 + 1 - f, par4 + 1);
+		return AxisAlignedBB.fromBounds(pos.getX(), pos.getY(), pos.getZ(), pos.getX() + 1, pos.getY() + 1 - f, pos.getZ() + 1);
 	}
 
 	@Override
-	public boolean isBurning(IBlockAccess world, int x, int y, int z)
+	public boolean isBurning(IBlockAccess world, BlockPos pos)
 	{
 		return true;
 	}

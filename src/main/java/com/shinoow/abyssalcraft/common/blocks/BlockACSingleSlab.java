@@ -11,51 +11,23 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.common.blocks;
 
-import java.util.Random;
-
-import net.minecraft.block.BlockSlab;
 import net.minecraft.block.material.Material;
-import net.minecraft.item.Item;
-import net.minecraft.world.World;
 
-import com.shinoow.abyssalcraft.AbyssalCraft;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-
-public class BlockACSingleSlab extends BlockSlab {
+public class BlockACSingleSlab extends BlockACSlab {
 
 	public BlockACSingleSlab(Material par3Material, String tooltype, int harvestlevel)
 	{
-		super(false, par3Material);
-		setCreativeTab(AbyssalCraft.tabBlock);
-		setLightOpacity(0);
-		setHarvestLevel(tooltype, harvestlevel);
+		super(par3Material, tooltype, harvestlevel);
 	}
 
 	public BlockACSingleSlab(Material par3Material)
 	{
-		super(false, par3Material);
-		setCreativeTab(AbyssalCraft.tabBlock);
-		setLightOpacity(0);
+		super(par3Material);
 	}
 
 	@Override
-	public Item getItemDropped(int par1, Random par2Random, int par3)
-	{
-		return Item.getItemFromBlock(this);
-	}
+	public boolean isDouble() {
 
-	@Override
-	@SideOnly(Side.CLIENT)
-	public Item getItem(World par1World, int par2, int par3, int par4)
-	{
-		return Item.getItemFromBlock(this);
-	}
-
-	@Override
-	public String func_150002_b(int var1) {
-
-		return super.getUnlocalizedName();
+		return false;
 	}
 }

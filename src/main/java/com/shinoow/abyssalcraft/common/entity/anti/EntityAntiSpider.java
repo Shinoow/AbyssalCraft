@@ -24,7 +24,8 @@ import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
-import net.minecraft.util.MathHelper;
+import net.minecraft.util.BlockPos;
+import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
 
@@ -65,18 +66,18 @@ public class EntityAntiSpider extends EntityMob implements IAntiEntity {
 		else getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(32.0D);
 	}
 
-	@Override
-	protected Entity findPlayerToAttack()
-	{
-		float f = getBrightness(1.0F);
-
-		if (f < 0.5F)
-		{
-			double d0 = 16.0D;
-			return worldObj.getClosestVulnerablePlayerToEntity(this, d0);
-		} else
-			return null;
-	}
+	//	@Override
+	//	protected Entity findPlayerToAttack()
+	//	{
+	//		float f = getBrightness(1.0F);
+	//
+	//		if (f < 0.5F)
+	//		{
+	//			double d0 = 16.0D;
+	//			return worldObj.getClosestVulnerablePlayerToEntity(this, d0);
+	//		} else
+	//			return null;
+	//	}
 
 	@Override
 	protected String getLivingSound()
@@ -97,32 +98,32 @@ public class EntityAntiSpider extends EntityMob implements IAntiEntity {
 	}
 
 	@Override
-	protected void func_145780_a(int par1, int par2, int par3, Block par4Block)
+	protected void playStepSound(BlockPos pos, Block par4Block)
 	{
 		playSound("mob.spider.step", 0.15F, 1.0F);
 	}
 
-	@Override
-	protected void attackEntity(Entity par1Entity, float par2)
-	{
-		float f1 = getBrightness(1.0F);
-
-		if (f1 > 0.5F && rand.nextInt(100) == 0)
-			entityToAttack = null;
-		else if (par2 > 2.0F && par2 < 6.0F && rand.nextInt(10) == 0)
-		{
-			if (onGround)
-			{
-				double d0 = par1Entity.posX - posX;
-				double d1 = par1Entity.posZ - posZ;
-				float f2 = MathHelper.sqrt_double(d0 * d0 + d1 * d1);
-				motionX = d0 / f2 * 0.5D * 0.800000011920929D + motionX * 0.20000000298023224D;
-				motionZ = d1 / f2 * 0.5D * 0.800000011920929D + motionZ * 0.20000000298023224D;
-				motionY = 0.4000000059604645D;
-			}
-		} else
-			super.attackEntity(par1Entity, par2);
-	}
+	//	@Override
+	//	protected void attackEntity(Entity par1Entity, float par2)
+	//	{
+	//		float f1 = getBrightness(1.0F);
+	//
+	//		if (f1 > 0.5F && rand.nextInt(100) == 0)
+	//			entityToAttack = null;
+	//		else if (par2 > 2.0F && par2 < 6.0F && rand.nextInt(10) == 0)
+	//		{
+	//			if (onGround)
+	//			{
+	//				double d0 = par1Entity.posX - posX;
+	//				double d1 = par1Entity.posZ - posZ;
+	//				float f2 = MathHelper.sqrt_double(d0 * d0 + d1 * d1);
+	//				motionX = d0 / f2 * 0.5D * 0.800000011920929D + motionX * 0.20000000298023224D;
+	//				motionZ = d1 / f2 * 0.5D * 0.800000011920929D + motionZ * 0.20000000298023224D;
+	//				motionY = 0.4000000059604645D;
+	//			}
+	//		} else
+	//			super.attackEntity(par1Entity, par2);
+	//	}
 
 	@Override
 	protected Item getDropItem()
@@ -164,7 +165,7 @@ public class EntityAntiSpider extends EntityMob implements IAntiEntity {
 	protected void collideWithEntity(Entity par1Entity)
 	{
 		if(!worldObj.isRemote && par1Entity instanceof EntitySpider){
-			boolean flag = worldObj.getGameRules().getGameRuleBooleanValue("mobGriefing");
+			boolean flag = worldObj.getGameRules().getBoolean("mobGriefing");
 			worldObj.createExplosion(this, posX, posY, posZ, 5, flag);
 			setDead();
 		}
@@ -197,15 +198,15 @@ public class EntityAntiSpider extends EntityMob implements IAntiEntity {
 	}
 
 	@Override
-	public IEntityLivingData onSpawnWithEgg(IEntityLivingData par1EntityLivingData)
+	public IEntityLivingData onInitialSpawn(DifficultyInstance difficulty, IEntityLivingData par1EntityLivingData)
 	{
-		Object p_110161_1_1 = super.onSpawnWithEgg(par1EntityLivingData);
+		Object p_110161_1_1 = super.onInitialSpawn(difficulty, par1EntityLivingData);
 
 		if (worldObj.rand.nextInt(100) == 0)
 		{
 			EntityAntiSkeleton entityskeleton = new EntityAntiSkeleton(worldObj);
 			entityskeleton.setLocationAndAngles(posX, posY, posZ, rotationYaw, 0.0F);
-			entityskeleton.onSpawnWithEgg((IEntityLivingData)null);
+			entityskeleton.onInitialSpawn(difficulty, (IEntityLivingData)null);
 			worldObj.spawnEntityInWorld(entityskeleton);
 			entityskeleton.mountEntity(this);
 		}
@@ -214,7 +215,7 @@ public class EntityAntiSpider extends EntityMob implements IAntiEntity {
 		{
 			p_110161_1_1 = new EntityAntiSpider.GroupData();
 
-			if (worldObj.difficultySetting == EnumDifficulty.HARD && worldObj.rand.nextFloat() < 0.1F * worldObj.func_147462_b(posX, posY, posZ))
+			if (worldObj.getDifficulty() == EnumDifficulty.HARD && worldObj.rand.nextFloat() < 0.1F * difficulty.getClampedAdditionalDifficulty())
 				((EntityAntiSpider.GroupData)p_110161_1_1).func_111104_a(worldObj.rand);
 		}
 

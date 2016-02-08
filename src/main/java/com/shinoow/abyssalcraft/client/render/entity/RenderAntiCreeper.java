@@ -13,26 +13,26 @@ package com.shinoow.abyssalcraft.client.render.entity;
 
 import net.minecraft.client.model.ModelCreeper;
 import net.minecraft.client.renderer.entity.RenderLiving;
+import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import org.lwjgl.opengl.GL11;
 
 import com.shinoow.abyssalcraft.common.entity.anti.EntityAntiCreeper;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
 public class RenderAntiCreeper extends RenderLiving {
 
 	private static final ResourceLocation creeperTextures = new ResourceLocation("abyssalcraft:textures/model/anti/creeper.png");
 
-	public RenderAntiCreeper()
+	public RenderAntiCreeper(RenderManager manager)
 	{
-		super(new ModelCreeper(), 0.5F);
+		super(manager, new ModelCreeper(), 0.5F);
 	}
 
 	protected void preRenderCallback(EntityAntiCreeper par1EntityAntiCreeper, float par2)

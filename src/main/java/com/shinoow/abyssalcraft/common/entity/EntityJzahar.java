@@ -43,10 +43,13 @@ import net.minecraft.entity.projectile.EntityWitherSkull;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
+import net.minecraft.util.BlockPos;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumChatFormatting;
+import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.StatCollector;
+import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.World;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
@@ -75,13 +78,13 @@ public class EntityJzahar extends EntityMob implements IBossDisplayData, IRanged
 		tasks.addTask(6, new EntityAILookIdle(this));
 		tasks.addTask(6, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
 		targetTasks.addTask(1, new EntityAIHurtByTarget(this, false));
-		targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityPlayer.class, 0, true));
+		targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityPlayer.class, true));
 	}
 
 	@Override
-	public String getCommandSenderName()
+	public String getName()
 	{
-		return EnumChatFormatting.BLUE + super.getCommandSenderName();
+		return EnumChatFormatting.BLUE + super.getName();
 	}
 
 	@Override
@@ -95,12 +98,6 @@ public class EntityJzahar extends EntityMob implements IBossDisplayData, IRanged
 			getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(500.0D);
 			getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(20.0D);
 		}
-	}
-
-	@Override
-	protected boolean isAIEnabled()
-	{
-		return true;
 	}
 
 	@Override
@@ -207,7 +204,7 @@ public class EntityJzahar extends EntityMob implements IBossDisplayData, IRanged
 		float f1 = (rand.nextFloat() - 0.5F) * 4.0F;
 		float f2 = (rand.nextFloat() - 0.5F) * 8.0F;
 
-		List list = worldObj.getEntitiesWithinAABBExcludingEntity(this, boundingBox.expand(64.0D, 64.0D, 64.0D));
+		List list = worldObj.getEntitiesWithinAABBExcludingEntity(this, getEntityBoundingBox().expand(64.0D, 64.0D, 64.0D));
 		if (list != null)
 			for (int k2 = 0; k2 < list.size(); k2++) {
 				Entity entity = (Entity)list.get(k2);
@@ -216,7 +213,7 @@ public class EntityJzahar extends EntityMob implements IBossDisplayData, IRanged
 						worldObj.removeEntity(entity);
 					else {
 						if(AbyssalCraft.particleEntity)
-							worldObj.spawnParticle("hugeexplosion", entity.posX + f, entity.posY + 2.0D + f1, entity.posZ + f2, 0.0D, 0.0D, 0.0D);
+							worldObj.spawnParticle(EnumParticleTypes.EXPLOSION_HUGE, entity.posX + f, entity.posY + 2.0D + f1, entity.posZ + f2, 0.0D, 0.0D, 0.0D);
 						if(entity.isDead)
 							SpecialTextUtil.JzaharGroup(worldObj, StatCollector.translateToLocal("message.jzahar.banish.vanilla"));
 					}
@@ -226,7 +223,7 @@ public class EntityJzahar extends EntityMob implements IBossDisplayData, IRanged
 						worldObj.removeEntity(entity);
 					else {
 						if(AbyssalCraft.particleEntity)
-							worldObj.spawnParticle("hugeexplosion", entity.posX + f, entity.posY + 2.0D + f1, entity.posZ + f2, 0.0D, 0.0D, 0.0D);
+							worldObj.spawnParticle(EnumParticleTypes.EXPLOSION_HUGE, entity.posX + f, entity.posY + 2.0D + f1, entity.posZ + f2, 0.0D, 0.0D, 0.0D);
 						if(entity.isDead)
 							SpecialTextUtil.JzaharGroup(worldObj, StatCollector.translateToLocal("message.jzahar.banish.ac"));
 					}
@@ -241,8 +238,8 @@ public class EntityJzahar extends EntityMob implements IBossDisplayData, IRanged
 					}
 					else {
 						if(AbyssalCraft.particleEntity){
-							worldObj.spawnParticle("hugeexplosion", entity.posX + f, entity.posY + 2.0D + f1, entity.posZ + f2, 0.0D, 0.0D, 0.0D);
-							worldObj.spawnParticle("hugeexplosion", posX + f, posY + 2.0D + f1, posZ + f2, 0.0D, 0.0D, 0.0D);
+							worldObj.spawnParticle(EnumParticleTypes.EXPLOSION_HUGE, entity.posX + f, entity.posY + 2.0D + f1, entity.posZ + f2, 0.0D, 0.0D, 0.0D);
+							worldObj.spawnParticle(EnumParticleTypes.EXPLOSION_HUGE, posX + f, posY + 2.0D + f1, posZ + f2, 0.0D, 0.0D, 0.0D);
 						}
 						if(!that){
 							that = true;
@@ -257,7 +254,7 @@ public class EntityJzahar extends EntityMob implements IBossDisplayData, IRanged
 							if(EntityUtil.isPlayerCoralium((EntityPlayer)entity))
 								SpecialTextUtil.JzaharText("<insert generic text here>");
 							else {
-								SpecialTextUtil.JzaharText(String.format(StatCollector.translateToLocal("message.jzahar.creative.1"), entity.getCommandSenderName()));
+								SpecialTextUtil.JzaharText(String.format(StatCollector.translateToLocal("message.jzahar.creative.1"), entity.getName()));
 								SpecialTextUtil.JzaharText(StatCollector.translateToLocal("message.jzahar.creative.2"));
 							}
 					}
@@ -271,9 +268,9 @@ public class EntityJzahar extends EntityMob implements IBossDisplayData, IRanged
 		++deathTicks;
 
 		if(deathTicks <= 200){
-			worldObj.spawnParticle("largesmoke", posX, posY + 1.5D, posZ, 0, 0, 0);
+			worldObj.spawnParticle(EnumParticleTypes.SMOKE_LARGE, posX, posY + 1.5D, posZ, 0, 0, 0);
 			if (deathTicks >= 190 && deathTicks <= 200){
-				worldObj.spawnParticle("hugeexplosion", posX, posY + 1.5D, posZ, 0.0D, 0.0D, 0.0D);
+				worldObj.spawnParticle(EnumParticleTypes.EXPLOSION_HUGE, posX, posY + 1.5D, posZ, 0.0D, 0.0D, 0.0D);
 				worldObj.playSoundAtEntity(this, "random.explode", 4, (1.0F + (rand.nextFloat() - rand.nextFloat()) * 0.2F) * 0.7F);
 			}
 		}
@@ -302,8 +299,8 @@ public class EntityJzahar extends EntityMob implements IBossDisplayData, IRanged
 		if(deathTicks == 200 && !worldObj.isRemote){
 			setDead();
 			worldObj.spawnEntityInWorld(new EntityItem(worldObj, posX, posY, posZ, new ItemStack(AbyssalCraft.Staff)));
-			if(!worldObj.getEntitiesWithinAABB(EntityPlayer.class, boundingBox.expand(3,1,3)).isEmpty()){
-				List<EntityPlayer> players = worldObj.getEntitiesWithinAABB(EntityPlayer.class, boundingBox.expand(3,1,3));
+			if(!worldObj.getEntitiesWithinAABB(EntityPlayer.class, getEntityBoundingBox().expand(3,1,3)).isEmpty()){
+				List<EntityPlayer> players = worldObj.getEntitiesWithinAABB(EntityPlayer.class, getEntityBoundingBox().expand(3,1,3));
 				for(EntityPlayer player: players){
 					player.attackEntityFrom(DamageSource.causeMobDamage(this).setDamageBypassesArmor(), 20F);
 					player.addPotionEffect(new PotionEffect(Potion.blindness.id, 2400, 3));
@@ -326,7 +323,7 @@ public class EntityJzahar extends EntityMob implements IBossDisplayData, IRanged
 	}
 
 	private void func_82209_a(int par1, double par2, double par4, double par6, boolean par8) {
-		worldObj.playAuxSFXAtEntity((EntityPlayer)null, 1014, (int)posX, (int)posY, (int)posZ, 0);
+		worldObj.playAuxSFXAtEntity((EntityPlayer)null, 1014, new BlockPos(posX, posY, posZ), 0);
 		double d3 = func_82214_u(par1);
 		double d4 = func_82208_v(par1);
 		double d5 = func_82213_w(par1);
@@ -348,9 +345,9 @@ public class EntityJzahar extends EntityMob implements IBossDisplayData, IRanged
 	}
 
 	@Override
-	public IEntityLivingData onSpawnWithEgg(IEntityLivingData par1EntityLivingData)
+	public IEntityLivingData onInitialSpawn(DifficultyInstance difficulty, IEntityLivingData par1EntityLivingData)
 	{
-		par1EntityLivingData = super.onSpawnWithEgg(par1EntityLivingData);
+		par1EntityLivingData = super.onInitialSpawn(difficulty, par1EntityLivingData);
 
 		IAttributeInstance attribute = getEntityAttribute(SharedMonsterAttributes.attackDamage);
 		Calendar calendar = worldObj.getCurrentDate();

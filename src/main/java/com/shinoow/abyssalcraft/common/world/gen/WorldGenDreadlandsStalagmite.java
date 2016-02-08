@@ -13,46 +13,52 @@ package com.shinoow.abyssalcraft.common.world.gen;
 
 import java.util.Random;
 
-import com.shinoow.abyssalcraft.AbyssalCraft;
-
-import net.minecraft.block.Block;
+import net.minecraft.block.state.IBlockState;
+import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
+
+import com.shinoow.abyssalcraft.AbyssalCraft;
 
 public class WorldGenDreadlandsStalagmite extends WorldGenerator {
 
 	@Override
-	public boolean generate(World world, Random rand, int x, int y, int z) {
+	public boolean generate(World world, Random rand, BlockPos pos) {
 
-		while(world.isAirBlock(x, y, z))
-			--y;
+		while(world.isAirBlock(pos))
+			pos = pos.down();
 
-		if(world.getBlock(x, y, z) != AbyssalCraft.abydreadstone &&
-				world.getBlock(x, y, z) != AbyssalCraft.dreadstone)
+		if(world.getBlockState(pos) != AbyssalCraft.abydreadstone.getDefaultState() &&
+				world.getBlockState(pos) != AbyssalCraft.dreadstone.getDefaultState())
 			return false;
 
-		Block block;
-		if(world.getBiomeGenForCoords(x, z) == AbyssalCraft.AbyDreadlands)
-			block = AbyssalCraft.abydreadstone;
-		else block = AbyssalCraft.dreadstone;
+		IBlockState state;
+		if(world.getBiomeGenForCoords(pos) == AbyssalCraft.AbyDreadlands)
+			state = AbyssalCraft.abydreadstone.getDefaultState();
+		else state = AbyssalCraft.dreadstone.getDefaultState();
+
+		int x = pos.getX();
+		int y = pos.getY();
+		int z = pos.getZ();
+
 		for(int i = 0; i < 7 + rand.nextInt(5); i++)
-			world.setBlock(x, y + i, z, block);
+			world.setBlockState(new BlockPos(x, y + i, z), state, 2);
 		for(int i = 0; i < 5 + rand.nextInt(5); i++)
-			world.setBlock(x + 1, y + i, z, block);
+			world.setBlockState(new BlockPos(x + 1, y + i, z), state, 2);
 		for(int i = 0; i < 5 + rand.nextInt(5); i++)
-			world.setBlock(x - 1, y + i, z, block);
+			world.setBlockState(new BlockPos(x - 1, y + i, z), state, 2);
 		for(int i = 0; i < 5 + rand.nextInt(5); i++)
-			world.setBlock(x, y + i, z + 1, block);
+			world.setBlockState(new BlockPos(x, y + i, z + 1), state, 2);
 		for(int i = 0; i < 5 + rand.nextInt(5); i++)
-			world.setBlock(x, y + i, z - 1, block);
+			world.setBlockState(new BlockPos(x, y + i, z - 1), state, 2);
 		for(int i = 0; i < 3 + rand.nextInt(5); i++)
-			world.setBlock(x + 1, y + i, z + 1, block);
+			world.setBlockState(new BlockPos(x + 1, y + i, z + 1), state, 2);
 		for(int i = 0; i < 3 + rand.nextInt(5); i++)
-			world.setBlock(x - 1, y + i, z - 1, block);
+			world.setBlockState(new BlockPos(x - 1, y + i, z - 1), state, 2);
 		for(int i = 0; i < 3 + rand.nextInt(5); i++)
-			world.setBlock(x - 1, y + i, z + 1, block);
+			world.setBlockState(new BlockPos(x - 1, y + i, z + 1), state, 2);
 		for(int i = 0; i < 3 + rand.nextInt(5); i++)
-			world.setBlock(x + 1, y + i, z - 1, block);
+			world.setBlockState(new BlockPos(x + 1, y + i, z - 1), state, 2);
 
 		return true;
 	}

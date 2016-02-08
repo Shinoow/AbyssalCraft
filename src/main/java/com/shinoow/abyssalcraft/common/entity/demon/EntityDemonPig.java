@@ -13,6 +13,7 @@ package com.shinoow.abyssalcraft.common.entity.demon;
 
 import net.minecraft.block.Block;
 import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
@@ -54,7 +55,7 @@ public class EntityDemonPig extends EntityDemonAnimal {
 	}
 
 	@Override
-	protected void func_145780_a(int par1, int par2, int par3, Block par4)
+	protected void playStepSound(BlockPos pos, Block par4)
 	{
 		playSound("mob.pig.step", 0.15F, 1.0F);
 	}

@@ -29,8 +29,10 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
+import net.minecraft.util.BlockPos;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
+import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeModContainer;
 
@@ -77,9 +79,9 @@ public class EntityLesserShoggoth extends EntityMob implements ICoraliumEntity, 
 		tasks.addTask(7, new EntityAIWatchClosest(this, EntityLesserShoggoth.class, 8.0F));
 		tasks.addTask(7, new EntityAIWatchClosest(this, EntityGatekeeperMinion.class, 8.0F));
 		targetTasks.addTask(1, new EntityAIHurtByTarget(this, false));
-		targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityPlayer.class, 0, true));
+		targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityPlayer.class, true));
 		for(int i = 0; i < noms.size(); i++)
-			targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, noms.get(i), 0, true));
+			targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, noms.get(i), true));
 		setSize(2.0F, 2.8F);
 	}
 
@@ -143,12 +145,6 @@ public class EntityLesserShoggoth extends EntityMob implements ICoraliumEntity, 
 		}
 	}
 
-	@Override
-	protected boolean isAIEnabled()
-	{
-		return true;
-	}
-
 	public int getShoggothType() {
 
 		return dataWatcher.getWatchableObjectByte(14);
@@ -201,7 +197,7 @@ public class EntityLesserShoggoth extends EntityMob implements ICoraliumEntity, 
 			if(!isChild()){
 				EntityLesserShoggoth shoggoth = new EntityLesserShoggoth(worldObj);
 				shoggoth.copyLocationAndAnglesFrom(this);
-				shoggoth.onSpawnWithEgg((IEntityLivingData)null);
+				shoggoth.onInitialSpawn(worldObj.getDifficultyForLocation(new BlockPos(posX, posY, posZ)),(IEntityLivingData)null);
 				shoggoth.setChild(true);
 				worldObj.spawnEntityInWorld(shoggoth);
 				playSound("mob.chicken.plop", 1.0F, (rand.nextFloat() - rand.nextFloat()) * 0.2F + 1.0F);
@@ -229,11 +225,11 @@ public class EntityLesserShoggoth extends EntityMob implements ICoraliumEntity, 
 
 		if(monolithTimer >= 1800){
 			monolithTimer = 0;
-			if(worldObj.getEntitiesWithinAABB(getClass(), boundingBox.expand(32D, 32D, 32D)).size() > 5 && !isChild()){
-				for(EntityLesserShoggoth shoggoth : (List<EntityLesserShoggoth>)worldObj.getEntitiesWithinAABB(getClass(), boundingBox.expand(32D, 32D, 32D)))
+			if(worldObj.getEntitiesWithinAABB(getClass(), getEntityBoundingBox().expand(32D, 32D, 32D)).size() > 5 && !isChild()){
+				for(EntityLesserShoggoth shoggoth : worldObj.getEntitiesWithinAABB(getClass(), getEntityBoundingBox().expand(32D, 32D, 32D)))
 					shoggoth.reduceMonolithTimer();
 				if(!worldObj.isRemote)
-					new WorldGenShoggothMonolith().generate(worldObj, rand, x + 3, y, z + 3);
+					new WorldGenShoggothMonolith().generate(worldObj, rand, new BlockPos(x + 3, y, z + 3));
 			}
 		}
 	}
@@ -245,17 +241,18 @@ public class EntityLesserShoggoth extends EntityMob implements ICoraliumEntity, 
 	 * @param z Z-coord
 	 */
 	private void spawnOoze(int x, int y, int z){
-		Block block = worldObj.getBlock(x, y, z);
+		BlockPos pos = new BlockPos(x, y, z);
+		Block block = worldObj.getBlockState(pos).getBlock();
 		if(AbyssalCraft.shoggothOoze)
-			if(!block.getMaterial().isLiquid() && block.getMaterial() != Material.air && !block.hasTileEntity(worldObj.getBlockMetadata(x, y, z))
-			&& block.isOpaqueCube() && block.renderAsNormalBlock() && block.getCollisionBoundingBoxFromPool(worldObj, x, y, z) != null)
+			if(!block.getMaterial().isLiquid() && block.getMaterial() != Material.air && !block.hasTileEntity(worldObj.getBlockState(pos))
+			&& block.isOpaqueCube() && block.isFullCube() && block.getCollisionBoundingBox(worldObj, pos, block.getDefaultState()) != null)
 				if(block.getMaterial() == Material.leaves && AbyssalCraft.oozeLeaves || block.getMaterial() == Material.grass && AbyssalCraft.oozeGrass
 				|| block.getMaterial() == Material.ground && AbyssalCraft.oozeGround || block.getMaterial() == Material.sand && AbyssalCraft.oozeSand
 				|| block.getMaterial() == Material.rock && AbyssalCraft.oozeRock || block.getMaterial() == Material.cloth && AbyssalCraft.oozeCloth
 				|| block.getMaterial() == Material.wood && AbyssalCraft.oozeWood || block.getMaterial() == Material.gourd && AbyssalCraft.oozeGourd
 				|| block.getMaterial() == Material.iron && AbyssalCraft.oozeIron || block.getMaterial() == Material.clay && AbyssalCraft.oozeClay)
 					if(!blockBlacklist.contains(block) && !worldObj.isRemote)
-						worldObj.setBlock(x, y, z, AbyssalCraft.shoggothBlock);
+						worldObj.setBlockState(pos, AbyssalCraft.shoggothBlock.getDefaultState());
 	}
 
 	/**
@@ -288,15 +285,15 @@ public class EntityLesserShoggoth extends EntityMob implements ICoraliumEntity, 
 	{
 		if (super.attackEntityAsMob(par1Entity))
 			if (par1Entity instanceof EntityLivingBase)
-				if(worldObj.provider.dimensionId == AbyssalCraft.configDimId1 &&
+				if(worldObj.provider.getDimensionId() == AbyssalCraft.configDimId1 &&
 				!EntityUtil.isEntityCoralium((EntityLivingBase)par1Entity))
 					((EntityLivingBase)par1Entity).addPotionEffect(new PotionEffect(AbyssalCraft.Cplague.id, 100));
-				else if(worldObj.provider.dimensionId == AbyssalCraft.configDimId2 &&
+				else if(worldObj.provider.getDimensionId() == AbyssalCraft.configDimId2 &&
 						!EntityUtil.isEntityDread((EntityLivingBase)par1Entity))
 					((EntityLivingBase)par1Entity).addPotionEffect(new PotionEffect(AbyssalCraft.Dplague.id, 100));
-				else if(worldObj.provider.dimensionId == AbyssalCraft.configDimId3)
+				else if(worldObj.provider.getDimensionId() == AbyssalCraft.configDimId3)
 					((EntityLivingBase)par1Entity).addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, 100));
-				else if(worldObj.provider.dimensionId == AbyssalCraft.configDimId4)
+				else if(worldObj.provider.getDimensionId() == AbyssalCraft.configDimId4)
 					((EntityLivingBase)par1Entity).addPotionEffect(new PotionEffect(Potion.blindness.id, 100));
 
 		return super.attackEntityAsMob(par1Entity);
@@ -315,7 +312,7 @@ public class EntityLesserShoggoth extends EntityMob implements ICoraliumEntity, 
 	}
 
 	@Override
-	protected void fall(float par1) {}
+	public void fall(float par1, float par2) {}
 
 	@Override
 	protected String getLivingSound()
@@ -336,7 +333,7 @@ public class EntityLesserShoggoth extends EntityMob implements ICoraliumEntity, 
 	}
 
 	@Override
-	protected void func_145780_a(int par1, int par2, int par3, Block par4)
+	protected void playStepSound(BlockPos pos, Block par4)
 	{
 		playSound("mob.spider.step", 0.15F, 1.0F);
 	}
@@ -400,19 +397,19 @@ public class EntityLesserShoggoth extends EntityMob implements ICoraliumEntity, 
 	}
 
 	@Override
-	public IEntityLivingData onSpawnWithEgg(IEntityLivingData par1EntityLivingData)
+	public IEntityLivingData onInitialSpawn(DifficultyInstance difficulty, IEntityLivingData par1EntityLivingData)
 	{
-		Object data = super.onSpawnWithEgg(par1EntityLivingData);
+		Object data = super.onInitialSpawn(difficulty, par1EntityLivingData);
 
 		setShoggothType(0);
 
-		if(worldObj.provider.dimensionId == AbyssalCraft.configDimId1)
+		if(worldObj.provider.getDimensionId() == AbyssalCraft.configDimId1)
 			setShoggothType(1);
-		if(worldObj.provider.dimensionId == AbyssalCraft.configDimId2)
+		if(worldObj.provider.getDimensionId() == AbyssalCraft.configDimId2)
 			setShoggothType(2);
-		if(worldObj.provider.dimensionId == AbyssalCraft.configDimId3)
+		if(worldObj.provider.getDimensionId() == AbyssalCraft.configDimId3)
 			setShoggothType(3);
-		if(worldObj.provider.dimensionId == AbyssalCraft.configDimId4)
+		if(worldObj.provider.getDimensionId() == AbyssalCraft.configDimId4)
 			setShoggothType(4);
 
 		if (data == null)

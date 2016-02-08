@@ -17,10 +17,11 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumChatFormatting;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
-
 import com.shinoow.abyssalcraft.AbyssalCraft;
 
 public class ItemCorb extends Item {
@@ -29,6 +30,9 @@ public class ItemCorb extends Item {
 		super();
 		maxStackSize = 1;
 		setMaxDamage(1000);
+		//		GameRegistry.registerItem(this, "transmutationgem");
+		setUnlocalizedName("transmutationgem");
+		setCreativeTab(AbyssalCraft.tabTools);
 	}
 
 	@Override
@@ -38,24 +42,24 @@ public class ItemCorb extends Item {
 	}
 
 	@Override
-	public boolean onItemUse(ItemStack is, EntityPlayer player, World w, int x, int y, int z, int l, float f, float f1, float f3){ //Called when an item is right clicked on a block
-		if(w.getBlock(x, y, z) == Blocks.stone){
-			w.setBlock(x, y, z, AbyssalCraft.Darkstone);
+	public boolean onItemUse(ItemStack is, EntityPlayer player, World w, BlockPos pos, EnumFacing side, float hitX, float hitY, float hitZ){
+		if(w.getBlockState(pos) == Blocks.stone){
+			w.setBlockState(pos, AbyssalCraft.Darkstone.getDefaultState());
 			is.damageItem(50, player);
-		}else if(w.getBlock(x, y, z) == AbyssalCraft.Darkstone){
-			w.setBlock(x, y, z, Blocks.stone);
+		}else if(w.getBlockState(pos) == AbyssalCraft.Darkstone){
+			w.setBlockState(pos, Blocks.stone.getDefaultState());
 			is.damageItem(50, player);
-		}else if(w.getBlock(x, y, z) == Blocks.cobblestone){
-			w.setBlock(x, y, z, AbyssalCraft.Darkstone_cobble);
+		}else if(w.getBlockState(pos) == Blocks.cobblestone){
+			w.setBlockState(pos, AbyssalCraft.Darkstone_cobble.getDefaultState());
 			is.damageItem(50, player);
-		}else if(w.getBlock(x, y, z) == AbyssalCraft.Darkstone_cobble){
-			w.setBlock(x, y, z, Blocks.cobblestone);
+		}else if(w.getBlockState(pos) == AbyssalCraft.Darkstone_cobble){
+			w.setBlockState(pos, Blocks.cobblestone.getDefaultState());
 			is.damageItem(50, player);
-		}else if(w.getBlock(x, y, z) == Blocks.stonebrick){
-			w.setBlock(x, y, z, AbyssalCraft.Darkstone_brick);
+		}else if(w.getBlockState(pos) == Blocks.stonebrick){
+			w.setBlockState(pos, AbyssalCraft.Darkstone_brick.getDefaultState());
 			is.damageItem(50, player);
-		}else if(w.getBlock(x, y, z) == AbyssalCraft.Darkstone_brick){
-			w.setBlock(x, y, z, Blocks.stonebrick);
+		}else if(w.getBlockState(pos) == AbyssalCraft.Darkstone_brick){
+			w.setBlockState(pos, Blocks.stonebrick.getDefaultState());
 			is.damageItem(50, player);
 		}
 		return false;
@@ -71,7 +75,7 @@ public class ItemCorb extends Item {
 	}
 
 	@Override
-	public boolean hasEffect(ItemStack is, int pass){
+	public boolean hasEffect(ItemStack is){
 		return true;
 	}
 }

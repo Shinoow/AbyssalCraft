@@ -99,7 +99,7 @@ public class SlotTransmutator extends Slot
 
 		MinecraftForge.EVENT_BUS.post(new ACEvents.ItemTransmutedEvent(thePlayer, par1ItemStack));
 
-		if (par1ItemStack.getItem() == AbyssalCraft.portalPlacerJzh)
+		if (par1ItemStack.getItem() == AbyssalCraft.gatewayKeyJzh)
 			thePlayer.addStat(AbyssalCraft.GK3, 1);
 		if(par1ItemStack.getItem() == AbyssalCraft.dreadiumingot)
 			thePlayer.addStat(AbyssalCraft.dreadium, 1);

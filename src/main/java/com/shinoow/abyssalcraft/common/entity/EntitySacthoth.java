@@ -34,10 +34,12 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
+import net.minecraft.util.BlockPos;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumChatFormatting;
-import net.minecraft.util.MathHelper;
+import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.StatCollector;
+import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.living.EnderTeleportEvent;
@@ -62,7 +64,7 @@ public class EntitySacthoth extends EntityMob implements IBossDisplayData, IAnti
 		tasks.addTask(5, new EntityAILookIdle(this));
 		tasks.addTask(5, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
 		targetTasks.addTask(1, new EntityAIHurtByTarget(this, false));
-		targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityPlayer.class, 0, true));
+		targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityPlayer.class, true));
 		ignoreFrustumCheck = true;
 		isImmuneToFire = true;
 	}
@@ -81,9 +83,9 @@ public class EntitySacthoth extends EntityMob implements IBossDisplayData, IAnti
 	}
 
 	@Override
-	public String getCommandSenderName()
+	public String getName()
 	{
-		return EnumChatFormatting.DARK_RED + super.getCommandSenderName();
+		return EnumChatFormatting.DARK_RED + super.getName();
 	}
 
 	@Override
@@ -114,15 +116,9 @@ public class EntitySacthoth extends EntityMob implements IBossDisplayData, IAnti
 	}
 
 	@Override
-	protected boolean isAIEnabled()
-	{
-		return true;
-	}
-
-	@Override
 	protected boolean canDespawn()
 	{
-		return worldObj.provider.dimensionId == AbyssalCraft.configDimId4 ? true : false;
+		return worldObj.provider.getDimensionId() == AbyssalCraft.configDimId4 ? true : false;
 	}
 
 	@Override
@@ -147,7 +143,7 @@ public class EntitySacthoth extends EntityMob implements IBossDisplayData, IAnti
 	}
 
 	@Override
-	protected void fall(float par1) {}
+	public void fall(float distance, float damageMultiplier) {}
 
 	@Override
 	protected String getLivingSound()
@@ -255,24 +251,23 @@ public class EntitySacthoth extends EntityMob implements IBossDisplayData, IAnti
 		posY = event.targetY;
 		posZ = event.targetZ;
 		boolean flag = false;
-		int i = MathHelper.floor_double(posX);
-		int j = MathHelper.floor_double(posY);
-		int k = MathHelper.floor_double(posZ);
+		BlockPos pos = new BlockPos(posX, posY, posZ);
 
-		if (worldObj.blockExists(i, j, k))
+		if (worldObj.isBlockLoaded(pos))
 		{
 			boolean flag1 = false;
 
-			while (!flag1 && j > 0)
+			while (!flag1 && pos.getY() > 0)
 			{
-				Block block = worldObj.getBlock(i, j - 1, k);
+				BlockPos pos1 = pos.down();
+				Block block = worldObj.getBlockState(pos1).getBlock();
 
 				if (block.getMaterial().blocksMovement())
 					flag1 = true;
 				else
 				{
 					--posY;
-					--j;
+					pos = pos1;
 				}
 			}
 
@@ -280,7 +275,7 @@ public class EntitySacthoth extends EntityMob implements IBossDisplayData, IAnti
 			{
 				setPosition(posX, posY, posZ);
 
-				if (worldObj.getCollidingBoundingBoxes(this, boundingBox).isEmpty() && !worldObj.isAnyLiquid(boundingBox))
+				if (worldObj.getCollidingBoundingBoxes(this, getEntityBoundingBox()).isEmpty() && !worldObj.isAnyLiquid(getEntityBoundingBox()))
 					flag = true;
 			}
 		}
@@ -304,7 +299,7 @@ public class EntitySacthoth extends EntityMob implements IBossDisplayData, IAnti
 				double d8 = d4 + (posY - d4) * d6 + rand.nextDouble() * height;
 				double d9 = d5 + (posZ - d5) * d6 + (rand.nextDouble() - 0.5D) * width * 2.0D;
 				if(AbyssalCraft.particleEntity)
-					worldObj.spawnParticle("largesmoke", d7, d8, d9, f, f1, f2);
+					worldObj.spawnParticle(EnumParticleTypes.SMOKE_LARGE, d7, d8, d9, f, f1, f2);
 			}
 
 			worldObj.playSoundEffect(d3, d4, d5, "mob.endermen.portal", 1.0F, 1.0F);
@@ -324,11 +319,11 @@ public class EntitySacthoth extends EntityMob implements IBossDisplayData, IAnti
 			float f1 = (rand.nextFloat() - 0.5F) * 4.0F;
 			float f2 = (rand.nextFloat() - 0.5F) * 8.0F;
 			if(AbyssalCraft.particleEntity){
-				worldObj.spawnParticle("smoke", posX + f, posY + 2.0D + f1, posZ + f2, 0.0D, 0.0D, 0.0D);
-				worldObj.spawnParticle("largesmoke", posX + f, posY + 2.0D + f1, posZ + f2, 0.0D, 0.0D, 0.0D);
-				worldObj.spawnParticle("explode", posX + f, posY + 2.0D + f1, posZ + f2, 0.0D, 0.0D, 0.0D);
+				worldObj.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, posX + f, posY + 2.0D + f1, posZ + f2, 0.0D, 0.0D, 0.0D);
+				worldObj.spawnParticle(EnumParticleTypes.SMOKE_LARGE, posX + f, posY + 2.0D + f1, posZ + f2, 0.0D, 0.0D, 0.0D);
+				worldObj.spawnParticle(EnumParticleTypes.EXPLOSION_NORMAL, posX + f, posY + 2.0D + f1, posZ + f2, 0.0D, 0.0D, 0.0D);
 				if (deathTicks >= 190 && deathTicks <= 200)
-					worldObj.spawnParticle("hugeexplosion", posX + f, posY + 2.0D + f1, posZ + f2, 0.0D, 0.0D, 0.0D);
+					worldObj.spawnParticle(EnumParticleTypes.EXPLOSION_HUGE, posX + f, posY + 2.0D + f1, posZ + f2, 0.0D, 0.0D, 0.0D);
 			}
 		}
 
@@ -393,17 +388,17 @@ public class EntitySacthoth extends EntityMob implements IBossDisplayData, IAnti
 	{
 		for (int i = 0; i < 2; ++i)
 			if(AbyssalCraft.particleEntity)
-				worldObj.spawnParticle("largesmoke", posX + (rand.nextDouble() - 0.5D) * width, posY + rand.nextDouble() * height, posZ + (rand.nextDouble() - 0.5D) * width, 0.0D, 0.0D, 0.0D);
+				worldObj.spawnParticle(EnumParticleTypes.SMOKE_LARGE, posX + (rand.nextDouble() - 0.5D) * width, posY + rand.nextDouble() * height, posZ + (rand.nextDouble() - 0.5D) * width, 0.0D, 0.0D, 0.0D);
 
-		List list = worldObj.getEntitiesWithinAABBExcludingEntity(this, boundingBox.expand(30.0D, 30.0D, 30.0D));
+		List list = worldObj.getEntitiesWithinAABBExcludingEntity(this, getEntityBoundingBox().expand(30.0D, 30.0D, 30.0D));
 		if (list != null)
 			for (int k2 = 0; k2 < list.size(); k2++) {
 				Entity entity = (Entity)list.get(k2);
 				if (entity instanceof EntityPlayer && !entity.isDead && deathTicks == 0 && !((EntityPlayer)entity).capabilities.isCreativeMode)
 					((EntityPlayer)entity).addPotionEffect(new PotionEffect(Potion.blindness.id, 40));
 			}
-		EntityPlayer player = worldObj.getClosestVulnerablePlayerToEntity(this, 160D);
-		if(player != null && player.getDistanceToEntity(this) >= 50D){
+		EntityPlayer player = worldObj.getClosestPlayerToEntity(this, 160D);
+		if(player != null && player.getDistanceToEntity(this) >= 50D && !player.capabilities.isCreativeMode){
 			if(player.posX - posX > 50)
 				teleportTo(player.posX + 30, player.posY, player.posZ);
 			if(player.posX - posX < -50)
@@ -422,9 +417,9 @@ public class EntitySacthoth extends EntityMob implements IBossDisplayData, IAnti
 	}
 
 	@Override
-	public IEntityLivingData onSpawnWithEgg(IEntityLivingData par1EntityLivingData)
+	public IEntityLivingData onInitialSpawn(DifficultyInstance difficulty, IEntityLivingData par1EntityLivingData)
 	{
-		par1EntityLivingData = super.onSpawnWithEgg(par1EntityLivingData);
+		par1EntityLivingData = super.onInitialSpawn(difficulty, par1EntityLivingData);
 
 		if(worldObj.isDaytime())
 			worldObj.setWorldTime(14000L);
