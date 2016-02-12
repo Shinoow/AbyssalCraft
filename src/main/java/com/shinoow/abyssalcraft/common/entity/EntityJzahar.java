@@ -66,7 +66,7 @@ public class EntityJzahar extends EntityMob implements IBossDisplayData, IRanged
 
 	public EntityJzahar(World par1World) {
 		super(par1World);
-		setSize(1.8F, 4.0F);
+		setSize(1.3F, 3.8F);
 		tasks.addTask(0, new EntityAISwimming(this));
 		tasks.addTask(2, new EntityAIAttackOnCollide(this, EntityPlayer.class, 0.35D, true));
 		tasks.addTask(3, new EntityAIArrowAttack(this, 0.4D, 40, 20.0F));

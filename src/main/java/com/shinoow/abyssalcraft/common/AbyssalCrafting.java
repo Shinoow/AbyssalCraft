@@ -222,9 +222,9 @@ public class AbyssalCrafting {
 		GameRegistry.addRecipe(new ItemStack(AbyssalCraft.dreadcloth, 1), new Object[] {"#%#", "%&%", "#%#", '#', Items.string, '%', AbyssalCraft.dreadfragment, '&', Items.leather});
 		GameRegistry.addRecipe(new ItemStack(AbyssalCraft.dreadcloth, 1), new Object[] {"#%#", "%&%", "#%#", '%', Items.string, '#', AbyssalCraft.dreadfragment, '&', Items.leather});
 		GameRegistry.addRecipe(new ItemStack(AbyssalCraft.dreadplate, 1), new Object[] {"###", "#%#", "###", '#', AbyssalCraft.dreadiumingot, '%', AbyssalCraft.dreadcloth});
-		GameRegistry.addRecipe(new ItemStack(AbyssalCraft.dreadblade, 1), new Object[] {"##", "##", "##", '#', new ItemStack(AbyssalCraft.crystal, 1, 14)});
+		GameRegistry.addRecipe(new ItemStack(AbyssalCraft.dreadblade, 1), new Object[] {"## ", "## ", "## ", '#', new ItemStack(AbyssalCraft.crystal, 1, 14)});
 		GameRegistry.addRecipe(new ItemStack(AbyssalCraft.dreadhilt, 1), new Object[] {"###", "%&%", "%&%", '#', AbyssalCraft.dreadiumingot, '%', AbyssalCraft.dreadcloth, '&', AbyssalCraft.dreadplanks});
-		GameRegistry.addRecipe(new ItemStack(AbyssalCraft.dreadkatana, 1), new Object[] {"#", "%", '#', AbyssalCraft.dreadblade, '%', AbyssalCraft.dreadhilt});
+		GameRegistry.addRecipe(new ItemStack(AbyssalCraft.dreadkatana, 1), new Object[] {"# ", "% ", '#', AbyssalCraft.dreadblade, '%', AbyssalCraft.dreadhilt});
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(Items.gunpowder, 4), true, new Object[] {"#&#", "#%#", "###", '#', "dustSaltpeter", '%', new ItemStack(Items.coal, 1, 1), '&', "dustSulfur"}));
 		GameRegistry.addRecipe(new ItemStack(AbyssalCraft.crystal, 1, 10), new Object[] {" # ", "#%#", " # ", '#', new ItemStack(AbyssalCraft.crystal, 1, 5), '%', new ItemStack(AbyssalCraft.crystal, 1, 3)});
 		GameRegistry.addRecipe(new ItemStack(AbyssalCraft.crystal, 1, 9), new Object[] {" # ", "%%%", '#', new ItemStack(AbyssalCraft.crystal, 1, 6), '%', new ItemStack(AbyssalCraft.crystal, 1, 4)});

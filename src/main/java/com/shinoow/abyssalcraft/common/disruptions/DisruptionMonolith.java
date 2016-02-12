@@ -27,9 +27,9 @@ public class DisruptionMonolith extends DisruptionEntry {
 	public DisruptionMonolith() {
 		super("monolith", null);
 	}
-
+	
 	private int randomNum(Random rand){
-		int num = 16;
+		int num = 1;
 		if(rand.nextInt(10) == 0)
 			num *= rand.nextBoolean() ? 3 : 2;
 		return rand.nextBoolean() ? num : num * -1;
@@ -38,19 +38,12 @@ public class DisruptionMonolith extends DisruptionEntry {
 	@Override
 	public void disrupt(World world, int x, int y, int z, List<EntityPlayer> players) {
 		if(!world.isRemote){
-			Chunk chunk = world.getChunkFromBlockCoords(x, z);
-			int chunkX = chunk.xPosition*randomNum(world.rand);
-			int chunkZ = chunk.zPosition*randomNum(world.rand);
 
-			int xPos = chunkX + world.rand.nextInt(32);
-			int zPos = chunkZ + world.rand.nextInt(32);
+			int xPos = x + world.rand.nextInt(32) * randomNum(world.rand);
+			int zPos = z + world.rand.nextInt(32) * randomNum(world.rand);
 			int yPos = world.getHeightValue(xPos, zPos);
-			int ytemp = yPos;
 
-			while(world.isAirBlock(xPos, ytemp, zPos) && ytemp > 2)
-				--ytemp;
-
-			world.setBlock(xPos, ytemp, zPos, AbyssalCraft.shoggothBlock);
+			world.setBlock(xPos, yPos, zPos, AbyssalCraft.shoggothBlock);
 
 			new WorldGenShoggothMonolith().generate(world, world.rand, xPos, yPos, zPos);
 		}

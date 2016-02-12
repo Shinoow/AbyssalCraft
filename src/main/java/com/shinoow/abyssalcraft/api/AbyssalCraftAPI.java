@@ -36,6 +36,8 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.api.integration.IACPlugin;
+import com.shinoow.abyssalcraft.api.internal.DummyNecroDataHandler;
+import com.shinoow.abyssalcraft.api.internal.IInternalNecroDataHandler;
 import com.shinoow.abyssalcraft.api.item.ACItems;
 import com.shinoow.abyssalcraft.api.item.ItemEngraving;
 import com.shinoow.abyssalcraft.api.necronomicon.NecroData;
@@ -57,7 +59,7 @@ public class AbyssalCraftAPI {
 	/**
 	 * String used to specify the API version in the "package-info.java" classes
 	 */
-	public static final String API_VERSION = "1.5";
+	public static final String API_VERSION = "1.6";
 
 	/**
 	 * Enchantment IDs, first one is the Coralium enchantment, second Dread enchantment,
@@ -109,6 +111,14 @@ public class AbyssalCraftAPI {
 	public static ToolMaterial refinedCoraliumTool = EnumHelper.addToolMaterial("CORALIUM", 5, 2000, 14.0F, 5, 14);
 	public static ToolMaterial dreadiumTool = EnumHelper.addToolMaterial("DREADIUM", 6, 3000, 15.0F, 6, 15);
 	public static ToolMaterial ethaxiumTool = EnumHelper.addToolMaterial("ETHAXIUM", 8, 4000, 16.0F, 8, 20);
+
+	/**
+	 * Internal NecroData handler.<br>
+	 * Use this to alter the Internal NecroData instances.<br>
+	 * Do NOT overwrite this, as internal things won't run!<br>
+	 * Truth be told, the game will stop if this class is overridden.
+	 */
+	public static IInternalNecroDataHandler internalNDHandler = new DummyNecroDataHandler();
 
 	/**
 	 * Initializes the reflection required for the Potion code, ignore it

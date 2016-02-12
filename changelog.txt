@@ -1,4 +1,11 @@
-- Rituals can now be performed even if there isn't enough PE (in which case the ritual will fail to complete)
-- Fixed server crashes related to Fireball rain Disruptions (had code that only ran client-side)
-- Somewhat fixed the hitbox issues with Lesser Shoggoths and Cha'garoth (reduced the bounding box width to 2 on both of them, makes it possible to land a hit)
-- Now runs on Forge 10.13.4.1558
+- The bounding box on Depths Ghoul/Anti-Ghoul/Omothol Ghoul has been reduced (the width was far off)
+- Lesser Shoggoths should now be possible to hit without them landing a couple of hits on you
+- Baby versions of all AbyssalCraft mobs (that has a baby version) now has a bounding box half the size of the adult one
+- Crafting recipes displayed in the Necronomicon are now automatically fetched (eg. a MineTweaked recipe will display)
+- Added a new config category: Worldgen
+- Nearly all structure generation and all ore generation can now be disabled in the config
+- Monolith Disruptions are a bit more accurate now (Monoliths will always generate within a maximum radius of 96 blocks from the manipulator)
+- You can now add/edit/remove pages in the Necronomicon (MineTweaker support in next ACI release)
+- The second Yog-Sothoth page now displays the correct text (eg. not the same as the first one)
+- No errors mentioning ReputationProps should be printed in the log when a player joins a sever
+- Now runs on Forge 10.13.4.1614

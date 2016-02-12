@@ -51,15 +51,16 @@ public class BiomeGenDarklandsMountains extends BiomeGenBase {
 		super.decorate(par1World, par2Random, par3, par4);
 		int var5 = 3 + par2Random.nextInt(6);
 
-		for (int rarity = 0; rarity < var5; ++rarity)
-		{
-			int veinSize = 1 + par2Random.nextInt(3);
-			int x = par3 + par2Random.nextInt(16);
-			int y = par2Random.nextInt(28) + 4;
-			int z = par4 + par2Random.nextInt(16);
+		if(AbyssalCraft.generateAbyssalniteOre)
+			for (int rarity = 0; rarity < var5; ++rarity)
+			{
+				int veinSize = 1 + par2Random.nextInt(3);
+				int x = par3 + par2Random.nextInt(16);
+				int y = par2Random.nextInt(28) + 4;
+				int z = par4 + par2Random.nextInt(16);
 
-			new WorldGenMinable(AbyssalCraft.abyore, veinSize).generate(par1World, par2Random, x, y, z);
-		}
+				new WorldGenMinable(AbyssalCraft.abyore, veinSize).generate(par1World, par2Random, x, y, z);
+			}
 	}
 
 	@Override

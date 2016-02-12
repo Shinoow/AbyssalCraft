@@ -80,7 +80,7 @@ import cpw.mods.fml.common.registry.*;
 @Mod(modid = AbyssalCraft.modid, name = AbyssalCraft.name, version = AbyssalCraft.version, dependencies = "required-after:Forge@[forgeversion,)", useMetadata = false, guiFactory = "com.shinoow.abyssalcraft.client.config.ACGuiFactory")
 public class AbyssalCraft {
 
-	public static final String version = "1.9.0-pre-3";
+	public static final String version = "1.9.0-pre-4";
 	public static final String modid = "abyssalcraft";
 	public static final String name = "AbyssalCraft";
 
@@ -291,6 +291,12 @@ public class AbyssalCraft {
 	public static int evilAnimalSpawnRate;
 	public static boolean shoggothOoze, oozeLeaves, oozeGrass, oozeGround, oozeSand, oozeRock, oozeCloth, oozeWood,
 	oozeGourd, oozeIron, oozeClay;
+	public static boolean generateDarklandsStructures, generateShoggothLairs, generateAbyssalWastelandPillars,
+	generateAbyssalWastelandRuins, generateAntimatterLake, generateCoraliumLake, generateDreadlandsStalagmite;
+	public static boolean generateCoraliumOre, generateNitreOre, generateAbyssalniteOre, generateAbyssalCoraliumOre,
+	generateDreadlandsAbyssalniteOre, generateDreadedAbyssalniteOre, generateAbyssalIronOre, generateAbyssalGoldOre,
+	generateAbyssalDiamondOre, generateAbyssalNitreOre, generateAbyssalTinOre, generateAbyssalCopperOre,
+	generatePearlescentCoraliumOre, generateLiquifiedCoraliumOre;
 
 	static int startEntityId = 300;
 
@@ -317,6 +323,7 @@ public class AbyssalCraft {
 		NetworkRegistry.INSTANCE.registerGuiHandler(this, new CommonProxy());
 		instance = this;
 		proxy.preInit();
+		AbyssalCraftAPI.internalNDHandler = new InternalNecroDataHandler();
 
 		cfg = new Configuration(event.getSuggestedConfigurationFile());
 		syncConfig();
@@ -1408,6 +1415,7 @@ public class AbyssalCraft {
 		GameRegistry.registerWorldGenerator(new AbyssalCraftWorldGenerator(), 0);
 		GameRegistry.registerFuelHandler(new FurnaceFuelHandler());
 		AbyssalCrafting.addRecipes();
+		AbyssalCraftAPI.internalNDHandler.registerInternalPages();
 		proxy.registerRenderThings();
 		IntegrationHandler.init();
 	}
@@ -1421,6 +1429,18 @@ public class AbyssalCraft {
 		((BlockCLiquid) Cwater).addBlocks();
 		checkBiomeIds(false);
 		ACLogger.info("AbyssalCraft loaded.");
+	}
+
+	@EventHandler
+	public void serverStart(FMLServerAboutToStartEvent event){
+		String clname = AbyssalCraftAPI.internalNDHandler.getClass().getName();
+		String expect = "com.shinoow.abyssalcraft.common.handlers.InternalNecroDataHandler";
+		if(!clname.equals(expect)) {
+			new IllegalAccessError("The AbyssalCraft API internal NecroData handler has been overriden. "
+					+ "Since things are not going to work correctly, the game will now shut down."
+					+ " (Expected classname: " + expect + ", Actual classname: " + clname + ")").printStackTrace();
+			FMLCommonHandler.instance().exitJava(1, true);
+		}
 	}
 
 	@SuppressWarnings("unchecked")
@@ -1804,6 +1824,29 @@ public class AbyssalCraft {
 		oozeGourd = cfg.get("shoggoth", "Ooze Spread: Gourd", true, "Toggles ooze spreading on blocks with the Gourd material (Pumpkin, Melon).").getBoolean();
 		oozeIron = cfg.get("shoggoth", "Ooze Spread: Iron", true, "Toggles ooze spreading on blocks with the Iron material (Iron blocks, Gold blocks, Diamond blocks).").getBoolean();
 		oozeClay = cfg.get("shoggoth", "Ooze Spread: Clay", true, "Toggles ooze spreading on blocks with the Clay material (Clay blocks).").getBoolean();
+
+		generateDarklandsStructures = cfg.get("worldgen", "Darklands Structures", true, "Toggles whether or not to generate random Darklands structures.").getBoolean();
+		generateShoggothLairs = cfg.get("worldgen", "Shoggoth Lairs", true, "Toggles whether or not to generate Shoggoth Lairs (however, they will still generate in Omothol).").getBoolean();
+		generateAbyssalWastelandPillars = cfg.get("worldgen", "Abyssal Wasteland Pillars", true, "Toggles whether or not to generate Tall Obsidian Pillars in the Abyssal Wasteland.").getBoolean();
+		generateAbyssalWastelandRuins = cfg.get("worldgen", "Abyssal Wasteland Ruins", true, "Toggles whether or not to generate small ruins in the Abyssal Wasteland.").getBoolean();
+		generateAntimatterLake = cfg.get("worldgen", "Liquid Antimatter Lakes", true, "Toggles whether or not to generate Liquid Antimatter Lakes in Coralium Infested Swamps.").getBoolean();
+		generateCoraliumLake = cfg.get("worldgen", "Liquid Coralium Lakes", true, "Toggles whether or not to generate Liquid Coralium Lakes in the Abyssal Wasteland.").getBoolean();
+		generateDreadlandsStalagmite = cfg.get("worldgen", "Dreadlands Stalagmites", true, "Toggles whether or not to generate Stalagmites in Dreadlands and Purified Dreadlands biomes.").getBoolean();
+		
+		generateCoraliumOre = cfg.get("worldgen", "Coralium Ore", true, "Toggles whether or not to generate Coralium Ore in the Overworld.").getBoolean();
+		generateNitreOre = cfg.get("worldgen", "Nitre Ore", true, "Toggles whether or not to generate Nitre Ore in the Overworld.").getBoolean();
+		generateAbyssalniteOre = cfg.get("worldgen", "Abyssalnite Ore", true, "Toggles wheter or not to generate Abyssalnite Ore in Darklands Biomes.").getBoolean();
+		generateAbyssalCoraliumOre = cfg.get("worldgen", "Abyssal Coralium Ore", true, "Toggles whether or not to generate Coralium Ore in the Abyssal Wasteland.").getBoolean();
+		generateDreadlandsAbyssalniteOre = cfg.get("worldgen", "Dreadlands Abyssalnite Ore", true, "Toggles whether or not to generate Abyssalnite Ore in the Dreadlands.").getBoolean();
+		generateDreadedAbyssalniteOre = cfg.get("worldgen", "Dreaded Abyssalnite Ore", true, "Toggles whether or not to generate Dreaded Abyssalnite Ore in the Dreadlands.").getBoolean();
+		generateAbyssalIronOre = cfg.get("worldgen", "Abyssal Iron Ore", true, "Toggles whether or not to generate Iron Ore in the Abyssal Wasteland.").getBoolean();
+		generateAbyssalGoldOre = cfg.get("worldgen", "Abyssal Gold Ore", true, "Toggles whether or not to generate Gold Ore in the Abyssal Wasteland.").getBoolean();
+		generateAbyssalDiamondOre = cfg.get("worldgen", "Abyssal Diamond Ore", true, "Toggles whether or not to generate Diamond Ore in the Abyssal Wasteland").getBoolean();
+		generateAbyssalNitreOre = cfg.get("worldgen", "Abyssal Nitre Ore", true, "Toggles whether or not to generate Nitre Ore in the Abyssal Wasteland.").getBoolean();
+		generateAbyssalTinOre = cfg.get("worldgen", "Abyssal Tin Ore", true, "Toggles whether or not to generate Tin Ore in the Abyssal Wasteland").getBoolean();
+		generateAbyssalCopperOre = cfg.get("worldgen", "Abyssal Copper Ore", true, "Toggles whether or not to generate Copper Ore in the Abyssal Wasteland.").getBoolean();
+		generatePearlescentCoraliumOre = cfg.get("worldgen", "Pearlescent Coralium Ore", true, "Toggles whether or not to generate Pearlescent Coralium Ore in the Abyssal Wasteland.").getBoolean();
+		generateLiquifiedCoraliumOre = cfg.get("worldgen", "Liquified Coralium Ore", true, "Toggles whether or not to generate Liquified Coralium Ore in the Abyssal Wasteland.").getBoolean();
 
 		if(cfg.hasChanged())
 			cfg.save();

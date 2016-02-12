@@ -13,6 +13,7 @@ package com.shinoow.abyssalcraft.common.world.biome;
 
 import java.util.Random;
 
+import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.common.entity.EntityDreadgolem;
 import com.shinoow.abyssalcraft.common.world.gen.WorldGenDreadlandsStalagmite;
 
@@ -34,11 +35,12 @@ public class BiomeGenDreadlands extends BiomeGenDreadlandsBase
 	{
 		super.decorate(world, rand, x, z);
 
-		for(int i = 0; i < 1; i++){
-			int xPos = x + rand.nextInt(16) + 8;
-			int zPos = z + rand.nextInt(16) + 8;
-			new WorldGenDreadlandsStalagmite().generate(world, rand, xPos, world.getHeightValue(xPos, zPos), zPos);
-		}
+		if(AbyssalCraft.generateDreadlandsStalagmite)
+			for(int i = 0; i < 1; i++){
+				int xPos = x + rand.nextInt(16) + 8;
+				int zPos = z + rand.nextInt(16) + 8;
+				new WorldGenDreadlandsStalagmite().generate(world, rand, xPos, world.getHeightValue(xPos, zPos), zPos);
+			}
 	}
 
 	@Override

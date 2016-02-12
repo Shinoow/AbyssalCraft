@@ -654,6 +654,8 @@ ac_potion=Potions
 ac_potion.tooltip=Potion ID configuration
 ac_shoggoth=Shoggoth Ooze
 ac_shoggoth.tooltip=Shoggoth Ooze Configuration
+ac_worldgen=Worldgen
+ac_worldgen.tooltip=Worldgen configuration
 
 #Damagesources
 death.attack.coralium=%1$s died from the Coralium Plague

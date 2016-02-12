@@ -52,86 +52,92 @@ public class AbyssalCraftWorldGenerator implements IWorldGenerator {
 
 	public void generateSurface(World world, Random random, int chunkX, int chunkZ) {
 
-		for(int k = 0; k < 2; k++) {
-			int RandPosX = chunkX + random.nextInt(5);
-			int RandPosY = random.nextInt(75);
-			int RandPosZ = chunkZ + random.nextInt(5);
-			new AChouse1().generate(world, random, RandPosX, RandPosY, RandPosZ);
+		if(AbyssalCraft.generateDarklandsStructures){
+			for(int k = 0; k < 2; k++) {
+				int RandPosX = chunkX + random.nextInt(5);
+				int RandPosY = random.nextInt(75);
+				int RandPosZ = chunkZ + random.nextInt(5);
+				new AChouse1().generate(world, random, RandPosX, RandPosY, RandPosZ);
+			}
+
+			for(int k = 0; k < 2; k++) {
+				int RandPosX = chunkX + random.nextInt(5);
+				int RandPosY = random.nextInt(75);
+				int RandPosZ = chunkZ + random.nextInt(5);
+				new AChouse2().generate(world, random, RandPosX, RandPosY, RandPosZ);
+			}
+
+			for(int k = 0; k < 2; k++) {
+				int RandPosX = chunkX + random.nextInt(5);
+				int RandPosY = random.nextInt(75);
+				int RandPosZ = chunkZ + random.nextInt(5);
+				new ACplatform1().generate(world, random, RandPosX, RandPosY, RandPosZ);
+			}
+
+			for(int k = 0; k < 2; k++) {
+				int RandPosX = chunkX + random.nextInt(5);
+				int RandPosY = random.nextInt(75);
+				int RandPosZ = chunkZ + random.nextInt(5);
+				new ACplatform2().generate(world, random, RandPosX, RandPosY, RandPosZ);
+			}
+
+			for(int k = 0; k < 2; k++) {
+				int RandPosX = chunkX + random.nextInt(5);
+				int RandPosY = random.nextInt(75);
+				int RandPosZ = chunkZ + random.nextInt(5);
+				new ACscion1().generate(world, random, RandPosX, RandPosY, RandPosZ);
+			}
+
+			for(int k = 0; k < 2; k++) {
+				int RandPosX = chunkX + random.nextInt(5);
+				int RandPosY = random.nextInt(75);
+				int RandPosZ = chunkZ + random.nextInt(5);
+				new ACscion2().generate(world, random, RandPosX, RandPosY, RandPosZ);
+			}
 		}
 
-		for(int k = 0; k < 2; k++) {
-			int RandPosX = chunkX + random.nextInt(5);
-			int RandPosY = random.nextInt(75);
-			int RandPosZ = chunkZ + random.nextInt(5);
-			new AChouse2().generate(world, random, RandPosX, RandPosY, RandPosZ);
+		if(AbyssalCraft.generateCoraliumOre){
+			for(int rarity = 0; rarity < 3; rarity++) {
+				int veinSize = 2 + random.nextInt(2);
+				int x = chunkX + random.nextInt(16);
+				int y = random.nextInt(40);
+				int z = chunkZ + random.nextInt(16);
+				if(BiomeDictionary.isBiomeOfType(world.getBiomeGenForCoords(chunkX, chunkZ), Type.SWAMP))
+					new WorldGenMinable(AbyssalCraft.Coraliumore, veinSize).generate(world, random, x, y, z);
+			}
+
+			for(int rarity = 0; rarity < 6; rarity++) {
+				int veinSize = 4 + random.nextInt(2);
+				int x = chunkX + random.nextInt(16);
+				int y = random.nextInt(40);
+				int z = chunkZ + random.nextInt(16);
+				if(BiomeDictionary.isBiomeOfType(world.getBiomeGenForCoords(chunkX, chunkZ), Type.OCEAN) &&
+						world.getBiomeGenForCoords(chunkX, chunkZ)!=BiomeGenBase.deepOcean)
+					new WorldGenMinable(AbyssalCraft.Coraliumore, veinSize).generate(world, random, x, y, z);
+				if(world.getBiomeGenForCoords(chunkX, chunkZ)==BiomeGenBase.deepOcean)
+					new WorldGenMinable(AbyssalCraft.Coraliumore, veinSize).generate(world, random, x, y-20, z);
+			}
 		}
 
-		for(int k = 0; k < 2; k++) {
-			int RandPosX = chunkX + random.nextInt(5);
-			int RandPosY = random.nextInt(75);
-			int RandPosZ = chunkZ + random.nextInt(5);
-			new ACplatform1().generate(world, random, RandPosX, RandPosY, RandPosZ);
-		}
+		if(AbyssalCraft.generateNitreOre)
+			for(int rarity = 0; rarity < 3; rarity++) {
+				int veinSize = 4 + random.nextInt(2);
+				int x = chunkX + random.nextInt(16);
+				int y = random.nextInt(30);
+				int z = chunkZ + random.nextInt(16);
 
-		for(int k = 0; k < 2; k++) {
-			int RandPosX = chunkX + random.nextInt(5);
-			int RandPosY = random.nextInt(75);
-			int RandPosZ = chunkZ + random.nextInt(5);
-			new ACplatform2().generate(world, random, RandPosX, RandPosY, RandPosZ);
-		}
+				new WorldGenMinable(AbyssalCraft.nitreOre, veinSize).generate(world, random, x, y, z);
+			}
 
-		for(int k = 0; k < 2; k++) {
-			int RandPosX = chunkX + random.nextInt(5);
-			int RandPosY = random.nextInt(75);
-			int RandPosZ = chunkZ + random.nextInt(5);
-			new ACscion1().generate(world, random, RandPosX, RandPosY, RandPosZ);
-		}
-
-		for(int k = 0; k < 2; k++) {
-			int RandPosX = chunkX + random.nextInt(5);
-			int RandPosY = random.nextInt(75);
-			int RandPosZ = chunkZ + random.nextInt(5);
-			new ACscion2().generate(world, random, RandPosX, RandPosY, RandPosZ);
-		}
-
-		for(int rarity = 0; rarity < 3; rarity++) {
-			int veinSize = 2 + random.nextInt(2);
-			int x = chunkX + random.nextInt(16);
-			int y = random.nextInt(40);
-			int z = chunkZ + random.nextInt(16);
-			if(BiomeDictionary.isBiomeOfType(world.getBiomeGenForCoords(chunkX, chunkZ), Type.SWAMP))
-				new WorldGenMinable(AbyssalCraft.Coraliumore, veinSize).generate(world, random, x, y, z);
-		}
-
-		for(int rarity = 0; rarity < 6; rarity++) {
-			int veinSize = 4 + random.nextInt(2);
-			int x = chunkX + random.nextInt(16);
-			int y = random.nextInt(40);
-			int z = chunkZ + random.nextInt(16);
-			if(BiomeDictionary.isBiomeOfType(world.getBiomeGenForCoords(chunkX, chunkZ), Type.OCEAN) &&
-					world.getBiomeGenForCoords(chunkX, chunkZ)!=BiomeGenBase.deepOcean)
-				new WorldGenMinable(AbyssalCraft.Coraliumore, veinSize).generate(world, random, x, y, z);
-			if(world.getBiomeGenForCoords(chunkX, chunkZ)==BiomeGenBase.deepOcean)
-				new WorldGenMinable(AbyssalCraft.Coraliumore, veinSize).generate(world, random, x, y-20, z);
-		}
-
-		for(int rarity = 0; rarity < 3; rarity++) {
-			int veinSize = 4 + random.nextInt(2);
-			int x = chunkX + random.nextInt(16);
-			int y = random.nextInt(30);
-			int z = chunkZ + random.nextInt(16);
-
-			new WorldGenMinable(AbyssalCraft.nitreOre, veinSize).generate(world, random, x, y, z);
-		}
-
-		for(int i = 0; i < 1; i++){
-			int x = chunkX + random.nextInt(16);
-			int z = chunkZ + random.nextInt(16);
-			int y = world.getHeightValue(x, z);
-			if(BiomeDictionary.isBiomeOfType(world.getBiomeGenForCoords(x, z), Type.SWAMP) ||
-					BiomeDictionary.isBiomeOfType(world.getBiomeGenForCoords(x, z), Type.RIVER))
-				if(random.nextInt(100) == 0)
-					new StructureShoggothPit().generate(world, random, x, y, z);
-		}
+		if(AbyssalCraft.generateShoggothLairs)
+			for(int i = 0; i < 1; i++){
+				int x = chunkX + random.nextInt(16);
+				int z = chunkZ + random.nextInt(16);
+				int y = world.getHeightValue(x, z);
+				if(BiomeDictionary.isBiomeOfType(world.getBiomeGenForCoords(x, z), Type.SWAMP) ||
+						BiomeDictionary.isBiomeOfType(world.getBiomeGenForCoords(x, z), Type.RIVER))
+					if(random.nextInt(100) == 0)
+						new StructureShoggothPit().generate(world, random, x, y, z);
+			}
 	}
 }

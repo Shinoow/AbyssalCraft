@@ -49,7 +49,7 @@ public class EntityChagaroth extends EntityMob implements IBossDisplayData, IDre
 
 	public EntityChagaroth(World par1World) {
 		super(par1World);
-		setSize(2.0F, 5.0F);
+		setSize(2.0F, 4.8F);
 		tasks.addTask(2, new EntityAIAttackOnCollide(this, EntityPlayer.class, 0.0D, true));
 		tasks.addTask(3, new EntityAILookIdle(this));
 		tasks.addTask(3, new EntityAIWatchClosest(this, EntityPlayer.class, 16.0F));

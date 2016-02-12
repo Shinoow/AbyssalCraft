@@ -20,7 +20,6 @@ import net.minecraftforge.client.MinecraftForgeClient;
 import net.minecraftforge.common.MinecraftForge;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
-import com.shinoow.abyssalcraft.api.render.Block3DRender;
 import com.shinoow.abyssalcraft.client.handlers.AbyssalCraftClientEventHooks;
 import com.shinoow.abyssalcraft.client.model.entity.*;
 import com.shinoow.abyssalcraft.client.model.item.ModelDreadiumSamuraiArmor;

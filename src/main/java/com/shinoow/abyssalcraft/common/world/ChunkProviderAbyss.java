@@ -379,37 +379,40 @@ public class ChunkProviderAbyss implements IChunkProvider
 		int l1;
 		int i2;
 
-		if (TerrainGen.populate(par1IChunkProvider, worldObj, rand, x, z, flag, LAKE) &&
-				!flag && rand.nextInt(4) == 0)
-		{
-			k1 = k + rand.nextInt(16) + 8;
-			l1 = rand.nextInt(128);
-			i2 = l + rand.nextInt(16) + 8;
-			new WorldGenAbyLake(AbyssalCraft.Cwater).generate(worldObj, rand, k1, l1, i2);
-		}
+		if(AbyssalCraft.generateCoraliumLake)
+			if (TerrainGen.populate(par1IChunkProvider, worldObj, rand, x, z, flag, LAKE) &&
+					!flag && rand.nextInt(4) == 0)
+			{
+				k1 = k + rand.nextInt(16) + 8;
+				l1 = rand.nextInt(128);
+				i2 = l + rand.nextInt(16) + 8;
+				new WorldGenAbyLake(AbyssalCraft.Cwater).generate(worldObj, rand, k1, l1, i2);
+			}
+		if(AbyssalCraft.generateAbyssalWastelandPillars)
+			for(int i = 0; i < 5; i++) {
+				int Xcoord1 = k + rand.nextInt(16);
+				int Ycoord1 = rand.nextInt(80);
+				int Zcoord1 = l + rand.nextInt(16);
 
-		for(int i = 0; i < 5; i++) {
-			int Xcoord1 = k + rand.nextInt(16);
-			int Ycoord1 = rand.nextInt(80);
-			int Zcoord1 = l + rand.nextInt(16);
+				new Abypillar().generate(worldObj, rand, Xcoord1, Ycoord1, Zcoord1);
+			}
+		if(AbyssalCraft.generateAbyssalWastelandRuins)
+			for(int i = 0; i < 5; i++) {
+				int Xcoord2 = k + rand.nextInt(16);
+				int Ycoord2 = rand.nextInt(70);
+				int Zcoord2 = l + rand.nextInt(16);
 
-			new Abypillar().generate(worldObj, rand, Xcoord1, Ycoord1, Zcoord1);
-		}
-		for(int i = 0; i < 5; i++) {
-			int Xcoord2 = k + rand.nextInt(16);
-			int Ycoord2 = rand.nextInt(70);
-			int Zcoord2 = l + rand.nextInt(16);
+				new Abyruin().generate(worldObj, rand, Xcoord2, Ycoord2, Zcoord2);
+			}
+		if(AbyssalCraft.generateShoggothLairs)
+			for(int i = 0; i < 1; i++) {
+				int Xcoord2 = k + rand.nextInt(16);
+				int Zcoord2 = l + rand.nextInt(16);
+				int Ycoord2 = worldObj.getHeightValue(Xcoord2, Zcoord2);
 
-			new Abyruin().generate(worldObj, rand, Xcoord2, Ycoord2, Zcoord2);
-		}
-		for(int i = 0; i < 1; i++) {
-			int Xcoord2 = k + rand.nextInt(16);
-			int Zcoord2 = l + rand.nextInt(16);
-			int Ycoord2 = worldObj.getHeightValue(Xcoord2, Zcoord2);
-
-			if(rand.nextInt(200) == 0)
-				new StructureShoggothPit().generate(worldObj, rand, Xcoord2, Ycoord2, Zcoord2);
-		}
+				if(rand.nextInt(200) == 0)
+					new StructureShoggothPit().generate(worldObj, rand, Xcoord2, Ycoord2, Zcoord2);
+			}
 
 		biomegenbase.decorate(worldObj, rand, k, l);
 

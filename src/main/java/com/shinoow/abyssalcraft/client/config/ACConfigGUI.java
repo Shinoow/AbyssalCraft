@@ -43,6 +43,7 @@ public class ACConfigGUI extends GuiConfig {
 		list.add(new DummyCategoryElement<Object>(StatCollector.translateToLocal("ac_potion"), "ac_potion", PotionEntry.class));
 		list.add(new DummyCategoryElement<Object>(StatCollector.translateToLocal("ac_general"), "ac_general", GeneralEntry.class));
 		list.add(new DummyCategoryElement<Object>(StatCollector.translateToLocal("ac_shoggoth"), "ac_shoggoth", ShoggothEntry.class));
+		list.add(new DummyCategoryElement<Object>(StatCollector.translateToLocal("ac_worldgen"), "ac_worldgen", WorldGenEntry.class));
 		return list;
 	}
 
@@ -135,6 +136,18 @@ public class ACConfigGUI extends GuiConfig {
 		@Override
 		protected GuiScreen buildChildScreen(){
 			return new GuiConfig(owningScreen, new ConfigElement<Object>(AbyssalCraft.cfg.getCategory("shoggoth")).getChildElements(), "abyssalcraft", "shoggoth", false, false, StatCollector.translateToLocal("ac_shoggoth"));
+
+		}
+	}
+	public static class WorldGenEntry extends CategoryEntry{
+
+		public WorldGenEntry(GuiConfig owningScreen, GuiConfigEntries owningEntryList, IConfigElement<?> configElement) {
+			super(owningScreen, owningEntryList, configElement);
+		}
+
+		@Override
+		protected GuiScreen buildChildScreen(){
+			return new GuiConfig(owningScreen, new ConfigElement<Object>(AbyssalCraft.cfg.getCategory("worldgen")).getChildElements(), "abyssalcraft", "worldgen", false, false, StatCollector.translateToLocal("ac_worldgen"));
 
 		}
 	}
