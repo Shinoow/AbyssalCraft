@@ -19,10 +19,10 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 import mezz.jei.api.recipe.BlankRecipeWrapper;
-import mezz.jei.util.Translator;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.StatCollector;
 
 public class TransmutationRecipe extends BlankRecipeWrapper {
 	@Nonnull
@@ -38,7 +38,7 @@ public class TransmutationRecipe extends BlankRecipeWrapper {
 		outputs = Collections.singletonList(output);
 
 		if (experience > 0.0)
-			experienceString = Translator.translateToLocalFormatted("gui.jei.category.smelting.experience", experience);
+			experienceString = StatCollector.translateToLocalFormatted("gui.jei.category.smelting.experience", experience);
 		else
 			experienceString = null;
 	}

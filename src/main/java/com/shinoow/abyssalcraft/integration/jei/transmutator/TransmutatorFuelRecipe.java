@@ -23,10 +23,10 @@ import mezz.jei.api.IGuiHelper;
 import mezz.jei.api.gui.IDrawableAnimated;
 import mezz.jei.api.gui.IDrawableStatic;
 import mezz.jei.api.recipe.BlankRecipeWrapper;
-import mezz.jei.util.Translator;
 import net.minecraft.client.Minecraft;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.StatCollector;
 
 public class TransmutatorFuelRecipe extends BlankRecipeWrapper {
 	@Nonnull
@@ -39,7 +39,7 @@ public class TransmutatorFuelRecipe extends BlankRecipeWrapper {
 	public TransmutatorFuelRecipe(@Nonnull IGuiHelper guiHelper, @Nonnull Collection<ItemStack> input, int burnTime) {
 		List<ItemStack> inputList = new ArrayList<>(input);
 		inputs = Collections.singletonList(inputList);
-		burnTimeString = Translator.translateToLocalFormatted("gui.jei.category.fuel.burnTime", burnTime);
+		burnTimeString = StatCollector.translateToLocalFormatted("gui.jei.category.fuel.burnTime", burnTime);
 
 		ResourceLocation furnaceBackgroundLocation = new ResourceLocation("abyssalcraft", "textures/gui/container/transmutator_NEI.png");
 		IDrawableStatic flameDrawable = guiHelper.createDrawable(furnaceBackgroundLocation, 176, 0, 14, 14);

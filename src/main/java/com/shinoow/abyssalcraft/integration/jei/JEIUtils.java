@@ -15,15 +15,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 
-import mezz.jei.Internal;
-import mezz.jei.util.Log;
-import net.minecraft.block.Block;
-import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.item.Item;
+import mezz.jei.api.IItemRegistry;
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.fml.common.registry.GameData;
 
 import com.google.common.collect.ImmutableList;
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI.FuelType;
@@ -54,18 +48,13 @@ public class JEIUtils {
 	 * compared to the JEI code (since this class is initialized<br>
 	 * at a different time, among things).
 	 */
-	public JEIUtils(){
+	public JEIUtils(IItemRegistry registry){
 		List<ItemStack> fuelsTMutable = new ArrayList<>();
 		List<ItemStack> fuelsCMutable = new ArrayList<>();
 
-		for (Block block : GameData.getBlockRegistry().typeSafeIterable()) {
-			addBlockAndSubBlocks(block, FuelType.TRANSMUTATOR, fuelsTMutable);
-			addBlockAndSubBlocks(block, FuelType.CRYSTALLIZER, fuelsCMutable);
-		}
-
-		for (Item item : GameData.getItemRegistry().typeSafeIterable()) {
-			addItemAndSubItems(item, FuelType.TRANSMUTATOR, fuelsTMutable);
-			addItemAndSubItems(item, FuelType.CRYSTALLIZER, fuelsCMutable);
+		for(ItemStack stack : registry.getItemList()){
+			addItemStack(stack, FuelType.TRANSMUTATOR, fuelsTMutable);
+			addItemStack(stack, FuelType.CRYSTALLIZER, fuelsCMutable);
 		}
 
 		transmutatorFuels = ImmutableList.copyOf(fuelsTMutable);
@@ -80,38 +69,6 @@ public class JEIUtils {
 	@Nonnull
 	public ImmutableList<ItemStack> getCrystallizerFuels() {
 		return crystallizerFuels;
-	}
-
-	private void addItemAndSubItems(@Nullable Item item, FuelType type, @Nonnull List<ItemStack> fuels) {
-		if (item == null)
-			return;
-
-		List<ItemStack> items = Internal.getStackHelper().getSubtypes(item, 1);
-		for (ItemStack stack : items)
-			if (stack != null)
-				addItemStack(stack, type, fuels);
-	}
-
-	private void addBlockAndSubBlocks(@Nullable Block block, @Nonnull FuelType type, @Nonnull List<ItemStack> fuels) {
-		if (block == null)
-			return;
-
-		Item item = Item.getItemFromBlock(block);
-
-		if (item == null)
-			return;
-
-		for (CreativeTabs itemTab : item.getCreativeTabs()) {
-			List<ItemStack> subBlocks = new ArrayList<>();
-			block.getSubBlocks(item, itemTab, subBlocks);
-			for (ItemStack subBlock : subBlocks)
-				if (subBlock == null)
-					Log.error("Found null subBlock of {}", block);
-				else if (subBlock.getItem() == null)
-					Log.error("Found subBlock of {} with null item", block);
-				else
-					addItemStack(subBlock, type, fuels);
-		}
 	}
 
 	private void addItemStack(@Nonnull ItemStack stack, @Nonnull FuelType type, @Nonnull List<ItemStack> fuels) {

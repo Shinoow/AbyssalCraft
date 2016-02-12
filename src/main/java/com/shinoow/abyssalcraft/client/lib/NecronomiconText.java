@@ -40,7 +40,7 @@ public class NecronomiconText {
 	public static String NYARLATHOTEP_1 = translate("necronomicon.text.nyarlathotep.1");
 	public static String NYARLATHOTEP_2 = translate("necronomicon.text.nyarlathotep.2");
 	public static String YOG_SOTHOTH_1 = translate("necronomicon.text.yog-sothoth.1");
-	public static String YOG_SOTHOTH_2 = translate("necronomicon.text.yog-sothoth.1");
+	public static String YOG_SOTHOTH_2 = translate("necronomicon.text.yog-sothoth.2");
 	public static String SHUB_NIGGURATH_1 = translate("necronomicon.text.shub-niggurath.1");
 	public static String SHUB_NIGGURATH_2 = translate("necronomicon.text.shub-niggurath.2");
 	public static String CTHULHU_1 = translate("necronomicon.text.cthulhu.1");

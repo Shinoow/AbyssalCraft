@@ -65,14 +65,15 @@ public class BiomeGenDreadlandsBase extends BiomeGenBase {
 	{
 		super.decorate(par1World, par2Random, pos);
 
-		for(int rarity = 0; rarity < 8; rarity++) {
-			int veinSize =  4 + par2Random.nextInt(12);
-			int x = par2Random.nextInt(16) + 8;
-			int y = par2Random.nextInt(60);
-			int z = par2Random.nextInt(16) + 8;
+		if(AbyssalCraft.generateDreadedAbyssalniteOre)
+			for(int rarity = 0; rarity < 8; rarity++) {
+				int veinSize =  4 + par2Random.nextInt(12);
+				int x = par2Random.nextInt(16) + 8;
+				int y = par2Random.nextInt(60);
+				int z = par2Random.nextInt(16) + 8;
 
-			new WorldGenMinable(AbyssalCraft.dreadore.getDefaultState(), veinSize, BlockHelper.forBlock(AbyssalCraft.dreadstone)).generate(par1World, par2Random, pos.add(x, y, z));
-		}
+				new WorldGenMinable(AbyssalCraft.dreadore.getDefaultState(), veinSize, BlockHelper.forBlock(AbyssalCraft.dreadstone)).generate(par1World, par2Random, pos.add(x, y, z));
+			}
 
 		for (int rarity = 0; rarity < 3; ++rarity)
 		{

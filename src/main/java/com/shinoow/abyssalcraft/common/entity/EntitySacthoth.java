@@ -57,7 +57,7 @@ public class EntitySacthoth extends EntityMob implements IBossDisplayData, IAnti
 
 	public EntitySacthoth(World par1World) {
 		super(par1World);
-		setSize(1.5F, 4.0F);
+		setSize(1.2F, 3.8F);
 		tasks.addTask(2, new EntityAIAttackOnCollide(this, EntityPlayer.class, 0.35D, true));
 		tasks.addTask(3, new EntityAIMoveTowardsRestriction(this, 0.35D));
 		tasks.addTask(4, new EntityAIWander(this, 0.35D));

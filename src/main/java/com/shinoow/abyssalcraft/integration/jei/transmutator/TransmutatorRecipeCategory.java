@@ -34,7 +34,7 @@ public abstract class TransmutatorRecipeCategory implements IRecipeCategory {
 	public TransmutatorRecipeCategory(IGuiHelper guiHelper) {
 		backgroundLocation = new ResourceLocation("abyssalcraft", "textures/gui/container/transmutator_NEI.png");
 
-		IDrawableStatic flameDrawable = guiHelper.createDrawable(backgroundLocation, 176, 0, 14, 14);
+		IDrawableStatic flameDrawable = guiHelper.createDrawable(backgroundLocation, 176, 0, 13, 13);
 		flame = guiHelper.createAnimatedDrawable(flameDrawable, 300, IDrawableAnimated.StartDirection.TOP, true);
 
 		IDrawableStatic arrowDrawable = guiHelper.createDrawable(backgroundLocation, 176, 14, 24, 17);

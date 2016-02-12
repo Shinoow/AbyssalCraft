@@ -304,7 +304,18 @@ public class GuiNecronomicon extends GuiScreen {
 	 * @param height The height where the text will appear at (0 is the top of the GUI)
 	 */
 	protected void writeText(int page, String text, int height){
-		int k = (width - guiWidth) / 2;
+		writeText(page, text, height, 0);
+	}
+
+	/**
+	 * Writes a bunch of text on a Necronomicon page.
+	 * @param page Which open page to write in (can be either 1 or 2)
+	 * @param text A long string of text (max is 368 characters)
+	 * @param height The height where the text will appear at (0 is the top of the GUI)
+	 * @param width The width where the text will appear at (0 is the leftmost part of the page)
+	 */
+	protected void writeText(int page, String text, int height, int width){
+		int k = (this.width - guiWidth) / 2;
 		if(page > 2)
 			throw new IndexOutOfBoundsException("Number is greater than 2 ("+page+")!");
 		else if(page < 1)
@@ -313,9 +324,9 @@ public class GuiNecronomicon extends GuiScreen {
 			throw new IndexOutOfBoundsException("Text is longer than 368 characters ("+text.length()+")!");
 		else{
 			if(page == 1)
-				fontRendererObj.drawSplitString(text, k + 20, height, 107, 0);
+				fontRendererObj.drawSplitString(text, k + 20 + width, height, 107, 0);
 			if(page == 2)
-				fontRendererObj.drawSplitString(text, k + 138, height, 107, 0);
+				fontRendererObj.drawSplitString(text, k + 138 + width, height, 107, 0);
 		}
 	}
 }

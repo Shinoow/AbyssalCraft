@@ -44,10 +44,10 @@ public class ItemDreadiumSamuraiArmor extends ItemArmor {
 	@Override
 	public String getArmorTexture(ItemStack stack, Entity entity, int slot, String layer) {
 		if(stack.getItem() == AbyssalCraft.dreadiumShelmet || stack.getItem() == AbyssalCraft.dreadiumSplate || stack.getItem() == AbyssalCraft.dreadiumSboots)
-			return "abyssalcraft:textures/armor/dreadiumS_1.png";
+			return "abyssalcraft:textures/armor/dreadiums_1.png";
 
 		if(stack.getItem() == AbyssalCraft.dreadiumSlegs)
-			return "abyssalcraft:textures/armor/dreadiumS_2.png";
+			return "abyssalcraft:textures/armor/dreadiums_2.png";
 		else return null;
 	}
 

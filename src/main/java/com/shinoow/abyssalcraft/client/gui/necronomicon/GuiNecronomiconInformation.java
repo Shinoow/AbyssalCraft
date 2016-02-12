@@ -14,9 +14,6 @@ package com.shinoow.abyssalcraft.client.gui.necronomicon;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.resources.I18n;
-import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
-import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.StatCollector;
 
@@ -24,9 +21,7 @@ import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.GL11;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
-import com.shinoow.abyssalcraft.api.necronomicon.CraftingStack;
-import com.shinoow.abyssalcraft.api.necronomicon.NecroData;
-import com.shinoow.abyssalcraft.api.necronomicon.NecroData.PageData;
+import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
 import com.shinoow.abyssalcraft.client.gui.necronomicon.buttons.ButtonCategory;
 import com.shinoow.abyssalcraft.client.gui.necronomicon.buttons.ButtonNextPage;
 import com.shinoow.abyssalcraft.client.lib.NecronomiconResources;
@@ -122,12 +117,9 @@ public class GuiNecronomiconInformation extends GuiNecronomicon {
 				isInfo = true;
 				isAC = true;
 				drawButtons();
-			} else if(button.id == 4){
-				PageData og = new PageData(4, NecronomiconText.LABEL_OUTER_GODS, NecronomiconResources.OUTER_GODS, NecronomiconText.OUTER_GODS);
-				PageData goo = new PageData(3, NecronomiconText.LABEL_INFORMATION_GREAT_OLD_ONES, NecronomiconResources.GREAT_OLD_ONES, NecronomiconText.GREAT_OLD_ONES);
-				NecroData data = new NecroData(NecronomiconText.LABEL_INFORMATION_GREAT_OLD_ONES, NecronomiconText.INFORMATION_GREAT_OLD_ONES, og, goo);
-				mc.displayGuiScreen(new GuiNecronomiconEntry(getBookType(), data, new GuiNecronomiconInformation(getBookType()), AbyssalCraft.necronomicon));
-			} else if(button.id == 5){
+			} else if(button.id == 4)
+				mc.displayGuiScreen(new GuiNecronomiconEntry(getBookType(), AbyssalCraftAPI.internalNDHandler.getInternalNecroData("greatoldones"), new GuiNecronomiconInformation(getBookType()), AbyssalCraft.necronomicon));
+			else if(button.id == 5){
 				isInfo = true;
 				isAN = true;
 				drawButtons();
@@ -138,141 +130,16 @@ public class GuiNecronomiconInformation extends GuiNecronomicon {
 			} else if(button.id == 7){
 				if(getBookType() >= 1)
 					mc.displayGuiScreen(new GuiNecronomiconMachines(getBookType()));
-			} else if(button.id == 8){
-				ItemStack[] materials = {new ItemStack(AbyssalCraft.abyore), new ItemStack(AbyssalCraft.Darkstone), new ItemStack(AbyssalCraft.Coraliumore),
-						new ItemStack(AbyssalCraft.DLTSapling), new ItemStack(AbyssalCraft.nitreOre), new ItemStack(AbyssalCraft.anticwater),
-						new ItemStack(AbyssalCraft.Darkgrass)};
-				CraftingStack cis = new CraftingStack(AbyssalCraft.CoraliumInfusedStone, Blocks.stone, Blocks.stone, Blocks.stone, AbyssalCraft.Coraliumcluster3, AbyssalCraft.Coraliumcluster3,
-						AbyssalCraft.Coraliumcluster3, Blocks.stone, Blocks.stone, Blocks.stone);
-				CraftingStack sg = new CraftingStack(AbyssalCraft.shadowgem, AbyssalCraft.shadowshard, AbyssalCraft.shadowshard, AbyssalCraft.shadowshard, AbyssalCraft.shadowshard,
-						AbyssalCraft.shadowshard, AbyssalCraft.shadowshard, AbyssalCraft.shadowshard, AbyssalCraft.shadowshard, AbyssalCraft.shadowshard);
-				CraftingStack soo = new CraftingStack(AbyssalCraft.oblivionshard, AbyssalCraft.shadowgem, AbyssalCraft.shadowgem, AbyssalCraft.shadowgem, AbyssalCraft.shadowgem,
-						AbyssalCraft.Corb, AbyssalCraft.shadowgem, AbyssalCraft.shadowgem, AbyssalCraft.shadowgem, AbyssalCraft.shadowgem);
-				CraftingStack gk = new CraftingStack(AbyssalCraft.gatewayKey, null, AbyssalCraft.Cpearl, AbyssalCraft.OC, null, Items.blaze_rod, AbyssalCraft.Cpearl, Items.blaze_rod, null, null);
-				CraftingStack aws = new CraftingStack(new ItemStack(AbyssalCraft.skin, 1, 0), AbyssalCraft.Corflesh, AbyssalCraft.Corflesh, AbyssalCraft.Corflesh, AbyssalCraft.Corflesh,
-						new ItemStack(AbyssalCraft.essence, 1, 0), AbyssalCraft.Corflesh, AbyssalCraft.Corflesh, AbyssalCraft.Corflesh, AbyssalCraft.Corflesh);
-				CraftingStack awn = new CraftingStack(AbyssalCraft.necronomicon_cor, new ItemStack(AbyssalCraft.skin, 1, 0), new ItemStack(AbyssalCraft.skin, 1, 0), new ItemStack(AbyssalCraft.skin, 1, 0),
-						new ItemStack(AbyssalCraft.skin, 1, 0), AbyssalCraft.necronomicon, new ItemStack(AbyssalCraft.skin, 1, 0), new ItemStack(AbyssalCraft.skin, 1, 0), new ItemStack(AbyssalCraft.skin, 1, 0),
-						new ItemStack(AbyssalCraft.skin, 1, 0));
-				CraftingStack[] recipes = CraftingStack.arrayFrom(cis, sg, soo, gk, aws, awn);
-				CraftingStack[] special = {new CraftingStack(AbyssalCraft.drainStaff, null, AbyssalCraft.shadowshard, AbyssalCraft.oblivionshard, null, AbyssalCraft.shadowshard, AbyssalCraft.shadowshard,
-						AbyssalCraft.shadowshard, null, null)};
-				PageData test1 = new PageData(7, NecronomiconText.LABEL_INFORMATION_MATERIALS, materials, NecronomiconText.OVERWORLD_MATERIALS);
-				PageData test2 = new PageData(3, NecronomiconText.LABEL_INFORMATION_PROGRESSION, NecronomiconText.OVERWORLD_PROGRESSION);
-				PageData test3 = new PageData(8, NecronomiconText.LABEL_INFORMATION_ENTITIES, NecronomiconResources.OVERWORLD_ENTITIES, NecronomiconText.OVERWORLD_ENTITIES);
-				PageData test4 = new PageData(6, NecronomiconText.LABEL_INFORMATION_SPECIAL_MATERIALS, recipes, NecronomiconText.OVERWORLD_CRAFTING);
-				PageData test5 = new PageData(1, NecronomiconText.LABEL_INFORMATION_ARMOR_TOOLS, special, NecronomiconText.OVERWORLD_ARMOR_TOOLS);
-				NecroData data = new NecroData(NecronomiconText.LABEL_INFORMATION_OVERWORLD_TITLE, NecronomiconText.INFORMATION_OVERWORLD, test1, test2, test3, test4, test5);
-				mc.displayGuiScreen(new GuiNecronomiconEntry(getBookType(), data, new GuiNecronomiconInformation(getBookType()), AbyssalCraft.necronomicon));
-			} else if(button.id == 9){
-				ItemStack[] materials = {new ItemStack(AbyssalCraft.abystone), new ItemStack(AbyssalCraft.AbyDiaOre), new ItemStack(AbyssalCraft.AbyCorOre),
-						new ItemStack(AbyssalCraft.AbyLCorOre), new ItemStack(AbyssalCraft.AbyPCorOre), new ItemStack(AbyssalCraft.Cwater), new ItemStack(AbyssalCraft.PSDL)};
-				CraftingStack psdlf = new CraftingStack(new ItemStack(AbyssalCraft.PSDLfinder, 4), AbyssalCraft.Coralium, AbyssalCraft.Coralium, AbyssalCraft.Coralium, AbyssalCraft.Coralium, Items.ender_eye,
-						AbyssalCraft.Coralium, AbyssalCraft.Coralium, AbyssalCraft.Coralium, AbyssalCraft.Coralium);
-				CraftingStack trans = new CraftingStack(AbyssalCraft.transmutator, AbyssalCraft.cbrick, AbyssalCraft.cbrick, AbyssalCraft.cbrick, AbyssalCraft.cbrick, AbyssalCraft.Corb,
-						AbyssalCraft.cbrick, AbyssalCraft.corblock, AbyssalCraft.Cbucket, AbyssalCraft.corblock);
-				CraftingStack cc = new CraftingStack(AbyssalCraft.Cchunk, AbyssalCraft.Coraliumcluster9, AbyssalCraft.Coraliumcluster9, AbyssalCraft.Coraliumcluster9, AbyssalCraft.Coraliumcluster9,
-						AbyssalCraft.abystone, AbyssalCraft.Coraliumcluster9, AbyssalCraft.Coraliumcluster9, AbyssalCraft.Coraliumcluster9, AbyssalCraft.Coraliumcluster9);
-				CraftingStack cp = new CraftingStack(AbyssalCraft.Cplate, AbyssalCraft.Cingot, AbyssalCraft.Cpearl, AbyssalCraft.Cingot, AbyssalCraft.Cingot, AbyssalCraft.Cpearl, AbyssalCraft.Cingot,
-						AbyssalCraft.Cingot, AbyssalCraft.Cpearl, AbyssalCraft.Cingot);
-				CraftingStack dls = new CraftingStack(new ItemStack(AbyssalCraft.skin, 1, 1), AbyssalCraft.dreadfragment, AbyssalCraft.dreadfragment, AbyssalCraft.dreadfragment, AbyssalCraft.dreadfragment,
-						new ItemStack(AbyssalCraft.essence, 1, 1), AbyssalCraft.dreadfragment, AbyssalCraft.dreadfragment, AbyssalCraft.dreadfragment, AbyssalCraft.dreadfragment);
-				CraftingStack dln = new CraftingStack(AbyssalCraft.necronomicon_dre, new ItemStack(AbyssalCraft.skin, 1, 1), new ItemStack(AbyssalCraft.skin, 1, 1), new ItemStack(AbyssalCraft.skin, 1, 1),
-						new ItemStack(AbyssalCraft.skin, 1, 1), AbyssalCraft.necronomicon_cor, new ItemStack(AbyssalCraft.skin, 1, 1), new ItemStack(AbyssalCraft.skin, 1, 1), new ItemStack(AbyssalCraft.skin, 1, 1),
-						new ItemStack(AbyssalCraft.skin, 1, 1));
-				CraftingStack[] recipes = CraftingStack.arrayFrom(psdlf, trans, cc, cp, dls, dln);
-				CraftingStack pch = new CraftingStack(AbyssalCraft.CorhelmetP, AbyssalCraft.Cpearl, AbyssalCraft.Cplate, AbyssalCraft.Cpearl, AbyssalCraft.Cplate, AbyssalCraft.Corhelmet, AbyssalCraft.Cplate,
-						AbyssalCraft.Cingot, AbyssalCraft.Cingot, AbyssalCraft.Cingot);
-				CraftingStack pcp = new CraftingStack(AbyssalCraft.CorplateP, AbyssalCraft.Cplate, null, AbyssalCraft.Cplate, AbyssalCraft.Cingot, AbyssalCraft.Corplate, AbyssalCraft.Cingot,
-						AbyssalCraft.Cingot, AbyssalCraft.Cplate, AbyssalCraft.Cingot);
-				CraftingStack pcl = new CraftingStack(AbyssalCraft.CorlegsP, AbyssalCraft.Cplate, AbyssalCraft.Corlegs, AbyssalCraft.Cplate, AbyssalCraft.Cingot, null, AbyssalCraft.Cingot,
-						AbyssalCraft.Cingot, null, AbyssalCraft.Cingot);
-				CraftingStack pcb = new CraftingStack(AbyssalCraft.CorbootsP, AbyssalCraft.Cingot, null, AbyssalCraft.Cingot, AbyssalCraft.Cplate, AbyssalCraft.Corboots, AbyssalCraft.Cplate, null, null, null);
-				CraftingStack clb = new CraftingStack(AbyssalCraft.corbow, null, AbyssalCraft.Cingot, Items.string, AbyssalCraft.Cpearl, Items.bow, Items.string, null, AbyssalCraft.Cingot, Items.string);
-				CraftingStack[] special = CraftingStack.arrayFrom(pch, pcp, pcl, pcb, clb);
-				PageData test1 = new PageData(7, NecronomiconText.LABEL_INFORMATION_MATERIALS, materials, NecronomiconText.ABYSSAL_WASTELAND_MATERIALS);
-				PageData test2 = new PageData(2, NecronomiconText.LABEL_INFORMATION_PROGRESSION, NecronomiconText.ABYSSAL_WASTELAND_PROGRESSION);
-				PageData test3 = new PageData(6, NecronomiconText.LABEL_INFORMATION_ENTITIES, NecronomiconResources.ABYSSAL_WASTELAND_ENTITIES, NecronomiconText.ABYSSAL_WASTELAND_ENTITIES);
-				PageData test4 = new PageData(6, NecronomiconText.LABEL_INFORMATION_SPECIAL_MATERIALS, recipes, NecronomiconText.ABYSSAL_WASTELAND_CRAFTING);
-				PageData test5 = new PageData(5, NecronomiconText.LABEL_INFORMATION_ARMOR_TOOLS, special, NecronomiconText.ABYSSAL_WASTELAND_ARMOR_TOOLS);
-				NecroData data = new NecroData(NecronomiconText.LABEL_INFORMATION_ABYSSAL_WASTELAND_TITLE, NecronomiconText.INFORMATION_ABYSSAL_WASTELAND, test1, test2, test3, test4, test5);
-				mc.displayGuiScreen(new GuiNecronomiconEntry(getBookType(), data, new GuiNecronomiconInformation(getBookType()), AbyssalCraft.necronomicon_cor));
-			} else if(button.id == 10){
-				ItemStack[] materials = {new ItemStack(AbyssalCraft.dreadstone), new ItemStack(AbyssalCraft.abydreadstone), new ItemStack(AbyssalCraft.abydreadore),
-						new ItemStack(AbyssalCraft.dreadore), new ItemStack(AbyssalCraft.dreadgrass), new ItemStack(AbyssalCraft.dreadsapling)};
-				CraftingStack dreadium = new CraftingStack(AbyssalCraft.dreadiumblock, AbyssalCraft.dreadiumingot, AbyssalCraft.dreadiumingot, AbyssalCraft.dreadiumingot, AbyssalCraft.dreadiumingot,
-						AbyssalCraft.dreadiumingot, AbyssalCraft.dreadiumingot, AbyssalCraft.dreadiumingot, AbyssalCraft.dreadiumingot, AbyssalCraft.dreadiumingot);
-				CraftingStack cryst = new CraftingStack(AbyssalCraft.crystallizer, AbyssalCraft.dreadbrick, AbyssalCraft.dreadbrick, AbyssalCraft.dreadbrick, AbyssalCraft.dreadiumblock,
-						Blocks.furnace, AbyssalCraft.dreadiumblock, AbyssalCraft.dreadbrick, AbyssalCraft.dreadbrick, AbyssalCraft.dreadbrick);
-				CraftingStack drc = new CraftingStack(AbyssalCraft.dreadcloth, Items.string, AbyssalCraft.dreadfragment, Items.string, AbyssalCraft.dreadfragment, Items.leather, AbyssalCraft.dreadfragment,
-						Items.string, AbyssalCraft.dreadfragment, Items.string);
-				CraftingStack daltarb = new CraftingStack(AbyssalCraft.dreadaltarbottom, Items.bone, AbyssalCraft.dreadcloth, Items.bone, AbyssalCraft.dreadiumingot, AbyssalCraft.gatewayKeyDL,
-						AbyssalCraft.dreadiumingot, AbyssalCraft.dreadstone, AbyssalCraft.Dreadshard, AbyssalCraft.dreadstone);
-				CraftingStack daltart = new CraftingStack(AbyssalCraft.dreadaltartop, Items.stick, Items.bucket, Items.stick, AbyssalCraft.dreadcloth, AbyssalCraft.dreadcloth, AbyssalCraft.dreadcloth,
-						AbyssalCraft.dreadiumingot, AbyssalCraft.dreadiumingot, AbyssalCraft.dreadiumingot);
-				CraftingStack dp = new CraftingStack(AbyssalCraft.dreadplate, AbyssalCraft.dreadiumingot, AbyssalCraft.dreadiumingot, AbyssalCraft.dreadiumingot, AbyssalCraft.dreadiumingot,
-						AbyssalCraft.dreadcloth, AbyssalCraft.dreadiumingot, AbyssalCraft.dreadiumingot, AbyssalCraft.dreadiumingot, AbyssalCraft.dreadiumingot);
-				CraftingStack dh = new CraftingStack(AbyssalCraft.dreadhilt, AbyssalCraft.dreadiumingot, AbyssalCraft.dreadiumingot, AbyssalCraft.dreadiumingot, AbyssalCraft.dreadcloth, AbyssalCraft.dreadplanks,
-						AbyssalCraft.dreadcloth, AbyssalCraft.dreadcloth, AbyssalCraft.dreadplanks, AbyssalCraft.dreadcloth);
-				CraftingStack db = new CraftingStack(AbyssalCraft.dreadblade, new ItemStack(AbyssalCraft.crystal, 1, 14), new ItemStack(AbyssalCraft.crystal, 1, 14), null,
-						new ItemStack(AbyssalCraft.crystal, 1, 14), new ItemStack(AbyssalCraft.crystal, 1, 14), null, new ItemStack(AbyssalCraft.crystal, 1, 14), new ItemStack(AbyssalCraft.crystal, 1, 14),
-						null);
-				CraftingStack oms = new CraftingStack(new ItemStack(AbyssalCraft.skin, 1, 2), AbyssalCraft.omotholFlesh, AbyssalCraft.omotholFlesh, AbyssalCraft.omotholFlesh, AbyssalCraft.omotholFlesh,
-						new ItemStack(AbyssalCraft.essence, 1, 2), AbyssalCraft.omotholFlesh, AbyssalCraft.omotholFlesh, AbyssalCraft.omotholFlesh, AbyssalCraft.omotholFlesh);
-				CraftingStack omn = new CraftingStack(AbyssalCraft.necronomicon_omt, new ItemStack(AbyssalCraft.skin, 1, 2), new ItemStack(AbyssalCraft.skin, 1, 2), new ItemStack(AbyssalCraft.skin, 1, 2),
-						new ItemStack(AbyssalCraft.skin, 1, 2), AbyssalCraft.necronomicon_dre, new ItemStack(AbyssalCraft.skin, 1, 2), new ItemStack(AbyssalCraft.skin, 1, 2), new ItemStack(AbyssalCraft.skin, 1, 2),
-						new ItemStack(AbyssalCraft.skin, 1, 2));
-				CraftingStack[] recipes = CraftingStack.arrayFrom(dreadium, cryst, drc, daltarb, daltart, dp, dh, db, oms, omn);
-				CraftingStack sh = new CraftingStack(AbyssalCraft.dreadiumShelmet, null, AbyssalCraft.dreadiumingot, null, AbyssalCraft.dreadplate, AbyssalCraft.dreadiumhelmet,
-						AbyssalCraft.dreadplate, null, null, null);
-				CraftingStack sp = new CraftingStack(AbyssalCraft.dreadiumSplate, AbyssalCraft.dreadplate, AbyssalCraft.dreadiumingot, AbyssalCraft.dreadplate, AbyssalCraft.dreadplate,
-						AbyssalCraft.dreadiumplate, AbyssalCraft.dreadplate, AbyssalCraft.dreadcloth, AbyssalCraft.dreadcloth, AbyssalCraft.dreadcloth);
-				CraftingStack sl = new CraftingStack(AbyssalCraft.dreadiumSlegs, AbyssalCraft.dreadplate, AbyssalCraft.dreadiumlegs, AbyssalCraft.dreadplate, AbyssalCraft.dreadcloth,
-						AbyssalCraft.dreadcloth, AbyssalCraft.dreadcloth, null, null, null);
-				CraftingStack sb = new CraftingStack(AbyssalCraft.dreadiumSboots, AbyssalCraft.dreadcloth, AbyssalCraft.dreadiumboots, AbyssalCraft.dreadcloth, AbyssalCraft.dreadplanks,
-						AbyssalCraft.dreadplanks, AbyssalCraft.dreadplanks, null, null, null);
-				CraftingStack dk = new CraftingStack(AbyssalCraft.dreadkatana, AbyssalCraft.dreadblade, null, null, AbyssalCraft.dreadhilt, null, null, null, null, null);
-				CraftingStack[] special = CraftingStack.arrayFrom(sh, sp, sl, sb, dk);
-				PageData test1 = new PageData(6, NecronomiconText.LABEL_INFORMATION_MATERIALS, materials, NecronomiconText.DREADLANDS_MATERIALS);
-				PageData test2 = new PageData(2, NecronomiconText.LABEL_INFORMATION_PROGRESSION, NecronomiconText.DREADLANDS_PROGRESSION);
-				PageData test3 = new PageData(10, NecronomiconText.LABEL_INFORMATION_ENTITIES, NecronomiconResources.DREADLANDS_ENTITIES, NecronomiconText.DREADLANDS_ENTITIES);
-				PageData test4 = new PageData(10, NecronomiconText.LABEL_INFORMATION_SPECIAL_MATERIALS, recipes, NecronomiconText.DREADLANDS_CRAFTING);
-				PageData test5 = new PageData(5, NecronomiconText.LABEL_INFORMATION_ARMOR_TOOLS, special, NecronomiconText.DREADLANDS_ARMOR_TOOLS);
-				NecroData data = new NecroData(NecronomiconText.LABEL_INFORMATION_DREADLANDS_TITLE, NecronomiconText.INFORMATION_DREADLANDS, test1, test2, test3, test4, test5);
-				mc.displayGuiScreen(new GuiNecronomiconEntry(getBookType(), data, new GuiNecronomiconInformation(getBookType()), AbyssalCraft.necronomicon_dre));
-			} else if(button.id == 11){
-				ItemStack[] materials = {new ItemStack(AbyssalCraft.omotholstone), new ItemStack(AbyssalCraft.ethaxium), new ItemStack(AbyssalCraft.darkethaxiumbrick)};
-				CraftingStack lc = new CraftingStack(AbyssalCraft.lifeCrystal, new ItemStack(AbyssalCraft.crystal, 1, 3),new ItemStack(AbyssalCraft.crystal, 1, 5),
-						new ItemStack(AbyssalCraft.crystal, 1, 6), new ItemStack(AbyssalCraft.crystal, 1, 4), new ItemStack(AbyssalCraft.crystal, 1, 7), new ItemStack(AbyssalCraft.crystal, 1, 2), null, null, null);
-				CraftingStack ei = new CraftingStack(AbyssalCraft.ethaxiumIngot, AbyssalCraft.ethaxium_brick, AbyssalCraft.ethaxium_brick, AbyssalCraft.ethaxium_brick, AbyssalCraft.ethaxium_brick,
-						AbyssalCraft.lifeCrystal, AbyssalCraft.ethaxium_brick, AbyssalCraft.ethaxium_brick, AbyssalCraft.ethaxium_brick, AbyssalCraft.ethaxium_brick);
-				CraftingStack enb = new CraftingStack(AbyssalCraft.engravingBlank, new ItemStack(Blocks.stone_slab, 1, 0), new ItemStack(Blocks.stone_slab, 1, 0), new ItemStack(Blocks.stone_slab, 1, 0),
-						new ItemStack(Blocks.stone_slab, 1, 0), Items.iron_ingot, new ItemStack(Blocks.stone_slab, 1, 0), new ItemStack(Blocks.stone_slab, 1, 0), new ItemStack(Blocks.stone_slab, 1, 0),
-						new ItemStack(Blocks.stone_slab, 1, 0));
-				CraftingStack coin = new CraftingStack(AbyssalCraft.coin, null, Items.iron_ingot, null, Items.iron_ingot, Items.flint, Items.iron_ingot, null, Items.iron_ingot, null);
-				CraftingStack engra = new CraftingStack(AbyssalCraft.engraver, AbyssalCraft.engravingBlank, Blocks.stone, null, AbyssalCraft.engravingBlank, Blocks.stone, Blocks.lever,
-						Blocks.anvil, Blocks.stone, null);
-				CraftingStack cb = new CraftingStack(AbyssalCraft.crystalbag_s, Items.string, Items.leather, Items.string, Items.leather, Items.gold_ingot, Items.leather, Items.leather,
-						Items.leather, Items.leather);
-				CraftingStack mater = new CraftingStack(AbyssalCraft.materializer, AbyssalCraft.ethaxium_brick, AbyssalCraft.ethaxium_brick, AbyssalCraft.ethaxium_brick, AbyssalCraft.ethaxium_brick,
-						Blocks.obsidian, AbyssalCraft.ethaxium_brick, AbyssalCraft.ethaxiumblock, AbyssalCraft.antibucket, AbyssalCraft.ethaxiumblock);
-				CraftingStack an = new CraftingStack(AbyssalCraft.abyssalnomicon, AbyssalCraft.ethaxiumIngot, AbyssalCraft.OC, AbyssalCraft.ethaxiumIngot, AbyssalCraft.eldritchScale,
-						AbyssalCraft.necronomicon_omt, AbyssalCraft.eldritchScale, AbyssalCraft.ethaxiumIngot, AbyssalCraft.eldritchScale, AbyssalCraft.ethaxiumIngot);
-				CraftingStack[] recipes = CraftingStack.arrayFrom(lc, ei, enb, coin, engra, cb, mater, an);
-				PageData test1 = new PageData(3, NecronomiconText.LABEL_INFORMATION_MATERIALS, materials, NecronomiconText.OMOTHOL_MATERIALS);
-				PageData test2 = new PageData(1, NecronomiconText.LABEL_INFORMATION_PROGRESSION, NecronomiconText.OMOTHOL_PROGRESSION);
-				PageData test3 = new PageData(6, NecronomiconText.LABEL_INFORMATION_ENTITIES, NecronomiconResources.OMOTHOL_ENTITIES, NecronomiconText.OMOTHOL_ENTITIES);
-				PageData test4 = new PageData(8, NecronomiconText.LABEL_INFORMATION_SPECIAL_MATERIALS, recipes, NecronomiconText.OMOTHOL_CRAFTING);
-				NecroData data = new NecroData(NecronomiconText.LABEL_INFORMATION_OMOTHOL_TITLE, NecronomiconText.INFORMATION_OMOTHOL, test1, test2, test3, test4);
-				mc.displayGuiScreen(new GuiNecronomiconEntry(getBookType(), data, new GuiNecronomiconInformation(getBookType()), AbyssalCraft.necronomicon_omt));
-			} else if(button.id == 12){
-				ItemStack[] materials = {new ItemStack(AbyssalCraft.Darkstone)};
-				PageData test1 = new PageData(1, NecronomiconText.LABEL_INFORMATION_MATERIALS, materials, NecronomiconText.DARK_REALM_MATERIALS);
-				PageData test2 = new PageData(1, NecronomiconText.LABEL_INFORMATION_PROGRESSION, NecronomiconText.DARK_REALM_PROGRESSION);
-				PageData test3 = new PageData(6, NecronomiconText.LABEL_INFORMATION_ENTITIES, NecronomiconResources.DARK_REALM_ENTITIES, NecronomiconText.DARK_REALM_ENTITIES);
-				NecroData data = new NecroData(NecronomiconText.LABEL_INFORMATION_DARK_REALM_TITLE, NecronomiconText.INFORMATION_DARK_REALM, test1, test2, test3);
-				mc.displayGuiScreen(new GuiNecronomiconEntry(getBookType(), data, new GuiNecronomiconInformation(getBookType()), AbyssalCraft.necronomicon_omt));
-			}
+			} else if(button.id == 8)
+				mc.displayGuiScreen(new GuiNecronomiconEntry(getBookType(), AbyssalCraftAPI.internalNDHandler.getInternalNecroData("overworld"), new GuiNecronomiconInformation(getBookType()), AbyssalCraft.necronomicon));
+			else if(button.id == 9)
+				mc.displayGuiScreen(new GuiNecronomiconEntry(getBookType(), AbyssalCraftAPI.internalNDHandler.getInternalNecroData("abyssalwasteland"), new GuiNecronomiconInformation(getBookType()), AbyssalCraft.necronomicon_cor));
+			else if(button.id == 10)
+				mc.displayGuiScreen(new GuiNecronomiconEntry(getBookType(), AbyssalCraftAPI.internalNDHandler.getInternalNecroData("dreadlands"), new GuiNecronomiconInformation(getBookType()), AbyssalCraft.necronomicon_dre));
+			else if(button.id == 11)
+				mc.displayGuiScreen(new GuiNecronomiconEntry(getBookType(), AbyssalCraftAPI.internalNDHandler.getInternalNecroData("omothol"), new GuiNecronomiconInformation(getBookType()), AbyssalCraft.necronomicon_omt));
+			else if(button.id == 12)
+				mc.displayGuiScreen(new GuiNecronomiconEntry(getBookType(), AbyssalCraftAPI.internalNDHandler.getInternalNecroData("darkrealm"), new GuiNecronomiconInformation(getBookType()), AbyssalCraft.necronomicon_omt));
 			updateButtons();
 		}
 	}

@@ -52,78 +52,87 @@ public class BiomeGenAbywasteland extends BiomeGenBase {
 		super.decorate(par1World, par2Random, pos);
 		int var5 = 3 + par2Random.nextInt(6);
 
-		for (int rarity = 0; rarity < 8; rarity++){
-			int veinSize = 1 + par2Random.nextInt(3);
-			int x = par2Random.nextInt(16);
-			int y = par2Random.nextInt(30);
-			int z = par2Random.nextInt(16);
+		if(AbyssalCraft.generateLiquifiedCoraliumOre)
+			for (int rarity = 0; rarity < 8; rarity++){
+				int veinSize = 1 + par2Random.nextInt(3);
+				int x = par2Random.nextInt(16);
+				int y = par2Random.nextInt(30);
+				int z = par2Random.nextInt(16);
 
-			new WorldGenMinable(AbyssalCraft.AbyLCorOre.getDefaultState(), veinSize, BlockHelper.forBlock(AbyssalCraft.abystone)).generate(par1World, par2Random, pos.add(x, y, z));
-		}
-		for(int rarity = 0; rarity < 8; rarity++) {
-			int veinSize =  2 + par2Random.nextInt(6);
-			int x = par2Random.nextInt(16);
-			int y = par2Random.nextInt(75);
-			int z = par2Random.nextInt(16);
+				new WorldGenMinable(AbyssalCraft.AbyLCorOre.getDefaultState(), veinSize, BlockHelper.forBlock(AbyssalCraft.abystone)).generate(par1World, par2Random, pos.add(x, y, z));
+			}
+		if(AbyssalCraft.generateAbyssalCoraliumOre)
+			for(int rarity = 0; rarity < 8; rarity++) {
+				int veinSize =  2 + par2Random.nextInt(6);
+				int x = par2Random.nextInt(16);
+				int y = par2Random.nextInt(75);
+				int z = par2Random.nextInt(16);
 
-			new WorldGenMinable(AbyssalCraft.AbyCorOre.getDefaultState(), veinSize, BlockHelper.forBlock(AbyssalCraft.abystone)).generate(par1World, par2Random, pos.add(x, y, z));
-		}
-		for(int rarity = 0; rarity < 8; rarity++) {
-			int veinSize =  2 + par2Random.nextInt(6);
-			int x = par2Random.nextInt(16);
-			int y = par2Random.nextInt(60);
-			int z = par2Random.nextInt(16);
+				new WorldGenMinable(AbyssalCraft.AbyCorOre.getDefaultState(), veinSize, BlockHelper.forBlock(AbyssalCraft.abystone)).generate(par1World, par2Random, pos.add(x, y, z));
+			}
+		if(AbyssalCraft.generateAbyssalNitreOre)
+			for(int rarity = 0; rarity < 8; rarity++) {
+				int veinSize =  2 + par2Random.nextInt(6);
+				int x = par2Random.nextInt(16);
+				int y = par2Random.nextInt(60);
+				int z = par2Random.nextInt(16);
 
-			new WorldGenMinable(AbyssalCraft.AbyNitOre.getDefaultState(), veinSize, BlockHelper.forBlock(AbyssalCraft.abystone)).generate(par1World, par2Random, pos.add(x, y, z));
-		}
-		for(int rarity = 0; rarity < 8; rarity++) {
-			int veinSize = 2 + par2Random.nextInt(6);
-			int x = par2Random.nextInt(16);
-			int y = par2Random.nextInt(60);
-			int z = par2Random.nextInt(16);
+				new WorldGenMinable(AbyssalCraft.AbyNitOre.getDefaultState(), veinSize, BlockHelper.forBlock(AbyssalCraft.abystone)).generate(par1World, par2Random, pos.add(x, y, z));
+			}
+		if(AbyssalCraft.generateAbyssalIronOre)
+			for(int rarity = 0; rarity < 8; rarity++) {
+				int veinSize = 2 + par2Random.nextInt(6);
+				int x = par2Random.nextInt(16);
+				int y = par2Random.nextInt(60);
+				int z = par2Random.nextInt(16);
 
-			new WorldGenMinable(AbyssalCraft.AbyIroOre.getDefaultState(), veinSize, BlockHelper.forBlock(AbyssalCraft.abystone)).generate(par1World, par2Random, pos.add(x, y, z));
-		}
-		for(int rarity = 0; rarity < 8; rarity++) {
-			int veinSize = 2 + par2Random.nextInt(6);
-			int x = par2Random.nextInt(16);
-			int y = par2Random.nextInt(60);
-			int z = par2Random.nextInt(16);
+				new WorldGenMinable(AbyssalCraft.AbyIroOre.getDefaultState(), veinSize, BlockHelper.forBlock(AbyssalCraft.abystone)).generate(par1World, par2Random, pos.add(x, y, z));
+			}
+		if(AbyssalCraft.generateAbyssalCopperOre)
+			for(int rarity = 0; rarity < 8; rarity++) {
+				int veinSize = 2 + par2Random.nextInt(6);
+				int x = par2Random.nextInt(16);
+				int y = par2Random.nextInt(60);
+				int z = par2Random.nextInt(16);
 
-			new WorldGenMinable(AbyssalCraft.AbyCopOre.getDefaultState(), veinSize, BlockHelper.forBlock(AbyssalCraft.abystone)).generate(par1World, par2Random, pos.add(x, y, z));
-		}
-		for(int rarity = 0; rarity < 5; rarity++) {
-			int veinSize = 2 + par2Random.nextInt(3);
-			int x = par2Random.nextInt(16);
-			int y = par2Random.nextInt(35);
-			int z = par2Random.nextInt(16);
+				new WorldGenMinable(AbyssalCraft.AbyCopOre.getDefaultState(), veinSize, BlockHelper.forBlock(AbyssalCraft.abystone)).generate(par1World, par2Random, pos.add(x, y, z));
+			}
+		if(AbyssalCraft.generateAbyssalGoldOre)
+			for(int rarity = 0; rarity < 5; rarity++) {
+				int veinSize = 2 + par2Random.nextInt(3);
+				int x = par2Random.nextInt(16);
+				int y = par2Random.nextInt(35);
+				int z = par2Random.nextInt(16);
 
-			new WorldGenMinable(AbyssalCraft.AbyGolOre.getDefaultState(), veinSize, BlockHelper.forBlock(AbyssalCraft.abystone)).generate(par1World, par2Random, pos.add(x, y, z));
-		}
-		for(int rarity = 0; rarity < var5; rarity++) {
-			int veinSize = 1 + par2Random.nextInt(7);
-			int x = par2Random.nextInt(16);
-			int y = par2Random.nextInt(20);
-			int z = par2Random.nextInt(16);
+				new WorldGenMinable(AbyssalCraft.AbyGolOre.getDefaultState(), veinSize, BlockHelper.forBlock(AbyssalCraft.abystone)).generate(par1World, par2Random, pos.add(x, y, z));
+			}
+		if(AbyssalCraft.generateAbyssalDiamondOre)
+			for(int rarity = 0; rarity < var5; rarity++) {
+				int veinSize = 1 + par2Random.nextInt(7);
+				int x = par2Random.nextInt(16);
+				int y = par2Random.nextInt(20);
+				int z = par2Random.nextInt(16);
 
-			new WorldGenMinable(AbyssalCraft.AbyDiaOre.getDefaultState(), veinSize, BlockHelper.forBlock(AbyssalCraft.abystone)).generate(par1World, par2Random, pos.add(x, y, z));
-		}
-		for(int rarity = 0; rarity < var5; rarity++) {
-			int veinSize = 1 + par2Random.nextInt(3);
-			int x = par2Random.nextInt(16);
-			int y = par2Random.nextInt(15);
-			int z = par2Random.nextInt(16);
+				new WorldGenMinable(AbyssalCraft.AbyDiaOre.getDefaultState(), veinSize, BlockHelper.forBlock(AbyssalCraft.abystone)).generate(par1World, par2Random, pos.add(x, y, z));
+			}
+		if(AbyssalCraft.generatePearlescentCoraliumOre)
+			for(int rarity = 0; rarity < var5; rarity++) {
+				int veinSize = 1 + par2Random.nextInt(3);
+				int x = par2Random.nextInt(16);
+				int y = par2Random.nextInt(15);
+				int z = par2Random.nextInt(16);
 
-			new WorldGenMinable(AbyssalCraft.AbyPCorOre.getDefaultState(), veinSize, BlockHelper.forBlock(AbyssalCraft.abystone)).generate(par1World, par2Random, pos.add(x, y, z));
-		}
-		for(int rarity = 0; rarity < 8; rarity++) {
-			int veinSize = 2 + par2Random.nextInt(6);
-			int x = par2Random.nextInt(16);
-			int y = par2Random.nextInt(60);
-			int z = par2Random.nextInt(16);
+				new WorldGenMinable(AbyssalCraft.AbyPCorOre.getDefaultState(), veinSize, BlockHelper.forBlock(AbyssalCraft.abystone)).generate(par1World, par2Random, pos.add(x, y, z));
+			}
+		if(AbyssalCraft.generateAbyssalTinOre)
+			for(int rarity = 0; rarity < 8; rarity++) {
+				int veinSize = 2 + par2Random.nextInt(6);
+				int x = par2Random.nextInt(16);
+				int y = par2Random.nextInt(60);
+				int z = par2Random.nextInt(16);
 
-			new WorldGenMinable(AbyssalCraft.AbyTinOre.getDefaultState(), veinSize, BlockHelper.forBlock(AbyssalCraft.abystone)).generate(par1World, par2Random, pos.add(x, y, z));
-		}
+				new WorldGenMinable(AbyssalCraft.AbyTinOre.getDefaultState(), veinSize, BlockHelper.forBlock(AbyssalCraft.abystone)).generate(par1World, par2Random, pos.add(x, y, z));
+			}
 	}
 
 	@Override

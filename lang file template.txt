@@ -201,6 +201,10 @@ container.abyssalcraft.engraver.nei=Coin Engraving
 container.abyssalcraft.materializer.nei=Materialization
 container.abyssalcraft.rituals.nei=Necronomicon Ritual
 
+#JEI Integration
+gui.acjei.category.fuel.transmutator=Transmutator Fuel
+gui.acjei.category.fuel.crystallizer=Crystallizer Fuel
+
 #Necronomicon Labels
 necronomicon.index=Index
 necronomicon.information=Forbidden Knowledge
@@ -654,6 +658,8 @@ ac_potion=Potions
 ac_potion.tooltip=Potion ID configuration
 ac_shoggoth=Shoggoth Ooze
 ac_shoggoth.tooltip=Shoggoth Ooze Configuration
+ac_worldgen=Worldgen
+ac_worldgen.tooltip=Worldgen configuration
 
 #Damagesources
 death.attack.coralium=%1$s died from the Coralium Plague
@@ -906,10 +912,10 @@ item.corhelmet.name=Refined Coralium Helmet
 item.corplate.name=Refined Coralium Chestplate
 item.corlegs.name=Refined Coralium Leggings
 item.corboots.name=Refined Coralium Boots
-item.corhelmetp.name=Plated Coralium Boots
-item.corplatep.name=Plated Coralium Helmet
-item.corlegsp.name=Plated Coralium Chestplate
-item.corbootsp.name=Plated Coralium Leggings
+item.corhelmetp.name=Plated Coralium Helmet
+item.corplatep.name=Plated Coralium Chestplate
+item.corlegsp.name=Plated Coralium Leggings
+item.corbootsp.name=Plated Coralium Boots
 item.depthshelmet.name=Visage of The Depths
 item.depthsplate.name=Chestplate of The Depths
 item.depthslegs.name=Legguards of The Depths

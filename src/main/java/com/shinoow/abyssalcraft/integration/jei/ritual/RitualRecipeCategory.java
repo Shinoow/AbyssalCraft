@@ -19,12 +19,12 @@ import mezz.jei.api.gui.IGuiItemStackGroup;
 import mezz.jei.api.gui.IRecipeLayout;
 import mezz.jei.api.recipe.IRecipeCategory;
 import mezz.jei.api.recipe.IRecipeWrapper;
-import mezz.jei.util.Translator;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.StatCollector;
 import net.minecraftforge.oredict.OreDictionary;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
@@ -54,7 +54,7 @@ public class RitualRecipeCategory implements IRecipeCategory {
 	public RitualRecipeCategory(IGuiHelper guiHelper){
 		ResourceLocation location = new ResourceLocation("abyssalcraft", "textures/gui/container/ritual_NEI.png");
 		background = guiHelper.createDrawable(location, 5, 11, 166, 140);
-		localizedName = Translator.translateToLocal("container.abyssalcraft.rituals.nei");
+		localizedName = StatCollector.translateToLocal("container.abyssalcraft.rituals.nei");
 
 		slotDrawable = guiHelper.getSlotDrawable();
 	}

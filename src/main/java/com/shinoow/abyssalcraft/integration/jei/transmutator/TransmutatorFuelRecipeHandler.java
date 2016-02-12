@@ -15,7 +15,8 @@ import javax.annotation.Nonnull;
 
 import mezz.jei.api.recipe.IRecipeHandler;
 import mezz.jei.api.recipe.IRecipeWrapper;
-import mezz.jei.api.recipe.VanillaRecipeCategoryUid;
+
+import com.shinoow.abyssalcraft.integration.jei.AbyssalCraftRecipeCategoryUid;
 
 public class TransmutatorFuelRecipeHandler implements IRecipeHandler<TransmutatorFuelRecipe> {
 	@Override
@@ -27,7 +28,7 @@ public class TransmutatorFuelRecipeHandler implements IRecipeHandler<Transmutato
 	@Nonnull
 	@Override
 	public String getRecipeCategoryUid() {
-		return VanillaRecipeCategoryUid.FUEL;
+		return AbyssalCraftRecipeCategoryUid.FUEL_TRANSMUTATION;
 	}
 
 	@Override

@@ -14,18 +14,6 @@ package com.shinoow.abyssalcraft.client.gui.necronomicon;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.lwjgl.input.Keyboard;
-import org.lwjgl.opengl.GL11;
-import org.lwjgl.opengl.GL12;
-
-import com.shinoow.abyssalcraft.api.necronomicon.CraftingStack;
-import com.shinoow.abyssalcraft.api.necronomicon.NecroData;
-import com.shinoow.abyssalcraft.api.necronomicon.NecroData.PageData;
-import com.shinoow.abyssalcraft.client.gui.necronomicon.buttons.ButtonCategory;
-import com.shinoow.abyssalcraft.client.gui.necronomicon.buttons.ButtonNextPage;
-import com.shinoow.abyssalcraft.client.lib.GuiRenderHelper;
-import com.shinoow.abyssalcraft.client.lib.NecronomiconResources;
-
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
@@ -37,8 +25,20 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.StatCollector;
-import net.minecraft.util.Tuple;
 import net.minecraftforge.oredict.OreDictionary;
+
+import org.lwjgl.input.Keyboard;
+import org.lwjgl.opengl.GL11;
+import org.lwjgl.opengl.GL12;
+
+import com.shinoow.abyssalcraft.api.necronomicon.CraftingStack;
+import com.shinoow.abyssalcraft.api.necronomicon.NecroData;
+import com.shinoow.abyssalcraft.api.necronomicon.NecroData.Chapter;
+import com.shinoow.abyssalcraft.api.necronomicon.NecroData.Page;
+import com.shinoow.abyssalcraft.client.gui.necronomicon.buttons.ButtonCategory;
+import com.shinoow.abyssalcraft.client.gui.necronomicon.buttons.ButtonNextPage;
+import com.shinoow.abyssalcraft.client.lib.GuiRenderHelper;
+import com.shinoow.abyssalcraft.client.lib.NecronomiconResources;
 
 public class GuiNecronomiconEntry extends GuiNecronomicon {
 
@@ -71,8 +71,8 @@ public class GuiNecronomiconEntry extends GuiNecronomicon {
 		buttonList.add(buttonNextPage = new ButtonNextPage(1, i + 215, b0 + 154, true));
 		buttonList.add(buttonPreviousPage = new ButtonNextPage(2, i + 18, b0 + 154, false));
 		if(data != null)
-			for(int n = 0; n < data.getPageData().length; n++)
-				buttonList.add(buttons[n] = new ButtonCategory(3 + n, i + 10, b0 + 20 + 17*n,this, data.getPageData()[n].getTitle(), icon));
+			for(int n = 0; n < data.getChapters().length; n++)
+				buttonList.add(buttons[n] = new ButtonCategory(3 + n, i + 10, b0 + 20 + 17*n,this, data.getChapters()[n].getTitle(), icon));
 		updateButtons();
 	}
 
@@ -82,7 +82,7 @@ public class GuiNecronomiconEntry extends GuiNecronomicon {
 		buttonPreviousPage.visible = true;
 		buttonDone.visible = true;
 		if(data != null)
-			for(int i = 0; i < data.getPageData().length; i++)
+			for(int i = 0; i < data.getChapters().length; i++)
 				buttons[i].visible = !isInfo;
 	}
 
@@ -152,359 +152,150 @@ public class GuiNecronomiconEntry extends GuiNecronomicon {
 	@Override
 	protected void drawInformationText(int x, int y){
 		if(bool1)
-			drawPageData(data.getPageData()[0], x, y);
+			drawChapter(data.getChapters()[0], x, y);
 		else if(bool2)
-			drawPageData(data.getPageData()[1], x, y);
+			drawChapter(data.getChapters()[1], x, y);
 		else if(bool3)
-			drawPageData(data.getPageData()[2], x, y);
+			drawChapter(data.getChapters()[2], x, y);
 		else if(bool4)
-			drawPageData(data.getPageData()[3], x, y);
+			drawChapter(data.getChapters()[3], x, y);
 		else if(bool5)
-			drawPageData(data.getPageData()[4], x, y);
+			drawChapter(data.getChapters()[4], x, y);
 		else if(bool6)
-			drawPageData(data.getPageData()[5], x, y);
+			drawChapter(data.getChapters()[5], x, y);
 		else if(bool7)
-			drawPageData(data.getPageData()[6], x, y);
+			drawChapter(data.getChapters()[6], x, y);
 		updateButtons();
 	}
 
-	private void drawPageData(PageData page, int x, int y){
+	private void drawChapter(Chapter chapter, int x, int y){
 		int k = (width - guiWidth) / 2;
 		byte b0 = 2;
 		String stuff;
-		Object[] icons = null;
 
-		stuff = StatCollector.translateToLocal(page.getTitle());
+		stuff = StatCollector.translateToLocal(chapter.getTitle());
 		fontRendererObj.drawSplitString(stuff, k + 20, b0 + 16, 116, 0xC40000);
-		setTurnupLimit(page.getPageAmount());
-		if(page.getIcons() == null)
-			icons = new Object[20];
-		else icons = page.getIcons();
+		setTurnupLimit(chapter.getTurnupAmount());
 
 		if(currTurnup == 0)
-			if(page.getPages().length >= 2)
-				addPage(page.getPages()[0], page.getPages()[1], icons[0], page.getPages().length, 1, x, y);
-			else addPage(page.getPages()[0], "", icons[0], page.getPages().length, 1, x, y);
-		else if(currTurnup == 1 && page.getPageAmount() >= 2)
-			if(page.getPages().length >= 4)
-				addPage(page.getPages()[2], page.getPages()[3], icons[1], page.getPages().length, 3, x, y);
-			else addPage(page.getPages()[2], "", icons[1], page.getPages().length, 3, x, y);
-		else if(currTurnup == 2 && page.getPageAmount() >= 3)
-			if(page.getPages().length >= 6)
-				addPage(page.getPages()[4], page.getPages()[5], icons[2], page.getPages().length, 5, x, y);
-			else addPage(page.getPages()[4], "", icons[2], page.getPages().length, 5, x, y);
-		else if(currTurnup == 3 && page.getPageAmount() >= 4)
-			if(page.getPages().length >= 8)
-				addPage(page.getPages()[6], page.getPages()[7], icons[3], page.getPages().length, 7, x, y);
-			else addPage(page.getPages()[6], "", icons[3], page.getPages().length, 7, x, y);
-		else if(currTurnup == 4 && page.getPageAmount() >= 5)
-			if(page.getPages().length >= 10)
-				addPage(page.getPages()[8], page.getPages()[9], icons[4], page.getPages().length, 9, x, y);
-			else addPage(page.getPages()[8], "", icons[4], page.getPages().length, 9, x, y);
-		else if(currTurnup == 5 && page.getPageAmount() >= 6)
-			if(page.getPages().length >= 12)
-				addPage(page.getPages()[10], page.getPages()[11], icons[5], page.getPages().length, 11, x, y);
-			else addPage(page.getPages()[10], "", icons[5], page.getPages().length, 11, x, y);
-		else if(currTurnup == 6 && page.getPageAmount() >= 7)
-			if(page.getPages().length >= 14)
-				addPage(page.getPages()[12], page.getPages()[13], icons[6], page.getPages().length, 13, x, y);
-			else addPage(page.getPages()[12], "", icons[6], page.getPages().length, 13, x, y);
-		else if(currTurnup == 7 && page.getPageAmount() >= 8)
-			if(page.getPages().length >= 16)
-				addPage(page.getPages()[14], page.getPages()[15], icons[7], page.getPages().length, 15, x, y);
-			else addPage(page.getPages()[14], "", icons[7], page.getPages().length, 15, x, y);
-		else if(currTurnup == 8 && page.getPageAmount() >= 9)
-			if(page.getPages().length >= 18)
-				addPage(page.getPages()[16], page.getPages()[17], icons[8], page.getPages().length, 17, x, y);
-			else addPage(page.getPages()[16], "", icons[8], page.getPages().length, 17, x, y);
-		else if(currTurnup == 9 && page.getPageAmount() >= 10)
-			if(page.getPages().length >= 20)
-				addPage(page.getPages()[18], page.getPages()[19], icons[9], page.getPages().length, 19, x, y);
-			else addPage(page.getPages()[18], "", icons[9], page.getPages().length, 19, x, y);
-		else if(currTurnup == 10 && page.getPageAmount() >= 11)
-			if(page.getPages().length >= 22)
-				addPage(page.getPages()[20], page.getPages()[21], icons[10], page.getPages().length, 21, x, y);
-			else addPage(page.getPages()[20], "", icons[10], page.getPages().length, 21, x, y);
-		else if(currTurnup == 11 && page.getPageAmount() >= 12)
-			if(page.getPages().length >= 24)
-				addPage(page.getPages()[22], page.getPages()[23], icons[11], page.getPages().length, 23, x, y);
-			else addPage(page.getPages()[22], "", icons[11], page.getPages().length, 23, x, y);
-		else if(currTurnup == 12 && page.getPageAmount() >= 13)
-			if(page.getPages().length >= 26)
-				addPage(page.getPages()[24], page.getPages()[25], icons[12], page.getPages().length, 25, x, y);
-			else addPage(page.getPages()[24], "", icons[12], page.getPages().length, 25, x, y);
-		else if(currTurnup == 13 && page.getPageAmount() >= 14)
-			if(page.getPages().length >= 28)
-				addPage(page.getPages()[26], page.getPages()[27], icons[13], page.getPages().length, 27, x, y);
-			else addPage(page.getPages()[26], "", icons[13], page.getPages().length, 27, x, y);
-		else if(currTurnup == 14 && page.getPageAmount() >= 15)
-			if(page.getPages().length >= 30)
-				addPage(page.getPages()[28], page.getPages()[29], icons[14], page.getPages().length, 29, x, y);
-			else addPage(page.getPages()[28], "", icons[14], page.getPages().length, 29, x, y);
-		else if(currTurnup == 15 && page.getPageAmount() >= 16)
-			if(page.getPages().length >= 32)
-				addPage(page.getPages()[30], page.getPages()[31], icons[15], page.getPages().length, 31, x, y);
-			else addPage(page.getPages()[30], "", icons[15], page.getPages().length, 31, x, y);
-		else if(currTurnup == 16 && page.getPageAmount() >= 17)
-			if(page.getPages().length >= 34)
-				addPage(page.getPages()[32], page.getPages()[33], icons[16], page.getPages().length, 33, x, y);
-			else addPage(page.getPages()[32], "", icons[16], page.getPages().length, 33, x, y);
-		else if(currTurnup == 17 && page.getPageAmount() >= 18)
-			if(page.getPages().length >= 36)
-				addPage(page.getPages()[34], page.getPages()[35], icons[17], page.getPages().length, 35, x, y);
-			else addPage(page.getPages()[34], "", icons[17], page.getPages().length, 35, x, y);
-		else if(currTurnup == 18 && page.getPageAmount() >= 19)
-			if(page.getPages().length >= 38)
-				addPage(page.getPages()[36], page.getPages()[37], icons[18], page.getPages().length, 37, x, y);
-			else addPage(page.getPages()[36], "", icons[18], page.getPages().length, 37, x, y);
-		else if(currTurnup == 19 && page.getPageAmount() >= 20)
-			if(page.getPages().length >= 40)
-				addPage(page.getPages()[38], page.getPages()[39], icons[19], page.getPages().length, 39, x, y);
-			else addPage(page.getPages()[38], "", icons[19], page.getPages().length, 39, x, y);
+			addPage(chapter.getPages().get(1), chapter.getPages().get(2), chapter.getPageAmount(), 2, x, y);
+		else if(currTurnup == 1 && chapter.getPageAmount() >= 3)
+			addPage(chapter.getPages().get(3), chapter.getPages().get(4), chapter.getPageAmount(), 4, x, y);
+		else if(currTurnup == 2 && chapter.getPageAmount() >= 5)
+			addPage(chapter.getPages().get(5), chapter.getPages().get(6), chapter.getPageAmount(), 6, x, y);
+		else if(currTurnup == 3 && chapter.getPageAmount() >= 7)
+			addPage(chapter.getPages().get(7), chapter.getPages().get(8), chapter.getPageAmount(), 8, x, y);
+		else if(currTurnup == 4 && chapter.getPageAmount() >= 9)
+			addPage(chapter.getPages().get(9), chapter.getPages().get(10), chapter.getPageAmount(), 10, x, y);
+		else if(currTurnup == 5 && chapter.getPageAmount() >= 11)
+			addPage(chapter.getPages().get(11), chapter.getPages().get(12), chapter.getPageAmount(), 12, x, y);
+		else if(currTurnup == 6 && chapter.getPageAmount() >= 13)
+			addPage(chapter.getPages().get(13), chapter.getPages().get(14), chapter.getPageAmount(), 14, x, y);
+		else if(currTurnup == 7 && chapter.getPageAmount() >= 15)
+			addPage(chapter.getPages().get(15), chapter.getPages().get(16), chapter.getPageAmount(), 16, x, y);
+		else if(currTurnup == 8 && chapter.getPageAmount() >= 17)
+			addPage(chapter.getPages().get(17), chapter.getPages().get(18), chapter.getPageAmount(), 18, x, y);
+		else if(currTurnup == 9 && chapter.getPageAmount() >= 19)
+			addPage(chapter.getPages().get(19), chapter.getPages().get(20), chapter.getPageAmount(), 20, x, y);
+		else if(currTurnup == 10 && chapter.getPageAmount() >= 21)
+			addPage(chapter.getPages().get(21), chapter.getPages().get(22), chapter.getPageAmount(), 22, x, y);
+		else if(currTurnup == 11 && chapter.getPageAmount() >= 23)
+			addPage(chapter.getPages().get(23), chapter.getPages().get(24), chapter.getPageAmount(), 24, x, y);
+		else if(currTurnup == 12 && chapter.getPageAmount() >= 25)
+			addPage(chapter.getPages().get(25), chapter.getPages().get(26), chapter.getPageAmount(), 26, x, y);
+		else if(currTurnup == 13 && chapter.getPageAmount() >= 27)
+			addPage(chapter.getPages().get(27), chapter.getPages().get(28), chapter.getPageAmount(), 28, x, y);
+		else if(currTurnup == 14 && chapter.getPageAmount() >= 29)
+			addPage(chapter.getPages().get(29), chapter.getPages().get(30), chapter.getPageAmount(), 30, x, y);
+		else if(currTurnup == 15 && chapter.getPageAmount() >= 31)
+			addPage(chapter.getPages().get(31), chapter.getPages().get(32), chapter.getPageAmount(), 32, x, y);
+		else if(currTurnup == 16 && chapter.getPageAmount() >= 33)
+			addPage(chapter.getPages().get(33), chapter.getPages().get(34), chapter.getPageAmount(), 34, x, y);
+		else if(currTurnup == 17 && chapter.getPageAmount() >= 35)
+			addPage(chapter.getPages().get(35), chapter.getPages().get(36), chapter.getPageAmount(), 36, x, y);
+		else if(currTurnup == 18 && chapter.getPageAmount() >= 37)
+			addPage(chapter.getPages().get(37), chapter.getPages().get(38), chapter.getPageAmount(), 38, x, y);
+		else if(currTurnup == 19 && chapter.getPageAmount() >= 39)
+			addPage(chapter.getPages().get(39), chapter.getPages().get(40), chapter.getPageAmount(), 40, x, y);
 	}
 
-	private void addPage(String text1, String text2, Object icon, int pageAmount, int limit, int x, int y){
+	private void addPage(Page page1, Page page2, int pageAmount, int limit, int x, int y){
 		int k = (width - guiWidth) / 2;
 		byte b0 = 2;
+		String text1 = "";
+		String text2 = "";
+		Object icon1 = null;
+		Object icon2 = null;
+
+		if(page1 != null){
+			text1 = page1.getText();
+			icon1 = page1.getIcon();
+		}
+		if(page2 != null){
+			text2 = page2.getText();
+			icon2 = page2.getIcon();
+		}
 
 		tooltipStack = null;
 
-		if(icon != null){
-			if(icon instanceof ItemStack){
-				if(pageAmount > limit)
-					writeText(2, text2);
-				writeText(1, text1, 50);
-				renderItem(k + 60, b0 + 28,(ItemStack)icon, x, y);
-			}
-			if(icon instanceof ResourceLocation){
-				if(pageAmount > limit)
-					writeText(2, text2);
-				writeText(1, text1, 100);
+		writeTexts(icon1, icon2, text1, text2);
+
+		writeText(1, String.valueOf(limit - 1), 165, 50);
+		writeText(2, String.valueOf(limit), 165, 50);
+
+		if(icon1 != null){
+			if(icon1 instanceof ItemStack)
+				renderItem(k + 60, b0 + 28,(ItemStack)icon1, x, y);
+			if(icon1 instanceof ResourceLocation){
 				GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-				mc.renderEngine.bindTexture((ResourceLocation)icon);
+				mc.renderEngine.bindTexture((ResourceLocation)icon1);
 				drawTexturedModalRect(k, b0, 0, 0, 256, 256);
 			}
-			if(icon instanceof CraftingStack){
-				if(pageAmount > limit)
-					writeText(2, text2);
-				writeText(1, text1, 95);
+			if(icon1 instanceof CraftingStack){
 				GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 				mc.renderEngine.bindTexture(NecronomiconResources.CRAFTING);
 				drawTexturedModalRect(k, b0, 0, 0, 256, 256);
 				boolean unicode = fontRendererObj.getUnicodeFlag();
 				fontRendererObj.setUnicodeFlag(false);
-				renderItem(k + 93, b0 + 52,((CraftingStack)icon).getOutput(), x, y);
+				renderItem(k + 93, b0 + 52,((CraftingStack)icon1).getOutput(), x, y);
 				fontRendererObj.setUnicodeFlag(unicode);
 				for(int i = 0; i <= 2; i++){
-					renderItem(k + 24 +i*21, b0 + 31,((CraftingStack)icon).getFirstArray()[i], x, y);
-					renderItem(k + 24 +i*21, b0 + 52,((CraftingStack)icon).getSecondArray()[i], x, y);
-					renderItem(k + 24 +i*21, b0 + 73,((CraftingStack)icon).getThirdArray()[i], x, y);
+					renderItem(k + 24 +i*21, b0 + 31,((CraftingStack)icon1).getFirstArray()[i], x, y);
+					renderItem(k + 24 +i*21, b0 + 52,((CraftingStack)icon1).getSecondArray()[i], x, y);
+					renderItem(k + 24 +i*21, b0 + 73,((CraftingStack)icon1).getThirdArray()[i], x, y);
 				}
 			}
-			if(icon instanceof Tuple)
-				if(((Tuple) icon).getFirst() != null){
-					if(((Tuple) icon).getFirst() instanceof ItemStack){
-						if(((Tuple) icon).getSecond() == null){
-							writeText(1, text1, 50);
-							renderItem(k + 60, b0 + 28,(ItemStack)((Tuple) icon).getFirst(), x, y);
-						} else {
-							int n = 123;
-							if(((Tuple) icon).getSecond() instanceof ItemStack){
-								writeText(1, text1, 50);
-								writeText(2, text2, 50);
-								renderItem(k + 60, b0 + 28,(ItemStack)((Tuple) icon).getFirst(), x, y);
-								renderItem(k + 60 + n, b0 + 28,(ItemStack)((Tuple) icon).getSecond(), x, y);
-							}
-							else if(((Tuple) icon).getSecond() instanceof ResourceLocation){
-								writeText(1, text1, 50);
-								writeText(2, text2, 100);
-								renderItem(k + 60, b0 + 28,(ItemStack)((Tuple) icon).getFirst(), x, y);
-								GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-								mc.renderEngine.bindTexture((ResourceLocation)((Tuple) icon).getSecond());
-								drawTexturedModalRect(k + n, b0, 0, 0, 256, 256);
-							}
-							else if(((Tuple) icon).getSecond() instanceof CraftingStack){
-								writeText(1, text1, 50);
-								writeText(2, text2, 95);
-								renderItem(k + 60, b0 + 28,(ItemStack)((Tuple) icon).getFirst(), x, y);
-								GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-								mc.renderEngine.bindTexture(NecronomiconResources.CRAFTING);
-								drawTexturedModalRect(k + n, b0, 0, 0, 256, 256);
-								boolean unicode = fontRendererObj.getUnicodeFlag();
-								fontRendererObj.setUnicodeFlag(false);
-								renderItem(k + 93 + n, b0 + 52,((CraftingStack)((Tuple) icon).getSecond()).getOutput(), x, y);
-								fontRendererObj.setUnicodeFlag(unicode);
-								for(int i = 0; i <= 2; i++){
-									renderItem(k + 24 + n +i*21, b0 + 31,((CraftingStack)((Tuple) icon).getSecond()).getFirstArray()[i], x, y);
-									renderItem(k + 24 + n +i*21, b0 + 52,((CraftingStack)((Tuple) icon).getSecond()).getSecondArray()[i], x, y);
-									renderItem(k + 24 + n +i*21, b0 + 73,((CraftingStack)((Tuple) icon).getSecond()).getThirdArray()[i], x, y);
-								}
-							}
-						}
-					}
-					else if(((Tuple) icon).getFirst() instanceof ResourceLocation){
-						if(((Tuple) icon).getSecond() == null){
-							writeText(1, text1, 100);
-							GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-							mc.renderEngine.bindTexture((ResourceLocation)((Tuple) icon).getFirst());
-							drawTexturedModalRect(k, b0, 0, 0, 256, 256);
-						} else {
-							int n = 123;
-							if(((Tuple) icon).getSecond() instanceof ItemStack){
-								writeText(2, text2, 50);
-								writeText(1, text1, 100);
-								GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-								mc.renderEngine.bindTexture((ResourceLocation)((Tuple) icon).getFirst());
-								drawTexturedModalRect(k, b0, 0, 0, 256, 256);
-								renderItem(k + 60 + n, b0 + 28,(ItemStack)((Tuple) icon).getSecond(), x, y);
-							}
-							else if(((Tuple) icon).getSecond() instanceof ResourceLocation){
-								writeText(1, text1, 100);
-								writeText(2, text2, 100);
-								GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-								mc.renderEngine.bindTexture((ResourceLocation)((Tuple) icon).getFirst());
-								drawTexturedModalRect(k, b0, 0, 0, 256, 256);
-								mc.renderEngine.bindTexture((ResourceLocation)((Tuple) icon).getSecond());
-								drawTexturedModalRect(k + n, b0, 0, 0, 256, 256);
-							}
-							else if(((Tuple) icon).getSecond() instanceof CraftingStack){
-								writeText(1, text1, 100);
-								writeText(2, text2, 95);
-								GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-								mc.renderEngine.bindTexture((ResourceLocation)((Tuple) icon).getFirst());
-								drawTexturedModalRect(k, b0, 0, 0, 256, 256);
-								mc.renderEngine.bindTexture(NecronomiconResources.CRAFTING);
-								drawTexturedModalRect(k + n, b0, 0, 0, 256, 256);
-								boolean unicode = fontRendererObj.getUnicodeFlag();
-								fontRendererObj.setUnicodeFlag(false);
-								renderItem(k + 93 + n, b0 + 52,((CraftingStack)((Tuple) icon).getSecond()).getOutput(), x, y);
-								fontRendererObj.setUnicodeFlag(unicode);
-								for(int i = 0; i <= 2; i++){
-									renderItem(k + 24 + n +i*21, b0 + 31,((CraftingStack)((Tuple) icon).getSecond()).getFirstArray()[i], x, y);
-									renderItem(k + 24 + n +i*21, b0 + 52,((CraftingStack)((Tuple) icon).getSecond()).getSecondArray()[i], x, y);
-									renderItem(k + 24 + n +i*21, b0 + 73,((CraftingStack)((Tuple) icon).getSecond()).getThirdArray()[i], x, y);
-								}
-							}
-						}
-					}
-					else if(((Tuple) icon).getFirst() instanceof CraftingStack)
-						if(((Tuple) icon).getSecond() == null){
-							writeText(1, text1, 95);
-							GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-							mc.renderEngine.bindTexture(NecronomiconResources.CRAFTING);
-							drawTexturedModalRect(k, b0, 0, 0, 256, 256);
-							boolean unicode = fontRendererObj.getUnicodeFlag();
-							fontRendererObj.setUnicodeFlag(false);
-							renderItem(k + 93, b0 + 52,((CraftingStack)((Tuple) icon).getFirst()).getOutput(), x, y);
-							fontRendererObj.setUnicodeFlag(unicode);
-							for(int i = 0; i <= 2; i++){
-								renderItem(k + 24 +i*21, b0 + 31,((CraftingStack)((Tuple) icon).getFirst()).getFirstArray()[i], x, y);
-								renderItem(k + 24 +i*21, b0 + 52,((CraftingStack)((Tuple) icon).getFirst()).getSecondArray()[i], x, y);
-								renderItem(k + 24 +i*21, b0 + 73,((CraftingStack)((Tuple) icon).getFirst()).getThirdArray()[i], x, y);
-							}
-						} else {
-							int n = 123;
-							if(((Tuple) icon).getSecond() instanceof ItemStack){
-								writeText(1, text1, 95);
-								writeText(2, text2, 50);
-								GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-								mc.renderEngine.bindTexture(NecronomiconResources.CRAFTING);
-								drawTexturedModalRect(k, b0, 0, 0, 256, 256);
-								boolean unicode = fontRendererObj.getUnicodeFlag();
-								fontRendererObj.setUnicodeFlag(false);
-								renderItem(k + 93, b0 + 52,((CraftingStack)((Tuple) icon).getFirst()).getOutput(), x, y);
-								fontRendererObj.setUnicodeFlag(unicode);
-								for(int i = 0; i <= 2; i++){
-									renderItem(k + 24 +i*21, b0 + 31,((CraftingStack)((Tuple) icon).getFirst()).getFirstArray()[i], x, y);
-									renderItem(k + 24 +i*21, b0 + 52,((CraftingStack)((Tuple) icon).getFirst()).getSecondArray()[i], x, y);
-									renderItem(k + 24 +i*21, b0 + 73,((CraftingStack)((Tuple) icon).getFirst()).getThirdArray()[i], x, y);
-								}
-								renderItem(k + 60 + n, b0 + 28,(ItemStack)((Tuple) icon).getSecond(), x, y);
-							}
-							else if(((Tuple) icon).getSecond() instanceof ResourceLocation){
-								writeText(1, text1, 95);
-								writeText(2, text2, 100);
-								GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-								mc.renderEngine.bindTexture(NecronomiconResources.CRAFTING);
-								drawTexturedModalRect(k, b0, 0, 0, 256, 256);
-								boolean unicode = fontRendererObj.getUnicodeFlag();
-								fontRendererObj.setUnicodeFlag(false);
-								renderItem(k + 93, b0 + 52,((CraftingStack)((Tuple) icon).getFirst()).getOutput(), x, y);
-								fontRendererObj.setUnicodeFlag(unicode);
-								for(int i = 0; i <= 2; i++){
-									renderItem(k + 24 +i*21, b0 + 31,((CraftingStack)((Tuple) icon).getFirst()).getFirstArray()[i], x, y);
-									renderItem(k + 24 +i*21, b0 + 52,((CraftingStack)((Tuple) icon).getFirst()).getSecondArray()[i], x, y);
-									renderItem(k + 24 +i*21, b0 + 73,((CraftingStack)((Tuple) icon).getFirst()).getThirdArray()[i], x, y);
-								}
-								mc.renderEngine.bindTexture((ResourceLocation)((Tuple) icon).getSecond());
-								drawTexturedModalRect(k + n, b0, 0, 0, 256, 256);
-							}
-							else if(((Tuple) icon).getSecond() instanceof CraftingStack){
-								writeText(1, text1, 95);
-								writeText(2, text2, 95);
-								GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-								mc.renderEngine.bindTexture(NecronomiconResources.CRAFTING);
-								drawTexturedModalRect(k, b0, 0, 0, 256, 256);
-								boolean unicode = fontRendererObj.getUnicodeFlag();
-								fontRendererObj.setUnicodeFlag(false);
-								renderItem(k + 93, b0 + 52,((CraftingStack)((Tuple) icon).getFirst()).getOutput(), x, y);
-								fontRendererObj.setUnicodeFlag(unicode);
-								for(int i = 0; i <= 2; i++){
-									renderItem(k + 24 +i*21, b0 + 31,((CraftingStack)((Tuple) icon).getFirst()).getFirstArray()[i], x, y);
-									renderItem(k + 24 +i*21, b0 + 52,((CraftingStack)((Tuple) icon).getFirst()).getSecondArray()[i], x, y);
-									renderItem(k + 24 +i*21, b0 + 73,((CraftingStack)((Tuple) icon).getFirst()).getThirdArray()[i], x, y);
-								}
-								mc.renderEngine.bindTexture(NecronomiconResources.CRAFTING);
-								drawTexturedModalRect(k + n, b0, 0, 0, 256, 256);
-								fontRendererObj.setUnicodeFlag(false);
-								renderItem(k + 93 + n, b0 + 52,((CraftingStack)((Tuple) icon).getSecond()).getOutput(), x, y);
-								fontRendererObj.setUnicodeFlag(unicode);
-								for(int i = 0; i <= 2; i++){
-									renderItem(k + 24 + n +i*21, b0 + 31,((CraftingStack)((Tuple) icon).getSecond()).getFirstArray()[i], x, y);
-									renderItem(k + 24 + n +i*21, b0 + 52,((CraftingStack)((Tuple) icon).getSecond()).getSecondArray()[i], x, y);
-									renderItem(k + 24 + n +i*21, b0 + 73,((CraftingStack)((Tuple) icon).getSecond()).getThirdArray()[i], x, y);
-								}
-							}
-						}
-				} else if(((Tuple) icon).getSecond() != null){
-					int n = 123;
-					if(((Tuple) icon).getSecond() instanceof ItemStack){
-						writeText(1, text1);
-						writeText(2, text2, 50);
-						renderItem(k + 60 + n, b0 + 28,(ItemStack)((Tuple) icon).getSecond(), x, y);
-					}
-					else if(((Tuple) icon).getSecond() instanceof ResourceLocation){
-						writeText(1, text1);
-						writeText(2, text2, 100);
-						GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-						mc.renderEngine.bindTexture((ResourceLocation)((Tuple) icon).getSecond());
-						drawTexturedModalRect(k + n, b0, 0, 0, 256, 256);
-					}
-					else if(((Tuple) icon).getSecond() instanceof CraftingStack){
-						writeText(1, text1);
-						writeText(2, text2, 95);
-						GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-						mc.renderEngine.bindTexture(NecronomiconResources.CRAFTING);
-						drawTexturedModalRect(k + n, b0, 0, 0, 256, 256);
-						boolean unicode = fontRendererObj.getUnicodeFlag();
-						fontRendererObj.setUnicodeFlag(false);
-						renderItem(k + 93 + n, b0 + 52,((CraftingStack)((Tuple) icon).getSecond()).getOutput(), x, y);
-						fontRendererObj.setUnicodeFlag(unicode);
-						for(int i = 0; i <= 2; i++){
-							renderItem(k + 24 + n +i*21, b0 + 31,((CraftingStack)((Tuple) icon).getSecond()).getFirstArray()[i], x, y);
-							renderItem(k + 24 + n +i*21, b0 + 52,((CraftingStack)((Tuple) icon).getSecond()).getSecondArray()[i], x, y);
-							renderItem(k + 24 + n +i*21, b0 + 73,((CraftingStack)((Tuple) icon).getSecond()).getThirdArray()[i], x, y);
-						}
-					}
-				} else {
-					if(pageAmount > limit)
-						writeText(2, text2);
-					writeText(1, text1);
+		}
+		if(icon2 != null){
+			int n = 123;
+			if(icon2 instanceof ItemStack)
+				renderItem(k + 60 + n, b0 + 28,(ItemStack)icon2, x, y);
+			if(icon2 instanceof ResourceLocation){
+				GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+				mc.renderEngine.bindTexture((ResourceLocation)icon2);
+				drawTexturedModalRect(k + n, b0, 0, 0, 256, 256);
+			}
+			if(icon2 instanceof CraftingStack){
+				GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+				GL11.glPushMatrix();
+				GL11.glEnable(GL11.GL_BLEND);
+				GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
+				mc.renderEngine.bindTexture(NecronomiconResources.CRAFTING);
+				drawTexturedModalRect(k + n, b0, 0, 0, 256, 256);
+				GL11.glEnable(GL12.GL_RESCALE_NORMAL);
+				GL11.glEnable(GL11.GL_DEPTH_TEST);
+				GL11.glPopMatrix();
+				GL11.glDisable(GL11.GL_LIGHTING);
+				boolean unicode = fontRendererObj.getUnicodeFlag();
+				fontRendererObj.setUnicodeFlag(false);
+				renderItem(k + 93 + n, b0 + 52,((CraftingStack)icon2).getOutput(), x, y);
+				fontRendererObj.setUnicodeFlag(unicode);
+				for(int i = 0; i <= 2; i++){
+					renderItem(k + 24 + n +i*21, b0 + 31,((CraftingStack)icon2).getFirstArray()[i], x, y);
+					renderItem(k + 24 + n +i*21, b0 + 52,((CraftingStack)icon2).getSecondArray()[i], x, y);
+					renderItem(k + 24 + n +i*21, b0 + 73,((CraftingStack)icon2).getThirdArray()[i], x, y);
 				}
-		} else {
-			if(pageAmount > limit)
-				writeText(2, text2);
-			writeText(1, text1);
+			}
 		}
 
 		if(tooltipStack != null)
@@ -523,6 +314,26 @@ public class GuiNecronomiconEntry extends GuiNecronomicon {
 			}
 			GuiRenderHelper.renderTooltip(x, y, parsedTooltip);
 		}
+	}
+
+	private void writeTexts(Object icon1, Object icon2, String text1, String text2){
+
+		if(icon1 != null){
+			if(icon1 instanceof ItemStack)
+				writeText(1, text1, 50);
+			if(icon1 instanceof ResourceLocation)
+				writeText(1, text1, 100);
+			if(icon1 instanceof CraftingStack)
+				writeText(1, text1, 95);
+		} else writeText(1, text1);
+		if(icon2 != null){
+			if(icon2 instanceof ItemStack)
+				writeText(2, text2, 50);
+			if(icon2 instanceof ResourceLocation)
+				writeText(2, text2, 100);
+			if(icon2 instanceof CraftingStack)
+				writeText(2, text2, 95);
+		} else writeText(2, text2);
 	}
 
 	@Override

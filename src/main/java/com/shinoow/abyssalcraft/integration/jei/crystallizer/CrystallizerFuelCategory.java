@@ -32,7 +32,7 @@ public class CrystallizerFuelCategory extends CrystallizerRecipeCategory {
 	public CrystallizerFuelCategory(IGuiHelper guiHelper) {
 		super(guiHelper);
 		background = guiHelper.createDrawable(backgroundLocation, 55, 38, 18, 32, 0, 0, 0, 80);
-		localizedName = Translator.translateToLocal("gui.jei.category.fuel");
+		localizedName = Translator.translateToLocal("gui.acjei.category.fuel.crystallizer");
 	}
 
 	@Override

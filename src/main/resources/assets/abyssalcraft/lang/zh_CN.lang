@@ -201,6 +201,10 @@ container.abyssalcraft.engraver.nei=钱币铸造
 container.abyssalcraft.materializer.nei=物质化
 container.abyssalcraft.rituals.nei=死灵之书仪式
 
+#JEI Integration
+gui.acjei.category.fuel.transmutator=Transmutator Fuel
+gui.acjei.category.fuel.crystallizer=Crystallizer Fuel
+
 #Necronomicon Labels
 necronomicon.index=索引
 necronomicon.information=禁忌知识
@@ -654,6 +658,8 @@ ac_potion=药水
 ac_potion.tooltip=药水ID设置
 ac_shoggoth=修格斯分泌物
 ac_shoggoth.tooltip=修格斯分泌物设置
+ac_worldgen=Worldgen
+ac_worldgen.tooltip=Worldgen configuration
 
 #Damagesources
 death.attack.coralium=%1$s 由于珊瑚侵染而死亡

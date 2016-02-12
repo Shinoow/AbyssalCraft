@@ -60,6 +60,9 @@ public class EntityAbyssalZombie extends EntityMob implements ICoraliumEntity {
 	private static final UUID attackDamageBoostUUID = UUID.fromString("648D7064-6A60-4F59-8ABE-C2C23A6DD7A9");
 	private static final AttributeModifier attackDamageBoostModifier = new AttributeModifier(attackDamageBoostUUID, "Attack Damage Boost", 3.0D, 0);
 
+	private float zombieWidth = -1.0F;
+	private float zombieHeight;
+
 	public EntityAbyssalZombie(World par1World) {
 		super(par1World);
 		tasks.addTask(0, new EntityAISwimming(this));
@@ -78,6 +81,7 @@ public class EntityAbyssalZombie extends EntityMob implements ICoraliumEntity {
 		targetTasks.addTask(1, new EntityAIHurtByTarget(this, false));
 		targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityZombie.class, true));
 		targetTasks.addTask(3, new EntityAINearestAttackableTarget(this, EntityPlayer.class, true));
+		setSize(0.6F, 1.8F);
 	}
 
 	@Override
@@ -136,6 +140,8 @@ public class EntityAbyssalZombie extends EntityMob implements ICoraliumEntity {
 			if (par1)
 				attributeinstance.applyModifier(babySpeedBoostModifier);
 		}
+
+		setChildSize(par1);
 	}
 
 	@Override
@@ -191,6 +197,9 @@ public class EntityAbyssalZombie extends EntityMob implements ICoraliumEntity {
 					setFire(16);
 			}
 		}
+
+		if(worldObj.isRemote)
+			setChildSize(isChild());
 
 		super.onLivingUpdate();
 	}
@@ -375,6 +384,27 @@ public class EntityAbyssalZombie extends EntityMob implements ICoraliumEntity {
 			attribute.applyModifier(attackDamageBoostModifier);
 
 		return (IEntityLivingData)data;
+	}
+
+	public void setChildSize(boolean p_146071_1_)
+	{
+		multiplySize(p_146071_1_ ? 0.5F : 1.0F);
+	}
+
+	@Override
+	protected final void setSize(float p_70105_1_, float p_70105_2_)
+	{
+		boolean flag = zombieWidth > 0.0F && zombieHeight > 0.0F;
+		zombieWidth = p_70105_1_;
+		zombieHeight = p_70105_2_;
+
+		if (!flag)
+			multiplySize(1.0F);
+	}
+
+	protected final void multiplySize(float p_146069_1_)
+	{
+		super.setSize(zombieWidth * p_146069_1_, zombieHeight * p_146069_1_);
 	}
 
 	class GroupData implements IEntityLivingData

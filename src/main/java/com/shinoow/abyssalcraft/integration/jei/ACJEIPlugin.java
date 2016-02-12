@@ -29,6 +29,7 @@ import com.shinoow.abyssalcraft.integration.jei.engraver.*;
 public class ACJEIPlugin implements IModPlugin {
 
 	private IJeiHelpers jeiHelpers;
+	private IItemRegistry itemRegistry;
 
 	@Override
 	public void onJeiHelpersAvailable(IJeiHelpers jeiHelpers) {
@@ -37,13 +38,14 @@ public class ACJEIPlugin implements IModPlugin {
 
 	@Override
 	public void onItemRegistryAvailable(IItemRegistry itemRegistry) {
+		this.itemRegistry = itemRegistry;
 	}
 
 	@Override
 	public void register(IModRegistry registry) {
 		if(!Loader.isModLoaded("abyssalcraft")) return;
 
-		JEIUtils utils = new JEIUtils();
+		JEIUtils utils = new JEIUtils(itemRegistry);
 
 		IGuiHelper guiHelper = jeiHelpers.getGuiHelper();
 		registry.addRecipeCategories(new TransmutatorFuelCategory(guiHelper),
@@ -82,6 +84,7 @@ public class ACJEIPlugin implements IModPlugin {
 		jeiHelpers.getItemBlacklist().addItemToBlacklist(new ItemStack(AbyssalCraft.Altar));
 	}
 
+	@Override
 	public void onRecipeRegistryAvailable(IRecipeRegistry recipeRegistry) {}
 
 	@Override

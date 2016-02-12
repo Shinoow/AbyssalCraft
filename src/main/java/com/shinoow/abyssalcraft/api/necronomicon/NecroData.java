@@ -11,6 +11,16 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.api.necronomicon;
 
+import java.util.Map;
+
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.fml.common.FMLLog;
+
+import org.apache.logging.log4j.Level;
+
+import com.google.common.collect.Maps;
+
 /**
  * Base data structure for Necronomicon information pages
  * @author shinoow
@@ -19,9 +29,10 @@ package com.shinoow.abyssalcraft.api.necronomicon;
  */
 public class NecroData {
 
+	private String identifier;
 	private String title;
 	private String information;
-	private PageData[] pageData;
+	private Chapter[] chapters;
 
 	/**
 	 * The base data structure for Necronomicon information pages
@@ -29,9 +40,10 @@ public class NecroData {
 	 * @param info Optional text to write beside buttons for sub-category pages
 	 * @param datas Page data for sub-category pages
 	 */
-	public NecroData(String title, String info,PageData...datas){
+	public NecroData(String identifier, String title, String info,Chapter...chapters){
+		this.identifier = identifier;
 		this.title = title;
-		pageData = datas;
+		this.chapters = chapters;
 		information = info;
 	}
 
@@ -40,8 +52,8 @@ public class NecroData {
 	 * @param title Title to display on the "Index" for the information page
 	 * @param datas Page data for sub-category pages
 	 */
-	public NecroData(String title,PageData...datas){
-		this(title, null, datas);
+	public NecroData(String identifier, String title,Chapter...chapters){
+		this(identifier, title, null, chapters);
 	}
 
 	/**
@@ -53,32 +65,6 @@ public class NecroData {
 	}
 
 	/**
-	 * Getter for the PageData array
-	 * @return An array of stored PageData
-	 */
-	public PageData[] getPageData(){
-		return pageData;
-	}
-
-	/**
-	 * Method for getting the title of a specific sub-category
-	 * @param index Position in the index to check
-	 * @return A string representing the PageData title
-	 */
-	public String getPageTitle(int index){
-		return pageData[index].title;
-	}
-
-	/**
-	 * Method for getting the icon/picture array of a sub-category page
-	 * @param index Position of the index to check
-	 * @return An array of Objects representing the page icons/pictures, if any
-	 */
-	public Object[] getPageIcons(int index){
-		return pageData[index].icons;
-	}
-
-	/**
 	 * Getter for the category information
 	 * @return A specified string used to display on the information page
 	 */
@@ -87,115 +73,292 @@ public class NecroData {
 	}
 
 	/**
-	 * Method for checking the total amount of pages, if needed
-	 * @param datas Array of PageDatas to check
-	 * @return Total amount of pages in the array (likely located in a NecroData instance)
+	 * Getter for the NecroData identifier
+	 * @return A unique string representing this NecroData
 	 */
-	public static int getTotalPageAmount(PageData...datas){
-		int length = 0;
-		for(int i = 0; i < datas.length; i++)
-			length += datas[i].pageNumber;
-		return length;
+	public String getIdentifier(){
+		return identifier;
 	}
 
 	/**
-	 * Method for checking the amount of pages
-	 * @param index Which index of the PageData array to check
-	 * @param datas The PageData array to be checked
-	 * @return Amount of pages on the selected index
+	 * Getter for the Chapter array
+	 * @return An array of stored Chapters
 	 */
-	public static int getPageAmount(int index, PageData...datas){
-		return datas[index].pageNumber;
+	public Chapter[] getChapters(){
+		return chapters;
 	}
 
-	@Override
-	public String toString(){
-		return "NecroData{Title: "+title + ",Information: "+(information != null ? "Yes" : "No") +",PageData: "+pageData.toString() +"}";
+	/**
+	 * Method for getting the title of a specific sub-category
+	 * @param index Position in the index to check
+	 * @return A string representing the Chapter title
+	 */
+	public String getChapterTitle(int index){
+		return chapters[index].title;
 	}
 
+	/**
+	 * Adds a Chapter (or overrides one that already exists)
+	 * @param chapter Chapter to add
+	 */
+	public void addChapter(Chapter chapter){
+		for(Chapter chap : chapters)
+			if(chap.identifier.equals(chapter.identifier)){
+				chap = chapter;
+				return;
+			}
+
+		if(chapters.length < 7){
+			Chapter[] newchap = new Chapter[chapters.length + 1];
+			for(int i = 0; i < chapters.length; i++)
+				newchap[i] = chapters[i];
+
+			newchap[chapters.length] = chapter;
+
+			chapters = newchap;
+		} else FMLLog.log("AbyssalCraftAPI", Level.ERROR, "NecroData instance is already full, can't add a new Chapter!");
+	}
+
+	/**
+	 * Removes a Chapter (if it exists)
+	 * @param identifier Chapter identifier
+	 */
+	public void removeChapter(String identifier){
+		Chapter[] newchap = new Chapter[chapters.length -1];
+		Chapter[] oldchap = chapters.clone();
+
+		for(Chapter chap : oldchap)
+			if(chap.identifier.equals(identifier)){
+				for(Chapter chapnew : newchap)
+					for(Chapter chap2 : oldchap)
+						if(chap2 != null && !chap2.identifier.equals(identifier)){
+							chapnew = chap2;
+							chap2 = null;
+							break;
+						}
+				chapters = newchap;
+				return;
+			}
+	}
+
+	//	@Override
+	//	public String toString(){
+	//		return "NecroData{Title: "+title + ",Information: "+(information != null ? "Yes" : "No") +",PageData: "+pageData.toString() +"}";
+	//	}
+
+	/**
+	 * Deprecated: use the new format
+	 */
+	@Deprecated
+	public NecroData(String title, String info,PageData...datas){}
+
+	/**
+	 * Deprecated: use the new format
+	 */
+	@Deprecated
+	public NecroData(String title,PageData...datas){}
+	@Deprecated
+	public PageData[] getPageData(){ return null; }
+	@Deprecated
+	public String getPageTitle(int index){ return null; }
+	@Deprecated
+	public Object[] getPageIcons(int index){ return null; }
+
+	@Deprecated
 	public static class PageData{
-		private String[] pages;
-		private int pageNumber;
+		/**
+		 * Deprecated: use the new format
+		 */
+		@Deprecated
+		public PageData(int num, String title, String...strings){}
+		/**
+		 * Deprecated: use the new format
+		 */
+		@Deprecated
+		public PageData(int num, String title, Object[] stuff, String...strings){}
+		@Deprecated
+		public String[] getPages(){ return null; }
+		@Deprecated
+		public int getPageAmount(){ return 0; }
+		@Deprecated
+		public String getTitle(){ return null; }
+		@Deprecated
+		public Object getIcon(int index){ return null; }
+		@Deprecated
+		public Object[] getIcons(){ return null; }
+	}
+
+	/**
+	 * A Necronomicon Chapter (collection of pages)
+	 * @author shinoow
+	 *
+	 * @since 1.6
+	 */
+	public static class Chapter{
+		private Map<Integer, Page> pages = Maps.newHashMap();
+		private String identifier;
 		private String title;
-		private Object[] icons;
 
 		/**
-		 * Page data for the NecroData structure
-		 * @param num Amount of turn-ups for the sub-category (max 20)
-		 * @param title A title to display on the top of the page
-		 * @param strings Text to be written on the pages (each string will represent one of
-		 * the two open pages, leave a empty string for a empty page)
+		 * A Necronomicon Chapter
+		 * @param identifier Identifier (used to locate the chapter, should be unique for every NecroData)
+		 * @param title Title to display on pages in the Chapter
 		 */
-		public PageData(int num, String title, String...strings){
-			this(num, title, null, strings);
-		}
-
-		/**
-		 * Page data for the NecroData structure
-		 * @param num Amount of turn-ups for the sub-category (max 20)
-		 * @param title A title to display on the top of the page
-		 * @param stuff An array of Objects used as a icons/pictures for the page (has to be the same amount
-		 * as the turn-up amount, can contain null elements if you don't want a icon/picture on a certain page)
-		 * @param strings Text to be written on the pages (each string will represent one of
-		 * the two open pages, leave a empty string for a empty page)
-		 */
-		public PageData(int num, String title, Object[] stuff, String...strings){
-			if(num > 20) throw new IndexOutOfBoundsException("Too many turn-ups! Maximum is 20! ("+num+")");
-			pageNumber = num;
+		public Chapter(String identifier, String title){
+			this.identifier = identifier;
 			this.title = title;
-			if(stuff != null)
-				if(stuff.length == num)
-					icons = stuff;
-				else throw new ArrayIndexOutOfBoundsException("Not enough elements in the Object array! ("+num+" turn-up(s), "+stuff.length+" Objects");
-			if(strings.length/2 <= num)
-				pages = strings;
-			else throw new ArrayIndexOutOfBoundsException("Not enough pages to write on! ("+num+" turn-ups, "+strings.length+" pages)");
 		}
 
 		/**
-		 * Getter for the stored strings representing pages
-		 * @return An array of strings representing pages
+		 * A Necronomicon Chapter
+		 * @param identifier Identifier (used to locate the chapter, should be unique for every NecroData)
+		 * @param title Title to display on pages in the Chapter
+		 * @param pages an array of Pages (it is optional to do it this way)
 		 */
-		public String[] getPages(){
-			return pages;
+		public Chapter(String identifier, String title, Page...pages){
+			this(identifier, title);
+			for(Page page : pages)
+				addPage(page);
 		}
 
 		/**
-		 * Getter for the turn-up amount
-		 * @return The amount of available turn-ups (they have 2 pages each)
+		 * Getter for the Chapter identifier
 		 */
-		public int getPageAmount(){
-			return pageNumber;
+		public String getIdentifier(){
+			return identifier;
 		}
 
 		/**
-		 * Getter for the PageData title
-		 * @return A string representing the title of the sub-category
+		 * Getter for the Chapter title
 		 */
 		public String getTitle(){
 			return title;
 		}
 
 		/**
-		 * Getter for the page icon/picture
-		 * @param index The specified index of page icons/pictures
-		 * @return A Object representing a specific page icon/picture
+		 * Fetches a HashMap of all the pages contained in this Chapter
 		 */
-		public Object getIcon(int index){
-			return icons[index];
+		public Map<Integer, Page> getPages(){
+			return pages;
 		}
 
 		/**
-		 * Getter for all of the page icons/pictures
-		 * @return An array of Object representing page icons/pictures
+		 * Getter for the page amount
 		 */
-		public Object[] getIcons(){
-			return icons;
+		public int getPageAmount(){
+			return pages.size();
+		}
+
+		/**
+		 * Getter for the turn-up amount (pages evenly divided by 2)
+		 */
+		public int getTurnupAmount(){
+			return getPageAmount() / 2 + (getPageAmount() % 2 == 0 ? 0 : 1);
+		}
+
+		/**
+		 * Adds a page to the Chapter
+		 * @param page Page to add
+		 */
+		public void addPage(Page page){
+			if(pages.size() < 40)
+				pages.put(page.pageNum, page);
+		}
+
+		/**
+		 * Removes a Page (if it exists)
+		 * @param pageNum Page number
+		 */
+		public void removePage(int pageNum){
+			if(pages.containsKey(pageNum))
+				pages.remove(pageNum);
+		}
+
+		/**
+		 * Fetches a page (if it exists)
+		 * @param pageNum Page number
+		 */
+		public Page getPage(int pageNum){
+			return pages.containsKey(pageNum) ? pages.get(pageNum) : null;
+		}
+
+		/**
+		 * Checks if a Page exists
+		 * @param pageNum Page number
+		 */
+		public boolean hasPage(int pageNum){
+			return pages.containsKey(pageNum);
+		}
+	}
+
+	/**
+	 * A Necronomicon Page
+	 * @author shinoow
+	 *
+	 * @since 1.6
+	 */
+	public static class Page{
+		private Object icon;
+		private int pageNum;
+		private String text;
+
+		/**
+		 * A Necronomicon Page
+		 * @param pageNum Page number
+		 * @param text Text to display on the Page
+		 */
+		public Page(int pageNum, String text){
+			this(pageNum, null, text);
+		}
+
+		/**
+		 * A Necronomicon Page
+		 * @param pageNum Page number
+		 * @param icon ResourceLocation/ItemStack/CraftingStack to display on the Page
+		 * @param text Text to display on the Page
+		 */
+		public Page(int pageNum, Object icon, String text){
+			if(pageNum == 0) throw new ArithmeticException("The Page number can't be zero");
+			this.pageNum = pageNum;
+			if(icon != null)
+				if(!(icon instanceof ResourceLocation) && !(icon instanceof ItemStack) && !(icon instanceof CraftingStack))
+					throw new IllegalArgumentException("Icon isn't a ResourceLocation, ItemStack or CraftingStack!");
+			this.icon = icon;
+			this.text = text;
+		}
+
+		/**
+		 * Fetches the page's number (used for ordering and overriding/removing/replacing pages).
+		 */
+		public int getPageNumber(){
+			return pageNum;
+		}
+
+		/**
+		 * Fetches the ResourceLocation/ItemStack/CraftingStack to display on the page (if any exist).
+		 */
+		public Object getIcon(){
+			return icon;
+		}
+
+		/**
+		 * Fetches the text to display on the page.
+		 */
+		public String getText(){
+			return text;
 		}
 
 		@Override
-		public String toString(){
-			return "PageData{Pages: "+pageNumber/2 +",Objects:"+getIcons().toString() +"}";
+		public boolean equals(Object obj){
+			if(!(obj instanceof Page)) return false;
+
+			Page page = (Page)obj;
+
+			boolean test1 = page.pageNum == pageNum;
+			boolean test2 = page.icon == null && icon == null || page.icon.equals(icon);
+			boolean test3 = page.text.equals(text);
+
+			return test1 && test2 && test3;
 		}
 	}
 }

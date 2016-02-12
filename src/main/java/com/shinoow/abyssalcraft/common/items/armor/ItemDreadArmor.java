@@ -28,7 +28,6 @@ import com.shinoow.abyssalcraft.AbyssalCraft;
 public class ItemDreadArmor extends ItemArmor {
 	public ItemDreadArmor(ArmorMaterial par2EnumArmorMaterial, int par3, int par4, String name){
 		super(par2EnumArmorMaterial, par3, par4);
-		//		GameRegistry.registerItem(this, name);
 		setUnlocalizedName(name);
 		setCreativeTab(AbyssalCraft.tabCombat);
 	}
@@ -49,13 +48,6 @@ public class ItemDreadArmor extends ItemArmor {
 		else return null;
 	}
 
-	//	@Override
-	//	@SideOnly(Side.CLIENT)
-	//	public void registerIcons(IIconRegister par1IconRegister)
-	//	{
-	//		itemIcon = par1IconRegister.registerIcon(AbyssalCraft.modid + ":" + this.getUnlocalizedName().substring(5));
-	//	}
-
 	@SuppressWarnings("rawtypes")
 	@Override
 	public void onArmorTick(World world, EntityPlayer player, ItemStack itemstack) {
@@ -63,7 +55,7 @@ public class ItemDreadArmor extends ItemArmor {
 			player.addPotionEffect(new PotionEffect(Potion.nightVision.getId(), 260, 0));
 		if (itemstack.getItem() == AbyssalCraft.plateD) {
 			player.addPotionEffect(new PotionEffect(Potion.fireResistance.getId(), 20, 3));
-			List list = player.worldObj.getEntitiesWithinAABBExcludingEntity(player, player.getCollisionBoundingBox().expand(4D, 0.0D, 4D));
+			List list = player.worldObj.getEntitiesWithinAABBExcludingEntity(player, player.getEntityBoundingBox().expand(4D, 0.0D, 4D));
 			if (list != null)
 				for (int k2 = 0; k2 < list.size(); k2++) {
 					Entity entity = (Entity)list.get(k2);

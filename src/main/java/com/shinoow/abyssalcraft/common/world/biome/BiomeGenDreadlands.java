@@ -15,6 +15,8 @@ import java.util.Random;
 
 import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;
+
+import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.common.entity.EntityDreadgolem;
 import com.shinoow.abyssalcraft.common.world.gen.WorldGenDreadlandsStalagmite;
 
@@ -32,10 +34,11 @@ public class BiomeGenDreadlands extends BiomeGenDreadlandsBase
 	{
 		super.decorate(world, rand, pos);
 
-		for(int i = 0; i < 1; i++){
-			int xPos = rand.nextInt(16) + 8;
-			int zPos = rand.nextInt(16) + 8;
-			new WorldGenDreadlandsStalagmite().generate(world, rand, world.getHeight(pos.add(xPos, 0, zPos)));
-		}
+		if(AbyssalCraft.generateDreadlandsStalagmite)
+			for(int i = 0; i < 1; i++){
+				int xPos = rand.nextInt(16) + 8;
+				int zPos = rand.nextInt(16) + 8;
+				new WorldGenDreadlandsStalagmite().generate(world, rand, world.getHeight(pos.add(xPos, 0, zPos)));
+			}
 	}
 }

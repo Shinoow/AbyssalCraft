@@ -13,9 +13,10 @@ package com.shinoow.abyssalcraft.integration.jei.crystallizer;
 
 import javax.annotation.Nonnull;
 
+import com.shinoow.abyssalcraft.integration.jei.AbyssalCraftRecipeCategoryUid;
+
 import mezz.jei.api.recipe.IRecipeHandler;
 import mezz.jei.api.recipe.IRecipeWrapper;
-import mezz.jei.api.recipe.VanillaRecipeCategoryUid;
 
 public class CrystallizerFuelRecipeHandler implements IRecipeHandler<CrystallizerFuelRecipe> {
 	@Override
@@ -27,7 +28,7 @@ public class CrystallizerFuelRecipeHandler implements IRecipeHandler<Crystallize
 	@Nonnull
 	@Override
 	public String getRecipeCategoryUid() {
-		return VanillaRecipeCategoryUid.FUEL;
+		return AbyssalCraftRecipeCategoryUid.FUEL_CRYSTALLIZATION;
 	}
 
 	@Override

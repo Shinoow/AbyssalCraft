@@ -58,15 +58,16 @@ public class BiomeGenDarklandsHills extends BiomeGenBase {
 		super.decorate(par1World, par2Random, pos);
 		int var5 = 3 + par2Random.nextInt(6);
 
-		for (int rarity = 0; rarity < var5; ++rarity)
-		{
-			int veinSize = 1 + par2Random.nextInt(3);
-			int x = par2Random.nextInt(16);
-			int y = par2Random.nextInt(28) + 4;
-			int z = par2Random.nextInt(16);
+		if(AbyssalCraft.generateAbyssalniteOre)
+			for (int rarity = 0; rarity < var5; ++rarity)
+			{
+				int veinSize = 1 + par2Random.nextInt(3);
+				int x = par2Random.nextInt(16);
+				int y = par2Random.nextInt(28) + 4;
+				int z = par2Random.nextInt(16);
 
-			new WorldGenMinable(AbyssalCraft.abyore.getDefaultState(), veinSize).generate(par1World, par2Random, pos.add(x, y, z));
-		}
+				new WorldGenMinable(AbyssalCraft.abyore.getDefaultState(), veinSize).generate(par1World, par2Random, pos.add(x, y, z));
+			}
 
 		for (int rarity = 0; rarity < 7; ++rarity)
 		{

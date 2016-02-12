@@ -29,7 +29,6 @@ import com.shinoow.abyssalcraft.AbyssalCraft;
 public class ItemCoraliumPArmor extends ItemArmor {
 	public ItemCoraliumPArmor(ArmorMaterial par2EnumArmorMaterial, int par3, int par4, String name){
 		super(par2EnumArmorMaterial, par3, par4);
-		//		GameRegistry.registerItem(this, name);
 		setUnlocalizedName(name);
 		setCreativeTab(AbyssalCraft.tabCombat);
 	}
@@ -43,19 +42,12 @@ public class ItemCoraliumPArmor extends ItemArmor {
 	@Override
 	public String getArmorTexture(ItemStack stack, Entity entity, int slot, String type) {
 		if(stack.getItem() == AbyssalCraft.CorhelmetP || stack.getItem() == AbyssalCraft.CorplateP || stack.getItem() == AbyssalCraft.CorbootsP)
-			return "abyssalcraft:textures/armor/coraliumP_1.png";
+			return "abyssalcraft:textures/armor/coraliump_1.png";
 
 		if(stack.getItem() == AbyssalCraft.CorlegsP)
-			return "abyssalcraft:textures/armor/coraliumP_2.png";
+			return "abyssalcraft:textures/armor/coraliump_2.png";
 		else return null;
 	}
-
-	//	@Override
-	//	@SideOnly(Side.CLIENT)
-	//	public void registerIcons(IIconRegister par1IconRegister)
-	//	{
-	//		itemIcon = par1IconRegister.registerIcon(AbyssalCraft.modid + ":" + this.getUnlocalizedName().substring(5));
-	//	}
 
 	@SuppressWarnings("rawtypes")
 	@Override
@@ -66,7 +58,7 @@ public class ItemCoraliumPArmor extends ItemArmor {
 				player.removePotionEffect(AbyssalCraft.Cplague.getId());
 		}
 		if (itemstack.getItem() == AbyssalCraft.CorplateP) {
-			List list = player.worldObj.getEntitiesWithinAABBExcludingEntity(player, player.getCollisionBoundingBox().expand(4D, 0.0D, 4D));
+			List list = player.worldObj.getEntitiesWithinAABBExcludingEntity(player, player.getEntityBoundingBox().expand(4D, 0.0D, 4D));
 
 			if (list != null)
 				for (int k2 = 0; k2 < list.size(); k2++) {

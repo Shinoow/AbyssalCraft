@@ -318,13 +318,14 @@ public class ChunkProviderDarkRealm implements IChunkProvider
 
 		MinecraftForge.EVENT_BUS.post(new PopulateChunkEvent.Pre(par1IChunkProvider, worldObj, rand, x, z, flag));
 
-		for(int i = 0; i < 1; i++) {
-			int Xcoord2 = k + rand.nextInt(16);
-			int Zcoord2 = l + rand.nextInt(16);
+		if(AbyssalCraft.generateShoggothLairs)
+			for(int i = 0; i < 1; i++) {
+				int Xcoord2 = k + rand.nextInt(16);
+				int Zcoord2 = l + rand.nextInt(16);
 
-			if(rand.nextInt(200) == 0)
-				new StructureShoggothPit().generate(worldObj, rand, worldObj.getHeight(new BlockPos(Xcoord2, 0, Zcoord2)));
-		}
+				if(rand.nextInt(200) == 0)
+					new StructureShoggothPit().generate(worldObj, rand, worldObj.getHeight(new BlockPos(Xcoord2, 0, Zcoord2)));
+			}
 
 		biomegenbase.decorate(worldObj, rand, new BlockPos(k, 0, l));
 

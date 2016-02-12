@@ -68,6 +68,9 @@ public class EntityDepthsGhoul extends EntityMob implements ICoraliumEntity {
 	private static final AttributeModifier wilsonHealthBoost = new AttributeModifier(healthBoostUUID, "Wilson Health Boost", 20.0D, 0);
 	private static final AttributeModifier orangeHealthBoost = new AttributeModifier(healthBoostUUID, "Orange Health Boost", 30.0D, 0);
 
+	private float ghoulWidth = -1.0F;
+	private float ghoulHeight;
+
 	public EntityDepthsGhoul(World par1World) {
 		super(par1World);
 		tasks.addTask(0, new EntityAISwimming(this));
@@ -84,7 +87,7 @@ public class EntityDepthsGhoul extends EntityMob implements ICoraliumEntity {
 		tasks.addTask(7, new EntityAIWatchClosest(this, EntitySkeletonGoliath.class, 8.0F));
 		targetTasks.addTask(1, new EntityAIHurtByTarget(this, false));
 		targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityPlayer.class, true));
-		setSize(1.5F, 3.0F);
+		setSize(1.0F, 3.0F);
 	}
 
 	@Override
@@ -153,6 +156,8 @@ public class EntityDepthsGhoul extends EntityMob implements ICoraliumEntity {
 			if (par1)
 				attributeinstance.applyModifier(babySpeedBoostModifier);
 		}
+
+		setChildSize(par1);
 	}
 
 	public int getGhoulType()
@@ -198,6 +203,9 @@ public class EntityDepthsGhoul extends EntityMob implements ICoraliumEntity {
 
 			}
 		}
+
+		if(worldObj.isRemote)
+			setChildSize(isChild());
 
 		super.onLivingUpdate();
 	}
@@ -440,6 +448,27 @@ public class EntityDepthsGhoul extends EntityMob implements ICoraliumEntity {
 		hp.removeModifier(peteHealthBoost);
 		hp.removeModifier(wilsonHealthBoost);
 		hp.removeModifier(orangeHealthBoost);
+	}
+
+	public void setChildSize(boolean p_146071_1_)
+	{
+		multiplySize(p_146071_1_ ? 0.5F : 1.0F);
+	}
+
+	@Override
+	protected final void setSize(float p_70105_1_, float p_70105_2_)
+	{
+		boolean flag = ghoulWidth > 0.0F && ghoulHeight > 0.0F;
+		ghoulWidth = p_70105_1_;
+		ghoulHeight = p_70105_2_;
+
+		if (!flag)
+			multiplySize(1.0F);
+	}
+
+	protected final void multiplySize(float p_146069_1_)
+	{
+		super.setSize(ghoulWidth * p_146069_1_, ghoulHeight * p_146069_1_);
 	}
 
 	class GroupData implements IEntityLivingData
