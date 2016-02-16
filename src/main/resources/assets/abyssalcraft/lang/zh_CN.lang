@@ -202,8 +202,8 @@ container.abyssalcraft.materializer.nei=物质化
 container.abyssalcraft.rituals.nei=死灵之书仪式
 
 #JEI Integration
-gui.acjei.category.fuel.transmutator=Transmutator Fuel
-gui.acjei.category.fuel.crystallizer=Crystallizer Fuel
+gui.acjei.category.fuel.transmutator=嬗变器燃料
+gui.acjei.category.fuel.crystallizer=结晶器燃料
 
 #Necronomicon Labels
 necronomicon.index=索引
@@ -240,9 +240,9 @@ necronomicon.information.armortools=特殊的盔甲和工具
 necronomicon.information.machines=机器
 necronomicon.reqenergy=需求能量
 necronomicon.remnanthelp=需要残存者帮助
-necronomicon.gettingstarted=Getting Started
-necronomicon.potentialenergy=Potential Energy
-necronomicon.turnupindicator=Turn-up %1$s of %2$s
+necronomicon.gettingstarted=新手入门
+necronomicon.potentialenergy=位能
+necronomicon.turnupindicator=翻转 %2$s 的 %1$s
 
 #Necronomicon Text
 #Note: the maximum amount of letters per string is 368
@@ -335,9 +335,9 @@ necronomicon.text.materials.ethaxium.1=伊桑斯石是奥穆索里的常用的�
 necronomicon.text.materials.ethaxium.2=传说伊桑斯石是由灵魂构成的, 这能解释为什么它如此难以破坏. 也难怪扎哈尔会用这来建筑神殿城市.
 necronomicon.text.materials.darkethaxium.1=黑暗伊桑斯石是伊桑斯石的强化版本. 由普通的伊桑斯石和奥穆索石头结合成. 黑暗伊桑斯石比普通的更为坚硬.
 necronomicon.text.materials.darkethaxium.2=这种材料只在扎哈尔神殿里使用.
-necronomicon.text.materials.ritualaltar.1=The Ritual Altar is the main component in performing rituals. It's used by shift right-clicking on it with a Necronomicon that has sufficient Potential Energy. For successful rituals, the nearby Ritual Pedestals will need the correct offerings placed on them.
-necronomicon.text.materials.ritualpedestal.1=Ritual Pedestals are used to place offerings when performing rituals. This is done by interacting with the pedestal while holding the offering you wish to place.
-necronomicon.text.materials.monolithstone.1=Monolith Stone is a material used to some extent with Potential Energy. It's origins are unknown, other than that Shoggoths are capable of creating it. It can be obtained from Monoliths or Shoggoth Lairs scattered about.
+necronomicon.text.materials.ritualaltar.1=仪式祭坛是进行仪式的主要部分. 通过手持有足够位能的死灵之书并按住shift右击仪式祭坛. 除了足够的位能外, 周围的仪式基座还需要正确的物品摆放在它们上面.
+necronomicon.text.materials.ritualpedestal.1=仪式基座是用来摆放用作仪式的物品. 手持物品右击仪式基座即可.
+necronomicon.text.materials.monolithstone.1=某种意义上来说巨石块是一种用于位能的材料. 它的来源未知, 并非由修格斯创造. 能从巨石或者修格斯巢穴挖掘获得.
 
 necronomicon.text.crafting.coraliuminfusedstone.1=蕴含珊瑚的石头是由珊瑚宝石团簇和石头合成. 这三种团簇能是任何规格的, 但必须加起来要到⑨.
 necronomicon.text.crafting.coraliuminfusedstone.2=如果你用一个有9个宝石的团簇, 合成时用石头围绕它一圈而不是两行. 那么这个方块在被破坏 (或者烧炼) 你会获得珊瑚珍珠.
@@ -394,10 +394,10 @@ necronomicon.text.crafting.energypedestal.1=能量基座是由巨石块, 一个�
 necronomicon.text.crafting.energypedestal.2=这个方块是一个用作收集位能的工具. 如果你将雕像放在它的3格方块距离处(在x或z轴), 它们会快速地转化能量. 将一本死灵之书(或者别的能保存位能的物品)放在它的上面来抽取能量.
 necronomicon.text.crafting.dreadium.1=恐惧锭能通过许多方式来获得. 第一个方法是嬗变深渊恐惧碎片(由恐惧守卫掉落).
 necronomicon.text.crafting.dreadium.2=当你有足够的恐惧锭就能合成结晶器, 你能结晶化恐惧材料来获得恐惧结晶 (大多数碎片你都能结合成能被嬗变为恐惧锭的结晶).
-necronomicon.text.crafting.monolithpillar.1=A Monolith Stone Pillar is crafted with Monolith Stone. It's primary use is to amplify the range of Potential Energy Manipulators (statues for example).
-necronomicon.text.crafting.ritualcharm.1=A Ritual Charm is crafted with Gold Ingots and a Diamond. By itself it has no effect, but through rituals it can amplify various stats of Potential Energy Manipulators.
-necronomicon.text.crafting.sacrificialaltar.1=A Sacrificial Altar is crafted with Torches, Monolith Stone, A Shadow Gem and a Coralium Pearl. They convert life-force into Potential Energy.
-necronomicon.text.crafting.sacrificialaltar.2=When a entity is targeted, it will emit smoke particles. Once the entity dies, an amount of PE equal to it's max health will be collected. It only targets non-undead adult entities that aren't players. It should be noted that the altar goes on a cooldown after collecting a certain amount of PE, preventing collection for a minute.
+necronomicon.text.crafting.monolithpillar.1=巨石柱是由巨石块合成. 它的主要用途是扩大位能操纵器的范围 (例如雕像).
+necronomicon.text.crafting.ritualcharm.1=仪式符咒由金粒和一个钻石合成. 单纯的符咒没有任何用途, 但是通过仪式能扩展位能操纵器的不同状态.
+necronomicon.text.crafting.sacrificialaltar.1=献祭祭坛由火把, 巨石块, 一个阴影宝石和一个珊瑚珍珠合成. 能将生命能量变为位能.
+necronomicon.text.crafting.sacrificialaltar.2=当一个生物作为目标时, 它会发出烟雾粒子. 在生物死后, 根据它的最大生命值会获得一定数量的位能. 只能把不包括玩家的非不死的成年生物作为目标. 需要注意的是祭坛在收集一定量的位能后需要冷却, 有一分钟的时间不能收集.
 
 necronomicon.text.overworld.progression.1=要想到达深渊荒芜之地, 你必须合成一把门钥匙, 这需要你旅行过下界和黑暗之地和水域. 水域可以是沼泽或者海洋.
 necronomicon.text.overworld.progression.2=从下界你需要获得2根烈焰棒, 最好是更多的留备以后用. 从黑暗之地你需要杀死活阴影来获得阴影宝石. 它们最有可能在黑暗之地山脉群落找到. 推荐获得一把撕裂法杖来更快获取阴影宝石(更多信息在特殊材料章节).
@@ -484,19 +484,19 @@ necronomicon.text.rituals.1=要想开始进行仪式你必须创造一个祭坛�
 necronomicon.text.rituals.2=包括: 圆石, 黑暗圆石, 深渊石砖, 珊瑚石砖, 恐惧石砖,深渊锭石砖, 伊桑斯砖和黑暗伊桑斯砖. 这些材料只能在它们特定的维度里使用 (例如. 圆石和黑暗圆石在主世界, 深渊石砖和珊瑚石砖在深渊荒芜之地).
 necronomicon.text.rituals.3=要构建祭坛, 简单将方块摆成上述形式 (保证红色区域清空) 然后手持死灵之书按住shift 右击中心方块.
 necronomicon.text.rituals.4=然后, 你能开始举行仪式! 要进行一个仪式, 将物品放在基座上然后手持死灵之书按住shift右击祭坛.
-necronomicon.text.rituals.5=When peforming, the pedestals project smoke towards the altar. Rituals where you gain objects always end with a bolt of lightning striking the altar.
+necronomicon.text.rituals.5=仪式进行时, 基座会发出射向祭坛的烟雾. 最终仪式获得物品的地方会有一束闪电击中祭坛.
 necronomicon.text.rituals.6=要进行仪式需要位能(每个仪式入口会显示出需要多少). 位能是一种纯净形式的来源于存在于更高维度里的未开发的能量. 主要用作燃料祭品来自旧日支配者(任何仪式).放在修格斯巨石上的雕像据说能适合来抽取它.
 
-necronomicon.text.pe.1=Potential Energy (PE) is a new form of energy presented in AbyssalCraft. It originates from a higher plane of existence (where no mortal has wandered), and can only be collected by tapping into Ley Lines using various methods. There exist objects capable of doing so, which will be explained here.
-necronomicon.text.pe.2=A good place to start obtaining materials required to create some of the PE collecting objects is Shoggoth Lairs, found in swamps and rivers.
-necronomicon.text.pe.3=Shoggoth Monoliths are also constructed with Monolith Stone (hence the name), while having statues placed on them. These statues can collect PE.
-necronomicon.text.pe.4=The statues come in different shapes, all depicting Great Old Ones. Standing close to one while holding a Necronomicon allows it to transport PE to you.
-necronomicon.text.pe.5=It should be noted that you harvesting PE isn't appreciated. This causes disruptions to occur (displayed by a bolt of lightning striking the statue, or other PE manipulator). Disruptions are random events that can affect the player, other entities or the environment. Their purpose is to punish those who tries to drain PE from the higher plane.
-necronomicon.text.pe.6=One way to boost the efficiency of statues (and other PE manipulators) is through the use of Ritual Charms. They can boost various stats (check the tooltip).
-necronomicon.text.pe.7=You can also craft a Energy Pedestal, which can collect PE from statues (and other PE manipulators) that are placed 3 blocks from the pedestal.
-necronomicon.text.pe.8=Along with the Energy Pedestal there's the Sacrificial Altar, which can convert life-force from dying entities into PE (targeted entities emit smoke).
-necronomicon.text.pe.9=If the PE production still is too slow, you can also upgrade Energy Pedestals and Sacrificial Altars through infusion rituals.
-necronomicon.text.pe.10=Upon reaching Omothol, you will be able to create deity-specific Ritual Charms (with an Abyssalnomicon), or buy them from Remnant Priests. Those charms will give an additional boost if used on manipulators associated with the same deity as the one displayed on the charm.
+necronomicon.text.pe.1=位能(PE)是在深渊国度里新的一种能量. 来源于一个更高的维度(一个没有人类存在的地方), 只能通过用各种方法转变为镭射线来收集. 存在多种物品能做到, 接下来会解释.
+necronomicon.text.pe.2=一个好的地方来开始获得材料需要创造一些位能收集物品是修格斯巢穴, 修格斯巢穴能在沼泽和河流找到.
+necronomicon.text.pe.3=修格斯巨石是由巨石块(由此得名)构筑的, 把雕像放在修格斯巨石块之间就能收集位能.
+necronomicon.text.pe.4=雕像有不同的形状, 全部都是描绘旧日支配者. 手持死灵之书靠近雕像就会有位能转移到你身上.
+necronomicon.text.pe.5=需要注意的是你去收集位能并不合适. 这会造成污染发生(表现为一束闪电击中雕像或其他位能操纵器). 污染是影响玩家, 其它生物和环境的随机事件. 目的是惩罚那些试图从更高维度抽取位能的人.
+necronomicon.text.pe.6=一个加速雕像(其它位能操纵器也是)效率的方式是使用仪式符咒. 能加速不同的效果(可看工具提示).
+necronomicon.text.pe.7=你还能合成一个能量基座, 能从雕像(其它位能操纵器也是)收集位能, 雕像需要放置在距离基座3格的地方.
+necronomicon.text.pe.8=与能量基座一同的还有献祭祭坛, 献祭祭坛能将生物(目标生物会有烟雾效果)死亡时的生命能量转变为位能.
+necronomicon.text.pe.9=如果位能的产生依旧很缓慢, 你还能通过注入仪式升级能量基座和献祭祭坛.
+necronomicon.text.pe.10=一旦到达奥穆索, 你还能创造特定神祗仪式符咒(用深渊死灵之书), 或者从残存者祭司处购买. 这些符咒会给予额外加速如果使用在关联了与符咒上面显示的神祗相同神祗的操纵器上.
 
 necronomicon.text.machines.info=查看信息章节来获得有关不同机器的信息, 或者其他章节来获得特定机器的合成表. 合成表并没有以任何方式进行分类.
 
@@ -624,22 +624,22 @@ ac.ritual.yogsothothCharm=尤格·索托斯符咒
 ac.ritual.yogsothothCharm.desc=一个尤格·索托斯符咒能通过将尤格·索托斯钱币注入到一个仪式符咒里获得.
 ac.ritual.shubniggurathCharm=舒卜·尼古拉斯符咒
 ac.ritual.shubniggurathCharm.desc=一个舒卜·尼古拉斯符咒能通过将舒卜·尼古拉斯钱币注入到一个仪式符咒里获得.
-ac.ritual.epOWupgrade=Overworld Energy Pedestal
-ac.ritual.epOWupgrade.desc=A Overworld Energy Pedestal is created by infusing a Energy Pedestal with Cobblestone, Darkstone Cobblestone, Shadow Gem Shards and Coralium Gems.
-ac.ritual.epAWupgrade=Abyssal Wasteland Energy Pedestal
-ac.ritual.epAWupgrade.desc=A Abyssal Wasteland Energy Pedestal is created by infusing a Overworld Energy Pedestal with Abyssal Stone Bricks, Coralium Bricks, Shadow Gem Shards and Coralium Gems.
-ac.ritual.epDLupgrade=Dreadlands Energy Pedestal
-ac.ritual.epDLupgrade.desc=A Dreadlands Energy Pedestal is created by infusing a Abyssal Wasteland Energy Pedestal with Dreadstone Bricks, Abyssalnite Stone Bricks, Shadow Gem Shards and Coralium Gems.
-ac.ritual.epOMTupgrade=Omothol Energy Pedestal
-ac.ritual.epOMTupgrade.desc=A Omothol Energy Pedestal is created by infusing a Dreadlands Energy Pedestal with Ethaxium Bricks, Dark Ethaxium Bricks, Shadow Gem Shards and Coralium Gems.
-ac.ritual.saOWupgrade=Overworld Sacrificial Altar
-ac.ritual.saOWupgrade.desc=A Overworld Sacrificial Altar is created by infusing a Sacrificial Altar with Cobblestone, Darkstone Cobblestone, Shadow Gem Shards and Coralium Gems.
-ac.ritual.saAWupgrade=Abyssal Wasteland Sacrificial Altar
-ac.ritual.saAWupgrade.desc=A Abyssal Wasteland Sacrificial Altar is created by infusing a Overworld Sacrificial Altar with Abyssal Stone Bricks, Coralium Bricks, Shadow Gem Shards and Coralium Gems.
-ac.ritual.saDLupgrade=Dreadlands Sacrificial Altar
-ac.ritual.saDLupgrade.desc=A Dreadlands Sacrificial Altar is created by infusing a Abyssal Wasteland Sacrificial Altar with Dreadstone Bricks, Abyssalnite Stone Bricks, Shadow Gem Shards and Coralium Gems.
-ac.ritual.saOMTupgrade=Omothol Sacrificial Altar
-ac.ritual.saOMTupgrade.desc=A Omothol Sacrificial is created by infusing a Dreadlands Sacrificial Altar with Ethaxium Bricks, Dark Ethaxium Bricks, Shadow Gem Shards and Coralium Gems.
+ac.ritual.epOWupgrade=主世界能量基座
+ac.ritual.epOWupgrade.desc=主世界能量基座能通过将圆石, 黑暗圆石, 阴影宝石碎片和珊瑚宝石注入到一个能量基座里获得.
+ac.ritual.epAWupgrade=深渊荒芜之地能量基座
+ac.ritual.epAWupgrade.desc=深渊荒芜之地能量基座能通过将深渊石砖, 珊瑚石砖, 阴影宝石碎片和珊瑚宝石注入到一个主世界能量基座里获得.
+ac.ritual.epDLupgrade=恐惧之地能量基座
+ac.ritual.epDLupgrade.desc=恐惧之地能量基座能通过将恐惧石砖, 深渊石砖, 阴影宝石碎片和珊瑚宝石注入到一个深渊荒芜之地能量基座里获得.
+ac.ritual.epOMTupgrade=奥穆索能量基座
+ac.ritual.epOMTupgrade.desc=奥穆索能量基座能通过将伊桑斯石砖, 黑暗伊桑斯石砖, 阴影宝石碎片和珊瑚宝石注入到一个恐惧之地能量基座里获得.
+ac.ritual.saOWupgrade=主世界献祭祭坛
+ac.ritual.saOWupgrade.desc=主世界献祭祭坛能通过将圆石, 黑暗圆石, 阴影宝石碎片和珊瑚宝石注入到一个献祭祭坛里获得.
+ac.ritual.saAWupgrade=深渊荒芜之地献祭祭坛
+ac.ritual.saAWupgrade.desc=深渊荒芜之地献祭祭坛能通过将深渊石砖, 珊瑚石砖, 阴影宝石碎片和珊瑚宝石注入到一个主世界献祭祭坛里获得.
+ac.ritual.saDLupgrade=恐惧之地献祭祭坛
+ac.ritual.saDLupgrade.desc=恐惧之地献祭祭坛能通过将恐惧石砖, 深渊石砖, 阴影宝石碎片和珊瑚宝石注入到一个深渊荒芜之地献祭祭坛里获得.
+ac.ritual.saOMTupgrade=奥穆索献祭祭坛
+ac.ritual.saOMTupgrade.desc=奥穆索献祭祭坛能通过将伊桑斯石砖, 黑暗伊桑斯石砖, 阴影宝石碎片和珊瑚宝石注入到一个恐惧之地献祭祭坛里获得.
 
 #Configuration
 ac_dimensions=维度
@@ -658,8 +658,8 @@ ac_potion=药水
 ac_potion.tooltip=药水ID设置
 ac_shoggoth=修格斯分泌物
 ac_shoggoth.tooltip=修格斯分泌物设置
-ac_worldgen=Worldgen
-ac_worldgen.tooltip=Worldgen configuration
+ac_worldgen=世界生成
+ac_worldgen.tooltip=世界生成设置
 
 #Damagesources
 death.attack.coralium=%1$s 由于珊瑚侵染而死亡
@@ -853,15 +853,15 @@ tile.monolithstone.name=巨石块
 tile.shoggothbiomass.name=修格斯生物质
 tile.energypedestal.name=能量基座
 tile.monolithpillar.name=巨石柱
-tile.sacrificialaltar.name=Sacrificial Altar
-tile.tieredenergypedestal.0.name=Overworld Energy Pedestal
-tile.tieredenergypedestal.1.name=Abyssal Wasteland Energy Pedestal
-tile.tieredenergypedestal.2.name=Dreadlands Energy Pedestal
-tile.tieredenergypedestal.3.name=Omothol Energy Pedestal
-tile.tieredsacrificialaltar.0.name=Overworld Sacrificial Altar
-tile.tieredsacrificialaltar.1.name=Abyssal Wasteland Sacrificial Altar
-tile.tieredsacrificialaltar.2.name=Dreadlands Sacrificial Altar
-tile.tieredsacrificialaltar.3.name=Omothol Sacrificial Altar
+tile.sacrificialaltar.name=献祭祭坛
+tile.tieredenergypedestal.0.name=主世界能量基座
+tile.tieredenergypedestal.1.name=深渊荒芜之地能量基座
+tile.tieredenergypedestal.2.name=恐惧之地能量基座
+tile.tieredenergypedestal.3.name=奥穆索能量基座
+tile.tieredsacrificialaltar.0.name=主世界献祭祭坛
+tile.tieredsacrificialaltar.1.name=深渊荒芜之地献祭祭坛
+tile.tieredsacrificialaltar.2.name=恐惧之地献祭祭坛
+tile.tieredsacrificialaltar.3.name=奥穆索献祭祭坛
 
 #Items
 item.devsword.name=恶魔之刃
