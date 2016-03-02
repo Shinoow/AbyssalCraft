@@ -577,11 +577,11 @@ public class ModelSacthoth extends ModelBase {
 			rightarm1.rotateAngleX += -((float)Math.PI / 5F);
 			leftarm1.rotateAngleX += -((float)Math.PI / 5F);
 
-			rightleg.rotateAngleX = -((float)Math.PI * 2F / 5F);
 			leftleg.rotateAngleX = -((float)Math.PI * 2F / 5F);
+			rightleg.rotateAngleX = -((float)Math.PI * 2F / 5F);
 
-			rightleg.rotateAngleY = (float)Math.PI / 10F;
-			leftleg.rotateAngleY = -((float)Math.PI / 10F);
+			leftleg.rotateAngleY = (float)Math.PI / 10F;
+			rightleg.rotateAngleY = -((float)Math.PI / 10F);
 		}
 	}
 

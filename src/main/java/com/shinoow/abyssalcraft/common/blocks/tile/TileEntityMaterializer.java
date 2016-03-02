@@ -21,11 +21,6 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.IChatComponent;
 import net.minecraft.util.ITickable;
 
-import java.util.Iterator;
-import java.util.List;
-
-import com.shinoow.abyssalcraft.api.recipe.MaterializerRecipes;
-
 public class TileEntityMaterializer extends TileEntity implements ISidedInventory, ITickable {
 
 	private static final int[] slotsTop = new int[] {0};
@@ -249,18 +244,18 @@ public class TileEntityMaterializer extends TileEntity implements ISidedInventor
 
 	private void test()
 	{
-		if (materializerItemStacks[0] != null)
-		{
-			List<ItemStack> list = MaterializerRecipes.instance().getMaterializationResult(materializerItemStacks[0]);
-
-			if(list != null){
-				Iterator<ItemStack> iter = list.iterator();
-
-				for(int i = 2; i < materializerItemStacks.length; i++)
-					if(iter.hasNext())
-						materializerItemStacks[i] = iter.next();
-			}
-		}
+		//		if (materializerItemStacks[0] != null)
+		//		{
+		//			List<ItemStack> list = MaterializerRecipes.instance().getMaterializationResult(materializerItemStacks[0]);
+		//
+		//			if(list != null){
+		//				Iterator<ItemStack> iter = list.iterator();
+		//
+		//				for(int i = 2; i < materializerItemStacks.length; i++)
+		//					if(iter.hasNext())
+		//						materializerItemStacks[i] = iter.next();
+		//			}
+		//		}
 	}
 
 	/**

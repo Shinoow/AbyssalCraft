@@ -26,7 +26,8 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraft.world.biome.BiomeGenOcean;
+import net.minecraftforge.common.BiomeDictionary;
+import net.minecraftforge.common.BiomeDictionary.Type;
 import net.minecraftforge.fluids.BlockFluidClassic;
 import net.minecraftforge.oredict.OreDictionary;
 
@@ -78,7 +79,7 @@ public class BlockCLiquid extends BlockFluidClassic {
 						&& world.getBlockState(new BlockPos(pos.getX(), pos.getY()+1, pos.getZ())).getBlock() != this && world.getBlockState(new BlockPos(pos.getX(), pos.getY()+1, pos.getZ())).getBlock() != AbyssalCraft.anticwater)
 					world.setBlockState(new BlockPos(pos.getX(), pos.getY()+1, pos.getZ()), getDefaultState());
 			} else {
-				if(world.getBiomeGenForCoords(pos) instanceof BiomeGenOcean && world.getBlockState(pos) == this)
+				if(BiomeDictionary.isBiomeOfType(world.getBiomeGenForCoords(pos), Type.OCEAN) && world.getBlockState(pos).getBlock() == this)
 					if(AbyssalCraft.destroyOcean)
 						world.setBlockState(pos, getDefaultState());
 					else world.setBlockState(pos, Blocks.cobblestone.getDefaultState());
@@ -111,7 +112,10 @@ public class BlockCLiquid extends BlockFluidClassic {
 					world.setBlockState(pos, AbyssalCraft.AbyDiaOre.getDefaultState());
 				else world.setBlockState(pos, AbyssalCraft.AbyPCorOre.getDefaultState());
 			else if(stones.contains(world.getBlockState(pos).getBlock()))
-				world.setBlockState(pos, AbyssalCraft.abystone.getDefaultState());
+				if(BiomeDictionary.isBiomeOfType(world.getBiomeGenForCoords(pos), Type.OCEAN)){
+					if(world.getBlockState(pos).getBlock() != Blocks.cobblestone)
+						world.setBlockState(pos, AbyssalCraft.abystone.getDefaultState());
+				}else world.setBlockState(pos, AbyssalCraft.abystone.getDefaultState());
 			else if(bricks.contains(world.getBlockState(pos).getBlock()))
 				world.setBlockState(pos, AbyssalCraft.abybrick.getDefaultState());
 		}

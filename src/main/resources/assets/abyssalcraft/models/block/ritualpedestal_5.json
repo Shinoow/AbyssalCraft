@@ -1,6 +1,7 @@
 {
 	"parent": "abyssalcraft:block/ritualpedestal",
 	"textures": {
-		"0": "abyssalcraft:blocks/abydrsb"
+		"0": "abyssalcraft:blocks/abydrsb",
+		"1": "abyssalcraft:blocks/ritualpedestal/overlay_5"
 	}
 }

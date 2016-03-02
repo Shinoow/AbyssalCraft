@@ -81,9 +81,9 @@ public class EntityDragonMinion extends EntityMob implements IEntityMultiPart, I
 
 	public EntityDragonMinion(World par1World) {
 		super(par1World);
-		dragonPartArray = new EntityDragonPart[] {dragonPartHead = new EntityDragonPart(this, "head", 4.0F, 4.0F), dragonPartBody = new EntityDragonPart(this, "body", 6.0F, 6.0F), dragonPartTail1 = new EntityDragonPart(this, "tail", 2.0F, 2.0F), dragonPartTail2 = new EntityDragonPart(this, "tail", 2.0F, 2.0F), dragonPartTail3 = new EntityDragonPart(this, "tail", 2.0F, 2.0F), dragonPartWing1 = new EntityDragonPart(this, "wing", 2.0F, 2.0F), dragonPartWing2 = new EntityDragonPart(this, "wing", 2.0F, 2.0F)};
+		dragonPartArray = new EntityDragonPart[] {dragonPartHead = new EntityDragonPart(this, "head", 3.0F, 3.0F), dragonPartBody = new EntityDragonPart(this, "body", 4.0F, 4.0F), dragonPartTail1 = new EntityDragonPart(this, "tail", 2.0F, 2.0F), dragonPartTail2 = new EntityDragonPart(this, "tail", 2.0F, 2.0F), dragonPartTail3 = new EntityDragonPart(this, "tail", 2.0F, 2.0F), dragonPartWing1 = new EntityDragonPart(this, "wing", 2.0F, 2.0F), dragonPartWing2 = new EntityDragonPart(this, "wing", 2.0F, 2.0F)};
 		setHealth(getMaxHealth());
-		setSize(7.0F, 3.0F);
+		setSize(8.0F, 4.0F);
 		noClip = true;
 		targetY = 100.0D;
 	}
@@ -318,9 +318,9 @@ public class EntityDragonMinion extends EntityMob implements IEntityMultiPart, I
 
 			if (!worldObj.isRemote && hurtTime == 0)
 			{
-				attackEntitiesInList(worldObj.getEntitiesWithinAABBExcludingEntity(this, dragonPartWing1.getEntityBoundingBox().expand(2.0D, 1.0D, 2.0D).offset(0.0D, -3.0D, 0.0D)));
-				attackEntitiesInList(worldObj.getEntitiesWithinAABBExcludingEntity(this, dragonPartWing2.getEntityBoundingBox().expand(2.0D, 1.0D, 2.0D).offset(0.0D, -3.0D, 0.0D)));
-				attackEntitiesInList(worldObj.getEntitiesWithinAABBExcludingEntity(this, dragonPartHead.getEntityBoundingBox().expand(0.5D, 0.5D, 0.5D)));
+				attackEntitiesInList(worldObj.getEntitiesWithinAABBExcludingEntity(this, dragonPartWing1.getEntityBoundingBox().expand(1.0D, 0.5D, 1.0D).offset(0.0D, -0.5D, 0.0D)));
+				attackEntitiesInList(worldObj.getEntitiesWithinAABBExcludingEntity(this, dragonPartWing2.getEntityBoundingBox().expand(1.0D, 0.5D, 1.0D).offset(0.0D, -0.5D, 0.0D)));
+				attackEntitiesInList(worldObj.getEntitiesWithinAABBExcludingEntity(this, dragonPartHead.getEntityBoundingBox().expand(0.25D, 0.25D, 0.25D)));
 			}
 
 			double[] adouble = getMovementOffsets(5, 1.0F);

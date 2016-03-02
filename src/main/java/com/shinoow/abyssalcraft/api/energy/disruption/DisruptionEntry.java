@@ -76,9 +76,7 @@ public abstract class DisruptionEntry {
 	/**
 	 * This is where all the evil things happen
 	 * @param world Current World
-	 * @param x X-Coordinate
-	 * @param y Y-Coordinate
-	 * @param z Z-Coodrinate
+	 * @param pos Current BlockPos
 	 * @param players Nearby Players (16 block range or larger)
 	 */
 	public abstract void disrupt(World world, BlockPos pos, List<EntityPlayer> players);

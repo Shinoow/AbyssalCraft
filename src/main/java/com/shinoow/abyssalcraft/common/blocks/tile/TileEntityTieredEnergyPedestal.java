@@ -24,12 +24,14 @@ import net.minecraft.util.ITickable;
 
 import com.shinoow.abyssalcraft.api.energy.IEnergyContainer;
 import com.shinoow.abyssalcraft.api.energy.IEnergyTransporter;
+import com.shinoow.abyssalcraft.common.util.ISingletonInventory;
 
-public class TileEntityTieredEnergyPedestal extends TileEntity implements IEnergyContainer, ITickable {
+public class TileEntityTieredEnergyPedestal extends TileEntity implements IEnergyContainer, ISingletonInventory, ITickable {
 
 	private ItemStack item;
 	private int rot;
 	private float energy;
+	private boolean isDirty;
 	Random rand = new Random();
 
 	@Override
@@ -70,6 +72,11 @@ public class TileEntityTieredEnergyPedestal extends TileEntity implements IEnerg
 	@Override
 	public void update()
 	{
+		if(isDirty){
+			worldObj.markBlockForUpdate(pos);
+			isDirty = false;
+		}
+
 		if(rot == 360)
 			rot = 0;
 		if(item != null)
@@ -104,11 +111,14 @@ public class TileEntityTieredEnergyPedestal extends TileEntity implements IEnerg
 		return rot;
 	}
 
+	@Override
 	public ItemStack getItem(){
 		return item;
 	}
 
+	@Override
 	public void setItem(ItemStack item){
+		isDirty = true;
 		this.item = item;
 	}
 

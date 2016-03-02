@@ -34,7 +34,6 @@ public class BlockHouse extends Block {
 	public BlockHouse() {
 		super(Material.wood);
 		setBlockBounds(0.2F, 0.0F, 0.2F, 0.8F, 0.8F, 0.8F);
-		//		setBlockTextureName("abyssalcraft:Crate");
 	}
 
 	@Override

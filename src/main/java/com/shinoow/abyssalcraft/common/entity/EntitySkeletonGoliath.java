@@ -39,7 +39,7 @@ public class EntitySkeletonGoliath extends EntityMob {
 
 	public EntitySkeletonGoliath(World par1World) {
 		super(par1World);
-		setSize(1.6F, 4.5F);
+		setSize(1.0F, 4.5F);
 		tasks.addTask(2, new EntityAIAttackOnCollide(this, EntityPlayer.class, 1.0D, true));
 		tasks.addTask(3, new EntityAIMoveTowardsRestriction(this, 1.0D));
 		tasks.addTask(4, new EntityAIWander(this, 1.0D));

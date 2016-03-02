@@ -12,44 +12,35 @@
 package com.shinoow.abyssalcraft.common.blocks;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockLeavesBase;
-import net.minecraft.block.material.Material;
+import net.minecraft.block.BlockLeaves;
+import net.minecraft.block.BlockPlanks.EnumType;
 import net.minecraft.block.properties.IProperty;
-import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.state.BlockState;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.BlockPos;
-import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.EnumWorldBlockLayer;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraftforge.common.IShearable;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
 
-public class BlockDLTLeaves extends BlockLeavesBase implements IShearable {
+public class BlockDLTLeaves extends BlockLeaves {
 
-	public static final PropertyBool DECAYABLE = PropertyBool.create("decayable");
-	public static final PropertyBool CHECK_DECAY = PropertyBool.create("check_decay");
-	int[] surroundings;
 	@SideOnly(Side.CLIENT)
 	protected int iconIndex;
 	@SideOnly(Side.CLIENT)
 	protected boolean isTransparent;
 
-	public BlockDLTLeaves()
-	{
-		super(Material.leaves , false);
-		setTickRandomly(true);
+	public BlockDLTLeaves() {
 		setCreativeTab(AbyssalCraft.tabDecoration);
 		setDefaultState(blockState.getBaseState().withProperty(CHECK_DECAY, Boolean.valueOf(true)).withProperty(DECAYABLE, Boolean.valueOf(true)));
 
@@ -58,123 +49,24 @@ public class BlockDLTLeaves extends BlockLeavesBase implements IShearable {
 	}
 
 	@Override
-	public void breakBlock(World worldIn, BlockPos pos, IBlockState state)
+	@SideOnly(Side.CLIENT)
+	public int getBlockColor()
 	{
-		int i = 1;
-		int j = i + 1;
-		int k = pos.getX();
-		int l = pos.getY();
-		int i1 = pos.getZ();
-
-		if (worldIn.isAreaLoaded(new BlockPos(k - j, l - j, i1 - j), new BlockPos(k + j, l + j, i1 + j)))
-			for (int j1 = -i; j1 <= i; ++j1)
-				for (int k1 = -i; k1 <= i; ++k1)
-					for (int l1 = -i; l1 <= i; ++l1)
-					{
-						BlockPos blockpos = pos.add(j1, k1, l1);
-						IBlockState iblockstate = worldIn.getBlockState(blockpos);
-
-						if (iblockstate.getBlock().isLeaves(worldIn, blockpos))
-							iblockstate.getBlock().beginLeavesDecay(worldIn, blockpos);
-					}
-	}
-
-	@Override
-	public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand)
-	{
-		if (!worldIn.isRemote)
-			if (state.getValue(CHECK_DECAY).booleanValue() && state.getValue(DECAYABLE).booleanValue())
-			{
-				int i = 4;
-				int j = i + 1;
-				int k = pos.getX();
-				int l = pos.getY();
-				int i1 = pos.getZ();
-				int j1 = 32;
-				int k1 = j1 * j1;
-				int l1 = j1 / 2;
-
-				if (surroundings == null)
-					surroundings = new int[j1 * j1 * j1];
-
-				if (worldIn.isAreaLoaded(new BlockPos(k - j, l - j, i1 - j), new BlockPos(k + j, l + j, i1 + j)))
-				{
-					BlockPos.MutableBlockPos blockpos$mutableblockpos = new BlockPos.MutableBlockPos();
-
-					for (int i2 = -i; i2 <= i; ++i2)
-						for (int j2 = -i; j2 <= i; ++j2)
-							for (int k2 = -i; k2 <= i; ++k2)
-							{
-								Block block = worldIn.getBlockState(blockpos$mutableblockpos.set(k + i2, l + j2, i1 + k2)).getBlock();
-
-								if (!block.canSustainLeaves(worldIn, blockpos$mutableblockpos.set(k + i2, l + j2, i1 + k2)))
-								{
-									if (block.isLeaves(worldIn, blockpos$mutableblockpos.set(k + i2, l + j2, i1 + k2)))
-										surroundings[(i2 + l1) * k1 + (j2 + l1) * j1 + k2 + l1] = -2;
-									else
-										surroundings[(i2 + l1) * k1 + (j2 + l1) * j1 + k2 + l1] = -1;
-								} else
-									surroundings[(i2 + l1) * k1 + (j2 + l1) * j1 + k2 + l1] = 0;
-							}
-
-					for (int i3 = 1; i3 <= 4; ++i3)
-						for (int j3 = -i; j3 <= i; ++j3)
-							for (int k3 = -i; k3 <= i; ++k3)
-								for (int l3 = -i; l3 <= i; ++l3)
-									if (surroundings[(j3 + l1) * k1 + (k3 + l1) * j1 + l3 + l1] == i3 - 1)
-									{
-										if (surroundings[(j3 + l1 - 1) * k1 + (k3 + l1) * j1 + l3 + l1] == -2)
-											surroundings[(j3 + l1 - 1) * k1 + (k3 + l1) * j1 + l3 + l1] = i3;
-
-										if (surroundings[(j3 + l1 + 1) * k1 + (k3 + l1) * j1 + l3 + l1] == -2)
-											surroundings[(j3 + l1 + 1) * k1 + (k3 + l1) * j1 + l3 + l1] = i3;
-
-										if (surroundings[(j3 + l1) * k1 + (k3 + l1 - 1) * j1 + l3 + l1] == -2)
-											surroundings[(j3 + l1) * k1 + (k3 + l1 - 1) * j1 + l3 + l1] = i3;
-
-										if (surroundings[(j3 + l1) * k1 + (k3 + l1 + 1) * j1 + l3 + l1] == -2)
-											surroundings[(j3 + l1) * k1 + (k3 + l1 + 1) * j1 + l3 + l1] = i3;
-
-										if (surroundings[(j3 + l1) * k1 + (k3 + l1) * j1 + l3 + l1 - 1] == -2)
-											surroundings[(j3 + l1) * k1 + (k3 + l1) * j1 + l3 + l1 - 1] = i3;
-
-										if (surroundings[(j3 + l1) * k1 + (k3 + l1) * j1 + l3 + l1 + 1] == -2)
-											surroundings[(j3 + l1) * k1 + (k3 + l1) * j1 + l3 + l1 + 1] = i3;
-									}
-				}
-
-				int l2 = surroundings[l1 * k1 + l1 * j1 + l1];
-
-				if (l2 >= 0)
-					worldIn.setBlockState(pos, state.withProperty(CHECK_DECAY, Boolean.valueOf(false)), 4);
-				else
-					destroy(worldIn, pos);
-			}
+		return 16777215;
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void randomDisplayTick(World worldIn, BlockPos pos, IBlockState state, Random rand)
+	public int getRenderColor(IBlockState state)
 	{
-		if (worldIn.canLightningStrike(pos.up()) && !World.doesBlockHaveSolidTopSurface(worldIn, pos.down()) && rand.nextInt(15) == 1)
-		{
-			double d0 = pos.getX() + rand.nextFloat();
-			double d1 = pos.getY() - 0.05D;
-			double d2 = pos.getZ() + rand.nextFloat();
-			worldIn.spawnParticle(EnumParticleTypes.DRIP_WATER, d0, d1, d2, 0.0D, 0.0D, 0.0D, new int[0]);
-		}
-	}
-
-	private void destroy(World worldIn, BlockPos pos)
-	{
-		dropBlockAsItem(worldIn, pos, worldIn.getBlockState(pos), 0);
-		worldIn.setBlockToAir(pos);
+		return 16777215;
 	}
 
 	@Override
-	public int quantityDropped(Random par1Random)
+	@SideOnly(Side.CLIENT)
+	public int colorMultiplier(IBlockAccess worldIn, BlockPos pos, int renderPass)
 	{
-		return par1Random.nextInt(20) == 0 ? 1 : 0;
+		return 16777215;
 	}
 
 	@Override
@@ -184,28 +76,12 @@ public class BlockDLTLeaves extends BlockLeavesBase implements IShearable {
 	}
 
 	@Override
-	public void dropBlockAsItemWithChance(World worldIn, BlockPos pos, IBlockState state, float chance, int fortune)
-	{
-		super.dropBlockAsItemWithChance(worldIn, pos, state, chance, fortune);
-	}
-
-	protected int getSaplingDropChance(IBlockState state)
-	{
-		return 20;
-	}
-
-	@Override
 	public boolean isOpaqueCube()
 	{
 		return !fancyGraphics;
 	}
 
 	@Override
-	public boolean isShearable(ItemStack item, IBlockAccess world, BlockPos pos)
-	{
-		return true;
-	}
-
 	@SideOnly(Side.CLIENT)
 	public void setGraphicsLevel(boolean fancy)
 	{
@@ -222,12 +98,6 @@ public class BlockDLTLeaves extends BlockLeavesBase implements IShearable {
 	}
 
 	@Override
-	public boolean isVisuallyOpaque()
-	{
-		return false;
-	}
-
-	@Override
 	public ArrayList<ItemStack> onSheared(ItemStack item, IBlockAccess world, BlockPos pos, int fortune)
 	{
 		ArrayList<ItemStack> ret = new ArrayList<ItemStack>();
@@ -236,11 +106,20 @@ public class BlockDLTLeaves extends BlockLeavesBase implements IShearable {
 	}
 
 	@Override
-	public void beginLeavesDecay(World world, BlockPos pos)
+	public List<ItemStack> getDrops(IBlockAccess world, BlockPos pos, IBlockState state, int fortune)
 	{
-		IBlockState state = world.getBlockState(pos);
-		if (!(Boolean)state.getValue(CHECK_DECAY))
-			world.setBlockState(pos, state.withProperty(CHECK_DECAY, true), 4);
+		List<ItemStack> ret = new java.util.ArrayList<ItemStack>();
+
+		Random rand = world instanceof World ? ((World)world).rand : RANDOM;
+
+		int count = quantityDropped(state, fortune, rand);
+		for(int i = 0; i < count; i++)
+		{
+			Item item = getItemDropped(state, rand, fortune);
+			if (item != null)
+				ret.add(new ItemStack(item, 1, damageDropped(state)));
+		}
+		return ret;
 	}
 
 	@Override
@@ -270,5 +149,11 @@ public class BlockDLTLeaves extends BlockLeavesBase implements IShearable {
 	protected BlockState createBlockState()
 	{
 		return new BlockState(this, new IProperty[] {CHECK_DECAY, DECAYABLE});
+	}
+
+	@Override
+	public EnumType getWoodType(int meta) {
+
+		return EnumType.OAK;
 	}
 }

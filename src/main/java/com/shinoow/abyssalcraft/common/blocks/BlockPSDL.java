@@ -13,30 +13,22 @@ package com.shinoow.abyssalcraft.common.blocks;
 
 import java.util.Random;
 
-import net.minecraft.block.BlockContainer;
+import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.world.World;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
-import com.shinoow.abyssalcraft.common.blocks.tile.TileEntityPSDL;
 
-public class BlockPSDL extends BlockContainer {
+public class BlockPSDL extends Block {
 
 	public BlockPSDL()
 	{
 		super(Material.rock);
-		setBlockBounds(0.1F, 0.0F, 0.1F, 0.8F, 0.7F, 0.8F);
+		setBlockBounds(0.2F, 0.0F, 0.2F, 0.8F, 1.0F, 0.8F);
 		this.setHarvestLevel("pickaxe", 5);
-	}
-
-
-	@Override
-	public TileEntity createNewTileEntity(World var1, int var2) {
-		return new TileEntityPSDL();
 	}
 
 	@Override
@@ -52,11 +44,6 @@ public class BlockPSDL extends BlockContainer {
 	}
 
 	@Override
-	public int getRenderType() {
-		return 2;
-	}
-
-	@Override
 	public void randomDisplayTick(World par1World, BlockPos pos, IBlockState state, Random par5Random)
 	{
 		super.randomDisplayTick(par1World, pos, state, par5Random);
@@ -65,17 +52,4 @@ public class BlockPSDL extends BlockContainer {
 			if (par5Random.nextInt(10) == 0)
 				par1World.spawnParticle(EnumParticleTypes.SMOKE_LARGE, pos.getX() + par5Random.nextFloat(), pos.getY() + 1.1F, pos.getZ() + par5Random.nextFloat(), 0.0D, 0.0D, 0.0D);
 	}
-
-	//	@Override
-	//	public boolean renderAsNormalBlock() {
-	//		return false;
-	//	}
-
-	//	@Override
-	//	public void onBlockPlacedBy(World par1World, BlockPos pos, IBlockState state, EntityLivingBase par5EntityLivingBase, ItemStack par6ItemStack)
-	//	{
-	//		int dir = MathHelper.floor_double(par5EntityLivingBase.rotationYaw * 4F / 360F + 0.5D) & 3;
-	//		par1World.setBlockMetadataWithNotify(par2, par3, par4, dir, 0);
-	//	}
-
 }

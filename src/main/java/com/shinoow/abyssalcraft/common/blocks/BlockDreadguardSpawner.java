@@ -25,6 +25,12 @@ public class BlockDreadguardSpawner extends BlockContainer {
 	}
 
 	@Override
+	public int getRenderType()
+	{
+		return 3;
+	}
+
+	@Override
 	public TileEntity createNewTileEntity(World var1, int var2) {
 		return new TileEntityDreadguardSpawner();
 	}

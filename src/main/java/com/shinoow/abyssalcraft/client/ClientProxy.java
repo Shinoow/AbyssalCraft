@@ -140,7 +140,6 @@ public class ClientProxy extends CommonProxy {
 
 	@Override
 	public void init(){
-		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityPSDL.class, new TileEntityPSDLRenderer());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityDGhead.class, new TileEntityDGheadRenderer());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityPhead.class, new TileEntityPheadRenderer());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityWhead.class, new TileEntityWheadRenderer());
@@ -162,6 +161,7 @@ public class ClientProxy extends CommonProxy {
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntitySacrificialAltar.class, new TileEntitySacrificialAltarRenderer());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityTieredEnergyPedestal.class, new TileEntityTieredEnergyPedestalRenderer());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityTieredSacrificialAltar.class, new TileEntityTieredSacrificialAltarRenderer());
+		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityJzaharSpawner.class, new TileEntityJzaharSpawnerRenderer());
 
 		//		MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(AbyssalCraft.PSDL), new Block3DRender(new TileEntityPSDLRenderer(), new TileEntityPSDL()));
 		//		MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(AbyssalCraft.Altar), new Block3DRender(new TileEntityAltarRenderer(), new TileEntityAltar()));
@@ -388,6 +388,7 @@ public class ClientProxy extends CommonProxy {
 		registerItemRender(AbyssalCraft.engravingNyarlathotep, 0);
 		registerItemRender(AbyssalCraft.engravingYogsothoth, 0);
 		registerItemRender(AbyssalCraft.engravingShubniggurath, 0);
+		registerItemRender(AbyssalCraft.gatekeeperEssence, 0);
 
 		registerItemRender(AbyssalCraft.Darkstone, 0);
 		registerItemRender(AbyssalCraft.Darkstone_cobble, 0);
@@ -479,7 +480,7 @@ public class ClientProxy extends CommonProxy {
 		registerItemRender(AbyssalCraft.transmutator_on, 0);
 		registerItemRender(AbyssalCraft.dreadguardspawner, 0);
 		registerItemRender(AbyssalCraft.chagarothspawner, 0);
-		registerItemRender(AbyssalCraft.chagarothfistspawner, 0);
+		registerItemRender(AbyssalCraft.jzaharspawner, 0);
 		registerItemRender(AbyssalCraft.DrTfence, 0);
 		registerItemRender(AbyssalCraft.nitreOre, 0);
 		registerItemRender(AbyssalCraft.AbyIroOre, 0);
@@ -550,6 +551,7 @@ public class ClientProxy extends CommonProxy {
 		registerItemRender(AbyssalCraft.tieredSacrificialAltar, 1, "tieredsacrificialaltar_1");
 		registerItemRender(AbyssalCraft.tieredSacrificialAltar, 2, "tieredsacrificialaltar_2");
 		registerItemRender(AbyssalCraft.tieredSacrificialAltar, 3, "tieredsacrificialaltar_3");
+		registerItemRender(AbyssalCraft.gatekeeperminionspawner, 0);
 
 		RenderPlayer render1 = Minecraft.getMinecraft().getRenderManager().getSkinMap().get("default");
 		render1.addLayer(new LayerStarSpawnTentacles(render1));

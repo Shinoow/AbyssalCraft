@@ -15,13 +15,26 @@ import java.util.Random;
 
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.entity.IEntityLivingData;
 import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.ai.EntityAIAttackOnCollide;
+import net.minecraft.entity.ai.EntityAIHurtByTarget;
+import net.minecraft.entity.ai.EntityAILeapAtTarget;
+import net.minecraft.entity.ai.EntityAILookIdle;
+import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
+import net.minecraft.entity.ai.EntityAISwimming;
+import net.minecraft.entity.ai.EntityAIWander;
+import net.minecraft.entity.ai.EntityAIWatchClosest;
+import net.minecraft.entity.monster.EntityIronGolem;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.monster.EntitySpider;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
+import net.minecraft.pathfinding.PathNavigate;
+import net.minecraft.pathfinding.PathNavigateClimber;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.BlockPos;
@@ -38,6 +51,28 @@ public class EntityAntiSpider extends EntityMob implements IAntiEntity {
 	{
 		super(par1World);
 		setSize(1.4F, 0.9F);
+		tasks.addTask(1, new EntityAISwimming(this));
+		tasks.addTask(3, new EntityAILeapAtTarget(this, 0.4F));
+		tasks.addTask(4, new AIAntiSpiderAttack(this, EntityPlayer.class));
+		tasks.addTask(4, new AIAntiSpiderAttack(this, EntityIronGolem.class));
+		tasks.addTask(5, new EntityAIWander(this, 0.8D));
+		tasks.addTask(6, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
+		tasks.addTask(6, new EntityAILookIdle(this));
+		targetTasks.addTask(1, new EntityAIHurtByTarget(this, false, new Class[0]));
+		targetTasks.addTask(2, new AIAntiSpiderTarget(this, EntityPlayer.class));
+		targetTasks.addTask(3, new AIAntiSpiderTarget(this, EntityIronGolem.class));
+	}
+
+	@Override
+	public double getMountedYOffset()
+	{
+		return height * 0.5F;
+	}
+
+	@Override
+	protected PathNavigate getNewNavigator(World worldIn)
+	{
+		return new PathNavigateClimber(this, worldIn);
 	}
 
 	@Override
@@ -61,23 +96,10 @@ public class EntityAntiSpider extends EntityMob implements IAntiEntity {
 	{
 		super.applyEntityAttributes();
 
-		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.800000011920929D);
+		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.30000001192092896D);
 		if(AbyssalCraft.hardcoreMode) getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(64.0D);
 		else getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(32.0D);
 	}
-
-	//	@Override
-	//	protected Entity findPlayerToAttack()
-	//	{
-	//		float f = getBrightness(1.0F);
-	//
-	//		if (f < 0.5F)
-	//		{
-	//			double d0 = 16.0D;
-	//			return worldObj.getClosestVulnerablePlayerToEntity(this, d0);
-	//		} else
-	//			return null;
-	//	}
 
 	@Override
 	protected String getLivingSound()
@@ -102,28 +124,6 @@ public class EntityAntiSpider extends EntityMob implements IAntiEntity {
 	{
 		playSound("mob.spider.step", 0.15F, 1.0F);
 	}
-
-	//	@Override
-	//	protected void attackEntity(Entity par1Entity, float par2)
-	//	{
-	//		float f1 = getBrightness(1.0F);
-	//
-	//		if (f1 > 0.5F && rand.nextInt(100) == 0)
-	//			entityToAttack = null;
-	//		else if (par2 > 2.0F && par2 < 6.0F && rand.nextInt(10) == 0)
-	//		{
-	//			if (onGround)
-	//			{
-	//				double d0 = par1Entity.posX - posX;
-	//				double d1 = par1Entity.posZ - posZ;
-	//				float f2 = MathHelper.sqrt_double(d0 * d0 + d1 * d1);
-	//				motionX = d0 / f2 * 0.5D * 0.800000011920929D + motionX * 0.20000000298023224D;
-	//				motionZ = d1 / f2 * 0.5D * 0.800000011920929D + motionZ * 0.20000000298023224D;
-	//				motionY = 0.4000000059604645D;
-	//			}
-	//		} else
-	//			super.attackEntity(par1Entity, par2);
-	//	}
 
 	@Override
 	protected Item getDropItem()
@@ -228,6 +228,60 @@ public class EntityAntiSpider extends EntityMob implements IAntiEntity {
 		}
 
 		return (IEntityLivingData)p_110161_1_1;
+	}
+
+	@Override
+	public float getEyeHeight()
+	{
+		return 0.65F;
+	}
+
+	static class AIAntiSpiderAttack extends EntityAIAttackOnCollide
+	{
+		public AIAntiSpiderAttack(EntityAntiSpider p_i45819_1_, Class <? extends Entity > targetClass)
+		{
+			super(p_i45819_1_, targetClass, 1.0D, true);
+		}
+
+		/**
+		 * Returns whether an in-progress EntityAIBase should continue executing
+		 */
+		@Override
+		public boolean continueExecuting()
+		{
+			float f = attacker.getBrightness(1.0F);
+
+			if (f >= 0.5F && attacker.getRNG().nextInt(100) == 0)
+			{
+				attacker.setAttackTarget((EntityLivingBase)null);
+				return false;
+			} else
+				return super.continueExecuting();
+		}
+
+		@Override
+		protected double func_179512_a(EntityLivingBase attackTarget)
+		{
+			return 4.0F + attackTarget.width;
+		}
+	}
+
+	static class AIAntiSpiderTarget<T extends EntityLivingBase> extends EntityAINearestAttackableTarget
+	{
+		public AIAntiSpiderTarget(EntityAntiSpider p_i45818_1_, Class<T> classTarget)
+		{
+			super(p_i45818_1_, classTarget, true);
+		}
+
+		/**
+		 * Returns whether the EntityAIBase should begin execution.
+		 */
+		@Override
+		public boolean shouldExecute()
+		{
+			float f = taskOwner.getBrightness(1.0F);
+			return f >= 0.5F ? false : super.shouldExecute();
+		}
 	}
 
 	public static class GroupData implements IEntityLivingData

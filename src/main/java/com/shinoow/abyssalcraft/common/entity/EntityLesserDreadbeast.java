@@ -28,6 +28,8 @@ import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
+import net.minecraft.pathfinding.PathNavigate;
+import net.minecraft.pathfinding.PathNavigateClimber;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.DamageSource;
@@ -70,6 +72,12 @@ public class EntityLesserDreadbeast extends EntityMob implements IDreadEntity, I
 			getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(300.0D);
 			getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(18.0D);
 		}
+	}
+
+	@Override
+	protected PathNavigate getNewNavigator(World worldIn)
+	{
+		return new PathNavigateClimber(this, worldIn);
 	}
 
 	@Override

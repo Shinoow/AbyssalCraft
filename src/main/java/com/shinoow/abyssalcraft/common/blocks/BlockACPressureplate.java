@@ -36,12 +36,14 @@ public class BlockACPressureplate extends BlockBasePressurePlate
 		super(par3Material);
 		sensitivity = par4EnumMobType;
 		this.setHarvestLevel(par5, par6);
+		setDefaultState(blockState.getBaseState().withProperty(POWERED, Boolean.valueOf(false)));
 	}
 
 	public BlockACPressureplate(String par2Str, Material par3Material, BlockACPressureplate.Sensitivity par4EnumMobType)
 	{
 		super(par3Material);
 		sensitivity = par4EnumMobType;
+		setDefaultState(blockState.getBaseState().withProperty(POWERED, Boolean.valueOf(false)));
 	}
 
 	@Override

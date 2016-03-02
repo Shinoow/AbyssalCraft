@@ -1,6 +1,7 @@
 {
 	"parent": "abyssalcraft:block/ritualpedestal",
 	"textures": {
-		"0": "abyssalcraft:blocks/cstonebrick"
+		"0": "abyssalcraft:blocks/cstonebrick",
+		"1": "abyssalcraft:blocks/ritualpedestal/overlay_3"
 	}
 }

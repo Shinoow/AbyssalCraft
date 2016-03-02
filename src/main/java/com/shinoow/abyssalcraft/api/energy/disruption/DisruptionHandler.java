@@ -76,9 +76,7 @@ public class DisruptionHandler {
 	 * Generates a Disruption
 	 * @param deity Deity tied to the manipulator
 	 * @param world Current World
-	 * @param x X-Coordinate of location
-	 * @param y Y-Coordinate of location
-	 * @param z Z-Coordinate of location
+	 * @param pos Current BlockPos
 	 * @param players Nearby players (16 block radius or larger)
 	 * 
 	 * @since 1.5

@@ -427,7 +427,15 @@ public class TileEntityTransmutator extends TileEntity implements ISidedInventor
 	@Override
 	public boolean canExtractItem(int par1, ItemStack par2ItemStack, EnumFacing face)
 	{
-		return par1 != 0 || par1 != 1 || par2ItemStack.getItem() == Items.bucket;
+		if (face == EnumFacing.DOWN && par1 == 1)
+		{
+			Item item = par2ItemStack.getItem();
+
+			if (item != Items.water_bucket && item != Items.bucket)
+				return false;
+		}
+
+		return true;
 	}
 
 	@Override

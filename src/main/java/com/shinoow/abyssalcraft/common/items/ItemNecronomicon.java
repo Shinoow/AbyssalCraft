@@ -24,7 +24,7 @@ import net.minecraft.world.World;
 import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.api.energy.IEnergyTransporter;
 import com.shinoow.abyssalcraft.common.blocks.BlockRitualAltar;
-import com.shinoow.abyssalcraft.common.blocks.tile.TileEntityRitualAltar;
+import com.shinoow.abyssalcraft.common.util.IRitualAltar;
 import com.shinoow.abyssalcraft.common.util.RitualUtil;
 import com.shinoow.abyssalcraft.common.util.SpecialTextUtil;
 
@@ -67,9 +67,9 @@ public class ItemNecronomicon extends ItemACBasic implements IEnergyTransporter 
 						player.addStat(AbyssalCraft.ritual, 1);
 						return true;
 					}
-			} else if(w.getTileEntity(pos) instanceof TileEntityRitualAltar)
+			} else if(w.getTileEntity(pos) instanceof IRitualAltar)
 				if(isOwner(player, is)){
-					TileEntityRitualAltar altar = (TileEntityRitualAltar) w.getTileEntity(pos);
+					IRitualAltar altar = (IRitualAltar) w.getTileEntity(pos);
 					altar.performRitual(w, pos, player);
 					return true;
 				}

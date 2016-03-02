@@ -12,7 +12,9 @@
 package com.shinoow.abyssalcraft.common.blocks;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
+import net.minecraft.util.IStringSerializable;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
 
@@ -49,5 +51,70 @@ public class BlockACBasic extends Block {
 		setResistance(resistance);
 		setStepSound(stepsound);
 		setCreativeTab(AbyssalCraft.tabBlock);
+	}
+
+	public static enum EnumType implements IStringSerializable
+	{
+		GENERIC(0, "generic", MapColor.airColor);
+
+		private static final EnumType[] META_LOOKUP = new EnumType[values().length];
+		private final int meta;
+		private final String name;
+		private final String unlocalizedName;
+		private final MapColor mapColor;
+
+		private EnumType(int meta, String name, MapColor mapColor)
+		{
+			this(meta, name, name, mapColor);
+		}
+
+		private EnumType(int meta, String name, String unlocalizedName, MapColor mapColor)
+		{
+			this.meta = meta;
+			this.name = name;
+			this.unlocalizedName = unlocalizedName;
+			this.mapColor = mapColor;
+		}
+
+		public int getMetadata()
+		{
+			return meta;
+		}
+
+		public MapColor func_181070_c()
+		{
+			return mapColor;
+		}
+
+		@Override
+		public String toString()
+		{
+			return name;
+		}
+
+		public static EnumType byMetadata(int meta)
+		{
+			if (meta < 0 || meta >= META_LOOKUP.length)
+				meta = 0;
+
+			return META_LOOKUP[meta];
+		}
+
+		@Override
+		public String getName()
+		{
+			return name;
+		}
+
+		public String getUnlocalizedName()
+		{
+			return unlocalizedName;
+		}
+
+		static
+		{
+			for (EnumType enumtype : values())
+				META_LOOKUP[enumtype.getMetadata()] = enumtype;
+		}
 	}
 }

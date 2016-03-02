@@ -24,9 +24,10 @@ import net.minecraft.entity.monster.*;
 import net.minecraft.entity.passive.*;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.pathfinding.PathNavigate;
+import net.minecraft.pathfinding.PathNavigateClimber;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.BlockPos;
@@ -101,6 +102,12 @@ public class EntityLesserShoggoth extends EntityMob implements ICoraliumEntity, 
 			getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(100.0D);
 			getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(8.0D);
 		}
+	}
+
+	@Override
+	protected PathNavigate getNewNavigator(World worldIn)
+	{
+		return new PathNavigateClimber(this, worldIn);
 	}
 
 	@Override
@@ -346,9 +353,20 @@ public class EntityLesserShoggoth extends EntityMob implements ICoraliumEntity, 
 	}
 
 	@Override
-	protected Item getDropItem()
+	protected void dropFewItems(boolean par1, int par2)
 	{
-		return new ItemStack(AbyssalCraft.shoggothFlesh, 1, getShoggothType()).getItem();
+		ItemStack item = new ItemStack(AbyssalCraft.shoggothFlesh, 1, getShoggothType());
+
+		if (item != null)
+		{
+			int i = rand.nextInt(3);
+
+			if (par2 > 0)
+				i += rand.nextInt(par2 + 1);
+
+			for (int j = 0; j < i; ++j)
+				entityDropItem(item, 0);
+		}
 	}
 
 	@Override

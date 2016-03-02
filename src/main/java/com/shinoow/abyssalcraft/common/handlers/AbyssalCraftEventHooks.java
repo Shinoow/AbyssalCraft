@@ -246,8 +246,6 @@ public class AbyssalCraftEventHooks {
 								if(l.getTagCompound() == null)
 									l.setTagCompound(compound);
 								l.getTagCompound().setTag("ench", tag);
-
-								event.craftMatrix.setInventorySlotContents(i, l);
 							}
 						}
 						else if(k.getItem() != null && k.getItem() instanceof ItemCrystalBag){
@@ -265,8 +263,6 @@ public class AbyssalCraftEventHooks {
 								if(l.getTagCompound() == null)
 									l.setTagCompound(compound);
 								l.getTagCompound().setTag("ItemInventory", items);
-
-								event.craftMatrix.setInventorySlotContents(i, l);
 							}
 						}
 						else if(k.getItem() != null && k.getItem() instanceof ItemNecronomicon){
@@ -288,8 +284,6 @@ public class AbyssalCraftEventHooks {
 									l.getTagCompound().setString("owner", owner);
 								if(energy != 0)
 									l.getTagCompound().setFloat("PotEnergy", energy);
-
-								event.craftMatrix.setInventorySlotContents(i, l);
 							}
 						}
 					}
@@ -369,8 +363,12 @@ public class AbyssalCraftEventHooks {
 				event.replacement = AbyssalCraft.Darkstoneslab1.getDefaultState();
 				event.setResult(Result.DENY);
 			}
-			if(event.original.getBlock() == Blocks.double_wooden_slab){
+			if(event.original.getBlock() == Blocks.double_stone_slab){
 				event.replacement = AbyssalCraft.Darkstoneslab2.getDefaultState();
+				event.setResult(Result.DENY);
+			}
+			if(event.original.getBlock() == Blocks.wooden_pressure_plate){
+				event.replacement = AbyssalCraft.DLTpplate.getDefaultState();
 				event.setResult(Result.DENY);
 			}
 		}

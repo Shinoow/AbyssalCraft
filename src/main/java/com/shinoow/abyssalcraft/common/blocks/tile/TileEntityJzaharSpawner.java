@@ -11,6 +11,9 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.common.blocks.tile;
 
+import java.util.List;
+
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
@@ -18,11 +21,12 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.MathHelper;
 
-import com.shinoow.abyssalcraft.common.entity.EntityChagarothFist;
+import com.shinoow.abyssalcraft.AbyssalCraft;
+import com.shinoow.abyssalcraft.common.entity.EntityJzahar;
 
-public class TileEntityChagarothFistSpawner extends TileEntity implements ITickable {
+public class TileEntityJzaharSpawner extends TileEntity implements ITickable {
 
-	private int activatingRangeFromPlayer = 16;
+	private int activatingRangeFromPlayer = 12;
 
 	@Override
 	public Packet getDescriptionPacket() {
@@ -35,16 +39,21 @@ public class TileEntityChagarothFistSpawner extends TileEntity implements ITicka
 		return worldObj.getClosestPlayer(pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D,
 				activatingRangeFromPlayer) != null &&
 				!worldObj.getClosestPlayer(pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D,
-						activatingRangeFromPlayer).capabilities.isCreativeMode;
+						activatingRangeFromPlayer).capabilities.isCreativeMode &&
+						worldObj.getClosestPlayer(pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D,
+								activatingRangeFromPlayer).posY >= pos.getY();
 	}
 
 	@Override
 	public void update() {
 		if (!worldObj.isRemote && isActivated()) {
-			EntityChagarothFist mob = new EntityChagarothFist(worldObj);
+			EntityJzahar mob = new EntityJzahar(worldObj);
 			mob.setLocationAndAngles(pos.getX(), pos.getY(), pos.getZ(), MathHelper.wrapAngleTo180_float(worldObj.rand.nextFloat() * 360.0F), 10.0F);
 			worldObj.spawnEntityInWorld(mob);
 			worldObj.setBlockToAir(pos);
+			List<EntityPlayer> players = worldObj.getEntitiesWithinAABB(EntityPlayer.class, mob.getEntityBoundingBox().expand(64, 64, 64));
+			for(EntityPlayer player : players)
+				player.addStat(AbyssalCraft.locateJzahar, 1);
 		}
 	}
 }

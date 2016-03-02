@@ -32,7 +32,9 @@ import net.minecraft.entity.ai.EntityAIHurtByTarget;
 import net.minecraft.entity.ai.EntityAILookIdle;
 import net.minecraft.entity.ai.EntityAIMoveTowardsRestriction;
 import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
+import net.minecraft.entity.ai.EntityAIOpenDoor;
 import net.minecraft.entity.ai.EntityAISwimming;
+import net.minecraft.entity.ai.EntityAITasks.EntityAITaskEntry;
 import net.minecraft.entity.ai.EntityAIWander;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.monster.EntityMob;
@@ -56,6 +58,7 @@ import net.minecraft.village.MerchantRecipe;
 import net.minecraft.village.MerchantRecipeList;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.ReflectionHelper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -75,7 +78,6 @@ public class EntityRemnant extends EntityMob implements IMerchant, IAntiEntity, 
 	private int timeUntilReset;
 	private boolean needsInitilization;
 	private int wealth;
-	private boolean isAngry;
 	private int timer;
 	private float field_82191_bN;
 	public static final Map<Item, Tuple> itemSellingList = new HashMap<Item, Tuple>();
@@ -85,8 +87,9 @@ public class EntityRemnant extends EntityMob implements IMerchant, IAntiEntity, 
 		super(par1World);
 		tasks.addTask(0, new EntityAISwimming(this));
 		tasks.addTask(3, new EntityAIAttackOnCollide(this, EntityLivingBase.class, 0.35D, false));
-		tasks.addTask(4, new EntityAIMoveTowardsRestriction(this, 0.35D));
-		tasks.addTask(5, new EntityAIWander(this, 0.35D));
+		tasks.addTask(4, new EntityAIOpenDoor(this, true));
+		tasks.addTask(5, new EntityAIMoveTowardsRestriction(this, 0.35D));
+		tasks.addTask(6, new EntityAIWander(this, 0.35D));
 		tasks.addTask(7, new EntityAILookIdle(this));
 		tasks.addTask(7, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
 		tasks.addTask(7, new EntityAIWatchClosest(this, EntityRemnant.class, 8.0F));
@@ -164,7 +167,7 @@ public class EntityRemnant extends EntityMob implements IMerchant, IAntiEntity, 
 	@Override
 	public boolean interact(EntityPlayer par1EntityPlayer)
 	{
-		if(isEntityAlive() && !par1EntityPlayer.isSneaking() && !isAngry)
+		if(isEntityAlive() && !par1EntityPlayer.isSneaking() && !isAngry())
 			if(EntityUtil.hasNecronomicon(par1EntityPlayer)){
 				if(!isTrading()){
 					if(!worldObj.isRemote){
@@ -256,10 +259,8 @@ public class EntityRemnant extends EntityMob implements IMerchant, IAntiEntity, 
 			worldObj.playSoundAtEntity(this, "abyssalcraft:remnant.scream", 3F, 1F);
 		}
 
-		isAngry = true;
-		timer = 0;
-		if(getAttackTarget() != null)
-			targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, getAttackTarget().getClass(), true));
+		setAngry();
+		setAttackAI();
 	}
 
 	@Override
@@ -270,7 +271,7 @@ public class EntityRemnant extends EntityMob implements IMerchant, IAntiEntity, 
 				setAttackTarget((EntityLivingBase) par1DamageSource.getEntity());
 				enrage(true, getAttackTarget());
 			}
-			if(!isAngry) enrage(true);
+			if(!isAngry()) enrage(true);
 			else enrage(rand.nextInt(10) == 0);
 		}
 		return super.attackEntityFrom(par1DamageSource, par2);
@@ -279,16 +280,14 @@ public class EntityRemnant extends EntityMob implements IMerchant, IAntiEntity, 
 	@Override
 	public void onLivingUpdate(){
 		super.onLivingUpdate();
-		if(isAngry){
-			if(getAttackTarget() != null)
-				targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, getAttackTarget().getClass(), true));
-			timer++;
-			if(timer == 2400){
-				isAngry = false;
-				if(getAttackTarget() != null)
-					targetTasks.removeTask(new EntityAINearestAttackableTarget(this, getAttackTarget().getClass(), true));
-			}
+		if(isAngry()){
+			setAttackAI();
+			timer--;
+			if(timer <= 0)
+				timer = 0;
 		}
+
+		if(!isAngry()) clearAttackAI();
 	}
 
 	@Override
@@ -297,7 +296,7 @@ public class EntityRemnant extends EntityMob implements IMerchant, IAntiEntity, 
 		super.writeEntityToNBT(par1NBTTagCompound);
 		par1NBTTagCompound.setInteger("Profession", getProfession());
 		par1NBTTagCompound.setInteger("Money", wealth);
-		par1NBTTagCompound.setBoolean("IsAngry", isAngry);
+		par1NBTTagCompound.setInteger("AngerTimer", timer);
 
 		if (tradingList != null)
 			par1NBTTagCompound.setTag("Offers", tradingList.getRecipiesAsTags());
@@ -309,7 +308,7 @@ public class EntityRemnant extends EntityMob implements IMerchant, IAntiEntity, 
 		super.readEntityFromNBT(par1NBTTagCompound);
 		setProfession(par1NBTTagCompound.getInteger("Profession"));
 		wealth = par1NBTTagCompound.getInteger("Money");
-		isAngry = par1NBTTagCompound.getBoolean("IsAngry");
+		timer = par1NBTTagCompound.getInteger("AngerTimer");
 
 		if (par1NBTTagCompound.hasKey("Offers", 10))
 		{
@@ -318,10 +317,54 @@ public class EntityRemnant extends EntityMob implements IMerchant, IAntiEntity, 
 		}
 	}
 
+	public boolean isAngry(){
+		return timer > 0;
+	}
+
+	public void setAngry(){
+		timer = 600;
+	}
+
+	private void clearAttackAI(){
+		if(getAttackTarget() != null)
+			setAttackTarget(null);
+		EntityAINearestAttackableTarget ai = fetchAI();
+		if(ai == null) return;
+		else targetTasks.removeTask(ai);
+		if(targetTasks.taskEntries.size() > 1)
+			clearAttackAI();
+	}
+
+	private void setAttackAI(){
+		if(getAttackTarget() != null){
+			Class temp = getAttackTarget().getClass();
+			EntityAINearestAttackableTarget ai = fetchAI();
+			if(ai != null){
+				if(temp != ReflectionHelper.findField(ai.getClass(), "targetClass", "field_75307_b").getDeclaringClass()){
+					targetTasks.removeTask(ai);
+					targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, temp, true));
+				}
+			} else targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, temp, true));
+		}
+	}
+
+	private EntityAINearestAttackableTarget fetchAI(){
+		for(EntityAITaskEntry entry : targetTasks.taskEntries)
+			if(entry.action instanceof EntityAINearestAttackableTarget)
+				return (EntityAINearestAttackableTarget) entry.action;
+		return null;
+	}
+
 	@Override
 	protected Item getDropItem()
 	{
 		return AbyssalCraft.eldritchScale;
+	}
+
+	@Override
+	protected boolean canDespawn()
+	{
+		return false;
 	}
 
 	@Override

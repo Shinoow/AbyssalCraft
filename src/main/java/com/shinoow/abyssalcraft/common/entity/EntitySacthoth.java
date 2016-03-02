@@ -32,6 +32,8 @@ import net.minecraft.entity.item.EntityXPOrb;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.pathfinding.PathNavigate;
+import net.minecraft.pathfinding.PathNavigateClimber;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.BlockPos;
@@ -67,6 +69,12 @@ public class EntitySacthoth extends EntityMob implements IBossDisplayData, IAnti
 		targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityPlayer.class, true));
 		ignoreFrustumCheck = true;
 		isImmuneToFire = true;
+	}
+
+	@Override
+	protected PathNavigate getNewNavigator(World worldIn)
+	{
+		return new PathNavigateClimber(this, worldIn);
 	}
 
 	@Override

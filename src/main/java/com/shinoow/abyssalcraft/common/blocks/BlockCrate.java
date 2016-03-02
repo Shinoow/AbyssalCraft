@@ -102,6 +102,12 @@ public class BlockCrate extends BlockContainer
 	}
 
 	@Override
+	public int getRenderType()
+	{
+		return 3;
+	}
+
+	@Override
 	public boolean onBlockActivated(World par1World, BlockPos pos, IBlockState state, EntityPlayer par5EntityPlayer, EnumFacing side, float par7, float par8, float par9)
 	{
 		if (par1World.isRemote)

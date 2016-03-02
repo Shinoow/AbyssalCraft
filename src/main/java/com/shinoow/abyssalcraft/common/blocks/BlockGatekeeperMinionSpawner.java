@@ -9,25 +9,29 @@
  * Contributors:
  *     Shinoow -  implementation
  ******************************************************************************/
-package com.shinoow.abyssalcraft.common.blocks.tile;
+package com.shinoow.abyssalcraft.common.blocks;
 
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.network.Packet;
-import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
+import net.minecraft.block.BlockContainer;
+import net.minecraft.block.material.Material;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.world.World;
 
-public class TileEntityPSDL extends TileEntity {
+import com.shinoow.abyssalcraft.common.blocks.tile.TileEntityGatekeeperMinionSpawner;
 
-	//	@Override
-	//	public boolean canUpdate()
-	//	{
-	//		return false;
-	//	}
+public class BlockGatekeeperMinionSpawner extends BlockContainer {
+
+	public BlockGatekeeperMinionSpawner() {
+		super(Material.rock);
+	}
 
 	@Override
-	public Packet getDescriptionPacket() {
-		NBTTagCompound nbtTag = new NBTTagCompound();
-		writeToNBT(nbtTag);
-		return new S35PacketUpdateTileEntity(pos, 1, nbtTag);
+	public int getRenderType()
+	{
+		return 3;
+	}
+
+	@Override
+	public TileEntity createNewTileEntity(World var1, int var2) {
+		return new TileEntityGatekeeperMinionSpawner();
 	}
 }

@@ -1,5 +1,5 @@
 {
-	"parent": "abyssalcraft:block/chagarothfistspawner",
+	"parent": "abyssalcraft:block/gatekeeperminionspawner",
 	"display": {
 		"thirdperson": {
 			"rotation": [ 10, -45, 170 ],

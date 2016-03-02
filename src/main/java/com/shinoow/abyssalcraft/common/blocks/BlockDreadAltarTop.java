@@ -72,7 +72,7 @@ public class BlockDreadAltarTop extends BlockContainer {
 		if(world.isRemote)
 			if(world.provider.getDimensionId() == AbyssalCraft.configDimId2){
 				if(world.getBiomeGenForCoords(pos) == AbyssalCraft.MountainDreadlands){
-					if(world.getBlockState(new BlockPos(pos.getX(), pos.getY() -1, pos.getZ())) == AbyssalCraft.dreadaltarbottom)
+					if(world.getBlockState(pos.down()).getBlock() == AbyssalCraft.dreadaltarbottom)
 						if(pos.getY() == 41)
 							FMLClientHandler.instance().getClient().ingameGUI.getChatGUI().printChatMessage(new ChatComponentText(StatCollector.translateToLocal("message.dreadaltartop.enter")));
 						else if(pos.getY() < 41)
@@ -90,15 +90,15 @@ public class BlockDreadAltarTop extends BlockContainer {
 	public boolean onBlockActivated(World par1World, BlockPos pos, IBlockState state, EntityPlayer par5EntityPlayer, EnumFacing side, float par7, float par8, float par9) {
 		if(par1World.provider.getDimensionId() == AbyssalCraft.configDimId2){
 			if(par1World.getBiomeGenForCoords(pos) == AbyssalCraft.MountainDreadlands){
-				if(par1World.getBlockState(new BlockPos(pos.getX(), pos.getY() - 1, pos.getZ())) == AbyssalCraft.dreadaltarbottom && pos.getY() == 41){
+				if(par1World.getBlockState(pos.down()).getBlock() == AbyssalCraft.dreadaltarbottom && pos.getY() == 41){
 					if(par1World.isRemote)
 						SpecialTextUtil.ChagarothGroup(par1World, StatCollector.translateToLocal("message.dreadaltartop.spawn"));
 					if(!par1World.isRemote){
 						par5EntityPlayer.addStat(AbyssalCraft.summonChagaroth, 1);
 						chagarothlair lair = new chagarothlair();
-						lair.generate(par1World, rand, new BlockPos(pos.getX(), pos.getY() - 2, pos.getZ()));
+						lair.generate(par1World, rand, pos.down(2));
 						par1World.getChunkFromBlockCoords(pos).setChunkModified();
-						par1World.setBlockToAir(new BlockPos(pos.getX(), pos.getY() - 1, pos.getZ()));
+						par1World.setBlockToAir(pos.down());
 						par1World.setBlockToAir(pos);
 					}
 				}

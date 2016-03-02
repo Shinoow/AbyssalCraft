@@ -16,6 +16,7 @@ import java.util.Random;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.common.structures.StructureShoggothPit;
+import com.shinoow.abyssalcraft.common.structures.omothol.MapGenOmothol;
 
 import net.minecraft.block.BlockFalling;
 import net.minecraft.block.material.Material;
@@ -24,6 +25,7 @@ import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.IProgressUpdate;
+import net.minecraft.world.ChunkCoordIntPair;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.chunk.Chunk;
@@ -43,6 +45,7 @@ public class ChunkProviderOmothol implements IChunkProvider
 	private BiomeGenBase[] biomesForGeneration;
 	double[] noiseData1, noiseData2, noiseData3, noiseData4, noiseData5;
 	int[][] field_73203_h = new int[32][32];
+	MapGenOmothol omotholGenerator = new MapGenOmothol();
 
 	public ChunkProviderOmothol(World par1World, long par2)
 	{
@@ -176,6 +179,8 @@ public class ChunkProviderOmothol implements IChunkProvider
 		setBlocksInChunk(x, z, primer);
 		replaceBlocksForBiome(primer);
 
+		omotholGenerator.generate(this, worldObj, x, z, primer);
+
 		Chunk chunk = new Chunk(worldObj, primer, x, z);
 		byte[] abyte = chunk.getBiomeArray();
 
@@ -284,6 +289,10 @@ public class ChunkProviderOmothol implements IChunkProvider
 		int l = z * 16;
 		BiomeGenBase biomegenbase = worldObj.getBiomeGenForCoords(new BlockPos(k + 16, 0, l + 16));
 
+		ChunkCoordIntPair chunkcoordintpair = new ChunkCoordIntPair(x, z);
+
+		omotholGenerator.generateStructure(worldObj, rand, chunkcoordintpair);
+
 		for(int i = 0; i < 1; i++) {
 			int Xcoord2 = k + rand.nextInt(16);
 			int Zcoord2 = l + rand.nextInt(16);
@@ -345,7 +354,11 @@ public class ChunkProviderOmothol implements IChunkProvider
 	}
 
 	@Override
-	public void recreateStructures(Chunk chunk, int x, int z) {}
+	public void recreateStructures(Chunk chunk, int x, int z) {
+
+		omotholGenerator.generate(this, worldObj, x, z, null);
+
+	}
 
 	@Override
 	public Chunk provideChunk(BlockPos blockPosIn) {

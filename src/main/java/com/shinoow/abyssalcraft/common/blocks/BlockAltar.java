@@ -23,11 +23,6 @@ public class BlockAltar extends Block {
 	}
 
 	@Override
-	public int getRenderType() {
-		return 3;
-	}
-
-	@Override
 	public boolean isOpaqueCube() {
 		return false;
 	}

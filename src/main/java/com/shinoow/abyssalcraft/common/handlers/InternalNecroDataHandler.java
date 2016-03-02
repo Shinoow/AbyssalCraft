@@ -145,8 +145,8 @@ public class InternalNecroDataHandler extends DummyNecroDataHandler {
 				new Page(4, NecronomiconText.MATERIAL_DARKSTONE_2),
 				new Page(5, new ItemStack(AbyssalCraft.Coraliumore), NecronomiconText.MATERIAL_CORALIUM_1),
 				new Page(6, NecronomiconText.MATERIAL_CORALIUM_2),
-				new Page(7, new ItemStack(AbyssalCraft.DLTSapling), NecronomiconText.MATERIAL_DARKSTONE_1),
-				new Page(8, NecronomiconText.MATERIAL_DARKSTONE_2),
+				new Page(7, new ItemStack(AbyssalCraft.DLTSapling), NecronomiconText.MATERIAL_DARKLANDS_OAK_1),
+				new Page(8, NecronomiconText.MATERIAL_DARKLANDS_OAK_2),
 				new Page(9, new ItemStack(AbyssalCraft.nitreOre), NecronomiconText.MATERIAL_NITRE_1),
 				new Page(10, NecronomiconText.MATERIAL_NITRE_2),
 				new Page(11, new ItemStack(AbyssalCraft.anticwater), NecronomiconText.MATERIAL_LIQUID_ANTIMATTER_1),
@@ -351,12 +351,13 @@ public class InternalNecroDataHandler extends DummyNecroDataHandler {
 		addPages("rituals", "potentialenergy", new Page(1, NecronomiconText.PE_TUT_1),
 				new Page(2, NecronomiconResources.PE_TUT_1, NecronomiconText.PE_TUT_2),
 				new Page(3, NecronomiconResources.PE_TUT_2, NecronomiconText.PE_TUT_3),
-				new Page(4, NecronomiconResources.PE_TUT_3, NecronomiconText.PE_TUT_4),
-				new Page(5, NecronomiconText.PE_TUT_5),
-				new Page(6, NecronomiconResources.PE_TUT_4, NecronomiconText.PE_TUT_6),
-				new Page(7, NecronomiconResources.PE_TUT_5, NecronomiconText.PE_TUT_7),
-				new Page(8, NecronomiconResources.PE_TUT_6, NecronomiconText.PE_TUT_8),
-				new Page(9, NecronomiconResources.PE_TUT_7, NecronomiconText.PE_TUT_9),
-				new Page(10, NecronomiconText.PE_TUT_10));
+				new Page(4, NecronomiconText.PE_TUT_4),
+				new Page(5, NecronomiconResources.PE_TUT_3, NecronomiconText.PE_TUT_5),
+				new Page(6, NecronomiconText.PE_TUT_6),
+				new Page(7, NecronomiconResources.PE_TUT_4, NecronomiconText.PE_TUT_7),
+				new Page(8, NecronomiconResources.PE_TUT_5, NecronomiconText.PE_TUT_8),
+				new Page(9, NecronomiconResources.PE_TUT_6, NecronomiconText.PE_TUT_9),
+				new Page(10, NecronomiconResources.PE_TUT_7, NecronomiconText.PE_TUT_10),
+				new Page(11, NecronomiconText.PE_TUT_11));
 	}
 }

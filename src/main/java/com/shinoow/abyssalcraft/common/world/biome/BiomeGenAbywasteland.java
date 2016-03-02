@@ -44,7 +44,7 @@ public class BiomeGenAbywasteland extends BiomeGenBase {
 		spawnableMonsterList.add(new SpawnListEntry(EntityDepthsGhoul.class, 60, 1, 5));
 		spawnableMonsterList.add(new SpawnListEntry(EntityAbyssalZombie.class, 60, 1, 5));
 		spawnableMonsterList.add(new SpawnListEntry(EntitySkeletonGoliath.class, 15, 1, 1));
-		spawnableMonsterList.add(new SpawnListEntry(EntityDragonMinion.class, 3, 1, 1));
+		spawnableMonsterList.add(new SpawnListEntry(EntityDragonMinion.class, 1, 0, 1));
 	}
 
 	@Override

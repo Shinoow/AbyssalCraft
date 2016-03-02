@@ -25,6 +25,7 @@ import net.minecraft.init.Items;
 import net.minecraft.item.*;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.Potion;
+import net.minecraft.potion.PotionHelper;
 import net.minecraft.stats.Achievement;
 import net.minecraft.stats.AchievementList;
 import net.minecraft.util.*;
@@ -71,6 +72,8 @@ import com.shinoow.abyssalcraft.common.structures.abyss.stronghold.MapGenAbyStro
 import com.shinoow.abyssalcraft.common.structures.abyss.stronghold.StructureAbyStrongholdPieces;
 import com.shinoow.abyssalcraft.common.structures.dreadlands.mineshaft.StructureDreadlandsMinePieces;
 import com.shinoow.abyssalcraft.common.structures.dreadlands.mineshaft.StructureDreadlandsMineStart;
+import com.shinoow.abyssalcraft.common.structures.omothol.MapGenOmothol;
+import com.shinoow.abyssalcraft.common.structures.omothol.StructureOmotholPieces;
 import com.shinoow.abyssalcraft.common.util.ACLogger;
 import com.shinoow.abyssalcraft.common.util.RitualUtil;
 import com.shinoow.abyssalcraft.common.world.AbyssalCraftWorldGenerator;
@@ -83,7 +86,7 @@ import com.shinoow.abyssalcraft.common.world.biome.*;
 @Mod(modid = AbyssalCraft.modid, name = AbyssalCraft.name, version = AbyssalCraft.version,dependencies = "required-after:Forge@[forgeversion,);after:JEI@[2.25,)", useMetadata = false, guiFactory = "com.shinoow.abyssalcraft.client.config.ACGuiFactory", acceptedMinecraftVersions = "[1.8.9]", updateJSON = "https://raw.githubusercontent.com/Shinoow/AbyssalCraft/master/version.json")
 public class AbyssalCraft {
 
-	public static final String version = "1.9.0-pre-4";
+	public static final String version = "1.9.0";
 	public static final String modid = "abyssalcraft";
 	public static final String name = "AbyssalCraft";
 
@@ -129,14 +132,14 @@ public class AbyssalCraft {
 	cstonebrick, cstonebrickfence, cstonebrickstairs, cstonebrickslab1, cstonebrickslab2,
 	cstonebutton, cstonepplate, dreadaltartop, dreadaltarbottom, crystallizer, crystallizer_on,
 	dreadiumblock, transmutator, transmutator_on, dreadguardspawner, chagarothspawner,
-	chagarothfistspawner, DrTfence, nitreOre, AbyIroOre, AbyGolOre, AbyDiaOre, AbyNitOre, AbyTinOre,
-	AbyCopOre, AbyPCorOre, AbyLCorOre, solidLava, ethaxium, ethaxiumbrick, ethaxiumpillar, ethaxiumstairs,
-	ethaxiumslab1, ethaxiumslab2, ethaxiumfence, omotholstone, ethaxiumblock, omotholportal, omotholfire,
-	engraver, house, materializer, darkethaxiumbrick, darkethaxiumpillar, darkethaxiumstairs,
-	darkethaxiumslab1, darkethaxiumslab2, darkethaxiumfence, ritualaltar, ritualpedestal, shoggothBlock,
-	cthulhuStatue, hasturStatue, jzaharStatue, azathothStatue, nyarlathotepStatue, yogsothothStatue,
-	shubniggurathStatue, monolithStone, shoggothBiomass, energyPedestal, monolithPillar, sacrificialAltar,
-	tieredEnergyPedestal, tieredSacrificialAltar;
+	DrTfence, nitreOre, AbyIroOre, AbyGolOre, AbyDiaOre, AbyNitOre, AbyTinOre, AbyCopOre, AbyPCorOre,
+	AbyLCorOre, solidLava, ethaxium, ethaxiumbrick, ethaxiumpillar, ethaxiumstairs, ethaxiumslab1,
+	ethaxiumslab2, ethaxiumfence, omotholstone, ethaxiumblock, omotholportal, omotholfire, engraver,
+	house, materializer, darkethaxiumbrick, darkethaxiumpillar, darkethaxiumstairs, darkethaxiumslab1,
+	darkethaxiumslab2, darkethaxiumfence, ritualaltar, ritualpedestal, shoggothBlock, cthulhuStatue,
+	hasturStatue, jzaharStatue, azathothStatue, nyarlathotepStatue, yogsothothStatue, shubniggurathStatue,
+	monolithStone, shoggothBiomass, energyPedestal, monolithPillar, sacrificialAltar, tieredEnergyPedestal,
+	tieredSacrificialAltar, jzaharspawner, gatekeeperminionspawner;
 
 	//Overworld biomes
 	public static BiomeGenBase Darklands, DarklandsForest, DarklandsPlains, DarklandsHills,
@@ -158,7 +161,7 @@ public class AbyssalCraft {
 	tinIngot, copperIngot, lifeCrystal, shoggothFlesh, eldritchScale, omotholFlesh, necronomicon,
 	necronomicon_cor, necronomicon_dre, necronomicon_omt, abyssalnomicon, crystalbag_s, crystalbag_m,
 	crystalbag_l, crystalbag_h, nugget, essence, skin, charm, cthulhuCharm, hasturCharm, jzaharCharm,
-	azathothCharm, nyarlathotepCharm, yogsothothCharm, shubniggurathCharm;
+	azathothCharm, nyarlathotepCharm, yogsothothCharm, shubniggurathCharm, gatekeeperEssence;
 	//coin stuff
 	public static Item coin, cthulhuCoin, elderCoin, jzaharCoin, engravingBlank, engravingCthulhu, engravingElder, engravingJzahar,
 	hasturCoin, azathothCoin, nyarlathotepCoin, yogsothothCoin, shubniggurathCoin, engravingHastur, engravingAzathoth, engravingNyarlathotep,
@@ -273,7 +276,8 @@ public class AbyssalCraft {
 	public static int darkWeight1, darkWeight2, darkWeight3, darkWeight4, darkWeight5, coraliumWeight;
 
 	public static boolean shouldSpread, shouldInfect, breakLogic, destroyOcean, demonAnimalFire, updateC, darkness,
-	particleBlock, particleEntity, hardcoreMode, useDynamicPotionIds, endAbyssalZombie;
+	particleBlock, particleEntity, hardcoreMode, useDynamicPotionIds, endAbyssalZombie, evilAnimalCreatureType,
+	antiItemDisintegration;
 	public static int evilAnimalSpawnRate;
 	public static boolean shoggothOoze, oozeLeaves, oozeGrass, oozeGround, oozeSand, oozeRock, oozeCloth, oozeWood,
 	oozeGourd, oozeIron, oozeClay;
@@ -309,6 +313,7 @@ public class AbyssalCraft {
 
 		cfg = new Configuration(event.getSuggestedConfigurationFile());
 		syncConfig();
+		AbyssalCraftAPI.initPotionReflection();
 
 		if(!FluidRegistry.isFluidRegistered("liquidcoralium")){
 			CFluid = LIQUID_CORALIUM;
@@ -367,8 +372,8 @@ public class AbyssalCraft {
 		DLTbutton = new BlockACButton(true, "DLTplank").setHardness(0.5F).setUnlocalizedName("dltbutton");
 		DLTpplate = new BlockACPressureplate("DLTplank", Material.wood, BlockACPressureplate.Sensitivity.EVERYTHING).setHardness(0.5F).setStepSound(Block.soundTypeWood).setUnlocalizedName("dltpplate");
 		DLTstairs = new BlockACStairs(DLTplank).setHardness(2.0F).setResistance(5.0F).setStepSound(Block.soundTypeWood).setUnlocalizedName("dltstairs");
-		DLTslab1 = new BlockACSingleSlab(Material.rock).setHardness(2.0F).setResistance(5.0F).setStepSound(Block.soundTypeWood).setUnlocalizedName("dltslab1");
-		DLTslab2 = new BlockACDoubleSlab(DLTslab1, Material.rock).setHardness(2.0F).setResistance(5.0F).setStepSound(Block.soundTypeWood).setUnlocalizedName("dltslab2");
+		DLTslab1 = new BlockACSingleSlab(Material.wood).setHardness(2.0F).setResistance(5.0F).setStepSound(Block.soundTypeWood).setUnlocalizedName("dltslab1");
+		DLTslab2 = new BlockACDoubleSlab(DLTslab1, Material.wood).setHardness(2.0F).setResistance(5.0F).setStepSound(Block.soundTypeWood).setUnlocalizedName("dltslab2");
 		corblock = new IngotBlock(5).setUnlocalizedName("corblock");
 		PSDL = new BlockPSDL().setHardness(50.0F).setResistance(3000F).setCreativeTab(tabDecoration).setUnlocalizedName("psdl");
 		AbyCorOre = new BlockACOre(3, 3.0F, 6.0F).setUnlocalizedName("abycorore");
@@ -421,7 +426,6 @@ public class AbyssalCraft {
 		transmutator_on = new BlockTransmutator(true).setHardness(2.5F).setResistance(12.0F).setStepSound(Block.soundTypeStone).setLightLevel(0.875F).setUnlocalizedName("transmutator_on");
 		dreadguardspawner = new BlockDreadguardSpawner().setUnlocalizedName("dreadguardspawner");
 		chagarothspawner = new BlockChagarothSpawner().setUnlocalizedName("chagarothspawner");
-		chagarothfistspawner = new BlockChagarothFistSpawner().setUnlocalizedName("chagarothfistspawner");
 		DrTfence = new BlockACFence(Material.wood).setHardness(2.0F).setResistance(5.0F).setStepSound(Block.soundTypeWood).setUnlocalizedName("drtfence");
 		nitreOre = new BlockACOre(2, 3.0F, 6.0F).setUnlocalizedName("nitreore");
 		AbyIroOre = new BlockACOre(2, 3.0F, 6.0F).setUnlocalizedName("abyiroore");
@@ -470,6 +474,8 @@ public class AbyssalCraft {
 		sacrificialAltar = new BlockSacrificialAltar();
 		tieredEnergyPedestal = new BlockTieredEnergyPedestal();
 		tieredSacrificialAltar = new BlockTieredSacrificialAltar();
+		jzaharspawner = new BlockJzaharSpawner().setUnlocalizedName("jzaharspawner");
+		gatekeeperminionspawner = new BlockGatekeeperMinionSpawner().setUnlocalizedName("gatekeeperminionspawner");
 
 		checkBiomeIds(true);
 
@@ -525,6 +531,7 @@ public class AbyssalCraft {
 		nugget = new ItemMetadata("nugget", true, "abyssalnite", "coralium", "dreadium", "ethaxium");
 		essence = new ItemMetadata("essence", true, "abyssalwasteland", "dreadlands", "omothol");
 		skin = new ItemMetadata("skin", true, "abyssalwasteland", "dreadlands", "omothol");
+		gatekeeperEssence = new ItemGatekeeperEssence();
 
 		//Coins
 		coin = new ItemCoin("coin");
@@ -703,7 +710,6 @@ public class AbyssalCraft {
 		cloth = new ItemWashCloth();
 
 		GameRegistry.registerTileEntity(TileEntityCrate.class, "tileEntityCrate");
-		GameRegistry.registerTileEntity(TileEntityPSDL.class, "tileEntityPSDL");
 		GameRegistry.registerTileEntity(TileEntityDGhead.class, "tileEntityDGhead");
 		GameRegistry.registerTileEntity(TileEntityPhead.class, "tileEntityPhead");
 		GameRegistry.registerTileEntity(TileEntityWhead.class, "tileEntityWhead");
@@ -714,7 +720,6 @@ public class AbyssalCraft {
 		GameRegistry.registerTileEntity(TileEntityTransmutator.class, "tileEntityTransmutator");
 		GameRegistry.registerTileEntity(TileEntityDreadguardSpawner.class, "tileEntityDradguardSpawner");
 		GameRegistry.registerTileEntity(TileEntityChagarothSpawner.class, "tileEntityChagarothSpawner");
-		GameRegistry.registerTileEntity(TileEntityChagarothFistSpawner.class, "tileEntityChagarothFistSpawner");
 		GameRegistry.registerTileEntity(TileEntityODB.class, "tileEntityODB");
 		GameRegistry.registerTileEntity(TileEntityEngraver.class, "tileEntityEngraver");
 		GameRegistry.registerTileEntity(TileEntityMaterializer.class, "tileEntityMaterializer");
@@ -732,6 +737,8 @@ public class AbyssalCraft {
 		GameRegistry.registerTileEntity(TileEntitySacrificialAltar.class, "tileEntitySacrificialAltar");
 		GameRegistry.registerTileEntity(TileEntityTieredEnergyPedestal.class, "tileEntityTieredEnergyPedestal");
 		GameRegistry.registerTileEntity(TileEntityTieredSacrificialAltar.class, "tileEntityTieredSacrificialAltar");
+		GameRegistry.registerTileEntity(TileEntityJzaharSpawner.class, "tileEntityJzaharSpawner");
+		GameRegistry.registerTileEntity(TileEntityGatekeeperMinionSpawner.class, "tileEntityGatekeeperMinionSpawner");
 
 		//TODO: uncomment stuff here
 		Cplague = new PotionCplague(new ResourceLocation("abyssalcraft", "Cplague"), true, 0x00FFFF).setIconIndex(1, 0).setPotionName("potion.Cplague");
@@ -739,15 +746,15 @@ public class AbyssalCraft {
 		//		Corflesh.setPotionEffect("+0+1-2+3&4+4+13");
 		//		Corbone.setPotionEffect("+0+1-2+3&4+4+13");
 		Dplague = new PotionDplague(new ResourceLocation("abyssalcraft", "Dplague"), true, 0xAD1313).setIconIndex(1, 0).setPotionName("potion.Dplague");
-		//		AbyssalCraftAPI.addPotionRequirements(Dplague.id, "0 & 1 & 2 & 3 & 2+6");
-		//		AbyssalCraftAPI.addPotionAmplifiers(Dplague.id, "5");
+		AbyssalCraftAPI.addPotionRequirements(Dplague.id, "0 & 1 & 2 & 3 & 2+6");
+		AbyssalCraftAPI.addPotionAmplifiers(Dplague.id, "5");
 		dreadfragment.setPotionEffect("0+1+2+3+13&4-4");
 		antiMatter = new PotionAntimatter(new ResourceLocation("abyssalcraft", "Antimatter"), true, 0xFFFFFF).setIconIndex(1, 0).setPotionName("potion.Antimatter");
-		//		AbyssalCraftAPI.addPotionRequirements(antiMatter.id, "0 & 1 & 2 & !3 & 2+6");
-		//		antiFlesh.setPotionEffect("0+1+2-3+13&4-4");
-		//		antiCorflesh.setPotionEffect("0+1+2-3+13&4-4");
-		//		antiCorbone.setPotionEffect("0+1+2-3+13&4-4");
-		//		sulfur.setPotionEffect(PotionHelper.spiderEyeEffect);
+		AbyssalCraftAPI.addPotionRequirements(antiMatter.id, "0 & 1 & 2 & !3 & 2+6");
+		antiFlesh.setPotionEffect("0+1+2-3+13&4-4");
+		antiCorflesh.setPotionEffect("0+1+2-3+13&4-4");
+		antiCorbone.setPotionEffect("0+1+2-3+13&4-4");
+		sulfur.setPotionEffect(PotionHelper.spiderEyeEffect);
 		//		crystalOxygen.setPotionEffect(PotionHelper.field_151423_m);
 		//		crystalHydrogen.setPotionEffect("-0-1+2+3&4-4+13");
 		//		crystalNitrogen.setPotionEffect("-0+1-2+3&4-4+13");
@@ -859,7 +866,6 @@ public class AbyssalCraft {
 		GameRegistry.registerBlock(transmutator_on, "transmutator_on");
 		GameRegistry.registerBlock(dreadguardspawner, "dreadguardspawner");
 		GameRegistry.registerBlock(chagarothspawner, "chagarothspawner");
-		GameRegistry.registerBlock(chagarothfistspawner, "chagarothfistspawner");
 		GameRegistry.registerBlock(DrTfence, "drtfence");
 		GameRegistry.registerBlock(nitreOre, "nitreore");
 		GameRegistry.registerBlock(AbyIroOre, "abyiroore");
@@ -908,6 +914,8 @@ public class AbyssalCraft {
 		GameRegistry.registerBlock(sacrificialAltar, "sacrificialaltar");
 		GameRegistry.registerBlock(tieredEnergyPedestal, ItemMetadataBlock.class, "tieredenergypedestal");
 		GameRegistry.registerBlock(tieredSacrificialAltar, ItemMetadataBlock.class, "tieredsacrificialaltar");
+		GameRegistry.registerBlock(jzaharspawner, "jzaharspawner");
+		GameRegistry.registerBlock(gatekeeperminionspawner, "gatekeeperminionspawner");
 
 		//Item Register
 		GameRegistry.registerItem(devsword, "devsword");
@@ -1093,6 +1101,7 @@ public class AbyssalCraft {
 		GameRegistry.registerItem(engravingNyarlathotep, "engraving_nyarlathotep");
 		GameRegistry.registerItem(engravingYogsothoth, "engraving_yogsothoth");
 		GameRegistry.registerItem(engravingShubniggurath, "engraving_shubniggurath");
+		GameRegistry.registerItem(gatekeeperEssence, "gatekeeperessence");
 		//		GameRegistry.registerItem(shadowPlate, "shadowplate");
 
 		AbyssalCraftAPI.setRepairItems();
@@ -1164,10 +1173,11 @@ public class AbyssalCraft {
 		EntityRegistry.addSpawn(EntityDepthsGhoul.class, 10, 1, 3, EnumCreatureType.MONSTER, BiomeDictionary.getBiomesForType(Type.WATER));
 		EntityRegistry.addSpawn(EntityDepthsGhoul.class, 10, 1, 3, EnumCreatureType.MONSTER, BiomeDictionary.getBiomesForType(Type.BEACH));
 		EntityRegistry.addSpawn(EntityDepthsGhoul.class, 10, 1, 3, EnumCreatureType.MONSTER, BiomeDictionary.getBiomesForType(Type.SWAMP));
+		EntityRegistry.removeSpawn(EntityDepthsGhoul.class, EnumCreatureType.MONSTER, new BiomeGenBase[]{ BiomeGenBase.mushroomIslandShore });
 
 		registerEntityWithEgg(EntityEvilpig.class, "evilpig", 26, 80, 3, true, 15771042, 14377823);
 		if(evilAnimalSpawnRate > 0)
-			EntityRegistry.addSpawn(EntityEvilpig.class, evilAnimalSpawnRate, 1, 3, EnumCreatureType.CREATURE, new BiomeGenBase[] {
+			EntityRegistry.addSpawn(EntityEvilpig.class, evilAnimalSpawnRate, 1, 3, evilAnimalCreatureType ? EnumCreatureType.MONSTER : EnumCreatureType.CREATURE, new BiomeGenBase[] {
 				BiomeGenBase.taiga, BiomeGenBase.plains, BiomeGenBase.forest, BiomeGenBase.savanna,
 				BiomeGenBase.beach, BiomeGenBase.extremeHills, BiomeGenBase.jungle, BiomeGenBase.savannaPlateau,
 				BiomeGenBase.swampland, BiomeGenBase.icePlains, BiomeGenBase.birchForest,
@@ -1179,6 +1189,7 @@ public class AbyssalCraft {
 		EntityRegistry.addSpawn(EntityAbyssalZombie.class, 10, 1, 3, EnumCreatureType.MONSTER, BiomeDictionary.getBiomesForType(Type.SWAMP));
 		if(endAbyssalZombie)
 			EntityRegistry.addSpawn(EntityAbyssalZombie.class, 10, 1, 3, EnumCreatureType.MONSTER, BiomeDictionary.getBiomesForType(Type.END));
+		EntityRegistry.removeSpawn(EntityAbyssalZombie.class, EnumCreatureType.MONSTER, new BiomeGenBase[]{ BiomeGenBase.mushroomIslandShore });
 
 		EntityRegistry.registerModEntity(EntityODBPrimed.class, "Primed ODB", 28, this, 80, 3, true);
 
@@ -1265,10 +1276,11 @@ public class AbyssalCraft {
 		EntityRegistry.addSpawn(EntityLesserShoggoth.class, 3, 1, 1, EnumCreatureType.MONSTER, new BiomeGenBase[]{
 			AbyssalCraft.Wastelands, AbyssalCraft.Dreadlands, AbyssalCraft.AbyDreadlands, AbyssalCraft.MountainDreadlands,
 			AbyssalCraft.ForestDreadlands, AbyssalCraft.omothol, AbyssalCraft.darkRealm});
+		EntityRegistry.removeSpawn(EntityLesserShoggoth.class, EnumCreatureType.MONSTER, new BiomeGenBase[]{ BiomeGenBase.mushroomIslandShore });
 
 		registerEntityWithEgg(EntityEvilCow.class, "evilcow", 67, 80, 3, true, 4470310, 10592673);
 		if(evilAnimalSpawnRate > 0)
-			EntityRegistry.addSpawn(EntityEvilCow.class, evilAnimalSpawnRate, 1, 3, EnumCreatureType.CREATURE, new BiomeGenBase[] {
+			EntityRegistry.addSpawn(EntityEvilCow.class, evilAnimalSpawnRate, 1, 3, evilAnimalCreatureType ? EnumCreatureType.MONSTER : EnumCreatureType.CREATURE, new BiomeGenBase[] {
 				BiomeGenBase.taiga, BiomeGenBase.plains, BiomeGenBase.forest, BiomeGenBase.savanna,
 				BiomeGenBase.beach, BiomeGenBase.extremeHills, BiomeGenBase.jungle, BiomeGenBase.savannaPlateau,
 				BiomeGenBase.swampland, BiomeGenBase.icePlains, BiomeGenBase.birchForest,
@@ -1276,7 +1288,7 @@ public class AbyssalCraft {
 
 		registerEntityWithEgg(EntityEvilChicken.class, "evilchicken", 68, 80, 3, true, 10592673, 16711680);
 		if(evilAnimalSpawnRate > 0)
-			EntityRegistry.addSpawn(EntityEvilChicken.class, evilAnimalSpawnRate, 1, 3, EnumCreatureType.CREATURE, new BiomeGenBase[] {
+			EntityRegistry.addSpawn(EntityEvilChicken.class, evilAnimalSpawnRate, 1, 3, evilAnimalCreatureType ? EnumCreatureType.MONSTER : EnumCreatureType.CREATURE, new BiomeGenBase[] {
 				BiomeGenBase.taiga, BiomeGenBase.plains, BiomeGenBase.forest, BiomeGenBase.savanna,
 				BiomeGenBase.beach, BiomeGenBase.extremeHills, BiomeGenBase.jungle, BiomeGenBase.savannaPlateau,
 				BiomeGenBase.swampland, BiomeGenBase.icePlains, BiomeGenBase.birchForest,
@@ -1352,7 +1364,7 @@ public class AbyssalCraft {
 		enterOmothol = new Achievement("achievement.enterOmothol", "enterOmothol", 4, 10, omotholstone, killChagaroth).setSpecial().registerStat();
 		enterDarkRealm = new Achievement("achievement.darkRealm", "darkRealm", 2, 10, Darkstone, enterOmothol).registerStat();
 		killOmotholelite = new Achievement("achievement.killOmotholelite", "killOmotholelite", 6, 10, eldritchScale, enterOmothol).registerStat();
-		locateJzahar = new Achievement("achievement.locateJzahar", "locateJzahar", 4, 12, OC, enterOmothol).registerStat();
+		locateJzahar = new Achievement("achievement.locateJzahar", "locateJzahar", 4, 12, jzaharCharm, enterOmothol).registerStat();
 		killJzahar = new Achievement("achievement.killJzahar", "killJzahar", 6, 12, Staff, locateJzahar).setSpecial().registerStat();
 		//nowwhat
 		//Gateway Key Achievements
@@ -1379,6 +1391,8 @@ public class AbyssalCraft {
 		StructureAbyStrongholdPieces.registerStructurePieces();
 		MapGenStructureIO.registerStructure(StructureDreadlandsMineStart.class, "DreadMine");
 		StructureDreadlandsMinePieces.registerStructurePieces();
+		MapGenStructureIO.registerStructure(MapGenOmothol.Start.class, "Omothol");
+		StructureOmotholPieces.registerOmotholPieces();
 		GameRegistry.registerWorldGenerator(new AbyssalCraftWorldGenerator(), 0);
 		GameRegistry.registerFuelHandler(new FurnaceFuelHandler());
 		AbyssalCrafting.addRecipes();
@@ -1764,6 +1778,10 @@ public class AbyssalCraft {
 		particleEntity = cfg.get(Configuration.CATEGORY_GENERAL, "Entity particles", true, "Toggles whether entities that emits particles should do so.").getBoolean();
 		hardcoreMode = cfg.get(Configuration.CATEGORY_GENERAL, "Hardcore Mode", false, "Toggles Hardcore mode. If set to true, all mobs will become tougher.").getBoolean();
 		endAbyssalZombie = cfg.get(Configuration.CATEGORY_GENERAL, "End Abyssal Zombies", true, "Toggles whether Abyssal Zombies should spawn in The End. Takes effect after restart.").getBoolean();
+		evilAnimalCreatureType = cfg.get(Configuration.CATEGORY_GENERAL, "Evil Animals Are Monsters", false, "If enabled, sets the creature type of Evil Animals to \"monster\". The creature type affects how a entity spawns, eg \"creature\" "
+				+ "treats the entity as an animal, while \"monster\" treats it as a hostile mob. If you enable this, Evil Animals will spawn like any other hostile mobs, instead of mimicking vanilla animals.\n"
+				+EnumChatFormatting.RED+"[Minecraft Restart Required]"+EnumChatFormatting.RESET).getBoolean();
+		antiItemDisintegration = cfg.get(Configuration.CATEGORY_GENERAL, "Liquid Antimatter item disintegration", true, "Toggles whether or not Liquid Antimatter will disintegrate any items dropped into a pool of it.").getBoolean();
 
 		darkWeight1 = cfg.get("biome_weight", "Darklands", 10, "Biome weight for the Darklands biome, controls the chance of it generating", 0, 100).getInt();
 		darkWeight2 = cfg.get("biome_weight", "Darklands Forest", 10, "Biome weight for the Darklands Forest biome, controls the chance of it generating", 0, 100).getInt();
@@ -1959,6 +1977,18 @@ public class AbyssalCraft {
 		ChestGenHooks.addItem(ChestGenHooks.VILLAGE_BLACKSMITH, new WeightedRandomChestContent(new ItemStack(DiamondU), 1, 2, 1));
 		ChestGenHooks.addItem(ChestGenHooks.DUNGEON_CHEST, new WeightedRandomChestContent(new ItemStack(MRE), 1, 1, 5));
 		ChestGenHooks.addItem(ChestGenHooks.DUNGEON_CHEST, new WeightedRandomChestContent(new ItemStack(Coralium), 1, 5, 8));
+		ChestGenHooks.addItem(ChestGenHooks.DUNGEON_CHEST, new WeightedRandomChestContent(new ItemStack(shadowfragment), 1, 10, 8));
+		ChestGenHooks.addItem(ChestGenHooks.DUNGEON_CHEST, new WeightedRandomChestContent(new ItemStack(shadowshard), 1, 6, 5));
+		ChestGenHooks.addItem(ChestGenHooks.DUNGEON_CHEST, new WeightedRandomChestContent(new ItemStack(shadowgem), 1, 3, 3));
+		ChestGenHooks.addItem(ChestGenHooks.PYRAMID_DESERT_CHEST, new WeightedRandomChestContent(new ItemStack(shadowfragment), 1, 10, 8));
+		ChestGenHooks.addItem(ChestGenHooks.PYRAMID_DESERT_CHEST, new WeightedRandomChestContent(new ItemStack(shadowshard), 1, 6, 5));
+		ChestGenHooks.addItem(ChestGenHooks.PYRAMID_DESERT_CHEST, new WeightedRandomChestContent(new ItemStack(shadowgem), 1, 3, 3));
+		ChestGenHooks.addItem(ChestGenHooks.MINESHAFT_CORRIDOR, new WeightedRandomChestContent(new ItemStack(shadowfragment), 1, 10, 8));
+		ChestGenHooks.addItem(ChestGenHooks.MINESHAFT_CORRIDOR, new WeightedRandomChestContent(new ItemStack(shadowshard), 1, 6, 5));
+		ChestGenHooks.addItem(ChestGenHooks.MINESHAFT_CORRIDOR, new WeightedRandomChestContent(new ItemStack(shadowgem), 1, 3, 3));
+		ChestGenHooks.addItem(ChestGenHooks.STRONGHOLD_CORRIDOR, new WeightedRandomChestContent(new ItemStack(shadowfragment), 1, 10, 8));
+		ChestGenHooks.addItem(ChestGenHooks.STRONGHOLD_CORRIDOR, new WeightedRandomChestContent(new ItemStack(shadowshard), 1, 6, 5));
+		ChestGenHooks.addItem(ChestGenHooks.STRONGHOLD_CORRIDOR, new WeightedRandomChestContent(new ItemStack(shadowgem), 1, 3, 3));
 	}
 
 	private void addDungeonHooks(){

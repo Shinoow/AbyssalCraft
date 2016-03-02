@@ -16,16 +16,28 @@ import net.minecraft.block.material.Material;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
-import com.shinoow.abyssalcraft.common.blocks.tile.TileEntityChagarothFistSpawner;
+import com.shinoow.abyssalcraft.common.blocks.tile.TileEntityJzaharSpawner;
 
-public class BlockChagarothFistSpawner extends BlockContainer {
+public class BlockJzaharSpawner extends BlockContainer {
 
-	public BlockChagarothFistSpawner() {
+	public BlockJzaharSpawner() {
 		super(Material.rock);
 	}
 
 	@Override
+	public boolean isOpaqueCube()
+	{
+		return false;
+	}
+
+	@Override
+	public int getRenderType()
+	{
+		return 2;
+	}
+
+	@Override
 	public TileEntity createNewTileEntity(World var1, int var2) {
-		return new TileEntityChagarothFistSpawner();
+		return new TileEntityJzaharSpawner();
 	}
 }
