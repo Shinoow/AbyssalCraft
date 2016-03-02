@@ -127,7 +127,7 @@ public class AbyssalCraftAPI {
 	public static void initPotionReflection(){
 		for(Field f : PotionHelper.class.getDeclaredFields())
 			try {
-				if(f.getName().equals("potionRequirements") || f.getName().equals("field_77927_l")){
+				if(f.getName().equals("potionRequirements") || f.getName().equals("field_179539_o")){
 					f.setAccessible(true);
 					try {
 						potionRequirements = (HashMap<Integer, String>)f.get(null);
@@ -137,7 +137,7 @@ public class AbyssalCraftAPI {
 						e.printStackTrace();
 					}
 				}
-				if(f.getName().equals("potionAmplifiers") || f.getName().equals("field_77928_m")){
+				if(f.getName().equals("potionAmplifiers") || f.getName().equals("field_179540_p")){
 					f.setAccessible(true);
 					try {
 						potionAmplifiers = (HashMap<Integer, String>)f.get(null);
