@@ -96,7 +96,7 @@ public class BlockAntiliquid extends BlockFluidClassic {
 			((EntityLivingBase)par5Entity).addPotionEffect(new PotionEffect(Potion.nightVision.id, 400));
 			((EntityLivingBase)par5Entity).addPotionEffect(new PotionEffect(AbyssalCraft.antiMatter.id, 200));
 		}
-		if(par5Entity instanceof EntityItem)
+		if(par5Entity instanceof EntityItem && AbyssalCraft.antiItemDisintegration)
 			par5Entity.setDead();
 	}
 }

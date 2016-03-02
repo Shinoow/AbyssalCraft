@@ -14,9 +14,6 @@ package com.shinoow.abyssalcraft.client.gui.necronomicon;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.resources.I18n;
-import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
-import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.StatCollector;
 
@@ -25,11 +22,6 @@ import org.lwjgl.opengl.GL11;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
-import com.shinoow.abyssalcraft.api.necronomicon.CraftingStack;
-import com.shinoow.abyssalcraft.api.necronomicon.NecroData;
-import com.shinoow.abyssalcraft.api.necronomicon.NecroData.Chapter;
-import com.shinoow.abyssalcraft.api.necronomicon.NecroData.Page;
-import com.shinoow.abyssalcraft.api.necronomicon.NecroData.PageData;
 import com.shinoow.abyssalcraft.client.gui.necronomicon.buttons.ButtonCategory;
 import com.shinoow.abyssalcraft.client.gui.necronomicon.buttons.ButtonNextPage;
 import com.shinoow.abyssalcraft.client.lib.NecronomiconResources;
@@ -125,9 +117,9 @@ public class GuiNecronomiconInformation extends GuiNecronomicon {
 				isInfo = true;
 				isAC = true;
 				drawButtons();
-			} else if(button.id == 4){
+			} else if(button.id == 4)
 				mc.displayGuiScreen(new GuiNecronomiconEntry(getBookType(), AbyssalCraftAPI.internalNDHandler.getInternalNecroData("greatoldones"), new GuiNecronomiconInformation(getBookType()), AbyssalCraft.necronomicon));
-			} else if(button.id == 5){
+			else if(button.id == 5){
 				isInfo = true;
 				isAN = true;
 				drawButtons();
@@ -138,17 +130,16 @@ public class GuiNecronomiconInformation extends GuiNecronomicon {
 			} else if(button.id == 7){
 				if(getBookType() >= 1)
 					mc.displayGuiScreen(new GuiNecronomiconMachines(getBookType()));
-			} else if(button.id == 8){
+			} else if(button.id == 8)
 				mc.displayGuiScreen(new GuiNecronomiconEntry(getBookType(), AbyssalCraftAPI.internalNDHandler.getInternalNecroData("overworld"), new GuiNecronomiconInformation(getBookType()), AbyssalCraft.necronomicon));
-			} else if(button.id == 9){
+			else if(button.id == 9)
 				mc.displayGuiScreen(new GuiNecronomiconEntry(getBookType(), AbyssalCraftAPI.internalNDHandler.getInternalNecroData("abyssalwasteland"), new GuiNecronomiconInformation(getBookType()), AbyssalCraft.necronomicon_cor));
-			} else if(button.id == 10){
+			else if(button.id == 10)
 				mc.displayGuiScreen(new GuiNecronomiconEntry(getBookType(), AbyssalCraftAPI.internalNDHandler.getInternalNecroData("dreadlands"), new GuiNecronomiconInformation(getBookType()), AbyssalCraft.necronomicon_dre));
-			} else if(button.id == 11){
+			else if(button.id == 11)
 				mc.displayGuiScreen(new GuiNecronomiconEntry(getBookType(), AbyssalCraftAPI.internalNDHandler.getInternalNecroData("omothol"), new GuiNecronomiconInformation(getBookType()), AbyssalCraft.necronomicon_omt));
-			} else if(button.id == 12){
+			else if(button.id == 12)
 				mc.displayGuiScreen(new GuiNecronomiconEntry(getBookType(), AbyssalCraftAPI.internalNDHandler.getInternalNecroData("darkrealm"), new GuiNecronomiconInformation(getBookType()), AbyssalCraft.necronomicon_omt));
-			}
 			updateButtons();
 		}
 	}

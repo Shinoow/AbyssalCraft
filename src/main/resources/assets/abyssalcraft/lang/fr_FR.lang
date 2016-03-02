@@ -115,8 +115,8 @@ achievement.killOmotholelite.desc=You killed a powerful being from Omothol.
 achievement.locateJzahar=A wild J'zahar appears
 achievement.locateJzahar.desc=I hope you brought potions, or something.
 
-achievement.killJzahar=Roll the credits? Nope.
-achievement.killJzahar.desc=You defeated The Gatekeeper himself. He isn't dead.
+achievement.killJzahar=To kill a god... if gods were puppets...
+achievement.killJzahar.desc=Did you really think you could kill a Great Old One?
 
 achievement.GK1=La Clé de morts-vivants
 achievement.GK1.desc=A fabriqué une clé de porte
@@ -169,7 +169,16 @@ message.chagaroth.death.1=Here, have your key back, transmute it for a working o
 message.chagaroth.death.2=The chest behind me holds "The Legendary Treasure of The Dreadlands",
 message.chagaroth.death.3=left by the ones who ran the mine before I came into the picture.
 message.chagaroth.death.4=Don't get your hopes up, I bet it's just a block of dirt or something.
-message.jzahar.death.dev=I'm still an in-dev boss, so you didn't exactly achieve anything killing me.
+message.jzahar.death.1=Congratulations, you "killed" me. No, not even close. You CAN'T kill a Great Old One.
+message.jzahar.death.2=What you killed is a simuraculum (a mere physical incarnation of infinite darkness). Some call it a puppet.
+message.jzahar.death.3=Something that escapes a human when they delve into madness is the concept of reality.
+message.jzahar.death.4=An example of this is you believing that you've slain a Great Old One.
+message.jzahar.death.5=Any sane person would realize that going after such a powerful being is nothing but certain death.
+message.jzahar.death.6=But you... your mind has been twisting itself harder the more knowledge you've gained.
+message.jzahar.death.7=The fact that you thought for a second that you had killed me shows just how insane you've become.
+message.jzahar.death.8=My readings have already led you here, so wouldn't you want more knowledge. Perhaps death is what you truly desire.
+message.jzahar.death.9=Let me unleash the last power contained within this hollow puppet. It'll give me the answer.
+message.jzahar.death.10=If you survived the blast, take this mere fragment of my being, it will give you access to the Abyssalnomicon.
 message.jzahar.banish.vanilla=I never asked to be within the same dimension as you. Begone, foul beast!
 message.jzahar.banish.ac=Ahem... I thought I gave you an assignment aeons ago, did it ever occur to you that it was permanent?
 message.jzahar.banish.jzh=There can only be ONE! *Creates sword out of thin air*
@@ -247,7 +256,7 @@ necronomicon.turnupindicator=Turn-up %1$s of %2$s
 #Anything longer than that will trigger a crash when you try to read it
 necronomicon.text.necronomicon.1=This is the Necronomicon, a book written by Abdul Alhazred, also known as "The Mad Arab". The book contains knowledge about The Great Old Ones, their names and how to summon them. There is also information about spells and rituals the book can perform.
 necronomicon.text.necronomicon.2=The Necronomicon itself is a chapter of the Abyssalnomicon, which was read to Alhazred by a demon known as J'zahar, who had composed the Abyssalnomicon from infinite knowledge known to The Great Old Ones.
-necronomicon.text.necronomicon.3=There are 4 types of Necronomicons within the Abyssalnomicon: The Necronomicon, The Abyssal Wasteland Necronomicon, knowledge bound to a specific dimension.
+necronomicon.text.necronomicon.3=There are 4 types of Necronomicons within the Abyssalnomicon: The Necronomicon, The Abyssal Wasteland Necronomicon, The Dreadlands Necronomicon and The Omothol Necronomicon, each with knowledge bound to a specific dimension.
 necronomicon.text.necronomicon.4=In order to unlock the knowledge, one must travel to said dimension and empower the Necronomicon with the flesh of that world. The Abyssalnomicon contains additional knowledge known only to J'zahar, knowledge man was not meant to obtain.
 
 necronomicon.text.abyssalnomicon.1=This is the Abyssalnomicon, a book written by J'zahar, Gatekeeper of The Abyss. The book contains the knowledge of the 4 Necronomicons, as they are in fact chapters of this book. There is also extensive knowledge not mentioned in the others.
@@ -363,7 +372,7 @@ necronomicon.text.crafting.crystalbag.1=A Crystal bag is crafted with Leather an
 necronomicon.text.crafting.crystalbag.2=They can be upgraded to hold more crystals by surrounding it with Coralium Plagued Flesh, Dread Fragments, then Omothol Ghoul Flesh.
 necronomicon.text.crafting.materializer.1=A Materializer is crafted with Ethaxium Bricks, Obsidian, Blocks of Ethaxium and a Liquid Antimatter Bucket.
 necronomicon.text.crafting.materializer.2=To use a Materializer, you need to place a Crystal Bag in the first slot, then a Necronomicon in the second, then you can create materials using the crystals inside the bag.
-necronomicon.text.crafting.abyssalnomicon.1=An Abyssalnomicon is crafted with Ethaxium Ingots, Eldritch Scales, a Oblivion Catalyst and a Omothol Necronomicon.
+necronomicon.text.crafting.abyssalnomicon.1=An Abyssalnomicon is crafted with Ethaxium Ingots, Eldritch Scales, a Essence of The Gatekeeper and a Omothol Necronomicon.
 necronomicon.text.crafting.abyssalnomicon.2=Eldritch Scales are gained from killing Remnants and Minions of The Gatekeeper.
 necronomicon.text.crafting.rendingstaff.1=A Staff of Rending is crafted with Shadow Gem Shards and a Shard of Oblivion. It can harvest energy from certain entities (by right clicking).
 necronomicon.text.crafting.rendingstaff.2=Abyssal Wasteland Energy can be harvested from any Coralium entity inside the Abyssal Wasteland. Dreadlands Energy can be harvested from any Dread entity inside the Dreadlands. Omothol Energy can be harvested from any entity inside Omothol. Shadow Energy are harvested from any living shadow. Essences are created when sufficient energy is collected.
@@ -396,8 +405,8 @@ necronomicon.text.crafting.sacrificialaltar.1=A Sacrificial Altar is crafted wit
 necronomicon.text.crafting.sacrificialaltar.2=When a entity is targeted, it will emit smoke particles. Once the entity dies, an amount of PE equal to it's max health will be collected. It only targets non-undead adult entities that aren't players. It should be noted that the altar goes on a cooldown after collecting a certain amount of PE, preventing collection for a minute.
 
 necronomicon.text.overworld.progression.1=In order to reach the Abyssal Wasteland, one must craft a Gateway Key, which requires one to travel to the Nether, and to visit a Darklands and a water-based biome. The water-based biome can be either a swamp or a ocean biome.
-necronomicon.text.overworld.progression.2=From the Nether you need 2 Blaze Rods, and probably a few more for later. From the Darklands biome you need to slay living shadows to finally obtain Shadow Gems. They are most commonly found in Darklands Mountains biomes. It is recommended to obtain a Staff of Rending in order to obtain Shadow Gems faster (more information in the special materials section).
-necronomicon.text.overworld.progression.3=From the water-based biome you need Coralium Gems in order to create Coralium Pearls. Once you have obtained these items, you can begin crafting Transmutation Gems (4 will be needed, and the excess Blaze Rods is used to make powder for these). Recipes for this and Shards of Oblivion can be found in the special materials section.
+necronomicon.text.overworld.progression.2=From the Nether you need 2 Blaze Rods, and probably a few more for later. From the Darklands biome you need to slay living shadows to finally obtain Shadow Gems. They are most commonly found in Darklands Mountains biomes. It is recommended to obtain a Staff of Rending in order to obtain Shadow Gems faster (more information in the special armor and tools section).
+necronomicon.text.overworld.progression.3=From the water-based biome you need Coralium Gems in order to create Coralium Pearls. Once you have obtained these items, you can begin crafting Transmutation Gems (4 will be needed, and the excess Blaze Rods are used to make powder for these). Recipes for this and Shards of Oblivion can be found in the special materials section.
 necronomicon.text.overworld.progression.4=When you have 4 Shards of Oblivion, use those and 4 units of Redstone Dust to infuse a Eye of Ender (through an infusion ritual, found in the ritual section of the Necronomicon) in order to create an Oblivion Catalyst, main component of the Gateway Key (the special materials section has the recipe).
 necronomicon.text.overworld.progression.5=Once the Gateway Key is crafted, simply right-click on the ground to form a portal. For more information, you will need the Abyssal Wasteland Necronomicon, which requires 8 Skins of The Abyssal Wasteland in order to upgrade. The Staff of Rending is needed in order to obtain essences used to craft those.
 
@@ -409,8 +418,8 @@ necronomicon.text.dreadlands.progression.1=Once you have reached the Dreadlands,
 necronomicon.text.dreadlands.progression.2=Once you have both Altar pieces, you need to place them at Y = 40 inside a Dreadlands Mountain biome and right-click it. Doing so will grant you entry to The Lair of Cha'garoth. After fighting through Dreadguards and eventually killing Cha'garoth, you will receive a Dread-plagued Gateway Key, along with loot. The key needs to be transmuted into a functioning one.
 necronomicon.text.dreadlands.progression.3=With the aforementioned Transmutator (recipe in Abyssal Wasteland special materials section) you can transmute the Dread-plagued Gateway Key into Cha'garoth's R'lyehian Gateway Key, granting you access to Omothol. Upgrading your Necronomicon to the Omothol Necronomicon requires 8 Skins of Omothol.
 
-necronomicon.text.omothol.progression.1=Now that you've arrived in Omothol, it's time to battle J'zahar, Gatekeeper of The Abyss. This dimension is currently incomplete, so there isn't that much to do here apart from getting materials to craft the Abyssalnomicon.
-necronomicon.text.omothol.progression.2=This section will be updated when Omothol has been completed. At that point, there will be a gigantic city built upon these floating islands.
+necronomicon.text.omothol.progression.1=Now that you've arrived in Omothol, it's time to battle J'zahar, Gatekeeper of The Abyss. The Temple of J'zahar can be located at the heart of Omothol (coordinates X=4, Y=53, Z=7). Once you have defeated the Gatekeeper, you will be able to unlock all hidden knowledge through the Abyssalnomicon.
+necronomicon.text.omothol.progression.2=The Abyssalnomicon requires Ethaxium Ingots, Eldritch Scales and the Essence of The Gatekeeper (dropped by J'zahar).
 necronomicon.text.omothol.progression.3=
 necronomicon.text.omothol.progression.4=
 necronomicon.text.omothol.progression.5=
@@ -478,7 +487,7 @@ necronomicon.text.rituals.info=Check the information section for information reg
 
 necronomicon.text.rituals.1=In order to get started with rituals you need to create the altar to perform them at. There is a total of 8 materials you can create your Ritual Altar from.
 necronomicon.text.rituals.2=Those are: Cobblestone, Darkstone Cobblestone, Abyssal Stone Brick, Coralium Brick, Dreadstone Brick, Abyssalnite Stone Brick, Ethaxium Brick and Dark Ethaxium Brick. The materials can only be used in their specific dimension (eg. Cobblestone and Darkstone Cobblestone in the Overworld, Abyssal Stone Brick and Coralium Brick in the Abyssal Wasteland etc).
-necronomicon.text.rituals.3=To create the altar, simply place the blocks in the above formation (keep the red area clear) and shift right-click the center block with a Necronomicon.
+necronomicon.text.rituals.3=To create the altar, simply place the blocks in the above formation (keep the colored area clear) and shift right-click the center block with a Necronomicon.
 necronomicon.text.rituals.4=After that, you can start performing rituals! In order to perform a ritual, place objects on the pedestals and shift right-click the altar with a Necronomicon.
 necronomicon.text.rituals.5=When peforming, the pedestals project smoke towards the altar. Rituals where you gain objects always end with a bolt of lightning striking the altar.
 necronomicon.text.rituals.6=Potential Energy is required in order to perform rituals (each ritual entry shows how much you need). Potential Energy is a pure form of untapped energy originating from a higher plane of existence. It's mainly used to fuel sacrifices made to The Great Old Ones (any ritual). Statues placed on Shoggoth Monoliths are said to be capable of draining it.
@@ -486,13 +495,14 @@ necronomicon.text.rituals.6=Potential Energy is required in order to perform rit
 necronomicon.text.pe.1=Potential Energy (PE) is a new form of energy presented in AbyssalCraft. It originates from a higher plane of existence (where no mortal has wandered), and can only be collected by tapping into Ley Lines using various methods. There exist objects capable of doing so, which will be explained here.
 necronomicon.text.pe.2=A good place to start obtaining materials required to create some of the PE collecting objects is Shoggoth Lairs, found in swamps and rivers.
 necronomicon.text.pe.3=Shoggoth Monoliths are also constructed with Monolith Stone (hence the name), while having statues placed on them. These statues can collect PE.
-necronomicon.text.pe.4=The statues come in different shapes, all depicting Great Old Ones. Standing close to one while holding a Necronomicon allows it to transport PE to you.
-necronomicon.text.pe.5=It should be noted that you harvesting PE isn't appreciated. This causes disruptions to occur (displayed by a bolt of lightning striking the statue, or other PE manipulator). Disruptions are random events that can affect the player, other entities or the environment. Their purpose is to punish those who tries to drain PE from the higher plane.
-necronomicon.text.pe.6=One way to boost the efficiency of statues (and other PE manipulators) is through the use of Ritual Charms. They can boost various stats (check the tooltip).
-necronomicon.text.pe.7=You can also craft a Energy Pedestal, which can collect PE from statues (and other PE manipulators) that are placed 3 blocks from the pedestal.
-necronomicon.text.pe.8=Along with the Energy Pedestal there's the Sacrificial Altar, which can convert life-force from dying entities into PE (targeted entities emit smoke).
-necronomicon.text.pe.9=If the PE production still is too slow, you can also upgrade Energy Pedestals and Sacrificial Altars through infusion rituals.
-necronomicon.text.pe.10=Upon reaching Omothol, you will be able to create deity-specific Ritual Charms (with an Abyssalnomicon), or buy them from Remnant Priests. Those charms will give an additional boost if used on manipulators associated with the same deity as the one displayed on the charm.
+necronomicon.text.pe.4=It should be noted that the Lesser Shoggoths only build these monoliths under certain conditions. Theorists claim it has to do with power positions (but they're genderless, and don't understand the concept of hieracrchy). If 6 (or more) Lesser Shoggoths are within 32 blocks of each other, one is prone to rise a monolith out of the ooze.
+necronomicon.text.pe.5=The statues come in different shapes, all depicting Great Old Ones. Standing close to one while holding a Necronomicon allows it to transport PE to you.
+necronomicon.text.pe.6=It should be noted that you harvesting PE isn't appreciated. This causes disruptions to occur (displayed by a bolt of lightning striking the statue, or other PE manipulator). Disruptions are random events that can affect the player, other entities or the environment. Their purpose is to punish those who tries to drain PE from the higher plane.
+necronomicon.text.pe.7=One way to boost the efficiency of statues (and other PE manipulators) is through the use of Ritual Charms. They can boost various stats (check the tooltip).
+necronomicon.text.pe.8=You can also craft a Energy Pedestal, which can collect PE from statues (and other PE manipulators) that are placed 3 blocks from the pedestal.
+necronomicon.text.pe.9=Along with the Energy Pedestal there's the Sacrificial Altar, which can convert life-force from dying entities into PE (targeted entities emit smoke).
+necronomicon.text.pe.10=If the PE production still is too slow, you can also upgrade Energy Pedestals and Sacrificial Altars through infusion rituals.
+necronomicon.text.pe.11=Upon reaching Omothol, you will be able to create deity-specific Ritual Charms (with an Abyssalnomicon), or buy them from Remnant Priests. Those charms will give an additional boost if used on manipulators associated with the same deity as the one displayed on the charm.
 
 necronomicon.text.machines.info=Check the information section for information regarding the different machines, or the other sections for all recipes for the specified machine. The recipes aren't sorted in any way.
 
@@ -636,6 +646,8 @@ ac.ritual.saDLupgrade=Dreadlands Sacrificial Altar
 ac.ritual.saDLupgrade.desc=A Dreadlands Sacrificial Altar is created by infusing a Abyssal Wasteland Sacrificial Altar with Dreadstone Bricks, Abyssalnite Stone Bricks, Shadow Gem Shards and Coralium Gems.
 ac.ritual.saOMTupgrade=Omothol Sacrificial Altar
 ac.ritual.saOMTupgrade.desc=A Omothol Sacrificial is created by infusing a Dreadlands Sacrificial Altar with Ethaxium Bricks, Dark Ethaxium Bricks, Shadow Gem Shards and Coralium Gems.
+ac.ritual.jzaharStaff=Staff of The Gatekeeper
+ac.ritual.jzaharStaff.desc=A Staff of The Gatekeeper is created by infusing a Staff of Rending with a Abyssal Wasteland Essence, a Dreadlands Essence, a Omothol Essence, Eldritch Scales and Ethaxium Ingots.
 
 #Configuration
 ac_dimensions=Dimensions
@@ -695,6 +707,8 @@ tooltip.drainstaff.energy.1=Abyssal Wasteland Energy
 tooltip.drainstaff.energy.2=Dreadlands Energy
 tooltip.drainstaff.energy.3=Omothol Energy
 tooltip.drainstaff.energy.4=Shadow Energy
+tooltip.gatekeeperessence.1=A mere fragment of J'zahar.
+tooltip.gatekeeperessence.2=You can feel it pulsating with power.
 
 #Creative Tabs
 itemGroup.acblocks= Blocs d'AbyssalCraft
@@ -801,7 +815,6 @@ tile.BOD.name=Block of Dreadium
 tile.transmutator.name=Transmutator
 tile.dreadguardspawner.name=Dreadguard Spawner Block
 tile.chagarothspawner.name=Cha'garoth Spawner Block
-tile.chagarothfistspawner.name=Fist of Cha'garoth Spawner Block
 tile.DrTf.name=Dreadlands Wood Fence
 tile.NO.name=Nitre Ore
 tile.AIO.name=Abyssal Iron Ore
@@ -858,6 +871,8 @@ tile.tieredSacrificialAltar.0.name=Overworld Sacrificial Altar
 tile.tieredSacrificialAltar.1.name=Abyssal Wasteland Sacrificial Altar
 tile.tieredSacrificialAltar.2.name=Dreadlands Sacrificial Altar
 tile.tieredSacrificialAltar.3.name=Omothol Sacrificial Altar
+tile.jzaharspawner.name=J'zahar Spawner Block
+tile.gatekeeperminionspawner.name=Minion of The Gatekeeper Spawner Block
 
 #Items
 item.DEV_BLADE.name=La Lame du Développeur
@@ -1103,6 +1118,7 @@ item.engraving.azathoth.name=Azathoth Coin Engraving
 item.engraving.nyarlathotep.name=Nyarlathotep Coin Engraving
 item.engraving.yogsothoth.name=Yog-Sothoth Coin Engraving
 item.engraving.shubniggurath.name=Shub-Niggurath Coin Engraving
+item.gatekeeperessence.name=Essence of The Gatekeeper
 
 #Entities
 entity.abyssalcraft.depthsghoul.name=Goule des Profondeurs

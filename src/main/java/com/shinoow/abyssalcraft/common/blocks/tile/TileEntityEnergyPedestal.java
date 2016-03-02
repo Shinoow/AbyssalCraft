@@ -29,6 +29,7 @@ public class TileEntityEnergyPedestal extends TileEntity implements IEnergyConta
 	private int rot;
 	private float energy;
 	Random rand = new Random();
+	private boolean isDirty;
 
 	@Override
 	public void readFromNBT(NBTTagCompound nbttagcompound)
@@ -69,6 +70,12 @@ public class TileEntityEnergyPedestal extends TileEntity implements IEnergyConta
 	public void updateEntity()
 	{
 		super.updateEntity();
+
+		if(isDirty){
+			worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
+			isDirty = false;
+		}
+
 		if(rot == 360)
 			rot = 0;
 		if(item != null)
@@ -108,6 +115,7 @@ public class TileEntityEnergyPedestal extends TileEntity implements IEnergyConta
 	}
 
 	public void setItem(ItemStack item){
+		isDirty = true;
 		this.item = item;
 	}
 

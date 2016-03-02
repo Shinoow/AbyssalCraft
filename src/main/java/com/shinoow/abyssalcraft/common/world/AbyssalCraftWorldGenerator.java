@@ -135,7 +135,8 @@ public class AbyssalCraftWorldGenerator implements IWorldGenerator {
 				int z = chunkZ + random.nextInt(16);
 				int y = world.getHeightValue(x, z);
 				if(BiomeDictionary.isBiomeOfType(world.getBiomeGenForCoords(x, z), Type.SWAMP) ||
-						BiomeDictionary.isBiomeOfType(world.getBiomeGenForCoords(x, z), Type.RIVER))
+						BiomeDictionary.isBiomeOfType(world.getBiomeGenForCoords(x, z), Type.RIVER) &&
+								!BiomeDictionary.isBiomeOfType(world.getBiomeGenForCoords(x, z), Type.OCEAN))
 					if(random.nextInt(100) == 0)
 						new StructureShoggothPit().generate(world, random, x, y, z);
 			}

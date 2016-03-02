@@ -59,7 +59,7 @@ public class EntityAbyssalZombie extends EntityMob implements ICoraliumEntity {
 	private static final AttributeModifier attackDamageBoostModifier = new AttributeModifier(attackDamageBoostUUID, "Attack Damage Boost", 3.0D, 0);
 
 	private float zombieWidth = -1.0F;
-    private float zombieHeight;
+	private float zombieHeight;
 
 	public EntityAbyssalZombie(World par1World) {
 		super(par1World);
@@ -391,26 +391,25 @@ public class EntityAbyssalZombie extends EntityMob implements ICoraliumEntity {
 	}
 
 	public void setChildSize(boolean p_146071_1_)
-    {
-        this.multiplySize(p_146071_1_ ? 0.5F : 1.0F);
-    }
+	{
+		multiplySize(p_146071_1_ ? 0.5F : 1.0F);
+	}
 
+	@Override
 	protected final void setSize(float p_70105_1_, float p_70105_2_)
-    {
-        boolean flag = zombieWidth > 0.0F && zombieHeight > 0.0F;
-        zombieWidth = p_70105_1_;
-        zombieHeight = p_70105_2_;
+	{
+		boolean flag = zombieWidth > 0.0F && zombieHeight > 0.0F;
+		zombieWidth = p_70105_1_;
+		zombieHeight = p_70105_2_;
 
-        if (!flag)
-        {
-            this.multiplySize(1.0F);
-        }
-    }
+		if (!flag)
+			multiplySize(1.0F);
+	}
 
-    protected final void multiplySize(float p_146069_1_)
-    {
-        super.setSize(zombieWidth * p_146069_1_, zombieHeight * p_146069_1_);
-    }
+	protected final void multiplySize(float p_146069_1_)
+	{
+		super.setSize(zombieWidth * p_146069_1_, zombieHeight * p_146069_1_);
+	}
 
 	class GroupData implements IEntityLivingData
 	{

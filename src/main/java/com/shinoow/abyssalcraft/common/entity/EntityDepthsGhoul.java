@@ -67,7 +67,7 @@ public class EntityDepthsGhoul extends EntityMob implements ICoraliumEntity {
 	private static final AttributeModifier orangeHealthBoost = new AttributeModifier(healthBoostUUID, "Orange Health Boost", 30.0D, 0);
 
 	private float ghoulWidth = -1.0F;
-    private float ghoulHeight;
+	private float ghoulHeight;
 
 	public EntityDepthsGhoul(World par1World) {
 		super(par1World);
@@ -455,26 +455,25 @@ public class EntityDepthsGhoul extends EntityMob implements ICoraliumEntity {
 	}
 
 	public void setChildSize(boolean p_146071_1_)
-    {
-        this.multiplySize(p_146071_1_ ? 0.5F : 1.0F);
-    }
+	{
+		multiplySize(p_146071_1_ ? 0.5F : 1.0F);
+	}
 
+	@Override
 	protected final void setSize(float p_70105_1_, float p_70105_2_)
-    {
-        boolean flag = ghoulWidth > 0.0F && ghoulHeight > 0.0F;
-        ghoulWidth = p_70105_1_;
-        ghoulHeight = p_70105_2_;
+	{
+		boolean flag = ghoulWidth > 0.0F && ghoulHeight > 0.0F;
+		ghoulWidth = p_70105_1_;
+		ghoulHeight = p_70105_2_;
 
-        if (!flag)
-        {
-            this.multiplySize(1.0F);
-        }
-    }
+		if (!flag)
+			multiplySize(1.0F);
+	}
 
-    protected final void multiplySize(float p_146069_1_)
-    {
-        super.setSize(ghoulWidth * p_146069_1_, ghoulHeight * p_146069_1_);
-    }
+	protected final void multiplySize(float p_146069_1_)
+	{
+		super.setSize(ghoulWidth * p_146069_1_, ghoulHeight * p_146069_1_);
+	}
 
 	class GroupData implements IEntityLivingData
 	{

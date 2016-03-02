@@ -16,8 +16,6 @@ import java.util.Random;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
-import net.minecraft.world.chunk.Chunk;
-
 import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.api.energy.disruption.DisruptionEntry;
 import com.shinoow.abyssalcraft.common.world.gen.WorldGenShoggothMonolith;
@@ -27,7 +25,7 @@ public class DisruptionMonolith extends DisruptionEntry {
 	public DisruptionMonolith() {
 		super("monolith", null);
 	}
-	
+
 	private int randomNum(Random rand){
 		int num = 1;
 		if(rand.nextInt(10) == 0)

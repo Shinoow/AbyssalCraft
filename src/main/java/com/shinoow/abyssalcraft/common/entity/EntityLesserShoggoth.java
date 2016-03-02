@@ -24,7 +24,6 @@ import net.minecraft.entity.monster.*;
 import net.minecraft.entity.passive.*;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.Potion;
@@ -51,7 +50,7 @@ public class EntityLesserShoggoth extends EntityMob implements ICoraliumEntity, 
 
 	private int monolithTimer;
 	private float shoggothWidth = -1.0F;
-    private float shoggothHeight;
+	private float shoggothHeight;
 
 	public EntityLesserShoggoth(World par1World) {
 		super(par1World);
@@ -144,7 +143,7 @@ public class EntityLesserShoggoth extends EntityMob implements ICoraliumEntity, 
 				attributeinstance.applyModifier(babySpeedBoostModifier);
 		}
 
-		this.setChildSize(par1);
+		setChildSize(par1);
 	}
 
 	@Override
@@ -349,9 +348,20 @@ public class EntityLesserShoggoth extends EntityMob implements ICoraliumEntity, 
 	}
 
 	@Override
-	protected Item getDropItem()
+	protected void dropFewItems(boolean par1, int par2)
 	{
-		return new ItemStack(AbyssalCraft.shoggothFlesh, 1, getShoggothType()).getItem();
+		ItemStack item = new ItemStack(AbyssalCraft.shoggothFlesh, 1, getShoggothType());
+
+		if (item != null)
+		{
+			int i = rand.nextInt(3);
+
+			if (par2 > 0)
+				i += rand.nextInt(par2 + 1);
+
+			for (int j = 0; j < i; ++j)
+				entityDropItem(item, 0);
+		}
 	}
 
 	@Override
@@ -437,26 +447,25 @@ public class EntityLesserShoggoth extends EntityMob implements ICoraliumEntity, 
 	}
 
 	public void setChildSize(boolean p_146071_1_)
-    {
-        this.multiplySize(p_146071_1_ ? 0.5F : 1.0F);
-    }
+	{
+		multiplySize(p_146071_1_ ? 0.5F : 1.0F);
+	}
 
+	@Override
 	protected final void setSize(float p_70105_1_, float p_70105_2_)
-    {
-        boolean flag = shoggothWidth > 0.0F && shoggothHeight > 0.0F;
-        shoggothWidth = p_70105_1_;
-        shoggothHeight = p_70105_2_;
+	{
+		boolean flag = shoggothWidth > 0.0F && shoggothHeight > 0.0F;
+		shoggothWidth = p_70105_1_;
+		shoggothHeight = p_70105_2_;
 
-        if (!flag)
-        {
-            this.multiplySize(1.0F);
-        }
-    }
+		if (!flag)
+			multiplySize(1.0F);
+	}
 
-    protected final void multiplySize(float p_146069_1_)
-    {
-        super.setSize(shoggothWidth * p_146069_1_, shoggothHeight * p_146069_1_);
-    }
+	protected final void multiplySize(float p_146069_1_)
+	{
+		super.setSize(shoggothWidth * p_146069_1_, shoggothHeight * p_146069_1_);
+	}
 
 	static {
 		noms.add(EntityAnimal.class);

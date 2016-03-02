@@ -56,7 +56,8 @@ public class EntityRemnant extends EntityMob implements IMerchant, IAntiEntity, 
 		tasks.addTask(0, new EntityAISwimming(this));
 		tasks.addTask(3, new EntityAIAttackOnCollide(this, EntityLivingBase.class, 0.35D, false));
 		tasks.addTask(4, new EntityAIMoveTowardsRestriction(this, 0.35D));
-		tasks.addTask(5, new EntityAIWander(this, 0.35D));
+		tasks.addTask(5, new EntityAIOpenDoor(this, true));
+		tasks.addTask(6, new EntityAIWander(this, 0.35D));
 		tasks.addTask(7, new EntityAILookIdle(this));
 		tasks.addTask(7, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
 		tasks.addTask(7, new EntityAIWatchClosest(this, EntityRemnant.class, 8.0F));
@@ -298,6 +299,12 @@ public class EntityRemnant extends EntityMob implements IMerchant, IAntiEntity, 
 	protected Item getDropItem()
 	{
 		return AbyssalCraft.eldritchScale;
+	}
+
+	@Override
+	protected boolean canDespawn()
+	{
+		return false;
 	}
 
 	@Override

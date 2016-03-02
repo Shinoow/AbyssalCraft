@@ -373,8 +373,12 @@ public class AbyssalCraftEventHooks {
 				event.replacement = AbyssalCraft.Darkstoneslab1;
 				event.setResult(Result.DENY);
 			}
-			if(event.original == Blocks.double_wooden_slab){
+			if(event.original == Blocks.double_stone_slab){
 				event.replacement = AbyssalCraft.Darkstoneslab2;
+				event.setResult(Result.DENY);
+			}
+			if(event.original == Blocks.wooden_pressure_plate){
+				event.replacement = AbyssalCraft.DLTpplate;
 				event.setResult(Result.DENY);
 			}
 		}

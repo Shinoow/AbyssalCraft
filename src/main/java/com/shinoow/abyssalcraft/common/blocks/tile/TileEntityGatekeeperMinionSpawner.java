@@ -17,9 +17,9 @@ import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.MathHelper;
 
-import com.shinoow.abyssalcraft.common.entity.EntityChagarothFist;
+import com.shinoow.abyssalcraft.common.entity.EntityGatekeeperMinion;
 
-public class TileEntityChagarothFistSpawner extends TileEntity {
+public class TileEntityGatekeeperMinionSpawner extends TileEntity {
 
 	private int activatingRangeFromPlayer = 16;
 
@@ -40,7 +40,7 @@ public class TileEntityChagarothFistSpawner extends TileEntity {
 	@Override
 	public void updateEntity() {
 		if (!worldObj.isRemote && isActivated()) {
-			EntityChagarothFist mob = new EntityChagarothFist(worldObj);
+			EntityGatekeeperMinion mob = new EntityGatekeeperMinion(worldObj);
 			mob.setLocationAndAngles(xCoord, yCoord, zCoord, MathHelper.wrapAngleTo180_float(worldObj.rand.nextFloat() * 360.0F), 10.0F);
 			worldObj.spawnEntityInWorld(mob);
 			worldObj.setBlockToAir(xCoord, yCoord, zCoord);

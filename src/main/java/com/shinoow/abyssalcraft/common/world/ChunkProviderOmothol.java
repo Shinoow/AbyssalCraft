@@ -16,6 +16,7 @@ import java.util.Random;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.common.structures.StructureShoggothPit;
+import com.shinoow.abyssalcraft.common.structures.omothol.MapGenOmothol;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockFalling;
@@ -29,7 +30,6 @@ import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraft.world.gen.NoiseGenerator;
 import net.minecraft.world.gen.NoiseGeneratorOctaves;
-import net.minecraftforge.event.terraingen.TerrainGen;
 
 public class ChunkProviderOmothol implements IChunkProvider
 {
@@ -40,6 +40,7 @@ public class ChunkProviderOmothol implements IChunkProvider
 	/** The biomes that are used to generate the chunk */
 	private BiomeGenBase[] biomesForGeneration;
 	double[] noiseData1, noiseData2, noiseData3, noiseData4, noiseData5;
+	MapGenOmothol omotholGenerator = new MapGenOmothol();
 	int[][] field_73203_h = new int[32][32];
 
 	public ChunkProviderOmothol(World par1World, long par2)
@@ -53,7 +54,6 @@ public class ChunkProviderOmothol implements IChunkProvider
 		noiseGen5 = new NoiseGeneratorOctaves(rand, 16);
 
 		NoiseGenerator[] noiseGens = {noiseGen1, noiseGen2, noiseGen3, noiseGen4, noiseGen5};
-		noiseGens = TerrainGen.getModdedNoiseGenerators(par1World, rand, noiseGens);
 		noiseGen1 = (NoiseGeneratorOctaves)noiseGens[0];
 		noiseGen2 = (NoiseGeneratorOctaves)noiseGens[1];
 		noiseGen3 = (NoiseGeneratorOctaves)noiseGens[2];
@@ -183,6 +183,8 @@ public class ChunkProviderOmothol implements IChunkProvider
 		generateTerrain(x, z, ablock, biomesForGeneration);
 		replaceBlocksForBiome(x, z, ablock, biomesForGeneration);
 
+		omotholGenerator.func_151539_a(this, worldObj, x, z, ablock);
+
 		Chunk chunk = new Chunk(worldObj, ablock, x, z);
 		byte[] abyte = chunk.getBiomeArray();
 
@@ -291,6 +293,8 @@ public class ChunkProviderOmothol implements IChunkProvider
 		int l = z * 16;
 		BiomeGenBase biomegenbase = worldObj.getBiomeGenForCoords(k + 16, l + 16);
 
+		omotholGenerator.generateStructuresInChunk(worldObj, rand, x, z);
+
 		for(int i = 0; i < 1; i++) {
 			int Xcoord2 = k + rand.nextInt(16);
 			int Zcoord2 = l + rand.nextInt(16);
@@ -353,5 +357,8 @@ public class ChunkProviderOmothol implements IChunkProvider
 	}
 
 	@Override
-	public void recreateStructures(int x, int z) {}
+	public void recreateStructures(int x, int z) {
+
+		omotholGenerator.func_151539_a(this, worldObj, x, z, null);
+	}
 }

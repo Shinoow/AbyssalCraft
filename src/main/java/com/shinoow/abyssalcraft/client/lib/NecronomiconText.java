@@ -159,9 +159,9 @@ public class NecronomiconText {
 	public static String CRAFTING_CORALIUM_CHUNK = translate("necronomicon.text.crafting.coraliumchunk");
 	public static String CRAFTING_CORALIUM_PLATE = translate("necronomicon.text.crafting.coraliumplate");
 	public static String CRAFTING_PLATED_CORALIUM_HELMET = translate("necronomicon.text.crafting.corhelmetp");
-	public static String CRAFTING_PLATED_CORALIUM_CHESTPLATE = translate("necronomicon.text.crafting.corhelmetp");
-	public static String CRAFTING_PLATED_CORALIUM_LEGGINGS = translate("necronomicon.text.crafting.corhelmetp");
-	public static String CRAFTING_PLATED_CORALIUM_BOOTS = translate("necronomicon.text.crafting.corhelmetp");
+	public static String CRAFTING_PLATED_CORALIUM_CHESTPLATE = translate("necronomicon.text.crafting.corplatep");
+	public static String CRAFTING_PLATED_CORALIUM_LEGGINGS = translate("necronomicon.text.crafting.corlegsp");
+	public static String CRAFTING_PLATED_CORALIUM_BOOTS = translate("necronomicon.text.crafting.corbootsp");
 	public static String CRAFTING_CORALIUM_LONGBOW = translate("necronomicon.text.crafting.corbow");
 	public static String CRAFTING_ENERGY_PEDESTAL_1 = translate("necronomicon.text.crafting.energypedestal.1");
 	public static String CRAFTING_ENERGY_PEDESTAL_2 = translate("necronomicon.text.crafting.energypedestal.2");
@@ -272,6 +272,7 @@ public class NecronomiconText {
 	public static String PE_TUT_8 = translate("necronomicon.text.pe.8");
 	public static String PE_TUT_9 = translate("necronomicon.text.pe.9");
 	public static String PE_TUT_10 = translate("necronomicon.text.pe.10");
+	public static String PE_TUT_11 = translate("necronomicon.text.pe.11");
 
 	public static String MACHINES_INFO = translate("necronomicon.text.machines.info");
 

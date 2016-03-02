@@ -16,25 +16,16 @@ import java.util.List;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.resources.I18n;
-import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
-import net.minecraft.item.ItemStack;
 import net.minecraft.util.StatCollector;
-import net.minecraft.util.Tuple;
-
 import org.lwjgl.input.Keyboard;
 
 import com.google.common.collect.Lists;
 import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
-import com.shinoow.abyssalcraft.api.necronomicon.CraftingStack;
-import com.shinoow.abyssalcraft.api.necronomicon.NecroData;
-import com.shinoow.abyssalcraft.api.necronomicon.NecroData.PageData;
 import com.shinoow.abyssalcraft.api.ritual.NecronomiconRitual;
 import com.shinoow.abyssalcraft.api.ritual.RitualRegistry;
 import com.shinoow.abyssalcraft.client.gui.necronomicon.buttons.ButtonCategory;
 import com.shinoow.abyssalcraft.client.gui.necronomicon.buttons.ButtonNextPage;
-import com.shinoow.abyssalcraft.client.lib.NecronomiconResources;
 import com.shinoow.abyssalcraft.client.lib.NecronomiconText;
 
 public class GuiNecronomiconRituals extends GuiNecronomicon {
@@ -98,9 +89,9 @@ public class GuiNecronomiconRituals extends GuiNecronomicon {
 				mc.displayGuiScreen((GuiScreen)null);
 			else if(button.id == 1)
 				mc.displayGuiScreen(new GuiNecronomicon(getBookType()));
-			else if(button.id == 2){
+			else if(button.id == 2)
 				mc.displayGuiScreen(new GuiNecronomiconEntry(getBookType(), AbyssalCraftAPI.internalNDHandler.getInternalNecroData("rituals"), new GuiNecronomiconRituals(getBookType()), AbyssalCraft.necronomicon));
-			} else if(button.id == 3){
+			else if(button.id == 3){
 				if(hasRituals(0))
 					mc.displayGuiScreen(new GuiNecronomiconRitualEntry(getBookType(), this, 0));
 			} else if(button.id == 4){

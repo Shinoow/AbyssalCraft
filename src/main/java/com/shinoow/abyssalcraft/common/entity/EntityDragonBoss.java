@@ -31,7 +31,6 @@ import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.StatCollector;
 import net.minecraft.util.Vec3;
-import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
@@ -88,9 +87,9 @@ public class EntityDragonBoss extends EntityMob implements IBossDisplayData, IEn
 
 	public EntityDragonBoss(World par1World) {
 		super(par1World);
-		dragonPartArray = new EntityDragonPart[] {dragonPartHead = new EntityDragonPart(this, "head", 8.0F, 8.0F), dragonPartBody = new EntityDragonPart(this, "body", 10.0F, 10.0F), dragonPartTail1 = new EntityDragonPart(this, "tail", 6.0F, 6.0F), dragonPartTail2 = new EntityDragonPart(this, "tail", 6.0F, 6.0F), dragonPartTail3 = new EntityDragonPart(this, "tail", 6.0F, 6.0F), dragonPartWing1 = new EntityDragonPart(this, "wing", 6.0F, 6.0F), dragonPartWing2 = new EntityDragonPart(this, "wing", 6.0F, 6.0F)};
+		dragonPartArray = new EntityDragonPart[] {dragonPartHead = new EntityDragonPart(this, "head", 9.0F, 9.0F), dragonPartBody = new EntityDragonPart(this, "body", 12.0F, 12.0F), dragonPartTail1 = new EntityDragonPart(this, "tail", 6.0F, 6.0F), dragonPartTail2 = new EntityDragonPart(this, "tail", 6.0F, 6.0F), dragonPartTail3 = new EntityDragonPart(this, "tail", 6.0F, 6.0F), dragonPartWing1 = new EntityDragonPart(this, "wing", 6.0F, 6.0F), dragonPartWing2 = new EntityDragonPart(this, "wing", 6.0F, 6.0F)};
 		setHealth(getMaxHealth());
-		setSize(18.0F, 10.0F);
+		setSize(24.0F, 12.0F);
 		noClip = false;
 		targetY = 100.0D;
 		ignoreFrustumCheck = true;
@@ -341,9 +340,9 @@ public class EntityDragonBoss extends EntityMob implements IBossDisplayData, IEn
 
 			if (!worldObj.isRemote && hurtTime == 0)
 			{
-				collideWithEntities(worldObj.getEntitiesWithinAABBExcludingEntity(this, dragonPartWing1.boundingBox.expand(6.0D, 4.0D, 6.0D).offset(0.0D, -1.0D, 0.0D)));
-				collideWithEntities(worldObj.getEntitiesWithinAABBExcludingEntity(this, dragonPartWing2.boundingBox.expand(6.0D, 4.0D, 6.0D).offset(0.0D, -1.0D, 0.0D)));
-				attackEntitiesInList(worldObj.getEntitiesWithinAABBExcludingEntity(this, dragonPartHead.boundingBox.expand(2.0D, 2.0D, 2.0D)));
+				collideWithEntities(worldObj.getEntitiesWithinAABBExcludingEntity(this, dragonPartWing1.boundingBox.expand(5.0D, 4.0D, 5.0D).offset(0.0D, -4.0D, 0.0D)));
+				collideWithEntities(worldObj.getEntitiesWithinAABBExcludingEntity(this, dragonPartWing2.boundingBox.expand(5.0D, 4.0D, 5.0D).offset(0.0D, -4.0D, 0.0D)));
+				attackEntitiesInList(worldObj.getEntitiesWithinAABBExcludingEntity(this, dragonPartHead.boundingBox.expand(1.5D, 1.5D, 1.5D)));
 			}
 
 			double[] adouble = getMovementOffsets(5, 1.0F);
@@ -382,12 +381,7 @@ public class EntityDragonBoss extends EntityMob implements IBossDisplayData, IEn
 	{
 		if (healingcircle != null)
 			if (healingcircle.isDead)
-			{
-				if (!worldObj.isRemote)
-					attackEntityFromPart(dragonPartHead, DamageSource.setExplosionSource((Explosion)null), 10.0F);
-
 				healingcircle = null;
-			}
 			else if (ticksExisted % 10 == 0 && getHealth() < getMaxHealth())
 				setHealth(getHealth() + 1.0F);
 			else if (ticksExisted % 10 == 0 && getHealth() < getMaxHealth()/2)

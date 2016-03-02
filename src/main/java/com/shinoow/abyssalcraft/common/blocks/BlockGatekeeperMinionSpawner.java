@@ -16,16 +16,16 @@ import net.minecraft.block.material.Material;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
-import com.shinoow.abyssalcraft.common.blocks.tile.TileEntityChagarothFistSpawner;
+import com.shinoow.abyssalcraft.common.blocks.tile.TileEntityGatekeeperMinionSpawner;
 
-public class BlockChagarothFistSpawner extends BlockContainer {
+public class BlockGatekeeperMinionSpawner extends BlockContainer {
 
-	public BlockChagarothFistSpawner() {
+	public BlockGatekeeperMinionSpawner() {
 		super(Material.rock);
 	}
 
 	@Override
 	public TileEntity createNewTileEntity(World var1, int var2) {
-		return new TileEntityChagarothFistSpawner();
+		return new TileEntityGatekeeperMinionSpawner();
 	}
 }

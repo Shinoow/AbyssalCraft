@@ -21,14 +21,16 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 
+import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.api.energy.IEnergyTransporter;
 import com.shinoow.abyssalcraft.api.event.ACEvents.RitualEvent;
 import com.shinoow.abyssalcraft.api.ritual.NecronomiconRitual;
 import com.shinoow.abyssalcraft.api.ritual.RitualRegistry;
 import com.shinoow.abyssalcraft.common.entity.EntityRemnant;
 import com.shinoow.abyssalcraft.common.items.ItemNecronomicon;
+import com.shinoow.abyssalcraft.common.util.IRitualAltar;
 
-public class TileEntityRitualAltar extends TileEntity {
+public class TileEntityRitualAltar extends TileEntity implements IRitualAltar {
 
 	private int ritualTimer;
 	private ItemStack[] offers = new ItemStack[8];
@@ -37,7 +39,7 @@ public class TileEntityRitualAltar extends TileEntity {
 	private int rot;
 	private EntityPlayer user;
 	private float consumedEnergy;
-
+	private boolean isDirty;
 
 	@Override
 	public void readFromNBT(NBTTagCompound nbttagcompound)
@@ -79,6 +81,11 @@ public class TileEntityRitualAltar extends TileEntity {
 	{
 		super.updateEntity();
 
+		if(isDirty || isPerformingRitual()){
+			worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
+			isDirty = false;
+		}
+
 		if(isPerformingRitual()){
 			ritualTimer++;
 
@@ -119,8 +126,45 @@ public class TileEntityRitualAltar extends TileEntity {
 						markDirty();
 					}
 			} else ritualTimer = 0;
-		}
 
+			if(AbyssalCraft.particleBlock){
+				worldObj.spawnParticle("lava", xCoord + 0.5, yCoord + 1, zCoord + 0.5, 0,0,0);
+
+				double x = 0, z = 0, o = 0;
+				for(double i = 0; i <= 0.7; i += 0.03) {
+					x = i * Math.cos(i) / 2;
+					z = i * Math.sin(i) / 2;
+					o = i * Math.tan(i) / 2;
+				}
+
+				worldObj.spawnParticle("largesmoke", xCoord - 2.5, yCoord + 0.95, zCoord + 0.5, x,0,0);
+				worldObj.spawnParticle("largesmoke", xCoord + 0.5, yCoord + 0.95, zCoord - 2.5, 0,0,z);
+				worldObj.spawnParticle("largesmoke", xCoord + 3.5, yCoord + 0.95, zCoord + 0.5, -x,0,0);
+				worldObj.spawnParticle("largesmoke", xCoord + 0.5, yCoord + 0.95, zCoord + 3.5, 0,0,-z);
+				worldObj.spawnParticle("largesmoke", xCoord - 1.5, yCoord + 0.95, zCoord + 2.5, o,0,-o);
+				worldObj.spawnParticle("largesmoke", xCoord - 1.5, yCoord + 0.95, zCoord - 1.5, o,0,o);
+				worldObj.spawnParticle("largesmoke", xCoord + 2.5, yCoord + 0.95, zCoord + 2.5, -o,0,-o);
+				worldObj.spawnParticle("largesmoke", xCoord + 2.5, yCoord + 0.95, zCoord - 1.5, -o,0,o);
+
+				worldObj.spawnParticle("flame", xCoord - 2.5, yCoord + 1.05, zCoord + 0.5, 0,0,0);
+				worldObj.spawnParticle("flame", xCoord + 0.5, yCoord + 1.05, zCoord - 2.5, 0,0,0);
+				worldObj.spawnParticle("flame", xCoord + 3.5, yCoord + 1.05, zCoord + 0.5, 0,0,0);
+				worldObj.spawnParticle("flame", xCoord + 0.5, yCoord + 1.05, zCoord + 3.5, 0,0,0);
+				worldObj.spawnParticle("flame", xCoord - 1.5, yCoord + 1.05, zCoord + 2.5, 0,0,0);
+				worldObj.spawnParticle("flame", xCoord - 1.5, yCoord + 1.05, zCoord - 1.5, 0,0,0);
+				worldObj.spawnParticle("flame", xCoord + 2.5, yCoord + 1.05, zCoord + 2.5, 0,0,0);
+				worldObj.spawnParticle("flame", xCoord + 2.5, yCoord + 1.05, zCoord - 1.5, 0,0,0);
+
+				worldObj.spawnParticle("smoke", xCoord - 2.5, yCoord + 1.05, zCoord + 0.5, 0,0,0);
+				worldObj.spawnParticle("smoke", xCoord + 0.5, yCoord + 1.05, zCoord - 2.5, 0,0,0);
+				worldObj.spawnParticle("smoke", xCoord + 3.5, yCoord + 1.05, zCoord + 0.5, 0,0,0);
+				worldObj.spawnParticle("smoke", xCoord + 0.5, yCoord + 1.05, zCoord + 3.5, 0,0,0);
+				worldObj.spawnParticle("smoke", xCoord - 1.5, yCoord + 1.05, zCoord + 2.5, 0,0,0);
+				worldObj.spawnParticle("smoke", xCoord - 1.5, yCoord + 1.05, zCoord - 1.5, 0,0,0);
+				worldObj.spawnParticle("smoke", xCoord + 2.5, yCoord + 1.05, zCoord + 2.5, 0,0,0);
+				worldObj.spawnParticle("smoke", xCoord + 2.5, yCoord + 1.05, zCoord - 1.5, 0,0,0);
+			}
+		}
 
 		if(rot == 360)
 			rot = 0;
@@ -128,13 +172,15 @@ public class TileEntityRitualAltar extends TileEntity {
 			rot++;
 	}
 
-	private boolean canPerform(){
+	@Override
+	public boolean canPerform(){
 
 		if(checkSurroundings(worldObj, xCoord, yCoord, zCoord)) return true;
 		return false;
 	}
 
-	private boolean checkSurroundings(World world, int x, int y, int z){
+	@Override
+	public boolean checkSurroundings(World world, int x, int y, int z){
 		TileEntity ped1 = world.getTileEntity(x - 3, y, z);
 		TileEntity ped2 = world.getTileEntity(x, y, z - 3);
 		TileEntity ped3 = world.getTileEntity(x + 3, y, z);
@@ -162,7 +208,8 @@ public class TileEntityRitualAltar extends TileEntity {
 		return false;
 	}
 
-	private void resetPedestals(World world, int x, int y, int z){
+	@Override
+	public void resetPedestals(World world, int x, int y, int z){
 		TileEntity ped1 = world.getTileEntity(x - 3, y, z);
 		TileEntity ped2 = world.getTileEntity(x, y, z - 3);
 		TileEntity ped3 = world.getTileEntity(x + 3, y, z);
@@ -186,6 +233,7 @@ public class TileEntityRitualAltar extends TileEntity {
 			}
 	}
 
+	@Override
 	public void performRitual(World world, int x, int y, int z, EntityPlayer player){
 
 		if(!isPerformingRitual()){
@@ -195,24 +243,24 @@ public class TileEntityRitualAltar extends TileEntity {
 					if(canPerform()){
 						ritual = RitualRegistry.instance().getRitual(world.provider.dimensionId, ((ItemNecronomicon)item.getItem()).getBookType(), offers, this.item);
 						if(ritual != null)
-								if(ritual.canRemnantAid()){
-									if(!world.getEntitiesWithinAABB(EntityRemnant.class, world.getBlock(x, y, z).getCollisionBoundingBoxFromPool(world, x, y, z).expand(32, 32, 32)).isEmpty()
-											&& world.getEntitiesWithinAABB(EntityRemnant.class, world.getBlock(x, y, z).getCollisionBoundingBoxFromPool(world, x, y, z).expand(32, 32, 32)).size() >= ritual.getBookType() + 1)
-										if(ritual.canCompleteRitual(world, x, y, z, player))
-											if(!MinecraftForge.EVENT_BUS.post(new RitualEvent.Pre(player, ritual, world, x, y, z))){
-												summonRemnants(world, x, y, z);
-												ritualTimer = 1;
-												resetPedestals(world, x, y, z);
-												user = player;
-												consumedEnergy = 0;
-											}
-								} else if(ritual.canCompleteRitual(world, x, y, z, player))
-									if(!MinecraftForge.EVENT_BUS.post(new RitualEvent.Pre(player, ritual, world, x, y, z))){
-										ritualTimer = 1;
-										resetPedestals(world, x, y, z);
-										user = player;
-										consumedEnergy = 0;
-									}
+							if(ritual.canRemnantAid()){
+								if(!world.getEntitiesWithinAABB(EntityRemnant.class, world.getBlock(x, y, z).getCollisionBoundingBoxFromPool(world, x, y, z).expand(32, 32, 32)).isEmpty()
+										&& world.getEntitiesWithinAABB(EntityRemnant.class, world.getBlock(x, y, z).getCollisionBoundingBoxFromPool(world, x, y, z).expand(32, 32, 32)).size() >= ritual.getBookType() + 1)
+									if(ritual.canCompleteRitual(world, x, y, z, player))
+										if(!MinecraftForge.EVENT_BUS.post(new RitualEvent.Pre(player, ritual, world, x, y, z))){
+											summonRemnants(world, x, y, z);
+											ritualTimer = 1;
+											resetPedestals(world, x, y, z);
+											user = player;
+											consumedEnergy = 0;
+										}
+							} else if(ritual.canCompleteRitual(world, x, y, z, player))
+								if(!MinecraftForge.EVENT_BUS.post(new RitualEvent.Pre(player, ritual, world, x, y, z))){
+									ritualTimer = 1;
+									resetPedestals(world, x, y, z);
+									user = player;
+									consumedEnergy = 0;
+								}
 					}
 		}
 	}
@@ -221,10 +269,12 @@ public class TileEntityRitualAltar extends TileEntity {
 		//		List<EntityRemnant> remnants = world.getEntitiesWithinAABB(EntityRemnant.class, world.getBlock(x, y, z).getCollisionBoundingBoxFromPool(world, x, y, z).expand(32, 32, 32));
 	}
 
+	@Override
 	public int getRitualCooldown(){
 		return ritualTimer;
 	}
 
+	@Override
 	public boolean isPerformingRitual(){
 		return ritualTimer < 200 && ritualTimer > 0;
 	}
@@ -233,11 +283,14 @@ public class TileEntityRitualAltar extends TileEntity {
 		return rot;
 	}
 
+	@Override
 	public ItemStack getItem(){
 		return item;
 	}
 
+	@Override
 	public void setItem(ItemStack item){
+		isDirty = true;
 		this.item = item;
 	}
 }

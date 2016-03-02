@@ -11,6 +11,8 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.common.blocks.tile;
 
+import com.shinoow.abyssalcraft.common.util.IRitualPedestal;
+
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
@@ -18,10 +20,11 @@ import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 
-public class TileEntityRitualPedestal extends TileEntity {
+public class TileEntityRitualPedestal extends TileEntity implements IRitualPedestal {
 
 	private ItemStack item;
 	private int rot;
+	private boolean isDirty;
 
 	@Override
 	public void readFromNBT(NBTTagCompound nbttagcompound)
@@ -60,6 +63,12 @@ public class TileEntityRitualPedestal extends TileEntity {
 	public void updateEntity()
 	{
 		super.updateEntity();
+
+		if(isDirty){
+			worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
+			isDirty = false;
+		}
+
 		if(rot == 360)
 			rot = 0;
 		if(item != null)
@@ -70,11 +79,14 @@ public class TileEntityRitualPedestal extends TileEntity {
 		return rot;
 	}
 
+	@Override
 	public ItemStack getItem(){
 		return item;
 	}
 
+	@Override
 	public void setItem(ItemStack item){
+		isDirty = true;
 		this.item = item;
 	}
 }

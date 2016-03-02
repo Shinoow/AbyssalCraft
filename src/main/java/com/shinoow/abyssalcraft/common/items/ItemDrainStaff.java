@@ -22,7 +22,6 @@ import com.shinoow.abyssalcraft.api.entity.IDreadEntity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.boss.IBossDisplayData;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.EnumAction;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -47,16 +46,6 @@ public class ItemDrainStaff extends Item {
 		return true;
 	}
 
-	@Override
-	public EnumAction getItemUseAction(ItemStack par1ItemStack) {
-		return EnumAction.block;
-	}
-
-	@Override
-	public int getMaxItemUseDuration(ItemStack par1ItemStack) {
-		return 0x11940;
-	}
-
 	public void increaseEnergy(ItemStack stack, String type){
 		if(!stack.hasTagCompound())
 			stack.setTagCompound(new NBTTagCompound());
@@ -75,9 +64,6 @@ public class ItemDrainStaff extends Item {
 	@Override
 	@SuppressWarnings("rawtypes")
 	public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player) {
-
-		player.setItemInUse(stack, getMaxItemUseDuration(stack));
-
 
 		int range = 50;
 		Vec3 v = player.getLookVec().normalize();

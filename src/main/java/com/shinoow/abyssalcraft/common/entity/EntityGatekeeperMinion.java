@@ -29,7 +29,7 @@ import net.minecraft.entity.ai.EntityAIWander;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
 
@@ -93,6 +93,12 @@ public class EntityGatekeeperMinion extends EntityMob implements ICoraliumEntity
 	}
 
 	@Override
+	protected boolean canDespawn()
+	{
+		return false;
+	}
+
+	@Override
 	protected String getDeathSound()
 	{
 		return "abyssalcraft:shadow.death";
@@ -124,9 +130,22 @@ public class EntityGatekeeperMinion extends EntityMob implements ICoraliumEntity
 	}
 
 	@Override
-	protected Item getDropItem()
+	protected void dropFewItems(boolean par1, int par2)
 	{
-		return AbyssalCraft.ethaxiumIngot;
+		ItemStack item = new ItemStack(AbyssalCraft.eldritchScale);
+
+		if(rand.nextInt(10) == 0) item = new ItemStack(AbyssalCraft.ethaxiumIngot);
+
+		if (item != null)
+		{
+			int i = rand.nextInt(3);
+
+			if (par2 > 0)
+				i += rand.nextInt(par2 + 1);
+
+			for (int j = 0; j < i; ++j)
+				entityDropItem(item, 0);
+		}
 	}
 
 	@Override

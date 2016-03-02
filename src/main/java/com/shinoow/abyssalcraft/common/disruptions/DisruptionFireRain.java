@@ -77,11 +77,11 @@ public class DisruptionFireRain extends DisruptionEntry {
 		EntityLargeFireball fireball = new EntityLargeFireball(world);
 		fireball.setLocationAndAngles(x, y, z, fireball.rotationYaw, fireball.rotationPitch);
 		fireball.setPosition(x, y, z);
-		double d6 = (double)MathHelper.sqrt_double(accx * accx + accy * accy + accz * accz);
+		double d6 = MathHelper.sqrt_double(accx * accx + accy * accy + accz * accz);
 		fireball.accelerationX = accx / d6 * 0.1D;
 		fireball.accelerationY = accy / d6 * 0.1D;
 		fireball.accelerationZ = accz / d6 * 0.1D;
-		
+
 		return fireball;
 	}
 }

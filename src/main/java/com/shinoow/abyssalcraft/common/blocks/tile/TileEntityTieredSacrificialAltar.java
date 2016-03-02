@@ -16,6 +16,8 @@ import java.util.Random;
 
 import com.shinoow.abyssalcraft.api.energy.IEnergyContainer;
 import com.shinoow.abyssalcraft.api.energy.IEnergyTransporter;
+import com.shinoow.abyssalcraft.common.util.ISingletonInventory;
+
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.entity.player.EntityPlayer;
@@ -26,7 +28,7 @@ import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 
-public class TileEntityTieredSacrificialAltar extends TileEntity implements IEnergyContainer {
+public class TileEntityTieredSacrificialAltar extends TileEntity implements IEnergyContainer, ISingletonInventory {
 
 	private ItemStack item;
 	private int rot;
@@ -35,6 +37,7 @@ public class TileEntityTieredSacrificialAltar extends TileEntity implements IEne
 	EntityLivingBase entity;
 	private int collectionLimit;
 	private int coolDown;
+	private boolean isDirty;
 
 	@Override
 	public void readFromNBT(NBTTagCompound nbttagcompound)
@@ -79,6 +82,12 @@ public class TileEntityTieredSacrificialAltar extends TileEntity implements IEne
 	public void updateEntity()
 	{
 		super.updateEntity();
+
+		if(isDirty){
+			worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
+			isDirty = false;
+		}
+
 		if(rot == 360)
 			rot = 0;
 		if(item != null)
@@ -155,11 +164,14 @@ public class TileEntityTieredSacrificialAltar extends TileEntity implements IEne
 		return rot;
 	}
 
+	@Override
 	public ItemStack getItem(){
 		return item;
 	}
 
+	@Override
 	public void setItem(ItemStack item){
+		isDirty = true;
 		this.item = item;
 	}
 

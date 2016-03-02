@@ -11,8 +11,11 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.client.render.entity;
 
+import org.lwjgl.opengl.GL11;
+
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.boss.BossStatus;
 import net.minecraft.util.ResourceLocation;
 
@@ -51,5 +54,11 @@ public class RenderJzahar extends RenderLiving {
 	public void doRender(Entity par1Entity, double par2, double par4, double par6, float par8, float par9)
 	{
 		doRender((EntityJzahar)par1Entity, par2, par4, par6, par8, par9);
+	}
+
+	@Override
+	protected void preRenderCallback(EntityLivingBase par1EntityLivingBase, float par2)
+	{
+		GL11.glScalef(1.5F, 1.5F, 1.5F);
 	}
 }

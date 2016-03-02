@@ -1,3 +1,14 @@
+/*******************************************************************************
+ * AbyssalCraft
+ * Copyright (c) 2012 - 2016 Shinoow.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the GNU Lesser Public License v3
+ * which accompanies this distribution, and is available at
+ * http://www.gnu.org/licenses/lgpl-3.0.txt
+ * 
+ * Contributors:
+ *     Shinoow -  implementation
+ ******************************************************************************/
 package com.shinoow.abyssalcraft.common.handlers;
 
 import java.util.List;
@@ -5,8 +16,6 @@ import java.util.List;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.Tuple;
-
 import com.google.common.collect.Lists;
 import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.api.internal.DummyNecroDataHandler;
@@ -136,8 +145,8 @@ public class InternalNecroDataHandler extends DummyNecroDataHandler {
 				new Page(4, NecronomiconText.MATERIAL_DARKSTONE_2),
 				new Page(5, new ItemStack(AbyssalCraft.Coraliumore), NecronomiconText.MATERIAL_CORALIUM_1),
 				new Page(6, NecronomiconText.MATERIAL_CORALIUM_2),
-				new Page(7, new ItemStack(AbyssalCraft.DLTSapling), NecronomiconText.MATERIAL_DARKSTONE_1),
-				new Page(8, NecronomiconText.MATERIAL_DARKSTONE_2),
+				new Page(7, new ItemStack(AbyssalCraft.DLTSapling), NecronomiconText.MATERIAL_DARKLANDS_OAK_1),
+				new Page(8, NecronomiconText.MATERIAL_DARKLANDS_OAK_2),
 				new Page(9, new ItemStack(AbyssalCraft.nitreOre), NecronomiconText.MATERIAL_NITRE_1),
 				new Page(10, NecronomiconText.MATERIAL_NITRE_2),
 				new Page(11, new ItemStack(AbyssalCraft.anticwater), NecronomiconText.MATERIAL_LIQUID_ANTIMATTER_1),
@@ -297,17 +306,17 @@ public class InternalNecroDataHandler extends DummyNecroDataHandler {
 				new Page(2, NecronomiconText.CRAFTING_LIFE_CRYSTAL_2),
 				new Page(3, new CraftingStack(AbyssalCraft.ethaxiumIngot, AbyssalCraft.ethaxium_brick, AbyssalCraft.ethaxium_brick, AbyssalCraft.ethaxium_brick, AbyssalCraft.ethaxium_brick,
 						AbyssalCraft.lifeCrystal, AbyssalCraft.ethaxium_brick, AbyssalCraft.ethaxium_brick, AbyssalCraft.ethaxium_brick, AbyssalCraft.ethaxium_brick), NecronomiconText.CRAFTING_ETHAXIUM_INGOT_1),
-				new Page(4, NecronomiconText.CRAFTING_ETHAXIUM_INGOT_2),
-				new Page(5, new CraftingStack(AbyssalCraft.engravingBlank), NecronomiconText.CRAFTING_BLANK_ENGRAVING_1),
-				new Page(6, NecronomiconText.CRAFTING_BLANK_ENGRAVING_2),
-				new Page(7, new CraftingStack(AbyssalCraft.coin, null, Items.iron_ingot, null, Items.iron_ingot, Items.flint, Items.iron_ingot, null, Items.iron_ingot, null), NecronomiconText.CRAFTING_COIN),
-				new Page(8, new CraftingStack(AbyssalCraft.engraver), NecronomiconText.CRAFTING_ENGRAVER),
-				new Page(9, new CraftingStack(AbyssalCraft.crystalbag_s), NecronomiconText.CRAFTING_CRYSTAL_BAG_1),
-				new Page(10, NecronomiconText.CRAFTING_CRYSTAL_BAG_2),
-				new Page(11, new CraftingStack(AbyssalCraft.materializer), NecronomiconText.CRAFTING_MATERIALIZER_1),
-				new Page(12, NecronomiconText.CRAFTING_MATERIALIZER_2),
-				new Page(13, new CraftingStack(AbyssalCraft.abyssalnomicon), NecronomiconText.CRAFTING_ABYSSALNOMICON_1),
-				new Page(14, NecronomiconText.CRAFTING_ABYSSALNOMICON_2));
+						new Page(4, NecronomiconText.CRAFTING_ETHAXIUM_INGOT_2),
+						new Page(5, new CraftingStack(AbyssalCraft.engravingBlank), NecronomiconText.CRAFTING_BLANK_ENGRAVING_1),
+						new Page(6, NecronomiconText.CRAFTING_BLANK_ENGRAVING_2),
+						new Page(7, new CraftingStack(AbyssalCraft.coin, null, Items.iron_ingot, null, Items.iron_ingot, Items.flint, Items.iron_ingot, null, Items.iron_ingot, null), NecronomiconText.CRAFTING_COIN),
+						new Page(8, new CraftingStack(AbyssalCraft.engraver), NecronomiconText.CRAFTING_ENGRAVER),
+						new Page(9, new CraftingStack(AbyssalCraft.crystalbag_s), NecronomiconText.CRAFTING_CRYSTAL_BAG_1),
+						new Page(10, NecronomiconText.CRAFTING_CRYSTAL_BAG_2),
+						new Page(11, new CraftingStack(AbyssalCraft.materializer), NecronomiconText.CRAFTING_MATERIALIZER_1),
+						new Page(12, NecronomiconText.CRAFTING_MATERIALIZER_2),
+						new Page(13, new CraftingStack(AbyssalCraft.abyssalnomicon), NecronomiconText.CRAFTING_ABYSSALNOMICON_1),
+						new Page(14, NecronomiconText.CRAFTING_ABYSSALNOMICON_2));
 		addPages("darkrealm", "materials", new Page(1, new ItemStack(AbyssalCraft.Darkstone), NecronomiconText.MATERIAL_DARKSTONE_1),
 				new Page(2, NecronomiconText.MATERIAL_DARKSTONE_2));
 		addPages("darkrealm", "progression", new Page(1, NecronomiconText.PROGRESSION_DARK_REALM_1),
@@ -342,12 +351,13 @@ public class InternalNecroDataHandler extends DummyNecroDataHandler {
 		addPages("rituals", "potentialenergy", new Page(1, NecronomiconText.PE_TUT_1),
 				new Page(2, NecronomiconResources.PE_TUT_1, NecronomiconText.PE_TUT_2),
 				new Page(3, NecronomiconResources.PE_TUT_2, NecronomiconText.PE_TUT_3),
-				new Page(4, NecronomiconResources.PE_TUT_3, NecronomiconText.PE_TUT_4),
-				new Page(5, NecronomiconText.PE_TUT_5),
-				new Page(6, NecronomiconResources.PE_TUT_4, NecronomiconText.PE_TUT_6),
-				new Page(7, NecronomiconResources.PE_TUT_5, NecronomiconText.PE_TUT_7),
-				new Page(8, NecronomiconResources.PE_TUT_6, NecronomiconText.PE_TUT_8),
-				new Page(9, NecronomiconResources.PE_TUT_7, NecronomiconText.PE_TUT_9),
-				new Page(10, NecronomiconText.PE_TUT_10));
+				new Page(4, NecronomiconText.PE_TUT_4),
+				new Page(5, NecronomiconResources.PE_TUT_3, NecronomiconText.PE_TUT_5),
+				new Page(6, NecronomiconText.PE_TUT_6),
+				new Page(7, NecronomiconResources.PE_TUT_4, NecronomiconText.PE_TUT_7),
+				new Page(8, NecronomiconResources.PE_TUT_5, NecronomiconText.PE_TUT_8),
+				new Page(9, NecronomiconResources.PE_TUT_6, NecronomiconText.PE_TUT_9),
+				new Page(10, NecronomiconResources.PE_TUT_7, NecronomiconText.PE_TUT_10),
+				new Page(11, NecronomiconText.PE_TUT_11));
 	}
 }
