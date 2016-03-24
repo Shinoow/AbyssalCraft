@@ -14,7 +14,7 @@ package com.shinoow.abyssalcraft.common.entity;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.EntityAIAttackOnCollide;
+import net.minecraft.entity.ai.EntityAIAttackMelee;
 import net.minecraft.entity.ai.EntityAIFleeSun;
 import net.minecraft.entity.ai.EntityAIHurtByTarget;
 import net.minecraft.entity.ai.EntityAILookIdle;
@@ -25,7 +25,9 @@ import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
+import net.minecraft.util.EnumHand;
 import net.minecraft.util.EnumParticleTypes;
+import net.minecraft.util.SoundEvent;
 import net.minecraft.world.World;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
@@ -39,7 +41,7 @@ public class EntityShadowBeast extends EntityMob implements IAntiEntity, ICorali
 	public EntityShadowBeast(World par1World) {
 		super(par1World);
 		setSize(1.0F, 2.8F);
-		tasks.addTask(2, new EntityAIAttackOnCollide(this, EntityPlayer.class, 0.35D, true));
+		tasks.addTask(2, new EntityAIAttackMelee(this, 0.35D, true));
 		tasks.addTask(3, new EntityAIMoveTowardsRestriction(this, 0.35D));
 		tasks.addTask(4, new EntityAIWander(this, 0.35D));
 		tasks.addTask(5, new EntityAIFleeSun(this, 0.35D));
@@ -54,21 +56,22 @@ public class EntityShadowBeast extends EntityMob implements IAntiEntity, ICorali
 	{
 		super.applyEntityAttributes();
 
-		getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setBaseValue(0.3D);
+		getEntityAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue(0.3D);
 
 		if(AbyssalCraft.hardcoreMode){
-			getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(200.0D);
-			getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(20.0D);
+			getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(200.0D);
+			getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(20.0D);
 		} else {
-			getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(100.0D);
-			getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(10.0D);
+			getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(100.0D);
+			getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(10.0D);
 		}
 	}
 
 	@Override
 	public boolean attackEntityAsMob(Entity par1Entity)
 	{
-		swingItem();
+		swingArm(EnumHand.MAIN_HAND);
+		swingArm(EnumHand.OFF_HAND);
 		boolean flag = super.attackEntityAsMob(par1Entity);
 
 		return flag;
@@ -81,15 +84,15 @@ public class EntityShadowBeast extends EntityMob implements IAntiEntity, ICorali
 	}
 
 	@Override
-	protected String getHurtSound()
+	protected SoundEvent getHurtSound()
 	{
-		return "abyssalcraft:shadow.hit";
+		return AbyssalCraft.shadow_hurt;
 	}
 
 	@Override
-	protected String getDeathSound()
+	protected SoundEvent getDeathSound()
 	{
-		return "abyssalcraft:shadow.death";
+		return AbyssalCraft.shadow_death;
 	}
 
 	@Override

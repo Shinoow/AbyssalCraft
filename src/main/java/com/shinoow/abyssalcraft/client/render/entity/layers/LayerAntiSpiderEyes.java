@@ -55,7 +55,7 @@ public class LayerAntiSpiderEyes implements LayerRenderer<EntityAntiSpider>
 		j = i % 65536;
 		k = i / 65536;
 		OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, j / 1.0F, k / 1.0F);
-		spiderRenderer.func_177105_a(entitylivingbaseIn, partialTicks);
+		spiderRenderer.setLightmap(entitylivingbaseIn, partialTicks);
 		GlStateManager.disableBlend();
 		GlStateManager.enableAlpha();
 	}

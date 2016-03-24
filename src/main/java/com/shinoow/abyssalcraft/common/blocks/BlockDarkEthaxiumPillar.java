@@ -11,6 +11,7 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.common.blocks;
 
+import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 
 public class BlockDarkEthaxiumPillar extends BlockACBasic {
@@ -21,7 +22,7 @@ public class BlockDarkEthaxiumPillar extends BlockACBasic {
 	//	private static IIcon overlay;
 
 	public BlockDarkEthaxiumPillar() {
-		super(Material.rock, "pickaxe", 8, 150.0F, Float.MAX_VALUE, soundTypeStone);
+		super(Material.rock, "pickaxe", 8, 150.0F, Float.MAX_VALUE, SoundType.STONE);
 	}
 
 	//	@Override

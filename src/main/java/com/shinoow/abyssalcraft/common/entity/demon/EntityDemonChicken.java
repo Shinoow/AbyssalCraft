@@ -11,12 +11,14 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.common.entity.demon;
 
-import com.shinoow.abyssalcraft.AbyssalCraft;
-
 import net.minecraft.block.Block;
 import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.util.BlockPos;
+import net.minecraft.init.SoundEvents;
+import net.minecraft.util.SoundEvent;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+
+import com.shinoow.abyssalcraft.AbyssalCraft;
 
 public class EntityDemonChicken extends EntityDemonAnimal {
 
@@ -36,33 +38,33 @@ public class EntityDemonChicken extends EntityDemonAnimal {
 		super.applyEntityAttributes();
 
 		if(AbyssalCraft.hardcoreMode){
-			getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(20.0D);
-			getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(4.0D);
-		} else getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(10.0D);
+			getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(20.0D);
+			getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(4.0D);
+		} else getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(10.0D);
 	}
 
 	@Override
-	protected String getLivingSound()
+	protected SoundEvent getAmbientSound()
 	{
-		return "mob.chicken.say";
+		return SoundEvents.entity_chicken_ambient;
 	}
 
 	@Override
-	protected String getHurtSound()
+	protected SoundEvent getHurtSound()
 	{
-		return "mob.ghast.scream";
+		return SoundEvents.entity_ghast_hurt;
 	}
 
 	@Override
-	protected String getDeathSound()
+	protected SoundEvent getDeathSound()
 	{
-		return "mob.chicken.hurt";
+		return SoundEvents.entity_chicken_death;
 	}
 
 	@Override
 	protected void playStepSound(BlockPos pos, Block par4)
 	{
-		playSound("mob.chicken.step", 0.15F, 1.0F);
+		playSound(SoundEvents.entity_chicken_step, 0.15F, 1.0F);
 	}
 
 	@Override

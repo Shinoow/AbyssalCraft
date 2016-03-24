@@ -1,6 +1,6 @@
 {
-	"parent": "block/cube_all",
+	"parent": "block/cross",
 	"textures": {
-		"all": "abyssalcraft:blocks/dfire_layer_0"
+		"cross": "abyssalcraft:blocks/dfire_layer_0"
 	}
 }

@@ -18,11 +18,11 @@ import net.minecraft.block.BlockSlab;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyBool;
-import net.minecraft.block.state.BlockState;
+import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.BlockPos;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -31,7 +31,7 @@ import com.shinoow.abyssalcraft.AbyssalCraft;
 
 public abstract class BlockACSlab extends BlockSlab {
 
-	private static final PropertyBool VARIANT_PROPERTY = PropertyBool.create("variant");
+	public static final PropertyBool VARIANT_PROPERTY = PropertyBool.create("variant");
 
 	private Block singleSlab;
 
@@ -76,9 +76,9 @@ public abstract class BlockACSlab extends BlockSlab {
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public Item getItem(World par1World, BlockPos pos)
+	public ItemStack getItem(World par1World, BlockPos pos, IBlockState state)
 	{
-		return Item.getItemFromBlock(singleSlab);
+		return new ItemStack(singleSlab);
 	}
 
 	@Override
@@ -94,7 +94,7 @@ public abstract class BlockACSlab extends BlockSlab {
 	}
 
 	@Override
-	public Object getVariant(ItemStack stack) {
+	public Comparable<?> getTypeForItem(ItemStack stack) {
 
 		return false;
 	}
@@ -131,11 +131,11 @@ public abstract class BlockACSlab extends BlockSlab {
 	}
 
 	@Override
-	protected final BlockState createBlockState() {
+	protected final BlockStateContainer createBlockState() {
 		if (isDouble())
-			return new BlockState(this, new IProperty[] {VARIANT_PROPERTY});
+			return new BlockStateContainer(this, new IProperty[] {VARIANT_PROPERTY});
 		else
-			return new BlockState(
+			return new BlockStateContainer(
 					this,
 					new IProperty[] {VARIANT_PROPERTY, HALF});
 	}

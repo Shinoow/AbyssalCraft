@@ -19,8 +19,8 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.entity.IRangedAttackMob;
 import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.EntityAIArrowAttack;
-import net.minecraft.entity.ai.EntityAIAttackOnCollide;
+import net.minecraft.entity.ai.EntityAIAttackMelee;
+import net.minecraft.entity.ai.EntityAIAttackRanged;
 import net.minecraft.entity.ai.EntityAIHurtByTarget;
 import net.minecraft.entity.ai.EntityAILookIdle;
 import net.minecraft.entity.ai.EntityAIMoveTowardsRestriction;
@@ -29,13 +29,18 @@ import net.minecraft.entity.ai.EntityAIWander;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.item.Item;
+import net.minecraft.network.datasync.DataParameter;
+import net.minecraft.network.datasync.DataSerializers;
+import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.pathfinding.PathNavigate;
 import net.minecraft.pathfinding.PathNavigateClimber;
 import net.minecraft.potion.PotionEffect;
-import net.minecraft.util.BlockPos;
 import net.minecraft.util.DamageSource;
-import net.minecraft.util.MathHelper;
+import net.minecraft.util.SoundEvent;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
@@ -43,10 +48,11 @@ import com.shinoow.abyssalcraft.api.entity.IDreadEntity;
 
 public class EntityGreaterDreadSpawn extends EntityMob implements IDreadEntity, IRangedAttackMob {
 
+	private static final DataParameter<Byte> CLIMBING = EntityDataManager.<Byte>createKey(EntityGreaterDreadSpawn.class, DataSerializers.BYTE);
 	private static boolean hasMerged;
 
-	private EntityAIArrowAttack arrowAttack = new EntityAIArrowAttack(this, 0.6D, 20, 60, 8.0F);
-	private EntityAIAttackOnCollide attackOnCollide = new EntityAIAttackOnCollide(this, EntityPlayer.class, 0.35D, true);
+	private EntityAIAttackRanged arrowAttack = new EntityAIAttackRanged(this, 0.6D, 20, 8.0F);
+	private EntityAIAttackMelee attackOnCollide = new EntityAIAttackMelee(this, 0.35D, true);
 
 	public EntityGreaterDreadSpawn(World par1World) {
 		super(par1World);
@@ -67,15 +73,15 @@ public class EntityGreaterDreadSpawn extends EntityMob implements IDreadEntity, 
 	{
 		super.applyEntityAttributes();
 
-		getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setBaseValue(0.2D);
-		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.5D);
+		getEntityAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue(0.2D);
+		getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.5D);
 
 		if(AbyssalCraft.hardcoreMode){
-			getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(200.0D);
-			getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(24.0D);
+			getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(200.0D);
+			getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(24.0D);
 		} else {
-			getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(100.0D);
-			getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(12.0D);
+			getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(100.0D);
+			getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(12.0D);
 		}
 	}
 
@@ -90,7 +96,7 @@ public class EntityGreaterDreadSpawn extends EntityMob implements IDreadEntity, 
 
 		if (super.attackEntityAsMob(par1Entity))
 			if (par1Entity instanceof EntityLivingBase)
-				((EntityLivingBase)par1Entity).addPotionEffect(new PotionEffect(AbyssalCraft.Dplague.id, 100));
+				((EntityLivingBase)par1Entity).addPotionEffect(new PotionEffect(AbyssalCraft.Dplague, 100));
 		return super.attackEntityAsMob(par1Entity);
 	}
 
@@ -98,7 +104,7 @@ public class EntityGreaterDreadSpawn extends EntityMob implements IDreadEntity, 
 	protected void entityInit()
 	{
 		super.entityInit();
-		dataWatcher.addObject(18, Byte.valueOf((byte)0));
+		dataWatcher.register(CLIMBING, Byte.valueOf((byte)0));
 	}
 
 	@Override
@@ -111,27 +117,27 @@ public class EntityGreaterDreadSpawn extends EntityMob implements IDreadEntity, 
 	}
 
 	@Override
-	protected String getLivingSound()
+	protected SoundEvent getAmbientSound()
 	{
-		return "mob.zombie.say";
+		return SoundEvents.entity_zombie_ambient;
 	}
 
 	@Override
-	protected String getHurtSound()
+	protected SoundEvent getHurtSound()
 	{
-		return "mob.zombie.hurt";
+		return SoundEvents.entity_zombie_hurt;
 	}
 
 	@Override
-	protected String getDeathSound()
+	protected SoundEvent getDeathSound()
 	{
-		return "mob.zombie.death";
+		return SoundEvents.entity_zombie_death;
 	}
 
 	@Override
 	protected void playStepSound(BlockPos pos, Block par4)
 	{
-		worldObj.playSoundAtEntity(this, "mob.zombie.step", 0.15F, 1.0F);
+		playSound(SoundEvents.entity_zombie_step, 0.15F, 1.0F);
 	}
 
 	@Override
@@ -146,7 +152,7 @@ public class EntityGreaterDreadSpawn extends EntityMob implements IDreadEntity, 
 	 */
 	public boolean isBesideClimbableBlock()
 	{
-		return (dataWatcher.getWatchableObjectByte(18) & 1) != 0;
+		return (dataWatcher.get(CLIMBING) & 1) != 0;
 	}
 
 	/**
@@ -155,14 +161,14 @@ public class EntityGreaterDreadSpawn extends EntityMob implements IDreadEntity, 
 	 */
 	public void setBesideClimbableBlock(boolean par1)
 	{
-		byte b0 = dataWatcher.getWatchableObjectByte(18);
+		byte b0 = dataWatcher.get(CLIMBING);
 
 		if (par1)
 			b0 = (byte)(b0 | 1);
 		else
 			b0 &= -2;
 
-		dataWatcher.updateObject(18, Byte.valueOf(b0));
+		dataWatcher.set(CLIMBING, Byte.valueOf(b0));
 	}
 
 	@Override
@@ -237,7 +243,7 @@ public class EntityGreaterDreadSpawn extends EntityMob implements IDreadEntity, 
 		double d2 = p_82196_1_.posZ - posZ;
 		float f1 = MathHelper.sqrt_double(d0 * d0 + d2 * d2) * 0.2F;
 		entitydreadslug.setThrowableHeading(d0, d1 + f1, d2, 1.6F, 12.0F);
-		playSound("random.bow", 1.0F, 1.0F / (getRNG().nextFloat() * 0.4F + 0.8F));
+		playSound(SoundEvents.entity_skeleton_shoot, 1.0F, 1.0F / (getRNG().nextFloat() * 0.4F + 0.8F));
 		worldObj.spawnEntityInWorld(entitydreadslug);
 	}
 }

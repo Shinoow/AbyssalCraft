@@ -14,23 +14,29 @@ package com.shinoow.abyssalcraft.common.blocks;
 import java.util.List;
 import java.util.Random;
 
-import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
+import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyEnum;
-import net.minecraft.block.state.BlockState;
+import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.BlockPos;
+import net.minecraft.util.BlockRenderLayer;
+import net.minecraft.util.EnumBlockRenderType;
 import net.minecraft.util.EnumFacing;
-import net.minecraft.util.EnumWorldBlockLayer;
+import net.minecraft.util.EnumHand;
 import net.minecraft.util.IStringSerializable;
+import net.minecraft.util.SoundCategory;
+import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -47,10 +53,16 @@ public class BlockTieredEnergyPedestal extends BlockContainer {
 		setUnlocalizedName("tieredenergypedestal");
 		setHardness(6.0F);
 		setResistance(12.0F);
-		setStepSound(Block.soundTypeStone);
+		setStepSound(SoundType.STONE);
 		setCreativeTab(AbyssalCraft.tabDecoration);
-		setBlockBounds(0.25F, 0.0F, 0.25F, 0.75F, 1.0F, 0.75F);
+		//		setBlockBounds(0.25F, 0.0F, 0.25F, 0.75F, 1.0F, 0.75F);
 		setDefaultState(blockState.getBaseState().withProperty(DIMENSION, EnumDimType.OVERWORLD));
+	}
+
+	@Override
+	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos)
+	{
+		return new AxisAlignedBB(0.25F, 0.0F, 0.25F, 0.75F, 1.0F, 0.75F);
 	}
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })
@@ -69,12 +81,12 @@ public class BlockTieredEnergyPedestal extends BlockContainer {
 	}
 
 	@Override
-	public boolean isOpaqueCube(){
+	public boolean isOpaqueCube(IBlockState state){
 		return false;
 	}
 
 	@Override
-	public boolean isFullCube()
+	public boolean isFullCube(IBlockState state)
 	{
 		return false;
 	}
@@ -85,31 +97,29 @@ public class BlockTieredEnergyPedestal extends BlockContainer {
 	}
 
 	@Override
-	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumFacing side, float hitX, float hitY, float hitZ) {
+	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, ItemStack heldItem, EnumFacing side, float hitX, float hitY, float hitZ) {
 		TileEntity tile = world.getTileEntity(pos);
 		if(tile != null && tile instanceof TileEntityTieredEnergyPedestal)
 			if(((TileEntityTieredEnergyPedestal)tile).getItem() != null){
 				player.inventory.addItemStackToInventory(((TileEntityTieredEnergyPedestal)tile).getItem());
 				((TileEntityTieredEnergyPedestal)tile).setItem(null);
-				world.playSoundEffect(pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, "random.pop", 0.5F, world.rand.nextFloat() - world.rand.nextFloat() * 0.2F + 1);
+				world.playSound(pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, SoundEvents.entity_item_pickup, SoundCategory.PLAYERS, 0.5F, world.rand.nextFloat() - world.rand.nextFloat() * 0.2F + 1, false);
 				return true;
-			} else {
-				ItemStack heldItem = player.getHeldItem();
+			} else //				ItemStack heldItem = player.getHeldItem();
 				if(heldItem != null){
 					ItemStack newItem = heldItem.copy();
 					newItem.stackSize = 1;
 					((TileEntityTieredEnergyPedestal)tile).setItem(newItem);
 					player.inventory.decrStackSize(player.inventory.currentItem, 1);
-					world.playSoundEffect(pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, "random.pop", 0.5F, world.rand.nextFloat() - world.rand.nextFloat() * 0.2F + 1);
+					world.playSound(pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, SoundEvents.entity_item_pickup, SoundCategory.PLAYERS, 0.5F, world.rand.nextFloat() - world.rand.nextFloat() * 0.2F + 1, false);
 					return true;
 				}
-			}
 		return false;
 	}
 
 	@Override
-	public int getRenderType() {
-		return 3;
+	public EnumBlockRenderType getRenderType(IBlockState state) {
+		return EnumBlockRenderType.MODEL;
 	}
 
 	@Override
@@ -137,9 +147,9 @@ public class BlockTieredEnergyPedestal extends BlockContainer {
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public EnumWorldBlockLayer getBlockLayer()
+	public BlockRenderLayer getBlockLayer()
 	{
-		return EnumWorldBlockLayer.CUTOUT;
+		return BlockRenderLayer.CUTOUT;
 	}
 
 	@Override
@@ -153,8 +163,8 @@ public class BlockTieredEnergyPedestal extends BlockContainer {
 	}
 
 	@Override
-	protected BlockState createBlockState() {
-		return new BlockState(this, new IProperty[] { DIMENSION });
+	protected BlockStateContainer createBlockState() {
+		return new BlockStateContainer(this, new IProperty[] { DIMENSION });
 	}
 
 	public enum EnumDimType implements IStringSerializable {

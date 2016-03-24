@@ -13,7 +13,7 @@ package com.shinoow.abyssalcraft.common.items;
 
 import java.util.List;
 
-import net.minecraft.block.Block;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
@@ -21,12 +21,16 @@ import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
+import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.EnumAction;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.ActionResult;
 import net.minecraft.util.DamageSource;
-import net.minecraft.util.EnumChatFormatting;
-import net.minecraft.util.StatCollector;
+import net.minecraft.util.EnumActionResult;
+import net.minecraft.util.EnumHand;
+import net.minecraft.util.text.TextFormatting;
+import net.minecraft.util.text.translation.I18n;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldSettings.GameType;
 
@@ -47,14 +51,14 @@ public class AbyssalCraftTool extends Item {
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
 	public void addInformation(ItemStack is, EntityPlayer player, List l, boolean B) {
-		l.add(StatCollector.translateToLocal("tooltip.devblade.1"));
-		l.add(StatCollector.translateToLocal("tooltip.devblade.2"));
+		l.add(I18n.translateToLocal("tooltip.devblade.1"));
+		l.add(I18n.translateToLocal("tooltip.devblade.2"));
 	}
 
 	@Override
 	public String getItemStackDisplayName(ItemStack par1ItemStack) {
 
-		return EnumChatFormatting.DARK_RED + StatCollector.translateToLocal(this.getUnlocalizedName() + ".name");
+		return TextFormatting.DARK_RED + super.getItemStackDisplayName(par1ItemStack);
 	}
 
 	@Override
@@ -74,9 +78,10 @@ public class AbyssalCraftTool extends Item {
 
 	@Override
 	@SuppressWarnings("rawtypes")
-	public ItemStack onItemRightClick(ItemStack par1ItemStack, World par2World, EntityPlayer par3EntityPlayer) {
+	public ActionResult<ItemStack> onItemRightClick(ItemStack par1ItemStack, World par2World, EntityPlayer par3EntityPlayer, EnumHand hand) {
 
-		par3EntityPlayer.setItemInUse(par1ItemStack, getMaxItemUseDuration(par1ItemStack));
+		//		par3EntityPlayer.setItemInUse(par1ItemStack, getMaxItemUseDuration(par1ItemStack));
+		par3EntityPlayer.setActiveHand(hand);
 
 		List list = par3EntityPlayer.worldObj.getEntitiesWithinAABBExcludingEntity(par3EntityPlayer, par3EntityPlayer.getEntityBoundingBox().expand(40D, 40D, 40D));
 
@@ -96,19 +101,25 @@ public class AbyssalCraftTool extends Item {
 						Minecraft.getMinecraft().thePlayer.sendChatMessage("I really thought I could do that, didn't I?");
 				}
 			}
-		return par1ItemStack;
+		return new ActionResult(EnumActionResult.PASS, par1ItemStack);
 	}
 
 	@Override
-	public boolean canHarvestBlock(Block par1Block) {
-		return par1Block == Blocks.web;
+	public boolean canHarvestBlock(IBlockState state) {
+		return state.getBlock() == Blocks.web;
 	}
 
 	@Override
 	@SuppressWarnings({ "rawtypes", "unchecked", "deprecation" })
-	public Multimap getItemAttributeModifiers() {
-		Multimap multimap = super.getItemAttributeModifiers();
-		multimap.put(SharedMonsterAttributes.attackDamage.getAttributeUnlocalizedName(), new AttributeModifier(itemModifierUUID, "Weapon modifier", weaponDamage, 0));
+	public Multimap getItemAttributeModifiers(EntityEquipmentSlot equipmentSlot) {
+		Multimap multimap = super.getItemAttributeModifiers(equipmentSlot);
+
+		if (equipmentSlot == EntityEquipmentSlot.MAINHAND)
+		{
+			multimap.put(SharedMonsterAttributes.ATTACK_DAMAGE.getAttributeUnlocalizedName(), new AttributeModifier(ATTACK_DAMAGE_MODIFIER, "Weapon modifier", weaponDamage, 0));
+			multimap.put(SharedMonsterAttributes.ATTACK_SPEED.getAttributeUnlocalizedName(), new AttributeModifier(ATTACK_SPEED_MODIFIER, "Weapon modifier", -2.4000000953674316D, 0));
+		}
+
 		return multimap;
 	}
 }

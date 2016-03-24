@@ -16,12 +16,14 @@ import java.util.List;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.BlockPos;
-import net.minecraft.util.ChatComponentText;
-import net.minecraft.util.EnumChatFormatting;
+import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumFacing;
-import net.minecraft.util.MathHelper;
-import net.minecraft.util.StatCollector;
+import net.minecraft.util.EnumHand;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.text.TextComponentTranslation;
+import net.minecraft.util.text.TextFormatting;
+import net.minecraft.util.text.translation.I18n;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.client.FMLClientHandler;
 
@@ -39,7 +41,7 @@ public class ItemPortalPlacerDL extends Item {
 	@Override
 	public String getItemStackDisplayName(ItemStack par1ItemStack) {
 
-		return EnumChatFormatting.DARK_RED + StatCollector.translateToLocal(this.getUnlocalizedName() + ".name");
+		return TextFormatting.DARK_RED + super.getItemStackDisplayName(par1ItemStack);
 	}
 
 	@Override
@@ -51,12 +53,12 @@ public class ItemPortalPlacerDL extends Item {
 	@Override
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public void addInformation(ItemStack par1ItemStack, EntityPlayer entityplayer, List list, boolean is){
-		list.add(StatCollector.translateToLocal("tooltip.portalplacerdl.1"));
-		list.add(StatCollector.translateToLocal("tooltip.portalplacerdl.2"));
+		list.add(I18n.translateToLocal("tooltip.portalplacerdl.1"));
+		list.add(I18n.translateToLocal("tooltip.portalplacerdl.2"));
 	}
 
 	@Override
-	public boolean onItemUse(ItemStack is, EntityPlayer player, World world, BlockPos pos, EnumFacing side, float hitX, float hitY, float hitZ){
+	public EnumActionResult onItemUse(ItemStack is, EntityPlayer player, World world, BlockPos pos, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ){
 		if(!world.isRemote){
 			if(player.dimension == AbyssalCraft.configDimId1 || player.dimension == AbyssalCraft.configDimId2)
 			{
@@ -67,7 +69,7 @@ public class ItemPortalPlacerDL extends Item {
 					for(int y = 1; y < 5; y++)
 						for (int z = -1; z < 2; z++)
 							if(!world.isAirBlock(pos.add(0, y, z)))
-								return false;
+								return EnumActionResult.FAIL;
 
 					world.setBlockState(pos.add(0, 1, 0), AbyssalCraft.dreadstone.getDefaultState());
 					world.setBlockState(pos.add(0, 1, 1), AbyssalCraft.dreadstone.getDefaultState());
@@ -94,7 +96,7 @@ public class ItemPortalPlacerDL extends Item {
 					for(int y = 1; y < 5; y++)
 						for (int x = -1; x < 2; x++)
 							if(!world.isAirBlock(pos.add(x, y, 0)))
-								return false;
+								return EnumActionResult.FAIL;
 
 					world.setBlockState(pos.add(0, 1, 0), AbyssalCraft.dreadstone.getDefaultState());
 					world.setBlockState(pos.add(1, 1, 0), AbyssalCraft.dreadstone.getDefaultState());
@@ -116,17 +118,17 @@ public class ItemPortalPlacerDL extends Item {
 
 					world.setBlockState(pos.add(1, 2, 0), AbyssalCraft.dreadfire.getDefaultState());
 				}
-				return true;
+				return EnumActionResult.SUCCESS;
 			}
 		} else if(player.dimension == 0 || player.dimension == AbyssalCraft.configDimId3 || player.dimension == AbyssalCraft.configDimId4)
 		{
-			FMLClientHandler.instance().getClient().ingameGUI.getChatGUI().printChatMessage(new ChatComponentText(StatCollector.translateToLocal("message.portalplacer.error.2")));
-			return false;
+			FMLClientHandler.instance().getClient().ingameGUI.getChatGUI().printChatMessage(new TextComponentTranslation("message.portalplacer.error.2"));
+			return EnumActionResult.FAIL;
 		} else if(player.dimension == AbyssalCraft.configDimId1 || player.dimension == AbyssalCraft.configDimId2){}
 		else {
-			FMLClientHandler.instance().getClient().ingameGUI.getChatGUI().printChatMessage(new ChatComponentText(StatCollector.translateToLocal("message.portalplacer.error.1")));
-			return false;
+			FMLClientHandler.instance().getClient().ingameGUI.getChatGUI().printChatMessage(new TextComponentTranslation("message.portalplacer.error.1"));
+			return EnumActionResult.FAIL;
 		}
-		return false;
+		return EnumActionResult.PASS;
 	}
 }

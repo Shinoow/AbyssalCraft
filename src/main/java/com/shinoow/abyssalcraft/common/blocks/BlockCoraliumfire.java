@@ -19,9 +19,10 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.potion.PotionEffect;
-import net.minecraft.util.AxisAlignedBB;
-import net.minecraft.util.BlockPos;
-import net.minecraft.util.EnumWorldBlockLayer;
+import net.minecraft.util.BlockRenderLayer;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
@@ -45,22 +46,29 @@ public class BlockCoraliumfire extends Block {
 	}
 
 	@Override
-	public AxisAlignedBB getCollisionBoundingBox(World worldIn, BlockPos pos, IBlockState state)
+	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess worldIn, BlockPos pos)
 	{
 		return null;
+	}
+
+	@Override
+	public void onNeighborBlockChange(World worldIn, BlockPos pos, IBlockState state, Block neighborBlock)
+	{
+		if(!worldIn.getBlockState(pos.down()).isSideSolid(worldIn, pos.down(), EnumFacing.UP))
+			worldIn.setBlockToAir(pos);
 	}
 
 	/**
 	 * Used to determine ambient occlusion and culling when rebuilding chunks for render
 	 */
 	@Override
-	public boolean isOpaqueCube()
+	public boolean isOpaqueCube(IBlockState state)
 	{
 		return false;
 	}
 
 	@Override
-	public boolean isFullCube()
+	public boolean isFullCube(IBlockState state)
 	{
 		return false;
 	}
@@ -94,9 +102,9 @@ public class BlockCoraliumfire extends Block {
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public EnumWorldBlockLayer getBlockLayer()
+	public BlockRenderLayer getBlockLayer()
 	{
-		return EnumWorldBlockLayer.CUTOUT;
+		return BlockRenderLayer.CUTOUT;
 	}
 
 	@Override
@@ -105,7 +113,7 @@ public class BlockCoraliumfire extends Block {
 
 		if(par5Entity instanceof EntityLivingBase)
 			if(EntityUtil.isEntityCoralium((EntityLivingBase)par5Entity)) {}
-			else ((EntityLivingBase)par5Entity).addPotionEffect(new PotionEffect(AbyssalCraft.Cplague.id, 100));
+			else ((EntityLivingBase)par5Entity).addPotionEffect(new PotionEffect(AbyssalCraft.Cplague, 100));
 	}
 
 	@Override
@@ -113,7 +121,7 @@ public class BlockCoraliumfire extends Block {
 	{
 
 		if (!BlockAbyssPortal.tryToCreatePortal(par1World, pos))
-			if (!World.doesBlockHaveSolidTopSurface(par1World, pos.down()))
+			if (!par1World.getBlockState(pos.down()).isSideSolid(par1World, pos.down(), EnumFacing.UP))
 				par1World.setBlockToAir(pos);
 			else
 				par1World.scheduleUpdate(pos, this, tickRate(par1World) + par1World.rand.nextInt(10));

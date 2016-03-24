@@ -13,7 +13,7 @@ package com.shinoow.abyssalcraft.common.blocks.tile;
 
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.Packet;
-import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
+import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 
 public class TileEntityDreadAltarTop extends TileEntity {
@@ -28,6 +28,6 @@ public class TileEntityDreadAltarTop extends TileEntity {
 	public Packet getDescriptionPacket() {
 		NBTTagCompound nbtTag = new NBTTagCompound();
 		writeToNBT(nbtTag);
-		return new S35PacketUpdateTileEntity(pos, 1, nbtTag);
+		return new SPacketUpdateTileEntity(pos, 1, nbtTag);
 	}
 }

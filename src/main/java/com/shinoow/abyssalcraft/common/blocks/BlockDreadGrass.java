@@ -18,16 +18,17 @@ import net.minecraft.block.BlockDirt;
 import net.minecraft.block.BlockFlower;
 import net.minecraft.block.BlockTallGrass;
 import net.minecraft.block.IGrowable;
+import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyBool;
-import net.minecraft.block.state.BlockState;
+import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
-import net.minecraft.util.BlockPos;
+import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumFacing;
-import net.minecraft.util.EnumWorldBlockLayer;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.IPlantable;
@@ -45,6 +46,7 @@ public class BlockDreadGrass extends Block implements IGrowable {
 		setDefaultState(blockState.getBaseState().withProperty(SNOWY, Boolean.valueOf(false)));
 		setTickRandomly(true);
 		setCreativeTab(AbyssalCraft.tabBlock);
+		setStepSound(SoundType.PLANT);
 	}
 
 	@Override
@@ -58,7 +60,7 @@ public class BlockDreadGrass extends Block implements IGrowable {
 	public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand)
 	{
 		if (!worldIn.isRemote)
-			if (worldIn.getLightFromNeighbors(pos.up()) < 4 && worldIn.getBlockState(pos.up()).getBlock().getLightOpacity(worldIn, pos.up()) > 2)
+			if (worldIn.getLightFromNeighbors(pos.up()) < 4 && worldIn.getBlockState(pos.up()).getBlock().getLightOpacity(worldIn.getBlockState(pos.up()), worldIn, pos.up()) > 2)
 				worldIn.setBlockState(pos, Blocks.dirt.getDefaultState());
 			else if (worldIn.getLightFromNeighbors(pos.up()) >= 9)
 				for (int i = 0; i < 4; ++i)
@@ -67,13 +69,13 @@ public class BlockDreadGrass extends Block implements IGrowable {
 					Block block = worldIn.getBlockState(blockpos.up()).getBlock();
 					IBlockState iblockstate = worldIn.getBlockState(blockpos);
 
-					if (iblockstate.getBlock() == Blocks.dirt && iblockstate.getValue(BlockDirt.VARIANT) == BlockDirt.DirtType.DIRT && worldIn.getLightFromNeighbors(blockpos.up()) >= 4 && block.getLightOpacity(worldIn, blockpos.up()) <= 2)
+					if (iblockstate.getBlock() == Blocks.dirt && iblockstate.getValue(BlockDirt.VARIANT) == BlockDirt.DirtType.DIRT && worldIn.getLightFromNeighbors(blockpos.up()) >= 4 && block.getLightOpacity(worldIn.getBlockState(blockpos.up()), worldIn, blockpos.up()) <= 2)
 						worldIn.setBlockState(blockpos, AbyssalCraft.dreadgrass.getDefaultState());
 				}
 	}
 
 	@Override
-	public boolean canSustainPlant(IBlockAccess world, BlockPos pos, EnumFacing direction, IPlantable plantable)
+	public boolean canSustainPlant(IBlockState state, IBlockAccess world, BlockPos pos, EnumFacing direction, IPlantable plantable)
 	{
 		Block plant = plantable.getPlant(world, pos.up()).getBlock();
 		if (plant == AbyssalCraft.dreadsapling || plant == AbyssalCraft.DLTSapling)
@@ -136,7 +138,7 @@ public class BlockDreadGrass extends Block implements IGrowable {
 
 				blockpos1 = blockpos1.add(rand.nextInt(3) - 1, (rand.nextInt(3) - 1) * rand.nextInt(3) / 2, rand.nextInt(3) - 1);
 
-				if (worldIn.getBlockState(blockpos1.down()).getBlock() != AbyssalCraft.dreadgrass || worldIn.getBlockState(blockpos1).getBlock().isNormalCube())
+				if (worldIn.getBlockState(blockpos1.down()).getBlock() != AbyssalCraft.dreadgrass || worldIn.getBlockState(blockpos1).isNormalCube())
 					break;
 
 				++j;
@@ -146,9 +148,9 @@ public class BlockDreadGrass extends Block implements IGrowable {
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public EnumWorldBlockLayer getBlockLayer()
+	public BlockRenderLayer getBlockLayer()
 	{
-		return EnumWorldBlockLayer.CUTOUT_MIPPED;
+		return BlockRenderLayer.CUTOUT_MIPPED;
 	}
 
 	/**
@@ -161,8 +163,8 @@ public class BlockDreadGrass extends Block implements IGrowable {
 	}
 
 	@Override
-	protected BlockState createBlockState()
+	protected BlockStateContainer createBlockState()
 	{
-		return new BlockState(this, new IProperty[] {SNOWY});
+		return new BlockStateContainer(this, new IProperty[] {SNOWY});
 	}
 }

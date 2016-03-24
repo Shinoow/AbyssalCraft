@@ -16,7 +16,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.EntityAIAttackOnCollide;
+import net.minecraft.entity.ai.EntityAIAttackMelee;
 import net.minecraft.entity.ai.EntityAIHurtByTarget;
 import net.minecraft.entity.ai.EntityAILookIdle;
 import net.minecraft.entity.ai.EntityAIMoveTowardsRestriction;
@@ -26,21 +26,26 @@ import net.minecraft.entity.ai.EntityAIWander;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.MobEffects;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.item.Item;
-import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
-import net.minecraft.util.BlockPos;
+import net.minecraft.util.EnumHand;
+import net.minecraft.util.SoundEvent;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
-import com.shinoow.abyssalcraft.api.entity.*;
+import com.shinoow.abyssalcraft.api.entity.IAntiEntity;
+import com.shinoow.abyssalcraft.api.entity.ICoraliumEntity;
+import com.shinoow.abyssalcraft.api.entity.IDreadEntity;
 
 public class EntityOmotholGhoul extends EntityMob implements IAntiEntity, ICoraliumEntity, IDreadEntity {
 
 	public EntityOmotholGhoul(World par1World) {
 		super(par1World);
 		tasks.addTask(0, new EntityAISwimming(this));
-		tasks.addTask(2, new EntityAIAttackOnCollide(this, EntityPlayer.class, 0.35D, false));
+		tasks.addTask(2, new EntityAIAttackMelee(this, 0.35D, false));
 		tasks.addTask(3, new EntityAIMoveTowardsRestriction(this, 0.35D));
 		tasks.addTask(4, new EntityAIWander(this, 0.35D));
 		tasks.addTask(7, new EntityAILookIdle(this));
@@ -55,15 +60,15 @@ public class EntityOmotholGhoul extends EntityMob implements IAntiEntity, ICoral
 	{
 		super.applyEntityAttributes();
 
-		getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(64.0D);
-		getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setBaseValue(0.2D);
+		getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(64.0D);
+		getEntityAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue(0.2D);
 
 		if(AbyssalCraft.hardcoreMode){
-			getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(300.0D);
-			getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(30.0D);
+			getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(300.0D);
+			getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(30.0D);
 		} else {
-			getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(150.0D);
-			getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(15.0D);
+			getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(150.0D);
+			getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(15.0D);
 		}
 	}
 
@@ -77,13 +82,14 @@ public class EntityOmotholGhoul extends EntityMob implements IAntiEntity, ICoral
 	{
 		if(super.attackEntityAsMob(par1Entity))
 			if(par1Entity instanceof EntityLivingBase){
-				((EntityLivingBase)par1Entity).addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, 100));
-				((EntityLivingBase)par1Entity).addPotionEffect(new PotionEffect(Potion.blindness.id, 20));
-				((EntityLivingBase)par1Entity).addPotionEffect(new PotionEffect(Potion.nightVision.id, 20));
+				((EntityLivingBase)par1Entity).addPotionEffect(new PotionEffect(MobEffects.moveSlowdown, 100));
+				((EntityLivingBase)par1Entity).addPotionEffect(new PotionEffect(MobEffects.blindness, 20));
+				((EntityLivingBase)par1Entity).addPotionEffect(new PotionEffect(MobEffects.nightVision, 20));
 			}
 
 
-		swingItem();
+		swingArm(EnumHand.MAIN_HAND);
+		swingArm(EnumHand.OFF_HAND);
 		boolean flag = super.attackEntityAsMob(par1Entity);
 
 		return flag;
@@ -96,27 +102,27 @@ public class EntityOmotholGhoul extends EntityMob implements IAntiEntity, ICoral
 	}
 
 	@Override
-	protected String getLivingSound()
+	protected SoundEvent getAmbientSound()
 	{
-		return "abyssalcraft:ghoul.normal.idle";
+		return AbyssalCraft.ghoul_normal_ambient;
 	}
 
 	@Override
-	protected String getHurtSound()
+	protected SoundEvent getHurtSound()
 	{
-		return "mob.zombie.hurt";
+		return SoundEvents.entity_zombie_hurt;
 	}
 
 	@Override
-	protected String getDeathSound()
+	protected SoundEvent getDeathSound()
 	{
-		return "abyssalcraft:ghoul.death";
+		return AbyssalCraft.ghoul_death;
 	}
 
 	@Override
 	protected void playStepSound(BlockPos pos, Block par4)
 	{
-		playSound("mob.zombie.step", 0.15F, 1.0F);
+		playSound(SoundEvents.entity_zombie_step, 0.15F, 1.0F);
 	}
 
 	@Override

@@ -13,12 +13,12 @@ package com.shinoow.abyssalcraft.api.energy.disruption;
 
 import java.util.List;
 
-import com.shinoow.abyssalcraft.api.energy.EnergyEnum.DeityType;
-
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.util.BlockPos;
-import net.minecraft.util.StatCollector;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.translation.I18n;
 import net.minecraft.world.World;
+
+import com.shinoow.abyssalcraft.api.energy.EnergyEnum.DeityType;
 
 /**
  * A Disruption Entry
@@ -62,7 +62,7 @@ public abstract class DisruptionEntry {
 	 * @return A localized string representing a name
 	 */
 	public String getLocalizedName(){
-		return StatCollector.translateToLocal(getUnlocalizedName());
+		return I18n.translateToLocal(getUnlocalizedName());
 	}
 
 	/**
@@ -70,7 +70,7 @@ public abstract class DisruptionEntry {
 	 * @return A localized string representing a description
 	 */
 	public String getDescrption(){
-		return StatCollector.translateToLocal(getUnlocalizedName() + ".desc");
+		return I18n.translateToLocal(getUnlocalizedName() + ".desc");
 	}
 
 	/**

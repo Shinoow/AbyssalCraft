@@ -11,11 +11,11 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.api.integration;
 
-import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
-
 /**
- * Simple interface to handle integrations. If used by another mod, register the
- * file implementing this interface in {@link AbyssalCraftAPI} or through a IMC message
+ * Simple interface for handling integrations. Should be used together with the<br>
+ * {@literal @}{@link ACPlugin} annotation.<br>
+ * The integration plugins follow the standard FML lifecycle (but you should register<br>
+ * any new Items/Blocks/Entities outside of the plugin).
  * 
  * @author shinoow
  *
@@ -40,7 +40,7 @@ public interface IACPlugin {
 	public void init();
 
 	/**
-	 * Will be called at the post-init stage
+	 * Will be called at the end of the post-init stage
 	 */
 	public void postInit();
 }

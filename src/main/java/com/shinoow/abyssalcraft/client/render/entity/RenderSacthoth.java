@@ -13,7 +13,6 @@ package com.shinoow.abyssalcraft.client.render.entity;
 
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.entity.RenderManager;
-import net.minecraft.entity.boss.BossStatus;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -34,7 +33,7 @@ public class RenderSacthoth extends RenderLiving<EntitySacthoth> {
 	@Override
 	public void doRender(EntitySacthoth entity, double par2, double par4, double par6, float par8, float par9)
 	{
-		BossStatus.setBossStatus(entity, false);
+		//		BossStatus.setBossStatus(entity, false);
 		super.doRender(entity, par2, par4, par6, par8, par9);
 	}
 

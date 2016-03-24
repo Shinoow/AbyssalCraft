@@ -14,11 +14,15 @@ package com.shinoow.abyssalcraft.common.items;
 import java.util.List;
 
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.BlockPos;
+import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumFacing;
-import net.minecraft.util.StatCollector;
+import net.minecraft.util.EnumHand;
+import net.minecraft.util.SoundCategory;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.translation.I18n;
 import net.minecraft.world.World;
 
 import com.shinoow.abyssalcraft.api.energy.EnergyEnum;
@@ -62,25 +66,25 @@ public class ItemCharm extends ItemMetadata implements IAmplifierCharm {
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
 	public void addInformation(ItemStack is, EntityPlayer player, List l, boolean B){
-		l.add(StatCollector.translateToLocal("ac.text.amplifier") + ": " + EnergyEnum.getAmplifierName(getAmplifier(is)));
-		l.add(StatCollector.translateToLocal("ac.text.deity") + ": " + EnergyEnum.getDeityName(getDeity(is)));
+		l.add(I18n.translateToLocal("ac.text.amplifier") + ": " + EnergyEnum.getAmplifierName(getAmplifier(is)));
+		l.add(I18n.translateToLocal("ac.text.deity") + ": " + EnergyEnum.getDeityName(getDeity(is)));
 	}
 
 	@Override
-	public boolean onItemUse(ItemStack stack, EntityPlayer player, World world, BlockPos pos, EnumFacing side, float hitX, float hitY, float hitZ){
+	public EnumActionResult onItemUse(ItemStack stack, EntityPlayer player, World world, BlockPos pos, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ){
 		TileEntity tile = world.getTileEntity(pos);
 		if(tile instanceof IEnergyManipulator && !((IEnergyManipulator) tile).isActive()){
 			((IEnergyManipulator) tile).setActive(getAmplifier(stack), getDeity(stack));
 			if(!world.isRemote)
 				stack.stackSize--;
-			world.playSoundEffect(pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, "random.pop", 0.5F, world.rand.nextFloat() - world.rand.nextFloat() * 0.2F + 1);
-			return true;
+			world.playSound(player, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, SoundEvents.entity_item_pickup, SoundCategory.PLAYERS, 0.5F, world.rand.nextFloat() - world.rand.nextFloat() * 0.2F + 1);
+			return EnumActionResult.SUCCESS;
 		}
-		return false;
+		return EnumActionResult.PASS;
 	}
 
 	@Override
 	public String getItemStackDisplayName(ItemStack par1ItemStack) {
-		return StatCollector.translateToLocal(getUnlocalizedName() + ".name");
+		return I18n.translateToLocal(getUnlocalizedName() + ".name");
 	}
 }

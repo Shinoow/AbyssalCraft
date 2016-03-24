@@ -12,7 +12,7 @@
 package com.shinoow.abyssalcraft.common.world.biome;
 
 
-import net.minecraft.util.BlockPos;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -27,9 +27,9 @@ import com.shinoow.abyssalcraft.common.entity.EntityShadowMonster;
 public class BiomeGenOmothol extends BiomeGenBase {
 
 	@SuppressWarnings("unchecked")
-	public BiomeGenOmothol(int par1){
+	public BiomeGenOmothol(BiomeProperties par1){
 		super(par1);
-		waterColorMultiplier = 14745518;
+		//		waterColorMultiplier = 14745518;
 		spawnableMonsterList.clear();
 		spawnableCreatureList.clear();
 		spawnableWaterCreatureList.clear();

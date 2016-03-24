@@ -19,7 +19,7 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
-import net.minecraft.util.BlockPos;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI.ACPotions;
@@ -65,12 +65,12 @@ public class DisruptionPotion extends DisruptionEntry {
 	public void disrupt(World world, BlockPos pos, List<EntityPlayer> players) {
 
 		if(!world.isRemote)
-			if(world.getBlockState(pos).getBlock().getCollisionBoundingBox(world, pos, world.getBlockState(pos)) != null){
-				List<EntityLivingBase> entities = world.getEntitiesWithinAABB(EntityLivingBase.class, world.getBlockState(pos).getBlock().getCollisionBoundingBox(world, pos, world.getBlockState(pos)).expand(16, 16, 16));
+			if(world.getBlockState(pos).getBlock().getBoundingBox(world.getBlockState(pos), world, pos) != null){
+				List<EntityLivingBase> entities = world.getEntitiesWithinAABB(EntityLivingBase.class, world.getBlockState(pos).getBlock().getBoundingBox(world.getBlockState(pos), world, pos).expand(16, 16, 16));
 
 				for(EntityLivingBase entity : entities)
 					if(!isEntityImmune(potion, entity))
-						entity.addPotionEffect(new PotionEffect(potion.id, 600));
+						entity.addPotionEffect(new PotionEffect(potion, 600));
 			}
 	}
 }

@@ -21,8 +21,8 @@ import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.entity.IEntityLivingData;
 import net.minecraft.entity.IRangedAttackMob;
 import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.EntityAIArrowAttack;
-import net.minecraft.entity.ai.EntityAIAttackOnCollide;
+import net.minecraft.entity.ai.EntityAIAttackMelee;
+import net.minecraft.entity.ai.EntityAIAttackRanged;
 import net.minecraft.entity.ai.EntityAIHurtByTarget;
 import net.minecraft.entity.ai.EntityAILookIdle;
 import net.minecraft.entity.ai.EntityAIMoveTowardsRestriction;
@@ -34,25 +34,30 @@ import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.ai.attributes.IAttributeInstance;
 import net.minecraft.entity.boss.EntityDragon;
 import net.minecraft.entity.boss.EntityWither;
-import net.minecraft.entity.boss.IBossDisplayData;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.item.EntityXPOrb;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.entity.projectile.EntityWitherSkull;
+import net.minecraft.init.MobEffects;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
-import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
-import net.minecraft.util.BlockPos;
 import net.minecraft.util.DamageSource;
-import net.minecraft.util.EnumChatFormatting;
+import net.minecraft.util.EnumHand;
 import net.minecraft.util.EnumParticleTypes;
-import net.minecraft.util.MathHelper;
-import net.minecraft.util.StatCollector;
+import net.minecraft.util.SoundEvent;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.text.TextFormatting;
+import net.minecraft.util.text.translation.I18n;
+import net.minecraft.world.BossInfo;
+import net.minecraft.world.BossInfoServer;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
+import net.minecraft.world.BossInfo.Color;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.api.entity.IAntiEntity;
@@ -62,20 +67,21 @@ import com.shinoow.abyssalcraft.common.util.EntityUtil;
 import com.shinoow.abyssalcraft.common.util.SpecialTextUtil;
 import com.shinoow.abyssalcraft.common.world.TeleporterDarkRealm;
 
-public class EntityJzahar extends EntityMob implements IBossDisplayData, IRangedAttackMob, IAntiEntity, ICoraliumEntity, IDreadEntity {
+public class EntityJzahar extends EntityMob implements IRangedAttackMob, IAntiEntity, ICoraliumEntity, IDreadEntity {
 
 	private static final UUID attackDamageBoostUUID = UUID.fromString("648D7064-6A60-4F59-8ABE-C2C23A6DD7A9");
 	private static final AttributeModifier attackDamageBoost = new AttributeModifier(attackDamageBoostUUID, "Halloween Attack Damage Boost", 10.0D, 0);
 	public int deathTicks;
 	private int talkTimer;
+	private final BossInfoServer bossInfo = (BossInfoServer)new BossInfoServer(getDisplayName(), BossInfo.Color.BLUE, BossInfo.Overlay.PROGRESS).setDarkenSky(true);
 	private boolean that = false;
 
 	public EntityJzahar(World par1World) {
 		super(par1World);
 		setSize(1.5F, 5.7F);
 		tasks.addTask(0, new EntityAISwimming(this));
-		tasks.addTask(2, new EntityAIAttackOnCollide(this, EntityPlayer.class, 0.35D, true));
-		tasks.addTask(3, new EntityAIArrowAttack(this, 0.4D, 40, 20.0F));
+		tasks.addTask(2, new EntityAIAttackMelee(this, 0.35D, true));
+		tasks.addTask(3, new EntityAIAttackRanged(this, 0.4D, 40, 20.0F));
 		tasks.addTask(4, new EntityAIMoveTowardsRestriction(this, 0.35D));
 		tasks.addTask(5, new EntityAIWander(this, 0.35D));
 		tasks.addTask(6, new EntityAILookIdle(this));
@@ -87,7 +93,7 @@ public class EntityJzahar extends EntityMob implements IBossDisplayData, IRanged
 	@Override
 	public String getName()
 	{
-		return EnumChatFormatting.BLUE + super.getName();
+		return TextFormatting.BLUE + super.getName();
 	}
 
 	@Override
@@ -95,30 +101,30 @@ public class EntityJzahar extends EntityMob implements IBossDisplayData, IRanged
 		super.applyEntityAttributes();
 
 		if(AbyssalCraft.hardcoreMode){
-			getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(1000.0D);
-			getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(40.0D);
+			getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(1000.0D);
+			getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(40.0D);
 		} else {
-			getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(500.0D);
-			getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(20.0D);
+			getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(500.0D);
+			getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(20.0D);
 		}
 	}
 
 	@Override
-	protected String getLivingSound()
+	protected SoundEvent getAmbientSound()
 	{
-		return "mob.blaze.breathe";
+		return SoundEvents.entity_blaze_ambient;
 	}
 
 	@Override
-	protected String getHurtSound()
+	protected SoundEvent getHurtSound()
 	{
-		return "mob.enderdragon.hit";
+		return SoundEvents.entity_enderdragon_hurt;
 	}
 
 	@Override
-	protected String getDeathSound()
+	protected SoundEvent getDeathSound()
 	{
-		return "mob.wither.death";
+		return SoundEvents.entity_wither_death;
 	}
 
 	@Override
@@ -134,15 +140,54 @@ public class EntityJzahar extends EntityMob implements IBossDisplayData, IRanged
 	}
 
 	@Override
+	public boolean isNonBoss()
+	{
+		return false;
+	}
+
+	@Override
 	protected boolean canDespawn()
 	{
 		return false;
 	}
 
 	@Override
+	protected void updateAITasks()
+	{
+		super.updateAITasks();
+		bossInfo.setPercent(getHealth() / getMaxHealth());
+		if(getHealth() < getMaxHealth() * 0.75 && getHealth() > getMaxHealth() / 2 && bossInfo.getColor() != BossInfo.Color.GREEN)
+			bossInfo.setColor(Color.GREEN);
+		if(getHealth() < getMaxHealth() / 2 && getHealth() > getMaxHealth() / 4 && bossInfo.getColor() != BossInfo.Color.YELLOW)
+			bossInfo.setColor(Color.YELLOW);
+		if(getHealth() < getMaxHealth() / 4 && getHealth() > 0 && bossInfo.getColor() != BossInfo.Color.RED)
+			bossInfo.setColor(Color.RED);
+	}
+
+	/**
+	 * Makes this boss Entity visible to the given player. Has no effect if this Entity is not a boss.
+	 */
+	@Override
+	public void setBossVisibleTo(EntityPlayerMP player)
+	{
+		super.setBossVisibleTo(player);
+		bossInfo.addPlayer(player);
+	}
+
+	/**
+	 * Makes this boss Entity non-visible to the given player. Has no effect if this Entity is not a boss.
+	 */
+	@Override
+	public void setBossNonVisibleTo(EntityPlayerMP player)
+	{
+		super.setBossNonVisibleTo(player);
+		bossInfo.removePlayer(player);
+	}
+
+	@Override
 	public boolean attackEntityAsMob(Entity par1Entity)
 	{
-		swingItem();
+		swingArm(EnumHand.MAIN_HAND);
 		boolean flag = super.attackEntityAsMob(par1Entity);
 
 		return flag;
@@ -166,7 +211,7 @@ public class EntityJzahar extends EntityMob implements IBossDisplayData, IRanged
 
 	@Override
 	public void onDeath(DamageSource par1DamageSource) {
-
+		bossInfo.setPercent(getHealth() / getMaxHealth());
 		List<EntityPlayer> players = worldObj.getEntitiesWithinAABB(EntityPlayer.class, getEntityBoundingBox().expand(10, 10, 10));
 		for(EntityPlayer player : players)
 			player.addStat(AbyssalCraft.killJzahar, 1);
@@ -225,7 +270,7 @@ public class EntityJzahar extends EntityMob implements IBossDisplayData, IRanged
 						if(AbyssalCraft.particleEntity)
 							worldObj.spawnParticle(EnumParticleTypes.EXPLOSION_HUGE, entity.posX + f, entity.posY + 2.0D + f1, entity.posZ + f2, 0.0D, 0.0D, 0.0D);
 						if(entity.isDead)
-							SpecialTextUtil.JzaharGroup(worldObj, StatCollector.translateToLocal("message.jzahar.banish.vanilla"));
+							SpecialTextUtil.JzaharGroup(worldObj, I18n.translateToLocal("message.jzahar.banish.vanilla"));
 					}
 				}
 				else if(entity instanceof EntityDragonBoss || entity instanceof EntitySacthoth || entity instanceof EntityChagaroth){
@@ -235,7 +280,7 @@ public class EntityJzahar extends EntityMob implements IBossDisplayData, IRanged
 						if(AbyssalCraft.particleEntity)
 							worldObj.spawnParticle(EnumParticleTypes.EXPLOSION_HUGE, entity.posX + f, entity.posY + 2.0D + f1, entity.posZ + f2, 0.0D, 0.0D, 0.0D);
 						if(entity.isDead)
-							SpecialTextUtil.JzaharGroup(worldObj, StatCollector.translateToLocal("message.jzahar.banish.ac"));
+							SpecialTextUtil.JzaharGroup(worldObj, I18n.translateToLocal("message.jzahar.banish.ac"));
 					}
 				}
 				else if(entity instanceof EntityJzahar){
@@ -254,7 +299,7 @@ public class EntityJzahar extends EntityMob implements IBossDisplayData, IRanged
 						}
 						if(!that){
 							that = true;
-							SpecialTextUtil.JzaharGroup(worldObj, StatCollector.translateToLocal("message.jzahar.banish.jzh"));
+							SpecialTextUtil.JzaharGroup(worldObj, I18n.translateToLocal("message.jzahar.banish.jzh"));
 						}
 					}
 				}
@@ -265,8 +310,8 @@ public class EntityJzahar extends EntityMob implements IBossDisplayData, IRanged
 							if(EntityUtil.isPlayerCoralium((EntityPlayer)entity))
 								SpecialTextUtil.JzaharText("<insert generic text here>");
 							else {
-								SpecialTextUtil.JzaharText(String.format(StatCollector.translateToLocal("message.jzahar.creative.1"), entity.getName()));
-								SpecialTextUtil.JzaharText(StatCollector.translateToLocal("message.jzahar.creative.2"));
+								SpecialTextUtil.JzaharText(String.format(I18n.translateToLocal("message.jzahar.creative.1"), entity.getName()));
+								SpecialTextUtil.JzaharText(I18n.translateToLocal("message.jzahar.creative.2"));
 							}
 					}
 			}
@@ -282,7 +327,7 @@ public class EntityJzahar extends EntityMob implements IBossDisplayData, IRanged
 			worldObj.spawnParticle(EnumParticleTypes.SMOKE_LARGE, posX, posY + 1.5D, posZ, 0, 0, 0);
 			if (deathTicks >= 190 && deathTicks <= 200){
 				worldObj.spawnParticle(EnumParticleTypes.EXPLOSION_HUGE, posX, posY + 1.5D, posZ, 0.0D, 0.0D, 0.0D);
-				worldObj.playSoundAtEntity(this, "random.explode", 4, (1.0F + (rand.nextFloat() - rand.nextFloat()) * 0.2F) * 0.7F);
+				playSound(SoundEvents.entity_generic_explode, 4, (1.0F + (rand.nextFloat() - rand.nextFloat()) * 0.2F) * 0.7F);
 			}
 		}
 
@@ -312,48 +357,48 @@ public class EntityJzahar extends EntityMob implements IBossDisplayData, IRanged
 				List<EntityPlayer> players = worldObj.getEntitiesWithinAABB(EntityPlayer.class, getEntityBoundingBox().expand(3,1,3));
 				for(EntityPlayer player: players){
 					player.setHealth(1);
-					player.addPotionEffect(new PotionEffect(Potion.blindness.id, 2400, 5));
-					player.addPotionEffect(new PotionEffect(Potion.nightVision.id, 2400, 5));
-					player.addPotionEffect(new PotionEffect(Potion.confusion.id, 2400, 5));
-					player.addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, 2400, 5));
-					player.addPotionEffect(new PotionEffect(Potion.digSlowdown.id, 2400, 5));
-					player.addPotionEffect(new PotionEffect(Potion.weakness.id, 2400, 5));
-					player.addPotionEffect(new PotionEffect(Potion.hunger.id, 2400, 5));
-					player.addPotionEffect(new PotionEffect(Potion.poison.id, 2400, 5));
+					player.addPotionEffect(new PotionEffect(MobEffects.blindness, 2400, 5));
+					player.addPotionEffect(new PotionEffect(MobEffects.nightVision, 2400, 5));
+					player.addPotionEffect(new PotionEffect(MobEffects.confusion, 2400, 5));
+					player.addPotionEffect(new PotionEffect(MobEffects.moveSlowdown, 2400, 5));
+					player.addPotionEffect(new PotionEffect(MobEffects.digSlowdown, 2400, 5));
+					player.addPotionEffect(new PotionEffect(MobEffects.weakness, 2400, 5));
+					player.addPotionEffect(new PotionEffect(MobEffects.hunger, 2400, 5));
+					player.addPotionEffect(new PotionEffect(MobEffects.poison, 2400, 5));
 					if(player instanceof EntityPlayerMP){
 						WorldServer worldServer = (WorldServer) player.worldObj;
 						EntityPlayerMP mp = (EntityPlayerMP) player;
-						mp.addPotionEffect(new PotionEffect(Potion.resistance.getId(), 80, 255));
-						mp.mcServer.getConfigurationManager().transferPlayerToDimension(mp, AbyssalCraft.configDimId4, new TeleporterDarkRealm(worldServer));
+						mp.addPotionEffect(new PotionEffect(MobEffects.resistance, 80, 255));
+						mp.mcServer.getPlayerList().transferPlayerToDimension(mp, AbyssalCraft.configDimId4, new TeleporterDarkRealm(worldServer));
 						player.addStat(AbyssalCraft.enterDarkRealm, 1);
 					}
 				}
 			}
-			if(worldObj.getClosestPlayer(posX, posY, posZ, 10) != null)
+			if(worldObj.getClosestPlayerToEntity(this, 32) != null)
 				worldObj.spawnEntityInWorld(new EntityItem(worldObj, posX, posY, posZ, new ItemStack(AbyssalCraft.gatekeeperEssence)));
 		}
 		if(deathTicks == 200 && !worldObj.isRemote)
 			setDead();
 		if(deathTicks == 20 && worldObj.isRemote)
-			SpecialTextUtil.JzaharGroup(worldObj, StatCollector.translateToLocal("message.jzahar.death.1"));
+			SpecialTextUtil.JzaharGroup(worldObj, I18n.translateToLocal("message.jzahar.death.1"));
 		if(deathTicks == 40 && worldObj.isRemote)
-			SpecialTextUtil.JzaharGroup(worldObj, StatCollector.translateToLocal("message.jzahar.death.2"));
+			SpecialTextUtil.JzaharGroup(worldObj, I18n.translateToLocal("message.jzahar.death.2"));
 		if(deathTicks == 60 && worldObj.isRemote)
-			SpecialTextUtil.JzaharGroup(worldObj, StatCollector.translateToLocal("message.jzahar.death.3"));
+			SpecialTextUtil.JzaharGroup(worldObj, I18n.translateToLocal("message.jzahar.death.3"));
 		if(deathTicks == 80 && worldObj.isRemote)
-			SpecialTextUtil.JzaharGroup(worldObj, StatCollector.translateToLocal("message.jzahar.death.4"));
+			SpecialTextUtil.JzaharGroup(worldObj, I18n.translateToLocal("message.jzahar.death.4"));
 		if(deathTicks == 100 && worldObj.isRemote)
-			SpecialTextUtil.JzaharGroup(worldObj, StatCollector.translateToLocal("message.jzahar.death.5"));
+			SpecialTextUtil.JzaharGroup(worldObj, I18n.translateToLocal("message.jzahar.death.5"));
 		if(deathTicks == 120 && worldObj.isRemote)
-			SpecialTextUtil.JzaharGroup(worldObj, StatCollector.translateToLocal("message.jzahar.death.6"));
+			SpecialTextUtil.JzaharGroup(worldObj, I18n.translateToLocal("message.jzahar.death.6"));
 		if(deathTicks == 140 && worldObj.isRemote)
-			SpecialTextUtil.JzaharGroup(worldObj, StatCollector.translateToLocal("message.jzahar.death.7"));
+			SpecialTextUtil.JzaharGroup(worldObj, I18n.translateToLocal("message.jzahar.death.7"));
 		if(deathTicks == 160 && worldObj.isRemote)
-			SpecialTextUtil.JzaharGroup(worldObj, StatCollector.translateToLocal("message.jzahar.death.8"));
+			SpecialTextUtil.JzaharGroup(worldObj, I18n.translateToLocal("message.jzahar.death.8"));
 		if(deathTicks == 180 && worldObj.isRemote)
-			SpecialTextUtil.JzaharGroup(worldObj, StatCollector.translateToLocal("message.jzahar.death.9"));
+			SpecialTextUtil.JzaharGroup(worldObj, I18n.translateToLocal("message.jzahar.death.9"));
 		if(deathTicks == 200 && worldObj.isRemote)
-			SpecialTextUtil.JzaharGroup(worldObj, StatCollector.translateToLocal("message.jzahar.death.10"));
+			SpecialTextUtil.JzaharGroup(worldObj, I18n.translateToLocal("message.jzahar.death.10"));
 	}
 
 	private int posneg(int num){
@@ -391,7 +436,7 @@ public class EntityJzahar extends EntityMob implements IBossDisplayData, IRanged
 	{
 		par1EntityLivingData = super.onInitialSpawn(difficulty, par1EntityLivingData);
 
-		IAttributeInstance attribute = getEntityAttribute(SharedMonsterAttributes.attackDamage);
+		IAttributeInstance attribute = getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE);
 		Calendar calendar = worldObj.getCurrentDate();
 
 		if (calendar.get(2) + 1 == 10 && calendar.get(5) == 31 && rand.nextFloat() < 0.25F)

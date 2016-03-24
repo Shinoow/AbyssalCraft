@@ -33,14 +33,15 @@ public class ReputationProps implements IExtendedEntityProperties
 	 * Used to register these extended properties for the player during EntityConstructing event
 	 */
 	public static final void register(EntityPlayer player) {
-		player.registerExtendedProperties(ReputationProps.EXT_PROP_NAME, new ReputationProps(player));
+		//		player.registerExtendedProperties(ReputationProps.EXT_PROP_NAME, new ReputationProps(player));
 	}
 
 	/**
 	 * Returns ReputationProps properties for player
 	 */
 	public static final ReputationProps get(EntityPlayer player) {
-		return (ReputationProps) player.getExtendedProperties(EXT_PROP_NAME);
+		//		return (ReputationProps) player.getExtendedProperties(EXT_PROP_NAME);
+		return null;
 	}
 
 	/**

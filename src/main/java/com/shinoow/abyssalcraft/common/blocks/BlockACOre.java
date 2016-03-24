@@ -13,12 +13,13 @@ package com.shinoow.abyssalcraft.common.blocks;
 
 import java.util.Random;
 
+import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
-import net.minecraft.util.BlockPos;
-import net.minecraft.util.MathHelper;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
@@ -27,7 +28,7 @@ import com.shinoow.abyssalcraft.AbyssalCraft;
 public class BlockACOre extends BlockACBasic {
 
 	public BlockACOre(int harvestlevel, float hardness, float resistance) {
-		super(Material.rock, "pickaxe", harvestlevel, hardness, resistance, soundTypeStone);
+		super(Material.rock, "pickaxe", harvestlevel, hardness, resistance, SoundType.STONE);
 	}
 
 	@Override
@@ -70,7 +71,7 @@ public class BlockACOre extends BlockACBasic {
 	private Random rand = new Random();
 
 	@Override
-	public int getExpDrop(IBlockAccess par1BlockAccess, BlockPos par2, int par3)
+	public int getExpDrop(IBlockState state, IBlockAccess par1BlockAccess, BlockPos par2, int par3)
 	{
 		if (getItemDropped(null, rand, par3) != Item.getItemFromBlock(this))
 		{

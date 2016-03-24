@@ -11,15 +11,15 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.common.blocks;
 
-import net.minecraft.block.Block;
+import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
-import net.minecraft.util.BlockPos;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 
 public class IngotBlock extends BlockACBasic {
 
 	public IngotBlock(int par1) {
-		super(Material.iron, "pickaxe", par1, 4.0F, 12.0F, Block.soundTypeMetal);
+		super(Material.iron, "pickaxe", par1, 4.0F, 12.0F, SoundType.METAL);
 	}
 
 	@Override

@@ -15,6 +15,7 @@ import java.util.Random;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
+import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
@@ -25,8 +26,10 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.BlockPos;
+import net.minecraft.util.EnumBlockRenderType;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumHand;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
@@ -39,6 +42,7 @@ public class BlockCrate extends BlockContainer
 	public BlockCrate(){
 		super(Material.wood);
 		setCreativeTab(AbyssalCraft.tabDecoration);
+		setStepSound(SoundType.WOOD);
 	}
 
 	@Override
@@ -102,13 +106,13 @@ public class BlockCrate extends BlockContainer
 	}
 
 	@Override
-	public int getRenderType()
+	public EnumBlockRenderType getRenderType(IBlockState state)
 	{
-		return 3;
+		return EnumBlockRenderType.MODEL;
 	}
 
 	@Override
-	public boolean onBlockActivated(World par1World, BlockPos pos, IBlockState state, EntityPlayer par5EntityPlayer, EnumFacing side, float par7, float par8, float par9)
+	public boolean onBlockActivated(World par1World, BlockPos pos, IBlockState state, EntityPlayer par5EntityPlayer, EnumHand hand, ItemStack heldItem, EnumFacing side, float par7, float par8, float par9)
 	{
 		if (par1World.isRemote)
 			return true;
@@ -125,21 +129,21 @@ public class BlockCrate extends BlockContainer
 
 	public IInventory func_149951_m(World par1World, BlockPos pos)
 	{
-		Object object = par1World.getTileEntity(pos);
+		TileEntity tile = par1World.getTileEntity(pos);
 
-		if (object == null)
+		if(!(tile instanceof IInventory))
 			return null;
-		else return (IInventory)object;
+		else return (IInventory)tile;
 	}
 
 	@Override
-	public boolean hasComparatorInputOverride()
+	public boolean hasComparatorInputOverride(IBlockState state)
 	{
 		return true;
 	}
 
 	@Override
-	public int getComparatorInputOverride(World par1World, BlockPos pos)
+	public int getComparatorInputOverride(IBlockState state, World par1World, BlockPos pos)
 	{
 		return Container.calcRedstoneFromInventory(func_149951_m(par1World, pos));
 	}

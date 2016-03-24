@@ -14,7 +14,7 @@ package com.shinoow.abyssalcraft.common.entity;
 import net.minecraft.block.Block;
 import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.EntityAIAttackOnCollide;
+import net.minecraft.entity.ai.EntityAIAttackMelee;
 import net.minecraft.entity.ai.EntityAIFleeSun;
 import net.minecraft.entity.ai.EntityAIHurtByTarget;
 import net.minecraft.entity.ai.EntityAILookIdle;
@@ -27,10 +27,13 @@ import net.minecraft.entity.monster.EntitySkeleton;
 import net.minecraft.entity.monster.EntityZombie;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.BlockPos;
-import net.minecraft.util.MathHelper;
+import net.minecraft.util.EnumHand;
+import net.minecraft.util.SoundEvent;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
@@ -40,7 +43,7 @@ public class EntitySkeletonGoliath extends EntityMob {
 	public EntitySkeletonGoliath(World par1World) {
 		super(par1World);
 		setSize(1.0F, 4.5F);
-		tasks.addTask(2, new EntityAIAttackOnCollide(this, EntityPlayer.class, 1.0D, true));
+		tasks.addTask(2, new EntityAIAttackMelee(this, 1.0D, true));
 		tasks.addTask(3, new EntityAIMoveTowardsRestriction(this, 1.0D));
 		tasks.addTask(4, new EntityAIWander(this, 1.0D));
 		tasks.addTask(5, new EntityAIFleeSun(this, 1.0D));
@@ -60,15 +63,15 @@ public class EntitySkeletonGoliath extends EntityMob {
 	{
 		super.applyEntityAttributes();
 
-		getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setBaseValue(0.3D);
-		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.23000000417232513D);
+		getEntityAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue(0.3D);
+		getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.23000000417232513D);
 
 		if(AbyssalCraft.hardcoreMode){
-			getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(200.0D);
-			getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(40.0D);
+			getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(200.0D);
+			getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(40.0D);
 		} else {
-			getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(100.0D);
-			getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(20.0D);
+			getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(100.0D);
+			getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(20.0D);
 		}
 	}
 
@@ -79,27 +82,27 @@ public class EntitySkeletonGoliath extends EntityMob {
 	}
 
 	@Override
-	protected String getLivingSound()
+	protected SoundEvent getAmbientSound()
 	{
-		return "mob.skeleton.say";
+		return SoundEvents.entity_skeleton_ambient;
 	}
 
 	@Override
-	protected String getHurtSound()
+	protected SoundEvent getHurtSound()
 	{
-		return "mob.skeleton.hurt";
+		return SoundEvents.entity_skeleton_hurt;
 	}
 
 	@Override
-	protected String getDeathSound()
+	protected SoundEvent getDeathSound()
 	{
-		return "mob.skeleton.death";
+		return SoundEvents.entity_skeleton_death;
 	}
 
 	@Override
 	protected void playStepSound(BlockPos pos, Block par4)
 	{
-		playSound("mob.skeleton.step", 0.15F, 1.0F);
+		playSound(SoundEvents.entity_skeleton_step, 0.15F, 1.0F);
 	}
 
 	@Override
@@ -109,16 +112,18 @@ public class EntitySkeletonGoliath extends EntityMob {
 	}
 
 	@Override
-	public ItemStack getHeldItem(){
-		return new ItemStack(AbyssalCraft.cudgel);
+	public ItemStack getHeldItem(EnumHand hand){
+		if(hand == EnumHand.MAIN_HAND)
+			return new ItemStack(AbyssalCraft.cudgel);
+		return null;
 
 	}
 
-	@Override
-	protected void addRandomDrop()
-	{
-		dropItem(AbyssalCraft.cudgel, 1);
-	}
+	//	@Override
+	//	protected void addRandomDrop()
+	//	{
+	//		dropItem(AbyssalCraft.cudgel, 1);
+	//	}
 
 	@Override
 	public EnumCreatureAttribute getCreatureAttribute()
@@ -129,7 +134,7 @@ public class EntitySkeletonGoliath extends EntityMob {
 	@Override
 	public void onLivingUpdate()
 	{
-		if (worldObj.isDaytime() && !worldObj.isRemote && worldObj.provider.getDimensionId() != AbyssalCraft.configDimId1)
+		if (worldObj.isDaytime() && !worldObj.isRemote && worldObj.provider.getDimension() != AbyssalCraft.configDimId1)
 		{
 			float f = getBrightness(1.0F);
 

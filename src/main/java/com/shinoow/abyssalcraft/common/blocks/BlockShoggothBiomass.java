@@ -13,14 +13,15 @@ package com.shinoow.abyssalcraft.common.blocks;
 
 import java.util.Random;
 
-import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
+import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.AxisAlignedBB;
-import net.minecraft.util.BlockPos;
+import net.minecraft.util.EnumBlockRenderType;
+import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
@@ -33,7 +34,7 @@ public class BlockShoggothBiomass extends BlockContainer {
 		super(Material.ground);
 		setHardness(1.0F);
 		setResistance(18.0F);
-		setStepSound(Block.soundTypeSand);
+		setStepSound(SoundType.SAND);
 		setUnlocalizedName("shoggothbiomass");
 		setCreativeTab(AbyssalCraft.tabBlock);
 		setLightLevel(0.5F);
@@ -46,10 +47,10 @@ public class BlockShoggothBiomass extends BlockContainer {
 	}
 
 	@Override
-	public AxisAlignedBB getCollisionBoundingBox(World world, BlockPos pos, IBlockState state)
+	public AxisAlignedBB getSelectedBoundingBox(IBlockState state, World world, BlockPos pos)
 	{
 		float f = 0.15F;
-		return AxisAlignedBB.fromBounds(pos.getX(), pos.getY(), pos.getZ(), pos.getX() + 1, pos.getY() + 1 - f, pos.getZ() + 1);
+		return new AxisAlignedBB(0, 0, 0, 1, 1 - f, 1);
 	}
 
 	@Override
@@ -59,9 +60,9 @@ public class BlockShoggothBiomass extends BlockContainer {
 	}
 
 	@Override
-	public int getRenderType()
+	public EnumBlockRenderType getRenderType(IBlockState state)
 	{
-		return 3;
+		return EnumBlockRenderType.MODEL;
 	}
 
 	@Override

@@ -11,22 +11,21 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.common.items;
 
-import com.shinoow.abyssalcraft.AbyssalCraft;
-
 import net.minecraft.item.ItemSpade;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.EnumChatFormatting;
-import net.minecraft.util.StatCollector;
+import net.minecraft.util.text.TextFormatting;
+
+import com.shinoow.abyssalcraft.AbyssalCraft;
 
 public class ItemACShovel extends ItemSpade {
 
-	private EnumChatFormatting format;
+	private TextFormatting format;
 
 	public ItemACShovel(ToolMaterial mat, String name, int harvestlevel){
 		this(mat, name, harvestlevel, null);
 	}
 
-	public ItemACShovel(ToolMaterial mat, String name, int harvestlevel, EnumChatFormatting format) {
+	public ItemACShovel(ToolMaterial mat, String name, int harvestlevel, TextFormatting format) {
 		super(mat);
 		setCreativeTab(AbyssalCraft.tabTools);
 		setHarvestLevel("shovel", harvestlevel);
@@ -39,6 +38,6 @@ public class ItemACShovel extends ItemSpade {
 	@Override
 	public String getItemStackDisplayName(ItemStack par1ItemStack) {
 
-		return format != null ? format + StatCollector.translateToLocal(this.getUnlocalizedName() + ".name") : super.getItemStackDisplayName(par1ItemStack);
+		return format != null ? format + super.getItemStackDisplayName(par1ItemStack) : super.getItemStackDisplayName(par1ItemStack);
 	}
 }

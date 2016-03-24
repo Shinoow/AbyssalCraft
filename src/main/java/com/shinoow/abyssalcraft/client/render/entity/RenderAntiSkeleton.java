@@ -40,8 +40,8 @@ public class RenderAntiSkeleton extends RenderBiped<EntityAntiSkeleton>
 			@Override
 			protected void initArmor()
 			{
-				field_177189_c = new ModelSkeleton(0.5F, true);
-				field_177186_d = new ModelSkeleton(1.0F, true);
+				modelLeggings = new ModelSkeleton(0.5F, true);
+				modelArmor = new ModelSkeleton(1.0F, true);
 			}
 		});
 	}

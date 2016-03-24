@@ -11,18 +11,21 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.common.blocks;
 
+import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 
 public class BlockACSingleSlab extends BlockACSlab {
 
-	public BlockACSingleSlab(Material par3Material, String tooltype, int harvestlevel)
+	public BlockACSingleSlab(Material par3Material, String tooltype, int harvestlevel, SoundType stepSound)
 	{
 		super(par3Material, tooltype, harvestlevel);
+		setStepSound(stepSound);
 	}
 
-	public BlockACSingleSlab(Material par3Material)
+	public BlockACSingleSlab(Material par3Material, SoundType stepSound)
 	{
 		super(par3Material);
+		setStepSound(stepSound);
 	}
 
 	@Override

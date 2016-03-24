@@ -16,8 +16,8 @@ import java.util.Random;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntityChest;
-import net.minecraft.util.BlockPos;
-import net.minecraft.util.EnumChatFormatting;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
 
@@ -3759,10 +3759,10 @@ public class chagarothlair extends WorldGenerator {
 			if(tileentitychest.getStackInSlot(13) == null)
 				tileentitychest.decrStackSize(13, 1);
 
-			tileentitychest.setInventorySlotContents(13, new ItemStack(Blocks.dirt, 1).setStackDisplayName(EnumChatFormatting.GOLD +"The Legendary Treasure of The Dreadlands"));
+			tileentitychest.setInventorySlotContents(13, new ItemStack(Blocks.dirt, 1).setStackDisplayName(TextFormatting.GOLD +"The Legendary Treasure of The Dreadlands"));
 			if(world.rand.nextInt(10) == 0){
 				tileentitychest.decrStackSize(13, 1);
-				tileentitychest.setInventorySlotContents(13, new ItemStack(AbyssalCraft.friedegg, 1).setStackDisplayName(EnumChatFormatting.GOLD +"The Legendary Treasure of The Dreadlands"));
+				tileentitychest.setInventorySlotContents(13, new ItemStack(AbyssalCraft.friedegg, 1).setStackDisplayName(TextFormatting.GOLD +"The Legendary Treasure of The Dreadlands"));
 			}
 			if(world.rand.nextInt(100) == 0){
 				tileentitychest.setInventorySlotContents(0, new ItemStack(AbyssalCraft.crystal, 1, 0));

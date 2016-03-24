@@ -13,12 +13,12 @@ package com.shinoow.abyssalcraft.common.structures;
 
 import java.util.Random;
 
-import com.shinoow.abyssalcraft.AbyssalCraft;
-
 import net.minecraft.block.material.Material;
-import net.minecraft.util.BlockPos;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
+
+import com.shinoow.abyssalcraft.AbyssalCraft;
 
 public class StructureShoggothPit extends WorldGenerator {
 
@@ -31,11 +31,11 @@ public class StructureShoggothPit extends WorldGenerator {
 			pos = pos.down();
 		if(pos.getY() <= 1) return false;
 
-		if(world.getBlockState(pos).getBlock().getMaterial() == Material.leaves ||
-				world.getBlockState(pos).getBlock().getMaterial() == Material.wood ||
-				world.getBlockState(pos).getBlock().getMaterial() == Material.vine ||
-				world.getBlockState(pos).getBlock().getMaterial() == Material.cactus ||
-				world.getBlockState(pos).getBlock().getMaterial() == Material.plants)
+		if(world.getBlockState(pos).getMaterial() == Material.leaves ||
+				world.getBlockState(pos).getMaterial() == Material.wood ||
+				world.getBlockState(pos).getMaterial() == Material.vine ||
+				world.getBlockState(pos).getMaterial() == Material.cactus ||
+				world.getBlockState(pos).getMaterial() == Material.plants)
 			return false;
 		else {
 

@@ -16,7 +16,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.entity.IEntityLivingData;
 import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.EntityAIAttackOnCollide;
+import net.minecraft.entity.ai.EntityAIAttackMelee;
 import net.minecraft.entity.ai.EntityAIHurtByTarget;
 import net.minecraft.entity.ai.EntityAILookIdle;
 import net.minecraft.entity.ai.EntityAIMoveTowardsRestriction;
@@ -26,10 +26,11 @@ import net.minecraft.entity.ai.EntityAIWander;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Items;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.item.Item;
-import net.minecraft.util.BlockPos;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.SoundEvent;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.World;
 
@@ -45,7 +46,7 @@ public class EntityAntiGhoul extends EntityMob implements IAntiEntity {
 		super(par1World);
 		setSize(1.0F, 3.0F);
 		tasks.addTask(0, new EntityAISwimming(this));
-		tasks.addTask(2, new EntityAIAttackOnCollide(this, EntityPlayer.class, 1.0D, false));
+		tasks.addTask(2, new EntityAIAttackMelee(this, 1.0D, false));
 		tasks.addTask(3, new EntityAIMoveTowardsRestriction(this, 1.0D));
 		tasks.addTask(4, new EntityAIWander(this, 1.0D));
 		tasks.addTask(6, new EntityAILookIdle(this));
@@ -63,44 +64,46 @@ public class EntityAntiGhoul extends EntityMob implements IAntiEntity {
 	protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
 
-		getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(64.0D);
-		getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setBaseValue(0.3D);
-		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.23000000417232513D);
+		getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(64.0D);
+		getEntityAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue(0.3D);
+		getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.23000000417232513D);
 
 		if(AbyssalCraft.hardcoreMode){
-			getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(120.0D);
-			getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(10.0D);
+			getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(120.0D);
+			getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(10.0D);
 		} else {
-			getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(60.0D);
-			getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(5.0D);
+			getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(60.0D);
+			getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(5.0D);
 		}
 	}
 
 	@Override
-	protected String getLivingSound()
+	protected SoundEvent getAmbientSound()
 	{
-		return "abyssalcraft:ghoul.normal.idle";
+		//		return "abyssalcraft:ghoul.normal.idle";
+		return SoundEvents.entity_zombie_ambient;
 	}
 
 	@Override
-	protected String getHurtSound()
+	protected SoundEvent getHurtSound()
 	{
-		return "mob.zombie.hurt";
+		return SoundEvents.entity_zombie_hurt;
 	}
 
 	/**
 	 * Returns the sound this mob makes on death.
 	 */
 	@Override
-	protected String getDeathSound()
+	protected SoundEvent getDeathSound()
 	{
-		return "abyssalcraft:ghoul.normal.death";
+		//		return "abyssalcraft:ghoul.normal.death";
+		return SoundEvents.entity_zombie_death;
 	}
 
 	@Override
 	protected void playStepSound(BlockPos pos, Block par4)
 	{
-		playSound("mob.zombie.step", 0.15F, 1.0F);
+		playSound(SoundEvents.entity_zombie_step, 0.15F, 1.0F);
 	}
 
 	@Override
@@ -115,22 +118,22 @@ public class EntityAntiGhoul extends EntityMob implements IAntiEntity {
 		return EnumCreatureAttribute.UNDEAD;
 	}
 
-	@Override
-	protected void addRandomDrop()
-	{
-		switch (rand.nextInt(3))
-		{
-		case 0:
-			dropItem(Items.bone, 1);
-			break;
-		case 1:
-			dropItem(Items.writable_book, 1);
-			break;
-		case 2:
-			dropItem(Item.getItemFromBlock(AbyssalCraft.DGhead), 1);
-			break;
-		}
-	}
+	//	@Override
+	//	protected void addRandomDrop() //TODO: loot pool
+	//	{
+	//		switch (rand.nextInt(3))
+	//		{
+	//		case 0:
+	//			dropItem(Items.bone, 1);
+	//			break;
+	//		case 1:
+	//			dropItem(Items.writable_book, 1);
+	//			break;
+	//		case 2:
+	//			dropItem(Item.getItemFromBlock(AbyssalCraft.DGhead), 1);
+	//			break;
+	//		}
+	//	}
 
 	@Override
 	protected void collideWithEntity(Entity par1Entity)

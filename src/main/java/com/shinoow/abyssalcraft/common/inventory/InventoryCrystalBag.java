@@ -18,7 +18,8 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
-import net.minecraft.util.IChatComponent;
+import net.minecraft.util.EnumHand;
+import net.minecraft.util.text.ITextComponent;
 import net.minecraftforge.common.util.Constants;
 
 public class InventoryCrystalBag implements IInventory
@@ -105,7 +106,7 @@ public class InventoryCrystalBag implements IInventory
 	}
 
 	@Override
-	public IChatComponent getDisplayName() {
+	public ITextComponent getDisplayName() {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -128,7 +129,7 @@ public class InventoryCrystalBag implements IInventory
 	@Override
 	public boolean isUseableByPlayer(EntityPlayer player)
 	{
-		return player.getHeldItem() == invItem;
+		return player.getHeldItem(EnumHand.MAIN_HAND) == invItem;
 	}
 
 	@Override

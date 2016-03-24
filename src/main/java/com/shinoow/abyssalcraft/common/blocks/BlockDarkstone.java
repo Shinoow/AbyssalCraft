@@ -14,6 +14,7 @@ package com.shinoow.abyssalcraft.common.blocks;
 import java.util.Random;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.Item;
@@ -25,6 +26,7 @@ public class BlockDarkstone extends Block {
 	public BlockDarkstone(){
 		super(Material.rock);
 		setCreativeTab(AbyssalCraft.tabBlock);
+		setStepSound(SoundType.STONE);
 	}
 
 	@Override

@@ -14,9 +14,9 @@ package com.shinoow.abyssalcraft.common.world.biome;
 import java.util.Random;
 
 import net.minecraft.block.Block;
-import net.minecraft.block.state.pattern.BlockHelper;
+import net.minecraft.block.state.pattern.BlockMatcher;
 import net.minecraft.init.Blocks;
-import net.minecraft.util.BlockPos;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.gen.feature.WorldGenAbstractTree;
@@ -43,10 +43,10 @@ import com.shinoow.abyssalcraft.common.world.gen.WorldGenAntimatterLake;
 public class BiomeGenCorSwamp extends BiomeGenBase {
 
 	@SuppressWarnings("unchecked")
-	public BiomeGenCorSwamp(int par1) {
+	public BiomeGenCorSwamp(BiomeProperties par1) {
 		super(par1);
-		minHeight = -0.2F;
-		maxHeight = 0.1F;
+		//		minHeight = -0.2F;
+		//		maxHeight = 0.1F;
 		topBlock=Blocks.grass.getDefaultState();
 		fillerBlock=Blocks.dirt.getDefaultState();
 		theBiomeDecorator.treesPerChunk = 2;
@@ -59,7 +59,7 @@ public class BiomeGenCorSwamp extends BiomeGenBase {
 		theBiomeDecorator.sandPerChunk2 = 0;
 		theBiomeDecorator.sandPerChunk = 0;
 		theBiomeDecorator.grassPerChunk = 5;
-		waterColorMultiplier = 0x24FF83;
+		//		waterColorMultiplier = 0x24FF83;
 		spawnableMonsterList.add(new SpawnListEntry(EntityDepthsGhoul.class, 60, 1, 5));
 		spawnableMonsterList.add(new SpawnListEntry(EntityAbyssalZombie.class, 60, 1, 5));
 		spawnableCreatureList.add(new SpawnListEntry(EntityAntiPig.class, 5, 1, 2));
@@ -89,7 +89,7 @@ public class BiomeGenCorSwamp extends BiomeGenBase {
 				int var9 = par2Random.nextInt(16);
 				Block var10 = par1World.getBlockState(pos.add(var7, var8, var9)).getBlock();
 
-				if (var10 != null && var10.isReplaceableOreGen(par1World, pos.add(var7, var8, var9), BlockHelper.forBlock(Blocks.stone)) || var10 == Blocks.iron_ore || var10 == Blocks.coal_ore)
+				if (var10 != null && var10.isReplaceableOreGen(par1World.getBlockState(pos.add(var7, var8, var9)), par1World, pos.add(var7, var8, var9), BlockMatcher.forBlock(Blocks.stone)) || var10 == Blocks.iron_ore || var10 == Blocks.coal_ore)
 					par1World.setBlockState(pos.add(var7, var8, var9), AbyssalCraft.Coraliumore.getDefaultState(), 2);
 			}
 			for(int rarity = 0; rarity < 6; rarity++)

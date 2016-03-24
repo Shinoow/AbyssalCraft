@@ -13,13 +13,13 @@ package com.shinoow.abyssalcraft.common.items;
 
 import java.util.List;
 
-import com.shinoow.abyssalcraft.AbyssalCraft;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.EnumChatFormatting;
-import net.minecraft.util.StatCollector;
+import net.minecraft.util.text.TextFormatting;
+import net.minecraft.util.text.translation.I18n;
+
+import com.shinoow.abyssalcraft.AbyssalCraft;
 
 public class ItemEoA extends Item {
 
@@ -34,12 +34,12 @@ public class ItemEoA extends Item {
 	@Override
 	public String getItemStackDisplayName(ItemStack par1ItemStack) {
 
-		return EnumChatFormatting.AQUA + StatCollector.translateToLocal(this.getUnlocalizedName() + ".name");
+		return TextFormatting.AQUA + super.getItemStackDisplayName(par1ItemStack);
 	}
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
 	public void addInformation(ItemStack is, EntityPlayer player, List l, boolean B){
-		l.add(StatCollector.translateToLocal("tooltip.eoa"));
+		l.add(I18n.translateToLocal("tooltip.eoa"));
 	}
 }

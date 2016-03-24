@@ -14,11 +14,10 @@ package com.shinoow.abyssalcraft.common.items;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.EnumAction;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.world.World;
 import com.google.common.collect.Multimap;
 import com.shinoow.abyssalcraft.AbyssalCraft;
 
@@ -59,13 +58,13 @@ public class ItemDreadiumKatana extends Item {
 		return true;
 	}
 
-	@Override
-	public ItemStack onItemRightClick(ItemStack par1ItemStack, World par2World, EntityPlayer par3EntityPlayer) {
-
-		par3EntityPlayer.setItemInUse(par1ItemStack, getMaxItemUseDuration(par1ItemStack));
-
-		return par1ItemStack;
-	}
+	//	@Override
+	//	public ActionResult<ItemStack> onItemRightClick(ItemStack par1ItemStack, World par2World, EntityPlayer par3EntityPlayer, EnumHand hand) {
+	//
+	////		par3EntityPlayer.setItemInUse(par1ItemStack, getMaxItemUseDuration(par1ItemStack));
+	//
+	//		return new ActionResult(EnumActionResult.PASS, par1ItemStack);
+	//	}
 
 	@Override
 	public boolean getIsRepairable(ItemStack par1ItemStack, ItemStack par2ItemStack)
@@ -75,9 +74,15 @@ public class ItemDreadiumKatana extends Item {
 
 	@Override
 	@SuppressWarnings({ "rawtypes", "unchecked", "deprecation" })
-	public Multimap getItemAttributeModifiers() {
-		Multimap multimap = super.getItemAttributeModifiers();
-		multimap.put(SharedMonsterAttributes.attackDamage.getAttributeUnlocalizedName(), new AttributeModifier(itemModifierUUID, "Weapon modifier", weaponDamage, 0));
+	public Multimap getItemAttributeModifiers(EntityEquipmentSlot equipmentSlot) {
+		Multimap multimap = super.getItemAttributeModifiers(equipmentSlot);
+
+		if (equipmentSlot == EntityEquipmentSlot.MAINHAND)
+		{
+			multimap.put(SharedMonsterAttributes.ATTACK_DAMAGE.getAttributeUnlocalizedName(), new AttributeModifier(ATTACK_DAMAGE_MODIFIER, "Weapon modifier", weaponDamage, 0));
+			multimap.put(SharedMonsterAttributes.ATTACK_SPEED.getAttributeUnlocalizedName(), new AttributeModifier(ATTACK_SPEED_MODIFIER, "Weapon modifier", -2.4000000953674316D, 0));
+		}
+
 		return multimap;
 	}
 }

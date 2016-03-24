@@ -13,6 +13,7 @@ package com.shinoow.abyssalcraft.common.inventory;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.inventory.ClickType;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
@@ -93,13 +94,22 @@ public class ContainerCrystalBag extends Container
 		return itemstack;
 	}
 
+	//	@Override
+	//	public ItemStack slotClick(int slot, int button, int flag, EntityPlayer player) {
+	//
+	//		if (slot >= 0 && getSlot(slot) != null && getSlot(slot).getStack() != null)
+	//			if(getSlot(slot).getStack().getItem() instanceof ItemCrystalBag)
+	//				return null;
+	//		return super.slotClick(slot, button, flag, player);
+	//	}
+
 	@Override
-	public ItemStack slotClick(int slot, int button, int flag, EntityPlayer player) {
+	public ItemStack func_184996_a(int slot, int dragType, ClickType clickType, EntityPlayer player) {
 
 		if (slot >= 0 && getSlot(slot) != null && getSlot(slot).getStack() != null)
 			if(getSlot(slot).getStack().getItem() instanceof ItemCrystalBag)
 				return null;
-		return super.slotClick(slot, button, flag, player);
+		return super.func_184996_a(slot, dragType, clickType, player);
 	}
 
 	public InventoryCrystalBag getBagInventory(){

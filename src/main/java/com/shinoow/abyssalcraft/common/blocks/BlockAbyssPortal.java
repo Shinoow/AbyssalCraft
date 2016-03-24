@@ -19,18 +19,18 @@ import net.minecraft.block.BlockPortal;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyEnum;
-import net.minecraft.block.state.BlockState;
+import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.BlockWorldState;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.block.state.pattern.BlockPattern;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
-import net.minecraft.item.Item;
-import net.minecraft.util.AxisAlignedBB;
-import net.minecraft.util.BlockPos;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumFacing;
-import net.minecraft.util.EnumWorldBlockLayer;
+import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
@@ -43,6 +43,9 @@ import com.shinoow.abyssalcraft.common.world.TeleporterAbyss;
 public class BlockAbyssPortal extends BlockBreakable {
 
 	public static final PropertyEnum<EnumFacing.Axis> AXIS = PropertyEnum.<EnumFacing.Axis>create("axis", EnumFacing.Axis.class, new EnumFacing.Axis[] {EnumFacing.Axis.X, EnumFacing.Axis.Z});
+	protected static final AxisAlignedBB field_185683_b = new AxisAlignedBB(0.0D, 0.0D, 0.375D, 1.0D, 1.0D, 0.625D);
+	protected static final AxisAlignedBB field_185684_c = new AxisAlignedBB(0.375D, 0.0D, 0.0D, 0.625D, 1.0D, 1.0D);
+	protected static final AxisAlignedBB field_185685_d = new AxisAlignedBB(0.375D, 0.0D, 0.375D, 0.625D, 1.0D, 0.625D);
 
 	public BlockAbyssPortal()
 	{
@@ -51,29 +54,27 @@ public class BlockAbyssPortal extends BlockBreakable {
 		setTickRandomly(true);
 		setHardness(-1.0F);
 		setLightLevel(0.75F);
-		setStepSound(soundTypeGlass);
 	}
 
 	@Override
-	public AxisAlignedBB getCollisionBoundingBox(World par1World, BlockPos pos, IBlockState state)
+	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos)
 	{
-		return null;
+		switch (state.getValue(AXIS))
+		{
+		case X:
+			return field_185683_b;
+		case Y:
+		default:
+			return field_185685_d;
+		case Z:
+			return field_185684_c;
+		}
 	}
 
 	@Override
-	public void setBlockBoundsBasedOnState(IBlockAccess worldIn, BlockPos pos)
+	public AxisAlignedBB getSelectedBoundingBox(IBlockState blockState, World worldIn, BlockPos pos)
 	{
-		EnumFacing.Axis enumfacing$axis = worldIn.getBlockState(pos).getValue(AXIS);
-		float f = 0.125F;
-		float f1 = 0.125F;
-
-		if (enumfacing$axis == EnumFacing.Axis.X)
-			f = 0.5F;
-
-		if (enumfacing$axis == EnumFacing.Axis.Z)
-			f1 = 0.5F;
-
-		setBlockBounds(0.5F - f, 0.0F, 0.5F - f1, 0.5F + f, 1.0F, 0.5F + f1);
+		return NULL_AABB;
 	}
 
 	public static int getMetaForAxis(EnumFacing.Axis axis)
@@ -82,7 +83,7 @@ public class BlockAbyssPortal extends BlockBreakable {
 	}
 
 	@Override
-	public boolean isFullCube()
+	public boolean isFullCube(IBlockState state)
 	{
 		return false;
 	}
@@ -132,14 +133,13 @@ public class BlockAbyssPortal extends BlockBreakable {
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public boolean shouldSideBeRendered(IBlockAccess worldIn, BlockPos pos, EnumFacing side)
+	public boolean shouldSideBeRendered(IBlockState state, IBlockAccess worldIn, BlockPos pos, EnumFacing side)
 	{
 		EnumFacing.Axis enumfacing$axis = null;
-		IBlockState iblockstate = worldIn.getBlockState(pos);
 
-		if (worldIn.getBlockState(pos).getBlock() == this)
+		if (state.getBlock() == this)
 		{
-			enumfacing$axis = iblockstate.getValue(AXIS);
+			enumfacing$axis = state.getValue(AXIS);
 
 			if (enumfacing$axis == null)
 				return false;
@@ -170,7 +170,7 @@ public class BlockAbyssPortal extends BlockBreakable {
 	public void onEntityCollidedWithBlock(World par1World, BlockPos pos, IBlockState state, Entity par5Entity)
 	{
 
-		if (par5Entity.ridingEntity == null && par5Entity.riddenByEntity == null && par5Entity instanceof EntityPlayerMP)
+		if (!par5Entity.isRiding() && !par5Entity.isBeingRidden() && par5Entity instanceof EntityPlayerMP)
 		{
 			EntityPlayerMP thePlayer = (EntityPlayerMP)par5Entity;
 			thePlayer.addStat(AbyssalCraft.enterabyss, 1);
@@ -180,27 +180,27 @@ public class BlockAbyssPortal extends BlockBreakable {
 			else if (thePlayer.dimension != AbyssalCraft.configDimId1)
 			{
 				thePlayer.timeUntilPortal = 10;
-				thePlayer.mcServer.getConfigurationManager().transferPlayerToDimension(thePlayer, AbyssalCraft.configDimId1, new TeleporterAbyss(thePlayer.mcServer.worldServerForDimension(AbyssalCraft.configDimId1)));
+				thePlayer.mcServer.getPlayerList().transferPlayerToDimension(thePlayer, AbyssalCraft.configDimId1, new TeleporterAbyss(thePlayer.mcServer.worldServerForDimension(AbyssalCraft.configDimId1)));
 			}
 			else {
 				thePlayer.timeUntilPortal = 10;
-				thePlayer.mcServer.getConfigurationManager().transferPlayerToDimension(thePlayer, 0, new TeleporterAbyss(thePlayer.mcServer.worldServerForDimension(0)));
+				thePlayer.mcServer.getPlayerList().transferPlayerToDimension(thePlayer, 0, new TeleporterAbyss(thePlayer.mcServer.worldServerForDimension(0)));
 			}
 		}
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public Item getItem(World par1World, BlockPos pos)
+	public ItemStack getItem(World par1World, BlockPos pos, IBlockState state)
 	{
 		return null;
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public EnumWorldBlockLayer getBlockLayer()
+	public BlockRenderLayer getBlockLayer()
 	{
-		return EnumWorldBlockLayer.TRANSLUCENT;
+		return BlockRenderLayer.TRANSLUCENT;
 	}
 
 	@Override
@@ -216,9 +216,9 @@ public class BlockAbyssPortal extends BlockBreakable {
 	}
 
 	@Override
-	protected BlockState createBlockState()
+	protected BlockStateContainer createBlockState()
 	{
-		return new BlockState(this, new IProperty[] {AXIS});
+		return new BlockStateContainer(this, new IProperty[] {AXIS});
 	}
 
 	public BlockPattern.PatternHelper func_181089_f(World p_181089_1_, BlockPos p_181089_2_)
@@ -243,14 +243,14 @@ public class BlockAbyssPortal extends BlockBreakable {
 
 			for (EnumFacing.AxisDirection enumfacing$axisdirection : EnumFacing.AxisDirection.values())
 			{
-				BlockPattern.PatternHelper blockpattern$patternhelper = new BlockPattern.PatternHelper(enumfacing.getAxisDirection() == enumfacing$axisdirection ? blockpos : blockpos.offset(blockportal$size.field_150866_c, blockportal$size.func_181101_b() - 1), EnumFacing.func_181076_a(enumfacing$axisdirection, enumfacing$axis), EnumFacing.UP, loadingcache, blockportal$size.func_181101_b(), blockportal$size.func_181100_a(), 1);
+				BlockPattern.PatternHelper blockpattern$patternhelper = new BlockPattern.PatternHelper(enumfacing.getAxisDirection() == enumfacing$axisdirection ? blockpos : blockpos.offset(blockportal$size.field_150866_c, blockportal$size.func_181101_b() - 1), EnumFacing.getFacingFromAxis(enumfacing$axisdirection, enumfacing$axis), EnumFacing.UP, loadingcache, blockportal$size.func_181101_b(), blockportal$size.func_181100_a(), 1);
 
 				for (int i = 0; i < blockportal$size.func_181101_b(); ++i)
 					for (int j = 0; j < blockportal$size.func_181100_a(); ++j)
 					{
 						BlockWorldState blockworldstate = blockpattern$patternhelper.translateOffset(i, j, 1);
 
-						if (blockworldstate.getBlockState() != null && blockworldstate.getBlockState().getBlock().getMaterial() != Material.air)
+						if (blockworldstate.getBlockState() != null && blockworldstate.getBlockState().getMaterial() != Material.air)
 							++aint[enumfacing$axisdirection.ordinal()];
 					}
 			}
@@ -261,7 +261,7 @@ public class BlockAbyssPortal extends BlockBreakable {
 				if (aint[enumfacing$axisdirection2.ordinal()] < aint[enumfacing$axisdirection1.ordinal()])
 					enumfacing$axisdirection1 = enumfacing$axisdirection2;
 
-			return new BlockPattern.PatternHelper(enumfacing.getAxisDirection() == enumfacing$axisdirection1 ? blockpos : blockpos.offset(blockportal$size.field_150866_c, blockportal$size.func_181101_b() - 1), EnumFacing.func_181076_a(enumfacing$axisdirection1, enumfacing$axis), EnumFacing.UP, loadingcache, blockportal$size.func_181101_b(), blockportal$size.func_181100_a(), 1);
+			return new BlockPattern.PatternHelper(enumfacing.getAxisDirection() == enumfacing$axisdirection1 ? blockpos : blockpos.offset(blockportal$size.field_150866_c, blockportal$size.func_181101_b() - 1), EnumFacing.getFacingFromAxis(enumfacing$axisdirection1, enumfacing$axis), EnumFacing.UP, loadingcache, blockportal$size.func_181101_b(), blockportal$size.func_181100_a(), 1);
 		}
 	}
 
@@ -391,7 +391,7 @@ public class BlockAbyssPortal extends BlockBreakable {
 
 		protected boolean func_150857_a(Block p_150857_1_)
 		{
-			return p_150857_1_.getMaterial() == Material.air || p_150857_1_ == AbyssalCraft.Coraliumfire || p_150857_1_ == AbyssalCraft.portal;
+			return p_150857_1_.getMaterial(p_150857_1_.getDefaultState()) == Material.air || p_150857_1_ == AbyssalCraft.Coraliumfire || p_150857_1_ == AbyssalCraft.portal;
 		}
 
 		public boolean func_150860_b()

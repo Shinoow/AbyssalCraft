@@ -13,17 +13,18 @@ package com.shinoow.abyssalcraft.common.items.armor;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.MobEffects;
+import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
-import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
-import net.minecraft.util.EnumChatFormatting;
-import net.minecraft.util.StatCollector;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
+
 import com.shinoow.abyssalcraft.AbyssalCraft;
 
 public class ItemEthaxiumArmor extends ItemArmor {
-	public ItemEthaxiumArmor(ArmorMaterial par2EnumArmorMaterial, int par3, int par4, String name){
+	public ItemEthaxiumArmor(ArmorMaterial par2EnumArmorMaterial, int par3, EntityEquipmentSlot par4, String name){
 		super(par2EnumArmorMaterial, par3, par4);
 		//		GameRegistry.registerItem(this, name);
 		setUnlocalizedName(name);
@@ -33,11 +34,11 @@ public class ItemEthaxiumArmor extends ItemArmor {
 	@Override
 	public String getItemStackDisplayName(ItemStack par1ItemStack) {
 
-		return EnumChatFormatting.AQUA + StatCollector.translateToLocal(this.getUnlocalizedName() + ".name");
+		return TextFormatting.AQUA + super.getItemStackDisplayName(par1ItemStack);
 	}
 
 	@Override
-	public String getArmorTexture(ItemStack stack, Entity entity, int slot, String layer) {
+	public String getArmorTexture(ItemStack stack, Entity entity, EntityEquipmentSlot slot, String layer) {
 		if(stack.getItem() == AbyssalCraft.ethHelmet || stack.getItem() == AbyssalCraft.ethPlate || stack.getItem() == AbyssalCraft.ethBoots)
 			return "abyssalcraft:textures/armor/ethaxium_1.png";
 
@@ -57,38 +58,38 @@ public class ItemEthaxiumArmor extends ItemArmor {
 	public void onArmorTick(World world, EntityPlayer player, ItemStack itemstack) {
 		if (itemstack.getItem() == AbyssalCraft.ethHelmet) {
 			if(world.provider.isSurfaceWorld() && !world.provider.isDaytime())
-				player.addPotionEffect(new PotionEffect(Potion.nightVision.getId(), 260, 0));
-			if(player.getActivePotionEffect(Potion.hunger) !=null)
-				player.removePotionEffect(Potion.hunger.getId());
-			if(player.getActivePotionEffect(Potion.poison) !=null)
-				player.removePotionEffect(Potion.poison.getId());
+				player.addPotionEffect(new PotionEffect(MobEffects.nightVision, 260, 0));
+			if(player.getActivePotionEffect(MobEffects.hunger) !=null)
+				player.removePotionEffect(MobEffects.hunger);
+			if(player.getActivePotionEffect(MobEffects.poison) !=null)
+				player.removePotionEffect(MobEffects.poison);
 			if(world.rand.nextInt(300) == 0)
-				player.addPotionEffect(new PotionEffect(Potion.saturation.getId(), 60, 0));
+				player.addPotionEffect(new PotionEffect(MobEffects.saturation, 60, 0));
 		}
 		if(itemstack.getItem() == AbyssalCraft.ethPlate){
 			if(player.isBurning() || world.provider.doesWaterVaporize())
-				player.addPotionEffect(new PotionEffect(Potion.fireResistance.id, 20, 2));
+				player.addPotionEffect(new PotionEffect(MobEffects.fireResistance, 20, 2));
 			if(player.getActivePotionEffect(AbyssalCraft.antiMatter) !=null)
-				player.removePotionEffect(AbyssalCraft.antiMatter.getId());
+				player.removePotionEffect(AbyssalCraft.antiMatter);
 			if(world.rand.nextInt(200) == 0)
-				player.addPotionEffect(new PotionEffect(Potion.damageBoost.id, 60));
+				player.addPotionEffect(new PotionEffect(MobEffects.damageBoost, 60));
 		}
 		if(itemstack.getItem() == AbyssalCraft.ethLegs)
 			if(world.rand.nextInt(200) == 0)
-				player.addPotionEffect(new PotionEffect(Potion.regeneration.id, 60));
+				player.addPotionEffect(new PotionEffect(MobEffects.regeneration, 60));
 		if(itemstack.getItem() == AbyssalCraft.ethBoots)
 			if(player.isInWater()){
-				player.addPotionEffect(new PotionEffect(Potion.moveSpeed.id, 20, 2));
-				player.addPotionEffect(new PotionEffect(Potion.waterBreathing.id, 20, 1));
+				player.addPotionEffect(new PotionEffect(MobEffects.moveSpeed, 20, 2));
+				player.addPotionEffect(new PotionEffect(MobEffects.waterBreathing, 20, 1));
 			}
 
-		if(player.getActivePotionEffect(Potion.saturation) != null && player.getActivePotionEffect(Potion.saturation).getDuration() == 0)
-			player.removePotionEffect(Potion.saturation.id);
-		if(player.getActivePotionEffect(Potion.damageBoost) != null && player.getActivePotionEffect(Potion.damageBoost).getDuration() == 0)
-			player.removePotionEffect(Potion.damageBoost.id);
-		if(player.getActivePotionEffect(Potion.regeneration) != null && player.getActivePotionEffect(Potion.regeneration).getDuration() == 0)
-			player.removePotionEffect(Potion.regeneration.id);
-		if(player.getActivePotionEffect(Potion.fireResistance) != null && player.getActivePotionEffect(Potion.fireResistance).getDuration() == 0)
-			player.removePotionEffect(Potion.fireResistance.id);
+		if(player.getActivePotionEffect(MobEffects.saturation) != null && player.getActivePotionEffect(MobEffects.saturation).getDuration() == 0)
+			player.removePotionEffect(MobEffects.saturation);
+		if(player.getActivePotionEffect(MobEffects.damageBoost) != null && player.getActivePotionEffect(MobEffects.damageBoost).getDuration() == 0)
+			player.removePotionEffect(MobEffects.damageBoost);
+		if(player.getActivePotionEffect(MobEffects.regeneration) != null && player.getActivePotionEffect(MobEffects.regeneration).getDuration() == 0)
+			player.removePotionEffect(MobEffects.regeneration);
+		if(player.getActivePotionEffect(MobEffects.fireResistance) != null && player.getActivePotionEffect(MobEffects.fireResistance).getDuration() == 0)
+			player.removePotionEffect(MobEffects.fireResistance);
 	}
 }

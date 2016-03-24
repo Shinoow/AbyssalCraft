@@ -11,7 +11,7 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.client.lib;
 
-import net.minecraft.util.StatCollector;
+import net.minecraft.util.text.translation.I18n;
 
 /**
  * That one place where you keep a billion Strings representing stuff
@@ -61,6 +61,8 @@ public class NecronomiconText {
 	public static String INFORMATION_DREADLANDS = translate("necronomicon.text.dreadlands");
 	public static String INFORMATION_OMOTHOL = translate("necronomicon.text.omothol");
 	public static String INFORMATION_DARK_REALM = translate("necronomicon.text.darkrealm");
+
+	public static String MISC_INFORMATION = translate("necronomicon.text.miscinformation");
 
 	public static String MATERIAL_ABYSSALNITE_1 = translate("necronomicon.text.materials.abyssalnite.1");
 	public static String MATERIAL_ABYSSALNITE_2 = translate("necronomicon.text.materials.abyssalnite.2");
@@ -173,6 +175,19 @@ public class NecronomiconText {
 	public static String CRAFTING_RITUAL_CHARM_2 = translate("necronomicon.text.crafting.ritualcharm.2");
 	public static String CRAFTING_SACRIFICIAL_ALTAR_1 = translate("necronomicon.text.crafting.sacrificialaltar.1");
 	public static String CRAFTING_SACRIFICIAL_ALTAR_2 = translate("necronomicon.text.crafting.sacrificialaltar.2");
+
+	//Misc crafting
+	public static String CRAFTING_UPGRADE_KIT_1 = translate("necronomicon.text.crafting.upgradekit.1");
+	public static String CRAFTING_UPGRADE_KIT_2 = translate("necronomicon.text.crafting.upgradekit.2");
+	public static String CRAFTING_IRON_PLATE = translate("necronomicon.text.crafting.ironplate");
+	public static String CRAFTING_WASHCLOTH = translate("necronomicon.text.crafting.washcloth");
+	public static String CRAFTING_MRE = translate("necronomicon.text.crafting.mre");
+	public static String CRAFTING_PLATE_FOOD = translate("necronomicon.text.crafting.platefood");
+	public static String CRAFTING_ODB_CORE = translate("necronomicon.text.crafting.odbcore");
+	public static String CRAFTING_ODB = translate("necronomicon.text.crafting.odb");
+	public static String CRAFTING_CARBON_CLUSTER = translate("necronomicon.text.crafting.carboncluster");
+	public static String CRAFTING_DENSE_CARBON_CLUSTER = translate("necronomicon.text.crafting.densecarboncluster");
+	public static String CRAFTING_CRATE = translate("necronomicon.text.crafting.crate");
 
 	public static String PROGRESSION_OVERWORLD_1 = translate("necronomicon.text.overworld.progression.1");
 	public static String PROGRESSION_OVERWORLD_2 = translate("necronomicon.text.overworld.progression.2");
@@ -396,6 +411,7 @@ public class NecronomiconText {
 	public static String LABEL_REMNANT_HELP = translate("necronomicon.remnanthelp");
 	public static String LABEL_GETTING_STARTED = translate("necronomicon.gettingstarted");
 	public static String LABEL_POTENTIAL_ENERGY = translate("necronomicon.potentialenergy");
+	public static String LABEL_MISC_INFORMATION = translate("necronomicon.miscinformation");
 
 	/**
 	 * The best way to drown an array of strings with nonsense
@@ -410,6 +426,6 @@ public class NecronomiconText {
 	}
 
 	private static String translate(String text){
-		return StatCollector.translateToLocal(text);
+		return I18n.translateToLocal(text);
 	}
 }

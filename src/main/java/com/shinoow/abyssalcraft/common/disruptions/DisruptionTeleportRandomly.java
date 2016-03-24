@@ -13,10 +13,12 @@ package com.shinoow.abyssalcraft.common.disruptions;
 
 import java.util.List;
 
-import net.minecraft.block.Block;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.util.BlockPos;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.util.EnumParticleTypes;
+import net.minecraft.util.SoundCategory;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.living.EnderTeleportEvent;
@@ -65,7 +67,7 @@ public class DisruptionTeleportRandomly extends DisruptionEntry {
 			while (!flag1 && pos.getY() > 0)
 			{
 				BlockPos pos1 = pos.down();
-				Block block = world.getBlockState(pos1).getBlock();
+				IBlockState block = world.getBlockState(pos1);
 
 				if (block.getMaterial().blocksMovement())
 					flag1 = true;
@@ -80,7 +82,7 @@ public class DisruptionTeleportRandomly extends DisruptionEntry {
 			{
 				player.setPosition(player.posX, player.posY, player.posZ);
 
-				if (world.getCollidingBoundingBoxes(player, player.getEntityBoundingBox()).isEmpty() && !world.isAnyLiquid(player.getEntityBoundingBox()))
+				if (world.getCubes(player, player.getEntityBoundingBox()).isEmpty() && !world.isAnyLiquid(player.getEntityBoundingBox()))
 					flag = true;
 			}
 		}
@@ -106,8 +108,8 @@ public class DisruptionTeleportRandomly extends DisruptionEntry {
 				world.spawnParticle(EnumParticleTypes.PORTAL, d7, d8, d9, f, f1, f2);
 			}
 
-			world.playSoundEffect(d3, d4, d5, "mob.endermen.portal", 1.0F, 1.0F);
-			player.playSound("mob.endermen.portal", 1.0F, 1.0F);
+			world.playSound(d3, d4, d5, SoundEvents.entity_endermen_teleport, SoundCategory.PLAYERS, 1.0F, 1.0F, false);
+			player.playSound(SoundEvents.entity_endermen_teleport, 1.0F, 1.0F);
 			return true;
 		}
 	}

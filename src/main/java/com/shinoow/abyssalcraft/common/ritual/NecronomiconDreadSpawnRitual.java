@@ -16,7 +16,7 @@ import java.util.List;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
-import net.minecraft.util.BlockPos;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 import com.google.common.collect.Lists;
@@ -35,9 +35,9 @@ public class NecronomiconDreadSpawnRitual extends NecronomiconRitual {
 
 	@Override
 	public boolean canCompleteRitual(World world, BlockPos pos, EntityPlayer player) {
-		List<EntityDreadSpawn> dreadSpawns = world.getEntitiesWithinAABB(EntityDreadSpawn.class, world.getBlockState(pos).getBlock().getCollisionBoundingBox(world, pos, world.getBlockState(pos)).expand(16, 3, 16));
-		List<EntityGreaterDreadSpawn> greaterDreadSpawns = world.getEntitiesWithinAABB(EntityGreaterDreadSpawn.class, world.getBlockState(pos).getBlock().getCollisionBoundingBox(world, pos, world.getBlockState(pos)).expand(16, 3, 16));
-		List<EntityLesserDreadbeast> lesserDreadBeasts = world.getEntitiesWithinAABB(EntityLesserDreadbeast.class, world.getBlockState(pos).getBlock().getCollisionBoundingBox(world, pos, world.getBlockState(pos)).expand(16, 3, 16));
+		List<EntityDreadSpawn> dreadSpawns = world.getEntitiesWithinAABB(EntityDreadSpawn.class, world.getBlockState(pos).getBlock().getBoundingBox(world.getBlockState(pos), world, pos).expand(16, 3, 16));
+		List<EntityGreaterDreadSpawn> greaterDreadSpawns = world.getEntitiesWithinAABB(EntityGreaterDreadSpawn.class, world.getBlockState(pos).getBlock().getBoundingBox(world.getBlockState(pos), world, pos).expand(16, 3, 16));
+		List<EntityLesserDreadbeast> lesserDreadBeasts = world.getEntitiesWithinAABB(EntityLesserDreadbeast.class, world.getBlockState(pos).getBlock().getBoundingBox(world.getBlockState(pos), world, pos).expand(16, 3, 16));
 		return !dreadSpawns.isEmpty() || !greaterDreadSpawns.isEmpty() || !lesserDreadBeasts.isEmpty();
 	}
 
@@ -47,7 +47,7 @@ public class NecronomiconDreadSpawnRitual extends NecronomiconRitual {
 		List<EntityGreaterDreadSpawn> greaterDreadSpawns = Lists.newArrayList();
 		List<EntityLesserDreadbeast> lesserDreadBeasts = Lists.newArrayList();
 
-		List<Entity> entities = world.getEntitiesWithinAABBExcludingEntity(player, world.getBlockState(pos).getBlock().getCollisionBoundingBox(world, pos, world.getBlockState(pos)).expand(16, 3, 16));
+		List<Entity> entities = world.getEntitiesWithinAABBExcludingEntity(player, world.getBlockState(pos).getBlock().getBoundingBox(world.getBlockState(pos), world, pos).expand(16, 3, 16));
 		for(Entity entity : entities){
 			if(entity instanceof EntityDreadSpawn)
 				dreadSpawns.add((EntityDreadSpawn) entity);

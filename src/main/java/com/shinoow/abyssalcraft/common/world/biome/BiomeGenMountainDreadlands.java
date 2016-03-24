@@ -20,10 +20,10 @@ import com.shinoow.abyssalcraft.common.entity.EntityDreadling;
 public class BiomeGenMountainDreadlands extends BiomeGenDreadlandsBase {
 
 	@SuppressWarnings("unchecked")
-	public BiomeGenMountainDreadlands(int par1) {
+	public BiomeGenMountainDreadlands(BiomeProperties par1) {
 		super(par1);
-		minHeight = 1.3F;
-		maxHeight = 0.9F;
+		//		minHeight = 1.3F;
+		//		maxHeight = 0.9F;
 		spawnableMonsterList.add(new SpawnListEntry(EntityDreadling.class, 40, 1, 3));
 		spawnableMonsterList.add(new SpawnListEntry(EntityDreadguard.class, 20, 1, 2));
 		spawnableMonsterList.add(new SpawnListEntry(EntityChagarothFist.class, 25, 1, 2));

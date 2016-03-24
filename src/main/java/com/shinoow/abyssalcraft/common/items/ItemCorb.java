@@ -17,11 +17,14 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.BlockPos;
-import net.minecraft.util.EnumChatFormatting;
+import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumFacing;
-import net.minecraft.util.StatCollector;
+import net.minecraft.util.EnumHand;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.TextFormatting;
+import net.minecraft.util.text.translation.I18n;
 import net.minecraft.world.World;
+
 import com.shinoow.abyssalcraft.AbyssalCraft;
 
 public class ItemCorb extends Item {
@@ -38,11 +41,11 @@ public class ItemCorb extends Item {
 	@Override
 	public String getItemStackDisplayName(ItemStack par1ItemStack) {
 
-		return EnumChatFormatting.AQUA + StatCollector.translateToLocal(this.getUnlocalizedName() + ".name");
+		return TextFormatting.AQUA + super.getItemStackDisplayName(par1ItemStack);
 	}
 
 	@Override
-	public boolean onItemUse(ItemStack is, EntityPlayer player, World w, BlockPos pos, EnumFacing side, float hitX, float hitY, float hitZ){
+	public EnumActionResult onItemUse(ItemStack is, EntityPlayer player, World w, BlockPos pos, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ){
 		if(w.getBlockState(pos) == Blocks.stone){
 			w.setBlockState(pos, AbyssalCraft.Darkstone.getDefaultState());
 			is.damageItem(50, player);
@@ -62,16 +65,16 @@ public class ItemCorb extends Item {
 			w.setBlockState(pos, Blocks.stonebrick.getDefaultState());
 			is.damageItem(50, player);
 		}
-		return false;
+		return EnumActionResult.PASS;
 	}
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
 	public void addInformation(ItemStack is, EntityPlayer player, List l, boolean B){
-		l.add(StatCollector.translateToLocal("tooltip.corb.1"));
-		l.add(StatCollector.translateToLocal("tooltip.corb.2"));
-		l.add(StatCollector.translateToLocal("tooltip.corb.3"));
-		l.add(StatCollector.translateToLocal("tooltip.corb.4"));
+		l.add(I18n.translateToLocal("tooltip.corb.1"));
+		l.add(I18n.translateToLocal("tooltip.corb.2"));
+		l.add(I18n.translateToLocal("tooltip.corb.3"));
+		l.add(I18n.translateToLocal("tooltip.corb.4"));
 	}
 
 	@Override

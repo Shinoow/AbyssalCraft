@@ -18,8 +18,10 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
-import net.minecraft.util.IChatComponent;
 import net.minecraft.util.ITickable;
+import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.TextComponentString;
+import net.minecraft.util.text.TextComponentTranslation;
 
 public class TileEntityMaterializer extends TileEntity implements ISidedInventory, ITickable {
 
@@ -128,9 +130,9 @@ public class TileEntityMaterializer extends TileEntity implements ISidedInventor
 	}
 
 	@Override
-	public IChatComponent getDisplayName() {
-		// TODO Auto-generated method stub
-		return null;
+	public ITextComponent getDisplayName()
+	{
+		return hasCustomName() ? new TextComponentString(getName()) : new TextComponentTranslation(getName(), new Object[0]);
 	}
 
 	public void func_145951_a(String par1)

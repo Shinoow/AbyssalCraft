@@ -20,7 +20,7 @@ import mezz.jei.api.gui.IRecipeLayout;
 import mezz.jei.api.recipe.IRecipeWrapper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.StatCollector;
+import net.minecraft.util.text.translation.I18n;
 
 import com.shinoow.abyssalcraft.integration.jei.AbyssalCraftRecipeCategoryUid;
 
@@ -34,7 +34,7 @@ public class TransmutationCategory extends TransmutatorRecipeCategory {
 		super(guiHelper);
 		ResourceLocation location = new ResourceLocation("abyssalcraft", "textures/gui/container/transmutator_NEI.png");
 		background = guiHelper.createDrawable(location, 55, 16, 82, 54);
-		localizedName = StatCollector.translateToLocal("container.abyssalcraft.transmutator.nei");
+		localizedName = I18n.translateToLocal("container.abyssalcraft.transmutator.nei");
 	}
 
 	@Override

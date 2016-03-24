@@ -16,38 +16,31 @@ import java.util.List;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.client.renderer.WorldRenderer;
+import net.minecraft.client.renderer.VertexBuffer;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.MobEffects;
+import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
-import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
-import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.StatCollector;
+import net.minecraft.util.text.TextFormatting;
+import net.minecraft.util.text.translation.I18n;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.Loader;
-import net.minecraftforge.fml.common.Optional.Interface;
-import net.minecraftforge.fml.common.Optional.InterfaceList;
-import net.minecraftforge.fml.common.Optional.Method;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import org.lwjgl.opengl.GL11;
 
-import thaumcraft.api.aspects.Aspect;
-import thaumcraft.api.items.IRevealer;
-import thaumcraft.api.items.IVisDiscountGear;
-
 import com.shinoow.abyssalcraft.AbyssalCraft;
 
-@InterfaceList(value = { @Interface(iface = "thaumcraft.api.items.IVisDiscountGear", modid = "Thaumcraft"),
-		@Interface(iface = "thaumcraft.api.items.IRevealer", modid = "Thaumcraft")})
-public class ItemDepthsArmor extends ItemArmor implements IVisDiscountGear, IRevealer {
-	public ItemDepthsArmor(ArmorMaterial par2EnumArmorMaterial, int par3, int par4, String name){
+//@InterfaceList(value = { @Interface(iface = "thaumcraft.api.items.IVisDiscountGear", modid = "Thaumcraft"),
+//		@Interface(iface = "thaumcraft.api.items.IRevealer", modid = "Thaumcraft")})
+public class ItemDepthsArmor extends ItemArmor /* implements IVisDiscountGear, IRevealer */ {
+	public ItemDepthsArmor(ArmorMaterial par2EnumArmorMaterial, int par3, EntityEquipmentSlot par4, String name){
 		super(par2EnumArmorMaterial, par3, par4);
 		//		GameRegistry.registerItem(this, name);
 		setUnlocalizedName(name);
@@ -57,11 +50,11 @@ public class ItemDepthsArmor extends ItemArmor implements IVisDiscountGear, IRev
 	@Override
 	public String getItemStackDisplayName(ItemStack par1ItemStack) {
 
-		return EnumChatFormatting.DARK_RED + StatCollector.translateToLocal(this.getUnlocalizedName() + ".name");
+		return TextFormatting.DARK_RED + super.getItemStackDisplayName(par1ItemStack);
 	}
 
 	@Override
-	public String getArmorTexture(ItemStack stack, Entity entity, int slot, String layer)
+	public String getArmorTexture(ItemStack stack, Entity entity, EntityEquipmentSlot slot, String layer)
 	{
 		if(stack.getItem() == AbyssalCraft.Depthshelmet || stack.getItem() == AbyssalCraft.Depthsplate || stack.getItem() == AbyssalCraft.Depthsboots)
 			return "abyssalcraft:textures/armor/depths_1.png";
@@ -75,18 +68,18 @@ public class ItemDepthsArmor extends ItemArmor implements IVisDiscountGear, IRev
 	public void onArmorTick(World world, EntityPlayer player, ItemStack itemstack) {
 		if (itemstack.getItem() == AbyssalCraft.Depthshelmet)
 		{
-			player.addPotionEffect(new PotionEffect(Potion.waterBreathing.getId(), 20, 0));
-			player.addPotionEffect(new PotionEffect(Potion.nightVision.getId(), 260, 0));
-			player.addPotionEffect(new PotionEffect(Potion.saturation.getId(), 20, 0));
+			player.addPotionEffect(new PotionEffect(MobEffects.waterBreathing, 20, 0));
+			player.addPotionEffect(new PotionEffect(MobEffects.nightVision, 260, 0));
+			player.addPotionEffect(new PotionEffect(MobEffects.saturation, 20, 0));
 			if(player.getActivePotionEffect(AbyssalCraft.Cplague) !=null)
-				player.removePotionEffect(AbyssalCraft.Cplague.getId());
+				player.removePotionEffect(AbyssalCraft.Cplague);
 		}
 		if (itemstack.getItem() == AbyssalCraft.Depthsplate)
-			player.addPotionEffect(new PotionEffect(Potion.resistance.getId(), 20, 0));
+			player.addPotionEffect(new PotionEffect(MobEffects.resistance, 20, 0));
 		if (itemstack.getItem() == AbyssalCraft.Depthslegs)
-			player.addPotionEffect(new PotionEffect(Potion.jump.getId(), 20, 1));
+			player.addPotionEffect(new PotionEffect(MobEffects.jump, 20, 1));
 		if (itemstack.getItem() == AbyssalCraft.Depthsboots)
-			player.addPotionEffect(new PotionEffect(Potion.moveSpeed.getId(), 20, 0));
+			player.addPotionEffect(new PotionEffect(MobEffects.moveSpeed, 20, 0));
 	}
 
 	@Override
@@ -111,7 +104,7 @@ public class ItemDepthsArmor extends ItemArmor implements IVisDiscountGear, IRev
 			GL11.glDisable(GL11.GL_ALPHA_TEST);
 			Minecraft.getMinecraft().renderEngine.bindTexture(coraliumBlur);
 
-			WorldRenderer wr = t.getWorldRenderer();
+			VertexBuffer wr = t.getBuffer();
 
 			wr.begin(7, DefaultVertexFormats.POSITION_TEX);
 			wr.pos(0.0D, height, 90.0D).tex(0.0D, 1.0D).endVertex();;
@@ -124,33 +117,33 @@ public class ItemDepthsArmor extends ItemArmor implements IVisDiscountGear, IRev
 		}
 	}
 
-	@Override
-	@Method(modid = "Thaumcraft")
-	public int getVisDiscount(ItemStack stack, EntityPlayer player,
-			Aspect aspect) {
-		return stack.getItem() == AbyssalCraft.Depthshelmet ? 5 : stack.getItem() == AbyssalCraft.Depthsplate ? 2 :
-			stack.getItem() == AbyssalCraft.Depthslegs ? 2 : stack.getItem() == AbyssalCraft.Depthsboots ? 1 : 0;
-	}
+	//	@Override
+	//	@Method(modid = "Thaumcraft")
+	//	public int getVisDiscount(ItemStack stack, EntityPlayer player,
+	//			Aspect aspect) {
+	//		return stack.getItem() == AbyssalCraft.Depthshelmet ? 5 : stack.getItem() == AbyssalCraft.Depthsplate ? 2 :
+	//			stack.getItem() == AbyssalCraft.Depthslegs ? 2 : stack.getItem() == AbyssalCraft.Depthsboots ? 1 : 0;
+	//	}
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
 	public void addInformation(ItemStack is, EntityPlayer player, List l, boolean B){
 		if(Loader.isModLoaded("Thaumcraft")){
 			if(is.getItem() == AbyssalCraft.Depthshelmet)
-				l.add("\u00A75"+StatCollector.translateToLocal("tc.visdiscount")+": 5%");
+				l.add("\u00A75"+I18n.translateToLocal("tc.visdiscount")+": 5%");
 			if(is.getItem() == AbyssalCraft.Depthsplate)
-				l.add("\u00A75"+StatCollector.translateToLocal("tc.visdiscount")+": 2%");
+				l.add("\u00A75"+I18n.translateToLocal("tc.visdiscount")+": 2%");
 			if(is.getItem() == AbyssalCraft.Depthslegs)
-				l.add("\u00A75"+StatCollector.translateToLocal("tc.visdiscount")+": 2%");
+				l.add("\u00A75"+I18n.translateToLocal("tc.visdiscount")+": 2%");
 			if(is.getItem() == AbyssalCraft.Depthsboots)
-				l.add("\u00A75"+StatCollector.translateToLocal("tc.visdiscount")+": 1%");
+				l.add("\u00A75"+I18n.translateToLocal("tc.visdiscount")+": 1%");
 		}
 	}
 
-	@Override
-	@Method(modid = "Thaumcraft")
-	public boolean showNodes(ItemStack itemstack, EntityLivingBase player) {
-
-		return itemstack.getItem() == AbyssalCraft.Depthshelmet;
-	}
+	//	@Override
+	//	@Method(modid = "Thaumcraft")
+	//	public boolean showNodes(ItemStack itemstack, EntityLivingBase player) {
+	//
+	//		return itemstack.getItem() == AbyssalCraft.Depthshelmet;
+	//	}
 }

@@ -14,15 +14,19 @@ package com.shinoow.abyssalcraft.common.blocks;
 import java.util.List;
 
 import net.minecraft.block.BlockBasePressurePlate;
+import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyBool;
-import net.minecraft.block.state.BlockState;
+import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.util.AxisAlignedBB;
-import net.minecraft.util.BlockPos;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.SoundEvents;
+import net.minecraft.util.SoundCategory;
+import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 public class BlockACPressureplate extends BlockBasePressurePlate
@@ -31,19 +35,21 @@ public class BlockACPressureplate extends BlockBasePressurePlate
 	private BlockACPressureplate.Sensitivity sensitivity;
 
 
-	public BlockACPressureplate(String par2Str, Material par3Material, BlockACPressureplate.Sensitivity par4EnumMobType, String par5, int par6)
+	public BlockACPressureplate(String par2Str, Material par3Material, BlockACPressureplate.Sensitivity par4EnumMobType, String par5, int par6, SoundType stepSound)
 	{
 		super(par3Material);
 		sensitivity = par4EnumMobType;
 		this.setHarvestLevel(par5, par6);
 		setDefaultState(blockState.getBaseState().withProperty(POWERED, Boolean.valueOf(false)));
+		setStepSound(stepSound);
 	}
 
-	public BlockACPressureplate(String par2Str, Material par3Material, BlockACPressureplate.Sensitivity par4EnumMobType)
+	public BlockACPressureplate(String par2Str, Material par3Material, BlockACPressureplate.Sensitivity par4EnumMobType, SoundType stepSound)
 	{
 		super(par3Material);
 		sensitivity = par4EnumMobType;
 		setDefaultState(blockState.getBaseState().withProperty(POWERED, Boolean.valueOf(false)));
+		setStepSound(stepSound);
 	}
 
 	@Override
@@ -66,7 +72,7 @@ public class BlockACPressureplate extends BlockBasePressurePlate
 	@SuppressWarnings("rawtypes")
 	protected int computeRedstoneStrength(World worldIn, BlockPos pos)
 	{
-		AxisAlignedBB axisalignedbb = getSensitiveAABB(pos);
+		AxisAlignedBB axisalignedbb = PRESSURE_AABB.offset(pos);
 		List <? extends Entity > list;
 
 		switch (sensitivity)
@@ -108,14 +114,32 @@ public class BlockACPressureplate extends BlockBasePressurePlate
 	}
 
 	@Override
-	protected BlockState createBlockState()
+	protected BlockStateContainer createBlockState()
 	{
-		return new BlockState(this, new IProperty[] {POWERED});
+		return new BlockStateContainer(this, new IProperty[] {POWERED});
 	}
 
 	public static enum Sensitivity
 	{
 		EVERYTHING,
 		MOBS;
+	}
+
+	@Override
+	protected void playClickOnSound(World worldIn, BlockPos color)
+	{
+		if (blockMaterial == Material.wood)
+			worldIn.playSound((EntityPlayer)null, color, SoundEvents.block_wood_pressplate_click_on, SoundCategory.BLOCKS, 0.3F, 0.8F);
+		else
+			worldIn.playSound((EntityPlayer)null, color, SoundEvents.block_stone_pressplate_click_on, SoundCategory.BLOCKS, 0.3F, 0.6F);
+	}
+
+	@Override
+	protected void playClickOffSound(World worldIn, BlockPos pos)
+	{
+		if (blockMaterial == Material.wood)
+			worldIn.playSound((EntityPlayer)null, pos, SoundEvents.block_wood_pressplate_click_off, SoundCategory.BLOCKS, 0.3F, 0.7F);
+		else
+			worldIn.playSound((EntityPlayer)null, pos, SoundEvents.block_stone_pressplate_click_off, SoundCategory.BLOCKS, 0.3F, 0.5F);
 	}
 }

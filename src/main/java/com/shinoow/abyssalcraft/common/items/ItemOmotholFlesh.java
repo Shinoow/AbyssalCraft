@@ -11,15 +11,17 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.common.items;
 
-import com.shinoow.abyssalcraft.AbyssalCraft;
-import com.shinoow.abyssalcraft.common.util.EntityUtil;
-
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.MobEffects;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemFood;
 import net.minecraft.item.ItemStack;
-import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
+import net.minecraft.util.SoundCategory;
 import net.minecraft.world.World;
+
+import com.shinoow.abyssalcraft.AbyssalCraft;
+import com.shinoow.abyssalcraft.common.util.EntityUtil;
 
 public class ItemOmotholFlesh extends ItemFood {
 
@@ -34,18 +36,18 @@ public class ItemOmotholFlesh extends ItemFood {
 	@Override
 	public void onFoodEaten(ItemStack itemStack, World world, EntityPlayer entityPlayer)
 	{
-		world.playSoundAtEntity(entityPlayer, "random.burp", 0.5F, world.rand.nextFloat() * 0.1F + 0.9F);
+		world.playSound(entityPlayer, entityPlayer.getPosition(), SoundEvents.entity_player_burp, SoundCategory.PLAYERS, 0.5F, world.rand.nextFloat() * 0.1F + 0.9F);
 		if(EntityUtil.isPlayerCoralium(entityPlayer)){
-			entityPlayer.addPotionEffect(new PotionEffect(Potion.weakness.id, 100));
-			entityPlayer.addPotionEffect(new PotionEffect(Potion.hunger.id, 300, 1));
-			entityPlayer.addPotionEffect(new PotionEffect(Potion.confusion.id, 200));
+			entityPlayer.addPotionEffect(new PotionEffect(MobEffects.weakness, 100));
+			entityPlayer.addPotionEffect(new PotionEffect(MobEffects.hunger, 300, 1));
+			entityPlayer.addPotionEffect(new PotionEffect(MobEffects.confusion, 200));
 		} else {
-			entityPlayer.addPotionEffect(new PotionEffect(Potion.weakness.id, 100));
-			entityPlayer.addPotionEffect(new PotionEffect(Potion.hunger.id, 400, 1));
-			entityPlayer.addPotionEffect(new PotionEffect(Potion.confusion.id, 300));
+			entityPlayer.addPotionEffect(new PotionEffect(MobEffects.weakness, 100));
+			entityPlayer.addPotionEffect(new PotionEffect(MobEffects.hunger, 400, 1));
+			entityPlayer.addPotionEffect(new PotionEffect(MobEffects.confusion, 300));
 		}
 
-		entityPlayer.addPotionEffect(new PotionEffect(Potion.blindness.id, 40));
-		entityPlayer.addPotionEffect(new PotionEffect(Potion.nightVision.id, 40));
+		entityPlayer.addPotionEffect(new PotionEffect(MobEffects.blindness, 40));
+		entityPlayer.addPotionEffect(new PotionEffect(MobEffects.nightVision, 40));
 	}
 }

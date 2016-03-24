@@ -27,7 +27,7 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.IEntityLivingData;
 import net.minecraft.entity.IMerchant;
 import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.EntityAIAttackOnCollide;
+import net.minecraft.entity.ai.EntityAIAttackMelee;
 import net.minecraft.entity.ai.EntityAIHurtByTarget;
 import net.minecraft.entity.ai.EntityAILookIdle;
 import net.minecraft.entity.ai.EntityAIMoveTowardsRestriction;
@@ -41,19 +41,25 @@ import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
+import net.minecraft.init.MobEffects;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemTool;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.potion.Potion;
+import net.minecraft.network.datasync.DataParameter;
+import net.minecraft.network.datasync.DataSerializers;
+import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.potion.PotionEffect;
-import net.minecraft.util.BlockPos;
-import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.DamageSource;
-import net.minecraft.util.MathHelper;
-import net.minecraft.util.StatCollector;
+import net.minecraft.util.EnumHand;
+import net.minecraft.util.SoundEvent;
 import net.minecraft.util.Tuple;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.text.TextComponentString;
+import net.minecraft.util.text.translation.I18n;
 import net.minecraft.village.MerchantRecipe;
 import net.minecraft.village.MerchantRecipeList;
 import net.minecraft.world.DifficultyInstance;
@@ -73,6 +79,7 @@ import com.shinoow.abyssalcraft.common.util.EntityUtil;
 
 public class EntityRemnant extends EntityMob implements IMerchant, IAntiEntity, ICoraliumEntity, IDreadEntity {
 
+	private static final DataParameter<Integer> PROFESSION = EntityDataManager.<Integer>createKey(EntityRemnant.class, DataSerializers.VARINT);
 	private EntityPlayer tradingPlayer;
 	private MerchantRecipeList tradingList;
 	private int timeUntilReset;
@@ -86,7 +93,7 @@ public class EntityRemnant extends EntityMob implements IMerchant, IAntiEntity, 
 	public EntityRemnant(World par1World) {
 		super(par1World);
 		tasks.addTask(0, new EntityAISwimming(this));
-		tasks.addTask(3, new EntityAIAttackOnCollide(this, EntityLivingBase.class, 0.35D, false));
+		tasks.addTask(3, new EntityAIAttackMelee(this, 0.35D, false));
 		tasks.addTask(4, new EntityAIOpenDoor(this, true));
 		tasks.addTask(5, new EntityAIMoveTowardsRestriction(this, 0.35D));
 		tasks.addTask(6, new EntityAIWander(this, 0.35D));
@@ -102,15 +109,15 @@ public class EntityRemnant extends EntityMob implements IMerchant, IAntiEntity, 
 	{
 		super.applyEntityAttributes();
 
-		getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(64.0D);
-		getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setBaseValue(0.2D);
+		getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(64.0D);
+		getEntityAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue(0.2D);
 
 		if(AbyssalCraft.hardcoreMode){
-			getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(200.0D);
-			getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(20.0D);
+			getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(200.0D);
+			getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(20.0D);
 		} else {
-			getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(100.0D);
-			getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(10.0D);
+			getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(100.0D);
+			getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(10.0D);
 		}
 	}
 
@@ -122,7 +129,8 @@ public class EntityRemnant extends EntityMob implements IMerchant, IAntiEntity, 
 	@Override
 	public boolean attackEntityAsMob(Entity par1Entity)
 	{
-		swingItem();
+		swingArm(EnumHand.MAIN_HAND);
+		swingArm(EnumHand.OFF_HAND);
 		boolean flag = super.attackEntityAsMob(par1Entity);
 
 		return flag;
@@ -157,7 +165,7 @@ public class EntityRemnant extends EntityMob implements IMerchant, IAntiEntity, 
 					needsInitilization = false;
 				}
 
-				addPotionEffect(new PotionEffect(Potion.regeneration.id, 200, 0));
+				addPotionEffect(new PotionEffect(MobEffects.regeneration, 200, 0));
 			}
 		}
 
@@ -165,7 +173,7 @@ public class EntityRemnant extends EntityMob implements IMerchant, IAntiEntity, 
 	}
 
 	@Override
-	public boolean interact(EntityPlayer par1EntityPlayer)
+	public boolean processInteract(EntityPlayer par1EntityPlayer, EnumHand hand, ItemStack stack)
 	{
 		if(isEntityAlive() && !par1EntityPlayer.isSneaking() && !isAngry())
 			if(EntityUtil.hasNecronomicon(par1EntityPlayer)){
@@ -175,17 +183,17 @@ public class EntityRemnant extends EntityMob implements IMerchant, IAntiEntity, 
 						par1EntityPlayer.displayVillagerTradeGui(this);
 						return true;
 					}
-				} else par1EntityPlayer.addChatMessage(new ChatComponentText(getName()+": "+StatCollector.translateToLocal("message.remnant.busy")));
+				} else par1EntityPlayer.addChatMessage(new TextComponentString(getName()+": "+I18n.translateToLocal("message.remnant.busy")));
 			} else insult(par1EntityPlayer);
 
-		return super.interact(par1EntityPlayer);
+		return super.processInteract(par1EntityPlayer, hand, stack);
 	}
 
 	@Override
 	protected void entityInit()
 	{
 		super.entityInit();
-		dataWatcher.addObject(16, Integer.valueOf(0));
+		dataWatcher.register(PROFESSION, Integer.valueOf(0));
 	}
 
 	/**
@@ -195,7 +203,7 @@ public class EntityRemnant extends EntityMob implements IMerchant, IAntiEntity, 
 	private void insult(EntityPlayer player){
 		int insultNum = worldObj.rand.nextInt(3);
 		String insult = getName()+": "+String.format(getInsult(insultNum), player.getName());
-		String translated = getName()+": "+String.format(StatCollector.translateToLocal("message.remnant.insult."+insultNum), player.getName());
+		String translated = getName()+": "+String.format(I18n.translateToLocal("message.remnant.insult."+insultNum), player.getName());
 
 		if(worldObj.isRemote){
 			List<EntityPlayer> players = worldObj.getEntitiesWithinAABB(EntityPlayer.class, player.getEntityBoundingBox().expand(16D, 16D, 16D));
@@ -204,8 +212,8 @@ public class EntityRemnant extends EntityMob implements IMerchant, IAntiEntity, 
 				while(i.hasNext()){
 					EntityPlayer player1 = i.next();
 					if(EntityUtil.hasNecronomicon(player1))
-						player1.addChatMessage(new ChatComponentText(translated));
-					else player1.addChatMessage(new ChatComponentText(insult));
+						player1.addChatMessage(new TextComponentString(translated));
+					else player1.addChatMessage(new TextComponentString(insult));
 				}
 			}
 		}
@@ -256,7 +264,7 @@ public class EntityRemnant extends EntityMob implements IMerchant, IAntiEntity, 
 				while(iter.hasNext())
 					iter.next().enrage(false, getAttackTarget());
 			}
-			worldObj.playSoundAtEntity(this, "abyssalcraft:remnant.scream", 3F, 1F);
+			playSound(AbyssalCraft.remnant_scream, 3F, 1F);
 		}
 
 		setAngry();
@@ -368,25 +376,25 @@ public class EntityRemnant extends EntityMob implements IMerchant, IAntiEntity, 
 	}
 
 	@Override
-	protected String getDeathSound()
+	protected SoundEvent getDeathSound()
 	{
-		return "abyssalcraft:shadow.death";
+		return AbyssalCraft.shadow_death;
 	}
 
 	@Override
 	protected void playStepSound(BlockPos pos, Block par4)
 	{
-		playSound("mob.spider.step", 0.15F, 1.0F);
+		playSound(SoundEvents.entity_spider_step, 0.15F, 1.0F);
 	}
 
 	public void setProfession(int par1)
 	{
-		dataWatcher.updateObject(16, Integer.valueOf(par1));
+		dataWatcher.set(PROFESSION, Integer.valueOf(par1));
 	}
 
 	public int getProfession()
 	{
-		return dataWatcher.getWatchableObjectInt(16);
+		return dataWatcher.get(PROFESSION);
 	}
 
 	@Override
@@ -472,7 +480,7 @@ public class EntityRemnant extends EntityMob implements IMerchant, IAntiEntity, 
 
 				if (rand.nextFloat() < adjustProbability(0.07F))
 				{
-					Enchantment enchantment = Enchantment.enchantmentsBookList[rand.nextInt(Enchantment.enchantmentsBookList.length)];
+					Enchantment enchantment = Enchantment.enchantmentRegistry.getRandomObject(rand);
 					int i1 = MathHelper.getRandomIntegerInRange(rand, enchantment.getMinLevel(), enchantment.getMaxLevel());
 					ItemStack itemstack = Items.enchanted_book.getEnchantedItemStack(new EnchantmentData(enchantment, i1));
 					k = 2 + rand.nextInt(5 + i1 * 10) + 3 * i1;
@@ -507,7 +515,7 @@ public class EntityRemnant extends EntityMob implements IMerchant, IAntiEntity, 
 					Item item = aitem1[k];
 
 					if (rand.nextFloat() < adjustProbability(0.05F))
-						list.add(new MerchantRecipe(new ItemStack(item, 1, 0), new ItemStack(AbyssalCraft.elderCoin, 2 + rand.nextInt(3), 0), EnchantmentHelper.addRandomEnchantment(rand, new ItemStack(item, 1, 0), 5 + rand.nextInt(15))));
+						list.add(new MerchantRecipe(new ItemStack(item, 1, 0), new ItemStack(AbyssalCraft.elderCoin, 2 + rand.nextInt(3), 0), EnchantmentHelper.addRandomEnchantment(rand, new ItemStack(item, 1, 0), 5 + rand.nextInt(15), true)));
 
 					++k;
 				}
@@ -624,7 +632,7 @@ public class EntityRemnant extends EntityMob implements IMerchant, IAntiEntity, 
 				var1.getItemToBuy().getItem() instanceof ItemDrainStaff)
 			var1.compensateToolUses();
 		livingSoundTime = -getTalkInterval();
-		playSound("mob.villager.yes", getSoundVolume(), getSoundPitch() * 0.5F);
+		playSound(SoundEvents.entity_villager_yes, getSoundVolume(), getSoundPitch() * 0.5F);
 
 		if (hasSameIDsAs(var1, tradingList.get(tradingList.size() - 1)))
 		{
@@ -727,9 +735,9 @@ public class EntityRemnant extends EntityMob implements IMerchant, IAntiEntity, 
 			livingSoundTime = -getTalkInterval();
 
 			if (par1ItemStack != null)
-				playSound("mob.villager.yes", getSoundVolume(), getSoundPitch() * 0.5F);
+				playSound(SoundEvents.entity_villager_yes, getSoundVolume(), getSoundPitch() * 0.5F);
 			else
-				playSound("mob.villager.no", getSoundVolume(), getSoundPitch() * 0.5F);
+				playSound(SoundEvents.entity_villager_no, getSoundVolume(), getSoundPitch() * 0.5F);
 		}
 	}
 

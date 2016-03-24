@@ -19,9 +19,10 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.init.Blocks;
-import net.minecraft.potion.Potion;
+import net.minecraft.init.MobEffects;
 import net.minecraft.potion.PotionEffect;
-import net.minecraft.util.BlockPos;
+import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fluids.BlockFluidClassic;
@@ -39,14 +40,26 @@ public class BlockAntiliquid extends BlockFluidClassic {
 	}
 
 	@Override
+	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos)
+	{
+		return FULL_BLOCK_AABB;
+	}
+
+	@Override
+	public AxisAlignedBB getSelectedBoundingBox(IBlockState blockState, World worldIn, BlockPos pos)
+	{
+		return NULL_AABB;
+	}
+
+	@Override
 	public MapColor getMapColor(IBlockState state){
 		return MapColor.silverColor;
 	}
 
 	@Override
 	public boolean canDisplace(IBlockAccess world, BlockPos pos) {
-		if(world.getBlockState(pos).getBlock() == AbyssalCraft.Cwater || world.getBlockState(pos).getBlock().getMaterial() == Material.water &&
-				world.getBlockState(pos).getBlock() != AbyssalCraft.Cwater && world.getBlockState(pos).getBlock() != this || world.getBlockState(pos).getBlock().getMaterial() == Material.lava)
+		if(world.getBlockState(pos).getBlock() == AbyssalCraft.Cwater || world.getBlockState(pos).getMaterial() == Material.water &&
+				world.getBlockState(pos).getBlock() != AbyssalCraft.Cwater && world.getBlockState(pos).getBlock() != this || world.getBlockState(pos).getMaterial() == Material.lava)
 			return true;
 		return super.canDisplace(world, pos);
 	}
@@ -57,10 +70,10 @@ public class BlockAntiliquid extends BlockFluidClassic {
 		if(!world.isRemote && world.getBlockState(pos).getBlock() == AbyssalCraft.Cwater)
 			world.setBlockState(pos, AbyssalCraft.cstone.getDefaultState());
 
-		if(!world.isRemote && world.getBlockState(pos).getBlock().getMaterial() == Material.water && world.getBlockState(pos).getBlock() != AbyssalCraft.Cwater && world.getBlockState(pos).getBlock() != this)
+		if(!world.isRemote && world.getBlockState(pos).getMaterial() == Material.water && world.getBlockState(pos).getBlock() != AbyssalCraft.Cwater && world.getBlockState(pos).getBlock() != this)
 			world.setBlockState(pos, Blocks.packed_ice.getDefaultState());
 
-		if(!world.isRemote && world.getBlockState(pos).getBlock().getMaterial() == Material.lava)
+		if(!world.isRemote && world.getBlockState(pos).getMaterial() == Material.lava)
 			world.setBlockState(pos, Blocks.obsidian.getDefaultState());
 
 		return super.displaceIfPossible(world, pos);
@@ -71,12 +84,12 @@ public class BlockAntiliquid extends BlockFluidClassic {
 		super.onEntityCollidedWithBlock(par1World, pos, state, par5Entity);
 
 		if(par5Entity instanceof EntityLivingBase && !EntityUtil.isEntityAnti((EntityLivingBase)par5Entity)){
-			((EntityLivingBase)par5Entity).addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, 400));
-			((EntityLivingBase)par5Entity).addPotionEffect(new PotionEffect(Potion.blindness.id, 400));
-			((EntityLivingBase)par5Entity).addPotionEffect(new PotionEffect(Potion.weakness.id, 400));
-			((EntityLivingBase)par5Entity).addPotionEffect(new PotionEffect(Potion.hunger.id, 400));
-			((EntityLivingBase)par5Entity).addPotionEffect(new PotionEffect(Potion.nightVision.id, 400));
-			((EntityLivingBase)par5Entity).addPotionEffect(new PotionEffect(AbyssalCraft.antiMatter.id, 200));
+			((EntityLivingBase)par5Entity).addPotionEffect(new PotionEffect(MobEffects.moveSlowdown, 400));
+			((EntityLivingBase)par5Entity).addPotionEffect(new PotionEffect(MobEffects.blindness, 400));
+			((EntityLivingBase)par5Entity).addPotionEffect(new PotionEffect(MobEffects.weakness, 400));
+			((EntityLivingBase)par5Entity).addPotionEffect(new PotionEffect(MobEffects.hunger, 400));
+			((EntityLivingBase)par5Entity).addPotionEffect(new PotionEffect(MobEffects.nightVision, 400));
+			((EntityLivingBase)par5Entity).addPotionEffect(new PotionEffect(AbyssalCraft.antiMatter, 200));
 		}
 		if(par5Entity instanceof EntityItem && AbyssalCraft.antiItemDisintegration)
 			par5Entity.setDead();

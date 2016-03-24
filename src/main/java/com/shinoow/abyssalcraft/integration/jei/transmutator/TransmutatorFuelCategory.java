@@ -19,7 +19,7 @@ import mezz.jei.api.gui.IGuiItemStackGroup;
 import mezz.jei.api.gui.IRecipeLayout;
 import mezz.jei.api.recipe.IRecipeWrapper;
 import net.minecraft.client.Minecraft;
-import net.minecraft.util.StatCollector;
+import net.minecraft.util.text.translation.I18n;
 
 import com.shinoow.abyssalcraft.integration.jei.AbyssalCraftRecipeCategoryUid;
 
@@ -32,7 +32,7 @@ public class TransmutatorFuelCategory extends TransmutatorRecipeCategory {
 	public TransmutatorFuelCategory(IGuiHelper guiHelper) {
 		super(guiHelper);
 		background = guiHelper.createDrawable(backgroundLocation, 55, 38, 18, 32, 0, 0, 0, 80);
-		localizedName = StatCollector.translateToLocal("gui.acjei.category.fuel.transmutator");
+		localizedName = I18n.translateToLocal("gui.acjei.category.fuel.transmutator");
 	}
 
 	@Override

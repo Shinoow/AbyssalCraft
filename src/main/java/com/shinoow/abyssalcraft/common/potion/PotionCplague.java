@@ -30,8 +30,8 @@ import com.shinoow.abyssalcraft.common.util.EntityUtil;
 
 public class PotionCplague extends Potion{
 
-	public PotionCplague(ResourceLocation par1, boolean par2, int par3) {
-		super(par1, par2, par3);
+	public PotionCplague(boolean par2, int par3) {
+		super(par2, par3);
 	}
 
 	@Override
@@ -44,7 +44,7 @@ public class PotionCplague extends Potion{
 	public void performEffect(EntityLivingBase par1EntityLivingBase, int par2){
 
 		if(EntityUtil.isEntityCoralium(par1EntityLivingBase))
-			par1EntityLivingBase.removePotionEffect(AbyssalCraft.Cplague.id);
+			par1EntityLivingBase.removePotionEffect(AbyssalCraft.Cplague);
 		else par1EntityLivingBase.attackEntityFrom(AbyssalCraftAPI.coralium, 2);
 
 		if(!par1EntityLivingBase.isEntityAlive() && !par1EntityLivingBase.worldObj.isRemote)

@@ -13,7 +13,7 @@ package com.shinoow.abyssalcraft.common.entity.anti;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.EntityAIAttackOnCollide;
+import net.minecraft.entity.ai.EntityAIAttackMelee;
 import net.minecraft.entity.ai.EntityAIAvoidEntity;
 import net.minecraft.entity.ai.EntityAIHurtByTarget;
 import net.minecraft.entity.ai.EntityAILookIdle;
@@ -21,15 +21,22 @@ import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
 import net.minecraft.entity.ai.EntityAISwimming;
 import net.minecraft.entity.ai.EntityAIWander;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
+import net.minecraft.entity.effect.EntityLightningBolt;
 import net.minecraft.entity.monster.EntityCreeper;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.passive.EntityOcelot;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.network.datasync.DataParameter;
+import net.minecraft.network.datasync.DataSerializers;
+import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.EnumHand;
+import net.minecraft.util.SoundEvent;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -40,6 +47,9 @@ import com.shinoow.abyssalcraft.common.entity.ai.EntityAIAntiCreeperSwell;
 
 public class EntityAntiCreeper extends EntityMob implements IAntiEntity {
 
+	private static final DataParameter<Integer> STATE = EntityDataManager.<Integer>createKey(EntityAntiCreeper.class, DataSerializers.VARINT);
+	private static final DataParameter<Boolean> POWERED = EntityDataManager.<Boolean>createKey(EntityAntiCreeper.class, DataSerializers.BOOLEAN);
+	private static final DataParameter<Boolean> IGNITED = EntityDataManager.<Boolean>createKey(EntityAntiCreeper.class, DataSerializers.BOOLEAN);
 	/**
 	 * Time when this creeper was last in an active state (Messed up code here, probably causes creeper animation to go
 	 * weird)
@@ -58,7 +68,7 @@ public class EntityAntiCreeper extends EntityMob implements IAntiEntity {
 		tasks.addTask(1, new EntityAISwimming(this));
 		tasks.addTask(2, new EntityAIAntiCreeperSwell(this));
 		tasks.addTask(3, new EntityAIAvoidEntity(this, EntityOcelot.class, 6.0F, 1.0D, 1.2D));
-		tasks.addTask(4, new EntityAIAttackOnCollide(this, 1.0D, false));
+		tasks.addTask(4, new EntityAIAttackMelee(this, 1.0D, false));
 		tasks.addTask(5, new EntityAIWander(this, 0.8D));
 		tasks.addTask(6, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
 		tasks.addTask(6, new EntityAILookIdle(this));
@@ -71,10 +81,10 @@ public class EntityAntiCreeper extends EntityMob implements IAntiEntity {
 	{
 		super.applyEntityAttributes();
 
-		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.25D);
+		getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.25D);
 
-		if(AbyssalCraft.hardcoreMode) getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(80.0D);
-		else getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(40.0D);
+		if(AbyssalCraft.hardcoreMode) getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(80.0D);
+		else getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(40.0D);
 	}
 
 	@Override
@@ -97,8 +107,9 @@ public class EntityAntiCreeper extends EntityMob implements IAntiEntity {
 	protected void entityInit()
 	{
 		super.entityInit();
-		dataWatcher.addObject(16, Byte.valueOf((byte) - 1));
-		dataWatcher.addObject(18, Byte.valueOf((byte)0));
+		dataWatcher.register(STATE, Integer.valueOf(-1));
+		dataWatcher.register(POWERED, Boolean.valueOf(false));
+		dataWatcher.register(IGNITED, Boolean.valueOf(false));
 	}
 
 	@Override
@@ -106,15 +117,20 @@ public class EntityAntiCreeper extends EntityMob implements IAntiEntity {
 	{
 		super.writeEntityToNBT(par1NBTTagCompound);
 
+		if (dataWatcher.get(POWERED).booleanValue())
+			par1NBTTagCompound.setBoolean("powered", true);
+
 		par1NBTTagCompound.setShort("Fuse", (short)fuseTime);
 		par1NBTTagCompound.setByte("ExplosionRadius", (byte)explosionRadius);
-		par1NBTTagCompound.setBoolean("ignited", isIgnited());
+		par1NBTTagCompound.setBoolean("ignited", hasIgnited());
 	}
 
 	@Override
 	public void readEntityFromNBT(NBTTagCompound par1NBTTagCompound)
 	{
 		super.readEntityFromNBT(par1NBTTagCompound);
+
+		dataWatcher.set(POWERED, Boolean.valueOf(par1NBTTagCompound.getBoolean("powered")));
 
 		if (par1NBTTagCompound.hasKey("Fuse", 99))
 			fuseTime = par1NBTTagCompound.getShort("Fuse");
@@ -123,7 +139,7 @@ public class EntityAntiCreeper extends EntityMob implements IAntiEntity {
 			explosionRadius = par1NBTTagCompound.getByte("ExplosionRadius");
 
 		if (par1NBTTagCompound.getBoolean("ignited"))
-			hasIgnited();
+			ignite();
 	}
 
 	@Override
@@ -133,13 +149,13 @@ public class EntityAntiCreeper extends EntityMob implements IAntiEntity {
 		{
 			lastActiveTime = timeSinceIgnited;
 
-			if (isIgnited())
+			if (hasIgnited())
 				setCreeperState(1);
 
 			int i = getCreeperState();
 
 			if (i > 0 && timeSinceIgnited == 0)
-				playSound("creeper.primed", 1.0F, 0.5F);
+				playSound(SoundEvents.entity_creeper_primed, 1.0F, 0.5F);
 
 			timeSinceIgnited += i;
 
@@ -157,15 +173,15 @@ public class EntityAntiCreeper extends EntityMob implements IAntiEntity {
 	}
 
 	@Override
-	protected String getHurtSound()
+	protected SoundEvent getHurtSound()
 	{
-		return "mob.creeper.say";
+		return SoundEvents.entity_creeper_hurt;
 	}
 
 	@Override
-	protected String getDeathSound()
+	protected SoundEvent getDeathSound()
 	{
-		return "mob.creeper.death";
+		return SoundEvents.entity_creeper_death;
 	}
 
 	@Override
@@ -199,6 +215,11 @@ public class EntityAntiCreeper extends EntityMob implements IAntiEntity {
 		return true;
 	}
 
+	public boolean getPowered()
+	{
+		return dataWatcher.get(POWERED).booleanValue();
+	}
+
 	/**
 	 * Params: (Float)Render tick. Returns the intensity of the creeper's flash when it is ignited.
 	 */
@@ -219,54 +240,60 @@ public class EntityAntiCreeper extends EntityMob implements IAntiEntity {
 	 */
 	public int getCreeperState()
 	{
-		return dataWatcher.getWatchableObjectByte(16);
+		return dataWatcher.get(STATE).intValue();
 	}
 
 	/**
 	 * Sets the state of creeper, -1 to idle and 1 to be 'in fuse'
 	 */
-	public void setCreeperState(int par1)
+	public void setCreeperState(int state)
 	{
-		dataWatcher.updateObject(16, Byte.valueOf((byte)par1));
+		dataWatcher.set(STATE, Integer.valueOf(state));
 	}
 
 	@Override
-	protected boolean interact(EntityPlayer par1EntityPlayer)
+	public void onStruckByLightning(EntityLightningBolt lightningBolt)
 	{
-		ItemStack itemstack = par1EntityPlayer.inventory.getCurrentItem();
+		super.onStruckByLightning(lightningBolt);
+		dataWatcher.set(POWERED, Boolean.valueOf(true));
+	}
 
-		if (itemstack != null && itemstack.getItem() == Items.flint_and_steel)
+	@Override
+	protected boolean processInteract(EntityPlayer player, EnumHand p_184645_2_, ItemStack stack)
+	{
+		if (stack != null && stack.getItem() == Items.flint_and_steel)
 		{
-			worldObj.playSoundEffect(posX + 0.5D, posY + 0.5D, posZ + 0.5D, "fire.ignite", 1.0F, rand.nextFloat() * 0.4F + 0.8F);
-			par1EntityPlayer.swingItem();
+			worldObj.playSound(player, posX, posY, posZ, SoundEvents.item_flintandsteel_use, getSoundCategory(), 1.0F, rand.nextFloat() * 0.4F + 0.8F);
+			player.swingArm(p_184645_2_);
 
 			if (!worldObj.isRemote)
 			{
-				hasIgnited();
-				itemstack.damageItem(1, par1EntityPlayer);
+				ignite();
+				stack.damageItem(1, player);
 				return true;
 			}
 		}
 
-		return super.interact(par1EntityPlayer);
+		return super.processInteract(player, p_184645_2_, stack);
 	}
 
 	private void explode()
 	{
 		if (!worldObj.isRemote){
 			boolean flag = worldObj.getGameRules().getBoolean("mobGriefing");
-			worldObj.createExplosion(this, posX, posY, posZ, explosionRadius, flag);
+			float f = getPowered() ? 2.0F : 1.0F;
+			worldObj.createExplosion(this, posX, posY, posZ, explosionRadius * f, flag);
 			setDead();
 		}
 	}
 
-	public boolean isIgnited()
+	public boolean hasIgnited()
 	{
-		return dataWatcher.getWatchableObjectByte(18) != 0;
+		return dataWatcher.get(IGNITED).booleanValue();
 	}
 
-	public void hasIgnited()
+	public void ignite()
 	{
-		dataWatcher.updateObject(18, Byte.valueOf((byte)1));
+		dataWatcher.set(IGNITED, Boolean.valueOf(true));
 	}
 }

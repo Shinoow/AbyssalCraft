@@ -17,8 +17,10 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.EnumFacing;
-import net.minecraft.util.IChatComponent;
 import net.minecraft.util.ITickable;
+import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.TextComponentString;
+import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -92,20 +94,20 @@ public class TileEntityEngraver extends TEDirectional implements ISidedInventory
 
 	@Override
 	public String getName() {
-		// TODO Auto-generated method stub
+
 		return hasCustomName() ? containerName : "container.abyssalcraft.engraver";
 	}
 
 	@Override
 	public boolean hasCustomName() {
-		// TODO Auto-generated method stub
+
 		return containerName != null && containerName.length() > 0;
 	}
 
 	@Override
-	public IChatComponent getDisplayName() {
-		// TODO Auto-generated method stub
-		return null;
+	public ITextComponent getDisplayName()
+	{
+		return hasCustomName() ? new TextComponentString(getName()) : new TextComponentTranslation(getName(), new Object[0]);
 	}
 
 	public void func_145951_a(String par1)
@@ -276,38 +278,26 @@ public class TileEntityEngraver extends TEDirectional implements ISidedInventory
 	}
 
 	@Override
-	public void openInventory(EntityPlayer player) {
-		// TODO Auto-generated method stub
-
-	}
+	public void openInventory(EntityPlayer player) {}
 
 	@Override
-	public void closeInventory(EntityPlayer player) {
-		// TODO Auto-generated method stub
-
-	}
+	public void closeInventory(EntityPlayer player) {}
 
 	@Override
 	public int getField(int id) {
-		// TODO Auto-generated method stub
+
 		return 0;
 	}
 
 	@Override
-	public void setField(int id, int value) {
-		// TODO Auto-generated method stub
-
-	}
+	public void setField(int id, int value) {}
 
 	@Override
 	public int getFieldCount() {
-		// TODO Auto-generated method stub
+
 		return 0;
 	}
 
 	@Override
-	public void clear() {
-		// TODO Auto-generated method stub
-
-	}
+	public void clear() {}
 }

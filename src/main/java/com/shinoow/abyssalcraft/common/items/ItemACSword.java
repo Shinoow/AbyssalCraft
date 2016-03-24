@@ -11,22 +11,21 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.common.items;
 
-import com.shinoow.abyssalcraft.AbyssalCraft;
-
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
-import net.minecraft.util.EnumChatFormatting;
-import net.minecraft.util.StatCollector;
+import net.minecraft.util.text.TextFormatting;
+
+import com.shinoow.abyssalcraft.AbyssalCraft;
 
 public class ItemACSword extends ItemSword {
 
-	private EnumChatFormatting format;
+	private TextFormatting format;
 
 	public ItemACSword(ToolMaterial mat, String name){
 		this(mat, name, null);
 	}
 
-	public ItemACSword(ToolMaterial mat, String name, EnumChatFormatting format) {
+	public ItemACSword(ToolMaterial mat, String name, TextFormatting format) {
 		super(mat);
 		setCreativeTab(AbyssalCraft.tabCombat);
 		//		GameRegistry.registerItem(this, name);
@@ -38,6 +37,6 @@ public class ItemACSword extends ItemSword {
 	@Override
 	public String getItemStackDisplayName(ItemStack par1ItemStack) {
 
-		return format != null ? format + StatCollector.translateToLocal(this.getUnlocalizedName() + ".name") : super.getItemStackDisplayName(par1ItemStack);
+		return format != null ? format + super.getItemStackDisplayName(par1ItemStack) : super.getItemStackDisplayName(par1ItemStack);
 	}
 }

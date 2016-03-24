@@ -14,28 +14,25 @@ package com.shinoow.abyssalcraft.common.world;
 import java.util.List;
 import java.util.Random;
 
-import com.shinoow.abyssalcraft.AbyssalCraft;
-import com.shinoow.abyssalcraft.common.structures.StructureShoggothPit;
-import com.shinoow.abyssalcraft.common.structures.omothol.MapGenOmothol;
-
 import net.minecraft.block.BlockFalling;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.init.Blocks;
-import net.minecraft.util.BlockPos;
-import net.minecraft.util.IProgressUpdate;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.ChunkCoordIntPair;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.chunk.ChunkPrimer;
-import net.minecraft.world.chunk.IChunkProvider;
-import net.minecraft.world.gen.NoiseGenerator;
+import net.minecraft.world.chunk.IChunkGenerator;
 import net.minecraft.world.gen.NoiseGeneratorOctaves;
-import net.minecraftforge.event.terraingen.TerrainGen;
 
-public class ChunkProviderOmothol implements IChunkProvider
+import com.shinoow.abyssalcraft.AbyssalCraft;
+import com.shinoow.abyssalcraft.common.structures.StructureShoggothPit;
+import com.shinoow.abyssalcraft.common.structures.omothol.MapGenOmothol;
+
+public class ChunkProviderOmothol implements IChunkGenerator
 {
 	private Random rand;
 	private NoiseGeneratorOctaves noiseGen1, noiseGen2, noiseGen3, noiseGen4, noiseGen5;
@@ -57,13 +54,13 @@ public class ChunkProviderOmothol implements IChunkProvider
 		noiseGen4 = new NoiseGeneratorOctaves(rand, 10);
 		noiseGen5 = new NoiseGeneratorOctaves(rand, 16);
 
-		NoiseGenerator[] noiseGens = {noiseGen1, noiseGen2, noiseGen3, noiseGen4, noiseGen5};
-		noiseGens = TerrainGen.getModdedNoiseGenerators(par1World, rand, noiseGens);
-		noiseGen1 = (NoiseGeneratorOctaves)noiseGens[0];
-		noiseGen2 = (NoiseGeneratorOctaves)noiseGens[1];
-		noiseGen3 = (NoiseGeneratorOctaves)noiseGens[2];
-		noiseGen4 = (NoiseGeneratorOctaves)noiseGens[3];
-		noiseGen5 = (NoiseGeneratorOctaves)noiseGens[4];
+		//		NoiseGenerator[] noiseGens = {noiseGen1, noiseGen2, noiseGen3, noiseGen4, noiseGen5};
+		//		noiseGens = TerrainGen.getModdedNoiseGenerators(par1World, rand, noiseGens);
+		//		noiseGen1 = (NoiseGeneratorOctaves)noiseGens[0];
+		//		noiseGen2 = (NoiseGeneratorOctaves)noiseGens[1];
+		//		noiseGen3 = (NoiseGeneratorOctaves)noiseGens[2];
+		//		noiseGen4 = (NoiseGeneratorOctaves)noiseGens[3];
+		//		noiseGen5 = (NoiseGeneratorOctaves)noiseGens[4];
 	}
 
 	public void setBlocksInChunk(int x, int z, ChunkPrimer primer)
@@ -143,7 +140,7 @@ public class ChunkProviderOmothol implements IChunkProvider
 				{
 					IBlockState iblockstate2 = primer.getBlockState(i, i1, j);
 
-					if (iblockstate2.getBlock().getMaterial() == Material.air)
+					if (iblockstate2.getMaterial() == Material.air)
 						l = -1;
 					else if (iblockstate2.getBlock() == Blocks.stone)
 						if (l == -1)
@@ -175,17 +172,17 @@ public class ChunkProviderOmothol implements IChunkProvider
 	{
 		rand.setSeed(x * 341873128712L + z * 132897987541L);
 		ChunkPrimer primer = new ChunkPrimer();
-		biomesForGeneration = worldObj.getWorldChunkManager().loadBlockGeneratorData(biomesForGeneration, x * 16, z * 16, 16, 16);
+		biomesForGeneration = worldObj.getBiomeProvider().loadBlockGeneratorData(biomesForGeneration, x * 16, z * 16, 16, 16);
 		setBlocksInChunk(x, z, primer);
 		replaceBlocksForBiome(primer);
 
-		omotholGenerator.generate(this, worldObj, x, z, primer);
+		omotholGenerator.generate(worldObj, x, z, primer);
 
 		Chunk chunk = new Chunk(worldObj, primer, x, z);
 		byte[] abyte = chunk.getBiomeArray();
 
 		for (int k = 0; k < abyte.length; ++k)
-			abyte[k] = (byte)biomesForGeneration[k].biomeID;
+			abyte[k] = (byte)BiomeGenBase.getIdForBiome(biomesForGeneration[k]);
 
 		chunk.generateSkylightMap();
 		return chunk;
@@ -274,14 +271,14 @@ public class ChunkProviderOmothol implements IChunkProvider
 		return par1ArrayOfDouble;
 	}
 
-	@Override
-	public boolean chunkExists(int x, int z)
-	{
-		return true;
-	}
+	//	@Override
+	//	public boolean chunkExists(int x, int z)
+	//	{
+	//		return true;
+	//	}
 
 	@Override
-	public void populate(IChunkProvider par1IChunkProvider, int x, int z)
+	public void populate(int x, int z)
 	{
 		BlockFalling.fallInstantly = true;
 
@@ -306,32 +303,32 @@ public class ChunkProviderOmothol implements IChunkProvider
 		BlockFalling.fallInstantly = false;
 	}
 
-	@Override
-	public boolean saveChunks(boolean par1, IProgressUpdate par2IProgressUpdate)
-	{
-		return true;
-	}
+	//	@Override
+	//	public boolean saveChunks(boolean par1, IProgressUpdate par2IProgressUpdate)
+	//	{
+	//		return true;
+	//	}
 
-	@Override
-	public void saveExtraData() {}
+	//	@Override
+	//	public void saveExtraData() {}
 
-	@Override
-	public boolean unloadQueuedChunks()
-	{
-		return false;
-	}
+	//	@Override
+	//	public boolean unloadQueuedChunks()
+	//	{
+	//		return false;
+	//	}
 
-	@Override
-	public boolean canSave()
-	{
-		return true;
-	}
+	//	@Override
+	//	public boolean canSave()
+	//	{
+	//		return true;
+	//	}
 
-	@Override
-	public String makeString()
-	{
-		return "ACLevelSource";
-	}
+	//	@Override
+	//	public String makeString()
+	//	{
+	//		return "ACLevelSource";
+	//	}
 
 	@Override
 	@SuppressWarnings("rawtypes")
@@ -347,29 +344,35 @@ public class ChunkProviderOmothol implements IChunkProvider
 		return null;
 	}
 
-	@Override
-	public int getLoadedChunkCount()
-	{
-		return 0;
-	}
+	//	@Override
+	//	public int getLoadedChunkCount()
+	//	{
+	//		return 0;
+	//	}
 
 	@Override
 	public void recreateStructures(Chunk chunk, int x, int z) {
 
-		omotholGenerator.generate(this, worldObj, x, z, null);
+		omotholGenerator.generate(worldObj, x, z, null);
 
 	}
 
 	@Override
-	public Chunk provideChunk(BlockPos blockPosIn) {
-
-		return provideChunk(blockPosIn.getX() >> 4, blockPosIn.getZ() >> 4);
-	}
-
-	@Override
-	public boolean func_177460_a(IChunkProvider p_177460_1_, Chunk p_177460_2_,
-			int p_177460_3_, int p_177460_4_) {
-
+	public boolean generateStructures(Chunk chunkIn, int x, int z) {
+		// TODO Auto-generated method stub
 		return false;
 	}
+
+	//	@Override
+	//	public Chunk provideChunk(BlockPos blockPosIn) {
+	//
+	//		return provideChunk(blockPosIn.getX() >> 4, blockPosIn.getZ() >> 4);
+	//	}
+
+	//	@Override
+	//	public boolean func_177460_a(IChunkProvider p_177460_1_, Chunk p_177460_2_,
+	//			int p_177460_3_, int p_177460_4_) {
+	//
+	//		return false;
+	//	}
 }

@@ -14,8 +14,8 @@ package com.shinoow.abyssalcraft.common.blocks.itemblock;
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.EnumChatFormatting;
-import net.minecraft.util.StatCollector;
+import net.minecraft.util.text.TextFormatting;
+import net.minecraft.util.text.translation.I18n;
 
 /** Some sort of universal metadata itemblock thingy */
 public class ItemMetadataBlock extends ItemBlock {
@@ -39,9 +39,9 @@ public class ItemMetadataBlock extends ItemBlock {
 	public String getItemStackDisplayName(ItemStack par1ItemStack) {
 
 		if(getUnlocalizedName().contains("darkethaxiumbrick"))
-			return EnumChatFormatting.DARK_RED + StatCollector.translateToLocal(getUnlocalizedName() + "." + subNames[par1ItemStack.getItemDamage()] + ".name");
+			return TextFormatting.DARK_RED + I18n.translateToLocal(getUnlocalizedName() + "." + subNames[par1ItemStack.getItemDamage()] + ".name");
 		else if(getUnlocalizedName().contains("ethaxiumbrick"))
-			return EnumChatFormatting.AQUA + StatCollector.translateToLocal(getUnlocalizedName() + "." + subNames[par1ItemStack.getItemDamage()] + ".name");
-		return StatCollector.translateToLocal(getUnlocalizedName() + "." + subNames[par1ItemStack.getItemDamage()] + ".name");
+			return TextFormatting.AQUA + I18n.translateToLocal(getUnlocalizedName() + "." + subNames[par1ItemStack.getItemDamage()] + ".name");
+		return I18n.translateToLocal(getUnlocalizedName() + "." + subNames[par1ItemStack.getItemDamage()] + ".name");
 	}
 }

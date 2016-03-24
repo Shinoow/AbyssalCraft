@@ -13,36 +13,44 @@ package com.shinoow.abyssalcraft.common.entity;
 
 import java.util.List;
 
-import net.minecraft.block.Block;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.entity.IEntityLivingData;
 import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.EntityAIAttackOnCollide;
+import net.minecraft.entity.ai.EntityAIAttackMelee;
 import net.minecraft.entity.ai.EntityAIHurtByTarget;
 import net.minecraft.entity.ai.EntityAILookIdle;
 import net.minecraft.entity.ai.EntityAIMoveTowardsRestriction;
 import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
 import net.minecraft.entity.ai.EntityAIWander;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
-import net.minecraft.entity.boss.IBossDisplayData;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.item.EntityXPOrb;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.init.MobEffects;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
+import net.minecraft.network.datasync.DataParameter;
+import net.minecraft.network.datasync.DataSerializers;
+import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.pathfinding.PathNavigate;
 import net.minecraft.pathfinding.PathNavigateClimber;
-import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
-import net.minecraft.util.BlockPos;
 import net.minecraft.util.DamageSource;
-import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.EnumParticleTypes;
-import net.minecraft.util.StatCollector;
+import net.minecraft.util.SoundEvent;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.TextFormatting;
+import net.minecraft.util.text.translation.I18n;
+import net.minecraft.world.BossInfo;
+import net.minecraft.world.BossInfoServer;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.World;
+import net.minecraft.world.BossInfo.Color;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.living.EnderTeleportEvent;
 
@@ -53,14 +61,16 @@ import com.shinoow.abyssalcraft.api.entity.ICoraliumEntity;
 import com.shinoow.abyssalcraft.api.entity.IDreadEntity;
 import com.shinoow.abyssalcraft.common.util.SpecialTextUtil;
 
-public class EntitySacthoth extends EntityMob implements IBossDisplayData, IAntiEntity, ICoraliumEntity, IDreadEntity {
+public class EntitySacthoth extends EntityMob implements IAntiEntity, ICoraliumEntity, IDreadEntity {
 
+	private static final DataParameter<Byte> CLIMBING = EntityDataManager.createKey(EntitySacthoth.class, DataSerializers.BYTE);
 	public int deathTicks;
+	private final BossInfoServer bossInfo = (BossInfoServer)new BossInfoServer(getDisplayName(), BossInfo.Color.BLUE, BossInfo.Overlay.PROGRESS).setDarkenSky(true);
 
 	public EntitySacthoth(World par1World) {
 		super(par1World);
 		setSize(1.2F, 3.8F);
-		tasks.addTask(2, new EntityAIAttackOnCollide(this, EntityPlayer.class, 0.35D, true));
+		tasks.addTask(2, new EntityAIAttackMelee(this, 0.35D, true));
 		tasks.addTask(3, new EntityAIMoveTowardsRestriction(this, 0.35D));
 		tasks.addTask(4, new EntityAIWander(this, 0.35D));
 		tasks.addTask(5, new EntityAILookIdle(this));
@@ -87,13 +97,13 @@ public class EntitySacthoth extends EntityMob implements IBossDisplayData, IAnti
 	protected void entityInit()
 	{
 		super.entityInit();
-		dataWatcher.addObject(16, new Byte((byte)0));
+		dataWatcher.register(CLIMBING, new Byte((byte)0));
 	}
 
 	@Override
 	public String getName()
 	{
-		return EnumChatFormatting.DARK_RED + super.getName();
+		return TextFormatting.DARK_RED + super.getName();
 	}
 
 	@Override
@@ -110,23 +120,61 @@ public class EntitySacthoth extends EntityMob implements IBossDisplayData, IAnti
 	{
 		super.applyEntityAttributes();
 
-		getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(160.0D);
-		getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setBaseValue(0.4D);
-		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.799D);
+		getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(160.0D);
+		getEntityAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue(0.4D);
+		getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.799D);
 
 		if(AbyssalCraft.hardcoreMode){
-			getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(600.0D);
-			getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(30.0D);
+			getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(600.0D);
+			getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(30.0D);
 		} else {
-			getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(300.0D);
-			getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(15.0D);
+			getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(300.0D);
+			getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(15.0D);
 		}
 	}
 
 	@Override
 	protected boolean canDespawn()
 	{
-		return worldObj.provider.getDimensionId() == AbyssalCraft.configDimId4 ? true : false;
+		return worldObj.provider.getDimension() == AbyssalCraft.configDimId4 ? true : false;
+	}
+
+	@Override
+	protected void updateAITasks()
+	{
+		super.updateAITasks();
+		bossInfo.setPercent(getHealth() / getMaxHealth());
+		if(getHealth() < getMaxHealth() * 0.75 && getHealth() > getMaxHealth() / 2 && bossInfo.getColor() != BossInfo.Color.GREEN)
+			bossInfo.setColor(Color.GREEN);
+		if(getHealth() < getMaxHealth() / 2 && getHealth() > getMaxHealth() / 4 && bossInfo.getColor() != BossInfo.Color.YELLOW)
+			bossInfo.setColor(Color.YELLOW);
+		if(getHealth() < getMaxHealth() / 4 && getHealth() > 0 && bossInfo.getColor() != BossInfo.Color.RED)
+			bossInfo.setColor(Color.RED);
+	}
+
+	/**
+	 * Makes this boss Entity visible to the given player. Has no effect if this Entity is not a boss.
+	 */
+	@Override
+	public void setBossVisibleTo(EntityPlayerMP player)
+	{
+		super.setBossVisibleTo(player);
+		bossInfo.addPlayer(player);
+	}
+
+	/**
+	 * Makes this boss Entity non-visible to the given player. Has no effect if this Entity is not a boss.
+	 */
+	@Override
+	public void setBossNonVisibleTo(EntityPlayerMP player)
+	{
+		super.setBossNonVisibleTo(player);
+		bossInfo.removePlayer(player);
+	}
+
+	@Override
+	public boolean isNonBoss(){
+		return false;
 	}
 
 	@Override
@@ -140,7 +188,7 @@ public class EntitySacthoth extends EntityMob implements IBossDisplayData, IAnti
 
 		if (super.attackEntityAsMob(par1Entity))
 			if (par1Entity instanceof EntityLivingBase)
-				((EntityLivingBase)par1Entity).addPotionEffect(new PotionEffect(Potion.confusion.id, 60));
+				((EntityLivingBase)par1Entity).addPotionEffect(new PotionEffect(MobEffects.confusion, 60));
 		return super.attackEntityAsMob(par1Entity);
 	}
 
@@ -154,21 +202,21 @@ public class EntitySacthoth extends EntityMob implements IBossDisplayData, IAnti
 	public void fall(float distance, float damageMultiplier) {}
 
 	@Override
-	protected String getLivingSound()
+	protected SoundEvent getAmbientSound()
 	{
-		return "mob.blaze.breathe";
+		return SoundEvents.entity_blaze_ambient;
 	}
 
 	@Override
-	protected String getHurtSound()
+	protected SoundEvent getHurtSound()
 	{
-		return "mob.blaze.hit";
+		return SoundEvents.entity_blaze_hurt;
 	}
 
 	@Override
-	protected String getDeathSound()
+	protected SoundEvent getDeathSound()
 	{
-		return "abyssalcraft:sacthoth.death";
+		return AbyssalCraft.sacthoth_death;
 	}
 
 	@Override
@@ -195,7 +243,7 @@ public class EntitySacthoth extends EntityMob implements IBossDisplayData, IAnti
 	 */
 	public boolean isBesideClimbableBlock()
 	{
-		return (dataWatcher.getWatchableObjectByte(16) & 1) != 0;
+		return (dataWatcher.get(CLIMBING) & 1) != 0;
 	}
 
 	/**
@@ -204,14 +252,14 @@ public class EntitySacthoth extends EntityMob implements IBossDisplayData, IAnti
 	 */
 	public void setBesideClimbableBlock(boolean par1)
 	{
-		byte b0 = dataWatcher.getWatchableObjectByte(16);
+		byte b0 = dataWatcher.get(CLIMBING);
 
 		if (par1)
 			b0 = (byte)(b0 | 1);
 		else
 			b0 &= -2;
 
-		dataWatcher.updateObject(16, Byte.valueOf(b0));
+		dataWatcher.set(CLIMBING, Byte.valueOf(b0));
 	}
 
 	@Override
@@ -228,12 +276,12 @@ public class EntitySacthoth extends EntityMob implements IBossDisplayData, IAnti
 		}
 		else if(par1DamageSource.isExplosion()){
 			if(worldObj.isRemote)
-				SpecialTextUtil.SacthothText(StatCollector.translateToLocal("message.sacthoth.damage.explosion"));
+				SpecialTextUtil.SacthothText(I18n.translateToLocal("message.sacthoth.damage.explosion"));
 			return false;
 		}
 		else if(par1DamageSource.isProjectile()){
 			if(worldObj.isRemote)
-				SpecialTextUtil.SacthothText(StatCollector.translateToLocal("message.sacthoth.damage.projectile"));
+				SpecialTextUtil.SacthothText(I18n.translateToLocal("message.sacthoth.damage.projectile"));
 			return false;
 		}
 		return super.attackEntityFrom(par1DamageSource, par2);
@@ -268,7 +316,7 @@ public class EntitySacthoth extends EntityMob implements IBossDisplayData, IAnti
 			while (!flag1 && pos.getY() > 0)
 			{
 				BlockPos pos1 = pos.down();
-				Block block = worldObj.getBlockState(pos1).getBlock();
+				IBlockState block = worldObj.getBlockState(pos1);
 
 				if (block.getMaterial().blocksMovement())
 					flag1 = true;
@@ -283,7 +331,7 @@ public class EntitySacthoth extends EntityMob implements IBossDisplayData, IAnti
 			{
 				setPosition(posX, posY, posZ);
 
-				if (worldObj.getCollidingBoundingBoxes(this, getEntityBoundingBox()).isEmpty() && !worldObj.isAnyLiquid(getEntityBoundingBox()))
+				if (worldObj.getCubes(this, getEntityBoundingBox()).isEmpty() && !worldObj.isAnyLiquid(getEntityBoundingBox()))
 					flag = true;
 			}
 		}
@@ -310,10 +358,16 @@ public class EntitySacthoth extends EntityMob implements IBossDisplayData, IAnti
 					worldObj.spawnParticle(EnumParticleTypes.SMOKE_LARGE, d7, d8, d9, f, f1, f2);
 			}
 
-			worldObj.playSoundEffect(d3, d4, d5, "mob.endermen.portal", 1.0F, 1.0F);
-			playSound("mob.endermen.portal", 1.0F, 1.0F);
+			worldObj.playSound(d3, d4, d5, SoundEvents.entity_endermen_teleport, getSoundCategory(), 1.0F, 1.0F, false);
+			playSound(SoundEvents.entity_endermen_teleport, 1.0F, 1.0F);
 			return true;
 		}
+	}
+
+	@Override
+	public void onDeath(DamageSource par1DamageSource) {
+		bossInfo.setPercent(getHealth() / getMaxHealth());
+		super.onDeath(par1DamageSource);
 	}
 
 	@Override
@@ -403,7 +457,7 @@ public class EntitySacthoth extends EntityMob implements IBossDisplayData, IAnti
 			for (int k2 = 0; k2 < list.size(); k2++) {
 				Entity entity = (Entity)list.get(k2);
 				if (entity instanceof EntityPlayer && !entity.isDead && deathTicks == 0 && !((EntityPlayer)entity).capabilities.isCreativeMode)
-					((EntityPlayer)entity).addPotionEffect(new PotionEffect(Potion.blindness.id, 40));
+					((EntityPlayer)entity).addPotionEffect(new PotionEffect(MobEffects.blindness, 40));
 			}
 		EntityPlayer player = worldObj.getClosestPlayerToEntity(this, 160D);
 		if(player != null && player.getDistanceToEntity(this) >= 50D && !player.capabilities.isCreativeMode){

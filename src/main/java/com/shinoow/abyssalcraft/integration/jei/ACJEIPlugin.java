@@ -32,19 +32,11 @@ public class ACJEIPlugin implements IModPlugin {
 	private IItemRegistry itemRegistry;
 
 	@Override
-	public void onJeiHelpersAvailable(IJeiHelpers jeiHelpers) {
-		this.jeiHelpers = jeiHelpers;
-	}
-
-	@Override
-	public void onItemRegistryAvailable(IItemRegistry itemRegistry) {
-		this.itemRegistry = itemRegistry;
-	}
-
-	@Override
 	public void register(IModRegistry registry) {
 		if(!Loader.isModLoaded("abyssalcraft")) return;
 
+		jeiHelpers = registry.getJeiHelpers();
+		itemRegistry = registry.getItemRegistry();
 		JEIUtils utils = new JEIUtils(itemRegistry);
 
 		IGuiHelper guiHelper = jeiHelpers.getGuiHelper();
@@ -83,9 +75,6 @@ public class ACJEIPlugin implements IModPlugin {
 		jeiHelpers.getItemBlacklist().addItemToBlacklist(new ItemStack(AbyssalCraft.house));
 		jeiHelpers.getItemBlacklist().addItemToBlacklist(new ItemStack(AbyssalCraft.Altar));
 	}
-
-	@Override
-	public void onRecipeRegistryAvailable(IRecipeRegistry recipeRegistry) {}
 
 	@Override
 	public void onRuntimeAvailable(IJeiRuntime jeiRuntime) {}

@@ -12,12 +12,13 @@
 package com.shinoow.abyssalcraft.common.world;
 
 import net.minecraft.entity.Entity;
-import net.minecraft.util.MathHelper;
-import net.minecraft.util.Vec3;
+import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.math.Vec3d;
+import net.minecraft.world.DimensionType;
 import net.minecraft.world.WorldProvider;
-import net.minecraft.world.biome.WorldChunkManagerHell;
+import net.minecraft.world.biome.BiomeProviderSingle;
 import net.minecraft.world.chunk.Chunk;
-import net.minecraft.world.chunk.IChunkProvider;
+import net.minecraft.world.chunk.IChunkGenerator;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -26,21 +27,21 @@ import com.shinoow.abyssalcraft.AbyssalCraft;
 public class WorldProviderDarkRealm extends WorldProvider {
 
 	@Override
-	public IChunkProvider createChunkGenerator() {
+	public IChunkGenerator createChunkGenerator() {
 		return new ChunkProviderDarkRealm(worldObj, worldObj.getSeed(), true);
 	}
 
 	@Override
 	public void registerWorldChunkManager() {
-		worldChunkMgr = new WorldChunkManagerHell(AbyssalCraft.darkRealm, 0.0F);
-		dimensionId = AbyssalCraft.configDimId4;
+		worldChunkMgr = new BiomeProviderSingle(AbyssalCraft.darkRealm);
+		setDimension(AbyssalCraft.configDimId4);
 		hasNoSky = true;
 	}
 
-	@Override
-	public String getDimensionName()  {
-		return "The Dark Realm";
-	}
+	//	@Override
+	//	public String getDimensionName()  {
+	//		return "The Dark Realm";
+	//	}
 
 	@Override
 	public boolean canRespawnHere() {
@@ -59,7 +60,7 @@ public class WorldProviderDarkRealm extends WorldProvider {
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public Vec3 getFogColor(float par1, float par2)
+	public Vec3d getFogColor(float par1, float par2)
 	{
 		int i = 10518688;
 		float f2 = MathHelper.cos(par1 * (float)Math.PI * 2.0F) * 2.0F + 0.5F;
@@ -76,7 +77,7 @@ public class WorldProviderDarkRealm extends WorldProvider {
 		f3 *= f2 * 0.0F + 0.15F;
 		f4 *= f2 * 0.0F + 0.15F;
 		f5 *= f2 * 0.0F + 0.15F;
-		return new Vec3(f3, f4, f5);
+		return new Vec3d(f3, f4, f5);
 	}
 
 	@Override
@@ -107,8 +108,8 @@ public class WorldProviderDarkRealm extends WorldProvider {
 	}
 
 	@Override
-	public Vec3 getSkyColor(Entity cameraEntity, float partialTicks) {
-		return new Vec3(0, 0, 0);
+	public Vec3d getSkyColor(Entity cameraEntity, float partialTicks) {
+		return new Vec3d(0, 0, 0);
 	}
 
 	@Override
@@ -128,8 +129,14 @@ public class WorldProviderDarkRealm extends WorldProvider {
 	}
 
 	@Override
-	public String getInternalNameSuffix() {
+	public DimensionType getDimensionType() {
 
-		return "_dr";
+		return AbyssalCraft.THE_DARK_REALM;
 	}
+
+	//	@Override
+	//	public String getInternalNameSuffix() {
+	//
+	//		return "_dr";
+	//	}
 }

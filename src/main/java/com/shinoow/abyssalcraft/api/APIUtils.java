@@ -66,8 +66,8 @@ public class APIUtils {
 	 * @since 1.5
 	 */
 	public static boolean hasNecronomicon(EntityPlayer player){
-		return player.inventory.hasItem(ACItems.necronomicon) || player.inventory.hasItem(ACItems.abyssal_wasteland_necronomicon)
-				|| player.inventory.hasItem(ACItems.dreadlands_necronomicon) || player.inventory.hasItem(ACItems.omothol_necronomicon)
-				|| player.inventory.hasItem(ACItems.abyssalnomicon);
+		return player.inventory.hasItemStack(new ItemStack(ACItems.necronomicon)) || player.inventory.hasItemStack(new ItemStack(ACItems.abyssal_wasteland_necronomicon))
+				|| player.inventory.hasItemStack(new ItemStack(ACItems.dreadlands_necronomicon)) || player.inventory.hasItemStack(new ItemStack(ACItems.omothol_necronomicon))
+				|| player.inventory.hasItemStack(new ItemStack(ACItems.abyssalnomicon));
 	}
 }

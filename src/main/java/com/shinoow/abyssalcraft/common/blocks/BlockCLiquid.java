@@ -23,7 +23,8 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionEffect;
-import net.minecraft.util.BlockPos;
+import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.BiomeDictionary;
@@ -51,13 +52,25 @@ public class BlockCLiquid extends BlockFluidClassic {
 	}
 
 	@Override
+	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos)
+	{
+		return FULL_BLOCK_AABB;
+	}
+
+	@Override
+	public AxisAlignedBB getSelectedBoundingBox(IBlockState blockState, World worldIn, BlockPos pos)
+	{
+		return NULL_AABB;
+	}
+
+	@Override
 	public MapColor getMapColor(IBlockState state){
 		return MapColor.lightBlueColor;
 	}
 
 	@Override
 	public boolean canDisplace(IBlockAccess world, BlockPos pos) {
-		if(world.getBlockState(pos).getBlock().getMaterial().isLiquid() && world.getBlockState(pos).getBlock() != this && world.getBlockState(pos).getBlock() != AbyssalCraft.anticwater)
+		if(world.getBlockState(pos).getMaterial().isLiquid() && world.getBlockState(pos).getBlock() != this && world.getBlockState(pos).getBlock() != AbyssalCraft.anticwater)
 			return true;
 		if(world.getBlockState(pos).getBlock() == Blocks.lava)
 			return true;
@@ -73,9 +86,9 @@ public class BlockCLiquid extends BlockFluidClassic {
 		if(!world.isRemote){
 			if(!world.provider.isSurfaceWorld()){
 				if(world.getBlockState(pos).getBlock() == Blocks.water && AbyssalCraft.shouldSpread == false) return false;
-				if(world.getBlockState(pos).getBlock().getMaterial().isLiquid() && world.getBlockState(pos).getBlock() != this && world.getBlockState(pos).getBlock() != AbyssalCraft.anticwater)
+				if(world.getBlockState(pos).getMaterial().isLiquid() && world.getBlockState(pos).getBlock() != this && world.getBlockState(pos).getBlock() != AbyssalCraft.anticwater)
 					world.setBlockState(pos, getDefaultState());
-				if(AbyssalCraft.breakLogic == true && world.getBlockState(new BlockPos(pos.getX(), pos.getY()+1, pos.getZ())).getBlock().getMaterial().isLiquid()
+				if(AbyssalCraft.breakLogic == true && world.getBlockState(new BlockPos(pos.getX(), pos.getY()+1, pos.getZ())).getMaterial().isLiquid()
 						&& world.getBlockState(new BlockPos(pos.getX(), pos.getY()+1, pos.getZ())).getBlock() != this && world.getBlockState(new BlockPos(pos.getX(), pos.getY()+1, pos.getZ())).getBlock() != AbyssalCraft.anticwater)
 					world.setBlockState(new BlockPos(pos.getX(), pos.getY()+1, pos.getZ()), getDefaultState());
 			} else {
@@ -85,9 +98,9 @@ public class BlockCLiquid extends BlockFluidClassic {
 					else world.setBlockState(pos, Blocks.cobblestone.getDefaultState());
 
 				if(AbyssalCraft.shouldSpread){
-					if(world.getBlockState(pos).getBlock().getMaterial().isLiquid() && world.getBlockState(pos).getBlock() != this && world.getBlockState(pos).getBlock() != AbyssalCraft.anticwater)
+					if(world.getBlockState(pos).getMaterial().isLiquid() && world.getBlockState(pos).getBlock() != this && world.getBlockState(pos).getBlock() != AbyssalCraft.anticwater)
 						world.setBlockState(pos, getDefaultState());
-					if(AbyssalCraft.breakLogic == true && world.getBlockState(new BlockPos(pos.getX(), pos.getY()+1, pos.getZ())).getBlock().getMaterial().isLiquid()
+					if(AbyssalCraft.breakLogic == true && world.getBlockState(new BlockPos(pos.getX(), pos.getY()+1, pos.getZ())).getMaterial().isLiquid()
 							&& world.getBlockState(new BlockPos(pos.getX(), pos.getY()+1, pos.getZ())).getBlock() != this && world.getBlockState(new BlockPos(pos.getX(), pos.getY()+1, pos.getZ())).getBlock() != AbyssalCraft.anticwater)
 						world.setBlockState(new BlockPos(pos.getX(), pos.getY()+1, pos.getZ()), getDefaultState());
 				}
@@ -127,7 +140,7 @@ public class BlockCLiquid extends BlockFluidClassic {
 		super.onEntityCollidedWithBlock(par1World, pos, state, par5Entity);
 
 		if(par5Entity instanceof EntityLivingBase && !EntityUtil.isEntityCoralium((EntityLivingBase)par5Entity) && ((EntityLivingBase)par5Entity).getActivePotionEffect(AbyssalCraft.Cplague) == null)
-			((EntityLivingBase)par5Entity).addPotionEffect(new PotionEffect(AbyssalCraft.Cplague.id, 200));
+			((EntityLivingBase)par5Entity).addPotionEffect(new PotionEffect(AbyssalCraft.Cplague, 200));
 	}
 
 	private List<Block> oresToBlocks(List<ItemStack> list){

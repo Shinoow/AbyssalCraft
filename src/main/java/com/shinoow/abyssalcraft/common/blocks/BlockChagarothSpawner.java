@@ -13,7 +13,9 @@ package com.shinoow.abyssalcraft.common.blocks;
 
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.EnumBlockRenderType;
 import net.minecraft.world.World;
 
 import com.shinoow.abyssalcraft.common.blocks.tile.TileEntityChagarothSpawner;
@@ -25,9 +27,9 @@ public class BlockChagarothSpawner extends BlockContainer {
 	}
 
 	@Override
-	public int getRenderType()
+	public EnumBlockRenderType getRenderType(IBlockState state)
 	{
-		return 3;
+		return EnumBlockRenderType.MODEL;
 	}
 
 	@Override

@@ -11,13 +11,10 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.common.entity.demon;
 
-import com.shinoow.abyssalcraft.AbyssalCraft;
-import com.shinoow.abyssalcraft.common.entity.EntityLesserShoggoth;
-
 import net.minecraft.block.Block;
 import net.minecraft.entity.IEntityLivingData;
 import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.EntityAIAttackOnCollide;
+import net.minecraft.entity.ai.EntityAIAttackMelee;
 import net.minecraft.entity.ai.EntityAIHurtByTarget;
 import net.minecraft.entity.ai.EntityAILookIdle;
 import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
@@ -27,11 +24,15 @@ import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
-import net.minecraft.pathfinding.PathNavigateGround;
-import net.minecraft.util.BlockPos;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.util.DamageSource;
-import net.minecraft.util.StatCollector;
+import net.minecraft.util.SoundEvent;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.translation.I18n;
 import net.minecraft.world.World;
+
+import com.shinoow.abyssalcraft.AbyssalCraft;
+import com.shinoow.abyssalcraft.common.entity.EntityLesserShoggoth;
 
 public class EntityEvilChicken extends EntityMob {
 
@@ -44,11 +45,10 @@ public class EntityEvilChicken extends EntityMob {
 	public EntityEvilChicken(World par1World) {
 		super(par1World);
 		setSize(0.3F, 0.7F);
-		((PathNavigateGround)getNavigator()).setAvoidsWater(true);
 		isImmuneToFire = true;
 		double var2 = 0.35D;
 		tasks.addTask(0, new EntityAISwimming(this));
-		tasks.addTask(2, new EntityAIAttackOnCollide(this, EntityPlayer.class, var2, true));
+		tasks.addTask(2, new EntityAIAttackMelee(this, var2, true));
 		tasks.addTask(3, new EntityAIWander(this, var2));
 		tasks.addTask(4, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
 		tasks.addTask(4, new EntityAILookIdle(this));
@@ -61,39 +61,39 @@ public class EntityEvilChicken extends EntityMob {
 		super.applyEntityAttributes();
 
 		if(AbyssalCraft.hardcoreMode){
-			getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(20.0D);
-			getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(4.0D);
-		} else getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(10.0D);
+			getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(20.0D);
+			getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(4.0D);
+		} else getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(10.0D);
 	}
 
 	@Override
 	public String getName()
 	{
-		return StatCollector.translateToLocal("entity.Chicken.name");
+		return I18n.translateToLocal("entity.Chicken.name");
 	}
 
 	@Override
-	protected String getLivingSound()
+	protected SoundEvent getAmbientSound()
 	{
-		return "mob.chicken.say";
+		return SoundEvents.entity_chicken_ambient;
 	}
 
 	@Override
-	protected String getHurtSound()
+	protected SoundEvent getHurtSound()
 	{
-		return "mob.ghast.scream";
+		return SoundEvents.entity_ghast_hurt;
 	}
 
 	@Override
-	protected String getDeathSound()
+	protected SoundEvent getDeathSound()
 	{
-		return "mob.chicken.hurt";
+		return SoundEvents.entity_chicken_death;
 	}
 
 	@Override
 	protected void playStepSound(BlockPos pos, Block par4)
 	{
-		playSound("mob.chicken.step", 0.15F, 1.0F);
+		playSound(SoundEvents.entity_chicken_step, 0.15F, 1.0F);
 	}
 
 	@Override

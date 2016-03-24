@@ -19,7 +19,7 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.entity.IEntityLivingData;
 import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.EntityAIAttackOnCollide;
+import net.minecraft.entity.ai.EntityAIAttackMelee;
 import net.minecraft.entity.ai.EntityAIHurtByTarget;
 import net.minecraft.entity.ai.EntityAILookIdle;
 import net.minecraft.entity.ai.EntityAIMoveTowardsRestriction;
@@ -31,10 +31,14 @@ import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.ai.attributes.IAttributeInstance;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Items;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.item.Item;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.BlockPos;
+import net.minecraft.network.datasync.DataParameter;
+import net.minecraft.network.datasync.DataSerializers;
+import net.minecraft.network.datasync.EntityDataManager;
+import net.minecraft.util.SoundEvent;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
@@ -46,14 +50,14 @@ import com.shinoow.abyssalcraft.common.entity.EntityAbyssalZombie;
 
 public class EntityAntiAbyssalZombie extends EntityMob implements IAntiEntity {
 
+	private static final DataParameter<Byte> CHILD = EntityDataManager.createKey(EntityAntiAbyssalZombie.class, DataSerializers.BYTE);
 	private static final UUID babySpeedBoostUUID = UUID.fromString("B9766B59-9566-4402-BC1F-2EE2A276D836");
 	private static final AttributeModifier babySpeedBoostModifier = new AttributeModifier(babySpeedBoostUUID, "Baby speed boost", 0.5D, 1);
 
 	public EntityAntiAbyssalZombie(World par1World) {
 		super(par1World);
 		tasks.addTask(0, new EntityAISwimming(this));
-		tasks.addTask(2, new EntityAIAttackOnCollide(this, EntityAntiZombie.class, 1.0D, true));
-		tasks.addTask(3, new EntityAIAttackOnCollide(this, EntityPlayer.class, 1.0D, false));
+		tasks.addTask(2, new EntityAIAttackMelee(this, 1.0D, true));
 		tasks.addTask(4, new EntityAIMoveTowardsRestriction(this, 1.0D));
 		tasks.addTask(5, new EntityAIWander(this, 1.0D));
 		tasks.addTask(8, new EntityAILookIdle(this));
@@ -72,16 +76,16 @@ public class EntityAntiAbyssalZombie extends EntityMob implements IAntiEntity {
 	protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
 
-		getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(64.0D);
-		getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setBaseValue(0.0D);
-		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.23000000417232513D);
+		getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(64.0D);
+		getEntityAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue(0.0D);
+		getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.23000000417232513D);
 
 		if(AbyssalCraft.hardcoreMode){
-			getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(100.0D);
-			getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(12.0D);
+			getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(100.0D);
+			getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(12.0D);
 		} else {
-			getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(50.0D);
-			getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(6.0D);
+			getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(50.0D);
+			getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(6.0D);
 		}
 	}
 
@@ -89,14 +93,13 @@ public class EntityAntiAbyssalZombie extends EntityMob implements IAntiEntity {
 	protected void entityInit()
 	{
 		super.entityInit();
-		getDataWatcher().addObject(12, Byte.valueOf((byte)0));
-		getDataWatcher().addObject(13, Byte.valueOf((byte)0));
+		dataWatcher.register(CHILD, Byte.valueOf((byte)0));
 	}
 
 	@Override
 	public boolean isChild()
 	{
-		return getDataWatcher().getWatchableObjectByte(12) == 1;
+		return dataWatcher.get(CHILD).byteValue() == 1;
 	}
 
 	@Override
@@ -115,11 +118,11 @@ public class EntityAntiAbyssalZombie extends EntityMob implements IAntiEntity {
 	 */
 	public void setChild(boolean par1)
 	{
-		getDataWatcher().updateObject(12, Byte.valueOf((byte)(par1 ? 1 : 0)));
+		dataWatcher.set(CHILD, Byte.valueOf((byte)(par1 ? 1 : 0)));
 
 		if (worldObj != null && !worldObj.isRemote)
 		{
-			IAttributeInstance attributeinstance = getEntityAttribute(SharedMonsterAttributes.movementSpeed);
+			IAttributeInstance attributeinstance = getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED);
 			attributeinstance.removeModifier(babySpeedBoostModifier);
 
 			if (par1)
@@ -128,52 +131,36 @@ public class EntityAntiAbyssalZombie extends EntityMob implements IAntiEntity {
 	}
 
 	/**
-	 * Return whether this  abyssal zombie is a zombie.
-	 */
-	public boolean isZombie()
-	{
-		return getDataWatcher().getWatchableObjectByte(13) == 1;
-	}
-
-	/**
-	 * Set whether this abyssal zombie is a zombie.
-	 */
-	public void setIsZombie(boolean par1)
-	{
-		getDataWatcher().updateObject(13, Byte.valueOf((byte)(par1 ? 1 : 0)));
-	}
-
-	/**
 	 * Returns the sound this mob makes while it's alive.
 	 */
 	@Override
-	protected String getLivingSound()
+	protected SoundEvent getAmbientSound()
 	{
-		return "mob.zombie.say";
+		return SoundEvents.entity_zombie_ambient;
 	}
 
 	/**
 	 * Returns the sound this mob makes when it is hurt.
 	 */
 	@Override
-	protected String getHurtSound()
+	protected SoundEvent getHurtSound()
 	{
-		return "mob.zombie.hurt";
+		return SoundEvents.entity_zombie_hurt;
 	}
 
 	/**
 	 * Returns the sound this mob makes on death.
 	 */
 	@Override
-	protected String getDeathSound()
+	protected SoundEvent getDeathSound()
 	{
-		return "mob.zombie.death";
+		return SoundEvents.entity_zombie_death;
 	}
 
 	@Override
 	protected void playStepSound(BlockPos pos, Block par4)
 	{
-		playSound("mob.zombie.step", 0.15F, 1.0F);
+		playSound(SoundEvents.entity_zombie_step, 0.15F, 1.0F);
 	}
 
 	@Override
@@ -187,21 +174,21 @@ public class EntityAntiAbyssalZombie extends EntityMob implements IAntiEntity {
 	{
 		return EnumCreatureAttribute.UNDEAD;
 	}
-	@Override
-	protected void addRandomDrop()
-	{
-		switch (rand.nextInt(3))
-		{
-		case 0:
-			dropItem(Items.bone, 1);
-			break;
-		case 1:
-			dropItem(AbyssalCraft.sword, 1);
-			break;
-		case 2:
-			dropItem(AbyssalCraft.Cpearl, 1);
-		}
-	}
+	//	@Override
+	//	protected void addRandomDrop()
+	//	{
+	//		switch (rand.nextInt(3))
+	//		{
+	//		case 0:
+	//			dropItem(Items.bone, 1);
+	//			break;
+	//		case 1:
+	//			dropItem(AbyssalCraft.sword, 1);
+	//			break;
+	//		case 2:
+	//			dropItem(AbyssalCraft.Cpearl, 1);
+	//		}
+	//	}
 
 	@Override
 	public void writeEntityToNBT(NBTTagCompound par1NBTTagCompound)
@@ -210,9 +197,15 @@ public class EntityAntiAbyssalZombie extends EntityMob implements IAntiEntity {
 
 		if (isChild())
 			par1NBTTagCompound.setBoolean("IsBaby", true);
+	}
 
-		if (isZombie())
-			par1NBTTagCompound.setBoolean("IsZombie", true);
+	@Override
+	public void readEntityFromNBT(NBTTagCompound par1NBTTagCompound)
+	{
+		super.readEntityFromNBT(par1NBTTagCompound);
+
+		if (par1NBTTagCompound.getBoolean("IsBaby"))
+			setChild(true);
 	}
 
 	@Override
@@ -240,13 +233,12 @@ public class EntityAntiAbyssalZombie extends EntityMob implements IAntiEntity {
 			antiAbyaalZombie.copyLocationAndAnglesFrom(par1EntityLivingBase);
 			worldObj.removeEntity(par1EntityLivingBase);
 			antiAbyaalZombie.onInitialSpawn(worldObj.getDifficultyForLocation(new BlockPos(posX, posY, posZ)), (IEntityLivingData)null);
-			antiAbyaalZombie.setIsZombie(true);
 
 			if (par1EntityLivingBase.isChild())
 				antiAbyaalZombie.setChild(true);
 
 			worldObj.spawnEntityInWorld(antiAbyaalZombie);
-			worldObj.playAuxSFXAtEntity((EntityPlayer)null, 1016, new BlockPos(posX, posY, posZ), 0);
+			worldObj.playAuxSFXAtEntity((EntityPlayer)null, 1026, new BlockPos(posX, posY, posZ), 0);
 
 		}
 	}
@@ -266,9 +258,6 @@ public class EntityAntiAbyssalZombie extends EntityMob implements IAntiEntity {
 		{
 			EntityAntiAbyssalZombie.GroupData groupdata = (EntityAntiAbyssalZombie.GroupData)data;
 
-			if (groupdata.field_142046_b)
-				setIsZombie(true);
-
 			if (groupdata.field_142048_a)
 				setChild(true);
 		}
@@ -278,18 +267,15 @@ public class EntityAntiAbyssalZombie extends EntityMob implements IAntiEntity {
 	class GroupData implements IEntityLivingData
 	{
 		public boolean field_142048_a;
-		public boolean field_142046_b;
-		private GroupData(boolean par2, boolean par3)
+		private GroupData(boolean par2)
 		{
 			field_142048_a = false;
-			field_142046_b = false;
 			field_142048_a = par2;
-			field_142046_b = par3;
 		}
 
 		GroupData(boolean par2, boolean par3, Object par4EntityZombieINNER1)
 		{
-			this(par2, par3);
+			this(par2);
 		}
 	}
 }

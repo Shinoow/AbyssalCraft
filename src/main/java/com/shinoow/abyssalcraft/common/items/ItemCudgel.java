@@ -15,8 +15,10 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.init.Items;
+import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+
 import com.google.common.collect.Multimap;
 import com.shinoow.abyssalcraft.AbyssalCraft;
 
@@ -47,9 +49,15 @@ public class ItemCudgel extends Item {
 
 	@Override
 	@SuppressWarnings({ "rawtypes", "unchecked", "deprecation" })
-	public Multimap getItemAttributeModifiers() {
-		Multimap multimap = super.getItemAttributeModifiers();
-		multimap.put(SharedMonsterAttributes.attackDamage.getAttributeUnlocalizedName(), new AttributeModifier(itemModifierUUID, "Weapon modifier", 20, 0));
+	public Multimap getItemAttributeModifiers(EntityEquipmentSlot equipmentSlot) {
+		Multimap multimap = super.getItemAttributeModifiers(equipmentSlot);
+
+		if (equipmentSlot == EntityEquipmentSlot.MAINHAND)
+		{
+			multimap.put(SharedMonsterAttributes.ATTACK_DAMAGE.getAttributeUnlocalizedName(), new AttributeModifier(ATTACK_DAMAGE_MODIFIER, "Weapon modifier", 20, 0));
+			multimap.put(SharedMonsterAttributes.ATTACK_SPEED.getAttributeUnlocalizedName(), new AttributeModifier(ATTACK_SPEED_MODIFIER, "Weapon modifier", -2.4000000953674316D, 0));
+		}
+
 		return multimap;
 	}
 }

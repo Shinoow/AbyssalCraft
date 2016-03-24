@@ -16,7 +16,8 @@ import java.util.Set;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.EnumChatFormatting;
+import net.minecraft.util.text.TextFormatting;
+
 import com.google.common.collect.Sets;
 import com.shinoow.abyssalcraft.AbyssalCraft;
 
@@ -26,16 +27,16 @@ public class ItemEthaxiumPickaxe extends ItemACPickaxe {
 
 	public ItemEthaxiumPickaxe(ToolMaterial mat, String name)
 	{
-		super(mat, name, 8, EnumChatFormatting.AQUA);
+		super(mat, name, 8, TextFormatting.AQUA);
 	}
 
 	@Override
-	public float getDigSpeed(ItemStack stack, IBlockState state)
+	public float getStrVsBlock(ItemStack stack, IBlockState state)
 	{
 		if(effectiveBlocks.contains(state.getBlock()))
 			return efficiencyOnProperMaterial * 10;
 		if (state.getBlock().isToolEffective("pickaxe", state))
 			return efficiencyOnProperMaterial;
-		return super.getDigSpeed(stack, state);
+		return super.getStrVsBlock(stack, state);
 	}
 }

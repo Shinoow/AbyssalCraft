@@ -11,12 +11,12 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.client.model.entity;
 
-import com.shinoow.abyssalcraft.common.entity.EntityJzahar;
-
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
-import net.minecraft.util.MathHelper;
+import net.minecraft.util.math.MathHelper;
+
+import com.shinoow.abyssalcraft.common.entity.EntityJzahar;
 
 public class ModelJzahar extends ModelBase
 {

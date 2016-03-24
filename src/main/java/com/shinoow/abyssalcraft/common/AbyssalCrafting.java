@@ -13,9 +13,9 @@ package com.shinoow.abyssalcraft.common;
 
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
+import net.minecraft.init.MobEffects;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.potion.Potion;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.oredict.ShapedOreRecipe;
@@ -250,7 +250,7 @@ public class AbyssalCrafting {
 		GameRegistry.addRecipe(new ItemStack(AbyssalCraft.crystalShard, 1, 23), new Object[] {"#%", '#', new ItemStack(AbyssalCraft.crystalShard, 1, 19), '%', new ItemStack(AbyssalCraft.crystalShard, 1, 4)});
 		GameRegistry.addRecipe(new ItemStack(AbyssalCraft.ethaxiumIngot), new Object[] {"###", "#%#", "###", '#', AbyssalCraft.ethaxium_brick, '%', AbyssalCraft.lifeCrystal});
 		GameRegistry.addRecipe(new ItemStack(AbyssalCraft.ethaxiumIngot), new Object[] {" # ", "#%#", " # ", '#', AbyssalCraft.ethaxium_brick, '%', AbyssalCraft.OC});
-		GameRegistry.addRecipe(new ItemStack(Items.spawn_egg, 1, AbyssalCraft.stringtoIDMapping.get("shadowboss")), new Object[] {"#", '#', AbyssalCraft.ODB});
+		//		GameRegistry.addRecipe(new ItemStack(Items.spawn_egg, 1, AbyssalCraft.stringtoIDMapping.get("shadowboss")), new Object[] {"#", '#', AbyssalCraft.ODB});
 		GameRegistry.addRecipe(new ItemStack(AbyssalCraft.ethaxiumIngot, 9), new Object[] {"#", '#', AbyssalCraft.ethaxiumblock});
 		GameRegistry.addRecipe(new ItemStack(AbyssalCraft.ethPickaxe, 1), new Object[] {"###", " % ", " % ", '#', AbyssalCraft.ethaxiumIngot, '%', AbyssalCraft.ethaxium_brick});
 		GameRegistry.addRecipe(new ItemStack(AbyssalCraft.ethAxe, 1), new Object[] {"##", "#%", " %", '#', AbyssalCraft.ethaxiumIngot, '%', AbyssalCraft.ethaxium_brick});
@@ -895,10 +895,10 @@ public class AbyssalCrafting {
 		DisruptionHandler.instance().registerDisruption(new DisruptionFire());
 		DisruptionHandler.instance().registerDisruption(new DisruptionSpawn("spawnShoggoth", null, EntityLesserShoggoth.class));
 		DisruptionHandler.instance().registerDisruption(new DisruptionSpawn("spawnGatekeeperMinion", DeityType.JZAHAR, EntityGatekeeperMinion.class));
-		DisruptionHandler.instance().registerDisruption(new DisruptionPotion("poisonPotion", null, Potion.poison));
-		DisruptionHandler.instance().registerDisruption(new DisruptionPotion("slownessPotion", null, Potion.moveSlowdown));
-		DisruptionHandler.instance().registerDisruption(new DisruptionPotion("weaknessPotion", null, Potion.weakness));
-		DisruptionHandler.instance().registerDisruption(new DisruptionPotion("witherPotion", null, Potion.wither));
+		DisruptionHandler.instance().registerDisruption(new DisruptionPotion("poisonPotion", null, MobEffects.poison));
+		DisruptionHandler.instance().registerDisruption(new DisruptionPotion("slownessPotion", null, MobEffects.moveSlowdown));
+		DisruptionHandler.instance().registerDisruption(new DisruptionPotion("weaknessPotion", null, MobEffects.weakness));
+		DisruptionHandler.instance().registerDisruption(new DisruptionPotion("witherPotion", null, MobEffects.wither));
 		DisruptionHandler.instance().registerDisruption(new DisruptionPotion("coraliumPotion", null, AbyssalCraft.Cplague));
 		DisruptionHandler.instance().registerDisruption(new DisruptionPotentialEnergy());
 		DisruptionHandler.instance().registerDisruption(new DisruptionFreeze());

@@ -20,7 +20,7 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
-import net.minecraft.util.BlockPos;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI.ACPotions;
@@ -83,7 +83,7 @@ public class NecronomiconPotionAoERitual extends NecronomiconRitual {
 		if(potion instanceof Potion)
 			return (Potion) potion;
 		if(potion instanceof Integer)
-			return Potion.potionTypes[(int) potion];
+			return Potion.getPotionById((int) potion);
 		return null;
 	}
 
@@ -111,13 +111,13 @@ public class NecronomiconPotionAoERitual extends NecronomiconRitual {
 	@Override
 	protected void completeRitualServer(World world, BlockPos pos, EntityPlayer player){
 
-		List<Entity> entities = world.getEntitiesWithinAABBExcludingEntity(player, world.getBlockState(pos).getBlock().getCollisionBoundingBox(world, pos, world.getBlockState(pos)).expand(16, 3, 16));
+		List<Entity> entities = world.getEntitiesWithinAABBExcludingEntity(player, world.getBlockState(pos).getBlock().getBoundingBox(world.getBlockState(pos), world, pos).expand(16, 3, 16));
 
 		if(!entities.isEmpty())
 			for(Entity entity : entities)
 				if(entity instanceof EntityLiving && !entity.isDead)
 					if(!isEntityImmune(getPotionEffect(), entity))
-						((EntityLiving)entity).addPotionEffect(new PotionEffect(getPotionEffect().id, 400));
+						((EntityLiving)entity).addPotionEffect(new PotionEffect(getPotionEffect(), 400));
 	}
 
 	@Override

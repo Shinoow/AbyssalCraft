@@ -18,13 +18,13 @@ import java.util.Random;
 import net.minecraft.block.BlockLeaves;
 import net.minecraft.block.BlockPlanks.EnumType;
 import net.minecraft.block.properties.IProperty;
-import net.minecraft.block.state.BlockState;
+import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.BlockPos;
-import net.minecraft.util.EnumWorldBlockLayer;
+import net.minecraft.util.BlockRenderLayer;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.FMLCommonHandler;
@@ -48,26 +48,26 @@ public class BlockDLTLeaves extends BlockLeaves {
 			setGraphicsLevel(Minecraft.getMinecraft().isFancyGraphicsEnabled());
 	}
 
-	@Override
-	@SideOnly(Side.CLIENT)
-	public int getBlockColor()
-	{
-		return 16777215;
-	}
-
-	@Override
-	@SideOnly(Side.CLIENT)
-	public int getRenderColor(IBlockState state)
-	{
-		return 16777215;
-	}
-
-	@Override
-	@SideOnly(Side.CLIENT)
-	public int colorMultiplier(IBlockAccess worldIn, BlockPos pos, int renderPass)
-	{
-		return 16777215;
-	}
+	//	@Override
+	//	@SideOnly(Side.CLIENT)
+	//	public int getBlockColor()
+	//	{
+	//		return 16777215;
+	//	}
+	//
+	//	@Override
+	//	@SideOnly(Side.CLIENT)
+	//	public int getRenderColor()
+	//	{
+	//		return 16777215;
+	//	}
+	//
+	//	@Override
+	//	@SideOnly(Side.CLIENT)
+	//	public int colorMultiplier(IBlockAccess worldIn, BlockPos pos, int renderPass)
+	//	{
+	//		return 16777215;
+	//	}
 
 	@Override
 	public Item getItemDropped(IBlockState state, Random par2Random, int par3)
@@ -76,9 +76,9 @@ public class BlockDLTLeaves extends BlockLeaves {
 	}
 
 	@Override
-	public boolean isOpaqueCube()
+	public boolean isOpaqueCube(IBlockState state)
 	{
-		return !fancyGraphics;
+		return !leavesFancy;
 	}
 
 	@Override
@@ -86,15 +86,15 @@ public class BlockDLTLeaves extends BlockLeaves {
 	public void setGraphicsLevel(boolean fancy)
 	{
 		isTransparent = fancy;
-		fancyGraphics = fancy;
+		leavesFancy = fancy;
 		iconIndex = fancy ? 0 : 1;
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public EnumWorldBlockLayer getBlockLayer()
+	public BlockRenderLayer getBlockLayer()
 	{
-		return isTransparent ? EnumWorldBlockLayer.CUTOUT_MIPPED : EnumWorldBlockLayer.SOLID;
+		return isTransparent ? BlockRenderLayer.CUTOUT_MIPPED : BlockRenderLayer.SOLID;
 	}
 
 	@Override
@@ -146,9 +146,9 @@ public class BlockDLTLeaves extends BlockLeaves {
 	}
 
 	@Override
-	protected BlockState createBlockState()
+	protected BlockStateContainer createBlockState()
 	{
-		return new BlockState(this, new IProperty[] {CHECK_DECAY, DECAYABLE});
+		return new BlockStateContainer(this, new IProperty[] {CHECK_DECAY, DECAYABLE});
 	}
 
 	@Override

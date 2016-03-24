@@ -13,15 +13,15 @@ package com.shinoow.abyssalcraft.common.structures.omothol;
 
 import java.util.Random;
 
+import net.minecraft.init.Blocks;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
+import net.minecraft.world.gen.feature.WorldGenerator;
+
 import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.common.blocks.BlockDarkEthaxiumBrick;
 import com.shinoow.abyssalcraft.common.blocks.BlockEthaxiumBrick.EnumBrickType;
 import com.shinoow.abyssalcraft.common.util.RitualUtil;
-
-import net.minecraft.init.Blocks;
-import net.minecraft.util.BlockPos;
-import net.minecraft.world.World;
-import net.minecraft.world.gen.feature.WorldGenerator;
 
 public class StructureJzaharTemple extends WorldGenerator {
 

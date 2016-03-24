@@ -20,7 +20,7 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.entity.IEntityLivingData;
 import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.EntityAIAttackOnCollide;
+import net.minecraft.entity.ai.EntityAIAttackMelee;
 import net.minecraft.entity.ai.EntityAIFleeSun;
 import net.minecraft.entity.ai.EntityAIHurtByTarget;
 import net.minecraft.entity.ai.EntityAILookIdle;
@@ -36,13 +36,20 @@ import net.minecraft.entity.monster.EntitySkeleton;
 import net.minecraft.entity.monster.EntityZombie;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
+import net.minecraft.init.SoundEvents;
+import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.network.datasync.DataParameter;
+import net.minecraft.network.datasync.DataSerializers;
+import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.potion.PotionEffect;
-import net.minecraft.util.BlockPos;
 import net.minecraft.util.DamageSource;
-import net.minecraft.util.MathHelper;
+import net.minecraft.util.EnumHand;
+import net.minecraft.util.SoundEvent;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeModContainer;
@@ -53,6 +60,8 @@ import com.shinoow.abyssalcraft.common.util.EntityUtil;
 
 public class EntityDepthsGhoul extends EntityMob implements ICoraliumEntity {
 
+	private static final DataParameter<Integer> TYPE = EntityDataManager.createKey(EntityDepthsGhoul.class, DataSerializers.VARINT);
+	private static final DataParameter<Byte> CHILD = EntityDataManager.createKey(EntityDepthsGhoul.class, DataSerializers.BYTE);
 	private static final UUID babySpeedBoostUUID = UUID.fromString("B9766B59-9566-4402-BC1F-2EE2A276D836");
 	private static final AttributeModifier babySpeedBoostModifier = new AttributeModifier(babySpeedBoostUUID, "Baby speed boost", 0.5D, 1);
 	private static final UUID attackDamageBoostUUID = UUID.fromString("648D7064-6A60-4F59-8ABE-C2C23A6DD7A9");
@@ -74,7 +83,7 @@ public class EntityDepthsGhoul extends EntityMob implements ICoraliumEntity {
 	public EntityDepthsGhoul(World par1World) {
 		super(par1World);
 		tasks.addTask(0, new EntityAISwimming(this));
-		tasks.addTask(2, new EntityAIAttackOnCollide(this, EntityPlayer.class, 1.0D, false));
+		tasks.addTask(2, new EntityAIAttackMelee(this, 1.0D, false));
 		tasks.addTask(3, new EntityAIFleeSun(this, 1.0D));
 		tasks.addTask(4, new EntityAIMoveTowardsRestriction(this, 1.0D));
 		tasks.addTask(5, new EntityAIWander(this, 1.0D));
@@ -94,16 +103,16 @@ public class EntityDepthsGhoul extends EntityMob implements ICoraliumEntity {
 	protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
 
-		getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(64.0D);
-		getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setBaseValue(0.3D);
-		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.23000000417232513D);
+		getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(64.0D);
+		getEntityAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue(0.3D);
+		getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.23000000417232513D);
 
 		if(AbyssalCraft.hardcoreMode){
-			getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(60.0D);
-			getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(10.0D);
+			getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(60.0D);
+			getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(10.0D);
 		} else {
-			getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(30.0D);
-			getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(5.0D);
+			getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(30.0D);
+			getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(5.0D);
 		}
 	}
 
@@ -134,23 +143,23 @@ public class EntityDepthsGhoul extends EntityMob implements ICoraliumEntity {
 	protected void entityInit()
 	{
 		super.entityInit();
-		getDataWatcher().addObject(12, Byte.valueOf((byte)0));
-		getDataWatcher().addObject(13, Byte.valueOf((byte)0));
+		dataWatcher.register(CHILD, Byte.valueOf((byte)0));
+		dataWatcher.register(TYPE, Integer.valueOf(0));
 	}
 
 	@Override
 	public boolean isChild()
 	{
-		return getDataWatcher().getWatchableObjectByte(12) == 1;
+		return dataWatcher.get(CHILD).byteValue() == 1;
 	}
 
 	public void setChild(boolean par1)
 	{
-		getDataWatcher().updateObject(12, Byte.valueOf((byte)(par1 ? 1 : 0)));
+		dataWatcher.set(CHILD, Byte.valueOf((byte)(par1 ? 1 : 0)));
 
 		if (worldObj != null && !worldObj.isRemote)
 		{
-			IAttributeInstance attributeinstance = getEntityAttribute(SharedMonsterAttributes.movementSpeed);
+			IAttributeInstance attributeinstance = getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED);
 			attributeinstance.removeModifier(babySpeedBoostModifier);
 
 			if (par1)
@@ -162,25 +171,25 @@ public class EntityDepthsGhoul extends EntityMob implements ICoraliumEntity {
 
 	public int getGhoulType()
 	{
-		return dataWatcher.getWatchableObjectByte(13);
+		return dataWatcher.get(TYPE);
 	}
 
 	public void setGhoulType(int par1)
 	{
-		dataWatcher.updateObject(13, Byte.valueOf((byte)par1));
+		dataWatcher.set(TYPE, Integer.valueOf(par1));
 	}
 
 	@Override
 	public void onLivingUpdate()
 	{
-		if (worldObj.isDaytime() && !worldObj.isRemote && !isChild() && worldObj.provider.getDimensionId() != AbyssalCraft.configDimId1)
+		if (worldObj.isDaytime() && !worldObj.isRemote && !isChild() && worldObj.provider.getDimension() != AbyssalCraft.configDimId1)
 		{
 			float var1 = getBrightness(1.0F);
 
 			if (var1 > 0.5F && rand.nextFloat() * 30.0F < (var1 - 0.4F) * 2.0F && worldObj.canSeeSky(new BlockPos(MathHelper.floor_double(posX), MathHelper.floor_double(posY), MathHelper.floor_double(posZ))))
 			{
 				boolean var2 = true;
-				ItemStack var3 = getEquipmentInSlot(4);
+				ItemStack var3 = getItemStackFromSlot(EntityEquipmentSlot.HEAD);
 
 				if (var3 != null)
 				{
@@ -191,7 +200,7 @@ public class EntityDepthsGhoul extends EntityMob implements ICoraliumEntity {
 						if (var3.getItemDamage() >= var3.getMaxDamage())
 						{
 							renderBrokenItemStack(var3);
-							setCurrentItemOrArmor(4, (ItemStack)null);
+							setItemStackToSlot(EntityEquipmentSlot.HEAD, null);
 						}
 					}
 
@@ -227,64 +236,65 @@ public class EntityDepthsGhoul extends EntityMob implements ICoraliumEntity {
 	{
 		if (super.attackEntityAsMob(par1Entity))
 			if (par1Entity instanceof EntityLivingBase)
-				if(worldObj.provider.getDimensionId() == AbyssalCraft.configDimId1 && !EntityUtil.isEntityCoralium((EntityLivingBase)par1Entity)
+				if(worldObj.provider.getDimension() == AbyssalCraft.configDimId1 && !EntityUtil.isEntityCoralium((EntityLivingBase)par1Entity)
 				|| AbyssalCraft.shouldInfect == true && !EntityUtil.isEntityCoralium((EntityLivingBase)par1Entity))
-					((EntityLivingBase)par1Entity).addPotionEffect(new PotionEffect(AbyssalCraft.Cplague.id, 100));
-		swingItem();
+					((EntityLivingBase)par1Entity).addPotionEffect(new PotionEffect(AbyssalCraft.Cplague, 100));
+		swingArm(EnumHand.MAIN_HAND);
+		swingArm(EnumHand.OFF_HAND);
 		boolean flag = super.attackEntityAsMob(par1Entity);
 
-		if (flag && getHeldItem() == null && isBurning() && rand.nextFloat() < worldObj.getDifficulty().getDifficultyId() * 0.3F)
+		if (flag && getHeldItemMainhand() == null && isBurning() && rand.nextFloat() < worldObj.getDifficulty().getDifficultyId() * 0.3F)
 			par1Entity.setFire(2 * worldObj.getDifficulty().getDifficultyId());
 
 		return flag;
 	}
 
 	@Override
-	protected String getLivingSound()
+	protected SoundEvent getAmbientSound()
 	{
 		switch (getGhoulType())
 		{
 		case 0:
-			return "abyssalcraft:ghoul.normal.idle";
+			return AbyssalCraft.ghoul_normal_ambient;
 		case 1:
-			return "abyssalcraft:ghoul.pete.idle";
+			return AbyssalCraft.ghoul_pete_ambient;
 		case 2:
-			return "abyssalcraft:ghoul.normal.idle"; //abyssalcraft:ghoul.wilson.idle
+			return AbyssalCraft.ghoul_normal_ambient; //abyssalcraft:ghoul.wilson.idle
 		case 3:
-			return "abyssalcraft:ghoul.normal.idle"; //abyssalcraft:ghoul.orange.idle
+			return AbyssalCraft.ghoul_normal_ambient; //abyssalcraft:ghoul.orange.idle
 		default:
-			return "abyssalcraft:ghoul.normal.idle";
+			return AbyssalCraft.ghoul_normal_ambient;
 		}
 	}
 
 	@Override
-	protected String getHurtSound()
+	protected SoundEvent getHurtSound()
 	{
 		switch (getGhoulType())
 		{
 		case 0:
-			return "mob.zombie.hurt"; //abyssalcraft:ghoul.normal.hit
+			return SoundEvents.entity_zombie_hurt; //abyssalcraft:ghoul.normal.hit
 		case 1:
-			return "abyssalcraft:ghoul.pete.hit";
+			return AbyssalCraft.ghoul_pete_hurt;
 		case 2:
-			return "mob.zombie.hurt"; //abyssalcraft:ghoul.wilson.hit
+			return SoundEvents.entity_zombie_hurt; //abyssalcraft:ghoul.wilson.hit
 		case 3:
-			return "mob.zombie.hurt"; //abyssalcraft:ghoul.orange.hit
+			return SoundEvents.entity_zombie_hurt; //abyssalcraft:ghoul.orange.hit
 		default:
-			return "mob.zombie.hurt";
+			return SoundEvents.entity_zombie_hurt;
 		}
 	}
 
 	@Override
-	protected String getDeathSound()
+	protected SoundEvent getDeathSound()
 	{
-		return "abyssalcraft:ghoul.death";
+		return AbyssalCraft.ghoul_death;
 	}
 
 	@Override
 	protected void playStepSound(BlockPos pos, Block par4)
 	{
-		playSound("mob.zombie.step", 0.15F, 1.0F);
+		playSound(SoundEvents.entity_zombie_step, 0.15F, 1.0F);
 	}
 
 	@Override
@@ -299,24 +309,24 @@ public class EntityDepthsGhoul extends EntityMob implements ICoraliumEntity {
 		return EnumCreatureAttribute.UNDEAD;
 	}
 
-	@Override
-	protected void addRandomDrop()
-	{
-		switch(getGhoulType()){
-		case 0:
-			dropItem(Item.getItemFromBlock(AbyssalCraft.DGhead),1);
-			break;
-		case 1:
-			dropItem(Item.getItemFromBlock(AbyssalCraft.Phead),1);
-			break;
-		case 2:
-			dropItem(Item.getItemFromBlock(AbyssalCraft.Whead),1);
-			break;
-		case 3:
-			dropItem(Item.getItemFromBlock(AbyssalCraft.Ohead),1);
-			break;
-		}
-	}
+	//	@Override
+	//	protected void addRandomDrop()
+	//	{
+	//		switch(getGhoulType()){
+	//		case 0:
+	//			dropItem(Item.getItemFromBlock(AbyssalCraft.DGhead),1);
+	//			break;
+	//		case 1:
+	//			dropItem(Item.getItemFromBlock(AbyssalCraft.Phead),1);
+	//			break;
+	//		case 2:
+	//			dropItem(Item.getItemFromBlock(AbyssalCraft.Whead),1);
+	//			break;
+	//		case 3:
+	//			dropItem(Item.getItemFromBlock(AbyssalCraft.Ohead),1);
+	//			break;
+	//		}
+	//	}
 
 	@Override
 	public void readEntityFromNBT(NBTTagCompound par1NBTTagCompound)
@@ -381,19 +391,19 @@ public class EntityDepthsGhoul extends EntityMob implements ICoraliumEntity {
 		setEquipmentBasedOnDifficulty(difficulty);
 		setEnchantmentBasedOnDifficulty(difficulty);
 
-		if (getEquipmentInSlot(4) == null)
+		if (getItemStackFromSlot(EntityEquipmentSlot.HEAD) == null)
 		{
 			Calendar calendar = worldObj.getCurrentDate();
 
 			if (calendar.get(2) + 1 == 10 && calendar.get(5) == 31 && rand.nextFloat() < 0.25F)
 			{
-				setCurrentItemOrArmor(4, new ItemStack(rand.nextFloat() < 0.1F ? Blocks.lit_pumpkin : Blocks.pumpkin));
-				equipmentDropChances[4] = 0.0F;
+				setItemStackToSlot(EntityEquipmentSlot.HEAD, new ItemStack(rand.nextFloat() < 0.1F ? Blocks.lit_pumpkin : Blocks.pumpkin));
+				inventoryArmorDropChances[4] = 0.0F;
 			}
 		}
 
-		IAttributeInstance attribute = getEntityAttribute(SharedMonsterAttributes.attackDamage);
-		IAttributeInstance attribute1 = getEntityAttribute(SharedMonsterAttributes.maxHealth);
+		IAttributeInstance attribute = getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE);
+		IAttributeInstance attribute1 = getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH);
 		Calendar calendar = worldObj.getCurrentDate();
 
 		switch(getGhoulType()){

@@ -18,29 +18,33 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.IEntityMultiPart;
 import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.boss.BossStatus;
 import net.minecraft.entity.boss.EntityDragonPart;
-import net.minecraft.entity.boss.IBossDisplayData;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.item.EntityXPOrb;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.BlockPos;
 import net.minecraft.util.DamageSource;
-import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.EnumParticleTypes;
-import net.minecraft.util.MathHelper;
-import net.minecraft.util.StatCollector;
-import net.minecraft.util.Vec3;
+import net.minecraft.util.SoundEvent;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.math.Vec3d;
+import net.minecraft.util.text.TextFormatting;
+import net.minecraft.util.text.translation.I18n;
+import net.minecraft.world.BossInfo;
+import net.minecraft.world.BossInfoServer;
 import net.minecraft.world.World;
+import net.minecraft.world.BossInfo.Color;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.api.entity.ICoraliumEntity;
 import com.shinoow.abyssalcraft.client.lib.ParticleEffects;
 import com.shinoow.abyssalcraft.common.util.SpecialTextUtil;
 
-public class EntityDragonBoss extends EntityMob implements IBossDisplayData, IEntityMultiPart, ICoraliumEntity
+public class EntityDragonBoss extends EntityMob implements IEntityMultiPart, ICoraliumEntity
 {
 
 	public double targetX;
@@ -85,6 +89,8 @@ public class EntityDragonBoss extends EntityMob implements IBossDisplayData, IEn
 	private Entity target;
 	public int deathTicks;
 
+	private final BossInfoServer bossInfo = (BossInfoServer)new BossInfoServer(getDisplayName(), BossInfo.Color.BLUE, BossInfo.Overlay.PROGRESS).setDarkenSky(true);
+
 	public EntityDragonMinion healingcircle;
 
 	public EntityDragonBoss(World par1World) {
@@ -100,15 +106,15 @@ public class EntityDragonBoss extends EntityMob implements IBossDisplayData, IEn
 	@Override
 	public String getName()
 	{
-		return EnumChatFormatting.AQUA + StatCollector.translateToLocal("entity.abyssalcraft.dragonboss.name");
+		return TextFormatting.AQUA + super.getName();
 	}
 
 	@Override
 	protected void applyEntityAttributes()
 	{
 		super.applyEntityAttributes();
-		if(AbyssalCraft.hardcoreMode) getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(800.0D);
-		else getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(400.0D);
+		if(AbyssalCraft.hardcoreMode) getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(800.0D);
+		else getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(400.0D);
 	}
 
 	@Override
@@ -145,17 +151,51 @@ public class EntityDragonBoss extends EntityMob implements IBossDisplayData, IEn
 	@Override
 	public void onDeath(DamageSource par1DamageSource)
 	{
+		bossInfo.setPercent(getHealth() / getMaxHealth());
 		if (par1DamageSource.getEntity() instanceof EntityPlayer)
 		{
 			EntityPlayer entityplayer = (EntityPlayer)par1DamageSource.getEntity();
 			entityplayer.addStat(AbyssalCraft.killAsorah, 1);
 		}
 		if(worldObj.isRemote){
-			SpecialTextUtil.OblivionaireGroup(worldObj, StatCollector.translateToLocal("message.asorah.death.1"));
-			SpecialTextUtil.OblivionaireGroup(worldObj, StatCollector.translateToLocal("message.asorah.death.2"));
-			SpecialTextUtil.OblivionaireGroup(worldObj, StatCollector.translateToLocal("message.asorah.death.3"));
+			SpecialTextUtil.OblivionaireGroup(worldObj, I18n.translateToLocal("message.asorah.death.1"));
+			SpecialTextUtil.OblivionaireGroup(worldObj, I18n.translateToLocal("message.asorah.death.2"));
+			SpecialTextUtil.OblivionaireGroup(worldObj, I18n.translateToLocal("message.asorah.death.3"));
 		}
 		super.onDeath(par1DamageSource);
+	}
+
+	@Override
+	protected void updateAITasks()
+	{
+		super.updateAITasks();
+		bossInfo.setPercent(getHealth() / getMaxHealth());
+		if(getHealth() < getMaxHealth() * 0.75 && getHealth() > getMaxHealth() / 2 && bossInfo.getColor() != BossInfo.Color.GREEN)
+			bossInfo.setColor(Color.GREEN);
+		if(getHealth() < getMaxHealth() / 2 && getHealth() > getMaxHealth() / 4 && bossInfo.getColor() != BossInfo.Color.YELLOW)
+			bossInfo.setColor(Color.YELLOW);
+		if(getHealth() < getMaxHealth() / 4 && getHealth() > 0 && bossInfo.getColor() != BossInfo.Color.RED)
+			bossInfo.setColor(Color.RED);
+	}
+
+	/**
+	 * Makes this boss Entity visible to the given player. Has no effect if this Entity is not a boss.
+	 */
+	@Override
+	public void setBossVisibleTo(EntityPlayerMP player)
+	{
+		super.setBossVisibleTo(player);
+		bossInfo.addPlayer(player);
+	}
+
+	/**
+	 * Makes this boss Entity non-visible to the given player. Has no effect if this Entity is not a boss.
+	 */
+	@Override
+	public void setBossNonVisibleTo(EntityPlayerMP player)
+	{
+		super.setBossNonVisibleTo(player);
+		bossInfo.removePlayer(player);
 	}
 
 	@Override
@@ -167,12 +207,12 @@ public class EntityDragonBoss extends EntityMob implements IBossDisplayData, IEn
 
 		if (worldObj.isRemote)
 		{
-			BossStatus.setBossStatus(this, true);
+			//			BossStatus.setBossStatus(this, true);
 			f = MathHelper.cos(animTime * (float)Math.PI * 2.0F);
 			f1 = MathHelper.cos(prevAnimTime * (float)Math.PI * 2.0F);
 
 			if (f1 <= -0.3F && f >= -0.3F)
-				worldObj.playSound(posX, posY, posZ, "mob.enderdragon.wings", 5.0F, 0.8F + rand.nextFloat() * 0.3F, false);
+				worldObj.playSound(posX, posY, posZ, SoundEvents.entity_enderdragon_flap, getSoundCategory(), 5.0F, 0.8F + rand.nextFloat() * 0.3F, false);
 		}
 
 		prevAnimTime = animTime;
@@ -219,12 +259,12 @@ public class EntityDragonBoss extends EntityMob implements IBossDisplayData, IEn
 			{
 				if (newPosRotationIncrements > 0)
 				{
-					d3 = posX + (newPosX - posX) / newPosRotationIncrements;
-					d0 = posY + (newPosY - posY) / newPosRotationIncrements;
-					d1 = posZ + (newPosZ - posZ) / newPosRotationIncrements;
-					d2 = MathHelper.wrapAngleTo180_double(newRotationYaw - rotationYaw);
+					d3 = posX + (interpTargetX - posX) / newPosRotationIncrements;
+					d0 = posY + (interpTargetY - posY) / newPosRotationIncrements;
+					d1 = posZ + (interpTargetZ - posZ) / newPosRotationIncrements;
+					d2 = MathHelper.wrapAngleTo180_double(interpTargetYaw - rotationYaw);
 					rotationYaw = (float)(rotationYaw + d2 / newPosRotationIncrements);
-					rotationPitch = (float)(rotationPitch + (newRotationPitch - rotationPitch) / newPosRotationIncrements);
+					rotationPitch = (float)(rotationPitch + (newPosX - rotationPitch) / newPosRotationIncrements);
 					--newPosRotationIncrements;
 					setPosition(d3, d0, d1);
 					setRotation(rotationYaw, rotationPitch);
@@ -284,8 +324,8 @@ public class EntityDragonBoss extends EntityMob implements IBossDisplayData, IEn
 				if (d9 < -50.0D)
 					d9 = -50.0D;
 
-				Vec3 vec3 = new Vec3(targetX - posX, targetY - posY, targetZ - posZ).normalize();
-				Vec3 vec31 = new Vec3(MathHelper.sin(rotationYaw * (float)Math.PI / 180.0F), motionY, -MathHelper.cos(rotationYaw * (float)Math.PI / 180.0F)).normalize();
+				Vec3d vec3 = new Vec3d(targetX - posX, targetY - posY, targetZ - posZ).normalize();
+				Vec3d vec31 = new Vec3d(MathHelper.sin(rotationYaw * (float)Math.PI / 180.0F), motionY, -MathHelper.cos(rotationYaw * (float)Math.PI / 180.0F)).normalize();
 				float f4 = (float)(vec31.dotProduct(vec3) + 0.5D) / 1.5F;
 
 				if (f4 < 0.0F)
@@ -308,7 +348,7 @@ public class EntityDragonBoss extends EntityMob implements IBossDisplayData, IEn
 				moveEntity(motionX, motionY, motionZ);
 
 
-				Vec3 vec32 = new Vec3(motionX, motionY, motionZ).normalize();
+				Vec3d vec32 = new Vec3d(motionX, motionY, motionZ).normalize();
 				float f8 = (float)(vec32.dotProduct(vec31) + 1.0D) / 2.0F;
 				f8 = 0.8F + 0.15F * f8;
 				motionX *= f8;
@@ -416,6 +456,11 @@ public class EntityDragonBoss extends EntityMob implements IBossDisplayData, IEn
 
 			healingcircle = entitydragonminion;
 		}
+	}
+
+	@Override
+	public boolean isNonBoss(){
+		return false;
 	}
 
 	private void collideWithEntities(List<?> par1List)
@@ -590,15 +635,15 @@ public class EntityDragonBoss extends EntityMob implements IBossDisplayData, IEn
 	}
 
 	@Override
-	protected String getLivingSound()
+	protected SoundEvent getAmbientSound()
 	{
-		return "mob.enderdragon.growl";
+		return SoundEvents.entity_enderdragon_ambient;
 	}
 
 	@Override
-	protected String getHurtSound()
+	protected SoundEvent getHurtSound()
 	{
-		return "mob.enderdragon.hit";
+		return SoundEvents.entity_enderdragon_hurt;
 	}
 
 	@Override

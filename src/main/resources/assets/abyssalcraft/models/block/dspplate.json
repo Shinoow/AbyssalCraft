@@ -1,5 +1,5 @@
 {
-	"parent": "block/pressure_plate_inventory",
+	"parent": "block/pressure_plate_up",
 	"textures": {
 		"texture": "abyssalcraft:blocks/ds"
 	}

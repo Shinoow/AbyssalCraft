@@ -17,8 +17,8 @@ import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.EnumChatFormatting;
-import net.minecraft.util.StatCollector;
+import net.minecraft.util.text.TextFormatting;
+import net.minecraft.util.text.translation.I18n;
 
 public class ItemODB extends ItemBlock {
 
@@ -31,12 +31,12 @@ public class ItemODB extends ItemBlock {
 	@Override
 	public void addInformation(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, List par3List, boolean par4)
 	{
-		par3List.add(StatCollector.translateToLocal("tooltip.odb"));
+		par3List.add(I18n.translateToLocal("tooltip.odb"));
 	}
 
 	@Override
 	public String getItemStackDisplayName(ItemStack par1ItemStack) {
 
-		return EnumChatFormatting.DARK_RED + StatCollector.translateToLocal(this.getUnlocalizedName() + ".name");
+		return TextFormatting.DARK_RED + super.getItemStackDisplayName(par1ItemStack);
 	}
 }

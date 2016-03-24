@@ -14,22 +14,24 @@ package com.shinoow.abyssalcraft.common.handlers;
 import java.util.Random;
 
 import net.minecraft.block.BlockStairs;
+import net.minecraft.enchantment.Enchantment;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
+import net.minecraft.init.MobEffects;
+import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
-import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
-import net.minecraft.util.BlockPos;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EntityDamageSource;
 import net.minecraft.util.EnumParticleTypes;
-import net.minecraft.util.StatCollector;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.translation.I18n;
 import net.minecraft.world.WorldServer;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.chunk.storage.ExtendedBlockStorage;
@@ -73,8 +75,8 @@ public class AbyssalCraftEventHooks {
 				for (int x = 0; x < 16; ++x)
 					for (int y = 0; y < 16; ++y)
 						for (int z = 0; z < 16; ++z)
-							if(chunk.getBiome(new BlockPos(x, y, z), event.world.getWorldChunkManager()) == AbyssalCraft.DarklandsMountains)
-								if (storage.getBlockByExtId(x, y, z) == Blocks.stone)
+							if(chunk.getBiome(new BlockPos(x, y, z), event.world.getBiomeProvider()) == AbyssalCraft.DarklandsMountains)
+								if (storage.get(x, y, z).getBlock() == Blocks.stone)
 									storage.set(x, y, z, AbyssalCraft.Darkstone.getDefaultState());
 	}
 
@@ -146,16 +148,16 @@ public class AbyssalCraftEventHooks {
 		if(event.source instanceof EntityDamageSource){
 			Entity entity = ((EntityDamageSource)event.source).getEntity();
 			if(entity instanceof EntityLivingBase){
-				ItemStack item = ((EntityLivingBase)entity).getHeldItem();
+				ItemStack item = ((EntityLivingBase)entity).getHeldItemMainhand();
 				if(item != null && item.hasTagCompound()){
 					NBTTagList enchTag = item.getEnchantmentTagList();
 					for(int i = 0; i < enchTag.tagCount(); i++)
-						if(enchTag.getCompoundTagAt(i).getInteger("id") == AbyssalCraft.coraliumE.effectId)
+						if(enchTag.getCompoundTagAt(i).getInteger("id") == Enchantment.getEnchantmentID(AbyssalCraft.coraliumE))
 							if(EntityUtil.isEntityCoralium(event.entityLiving)){}
-							else event.entityLiving.addPotionEffect(new PotionEffect(AbyssalCraft.Cplague.id, 100));
-						else if(enchTag.getCompoundTagAt(i).getInteger("id") == AbyssalCraft.dreadE.effectId)
+							else event.entityLiving.addPotionEffect(new PotionEffect(AbyssalCraft.Cplague, 100));
+						else if(enchTag.getCompoundTagAt(i).getInteger("id") == Enchantment.getEnchantmentID(AbyssalCraft.dreadE))
 							if(event.entityLiving instanceof IDreadEntity){}
-							else event.entityLiving.addPotionEffect(new PotionEffect(AbyssalCraft.Dplague.id, 100));
+							else event.entityLiving.addPotionEffect(new PotionEffect(AbyssalCraft.Dplague, 100));
 				}
 			}
 		}
@@ -163,11 +165,11 @@ public class AbyssalCraftEventHooks {
 
 	@SubscribeEvent
 	public void ironWall(LivingHurtEvent event){
-		ItemStack item = event.entityLiving.getEquipmentInSlot(3);
+		ItemStack item = event.entityLiving.getItemStackFromSlot(EntityEquipmentSlot.CHEST);
 		if(item != null && item.hasTagCompound()){
 			NBTTagList enchTag = item.getEnchantmentTagList();
 			for(int i = 0; i < enchTag.tagCount(); i++)
-				if(enchTag.getCompoundTagAt(i).getInteger("id") == AbyssalCraft.ironWall.effectId)
+				if(enchTag.getCompoundTagAt(i).getInteger("id") == Enchantment.getEnchantmentID(AbyssalCraft.ironWall))
 					event.entityLiving.setInWeb();
 		}
 	}
@@ -178,9 +180,9 @@ public class AbyssalCraftEventHooks {
 			WorldServer worldServer = (WorldServer)event.entityLiving.worldObj;
 			EntityPlayerMP player = (EntityPlayerMP)event.entityLiving;
 			if(player.dimension == AbyssalCraft.configDimId3 && player.posY <= 0){
-				player.addPotionEffect(new PotionEffect(Potion.resistance.getId(), 80, 255));
-				player.addPotionEffect(new PotionEffect(Potion.blindness.getId(), 20));
-				player.mcServer.getConfigurationManager().transferPlayerToDimension(player, AbyssalCraft.configDimId4, new TeleporterDarkRealm(worldServer));
+				player.addPotionEffect(new PotionEffect(MobEffects.resistance, 80, 255));
+				player.addPotionEffect(new PotionEffect(MobEffects.blindness, 20));
+				player.mcServer.getPlayerList().transferPlayerToDimension(player, AbyssalCraft.configDimId4, new TeleporterDarkRealm(worldServer));
 				player.addStat(AbyssalCraft.enterDarkRealm, 1);
 			}
 		}
@@ -195,7 +197,7 @@ public class AbyssalCraftEventHooks {
 			if(event.entityLiving instanceof EntityPlayer){
 				EntityPlayer player = (EntityPlayer)event.entityLiving;
 				Random rand = new Random();
-				ItemStack helmet = player.getEquipmentInSlot(4);
+				ItemStack helmet = player.getItemStackFromSlot(EntityEquipmentSlot.HEAD);
 				if(player.worldObj.getBiomeGenForCoords(new BlockPos(player.posX, player.posY, player.posZ)) == AbyssalCraft.Darklands ||
 						player.worldObj.getBiomeGenForCoords(new BlockPos(player.posX, player.posY, player.posZ)) == AbyssalCraft.DarklandsPlains ||
 						player.worldObj.getBiomeGenForCoords(new BlockPos(player.posX, player.posY, player.posZ)) == AbyssalCraft.DarklandsMountains ||
@@ -207,9 +209,9 @@ public class AbyssalCraftEventHooks {
 						&& helmet.getItem() != AbyssalCraft.Depthshelmet && helmet.getItem() != AbyssalCraft.dreadiumhelmet
 						&& helmet.getItem() != AbyssalCraft.dreadiumShelmet && helmet.getItem() != AbyssalCraft.ethHelmet)
 							if(!player.capabilities.isCreativeMode)
-								player.addPotionEffect(new PotionEffect(Potion.blindness.id, 100));
-				if(player.getActivePotionEffect(Potion.blindness) != null && player.getActivePotionEffect(Potion.blindness).getDuration() == 0)
-					player.removePotionEffect(Potion.blindness.id);
+								player.addPotionEffect(new PotionEffect(MobEffects.blindness, 100));
+				if(player.getActivePotionEffect(MobEffects.blindness) != null && player.getActivePotionEffect(MobEffects.blindness).getDuration() == 0)
+					player.removePotionEffect(MobEffects.blindness);
 			}
 	}
 
@@ -324,8 +326,8 @@ public class AbyssalCraftEventHooks {
 		if(!(event.entityLiving instanceof EntityJzahar))
 			if(event.entityLiving.dimension == AbyssalCraft.configDimId3){
 				event.entityLiving.attackEntityFrom(DamageSource.fall, event.attackDamage);
-				event.entityLiving.addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, 200, 1));
-				event.entityLiving.addPotionEffect(new PotionEffect(Potion.weakness.id, 200, 1));
+				event.entityLiving.addPotionEffect(new PotionEffect(MobEffects.moveSlowdown, 200, 1));
+				event.entityLiving.addPotionEffect(new PotionEffect(MobEffects.weakness, 200, 1));
 				event.setCanceled(true);
 			}
 	}
@@ -380,10 +382,10 @@ public class AbyssalCraftEventHooks {
 			event.entityPlayer.addStat(AbyssalCraft.ritualSummon, 1);
 			if(event.ritual.getUnlocalizedName().substring(10).equals("summonSacthoth"))
 				if(event.world.isRemote)
-					SpecialTextUtil.SacthothGroup(event.world, StatCollector.translateToLocal("message.sacthoth.spawn.1"));
+					SpecialTextUtil.SacthothGroup(event.world, I18n.translateToLocal("message.sacthoth.spawn.1"));
 			if(event.ritual.getUnlocalizedName().substring(10).equals("summonAsorah")){
 				if(event.world.isRemote)
-					SpecialTextUtil.AsorahGroup(event.world, StatCollector.translateToLocal("message.asorah.spawn"));
+					SpecialTextUtil.AsorahGroup(event.world, I18n.translateToLocal("message.asorah.spawn"));
 				event.entityPlayer.addStat(AbyssalCraft.summonAsorah, 1);
 			}
 		}

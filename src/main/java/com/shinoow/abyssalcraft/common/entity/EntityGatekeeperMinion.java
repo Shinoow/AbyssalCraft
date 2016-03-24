@@ -19,7 +19,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.EntityAIAttackOnCollide;
+import net.minecraft.entity.ai.EntityAIAttackMelee;
 import net.minecraft.entity.ai.EntityAIHurtByTarget;
 import net.minecraft.entity.ai.EntityAILookIdle;
 import net.minecraft.entity.ai.EntityAIMoveTowardsRestriction;
@@ -29,9 +29,12 @@ import net.minecraft.entity.ai.EntityAIWander;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.BlockPos;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.EnumHand;
+import net.minecraft.util.SoundEvent;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
@@ -44,7 +47,7 @@ public class EntityGatekeeperMinion extends EntityMob implements ICoraliumEntity
 	public EntityGatekeeperMinion(World par1World) {
 		super(par1World);
 		tasks.addTask(0, new EntityAISwimming(this));
-		tasks.addTask(2, new EntityAIAttackOnCollide(this, EntityLivingBase.class, 0.35D, false));
+		tasks.addTask(2, new EntityAIAttackMelee(this, 0.35D, false));
 		tasks.addTask(3, new EntityAIMoveTowardsRestriction(this, 0.35D));
 		tasks.addTask(4, new EntityAIWander(this, 0.35D));
 		tasks.addTask(7, new EntityAILookIdle(this));
@@ -61,15 +64,15 @@ public class EntityGatekeeperMinion extends EntityMob implements ICoraliumEntity
 	{
 		super.applyEntityAttributes();
 
-		getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(64.0D);
-		getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setBaseValue(0.2D);
+		getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(64.0D);
+		getEntityAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue(0.2D);
 
 		if(AbyssalCraft.hardcoreMode){
-			getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(500.0D);
-			getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(36.0D);
+			getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(500.0D);
+			getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(36.0D);
 		} else {
-			getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(250.0D);
-			getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(18.0D);
+			getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(250.0D);
+			getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(18.0D);
 		}
 	}
 
@@ -81,7 +84,8 @@ public class EntityGatekeeperMinion extends EntityMob implements ICoraliumEntity
 	@Override
 	public boolean attackEntityAsMob(Entity par1Entity)
 	{
-		swingItem();
+		swingArm(EnumHand.MAIN_HAND);
+		swingArm(EnumHand.OFF_HAND);
 		boolean flag = super.attackEntityAsMob(par1Entity);
 
 		return flag;
@@ -94,15 +98,15 @@ public class EntityGatekeeperMinion extends EntityMob implements ICoraliumEntity
 	}
 
 	@Override
-	protected String getDeathSound()
+	protected SoundEvent getDeathSound()
 	{
-		return "abyssalcraft:shadow.death";
+		return AbyssalCraft.shadow_death;
 	}
 
 	@Override
 	protected void playStepSound(BlockPos pos, Block par4)
 	{
-		playSound("mob.spider.step", 0.15F, 1.0F);
+		playSound(SoundEvents.entity_spider_step, 0.15F, 1.0F);
 	}
 
 	@Override
@@ -119,7 +123,7 @@ public class EntityGatekeeperMinion extends EntityMob implements ICoraliumEntity
 					while(iter.hasNext())
 						iter.next().enrage(false, enemy);
 				}
-			worldObj.playSoundAtEntity(this, "abyssalcraft:remnant.scream", 3F, 1F);
+			playSound(AbyssalCraft.remnant_scream, 3F, 1F);
 		}
 		return super.attackEntityFrom(par1DamageSource, par2);
 	}

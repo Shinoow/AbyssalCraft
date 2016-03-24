@@ -39,7 +39,7 @@ public class GenLayerBiomesDL extends GenLayer {
 			for (int dx=0; dx<width; dx++)
 			{
 				initChunkSeed(dx+x, dz+z);
-				dest[dx+dz*width] = allowedBiomes[nextInt(allowedBiomes.length)].biomeID;
+				dest[dx+dz*width] = BiomeGenBase.getIdForBiome(allowedBiomes[nextInt(allowedBiomes.length)]);
 			}
 		return dest;
 	}

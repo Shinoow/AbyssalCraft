@@ -19,16 +19,16 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.ITickable;
+import net.minecraft.util.math.BlockPos;
 
+import com.shinoow.abyssalcraft.api.energy.EnergyEnum.AmplifierType;
 import com.shinoow.abyssalcraft.api.energy.EnergyEnum.DeityType;
 import com.shinoow.abyssalcraft.api.energy.IEnergyAmplifier;
 import com.shinoow.abyssalcraft.api.energy.IEnergyContainer;
 import com.shinoow.abyssalcraft.api.energy.IEnergyManipulator;
 import com.shinoow.abyssalcraft.api.energy.IEnergyTransporter;
-import com.shinoow.abyssalcraft.api.energy.EnergyEnum.AmplifierType;
 import com.shinoow.abyssalcraft.api.energy.disruption.DisruptionHandler;
 import com.shinoow.abyssalcraft.common.util.EntityUtil;
 
@@ -152,8 +152,8 @@ public class TileStatueDirectional extends TEDirectional implements IEnergyManip
 	@Override
 	public void disrupt(boolean factor) {
 		if(factor){
-			worldObj.addWeatherEffect(new EntityLightningBolt(worldObj, pos.getX(), pos.getY() + 1, pos.getZ()));
-			DisruptionHandler.instance().generateDisruption(getDeity(), worldObj, pos, worldObj.getEntitiesWithinAABB(EntityPlayer.class, worldObj.getBlockState(pos).getBlock().getCollisionBoundingBox(worldObj, pos, worldObj.getBlockState(pos)).expand(16, 16, 16)));
+			worldObj.addWeatherEffect(new EntityLightningBolt(worldObj, pos.getX(), pos.getY() + 1, pos.getZ(), false));
+			DisruptionHandler.instance().generateDisruption(getDeity(), worldObj, pos, worldObj.getEntitiesWithinAABB(EntityPlayer.class, worldObj.getBlockState(pos).getBlock().getBoundingBox(worldObj.getBlockState(pos), worldObj, pos).expand(16, 16, 16)));
 		}
 	}
 
@@ -175,12 +175,12 @@ public class TileStatueDirectional extends TEDirectional implements IEnergyManip
 				!(worldObj.getTileEntity(new BlockPos(xp, yp - 1, zp)) instanceof IEnergyManipulator) &&
 				!(worldObj.getTileEntity(new BlockPos(xp, yp + 2, zp)) instanceof IEnergyManipulator) &&
 				!(worldObj.getTileEntity(new BlockPos(xp, yp - 2, zp)) instanceof IEnergyManipulator)){
-			if(worldObj.getBlockState(pos).getBlock().getCollisionBoundingBox(worldObj, pos, worldObj.getBlockState(pos)) != null){
-				List<EntityPlayer> players = worldObj.getEntitiesWithinAABB(EntityPlayer.class, worldObj.getBlockState(pos).getBlock().getCollisionBoundingBox(worldObj, pos, worldObj.getBlockState(pos)).expand(range, range, range));
+			if(worldObj.getBlockState(pos).getBlock().getBoundingBox(worldObj.getBlockState(pos), worldObj, pos) != null){
+				List<EntityPlayer> players = worldObj.getEntitiesWithinAABB(EntityPlayer.class, worldObj.getBlockState(pos).getBlock().getBoundingBox(worldObj.getBlockState(pos), worldObj, pos).expand(range, range, range));
 
 				for(EntityPlayer player : players)
 					if(EntityUtil.hasNecronomicon(player)){
-						ItemStack item = player.getCurrentEquippedItem();
+						ItemStack item = player.getActiveItemStack();
 						if(item != null && item.getItem() instanceof IEnergyTransporter){
 							timer++;
 							if(timer >= (int)(timerMax / getAmplifier(AmplifierType.DURATION))){
@@ -291,7 +291,7 @@ public class TileStatueDirectional extends TEDirectional implements IEnergyManip
 						}
 					}
 		}
-		disrupt(worldObj.rand.nextInt(20 * (isActive() ? 40 : 200) * (worldObj.getClosestPlayer(xp, yp, zp, range * 2) != null ? 1 : 10)) == 0);
+		disrupt(worldObj.rand.nextInt(20 * (isActive() ? 40 : 200) * (worldObj.func_184137_a(xp, yp, zp, range * 2, true) != null ? 1 : 10)) == 0);
 		clearData();
 	}
 }

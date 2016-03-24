@@ -37,8 +37,8 @@ public class RenderAbyssalZombie extends RenderBiped<EntityAbyssalZombie> {
 			@Override
 			protected void initArmor()
 			{
-				field_177189_c = new ModelBiped(0.5F);
-				field_177186_d = new ModelBiped(1.0F);
+				modelLeggings = new ModelBiped(0.5F);
+				modelArmor = new ModelBiped(1.0F);
 			}
 		});
 	}

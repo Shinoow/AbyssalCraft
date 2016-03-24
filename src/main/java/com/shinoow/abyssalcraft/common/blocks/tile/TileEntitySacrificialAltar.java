@@ -14,10 +14,6 @@ package com.shinoow.abyssalcraft.common.blocks.tile;
 import java.util.List;
 import java.util.Random;
 
-import com.shinoow.abyssalcraft.api.energy.IEnergyContainer;
-import com.shinoow.abyssalcraft.api.energy.IEnergyTransporter;
-import com.shinoow.abyssalcraft.common.util.ISingletonInventory;
-
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.entity.player.EntityPlayer;
@@ -25,10 +21,14 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.Packet;
-import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
+import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.ITickable;
+
+import com.shinoow.abyssalcraft.api.energy.IEnergyContainer;
+import com.shinoow.abyssalcraft.api.energy.IEnergyTransporter;
+import com.shinoow.abyssalcraft.common.util.ISingletonInventory;
 
 public class TileEntitySacrificialAltar extends TileEntity implements IEnergyContainer, ISingletonInventory, ITickable {
 
@@ -71,11 +71,11 @@ public class TileEntitySacrificialAltar extends TileEntity implements IEnergyCon
 	public Packet getDescriptionPacket() {
 		NBTTagCompound nbtTag = new NBTTagCompound();
 		writeToNBT(nbtTag);
-		return new S35PacketUpdateTileEntity(pos, 1, nbtTag);
+		return new SPacketUpdateTileEntity(pos, 1, nbtTag);
 	}
 
 	@Override
-	public void onDataPacket(NetworkManager net, S35PacketUpdateTileEntity packet)
+	public void onDataPacket(NetworkManager net, SPacketUpdateTileEntity packet)
 	{
 		readFromNBT(packet.getNbtCompound());
 	}
@@ -83,10 +83,9 @@ public class TileEntitySacrificialAltar extends TileEntity implements IEnergyCon
 	@Override
 	public void update()
 	{
-		if(isDirty){
-			worldObj.markBlockForUpdate(pos);
+		if(isDirty)
+			//			worldObj.markBlockForUpdate(pos); //TODO: find replacement
 			isDirty = false;
-		}
 
 		if(rot == 360)
 			rot = 0;
@@ -104,8 +103,8 @@ public class TileEntitySacrificialAltar extends TileEntity implements IEnergyCon
 				}
 
 		if(entity == null)
-			if(worldObj.getBlockState(pos).getBlock().getCollisionBoundingBox(worldObj, pos, worldObj.getBlockState(pos)) != null){
-				List<EntityLivingBase> mobs = worldObj.getEntitiesWithinAABB(EntityLivingBase.class, worldObj.getBlockState(pos).getBlock().getCollisionBoundingBox(worldObj, pos, worldObj.getBlockState(pos)).expand(8, 3, 8));
+			if(worldObj.getBlockState(pos).getBlock().getBoundingBox(worldObj.getBlockState(pos), worldObj, pos) != null){
+				List<EntityLivingBase> mobs = worldObj.getEntitiesWithinAABB(EntityLivingBase.class, worldObj.getBlockState(pos).getBlock().getBoundingBox(worldObj.getBlockState(pos), worldObj, pos).expand(8, 3, 8));
 
 				for(EntityLivingBase mob : mobs)
 					if(!(mob instanceof EntityPlayer))

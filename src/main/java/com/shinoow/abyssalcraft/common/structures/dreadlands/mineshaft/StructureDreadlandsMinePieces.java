@@ -11,30 +11,26 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.common.structures.dreadlands.mineshaft;
 
-import static net.minecraftforge.common.ChestGenHooks.MINESHAFT_CORRIDOR;
-
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
 
-import net.minecraft.block.Block;
+import net.minecraft.block.BlockRail;
+import net.minecraft.block.BlockRailBase;
 import net.minecraft.block.material.Material;
-import net.minecraft.entity.item.EntityMinecartChest;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
-import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.WeightedRandomChestContent;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.structure.MapGenStructureIO;
 import net.minecraft.world.gen.structure.StructureBoundingBox;
 import net.minecraft.world.gen.structure.StructureComponent;
-import net.minecraftforge.common.ChestGenHooks;
 
 import com.google.common.collect.Lists;
 import com.shinoow.abyssalcraft.AbyssalCraft;
@@ -42,7 +38,7 @@ import com.shinoow.abyssalcraft.AbyssalCraft;
 public class StructureDreadlandsMinePieces
 {
 	/** List of contents that can generate in Mineshafts. */
-	public static final List<WeightedRandomChestContent> mineshaftChestContents = Lists.newArrayList(new WeightedRandomChestContent[] {new WeightedRandomChestContent(AbyssalCraft.abyingot, 0, 1, 5, 10), new WeightedRandomChestContent(Items.diamond, 0, 1, 3, 5), new WeightedRandomChestContent(AbyssalCraft.Coralium, 0, 4, 9, 5), new WeightedRandomChestContent(AbyssalCraft.shadowshard, 0, 4, 9, 5), new WeightedRandomChestContent(Items.diamond, 0, 1, 2, 3), new WeightedRandomChestContent(AbyssalCraft.Dreadshard, 0, 3, 8, 10), new WeightedRandomChestContent(Items.bread, 0, 1, 3, 15), new WeightedRandomChestContent(AbyssalCraft.Corpickaxe, 0, 1, 1, 1), new WeightedRandomChestContent(Item.getItemFromBlock(Blocks.rail), 0, 4, 8, 1), new WeightedRandomChestContent(AbyssalCraft.abychunk, 0, 2, 4, 10), new WeightedRandomChestContent(AbyssalCraft.dreadchunk, 0, 2, 4, 10), new WeightedRandomChestContent(AbyssalCraft.Corb, 0, 1, 1, 3), new WeightedRandomChestContent(AbyssalCraft.OC, 0, 1, 1, 1), new WeightedRandomChestContent(new ItemStack(AbyssalCraft.crystal, 1, 24), 1, 5, 8)});
+	public static final List<WeightedRandomChestContent> mineshaftChestContents = Lists.newArrayList(new WeightedRandomChestContent[] {new WeightedRandomChestContent(AbyssalCraft.abyingot, 0, 1, 5, 10), new WeightedRandomChestContent(Items.diamond, 0, 1, 3, 5), new WeightedRandomChestContent(AbyssalCraft.Coralium, 0, 4, 9, 5), new WeightedRandomChestContent(AbyssalCraft.shadowshard, 0, 4, 9, 5), new WeightedRandomChestContent(Items.diamond, 0, 1, 2, 3), new WeightedRandomChestContent(AbyssalCraft.Dreadshard, 0, 3, 8, 10), new WeightedRandomChestContent(Items.bread, 0, 1, 3, 15), new WeightedRandomChestContent(AbyssalCraft.Corpickaxe, 0, 1, 1, 1), new WeightedRandomChestContent(Item.getItemFromBlock(Blocks.rail), 0, 4, 8, 1), new WeightedRandomChestContent(AbyssalCraft.abychunk, 0, 2, 4, 10), new WeightedRandomChestContent(AbyssalCraft.dreadchunk, 0, 2, 4, 10), new WeightedRandomChestContent(AbyssalCraft.Corb, 0, 1, 1, 3), new WeightedRandomChestContent(AbyssalCraft.OC, 0, 1, 1, 1), new WeightedRandomChestContent(AbyssalCraft.crystal, 24, 1, 5, 8)});
 
 	public static void registerStructurePieces()
 	{
@@ -127,11 +123,11 @@ public class StructureDreadlandsMinePieces
 		public Corridor(int par1, Random par2Random, StructureBoundingBox par3StructureBoundingBox, EnumFacing par4)
 		{
 			super(par1);
-			coordBaseMode = par4;
+			func_186164_a(par4);
 			boundingBox = par3StructureBoundingBox;
 			hasRails = par2Random.nextInt(3) == 0;
 
-			if (coordBaseMode != EnumFacing.NORTH && coordBaseMode != EnumFacing.SOUTH)
+			if (func_186165_e() != EnumFacing.NORTH && func_186165_e() != EnumFacing.SOUTH)
 				sectionCount = par3StructureBoundingBox.getXSize() / 5;
 			else
 				sectionCount = par3StructureBoundingBox.getZSize() / 5;
@@ -183,11 +179,11 @@ public class StructureDreadlandsMinePieces
 			int i = getComponentType();
 			int j = par3Random.nextInt(4);
 
-			switch (coordBaseMode)
+			switch (func_186165_e())
 			{
 			case SOUTH:
 				if (j <= 1)
-					StructureDreadlandsMinePieces.getNextMineShaftComponent(par1StructureComponent, par2List, par3Random, boundingBox.minX, boundingBox.minY - 1 + par3Random.nextInt(3), boundingBox.maxZ + 1, coordBaseMode, i);
+					StructureDreadlandsMinePieces.getNextMineShaftComponent(par1StructureComponent, par2List, par3Random, boundingBox.minX, boundingBox.minY - 1 + par3Random.nextInt(3), boundingBox.maxZ + 1, func_186165_e(), i);
 				else if (j == 2)
 					StructureDreadlandsMinePieces.getNextMineShaftComponent(par1StructureComponent, par2List, par3Random, boundingBox.minX - 1, boundingBox.minY - 1 + par3Random.nextInt(3), boundingBox.maxZ - 3, EnumFacing.WEST, i);
 				else
@@ -196,7 +192,7 @@ public class StructureDreadlandsMinePieces
 				break;
 			case WEST:
 				if (j <= 1)
-					StructureDreadlandsMinePieces.getNextMineShaftComponent(par1StructureComponent, par2List, par3Random, boundingBox.minX - 1, boundingBox.minY - 1 + par3Random.nextInt(3), boundingBox.minZ, coordBaseMode, i);
+					StructureDreadlandsMinePieces.getNextMineShaftComponent(par1StructureComponent, par2List, par3Random, boundingBox.minX - 1, boundingBox.minY - 1 + par3Random.nextInt(3), boundingBox.minZ, func_186165_e(), i);
 				else if (j == 2)
 					StructureDreadlandsMinePieces.getNextMineShaftComponent(par1StructureComponent, par2List, par3Random, boundingBox.minX, boundingBox.minY - 1 + par3Random.nextInt(3), boundingBox.minZ - 1, EnumFacing.NORTH, i);
 				else
@@ -205,7 +201,7 @@ public class StructureDreadlandsMinePieces
 				break;
 			case NORTH:
 				if (j <= 1)
-					StructureDreadlandsMinePieces.getNextMineShaftComponent(par1StructureComponent, par2List, par3Random, boundingBox.minX, boundingBox.minY - 1 + par3Random.nextInt(3), boundingBox.minZ - 1, coordBaseMode, i);
+					StructureDreadlandsMinePieces.getNextMineShaftComponent(par1StructureComponent, par2List, par3Random, boundingBox.minX, boundingBox.minY - 1 + par3Random.nextInt(3), boundingBox.minZ - 1, func_186165_e(), i);
 				else if (j == 2)
 					StructureDreadlandsMinePieces.getNextMineShaftComponent(par1StructureComponent, par2List, par3Random, boundingBox.minX - 1, boundingBox.minY - 1 + par3Random.nextInt(3), boundingBox.minZ, EnumFacing.WEST, i);
 				else
@@ -214,7 +210,7 @@ public class StructureDreadlandsMinePieces
 				break;
 			case EAST:
 				if (j <= 1)
-					StructureDreadlandsMinePieces.getNextMineShaftComponent(par1StructureComponent, par2List, par3Random, boundingBox.maxX + 1, boundingBox.minY - 1 + par3Random.nextInt(3), boundingBox.minZ, coordBaseMode, i);
+					StructureDreadlandsMinePieces.getNextMineShaftComponent(par1StructureComponent, par2List, par3Random, boundingBox.maxX + 1, boundingBox.minY - 1 + par3Random.nextInt(3), boundingBox.minZ, func_186165_e(), i);
 				else if (j == 2)
 					StructureDreadlandsMinePieces.getNextMineShaftComponent(par1StructureComponent, par2List, par3Random, boundingBox.maxX - 3, boundingBox.minY - 1 + par3Random.nextInt(3), boundingBox.minZ - 1, EnumFacing.NORTH, i);
 				else
@@ -226,7 +222,7 @@ public class StructureDreadlandsMinePieces
 				int k;
 				int l;
 
-				if (coordBaseMode != EnumFacing.NORTH && coordBaseMode != EnumFacing.SOUTH)
+				if (func_186165_e() != EnumFacing.NORTH && func_186165_e() != EnumFacing.SOUTH)
 					for (k = boundingBox.minX + 3; k + 3 <= boundingBox.maxX; k += 5)
 					{
 						l = par3Random.nextInt(5);
@@ -252,24 +248,24 @@ public class StructureDreadlandsMinePieces
 		/**
 		 * Used to generate chests with items in it. ex: Temple Chests, Village Blacksmith Chests, Mineshaft Chests.
 		 */
-		@Override
-		protected boolean generateChestContents(World par1World, StructureBoundingBox par2StructureBoundingBox, Random par3Random, int par4, int par5, int par6, List<WeightedRandomChestContent> par7List, int par8)
-		{
-			int i1 = getXWithOffset(par4, par6);
-			int j1 = getYWithOffset(par5);
-			int k1 = getZWithOffset(par4, par6);
-
-			if (par2StructureBoundingBox.isVecInside(new BlockPos(i1, j1, k1)) && par1World.getBlockState(new BlockPos(i1, j1, k1)).getBlock().getMaterial() == Material.air)
-			{
-				int l1 = par3Random.nextBoolean() ? 1 : 0;
-				par1World.setBlockState(new BlockPos(i1, j1, k1), Blocks.rail.getStateFromMeta(getMetadataWithOffset(Blocks.rail, l1)), 2);
-				EntityMinecartChest entityminecartchest = new EntityMinecartChest(par1World, i1 + 0.5F, j1 + 0.5F, k1 + 0.5F);
-				WeightedRandomChestContent.generateChestContents(par3Random, par7List, entityminecartchest, par8);
-				par1World.spawnEntityInWorld(entityminecartchest);
-				return true;
-			} else
-				return false;
-		}
+		//		@Override //TODO: loot tables
+		//		protected boolean generateChestContents(World par1World, StructureBoundingBox par2StructureBoundingBox, Random par3Random, int par4, int par5, int par6, List<WeightedRandomChestContent> par7List, int par8)
+		//		{
+		//			int i1 = getXWithOffset(par4, par6);
+		//			int j1 = getYWithOffset(par5);
+		//			int k1 = getZWithOffset(par4, par6);
+		//
+		//			if (par2StructureBoundingBox.isVecInside(new BlockPos(i1, j1, k1)) && par1World.getBlockState(new BlockPos(i1, j1, k1)).getBlock().getMaterial() == Material.air)
+		//			{
+		//				int l1 = par3Random.nextBoolean() ? 1 : 0;
+		//				par1World.setBlockState(new BlockPos(i1, j1, k1), Blocks.rail.getStateFromMeta(getMetadataWithOffset(Blocks.rail, l1)), 2);
+		//				EntityMinecartChest entityminecartchest = new EntityMinecartChest(par1World, i1 + 0.5F, j1 + 0.5F, k1 + 0.5F);
+		//				WeightedRandomChestContent.generateChestContents(par3Random, par7List, entityminecartchest, par8);
+		//				par1World.spawnEntityInWorld(entityminecartchest);
+		//				return true;
+		//			} else
+		//				return false;
+		//		}
 
 		/**
 		 * second Part of Structure generating, this for example places Spiderwebs, Mob Spawners, it closes
@@ -305,19 +301,19 @@ public class StructureDreadlandsMinePieces
 					randomlyPlaceBlock(par1World, par3StructureBoundingBox, par2Random, 0.05F, 1, 2, k - 1, Blocks.torch.getStateFromMeta(0));
 					randomlyPlaceBlock(par1World, par3StructureBoundingBox, par2Random, 0.05F, 1, 2, k + 1, Blocks.torch.getStateFromMeta(0));
 
-					ChestGenHooks info = ChestGenHooks.getInfo(MINESHAFT_CORRIDOR);
-					if (par2Random.nextInt(100) == 0)
-						generateChestContents(par1World, par3StructureBoundingBox, par2Random, 2, 0, k - 1, mineshaftChestContents, info.getCount(par2Random));
-
-					if (par2Random.nextInt(100) == 0)
-						generateChestContents(par1World, par3StructureBoundingBox, par2Random, 0, 0, k + 1, mineshaftChestContents, info.getCount(par2Random));
+					//					ChestGenHooks info = ChestGenHooks.getInfo(MINESHAFT_CORRIDOR); //TODO: loot tables
+					//					if (par2Random.nextInt(100) == 0)
+					//						generateChestContents(par1World, par3StructureBoundingBox, par2Random, 2, 0, k - 1, mineshaftChestContents, info.getCount(par2Random));
+					//
+					//					if (par2Random.nextInt(100) == 0)
+					//						generateChestContents(par1World, par3StructureBoundingBox, par2Random, 0, 0, k + 1, mineshaftChestContents, info.getCount(par2Random));
 				}
 
 				for (j = 0; j <= 2; ++j)
 					for (k = 0; k <= i; ++k)
 					{
 						byte b0 = -1;
-						Block block1 = getBlockStateFromPos(par1World, j, b0, k, par3StructureBoundingBox).getBlock();
+						IBlockState block1 = getBlockStateFromPos(par1World, j, b0, k, par3StructureBoundingBox);
 
 						if (block1.getMaterial() == Material.air)
 						{
@@ -326,14 +322,18 @@ public class StructureDreadlandsMinePieces
 						}
 					}
 
-				if (hasRails)
+				if (hasRails){
+
+					IBlockState iblockstate = Blocks.rail.getDefaultState().withProperty(BlockRail.SHAPE, BlockRailBase.EnumRailDirection.NORTH_SOUTH);
+
 					for (j = 0; j <= i; ++j)
 					{
-						Block block = getBlockStateFromPos(par1World, 1, -1, j, par3StructureBoundingBox).getBlock();
+						IBlockState block = getBlockStateFromPos(par1World, 1, -1, j, par3StructureBoundingBox);
 
 						if (block.getMaterial() != Material.air && block.isFullBlock())
-							randomlyPlaceBlock(par1World, par3StructureBoundingBox, par2Random, 0.7F, 1, 0, j, Blocks.rail.getStateFromMeta(getMetadataWithOffset(Blocks.rail, 0)));
+							randomlyPlaceBlock(par1World, par3StructureBoundingBox, par2Random, 0.7F, 1, 0, j, iblockstate);
 					}
+				}
 
 				return true;
 			}
@@ -482,7 +482,7 @@ public class StructureDreadlandsMinePieces
 
 				for (int i = boundingBox.minX; i <= boundingBox.maxX; ++i)
 					for (int j = boundingBox.minZ; j <= boundingBox.maxZ; ++j)
-						if (getBlockStateFromPos(par1World, i, boundingBox.minY - 1, j, par3StructureBoundingBox).getBlock().getMaterial() == Material.air)
+						if (getBlockStateFromPos(par1World, i, boundingBox.minY - 1, j, par3StructureBoundingBox).getMaterial() == Material.air)
 							setBlockState(par1World, AbyssalCraft.dreadplanks.getDefaultState(), i, boundingBox.minY - 1, j, par3StructureBoundingBox);
 
 				return true;
@@ -642,7 +642,7 @@ public class StructureDreadlandsMinePieces
 		public Stairs(int par1, Random par2Random, StructureBoundingBox par3StructureBoundingBox, EnumFacing par4)
 		{
 			super(par1);
-			coordBaseMode = par4;
+			func_186164_a(par4);
 			boundingBox = par3StructureBoundingBox;
 		}
 
@@ -691,7 +691,7 @@ public class StructureDreadlandsMinePieces
 		{
 			int i = getComponentType();
 
-			switch (coordBaseMode)
+			switch (func_186165_e())
 			{
 			case SOUTH:
 				StructureDreadlandsMinePieces.getNextMineShaftComponent(par1StructureComponent, par2List, par3Random, boundingBox.minX, boundingBox.minY, boundingBox.maxZ + 1, EnumFacing.SOUTH, i);

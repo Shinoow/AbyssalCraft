@@ -17,14 +17,14 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.MobEffects;
+import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.EnumAction;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
-import net.minecraft.util.StatCollector;
-import net.minecraft.world.World;
+import net.minecraft.util.text.translation.I18n;
 import com.google.common.collect.Multimap;
 import com.shinoow.abyssalcraft.AbyssalCraft;
 
@@ -84,39 +84,39 @@ public class ItemSoulReaper extends Item {
 			increaseSouls(par1ItemStack);
 			switch(getSouls(par1ItemStack)){
 			case 32:
-				par3EntityLivingBase.addPotionEffect(new PotionEffect(Potion.damageBoost.getId(), 600));
+				par3EntityLivingBase.addPotionEffect(new PotionEffect(MobEffects.damageBoost, 600));
 				par3EntityLivingBase.heal(20.0F);
 				break;
 			case 64:
-				par3EntityLivingBase.addPotionEffect(new PotionEffect(Potion.damageBoost.getId(), 1200));
+				par3EntityLivingBase.addPotionEffect(new PotionEffect(MobEffects.damageBoost, 1200));
 				par3EntityLivingBase.heal(20.0F);
 				break;
 			case 128:
-				par3EntityLivingBase.addPotionEffect(new PotionEffect(Potion.damageBoost.getId(), 1200, 1));
-				par3EntityLivingBase.addPotionEffect(new PotionEffect(Potion.moveSpeed.getId(), 600));
+				par3EntityLivingBase.addPotionEffect(new PotionEffect(MobEffects.damageBoost, 1200, 1));
+				par3EntityLivingBase.addPotionEffect(new PotionEffect(MobEffects.moveSpeed, 600));
 				par3EntityLivingBase.heal(20.0F);
 				break;
 			case 256:
-				par3EntityLivingBase.addPotionEffect(new PotionEffect(Potion.damageBoost.getId(), 2400, 1));
-				par3EntityLivingBase.addPotionEffect(new PotionEffect(Potion.moveSpeed.getId(), 1200));
-				par3EntityLivingBase.addPotionEffect(new PotionEffect(Potion.resistance.getId(), 300));
+				par3EntityLivingBase.addPotionEffect(new PotionEffect(MobEffects.damageBoost, 2400, 1));
+				par3EntityLivingBase.addPotionEffect(new PotionEffect(MobEffects.moveSpeed, 1200));
+				par3EntityLivingBase.addPotionEffect(new PotionEffect(MobEffects.resistance, 300));
 				par3EntityLivingBase.heal(20.0F);
 				break;
 			case 512:
-				par3EntityLivingBase.addPotionEffect(new PotionEffect(Potion.damageBoost.getId(), 1200, 2));
-				par3EntityLivingBase.addPotionEffect(new PotionEffect(Potion.moveSpeed.getId(), 1200, 1));
-				par3EntityLivingBase.addPotionEffect(new PotionEffect(Potion.resistance.getId(), 600));
-				par3EntityLivingBase.addPotionEffect(new PotionEffect(Potion.fireResistance.getId(), 300));
+				par3EntityLivingBase.addPotionEffect(new PotionEffect(MobEffects.damageBoost, 1200, 2));
+				par3EntityLivingBase.addPotionEffect(new PotionEffect(MobEffects.moveSpeed, 1200, 1));
+				par3EntityLivingBase.addPotionEffect(new PotionEffect(MobEffects.resistance, 600));
+				par3EntityLivingBase.addPotionEffect(new PotionEffect(MobEffects.fireResistance, 300));
 				par3EntityLivingBase.heal(20.0F);
 				break;
 			case 1024:
 				setSouls(0, par1ItemStack);
-				par3EntityLivingBase.addPotionEffect(new PotionEffect(Potion.damageBoost.getId(), 2400, 2));
-				par3EntityLivingBase.addPotionEffect(new PotionEffect(Potion.moveSpeed.getId(), 2400, 2));
-				par3EntityLivingBase.addPotionEffect(new PotionEffect(Potion.resistance.getId(), 1200));
-				par3EntityLivingBase.addPotionEffect(new PotionEffect(Potion.fireResistance.getId(), 600));
-				par3EntityLivingBase.addPotionEffect(new PotionEffect(Potion.saturation.getId(), 300));
-				par3EntityLivingBase.addPotionEffect(new PotionEffect(Potion.healthBoost.getId(), 2400, 2));
+				par3EntityLivingBase.addPotionEffect(new PotionEffect(MobEffects.damageBoost, 2400, 2));
+				par3EntityLivingBase.addPotionEffect(new PotionEffect(MobEffects.moveSpeed, 2400, 2));
+				par3EntityLivingBase.addPotionEffect(new PotionEffect(MobEffects.resistance, 1200));
+				par3EntityLivingBase.addPotionEffect(new PotionEffect(MobEffects.fireResistance, 600));
+				par3EntityLivingBase.addPotionEffect(new PotionEffect(MobEffects.saturation, 300));
+				par3EntityLivingBase.addPotionEffect(new PotionEffect(MobEffects.healthBoost, 2400, 2));
 				par3EntityLivingBase.heal(20.0F);
 				break;
 			}
@@ -129,16 +129,17 @@ public class ItemSoulReaper extends Item {
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public void addInformation(ItemStack is, EntityPlayer player, List l, boolean B){
 		int souls = getSouls(is);
-		l.add(StatCollector.translateToLocal("tooltip.soulreaper") + ": " + souls + "/1024");
+		l.add(I18n.translateToLocal("tooltip.soulreaper") + ": " + souls + "/1024");
 	}
 
-	@Override
-	public ItemStack onItemRightClick(ItemStack par1ItemStack, World par2World, EntityPlayer par3EntityPlayer) {
-
-		par3EntityPlayer.setItemInUse(par1ItemStack, getMaxItemUseDuration(par1ItemStack));
-
-		return par1ItemStack;
-	}
+	//	@Override
+	//	public ActionResult<ItemStack> onItemRightClick(ItemStack par1ItemStack, World par2World, EntityPlayer par3EntityPlayer, EnumHand hand) {
+	//
+	////		par3EntityPlayer.setItemInUse(par1ItemStack, getMaxItemUseDuration(par1ItemStack));¨
+	//		par3EntityPlayer.setActiveHand(hand);
+	//
+	//		return new ActionResult(EnumActionResult.PASS, par1ItemStack);
+	//	}
 
 	@Override
 	public boolean getIsRepairable(ItemStack par1ItemStack, ItemStack par2ItemStack)
@@ -148,9 +149,15 @@ public class ItemSoulReaper extends Item {
 
 	@Override
 	@SuppressWarnings({ "rawtypes", "unchecked", "deprecation" })
-	public Multimap getItemAttributeModifiers() {
-		Multimap multimap = super.getItemAttributeModifiers();
-		multimap.put(SharedMonsterAttributes.attackDamage.getAttributeUnlocalizedName(), new AttributeModifier(itemModifierUUID, "Weapon modifier", weaponDamage, 0));
+	public Multimap getItemAttributeModifiers(EntityEquipmentSlot equipmentSlot) {
+		Multimap multimap = super.getItemAttributeModifiers(equipmentSlot);
+
+		if (equipmentSlot == EntityEquipmentSlot.MAINHAND)
+		{
+			multimap.put(SharedMonsterAttributes.ATTACK_DAMAGE.getAttributeUnlocalizedName(), new AttributeModifier(ATTACK_DAMAGE_MODIFIER, "Weapon modifier", weaponDamage, 0));
+			multimap.put(SharedMonsterAttributes.ATTACK_SPEED.getAttributeUnlocalizedName(), new AttributeModifier(ATTACK_SPEED_MODIFIER, "Weapon modifier", -2.4000000953674316D, 0));
+		}
+
 		return multimap;
 	}
 }

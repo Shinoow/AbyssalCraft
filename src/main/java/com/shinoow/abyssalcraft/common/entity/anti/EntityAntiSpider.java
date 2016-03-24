@@ -19,7 +19,7 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.entity.IEntityLivingData;
 import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.EntityAIAttackOnCollide;
+import net.minecraft.entity.ai.EntityAIAttackMelee;
 import net.minecraft.entity.ai.EntityAIHurtByTarget;
 import net.minecraft.entity.ai.EntityAILeapAtTarget;
 import net.minecraft.entity.ai.EntityAILookIdle;
@@ -32,12 +32,18 @@ import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.monster.EntitySpider;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
+import net.minecraft.init.MobEffects;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.item.Item;
+import net.minecraft.network.datasync.DataParameter;
+import net.minecraft.network.datasync.DataSerializers;
+import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.pathfinding.PathNavigate;
 import net.minecraft.pathfinding.PathNavigateClimber;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
-import net.minecraft.util.BlockPos;
+import net.minecraft.util.SoundEvent;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
@@ -47,14 +53,15 @@ import com.shinoow.abyssalcraft.api.entity.IAntiEntity;
 
 public class EntityAntiSpider extends EntityMob implements IAntiEntity {
 
+	private static final DataParameter<Byte> CLIMBING = EntityDataManager.<Byte>createKey(EntityAntiSpider.class, DataSerializers.BYTE);
+
 	public EntityAntiSpider(World par1World)
 	{
 		super(par1World);
 		setSize(1.4F, 0.9F);
 		tasks.addTask(1, new EntityAISwimming(this));
 		tasks.addTask(3, new EntityAILeapAtTarget(this, 0.4F));
-		tasks.addTask(4, new AIAntiSpiderAttack(this, EntityPlayer.class));
-		tasks.addTask(4, new AIAntiSpiderAttack(this, EntityIronGolem.class));
+		tasks.addTask(4, new AIAntiSpiderAttack(this));
 		tasks.addTask(5, new EntityAIWander(this, 0.8D));
 		tasks.addTask(6, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
 		tasks.addTask(6, new EntityAILookIdle(this));
@@ -79,7 +86,7 @@ public class EntityAntiSpider extends EntityMob implements IAntiEntity {
 	protected void entityInit()
 	{
 		super.entityInit();
-		dataWatcher.addObject(16, new Byte((byte)0));
+		dataWatcher.register(CLIMBING, new Byte((byte)0));
 	}
 
 	@Override
@@ -96,33 +103,33 @@ public class EntityAntiSpider extends EntityMob implements IAntiEntity {
 	{
 		super.applyEntityAttributes();
 
-		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.30000001192092896D);
-		if(AbyssalCraft.hardcoreMode) getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(64.0D);
-		else getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(32.0D);
+		getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.30000001192092896D);
+		if(AbyssalCraft.hardcoreMode) getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(64.0D);
+		else getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(32.0D);
 	}
 
 	@Override
-	protected String getLivingSound()
+	protected SoundEvent getAmbientSound()
 	{
-		return "mob.spider.say";
+		return SoundEvents.entity_spider_ambient;
 	}
 
 	@Override
-	protected String getHurtSound()
+	protected SoundEvent getHurtSound()
 	{
-		return "mob.spider.say";
+		return SoundEvents.entity_spider_hurt;
 	}
 
 	@Override
-	protected String getDeathSound()
+	protected SoundEvent getDeathSound()
 	{
-		return "mob.spider.death";
+		return SoundEvents.entity_spider_death;
 	}
 
 	@Override
-	protected void playStepSound(BlockPos pos, Block par4Block)
+	protected void playStepSound(BlockPos pos, Block blockIn)
 	{
-		playSound("mob.spider.step", 0.15F, 1.0F);
+		playSound(SoundEvents.entity_spider_step, 0.15F, 1.0F);
 	}
 
 	@Override
@@ -158,7 +165,7 @@ public class EntityAntiSpider extends EntityMob implements IAntiEntity {
 	@Override
 	public boolean isPotionApplicable(PotionEffect par1PotionEffect)
 	{
-		return par1PotionEffect.getPotionID() == Potion.poison.id ? false : super.isPotionApplicable(par1PotionEffect);
+		return par1PotionEffect.getPotion() == MobEffects.poison ? false : super.isPotionApplicable(par1PotionEffect);
 	}
 
 	@Override
@@ -178,7 +185,7 @@ public class EntityAntiSpider extends EntityMob implements IAntiEntity {
 	 */
 	public boolean isBesideClimbableBlock()
 	{
-		return (dataWatcher.getWatchableObjectByte(16) & 1) != 0;
+		return (dataWatcher.get(CLIMBING) & 1) != 0;
 	}
 
 	/**
@@ -187,14 +194,14 @@ public class EntityAntiSpider extends EntityMob implements IAntiEntity {
 	 */
 	public void setBesideClimbableBlock(boolean par1)
 	{
-		byte b0 = dataWatcher.getWatchableObjectByte(16);
+		byte b0 = dataWatcher.get(CLIMBING).byteValue();
 
 		if (par1)
 			b0 = (byte)(b0 | 1);
 		else
 			b0 &= -2;
 
-		dataWatcher.updateObject(16, Byte.valueOf(b0));
+		dataWatcher.set(CLIMBING, Byte.valueOf(b0));
 	}
 
 	@Override
@@ -208,7 +215,7 @@ public class EntityAntiSpider extends EntityMob implements IAntiEntity {
 			entityskeleton.setLocationAndAngles(posX, posY, posZ, rotationYaw, 0.0F);
 			entityskeleton.onInitialSpawn(difficulty, (IEntityLivingData)null);
 			worldObj.spawnEntityInWorld(entityskeleton);
-			entityskeleton.mountEntity(this);
+			entityskeleton.startRiding(this);
 		}
 
 		if (p_110161_1_1 == null)
@@ -221,9 +228,9 @@ public class EntityAntiSpider extends EntityMob implements IAntiEntity {
 
 		if (p_110161_1_1 instanceof EntityAntiSpider.GroupData)
 		{
-			int i = ((EntityAntiSpider.GroupData)p_110161_1_1).field_111105_a;
+			Potion i = ((EntityAntiSpider.GroupData)p_110161_1_1).field_111105_a;
 
-			if (i > 0 && Potion.potionTypes[i] != null)
+			if (Potion.getIdFromPotion(i) > 0)
 				addPotionEffect(new PotionEffect(i, Integer.MAX_VALUE));
 		}
 
@@ -236,11 +243,11 @@ public class EntityAntiSpider extends EntityMob implements IAntiEntity {
 		return 0.65F;
 	}
 
-	static class AIAntiSpiderAttack extends EntityAIAttackOnCollide
+	static class AIAntiSpiderAttack extends EntityAIAttackMelee
 	{
-		public AIAntiSpiderAttack(EntityAntiSpider p_i45819_1_, Class <? extends Entity > targetClass)
+		public AIAntiSpiderAttack(EntityAntiSpider p_i45819_1_)
 		{
-			super(p_i45819_1_, targetClass, 1.0D, true);
+			super(p_i45819_1_, 1.0D, true);
 		}
 
 		/**
@@ -286,20 +293,20 @@ public class EntityAntiSpider extends EntityMob implements IAntiEntity {
 
 	public static class GroupData implements IEntityLivingData
 	{
-		public int field_111105_a;
+		public Potion field_111105_a;
 
 		public void func_111104_a(Random par1Random)
 		{
 			int i = par1Random.nextInt(5);
 
 			if (i <= 1)
-				field_111105_a = Potion.moveSpeed.id;
+				field_111105_a = MobEffects.moveSpeed;
 			else if (i <= 2)
-				field_111105_a = Potion.damageBoost.id;
+				field_111105_a = MobEffects.damageBoost;
 			else if (i <= 3)
-				field_111105_a = Potion.regeneration.id;
+				field_111105_a = MobEffects.regeneration;
 			else if (i <= 4)
-				field_111105_a = Potion.invisibility.id;
+				field_111105_a = MobEffects.invisibility;
 		}
 	}
 

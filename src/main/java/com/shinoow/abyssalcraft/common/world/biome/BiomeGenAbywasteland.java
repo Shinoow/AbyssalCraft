@@ -13,10 +13,10 @@ package com.shinoow.abyssalcraft.common.world.biome;
 
 import java.util.Random;
 
-import net.minecraft.block.state.pattern.BlockHelper;
+import net.minecraft.block.state.pattern.BlockMatcher;
 import net.minecraft.entity.monster.EntitySkeleton;
 import net.minecraft.entity.monster.EntityZombie;
-import net.minecraft.util.BlockPos;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.gen.feature.WorldGenMinable;
@@ -32,9 +32,9 @@ import com.shinoow.abyssalcraft.common.entity.EntitySkeletonGoliath;
 public class BiomeGenAbywasteland extends BiomeGenBase {
 
 	@SuppressWarnings("unchecked")
-	public BiomeGenAbywasteland(int par1){
+	public BiomeGenAbywasteland(BiomeProperties par1){
 		super(par1);
-		waterColorMultiplier = 0x24FF83;
+		//		waterColorMultiplier = 0x24FF83;
 		spawnableMonsterList.clear();
 		spawnableCreatureList.clear();
 		spawnableWaterCreatureList.clear();
@@ -59,7 +59,7 @@ public class BiomeGenAbywasteland extends BiomeGenBase {
 				int y = par2Random.nextInt(30);
 				int z = par2Random.nextInt(16);
 
-				new WorldGenMinable(AbyssalCraft.AbyLCorOre.getDefaultState(), veinSize, BlockHelper.forBlock(AbyssalCraft.abystone)).generate(par1World, par2Random, pos.add(x, y, z));
+				new WorldGenMinable(AbyssalCraft.AbyLCorOre.getDefaultState(), veinSize, BlockMatcher.forBlock(AbyssalCraft.abystone)).generate(par1World, par2Random, pos.add(x, y, z));
 			}
 		if(AbyssalCraft.generateAbyssalCoraliumOre)
 			for(int rarity = 0; rarity < 8; rarity++) {
@@ -68,7 +68,7 @@ public class BiomeGenAbywasteland extends BiomeGenBase {
 				int y = par2Random.nextInt(75);
 				int z = par2Random.nextInt(16);
 
-				new WorldGenMinable(AbyssalCraft.AbyCorOre.getDefaultState(), veinSize, BlockHelper.forBlock(AbyssalCraft.abystone)).generate(par1World, par2Random, pos.add(x, y, z));
+				new WorldGenMinable(AbyssalCraft.AbyCorOre.getDefaultState(), veinSize, BlockMatcher.forBlock(AbyssalCraft.abystone)).generate(par1World, par2Random, pos.add(x, y, z));
 			}
 		if(AbyssalCraft.generateAbyssalNitreOre)
 			for(int rarity = 0; rarity < 8; rarity++) {
@@ -77,7 +77,7 @@ public class BiomeGenAbywasteland extends BiomeGenBase {
 				int y = par2Random.nextInt(60);
 				int z = par2Random.nextInt(16);
 
-				new WorldGenMinable(AbyssalCraft.AbyNitOre.getDefaultState(), veinSize, BlockHelper.forBlock(AbyssalCraft.abystone)).generate(par1World, par2Random, pos.add(x, y, z));
+				new WorldGenMinable(AbyssalCraft.AbyNitOre.getDefaultState(), veinSize, BlockMatcher.forBlock(AbyssalCraft.abystone)).generate(par1World, par2Random, pos.add(x, y, z));
 			}
 		if(AbyssalCraft.generateAbyssalIronOre)
 			for(int rarity = 0; rarity < 8; rarity++) {
@@ -86,7 +86,7 @@ public class BiomeGenAbywasteland extends BiomeGenBase {
 				int y = par2Random.nextInt(60);
 				int z = par2Random.nextInt(16);
 
-				new WorldGenMinable(AbyssalCraft.AbyIroOre.getDefaultState(), veinSize, BlockHelper.forBlock(AbyssalCraft.abystone)).generate(par1World, par2Random, pos.add(x, y, z));
+				new WorldGenMinable(AbyssalCraft.AbyIroOre.getDefaultState(), veinSize, BlockMatcher.forBlock(AbyssalCraft.abystone)).generate(par1World, par2Random, pos.add(x, y, z));
 			}
 		if(AbyssalCraft.generateAbyssalCopperOre)
 			for(int rarity = 0; rarity < 8; rarity++) {
@@ -95,7 +95,7 @@ public class BiomeGenAbywasteland extends BiomeGenBase {
 				int y = par2Random.nextInt(60);
 				int z = par2Random.nextInt(16);
 
-				new WorldGenMinable(AbyssalCraft.AbyCopOre.getDefaultState(), veinSize, BlockHelper.forBlock(AbyssalCraft.abystone)).generate(par1World, par2Random, pos.add(x, y, z));
+				new WorldGenMinable(AbyssalCraft.AbyCopOre.getDefaultState(), veinSize, BlockMatcher.forBlock(AbyssalCraft.abystone)).generate(par1World, par2Random, pos.add(x, y, z));
 			}
 		if(AbyssalCraft.generateAbyssalGoldOre)
 			for(int rarity = 0; rarity < 5; rarity++) {
@@ -104,7 +104,7 @@ public class BiomeGenAbywasteland extends BiomeGenBase {
 				int y = par2Random.nextInt(35);
 				int z = par2Random.nextInt(16);
 
-				new WorldGenMinable(AbyssalCraft.AbyGolOre.getDefaultState(), veinSize, BlockHelper.forBlock(AbyssalCraft.abystone)).generate(par1World, par2Random, pos.add(x, y, z));
+				new WorldGenMinable(AbyssalCraft.AbyGolOre.getDefaultState(), veinSize, BlockMatcher.forBlock(AbyssalCraft.abystone)).generate(par1World, par2Random, pos.add(x, y, z));
 			}
 		if(AbyssalCraft.generateAbyssalDiamondOre)
 			for(int rarity = 0; rarity < var5; rarity++) {
@@ -113,7 +113,7 @@ public class BiomeGenAbywasteland extends BiomeGenBase {
 				int y = par2Random.nextInt(20);
 				int z = par2Random.nextInt(16);
 
-				new WorldGenMinable(AbyssalCraft.AbyDiaOre.getDefaultState(), veinSize, BlockHelper.forBlock(AbyssalCraft.abystone)).generate(par1World, par2Random, pos.add(x, y, z));
+				new WorldGenMinable(AbyssalCraft.AbyDiaOre.getDefaultState(), veinSize, BlockMatcher.forBlock(AbyssalCraft.abystone)).generate(par1World, par2Random, pos.add(x, y, z));
 			}
 		if(AbyssalCraft.generatePearlescentCoraliumOre)
 			for(int rarity = 0; rarity < var5; rarity++) {
@@ -122,7 +122,7 @@ public class BiomeGenAbywasteland extends BiomeGenBase {
 				int y = par2Random.nextInt(15);
 				int z = par2Random.nextInt(16);
 
-				new WorldGenMinable(AbyssalCraft.AbyPCorOre.getDefaultState(), veinSize, BlockHelper.forBlock(AbyssalCraft.abystone)).generate(par1World, par2Random, pos.add(x, y, z));
+				new WorldGenMinable(AbyssalCraft.AbyPCorOre.getDefaultState(), veinSize, BlockMatcher.forBlock(AbyssalCraft.abystone)).generate(par1World, par2Random, pos.add(x, y, z));
 			}
 		if(AbyssalCraft.generateAbyssalTinOre)
 			for(int rarity = 0; rarity < 8; rarity++) {
@@ -131,7 +131,7 @@ public class BiomeGenAbywasteland extends BiomeGenBase {
 				int y = par2Random.nextInt(60);
 				int z = par2Random.nextInt(16);
 
-				new WorldGenMinable(AbyssalCraft.AbyTinOre.getDefaultState(), veinSize, BlockHelper.forBlock(AbyssalCraft.abystone)).generate(par1World, par2Random, pos.add(x, y, z));
+				new WorldGenMinable(AbyssalCraft.AbyTinOre.getDefaultState(), veinSize, BlockMatcher.forBlock(AbyssalCraft.abystone)).generate(par1World, par2Random, pos.add(x, y, z));
 			}
 	}
 

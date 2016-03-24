@@ -13,18 +13,21 @@ package com.shinoow.abyssalcraft.common.items;
 
 import java.util.List;
 
-import com.shinoow.abyssalcraft.AbyssalCraft;
-
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.MobEffects;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
-import net.minecraft.util.EnumChatFormatting;
-import net.minecraft.util.StatCollector;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.EnumActionResult;
+import net.minecraft.util.EnumHand;
+import net.minecraft.util.text.TextFormatting;
+import net.minecraft.util.text.translation.I18n;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+
+import com.shinoow.abyssalcraft.AbyssalCraft;
 
 public class ItemOC extends Item {
 
@@ -38,32 +41,32 @@ public class ItemOC extends Item {
 	@Override
 	public String getItemStackDisplayName(ItemStack par1ItemStack) {
 
-		return EnumChatFormatting.DARK_RED + StatCollector.translateToLocal(this.getUnlocalizedName() + ".name");
+		return TextFormatting.DARK_RED + super.getItemStackDisplayName(par1ItemStack);
 	}
 
 	@Override
-	public ItemStack onItemRightClick(ItemStack par1ItemStack, World par2World, EntityPlayer par3EntityPlayer)
+	public ActionResult<ItemStack> onItemRightClick(ItemStack par1ItemStack, World par2World, EntityPlayer par3EntityPlayer, EnumHand hand)
 	{
-		par3EntityPlayer.addPotionEffect(new PotionEffect(Potion.damageBoost.id, 6000, 6));
-		par3EntityPlayer.addPotionEffect(new PotionEffect(Potion.nightVision.id, 6000, 6));
-		par3EntityPlayer.addPotionEffect(new PotionEffect(Potion.invisibility.id, 6000, 6));
-		par3EntityPlayer.addPotionEffect(new PotionEffect(Potion.regeneration.id, 6000, 6));
-		par3EntityPlayer.addPotionEffect(new PotionEffect(Potion.moveSpeed.id, 6000, 6));
-		par3EntityPlayer.addPotionEffect(new PotionEffect(Potion.resistance.id, 6000, 6));
-		par3EntityPlayer.addPotionEffect(new PotionEffect(Potion.fireResistance.id, 6000, 6));
-		par3EntityPlayer.addPotionEffect(new PotionEffect(Potion.waterBreathing.id, 6000, 6));
-		par3EntityPlayer.addPotionEffect(new PotionEffect(Potion.jump.id, 6000, 6));
-		par3EntityPlayer.addPotionEffect(new PotionEffect(Potion.digSpeed.id, 6000, 6));
-		par3EntityPlayer.addPotionEffect(new PotionEffect(Potion.fireResistance.id, 6000, 6));
+		par3EntityPlayer.addPotionEffect(new PotionEffect(MobEffects.damageBoost, 6000, 6));
+		par3EntityPlayer.addPotionEffect(new PotionEffect(MobEffects.nightVision, 6000, 6));
+		par3EntityPlayer.addPotionEffect(new PotionEffect(MobEffects.invisibility, 6000, 6));
+		par3EntityPlayer.addPotionEffect(new PotionEffect(MobEffects.regeneration, 6000, 6));
+		par3EntityPlayer.addPotionEffect(new PotionEffect(MobEffects.moveSpeed, 6000, 6));
+		par3EntityPlayer.addPotionEffect(new PotionEffect(MobEffects.resistance, 6000, 6));
+		par3EntityPlayer.addPotionEffect(new PotionEffect(MobEffects.fireResistance, 6000, 6));
+		par3EntityPlayer.addPotionEffect(new PotionEffect(MobEffects.waterBreathing, 6000, 6));
+		par3EntityPlayer.addPotionEffect(new PotionEffect(MobEffects.jump, 6000, 6));
+		par3EntityPlayer.addPotionEffect(new PotionEffect(MobEffects.digSpeed, 6000, 6));
+		par3EntityPlayer.addPotionEffect(new PotionEffect(MobEffects.fireResistance, 6000, 6));
 
 		par1ItemStack.stackSize--;
-		return par1ItemStack;
+		return new ActionResult(EnumActionResult.PASS, par1ItemStack);
 	}
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@Override
 	public void addInformation(ItemStack is, EntityPlayer player, List l, boolean B){
-		l.add(StatCollector.translateToLocal("tooltip.oc"));
+		l.add(I18n.translateToLocal("tooltip.oc"));
 	}
 
 	@Override

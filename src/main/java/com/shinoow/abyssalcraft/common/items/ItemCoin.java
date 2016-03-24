@@ -11,10 +11,6 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.common.items;
 
-import net.minecraft.item.ItemStack;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
-
 import com.shinoow.abyssalcraft.AbyssalCraft;
 
 public class ItemCoin extends ItemACBasic {
@@ -22,11 +18,5 @@ public class ItemCoin extends ItemACBasic {
 	public ItemCoin(String par1) {
 		super(par1);
 		setCreativeTab(AbyssalCraft.tabCoins);
-	}
-
-	@Override
-	@SideOnly(Side.CLIENT)
-	public int getColorFromItemStack(ItemStack par1ItemStack, int par2) {
-		return 0xE8E8E8;
 	}
 }

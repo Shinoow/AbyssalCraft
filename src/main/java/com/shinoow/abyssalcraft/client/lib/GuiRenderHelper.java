@@ -17,7 +17,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.client.renderer.WorldRenderer;
+import net.minecraft.client.renderer.VertexBuffer;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.client.settings.KeyBinding;
 
@@ -98,7 +98,7 @@ public final class GuiRenderHelper
 		GlStateManager.tryBlendFuncSeparate(770, 771, 1, 0);
 		GlStateManager.shadeModel(7425);
 		Tessellator tessellator = Tessellator.getInstance();
-		WorldRenderer worldrenderer = tessellator.getWorldRenderer();
+		VertexBuffer worldrenderer = tessellator.getBuffer();
 		worldrenderer.begin(7, DefaultVertexFormats.POSITION_COLOR);
 		worldrenderer.pos(right, top, z).color(f1, f2, f3, f).endVertex();
 		worldrenderer.pos(left, top, z).color(f1, f2, f3, f).endVertex();
@@ -117,7 +117,7 @@ public final class GuiRenderHelper
 
 	public static void drawTexturedModalRect(int x, int y, float z, int textureX, int textureY, int width, int height, float f, float f1) {
 		Tessellator tessellator = Tessellator.getInstance();
-		WorldRenderer worldrenderer = tessellator.getWorldRenderer();
+		VertexBuffer worldrenderer = tessellator.getBuffer();
 		worldrenderer.begin(7, DefaultVertexFormats.POSITION_TEX);
 		worldrenderer.pos(x + 0, y + height, z).tex((textureX + 0) * f, (textureY + height) * f1).endVertex();
 		worldrenderer.pos(x + width, y + height, z).tex((textureX + width) * f, (textureY + height) * f1).endVertex();

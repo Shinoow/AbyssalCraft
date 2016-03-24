@@ -13,12 +13,13 @@ package com.shinoow.abyssalcraft.common.enchantments;
 
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnumEnchantmentType;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.inventory.EntityEquipmentSlot;
 
 public class EnchantmentWeaponInfusion extends Enchantment {
 
-	public EnchantmentWeaponInfusion(int par1, int par2, String par3Str) {
-		super(par1, new ResourceLocation("abyssalcraft", par3Str), par2, EnumEnchantmentType.WEAPON);
+	public EnchantmentWeaponInfusion(String par3Str) {
+		//		super(par1, new ResourceLocation("abyssalcraft", par3Str), par2, EnumEnchantmentType.WEAPON);
+		super(Rarity.RARE, EnumEnchantmentType.WEAPON, new EntityEquipmentSlot[]{EntityEquipmentSlot.MAINHAND});
 		setName(par3Str);
 	}
 

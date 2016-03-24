@@ -12,27 +12,27 @@
 package com.shinoow.abyssalcraft.common.blocks;
 
 import net.minecraft.block.BlockContainer;
+import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.AxisAlignedBB;
-import net.minecraft.util.BlockPos;
-import net.minecraft.util.MathHelper;
+import net.minecraft.util.EnumBlockRenderType;
+import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.common.Optional.Interface;
-import net.minecraftforge.fml.common.Optional.Method;
-import thaumcraft.api.crafting.IInfusionStabiliser;
-
 import com.shinoow.abyssalcraft.common.blocks.tile.TileEntityWhead;
 
-@Interface(modid = "Thaumcraft", iface = "thaumcraft.api.crafting.IInfusionStabiliser", striprefs = true)
-public class BlockWhead extends BlockContainer implements IInfusionStabiliser {
+//@Interface(modid = "Thaumcraft", iface = "thaumcraft.api.crafting.IInfusionStabiliser", striprefs = true)
+public class BlockWhead extends BlockContainer /* implements IInfusionStabiliser */ {
 
 	public BlockWhead() {
 		super(Material.cloth);
-		setBlockBounds(0.1F, 0.0F, 0.1F, 0.8F, 0.7F, 0.8F);
+		//		setBlockBounds(0.1F, 0.0F, 0.1F, 0.8F, 0.7F, 0.8F);
+		setStepSound(SoundType.CLOTH);
 	}
 
 	@Override
@@ -41,27 +41,26 @@ public class BlockWhead extends BlockContainer implements IInfusionStabiliser {
 	}
 
 	@Override
-	public boolean isOpaqueCube()
+	public boolean isOpaqueCube(IBlockState state)
 	{
 		return false;
 	}
 
 	@Override
-	public boolean isFullCube()
+	public boolean isFullCube(IBlockState state)
 	{
 		return false;
 	}
 
 	@Override
-	public int getRenderType() {
-		return 2;
+	public EnumBlockRenderType getRenderType(IBlockState state) {
+		return EnumBlockRenderType.ENTITYBLOCK_ANIMATED;
 	}
 
 	@Override
-	public AxisAlignedBB getCollisionBoundingBox(World par1World, BlockPos pos, IBlockState state)
+	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess par1World, BlockPos pos)
 	{
-		setBlockBoundsBasedOnState(par1World, pos);
-		return super.getCollisionBoundingBox(par1World, pos, state);
+		return new AxisAlignedBB(0.1F, 0.0F, 0.1F, 0.8F, 0.7F, 0.8F);
 	}
 
 	@Override
@@ -74,10 +73,10 @@ public class BlockWhead extends BlockContainer implements IInfusionStabiliser {
 		tile.direction = MathHelper.floor_double(par5EntityLivingBase.rotationYaw * 4.0F / 360.0F + 0.5D) & 3;
 	}
 
-	@Override
-	@Method(modid = "Thaumcraft")
-	public boolean canStabaliseInfusion(World world, BlockPos pos) {
-
-		return true;
-	}
+	//	@Override
+	//	@Method(modid = "Thaumcraft")
+	//	public boolean canStabaliseInfusion(World world, BlockPos pos) {
+	//
+	//		return true;
+	//	}
 }

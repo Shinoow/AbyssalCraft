@@ -17,8 +17,8 @@ import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.IEntityLivingData;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.util.BlockPos;
-import net.minecraft.util.ChatComponentText;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.World;
 
 /**
@@ -113,7 +113,7 @@ public class NecronomiconSummonRitual extends NecronomiconRitual {
 				| NoSuchMethodException | SecurityException e) {
 			e.printStackTrace();
 		}
-		if(entityliving == null) player.addChatMessage(new ChatComponentText("The Entity could not be summoned."));
+		if(entityliving == null) player.addChatMessage(new TextComponentString("The Entity could not be summoned."));
 
 	}
 }

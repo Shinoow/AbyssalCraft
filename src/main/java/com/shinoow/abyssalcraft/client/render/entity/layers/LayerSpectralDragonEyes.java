@@ -48,7 +48,7 @@ public class LayerSpectralDragonEyes implements LayerRenderer<EntityDragonMinion
 		GlStateManager.enableLighting();
 		GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
 		dragonRenderer.getMainModel().render(entitylivingbaseIn, p_177141_2_, p_177141_3_, p_177141_5_, p_177141_6_, p_177141_7_, scale);
-		dragonRenderer.func_177105_a(entitylivingbaseIn, partialTicks);
+		dragonRenderer.setLightmap(entitylivingbaseIn, partialTicks);
 		GlStateManager.disableBlend();
 		GlStateManager.enableAlpha();
 		GlStateManager.depthFunc(515);

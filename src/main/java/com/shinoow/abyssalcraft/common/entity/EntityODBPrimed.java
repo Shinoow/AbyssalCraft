@@ -15,9 +15,9 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.init.Blocks;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumParticleTypes;
-import net.minecraft.util.StatCollector;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.translation.I18n;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -147,8 +147,8 @@ public class EntityODBPrimed extends Entity {
 
 	@SideOnly(Side.CLIENT)
 	private void message(){
-		SpecialTextUtil.SacthothGroup(worldObj, StatCollector.translateToLocal("message.sacthoth.spawn.1"));
-		SpecialTextUtil.SacthothGroup(worldObj, StatCollector.translateToLocal("message.sacthoth.spawn.2"));
+		SpecialTextUtil.SacthothGroup(worldObj, I18n.translateToLocal("message.sacthoth.spawn.1"));
+		SpecialTextUtil.SacthothGroup(worldObj, I18n.translateToLocal("message.sacthoth.spawn.2"));
 	}
 
 	@Override

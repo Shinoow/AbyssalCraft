@@ -15,8 +15,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockSlab;
 import net.minecraft.item.ItemSlab;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.EnumChatFormatting;
-import net.minecraft.util.StatCollector;
+import net.minecraft.util.text.TextFormatting;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
 
@@ -31,6 +30,6 @@ public class ItemEthaxiumSlab extends ItemSlab {
 	@Override
 	public String getItemStackDisplayName(ItemStack par1ItemStack) {
 
-		return EnumChatFormatting.AQUA + StatCollector.translateToLocal(this.getUnlocalizedName() + ".name");
+		return TextFormatting.AQUA + super.getItemStackDisplayName(par1ItemStack);
 	}
 }

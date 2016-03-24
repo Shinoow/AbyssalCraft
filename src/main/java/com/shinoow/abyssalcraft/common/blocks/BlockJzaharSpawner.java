@@ -13,7 +13,9 @@ package com.shinoow.abyssalcraft.common.blocks;
 
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.EnumBlockRenderType;
 import net.minecraft.world.World;
 
 import com.shinoow.abyssalcraft.common.blocks.tile.TileEntityJzaharSpawner;
@@ -25,15 +27,15 @@ public class BlockJzaharSpawner extends BlockContainer {
 	}
 
 	@Override
-	public boolean isOpaqueCube()
+	public boolean isOpaqueCube(IBlockState state)
 	{
 		return false;
 	}
 
 	@Override
-	public int getRenderType()
+	public EnumBlockRenderType getRenderType(IBlockState state)
 	{
-		return 2;
+		return EnumBlockRenderType.ENTITYBLOCK_ANIMATED;
 	}
 
 	@Override

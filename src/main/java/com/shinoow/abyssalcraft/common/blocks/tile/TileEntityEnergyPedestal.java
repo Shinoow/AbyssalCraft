@@ -17,7 +17,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.Packet;
-import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
+import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.ITickable;
@@ -60,11 +60,11 @@ public class TileEntityEnergyPedestal extends TileEntity implements IEnergyConta
 	public Packet getDescriptionPacket() {
 		NBTTagCompound nbtTag = new NBTTagCompound();
 		writeToNBT(nbtTag);
-		return new S35PacketUpdateTileEntity(pos, 1, nbtTag);
+		return new SPacketUpdateTileEntity(pos, 1, nbtTag);
 	}
 
 	@Override
-	public void onDataPacket(NetworkManager net, S35PacketUpdateTileEntity packet)
+	public void onDataPacket(NetworkManager net, SPacketUpdateTileEntity packet)
 	{
 		readFromNBT(packet.getNbtCompound());
 	}
@@ -72,10 +72,9 @@ public class TileEntityEnergyPedestal extends TileEntity implements IEnergyConta
 	@Override
 	public void update()
 	{
-		if(isDirty){
-			worldObj.markBlockForUpdate(pos);
+		if(isDirty)
+			//			worldObj.markBlockForUpdate(pos); //TODO: find replacement
 			isDirty = false;
-		}
 
 		if(rot == 360)
 			rot = 0;

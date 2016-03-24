@@ -12,7 +12,6 @@
 package com.shinoow.abyssalcraft.common.entity.anti;
 
 import net.minecraft.block.Block;
-import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityCreature;
@@ -21,7 +20,6 @@ import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.entity.IEntityLivingData;
 import net.minecraft.entity.IRangedAttackMob;
 import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.EntityAIArrowAttack;
 import net.minecraft.entity.ai.EntityAIHurtByTarget;
 import net.minecraft.entity.ai.EntityAILookIdle;
 import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
@@ -33,19 +31,32 @@ import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.monster.EntitySkeleton;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityArrow;
+import net.minecraft.entity.projectile.EntityTippedArrow;
+import net.minecraft.init.Enchantments;
 import net.minecraft.init.Items;
+import net.minecraft.init.SoundEvents;
+import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.BlockPos;
+import net.minecraft.network.datasync.DataParameter;
+import net.minecraft.network.datasync.DataSerializers;
+import net.minecraft.network.datasync.EntityDataManager;
+import net.minecraft.util.SoundEvent;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.api.entity.IAntiEntity;
+import com.shinoow.abyssalcraft.common.entity.ai.EntityAIAttackRangedBowAnti;
 
 public class EntityAntiSkeleton extends EntityMob implements IRangedAttackMob, IAntiEntity {
 
-	private EntityAIArrowAttack aiArrowAttack = new EntityAIArrowAttack(this, 1.0D, 20, 60, 15.0F);
+	private static final DataParameter<Boolean> field_184728_b = EntityDataManager.<Boolean>createKey(EntityAntiSkeleton.class, DataSerializers.BOOLEAN);
+	private EntityAIAttackRangedBowAnti aiArrowAttack = new EntityAIAttackRangedBowAnti(this, 1.0D, 20, 15.0F);
 
 	public EntityAntiSkeleton(World par1World){
 		super(par1World);
@@ -64,40 +75,40 @@ public class EntityAntiSkeleton extends EntityMob implements IRangedAttackMob, I
 	{
 		super.applyEntityAttributes();
 
-		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.25D);
-		if(AbyssalCraft.hardcoreMode) getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(80.0D);
-		else getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(40.0D);
+		getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.25D);
+		if(AbyssalCraft.hardcoreMode) getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(80.0D);
+		else getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(40.0D);
 	}
 
 	@Override
 	protected void entityInit()
 	{
 		super.entityInit();
-		dataWatcher.addObject(13, new Byte((byte)0));
+		dataWatcher.register(field_184728_b, Boolean.valueOf(false));
 	}
 
 	@Override
-	protected String getLivingSound()
+	protected SoundEvent getAmbientSound()
 	{
-		return "mob.skeleton.say";
+		return SoundEvents.entity_skeleton_ambient;
 	}
 
 	@Override
-	protected String getHurtSound()
+	protected SoundEvent getHurtSound()
 	{
-		return "mob.skeleton.hurt";
+		return SoundEvents.entity_skeleton_hurt;
 	}
 
 	@Override
-	protected String getDeathSound()
+	protected SoundEvent getDeathSound()
 	{
-		return "mob.skeleton.death";
+		return SoundEvents.entity_skeleton_death;
 	}
 
 	@Override
-	protected void playStepSound(BlockPos pos, Block par4Block)
+	protected void playStepSound(BlockPos pos, Block blockIn)
 	{
-		playSound("mob.skeleton.step", 0.15F, 1.0F);
+		playSound(SoundEvents.entity_skeleton_step, 0.15F, 1.0F);
 	}
 
 	@Override
@@ -111,9 +122,9 @@ public class EntityAntiSkeleton extends EntityMob implements IRangedAttackMob, I
 	{
 		super.updateRidden();
 
-		if (ridingEntity instanceof EntityCreature)
+		if (getRidingEntity() instanceof EntityCreature)
 		{
-			EntityCreature entitycreature = (EntityCreature)ridingEntity;
+			EntityCreature entitycreature = (EntityCreature)getRidingEntity();
 			renderYawOffset = entitycreature.renderYawOffset;
 		}
 	}
@@ -153,12 +164,18 @@ public class EntityAntiSkeleton extends EntityMob implements IRangedAttackMob, I
 	}
 
 	@Override
+	protected void setEquipmentBasedOnDifficulty(DifficultyInstance difficulty)
+	{
+		super.setEquipmentBasedOnDifficulty(difficulty);
+		setItemStackToSlot(EntityEquipmentSlot.MAINHAND, new ItemStack(Items.bow));
+	}
+
+	@Override
 	public IEntityLivingData onInitialSpawn(DifficultyInstance difficulty, IEntityLivingData par1EntityLivingData)
 	{
 		par1EntityLivingData = super.onInitialSpawn(difficulty, par1EntityLivingData);
 
-		tasks.addTask(4, aiArrowAttack);
-		setCurrentItemOrArmor(0, new ItemStack(Items.bow));
+		setEquipmentBasedOnDifficulty(difficulty);
 		setEnchantmentBasedOnDifficulty(difficulty);
 
 		setCanPickUpLoot(rand.nextFloat() < 0.55F * difficulty.getClampedAdditionalDifficulty());
@@ -172,9 +189,14 @@ public class EntityAntiSkeleton extends EntityMob implements IRangedAttackMob, I
 	@Override
 	public void attackEntityWithRangedAttack(EntityLivingBase par1EntityLivingBase, float par2)
 	{
-		EntityArrow entityarrow = new EntityArrow(worldObj, this, par1EntityLivingBase, 1.6F, 14 - worldObj.getDifficulty().getDifficultyId() * 4);
-		int i = EnchantmentHelper.getEnchantmentLevel(Enchantment.power.effectId, getHeldItem());
-		int j = EnchantmentHelper.getEnchantmentLevel(Enchantment.punch.effectId, getHeldItem());
+		EntityArrow entityarrow = new EntityTippedArrow(worldObj, this);
+		double d0 = par1EntityLivingBase.posX - posX;
+		double d1 = par1EntityLivingBase.getEntityBoundingBox().minY + par1EntityLivingBase.height / 3.0F - entityarrow.posY;
+		double d2 = par1EntityLivingBase.posZ - posZ;
+		double d3 = MathHelper.sqrt_double(d0 * d0 + d2 * d2);
+		entityarrow.setThrowableHeading(d0, d1 + d3 * 0.20000000298023224D, d2, 1.6F, 14 - worldObj.getDifficulty().getDifficultyId() * 4);
+		int i = EnchantmentHelper.getMaxEnchantmentLevel(Enchantments.power, this);
+		int j = EnchantmentHelper.getMaxEnchantmentLevel(Enchantments.punch, this);
 		entityarrow.setDamage(par2 * 2.0F + rand.nextGaussian() * 0.25D + worldObj.getDifficulty().getDifficultyId() * 0.11F);
 
 		if (i > 0)
@@ -183,17 +205,27 @@ public class EntityAntiSkeleton extends EntityMob implements IRangedAttackMob, I
 		if (j > 0)
 			entityarrow.setKnockbackStrength(j);
 
-		if (EnchantmentHelper.getEnchantmentLevel(Enchantment.flame.effectId, getHeldItem()) > 0)
+		if (EnchantmentHelper.getMaxEnchantmentLevel(Enchantments.flame, this) > 0)
 			entityarrow.setFire(100);
 
-		playSound("random.bow", 1.0F, 1.0F / (getRNG().nextFloat() * 0.4F + 0.8F));
+		playSound(SoundEvents.entity_skeleton_shoot, 1.0F, 1.0F / (getRNG().nextFloat() * 0.4F + 0.8F));
 		worldObj.spawnEntityInWorld(entityarrow);
 	}
 
 	@Override
 	public double getYOffset()
 	{
-		return super.getYOffset() - 0.5D;
+		return -0.35D;
 	}
 
+	@SideOnly(Side.CLIENT)
+	public boolean func_184725_db()
+	{
+		return dataWatcher.get(field_184728_b).booleanValue();
+	}
+
+	public void func_184724_a(boolean p_184724_1_)
+	{
+		dataWatcher.set(field_184728_b, Boolean.valueOf(p_184724_1_));
+	}
 }

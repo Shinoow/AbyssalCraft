@@ -13,23 +13,25 @@ package com.shinoow.abyssalcraft.common.items;
 
 import java.util.List;
 
+import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.DamageSource;
+import net.minecraft.util.EnumActionResult;
+import net.minecraft.util.EnumHand;
+import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.util.math.Vec3d;
+import net.minecraft.util.text.translation.I18n;
+import net.minecraft.world.World;
+
 import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
 import com.shinoow.abyssalcraft.api.entity.IAntiEntity;
 import com.shinoow.abyssalcraft.api.entity.ICoraliumEntity;
 import com.shinoow.abyssalcraft.api.entity.IDreadEntity;
-
-import net.minecraft.entity.EntityLiving;
-import net.minecraft.entity.boss.IBossDisplayData;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.AxisAlignedBB;
-import net.minecraft.util.DamageSource;
-import net.minecraft.util.StatCollector;
-import net.minecraft.util.Vec3;
-import net.minecraft.world.World;
 
 public class ItemDrainStaff extends Item {
 
@@ -62,18 +64,18 @@ public class ItemDrainStaff extends Item {
 
 	@Override
 	@SuppressWarnings("rawtypes")
-	public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player) {
+	public ActionResult<ItemStack> onItemRightClick(ItemStack stack, World world, EntityPlayer player, EnumHand hand) {
 
 		int range = 50;
-		Vec3 v = player.getLookVec().normalize();
+		Vec3d v = player.getLookVec().normalize();
 		for(int i = 1;i<range;i++){
 
-			AxisAlignedBB aabb = AxisAlignedBB.fromBounds(player.posX + v.xCoord * i, player.posY + v.yCoord * i, player.posZ + v.zCoord * i, player.posX + v.xCoord * i, player.posY + v.yCoord * i, player.posZ + v.zCoord * i);
+			AxisAlignedBB aabb = new AxisAlignedBB(player.posX + v.xCoord * i, player.posY + v.yCoord * i, player.posZ + v.zCoord * i, player.posX + v.xCoord * i, player.posY + v.yCoord * i, player.posZ + v.zCoord * i);
 			List list = world.getEntitiesWithinAABB(EntityLiving.class, aabb);
 			if(list.iterator().hasNext()){
 				EntityLiving target = (EntityLiving)list.get(0);
 
-				if(target.getCreatureAttribute() == AbyssalCraftAPI.SHADOW && !(target instanceof IBossDisplayData)){
+				if(target.getCreatureAttribute() == AbyssalCraftAPI.SHADOW && target.isNonBoss()){
 					if(!target.isDead){
 						if(target.attackEntityFrom(DamageSource.causePlayerDamage(player), 1))
 							increaseEnergy(stack, "Shadow");
@@ -82,8 +84,8 @@ public class ItemDrainStaff extends Item {
 							player.inventory.addItemStackToInventory(new ItemStack(AbyssalCraft.shadowgem));
 						}
 					}
-				} else if(world.provider.getDimensionId() == AbyssalCraft.configDimId1 && target instanceof ICoraliumEntity &&
-						!(target instanceof IBossDisplayData)){
+				} else if(world.provider.getDimension() == AbyssalCraft.configDimId1 && target instanceof ICoraliumEntity &&
+						target.isNonBoss()){
 					if(!target.isDead){
 						if(target.attackEntityFrom(DamageSource.causePlayerDamage(player), 1))
 							increaseEnergy(stack, "Abyssal");
@@ -92,8 +94,8 @@ public class ItemDrainStaff extends Item {
 							player.inventory.addItemStackToInventory(new ItemStack(AbyssalCraft.essence, 1, 0));
 						}
 					}
-				} else if(world.provider.getDimensionId() == AbyssalCraft.configDimId2 && target instanceof IDreadEntity &&
-						!(target instanceof IBossDisplayData)){
+				} else if(world.provider.getDimension() == AbyssalCraft.configDimId2 && target instanceof IDreadEntity &&
+						target.isNonBoss()){
 					if(!target.isDead){
 						if(target.attackEntityFrom(DamageSource.causePlayerDamage(player), 1))
 							increaseEnergy(stack, "Dread");
@@ -102,9 +104,9 @@ public class ItemDrainStaff extends Item {
 							player.inventory.addItemStackToInventory(new ItemStack(AbyssalCraft.essence, 1, 1));
 						}
 					}
-				} else if(world.provider.getDimensionId() == AbyssalCraft.configDimId3 && target instanceof ICoraliumEntity
+				} else if(world.provider.getDimension() == AbyssalCraft.configDimId3 && target instanceof ICoraliumEntity
 						&& target instanceof IDreadEntity && target instanceof IAntiEntity &&
-						target.getCreatureAttribute() != AbyssalCraftAPI.SHADOW && !(target instanceof IBossDisplayData))
+						target.getCreatureAttribute() != AbyssalCraftAPI.SHADOW && target.isNonBoss())
 					if(!target.isDead){
 						if(target.attackEntityFrom(DamageSource.causePlayerDamage(player), 1))
 							increaseEnergy(stack, "Omothol");
@@ -134,7 +136,7 @@ public class ItemDrainStaff extends Item {
 		}
 
 
-		return stack;
+		return new ActionResult(EnumActionResult.PASS, stack);
 	}
 
 	@Override
@@ -144,9 +146,9 @@ public class ItemDrainStaff extends Item {
 		int dread = getEnergy(is, "Dread");
 		int omothol = getEnergy(is, "Omothol");
 		int shadow = getEnergy(is, "Shadow");
-		l.add(StatCollector.translateToLocal("tooltip.drainstaff.energy.1")+": " + abyssal + "/100");
-		l.add(StatCollector.translateToLocal("tooltip.drainstaff.energy.2")+": " + dread + "/100");
-		l.add(StatCollector.translateToLocal("tooltip.drainstaff.energy.3")+": " + omothol + "/100");
-		l.add(StatCollector.translateToLocal("tooltip.drainstaff.energy.4")+": " + shadow + "/200");
+		l.add(I18n.translateToLocal("tooltip.drainstaff.energy.1")+": " + abyssal + "/100");
+		l.add(I18n.translateToLocal("tooltip.drainstaff.energy.2")+": " + dread + "/100");
+		l.add(I18n.translateToLocal("tooltip.drainstaff.energy.3")+": " + omothol + "/100");
+		l.add(I18n.translateToLocal("tooltip.drainstaff.energy.4")+": " + shadow + "/200");
 	}
 }

@@ -83,7 +83,7 @@ public class EngraverRecipes {
 
 	private boolean areStacksEqual(ItemStack par1ItemStack, ItemStack par2ItemStack)
 	{
-		return par2ItemStack.getItem() == par1ItemStack.getItem() && (par2ItemStack.getItemDamage() == OreDictionary.WILDCARD_VALUE || par2ItemStack.getItemDamage() == par1ItemStack.getItemDamage());
+		return (par2ItemStack.getItem() == par1ItemStack.getItem() || par1ItemStack.getItem() == ACItems.coin) && (par2ItemStack.getItemDamage() == OreDictionary.WILDCARD_VALUE || par2ItemStack.getItemDamage() == par1ItemStack.getItemDamage());
 	}
 
 	/**

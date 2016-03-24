@@ -16,7 +16,7 @@ import java.util.Map;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
-import net.minecraft.util.BlockPos;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 import com.google.common.collect.Maps;
@@ -98,7 +98,7 @@ public class RitualUtil {
 							world.isAirBlock(pos.add(x + 2, y, z)) && world.isAirBlock(pos.add(x + 2, y, z + 1)) &&
 							world.isAirBlock(pos.add(x + 1, y, z + 1)) && world.isAirBlock(pos.add(x + 1, y, z + 2)) &&
 							world.isAirBlock(pos.add(x, y, z + 2)) && world.isAirBlock(pos.add(x -1, y, z + 2)))
-						if(RitualRegistry.instance().sameBookType(world.provider.getDimensionId(), ritualBlocks.get(ritualBlock.getBlock()))){
+						if(RitualRegistry.instance().sameBookType(world.provider.getDimension(), ritualBlocks.get(ritualBlock.getBlock()))){
 							createAltar(world, pos, ritualBlock.getBlock());
 							return true;
 						}

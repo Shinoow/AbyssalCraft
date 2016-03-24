@@ -13,10 +13,11 @@ package com.shinoow.abyssalcraft.common.blocks;
 
 import java.util.List;
 
+import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyEnum;
-import net.minecraft.block.state.BlockState;
+import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
@@ -29,7 +30,7 @@ public class BlockDarkEthaxiumBrick extends BlockACBasic {
 	public static final PropertyEnum TYPE = PropertyEnum.create("type", BlockEthaxiumBrick.EnumBrickType.class);
 
 	public BlockDarkEthaxiumBrick() {
-		super(Material.rock, "pickaxe", 8, 150.0F, Float.MAX_VALUE, soundTypeStone);
+		super(Material.rock, "pickaxe", 8, 150.0F, Float.MAX_VALUE, SoundType.STONE);
 		setDefaultState(blockState.getBaseState().withProperty(TYPE, EnumBrickType.NORMAL));
 
 	}
@@ -57,7 +58,7 @@ public class BlockDarkEthaxiumBrick extends BlockACBasic {
 	}
 
 	@Override
-	protected BlockState createBlockState() {
-		return new BlockState(this, new IProperty[] { TYPE });
+	protected BlockStateContainer createBlockState() {
+		return new BlockStateContainer(this, new IProperty[] { TYPE });
 	}
 }

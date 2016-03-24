@@ -13,7 +13,7 @@ package com.shinoow.abyssalcraft.common.world.biome;
 
 import java.util.Random;
 
-import net.minecraft.util.BlockPos;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.gen.feature.WorldGenMinable;
@@ -30,14 +30,14 @@ import com.shinoow.abyssalcraft.common.entity.EntityShadowMonster;
 public class BiomeGenDarklandsMountains extends BiomeGenBase {
 
 	@SuppressWarnings("unchecked")
-	public BiomeGenDarklandsMountains(int par1)
+	public BiomeGenDarklandsMountains(BiomeProperties par1)
 	{
 		super(par1);
-		minHeight = 1.3F;
-		maxHeight = 0.9F;
+		//		minHeight = 1.3F;
+		//		maxHeight = 0.9F;
 		topBlock = AbyssalCraft.Darkstone.getDefaultState();
 		fillerBlock = AbyssalCraft.Darkstone.getDefaultState();
-		waterColorMultiplier = 14745518;
+		//		waterColorMultiplier = 14745518;
 		theBiomeDecorator.treesPerChunk = 0;
 		spawnableMonsterList.add(new SpawnListEntry(EntityDepthsGhoul.class, 45, 1, 2));
 		spawnableMonsterList.add(new SpawnListEntry(EntityAbyssalZombie.class, 45, 1, 2));

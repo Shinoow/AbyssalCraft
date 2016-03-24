@@ -15,8 +15,9 @@ import net.minecraft.client.model.ModelBiped;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.BlockPos;
+import net.minecraft.util.EnumHand;
 import net.minecraft.util.IThreadListener;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
@@ -34,7 +35,7 @@ public class CommonProxy implements IGuiHandler {
 	@Override
 	public Object getServerGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
 		TileEntity entity = world.getTileEntity(new BlockPos(x, y, z));
-		ItemStack stack = player.getCurrentEquippedItem();
+		ItemStack stack = player.getHeldItem(EnumHand.MAIN_HAND);
 
 		if(entity != null)
 			switch(ID) {
@@ -59,7 +60,7 @@ public class CommonProxy implements IGuiHandler {
 		if(stack != null)
 			switch(ID){
 			case AbyssalCraft.crystalbagGuiID:
-				return new ContainerCrystalBag(player.inventory, new InventoryCrystalBag(player.getHeldItem()));
+				return new ContainerCrystalBag(player.inventory, new InventoryCrystalBag(player.getHeldItem(EnumHand.MAIN_HAND)));
 			}
 		return null;
 	}
@@ -67,7 +68,7 @@ public class CommonProxy implements IGuiHandler {
 	@Override
 	public Object getClientGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
 		TileEntity entity = world.getTileEntity(new BlockPos(x, y, z));
-		ItemStack stack = player.getCurrentEquippedItem();
+		ItemStack stack = player.getHeldItem(EnumHand.MAIN_HAND);
 
 		if(entity != null)
 			switch(ID) {
@@ -95,7 +96,7 @@ public class CommonProxy implements IGuiHandler {
 					return new GuiNecronomicon(((ItemNecronomicon)stack.getItem()).getBookType());
 				break;
 			case AbyssalCraft.crystalbagGuiID:
-				return new GuiCrystalBag(new ContainerCrystalBag(player.inventory, new InventoryCrystalBag(player.getHeldItem())));
+				return new GuiCrystalBag(new ContainerCrystalBag(player.inventory, new InventoryCrystalBag(player.getHeldItem(EnumHand.MAIN_HAND))));
 			}
 		return null;
 	}

@@ -14,9 +14,9 @@ package com.shinoow.abyssalcraft.common.disruptions;
 import java.util.List;
 
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.potion.Potion;
+import net.minecraft.init.MobEffects;
 import net.minecraft.potion.PotionEffect;
-import net.minecraft.util.BlockPos;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 import com.shinoow.abyssalcraft.api.energy.disruption.DisruptionEntry;
@@ -31,6 +31,6 @@ public class DisruptionFreeze extends DisruptionEntry {
 	public void disrupt(World world, BlockPos pos, List<EntityPlayer> players) {
 		if(!players.isEmpty())
 			for(EntityPlayer player : players)
-				player.addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, 100, 14));
+				player.addPotionEffect(new PotionEffect(MobEffects.moveSlowdown, 100, 14));
 	}
 }

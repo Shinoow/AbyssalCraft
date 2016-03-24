@@ -12,7 +12,7 @@
 package com.shinoow.abyssalcraft.client;
 
 import net.minecraft.client.particle.EntityFX;
-import net.minecraft.client.renderer.WorldRenderer;
+import net.minecraft.client.renderer.VertexBuffer;
 import net.minecraft.entity.Entity;
 import net.minecraft.world.World;
 
@@ -28,9 +28,9 @@ public class ACParticleFX extends EntityFX {
 	public ACParticleFX(World par1World, double par2, double par4, double par6, float par8, float par9, float par10, float par11)
 	{
 		super(par1World, par2, par4, par6, 0.0D, 0.0D, 0.0D);
-		motionX *= 0.10000000149011612D;
-		motionY *= 0.10000000149011612D;
-		motionZ *= 0.10000000149011612D;
+		xSpeed *= 0.10000000149011612D;
+		ySpeed *= 0.10000000149011612D;
+		zSpeed *= 0.10000000149011612D;
 
 		if (par9 == 0.0F)
 			par9 = 1.0F;
@@ -41,11 +41,11 @@ public class ACParticleFX extends EntityFX {
 		reddustParticleScale = particleScale;
 		particleMaxAge = (int)(8.0D / (Math.random() * 0.8D + 0.2D));
 		particleMaxAge = (int)(particleMaxAge * par8);
-		noClip = false;
+		//		noClip = false;
 	}
 
 	@Override
-	public void renderParticle(WorldRenderer worldRendererIn, Entity entityIn, float par2, float par3, float par4, float par5, float par6, float par7)
+	public void renderParticle(VertexBuffer worldRendererIn, Entity entityIn, float par2, float par3, float par4, float par5, float par6, float par7)
 	{
 		float var8 = (particleAge + par2) / particleMaxAge * 32.0F;
 
@@ -67,25 +67,25 @@ public class ACParticleFX extends EntityFX {
 		prevPosZ = posZ;
 
 		if (particleAge++ >= particleMaxAge)
-			setDead();
+			setExpired();
 
 		setParticleTextureIndex(7 - particleAge * 8 / particleMaxAge);
-		moveEntity(motionX, motionY, motionZ);
+		moveEntity(xSpeed, ySpeed, zSpeed);
 
 		if (posY == prevPosY)
 		{
-			motionX *= 1.1D;
-			motionZ *= 1.1D;
+			xSpeed *= 1.1D;
+			zSpeed *= 1.1D;
 		}
 
-		motionX *= 0.9599999785423279D;
-		motionY *= 0.9599999785423279D;
-		motionZ *= 0.9599999785423279D;
+		xSpeed *= 0.9599999785423279D;
+		ySpeed *= 0.9599999785423279D;
+		zSpeed *= 0.9599999785423279D;
 
-		if (onGround)
+		if (isCollided)
 		{
-			motionX *= 0.699999988079071D;
-			motionZ *= 0.699999988079071D;
+			xSpeed *= 0.699999988079071D;
+			zSpeed *= 0.699999988079071D;
 		}
 	}
 }

@@ -15,21 +15,29 @@ import java.util.Random;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
+import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyBool;
-import net.minecraft.block.state.BlockState;
+import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.init.Items;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.BlockPos;
+import net.minecraft.util.EnumBlockRenderType;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumHand;
+import net.minecraft.util.SoundCategory;
+import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.Explosion;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
@@ -44,7 +52,14 @@ public class BlockODB extends BlockContainer {
 		super(Material.iron);
 		setDefaultState(blockState.getBaseState().withProperty(EXPLODE, Boolean.valueOf(false)));
 		setCreativeTab(AbyssalCraft.tabBlock);
-		setBlockBounds(0.1F, 0.0F, 0.1F, 1.0F, 0.8F, 1.0F);
+		//		setBlockBounds(0.1F, 0.0F, 0.1F, 1.0F, 0.8F, 1.0F);
+		setStepSound(SoundType.METAL);
+	}
+
+	@Override
+	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess par1World, BlockPos pos)
+	{
+		return new AxisAlignedBB(0.1F, 0.0F, 0.1F, 1.0F, 0.8F, 1.0F);
 	}
 
 	@Override
@@ -54,17 +69,17 @@ public class BlockODB extends BlockContainer {
 	}
 
 	@Override
-	public int getRenderType() {
-		return 2;
+	public EnumBlockRenderType getRenderType(IBlockState state) {
+		return EnumBlockRenderType.ENTITYBLOCK_ANIMATED;
 	}
 
 	@Override
-	public boolean isOpaqueCube() {
+	public boolean isOpaqueCube(IBlockState state) {
 		return false;
 	}
 
 	@Override
-	public boolean isFullCube()
+	public boolean isFullCube(IBlockState state)
 	{
 		return false;
 	}
@@ -121,16 +136,16 @@ public class BlockODB extends BlockContainer {
 			{
 				EntityODBPrimed var7 = new EntityODBPrimed(par1World, pos.getX() + 0.5F, pos.getY() + 0.5F, pos.getZ() + 0.5F, par6);
 				par1World.spawnEntityInWorld(var7);
-				par1World.playSoundAtEntity(var7, "game.tnt.primed", 1.0F, 1.0F);
+				par1World.playSound(var7.posX, var7.posY, var7.posZ, SoundEvents.entity_tnt_primed, SoundCategory.BLOCKS, 1.0F, 1.0F, false);
 			}
 	}
 
 	@Override
-	public boolean onBlockActivated(World par1World, BlockPos pos, IBlockState state, EntityPlayer par5EntityPlayer, EnumFacing side, float hitX, float hitY, float hitZ)
+	public boolean onBlockActivated(World par1World, BlockPos pos, IBlockState state, EntityPlayer par5EntityPlayer, EnumHand hand, ItemStack heldItem, EnumFacing side, float hitX, float hitY, float hitZ)
 	{
-		if (par5EntityPlayer.getCurrentEquippedItem() != null)
+		if (heldItem != null)
 		{
-			Item item = par5EntityPlayer.getCurrentEquippedItem().getItem();
+			Item item = heldItem.getItem();
 
 			if (item == Items.flint_and_steel || item == Items.fire_charge)
 			{
@@ -138,15 +153,15 @@ public class BlockODB extends BlockContainer {
 				par1World.setBlockToAir(pos);
 
 				if (item == Items.flint_and_steel)
-					par5EntityPlayer.getCurrentEquippedItem().damageItem(1, par5EntityPlayer);
+					heldItem.damageItem(1, par5EntityPlayer);
 				else if (!par5EntityPlayer.capabilities.isCreativeMode)
-					--par5EntityPlayer.getCurrentEquippedItem().stackSize;
+					--heldItem.stackSize;
 
 				return true;
 			}
 		}
 
-		return super.onBlockActivated(par1World, pos, state, par5EntityPlayer, side, hitX, hitY, hitZ);
+		return super.onBlockActivated(par1World, pos, state, par5EntityPlayer, hand, heldItem, side, hitX, hitY, hitZ);
 	}
 
 	@Override
@@ -189,8 +204,8 @@ public class BlockODB extends BlockContainer {
 	}
 
 	@Override
-	protected BlockState createBlockState()
+	protected BlockStateContainer createBlockState()
 	{
-		return new BlockState(this, new IProperty[] {EXPLODE});
+		return new BlockStateContainer(this, new IProperty[] {EXPLODE});
 	}
 }

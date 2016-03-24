@@ -19,7 +19,7 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.entity.IEntityLivingData;
 import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.EntityAIAttackOnCollide;
+import net.minecraft.entity.ai.EntityAIAttackMelee;
 import net.minecraft.entity.ai.EntityAIHurtByTarget;
 import net.minecraft.entity.ai.EntityAILookIdle;
 import net.minecraft.entity.ai.EntityAIMoveTowardsRestriction;
@@ -30,10 +30,14 @@ import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.ai.attributes.IAttributeInstance;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.SoundEvents;
+import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.SoundEvent;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.World;
 
@@ -49,7 +53,7 @@ public class EntityDreadguard extends EntityMob implements IDreadEntity {
 		super(par1World);
 		setSize(1.0F, 3.0F);
 		isImmuneToFire = true;
-		tasks.addTask(2, new EntityAIAttackOnCollide(this, EntityPlayer.class, 1.0D, true));
+		tasks.addTask(2, new EntityAIAttackMelee(this, 1.0D, true));
 		tasks.addTask(3, new EntityAIMoveTowardsRestriction(this, 1.0D));
 		tasks.addTask(4, new EntityAIWander(this, 1.0D));
 		tasks.addTask(5, new EntityAILookIdle(this));
@@ -63,14 +67,14 @@ public class EntityDreadguard extends EntityMob implements IDreadEntity {
 	{
 		super.applyEntityAttributes();
 
-		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.23000000417232513D);
+		getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.23000000417232513D);
 
 		if(AbyssalCraft.hardcoreMode){
-			getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(240.0D);
-			getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(20.0D);
+			getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(240.0D);
+			getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(20.0D);
 		} else {
-			getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(120.0D);
-			getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(10.0D);
+			getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(120.0D);
+			getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(10.0D);
 		}
 	}
 
@@ -96,7 +100,7 @@ public class EntityDreadguard extends EntityMob implements IDreadEntity {
 
 		if (super.attackEntityAsMob(par1Entity))
 			if (par1Entity instanceof EntityLivingBase)
-				((EntityLivingBase)par1Entity).addPotionEffect(new PotionEffect(AbyssalCraft.Dplague.id, 100));
+				((EntityLivingBase)par1Entity).addPotionEffect(new PotionEffect(AbyssalCraft.Dplague, 100));
 		return super.attackEntityAsMob(par1Entity);
 	}
 
@@ -112,26 +116,26 @@ public class EntityDreadguard extends EntityMob implements IDreadEntity {
 	}
 
 	@Override
-	protected String getLivingSound()
+	protected SoundEvent getAmbientSound()
 	{
-		return "abyssalcraft:dreadguard.idle";
+		return AbyssalCraft.dreadguard_ambient;
 	}
 
 	@Override
-	protected String getHurtSound()
+	protected SoundEvent getHurtSound()
 	{
-		return "abyssalcraft:dreadguard.hit";
+		return AbyssalCraft.dreadguard_hurt;
 	}
 
 	@Override
-	protected String getDeathSound()
+	protected SoundEvent getDeathSound()
 	{
-		return "abyssalcraft:dreadguard.death";
+		return AbyssalCraft.dreadguard_death;
 	}
 
-	protected void playStepSound(int par1, int par2, int par3, int par4)
+	protected void playStepSound(BlockPos pos, int par4)
 	{
-		worldObj.playSoundAtEntity(this, "mob.zombie.step", 0.15F, 1.0F);
+		playSound(SoundEvents.entity_zombie_step, 0.15F, 1.0F);
 	}
 
 	@Override
@@ -150,10 +154,10 @@ public class EntityDreadguard extends EntityMob implements IDreadEntity {
 	public void onLivingUpdate()
 	{
 		if (worldObj.isRemote){
-			setCurrentItemOrArmor(1, new ItemStack(AbyssalCraft.bootsD));
-			setCurrentItemOrArmor(3, new ItemStack(AbyssalCraft.plateD));
-			setCurrentItemOrArmor(4, new ItemStack(AbyssalCraft.helmetD));
-			setCurrentItemOrArmor(2, new ItemStack(AbyssalCraft.legsD));
+			setItemStackToSlot(EntityEquipmentSlot.HEAD, new ItemStack(AbyssalCraft.helmetD));
+			setItemStackToSlot(EntityEquipmentSlot.CHEST, new ItemStack(AbyssalCraft.plateD));
+			setItemStackToSlot(EntityEquipmentSlot.LEGS, new ItemStack(AbyssalCraft.legsD));
+			setItemStackToSlot(EntityEquipmentSlot.FEET, new ItemStack(AbyssalCraft.bootsD));
 		}
 		super.onLivingUpdate();
 	}
@@ -163,7 +167,7 @@ public class EntityDreadguard extends EntityMob implements IDreadEntity {
 	{
 		par1EntityLivingData = super.onInitialSpawn(difficulty, par1EntityLivingData);
 
-		IAttributeInstance attribute = getEntityAttribute(SharedMonsterAttributes.attackDamage);
+		IAttributeInstance attribute = getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE);
 		Calendar calendar = worldObj.getCurrentDate();
 
 		if (calendar.get(2) + 1 == 10 && calendar.get(5) == 31 && rand.nextFloat() < 0.25F)

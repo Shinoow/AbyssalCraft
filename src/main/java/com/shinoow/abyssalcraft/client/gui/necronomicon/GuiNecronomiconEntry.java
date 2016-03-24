@@ -18,13 +18,12 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.renderer.RenderHelper;
-import net.minecraft.client.renderer.entity.RenderItem;
+import net.minecraft.client.renderer.RenderItem;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.StatCollector;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.oredict.OreDictionary;
 
 import org.lwjgl.input.Keyboard;
@@ -72,7 +71,7 @@ public class GuiNecronomiconEntry extends GuiNecronomicon {
 		buttonList.add(buttonPreviousPage = new ButtonNextPage(2, i + 18, b0 + 154, false));
 		if(data != null)
 			for(int n = 0; n < data.getChapters().length; n++)
-				buttonList.add(buttons[n] = new ButtonCategory(3 + n, i + 10, b0 + 20 + 17*n,this, data.getChapters()[n].getTitle(), icon));
+				buttonList.add(buttons[n] = new ButtonCategory(3 + n, i + 14, b0 + 24 + 17*n,this, data.getChapters()[n].getTitle(), icon));
 		updateButtons();
 	}
 
@@ -173,7 +172,7 @@ public class GuiNecronomiconEntry extends GuiNecronomicon {
 		byte b0 = 2;
 		String stuff;
 
-		stuff = StatCollector.translateToLocal(chapter.getTitle());
+		stuff = I18n.format(chapter.getTitle(), new Object[0]);
 		fontRendererObj.drawSplitString(stuff, k + 20, b0 + 16, 116, 0xC40000);
 		setTurnupLimit(chapter.getTurnupAmount());
 
@@ -308,7 +307,7 @@ public class GuiNecronomiconEntry extends GuiNecronomicon {
 			{
 				String s_ = s;
 				if(!first)
-					s_ = EnumChatFormatting.GRAY + s;
+					s_ = TextFormatting.GRAY + s;
 				parsedTooltip.add(s_);
 				first = false;
 			}
@@ -341,7 +340,7 @@ public class GuiNecronomiconEntry extends GuiNecronomicon {
 		int k = (width - guiWidth) / 2;
 		byte b0 = 2;
 		String stuff;
-		stuff = StatCollector.translateToLocal(data.getTitle());
+		stuff = I18n.format(data.getTitle(), new Object[0]);
 		fontRendererObj.drawSplitString(stuff, k + 20, b0 + 16, 116, 0xC40000);
 		if(data.getInformation() != null) writeText(2, data.getInformation());
 	}

@@ -50,8 +50,8 @@ public class Renderdreadguard extends RenderBiped<EntityDreadguard>
 			@Override
 			protected void initArmor()
 			{
-				field_177189_c = new ModelZombie(0.5F, true);
-				field_177186_d = new ModelZombie(1.0F, true);
+				modelLeggings = new ModelZombie(0.5F, true);
+				modelArmor = new ModelZombie(1.0F, true);
 			}
 		};
 		this.addLayer(layerbipedarmor);

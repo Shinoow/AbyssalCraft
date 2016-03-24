@@ -14,8 +14,7 @@ package com.shinoow.abyssalcraft.common.blocks.itemblock;
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.EnumChatFormatting;
-import net.minecraft.util.StatCollector;
+import net.minecraft.util.text.TextFormatting;
 
 /**Shin = lazy. Deal with it.*/
 public class ItemBlockColorName extends ItemBlock {
@@ -27,16 +26,16 @@ public class ItemBlockColorName extends ItemBlock {
 	@Override
 	public String getItemStackDisplayName(ItemStack par1ItemStack) {
 		if(getUnlocalizedName().contains("abyblock"))
-			return EnumChatFormatting.DARK_AQUA + StatCollector.translateToLocal(getUnlocalizedName() + ".name");
+			return TextFormatting.DARK_AQUA + super.getItemStackDisplayName(par1ItemStack);
 		else if(getUnlocalizedName().contains("odb") || getUnlocalizedName().contains("dreadiumblock") ||
 				getUnlocalizedName().contains("darkethaxium"))
-			return EnumChatFormatting.DARK_RED + StatCollector.translateToLocal(getUnlocalizedName() + ".name");
+			return TextFormatting.DARK_RED + super.getItemStackDisplayName(par1ItemStack);
 		else if(getUnlocalizedName().contains("corblock") || getUnlocalizedName().contains("Eth")
 				|| getUnlocalizedName().contains("ethaxium") || getUnlocalizedName().contains("BOE"))
-			return EnumChatFormatting.AQUA + StatCollector.translateToLocal(getUnlocalizedName() + ".name");
+			return TextFormatting.AQUA + super.getItemStackDisplayName(par1ItemStack);
 		else if(getUnlocalizedName().contains("aby"))
-			return EnumChatFormatting.BLUE + StatCollector.translateToLocal(getUnlocalizedName() + ".name");
+			return TextFormatting.BLUE + super.getItemStackDisplayName(par1ItemStack);
 
-		return StatCollector.translateToLocal(getUnlocalizedName() + ".name");
+		return super.getItemStackDisplayName(par1ItemStack);
 	}
 }

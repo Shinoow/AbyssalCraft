@@ -11,9 +11,10 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.common.world;
 
-import net.minecraft.util.Vec3;
+import net.minecraft.util.math.Vec3d;
+import net.minecraft.world.DimensionType;
 import net.minecraft.world.WorldProvider;
-import net.minecraft.world.chunk.IChunkProvider;
+import net.minecraft.world.chunk.IChunkGenerator;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -25,13 +26,13 @@ public class WorldProviderDreadlands extends WorldProvider {
 	public void registerWorldChunkManager() {
 		worldChunkMgr = new WorldChunkManagerDreadlands(worldObj.getSeed(), worldObj.getWorldInfo().getTerrainType());
 		hasNoSky = true;
-		dimensionId = AbyssalCraft.configDimId2;
+		setDimension(AbyssalCraft.configDimId2);
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public Vec3 getFogColor(float par1, float par2) {
-		return new Vec3(0.20000000298023224D, 0.029999999329447746D, 0.029999999329447746D);
+	public Vec3d getFogColor(float par1, float par2) {
+		return new Vec3d(0.20000000298023224D, 0.029999999329447746D, 0.029999999329447746D);
 	}
 
 	@Override
@@ -45,7 +46,7 @@ public class WorldProviderDreadlands extends WorldProvider {
 	}
 
 	@Override
-	public IChunkProvider createChunkGenerator() {
+	public IChunkGenerator createChunkGenerator() {
 		return new ChunkProviderDreadlands(worldObj, worldObj.getSeed(), true);
 	}
 
@@ -86,13 +87,19 @@ public class WorldProviderDreadlands extends WorldProvider {
 	}
 
 	@Override
-	public String getDimensionName() {
-		return "The Dreadlands";
+	public DimensionType getDimensionType() {
+
+		return AbyssalCraft.THE_DREADLANDS;
 	}
 
-	@Override
-	public String getInternalNameSuffix() {
+	//	@Override
+	//	public String getDimensionName() {
+	//		return "The Dreadlands";
+	//	}
 
-		return "_dl";
-	}
+	//	@Override
+	//	public String getInternalNameSuffix() {
+	//
+	//		return "_dl";
+	//	}
 }

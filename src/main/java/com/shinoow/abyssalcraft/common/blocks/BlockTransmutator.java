@@ -13,12 +13,12 @@ package com.shinoow.abyssalcraft.common.blocks;
 
 import java.util.Random;
 
-import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
+import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyDirection;
-import net.minecraft.block.state.BlockState;
+import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
@@ -28,9 +28,11 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.BlockPos;
+import net.minecraft.util.EnumBlockRenderType;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumHand;
 import net.minecraft.util.EnumParticleTypes;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.internal.FMLNetworkHandler;
 import net.minecraftforge.fml.relauncher.Side;
@@ -51,6 +53,7 @@ public class BlockTransmutator extends BlockContainer {
 	public BlockTransmutator(boolean par1) {
 		super(Material.rock);
 		setDefaultState(blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH));
+		setStepSound(SoundType.STONE);
 		isLit = par1;
 		if(!isLit)
 			setCreativeTab(AbyssalCraft.tabDecoration);
@@ -72,10 +75,10 @@ public class BlockTransmutator extends BlockContainer {
 	{
 		if (!worldIn.isRemote)
 		{
-			Block block = worldIn.getBlockState(pos.north()).getBlock();
-			Block block1 = worldIn.getBlockState(pos.south()).getBlock();
-			Block block2 = worldIn.getBlockState(pos.west()).getBlock();
-			Block block3 = worldIn.getBlockState(pos.east()).getBlock();
+			IBlockState block = worldIn.getBlockState(pos.north());
+			IBlockState block1 = worldIn.getBlockState(pos.south());
+			IBlockState block2 = worldIn.getBlockState(pos.west());
+			IBlockState block3 = worldIn.getBlockState(pos.east());
 			EnumFacing enumfacing = state.getValue(FACING);
 
 			if (enumfacing == EnumFacing.NORTH && block.isFullBlock() && !block1.isFullBlock())
@@ -92,7 +95,7 @@ public class BlockTransmutator extends BlockContainer {
 	}
 
 	@Override
-	public boolean onBlockActivated(World par1World, BlockPos pos, IBlockState state, EntityPlayer par5EntityPlayer, EnumFacing side, float par7, float par8, float par9) {
+	public boolean onBlockActivated(World par1World, BlockPos pos, IBlockState state, EntityPlayer par5EntityPlayer, EnumHand hand, ItemStack heldItem, EnumFacing side, float par7, float par8, float par9) {
 		if(!par1World.isRemote)
 			FMLNetworkHandler.openGui(par5EntityPlayer, AbyssalCraft.instance, AbyssalCraft.transmutatorGuiID, par1World, pos.getX(), pos.getY(), pos.getZ());
 		return true;
@@ -181,7 +184,7 @@ public class BlockTransmutator extends BlockContainer {
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void randomDisplayTick(World world, BlockPos pos, IBlockState state, Random rand) {
+	public void randomDisplayTick(IBlockState state, World world, BlockPos pos, Random rand) {
 		if (isLit && AbyssalCraft.particleBlock){
 			EnumFacing enumfacing = state.getValue(FACING);
 			double d0 = pos.getX() + 0.5D;
@@ -214,39 +217,39 @@ public class BlockTransmutator extends BlockContainer {
 	}
 
 	@Override
-	public boolean hasComparatorInputOverride()
+	public boolean hasComparatorInputOverride(IBlockState state)
 	{
 		return true;
 	}
 
 	@Override
-	public int getComparatorInputOverride(World par1World, BlockPos pos)
+	public int getComparatorInputOverride(IBlockState state, World par1World, BlockPos pos)
 	{
 		return Container.calcRedstone(par1World.getTileEntity(pos));
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public Item getItem(World par1World, BlockPos pos)
+	public ItemStack getItem(World par1World, BlockPos pos, IBlockState state)
 	{
-		return Item.getItemFromBlock(AbyssalCraft.transmutator);
+		return new ItemStack(AbyssalCraft.transmutator);
 	}
 
 	@Override
-	public int getRenderType()
+	public EnumBlockRenderType getRenderType(IBlockState state)
 	{
-		return 3;
+		return EnumBlockRenderType.MODEL;
 	}
 
-	/**
-	 * Possibly modify the given BlockState before rendering it on an Entity (Minecarts, Endermen, ...)
-	 */
-	@Override
-	@SideOnly(Side.CLIENT)
-	public IBlockState getStateForEntityRender(IBlockState state)
-	{
-		return getDefaultState().withProperty(FACING, EnumFacing.SOUTH);
-	}
+	//	/**
+	//	 * Possibly modify the given BlockState before rendering it on an Entity (Minecarts, Endermen, ...)
+	//	 */
+	//	@Override
+	//	@SideOnly(Side.CLIENT)
+	//	public IBlockState getStateForEntityRender(IBlockState state)
+	//	{
+	//		return getDefaultState().withProperty(FACING, EnumFacing.SOUTH);
+	//	}
 
 	/**
 	 * Convert the given metadata into a BlockState for this Block
@@ -272,8 +275,8 @@ public class BlockTransmutator extends BlockContainer {
 	}
 
 	@Override
-	protected BlockState createBlockState()
+	protected BlockStateContainer createBlockState()
 	{
-		return new BlockState(this, new IProperty[] {FACING});
+		return new BlockStateContainer(this, new IProperty[] {FACING});
 	}
 }

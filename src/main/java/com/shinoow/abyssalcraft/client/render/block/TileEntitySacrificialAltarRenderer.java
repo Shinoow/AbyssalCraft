@@ -48,7 +48,7 @@ public class TileEntitySacrificialAltarRenderer extends TileEntitySpecialRendere
 			GL11.glColor4f(1F, 1F, 1F, 1F);
 			RenderManager rm = Minecraft.getMinecraft().getRenderManager();
 			if (rm.options.fancyGraphics)
-				rm.renderEntityWithPosYaw(entityitem, 0.0D, 0.0D, 0.0D, 0.0F, 0.0F);
+				rm.doRenderEntity(entityitem, 0.0D, 0.0D, 0.0D, 0.0F, 0.0F, false);
 			else{
 				GL11.glRotatef(180F, 0F, 1F, 0F);
 				rm.options.fancyGraphics = true;
@@ -56,7 +56,7 @@ public class TileEntitySacrificialAltarRenderer extends TileEntitySpecialRendere
 				int j = i % 65536;
 				int k = i / 65536;
 				OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, j / 1.0F, k / 1.0F);
-				rm.renderEntityWithPosYaw(entityitem, 0.0D, 0.0D, 0.0D, 0.0F, 0.0F);
+				rm.doRenderEntity(entityitem, 0.0D, 0.0D, 0.0D, 0.0F, 0.0F, false);
 				rm.options.fancyGraphics = false;
 			}
 			GL11.glPopMatrix();

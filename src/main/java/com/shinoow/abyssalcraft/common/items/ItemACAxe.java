@@ -11,34 +11,51 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.common.items;
 
+import java.util.Set;
+
+import net.minecraft.block.Block;
+import net.minecraft.block.material.Material;
+import net.minecraft.block.state.IBlockState;
+import net.minecraft.init.Blocks;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.ItemTool;
+import net.minecraft.util.text.TextFormatting;
+
+import com.google.common.collect.Sets;
 import com.shinoow.abyssalcraft.AbyssalCraft;
 
-import net.minecraft.item.ItemAxe;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.EnumChatFormatting;
-import net.minecraft.util.StatCollector;
+public class ItemACAxe extends ItemTool {
 
-public class ItemACAxe extends ItemAxe {
+	private TextFormatting format;
 
-	private EnumChatFormatting format;
+	private static final Set<Block> EFFECTIVE_ON = Sets.newHashSet(new Block[] {Blocks.planks, Blocks.bookshelf, Blocks.log, Blocks.log2, Blocks.chest, Blocks.pumpkin, Blocks.lit_pumpkin, Blocks.melon_block, Blocks.ladder, Blocks.wooden_button, Blocks.wooden_pressure_plate});
 
 	public ItemACAxe(ToolMaterial mat, String name, int harvestlevel){
 		this(mat, name, harvestlevel, null);
 	}
 
-	public ItemACAxe(ToolMaterial mat, String name, int harvestlevel, EnumChatFormatting format) {
-		super(mat);
+	public ItemACAxe(ToolMaterial mat, String name, int harvestlevel, TextFormatting format) {
+		super(mat, EFFECTIVE_ON);
 		setCreativeTab(AbyssalCraft.tabTools);
 		setHarvestLevel("axe", harvestlevel);
 		//		GameRegistry.registerItem(this, name);
 		setUnlocalizedName(name);
 		//		setTextureName(AbyssalCraft.modid + ":" + name);
 		this.format = format;
+		damageVsEntity = mat.getDamageVsEntity();
+		attackSpeed = -3.0F;
 	}
 
 	@Override
 	public String getItemStackDisplayName(ItemStack par1ItemStack) {
 
-		return format != null ? format + StatCollector.translateToLocal(this.getUnlocalizedName() + ".name") : super.getItemStackDisplayName(par1ItemStack);
+		return format != null ? format + super.getItemStackDisplayName(par1ItemStack) : super.getItemStackDisplayName(par1ItemStack);
+	}
+
+	@Override
+	public float getStrVsBlock(ItemStack stack, IBlockState state)
+	{
+		Material material = state.getMaterial();
+		return material != Material.wood && material != Material.plants && material != Material.vine ? super.getStrVsBlock(stack, state) : efficiencyOnProperMaterial;
 	}
 }

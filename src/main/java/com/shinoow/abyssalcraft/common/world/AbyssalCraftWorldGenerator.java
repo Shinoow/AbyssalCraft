@@ -13,9 +13,10 @@ package com.shinoow.abyssalcraft.common.world;
 
 import java.util.Random;
 
-import net.minecraft.util.BlockPos;
+import net.minecraft.init.Biomes;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraft.world.biome.BiomeGenBase;
+import net.minecraft.world.chunk.IChunkGenerator;
 import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraft.world.gen.feature.WorldGenMinable;
 import net.minecraftforge.common.BiomeDictionary;
@@ -24,14 +25,19 @@ import net.minecraftforge.fml.common.IWorldGenerator;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.common.structures.StructureShoggothPit;
-import com.shinoow.abyssalcraft.common.structures.overworld.*;
+import com.shinoow.abyssalcraft.common.structures.overworld.AChouse1;
+import com.shinoow.abyssalcraft.common.structures.overworld.AChouse2;
+import com.shinoow.abyssalcraft.common.structures.overworld.ACplatform1;
+import com.shinoow.abyssalcraft.common.structures.overworld.ACplatform2;
+import com.shinoow.abyssalcraft.common.structures.overworld.ACscion1;
+import com.shinoow.abyssalcraft.common.structures.overworld.ACscion2;
 
 public class AbyssalCraftWorldGenerator implements IWorldGenerator {
 
 	@Override
-	public void generate(Random random, int chunkX, int chunkZ, World world, IChunkProvider
+	public void generate(Random random, int chunkX, int chunkZ, World world, IChunkGenerator
 			chunkGenerator, IChunkProvider chunkProvider) {
-		switch(world.provider.getDimensionId()) {
+		switch(world.provider.getDimension()) {
 		case -1:
 			generateNether(world, random, chunkX*16, chunkZ*16);
 		case 0:
@@ -107,9 +113,9 @@ public class AbyssalCraftWorldGenerator implements IWorldGenerator {
 				int y = random.nextInt(40);
 				int z = chunkZ + random.nextInt(16);
 				if(BiomeDictionary.isBiomeOfType(world.getBiomeGenForCoords(new BlockPos(x, 0, z)), Type.OCEAN) &&
-						world.getBiomeGenForCoords(new BlockPos(x, 0, z))!=BiomeGenBase.deepOcean)
+						world.getBiomeGenForCoords(new BlockPos(x, 0, z))!=Biomes.deepOcean)
 					new WorldGenMinable(AbyssalCraft.Coraliumore.getDefaultState(), veinSize).generate(world, random, new BlockPos(x, y, z));
-				if(world.getBiomeGenForCoords(new BlockPos(x, 0, z))==BiomeGenBase.deepOcean)
+				if(world.getBiomeGenForCoords(new BlockPos(x, 0, z))==Biomes.deepOcean)
 					new WorldGenMinable(AbyssalCraft.Coraliumore.getDefaultState(), veinSize).generate(world, random, new BlockPos(x, y-20, z));
 			}
 		}

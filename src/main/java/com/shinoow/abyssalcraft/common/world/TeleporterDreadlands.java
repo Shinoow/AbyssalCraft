@@ -19,10 +19,10 @@ import net.minecraft.block.BlockPortal;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.init.Blocks;
-import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.LongHashMap;
-import net.minecraft.util.MathHelper;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.ChunkCoordIntPair;
 import net.minecraft.world.Teleporter;
 import net.minecraft.world.WorldServer;
@@ -47,7 +47,7 @@ public class TeleporterDreadlands extends Teleporter
 	@Override
 	public void placeInPortal(Entity entityIn, float rotationYaw)
 	{
-		if (worldServerInstance.provider.getDimensionId() != 1)
+		if (worldServerInstance.provider.getDimension() != 1)
 		{
 			if (!placeInExistingPortal(entityIn, rotationYaw))
 			{
@@ -266,7 +266,7 @@ public class TeleporterDreadlands extends Teleporter
 											int k5 = l2 + (k4 - 1) * i4 - j4 * l3;
 											blockpos$mutableblockpos.set(i5, j5, k5);
 
-											if (l4 < 0 && !worldServerInstance.getBlockState(blockpos$mutableblockpos).getBlock().getMaterial().isSolid() || l4 >= 0 && !worldServerInstance.isAirBlock(blockpos$mutableblockpos))
+											if (l4 < 0 && !worldServerInstance.getBlockState(blockpos$mutableblockpos).getMaterial().isSolid() || l4 >= 0 && !worldServerInstance.isAirBlock(blockpos$mutableblockpos))
 												continue label142;
 										}
 
@@ -315,7 +315,7 @@ public class TeleporterDreadlands extends Teleporter
 											int j13 = j6 + (j10 - 1) * j9;
 											blockpos$mutableblockpos.set(j12, i13, j13);
 
-											if (j11 < 0 && !worldServerInstance.getBlockState(blockpos$mutableblockpos).getBlock().getMaterial().isSolid() || j11 >= 0 && !worldServerInstance.isAirBlock(blockpos$mutableblockpos))
+											if (j11 < 0 && !worldServerInstance.getBlockState(blockpos$mutableblockpos).getMaterial().isSolid() || j11 >= 0 && !worldServerInstance.isAirBlock(blockpos$mutableblockpos))
 												continue label562;
 										}
 

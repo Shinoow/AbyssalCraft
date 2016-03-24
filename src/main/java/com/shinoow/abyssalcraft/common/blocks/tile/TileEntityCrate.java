@@ -12,20 +12,26 @@
 package com.shinoow.abyssalcraft.common.blocks.tile;
 
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.inventory.Container;
+import net.minecraft.inventory.ContainerChest;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.BlockPos;
-import net.minecraft.util.IChatComponent;
 import net.minecraft.util.ITickable;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.TextComponentString;
+import net.minecraft.util.text.TextComponentTranslation;
+import net.minecraft.world.IInteractionObject;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import com.shinoow.abyssalcraft.common.blocks.BlockCrate;
 
-public class TileEntityCrate extends TileEntity implements IInventory, ITickable
+public class TileEntityCrate extends TileEntity implements IInventory, ITickable, IInteractionObject
 {
 	private ItemStack[] crateContents = new ItemStack[36];
 	public int numUsingPlayers;
@@ -247,33 +253,44 @@ public class TileEntityCrate extends TileEntity implements IInventory, ITickable
 	}
 
 	@Override
-	public IChatComponent getDisplayName() {
-		// TODO Auto-generated method stub
-		return null;
+	public ITextComponent getDisplayName()
+	{
+		return hasCustomName() ? new TextComponentString(getName()) : new TextComponentTranslation(getName(), new Object[0]);
 	}
 
 	@Override
 	public int getField(int id) {
-		// TODO Auto-generated method stub
+
 		return 0;
 	}
 
 	@Override
-	public void setField(int id, int value) {
-		// TODO Auto-generated method stub
-
-	}
+	public void setField(int id, int value) {}
 
 	@Override
 	public int getFieldCount() {
-		// TODO Auto-generated method stub
+
 		return 0;
 	}
 
 	@Override
 	public void clear() {
-		// TODO Auto-generated method stub
+		for(ItemStack stack : crateContents)
+			stack = null;
 
+	}
+
+	@Override
+	public Container createContainer(InventoryPlayer playerInventory,
+			EntityPlayer playerIn) {
+
+		return new ContainerChest(playerInventory, this, playerIn);
+	}
+
+	@Override
+	public String getGuiID() {
+
+		return "minecraft:chest";
 	}
 
 }

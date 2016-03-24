@@ -13,13 +13,16 @@ package com.shinoow.abyssalcraft.common.items;
 
 import java.util.List;
 
-import com.shinoow.abyssalcraft.AbyssalCraft;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.StatCollector;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.EnumActionResult;
+import net.minecraft.util.EnumHand;
+import net.minecraft.util.text.translation.I18n;
 import net.minecraft.world.World;
+
+import com.shinoow.abyssalcraft.AbyssalCraft;
 
 public class ItemCrystalBag extends ItemACBasic {
 
@@ -34,19 +37,19 @@ public class ItemCrystalBag extends ItemACBasic {
 	}
 
 	@Override
-	public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player) {
+	public ActionResult<ItemStack> onItemRightClick(ItemStack stack, World world, EntityPlayer player, EnumHand hand) {
 		setInventorySize(stack);
 		if (!world.isRemote)
 			if (!player.isSneaking())
 				player.openGui(AbyssalCraft.instance, AbyssalCraft.crystalbagGuiID, player.worldObj, (int) player.posX, (int) player.posY, (int) player.posZ);
-		return stack;
+		return new ActionResult(EnumActionResult.PASS, stack);
 	}
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
 	public void addInformation(ItemStack is, EntityPlayer player, List l, boolean B)
 	{
-		l.add(StatCollector.translateToLocal("tooltip.crystalbag"));
+		l.add(I18n.translateToLocal("tooltip.crystalbag"));
 	}
 
 	public void setInventorySize(ItemStack stack){

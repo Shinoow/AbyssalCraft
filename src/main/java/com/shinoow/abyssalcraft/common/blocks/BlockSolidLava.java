@@ -11,10 +11,11 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.common.blocks;
 
+import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.util.AxisAlignedBB;
-import net.minecraft.util.BlockPos;
+import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
@@ -23,17 +24,17 @@ import com.shinoow.abyssalcraft.AbyssalCraft;
 public class BlockSolidLava extends BlockACBasic {
 
 	public BlockSolidLava(String par1) {
-		super(Material.lava, "pickaxe", 2, 10F, 100F, soundTypeStone);
+		super(Material.lava, "pickaxe", 2, 10F, 100F, SoundType.STONE);
 		setUnlocalizedName(par1);
 		//		setBlockTextureName("lava_still");
 		setCreativeTab(AbyssalCraft.tabDecoration);
 	}
 
 	@Override
-	public AxisAlignedBB getCollisionBoundingBox(World par1World, BlockPos pos, IBlockState state)
+	public AxisAlignedBB getSelectedBoundingBox(IBlockState state, World par1World, BlockPos pos)
 	{
 		float f = 0.125F;
-		return AxisAlignedBB.fromBounds(pos.getX(), pos.getY(), pos.getZ(), pos.getX() + 1, pos.getY() + 1 - f, pos.getZ() + 1);
+		return new AxisAlignedBB(0, 0, 0, 1, 1 - f, 1);
 	}
 
 	@Override

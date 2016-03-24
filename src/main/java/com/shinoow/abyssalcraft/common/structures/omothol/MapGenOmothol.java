@@ -17,15 +17,15 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Random;
 
-import com.shinoow.abyssalcraft.AbyssalCraft;
-
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.MathHelper;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.gen.structure.MapGenStructure;
 import net.minecraft.world.gen.structure.StructureComponent;
 import net.minecraft.world.gen.structure.StructureStart;
+
+import com.shinoow.abyssalcraft.AbyssalCraft;
 
 public class MapGenOmothol extends MapGenStructure
 {
@@ -116,7 +116,7 @@ public class MapGenOmothol extends MapGenStructure
 		{
 			super(x, z);
 			List<StructureOmotholPieces.PieceWeight> list = StructureOmotholPieces.getStructureVillageWeightedPieceList(rand, 100);
-			StructureOmotholPieces.Start StructureOmotholPieces$start = new StructureOmotholPieces.Start(worldIn.getWorldChunkManager(), 0, rand, (x << 4) + 2, (z << 4) + 2, list, p_i2092_5_);
+			StructureOmotholPieces.Start StructureOmotholPieces$start = new StructureOmotholPieces.Start(worldIn.getBiomeProvider(), 0, rand, (x << 4) + 2, (z << 4) + 2, list, p_i2092_5_);
 			components.add(StructureOmotholPieces$start);
 			StructureOmotholPieces$start.buildComponent(StructureOmotholPieces$start, components, rand);
 			List<StructureComponent> list1 = StructureOmotholPieces$start.field_74930_j;

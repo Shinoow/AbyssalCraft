@@ -25,15 +25,18 @@ import net.minecraft.entity.monster.EntityZombie;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.entity.projectile.EntityArrow;
-import net.minecraft.network.play.server.S2BPacketChangeGameState;
+import net.minecraft.init.Items;
+import net.minecraft.init.SoundEvents;
+import net.minecraft.item.ItemStack;
+import net.minecraft.network.play.server.SPacketChangeGameState;
 import net.minecraft.potion.PotionEffect;
-import net.minecraft.util.AxisAlignedBB;
-import net.minecraft.util.BlockPos;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumParticleTypes;
-import net.minecraft.util.MathHelper;
-import net.minecraft.util.MovingObjectPosition;
-import net.minecraft.util.Vec3;
+import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.math.RayTraceResult;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
 
@@ -55,14 +58,8 @@ public class EntityCoraliumArrow extends EntityArrow {
 	private int knockbackStrength;
 
 	public EntityCoraliumArrow(World par1World,
-			EntityLivingBase par2EntityLivingBase, float par3) {
-		super(par1World, par2EntityLivingBase, par3);
-	}
-
-	public EntityCoraliumArrow(World par1World,
-			EntityLivingBase par2EntityLivingBase,
-			EntityLivingBase par3EntityLivingBase, float par4, float par5) {
-		super(par1World, par2EntityLivingBase, par3EntityLivingBase, par4, par5);
+			EntityLivingBase par2EntityLivingBase) {
+		super(par1World, par2EntityLivingBase);
 	}
 
 	public EntityCoraliumArrow(World par1World, double par2, double par4,
@@ -90,12 +87,12 @@ public class EntityCoraliumArrow extends EntityArrow {
 		IBlockState iblockstate = worldObj.getBlockState(blockpos);
 		Block block = iblockstate.getBlock();
 
-		if (block.getMaterial() != Material.air)
+		if (block.getMaterial(iblockstate) != Material.air)
 		{
-			block.setBlockBoundsBasedOnState(worldObj, blockpos);
-			AxisAlignedBB axisalignedbb = block.getCollisionBoundingBox(worldObj, blockpos, iblockstate);
+			//			block.setBlockBoundsBasedOnState(worldObj, blockpos);
+			AxisAlignedBB axisalignedbb = block.getBoundingBox(iblockstate, worldObj, blockpos);
 
-			if (axisalignedbb != null && axisalignedbb.isVecInside(new Vec3(posX, posY, posZ)))
+			if (axisalignedbb != null && axisalignedbb.isVecInside(new Vec3d(posX, posY, posZ)))
 				inGround = true;
 		}
 
@@ -126,14 +123,14 @@ public class EntityCoraliumArrow extends EntityArrow {
 		else
 		{
 			++ticksInAir;
-			Vec3 vec31 = new Vec3(posX, posY, posZ);
-			Vec3 vec3 = new Vec3(posX + motionX, posY + motionY, posZ + motionZ);
-			MovingObjectPosition movingobjectposition = worldObj.rayTraceBlocks(vec31, vec3, false, true, false);
-			vec31 = new Vec3(posX, posY, posZ);
-			vec3 = new Vec3(posX + motionX, posY + motionY, posZ + motionZ);
+			Vec3d vec31 = new Vec3d(posX, posY, posZ);
+			Vec3d vec3 = new Vec3d(posX + motionX, posY + motionY, posZ + motionZ);
+			RayTraceResult movingobjectposition = worldObj.rayTraceBlocks(vec31, vec3, false, true, false);
+			vec31 = new Vec3d(posX, posY, posZ);
+			vec3 = new Vec3d(posX + motionX, posY + motionY, posZ + motionZ);
 
 			if (movingobjectposition != null)
-				vec3 = new Vec3(movingobjectposition.hitVec.xCoord, movingobjectposition.hitVec.yCoord, movingobjectposition.hitVec.zCoord);
+				vec3 = new Vec3d(movingobjectposition.hitVec.xCoord, movingobjectposition.hitVec.yCoord, movingobjectposition.hitVec.zCoord);
 
 			Entity entity = null;
 			List<Entity> list = worldObj.getEntitiesWithinAABBExcludingEntity(this, getEntityBoundingBox().addCoord(motionX, motionY, motionZ).expand(1.0D, 1.0D, 1.0D));
@@ -147,7 +144,7 @@ public class EntityCoraliumArrow extends EntityArrow {
 				{
 					float f1 = 0.3F;
 					AxisAlignedBB axisalignedbb1 = entity1.getEntityBoundingBox().expand(f1, f1, f1);
-					MovingObjectPosition movingobjectposition1 = axisalignedbb1.calculateIntercept(vec31, vec3);
+					RayTraceResult movingobjectposition1 = axisalignedbb1.calculateIntercept(vec31, vec3);
 
 					if (movingobjectposition1 != null)
 					{
@@ -163,7 +160,7 @@ public class EntityCoraliumArrow extends EntityArrow {
 			}
 
 			if (entity != null)
-				movingobjectposition = new MovingObjectPosition(entity);
+				movingobjectposition = new RayTraceResult(entity);
 
 			if (movingobjectposition != null && movingobjectposition.entityHit != null && movingobjectposition.entityHit instanceof EntityPlayer)
 			{
@@ -199,7 +196,7 @@ public class EntityCoraliumArrow extends EntityArrow {
 							EntityLivingBase entitylivingbase = (EntityLivingBase)movingobjectposition.entityHit;
 
 							if(EntityUtil.isEntityCoralium(entitylivingbase)){}
-							else entitylivingbase.addPotionEffect(new PotionEffect(AbyssalCraft.Cplague.id, 100));
+							else entitylivingbase.addPotionEffect(new PotionEffect(AbyssalCraft.Cplague, 100));
 
 							if (!worldObj.isRemote)
 								entitylivingbase.setArrowCountInEntity(entitylivingbase.getArrowCountInEntity() + 1);
@@ -236,10 +233,10 @@ public class EntityCoraliumArrow extends EntityArrow {
 							}
 
 							if (shootingEntity != null && movingobjectposition.entityHit != shootingEntity && movingobjectposition.entityHit instanceof EntityPlayer && shootingEntity instanceof EntityPlayerMP)
-								((EntityPlayerMP)shootingEntity).playerNetServerHandler.sendPacket(new S2BPacketChangeGameState(6, 0.0F));
+								((EntityPlayerMP)shootingEntity).playerNetServerHandler.sendPacket(new SPacketChangeGameState(6, 0.0F));
 						}
 
-						playSound("random.bowhit", 1.0F, 1.2F / (rand.nextFloat() * 0.2F + 0.9F));
+						playSound(SoundEvents.entity_arrow_hit_player, 1.0F, 1.2F / (rand.nextFloat() * 0.2F + 0.9F));
 
 						if (!(movingobjectposition.entityHit instanceof EntityEnderman))
 							setDead();
@@ -270,12 +267,12 @@ public class EntityCoraliumArrow extends EntityArrow {
 					posX -= motionX / f5 * 0.05000000074505806D;
 					posY -= motionY / f5 * 0.05000000074505806D;
 					posZ -= motionZ / f5 * 0.05000000074505806D;
-					playSound("random.bowhit", 1.0F, 1.2F / (rand.nextFloat() * 0.2F + 0.9F));
+					playSound(SoundEvents.entity_arrow_hit, 1.0F, 1.2F / (rand.nextFloat() * 0.2F + 0.9F));
 					inGround = true;
 					arrowShake = 7;
 					setIsCritical(false);
 
-					if (inTile.getMaterial() != Material.air)
+					if (inTile.getMaterial(iblockstate1) != Material.air)
 						inTile.onEntityCollidedWithBlock(worldObj, blockpos1, iblockstate1, this);
 				}
 
@@ -327,5 +324,11 @@ public class EntityCoraliumArrow extends EntityArrow {
 			setPosition(posX, posY, posZ);
 			doBlockCollisions();
 		}
+	}
+
+	@Override
+	protected ItemStack getArrowStack() {
+
+		return new ItemStack(Items.arrow);
 	}
 }

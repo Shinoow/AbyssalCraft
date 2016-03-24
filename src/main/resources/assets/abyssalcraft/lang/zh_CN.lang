@@ -252,6 +252,7 @@ necronomicon.remnanthelp=需要残存者帮助
 necronomicon.gettingstarted=新手入门
 necronomicon.potentialenergy=位能
 necronomicon.turnupindicator=翻转 %2$s 的 %1$s
+necronomicon.miscinformation=Misc Information
 
 #Necronomicon Text
 #Note: the maximum amount of letters per string is 368
@@ -297,6 +298,8 @@ necronomicon.text.abyssal=这是深渊的第一层, 一个黑暗的绿色的地�
 necronomicon.text.dreadlands=过去一个世界的深渊锭, 恐惧之地的名字来由是因为恐惧侵染释放在它之上, 杀死了所有的矿工并污染平和的深渊锭傀儡. 深渊的第二层有着失去灵魂的生物.
 necronomicon.text.omothol=一个无尽神殿的城市建筑在理智的边缘. 扎哈尔的国度有着唯一的入口去旧日支配者所居住的地方. 守门者始终在看守着, 没有人能活着离开深渊的最后一层.
 necronomicon.text.darkrealm=奥穆索所在的国度之下是有着不朽灵魂的等待转世的邪恶恶魔神所在之地. 黑暗领域是活阴影诞生的地方, 同时也是一个活灵魂应该到达的最后一个地方, 因为它们会面临无尽的折磨.
+
+necronomicon.text.miscinformation=In this section you can find miscellaneous information not mentioned anywhere else in the Necronomicon.
 
 necronomicon.text.materials.abyssalnite.1=深渊锭是一种能在黑暗之地找到的新的矿石. 它比钻石的强度还高, 并能用来合成工具、武器和盔甲. 能在Y轴32以下找到.
 necronomicon.text.materials.abyssalnite.2=当挖掘它的时候, 它会掉落能烧炼成锭的矿石块. 深渊锭是紫色的, 跟矿石本身差不多.
@@ -407,6 +410,18 @@ necronomicon.text.crafting.monolithpillar.1=巨石柱是由巨石块合成. 它�
 necronomicon.text.crafting.ritualcharm.1=仪式符咒由金粒和一个钻石合成. 单纯的符咒没有任何用途, 但是通过仪式能扩展位能操纵器的不同状态.
 necronomicon.text.crafting.sacrificialaltar.1=献祭祭坛由火把, 巨石块, 一个阴影宝石和一个珊瑚珍珠合成. 能将生命能量变为位能.
 necronomicon.text.crafting.sacrificialaltar.2=当一个生物作为目标时, 它会发出烟雾粒子. 在生物死后, 根据它的最大生命值会获得一定数量的位能. 只能把不包括玩家的非不死的成年生物作为目标. 需要注意的是祭坛在收集一定量的位能后需要冷却, 有一分钟的时间不能收集.
+
+necronomicon.text.crafting.upgradekit.1=A Upgrade Kit is crafted with Wooden Planks, Cobblestone, String and Flint. Upgrade kits can upgrade tools and armor through crafting.
+necronomicon.text.crafting.upgradekit.2=To upgrade a kit, you need 2 units of the next material and 1 of the current. Materials are Wood -> Cobblestone -> Iron -> Gold -> Diamond -> Abyssalnite -> Refined Coralium -> Dreadium -> Ethaxium.
+necronomicon.text.crafting.ironplate=A Iron Plate is crafted with 2 Iron Ingots. Iron Plates can enhance the saturation of certain food.
+necronomicon.text.crafting.washcloth=A Washcloth is crafted with Wool and Cobweb. It's used to clean Dirty Plates (given when eating plate food).
+necronomicon.text.crafting.mre=A MRE (Meal, Ready to Eat) is crafted with a Iron Plate, a Carrot, a Potato and a Steak. It fills the entire food bar when eaten.
+necronomicon.text.crafting.platefood=Any Vanilla foodstuffs (and Fried Eggs) combined with a Iron Plate will create plate food (which has twice the saturation of the normal). Returns a Dirty Plate when eaten.
+necronomicon.text.crafting.odbcore=A ODB Core is crafted with Abyssalnite Ingots, Iron Ingots, Iron Blocks and a Coralium Pearl. Can be used as an explosive.
+necronomicon.text.crafting.odb=A Oblivion Deathbomb is crafted with Obsidian, A ODB Core, A Oblivion Catalyst, a Liquid Coralium Bucket and a Liquid Antimatter Bucket. Heavy explosive.
+necronomicon.text.crafting.carboncluster=A Carbon Cluster is crafted with Crystallized Carbon. They are used in order to craft Dense Carbon Clusters.
+necronomicon.text.crafting.densecarboncluster=A Dense Carbon Cluster is crafted with Carbon Clusters and a block of Obsidian. Can be transmuted into a Diamond.
+necronomicon.text.crafting.crate=A Wooden Crate is crafted with Sticks, Wooden Planks and a Chest. Has an extra row of inventory slots more than a Chest.
 
 necronomicon.text.overworld.progression.1=要想到达深渊荒芜之地, 你必须合成一把门钥匙, 这需要你旅行过下界和黑暗之地和水域. 水域可以是沼泽或者海洋.
 necronomicon.text.overworld.progression.2=From the Nether you need 2 Blaze Rods, and probably a few more for later. From the Darklands biome you need to slay living shadows to finally obtain Shadow Gems. They are most commonly found in Darklands Mountains biomes. It is recommended to obtain a Staff of Rending in order to obtain Shadow Gems faster (more information in the special armor and tools section).
@@ -1166,11 +1181,17 @@ entity.abyssalcraft.demonchicken.name=恶魔鸡
 
 #Potions
 potion.Cplague=珊瑚侵染
-potion.Cplague.postfix=珊瑚侵染药水
+potion.effect.Cplague=珊瑚侵染药水
+splash_potion.effect.Cplague=Splash Potion of Coralium Plague
+lingering_potion.effect.Cplague=Lingering Potion of Coralium Plague
 potion.Dplague=恐惧侵染
-potion.Dplague.postfix=恐惧侵染药水
+potion.effect.Dplague=恐惧侵染药水
+splash_potion.effect.Dplague=Splash Potion of Dread Plague
+lingering_potion.effect.Dplague=Lingering Potion of Dread Plague
 potion.Antimatter=反物质
-potion.Antimatter.postfix=湮灭药水
+potion.effect.Antimatter=湮灭药水
+splash_potion.effect.Antimatter=Splash Potion of Annihilation
+lingering_potion.effect.Antimatter=Lingering Potion of Annihilation
 
 #Enchantments
 enchantment.coralium=珊瑚

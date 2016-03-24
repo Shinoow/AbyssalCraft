@@ -12,8 +12,8 @@
 package com.shinoow.abyssalcraft.api.ritual;
 
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.util.BlockPos;
-import net.minecraft.util.StatCollector;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.translation.I18n;
 import net.minecraft.world.World;
 
 /**
@@ -132,7 +132,7 @@ public abstract class NecronomiconRitual {
 	 * @return A localized string representing a name
 	 */
 	public String getLocalizedName(){
-		return StatCollector.translateToLocal(getUnlocalizedName());
+		return I18n.translateToLocal(getUnlocalizedName());
 	}
 
 	/**
@@ -140,7 +140,7 @@ public abstract class NecronomiconRitual {
 	 * @return A localized string representing a description
 	 */
 	public String getDescription(){
-		return StatCollector.translateToLocal(getUnlocalizedName() + ".desc");
+		return I18n.translateToLocal(getUnlocalizedName() + ".desc");
 	}
 
 	/**

@@ -16,21 +16,20 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import org.lwjgl.input.Keyboard;
-import org.lwjgl.opengl.GL11;
-import org.lwjgl.opengl.GL12;
-
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.renderer.RenderHelper;
-import net.minecraft.client.renderer.entity.RenderItem;
+import net.minecraft.client.renderer.RenderItem;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.EnumChatFormatting;
-import net.minecraft.util.StatCollector;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.oredict.OreDictionary;
+
+import org.lwjgl.input.Keyboard;
+import org.lwjgl.opengl.GL11;
+import org.lwjgl.opengl.GL12;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.api.recipe.CrystallizerRecipes;
@@ -66,11 +65,11 @@ public class GuiNecronomiconMachines extends GuiNecronomicon {
 		byte b0 = 2;
 		buttonList.add(buttonNextPage = new ButtonNextPage(1, i + 220, b0 + 154, true));
 		buttonList.add(buttonPreviousPage = new ButtonNextPage(2, i + 18, b0 + 154, false));
-		buttonList.add(info = new ButtonCategory(3, i + 10, b0 + 20, this, NecronomiconText.LABEL_INFO, AbyssalCraft.necronomicon));
-		buttonList.add(transmutator = new ButtonCategory(4, i + 10, b0 + 37, this, StatCollector.translateToLocal("container.abyssalcraft.transmutator"), getItem(1)));
-		buttonList.add(crystallizer = new ButtonCategory(5, i + 10, b0 + 54, this, StatCollector.translateToLocal("container.abyssalcraft.crystallizer"), getItem(2)));
-		//	buttonList.add(engraver = new ButtonCategory(6, i + 10, b0 + 71, this, StatCollector.translateToLocal("container.abyssalcraft.engraver"), getItem(3)));
-		//	buttonList.add(materializer = new ButtonCategory(7, i + 10, b0 + 88, this, StatCollector.translateToLocal("container.abyssalcraft.materializer"), getItem(3)));
+		buttonList.add(info = new ButtonCategory(3, i + 14, b0 + 24, this, NecronomiconText.LABEL_INFO, AbyssalCraft.necronomicon));
+		buttonList.add(transmutator = new ButtonCategory(4, i + 14, b0 + 41, this, I18n.format("container.abyssalcraft.transmutator", new Object[0]), getItem(1)));
+		buttonList.add(crystallizer = new ButtonCategory(5, i + 14, b0 + 58, this, I18n.format("container.abyssalcraft.crystallizer", new Object[0]), getItem(2)));
+		//	buttonList.add(engraver = new ButtonCategory(6, i + 14, b0 + 75, this, StatCollector.translateToLocal("container.abyssalcraft.engraver"), getItem(3)));
+		//	buttonList.add(materializer = new ButtonCategory(7, i + 14, b0 + 92, this, StatCollector.translateToLocal("container.abyssalcraft.materializer"), getItem(3)));
 	}
 
 	private Item getItem(int par1){
@@ -238,7 +237,7 @@ public class GuiNecronomiconMachines extends GuiNecronomicon {
 			}
 		}
 		if(isTra){
-			stuff = StatCollector.translateToLocal("container.abyssalcraft.transmutator");
+			stuff = I18n.format("container.abyssalcraft.transmutator", new Object[0]);
 			fontRendererObj.drawSplitString(stuff, k + 20, b0 + 16, 116, 0xC40000);
 			Map<ItemStack, ItemStack> trans = TransmutatorRecipes.instance().getTransmutationList();
 			setTurnups(trans.size());
@@ -311,7 +310,7 @@ public class GuiNecronomiconMachines extends GuiNecronomicon {
 			}
 		}
 		if(isCry){
-			stuff = StatCollector.translateToLocal("container.abyssalcraft.crystallizer");
+			stuff = I18n.format("container.abyssalcraft.crystallizer", new Object[0]);
 			fontRendererObj.drawSplitString(stuff, k + 20, b0 + 16, 116, 0xC40000);
 			Map<ItemStack, ItemStack[]> cryst = CrystallizerRecipes.instance().getCrystallizationList();
 			setTurnups(cryst.size());
@@ -396,7 +395,7 @@ public class GuiNecronomiconMachines extends GuiNecronomicon {
 			{
 				String s_ = s;
 				if(!first)
-					s_ = EnumChatFormatting.GRAY + s;
+					s_ = TextFormatting.GRAY + s;
 				parsedTooltip.add(s_);
 				first = false;
 			}

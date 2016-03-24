@@ -19,7 +19,7 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.BlockPos;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
@@ -45,7 +45,7 @@ public class BlockDarkstonecobblewall extends BlockWall{
 	}
 
 	@Override
-	public boolean canPlaceTorchOnTop(IBlockAccess world, BlockPos pos) {
+	public boolean canPlaceTorchOnTop(IBlockState state, IBlockAccess world, BlockPos pos) {
 		return true;
 	}
 }

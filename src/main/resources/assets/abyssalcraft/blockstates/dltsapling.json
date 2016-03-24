@@ -1,6 +1,6 @@
 {
 	"variants": {
-		"stage=0,type=oak": { "model": "abyssalcraft:dltsapling" },
-		"stage=1,type=oak": { "model": "abyssalcraft:dltsapling" }
+		"stage=0": { "model": "abyssalcraft:dltsapling" },
+		"stage=1": { "model": "abyssalcraft:dltsapling" }
 	}
 }

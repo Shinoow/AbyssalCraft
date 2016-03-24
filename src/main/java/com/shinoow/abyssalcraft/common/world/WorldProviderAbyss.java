@@ -12,11 +12,12 @@
 package com.shinoow.abyssalcraft.common.world;
 
 import net.minecraft.entity.Entity;
-import net.minecraft.util.Vec3;
+import net.minecraft.util.math.Vec3d;
+import net.minecraft.world.DimensionType;
 import net.minecraft.world.WorldProvider;
-import net.minecraft.world.biome.WorldChunkManagerHell;
+import net.minecraft.world.biome.BiomeProviderSingle;
 import net.minecraft.world.chunk.Chunk;
-import net.minecraft.world.chunk.IChunkProvider;
+import net.minecraft.world.chunk.IChunkGenerator;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -25,22 +26,22 @@ import com.shinoow.abyssalcraft.AbyssalCraft;
 public class WorldProviderAbyss extends WorldProvider {
 
 	@Override
-	public IChunkProvider createChunkGenerator() {
+	public IChunkGenerator createChunkGenerator() {
 		return new ChunkProviderAbyss(worldObj, worldObj.getSeed(), true);
 	}
 
 	@Override
 	public void registerWorldChunkManager() {
-		worldChunkMgr = new WorldChunkManagerHell(AbyssalCraft.Wastelands, 0.0F);
+		worldChunkMgr = new BiomeProviderSingle(AbyssalCraft.Wastelands);
 		isHellWorld= false;
-		dimensionId = AbyssalCraft.configDimId1;
+		setDimension(AbyssalCraft.configDimId1);
 		hasNoSky = true;
 	}
 
-	@Override
-	public String getDimensionName()  {
-		return "The Abyssal Wasteland";
-	}
+	//	@Override
+	//	public String getDimensionName()  {
+	//		return "The Abyssal Wasteland";
+	//	}
 
 	@Override
 	public boolean canRespawnHere() {
@@ -88,8 +89,8 @@ public class WorldProviderAbyss extends WorldProvider {
 	}
 
 	@Override
-	public Vec3 getSkyColor(Entity cameraEntity, float partialTicks) {
-		return new Vec3(0, 180, 50);
+	public Vec3d getSkyColor(Entity cameraEntity, float partialTicks) {
+		return new Vec3d(0, 180, 50);
 	}
 
 	@Override
@@ -109,8 +110,14 @@ public class WorldProviderAbyss extends WorldProvider {
 	}
 
 	@Override
-	public String getInternalNameSuffix() {
+	public DimensionType getDimensionType() {
 
-		return "_aw";
+		return AbyssalCraft.THE_ABYSSAL_WASTELAND;
 	}
+
+	//	@Override
+	//	public String getInternalNameSuffix() {
+	//
+	//		return "_aw";
+	//	}
 }

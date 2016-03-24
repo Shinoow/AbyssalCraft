@@ -13,7 +13,7 @@ package com.shinoow.abyssalcraft.client.lib;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.client.renderer.WorldRenderer;
+import net.minecraft.client.renderer.VertexBuffer;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemStack;
@@ -121,7 +121,7 @@ public final class ItemRenderHelper
 			float f2 = Minecraft.getSystemTime() % (3000 + j1 * 1873) / (3000.0F + j1 * 1873) * 256.0F;
 			float f3 = 0.0F;
 			Tessellator tessellator = Tessellator.getInstance();
-			WorldRenderer worldrenderer = tessellator.getWorldRenderer();
+			VertexBuffer worldrenderer = tessellator.getBuffer();
 			float f4 = 4.0F;
 
 			if( j1 == 1 )

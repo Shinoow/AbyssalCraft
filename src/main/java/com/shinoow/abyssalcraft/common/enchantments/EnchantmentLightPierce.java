@@ -14,17 +14,17 @@ package com.shinoow.abyssalcraft.common.enchantments;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentDamage;
 import net.minecraft.entity.EnumCreatureAttribute;
+import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemAxe;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.ResourceLocation;
-
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
 
 public class EnchantmentLightPierce extends EnchantmentDamage {
 
-	public EnchantmentLightPierce(int par1)
+	public EnchantmentLightPierce()
 	{
-		super(par1, new ResourceLocation("abyssalcraft", "light_pierce"), 5, 3);
+		//		super(par1, new ResourceLocation("abyssalcraft", "light_pierce"), 5, 3);
+		super(Rarity.COMMON, 5, new EntityEquipmentSlot[]{EntityEquipmentSlot.MAINHAND});
 	}
 
 	@Override

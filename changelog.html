@@ -1,45 +1,14 @@
 <ul>
-	<li>Added missing page to the Potential Energy section of Ritual Information (mentions how monoliths are created)</li>
-	<li>Darklands Villages should now have Darklands Oak Pressure Plates and Darkstone Double slabs (instead of the vanilla equivalents)</li>
-	<li>Anti-Spiders are now hostile during night again</li>
-	<li>Fixed the third person rendering of some blocks (large upside-down models when held in third person)</li>
-	<li>The Dreadlands Infused Powerstone now has a model (semi-temp if I can get the OBj one to work, otherwise permanent)</li>
-	<li>Fixed the Abyssal Stone Slab and Darklands Oak Slab not rendering correctly when placed</li>
-	<li>Depths Ghouls, Abyssal Zombies and Lesser Shoggoths should no longer spawn at Mushroom Island Shores</li>
-	<li>It's possible to enter Cha'garoth's lair again (minor derp in the code)</li>
-	<li>Fixed some Necronomicon Pages with the wrong text</li>
-	<li>Added a config option that allows you to change how Evil Animals spawn</li>
-	<li>Disabled any test code in the Materializer that could trigger a crash (since it's incomplete)</li>
-	<li>Fixed bug related to crafting recipes involving upgrading Necronomicons/Crystal Bags and using Upgrade Kits</li>
-	<li>Lesser Shoggoths outside of the Overworld should drop the correct item when killed now (applying metadata to the dropped item)</li>
-	<li>Spectral Dragons should now be easier to hit without getting hit from them</li>
-	<li>Spectral Dragon spawn rate has been reduced to the lowest possible (encountering one now should be very rare, unless another mod tweaks the spawn rate)</li>
-	<li>Darklands Oak Slabs are no longer treated as stone</li>
-	<li>Added a config option allowing you to toggle whether or not Liquid Antimatter should disintegrate any item dropped into it</li>
-	<li>Crystallizer and Transmutator automation works correctly again (output slot is depleted from the bottom)</li>
-	<li>Leaves, Saplings and Logs should be treated as such by other mods now</li>
-	<li>Liquid Coralium shouldn't spread into ocean biomes when told not to</li>
-	<li>Remnants should now stop attacking whatever angered them when the anger timer runs out (and they don't slow the game down while they're angry)</li>
-	<li>The Crate now renders when placed</li>
-	<li>Replaced the Fist of Cha'garoth spawner block with a J'zahar spawner block</li>
-	<li>J'zahar has increased in size</li>
-	<li>If a Spectral Dragon dies while Asorah is draining it, Asorah won't take explosion damage</li>
-	<li>Any item placed on a Ritual/Sacrificial Altar or Ritual/Energy Pedestal will also render for other players</li>
-	<li>The smoke projected when a ritual is performed also renders for other players</li>
-	<li>Shoggoth Lairs should now longer spawn in biomes registered to the BiomeDictionary as the "WATER" type</li>
-	<li>The Staff of Rending will now continue to drain energy when the right mouse button is pressed</li>
-	<li>Shadow Fragments/Shards/Gems now spawn in dungeon/mineshaft/pyramid/stronghold chests</li>
-	<li>The Shard of Oblivion now requires 4 Shadow Gems (previously 8)</li>
-	<li>Remnants can now open doors</li>
-	<li>Added the Temple of J'zahar (generates in Omothol)</li>
-	<li>Added the City of Omothol</li>
-	<li>Updated the Omothol Progression section of the Necronomicon</li>
-	<li>Added Essence of The Gatekeeper (replacement for the Oblivion Catalyst in the Abyssalnomicon recipe, dropped by J'zahar)</li>
-	<li>Staff of The Gatekeeper is now created through a ritual (instead of dropped by J'zahar)</li>
-	<li>Added a Minion of The Gatekeeper spawner block</li>
-	<li>Potion of Annihilation and Potion of Dread Plague can now be brewed again</li>
-	<li>Remnants and Minions of The Gatekeeper no longer despawn</li>
-	<li>Spawn rate of Remnants and Minions of The Gatekeeper has been heavily reduced (quite rare now)</li>
-	<li>Minions of The Gatekeeper now has a 10% chance of dropping Ethaxium Ingots (while Eldritch Scales are the regular drop)</li>
-	<li>Now runs on Forge 11.15.1.1764</li>
+	<li>Demon Animals now have a 50% chance of not burning when spawning in the Nether</li>
+	<li>Added a mimic fire (exstinguishes after 6 seconds, can't be sustained by netherrack)</li>
+	<li>Integrations no longer need to be registered (added a plugin annotation that allows for 100% soft dependencies)</li>
+	<li>Fixed animations for the Dreadium Samurai Armor (arms should move correctly, and armor renders correctly on Armor Stands)</li>
+	<li>Improved the buttons in the Necronomicon GUI (they don't overlay anymore, and a transparent gradient displays on a button when hovered over)</li>
+	<li>Fixed potential crashes related to CraftingStacks where the recipe uses the OreDictionary</li>
+	<li>Automatically fetched crafting recipes will now also fetch the output quantity from the recipe</li>
+	<li>Sacthoth no longer spawns in the Dark Realm</li>
+	<li>Added a Misc Information section to the Necronomicon (displays things not mentioned anywhere else, among them crafting recipes)</li>
+	<li>The range from J'zahar in which you need to be in order for him to drop his essence has been increased to 32 blocks (previously 10)</li>
+	<li>Ported to Minecraft 1.9 (there may be bugs left from the port)</li>
+	<li>All boss health bars now uses the new system (and they also change color depending on how much health the boss has)</li>
 </ul>

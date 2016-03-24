@@ -17,7 +17,7 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.StatCollector;
+import net.minecraft.util.text.translation.I18n;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -31,10 +31,6 @@ public class ItemCrystal extends Item implements ICrystal {
 			"Silicon", "Magnesium", "Aluminium", "Silica", "Alumina", "Magnesia", "Zinc"};
 	private String[] atoms = new String[]{"Fe", "Au", "S", "C", "O", "H", "N", "P", "K", "NO\u2083", "CH\u2084", "none", "An",
 			"Cor", "Dr", "none", "Sn", "Cu", "Si", "Mg", "Al", "SiO\u2082", "Al\u2082O\u2083", "MgO", "Zn"};
-	private int[] crystalColors = new int[]{0xD9D9D9, 0xF3CC3E, 0xF6FF00, 0x3D3D36, 16777215, 16777215, 16777215, 0x996A18,
-			0xD9D9D9, 0x1500FF, 0x19FC00, 0xFF0000, 0x8002BF, 0x00FFEE, 0xB00000, 0xFFCC00, 0xD9D8D7, 0xE89207, 0xD9D9D9,
-			0xD9D9D9, 0xD9D9D9, 16777215, 0xD9D8D9, 16777215, 0xD7D8D9};
-
 	public ItemCrystal(String name){
 		super();
 		//		GameRegistry.registerItem(this, name);
@@ -68,20 +64,14 @@ public class ItemCrystal extends Item implements ICrystal {
 			par3List.add(new ItemStack(par1Item, 1, i));
 	}
 
-	@Override
-	@SideOnly(Side.CLIENT)
-	public int getColorFromItemStack(ItemStack par1ItemStack, int par2) {
-		return crystalColors[par1ItemStack.getItemDamage()];
-	}
-
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
 	public void addInformation(ItemStack is, EntityPlayer player, List l, boolean B){
-		l.add(StatCollector.translateToLocal("tooltip.crystal")+ ": " + atoms[is.getItemDamage()]);
+		l.add(I18n.translateToLocal("tooltip.crystal")+ ": " + atoms[is.getItemDamage()]);
 	}
 
 	@Override
 	public String getItemStackDisplayName(ItemStack par1ItemStack) {
-		return StatCollector.translateToLocal(getUnlocalizedName() + "." + names[par1ItemStack.getItemDamage()] + ".name");
+		return I18n.translateToLocal(getUnlocalizedName() + "." + names[par1ItemStack.getItemDamage()] + ".name");
 	}
 }

@@ -18,22 +18,24 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemHoe;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.BlockPos;
-import net.minecraft.util.EnumChatFormatting;
+import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumFacing;
-import net.minecraft.util.StatCollector;
+import net.minecraft.util.EnumHand;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
+
 import com.shinoow.abyssalcraft.AbyssalCraft;
 
 public class ItemACHoe extends ItemHoe {
 
-	private EnumChatFormatting format;
+	private TextFormatting format;
 
 	public ItemACHoe(ToolMaterial mat, String name){
 		this(mat, name, null);
 	}
 
-	public ItemACHoe(ToolMaterial mat, String name, EnumChatFormatting format) {
+	public ItemACHoe(ToolMaterial mat, String name, TextFormatting format) {
 		super(mat);
 		setCreativeTab(AbyssalCraft.tabTools);
 		//		GameRegistry.registerItem(this, name);
@@ -45,39 +47,44 @@ public class ItemACHoe extends ItemHoe {
 	@Override
 	public String getItemStackDisplayName(ItemStack par1ItemStack) {
 
-		return format != null ? format + StatCollector.translateToLocal(this.getUnlocalizedName() + ".name") : super.getItemStackDisplayName(par1ItemStack);
+		return format != null ? format + super.getItemStackDisplayName(par1ItemStack) : super.getItemStackDisplayName(par1ItemStack);
 	}
 
 	@Override
 	@SuppressWarnings("incomplete-switch")
-	public boolean onItemUse(ItemStack stack, EntityPlayer playerIn, World worldIn, BlockPos pos, EnumFacing side, float hitX, float hitY, float hitZ)
+	public EnumActionResult onItemUse(ItemStack stack, EntityPlayer playerIn, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)
 	{
-		if (!playerIn.canPlayerEdit(pos.offset(side), side, stack))
-			return false;
+		if (!playerIn.canPlayerEdit(pos.offset(facing), facing, stack))
+			return EnumActionResult.FAIL;
 		else
 		{
 			int hook = net.minecraftforge.event.ForgeEventFactory.onHoeUse(stack, playerIn, worldIn, pos);
-			if (hook != 0) return hook > 0;
+			if (hook != 0) return hook > 0 ? EnumActionResult.SUCCESS : EnumActionResult.FAIL;
 
 			IBlockState iblockstate = worldIn.getBlockState(pos);
 			Block block = iblockstate.getBlock();
 
-			if (side != EnumFacing.DOWN && worldIn.isAirBlock(pos.up()))
+			if (facing != EnumFacing.DOWN && worldIn.isAirBlock(pos.up()))
 			{
-				if (block == Blocks.grass || block == AbyssalCraft.Darkgrass || block == AbyssalCraft.dreadgrass)
-					return useHoe(stack, playerIn, worldIn, pos, Blocks.farmland.getDefaultState());
+				if (block == Blocks.grass || block == Blocks.grass_path || block == AbyssalCraft.Darkgrass || block == AbyssalCraft.dreadgrass)
+				{
+					func_185071_a(stack, playerIn, worldIn, pos, Blocks.farmland.getDefaultState());
+					return EnumActionResult.SUCCESS;
+				}
 
 				if (block == Blocks.dirt)
 					switch (iblockstate.getValue(BlockDirt.VARIANT))
 					{
 					case DIRT:
-						return useHoe(stack, playerIn, worldIn, pos, Blocks.farmland.getDefaultState());
+						func_185071_a(stack, playerIn, worldIn, pos, Blocks.farmland.getDefaultState());
+						return EnumActionResult.SUCCESS;
 					case COARSE_DIRT:
-						return useHoe(stack, playerIn, worldIn, pos, Blocks.dirt.getDefaultState().withProperty(BlockDirt.VARIANT, BlockDirt.DirtType.DIRT));
+						func_185071_a(stack, playerIn, worldIn, pos, Blocks.dirt.getDefaultState().withProperty(BlockDirt.VARIANT, BlockDirt.DirtType.DIRT));
+						return EnumActionResult.SUCCESS;
 					}
 			}
 
-			return false;
+			return EnumActionResult.PASS;
 		}
 	}
 }

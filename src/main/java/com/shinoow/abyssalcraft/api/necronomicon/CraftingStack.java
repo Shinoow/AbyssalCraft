@@ -11,7 +11,7 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.api.necronomicon;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
@@ -120,6 +120,7 @@ public class CraftingStack {
 								stuff[i+3] = copy[i+2];
 							}
 						}
+						this.output.stackSize = recipe.getRecipeOutput().stackSize;
 					}
 				}
 			for(int i = 0; i < 9; i++)
@@ -129,8 +130,8 @@ public class CraftingStack {
 					recipe[i] = new ItemStack((Item)stuff[i]);
 				else if(stuff[i] instanceof Block)
 					recipe[i] = new ItemStack((Block)stuff[i]);
-				else if(stuff[i] instanceof ArrayList)
-					recipe[i] = (ItemStack)((ArrayList) stuff[i]).get(0);
+				else if(stuff[i] instanceof List)
+					recipe[i] = (ItemStack)((List) stuff[i]).get(0);
 				else throw new ClassCastException("Not a Item, Block or ItemStack!");
 		}
 

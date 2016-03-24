@@ -26,7 +26,7 @@ import net.minecraft.entity.passive.EntityWolf;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
-import net.minecraft.util.BlockPos;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 import com.google.common.collect.Lists;
@@ -63,7 +63,7 @@ public class NecronomiconBreedingRitual extends NecronomiconRitual {
 	@Override
 	public boolean canCompleteRitual(World world, BlockPos pos, EntityPlayer player) {
 
-		List<EntityAnimal> animals = world.getEntitiesWithinAABB(EntityAnimal.class, world.getBlockState(pos).getBlock().getCollisionBoundingBox(world, pos, world.getBlockState(pos)).expand(16, 3, 16));
+		List<EntityAnimal> animals = world.getEntitiesWithinAABB(EntityAnimal.class, world.getBlockState(pos).getBlock().getBoundingBox(world.getBlockState(pos), world, pos).expand(16, 3, 16));
 		return !animals.isEmpty();
 	}
 
@@ -78,7 +78,7 @@ public class NecronomiconBreedingRitual extends NecronomiconRitual {
 		List<EntityOcelot> ocelots = Lists.newArrayList();
 		List<EntityWolf> wolves = Lists.newArrayList();
 
-		List<Entity> entities = world.getEntitiesWithinAABBExcludingEntity(player, world.getBlockState(pos).getBlock().getCollisionBoundingBox(world, pos, world.getBlockState(pos)).expand(16, 3, 16));
+		List<Entity> entities = world.getEntitiesWithinAABBExcludingEntity(player, world.getBlockState(pos).getBlock().getBoundingBox(world.getBlockState(pos), world, pos).expand(16, 3, 16));
 		for(Entity entity : entities){
 			if(entity instanceof EntityCow)
 				cows.add((EntityCow) entity);

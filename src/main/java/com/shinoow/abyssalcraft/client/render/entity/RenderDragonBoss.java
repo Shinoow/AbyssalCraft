@@ -14,13 +14,12 @@ package com.shinoow.abyssalcraft.client.render.entity;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.client.renderer.WorldRenderer;
+import net.minecraft.client.renderer.VertexBuffer;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
-import net.minecraft.entity.boss.BossStatus;
-import net.minecraft.util.MathHelper;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -126,7 +125,7 @@ public class RenderDragonBoss extends RenderLiving<EntityDragonBoss> {
 	@Override
 	public void doRender(EntityDragonBoss dragon, double par2, double par4, double par6, float par8, float par9)
 	{
-		BossStatus.setBossStatus(dragon, false);
+		//		BossStatus.setBossStatus(dragon, false);
 		super.doRender(dragon, par2, par4, par6, par8, par9);
 
 		if (dragon.healingcircle != null)
@@ -144,7 +143,7 @@ public class RenderDragonBoss extends RenderLiving<EntityDragonBoss> {
 			GlStateManager.rotate((float)-Math.atan2(f4, f2) * 180.0F / (float)Math.PI - 90.0F, 0.0F, 1.0F, 0.0F);
 			GlStateManager.rotate((float)-Math.atan2(f5, f3) * 180.0F / (float)Math.PI - 90.0F, 1.0F, 0.0F, 0.0F);
 			Tessellator tessellator = Tessellator.getInstance();
-			WorldRenderer worldrenderer = tessellator.getWorldRenderer();
+			VertexBuffer worldrenderer = tessellator.getBuffer();
 			RenderHelper.disableStandardItemLighting();
 			GlStateManager.disableCull();
 			bindTexture(field_110842_f);

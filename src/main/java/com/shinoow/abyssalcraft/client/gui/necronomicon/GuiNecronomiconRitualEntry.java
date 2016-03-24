@@ -20,11 +20,11 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.renderer.RenderHelper;
-import net.minecraft.client.renderer.entity.RenderItem;
+import net.minecraft.client.renderer.RenderItem;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.EnumChatFormatting;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.oredict.OreDictionary;
 
 import org.lwjgl.input.Keyboard;
@@ -366,7 +366,7 @@ public class GuiNecronomiconRitualEntry extends GuiNecronomicon {
 			{
 				String s_ = s;
 				if(!first)
-					s_ = EnumChatFormatting.GRAY + s;
+					s_ = TextFormatting.GRAY + s;
 				parsedTooltip.add(s_);
 				first = false;
 			}

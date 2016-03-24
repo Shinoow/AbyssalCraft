@@ -11,14 +11,13 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.client.render.entity;
 
-import org.lwjgl.opengl.GL11;
-
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.entity.RenderManager;
-import net.minecraft.entity.boss.BossStatus;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+
+import org.lwjgl.opengl.GL11;
 
 import com.shinoow.abyssalcraft.client.model.entity.ModelJzahar;
 import com.shinoow.abyssalcraft.common.entity.EntityJzahar;
@@ -45,7 +44,7 @@ public class RenderJzahar extends RenderLiving<EntityJzahar> {
 	@Override
 	public void doRender(EntityJzahar par1Entity, double par2, double par4, double par6, float par8, float par9)
 	{
-		BossStatus.setBossStatus(par1Entity, false);
+		//		BossStatus.setBossStatus(par1Entity, false);
 		super.doRender(par1Entity, par2, par4, par6, par8, par9);
 	}
 

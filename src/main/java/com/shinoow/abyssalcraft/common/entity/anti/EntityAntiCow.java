@@ -27,10 +27,12 @@ import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.passive.EntityCow;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.pathfinding.PathNavigateGround;
-import net.minecraft.util.BlockPos;
+import net.minecraft.util.EnumHand;
+import net.minecraft.util.SoundEvent;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
@@ -42,7 +44,6 @@ public class EntityAntiCow extends EntityAnimal implements IAntiEntity {
 	{
 		super(par1World);
 		setSize(0.9F, 1.3F);
-		((PathNavigateGround)getNavigator()).setAvoidsWater(true);
 		tasks.addTask(0, new EntityAISwimming(this));
 		tasks.addTask(1, new EntityAIPanic(this, 2.0D));
 		tasks.addTask(2, new EntityAIMate(this, 1.0D));
@@ -57,32 +58,32 @@ public class EntityAntiCow extends EntityAnimal implements IAntiEntity {
 	protected void applyEntityAttributes()
 	{
 		super.applyEntityAttributes();
-		getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(20.0D);
-		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.20000000298023224D);
+		getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(20.0D);
+		getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.20000000298023224D);
 	}
 
 	@Override
-	protected String getLivingSound()
+	protected SoundEvent getAmbientSound()
 	{
-		return "mob.cow.say";
+		return SoundEvents.entity_cow_ambient;
 	}
 
 	@Override
-	protected String getHurtSound()
+	protected SoundEvent getHurtSound()
 	{
-		return "mob.cow.hurt";
+		return SoundEvents.entity_cow_hurt;
 	}
 
 	@Override
-	protected String getDeathSound()
+	protected SoundEvent getDeathSound()
 	{
-		return "mob.cow.hurt";
+		return SoundEvents.entity_cow_death;
 	}
 
 	@Override
 	protected void playStepSound(BlockPos pos, Block par4Block)
 	{
-		playSound("mob.cow.step", 0.15F, 1.0F);
+		playSound(SoundEvents.entity_cow_step, 0.15F, 1.0F);
 	}
 
 	@Override
@@ -127,20 +128,20 @@ public class EntityAntiCow extends EntityAnimal implements IAntiEntity {
 	}
 
 	@Override
-	public boolean interact(EntityPlayer par1EntityPlayer)
+	public boolean processInteract(EntityPlayer par1EntityPlayer, EnumHand hand, ItemStack stack)
 	{
-		ItemStack itemstack = par1EntityPlayer.inventory.getCurrentItem();
 
-		if (itemstack != null && itemstack.getItem() == Items.bucket && !par1EntityPlayer.capabilities.isCreativeMode)
+		if (stack != null && stack.getItem() == Items.bucket && !par1EntityPlayer.capabilities.isCreativeMode && !isChild())
 		{
-			if (itemstack.stackSize-- == 1)
-				par1EntityPlayer.inventory.setInventorySlotContents(par1EntityPlayer.inventory.currentItem, new ItemStack(Items.milk_bucket));
+			par1EntityPlayer.playSound(SoundEvents.entity_cow_milk, 1.0F, 1.0F);
+			if (stack.stackSize-- == 1)
+				par1EntityPlayer.setHeldItem(hand, new ItemStack(Items.milk_bucket));
 			else if (!par1EntityPlayer.inventory.addItemStackToInventory(new ItemStack(AbyssalCraft.antibucket)))
 				par1EntityPlayer.dropPlayerItemWithRandomChoice(new ItemStack(AbyssalCraft.antibucket, 1, 0), false);
 
 			return true;
 		} else
-			return super.interact(par1EntityPlayer);
+			return super.processInteract(par1EntityPlayer, hand, stack);
 	}
 
 	@Override

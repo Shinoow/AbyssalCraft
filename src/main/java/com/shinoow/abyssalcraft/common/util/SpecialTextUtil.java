@@ -14,7 +14,7 @@ package com.shinoow.abyssalcraft.common.util;
 import java.util.List;
 
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.util.ChatComponentText;
+import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.client.FMLClientHandler;
 
@@ -111,7 +111,7 @@ public class SpecialTextUtil {
 	 * @param text A message
 	 */
 	public static void customText(String name, String text){
-		FMLClientHandler.instance().getClient().ingameGUI.getChatGUI().printChatMessage(new ChatComponentText(name + ": " + text));
+		FMLClientHandler.instance().getClient().ingameGUI.getChatGUI().printChatMessage(new TextComponentString(name + ": " + text));
 	}
 
 	/**
@@ -123,6 +123,6 @@ public class SpecialTextUtil {
 	public static void customGroup(World world, String name, String text){
 		List<EntityPlayer> players = world.playerEntities;
 		for(EntityPlayer player : players)
-			player.addChatMessage(new ChatComponentText(name + ": " + text));
+			player.addChatMessage(new TextComponentString(name + ": " + text));
 	}
 }

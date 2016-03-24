@@ -19,19 +19,20 @@ import java.util.Map;
 import java.util.Random;
 import java.util.Set;
 
-import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.enchantment.EnchantmentProtection;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.util.AxisAlignedBB;
-import net.minecraft.util.BlockPos;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumParticleTypes;
-import net.minecraft.util.MathHelper;
-import net.minecraft.util.Vec3;
+import net.minecraft.util.SoundCategory;
+import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
 
@@ -55,7 +56,7 @@ public class ACExplosion extends Explosion
 	public float explosionSize;
 	/** A list of BlockPos of blocks affected by this explosion */
 	public List<BlockPos> affectedBlockPositions = new ArrayList<BlockPos>();
-	private Map<EntityPlayer, Vec3> field_77288_k = new HashMap<EntityPlayer, Vec3>();
+	private Map<EntityPlayer, Vec3d> field_77288_k = new HashMap<EntityPlayer, Vec3d>();
 
 	public ACExplosion(World par1World, Entity par2Entity, double par3, double par5, double par7, float par9, int par11, boolean par12, boolean par14)
 	{
@@ -108,7 +109,7 @@ public class ACExplosion extends Explosion
 							BlockPos pos = new BlockPos(d5, d6, d7);
 							IBlockState state = worldObj.getBlockState(pos);
 
-							if (state.getBlock().getMaterial() != Material.air)
+							if (state.getMaterial() != Material.air)
 							{
 								float f3 = exploder != null ? exploder.getExplosionResistance(this, worldObj, pos, state) : state.getBlock().getExplosionResistance(worldObj, pos, null, this);
 								f1 -= (f3 + 0.3F) * f2;
@@ -132,7 +133,7 @@ public class ACExplosion extends Explosion
 		int l = MathHelper.floor_double(explosionZ - explosionSize - 1.0D);
 		int j2 = MathHelper.floor_double(explosionZ + explosionSize + 1.0D);
 		List<?> list = worldObj.getEntitiesWithinAABBExcludingEntity(exploder, new AxisAlignedBB(i, k, l, j, i2, j2));
-		Vec3 vec3 = new Vec3(explosionX, explosionY, explosionZ);
+		Vec3d vec3 = new Vec3d(explosionX, explosionY, explosionZ);
 
 		for (int i1 = 0; i1 < list.size(); ++i1)
 		{
@@ -153,14 +154,17 @@ public class ACExplosion extends Explosion
 					d7 /= d9;
 					double d10 = worldObj.getBlockDensity(vec3, entity.getEntityBoundingBox());
 					double d11 = (1.0D - d4) * d10;
-					entity.attackEntityFrom(DamageSource.setExplosionSource(this), (int)((d11 * d11 + d11) / 2.0D * 8.0D * explosionSize + 1.0D));
-					double d8 = EnchantmentProtection.func_92092_a(entity, d11);
+					entity.attackEntityFrom(DamageSource.causeExplosionDamage(this), (int)((d11 * d11 + d11) / 2.0D * 8.0D * explosionSize + 1.0D));
+					double d8 = 1.0D;
+
+					if(entity instanceof EntityLivingBase)
+						d8 = EnchantmentProtection.func_92092_a((EntityLivingBase) entity, d11);
 					entity.motionX += d5 * d8;
 					entity.motionY += d6 * d8;
 					entity.motionZ += d7 * d8;
 
 					if (entity instanceof EntityPlayer)
-						field_77288_k.put((EntityPlayer)entity, new Vec3(d5 * d11, d6 * d11, d7 * d11));
+						field_77288_k.put((EntityPlayer)entity, new Vec3d(d5 * d11, d6 * d11, d7 * d11));
 				}
 			}
 		}
@@ -174,7 +178,7 @@ public class ACExplosion extends Explosion
 	@Override
 	public void doExplosionB(boolean par1)
 	{
-		worldObj.playSoundEffect(explosionX, explosionY, explosionZ, "random.explode", 4.0F, (1.0F + (worldObj.rand.nextFloat() - worldObj.rand.nextFloat()) * 0.2F) * 0.7F);
+		worldObj.playSound(explosionX, explosionY, explosionZ, SoundEvents.entity_generic_explode, SoundCategory.BLOCKS, 4.0F, (1.0F + (worldObj.rand.nextFloat() - worldObj.rand.nextFloat()) * 0.2F) * 0.7F, false);
 
 		if (explosionSize >= 2.0F && isSmoking)
 			worldObj.spawnParticle(EnumParticleTypes.EXPLOSION_HUGE, explosionX, explosionY, explosionZ, 1.0D, 0.0D, 0.0D);
@@ -186,7 +190,7 @@ public class ACExplosion extends Explosion
 			for(BlockPos pos : affectedBlockPositions)
 			{
 
-				Block block = worldObj.getBlockState(pos).getBlock();
+				IBlockState block = worldObj.getBlockState(pos);
 
 				if (par1)
 				{
@@ -210,14 +214,14 @@ public class ACExplosion extends Explosion
 				}
 
 				if (block.getMaterial() != Material.air)
-					block.onBlockExploded(worldObj, pos, this);
+					block.getBlock().onBlockExploded(worldObj, pos, this);
 			}
 
 		if (isAntimatter)
 			for(BlockPos pos1 : affectedBlockPositions)
 			{
-				Block block = worldObj.getBlockState(pos1).getBlock();
-				Block block1 = worldObj.getBlockState(pos1.down()).getBlock();
+				IBlockState block = worldObj.getBlockState(pos1);
+				IBlockState block1 = worldObj.getBlockState(pos1.down());
 
 				if (block.getMaterial() == Material.air && block1.isFullBlock() && explosionRNG.nextInt(3) == 0)
 					worldObj.setBlockState(pos1, AbyssalCraft.anticwater.getDefaultState());
@@ -225,7 +229,7 @@ public class ACExplosion extends Explosion
 	}
 
 	@Override
-	public Map<EntityPlayer, Vec3> getPlayerKnockbackMap()
+	public Map<EntityPlayer, Vec3d> getPlayerKnockbackMap()
 	{
 		return field_77288_k;
 	}

@@ -33,8 +33,8 @@ import com.shinoow.abyssalcraft.common.entity.demon.EntityDemonPig;
 
 public class PotionAntimatter extends Potion{
 
-	public PotionAntimatter(ResourceLocation par1, boolean par2, int par3) {
-		super(par1, par2, par3);
+	public PotionAntimatter(boolean par2, int par3) {
+		super(par2, par3);
 	}
 
 	@Override
@@ -47,7 +47,7 @@ public class PotionAntimatter extends Potion{
 	public void performEffect(EntityLivingBase par1EntityLivingBase, int par2){
 
 		if(par1EntityLivingBase instanceof IAntiEntity)
-			par1EntityLivingBase.removePotionEffect(AbyssalCraft.antiMatter.id);
+			par1EntityLivingBase.removePotionEffect(AbyssalCraft.antiMatter);
 		else par1EntityLivingBase.attackEntityFrom(AbyssalCraftAPI.antimatter, 5);
 
 		if(!par1EntityLivingBase.worldObj.isRemote && par1EntityLivingBase.isDead)

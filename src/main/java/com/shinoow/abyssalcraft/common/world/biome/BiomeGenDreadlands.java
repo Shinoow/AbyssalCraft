@@ -13,7 +13,7 @@ package com.shinoow.abyssalcraft.common.world.biome;
 
 import java.util.Random;
 
-import net.minecraft.util.BlockPos;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
@@ -24,7 +24,7 @@ public class BiomeGenDreadlands extends BiomeGenDreadlandsBase
 {
 
 	@SuppressWarnings("unchecked")
-	public BiomeGenDreadlands(int par1) {
+	public BiomeGenDreadlands(BiomeProperties par1) {
 		super(par1);
 		spawnableMonsterList.add(new SpawnListEntry(EntityDreadgolem.class, 100, 1, 5));
 	}

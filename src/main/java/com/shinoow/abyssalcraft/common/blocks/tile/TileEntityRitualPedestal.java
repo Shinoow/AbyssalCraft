@@ -11,15 +11,15 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.common.blocks.tile;
 
-import com.shinoow.abyssalcraft.common.util.IRitualPedestal;
-
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.Packet;
-import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
+import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ITickable;
+
+import com.shinoow.abyssalcraft.common.util.IRitualPedestal;
 
 public class TileEntityRitualPedestal extends TileEntity implements ITickable, IRitualPedestal {
 
@@ -51,11 +51,11 @@ public class TileEntityRitualPedestal extends TileEntity implements ITickable, I
 	public Packet getDescriptionPacket() {
 		NBTTagCompound nbtTag = new NBTTagCompound();
 		writeToNBT(nbtTag);
-		return new S35PacketUpdateTileEntity(pos, 1, nbtTag);
+		return new SPacketUpdateTileEntity(pos, 1, nbtTag);
 	}
 
 	@Override
-	public void onDataPacket(NetworkManager net, S35PacketUpdateTileEntity packet)
+	public void onDataPacket(NetworkManager net, SPacketUpdateTileEntity packet)
 	{
 		readFromNBT(packet.getNbtCompound());
 	}
@@ -63,10 +63,9 @@ public class TileEntityRitualPedestal extends TileEntity implements ITickable, I
 	@Override
 	public void update()
 	{
-		if(isDirty){
-			worldObj.markBlockForUpdate(pos);
+		if(isDirty)
+			//			worldObj.markBlockForUpdate(pos); //TODO: find replacement
 			isDirty = false;
-		}
 
 		if(rot == 360)
 			rot = 0;

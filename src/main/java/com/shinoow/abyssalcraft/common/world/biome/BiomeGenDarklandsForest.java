@@ -14,7 +14,7 @@ package com.shinoow.abyssalcraft.common.world.biome;
 import java.util.Random;
 
 import net.minecraft.init.Blocks;
-import net.minecraft.util.BlockPos;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.gen.feature.WorldGenAbstractTree;
@@ -33,12 +33,12 @@ public class BiomeGenDarklandsForest extends BiomeGenBase {
 	private WorldGenTrees WorldGenDarkTrees;
 
 	@SuppressWarnings("unchecked")
-	public BiomeGenDarklandsForest(int par1)
+	public BiomeGenDarklandsForest(BiomeProperties par1)
 	{
 		super(par1);
 		topBlock = AbyssalCraft.Darkgrass.getDefaultState();
 		fillerBlock = Blocks.dirt.getDefaultState();
-		waterColorMultiplier = 14745518;
+		//		waterColorMultiplier = 14745518;
 		WorldGenDarkTrees = new WorldGenDLT(false);
 		theBiomeDecorator.treesPerChunk = 6;
 		spawnableMonsterList.add(new SpawnListEntry(EntityDepthsGhoul.class, 60, 1, 5));

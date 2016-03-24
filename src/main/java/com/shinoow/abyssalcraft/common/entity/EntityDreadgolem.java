@@ -13,7 +13,7 @@ package com.shinoow.abyssalcraft.common.entity;
 
 import net.minecraft.block.Block;
 import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.EntityAIAttackOnCollide;
+import net.minecraft.entity.ai.EntityAIAttackMelee;
 import net.minecraft.entity.ai.EntityAIHurtByTarget;
 import net.minecraft.entity.ai.EntityAILookIdle;
 import net.minecraft.entity.ai.EntityAIMoveTowardsRestriction;
@@ -22,8 +22,10 @@ import net.minecraft.entity.ai.EntityAIWander;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.util.BlockPos;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.SoundEvent;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
@@ -33,8 +35,7 @@ public class EntityDreadgolem extends EntityMob implements IDreadEntity {
 
 	public EntityDreadgolem(World par1World) {
 		super(par1World);
-		tasks.addTask(2, new EntityAIAttackOnCollide(this, EntityAbygolem.class, 0.35D, true));
-		tasks.addTask(3, new EntityAIAttackOnCollide(this, EntityPlayer.class, 0.35D, false));
+		tasks.addTask(2, new EntityAIAttackMelee(this, 0.35D, true));
 		tasks.addTask(4, new EntityAIMoveTowardsRestriction(this, 0.35D));
 		tasks.addTask(5, new EntityAIWander(this, 0.35D));
 		tasks.addTask(6, new EntityAILookIdle(this));
@@ -50,27 +51,27 @@ public class EntityDreadgolem extends EntityMob implements IDreadEntity {
 		super.applyEntityAttributes();
 
 		if(AbyssalCraft.hardcoreMode){
-			getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(40.0D);
-			getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(8.0D);
-		} else getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(4.0D);
+			getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(40.0D);
+			getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(8.0D);
+		} else getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(4.0D);
 	}
 
 	@Override
-	protected String getLivingSound()
+	protected SoundEvent getAmbientSound()
 	{
-		return "abyssalcraft:golem.idle";
+		return AbyssalCraft.golem_ambient;
 	}
 
 	@Override
-	protected String getHurtSound()
+	protected SoundEvent getHurtSound()
 	{
-		return "abyssalcraft:golem.hit";
+		return AbyssalCraft.golem_hurt;
 	}
 
 	@Override
-	protected String getDeathSound()
+	protected SoundEvent getDeathSound()
 	{
-		return "abyssalcraft:golem.death";
+		return AbyssalCraft.golem_death;
 	}
 
 	@Override
@@ -83,6 +84,6 @@ public class EntityDreadgolem extends EntityMob implements IDreadEntity {
 	@Override
 	protected void playStepSound(BlockPos pos, Block par4)
 	{
-		worldObj.playSoundAtEntity(this, "mob.zombie.step", 0.15F, 1.0F);
+		playSound(SoundEvents.entity_zombie_step, 0.15F, 1.0F);
 	}
 }

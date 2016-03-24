@@ -29,7 +29,7 @@ public class BiomeGenForestDreadlands extends BiomeGenDreadlandsBase
 	private WorldGenTrees WorldGenDreadTrees;
 
 	@SuppressWarnings("unchecked")
-	public BiomeGenForestDreadlands(int par1) {
+	public BiomeGenForestDreadlands(BiomeProperties par1) {
 		super(par1);
 		topBlock = AbyssalCraft.dreadgrass.getDefaultState();
 		fillerBlock = Blocks.dirt.getDefaultState();

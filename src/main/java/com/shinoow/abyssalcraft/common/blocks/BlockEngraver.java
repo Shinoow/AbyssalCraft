@@ -14,6 +14,7 @@ package com.shinoow.abyssalcraft.common.blocks;
 import java.util.Random;
 
 import net.minecraft.block.BlockContainer;
+import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
@@ -25,9 +26,11 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.BlockPos;
+import net.minecraft.util.EnumBlockRenderType;
 import net.minecraft.util.EnumFacing;
-import net.minecraft.util.MathHelper;
+import net.minecraft.util.EnumHand;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.internal.FMLNetworkHandler;
 import net.minecraftforge.fml.relauncher.Side;
@@ -44,15 +47,16 @@ public class BlockEngraver extends BlockContainer {
 	public BlockEngraver() {
 		super(Material.rock);
 		setCreativeTab(AbyssalCraft.tabDecoration);
+		setStepSound(SoundType.STONE);
 	}
 
 	@Override
-	public int getRenderType() {
-		return 2;
+	public EnumBlockRenderType getRenderType(IBlockState state) {
+		return EnumBlockRenderType.ENTITYBLOCK_ANIMATED;
 	}
 
 	@Override
-	public boolean isOpaqueCube() {
+	public boolean isOpaqueCube(IBlockState state) {
 		return false;
 	}
 
@@ -63,7 +67,7 @@ public class BlockEngraver extends BlockContainer {
 	}
 
 	@Override
-	public boolean onBlockActivated(World par1World, BlockPos pos, IBlockState state, EntityPlayer par5EntityPlayer, EnumFacing side, float par7, float par8, float par9) {
+	public boolean onBlockActivated(World par1World, BlockPos pos, IBlockState state, EntityPlayer par5EntityPlayer, EnumHand hand, ItemStack heldItem, EnumFacing side, float par7, float par8, float par9) {
 		if(!par1World.isRemote)
 			FMLNetworkHandler.openGui(par5EntityPlayer, AbyssalCraft.instance, AbyssalCraft.engraverGuiID, par1World, pos.getX(), pos.getY(), pos.getZ());
 		return true;
@@ -145,21 +149,21 @@ public class BlockEngraver extends BlockContainer {
 	}
 
 	@Override
-	public boolean hasComparatorInputOverride()
+	public boolean hasComparatorInputOverride(IBlockState state)
 	{
 		return true;
 	}
 
 	@Override
-	public int getComparatorInputOverride(World par1World, BlockPos pos)
+	public int getComparatorInputOverride(IBlockState state, World par1World, BlockPos pos)
 	{
 		return Container.calcRedstoneFromInventory((IInventory)par1World.getTileEntity(pos));
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public Item getItem(World par1World, BlockPos pos)
+	public ItemStack getItem(World par1World, BlockPos pos, IBlockState state)
 	{
-		return Item.getItemFromBlock(AbyssalCraft.engraver);
+		return new ItemStack(AbyssalCraft.engraver);
 	}
 }

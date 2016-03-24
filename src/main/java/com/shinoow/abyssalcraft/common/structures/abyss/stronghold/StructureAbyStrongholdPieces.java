@@ -11,28 +11,29 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.common.structures.abyss.stronghold;
 
-import static net.minecraftforge.common.ChestGenHooks.STRONGHOLD_CORRIDOR;
-import static net.minecraftforge.common.ChestGenHooks.STRONGHOLD_CROSSING;
-
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
+import net.minecraft.block.BlockButton;
+import net.minecraft.block.BlockDirectional;
+import net.minecraft.block.BlockDoor;
+import net.minecraft.block.BlockLadder;
+import net.minecraft.block.BlockStairs;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
-import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityMobSpawner;
-import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.WeightedRandomChestContent;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.structure.MapGenStructureIO;
 import net.minecraft.world.gen.structure.StructureBoundingBox;
 import net.minecraft.world.gen.structure.StructureComponent;
-import net.minecraftforge.common.ChestGenHooks;
 
 import com.google.common.collect.Lists;
 import com.shinoow.abyssalcraft.AbyssalCraft;
@@ -231,10 +232,10 @@ public class StructureAbyStrongholdPieces
 		{
 			super(par1);
 			field_75024_a = true;
-			coordBaseMode = EnumFacing.Plane.HORIZONTAL.random(par2Random);
+			func_186164_a(EnumFacing.Plane.HORIZONTAL.random(par2Random));
 			field_143013_d = StructureAbyStrongholdPieces.Stronghold.Door.OPENING;
 
-			switch (coordBaseMode)
+			switch (func_186165_e())
 			{
 			case NORTH:
 			case SOUTH:
@@ -249,7 +250,7 @@ public class StructureAbyStrongholdPieces
 		{
 			super(par1);
 			field_75024_a = false;
-			coordBaseMode = par4;
+			func_186164_a(par4);
 			field_143013_d = getRandomDoor(par2Random);
 			boundingBox = par3StructureBoundingBox;
 		}
@@ -338,7 +339,7 @@ public class StructureAbyStrongholdPieces
 		public Straight(int par1, Random par2Random, StructureBoundingBox par3StructureBoundingBox, EnumFacing par4)
 		{
 			super(par1);
-			coordBaseMode = par4;
+			func_186164_a(par4);
 			field_143013_d = getRandomDoor(par2Random);
 			boundingBox = par3StructureBoundingBox;
 			expandsX = par2Random.nextInt(2) == 0;
@@ -420,7 +421,7 @@ public class StructureAbyStrongholdPieces
 		public PortalRoom(int par1, Random par2Random, StructureBoundingBox par3StructureBoundingBox, EnumFacing par4)
 		{
 			super(par1);
-			coordBaseMode = par4;
+			func_186164_a(par4);
 			boundingBox = par3StructureBoundingBox;
 		}
 
@@ -489,16 +490,16 @@ public class StructureAbyStrongholdPieces
 			for (i = 2; i < 9; i += 2)
 				fillWithBlocks(par1World, par3StructureBoundingBox, i, 3, 15, i, 4, 15, AbyssalCraft.abyfence.getDefaultState(), AbyssalCraft.abyfence.getDefaultState(), false);
 
-			i = getMetadataWithOffset(AbyssalCraft.abystairs, 3);
+			IBlockState iblockstate3 = AbyssalCraft.abystairs.getDefaultState().withProperty(BlockStairs.FACING, EnumFacing.NORTH);
 			fillWithRandomizedBlocks(par1World, par3StructureBoundingBox, 4, 1, 5, 6, 1, 7, false, par2Random, StructureAbyStrongholdPieces.strongholdStones);
 			fillWithRandomizedBlocks(par1World, par3StructureBoundingBox, 4, 2, 6, 6, 2, 7, false, par2Random, StructureAbyStrongholdPieces.strongholdStones);
 			fillWithRandomizedBlocks(par1World, par3StructureBoundingBox, 4, 3, 7, 6, 3, 7, false, par2Random, StructureAbyStrongholdPieces.strongholdStones);
 
 			for (int j = 4; j <= 6; ++j)
 			{
-				setBlockState(par1World, AbyssalCraft.abystairs.getStateFromMeta(i), j, 1, 4, par3StructureBoundingBox);
-				setBlockState(par1World, AbyssalCraft.abystairs.getStateFromMeta(i), j, 2, 5, par3StructureBoundingBox);
-				setBlockState(par1World, AbyssalCraft.abystairs.getStateFromMeta(i), j, 3, 6, par3StructureBoundingBox);
+				setBlockState(par1World, iblockstate3, j, 1, 4, par3StructureBoundingBox);
+				setBlockState(par1World, iblockstate3, j, 2, 5, par3StructureBoundingBox);
+				setBlockState(par1World, iblockstate3, j, 3, 6, par3StructureBoundingBox);
 			}
 
 			setBlockState(par1World, AbyssalCraft.abybrick.getDefaultState(), 4, 3, 8, par3StructureBoundingBox);
@@ -573,14 +574,14 @@ public class StructureAbyStrongholdPieces
 		/**
 		 * List of items that Stronghold chests can contain.
 		 */
-		public static final List<WeightedRandomChestContent> strongholdChestContents = Lists.newArrayList(new WeightedRandomChestContent[] {new WeightedRandomChestContent(Items.ender_pearl, 0, 1, 4, 10), new WeightedRandomChestContent(AbyssalCraft.Corb, 0, 1, 1, 3), new WeightedRandomChestContent(AbyssalCraft.abyingot, 0, 1, 5, 10), new WeightedRandomChestContent(AbyssalCraft.Cingot, 0, 1, 3, 5), new WeightedRandomChestContent(AbyssalCraft.Cpearl, 0, 1, 3, 5), new WeightedRandomChestContent(Items.bread, 0, 1, 3, 15), new WeightedRandomChestContent(Items.golden_apple, 0, 1, 3, 15), new WeightedRandomChestContent(AbyssalCraft.pickaxeA, 0, 1, 1, 5), new WeightedRandomChestContent(AbyssalCraft.plate, 0, 1, 1, 5), new WeightedRandomChestContent(AbyssalCraft.helmet, 0, 1, 1, 5), new WeightedRandomChestContent(AbyssalCraft.legs, 0, 1, 1, 5), new WeightedRandomChestContent(AbyssalCraft.boots, 0, 1, 1, 5), new WeightedRandomChestContent(AbyssalCraft.OC, 0, 1, 1, 1), new WeightedRandomChestContent(new ItemStack(AbyssalCraft.crystal, 1, 24), 1, 5, 8)});
+		public static final List<WeightedRandomChestContent> strongholdChestContents = Lists.newArrayList(new WeightedRandomChestContent[] {new WeightedRandomChestContent(Items.ender_pearl, 0, 1, 4, 10), new WeightedRandomChestContent(AbyssalCraft.Corb, 0, 1, 1, 3), new WeightedRandomChestContent(AbyssalCraft.abyingot, 0, 1, 5, 10), new WeightedRandomChestContent(AbyssalCraft.Cingot, 0, 1, 3, 5), new WeightedRandomChestContent(AbyssalCraft.Cpearl, 0, 1, 3, 5), new WeightedRandomChestContent(Items.bread, 0, 1, 3, 15), new WeightedRandomChestContent(Items.golden_apple, 0, 1, 3, 15), new WeightedRandomChestContent(AbyssalCraft.pickaxeA, 0, 1, 1, 5), new WeightedRandomChestContent(AbyssalCraft.plate, 0, 1, 1, 5), new WeightedRandomChestContent(AbyssalCraft.helmet, 0, 1, 1, 5), new WeightedRandomChestContent(AbyssalCraft.legs, 0, 1, 1, 5), new WeightedRandomChestContent(AbyssalCraft.boots, 0, 1, 1, 5), new WeightedRandomChestContent(AbyssalCraft.OC, 0, 1, 1, 1), new WeightedRandomChestContent(AbyssalCraft.crystal, 24, 1, 5, 8)});
 		private boolean hasMadeChest;
 		public ChestCorridor() {}
 
 		public ChestCorridor(int par1, Random par2Random, StructureBoundingBox par3StructureBoundingBox, EnumFacing par4)
 		{
 			super(par1);
-			coordBaseMode = par4;
+			func_186164_a(par4);
 			field_143013_d = getRandomDoor(par2Random);
 			boundingBox = par3StructureBoundingBox;
 		}
@@ -642,10 +643,9 @@ public class StructureAbyStrongholdPieces
 				for (i = 2; i <= 4; ++i)
 					setBlockState(par1World, AbyssalCraft.abyslab1.getDefaultState(), 2, 1, i, par3StructureBoundingBox);
 
-				if (!hasMadeChest && par3StructureBoundingBox.isVecInside(new BlockPos(getXWithOffset(3, 3), getYWithOffset(2), getZWithOffset(3, 3)))){
-					hasMadeChest = true;
-					generateChestContents(par1World, par3StructureBoundingBox, par2Random, 3, 2, 3, strongholdChestContents, ChestGenHooks.getCount(STRONGHOLD_CORRIDOR, par2Random));
-				}
+				if (!hasMadeChest && par3StructureBoundingBox.isVecInside(new BlockPos(getXWithOffset(3, 3), getYWithOffset(2), getZWithOffset(3, 3))))
+					hasMadeChest = true; //TODO: loot tables
+				//					generateChestContents(par1World, par3StructureBoundingBox, par2Random, 3, 2, 3, strongholdChestContents, ChestGenHooks.getCount(STRONGHOLD_CORRIDOR, par2Random));
 
 				return true;
 			}
@@ -657,14 +657,14 @@ public class StructureAbyStrongholdPieces
 		/**
 		 * Items that could generate in the chest that is located in Stronghold Room Crossing.
 		 */
-		public static final List<WeightedRandomChestContent> strongholdRoomCrossingChestContents = Lists.newArrayList(new WeightedRandomChestContent[] {new WeightedRandomChestContent(AbyssalCraft.abyingot, 0, 1, 5, 10), new WeightedRandomChestContent(AbyssalCraft.Cingot, 0, 1, 5, 5), new WeightedRandomChestContent(AbyssalCraft.Cpearl, 0, 1, 3, 5), new WeightedRandomChestContent(AbyssalCraft.Coralium, 0, 3, 8, 10), new WeightedRandomChestContent(Items.golden_apple, 0, 1, 3, 15), new WeightedRandomChestContent(AbyssalCraft.MRE, 0, 1, 1, 10), new WeightedRandomChestContent(AbyssalCraft.pickaxeA, 0, 1, 1, 1), new WeightedRandomChestContent(new ItemStack(AbyssalCraft.crystal, 1, 24), 1, 5, 8)});
+		public static final List<WeightedRandomChestContent> strongholdRoomCrossingChestContents = Lists.newArrayList(new WeightedRandomChestContent[] {new WeightedRandomChestContent(AbyssalCraft.abyingot, 0, 1, 5, 10), new WeightedRandomChestContent(AbyssalCraft.Cingot, 0, 1, 5, 5), new WeightedRandomChestContent(AbyssalCraft.Cpearl, 0, 1, 3, 5), new WeightedRandomChestContent(AbyssalCraft.Coralium, 0, 3, 8, 10), new WeightedRandomChestContent(Items.golden_apple, 0, 1, 3, 15), new WeightedRandomChestContent(AbyssalCraft.MRE, 0, 1, 1, 10), new WeightedRandomChestContent(AbyssalCraft.pickaxeA, 0, 1, 1, 1), new WeightedRandomChestContent(AbyssalCraft.crystal, 24, 1, 5, 8)});
 		protected int roomType;
 		public RoomCrossing() {}
 
 		public RoomCrossing(int par1, Random par2Random, StructureBoundingBox par3StructureBoundingBox, EnumFacing par4)
 		{
 			super(par1);
-			coordBaseMode = par4;
+			func_186164_a(par4);
 			field_143013_d = getRandomDoor(par2Random);
 			boundingBox = par3StructureBoundingBox;
 			roomType = par2Random.nextInt(5);
@@ -804,10 +804,11 @@ public class StructureAbyStrongholdPieces
 						setBlockState(par1World, AbyssalCraft.DLTplank.getDefaultState(), 8, 3, i, par3StructureBoundingBox);
 					}
 
-					setBlockState(par1World, Blocks.ladder.getStateFromMeta(getMetadataWithOffset(Blocks.ladder, 4)), 9, 1, 3, par3StructureBoundingBox);
-					setBlockState(par1World, Blocks.ladder.getStateFromMeta(getMetadataWithOffset(Blocks.ladder, 4)), 9, 2, 3, par3StructureBoundingBox);
-					setBlockState(par1World, Blocks.ladder.getStateFromMeta(getMetadataWithOffset(Blocks.ladder, 4)), 9, 3, 3, par3StructureBoundingBox);
-					generateChestContents(par1World, par3StructureBoundingBox, par2Random, 3, 4, 8, strongholdRoomCrossingChestContents, ChestGenHooks.getCount(STRONGHOLD_CROSSING, par2Random));
+					IBlockState iblockstate = Blocks.ladder.getDefaultState().withProperty(BlockLadder.FACING, EnumFacing.WEST);
+					setBlockState(par1World, iblockstate, 9, 1, 3, par3StructureBoundingBox);
+					setBlockState(par1World, iblockstate, 9, 2, 3, par3StructureBoundingBox);
+					setBlockState(par1World, iblockstate, 9, 3, 3, par3StructureBoundingBox); //TODO: loot tables
+					//					generateChestContents(par1World, par3StructureBoundingBox, par2Random, 3, 4, 8, strongholdRoomCrossingChestContents, ChestGenHooks.getCount(STRONGHOLD_CROSSING, par2Random));
 				}
 
 				return true;
@@ -822,7 +823,7 @@ public class StructureAbyStrongholdPieces
 		public StairsStraight(int par1, Random par2Random, StructureBoundingBox par3StructureBoundingBox, EnumFacing par4)
 		{
 			super(par1);
-			coordBaseMode = par4;
+			func_186164_a(par4);
 			field_143013_d = getRandomDoor(par2Random);
 			boundingBox = par3StructureBoundingBox;
 		}
@@ -860,13 +861,13 @@ public class StructureAbyStrongholdPieces
 				fillWithRandomizedBlocks(par1World, par3StructureBoundingBox, 0, 0, 0, 4, 10, 7, true, par2Random, StructureAbyStrongholdPieces.strongholdStones);
 				placeDoor(par1World, par2Random, par3StructureBoundingBox, field_143013_d, 1, 7, 0);
 				placeDoor(par1World, par2Random, par3StructureBoundingBox, StructureAbyStrongholdPieces.Stronghold.Door.OPENING, 1, 1, 7);
-				int i = getMetadataWithOffset(AbyssalCraft.DCstairs, 2);
+				IBlockState iblockstate = AbyssalCraft.DCstairs.getDefaultState().withProperty(BlockStairs.FACING, EnumFacing.SOUTH);
 
 				for (int j = 0; j < 6; ++j)
 				{
-					setBlockState(par1World, AbyssalCraft.DCstairs.getStateFromMeta(i), 1, 6 - j, 1 + j, par3StructureBoundingBox);
-					setBlockState(par1World, AbyssalCraft.DCstairs.getStateFromMeta(i), 2, 6 - j, 1 + j, par3StructureBoundingBox);
-					setBlockState(par1World, AbyssalCraft.DCstairs.getStateFromMeta(i), 3, 6 - j, 1 + j, par3StructureBoundingBox);
+					setBlockState(par1World, iblockstate, 1, 6 - j, 1 + j, par3StructureBoundingBox);
+					setBlockState(par1World, iblockstate, 2, 6 - j, 1 + j, par3StructureBoundingBox);
+					setBlockState(par1World, iblockstate, 3, 6 - j, 1 + j, par3StructureBoundingBox);
 
 					if (j < 5)
 					{
@@ -907,7 +908,7 @@ public class StructureAbyStrongholdPieces
 		public Prison(int par1, Random par2Random, StructureBoundingBox par3StructureBoundingBox, EnumFacing par4)
 		{
 			super(par1);
-			coordBaseMode = par4;
+			func_186164_a(par4);
 			field_143013_d = getRandomDoor(par2Random);
 			boundingBox = par3StructureBoundingBox;
 		}
@@ -953,10 +954,12 @@ public class StructureAbyStrongholdPieces
 				fillWithBlocks(par1World, par3StructureBoundingBox, 5, 1, 5, 7, 3, 5, AbyssalCraft.abyfence.getDefaultState(), AbyssalCraft.abyfence.getDefaultState(), false);
 				setBlockState(par1World, AbyssalCraft.abyfence.getDefaultState(), 4, 3, 2, par3StructureBoundingBox);
 				setBlockState(par1World, AbyssalCraft.abyfence.getDefaultState(), 4, 3, 8, par3StructureBoundingBox);
-				setBlockState(par1World, Blocks.iron_door.getStateFromMeta(getMetadataWithOffset(Blocks.iron_door, 3)), 4, 1, 2, par3StructureBoundingBox);
-				setBlockState(par1World, Blocks.iron_door.getStateFromMeta(getMetadataWithOffset(Blocks.iron_door, 3) + 8), 4, 2, 2, par3StructureBoundingBox);
-				setBlockState(par1World, Blocks.iron_door.getStateFromMeta(getMetadataWithOffset(Blocks.iron_door, 3)), 4, 1, 8, par3StructureBoundingBox);
-				setBlockState(par1World, Blocks.iron_door.getStateFromMeta(getMetadataWithOffset(Blocks.iron_door, 3) + 8), 4, 2, 8, par3StructureBoundingBox);
+				IBlockState iblockstate = Blocks.iron_door.getDefaultState().withProperty(BlockDoor.FACING, EnumFacing.WEST);
+				IBlockState iblockstate1 = Blocks.iron_door.getDefaultState().withProperty(BlockDoor.FACING, EnumFacing.WEST).withProperty(BlockDoor.HALF, BlockDoor.EnumDoorHalf.UPPER);
+				setBlockState(par1World, iblockstate, 4, 1, 2, par3StructureBoundingBox);
+				setBlockState(par1World, iblockstate1, 4, 2, 2, par3StructureBoundingBox);
+				setBlockState(par1World, iblockstate, 4, 1, 8, par3StructureBoundingBox);
+				setBlockState(par1World, iblockstate1, 4, 2, 8, par3StructureBoundingBox);
 				return true;
 			}
 		}
@@ -969,7 +972,7 @@ public class StructureAbyStrongholdPieces
 		public LeftTurn(int par1, Random par2Random, StructureBoundingBox par3StructureBoundingBox, EnumFacing par4)
 		{
 			super(par1);
-			coordBaseMode = par4;
+			func_186164_a(par4);
 			field_143013_d = getRandomDoor(par2Random);
 			boundingBox = par3StructureBoundingBox;
 		}
@@ -981,7 +984,7 @@ public class StructureAbyStrongholdPieces
 		@SuppressWarnings({ "rawtypes", "unchecked" })
 		public void buildComponent(StructureComponent par1StructureComponent, List par2List, Random par3Random)
 		{
-			if (coordBaseMode != EnumFacing.NORTH && coordBaseMode != EnumFacing.EAST)
+			if (func_186165_e() != EnumFacing.NORTH && func_186165_e() != EnumFacing.EAST)
 				getNextComponentZ((StructureAbyStrongholdPieces.Stairs2)par1StructureComponent, par2List, par3Random, 1, 1);
 			else
 				getNextComponentX((StructureAbyStrongholdPieces.Stairs2)par1StructureComponent, par2List, par3Random, 1, 1);
@@ -1010,7 +1013,7 @@ public class StructureAbyStrongholdPieces
 				fillWithRandomizedBlocks(par1World, par3StructureBoundingBox, 0, 0, 0, 4, 4, 4, true, par2Random, StructureAbyStrongholdPieces.strongholdStones);
 				placeDoor(par1World, par2Random, par3StructureBoundingBox, field_143013_d, 1, 1, 0);
 
-				if (coordBaseMode != EnumFacing.NORTH && coordBaseMode != EnumFacing.EAST)
+				if (func_186165_e() != EnumFacing.NORTH && func_186165_e() != EnumFacing.EAST)
 					fillWithBlocks(par1World, par3StructureBoundingBox, 4, 1, 1, 4, 3, 3, Blocks.air.getDefaultState(), Blocks.air.getDefaultState(), false);
 				else
 					fillWithBlocks(par1World, par3StructureBoundingBox, 0, 1, 1, 0, 3, 3, Blocks.air.getDefaultState(), Blocks.air.getDefaultState(), false);
@@ -1029,7 +1032,7 @@ public class StructureAbyStrongholdPieces
 		@SuppressWarnings({ "rawtypes", "unchecked" })
 		public void buildComponent(StructureComponent par1StructureComponent, List par2List, Random par3Random)
 		{
-			if (coordBaseMode != EnumFacing.NORTH && coordBaseMode != EnumFacing.EAST)
+			if (func_186165_e() != EnumFacing.NORTH && func_186165_e() != EnumFacing.EAST)
 				getNextComponentX((StructureAbyStrongholdPieces.Stairs2)par1StructureComponent, par2List, par3Random, 1, 1);
 			else
 				getNextComponentZ((StructureAbyStrongholdPieces.Stairs2)par1StructureComponent, par2List, par3Random, 1, 1);
@@ -1049,7 +1052,7 @@ public class StructureAbyStrongholdPieces
 				fillWithRandomizedBlocks(par1World, par3StructureBoundingBox, 0, 0, 0, 4, 4, 4, true, par2Random, StructureAbyStrongholdPieces.strongholdStones);
 				placeDoor(par1World, par2Random, par3StructureBoundingBox, field_143013_d, 1, 1, 0);
 
-				if (coordBaseMode != EnumFacing.NORTH && coordBaseMode != EnumFacing.EAST)
+				if (func_186165_e() != EnumFacing.NORTH && func_186165_e() != EnumFacing.EAST)
 					fillWithBlocks(par1World, par3StructureBoundingBox, 0, 1, 1, 0, 3, 3, Blocks.air.getDefaultState(), Blocks.air.getDefaultState(), false);
 				else
 					fillWithBlocks(par1World, par3StructureBoundingBox, 4, 1, 1, 4, 3, 3, Blocks.air.getDefaultState(), Blocks.air.getDefaultState(), false);
@@ -1149,9 +1152,9 @@ public class StructureAbyStrongholdPieces
 				setBlockState(par1World, AbyssalCraft.abybrick.getDefaultState(), par5 + 2, par6 + 1, par7, par3StructureBoundingBox);
 				setBlockState(par1World, AbyssalCraft.abybrick.getDefaultState(), par5 + 2, par6, par7, par3StructureBoundingBox);
 				setBlockState(par1World, Blocks.iron_door.getDefaultState(), par5 + 1, par6, par7, par3StructureBoundingBox);
-				setBlockState(par1World, Blocks.iron_door.getStateFromMeta(8), par5 + 1, par6 + 1, par7, par3StructureBoundingBox);
-				setBlockState(par1World, AbyssalCraft.Abybutton.getStateFromMeta(getMetadataWithOffset(AbyssalCraft.Abybutton, 4)), par5 + 2, par6 + 1, par7 + 1, par3StructureBoundingBox);
-				setBlockState(par1World, AbyssalCraft.Abybutton.getStateFromMeta(getMetadataWithOffset(AbyssalCraft.Abybutton, 3)), par5 + 2, par6 + 1, par7 - 1, par3StructureBoundingBox);
+				setBlockState(par1World, Blocks.iron_door.getDefaultState().withProperty(BlockDoor.HALF, BlockDoor.EnumDoorHalf.UPPER), par5 + 1, par6 + 1, par7, par3StructureBoundingBox);
+				setBlockState(par1World, AbyssalCraft.Abybutton.getDefaultState().withProperty(BlockDirectional.FACING, EnumFacing.NORTH), par5 + 2, par6 + 1, par7 + 1, par3StructureBoundingBox);
+				setBlockState(par1World, AbyssalCraft.Abybutton.getDefaultState().withProperty(BlockDirectional.FACING, EnumFacing.NORTH), par5 + 2, par6 + 1, par7 - 1, par3StructureBoundingBox);
 			}
 
 		}
@@ -1180,16 +1183,16 @@ public class StructureAbyStrongholdPieces
 		 */
 		protected StructureComponent getNextComponentNormal(StructureAbyStrongholdPieces.Stairs2 par1ComponentStrongholdStairs2, List<StructureComponent> par2List, Random par3Random, int par4, int par5)
 		{
-			switch (coordBaseMode)
+			switch (func_186165_e())
 			{
 			case SOUTH:
-				return StructureAbyStrongholdPieces.getNextValidComponent(par1ComponentStrongholdStairs2, par2List, par3Random, boundingBox.minX + par4, boundingBox.minY + par5, boundingBox.maxZ + 1, coordBaseMode, getComponentType());
+				return StructureAbyStrongholdPieces.getNextValidComponent(par1ComponentStrongholdStairs2, par2List, par3Random, boundingBox.minX + par4, boundingBox.minY + par5, boundingBox.maxZ + 1, func_186165_e(), getComponentType());
 			case WEST:
-				return StructureAbyStrongholdPieces.getNextValidComponent(par1ComponentStrongholdStairs2, par2List, par3Random, boundingBox.minX - 1, boundingBox.minY + par5, boundingBox.minZ + par4, coordBaseMode, getComponentType());
+				return StructureAbyStrongholdPieces.getNextValidComponent(par1ComponentStrongholdStairs2, par2List, par3Random, boundingBox.minX - 1, boundingBox.minY + par5, boundingBox.minZ + par4, func_186165_e(), getComponentType());
 			case NORTH:
-				return StructureAbyStrongholdPieces.getNextValidComponent(par1ComponentStrongholdStairs2, par2List, par3Random, boundingBox.minX + par4, boundingBox.minY + par5, boundingBox.minZ - 1, coordBaseMode, getComponentType());
+				return StructureAbyStrongholdPieces.getNextValidComponent(par1ComponentStrongholdStairs2, par2List, par3Random, boundingBox.minX + par4, boundingBox.minY + par5, boundingBox.minZ - 1, func_186165_e(), getComponentType());
 			case EAST:
-				return StructureAbyStrongholdPieces.getNextValidComponent(par1ComponentStrongholdStairs2, par2List, par3Random, boundingBox.maxX + 1, boundingBox.minY + par5, boundingBox.minZ + par4, coordBaseMode, getComponentType());
+				return StructureAbyStrongholdPieces.getNextValidComponent(par1ComponentStrongholdStairs2, par2List, par3Random, boundingBox.maxX + 1, boundingBox.minY + par5, boundingBox.minZ + par4, func_186165_e(), getComponentType());
 			default:
 				return null;
 			}
@@ -1200,7 +1203,7 @@ public class StructureAbyStrongholdPieces
 		 */
 		protected StructureComponent getNextComponentX(StructureAbyStrongholdPieces.Stairs2 par1ComponentStrongholdStairs2, List<StructureComponent> par2List, Random par3Random, int par4, int par5)
 		{
-			switch (coordBaseMode)
+			switch (func_186165_e())
 			{
 			case SOUTH:
 				return StructureAbyStrongholdPieces.getNextValidComponent(par1ComponentStrongholdStairs2, par2List, par3Random, boundingBox.minX - 1, boundingBox.minY + par4, boundingBox.minZ + par5, EnumFacing.WEST, getComponentType());
@@ -1220,7 +1223,7 @@ public class StructureAbyStrongholdPieces
 		 */
 		protected StructureComponent getNextComponentZ(StructureAbyStrongholdPieces.Stairs2 par1ComponentStrongholdStairs2, List<StructureComponent> par2List, Random par3Random, int par4, int par5)
 		{
-			switch (coordBaseMode)
+			switch (func_186165_e())
 			{
 			case SOUTH:
 				return StructureAbyStrongholdPieces.getNextValidComponent(par1ComponentStrongholdStairs2, par2List, par3Random, boundingBox.maxX + 1, boundingBox.minY + par4, boundingBox.minZ + par5, EnumFacing.EAST, getComponentType());
@@ -1263,7 +1266,7 @@ public class StructureAbyStrongholdPieces
 		public Crossing(int par1, Random par2Random, StructureBoundingBox par3StructureBoundingBox, EnumFacing par4)
 		{
 			super(par1);
-			coordBaseMode = par4;
+			func_186164_a(par4);
 			field_143013_d = getRandomDoor(par2Random);
 			boundingBox = par3StructureBoundingBox;
 			field_74996_b = par2Random.nextBoolean();
@@ -1302,7 +1305,7 @@ public class StructureAbyStrongholdPieces
 			int i = 3;
 			int j = 5;
 
-			if (coordBaseMode == EnumFacing.WEST || coordBaseMode == EnumFacing.NORTH)
+			if (func_186165_e() == EnumFacing.WEST || func_186165_e() == EnumFacing.NORTH)
 			{
 				i = 8 - i;
 				j = 8 - j;
@@ -1385,7 +1388,7 @@ public class StructureAbyStrongholdPieces
 		public Corridor(int par1, Random par2Random, StructureBoundingBox par3StructureBoundingBox, EnumFacing par6)
 		{
 			super(par1);
-			coordBaseMode = par6;
+			func_186164_a(par6);
 			boundingBox = par3StructureBoundingBox;
 			field_74993_a = par6 != EnumFacing.NORTH && par6 != EnumFacing.SOUTH ? par3StructureBoundingBox.getXSize() : par3StructureBoundingBox.getZSize();
 		}

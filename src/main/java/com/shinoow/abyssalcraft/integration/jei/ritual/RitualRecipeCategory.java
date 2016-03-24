@@ -24,7 +24,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.StatCollector;
+import net.minecraft.util.text.translation.I18n;
 import net.minecraftforge.oredict.OreDictionary;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
@@ -54,7 +54,7 @@ public class RitualRecipeCategory implements IRecipeCategory {
 	public RitualRecipeCategory(IGuiHelper guiHelper){
 		ResourceLocation location = new ResourceLocation("abyssalcraft", "textures/gui/container/ritual_NEI.png");
 		background = guiHelper.createDrawable(location, 5, 11, 166, 140);
-		localizedName = StatCollector.translateToLocal("container.abyssalcraft.rituals.nei");
+		localizedName = I18n.translateToLocal("container.abyssalcraft.rituals.nei");
 
 		slotDrawable = guiHelper.getSlotDrawable();
 	}

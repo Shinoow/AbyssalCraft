@@ -16,9 +16,12 @@ import java.util.List;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.BlockPos;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumFacing;
-import net.minecraft.util.StatCollector;
+import net.minecraft.util.EnumHand;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.translation.I18n;
 import net.minecraft.world.World;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
@@ -39,41 +42,45 @@ public class ItemNecronomicon extends ItemACBasic implements IEnergyTransporter 
 	}
 
 	@Override
-	public ItemStack onItemRightClick(ItemStack par1ItemStack, World par2World, EntityPlayer par3EntityPlayer)
+	public ActionResult<ItemStack> onItemRightClick(ItemStack par1ItemStack, World par2World, EntityPlayer par3EntityPlayer, EnumHand hand)
 	{
 		if(!par1ItemStack.hasTagCompound())
 			par1ItemStack.setTagCompound(new NBTTagCompound());
 		if(!par1ItemStack.getTagCompound().hasKey("owner")){
 			par1ItemStack.getTagCompound().setString("owner", par3EntityPlayer.getName());
-			if(!par3EntityPlayer.isSneaking())
+			if(!par3EntityPlayer.isSneaking()){
 				par3EntityPlayer.openGui(AbyssalCraft.instance, AbyssalCraft.necronmiconGuiID, par2World, 0, 0, 0);
+				return new ActionResult(EnumActionResult.SUCCESS, par1ItemStack);
+			}
 		}
 		if(par1ItemStack.getTagCompound().getString("owner").equals(par3EntityPlayer.getName())){
-			if(!par3EntityPlayer.isSneaking())
+			if(!par3EntityPlayer.isSneaking()){
 				par3EntityPlayer.openGui(AbyssalCraft.instance, AbyssalCraft.necronmiconGuiID, par2World, 0, 0, 0);
+				return new ActionResult(EnumActionResult.SUCCESS, par1ItemStack);
+			}
 		}
 		else if(par2World.isRemote)
-			SpecialTextUtil.JzaharText(StatCollector.translateToLocal("message.necronomicon.nope"));
-		return par1ItemStack;
+			SpecialTextUtil.JzaharText(I18n.translateToLocal("message.necronomicon.nope"));
+		return new ActionResult(EnumActionResult.PASS, par1ItemStack);
 	}
 
 	@Override
-	public boolean onItemUse(ItemStack is, EntityPlayer player, World w, BlockPos pos, EnumFacing side, float hitX, float hitY, float hitZ){
+	public EnumActionResult onItemUse(ItemStack is, EntityPlayer player, World w, BlockPos pos, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ){
 		if(player.isSneaking())
 			if(!(w.getBlockState(pos).getBlock() instanceof BlockRitualAltar)){
 				if(isOwner(player, is))
 					if(RitualUtil.tryAltar(w, pos, bookType)){
-						w.playSoundAtEntity(player, "abyssalcraft:remnant.scream", 3F, 1F);
+						w.playSound(player, pos, AbyssalCraft.remnant_scream, player.getSoundCategory(), 3F, 1F);
 						player.addStat(AbyssalCraft.ritual, 1);
-						return true;
+						return EnumActionResult.SUCCESS;
 					}
 			} else if(w.getTileEntity(pos) instanceof IRitualAltar)
 				if(isOwner(player, is)){
 					IRitualAltar altar = (IRitualAltar) w.getTileEntity(pos);
 					altar.performRitual(w, pos, player);
-					return true;
+					return EnumActionResult.SUCCESS;
 				}
-		return false;
+		return EnumActionResult.PASS;
 	}
 
 	private boolean isOwner(EntityPlayer player, ItemStack stack){

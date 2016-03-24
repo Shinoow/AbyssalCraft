@@ -27,10 +27,12 @@ import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.passive.EntityChicken;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemSeeds;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.BlockPos;
+import net.minecraft.util.SoundEvent;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
@@ -65,8 +67,8 @@ public class EntityAntiChicken extends EntityAnimal implements IAntiEntity {
 	protected void applyEntityAttributes()
 	{
 		super.applyEntityAttributes();
-		getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(8.0D);
-		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.25D);
+		getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(8.0D);
+		getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.25D);
 	}
 
 	@Override
@@ -95,7 +97,7 @@ public class EntityAntiChicken extends EntityAnimal implements IAntiEntity {
 
 		if (!isChild() && !worldObj.isRemote && --timeUntilNextEgg <= 0)
 		{
-			playSound("mob.chicken.plop", 1.0F, (rand.nextFloat() - rand.nextFloat()) * 0.2F + 1.0F);
+			playSound(SoundEvents.entity_chicken_egg, 1.0F, (rand.nextFloat() - rand.nextFloat()) * 0.2F + 1.0F);
 			dropItem(Items.egg, 1);
 			timeUntilNextEgg = rand.nextInt(6000) + 6000;
 		}
@@ -105,27 +107,27 @@ public class EntityAntiChicken extends EntityAnimal implements IAntiEntity {
 	public void fall(float par1, float par2) {}
 
 	@Override
-	protected String getLivingSound()
+	protected SoundEvent getAmbientSound()
 	{
-		return "mob.chicken.say";
+		return SoundEvents.entity_chicken_ambient;
 	}
 
 	@Override
-	protected String getHurtSound()
+	protected SoundEvent getHurtSound()
 	{
-		return "mob.chicken.hurt";
+		return SoundEvents.entity_chicken_hurt;
 	}
 
 	@Override
-	protected String getDeathSound()
+	protected SoundEvent getDeathSound()
 	{
-		return "mob.chicken.hurt";
+		return SoundEvents.entity_chicken_death;
 	}
 
 	@Override
 	protected void playStepSound(BlockPos pos, Block p_145780_4_)
 	{
-		playSound("mob.chicken.step", 0.15F, 1.0F);
+		playSound(SoundEvents.entity_chicken_step, 0.15F, 1.0F);
 	}
 
 	@Override

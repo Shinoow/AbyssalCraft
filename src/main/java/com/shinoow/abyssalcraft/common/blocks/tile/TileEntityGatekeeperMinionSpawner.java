@@ -13,10 +13,10 @@ package com.shinoow.abyssalcraft.common.blocks.tile;
 
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.Packet;
-import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
+import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ITickable;
-import net.minecraft.util.MathHelper;
+import net.minecraft.util.math.MathHelper;
 
 import com.shinoow.abyssalcraft.common.entity.EntityGatekeeperMinion;
 
@@ -28,14 +28,14 @@ public class TileEntityGatekeeperMinionSpawner extends TileEntity implements ITi
 	public Packet getDescriptionPacket() {
 		NBTTagCompound nbtTag = new NBTTagCompound();
 		writeToNBT(nbtTag);
-		return new S35PacketUpdateTileEntity(pos, 1, nbtTag);
+		return new SPacketUpdateTileEntity(pos, 1, nbtTag);
 	}
 
 	public boolean isActivated() {
-		return worldObj.getClosestPlayer(pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D,
-				activatingRangeFromPlayer) != null &&
-				!worldObj.getClosestPlayer(pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D,
-						activatingRangeFromPlayer).capabilities.isCreativeMode;
+		return worldObj.func_184137_a(pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D,
+				activatingRangeFromPlayer, true) != null &&
+				!worldObj.func_184137_a(pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D,
+						activatingRangeFromPlayer, true).capabilities.isCreativeMode;
 	}
 
 	@Override

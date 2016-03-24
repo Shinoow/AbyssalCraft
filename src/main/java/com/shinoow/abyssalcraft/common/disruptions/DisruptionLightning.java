@@ -15,7 +15,7 @@ import java.util.List;
 
 import net.minecraft.entity.effect.EntityLightningBolt;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.util.BlockPos;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 import com.shinoow.abyssalcraft.api.energy.disruption.DisruptionEntry;
@@ -32,6 +32,6 @@ public class DisruptionLightning extends DisruptionEntry {
 		if(!players.isEmpty())
 			for(EntityPlayer player : players)
 				if(world.rand.nextInt(10) == 0)
-					world.addWeatherEffect(new EntityLightningBolt(world, player.posX, player.posY, player.posZ));
+					world.addWeatherEffect(new EntityLightningBolt(world, player.posX, player.posY, player.posZ, false));
 	}
 }

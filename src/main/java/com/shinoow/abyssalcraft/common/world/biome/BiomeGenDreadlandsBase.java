@@ -15,9 +15,9 @@ import java.util.Random;
 
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.block.state.pattern.BlockHelper;
+import net.minecraft.block.state.pattern.BlockMatcher;
 import net.minecraft.init.Blocks;
-import net.minecraft.util.BlockPos;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.chunk.ChunkPrimer;
@@ -39,7 +39,7 @@ import com.shinoow.abyssalcraft.common.entity.demon.EntityDemonPig;
 public class BiomeGenDreadlandsBase extends BiomeGenBase {
 
 	@SuppressWarnings("unchecked")
-	public BiomeGenDreadlandsBase(int par1) {
+	public BiomeGenDreadlandsBase(BiomeProperties par1) {
 		super(par1);
 		topBlock = AbyssalCraft.dreadstone.getDefaultState();
 		fillerBlock = AbyssalCraft.dreadstone.getDefaultState();
@@ -72,7 +72,7 @@ public class BiomeGenDreadlandsBase extends BiomeGenBase {
 				int y = par2Random.nextInt(60);
 				int z = par2Random.nextInt(16) + 8;
 
-				new WorldGenMinable(AbyssalCraft.dreadore.getDefaultState(), veinSize, BlockHelper.forBlock(AbyssalCraft.dreadstone)).generate(par1World, par2Random, pos.add(x, y, z));
+				new WorldGenMinable(AbyssalCraft.dreadore.getDefaultState(), veinSize, BlockMatcher.forBlock(AbyssalCraft.dreadstone)).generate(par1World, par2Random, pos.add(x, y, z));
 			}
 
 		for (int rarity = 0; rarity < 3; ++rarity)
@@ -81,7 +81,7 @@ public class BiomeGenDreadlandsBase extends BiomeGenBase {
 			int y = par2Random.nextInt(55);
 			int z = par2Random.nextInt(16) + 8;
 			new WorldGenMinable(AbyssalCraft.abydreadstone.getDefaultState(), 16,
-					BlockHelper.forBlock(AbyssalCraft.dreadstone)).generate(par1World, par2Random, pos.add(x, y, z));
+					BlockMatcher.forBlock(AbyssalCraft.dreadstone)).generate(par1World, par2Random, pos.add(x, y, z));
 		}
 	}
 
@@ -130,7 +130,7 @@ public class BiomeGenDreadlandsBase extends BiomeGenBase {
 			{
 				IBlockState iblockstate2 = chunkPrimerIn.getBlockState(i1, j1, l);
 
-				if (iblockstate2.getBlock().getMaterial() == Material.air)
+				if (iblockstate2.getMaterial() == Material.air)
 					j = -1;
 				else if (iblockstate2.getBlock() == AbyssalCraft.dreadstone)
 					if (j == -1)

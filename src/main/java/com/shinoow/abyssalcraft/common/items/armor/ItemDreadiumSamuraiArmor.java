@@ -15,12 +15,12 @@ import net.minecraft.client.model.ModelBiped;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.MobEffects;
+import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
-import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
-import net.minecraft.util.EnumChatFormatting;
-import net.minecraft.util.StatCollector;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -28,9 +28,8 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import com.shinoow.abyssalcraft.AbyssalCraft;
 
 public class ItemDreadiumSamuraiArmor extends ItemArmor {
-	public ItemDreadiumSamuraiArmor(ArmorMaterial par2EnumArmorMaterial, int par3, int par4, String name){
+	public ItemDreadiumSamuraiArmor(ArmorMaterial par2EnumArmorMaterial, int par3, EntityEquipmentSlot par4, String name){
 		super(par2EnumArmorMaterial, par3, par4);
-		//		GameRegistry.registerItem(this, name);
 		setUnlocalizedName(name);
 		setCreativeTab(AbyssalCraft.tabCombat);
 	}
@@ -38,11 +37,11 @@ public class ItemDreadiumSamuraiArmor extends ItemArmor {
 	@Override
 	public String getItemStackDisplayName(ItemStack par1ItemStack) {
 
-		return EnumChatFormatting.DARK_RED + StatCollector.translateToLocal(this.getUnlocalizedName() + ".name");
+		return TextFormatting.DARK_RED + super.getItemStackDisplayName(par1ItemStack);
 	}
 
 	@Override
-	public String getArmorTexture(ItemStack stack, Entity entity, int slot, String layer) {
+	public String getArmorTexture(ItemStack stack, Entity entity, EntityEquipmentSlot slot, String layer) {
 		if(stack.getItem() == AbyssalCraft.dreadiumShelmet || stack.getItem() == AbyssalCraft.dreadiumSplate || stack.getItem() == AbyssalCraft.dreadiumSboots)
 			return "abyssalcraft:textures/armor/dreadiums_1.png";
 
@@ -53,58 +52,53 @@ public class ItemDreadiumSamuraiArmor extends ItemArmor {
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public ModelBiped getArmorModel(EntityLivingBase entityLiving, ItemStack itemStack, int armorSlot) {
-		ModelBiped armorModel = new ModelBiped();
+	public ModelBiped getArmorModel(EntityLivingBase entityLiving, ItemStack itemStack, EntityEquipmentSlot armorSlot, ModelBiped armorModel) {
 		if(itemStack != null){
 			if(itemStack.getItem() instanceof ItemDreadiumSamuraiArmor){
-				int type = ((ItemArmor)itemStack.getItem()).armorType;
-				if(type == 1 || type == 3)
+				EntityEquipmentSlot type = ((ItemArmor)itemStack.getItem()).armorType;
+				if(type == EntityEquipmentSlot.FEET || type == EntityEquipmentSlot.CHEST)
 					armorModel = AbyssalCraft.proxy.getArmorModel(0);
 				else
 					armorModel = AbyssalCraft.proxy.getArmorModel(1);
 			} if(armorModel != null){
-				armorModel.bipedHead.showModel = armorSlot == 0;
-				armorModel.bipedHeadwear.showModel = armorSlot == 0;
-				armorModel.bipedBody.showModel = armorSlot == 1 || armorSlot == 2;
-				armorModel.bipedRightArm.showModel = armorSlot == 1;
-				armorModel.bipedLeftArm.showModel = armorSlot == 1;
-				armorModel.bipedRightLeg.showModel = armorSlot == 2 || armorSlot == 3;
-				armorModel.bipedLeftLeg.showModel = armorSlot == 2 || armorSlot == 3;
+				armorModel.bipedHead.showModel = armorSlot == EntityEquipmentSlot.HEAD;
+				armorModel.bipedHeadwear.showModel = armorSlot == EntityEquipmentSlot.HEAD;
+				armorModel.bipedBody.showModel = armorSlot == EntityEquipmentSlot.CHEST || armorSlot == EntityEquipmentSlot.LEGS;
+				armorModel.bipedRightArm.showModel = armorSlot == EntityEquipmentSlot.CHEST;
+				armorModel.bipedLeftArm.showModel = armorSlot == EntityEquipmentSlot.CHEST;
+				armorModel.bipedRightLeg.showModel = armorSlot == EntityEquipmentSlot.LEGS || armorSlot == EntityEquipmentSlot.FEET;
+				armorModel.bipedLeftLeg.showModel = armorSlot == EntityEquipmentSlot.LEGS || armorSlot == EntityEquipmentSlot.FEET;
 				armorModel.isSneak = entityLiving.isSneaking();
 				armorModel.isRiding = entityLiving.isRiding();
 				armorModel.isChild = entityLiving.isChild();
-				armorModel.heldItemRight = entityLiving.getEquipmentInSlot(0) != null ? 1 :0;
-				if(entityLiving instanceof EntityPlayer)
-					armorModel.aimedBow =((EntityPlayer)entityLiving).getItemInUseDuration() > 2;
-					return armorModel;
+				//				armorModel.heldItemRight = entityLiving.getEquipmentInSlot(0) != null ? 1 :0;
+				armorModel.swingProgress = entityLiving.swingProgress;
+				//				if(entityLiving instanceof EntityPlayer){
+				//					armorModel.aimedBow =((EntityPlayer)entityLiving).getItemInUseDuration() > 2 && ((EntityPlayer) entityLiving).getItemInUse().getItem().getItemUseAction(((EntityPlayer) entityLiving).getItemInUse()) == EnumAction.BOW;
+				//					armorModel.heldItemRight = ((EntityPlayer) entityLiving).isBlocking() ? 3 : entityLiving.getEquipmentInSlot(0) != null ? 1 :0;
+				//				}
+				return armorModel;
 			}
 		}
 		return null;
 	}
 
-	//	@Override
-	//	@SideOnly(Side.CLIENT)
-	//	public void registerIcons(IIconRegister par1IconRegister)
-	//	{
-	//		itemIcon = par1IconRegister.registerIcon(AbyssalCraft.modid + ":" + this.getUnlocalizedName().substring(5));
-	//	}
-
 	@Override
 	public void onArmorTick(World world, EntityPlayer player, ItemStack itemstack) {
 		if (itemstack.getItem() == AbyssalCraft.dreadiumShelmet) {
-			player.addPotionEffect(new PotionEffect(Potion.nightVision.getId(), 260, 0));
+			player.addPotionEffect(new PotionEffect(MobEffects.nightVision, 260, 0));
 			if(player.getActivePotionEffect(AbyssalCraft.Dplague) !=null)
-				player.removePotionEffect(AbyssalCraft.Dplague.getId());
+				player.removePotionEffect(AbyssalCraft.Dplague);
 		}
 		if (itemstack.getItem() == AbyssalCraft.dreadiumSplate) {
-			player.addPotionEffect(new PotionEffect(Potion.resistance.getId(), 20));
-			player.addPotionEffect(new PotionEffect(Potion.damageBoost.getId(), 20));
-			player.addPotionEffect(new PotionEffect(Potion.fireResistance.getId(), 20, 1));
+			player.addPotionEffect(new PotionEffect(MobEffects.resistance, 20));
+			player.addPotionEffect(new PotionEffect(MobEffects.damageBoost, 20));
+			player.addPotionEffect(new PotionEffect(MobEffects.fireResistance, 20, 1));
 		}
 		if (itemstack.getItem() == AbyssalCraft.dreadiumSlegs)
-			player.addPotionEffect(new PotionEffect(Potion.regeneration.getId(), 20, 0));
+			player.addPotionEffect(new PotionEffect(MobEffects.regeneration, 20, 0));
 		if (itemstack.getItem() == AbyssalCraft.dreadiumSboots)
-			player.addPotionEffect(new PotionEffect(Potion.moveSpeed.getId(), 20, 1));
+			player.addPotionEffect(new PotionEffect(MobEffects.moveSpeed, 20, 1));
 
 	}
 }

@@ -12,12 +12,11 @@
 package com.shinoow.abyssalcraft.common.world.biome;
 
 
-import net.minecraft.util.BlockPos;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import com.shinoow.abyssalcraft.common.entity.EntitySacthoth;
 import com.shinoow.abyssalcraft.common.entity.EntityShadowBeast;
 import com.shinoow.abyssalcraft.common.entity.EntityShadowCreature;
 import com.shinoow.abyssalcraft.common.entity.EntityShadowMonster;
@@ -25,9 +24,9 @@ import com.shinoow.abyssalcraft.common.entity.EntityShadowMonster;
 public class BiomeGenDarkRealm extends BiomeGenBase {
 
 	@SuppressWarnings("unchecked")
-	public BiomeGenDarkRealm(int par1){
+	public BiomeGenDarkRealm(BiomeProperties par1){
 		super(par1);
-		waterColorMultiplier = 14745518;
+		//		waterColorMultiplier = 14745518;
 		spawnableMonsterList.clear();
 		spawnableCreatureList.clear();
 		spawnableWaterCreatureList.clear();
@@ -35,7 +34,6 @@ public class BiomeGenDarkRealm extends BiomeGenBase {
 		spawnableMonsterList.add(new SpawnListEntry(EntityShadowCreature.class, 60, 1, 5));
 		spawnableMonsterList.add(new SpawnListEntry(EntityShadowMonster.class, 40, 1, 3));
 		spawnableMonsterList.add(new SpawnListEntry(EntityShadowBeast.class, 10, 1, 1));
-		spawnableMonsterList.add(new SpawnListEntry(EntitySacthoth.class, 1, 0, 1));
 	}
 
 	@Override

@@ -14,13 +14,18 @@ package com.shinoow.abyssalcraft.common.blocks;
 import java.util.Random;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
-import net.minecraft.util.BlockPos;
-import net.minecraft.util.ChatComponentText;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumHand;
+import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.TextComponentString;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.client.FMLClientHandler;
 
@@ -33,26 +38,33 @@ public class BlockHouse extends Block {
 
 	public BlockHouse() {
 		super(Material.wood);
-		setBlockBounds(0.2F, 0.0F, 0.2F, 0.8F, 0.8F, 0.8F);
+		//		setBlockBounds(0.2F, 0.0F, 0.2F, 0.8F, 0.8F, 0.8F);
+		setStepSound(SoundType.WOOD);
 	}
 
 	@Override
-	public boolean isOpaqueCube(){
+	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos)
+	{
+		return new AxisAlignedBB(0.2F, 0.0F, 0.2F, 0.8F, 0.8F, 0.8F);
+	}
+
+	@Override
+	public boolean isOpaqueCube(IBlockState state){
 		return false;
 	}
 
 	@Override
-	public boolean isFullCube()
+	public boolean isFullCube(IBlockState state)
 	{
 		return false;
 	}
 
 	@Override
-	public boolean onBlockActivated(World par1World, BlockPos pos, IBlockState state, EntityPlayer par5EntityPlayer, EnumFacing side, float par7, float par8, float par9)
+	public boolean onBlockActivated(World par1World, BlockPos pos, IBlockState state, EntityPlayer par5EntityPlayer, EnumHand hand, ItemStack heldItem, EnumFacing side, float par7, float par8, float par9)
 	{
 		if(EntityUtil.isPlayerCoralium(par5EntityPlayer)){
 			if(par1World.isRemote)
-				FMLClientHandler.instance().getClient().ingameGUI.getChatGUI().printChatMessage(new ChatComponentText("Whoppidy-doo, a house."));
+				FMLClientHandler.instance().getClient().ingameGUI.getChatGUI().printChatMessage(new TextComponentString("Whoppidy-doo, a house."));
 			if(!par1World.isRemote){
 				StructureHouse house = new StructureHouse();
 				house.generate(par1World, rand, pos);
@@ -60,7 +72,7 @@ public class BlockHouse extends Block {
 			}
 		} else{
 			if(par1World.isRemote)
-				FMLClientHandler.instance().getClient().ingameGUI.getChatGUI().printChatMessage(new ChatComponentText("Whoppidy-doo, a house."));
+				FMLClientHandler.instance().getClient().ingameGUI.getChatGUI().printChatMessage(new TextComponentString("Whoppidy-doo, a house."));
 			if(!par1World.isRemote){
 				int x = pos.getX();
 				int y = pos.getY();

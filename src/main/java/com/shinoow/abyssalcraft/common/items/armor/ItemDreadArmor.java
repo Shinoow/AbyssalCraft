@@ -16,17 +16,18 @@ import java.util.List;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.MobEffects;
+import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
-import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
-import net.minecraft.util.EnumChatFormatting;
-import net.minecraft.util.StatCollector;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
+
 import com.shinoow.abyssalcraft.AbyssalCraft;
 
 public class ItemDreadArmor extends ItemArmor {
-	public ItemDreadArmor(ArmorMaterial par2EnumArmorMaterial, int par3, int par4, String name){
+	public ItemDreadArmor(ArmorMaterial par2EnumArmorMaterial, int par3, EntityEquipmentSlot par4, String name){
 		super(par2EnumArmorMaterial, par3, par4);
 		setUnlocalizedName(name);
 		setCreativeTab(AbyssalCraft.tabCombat);
@@ -35,11 +36,11 @@ public class ItemDreadArmor extends ItemArmor {
 	@Override
 	public String getItemStackDisplayName(ItemStack par1ItemStack) {
 
-		return EnumChatFormatting.DARK_RED + StatCollector.translateToLocal(this.getUnlocalizedName() + ".name");
+		return TextFormatting.DARK_RED + super.getItemStackDisplayName(par1ItemStack);
 	}
 
 	@Override
-	public String getArmorTexture(ItemStack stack, Entity entity, int slot, String layer) {
+	public String getArmorTexture(ItemStack stack, Entity entity, EntityEquipmentSlot slot, String layer) {
 		if(stack.getItem() == AbyssalCraft.helmetD || stack.getItem() == AbyssalCraft.plateD || stack.getItem() == AbyssalCraft.bootsD)
 			return "abyssalcraft:textures/armor/dread_1.png";
 
@@ -52,9 +53,9 @@ public class ItemDreadArmor extends ItemArmor {
 	@Override
 	public void onArmorTick(World world, EntityPlayer player, ItemStack itemstack) {
 		if (itemstack.getItem() == AbyssalCraft.helmetD)
-			player.addPotionEffect(new PotionEffect(Potion.nightVision.getId(), 260, 0));
+			player.addPotionEffect(new PotionEffect(MobEffects.nightVision, 260, 0));
 		if (itemstack.getItem() == AbyssalCraft.plateD) {
-			player.addPotionEffect(new PotionEffect(Potion.fireResistance.getId(), 20, 3));
+			player.addPotionEffect(new PotionEffect(MobEffects.fireResistance, 20, 3));
 			List list = player.worldObj.getEntitiesWithinAABBExcludingEntity(player, player.getEntityBoundingBox().expand(4D, 0.0D, 4D));
 			if (list != null)
 				for (int k2 = 0; k2 < list.size(); k2++) {
@@ -66,8 +67,8 @@ public class ItemDreadArmor extends ItemArmor {
 				}
 		}
 		if (itemstack.getItem() == AbyssalCraft.legsD)
-			player.addPotionEffect(new PotionEffect(Potion.fireResistance.getId(), 20, 3));
+			player.addPotionEffect(new PotionEffect(MobEffects.fireResistance, 20, 3));
 		if (itemstack.getItem() == AbyssalCraft.bootsD)
-			player.addPotionEffect(new PotionEffect(Potion.fireResistance.getId(), 20, 3));
+			player.addPotionEffect(new PotionEffect(MobEffects.fireResistance, 20, 3));
 	}
 }

@@ -16,41 +16,69 @@ import java.util.List;
 import java.util.UUID;
 
 import net.minecraft.block.Block;
-import net.minecraft.block.material.Material;
-import net.minecraft.entity.*;
-import net.minecraft.entity.ai.*;
-import net.minecraft.entity.ai.attributes.*;
-import net.minecraft.entity.monster.*;
-import net.minecraft.entity.passive.*;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.EnumCreatureAttribute;
+import net.minecraft.entity.IEntityLivingData;
+import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.ai.EntityAIAttackMelee;
+import net.minecraft.entity.ai.EntityAIFleeSun;
+import net.minecraft.entity.ai.EntityAIHurtByTarget;
+import net.minecraft.entity.ai.EntityAILookIdle;
+import net.minecraft.entity.ai.EntityAIMoveTowardsRestriction;
+import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
+import net.minecraft.entity.ai.EntityAISwimming;
+import net.minecraft.entity.ai.EntityAIWander;
+import net.minecraft.entity.ai.EntityAIWatchClosest;
+import net.minecraft.entity.ai.attributes.AttributeModifier;
+import net.minecraft.entity.ai.attributes.IAttributeInstance;
+import net.minecraft.entity.monster.EntityMob;
+import net.minecraft.entity.monster.EntitySkeleton;
+import net.minecraft.entity.monster.EntityZombie;
+import net.minecraft.entity.passive.EntityAmbientCreature;
+import net.minecraft.entity.passive.EntityAnimal;
+import net.minecraft.entity.passive.EntityWaterMob;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
+import net.minecraft.init.MobEffects;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.network.datasync.DataParameter;
+import net.minecraft.network.datasync.DataSerializers;
+import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.pathfinding.PathNavigate;
 import net.minecraft.pathfinding.PathNavigateClimber;
-import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
-import net.minecraft.util.BlockPos;
 import net.minecraft.util.DamageSource;
-import net.minecraft.util.MathHelper;
+import net.minecraft.util.SoundEvent;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeModContainer;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
-import com.shinoow.abyssalcraft.api.entity.*;
-import com.shinoow.abyssalcraft.common.entity.demon.*;
+import com.shinoow.abyssalcraft.api.entity.ICoraliumEntity;
+import com.shinoow.abyssalcraft.api.entity.IDreadEntity;
+import com.shinoow.abyssalcraft.common.entity.demon.EntityDemonAnimal;
+import com.shinoow.abyssalcraft.common.entity.demon.EntityDemonPig;
+import com.shinoow.abyssalcraft.common.entity.demon.EntityEvilChicken;
+import com.shinoow.abyssalcraft.common.entity.demon.EntityEvilCow;
+import com.shinoow.abyssalcraft.common.entity.demon.EntityEvilpig;
 import com.shinoow.abyssalcraft.common.util.EntityUtil;
 import com.shinoow.abyssalcraft.common.world.gen.WorldGenShoggothMonolith;
 
 public class EntityLesserShoggoth extends EntityMob implements ICoraliumEntity, IDreadEntity {
 
+	private static final DataParameter<Byte> CLIMBING = EntityDataManager.<Byte>createKey(EntityLesserShoggoth.class, DataSerializers.BYTE);
+	private static final DataParameter<Byte> CHILD = EntityDataManager.createKey(EntityLesserShoggoth.class, DataSerializers.BYTE);
+	private static final DataParameter<Integer> TYPE = EntityDataManager.createKey(EntityLesserShoggoth.class, DataSerializers.VARINT);
+	private static final DataParameter<Integer> FOOD = EntityDataManager.createKey(EntityLesserShoggoth.class, DataSerializers.VARINT);
 	private static final UUID babySpeedBoostUUID = UUID.fromString("B9766B59-9566-4402-BC1F-2EE2A276D836");
 	private static final AttributeModifier babySpeedBoostModifier = new AttributeModifier(babySpeedBoostUUID, "Baby speed boost", 0.5D, 1);
 
 	private static List<Class<? extends EntityLivingBase>> noms = new ArrayList<Class<? extends EntityLivingBase>>();
-	private static List<Block> blockBlacklist = new ArrayList<Block>();
 
 	private int monolithTimer;
 	private float shoggothWidth = -1.0F;
@@ -59,9 +87,7 @@ public class EntityLesserShoggoth extends EntityMob implements ICoraliumEntity, 
 	public EntityLesserShoggoth(World par1World) {
 		super(par1World);
 		tasks.addTask(0, new EntityAISwimming(this));
-		tasks.addTask(2, new EntityAIAttackOnCollide(this, EntityPlayer.class, 0.35D, true));
-		for(int i = 0; i < noms.size(); i++)
-			tasks.addTask(2, new EntityAIAttackOnCollide(this, noms.get(i), 0.40D, true));
+		tasks.addTask(2, new EntityAIAttackMelee(this, 0.35D, true));
 		tasks.addTask(3, new EntityAIFleeSun(this, 0.35D));
 		tasks.addTask(4, new EntityAIMoveTowardsRestriction(this, 0.35D));
 		tasks.addTask(5, new EntityAIWander(this, 0.35D));
@@ -93,14 +119,14 @@ public class EntityLesserShoggoth extends EntityMob implements ICoraliumEntity, 
 	{
 		super.applyEntityAttributes();
 
-		getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setBaseValue(0.2D);
+		getEntityAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue(0.2D);
 
 		if(AbyssalCraft.hardcoreMode){
-			getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(200.0D);
-			getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(16.0D);
+			getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(200.0D);
+			getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(16.0D);
 		} else {
-			getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(100.0D);
-			getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(8.0D);
+			getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(100.0D);
+			getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(8.0D);
 		}
 	}
 
@@ -114,10 +140,10 @@ public class EntityLesserShoggoth extends EntityMob implements ICoraliumEntity, 
 	protected void entityInit()
 	{
 		super.entityInit();
-		dataWatcher.addObject(12, Byte.valueOf((byte)0));
-		dataWatcher.addObject(14, Byte.valueOf((byte)0));
-		dataWatcher.addObject(16, Byte.valueOf((byte)0));
-		dataWatcher.addObject(18, Byte.valueOf((byte)0));
+		dataWatcher.register(CHILD, Byte.valueOf((byte)0));
+		dataWatcher.register(TYPE, Integer.valueOf(0));
+		dataWatcher.register(FOOD, Integer.valueOf(0));
+		dataWatcher.register(CLIMBING, Byte.valueOf((byte)0));
 	}
 
 	@Override
@@ -137,16 +163,16 @@ public class EntityLesserShoggoth extends EntityMob implements ICoraliumEntity, 
 	@Override
 	public boolean isChild()
 	{
-		return getDataWatcher().getWatchableObjectByte(12) == 1;
+		return dataWatcher.get(CHILD).byteValue() == 1;
 	}
 
 	public void setChild(boolean par1)
 	{
-		getDataWatcher().updateObject(12, Byte.valueOf((byte)(par1 ? 1 : 0)));
+		dataWatcher.set(CHILD, Byte.valueOf((byte)(par1 ? 1 : 0)));
 
 		if (worldObj != null && !worldObj.isRemote)
 		{
-			IAttributeInstance attributeinstance = getEntityAttribute(SharedMonsterAttributes.movementSpeed);
+			IAttributeInstance attributeinstance = getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED);
 			attributeinstance.removeModifier(babySpeedBoostModifier);
 
 			if (par1)
@@ -158,27 +184,27 @@ public class EntityLesserShoggoth extends EntityMob implements ICoraliumEntity, 
 
 	public int getShoggothType() {
 
-		return dataWatcher.getWatchableObjectByte(14);
+		return dataWatcher.get(TYPE);
 	}
 
 	public void setShoggothType(int par1) {
 
-		dataWatcher.updateObject(14, Byte.valueOf((byte)par1));
+		dataWatcher.set(TYPE, Integer.valueOf(par1));
 	}
 
 	public void setFoodLevel(int par1){
 
-		dataWatcher.updateObject(16, Byte.valueOf((byte)par1));
+		dataWatcher.set(FOOD, Integer.valueOf(par1));
 	}
 
 	public int getFoodLevel(){
 
-		return dataWatcher.getWatchableObjectByte(16);
+		return dataWatcher.get(FOOD);
 	}
 
 	public void feed(){
 		int food = getFoodLevel() + 1;
-		dataWatcher.updateObject(16, Byte.valueOf((byte)food));
+		dataWatcher.set(FOOD, Integer.valueOf(food));
 	}
 
 	@Override
@@ -214,26 +240,28 @@ public class EntityLesserShoggoth extends EntityMob implements ICoraliumEntity, 
 				shoggoth.onInitialSpawn(worldObj.getDifficultyForLocation(new BlockPos(posX, posY, posZ)),(IEntityLivingData)null);
 				shoggoth.setChild(true);
 				worldObj.spawnEntityInWorld(shoggoth);
-				playSound("mob.chicken.plop", 1.0F, (rand.nextFloat() - rand.nextFloat()) * 0.2F + 1.0F);
+				playSound(SoundEvents.entity_chicken_egg, 1.0F, (rand.nextFloat() - rand.nextFloat()) * 0.2F + 1.0F);
 			}
 			else setChild(false);
 		}
 
-		int x = MathHelper.floor_double(posX);
-		int y = MathHelper.floor_double(posY);
-		int z = MathHelper.floor_double(posZ);
+		if(!worldObj.isRemote){
+			int x = MathHelper.floor_double(posX);
+			int y = MathHelper.floor_double(posY);
+			int z = MathHelper.floor_double(posZ);
 
-		for (int l = 0; l < 4; ++l)
-		{
-			x = MathHelper.floor_double(posX + (l % 2 * 2 - 1) * 0.25F);
-			y = MathHelper.floor_double(posY);
-			z = MathHelper.floor_double(posZ + (l / 2 % 2 * 2 - 1) * 0.25F);
+			for (int l = 0; l < 4; ++l)
+			{
+				x = MathHelper.floor_double(posX + (l % 2 * 2 - 1) * 0.25F);
+				y = MathHelper.floor_double(posY);
+				z = MathHelper.floor_double(posZ + (l / 2 % 2 * 2 - 1) * 0.25F);
 
-			spawnOoze(x, y - 1, z);
-			if(!isChild()){
-				spawnOoze(x - 1, y - 1, z);
-				spawnOoze(x, y - 1, z - 1);
-				spawnOoze(x - 1, y - 1, z - 1);
+				spawnOoze(x, y - 1, z);
+				if(!isChild()){
+					spawnOoze(x - 1, y - 1, z);
+					spawnOoze(x, y - 1, z - 1);
+					spawnOoze(x - 1, y - 1, z - 1);
+				}
 			}
 		}
 
@@ -243,7 +271,7 @@ public class EntityLesserShoggoth extends EntityMob implements ICoraliumEntity, 
 				for(EntityLesserShoggoth shoggoth : worldObj.getEntitiesWithinAABB(getClass(), getEntityBoundingBox().expand(32D, 32D, 32D)))
 					shoggoth.reduceMonolithTimer();
 				if(!worldObj.isRemote)
-					new WorldGenShoggothMonolith().generate(worldObj, rand, new BlockPos(x + 3, y, z + 3));
+					new WorldGenShoggothMonolith().generate(worldObj, rand, new BlockPos(MathHelper.floor_double(posX) + 3, MathHelper.floor_double(posY), MathHelper.floor_double(posZ) + 3));
 			}
 		}
 	}
@@ -256,17 +284,9 @@ public class EntityLesserShoggoth extends EntityMob implements ICoraliumEntity, 
 	 */
 	private void spawnOoze(int x, int y, int z){
 		BlockPos pos = new BlockPos(x, y, z);
-		Block block = worldObj.getBlockState(pos).getBlock();
 		if(AbyssalCraft.shoggothOoze)
-			if(!block.getMaterial().isLiquid() && block.getMaterial() != Material.air && !block.hasTileEntity(worldObj.getBlockState(pos))
-			&& block.isOpaqueCube() && block.isFullCube() && block.getCollisionBoundingBox(worldObj, pos, block.getDefaultState()) != null)
-				if(block.getMaterial() == Material.leaves && AbyssalCraft.oozeLeaves || block.getMaterial() == Material.grass && AbyssalCraft.oozeGrass
-				|| block.getMaterial() == Material.ground && AbyssalCraft.oozeGround || block.getMaterial() == Material.sand && AbyssalCraft.oozeSand
-				|| block.getMaterial() == Material.rock && AbyssalCraft.oozeRock || block.getMaterial() == Material.cloth && AbyssalCraft.oozeCloth
-				|| block.getMaterial() == Material.wood && AbyssalCraft.oozeWood || block.getMaterial() == Material.gourd && AbyssalCraft.oozeGourd
-				|| block.getMaterial() == Material.iron && AbyssalCraft.oozeIron || block.getMaterial() == Material.clay && AbyssalCraft.oozeClay)
-					if(!blockBlacklist.contains(block) && !worldObj.isRemote)
-						worldObj.setBlockState(pos, AbyssalCraft.shoggothBlock.getDefaultState());
+			if(AbyssalCraft.shoggothBlock.canPlaceBlockAt(worldObj, pos))
+				worldObj.setBlockState(pos, AbyssalCraft.shoggothBlock.getDefaultState());
 	}
 
 	/**
@@ -275,7 +295,7 @@ public class EntityLesserShoggoth extends EntityMob implements ICoraliumEntity, 
 	 */
 	public boolean isBesideClimbableBlock()
 	{
-		return (dataWatcher.getWatchableObjectByte(18) & 1) != 0;
+		return (dataWatcher.get(CLIMBING) & 1) != 0;
 	}
 
 	/**
@@ -284,14 +304,14 @@ public class EntityLesserShoggoth extends EntityMob implements ICoraliumEntity, 
 	 */
 	public void setBesideClimbableBlock(boolean par1)
 	{
-		byte b0 = dataWatcher.getWatchableObjectByte(18);
+		byte b0 = dataWatcher.get(CLIMBING);
 
 		if (par1)
 			b0 = (byte)(b0 | 1);
 		else
 			b0 &= -2;
 
-		dataWatcher.updateObject(18, Byte.valueOf(b0));
+		dataWatcher.set(CLIMBING, Byte.valueOf(b0));
 	}
 
 	@Override
@@ -299,16 +319,16 @@ public class EntityLesserShoggoth extends EntityMob implements ICoraliumEntity, 
 	{
 		if (super.attackEntityAsMob(par1Entity))
 			if (par1Entity instanceof EntityLivingBase)
-				if(worldObj.provider.getDimensionId() == AbyssalCraft.configDimId1 &&
+				if(worldObj.provider.getDimension() == AbyssalCraft.configDimId1 &&
 				!EntityUtil.isEntityCoralium((EntityLivingBase)par1Entity))
-					((EntityLivingBase)par1Entity).addPotionEffect(new PotionEffect(AbyssalCraft.Cplague.id, 100));
-				else if(worldObj.provider.getDimensionId() == AbyssalCraft.configDimId2 &&
+					((EntityLivingBase)par1Entity).addPotionEffect(new PotionEffect(AbyssalCraft.Cplague, 100));
+				else if(worldObj.provider.getDimension() == AbyssalCraft.configDimId2 &&
 						!EntityUtil.isEntityDread((EntityLivingBase)par1Entity))
-					((EntityLivingBase)par1Entity).addPotionEffect(new PotionEffect(AbyssalCraft.Dplague.id, 100));
-				else if(worldObj.provider.getDimensionId() == AbyssalCraft.configDimId3)
-					((EntityLivingBase)par1Entity).addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, 100));
-				else if(worldObj.provider.getDimensionId() == AbyssalCraft.configDimId4)
-					((EntityLivingBase)par1Entity).addPotionEffect(new PotionEffect(Potion.blindness.id, 100));
+					((EntityLivingBase)par1Entity).addPotionEffect(new PotionEffect(AbyssalCraft.Dplague, 100));
+				else if(worldObj.provider.getDimension() == AbyssalCraft.configDimId3)
+					((EntityLivingBase)par1Entity).addPotionEffect(new PotionEffect(MobEffects.moveSlowdown, 100));
+				else if(worldObj.provider.getDimension() == AbyssalCraft.configDimId4)
+					((EntityLivingBase)par1Entity).addPotionEffect(new PotionEffect(MobEffects.blindness, 100));
 
 		return super.attackEntityAsMob(par1Entity);
 	}
@@ -317,7 +337,7 @@ public class EntityLesserShoggoth extends EntityMob implements ICoraliumEntity, 
 	public boolean attackEntityFrom(DamageSource par1DamageSource, float par2)
 	{
 		if(par1DamageSource.isProjectile()){
-			playSound("mob.slime.small", getSoundVolume(), ((rand.nextFloat() - rand.nextFloat()) * 0.2F + 1.0F) / 0.8F);
+			playSound(SoundEvents.entity_small_slime_jump, getSoundVolume(), ((rand.nextFloat() - rand.nextFloat()) * 0.2F + 1.0F) / 0.8F);
 			return false;
 		}
 		if(par1DamageSource == DamageSource.cactus) return false;
@@ -329,27 +349,27 @@ public class EntityLesserShoggoth extends EntityMob implements ICoraliumEntity, 
 	public void fall(float par1, float par2) {}
 
 	@Override
-	protected String getLivingSound()
+	protected SoundEvent getAmbientSound()
 	{
-		return "mob.zombie.say";
+		return SoundEvents.entity_zombie_ambient;
 	}
 
 	@Override
-	protected String getHurtSound()
+	protected SoundEvent getHurtSound()
 	{
-		return "mob.zombie.hurt";
+		return SoundEvents.entity_zombie_hurt;
 	}
 
 	@Override
-	protected String getDeathSound()
+	protected SoundEvent getDeathSound()
 	{
-		return "mob.zombie.death";
+		return SoundEvents.entity_zombie_death;
 	}
 
 	@Override
 	protected void playStepSound(BlockPos pos, Block par4)
 	{
-		playSound("mob.spider.step", 0.15F, 1.0F);
+		playSound(SoundEvents.entity_spider_step, 0.15F, 1.0F);
 	}
 
 	@Override
@@ -428,13 +448,13 @@ public class EntityLesserShoggoth extends EntityMob implements ICoraliumEntity, 
 
 		setShoggothType(0);
 
-		if(worldObj.provider.getDimensionId() == AbyssalCraft.configDimId1)
+		if(worldObj.provider.getDimension() == AbyssalCraft.configDimId1)
 			setShoggothType(1);
-		if(worldObj.provider.getDimensionId() == AbyssalCraft.configDimId2)
+		if(worldObj.provider.getDimension() == AbyssalCraft.configDimId2)
 			setShoggothType(2);
-		if(worldObj.provider.getDimensionId() == AbyssalCraft.configDimId3)
+		if(worldObj.provider.getDimension() == AbyssalCraft.configDimId3)
 			setShoggothType(3);
-		if(worldObj.provider.getDimensionId() == AbyssalCraft.configDimId4)
+		if(worldObj.provider.getDimension() == AbyssalCraft.configDimId4)
 			setShoggothType(4);
 
 		if (data == null)
@@ -481,18 +501,6 @@ public class EntityLesserShoggoth extends EntityMob implements ICoraliumEntity, 
 		noms.add(EntityEvilChicken.class);
 		noms.add(EntityDemonAnimal.class);
 		noms.addAll(AbyssalCraftAPI.getShoggothFood());
-
-		blockBlacklist.add(AbyssalCraft.shoggothBlock);
-		blockBlacklist.add(Blocks.bedrock);
-		blockBlacklist.add(Blocks.crafting_table);
-		blockBlacklist.add(AbyssalCraft.ethaxium);
-		blockBlacklist.add(AbyssalCraft.ethaxiumbrick);
-		blockBlacklist.add(AbyssalCraft.ethaxiumpillar);
-		blockBlacklist.add(AbyssalCraft.darkethaxiumbrick);
-		blockBlacklist.add(AbyssalCraft.darkethaxiumpillar);
-		blockBlacklist.add(AbyssalCraft.monolithStone);
-		blockBlacklist.add(AbyssalCraft.shoggothBiomass);
-		blockBlacklist.addAll(AbyssalCraftAPI.getShoggothBlockBlacklist());
 	}
 
 	/**

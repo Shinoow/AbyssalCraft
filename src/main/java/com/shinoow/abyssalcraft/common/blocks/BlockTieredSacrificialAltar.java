@@ -14,22 +14,28 @@ package com.shinoow.abyssalcraft.common.blocks;
 import java.util.List;
 import java.util.Random;
 
-import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
+import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyEnum;
-import net.minecraft.block.state.BlockState;
+import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.BlockPos;
+import net.minecraft.util.EnumBlockRenderType;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumHand;
 import net.minecraft.util.EnumParticleTypes;
+import net.minecraft.util.SoundCategory;
+import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
@@ -45,10 +51,16 @@ public class BlockTieredSacrificialAltar extends BlockContainer {
 		setHardness(6.0F);
 		setResistance(12.0F);
 		setUnlocalizedName("tieredsacrificialaltar");
-		setStepSound(Block.soundTypeStone);
-		setBlockBounds(0.15F, 0.0F, 0.15F, 0.85F, 1.0F, 0.85F);
+		setStepSound(SoundType.STONE);
+		//		setBlockBounds(0.15F, 0.0F, 0.15F, 0.85F, 1.0F, 0.85F);
 		setCreativeTab(AbyssalCraft.tabDecoration);
 		//		setLightLevel(0.375F);
+	}
+
+	@Override
+	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos)
+	{
+		return new AxisAlignedBB(0.15F, 0.0F, 0.15F, 0.85F, 1.0F, 0.85F);
 	}
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })
@@ -67,12 +79,12 @@ public class BlockTieredSacrificialAltar extends BlockContainer {
 	}
 
 	@Override
-	public boolean isOpaqueCube(){
+	public boolean isOpaqueCube(IBlockState state){
 		return false;
 	}
 
 	@Override
-	public boolean isFullCube()
+	public boolean isFullCube(IBlockState state)
 	{
 		return false;
 	}
@@ -83,8 +95,8 @@ public class BlockTieredSacrificialAltar extends BlockContainer {
 	}
 
 	@Override
-	public void randomDisplayTick(World world, BlockPos pos, IBlockState state, Random random) {
-		super.randomDisplayTick(world, pos, state, random);
+	public void randomDisplayTick(IBlockState state, World world, BlockPos pos, Random random) {
+		super.randomDisplayTick(state, world, pos, random);
 
 		int x = pos.getX();
 		int y = pos.getY();
@@ -111,31 +123,29 @@ public class BlockTieredSacrificialAltar extends BlockContainer {
 	}
 
 	@Override
-	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumFacing side, float hitX, float hitY, float hitZ) {
+	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, ItemStack heldItem, EnumFacing side, float hitX, float hitY, float hitZ) {
 		TileEntity tile = world.getTileEntity(pos);
 		if(tile != null && tile instanceof TileEntityTieredSacrificialAltar)
 			if(((TileEntityTieredSacrificialAltar)tile).getItem() != null){
 				player.inventory.addItemStackToInventory(((TileEntityTieredSacrificialAltar)tile).getItem());
 				((TileEntityTieredSacrificialAltar)tile).setItem(null);
-				world.playSoundEffect(pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, "random.pop", 0.5F, world.rand.nextFloat() - world.rand.nextFloat() * 0.2F + 1);
+				world.playSound(pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, SoundEvents.entity_item_pickup, SoundCategory.PLAYERS, 0.5F, world.rand.nextFloat() - world.rand.nextFloat() * 0.2F + 1, false);
 				return true;
-			} else {
-				ItemStack heldItem = player.getHeldItem();
+			} else //				ItemStack heldItem = player.getHeldItem();
 				if(heldItem != null){
 					ItemStack newItem = heldItem.copy();
 					newItem.stackSize = 1;
 					((TileEntityTieredSacrificialAltar)tile).setItem(newItem);
 					player.inventory.decrStackSize(player.inventory.currentItem, 1);
-					world.playSoundEffect(pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, "random.pop", 0.5F, world.rand.nextFloat() - world.rand.nextFloat() * 0.2F + 1);
+					world.playSound(pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, SoundEvents.entity_item_pickup, SoundCategory.PLAYERS, 0.5F, world.rand.nextFloat() - world.rand.nextFloat() * 0.2F + 1, false);
 					return true;
 				}
-			}
 		return false;
 	}
 
 	@Override
-	public int getRenderType() {
-		return 3;
+	public EnumBlockRenderType getRenderType(IBlockState state) {
+		return EnumBlockRenderType.MODEL;
 	}
 
 	@Override
@@ -172,7 +182,7 @@ public class BlockTieredSacrificialAltar extends BlockContainer {
 	}
 
 	@Override
-	protected BlockState createBlockState() {
-		return new BlockState(this, new IProperty[] { DIMENSION });
+	protected BlockStateContainer createBlockState() {
+		return new BlockStateContainer(this, new IProperty[] { DIMENSION });
 	}
 }

@@ -15,12 +15,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import net.minecraft.util.BlockPos;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldType;
 import net.minecraft.world.biome.BiomeCache;
 import net.minecraft.world.biome.BiomeGenBase;
-import net.minecraft.world.biome.WorldChunkManager;
+import net.minecraft.world.biome.BiomeProvider;
 import net.minecraft.world.gen.layer.GenLayer;
 import net.minecraft.world.gen.layer.IntCache;
 import net.minecraftforge.fml.relauncher.Side;
@@ -29,7 +29,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.common.world.gen.layer.GenLayerDL;
 
-public class WorldChunkManagerDreadlands extends WorldChunkManager
+public class WorldChunkManagerDreadlands extends BiomeProvider
 {
 
 	private GenLayer biomeToUse;
@@ -82,26 +82,26 @@ public class WorldChunkManagerDreadlands extends WorldChunkManager
 		return biome;
 	}
 
-	@Override
-	public float[] getRainfall(float[] par1ArrayOfFloat, int par2, int par3, int par4, int par5) {
-		IntCache.resetIntCache();
-
-		if (par1ArrayOfFloat == null || par1ArrayOfFloat.length < par4 * par5)
-			par1ArrayOfFloat = new float[par4 * par5];
-
-		int[] aint = biomeIndexLayer.getInts(par2, par3, par4, par5);
-
-		for (int i1 = 0; i1 < par4 * par5; ++i1) {
-			float f = BiomeGenBase.getBiome(aint[i1]).getIntRainfall() / 65536.0F;
-
-			if (f > 1.0F)
-				f = 1.0F;
-
-			par1ArrayOfFloat[i1] = f;
-		}
-
-		return par1ArrayOfFloat;
-	}
+	//	@Override
+	//	public float[] getRainfall(float[] par1ArrayOfFloat, int par2, int par3, int par4, int par5) {
+	//		IntCache.resetIntCache();
+	//
+	//		if (par1ArrayOfFloat == null || par1ArrayOfFloat.length < par4 * par5)
+	//			par1ArrayOfFloat = new float[par4 * par5];
+	//
+	//		int[] aint = biomeIndexLayer.getInts(par2, par3, par4, par5);
+	//
+	//		for (int i1 = 0; i1 < par4 * par5; ++i1) {
+	//			float f = BiomeGenBase.getBiome(aint[i1]).getRainfall() / 65536.0F;
+	//
+	//			if (f > 1.0F)
+	//				f = 1.0F;
+	//
+	//			par1ArrayOfFloat[i1] = f;
+	//		}
+	//
+	//		return par1ArrayOfFloat;
+	//	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
@@ -118,7 +118,7 @@ public class WorldChunkManagerDreadlands extends WorldChunkManager
 		int[] aint = biomeIndexLayer.getInts(par2, par3, par4, par5);
 
 		for (int i1 = 0; i1 < par4 * par5; ++i1) {
-			float f = BiomeGenBase.getBiome(aint[i1]).getIntRainfall() / 65536.0F; //getIntTemperature()
+			float f = BiomeGenBase.getBiome(aint[i1]).getTemperature() / 65536.0F; //getIntTemperature()
 
 			if (f > 1.0F)
 				f = 1.0F;

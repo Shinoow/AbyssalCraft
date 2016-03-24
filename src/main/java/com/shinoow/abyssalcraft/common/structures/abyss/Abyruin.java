@@ -11,22 +11,17 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.common.structures.abyss;
 
-import static net.minecraftforge.common.ChestGenHooks.DUNGEON_CHEST;
-import static net.minecraftforge.common.ChestGenHooks.STRONGHOLD_CORRIDOR;
-
 import java.util.Random;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.tileentity.TileEntityChest;
-import net.minecraft.util.BlockPos;
-import net.minecraft.util.WeightedRandomChestContent;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
-import net.minecraftforge.common.ChestGenHooks;
+import net.minecraft.world.storage.loot.LootTableList;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
-import com.shinoow.abyssalcraft.common.structures.abyss.stronghold.StructureAbyStrongholdPieces.ChestCorridor;
 
 public class Abyruin extends WorldGenerator
 {
@@ -220,7 +215,7 @@ public class Abyruin extends WorldGenerator
 		world.setBlockState(new BlockPos(i, j - 7, k - 3), Blocks.chest.getStateFromMeta(3), 2); //TODO: 3
 		TileEntityChest tileentitychest = (TileEntityChest)world.getTileEntity(new BlockPos(i, j - 7, k - 3));
 		if(tileentitychest != null)
-			WeightedRandomChestContent.generateChestContents(rand, ChestCorridor.strongholdChestContents, tileentitychest, ChestGenHooks.getCount(STRONGHOLD_CORRIDOR, rand));
+			tileentitychest.setLoot(LootTableList.CHESTS_STRONGHOLD_CORRIDOR, rand.nextLong()); //TODO: use my own stronghold loot
 		world.setBlockState(new BlockPos(i, j - 7, k + 1), AbyssalCraft.abybrick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i, j - 6, k - 4), AbyssalCraft.abybrick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i, j - 6, k + 1), AbyssalCraft.abybrick.getDefaultState(), 2);
@@ -248,7 +243,7 @@ public class Abyruin extends WorldGenerator
 		world.setBlockState(new BlockPos(i, j + 1, k + 1), Blocks.chest.getStateFromMeta(2), 2); //TODO: 2
 		TileEntityChest tileentitychest2 = (TileEntityChest)world.getTileEntity(new BlockPos(i, j + 1, k + 1));
 		if(tileentitychest2 != null)
-			WeightedRandomChestContent.generateChestContents(rand, ChestGenHooks.getItems(DUNGEON_CHEST, rand), tileentitychest2, ChestGenHooks.getCount(DUNGEON_CHEST, rand));
+			tileentitychest2.setLoot(LootTableList.CHESTS_SIMPLE_DUNGEON, rand.nextLong());
 		world.setBlockState(new BlockPos(i, j + 1, k + 2), AbyssalCraft.abybrick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i, j + 2, k + 2), AbyssalCraft.abybrick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i, j + 3, k + 2), AbyssalCraft.abybrick.getDefaultState(), 2);

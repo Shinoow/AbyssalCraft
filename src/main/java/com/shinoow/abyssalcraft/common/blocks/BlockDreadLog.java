@@ -15,7 +15,7 @@ import java.util.Random;
 
 import net.minecraft.block.BlockLog;
 import net.minecraft.block.properties.IProperty;
-import net.minecraft.block.state.BlockState;
+import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.Item;
 
@@ -85,8 +85,8 @@ public class BlockDreadLog extends BlockLog {
 	}
 
 	@Override
-	protected BlockState createBlockState()
+	protected BlockStateContainer createBlockState()
 	{
-		return new BlockState(this, new IProperty[] {LOG_AXIS});
+		return new BlockStateContainer(this, new IProperty[] {LOG_AXIS});
 	}
 }

@@ -34,8 +34,8 @@ import com.shinoow.abyssalcraft.common.entity.demon.*;
 
 public class PotionDplague extends Potion{
 
-	public PotionDplague(ResourceLocation par1, boolean par2, int par3) {
-		super(par1, par2, par3);
+	public PotionDplague(boolean par2, int par3) {
+		super(par2, par3);
 	}
 
 	@Override
@@ -48,7 +48,7 @@ public class PotionDplague extends Potion{
 	public void performEffect(EntityLivingBase par1EntityLivingBase, int par2){
 
 		if(par1EntityLivingBase instanceof IDreadEntity)
-			par1EntityLivingBase.removePotionEffect(AbyssalCraft.Dplague.id);
+			par1EntityLivingBase.removePotionEffect(AbyssalCraft.Dplague);
 		else par1EntityLivingBase.attackEntityFrom(AbyssalCraftAPI.dread, 1);
 
 		if(par1EntityLivingBase instanceof EntityPlayer)

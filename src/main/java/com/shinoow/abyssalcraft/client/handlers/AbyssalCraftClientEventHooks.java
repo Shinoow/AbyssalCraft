@@ -23,8 +23,8 @@ public class AbyssalCraftClientEventHooks {
 	public void onUpdateFOV(FOVUpdateEvent event) {
 		float fov = event.fov;
 
-		if( event.entity.isUsingItem() && event.entity.getItemInUse().getItem() == AbyssalCraft.corbow) {
-			int duration = event.entity.getItemInUseDuration();
+		if( event.entity.isHandActive() && event.entity.getActiveItemStack().getItem() == AbyssalCraft.corbow) {
+			int duration = event.entity.getItemInUseCount();
 			float multiplier = duration / 20.0F;
 
 			if( multiplier > 1.0F )
@@ -41,7 +41,7 @@ public class AbyssalCraftClientEventHooks {
 	@SubscribeEvent
 	public void onModelBakeEvent(ModelBakeEvent event)
 	{
-		event.modelManager.getBlockModelShapes().registerBuiltInBlocks(AbyssalCraft.dreadaltarbottom, AbyssalCraft.dreadaltartop, AbyssalCraft.ODB,
+		event.getModelManager().getBlockModelShapes().registerBuiltInBlocks(AbyssalCraft.dreadaltarbottom, AbyssalCraft.dreadaltartop, AbyssalCraft.ODB,
 				AbyssalCraft.engraver, AbyssalCraft.cthulhuStatue, AbyssalCraft.hasturStatue, AbyssalCraft.jzaharStatue, AbyssalCraft.azathothStatue,
 				AbyssalCraft.nyarlathotepStatue, AbyssalCraft.yogsothothStatue, AbyssalCraft.shubniggurathStatue);
 	}

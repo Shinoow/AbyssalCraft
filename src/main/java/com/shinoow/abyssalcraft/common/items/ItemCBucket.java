@@ -13,14 +13,14 @@ package com.shinoow.abyssalcraft.common.items;
 
 import java.util.List;
 
-import com.shinoow.abyssalcraft.AbyssalCraft;
-
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemBucket;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.StatCollector;
+import net.minecraft.util.text.translation.I18n;
+
+import com.shinoow.abyssalcraft.AbyssalCraft;
 
 public class ItemCBucket extends ItemBucket{
 
@@ -38,9 +38,9 @@ public class ItemCBucket extends ItemBucket{
 	@Override
 	public void addInformation(ItemStack is, EntityPlayer player, List l, boolean B)
 	{
-		l.add(StatCollector.translateToLocal("tooltip.cbucket.1"));
-		l.add(StatCollector.translateToLocal("tooltip.cbucket.2"));
-		l.add(StatCollector.translateToLocal("tooltip.cbucket.3"));
+		l.add(I18n.translateToLocal("tooltip.cbucket.1"));
+		l.add(I18n.translateToLocal("tooltip.cbucket.2"));
+		l.add(I18n.translateToLocal("tooltip.cbucket.3"));
 	}
 
 	@Override

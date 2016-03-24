@@ -18,6 +18,7 @@ import com.shinoow.abyssalcraft.api.entity.*;
 
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
 import net.minecraft.launchwrapper.Launch;
 
 public final class EntityUtil {
@@ -68,9 +69,9 @@ public final class EntityUtil {
 	 * @return True if the Player has a Necronomicon, otherwise false
 	 */
 	public static boolean hasNecronomicon(EntityPlayer player){
-		return player.inventory.hasItem(AbyssalCraft.necronomicon) || player.inventory.hasItem(AbyssalCraft.necronomicon_cor) ||
-				player.inventory.hasItem(AbyssalCraft.necronomicon_dre) || player.inventory.hasItem(AbyssalCraft.necronomicon_omt) ||
-				player.inventory.hasItem(AbyssalCraft.abyssalnomicon);
+		return player.inventory.hasItemStack(new ItemStack(AbyssalCraft.necronomicon)) || player.inventory.hasItemStack(new ItemStack(AbyssalCraft.necronomicon_cor)) ||
+				player.inventory.hasItemStack(new ItemStack(AbyssalCraft.necronomicon_dre)) || player.inventory.hasItemStack(new ItemStack(AbyssalCraft.necronomicon_omt)) ||
+				player.inventory.hasItemStack(new ItemStack(AbyssalCraft.abyssalnomicon));
 	}
 
 	static class Vars{

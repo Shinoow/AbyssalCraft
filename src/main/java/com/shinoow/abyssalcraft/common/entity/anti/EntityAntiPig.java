@@ -15,7 +15,6 @@ import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.EntityAIControlledByPlayer;
 import net.minecraft.entity.ai.EntityAIFollowParent;
 import net.minecraft.entity.ai.EntityAILookIdle;
 import net.minecraft.entity.ai.EntityAIMate;
@@ -28,10 +27,11 @@ import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.passive.EntityPig;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.pathfinding.PathNavigateGround;
-import net.minecraft.util.BlockPos;
+import net.minecraft.util.SoundEvent;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
@@ -43,10 +43,8 @@ public class EntityAntiPig extends EntityAnimal implements IAntiEntity {
 	{
 		super(par1World);
 		setSize(0.9F, 0.9F);
-		((PathNavigateGround)getNavigator()).setAvoidsWater(true);
 		tasks.addTask(0, new EntityAISwimming(this));
 		tasks.addTask(1, new EntityAIPanic(this, 1.25D));
-		tasks.addTask(2, new EntityAIControlledByPlayer(this, 0.3F));
 		tasks.addTask(3, new EntityAIMate(this, 1.0D));
 		tasks.addTask(4, new EntityAITempt(this, 1.2D, Items.carrot_on_a_stick, false));
 		tasks.addTask(4, new EntityAITempt(this, 1.2D, Items.carrot, false));
@@ -60,8 +58,8 @@ public class EntityAntiPig extends EntityAnimal implements IAntiEntity {
 	protected void applyEntityAttributes()
 	{
 		super.applyEntityAttributes();
-		getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(20.0D);
-		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.25D);
+		getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(20.0D);
+		getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.25D);
 	}
 
 	@Override
@@ -71,27 +69,27 @@ public class EntityAntiPig extends EntityAnimal implements IAntiEntity {
 	}
 
 	@Override
-	protected String getLivingSound()
+	protected SoundEvent getAmbientSound()
 	{
-		return "mob.pig.say";
+		return SoundEvents.entity_pig_ambient;
 	}
 
 	@Override
-	protected String getHurtSound()
+	protected SoundEvent getHurtSound()
 	{
-		return "mob.pig.say";
+		return SoundEvents.entity_pig_hurt;
 	}
 
 	@Override
-	protected String getDeathSound()
+	protected SoundEvent getDeathSound()
 	{
-		return "mob.pig.death";
+		return SoundEvents.entity_pig_death;
 	}
 
 	@Override
 	protected void playStepSound(BlockPos pos, Block par4Block)
 	{
-		playSound("mob.pig.step", 0.15F, 1.0F);
+		playSound(SoundEvents.entity_pig_step, 0.15F, 1.0F);
 	}
 
 	@Override

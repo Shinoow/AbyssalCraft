@@ -20,7 +20,7 @@ import mezz.jei.api.gui.IRecipeLayout;
 import mezz.jei.api.recipe.IRecipeWrapper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.StatCollector;
+import net.minecraft.util.text.translation.I18n;
 
 import com.shinoow.abyssalcraft.integration.jei.AbyssalCraftRecipeCategoryUid;
 
@@ -34,7 +34,7 @@ public class CrystallizationCategory extends CrystallizerRecipeCategory {
 		super(guiHelper);
 		ResourceLocation location = new ResourceLocation("abyssalcraft", "textures/gui/container/crystallizer_NEI.png");
 		background = guiHelper.createDrawable(location, 55, 16, 116, 54);
-		localizedName = StatCollector.translateToLocal("container.abyssalcraft.crystallizer.nei");
+		localizedName = I18n.translateToLocal("container.abyssalcraft.crystallizer.nei");
 	}
 
 	@Override

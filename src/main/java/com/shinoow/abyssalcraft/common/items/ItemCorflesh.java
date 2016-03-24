@@ -12,11 +12,12 @@
 package com.shinoow.abyssalcraft.common.items;
 
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.MobEffects;
 import net.minecraft.item.ItemFood;
 import net.minecraft.item.ItemStack;
-import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.world.World;
+
 import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.common.util.EntityUtil;
 
@@ -36,13 +37,13 @@ public class ItemCorflesh extends ItemFood {
 	public void onFoodEaten(ItemStack itemStack, World world, EntityPlayer entityPlayer)
 	{
 		if(itemStack.getItem() == AbyssalCraft.antiCorflesh){
-			entityPlayer.addPotionEffect(new PotionEffect(Potion.saturation.id, 600, 1));
-			entityPlayer.addPotionEffect(new PotionEffect(Potion.regeneration.id, 600, 0));
+			entityPlayer.addPotionEffect(new PotionEffect(MobEffects.saturation, 600, 1));
+			entityPlayer.addPotionEffect(new PotionEffect(MobEffects.regeneration, 600, 0));
 		} else {
-			entityPlayer.addPotionEffect(new PotionEffect(Potion.hunger.id, 600, 1));
+			entityPlayer.addPotionEffect(new PotionEffect(MobEffects.hunger, 600, 1));
 			if(!EntityUtil.isPlayerCoralium(entityPlayer))
-				entityPlayer.addPotionEffect(new PotionEffect(AbyssalCraft.Cplague.id, 600, 0));
-			entityPlayer.addPotionEffect(new PotionEffect(Potion.confusion.id, 600, 0));
+				entityPlayer.addPotionEffect(new PotionEffect(AbyssalCraft.Cplague, 600, 0));
+			entityPlayer.addPotionEffect(new PotionEffect(MobEffects.confusion, 600, 0));
 		}
 	}
 }

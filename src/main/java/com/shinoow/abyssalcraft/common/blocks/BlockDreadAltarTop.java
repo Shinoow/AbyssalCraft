@@ -14,17 +14,24 @@ package com.shinoow.abyssalcraft.common.blocks;
 import java.util.Random;
 
 import net.minecraft.block.BlockContainer;
+import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.BlockPos;
-import net.minecraft.util.ChatComponentText;
+import net.minecraft.util.EnumBlockRenderType;
 import net.minecraft.util.EnumFacing;
-import net.minecraft.util.StatCollector;
+import net.minecraft.util.EnumHand;
+import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.TextComponentString;
+import net.minecraft.util.text.TextComponentTranslation;
+import net.minecraft.util.text.translation.I18n;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.client.FMLClientHandler;
 
@@ -41,7 +48,14 @@ public class BlockDreadAltarTop extends BlockContainer {
 	public BlockDreadAltarTop() {
 		super(Material.rock);
 		setHarvestLevel("pickaxe", 6);
-		setBlockBounds(0.2F, 0.0F, 0.2F, 0.8F, 0.7F, 0.8F);
+		//		setBlockBounds(0.2F, 0.0F, 0.2F, 0.8F, 0.7F, 0.8F);
+		setStepSound(SoundType.STONE);
+	}
+
+	@Override
+	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos)
+	{
+		return new AxisAlignedBB(0.2F, 0.0F, 0.2F, 0.8F, 0.7F, 0.8F);
 	}
 
 	@Override
@@ -51,48 +65,49 @@ public class BlockDreadAltarTop extends BlockContainer {
 	}
 
 	@Override
-	public boolean isOpaqueCube() {
-		return false;
-	}
-
-	@Override
-	public boolean isFullCube()
+	public boolean isOpaqueCube(IBlockState state)
 	{
 		return false;
 	}
 
 	@Override
-	public int getRenderType() {
-		return 2;
+	public boolean isFullCube(IBlockState state)
+	{
+		return false;
+	}
+
+	@Override
+	public EnumBlockRenderType getRenderType(IBlockState state) {
+		return EnumBlockRenderType.ENTITYBLOCK_ANIMATED;
 	}
 
 	@Override
 	public IBlockState onBlockPlaced(World world, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer){
 		super.onBlockPlaced(world, pos, facing, hitX, hitY, hitZ, meta, placer);
 		if(world.isRemote)
-			if(world.provider.getDimensionId() == AbyssalCraft.configDimId2){
+			if(world.provider.getDimension() == AbyssalCraft.configDimId2){
 				if(world.getBiomeGenForCoords(pos) == AbyssalCraft.MountainDreadlands){
 					if(world.getBlockState(pos.down()).getBlock() == AbyssalCraft.dreadaltarbottom)
 						if(pos.getY() == 41)
-							FMLClientHandler.instance().getClient().ingameGUI.getChatGUI().printChatMessage(new ChatComponentText(StatCollector.translateToLocal("message.dreadaltartop.enter")));
+							FMLClientHandler.instance().getClient().ingameGUI.getChatGUI().printChatMessage(new TextComponentTranslation("message.dreadaltartop.enter"));
 						else if(pos.getY() < 41)
-							FMLClientHandler.instance().getClient().ingameGUI.getChatGUI().printChatMessage(new ChatComponentText("You need to place the altar "+ (41 - pos.getY()) +" blocks higher."));
+							FMLClientHandler.instance().getClient().ingameGUI.getChatGUI().printChatMessage(new TextComponentString("You need to place the altar "+ (41 - pos.getY()) +" blocks higher."));
 						else if(pos.getY() > 41)
-							FMLClientHandler.instance().getClient().ingameGUI.getChatGUI().printChatMessage(new ChatComponentText("You need to place the altar "+ (pos.getY() - 41) +" blocks lower."));
+							FMLClientHandler.instance().getClient().ingameGUI.getChatGUI().printChatMessage(new TextComponentString("You need to place the altar "+ (pos.getY() - 41) +" blocks lower."));
 				} else
-					FMLClientHandler.instance().getClient().ingameGUI.getChatGUI().printChatMessage(new ChatComponentText(StatCollector.translateToLocal("message.dreadaltar.error.2")));
+					FMLClientHandler.instance().getClient().ingameGUI.getChatGUI().printChatMessage(new TextComponentTranslation("message.dreadaltar.error.2"));
 			} else
-				FMLClientHandler.instance().getClient().ingameGUI.getChatGUI().printChatMessage(new ChatComponentText(StatCollector.translateToLocal("message.dreadaltar.error.1")));
+				FMLClientHandler.instance().getClient().ingameGUI.getChatGUI().printChatMessage(new TextComponentTranslation("message.dreadaltar.error.1"));
 		return getStateFromMeta(meta);
 	}
 
 	@Override
-	public boolean onBlockActivated(World par1World, BlockPos pos, IBlockState state, EntityPlayer par5EntityPlayer, EnumFacing side, float par7, float par8, float par9) {
-		if(par1World.provider.getDimensionId() == AbyssalCraft.configDimId2){
+	public boolean onBlockActivated(World par1World, BlockPos pos, IBlockState state, EntityPlayer par5EntityPlayer, EnumHand hand, ItemStack heldItem, EnumFacing side, float par7, float par8, float par9) {
+		if(par1World.provider.getDimension() == AbyssalCraft.configDimId2){
 			if(par1World.getBiomeGenForCoords(pos) == AbyssalCraft.MountainDreadlands){
 				if(par1World.getBlockState(pos.down()).getBlock() == AbyssalCraft.dreadaltarbottom && pos.getY() == 41){
 					if(par1World.isRemote)
-						SpecialTextUtil.ChagarothGroup(par1World, StatCollector.translateToLocal("message.dreadaltartop.spawn"));
+						SpecialTextUtil.ChagarothGroup(par1World, I18n.translateToLocal("message.dreadaltartop.spawn"));
 					if(!par1World.isRemote){
 						par5EntityPlayer.addStat(AbyssalCraft.summonChagaroth, 1);
 						chagarothlair lair = new chagarothlair();
@@ -103,9 +118,9 @@ public class BlockDreadAltarTop extends BlockContainer {
 					}
 				}
 			} else if(par1World.isRemote)
-				FMLClientHandler.instance().getClient().ingameGUI.getChatGUI().printChatMessage(new ChatComponentText(StatCollector.translateToLocal("message.dreadaltar.error.2")));
+				FMLClientHandler.instance().getClient().ingameGUI.getChatGUI().printChatMessage(new TextComponentTranslation("message.dreadaltar.error.2"));
 		} else if(par1World.isRemote)
-			FMLClientHandler.instance().getClient().ingameGUI.getChatGUI().printChatMessage(new ChatComponentText(StatCollector.translateToLocal("message.dreadaltar.error.3")));
+			FMLClientHandler.instance().getClient().ingameGUI.getChatGUI().printChatMessage(new TextComponentTranslation("message.dreadaltar.error.3"));
 		return false;
 	}
 
@@ -115,6 +130,6 @@ public class BlockDreadAltarTop extends BlockContainer {
 
 		if(par5Entity instanceof IDreadEntity){}
 		else if(par5Entity instanceof EntityLivingBase)
-			((EntityLivingBase)par5Entity).addPotionEffect(new PotionEffect(AbyssalCraft.Dplague.id, 100));
+			((EntityLivingBase)par5Entity).addPotionEffect(new PotionEffect(AbyssalCraft.Dplague, 100));
 	}
 }

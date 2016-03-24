@@ -18,41 +18,46 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.IEntityLivingData;
 import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.EntityAIAttackOnCollide;
+import net.minecraft.entity.ai.EntityAIAttackMelee;
 import net.minecraft.entity.ai.EntityAIHurtByTarget;
 import net.minecraft.entity.ai.EntityAILookIdle;
 import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.ai.attributes.IAttributeInstance;
-import net.minecraft.entity.boss.IBossDisplayData;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.item.EntityXPOrb;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
-import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.EnumParticleTypes;
-import net.minecraft.util.StatCollector;
+import net.minecraft.util.SoundEvent;
+import net.minecraft.util.text.TextFormatting;
+import net.minecraft.util.text.translation.I18n;
+import net.minecraft.world.BossInfo;
+import net.minecraft.world.BossInfoServer;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.World;
+import net.minecraft.world.BossInfo.Color;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.api.entity.IDreadEntity;
 import com.shinoow.abyssalcraft.common.util.SpecialTextUtil;
 
-public class EntityChagaroth extends EntityMob implements IBossDisplayData, IDreadEntity {
+public class EntityChagaroth extends EntityMob implements IDreadEntity {
 
 	private static final UUID attackDamageBoostUUID = UUID.fromString("648D7064-6A60-4F59-8ABE-C2C23A6DD7A9");
 	private static final AttributeModifier attackDamageBoost = new AttributeModifier(attackDamageBoostUUID, "Halloween Attack Damage Boost", 8D, 0);
 	public int deathTicks;
+	private final BossInfoServer bossInfo = (BossInfoServer)new BossInfoServer(getDisplayName(), BossInfo.Color.BLUE, BossInfo.Overlay.PROGRESS).setDarkenSky(true);
 
 	public EntityChagaroth(World par1World) {
 		super(par1World);
 		setSize(2.0F, 4.8F);
-		tasks.addTask(2, new EntityAIAttackOnCollide(this, EntityPlayer.class, 0.0D, true));
+		tasks.addTask(2, new EntityAIAttackMelee(this, 0.0D, true));
 		tasks.addTask(3, new EntityAILookIdle(this));
 		tasks.addTask(3, new EntityAIWatchClosest(this, EntityPlayer.class, 16.0F));
 		targetTasks.addTask(1, new EntityAIHurtByTarget(this, false));
@@ -64,7 +69,7 @@ public class EntityChagaroth extends EntityMob implements IBossDisplayData, IDre
 	@Override
 	public String getName()
 	{
-		return EnumChatFormatting.DARK_RED + super.getName();
+		return TextFormatting.DARK_RED + super.getName();
 	}
 
 	@Override
@@ -72,7 +77,7 @@ public class EntityChagaroth extends EntityMob implements IBossDisplayData, IDre
 
 		if (super.attackEntityAsMob(par1Entity))
 			if (par1Entity instanceof EntityLivingBase)
-				((EntityLivingBase)par1Entity).addPotionEffect(new PotionEffect(AbyssalCraft.Dplague.id, 100));
+				((EntityLivingBase)par1Entity).addPotionEffect(new PotionEffect(AbyssalCraft.Dplague, 100));
 		return super.attackEntityAsMob(par1Entity);
 	}
 
@@ -81,15 +86,15 @@ public class EntityChagaroth extends EntityMob implements IBossDisplayData, IDre
 	{
 		super.applyEntityAttributes();
 
-		getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setBaseValue(1.0D);
-		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.0D);
+		getEntityAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue(1.0D);
+		getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.0D);
 
 		if(AbyssalCraft.hardcoreMode){
-			getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(2000.0D);
-			getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(30.0D);
+			getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(2000.0D);
+			getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(30.0D);
 		} else {
-			getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(1000.0D);
-			getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(15.0D);
+			getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(1000.0D);
+			getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(15.0D);
 		}
 	}
 
@@ -100,21 +105,21 @@ public class EntityChagaroth extends EntityMob implements IBossDisplayData, IDre
 	}
 
 	@Override
-	protected String getLivingSound()
+	protected SoundEvent getAmbientSound()
 	{
-		return "abyssalcraft:dreadguard.idle";
+		return AbyssalCraft.dreadguard_ambient;
 	}
 
 	@Override
-	protected String getHurtSound()
+	protected SoundEvent getHurtSound()
 	{
-		return "abyssalcraft:dreadguard.hit";
+		return AbyssalCraft.dreadguard_hurt;
 	}
 
 	@Override
-	protected String getDeathSound()
+	protected SoundEvent getDeathSound()
 	{
-		return "abyssalcraft:dreadguard.death";
+		return AbyssalCraft.dreadguard_death;
 	}
 
 	@Override
@@ -133,6 +138,39 @@ public class EntityChagaroth extends EntityMob implements IBossDisplayData, IDre
 	protected boolean canDespawn()
 	{
 		return false;
+	}
+
+	@Override
+	protected void updateAITasks()
+	{
+		super.updateAITasks();
+		bossInfo.setPercent(getHealth() / getMaxHealth());
+		if(getHealth() < getMaxHealth() * 0.75 && getHealth() > getMaxHealth() / 2 && bossInfo.getColor() != BossInfo.Color.GREEN)
+			bossInfo.setColor(Color.GREEN);
+		if(getHealth() < getMaxHealth() / 2 && getHealth() > getMaxHealth() / 4 && bossInfo.getColor() != BossInfo.Color.YELLOW)
+			bossInfo.setColor(Color.YELLOW);
+		if(getHealth() < getMaxHealth() / 4 && getHealth() > 0 && bossInfo.getColor() != BossInfo.Color.RED)
+			bossInfo.setColor(Color.RED);
+	}
+
+	/**
+	 * Makes this boss Entity visible to the given player. Has no effect if this Entity is not a boss.
+	 */
+	@Override
+	public void setBossVisibleTo(EntityPlayerMP player)
+	{
+		super.setBossVisibleTo(player);
+		bossInfo.addPlayer(player);
+	}
+
+	/**
+	 * Makes this boss Entity non-visible to the given player. Has no effect if this Entity is not a boss.
+	 */
+	@Override
+	public void setBossNonVisibleTo(EntityPlayerMP player)
+	{
+		super.setBossNonVisibleTo(player);
+		bossInfo.removePlayer(player);
 	}
 
 	@Override
@@ -208,18 +246,24 @@ public class EntityChagaroth extends EntityMob implements IBossDisplayData, IDre
 
 	@Override
 	public void onDeath(DamageSource par1DamageSource) {
+		bossInfo.setPercent(getHealth() / getMaxHealth());
 		if (par1DamageSource.getEntity() instanceof EntityPlayer)
 		{
 			EntityPlayer entityplayer = (EntityPlayer)par1DamageSource.getEntity();
 			entityplayer.addStat(AbyssalCraft.killChagaroth, 1);
 		}
 		if(worldObj.isRemote){
-			SpecialTextUtil.ChagarothGroup(worldObj, StatCollector.translateToLocal("message.chagaroth.death.1"));
-			SpecialTextUtil.ChagarothGroup(worldObj, StatCollector.translateToLocal("message.chagaroth.death.2"));
-			SpecialTextUtil.ChagarothGroup(worldObj, StatCollector.translateToLocal("message.chagaroth.death.3"));
-			SpecialTextUtil.ChagarothGroup(worldObj, StatCollector.translateToLocal("message.chagaroth.death.4"));
+			SpecialTextUtil.ChagarothGroup(worldObj, I18n.translateToLocal("message.chagaroth.death.1"));
+			SpecialTextUtil.ChagarothGroup(worldObj, I18n.translateToLocal("message.chagaroth.death.2"));
+			SpecialTextUtil.ChagarothGroup(worldObj, I18n.translateToLocal("message.chagaroth.death.3"));
+			SpecialTextUtil.ChagarothGroup(worldObj, I18n.translateToLocal("message.chagaroth.death.4"));
 		}
 		super.onDeath(par1DamageSource);
+	}
+
+	@Override
+	public boolean isNonBoss(){
+		return false;
 	}
 
 	@Override
@@ -289,7 +333,7 @@ public class EntityChagaroth extends EntityMob implements IBossDisplayData, IDre
 	{
 		par1EntityLivingData = super.onInitialSpawn(difficulty, par1EntityLivingData);
 
-		IAttributeInstance attribute = getEntityAttribute(SharedMonsterAttributes.attackDamage);
+		IAttributeInstance attribute = getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE);
 		Calendar calendar = worldObj.getCurrentDate();
 
 		if (calendar.get(2) + 1 == 10 && calendar.get(5) == 31 && rand.nextFloat() < 0.25F)

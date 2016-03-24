@@ -13,22 +13,28 @@ package com.shinoow.abyssalcraft.common.entity.anti;
 
 import java.util.Calendar;
 
-import net.minecraft.block.Block;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.passive.EntityAmbientCreature;
 import net.minecraft.entity.passive.EntityBat;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.BlockPos;
+import net.minecraft.network.datasync.DataParameter;
+import net.minecraft.network.datasync.DataSerializers;
+import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.util.DamageSource;
-import net.minecraft.util.MathHelper;
+import net.minecraft.util.SoundEvent;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 
 import com.shinoow.abyssalcraft.api.entity.IAntiEntity;
 
 public class EntityAntiBat extends EntityAmbientCreature implements IAntiEntity {
 
+	private static final DataParameter<Byte> HANGING = EntityDataManager.<Byte>createKey(EntityAntiBat.class, DataSerializers.BYTE);
 	/** Coordinates of where the bat spawned. */
 	private BlockPos spawnPosition;
 	public EntityAntiBat(World par1World)
@@ -42,7 +48,7 @@ public class EntityAntiBat extends EntityAmbientCreature implements IAntiEntity 
 	protected void entityInit()
 	{
 		super.entityInit();
-		dataWatcher.addObject(16, new Byte((byte)0));
+		dataWatcher.register(HANGING, new Byte((byte)0));
 	}
 
 	@Override
@@ -58,21 +64,21 @@ public class EntityAntiBat extends EntityAmbientCreature implements IAntiEntity 
 	}
 
 	@Override
-	protected String getLivingSound()
+	protected SoundEvent getAmbientSound()
 	{
-		return getIsBatHanging() && rand.nextInt(4) != 0 ? null : "mob.bat.idle";
+		return getIsBatHanging() && rand.nextInt(4) != 0 ? null : SoundEvents.entity_bat_ambient;
 	}
 
 	@Override
-	protected String getHurtSound()
+	protected SoundEvent getHurtSound()
 	{
-		return "mob.bat.hurt";
+		return SoundEvents.entity_bat_hurt;
 	}
 
 	@Override
-	protected String getDeathSound()
+	protected SoundEvent getDeathSound()
 	{
-		return "mob.bat.death";
+		return SoundEvents.entity_bat_death;
 	}
 
 	@Override
@@ -98,22 +104,22 @@ public class EntityAntiBat extends EntityAmbientCreature implements IAntiEntity 
 	protected void applyEntityAttributes()
 	{
 		super.applyEntityAttributes();
-		getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(12.0D);
+		getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(12.0D);
 	}
 
 	public boolean getIsBatHanging()
 	{
-		return (dataWatcher.getWatchableObjectByte(16) & 1) != 0;
+		return (dataWatcher.get(HANGING) & 1) != 0;
 	}
 
 	public void setIsBatHanging(boolean par1)
 	{
-		byte b0 = dataWatcher.getWatchableObjectByte(16);
+		byte b0 = dataWatcher.get(HANGING).byteValue();
 
 		if (par1)
-			dataWatcher.updateObject(16, Byte.valueOf((byte)(b0 | 1)));
+			dataWatcher.set(HANGING, Byte.valueOf((byte)(b0 | 1)));
 		else
-			dataWatcher.updateObject(16, Byte.valueOf((byte)(b0 & -2)));
+			dataWatcher.set(HANGING, Byte.valueOf((byte)(b0 & -2)));
 	}
 
 	@Override
@@ -138,7 +144,7 @@ public class EntityAntiBat extends EntityAmbientCreature implements IAntiEntity 
 
 		if (getIsBatHanging())
 		{
-			if (!worldObj.getBlockState(blockpos1).getBlock().isNormalCube())
+			if (!worldObj.getBlockState(blockpos1).isNormalCube())
 			{
 				setIsBatHanging(false);
 				worldObj.playAuxSFXAtEntity((EntityPlayer)null, 1015, blockpos, 0);
@@ -174,7 +180,7 @@ public class EntityAntiBat extends EntityAmbientCreature implements IAntiEntity 
 			moveForward = 0.5F;
 			rotationYaw += f1;
 
-			if (rand.nextInt(100) == 0 && worldObj.getBlockState(blockpos1).getBlock().isNormalCube())
+			if (rand.nextInt(100) == 0 && worldObj.getBlockState(blockpos1).isNormalCube())
 				setIsBatHanging(true);
 		}
 	}
@@ -189,7 +195,7 @@ public class EntityAntiBat extends EntityAmbientCreature implements IAntiEntity 
 	public void fall(float par1, float par2) {}
 
 	@Override
-	protected void updateFallState(double y, boolean onGroundIn, Block blockIn, BlockPos pos) {}
+	protected void updateFallState(double y, boolean onGroundIn, IBlockState blockIn, BlockPos pos) {}
 
 	@Override
 	public boolean doesEntityNotTriggerPressurePlate()
@@ -215,14 +221,14 @@ public class EntityAntiBat extends EntityAmbientCreature implements IAntiEntity 
 	public void readEntityFromNBT(NBTTagCompound par1NBTTagCompound)
 	{
 		super.readEntityFromNBT(par1NBTTagCompound);
-		dataWatcher.updateObject(16, Byte.valueOf(par1NBTTagCompound.getByte("BatFlags")));
+		dataWatcher.set(HANGING, Byte.valueOf(par1NBTTagCompound.getByte("BatFlags")));
 	}
 
 	@Override
 	public void writeEntityToNBT(NBTTagCompound par1NBTTagCompound)
 	{
 		super.writeEntityToNBT(par1NBTTagCompound);
-		par1NBTTagCompound.setByte("BatFlags", dataWatcher.getWatchableObjectByte(16));
+		par1NBTTagCompound.setByte("BatFlags", dataWatcher.get(HANGING).byteValue());
 	}
 
 
