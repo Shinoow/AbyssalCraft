@@ -54,9 +54,9 @@ public class DisruptionTeleportRandomly extends DisruptionEntry {
 		double d3 = player.posX;
 		double d4 = player.posY;
 		double d5 = player.posZ;
-		player.posX = event.targetX;
-		player.posY = event.targetY;
-		player.posZ = event.targetZ;
+		player.posX = event.getTargetX();
+		player.posY = event.getTargetY();
+		player.posZ = event.getTargetZ();
 		boolean flag = false;
 		BlockPos pos = new BlockPos(player.posX, player.posY, player.posZ);
 

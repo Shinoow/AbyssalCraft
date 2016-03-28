@@ -157,11 +157,6 @@ public class EntityDragonBoss extends EntityMob implements IEntityMultiPart, ICo
 			EntityPlayer entityplayer = (EntityPlayer)par1DamageSource.getEntity();
 			entityplayer.addStat(AbyssalCraft.killAsorah, 1);
 		}
-		if(worldObj.isRemote){
-			SpecialTextUtil.OblivionaireGroup(worldObj, I18n.translateToLocal("message.asorah.death.1"));
-			SpecialTextUtil.OblivionaireGroup(worldObj, I18n.translateToLocal("message.asorah.death.2"));
-			SpecialTextUtil.OblivionaireGroup(worldObj, I18n.translateToLocal("message.asorah.death.3"));
-		}
 		super.onDeath(par1DamageSource);
 	}
 
@@ -170,6 +165,8 @@ public class EntityDragonBoss extends EntityMob implements IEntityMultiPart, ICo
 	{
 		super.updateAITasks();
 		bossInfo.setPercent(getHealth() / getMaxHealth());
+		if(getHealth() > getMaxHealth() * 0.75 && bossInfo.getColor() != BossInfo.Color.BLUE)
+			bossInfo.setColor(Color.BLUE);
 		if(getHealth() < getMaxHealth() * 0.75 && getHealth() > getMaxHealth() / 2 && bossInfo.getColor() != BossInfo.Color.GREEN)
 			bossInfo.setColor(Color.GREEN);
 		if(getHealth() < getMaxHealth() / 2 && getHealth() > getMaxHealth() / 4 && bossInfo.getColor() != BossInfo.Color.YELLOW)
@@ -606,6 +603,12 @@ public class EntityDragonBoss extends EntityMob implements IEntityMultiPart, ICo
 		moveEntity(0.0D, 0.10000000149011612D, 0.0D);
 		renderYawOffset = rotationYaw += 20.0F;
 
+		if(deathTicks == 20 && worldObj.isRemote)
+			SpecialTextUtil.OblivionaireGroup(worldObj, I18n.translateToLocal("message.asorah.death.1"));
+		if(deathTicks == 80 && worldObj.isRemote)
+			SpecialTextUtil.OblivionaireGroup(worldObj, I18n.translateToLocal("message.asorah.death.2"));
+		if(deathTicks == 140 && worldObj.isRemote)
+			SpecialTextUtil.OblivionaireGroup(worldObj, I18n.translateToLocal("message.asorah.death.3"));
 		if (deathTicks == 200 && !worldObj.isRemote){
 			setDead();
 			worldObj.spawnEntityInWorld(new EntityItem(worldObj, posX, posY, posZ, new ItemStack(AbyssalCraft.EoA)));

@@ -13,6 +13,7 @@ package com.shinoow.abyssalcraft.common.handlers;
 
 import java.util.List;
 
+import net.minecraft.enchantment.EnchantmentData;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
@@ -75,7 +76,9 @@ public class InternalNecroDataHandler extends DummyNecroDataHandler {
 		internalNecroData.add(new NecroData("rituals", NecronomiconText.LABEL_INFO, ritualgettingstarted, ritualmaterials,
 				ritualspecialmaterials, ritualpotentialenergy));
 		Chapter miscspecialmaterials = new Chapter("specialmaterials", NecronomiconText.LABEL_INFORMATION_SPECIAL_MATERIALS);
-		internalNecroData.add(new NecroData("miscinfo", NecronomiconText.LABEL_MISC_INFORMATION, NecronomiconText.MISC_INFORMATION, miscspecialmaterials));
+		Chapter miscenchantments = new Chapter("enchantments", NecronomiconText.LABEL_INFORMATION_ENCHANTMENTS);
+		internalNecroData.add(new NecroData("miscinfo", NecronomiconText.LABEL_MISC_INFORMATION, NecronomiconText.MISC_INFORMATION, miscspecialmaterials,
+				miscenchantments));
 	}
 
 	@Override
@@ -373,5 +376,9 @@ public class InternalNecroDataHandler extends DummyNecroDataHandler {
 				new Page(9, new CraftingStack(AbyssalCraft.carbonCluster), NecronomiconText.CRAFTING_CARBON_CLUSTER),
 				new Page(10, new CraftingStack(AbyssalCraft.denseCarbonCluster), NecronomiconText.CRAFTING_DENSE_CARBON_CLUSTER),
 				new Page(11, new CraftingStack(AbyssalCraft.Crate), NecronomiconText.CRAFTING_CRATE));
+		addPages("miscinfo", "enchantments", new Page(1, Items.enchanted_book.getEnchantedItemStack(new EnchantmentData(AbyssalCraft.coraliumE, 1)), NecronomiconText.ENCHANTMENT_CORALIUM),
+				new Page(2, Items.enchanted_book.getEnchantedItemStack(new EnchantmentData(AbyssalCraft.dreadE, 1)), NecronomiconText.ENCHANTMENT_DREAD),
+				new Page(3, Items.enchanted_book.getEnchantedItemStack(new EnchantmentData(AbyssalCraft.lightPierce, AbyssalCraft.lightPierce.getMaxLevel())), NecronomiconText.ENCHANTMENT_LIGHT_PIERCE),
+				new Page(4, Items.enchanted_book.getEnchantedItemStack(new EnchantmentData(AbyssalCraft.ironWall, 1)), NecronomiconText.ENCHANTMENT_IRON_WALL));
 	}
 }

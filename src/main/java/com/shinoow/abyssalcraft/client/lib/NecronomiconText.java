@@ -189,6 +189,12 @@ public class NecronomiconText {
 	public static String CRAFTING_DENSE_CARBON_CLUSTER = translate("necronomicon.text.crafting.densecarboncluster");
 	public static String CRAFTING_CRATE = translate("necronomicon.text.crafting.crate");
 
+	//Enchantments
+	public static String ENCHANTMENT_CORALIUM = translate("necronomicon.text.enchantment.coralium");
+	public static String ENCHANTMENT_DREAD = translate("necronomicon.text.enchantment.dread");
+	public static String ENCHANTMENT_LIGHT_PIERCE = translate("necronomicon.text.enchantment.lightpierce");
+	public static String ENCHANTMENT_IRON_WALL = translate("necronomicon.text.enchantment.ironwall");
+
 	public static String PROGRESSION_OVERWORLD_1 = translate("necronomicon.text.overworld.progression.1");
 	public static String PROGRESSION_OVERWORLD_2 = translate("necronomicon.text.overworld.progression.2");
 	public static String PROGRESSION_OVERWORLD_3 = translate("necronomicon.text.overworld.progression.3");
@@ -412,6 +418,7 @@ public class NecronomiconText {
 	public static String LABEL_GETTING_STARTED = translate("necronomicon.gettingstarted");
 	public static String LABEL_POTENTIAL_ENERGY = translate("necronomicon.potentialenergy");
 	public static String LABEL_MISC_INFORMATION = translate("necronomicon.miscinformation");
+	public static String LABEL_INFORMATION_ENCHANTMENTS = translate("necronomicon.information.enchantments");
 
 	/**
 	 * The best way to drown an array of strings with nonsense

@@ -13,13 +13,12 @@ package com.shinoow.abyssalcraft.common.network.client;
 
 import java.io.IOException;
 
-import com.shinoow.abyssalcraft.common.entity.props.ReputationProps;
-import com.shinoow.abyssalcraft.common.network.AbstractMessage.AbstractClientMessage;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.PacketBuffer;
 import net.minecraftforge.fml.relauncher.Side;
+
+import com.shinoow.abyssalcraft.common.network.AbstractMessage.AbstractClientMessage;
 
 /**
  * 
@@ -58,7 +57,7 @@ public class SyncPlayerPropsMessage extends AbstractClientMessage<SyncPlayerProp
 		// create a new tag compound
 		data = new NBTTagCompound();
 		// and save our player's data into it
-		ReputationProps.get(player).saveNBTData(data);
+		//		ReputationProps.get(player).saveNBTData(data);
 	}
 
 	@Override
@@ -74,6 +73,6 @@ public class SyncPlayerPropsMessage extends AbstractClientMessage<SyncPlayerProp
 	@Override
 	public void process(EntityPlayer player, Side side) {
 		// now we can just load the NBTTagCompound data directly; one and done, folks
-		ReputationProps.get(player).loadNBTData(data);
+		//		ReputationProps.get(player).loadNBTData(data);
 	}
 }

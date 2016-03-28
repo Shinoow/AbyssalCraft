@@ -19,6 +19,7 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
+import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
@@ -64,13 +65,12 @@ public class DisruptionPotion extends DisruptionEntry {
 	@Override
 	public void disrupt(World world, BlockPos pos, List<EntityPlayer> players) {
 
-		if(!world.isRemote)
-			if(world.getBlockState(pos).getBlock().getBoundingBox(world.getBlockState(pos), world, pos) != null){
-				List<EntityLivingBase> entities = world.getEntitiesWithinAABB(EntityLivingBase.class, world.getBlockState(pos).getBlock().getBoundingBox(world.getBlockState(pos), world, pos).expand(16, 16, 16));
+		if(!world.isRemote){
+			List<EntityLivingBase> entities = world.getEntitiesWithinAABB(EntityLivingBase.class, new AxisAlignedBB(pos).expand(16, 16, 16));
 
-				for(EntityLivingBase entity : entities)
-					if(!isEntityImmune(potion, entity))
-						entity.addPotionEffect(new PotionEffect(potion, 600));
-			}
+			for(EntityLivingBase entity : entities)
+				if(!isEntityImmune(potion, entity))
+					entity.addPotionEffect(new PotionEffect(potion, 600));
+		}
 	}
 }

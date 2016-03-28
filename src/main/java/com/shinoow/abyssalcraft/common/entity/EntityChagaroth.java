@@ -145,6 +145,8 @@ public class EntityChagaroth extends EntityMob implements IDreadEntity {
 	{
 		super.updateAITasks();
 		bossInfo.setPercent(getHealth() / getMaxHealth());
+		if(getHealth() > getMaxHealth() * 0.75 && bossInfo.getColor() != BossInfo.Color.BLUE)
+			bossInfo.setColor(Color.BLUE);
 		if(getHealth() < getMaxHealth() * 0.75 && getHealth() > getMaxHealth() / 2 && bossInfo.getColor() != BossInfo.Color.GREEN)
 			bossInfo.setColor(Color.GREEN);
 		if(getHealth() < getMaxHealth() / 2 && getHealth() > getMaxHealth() / 4 && bossInfo.getColor() != BossInfo.Color.YELLOW)
@@ -252,12 +254,6 @@ public class EntityChagaroth extends EntityMob implements IDreadEntity {
 			EntityPlayer entityplayer = (EntityPlayer)par1DamageSource.getEntity();
 			entityplayer.addStat(AbyssalCraft.killChagaroth, 1);
 		}
-		if(worldObj.isRemote){
-			SpecialTextUtil.ChagarothGroup(worldObj, I18n.translateToLocal("message.chagaroth.death.1"));
-			SpecialTextUtil.ChagarothGroup(worldObj, I18n.translateToLocal("message.chagaroth.death.2"));
-			SpecialTextUtil.ChagarothGroup(worldObj, I18n.translateToLocal("message.chagaroth.death.3"));
-			SpecialTextUtil.ChagarothGroup(worldObj, I18n.translateToLocal("message.chagaroth.death.4"));
-		}
 		super.onDeath(par1DamageSource);
 	}
 
@@ -318,6 +314,15 @@ public class EntityChagaroth extends EntityMob implements IDreadEntity {
 					}
 				}
 			}
+
+		if(deathTicks == 20 && worldObj.isRemote)
+			SpecialTextUtil.ChagarothGroup(worldObj, I18n.translateToLocal("message.chagaroth.death.1"));
+		if(deathTicks == 80 && worldObj.isRemote)
+			SpecialTextUtil.ChagarothGroup(worldObj, I18n.translateToLocal("message.chagaroth.death.2"));
+		if(deathTicks == 140 && worldObj.isRemote)
+			SpecialTextUtil.ChagarothGroup(worldObj, I18n.translateToLocal("message.chagaroth.death.3"));
+		if(deathTicks == 200 && worldObj.isRemote)
+			SpecialTextUtil.ChagarothGroup(worldObj, I18n.translateToLocal("message.chagaroth.death.4"));
 		if(deathTicks == 200 && !worldObj.isRemote){
 			setDead();
 			worldObj.spawnEntityInWorld(new EntityItem(worldObj, posX, posY, posZ, new ItemStack(AbyssalCraft.dreadKey)));

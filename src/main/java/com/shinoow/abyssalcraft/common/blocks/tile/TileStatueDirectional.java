@@ -21,6 +21,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.ITickable;
+import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 
 import com.shinoow.abyssalcraft.api.energy.EnergyEnum.AmplifierType;
@@ -39,13 +40,6 @@ public class TileStatueDirectional extends TEDirectional implements IEnergyManip
 	private int activationTimer;
 	private AmplifierType currentAmplifier;
 	private DeityType currentDeity;
-
-
-	//	@Override
-	//	public boolean canUpdate()
-	//	{
-	//		return true;
-	//	}
 
 	@Override
 	public void readFromNBT(NBTTagCompound nbttagcompound)
@@ -153,7 +147,7 @@ public class TileStatueDirectional extends TEDirectional implements IEnergyManip
 	public void disrupt(boolean factor) {
 		if(factor){
 			worldObj.addWeatherEffect(new EntityLightningBolt(worldObj, pos.getX(), pos.getY() + 1, pos.getZ(), false));
-			DisruptionHandler.instance().generateDisruption(getDeity(), worldObj, pos, worldObj.getEntitiesWithinAABB(EntityPlayer.class, worldObj.getBlockState(pos).getBlock().getBoundingBox(worldObj.getBlockState(pos), worldObj, pos).expand(16, 16, 16)));
+			DisruptionHandler.instance().generateDisruption(getDeity(), worldObj, pos, worldObj.getEntitiesWithinAABB(EntityPlayer.class, new AxisAlignedBB(pos).expand(16, 16, 16)));
 		}
 	}
 
@@ -175,31 +169,29 @@ public class TileStatueDirectional extends TEDirectional implements IEnergyManip
 				!(worldObj.getTileEntity(new BlockPos(xp, yp - 1, zp)) instanceof IEnergyManipulator) &&
 				!(worldObj.getTileEntity(new BlockPos(xp, yp + 2, zp)) instanceof IEnergyManipulator) &&
 				!(worldObj.getTileEntity(new BlockPos(xp, yp - 2, zp)) instanceof IEnergyManipulator)){
-			if(worldObj.getBlockState(pos).getBlock().getBoundingBox(worldObj.getBlockState(pos), worldObj, pos) != null){
-				List<EntityPlayer> players = worldObj.getEntitiesWithinAABB(EntityPlayer.class, worldObj.getBlockState(pos).getBlock().getBoundingBox(worldObj.getBlockState(pos), worldObj, pos).expand(range, range, range));
+			List<EntityPlayer> players = worldObj.getEntitiesWithinAABB(EntityPlayer.class, new AxisAlignedBB(pos).expand(range, range, range));
 
-				for(EntityPlayer player : players)
-					if(EntityUtil.hasNecronomicon(player)){
-						ItemStack item = player.getActiveItemStack();
-						if(item != null && item.getItem() instanceof IEnergyTransporter){
-							timer++;
-							if(timer >= (int)(timerMax / getAmplifier(AmplifierType.DURATION))){
-								timer = worldObj.rand.nextInt(10);
-								if(!worldObj.isRemote && ((IEnergyTransporter) item.getItem()).getContainedEnergy(item) < ((IEnergyTransporter) item.getItem()).getMaxEnergy(item))
-									((IEnergyTransporter) item.getItem()).addEnergy(item, energyQuanta());
-								for(double i = 0; i <= 0.7; i += 0.03) {
-									int xPos = xp < (int) player.posX ? 1 : xp > (int) player.posX ? -1 : 0;
-									int yPos = yp < (int) player.posY ? 1 : yp > (int) player.posY ? -1 : 0;
-									int zPos = zp < (int) player.posZ ? 1 : zp > (int) player.posZ ? -1 : 0;
-									double x = i * Math.cos(i) / 2 * xPos;
-									double y = i * Math.sin(i) / 2 * yPos;
-									double z = i * Math.sin(i) / 2 * zPos;
-									worldObj.spawnParticle(EnumParticleTypes.SMOKE_LARGE, xp + 0.5, yp + 0.5, zp + 0.5, x, y, z);
-								}
+			for(EntityPlayer player : players)
+				if(EntityUtil.hasNecronomicon(player)){
+					ItemStack item = player.getActiveItemStack();
+					if(item != null && item.getItem() instanceof IEnergyTransporter){
+						timer++;
+						if(timer >= (int)(timerMax / getAmplifier(AmplifierType.DURATION))){
+							timer = worldObj.rand.nextInt(10);
+							if(!worldObj.isRemote && ((IEnergyTransporter) item.getItem()).getContainedEnergy(item) < ((IEnergyTransporter) item.getItem()).getMaxEnergy(item))
+								((IEnergyTransporter) item.getItem()).addEnergy(item, energyQuanta());
+							for(double i = 0; i <= 0.7; i += 0.03) {
+								int xPos = xp < (int) player.posX ? 1 : xp > (int) player.posX ? -1 : 0;
+								int yPos = yp < (int) player.posY ? 1 : yp > (int) player.posY ? -1 : 0;
+								int zPos = zp < (int) player.posZ ? 1 : zp > (int) player.posZ ? -1 : 0;
+								double x = i * Math.cos(i) / 2 * xPos;
+								double y = i * Math.sin(i) / 2 * yPos;
+								double z = i * Math.sin(i) / 2 * zPos;
+								worldObj.spawnParticle(EnumParticleTypes.SMOKE_LARGE, xp + 0.5, yp + 0.5, zp + 0.5, x, y, z);
 							}
 						}
 					}
-			}
+				}
 
 			TileEntity pedestal1 = null;
 			TileEntity pedestal2 = null;

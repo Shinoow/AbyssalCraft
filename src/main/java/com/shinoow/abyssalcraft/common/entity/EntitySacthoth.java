@@ -144,6 +144,8 @@ public class EntitySacthoth extends EntityMob implements IAntiEntity, ICoraliumE
 	{
 		super.updateAITasks();
 		bossInfo.setPercent(getHealth() / getMaxHealth());
+		if(getHealth() > getMaxHealth() * 0.75 && bossInfo.getColor() != BossInfo.Color.BLUE)
+			bossInfo.setColor(Color.BLUE);
 		if(getHealth() < getMaxHealth() * 0.75 && getHealth() > getMaxHealth() / 2 && bossInfo.getColor() != BossInfo.Color.GREEN)
 			bossInfo.setColor(Color.GREEN);
 		if(getHealth() < getMaxHealth() / 2 && getHealth() > getMaxHealth() / 4 && bossInfo.getColor() != BossInfo.Color.YELLOW)
@@ -303,9 +305,9 @@ public class EntitySacthoth extends EntityMob implements IAntiEntity, ICoraliumE
 		double d3 = posX;
 		double d4 = posY;
 		double d5 = posZ;
-		posX = event.targetX;
-		posY = event.targetY;
-		posZ = event.targetZ;
+		posX = event.getTargetX();
+		posY = event.getTargetY();
+		posZ = event.getTargetZ();
 		boolean flag = false;
 		BlockPos pos = new BlockPos(posX, posY, posZ);
 

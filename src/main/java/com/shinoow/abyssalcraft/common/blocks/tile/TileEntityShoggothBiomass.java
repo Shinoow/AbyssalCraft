@@ -22,6 +22,7 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.ITickable;
+import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.EnumDifficulty;
 
@@ -70,7 +71,7 @@ public class TileEntityShoggothBiomass extends TileEntity implements ITickable {
 				cooldown = worldObj.rand.nextInt(10);
 				resetNearbyBiomass(true);
 				if(!worldObj.isRemote)
-					if(worldObj.getEntitiesWithinAABB(EntityLesserShoggoth.class, worldObj.getBlockState(pos).getBlock().getBoundingBox(worldObj.getBlockState(pos), worldObj, pos).expand(16, 16, 16)).size() <= 6){
+					if(worldObj.getEntitiesWithinAABB(EntityLesserShoggoth.class, new AxisAlignedBB(pos).expand(16, 16, 16)).size() <= 6){
 						EntityLesserShoggoth mob = new EntityLesserShoggoth(worldObj);
 						setPosition(mob, pos.getX(), pos.getY(), pos.getZ());
 						mob.onInitialSpawn(worldObj.getDifficultyForLocation(pos), (IEntityLivingData)null);

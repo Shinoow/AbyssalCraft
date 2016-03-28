@@ -16,7 +16,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
-import net.minecraft.block.BlockButton;
 import net.minecraft.block.BlockDirectional;
 import net.minecraft.block.BlockDoor;
 import net.minecraft.block.BlockLadder;

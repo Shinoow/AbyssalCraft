@@ -52,6 +52,7 @@ import com.shinoow.abyssalcraft.common.entity.EntityShadowCreature;
 import com.shinoow.abyssalcraft.common.entity.EntityShadowMonster;
 import com.shinoow.abyssalcraft.common.ritual.NecronomiconBreedingRitual;
 import com.shinoow.abyssalcraft.common.ritual.NecronomiconDreadSpawnRitual;
+import com.shinoow.abyssalcraft.common.ritual.NecronomiconRespawnJzaharRitual;
 
 public class AbyssalCrafting {
 
@@ -888,6 +889,7 @@ public class AbyssalCrafting {
 		Object[] staffofferings = new Object[]{new ItemStack(AbyssalCraft.essence, 1, 1), new ItemStack(AbyssalCraft.essence, 1, 2), AbyssalCraft.eldritchScale, AbyssalCraft.ethaxiumIngot,
 				AbyssalCraft.eldritchScale, AbyssalCraft.ethaxiumIngot, AbyssalCraft.eldritchScale, new ItemStack(AbyssalCraft.essence, 1, 0)};
 		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("jzaharStaff", 4, AbyssalCraft.configDimId3, 15000F, true, new ItemStack(AbyssalCraft.Staff), AbyssalCraft.drainStaff, staffofferings));
+		RitualRegistry.instance().registerRitual(new NecronomiconRespawnJzaharRitual());
 	}
 
 	private static void addDisruptions(){

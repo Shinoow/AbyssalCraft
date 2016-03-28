@@ -12,11 +12,13 @@
 package com.shinoow.abyssalcraft.common.items.armor;
 
 import net.minecraft.client.model.ModelBiped;
+import net.minecraft.client.model.ModelBiped.ArmPose;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.MobEffects;
 import net.minecraft.inventory.EntityEquipmentSlot;
+import net.minecraft.item.EnumAction;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionEffect;
@@ -71,12 +73,10 @@ public class ItemDreadiumSamuraiArmor extends ItemArmor {
 				armorModel.isSneak = entityLiving.isSneaking();
 				armorModel.isRiding = entityLiving.isRiding();
 				armorModel.isChild = entityLiving.isChild();
-				//				armorModel.heldItemRight = entityLiving.getEquipmentInSlot(0) != null ? 1 :0;
+				armorModel.rightArmPose = entityLiving.getHeldItemMainhand() != null ? entityLiving.getHeldItemMainhand().getItemUseAction() == EnumAction.BLOCK && entityLiving.getItemInUseCount() > 0 ? ArmPose.BLOCK : entityLiving.getHeldItemMainhand().getItemUseAction() == EnumAction.BOW && entityLiving.getItemInUseCount() > 0 ? ArmPose.BOW_AND_ARROW : ArmPose.ITEM : ArmPose.EMPTY;
+				armorModel.leftArmPose = entityLiving.getHeldItemOffhand() != null ? entityLiving.getHeldItemOffhand().getItemUseAction() == EnumAction.BLOCK && entityLiving.getItemInUseCount() > 0 ? ArmPose.BLOCK : entityLiving.getHeldItemMainhand() != null && entityLiving.getHeldItemMainhand().getItemUseAction() == EnumAction.BOW && entityLiving.getItemInUseCount() > 0 ? ArmPose.BOW_AND_ARROW : ArmPose.ITEM : ArmPose.EMPTY;
 				armorModel.swingProgress = entityLiving.swingProgress;
-				//				if(entityLiving instanceof EntityPlayer){
-				//					armorModel.aimedBow =((EntityPlayer)entityLiving).getItemInUseDuration() > 2 && ((EntityPlayer) entityLiving).getItemInUse().getItem().getItemUseAction(((EntityPlayer) entityLiving).getItemInUse()) == EnumAction.BOW;
-				//					armorModel.heldItemRight = ((EntityPlayer) entityLiving).isBlocking() ? 3 : entityLiving.getEquipmentInSlot(0) != null ? 1 :0;
-				//				}
+
 				return armorModel;
 			}
 		}

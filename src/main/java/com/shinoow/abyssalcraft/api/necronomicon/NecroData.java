@@ -38,7 +38,7 @@ public class NecroData {
 	 * The base data structure for Necronomicon information pages
 	 * @param title Title to display on the "Index" for the information page
 	 * @param info Optional text to write beside buttons for sub-category pages
-	 * @param datas Page data for sub-category pages
+	 * @param chapters Chapters for sub-category pages
 	 */
 	public NecroData(String identifier, String title, String info,Chapter...chapters){
 		this.identifier = identifier;
@@ -50,7 +50,7 @@ public class NecroData {
 	/**
 	 * The base data structure for Necronomicon information pages
 	 * @param title Title to display on the "Index" for the information page
-	 * @param datas Page data for sub-category pages
+	 * @param chapters Chapters for sub-category pages
 	 */
 	public NecroData(String identifier, String title,Chapter...chapters){
 		this(identifier, title, null, chapters);
@@ -145,48 +145,6 @@ public class NecroData {
 	//	public String toString(){
 	//		return "NecroData{Title: "+title + ",Information: "+(information != null ? "Yes" : "No") +",PageData: "+pageData.toString() +"}";
 	//	}
-
-	/**
-	 * Deprecated: use the new format
-	 */
-	@Deprecated
-	public NecroData(String title, String info,PageData...datas){}
-
-	/**
-	 * Deprecated: use the new format
-	 */
-	@Deprecated
-	public NecroData(String title,PageData...datas){}
-	@Deprecated
-	public PageData[] getPageData(){ return null; }
-	@Deprecated
-	public String getPageTitle(int index){ return null; }
-	@Deprecated
-	public Object[] getPageIcons(int index){ return null; }
-
-	@Deprecated
-	public static class PageData{
-		/**
-		 * Deprecated: use the new format
-		 */
-		@Deprecated
-		public PageData(int num, String title, String...strings){}
-		/**
-		 * Deprecated: use the new format
-		 */
-		@Deprecated
-		public PageData(int num, String title, Object[] stuff, String...strings){}
-		@Deprecated
-		public String[] getPages(){ return null; }
-		@Deprecated
-		public int getPageAmount(){ return 0; }
-		@Deprecated
-		public String getTitle(){ return null; }
-		@Deprecated
-		public Object getIcon(int index){ return null; }
-		@Deprecated
-		public Object[] getIcons(){ return null; }
-	}
 
 	/**
 	 * A Necronomicon Chapter (collection of pages)

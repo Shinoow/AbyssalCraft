@@ -160,7 +160,4 @@ public class ACBlocks {
 	private static Block getBlock(String name){
 		return GameRegistry.findBlock("abyssalcraft", name);
 	}
-
-	@Deprecated
-	public static Block fist_of_chagaroth_spawner;
 }

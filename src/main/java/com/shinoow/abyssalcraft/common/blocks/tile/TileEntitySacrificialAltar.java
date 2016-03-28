@@ -25,6 +25,7 @@ import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.ITickable;
+import net.minecraft.util.math.AxisAlignedBB;
 
 import com.shinoow.abyssalcraft.api.energy.IEnergyContainer;
 import com.shinoow.abyssalcraft.api.energy.IEnergyTransporter;
@@ -102,19 +103,18 @@ public class TileEntitySacrificialAltar extends TileEntity implements IEnergyCon
 					consumeEnergy(1);
 				}
 
-		if(entity == null)
-			if(worldObj.getBlockState(pos).getBlock().getBoundingBox(worldObj.getBlockState(pos), worldObj, pos) != null){
-				List<EntityLivingBase> mobs = worldObj.getEntitiesWithinAABB(EntityLivingBase.class, worldObj.getBlockState(pos).getBlock().getBoundingBox(worldObj.getBlockState(pos), worldObj, pos).expand(8, 3, 8));
+		if(entity == null){
+			List<EntityLivingBase> mobs = worldObj.getEntitiesWithinAABB(EntityLivingBase.class, new AxisAlignedBB(pos).expand(8, 3, 8));
 
-				for(EntityLivingBase mob : mobs)
-					if(!(mob instanceof EntityPlayer))
-						if(mob.getCreatureAttribute() != EnumCreatureAttribute.UNDEAD)
-							if(mob.isEntityAlive())
-								if(!mob.isChild()){
-									entity = mob;
-									break;
-								}
-			}
+			for(EntityLivingBase mob : mobs)
+				if(!(mob instanceof EntityPlayer))
+					if(mob.getCreatureAttribute() != EnumCreatureAttribute.UNDEAD)
+						if(mob.isEntityAlive())
+							if(!mob.isChild()){
+								entity = mob;
+								break;
+							}
+		}
 
 		if(entity != null){
 			if(getContainedEnergy() < getMaxEnergy())

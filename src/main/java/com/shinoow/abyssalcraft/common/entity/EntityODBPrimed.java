@@ -36,7 +36,7 @@ public class EntityODBPrimed extends Entity {
 	public EntityODBPrimed(World par1World)
 	{
 		super(par1World);
-		fuse = 0;
+		fuse = 200;
 		preventEntitySpawning = true;
 		setSize(0.98F, 0.98F);
 	}

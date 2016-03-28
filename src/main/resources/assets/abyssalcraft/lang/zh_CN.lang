@@ -195,6 +195,7 @@ message.remnant.busy=对不起, 我正在招待一个客人, 不久会回来的.
 message.remnant.insult.0=%s, 你说Aklo就像mod制作者说1.8一样.
 message.remnant.insult.1=你什么都不知道, %s.
 message.remnant.insult.2=没有了死灵之书你什么都不是, %s.
+message.jzahar.respawn=I sense time was turned back. Did you fail to defeat me, %s?
 
 #Container Inventories
 container.abyssalcraft.crate=板条箱
@@ -253,6 +254,7 @@ necronomicon.gettingstarted=新手入门
 necronomicon.potentialenergy=位能
 necronomicon.turnupindicator=翻转 %2$s 的 %1$s
 necronomicon.miscinformation=Misc Information
+necronomicon.information.enchantments=Enchantments
 
 #Necronomicon Text
 #Note: the maximum amount of letters per string is 368
@@ -422,6 +424,11 @@ necronomicon.text.crafting.odb=A Oblivion Deathbomb is crafted with Obsidian, A 
 necronomicon.text.crafting.carboncluster=A Carbon Cluster is crafted with Crystallized Carbon. They are used in order to craft Dense Carbon Clusters.
 necronomicon.text.crafting.densecarboncluster=A Dense Carbon Cluster is crafted with Carbon Clusters and a block of Obsidian. Can be transmuted into a Diamond.
 necronomicon.text.crafting.crate=A Wooden Crate is crafted with Sticks, Wooden Planks and a Chest. Has an extra row of inventory slots more than a Chest.
+
+necronomicon.text.enchantment.coralium=The Coralium Enchantment allows you to infect any entity you hit with the Coralium Plague (that is, if they aren't immune).
+necronomicon.text.enchantment.dread=The Dread Enchantment allows you to infect any entity you hit with the Dread Plague (that is, if they aren't immune).
+necronomicon.text.enchantment.lightpierce=The Light Pierce Enchantment works like Bane of Arthropods, but on Shadow mobs.
+necronomicon.text.enchantment.ironwall=The Iron Wall Enchantment works as a anti-knockback enchantment, repelling knockback applied when hit.
 
 necronomicon.text.overworld.progression.1=要想到达深渊荒芜之地, 你必须合成一把门钥匙, 这需要你旅行过下界和黑暗之地和水域. 水域可以是沼泽或者海洋.
 necronomicon.text.overworld.progression.2=From the Nether you need 2 Blaze Rods, and probably a few more for later. From the Darklands biome you need to slay living shadows to finally obtain Shadow Gems. They are most commonly found in Darklands Mountains biomes. It is recommended to obtain a Staff of Rending in order to obtain Shadow Gems faster (more information in the special armor and tools section).
@@ -667,6 +674,8 @@ ac.ritual.saOMTupgrade=奥穆索献祭祭坛
 ac.ritual.saOMTupgrade.desc=奥穆索献祭祭坛能通过将伊桑斯石砖, 黑暗伊桑斯石砖, 阴影宝石碎片和珊瑚宝石注入到一个恐惧之地献祭祭坛里获得.
 ac.ritual.jzaharStaff=Staff of The Gatekeeper
 ac.ritual.jzaharStaff.desc=A Staff of The Gatekeeper is created by infusing a Staff of Rending with a Abyssal Wasteland Essence, a Dreadlands Essence, a Omothol Essence, Eldritch Scales and Ethaxium Ingots.
+ac.ritual.respawnJzahar=Ritual of reversed time
+ac.ritual.respawnJzahar.desc=If you in some way failed to obtain a Essence of The Gatekeeper, you can revert time and fight J'zahar again. Can only be performed at the Ritual Altar inside the Temple of J'zahar (X=4, Y=54, Z=85).
 
 #Configuration
 ac_dimensions=维度

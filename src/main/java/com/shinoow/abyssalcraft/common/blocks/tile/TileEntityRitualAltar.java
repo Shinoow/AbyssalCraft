@@ -18,9 +18,9 @@ import net.minecraft.network.NetworkManager;
 import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.EnumHand;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.ITickable;
+import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
@@ -244,15 +244,15 @@ public class TileEntityRitualAltar extends TileEntity implements ITickable, IRit
 	public void performRitual(World world, BlockPos pos, EntityPlayer player){
 
 		if(!isPerformingRitual()){
-			ItemStack item = player.getHeldItem(EnumHand.MAIN_HAND);
+			ItemStack item = player.getHeldItemMainhand();
 			if(item.getItem() instanceof ItemNecronomicon)
 				if(RitualRegistry.instance().canPerformAction(world.provider.getDimension(), ((ItemNecronomicon)item.getItem()).getBookType()))
 					if(canPerform()){
 						ritual = RitualRegistry.instance().getRitual(world.provider.getDimension(), ((ItemNecronomicon)item.getItem()).getBookType(), offers, this.item);
 						if(ritual != null)
 							if(ritual.canRemnantAid()){
-								if(!world.getEntitiesWithinAABB(EntityRemnant.class, world.getBlockState(pos).getBlock().getBoundingBox(world.getBlockState(pos), world, pos).expand(32, 32, 32)).isEmpty()
-										&& world.getEntitiesWithinAABB(EntityRemnant.class, world.getBlockState(pos).getBlock().getBoundingBox(world.getBlockState(pos), world, pos).expand(32, 32, 32)).size() >= ritual.getBookType() + 1)
+								if(!world.getEntitiesWithinAABB(EntityRemnant.class, new AxisAlignedBB(pos).expand(32, 32, 32)).isEmpty()
+										&& world.getEntitiesWithinAABB(EntityRemnant.class, new AxisAlignedBB(pos).expand(32, 32, 32)).size() >= ritual.getBookType() + 1)
 									if(ritual.canCompleteRitual(world, pos, player))
 										if(!MinecraftForge.EVENT_BUS.post(new RitualEvent.Pre(player, ritual, world, pos))){
 											//											summonRemnants(world, pos);

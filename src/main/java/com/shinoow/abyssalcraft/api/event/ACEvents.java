@@ -48,11 +48,15 @@ public class ACEvents {
 	 */
 	public static class ItemTransmutedEvent extends PlayerEvent {
 
-		public final ItemStack transmuted;
+		private final ItemStack transmuted;
 
 		public ItemTransmutedEvent(EntityPlayer player, ItemStack crafting){
 			super(player);
 			transmuted = crafting;
+		}
+
+		public ItemStack getTransmutedStack(){
+			return transmuted;
 		}
 	}
 
@@ -73,11 +77,15 @@ public class ACEvents {
 	 */
 	public static class ItemCrystallizedEvent extends PlayerEvent {
 
-		public final ItemStack crystallized;
+		private final ItemStack crystallized;
 
 		public ItemCrystallizedEvent(EntityPlayer player, ItemStack crafting){
 			super(player);
 			crystallized = crafting;
+		}
+
+		public ItemStack getCrystallizedStack(){
+			return crystallized;
 		}
 	}
 
@@ -98,11 +106,15 @@ public class ACEvents {
 	 */
 	public static class ItemEngravedEvent extends PlayerEvent {
 
-		public final ItemStack engraved;
+		private final ItemStack engraved;
 
 		public ItemEngravedEvent(EntityPlayer player, ItemStack crafting){
 			super(player);
 			engraved = crafting;
+		}
+
+		public ItemStack getEngravedStack(){
+			return engraved;
 		}
 	}
 
@@ -123,11 +135,15 @@ public class ACEvents {
 	 */
 	public static class ItemMaterializedEvent extends PlayerEvent {
 
-		public final ItemStack materialized;
+		private final ItemStack materialized;
 
 		public ItemMaterializedEvent(EntityPlayer player, ItemStack crafting){
 			super(player);
 			materialized = crafting;
+		}
+
+		public ItemStack getMaterializedStack(){
+			return materialized;
 		}
 	}
 
@@ -155,15 +171,27 @@ public class ACEvents {
 	 * @since 1.4
 	 */
 	public static class RitualEvent extends PlayerEvent {
-		public final NecronomiconRitual ritual;
-		public final World world;
-		public final BlockPos pos;
+		private final NecronomiconRitual ritual;
+		private final World world;
+		private final BlockPos pos;
 
 		public RitualEvent(EntityPlayer player, NecronomiconRitual ritual, World world, BlockPos pos){
 			super(player);
 			this.ritual = ritual;
 			this.world = world;
 			this.pos = pos;
+		}
+
+		public NecronomiconRitual getRitual(){
+			return ritual;
+		}
+
+		public World getWorld(){
+			return world;
+		}
+
+		public BlockPos getPos(){
+			return pos;
 		}
 
 		@Cancelable

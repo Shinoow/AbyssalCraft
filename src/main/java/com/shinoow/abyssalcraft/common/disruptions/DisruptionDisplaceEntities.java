@@ -15,6 +15,7 @@ import java.util.List;
 
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
@@ -28,7 +29,7 @@ public class DisruptionDisplaceEntities extends DisruptionEntry {
 
 	@Override
 	public void disrupt(World world, BlockPos pos, List<EntityPlayer> players) {
-		List<EntityLivingBase> entities = world.getEntitiesWithinAABB(EntityLivingBase.class, world.getBlockState(pos).getBlock().getBoundingBox(world.getBlockState(pos), world, pos).expand(16, 16, 16));
+		List<EntityLivingBase> entities = world.getEntitiesWithinAABB(EntityLivingBase.class, new AxisAlignedBB(pos).expand(16, 16, 16));
 
 		if(!entities.isEmpty())
 			for(EntityLivingBase entity : entities){
