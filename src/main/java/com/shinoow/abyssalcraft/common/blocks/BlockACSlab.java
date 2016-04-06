@@ -31,7 +31,7 @@ import com.shinoow.abyssalcraft.AbyssalCraft;
 
 public abstract class BlockACSlab extends BlockSlab {
 
-	private static final PropertyBool VARIANT_PROPERTY = PropertyBool.create("variant");
+	public static final PropertyBool VARIANT_PROPERTY = PropertyBool.create("variant");
 
 	private Block singleSlab;
 

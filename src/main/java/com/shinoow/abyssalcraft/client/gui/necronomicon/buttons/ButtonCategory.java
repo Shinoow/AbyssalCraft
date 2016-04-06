@@ -11,8 +11,6 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.client.gui.necronomicon.buttons;
 
-import org.lwjgl.opengl.GL11;
-
 import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.client.gui.necronomicon.GuiNecronomicon;
 import com.shinoow.abyssalcraft.client.lib.GuiRenderHelper;
@@ -28,10 +26,9 @@ public class ButtonCategory extends GuiButton {
 
 	GuiNecronomicon gui;
 	Item icon;
-	float ticksHovered = 0F;
 
 	public ButtonCategory(int par1, int par2, int par3, GuiNecronomicon gui, String label, Item icon) {
-		super(par1, par2, par3, 120, 24, label);
+		super(par1, par2, par3, 110, 16, label);
 		this.gui = gui;
 		this.icon = icon;
 	}
@@ -40,10 +37,6 @@ public class ButtonCategory extends GuiButton {
 	public void drawButton(Minecraft mc, int mx, int my) {
 		FontRenderer fr = mc.fontRendererObj;
 		boolean inside = mx >= xPosition && my >= yPosition && mx < xPosition + width && my < yPosition + height;
-		float time = 5F;
-		if(inside)
-			ticksHovered = Math.min(time, ticksHovered);
-		else ticksHovered = Math.max(0F, ticksHovered);
 
 		ResourceLocation res = getTexture(icon);
 		if(res == null)
@@ -53,14 +46,16 @@ public class ButtonCategory extends GuiButton {
 
 		float s = 1F / 16F;
 
-		GL11.glPushMatrix();
+		GlStateManager.pushMatrix();
 		GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
 		GlStateManager.enableBlend();
 		GlStateManager.tryBlendFuncSeparate(770, 771, 1, 0);
 		GlStateManager.blendFunc(770, 771);
-		GuiRenderHelper.drawTexturedModalRect(xPosition + 5, yPosition + 5, zLevel, 0, 0, 16, 16, s, s);
-		GL11.glPopMatrix();
-		fr.drawString(displayString, xPosition + 20, yPosition + 10, 0);
+		if(inside)
+			GuiRenderHelper.drawGradientRect(xPosition, yPosition, zLevel, xPosition + width, yPosition + height, -2130706433, 0x505000);
+		GuiRenderHelper.drawTexturedModalRect(xPosition, yPosition, zLevel, 0, 0, 16, 16, s, s);
+		GlStateManager.popMatrix();
+		fr.drawString(displayString, xPosition + 17, yPosition + 3, 0);
 	}
 
 	ResourceLocation getTexture(Item par1){

@@ -1886,6 +1886,10 @@ public class StructureOmotholPieces
 		{
 			StructureOmotholPieces.func_176069_e((StructureOmotholPieces.Start)componentIn, listIn, rand, boundingBox.minX + 36, boundingBox.maxY - 4, boundingBox.minZ - 6, EnumFacing.WEST, getComponentType());
 			StructureOmotholPieces.func_176069_e((StructureOmotholPieces.Start)componentIn, listIn, rand, boundingBox.maxX - 36, boundingBox.maxY - 4, boundingBox.minZ - 6, EnumFacing.EAST, getComponentType());
+			StructureOmotholPieces.func_176069_e((StructureOmotholPieces.Start)componentIn, listIn, rand, boundingBox.minX - 5, boundingBox.maxY - 4, boundingBox.minZ + 30, EnumFacing.WEST, getComponentType());
+			StructureOmotholPieces.func_176069_e((StructureOmotholPieces.Start)componentIn, listIn, rand, boundingBox.maxX + 5, boundingBox.maxY - 4, boundingBox.minZ + 30, EnumFacing.EAST, getComponentType());
+			StructureOmotholPieces.func_176069_e((StructureOmotholPieces.Start)componentIn, listIn, rand, boundingBox.minX - 5, boundingBox.maxY - 4, boundingBox.maxZ - 30, EnumFacing.WEST, getComponentType());
+			StructureOmotholPieces.func_176069_e((StructureOmotholPieces.Start)componentIn, listIn, rand, boundingBox.maxX + 5, boundingBox.maxY - 4, boundingBox.maxZ - 30, EnumFacing.EAST, getComponentType());
 			StructureOmotholPieces.func_176069_e((StructureOmotholPieces.Start)componentIn, listIn, rand, boundingBox.minX + 39, boundingBox.maxY - 4, boundingBox.minZ - 8, EnumFacing.NORTH, getComponentType());
 			StructureOmotholPieces.func_176069_e((StructureOmotholPieces.Start)componentIn, listIn, rand, boundingBox.minX + 39, boundingBox.maxY - 4, boundingBox.maxZ + 5, EnumFacing.SOUTH, getComponentType());
 		}
@@ -1897,45 +1901,8 @@ public class StructureOmotholPieces
 		@Override
 		public boolean addComponentParts(World worldIn, Random randomIn, StructureBoundingBox structureBoundingBoxIn)
 		{
-			//                if (this.field_143015_k < 0)
-			//                {
-			//                    this.field_143015_k = this.getAverageGroundLevel(worldIn, structureBoundingBoxIn);
-			//
-			//                    if (this.field_143015_k < 0)
-			//                    {
-			//                        return true;
-			//                    }
-			//
-			//                    this.boundingBox.offset(0, this.field_143015_k - this.boundingBox.maxY + 3, 0);
-			//                }
 			StructureJzaharTemple temple = new StructureJzaharTemple();
 			temple.generate(worldIn, randomIn, new BlockPos(4, getYWithOffset(0), 7));
-			//                this.fillWithBlocks(worldIn, structureBoundingBoxIn, 1, 0, 1, 4, 12, 4, AbyssalCraft.ethaxiumbrick.getDefaultState(), Blocks.flowing_water.getDefaultState(), false);
-			//                this.setBlockState(worldIn, Blocks.air.getDefaultState(), 2, 12, 2, structureBoundingBoxIn);
-			//                this.setBlockState(worldIn, Blocks.air.getDefaultState(), 3, 12, 2, structureBoundingBoxIn);
-			//                this.setBlockState(worldIn, Blocks.air.getDefaultState(), 2, 12, 3, structureBoundingBoxIn);
-			//                this.setBlockState(worldIn, Blocks.air.getDefaultState(), 3, 12, 3, structureBoundingBoxIn);
-			//                this.setBlockState(worldIn, Blocks.oak_fence.getDefaultState(), 1, 13, 1, structureBoundingBoxIn);
-			//                this.setBlockState(worldIn, Blocks.oak_fence.getDefaultState(), 1, 14, 1, structureBoundingBoxIn);
-			//                this.setBlockState(worldIn, Blocks.oak_fence.getDefaultState(), 4, 13, 1, structureBoundingBoxIn);
-			//                this.setBlockState(worldIn, Blocks.oak_fence.getDefaultState(), 4, 14, 1, structureBoundingBoxIn);
-			//                this.setBlockState(worldIn, Blocks.oak_fence.getDefaultState(), 1, 13, 4, structureBoundingBoxIn);
-			//                this.setBlockState(worldIn, Blocks.oak_fence.getDefaultState(), 1, 14, 4, structureBoundingBoxIn);
-			//                this.setBlockState(worldIn, Blocks.oak_fence.getDefaultState(), 4, 13, 4, structureBoundingBoxIn);
-			//                this.setBlockState(worldIn, Blocks.oak_fence.getDefaultState(), 4, 14, 4, structureBoundingBoxIn);
-			//                this.fillWithBlocks(worldIn, structureBoundingBoxIn, 1, 15, 1, 4, 15, 4, AbyssalCraft.ethaxiumbrick.getDefaultState(), AbyssalCraft.ethaxiumbrick.getDefaultState(), false);
-			//
-			//                for (int i = 0; i <= 5; ++i)
-			//                {
-			//                    for (int j = 0; j <= 5; ++j)
-			//                    {
-			//                        if (j == 0 || j == 5 || i == 0 || i == 5)
-			//                        {
-			//                            this.setBlockState(worldIn, Blocks.gravel.getDefaultState(), j, 11, i, structureBoundingBoxIn);
-			//                            this.clearCurrentPositionBlocksUpwards(worldIn, j, 12, i, structureBoundingBoxIn);
-			//                        }
-			//                    }
-			//                }
 
 			return true;
 		}

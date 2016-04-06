@@ -18,6 +18,7 @@ import net.minecraft.network.NetworkManager;
 import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.ITickable;
@@ -251,8 +252,8 @@ public class TileEntityRitualAltar extends TileEntity implements ITickable, IRit
 						ritual = RitualRegistry.instance().getRitual(world.provider.getDimensionId(), ((ItemNecronomicon)item.getItem()).getBookType(), offers, this.item);
 						if(ritual != null)
 							if(ritual.canRemnantAid()){
-								if(!world.getEntitiesWithinAABB(EntityRemnant.class, world.getBlockState(pos).getBlock().getCollisionBoundingBox(world, pos, world.getBlockState(pos)).expand(32, 32, 32)).isEmpty()
-										&& world.getEntitiesWithinAABB(EntityRemnant.class, world.getBlockState(pos).getBlock().getCollisionBoundingBox(world, pos, world.getBlockState(pos)).expand(32, 32, 32)).size() >= ritual.getBookType() + 1)
+								if(!world.getEntitiesWithinAABB(EntityRemnant.class, new AxisAlignedBB(pos, pos.add(1, 1, 1)).expand(32, 32, 32)).isEmpty()
+										&& world.getEntitiesWithinAABB(EntityRemnant.class, new AxisAlignedBB(pos, pos.add(1, 1, 1)).expand(32, 32, 32)).size() >= ritual.getBookType() + 1)
 									if(ritual.canCompleteRitual(world, pos, player))
 										if(!MinecraftForge.EVENT_BUS.post(new RitualEvent.Pre(player, ritual, world, pos))){
 											//											summonRemnants(world, pos);

@@ -86,7 +86,7 @@ import com.shinoow.abyssalcraft.common.world.biome.*;
 @Mod(modid = AbyssalCraft.modid, name = AbyssalCraft.name, version = AbyssalCraft.version,dependencies = "required-after:Forge@[forgeversion,);after:JEI@[2.25,)", useMetadata = false, guiFactory = "com.shinoow.abyssalcraft.client.config.ACGuiFactory", acceptedMinecraftVersions = "[1.8.9]", updateJSON = "https://raw.githubusercontent.com/Shinoow/AbyssalCraft/master/version.json")
 public class AbyssalCraft {
 
-	public static final String version = "1.9.0";
+	public static final String version = "1.9.1";
 	public static final String modid = "abyssalcraft";
 	public static final String name = "AbyssalCraft";
 
@@ -139,7 +139,7 @@ public class AbyssalCraft {
 	darkethaxiumslab2, darkethaxiumfence, ritualaltar, ritualpedestal, shoggothBlock, cthulhuStatue,
 	hasturStatue, jzaharStatue, azathothStatue, nyarlathotepStatue, yogsothothStatue, shubniggurathStatue,
 	monolithStone, shoggothBiomass, energyPedestal, monolithPillar, sacrificialAltar, tieredEnergyPedestal,
-	tieredSacrificialAltar, jzaharspawner, gatekeeperminionspawner;
+	tieredSacrificialAltar, jzaharspawner, gatekeeperminionspawner, mimicFire;
 
 	//Overworld biomes
 	public static BiomeGenBase Darklands, DarklandsForest, DarklandsPlains, DarklandsHills,
@@ -309,7 +309,7 @@ public class AbyssalCraft {
 		MinecraftForge.EVENT_BUS.register(this);
 		NetworkRegistry.INSTANCE.registerGuiHandler(this, new CommonProxy());
 		instance = this;
-		AbyssalCraftAPI.internalNDHandler = new InternalNecroDataHandler();
+		AbyssalCraftAPI.setInternalNDHandler(new InternalNecroDataHandler());
 
 		cfg = new Configuration(event.getSuggestedConfigurationFile());
 		syncConfig();
@@ -476,6 +476,7 @@ public class AbyssalCraft {
 		tieredSacrificialAltar = new BlockTieredSacrificialAltar();
 		jzaharspawner = new BlockJzaharSpawner().setUnlocalizedName("jzaharspawner");
 		gatekeeperminionspawner = new BlockGatekeeperMinionSpawner().setUnlocalizedName("gatekeeperminionspawner");
+		mimicFire = new BlockMimicFire().setUnlocalizedName("fire");
 
 		checkBiomeIds(true);
 
@@ -916,6 +917,7 @@ public class AbyssalCraft {
 		GameRegistry.registerBlock(tieredSacrificialAltar, ItemMetadataBlock.class, "tieredsacrificialaltar");
 		GameRegistry.registerBlock(jzaharspawner, "jzaharspawner");
 		GameRegistry.registerBlock(gatekeeperminionspawner, "gatekeeperminionspawner");
+		GameRegistry.registerBlock(mimicFire, "fire");
 
 		//Item Register
 		GameRegistry.registerItem(devsword, "devsword");
@@ -1313,7 +1315,7 @@ public class AbyssalCraft {
 		addDungeonHooks();
 		sendIMC();
 		PacketDispatcher.registerPackets();
-		IntegrationHandler.preInit();
+		IntegrationHandler.preInit(event.getAsmData());
 	}
 
 	@EventHandler
@@ -1396,7 +1398,7 @@ public class AbyssalCraft {
 		GameRegistry.registerWorldGenerator(new AbyssalCraftWorldGenerator(), 0);
 		GameRegistry.registerFuelHandler(new FurnaceFuelHandler());
 		AbyssalCrafting.addRecipes();
-		AbyssalCraftAPI.internalNDHandler.registerInternalPages();
+		AbyssalCraftAPI.getInternalNDHandler().registerInternalPages();
 		IntegrationHandler.init();
 	}
 
@@ -1407,13 +1409,14 @@ public class AbyssalCraft {
 		proxy.postInit();
 		IntegrationHandler.postInit();
 		((BlockCLiquid) Cwater).addBlocks();
+		((BlockShoggothOoze) shoggothBlock).initBlacklist();
 		checkBiomeIds(false);
 		ACLogger.info("AbyssalCraft loaded.");
 	}
 
 	@EventHandler
 	public void serverStart(FMLServerAboutToStartEvent event){
-		String clname = AbyssalCraftAPI.internalNDHandler.getClass().getName();
+		String clname = AbyssalCraftAPI.getInternalNDHandler().getClass().getName();
 		String expect = "com.shinoow.abyssalcraft.common.handlers.InternalNecroDataHandler";
 		if(!clname.equals(expect)) {
 			new IllegalAccessError("The AbyssalCraft API internal NecroData handler has been overriden. "
@@ -1625,9 +1628,7 @@ public class AbyssalCraft {
 						failed = true;
 						return;
 					}
-					if(stuff.hasKey("quantity") && stuff.hasKey("meta"))
-						AbyssalCraftAPI.addTransmutation(input, output, stuff.getInteger("quantity"), stuff.getInteger("meta"), stuff.getFloat("xp"));
-					else if(stuff.hasKey("quantity"))
+					if(stuff.hasKey("quantity"))
 						AbyssalCraftAPI.addTransmutation(input, output, stuff.getInteger("quantity"), stuff.getFloat("xp"));
 					else AbyssalCraftAPI.addTransmutation(input, output, stuff.getFloat("xp"));
 				}

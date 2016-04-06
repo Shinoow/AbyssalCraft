@@ -20,6 +20,7 @@ import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.ITickable;
@@ -70,7 +71,7 @@ public class TileEntityShoggothBiomass extends TileEntity implements ITickable {
 				cooldown = worldObj.rand.nextInt(10);
 				resetNearbyBiomass(true);
 				if(!worldObj.isRemote)
-					if(worldObj.getEntitiesWithinAABB(EntityLesserShoggoth.class, worldObj.getBlockState(pos).getBlock().getCollisionBoundingBox(worldObj, pos, worldObj.getBlockState(pos)).expand(16, 16, 16)).size() <= 6){
+					if(worldObj.getEntitiesWithinAABB(EntityLesserShoggoth.class, new AxisAlignedBB(pos, pos.add(1, 1, 1)).expand(16, 16, 16)).size() <= 6){
 						EntityLesserShoggoth mob = new EntityLesserShoggoth(worldObj);
 						setPosition(mob, pos.getX(), pos.getY(), pos.getZ());
 						mob.onInitialSpawn(worldObj.getDifficultyForLocation(pos), (IEntityLivingData)null);

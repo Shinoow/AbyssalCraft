@@ -195,6 +195,7 @@ message.remnant.busy=Sorry, I'm currently busy with a customer, come back later.
 message.remnant.insult.0=%s, you speak Aklo just as well as modders speak 1.8.
 message.remnant.insult.1=You know nothing, %s.
 message.remnant.insult.2=You're worthless without a Necronomicon, %s.
+message.jzahar.respawn=I sense time was turned back. Did you fail to defeat me, %s?
 
 #Container Inventories
 container.abyssalcraft.crate=Crate
@@ -252,6 +253,8 @@ necronomicon.remnanthelp=Remnant help needed
 necronomicon.gettingstarted=Getting Started
 necronomicon.potentialenergy=Potential Energy
 necronomicon.turnupindicator=Turn-up %1$s of %2$s
+necronomicon.miscinformation=Misc Information
+necronomicon.information.enchantments=Enchantments
 
 #Necronomicon Text
 #Note: the maximum amount of letters per string is 368
@@ -297,6 +300,8 @@ necronomicon.text.abyssal=This is the first layer of the Abyss, a place that's d
 necronomicon.text.dreadlands=Previously a world of Abyssalnite, the Dreadlands got it's name when the Dread Plague was unleashed on it, killing all miners and corrupting the peaceful Abyssalnite Golems. The second layer of the Abyss holds lost souls of the living.
 necronomicon.text.omothol=A endless temple city built at the very edge of sanity. The Realm of J'zahar holds the only entrance to where The Great Old Ones dwell. The Gatekeeper is always watching, and nobody leaves the final layer of the Abyss alive.
 necronomicon.text.darkrealm=Beneath Omothol lies the realm where the immortal souls of evil demonic gods rest, awaiting their reincarnation. The Dark Realm is where living shadows are born, and the last place a living souls should ever visit, as they will face eternal suffering.
+
+necronomicon.text.miscinformation=In this section you can find miscellaneous information not mentioned anywhere else in the Necronomicon.
 
 necronomicon.text.materials.abyssalnite.1=Abyssalnite is a new ore found in Darklands biomes. It is stronger than diamonds, and can be used to create tools, weapons and armor. Can be found below Y = 32.
 necronomicon.text.materials.abyssalnite.2=When mined, it drops ore blocks to smelt for ingots. The ingots are purple, much like the ore itself.
@@ -407,6 +412,23 @@ necronomicon.text.crafting.monolithpillar.1=A Monolith Stone Pillar is crafted w
 necronomicon.text.crafting.ritualcharm.1=A Ritual Charm is crafted with Gold Ingots and a Diamond. By itself it has no effect, but through rituals it can amplify various stats of Potential Energy Manipulators.
 necronomicon.text.crafting.sacrificialaltar.1=A Sacrificial Altar is crafted with Torches, Monolith Stone, A Shadow Gem and a Coralium Pearl. They convert life-force into Potential Energy.
 necronomicon.text.crafting.sacrificialaltar.2=When a entity is targeted, it will emit smoke particles. Once the entity dies, an amount of PE equal to it's max health will be collected. It only targets non-undead adult entities that aren't players. It should be noted that the altar goes on a cooldown after collecting a certain amount of PE, preventing collection for a minute.
+
+necronomicon.text.crafting.upgradekit.1=A Upgrade Kit is crafted with Wooden Planks, Cobblestone, String and Flint. Upgrade kits can upgrade tools and armor through crafting.
+necronomicon.text.crafting.upgradekit.2=To upgrade a kit, you need 2 units of the next material and 1 of the current. Materials are Wood -> Cobblestone -> Iron -> Gold -> Diamond -> Abyssalnite -> Refined Coralium -> Dreadium -> Ethaxium.
+necronomicon.text.crafting.ironplate=A Iron Plate is crafted with 2 Iron Ingots. Iron Plates can enhance the saturation of certain food.
+necronomicon.text.crafting.washcloth=A Washcloth is crafted with Wool and Cobweb. It's used to clean Dirty Plates (given when eating plate food).
+necronomicon.text.crafting.mre=A MRE (Meal, Ready to Eat) is crafted with a Iron Plate, a Carrot, a Potato and a Steak. It fills the entire food bar when eaten.
+necronomicon.text.crafting.platefood=Any Vanilla foodstuffs (and Fried Eggs) combined with a Iron Plate will create plate food (which has twice the saturation of the normal). Returns a Dirty Plate when eaten.
+necronomicon.text.crafting.odbcore=A ODB Core is crafted with Abyssalnite Ingots, Iron Ingots, Iron Blocks and a Coralium Pearl. Can be used as an explosive.
+necronomicon.text.crafting.odb=A Oblivion Deathbomb is crafted with Obsidian, A ODB Core, A Oblivion Catalyst, a Liquid Coralium Bucket and a Liquid Antimatter Bucket. Heavy explosive.
+necronomicon.text.crafting.carboncluster=A Carbon Cluster is crafted with Crystallized Carbon. They are used in order to craft Dense Carbon Clusters.
+necronomicon.text.crafting.densecarboncluster=A Dense Carbon Cluster is crafted with Carbon Clusters and a block of Obsidian. Can be transmuted into a Diamond.
+necronomicon.text.crafting.crate=A Wooden Crate is crafted with Sticks, Wooden Planks and a Chest. Has an extra row of inventory slots more than a Chest.
+
+necronomicon.text.enchantment.coralium=The Coralium Enchantment allows you to infect any entity you hit with the Coralium Plague (that is, if they aren't immune).
+necronomicon.text.enchantment.dread=The Dread Enchantment allows you to infect any entity you hit with the Dread Plague (that is, if they aren't immune).
+necronomicon.text.enchantment.lightpierce=The Light Pierce Enchantment works like Bane of Arthropods, but on Shadow mobs.
+necronomicon.text.enchantment.ironwall=The Iron Wall Enchantment works as a anti-knockback enchantment, repelling knockback applied when hit.
 
 necronomicon.text.overworld.progression.1=In order to reach the Abyssal Wasteland, one must craft a Gateway Key, which requires one to travel to the Nether, and to visit a Darklands and a water-based biome. The water-based biome can be either a swamp or a ocean biome.
 necronomicon.text.overworld.progression.2=From the Nether you need 2 Blaze Rods, and probably a few more for later. From the Darklands biome you need to slay living shadows to finally obtain Shadow Gems. They are most commonly found in Darklands Mountains biomes. It is recommended to obtain a Staff of Rending in order to obtain Shadow Gems faster (more information in the special armor and tools section).
@@ -652,6 +674,8 @@ ac.ritual.saOMTupgrade=Omothol Sacrificial Altar
 ac.ritual.saOMTupgrade.desc=A Omothol Sacrificial is created by infusing a Dreadlands Sacrificial Altar with Ethaxium Bricks, Dark Ethaxium Bricks, Shadow Gem Shards and Coralium Gems.
 ac.ritual.jzaharStaff=Staff of The Gatekeeper
 ac.ritual.jzaharStaff.desc=A Staff of The Gatekeeper is created by infusing a Staff of Rending with a Abyssal Wasteland Essence, a Dreadlands Essence, a Omothol Essence, Eldritch Scales and Ethaxium Ingots.
+ac.ritual.respawnJzahar=Ritual of reversed time
+ac.ritual.respawnJzahar.desc=If you in some way failed to obtain a Essence of The Gatekeeper, you can revert time and fight J'zahar again. Can only be performed at the Ritual Altar inside the Temple of J'zahar (X=4, Y=54, Z=85).
 
 #Configuration
 ac_dimensions=Dimensions

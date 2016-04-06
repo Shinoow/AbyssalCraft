@@ -24,6 +24,7 @@ import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.pathfinding.PathNavigateGround;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.MathHelper;
@@ -63,21 +64,21 @@ public class EntityDemonAnimal extends EntityMob implements IDreadEntity {
 	{
 		super.onLivingUpdate();
 
-		int i = MathHelper.floor_double(posX);
-		int j = MathHelper.floor_double(posY);
-		int k = MathHelper.floor_double(posZ);
+		if(!worldObj.isRemote && canBurn){
+			int i = MathHelper.floor_double(posX);
+			int j = MathHelper.floor_double(posY);
+			int k = MathHelper.floor_double(posZ);
 
-		for (int l = 0; l < 4; ++l)
-		{
-			i = MathHelper.floor_double(posX + (l % 2 * 2 - 1) * 0.25F);
-			j = MathHelper.floor_double(posY);
-			k = MathHelper.floor_double(posZ + (l / 2 % 2 * 2 - 1) * 0.25F);
-			BlockPos pos = new BlockPos(i, j, k);
+			for (int l = 0; l < 4; ++l)
+			{
+				i = MathHelper.floor_double(posX + (l % 2 * 2 - 1) * 0.25F);
+				j = MathHelper.floor_double(posY);
+				k = MathHelper.floor_double(posZ + (l / 2 % 2 * 2 - 1) * 0.25F);
+				BlockPos pos = new BlockPos(i, j, k);
 
-			if (worldObj.provider.getDimensionId() != AbyssalCraft.configDimId2 && worldObj.provider.getDimensionId() != 0 && worldObj.getBlockState(pos).getBlock().getMaterial() == Material.air &&
-					worldObj.getBiomeGenForCoords(pos).getFloatTemperature(pos) < 10.0F && Blocks.fire.canPlaceBlockAt(worldObj, pos) || canBurn == true &&
-					worldObj.getBlockState(pos).getBlock().getMaterial() == Material.air && worldObj.getBiomeGenForCoords(pos).getFloatTemperature(pos) < 10.0F && Blocks.fire.canPlaceBlockAt(worldObj, pos))
-				worldObj.setBlockState(pos, Blocks.fire.getDefaultState());
+				if (worldObj.getBlockState(pos).getBlock().getMaterial() == Material.air && Blocks.fire.canPlaceBlockAt(worldObj, pos))
+					worldObj.setBlockState(pos, AbyssalCraft.mimicFire.getDefaultState());
+			}
 		}
 	}
 
@@ -89,11 +90,29 @@ public class EntityDemonAnimal extends EntityMob implements IDreadEntity {
 	}
 
 	@Override
+	public void readEntityFromNBT(NBTTagCompound par1NBTTagCompound)
+	{
+		super.readEntityFromNBT(par1NBTTagCompound);
+
+		canBurn = par1NBTTagCompound.getBoolean("CanBurn");
+
+	}
+
+	@Override
+	public void writeEntityToNBT(NBTTagCompound par1NBTTagCompound)
+	{
+		super.writeEntityToNBT(par1NBTTagCompound);
+
+		par1NBTTagCompound.setBoolean("CanBurn", canBurn);
+	}
+
+	@Override
 	public IEntityLivingData onInitialSpawn(DifficultyInstance difficulty, IEntityLivingData par1EntityLivingData)
 	{
 		Object data = super.onInitialSpawn(difficulty, par1EntityLivingData);
 
-		if(worldObj.provider.getDimensionId() == 0 && AbyssalCraft.demonAnimalFire == true && rand.nextInt(3) == 0)
+		if(worldObj.provider.getDimensionId() == 0 && AbyssalCraft.demonAnimalFire == true && rand.nextInt(3) == 0
+				|| worldObj.provider.getDimensionId() == -1 && rand.nextBoolean())
 			canBurn = true;
 
 		return (IEntityLivingData)data;

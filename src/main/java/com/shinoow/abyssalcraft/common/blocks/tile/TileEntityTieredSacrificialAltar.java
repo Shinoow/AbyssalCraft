@@ -27,6 +27,7 @@ import net.minecraft.network.NetworkManager;
 import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.ITickable;
 
@@ -103,19 +104,18 @@ public class TileEntityTieredSacrificialAltar extends TileEntity implements IEne
 					consumeEnergy(1);
 				}
 
-		if(entity == null)
-			if(worldObj.getBlockState(pos).getBlock().getCollisionBoundingBox(worldObj, pos, worldObj.getBlockState(pos)) != null){
-				List<EntityLivingBase> mobs = worldObj.getEntitiesWithinAABB(EntityLivingBase.class, worldObj.getBlockState(pos).getBlock().getCollisionBoundingBox(worldObj, pos, worldObj.getBlockState(pos)).expand(8, 3, 8));
+		if(entity == null){
+			List<EntityLivingBase> mobs = worldObj.getEntitiesWithinAABB(EntityLivingBase.class, new AxisAlignedBB(pos, pos.add(1, 1, 1)).expand(8, 3, 8));
 
-				for(EntityLivingBase mob : mobs)
-					if(!(mob instanceof EntityPlayer))
-						if(mob.getCreatureAttribute() != EnumCreatureAttribute.UNDEAD)
-							if(mob.isEntityAlive())
-								if(!mob.isChild()){
-									entity = mob;
-									break;
-								}
-			}
+			for(EntityLivingBase mob : mobs)
+				if(!(mob instanceof EntityPlayer))
+					if(mob.getCreatureAttribute() != EnumCreatureAttribute.UNDEAD)
+						if(mob.isEntityAlive())
+							if(!mob.isChild()){
+								entity = mob;
+								break;
+							}
+		}
 
 		if(entity != null){
 			if(getContainedEnergy() < getMaxEnergy())

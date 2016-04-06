@@ -278,9 +278,9 @@ public class EntityJzahar extends EntityMob implements IBossDisplayData, IRanged
 	{
 		++deathTicks;
 
-		if(deathTicks <= 200){
+		if(deathTicks <= 800){
 			worldObj.spawnParticle(EnumParticleTypes.SMOKE_LARGE, posX, posY + 1.5D, posZ, 0, 0, 0);
-			if (deathTicks >= 190 && deathTicks <= 200){
+			if (deathTicks >= 790 && deathTicks <= 800){
 				worldObj.spawnParticle(EnumParticleTypes.EXPLOSION_HUGE, posX, posY + 1.5D, posZ, 0.0D, 0.0D, 0.0D);
 				worldObj.playSoundAtEntity(this, "random.explode", 4, (1.0F + (rand.nextFloat() - rand.nextFloat()) * 0.2F) * 0.7F);
 			}
@@ -290,7 +290,7 @@ public class EntityJzahar extends EntityMob implements IBossDisplayData, IRanged
 		int j;
 
 		if (!worldObj.isRemote)
-			if (deathTicks > 150 && deathTicks % 5 == 0)
+			if (deathTicks > 750 && deathTicks % 5 == 0)
 			{
 				i = 500;
 
@@ -299,7 +299,7 @@ public class EntityJzahar extends EntityMob implements IBossDisplayData, IRanged
 					j = EntityXPOrb.getXPSplit(i);
 					i -= j;
 					worldObj.spawnEntityInWorld(new EntityXPOrb(worldObj, posX, posY, posZ, j));
-					if(deathTicks == 100 || deathTicks == 120 || deathTicks == 140 || deathTicks == 160 || deathTicks == 180){
+					if(deathTicks == 700 || deathTicks == 720 || deathTicks == 740 || deathTicks == 760 || deathTicks == 780){
 						worldObj.spawnEntityInWorld(new EntityItem(worldObj, posX + posneg(3), posY + rand.nextInt(3), posZ + posneg(3), new ItemStack(AbyssalCraft.abyingot)));
 						worldObj.spawnEntityInWorld(new EntityItem(worldObj, posX + posneg(3), posY + rand.nextInt(3), posZ + posneg(3), new ItemStack(AbyssalCraft.Cingot)));
 						worldObj.spawnEntityInWorld(new EntityItem(worldObj, posX + posneg(3), posY + rand.nextInt(3), posZ + posneg(3), new ItemStack(AbyssalCraft.dreadiumingot)));
@@ -307,7 +307,7 @@ public class EntityJzahar extends EntityMob implements IBossDisplayData, IRanged
 					}
 				}
 			}
-		if(deathTicks == 190 && !worldObj.isRemote){
+		if(deathTicks == 790 && !worldObj.isRemote){
 			if(!worldObj.getEntitiesWithinAABB(EntityPlayer.class, getEntityBoundingBox().expand(3,1,3)).isEmpty()){
 				List<EntityPlayer> players = worldObj.getEntitiesWithinAABB(EntityPlayer.class, getEntityBoundingBox().expand(3,1,3));
 				for(EntityPlayer player: players){
@@ -329,31 +329,31 @@ public class EntityJzahar extends EntityMob implements IBossDisplayData, IRanged
 					}
 				}
 			}
-			if(worldObj.getClosestPlayer(posX, posY, posZ, 10) != null)
+			if(worldObj.getClosestPlayer(posX, posY, posZ, 32) != null)
 				worldObj.spawnEntityInWorld(new EntityItem(worldObj, posX, posY, posZ, new ItemStack(AbyssalCraft.gatekeeperEssence)));
 		}
-		if(deathTicks == 200 && !worldObj.isRemote)
-			setDead();
 		if(deathTicks == 20 && worldObj.isRemote)
 			SpecialTextUtil.JzaharGroup(worldObj, StatCollector.translateToLocal("message.jzahar.death.1"));
-		if(deathTicks == 40 && worldObj.isRemote)
-			SpecialTextUtil.JzaharGroup(worldObj, StatCollector.translateToLocal("message.jzahar.death.2"));
-		if(deathTicks == 60 && worldObj.isRemote)
-			SpecialTextUtil.JzaharGroup(worldObj, StatCollector.translateToLocal("message.jzahar.death.3"));
-		if(deathTicks == 80 && worldObj.isRemote)
-			SpecialTextUtil.JzaharGroup(worldObj, StatCollector.translateToLocal("message.jzahar.death.4"));
 		if(deathTicks == 100 && worldObj.isRemote)
-			SpecialTextUtil.JzaharGroup(worldObj, StatCollector.translateToLocal("message.jzahar.death.5"));
-		if(deathTicks == 120 && worldObj.isRemote)
-			SpecialTextUtil.JzaharGroup(worldObj, StatCollector.translateToLocal("message.jzahar.death.6"));
-		if(deathTicks == 140 && worldObj.isRemote)
-			SpecialTextUtil.JzaharGroup(worldObj, StatCollector.translateToLocal("message.jzahar.death.7"));
-		if(deathTicks == 160 && worldObj.isRemote)
-			SpecialTextUtil.JzaharGroup(worldObj, StatCollector.translateToLocal("message.jzahar.death.8"));
+			SpecialTextUtil.JzaharGroup(worldObj, StatCollector.translateToLocal("message.jzahar.death.2"));
 		if(deathTicks == 180 && worldObj.isRemote)
+			SpecialTextUtil.JzaharGroup(worldObj, StatCollector.translateToLocal("message.jzahar.death.3"));
+		if(deathTicks == 260 && worldObj.isRemote)
+			SpecialTextUtil.JzaharGroup(worldObj, StatCollector.translateToLocal("message.jzahar.death.4"));
+		if(deathTicks == 340 && worldObj.isRemote)
+			SpecialTextUtil.JzaharGroup(worldObj, StatCollector.translateToLocal("message.jzahar.death.5"));
+		if(deathTicks == 420 && worldObj.isRemote)
+			SpecialTextUtil.JzaharGroup(worldObj, StatCollector.translateToLocal("message.jzahar.death.6"));
+		if(deathTicks == 500 && worldObj.isRemote)
+			SpecialTextUtil.JzaharGroup(worldObj, StatCollector.translateToLocal("message.jzahar.death.7"));
+		if(deathTicks == 580 && worldObj.isRemote)
+			SpecialTextUtil.JzaharGroup(worldObj, StatCollector.translateToLocal("message.jzahar.death.8"));
+		if(deathTicks == 660 && worldObj.isRemote)
 			SpecialTextUtil.JzaharGroup(worldObj, StatCollector.translateToLocal("message.jzahar.death.9"));
-		if(deathTicks == 200 && worldObj.isRemote)
+		if(deathTicks == 800 && worldObj.isRemote)
 			SpecialTextUtil.JzaharGroup(worldObj, StatCollector.translateToLocal("message.jzahar.death.10"));
+		if(deathTicks == 800 && !worldObj.isRemote)
+			setDead();
 	}
 
 	private int posneg(int num){

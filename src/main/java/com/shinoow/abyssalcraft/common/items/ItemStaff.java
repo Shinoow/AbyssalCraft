@@ -95,45 +95,25 @@ public class ItemStaff extends Item {
 				EntityLiving target = (EntityLiving)list.get(0);
 
 				if(target.getCreatureAttribute() == AbyssalCraftAPI.SHADOW && !(target instanceof IBossDisplayData)){
-					if(!target.isDead){
+					if(!target.isDead)
 						if(target.attackEntityFrom(DamageSource.causePlayerDamage(player), 4))
 							increaseEnergy(stack, "Shadow");
-						if(getEnergy(stack, "Shadow") == 200){
-							setEnergy(0, stack, "Shadow");
-							player.inventory.addItemStackToInventory(new ItemStack(AbyssalCraft.shadowgem));
-						}
-					}
 				} else if(world.provider.getDimensionId() == AbyssalCraft.configDimId1 && target instanceof ICoraliumEntity &&
 						!(target instanceof IBossDisplayData)){
-					if(!target.isDead){
+					if(!target.isDead)
 						if(target.attackEntityFrom(DamageSource.causePlayerDamage(player), 4))
 							increaseEnergy(stack, "Abyssal");
-						if(getEnergy(stack, "Abyssal") == 100){
-							setEnergy(0, stack, "Abyssal");
-							player.inventory.addItemStackToInventory(new ItemStack(AbyssalCraft.essence, 1, 0));
-						}
-					}
 				} else if(world.provider.getDimensionId() == AbyssalCraft.configDimId2 && target instanceof IDreadEntity &&
 						!(target instanceof IBossDisplayData)){
-					if(!target.isDead){
+					if(!target.isDead)
 						if(target.attackEntityFrom(DamageSource.causePlayerDamage(player), 4))
 							increaseEnergy(stack, "Dread");
-						if(getEnergy(stack, "Dread") == 100){
-							setEnergy(0, stack, "Dread");
-							player.inventory.addItemStackToInventory(new ItemStack(AbyssalCraft.essence, 1, 1));
-						}
-					}
 				} else if(world.provider.getDimensionId() == AbyssalCraft.configDimId3 && target instanceof ICoraliumEntity
 						&& target instanceof IDreadEntity && target instanceof IAntiEntity &&
 						target.getCreatureAttribute() != AbyssalCraftAPI.SHADOW && !(target instanceof IBossDisplayData))
-					if(!target.isDead){
+					if(!target.isDead)
 						if(target.attackEntityFrom(DamageSource.causePlayerDamage(player), 4))
 							increaseEnergy(stack, "Omothol");
-						if(getEnergy(stack, "Omothol") == 100){
-							setEnergy(0, stack, "Omothol");
-							player.inventory.addItemStackToInventory(new ItemStack(AbyssalCraft.essence, 1, 2));
-						}
-					}
 			}
 
 		}

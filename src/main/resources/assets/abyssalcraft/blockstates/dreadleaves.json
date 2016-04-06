@@ -1,9 +1,5 @@
 {
 	"variants": {
-		"normal": { "model": "abyssalcraft:dreadleaves" },
-        "check_decay=false,decayable=false": { "model": "abyssalcraft:dreadleaves" },
-        "check_decay=true,decayable=false": { "model": "abyssalcraft:dreadleaves" },
-        "check_decay=true,decayable=true": { "model": "abyssalcraft:dreadleaves" },
-        "check_decay=false,decayable=true": { "model": "abyssalcraft:dreadleaves" }
+		"normal": { "model": "abyssalcraft:dreadleaves" }
 	}
 }

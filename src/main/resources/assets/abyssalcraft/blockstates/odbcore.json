@@ -1,6 +1,6 @@
 {
 	"variants": {
-		"explode=false": [
+		"normal": [
 			{ "model": "abyssalcraft:odbcore" },
             { "model": "abyssalcraft:odbcore", "y": 90 },
             { "model": "abyssalcraft:odbcore", "y": 180 },

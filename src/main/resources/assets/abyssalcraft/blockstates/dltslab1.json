@@ -8,7 +8,7 @@
 		}
 	},
 	"variants": {
-		"half=bottom,variant=false": { "model": "abyssalcraft:dltslab1" },
-		"half=top,variant=false": { "model": "upper_slab" }
+		"half=bottom": { "model": "abyssalcraft:dltslab1" },
+		"half=top": { "model": "upper_slab" }
 	}
 }

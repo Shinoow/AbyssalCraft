@@ -13,9 +13,11 @@ package com.shinoow.abyssalcraft.common.handlers;
 
 import java.util.List;
 
+import net.minecraft.enchantment.EnchantmentData;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
+
 import com.google.common.collect.Lists;
 import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.api.internal.DummyNecroDataHandler;
@@ -73,6 +75,10 @@ public class InternalNecroDataHandler extends DummyNecroDataHandler {
 		Chapter ritualpotentialenergy = new Chapter("potentialenergy", NecronomiconText.LABEL_POTENTIAL_ENERGY);
 		internalNecroData.add(new NecroData("rituals", NecronomiconText.LABEL_INFO, ritualgettingstarted, ritualmaterials,
 				ritualspecialmaterials, ritualpotentialenergy));
+		Chapter miscspecialmaterials = new Chapter("specialmaterials", NecronomiconText.LABEL_INFORMATION_SPECIAL_MATERIALS);
+		Chapter miscenchantments = new Chapter("enchantments", NecronomiconText.LABEL_INFORMATION_ENCHANTMENTS);
+		internalNecroData.add(new NecroData("miscinfo", NecronomiconText.LABEL_MISC_INFORMATION, NecronomiconText.MISC_INFORMATION, miscspecialmaterials,
+				miscenchantments));
 	}
 
 	@Override
@@ -215,7 +221,7 @@ public class InternalNecroDataHandler extends DummyNecroDataHandler {
 				new Page(10, NecronomiconText.ENTITY_ASORAH_2),
 				new Page(11, NecronomiconResources.LESSER_SHOGGOTH_ABYSSAL, NecronomiconText.ENTITY_LESSER_SHOGGOTH_1),
 				new Page(12, NecronomiconText.ENTITY_LESSER_SHOGGOTH_2));
-		addPages("abyssalwasteland", "specialmaterials", new Page(1, new CraftingStack(new ItemStack(AbyssalCraft.PSDLfinder, 4)),
+		addPages("abyssalwasteland", "specialmaterials", new Page(1, new CraftingStack(AbyssalCraft.PSDLfinder),
 				NecronomiconText.CRAFTING_POWERSTONE_TRACKER),
 				new Page(3, new CraftingStack(AbyssalCraft.transmutator), NecronomiconText.CRAFTING_TRANSMUTATOR_1),
 				new Page(4, NecronomiconText.CRAFTING_TRANSMUTATOR_2),
@@ -359,5 +365,20 @@ public class InternalNecroDataHandler extends DummyNecroDataHandler {
 				new Page(9, NecronomiconResources.PE_TUT_6, NecronomiconText.PE_TUT_9),
 				new Page(10, NecronomiconResources.PE_TUT_7, NecronomiconText.PE_TUT_10),
 				new Page(11, NecronomiconText.PE_TUT_11));
+		addPages("miscinfo", "specialmaterials", new Page(1, new CraftingStack(AbyssalCraft.CobbleU), NecronomiconText.CRAFTING_UPGRADE_KIT_1),
+				new Page(2, new CraftingStack(AbyssalCraft.IronU), NecronomiconText.CRAFTING_UPGRADE_KIT_2),
+				new Page(3, new CraftingStack(new ItemStack(AbyssalCraft.ironp, 2), null, null, null, null, Items.iron_ingot, null, null, Items.iron_ingot, null), NecronomiconText.CRAFTING_IRON_PLATE),
+				new Page(4, new CraftingStack(AbyssalCraft.cloth), NecronomiconText.CRAFTING_WASHCLOTH),
+				new Page(5, new CraftingStack(AbyssalCraft.MRE), NecronomiconText.CRAFTING_MRE),
+				new Page(6, new CraftingStack(AbyssalCraft.beefp), NecronomiconText.CRAFTING_PLATE_FOOD),
+				new Page(7, new CraftingStack(AbyssalCraft.ODBcore), NecronomiconText.CRAFTING_ODB_CORE),
+				new Page(8, new CraftingStack(AbyssalCraft.ODB), NecronomiconText.CRAFTING_ODB),
+				new Page(9, new CraftingStack(AbyssalCraft.carbonCluster), NecronomiconText.CRAFTING_CARBON_CLUSTER),
+				new Page(10, new CraftingStack(AbyssalCraft.denseCarbonCluster), NecronomiconText.CRAFTING_DENSE_CARBON_CLUSTER),
+				new Page(11, new CraftingStack(AbyssalCraft.Crate), NecronomiconText.CRAFTING_CRATE));
+		addPages("miscinfo", "enchantments", new Page(1, Items.enchanted_book.getEnchantedItemStack(new EnchantmentData(AbyssalCraft.coraliumE, 1)), NecronomiconText.ENCHANTMENT_CORALIUM),
+				new Page(2, Items.enchanted_book.getEnchantedItemStack(new EnchantmentData(AbyssalCraft.dreadE, 1)), NecronomiconText.ENCHANTMENT_DREAD),
+				new Page(3, Items.enchanted_book.getEnchantedItemStack(new EnchantmentData(AbyssalCraft.lightPierce, AbyssalCraft.lightPierce.getMaxLevel())), NecronomiconText.ENCHANTMENT_LIGHT_PIERCE),
+				new Page(4, Items.enchanted_book.getEnchantedItemStack(new EnchantmentData(AbyssalCraft.ironWall, 1)), NecronomiconText.ENCHANTMENT_IRON_WALL));
 	}
 }

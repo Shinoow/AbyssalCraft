@@ -12,10 +12,17 @@
 package com.shinoow.abyssalcraft.client;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockFire;
+import net.minecraft.block.BlockLeaves;
+import net.minecraft.block.BlockSapling;
+import net.minecraft.block.BlockTNT;
+import net.minecraft.block.BlockWall;
+import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.renderer.ItemMeshDefinition;
+import net.minecraft.client.renderer.block.statemap.StateMap;
 import net.minecraft.client.renderer.block.statemap.StateMapperBase;
 import net.minecraft.client.renderer.entity.RenderItem;
 import net.minecraft.client.renderer.entity.RenderPlayer;
@@ -41,6 +48,7 @@ import com.shinoow.abyssalcraft.client.render.block.*;
 import com.shinoow.abyssalcraft.client.render.entity.layers.LayerStarSpawnTentacles;
 import com.shinoow.abyssalcraft.client.render.factory.*;
 import com.shinoow.abyssalcraft.common.CommonProxy;
+import com.shinoow.abyssalcraft.common.blocks.BlockACSlab;
 import com.shinoow.abyssalcraft.common.blocks.tile.*;
 import com.shinoow.abyssalcraft.common.entity.*;
 import com.shinoow.abyssalcraft.common.entity.anti.*;
@@ -122,6 +130,25 @@ public class ClientProxy extends CommonProxy {
 
 		registerFluidModel(AbyssalCraft.Cwater, "cor");
 		registerFluidModel(AbyssalCraft.anticwater, "anti");
+
+		ModelLoader.setCustomStateMapper(AbyssalCraft.DLTLeaves, new StateMap.Builder().ignore(new IProperty[] {BlockLeaves.CHECK_DECAY, BlockLeaves.DECAYABLE}).build());
+		ModelLoader.setCustomStateMapper(AbyssalCraft.dreadleaves, new StateMap.Builder().ignore(new IProperty[] {BlockLeaves.CHECK_DECAY, BlockLeaves.DECAYABLE}).build());
+		ModelLoader.setCustomStateMapper(AbyssalCraft.ODB, new StateMap.Builder().ignore(new IProperty[] {BlockTNT.EXPLODE}).build());
+		ModelLoader.setCustomStateMapper(AbyssalCraft.ODBcore, new StateMap.Builder().ignore(new IProperty[] {BlockTNT.EXPLODE}).build());
+		ModelLoader.setCustomStateMapper(AbyssalCraft.Darkbrickslab1, new StateMap.Builder().ignore(new IProperty[] {BlockACSlab.VARIANT_PROPERTY}).build());
+		ModelLoader.setCustomStateMapper(AbyssalCraft.Darkcobbleslab1, new StateMap.Builder().ignore(new IProperty[] {BlockACSlab.VARIANT_PROPERTY}).build());
+		ModelLoader.setCustomStateMapper(AbyssalCraft.abyslab1, new StateMap.Builder().ignore(new IProperty[] {BlockACSlab.VARIANT_PROPERTY}).build());
+		ModelLoader.setCustomStateMapper(AbyssalCraft.Darkstoneslab1, new StateMap.Builder().ignore(new IProperty[] {BlockACSlab.VARIANT_PROPERTY}).build());
+		ModelLoader.setCustomStateMapper(AbyssalCraft.DLTslab1, new StateMap.Builder().ignore(new IProperty[] {BlockACSlab.VARIANT_PROPERTY}).build());
+		ModelLoader.setCustomStateMapper(AbyssalCraft.dreadbrickslab1, new StateMap.Builder().ignore(new IProperty[] {BlockACSlab.VARIANT_PROPERTY}).build());
+		ModelLoader.setCustomStateMapper(AbyssalCraft.abydreadbrickslab1, new StateMap.Builder().ignore(new IProperty[] {BlockACSlab.VARIANT_PROPERTY}).build());
+		ModelLoader.setCustomStateMapper(AbyssalCraft.cstonebrickslab1, new StateMap.Builder().ignore(new IProperty[] {BlockACSlab.VARIANT_PROPERTY}).build());
+		ModelLoader.setCustomStateMapper(AbyssalCraft.ethaxiumslab1, new StateMap.Builder().ignore(new IProperty[] {BlockACSlab.VARIANT_PROPERTY}).build());
+		ModelLoader.setCustomStateMapper(AbyssalCraft.darkethaxiumslab1, new StateMap.Builder().ignore(new IProperty[] {BlockACSlab.VARIANT_PROPERTY}).build());
+		ModelLoader.setCustomStateMapper(AbyssalCraft.DLTSapling, new StateMap.Builder().ignore(new IProperty[] {BlockSapling.TYPE}).build());
+		ModelLoader.setCustomStateMapper(AbyssalCraft.dreadsapling, new StateMap.Builder().ignore(new IProperty[] {BlockSapling.TYPE}).build());
+		ModelLoader.setCustomStateMapper(AbyssalCraft.mimicFire, new StateMap.Builder().ignore(new IProperty[] {BlockFire.AGE}).build());
+		ModelLoader.setCustomStateMapper(AbyssalCraft.DSCwall, new StateMap.Builder().ignore(new IProperty[]{BlockWall.VARIANT}).build());
 
 		loatheMyselfForBeingALazyFuck(AbyssalCraft.dreadaltarbottom, TileEntityDreadAltarBottom.class);
 		loatheMyselfForBeingALazyFuck(AbyssalCraft.dreadaltartop, TileEntityDreadAltarTop.class);
@@ -552,6 +579,7 @@ public class ClientProxy extends CommonProxy {
 		registerItemRender(AbyssalCraft.tieredSacrificialAltar, 2, "tieredsacrificialaltar_2");
 		registerItemRender(AbyssalCraft.tieredSacrificialAltar, 3, "tieredsacrificialaltar_3");
 		registerItemRender(AbyssalCraft.gatekeeperminionspawner, 0);
+		registerItemRender(AbyssalCraft.mimicFire, 0);
 
 		RenderPlayer render1 = Minecraft.getMinecraft().getRenderManager().getSkinMap().get("default");
 		render1.addLayer(new LayerStarSpawnTentacles(render1));

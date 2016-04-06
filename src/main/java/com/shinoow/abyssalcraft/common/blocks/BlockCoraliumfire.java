@@ -50,6 +50,13 @@ public class BlockCoraliumfire extends Block {
 		return null;
 	}
 
+	@Override
+	public void onNeighborBlockChange(World worldIn, BlockPos pos, IBlockState state, Block neighborBlock)
+	{
+		if(!World.doesBlockHaveSolidTopSurface(worldIn, pos.down()))
+			worldIn.setBlockToAir(pos);
+	}
+
 	/**
 	 * Used to determine ambient occlusion and culling when rebuilding chunks for render
 	 */

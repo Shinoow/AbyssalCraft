@@ -66,11 +66,11 @@ public class GuiNecronomiconMachines extends GuiNecronomicon {
 		byte b0 = 2;
 		buttonList.add(buttonNextPage = new ButtonNextPage(1, i + 220, b0 + 154, true));
 		buttonList.add(buttonPreviousPage = new ButtonNextPage(2, i + 18, b0 + 154, false));
-		buttonList.add(info = new ButtonCategory(3, i + 10, b0 + 20, this, NecronomiconText.LABEL_INFO, AbyssalCraft.necronomicon));
-		buttonList.add(transmutator = new ButtonCategory(4, i + 10, b0 + 37, this, StatCollector.translateToLocal("container.abyssalcraft.transmutator"), getItem(1)));
-		buttonList.add(crystallizer = new ButtonCategory(5, i + 10, b0 + 54, this, StatCollector.translateToLocal("container.abyssalcraft.crystallizer"), getItem(2)));
-		//	buttonList.add(engraver = new ButtonCategory(6, i + 10, b0 + 71, this, StatCollector.translateToLocal("container.abyssalcraft.engraver"), getItem(3)));
-		//	buttonList.add(materializer = new ButtonCategory(7, i + 10, b0 + 88, this, StatCollector.translateToLocal("container.abyssalcraft.materializer"), getItem(3)));
+		buttonList.add(info = new ButtonCategory(3, i + 14, b0 + 24, this, NecronomiconText.LABEL_INFO, AbyssalCraft.necronomicon));
+		buttonList.add(transmutator = new ButtonCategory(4, i + 14, b0 + 41, this, StatCollector.translateToLocal("container.abyssalcraft.transmutator"), getItem(1)));
+		buttonList.add(crystallizer = new ButtonCategory(5, i + 14, b0 + 58, this, StatCollector.translateToLocal("container.abyssalcraft.crystallizer"), getItem(2)));
+		//	buttonList.add(engraver = new ButtonCategory(6, i + 14, b0 + 75, this, StatCollector.translateToLocal("container.abyssalcraft.engraver"), getItem(3)));
+		//	buttonList.add(materializer = new ButtonCategory(7, i + 14, b0 + 92, this, StatCollector.translateToLocal("container.abyssalcraft.materializer"), getItem(3)));
 	}
 
 	private Item getItem(int par1){

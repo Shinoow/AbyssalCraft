@@ -15,6 +15,7 @@ import net.minecraft.client.model.ModelBiped;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.EnumAction;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
@@ -30,7 +31,6 @@ import com.shinoow.abyssalcraft.AbyssalCraft;
 public class ItemDreadiumSamuraiArmor extends ItemArmor {
 	public ItemDreadiumSamuraiArmor(ArmorMaterial par2EnumArmorMaterial, int par3, int par4, String name){
 		super(par2EnumArmorMaterial, par3, par4);
-		//		GameRegistry.registerItem(this, name);
 		setUnlocalizedName(name);
 		setCreativeTab(AbyssalCraft.tabCombat);
 	}
@@ -74,20 +74,16 @@ public class ItemDreadiumSamuraiArmor extends ItemArmor {
 				armorModel.isRiding = entityLiving.isRiding();
 				armorModel.isChild = entityLiving.isChild();
 				armorModel.heldItemRight = entityLiving.getEquipmentInSlot(0) != null ? 1 :0;
-				if(entityLiving instanceof EntityPlayer)
-					armorModel.aimedBow =((EntityPlayer)entityLiving).getItemInUseDuration() > 2;
-					return armorModel;
+				armorModel.swingProgress = entityLiving.swingProgress;
+				if(entityLiving instanceof EntityPlayer){
+					armorModel.aimedBow =((EntityPlayer)entityLiving).getItemInUseDuration() > 2 && ((EntityPlayer) entityLiving).getItemInUse().getItem().getItemUseAction(((EntityPlayer) entityLiving).getItemInUse()) == EnumAction.BOW;
+					armorModel.heldItemRight = ((EntityPlayer) entityLiving).isBlocking() ? 3 : entityLiving.getEquipmentInSlot(0) != null ? 1 :0;
+				}
+				return armorModel;
 			}
 		}
 		return null;
 	}
-
-	//	@Override
-	//	@SideOnly(Side.CLIENT)
-	//	public void registerIcons(IIconRegister par1IconRegister)
-	//	{
-	//		itemIcon = par1IconRegister.registerIcon(AbyssalCraft.modid + ":" + this.getUnlocalizedName().substring(5));
-	//	}
 
 	@Override
 	public void onArmorTick(World world, EntityPlayer player, ItemStack itemstack) {
