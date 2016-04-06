@@ -267,15 +267,15 @@ public class EntityDepthsGhoul extends EntityMob implements ICoraliumEntity {
 		switch (getGhoulType())
 		{
 		case 0:
-			return "mob.zombie.hurt"; //abyssalcraft:ghoul.normal.hit
+			return "abyssalcraft:ghoul.normal.hit";
 		case 1:
 			return "abyssalcraft:ghoul.pete.hit";
 		case 2:
-			return "mob.zombie.hurt"; //abyssalcraft:ghoul.wilson.hit
+			return "abyssalcraft:ghoul.normal.hit"; //abyssalcraft:ghoul.wilson.hit
 		case 3:
-			return "mob.zombie.hurt"; //abyssalcraft:ghoul.orange.hit
+			return "abyssalcraft:ghoul.normal.hit"; //abyssalcraft:ghoul.orange.hit
 		default:
-			return "mob.zombie.hurt";
+			return "abyssalcraft:ghoul.normal.hit";
 		}
 	}
 

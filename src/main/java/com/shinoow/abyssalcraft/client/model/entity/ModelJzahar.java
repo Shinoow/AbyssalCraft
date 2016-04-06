@@ -509,7 +509,7 @@ public class ModelJzahar extends ModelBase
 			arm.rotateAngleY += MathHelper.sin(MathHelper.sqrt_float(f6) * (float)Math.PI * 2.0F) * 0.2F * 2.0F;
 		}
 
-		if(((EntityJzahar)entity).deathTicks <= 200 && ((EntityJzahar)entity).deathTicks > 0){
+		if(((EntityJzahar)entity).deathTicks <= 800 && ((EntityJzahar)entity).deathTicks > 0){
 			head.rotateAngleX = 20F;
 			eye1.isHidden = true;
 			eye2.isHidden = true;

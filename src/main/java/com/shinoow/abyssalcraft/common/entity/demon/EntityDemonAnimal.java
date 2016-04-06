@@ -24,6 +24,7 @@ import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
@@ -66,20 +67,21 @@ public class EntityDemonAnimal extends EntityMob implements IDreadEntity {
 	{
 		super.onLivingUpdate();
 
-		int i = MathHelper.floor_double(posX);
-		int j = MathHelper.floor_double(posY);
-		int k = MathHelper.floor_double(posZ);
+		if(!worldObj.isRemote && canBurn){
 
-		for (int l = 0; l < 4; ++l)
-		{
-			i = MathHelper.floor_double(posX + (l % 2 * 2 - 1) * 0.25F);
-			j = MathHelper.floor_double(posY);
-			k = MathHelper.floor_double(posZ + (l / 2 % 2 * 2 - 1) * 0.25F);
+			int i = MathHelper.floor_double(posX);
+			int j = MathHelper.floor_double(posY);
+			int k = MathHelper.floor_double(posZ);
 
-			if (worldObj.provider.dimensionId != AbyssalCraft.configDimId2 && worldObj.provider.dimensionId != 0 && worldObj.getBlock(i, j, k).getMaterial() == Material.air &&
-					worldObj.getBiomeGenForCoords(i, k).getFloatTemperature(i, j, k) < 10.0F && Blocks.fire.canPlaceBlockAt(worldObj, i, j, k) || canBurn == true &&
-					worldObj.getBlock(i, j, k).getMaterial() == Material.air && worldObj.getBiomeGenForCoords(i, k).getFloatTemperature(i, j, k) < 10.0F && Blocks.fire.canPlaceBlockAt(worldObj, i, j, k))
-				worldObj.setBlock(i, j, k, Blocks.fire);
+			for (int l = 0; l < 4; ++l)
+			{
+				i = MathHelper.floor_double(posX + (l % 2 * 2 - 1) * 0.25F);
+				j = MathHelper.floor_double(posY);
+				k = MathHelper.floor_double(posZ + (l / 2 % 2 * 2 - 1) * 0.25F);
+
+				if (worldObj.getBlock(i, j, k).getMaterial() == Material.air && Blocks.fire.canPlaceBlockAt(worldObj, i, j, k))
+					worldObj.setBlock(i, j, k, AbyssalCraft.mimicFire);
+			}
 		}
 	}
 
@@ -91,11 +93,28 @@ public class EntityDemonAnimal extends EntityMob implements IDreadEntity {
 	}
 
 	@Override
+	public void readEntityFromNBT(NBTTagCompound par1NBTTagCompound)
+	{
+		super.readEntityFromNBT(par1NBTTagCompound);
+
+		canBurn = par1NBTTagCompound.getBoolean("CanBurn");
+	}
+
+	@Override
+	public void writeEntityToNBT(NBTTagCompound par1NBTTagCompound)
+	{
+		super.writeEntityToNBT(par1NBTTagCompound);
+
+		par1NBTTagCompound.setBoolean("CanBurn", canBurn);
+	}
+
+	@Override
 	public IEntityLivingData onSpawnWithEgg(IEntityLivingData par1EntityLivingData)
 	{
 		Object data = super.onSpawnWithEgg(par1EntityLivingData);
 
-		if(worldObj.provider.dimensionId == 0 && AbyssalCraft.demonAnimalFire == true && rand.nextInt(3) == 0)
+		if(worldObj.provider.dimensionId == 0 && AbyssalCraft.demonAnimalFire == true && rand.nextInt(3) == 0
+				|| worldObj.provider.dimensionId == -1 && rand.nextBoolean())
 			canBurn = true;
 
 		return (IEntityLivingData)data;

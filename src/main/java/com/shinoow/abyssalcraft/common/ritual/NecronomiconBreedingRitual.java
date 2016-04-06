@@ -19,6 +19,7 @@ import net.minecraft.entity.passive.*;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
+import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.world.World;
 
 import com.google.common.collect.Lists;
@@ -55,7 +56,7 @@ public class NecronomiconBreedingRitual extends NecronomiconRitual {
 	@Override
 	public boolean canCompleteRitual(World world, int x, int y, int z, EntityPlayer player) {
 
-		List<EntityAnimal> animals = world.getEntitiesWithinAABB(EntityAnimal.class, world.getBlock(x, y, z).getCollisionBoundingBoxFromPool(world, x, y, z).expand(16, 3, 16));
+		List<EntityAnimal> animals = world.getEntitiesWithinAABB(EntityAnimal.class, AxisAlignedBB.getBoundingBox(x, y, z, x + 1, y + 1, z + 1).expand(16, 3, 16));
 		return !animals.isEmpty();
 	}
 
@@ -70,7 +71,7 @@ public class NecronomiconBreedingRitual extends NecronomiconRitual {
 		List<EntityOcelot> ocelots = Lists.newArrayList();
 		List<EntityWolf> wolves = Lists.newArrayList();
 
-		List<Entity> entities = world.getEntitiesWithinAABBExcludingEntity(player, world.getBlock(x, y, z).getCollisionBoundingBoxFromPool(world, x, y, z).expand(16, 3, 16));
+		List<Entity> entities = world.getEntitiesWithinAABBExcludingEntity(player, AxisAlignedBB.getBoundingBox(x, y, z, x + 1, y + 1, z + 1).expand(16, 3, 16));
 		for(Entity entity : entities){
 			if(entity instanceof EntityCow)
 				cows.add((EntityCow) entity);

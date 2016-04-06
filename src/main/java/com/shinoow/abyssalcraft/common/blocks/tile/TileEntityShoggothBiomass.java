@@ -23,6 +23,7 @@ import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.world.EnumDifficulty;
 
 public class TileEntityShoggothBiomass extends TileEntity {
@@ -67,7 +68,7 @@ public class TileEntityShoggothBiomass extends TileEntity {
 				cooldown = worldObj.rand.nextInt(10);
 				resetNearbyBiomass(true);
 				if(!worldObj.isRemote)
-					if(worldObj.getEntitiesWithinAABB(EntityLesserShoggoth.class, worldObj.getBlock(xCoord, yCoord, zCoord).getCollisionBoundingBoxFromPool(worldObj, xCoord, yCoord, zCoord).expand(16, 16, 16)).size() <= 6){
+					if(worldObj.getEntitiesWithinAABB(EntityLesserShoggoth.class, AxisAlignedBB.getBoundingBox(xCoord, yCoord, zCoord, xCoord + 1, yCoord + 1, zCoord + 1).expand(16, 16, 16)).size() <= 6){
 						EntityLesserShoggoth mob = new EntityLesserShoggoth(worldObj);
 						setPosition(mob, xCoord, yCoord, zCoord);
 						mob.onSpawnWithEgg((IEntityLivingData)null);

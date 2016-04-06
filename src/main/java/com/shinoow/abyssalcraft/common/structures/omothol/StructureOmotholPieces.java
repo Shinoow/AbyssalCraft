@@ -1869,6 +1869,10 @@ public class StructureOmotholPieces
 		{
 			StructureOmotholPieces.func_176069_e((StructureOmotholPieces.Start)componentIn, listIn, rand, boundingBox.minX + 36, boundingBox.maxY - 4, boundingBox.minZ - 6, 1, getComponentType());
 			StructureOmotholPieces.func_176069_e((StructureOmotholPieces.Start)componentIn, listIn, rand, boundingBox.maxX - 36, boundingBox.maxY - 4, boundingBox.minZ - 6, 3, getComponentType());
+			StructureOmotholPieces.func_176069_e((StructureOmotholPieces.Start)componentIn, listIn, rand, boundingBox.minX - 5, boundingBox.maxY - 4, boundingBox.minZ + 30, 1, getComponentType());
+			StructureOmotholPieces.func_176069_e((StructureOmotholPieces.Start)componentIn, listIn, rand, boundingBox.maxX + 5, boundingBox.maxY - 4, boundingBox.minZ + 30, 3, getComponentType());
+			StructureOmotholPieces.func_176069_e((StructureOmotholPieces.Start)componentIn, listIn, rand, boundingBox.minX - 5, boundingBox.maxY - 4, boundingBox.maxZ - 30, 1, getComponentType());
+			StructureOmotholPieces.func_176069_e((StructureOmotholPieces.Start)componentIn, listIn, rand, boundingBox.maxX + 5, boundingBox.maxY - 4, boundingBox.maxZ - 30, 3, getComponentType());
 			StructureOmotholPieces.func_176069_e((StructureOmotholPieces.Start)componentIn, listIn, rand, boundingBox.minX + 39, boundingBox.maxY - 4, boundingBox.minZ - 8, 2, getComponentType());
 			StructureOmotholPieces.func_176069_e((StructureOmotholPieces.Start)componentIn, listIn, rand, boundingBox.minX + 39, boundingBox.maxY - 4, boundingBox.maxZ + 5, 0, getComponentType());
 		}

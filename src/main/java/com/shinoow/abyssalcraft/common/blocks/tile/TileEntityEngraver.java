@@ -16,6 +16,7 @@ import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
+
 import com.shinoow.abyssalcraft.api.item.ItemEngraving;
 import com.shinoow.abyssalcraft.api.recipe.EngraverRecipes;
 import com.shinoow.abyssalcraft.common.blocks.BlockEngraver;
@@ -33,6 +34,12 @@ public class TileEntityEngraver extends TEDirectional implements ISidedInventory
 
 	public int engraverProcessTime;
 	private String containerName;
+
+	@Override
+	public boolean canUpdate()
+	{
+		return true;
+	}
 
 	@Override
 	public int getSizeInventory() {

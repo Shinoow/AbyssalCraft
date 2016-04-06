@@ -147,6 +147,7 @@ public class ACBlocks {
 	public static Block yog_sothoth_statue = getBlock("yogsothothstatue");
 	public static Block shub_niggurath_statue = getBlock("shubniggurathstatue");
 	public static Block monolith_stone = getBlock("monolithstone");
+	public static Block shoggoth_biomass = getBlock("shoggothbiomass");
 	public static Block energy_pedestal = getBlock("energypedestal");
 	public static Block monolith_pillar = getBlock("monolithpillar");
 	public static Block sacrificial_altar = getBlock("sacrificialaltar");
@@ -156,11 +157,9 @@ public class ACBlocks {
 	public static Block tiered_sacrificial_altar = getBlock("tieredsacrificialaltar");
 	public static Block jzahar_spawner = getBlock("jzaharspawner");
 	public static Block minion_of_the_gatekeeper_spawner = getBlock("gatekeeperminionspawner");
+	public static Block mimic_fire = getBlock("fire");
 
 	private static Block getBlock(String name){
 		return GameRegistry.findBlock("abyssalcraft", name);
 	}
-
-	@Deprecated
-	public static Block fist_of_chagaroth_spawner;
 }

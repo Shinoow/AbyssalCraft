@@ -217,12 +217,6 @@ public class EntityChagaroth extends EntityMob implements IBossDisplayData, IDre
 			EntityPlayer entityplayer = (EntityPlayer)par1DamageSource.getEntity();
 			entityplayer.addStat(AbyssalCraft.killChagaroth, 1);
 		}
-		if(worldObj.isRemote){
-			SpecialTextUtil.ChagarothGroup(worldObj, StatCollector.translateToLocal("message.chagaroth.death.1"));
-			SpecialTextUtil.ChagarothGroup(worldObj, StatCollector.translateToLocal("message.chagaroth.death.2"));
-			SpecialTextUtil.ChagarothGroup(worldObj, StatCollector.translateToLocal("message.chagaroth.death.3"));
-			SpecialTextUtil.ChagarothGroup(worldObj, StatCollector.translateToLocal("message.chagaroth.death.4"));
-		}
 		super.onDeath(par1DamageSource);
 	}
 
@@ -278,6 +272,14 @@ public class EntityChagaroth extends EntityMob implements IBossDisplayData, IDre
 					}
 				}
 			}
+		if(deathTicks == 20 && worldObj.isRemote)
+			SpecialTextUtil.ChagarothGroup(worldObj, StatCollector.translateToLocal("message.chagaroth.death.1"));
+		if(deathTicks == 80 && worldObj.isRemote)
+			SpecialTextUtil.ChagarothGroup(worldObj, StatCollector.translateToLocal("message.chagaroth.death.2"));
+		if(deathTicks == 140 && worldObj.isRemote)
+			SpecialTextUtil.ChagarothGroup(worldObj, StatCollector.translateToLocal("message.chagaroth.death.3"));
+		if(deathTicks == 200 && worldObj.isRemote)
+			SpecialTextUtil.ChagarothGroup(worldObj, StatCollector.translateToLocal("message.chagaroth.death.4"));
 		if(deathTicks == 200 && !worldObj.isRemote){
 			setDead();
 			worldObj.spawnEntityInWorld(new EntityItem(worldObj, posX, posY, posZ, new ItemStack(AbyssalCraft.dreadKey)));

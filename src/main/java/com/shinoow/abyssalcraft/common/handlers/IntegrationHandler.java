@@ -13,49 +13,93 @@ package com.shinoow.abyssalcraft.common.handlers;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
+import com.shinoow.abyssalcraft.api.integration.ACPlugin;
 import com.shinoow.abyssalcraft.api.integration.IACPlugin;
 import com.shinoow.abyssalcraft.common.util.ACLogger;
-import com.shinoow.abyssalcraft.integration.morph.ACMorph;
-
 import cpw.mods.fml.common.Loader;
+import cpw.mods.fml.common.discovery.ASMDataTable;
 
 public class IntegrationHandler {
 
 	static boolean isNEILoaded = Loader.isModLoaded("NotEnoughItems");
-	static boolean isMorhpLoaded = Loader.isModLoaded("Morph");
 	static boolean isInvTweaksLoaded = Loader.isModLoaded("inventorytweaks");
 
 	static List<String> mods = new ArrayList<String>();
 	static List<IACPlugin> integrations = new ArrayList<IACPlugin>();
+	static List<IACPlugin> oldRegistry = new ArrayList<IACPlugin>();
+	static List<IACPlugin> temp = new ArrayList<IACPlugin>();
 
 	/**
 	 * Attempts to find mod integrations.
 	 */
-	private static void findIntegrations(){
-		ACLogger.info("Checking possible mod integrations.");
+	private static void findIntegrations(ASMDataTable asmDataTable){
+		ACLogger.info("Starting the Integration Handler.");
+
+		fetchModIntegrations(asmDataTable);
+
+		if(!temp.isEmpty())
+			ACLogger.info("Preliminary integration search complete: found %d possible mod integration(s)!", temp.size());
+	}
+
+	private static void fetchModIntegrations(ASMDataTable asmDataTable){
+		List<IACPlugin> plugins = fetchPlugins(asmDataTable, ACPlugin.class, IACPlugin.class);
+		if(!plugins.isEmpty())
+			for(IACPlugin plugin : plugins)
+				temp.add(plugin);
+	}
+
+	private static <T> List<T> fetchPlugins(ASMDataTable asmDataTable, Class annotationClass, Class<T> instanceClass){
+		String annotationClassName = annotationClass.getCanonicalName();
+		Set<ASMDataTable.ASMData> asmDatas = asmDataTable.getAll(annotationClassName);
+		List<T> instances = new ArrayList<>();
+		for (ASMDataTable.ASMData asmData : asmDatas)
+			try {
+				Class<?> asmClass = Class.forName(asmData.getClassName());
+				Class<? extends T> asmInstanceClass = asmClass.asSubclass(instanceClass);
+				T instance = asmInstanceClass.newInstance();
+				instances.add(instance);
+			} catch (ClassNotFoundException | IllegalAccessException | InstantiationException e) {
+				ACLogger.severe("Failed to load: {}", asmData.getClassName(), e);
+			}
+		return instances;
+	}
+
+	/**
+	 * Does the initial search for integrations (eg. go over found plugins and scan ones registered through the API)
+	 */
+	private static void search(){
 		if(isNEILoaded){
 			ACLogger.info("Not Enough Items is present, initializing informative stuff.");
 			//This part is handled by NEI, so this message is essentially useless :P
 			mods.add("Not Enough Items");
 		}
-		if(isMorhpLoaded){
-			ACLogger.info("Morph is present, initializing weird shape-shifting stuff.");
-			integrations.add(new ACMorph());
-			mods.add("Morph");
-		}
 		if(isInvTweaksLoaded){
 			ACLogger.info("Inventory Tweaks is present, initializing sorting stuff.");
 			mods.add("Inventory Tweaks");
 		}
+
+		if(!temp.isEmpty()){
+			for(IACPlugin plugin : temp)
+				if(plugin.canLoad()){
+					ACLogger.info("Found a integration for mod %s", plugin.getModName());
+					integrations.add(plugin);
+					mods.add(plugin.getModName());
+				}
+
+			temp.clear();
+		}
+
 		if(!AbyssalCraftAPI.getIntegrations().isEmpty()){
-			ACLogger.info("Searching the AbyssalCraftAPI list for integrations.");
-			for(IACPlugin plugin : AbyssalCraftAPI.getIntegrations()){
-				ACLogger.info("Found a integration for mod %s", plugin.getModName());
-				integrations.add(plugin);
-				mods.add(plugin.getModName());
-			}
+			ACLogger.info("Searching the AbyssalCraftAPI list (old registry) for integrations.");
+			for(IACPlugin plugin : AbyssalCraftAPI.getIntegrations())
+				if(!mods.contains(plugin.getModName())){
+					ACLogger.info("Found a integration for mod %s", plugin.getModName());
+					oldRegistry.add(plugin);
+					mods.add(plugin.getModName());
+				}
 		}
 
 		if(!mods.isEmpty())
@@ -64,12 +108,12 @@ public class IntegrationHandler {
 
 	/**
 	 * Runs a second scan in the AbyssalCraftAPI list,
-	 * in case a mod registered the integration after Pre-init.
+	 * in case a mod registered the integration after Init.
 	 */
 	private static void searchAgain(){
 		int temp = mods.size();
 		if(!AbyssalCraftAPI.getIntegrations().isEmpty()){
-			ACLogger.info("Searching the AbyssalCraftAPI list for integrations (again).");
+			ACLogger.info("Searching the AbyssalCraftAPI list (old registry) for integrations (again).");
 			for(IACPlugin plugin : AbyssalCraftAPI.getIntegrations())
 				if(!mods.contains(plugin.getModName())){
 					ACLogger.info("Found a integration for mod %s", plugin.getModName());
@@ -82,20 +126,20 @@ public class IntegrationHandler {
 		}
 	}
 
-	public static void preInit(){
-		findIntegrations();
-		if(!integrations.isEmpty()){
-			ACLogger.info("Pre-initalizing integrations!");
-			for(IACPlugin plugin : integrations)
-				plugin.preInit();
-		}
+	public static void preInit(ASMDataTable asmDataTable){
+		findIntegrations(asmDataTable);
 	}
 
 	public static void init(){
-		searchAgain();
+		search();
 		if(!integrations.isEmpty()){
 			ACLogger.info("Initializing integrations!");
 			for(IACPlugin plugin : integrations)
+				plugin.init();
+		}
+		if(!oldRegistry.isEmpty()){
+			ACLogger.info("Initalizing integrations (old registry)!");
+			for(IACPlugin plugin : oldRegistry)
 				plugin.init();
 		}
 	}
@@ -105,6 +149,11 @@ public class IntegrationHandler {
 		if(!integrations.isEmpty()){
 			ACLogger.info("Post-initializing integrations!");
 			for(IACPlugin plugin : integrations)
+				plugin.postInit();
+		}
+		if(!oldRegistry.isEmpty()){
+			ACLogger.info("Post-initalizing integrations (old registry)!");
+			for(IACPlugin plugin : oldRegistry)
 				plugin.postInit();
 		}
 	}

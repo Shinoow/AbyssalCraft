@@ -18,6 +18,7 @@ import net.minecraft.network.NetworkManager;
 import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 
@@ -244,8 +245,8 @@ public class TileEntityRitualAltar extends TileEntity implements IRitualAltar {
 						ritual = RitualRegistry.instance().getRitual(world.provider.dimensionId, ((ItemNecronomicon)item.getItem()).getBookType(), offers, this.item);
 						if(ritual != null)
 							if(ritual.canRemnantAid()){
-								if(!world.getEntitiesWithinAABB(EntityRemnant.class, world.getBlock(x, y, z).getCollisionBoundingBoxFromPool(world, x, y, z).expand(32, 32, 32)).isEmpty()
-										&& world.getEntitiesWithinAABB(EntityRemnant.class, world.getBlock(x, y, z).getCollisionBoundingBoxFromPool(world, x, y, z).expand(32, 32, 32)).size() >= ritual.getBookType() + 1)
+								if(!world.getEntitiesWithinAABB(EntityRemnant.class, AxisAlignedBB.getBoundingBox(x, y, z, x + 1, y + 1, z + 1).expand(32, 32, 32)).isEmpty()
+										&& world.getEntitiesWithinAABB(EntityRemnant.class, AxisAlignedBB.getBoundingBox(x, y, z, x + 1, y + 1, z + 1).expand(32, 32, 32)).size() >= ritual.getBookType() + 1)
 									if(ritual.canCompleteRitual(world, x, y, z, player))
 										if(!MinecraftForge.EVENT_BUS.post(new RitualEvent.Pre(player, ritual, world, x, y, z))){
 											summonRemnants(world, x, y, z);

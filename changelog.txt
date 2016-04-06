@@ -1,30 +1,22 @@
-- Added missing page to the Potential Energy section of Ritual Information (mentions how monoliths are created)
-- Darklands Villages should now have Darklands Oak Pressure Plates and Darkstone Double slabs (instead of the vanilla equivalents)
-- Depths Ghouls, Abyssal Zombies and Lesser Shoggoths should no longer spawn at Mushroom Island Shores
-- Fixed some Necronomicon Pages with the wrong text
-- Added a config option that allows you to change how Evil Animals spawn
-- Disabled any test code in the Materializer that could trigger a crash (since it's incomplete)
-- Lesser Shoggoths outside of the Overworld should drop the correct item when killed now (applying metadata to the dropped item)
-- Spectral Dragons should now be easier to hit without getting hit from them
-- Spectral Dragon spawn rate has been reduced to the lowest possible (encountering one now should be very rare, unless another mod tweaks the spawn rate)
-- Darklands Oak Slabs are no longer treated as stone
-- Added a config option allowing you to toggle whether or not Liquid Antimatter should disintegrate any item dropped into it
-- Replaced the Fist of Cha'garoth spawner block with a J'zahar spawner block
-- J'zahar has increased in size
-- If a Spectral Dragon dies while Asorah is draining it, Asorah won't take explosion damage
-- Any item placed on a Ritual/Sacrificial Altar or Ritual/Energy Pedestal will also render for other players
-- The smoke projected when a ritual is performed also renders for other players
-- Shoggoth Lairs should now longer spawn in biomes registered to the BiomeDictionary as the "WATER" type
-- The Staff of Rending will now continue to drain energy when the right mouse button is pressed
-- Shadow Fragments/Shards/Gems now spawn in dungeon/mineshaft/pyramid/stronghold chests
-- The Shard of Oblivion now requires 4 Shadow Gems (previously 8)
-- Remnants can now open doors
-- Added the Temple of J'zahar (generates in Omothol)
-- Added the City of Omothol
-- Updated the Omothol Progression section of the Necronomicon
-- Added Essence of The Gatekeeper (replacement for the Oblivion Catalyst in the Abyssalnomicon recipe, dropped by J'zahar)
-- Staff of The Gatekeeper is now created through a ritual (instead of dropped by J'zahar)
-- Added a Minion of The Gatekeeper spawner block
-- Remnants and Minions of The Gatekeeper no longer despawn
-- Spawn rate of Remnants and Minions of The Gatekeeper has been heavily reduced (quite rare now)
-- Minions of The Gatekeeper now has a 10% chance of dropping Ethaxium Ingots (while Eldritch Scales are the regular drop)
+- Demon Animals now have a 50% chance of not burning when spawning in the Nether
+- Added a mimic fire (exstinguishes after 6 seconds, can't be sustained by netherrack)
+- Integrations no longer need to be registered (added a plugin annotation that allows for 100% soft dependencies)
+- Fixed animations for the Dreadium Samurai Armor (arms should move correctly)
+- Improved the buttons in the Necronomicon GUI (they don't overlay anymore, and a transparent gradient displays on a button when hovered over)
+- Fixed potential crashes related to CraftingStacks where the recipe uses the OreDictionary
+- Automatically fetched crafting recipes will now also fetch the output quantity from the recipe
+- Sacthoth no longer spawns in the Dark Realm
+- Added a Misc Information section to the Necronomicon (displays things not mentioned anywhere else, among them crafting recipes)
+- The range from J'zahar in which you need to be in order for him to drop his essence has been increased to 32 blocks (previously 10)
+- The Engraver can be used again now (apparently broke in 1.9.0a)
+- Oblivion Deathbombs and ODB Cores now animate like TNT when primed
+- The death animation time for J'zahar has been increased to 40 seconds (so you can keep up with his speech)
+- The dialogues shown upon Asorah's and Cha'garoth's deaths now display each sentence with a 3 second pause between them
+- Added a ritual that allows you to respawn J'zahar (can only be performed at his temple)
+- Depths Ghouls now have their own hurt sound
+- Lesser Shoggoths now have their own living/hurt/death sounds
+- Increased the PE requirement for a few rituals
+- Nerfed the various tool materials a bit (reduced efficiency and durability)
+- A lot of API related things have been refactored
+- Inventory syncing for when the Staff of Rending gives you a essence/shadow gem should be a lot better now
+- Fixed any remaining issues related to tracking entities within close proximity of a block

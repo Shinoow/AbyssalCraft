@@ -71,7 +71,7 @@ public class GuiNecronomiconEntry extends GuiNecronomicon {
 		buttonList.add(buttonPreviousPage = new ButtonNextPage(2, i + 18, b0 + 154, false));
 		if(data != null)
 			for(int n = 0; n < data.getChapters().length; n++)
-				buttonList.add(buttons[n] = new ButtonCategory(3 + n, i + 10, b0 + 20 + 17*n,this, data.getChapters()[n].getTitle(), icon));
+				buttonList.add(buttons[n] = new ButtonCategory(3 + n, i + 14, b0 + 24 + 17*n,this, data.getChapters()[n].getTitle(), icon));
 		updateButtons();
 	}
 

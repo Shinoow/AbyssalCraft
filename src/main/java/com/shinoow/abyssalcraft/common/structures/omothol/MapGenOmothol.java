@@ -150,10 +150,10 @@ public class MapGenOmothol extends MapGenStructure
 		/**
 		 * currently only defined for Villages, returns true if Village has more than 2 non-road components
 		 */
-		 @Override
-		 public boolean isSizeableStructure()
+		@Override
+		public boolean isSizeableStructure()
 		{
-			 return hasMoreThanTwoComponents;
+			return hasMoreThanTwoComponents;
 		}
 
 		@Override

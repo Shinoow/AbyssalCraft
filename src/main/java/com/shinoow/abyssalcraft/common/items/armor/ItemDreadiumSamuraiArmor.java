@@ -16,6 +16,7 @@ import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.EnumAction;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
@@ -74,9 +75,11 @@ public class ItemDreadiumSamuraiArmor extends ItemArmor {
 				armorModel.isRiding = entityLiving.isRiding();
 				armorModel.isChild = entityLiving.isChild();
 				armorModel.heldItemRight = entityLiving.getEquipmentInSlot(0) != null ? 1 :0;
-				if(entityLiving instanceof EntityPlayer)
-					armorModel.aimedBow =((EntityPlayer)entityLiving).getItemInUseDuration() > 2;
-					return armorModel;
+				if(entityLiving instanceof EntityPlayer){
+					armorModel.aimedBow =((EntityPlayer)entityLiving).getItemInUseDuration() > 2 && ((EntityPlayer) entityLiving).getItemInUse().getItem().getItemUseAction(((EntityPlayer) entityLiving).getItemInUse()) == EnumAction.bow;
+					armorModel.heldItemRight = ((EntityPlayer) entityLiving).isBlocking() ? 3 : entityLiving.getEquipmentInSlot(0) != null ? 1 :0;
+				}
+				return armorModel;
 			}
 		}
 		return null;

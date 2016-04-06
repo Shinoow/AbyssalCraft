@@ -16,6 +16,7 @@ import java.lang.reflect.InvocationTargetException;
 import morph.api.Ability;
 import morph.api.Api;
 
+import com.shinoow.abyssalcraft.api.integration.ACPlugin;
 import com.shinoow.abyssalcraft.api.integration.IACPlugin;
 import com.shinoow.abyssalcraft.client.model.entity.*;
 import com.shinoow.abyssalcraft.common.entity.*;
@@ -24,7 +25,9 @@ import com.shinoow.abyssalcraft.common.entity.demon.*;
 import com.shinoow.abyssalcraft.common.util.ACLogger;
 
 import cpw.mods.fml.common.FMLCommonHandler;
+import cpw.mods.fml.common.Loader;
 
+@ACPlugin
 public class ACMorph implements IACPlugin {
 
 	Ability hostile, sunburn, climb, fallNegate, fly, fireImmunity, flyNerf, water, chicken;
@@ -46,6 +49,12 @@ public class ACMorph implements IACPlugin {
 	@Override
 	public String getModName(){
 		return "Morph";
+	}
+
+	@Override
+	public boolean canLoad() {
+
+		return Loader.isModLoaded("Morph");
 	}
 
 	@Override

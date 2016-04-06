@@ -33,7 +33,7 @@ public class EntityODBcPrimed extends Entity {
 	public EntityODBcPrimed(World par1World)
 	{
 		super(par1World);
-		fuse = 0;
+		fuse = 40;
 		preventEntitySpawning = true;
 		setSize(0.98F, 0.98F);
 		yOffset = height / 2.0F;
