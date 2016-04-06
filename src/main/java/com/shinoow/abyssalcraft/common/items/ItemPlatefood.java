@@ -15,7 +15,9 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemFood;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
+
 import com.shinoow.abyssalcraft.AbyssalCraft;
+import com.shinoow.abyssalcraft.api.item.ACItems;
 
 public class ItemPlatefood extends ItemFood
 {
@@ -31,6 +33,6 @@ public class ItemPlatefood extends ItemFood
 	@Override
 	public void onFoodEaten(ItemStack itemStack, World world, EntityPlayer entityPlayer)
 	{
-		entityPlayer.inventory.addItemStackToInventory(new ItemStack(AbyssalCraft.dirtyplate));
+		entityPlayer.inventory.addItemStackToInventory(new ItemStack(ACItems.dirty_plate));
 	}
 }

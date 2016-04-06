@@ -28,6 +28,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.client.FMLClientHandler;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
+import com.shinoow.abyssalcraft.api.block.ACBlocks;
 
 public class ItemPortalPlacerJzh extends Item {
 
@@ -72,25 +73,25 @@ public class ItemPortalPlacerJzh extends Item {
 							if(!world.isAirBlock(pos.add(0, y, z)))
 								return EnumActionResult.FAIL;
 
-					world.setBlockState(pos.add(0, 1, 0), AbyssalCraft.omotholstone.getDefaultState());
-					world.setBlockState(pos.add(0, 1, 1), AbyssalCraft.omotholstone.getDefaultState());
-					world.setBlockState(pos.add(0, 1, 2), AbyssalCraft.omotholstone.getDefaultState());
-					world.setBlockState(pos.add(0, 1, -1), AbyssalCraft.omotholstone.getDefaultState());
+					world.setBlockState(pos.add(0, 1, 0), ACBlocks.omothol_stone.getDefaultState());
+					world.setBlockState(pos.add(0, 1, 1), ACBlocks.omothol_stone.getDefaultState());
+					world.setBlockState(pos.add(0, 1, 2), ACBlocks.omothol_stone.getDefaultState());
+					world.setBlockState(pos.add(0, 1, -1), ACBlocks.omothol_stone.getDefaultState());
 
-					world.setBlockState(pos.add(0, 2, -1), AbyssalCraft.omotholstone.getDefaultState());
-					world.setBlockState(pos.add(0, 3, -1), AbyssalCraft.omotholstone.getDefaultState());
-					world.setBlockState(pos.add(0, 4, -1), AbyssalCraft.omotholstone.getDefaultState());
-					world.setBlockState(pos.add(0, 5, -1), AbyssalCraft.omotholstone.getDefaultState());
+					world.setBlockState(pos.add(0, 2, -1), ACBlocks.omothol_stone.getDefaultState());
+					world.setBlockState(pos.add(0, 3, -1), ACBlocks.omothol_stone.getDefaultState());
+					world.setBlockState(pos.add(0, 4, -1), ACBlocks.omothol_stone.getDefaultState());
+					world.setBlockState(pos.add(0, 5, -1), ACBlocks.omothol_stone.getDefaultState());
 
-					world.setBlockState(pos.add(0, 2, 2), AbyssalCraft.omotholstone.getDefaultState());
-					world.setBlockState(pos.add(0, 3, 2), AbyssalCraft.omotholstone.getDefaultState());
-					world.setBlockState(pos.add(0, 4, 2), AbyssalCraft.omotholstone.getDefaultState());
-					world.setBlockState(pos.add(0, 5, 2), AbyssalCraft.omotholstone.getDefaultState());
+					world.setBlockState(pos.add(0, 2, 2), ACBlocks.omothol_stone.getDefaultState());
+					world.setBlockState(pos.add(0, 3, 2), ACBlocks.omothol_stone.getDefaultState());
+					world.setBlockState(pos.add(0, 4, 2), ACBlocks.omothol_stone.getDefaultState());
+					world.setBlockState(pos.add(0, 5, 2), ACBlocks.omothol_stone.getDefaultState());
 
-					world.setBlockState(pos.add(0, 5, 0), AbyssalCraft.omotholstone.getDefaultState());
-					world.setBlockState(pos.add(0, 5, 1), AbyssalCraft.omotholstone.getDefaultState());
+					world.setBlockState(pos.add(0, 5, 0), ACBlocks.omothol_stone.getDefaultState());
+					world.setBlockState(pos.add(0, 5, 1), ACBlocks.omothol_stone.getDefaultState());
 
-					world.setBlockState(pos.add(0, 2, 1), AbyssalCraft.omotholfire.getDefaultState());
+					world.setBlockState(pos.add(0, 2, 1), ACBlocks.omothol_fire.getDefaultState());
 				}
 				else
 				{
@@ -99,25 +100,25 @@ public class ItemPortalPlacerJzh extends Item {
 							if(!world.isAirBlock(pos.add(x, y, 0)))
 								return EnumActionResult.FAIL;
 
-					world.setBlockState(pos.add(0, 1, 0), AbyssalCraft.omotholstone.getDefaultState());
-					world.setBlockState(pos.add(1, 1, 0), AbyssalCraft.omotholstone.getDefaultState());
-					world.setBlockState(pos.add(2, 1, 0), AbyssalCraft.omotholstone.getDefaultState());
-					world.setBlockState(pos.add(-1, 1, 0), AbyssalCraft.omotholstone.getDefaultState());
+					world.setBlockState(pos.add(0, 1, 0), ACBlocks.omothol_stone.getDefaultState());
+					world.setBlockState(pos.add(1, 1, 0), ACBlocks.omothol_stone.getDefaultState());
+					world.setBlockState(pos.add(2, 1, 0), ACBlocks.omothol_stone.getDefaultState());
+					world.setBlockState(pos.add(-1, 1, 0), ACBlocks.omothol_stone.getDefaultState());
 
-					world.setBlockState(pos.add(-1, 2, 0), AbyssalCraft.omotholstone.getDefaultState());
-					world.setBlockState(pos.add(-1, 3, 0), AbyssalCraft.omotholstone.getDefaultState());
-					world.setBlockState(pos.add(-1, 4, 0), AbyssalCraft.omotholstone.getDefaultState());
-					world.setBlockState(pos.add(-1, 5, 0), AbyssalCraft.omotholstone.getDefaultState());
+					world.setBlockState(pos.add(-1, 2, 0), ACBlocks.omothol_stone.getDefaultState());
+					world.setBlockState(pos.add(-1, 3, 0), ACBlocks.omothol_stone.getDefaultState());
+					world.setBlockState(pos.add(-1, 4, 0), ACBlocks.omothol_stone.getDefaultState());
+					world.setBlockState(pos.add(-1, 5, 0), ACBlocks.omothol_stone.getDefaultState());
 
-					world.setBlockState(pos.add(2, 2, 0), AbyssalCraft.omotholstone.getDefaultState());
-					world.setBlockState(pos.add(2, 3, 0), AbyssalCraft.omotholstone.getDefaultState());
-					world.setBlockState(pos.add(2, 4, 0), AbyssalCraft.omotholstone.getDefaultState());
-					world.setBlockState(pos.add(2, 5, 0), AbyssalCraft.omotholstone.getDefaultState());
+					world.setBlockState(pos.add(2, 2, 0), ACBlocks.omothol_stone.getDefaultState());
+					world.setBlockState(pos.add(2, 3, 0), ACBlocks.omothol_stone.getDefaultState());
+					world.setBlockState(pos.add(2, 4, 0), ACBlocks.omothol_stone.getDefaultState());
+					world.setBlockState(pos.add(2, 5, 0), ACBlocks.omothol_stone.getDefaultState());
 
-					world.setBlockState(pos.add(0, 5, 0), AbyssalCraft.omotholstone.getDefaultState());
-					world.setBlockState(pos.add(1, 5, 0), AbyssalCraft.omotholstone.getDefaultState());
+					world.setBlockState(pos.add(0, 5, 0), ACBlocks.omothol_stone.getDefaultState());
+					world.setBlockState(pos.add(1, 5, 0), ACBlocks.omothol_stone.getDefaultState());
 
-					world.setBlockState(pos.add(1, 2, 0), AbyssalCraft.omotholfire.getDefaultState());
+					world.setBlockState(pos.add(1, 2, 0), ACBlocks.omothol_fire.getDefaultState());
 				}
 				return EnumActionResult.SUCCESS;
 			}

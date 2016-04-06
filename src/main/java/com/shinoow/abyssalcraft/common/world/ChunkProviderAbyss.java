@@ -37,7 +37,9 @@ import net.minecraft.world.gen.NoiseGeneratorOctaves;
 import net.minecraft.world.gen.NoiseGeneratorPerlin;
 import net.minecraftforge.event.ForgeEventFactory;
 import net.minecraftforge.event.terraingen.TerrainGen;
+
 import com.shinoow.abyssalcraft.AbyssalCraft;
+import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.common.structures.StructureShoggothPit;
 import com.shinoow.abyssalcraft.common.structures.abyss.Abypillar;
 import com.shinoow.abyssalcraft.common.structures.abyss.Abyruin;
@@ -161,9 +163,9 @@ public class ChunkProviderAbyss implements IChunkGenerator
 
 							for (int k3 = 0; k3 < 4; ++k3)
 								if ((d15 += d16) > 0.0D)
-									primer.setBlockState(k * 4 + i3, k2 * 8 + l2, j1 * 4 + k3, AbyssalCraft.abystone.getDefaultState());
+									primer.setBlockState(k * 4 + i3, k2 * 8 + l2, j1 * 4 + k3, ACBlocks.abyssal_stone.getDefaultState());
 								else if (k2 * 8 + l2 < b0)
-									primer.setBlockState(k * 4 + i3, k2 * 8 + l2, j1 * 4 + k3, AbyssalCraft.Cwater.getDefaultState());
+									primer.setBlockState(k * 4 + i3, k2 * 8 + l2, j1 * 4 + k3, ACBlocks.liquid_coralium.getDefaultState());
 
 							d10 += d12;
 							d11 += d13;
@@ -364,7 +366,7 @@ public class ChunkProviderAbyss implements IChunkGenerator
 				k1 = rand.nextInt(16) + 8;
 				l1 = rand.nextInt(128);
 				i2 = rand.nextInt(16) + 8;
-				new WorldGenAbyLake(AbyssalCraft.Cwater).generate(worldObj, rand, pos.add(k1, l1, i2));
+				new WorldGenAbyLake(ACBlocks.liquid_coralium).generate(worldObj, rand, pos.add(k1, l1, i2));
 			}
 		if(AbyssalCraft.generateAbyssalWastelandPillars)
 			for(int i = 0; i < 5; i++) {

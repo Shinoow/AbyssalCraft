@@ -22,7 +22,6 @@ import net.minecraft.world.EnumDifficulty;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
 import com.shinoow.abyssalcraft.common.entity.EntityAbyssalZombie;
 import com.shinoow.abyssalcraft.common.entity.EntityDepthsGhoul;
@@ -44,7 +43,7 @@ public class PotionCplague extends Potion{
 	public void performEffect(EntityLivingBase par1EntityLivingBase, int par2){
 
 		if(EntityUtil.isEntityCoralium(par1EntityLivingBase))
-			par1EntityLivingBase.removePotionEffect(AbyssalCraft.Cplague);
+			par1EntityLivingBase.removePotionEffect(this);
 		else par1EntityLivingBase.attackEntityFrom(AbyssalCraftAPI.coralium, 2);
 
 		if(!par1EntityLivingBase.isEntityAlive() && !par1EntityLivingBase.worldObj.isRemote)

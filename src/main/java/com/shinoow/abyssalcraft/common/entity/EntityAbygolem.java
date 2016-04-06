@@ -29,6 +29,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
+import com.shinoow.abyssalcraft.api.item.ACItems;
 
 public class EntityAbygolem extends EntityMob {
 
@@ -74,7 +75,7 @@ public class EntityAbygolem extends EntityMob {
 	@Override
 	public void onDeath(DamageSource par1DamageSource) {
 		if(par1DamageSource.getEntity() instanceof EntityPlayer)
-			dropItem(AbyssalCraft.abychunk, worldObj.rand.nextInt(3));
+			dropItem(ACItems.chunk_of_abyssalnite, worldObj.rand.nextInt(3));
 		super.onDeath(par1DamageSource);
 	}
 

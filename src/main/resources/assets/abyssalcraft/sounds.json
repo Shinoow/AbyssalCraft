@@ -32,6 +32,16 @@
 			"abyssalcraft:ghoul/normal/idle5"
 		]
 	},
+	"ghoul.normal.hit": {
+		"category": "hostile",
+		"sounds": [
+			"abyssalcraft:ghoul/normal/hurt1",
+			"abyssalcraft:ghoul/normal/hurt2",
+			"abyssalcraft:ghoul/normal/hurt3",
+			"abyssalcraft:ghoul/normal/hurt4",
+			"abyssalcraft:ghoul/normal/hurt5"
+		]
+	},
 	"ghoul.death": {
 		"category": "hostile",
 		"sounds": [
@@ -104,6 +114,32 @@
 		"category": "hostile",
 		"sounds": [
 			"abyssalcraft:remnant/scream"
+		]
+	},
+	"shoggoth.idle": {
+		"category": "hostile",
+		"sounds": [
+			"abyssalcraft:shoggoth/idle1",
+			"abyssalcraft:shoggoth/idle2",
+			"abyssalcraft:shoggoth/idle3",
+			"abyssalcraft:shoggoth/idle4",
+			"abyssalcraft:shoggoth/idle5"
+		]
+	},
+	"shoggoth.hit": {
+		"category": "hostile",
+		"sounds": [
+			"abyssalcraft:shoggoth/hurt1",
+			"abyssalcraft:shoggoth/hurt2",
+			"abyssalcraft:shoggoth/hurt3",
+			"abyssalcraft:shoggoth/hurt4",
+			"abyssalcraft:shoggoth/hurt5"
+		]
+	},
+	"shoggoth.death": {
+		"category": "hostile",
+		"sounds": [
+			"abyssalcraft:shoggoth/death"
 		]
 	}
 }

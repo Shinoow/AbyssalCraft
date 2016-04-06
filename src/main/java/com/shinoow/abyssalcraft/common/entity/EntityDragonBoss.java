@@ -41,6 +41,7 @@ import net.minecraft.world.BossInfo.Color;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.api.entity.ICoraliumEntity;
+import com.shinoow.abyssalcraft.api.item.ACItems;
 import com.shinoow.abyssalcraft.client.lib.ParticleEffects;
 import com.shinoow.abyssalcraft.common.util.SpecialTextUtil;
 
@@ -589,9 +590,9 @@ public class EntityDragonBoss extends EntityMob implements IEntityMultiPart, ICo
 					i -= j;
 					worldObj.spawnEntityInWorld(new EntityXPOrb(worldObj, posX, posY, posZ, j));
 					if(deathTicks == 100 || deathTicks == 120 || deathTicks == 140 || deathTicks == 160 || deathTicks == 180){
-						worldObj.spawnEntityInWorld(new EntityItem(worldObj, posX + posneg(3), posY + rand.nextInt(3), posZ + posneg(3), new ItemStack(AbyssalCraft.Cchunk)));
-						worldObj.spawnEntityInWorld(new EntityItem(worldObj, posX + posneg(3), posY + rand.nextInt(3), posZ + posneg(3), new ItemStack(AbyssalCraft.Cingot)));
-						worldObj.spawnEntityInWorld(new EntityItem(worldObj, posX + posneg(3), posY + rand.nextInt(3), posZ + posneg(3), new ItemStack(AbyssalCraft.Corflesh)));
+						worldObj.spawnEntityInWorld(new EntityItem(worldObj, posX + posneg(3), posY + rand.nextInt(3), posZ + posneg(3), new ItemStack(ACItems.chunk_of_coralium)));
+						worldObj.spawnEntityInWorld(new EntityItem(worldObj, posX + posneg(3), posY + rand.nextInt(3), posZ + posneg(3), new ItemStack(ACItems.refined_coralium_ingot)));
+						worldObj.spawnEntityInWorld(new EntityItem(worldObj, posX + posneg(3), posY + rand.nextInt(3), posZ + posneg(3), new ItemStack(ACItems.coralium_plagued_flesh)));
 					}
 				}
 			}
@@ -611,7 +612,7 @@ public class EntityDragonBoss extends EntityMob implements IEntityMultiPart, ICo
 			SpecialTextUtil.OblivionaireGroup(worldObj, I18n.translateToLocal("message.asorah.death.3"));
 		if (deathTicks == 200 && !worldObj.isRemote){
 			setDead();
-			worldObj.spawnEntityInWorld(new EntityItem(worldObj, posX, posY, posZ, new ItemStack(AbyssalCraft.EoA)));
+			worldObj.spawnEntityInWorld(new EntityItem(worldObj, posX, posY, posZ, new ItemStack(ACItems.eye_of_the_abyss)));
 		}
 	}
 

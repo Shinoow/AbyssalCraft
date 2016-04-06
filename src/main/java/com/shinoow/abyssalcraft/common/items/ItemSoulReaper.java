@@ -25,8 +25,10 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.text.translation.I18n;
+
 import com.google.common.collect.Multimap;
 import com.shinoow.abyssalcraft.AbyssalCraft;
+import com.shinoow.abyssalcraft.api.item.ACItems;
 
 public class ItemSoulReaper extends Item {
 
@@ -144,7 +146,7 @@ public class ItemSoulReaper extends Item {
 	@Override
 	public boolean getIsRepairable(ItemStack par1ItemStack, ItemStack par2ItemStack)
 	{
-		return AbyssalCraft.shadowgem == par2ItemStack.getItem() ? true : super.getIsRepairable(par1ItemStack, par2ItemStack);
+		return ACItems.shadow_gem == par2ItemStack.getItem() ? true : super.getIsRepairable(par1ItemStack, par2ItemStack);
 	}
 
 	@Override

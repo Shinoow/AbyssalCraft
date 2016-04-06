@@ -19,7 +19,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenTrees;
 
-import com.shinoow.abyssalcraft.AbyssalCraft;
+import com.shinoow.abyssalcraft.api.block.ACBlocks;
 
 public class WorldGenDrT extends WorldGenTrees
 {
@@ -62,7 +62,7 @@ public class WorldGenDrT extends WorldGenTrees
 					{
 						IBlockState i3 = world.getBlockState(new BlockPos(k1, i1, i2));
 
-						if (i3 != Blocks.air.getDefaultState() && i3 != AbyssalCraft.dreadleaves.getDefaultState() && i3 != Blocks.dirt.getDefaultState() && i3 != AbyssalCraft.dreadlog.getDefaultState())
+						if (i3 != Blocks.air.getDefaultState() && i3 != ACBlocks.dreadlands_leaves.getDefaultState() && i3 != Blocks.dirt.getDefaultState() && i3 != ACBlocks.dreadlands_log.getDefaultState())
 							flag = false;
 					} else
 						flag = false;
@@ -73,7 +73,7 @@ public class WorldGenDrT extends WorldGenTrees
 
 		IBlockState j1 = world.getBlockState(pos.down());
 
-		if (j1 != Blocks.dirt.getDefaultState() && j1 != AbyssalCraft.dreadstone.getDefaultState() && j1 != Blocks.grass.getDefaultState() && j1 != AbyssalCraft.dreadgrass.getDefaultState() && j1 != AbyssalCraft.Darkgrass.getDefaultState() || pos.getY() >= 256 - l - 1)
+		if (j1 != Blocks.dirt.getDefaultState() && j1 != ACBlocks.dreadstone.getDefaultState() && j1 != Blocks.grass.getDefaultState() && j1 != ACBlocks.dreadlands_grass.getDefaultState() && j1 != ACBlocks.darklands_grass.getDefaultState() || pos.getY() >= 256 - l - 1)
 			return false;
 
 		setBlockAndNotifyAdequately(world, pos.down(), Blocks.dirt.getDefaultState());
@@ -94,7 +94,7 @@ public class WorldGenDrT extends WorldGenTrees
 					int l5 = k5 - pos.getZ();
 
 					if (Math.abs(i5) != i4 || Math.abs(l5) != i4 || random.nextInt(2) != 0 && j3 != 0)
-						setBlockAndNotifyAdequately(world, new BlockPos(k4, j2, k5), AbyssalCraft.dreadleaves.getDefaultState());
+						setBlockAndNotifyAdequately(world, new BlockPos(k4, j2, k5), ACBlocks.dreadlands_leaves.getDefaultState());
 				}
 			}
 		}
@@ -103,10 +103,10 @@ public class WorldGenDrT extends WorldGenTrees
 		{
 			IBlockState k3 = world.getBlockState(pos.up(k2));
 
-			if (k3 != Blocks.air.getDefaultState() && k3 != AbyssalCraft.dreadleaves.getDefaultState())
+			if (k3 != Blocks.air.getDefaultState() && k3 != ACBlocks.dreadlands_leaves.getDefaultState())
 				continue;
 
-			setBlockAndNotifyAdequately(world, pos.up(k2), AbyssalCraft.dreadlog.getDefaultState());
+			setBlockAndNotifyAdequately(world, pos.up(k2), ACBlocks.dreadlands_log.getDefaultState());
 
 			if (!vinesGrow || k2 <= 0)
 				continue;

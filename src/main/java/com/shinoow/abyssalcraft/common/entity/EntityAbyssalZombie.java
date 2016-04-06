@@ -55,7 +55,9 @@ import net.minecraft.world.WorldProviderEnd;
 import net.minecraftforge.common.ForgeModContainer;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
+import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
 import com.shinoow.abyssalcraft.api.entity.ICoraliumEntity;
+import com.shinoow.abyssalcraft.api.item.ACItems;
 import com.shinoow.abyssalcraft.common.util.EntityUtil;
 
 public class EntityAbyssalZombie extends EntityMob implements ICoraliumEntity {
@@ -218,7 +220,7 @@ public class EntityAbyssalZombie extends EntityMob implements ICoraliumEntity {
 			if (par1Entity instanceof EntityLivingBase)
 				if(worldObj.provider.getDimension() == AbyssalCraft.configDimId1 && !EntityUtil.isEntityCoralium((EntityLivingBase)par1Entity)
 				|| AbyssalCraft.shouldInfect == true && !EntityUtil.isEntityCoralium((EntityLivingBase)par1Entity))
-					((EntityLivingBase)par1Entity).addPotionEffect(new PotionEffect(AbyssalCraft.Cplague, 100));
+					((EntityLivingBase)par1Entity).addPotionEffect(new PotionEffect(AbyssalCraftAPI.coralium_plague, 100));
 
 		boolean flag = super.attackEntityAsMob(par1Entity);
 
@@ -255,7 +257,7 @@ public class EntityAbyssalZombie extends EntityMob implements ICoraliumEntity {
 	@Override
 	protected Item getDropItem()
 	{
-		return AbyssalCraft.Corflesh;
+		return ACItems.coralium_plagued_flesh;
 	}
 
 	@Override

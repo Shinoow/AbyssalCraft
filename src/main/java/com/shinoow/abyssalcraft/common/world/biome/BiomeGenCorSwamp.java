@@ -25,6 +25,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
+import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.common.entity.EntityAbyssalZombie;
 import com.shinoow.abyssalcraft.common.entity.EntityDepthsGhoul;
 import com.shinoow.abyssalcraft.common.entity.anti.EntityAntiAbyssalZombie;
@@ -90,7 +91,7 @@ public class BiomeGenCorSwamp extends BiomeGenBase {
 				Block var10 = par1World.getBlockState(pos.add(var7, var8, var9)).getBlock();
 
 				if (var10 != null && var10.isReplaceableOreGen(par1World.getBlockState(pos.add(var7, var8, var9)), par1World, pos.add(var7, var8, var9), BlockMatcher.forBlock(Blocks.stone)) || var10 == Blocks.iron_ore || var10 == Blocks.coal_ore)
-					par1World.setBlockState(pos.add(var7, var8, var9), AbyssalCraft.Coraliumore.getDefaultState(), 2);
+					par1World.setBlockState(pos.add(var7, var8, var9), ACBlocks.coralium_ore.getDefaultState(), 2);
 			}
 			for(int rarity = 0; rarity < 6; rarity++)
 			{
@@ -99,7 +100,7 @@ public class BiomeGenCorSwamp extends BiomeGenBase {
 				int y = par2Random.nextInt(40);
 				int z = par2Random.nextInt(16);
 
-				new WorldGenMinable(AbyssalCraft.Coraliumore.getDefaultState(), veinSize).generate(par1World, par2Random, pos.add(x, y, z));
+				new WorldGenMinable(ACBlocks.coralium_ore.getDefaultState(), veinSize).generate(par1World, par2Random, pos.add(x, y, z));
 			}
 		}
 
@@ -109,7 +110,7 @@ public class BiomeGenCorSwamp extends BiomeGenBase {
 				int RandPosX = par2Random.nextInt(64);
 				int RandPosY = par2Random.nextInt(60);
 				int RandPosZ = par2Random.nextInt(64);
-				new WorldGenAntimatterLake(AbyssalCraft.anticwater).generate(par1World, par2Random, pos.add(RandPosX, RandPosY, RandPosZ));
+				new WorldGenAntimatterLake(ACBlocks.liquid_antimatter).generate(par1World, par2Random, pos.add(RandPosX, RandPosY, RandPosZ));
 			}
 	}
 

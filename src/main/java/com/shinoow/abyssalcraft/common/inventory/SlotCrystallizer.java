@@ -21,6 +21,7 @@ import net.minecraftforge.common.MinecraftForge;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.api.event.ACEvents;
+import com.shinoow.abyssalcraft.api.item.ACItems;
 import com.shinoow.abyssalcraft.api.recipe.CrystallizerRecipes;
 
 public class SlotCrystallizer extends Slot
@@ -99,7 +100,7 @@ public class SlotCrystallizer extends Slot
 
 		MinecraftForge.EVENT_BUS.post(new ACEvents.ItemCrystallizedEvent(thePlayer, par1ItemStack));
 
-		if(par1ItemStack.getItem() == AbyssalCraft.shadowgem)
+		if(par1ItemStack.getItem() == ACItems.shadow_gem)
 			thePlayer.addStat(AbyssalCraft.shadowGems, 1);
 	}
 }

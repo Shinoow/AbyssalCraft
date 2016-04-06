@@ -39,6 +39,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
+import com.shinoow.abyssalcraft.api.item.ACItems;
 import com.shinoow.abyssalcraft.common.entity.EntityCoraliumArrow;
 
 public class ItemCoraliumBow extends ItemBow {
@@ -90,7 +91,7 @@ public class ItemCoraliumBow extends ItemBow {
 				else
 				{
 					ItemStack itemstack = entityIn.getActiveItemStack();
-					return itemstack != null && itemstack.getItem() == AbyssalCraft.corbow ? (stack.getMaxItemUseDuration() - entityIn.getItemInUseCount()) / 20.0F : 0.0F;
+					return itemstack != null && itemstack.getItem() == ACItems.coralium_longbow ? (stack.getMaxItemUseDuration() - entityIn.getItemInUseCount()) / 20.0F : 0.0F;
 				}
 			}
 		});
@@ -270,6 +271,6 @@ public class ItemCoraliumBow extends ItemBow {
 	@Override
 	public boolean getIsRepairable(ItemStack par1ItemStack, ItemStack par2ItemStack)
 	{
-		return AbyssalCraft.Cingot == par2ItemStack.getItem() ? true : super.getIsRepairable(par1ItemStack, par2ItemStack);
+		return ACItems.refined_coralium_ingot == par2ItemStack.getItem() ? true : super.getIsRepairable(par1ItemStack, par2ItemStack);
 	}
 }

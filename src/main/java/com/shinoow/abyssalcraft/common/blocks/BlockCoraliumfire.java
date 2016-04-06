@@ -28,7 +28,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import com.shinoow.abyssalcraft.AbyssalCraft;
+import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
 import com.shinoow.abyssalcraft.common.util.EntityUtil;
 
 public class BlockCoraliumfire extends Block {
@@ -113,7 +113,7 @@ public class BlockCoraliumfire extends Block {
 
 		if(par5Entity instanceof EntityLivingBase)
 			if(EntityUtil.isEntityCoralium((EntityLivingBase)par5Entity)) {}
-			else ((EntityLivingBase)par5Entity).addPotionEffect(new PotionEffect(AbyssalCraft.Cplague, 100));
+			else ((EntityLivingBase)par5Entity).addPotionEffect(new PotionEffect(AbyssalCraftAPI.coralium_plague, 100));
 	}
 
 	@Override

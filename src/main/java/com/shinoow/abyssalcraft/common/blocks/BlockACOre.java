@@ -23,7 +23,8 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-import com.shinoow.abyssalcraft.AbyssalCraft;
+import com.shinoow.abyssalcraft.api.block.ACBlocks;
+import com.shinoow.abyssalcraft.api.item.ACItems;
 
 public class BlockACOre extends BlockACBasic {
 
@@ -34,15 +35,15 @@ public class BlockACOre extends BlockACBasic {
 	@Override
 	public Item getItemDropped(IBlockState state, Random par2Random, int par3)
 	{
-		return this == AbyssalCraft.CoraliumInfusedStone ? AbyssalCraft.Cpearl: this == AbyssalCraft.Coraliumore ? AbyssalCraft.Coralium: this == AbyssalCraft.nitreOre ? AbyssalCraft.nitre: this == AbyssalCraft.AbyNitOre ? AbyssalCraft.nitre: this == AbyssalCraft.AbyDiaOre ? Items.diamond:
-			this == AbyssalCraft.AbyCorOre ? AbyssalCraft.Coralium: this == AbyssalCraft.AbyPCorOre ? AbyssalCraft.Cpearl: Item.getItemFromBlock(this);
+		return this == ACBlocks.coralium_infused_stone ? ACItems.coralium_pearl: this == ACBlocks.coralium_ore ? ACItems.coralium_gem: this == ACBlocks.nitre_ore ? ACItems.nitre: this == ACBlocks.abyssal_nitre_ore ? ACItems.nitre: this == ACBlocks.abyssal_diamond_ore ? Items.diamond:
+			this == ACBlocks.abyssal_coralium_ore ? ACItems.coralium_gem: this == ACBlocks.pearlescent_coralium_ore ? ACItems.coralium_pearl: Item.getItemFromBlock(this);
 	}
 
 	@Override
 	public int quantityDropped(Random par1Random)
 	{
-		return this == AbyssalCraft.Coraliumore ? 1 + par1Random.nextInt(3): this == AbyssalCraft.nitreOre ? 1 + par1Random.nextInt(3): this == AbyssalCraft.AbyNitOre ? 1 + par1Random.nextInt(3):
-			this == AbyssalCraft.AbyCorOre ? 1 + par1Random.nextInt(3): this == AbyssalCraft.AbyPCorOre ? 1 + par1Random.nextInt(2): 1;
+		return this == ACBlocks.coralium_ore ? 1 + par1Random.nextInt(3): this == ACBlocks.nitre_ore ? 1 + par1Random.nextInt(3): this == ACBlocks.abyssal_nitre_ore ? 1 + par1Random.nextInt(3):
+			this == ACBlocks.abyssal_coralium_ore ? 1 + par1Random.nextInt(3): this == ACBlocks.pearlescent_coralium_ore ? 1 + par1Random.nextInt(2): 1;
 	}
 
 	@Override
@@ -56,7 +57,7 @@ public class BlockACOre extends BlockACBasic {
 				j = 0;
 
 			return quantityDropped(par2Random) * (j + 1);
-		} else if(this == AbyssalCraft.Coraliumore || this == AbyssalCraft.nitreOre || this == AbyssalCraft.AbyNitOre || this == AbyssalCraft.AbyCorOre)
+		} else if(this == ACBlocks.coralium_ore || this == ACBlocks.nitre_ore || this == ACBlocks.abyssal_nitre_ore || this == ACBlocks.abyssal_coralium_ore)
 			return quantityDropped(par2Random);
 		else
 			return quantityDropped(par2Random);
@@ -77,19 +78,19 @@ public class BlockACOre extends BlockACBasic {
 		{
 			int j1 = 0;
 
-			if (this == AbyssalCraft.Coraliumore)
+			if (this == ACBlocks.coralium_ore)
 				j1 = MathHelper.getRandomIntegerInRange(rand, 0, 2);
-			else if (this == AbyssalCraft.nitreOre)
+			else if (this == ACBlocks.nitre_ore)
 				j1 = MathHelper.getRandomIntegerInRange(rand, 0, 2);
-			else if (this == AbyssalCraft.CoraliumInfusedStone)
+			else if (this == ACBlocks.coralium_infused_stone)
 				j1 = MathHelper.getRandomIntegerInRange(rand, 2, 5);
-			else if (this == AbyssalCraft.AbyCorOre)
+			else if (this == ACBlocks.abyssal_coralium_ore)
 				j1 = MathHelper.getRandomIntegerInRange(rand, 0, 2);
-			else if (this == AbyssalCraft.AbyDiaOre)
+			else if (this == ACBlocks.abyssal_diamond_ore)
 				j1 = MathHelper.getRandomIntegerInRange(rand, 3, 7);
-			else if (this == AbyssalCraft.AbyNitOre)
+			else if (this == ACBlocks.abyssal_nitre_ore)
 				j1 = MathHelper.getRandomIntegerInRange(rand, 0, 2);
-			else if (this == AbyssalCraft.AbyPCorOre)
+			else if (this == ACBlocks.pearlescent_coralium_ore)
 				j1 = MathHelper.getRandomIntegerInRange(rand, 2, 5);
 
 			return j1;

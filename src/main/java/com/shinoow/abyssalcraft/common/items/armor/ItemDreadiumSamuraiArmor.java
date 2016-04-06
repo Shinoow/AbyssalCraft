@@ -28,6 +28,8 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
+import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
+import com.shinoow.abyssalcraft.api.item.ACItems;
 
 public class ItemDreadiumSamuraiArmor extends ItemArmor {
 	public ItemDreadiumSamuraiArmor(ArmorMaterial par2EnumArmorMaterial, int par3, EntityEquipmentSlot par4, String name){
@@ -44,10 +46,10 @@ public class ItemDreadiumSamuraiArmor extends ItemArmor {
 
 	@Override
 	public String getArmorTexture(ItemStack stack, Entity entity, EntityEquipmentSlot slot, String layer) {
-		if(stack.getItem() == AbyssalCraft.dreadiumShelmet || stack.getItem() == AbyssalCraft.dreadiumSplate || stack.getItem() == AbyssalCraft.dreadiumSboots)
+		if(stack.getItem() == ACItems.dreadium_samurai_helmet || stack.getItem() == ACItems.dreadium_samurai_chestplate || stack.getItem() == ACItems.dreadium_samurai_boots)
 			return "abyssalcraft:textures/armor/dreadiums_1.png";
 
-		if(stack.getItem() == AbyssalCraft.dreadiumSlegs)
+		if(stack.getItem() == ACItems.dreadium_samurai_leggings)
 			return "abyssalcraft:textures/armor/dreadiums_2.png";
 		else return null;
 	}
@@ -85,19 +87,19 @@ public class ItemDreadiumSamuraiArmor extends ItemArmor {
 
 	@Override
 	public void onArmorTick(World world, EntityPlayer player, ItemStack itemstack) {
-		if (itemstack.getItem() == AbyssalCraft.dreadiumShelmet) {
+		if (itemstack.getItem() == ACItems.dreadium_samurai_helmet) {
 			player.addPotionEffect(new PotionEffect(MobEffects.nightVision, 260, 0));
-			if(player.getActivePotionEffect(AbyssalCraft.Dplague) !=null)
-				player.removePotionEffect(AbyssalCraft.Dplague);
+			if(player.getActivePotionEffect(AbyssalCraftAPI.dread_plague) !=null)
+				player.removePotionEffect(AbyssalCraftAPI.dread_plague);
 		}
-		if (itemstack.getItem() == AbyssalCraft.dreadiumSplate) {
+		if (itemstack.getItem() == ACItems.dreadium_samurai_chestplate) {
 			player.addPotionEffect(new PotionEffect(MobEffects.resistance, 20));
 			player.addPotionEffect(new PotionEffect(MobEffects.damageBoost, 20));
 			player.addPotionEffect(new PotionEffect(MobEffects.fireResistance, 20, 1));
 		}
-		if (itemstack.getItem() == AbyssalCraft.dreadiumSlegs)
+		if (itemstack.getItem() == ACItems.dreadium_samurai_leggings)
 			player.addPotionEffect(new PotionEffect(MobEffects.regeneration, 20, 0));
-		if (itemstack.getItem() == AbyssalCraft.dreadiumSboots)
+		if (itemstack.getItem() == ACItems.dreadium_samurai_boots)
 			player.addPotionEffect(new PotionEffect(MobEffects.moveSpeed, 20, 1));
 
 	}

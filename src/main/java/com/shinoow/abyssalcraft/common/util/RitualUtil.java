@@ -20,7 +20,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 import com.google.common.collect.Maps;
-import com.shinoow.abyssalcraft.AbyssalCraft;
+import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.api.ritual.RitualRegistry;
 
 public class RitualUtil {
@@ -30,22 +30,22 @@ public class RitualUtil {
 
 	public static void addBlocks(){
 		ritualBlocks.put(Blocks.cobblestone, 0);
-		ritualBlocks.put(AbyssalCraft.Darkstone_cobble, 0);
-		ritualBlocks.put(AbyssalCraft.abybrick, 1);
-		ritualBlocks.put(AbyssalCraft.cstonebrick, 1);
-		ritualBlocks.put(AbyssalCraft.dreadbrick, 2);
-		ritualBlocks.put(AbyssalCraft.abydreadbrick, 2);
-		ritualBlocks.put(AbyssalCraft.ethaxiumbrick, 3);
-		ritualBlocks.put(AbyssalCraft.darkethaxiumbrick, 3);
+		ritualBlocks.put(ACBlocks.darkstone_cobblestone, 0);
+		ritualBlocks.put(ACBlocks.abyssal_stone_brick, 1);
+		ritualBlocks.put(ACBlocks.coralium_stone_brick, 1);
+		ritualBlocks.put(ACBlocks.dreadstone_brick, 2);
+		ritualBlocks.put(ACBlocks.abyssalnite_stone_brick, 2);
+		ritualBlocks.put(ACBlocks.ethaxium_brick, 3);
+		ritualBlocks.put(ACBlocks.dark_ethaxium_brick, 3);
 
 		altarMeta.put(Blocks.cobblestone, 0);
-		altarMeta.put(AbyssalCraft.Darkstone_cobble, 1);
-		altarMeta.put(AbyssalCraft.abybrick, 2);
-		altarMeta.put(AbyssalCraft.cstonebrick, 3);
-		altarMeta.put(AbyssalCraft.dreadbrick, 4);
-		altarMeta.put(AbyssalCraft.abydreadbrick, 5);
-		altarMeta.put(AbyssalCraft.ethaxiumbrick, 6);
-		altarMeta.put(AbyssalCraft.darkethaxiumbrick, 7);
+		altarMeta.put(ACBlocks.darkstone_cobblestone, 1);
+		altarMeta.put(ACBlocks.abyssal_stone_brick, 2);
+		altarMeta.put(ACBlocks.coralium_stone_brick, 3);
+		altarMeta.put(ACBlocks.dreadstone_brick, 4);
+		altarMeta.put(ACBlocks.abyssalnite_stone_brick, 5);
+		altarMeta.put(ACBlocks.ethaxium_brick, 6);
+		altarMeta.put(ACBlocks.dark_ethaxium_brick, 7);
 	}
 
 	/**
@@ -120,15 +120,15 @@ public class RitualUtil {
 			int y = 0;
 			int z = 0;
 
-			world.setBlockState(pos, AbyssalCraft.ritualaltar.getStateFromMeta(meta), 2);
-			world.setBlockState(pos.add(x -3, y, z), AbyssalCraft.ritualpedestal.getStateFromMeta(meta), 2);
-			world.setBlockState(pos.add(x, y, z -3), AbyssalCraft.ritualpedestal.getStateFromMeta(meta), 2);
-			world.setBlockState(pos.add(x + 3, y, z), AbyssalCraft.ritualpedestal.getStateFromMeta(meta), 2);
-			world.setBlockState(pos.add(x, y, z + 3), AbyssalCraft.ritualpedestal.getStateFromMeta(meta), 2);
-			world.setBlockState(pos.add(x -2, y, z + 2), AbyssalCraft.ritualpedestal.getStateFromMeta(meta), 2);
-			world.setBlockState(pos.add(x -2, y, z -2), AbyssalCraft.ritualpedestal.getStateFromMeta(meta), 2);
-			world.setBlockState(pos.add(x + 2, y, z + 2), AbyssalCraft.ritualpedestal.getStateFromMeta(meta), 2);
-			world.setBlockState(pos.add(x + 2, y, z -2), AbyssalCraft.ritualpedestal.getStateFromMeta(meta), 2);
+			world.setBlockState(pos, ACBlocks.ritual_altar.getStateFromMeta(meta), 2);
+			world.setBlockState(pos.add(x -3, y, z), ACBlocks.ritual_pedestal.getStateFromMeta(meta), 2);
+			world.setBlockState(pos.add(x, y, z -3), ACBlocks.ritual_pedestal.getStateFromMeta(meta), 2);
+			world.setBlockState(pos.add(x + 3, y, z), ACBlocks.ritual_pedestal.getStateFromMeta(meta), 2);
+			world.setBlockState(pos.add(x, y, z + 3), ACBlocks.ritual_pedestal.getStateFromMeta(meta), 2);
+			world.setBlockState(pos.add(x -2, y, z + 2), ACBlocks.ritual_pedestal.getStateFromMeta(meta), 2);
+			world.setBlockState(pos.add(x -2, y, z -2), ACBlocks.ritual_pedestal.getStateFromMeta(meta), 2);
+			world.setBlockState(pos.add(x + 2, y, z + 2), ACBlocks.ritual_pedestal.getStateFromMeta(meta), 2);
+			world.setBlockState(pos.add(x + 2, y, z -2), ACBlocks.ritual_pedestal.getStateFromMeta(meta), 2);
 		}
 	}
 }

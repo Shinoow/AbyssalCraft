@@ -38,6 +38,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import com.google.common.cache.LoadingCache;
 import com.shinoow.abyssalcraft.AbyssalCraft;
+import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.common.world.TeleporterDreadlands;
 
 public class BlockDreadlandsPortal extends BlockBreakable {
@@ -319,12 +320,12 @@ public class BlockDreadlandsPortal extends BlockBreakable {
 			{
 				BlockPos blockpos = p_180120_1_.offset(p_180120_2_, i);
 
-				if (!func_150857_a(world.getBlockState(blockpos).getBlock()) || world.getBlockState(blockpos.down()).getBlock() != AbyssalCraft.dreadstone)
+				if (!func_150857_a(world.getBlockState(blockpos).getBlock()) || world.getBlockState(blockpos.down()).getBlock() != ACBlocks.dreadstone)
 					break;
 			}
 
 			Block block = world.getBlockState(p_180120_1_.offset(p_180120_2_, i)).getBlock();
-			return block == AbyssalCraft.dreadstone ? i : 0;
+			return block == ACBlocks.dreadstone ? i : 0;
 		}
 
 		public int func_181100_a()
@@ -350,27 +351,27 @@ public class BlockDreadlandsPortal extends BlockBreakable {
 						if (!func_150857_a(block))
 							break label24;
 
-						if (block == AbyssalCraft.dreadportal)
+						if (block == ACBlocks.dreaded_gateway)
 							++field_150864_e;
 
 						if (i == 0)
 						{
 							block = world.getBlockState(blockpos.offset(field_150863_d)).getBlock();
 
-							if (block != AbyssalCraft.dreadstone)
+							if (block != ACBlocks.dreadstone)
 								break label24;
 						}
 						else if (i == field_150868_h - 1)
 						{
 							block = world.getBlockState(blockpos.offset(field_150866_c)).getBlock();
 
-							if (block != AbyssalCraft.dreadstone)
+							if (block != ACBlocks.dreadstone)
 								break label24;
 						}
 					}
 
 		for (int j = 0; j < field_150868_h; ++j)
-			if (world.getBlockState(field_150861_f.offset(field_150866_c, j).up(field_150862_g)).getBlock() != AbyssalCraft.dreadstone)
+			if (world.getBlockState(field_150861_f.offset(field_150866_c, j).up(field_150862_g)).getBlock() != ACBlocks.dreadstone)
 			{
 				field_150862_g = 0;
 				break;
@@ -389,7 +390,7 @@ public class BlockDreadlandsPortal extends BlockBreakable {
 
 		protected boolean func_150857_a(Block p_150857_1_)
 		{
-			return p_150857_1_.getMaterial(p_150857_1_.getDefaultState()) == Material.air || p_150857_1_ == AbyssalCraft.dreadfire || p_150857_1_ == AbyssalCraft.dreadportal;
+			return p_150857_1_.getMaterial(p_150857_1_.getDefaultState()) == Material.air || p_150857_1_ == ACBlocks.dreaded_fire || p_150857_1_ == ACBlocks.dreaded_gateway;
 		}
 
 		public boolean func_150860_b()
@@ -404,7 +405,7 @@ public class BlockDreadlandsPortal extends BlockBreakable {
 				BlockPos blockpos = field_150861_f.offset(field_150866_c, i);
 
 				for (int j = 0; j < field_150862_g; ++j)
-					world.setBlockState(blockpos.up(j), AbyssalCraft.dreadportal.getDefaultState().withProperty(BlockPortal.AXIS, axis), 2);
+					world.setBlockState(blockpos.up(j), ACBlocks.dreaded_gateway.getDefaultState().withProperty(BlockPortal.AXIS, axis), 2);
 			}
 		}
 	}

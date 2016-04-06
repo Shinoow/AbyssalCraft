@@ -30,6 +30,7 @@ import net.minecraft.world.World;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.api.entity.IDreadEntity;
+import com.shinoow.abyssalcraft.api.item.ACItems;
 
 public class EntityDreadgolem extends EntityMob implements IDreadEntity {
 
@@ -77,7 +78,7 @@ public class EntityDreadgolem extends EntityMob implements IDreadEntity {
 	@Override
 	public void onDeath(DamageSource par1DamageSource) {
 		if(par1DamageSource.getEntity() instanceof EntityPlayer)
-			dropItem(AbyssalCraft.dreadchunk, worldObj.rand.nextInt(3));
+			dropItem(ACItems.dreaded_chunk_of_abyssalnite, worldObj.rand.nextInt(3));
 		super.onDeath(par1DamageSource);
 	}
 

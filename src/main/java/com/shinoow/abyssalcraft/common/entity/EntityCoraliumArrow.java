@@ -40,7 +40,7 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
 
-import com.shinoow.abyssalcraft.AbyssalCraft;
+import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
 import com.shinoow.abyssalcraft.common.util.EntityUtil;
 
 public class EntityCoraliumArrow extends EntityArrow {
@@ -196,7 +196,7 @@ public class EntityCoraliumArrow extends EntityArrow {
 							EntityLivingBase entitylivingbase = (EntityLivingBase)movingobjectposition.entityHit;
 
 							if(EntityUtil.isEntityCoralium(entitylivingbase)){}
-							else entitylivingbase.addPotionEffect(new PotionEffect(AbyssalCraft.Cplague, 100));
+							else entitylivingbase.addPotionEffect(new PotionEffect(AbyssalCraftAPI.coralium_plague, 100));
 
 							if (!worldObj.isRemote)
 								entitylivingbase.setArrowCountInEntity(entitylivingbase.getArrowCountInEntity() + 1);

@@ -38,6 +38,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
+import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.common.blocks.tile.TileEntityMaterializer;
 
 public class BlockMaterializer extends BlockContainer {
@@ -60,7 +61,7 @@ public class BlockMaterializer extends BlockContainer {
 	@Override
 	public Item getItemDropped(IBlockState state, Random par1Random, int par3)
 	{
-		return Item.getItemFromBlock(AbyssalCraft.materializer);
+		return Item.getItemFromBlock(ACBlocks.materializer);
 	}
 
 	@Override
@@ -193,7 +194,7 @@ public class BlockMaterializer extends BlockContainer {
 	@SideOnly(Side.CLIENT)
 	public ItemStack getItem(World par1World, BlockPos pos, IBlockState state)
 	{
-		return new ItemStack(AbyssalCraft.materializer);
+		return new ItemStack(ACBlocks.materializer);
 	}
 
 	@Override

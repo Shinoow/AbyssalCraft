@@ -23,6 +23,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
+import com.shinoow.abyssalcraft.api.block.ACBlocks;
 
 public class WorldProviderOmothol extends WorldProvider {
 
@@ -125,7 +126,7 @@ public class WorldProviderOmothol extends WorldProvider {
 	@Override
 	public boolean canCoordinateBeSpawn(int x, int z)
 	{
-		return worldObj.getGroundAboveSeaLevel(new BlockPos(x, 0, z)) == AbyssalCraft.omotholstone;
+		return worldObj.getGroundAboveSeaLevel(new BlockPos(x, 0, z)) == ACBlocks.omothol_stone;
 	}
 
 	@Override

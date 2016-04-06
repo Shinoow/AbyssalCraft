@@ -24,7 +24,7 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-import com.shinoow.abyssalcraft.api.AbyssalCraftAPI.ACPotions;
+import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
 
 /**
  * A Necronomicon Area-of-Effect Ritual
@@ -93,9 +93,9 @@ public class NecronomiconPotionAoERitual extends NecronomiconRitual {
 		try {
 			Class utilClass = Class.forName("com.shinoow.abyssalcraft.common.util.EntityUtil");
 
-			result = potion == ACPotions.Coralium_plague && (Boolean)utilClass.getDeclaredMethod("isEntityCoralium", EntityLivingBase.class).invoke(null, (EntityLivingBase)entity) ||
-					potion == ACPotions.Dread_plague && (Boolean)utilClass.getDeclaredMethod("isEntityDread", EntityLivingBase.class).invoke(null, (EntityLivingBase)entity) ||
-					potion == ACPotions.Antimatter && (Boolean)utilClass.getDeclaredMethod("isEntityAnti", EntityLivingBase.class).invoke(null, (EntityLivingBase)entity);
+			result = potion == AbyssalCraftAPI.coralium_plague && (Boolean)utilClass.getDeclaredMethod("isEntityCoralium", EntityLivingBase.class).invoke(null, (EntityLivingBase)entity) ||
+					potion == AbyssalCraftAPI.dread_plague && (Boolean)utilClass.getDeclaredMethod("isEntityDread", EntityLivingBase.class).invoke(null, (EntityLivingBase)entity) ||
+					potion == AbyssalCraftAPI.antimatter_potion && (Boolean)utilClass.getDeclaredMethod("isEntityAnti", EntityLivingBase.class).invoke(null, (EntityLivingBase)entity);
 
 		} catch (ClassNotFoundException | IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchMethodException | SecurityException e) {
 			e.printStackTrace();

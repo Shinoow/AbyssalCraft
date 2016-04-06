@@ -23,8 +23,8 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.GL11;
 
-import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
+import com.shinoow.abyssalcraft.api.item.ACItems;
 import com.shinoow.abyssalcraft.client.gui.necronomicon.buttons.ButtonCategory;
 import com.shinoow.abyssalcraft.client.gui.necronomicon.buttons.ButtonNextPage;
 import com.shinoow.abyssalcraft.client.lib.NecronomiconText;
@@ -102,15 +102,15 @@ public class GuiNecronomicon extends GuiScreen {
 		byte b0 = 2;
 		buttonList.add(buttonNextPage = new ButtonNextPage(1, i + 215, b0 + 154, true));
 		buttonList.add(buttonPreviousPage = new ButtonNextPage(2, i + 18, b0 + 154, false));
-		buttonList.add(buttonCat1 = new ButtonCategory(3, i + 14, b0 + 24, this, NecronomiconText.LABEL_INFORMATION, AbyssalCraft.necronomicon));
-		buttonList.add(buttonCat2 = new ButtonCategory(4, i + 14, b0 + 41, this, NecronomiconText.LABEL_SPELLBOOK, AbyssalCraft.necronomicon));
-		buttonList.add(buttonCat3 = new ButtonCategory(5, i + 14, b0 + 58, this, NecronomiconText.LABEL_RITUALS, AbyssalCraft.necronomicon));
+		buttonList.add(buttonCat1 = new ButtonCategory(3, i + 14, b0 + 24, this, NecronomiconText.LABEL_INFORMATION, ACItems.necronomicon));
+		buttonList.add(buttonCat2 = new ButtonCategory(4, i + 14, b0 + 41, this, NecronomiconText.LABEL_SPELLBOOK, ACItems.necronomicon));
+		buttonList.add(buttonCat3 = new ButtonCategory(5, i + 14, b0 + 58, this, NecronomiconText.LABEL_RITUALS, ACItems.necronomicon));
 		if(bookType == 4)
-			buttonList.add(buttonCat4 = new ButtonCategory(6, i + 14, b0 + 75, this, NecronomiconText.LABEL_HUH, AbyssalCraft.abyssalnomicon));
-		else buttonList.add(buttonCat4 = new ButtonCategory(6, i + 14, b0 + 75, this, NecronomiconText.LABEL_HUH, AbyssalCraft.necronomicon));
-		buttonList.add(buttonCat5 = new ButtonCategory(7, i + 14, b0 + 92, this, NecronomiconText.LABEL_MISC_INFORMATION, AbyssalCraft.necronomicon));
+			buttonList.add(buttonCat4 = new ButtonCategory(6, i + 14, b0 + 75, this, NecronomiconText.LABEL_HUH, ACItems.abyssalnomicon));
+		else buttonList.add(buttonCat4 = new ButtonCategory(6, i + 14, b0 + 75, this, NecronomiconText.LABEL_HUH, ACItems.necronomicon));
+		buttonList.add(buttonCat5 = new ButtonCategory(7, i + 14, b0 + 92, this, NecronomiconText.LABEL_MISC_INFORMATION, ACItems.necronomicon));
 		if(!AbyssalCraftAPI.getNecronomiconData().isEmpty())
-			buttonList.add(buttonCat6 = new ButtonCategory(8, i + 14, b0 + 109, this, NecronomiconText.LABEL_OTHER, AbyssalCraft.necronomicon));
+			buttonList.add(buttonCat6 = new ButtonCategory(8, i + 14, b0 + 109, this, NecronomiconText.LABEL_OTHER, ACItems.necronomicon));
 		updateButtons();
 	}
 
@@ -180,7 +180,7 @@ public class GuiNecronomicon extends GuiScreen {
 				else bookTotalTurnups = 2;
 				drawButtons();
 			} else if(button.id == 7)
-				mc.displayGuiScreen(new GuiNecronomiconEntry(bookType, AbyssalCraftAPI.internalNDHandler.getInternalNecroData("miscinfo"), this, AbyssalCraft.necronomicon));
+				mc.displayGuiScreen(new GuiNecronomiconEntry(bookType, AbyssalCraftAPI.getInternalNDHandler().getInternalNecroData("miscinfo"), this, ACItems.necronomicon));
 			else if (button.id == 8)
 				mc.displayGuiScreen(new GuiNecronomiconOther(bookType));
 			updateButtons();

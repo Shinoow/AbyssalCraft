@@ -37,6 +37,7 @@ import net.minecraft.world.World;
 import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
 import com.shinoow.abyssalcraft.api.entity.IAntiEntity;
+import com.shinoow.abyssalcraft.api.item.ACItems;
 import com.shinoow.abyssalcraft.common.entity.EntityDepthsGhoul;
 import com.shinoow.abyssalcraft.common.entity.EntityOmotholGhoul;
 
@@ -80,14 +81,13 @@ public class EntityAntiGhoul extends EntityMob implements IAntiEntity {
 	@Override
 	protected SoundEvent getAmbientSound()
 	{
-		//		return "abyssalcraft:ghoul.normal.idle";
-		return SoundEvents.entity_zombie_ambient;
+		return AbyssalCraft.ghoul_normal_ambient;
 	}
 
 	@Override
 	protected SoundEvent getHurtSound()
 	{
-		return SoundEvents.entity_zombie_hurt;
+		return AbyssalCraft.ghoul_normal_hurt;
 	}
 
 	/**
@@ -96,8 +96,7 @@ public class EntityAntiGhoul extends EntityMob implements IAntiEntity {
 	@Override
 	protected SoundEvent getDeathSound()
 	{
-		//		return "abyssalcraft:ghoul.normal.death";
-		return SoundEvents.entity_zombie_death;
+		return AbyssalCraft.ghoul_death;
 	}
 
 	@Override
@@ -109,7 +108,7 @@ public class EntityAntiGhoul extends EntityMob implements IAntiEntity {
 	@Override
 	protected Item getDropItem()
 	{
-		return AbyssalCraft.antiCorbone;
+		return ACItems.anti_plagued_flesh_on_a_bone;
 	}
 
 	@Override

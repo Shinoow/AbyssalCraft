@@ -31,7 +31,8 @@ import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
-import com.shinoow.abyssalcraft.AbyssalCraft;
+import com.shinoow.abyssalcraft.api.block.ACBlocks;
+import com.shinoow.abyssalcraft.api.item.ACItems;
 import com.shinoow.abyssalcraft.api.recipe.CrystallizerRecipes;
 import com.shinoow.abyssalcraft.api.recipe.TransmutatorRecipes;
 import com.shinoow.abyssalcraft.client.gui.necronomicon.buttons.ButtonCategory;
@@ -65,7 +66,7 @@ public class GuiNecronomiconMachines extends GuiNecronomicon {
 		byte b0 = 2;
 		buttonList.add(buttonNextPage = new ButtonNextPage(1, i + 220, b0 + 154, true));
 		buttonList.add(buttonPreviousPage = new ButtonNextPage(2, i + 18, b0 + 154, false));
-		buttonList.add(info = new ButtonCategory(3, i + 14, b0 + 24, this, NecronomiconText.LABEL_INFO, AbyssalCraft.necronomicon));
+		buttonList.add(info = new ButtonCategory(3, i + 14, b0 + 24, this, NecronomiconText.LABEL_INFO, ACItems.necronomicon));
 		buttonList.add(transmutator = new ButtonCategory(4, i + 14, b0 + 41, this, I18n.format("container.abyssalcraft.transmutator", new Object[0]), getItem(1)));
 		buttonList.add(crystallizer = new ButtonCategory(5, i + 14, b0 + 58, this, I18n.format("container.abyssalcraft.crystallizer", new Object[0]), getItem(2)));
 		//	buttonList.add(engraver = new ButtonCategory(6, i + 14, b0 + 75, this, StatCollector.translateToLocal("container.abyssalcraft.engraver"), getItem(3)));
@@ -74,20 +75,20 @@ public class GuiNecronomiconMachines extends GuiNecronomicon {
 
 	private Item getItem(int par1){
 		if(par1 > getBookType())
-			return AbyssalCraft.OC;
+			return ACItems.oblivion_catalyst;
 		switch(par1){
 		case 0:
-			return AbyssalCraft.necronomicon;
+			return ACItems.necronomicon;
 		case 1:
-			return AbyssalCraft.necronomicon_cor;
+			return ACItems.abyssal_wasteland_necronomicon;
 		case 2:
-			return AbyssalCraft.necronomicon_dre;
+			return ACItems.dreadlands_necronomicon;
 		case 3:
-			return AbyssalCraft.necronomicon_omt;
+			return ACItems.omothol_necronomicon;
 		case 4:
-			return AbyssalCraft.abyssalnomicon;
+			return ACItems.abyssalnomicon;
 		default:
-			return AbyssalCraft.necronomicon;
+			return ACItems.necronomicon;
 		}
 	}
 
@@ -224,16 +225,16 @@ public class GuiNecronomiconMachines extends GuiNecronomicon {
 			setTurnupLimit(4);
 			if(currTurnup == 0){
 				writeText(1, NecronomiconText.MACHINE_INFO_1, 50);
-				renderItem(k + 60, b0 + 28, new ItemStack(AbyssalCraft.transmutator), x, y);
+				renderItem(k + 60, b0 + 28, new ItemStack(ACBlocks.transmutator_idle), x, y);
 			} else if(currTurnup == 1){
 				writeText(1, NecronomiconText.MACHINE_INFO_2, 50);
-				renderItem(k + 60, b0 + 28, new ItemStack(AbyssalCraft.crystallizer), x, y);
+				renderItem(k + 60, b0 + 28, new ItemStack(ACBlocks.crystallizer_idle), x, y);
 			} else if(currTurnup == 2){
 				writeText(1, NecronomiconText.MACHINE_INFO_3, 50);
-				renderItem(k + 60, b0 + 28, new ItemStack(AbyssalCraft.engraver), x, y);
+				renderItem(k + 60, b0 + 28, new ItemStack(ACBlocks.engraver), x, y);
 			} else if(currTurnup == 3){
 				writeText(1, NecronomiconText.MACHINE_INFO_4, 50);
-				renderItem(k + 60, b0 + 28, new ItemStack(AbyssalCraft.materializer), x, y);
+				renderItem(k + 60, b0 + 28, new ItemStack(ACBlocks.materializer), x, y);
 			}
 		}
 		if(isTra){

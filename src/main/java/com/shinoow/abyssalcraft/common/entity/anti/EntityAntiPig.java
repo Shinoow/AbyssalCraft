@@ -34,8 +34,8 @@ import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.api.entity.IAntiEntity;
+import com.shinoow.abyssalcraft.api.item.ACItems;
 
 public class EntityAntiPig extends EntityAnimal implements IAntiEntity {
 
@@ -95,7 +95,7 @@ public class EntityAntiPig extends EntityAnimal implements IAntiEntity {
 	@Override
 	protected Item getDropItem()
 	{
-		return isBurning() ? AbyssalCraft.antiPork : AbyssalCraft.antiPork;
+		return isBurning() ? ACItems.anti_pork : ACItems.anti_pork;
 	}
 
 	@Override
@@ -105,9 +105,9 @@ public class EntityAntiPig extends EntityAnimal implements IAntiEntity {
 
 		for (int k = 0; k < j; ++k)
 			if (isBurning())
-				dropItem(AbyssalCraft.antiPork, 1);
+				dropItem(ACItems.anti_pork, 1);
 			else
-				dropItem(AbyssalCraft.antiPork, 1);
+				dropItem(ACItems.anti_pork, 1);
 	}
 
 	@Override

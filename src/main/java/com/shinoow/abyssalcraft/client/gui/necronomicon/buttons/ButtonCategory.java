@@ -11,7 +11,7 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.client.gui.necronomicon.buttons;
 
-import com.shinoow.abyssalcraft.AbyssalCraft;
+import com.shinoow.abyssalcraft.api.item.ACItems;
 import com.shinoow.abyssalcraft.client.gui.necronomicon.GuiNecronomicon;
 import com.shinoow.abyssalcraft.client.lib.GuiRenderHelper;
 
@@ -40,7 +40,7 @@ public class ButtonCategory extends GuiButton {
 
 		ResourceLocation res = getTexture(icon);
 		if(res == null)
-			res = getTexture(AbyssalCraft.necronomicon);
+			res = getTexture(ACItems.necronomicon);
 
 		mc.renderEngine.bindTexture(res);
 
@@ -59,15 +59,15 @@ public class ButtonCategory extends GuiButton {
 	}
 
 	ResourceLocation getTexture(Item par1){
-		if(par1 == AbyssalCraft.abyssalnomicon)
+		if(par1 == ACItems.abyssalnomicon)
 			return new ResourceLocation("abyssalcraft:textures/items/abyssalnomicon.png");
-		else if(par1 == AbyssalCraft.necronomicon_cor)
+		else if(par1 == ACItems.abyssal_wasteland_necronomicon)
 			return new ResourceLocation("abyssalcraft:textures/items/necronomicon_cor.png");
-		else if(par1 == AbyssalCraft.necronomicon_dre)
+		else if(par1 == ACItems.dreadlands_necronomicon)
 			return new ResourceLocation("abyssalcraft:textures/items/necronomicon_dre.png");
-		else if(par1 == AbyssalCraft.necronomicon_omt)
+		else if(par1 == ACItems.omothol_necronomicon)
 			return new ResourceLocation("abyssalcraft:textures/items/necronomicon_omt.png");
-		else if(par1 == AbyssalCraft.OC)
+		else if(par1 == ACItems.oblivion_catalyst)
 			return new ResourceLocation("abyssalcraft:textures/items/necronahicon.png");
 		else return new ResourceLocation("abyssalcraft:textures/items/necronomicon.png");
 	}

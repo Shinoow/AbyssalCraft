@@ -21,6 +21,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
+import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.common.entity.EntityAbyssalZombie;
 import com.shinoow.abyssalcraft.common.entity.EntityDepthsGhoul;
 import com.shinoow.abyssalcraft.common.entity.EntityShadowBeast;
@@ -35,8 +36,8 @@ public class BiomeGenDarklandsMountains extends BiomeGenBase {
 		super(par1);
 		//		minHeight = 1.3F;
 		//		maxHeight = 0.9F;
-		topBlock = AbyssalCraft.Darkstone.getDefaultState();
-		fillerBlock = AbyssalCraft.Darkstone.getDefaultState();
+		topBlock = ACBlocks.darkstone.getDefaultState();
+		fillerBlock = ACBlocks.darkstone.getDefaultState();
 		//		waterColorMultiplier = 14745518;
 		theBiomeDecorator.treesPerChunk = 0;
 		spawnableMonsterList.add(new SpawnListEntry(EntityDepthsGhoul.class, 45, 1, 2));
@@ -59,7 +60,7 @@ public class BiomeGenDarklandsMountains extends BiomeGenBase {
 				int y = par2Random.nextInt(28) + 4;
 				int z = par2Random.nextInt(16);
 
-				new WorldGenMinable(AbyssalCraft.abyore.getDefaultState(), veinSize).generate(par1World, par2Random, pos.add(x, y, z));
+				new WorldGenMinable(ACBlocks.abyssalnite_ore.getDefaultState(), veinSize).generate(par1World, par2Random, pos.add(x, y, z));
 			}
 	}
 

@@ -17,13 +17,13 @@ import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.entity.RenderSnowball;
 import net.minecraftforge.fml.client.registry.IRenderFactory;
 
-import com.shinoow.abyssalcraft.AbyssalCraft;
+import com.shinoow.abyssalcraft.api.item.ACItems;
 
 public class RenderFactoryDreadSlug implements IRenderFactory {
 
 	@Override
 	public Render createRenderFor(RenderManager manager) {
 
-		return new RenderSnowball(manager, AbyssalCraft.dreadfragment, Minecraft.getMinecraft().getRenderItem());
+		return new RenderSnowball(manager, ACItems.dread_fragment, Minecraft.getMinecraft().getRenderItem());
 	}
 }

@@ -26,6 +26,7 @@ import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
+import com.shinoow.abyssalcraft.api.block.ACBlocks;
 
 public class ItemACHoe extends ItemHoe {
 
@@ -66,7 +67,7 @@ public class ItemACHoe extends ItemHoe {
 
 			if (facing != EnumFacing.DOWN && worldIn.isAirBlock(pos.up()))
 			{
-				if (block == Blocks.grass || block == Blocks.grass_path || block == AbyssalCraft.Darkgrass || block == AbyssalCraft.dreadgrass)
+				if (block == Blocks.grass || block == Blocks.grass_path || block == ACBlocks.darklands_grass || block == ACBlocks.dreadlands_grass)
 				{
 					func_185071_a(stack, playerIn, worldIn, pos, Blocks.farmland.getDefaultState());
 					return EnumActionResult.SUCCESS;

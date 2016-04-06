@@ -23,6 +23,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
+import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.common.util.ACLogger;
 import com.shinoow.abyssalcraft.common.util.ExplosionUtil;
 import com.shinoow.abyssalcraft.common.util.SpecialTextUtil;
@@ -111,7 +112,7 @@ public class EntityODBPrimed extends Entity {
 		Blocks.flowing_lava.setResistance(5.0F);
 		Blocks.water.setResistance(5.0F);
 		Blocks.flowing_water.setResistance(5.0F);
-		AbyssalCraft.Cwater.setResistance(50.0F);
+		ACBlocks.liquid_coralium.setResistance(50.0F);
 		float var0 = 30.0F;
 		ExplosionUtil.newODBExplosion(worldObj, this, posX, posY, posZ, var0, 128, false, true);
 		ExplosionUtil.newODBExplosion(worldObj, this, posX + 10, posY, posZ, var0, 128, false, true);
@@ -127,7 +128,7 @@ public class EntityODBPrimed extends Entity {
 		Blocks.flowing_lava.setResistance(500.0F);
 		Blocks.water.setResistance(500.0F);
 		Blocks.flowing_water.setResistance(500.0F);
-		AbyssalCraft.Cwater.setResistance(500.0F);
+		ACBlocks.liquid_coralium.setResistance(500.0F);
 		ACLogger.info("Hell successfully unleashed.");
 
 		int x, x1, z, z1;

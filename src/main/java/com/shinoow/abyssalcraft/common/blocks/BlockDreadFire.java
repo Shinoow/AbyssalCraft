@@ -28,7 +28,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import com.shinoow.abyssalcraft.AbyssalCraft;
+import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
 import com.shinoow.abyssalcraft.api.entity.IDreadEntity;
 
 public class BlockDreadFire extends Block {
@@ -113,7 +113,7 @@ public class BlockDreadFire extends Block {
 
 		if(par5Entity instanceof EntityLivingBase)
 			if((EntityLivingBase)par5Entity instanceof IDreadEntity){}
-			else ((EntityLivingBase)par5Entity).addPotionEffect(new PotionEffect(AbyssalCraft.Dplague, 100));
+			else ((EntityLivingBase)par5Entity).addPotionEffect(new PotionEffect(AbyssalCraftAPI.dread_plague, 100));
 	}
 
 	@Override

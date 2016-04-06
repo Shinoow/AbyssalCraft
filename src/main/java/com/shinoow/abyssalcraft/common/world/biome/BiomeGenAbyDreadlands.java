@@ -21,6 +21,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
+import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.common.entity.EntityAbygolem;
 import com.shinoow.abyssalcraft.common.entity.EntityDreadguard;
 import com.shinoow.abyssalcraft.common.world.gen.WorldGenDreadlandsStalagmite;
@@ -30,8 +31,8 @@ public class BiomeGenAbyDreadlands extends BiomeGenDreadlandsBase {
 	@SuppressWarnings("unchecked")
 	public BiomeGenAbyDreadlands(BiomeProperties par1) {
 		super(par1);
-		topBlock = AbyssalCraft.abydreadstone.getDefaultState();
-		fillerBlock = AbyssalCraft.abydreadstone.getDefaultState();
+		topBlock = ACBlocks.abyssalnite_stone.getDefaultState();
+		fillerBlock = ACBlocks.abyssalnite_stone.getDefaultState();
 		spawnableCreatureList.add(new SpawnListEntry(EntityAbygolem.class, 100, 3, 8));
 		spawnableMonsterList.add(new SpawnListEntry(EntityDreadguard.class, 1, 1, 1));
 	}
@@ -48,32 +49,32 @@ public class BiomeGenAbyDreadlands extends BiomeGenDreadlandsBase {
 				int y = par2Random.nextInt(60);
 				int z = par2Random.nextInt(16);
 
-				new WorldGenMinable(AbyssalCraft.abydreadore.getDefaultState(), veinSize,
-						BlockMatcher.forBlock(AbyssalCraft.dreadstone)).generate(par1World, par2Random, pos.add(x, y, z));
+				new WorldGenMinable(ACBlocks.dreadlands_abyssalnite_ore.getDefaultState(), veinSize,
+						BlockMatcher.forBlock(ACBlocks.dreadstone)).generate(par1World, par2Random, pos.add(x, y, z));
 			}
 		for (int rarity = 0; rarity < 7; ++rarity)
 		{
 			int x = par2Random.nextInt(16);
 			int y = par2Random.nextInt(64);
 			int z = par2Random.nextInt(16);
-			new WorldGenMinable(AbyssalCraft.abydreadstone.getDefaultState(), 64,
-					BlockMatcher.forBlock(AbyssalCraft.dreadstone)).generate(par1World, par2Random, pos.add(x, y, z));
+			new WorldGenMinable(ACBlocks.abyssalnite_stone.getDefaultState(), 64,
+					BlockMatcher.forBlock(ACBlocks.dreadstone)).generate(par1World, par2Random, pos.add(x, y, z));
 		}
 		for (int rarity = 0; rarity < 7; ++rarity)
 		{
 			int x = par2Random.nextInt(16);
 			int y = par2Random.nextInt(64);
 			int z = par2Random.nextInt(16);
-			new WorldGenMinable(AbyssalCraft.abydreadstone.getDefaultState(), 48,
-					BlockMatcher.forBlock(AbyssalCraft.dreadstone)).generate(par1World, par2Random, pos.add(x, y, z));
+			new WorldGenMinable(ACBlocks.abyssalnite_stone.getDefaultState(), 48,
+					BlockMatcher.forBlock(ACBlocks.dreadstone)).generate(par1World, par2Random, pos.add(x, y, z));
 		}
 		for (int rarity = 0; rarity < 7; ++rarity)
 		{
 			int x = par2Random.nextInt(16);
 			int y = par2Random.nextInt(64);
 			int z = par2Random.nextInt(16);
-			new WorldGenMinable(AbyssalCraft.abydreadstone.getDefaultState(), 32,
-					BlockMatcher.forBlock(AbyssalCraft.dreadstone)).generate(par1World, par2Random, pos.add(x, y, z));
+			new WorldGenMinable(ACBlocks.abyssalnite_stone.getDefaultState(), 32,
+					BlockMatcher.forBlock(ACBlocks.dreadstone)).generate(par1World, par2Random, pos.add(x, y, z));
 		}
 		if(AbyssalCraft.generateDreadlandsAbyssalniteOre)
 			for(int rarity = 0; rarity < 8; rarity++) {
@@ -82,8 +83,8 @@ public class BiomeGenAbyDreadlands extends BiomeGenDreadlandsBase {
 				int y = par2Random.nextInt(55);
 				int z = par2Random.nextInt(16);
 
-				new WorldGenMinable(AbyssalCraft.abydreadore.getDefaultState(), veinSize,
-						BlockMatcher.forBlock(AbyssalCraft.dreadstone)).generate(par1World, par2Random, pos.add(x, y, z));
+				new WorldGenMinable(ACBlocks.dreadlands_abyssalnite_ore.getDefaultState(), veinSize,
+						BlockMatcher.forBlock(ACBlocks.dreadstone)).generate(par1World, par2Random, pos.add(x, y, z));
 			}
 		if(AbyssalCraft.generateDreadlandsStalagmite)
 			for(int i = 0; i < 1; i++){

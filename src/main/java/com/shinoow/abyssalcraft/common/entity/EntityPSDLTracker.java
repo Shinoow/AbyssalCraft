@@ -23,6 +23,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
+import com.shinoow.abyssalcraft.api.item.ACItems;
 
 public class EntityPSDLTracker extends Entity
 {
@@ -190,7 +191,7 @@ public class EntityPSDLTracker extends Entity
 				setDead();
 
 				if (shatterOrDrop)
-					worldObj.spawnEntityInWorld(new EntityItem(worldObj, posX, posY, posZ, new ItemStack(AbyssalCraft.PSDLfinder)));
+					worldObj.spawnEntityInWorld(new EntityItem(worldObj, posX, posY, posZ, new ItemStack(ACItems.powerstone_tracker)));
 				else
 					worldObj.playAuxSFX(2003, new BlockPos(this), 0);
 			}

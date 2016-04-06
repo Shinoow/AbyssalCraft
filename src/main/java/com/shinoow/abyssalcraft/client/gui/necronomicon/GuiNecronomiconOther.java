@@ -16,8 +16,8 @@ import java.util.HashMap;
 import org.lwjgl.input.Keyboard;
 
 import com.google.common.collect.Maps;
-import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
+import com.shinoow.abyssalcraft.api.item.ACItems;
 import com.shinoow.abyssalcraft.api.necronomicon.NecroData;
 import com.shinoow.abyssalcraft.client.gui.necronomicon.buttons.ButtonCategory;
 import com.shinoow.abyssalcraft.client.gui.necronomicon.buttons.ButtonNextPage;
@@ -106,20 +106,20 @@ public class GuiNecronomiconOther extends GuiNecronomicon {
 
 	private Item getItem(int par1){
 		if(par1 > getBookType())
-			return AbyssalCraft.OC;
+			return ACItems.oblivion_catalyst;
 		switch(par1){
 		case 0:
-			return AbyssalCraft.necronomicon;
+			return ACItems.necronomicon;
 		case 1:
-			return AbyssalCraft.necronomicon_cor;
+			return ACItems.abyssal_wasteland_necronomicon;
 		case 2:
-			return AbyssalCraft.necronomicon_dre;
+			return ACItems.dreadlands_necronomicon;
 		case 3:
-			return AbyssalCraft.necronomicon_omt;
+			return ACItems.omothol_necronomicon;
 		case 4:
-			return AbyssalCraft.abyssalnomicon;
+			return ACItems.abyssalnomicon;
 		default:
-			return AbyssalCraft.necronomicon;
+			return ACItems.necronomicon;
 		}
 	}
 

@@ -11,25 +11,18 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.common.structures;
 
-import java.util.Arrays;
-import java.util.List;
-
-import net.minecraft.block.Block;
-import net.minecraft.init.Blocks;
 import net.minecraft.world.gen.structure.StructureComponent;
-
-import com.shinoow.abyssalcraft.AbyssalCraft;
 
 public abstract class StructureComponentModded extends StructureComponent {
 
 	/* A bunch of lists to use for metadata block placement in structures generated with this stuff */
 	//	protected List<Block> doors = Arrays.asList(Blocks.wooden_door, Blocks.iron_door);
-	protected List<Block> stairs = Arrays.asList(Blocks.stone_stairs, Blocks.oak_stairs, Blocks.nether_brick_stairs, Blocks.stone_brick_stairs,
-			Blocks.sandstone_stairs, AbyssalCraft.abystairs, AbyssalCraft.DCstairs, AbyssalCraft.DBstairs, AbyssalCraft.DLTstairs, AbyssalCraft.abydreadbrickstairs,
-			AbyssalCraft.dreadbrickstairs, AbyssalCraft.cstonebrickstairs, AbyssalCraft.ethaxiumstairs, AbyssalCraft.darkethaxiumstairs);
-	protected List<Block> buttons = Arrays.asList(Blocks.stone_button, Blocks.wooden_button, AbyssalCraft.Abybutton,
-			AbyssalCraft.DSbutton, AbyssalCraft.DLTbutton, AbyssalCraft.cstonebutton);
-	protected List<Block> redstone = Arrays.asList(Blocks.lever, Blocks.piston, Blocks.sticky_piston, Blocks.dispenser);
+	//	protected List<Block> stairs = Arrays.asList(Blocks.stone_stairs, Blocks.oak_stairs, Blocks.nether_brick_stairs, Blocks.stone_brick_stairs,
+	//			Blocks.sandstone_stairs, AbyssalCraft.abystairs, AbyssalCraft.DCstairs, AbyssalCraft.DBstairs, AbyssalCraft.DLTstairs, AbyssalCraft.abydreadbrickstairs,
+	//			AbyssalCraft.dreadbrickstairs, AbyssalCraft.cstonebrickstairs, AbyssalCraft.ethaxiumstairs, AbyssalCraft.darkethaxiumstairs);
+	//	protected List<Block> buttons = Arrays.asList(Blocks.stone_button, Blocks.wooden_button, AbyssalCraft.Abybutton,
+	//			AbyssalCraft.DSbutton, AbyssalCraft.DLTbutton, AbyssalCraft.cstonebutton);
+	//	protected List<Block> redstone = Arrays.asList(Blocks.lever, Blocks.piston, Blocks.sticky_piston, Blocks.dispenser);
 
 	public StructureComponentModded() {}
 

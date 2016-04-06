@@ -55,7 +55,9 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeModContainer;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
+import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
 import com.shinoow.abyssalcraft.api.entity.ICoraliumEntity;
+import com.shinoow.abyssalcraft.api.item.ACItems;
 import com.shinoow.abyssalcraft.common.util.EntityUtil;
 
 public class EntityDepthsGhoul extends EntityMob implements ICoraliumEntity {
@@ -238,7 +240,7 @@ public class EntityDepthsGhoul extends EntityMob implements ICoraliumEntity {
 			if (par1Entity instanceof EntityLivingBase)
 				if(worldObj.provider.getDimension() == AbyssalCraft.configDimId1 && !EntityUtil.isEntityCoralium((EntityLivingBase)par1Entity)
 				|| AbyssalCraft.shouldInfect == true && !EntityUtil.isEntityCoralium((EntityLivingBase)par1Entity))
-					((EntityLivingBase)par1Entity).addPotionEffect(new PotionEffect(AbyssalCraft.Cplague, 100));
+					((EntityLivingBase)par1Entity).addPotionEffect(new PotionEffect(AbyssalCraftAPI.coralium_plague, 100));
 		swingArm(EnumHand.MAIN_HAND);
 		swingArm(EnumHand.OFF_HAND);
 		boolean flag = super.attackEntityAsMob(par1Entity);
@@ -273,15 +275,15 @@ public class EntityDepthsGhoul extends EntityMob implements ICoraliumEntity {
 		switch (getGhoulType())
 		{
 		case 0:
-			return SoundEvents.entity_zombie_hurt; //abyssalcraft:ghoul.normal.hit
+			return AbyssalCraft.ghoul_normal_hurt;
 		case 1:
 			return AbyssalCraft.ghoul_pete_hurt;
 		case 2:
-			return SoundEvents.entity_zombie_hurt; //abyssalcraft:ghoul.wilson.hit
+			return AbyssalCraft.ghoul_normal_hurt; //abyssalcraft:ghoul.wilson.hit
 		case 3:
-			return SoundEvents.entity_zombie_hurt; //abyssalcraft:ghoul.orange.hit
+			return AbyssalCraft.ghoul_normal_hurt; //abyssalcraft:ghoul.orange.hit
 		default:
-			return SoundEvents.entity_zombie_hurt;
+			return AbyssalCraft.ghoul_normal_hurt;
 		}
 	}
 
@@ -300,7 +302,7 @@ public class EntityDepthsGhoul extends EntityMob implements ICoraliumEntity {
 	@Override
 	protected Item getDropItem()
 	{
-		return AbyssalCraft.Corbone;
+		return ACItems.coralium_plagued_flesh_on_a_bone;
 	}
 
 	@Override

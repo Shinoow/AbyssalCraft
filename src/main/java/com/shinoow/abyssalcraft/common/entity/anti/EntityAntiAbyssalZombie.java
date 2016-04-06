@@ -46,6 +46,7 @@ import net.minecraftforge.common.ForgeModContainer;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.api.entity.IAntiEntity;
+import com.shinoow.abyssalcraft.api.item.ACItems;
 import com.shinoow.abyssalcraft.common.entity.EntityAbyssalZombie;
 
 public class EntityAntiAbyssalZombie extends EntityMob implements IAntiEntity {
@@ -166,7 +167,7 @@ public class EntityAntiAbyssalZombie extends EntityMob implements IAntiEntity {
 	@Override
 	protected Item getDropItem()
 	{
-		return AbyssalCraft.antiCorflesh;
+		return ACItems.anti_plagued_flesh;
 
 	}
 	@Override

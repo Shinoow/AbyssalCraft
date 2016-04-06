@@ -31,6 +31,7 @@ import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.World;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
+import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.api.entity.IDreadEntity;
 
 public class EntityDemonAnimal extends EntityMob implements IDreadEntity {
@@ -75,7 +76,7 @@ public class EntityDemonAnimal extends EntityMob implements IDreadEntity {
 				BlockPos pos = new BlockPos(i, j, k);
 
 				if (worldObj.getBlockState(pos).getMaterial() == Material.air && Blocks.fire.canPlaceBlockAt(worldObj, pos))
-					worldObj.setBlockState(pos, AbyssalCraft.mimicFire.getDefaultState());
+					worldObj.setBlockState(pos, ACBlocks.mimic_fire.getDefaultState());
 			}
 		}
 	}

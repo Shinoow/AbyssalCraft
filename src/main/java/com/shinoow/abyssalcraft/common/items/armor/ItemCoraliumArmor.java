@@ -22,6 +22,7 @@ import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
+import com.shinoow.abyssalcraft.api.item.ACItems;
 
 public class ItemCoraliumArmor extends ItemArmor {
 	public ItemCoraliumArmor(ArmorMaterial par2EnumArmorMaterial, int par3, EntityEquipmentSlot par4, String name){
@@ -40,10 +41,10 @@ public class ItemCoraliumArmor extends ItemArmor {
 	@Override
 	public String getArmorTexture(ItemStack stack, Entity entity, EntityEquipmentSlot slot, String type)
 	{
-		if(stack.getItem() == AbyssalCraft.Corhelmet || stack.getItem() == AbyssalCraft.Corplate || stack.getItem() == AbyssalCraft.Corboots)
+		if(stack.getItem() == ACItems.refined_coralium_helmet || stack.getItem() == ACItems.refined_coralium_chestplate || stack.getItem() == ACItems.refined_coralium_boots)
 			return "abyssalcraft:textures/armor/coralium_1.png";
 
-		if(stack.getItem() == AbyssalCraft.Corlegs)
+		if(stack.getItem() == ACItems.refined_coralium_leggings)
 			return "abyssalcraft:textures/armor/coralium_2.png";
 		else return null;
 	}
@@ -57,14 +58,14 @@ public class ItemCoraliumArmor extends ItemArmor {
 
 	@Override
 	public void onArmorTick(World world, EntityPlayer player, ItemStack itemstack) {
-		if (itemstack.getItem() == AbyssalCraft.Corhelmet)
+		if (itemstack.getItem() == ACItems.refined_coralium_helmet)
 		{
 			player.addPotionEffect(new PotionEffect(MobEffects.waterBreathing, 20, 0));
 			player.addPotionEffect(new PotionEffect(MobEffects.nightVision, 260, 0));
 		}
-		if (itemstack.getItem() == AbyssalCraft.Corplate)
+		if (itemstack.getItem() == ACItems.refined_coralium_chestplate)
 			player.addPotionEffect(new PotionEffect(MobEffects.resistance, 20, 0));
-		if (itemstack.getItem() == AbyssalCraft.Corboots)
+		if (itemstack.getItem() == ACItems.refined_coralium_boots)
 			player.addPotionEffect(new PotionEffect(MobEffects.moveSpeed, 20, 1));
 	}
 }

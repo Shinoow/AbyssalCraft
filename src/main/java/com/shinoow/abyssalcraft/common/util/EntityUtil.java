@@ -13,12 +13,11 @@ package com.shinoow.abyssalcraft.common.util;
 
 import java.util.UUID;
 
-import com.shinoow.abyssalcraft.AbyssalCraft;
+import com.shinoow.abyssalcraft.api.APIUtils;
 import com.shinoow.abyssalcraft.api.entity.*;
 
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemStack;
 import net.minecraft.launchwrapper.Launch;
 
 public final class EntityUtil {
@@ -69,9 +68,7 @@ public final class EntityUtil {
 	 * @return True if the Player has a Necronomicon, otherwise false
 	 */
 	public static boolean hasNecronomicon(EntityPlayer player){
-		return player.inventory.hasItemStack(new ItemStack(AbyssalCraft.necronomicon)) || player.inventory.hasItemStack(new ItemStack(AbyssalCraft.necronomicon_cor)) ||
-				player.inventory.hasItemStack(new ItemStack(AbyssalCraft.necronomicon_dre)) || player.inventory.hasItemStack(new ItemStack(AbyssalCraft.necronomicon_omt)) ||
-				player.inventory.hasItemStack(new ItemStack(AbyssalCraft.abyssalnomicon));
+		return APIUtils.hasNecronomicon(player);
 	}
 
 	static class Vars{

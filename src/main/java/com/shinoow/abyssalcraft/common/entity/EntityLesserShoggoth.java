@@ -59,8 +59,10 @@ import net.minecraftforge.common.ForgeModContainer;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
+import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.api.entity.ICoraliumEntity;
 import com.shinoow.abyssalcraft.api.entity.IDreadEntity;
+import com.shinoow.abyssalcraft.api.item.ACItems;
 import com.shinoow.abyssalcraft.common.entity.demon.EntityDemonAnimal;
 import com.shinoow.abyssalcraft.common.entity.demon.EntityDemonPig;
 import com.shinoow.abyssalcraft.common.entity.demon.EntityEvilChicken;
@@ -285,8 +287,8 @@ public class EntityLesserShoggoth extends EntityMob implements ICoraliumEntity, 
 	private void spawnOoze(int x, int y, int z){
 		BlockPos pos = new BlockPos(x, y, z);
 		if(AbyssalCraft.shoggothOoze)
-			if(AbyssalCraft.shoggothBlock.canPlaceBlockAt(worldObj, pos))
-				worldObj.setBlockState(pos, AbyssalCraft.shoggothBlock.getDefaultState());
+			if(ACBlocks.shoggoth_ooze.canPlaceBlockAt(worldObj, pos))
+				worldObj.setBlockState(pos, ACBlocks.shoggoth_ooze.getDefaultState());
 	}
 
 	/**
@@ -321,10 +323,10 @@ public class EntityLesserShoggoth extends EntityMob implements ICoraliumEntity, 
 			if (par1Entity instanceof EntityLivingBase)
 				if(worldObj.provider.getDimension() == AbyssalCraft.configDimId1 &&
 				!EntityUtil.isEntityCoralium((EntityLivingBase)par1Entity))
-					((EntityLivingBase)par1Entity).addPotionEffect(new PotionEffect(AbyssalCraft.Cplague, 100));
+					((EntityLivingBase)par1Entity).addPotionEffect(new PotionEffect(AbyssalCraftAPI.coralium_plague, 100));
 				else if(worldObj.provider.getDimension() == AbyssalCraft.configDimId2 &&
 						!EntityUtil.isEntityDread((EntityLivingBase)par1Entity))
-					((EntityLivingBase)par1Entity).addPotionEffect(new PotionEffect(AbyssalCraft.Dplague, 100));
+					((EntityLivingBase)par1Entity).addPotionEffect(new PotionEffect(AbyssalCraftAPI.dread_plague, 100));
 				else if(worldObj.provider.getDimension() == AbyssalCraft.configDimId3)
 					((EntityLivingBase)par1Entity).addPotionEffect(new PotionEffect(MobEffects.moveSlowdown, 100));
 				else if(worldObj.provider.getDimension() == AbyssalCraft.configDimId4)
@@ -351,19 +353,19 @@ public class EntityLesserShoggoth extends EntityMob implements ICoraliumEntity, 
 	@Override
 	protected SoundEvent getAmbientSound()
 	{
-		return SoundEvents.entity_zombie_ambient;
+		return AbyssalCraft.shoggoth_ambient;
 	}
 
 	@Override
 	protected SoundEvent getHurtSound()
 	{
-		return SoundEvents.entity_zombie_hurt;
+		return AbyssalCraft.shoggoth_hurt;
 	}
 
 	@Override
 	protected SoundEvent getDeathSound()
 	{
-		return SoundEvents.entity_zombie_death;
+		return AbyssalCraft.shoggoth_death;
 	}
 
 	@Override
@@ -375,7 +377,7 @@ public class EntityLesserShoggoth extends EntityMob implements ICoraliumEntity, 
 	@Override
 	protected void dropFewItems(boolean par1, int par2)
 	{
-		ItemStack item = new ItemStack(AbyssalCraft.shoggothFlesh, 1, getShoggothType());
+		ItemStack item = new ItemStack(ACItems.shoggoth_flesh, 1, getShoggothType());
 
 		if (item != null)
 		{

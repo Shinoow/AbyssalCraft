@@ -20,8 +20,8 @@ import net.minecraft.client.resources.I18n;
 import org.lwjgl.input.Keyboard;
 
 import com.google.common.collect.Lists;
-import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
+import com.shinoow.abyssalcraft.api.item.ACItems;
 import com.shinoow.abyssalcraft.api.ritual.NecronomiconRitual;
 import com.shinoow.abyssalcraft.api.ritual.RitualRegistry;
 import com.shinoow.abyssalcraft.client.gui.necronomicon.buttons.ButtonCategory;
@@ -50,16 +50,16 @@ public class GuiNecronomiconRituals extends GuiNecronomicon {
 		int i = (width - guiWidth) / 2;
 		byte b0 = 2;
 		buttonList.add(buttonPreviousPage = new ButtonNextPage(1, i + 18, b0 + 154, false));
-		buttonList.add(info = new ButtonCategory(2, i + 14, b0 + 24, this, NecronomiconText.LABEL_INFO, AbyssalCraft.necronomicon));
-		buttonList.add(ritual0 = new ButtonCategory(3, i + 14, b0 + 41, this, NecronomiconText.LABEL_NORMAL, hasRituals(0) ? AbyssalCraft.necronomicon : AbyssalCraft.OC));
+		buttonList.add(info = new ButtonCategory(2, i + 14, b0 + 24, this, NecronomiconText.LABEL_INFO, ACItems.necronomicon));
+		buttonList.add(ritual0 = new ButtonCategory(3, i + 14, b0 + 41, this, NecronomiconText.LABEL_NORMAL, hasRituals(0) ? ACItems.necronomicon : ACItems.oblivion_catalyst));
 		if(getBookType() >= 1)
-			buttonList.add(ritual1 = new ButtonCategory(4, i + 14, b0 + 58, this, NecronomiconText.LABEL_INFORMATION_ABYSSAL_WASTELAND, hasRituals(1) ? AbyssalCraft.necronomicon_cor : AbyssalCraft.OC));
+			buttonList.add(ritual1 = new ButtonCategory(4, i + 14, b0 + 58, this, NecronomiconText.LABEL_INFORMATION_ABYSSAL_WASTELAND, hasRituals(1) ? ACItems.abyssal_wasteland_necronomicon : ACItems.oblivion_catalyst));
 		if(getBookType() >= 2)
-			buttonList.add(ritual2 = new ButtonCategory(5, i + 14, b0 + 75, this, NecronomiconText.LABEL_INFORMATION_DREADLANDS, hasRituals(2) ? AbyssalCraft.necronomicon_dre : AbyssalCraft.OC));
+			buttonList.add(ritual2 = new ButtonCategory(5, i + 14, b0 + 75, this, NecronomiconText.LABEL_INFORMATION_DREADLANDS, hasRituals(2) ? ACItems.dreadlands_necronomicon : ACItems.oblivion_catalyst));
 		if(getBookType() >= 3)
-			buttonList.add(ritual3 = new ButtonCategory(6, i + 14, b0 + 92, this, NecronomiconText.LABEL_INFORMATION_OMOTHOL, hasRituals(3) ? AbyssalCraft.necronomicon_omt : AbyssalCraft.OC));
+			buttonList.add(ritual3 = new ButtonCategory(6, i + 14, b0 + 92, this, NecronomiconText.LABEL_INFORMATION_OMOTHOL, hasRituals(3) ? ACItems.omothol_necronomicon : ACItems.oblivion_catalyst));
 		if(getBookType() == 4)
-			buttonList.add(ritual4 = new ButtonCategory(7, i + 14, b0 + 109, this, I18n.format(AbyssalCraft.abyssalnomicon.getUnlocalizedName() + ".name", new Object[0]), hasRituals(4) ? AbyssalCraft.abyssalnomicon : AbyssalCraft.OC));
+			buttonList.add(ritual4 = new ButtonCategory(7, i + 14, b0 + 109, this, I18n.format(ACItems.abyssalnomicon.getUnlocalizedName() + ".name", new Object[0]), hasRituals(4) ? ACItems.abyssalnomicon : ACItems.oblivion_catalyst));
 		updateButtons();
 	}
 
@@ -90,7 +90,7 @@ public class GuiNecronomiconRituals extends GuiNecronomicon {
 			else if(button.id == 1)
 				mc.displayGuiScreen(new GuiNecronomicon(getBookType()));
 			else if(button.id == 2)
-				mc.displayGuiScreen(new GuiNecronomiconEntry(getBookType(), AbyssalCraftAPI.internalNDHandler.getInternalNecroData("rituals"), this, AbyssalCraft.necronomicon));
+				mc.displayGuiScreen(new GuiNecronomiconEntry(getBookType(), AbyssalCraftAPI.getInternalNDHandler().getInternalNecroData("rituals"), this, ACItems.necronomicon));
 			else if(button.id == 3){
 				if(hasRituals(0))
 					mc.displayGuiScreen(new GuiNecronomiconRitualEntry(getBookType(), this, 0));

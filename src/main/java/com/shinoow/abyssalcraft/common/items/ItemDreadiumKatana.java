@@ -18,8 +18,10 @@ import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.EnumAction;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+
 import com.google.common.collect.Multimap;
 import com.shinoow.abyssalcraft.AbyssalCraft;
+import com.shinoow.abyssalcraft.api.item.ACItems;
 
 public class ItemDreadiumKatana extends Item {
 
@@ -69,7 +71,7 @@ public class ItemDreadiumKatana extends Item {
 	@Override
 	public boolean getIsRepairable(ItemStack par1ItemStack, ItemStack par2ItemStack)
 	{
-		return new ItemStack(AbyssalCraft.crystal, 1, 14) == par2ItemStack ? true : super.getIsRepairable(par1ItemStack, par2ItemStack);
+		return new ItemStack(ACItems.crystal, 1, 14) == par2ItemStack ? true : super.getIsRepairable(par1ItemStack, par2ItemStack);
 	}
 
 	@Override

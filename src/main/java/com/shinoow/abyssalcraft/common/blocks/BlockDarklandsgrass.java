@@ -37,6 +37,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
+import com.shinoow.abyssalcraft.api.block.ACBlocks;
 
 public class BlockDarklandsgrass extends Block implements IGrowable {
 
@@ -84,7 +85,7 @@ public class BlockDarklandsgrass extends Block implements IGrowable {
 					IBlockState iblockstate = worldIn.getBlockState(blockpos);
 
 					if (iblockstate.getBlock() == Blocks.dirt && iblockstate.getValue(BlockDirt.VARIANT) == BlockDirt.DirtType.DIRT && worldIn.getLightFromNeighbors(blockpos.up()) >= 4 && block.getLightOpacity(worldIn.getBlockState(blockpos.up()), worldIn, blockpos.up()) <= 2)
-						worldIn.setBlockState(blockpos, AbyssalCraft.Darkgrass.getDefaultState());
+						worldIn.setBlockState(blockpos, ACBlocks.darklands_grass.getDefaultState());
 				}
 	}
 
@@ -92,7 +93,7 @@ public class BlockDarklandsgrass extends Block implements IGrowable {
 	public boolean canSustainPlant(IBlockState state, IBlockAccess world, BlockPos pos, EnumFacing direction, IPlantable plantable)
 	{
 		Block plant = plantable.getPlant(world, pos.up()).getBlock();
-		if (plant == AbyssalCraft.dreadsapling || plant == AbyssalCraft.DLTSapling)
+		if (plant == ACBlocks.dreadlands_sapling || plant == ACBlocks.darklands_oak_sapling)
 			return true;
 		return false;
 	}
@@ -154,7 +155,7 @@ public class BlockDarklandsgrass extends Block implements IGrowable {
 
 				blockpos1 = blockpos1.add(rand.nextInt(3) - 1, (rand.nextInt(3) - 1) * rand.nextInt(3) / 2, rand.nextInt(3) - 1);
 
-				if (worldIn.getBlockState(blockpos1.down()).getBlock() != AbyssalCraft.Darkgrass || worldIn.getBlockState(blockpos1).isNormalCube())
+				if (worldIn.getBlockState(blockpos1.down()).getBlock() != ACBlocks.darklands_grass || worldIn.getBlockState(blockpos1).isNormalCube())
 					break;
 
 				++j;

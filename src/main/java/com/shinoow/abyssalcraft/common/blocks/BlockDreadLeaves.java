@@ -32,6 +32,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
+import com.shinoow.abyssalcraft.api.block.ACBlocks;
 
 public class BlockDreadLeaves extends BlockLeaves {
 
@@ -72,7 +73,7 @@ public class BlockDreadLeaves extends BlockLeaves {
 	@Override
 	public Item getItemDropped(IBlockState state, Random par2Random, int par3)
 	{
-		return Item.getItemFromBlock(AbyssalCraft.dreadsapling);
+		return Item.getItemFromBlock(ACBlocks.dreadlands_sapling);
 	}
 
 	@Override

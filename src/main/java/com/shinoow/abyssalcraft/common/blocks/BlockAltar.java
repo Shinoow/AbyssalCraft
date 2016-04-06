@@ -24,7 +24,6 @@ public class BlockAltar extends Block {
 	public BlockAltar() {
 		super(Material.rock);
 		setHarvestLevel("pickaxe", 3);
-		//		setBlockBounds(0.1F, 0.0F, 0.1F, 0.9F, 0.7F, 0.9F);
 		setStepSound(SoundType.STONE);
 	}
 

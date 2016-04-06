@@ -16,11 +16,12 @@ import net.minecraft.block.BlockSlab;
 import net.minecraft.item.ItemSlab;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
+import com.shinoow.abyssalcraft.api.block.ACBlocks;
 
 public class ItemDarkcobbleSlab extends ItemSlab {
 
 	public ItemDarkcobbleSlab(Block block) {
-		super(block, (BlockSlab)AbyssalCraft.Darkcobbleslab1, (BlockSlab)AbyssalCraft.Darkcobbleslab2);
+		super(block, (BlockSlab)ACBlocks.darkstone_cobblestone_slab, (BlockSlab)AbyssalCraft.Darkcobbleslab2);
 		setMaxDamage(0);
 		setHasSubtypes(true);
 	}

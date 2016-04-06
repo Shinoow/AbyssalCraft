@@ -19,6 +19,7 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraft.world.World;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
+import com.shinoow.abyssalcraft.api.item.ACItems;
 
 public class ItemAntiFood extends ItemFood {
 
@@ -37,9 +38,9 @@ public class ItemAntiFood extends ItemFood {
 	@Override
 	public void onFoodEaten(ItemStack itemStack, World world, EntityPlayer entityPlayer)
 	{
-		if(itemStack.getItem() == AbyssalCraft.antiFlesh)
+		if(itemStack.getItem() == ACItems.rotten_anti_flesh)
 			entityPlayer.addPotionEffect(new PotionEffect(MobEffects.saturation, 600, 1));
-		else if(itemStack.getItem() == AbyssalCraft.antiSpider_eye)
+		else if(itemStack.getItem() == ACItems.anti_spider_eye)
 			entityPlayer.addPotionEffect(new PotionEffect(MobEffects.regeneration, 400, 0));
 		else entityPlayer.addPotionEffect(new PotionEffect(MobEffects.hunger, 600, 1));
 	}

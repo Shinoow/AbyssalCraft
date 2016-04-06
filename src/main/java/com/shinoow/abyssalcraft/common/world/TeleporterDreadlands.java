@@ -28,7 +28,7 @@ import net.minecraft.world.Teleporter;
 import net.minecraft.world.WorldServer;
 
 import com.google.common.collect.Lists;
-import com.shinoow.abyssalcraft.AbyssalCraft;
+import com.shinoow.abyssalcraft.api.block.ACBlocks;
 
 public class TeleporterDreadlands extends Teleporter
 {
@@ -71,7 +71,7 @@ public class TeleporterDreadlands extends Teleporter
 						int j2 = j + l1;
 						int k2 = k + k1 * i1 - j1 * l;
 						boolean flag = l1 < 0;
-						worldServerInstance.setBlockState(new BlockPos(i2, j2, k2), flag ? AbyssalCraft.dreadstone.getDefaultState() : Blocks.air.getDefaultState());
+						worldServerInstance.setBlockState(new BlockPos(i2, j2, k2), flag ? ACBlocks.dreadstone.getDefaultState() : Blocks.air.getDefaultState());
 					}
 
 			entityIn.setLocationAndAngles(i, j, k, entityIn.rotationYaw, 0.0F);
@@ -106,8 +106,8 @@ public class TeleporterDreadlands extends Teleporter
 					for (BlockPos blockpos = blockpos4.add(l, worldServerInstance.getActualHeight() - 1 - blockpos4.getY(), i1); blockpos.getY() >= 0; blockpos = blockpos1) {
 						blockpos1 = blockpos.down();
 
-						if (worldServerInstance.getBlockState(blockpos).getBlock() == AbyssalCraft.dreadportal) {
-							while (worldServerInstance.getBlockState(blockpos1 = blockpos.down()).getBlock() == AbyssalCraft.dreadportal)
+						if (worldServerInstance.getBlockState(blockpos).getBlock() == ACBlocks.dreaded_gateway) {
+							while (worldServerInstance.getBlockState(blockpos1 = blockpos.down()).getBlock() == ACBlocks.dreaded_gateway)
 								blockpos = blockpos1;
 
 							double d1 = blockpos.distanceSq(blockpos4);
@@ -132,16 +132,16 @@ public class TeleporterDreadlands extends Teleporter
 			double d6 = ((BlockPos) object).getZ() + 0.5D;
 			EnumFacing enumfacing = null;
 
-			if (worldServerInstance.getBlockState(((BlockPos) object).west()).getBlock() == AbyssalCraft.dreadportal)
+			if (worldServerInstance.getBlockState(((BlockPos) object).west()).getBlock() == ACBlocks.dreaded_gateway)
 				enumfacing = EnumFacing.NORTH;
 
-			if (worldServerInstance.getBlockState(((BlockPos) object).east()).getBlock() == AbyssalCraft.dreadportal)
+			if (worldServerInstance.getBlockState(((BlockPos) object).east()).getBlock() == ACBlocks.dreaded_gateway)
 				enumfacing = EnumFacing.SOUTH;
 
-			if (worldServerInstance.getBlockState(((BlockPos) object).north()).getBlock() == AbyssalCraft.dreadportal)
+			if (worldServerInstance.getBlockState(((BlockPos) object).north()).getBlock() == ACBlocks.dreaded_gateway)
 				enumfacing = EnumFacing.EAST;
 
-			if (worldServerInstance.getBlockState(((BlockPos) object).south()).getBlock() == AbyssalCraft.dreadportal)
+			if (worldServerInstance.getBlockState(((BlockPos) object).south()).getBlock() == ACBlocks.dreaded_gateway)
 				enumfacing = EnumFacing.WEST;
 
 			EnumFacing enumfacing1 = EnumFacing.getHorizontal(MathHelper.floor_double(entityIn.rotationYaw * 4.0F / 360.0F + 0.5D) & 3);
@@ -360,11 +360,11 @@ public class TeleporterDreadlands extends Teleporter
 						int k10 = k2 + k8;
 						int k11 = k6 + (l7 - 1) * i3 - j7 * l6;
 						boolean flag = k8 < 0;
-						worldServerInstance.setBlockState(new BlockPos(k9, k10, k11), flag ? AbyssalCraft.dreadstone.getDefaultState() : Blocks.air.getDefaultState());
+						worldServerInstance.setBlockState(new BlockPos(k9, k10, k11), flag ? ACBlocks.dreadstone.getDefaultState() : Blocks.air.getDefaultState());
 					}
 		}
 
-		IBlockState iblockstate = AbyssalCraft.dreadportal.getDefaultState().withProperty(BlockPortal.AXIS, l6 != 0 ? EnumFacing.Axis.X : EnumFacing.Axis.Z);
+		IBlockState iblockstate = ACBlocks.dreaded_gateway.getDefaultState().withProperty(BlockPortal.AXIS, l6 != 0 ? EnumFacing.Axis.X : EnumFacing.Axis.Z);
 
 		for (int i8 = 0; i8 < 4; ++i8)
 		{
@@ -375,7 +375,7 @@ public class TeleporterDreadlands extends Teleporter
 					int l11 = k2 + l9;
 					int k12 = k6 + (l8 - 1) * i3;
 					boolean flag1 = l8 == 0 || l8 == 3 || l9 == -1 || l9 == 3;
-					worldServerInstance.setBlockState(new BlockPos(l10, l11, k12), flag1 ? AbyssalCraft.dreadstone.getDefaultState() : iblockstate, 2);
+					worldServerInstance.setBlockState(new BlockPos(l10, l11, k12), flag1 ? ACBlocks.dreadstone.getDefaultState() : iblockstate, 2);
 				}
 
 			for (int i9 = 0; i9 < 4; ++i9)

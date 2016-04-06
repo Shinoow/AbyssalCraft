@@ -37,6 +37,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
+import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.common.blocks.tile.TileEntityEngraver;
 
 public class BlockEngraver extends BlockContainer {
@@ -63,7 +64,7 @@ public class BlockEngraver extends BlockContainer {
 	@Override
 	public Item getItemDropped(IBlockState state, Random par1Random, int par3)
 	{
-		return Item.getItemFromBlock(AbyssalCraft.engraver);
+		return Item.getItemFromBlock(ACBlocks.engraver);
 	}
 
 	@Override
@@ -78,7 +79,7 @@ public class BlockEngraver extends BlockContainer {
 		TileEntity tileentity = par1World.getTileEntity(pos);
 		keepInventory = true;
 
-		par1World.setBlockState(pos, AbyssalCraft.engraver.getDefaultState());
+		par1World.setBlockState(pos, ACBlocks.engraver.getDefaultState());
 
 		keepInventory = false;
 
@@ -164,6 +165,6 @@ public class BlockEngraver extends BlockContainer {
 	@SideOnly(Side.CLIENT)
 	public ItemStack getItem(World par1World, BlockPos pos, IBlockState state)
 	{
-		return new ItemStack(AbyssalCraft.engraver);
+		return new ItemStack(ACBlocks.engraver);
 	}
 }

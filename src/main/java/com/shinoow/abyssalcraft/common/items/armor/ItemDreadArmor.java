@@ -25,6 +25,7 @@ import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
+import com.shinoow.abyssalcraft.api.item.ACItems;
 
 public class ItemDreadArmor extends ItemArmor {
 	public ItemDreadArmor(ArmorMaterial par2EnumArmorMaterial, int par3, EntityEquipmentSlot par4, String name){
@@ -41,10 +42,10 @@ public class ItemDreadArmor extends ItemArmor {
 
 	@Override
 	public String getArmorTexture(ItemStack stack, Entity entity, EntityEquipmentSlot slot, String layer) {
-		if(stack.getItem() == AbyssalCraft.helmetD || stack.getItem() == AbyssalCraft.plateD || stack.getItem() == AbyssalCraft.bootsD)
+		if(stack.getItem() == ACItems.dreaded_abyssalnite_helmet || stack.getItem() == ACItems.dreaded_abyssalnite_chestplate || stack.getItem() == ACItems.dreaded_abyssalnite_boots)
 			return "abyssalcraft:textures/armor/dread_1.png";
 
-		if(stack.getItem() == AbyssalCraft.legsD)
+		if(stack.getItem() == ACItems.dreaded_abyssalnite_leggings)
 			return "abyssalcraft:textures/armor/dread_2.png";
 		else return null;
 	}
@@ -52,9 +53,9 @@ public class ItemDreadArmor extends ItemArmor {
 	@SuppressWarnings("rawtypes")
 	@Override
 	public void onArmorTick(World world, EntityPlayer player, ItemStack itemstack) {
-		if (itemstack.getItem() == AbyssalCraft.helmetD)
+		if (itemstack.getItem() == ACItems.dreaded_abyssalnite_helmet)
 			player.addPotionEffect(new PotionEffect(MobEffects.nightVision, 260, 0));
-		if (itemstack.getItem() == AbyssalCraft.plateD) {
+		if (itemstack.getItem() == ACItems.dreaded_abyssalnite_chestplate) {
 			player.addPotionEffect(new PotionEffect(MobEffects.fireResistance, 20, 3));
 			List list = player.worldObj.getEntitiesWithinAABBExcludingEntity(player, player.getEntityBoundingBox().expand(4D, 0.0D, 4D));
 			if (list != null)
@@ -66,9 +67,9 @@ public class ItemDreadArmor extends ItemArmor {
 						entity.setFire(99);
 				}
 		}
-		if (itemstack.getItem() == AbyssalCraft.legsD)
+		if (itemstack.getItem() == ACItems.dreaded_abyssalnite_leggings)
 			player.addPotionEffect(new PotionEffect(MobEffects.fireResistance, 20, 3));
-		if (itemstack.getItem() == AbyssalCraft.bootsD)
+		if (itemstack.getItem() == ACItems.dreaded_abyssalnite_boots)
 			player.addPotionEffect(new PotionEffect(MobEffects.fireResistance, 20, 3));
 	}
 }

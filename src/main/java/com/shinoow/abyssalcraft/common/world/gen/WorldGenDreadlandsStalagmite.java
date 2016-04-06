@@ -19,6 +19,7 @@ import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
+import com.shinoow.abyssalcraft.api.block.ACBlocks;
 
 public class WorldGenDreadlandsStalagmite extends WorldGenerator {
 
@@ -28,14 +29,14 @@ public class WorldGenDreadlandsStalagmite extends WorldGenerator {
 		while(world.isAirBlock(pos))
 			pos = pos.down();
 
-		if(world.getBlockState(pos) != AbyssalCraft.abydreadstone.getDefaultState() &&
-				world.getBlockState(pos) != AbyssalCraft.dreadstone.getDefaultState())
+		if(world.getBlockState(pos) != ACBlocks.abyssalnite_stone.getDefaultState() &&
+				world.getBlockState(pos) != ACBlocks.dreadstone.getDefaultState())
 			return false;
 
 		IBlockState state;
 		if(world.getBiomeGenForCoords(pos) == AbyssalCraft.AbyDreadlands)
-			state = AbyssalCraft.abydreadstone.getDefaultState();
-		else state = AbyssalCraft.dreadstone.getDefaultState();
+			state = ACBlocks.abyssalnite_stone.getDefaultState();
+		else state = ACBlocks.dreadstone.getDefaultState();
 
 		int x = pos.getX();
 		int y = pos.getY();

@@ -25,55 +25,31 @@ import com.shinoow.abyssalcraft.common.util.ACLogger;
 
 public class IntegrationHandler {
 
-	static boolean isMorhpLoaded = Loader.isModLoaded("Morph");
 	static boolean isInvTweaksLoaded = Loader.isModLoaded("inventorytweaks");
 	static boolean isJEILoaded = Loader.isModLoaded("JEI");
 
 	static List<String> mods = new ArrayList<String>();
 	static List<IACPlugin> integrations = new ArrayList<IACPlugin>();
 	static List<IACPlugin> oldRegistry = new ArrayList<IACPlugin>();
+	static List<IACPlugin> temp = new ArrayList<IACPlugin>();
 
 	/**
 	 * Attempts to find mod integrations.
 	 */
 	private static void findIntegrations(ASMDataTable asmDataTable){
-		ACLogger.info("Checking possible mod integrations.");
-		if(isMorhpLoaded){
-			//			ACLogger.info("Morph is present, initializing weird shape-shifting stuff.");
-			//			integrations.add(new ACMorph());
-			//			mods.add("Morph");
-		}
-		if(isInvTweaksLoaded){
-			ACLogger.info("Inventory Tweaks is present, initializing sorting stuff.");
-			mods.add("Inventory Tweaks");
-		}
-		if(isJEILoaded){
-			ACLogger.info("Just Enough Items is present, initializing informative stuff.");
-			mods.add("Just Enough Items");
-		}
-		fetchModIntegrations(asmDataTable);
-		if(!AbyssalCraftAPI.getIntegrations().isEmpty()){
-			ACLogger.info("Searching the AbyssalCraftAPI list (old registry) for integrations.");
-			for(IACPlugin plugin : AbyssalCraftAPI.getIntegrations())
-				if(!mods.contains(plugin.getModName())){
-					ACLogger.info("Found a integration for mod %s", plugin.getModName());
-					oldRegistry.add(plugin);
-					mods.add(plugin.getModName());
-				}
-		}
+		ACLogger.info("Starting the Integration Handler.");
 
-		if(!mods.isEmpty())
-			ACLogger.info("Mod integrations found: %s", mods);
+		fetchModIntegrations(asmDataTable);
+
+		if(!temp.isEmpty())
+			ACLogger.info("Preliminary integration search complete: found %d possible mod integration(s)!", temp.size());
 	}
 
 	private static void fetchModIntegrations(ASMDataTable asmDataTable){
 		List<IACPlugin> plugins = fetchPlugins(asmDataTable, ACPlugin.class, IACPlugin.class);
 		if(!plugins.isEmpty())
-			for(IACPlugin plugin : plugins){
-				ACLogger.info("Found a integration for mod %s", plugin.getModName());
-				integrations.add(plugin);
-				mods.add(plugin.getModName());
-			}
+			for(IACPlugin plugin : plugins)
+				temp.add(plugin);
 	}
 
 	private static <T> List<T> fetchPlugins(ASMDataTable asmDataTable, Class annotationClass, Class<T> instanceClass){
@@ -93,8 +69,46 @@ public class IntegrationHandler {
 	}
 
 	/**
+	 * Does the initial search for integrations (eg. go over found plugins and scan ones registered through the API)
+	 */
+	private static void search(){
+		if(isInvTweaksLoaded){
+			ACLogger.info("Inventory Tweaks is present, initializing sorting stuff.");
+			mods.add("Inventory Tweaks");
+		}
+		if(isJEILoaded){
+			ACLogger.info("Just Enough Items is present, initializing informative stuff.");
+			mods.add("Just Enough Items");
+		}
+
+		if(!temp.isEmpty()){
+			for(IACPlugin plugin : temp)
+				if(plugin.canLoad()){
+					ACLogger.info("Found a integration for mod %s", plugin.getModName());
+					integrations.add(plugin);
+					mods.add(plugin.getModName());
+				}
+
+			temp.clear();
+		}
+
+		if(!AbyssalCraftAPI.getIntegrations().isEmpty()){
+			ACLogger.info("Searching the AbyssalCraftAPI list (old registry) for integrations.");
+			for(IACPlugin plugin : AbyssalCraftAPI.getIntegrations())
+				if(!mods.contains(plugin.getModName())){
+					ACLogger.info("Found a integration for mod %s", plugin.getModName());
+					oldRegistry.add(plugin);
+					mods.add(plugin.getModName());
+				}
+		}
+
+		if(!mods.isEmpty())
+			ACLogger.info("Mod integrations found: %s", mods);
+	}
+
+	/**
 	 * Runs a second scan in the AbyssalCraftAPI list,
-	 * in case a mod registered the integration after Pre-init.
+	 * in case a mod registered the integration after Init.
 	 */
 	private static void searchAgain(){
 		int temp = mods.size();
@@ -114,20 +128,10 @@ public class IntegrationHandler {
 
 	public static void preInit(ASMDataTable asmDataTable){
 		findIntegrations(asmDataTable);
-		if(!integrations.isEmpty()){
-			ACLogger.info("Pre-initalizing integrations!");
-			for(IACPlugin plugin : integrations)
-				plugin.preInit();
-		}
-		if(!oldRegistry.isEmpty()){
-			ACLogger.info("Pre-initalizing integrations (old registry)!");
-			for(IACPlugin plugin : oldRegistry)
-				plugin.preInit();
-		}
 	}
 
 	public static void init(){
-		searchAgain();
+		search();
 		if(!integrations.isEmpty()){
 			ACLogger.info("Initializing integrations!");
 			for(IACPlugin plugin : integrations)

@@ -22,6 +22,7 @@ import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
+import com.shinoow.abyssalcraft.api.item.ACItems;
 
 public class ItemAbyssalniteArmor extends ItemArmor {
 	public ItemAbyssalniteArmor(ArmorMaterial par2EnumArmorMaterial, int par3, EntityEquipmentSlot par4, String name){
@@ -40,10 +41,10 @@ public class ItemAbyssalniteArmor extends ItemArmor {
 	@Override
 	public String getArmorTexture(ItemStack stack, Entity entity, EntityEquipmentSlot slot, String type)
 	{
-		if(stack.getItem() == AbyssalCraft.helmet || stack.getItem() == AbyssalCraft.plate || stack.getItem() == AbyssalCraft.boots)
+		if(stack.getItem() == ACItems.abyssalnite_helmet || stack.getItem() == ACItems.abyssalnite_chestplate || stack.getItem() == ACItems.abyssalnite_boots)
 			return "abyssalcraft:textures/armor/abyssalnite_1.png";
 
-		if(stack.getItem() == AbyssalCraft.legs)
+		if(stack.getItem() == ACItems.abyssalnite_leggings)
 			return "abyssalcraft:textures/armor/abyssalnite_2.png";
 		else return null;
 	}
@@ -57,9 +58,9 @@ public class ItemAbyssalniteArmor extends ItemArmor {
 
 	@Override
 	public void onArmorTick(World world, EntityPlayer player, ItemStack itemstack) {
-		if (itemstack.getItem() == AbyssalCraft.helmet)
+		if (itemstack.getItem() == ACItems.abyssalnite_helmet)
 			player.addPotionEffect(new PotionEffect(MobEffects.waterBreathing, 20, 0));
-		if (itemstack.getItem() == AbyssalCraft.boots)
+		if (itemstack.getItem() == ACItems.abyssalnite_boots)
 			player.addPotionEffect(new PotionEffect(MobEffects.moveSpeed, 20, 0));
 	}
 }

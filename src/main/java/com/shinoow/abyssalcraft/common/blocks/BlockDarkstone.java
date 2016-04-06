@@ -20,6 +20,7 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.Item;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
+import com.shinoow.abyssalcraft.api.block.ACBlocks;
 
 public class BlockDarkstone extends Block {
 
@@ -32,6 +33,6 @@ public class BlockDarkstone extends Block {
 	@Override
 	public Item getItemDropped(IBlockState state, Random random, int j)
 	{
-		return Item.getItemFromBlock(AbyssalCraft.Darkstone_cobble);
+		return Item.getItemFromBlock(ACBlocks.darkstone_cobblestone);
 	}
 }

@@ -25,6 +25,7 @@ import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
+import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.common.entity.EntityPSDLTracker;
 
 public class ItemTrackerPSDL extends Item {
@@ -39,7 +40,7 @@ public class ItemTrackerPSDL extends Item {
 	{
 		RayTraceResult movingobjectposition = getMovingObjectPositionFromPlayer(par2World, par3EntityPlayer, false);
 
-		if (movingobjectposition != null && movingobjectposition.typeOfHit == RayTraceResult.Type.BLOCK && par2World.getBlockState(movingobjectposition.getBlockPos()) == AbyssalCraft.PSDL)
+		if (movingobjectposition != null && movingobjectposition.typeOfHit == RayTraceResult.Type.BLOCK && par2World.getBlockState(movingobjectposition.getBlockPos()) == ACBlocks.dreadlands_infused_powerstone)
 			return new ActionResult(EnumActionResult.PASS, par1ItemStack);
 
 		if (!par2World.isRemote)

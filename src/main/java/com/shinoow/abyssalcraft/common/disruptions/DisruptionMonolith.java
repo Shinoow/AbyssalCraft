@@ -18,7 +18,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-import com.shinoow.abyssalcraft.AbyssalCraft;
+import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.api.energy.disruption.DisruptionEntry;
 import com.shinoow.abyssalcraft.common.world.gen.WorldGenShoggothMonolith;
 
@@ -42,7 +42,7 @@ public class DisruptionMonolith extends DisruptionEntry {
 			int xPos = world.rand.nextInt(32) * randomNum(world.rand);
 			int zPos = world.rand.nextInt(32) * randomNum(world.rand);
 
-			world.setBlockState(world.getHeight(pos.add(xPos, 0, zPos)), AbyssalCraft.shoggothBlock.getDefaultState());
+			world.setBlockState(world.getHeight(pos.add(xPos, 0, zPos)), ACBlocks.shoggoth_ooze.getDefaultState());
 
 			new WorldGenShoggothMonolith().generate(world, world.rand, world.getHeight(pos.add(xPos, 0, zPos)));
 		}

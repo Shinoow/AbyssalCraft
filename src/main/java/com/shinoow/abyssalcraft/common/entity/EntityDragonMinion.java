@@ -33,6 +33,7 @@ import net.minecraft.world.World;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.api.entity.ICoraliumEntity;
+import com.shinoow.abyssalcraft.api.item.ACItems;
 
 public class EntityDragonMinion extends EntityMob implements IEntityMultiPart, ICoraliumEntity
 {
@@ -126,7 +127,7 @@ public class EntityDragonMinion extends EntityMob implements IEntityMultiPart, I
 	@Override
 	protected Item getDropItem()
 	{
-		return AbyssalCraft.Corflesh;
+		return ACItems.coralium_plagued_flesh;
 
 	}
 

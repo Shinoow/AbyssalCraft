@@ -36,6 +36,8 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.client.FMLClientHandler;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
+import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
+import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.api.entity.IDreadEntity;
 import com.shinoow.abyssalcraft.common.blocks.tile.TileEntityDreadAltarTop;
 import com.shinoow.abyssalcraft.common.structures.dreadlands.chagarothlair;
@@ -87,7 +89,7 @@ public class BlockDreadAltarTop extends BlockContainer {
 		if(world.isRemote)
 			if(world.provider.getDimension() == AbyssalCraft.configDimId2){
 				if(world.getBiomeGenForCoords(pos) == AbyssalCraft.MountainDreadlands){
-					if(world.getBlockState(pos.down()).getBlock() == AbyssalCraft.dreadaltarbottom)
+					if(world.getBlockState(pos.down()).getBlock() == ACBlocks.chagaroth_altar_bottom)
 						if(pos.getY() == 41)
 							FMLClientHandler.instance().getClient().ingameGUI.getChatGUI().printChatMessage(new TextComponentTranslation("message.dreadaltartop.enter"));
 						else if(pos.getY() < 41)
@@ -105,7 +107,7 @@ public class BlockDreadAltarTop extends BlockContainer {
 	public boolean onBlockActivated(World par1World, BlockPos pos, IBlockState state, EntityPlayer par5EntityPlayer, EnumHand hand, ItemStack heldItem, EnumFacing side, float par7, float par8, float par9) {
 		if(par1World.provider.getDimension() == AbyssalCraft.configDimId2){
 			if(par1World.getBiomeGenForCoords(pos) == AbyssalCraft.MountainDreadlands){
-				if(par1World.getBlockState(pos.down()).getBlock() == AbyssalCraft.dreadaltarbottom && pos.getY() == 41){
+				if(par1World.getBlockState(pos.down()).getBlock() == ACBlocks.chagaroth_altar_bottom && pos.getY() == 41){
 					if(par1World.isRemote)
 						SpecialTextUtil.ChagarothGroup(par1World, I18n.translateToLocal("message.dreadaltartop.spawn"));
 					if(!par1World.isRemote){
@@ -130,6 +132,6 @@ public class BlockDreadAltarTop extends BlockContainer {
 
 		if(par5Entity instanceof IDreadEntity){}
 		else if(par5Entity instanceof EntityLivingBase)
-			((EntityLivingBase)par5Entity).addPotionEffect(new PotionEffect(AbyssalCraft.Dplague, 100));
+			((EntityLivingBase)par5Entity).addPotionEffect(new PotionEffect(AbyssalCraftAPI.dread_plague, 100));
 	}
 }

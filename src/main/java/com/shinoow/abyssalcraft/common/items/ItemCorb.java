@@ -26,6 +26,7 @@ import net.minecraft.util.text.translation.I18n;
 import net.minecraft.world.World;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
+import com.shinoow.abyssalcraft.api.block.ACBlocks;
 
 public class ItemCorb extends Item {
 
@@ -47,21 +48,21 @@ public class ItemCorb extends Item {
 	@Override
 	public EnumActionResult onItemUse(ItemStack is, EntityPlayer player, World w, BlockPos pos, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ){
 		if(w.getBlockState(pos) == Blocks.stone){
-			w.setBlockState(pos, AbyssalCraft.Darkstone.getDefaultState());
+			w.setBlockState(pos, ACBlocks.darkstone.getDefaultState());
 			is.damageItem(50, player);
-		}else if(w.getBlockState(pos) == AbyssalCraft.Darkstone){
+		}else if(w.getBlockState(pos) == ACBlocks.darkstone){
 			w.setBlockState(pos, Blocks.stone.getDefaultState());
 			is.damageItem(50, player);
 		}else if(w.getBlockState(pos) == Blocks.cobblestone){
-			w.setBlockState(pos, AbyssalCraft.Darkstone_cobble.getDefaultState());
+			w.setBlockState(pos, ACBlocks.darkstone_cobblestone.getDefaultState());
 			is.damageItem(50, player);
-		}else if(w.getBlockState(pos) == AbyssalCraft.Darkstone_cobble){
+		}else if(w.getBlockState(pos) == ACBlocks.darkstone_cobblestone){
 			w.setBlockState(pos, Blocks.cobblestone.getDefaultState());
 			is.damageItem(50, player);
 		}else if(w.getBlockState(pos) == Blocks.stonebrick){
-			w.setBlockState(pos, AbyssalCraft.Darkstone_brick.getDefaultState());
+			w.setBlockState(pos, ACBlocks.darkstone_brick.getDefaultState());
 			is.damageItem(50, player);
-		}else if(w.getBlockState(pos) == AbyssalCraft.Darkstone_brick){
+		}else if(w.getBlockState(pos) == ACBlocks.darkstone_brick){
 			w.setBlockState(pos, Blocks.stonebrick.getDefaultState());
 			is.damageItem(50, player);
 		}

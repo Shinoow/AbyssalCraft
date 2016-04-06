@@ -22,6 +22,8 @@ import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
+import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
+import com.shinoow.abyssalcraft.api.item.ACItems;
 
 public class ItemDreadiumArmor extends ItemArmor {
 	public ItemDreadiumArmor(ArmorMaterial par2EnumArmorMaterial, int par3, EntityEquipmentSlot par4, String name){
@@ -39,24 +41,24 @@ public class ItemDreadiumArmor extends ItemArmor {
 
 	@Override
 	public String getArmorTexture(ItemStack stack, Entity entity, EntityEquipmentSlot slot, String layer) {
-		if(stack.getItem() == AbyssalCraft.dreadiumhelmet || stack.getItem() == AbyssalCraft.dreadiumplate || stack.getItem() == AbyssalCraft.dreadiumboots)
+		if(stack.getItem() == ACItems.dreadium_helmet || stack.getItem() == ACItems.dreadium_chestplate || stack.getItem() == ACItems.dreadium_boots)
 			return "abyssalcraft:textures/armor/dreadium_1.png";
 
-		if(stack.getItem() == AbyssalCraft.dreadiumlegs)
+		if(stack.getItem() == ACItems.dreadium_leggings)
 			return "abyssalcraft:textures/armor/dreadium_2.png";
 		else return null;
 	}
 
 	@Override
 	public void onArmorTick(World world, EntityPlayer player, ItemStack itemstack) {
-		if (itemstack.getItem() == AbyssalCraft.dreadiumhelmet) {
+		if (itemstack.getItem() == ACItems.dreadium_helmet) {
 			player.addPotionEffect(new PotionEffect(MobEffects.nightVision, 260, 0));
-			if(player.getActivePotionEffect(AbyssalCraft.Dplague) !=null)
-				player.removePotionEffect(AbyssalCraft.Dplague);
+			if(player.getActivePotionEffect(AbyssalCraftAPI.dread_plague) !=null)
+				player.removePotionEffect(AbyssalCraftAPI.dread_plague);
 		}
-		if (itemstack.getItem() == AbyssalCraft.dreadiumplate)
+		if (itemstack.getItem() == ACItems.dreadium_chestplate)
 			player.addPotionEffect(new PotionEffect(MobEffects.resistance, 20, 0));
-		if (itemstack.getItem() == AbyssalCraft.dreadiumboots)
+		if (itemstack.getItem() == ACItems.dreadium_boots)
 			player.addPotionEffect(new PotionEffect(MobEffects.moveSpeed, 20, 1));
 	}
 }

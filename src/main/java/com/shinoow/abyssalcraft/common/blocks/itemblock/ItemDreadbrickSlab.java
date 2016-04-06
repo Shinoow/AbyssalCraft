@@ -16,11 +16,12 @@ import net.minecraft.block.BlockSlab;
 import net.minecraft.item.ItemSlab;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
+import com.shinoow.abyssalcraft.api.block.ACBlocks;
 
 public class ItemDreadbrickSlab extends ItemSlab {
 
 	public ItemDreadbrickSlab(Block block) {
-		super(block, (BlockSlab)AbyssalCraft.dreadbrickslab1, (BlockSlab)AbyssalCraft.dreadbrickslab2);
+		super(block, (BlockSlab)ACBlocks.dreadstone_brick_slab, (BlockSlab)AbyssalCraft.dreadbrickslab2);
 		setMaxDamage(0);
 		setHasSubtypes(true);
 	}

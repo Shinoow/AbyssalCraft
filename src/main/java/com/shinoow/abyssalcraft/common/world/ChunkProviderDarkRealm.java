@@ -27,7 +27,9 @@ import net.minecraft.world.chunk.IChunkGenerator;
 import net.minecraft.world.gen.NoiseGeneratorOctaves;
 import net.minecraft.world.gen.NoiseGeneratorPerlin;
 import net.minecraftforge.event.ForgeEventFactory;
+
 import com.shinoow.abyssalcraft.AbyssalCraft;
+import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.common.structures.StructureShoggothPit;
 
 public class ChunkProviderDarkRealm implements IChunkGenerator
@@ -136,9 +138,9 @@ public class ChunkProviderDarkRealm implements IChunkGenerator
 
 							for (int k3 = 0; k3 < 4; ++k3)
 								if ((d15 += d16) > 0.0D)
-									primer.setBlockState(k * 4 + i3, k2 * 8 + l2, j1 * 4 + k3, AbyssalCraft.Darkstone.getDefaultState());
+									primer.setBlockState(k * 4 + i3, k2 * 8 + l2, j1 * 4 + k3, ACBlocks.darkstone.getDefaultState());
 								else if (k2 * 8 + l2 < b0)
-									primer.setBlockState(k * 4 + i3, k2 * 8 + l2, j1 * 4 + k3, AbyssalCraft.Darkstone.getDefaultState());
+									primer.setBlockState(k * 4 + i3, k2 * 8 + l2, j1 * 4 + k3, ACBlocks.darkstone.getDefaultState());
 
 							d10 += d12;
 							d11 += d13;

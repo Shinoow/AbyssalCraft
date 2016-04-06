@@ -51,6 +51,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.api.entity.IAntiEntity;
+import com.shinoow.abyssalcraft.api.item.ACItems;
 import com.shinoow.abyssalcraft.common.entity.ai.EntityAIAttackRangedBowAnti;
 
 public class EntityAntiSkeleton extends EntityMob implements IRangedAttackMob, IAntiEntity {
@@ -149,7 +150,7 @@ public class EntityAntiSkeleton extends EntityMob implements IRangedAttackMob, I
 		j = rand.nextInt(3 + par2);
 
 		for (k = 0; k < j; ++k)
-			dropItem(AbyssalCraft.antiBone, 1);
+			dropItem(ACItems.anti_bone, 1);
 	}
 
 	@Override

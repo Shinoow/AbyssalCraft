@@ -42,7 +42,9 @@ import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.World;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
+import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
 import com.shinoow.abyssalcraft.api.entity.IDreadEntity;
+import com.shinoow.abyssalcraft.api.item.ACItems;
 
 public class EntityDreadguard extends EntityMob implements IDreadEntity {
 
@@ -100,7 +102,7 @@ public class EntityDreadguard extends EntityMob implements IDreadEntity {
 
 		if (super.attackEntityAsMob(par1Entity))
 			if (par1Entity instanceof EntityLivingBase)
-				((EntityLivingBase)par1Entity).addPotionEffect(new PotionEffect(AbyssalCraft.Dplague, 100));
+				((EntityLivingBase)par1Entity).addPotionEffect(new PotionEffect(AbyssalCraftAPI.dread_plague, 100));
 		return super.attackEntityAsMob(par1Entity);
 	}
 
@@ -147,17 +149,17 @@ public class EntityDreadguard extends EntityMob implements IDreadEntity {
 	@Override
 	protected Item getDropItem()
 	{
-		return AbyssalCraft.Dreadshard;
+		return ACItems.dreaded_shard_of_abyssalnite;
 	}
 
 	@Override
 	public void onLivingUpdate()
 	{
 		if (worldObj.isRemote){
-			setItemStackToSlot(EntityEquipmentSlot.HEAD, new ItemStack(AbyssalCraft.helmetD));
-			setItemStackToSlot(EntityEquipmentSlot.CHEST, new ItemStack(AbyssalCraft.plateD));
-			setItemStackToSlot(EntityEquipmentSlot.LEGS, new ItemStack(AbyssalCraft.legsD));
-			setItemStackToSlot(EntityEquipmentSlot.FEET, new ItemStack(AbyssalCraft.bootsD));
+			setItemStackToSlot(EntityEquipmentSlot.HEAD, new ItemStack(ACItems.dreaded_abyssalnite_helmet));
+			setItemStackToSlot(EntityEquipmentSlot.CHEST, new ItemStack(ACItems.dreaded_abyssalnite_chestplate));
+			setItemStackToSlot(EntityEquipmentSlot.LEGS, new ItemStack(ACItems.dreaded_abyssalnite_leggings));
+			setItemStackToSlot(EntityEquipmentSlot.FEET, new ItemStack(ACItems.dreaded_abyssalnite_boots));
 		}
 		super.onLivingUpdate();
 	}

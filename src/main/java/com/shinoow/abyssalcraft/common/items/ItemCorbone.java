@@ -20,6 +20,8 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraft.world.World;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
+import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
+import com.shinoow.abyssalcraft.api.item.ACItems;
 import com.shinoow.abyssalcraft.common.util.EntityUtil;
 
 public class ItemCorbone extends ItemFood {
@@ -38,14 +40,14 @@ public class ItemCorbone extends ItemFood {
 	@Override
 	public void onFoodEaten(ItemStack itemStack, World world, EntityPlayer entityPlayer)
 	{
-		if(itemStack.getItem() == AbyssalCraft.antiCorbone){
+		if(itemStack.getItem() == ACItems.anti_plagued_flesh_on_a_bone){
 			entityPlayer.addPotionEffect(new PotionEffect(MobEffects.saturation, 600, 1));
 			entityPlayer.addPotionEffect(new PotionEffect(MobEffects.regeneration, 600, 0));
-			entityPlayer.inventory.addItemStackToInventory(new ItemStack(AbyssalCraft.antiBone));
+			entityPlayer.inventory.addItemStackToInventory(new ItemStack(ACItems.anti_bone));
 		} else {
 			entityPlayer.addPotionEffect(new PotionEffect(MobEffects.hunger, 600, 1));
 			if(!EntityUtil.isPlayerCoralium(entityPlayer))
-				entityPlayer.addPotionEffect(new PotionEffect(AbyssalCraft.Cplague, 600, 0));
+				entityPlayer.addPotionEffect(new PotionEffect(AbyssalCraftAPI.coralium_plague, 600, 0));
 			entityPlayer.addPotionEffect(new PotionEffect(MobEffects.confusion, 600, 0));
 			entityPlayer.inventory.addItemStackToInventory(new ItemStack(Items.bone));
 		}

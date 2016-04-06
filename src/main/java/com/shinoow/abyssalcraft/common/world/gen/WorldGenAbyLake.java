@@ -21,7 +21,7 @@ import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
 
-import com.shinoow.abyssalcraft.AbyssalCraft;
+import com.shinoow.abyssalcraft.api.block.ACBlocks;
 
 public class WorldGenAbyLake extends WorldGenerator
 {
@@ -101,10 +101,10 @@ public class WorldGenAbyLake extends WorldGenerator
 						{
 							BlockPos blockpos = position.add(i2, j4 - 1, j3);
 
-							if (worldIn.getBlockState(blockpos).getBlock() == AbyssalCraft.abystone && worldIn.getLightFor(EnumSkyBlock.SKY, position.add(i2, j4, j3)) > 0)
+							if (worldIn.getBlockState(blockpos).getBlock() == ACBlocks.abyssal_stone && worldIn.getLightFor(EnumSkyBlock.SKY, position.add(i2, j4, j3)) > 0)
 								if(n <= 32)
-									worldIn.setBlockState(blockpos, AbyssalCraft.AbyLCorOre.getDefaultState(), 2);
-								else worldIn.setBlockState(blockpos, AbyssalCraft.abystone.getDefaultState(), 2);
+									worldIn.setBlockState(blockpos, ACBlocks.liquified_coralium_ore.getDefaultState(), 2);
+								else worldIn.setBlockState(blockpos, ACBlocks.abyssal_stone.getDefaultState(), 2);
 						}
 
 			return true;
