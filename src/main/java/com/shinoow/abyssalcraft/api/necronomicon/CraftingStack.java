@@ -123,14 +123,16 @@ public class CraftingStack {
 					}
 				}
 			for(int i = 0; i < 9; i++)
-				if(stuff[i] == null || stuff[i] instanceof ItemStack)
+				if(stuff[i] == null)
 					recipe[i] = (ItemStack) stuff[i];
+				else if(stuff[i] instanceof ItemStack)
+					recipe[i] = ((ItemStack) stuff[i]).copy();
 				else if(stuff[i] instanceof Item)
 					recipe[i] = new ItemStack((Item)stuff[i]);
 				else if(stuff[i] instanceof Block)
 					recipe[i] = new ItemStack((Block)stuff[i]);
 				else if(stuff[i] instanceof List)
-					recipe[i] = (ItemStack)((List) stuff[i]).get(0);
+					recipe[i] = ((ItemStack)((List) stuff[i]).get(0)).copy();
 				else throw new ClassCastException("Not a Item, Block or ItemStack!");
 		}
 

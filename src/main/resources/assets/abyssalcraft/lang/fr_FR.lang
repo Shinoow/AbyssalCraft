@@ -195,6 +195,7 @@ message.remnant.busy=Sorry, I'm currently busy with a customer, come back later.
 message.remnant.insult.0=%s, you speak Aklo just as well as modders speak 1.8.
 message.remnant.insult.1=You know nothing, %s.
 message.remnant.insult.2=You're worthless without a Necronomicon, %s.
+message.jzahar.respawn=I sense time was turned back. Did you fail to defeat me, %s?
 
 #Container Inventories
 container.abyssalcraft.crate=Crate
@@ -249,6 +250,7 @@ necronomicon.gettingstarted=Getting Started
 necronomicon.potentialenergy=Potential Energy
 necronomicon.turnupindicator=Turn-up %1$s of %2$s
 necronomicon.miscinformation=Misc Information
+necronomicon.information.enchantments=Enchantments
 
 #Necronomicon Text
 #Note: the maximum amount of letters per string is 368
@@ -418,6 +420,11 @@ necronomicon.text.crafting.odb=A Oblivion Deathbomb is crafted with Obsidian, A 
 necronomicon.text.crafting.carboncluster=A Carbon Cluster is crafted with Crystallized Carbon. They are used in order to craft Dense Carbon Clusters.
 necronomicon.text.crafting.densecarboncluster=A Dense Carbon Cluster is crafted with Carbon Clusters and a block of Obsidian. Can be transmuted into a Diamond.
 necronomicon.text.crafting.crate=A Wooden Crate is crafted with Sticks, Wooden Planks and a Chest. Has an extra row of inventory slots more than a Chest.
+
+necronomicon.text.enchantment.coralium=The Coralium Enchantment allows you to infect any entity you hit with the Coralium Plague (that is, if they aren't immune).
+necronomicon.text.enchantment.dread=The Dread Enchantment allows you to infect any entity you hit with the Dread Plague (that is, if they aren't immune).
+necronomicon.text.enchantment.lightpierce=The Light Pierce Enchantment works like Bane of Arthropods, but on Shadow mobs.
+necronomicon.text.enchantment.ironwall=The Iron Wall Enchantment works as a anti-knockback enchantment, repelling knockback applied when hit.
 
 necronomicon.text.overworld.progression.1=In order to reach the Abyssal Wasteland, one must craft a Gateway Key, which requires one to travel to the Nether, and to visit a Darklands and a water-based biome. The water-based biome can be either a swamp or a ocean biome.
 necronomicon.text.overworld.progression.2=From the Nether you need 2 Blaze Rods, and probably a few more for later. From the Darklands biome you need to slay living shadows to finally obtain Shadow Gems. They are most commonly found in Darklands Mountains biomes. It is recommended to obtain a Staff of Rending in order to obtain Shadow Gems faster (more information in the special armor and tools section).
@@ -663,6 +670,8 @@ ac.ritual.saOMTupgrade=Omothol Sacrificial Altar
 ac.ritual.saOMTupgrade.desc=A Omothol Sacrificial is created by infusing a Dreadlands Sacrificial Altar with Ethaxium Bricks, Dark Ethaxium Bricks, Shadow Gem Shards and Coralium Gems.
 ac.ritual.jzaharStaff=Staff of The Gatekeeper
 ac.ritual.jzaharStaff.desc=A Staff of The Gatekeeper is created by infusing a Staff of Rending with a Abyssal Wasteland Essence, a Dreadlands Essence, a Omothol Essence, Eldritch Scales and Ethaxium Ingots.
+ac.ritual.respawnJzahar=Ritual of reversed time
+ac.ritual.respawnJzahar.desc=If you in some way failed to obtain a Essence of The Gatekeeper, you can revert time and fight J'zahar again. Can only be performed at the Ritual Altar inside the Temple of J'zahar (X=4, Y=54, Z=85).
 
 #Configuration
 ac_dimensions=Dimensions
