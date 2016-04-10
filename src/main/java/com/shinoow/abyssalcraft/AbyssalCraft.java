@@ -83,10 +83,10 @@ import com.shinoow.abyssalcraft.common.world.WorldProviderDreadlands;
 import com.shinoow.abyssalcraft.common.world.WorldProviderOmothol;
 import com.shinoow.abyssalcraft.common.world.biome.*;
 
-@Mod(modid = AbyssalCraft.modid, name = AbyssalCraft.name, version = AbyssalCraft.version,dependencies = "required-after:Forge@[forgeversion,);after:JEI@[2.25,)", useMetadata = false, guiFactory = "com.shinoow.abyssalcraft.client.config.ACGuiFactory", acceptedMinecraftVersions = "[1.8.9]", updateJSON = "https://raw.githubusercontent.com/Shinoow/AbyssalCraft/master/version.json")
+@Mod(modid = AbyssalCraft.modid, name = AbyssalCraft.name, version = AbyssalCraft.version,dependencies = "required-after:Forge@[forgeversion,);after:JEI@[2.28,)", useMetadata = false, guiFactory = "com.shinoow.abyssalcraft.client.config.ACGuiFactory", acceptedMinecraftVersions = "[1.8.9]", updateJSON = "https://raw.githubusercontent.com/Shinoow/AbyssalCraft/master/version.json")
 public class AbyssalCraft {
 
-	public static final String version = "1.9.1";
+	public static final String version = "1.9.1.1";
 	public static final String modid = "abyssalcraft";
 	public static final String name = "AbyssalCraft";
 
