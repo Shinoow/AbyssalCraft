@@ -195,8 +195,6 @@ public class AbyssalCrafting {
 
 	private static void addItemCrafting(){
 
-		GameRegistry.addRecipe(new ItemStack(AbyssalCraft.devsword, 1), new Object[] {"#", '#', AbyssalCraft.devsword}); //You ain't seen nothing
-
 		GameRegistry.addRecipe(new ItemStack(ACItems.darkstone_pickaxe, 1), new Object[] {"###", " % ", " % ", '#', ACBlocks.darkstone_cobblestone, '%', Items.stick});
 		GameRegistry.addRecipe(new ItemStack(ACItems.darkstone_axe, 1), new Object[] {"##", "#%", " %", '#', ACBlocks.darkstone_cobblestone, '%', Items.stick});
 		GameRegistry.addRecipe(new ItemStack(ACItems.darkstone_shovel, 1), new Object[] {"#", "%", "%", '#', ACBlocks.darkstone_cobblestone, '%', Items.stick});
