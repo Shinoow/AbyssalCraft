@@ -12,7 +12,6 @@
 package com.shinoow.abyssalcraft.common.world;
 
 import static net.minecraftforge.event.terraingen.InitMapGenEvent.EventType.CAVE;
-import static net.minecraftforge.event.terraingen.InitMapGenEvent.EventType.MINESHAFT;
 import static net.minecraftforge.event.terraingen.InitMapGenEvent.EventType.NETHER_CAVE;
 import static net.minecraftforge.event.terraingen.InitMapGenEvent.EventType.RAVINE;
 import static net.minecraftforge.event.terraingen.PopulateChunkEvent.Populate.EventType.LAVA;
@@ -89,7 +88,6 @@ public class ChunkProviderDreadlands implements IChunkProvider {
 
 	{
 		caveGenerator = TerrainGen.getModdedMapGen(caveGenerator, CAVE);
-		dmGenerator = (MapGenDreadlandsMine) TerrainGen.getModdedMapGen(dmGenerator, MINESHAFT);
 		ravineGenerator = TerrainGen.getModdedMapGen(ravineGenerator, RAVINE);
 		netherCaveGenerator = TerrainGen.getModdedMapGen(netherCaveGenerator, NETHER_CAVE);
 	}

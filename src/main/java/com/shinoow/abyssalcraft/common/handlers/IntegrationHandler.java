@@ -15,7 +15,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
-import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
 import com.shinoow.abyssalcraft.api.integration.ACPlugin;
 import com.shinoow.abyssalcraft.api.integration.IACPlugin;
 import com.shinoow.abyssalcraft.common.util.ACLogger;
@@ -29,7 +28,6 @@ public class IntegrationHandler {
 
 	static List<String> mods = new ArrayList<String>();
 	static List<IACPlugin> integrations = new ArrayList<IACPlugin>();
-	static List<IACPlugin> oldRegistry = new ArrayList<IACPlugin>();
 	static List<IACPlugin> temp = new ArrayList<IACPlugin>();
 
 	/**
@@ -68,7 +66,7 @@ public class IntegrationHandler {
 	}
 
 	/**
-	 * Does the initial search for integrations (eg. go over found plugins and scan ones registered through the API)
+	 * Does the initial search for integrations (eg. go over found plugins)
 	 */
 	private static void search(){
 		if(isNEILoaded){
@@ -92,38 +90,8 @@ public class IntegrationHandler {
 			temp.clear();
 		}
 
-		if(!AbyssalCraftAPI.getIntegrations().isEmpty()){
-			ACLogger.info("Searching the AbyssalCraftAPI list (old registry) for integrations.");
-			for(IACPlugin plugin : AbyssalCraftAPI.getIntegrations())
-				if(!mods.contains(plugin.getModName())){
-					ACLogger.info("Found a integration for mod %s", plugin.getModName());
-					oldRegistry.add(plugin);
-					mods.add(plugin.getModName());
-				}
-		}
-
 		if(!mods.isEmpty())
 			ACLogger.info("Mod integrations found: %s", mods);
-	}
-
-	/**
-	 * Runs a second scan in the AbyssalCraftAPI list,
-	 * in case a mod registered the integration after Init.
-	 */
-	private static void searchAgain(){
-		int temp = mods.size();
-		if(!AbyssalCraftAPI.getIntegrations().isEmpty()){
-			ACLogger.info("Searching the AbyssalCraftAPI list (old registry) for integrations (again).");
-			for(IACPlugin plugin : AbyssalCraftAPI.getIntegrations())
-				if(!mods.contains(plugin.getModName())){
-					ACLogger.info("Found a integration for mod %s", plugin.getModName());
-					integrations.add(plugin);
-					mods.add(plugin.getModName());
-				}
-			if(mods.size() > temp)
-				ACLogger.info("Mod integrations found (with additions): %s", mods);
-			else ACLogger.info("Found no additional mod integrations.");
-		}
 	}
 
 	public static void preInit(ASMDataTable asmDataTable){
@@ -137,23 +105,12 @@ public class IntegrationHandler {
 			for(IACPlugin plugin : integrations)
 				plugin.init();
 		}
-		if(!oldRegistry.isEmpty()){
-			ACLogger.info("Initalizing integrations (old registry)!");
-			for(IACPlugin plugin : oldRegistry)
-				plugin.init();
-		}
 	}
 
 	public static void postInit(){
-		searchAgain();
 		if(!integrations.isEmpty()){
 			ACLogger.info("Post-initializing integrations!");
 			for(IACPlugin plugin : integrations)
-				plugin.postInit();
-		}
-		if(!oldRegistry.isEmpty()){
-			ACLogger.info("Post-initalizing integrations (old registry)!");
-			for(IACPlugin plugin : oldRegistry)
 				plugin.postInit();
 		}
 	}

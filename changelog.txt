@@ -1,1 +1,5 @@
-- Recipes involving wooden planks should work with all types of planks now
+- Fixed any crashes related to ClassCastExceptions regarding strongholds or mineshafts
+- The "AbyssalCraft Items" Creative Tab now has a Necronomicon as tab icon
+- The AbyssalCraft biomes can now be accessed in the API (and you can create Darklands and Dreadlands biomes)
+- Any Fire block added by AbyssalCraft can now be exstinghished by hand like vanilla Fire
+- Displacement disruptions now properly move players around (along with other entities)

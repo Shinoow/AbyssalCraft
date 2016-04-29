@@ -46,8 +46,8 @@ import net.minecraftforge.oredict.OreDictionary;
 
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI.FuelType;
+import com.shinoow.abyssalcraft.api.biome.ACBiomes;
 import com.shinoow.abyssalcraft.api.energy.EnergyEnum.DeityType;
-import com.shinoow.abyssalcraft.api.integration.IACPlugin;
 import com.shinoow.abyssalcraft.api.item.*;
 import com.shinoow.abyssalcraft.common.*;
 import com.shinoow.abyssalcraft.common.blocks.*;
@@ -82,7 +82,7 @@ import cpw.mods.fml.common.registry.*;
 @Mod(modid = AbyssalCraft.modid, name = AbyssalCraft.name, version = AbyssalCraft.version, dependencies = "required-after:Forge@[forgeversion,)", useMetadata = false, guiFactory = "com.shinoow.abyssalcraft.client.config.ACGuiFactory")
 public class AbyssalCraft {
 
-	public static final String version = "1.9.1.1";
+	public static final String version = "1.9.1.2";
 	public static final String modid = "abyssalcraft";
 	public static final String name = "AbyssalCraft";
 
@@ -154,17 +154,10 @@ public class AbyssalCraft {
 	monolithStone, shoggothBiomass, energyPedestal, monolithPillar, sacrificialAltar, tieredEnergyPedestal,
 	tieredSacrificialAltar, jzaharspawner, gatekeeperminionspawner, mimicFire;
 
-	//Overworld biomes
+	@Deprecated
 	public static BiomeGenBase Darklands, DarklandsForest, DarklandsPlains, DarklandsHills,
-	DarklandsMountains, corswamp;
-	//Abyssal Wastelands biome
-	public static BiomeGenBase Wastelands;
-	//Dreadlands biomes
-	public static BiomeGenBase Dreadlands, AbyDreadlands, ForestDreadlands, MountainDreadlands;
-	//Omothol biome
-	public static BiomeGenBase omothol;
-	//Dark Realm biome
-	public static BiomeGenBase darkRealm;
+	DarklandsMountains, corswamp, Wastelands, Dreadlands, AbyDreadlands, ForestDreadlands,
+	MountainDreadlands, omothol, darkRealm;
 
 	//"secret" dev stuff
 	public static Item devsword;
@@ -228,7 +221,7 @@ public class AbyssalCraft {
 
 		@Override
 		public Item getTabIconItem() {
-			return OC;
+			return necronomicon;
 		}
 	};
 	public static final CreativeTabs tabTools = new CreativeTabs("actools"){
@@ -501,19 +494,34 @@ public class AbyssalCraft {
 		checkBiomeIds(true);
 
 		//Biome
-		Darklands = new BiomeGenDarklands(configBiomeId1).setColor(522674).setBiomeName("Darklands");
-		Wastelands = new BiomeGenAbywasteland(configBiomeId2).setColor(522674).setBiomeName("Abyssal Wastelands").setDisableRain();
-		Dreadlands = new BiomeGenDreadlands(configBiomeId3).setColor(522674).setBiomeName("Dreadlands").setDisableRain();
-		AbyDreadlands = new BiomeGenAbyDreadlands(configBiomeId4).setColor(522674).setBiomeName("Purified Dreadlands").setDisableRain();
-		ForestDreadlands = new BiomeGenForestDreadlands(configBiomeId5).setColor(522674).setBiomeName("Dreadlands Forest").setDisableRain();
-		MountainDreadlands = new BiomeGenMountainDreadlands(configBiomeId6).setColor(522674).setBiomeName("Dreadlands Mountains").setDisableRain();
-		DarklandsForest = new BiomeGenDarklandsForest(configBiomeId7).setColor(522674).setBiomeName("Darklands Forest");
-		DarklandsPlains = new BiomeGenDarklandsPlains(configBiomeId8).setColor(522674).setBiomeName("Darklands Plains").setDisableRain();
-		DarklandsHills = new BiomeGenDarklandsHills(configBiomeId9).setColor(522674).setBiomeName("Darklands Highland");
-		DarklandsMountains = new BiomeGenDarklandsMountains(configBiomeId10).setColor(522674).setBiomeName("Darklands Mountains").setDisableRain();
-		corswamp = new BiomeGenCorSwamp(configBiomeId11).setColor(522674).setBiomeName("Coralium Infested Swamp");
-		omothol = new BiomeGenOmothol(configBiomeId12).setColor(5522674).setBiomeName("Omothol").setDisableRain();
-		darkRealm = new BiomeGenDarkRealm(configBiomeId13).setColor(522674).setBiomeName("Dark Realm").setDisableRain();
+		ACBiomes.darklands = new BiomeGenDarklands(configBiomeId1).setColor(522674).setBiomeName("Darklands");
+		ACBiomes.abyssal_wastelands = new BiomeGenAbywasteland(configBiomeId2).setColor(522674).setBiomeName("Abyssal Wastelands").setDisableRain();
+		ACBiomes.dreadlands = new BiomeGenDreadlands(configBiomeId3).setColor(522674).setBiomeName("Dreadlands").setDisableRain();
+		ACBiomes.purified_dreadlands = new BiomeGenAbyDreadlands(configBiomeId4).setColor(522674).setBiomeName("Purified Dreadlands").setDisableRain();
+		ACBiomes.dreadlands_forest = new BiomeGenForestDreadlands(configBiomeId5).setColor(522674).setBiomeName("Dreadlands Forest").setDisableRain();
+		ACBiomes.dreadlands_mountains = new BiomeGenMountainDreadlands(configBiomeId6).setColor(522674).setBiomeName("Dreadlands Mountains").setDisableRain();
+		ACBiomes.darklands_forest = new BiomeGenDarklandsForest(configBiomeId7).setColor(522674).setBiomeName("Darklands Forest");
+		ACBiomes.darklands_plains = new BiomeGenDarklandsPlains(configBiomeId8).setColor(522674).setBiomeName("Darklands Plains").setDisableRain();
+		ACBiomes.darklands_hills = new BiomeGenDarklandsHills(configBiomeId9).setColor(522674).setBiomeName("Darklands Highland");
+		ACBiomes.darklands_mountains = new BiomeGenDarklandsMountains(configBiomeId10).setColor(522674).setBiomeName("Darklands Mountains").setDisableRain();
+		ACBiomes.coralium_infested_swamp = new BiomeGenCorSwamp(configBiomeId11).setColor(522674).setBiomeName("Coralium Infested Swamp");
+		ACBiomes.omothol = new BiomeGenOmothol(configBiomeId12).setColor(5522674).setBiomeName("Omothol").setDisableRain();
+		ACBiomes.dark_realm = new BiomeGenDarkRealm(configBiomeId13).setColor(522674).setBiomeName("Dark Realm").setDisableRain();
+
+		//TODO remove this in the next release or so
+		Darklands = ACBiomes.darklands;
+		DarklandsForest = ACBiomes.darklands_forest;
+		DarklandsPlains = ACBiomes.darklands_plains;
+		DarklandsHills = ACBiomes.darklands_hills;
+		DarklandsMountains = ACBiomes.darklands_mountains;
+		corswamp = ACBiomes.coralium_infested_swamp;
+		Wastelands = ACBiomes.abyssal_wastelands;
+		Dreadlands = ACBiomes.dreadlands;
+		AbyDreadlands = ACBiomes.purified_dreadlands;
+		ForestDreadlands = ACBiomes.dreadlands_forest;
+		MountainDreadlands = ACBiomes.dreadlands_mountains;
+		omothol = ACBiomes.omothol;
+		darkRealm = ACBiomes.dark_realm;
 
 		//"secret" dev stuff
 		devsword = new AbyssalCraftTool().setUnlocalizedName("DEV_BLADE").setTextureName(modid + ":" + "Sword");
@@ -1144,48 +1152,48 @@ public class AbyssalCraft {
 
 		//Biome
 		if(dark1 == true){
-			registerBiomeWithTypes(Darklands, darkWeight1, BiomeType.WARM, Type.WASTELAND, Type.SPOOKY);
-			BiomeManager.addVillageBiome(Darklands, true);
+			registerBiomeWithTypes(ACBiomes.darklands, darkWeight1, BiomeType.WARM, Type.WASTELAND, Type.SPOOKY);
+			BiomeManager.addVillageBiome(ACBiomes.darklands, true);
 		}
 		if(dark2 == true){
-			registerBiomeWithTypes(DarklandsForest, darkWeight2, BiomeType.WARM, Type.FOREST, Type.SPOOKY);
-			BiomeManager.addVillageBiome(DarklandsForest, true);
+			registerBiomeWithTypes(ACBiomes.darklands_forest, darkWeight2, BiomeType.WARM, Type.FOREST, Type.SPOOKY);
+			BiomeManager.addVillageBiome(ACBiomes.darklands_forest, true);
 		}
 		if(dark3 == true){
-			registerBiomeWithTypes(DarklandsPlains, darkWeight3, BiomeType.WARM, Type.PLAINS, Type.SPOOKY);
-			BiomeManager.addVillageBiome(DarklandsPlains, true);
+			registerBiomeWithTypes(ACBiomes.darklands_plains, darkWeight3, BiomeType.WARM, Type.PLAINS, Type.SPOOKY);
+			BiomeManager.addVillageBiome(ACBiomes.darklands_plains, true);
 		}
 		if(dark4 == true){
-			registerBiomeWithTypes(DarklandsHills, darkWeight4, BiomeType.WARM, Type.HILLS, Type.SPOOKY);
-			BiomeManager.addVillageBiome(DarklandsHills, true);
+			registerBiomeWithTypes(ACBiomes.darklands_hills, darkWeight4, BiomeType.WARM, Type.HILLS, Type.SPOOKY);
+			BiomeManager.addVillageBiome(ACBiomes.darklands_hills, true);
 		}
 		if(dark5 == true){
-			registerBiomeWithTypes(DarklandsMountains, darkWeight5, BiomeType.WARM, Type.MOUNTAIN, Type.SPOOKY);
-			BiomeManager.addVillageBiome(DarklandsMountains, true);
-			BiomeManager.addStrongholdBiome(DarklandsMountains);
+			registerBiomeWithTypes(ACBiomes.darklands_mountains, darkWeight5, BiomeType.WARM, Type.MOUNTAIN, Type.SPOOKY);
+			BiomeManager.addVillageBiome(ACBiomes.darklands_mountains, true);
+			BiomeManager.addStrongholdBiome(ACBiomes.darklands_mountains);
 		}
 		if(coralium1 == true)
-			registerBiomeWithTypes(corswamp, coraliumWeight, BiomeType.WARM, Type.SWAMP);
+			registerBiomeWithTypes(ACBiomes.coralium_infested_swamp, coraliumWeight, BiomeType.WARM, Type.SWAMP);
 		if(darkspawn1 == true)
-			BiomeManager.addSpawnBiome(Darklands);
+			BiomeManager.addSpawnBiome(ACBiomes.darklands);
 		if(darkspawn2 == true)
-			BiomeManager.addSpawnBiome(DarklandsForest);
+			BiomeManager.addSpawnBiome(ACBiomes.darklands_forest);
 		if(darkspawn3 == true)
-			BiomeManager.addSpawnBiome(DarklandsPlains);
+			BiomeManager.addSpawnBiome(ACBiomes.darklands_plains);
 		if(darkspawn4 == true)
-			BiomeManager.addSpawnBiome(DarklandsHills);
+			BiomeManager.addSpawnBiome(ACBiomes.darklands_hills);
 		if(darkspawn5 == true)
-			BiomeManager.addSpawnBiome(DarklandsMountains);
+			BiomeManager.addSpawnBiome(ACBiomes.darklands_mountains);
 		if(coraliumspawn1 == true)
-			BiomeManager.addSpawnBiome(corswamp);
+			BiomeManager.addSpawnBiome(ACBiomes.coralium_infested_swamp);
 
-		BiomeDictionary.registerBiomeType(Wastelands, Type.DEAD);
-		BiomeDictionary.registerBiomeType(Dreadlands, Type.DEAD);
-		BiomeDictionary.registerBiomeType(AbyDreadlands, Type.DEAD);
-		BiomeDictionary.registerBiomeType(MountainDreadlands, Type.DEAD);
-		BiomeDictionary.registerBiomeType(ForestDreadlands, Type.DEAD);
-		BiomeDictionary.registerBiomeType(omothol, Type.DEAD);
-		BiomeDictionary.registerBiomeType(darkRealm, Type.DEAD);
+		BiomeDictionary.registerBiomeType(ACBiomes.abyssal_wastelands, Type.DEAD);
+		BiomeDictionary.registerBiomeType(ACBiomes.dreadlands, Type.DEAD);
+		BiomeDictionary.registerBiomeType(ACBiomes.purified_dreadlands, Type.DEAD);
+		BiomeDictionary.registerBiomeType(ACBiomes.dreadlands_mountains, Type.DEAD);
+		BiomeDictionary.registerBiomeType(ACBiomes.dreadlands_forest, Type.DEAD);
+		BiomeDictionary.registerBiomeType(ACBiomes.omothol, Type.DEAD);
+		BiomeDictionary.registerBiomeType(ACBiomes.dark_realm, Type.DEAD);
 
 		//Dimension
 		registerDimension(configDimId1, WorldProviderAbyss.class, keepLoaded1);
@@ -1299,8 +1307,8 @@ public class AbyssalCraft {
 		EntityRegistry.addSpawn(EntityLesserShoggoth.class, 3, 1, 1, EnumCreatureType.monster, BiomeDictionary.getBiomesForType(Type.BEACH));
 		EntityRegistry.addSpawn(EntityLesserShoggoth.class, 3, 1, 1, EnumCreatureType.monster, BiomeDictionary.getBiomesForType(Type.SWAMP));
 		EntityRegistry.addSpawn(EntityLesserShoggoth.class, 3, 1, 1, EnumCreatureType.monster, new BiomeGenBase[]{
-			AbyssalCraft.Wastelands, AbyssalCraft.Dreadlands, AbyssalCraft.AbyDreadlands, AbyssalCraft.MountainDreadlands,
-			AbyssalCraft.ForestDreadlands, AbyssalCraft.omothol, AbyssalCraft.darkRealm});
+			ACBiomes.abyssal_wastelands, ACBiomes.dreadlands, ACBiomes.purified_dreadlands, ACBiomes.dreadlands_mountains,
+			ACBiomes.dreadlands_forest, ACBiomes.omothol, ACBiomes.dark_realm});
 		EntityRegistry.removeSpawn(EntityLesserShoggoth.class, EnumCreatureType.monster, new BiomeGenBase[]{ BiomeGenBase.mushroomIslandShore });
 
 		registerEntityWithEgg(EntityEvilCow.class, "evilcow", 67, 80, 3, true, 4470310, 10592673);
@@ -1724,19 +1732,6 @@ public class AbyssalCraft {
 					ACLogger.imcWarning("Received invalid Materializer recipe from mod %s!", imcMessage.getSender());
 				else ACLogger.imcInfo("Received Materializer recipe from mod %s", imcMessage.getSender());
 			}
-			else if(imcMessage.key.equals("registerACIntegration"))
-				try {
-					AbyssalCraftAPI.registerACIntegration((IACPlugin)Class.forName(imcMessage.getStringValue()).newInstance());
-					ACLogger.imcInfo("Recieved Integration %s from mod %s", imcMessage.getStringValue(), imcMessage.getSender());
-					if(!senders.contains(imcMessage.getSender()))
-						senders.add(imcMessage.getSender());
-				} catch (InstantiationException e) {
-					ACLogger.imcWarning("Could not create a instance of class %s (not a IACPlugin?)", imcMessage.getStringValue());
-				} catch (IllegalAccessException e) {
-					ACLogger.imcWarning("Unable to access class %s", imcMessage.getStringValue());
-				} catch (ClassNotFoundException e) {
-					ACLogger.imcWarning("Could not find class %s", imcMessage.getStringValue());
-				}
 			else if(imcMessage.key.equals("shoggothBlacklist")){
 				boolean failed = false;
 				if(!imcMessage.isItemStackMessage())
@@ -2183,43 +2178,43 @@ public class AbyssalCraft {
 		} else {
 			ACLogger.info("Checking so that no other mod has overridden a used biome ID.");
 
-			if(BiomeGenBase.getBiomeGenArray()[configBiomeId1] != Darklands && dark1)
+			if(BiomeGenBase.getBiomeGenArray()[configBiomeId1] != ACBiomes.darklands && dark1)
 				throw new RuntimeException(String.format("Biome ID %d was overridden by the biome %s (%s)!", configBiomeId1, BiomeGenBase.getBiome(configBiomeId1).biomeName,
 						BiomeGenBase.getBiome(configBiomeId1).getBiomeClass().getName()));
-			if(BiomeGenBase.getBiomeGenArray()[configBiomeId2] != Wastelands)
+			if(BiomeGenBase.getBiomeGenArray()[configBiomeId2] != ACBiomes.abyssal_wastelands)
 				throw new RuntimeException(String.format("Biome ID %d was overridden by the biome %s (%s)!", configBiomeId2, BiomeGenBase.getBiome(configBiomeId2).biomeName,
 						BiomeGenBase.getBiome(configBiomeId2).getBiomeClass().getName()));
-			if(BiomeGenBase.getBiomeGenArray()[configBiomeId3] != Dreadlands)
+			if(BiomeGenBase.getBiomeGenArray()[configBiomeId3] != ACBiomes.dreadlands)
 				throw new RuntimeException(String.format("Biome ID %d was overridden by the biome %s (%s)!", configBiomeId3, BiomeGenBase.getBiome(configBiomeId3).biomeName,
 						BiomeGenBase.getBiome(configBiomeId3).getBiomeClass().getName()));
-			if(BiomeGenBase.getBiomeGenArray()[configBiomeId4] != AbyDreadlands)
+			if(BiomeGenBase.getBiomeGenArray()[configBiomeId4] != ACBiomes.purified_dreadlands)
 				throw new RuntimeException(String.format("Biome ID %d was overridden by the biome %s (%s)!", configBiomeId4, BiomeGenBase.getBiome(configBiomeId4).biomeName,
 						BiomeGenBase.getBiome(configBiomeId4).getBiomeClass().getName()));
-			if(BiomeGenBase.getBiomeGenArray()[configBiomeId5] != ForestDreadlands)
+			if(BiomeGenBase.getBiomeGenArray()[configBiomeId5] != ACBiomes.dreadlands_forest)
 				throw new RuntimeException(String.format("Biome ID %d was overridden by the biome %s (%s)!", configBiomeId5, BiomeGenBase.getBiome(configBiomeId5).biomeName,
 						BiomeGenBase.getBiome(configBiomeId5).getBiomeClass().getName()));
-			if(BiomeGenBase.getBiomeGenArray()[configBiomeId6] != MountainDreadlands)
+			if(BiomeGenBase.getBiomeGenArray()[configBiomeId6] != ACBiomes.dreadlands_mountains)
 				throw new RuntimeException(String.format("Biome ID %d was overridden by the biome %s (%s)!", configBiomeId6, BiomeGenBase.getBiome(configBiomeId6).biomeName,
 						BiomeGenBase.getBiome(configBiomeId6).getBiomeClass().getName()));
-			if(BiomeGenBase.getBiomeGenArray()[configBiomeId7] != DarklandsForest && dark2)
+			if(BiomeGenBase.getBiomeGenArray()[configBiomeId7] != ACBiomes.darklands_forest && dark2)
 				throw new RuntimeException(String.format("Biome ID %d was overridden by the biome %s (%s)!", configBiomeId7, BiomeGenBase.getBiome(configBiomeId7).biomeName,
 						BiomeGenBase.getBiome(configBiomeId7).getBiomeClass().getName()));
-			if(BiomeGenBase.getBiomeGenArray()[configBiomeId8] != DarklandsPlains && dark3)
+			if(BiomeGenBase.getBiomeGenArray()[configBiomeId8] != ACBiomes.darklands_plains && dark3)
 				throw new RuntimeException(String.format("Biome ID %d was overridden by the biome %s (%s)!", configBiomeId8, BiomeGenBase.getBiome(configBiomeId8).biomeName,
 						BiomeGenBase.getBiome(configBiomeId8).getBiomeClass().getName()));
-			if(BiomeGenBase.getBiomeGenArray()[configBiomeId9] != DarklandsHills && dark4)
+			if(BiomeGenBase.getBiomeGenArray()[configBiomeId9] != ACBiomes.darklands_hills && dark4)
 				throw new RuntimeException(String.format("Biome ID %d was overridden by the biome %s (%s)!", configBiomeId9, BiomeGenBase.getBiome(configBiomeId9).biomeName,
 						BiomeGenBase.getBiome(configBiomeId9).getBiomeClass().getName()));
-			if(BiomeGenBase.getBiomeGenArray()[configBiomeId10] != DarklandsMountains && dark5)
+			if(BiomeGenBase.getBiomeGenArray()[configBiomeId10] != ACBiomes.darklands_mountains && dark5)
 				throw new RuntimeException(String.format("Biome ID %d was overridden by the biome %s (%s)!", configBiomeId10, BiomeGenBase.getBiome(configBiomeId10).biomeName,
 						BiomeGenBase.getBiome(configBiomeId10).getBiomeClass().getName()));
-			if(BiomeGenBase.getBiomeGenArray()[configBiomeId11] != corswamp && coralium1)
+			if(BiomeGenBase.getBiomeGenArray()[configBiomeId11] != ACBiomes.coralium_infested_swamp && coralium1)
 				throw new RuntimeException(String.format("Biome ID %d was overridden by the biome %s (%s)!", configBiomeId11, BiomeGenBase.getBiome(configBiomeId11).biomeName,
 						BiomeGenBase.getBiome(configBiomeId11).getBiomeClass().getName()));
-			if(BiomeGenBase.getBiomeGenArray()[configBiomeId12] != omothol)
+			if(BiomeGenBase.getBiomeGenArray()[configBiomeId12] != ACBiomes.omothol)
 				throw new RuntimeException(String.format("Biome ID %d was overridden by the biome %s (%s)!", configBiomeId12, BiomeGenBase.getBiome(configBiomeId12).biomeName,
 						BiomeGenBase.getBiome(configBiomeId12).getBiomeClass().getName()));
-			if(BiomeGenBase.getBiomeGenArray()[configBiomeId13] != darkRealm)
+			if(BiomeGenBase.getBiomeGenArray()[configBiomeId13] != ACBiomes.dark_realm)
 				throw new RuntimeException(String.format("Biome ID %d was overridden by the biome %s (%s)!", configBiomeId13, BiomeGenBase.getBiome(configBiomeId13).biomeName,
 						BiomeGenBase.getBiome(configBiomeId13).getBiomeClass().getName()));
 

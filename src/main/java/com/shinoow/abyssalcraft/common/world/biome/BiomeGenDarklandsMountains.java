@@ -18,6 +18,7 @@ import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.gen.feature.WorldGenMinable;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
+import com.shinoow.abyssalcraft.api.biome.IDarklandsBiome;
 import com.shinoow.abyssalcraft.common.entity.EntityAbyssalZombie;
 import com.shinoow.abyssalcraft.common.entity.EntityDepthsGhoul;
 import com.shinoow.abyssalcraft.common.entity.EntityShadowBeast;
@@ -27,7 +28,7 @@ import com.shinoow.abyssalcraft.common.entity.EntityShadowMonster;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class BiomeGenDarklandsMountains extends BiomeGenBase {
+public class BiomeGenDarklandsMountains extends BiomeGenBase implements IDarklandsBiome {
 
 	@SuppressWarnings("unchecked")
 	public BiomeGenDarklandsMountains(int par1)

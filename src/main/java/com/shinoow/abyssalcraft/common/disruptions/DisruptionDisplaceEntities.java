@@ -36,11 +36,9 @@ public class DisruptionDisplaceEntities extends DisruptionEntry {
 				double posX = entity.posX;
 				double posY = entity.posY;
 				double posZ = entity.posZ;
-				float pitch = entity.rotationPitch;
-				float yaw = entity.rotationYaw;
 				if(!world.isRemote){
-					entity.setPositionAndRotation(other.posX, other.posY, other.posZ, other.rotationPitch, other.rotationYaw);
-					other.setPositionAndRotation(posX, posY, posZ, pitch, yaw);
+					entity.setPositionAndUpdate(other.posX, other.posY, other.posZ);
+					other.setPositionAndUpdate(posX, posY, posZ);
 				}
 			}
 	}

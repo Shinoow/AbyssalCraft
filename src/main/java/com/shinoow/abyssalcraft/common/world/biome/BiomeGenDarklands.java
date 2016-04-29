@@ -21,6 +21,7 @@ import net.minecraft.world.gen.feature.WorldGenMinable;
 import net.minecraft.world.gen.feature.WorldGenTrees;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
+import com.shinoow.abyssalcraft.api.biome.IDarklandsBiome;
 import com.shinoow.abyssalcraft.common.entity.EntityAbyssalZombie;
 import com.shinoow.abyssalcraft.common.entity.EntityDepthsGhoul;
 import com.shinoow.abyssalcraft.common.world.gen.WorldGenDLT;
@@ -28,7 +29,7 @@ import com.shinoow.abyssalcraft.common.world.gen.WorldGenDLT;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class BiomeGenDarklands extends BiomeGenBase {
+public class BiomeGenDarklands extends BiomeGenBase implements IDarklandsBiome {
 
 	private WorldGenTrees WorldGenDarkTrees;
 

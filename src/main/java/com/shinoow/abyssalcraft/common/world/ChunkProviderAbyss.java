@@ -13,7 +13,6 @@ package com.shinoow.abyssalcraft.common.world;
 
 import static net.minecraftforge.event.terraingen.InitMapGenEvent.EventType.CAVE;
 import static net.minecraftforge.event.terraingen.InitMapGenEvent.EventType.RAVINE;
-import static net.minecraftforge.event.terraingen.InitMapGenEvent.EventType.STRONGHOLD;
 import static net.minecraftforge.event.terraingen.PopulateChunkEvent.Populate.EventType.LAKE;
 
 import java.util.List;
@@ -83,7 +82,6 @@ public class ChunkProviderAbyss implements IChunkProvider
 	int[][] field_73219_j = new int[32][32];
 	{
 		caveGenerator = TerrainGen.getModdedMapGen(caveGenerator, CAVE);
-		strongholdGenerator = (MapGenAbyStronghold) TerrainGen.getModdedMapGen(strongholdGenerator, STRONGHOLD);
 		ravineGenerator = TerrainGen.getModdedMapGen(ravineGenerator, RAVINE);
 	}
 

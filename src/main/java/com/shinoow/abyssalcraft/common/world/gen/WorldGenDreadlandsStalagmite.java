@@ -14,6 +14,7 @@ package com.shinoow.abyssalcraft.common.world.gen;
 import java.util.Random;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
+import com.shinoow.abyssalcraft.api.biome.ACBiomes;
 
 import net.minecraft.block.Block;
 import net.minecraft.world.World;
@@ -32,7 +33,7 @@ public class WorldGenDreadlandsStalagmite extends WorldGenerator {
 			return false;
 
 		Block block;
-		if(world.getBiomeGenForCoords(x, z) == AbyssalCraft.AbyDreadlands)
+		if(world.getBiomeGenForCoords(x, z) == ACBiomes.purified_dreadlands)
 			block = AbyssalCraft.abydreadstone;
 		else block = AbyssalCraft.dreadstone;
 		for(int i = 0; i < 7 + rand.nextInt(5); i++)

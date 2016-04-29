@@ -148,48 +148,6 @@ public class NecroData {
 	//	}
 
 	/**
-	 * Deprecated: use the new format
-	 */
-	@Deprecated
-	public NecroData(String title, String info,PageData...datas){}
-
-	/**
-	 * Deprecated: use the new format
-	 */
-	@Deprecated
-	public NecroData(String title,PageData...datas){}
-	@Deprecated
-	public PageData[] getPageData(){ return null; }
-	@Deprecated
-	public String getPageTitle(int index){ return null; }
-	@Deprecated
-	public Object[] getPageIcons(int index){ return null; }
-
-	@Deprecated
-	public static class PageData{
-		/**
-		 * Deprecated: use the new format
-		 */
-		@Deprecated
-		public PageData(int num, String title, String...strings){}
-		/**
-		 * Deprecated: use the new format
-		 */
-		@Deprecated
-		public PageData(int num, String title, Object[] stuff, String...strings){}
-		@Deprecated
-		public String[] getPages(){ return null; }
-		@Deprecated
-		public int getPageAmount(){ return 0; }
-		@Deprecated
-		public String getTitle(){ return null; }
-		@Deprecated
-		public Object getIcon(int index){ return null; }
-		@Deprecated
-		public Object[] getIcons(){ return null; }
-	}
-
-	/**
 	 * A Necronomicon Chapter (collection of pages)
 	 * @author shinoow
 	 *

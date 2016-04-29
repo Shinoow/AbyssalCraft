@@ -13,37 +13,54 @@ package com.shinoow.abyssalcraft.common.handlers;
 
 import java.util.Random;
 
-import net.minecraft.entity.*;
-import net.minecraft.entity.player.*;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
-import net.minecraft.item.*;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
-import net.minecraft.potion.*;
-import net.minecraft.util.*;
+import net.minecraft.potion.Potion;
+import net.minecraft.potion.PotionEffect;
+import net.minecraft.util.DamageSource;
+import net.minecraft.util.EntityDamageSource;
+import net.minecraft.util.StatCollector;
 import net.minecraft.world.WorldServer;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.chunk.storage.ExtendedBlockStorage;
-import net.minecraftforge.event.entity.living.*;
+import net.minecraftforge.event.entity.living.EnderTeleportEvent;
+import net.minecraftforge.event.entity.living.LivingAttackEvent;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
-import net.minecraftforge.event.entity.player.*;
+import net.minecraftforge.event.entity.living.LivingHurtEvent;
+import net.minecraftforge.event.entity.player.BonemealEvent;
+import net.minecraftforge.event.entity.player.EntityItemPickupEvent;
 import net.minecraftforge.event.terraingen.BiomeEvent;
 import net.minecraftforge.event.terraingen.PopulateChunkEvent;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
-import com.shinoow.abyssalcraft.api.entity.*;
+import com.shinoow.abyssalcraft.api.biome.ACBiomes;
+import com.shinoow.abyssalcraft.api.biome.IDarklandsBiome;
+import com.shinoow.abyssalcraft.api.entity.IDreadEntity;
 import com.shinoow.abyssalcraft.api.event.ACEvents.RitualEvent;
 import com.shinoow.abyssalcraft.api.item.ItemUpgradeKit;
-import com.shinoow.abyssalcraft.api.ritual.*;
+import com.shinoow.abyssalcraft.api.ritual.NecronomiconCreationRitual;
+import com.shinoow.abyssalcraft.api.ritual.NecronomiconInfusionRitual;
+import com.shinoow.abyssalcraft.api.ritual.NecronomiconPotionAoERitual;
+import com.shinoow.abyssalcraft.api.ritual.NecronomiconPotionRitual;
+import com.shinoow.abyssalcraft.api.ritual.NecronomiconSummonRitual;
 import com.shinoow.abyssalcraft.common.blocks.BlockDLTSapling;
 import com.shinoow.abyssalcraft.common.blocks.BlockDreadSapling;
 import com.shinoow.abyssalcraft.common.entity.EntityJzahar;
-import com.shinoow.abyssalcraft.common.items.*;
+import com.shinoow.abyssalcraft.common.items.ItemCrystalBag;
+import com.shinoow.abyssalcraft.common.items.ItemNecronomicon;
 import com.shinoow.abyssalcraft.common.ritual.NecronomiconBreedingRitual;
 import com.shinoow.abyssalcraft.common.ritual.NecronomiconDreadSpawnRitual;
 import com.shinoow.abyssalcraft.common.util.EntityUtil;
 import com.shinoow.abyssalcraft.common.util.SpecialTextUtil;
 import com.shinoow.abyssalcraft.common.world.TeleporterDarkRealm;
+
 import cpw.mods.fml.common.eventhandler.Event.Result;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.PlayerEvent;
@@ -77,7 +94,7 @@ public class AbyssalCraftEventHooks {
 				for (int x = 0; x < 16; ++x)
 					for (int y = 0; y < 16; ++y)
 						for (int z = 0; z < 16; ++z)
-							if(chunk.getBiomeGenForWorldCoords(x, z, event.world.getWorldChunkManager()) == AbyssalCraft.DarklandsMountains)
+							if(chunk.getBiomeGenForWorldCoords(x, z, event.world.getWorldChunkManager()) == ACBiomes.darklands_mountains)
 								if (storage.getBlockByExtId(x, y, z) == Blocks.stone)
 									storage.func_150818_a(x, y, z, AbyssalCraft.Darkstone);
 	}
@@ -200,11 +217,7 @@ public class AbyssalCraftEventHooks {
 				EntityPlayer player = (EntityPlayer)event.entityLiving;
 				Random rand = new Random();
 				ItemStack helmet = player.getEquipmentInSlot(4);
-				if(player.worldObj.getBiomeGenForCoords((int)player.posX, (int)player.posZ) == AbyssalCraft.Darklands ||
-						player.worldObj.getBiomeGenForCoords((int)player.posX, (int)player.posZ) == AbyssalCraft.DarklandsPlains ||
-						player.worldObj.getBiomeGenForCoords((int)player.posX, (int)player.posZ) == AbyssalCraft.DarklandsMountains ||
-						player.worldObj.getBiomeGenForCoords((int)player.posX, (int)player.posZ) == AbyssalCraft.DarklandsHills ||
-						player.worldObj.getBiomeGenForCoords((int)player.posX, (int)player.posZ) == AbyssalCraft.DarklandsForest)
+				if(player.worldObj.getBiomeGenForCoords((int)player.posX, (int)player.posZ) instanceof IDarklandsBiome)
 					if(rand.nextInt(1000) == 0)
 						if(helmet == null || helmet != null && helmet.getItem() != AbyssalCraft.helmet && helmet.getItem() != AbyssalCraft.helmetD
 						&& helmet.getItem() != AbyssalCraft.Corhelmet && helmet.getItem() != AbyssalCraft.CorhelmetP
@@ -215,15 +228,6 @@ public class AbyssalCraftEventHooks {
 				if(player.getActivePotionEffect(Potion.blindness) != null && player.getActivePotionEffect(Potion.blindness).getDuration() == 0)
 					player.removePotionEffect(Potion.blindness.id);
 			}
-	}
-
-	@SubscribeEvent
-	public void playerInteract(PlayerInteractEvent event) {
-		if (event.action == PlayerInteractEvent.Action.LEFT_CLICK_BLOCK)
-			if (event.world.getBlock(event.x, event.y + 1, event.z) == AbyssalCraft.Coraliumfire ||
-			event.world.getBlock(event.x, event.y + 1, event.z) == AbyssalCraft.dreadfire ||
-			event.world.getBlock(event.x, event.y + 1, event.z) == AbyssalCraft.omotholfire)
-				event.world.setBlockToAir(event.x, event.y + 1, event.z);
 	}
 
 	@SubscribeEvent
@@ -342,9 +346,7 @@ public class AbyssalCraftEventHooks {
 
 	@SubscribeEvent
 	public void darklandsVillages(BiomeEvent.GetVillageBlockID event){
-		if(event.biome == AbyssalCraft.Darklands || event.biome == AbyssalCraft.DarklandsPlains ||
-				event.biome == AbyssalCraft.DarklandsForest || event.biome == AbyssalCraft.DarklandsHills ||
-				event.biome == AbyssalCraft.DarklandsMountains){
+		if(event.biome instanceof IDarklandsBiome){
 			if(event.original == Blocks.log || event.original == Blocks.log2){
 				event.replacement = AbyssalCraft.DLTLog;
 				event.setResult(Result.DENY);

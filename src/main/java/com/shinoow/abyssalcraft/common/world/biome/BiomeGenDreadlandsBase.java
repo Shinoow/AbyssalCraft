@@ -21,6 +21,7 @@ import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.gen.feature.WorldGenMinable;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
+import com.shinoow.abyssalcraft.api.biome.IDreadlandsBiome;
 import com.shinoow.abyssalcraft.common.entity.EntityAbygolem;
 import com.shinoow.abyssalcraft.common.entity.EntityChagarothFist;
 import com.shinoow.abyssalcraft.common.entity.EntityDreadSpawn;
@@ -31,7 +32,7 @@ import com.shinoow.abyssalcraft.common.entity.EntityGreaterDreadSpawn;
 import com.shinoow.abyssalcraft.common.entity.EntityLesserDreadbeast;
 import com.shinoow.abyssalcraft.common.entity.demon.EntityDemonPig;
 
-public class BiomeGenDreadlandsBase extends BiomeGenBase {
+public class BiomeGenDreadlandsBase extends BiomeGenBase implements IDreadlandsBiome {
 
 	@SuppressWarnings("unchecked")
 	public BiomeGenDreadlandsBase(int par1) {

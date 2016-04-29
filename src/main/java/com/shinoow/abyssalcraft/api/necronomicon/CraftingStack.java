@@ -11,9 +11,8 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.api.necronomicon;
 
-import java.util.List;
-import net.minecraft.block.Block;
-import net.minecraft.item.Item;
+import com.shinoow.abyssalcraft.api.APIUtils;
+
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.CraftingManager;
 import net.minecraft.item.crafting.IRecipe;
@@ -43,37 +42,9 @@ public class CraftingStack {
 		if(output != null){
 			if(recipe != null){
 				if(recipe.length == 9){
-					if(output instanceof Item){
-						this.output = new ItemStack((Item)output);
-						for(int i = 0; i < 9; i++)
-							if(recipe[i] == null || recipe[i] instanceof ItemStack)
-								this.recipe[i] = (ItemStack) recipe[i];
-							else if(recipe[i] instanceof Item)
-								this.recipe[i] = new ItemStack((Item)recipe[i]);
-							else if(recipe[i] instanceof Block)
-								this.recipe[i] = new ItemStack((Block)recipe[i]);
-							else throw new ClassCastException("Not a Item, Block or ItemStack!");
-					} else if(output instanceof Block){
-						this.output = new ItemStack((Block)output);
-						for(int i = 0; i < 9; i++)
-							if(recipe[i] == null || recipe[i] instanceof ItemStack)
-								this.recipe[i] = (ItemStack) recipe[i];
-							else if(recipe[i] instanceof Item)
-								this.recipe[i] = new ItemStack((Item)recipe[i]);
-							else if(recipe[i] instanceof Block)
-								this.recipe[i] = new ItemStack((Block)recipe[i]);
-							else throw new ClassCastException("Not a Item, Block or ItemStack!");
-					} else if(output instanceof ItemStack){
-						this.output = (ItemStack)output;
-						for(int i = 0; i < 9; i++)
-							if(recipe[i] == null || recipe[i] instanceof ItemStack)
-								this.recipe[i] = (ItemStack) recipe[i];
-							else if(recipe[i] instanceof Item)
-								this.recipe[i] = new ItemStack((Item)recipe[i]);
-							else if(recipe[i] instanceof Block)
-								this.recipe[i] = new ItemStack((Block)recipe[i]);
-							else throw new ClassCastException("Not a Item, Block or ItemStack!");
-					} else throw new ClassCastException("Not a Item, Block or ItemStack!");
+					this.output = APIUtils.convertToStack(output);
+					for(int i = 0; i < 9; i++)
+						this.recipe[i] = APIUtils.convertToStack(recipe[i]);
 				} else throw new ArrayIndexOutOfBoundsException("The array must contain preciesly 9 elements, not "+recipe.length+"!");
 			} else throw new NullPointerException("This array can't be empty!");
 		} else throw new NullPointerException("Output can't be null!");
@@ -88,12 +59,7 @@ public class CraftingStack {
 	public CraftingStack(Object output){
 		if(output != null){
 			Object[] stuff = new Object[9];
-			if(output instanceof Item)
-				this.output = new ItemStack((Item)output);
-			else if(output instanceof Block)
-				this.output = new ItemStack((Block)output);
-			else if(output instanceof ItemStack)
-				this.output = (ItemStack)output;
+			this.output = APIUtils.convertToStack(output);
 			for(Object thing : CraftingManager.getInstance().getRecipeList())
 				if(thing instanceof IRecipe){
 					IRecipe recipe = (IRecipe)thing;
@@ -123,17 +89,7 @@ public class CraftingStack {
 					}
 				}
 			for(int i = 0; i < 9; i++)
-				if(stuff[i] == null)
-					recipe[i] = (ItemStack) stuff[i];
-				else if(stuff[i] instanceof ItemStack)
-					recipe[i] = ((ItemStack) stuff[i]).copy();
-				else if(stuff[i] instanceof Item)
-					recipe[i] = new ItemStack((Item)stuff[i]);
-				else if(stuff[i] instanceof Block)
-					recipe[i] = new ItemStack((Block)stuff[i]);
-				else if(stuff[i] instanceof List)
-					recipe[i] = ((ItemStack)((List) stuff[i]).get(0)).copy();
-				else throw new ClassCastException("Not a Item, Block or ItemStack!");
+				recipe[i] = APIUtils.convertToStack(stuff[i]);
 		}
 
 		for(ItemStack stack : recipe)

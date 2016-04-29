@@ -24,7 +24,7 @@ import net.minecraft.world.biome.WorldChunkManager;
 import net.minecraft.world.gen.layer.GenLayer;
 import net.minecraft.world.gen.layer.IntCache;
 
-import com.shinoow.abyssalcraft.AbyssalCraft;
+import com.shinoow.abyssalcraft.api.biome.ACBiomes;
 import com.shinoow.abyssalcraft.common.world.gen.layer.GenLayerDL;
 
 import cpw.mods.fml.relauncher.Side;
@@ -42,10 +42,10 @@ public class WorldChunkManagerDreadlands extends WorldChunkManager
 	{
 		biomeCache = new BiomeCache(this);
 		biomesToSpawnIn = new ArrayList<BiomeGenBase>();
-		biomesToSpawnIn.add(AbyssalCraft.Dreadlands);
-		biomesToSpawnIn.add(AbyssalCraft.AbyDreadlands);
-		biomesToSpawnIn.add(AbyssalCraft.ForestDreadlands);
-		biomesToSpawnIn.add(AbyssalCraft.MountainDreadlands);
+		biomesToSpawnIn.add(ACBiomes.dreadlands);
+		biomesToSpawnIn.add(ACBiomes.purified_dreadlands);
+		biomesToSpawnIn.add(ACBiomes.dreadlands_forest);
+		biomesToSpawnIn.add(ACBiomes.dreadlands_mountains);
 	}
 
 	public WorldChunkManagerDreadlands(long par1, WorldType par3WorldType)
@@ -72,7 +72,7 @@ public class WorldChunkManagerDreadlands extends WorldChunkManager
 	{
 		BiomeGenBase biome = biomeCache.getBiomeGenAt(par1, par2);
 		if (biome == null)
-			return AbyssalCraft.Dreadlands;
+			return ACBiomes.dreadlands;
 
 		return biome;
 	}
@@ -136,7 +136,7 @@ public class WorldChunkManagerDreadlands extends WorldChunkManager
 			if (aint[i] >= 0)
 				par1ArrayOfBiomeGenBase[i] = BiomeGenBase.getBiome(aint[i]);
 			else
-				par1ArrayOfBiomeGenBase[i] = AbyssalCraft.Dreadlands;
+				par1ArrayOfBiomeGenBase[i] = ACBiomes.dreadlands;
 
 		return par1ArrayOfBiomeGenBase;
 	}
@@ -166,7 +166,7 @@ public class WorldChunkManagerDreadlands extends WorldChunkManager
 				if (aint[i] >= 0)
 					par1ArrayOfBiomeGenBase[i] = BiomeGenBase.getBiome(aint[i]);
 				else
-					par1ArrayOfBiomeGenBase[i] = AbyssalCraft.Dreadlands;
+					par1ArrayOfBiomeGenBase[i] = ACBiomes.dreadlands;
 
 			return par1ArrayOfBiomeGenBase;
 		}

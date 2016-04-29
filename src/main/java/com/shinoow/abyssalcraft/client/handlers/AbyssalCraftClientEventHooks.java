@@ -13,16 +13,24 @@ package com.shinoow.abyssalcraft.client.handlers;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.world.World;
 import net.minecraftforge.client.event.FOVUpdateEvent;
+import net.minecraftforge.client.event.MouseEvent;
 import net.minecraftforge.client.event.RenderPlayerEvent;
+import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 
+import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.GL11;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.client.model.player.ModelStarSpawnPlayer;
+import com.shinoow.abyssalcraft.common.network.PacketDispatcher;
+import com.shinoow.abyssalcraft.common.network.server.FireMessage;
 import com.shinoow.abyssalcraft.common.util.EntityUtil;
 
+import cpw.mods.fml.common.eventhandler.Event;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 
 public class AbyssalCraftClientEventHooks {
@@ -75,5 +83,32 @@ public class AbyssalCraftClientEventHooks {
 		}
 
 		event.newfov = fov;
+	}
+
+	@SubscribeEvent
+	public void onMouseEvent(MouseEvent event) {
+		int button = event.button - 100;
+		Minecraft mc = Minecraft.getMinecraft();
+		EntityPlayer player = mc.thePlayer;
+		World world = mc.theWorld;
+		int key = mc.gameSettings.keyBindAttack.getKeyCode();
+
+		MovingObjectPosition mop = mc.objectMouseOver;
+
+		if (button == key && Mouse.isButtonDown(button + 100))
+			if (mop.typeOfHit == MovingObjectPosition.MovingObjectType.BLOCK)
+				if (world.getBlock(mop.blockX, mop.blockY, mop.blockZ) != null)
+					extinguishFire(player, mop.blockX, mop.blockY, mop.blockZ, world, event);
+	}
+
+	private void extinguishFire(EntityPlayer player, int x, int y, int z, World world, Event event) {
+		if (world.getBlock(x, y + 1, z) == AbyssalCraft.mimicFire ||
+				world.getBlock(x, y + 1, z) == AbyssalCraft.Coraliumfire ||
+				world.getBlock(x, y + 1, z) == AbyssalCraft.dreadfire ||
+				world.getBlock(x, y + 1, z) == AbyssalCraft.omotholfire)
+			if (event instanceof MouseEvent || event instanceof PlayerInteractEvent) {
+				PacketDispatcher.sendToServer(new FireMessage(x, y + 1, z));
+				event.setCanceled(true);
+			}
 	}
 }

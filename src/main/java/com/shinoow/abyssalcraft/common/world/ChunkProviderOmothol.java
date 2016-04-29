@@ -28,7 +28,6 @@ import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.chunk.IChunkProvider;
-import net.minecraft.world.gen.NoiseGenerator;
 import net.minecraft.world.gen.NoiseGeneratorOctaves;
 
 public class ChunkProviderOmothol implements IChunkProvider
@@ -52,13 +51,6 @@ public class ChunkProviderOmothol implements IChunkProvider
 		noiseGen3 = new NoiseGeneratorOctaves(rand, 8);
 		noiseGen4 = new NoiseGeneratorOctaves(rand, 10);
 		noiseGen5 = new NoiseGeneratorOctaves(rand, 16);
-
-		NoiseGenerator[] noiseGens = {noiseGen1, noiseGen2, noiseGen3, noiseGen4, noiseGen5};
-		noiseGen1 = (NoiseGeneratorOctaves)noiseGens[0];
-		noiseGen2 = (NoiseGeneratorOctaves)noiseGens[1];
-		noiseGen3 = (NoiseGeneratorOctaves)noiseGens[2];
-		noiseGen4 = (NoiseGeneratorOctaves)noiseGens[3];
-		noiseGen5 = (NoiseGeneratorOctaves)noiseGens[4];
 	}
 
 	public void generateTerrain(int x, int z, Block[] par3BlockArray, BiomeGenBase[] par4BiomeArray)

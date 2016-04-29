@@ -19,6 +19,7 @@ import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.chunk.IChunkProvider;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
+import com.shinoow.abyssalcraft.api.biome.ACBiomes;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -32,7 +33,7 @@ public class WorldProviderAbyss extends WorldProvider {
 
 	@Override
 	public void registerWorldChunkManager() {
-		worldChunkMgr = new WorldChunkManagerHell(AbyssalCraft.Wastelands, 0.0F);
+		worldChunkMgr = new WorldChunkManagerHell(ACBiomes.abyssal_wastelands, 0.0F);
 		isHellWorld= false;
 		dimensionId = AbyssalCraft.configDimId1;
 		hasNoSky = true;
