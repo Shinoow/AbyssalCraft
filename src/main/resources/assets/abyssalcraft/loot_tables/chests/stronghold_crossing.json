@@ -1,0 +1,110 @@
+{
+    "pools": [
+        {
+            "rolls": {
+                "min": 1,
+                "max": 4
+            },
+            "entries": [
+                {
+                    "type": "item",
+                    "name": "abyssalcraft:abyingot",
+                    "functions": [
+                        {
+                            "function": "set_count",
+                            "count": {
+                                "min": 1,
+                                "max": 5
+                            }
+                        }
+                    ],
+                    "weight": 10
+                },
+                {
+                    "type": "item",
+                    "name": "abyssalcraft:cingot",
+                    "functions": [
+                        {
+                            "function": "set_count",
+                            "count": {
+                                "min": 1,
+                                "max": 3
+                            }
+                        }
+                    ],
+                    "weight": 5
+                },
+                {
+                    "type": "item",
+                    "name": "abyssalcraft:cpearl",
+                    "functions": [
+                        {
+                            "function": "set_count",
+                            "count": {
+                                "min": 1,
+                                "max": 3
+                            }
+                        }
+                    ],
+                    "weight": 5
+                },
+                {
+                    "type": "item",
+                    "name": "abyssalcraft:coralium",
+                    "functions": [
+                        {
+                            "function": "set_count",
+                            "count": {
+                                "min": 3,
+                                "max": 8
+                            }
+                        }
+                    ],
+                    "weight": 10
+                },
+                {
+                    "type": "item",
+                    "name": "minecraft:golden_apple",
+                    "functions": [
+                        {
+                            "function": "set_count",
+                            "count": {
+                                "min": 1,
+                                "max": 3
+                            }
+                        }
+                    ],
+                    "weight": 15
+                },
+                {
+                    "type": "item",
+                    "name": "abyssalcraft:mre",
+                    "weight": 10
+                },
+                {
+                    "type": "item",
+                    "name": "abyssalcraft:apick",
+                    "weight": 1
+                },
+                {
+                    "type": "item",
+                    "name": "abyssalcraft:crystal",
+					"functions": [
+					    {
+                            "function": "set_count",
+                            "count": {
+                                "min": 1,
+                                "max": 5
+                            }
+                        },
+						{
+						    "function": "set_data",
+							"data": 24
+						}
+					],
+                    "weight": 8
+                }
+            ]
+        }
+    ]
+}

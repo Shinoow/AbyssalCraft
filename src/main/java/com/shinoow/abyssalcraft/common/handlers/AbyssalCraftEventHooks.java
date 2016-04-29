@@ -48,6 +48,8 @@ import net.minecraftforge.fml.common.gameevent.PlayerEvent;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
+import com.shinoow.abyssalcraft.api.biome.ACBiomes;
+import com.shinoow.abyssalcraft.api.biome.IDarklandsBiome;
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.api.entity.IDreadEntity;
 import com.shinoow.abyssalcraft.api.event.ACEvents.RitualEvent;
@@ -77,7 +79,7 @@ public class AbyssalCraftEventHooks {
 				for (int x = 0; x < 16; ++x)
 					for (int y = 0; y < 16; ++y)
 						for (int z = 0; z < 16; ++z)
-							if(chunk.getBiome(new BlockPos(x, y, z), event.getWorld().getBiomeProvider()) == AbyssalCraft.DarklandsMountains)
+							if(chunk.getBiome(new BlockPos(x, y, z), event.getWorld().getBiomeProvider()) == ACBiomes.darklands_mountains)
 								if (storage.get(x, y, z).getBlock() == Blocks.stone)
 									storage.set(x, y, z, ACBlocks.darkstone.getDefaultState());
 	}
@@ -200,11 +202,7 @@ public class AbyssalCraftEventHooks {
 				EntityPlayer player = (EntityPlayer)event.getEntityLiving();
 				Random rand = new Random();
 				ItemStack helmet = player.getItemStackFromSlot(EntityEquipmentSlot.HEAD);
-				if(player.worldObj.getBiomeGenForCoords(new BlockPos(player.posX, player.posY, player.posZ)) == AbyssalCraft.Darklands ||
-						player.worldObj.getBiomeGenForCoords(new BlockPos(player.posX, player.posY, player.posZ)) == AbyssalCraft.DarklandsPlains ||
-						player.worldObj.getBiomeGenForCoords(new BlockPos(player.posX, player.posY, player.posZ)) == AbyssalCraft.DarklandsMountains ||
-						player.worldObj.getBiomeGenForCoords(new BlockPos(player.posX, player.posY, player.posZ)) == AbyssalCraft.DarklandsHills ||
-						player.worldObj.getBiomeGenForCoords(new BlockPos(player.posX, player.posY, player.posZ)) == AbyssalCraft.DarklandsForest)
+				if(player.worldObj.getBiomeGenForCoords(new BlockPos(player.posX, player.posY, player.posZ)) instanceof IDarklandsBiome)
 					if(rand.nextInt(1000) == 0)
 						if(helmet == null || helmet != null && helmet.getItem() != ACItems.abyssalnite_helmet && helmet.getItem() != ACItems.dreaded_abyssalnite_helmet
 						&& helmet.getItem() != ACItems.refined_coralium_helmet && helmet.getItem() != ACItems.plated_coralium_helmet
@@ -216,15 +214,6 @@ public class AbyssalCraftEventHooks {
 					player.removePotionEffect(MobEffects.blindness);
 			}
 	}
-
-	//	@SubscribeEvent
-	//	public void playerInteract(PlayerInteractEvent event) {
-	//		if(event.getAction() == PlayerInteractEvent.Action.LEFT_CLICK_BLOCK)
-	//			if (event.getWorld().getBlockState(event.getPos()) == ACBlocks.coralium_fire ||
-	//			event.getWorld().getBlockState(event.getPos()) == ACBlocks.dreaded_fire ||
-	//			event.getWorld().getBlockState(event.getPos()) == ACBlocks.omothol_fire)
-	//				event.getWorld().setBlockToAir(event.getPos());
-	//	}
 
 	@SubscribeEvent
 	public void onCraftingEvent(PlayerEvent.ItemCraftedEvent event)
@@ -336,9 +325,7 @@ public class AbyssalCraftEventHooks {
 
 	@SubscribeEvent
 	public void darklandsVillages(BiomeEvent.GetVillageBlockID event){
-		if(event.getBiome() == AbyssalCraft.Darklands || event.getBiome() == AbyssalCraft.DarklandsPlains ||
-				event.getBiome() == AbyssalCraft.DarklandsForest || event.getBiome() == AbyssalCraft.DarklandsHills ||
-				event.getBiome() == AbyssalCraft.DarklandsMountains){
+		if(event.getBiome() instanceof IDarklandsBiome){
 			if(event.getOriginal().getBlock() == Blocks.log || event.getOriginal().getBlock() == Blocks.log2){
 				event.setReplacement(ACBlocks.darklands_oak_wood.getDefaultState());
 				event.setResult(Result.DENY);

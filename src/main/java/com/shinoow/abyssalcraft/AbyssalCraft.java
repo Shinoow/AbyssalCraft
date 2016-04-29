@@ -55,9 +55,9 @@ import net.minecraftforge.oredict.OreDictionary;
 
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI.FuelType;
+import com.shinoow.abyssalcraft.api.biome.ACBiomes;
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.api.energy.EnergyEnum.DeityType;
-import com.shinoow.abyssalcraft.api.integration.IACPlugin;
 import com.shinoow.abyssalcraft.api.item.ACItems;
 import com.shinoow.abyssalcraft.api.item.ItemEngraving;
 import com.shinoow.abyssalcraft.api.item.ItemUpgradeKit;
@@ -93,7 +93,7 @@ import com.shinoow.abyssalcraft.common.world.biome.*;
 @Mod(modid = AbyssalCraft.modid, name = AbyssalCraft.name, version = AbyssalCraft.version,dependencies = "required-after:Forge@[forgeversion,);after:JEI@[3.2.8,)", useMetadata = false, guiFactory = "com.shinoow.abyssalcraft.client.config.ACGuiFactory", acceptedMinecraftVersions = "[1.9]", updateJSON = "https://raw.githubusercontent.com/Shinoow/AbyssalCraft/master/version.json")
 public class AbyssalCraft {
 
-	public static final String version = "1.9.1.1";
+	public static final String version = "1.9.1.2";
 	public static final String modid = "abyssalcraft";
 	public static final String name = "AbyssalCraft";
 
@@ -130,17 +130,10 @@ public class AbyssalCraft {
 	Altar, dreadbrickslab2, abydreadbrickslab2, cstonebrickslab2, ethaxiumslab2, house,
 	darkethaxiumslab2;
 
-	//Overworld biomes
+	@Deprecated
 	public static BiomeGenBase Darklands, DarklandsForest, DarklandsPlains, DarklandsHills,
-	DarklandsMountains, corswamp;
-	//Abyssal Wastelands biome
-	public static BiomeGenBase Wastelands;
-	//Dreadlands biomes
-	public static BiomeGenBase Dreadlands, AbyDreadlands, ForestDreadlands, MountainDreadlands;
-	//Omothol biome
-	public static BiomeGenBase omothol;
-	//Dark Realm biome
-	public static BiomeGenBase darkRealm;
+	DarklandsMountains, corswamp, Wastelands, Dreadlands, AbyDreadlands, ForestDreadlands,
+	MountainDreadlands, omothol, darkRealm;
 
 	//"secret" dev stuff
 	public static Item devsword;
@@ -161,7 +154,7 @@ public class AbyssalCraft {
 
 		@Override
 		public Item getTabIconItem() {
-			return ACItems.oblivion_catalyst;
+			return ACItems.necronomicon;
 		}
 	};
 	public static final CreativeTabs tabTools = new CreativeTabs("actools"){
@@ -425,19 +418,34 @@ public class AbyssalCraft {
 		ACBlocks.mimic_fire = new BlockMimicFire().setUnlocalizedName("fire");
 
 		//Biome
-		Darklands = new BiomeGenDarklands(new BiomeProperties("Darklands").setWaterColor(14745518));
-		Wastelands = new BiomeGenAbywasteland(new BiomeProperties("Abyssal Wastelands").setWaterColor(0x24FF83).setRainDisabled());
-		Dreadlands = new BiomeGenDreadlands(new BiomeProperties("Dreadlands").setRainDisabled());
-		AbyDreadlands = new BiomeGenAbyDreadlands(new BiomeProperties("Purified Dreadlands").setRainDisabled());
-		ForestDreadlands = new BiomeGenForestDreadlands(new BiomeProperties("Dreadlands Forest").setRainDisabled());
-		MountainDreadlands = new BiomeGenMountainDreadlands(new BiomeProperties("Dreadlands Mountains").setBaseHeight(1.3F).setHeightVariation(0.9F).setRainDisabled());
-		DarklandsForest = new BiomeGenDarklandsForest(new BiomeProperties("Darklands Forest").setWaterColor(14745518));
-		DarklandsPlains = new BiomeGenDarklandsPlains(new BiomeProperties("Darklands Plains").setWaterColor(14745518).setRainDisabled());
-		DarklandsHills = new BiomeGenDarklandsHills(new BiomeProperties("Darklands Highland").setWaterColor(14745518).setBaseHeight(1.1F).setHeightVariation(0.5F));
-		DarklandsMountains = new BiomeGenDarklandsMountains(new BiomeProperties("Darklands Mountains").setWaterColor(14745518).setBaseHeight(1.3F).setHeightVariation(0.9F).setRainDisabled());
-		corswamp = new BiomeGenCorSwamp(new BiomeProperties("Coralium Infested Swamp").setWaterColor(0x24FF83).setBaseHeight(-0.2F).setHeightVariation(0.1F));
-		omothol = new BiomeGenOmothol(new BiomeProperties("Omothol").setWaterColor(14745518).setRainDisabled());
-		darkRealm = new BiomeGenDarkRealm(new BiomeProperties("Dark Realm").setWaterColor(14745518).setRainDisabled());
+		ACBiomes.darklands = new BiomeGenDarklands(new BiomeProperties("Darklands").setWaterColor(14745518));
+		ACBiomes.abyssal_wastelands = new BiomeGenAbywasteland(new BiomeProperties("Abyssal Wastelands").setWaterColor(0x24FF83).setRainDisabled());
+		ACBiomes.dreadlands = new BiomeGenDreadlands(new BiomeProperties("Dreadlands").setRainDisabled());
+		ACBiomes.purified_dreadlands = new BiomeGenAbyDreadlands(new BiomeProperties("Purified Dreadlands").setRainDisabled());
+		ACBiomes.dreadlands_forest = new BiomeGenForestDreadlands(new BiomeProperties("Dreadlands Forest").setRainDisabled());
+		ACBiomes.dreadlands_mountains = new BiomeGenMountainDreadlands(new BiomeProperties("Dreadlands Mountains").setBaseHeight(1.3F).setHeightVariation(0.9F).setRainDisabled());
+		ACBiomes.darklands_forest = new BiomeGenDarklandsForest(new BiomeProperties("Darklands Forest").setWaterColor(14745518));
+		ACBiomes.darklands_plains = new BiomeGenDarklandsPlains(new BiomeProperties("Darklands Plains").setWaterColor(14745518).setRainDisabled());
+		ACBiomes.darklands_hills = new BiomeGenDarklandsHills(new BiomeProperties("Darklands Highland").setWaterColor(14745518).setBaseHeight(1.1F).setHeightVariation(0.5F));
+		ACBiomes.darklands_mountains = new BiomeGenDarklandsMountains(new BiomeProperties("Darklands Mountains").setWaterColor(14745518).setBaseHeight(1.3F).setHeightVariation(0.9F).setRainDisabled());
+		ACBiomes.coralium_infested_swamp = new BiomeGenCorSwamp(new BiomeProperties("Coralium Infested Swamp").setWaterColor(0x24FF83).setBaseHeight(-0.2F).setHeightVariation(0.1F));
+		ACBiomes.omothol = new BiomeGenOmothol(new BiomeProperties("Omothol").setWaterColor(14745518).setRainDisabled());
+		ACBiomes.dark_realm = new BiomeGenDarkRealm(new BiomeProperties("Dark Realm").setWaterColor(14745518).setRainDisabled());
+
+		//TODO remove this in the next release or so
+		Darklands = ACBiomes.darklands;
+		DarklandsForest = ACBiomes.darklands_forest;
+		DarklandsPlains = ACBiomes.darklands_plains;
+		DarklandsHills = ACBiomes.darklands_hills;
+		DarklandsMountains = ACBiomes.darklands_mountains;
+		corswamp = ACBiomes.coralium_infested_swamp;
+		Wastelands = ACBiomes.abyssal_wastelands;
+		Dreadlands = ACBiomes.dreadlands;
+		AbyDreadlands = ACBiomes.purified_dreadlands;
+		ForestDreadlands = ACBiomes.dreadlands_forest;
+		MountainDreadlands = ACBiomes.dreadlands_mountains;
+		omothol = ACBiomes.omothol;
+		darkRealm = ACBiomes.dark_realm;
 
 		//"secret" dev stuff
 		devsword = new AbyssalCraftTool();
@@ -1081,56 +1089,56 @@ public class AbyssalCraft {
 
 		//Biome
 		if(dark1 == true){
-			registerBiomeWithTypes(Darklands, "darklands", darkWeight1, BiomeType.WARM, Type.WASTELAND, Type.SPOOKY);
-			BiomeManager.addVillageBiome(Darklands, true);
+			registerBiomeWithTypes(ACBiomes.darklands, "darklands", darkWeight1, BiomeType.WARM, Type.WASTELAND, Type.SPOOKY);
+			BiomeManager.addVillageBiome(ACBiomes.darklands, true);
 		}
 		if(dark2 == true){
-			registerBiomeWithTypes(DarklandsForest, "darklands_forest", darkWeight2, BiomeType.WARM, Type.FOREST, Type.SPOOKY);
-			BiomeManager.addVillageBiome(DarklandsForest, true);
+			registerBiomeWithTypes(ACBiomes.darklands_forest, "darklands_forest", darkWeight2, BiomeType.WARM, Type.FOREST, Type.SPOOKY);
+			BiomeManager.addVillageBiome(ACBiomes.darklands_forest, true);
 		}
 		if(dark3 == true){
-			registerBiomeWithTypes(DarklandsPlains, "darklands_plains", darkWeight3, BiomeType.WARM, Type.PLAINS, Type.SPOOKY);
-			BiomeManager.addVillageBiome(DarklandsPlains, true);
+			registerBiomeWithTypes(ACBiomes.darklands_plains, "darklands_plains", darkWeight3, BiomeType.WARM, Type.PLAINS, Type.SPOOKY);
+			BiomeManager.addVillageBiome(ACBiomes.darklands_plains, true);
 		}
 		if(dark4 == true){
-			registerBiomeWithTypes(DarklandsHills, "darklands_hills", darkWeight4, BiomeType.WARM, Type.HILLS, Type.SPOOKY);
-			BiomeManager.addVillageBiome(DarklandsHills, true);
+			registerBiomeWithTypes(ACBiomes.darklands_hills, "darklands_hills", darkWeight4, BiomeType.WARM, Type.HILLS, Type.SPOOKY);
+			BiomeManager.addVillageBiome(ACBiomes.darklands_hills, true);
 		}
 		if(dark5 == true){
-			registerBiomeWithTypes(DarklandsMountains, "darklands_mountains", darkWeight5, BiomeType.WARM, Type.MOUNTAIN, Type.SPOOKY);
-			BiomeManager.addVillageBiome(DarklandsMountains, true);
-			BiomeManager.addStrongholdBiome(DarklandsMountains);
+			registerBiomeWithTypes(ACBiomes.darklands_mountains, "darklands_mountains", darkWeight5, BiomeType.WARM, Type.MOUNTAIN, Type.SPOOKY);
+			BiomeManager.addVillageBiome(ACBiomes.darklands_mountains, true);
+			BiomeManager.addStrongholdBiome(ACBiomes.darklands_mountains);
 		}
 		if(coralium1 == true)
-			registerBiomeWithTypes(corswamp, "coralium_infested_swamp", coraliumWeight, BiomeType.WARM, Type.SWAMP);
+			registerBiomeWithTypes(ACBiomes.coralium_infested_swamp, "coralium_infested_swamp", coraliumWeight, BiomeType.WARM, Type.SWAMP);
 		if(darkspawn1 == true)
-			BiomeManager.addSpawnBiome(Darklands);
+			BiomeManager.addSpawnBiome(ACBiomes.darklands);
 		if(darkspawn2 == true)
-			BiomeManager.addSpawnBiome(DarklandsForest);
+			BiomeManager.addSpawnBiome(ACBiomes.darklands_forest);
 		if(darkspawn3 == true)
-			BiomeManager.addSpawnBiome(DarklandsPlains);
+			BiomeManager.addSpawnBiome(ACBiomes.darklands_plains);
 		if(darkspawn4 == true)
-			BiomeManager.addSpawnBiome(DarklandsHills);
+			BiomeManager.addSpawnBiome(ACBiomes.darklands_hills);
 		if(darkspawn5 == true)
-			BiomeManager.addSpawnBiome(DarklandsMountains);
+			BiomeManager.addSpawnBiome(ACBiomes.darklands_mountains);
 		if(coraliumspawn1 == true)
-			BiomeManager.addSpawnBiome(corswamp);
+			BiomeManager.addSpawnBiome(ACBiomes.coralium_infested_swamp);
 
-		GameRegistry.register(Wastelands.setRegistryName(new ResourceLocation(modid, "abyssal_wastelands")));
-		GameRegistry.register(Dreadlands.setRegistryName(new ResourceLocation(modid, "dreadlands")));
-		GameRegistry.register(AbyDreadlands.setRegistryName(new ResourceLocation(modid, "purified_dreadlands")));
-		GameRegistry.register(ForestDreadlands.setRegistryName(new ResourceLocation(modid, "dreadlands_forest")));
-		GameRegistry.register(MountainDreadlands.setRegistryName(new ResourceLocation(modid, "dreadlands_mountains")));
-		GameRegistry.register(omothol.setRegistryName(new ResourceLocation(modid, "omothol")));
-		GameRegistry.register(darkRealm.setRegistryName(new ResourceLocation(modid, "dark_realm")));
+		GameRegistry.register(ACBiomes.abyssal_wastelands.setRegistryName(new ResourceLocation(modid, "abyssal_wastelands")));
+		GameRegistry.register(ACBiomes.dreadlands.setRegistryName(new ResourceLocation(modid, "dreadlands")));
+		GameRegistry.register(ACBiomes.purified_dreadlands.setRegistryName(new ResourceLocation(modid, "purified_dreadlands")));
+		GameRegistry.register(ACBiomes.dreadlands_forest.setRegistryName(new ResourceLocation(modid, "dreadlands_forest")));
+		GameRegistry.register(ACBiomes.dreadlands_mountains.setRegistryName(new ResourceLocation(modid, "dreadlands_mountains")));
+		GameRegistry.register(ACBiomes.omothol.setRegistryName(new ResourceLocation(modid, "omothol")));
+		GameRegistry.register(ACBiomes.dark_realm.setRegistryName(new ResourceLocation(modid, "dark_realm")));
 
-		BiomeDictionary.registerBiomeType(Wastelands, Type.DEAD);
-		BiomeDictionary.registerBiomeType(Dreadlands, Type.DEAD);
-		BiomeDictionary.registerBiomeType(AbyDreadlands, Type.DEAD);
-		BiomeDictionary.registerBiomeType(MountainDreadlands, Type.DEAD);
-		BiomeDictionary.registerBiomeType(ForestDreadlands, Type.DEAD);
-		BiomeDictionary.registerBiomeType(omothol, Type.DEAD);
-		BiomeDictionary.registerBiomeType(darkRealm, Type.DEAD);
+		BiomeDictionary.registerBiomeType(ACBiomes.abyssal_wastelands, Type.DEAD);
+		BiomeDictionary.registerBiomeType(ACBiomes.dreadlands, Type.DEAD);
+		BiomeDictionary.registerBiomeType(ACBiomes.purified_dreadlands, Type.DEAD);
+		BiomeDictionary.registerBiomeType(ACBiomes.dreadlands_mountains, Type.DEAD);
+		BiomeDictionary.registerBiomeType(ACBiomes.dreadlands_forest, Type.DEAD);
+		BiomeDictionary.registerBiomeType(ACBiomes.omothol, Type.DEAD);
+		BiomeDictionary.registerBiomeType(ACBiomes.dark_realm, Type.DEAD);
 
 		THE_ABYSSAL_WASTELAND = DimensionType.register("The Abyssal Wasteland", "_aw", configDimId1, WorldProviderAbyss.class, keepLoaded1);
 		THE_DREADLANDS = DimensionType.register("The Dreadlands", "_dl", configDimId2, WorldProviderDreadlands.class, keepLoaded2);
@@ -1268,8 +1276,8 @@ public class AbyssalCraft {
 		EntityRegistry.addSpawn(EntityLesserShoggoth.class, 3, 1, 1, EnumCreatureType.MONSTER, BiomeDictionary.getBiomesForType(Type.BEACH));
 		EntityRegistry.addSpawn(EntityLesserShoggoth.class, 3, 1, 1, EnumCreatureType.MONSTER, BiomeDictionary.getBiomesForType(Type.SWAMP));
 		EntityRegistry.addSpawn(EntityLesserShoggoth.class, 3, 1, 1, EnumCreatureType.MONSTER, new BiomeGenBase[]{
-			AbyssalCraft.Wastelands, AbyssalCraft.Dreadlands, AbyssalCraft.AbyDreadlands, AbyssalCraft.MountainDreadlands,
-			AbyssalCraft.ForestDreadlands, AbyssalCraft.omothol, AbyssalCraft.darkRealm});
+			ACBiomes.abyssal_wastelands, ACBiomes.dreadlands, ACBiomes.purified_dreadlands, ACBiomes.dreadlands_mountains,
+			ACBiomes.dreadlands_forest, ACBiomes.omothol, ACBiomes.dark_realm});
 		EntityRegistry.removeSpawn(EntityLesserShoggoth.class, EnumCreatureType.MONSTER, new BiomeGenBase[]{ Biomes.mushroomIslandShore });
 
 		registerEntityWithEgg(EntityEvilCow.class, "evilcow", 67, 80, 3, true, 4470310, 10592673);
@@ -1682,19 +1690,6 @@ public class AbyssalCraft {
 					ACLogger.imcWarning("Received invalid Materializer recipe from mod %s!", imcMessage.getSender());
 				else ACLogger.imcInfo("Received Materializer recipe from mod %s", imcMessage.getSender());
 			}
-			else if(imcMessage.key.equals("registerACIntegration"))
-				try {
-					AbyssalCraftAPI.registerACIntegration((IACPlugin)Class.forName(imcMessage.getStringValue()).newInstance());
-					ACLogger.imcInfo("Recieved Integration %s from mod %s", imcMessage.getStringValue(), imcMessage.getSender());
-					if(!senders.contains(imcMessage.getSender()))
-						senders.add(imcMessage.getSender());
-				} catch (InstantiationException e) {
-					ACLogger.imcWarning("Could not create a instance of class %s (not a IACPlugin?)", imcMessage.getStringValue());
-				} catch (IllegalAccessException e) {
-					ACLogger.imcWarning("Unable to access class %s", imcMessage.getStringValue());
-				} catch (ClassNotFoundException e) {
-					ACLogger.imcWarning("Could not find class %s", imcMessage.getStringValue());
-				}
 			else if(imcMessage.key.equals("shoggothBlacklist")){
 				boolean failed = false;
 				if(!imcMessage.isItemStackMessage())

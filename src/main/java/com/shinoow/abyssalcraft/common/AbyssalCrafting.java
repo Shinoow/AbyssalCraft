@@ -144,7 +144,7 @@ public class AbyssalCrafting {
 		GameRegistry.addRecipe(new ItemStack(ACBlocks.crystallizer_idle, 1), new Object[] {"###", "&%&", "###", '#', ACBlocks.dreadstone_brick, '&', ACBlocks.block_of_dreadium, '%', Blocks.furnace});
 		GameRegistry.addRecipe(new ItemStack(ACBlocks.chagaroth_altar_top, 1), new Object[] {"#%#", "&&&", "@@@", '#', Items.stick, '%', Items.bucket, '&', ACItems.dread_cloth, '@', ACItems.dreadium_ingot});
 		GameRegistry.addRecipe(new ItemStack(ACBlocks.chagaroth_altar_bottom, 1), new Object[] {"#%#", "&@&", "T$T", '#', Items.bone, '%', ACItems.dread_cloth, '&', ACItems.dreadium_ingot, '@', ACItems.dreaded_gateway_key, '$', ACItems.dreaded_shard_of_abyssalnite, 'T', ACBlocks.dreadstone});
-		GameRegistry.addRecipe(new ItemStack(ACBlocks.ethaxium_brick, 1, 0), new Object [] {"##", "##", '#', ACBlocks.ethaxium_brick});
+		GameRegistry.addRecipe(new ItemStack(ACBlocks.ethaxium_brick, 1, 0), new Object [] {"##", "##", '#', ACItems.ethaxium_brick});
 		GameRegistry.addRecipe(new ItemStack(ACBlocks.ethaxium_brick, 1, 1), new Object[] {"##", "##", '#', new ItemStack(ACBlocks.ethaxium_brick, 1, 0)});
 		GameRegistry.addRecipe(new ItemStack(ACBlocks.ethaxium_pillar, 2), new Object[] {"#%", "#%", '#', new ItemStack(ACBlocks.ethaxium_brick, 1, 0), '%', ACBlocks.ethaxium});
 		GameRegistry.addRecipe(new ItemStack(ACBlocks.darkstone_brick_stairs, 4), new Object[] {"#  ", "## ", "###", '#', ACBlocks.darkstone_brick});
@@ -155,12 +155,12 @@ public class AbyssalCrafting {
 		GameRegistry.addRecipe(new ItemStack(ACBlocks.abyssalnite_stone_brick_stairs, 4), new Object[] {"#  ", "## ", "###", '#', ACBlocks.abyssalnite_stone_brick});
 		GameRegistry.addRecipe(new ItemStack(ACBlocks.coralium_stone_brick_stairs, 4), new Object[] {"#  ", "## ", "###", '#', ACBlocks.coralium_stone_brick});
 		GameRegistry.addRecipe(new ItemStack(ACBlocks.block_of_ethaxium, 1), new Object[] {"###", "###", "###", '#', ACItems.ethaxium_ingot});
-		GameRegistry.addRecipe(new ItemStack(ACBlocks.ethaxium_brick_stairs, 4), new Object[] {"#  ", "## ", "###", '#', new ItemStack(ACBlocks.ethaxium_brick, 0)});
-		GameRegistry.addRecipe(new ItemStack(ACBlocks.ethaxium_brick_slab, 6), new Object[] {"AAA", 'A', new ItemStack(ACBlocks.ethaxium_brick, 0)});
-		GameRegistry.addRecipe(new ItemStack(ACBlocks.ethaxium_brick_fence, 6), new Object[] {"###", "###", '#', new ItemStack(ACBlocks.ethaxium_brick, 0)});
+		GameRegistry.addRecipe(new ItemStack(ACBlocks.ethaxium_brick_stairs, 4), new Object[] {"#  ", "## ", "###", '#', new ItemStack(ACBlocks.ethaxium_brick, 1, 0)});
+		GameRegistry.addRecipe(new ItemStack(ACBlocks.ethaxium_brick_slab, 6), new Object[] {"AAA", 'A', new ItemStack(ACBlocks.ethaxium_brick, 1, 0)});
+		GameRegistry.addRecipe(new ItemStack(ACBlocks.ethaxium_brick_fence, 6), new Object[] {"###", "###", '#', new ItemStack(ACBlocks.ethaxium_brick, 1, 0)});
 		GameRegistry.addRecipe(new ItemStack(ACBlocks.engraver, 1), new Object[] {"#% ", "#%&", "@% ", '#', ACItems.blank_engraving, '%', Blocks.stone, '&', Blocks.lever, '@', Blocks.anvil});
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(AbyssalCraft.house, 1), true, new Object[] {"#%#", "%&%", "%%%", '#', "stairWood", '%', "plankWood", '&', Items.oak_door})); //Quite frankly, this recipe doesn't exist
-		GameRegistry.addRecipe(new ItemStack(ACBlocks.materializer, 1), new Object[] {"###", "#%#", "&@&", '#', ACBlocks.ethaxium_brick, '%', Blocks.obsidian, '&', ACBlocks.block_of_ethaxium, '@', ACItems.liquid_antimatter_bucket});
+		GameRegistry.addRecipe(new ItemStack(ACBlocks.materializer, 1), new Object[] {"###", "#%#", "&@&", '#', ACItems.ethaxium_brick, '%', Blocks.obsidian, '&', ACBlocks.block_of_ethaxium, '@', ACItems.liquid_antimatter_bucket});
 		GameRegistry.addRecipe(new ItemStack(ACBlocks.dark_ethaxium_brick, 1, 0), new Object[] {"#%", "#%", '#', ACBlocks.omothol_stone, '%', ACBlocks.ethaxium});
 		GameRegistry.addRecipe(new ItemStack(ACBlocks.dark_ethaxium_brick, 1, 1), new Object[] {"##", "##", '#', new ItemStack(ACBlocks.dark_ethaxium_brick, 1, 0)});
 		GameRegistry.addRecipe(new ItemStack(ACBlocks.dark_ethaxium_pillar, 2), new Object[] {"#%", "#%", '#', new ItemStack(ACBlocks.dark_ethaxium_brick, 1, 0), '%', ACBlocks.omothol_stone});
@@ -190,7 +190,7 @@ public class AbyssalCrafting {
 		GameRegistry.addSmelting(ACBlocks.abyssal_nitre_ore, new ItemStack(ACItems.nitre, 1), 1F);
 		GameRegistry.addSmelting(ACBlocks.abyssal_tin_ore, new ItemStack(ACItems.tin_ingot, 1), 0.7F);
 		GameRegistry.addSmelting(ACBlocks.abyssal_copper_ore, new ItemStack(ACItems.copper_ingot, 1), 0.7F);
-		GameRegistry.addSmelting(ACBlocks.ethaxium, new ItemStack(ACBlocks.ethaxium_brick), 0.2F);
+		GameRegistry.addSmelting(ACBlocks.ethaxium, new ItemStack(ACItems.ethaxium_brick), 0.2F);
 	}
 
 	private static void addItemCrafting(){
@@ -249,15 +249,15 @@ public class AbyssalCrafting {
 		GameRegistry.addRecipe(new ItemStack(ACItems.crystal_shard, 1, 22), new Object[] {" # ", "%%%", " # ", '#', new ItemStack(ACItems.crystal_shard, 1, 20), '%', new ItemStack(ACItems.crystal_shard, 1, 4)});
 		GameRegistry.addRecipe(new ItemStack(ACItems.crystal_shard, 1, 21), new Object[] {"#%#", '#', new ItemStack(ACItems.crystal_shard, 1, 4), '%', new ItemStack(ACItems.crystal_shard, 1, 18)});
 		GameRegistry.addRecipe(new ItemStack(ACItems.crystal_shard, 1, 23), new Object[] {"#%", '#', new ItemStack(ACItems.crystal_shard, 1, 19), '%', new ItemStack(ACItems.crystal_shard, 1, 4)});
-		GameRegistry.addRecipe(new ItemStack(ACItems.ethaxium_ingot), new Object[] {"###", "#%#", "###", '#', ACBlocks.ethaxium_brick, '%', ACItems.life_crystal});
-		GameRegistry.addRecipe(new ItemStack(ACItems.ethaxium_ingot), new Object[] {" # ", "#%#", " # ", '#', ACBlocks.ethaxium_brick, '%', ACItems.oblivion_catalyst});
+		GameRegistry.addRecipe(new ItemStack(ACItems.ethaxium_ingot), new Object[] {"###", "#%#", "###", '#', ACItems.ethaxium_brick, '%', ACItems.life_crystal});
+		GameRegistry.addRecipe(new ItemStack(ACItems.ethaxium_ingot), new Object[] {" # ", "#%#", " # ", '#', ACItems.ethaxium_brick, '%', ACItems.oblivion_catalyst});
 		//		GameRegistry.addRecipe(new ItemStack(Items.spawn_egg, 1, AbyssalCraft.stringtoIDMapping.get("shadowboss")), new Object[] {"#", '#', AbyssalCraft.ODB});
 		GameRegistry.addRecipe(new ItemStack(ACItems.ethaxium_ingot, 9), new Object[] {"#", '#', ACBlocks.block_of_ethaxium});
-		GameRegistry.addRecipe(new ItemStack(ACItems.ethaxium_pickaxe, 1), new Object[] {"###", " % ", " % ", '#', ACItems.ethaxium_ingot, '%', ACBlocks.ethaxium_brick});
-		GameRegistry.addRecipe(new ItemStack(ACItems.ethaxium_axe, 1), new Object[] {"##", "#%", " %", '#', ACItems.ethaxium_ingot, '%', ACBlocks.ethaxium_brick});
-		GameRegistry.addRecipe(new ItemStack(ACItems.ethaxium_shovel, 1), new Object[] {"#", "%", "%", '#', ACItems.ethaxium_ingot, '%', ACBlocks.ethaxium_brick});
-		GameRegistry.addRecipe(new ItemStack(ACItems.ethaxium_sword, 1), new Object[] {"#", "#", "%", '#', ACItems.ethaxium_ingot, '%', ACBlocks.ethaxium_brick});
-		GameRegistry.addRecipe(new ItemStack(ACItems.ethaxium_hoe, 1), new Object[] {"##", " %", " %", '#', ACItems.ethaxium_ingot, '%', ACBlocks.ethaxium_brick});
+		GameRegistry.addRecipe(new ItemStack(ACItems.ethaxium_pickaxe, 1), new Object[] {"###", " % ", " % ", '#', ACItems.ethaxium_ingot, '%', ACItems.ethaxium_brick});
+		GameRegistry.addRecipe(new ItemStack(ACItems.ethaxium_axe, 1), new Object[] {"##", "#%", " %", '#', ACItems.ethaxium_ingot, '%', ACItems.ethaxium_brick});
+		GameRegistry.addRecipe(new ItemStack(ACItems.ethaxium_shovel, 1), new Object[] {"#", "%", "%", '#', ACItems.ethaxium_ingot, '%', ACItems.ethaxium_brick});
+		GameRegistry.addRecipe(new ItemStack(ACItems.ethaxium_sword, 1), new Object[] {"#", "#", "%", '#', ACItems.ethaxium_ingot, '%', ACItems.ethaxium_brick});
+		GameRegistry.addRecipe(new ItemStack(ACItems.ethaxium_hoe, 1), new Object[] {"##", " %", " %", '#', ACItems.ethaxium_ingot, '%', ACItems.ethaxium_brick});
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ACItems.coin, 1), true, new Object[] {" # ", "#%#", " # ", '#', "ingotCopper", '%', Items.flint}));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ACItems.coin, 1), true, new Object[] {" # ", "#%#", " # ", '#', "ingotIron", '%', Items.flint}));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ACItems.coin, 1), true, new Object[] {" # ", "#%#", " # ", '#', "ingotTin", '%', Items.flint}));
@@ -812,7 +812,7 @@ public class AbyssalCrafting {
 		Object[] psdlofferings = new Object[]{new ItemStack(ACItems.essence, 1, 1), new ItemStack(ACItems.essence, 1, 1), new ItemStack(ACItems.essence, 1, 1), new ItemStack(ACItems.essence, 1, 1),
 				new ItemStack(ACItems.essence, 1, 1), new ItemStack(ACItems.essence, 1, 1), new ItemStack(ACItems.essence, 1, 1), new ItemStack(ACItems.essence, 1, 1)};
 		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("powerStone", 4, AbyssalCraft.configDimId2, 5000F, new ItemStack(ACBlocks.dreadlands_infused_powerstone), ACBlocks.coralium_infused_stone, psdlofferings));
-		Object[] ethofferings = new Object[]{ACBlocks.ethaxium_brick, ACBlocks.ethaxium_brick, ACItems.life_crystal, ACBlocks.ethaxium_brick, ACBlocks.ethaxium_brick};
+		Object[] ethofferings = new Object[]{ACItems.ethaxium_brick, ACItems.ethaxium_brick, ACItems.life_crystal, ACItems.ethaxium_brick, ACItems.ethaxium_brick};
 		RitualRegistry.instance().registerRitual(new NecronomiconCreationRitual("ethaxiumIngot", 3, AbyssalCraft.configDimId3, 1000F, new ItemStack(ACItems.ethaxium_ingot), ethofferings));
 		Object[] dreadofferings = new Object[]{new ItemStack(ACItems.essence, 1, 1), ACItems.dreaded_shard_of_abyssalnite, ACItems.dreaded_shard_of_abyssalnite, ACItems.dreaded_shard_of_abyssalnite, ACItems.dreaded_shard_of_abyssalnite,
 				ACItems.dreaded_shard_of_abyssalnite, ACItems.dreaded_shard_of_abyssalnite, ACItems.dreaded_shard_of_abyssalnite};

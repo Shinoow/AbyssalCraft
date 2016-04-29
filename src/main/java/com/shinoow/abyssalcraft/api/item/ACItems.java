@@ -12,7 +12,6 @@
 package com.shinoow.abyssalcraft.api.item;
 
 import net.minecraft.item.Item;
-import net.minecraftforge.fml.common.registry.GameRegistry;
 
 /**
  * Contains all items added in AbyssalCraft

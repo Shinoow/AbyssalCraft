@@ -36,11 +36,6 @@ import com.shinoow.abyssalcraft.api.block.ACBlocks;
 
 public class BlockDLTLeaves extends BlockLeaves {
 
-	@SideOnly(Side.CLIENT)
-	protected int iconIndex;
-	@SideOnly(Side.CLIENT)
-	protected boolean isTransparent;
-
 	public BlockDLTLeaves() {
 		setCreativeTab(AbyssalCraft.tabDecoration);
 		setDefaultState(blockState.getBaseState().withProperty(CHECK_DECAY, Boolean.valueOf(true)).withProperty(DECAYABLE, Boolean.valueOf(true)));
@@ -48,27 +43,6 @@ public class BlockDLTLeaves extends BlockLeaves {
 		if(FMLCommonHandler.instance().getEffectiveSide().equals(Side.CLIENT))
 			setGraphicsLevel(Minecraft.getMinecraft().isFancyGraphicsEnabled());
 	}
-
-	//	@Override
-	//	@SideOnly(Side.CLIENT)
-	//	public int getBlockColor()
-	//	{
-	//		return 16777215;
-	//	}
-	//
-	//	@Override
-	//	@SideOnly(Side.CLIENT)
-	//	public int getRenderColor()
-	//	{
-	//		return 16777215;
-	//	}
-	//
-	//	@Override
-	//	@SideOnly(Side.CLIENT)
-	//	public int colorMultiplier(IBlockAccess worldIn, BlockPos pos, int renderPass)
-	//	{
-	//		return 16777215;
-	//	}
 
 	@Override
 	public Item getItemDropped(IBlockState state, Random par2Random, int par3)
@@ -86,16 +60,14 @@ public class BlockDLTLeaves extends BlockLeaves {
 	@SideOnly(Side.CLIENT)
 	public void setGraphicsLevel(boolean fancy)
 	{
-		isTransparent = fancy;
 		leavesFancy = fancy;
-		iconIndex = fancy ? 0 : 1;
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
 	public BlockRenderLayer getBlockLayer()
 	{
-		return isTransparent ? BlockRenderLayer.CUTOUT_MIPPED : BlockRenderLayer.SOLID;
+		return leavesFancy ? BlockRenderLayer.CUTOUT_MIPPED : BlockRenderLayer.SOLID;
 	}
 
 	@Override

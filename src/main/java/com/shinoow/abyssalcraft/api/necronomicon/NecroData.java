@@ -141,11 +141,6 @@ public class NecroData {
 			}
 	}
 
-	//	@Override
-	//	public String toString(){
-	//		return "NecroData{Title: "+title + ",Information: "+(information != null ? "Yes" : "No") +",PageData: "+pageData.toString() +"}";
-	//	}
-
 	/**
 	 * A Necronomicon Chapter (collection of pages)
 	 * @author shinoow
@@ -219,7 +214,10 @@ public class NecroData {
 		 * @param page Page to add
 		 */
 		public void addPage(Page page){
-			if(pages.size() < 40)
+			if(pages.containsKey(page.pageNum)){
+				pages.put(page.pageNum, page);
+				return;
+			} else if(pages.size() < 40)
 				pages.put(page.pageNum, page);
 		}
 

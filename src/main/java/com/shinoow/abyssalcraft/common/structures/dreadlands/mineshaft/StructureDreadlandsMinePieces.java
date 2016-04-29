@@ -20,13 +20,16 @@ import net.minecraft.block.BlockRail;
 import net.minecraft.block.BlockRailBase;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.entity.item.EntityMinecartChest;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.WeightedRandomChestContent;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.structure.MapGenStructureIO;
 import net.minecraft.world.gen.structure.StructureBoundingBox;
@@ -35,6 +38,7 @@ import net.minecraft.world.gen.structure.StructureComponent;
 import com.google.common.collect.Lists;
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.api.item.ACItems;
+import com.shinoow.abyssalcraft.common.util.ACLoot;
 
 public class StructureDreadlandsMinePieces
 {
@@ -249,24 +253,22 @@ public class StructureDreadlandsMinePieces
 		/**
 		 * Used to generate chests with items in it. ex: Temple Chests, Village Blacksmith Chests, Mineshaft Chests.
 		 */
-		//		@Override //TODO: loot tables
-		//		protected boolean generateChestContents(World par1World, StructureBoundingBox par2StructureBoundingBox, Random par3Random, int par4, int par5, int par6, List<WeightedRandomChestContent> par7List, int par8)
-		//		{
-		//			int i1 = getXWithOffset(par4, par6);
-		//			int j1 = getYWithOffset(par5);
-		//			int k1 = getZWithOffset(par4, par6);
-		//
-		//			if (par2StructureBoundingBox.isVecInside(new BlockPos(i1, j1, k1)) && par1World.getBlockState(new BlockPos(i1, j1, k1)).getBlock().getMaterial() == Material.air)
-		//			{
-		//				int l1 = par3Random.nextBoolean() ? 1 : 0;
-		//				par1World.setBlockState(new BlockPos(i1, j1, k1), Blocks.rail.getStateFromMeta(getMetadataWithOffset(Blocks.rail, l1)), 2);
-		//				EntityMinecartChest entityminecartchest = new EntityMinecartChest(par1World, i1 + 0.5F, j1 + 0.5F, k1 + 0.5F);
-		//				WeightedRandomChestContent.generateChestContents(par3Random, par7List, entityminecartchest, par8);
-		//				par1World.spawnEntityInWorld(entityminecartchest);
-		//				return true;
-		//			} else
-		//				return false;
-		//		}
+		@Override
+		protected boolean func_186167_a(World world, StructureBoundingBox structureboundingbox, Random rand, int x, int y, int z, ResourceLocation loot)
+		{
+			BlockPos blockpos = new BlockPos(getXWithOffset(x, z), getYWithOffset(y), getZWithOffset(x, z));
+
+			if (structureboundingbox.isVecInside(blockpos) && world.getBlockState(blockpos).getMaterial() == Material.air)
+			{
+				IBlockState iblockstate = Blocks.rail.getDefaultState().withProperty(BlockRail.SHAPE, rand.nextBoolean() ? BlockRailBase.EnumRailDirection.NORTH_SOUTH : BlockRailBase.EnumRailDirection.EAST_WEST);
+				setBlockState(world, iblockstate, x, y, z, structureboundingbox);
+				EntityMinecartChest entityminecartchest = new EntityMinecartChest(world, blockpos.getX() + 0.5F, blockpos.getY() + 0.5F, blockpos.getZ() + 0.5F);
+				entityminecartchest.setLootTable(loot, rand.nextLong());
+				world.spawnEntityInWorld(entityminecartchest);
+				return true;
+			} else
+				return false;
+		}
 
 		/**
 		 * second Part of Structure generating, this for example places Spiderwebs, Mob Spawners, it closes
@@ -302,12 +304,11 @@ public class StructureDreadlandsMinePieces
 					randomlyPlaceBlock(par1World, par3StructureBoundingBox, par2Random, 0.05F, 1, 2, k - 1, Blocks.torch.getStateFromMeta(0));
 					randomlyPlaceBlock(par1World, par3StructureBoundingBox, par2Random, 0.05F, 1, 2, k + 1, Blocks.torch.getStateFromMeta(0));
 
-					//					ChestGenHooks info = ChestGenHooks.getInfo(MINESHAFT_CORRIDOR); //TODO: loot tables
-					//					if (par2Random.nextInt(100) == 0)
-					//						generateChestContents(par1World, par3StructureBoundingBox, par2Random, 2, 0, k - 1, mineshaftChestContents, info.getCount(par2Random));
-					//
-					//					if (par2Random.nextInt(100) == 0)
-					//						generateChestContents(par1World, par3StructureBoundingBox, par2Random, 0, 0, k + 1, mineshaftChestContents, info.getCount(par2Random));
+					if (par2Random.nextInt(100) == 0)
+						func_186167_a(par1World, par3StructureBoundingBox, par2Random, 2, 0, k - 1, ACLoot.CHEST_DREADLANDS_MINESHAFT);
+
+					if (par2Random.nextInt(100) == 0)
+						func_186167_a(par1World, par3StructureBoundingBox, par2Random, 2, 0, k + 1, ACLoot.CHEST_DREADLANDS_MINESHAFT);
 				}
 
 				for (j = 0; j <= 2; ++j)

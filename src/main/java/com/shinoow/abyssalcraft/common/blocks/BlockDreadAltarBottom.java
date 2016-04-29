@@ -28,6 +28,7 @@ import net.minecraftforge.fml.client.FMLClientHandler;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
+import com.shinoow.abyssalcraft.api.biome.ACBiomes;
 import com.shinoow.abyssalcraft.api.entity.IDreadEntity;
 import com.shinoow.abyssalcraft.common.blocks.tile.TileEntityDreadAltarBottom;
 
@@ -67,7 +68,7 @@ public class BlockDreadAltarBottom extends BlockContainer {
 		super.onBlockPlaced(world, pos, facing, hitX, hitY, hitZ, meta, placer);
 		if(world.provider.getDimension() != AbyssalCraft.configDimId2  && world.isRemote)
 			FMLClientHandler.instance().getClient().ingameGUI.getChatGUI().printChatMessage(new TextComponentTranslation("message.dreadaltar.error.1"));
-		if(world.provider.getDimension() == AbyssalCraft.configDimId2 && world.getBiomeGenForCoords(pos) != AbyssalCraft.MountainDreadlands  && world.isRemote)
+		if(world.provider.getDimension() == AbyssalCraft.configDimId2 && world.getBiomeGenForCoords(pos) != ACBiomes.dreadlands_mountains  && world.isRemote)
 			FMLClientHandler.instance().getClient().ingameGUI.getChatGUI().printChatMessage(new TextComponentTranslation("message.dreadaltar.error.2"));
 		return getStateFromMeta(meta);
 	}

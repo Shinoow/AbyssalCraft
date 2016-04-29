@@ -18,7 +18,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
 
-import com.shinoow.abyssalcraft.AbyssalCraft;
+import com.shinoow.abyssalcraft.api.biome.ACBiomes;
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
 
 public class WorldGenDreadlandsStalagmite extends WorldGenerator {
@@ -34,7 +34,7 @@ public class WorldGenDreadlandsStalagmite extends WorldGenerator {
 			return false;
 
 		IBlockState state;
-		if(world.getBiomeGenForCoords(pos) == AbyssalCraft.AbyDreadlands)
+		if(world.getBiomeGenForCoords(pos) == ACBiomes.purified_dreadlands)
 			state = ACBlocks.abyssalnite_stone.getDefaultState();
 		else state = ACBlocks.dreadstone.getDefaultState();
 

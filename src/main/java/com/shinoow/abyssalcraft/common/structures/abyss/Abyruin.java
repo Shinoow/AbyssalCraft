@@ -22,6 +22,7 @@ import net.minecraft.world.gen.feature.WorldGenerator;
 import net.minecraft.world.storage.loot.LootTableList;
 
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
+import com.shinoow.abyssalcraft.common.util.ACLoot;
 
 public class Abyruin extends WorldGenerator
 {
@@ -212,10 +213,10 @@ public class Abyruin extends WorldGenerator
 		world.setBlockState(new BlockPos(i, j - 8, k - 1), ACBlocks.abyssal_stone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i, j - 8, k), ACBlocks.abyssal_stone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i, j - 7, k - 4), ACBlocks.abyssal_stone_brick.getDefaultState(), 2);
-		world.setBlockState(new BlockPos(i, j - 7, k - 3), Blocks.chest.getStateFromMeta(3), 2); //TODO: 3
+		world.setBlockState(new BlockPos(i, j - 7, k - 3), Blocks.chest.getStateFromMeta(3), 2);
 		TileEntityChest tileentitychest = (TileEntityChest)world.getTileEntity(new BlockPos(i, j - 7, k - 3));
 		if(tileentitychest != null)
-			tileentitychest.setLoot(LootTableList.CHESTS_STRONGHOLD_CORRIDOR, rand.nextLong()); //TODO: use my own stronghold loot
+			tileentitychest.setLoot(ACLoot.CHEST_ABYSSAL_STRONGHOLD_CORRIDOR, rand.nextLong());
 		world.setBlockState(new BlockPos(i, j - 7, k + 1), ACBlocks.abyssal_stone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i, j - 6, k - 4), ACBlocks.abyssal_stone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i, j - 6, k + 1), ACBlocks.abyssal_stone_brick.getDefaultState(), 2);
@@ -240,7 +241,7 @@ public class Abyruin extends WorldGenerator
 		world.setBlockState(new BlockPos(i, j, k), ACBlocks.coralium_stone.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i, j, k + 1), ACBlocks.abyssal_stone.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i, j, k + 2), ACBlocks.abyssal_stone_brick.getDefaultState(), 2);
-		world.setBlockState(new BlockPos(i, j + 1, k + 1), Blocks.chest.getStateFromMeta(2), 2); //TODO: 2
+		world.setBlockState(new BlockPos(i, j + 1, k + 1), Blocks.chest.getStateFromMeta(2), 2);
 		TileEntityChest tileentitychest2 = (TileEntityChest)world.getTileEntity(new BlockPos(i, j + 1, k + 1));
 		if(tileentitychest2 != null)
 			tileentitychest2.setLoot(LootTableList.CHESTS_SIMPLE_DUNGEON, rand.nextLong());
@@ -435,10 +436,10 @@ public class Abyruin extends WorldGenerator
 		world.setBlockState(new BlockPos(i - 2, j + 1, k + 1), Blocks.air.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i - 2, j + 2, k - 5), Blocks.air.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i - 2, j + 2, k - 4), Blocks.air.getDefaultState(), 2);
-		world.setBlockState(new BlockPos(i - 2, j + 2, k - 3), Blocks.torch.getStateFromMeta(5), 2); //TODO: 5
+		world.setBlockState(new BlockPos(i - 2, j + 2, k - 3), Blocks.torch.getStateFromMeta(5), 2);
 		world.setBlockState(new BlockPos(i - 2, j + 2, k - 2), Blocks.air.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i - 2, j + 2, k - 1), Blocks.air.getDefaultState(), 2);
-		world.setBlockState(new BlockPos(i - 2, j + 2, k), Blocks.torch.getStateFromMeta(5), 2); //TODO: 5
+		world.setBlockState(new BlockPos(i - 2, j + 2, k), Blocks.torch.getStateFromMeta(5), 2);
 		world.setBlockState(new BlockPos(i - 2, j + 2, k + 1), Blocks.air.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i - 2, j + 3, k - 5), Blocks.air.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i - 2, j + 3, k - 4), Blocks.air.getDefaultState(), 2);
@@ -499,19 +500,19 @@ public class Abyruin extends WorldGenerator
 		world.setBlockState(new BlockPos(i - 1, j + 4, k + 1), Blocks.air.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i, j - 7, k - 2), Blocks.air.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i, j - 7, k - 1), Blocks.air.getDefaultState(), 2);
-		world.setBlockState(new BlockPos(i, j - 7, k), Blocks.ladder.getStateFromMeta(2), 2); //TODO: 2
+		world.setBlockState(new BlockPos(i, j - 7, k), Blocks.ladder.getStateFromMeta(2), 2);
 		world.setBlockState(new BlockPos(i, j - 6, k - 3), Blocks.air.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i, j - 6, k - 2), Blocks.air.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i, j - 6, k - 1), Blocks.air.getDefaultState(), 2);
-		world.setBlockState(new BlockPos(i, j - 6, k), Blocks.ladder.getStateFromMeta(2), 2); //TODO: 2
+		world.setBlockState(new BlockPos(i, j - 6, k), Blocks.ladder.getStateFromMeta(2), 2);
 		world.setBlockState(new BlockPos(i, j - 5, k - 3), Blocks.air.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i, j - 5, k - 2), Blocks.air.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i, j - 5, k - 1), Blocks.air.getDefaultState(), 2);
-		world.setBlockState(new BlockPos(i, j - 5, k), Blocks.ladder.getStateFromMeta(2), 2); //TODO: 2
-		world.setBlockState(new BlockPos(i, j - 4, k), Blocks.ladder.getStateFromMeta(2), 2); //TODO: 2
-		world.setBlockState(new BlockPos(i, j - 3, k), Blocks.ladder.getStateFromMeta(2), 2); //TODO: 2
-		world.setBlockState(new BlockPos(i, j - 2, k), Blocks.ladder.getStateFromMeta(2), 2); //TODO: 2
-		world.setBlockState(new BlockPos(i, j - 1, k), Blocks.ladder.getStateFromMeta(2), 2); //TODO: 2
+		world.setBlockState(new BlockPos(i, j - 5, k), Blocks.ladder.getStateFromMeta(2), 2);
+		world.setBlockState(new BlockPos(i, j - 4, k), Blocks.ladder.getStateFromMeta(2), 2);
+		world.setBlockState(new BlockPos(i, j - 3, k), Blocks.ladder.getStateFromMeta(2), 2);
+		world.setBlockState(new BlockPos(i, j - 2, k), Blocks.ladder.getStateFromMeta(2), 2);
+		world.setBlockState(new BlockPos(i, j - 1, k), Blocks.ladder.getStateFromMeta(2), 2);
 		world.setBlockState(new BlockPos(i, j + 1, k - 6), Blocks.air.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i, j + 1, k - 5), Blocks.air.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i, j + 1, k - 4), Blocks.air.getDefaultState(), 2);
@@ -592,10 +593,10 @@ public class Abyruin extends WorldGenerator
 		world.setBlockState(new BlockPos(i + 2, j + 1, k + 1), Blocks.air.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 2, j + 2, k - 5), Blocks.air.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 2, j + 2, k - 4), Blocks.air.getDefaultState(), 2);
-		world.setBlockState(new BlockPos(i + 2, j + 2, k - 3), Blocks.torch.getStateFromMeta(5), 2); //TODO: 5
+		world.setBlockState(new BlockPos(i + 2, j + 2, k - 3), Blocks.torch.getStateFromMeta(5), 2);
 		world.setBlockState(new BlockPos(i + 2, j + 2, k - 2), Blocks.air.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 2, j + 2, k - 1), Blocks.air.getDefaultState(), 2);
-		world.setBlockState(new BlockPos(i + 2, j + 2, k), Blocks.torch.getStateFromMeta(5), 2); //TODO: 5
+		world.setBlockState(new BlockPos(i + 2, j + 2, k), Blocks.torch.getStateFromMeta(5), 2);
 		world.setBlockState(new BlockPos(i + 2, j + 2, k + 1), Blocks.air.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 2, j + 3, k - 5), Blocks.air.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 2, j + 3, k - 4), Blocks.air.getDefaultState(), 2);

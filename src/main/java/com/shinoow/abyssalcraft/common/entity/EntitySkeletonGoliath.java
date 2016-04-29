@@ -31,6 +31,7 @@ import net.minecraft.init.SoundEvents;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumHand;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
@@ -38,6 +39,7 @@ import net.minecraft.world.World;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.api.item.ACItems;
+import com.shinoow.abyssalcraft.common.util.ACLoot;
 
 public class EntitySkeletonGoliath extends EntityMob {
 
@@ -120,11 +122,10 @@ public class EntitySkeletonGoliath extends EntityMob {
 
 	}
 
-	//	@Override
-	//	protected void addRandomDrop()
-	//	{
-	//		dropItem(AbyssalCraft.cudgel, 1);
-	//	}
+	@Override
+	protected ResourceLocation getLootTable(){
+		return ACLoot.ENTITY_SKELETON_GOLIATH;
+	}
 
 	@Override
 	public EnumCreatureAttribute getCreatureAttribute()

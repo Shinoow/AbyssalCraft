@@ -47,6 +47,7 @@ import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumHand;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
@@ -58,6 +59,7 @@ import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
 import com.shinoow.abyssalcraft.api.entity.ICoraliumEntity;
 import com.shinoow.abyssalcraft.api.item.ACItems;
+import com.shinoow.abyssalcraft.common.util.ACLoot;
 import com.shinoow.abyssalcraft.common.util.EntityUtil;
 
 public class EntityDepthsGhoul extends EntityMob implements ICoraliumEntity {
@@ -311,24 +313,20 @@ public class EntityDepthsGhoul extends EntityMob implements ICoraliumEntity {
 		return EnumCreatureAttribute.UNDEAD;
 	}
 
-	//	@Override
-	//	protected void addRandomDrop()
-	//	{
-	//		switch(getGhoulType()){
-	//		case 0:
-	//			dropItem(Item.getItemFromBlock(AbyssalCraft.DGhead),1);
-	//			break;
-	//		case 1:
-	//			dropItem(Item.getItemFromBlock(AbyssalCraft.Phead),1);
-	//			break;
-	//		case 2:
-	//			dropItem(Item.getItemFromBlock(AbyssalCraft.Whead),1);
-	//			break;
-	//		case 3:
-	//			dropItem(Item.getItemFromBlock(AbyssalCraft.Ohead),1);
-	//			break;
-	//		}
-	//	}
+	@Override
+	protected ResourceLocation getLootTable(){
+		switch(getGhoulType()){
+		case 0:
+			return ACLoot.ENTITY_DEPTHS_GHOUL;
+		case 1:
+			return ACLoot.ENTITY_DEPTHS_GHOUL_PETE;
+		case 2:
+			return ACLoot.ENTITY_DEPTHS_GHOUL_WILSON;
+		case 3:
+			return ACLoot.ENTITY_DEPTHS_GHOUL_ORANGE;
+		}
+		return null;
+	}
 
 	@Override
 	public void readEntityFromNBT(NBTTagCompound par1NBTTagCompound)

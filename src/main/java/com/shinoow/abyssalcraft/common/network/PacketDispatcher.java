@@ -15,7 +15,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
-import com.shinoow.abyssalcraft.common.network.client.SyncPlayerPropsMessage;
+import com.shinoow.abyssalcraft.common.network.server.FireMessage;
 
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
@@ -59,7 +59,8 @@ public class PacketDispatcher
 	 */
 	public static final void registerPackets() {
 
-		registerMessage(SyncPlayerPropsMessage.class);
+		//		registerMessage(SyncPlayerPropsMessage.class);
+		registerMessage(FireMessage.class);
 	}
 
 	/**

@@ -21,6 +21,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
+import com.shinoow.abyssalcraft.api.biome.IDarklandsBiome;
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.common.entity.EntityAbyssalZombie;
 import com.shinoow.abyssalcraft.common.entity.EntityDepthsGhoul;
@@ -28,7 +29,7 @@ import com.shinoow.abyssalcraft.common.entity.EntityShadowBeast;
 import com.shinoow.abyssalcraft.common.entity.EntityShadowCreature;
 import com.shinoow.abyssalcraft.common.entity.EntityShadowMonster;
 
-public class BiomeGenDarklandsMountains extends BiomeGenBase {
+public class BiomeGenDarklandsMountains extends BiomeGenBase implements IDarklandsBiome {
 
 	@SuppressWarnings("unchecked")
 	public BiomeGenDarklandsMountains(BiomeProperties par1)

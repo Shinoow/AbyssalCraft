@@ -26,6 +26,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
+import com.shinoow.abyssalcraft.api.biome.IDreadlandsBiome;
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.common.entity.EntityAbygolem;
 import com.shinoow.abyssalcraft.common.entity.EntityChagarothFist;
@@ -37,7 +38,7 @@ import com.shinoow.abyssalcraft.common.entity.EntityGreaterDreadSpawn;
 import com.shinoow.abyssalcraft.common.entity.EntityLesserDreadbeast;
 import com.shinoow.abyssalcraft.common.entity.demon.EntityDemonPig;
 
-public class BiomeGenDreadlandsBase extends BiomeGenBase {
+public class BiomeGenDreadlandsBase extends BiomeGenBase implements IDreadlandsBiome {
 
 	@SuppressWarnings("unchecked")
 	public BiomeGenDreadlandsBase(BiomeProperties par1) {

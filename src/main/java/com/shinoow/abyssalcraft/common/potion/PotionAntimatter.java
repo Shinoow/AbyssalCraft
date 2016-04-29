@@ -32,6 +32,8 @@ import com.shinoow.abyssalcraft.common.entity.demon.EntityDemonPig;
 
 public class PotionAntimatter extends Potion{
 
+	private boolean wasKilled;
+
 	public PotionAntimatter(boolean par2, int par3) {
 		super(par2, par3);
 	}
@@ -48,6 +50,9 @@ public class PotionAntimatter extends Potion{
 		if(par1EntityLivingBase instanceof IAntiEntity)
 			par1EntityLivingBase.removePotionEffect(this);
 		else par1EntityLivingBase.attackEntityFrom(AbyssalCraftAPI.antimatter, 5);
+
+		if(par1EntityLivingBase instanceof EntityPlayer && !par1EntityLivingBase.isDead && wasKilled)
+			wasKilled = false;
 
 		if(!par1EntityLivingBase.worldObj.isRemote && par1EntityLivingBase.isDead)
 			if(par1EntityLivingBase instanceof EntityZombie){
@@ -98,7 +103,8 @@ public class PotionAntimatter extends Potion{
 				par1EntityLivingBase.worldObj.removeEntity(par1EntityLivingBase);
 				entity.onInitialSpawn(null, null);
 				par1EntityLivingBase.worldObj.spawnEntityInWorld(entity);
-			} else if(par1EntityLivingBase instanceof EntityPlayer){
+			} else if(par1EntityLivingBase instanceof EntityPlayer && !wasKilled){
+				wasKilled = true;
 				EntityAntiPlayer entity = new EntityAntiPlayer(par1EntityLivingBase.worldObj);
 				entity.copyLocationAndAnglesFrom(par1EntityLivingBase);
 				par1EntityLivingBase.worldObj.removeEntity(par1EntityLivingBase);

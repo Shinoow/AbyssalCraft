@@ -23,6 +23,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
+import com.shinoow.abyssalcraft.api.biome.ACBiomes;
 
 public class WorldProviderDarkRealm extends WorldProvider {
 
@@ -33,7 +34,7 @@ public class WorldProviderDarkRealm extends WorldProvider {
 
 	@Override
 	public void registerWorldChunkManager() {
-		worldChunkMgr = new BiomeProviderSingle(AbyssalCraft.darkRealm);
+		worldChunkMgr = new BiomeProviderSingle(ACBiomes.dark_realm);
 		setDimension(AbyssalCraft.configDimId4);
 		hasNoSky = true;
 	}

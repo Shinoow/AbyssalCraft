@@ -37,6 +37,7 @@ import net.minecraftforge.fml.client.FMLClientHandler;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
+import com.shinoow.abyssalcraft.api.biome.ACBiomes;
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.api.entity.IDreadEntity;
 import com.shinoow.abyssalcraft.common.blocks.tile.TileEntityDreadAltarTop;
@@ -88,7 +89,7 @@ public class BlockDreadAltarTop extends BlockContainer {
 		super.onBlockPlaced(world, pos, facing, hitX, hitY, hitZ, meta, placer);
 		if(world.isRemote)
 			if(world.provider.getDimension() == AbyssalCraft.configDimId2){
-				if(world.getBiomeGenForCoords(pos) == AbyssalCraft.MountainDreadlands){
+				if(world.getBiomeGenForCoords(pos) == ACBiomes.dreadlands_mountains){
 					if(world.getBlockState(pos.down()).getBlock() == ACBlocks.chagaroth_altar_bottom)
 						if(pos.getY() == 41)
 							FMLClientHandler.instance().getClient().ingameGUI.getChatGUI().printChatMessage(new TextComponentTranslation("message.dreadaltartop.enter"));
@@ -106,7 +107,7 @@ public class BlockDreadAltarTop extends BlockContainer {
 	@Override
 	public boolean onBlockActivated(World par1World, BlockPos pos, IBlockState state, EntityPlayer par5EntityPlayer, EnumHand hand, ItemStack heldItem, EnumFacing side, float par7, float par8, float par9) {
 		if(par1World.provider.getDimension() == AbyssalCraft.configDimId2){
-			if(par1World.getBiomeGenForCoords(pos) == AbyssalCraft.MountainDreadlands){
+			if(par1World.getBiomeGenForCoords(pos) == ACBiomes.dreadlands_mountains){
 				if(par1World.getBlockState(pos.down()).getBlock() == ACBlocks.chagaroth_altar_bottom && pos.getY() == 41){
 					if(par1World.isRemote)
 						SpecialTextUtil.ChagarothGroup(par1World, I18n.translateToLocal("message.dreadaltartop.spawn"));

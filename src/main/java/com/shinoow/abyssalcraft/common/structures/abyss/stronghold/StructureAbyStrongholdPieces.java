@@ -39,6 +39,7 @@ import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.api.item.ACItems;
 import com.shinoow.abyssalcraft.common.structures.StructureComponentModded;
+import com.shinoow.abyssalcraft.common.util.ACLoot;
 
 public class StructureAbyStrongholdPieces
 {
@@ -644,9 +645,10 @@ public class StructureAbyStrongholdPieces
 				for (i = 2; i <= 4; ++i)
 					setBlockState(par1World, ACBlocks.abyssal_stone_brick_slab.getDefaultState(), 2, 1, i, par3StructureBoundingBox);
 
-				if (!hasMadeChest && par3StructureBoundingBox.isVecInside(new BlockPos(getXWithOffset(3, 3), getYWithOffset(2), getZWithOffset(3, 3))))
-					hasMadeChest = true; //TODO: loot tables
-				//					generateChestContents(par1World, par3StructureBoundingBox, par2Random, 3, 2, 3, strongholdChestContents, ChestGenHooks.getCount(STRONGHOLD_CORRIDOR, par2Random));
+				if (!hasMadeChest && par3StructureBoundingBox.isVecInside(new BlockPos(getXWithOffset(3, 3), getYWithOffset(2), getZWithOffset(3, 3)))){
+					hasMadeChest = true;
+					func_186167_a(par1World, par3StructureBoundingBox, par2Random, 3, 2, 3, ACLoot.CHEST_ABYSSAL_STRONGHOLD_CORRIDOR);
+				}
 
 				return true;
 			}
@@ -808,8 +810,8 @@ public class StructureAbyStrongholdPieces
 					IBlockState iblockstate = Blocks.ladder.getDefaultState().withProperty(BlockLadder.FACING, EnumFacing.WEST);
 					setBlockState(par1World, iblockstate, 9, 1, 3, par3StructureBoundingBox);
 					setBlockState(par1World, iblockstate, 9, 2, 3, par3StructureBoundingBox);
-					setBlockState(par1World, iblockstate, 9, 3, 3, par3StructureBoundingBox); //TODO: loot tables
-					//					generateChestContents(par1World, par3StructureBoundingBox, par2Random, 3, 4, 8, strongholdRoomCrossingChestContents, ChestGenHooks.getCount(STRONGHOLD_CROSSING, par2Random));
+					setBlockState(par1World, iblockstate, 9, 3, 3, par3StructureBoundingBox);
+					func_186167_a(par1World, par3StructureBoundingBox, par2Random, 3, 4, 8, ACLoot.CHEST_ABYSSAL_STRONGHOLD_CROSSING);
 				}
 
 				return true;
