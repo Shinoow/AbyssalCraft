@@ -40,11 +40,12 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
+import com.shinoow.abyssalcraft.api.biome.IDarklandsBiome;
 import com.shinoow.abyssalcraft.common.entity.EntityAbyssalZombie;
 import com.shinoow.abyssalcraft.common.entity.EntityDepthsGhoul;
 import com.shinoow.abyssalcraft.common.world.gen.WorldGenDLT;
 
-public class BiomeGenDarklandsPlains extends BiomeGenBase {
+public class BiomeGenDarklandsPlains extends BiomeGenBase implements IDarklandsBiome {
 
 	private WorldGenTrees WorldGenDarkTrees;
 

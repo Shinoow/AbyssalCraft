@@ -65,13 +65,12 @@ public class DisruptionPotion extends DisruptionEntry {
 	@Override
 	public void disrupt(World world, BlockPos pos, List<EntityPlayer> players) {
 
-		if(!world.isRemote)
-			if(world.getBlockState(pos).getBlock().getCollisionBoundingBox(world, pos, world.getBlockState(pos)) != null){
-				List<EntityLivingBase> entities = world.getEntitiesWithinAABB(EntityLivingBase.class, new AxisAlignedBB(pos, pos.add(1, 1, 1)).expand(16, 16, 16));
+		if(!world.isRemote){
+			List<EntityLivingBase> entities = world.getEntitiesWithinAABB(EntityLivingBase.class, new AxisAlignedBB(pos, pos.add(1, 1, 1)).expand(16, 16, 16));
 
-				for(EntityLivingBase entity : entities)
-					if(!isEntityImmune(potion, entity))
-						entity.addPotionEffect(new PotionEffect(potion.id, 600));
-			}
+			for(EntityLivingBase entity : entities)
+				if(!isEntityImmune(potion, entity))
+					entity.addPotionEffect(new PotionEffect(potion.id, 600));
+		}
 	}
 }

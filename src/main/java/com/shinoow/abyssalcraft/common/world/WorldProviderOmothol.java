@@ -22,13 +22,14 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
+import com.shinoow.abyssalcraft.api.biome.ACBiomes;
 
 public class WorldProviderOmothol extends WorldProvider {
 
 	@Override
 	public void registerWorldChunkManager()
 	{
-		worldChunkMgr = new WorldChunkManagerHell(AbyssalCraft.omothol, 0.0F);
+		worldChunkMgr = new WorldChunkManagerHell(ACBiomes.omothol, 0.0F);
 		dimensionId = AbyssalCraft.configDimId3;
 		hasNoSky = true;
 	}

@@ -23,6 +23,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
+import com.shinoow.abyssalcraft.api.biome.IDarklandsBiome;
 import com.shinoow.abyssalcraft.common.entity.EntityAbyssalZombie;
 import com.shinoow.abyssalcraft.common.entity.EntityDepthsGhoul;
 import com.shinoow.abyssalcraft.common.entity.EntityShadowBeast;
@@ -30,7 +31,7 @@ import com.shinoow.abyssalcraft.common.entity.EntityShadowCreature;
 import com.shinoow.abyssalcraft.common.entity.EntityShadowMonster;
 import com.shinoow.abyssalcraft.common.world.gen.WorldGenDLT;
 
-public class BiomeGenDarklandsHills extends BiomeGenBase {
+public class BiomeGenDarklandsHills extends BiomeGenBase implements IDarklandsBiome {
 
 	private WorldGenTrees WorldGenDarkTrees;
 

@@ -38,7 +38,6 @@ import net.minecraftforge.event.entity.living.LivingAttackEvent;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.player.EntityItemPickupEvent;
-import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.event.terraingen.BiomeEvent;
 import net.minecraftforge.event.terraingen.PopulateChunkEvent;
 import net.minecraftforge.fml.common.eventhandler.Event.Result;
@@ -46,6 +45,8 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
+import com.shinoow.abyssalcraft.api.biome.ACBiomes;
+import com.shinoow.abyssalcraft.api.biome.IDarklandsBiome;
 import com.shinoow.abyssalcraft.api.entity.IDreadEntity;
 import com.shinoow.abyssalcraft.api.event.ACEvents.RitualEvent;
 import com.shinoow.abyssalcraft.api.item.ItemUpgradeKit;
@@ -73,7 +74,7 @@ public class AbyssalCraftEventHooks {
 				for (int x = 0; x < 16; ++x)
 					for (int y = 0; y < 16; ++y)
 						for (int z = 0; z < 16; ++z)
-							if(chunk.getBiome(new BlockPos(x, y, z), event.world.getWorldChunkManager()) == AbyssalCraft.DarklandsMountains)
+							if(chunk.getBiome(new BlockPos(x, y, z), event.world.getWorldChunkManager()) == ACBiomes.darklands_mountains)
 								if (storage.getBlockByExtId(x, y, z) == Blocks.stone)
 									storage.set(x, y, z, AbyssalCraft.Darkstone.getDefaultState());
 	}
@@ -196,11 +197,7 @@ public class AbyssalCraftEventHooks {
 				EntityPlayer player = (EntityPlayer)event.entityLiving;
 				Random rand = new Random();
 				ItemStack helmet = player.getEquipmentInSlot(4);
-				if(player.worldObj.getBiomeGenForCoords(new BlockPos(player.posX, player.posY, player.posZ)) == AbyssalCraft.Darklands ||
-						player.worldObj.getBiomeGenForCoords(new BlockPos(player.posX, player.posY, player.posZ)) == AbyssalCraft.DarklandsPlains ||
-						player.worldObj.getBiomeGenForCoords(new BlockPos(player.posX, player.posY, player.posZ)) == AbyssalCraft.DarklandsMountains ||
-						player.worldObj.getBiomeGenForCoords(new BlockPos(player.posX, player.posY, player.posZ)) == AbyssalCraft.DarklandsHills ||
-						player.worldObj.getBiomeGenForCoords(new BlockPos(player.posX, player.posY, player.posZ)) == AbyssalCraft.DarklandsForest)
+				if(player.worldObj.getBiomeGenForCoords(new BlockPos(player.posX, player.posY, player.posZ)) instanceof IDarklandsBiome)
 					if(rand.nextInt(1000) == 0)
 						if(helmet == null || helmet != null && helmet.getItem() != AbyssalCraft.helmet && helmet.getItem() != AbyssalCraft.helmetD
 						&& helmet.getItem() != AbyssalCraft.Corhelmet && helmet.getItem() != AbyssalCraft.CorhelmetP
@@ -211,15 +208,6 @@ public class AbyssalCraftEventHooks {
 				if(player.getActivePotionEffect(Potion.blindness) != null && player.getActivePotionEffect(Potion.blindness).getDuration() == 0)
 					player.removePotionEffect(Potion.blindness.id);
 			}
-	}
-
-	@SubscribeEvent
-	public void playerInteract(PlayerInteractEvent event) {
-		if (event.action == PlayerInteractEvent.Action.LEFT_CLICK_BLOCK)
-			if (event.world.getBlockState(event.pos) == AbyssalCraft.Coraliumfire ||
-			event.world.getBlockState(event.pos) == AbyssalCraft.dreadfire ||
-			event.world.getBlockState(event.pos) == AbyssalCraft.omotholfire)
-				event.world.setBlockToAir(event.pos);
 	}
 
 	@SubscribeEvent
@@ -332,9 +320,7 @@ public class AbyssalCraftEventHooks {
 
 	@SubscribeEvent
 	public void darklandsVillages(BiomeEvent.GetVillageBlockID event){
-		if(event.biome == AbyssalCraft.Darklands || event.biome == AbyssalCraft.DarklandsPlains ||
-				event.biome == AbyssalCraft.DarklandsForest || event.biome == AbyssalCraft.DarklandsHills ||
-				event.biome == AbyssalCraft.DarklandsMountains){
+		if(event.biome instanceof IDarklandsBiome){
 			if(event.original.getBlock() == Blocks.log || event.original.getBlock() == Blocks.log2){
 				event.replacement = AbyssalCraft.DLTLog.getDefaultState();
 				event.setResult(Result.DENY);

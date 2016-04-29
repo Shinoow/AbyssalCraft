@@ -29,11 +29,11 @@ import net.minecraft.world.gen.structure.MapGenStructure;
 import net.minecraft.world.gen.structure.StructureComponent;
 import net.minecraft.world.gen.structure.StructureStart;
 
-import com.shinoow.abyssalcraft.AbyssalCraft;
+import com.shinoow.abyssalcraft.api.biome.ACBiomes;
 
 public class MapGenAbyStronghold extends MapGenStructure
 {
-	public static ArrayList<BiomeGenBase> allowedBiomes = new ArrayList<BiomeGenBase>(Arrays.asList(AbyssalCraft.Wastelands));
+	public static ArrayList<BiomeGenBase> allowedBiomes = new ArrayList<BiomeGenBase>(Arrays.asList(ACBiomes.abyssal_wastelands));
 	private BiomeGenBase[] allowedBiomeGenBases;
 
 	/**
