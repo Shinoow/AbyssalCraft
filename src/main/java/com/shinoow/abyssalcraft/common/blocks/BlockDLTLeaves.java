@@ -21,6 +21,7 @@ import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.state.BlockState;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.BlockPos;
@@ -70,7 +71,7 @@ public class BlockDLTLeaves extends BlockLeaves {
 	@Override
 	public boolean isOpaqueCube()
 	{
-		return !Minecraft.getMinecraft().gameSettings.fancyGraphics;
+		return Blocks.leaves.isOpaqueCube();
 	}
 
 	@Override

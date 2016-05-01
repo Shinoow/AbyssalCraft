@@ -95,10 +95,9 @@ public class ItemDreadiumSamuraiArmor extends ItemArmor {
 		if (itemstack.getItem() == AbyssalCraft.dreadiumSplate) {
 			player.addPotionEffect(new PotionEffect(Potion.resistance.getId(), 20));
 			player.addPotionEffect(new PotionEffect(Potion.damageBoost.getId(), 20));
-			player.addPotionEffect(new PotionEffect(Potion.fireResistance.getId(), 20, 1));
 		}
 		if (itemstack.getItem() == AbyssalCraft.dreadiumSlegs)
-			player.addPotionEffect(new PotionEffect(Potion.regeneration.getId(), 20, 0));
+			player.addPotionEffect(new PotionEffect(Potion.fireResistance.getId(), 20, 1));
 		if (itemstack.getItem() == AbyssalCraft.dreadiumSboots)
 			player.addPotionEffect(new PotionEffect(Potion.moveSpeed.getId(), 20, 1));
 
