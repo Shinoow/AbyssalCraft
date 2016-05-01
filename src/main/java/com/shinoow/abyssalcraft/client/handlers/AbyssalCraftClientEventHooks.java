@@ -15,6 +15,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.MovingObjectPosition.MovingObjectType;
 import net.minecraft.world.World;
 import net.minecraftforge.client.event.FOVUpdateEvent;
 import net.minecraftforge.client.event.ModelBakeEvent;
@@ -69,7 +70,7 @@ public class AbyssalCraftClientEventHooks {
 		EnumFacing face = mc.objectMouseOver.sideHit;
 
 		if (button == key && Mouse.isButtonDown(button + 100))
-			if (pos != null)
+			if(mc.objectMouseOver.typeOfHit == MovingObjectType.BLOCK)
 				if (world.getBlockState(pos).getBlock() != null)
 					extinguishFire(player, pos, face, world, event);
 	}

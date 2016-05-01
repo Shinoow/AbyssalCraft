@@ -24,10 +24,10 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.BlockPos;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumWorldBlockLayer;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -35,17 +35,9 @@ import com.shinoow.abyssalcraft.AbyssalCraft;
 
 public class BlockDreadLeaves extends BlockLeaves {
 
-	@SideOnly(Side.CLIENT)
-	protected int iconIndex;
-	@SideOnly(Side.CLIENT)
-	protected boolean isTransparent;
-
 	public BlockDreadLeaves() {
 		setCreativeTab(AbyssalCraft.tabDecoration);
 		setDefaultState(blockState.getBaseState().withProperty(CHECK_DECAY, Boolean.valueOf(true)).withProperty(DECAYABLE, Boolean.valueOf(true)));
-
-		if(FMLCommonHandler.instance().getEffectiveSide().equals(Side.CLIENT))
-			setGraphicsLevel(Minecraft.getMinecraft().isFancyGraphicsEnabled());
 	}
 
 	@Override
@@ -78,23 +70,20 @@ public class BlockDreadLeaves extends BlockLeaves {
 	@Override
 	public boolean isOpaqueCube()
 	{
-		return !fancyGraphics;
+		return !Minecraft.getMinecraft().gameSettings.fancyGraphics;
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void setGraphicsLevel(boolean fancy)
-	{
-		isTransparent = fancy;
-		fancyGraphics = fancy;
-		iconIndex = fancy ? 0 : 1;
+	public boolean shouldSideBeRendered(IBlockAccess blockAccess, BlockPos pos, EnumFacing side) {
+		return !Minecraft.getMinecraft().gameSettings.fancyGraphics && blockAccess.getBlockState(pos.offset(side)).getBlock() == this ? false : true;
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
 	public EnumWorldBlockLayer getBlockLayer()
 	{
-		return isTransparent ? EnumWorldBlockLayer.CUTOUT_MIPPED : EnumWorldBlockLayer.SOLID;
+		return Minecraft.getMinecraft().gameSettings.fancyGraphics ? EnumWorldBlockLayer.CUTOUT_MIPPED : EnumWorldBlockLayer.SOLID;
 	}
 
 	@Override
