@@ -1,12 +1,13 @@
 {
   "homepage": "https://shinoow.github.io/AbyssalCraft/",
   "promos": {
-	"1.9-latest": "1.9.1.3",
-	"1.9-recommended": "1.9.1.3",
-    "1.8.9-latest": "1.9.1.3",
-    "1.8.9-recommended": "1.9.1.3"
+	"1.9-latest": "1.9.1.4",
+	"1.9-recommended": "1.9.1.4",
+    "1.8.9-latest": "1.9.1.4",
+    "1.8.9-recommended": "1.9.1.4"
   },
   "1.9": {
+	"1.9.1.4": "- Fixed crash at server startup",
 	"1.9.1.3": "- Leaf blocks now look correct when using fast graphics (thanks to vadis365)\n- Fixed random crashes occurring when hitting entities from certain angles\n- Added information regarding Shoggoth infestations to the Potential Energy section of Ritual Information",
 	"1.9.1.2": "- Fixed any crashes related to ClassCastExceptions regarding strongholds or mineshafts\n- The \"AbyssalCraft Items\" Creative Tab now has a Necronomicon as tab icon\n- Implemented loot tables (Abyssal Strongholds and Dreadlands Mineshafts have their own loot)\n- The Antimatter Potion Effect should no longer continue to spawn Anti-Players while the death screen is displaying\n- The AbyssalCraft biomes can now be accessed in the API (and you can create Darklands and Dreadlands biomes)\n- Any Fire block added by AbyssalCraft can now be exstinghished by hand like vanilla Fire\n- Displacement disruptions now properly move players around (along with other entities)",
 	"1.9.1.1": "- Recipes involving wooden planks should work with all types of planks now",
@@ -15,6 +16,7 @@
 	"1.9.1-pre-1": "- Demon Animals now have a 50% chance of not burning when spawning in the Nether\n- Added a mimic fire (exstinguishes after 6 seconds, can't be sustained by netherrack)\n- Integrations no longer need to be registered (added a plugin annotation that allows for 100% soft dependencies)\n- Fixed animations for the Dreadium Samurai Armor (arms should move correctly, and armor renders correctly on Armor Stands)\n- Improved the buttons in the Necronomicon GUI (they don't overlay anymore, and a transparent gradient displays on a button when hovered over)\n- Fixed potential crashes related to CraftingStacks where the recipe uses the OreDictionary\n- Automatically fetched crafting recipes will now also fetch the output quantity from the recipe\n- Sacthoth no longer spawns in the Dark Realm\n- Added a Misc Information section to the Necronomicon (displays things not mentioned anywhere else, among them crafting recipes)\n- The range from J'zahar in which you need to be in order for him to drop his essence has been increased to 32 blocks (previously 10)\n- Ported to Minecraft 1.9 (there may be bugs left from the port)\n- All boss health bars now uses the new system (and they also change color depending on how much health the boss has)"
   },
   "1.8.9": {
+	"1.9.1.4": "- Fixed crash at server startup",
 	"1.9.1.3": "- Leaf blocks now look correct when using fast graphics (thanks to vadis365)\n- Fixed random crashes occurring when hitting entities from certain angles\n- Added information regarding Shoggoth infestations to the Potential Energy section of Ritual Information",
 	"1.9.1.2": "- Fixed any crashes related to ClassCastExceptions regarding strongholds or mineshafts\n- The \"AbyssalCraft Items\" Creative Tab now has a Necronomicon as tab icon\n- The AbyssalCraft biomes can now be accessed in the API (and you can create Darklands and Dreadlands biomes)\n- Any Fire block added by AbyssalCraft can now be exstinghished by hand like vanilla Fire\n- Displacement disruptions now properly move players around (along with other entities)",
 	"1.9.1.1": "- Recipes involving wooden planks should work with all types of planks now",

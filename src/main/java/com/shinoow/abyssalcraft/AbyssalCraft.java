@@ -93,7 +93,7 @@ import com.shinoow.abyssalcraft.common.world.biome.*;
 @Mod(modid = AbyssalCraft.modid, name = AbyssalCraft.name, version = AbyssalCraft.version,dependencies = "required-after:Forge@[forgeversion,);after:JEI@[3.2.8,)", useMetadata = false, guiFactory = "com.shinoow.abyssalcraft.client.config.ACGuiFactory", acceptedMinecraftVersions = "[1.9]", updateJSON = "https://raw.githubusercontent.com/Shinoow/AbyssalCraft/master/version.json")
 public class AbyssalCraft {
 
-	public static final String version = "1.9.1.3";
+	public static final String version = "1.9.1.4";
 	public static final String modid = "abyssalcraft";
 	public static final String name = "AbyssalCraft";
 

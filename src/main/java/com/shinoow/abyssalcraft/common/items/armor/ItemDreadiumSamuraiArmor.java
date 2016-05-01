@@ -95,10 +95,9 @@ public class ItemDreadiumSamuraiArmor extends ItemArmor {
 		if (itemstack.getItem() == ACItems.dreadium_samurai_chestplate) {
 			player.addPotionEffect(new PotionEffect(MobEffects.resistance, 20));
 			player.addPotionEffect(new PotionEffect(MobEffects.damageBoost, 20));
-			player.addPotionEffect(new PotionEffect(MobEffects.fireResistance, 20, 1));
 		}
 		if (itemstack.getItem() == ACItems.dreadium_samurai_leggings)
-			player.addPotionEffect(new PotionEffect(MobEffects.regeneration, 20, 0));
+			player.addPotionEffect(new PotionEffect(MobEffects.fireResistance, 20, 1));
 		if (itemstack.getItem() == ACItems.dreadium_samurai_boots)
 			player.addPotionEffect(new PotionEffect(MobEffects.moveSpeed, 20, 1));
 
