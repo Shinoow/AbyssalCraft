@@ -294,6 +294,8 @@ public class NecronomiconText {
 	public static String PE_TUT_9 = translate("necronomicon.text.pe.9");
 	public static String PE_TUT_10 = translate("necronomicon.text.pe.10");
 	public static String PE_TUT_11 = translate("necronomicon.text.pe.11");
+	public static String PE_TUT_12 = translate("necronomicon.text.pe.12");
+	public static String PE_TUT_13 = translate("necronomicon.text.pe.13");
 
 	public static String MACHINES_INFO = translate("necronomicon.text.machines.info");
 

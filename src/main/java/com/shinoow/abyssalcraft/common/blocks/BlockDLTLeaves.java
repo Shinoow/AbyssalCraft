@@ -24,10 +24,10 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.BlockRenderLayer;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -39,9 +39,6 @@ public class BlockDLTLeaves extends BlockLeaves {
 	public BlockDLTLeaves() {
 		setCreativeTab(AbyssalCraft.tabDecoration);
 		setDefaultState(blockState.getBaseState().withProperty(CHECK_DECAY, Boolean.valueOf(true)).withProperty(DECAYABLE, Boolean.valueOf(true)));
-
-		if(FMLCommonHandler.instance().getEffectiveSide().equals(Side.CLIENT))
-			setGraphicsLevel(Minecraft.getMinecraft().isFancyGraphicsEnabled());
 	}
 
 	@Override
@@ -53,21 +50,20 @@ public class BlockDLTLeaves extends BlockLeaves {
 	@Override
 	public boolean isOpaqueCube(IBlockState state)
 	{
-		return !leavesFancy;
+		return !Minecraft.getMinecraft().gameSettings.fancyGraphics;
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void setGraphicsLevel(boolean fancy)
-	{
-		leavesFancy = fancy;
+	public boolean shouldSideBeRendered(IBlockState blockState, IBlockAccess blockAccess, BlockPos pos, EnumFacing side) {
+		return !Minecraft.getMinecraft().gameSettings.fancyGraphics && blockAccess.getBlockState(pos.offset(side)).getBlock() == this ? false : true;
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
 	public BlockRenderLayer getBlockLayer()
 	{
-		return leavesFancy ? BlockRenderLayer.CUTOUT_MIPPED : BlockRenderLayer.SOLID;
+		return Minecraft.getMinecraft().gameSettings.fancyGraphics ? BlockRenderLayer.CUTOUT_MIPPED : BlockRenderLayer.SOLID;
 	}
 
 	@Override
