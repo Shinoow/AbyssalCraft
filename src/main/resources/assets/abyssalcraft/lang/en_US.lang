@@ -249,12 +249,12 @@ necronomicon.patrons=Patrons
 necronomicon.information.armortools=Special Armor and Tools
 necronomicon.information.machines=Machines
 necronomicon.reqenergy=Required Energy
-necronomicon.remnanthelp=Remnant help needed
 necronomicon.gettingstarted=Getting Started
 necronomicon.potentialenergy=Potential Energy
 necronomicon.turnupindicator=Turn-up %1$s of %2$s
 necronomicon.miscinformation=Misc Information
 necronomicon.information.enchantments=Enchantments
+necronomicon.sacrifice=Sacrifice required
 
 #Necronomicon Text
 #Note: the maximum amount of letters per string is 368

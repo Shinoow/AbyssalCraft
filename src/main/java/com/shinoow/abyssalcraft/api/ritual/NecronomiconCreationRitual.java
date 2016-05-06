@@ -35,12 +35,12 @@ public class NecronomiconCreationRitual extends NecronomiconRitual {
 	 * @param bookType Necronomicon book type required
 	 * @param dimension Dimension where the ritual can be peformed
 	 * @param requiredEnergy Amount of Potential Energy required to perform
-	 * @param remnantHelp If Remnants can aid you when performing the ritual
+	 * @param requiresSacrifice If the ritual requires a living sacrifice
 	 * @param item The Item given from the ritual
 	 * @param offerings Components used to perform the ritual, are consumed afterwards
 	 */
-	public NecronomiconCreationRitual(String unlocalizedName, int bookType, int dimension, float requiredEnergy, boolean remnantHelp, ItemStack item, Object...offerings) {
-		super(unlocalizedName, bookType, dimension, requiredEnergy, remnantHelp, offerings);
+	public NecronomiconCreationRitual(String unlocalizedName, int bookType, int dimension, float requiredEnergy, boolean requiresSacrifice, ItemStack item, Object...offerings) {
+		super(unlocalizedName, bookType, dimension, requiredEnergy, requiresSacrifice, offerings);
 		this.item = item;
 		if(item.stackSize > 1)
 			item.stackSize = 1;

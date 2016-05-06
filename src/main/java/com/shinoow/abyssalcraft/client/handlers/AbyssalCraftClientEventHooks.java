@@ -66,13 +66,14 @@ public class AbyssalCraftClientEventHooks {
 		World world = mc.theWorld;
 		int key = mc.gameSettings.keyBindAttack.getKeyCode();
 
-		BlockPos pos = mc.objectMouseOver.getBlockPos();
-		EnumFacing face = mc.objectMouseOver.sideHit;
-
 		if (button == key && Mouse.isButtonDown(button + 100))
-			if(mc.objectMouseOver.typeOfHit == MovingObjectType.BLOCK)
-				if (world.getBlockState(pos).getBlock() != null)
-					extinguishFire(player, pos, face, world, event);
+			if(mc.objectMouseOver != null && mc.objectMouseOver.typeOfHit == MovingObjectType.BLOCK){
+				BlockPos pos = mc.objectMouseOver.getBlockPos();
+				EnumFacing face = mc.objectMouseOver.sideHit;
+				if(pos != null && face != null)
+					if (world.getBlockState(pos).getBlock() != null)
+						extinguishFire(player, pos, face, world, event);
+			}
 	}
 
 	private void extinguishFire(EntityPlayer player, BlockPos posIn, EnumFacing face, World world, Event event) {

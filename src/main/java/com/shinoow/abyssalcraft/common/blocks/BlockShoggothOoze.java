@@ -31,7 +31,18 @@ import com.shinoow.abyssalcraft.common.entity.EntityLesserShoggoth;
 
 public class BlockShoggothOoze extends BlockACBasic {
 
-	private static List<Block> blockBlacklist = new ArrayList<Block>();
+	private static List<Block> blockBlacklist = new ArrayList<Block>(){{
+		add(AbyssalCraft.shoggothBlock);
+		add(Blocks.bedrock);
+		add(Blocks.crafting_table);
+		add(AbyssalCraft.ethaxium);
+		add(AbyssalCraft.ethaxiumbrick);
+		add(AbyssalCraft.ethaxiumpillar);
+		add(AbyssalCraft.darkethaxiumbrick);
+		add(AbyssalCraft.darkethaxiumpillar);
+		add(AbyssalCraft.monolithStone);
+		add(AbyssalCraft.shoggothBiomass);
+	}};
 
 	public BlockShoggothOoze(){
 		super(Material.ground, 1.0F, 1.0F, Block.soundTypeSand);
@@ -76,21 +87,7 @@ public class BlockShoggothOoze extends BlockACBasic {
 			|| block.getMaterial() == Material.rock && AbyssalCraft.oozeRock || block.getMaterial() == Material.cloth && AbyssalCraft.oozeCloth
 			|| block.getMaterial() == Material.wood && AbyssalCraft.oozeWood || block.getMaterial() == Material.gourd && AbyssalCraft.oozeGourd
 			|| block.getMaterial() == Material.iron && AbyssalCraft.oozeIron || block.getMaterial() == Material.clay && AbyssalCraft.oozeClay)
-				return !blockBlacklist.contains(block);
+				return !blockBlacklist.contains(block) && !AbyssalCraftAPI.getShoggothBlockBlacklist().contains(block);
 		return false;
-	}
-
-	public void initBlacklist(){
-		blockBlacklist.add(AbyssalCraft.shoggothBlock);
-		blockBlacklist.add(Blocks.bedrock);
-		blockBlacklist.add(Blocks.crafting_table);
-		blockBlacklist.add(AbyssalCraft.ethaxium);
-		blockBlacklist.add(AbyssalCraft.ethaxiumbrick);
-		blockBlacklist.add(AbyssalCraft.ethaxiumpillar);
-		blockBlacklist.add(AbyssalCraft.darkethaxiumbrick);
-		blockBlacklist.add(AbyssalCraft.darkethaxiumpillar);
-		blockBlacklist.add(AbyssalCraft.monolithStone);
-		blockBlacklist.add(AbyssalCraft.shoggothBiomass);
-		blockBlacklist.addAll(AbyssalCraftAPI.getShoggothBlockBlacklist());
 	}
 }

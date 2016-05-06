@@ -249,12 +249,12 @@ necronomicon.patrons=庇护
 necronomicon.information.armortools=特殊的盔甲和工具
 necronomicon.information.machines=机器
 necronomicon.reqenergy=需求能量
-necronomicon.remnanthelp=需要残存者帮助
 necronomicon.gettingstarted=新手入门
 necronomicon.potentialenergy=位能
 necronomicon.turnupindicator=翻转 %2$s 的 %1$s
 necronomicon.miscinformation=Misc Information
 necronomicon.information.enchantments=Enchantments
+necronomicon.sacrifice=Sacrifice required
 
 #Necronomicon Text
 #Note: the maximum amount of letters per string is 368
