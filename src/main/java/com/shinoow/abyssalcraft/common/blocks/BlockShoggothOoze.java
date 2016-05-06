@@ -33,7 +33,19 @@ import com.shinoow.abyssalcraft.common.entity.EntityLesserShoggoth;
 
 public class BlockShoggothOoze extends BlockACBasic {
 
-	private static List<Block> blockBlacklist = new ArrayList<Block>();
+	private static List<Block> blockBlacklist = new ArrayList<Block>(){{
+		add(ACBlocks.shoggoth_ooze);
+		add(Blocks.bedrock);
+		add(Blocks.crafting_table);
+		add(ACBlocks.ethaxium);
+		add(ACBlocks.ethaxium_brick);
+		add(ACBlocks.ethaxium_pillar);
+		add(ACBlocks.dark_ethaxium_brick);
+		add(ACBlocks.dark_ethaxium_pillar);
+		add(ACBlocks.monolith_stone);
+		add(ACBlocks.shoggoth_biomass);
+		add(ACBlocks.block_of_ethaxium);
+	}};
 
 	public BlockShoggothOoze(){
 		super(Material.ground, 1.0F, 1.0F, SoundType.SAND);
@@ -78,22 +90,7 @@ public class BlockShoggothOoze extends BlockACBasic {
 			|| block.getMaterial() == Material.rock && AbyssalCraft.oozeRock || block.getMaterial() == Material.cloth && AbyssalCraft.oozeCloth
 			|| block.getMaterial() == Material.wood && AbyssalCraft.oozeWood || block.getMaterial() == Material.gourd && AbyssalCraft.oozeGourd
 			|| block.getMaterial() == Material.iron && AbyssalCraft.oozeIron || block.getMaterial() == Material.clay && AbyssalCraft.oozeClay)
-				return !blockBlacklist.contains(block.getBlock());
+				return !blockBlacklist.contains(block.getBlock()) && !AbyssalCraftAPI.getShoggothBlockBlacklist().contains(block.getBlock());
 		return false;
-	}
-
-	public void initBlacklist(){
-		blockBlacklist.add(ACBlocks.shoggoth_ooze);
-		blockBlacklist.add(Blocks.bedrock);
-		blockBlacklist.add(Blocks.crafting_table);
-		blockBlacklist.add(ACBlocks.ethaxium);
-		blockBlacklist.add(ACBlocks.ethaxium_brick);
-		blockBlacklist.add(ACBlocks.ethaxium_pillar);
-		blockBlacklist.add(ACBlocks.dark_ethaxium_brick);
-		blockBlacklist.add(ACBlocks.dark_ethaxium_pillar);
-		blockBlacklist.add(ACBlocks.monolith_stone);
-		blockBlacklist.add(ACBlocks.shoggoth_biomass);
-		blockBlacklist.add(ACBlocks.block_of_ethaxium);
-		blockBlacklist.addAll(AbyssalCraftAPI.getShoggothBlockBlacklist());
 	}
 }

@@ -1682,11 +1682,10 @@ public class StructureOmotholPieces
 			setBlockState(worldIn, ACBlocks.ethaxium_brick_fence.getDefaultState(), 1, 1, 0, structureBoundingBoxIn);
 			setBlockState(worldIn, ACBlocks.ethaxium_brick_fence.getDefaultState(), 1, 2, 0, structureBoundingBoxIn);
 			setBlockState(worldIn, Blocks.wool.getStateFromMeta(EnumDyeColor.WHITE.getDyeDamage()), 1, 3, 0, structureBoundingBoxIn);
-			boolean flag = func_186165_e() == EnumFacing.EAST || func_186165_e() == EnumFacing.NORTH;
-			setBlockState(worldIn, Blocks.torch.getDefaultState().withProperty(BlockTorch.FACING, func_186165_e().rotateY()), flag ? 2 : 0, 3, 0, structureBoundingBoxIn);
-			setBlockState(worldIn, Blocks.torch.getDefaultState().withProperty(BlockTorch.FACING, func_186165_e()), 1, 3, 1, structureBoundingBoxIn);
-			setBlockState(worldIn, Blocks.torch.getDefaultState().withProperty(BlockTorch.FACING, func_186165_e().rotateYCCW()), flag ? 0 : 2, 3, 0, structureBoundingBoxIn);
-			setBlockState(worldIn, Blocks.torch.getDefaultState().withProperty(BlockTorch.FACING, func_186165_e().getOpposite()), 1, 3, -1, structureBoundingBoxIn);
+			setBlockState(worldIn, Blocks.torch.getDefaultState().withProperty(BlockTorch.FACING, EnumFacing.EAST), 2, 3, 0, structureBoundingBoxIn);
+			setBlockState(worldIn, Blocks.torch.getDefaultState().withProperty(BlockTorch.FACING, EnumFacing.NORTH), 1, 3, 1, structureBoundingBoxIn);
+			setBlockState(worldIn, Blocks.torch.getDefaultState().withProperty(BlockTorch.FACING, EnumFacing.WEST), 0, 3, 0, structureBoundingBoxIn);
+			setBlockState(worldIn, Blocks.torch.getDefaultState().withProperty(BlockTorch.FACING, EnumFacing.SOUTH), 1, 3, -1, structureBoundingBoxIn);
 			return true;
 		}
 	}

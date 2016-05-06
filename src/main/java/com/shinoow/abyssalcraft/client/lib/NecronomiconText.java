@@ -416,7 +416,7 @@ public class NecronomiconText {
 	public static String LABEL_INFORMATION_ARMOR_TOOLS = translate("necronomicon.information.armortools");
 	public static String LABEL_INFORMATION_MACHINES = translate("necronomicon.information.machines");
 	public static String LABEL_REQUIRED_ENERGY = translate("necronomicon.reqenergy");
-	public static String LABEL_REMNANT_HELP = translate("necronomicon.remnanthelp");
+	public static String LABEL_SACRIFICE = translate("necronomicon.sacrifice");
 	public static String LABEL_GETTING_STARTED = translate("necronomicon.gettingstarted");
 	public static String LABEL_POTENTIAL_ENERGY = translate("necronomicon.potentialenergy");
 	public static String LABEL_MISC_INFORMATION = translate("necronomicon.miscinformation");

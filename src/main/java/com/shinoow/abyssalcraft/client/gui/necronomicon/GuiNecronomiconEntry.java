@@ -11,6 +11,7 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.client.gui.necronomicon;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,6 +20,7 @@ import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.renderer.RenderItem;
+import net.minecraft.client.renderer.texture.TextureUtil;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -176,49 +178,12 @@ public class GuiNecronomiconEntry extends GuiNecronomicon {
 		fontRendererObj.drawSplitString(stuff, k + 20, b0 + 16, 116, 0xC40000);
 		setTurnupLimit(chapter.getTurnupAmount());
 
-		if(currTurnup == 0)
-			addPage(chapter.getPages().get(1), chapter.getPages().get(2), chapter.getPageAmount(), 2, x, y);
-		else if(currTurnup == 1 && chapter.getPageAmount() >= 3)
-			addPage(chapter.getPages().get(3), chapter.getPages().get(4), chapter.getPageAmount(), 4, x, y);
-		else if(currTurnup == 2 && chapter.getPageAmount() >= 5)
-			addPage(chapter.getPages().get(5), chapter.getPages().get(6), chapter.getPageAmount(), 6, x, y);
-		else if(currTurnup == 3 && chapter.getPageAmount() >= 7)
-			addPage(chapter.getPages().get(7), chapter.getPages().get(8), chapter.getPageAmount(), 8, x, y);
-		else if(currTurnup == 4 && chapter.getPageAmount() >= 9)
-			addPage(chapter.getPages().get(9), chapter.getPages().get(10), chapter.getPageAmount(), 10, x, y);
-		else if(currTurnup == 5 && chapter.getPageAmount() >= 11)
-			addPage(chapter.getPages().get(11), chapter.getPages().get(12), chapter.getPageAmount(), 12, x, y);
-		else if(currTurnup == 6 && chapter.getPageAmount() >= 13)
-			addPage(chapter.getPages().get(13), chapter.getPages().get(14), chapter.getPageAmount(), 14, x, y);
-		else if(currTurnup == 7 && chapter.getPageAmount() >= 15)
-			addPage(chapter.getPages().get(15), chapter.getPages().get(16), chapter.getPageAmount(), 16, x, y);
-		else if(currTurnup == 8 && chapter.getPageAmount() >= 17)
-			addPage(chapter.getPages().get(17), chapter.getPages().get(18), chapter.getPageAmount(), 18, x, y);
-		else if(currTurnup == 9 && chapter.getPageAmount() >= 19)
-			addPage(chapter.getPages().get(19), chapter.getPages().get(20), chapter.getPageAmount(), 20, x, y);
-		else if(currTurnup == 10 && chapter.getPageAmount() >= 21)
-			addPage(chapter.getPages().get(21), chapter.getPages().get(22), chapter.getPageAmount(), 22, x, y);
-		else if(currTurnup == 11 && chapter.getPageAmount() >= 23)
-			addPage(chapter.getPages().get(23), chapter.getPages().get(24), chapter.getPageAmount(), 24, x, y);
-		else if(currTurnup == 12 && chapter.getPageAmount() >= 25)
-			addPage(chapter.getPages().get(25), chapter.getPages().get(26), chapter.getPageAmount(), 26, x, y);
-		else if(currTurnup == 13 && chapter.getPageAmount() >= 27)
-			addPage(chapter.getPages().get(27), chapter.getPages().get(28), chapter.getPageAmount(), 28, x, y);
-		else if(currTurnup == 14 && chapter.getPageAmount() >= 29)
-			addPage(chapter.getPages().get(29), chapter.getPages().get(30), chapter.getPageAmount(), 30, x, y);
-		else if(currTurnup == 15 && chapter.getPageAmount() >= 31)
-			addPage(chapter.getPages().get(31), chapter.getPages().get(32), chapter.getPageAmount(), 32, x, y);
-		else if(currTurnup == 16 && chapter.getPageAmount() >= 33)
-			addPage(chapter.getPages().get(33), chapter.getPages().get(34), chapter.getPageAmount(), 34, x, y);
-		else if(currTurnup == 17 && chapter.getPageAmount() >= 35)
-			addPage(chapter.getPages().get(35), chapter.getPages().get(36), chapter.getPageAmount(), 36, x, y);
-		else if(currTurnup == 18 && chapter.getPageAmount() >= 37)
-			addPage(chapter.getPages().get(37), chapter.getPages().get(38), chapter.getPageAmount(), 38, x, y);
-		else if(currTurnup == 19 && chapter.getPageAmount() >= 39)
-			addPage(chapter.getPages().get(39), chapter.getPages().get(40), chapter.getPageAmount(), 40, x, y);
+		int num = (currTurnup + 1)*2;
+
+		addPage(chapter.getPage(num-1), chapter.getPage(num), num, x, y);
 	}
 
-	private void addPage(Page page1, Page page2, int pageAmount, int limit, int x, int y){
+	private void addPage(Page page1, Page page2, int displayNum, int x, int y){
 		int k = (width - guiWidth) / 2;
 		byte b0 = 2;
 		String text1 = "";
@@ -239,14 +204,15 @@ public class GuiNecronomiconEntry extends GuiNecronomicon {
 
 		writeTexts(icon1, icon2, text1, text2);
 
-		writeText(1, String.valueOf(limit - 1), 165, 50);
-		writeText(2, String.valueOf(limit), 165, 50);
+		writeText(1, String.valueOf(displayNum - 1), 165, 50);
+		writeText(2, String.valueOf(displayNum), 165, 50);
 
 		if(icon1 != null){
 			if(icon1 instanceof ItemStack)
 				renderItem(k + 60, b0 + 28,(ItemStack)icon1, x, y);
 			if(icon1 instanceof ResourceLocation){
 				GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+				icon1 = verify((ResourceLocation)icon1);
 				mc.renderEngine.bindTexture((ResourceLocation)icon1);
 				drawTexturedModalRect(k, b0, 0, 0, 256, 256);
 			}
@@ -271,6 +237,7 @@ public class GuiNecronomiconEntry extends GuiNecronomicon {
 				renderItem(k + 60 + n, b0 + 28,(ItemStack)icon2, x, y);
 			if(icon2 instanceof ResourceLocation){
 				GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+				icon2 = verify((ResourceLocation)icon2);
 				mc.renderEngine.bindTexture((ResourceLocation)icon2);
 				drawTexturedModalRect(k + n, b0, 0, 0, 256, 256);
 			}
@@ -313,6 +280,15 @@ public class GuiNecronomiconEntry extends GuiNecronomicon {
 			}
 			GuiRenderHelper.renderTooltip(x, y, parsedTooltip);
 		}
+	}
+
+	private ResourceLocation verify(ResourceLocation res){
+		try {
+			TextureUtil.readBufferedImage(mc.getResourceManager().getResource(res).getInputStream());
+		} catch (IOException e) {
+			return new ResourceLocation("abyssalcraft", "textures/gui/necronomicon/missing.png");
+		}
+		return res;
 	}
 
 	private void writeTexts(Object icon1, Object icon2, String text1, String text2){

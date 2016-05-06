@@ -40,14 +40,14 @@ public class NecronomiconPotionAoERitual extends NecronomiconRitual {
 	 * A Necronomicon Potion Area-of-Effect Ritual
 	 * @param unlocalizedName A string representing the ritual name
 	 * @param bookType Necronomicon book type required
-	 * @param dimension Dimension where the ritual can be peformed
+	 * @param dimension Dimension where the ritual can be performed
 	 * @param requiredEnergy Amount of Potential Energy required to perform
-	 * @param remnantHelp If Remnants can aid you when performing the ritual
+	 * @param requiresSacrifice If the ritual requires a living sacrifice
 	 * @param potions Either a Potion effect or a Potion ID (will last for 20 seconds)
 	 * @param offerings Components used to perform the ritual, are consumed afterwards
 	 */
-	public NecronomiconPotionAoERitual(String unlocalizedName, int bookType, int dimension, float requiredEnergy, boolean remnantHelp, Object potion, Object...offerings) {
-		super(unlocalizedName, bookType, dimension, requiredEnergy, remnantHelp, offerings);
+	public NecronomiconPotionAoERitual(String unlocalizedName, int bookType, int dimension, float requiredEnergy, boolean requiresSacrifice, Object potion, Object...offerings) {
+		super(unlocalizedName, bookType, dimension, requiredEnergy, requiresSacrifice, offerings);
 		this.potion = potion;
 	}
 

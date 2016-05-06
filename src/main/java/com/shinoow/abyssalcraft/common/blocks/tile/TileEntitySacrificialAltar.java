@@ -84,9 +84,10 @@ public class TileEntitySacrificialAltar extends TileEntity implements IEnergyCon
 	@Override
 	public void update()
 	{
-		if(isDirty)
-			//			worldObj.markBlockForUpdate(pos); //TODO: find replacement
+		if(isDirty){
+			worldObj.notifyBlockUpdate(pos, worldObj.getBlockState(pos), worldObj.getBlockState(pos), 2);
 			isDirty = false;
+		}
 
 		if(rot == 360)
 			rot = 0;

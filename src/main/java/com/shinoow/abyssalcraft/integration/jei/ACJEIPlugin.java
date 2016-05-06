@@ -18,6 +18,7 @@ import net.minecraftforge.fml.common.Loader;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
+import com.shinoow.abyssalcraft.api.item.ACItems;
 import com.shinoow.abyssalcraft.common.inventory.ContainerCrystallizer;
 import com.shinoow.abyssalcraft.common.inventory.ContainerEngraver;
 import com.shinoow.abyssalcraft.common.inventory.ContainerTransmutator;
@@ -54,6 +55,17 @@ public class ACJEIPlugin implements IModPlugin {
 				new CrystallizationRecipeHandler(),
 				new RitualRecipeHandler(),
 				new EngravingRecipeHandler());
+
+		registry.addRecipeCategoryCraftingItem(new ItemStack(ACBlocks.transmutator_idle), AbyssalCraftRecipeCategoryUid.TRANSMUTATION,
+				AbyssalCraftRecipeCategoryUid.FUEL_TRANSMUTATION);
+		registry.addRecipeCategoryCraftingItem(new ItemStack(ACBlocks.crystallizer_idle), AbyssalCraftRecipeCategoryUid.CRYSTALLIZATION,
+				AbyssalCraftRecipeCategoryUid.FUEL_CRYSTALLIZATION);
+		registry.addRecipeCategoryCraftingItem(new ItemStack(ACBlocks.engraver), AbyssalCraftRecipeCategoryUid.ENGRAVING);
+		registry.addRecipeCategoryCraftingItem(new ItemStack(ACItems.necronomicon), AbyssalCraftRecipeCategoryUid.RITUAL);
+		registry.addRecipeCategoryCraftingItem(new ItemStack(ACItems.abyssal_wasteland_necronomicon), AbyssalCraftRecipeCategoryUid.RITUAL);
+		registry.addRecipeCategoryCraftingItem(new ItemStack(ACItems.dreadlands_necronomicon), AbyssalCraftRecipeCategoryUid.RITUAL);
+		registry.addRecipeCategoryCraftingItem(new ItemStack(ACItems.omothol_necronomicon), AbyssalCraftRecipeCategoryUid.RITUAL);
+		registry.addRecipeCategoryCraftingItem(new ItemStack(ACItems.abyssalnomicon), AbyssalCraftRecipeCategoryUid.RITUAL);
 
 		IRecipeTransferRegistry recipeTransferRegistry = registry.getRecipeTransferRegistry();
 

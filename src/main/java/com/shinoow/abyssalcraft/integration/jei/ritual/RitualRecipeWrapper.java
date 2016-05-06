@@ -76,8 +76,8 @@ public class RitualRecipeWrapper extends BlankRecipeWrapper {
 		boolean unicode = fr.getUnicodeFlag();
 		fr.setUnicodeFlag(true);
 
-		if(ritual.canRemnantAid())
-			fr.drawString(NecronomiconText.LABEL_REMNANT_HELP, 93, 124, 0xC40000);
+		//		if(ritual.requiresSacrifice())
+		//			fr.drawString(NecronomiconText.LABEL_SACRIFICE, 93, 124, 0xC40000);
 		fr.drawSplitString(NecronomiconText.LABEL_LOCATION + ": " + getDimension(ritual.getDimension()), 93, 85, 70, 0);
 		fr.drawSplitString(NecronomiconText.LABEL_REQUIRED_ENERGY + ": " + ritual.getReqEnergy() + " PE", 93, 108, 70, 0);
 

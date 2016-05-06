@@ -16,6 +16,7 @@ import java.util.Random;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockDirt;
 import net.minecraft.block.BlockFlower;
+import net.minecraft.block.BlockMushroom;
 import net.minecraft.block.BlockTallGrass;
 import net.minecraft.block.IGrowable;
 import net.minecraft.block.SoundType;
@@ -93,7 +94,8 @@ public class BlockDarklandsgrass extends Block implements IGrowable {
 	public boolean canSustainPlant(IBlockState state, IBlockAccess world, BlockPos pos, EnumFacing direction, IPlantable plantable)
 	{
 		Block plant = plantable.getPlant(world, pos.up()).getBlock();
-		if (plant == ACBlocks.dreadlands_sapling || plant == ACBlocks.darklands_oak_sapling)
+		if (plant == ACBlocks.dreadlands_sapling || plant == ACBlocks.darklands_oak_sapling || plant instanceof BlockFlower ||
+				plant instanceof BlockMushroom || plant instanceof BlockTallGrass)
 			return true;
 		return false;
 	}

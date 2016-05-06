@@ -83,9 +83,10 @@ public class TileEntityRitualAltar extends TileEntity implements ITickable, IRit
 	@Override
 	public void update()
 	{
-		if(isDirty || isPerformingRitual())
-			//			worldObj.markBlockForUpdate(pos); //TODO: find replacement
+		if(isDirty || isPerformingRitual()){
+			worldObj.notifyBlockUpdate(pos, worldObj.getBlockState(pos), worldObj.getBlockState(pos), 2);
 			isDirty = false;
+		}
 
 		if(isPerformingRitual()){
 			ritualTimer++;

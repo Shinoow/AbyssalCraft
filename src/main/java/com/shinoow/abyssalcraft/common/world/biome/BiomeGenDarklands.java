@@ -42,7 +42,7 @@ public class BiomeGenDarklands extends BiomeGenBase implements IDarklandsBiome {
 		fillerBlock = Blocks.dirt.getDefaultState();
 		//		waterColorMultiplier = 14745518;
 		WorldGenDarkTrees = new WorldGenDLT(false);
-		theBiomeDecorator.treesPerChunk = 2;
+		theBiomeDecorator.treesPerChunk = 3;
 		spawnableMonsterList.add(new SpawnListEntry(EntityDepthsGhoul.class, 60, 1, 5));
 		spawnableMonsterList.add(new SpawnListEntry(EntityAbyssalZombie.class, 60, 1, 3));
 	}
