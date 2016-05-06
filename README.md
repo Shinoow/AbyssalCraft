@@ -1,5 +1,8 @@
 ## Welcome to AbyssalCraft on Github
 
+### Notice
+**All development for this branch has stopped. There will not be any more updates for Minecraft 1.7.10.**
+
 ### Main information
 
 The mod thread can be located at
