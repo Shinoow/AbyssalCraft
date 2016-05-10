@@ -1,12 +1,13 @@
 {
   "homepage": "https://shinoow.github.io/AbyssalCraft/",
   "promos": {
-	"1.9-latest": "1.9.1.5",
-	"1.9-recommended": "1.9.1.5",
-    "1.8.9-latest": "1.9.1.5",
-    "1.8.9-recommended": "1.9.1.5"
+	"1.9-latest": "1.9.1.6",
+	"1.9-recommended": "1.9.1.6",
+    "1.8.9-latest": "1.9.1.6",
+    "1.8.9-recommended": "1.9.1.6"
   },
   "1.9": {
+	"1.9.1.6": "- Shoggoth Ooze should no longer spread onto Monolith Stone\n- Changed the picture for the Shoggoth Infestation page\n- Fixed a duplication bug with Ritual Altars and the like\n- When naturally grown into trees, Darklands Oaks and Dreadlands Trees should not turn into regular Oaks",
 	"1.9.1.5": "- Actually fix the client-side crashes exposed in the previous versions\n- Now runs on Forge 12.16.1.1887\n- Recipe categories in the JEI integration now shows what's used for what recipe (like how the Furnace is shown for smelting)\n- Altar/Pedestal interaction now sync between players again\n- There is no longer a limit on how many rituals can be displayed per section\n- You can now add infinite pages to a Necronomicon Category\n- The Darklands Oak and Dreadlands Tree now have a new design\n- Darklands Grass can now sustain Flowers, Tall Grass and Mushrooms again\n- Rebranded all API packages (now named \"AbyssalCraftAPI\" instead of \"AbyssalCraftAPI|Core\" for instance)\n- Replaced the Necronomicon \"missing texture\" with one that has a more fitting color scheme\n- If the Necronomicon GUI is unable to load an image, it will substitute to it's own \"missing texture\" (instead of the vanilla one)",
 	"1.9.1.4": "- Fixed crash at server startup",
 	"1.9.1.3": "- Leaf blocks now look correct when using fast graphics (thanks to vadis365)\n- Fixed random crashes occurring when hitting entities from certain angles\n- Added information regarding Shoggoth infestations to the Potential Energy section of Ritual Information",
@@ -17,6 +18,7 @@
 	"1.9.1-pre-1": "- Demon Animals now have a 50% chance of not burning when spawning in the Nether\n- Added a mimic fire (exstinguishes after 6 seconds, can't be sustained by netherrack)\n- Integrations no longer need to be registered (added a plugin annotation that allows for 100% soft dependencies)\n- Fixed animations for the Dreadium Samurai Armor (arms should move correctly, and armor renders correctly on Armor Stands)\n- Improved the buttons in the Necronomicon GUI (they don't overlay anymore, and a transparent gradient displays on a button when hovered over)\n- Fixed potential crashes related to CraftingStacks where the recipe uses the OreDictionary\n- Automatically fetched crafting recipes will now also fetch the output quantity from the recipe\n- Sacthoth no longer spawns in the Dark Realm\n- Added a Misc Information section to the Necronomicon (displays things not mentioned anywhere else, among them crafting recipes)\n- The range from J'zahar in which you need to be in order for him to drop his essence has been increased to 32 blocks (previously 10)\n- Ported to Minecraft 1.9 (there may be bugs left from the port)\n- All boss health bars now uses the new system (and they also change color depending on how much health the boss has)"
   },
   "1.8.9": {
+	"1.9.1.6": "- Shoggoth Ooze should no longer spread onto Monolith Stone\n- Changed the picture for the Shoggoth Infestation page\n- When naturally grown into trees, Darklands Oaks and Dreadlands Trees should not turn into regular Oaks",
 	"1.9.1.5": "- Actually fix the client-side crashes exposed in the previous versions\n- Now runs on Forge 11.15.1.1875\n- There is no longer a limit on how many rituals can be displayed per section\n- You can now add infinite pages to a Necronomicon Category\n- The Darklands Oak and Dreadlands Tree now have a new design\n- Darklands Grass can now sustain Flowers, Tall Grass and Mushrooms again\n- Rebranded all API packages (now named \"AbyssalCraftAPI\" instead of \"AbyssalCraftAPI|Core\" for instance)\n- Replaced the Necronomicon \"missing texture\" with one that has a more fitting color scheme\n- If the Necronomicon GUI is unable to load an image, it will substitute to it's own \"missing texture\" (instead of the vanilla one)",
 	"1.9.1.4": "- Fixed crash at server startup",
 	"1.9.1.3": "- Leaf blocks now look correct when using fast graphics (thanks to vadis365)\n- Fixed random crashes occurring when hitting entities from certain angles\n- Added information regarding Shoggoth infestations to the Potential Energy section of Ritual Information",
