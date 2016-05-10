@@ -44,7 +44,7 @@ public class BlockDreadSapling extends BlockSapling {
 	}
 
 	@Override
-	public void grow(World worldIn, Random rand, BlockPos pos, IBlockState state) {
+	public void grow(World worldIn, BlockPos pos, IBlockState state, Random rand) {
 
 		if (state.getValue(STAGE).intValue() == 0)
 			worldIn.setBlockState(pos, state.cycleProperty(STAGE), 4);
