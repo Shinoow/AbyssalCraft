@@ -93,7 +93,7 @@ import com.shinoow.abyssalcraft.common.world.biome.*;
 @Mod(modid = AbyssalCraft.modid, name = AbyssalCraft.name, version = AbyssalCraft.version,dependencies = "required-after:Forge@[forgeversion,);after:JEI@[3.3.3,)", useMetadata = false, guiFactory = "com.shinoow.abyssalcraft.client.config.ACGuiFactory", acceptedMinecraftVersions = "[1.9]", updateJSON = "https://raw.githubusercontent.com/Shinoow/AbyssalCraft/master/version.json")
 public class AbyssalCraft {
 
-	public static final String version = "1.9.1.5";
+	public static final String version = "1.9.1.6";
 	public static final String modid = "abyssalcraft";
 	public static final String name = "AbyssalCraft";
 
@@ -417,6 +417,8 @@ public class AbyssalCraft {
 		ACBlocks.minion_of_the_gatekeeper_spawner = new BlockGatekeeperMinionSpawner().setUnlocalizedName("gatekeeperminionspawner");
 		ACBlocks.mimic_fire = new BlockMimicFire().setUnlocalizedName("fire");
 
+		((BlockShoggothOoze) ACBlocks.shoggoth_ooze).initBlacklist();
+
 		//Biome
 		ACBiomes.darklands = new BiomeGenDarklands(new BiomeProperties("Darklands").setWaterColor(14745518));
 		ACBiomes.abyssal_wastelands = new BiomeGenAbywasteland(new BiomeProperties("Abyssal Wastelands").setWaterColor(0x24FF83).setRainDisabled());
@@ -432,7 +434,7 @@ public class AbyssalCraft {
 		ACBiomes.omothol = new BiomeGenOmothol(new BiomeProperties("Omothol").setWaterColor(14745518).setRainDisabled());
 		ACBiomes.dark_realm = new BiomeGenDarkRealm(new BiomeProperties("Dark Realm").setWaterColor(14745518).setRainDisabled());
 
-		//TODO remove this in the next release or so
+		//TODO remove in AC 1.9.2
 		Darklands = ACBiomes.darklands;
 		DarklandsForest = ACBiomes.darklands_forest;
 		DarklandsPlains = ACBiomes.darklands_plains;

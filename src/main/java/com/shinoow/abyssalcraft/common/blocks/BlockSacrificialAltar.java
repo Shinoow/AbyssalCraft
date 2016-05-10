@@ -113,7 +113,7 @@ public class BlockSacrificialAltar extends BlockContainer {
 					ItemStack newItem = heldItem.copy();
 					newItem.stackSize = 1;
 					((TileEntitySacrificialAltar)tile).setItem(newItem);
-					player.inventory.decrStackSize(player.inventory.currentItem, 1);
+					heldItem.stackSize--;
 					world.playSound(pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, SoundEvents.entity_item_pickup, SoundCategory.PLAYERS, 0.5F, world.rand.nextFloat() - world.rand.nextFloat() * 0.2F + 1, false);
 					return true;
 				}
