@@ -75,7 +75,7 @@ public class EntityDemonAnimal extends EntityMob implements IDreadEntity {
 				k = MathHelper.floor_double(posZ + (l / 2 % 2 * 2 - 1) * 0.25F);
 				BlockPos pos = new BlockPos(i, j, k);
 
-				if (worldObj.getBlockState(pos).getMaterial() == Material.air && Blocks.fire.canPlaceBlockAt(worldObj, pos))
+				if (worldObj.getBlockState(pos).getMaterial() == Material.AIR && Blocks.FIRE.canPlaceBlockAt(worldObj, pos))
 					worldObj.setBlockState(pos, ACBlocks.mimic_fire.getDefaultState());
 			}
 		}
@@ -85,7 +85,7 @@ public class EntityDemonAnimal extends EntityMob implements IDreadEntity {
 	protected void dropFewItems(boolean par1, int par2){
 		int var3 = rand.nextInt(3) + 1 + rand.nextInt(1 + par2);
 		for (int var4 = 0; var4 < var3; ++var4)
-			dropItem(Items.rotten_flesh, 1);
+			dropItem(Items.ROTTEN_FLESH, 1);
 	}
 
 	@Override

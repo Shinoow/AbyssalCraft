@@ -30,7 +30,7 @@ public class BlockDarkEthaxiumBrick extends BlockACBasic {
 	public static final PropertyEnum TYPE = PropertyEnum.create("type", BlockEthaxiumBrick.EnumBrickType.class);
 
 	public BlockDarkEthaxiumBrick() {
-		super(Material.rock, "pickaxe", 8, 150.0F, Float.MAX_VALUE, SoundType.STONE);
+		super(Material.ROCK, "pickaxe", 8, 150.0F, Float.MAX_VALUE, SoundType.STONE);
 		setDefaultState(blockState.getBaseState().withProperty(TYPE, EnumBrickType.NORMAL));
 
 	}

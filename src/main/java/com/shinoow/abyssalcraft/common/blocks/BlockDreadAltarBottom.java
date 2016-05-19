@@ -35,9 +35,9 @@ import com.shinoow.abyssalcraft.common.blocks.tile.TileEntityDreadAltarBottom;
 public class BlockDreadAltarBottom extends BlockContainer {
 
 	public BlockDreadAltarBottom() {
-		super(Material.rock);
+		super(Material.ROCK);
 		setHarvestLevel("pickaxe", 6);
-		setStepSound(SoundType.STONE);
+		setSoundType(SoundType.STONE);
 	}
 
 	@Override
@@ -74,8 +74,8 @@ public class BlockDreadAltarBottom extends BlockContainer {
 	}
 
 	@Override
-	public void onEntityCollidedWithBlock(World par1World, BlockPos pos, Entity par5Entity) {
-		super.onEntityCollidedWithBlock(par1World, pos, par5Entity);
+	public void onEntityCollidedWithBlock(World par1World, BlockPos pos, IBlockState state, Entity par5Entity) {
+		super.onEntityCollidedWithBlock(par1World, pos, state, par5Entity);
 
 		if(par5Entity instanceof IDreadEntity){}
 		else if(par5Entity instanceof EntityLivingBase)

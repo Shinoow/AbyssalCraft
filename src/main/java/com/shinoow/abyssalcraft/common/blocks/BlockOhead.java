@@ -31,9 +31,9 @@ import com.shinoow.abyssalcraft.common.blocks.tile.TileEntityOhead;
 public class BlockOhead extends BlockContainer /* implements IInfusionStabiliser */ {
 
 	public BlockOhead() {
-		super(Material.cloth);
+		super(Material.CLOTH);
 		//		setBlockBounds(0.1F, 0.0F, 0.1F, 0.8F, 0.7F, 0.8F);
-		setStepSound(SoundType.CLOTH);
+		setSoundType(SoundType.CLOTH);
 	}
 
 	@Override

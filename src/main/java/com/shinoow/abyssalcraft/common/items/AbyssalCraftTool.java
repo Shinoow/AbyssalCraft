@@ -106,7 +106,7 @@ public class AbyssalCraftTool extends Item {
 
 	@Override
 	public boolean canHarvestBlock(IBlockState state) {
-		return state.getBlock() == Blocks.web;
+		return state.getBlock() == Blocks.WEB;
 	}
 
 	@Override

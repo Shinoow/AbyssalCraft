@@ -50,7 +50,7 @@ public class BlockAbyssPortal extends BlockBreakable {
 
 	public BlockAbyssPortal()
 	{
-		super(Material.portal , false);
+		super(Material.PORTAL , false);
 		setDefaultState(blockState.getBaseState().withProperty(AXIS, EnumFacing.Axis.X));
 		setTickRandomly(true);
 		setHardness(-1.0F);
@@ -73,7 +73,7 @@ public class BlockAbyssPortal extends BlockBreakable {
 	}
 
 	@Override
-	public AxisAlignedBB getSelectedBoundingBox(IBlockState blockState, World worldIn, BlockPos pos)
+	public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, World worldIn, BlockPos pos)
 	{
 		return NULL_AABB;
 	}
@@ -112,7 +112,7 @@ public class BlockAbyssPortal extends BlockBreakable {
 	}
 
 	@Override
-	public void onNeighborBlockChange(World worldIn, BlockPos pos, IBlockState state, Block neighborBlock)
+	public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block neighborBlock)
 	{
 		EnumFacing.Axis enumfacing$axis = state.getValue(AXIS);
 
@@ -121,14 +121,14 @@ public class BlockAbyssPortal extends BlockBreakable {
 			BlockAbyssPortal.Size blockportal$size = new BlockAbyssPortal.Size(worldIn, pos, EnumFacing.Axis.X);
 
 			if (!blockportal$size.func_150860_b() || blockportal$size.field_150864_e < blockportal$size.field_150868_h * blockportal$size.field_150862_g)
-				worldIn.setBlockState(pos, Blocks.air.getDefaultState());
+				worldIn.setBlockState(pos, Blocks.AIR.getDefaultState());
 		}
 		else if (enumfacing$axis == EnumFacing.Axis.Z)
 		{
 			BlockAbyssPortal.Size blockportal$size1 = new BlockAbyssPortal.Size(worldIn, pos, EnumFacing.Axis.Z);
 
 			if (!blockportal$size1.func_150860_b() || blockportal$size1.field_150864_e < blockportal$size1.field_150868_h * blockportal$size1.field_150862_g)
-				worldIn.setBlockState(pos, Blocks.air.getDefaultState());
+				worldIn.setBlockState(pos, Blocks.AIR.getDefaultState());
 		}
 	}
 
@@ -226,7 +226,7 @@ public class BlockAbyssPortal extends BlockBreakable {
 	{
 		EnumFacing.Axis enumfacing$axis = EnumFacing.Axis.Z;
 		BlockAbyssPortal.Size blockportal$size = new BlockAbyssPortal.Size(p_181089_1_, p_181089_2_, EnumFacing.Axis.X);
-		LoadingCache<BlockPos, BlockWorldState> loadingcache = BlockPattern.func_181627_a(p_181089_1_, true);
+		LoadingCache<BlockPos, BlockWorldState> loadingcache = BlockPattern.createLoadingCache(p_181089_1_, true);
 
 		if (!blockportal$size.func_150860_b())
 		{
@@ -251,7 +251,7 @@ public class BlockAbyssPortal extends BlockBreakable {
 					{
 						BlockWorldState blockworldstate = blockpattern$patternhelper.translateOffset(i, j, 1);
 
-						if (blockworldstate.getBlockState() != null && blockworldstate.getBlockState().getMaterial() != Material.air)
+						if (blockworldstate.getBlockState() != null && blockworldstate.getBlockState().getMaterial() != Material.AIR)
 							++aint[enumfacing$axisdirection.ordinal()];
 					}
 			}
@@ -392,7 +392,7 @@ public class BlockAbyssPortal extends BlockBreakable {
 
 		protected boolean func_150857_a(Block p_150857_1_)
 		{
-			return p_150857_1_.getMaterial(p_150857_1_.getDefaultState()) == Material.air || p_150857_1_ == ACBlocks.coralium_fire || p_150857_1_ == ACBlocks.abyssal_gateway;
+			return p_150857_1_.getMaterial(p_150857_1_.getDefaultState()) == Material.AIR || p_150857_1_ == ACBlocks.coralium_fire || p_150857_1_ == ACBlocks.abyssal_gateway;
 		}
 
 		public boolean func_150860_b()

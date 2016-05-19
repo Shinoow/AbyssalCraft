@@ -68,7 +68,7 @@ public class EntityAntiPlayer extends EntityMob implements IAntiEntity {
 	@Override
 	protected void playStepSound(BlockPos pos, Block par4)
 	{
-		playSound(SoundEvents.entity_zombie_step, 0.15F, 1.0F);
+		playSound(SoundEvents.ENTITY_ZOMBIE_STEP, 0.15F, 1.0F);
 	}
 
 	@Override
@@ -87,7 +87,7 @@ public class EntityAntiPlayer extends EntityMob implements IAntiEntity {
 			antiPlayer.onInitialSpawn(worldObj.getDifficultyForLocation(new BlockPos(posX, posY, posZ)), (IEntityLivingData)null);
 
 			worldObj.spawnEntityInWorld(antiPlayer);
-			worldObj.playAuxSFXAtEntity((EntityPlayer)null, 1016, new BlockPos(posX, posY, posZ), 0);
+			worldObj.playEvent((EntityPlayer)null, 1016, new BlockPos(posX, posY, posZ), 0);
 
 		}
 	}

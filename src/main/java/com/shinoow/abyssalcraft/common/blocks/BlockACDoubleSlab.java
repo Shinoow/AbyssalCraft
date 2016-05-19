@@ -19,13 +19,13 @@ public class BlockACDoubleSlab extends BlockACSlab {
 	public BlockACDoubleSlab(Block par1SingleSlab, Material par3Material, String tooltype, int harvestlevel)
 	{
 		super(par1SingleSlab, par3Material, tooltype, harvestlevel);
-		setStepSound(par1SingleSlab.getStepSound());
+		setSoundType(par1SingleSlab.getSoundType());
 	}
 
 	public BlockACDoubleSlab(Block par1SingleSlab, Material par3Material)
 	{
 		super(par1SingleSlab, par3Material);
-		setStepSound(par1SingleSlab.getStepSound());
+		setSoundType(par1SingleSlab.getSoundType());
 	}
 
 	@Override

@@ -14,14 +14,13 @@ package com.shinoow.abyssalcraft.common.inventory;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
-import net.minecraft.inventory.ICrafting;
+import net.minecraft.inventory.IContainerListener;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
-
-import com.shinoow.abyssalcraft.common.blocks.tile.TileEntityMaterializer;
-
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+
+import com.shinoow.abyssalcraft.common.blocks.tile.TileEntityMaterializer;
 
 public class ContainerMaterializer extends Container {
 
@@ -47,9 +46,9 @@ public class ContainerMaterializer extends Container {
 	}
 
 	@Override
-	public void onCraftGuiOpened(ICrafting par1ICrafting)
-	{
-		super.onCraftGuiOpened(par1ICrafting);
+	public void addListener(IContainerListener listener)
+    {
+        super.addListener(listener);
 	}
 
 	@Override

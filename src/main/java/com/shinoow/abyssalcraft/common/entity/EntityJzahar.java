@@ -113,19 +113,19 @@ public class EntityJzahar extends EntityMob implements IRangedAttackMob, IAntiEn
 	@Override
 	protected SoundEvent getAmbientSound()
 	{
-		return SoundEvents.entity_blaze_ambient;
+		return SoundEvents.ENTITY_BLAZE_AMBIENT;
 	}
 
 	@Override
 	protected SoundEvent getHurtSound()
 	{
-		return SoundEvents.entity_enderdragon_hurt;
+		return SoundEvents.ENTITY_ENDERDRAGON_HURT;
 	}
 
 	@Override
 	protected SoundEvent getDeathSound()
 	{
-		return SoundEvents.entity_wither_death;
+		return SoundEvents.ENTITY_WITHER_DEATH;
 	}
 
 	@Override
@@ -167,23 +167,17 @@ public class EntityJzahar extends EntityMob implements IRangedAttackMob, IAntiEn
 			bossInfo.setColor(Color.RED);
 	}
 
-	/**
-	 * Makes this boss Entity visible to the given player. Has no effect if this Entity is not a boss.
-	 */
 	@Override
-	public void setBossVisibleTo(EntityPlayerMP player)
+	public void addTrackingPlayer(EntityPlayerMP player)
 	{
-		super.setBossVisibleTo(player);
+		super.addTrackingPlayer(player);
 		bossInfo.addPlayer(player);
 	}
 
-	/**
-	 * Makes this boss Entity non-visible to the given player. Has no effect if this Entity is not a boss.
-	 */
 	@Override
-	public void setBossNonVisibleTo(EntityPlayerMP player)
+	public void removeTrackingPlayer(EntityPlayerMP player)
 	{
-		super.setBossNonVisibleTo(player);
+		super.removeTrackingPlayer(player);
 		bossInfo.removePlayer(player);
 	}
 
@@ -330,7 +324,7 @@ public class EntityJzahar extends EntityMob implements IRangedAttackMob, IAntiEn
 			worldObj.spawnParticle(EnumParticleTypes.SMOKE_LARGE, posX, posY + 1.5D, posZ, 0, 0, 0);
 			if (deathTicks >= 790 && deathTicks <= 800){
 				worldObj.spawnParticle(EnumParticleTypes.EXPLOSION_HUGE, posX, posY + 1.5D, posZ, 0.0D, 0.0D, 0.0D);
-				playSound(SoundEvents.entity_generic_explode, 4, (1.0F + (rand.nextFloat() - rand.nextFloat()) * 0.2F) * 0.7F);
+				playSound(SoundEvents.ENTITY_GENERIC_EXPLODE, 4, (1.0F + (rand.nextFloat() - rand.nextFloat()) * 0.2F) * 0.7F);
 			}
 		}
 
@@ -360,18 +354,18 @@ public class EntityJzahar extends EntityMob implements IRangedAttackMob, IAntiEn
 				List<EntityPlayer> players = worldObj.getEntitiesWithinAABB(EntityPlayer.class, getEntityBoundingBox().expand(3,1,3));
 				for(EntityPlayer player: players){
 					player.setHealth(1);
-					player.addPotionEffect(new PotionEffect(MobEffects.blindness, 2400, 5));
-					player.addPotionEffect(new PotionEffect(MobEffects.nightVision, 2400, 5));
-					player.addPotionEffect(new PotionEffect(MobEffects.confusion, 2400, 5));
-					player.addPotionEffect(new PotionEffect(MobEffects.moveSlowdown, 2400, 5));
-					player.addPotionEffect(new PotionEffect(MobEffects.digSlowdown, 2400, 5));
-					player.addPotionEffect(new PotionEffect(MobEffects.weakness, 2400, 5));
-					player.addPotionEffect(new PotionEffect(MobEffects.hunger, 2400, 5));
-					player.addPotionEffect(new PotionEffect(MobEffects.poison, 2400, 5));
+					player.addPotionEffect(new PotionEffect(MobEffects.BLINDNESS, 2400, 5));
+					player.addPotionEffect(new PotionEffect(MobEffects.NIGHT_VISION, 2400, 5));
+					player.addPotionEffect(new PotionEffect(MobEffects.NAUSEA, 2400, 5));
+					player.addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, 2400, 5));
+					player.addPotionEffect(new PotionEffect(MobEffects.MINING_FATIGUE, 2400, 5));
+					player.addPotionEffect(new PotionEffect(MobEffects.WEAKNESS, 2400, 5));
+					player.addPotionEffect(new PotionEffect(MobEffects.HUNGER, 2400, 5));
+					player.addPotionEffect(new PotionEffect(MobEffects.POISON, 2400, 5));
 					if(player instanceof EntityPlayerMP){
 						WorldServer worldServer = (WorldServer) player.worldObj;
 						EntityPlayerMP mp = (EntityPlayerMP) player;
-						mp.addPotionEffect(new PotionEffect(MobEffects.resistance, 80, 255));
+						mp.addPotionEffect(new PotionEffect(MobEffects.RESISTANCE, 80, 255));
 						mp.mcServer.getPlayerList().transferPlayerToDimension(mp, AbyssalCraft.configDimId4, new TeleporterDarkRealm(worldServer));
 						player.addStat(AbyssalCraft.enterDarkRealm, 1);
 					}
@@ -414,7 +408,7 @@ public class EntityJzahar extends EntityMob implements IRangedAttackMob, IAntiEn
 	}
 
 	private void func_82209_a(int par1, double par2, double par4, double par6, boolean par8) {
-		worldObj.playAuxSFXAtEntity((EntityPlayer)null, 1014, new BlockPos(posX, posY, posZ), 0);
+		worldObj.playEvent((EntityPlayer)null, 1014, new BlockPos(posX, posY, posZ), 0);
 		double d3 = func_82214_u(par1);
 		double d4 = func_82208_v(par1);
 		double d5 = func_82213_w(par1);

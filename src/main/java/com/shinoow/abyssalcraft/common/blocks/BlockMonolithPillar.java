@@ -25,7 +25,7 @@ import com.shinoow.abyssalcraft.api.energy.IEnergyAmplifier;
 public class BlockMonolithPillar extends BlockACBasic implements IEnergyAmplifier {
 
 	public BlockMonolithPillar() {
-		super(Material.rock, 6.0F, 24.0F, SoundType.STONE);
+		super(Material.ROCK, 6.0F, 24.0F, SoundType.STONE);
 		//		setBlockBounds(0.25F, 0.0F, 0.25F, 0.75F, 1.0F, 0.75F);
 		setUnlocalizedName("monolithpillar");
 		setCreativeTab(AbyssalCraft.tabDecoration);

@@ -24,7 +24,7 @@ public class TileEntityODB extends TileEntity {
 	//	}
 
 	@Override
-	public Packet getDescriptionPacket() {
+	public SPacketUpdateTileEntity getUpdatePacket() {
 		NBTTagCompound nbtTag = new NBTTagCompound();
 		writeToNBT(nbtTag);
 		return new SPacketUpdateTileEntity(pos, 1, nbtTag);

@@ -107,9 +107,9 @@ public class EntityAntiCreeper extends EntityMob implements IAntiEntity {
 	protected void entityInit()
 	{
 		super.entityInit();
-		dataWatcher.register(STATE, Integer.valueOf(-1));
-		dataWatcher.register(POWERED, Boolean.valueOf(false));
-		dataWatcher.register(IGNITED, Boolean.valueOf(false));
+		dataManager.register(STATE, Integer.valueOf(-1));
+		dataManager.register(POWERED, Boolean.valueOf(false));
+		dataManager.register(IGNITED, Boolean.valueOf(false));
 	}
 
 	@Override
@@ -117,7 +117,7 @@ public class EntityAntiCreeper extends EntityMob implements IAntiEntity {
 	{
 		super.writeEntityToNBT(par1NBTTagCompound);
 
-		if (dataWatcher.get(POWERED).booleanValue())
+		if (dataManager.get(POWERED).booleanValue())
 			par1NBTTagCompound.setBoolean("powered", true);
 
 		par1NBTTagCompound.setShort("Fuse", (short)fuseTime);
@@ -130,7 +130,7 @@ public class EntityAntiCreeper extends EntityMob implements IAntiEntity {
 	{
 		super.readEntityFromNBT(par1NBTTagCompound);
 
-		dataWatcher.set(POWERED, Boolean.valueOf(par1NBTTagCompound.getBoolean("powered")));
+		dataManager.set(POWERED, Boolean.valueOf(par1NBTTagCompound.getBoolean("powered")));
 
 		if (par1NBTTagCompound.hasKey("Fuse", 99))
 			fuseTime = par1NBTTagCompound.getShort("Fuse");
@@ -155,7 +155,7 @@ public class EntityAntiCreeper extends EntityMob implements IAntiEntity {
 			int i = getCreeperState();
 
 			if (i > 0 && timeSinceIgnited == 0)
-				playSound(SoundEvents.entity_creeper_primed, 1.0F, 0.5F);
+				playSound(SoundEvents.ENTITY_CREEPER_PRIMED, 1.0F, 0.5F);
 
 			timeSinceIgnited += i;
 
@@ -175,13 +175,13 @@ public class EntityAntiCreeper extends EntityMob implements IAntiEntity {
 	@Override
 	protected SoundEvent getHurtSound()
 	{
-		return SoundEvents.entity_creeper_hurt;
+		return SoundEvents.ENTITY_CREEPER_HURT;
 	}
 
 	@Override
 	protected SoundEvent getDeathSound()
 	{
-		return SoundEvents.entity_creeper_death;
+		return SoundEvents.ENTITY_CREEPER_DEATH;
 	}
 
 	@Override
@@ -191,8 +191,8 @@ public class EntityAntiCreeper extends EntityMob implements IAntiEntity {
 
 		if (par1DamageSource.getEntity() instanceof EntityAntiSkeleton)
 		{
-			int i = Item.getIdFromItem(Items.record_13);
-			int j = Item.getIdFromItem(Items.record_wait);
+			int i = Item.getIdFromItem(Items.RECORD_13);
+			int j = Item.getIdFromItem(Items.RECORD_WAIT);
 			int k = i + rand.nextInt(j - i + 1);
 			dropItem(Item.getItemById(k), 1);
 		}
@@ -217,7 +217,7 @@ public class EntityAntiCreeper extends EntityMob implements IAntiEntity {
 
 	public boolean getPowered()
 	{
-		return dataWatcher.get(POWERED).booleanValue();
+		return dataManager.get(POWERED).booleanValue();
 	}
 
 	/**
@@ -232,7 +232,7 @@ public class EntityAntiCreeper extends EntityMob implements IAntiEntity {
 	@Override
 	protected Item getDropItem()
 	{
-		return Items.gunpowder;
+		return Items.GUNPOWDER;
 	}
 
 	/**
@@ -240,7 +240,7 @@ public class EntityAntiCreeper extends EntityMob implements IAntiEntity {
 	 */
 	public int getCreeperState()
 	{
-		return dataWatcher.get(STATE).intValue();
+		return dataManager.get(STATE).intValue();
 	}
 
 	/**
@@ -248,22 +248,22 @@ public class EntityAntiCreeper extends EntityMob implements IAntiEntity {
 	 */
 	public void setCreeperState(int state)
 	{
-		dataWatcher.set(STATE, Integer.valueOf(state));
+		dataManager.set(STATE, Integer.valueOf(state));
 	}
 
 	@Override
 	public void onStruckByLightning(EntityLightningBolt lightningBolt)
 	{
 		super.onStruckByLightning(lightningBolt);
-		dataWatcher.set(POWERED, Boolean.valueOf(true));
+		dataManager.set(POWERED, Boolean.valueOf(true));
 	}
 
 	@Override
 	protected boolean processInteract(EntityPlayer player, EnumHand p_184645_2_, ItemStack stack)
 	{
-		if (stack != null && stack.getItem() == Items.flint_and_steel)
+		if (stack != null && stack.getItem() == Items.FLINT_AND_STEEL)
 		{
-			worldObj.playSound(player, posX, posY, posZ, SoundEvents.item_flintandsteel_use, getSoundCategory(), 1.0F, rand.nextFloat() * 0.4F + 0.8F);
+			worldObj.playSound(player, posX, posY, posZ, SoundEvents.ITEM_FLINTANDSTEEL_USE, getSoundCategory(), 1.0F, rand.nextFloat() * 0.4F + 0.8F);
 			player.swingArm(p_184645_2_);
 
 			if (!worldObj.isRemote)
@@ -289,11 +289,11 @@ public class EntityAntiCreeper extends EntityMob implements IAntiEntity {
 
 	public boolean hasIgnited()
 	{
-		return dataWatcher.get(IGNITED).booleanValue();
+		return dataManager.get(IGNITED).booleanValue();
 	}
 
 	public void ignite()
 	{
-		dataWatcher.set(IGNITED, Boolean.valueOf(true));
+		dataManager.set(IGNITED, Boolean.valueOf(true));
 	}
 }

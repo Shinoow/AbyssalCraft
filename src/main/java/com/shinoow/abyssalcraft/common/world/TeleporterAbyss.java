@@ -11,8 +11,10 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.common.world;
 
-import java.util.Iterator;
-import java.util.List;
+import it.unimi.dsi.fastutil.longs.Long2ObjectMap;
+import it.unimi.dsi.fastutil.longs.Long2ObjectOpenHashMap;
+import it.unimi.dsi.fastutil.objects.ObjectIterator;
+
 import java.util.Random;
 
 import net.minecraft.block.BlockPortal;
@@ -20,22 +22,19 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.EnumFacing;
-import net.minecraft.util.LongHashMap;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.ChunkPos;
 import net.minecraft.util.math.MathHelper;
-import net.minecraft.world.ChunkCoordIntPair;
 import net.minecraft.world.Teleporter;
 import net.minecraft.world.WorldServer;
 
-import com.google.common.collect.Lists;
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
 
 public class TeleporterAbyss extends Teleporter
 {
 	private final WorldServer worldServerInstance;
 	private final Random random;
-	private final LongHashMap<Teleporter.PortalPosition> destinationCoordinateCache = new LongHashMap();
-	private final List<Long> destinationCoordinateKeys = Lists.<Long>newArrayList();
+	private final Long2ObjectMap<Teleporter.PortalPosition> destinationCoordinateCache = new Long2ObjectOpenHashMap(4096);
 
 	public TeleporterAbyss(WorldServer par1WorldServer)
 	{
@@ -71,7 +70,7 @@ public class TeleporterAbyss extends Teleporter
 						int j2 = j + l1;
 						int k2 = k + k1 * i1 - j1 * l;
 						boolean flag = l1 < 0;
-						worldServerInstance.setBlockState(new BlockPos(i2, j2, k2), flag ? ACBlocks.abyssal_stone.getDefaultState() : Blocks.air.getDefaultState());
+						worldServerInstance.setBlockState(new BlockPos(i2, j2, k2), flag ? ACBlocks.abyssal_stone.getDefaultState() : Blocks.AIR.getDefaultState());
 					}
 
 			entityIn.setLocationAndAngles(i, j, k, entityIn.rotationYaw, 0.0F);
@@ -87,10 +86,10 @@ public class TeleporterAbyss extends Teleporter
 		int j = MathHelper.floor_double(entityIn.posZ);
 		boolean flag1 = true;
 		Object object = BlockPos.ORIGIN;
-		long k = ChunkCoordIntPair.chunkXZ2Int(i, j);
+		long k = ChunkPos.chunkXZ2Int(i, j);
 
-		if (destinationCoordinateCache.containsItem(k)) {
-			Teleporter.PortalPosition portalposition = destinationCoordinateCache.getValueByKey(k);
+		if (destinationCoordinateCache.containsKey(k)) {
+			Teleporter.PortalPosition portalposition = destinationCoordinateCache.get(k);
 			d0 = 0.0D;
 			object = portalposition;
 			portalposition.lastUpdateTime = worldServerInstance.getTotalWorldTime();
@@ -123,8 +122,7 @@ public class TeleporterAbyss extends Teleporter
 
 		if (d0 >= 0.0D) {
 			if (flag1) {
-				destinationCoordinateCache.add(k, new Teleporter.PortalPosition((BlockPos) object, worldServerInstance.getTotalWorldTime()));
-				destinationCoordinateKeys.add(Long.valueOf(k));
+				destinationCoordinateCache.put(k, new Teleporter.PortalPosition((BlockPos) object, worldServerInstance.getTotalWorldTime()));
 			}
 
 			double d4 = ((BlockPos) object).getX() + 0.5D;
@@ -241,9 +239,9 @@ public class TeleporterAbyss extends Teleporter
 				label142:
 
 					for (int j3 = worldServerInstance.getActualHeight() - 1; j3 >= 0; --j3)
-						if (worldServerInstance.isAirBlock(blockpos$mutableblockpos.set(j2, j3, l2)))
+						if (worldServerInstance.isAirBlock(blockpos$mutableblockpos.setPos(j2, j3, l2)))
 						{
-							while (j3 > 0 && worldServerInstance.isAirBlock(blockpos$mutableblockpos.set(j2, j3 - 1, l2)))
+							while (j3 > 0 && worldServerInstance.isAirBlock(blockpos$mutableblockpos.setPos(j2, j3 - 1, l2)))
 								--j3;
 
 							for (int k3 = i2; k3 < i2 + 4; ++k3)
@@ -264,7 +262,7 @@ public class TeleporterAbyss extends Teleporter
 											int i5 = j2 + (k4 - 1) * l3 + j4 * i4;
 											int j5 = j3 + l4;
 											int k5 = l2 + (k4 - 1) * i4 - j4 * l3;
-											blockpos$mutableblockpos.set(i5, j5, k5);
+											blockpos$mutableblockpos.setPos(i5, j5, k5);
 
 											if (l4 < 0 && !worldServerInstance.getBlockState(blockpos$mutableblockpos).getMaterial().isSolid() || l4 >= 0 && !worldServerInstance.isAirBlock(blockpos$mutableblockpos))
 												continue label142;
@@ -297,9 +295,9 @@ public class TeleporterAbyss extends Teleporter
 					label562:
 
 						for (int i7 = worldServerInstance.getActualHeight() - 1; i7 >= 0; --i7)
-							if (worldServerInstance.isAirBlock(blockpos$mutableblockpos.set(l5, i7, j6)))
+							if (worldServerInstance.isAirBlock(blockpos$mutableblockpos.setPos(l5, i7, j6)))
 							{
-								while (i7 > 0 && worldServerInstance.isAirBlock(blockpos$mutableblockpos.set(l5, i7 - 1, j6)))
+								while (i7 > 0 && worldServerInstance.isAirBlock(blockpos$mutableblockpos.setPos(l5, i7 - 1, j6)))
 									--i7;
 
 								for (int k7 = i2; k7 < i2 + 2; ++k7)
@@ -313,7 +311,7 @@ public class TeleporterAbyss extends Teleporter
 											int j12 = l5 + (j10 - 1) * j8;
 											int i13 = i7 + j11;
 											int j13 = j6 + (j10 - 1) * j9;
-											blockpos$mutableblockpos.set(j12, i13, j13);
+											blockpos$mutableblockpos.setPos(j12, i13, j13);
 
 											if (j11 < 0 && !worldServerInstance.getBlockState(blockpos$mutableblockpos).getMaterial().isSolid() || j11 >= 0 && !worldServerInstance.isAirBlock(blockpos$mutableblockpos))
 												continue label562;
@@ -360,7 +358,7 @@ public class TeleporterAbyss extends Teleporter
 						int k10 = k2 + k8;
 						int k11 = k6 + (l7 - 1) * i3 - j7 * l6;
 						boolean flag = k8 < 0;
-						worldServerInstance.setBlockState(new BlockPos(k9, k10, k11), flag ? ACBlocks.abyssal_stone.getDefaultState() : Blocks.air.getDefaultState());
+						worldServerInstance.setBlockState(new BlockPos(k9, k10, k11), flag ? ACBlocks.abyssal_stone.getDefaultState() : Blocks.AIR.getDefaultState());
 					}
 		}
 
@@ -394,24 +392,22 @@ public class TeleporterAbyss extends Teleporter
 
 	@SuppressWarnings("rawtypes")
 	@Override
-	public void removeStalePortalLocations(long par1)
-	{
-		if (par1 % 100L == 0L)
-		{
-			Iterator iterator = destinationCoordinateKeys.iterator();
-			long j = par1 - 600L;
+	public void removeStalePortalLocations(long worldTime)
+    {
+        if (worldTime % 100L == 0L)
+        {
+            long i = worldTime - 300L;
+            ObjectIterator<Teleporter.PortalPosition> objectiterator = this.destinationCoordinateCache.values().iterator();
 
-			while (iterator.hasNext())
-			{
-				Long olong = (Long)iterator.next();
-				PortalPosition portalposition = destinationCoordinateCache.getValueByKey(olong.longValue());
+            while (objectiterator.hasNext())
+            {
+                Teleporter.PortalPosition teleporter$portalposition = objectiterator.next();
 
-				if (portalposition == null || portalposition.lastUpdateTime < j)
-				{
-					iterator.remove();
-					destinationCoordinateCache.remove(olong.longValue());
-				}
-			}
-		}
-	}
+                if (teleporter$portalposition == null || teleporter$portalposition.lastUpdateTime < i)
+                {
+                    objectiterator.remove();
+                }
+            }
+        }
+    }
 }

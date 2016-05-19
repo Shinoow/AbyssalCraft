@@ -13,7 +13,7 @@ package com.shinoow.abyssalcraft.common.world.biome;
 
 
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.biome.BiomeGenBase;
+import net.minecraft.world.biome.Biome;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -21,7 +21,7 @@ import com.shinoow.abyssalcraft.common.entity.EntityShadowBeast;
 import com.shinoow.abyssalcraft.common.entity.EntityShadowCreature;
 import com.shinoow.abyssalcraft.common.entity.EntityShadowMonster;
 
-public class BiomeGenDarkRealm extends BiomeGenBase {
+public class BiomeGenDarkRealm extends Biome {
 
 	@SuppressWarnings("unchecked")
 	public BiomeGenDarkRealm(BiomeProperties par1){

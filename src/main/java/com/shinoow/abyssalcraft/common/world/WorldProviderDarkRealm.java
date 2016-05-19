@@ -33,8 +33,8 @@ public class WorldProviderDarkRealm extends WorldProvider {
 	}
 
 	@Override
-	public void registerWorldChunkManager() {
-		worldChunkMgr = new BiomeProviderSingle(ACBiomes.dark_realm);
+	public void createBiomeProvider() {
+		biomeProvider = new BiomeProviderSingle(ACBiomes.dark_realm);
 		setDimension(AbyssalCraft.configDimId4);
 		hasNoSky = true;
 	}

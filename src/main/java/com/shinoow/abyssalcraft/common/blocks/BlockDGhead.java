@@ -31,9 +31,9 @@ import com.shinoow.abyssalcraft.common.blocks.tile.TileEntityDGhead;
 public class BlockDGhead extends BlockContainer /*implements IInfusionStabiliser*/ {
 
 	public BlockDGhead() {
-		super(Material.cloth);
+		super(Material.CLOTH);
 		//		setBlockBounds(0.1F, 0.0F, 0.1F, 0.8F, 0.7F, 0.8F);
-		setStepSound(SoundType.CLOTH);
+		setSoundType(SoundType.CLOTH);
 	}
 
 	@Override

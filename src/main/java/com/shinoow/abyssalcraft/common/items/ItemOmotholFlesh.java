@@ -36,18 +36,18 @@ public class ItemOmotholFlesh extends ItemFood {
 	@Override
 	public void onFoodEaten(ItemStack itemStack, World world, EntityPlayer entityPlayer)
 	{
-		world.playSound(entityPlayer, entityPlayer.getPosition(), SoundEvents.entity_player_burp, SoundCategory.PLAYERS, 0.5F, world.rand.nextFloat() * 0.1F + 0.9F);
+		world.playSound(entityPlayer, entityPlayer.getPosition(), SoundEvents.ENTITY_PLAYER_BURP, SoundCategory.PLAYERS, 0.5F, world.rand.nextFloat() * 0.1F + 0.9F);
 		if(EntityUtil.isPlayerCoralium(entityPlayer)){
-			entityPlayer.addPotionEffect(new PotionEffect(MobEffects.weakness, 100));
-			entityPlayer.addPotionEffect(new PotionEffect(MobEffects.hunger, 300, 1));
-			entityPlayer.addPotionEffect(new PotionEffect(MobEffects.confusion, 200));
+			entityPlayer.addPotionEffect(new PotionEffect(MobEffects.WEAKNESS, 100));
+			entityPlayer.addPotionEffect(new PotionEffect(MobEffects.HUNGER, 300, 1));
+			entityPlayer.addPotionEffect(new PotionEffect(MobEffects.NAUSEA, 200));
 		} else {
-			entityPlayer.addPotionEffect(new PotionEffect(MobEffects.weakness, 100));
-			entityPlayer.addPotionEffect(new PotionEffect(MobEffects.hunger, 400, 1));
-			entityPlayer.addPotionEffect(new PotionEffect(MobEffects.confusion, 300));
+			entityPlayer.addPotionEffect(new PotionEffect(MobEffects.WEAKNESS, 100));
+			entityPlayer.addPotionEffect(new PotionEffect(MobEffects.HUNGER, 400, 1));
+			entityPlayer.addPotionEffect(new PotionEffect(MobEffects.NAUSEA, 300));
 		}
 
-		entityPlayer.addPotionEffect(new PotionEffect(MobEffects.blindness, 40));
-		entityPlayer.addPotionEffect(new PotionEffect(MobEffects.nightVision, 40));
+		entityPlayer.addPotionEffect(new PotionEffect(MobEffects.BLINDNESS, 40));
+		entityPlayer.addPotionEffect(new PotionEffect(MobEffects.NIGHT_VISION, 40));
 	}
 }

@@ -48,7 +48,7 @@ public class EntityAntiBat extends EntityAmbientCreature implements IAntiEntity 
 	protected void entityInit()
 	{
 		super.entityInit();
-		dataWatcher.register(HANGING, new Byte((byte)0));
+		dataManager.register(HANGING, new Byte((byte)0));
 	}
 
 	@Override
@@ -66,19 +66,19 @@ public class EntityAntiBat extends EntityAmbientCreature implements IAntiEntity 
 	@Override
 	protected SoundEvent getAmbientSound()
 	{
-		return getIsBatHanging() && rand.nextInt(4) != 0 ? null : SoundEvents.entity_bat_ambient;
+		return getIsBatHanging() && rand.nextInt(4) != 0 ? null : SoundEvents.ENTITY_BAT_AMBIENT;
 	}
 
 	@Override
 	protected SoundEvent getHurtSound()
 	{
-		return SoundEvents.entity_bat_hurt;
+		return SoundEvents.ENTITY_BAT_HURT;
 	}
 
 	@Override
 	protected SoundEvent getDeathSound()
 	{
-		return SoundEvents.entity_bat_death;
+		return SoundEvents.ENTITY_BAT_DEATH;
 	}
 
 	@Override
@@ -109,17 +109,17 @@ public class EntityAntiBat extends EntityAmbientCreature implements IAntiEntity 
 
 	public boolean getIsBatHanging()
 	{
-		return (dataWatcher.get(HANGING) & 1) != 0;
+		return (dataManager.get(HANGING) & 1) != 0;
 	}
 
 	public void setIsBatHanging(boolean par1)
 	{
-		byte b0 = dataWatcher.get(HANGING).byteValue();
+		byte b0 = dataManager.get(HANGING).byteValue();
 
 		if (par1)
-			dataWatcher.set(HANGING, Byte.valueOf((byte)(b0 | 1)));
+			dataManager.set(HANGING, Byte.valueOf((byte)(b0 | 1)));
 		else
-			dataWatcher.set(HANGING, Byte.valueOf((byte)(b0 & -2)));
+			dataManager.set(HANGING, Byte.valueOf((byte)(b0 & -2)));
 	}
 
 	@Override
@@ -147,7 +147,7 @@ public class EntityAntiBat extends EntityAmbientCreature implements IAntiEntity 
 			if (!worldObj.getBlockState(blockpos1).isNormalCube())
 			{
 				setIsBatHanging(false);
-				worldObj.playAuxSFXAtEntity((EntityPlayer)null, 1015, blockpos, 0);
+				worldObj.playEvent((EntityPlayer)null, 1015, blockpos, 0);
 			}
 			else
 			{
@@ -157,7 +157,7 @@ public class EntityAntiBat extends EntityAmbientCreature implements IAntiEntity 
 				if (worldObj.getClosestPlayerToEntity(this, 4.0D) != null)
 				{
 					setIsBatHanging(false);
-					worldObj.playAuxSFXAtEntity((EntityPlayer)null, 1015, blockpos, 0);
+					worldObj.playEvent((EntityPlayer)null, 1015, blockpos, 0);
 				}
 			}
 		}
@@ -176,7 +176,7 @@ public class EntityAntiBat extends EntityAmbientCreature implements IAntiEntity 
 			motionY += (Math.signum(d1) * 0.699999988079071D - motionY) * 0.10000000149011612D;
 			motionZ += (Math.signum(d2) * 0.5D - motionZ) * 0.10000000149011612D;
 			float f = (float)(MathHelper.atan2(motionZ, motionX) * 180.0D / Math.PI) - 90.0F;
-			float f1 = MathHelper.wrapAngleTo180_float(f - rotationYaw);
+			float f1 = MathHelper.wrapDegrees(f - rotationYaw);
 			moveForward = 0.5F;
 			rotationYaw += f1;
 
@@ -221,14 +221,14 @@ public class EntityAntiBat extends EntityAmbientCreature implements IAntiEntity 
 	public void readEntityFromNBT(NBTTagCompound par1NBTTagCompound)
 	{
 		super.readEntityFromNBT(par1NBTTagCompound);
-		dataWatcher.set(HANGING, Byte.valueOf(par1NBTTagCompound.getByte("BatFlags")));
+		dataManager.set(HANGING, Byte.valueOf(par1NBTTagCompound.getByte("BatFlags")));
 	}
 
 	@Override
 	public void writeEntityToNBT(NBTTagCompound par1NBTTagCompound)
 	{
 		super.writeEntityToNBT(par1NBTTagCompound);
-		par1NBTTagCompound.setByte("BatFlags", dataWatcher.get(HANGING).byteValue());
+		par1NBTTagCompound.setByte("BatFlags", dataManager.get(HANGING).byteValue());
 	}
 
 

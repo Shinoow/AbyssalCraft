@@ -193,7 +193,7 @@ public class EntityPSDLTracker extends Entity
 				if (shatterOrDrop)
 					worldObj.spawnEntityInWorld(new EntityItem(worldObj, posX, posY, posZ, new ItemStack(ACItems.powerstone_tracker)));
 				else
-					worldObj.playAuxSFX(2003, new BlockPos(this), 0);
+					worldObj.playEvent(2003, new BlockPos(this), 0);
 			}
 		}
 	}
@@ -230,11 +230,8 @@ public class EntityPSDLTracker extends Entity
 		return 15728880;
 	}
 
-	/**
-	 * If returns false, the item will not inflict any damage against entities.
-	 */
 	@Override
-	public boolean canAttackWithItem()
+	public boolean canBeAttackedWithItem()
 	{
 		return false;
 	}

@@ -47,11 +47,11 @@ public class BlockTieredSacrificialAltar extends BlockContainer {
 	public static final PropertyEnum DIMENSION = PropertyEnum.create("dimension", EnumDimType.class);
 
 	public BlockTieredSacrificialAltar(){
-		super(Material.rock);
+		super(Material.ROCK);
 		setHardness(6.0F);
 		setResistance(12.0F);
 		setUnlocalizedName("tieredsacrificialaltar");
-		setStepSound(SoundType.STONE);
+		setSoundType(SoundType.STONE);
 		//		setBlockBounds(0.15F, 0.0F, 0.15F, 0.85F, 1.0F, 0.85F);
 		setCreativeTab(AbyssalCraft.tabDecoration);
 		//		setLightLevel(0.375F);
@@ -129,7 +129,7 @@ public class BlockTieredSacrificialAltar extends BlockContainer {
 			if(((TileEntityTieredSacrificialAltar)tile).getItem() != null){
 				player.inventory.addItemStackToInventory(((TileEntityTieredSacrificialAltar)tile).getItem());
 				((TileEntityTieredSacrificialAltar)tile).setItem(null);
-				world.playSound(pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, SoundEvents.entity_item_pickup, SoundCategory.PLAYERS, 0.5F, world.rand.nextFloat() - world.rand.nextFloat() * 0.2F + 1, false);
+				world.playSound(pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, SoundEvents.ENTITY_ITEM_PICKUP, SoundCategory.PLAYERS, 0.5F, world.rand.nextFloat() - world.rand.nextFloat() * 0.2F + 1, false);
 				return true;
 			} else //				ItemStack heldItem = player.getHeldItem();
 				if(heldItem != null){
@@ -137,7 +137,7 @@ public class BlockTieredSacrificialAltar extends BlockContainer {
 					newItem.stackSize = 1;
 					((TileEntityTieredSacrificialAltar)tile).setItem(newItem);
 					heldItem.stackSize--;
-					world.playSound(pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, SoundEvents.entity_item_pickup, SoundCategory.PLAYERS, 0.5F, world.rand.nextFloat() - world.rand.nextFloat() * 0.2F + 1, false);
+					world.playSound(pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, SoundEvents.ENTITY_ITEM_PICKUP, SoundCategory.PLAYERS, 0.5F, world.rand.nextFloat() - world.rand.nextFloat() * 0.2F + 1, false);
 					return true;
 				}
 		return false;

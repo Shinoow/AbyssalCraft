@@ -40,8 +40,8 @@ public class NecronomiconBreedingRitual extends NecronomiconRitual {
 	private boolean shoggothInfestation;
 
 	public NecronomiconBreedingRitual() {
-		super("breeding", 0, 500F, new Object[]{Items.wheat, Items.potato, Items.carrot, Items.melon,
-				Blocks.pumpkin, Items.wheat_seeds, Items.melon_seeds, Items.pumpkin_seeds});
+		super("breeding", 0, 500F, new Object[]{Items.WHEAT, Items.POTATO, Items.CARROT, Items.MELON,
+				Blocks.PUMPKIN, Items.WHEAT_SEEDS, Items.MELON_SEEDS, Items.PUMPKIN_SEEDS});
 	}
 
 	/**

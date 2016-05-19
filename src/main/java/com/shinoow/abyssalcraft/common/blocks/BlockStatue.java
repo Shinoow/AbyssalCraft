@@ -31,10 +31,10 @@ import com.shinoow.abyssalcraft.common.blocks.tile.TileStatueDirectional;
 public abstract class BlockStatue extends BlockContainer {
 
 	protected BlockStatue() {
-		super(Material.rock);
+		super(Material.ROCK);
 		setHardness(6.0F);
 		setResistance(12.0F);
-		setStepSound(SoundType.STONE);
+		setSoundType(SoundType.STONE);
 		setCreativeTab(AbyssalCraft.tabDecoration);
 		//		setBlockBounds(0.25F, 0.0F, 0.25F, 0.75F, 1.0F, 0.75F);
 	}

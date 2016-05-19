@@ -87,7 +87,7 @@ public class EntityAntiSpider extends EntityMob implements IAntiEntity {
 	protected void entityInit()
 	{
 		super.entityInit();
-		dataWatcher.register(CLIMBING, new Byte((byte)0));
+		dataManager.register(CLIMBING, new Byte((byte)0));
 	}
 
 	@Override
@@ -112,31 +112,31 @@ public class EntityAntiSpider extends EntityMob implements IAntiEntity {
 	@Override
 	protected SoundEvent getAmbientSound()
 	{
-		return SoundEvents.entity_spider_ambient;
+		return SoundEvents.ENTITY_SPIDER_AMBIENT;
 	}
 
 	@Override
 	protected SoundEvent getHurtSound()
 	{
-		return SoundEvents.entity_spider_hurt;
+		return SoundEvents.ENTITY_SPIDER_HURT;
 	}
 
 	@Override
 	protected SoundEvent getDeathSound()
 	{
-		return SoundEvents.entity_spider_death;
+		return SoundEvents.ENTITY_SPIDER_DEATH;
 	}
 
 	@Override
 	protected void playStepSound(BlockPos pos, Block blockIn)
 	{
-		playSound(SoundEvents.entity_spider_step, 0.15F, 1.0F);
+		playSound(SoundEvents.ENTITY_SPIDER_STEP, 0.15F, 1.0F);
 	}
 
 	@Override
 	protected Item getDropItem()
 	{
-		return Items.string;
+		return Items.STRING;
 	}
 
 	@Override
@@ -166,7 +166,7 @@ public class EntityAntiSpider extends EntityMob implements IAntiEntity {
 	@Override
 	public boolean isPotionApplicable(PotionEffect par1PotionEffect)
 	{
-		return par1PotionEffect.getPotion() == MobEffects.poison ? false : super.isPotionApplicable(par1PotionEffect);
+		return par1PotionEffect.getPotion() == MobEffects.POISON ? false : super.isPotionApplicable(par1PotionEffect);
 	}
 
 	@Override
@@ -186,7 +186,7 @@ public class EntityAntiSpider extends EntityMob implements IAntiEntity {
 	 */
 	public boolean isBesideClimbableBlock()
 	{
-		return (dataWatcher.get(CLIMBING) & 1) != 0;
+		return (dataManager.get(CLIMBING) & 1) != 0;
 	}
 
 	/**
@@ -195,14 +195,14 @@ public class EntityAntiSpider extends EntityMob implements IAntiEntity {
 	 */
 	public void setBesideClimbableBlock(boolean par1)
 	{
-		byte b0 = dataWatcher.get(CLIMBING).byteValue();
+		byte b0 = dataManager.get(CLIMBING).byteValue();
 
 		if (par1)
 			b0 = (byte)(b0 | 1);
 		else
 			b0 &= -2;
 
-		dataWatcher.set(CLIMBING, Byte.valueOf(b0));
+		dataManager.set(CLIMBING, Byte.valueOf(b0));
 	}
 
 	@Override
@@ -268,7 +268,7 @@ public class EntityAntiSpider extends EntityMob implements IAntiEntity {
 		}
 
 		@Override
-		protected double func_179512_a(EntityLivingBase attackTarget)
+		protected double getAttackReachSqr(EntityLivingBase attackTarget)
 		{
 			return 4.0F + attackTarget.width;
 		}
@@ -301,13 +301,13 @@ public class EntityAntiSpider extends EntityMob implements IAntiEntity {
 			int i = par1Random.nextInt(5);
 
 			if (i <= 1)
-				field_111105_a = MobEffects.moveSpeed;
+				field_111105_a = MobEffects.SPEED;
 			else if (i <= 2)
-				field_111105_a = MobEffects.damageBoost;
+				field_111105_a = MobEffects.STRENGTH;
 			else if (i <= 3)
-				field_111105_a = MobEffects.regeneration;
+				field_111105_a = MobEffects.REGENERATION;
 			else if (i <= 4)
-				field_111105_a = MobEffects.invisibility;
+				field_111105_a = MobEffects.INVISIBILITY;
 		}
 	}
 

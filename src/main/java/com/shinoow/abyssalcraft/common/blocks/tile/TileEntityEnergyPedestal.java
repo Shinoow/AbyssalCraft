@@ -45,7 +45,7 @@ public class TileEntityEnergyPedestal extends TileEntity implements IEnergyConta
 	}
 
 	@Override
-	public void writeToNBT(NBTTagCompound nbttagcompound)
+	public NBTTagCompound writeToNBT(NBTTagCompound nbttagcompound)
 	{
 		super.writeToNBT(nbttagcompound);
 		NBTTagCompound nbtItem = new NBTTagCompound();
@@ -54,10 +54,12 @@ public class TileEntityEnergyPedestal extends TileEntity implements IEnergyConta
 		nbttagcompound.setTag("Item", nbtItem);
 		nbttagcompound.setInteger("Rot", rot);
 		nbttagcompound.setFloat("PotEnergy", energy);
+		
+		return nbttagcompound;
 	}
 
 	@Override
-	public Packet getDescriptionPacket() {
+	public SPacketUpdateTileEntity getUpdatePacket() {
 		NBTTagCompound nbtTag = new NBTTagCompound();
 		writeToNBT(nbtTag);
 		return new SPacketUpdateTileEntity(pos, 1, nbtTag);

@@ -60,7 +60,7 @@ public class FireMessage extends AbstractMessage<FireMessage> {
 		World world = player.worldObj;
 		BlockPos pos = new BlockPos(x, y, z);
 
-		world.playSound(x, y, z, SoundEvents.block_fire_extinguish, SoundCategory.BLOCKS, 1.0F, 1.0F, true);
+		world.playSound(x, y, z, SoundEvents.BLOCK_FIRE_EXTINGUISH, SoundCategory.BLOCKS, 1.0F, 1.0F, true);
 		world.setBlockToAir(pos);
 	}
 

@@ -46,8 +46,8 @@ public class EntityAntiPig extends EntityAnimal implements IAntiEntity {
 		tasks.addTask(0, new EntityAISwimming(this));
 		tasks.addTask(1, new EntityAIPanic(this, 1.25D));
 		tasks.addTask(3, new EntityAIMate(this, 1.0D));
-		tasks.addTask(4, new EntityAITempt(this, 1.2D, Items.carrot_on_a_stick, false));
-		tasks.addTask(4, new EntityAITempt(this, 1.2D, Items.carrot, false));
+		tasks.addTask(4, new EntityAITempt(this, 1.2D, Items.CARROT_ON_A_STICK, false));
+		tasks.addTask(4, new EntityAITempt(this, 1.2D, Items.CARROT, false));
 		tasks.addTask(5, new EntityAIFollowParent(this, 1.1D));
 		tasks.addTask(6, new EntityAIWander(this, 1.0D));
 		tasks.addTask(7, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
@@ -71,25 +71,25 @@ public class EntityAntiPig extends EntityAnimal implements IAntiEntity {
 	@Override
 	protected SoundEvent getAmbientSound()
 	{
-		return SoundEvents.entity_pig_ambient;
+		return SoundEvents.ENTITY_PIG_AMBIENT;
 	}
 
 	@Override
 	protected SoundEvent getHurtSound()
 	{
-		return SoundEvents.entity_pig_hurt;
+		return SoundEvents.ENTITY_GHAST_HURT;
 	}
 
 	@Override
 	protected SoundEvent getDeathSound()
 	{
-		return SoundEvents.entity_pig_death;
+		return SoundEvents.ENTITY_PIG_DEATH;
 	}
 
 	@Override
-	protected void playStepSound(BlockPos pos, Block par4Block)
+	protected void playStepSound(BlockPos pos, Block par4)
 	{
-		playSound(SoundEvents.entity_pig_step, 0.15F, 1.0F);
+		playSound(SoundEvents.ENTITY_PIG_STEP, 0.15F, 1.0F);
 	}
 
 	@Override
@@ -130,6 +130,6 @@ public class EntityAntiPig extends EntityAnimal implements IAntiEntity {
 	@Override
 	public boolean isBreedingItem(ItemStack par1ItemStack)
 	{
-		return par1ItemStack != null && par1ItemStack.getItem() == Items.carrot;
+		return par1ItemStack != null && par1ItemStack.getItem() == Items.CARROT;
 	}
 }

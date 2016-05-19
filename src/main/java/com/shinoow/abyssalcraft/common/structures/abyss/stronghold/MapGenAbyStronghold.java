@@ -19,10 +19,10 @@ import java.util.Map.Entry;
 import java.util.Random;
 
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.ChunkPos;
 import net.minecraft.util.math.MathHelper;
-import net.minecraft.world.ChunkCoordIntPair;
 import net.minecraft.world.World;
-import net.minecraft.world.biome.BiomeGenBase;
+import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.structure.MapGenStructure;
 import net.minecraft.world.gen.structure.StructureComponent;
 import net.minecraft.world.gen.structure.StructureStart;
@@ -31,21 +31,21 @@ import com.shinoow.abyssalcraft.api.biome.ACBiomes;
 
 public class MapGenAbyStronghold extends MapGenStructure
 {
-	public static ArrayList<BiomeGenBase> allowedBiomes = new ArrayList<BiomeGenBase>(Arrays.asList(ACBiomes.abyssal_wastelands));
-	private BiomeGenBase[] allowedBiomeGenBases;
+	public static ArrayList<Biome> allowedBiomes = new ArrayList<Biome>(Arrays.asList(ACBiomes.abyssal_wastelands));
+	private Biome[] allowedBiomeGenBases;
 
 	/**
 	 * is spawned false and set true once the defined BiomeGenBases were compared with the present ones
 	 */
 	private boolean ranBiomeCheck;
-	private ChunkCoordIntPair[] structureCoords;
+	private ChunkPos[] structureCoords;
 	private double field_82671_h;
 	private int field_82672_i;
 
 	public MapGenAbyStronghold()
 	{
-		allowedBiomeGenBases = allowedBiomes.toArray(new BiomeGenBase[0]);
-		structureCoords = new ChunkCoordIntPair[128];
+		allowedBiomeGenBases = allowedBiomes.toArray(new Biome[0]);
+		structureCoords = new ChunkPos[128];
 		field_82671_h = 32.0D;
 		field_82672_i = 3;
 	}
@@ -59,7 +59,7 @@ public class MapGenAbyStronghold extends MapGenStructure
 			if (((String)var3.getKey()).equals("distance"))
 				field_82671_h = MathHelper.parseDoubleWithDefaultAndMax((String)var3.getValue(), field_82671_h, 1.0D);
 			else if (((String)var3.getKey()).equals("count"))
-				structureCoords = new ChunkCoordIntPair[MathHelper.parseIntWithDefaultAndMax((String)var3.getValue(), structureCoords.length, 1)];
+				structureCoords = new ChunkPos[MathHelper.parseIntWithDefaultAndMax((String)var3.getValue(), structureCoords.length, 1)];
 			else if (((String)var3.getKey()).equals("spread"))
 				field_82672_i = MathHelper.parseIntWithDefaultAndMax((String)var3.getValue(), field_82672_i, 1);
 	}
@@ -84,9 +84,9 @@ public class MapGenAbyStronghold extends MapGenStructure
 		BlockPos.MutableBlockPos blockpos$mutableblockpos = new BlockPos.MutableBlockPos(0, 0, 0);
 		double d0 = Double.MAX_VALUE;
 
-		for (ChunkCoordIntPair chunkcoordintpair : structureCoords)
+		for (ChunkPos chunkcoordintpair : structureCoords)
 		{
-			blockpos$mutableblockpos.set((chunkcoordintpair.chunkXPos << 4) + 8, 32, (chunkcoordintpair.chunkZPos << 4) + 8);
+			blockpos$mutableblockpos.setPos((chunkcoordintpair.chunkXPos << 4) + 8, 32, (chunkcoordintpair.chunkZPos << 4) + 8);
 			double d1 = blockpos$mutableblockpos.distanceSq(pos);
 
 			if (blockpos == null)
@@ -114,12 +114,12 @@ public class MapGenAbyStronghold extends MapGenStructure
 			ranBiomeCheck = true;
 		}
 
-		ChunkCoordIntPair[] var14 = structureCoords;
+		ChunkPos[] var14 = structureCoords;
 		int var15 = var14.length;
 
 		for (int var5 = 0; var5 < var15; ++var5)
 		{
-			ChunkCoordIntPair var16 = var14[var5];
+			ChunkPos var16 = var14[var5];
 
 			if (par1 == var16.chunkXPos && par2 == var16.chunkZPos)
 				return true;
@@ -135,7 +135,7 @@ public class MapGenAbyStronghold extends MapGenStructure
 
 		for (StructureStart structurestart : structureMap.values())
 			if (i < structureCoords.length)
-				structureCoords[i++] = new ChunkCoordIntPair(structurestart.getChunkPosX(), structurestart.getChunkPosZ());
+				structureCoords[i++] = new ChunkPos(structurestart.getChunkPosX(), structurestart.getChunkPosZ());
 
 		Random random = new Random();
 		random.setSeed(worldObj.getSeed());
@@ -159,7 +159,7 @@ public class MapGenAbyStronghold extends MapGenStructure
 				}
 
 				if (i1 >= l)
-					structureCoords[i1] = new ChunkCoordIntPair(j1, k1);
+					structureCoords[i1] = new ChunkPos(j1, k1);
 
 				d1 += Math.PI * 2D / field_82672_i;
 				++k;
@@ -184,12 +184,12 @@ public class MapGenAbyStronghold extends MapGenStructure
 	protected List getCoordList()
 	{
 		ArrayList var1 = new ArrayList();
-		ChunkCoordIntPair[] var2 = structureCoords;
+		ChunkPos[] var2 = structureCoords;
 		int var3 = var2.length;
 
 		for (int var4 = 0; var4 < var3; ++var4)
 		{
-			ChunkCoordIntPair var5 = var2[var4];
+			ChunkPos var5 = var2[var4];
 
 			if (var5 != null)
 				var1.add(var5.getCenterBlock(64));
@@ -203,7 +203,7 @@ public class MapGenAbyStronghold extends MapGenStructure
 	{
 		MapGenAbyStronghold.Start start;
 
-		for (start = new MapGenAbyStronghold.Start(worldObj, rand, par1, par2); start.func_186161_c().isEmpty() || ((StructureAbyStrongholdPieces.Stairs2)start.func_186161_c().get(0)).strongholdPortalRoom == null; start = new MapGenAbyStronghold.Start(worldObj, rand, par1, par2))
+		for (start = new MapGenAbyStronghold.Start(worldObj, rand, par1, par2); start.getComponents().isEmpty() || ((StructureAbyStrongholdPieces.Stairs2)start.getComponents().get(0)).strongholdPortalRoom == null; start = new MapGenAbyStronghold.Start(worldObj, rand, par1, par2))
 			;
 
 		return start;

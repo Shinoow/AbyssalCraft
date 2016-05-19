@@ -43,15 +43,17 @@ public class TileEntityShoggothBiomass extends TileEntity implements ITickable {
 	}
 
 	@Override
-	public void writeToNBT(NBTTagCompound nbttagcompound)
+	public NBTTagCompound writeToNBT(NBTTagCompound nbttagcompound)
 	{
 		super.writeToNBT(nbttagcompound);
 		nbttagcompound.setInteger("Cooldown", cooldown);
 		nbttagcompound.setInteger("SpawnedShoggoths", spawnedShoggoths);
+		
+		return nbttagcompound;
 	}
 
 	@Override
-	public Packet getDescriptionPacket() {
+	public SPacketUpdateTileEntity getUpdatePacket() {
 		NBTTagCompound nbtTag = new NBTTagCompound();
 		writeToNBT(nbtTag);
 		return new SPacketUpdateTileEntity(pos, 1, nbtTag);
@@ -161,10 +163,10 @@ public class TileEntityShoggothBiomass extends TileEntity implements ITickable {
 														if(worldObj.getBlockState(new BlockPos(x, y + 1, z - 4)).getMaterial().isSolid()){
 															if(worldObj.getBlockState(new BlockPos(x - 4, y + 1, z - 4)).getMaterial().isSolid()){
 																if(worldObj.getBlockState(new BlockPos(x, y + 15, z)).getMaterial().isSolid()){
-																	entity.addPotionEffect(new PotionEffect(MobEffects.resistance, 10, 100));
+																	entity.addPotionEffect(new PotionEffect(MobEffects.RESISTANCE, 10, 100));
 																	entity.setLocationAndAngles(x, y + 20, z, entity.rotationYaw, entity.rotationPitch);
 																} else {
-																	entity.addPotionEffect(new PotionEffect(MobEffects.resistance, 10, 100));
+																	entity.addPotionEffect(new PotionEffect(MobEffects.RESISTANCE, 10, 100));
 																	entity.setLocationAndAngles(x, y + 15, z, entity.rotationYaw, entity.rotationPitch);
 																}
 															} else entity.setLocationAndAngles(x - 4, y + 1, z - 4, entity.rotationYaw, entity.rotationPitch);

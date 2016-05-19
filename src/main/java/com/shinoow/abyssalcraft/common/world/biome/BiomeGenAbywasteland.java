@@ -18,7 +18,7 @@ import net.minecraft.entity.monster.EntitySkeleton;
 import net.minecraft.entity.monster.EntityZombie;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraft.world.biome.BiomeGenBase;
+import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.feature.WorldGenMinable;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -30,7 +30,7 @@ import com.shinoow.abyssalcraft.common.entity.EntityDepthsGhoul;
 import com.shinoow.abyssalcraft.common.entity.EntityDragonMinion;
 import com.shinoow.abyssalcraft.common.entity.EntitySkeletonGoliath;
 
-public class BiomeGenAbywasteland extends BiomeGenBase {
+public class BiomeGenAbywasteland extends Biome {
 
 	@SuppressWarnings("unchecked")
 	public BiomeGenAbywasteland(BiomeProperties par1){

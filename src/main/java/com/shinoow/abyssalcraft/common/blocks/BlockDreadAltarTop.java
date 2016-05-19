@@ -49,10 +49,10 @@ public class BlockDreadAltarTop extends BlockContainer {
 	Random rand;
 
 	public BlockDreadAltarTop() {
-		super(Material.rock);
+		super(Material.ROCK);
 		setHarvestLevel("pickaxe", 6);
 		//		setBlockBounds(0.2F, 0.0F, 0.2F, 0.8F, 0.7F, 0.8F);
-		setStepSound(SoundType.STONE);
+		setSoundType(SoundType.STONE);
 	}
 
 	@Override
@@ -128,8 +128,8 @@ public class BlockDreadAltarTop extends BlockContainer {
 	}
 
 	@Override
-	public void onEntityCollidedWithBlock(World par1World, BlockPos pos, Entity par5Entity) {
-		super.onEntityCollidedWithBlock(par1World, pos, par5Entity);
+	public void onEntityCollidedWithBlock(World par1World, BlockPos pos, IBlockState state, Entity par5Entity) {
+		super.onEntityCollidedWithBlock(par1World, pos, state, par5Entity);
 
 		if(par5Entity instanceof IDreadEntity){}
 		else if(par5Entity instanceof EntityLivingBase)

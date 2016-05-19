@@ -88,18 +88,18 @@ public class ItemDreadiumSamuraiArmor extends ItemArmor {
 	@Override
 	public void onArmorTick(World world, EntityPlayer player, ItemStack itemstack) {
 		if (itemstack.getItem() == ACItems.dreadium_samurai_helmet) {
-			player.addPotionEffect(new PotionEffect(MobEffects.nightVision, 260, 0));
+			player.addPotionEffect(new PotionEffect(MobEffects.NIGHT_VISION, 260, 0));
 			if(player.getActivePotionEffect(AbyssalCraftAPI.dread_plague) !=null)
 				player.removePotionEffect(AbyssalCraftAPI.dread_plague);
 		}
 		if (itemstack.getItem() == ACItems.dreadium_samurai_chestplate) {
-			player.addPotionEffect(new PotionEffect(MobEffects.resistance, 20));
-			player.addPotionEffect(new PotionEffect(MobEffects.damageBoost, 20));
+			player.addPotionEffect(new PotionEffect(MobEffects.RESISTANCE, 20));
+			player.addPotionEffect(new PotionEffect(MobEffects.STRENGTH, 20));
 		}
 		if (itemstack.getItem() == ACItems.dreadium_samurai_leggings)
-			player.addPotionEffect(new PotionEffect(MobEffects.fireResistance, 20, 1));
+			player.addPotionEffect(new PotionEffect(MobEffects.FIRE_RESISTANCE, 20, 1));
 		if (itemstack.getItem() == ACItems.dreadium_samurai_boots)
-			player.addPotionEffect(new PotionEffect(MobEffects.moveSpeed, 20, 1));
+			player.addPotionEffect(new PotionEffect(MobEffects.SPEED, 20, 1));
 
 	}
 }

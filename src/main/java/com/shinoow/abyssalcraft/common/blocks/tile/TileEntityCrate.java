@@ -149,7 +149,7 @@ public class TileEntityCrate extends TileEntity implements IInventory, ITickable
 	}
 
 	@Override
-	public void writeToNBT(NBTTagCompound par1NBTTagCompound)
+	public NBTTagCompound writeToNBT(NBTTagCompound par1NBTTagCompound)
 	{
 		super.writeToNBT(par1NBTTagCompound);
 		NBTTagList nbttaglist = new NBTTagList();
@@ -167,6 +167,8 @@ public class TileEntityCrate extends TileEntity implements IInventory, ITickable
 
 		if (hasCustomName())
 			par1NBTTagCompound.setString("CustomName", customName);
+		
+		return par1NBTTagCompound;
 	}
 
 	@Override

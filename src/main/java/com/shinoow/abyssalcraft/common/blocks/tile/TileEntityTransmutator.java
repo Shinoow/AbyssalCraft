@@ -178,7 +178,7 @@ public class TileEntityTransmutator extends TileEntity implements ISidedInventor
 	}
 
 	@Override
-	public void writeToNBT(NBTTagCompound par1)
+	public NBTTagCompound writeToNBT(NBTTagCompound par1)
 	{
 		super.writeToNBT(par1);
 		par1.setShort("BurnTime", (short)transmutatorBurnTime);
@@ -198,6 +198,8 @@ public class TileEntityTransmutator extends TileEntity implements ISidedInventor
 
 		if (hasCustomName())
 			par1.setString("CustomName", containerName);
+		
+		return par1;
 	}
 
 	/**
@@ -363,8 +365,8 @@ public class TileEntityTransmutator extends TileEntity implements ISidedInventor
 			if (item == Item.getItemFromBlock(ACBlocks.liquid_coralium)) return 22000;
 			if (item instanceof ICrystal) return 1200;
 			if (AbyssalCraftAPI.getCrystals().contains(par1ItemStack)) return 1200;
-			if (item == Items.blaze_powder) return 1200;
-			if (item == Items.blaze_rod) return 2400;
+			if (item == Items.BLAZE_POWDER) return 1200;
+			if (item == Items.BLAZE_ROD) return 2400;
 			if (item == ACItems.methane) return 10000;
 			return AbyssalCraftAPI.getFuelValue(par1ItemStack, FuelType.TRANSMUTATOR);
 		}
@@ -434,7 +436,7 @@ public class TileEntityTransmutator extends TileEntity implements ISidedInventor
 		{
 			Item item = par2ItemStack.getItem();
 
-			if (item != Items.water_bucket && item != Items.bucket)
+			if (item != Items.WATER_BUCKET && item != Items.BUCKET)
 				return false;
 		}
 

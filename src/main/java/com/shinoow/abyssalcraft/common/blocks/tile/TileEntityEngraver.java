@@ -138,7 +138,7 @@ public class TileEntityEngraver extends TEDirectional implements ISidedInventory
 	}
 
 	@Override
-	public void writeToNBT(NBTTagCompound par1)
+	public NBTTagCompound writeToNBT(NBTTagCompound par1)
 	{
 		super.writeToNBT(par1);
 		par1.setShort("ProcessTime", (short)engraverProcessTime);
@@ -157,6 +157,8 @@ public class TileEntityEngraver extends TEDirectional implements ISidedInventory
 
 		if (hasCustomName())
 			par1.setString("CustomName", containerName);
+		
+		return par1;
 	}
 
 	@Override

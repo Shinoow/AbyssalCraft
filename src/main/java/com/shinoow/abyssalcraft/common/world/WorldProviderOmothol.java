@@ -29,9 +29,9 @@ import com.shinoow.abyssalcraft.api.block.ACBlocks;
 public class WorldProviderOmothol extends WorldProvider {
 
 	@Override
-	public void registerWorldChunkManager()
+	public void createBiomeProvider()
 	{
-		worldChunkMgr = new BiomeProviderSingle(ACBiomes.omothol);
+		biomeProvider = new BiomeProviderSingle(ACBiomes.omothol);
 		setDimension(AbyssalCraft.configDimId3);
 		hasNoSky = true;
 	}

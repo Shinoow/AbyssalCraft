@@ -29,11 +29,10 @@ import net.minecraft.item.EnumDyeColor;
 import net.minecraft.item.Item;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
-import net.minecraft.util.WeightedRandomChestContent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
-import net.minecraft.world.biome.BiomeGenBase;
+import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.BiomeProvider;
 import net.minecraft.world.gen.structure.MapGenStructureIO;
 import net.minecraft.world.gen.structure.StructureBoundingBox;
@@ -249,7 +248,7 @@ public class StructureOmotholPieces
 		public Church(StructureOmotholPieces.Start start, int p_i45564_2_, Random rand, StructureBoundingBox p_i45564_4_, EnumFacing facing)
 		{
 			super(start, p_i45564_2_);
-			func_186164_a(facing);
+			setCoordBaseMode(facing);
 			boundingBox = p_i45564_4_;
 		}
 
@@ -276,8 +275,8 @@ public class StructureOmotholPieces
 				boundingBox.offset(0, field_143015_k - boundingBox.maxY + 12 - 1, 0);
 			}
 
-			fillWithBlocks(worldIn, structureBoundingBoxIn, 1, 1, 1, 3, 3, 7, Blocks.air.getDefaultState(), Blocks.air.getDefaultState(), false);
-			fillWithBlocks(worldIn, structureBoundingBoxIn, 1, 5, 1, 3, 9, 3, Blocks.air.getDefaultState(), Blocks.air.getDefaultState(), false);
+			fillWithBlocks(worldIn, structureBoundingBoxIn, 1, 1, 1, 3, 3, 7, Blocks.AIR.getDefaultState(), Blocks.AIR.getDefaultState(), false);
+			fillWithBlocks(worldIn, structureBoundingBoxIn, 1, 5, 1, 3, 9, 3, Blocks.AIR.getDefaultState(), Blocks.AIR.getDefaultState(), false);
 			fillWithBlocks(worldIn, structureBoundingBoxIn, 1, 0, 0, 3, 0, 8, ACBlocks.ethaxium_brick.getDefaultState(), ACBlocks.ethaxium_brick.getDefaultState(), false);
 			fillWithBlocks(worldIn, structureBoundingBoxIn, 1, 1, 0, 3, 10, 0, ACBlocks.ethaxium_brick.getDefaultState(), ACBlocks.ethaxium_brick.getDefaultState(), false);
 			fillWithBlocks(worldIn, structureBoundingBoxIn, 0, 1, 1, 0, 10, 3, ACBlocks.ethaxium_brick.getDefaultState(), ACBlocks.ethaxium_brick.getDefaultState(), false);
@@ -306,35 +305,35 @@ public class StructureOmotholPieces
 			setBlockState(worldIn, iblockstate, 3, 1, 5, structureBoundingBoxIn);
 			setBlockState(worldIn, iblockstate1, 1, 2, 7, structureBoundingBoxIn);
 			setBlockState(worldIn, iblockstate2, 3, 2, 7, structureBoundingBoxIn);
-			setBlockState(worldIn, Blocks.glass_pane.getDefaultState(), 0, 2, 2, structureBoundingBoxIn);
-			setBlockState(worldIn, Blocks.glass_pane.getDefaultState(), 0, 3, 2, structureBoundingBoxIn);
-			setBlockState(worldIn, Blocks.glass_pane.getDefaultState(), 4, 2, 2, structureBoundingBoxIn);
-			setBlockState(worldIn, Blocks.glass_pane.getDefaultState(), 4, 3, 2, structureBoundingBoxIn);
-			setBlockState(worldIn, Blocks.glass_pane.getDefaultState(), 0, 6, 2, structureBoundingBoxIn);
-			setBlockState(worldIn, Blocks.glass_pane.getDefaultState(), 0, 7, 2, structureBoundingBoxIn);
-			setBlockState(worldIn, Blocks.glass_pane.getDefaultState(), 4, 6, 2, structureBoundingBoxIn);
-			setBlockState(worldIn, Blocks.glass_pane.getDefaultState(), 4, 7, 2, structureBoundingBoxIn);
-			setBlockState(worldIn, Blocks.glass_pane.getDefaultState(), 2, 6, 0, structureBoundingBoxIn);
-			setBlockState(worldIn, Blocks.glass_pane.getDefaultState(), 2, 7, 0, structureBoundingBoxIn);
-			setBlockState(worldIn, Blocks.glass_pane.getDefaultState(), 2, 6, 4, structureBoundingBoxIn);
-			setBlockState(worldIn, Blocks.glass_pane.getDefaultState(), 2, 7, 4, structureBoundingBoxIn);
-			setBlockState(worldIn, Blocks.glass_pane.getDefaultState(), 0, 3, 6, structureBoundingBoxIn);
-			setBlockState(worldIn, Blocks.glass_pane.getDefaultState(), 4, 3, 6, structureBoundingBoxIn);
-			setBlockState(worldIn, Blocks.glass_pane.getDefaultState(), 2, 3, 8, structureBoundingBoxIn);
-			setBlockState(worldIn, Blocks.torch.getDefaultState().withProperty(BlockTorch.FACING, func_186165_e().getOpposite()), 2, 4, 7, structureBoundingBoxIn);
-			setBlockState(worldIn, Blocks.torch.getDefaultState().withProperty(BlockTorch.FACING, func_186165_e().rotateY()), 1, 4, 6, structureBoundingBoxIn);
-			setBlockState(worldIn, Blocks.torch.getDefaultState().withProperty(BlockTorch.FACING, func_186165_e().rotateYCCW()), 3, 4, 6, structureBoundingBoxIn);
-			setBlockState(worldIn, Blocks.torch.getDefaultState().withProperty(BlockTorch.FACING, func_186165_e()), 2, 4, 5, structureBoundingBoxIn);
-			IBlockState iblockstate3 = Blocks.ladder.getDefaultState().withProperty(BlockLadder.FACING, EnumFacing.WEST);
+			setBlockState(worldIn, Blocks.GLASS_PANE.getDefaultState(), 0, 2, 2, structureBoundingBoxIn);
+			setBlockState(worldIn, Blocks.GLASS_PANE.getDefaultState(), 0, 3, 2, structureBoundingBoxIn);
+			setBlockState(worldIn, Blocks.GLASS_PANE.getDefaultState(), 4, 2, 2, structureBoundingBoxIn);
+			setBlockState(worldIn, Blocks.GLASS_PANE.getDefaultState(), 4, 3, 2, structureBoundingBoxIn);
+			setBlockState(worldIn, Blocks.GLASS_PANE.getDefaultState(), 0, 6, 2, structureBoundingBoxIn);
+			setBlockState(worldIn, Blocks.GLASS_PANE.getDefaultState(), 0, 7, 2, structureBoundingBoxIn);
+			setBlockState(worldIn, Blocks.GLASS_PANE.getDefaultState(), 4, 6, 2, structureBoundingBoxIn);
+			setBlockState(worldIn, Blocks.GLASS_PANE.getDefaultState(), 4, 7, 2, structureBoundingBoxIn);
+			setBlockState(worldIn, Blocks.GLASS_PANE.getDefaultState(), 2, 6, 0, structureBoundingBoxIn);
+			setBlockState(worldIn, Blocks.GLASS_PANE.getDefaultState(), 2, 7, 0, structureBoundingBoxIn);
+			setBlockState(worldIn, Blocks.GLASS_PANE.getDefaultState(), 2, 6, 4, structureBoundingBoxIn);
+			setBlockState(worldIn, Blocks.GLASS_PANE.getDefaultState(), 2, 7, 4, structureBoundingBoxIn);
+			setBlockState(worldIn, Blocks.GLASS_PANE.getDefaultState(), 0, 3, 6, structureBoundingBoxIn);
+			setBlockState(worldIn, Blocks.GLASS_PANE.getDefaultState(), 4, 3, 6, structureBoundingBoxIn);
+			setBlockState(worldIn, Blocks.GLASS_PANE.getDefaultState(), 2, 3, 8, structureBoundingBoxIn);
+			setBlockState(worldIn, Blocks.TORCH.getDefaultState().withProperty(BlockTorch.FACING, getCoordBaseMode().getOpposite()), 2, 4, 7, structureBoundingBoxIn);
+			setBlockState(worldIn, Blocks.TORCH.getDefaultState().withProperty(BlockTorch.FACING, getCoordBaseMode().rotateY()), 1, 4, 6, structureBoundingBoxIn);
+			setBlockState(worldIn, Blocks.TORCH.getDefaultState().withProperty(BlockTorch.FACING, getCoordBaseMode().rotateYCCW()), 3, 4, 6, structureBoundingBoxIn);
+			setBlockState(worldIn, Blocks.TORCH.getDefaultState().withProperty(BlockTorch.FACING, getCoordBaseMode()), 2, 4, 5, structureBoundingBoxIn);
+			IBlockState iblockstate3 = Blocks.LADDER.getDefaultState().withProperty(BlockLadder.FACING, EnumFacing.WEST);
 
 			for (int j = 1; j <= 9; ++j)
 				setBlockState(worldIn, iblockstate3, 3, j, 3, structureBoundingBoxIn);
 
-			setBlockState(worldIn, Blocks.air.getDefaultState(), 2, 1, 0, structureBoundingBoxIn);
-			setBlockState(worldIn, Blocks.air.getDefaultState(), 2, 2, 0, structureBoundingBoxIn);
+			setBlockState(worldIn, Blocks.AIR.getDefaultState(), 2, 1, 0, structureBoundingBoxIn);
+			setBlockState(worldIn, Blocks.AIR.getDefaultState(), 2, 2, 0, structureBoundingBoxIn);
 			placeDoorCurrentPosition(worldIn, structureBoundingBoxIn, randomIn, 2, 1, 0, EnumFacing.NORTH);
 
-			if (getBlockStateFromPos(worldIn, 2, 0, -1, structureBoundingBoxIn).getMaterial() == Material.air && getBlockStateFromPos(worldIn, 2, -1, -1, structureBoundingBoxIn).getMaterial() != Material.air)
+			if (getBlockStateFromPos(worldIn, 2, 0, -1, structureBoundingBoxIn).getMaterial() == Material.AIR && getBlockStateFromPos(worldIn, 2, -1, -1, structureBoundingBoxIn).getMaterial() != Material.AIR)
 				setBlockState(worldIn, iblockstate, 2, 0, -1, structureBoundingBoxIn);
 
 			for (int l = 0; l < 9; ++l)
@@ -373,7 +372,7 @@ public class StructureOmotholPieces
 		public Field1(StructureOmotholPieces.Start start, int p_i45570_2_, Random rand, StructureBoundingBox p_i45570_4_, EnumFacing facing)
 		{
 			super(start, p_i45570_2_);
-			func_186164_a(facing);
+			setCoordBaseMode(facing);
 			boundingBox = p_i45570_4_;
 			cropTypeA = func_151559_a(rand);
 			cropTypeB = func_151559_a(rand);
@@ -388,10 +387,10 @@ public class StructureOmotholPieces
 		protected void writeStructureToNBT(NBTTagCompound tagCompound)
 		{
 			super.writeStructureToNBT(tagCompound);
-			tagCompound.setInteger("CA", Block.blockRegistry.getIDForObject(cropTypeA));
-			tagCompound.setInteger("CB", Block.blockRegistry.getIDForObject(cropTypeB));
-			tagCompound.setInteger("CC", Block.blockRegistry.getIDForObject(cropTypeC));
-			tagCompound.setInteger("CD", Block.blockRegistry.getIDForObject(cropTypeD));
+			tagCompound.setInteger("CA", Block.REGISTRY.getIDForObject(cropTypeA));
+			tagCompound.setInteger("CB", Block.REGISTRY.getIDForObject(cropTypeB));
+			tagCompound.setInteger("CC", Block.REGISTRY.getIDForObject(cropTypeC));
+			tagCompound.setInteger("CD", Block.REGISTRY.getIDForObject(cropTypeD));
 		}
 
 		/**
@@ -412,11 +411,11 @@ public class StructureOmotholPieces
 			switch (rand.nextInt(5))
 			{
 			case 0:
-				return Blocks.carrots;
+				return Blocks.CARROTS;
 			case 1:
-				return Blocks.potatoes;
+				return Blocks.POTATOES;
 			default:
-				return Blocks.wheat;
+				return Blocks.WHEAT;
 			}
 		}
 
@@ -443,18 +442,18 @@ public class StructureOmotholPieces
 				boundingBox.offset(0, field_143015_k - boundingBox.maxY + 4 - 1, 0);
 			}
 
-			fillWithBlocks(worldIn, structureBoundingBoxIn, 0, 1, 0, 12, 4, 8, Blocks.air.getDefaultState(), Blocks.air.getDefaultState(), false);
-			fillWithBlocks(worldIn, structureBoundingBoxIn, 1, 0, 1, 2, 0, 7, Blocks.farmland.getDefaultState(), Blocks.farmland.getDefaultState(), false);
-			fillWithBlocks(worldIn, structureBoundingBoxIn, 4, 0, 1, 5, 0, 7, Blocks.farmland.getDefaultState(), Blocks.farmland.getDefaultState(), false);
-			fillWithBlocks(worldIn, structureBoundingBoxIn, 7, 0, 1, 8, 0, 7, Blocks.farmland.getDefaultState(), Blocks.farmland.getDefaultState(), false);
-			fillWithBlocks(worldIn, structureBoundingBoxIn, 10, 0, 1, 11, 0, 7, Blocks.farmland.getDefaultState(), Blocks.farmland.getDefaultState(), false);
+			fillWithBlocks(worldIn, structureBoundingBoxIn, 0, 1, 0, 12, 4, 8, Blocks.AIR.getDefaultState(), Blocks.AIR.getDefaultState(), false);
+			fillWithBlocks(worldIn, structureBoundingBoxIn, 1, 0, 1, 2, 0, 7, Blocks.FARMLAND.getDefaultState(), Blocks.FARMLAND.getDefaultState(), false);
+			fillWithBlocks(worldIn, structureBoundingBoxIn, 4, 0, 1, 5, 0, 7, Blocks.FARMLAND.getDefaultState(), Blocks.FARMLAND.getDefaultState(), false);
+			fillWithBlocks(worldIn, structureBoundingBoxIn, 7, 0, 1, 8, 0, 7, Blocks.FARMLAND.getDefaultState(), Blocks.FARMLAND.getDefaultState(), false);
+			fillWithBlocks(worldIn, structureBoundingBoxIn, 10, 0, 1, 11, 0, 7, Blocks.FARMLAND.getDefaultState(), Blocks.FARMLAND.getDefaultState(), false);
 			fillWithBlocks(worldIn, structureBoundingBoxIn, 0, 0, 0, 0, 0, 8, ACBlocks.ethaxium_pillar.getDefaultState(), ACBlocks.ethaxium_pillar.getDefaultState(), false);
 			fillWithBlocks(worldIn, structureBoundingBoxIn, 6, 0, 0, 6, 0, 8, ACBlocks.ethaxium_pillar.getDefaultState(), ACBlocks.ethaxium_pillar.getDefaultState(), false);
 			fillWithBlocks(worldIn, structureBoundingBoxIn, 12, 0, 0, 12, 0, 8, ACBlocks.ethaxium_pillar.getDefaultState(), ACBlocks.ethaxium_pillar.getDefaultState(), false);
 			fillWithBlocks(worldIn, structureBoundingBoxIn, 1, 0, 0, 11, 0, 0, ACBlocks.ethaxium_pillar.getDefaultState(), ACBlocks.ethaxium_pillar.getDefaultState(), false);
 			fillWithBlocks(worldIn, structureBoundingBoxIn, 1, 0, 8, 11, 0, 8, ACBlocks.ethaxium_pillar.getDefaultState(), ACBlocks.ethaxium_pillar.getDefaultState(), false);
-			fillWithBlocks(worldIn, structureBoundingBoxIn, 3, 0, 1, 3, 0, 7, Blocks.water.getDefaultState(), Blocks.water.getDefaultState(), false);
-			fillWithBlocks(worldIn, structureBoundingBoxIn, 9, 0, 1, 9, 0, 7, Blocks.water.getDefaultState(), Blocks.water.getDefaultState(), false);
+			fillWithBlocks(worldIn, structureBoundingBoxIn, 3, 0, 1, 3, 0, 7, Blocks.WATER.getDefaultState(), Blocks.WATER.getDefaultState(), false);
+			fillWithBlocks(worldIn, structureBoundingBoxIn, 9, 0, 1, 9, 0, 7, Blocks.WATER.getDefaultState(), Blocks.WATER.getDefaultState(), false);
 
 			for (int i = 1; i <= 7; ++i)
 			{
@@ -472,7 +471,7 @@ public class StructureOmotholPieces
 				for (int j = 0; j < 13; ++j)
 				{
 					clearCurrentPositionBlocksUpwards(worldIn, j, 4, k, structureBoundingBoxIn);
-					replaceAirAndLiquidDownwards(worldIn, Blocks.dirt.getDefaultState(), j, -1, k, structureBoundingBoxIn);
+					replaceAirAndLiquidDownwards(worldIn, Blocks.DIRT.getDefaultState(), j, -1, k, structureBoundingBoxIn);
 				}
 
 			return true;
@@ -493,7 +492,7 @@ public class StructureOmotholPieces
 		public Field2(StructureOmotholPieces.Start start, int p_i45569_2_, Random rand, StructureBoundingBox p_i45569_4_, EnumFacing facing)
 		{
 			super(start, p_i45569_2_);
-			func_186164_a(facing);
+			setCoordBaseMode(facing);
 			boundingBox = p_i45569_4_;
 			cropTypeA = func_151560_a(rand);
 			cropTypeB = func_151560_a(rand);
@@ -506,8 +505,8 @@ public class StructureOmotholPieces
 		protected void writeStructureToNBT(NBTTagCompound tagCompound)
 		{
 			super.writeStructureToNBT(tagCompound);
-			tagCompound.setInteger("CA", Block.blockRegistry.getIDForObject(cropTypeA));
-			tagCompound.setInteger("CB", Block.blockRegistry.getIDForObject(cropTypeB));
+			tagCompound.setInteger("CA", Block.REGISTRY.getIDForObject(cropTypeA));
+			tagCompound.setInteger("CB", Block.REGISTRY.getIDForObject(cropTypeB));
 		}
 
 		/**
@@ -526,11 +525,11 @@ public class StructureOmotholPieces
 			switch (rand.nextInt(5))
 			{
 			case 0:
-				return Blocks.carrots;
+				return Blocks.CARROTS;
 			case 1:
-				return Blocks.potatoes;
+				return Blocks.POTATOES;
 			default:
-				return Blocks.wheat;
+				return Blocks.WHEAT;
 			}
 		}
 
@@ -557,14 +556,14 @@ public class StructureOmotholPieces
 				boundingBox.offset(0, field_143015_k - boundingBox.maxY + 4 - 1, 0);
 			}
 
-			fillWithBlocks(worldIn, structureBoundingBoxIn, 0, 1, 0, 6, 4, 8, Blocks.air.getDefaultState(), Blocks.air.getDefaultState(), false);
-			fillWithBlocks(worldIn, structureBoundingBoxIn, 1, 0, 1, 2, 0, 7, Blocks.farmland.getDefaultState(), Blocks.farmland.getDefaultState(), false);
-			fillWithBlocks(worldIn, structureBoundingBoxIn, 4, 0, 1, 5, 0, 7, Blocks.farmland.getDefaultState(), Blocks.farmland.getDefaultState(), false);
+			fillWithBlocks(worldIn, structureBoundingBoxIn, 0, 1, 0, 6, 4, 8, Blocks.AIR.getDefaultState(), Blocks.AIR.getDefaultState(), false);
+			fillWithBlocks(worldIn, structureBoundingBoxIn, 1, 0, 1, 2, 0, 7, Blocks.FARMLAND.getDefaultState(), Blocks.FARMLAND.getDefaultState(), false);
+			fillWithBlocks(worldIn, structureBoundingBoxIn, 4, 0, 1, 5, 0, 7, Blocks.FARMLAND.getDefaultState(), Blocks.FARMLAND.getDefaultState(), false);
 			fillWithBlocks(worldIn, structureBoundingBoxIn, 0, 0, 0, 0, 0, 8, ACBlocks.ethaxium_pillar.getDefaultState(), ACBlocks.ethaxium_pillar.getDefaultState(), false);
 			fillWithBlocks(worldIn, structureBoundingBoxIn, 6, 0, 0, 6, 0, 8, ACBlocks.ethaxium_pillar.getDefaultState(), ACBlocks.ethaxium_pillar.getDefaultState(), false);
 			fillWithBlocks(worldIn, structureBoundingBoxIn, 1, 0, 0, 5, 0, 0, ACBlocks.ethaxium_pillar.getDefaultState(), ACBlocks.ethaxium_pillar.getDefaultState(), false);
 			fillWithBlocks(worldIn, structureBoundingBoxIn, 1, 0, 8, 5, 0, 8, ACBlocks.ethaxium_pillar.getDefaultState(), ACBlocks.ethaxium_pillar.getDefaultState(), false);
-			fillWithBlocks(worldIn, structureBoundingBoxIn, 3, 0, 1, 3, 0, 7, Blocks.water.getDefaultState(), Blocks.water.getDefaultState(), false);
+			fillWithBlocks(worldIn, structureBoundingBoxIn, 3, 0, 1, 3, 0, 7, Blocks.WATER.getDefaultState(), Blocks.WATER.getDefaultState(), false);
 
 			for (int i = 1; i <= 7; ++i)
 			{
@@ -578,7 +577,7 @@ public class StructureOmotholPieces
 				for (int j = 0; j < 7; ++j)
 				{
 					clearCurrentPositionBlocksUpwards(worldIn, j, 4, k, structureBoundingBoxIn);
-					replaceAirAndLiquidDownwards(worldIn, Blocks.dirt.getDefaultState(), j, -1, k, structureBoundingBoxIn);
+					replaceAirAndLiquidDownwards(worldIn, Blocks.DIRT.getDefaultState(), j, -1, k, structureBoundingBoxIn);
 				}
 
 			return true;
@@ -594,7 +593,7 @@ public class StructureOmotholPieces
 		public Hall(StructureOmotholPieces.Start start, int p_i45567_2_, Random rand, StructureBoundingBox p_i45567_4_, EnumFacing facing)
 		{
 			super(start, p_i45567_2_);
-			func_186164_a(facing);
+			setCoordBaseMode(facing);
 			boundingBox = p_i45567_4_;
 		}
 
@@ -621,9 +620,9 @@ public class StructureOmotholPieces
 				boundingBox.offset(0, field_143015_k - boundingBox.maxY + 7 - 1, 0);
 			}
 
-			fillWithBlocks(worldIn, structureBoundingBoxIn, 1, 1, 1, 7, 4, 4, Blocks.air.getDefaultState(), Blocks.air.getDefaultState(), false);
-			fillWithBlocks(worldIn, structureBoundingBoxIn, 2, 1, 6, 8, 4, 10, Blocks.air.getDefaultState(), Blocks.air.getDefaultState(), false);
-			fillWithBlocks(worldIn, structureBoundingBoxIn, 2, 0, 6, 8, 0, 10, Blocks.dirt.getDefaultState(), Blocks.dirt.getDefaultState(), false);
+			fillWithBlocks(worldIn, structureBoundingBoxIn, 1, 1, 1, 7, 4, 4, Blocks.AIR.getDefaultState(), Blocks.AIR.getDefaultState(), false);
+			fillWithBlocks(worldIn, structureBoundingBoxIn, 2, 1, 6, 8, 4, 10, Blocks.AIR.getDefaultState(), Blocks.AIR.getDefaultState(), false);
+			fillWithBlocks(worldIn, structureBoundingBoxIn, 2, 0, 6, 8, 0, 10, Blocks.DIRT.getDefaultState(), Blocks.DIRT.getDefaultState(), false);
 			setBlockState(worldIn, ACBlocks.ethaxium_brick.getDefaultState(), 6, 0, 6, structureBoundingBoxIn);
 			fillWithBlocks(worldIn, structureBoundingBoxIn, 2, 1, 6, 2, 1, 10, ACBlocks.ethaxium_brick_fence.getDefaultState(), ACBlocks.ethaxium_brick_fence.getDefaultState(), false);
 			fillWithBlocks(worldIn, structureBoundingBoxIn, 8, 1, 6, 8, 1, 10, ACBlocks.ethaxium_brick_fence.getDefaultState(), ACBlocks.ethaxium_brick_fence.getDefaultState(), false);
@@ -657,33 +656,33 @@ public class StructureOmotholPieces
 			setBlockState(worldIn, ACBlocks.ethaxium_pillar.getDefaultState(), 0, 2, 4, structureBoundingBoxIn);
 			setBlockState(worldIn, ACBlocks.ethaxium_pillar.getDefaultState(), 8, 2, 1, structureBoundingBoxIn);
 			setBlockState(worldIn, ACBlocks.ethaxium_pillar.getDefaultState(), 8, 2, 4, structureBoundingBoxIn);
-			setBlockState(worldIn, Blocks.glass_pane.getDefaultState(), 0, 2, 2, structureBoundingBoxIn);
-			setBlockState(worldIn, Blocks.glass_pane.getDefaultState(), 0, 2, 3, structureBoundingBoxIn);
-			setBlockState(worldIn, Blocks.glass_pane.getDefaultState(), 8, 2, 2, structureBoundingBoxIn);
-			setBlockState(worldIn, Blocks.glass_pane.getDefaultState(), 8, 2, 3, structureBoundingBoxIn);
-			setBlockState(worldIn, Blocks.glass_pane.getDefaultState(), 2, 2, 5, structureBoundingBoxIn);
-			setBlockState(worldIn, Blocks.glass_pane.getDefaultState(), 3, 2, 5, structureBoundingBoxIn);
-			setBlockState(worldIn, Blocks.glass_pane.getDefaultState(), 5, 2, 0, structureBoundingBoxIn);
-			setBlockState(worldIn, Blocks.glass_pane.getDefaultState(), 6, 2, 5, structureBoundingBoxIn);
-			setBlockState(worldIn, Blocks.oak_fence.getDefaultState(), 2, 1, 3, structureBoundingBoxIn);
-			setBlockState(worldIn, Blocks.wooden_pressure_plate.getDefaultState(), 2, 2, 3, structureBoundingBoxIn);
+			setBlockState(worldIn, Blocks.GLASS_PANE.getDefaultState(), 0, 2, 2, structureBoundingBoxIn);
+			setBlockState(worldIn, Blocks.GLASS_PANE.getDefaultState(), 0, 2, 3, structureBoundingBoxIn);
+			setBlockState(worldIn, Blocks.GLASS_PANE.getDefaultState(), 8, 2, 2, structureBoundingBoxIn);
+			setBlockState(worldIn, Blocks.GLASS_PANE.getDefaultState(), 8, 2, 3, structureBoundingBoxIn);
+			setBlockState(worldIn, Blocks.GLASS_PANE.getDefaultState(), 2, 2, 5, structureBoundingBoxIn);
+			setBlockState(worldIn, Blocks.GLASS_PANE.getDefaultState(), 3, 2, 5, structureBoundingBoxIn);
+			setBlockState(worldIn, Blocks.GLASS_PANE.getDefaultState(), 5, 2, 0, structureBoundingBoxIn);
+			setBlockState(worldIn, Blocks.GLASS_PANE.getDefaultState(), 6, 2, 5, structureBoundingBoxIn);
+			setBlockState(worldIn, Blocks.OAK_FENCE.getDefaultState(), 2, 1, 3, structureBoundingBoxIn);
+			setBlockState(worldIn, Blocks.WOODEN_PRESSURE_PLATE.getDefaultState(), 2, 2, 3, structureBoundingBoxIn);
 			setBlockState(worldIn, ACBlocks.ethaxium_brick.getDefaultState(), 1, 1, 4, structureBoundingBoxIn);
 			setBlockState(worldIn, iblockstate, 2, 1, 4, structureBoundingBoxIn);
 			setBlockState(worldIn, iblockstate2, 1, 1, 3, structureBoundingBoxIn);
-			fillWithBlocks(worldIn, structureBoundingBoxIn, 5, 0, 1, 7, 0, 3, Blocks.double_stone_slab.getDefaultState(), Blocks.double_stone_slab.getDefaultState(), false);
-			setBlockState(worldIn, Blocks.double_stone_slab.getDefaultState(), 6, 1, 1, structureBoundingBoxIn);
-			setBlockState(worldIn, Blocks.double_stone_slab.getDefaultState(), 6, 1, 2, structureBoundingBoxIn);
-			setBlockState(worldIn, Blocks.air.getDefaultState(), 2, 1, 0, structureBoundingBoxIn);
-			setBlockState(worldIn, Blocks.air.getDefaultState(), 2, 2, 0, structureBoundingBoxIn);
-			setBlockState(worldIn, Blocks.torch.getDefaultState().withProperty(BlockTorch.FACING, func_186165_e()), 2, 3, 1, structureBoundingBoxIn);
+			fillWithBlocks(worldIn, structureBoundingBoxIn, 5, 0, 1, 7, 0, 3, Blocks.DOUBLE_STONE_SLAB.getDefaultState(), Blocks.DOUBLE_STONE_SLAB.getDefaultState(), false);
+			setBlockState(worldIn, Blocks.DOUBLE_STONE_SLAB.getDefaultState(), 6, 1, 1, structureBoundingBoxIn);
+			setBlockState(worldIn, Blocks.DOUBLE_STONE_SLAB.getDefaultState(), 6, 1, 2, structureBoundingBoxIn);
+			setBlockState(worldIn, Blocks.AIR.getDefaultState(), 2, 1, 0, structureBoundingBoxIn);
+			setBlockState(worldIn, Blocks.AIR.getDefaultState(), 2, 2, 0, structureBoundingBoxIn);
+			setBlockState(worldIn, Blocks.TORCH.getDefaultState().withProperty(BlockTorch.FACING, getCoordBaseMode()), 2, 3, 1, structureBoundingBoxIn);
 			placeDoorCurrentPosition(worldIn, structureBoundingBoxIn, randomIn, 2, 1, 0, EnumFacing.NORTH);
 
-			if (getBlockStateFromPos(worldIn, 2, 0, -1, structureBoundingBoxIn).getMaterial() == Material.air && getBlockStateFromPos(worldIn, 2, -1, -1, structureBoundingBoxIn).getMaterial() != Material.air)
+			if (getBlockStateFromPos(worldIn, 2, 0, -1, structureBoundingBoxIn).getMaterial() == Material.AIR && getBlockStateFromPos(worldIn, 2, -1, -1, structureBoundingBoxIn).getMaterial() != Material.AIR)
 				setBlockState(worldIn, iblockstate, 2, 0, -1, structureBoundingBoxIn);
 
-			setBlockState(worldIn, Blocks.air.getDefaultState(), 6, 1, 5, structureBoundingBoxIn);
-			setBlockState(worldIn, Blocks.air.getDefaultState(), 6, 2, 5, structureBoundingBoxIn);
-			setBlockState(worldIn, Blocks.torch.getDefaultState().withProperty(BlockTorch.FACING, func_186165_e().getOpposite()), 6, 3, 4, structureBoundingBoxIn);
+			setBlockState(worldIn, Blocks.AIR.getDefaultState(), 6, 1, 5, structureBoundingBoxIn);
+			setBlockState(worldIn, Blocks.AIR.getDefaultState(), 6, 2, 5, structureBoundingBoxIn);
+			setBlockState(worldIn, Blocks.TORCH.getDefaultState().withProperty(BlockTorch.FACING, getCoordBaseMode().getOpposite()), 6, 3, 4, structureBoundingBoxIn);
 			placeDoorCurrentPosition(worldIn, structureBoundingBoxIn, randomIn, 6, 1, 5, EnumFacing.SOUTH);
 
 			for (int i1 = 0; i1 < 5; ++i1)
@@ -714,7 +713,7 @@ public class StructureOmotholPieces
 		public House1(StructureOmotholPieces.Start start, int p_i45571_2_, Random rand, StructureBoundingBox p_i45571_4_, EnumFacing facing)
 		{
 			super(start, p_i45571_2_);
-			func_186164_a(facing);
+			setCoordBaseMode(facing);
 			boundingBox = p_i45571_4_;
 		}
 
@@ -741,7 +740,7 @@ public class StructureOmotholPieces
 				boundingBox.offset(0, field_143015_k - boundingBox.maxY + 9 - 1, 0);
 			}
 
-			fillWithBlocks(worldIn, structureBoundingBoxIn, 1, 1, 1, 7, 5, 4, Blocks.air.getDefaultState(), Blocks.air.getDefaultState(), false);
+			fillWithBlocks(worldIn, structureBoundingBoxIn, 1, 1, 1, 7, 5, 4, Blocks.AIR.getDefaultState(), Blocks.AIR.getDefaultState(), false);
 			fillWithBlocks(worldIn, structureBoundingBoxIn, 0, 0, 0, 8, 0, 5, ACBlocks.ethaxium_brick.getDefaultState(), ACBlocks.ethaxium_brick.getDefaultState(), false);
 			fillWithBlocks(worldIn, structureBoundingBoxIn, 0, 5, 0, 8, 5, 5, ACBlocks.ethaxium_brick.getDefaultState(), ACBlocks.ethaxium_brick.getDefaultState(), false);
 			fillWithBlocks(worldIn, structureBoundingBoxIn, 0, 6, 1, 8, 6, 4, ACBlocks.ethaxium_brick.getDefaultState(), ACBlocks.ethaxium_brick.getDefaultState(), false);
@@ -766,27 +765,27 @@ public class StructureOmotholPieces
 			fillWithBlocks(worldIn, structureBoundingBoxIn, 1, 2, 5, 7, 4, 5, ACBlocks.ethaxium_brick.getDefaultState(), ACBlocks.ethaxium_brick.getDefaultState(), false);
 			fillWithBlocks(worldIn, structureBoundingBoxIn, 8, 2, 1, 8, 4, 4, ACBlocks.ethaxium_brick.getDefaultState(), ACBlocks.ethaxium_brick.getDefaultState(), false);
 			fillWithBlocks(worldIn, structureBoundingBoxIn, 1, 2, 0, 7, 4, 0, ACBlocks.ethaxium_brick.getDefaultState(), ACBlocks.ethaxium_brick.getDefaultState(), false);
-			setBlockState(worldIn, Blocks.glass_pane.getDefaultState(), 4, 2, 0, structureBoundingBoxIn);
-			setBlockState(worldIn, Blocks.glass_pane.getDefaultState(), 5, 2, 0, structureBoundingBoxIn);
-			setBlockState(worldIn, Blocks.glass_pane.getDefaultState(), 6, 2, 0, structureBoundingBoxIn);
-			setBlockState(worldIn, Blocks.glass_pane.getDefaultState(), 4, 3, 0, structureBoundingBoxIn);
-			setBlockState(worldIn, Blocks.glass_pane.getDefaultState(), 5, 3, 0, structureBoundingBoxIn);
-			setBlockState(worldIn, Blocks.glass_pane.getDefaultState(), 6, 3, 0, structureBoundingBoxIn);
-			setBlockState(worldIn, Blocks.glass_pane.getDefaultState(), 0, 2, 2, structureBoundingBoxIn);
-			setBlockState(worldIn, Blocks.glass_pane.getDefaultState(), 0, 2, 3, structureBoundingBoxIn);
-			setBlockState(worldIn, Blocks.glass_pane.getDefaultState(), 0, 3, 2, structureBoundingBoxIn);
-			setBlockState(worldIn, Blocks.glass_pane.getDefaultState(), 0, 3, 3, structureBoundingBoxIn);
-			setBlockState(worldIn, Blocks.glass_pane.getDefaultState(), 8, 2, 2, structureBoundingBoxIn);
-			setBlockState(worldIn, Blocks.glass_pane.getDefaultState(), 8, 2, 3, structureBoundingBoxIn);
-			setBlockState(worldIn, Blocks.glass_pane.getDefaultState(), 8, 3, 2, structureBoundingBoxIn);
-			setBlockState(worldIn, Blocks.glass_pane.getDefaultState(), 8, 3, 3, structureBoundingBoxIn);
-			setBlockState(worldIn, Blocks.glass_pane.getDefaultState(), 2, 2, 5, structureBoundingBoxIn);
-			setBlockState(worldIn, Blocks.glass_pane.getDefaultState(), 3, 2, 5, structureBoundingBoxIn);
-			setBlockState(worldIn, Blocks.glass_pane.getDefaultState(), 5, 2, 5, structureBoundingBoxIn);
-			setBlockState(worldIn, Blocks.glass_pane.getDefaultState(), 6, 2, 5, structureBoundingBoxIn);
+			setBlockState(worldIn, Blocks.GLASS_PANE.getDefaultState(), 4, 2, 0, structureBoundingBoxIn);
+			setBlockState(worldIn, Blocks.GLASS_PANE.getDefaultState(), 5, 2, 0, structureBoundingBoxIn);
+			setBlockState(worldIn, Blocks.GLASS_PANE.getDefaultState(), 6, 2, 0, structureBoundingBoxIn);
+			setBlockState(worldIn, Blocks.GLASS_PANE.getDefaultState(), 4, 3, 0, structureBoundingBoxIn);
+			setBlockState(worldIn, Blocks.GLASS_PANE.getDefaultState(), 5, 3, 0, structureBoundingBoxIn);
+			setBlockState(worldIn, Blocks.GLASS_PANE.getDefaultState(), 6, 3, 0, structureBoundingBoxIn);
+			setBlockState(worldIn, Blocks.GLASS_PANE.getDefaultState(), 0, 2, 2, structureBoundingBoxIn);
+			setBlockState(worldIn, Blocks.GLASS_PANE.getDefaultState(), 0, 2, 3, structureBoundingBoxIn);
+			setBlockState(worldIn, Blocks.GLASS_PANE.getDefaultState(), 0, 3, 2, structureBoundingBoxIn);
+			setBlockState(worldIn, Blocks.GLASS_PANE.getDefaultState(), 0, 3, 3, structureBoundingBoxIn);
+			setBlockState(worldIn, Blocks.GLASS_PANE.getDefaultState(), 8, 2, 2, structureBoundingBoxIn);
+			setBlockState(worldIn, Blocks.GLASS_PANE.getDefaultState(), 8, 2, 3, structureBoundingBoxIn);
+			setBlockState(worldIn, Blocks.GLASS_PANE.getDefaultState(), 8, 3, 2, structureBoundingBoxIn);
+			setBlockState(worldIn, Blocks.GLASS_PANE.getDefaultState(), 8, 3, 3, structureBoundingBoxIn);
+			setBlockState(worldIn, Blocks.GLASS_PANE.getDefaultState(), 2, 2, 5, structureBoundingBoxIn);
+			setBlockState(worldIn, Blocks.GLASS_PANE.getDefaultState(), 3, 2, 5, structureBoundingBoxIn);
+			setBlockState(worldIn, Blocks.GLASS_PANE.getDefaultState(), 5, 2, 5, structureBoundingBoxIn);
+			setBlockState(worldIn, Blocks.GLASS_PANE.getDefaultState(), 6, 2, 5, structureBoundingBoxIn);
 			fillWithBlocks(worldIn, structureBoundingBoxIn, 1, 4, 1, 7, 4, 1, ACBlocks.ethaxium_brick.getDefaultState(), ACBlocks.ethaxium_brick.getDefaultState(), false);
 			fillWithBlocks(worldIn, structureBoundingBoxIn, 1, 4, 4, 7, 4, 4, ACBlocks.ethaxium_brick.getDefaultState(), ACBlocks.ethaxium_brick.getDefaultState(), false);
-			fillWithBlocks(worldIn, structureBoundingBoxIn, 1, 3, 4, 7, 3, 4, Blocks.bookshelf.getDefaultState(), Blocks.bookshelf.getDefaultState(), false);
+			fillWithBlocks(worldIn, structureBoundingBoxIn, 1, 3, 4, 7, 3, 4, Blocks.BOOKSHELF.getDefaultState(), Blocks.BOOKSHELF.getDefaultState(), false);
 			setBlockState(worldIn, ACBlocks.ethaxium_brick.getDefaultState(), 7, 1, 4, structureBoundingBoxIn);
 			setBlockState(worldIn, ACBlocks.ethaxium_brick_stairs.getDefaultState().withProperty(BlockStairs.FACING, EnumFacing.EAST), 7, 1, 3, structureBoundingBoxIn);
 			IBlockState iblockstate = ACBlocks.ethaxium_brick_stairs.getDefaultState().withProperty(BlockStairs.FACING, EnumFacing.NORTH);
@@ -794,16 +793,16 @@ public class StructureOmotholPieces
 			setBlockState(worldIn, iblockstate, 5, 1, 4, structureBoundingBoxIn);
 			setBlockState(worldIn, iblockstate, 4, 1, 4, structureBoundingBoxIn);
 			setBlockState(worldIn, iblockstate, 3, 1, 4, structureBoundingBoxIn);
-			setBlockState(worldIn, Blocks.oak_fence.getDefaultState(), 6, 1, 3, structureBoundingBoxIn);
-			setBlockState(worldIn, Blocks.wooden_pressure_plate.getDefaultState(), 6, 2, 3, structureBoundingBoxIn);
-			setBlockState(worldIn, Blocks.oak_fence.getDefaultState(), 4, 1, 3, structureBoundingBoxIn);
-			setBlockState(worldIn, Blocks.wooden_pressure_plate.getDefaultState(), 4, 2, 3, structureBoundingBoxIn);
-			setBlockState(worldIn, Blocks.crafting_table.getDefaultState(), 7, 1, 1, structureBoundingBoxIn);
-			setBlockState(worldIn, Blocks.air.getDefaultState(), 1, 1, 0, structureBoundingBoxIn);
-			setBlockState(worldIn, Blocks.air.getDefaultState(), 1, 2, 0, structureBoundingBoxIn);
+			setBlockState(worldIn, Blocks.OAK_FENCE.getDefaultState(), 6, 1, 3, structureBoundingBoxIn);
+			setBlockState(worldIn, Blocks.WOODEN_PRESSURE_PLATE.getDefaultState(), 6, 2, 3, structureBoundingBoxIn);
+			setBlockState(worldIn, Blocks.OAK_FENCE.getDefaultState(), 4, 1, 3, structureBoundingBoxIn);
+			setBlockState(worldIn, Blocks.WOODEN_PRESSURE_PLATE.getDefaultState(), 4, 2, 3, structureBoundingBoxIn);
+			setBlockState(worldIn, Blocks.CRAFTING_TABLE.getDefaultState(), 7, 1, 1, structureBoundingBoxIn);
+			setBlockState(worldIn, Blocks.AIR.getDefaultState(), 1, 1, 0, structureBoundingBoxIn);
+			setBlockState(worldIn, Blocks.AIR.getDefaultState(), 1, 2, 0, structureBoundingBoxIn);
 			placeDoorCurrentPosition(worldIn, structureBoundingBoxIn, randomIn, 1, 1, 0, EnumFacing.NORTH);
 
-			if (getBlockStateFromPos(worldIn, 1, 0, -1, structureBoundingBoxIn).getMaterial() == Material.air && getBlockStateFromPos(worldIn, 1, -1, -1, structureBoundingBoxIn).getMaterial() != Material.air)
+			if (getBlockStateFromPos(worldIn, 1, 0, -1, structureBoundingBoxIn).getMaterial() == Material.AIR && getBlockStateFromPos(worldIn, 1, -1, -1, structureBoundingBoxIn).getMaterial() != Material.AIR)
 				setBlockState(worldIn, iblockstate, 1, 0, -1, structureBoundingBoxIn);
 
 			for (int k1 = 0; k1 < 6; ++k1)
@@ -826,7 +825,7 @@ public class StructureOmotholPieces
 
 	public static class House2 extends StructureOmotholPieces.Omothol
 	{
-		private static final List<WeightedRandomChestContent> villageBlacksmithChestContents = Lists.newArrayList(new WeightedRandomChestContent[] {new WeightedRandomChestContent(Items.diamond, 0, 1, 3, 3), new WeightedRandomChestContent(Items.iron_ingot, 0, 1, 5, 10), new WeightedRandomChestContent(Items.gold_ingot, 0, 1, 3, 5), new WeightedRandomChestContent(Items.bread, 0, 1, 3, 15), new WeightedRandomChestContent(Items.apple, 0, 1, 3, 15), new WeightedRandomChestContent(Items.iron_pickaxe, 0, 1, 1, 5), new WeightedRandomChestContent(Items.iron_sword, 0, 1, 1, 5), new WeightedRandomChestContent(Items.iron_chestplate, 0, 1, 1, 5), new WeightedRandomChestContent(Items.iron_helmet, 0, 1, 1, 5), new WeightedRandomChestContent(Items.iron_leggings, 0, 1, 1, 5), new WeightedRandomChestContent(Items.iron_boots, 0, 1, 1, 5), new WeightedRandomChestContent(Item.getItemFromBlock(Blocks.obsidian), 0, 3, 7, 5), new WeightedRandomChestContent(Item.getItemFromBlock(Blocks.sapling), 0, 3, 7, 5), new WeightedRandomChestContent(Items.saddle, 0, 1, 1, 3), new WeightedRandomChestContent(Items.iron_horse_armor, 0, 1, 1, 1), new WeightedRandomChestContent(Items.golden_horse_armor, 0, 1, 1, 1), new WeightedRandomChestContent(Items.diamond_horse_armor, 0, 1, 1, 1)});
+//		private static final List<WeightedRandomChestContent> villageBlacksmithChestContents = Lists.newArrayList(new WeightedRandomChestContent[] {new WeightedRandomChestContent(Items.diamond, 0, 1, 3, 3), new WeightedRandomChestContent(Items.iron_ingot, 0, 1, 5, 10), new WeightedRandomChestContent(Items.gold_ingot, 0, 1, 3, 5), new WeightedRandomChestContent(Items.bread, 0, 1, 3, 15), new WeightedRandomChestContent(Items.apple, 0, 1, 3, 15), new WeightedRandomChestContent(Items.iron_pickaxe, 0, 1, 1, 5), new WeightedRandomChestContent(Items.iron_sword, 0, 1, 1, 5), new WeightedRandomChestContent(Items.iron_chestplate, 0, 1, 1, 5), new WeightedRandomChestContent(Items.iron_helmet, 0, 1, 1, 5), new WeightedRandomChestContent(Items.iron_leggings, 0, 1, 1, 5), new WeightedRandomChestContent(Items.iron_boots, 0, 1, 1, 5), new WeightedRandomChestContent(Item.getItemFromBlock(Blocks.obsidian), 0, 3, 7, 5), new WeightedRandomChestContent(Item.getItemFromBlock(Blocks.sapling), 0, 3, 7, 5), new WeightedRandomChestContent(Items.saddle, 0, 1, 1, 3), new WeightedRandomChestContent(Items.iron_horse_armor, 0, 1, 1, 1), new WeightedRandomChestContent(Items.golden_horse_armor, 0, 1, 1, 1), new WeightedRandomChestContent(Items.diamond_horse_armor, 0, 1, 1, 1)});
 		private boolean hasMadeChest;
 
 		public House2()
@@ -841,7 +840,7 @@ public class StructureOmotholPieces
 		public House2(StructureOmotholPieces.Start start, int p_i45563_2_, Random rand, StructureBoundingBox p_i45563_4_, EnumFacing facing)
 		{
 			super(start, p_i45563_2_);
-			func_186164_a(facing);
+			setCoordBaseMode(facing);
 			boundingBox = p_i45563_4_;
 		}
 
@@ -888,11 +887,11 @@ public class StructureOmotholPieces
 				boundingBox.offset(0, field_143015_k - boundingBox.maxY + 6 - 1, 0);
 			}
 
-			fillWithBlocks(worldIn, structureBoundingBoxIn, 0, 1, 0, 9, 4, 6, Blocks.air.getDefaultState(), Blocks.air.getDefaultState(), false);
+			fillWithBlocks(worldIn, structureBoundingBoxIn, 0, 1, 0, 9, 4, 6, Blocks.AIR.getDefaultState(), Blocks.AIR.getDefaultState(), false);
 			fillWithBlocks(worldIn, structureBoundingBoxIn, 0, 0, 0, 9, 0, 6, ACBlocks.ethaxium_brick.getDefaultState(), ACBlocks.ethaxium_brick.getDefaultState(), false);
 			fillWithBlocks(worldIn, structureBoundingBoxIn, 0, 4, 0, 9, 4, 6, ACBlocks.ethaxium_brick.getDefaultState(), ACBlocks.ethaxium_brick.getDefaultState(), false);
-			fillWithBlocks(worldIn, structureBoundingBoxIn, 0, 5, 0, 9, 5, 6, Blocks.stone_slab.getDefaultState(), Blocks.stone_slab.getDefaultState(), false);
-			fillWithBlocks(worldIn, structureBoundingBoxIn, 1, 5, 1, 8, 5, 5, Blocks.air.getDefaultState(), Blocks.air.getDefaultState(), false);
+			fillWithBlocks(worldIn, structureBoundingBoxIn, 0, 5, 0, 9, 5, 6, Blocks.STONE_SLAB.getDefaultState(), Blocks.STONE_SLAB.getDefaultState(), false);
+			fillWithBlocks(worldIn, structureBoundingBoxIn, 1, 5, 1, 8, 5, 5, Blocks.AIR.getDefaultState(), Blocks.AIR.getDefaultState(), false);
 			fillWithBlocks(worldIn, structureBoundingBoxIn, 1, 1, 0, 2, 3, 0, ACBlocks.ethaxium_brick.getDefaultState(), ACBlocks.ethaxium_brick.getDefaultState(), false);
 			fillWithBlocks(worldIn, structureBoundingBoxIn, 0, 1, 0, 0, 4, 0, ACBlocks.ethaxium_pillar.getDefaultState(), ACBlocks.ethaxium_pillar.getDefaultState(), false);
 			fillWithBlocks(worldIn, structureBoundingBoxIn, 3, 1, 0, 3, 4, 0, ACBlocks.ethaxium_pillar.getDefaultState(), ACBlocks.ethaxium_pillar.getDefaultState(), false);
@@ -905,21 +904,21 @@ public class StructureOmotholPieces
 			fillWithBlocks(worldIn, structureBoundingBoxIn, 5, 1, 0, 5, 3, 0, ACBlocks.ethaxium_brick_fence.getDefaultState(), ACBlocks.ethaxium_brick_fence.getDefaultState(), false);
 			fillWithBlocks(worldIn, structureBoundingBoxIn, 9, 1, 0, 9, 3, 0, ACBlocks.ethaxium_brick_fence.getDefaultState(), ACBlocks.ethaxium_brick_fence.getDefaultState(), false);
 			fillWithBlocks(worldIn, structureBoundingBoxIn, 6, 1, 4, 9, 4, 6, ACBlocks.ethaxium_brick.getDefaultState(), ACBlocks.ethaxium_brick.getDefaultState(), false);
-			setBlockState(worldIn, Blocks.flowing_lava.getDefaultState(), 7, 1, 5, structureBoundingBoxIn);
-			setBlockState(worldIn, Blocks.flowing_lava.getDefaultState(), 8, 1, 5, structureBoundingBoxIn);
-			setBlockState(worldIn, Blocks.iron_bars.getDefaultState(), 9, 2, 5, structureBoundingBoxIn);
-			setBlockState(worldIn, Blocks.iron_bars.getDefaultState(), 9, 2, 4, structureBoundingBoxIn);
-			fillWithBlocks(worldIn, structureBoundingBoxIn, 7, 2, 4, 8, 2, 5, Blocks.air.getDefaultState(), Blocks.air.getDefaultState(), false);
+			setBlockState(worldIn, Blocks.FLOWING_LAVA.getDefaultState(), 7, 1, 5, structureBoundingBoxIn);
+			setBlockState(worldIn, Blocks.FLOWING_LAVA.getDefaultState(), 8, 1, 5, structureBoundingBoxIn);
+			setBlockState(worldIn, Blocks.IRON_BARS.getDefaultState(), 9, 2, 5, structureBoundingBoxIn);
+			setBlockState(worldIn, Blocks.IRON_BARS.getDefaultState(), 9, 2, 4, structureBoundingBoxIn);
+			fillWithBlocks(worldIn, structureBoundingBoxIn, 7, 2, 4, 8, 2, 5, Blocks.AIR.getDefaultState(), Blocks.AIR.getDefaultState(), false);
 			setBlockState(worldIn, ACBlocks.ethaxium_brick.getDefaultState(), 6, 1, 3, structureBoundingBoxIn);
-			setBlockState(worldIn, Blocks.furnace.getDefaultState(), 6, 2, 3, structureBoundingBoxIn);
-			setBlockState(worldIn, Blocks.furnace.getDefaultState(), 6, 3, 3, structureBoundingBoxIn);
-			setBlockState(worldIn, Blocks.double_stone_slab.getDefaultState(), 8, 1, 1, structureBoundingBoxIn);
-			setBlockState(worldIn, Blocks.glass_pane.getDefaultState(), 0, 2, 2, structureBoundingBoxIn);
-			setBlockState(worldIn, Blocks.glass_pane.getDefaultState(), 0, 2, 4, structureBoundingBoxIn);
-			setBlockState(worldIn, Blocks.glass_pane.getDefaultState(), 2, 2, 6, structureBoundingBoxIn);
-			setBlockState(worldIn, Blocks.glass_pane.getDefaultState(), 4, 2, 6, structureBoundingBoxIn);
-			setBlockState(worldIn, Blocks.oak_fence.getDefaultState(), 2, 1, 4, structureBoundingBoxIn);
-			setBlockState(worldIn, Blocks.wooden_pressure_plate.getDefaultState(), 2, 2, 4, structureBoundingBoxIn);
+			setBlockState(worldIn, Blocks.FURNACE.getDefaultState(), 6, 2, 3, structureBoundingBoxIn);
+			setBlockState(worldIn, Blocks.FURNACE.getDefaultState(), 6, 3, 3, structureBoundingBoxIn);
+			setBlockState(worldIn, Blocks.DOUBLE_STONE_SLAB.getDefaultState(), 8, 1, 1, structureBoundingBoxIn);
+			setBlockState(worldIn, Blocks.GLASS_PANE.getDefaultState(), 0, 2, 2, structureBoundingBoxIn);
+			setBlockState(worldIn, Blocks.GLASS_PANE.getDefaultState(), 0, 2, 4, structureBoundingBoxIn);
+			setBlockState(worldIn, Blocks.GLASS_PANE.getDefaultState(), 2, 2, 6, structureBoundingBoxIn);
+			setBlockState(worldIn, Blocks.GLASS_PANE.getDefaultState(), 4, 2, 6, structureBoundingBoxIn);
+			setBlockState(worldIn, Blocks.OAK_FENCE.getDefaultState(), 2, 1, 4, structureBoundingBoxIn);
+			setBlockState(worldIn, Blocks.WOODEN_PRESSURE_PLATE.getDefaultState(), 2, 2, 4, structureBoundingBoxIn);
 			setBlockState(worldIn, ACBlocks.ethaxium_brick.getDefaultState(), 1, 1, 5, structureBoundingBoxIn);
 			setBlockState(worldIn, ACBlocks.ethaxium_brick_stairs.getDefaultState().withProperty(BlockStairs.FACING, EnumFacing.NORTH), 2, 1, 5, structureBoundingBoxIn);
 			setBlockState(worldIn, ACBlocks.ethaxium_brick_stairs.getDefaultState().withProperty(BlockStairs.FACING, EnumFacing.WEST), 1, 1, 4, structureBoundingBoxIn);
@@ -929,7 +928,7 @@ public class StructureOmotholPieces
 			//				generateChestContents(worldIn, structureBoundingBoxIn, randomIn, 5, 1, 5, net.minecraftforge.common.ChestGenHooks.getItems(net.minecraftforge.common.ChestGenHooks.VILLAGE_BLACKSMITH, randomIn), net.minecraftforge.common.ChestGenHooks.getCount(net.minecraftforge.common.ChestGenHooks.VILLAGE_BLACKSMITH, randomIn));
 
 			for (int i = 6; i <= 8; ++i)
-				if (getBlockStateFromPos(worldIn, i, 0, -1, structureBoundingBoxIn).getMaterial() == Material.air && getBlockStateFromPos(worldIn, i, -1, -1, structureBoundingBoxIn).getMaterial() != Material.air)
+				if (getBlockStateFromPos(worldIn, i, 0, -1, structureBoundingBoxIn).getMaterial() == Material.AIR && getBlockStateFromPos(worldIn, i, -1, -1, structureBoundingBoxIn).getMaterial() != Material.AIR)
 					setBlockState(worldIn, ACBlocks.ethaxium_brick_stairs.getDefaultState().withProperty(BlockStairs.FACING, EnumFacing.NORTH), i, 0, -1, structureBoundingBoxIn);
 
 			for (int k = 0; k < 7; ++k)
@@ -960,7 +959,7 @@ public class StructureOmotholPieces
 		public House3(StructureOmotholPieces.Start start, int p_i45561_2_, Random rand, StructureBoundingBox p_i45561_4_, EnumFacing facing)
 		{
 			super(start, p_i45561_2_);
-			func_186164_a(facing);
+			setCoordBaseMode(facing);
 			boundingBox = p_i45561_4_;
 		}
 
@@ -987,8 +986,8 @@ public class StructureOmotholPieces
 				boundingBox.offset(0, field_143015_k - boundingBox.maxY + 7 - 1, 0);
 			}
 
-			fillWithBlocks(worldIn, structureBoundingBoxIn, 1, 1, 1, 7, 4, 4, Blocks.air.getDefaultState(), Blocks.air.getDefaultState(), false);
-			fillWithBlocks(worldIn, structureBoundingBoxIn, 2, 1, 6, 8, 4, 10, Blocks.air.getDefaultState(), Blocks.air.getDefaultState(), false);
+			fillWithBlocks(worldIn, structureBoundingBoxIn, 1, 1, 1, 7, 4, 4, Blocks.AIR.getDefaultState(), Blocks.AIR.getDefaultState(), false);
+			fillWithBlocks(worldIn, structureBoundingBoxIn, 2, 1, 6, 8, 4, 10, Blocks.AIR.getDefaultState(), Blocks.AIR.getDefaultState(), false);
 			fillWithBlocks(worldIn, structureBoundingBoxIn, 2, 0, 5, 8, 0, 10, ACBlocks.ethaxium_brick.getDefaultState(), ACBlocks.ethaxium_brick.getDefaultState(), false);
 			fillWithBlocks(worldIn, structureBoundingBoxIn, 1, 0, 1, 7, 0, 4, ACBlocks.ethaxium_brick.getDefaultState(), ACBlocks.ethaxium_brick.getDefaultState(), false);
 			fillWithBlocks(worldIn, structureBoundingBoxIn, 0, 0, 0, 0, 3, 5, ACBlocks.ethaxium_brick.getDefaultState(), ACBlocks.ethaxium_brick.getDefaultState(), false);
@@ -1045,35 +1044,35 @@ public class StructureOmotholPieces
 
 			setBlockState(worldIn, ACBlocks.ethaxium_pillar.getDefaultState(), 0, 2, 1, structureBoundingBoxIn);
 			setBlockState(worldIn, ACBlocks.ethaxium_pillar.getDefaultState(), 0, 2, 4, structureBoundingBoxIn);
-			setBlockState(worldIn, Blocks.glass_pane.getDefaultState(), 0, 2, 2, structureBoundingBoxIn);
-			setBlockState(worldIn, Blocks.glass_pane.getDefaultState(), 0, 2, 3, structureBoundingBoxIn);
+			setBlockState(worldIn, Blocks.GLASS_PANE.getDefaultState(), 0, 2, 2, structureBoundingBoxIn);
+			setBlockState(worldIn, Blocks.GLASS_PANE.getDefaultState(), 0, 2, 3, structureBoundingBoxIn);
 			setBlockState(worldIn, ACBlocks.ethaxium_pillar.getDefaultState(), 4, 2, 0, structureBoundingBoxIn);
-			setBlockState(worldIn, Blocks.glass_pane.getDefaultState(), 5, 2, 0, structureBoundingBoxIn);
+			setBlockState(worldIn, Blocks.GLASS_PANE.getDefaultState(), 5, 2, 0, structureBoundingBoxIn);
 			setBlockState(worldIn, ACBlocks.ethaxium_pillar.getDefaultState(), 6, 2, 0, structureBoundingBoxIn);
 			setBlockState(worldIn, ACBlocks.ethaxium_pillar.getDefaultState(), 8, 2, 1, structureBoundingBoxIn);
-			setBlockState(worldIn, Blocks.glass_pane.getDefaultState(), 8, 2, 2, structureBoundingBoxIn);
-			setBlockState(worldIn, Blocks.glass_pane.getDefaultState(), 8, 2, 3, structureBoundingBoxIn);
+			setBlockState(worldIn, Blocks.GLASS_PANE.getDefaultState(), 8, 2, 2, structureBoundingBoxIn);
+			setBlockState(worldIn, Blocks.GLASS_PANE.getDefaultState(), 8, 2, 3, structureBoundingBoxIn);
 			setBlockState(worldIn, ACBlocks.ethaxium_pillar.getDefaultState(), 8, 2, 4, structureBoundingBoxIn);
 			setBlockState(worldIn, ACBlocks.ethaxium_brick.getDefaultState(), 8, 2, 5, structureBoundingBoxIn);
 			setBlockState(worldIn, ACBlocks.ethaxium_pillar.getDefaultState(), 8, 2, 6, structureBoundingBoxIn);
-			setBlockState(worldIn, Blocks.glass_pane.getDefaultState(), 8, 2, 7, structureBoundingBoxIn);
-			setBlockState(worldIn, Blocks.glass_pane.getDefaultState(), 8, 2, 8, structureBoundingBoxIn);
+			setBlockState(worldIn, Blocks.GLASS_PANE.getDefaultState(), 8, 2, 7, structureBoundingBoxIn);
+			setBlockState(worldIn, Blocks.GLASS_PANE.getDefaultState(), 8, 2, 8, structureBoundingBoxIn);
 			setBlockState(worldIn, ACBlocks.ethaxium_pillar.getDefaultState(), 8, 2, 9, structureBoundingBoxIn);
 			setBlockState(worldIn, ACBlocks.ethaxium_pillar.getDefaultState(), 2, 2, 6, structureBoundingBoxIn);
-			setBlockState(worldIn, Blocks.glass_pane.getDefaultState(), 2, 2, 7, structureBoundingBoxIn);
-			setBlockState(worldIn, Blocks.glass_pane.getDefaultState(), 2, 2, 8, structureBoundingBoxIn);
+			setBlockState(worldIn, Blocks.GLASS_PANE.getDefaultState(), 2, 2, 7, structureBoundingBoxIn);
+			setBlockState(worldIn, Blocks.GLASS_PANE.getDefaultState(), 2, 2, 8, structureBoundingBoxIn);
 			setBlockState(worldIn, ACBlocks.ethaxium_pillar.getDefaultState(), 2, 2, 9, structureBoundingBoxIn);
 			setBlockState(worldIn, ACBlocks.ethaxium_pillar.getDefaultState(), 4, 4, 10, structureBoundingBoxIn);
-			setBlockState(worldIn, Blocks.glass_pane.getDefaultState(), 5, 4, 10, structureBoundingBoxIn);
+			setBlockState(worldIn, Blocks.GLASS_PANE.getDefaultState(), 5, 4, 10, structureBoundingBoxIn);
 			setBlockState(worldIn, ACBlocks.ethaxium_pillar.getDefaultState(), 6, 4, 10, structureBoundingBoxIn);
 			setBlockState(worldIn, ACBlocks.ethaxium_brick.getDefaultState(), 5, 5, 10, structureBoundingBoxIn);
-			setBlockState(worldIn, Blocks.air.getDefaultState(), 2, 1, 0, structureBoundingBoxIn);
-			setBlockState(worldIn, Blocks.air.getDefaultState(), 2, 2, 0, structureBoundingBoxIn);
-			setBlockState(worldIn, Blocks.torch.getDefaultState().withProperty(BlockTorch.FACING, func_186165_e()), 2, 3, 1, structureBoundingBoxIn);
+			setBlockState(worldIn, Blocks.AIR.getDefaultState(), 2, 1, 0, structureBoundingBoxIn);
+			setBlockState(worldIn, Blocks.AIR.getDefaultState(), 2, 2, 0, structureBoundingBoxIn);
+			setBlockState(worldIn, Blocks.TORCH.getDefaultState().withProperty(BlockTorch.FACING, getCoordBaseMode()), 2, 3, 1, structureBoundingBoxIn);
 			placeDoorCurrentPosition(worldIn, structureBoundingBoxIn, randomIn, 2, 1, 0, EnumFacing.NORTH);
-			fillWithBlocks(worldIn, structureBoundingBoxIn, 1, 0, -1, 3, 2, -1, Blocks.air.getDefaultState(), Blocks.air.getDefaultState(), false);
+			fillWithBlocks(worldIn, structureBoundingBoxIn, 1, 0, -1, 3, 2, -1, Blocks.AIR.getDefaultState(), Blocks.AIR.getDefaultState(), false);
 
-			if (getBlockStateFromPos(worldIn, 2, 0, -1, structureBoundingBoxIn).getMaterial() == Material.air && getBlockStateFromPos(worldIn, 2, -1, -1, structureBoundingBoxIn).getMaterial() != Material.air)
+			if (getBlockStateFromPos(worldIn, 2, 0, -1, structureBoundingBoxIn).getMaterial() == Material.AIR && getBlockStateFromPos(worldIn, 2, -1, -1, structureBoundingBoxIn).getMaterial() != Material.AIR)
 				setBlockState(worldIn, iblockstate, 2, 0, -1, structureBoundingBoxIn);
 
 			for (int k2 = 0; k2 < 5; ++k2)
@@ -1106,7 +1105,7 @@ public class StructureOmotholPieces
 		public House4Garden(StructureOmotholPieces.Start start, int p_i45566_2_, Random rand, StructureBoundingBox p_i45566_4_, EnumFacing facing)
 		{
 			super(start, p_i45566_2_);
-			func_186164_a(facing);
+			setCoordBaseMode(facing);
 			boundingBox = p_i45566_4_;
 			isRoofAccessible = rand.nextBoolean();
 		}
@@ -1172,9 +1171,9 @@ public class StructureOmotholPieces
 			fillWithBlocks(worldIn, structureBoundingBoxIn, 0, 1, 1, 0, 3, 3, ACBlocks.ethaxium_brick.getDefaultState(), ACBlocks.ethaxium_brick.getDefaultState(), false);
 			fillWithBlocks(worldIn, structureBoundingBoxIn, 4, 1, 1, 4, 3, 3, ACBlocks.ethaxium_brick.getDefaultState(), ACBlocks.ethaxium_brick.getDefaultState(), false);
 			fillWithBlocks(worldIn, structureBoundingBoxIn, 1, 1, 4, 3, 3, 4, ACBlocks.ethaxium_brick.getDefaultState(), ACBlocks.ethaxium_brick.getDefaultState(), false);
-			setBlockState(worldIn, Blocks.glass_pane.getDefaultState(), 0, 2, 2, structureBoundingBoxIn);
-			setBlockState(worldIn, Blocks.glass_pane.getDefaultState(), 2, 2, 4, structureBoundingBoxIn);
-			setBlockState(worldIn, Blocks.glass_pane.getDefaultState(), 4, 2, 2, structureBoundingBoxIn);
+			setBlockState(worldIn, Blocks.GLASS_PANE.getDefaultState(), 0, 2, 2, structureBoundingBoxIn);
+			setBlockState(worldIn, Blocks.GLASS_PANE.getDefaultState(), 2, 2, 4, structureBoundingBoxIn);
+			setBlockState(worldIn, Blocks.GLASS_PANE.getDefaultState(), 4, 2, 2, structureBoundingBoxIn);
 			setBlockState(worldIn, ACBlocks.ethaxium_brick.getDefaultState(), 1, 1, 0, structureBoundingBoxIn);
 			setBlockState(worldIn, ACBlocks.ethaxium_brick.getDefaultState(), 1, 2, 0, structureBoundingBoxIn);
 			setBlockState(worldIn, ACBlocks.ethaxium_brick.getDefaultState(), 1, 3, 0, structureBoundingBoxIn);
@@ -1183,10 +1182,10 @@ public class StructureOmotholPieces
 			setBlockState(worldIn, ACBlocks.ethaxium_brick.getDefaultState(), 3, 2, 0, structureBoundingBoxIn);
 			setBlockState(worldIn, ACBlocks.ethaxium_brick.getDefaultState(), 3, 1, 0, structureBoundingBoxIn);
 
-			if (getBlockStateFromPos(worldIn, 2, 0, -1, structureBoundingBoxIn).getMaterial() == Material.air && getBlockStateFromPos(worldIn, 2, -1, -1, structureBoundingBoxIn).getMaterial() != Material.air)
+			if (getBlockStateFromPos(worldIn, 2, 0, -1, structureBoundingBoxIn).getMaterial() == Material.AIR && getBlockStateFromPos(worldIn, 2, -1, -1, structureBoundingBoxIn).getMaterial() != Material.AIR)
 				setBlockState(worldIn, ACBlocks.ethaxium_brick_stairs.getDefaultState().withProperty(BlockStairs.FACING, EnumFacing.NORTH), 2, 0, -1, structureBoundingBoxIn);
 
-			fillWithBlocks(worldIn, structureBoundingBoxIn, 1, 1, 1, 3, 3, 3, Blocks.air.getDefaultState(), Blocks.air.getDefaultState(), false);
+			fillWithBlocks(worldIn, structureBoundingBoxIn, 1, 1, 1, 3, 3, 3, Blocks.AIR.getDefaultState(), Blocks.AIR.getDefaultState(), false);
 
 			if (isRoofAccessible)
 			{
@@ -1210,14 +1209,14 @@ public class StructureOmotholPieces
 
 			if (isRoofAccessible)
 			{
-				IBlockState iblockstate = Blocks.ladder.getDefaultState().withProperty(BlockLadder.FACING, EnumFacing.SOUTH);
+				IBlockState iblockstate = Blocks.LADDER.getDefaultState().withProperty(BlockLadder.FACING, EnumFacing.SOUTH);
 				setBlockState(worldIn, iblockstate, 3, 1, 3, structureBoundingBoxIn);
 				setBlockState(worldIn, iblockstate, 3, 2, 3, structureBoundingBoxIn);
 				setBlockState(worldIn, iblockstate, 3, 3, 3, structureBoundingBoxIn);
 				setBlockState(worldIn, iblockstate, 3, 4, 3, structureBoundingBoxIn);
 			}
 
-			setBlockState(worldIn, Blocks.torch.getDefaultState().withProperty(BlockTorch.FACING, func_186165_e()), 2, 3, 1, structureBoundingBoxIn);
+			setBlockState(worldIn, Blocks.TORCH.getDefaultState().withProperty(BlockTorch.FACING, getCoordBaseMode()), 2, 3, 1, structureBoundingBoxIn);
 
 			for (int k = 0; k < 5; ++k)
 				for (int j = 0; j < 5; ++j)
@@ -1242,7 +1241,7 @@ public class StructureOmotholPieces
 		public HouseBanker(StructureOmotholPieces.Start start, int p_i45566_2_, Random rand, StructureBoundingBox p_i45566_4_, EnumFacing facing)
 		{
 			super(start, p_i45566_2_);
-			func_186164_a(facing);
+			setCoordBaseMode(facing);
 			boundingBox = p_i45566_4_;
 			isRoofAccessible = rand.nextBoolean();
 		}
@@ -1308,9 +1307,9 @@ public class StructureOmotholPieces
 			fillWithBlocks(worldIn, structureBoundingBoxIn, 0, 1, 1, 0, 3, 3, ACBlocks.ethaxium_brick.getDefaultState(), ACBlocks.ethaxium_brick.getDefaultState(), false);
 			fillWithBlocks(worldIn, structureBoundingBoxIn, 4, 1, 1, 4, 3, 3, ACBlocks.ethaxium_brick.getDefaultState(), ACBlocks.ethaxium_brick.getDefaultState(), false);
 			fillWithBlocks(worldIn, structureBoundingBoxIn, 1, 1, 4, 3, 3, 4, ACBlocks.ethaxium_brick.getDefaultState(), ACBlocks.ethaxium_brick.getDefaultState(), false);
-			setBlockState(worldIn, Blocks.glass_pane.getDefaultState(), 0, 2, 2, structureBoundingBoxIn);
-			setBlockState(worldIn, Blocks.glass_pane.getDefaultState(), 2, 2, 4, structureBoundingBoxIn);
-			setBlockState(worldIn, Blocks.glass_pane.getDefaultState(), 4, 2, 2, structureBoundingBoxIn);
+			setBlockState(worldIn, Blocks.GLASS_PANE.getDefaultState(), 0, 2, 2, structureBoundingBoxIn);
+			setBlockState(worldIn, Blocks.GLASS_PANE.getDefaultState(), 2, 2, 4, structureBoundingBoxIn);
+			setBlockState(worldIn, Blocks.GLASS_PANE.getDefaultState(), 4, 2, 2, structureBoundingBoxIn);
 			setBlockState(worldIn, ACBlocks.ethaxium_brick.getDefaultState(), 1, 1, 0, structureBoundingBoxIn);
 			setBlockState(worldIn, ACBlocks.ethaxium_brick.getDefaultState(), 1, 2, 0, structureBoundingBoxIn);
 			setBlockState(worldIn, ACBlocks.ethaxium_brick.getDefaultState(), 1, 3, 0, structureBoundingBoxIn);
@@ -1319,10 +1318,10 @@ public class StructureOmotholPieces
 			setBlockState(worldIn, ACBlocks.ethaxium_brick.getDefaultState(), 3, 2, 0, structureBoundingBoxIn);
 			setBlockState(worldIn, ACBlocks.ethaxium_brick.getDefaultState(), 3, 1, 0, structureBoundingBoxIn);
 
-			if (getBlockStateFromPos(worldIn, 2, 0, -1, structureBoundingBoxIn).getMaterial() == Material.air && getBlockStateFromPos(worldIn, 2, -1, -1, structureBoundingBoxIn).getMaterial() != Material.air)
+			if (getBlockStateFromPos(worldIn, 2, 0, -1, structureBoundingBoxIn).getMaterial() == Material.AIR && getBlockStateFromPos(worldIn, 2, -1, -1, structureBoundingBoxIn).getMaterial() != Material.AIR)
 				setBlockState(worldIn, ACBlocks.ethaxium_brick_stairs.getDefaultState().withProperty(BlockStairs.FACING, EnumFacing.NORTH), 2, 0, -1, structureBoundingBoxIn);
 
-			fillWithBlocks(worldIn, structureBoundingBoxIn, 1, 1, 1, 3, 3, 3, Blocks.air.getDefaultState(), Blocks.air.getDefaultState(), false);
+			fillWithBlocks(worldIn, structureBoundingBoxIn, 1, 1, 1, 3, 3, 3, Blocks.AIR.getDefaultState(), Blocks.AIR.getDefaultState(), false);
 
 			fillWithBlocks(worldIn, structureBoundingBoxIn, 0, 5, 0, 4, 5, 4, ACBlocks.ethaxium_brick.getDefaultState(), ACBlocks.ethaxium_brick.getDefaultState(), false);
 			fillWithBlocks(worldIn, structureBoundingBoxIn, 0, 9, 0, 4, 9, 4, ACBlocks.ethaxium_pillar.getDefaultState(), ACBlocks.ethaxium_pillar.getDefaultState(), false);
@@ -1343,10 +1342,10 @@ public class StructureOmotholPieces
 			fillWithBlocks(worldIn, structureBoundingBoxIn, 1, 6, 0, 3, 8, 0, ACBlocks.ethaxium_brick.getDefaultState(), ACBlocks.ethaxium_brick.getDefaultState(), false);
 			fillWithBlocks(worldIn, structureBoundingBoxIn, 4, 6, 1, 4, 8, 3, ACBlocks.ethaxium_brick.getDefaultState(), ACBlocks.ethaxium_brick.getDefaultState(), false);
 			fillWithBlocks(worldIn, structureBoundingBoxIn, 1, 6, 4, 3, 8, 4, ACBlocks.ethaxium_brick.getDefaultState(), ACBlocks.ethaxium_brick.getDefaultState(), false);
-			setBlockState(worldIn, Blocks.glass_pane.getDefaultState(), 0, 7, 2, structureBoundingBoxIn);
-			setBlockState(worldIn, Blocks.glass_pane.getDefaultState(), 2, 7, 4, structureBoundingBoxIn);
-			setBlockState(worldIn, Blocks.glass_pane.getDefaultState(), 4, 7, 2, structureBoundingBoxIn);
-			setBlockState(worldIn, Blocks.glass_pane.getDefaultState(), 2, 7, 0, structureBoundingBoxIn);
+			setBlockState(worldIn, Blocks.GLASS_PANE.getDefaultState(), 0, 7, 2, structureBoundingBoxIn);
+			setBlockState(worldIn, Blocks.GLASS_PANE.getDefaultState(), 2, 7, 4, structureBoundingBoxIn);
+			setBlockState(worldIn, Blocks.GLASS_PANE.getDefaultState(), 4, 7, 2, structureBoundingBoxIn);
+			setBlockState(worldIn, Blocks.GLASS_PANE.getDefaultState(), 2, 7, 0, structureBoundingBoxIn);
 			setBlockState(worldIn, ACBlocks.ethaxium_brick.getDefaultState(), 1, 6, 0, structureBoundingBoxIn);
 			setBlockState(worldIn, ACBlocks.ethaxium_brick.getDefaultState(), 1, 7, 0, structureBoundingBoxIn);
 			setBlockState(worldIn, ACBlocks.ethaxium_brick.getDefaultState(), 1, 8, 0, structureBoundingBoxIn);
@@ -1375,7 +1374,7 @@ public class StructureOmotholPieces
 				setBlockState(worldIn, ACBlocks.ethaxium_brick_fence.getDefaultState(), 0, 10, 3, structureBoundingBoxIn);
 			}
 
-			IBlockState iblockstate = Blocks.ladder.getDefaultState().withProperty(BlockLadder.FACING, EnumFacing.SOUTH);
+			IBlockState iblockstate = Blocks.LADDER.getDefaultState().withProperty(BlockLadder.FACING, EnumFacing.SOUTH);
 			setBlockState(worldIn, iblockstate, 3, 1, 3, structureBoundingBoxIn);
 			setBlockState(worldIn, iblockstate, 3, 2, 3, structureBoundingBoxIn);
 			setBlockState(worldIn, iblockstate, 3, 3, 3, structureBoundingBoxIn);
@@ -1390,7 +1389,7 @@ public class StructureOmotholPieces
 				setBlockState(worldIn, iblockstate, 3, 9, 3, structureBoundingBoxIn);
 			}
 
-			setBlockState(worldIn, Blocks.torch.getDefaultState().withProperty(BlockTorch.FACING, func_186165_e()), 2, 3, 1, structureBoundingBoxIn);
+			setBlockState(worldIn, Blocks.TORCH.getDefaultState().withProperty(BlockTorch.FACING, getCoordBaseMode()), 2, 3, 1, structureBoundingBoxIn);
 
 			for (int k = 0; k < 5; ++k)
 				for (int j = 0; j < 5; ++j)
@@ -1421,7 +1420,7 @@ public class StructureOmotholPieces
 		public Path(StructureOmotholPieces.Start start, int p_i45562_2_, Random rand, StructureBoundingBox p_i45562_4_, EnumFacing facing)
 		{
 			super(start, p_i45562_2_);
-			func_186164_a(facing);
+			setCoordBaseMode(facing);
 			boundingBox = p_i45562_4_;
 			length = Math.max(p_i45562_4_.getXSize(), p_i45562_4_.getZSize());
 		}
@@ -1476,8 +1475,8 @@ public class StructureOmotholPieces
 				}
 			}
 
-			if (flag && rand.nextInt(3) > 0 && func_186165_e() != null)
-				switch (func_186165_e())
+			if (flag && rand.nextInt(3) > 0 && getCoordBaseMode() != null)
+				switch (getCoordBaseMode())
 				{
 				case NORTH:
 					StructureOmotholPieces.func_176069_e((StructureOmotholPieces.Start)componentIn, listIn, rand, boundingBox.minX - 1, boundingBox.minY, boundingBox.minZ, EnumFacing.WEST, getComponentType());
@@ -1492,8 +1491,8 @@ public class StructureOmotholPieces
 					StructureOmotholPieces.func_176069_e((StructureOmotholPieces.Start)componentIn, listIn, rand, boundingBox.maxX - 2, boundingBox.minY, boundingBox.minZ - 1, EnumFacing.NORTH, getComponentType());
 				}
 
-			if (flag && rand.nextInt(3) > 0 && func_186165_e() != null)
-				switch (func_186165_e())
+			if (flag && rand.nextInt(3) > 0 && getCoordBaseMode() != null)
+				switch (getCoordBaseMode())
 				{
 				case NORTH:
 					StructureOmotholPieces.func_176069_e((StructureOmotholPieces.Start)componentIn, listIn, rand, boundingBox.maxX + 1, boundingBox.minY, boundingBox.minZ, EnumFacing.EAST, getComponentType());
@@ -1539,7 +1538,7 @@ public class StructureOmotholPieces
 					{
 
 						BlockPos blockpos1 = blockpos;
-						switch(func_186165_e()){
+						switch(getCoordBaseMode()){
 						case NORTH:
 							blockpos1 = blockpos.south();
 							break;
@@ -1618,7 +1617,7 @@ public class StructureOmotholPieces
 		public List<StructureOmotholPieces.PieceWeight> structureVillageWeightedPieceList;
 		public List<StructureComponent> field_74932_i = Lists.<StructureComponent>newArrayList();
 		public List<StructureComponent> field_74930_j = Lists.<StructureComponent>newArrayList();
-		public BiomeGenBase biome;
+		public Biome biome;
 
 		public Start()
 		{
@@ -1630,8 +1629,8 @@ public class StructureOmotholPieces
 			worldChunkMngr = chunkManagerIn;
 			structureVillageWeightedPieceList = p_i2104_6_;
 			terrainType = p_i2104_7_;
-			BiomeGenBase biomegenbase = chunkManagerIn.getBiomeGenerator(new BlockPos(p_i2104_4_, 0, p_i2104_5_), Biomes.ocean);
-			//			inDesert = biomegenbase == BiomeGenBase.desert || biomegenbase == BiomeGenBase.desertHills;
+			Biome biomegenbase = chunkManagerIn.getBiomeGenerator(new BlockPos(p_i2104_4_, 0, p_i2104_5_), Biomes.OCEAN);
+			//			inDesert = biomegenbase == Biome.desert || biomegenbase == Biome.desertHills;
 			biome = biomegenbase;
 		}
 
@@ -1650,7 +1649,7 @@ public class StructureOmotholPieces
 		public Torch(StructureOmotholPieces.Start start, int p_i45568_2_, Random rand, StructureBoundingBox p_i45568_4_, EnumFacing facing)
 		{
 			super(start, p_i45568_2_);
-			func_186164_a(facing);
+			setCoordBaseMode(facing);
 			boundingBox = p_i45568_4_;
 		}
 
@@ -1677,15 +1676,15 @@ public class StructureOmotholPieces
 				boundingBox.offset(0, field_143015_k - boundingBox.maxY + 4 - 1, 0);
 			}
 
-			fillWithBlocks(worldIn, structureBoundingBoxIn, 0, 0, 0, 2, 3, 1, Blocks.air.getDefaultState(), Blocks.air.getDefaultState(), false);
+			fillWithBlocks(worldIn, structureBoundingBoxIn, 0, 0, 0, 2, 3, 1, Blocks.AIR.getDefaultState(), Blocks.AIR.getDefaultState(), false);
 			setBlockState(worldIn, ACBlocks.ethaxium_brick_fence.getDefaultState(), 1, 0, 0, structureBoundingBoxIn);
 			setBlockState(worldIn, ACBlocks.ethaxium_brick_fence.getDefaultState(), 1, 1, 0, structureBoundingBoxIn);
 			setBlockState(worldIn, ACBlocks.ethaxium_brick_fence.getDefaultState(), 1, 2, 0, structureBoundingBoxIn);
-			setBlockState(worldIn, Blocks.wool.getStateFromMeta(EnumDyeColor.WHITE.getDyeDamage()), 1, 3, 0, structureBoundingBoxIn);
-			setBlockState(worldIn, Blocks.torch.getDefaultState().withProperty(BlockTorch.FACING, EnumFacing.EAST), 2, 3, 0, structureBoundingBoxIn);
-			setBlockState(worldIn, Blocks.torch.getDefaultState().withProperty(BlockTorch.FACING, EnumFacing.NORTH), 1, 3, 1, structureBoundingBoxIn);
-			setBlockState(worldIn, Blocks.torch.getDefaultState().withProperty(BlockTorch.FACING, EnumFacing.WEST), 0, 3, 0, structureBoundingBoxIn);
-			setBlockState(worldIn, Blocks.torch.getDefaultState().withProperty(BlockTorch.FACING, EnumFacing.SOUTH), 1, 3, -1, structureBoundingBoxIn);
+			setBlockState(worldIn, Blocks.WOOL.getStateFromMeta(EnumDyeColor.WHITE.getDyeDamage()), 1, 3, 0, structureBoundingBoxIn);
+			setBlockState(worldIn, Blocks.TORCH.getDefaultState().withProperty(BlockTorch.FACING, EnumFacing.EAST), 2, 3, 0, structureBoundingBoxIn);
+			setBlockState(worldIn, Blocks.TORCH.getDefaultState().withProperty(BlockTorch.FACING, EnumFacing.NORTH), 1, 3, 1, structureBoundingBoxIn);
+			setBlockState(worldIn, Blocks.TORCH.getDefaultState().withProperty(BlockTorch.FACING, EnumFacing.WEST), 0, 3, 0, structureBoundingBoxIn);
+			setBlockState(worldIn, Blocks.TORCH.getDefaultState().withProperty(BlockTorch.FACING, EnumFacing.SOUTH), 1, 3, -1, structureBoundingBoxIn);
 			return true;
 		}
 	}
@@ -1735,8 +1734,8 @@ public class StructureOmotholPieces
 		 */
 		protected StructureComponent getNextComponentNN(StructureOmotholPieces.Start start, List<StructureComponent> p_74891_2_, Random rand, int p_74891_4_, int p_74891_5_)
 		{
-			if (func_186165_e() != null)
-				switch (func_186165_e())
+			if (getCoordBaseMode() != null)
+				switch (getCoordBaseMode())
 				{
 				case NORTH:
 					return StructureOmotholPieces.func_176066_d(start, p_74891_2_, rand, boundingBox.minX - 1, boundingBox.minY + p_74891_4_, boundingBox.minZ + p_74891_5_, EnumFacing.WEST, getComponentType());
@@ -1756,8 +1755,8 @@ public class StructureOmotholPieces
 		 */
 		protected StructureComponent getNextComponentPP(StructureOmotholPieces.Start start, List<StructureComponent> p_74894_2_, Random rand, int p_74894_4_, int p_74894_5_)
 		{
-			if (func_186165_e() != null)
-				switch (func_186165_e())
+			if (getCoordBaseMode() != null)
+				switch (getCoordBaseMode())
 				{
 				case NORTH:
 					return StructureOmotholPieces.func_176066_d(start, p_74894_2_, rand, boundingBox.maxX + 1, boundingBox.minY + p_74894_4_, boundingBox.minZ + p_74894_5_, EnumFacing.EAST, getComponentType());
@@ -1785,7 +1784,7 @@ public class StructureOmotholPieces
 			for (int k = boundingBox.minZ; k <= boundingBox.maxZ; ++k)
 				for (int l = boundingBox.minX; l <= boundingBox.maxX; ++l)
 				{
-					blockpos$mutableblockpos.set(l, 64, k);
+					blockpos$mutableblockpos.setPos(l, 64, k);
 
 					if (p_74889_2_.isVecInside(blockpos$mutableblockpos))
 					{
@@ -1870,9 +1869,9 @@ public class StructureOmotholPieces
 		public Well(StructureOmotholPieces.Start start, int p_i2109_2_, Random rand, int p_i2109_4_, int p_i2109_5_)
 		{
 			super(start, p_i2109_2_);
-			func_186164_a(EnumFacing.Plane.HORIZONTAL.random(rand));
+			setCoordBaseMode(EnumFacing.Plane.HORIZONTAL.random(rand));
 
-			switch (func_186165_e())
+			switch (getCoordBaseMode())
 			{
 			case NORTH:
 			case SOUTH:
@@ -1926,7 +1925,7 @@ public class StructureOmotholPieces
 		public WoodHut(StructureOmotholPieces.Start start, int p_i45565_2_, Random rand, StructureBoundingBox p_i45565_4_, EnumFacing facing)
 		{
 			super(start, p_i45565_2_);
-			func_186164_a(facing);
+			setCoordBaseMode(facing);
 			boundingBox = p_i45565_4_;
 			isTallHouse = rand.nextBoolean();
 			tablePosition = rand.nextInt(3);
@@ -1977,9 +1976,9 @@ public class StructureOmotholPieces
 				boundingBox.offset(0, field_143015_k - boundingBox.maxY + 6 - 1, 0);
 			}
 
-			fillWithBlocks(worldIn, structureBoundingBoxIn, 1, 1, 1, 3, 5, 4, Blocks.air.getDefaultState(), Blocks.air.getDefaultState(), false);
+			fillWithBlocks(worldIn, structureBoundingBoxIn, 1, 1, 1, 3, 5, 4, Blocks.AIR.getDefaultState(), Blocks.AIR.getDefaultState(), false);
 			fillWithBlocks(worldIn, structureBoundingBoxIn, 0, 0, 0, 3, 0, 4, ACBlocks.ethaxium_brick.getDefaultState(), ACBlocks.ethaxium_brick.getDefaultState(), false);
-			fillWithBlocks(worldIn, structureBoundingBoxIn, 1, 0, 1, 2, 0, 3, Blocks.dirt.getDefaultState(), Blocks.dirt.getDefaultState(), false);
+			fillWithBlocks(worldIn, structureBoundingBoxIn, 1, 0, 1, 2, 0, 3, Blocks.DIRT.getDefaultState(), Blocks.DIRT.getDefaultState(), false);
 
 			if (isTallHouse)
 				fillWithBlocks(worldIn, structureBoundingBoxIn, 1, 4, 1, 2, 4, 3, ACBlocks.ethaxium_pillar.getDefaultState(), ACBlocks.ethaxium_pillar.getDefaultState(), false);
@@ -2004,20 +2003,20 @@ public class StructureOmotholPieces
 			fillWithBlocks(worldIn, structureBoundingBoxIn, 3, 1, 1, 3, 3, 3, ACBlocks.ethaxium_brick.getDefaultState(), ACBlocks.ethaxium_brick.getDefaultState(), false);
 			fillWithBlocks(worldIn, structureBoundingBoxIn, 1, 1, 0, 2, 3, 0, ACBlocks.ethaxium_brick.getDefaultState(), ACBlocks.ethaxium_brick.getDefaultState(), false);
 			fillWithBlocks(worldIn, structureBoundingBoxIn, 1, 1, 4, 2, 3, 4, ACBlocks.ethaxium_brick.getDefaultState(), ACBlocks.ethaxium_brick.getDefaultState(), false);
-			setBlockState(worldIn, Blocks.glass_pane.getDefaultState(), 0, 2, 2, structureBoundingBoxIn);
-			setBlockState(worldIn, Blocks.glass_pane.getDefaultState(), 3, 2, 2, structureBoundingBoxIn);
+			setBlockState(worldIn, Blocks.GLASS_PANE.getDefaultState(), 0, 2, 2, structureBoundingBoxIn);
+			setBlockState(worldIn, Blocks.GLASS_PANE.getDefaultState(), 3, 2, 2, structureBoundingBoxIn);
 
 			if (tablePosition > 0)
 			{
-				setBlockState(worldIn, Blocks.oak_fence.getDefaultState(), tablePosition, 1, 3, structureBoundingBoxIn);
-				setBlockState(worldIn, Blocks.wooden_pressure_plate.getDefaultState(), tablePosition, 2, 3, structureBoundingBoxIn);
+				setBlockState(worldIn, Blocks.OAK_FENCE.getDefaultState(), tablePosition, 1, 3, structureBoundingBoxIn);
+				setBlockState(worldIn, Blocks.WOODEN_PRESSURE_PLATE.getDefaultState(), tablePosition, 2, 3, structureBoundingBoxIn);
 			}
 
-			setBlockState(worldIn, Blocks.air.getDefaultState(), 1, 1, 0, structureBoundingBoxIn);
-			setBlockState(worldIn, Blocks.air.getDefaultState(), 1, 2, 0, structureBoundingBoxIn);
+			setBlockState(worldIn, Blocks.AIR.getDefaultState(), 1, 1, 0, structureBoundingBoxIn);
+			setBlockState(worldIn, Blocks.AIR.getDefaultState(), 1, 2, 0, structureBoundingBoxIn);
 			placeDoorCurrentPosition(worldIn, structureBoundingBoxIn, randomIn, 1, 1, 0, EnumFacing.NORTH);
 
-			if (getBlockStateFromPos(worldIn, 1, 0, -1, structureBoundingBoxIn).getMaterial() == Material.air && getBlockStateFromPos(worldIn, 1, -1, -1, structureBoundingBoxIn).getMaterial() != Material.air)
+			if (getBlockStateFromPos(worldIn, 1, 0, -1, structureBoundingBoxIn).getMaterial() == Material.AIR && getBlockStateFromPos(worldIn, 1, -1, -1, structureBoundingBoxIn).getMaterial() != Material.AIR)
 				setBlockState(worldIn, ACBlocks.ethaxium_brick_stairs.getDefaultState().withProperty(BlockStairs.FACING, EnumFacing.NORTH), 1, 0, -1, structureBoundingBoxIn);
 
 			for (int i = 0; i < 5; ++i)

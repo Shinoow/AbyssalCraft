@@ -87,7 +87,7 @@ public class EntityCoraliumArrow extends EntityArrow {
 		IBlockState iblockstate = worldObj.getBlockState(blockpos);
 		Block block = iblockstate.getBlock();
 
-		if (block.getMaterial(iblockstate) != Material.air)
+		if (block.getMaterial(iblockstate) != Material.AIR)
 		{
 			//			block.setBlockBoundsBasedOnState(worldObj, blockpos);
 			AxisAlignedBB axisalignedbb = block.getBoundingBox(iblockstate, worldObj, blockpos);
@@ -233,10 +233,10 @@ public class EntityCoraliumArrow extends EntityArrow {
 							}
 
 							if (shootingEntity != null && movingobjectposition.entityHit != shootingEntity && movingobjectposition.entityHit instanceof EntityPlayer && shootingEntity instanceof EntityPlayerMP)
-								((EntityPlayerMP)shootingEntity).playerNetServerHandler.sendPacket(new SPacketChangeGameState(6, 0.0F));
+								((EntityPlayerMP)shootingEntity).connection.sendPacket(new SPacketChangeGameState(6, 0.0F));
 						}
 
-						playSound(SoundEvents.entity_arrow_hit_player, 1.0F, 1.2F / (rand.nextFloat() * 0.2F + 0.9F));
+						playSound(SoundEvents.ENTITY_ARROW_HIT_PLAYER, 1.0F, 1.2F / (rand.nextFloat() * 0.2F + 0.9F));
 
 						if (!(movingobjectposition.entityHit instanceof EntityEnderman))
 							setDead();
@@ -267,12 +267,12 @@ public class EntityCoraliumArrow extends EntityArrow {
 					posX -= motionX / f5 * 0.05000000074505806D;
 					posY -= motionY / f5 * 0.05000000074505806D;
 					posZ -= motionZ / f5 * 0.05000000074505806D;
-					playSound(SoundEvents.entity_arrow_hit, 1.0F, 1.2F / (rand.nextFloat() * 0.2F + 0.9F));
+					playSound(SoundEvents.ENTITY_ARROW_HIT, 1.0F, 1.2F / (rand.nextFloat() * 0.2F + 0.9F));
 					inGround = true;
 					arrowShake = 7;
 					setIsCritical(false);
 
-					if (inTile.getMaterial(iblockstate1) != Material.air)
+					if (inTile.getMaterial(iblockstate1) != Material.AIR)
 						inTile.onEntityCollidedWithBlock(worldObj, blockpos1, iblockstate1, this);
 				}
 
@@ -329,6 +329,6 @@ public class EntityCoraliumArrow extends EntityArrow {
 	@Override
 	protected ItemStack getArrowStack() {
 
-		return new ItemStack(Items.arrow);
+		return new ItemStack(Items.ARROW);
 	}
 }

@@ -41,25 +41,25 @@ public class EntityDemonCow extends EntityDemonAnimal {
 	@Override
 	protected SoundEvent getAmbientSound()
 	{
-		return SoundEvents.entity_cow_ambient;
+		return SoundEvents.ENTITY_COW_AMBIENT;
 	}
 
 	@Override
 	protected SoundEvent getHurtSound()
 	{
-		return SoundEvents.entity_ghast_hurt;
+		return SoundEvents.ENTITY_GHAST_HURT;
 	}
 
 	@Override
 	protected SoundEvent getDeathSound()
 	{
-		return SoundEvents.entity_cow_death;
+		return SoundEvents.ENTITY_COW_DEATH;
 	}
 
 	@Override
 	protected void playStepSound(BlockPos pos, Block p_145780_4_)
 	{
-		playSound(SoundEvents.entity_cow_step, 0.15F, 1.0F);
+		playSound(SoundEvents.ENTITY_COW_STEP, 0.15F, 1.0F);
 	}
 
 	@Override

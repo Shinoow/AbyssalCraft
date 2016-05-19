@@ -55,7 +55,7 @@ public class TileEntitySacrificialAltar extends TileEntity implements IEnergyCon
 	}
 
 	@Override
-	public void writeToNBT(NBTTagCompound nbttagcompound)
+	public NBTTagCompound writeToNBT(NBTTagCompound nbttagcompound)
 	{
 		super.writeToNBT(nbttagcompound);
 		NBTTagCompound nbtItem = new NBTTagCompound();
@@ -66,10 +66,12 @@ public class TileEntitySacrificialAltar extends TileEntity implements IEnergyCon
 		nbttagcompound.setFloat("PotEnergy", energy);
 		nbttagcompound.setInteger("CollectionLimit", collectionLimit);
 		nbttagcompound.setInteger("CoolDown", coolDown);
+		
+		return nbttagcompound;
 	}
 
 	@Override
-	public Packet getDescriptionPacket() {
+	public SPacketUpdateTileEntity getUpdatePacket() {
 		NBTTagCompound nbtTag = new NBTTagCompound();
 		writeToNBT(nbtTag);
 		return new SPacketUpdateTileEntity(pos, 1, nbtTag);

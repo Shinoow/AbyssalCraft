@@ -37,9 +37,9 @@ public class BlockHouse extends Block {
 	Random rand;
 
 	public BlockHouse() {
-		super(Material.wood);
+		super(Material.WOOD);
 		//		setBlockBounds(0.2F, 0.0F, 0.2F, 0.8F, 0.8F, 0.8F);
-		setStepSound(SoundType.WOOD);
+		setSoundType(SoundType.WOOD);
 	}
 
 	@Override
@@ -78,34 +78,34 @@ public class BlockHouse extends Block {
 				int y = pos.getY();
 				int z = pos.getZ();
 				par1World.setBlockToAir(pos);
-				par1World.setBlockState(new BlockPos(x, y, z - 1), Blocks.stone_stairs.getStateFromMeta(3), 2);
+				par1World.setBlockState(new BlockPos(x, y, z - 1), Blocks.STONE_STAIRS.getStateFromMeta(3), 2);
 				for(int i = 0; i <= 4; i++)
 					for(int j = 0; j <= 4; j++)
-						par1World.setBlockState(new BlockPos(x -2 + i, y, z - (2 + j)), Blocks.cobblestone.getDefaultState(), 2);
+						par1World.setBlockState(new BlockPos(x -2 + i, y, z - (2 + j)), Blocks.COBBLESTONE.getDefaultState(), 2);
 				for(int i = 0; i <= 2; i++){
-					par1World.setBlockState(new BlockPos(x - 1, y + 1 + i, z - 2), Blocks.planks.getDefaultState(), 2);
-					par1World.setBlockState(new BlockPos(x + 1, y + 1 + i, z - 2), Blocks.planks.getDefaultState(), 2);
+					par1World.setBlockState(new BlockPos(x - 1, y + 1 + i, z - 2), Blocks.PLANKS.getDefaultState(), 2);
+					par1World.setBlockState(new BlockPos(x + 1, y + 1 + i, z - 2), Blocks.PLANKS.getDefaultState(), 2);
 					for(int j = 0; j <= 2; j++)
-						par1World.setBlockState(new BlockPos(x - 1 + j, y + 1 + i, z - 6), Blocks.planks.getDefaultState(), 2);
+						par1World.setBlockState(new BlockPos(x - 1 + j, y + 1 + i, z - 6), Blocks.PLANKS.getDefaultState(), 2);
 				} for(int i = 0; i <= 4; i++)
 					for(int j = 0; j <= 2; j++){
-						par1World.setBlockState(new BlockPos(x - 2, y + 1 + j, z - 2 - i), Blocks.planks.getDefaultState(), 2);
-						par1World.setBlockState(new BlockPos(x + 2, y + 1 + j, z - 2 - i), Blocks.planks.getDefaultState(), 2);
+						par1World.setBlockState(new BlockPos(x - 2, y + 1 + j, z - 2 - i), Blocks.PLANKS.getDefaultState(), 2);
+						par1World.setBlockState(new BlockPos(x + 2, y + 1 + j, z - 2 - i), Blocks.PLANKS.getDefaultState(), 2);
 					}
-				par1World.setBlockState(new BlockPos(x, y + 3, z - 2), Blocks.planks.getDefaultState(), 2);
+				par1World.setBlockState(new BlockPos(x, y + 3, z - 2), Blocks.PLANKS.getDefaultState(), 2);
 				for(int i = 0; i <= 4; i++){
-					par1World.setBlockState(new BlockPos(x - 2, y + 4, z - 2 - i), Blocks.log.getDefaultState(), 2);
-					par1World.setBlockState(new BlockPos(x + 2, y + 4, z - 2 - i), Blocks.log.getDefaultState(), 2);
+					par1World.setBlockState(new BlockPos(x - 2, y + 4, z - 2 - i), Blocks.LOG.getDefaultState(), 2);
+					par1World.setBlockState(new BlockPos(x + 2, y + 4, z - 2 - i), Blocks.LOG.getDefaultState(), 2);
 				} for(int i = 0; i <= 2; i++)
 					for(int j = 0; j <= 1; j++)
-						par1World.setBlockState(new BlockPos(x - 1 + i, y + 4, z - (2 + j*4)), Blocks.log.getDefaultState(), 2);
+						par1World.setBlockState(new BlockPos(x - 1 + i, y + 4, z - (2 + j*4)), Blocks.LOG.getDefaultState(), 2);
 				for(int i = 0; i <= 2; i++)
 					for(int j = 0; j <= 2; j++)
-						par1World.setBlockState(new BlockPos(x -1 + i, y + 4, z - (3 + j)), Blocks.planks.getDefaultState(), 2);
+						par1World.setBlockState(new BlockPos(x -1 + i, y + 4, z - (3 + j)), Blocks.PLANKS.getDefaultState(), 2);
 				for(int i = 0; i <= 2; i++)
 					for(int j = 0; j <= 1; j++){
-						par1World.setBlockState(new BlockPos(x - 2, y + 1 + i, z - (2 + j*4)), Blocks.cobblestone.getDefaultState(), 2);
-						par1World.setBlockState(new BlockPos(x + 2, y + 1 + i, z - (2 + j*4)), Blocks.cobblestone.getDefaultState(), 2);
+						par1World.setBlockState(new BlockPos(x - 2, y + 1 + i, z - (2 + j*4)), Blocks.COBBLESTONE.getDefaultState(), 2);
+						par1World.setBlockState(new BlockPos(x + 2, y + 1 + i, z - (2 + j*4)), Blocks.COBBLESTONE.getDefaultState(), 2);
 					}
 			}
 		}

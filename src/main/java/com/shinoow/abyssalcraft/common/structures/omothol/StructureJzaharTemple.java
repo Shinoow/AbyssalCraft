@@ -67,10 +67,10 @@ public class StructureJzaharTemple extends WorldGenerator {
 						}
 						if(y > 1 && y < 10){
 							if(x < 11)
-								world.setBlockState(pos.add(x, y, 89), Blocks.bookshelf.getDefaultState(), 2);
+								world.setBlockState(pos.add(x, y, 89), Blocks.BOOKSHELF.getDefaultState(), 2);
 							if(z > 66 && z < 90){
-								world.setBlockState(pos.add(-10, y, z), Blocks.bookshelf.getDefaultState(), 2);
-								world.setBlockState(pos.add(10, y, z), Blocks.bookshelf.getDefaultState(), 2);
+								world.setBlockState(pos.add(-10, y, z), Blocks.BOOKSHELF.getDefaultState(), 2);
+								world.setBlockState(pos.add(10, y, z), Blocks.BOOKSHELF.getDefaultState(), 2);
 							}
 						}
 					}

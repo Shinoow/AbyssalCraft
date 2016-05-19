@@ -20,7 +20,7 @@ import java.util.Random;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
-import net.minecraft.world.biome.BiomeGenBase;
+import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.structure.MapGenStructure;
 import net.minecraft.world.gen.structure.StructureComponent;
 import net.minecraft.world.gen.structure.StructureStart;
@@ -29,7 +29,7 @@ import com.shinoow.abyssalcraft.api.biome.ACBiomes;
 
 public class MapGenOmothol extends MapGenStructure
 {
-	public static List<BiomeGenBase> villageSpawnBiomes = Arrays.<BiomeGenBase>asList(new BiomeGenBase[] {ACBiomes.omothol});
+	public static List<Biome> villageSpawnBiomes = Arrays.<Biome>asList(new Biome[] {ACBiomes.omothol});
 	/** World terrain type, 0 for normal, 1 for flat map */
 	private int terrainType;
 	private int field_82665_g;

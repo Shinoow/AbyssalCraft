@@ -34,11 +34,11 @@ import com.shinoow.abyssalcraft.common.util.EntityUtil;
 
 public class BlockAntiliquid extends BlockFluidClassic {
 
-	public static final MaterialLiquid antimatter = new MaterialLiquid(MapColor.silverColor);
+	public static final MaterialLiquid antimatter = new MaterialLiquid(MapColor.SILVER);
 
 
 	public BlockAntiliquid() {
-		super(AbyssalCraft.antifluid, Material.water);
+		super(AbyssalCraft.antifluid, Material.WATER);
 	}
 
 	@Override
@@ -55,13 +55,13 @@ public class BlockAntiliquid extends BlockFluidClassic {
 
 	@Override
 	public MapColor getMapColor(IBlockState state){
-		return MapColor.silverColor;
+		return MapColor.SILVER;
 	}
 
 	@Override
 	public boolean canDisplace(IBlockAccess world, BlockPos pos) {
-		if(world.getBlockState(pos).getBlock() == ACBlocks.liquid_coralium || world.getBlockState(pos).getMaterial() == Material.water &&
-				world.getBlockState(pos).getBlock() != ACBlocks.liquid_coralium && world.getBlockState(pos).getBlock() != this || world.getBlockState(pos).getMaterial() == Material.lava)
+		if(world.getBlockState(pos).getBlock() == ACBlocks.liquid_coralium || world.getBlockState(pos).getMaterial() == Material.WATER &&
+				world.getBlockState(pos).getBlock() != ACBlocks.liquid_coralium && world.getBlockState(pos).getBlock() != this || world.getBlockState(pos).getMaterial() == Material.LAVA)
 			return true;
 		return super.canDisplace(world, pos);
 	}
@@ -72,11 +72,11 @@ public class BlockAntiliquid extends BlockFluidClassic {
 		if(!world.isRemote && world.getBlockState(pos).getBlock() == ACBlocks.liquid_coralium)
 			world.setBlockState(pos, ACBlocks.coralium_stone.getDefaultState());
 
-		if(!world.isRemote && world.getBlockState(pos).getMaterial() == Material.water && world.getBlockState(pos).getBlock() != ACBlocks.liquid_coralium && world.getBlockState(pos).getBlock() != this)
-			world.setBlockState(pos, Blocks.packed_ice.getDefaultState());
+		if(!world.isRemote && world.getBlockState(pos).getMaterial() == Material.WATER && world.getBlockState(pos).getBlock() != ACBlocks.liquid_coralium && world.getBlockState(pos).getBlock() != this)
+			world.setBlockState(pos, Blocks.PACKED_ICE.getDefaultState());
 
-		if(!world.isRemote && world.getBlockState(pos).getMaterial() == Material.lava)
-			world.setBlockState(pos, Blocks.obsidian.getDefaultState());
+		if(!world.isRemote && world.getBlockState(pos).getMaterial() == Material.LAVA)
+			world.setBlockState(pos, Blocks.OBSIDIAN.getDefaultState());
 
 		return super.displaceIfPossible(world, pos);
 	}
@@ -86,11 +86,11 @@ public class BlockAntiliquid extends BlockFluidClassic {
 		super.onEntityCollidedWithBlock(par1World, pos, state, par5Entity);
 
 		if(par5Entity instanceof EntityLivingBase && !EntityUtil.isEntityAnti((EntityLivingBase)par5Entity)){
-			((EntityLivingBase)par5Entity).addPotionEffect(new PotionEffect(MobEffects.moveSlowdown, 400));
-			((EntityLivingBase)par5Entity).addPotionEffect(new PotionEffect(MobEffects.blindness, 400));
-			((EntityLivingBase)par5Entity).addPotionEffect(new PotionEffect(MobEffects.weakness, 400));
-			((EntityLivingBase)par5Entity).addPotionEffect(new PotionEffect(MobEffects.hunger, 400));
-			((EntityLivingBase)par5Entity).addPotionEffect(new PotionEffect(MobEffects.nightVision, 400));
+			((EntityLivingBase)par5Entity).addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, 400));
+			((EntityLivingBase)par5Entity).addPotionEffect(new PotionEffect(MobEffects.BLINDNESS, 400));
+			((EntityLivingBase)par5Entity).addPotionEffect(new PotionEffect(MobEffects.WEAKNESS, 400));
+			((EntityLivingBase)par5Entity).addPotionEffect(new PotionEffect(MobEffects.HUNGER, 400));
+			((EntityLivingBase)par5Entity).addPotionEffect(new PotionEffect(MobEffects.NIGHT_VISION, 400));
 			((EntityLivingBase)par5Entity).addPotionEffect(new PotionEffect(AbyssalCraftAPI.antimatter_potion, 200));
 		}
 		if(par5Entity instanceof EntityItem && AbyssalCraft.antiItemDisintegration)

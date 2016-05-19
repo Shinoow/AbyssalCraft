@@ -23,8 +23,8 @@ import com.shinoow.abyssalcraft.AbyssalCraft;
 public class WorldProviderDreadlands extends WorldProvider {
 
 	@Override
-	public void registerWorldChunkManager() {
-		worldChunkMgr = new WorldChunkManagerDreadlands(worldObj.getSeed(), worldObj.getWorldInfo().getTerrainType());
+	public void createBiomeProvider() {
+		biomeProvider = new WorldChunkManagerDreadlands(worldObj.getSeed(), worldObj.getWorldInfo().getTerrainType());
 		hasNoSky = true;
 		setDimension(AbyssalCraft.configDimId2);
 	}

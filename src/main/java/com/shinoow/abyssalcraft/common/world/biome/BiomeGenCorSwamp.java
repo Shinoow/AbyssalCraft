@@ -18,7 +18,7 @@ import net.minecraft.block.state.pattern.BlockMatcher;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraft.world.biome.BiomeGenBase;
+import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.feature.WorldGenAbstractTree;
 import net.minecraft.world.gen.feature.WorldGenMinable;
 import net.minecraftforge.fml.relauncher.Side;
@@ -41,15 +41,15 @@ import com.shinoow.abyssalcraft.common.entity.anti.EntityAntiSpider;
 import com.shinoow.abyssalcraft.common.entity.anti.EntityAntiZombie;
 import com.shinoow.abyssalcraft.common.world.gen.WorldGenAntimatterLake;
 
-public class BiomeGenCorSwamp extends BiomeGenBase {
+public class BiomeGenCorSwamp extends Biome {
 
 	@SuppressWarnings("unchecked")
 	public BiomeGenCorSwamp(BiomeProperties par1) {
 		super(par1);
 		//		minHeight = -0.2F;
 		//		maxHeight = 0.1F;
-		topBlock=Blocks.grass.getDefaultState();
-		fillerBlock=Blocks.dirt.getDefaultState();
+		topBlock=Blocks.GRASS.getDefaultState();
+		fillerBlock=Blocks.DIRT.getDefaultState();
 		theBiomeDecorator.treesPerChunk = 2;
 		theBiomeDecorator.flowersPerChunk = 1;
 		theBiomeDecorator.deadBushPerChunk = 1;
@@ -90,7 +90,7 @@ public class BiomeGenCorSwamp extends BiomeGenBase {
 				int var9 = par2Random.nextInt(16);
 				Block var10 = par1World.getBlockState(pos.add(var7, var8, var9)).getBlock();
 
-				if (var10 != null && var10.isReplaceableOreGen(par1World.getBlockState(pos.add(var7, var8, var9)), par1World, pos.add(var7, var8, var9), BlockMatcher.forBlock(Blocks.stone)) || var10 == Blocks.iron_ore || var10 == Blocks.coal_ore)
+				if (var10 != null && var10.isReplaceableOreGen(par1World.getBlockState(pos.add(var7, var8, var9)), par1World, pos.add(var7, var8, var9), BlockMatcher.forBlock(Blocks.STONE)) || var10 == Blocks.IRON_ORE || var10 == Blocks.COAL_ORE)
 					par1World.setBlockState(pos.add(var7, var8, var9), ACBlocks.coralium_ore.getDefaultState(), 2);
 			}
 			for(int rarity = 0; rarity < 6; rarity++)
@@ -117,7 +117,7 @@ public class BiomeGenCorSwamp extends BiomeGenBase {
 	@Override
 	public WorldGenAbstractTree genBigTreeChance(Random par1Random)
 	{
-		return worldGeneratorSwamp;
+		return SWAMP_FEATURE;
 	}
 
 	@Override

@@ -11,20 +11,18 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.common.inventory;
 
-import invtweaks.api.container.ChestContainer;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.ClickType;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.fml.common.Optional.Interface;
 
 import com.shinoow.abyssalcraft.api.APIUtils;
 import com.shinoow.abyssalcraft.common.items.ItemCrystalBag;
 
-@Interface(iface = "invtweaks.api.container.ChestContainer", modid = "inventorytweaks")
-@ChestContainer
+//@Interface(iface = "invtweaks.api.container.ChestContainer", modid = "inventorytweaks")
+//@ChestContainer
 public class ContainerCrystalBag extends Container
 {
 	/** The Item Inventory for this Container */
@@ -106,12 +104,12 @@ public class ContainerCrystalBag extends Container
 	//	}
 
 	@Override
-	public ItemStack func_184996_a(int slot, int dragType, ClickType clickType, EntityPlayer player) {
+	public ItemStack slotClick(int slot, int dragType, ClickType clickType, EntityPlayer player) {
 
 		if (slot >= 0 && getSlot(slot) != null && getSlot(slot).getStack() != null)
 			if(getSlot(slot).getStack().getItem() instanceof ItemCrystalBag)
 				return null;
-		return super.func_184996_a(slot, dragType, clickType, player);
+		return super.slotClick(slot, dragType, clickType, player);
 	}
 
 	public InventoryCrystalBag getBagInventory(){

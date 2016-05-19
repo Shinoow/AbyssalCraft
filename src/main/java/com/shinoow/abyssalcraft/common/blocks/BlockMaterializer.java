@@ -49,12 +49,12 @@ public class BlockMaterializer extends BlockContainer {
 	private static boolean keepInventory;
 
 	public BlockMaterializer() {
-		super(Material.rock);
+		super(Material.ROCK);
 		setDefaultState(blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH));
 		setHarvestLevel("pickaxe", 8);
 		setHardness(100);
 		setResistance(Float.MAX_VALUE);
-		setStepSound(SoundType.STONE);
+		setSoundType(SoundType.STONE);
 		setCreativeTab(AbyssalCraft.tabDecoration);
 	}
 

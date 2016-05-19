@@ -40,11 +40,11 @@ import com.shinoow.abyssalcraft.common.blocks.tile.TileEntityEnergyPedestal;
 public class BlockEnergyPedestal extends BlockContainer {
 
 	public BlockEnergyPedestal() {
-		super(Material.rock);
+		super(Material.ROCK);
 		setUnlocalizedName("energypedestal");
 		setHardness(6.0F);
 		setResistance(12.0F);
-		setStepSound(SoundType.STONE);
+		setSoundType(SoundType.STONE);
 		setCreativeTab(AbyssalCraft.tabDecoration);
 		//		setBlockBounds(0.25F, 0.0F, 0.25F, 0.75F, 1.0F, 0.75F);
 	}
@@ -79,7 +79,7 @@ public class BlockEnergyPedestal extends BlockContainer {
 			if(((TileEntityEnergyPedestal)tile).getItem() != null){
 				player.inventory.addItemStackToInventory(((TileEntityEnergyPedestal)tile).getItem());
 				((TileEntityEnergyPedestal)tile).setItem(null);
-				world.playSound(pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, SoundEvents.entity_item_pickup, SoundCategory.PLAYERS, 0.5F, world.rand.nextFloat() - world.rand.nextFloat() * 0.2F + 1, false);
+				world.playSound(pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, SoundEvents.ENTITY_ITEM_PICKUP, SoundCategory.PLAYERS, 0.5F, world.rand.nextFloat() - world.rand.nextFloat() * 0.2F + 1, false);
 				return true;
 			} else //				ItemStack heldItem = player.getHeldItem();
 				if(heldItem != null){
@@ -87,7 +87,7 @@ public class BlockEnergyPedestal extends BlockContainer {
 					newItem.stackSize = 1;
 					((TileEntityEnergyPedestal)tile).setItem(newItem);
 					heldItem.stackSize--;
-					world.playSound(pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, SoundEvents.entity_item_pickup, SoundCategory.PLAYERS, 0.5F, world.rand.nextFloat() - world.rand.nextFloat() * 0.2F + 1, false);
+					world.playSound(pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, SoundEvents.ENTITY_ITEM_PICKUP, SoundCategory.PLAYERS, 0.5F, world.rand.nextFloat() - world.rand.nextFloat() * 0.2F + 1, false);
 					return true;
 				}
 		return false;

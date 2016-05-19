@@ -60,12 +60,12 @@ public class ItemCoraliumArmor extends ItemArmor {
 	public void onArmorTick(World world, EntityPlayer player, ItemStack itemstack) {
 		if (itemstack.getItem() == ACItems.refined_coralium_helmet)
 		{
-			player.addPotionEffect(new PotionEffect(MobEffects.waterBreathing, 20, 0));
-			player.addPotionEffect(new PotionEffect(MobEffects.nightVision, 260, 0));
+			player.addPotionEffect(new PotionEffect(MobEffects.WATER_BREATHING, 20, 0));
+			player.addPotionEffect(new PotionEffect(MobEffects.NIGHT_VISION, 260, 0));
 		}
 		if (itemstack.getItem() == ACItems.refined_coralium_chestplate)
-			player.addPotionEffect(new PotionEffect(MobEffects.resistance, 20, 0));
+			player.addPotionEffect(new PotionEffect(MobEffects.RESISTANCE, 20, 0));
 		if (itemstack.getItem() == ACItems.refined_coralium_boots)
-			player.addPotionEffect(new PotionEffect(MobEffects.moveSpeed, 20, 1));
+			player.addPotionEffect(new PotionEffect(MobEffects.SPEED, 20, 1));
 	}
 }

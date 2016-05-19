@@ -22,7 +22,7 @@ public class BlockDarkEthaxiumPillar extends BlockACBasic {
 	//	private static IIcon overlay;
 
 	public BlockDarkEthaxiumPillar() {
-		super(Material.rock, "pickaxe", 8, 150.0F, Float.MAX_VALUE, SoundType.STONE);
+		super(Material.ROCK, "pickaxe", 8, 150.0F, Float.MAX_VALUE, SoundType.STONE);
 	}
 
 	//	@Override

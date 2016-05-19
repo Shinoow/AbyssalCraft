@@ -114,9 +114,9 @@ public class AbyssalCraftWorldGenerator implements IWorldGenerator {
 				int y = random.nextInt(40);
 				int z = chunkZ + random.nextInt(16);
 				if(BiomeDictionary.isBiomeOfType(world.getBiomeGenForCoords(new BlockPos(x, 0, z)), Type.OCEAN) &&
-						world.getBiomeGenForCoords(new BlockPos(x, 0, z))!=Biomes.deepOcean)
+						world.getBiomeGenForCoords(new BlockPos(x, 0, z))!=Biomes.DEEP_OCEAN)
 					new WorldGenMinable(ACBlocks.coralium_ore.getDefaultState(), veinSize).generate(world, random, new BlockPos(x, y, z));
-				if(world.getBiomeGenForCoords(new BlockPos(x, 0, z))==Biomes.deepOcean)
+				if(world.getBiomeGenForCoords(new BlockPos(x, 0, z))==Biomes.DEEP_OCEAN)
 					new WorldGenMinable(ACBlocks.coralium_ore.getDefaultState(), veinSize).generate(world, random, new BlockPos(x, y-20, z));
 			}
 		}

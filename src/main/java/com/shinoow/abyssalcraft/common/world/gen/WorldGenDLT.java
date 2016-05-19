@@ -45,10 +45,10 @@ public class WorldGenDLT extends WorldGenTrees {
 
 		IBlockState j1 = world.getBlockState(new BlockPos(x, y -1, z));
 
-		if (j1.getBlock() != Blocks.dirt && j1.getMaterial() != Material.grass || y >= 256 - height - 1)
+		if (j1.getBlock() != Blocks.DIRT && j1.getMaterial() != Material.GRASS || y >= 256 - height - 1)
 			return false;
 
-		setBlockAndNotifyAdequately(world, new BlockPos(x, y -1, z), Blocks.dirt.getDefaultState());
+		setBlockAndNotifyAdequately(world, new BlockPos(x, y -1, z), Blocks.DIRT.getDefaultState());
 
 		for (int i = 0; i < height; i++)
 			world.setBlockState(new BlockPos(x, y + i, z), ACBlocks.darklands_oak_wood.getDefaultState());

@@ -56,7 +56,7 @@ public class EntityAntiChicken extends EntityAnimal implements IAntiEntity {
 		tasks.addTask(0, new EntityAISwimming(this));
 		tasks.addTask(1, new EntityAIPanic(this, 1.4D));
 		tasks.addTask(2, new EntityAIMate(this, 1.0D));
-		tasks.addTask(3, new EntityAITempt(this, 1.0D, Items.wheat_seeds, false));
+		tasks.addTask(3, new EntityAITempt(this, 1.0D, Items.WHEAT_SEEDS, false));
 		tasks.addTask(4, new EntityAIFollowParent(this, 1.1D));
 		tasks.addTask(5, new EntityAIWander(this, 1.0D));
 		tasks.addTask(6, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
@@ -97,8 +97,8 @@ public class EntityAntiChicken extends EntityAnimal implements IAntiEntity {
 
 		if (!isChild() && !worldObj.isRemote && --timeUntilNextEgg <= 0)
 		{
-			playSound(SoundEvents.entity_chicken_egg, 1.0F, (rand.nextFloat() - rand.nextFloat()) * 0.2F + 1.0F);
-			dropItem(Items.egg, 1);
+			playSound(SoundEvents.ENTITY_CHICKEN_EGG, 1.0F, (rand.nextFloat() - rand.nextFloat()) * 0.2F + 1.0F);
+			dropItem(Items.EGG, 1);
 			timeUntilNextEgg = rand.nextInt(6000) + 6000;
 		}
 	}
@@ -109,31 +109,31 @@ public class EntityAntiChicken extends EntityAnimal implements IAntiEntity {
 	@Override
 	protected SoundEvent getAmbientSound()
 	{
-		return SoundEvents.entity_chicken_ambient;
+		return SoundEvents.ENTITY_CHICKEN_AMBIENT;
 	}
 
 	@Override
 	protected SoundEvent getHurtSound()
 	{
-		return SoundEvents.entity_chicken_hurt;
+		return SoundEvents.ENTITY_CHICKEN_HURT;
 	}
 
 	@Override
 	protected SoundEvent getDeathSound()
 	{
-		return SoundEvents.entity_chicken_death;
+		return SoundEvents.ENTITY_CHICKEN_DEATH;
 	}
 
 	@Override
 	protected void playStepSound(BlockPos pos, Block p_145780_4_)
 	{
-		playSound(SoundEvents.entity_chicken_step, 0.15F, 1.0F);
+		playSound(SoundEvents.ENTITY_CHICKEN_STEP, 0.15F, 1.0F);
 	}
 
 	@Override
 	protected Item getDropItem()
 	{
-		return Items.feather;
+		return Items.FEATHER;
 	}
 
 	@Override
@@ -142,7 +142,7 @@ public class EntityAntiChicken extends EntityAnimal implements IAntiEntity {
 		int j = rand.nextInt(3) + rand.nextInt(1 + par2);
 
 		for (int k = 0; k < j; ++k)
-			dropItem(Items.feather, 1);
+			dropItem(Items.FEATHER, 1);
 
 		if (isBurning())
 			dropItem(ACItems.anti_chicken, 1);

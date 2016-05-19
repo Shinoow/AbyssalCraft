@@ -147,19 +147,19 @@ public class EntityDepthsGhoul extends EntityMob implements ICoraliumEntity {
 	protected void entityInit()
 	{
 		super.entityInit();
-		dataWatcher.register(CHILD, Byte.valueOf((byte)0));
-		dataWatcher.register(TYPE, Integer.valueOf(0));
+		dataManager.register(CHILD, Byte.valueOf((byte)0));
+		dataManager.register(TYPE, Integer.valueOf(0));
 	}
 
 	@Override
 	public boolean isChild()
 	{
-		return dataWatcher.get(CHILD).byteValue() == 1;
+		return dataManager.get(CHILD).byteValue() == 1;
 	}
 
 	public void setChild(boolean par1)
 	{
-		dataWatcher.set(CHILD, Byte.valueOf((byte)(par1 ? 1 : 0)));
+		dataManager.set(CHILD, Byte.valueOf((byte)(par1 ? 1 : 0)));
 
 		if (worldObj != null && !worldObj.isRemote)
 		{
@@ -175,12 +175,12 @@ public class EntityDepthsGhoul extends EntityMob implements ICoraliumEntity {
 
 	public int getGhoulType()
 	{
-		return dataWatcher.get(TYPE);
+		return dataManager.get(TYPE);
 	}
 
 	public void setGhoulType(int par1)
 	{
-		dataWatcher.set(TYPE, Integer.valueOf(par1));
+		dataManager.set(TYPE, Integer.valueOf(par1));
 	}
 
 	@Override
@@ -298,7 +298,7 @@ public class EntityDepthsGhoul extends EntityMob implements ICoraliumEntity {
 	@Override
 	protected void playStepSound(BlockPos pos, Block par4)
 	{
-		playSound(SoundEvents.entity_zombie_step, 0.15F, 1.0F);
+		playSound(SoundEvents.ENTITY_ZOMBIE_STEP, 0.15F, 1.0F);
 	}
 
 	@Override
@@ -397,7 +397,7 @@ public class EntityDepthsGhoul extends EntityMob implements ICoraliumEntity {
 
 			if (calendar.get(2) + 1 == 10 && calendar.get(5) == 31 && rand.nextFloat() < 0.25F)
 			{
-				setItemStackToSlot(EntityEquipmentSlot.HEAD, new ItemStack(rand.nextFloat() < 0.1F ? Blocks.lit_pumpkin : Blocks.pumpkin));
+				setItemStackToSlot(EntityEquipmentSlot.HEAD, new ItemStack(rand.nextFloat() < 0.1F ? Blocks.LIT_PUMPKIN : Blocks.PUMPKIN));
 				inventoryArmorDropChances[4] = 0.0F;
 			}
 		}

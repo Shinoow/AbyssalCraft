@@ -107,11 +107,11 @@ public class EntityODBPrimed extends Entity {
 	private void explode()
 	{
 		ACLogger.info("Unleashing hell shortly.");
-		Blocks.obsidian.setResistance(5.0F);
-		Blocks.lava.setResistance(5.0F);
-		Blocks.flowing_lava.setResistance(5.0F);
-		Blocks.water.setResistance(5.0F);
-		Blocks.flowing_water.setResistance(5.0F);
+		Blocks.OBSIDIAN.setResistance(5.0F);
+		Blocks.LAVA.setResistance(5.0F);
+		Blocks.FLOWING_LAVA.setResistance(5.0F);
+		Blocks.WATER.setResistance(5.0F);
+		Blocks.FLOWING_WATER.setResistance(5.0F);
 		ACBlocks.liquid_coralium.setResistance(50.0F);
 		float var0 = 30.0F;
 		ExplosionUtil.newODBExplosion(worldObj, this, posX, posY, posZ, var0, 128, false, true);
@@ -123,11 +123,11 @@ public class EntityODBPrimed extends Entity {
 		ExplosionUtil.newODBExplosion(worldObj, this, posX - 10, posY, posZ + 10, var0, 128, false, true);
 		ExplosionUtil.newODBExplosion(worldObj, this, posX + 10, posY, posZ + 10, var0, 128, false, true);
 		ExplosionUtil.newODBExplosion(worldObj, this, posX - 10, posY, posZ - 10, var0, 128, false, true);
-		Blocks.obsidian.setResistance(2000.0F);
-		Blocks.lava.setResistance(500.0F);
-		Blocks.flowing_lava.setResistance(500.0F);
-		Blocks.water.setResistance(500.0F);
-		Blocks.flowing_water.setResistance(500.0F);
+		Blocks.OBSIDIAN.setResistance(2000.0F);
+		Blocks.LAVA.setResistance(500.0F);
+		Blocks.FLOWING_LAVA.setResistance(500.0F);
+		Blocks.WATER.setResistance(500.0F);
+		Blocks.FLOWING_WATER.setResistance(500.0F);
 		ACBlocks.liquid_coralium.setResistance(500.0F);
 		ACLogger.info("Hell successfully unleashed.");
 
@@ -136,10 +136,10 @@ public class EntityODBPrimed extends Entity {
 			for(z = 0; z < 9; z++)
 				for(x1 = 0; x1 < 9; x1++)
 					for(z1 = 0; z1 < 9; z1++){
-						worldObj.setBlockState(new BlockPos(posX + x, posY, posZ + z), Blocks.obsidian.getDefaultState());
-						worldObj.setBlockState(new BlockPos(posX - x1, posY, posZ - z1), Blocks.obsidian.getDefaultState());
-						worldObj.setBlockState(new BlockPos(posX + x, posY, posZ - z1), Blocks.obsidian.getDefaultState());
-						worldObj.setBlockState(new BlockPos(posX - x1, posY, posZ  + z), Blocks.obsidian.getDefaultState());
+						worldObj.setBlockState(new BlockPos(posX + x, posY, posZ + z), Blocks.OBSIDIAN.getDefaultState());
+						worldObj.setBlockState(new BlockPos(posX - x1, posY, posZ - z1), Blocks.OBSIDIAN.getDefaultState());
+						worldObj.setBlockState(new BlockPos(posX + x, posY, posZ - z1), Blocks.OBSIDIAN.getDefaultState());
+						worldObj.setBlockState(new BlockPos(posX - x1, posY, posZ  + z), Blocks.OBSIDIAN.getDefaultState());
 					}
 		EntitySacthoth sacthoth = new EntitySacthoth(worldObj);
 		sacthoth.setPosition(posX, posY + 1, posZ);

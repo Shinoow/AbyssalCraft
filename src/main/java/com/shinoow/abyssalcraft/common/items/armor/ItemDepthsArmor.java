@@ -66,18 +66,18 @@ public class ItemDepthsArmor extends ItemArmor /* implements IVisDiscountGear, I
 	public void onArmorTick(World world, EntityPlayer player, ItemStack itemstack) {
 		if (itemstack.getItem() == ACItems.depths_helmet)
 		{
-			player.addPotionEffect(new PotionEffect(MobEffects.waterBreathing, 20, 0));
-			player.addPotionEffect(new PotionEffect(MobEffects.nightVision, 260, 0));
-			player.addPotionEffect(new PotionEffect(MobEffects.saturation, 20, 0));
+			player.addPotionEffect(new PotionEffect(MobEffects.WATER_BREATHING, 20, 0));
+			player.addPotionEffect(new PotionEffect(MobEffects.NIGHT_VISION, 260, 0));
+			player.addPotionEffect(new PotionEffect(MobEffects.SATURATION, 20, 0));
 			if(player.getActivePotionEffect(AbyssalCraftAPI.coralium_plague) !=null)
 				player.removePotionEffect(AbyssalCraftAPI.coralium_plague);
 		}
 		if (itemstack.getItem() == ACItems.depths_chestplate)
-			player.addPotionEffect(new PotionEffect(MobEffects.resistance, 20, 0));
+			player.addPotionEffect(new PotionEffect(MobEffects.RESISTANCE, 20, 0));
 		if (itemstack.getItem() == ACItems.depths_leggings)
-			player.addPotionEffect(new PotionEffect(MobEffects.jump, 20, 1));
+			player.addPotionEffect(new PotionEffect(MobEffects.JUMP_BOOST, 20, 1));
 		if (itemstack.getItem() == ACItems.depths_boots)
-			player.addPotionEffect(new PotionEffect(MobEffects.moveSpeed, 20, 0));
+			player.addPotionEffect(new PotionEffect(MobEffects.SPEED, 20, 0));
 	}
 
 	@Override

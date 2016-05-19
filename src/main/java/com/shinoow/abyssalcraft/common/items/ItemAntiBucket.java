@@ -30,7 +30,7 @@ public class ItemAntiBucket extends ItemBucket{
 		//		GameRegistry.registerItem(this, "antibucket");
 		setUnlocalizedName("antibucket");
 		setCreativeTab(AbyssalCraft.tabItems);
-		setContainerItem(Items.bucket);
+		setContainerItem(Items.BUCKET);
 		//		setTextureName(modid + ":" + "Antibucket")
 	}
 

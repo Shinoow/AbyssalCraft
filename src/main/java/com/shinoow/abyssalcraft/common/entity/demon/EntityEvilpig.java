@@ -70,25 +70,25 @@ public class EntityEvilpig extends EntityMob {
 	@Override
 	protected SoundEvent getAmbientSound()
 	{
-		return SoundEvents.entity_pig_ambient;
+		return SoundEvents.ENTITY_PIG_AMBIENT;
 	}
 
 	@Override
 	protected SoundEvent getHurtSound()
 	{
-		return SoundEvents.entity_ghast_hurt;
+		return SoundEvents.ENTITY_GHAST_HURT;
 	}
 
 	@Override
 	protected SoundEvent getDeathSound()
 	{
-		return SoundEvents.entity_pig_death;
+		return SoundEvents.ENTITY_PIG_DEATH;
 	}
 
 	@Override
 	protected void playStepSound(BlockPos pos, Block par4)
 	{
-		playSound(SoundEvents.entity_pig_step, 0.15F, 1.0F);
+		playSound(SoundEvents.ENTITY_PIG_STEP, 0.15F, 1.0F);
 	}
 
 	@Override
@@ -114,6 +114,6 @@ public class EntityEvilpig extends EntityMob {
 	protected void dropFewItems(boolean par1, int par2){
 		int var3 = rand.nextInt(3) + 1 + rand.nextInt(1 + par2);
 		for (int var4 = 0; var4 < var3; ++var4)
-			dropItem(Items.porkchop, 1);
+			dropItem(Items.PORKCHOP, 1);
 	}
 }

@@ -56,7 +56,7 @@ public class ItemCoraliumPArmor extends ItemArmor {
 	@Override
 	public void onArmorTick(World world, EntityPlayer player, ItemStack itemstack) {
 		if (itemstack.getItem() == ACItems.plated_coralium_helmet) {
-			player.addPotionEffect(new PotionEffect(MobEffects.nightVision, 260, 0));
+			player.addPotionEffect(new PotionEffect(MobEffects.NIGHT_VISION, 260, 0));
 			if(player.getActivePotionEffect(AbyssalCraftAPI.coralium_plague) !=null)
 				player.removePotionEffect(AbyssalCraftAPI.coralium_plague);
 		}
@@ -75,8 +75,8 @@ public class ItemCoraliumPArmor extends ItemArmor {
 		}
 		if (itemstack.getItem() == ACItems.plated_coralium_boots)
 			if(player.isInWater()){
-				player.addPotionEffect(new PotionEffect(MobEffects.moveSpeed, 20, 2));
-				player.addPotionEffect(new PotionEffect(MobEffects.waterBreathing, 20, 1));
+				player.addPotionEffect(new PotionEffect(MobEffects.SPEED, 20, 2));
+				player.addPotionEffect(new PotionEffect(MobEffects.WATER_BREATHING, 20, 1));
 			}
 	}
 }

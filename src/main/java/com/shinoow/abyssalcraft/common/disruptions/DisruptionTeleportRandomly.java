@@ -82,7 +82,7 @@ public class DisruptionTeleportRandomly extends DisruptionEntry {
 			{
 				player.setPosition(player.posX, player.posY, player.posZ);
 
-				if (world.getCubes(player, player.getEntityBoundingBox()).isEmpty() && !world.isAnyLiquid(player.getEntityBoundingBox()))
+				if (world.getCollisionBoxes(player, player.getEntityBoundingBox()).isEmpty() && !world.containsAnyLiquid(player.getEntityBoundingBox()))
 					flag = true;
 			}
 		}
@@ -108,8 +108,8 @@ public class DisruptionTeleportRandomly extends DisruptionEntry {
 				world.spawnParticle(EnumParticleTypes.PORTAL, d7, d8, d9, f, f1, f2);
 			}
 
-			world.playSound(d3, d4, d5, SoundEvents.entity_endermen_teleport, SoundCategory.PLAYERS, 1.0F, 1.0F, false);
-			player.playSound(SoundEvents.entity_endermen_teleport, 1.0F, 1.0F);
+			world.playSound(d3, d4, d5, SoundEvents.ENTITY_ENDERMEN_TELEPORT, SoundCategory.PLAYERS, 1.0F, 1.0F, false);
+			player.playSound(SoundEvents.ENTITY_ENDERMEN_TELEPORT, 1.0F, 1.0F);
 			return true;
 		}
 	}

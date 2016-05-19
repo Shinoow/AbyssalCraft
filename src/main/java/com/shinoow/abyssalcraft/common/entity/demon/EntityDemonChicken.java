@@ -46,25 +46,25 @@ public class EntityDemonChicken extends EntityDemonAnimal {
 	@Override
 	protected SoundEvent getAmbientSound()
 	{
-		return SoundEvents.entity_chicken_ambient;
+		return SoundEvents.ENTITY_CHICKEN_AMBIENT;
 	}
 
 	@Override
 	protected SoundEvent getHurtSound()
 	{
-		return SoundEvents.entity_ghast_hurt;
+		return SoundEvents.ENTITY_GHAST_HURT;
 	}
 
 	@Override
 	protected SoundEvent getDeathSound()
 	{
-		return SoundEvents.entity_chicken_death;
+		return SoundEvents.ENTITY_CHICKEN_DEATH;
 	}
 
 	@Override
 	protected void playStepSound(BlockPos pos, Block par4)
 	{
-		playSound(SoundEvents.entity_chicken_step, 0.15F, 1.0F);
+		playSound(SoundEvents.ENTITY_CHICKEN_STEP, 0.15F, 1.0F);
 	}
 
 	@Override

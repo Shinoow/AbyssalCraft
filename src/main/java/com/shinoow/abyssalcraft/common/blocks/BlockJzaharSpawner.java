@@ -23,7 +23,7 @@ import com.shinoow.abyssalcraft.common.blocks.tile.TileEntityJzaharSpawner;
 public class BlockJzaharSpawner extends BlockContainer {
 
 	public BlockJzaharSpawner() {
-		super(Material.rock);
+		super(Material.ROCK);
 	}
 
 	@Override

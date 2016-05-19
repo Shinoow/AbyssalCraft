@@ -70,25 +70,25 @@ public class EntityEvilCow extends EntityMob {
 	@Override
 	protected SoundEvent getAmbientSound()
 	{
-		return SoundEvents.entity_cow_ambient;
+		return SoundEvents.ENTITY_COW_AMBIENT;
 	}
 
 	@Override
 	protected SoundEvent getHurtSound()
 	{
-		return SoundEvents.entity_ghast_hurt;
+		return SoundEvents.ENTITY_GHAST_HURT;
 	}
 
 	@Override
 	protected SoundEvent getDeathSound()
 	{
-		return SoundEvents.entity_cow_death;
+		return SoundEvents.ENTITY_COW_DEATH;
 	}
 
 	@Override
 	protected void playStepSound(BlockPos pos, Block p_145780_4_)
 	{
-		playSound(SoundEvents.entity_cow_step, 0.15F, 1.0F);
+		playSound(SoundEvents.ENTITY_COW_STEP, 0.15F, 1.0F);
 	}
 
 	@Override
@@ -120,11 +120,11 @@ public class EntityEvilCow extends EntityMob {
 		int k;
 
 		for (k = 0; k < j; ++k)
-			dropItem(Items.leather, 1);
+			dropItem(Items.LEATHER, 1);
 
 		j = rand.nextInt(3) + 1 + rand.nextInt(1 + p_70628_2_);
 
 		for (k = 0; k < j; ++k)
-			dropItem(Items.beef, 1);
+			dropItem(Items.BEEF, 1);
 	}
 }

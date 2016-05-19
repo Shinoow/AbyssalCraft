@@ -109,7 +109,7 @@ public class ACExplosion extends Explosion
 							BlockPos pos = new BlockPos(d5, d6, d7);
 							IBlockState state = worldObj.getBlockState(pos);
 
-							if (state.getMaterial() != Material.air)
+							if (state.getMaterial() != Material.AIR)
 							{
 								float f3 = exploder != null ? exploder.getExplosionResistance(this, worldObj, pos, state) : state.getBlock().getExplosionResistance(worldObj, pos, null, this);
 								f1 -= (f3 + 0.3F) * f2;
@@ -158,7 +158,7 @@ public class ACExplosion extends Explosion
 					double d8 = 1.0D;
 
 					if(entity instanceof EntityLivingBase)
-						d8 = EnchantmentProtection.func_92092_a((EntityLivingBase) entity, d11);
+						d8 = EnchantmentProtection.getBlastDamageReduction((EntityLivingBase) entity, d11);
 					entity.motionX += d5 * d8;
 					entity.motionY += d6 * d8;
 					entity.motionZ += d7 * d8;
@@ -178,7 +178,7 @@ public class ACExplosion extends Explosion
 	@Override
 	public void doExplosionB(boolean par1)
 	{
-		worldObj.playSound(explosionX, explosionY, explosionZ, SoundEvents.entity_generic_explode, SoundCategory.BLOCKS, 4.0F, (1.0F + (worldObj.rand.nextFloat() - worldObj.rand.nextFloat()) * 0.2F) * 0.7F, false);
+		worldObj.playSound(explosionX, explosionY, explosionZ, SoundEvents.ENTITY_GENERIC_EXPLODE, SoundCategory.BLOCKS, 4.0F, (1.0F + (worldObj.rand.nextFloat() - worldObj.rand.nextFloat()) * 0.2F) * 0.7F, false);
 
 		if (explosionSize >= 2.0F && isSmoking)
 			worldObj.spawnParticle(EnumParticleTypes.EXPLOSION_HUGE, explosionX, explosionY, explosionZ, 1.0D, 0.0D, 0.0D);
@@ -213,7 +213,7 @@ public class ACExplosion extends Explosion
 					worldObj.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, d0, d1, d2, d3, d4, d5);
 				}
 
-				if (block.getMaterial() != Material.air)
+				if (block.getMaterial() != Material.AIR)
 					block.getBlock().onBlockExploded(worldObj, pos, this);
 			}
 
@@ -223,7 +223,7 @@ public class ACExplosion extends Explosion
 				IBlockState block = worldObj.getBlockState(pos1);
 				IBlockState block1 = worldObj.getBlockState(pos1.down());
 
-				if (block.getMaterial() == Material.air && block1.isFullBlock() && explosionRNG.nextInt(3) == 0)
+				if (block.getMaterial() == Material.AIR && block1.isFullBlock() && explosionRNG.nextInt(3) == 0)
 					worldObj.setBlockState(pos1, ACBlocks.liquid_antimatter.getDefaultState());
 			}
 	}

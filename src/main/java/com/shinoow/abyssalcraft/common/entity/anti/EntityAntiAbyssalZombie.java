@@ -94,13 +94,13 @@ public class EntityAntiAbyssalZombie extends EntityMob implements IAntiEntity {
 	protected void entityInit()
 	{
 		super.entityInit();
-		dataWatcher.register(CHILD, Byte.valueOf((byte)0));
+		dataManager.register(CHILD, Byte.valueOf((byte)0));
 	}
 
 	@Override
 	public boolean isChild()
 	{
-		return dataWatcher.get(CHILD).byteValue() == 1;
+		return dataManager.get(CHILD).byteValue() == 1;
 	}
 
 	@Override
@@ -119,7 +119,7 @@ public class EntityAntiAbyssalZombie extends EntityMob implements IAntiEntity {
 	 */
 	public void setChild(boolean par1)
 	{
-		dataWatcher.set(CHILD, Byte.valueOf((byte)(par1 ? 1 : 0)));
+		dataManager.set(CHILD, Byte.valueOf((byte)(par1 ? 1 : 0)));
 
 		if (worldObj != null && !worldObj.isRemote)
 		{
@@ -137,7 +137,7 @@ public class EntityAntiAbyssalZombie extends EntityMob implements IAntiEntity {
 	@Override
 	protected SoundEvent getAmbientSound()
 	{
-		return SoundEvents.entity_zombie_ambient;
+		return SoundEvents.ENTITY_ZOMBIE_AMBIENT;
 	}
 
 	/**
@@ -146,7 +146,7 @@ public class EntityAntiAbyssalZombie extends EntityMob implements IAntiEntity {
 	@Override
 	protected SoundEvent getHurtSound()
 	{
-		return SoundEvents.entity_zombie_hurt;
+		return SoundEvents.ENTITY_ZOMBIE_HURT;
 	}
 
 	/**
@@ -155,13 +155,13 @@ public class EntityAntiAbyssalZombie extends EntityMob implements IAntiEntity {
 	@Override
 	protected SoundEvent getDeathSound()
 	{
-		return SoundEvents.entity_zombie_death;
+		return SoundEvents.ENTITY_ZOMBIE_DEATH;
 	}
 
 	@Override
 	protected void playStepSound(BlockPos pos, Block par4)
 	{
-		playSound(SoundEvents.entity_zombie_step, 0.15F, 1.0F);
+		playSound(SoundEvents.ENTITY_ZOMBIE_STEP, 0.15F, 1.0F);
 	}
 
 	@Override
@@ -239,7 +239,7 @@ public class EntityAntiAbyssalZombie extends EntityMob implements IAntiEntity {
 				antiAbyaalZombie.setChild(true);
 
 			worldObj.spawnEntityInWorld(antiAbyaalZombie);
-			worldObj.playAuxSFXAtEntity((EntityPlayer)null, 1026, new BlockPos(posX, posY, posZ), 0);
+			worldObj.playEvent((EntityPlayer)null, 1026, new BlockPos(posX, posY, posZ), 0);
 
 		}
 	}

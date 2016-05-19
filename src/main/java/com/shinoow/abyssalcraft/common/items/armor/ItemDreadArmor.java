@@ -54,9 +54,9 @@ public class ItemDreadArmor extends ItemArmor {
 	@Override
 	public void onArmorTick(World world, EntityPlayer player, ItemStack itemstack) {
 		if (itemstack.getItem() == ACItems.dreaded_abyssalnite_helmet)
-			player.addPotionEffect(new PotionEffect(MobEffects.nightVision, 260, 0));
+			player.addPotionEffect(new PotionEffect(MobEffects.NIGHT_VISION, 260, 0));
 		if (itemstack.getItem() == ACItems.dreaded_abyssalnite_chestplate) {
-			player.addPotionEffect(new PotionEffect(MobEffects.fireResistance, 20, 3));
+			player.addPotionEffect(new PotionEffect(MobEffects.FIRE_RESISTANCE, 20, 3));
 			List list = player.worldObj.getEntitiesWithinAABBExcludingEntity(player, player.getEntityBoundingBox().expand(4D, 0.0D, 4D));
 			if (list != null)
 				for (int k2 = 0; k2 < list.size(); k2++) {
@@ -68,8 +68,8 @@ public class ItemDreadArmor extends ItemArmor {
 				}
 		}
 		if (itemstack.getItem() == ACItems.dreaded_abyssalnite_leggings)
-			player.addPotionEffect(new PotionEffect(MobEffects.fireResistance, 20, 3));
+			player.addPotionEffect(new PotionEffect(MobEffects.FIRE_RESISTANCE, 20, 3));
 		if (itemstack.getItem() == ACItems.dreaded_abyssalnite_boots)
-			player.addPotionEffect(new PotionEffect(MobEffects.fireResistance, 20, 3));
+			player.addPotionEffect(new PotionEffect(MobEffects.FIRE_RESISTANCE, 20, 3));
 	}
 }

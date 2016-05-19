@@ -80,7 +80,7 @@ public class AbyssalCraftEventHooks {
 					for (int y = 0; y < 16; ++y)
 						for (int z = 0; z < 16; ++z)
 							if(chunk.getBiome(new BlockPos(x, y, z), event.getWorld().getBiomeProvider()) == ACBiomes.darklands_mountains)
-								if (storage.get(x, y, z).getBlock() == Blocks.stone)
+								if (storage.get(x, y, z).getBlock() == Blocks.STONE)
 									storage.set(x, y, z, ACBlocks.darkstone.getDefaultState());
 	}
 
@@ -184,8 +184,8 @@ public class AbyssalCraftEventHooks {
 			WorldServer worldServer = (WorldServer)event.getEntityLiving().worldObj;
 			EntityPlayerMP player = (EntityPlayerMP)event.getEntityLiving();
 			if(player.dimension == AbyssalCraft.configDimId3 && player.posY <= 0){
-				player.addPotionEffect(new PotionEffect(MobEffects.resistance, 80, 255));
-				player.addPotionEffect(new PotionEffect(MobEffects.blindness, 20));
+				player.addPotionEffect(new PotionEffect(MobEffects.RESISTANCE, 80, 255));
+				player.addPotionEffect(new PotionEffect(MobEffects.BLINDNESS, 20));
 				player.mcServer.getPlayerList().transferPlayerToDimension(player, AbyssalCraft.configDimId4, new TeleporterDarkRealm(worldServer));
 				player.addStat(AbyssalCraft.enterDarkRealm, 1);
 			}
@@ -209,9 +209,9 @@ public class AbyssalCraftEventHooks {
 						&& helmet.getItem() != ACItems.depths_helmet && helmet.getItem() != ACItems.dreadium_helmet
 						&& helmet.getItem() != ACItems.dreadium_samurai_helmet && helmet.getItem() != ACItems.ethaxium_helmet)
 							if(!player.capabilities.isCreativeMode)
-								player.addPotionEffect(new PotionEffect(MobEffects.blindness, 100));
-				if(player.getActivePotionEffect(MobEffects.blindness) != null && player.getActivePotionEffect(MobEffects.blindness).getDuration() == 0)
-					player.removePotionEffect(MobEffects.blindness);
+								player.addPotionEffect(new PotionEffect(MobEffects.BLINDNESS, 100));
+				if(player.getActivePotionEffect(MobEffects.BLINDNESS) != null && player.getActivePotionEffect(MobEffects.BLINDNESS).getDuration() == 0)
+					player.removePotionEffect(MobEffects.BLINDNESS);
 			}
 	}
 
@@ -317,8 +317,8 @@ public class AbyssalCraftEventHooks {
 		if(!(event.getEntityLiving() instanceof EntityJzahar))
 			if(event.getEntityLiving().dimension == AbyssalCraft.configDimId3){
 				event.getEntityLiving().attackEntityFrom(DamageSource.fall, event.getAttackDamage());
-				event.getEntityLiving().addPotionEffect(new PotionEffect(MobEffects.moveSlowdown, 200, 1));
-				event.getEntityLiving().addPotionEffect(new PotionEffect(MobEffects.weakness, 200, 1));
+				event.getEntityLiving().addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, 200, 1));
+				event.getEntityLiving().addPotionEffect(new PotionEffect(MobEffects.WEAKNESS, 200, 1));
 				event.setCanceled(true);
 			}
 	}
@@ -326,39 +326,39 @@ public class AbyssalCraftEventHooks {
 	@SubscribeEvent
 	public void darklandsVillages(BiomeEvent.GetVillageBlockID event){
 		if(event.getBiome() instanceof IDarklandsBiome){
-			if(event.getOriginal().getBlock() == Blocks.log || event.getOriginal().getBlock() == Blocks.log2){
+			if(event.getOriginal().getBlock() == Blocks.LOG || event.getOriginal().getBlock() == Blocks.LOG2){
 				event.setReplacement(ACBlocks.darklands_oak_wood.getDefaultState());
 				event.setResult(Result.DENY);
 			}
-			if(event.getOriginal().getBlock() == Blocks.cobblestone){
+			if(event.getOriginal().getBlock() == Blocks.COBBLESTONE){
 				event.setReplacement(ACBlocks.darkstone_cobblestone.getDefaultState());
 				event.setResult(Result.DENY);
 			}
-			if(event.getOriginal().getBlock() == Blocks.planks){
+			if(event.getOriginal().getBlock() == Blocks.PLANKS){
 				event.setReplacement(ACBlocks.darklands_oak_planks.getDefaultState());
 				event.setResult(Result.DENY);
 			}
-			if(event.getOriginal().getBlock() == Blocks.oak_stairs){
+			if(event.getOriginal().getBlock() == Blocks.OAK_STAIRS){
 				event.setReplacement(ACBlocks.darklands_oak_stairs.getDefaultState().withProperty(BlockStairs.FACING, event.getOriginal().getValue(BlockStairs.FACING)));
 				event.setResult(Result.DENY);
 			}
-			if(event.getOriginal().getBlock() == Blocks.stone_stairs){
+			if(event.getOriginal().getBlock() == Blocks.STONE_STAIRS){
 				event.setReplacement(ACBlocks.darkstone_cobblestone_stairs.getDefaultState().withProperty(BlockStairs.FACING, event.getOriginal().getValue(BlockStairs.FACING)));;
 				event.setResult(Result.DENY);
 			}
-			if(event.getOriginal().getBlock() == Blocks.oak_fence){
+			if(event.getOriginal().getBlock() == Blocks.OAK_FENCE){
 				event.setReplacement(ACBlocks.darklands_oak_fence.getDefaultState());
 				event.setResult(Result.DENY);
 			}
-			if(event.getOriginal().getBlock() == Blocks.stone_slab){
+			if(event.getOriginal().getBlock() == Blocks.STONE_SLAB){
 				event.setReplacement(ACBlocks.darkstone_slab.getDefaultState());
 				event.setResult(Result.DENY);
 			}
-			if(event.getOriginal().getBlock() == Blocks.double_stone_slab){
+			if(event.getOriginal().getBlock() == Blocks.DOUBLE_STONE_SLAB){
 				event.setReplacement(AbyssalCraft.Darkstoneslab2.getDefaultState());
 				event.setResult(Result.DENY);
 			}
-			if(event.getOriginal().getBlock() == Blocks.wooden_pressure_plate){
+			if(event.getOriginal().getBlock() == Blocks.WOODEN_PRESSURE_PLATE){
 				event.setReplacement(ACBlocks.darkstone_pressure_plate.getDefaultState());
 				event.setResult(Result.DENY);
 			}

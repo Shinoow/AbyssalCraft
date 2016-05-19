@@ -23,7 +23,7 @@ import com.shinoow.abyssalcraft.common.blocks.tile.TileEntityGatekeeperMinionSpa
 public class BlockGatekeeperMinionSpawner extends BlockContainer {
 
 	public BlockGatekeeperMinionSpawner() {
-		super(Material.rock);
+		super(Material.ROCK);
 	}
 
 	@Override

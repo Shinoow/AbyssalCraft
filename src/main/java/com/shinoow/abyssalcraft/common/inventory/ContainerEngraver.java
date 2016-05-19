@@ -14,15 +14,14 @@ package com.shinoow.abyssalcraft.common.inventory;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
-import net.minecraft.inventory.ICrafting;
+import net.minecraft.inventory.IContainerListener;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import com.shinoow.abyssalcraft.api.recipe.EngraverRecipes;
 import com.shinoow.abyssalcraft.common.blocks.tile.TileEntityEngraver;
-
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ContainerEngraver extends Container {
 
@@ -45,10 +44,10 @@ public class ContainerEngraver extends Container {
 	}
 
 	@Override
-	public void onCraftGuiOpened(ICrafting par1ICrafting)
-	{
-		super.onCraftGuiOpened(par1ICrafting);
-		par1ICrafting.sendProgressBarUpdate(this, 0, tileEngraver.engraverProcessTime);
+	public void addListener(IContainerListener listener)
+    {
+        super.addListener(listener);
+		listener.sendProgressBarUpdate(this, 0, tileEngraver.engraverProcessTime);
 	}
 
 	@Override
@@ -56,9 +55,9 @@ public class ContainerEngraver extends Container {
 	{
 		super.detectAndSendChanges();
 
-		for (int i = 0; i < crafters.size(); ++i)
+		for (int i = 0; i < listeners.size(); ++i)
 		{
-			ICrafting icrafting = crafters.get(i);
+			IContainerListener icrafting = listeners.get(i);
 
 			if (lastProcessTime != tileEngraver.engraverProcessTime)
 				icrafting.sendProgressBarUpdate(this, 0, tileEngraver.engraverProcessTime);

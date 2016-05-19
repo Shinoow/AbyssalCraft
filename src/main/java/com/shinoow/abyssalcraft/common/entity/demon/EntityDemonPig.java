@@ -16,6 +16,7 @@ import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.translation.I18n;
 import net.minecraft.world.World;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
@@ -39,26 +40,32 @@ public class EntityDemonPig extends EntityDemonAnimal {
 	}
 
 	@Override
+	public String getName()
+	{
+		return I18n.translateToLocal("entity.Pig.name");
+	}
+
+	@Override
 	protected SoundEvent getAmbientSound()
 	{
-		return SoundEvents.entity_pig_ambient;
+		return SoundEvents.ENTITY_PIG_AMBIENT;
 	}
 
 	@Override
 	protected SoundEvent getHurtSound()
 	{
-		return SoundEvents.entity_ghast_hurt;
+		return SoundEvents.ENTITY_GHAST_HURT;
 	}
 
 	@Override
 	protected SoundEvent getDeathSound()
 	{
-		return SoundEvents.entity_pig_death;
+		return SoundEvents.ENTITY_PIG_DEATH;
 	}
 
 	@Override
 	protected void playStepSound(BlockPos pos, Block par4)
 	{
-		playSound(SoundEvents.entity_pig_step, 0.15F, 1.0F);
+		playSound(SoundEvents.ENTITY_PIG_STEP, 0.15F, 1.0F);
 	}
 }

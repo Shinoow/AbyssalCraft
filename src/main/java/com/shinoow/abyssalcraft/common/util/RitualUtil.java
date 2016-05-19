@@ -29,7 +29,7 @@ public class RitualUtil {
 	private static Map<Block, Integer> altarMeta = Maps.newHashMap();
 
 	public static void addBlocks(){
-		ritualBlocks.put(Blocks.cobblestone, 0);
+		ritualBlocks.put(Blocks.COBBLESTONE, 0);
 		ritualBlocks.put(ACBlocks.darkstone_cobblestone, 0);
 		ritualBlocks.put(ACBlocks.abyssal_stone_brick, 1);
 		ritualBlocks.put(ACBlocks.coralium_stone_brick, 1);
@@ -38,7 +38,7 @@ public class RitualUtil {
 		ritualBlocks.put(ACBlocks.ethaxium_brick, 3);
 		ritualBlocks.put(ACBlocks.dark_ethaxium_brick, 3);
 
-		altarMeta.put(Blocks.cobblestone, 0);
+		altarMeta.put(Blocks.COBBLESTONE, 0);
 		altarMeta.put(ACBlocks.darkstone_cobblestone, 1);
 		altarMeta.put(ACBlocks.abyssal_stone_brick, 2);
 		altarMeta.put(ACBlocks.coralium_stone_brick, 3);

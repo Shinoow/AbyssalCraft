@@ -51,7 +51,7 @@ public class EntityAIAttackRangedBowAnti extends EntityAIBase
 
 	protected boolean func_188498_f()
 	{
-		return entity.getHeldItemMainhand() != null && entity.getHeldItemMainhand().getItem() == Items.bow;
+		return entity.getHeldItemMainhand() != null && entity.getHeldItemMainhand().getItem() == Items.BOW;
 	}
 
 	/**
@@ -137,7 +137,7 @@ public class EntityAIAttackRangedBowAnti extends EntityAIBase
 				else if (d0 < maxAttackDistance * 0.25F)
 					field_188506_h = true;
 
-				entity.getMoveHelper().func_188488_a(field_188506_h ? -0.5F : 0.5F, field_188505_g ? 0.5F : -0.5F);
+				entity.getMoveHelper().strafe(field_188506_h ? -0.5F : 0.5F, field_188505_g ? 0.5F : -0.5F);
 				entity.faceEntity(entitylivingbase, 30.0F, 30.0F);
 			} else
 				entity.getLookHelper().setLookPositionWithEntity(entitylivingbase, 30.0F, 30.0F);
@@ -153,7 +153,7 @@ public class EntityAIAttackRangedBowAnti extends EntityAIBase
 					if (i >= 20)
 					{
 						entity.resetActiveHand();
-						entity.attackEntityWithRangedAttack(entitylivingbase, ItemBow.func_185059_b(i));
+						entity.attackEntityWithRangedAttack(entitylivingbase, ItemBow.getArrowVelocity(i));
 						field_188503_e = field_188501_c;
 					}
 				}

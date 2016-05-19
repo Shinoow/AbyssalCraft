@@ -36,7 +36,7 @@ public class BlockShoggothOoze extends BlockACBasic {
 	private static List<Block> blockBlacklist = new ArrayList<Block>();
 
 	public BlockShoggothOoze(){
-		super(Material.ground, 1.0F, 1.0F, SoundType.SAND);
+		super(Material.GROUND, 1.0F, 1.0F, SoundType.SAND);
 	}
 
 	@Override
@@ -53,7 +53,7 @@ public class BlockShoggothOoze extends BlockACBasic {
 	}
 
 	@Override
-	public void onEntityCollidedWithBlock(World world, BlockPos pos, Entity entity)
+	public void onEntityCollidedWithBlock(World world, BlockPos pos, IBlockState state, Entity entity)
 	{
 		if(!(entity instanceof EntityLesserShoggoth)){
 			entity.motionX *= 0.4D;
@@ -71,21 +71,21 @@ public class BlockShoggothOoze extends BlockACBasic {
 	public boolean canPlaceBlockAt(World worldIn, BlockPos pos)
 	{
 		IBlockState block = worldIn.getBlockState(pos);
-		if(!block.getMaterial().isLiquid() && block.getMaterial() != Material.air && !block.getBlock().hasTileEntity(worldIn.getBlockState(pos))
+		if(!block.getMaterial().isLiquid() && block.getMaterial() != Material.AIR && !block.getBlock().hasTileEntity(worldIn.getBlockState(pos))
 				&& block.isOpaqueCube() && block.isFullCube() && block.getBoundingBox(worldIn, pos) != null)
-			if(block.getMaterial() == Material.leaves && AbyssalCraft.oozeLeaves || block.getMaterial() == Material.grass && AbyssalCraft.oozeGrass
-			|| block.getMaterial() == Material.ground && AbyssalCraft.oozeGround || block.getMaterial() == Material.sand && AbyssalCraft.oozeSand
-			|| block.getMaterial() == Material.rock && AbyssalCraft.oozeRock || block.getMaterial() == Material.cloth && AbyssalCraft.oozeCloth
-			|| block.getMaterial() == Material.wood && AbyssalCraft.oozeWood || block.getMaterial() == Material.gourd && AbyssalCraft.oozeGourd
-			|| block.getMaterial() == Material.iron && AbyssalCraft.oozeIron || block.getMaterial() == Material.clay && AbyssalCraft.oozeClay)
+			if(block.getMaterial() == Material.LEAVES && AbyssalCraft.oozeLeaves || block.getMaterial() == Material.GRASS && AbyssalCraft.oozeGrass
+			|| block.getMaterial() == Material.GROUND && AbyssalCraft.oozeGround || block.getMaterial() == Material.SAND && AbyssalCraft.oozeSand
+			|| block.getMaterial() == Material.ROCK && AbyssalCraft.oozeRock || block.getMaterial() == Material.CLOTH && AbyssalCraft.oozeCloth
+			|| block.getMaterial() == Material.WOOD && AbyssalCraft.oozeWood || block.getMaterial() == Material.GOURD && AbyssalCraft.oozeGourd
+			|| block.getMaterial() == Material.IRON && AbyssalCraft.oozeIron || block.getMaterial() == Material.CLAY && AbyssalCraft.oozeClay)
 				return !blockBlacklist.contains(block.getBlock()) && !AbyssalCraftAPI.getShoggothBlockBlacklist().contains(block.getBlock());
 		return false;
 	}
 
 	public void initBlacklist(){
 		blockBlacklist.add(ACBlocks.shoggoth_ooze);
-		blockBlacklist.add(Blocks.bedrock);
-		blockBlacklist.add(Blocks.crafting_table);
+		blockBlacklist.add(Blocks.BEDROCK);
+		blockBlacklist.add(Blocks.CRAFTING_TABLE);
 		blockBlacklist.add(ACBlocks.ethaxium);
 		blockBlacklist.add(ACBlocks.ethaxium_brick);
 		blockBlacklist.add(ACBlocks.ethaxium_pillar);

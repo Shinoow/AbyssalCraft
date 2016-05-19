@@ -77,7 +77,7 @@ public class ItemCharm extends ItemMetadata implements IAmplifierCharm {
 			((IEnergyManipulator) tile).setActive(getAmplifier(stack), getDeity(stack));
 			if(!world.isRemote)
 				stack.stackSize--;
-			world.playSound(player, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, SoundEvents.entity_item_pickup, SoundCategory.PLAYERS, 0.5F, world.rand.nextFloat() - world.rand.nextFloat() * 0.2F + 1);
+			world.playSound(player, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, SoundEvents.ENTITY_ITEM_PICKUP, SoundCategory.PLAYERS, 0.5F, world.rand.nextFloat() - world.rand.nextFloat() * 0.2F + 1);
 			return EnumActionResult.SUCCESS;
 		}
 		return EnumActionResult.PASS;

@@ -54,7 +54,7 @@ public class TileStatueDirectional extends TEDirectional implements IEnergyManip
 	}
 
 	@Override
-	public void writeToNBT(NBTTagCompound nbttagcompound)
+	public NBTTagCompound writeToNBT(NBTTagCompound nbttagcompound)
 	{
 		super.writeToNBT(nbttagcompound);
 		nbttagcompound.setInteger("Timer", timer);
@@ -64,6 +64,7 @@ public class TileStatueDirectional extends TEDirectional implements IEnergyManip
 		if(currentAmplifier != null)
 			nbttagcompound.setString("Amplifier", currentAmplifier.name());
 
+		return nbttagcompound;
 	}
 
 	@Override
@@ -283,7 +284,7 @@ public class TileStatueDirectional extends TEDirectional implements IEnergyManip
 						}
 					}
 		}
-		disrupt(worldObj.rand.nextInt(20 * (isActive() ? 40 : 200) * (worldObj.func_184137_a(xp, yp, zp, range * 2, true) != null ? 1 : 10)) == 0);
+		disrupt(worldObj.rand.nextInt(20 * (isActive() ? 40 : 200) * (worldObj.getClosestPlayer(xp, yp, zp, range * 2, true) != null ? 1 : 10)) == 0);
 		clearData();
 	}
 }

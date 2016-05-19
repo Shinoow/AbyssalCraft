@@ -31,10 +31,10 @@ import com.shinoow.abyssalcraft.common.entity.EntityLesserShoggoth;
 public class BlockShoggothBiomass extends BlockContainer {
 
 	public BlockShoggothBiomass(){
-		super(Material.ground);
+		super(Material.GROUND);
 		setHardness(1.0F);
 		setResistance(18.0F);
-		setStepSound(SoundType.SAND);
+		setSoundType(SoundType.SAND);
 		setUnlocalizedName("shoggothbiomass");
 		setCreativeTab(AbyssalCraft.tabBlock);
 		setLightLevel(0.5F);
@@ -66,7 +66,7 @@ public class BlockShoggothBiomass extends BlockContainer {
 	}
 
 	@Override
-	public void onEntityCollidedWithBlock(World world, BlockPos pos, Entity entity)
+	public void onEntityCollidedWithBlock(World world, BlockPos pos, IBlockState state, Entity entity)
 	{
 		if(!(entity instanceof EntityLesserShoggoth)){
 			entity.motionX *= 0.4D;

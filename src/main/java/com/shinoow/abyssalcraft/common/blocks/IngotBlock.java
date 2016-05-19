@@ -19,7 +19,7 @@ import net.minecraft.world.IBlockAccess;
 public class IngotBlock extends BlockACBasic {
 
 	public IngotBlock(int par1) {
-		super(Material.iron, "pickaxe", par1, 4.0F, 12.0F, SoundType.METAL);
+		super(Material.IRON, "pickaxe", par1, 4.0F, 12.0F, SoundType.METAL);
 	}
 
 	@Override

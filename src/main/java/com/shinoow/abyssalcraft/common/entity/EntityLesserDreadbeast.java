@@ -101,7 +101,7 @@ public class EntityLesserDreadbeast extends EntityMob implements IDreadEntity, I
 	protected void entityInit()
 	{
 		super.entityInit();
-		dataWatcher.register(CLIMBING, Byte.valueOf((byte)0));
+		dataManager.register(CLIMBING, Byte.valueOf((byte)0));
 	}
 
 	@Override
@@ -116,25 +116,25 @@ public class EntityLesserDreadbeast extends EntityMob implements IDreadEntity, I
 	@Override
 	protected SoundEvent getAmbientSound()
 	{
-		return SoundEvents.entity_zombie_ambient;
+		return SoundEvents.ENTITY_ZOMBIE_AMBIENT;
 	}
 
 	@Override
 	protected SoundEvent getHurtSound()
 	{
-		return SoundEvents.entity_zombie_hurt;
+		return SoundEvents.ENTITY_ZOMBIE_HURT;
 	}
 
 	@Override
 	protected SoundEvent getDeathSound()
 	{
-		return SoundEvents.entity_zombie_death;
+		return SoundEvents.ENTITY_ZOMBIE_DEATH;
 	}
 
 	@Override
 	protected void playStepSound(BlockPos pos, Block par4)
 	{
-		playSound(SoundEvents.entity_zombie_step, 0.15F, 1.0F);
+		playSound(SoundEvents.ENTITY_ZOMBIE_STEP, 0.15F, 1.0F);
 	}
 
 	@Override
@@ -149,7 +149,7 @@ public class EntityLesserDreadbeast extends EntityMob implements IDreadEntity, I
 	 */
 	public boolean isBesideClimbableBlock()
 	{
-		return (dataWatcher.get(CLIMBING) & 1) != 0;
+		return (dataManager.get(CLIMBING) & 1) != 0;
 	}
 
 	/**
@@ -158,14 +158,14 @@ public class EntityLesserDreadbeast extends EntityMob implements IDreadEntity, I
 	 */
 	public void setBesideClimbableBlock(boolean par1)
 	{
-		byte b0 = dataWatcher.get(CLIMBING);
+		byte b0 = dataManager.get(CLIMBING);
 
 		if (par1)
 			b0 = (byte)(b0 | 1);
 		else
 			b0 &= -2;
 
-		dataWatcher.set(CLIMBING, Byte.valueOf(b0));
+		dataManager.set(CLIMBING, Byte.valueOf(b0));
 	}
 
 	@Override
@@ -239,7 +239,7 @@ public class EntityLesserDreadbeast extends EntityMob implements IDreadEntity, I
 		double d2 = p_82196_1_.posZ - posZ;
 		float f1 = MathHelper.sqrt_double(d0 * d0 + d2 * d2) * 0.2F;
 		entitydreadslug.setThrowableHeading(d0, d1 + f1, d2, 1.6F, 12.0F);
-		playSound(SoundEvents.entity_skeleton_shoot, 1.0F, 1.0F / (getRNG().nextFloat() * 0.4F + 0.8F));
+		playSound(SoundEvents.ENTITY_SKELETON_SHOOT, 1.0F, 1.0F / (getRNG().nextFloat() * 0.4F + 0.8F));
 		worldObj.spawnEntityInWorld(entitydreadslug);
 	}
 }

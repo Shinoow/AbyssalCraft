@@ -47,17 +47,17 @@ public class ItemOC extends Item {
 	@Override
 	public ActionResult<ItemStack> onItemRightClick(ItemStack par1ItemStack, World par2World, EntityPlayer par3EntityPlayer, EnumHand hand)
 	{
-		par3EntityPlayer.addPotionEffect(new PotionEffect(MobEffects.damageBoost, 6000, 6));
-		par3EntityPlayer.addPotionEffect(new PotionEffect(MobEffects.nightVision, 6000, 6));
-		par3EntityPlayer.addPotionEffect(new PotionEffect(MobEffects.invisibility, 6000, 6));
-		par3EntityPlayer.addPotionEffect(new PotionEffect(MobEffects.regeneration, 6000, 6));
-		par3EntityPlayer.addPotionEffect(new PotionEffect(MobEffects.moveSpeed, 6000, 6));
-		par3EntityPlayer.addPotionEffect(new PotionEffect(MobEffects.resistance, 6000, 6));
-		par3EntityPlayer.addPotionEffect(new PotionEffect(MobEffects.fireResistance, 6000, 6));
-		par3EntityPlayer.addPotionEffect(new PotionEffect(MobEffects.waterBreathing, 6000, 6));
-		par3EntityPlayer.addPotionEffect(new PotionEffect(MobEffects.jump, 6000, 6));
-		par3EntityPlayer.addPotionEffect(new PotionEffect(MobEffects.digSpeed, 6000, 6));
-		par3EntityPlayer.addPotionEffect(new PotionEffect(MobEffects.fireResistance, 6000, 6));
+		par3EntityPlayer.addPotionEffect(new PotionEffect(MobEffects.STRENGTH, 6000, 6));
+		par3EntityPlayer.addPotionEffect(new PotionEffect(MobEffects.NIGHT_VISION, 6000, 6));
+		par3EntityPlayer.addPotionEffect(new PotionEffect(MobEffects.INVISIBILITY, 6000, 6));
+		par3EntityPlayer.addPotionEffect(new PotionEffect(MobEffects.REGENERATION, 6000, 6));
+		par3EntityPlayer.addPotionEffect(new PotionEffect(MobEffects.SPEED, 6000, 6));
+		par3EntityPlayer.addPotionEffect(new PotionEffect(MobEffects.RESISTANCE, 6000, 6));
+		par3EntityPlayer.addPotionEffect(new PotionEffect(MobEffects.FIRE_RESISTANCE, 6000, 6));
+		par3EntityPlayer.addPotionEffect(new PotionEffect(MobEffects.WATER_BREATHING, 6000, 6));
+		par3EntityPlayer.addPotionEffect(new PotionEffect(MobEffects.JUMP_BOOST, 6000, 6));
+		par3EntityPlayer.addPotionEffect(new PotionEffect(MobEffects.HASTE, 6000, 6));
+		par3EntityPlayer.addPotionEffect(new PotionEffect(MobEffects.FIRE_RESISTANCE, 6000, 6));
 
 		par1ItemStack.stackSize--;
 		return new ActionResult(EnumActionResult.PASS, par1ItemStack);

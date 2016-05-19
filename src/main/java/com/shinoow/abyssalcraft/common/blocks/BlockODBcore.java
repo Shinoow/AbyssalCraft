@@ -45,12 +45,12 @@ public class BlockODBcore extends Block {
 	public static final PropertyBool EXPLODE = PropertyBool.create("explode");
 
 	public BlockODBcore() {
-		super(Material.iron);
+		super(Material.IRON);
 		setDefaultState(blockState.getBaseState().withProperty(EXPLODE, Boolean.valueOf(false)));
 		setCreativeTab(AbyssalCraft.tabBlock);
 		setHarvestLevel("pickaxe", 3);
 		//		setBlockBounds(0.25F, 0.0F, 0.25F, 0.75F, 1.0F, 0.75F);
-		setStepSound(SoundType.METAL);
+		setSoundType(SoundType.METAL);
 	}
 
 	@Override
@@ -72,7 +72,7 @@ public class BlockODBcore extends Block {
 	}
 
 	@Override
-	public void onNeighborBlockChange(World par1World, BlockPos pos, IBlockState state, Block par5Block)
+	public void neighborChanged(IBlockState state, World par1World, BlockPos pos, Block neighborBlock)
 	{
 		if (par1World.isBlockPowered(pos))
 		{
@@ -122,7 +122,7 @@ public class BlockODBcore extends Block {
 			{
 				EntityODBcPrimed var7 = new EntityODBcPrimed(par1World, pos.getX() + 0.5F, pos.getY() + 0.5F, pos.getZ() + 0.5F, par6);
 				par1World.spawnEntityInWorld(var7);
-				par1World.playSound(var7.posX, var7.posY, var7.posZ, SoundEvents.entity_tnt_primed, SoundCategory.BLOCKS, 1.0F, 1.0F, false);
+				par1World.playSound(var7.posX, var7.posY, var7.posZ, SoundEvents.ENTITY_TNT_PRIMED, SoundCategory.BLOCKS, 1.0F, 1.0F, false);
 			}
 	}
 
@@ -133,12 +133,12 @@ public class BlockODBcore extends Block {
 		{
 			Item item = heldItem.getItem();
 
-			if (item == Items.flint_and_steel || item == Items.fire_charge)
+			if (item == Items.FLINT_AND_STEEL || item == Items.FIRE_CHARGE)
 			{
 				explode(par1World, pos, state.withProperty(EXPLODE, Boolean.valueOf(true)), par5EntityPlayer);
 				par1World.setBlockToAir(pos);
 
-				if (item == Items.flint_and_steel)
+				if (item == Items.FLINT_AND_STEEL)
 					heldItem.damageItem(1, par5EntityPlayer);
 				else if (!par5EntityPlayer.capabilities.isCreativeMode)
 					--heldItem.stackSize;
@@ -151,7 +151,7 @@ public class BlockODBcore extends Block {
 	}
 
 	@Override
-	public void onEntityCollidedWithBlock(World par1World, BlockPos pos, Entity par5Entity)
+	public void onEntityCollidedWithBlock(World par1World, BlockPos pos, IBlockState state, Entity par5Entity)
 	{
 		if (par5Entity instanceof EntityArrow && !par1World.isRemote)
 		{

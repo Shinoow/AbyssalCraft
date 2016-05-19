@@ -1,10 +1,15 @@
 {
   "homepage": "https://shinoow.github.io/AbyssalCraft/",
   "promos": {
+	"1.9.4-latest": "1.9.1.6",
+	"1.9.4-recommended": "1.9.1.6",
 	"1.9-latest": "1.9.1.6",
 	"1.9-recommended": "1.9.1.6",
     "1.8.9-latest": "1.9.1.6",
     "1.8.9-recommended": "1.9.1.6"
+  },
+  "1.9.4": {
+	"1.9.1.6": "- Ported to Minecraft 1.9.4\n- All armor sets currently uses the Diamond Armor Material (due to a small bug in Forge)"
   },
   "1.9": {
 	"1.9.1.6": "- Shoggoth Ooze should no longer spread onto Monolith Stone\n- Changed the picture for the Shoggoth Infestation page\n- Fixed a duplication bug with Ritual Altars and the like\n- When naturally grown into trees, Darklands Oaks and Dreadlands Trees should not turn into regular Oaks",

@@ -56,7 +56,7 @@ public class TileEntityRitualAltar extends TileEntity implements ITickable, IRit
 	}
 
 	@Override
-	public void writeToNBT(NBTTagCompound nbttagcompound)
+	public NBTTagCompound writeToNBT(NBTTagCompound nbttagcompound)
 	{
 		super.writeToNBT(nbttagcompound);
 		NBTTagCompound nbtItem = new NBTTagCompound();
@@ -65,10 +65,12 @@ public class TileEntityRitualAltar extends TileEntity implements ITickable, IRit
 		nbttagcompound.setTag("Item", nbtItem);
 		nbttagcompound.setInteger("Rot", rot);
 		nbttagcompound.setInteger("Cooldown", ritualTimer);
+		
+		return nbttagcompound;
 	}
 
 	@Override
-	public Packet getDescriptionPacket() {
+	public SPacketUpdateTileEntity getUpdatePacket() {
 		NBTTagCompound nbtTag = new NBTTagCompound();
 		writeToNBT(nbtTag);
 		return new SPacketUpdateTileEntity(pos, 1, nbtTag);
@@ -101,7 +103,7 @@ public class TileEntityRitualAltar extends TileEntity implements ITickable, IRit
 							consumedEnergy += ritual.getReqEnergy()/200;
 							break;
 						}
-				} else user = worldObj.func_184137_a(pos.getX(), pos.getY(), pos.getZ(), 5, true);
+				} else user = worldObj.getClosestPlayer(pos.getX(), pos.getY(), pos.getZ(), 5, true);
 				if(ritualTimer == 200)
 					if(user != null){
 						if(!MinecraftForge.EVENT_BUS.post(new RitualEvent.Post(user, ritual, worldObj, pos))){

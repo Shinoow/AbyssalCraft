@@ -15,7 +15,7 @@ import java.util.Random;
 
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraft.world.biome.BiomeGenBase;
+import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.feature.WorldGenAbstractTree;
 import net.minecraft.world.gen.feature.WorldGenMinable;
 import net.minecraft.world.gen.feature.WorldGenTrees;
@@ -32,7 +32,7 @@ import com.shinoow.abyssalcraft.common.entity.EntityShadowCreature;
 import com.shinoow.abyssalcraft.common.entity.EntityShadowMonster;
 import com.shinoow.abyssalcraft.common.world.gen.WorldGenDLT;
 
-public class BiomeGenDarklandsHills extends BiomeGenBase implements IDarklandsBiome {
+public class BiomeGenDarklandsHills extends Biome implements IDarklandsBiome {
 
 	private WorldGenTrees WorldGenDarkTrees;
 
@@ -99,7 +99,7 @@ public class BiomeGenDarklandsHills extends BiomeGenBase implements IDarklandsBi
 	@Override
 	public WorldGenAbstractTree genBigTreeChance(Random par1Random)
 	{
-		return par1Random.nextInt(5) == 0 ? worldGeneratorTrees : par1Random.nextInt(10) == 0 ? WorldGenDarkTrees : worldGeneratorTrees;
+		return par1Random.nextInt(5) == 0 ? TREE_FEATURE : par1Random.nextInt(10) == 0 ? WorldGenDarkTrees : TREE_FEATURE;
 	}
 
 	@Override

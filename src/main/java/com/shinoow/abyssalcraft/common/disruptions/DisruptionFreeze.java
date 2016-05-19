@@ -31,6 +31,6 @@ public class DisruptionFreeze extends DisruptionEntry {
 	public void disrupt(World world, BlockPos pos, List<EntityPlayer> players) {
 		if(!players.isEmpty())
 			for(EntityPlayer player : players)
-				player.addPotionEffect(new PotionEffect(MobEffects.moveSlowdown, 100, 14));
+				player.addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, 100, 14));
 	}
 }

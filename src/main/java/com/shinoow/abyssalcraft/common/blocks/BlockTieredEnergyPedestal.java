@@ -49,11 +49,11 @@ public class BlockTieredEnergyPedestal extends BlockContainer {
 	public static final PropertyEnum DIMENSION = PropertyEnum.create("dimension", EnumDimType.class);
 
 	public BlockTieredEnergyPedestal() {
-		super(Material.rock);
+		super(Material.ROCK);
 		setUnlocalizedName("tieredenergypedestal");
 		setHardness(6.0F);
 		setResistance(12.0F);
-		setStepSound(SoundType.STONE);
+		setSoundType(SoundType.STONE);
 		setCreativeTab(AbyssalCraft.tabDecoration);
 		//		setBlockBounds(0.25F, 0.0F, 0.25F, 0.75F, 1.0F, 0.75F);
 		setDefaultState(blockState.getBaseState().withProperty(DIMENSION, EnumDimType.OVERWORLD));
@@ -103,7 +103,7 @@ public class BlockTieredEnergyPedestal extends BlockContainer {
 			if(((TileEntityTieredEnergyPedestal)tile).getItem() != null){
 				player.inventory.addItemStackToInventory(((TileEntityTieredEnergyPedestal)tile).getItem());
 				((TileEntityTieredEnergyPedestal)tile).setItem(null);
-				world.playSound(pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, SoundEvents.entity_item_pickup, SoundCategory.PLAYERS, 0.5F, world.rand.nextFloat() - world.rand.nextFloat() * 0.2F + 1, false);
+				world.playSound(pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, SoundEvents.ENTITY_ITEM_PICKUP, SoundCategory.PLAYERS, 0.5F, world.rand.nextFloat() - world.rand.nextFloat() * 0.2F + 1, false);
 				return true;
 			} else //				ItemStack heldItem = player.getHeldItem();
 				if(heldItem != null){
@@ -111,7 +111,7 @@ public class BlockTieredEnergyPedestal extends BlockContainer {
 					newItem.stackSize = 1;
 					((TileEntityTieredEnergyPedestal)tile).setItem(newItem);
 					heldItem.stackSize--;
-					world.playSound(pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, SoundEvents.entity_item_pickup, SoundCategory.PLAYERS, 0.5F, world.rand.nextFloat() - world.rand.nextFloat() * 0.2F + 1, false);
+					world.playSound(pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, SoundEvents.ENTITY_ITEM_PICKUP, SoundCategory.PLAYERS, 0.5F, world.rand.nextFloat() - world.rand.nextFloat() * 0.2F + 1, false);
 					return true;
 				}
 		return false;

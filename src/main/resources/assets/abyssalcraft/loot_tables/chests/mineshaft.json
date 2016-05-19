@@ -1,6 +1,7 @@
 {
     "pools": [
         {
+		    "namne": "main",
             "rolls": 1,
             "entries": [
                 {
@@ -123,6 +124,7 @@
             ]
         },
         {
+		    "name": "pool1",
             "rolls": {
                 "min": 2,
                 "max": 4
@@ -243,6 +245,7 @@
             ]
         },
         {
+		    "name": "pool2",
             "rolls": 3,
             "entries": [
                 {

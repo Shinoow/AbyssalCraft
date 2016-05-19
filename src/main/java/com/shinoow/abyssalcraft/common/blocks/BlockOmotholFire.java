@@ -33,7 +33,7 @@ public class BlockOmotholFire extends Block {
 
 	public BlockOmotholFire()
 	{
-		super(Material.fire);
+		super(Material.FIRE);
 		setTickRandomly(true);
 	}
 
@@ -50,7 +50,7 @@ public class BlockOmotholFire extends Block {
 	}
 
 	@Override
-	public void onNeighborBlockChange(World worldIn, BlockPos pos, IBlockState state, Block neighborBlock)
+	public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block neighborBlock)
 	{
 		if(!worldIn.getBlockState(pos.down()).isSideSolid(worldIn, pos.down(), EnumFacing.UP))
 			worldIn.setBlockToAir(pos);
@@ -106,11 +106,11 @@ public class BlockOmotholFire extends Block {
 	}
 
 	@Override
-	public void onEntityCollidedWithBlock(World par1World, BlockPos pos, Entity par5Entity) {
-		super.onEntityCollidedWithBlock(par1World, pos, par5Entity);
+	public void onEntityCollidedWithBlock(World par1World, BlockPos pos, IBlockState state, Entity par5Entity) {
+		super.onEntityCollidedWithBlock(par1World, pos, state, par5Entity);
 
 		if(par5Entity instanceof EntityLivingBase)
-			((EntityLivingBase)par5Entity).addPotionEffect(new PotionEffect(MobEffects.blindness, 100));
+			((EntityLivingBase)par5Entity).addPotionEffect(new PotionEffect(MobEffects.BLINDNESS, 100));
 	}
 
 	@Override

@@ -95,7 +95,7 @@ public class EntityDreadSpawn extends EntityMob implements IDreadEntity
 	protected void entityInit()
 	{
 		super.entityInit();
-		dataWatcher.register(CLIMBING, Byte.valueOf((byte)0));
+		dataManager.register(CLIMBING, Byte.valueOf((byte)0));
 	}
 
 	@Override
@@ -110,25 +110,25 @@ public class EntityDreadSpawn extends EntityMob implements IDreadEntity
 	@Override
 	protected SoundEvent getAmbientSound()
 	{
-		return SoundEvents.entity_zombie_ambient;
+		return SoundEvents.ENTITY_ZOMBIE_AMBIENT;
 	}
 
 	@Override
 	protected SoundEvent getHurtSound()
 	{
-		return SoundEvents.entity_zombie_hurt;
+		return SoundEvents.ENTITY_ZOMBIE_HURT;
 	}
 
 	@Override
 	protected SoundEvent getDeathSound()
 	{
-		return SoundEvents.entity_zombie_death;
+		return SoundEvents.ENTITY_ZOMBIE_DEATH;
 	}
 
 	@Override
 	protected void playStepSound(BlockPos pos, Block par4)
 	{
-		playSound(SoundEvents.entity_zombie_step, 0.15F, 1.0F);
+		playSound(SoundEvents.ENTITY_ZOMBIE_STEP, 0.15F, 1.0F);
 	}
 
 	@Override
@@ -143,7 +143,7 @@ public class EntityDreadSpawn extends EntityMob implements IDreadEntity
 	 */
 	public boolean isBesideClimbableBlock()
 	{
-		return (dataWatcher.get(CLIMBING) & 1) != 0;
+		return (dataManager.get(CLIMBING) & 1) != 0;
 	}
 
 	/**
@@ -152,14 +152,14 @@ public class EntityDreadSpawn extends EntityMob implements IDreadEntity
 	 */
 	public void setBesideClimbableBlock(boolean par1)
 	{
-		byte b0 = dataWatcher.get(CLIMBING);
+		byte b0 = dataManager.get(CLIMBING);
 
 		if (par1)
 			b0 = (byte)(b0 | 1);
 		else
 			b0 &= -2;
 
-		dataWatcher.set(CLIMBING, Byte.valueOf(b0));
+		dataManager.set(CLIMBING, Byte.valueOf(b0));
 	}
 
 	@Override

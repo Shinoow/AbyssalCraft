@@ -19,7 +19,7 @@ import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.World;
-import net.minecraft.world.biome.BiomeGenBase;
+import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.feature.WorldGenerator;
 
 public class WorldGenAntimatterLake extends WorldGenerator
@@ -90,7 +90,7 @@ public class WorldGenAntimatterLake extends WorldGenerator
 				for (int i3 = 0; i3 < 16; ++i3)
 					for (int i4 = 0; i4 < 8; ++i4)
 						if (aboolean[(l1 * 16 + i3) * 8 + i4])
-							worldIn.setBlockState(position.add(l1, i4, i3), i4 >= 4 ? Blocks.air.getDefaultState() : blockIndex.getDefaultState(), 2);
+							worldIn.setBlockState(position.add(l1, i4, i3), i4 >= 4 ? Blocks.AIR.getDefaultState() : blockIndex.getDefaultState(), 2);
 
 			for (int i2 = 0; i2 < 16; ++i2)
 				for (int j3 = 0; j3 < 16; ++j3)
@@ -99,14 +99,14 @@ public class WorldGenAntimatterLake extends WorldGenerator
 						{
 							BlockPos blockpos = position.add(i2, j4 - 1, j3);
 
-							if (worldIn.getBlockState(blockpos).getBlock() == Blocks.dirt && worldIn.getLightFor(EnumSkyBlock.SKY, position.add(i2, j4, j3)) > 0)
+							if (worldIn.getBlockState(blockpos).getBlock() == Blocks.DIRT && worldIn.getLightFor(EnumSkyBlock.SKY, position.add(i2, j4, j3)) > 0)
 							{
-								BiomeGenBase biomegenbase = worldIn.getBiomeGenForCoords(blockpos);
+								Biome biomegenbase = worldIn.getBiomeGenForCoords(blockpos);
 
-								if (biomegenbase.topBlock.getBlock() == Blocks.mycelium)
-									worldIn.setBlockState(blockpos, Blocks.mycelium.getDefaultState(), 2);
+								if (biomegenbase.topBlock.getBlock() == Blocks.MYCELIUM)
+									worldIn.setBlockState(blockpos, Blocks.MYCELIUM.getDefaultState(), 2);
 								else
-									worldIn.setBlockState(blockpos, Blocks.grass.getDefaultState(), 2);
+									worldIn.setBlockState(blockpos, Blocks.GRASS.getDefaultState(), 2);
 							}
 						}
 

@@ -24,7 +24,7 @@ public class BlockDSGlow extends Block {
 	//	private static IIcon iconDSGlowSideOverlay;
 
 	public BlockDSGlow() {
-		super(Material.rock);
+		super(Material.ROCK);
 		setCreativeTab(AbyssalCraft.tabBlock);
 		setHarvestLevel("pickaxe", 3);
 	}

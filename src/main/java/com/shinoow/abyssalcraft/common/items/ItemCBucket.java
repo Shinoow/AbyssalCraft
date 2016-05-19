@@ -30,7 +30,7 @@ public class ItemCBucket extends ItemBucket{
 		//		GameRegistry.registerItem(this, "cbucket");
 		setUnlocalizedName("cbucket");
 		setCreativeTab(AbyssalCraft.tabItems);
-		setContainerItem(Items.bucket);
+		setContainerItem(Items.BUCKET);
 		//		setTextureName(modid + ":" + "Cbucket")
 	}
 

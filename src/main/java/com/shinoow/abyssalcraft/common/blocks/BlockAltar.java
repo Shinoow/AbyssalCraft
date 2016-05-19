@@ -22,9 +22,9 @@ import net.minecraft.world.IBlockAccess;
 public class BlockAltar extends Block {
 
 	public BlockAltar() {
-		super(Material.rock);
+		super(Material.ROCK);
 		setHarvestLevel("pickaxe", 3);
-		setStepSound(SoundType.STONE);
+		setSoundType(SoundType.STONE);
 	}
 
 	@Override

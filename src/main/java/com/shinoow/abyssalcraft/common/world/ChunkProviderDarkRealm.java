@@ -20,7 +20,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldType;
-import net.minecraft.world.biome.BiomeGenBase;
+import net.minecraft.world.biome.Biome;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.chunk.ChunkPrimer;
 import net.minecraft.world.chunk.IChunkGenerator;
@@ -51,7 +51,7 @@ public class ChunkProviderDarkRealm implements IChunkGenerator
 	private final double[] field_147434_q;
 	private final float[] parabolicField;
 	private double[] stoneNoise = new double[256];
-	private BiomeGenBase[] biomesForGeneration;
+	private Biome[] biomesForGeneration;
 
 	double[] doubleArray1;
 	double[] doubleArray2;
@@ -156,18 +156,18 @@ public class ChunkProviderDarkRealm implements IChunkGenerator
 		}
 	}
 
-	public void replaceBlocksForBiome(int x, int z, ChunkPrimer primer, BiomeGenBase[] par5BiomeArray)
+	public void replaceBlocksForBiome(int x, int z, ChunkPrimer primer, Biome[] par5BiomeArray)
 	{
 		if(!ForgeEventFactory.onReplaceBiomeBlocks(this, x, z, primer, worldObj)) return;
 
 		double d0 = 0.03125D;
-		stoneNoise = noiseGen4.func_151599_a(stoneNoise, x * 16, z * 16, 16, 16, d0 * 2.0D, d0 * 2.0D, 1.0D);
+		stoneNoise = noiseGen4.getRegion(stoneNoise, x * 16, z * 16, 16, 16, d0 * 2.0D, d0 * 2.0D, 1.0D);
 
 		for (int k = 0; k < 16; ++k)
 			for (int l = 0; l < 16; ++l)
 			{
-				BiomeGenBase biomegenbase = par5BiomeArray[l + k * 16];
-				biomegenbase.genTerrainBlocks(worldObj, rand, primer, x * 16 + k, z * 16 + l, stoneNoise[l + k * 16]);
+				Biome Biome = par5BiomeArray[l + k * 16];
+				Biome.genTerrainBlocks(worldObj, rand, primer, x * 16 + k, z * 16 + l, stoneNoise[l + k * 16]);
 			}
 	}
 
@@ -184,7 +184,7 @@ public class ChunkProviderDarkRealm implements IChunkGenerator
 		byte[] abyte1 = chunk.getBiomeArray();
 
 		for (int k = 0; k < abyte1.length; ++k)
-			abyte1[k] = (byte)BiomeGenBase.getIdForBiome(biomesForGeneration[k]);
+			abyte1[k] = (byte)Biome.getIdForBiome(biomesForGeneration[k]);
 
 		chunk.generateSkylightMap();
 		return chunk;
@@ -205,14 +205,14 @@ public class ChunkProviderDarkRealm implements IChunkGenerator
 				float f1 = 0.0F;
 				float f2 = 0.0F;
 				byte b0 = 2;
-				BiomeGenBase biomegenbase = biomesForGeneration[j1 + 2 + (k1 + 2) * 10];
+				Biome Biome = biomesForGeneration[j1 + 2 + (k1 + 2) * 10];
 
 				for (int l1 = -b0; l1 <= b0; ++l1)
 					for (int i2 = -b0; i2 <= b0; ++i2)
 					{
-						BiomeGenBase biomegenbase1 = biomesForGeneration[j1 + l1 + 2 + (k1 + i2 + 2) * 10];
-						float f3 = biomegenbase1.getBaseHeight();
-						float f4 = biomegenbase1.getHeightVariation();
+						Biome Biome1 = biomesForGeneration[j1 + l1 + 2 + (k1 + i2 + 2) * 10];
+						float f3 = Biome1.getBaseHeight();
+						float f4 = Biome1.getHeightVariation();
 
 						if (worldType == WorldType.AMPLIFIED && f3 > 0.0F)
 						{
@@ -222,7 +222,7 @@ public class ChunkProviderDarkRealm implements IChunkGenerator
 
 						float f5 = parabolicField[l1 + 2 + (i2 + 2) * 5] / (f3 + 2.0F);
 
-						if (biomegenbase1.getBaseHeight() > biomegenbase.getBaseHeight())
+						if (Biome1.getBaseHeight() > Biome.getBaseHeight())
 							f5 /= 2.0F;
 
 						f += f4 * f5;
@@ -302,7 +302,7 @@ public class ChunkProviderDarkRealm implements IChunkGenerator
 		BlockFalling.fallInstantly = true;
 		int k = x * 16;
 		int l = z * 16;
-		BiomeGenBase biomegenbase = worldObj.getBiomeGenForCoords(new BlockPos(k + 16, 0, l + 16));
+		Biome Biome = worldObj.getBiomeGenForCoords(new BlockPos(k + 16, 0, l + 16));
 		rand.setSeed(worldObj.getSeed());
 		long i1 = rand.nextLong() / 2L * 2L + 1L;
 		long j1 = rand.nextLong() / 2L * 2L + 1L;
@@ -320,7 +320,7 @@ public class ChunkProviderDarkRealm implements IChunkGenerator
 					new StructureShoggothPit().generate(worldObj, rand, worldObj.getHeight(new BlockPos(Xcoord2, 0, Zcoord2)));
 			}
 
-		biomegenbase.decorate(worldObj, rand, new BlockPos(k, 0, l));
+		Biome.decorate(worldObj, rand, new BlockPos(k, 0, l));
 
 		ForgeEventFactory.onChunkPopulate(false, this, worldObj, x, z, flag);
 
@@ -358,7 +358,7 @@ public class ChunkProviderDarkRealm implements IChunkGenerator
 	@SuppressWarnings("rawtypes")
 	public List getPossibleCreatures(EnumCreatureType par1EnumCreatureType, BlockPos pos)
 	{
-		BiomeGenBase biome = worldObj.getBiomeGenForCoords(pos);
+		Biome biome = worldObj.getBiomeGenForCoords(pos);
 		return biome == null ? null : biome.getSpawnableList(par1EnumCreatureType);
 	}
 

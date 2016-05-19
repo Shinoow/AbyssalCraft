@@ -115,7 +115,7 @@ public class EntityDragonMinion extends EntityMob implements IEntityMultiPart, I
 		int k = ringBufferIndex - par1 * 1 - 1 & 63;
 		double[] adouble = new double[3];
 		double d0 = ringBuffer[j][0];
-		double d1 = MathHelper.wrapAngleTo180_double(ringBuffer[k][0] - d0);
+		double d1 = MathHelper.wrapDegrees(ringBuffer[k][0] - d0);
 		adouble[0] = d0 + d1 * par2;
 		d0 = ringBuffer[j][1];
 		d1 = ringBuffer[k][1] - d0;
@@ -155,7 +155,7 @@ public class EntityDragonMinion extends EntityMob implements IEntityMultiPart, I
 			f1 = MathHelper.cos(prevAnimTime * (float)Math.PI * 2.0F);
 
 			if (f1 <= -0.3F && f >= -0.3F)
-				worldObj.playSound(posX, posY, posZ, SoundEvents.entity_enderdragon_flap, getSoundCategory(), 5.0F, 0.8F + rand.nextFloat() * 0.3F, false);
+				worldObj.playSound(posX, posY, posZ, SoundEvents.ENTITY_ENDERDRAGON_FLAP, getSoundCategory(), 5.0F, 0.8F + rand.nextFloat() * 0.3F, false);
 		}
 
 		prevAnimTime = animTime;
@@ -178,7 +178,7 @@ public class EntityDragonMinion extends EntityMob implements IEntityMultiPart, I
 			animTime += f;
 
 
-			rotationYaw = MathHelper.wrapAngleTo180_float(rotationYaw);
+			rotationYaw = MathHelper.wrapDegrees(rotationYaw);
 
 			if (ringBufferIndex < 0)
 				for (int i = 0; i < ringBuffer.length; ++i)
@@ -205,9 +205,9 @@ public class EntityDragonMinion extends EntityMob implements IEntityMultiPart, I
 					d3 = posX + (interpTargetX - posX) / newPosRotationIncrements;
 					d0 = posY + (interpTargetY - posY) / newPosRotationIncrements;
 					d1 = posZ + (interpTargetZ - posZ) / newPosRotationIncrements;
-					d2 = MathHelper.wrapAngleTo180_double(interpTargetYaw - rotationYaw);
+					d2 = MathHelper.wrapDegrees(interpTargetYaw - rotationYaw);
 					rotationYaw = (float)(rotationYaw + d2 / newPosRotationIncrements);
-					rotationPitch = (float)(rotationPitch + (newPosX - rotationPitch) / newPosRotationIncrements);
+					rotationPitch = (float)(rotationPitch + (interpTargetPitch - rotationPitch) / newPosRotationIncrements);
 					--newPosRotationIncrements;
 					setPosition(d3, d0, d1);
 					setRotation(rotationYaw, rotationPitch);
@@ -253,9 +253,9 @@ public class EntityDragonMinion extends EntityMob implements IEntityMultiPart, I
 					d0 = f3;
 
 				motionY += d0 * 0.10000000149011612D;
-				rotationYaw = MathHelper.wrapAngleTo180_float(rotationYaw);
+				rotationYaw = MathHelper.wrapDegrees(rotationYaw);
 				double d8 = 180.0D - Math.atan2(d3, d1) * 180.0D / Math.PI;
-				double d9 = MathHelper.wrapAngleTo180_double(d8 - rotationYaw);
+				double d9 = MathHelper.wrapDegrees(d8 - rotationYaw);
 
 				if (d9 > 50.0D)
 					d9 = 50.0D;
@@ -281,7 +281,7 @@ public class EntityDragonMinion extends EntityMob implements IEntityMultiPart, I
 				rotationYaw += randomYawVelocity * 0.1F;
 				float f6 = (float)(2.0D / (d10 + 1.0D));
 				float f7 = 0.06F;
-				moveFlying(0.0F, -1.0F, f7 * (f4 * f6 + (1.0F - f6)));
+				moveRelative(0.0F, -1.0F, f7 * (f4 * f6 + (1.0F - f6)));
 
 
 				moveEntity(motionX, motionY, motionZ);
@@ -436,7 +436,7 @@ public class EntityDragonMinion extends EntityMob implements IEntityMultiPart, I
 
 	private float simplifyAngle(double par1)
 	{
-		return (float)MathHelper.wrapAngleTo180_double(par1);
+		return (float)MathHelper.wrapDegrees(par1);
 	}
 
 	@Override
@@ -491,12 +491,12 @@ public class EntityDragonMinion extends EntityMob implements IEntityMultiPart, I
 	@Override
 	protected SoundEvent getAmbientSound()
 	{
-		return SoundEvents.entity_enderdragon_ambient;
+		return SoundEvents.ENTITY_ENDERDRAGON_AMBIENT;
 	}
 
 	@Override
 	protected SoundEvent getHurtSound()
 	{
-		return SoundEvents.entity_enderdragon_hurt;
+		return SoundEvents.ENTITY_ENDERDRAGON_HURT;
 	}
 }

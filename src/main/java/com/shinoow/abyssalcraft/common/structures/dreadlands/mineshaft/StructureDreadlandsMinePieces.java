@@ -22,28 +22,23 @@ import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.item.EntityMinecartChest;
 import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
-import net.minecraft.item.Item;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.WeightedRandomChestContent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.structure.MapGenStructureIO;
 import net.minecraft.world.gen.structure.StructureBoundingBox;
 import net.minecraft.world.gen.structure.StructureComponent;
 
-import com.google.common.collect.Lists;
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
-import com.shinoow.abyssalcraft.api.item.ACItems;
 import com.shinoow.abyssalcraft.common.util.ACLoot;
 
 public class StructureDreadlandsMinePieces
 {
 	/** List of contents that can generate in Mineshafts. */
-	public static final List<WeightedRandomChestContent> mineshaftChestContents = Lists.newArrayList(new WeightedRandomChestContent[] {new WeightedRandomChestContent(ACItems.abyssalnite_ingot, 0, 1, 5, 10), new WeightedRandomChestContent(Items.diamond, 0, 1, 3, 5), new WeightedRandomChestContent(ACItems.coralium_gem, 0, 4, 9, 5), new WeightedRandomChestContent(ACItems.shadow_shard, 0, 4, 9, 5), new WeightedRandomChestContent(Items.diamond, 0, 1, 2, 3), new WeightedRandomChestContent(ACItems.dreaded_shard_of_abyssalnite, 0, 3, 8, 10), new WeightedRandomChestContent(Items.bread, 0, 1, 3, 15), new WeightedRandomChestContent(ACItems.refined_coralium_pickaxe, 0, 1, 1, 1), new WeightedRandomChestContent(Item.getItemFromBlock(Blocks.rail), 0, 4, 8, 1), new WeightedRandomChestContent(ACItems.chunk_of_abyssalnite, 0, 2, 4, 10), new WeightedRandomChestContent(ACItems.dreaded_chunk_of_abyssalnite, 0, 2, 4, 10), new WeightedRandomChestContent(ACItems.transmutation_gem, 0, 1, 1, 3), new WeightedRandomChestContent(ACItems.oblivion_catalyst, 0, 1, 1, 1), new WeightedRandomChestContent(ACItems.crystal, 24, 1, 5, 8)});
+//	public static final List<WeightedRandomChestContent> mineshaftChestContents = Lists.newArrayList(new WeightedRandomChestContent[] {new WeightedRandomChestContent(ACItems.abyssalnite_ingot, 0, 1, 5, 10), new WeightedRandomChestContent(Items.diamond, 0, 1, 3, 5), new WeightedRandomChestContent(ACItems.coralium_gem, 0, 4, 9, 5), new WeightedRandomChestContent(ACItems.shadow_shard, 0, 4, 9, 5), new WeightedRandomChestContent(Items.diamond, 0, 1, 2, 3), new WeightedRandomChestContent(ACItems.dreaded_shard_of_abyssalnite, 0, 3, 8, 10), new WeightedRandomChestContent(Items.bread, 0, 1, 3, 15), new WeightedRandomChestContent(ACItems.refined_coralium_pickaxe, 0, 1, 1, 1), new WeightedRandomChestContent(Item.getItemFromBlock(Blocks.rail), 0, 4, 8, 1), new WeightedRandomChestContent(ACItems.chunk_of_abyssalnite, 0, 2, 4, 10), new WeightedRandomChestContent(ACItems.dreaded_chunk_of_abyssalnite, 0, 2, 4, 10), new WeightedRandomChestContent(ACItems.transmutation_gem, 0, 1, 1, 3), new WeightedRandomChestContent(ACItems.oblivion_catalyst, 0, 1, 1, 1), new WeightedRandomChestContent(ACItems.crystal, 24, 1, 5, 8)});
 
 	public static void registerStructurePieces()
 	{
@@ -128,11 +123,11 @@ public class StructureDreadlandsMinePieces
 		public Corridor(int par1, Random par2Random, StructureBoundingBox par3StructureBoundingBox, EnumFacing par4)
 		{
 			super(par1);
-			func_186164_a(par4);
+			setCoordBaseMode(par4);
 			boundingBox = par3StructureBoundingBox;
 			hasRails = par2Random.nextInt(3) == 0;
 
-			if (func_186165_e() != EnumFacing.NORTH && func_186165_e() != EnumFacing.SOUTH)
+			if (getCoordBaseMode() != EnumFacing.NORTH && getCoordBaseMode() != EnumFacing.SOUTH)
 				sectionCount = par3StructureBoundingBox.getXSize() / 5;
 			else
 				sectionCount = par3StructureBoundingBox.getZSize() / 5;
@@ -184,11 +179,11 @@ public class StructureDreadlandsMinePieces
 			int i = getComponentType();
 			int j = par3Random.nextInt(4);
 
-			switch (func_186165_e())
+			switch (getCoordBaseMode())
 			{
 			case SOUTH:
 				if (j <= 1)
-					StructureDreadlandsMinePieces.getNextMineShaftComponent(par1StructureComponent, par2List, par3Random, boundingBox.minX, boundingBox.minY - 1 + par3Random.nextInt(3), boundingBox.maxZ + 1, func_186165_e(), i);
+					StructureDreadlandsMinePieces.getNextMineShaftComponent(par1StructureComponent, par2List, par3Random, boundingBox.minX, boundingBox.minY - 1 + par3Random.nextInt(3), boundingBox.maxZ + 1, getCoordBaseMode(), i);
 				else if (j == 2)
 					StructureDreadlandsMinePieces.getNextMineShaftComponent(par1StructureComponent, par2List, par3Random, boundingBox.minX - 1, boundingBox.minY - 1 + par3Random.nextInt(3), boundingBox.maxZ - 3, EnumFacing.WEST, i);
 				else
@@ -197,7 +192,7 @@ public class StructureDreadlandsMinePieces
 				break;
 			case WEST:
 				if (j <= 1)
-					StructureDreadlandsMinePieces.getNextMineShaftComponent(par1StructureComponent, par2List, par3Random, boundingBox.minX - 1, boundingBox.minY - 1 + par3Random.nextInt(3), boundingBox.minZ, func_186165_e(), i);
+					StructureDreadlandsMinePieces.getNextMineShaftComponent(par1StructureComponent, par2List, par3Random, boundingBox.minX - 1, boundingBox.minY - 1 + par3Random.nextInt(3), boundingBox.minZ, getCoordBaseMode(), i);
 				else if (j == 2)
 					StructureDreadlandsMinePieces.getNextMineShaftComponent(par1StructureComponent, par2List, par3Random, boundingBox.minX, boundingBox.minY - 1 + par3Random.nextInt(3), boundingBox.minZ - 1, EnumFacing.NORTH, i);
 				else
@@ -206,7 +201,7 @@ public class StructureDreadlandsMinePieces
 				break;
 			case NORTH:
 				if (j <= 1)
-					StructureDreadlandsMinePieces.getNextMineShaftComponent(par1StructureComponent, par2List, par3Random, boundingBox.minX, boundingBox.minY - 1 + par3Random.nextInt(3), boundingBox.minZ - 1, func_186165_e(), i);
+					StructureDreadlandsMinePieces.getNextMineShaftComponent(par1StructureComponent, par2List, par3Random, boundingBox.minX, boundingBox.minY - 1 + par3Random.nextInt(3), boundingBox.minZ - 1, getCoordBaseMode(), i);
 				else if (j == 2)
 					StructureDreadlandsMinePieces.getNextMineShaftComponent(par1StructureComponent, par2List, par3Random, boundingBox.minX - 1, boundingBox.minY - 1 + par3Random.nextInt(3), boundingBox.minZ, EnumFacing.WEST, i);
 				else
@@ -215,7 +210,7 @@ public class StructureDreadlandsMinePieces
 				break;
 			case EAST:
 				if (j <= 1)
-					StructureDreadlandsMinePieces.getNextMineShaftComponent(par1StructureComponent, par2List, par3Random, boundingBox.maxX + 1, boundingBox.minY - 1 + par3Random.nextInt(3), boundingBox.minZ, func_186165_e(), i);
+					StructureDreadlandsMinePieces.getNextMineShaftComponent(par1StructureComponent, par2List, par3Random, boundingBox.maxX + 1, boundingBox.minY - 1 + par3Random.nextInt(3), boundingBox.minZ, getCoordBaseMode(), i);
 				else if (j == 2)
 					StructureDreadlandsMinePieces.getNextMineShaftComponent(par1StructureComponent, par2List, par3Random, boundingBox.maxX - 3, boundingBox.minY - 1 + par3Random.nextInt(3), boundingBox.minZ - 1, EnumFacing.NORTH, i);
 				else
@@ -227,7 +222,7 @@ public class StructureDreadlandsMinePieces
 				int k;
 				int l;
 
-				if (func_186165_e() != EnumFacing.NORTH && func_186165_e() != EnumFacing.SOUTH)
+				if (getCoordBaseMode() != EnumFacing.NORTH && getCoordBaseMode() != EnumFacing.SOUTH)
 					for (k = boundingBox.minX + 3; k + 3 <= boundingBox.maxX; k += 5)
 					{
 						l = par3Random.nextInt(5);
@@ -254,13 +249,13 @@ public class StructureDreadlandsMinePieces
 		 * Used to generate chests with items in it. ex: Temple Chests, Village Blacksmith Chests, Mineshaft Chests.
 		 */
 		@Override
-		protected boolean func_186167_a(World world, StructureBoundingBox structureboundingbox, Random rand, int x, int y, int z, ResourceLocation loot)
+		protected boolean generateChest(World world, StructureBoundingBox structureboundingbox, Random rand, int x, int y, int z, ResourceLocation loot)
 		{
 			BlockPos blockpos = new BlockPos(getXWithOffset(x, z), getYWithOffset(y), getZWithOffset(x, z));
 
-			if (structureboundingbox.isVecInside(blockpos) && world.getBlockState(blockpos).getMaterial() == Material.air)
+			if (structureboundingbox.isVecInside(blockpos) && world.getBlockState(blockpos).getMaterial() == Material.AIR)
 			{
-				IBlockState iblockstate = Blocks.rail.getDefaultState().withProperty(BlockRail.SHAPE, rand.nextBoolean() ? BlockRailBase.EnumRailDirection.NORTH_SOUTH : BlockRailBase.EnumRailDirection.EAST_WEST);
+				IBlockState iblockstate = Blocks.RAIL.getDefaultState().withProperty(BlockRail.SHAPE, rand.nextBoolean() ? BlockRailBase.EnumRailDirection.NORTH_SOUTH : BlockRailBase.EnumRailDirection.EAST_WEST);
 				setBlockState(world, iblockstate, x, y, z, structureboundingbox);
 				EntityMinecartChest entityminecartchest = new EntityMinecartChest(world, blockpos.getX() + 0.5F, blockpos.getY() + 0.5F, blockpos.getZ() + 0.5F);
 				entityminecartchest.setLootTable(loot, rand.nextLong());
@@ -282,8 +277,8 @@ public class StructureDreadlandsMinePieces
 			else
 			{
 				int i = sectionCount * 5 - 1;
-				fillWithBlocks(par1World, par3StructureBoundingBox, 0, 0, 0, 2, 1, i, Blocks.air.getDefaultState(), Blocks.air.getDefaultState(), false);
-				func_175805_a(par1World, par3StructureBoundingBox, par2Random, 0.8F, 0, 2, 0, 2, 2, i, Blocks.air.getDefaultState(), Blocks.air.getDefaultState(), false);
+				fillWithBlocks(par1World, par3StructureBoundingBox, 0, 0, 0, 2, 1, i, Blocks.AIR.getDefaultState(), Blocks.AIR.getDefaultState(), false);
+				fillWithBlocksRandomly(par1World, par3StructureBoundingBox, par2Random, 0.8F, 0, 2, 0, 2, 2, i, Blocks.AIR.getDefaultState(), Blocks.AIR.getDefaultState(), false);
 
 				int j;
 				int k;
@@ -291,24 +286,24 @@ public class StructureDreadlandsMinePieces
 				for (j = 0; j < sectionCount; ++j)
 				{
 					k = 2 + j * 5;
-					fillWithBlocks(par1World, par3StructureBoundingBox, 0, 0, k, 0, 1, k, ACBlocks.dreadlands_wood_fence.getDefaultState(), Blocks.air.getDefaultState(), false);
-					fillWithBlocks(par1World, par3StructureBoundingBox, 2, 0, k, 2, 1, k, ACBlocks.dreadlands_wood_fence.getDefaultState(), Blocks.air.getDefaultState(), false);
+					fillWithBlocks(par1World, par3StructureBoundingBox, 0, 0, k, 0, 1, k, ACBlocks.dreadlands_wood_fence.getDefaultState(), Blocks.AIR.getDefaultState(), false);
+					fillWithBlocks(par1World, par3StructureBoundingBox, 2, 0, k, 2, 1, k, ACBlocks.dreadlands_wood_fence.getDefaultState(), Blocks.AIR.getDefaultState(), false);
 
 					if (par2Random.nextInt(4) == 0)
 					{
-						fillWithBlocks(par1World, par3StructureBoundingBox, 0, 2, k, 0, 2, k, ACBlocks.dreadlands_planks.getDefaultState(), Blocks.air.getDefaultState(), false);
-						fillWithBlocks(par1World, par3StructureBoundingBox, 2, 2, k, 2, 2, k, ACBlocks.dreadlands_planks.getDefaultState(), Blocks.air.getDefaultState(), false);
+						fillWithBlocks(par1World, par3StructureBoundingBox, 0, 2, k, 0, 2, k, ACBlocks.dreadlands_planks.getDefaultState(), Blocks.AIR.getDefaultState(), false);
+						fillWithBlocks(par1World, par3StructureBoundingBox, 2, 2, k, 2, 2, k, ACBlocks.dreadlands_planks.getDefaultState(), Blocks.AIR.getDefaultState(), false);
 					} else
-						fillWithBlocks(par1World, par3StructureBoundingBox, 0, 2, k, 2, 2, k, ACBlocks.dreadlands_planks.getDefaultState(), Blocks.air.getDefaultState(), false);
+						fillWithBlocks(par1World, par3StructureBoundingBox, 0, 2, k, 2, 2, k, ACBlocks.dreadlands_planks.getDefaultState(), Blocks.AIR.getDefaultState(), false);
 
-					randomlyPlaceBlock(par1World, par3StructureBoundingBox, par2Random, 0.05F, 1, 2, k - 1, Blocks.torch.getStateFromMeta(0));
-					randomlyPlaceBlock(par1World, par3StructureBoundingBox, par2Random, 0.05F, 1, 2, k + 1, Blocks.torch.getStateFromMeta(0));
-
-					if (par2Random.nextInt(100) == 0)
-						func_186167_a(par1World, par3StructureBoundingBox, par2Random, 2, 0, k - 1, ACLoot.CHEST_DREADLANDS_MINESHAFT);
+					randomlyPlaceBlock(par1World, par3StructureBoundingBox, par2Random, 0.05F, 1, 2, k - 1, Blocks.TORCH.getStateFromMeta(0));
+					randomlyPlaceBlock(par1World, par3StructureBoundingBox, par2Random, 0.05F, 1, 2, k + 1, Blocks.TORCH.getStateFromMeta(0));
 
 					if (par2Random.nextInt(100) == 0)
-						func_186167_a(par1World, par3StructureBoundingBox, par2Random, 2, 0, k + 1, ACLoot.CHEST_DREADLANDS_MINESHAFT);
+						generateChest(par1World, par3StructureBoundingBox, par2Random, 2, 0, k - 1, ACLoot.CHEST_DREADLANDS_MINESHAFT);
+
+					if (par2Random.nextInt(100) == 0)
+						generateChest(par1World, par3StructureBoundingBox, par2Random, 2, 0, k + 1, ACLoot.CHEST_DREADLANDS_MINESHAFT);
 				}
 
 				for (j = 0; j <= 2; ++j)
@@ -317,7 +312,7 @@ public class StructureDreadlandsMinePieces
 						byte b0 = -1;
 						IBlockState block1 = getBlockStateFromPos(par1World, j, b0, k, par3StructureBoundingBox);
 
-						if (block1.getMaterial() == Material.air)
+						if (block1.getMaterial() == Material.AIR)
 						{
 							byte b1 = -1;
 							setBlockState(par1World, ACBlocks.dreadlands_planks.getDefaultState(), j, b1, k, par3StructureBoundingBox);
@@ -326,13 +321,13 @@ public class StructureDreadlandsMinePieces
 
 				if (hasRails){
 
-					IBlockState iblockstate = Blocks.rail.getDefaultState().withProperty(BlockRail.SHAPE, BlockRailBase.EnumRailDirection.NORTH_SOUTH);
+					IBlockState iblockstate = Blocks.RAIL.getDefaultState().withProperty(BlockRail.SHAPE, BlockRailBase.EnumRailDirection.NORTH_SOUTH);
 
 					for (j = 0; j <= i; ++j)
 					{
 						IBlockState block = getBlockStateFromPos(par1World, 1, -1, j, par3StructureBoundingBox);
 
-						if (block.getMaterial() != Material.air && block.isFullBlock())
+						if (block.getMaterial() != Material.AIR && block.isFullBlock())
 							randomlyPlaceBlock(par1World, par3StructureBoundingBox, par2Random, 0.7F, 1, 0, j, iblockstate);
 					}
 				}
@@ -465,26 +460,26 @@ public class StructureDreadlandsMinePieces
 			{
 				if (isMultipleFloors)
 				{
-					fillWithBlocks(par1World, par3StructureBoundingBox, boundingBox.minX + 1, boundingBox.minY, boundingBox.minZ, boundingBox.maxX - 1, boundingBox.minY + 3 - 1, boundingBox.maxZ, Blocks.air.getDefaultState(), Blocks.air.getDefaultState(), false);
-					fillWithBlocks(par1World, par3StructureBoundingBox, boundingBox.minX, boundingBox.minY, boundingBox.minZ + 1, boundingBox.maxX, boundingBox.minY + 3 - 1, boundingBox.maxZ - 1, Blocks.air.getDefaultState(), Blocks.air.getDefaultState(), false);
-					fillWithBlocks(par1World, par3StructureBoundingBox, boundingBox.minX + 1, boundingBox.maxY - 2, boundingBox.minZ, boundingBox.maxX - 1, boundingBox.maxY, boundingBox.maxZ, Blocks.air.getDefaultState(), Blocks.air.getDefaultState(), false);
-					fillWithBlocks(par1World, par3StructureBoundingBox, boundingBox.minX, boundingBox.maxY - 2, boundingBox.minZ + 1, boundingBox.maxX, boundingBox.maxY, boundingBox.maxZ - 1, Blocks.air.getDefaultState(), Blocks.air.getDefaultState(), false);
-					fillWithBlocks(par1World, par3StructureBoundingBox, boundingBox.minX + 1, boundingBox.minY + 3, boundingBox.minZ + 1, boundingBox.maxX - 1, boundingBox.minY + 3, boundingBox.maxZ - 1, Blocks.air.getDefaultState(), Blocks.air.getDefaultState(), false);
+					fillWithBlocks(par1World, par3StructureBoundingBox, boundingBox.minX + 1, boundingBox.minY, boundingBox.minZ, boundingBox.maxX - 1, boundingBox.minY + 3 - 1, boundingBox.maxZ, Blocks.AIR.getDefaultState(), Blocks.AIR.getDefaultState(), false);
+					fillWithBlocks(par1World, par3StructureBoundingBox, boundingBox.minX, boundingBox.minY, boundingBox.minZ + 1, boundingBox.maxX, boundingBox.minY + 3 - 1, boundingBox.maxZ - 1, Blocks.AIR.getDefaultState(), Blocks.AIR.getDefaultState(), false);
+					fillWithBlocks(par1World, par3StructureBoundingBox, boundingBox.minX + 1, boundingBox.maxY - 2, boundingBox.minZ, boundingBox.maxX - 1, boundingBox.maxY, boundingBox.maxZ, Blocks.AIR.getDefaultState(), Blocks.AIR.getDefaultState(), false);
+					fillWithBlocks(par1World, par3StructureBoundingBox, boundingBox.minX, boundingBox.maxY - 2, boundingBox.minZ + 1, boundingBox.maxX, boundingBox.maxY, boundingBox.maxZ - 1, Blocks.AIR.getDefaultState(), Blocks.AIR.getDefaultState(), false);
+					fillWithBlocks(par1World, par3StructureBoundingBox, boundingBox.minX + 1, boundingBox.minY + 3, boundingBox.minZ + 1, boundingBox.maxX - 1, boundingBox.minY + 3, boundingBox.maxZ - 1, Blocks.AIR.getDefaultState(), Blocks.AIR.getDefaultState(), false);
 				}
 				else
 				{
-					fillWithBlocks(par1World, par3StructureBoundingBox, boundingBox.minX + 1, boundingBox.minY, boundingBox.minZ, boundingBox.maxX - 1, boundingBox.maxY, boundingBox.maxZ, Blocks.air.getDefaultState(), Blocks.air.getDefaultState(), false);
-					fillWithBlocks(par1World, par3StructureBoundingBox, boundingBox.minX, boundingBox.minY, boundingBox.minZ + 1, boundingBox.maxX, boundingBox.maxY, boundingBox.maxZ - 1, Blocks.air.getDefaultState(), Blocks.air.getDefaultState(), false);
+					fillWithBlocks(par1World, par3StructureBoundingBox, boundingBox.minX + 1, boundingBox.minY, boundingBox.minZ, boundingBox.maxX - 1, boundingBox.maxY, boundingBox.maxZ, Blocks.AIR.getDefaultState(), Blocks.AIR.getDefaultState(), false);
+					fillWithBlocks(par1World, par3StructureBoundingBox, boundingBox.minX, boundingBox.minY, boundingBox.minZ + 1, boundingBox.maxX, boundingBox.maxY, boundingBox.maxZ - 1, Blocks.AIR.getDefaultState(), Blocks.AIR.getDefaultState(), false);
 				}
 
-				fillWithBlocks(par1World, par3StructureBoundingBox, boundingBox.minX + 1, boundingBox.minY, boundingBox.minZ + 1, boundingBox.minX + 1, boundingBox.maxY, boundingBox.minZ + 1, ACBlocks.dreadlands_planks.getDefaultState(), Blocks.air.getDefaultState(), false);
-				fillWithBlocks(par1World, par3StructureBoundingBox, boundingBox.minX + 1, boundingBox.minY, boundingBox.maxZ - 1, boundingBox.minX + 1, boundingBox.maxY, boundingBox.maxZ - 1, ACBlocks.dreadlands_planks.getDefaultState(), Blocks.air.getDefaultState(), false);
-				fillWithBlocks(par1World, par3StructureBoundingBox, boundingBox.maxX - 1, boundingBox.minY, boundingBox.minZ + 1, boundingBox.maxX - 1, boundingBox.maxY, boundingBox.minZ + 1, ACBlocks.dreadlands_planks.getDefaultState(), Blocks.air.getDefaultState(), false);
-				fillWithBlocks(par1World, par3StructureBoundingBox, boundingBox.maxX - 1, boundingBox.minY, boundingBox.maxZ - 1, boundingBox.maxX - 1, boundingBox.maxY, boundingBox.maxZ - 1, ACBlocks.dreadlands_planks.getDefaultState(), Blocks.air.getDefaultState(), false);
+				fillWithBlocks(par1World, par3StructureBoundingBox, boundingBox.minX + 1, boundingBox.minY, boundingBox.minZ + 1, boundingBox.minX + 1, boundingBox.maxY, boundingBox.minZ + 1, ACBlocks.dreadlands_planks.getDefaultState(), Blocks.AIR.getDefaultState(), false);
+				fillWithBlocks(par1World, par3StructureBoundingBox, boundingBox.minX + 1, boundingBox.minY, boundingBox.maxZ - 1, boundingBox.minX + 1, boundingBox.maxY, boundingBox.maxZ - 1, ACBlocks.dreadlands_planks.getDefaultState(), Blocks.AIR.getDefaultState(), false);
+				fillWithBlocks(par1World, par3StructureBoundingBox, boundingBox.maxX - 1, boundingBox.minY, boundingBox.minZ + 1, boundingBox.maxX - 1, boundingBox.maxY, boundingBox.minZ + 1, ACBlocks.dreadlands_planks.getDefaultState(), Blocks.AIR.getDefaultState(), false);
+				fillWithBlocks(par1World, par3StructureBoundingBox, boundingBox.maxX - 1, boundingBox.minY, boundingBox.maxZ - 1, boundingBox.maxX - 1, boundingBox.maxY, boundingBox.maxZ - 1, ACBlocks.dreadlands_planks.getDefaultState(), Blocks.AIR.getDefaultState(), false);
 
 				for (int i = boundingBox.minX; i <= boundingBox.maxX; ++i)
 					for (int j = boundingBox.minZ; j <= boundingBox.maxZ; ++j)
-						if (getBlockStateFromPos(par1World, i, boundingBox.minY - 1, j, par3StructureBoundingBox).getMaterial() == Material.air)
+						if (getBlockStateFromPos(par1World, i, boundingBox.minY - 1, j, par3StructureBoundingBox).getMaterial() == Material.AIR)
 							setBlockState(par1World, ACBlocks.dreadlands_planks.getDefaultState(), i, boundingBox.minY - 1, j, par3StructureBoundingBox);
 
 				return true;
@@ -597,17 +592,17 @@ public class StructureDreadlandsMinePieces
 				return false;
 			else
 			{
-				fillWithBlocks(par1World, par3StructureBoundingBox, boundingBox.minX, boundingBox.minY, boundingBox.minZ, boundingBox.maxX, boundingBox.minY, boundingBox.maxZ, ACBlocks.dreadlands_grass.getDefaultState(), Blocks.air.getDefaultState(), true);
-				fillWithBlocks(par1World, par3StructureBoundingBox, boundingBox.minX, boundingBox.minY + 1, boundingBox.minZ, boundingBox.maxX, Math.min(boundingBox.minY + 3, boundingBox.maxY), boundingBox.maxZ, Blocks.air.getDefaultState(), Blocks.air.getDefaultState(), false);
+				fillWithBlocks(par1World, par3StructureBoundingBox, boundingBox.minX, boundingBox.minY, boundingBox.minZ, boundingBox.maxX, boundingBox.minY, boundingBox.maxZ, ACBlocks.dreadlands_grass.getDefaultState(), Blocks.AIR.getDefaultState(), true);
+				fillWithBlocks(par1World, par3StructureBoundingBox, boundingBox.minX, boundingBox.minY + 1, boundingBox.minZ, boundingBox.maxX, Math.min(boundingBox.minY + 3, boundingBox.maxY), boundingBox.maxZ, Blocks.AIR.getDefaultState(), Blocks.AIR.getDefaultState(), false);
 				Iterator<StructureBoundingBox> iterator = roomsLinkedToTheRoom.iterator();
 
 				while (iterator.hasNext())
 				{
 					StructureBoundingBox structureboundingbox1 = iterator.next();
-					fillWithBlocks(par1World, par3StructureBoundingBox, structureboundingbox1.minX, structureboundingbox1.maxY - 2, structureboundingbox1.minZ, structureboundingbox1.maxX, structureboundingbox1.maxY, structureboundingbox1.maxZ, Blocks.air.getDefaultState(), Blocks.air.getDefaultState(), false);
+					fillWithBlocks(par1World, par3StructureBoundingBox, structureboundingbox1.minX, structureboundingbox1.maxY - 2, structureboundingbox1.minZ, structureboundingbox1.maxX, structureboundingbox1.maxY, structureboundingbox1.maxZ, Blocks.AIR.getDefaultState(), Blocks.AIR.getDefaultState(), false);
 				}
 
-				randomlyRareFillWithBlocks(par1World, par3StructureBoundingBox, boundingBox.minX, boundingBox.minY + 4, boundingBox.minZ, boundingBox.maxX, boundingBox.maxY, boundingBox.maxZ, Blocks.air.getDefaultState(), false);
+				randomlyRareFillWithBlocks(par1World, par3StructureBoundingBox, boundingBox.minX, boundingBox.minY + 4, boundingBox.minZ, boundingBox.maxX, boundingBox.maxY, boundingBox.maxZ, Blocks.AIR.getDefaultState(), false);
 				return true;
 			}
 		}
@@ -644,7 +639,7 @@ public class StructureDreadlandsMinePieces
 		public Stairs(int par1, Random par2Random, StructureBoundingBox par3StructureBoundingBox, EnumFacing par4)
 		{
 			super(par1);
-			func_186164_a(par4);
+			setCoordBaseMode(par4);
 			boundingBox = par3StructureBoundingBox;
 		}
 
@@ -693,7 +688,7 @@ public class StructureDreadlandsMinePieces
 		{
 			int i = getComponentType();
 
-			switch (func_186165_e())
+			switch (getCoordBaseMode())
 			{
 			case SOUTH:
 				StructureDreadlandsMinePieces.getNextMineShaftComponent(par1StructureComponent, par2List, par3Random, boundingBox.minX, boundingBox.minY, boundingBox.maxZ + 1, EnumFacing.SOUTH, i);
@@ -720,11 +715,11 @@ public class StructureDreadlandsMinePieces
 				return false;
 			else
 			{
-				fillWithBlocks(par1World, par3StructureBoundingBox, 0, 5, 0, 2, 7, 1, Blocks.air.getDefaultState(), Blocks.air.getDefaultState(), false);
-				fillWithBlocks(par1World, par3StructureBoundingBox, 0, 0, 7, 2, 2, 8, Blocks.air.getDefaultState(), Blocks.air.getDefaultState(), false);
+				fillWithBlocks(par1World, par3StructureBoundingBox, 0, 5, 0, 2, 7, 1, Blocks.AIR.getDefaultState(), Blocks.AIR.getDefaultState(), false);
+				fillWithBlocks(par1World, par3StructureBoundingBox, 0, 0, 7, 2, 2, 8, Blocks.AIR.getDefaultState(), Blocks.AIR.getDefaultState(), false);
 
 				for (int i = 0; i < 5; ++i)
-					fillWithBlocks(par1World, par3StructureBoundingBox, 0, 5 - i - (i < 4 ? 1 : 0), 2 + i, 2, 7 - i, 2 + i, Blocks.air.getDefaultState(), Blocks.air.getDefaultState(), false);
+					fillWithBlocks(par1World, par3StructureBoundingBox, 0, 5 - i - (i < 4 ? 1 : 0), 2 + i, 2, 7 - i, 2 + i, Blocks.AIR.getDefaultState(), Blocks.AIR.getDefaultState(), false);
 
 				return true;
 			}

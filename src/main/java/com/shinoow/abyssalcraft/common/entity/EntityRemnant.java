@@ -139,7 +139,7 @@ public class EntityRemnant extends EntityMob implements IMerchant, IAntiEntity, 
 
 	@Override
 	@SuppressWarnings("rawtypes")
-	protected void updateAITick() {
+	protected void updateAITasks() {
 
 		if (!isTrading() && timeUntilReset > 0)
 		{
@@ -166,11 +166,11 @@ public class EntityRemnant extends EntityMob implements IMerchant, IAntiEntity, 
 					needsInitilization = false;
 				}
 
-				addPotionEffect(new PotionEffect(MobEffects.regeneration, 200, 0));
+				addPotionEffect(new PotionEffect(MobEffects.REGENERATION, 200, 0));
 			}
 		}
 
-		super.updateAITick();
+		super.updateAITasks();
 	}
 
 	@Override
@@ -194,7 +194,7 @@ public class EntityRemnant extends EntityMob implements IMerchant, IAntiEntity, 
 	protected void entityInit()
 	{
 		super.entityInit();
-		dataWatcher.register(PROFESSION, Integer.valueOf(0));
+		dataManager.register(PROFESSION, Integer.valueOf(0));
 	}
 
 	/**
@@ -385,17 +385,17 @@ public class EntityRemnant extends EntityMob implements IMerchant, IAntiEntity, 
 	@Override
 	protected void playStepSound(BlockPos pos, Block par4)
 	{
-		playSound(SoundEvents.entity_spider_step, 0.15F, 1.0F);
+		playSound(SoundEvents.ENTITY_SPIDER_STEP, 0.15F, 1.0F);
 	}
 
 	public void setProfession(int par1)
 	{
-		dataWatcher.set(PROFESSION, Integer.valueOf(par1));
+		dataManager.set(PROFESSION, Integer.valueOf(par1));
 	}
 
 	public int getProfession()
 	{
-		return dataWatcher.get(PROFESSION);
+		return dataManager.get(PROFESSION);
 	}
 
 	@Override
@@ -445,55 +445,55 @@ public class EntityRemnant extends EntityMob implements IMerchant, IAntiEntity, 
 			switch (getProfession())
 			{
 			case 0:
-				addItemTrade(list, Items.wheat, rand, adjustProbability(0.9F));
-				addItemTrade(list, Item.getItemFromBlock(Blocks.wool), rand, adjustProbability(0.5F));
-				addItemTrade(list, Items.chicken, rand, adjustProbability(0.5F));
-				addItemTrade(list, Items.cooked_fish, rand, adjustProbability(0.4F));
-				addCoinTrade(list, Items.bread, rand, adjustProbability(0.9F));
-				addCoinTrade(list, Items.melon, rand, adjustProbability(0.3F));
-				addCoinTrade(list, Items.apple, rand, adjustProbability(0.3F));
-				addCoinTrade(list, Items.cookie, rand, adjustProbability(0.3F));
-				addCoinTrade(list, Items.shears, rand, adjustProbability(0.3F));
-				addCoinTrade(list, Items.flint_and_steel, rand, adjustProbability(0.3F));
+				addItemTrade(list, Items.WHEAT, rand, adjustProbability(0.9F));
+				addItemTrade(list, Item.getItemFromBlock(Blocks.WOOL), rand, adjustProbability(0.5F));
+				addItemTrade(list, Items.CHICKEN, rand, adjustProbability(0.5F));
+				addItemTrade(list, Items.COOKED_FISH, rand, adjustProbability(0.4F));
+				addCoinTrade(list, Items.BREAD, rand, adjustProbability(0.9F));
+				addCoinTrade(list, Items.MELON, rand, adjustProbability(0.3F));
+				addCoinTrade(list, Items.APPLE, rand, adjustProbability(0.3F));
+				addCoinTrade(list, Items.COOKIE, rand, adjustProbability(0.3F));
+				addCoinTrade(list, Items.SHEARS, rand, adjustProbability(0.3F));
+				addCoinTrade(list, Items.FLINT_AND_STEEL, rand, adjustProbability(0.3F));
 				addCoinTrade(list, ACItems.fish_on_a_plate, rand, adjustProbability(0.3F));
-				addCoinTrade(list, Items.arrow, rand, adjustProbability(0.5F));
+				addCoinTrade(list, Items.ARROW, rand, adjustProbability(0.5F));
 
 				if (rand.nextFloat() < adjustProbability(0.5F))
-					list.add(new MerchantRecipe(new ItemStack(Blocks.gravel, 10), new ItemStack(ACItems.elder_engraved_coin), new ItemStack(Items.flint, 4 + rand.nextInt(2), 0)));
+					list.add(new MerchantRecipe(new ItemStack(Blocks.GRAVEL, 10), new ItemStack(ACItems.elder_engraved_coin), new ItemStack(Items.FLINT, 4 + rand.nextInt(2), 0)));
 
 				break;
 			case 1:
-				addItemTrade(list, Items.paper, rand, adjustProbability(0.8F));
-				addItemTrade(list, Items.book, rand, adjustProbability(0.8F));
-				addItemTrade(list, Items.written_book, rand, adjustProbability(0.3F));
-				addItemTrade(list, Items.rotten_flesh, rand, adjustProbability(0.7F));
+				addItemTrade(list, Items.PAPER, rand, adjustProbability(0.8F));
+				addItemTrade(list, Items.BOOK, rand, adjustProbability(0.8F));
+				addItemTrade(list, Items.WRITTEN_BOOK, rand, adjustProbability(0.3F));
+				addItemTrade(list, Items.ROTTEN_FLESH, rand, adjustProbability(0.7F));
 				addItemTrade(list, ACItems.coralium_plagued_flesh, rand, adjustProbability(0.7F));
 				addItemTrade(list, ACItems.dread_fragment, rand, adjustProbability(0.7F));
 				addItemTrade(list, ACItems.omothol_flesh, rand, adjustProbability(0.7F));
 				addItemTrade(list, ACItems.rotten_anti_flesh, rand, adjustProbability(0.3F));
-				addCoinTrade(list, Item.getItemFromBlock(Blocks.bookshelf), rand, adjustProbability(0.8F));
-				addCoinTrade(list, Item.getItemFromBlock(Blocks.glass), rand, adjustProbability(0.2F));
-				addCoinTrade(list, Items.compass, rand, adjustProbability(0.2F));
-				addCoinTrade(list, Items.clock, rand, adjustProbability(0.2F));
+				addCoinTrade(list, Item.getItemFromBlock(Blocks.BOOKSHELF), rand, adjustProbability(0.8F));
+				addCoinTrade(list, Item.getItemFromBlock(Blocks.GLASS), rand, adjustProbability(0.2F));
+				addCoinTrade(list, Items.COMPASS, rand, adjustProbability(0.2F));
+				addCoinTrade(list, Items.CLOCK, rand, adjustProbability(0.2F));
 				addCoinTrade(list, ACItems.necronomicon, rand, adjustProbability(0.3F));
 				addCoinTrade(list, ACItems.abyssal_wasteland_necronomicon, rand, adjustProbability(0.2F));
 				addCoinTrade(list, ACItems.dreadlands_necronomicon, rand, adjustProbability(0.1F));
 
 				if (rand.nextFloat() < adjustProbability(0.07F))
 				{
-					Enchantment enchantment = Enchantment.enchantmentRegistry.getRandomObject(rand);
+					Enchantment enchantment = Enchantment.REGISTRY.getRandomObject(rand);
 					int i1 = MathHelper.getRandomIntegerInRange(rand, enchantment.getMinLevel(), enchantment.getMaxLevel());
-					ItemStack itemstack = Items.enchanted_book.getEnchantedItemStack(new EnchantmentData(enchantment, i1));
+					ItemStack itemstack = Items.ENCHANTED_BOOK.getEnchantedItemStack(new EnchantmentData(enchantment, i1));
 					k = 2 + rand.nextInt(5 + i1 * 10) + 3 * i1;
-					list.add(new MerchantRecipe(new ItemStack(Items.book), new ItemStack(ACItems.elder_engraved_coin, k), itemstack));
+					list.add(new MerchantRecipe(new ItemStack(Items.BOOK), new ItemStack(ACItems.elder_engraved_coin, k), itemstack));
 				}
 
 				break;
 			case 2:
-				addCoinTrade(list, Items.ender_eye, rand, adjustProbability(0.3F));
-				addCoinTrade(list, Items.experience_bottle, rand, adjustProbability(0.2F));
-				addCoinTrade(list, Items.redstone, rand, adjustProbability(0.4F));
-				addCoinTrade(list, Item.getItemFromBlock(Blocks.glowstone), rand, adjustProbability(0.3F));
+				addCoinTrade(list, Items.ENDER_EYE, rand, adjustProbability(0.3F));
+				addCoinTrade(list, Items.EXPERIENCE_BOTTLE, rand, adjustProbability(0.2F));
+				addCoinTrade(list, Items.REDSTONE, rand, adjustProbability(0.4F));
+				addCoinTrade(list, Item.getItemFromBlock(Blocks.GLOWSTONE), rand, adjustProbability(0.3F));
 				addCoinTrade(list, ACItems.ritual_charm, rand, adjustProbability(0.4F));
 				addCoinTrade(list, ACItems.elder_engraved_coin, 8, ACItems.cthulhu_charm, 1);
 				addCoinTrade(list, ACItems.elder_engraved_coin, 8, ACItems.hastur_charm, 1);
@@ -521,7 +521,7 @@ public class EntityRemnant extends EntityMob implements IMerchant, IAntiEntity, 
 					++k;
 				}
 			case 3:
-				addItemTrade(list, Items.coal, rand, adjustProbability(0.7F));
+				addItemTrade(list, Items.COAL, rand, adjustProbability(0.7F));
 				addItemTrade(list, ACItems.abyssalnite_ingot, rand, adjustProbability(0.5F));
 				addItemTrade(list, ACItems.refined_coralium_ingot, rand, adjustProbability(0.5F));
 				addItemTrade(list, ACItems.dreadium_ingot, rand, adjustProbability(0.5F));
@@ -538,10 +538,10 @@ public class EntityRemnant extends EntityMob implements IMerchant, IAntiEntity, 
 				addCoinTrade(list, ACItems.blank_engraving, rand, adjustProbability(0.2F));
 				break;
 			case 4:
-				addItemTrade(list, Items.coal, rand, adjustProbability(0.7F));
-				addItemTrade(list, Items.porkchop, rand, adjustProbability(0.5F));
-				addItemTrade(list, Items.beef, rand, adjustProbability(0.5F));
-				addItemTrade(list, Items.chicken, rand, adjustProbability(0.5F));
+				addItemTrade(list, Items.COAL, rand, adjustProbability(0.7F));
+				addItemTrade(list, Items.PORKCHOP, rand, adjustProbability(0.5F));
+				addItemTrade(list, Items.BEEF, rand, adjustProbability(0.5F));
+				addItemTrade(list, Items.CHICKEN, rand, adjustProbability(0.5F));
 				addCoinTrade(list, ACItems.washcloth, rand, adjustProbability(0.4F));
 				addCoinTrade(list, ACItems.mre, rand, adjustProbability(0.1F));
 				addCoinTrade(list, ACItems.pork_on_a_plate, rand, adjustProbability(0.3F));
@@ -573,7 +573,7 @@ public class EntityRemnant extends EntityMob implements IMerchant, IAntiEntity, 
 				break;
 
 			case 6:
-				addItemTrade(list, Items.coal, rand, adjustProbability(0.7F));
+				addItemTrade(list, Items.COAL, rand, adjustProbability(0.7F));
 				addItemTrade(list, ACItems.abyssalnite_ingot, rand, adjustProbability(0.5F));
 				addItemTrade(list, ACItems.refined_coralium_ingot, rand, adjustProbability(0.5F));
 				addItemTrade(list, ACItems.dreadium_ingot, rand, adjustProbability(0.5F));
@@ -605,7 +605,7 @@ public class EntityRemnant extends EntityMob implements IMerchant, IAntiEntity, 
 			}
 
 		if (list.isEmpty())
-			addItemTrade(list, Items.gold_ingot, rand, 1.0F);
+			addItemTrade(list, Items.GOLD_INGOT, rand, 1.0F);
 
 		Collections.shuffle(list);
 
@@ -633,7 +633,7 @@ public class EntityRemnant extends EntityMob implements IMerchant, IAntiEntity, 
 				var1.getItemToBuy().getItem() instanceof ItemDrainStaff)
 			var1.compensateToolUses();
 		livingSoundTime = -getTalkInterval();
-		playSound(SoundEvents.entity_villager_yes, getSoundVolume(), getSoundPitch() * 0.5F);
+		playSound(SoundEvents.ENTITY_VILLAGER_YES, getSoundVolume(), getSoundPitch() * 0.5F);
 
 		if (hasSameIDsAs(var1, tradingList.get(tradingList.size() - 1)))
 		{
@@ -736,9 +736,9 @@ public class EntityRemnant extends EntityMob implements IMerchant, IAntiEntity, 
 			livingSoundTime = -getTalkInterval();
 
 			if (par1ItemStack != null)
-				playSound(SoundEvents.entity_villager_yes, getSoundVolume(), getSoundPitch() * 0.5F);
+				playSound(SoundEvents.ENTITY_VILLAGER_YES, getSoundVolume(), getSoundPitch() * 0.5F);
 			else
-				playSound(SoundEvents.entity_villager_no, getSoundVolume(), getSoundPitch() * 0.5F);
+				playSound(SoundEvents.ENTITY_VILLAGER_NO, getSoundVolume(), getSoundPitch() * 0.5F);
 		}
 	}
 
@@ -768,32 +768,32 @@ public class EntityRemnant extends EntityMob implements IMerchant, IAntiEntity, 
 
 	static
 	{
-		itemSellingList.put(Items.coal, new Tuple(Integer.valueOf(16), Integer.valueOf(24)));
+		itemSellingList.put(Items.COAL, new Tuple(Integer.valueOf(16), Integer.valueOf(24)));
 		itemSellingList.put(ACItems.abyssalnite_ingot, new Tuple(Integer.valueOf(8), Integer.valueOf(10)));
 		itemSellingList.put(ACItems.refined_coralium_ingot, new Tuple(Integer.valueOf(8), Integer.valueOf(10)));
 		itemSellingList.put(ACItems.dreadium_ingot, new Tuple(Integer.valueOf(8), Integer.valueOf(10)));
 		itemSellingList.put(ACItems.ethaxium_ingot, new Tuple(Integer.valueOf(4), Integer.valueOf(6)));
-		itemSellingList.put(Items.paper, new Tuple(Integer.valueOf(24), Integer.valueOf(36)));
-		itemSellingList.put(Items.book, new Tuple(Integer.valueOf(11), Integer.valueOf(13)));
-		itemSellingList.put(Items.written_book, new Tuple(Integer.valueOf(1), Integer.valueOf(1)));
-		itemSellingList.put(Items.ender_pearl, new Tuple(Integer.valueOf(3), Integer.valueOf(4)));
-		itemSellingList.put(Items.ender_eye, new Tuple(Integer.valueOf(2), Integer.valueOf(3)));
-		itemSellingList.put(Items.porkchop, new Tuple(Integer.valueOf(14), Integer.valueOf(18)));
-		itemSellingList.put(Items.beef, new Tuple(Integer.valueOf(14), Integer.valueOf(18)));
-		itemSellingList.put(Items.chicken, new Tuple(Integer.valueOf(14), Integer.valueOf(18)));
-		itemSellingList.put(Items.cooked_fish, new Tuple(Integer.valueOf(9), Integer.valueOf(13)));
-		itemSellingList.put(Items.wheat_seeds, new Tuple(Integer.valueOf(34), Integer.valueOf(48)));
-		itemSellingList.put(Items.melon_seeds, new Tuple(Integer.valueOf(30), Integer.valueOf(38)));
-		itemSellingList.put(Items.pumpkin_seeds, new Tuple(Integer.valueOf(30), Integer.valueOf(38)));
-		itemSellingList.put(Items.wheat, new Tuple(Integer.valueOf(18), Integer.valueOf(22)));
-		itemSellingList.put(Item.getItemFromBlock(Blocks.wool), new Tuple(Integer.valueOf(14), Integer.valueOf(22)));
-		itemSellingList.put(Items.rotten_flesh, new Tuple(Integer.valueOf(16), Integer.valueOf(28)));
+		itemSellingList.put(Items.PAPER, new Tuple(Integer.valueOf(24), Integer.valueOf(36)));
+		itemSellingList.put(Items.BOOK, new Tuple(Integer.valueOf(11), Integer.valueOf(13)));
+		itemSellingList.put(Items.WRITTEN_BOOK, new Tuple(Integer.valueOf(1), Integer.valueOf(1)));
+		itemSellingList.put(Items.ENDER_PEARL, new Tuple(Integer.valueOf(3), Integer.valueOf(4)));
+		itemSellingList.put(Items.ENDER_EYE, new Tuple(Integer.valueOf(2), Integer.valueOf(3)));
+		itemSellingList.put(Items.PORKCHOP, new Tuple(Integer.valueOf(14), Integer.valueOf(18)));
+		itemSellingList.put(Items.BEEF, new Tuple(Integer.valueOf(14), Integer.valueOf(18)));
+		itemSellingList.put(Items.CHICKEN, new Tuple(Integer.valueOf(14), Integer.valueOf(18)));
+		itemSellingList.put(Items.COOKED_FISH, new Tuple(Integer.valueOf(9), Integer.valueOf(13)));
+		itemSellingList.put(Items.WHEAT_SEEDS, new Tuple(Integer.valueOf(34), Integer.valueOf(48)));
+		itemSellingList.put(Items.MELON_SEEDS, new Tuple(Integer.valueOf(30), Integer.valueOf(38)));
+		itemSellingList.put(Items.PUMPKIN_SEEDS, new Tuple(Integer.valueOf(30), Integer.valueOf(38)));
+		itemSellingList.put(Items.WHEAT, new Tuple(Integer.valueOf(18), Integer.valueOf(22)));
+		itemSellingList.put(Item.getItemFromBlock(Blocks.WOOL), new Tuple(Integer.valueOf(14), Integer.valueOf(22)));
+		itemSellingList.put(Items.ROTTEN_FLESH, new Tuple(Integer.valueOf(16), Integer.valueOf(28)));
 		itemSellingList.put(ACItems.coralium_plagued_flesh, new Tuple(Integer.valueOf(16), Integer.valueOf(28)));
 		itemSellingList.put(ACItems.dread_fragment, new Tuple(Integer.valueOf(16), Integer.valueOf(28)));
 		itemSellingList.put(ACItems.omothol_flesh, new Tuple(Integer.valueOf(32), Integer.valueOf(60)));
 		itemSellingList.put(ACItems.rotten_anti_flesh, new Tuple(Integer.valueOf(8), Integer.valueOf(14)));
-		coinSellingList.put(Items.flint_and_steel, new Tuple(Integer.valueOf(3), Integer.valueOf(4)));
-		coinSellingList.put(Items.shears, new Tuple(Integer.valueOf(3), Integer.valueOf(4)));
+		coinSellingList.put(Items.FLINT_AND_STEEL, new Tuple(Integer.valueOf(3), Integer.valueOf(4)));
+		coinSellingList.put(Items.SHEARS, new Tuple(Integer.valueOf(3), Integer.valueOf(4)));
 		coinSellingList.put(ACItems.ethaxium_sword, new Tuple(Integer.valueOf(12), Integer.valueOf(14)));
 		coinSellingList.put(ACItems.ethaxium_axe, new Tuple(Integer.valueOf(9), Integer.valueOf(12)));
 		coinSellingList.put(ACItems.ethaxium_pickaxe, new Tuple(Integer.valueOf(10), Integer.valueOf(12)));
@@ -803,29 +803,29 @@ public class EntityRemnant extends EntityMob implements IMerchant, IAntiEntity, 
 		coinSellingList.put(ACItems.ethaxium_helmet, new Tuple(Integer.valueOf(5), Integer.valueOf(7)));
 		coinSellingList.put(ACItems.ethaxium_chestplate, new Tuple(Integer.valueOf(11), Integer.valueOf(15)));
 		coinSellingList.put(ACItems.ethaxium_leggings, new Tuple(Integer.valueOf(9), Integer.valueOf(11)));
-		coinSellingList.put(Items.bread, new Tuple(Integer.valueOf(-4), Integer.valueOf(-2)));
-		coinSellingList.put(Items.melon, new Tuple(Integer.valueOf(-8), Integer.valueOf(-4)));
-		coinSellingList.put(Items.apple, new Tuple(Integer.valueOf(-8), Integer.valueOf(-4)));
-		coinSellingList.put(Items.cookie, new Tuple(Integer.valueOf(-10), Integer.valueOf(-7)));
-		coinSellingList.put(Item.getItemFromBlock(Blocks.glass), new Tuple(Integer.valueOf(-5), Integer.valueOf(-3)));
-		coinSellingList.put(Item.getItemFromBlock(Blocks.bookshelf), new Tuple(Integer.valueOf(3), Integer.valueOf(4)));
+		coinSellingList.put(Items.BREAD, new Tuple(Integer.valueOf(-4), Integer.valueOf(-2)));
+		coinSellingList.put(Items.MELON, new Tuple(Integer.valueOf(-8), Integer.valueOf(-4)));
+		coinSellingList.put(Items.APPLE, new Tuple(Integer.valueOf(-8), Integer.valueOf(-4)));
+		coinSellingList.put(Items.COOKIE, new Tuple(Integer.valueOf(-10), Integer.valueOf(-7)));
+		coinSellingList.put(Item.getItemFromBlock(Blocks.GLASS), new Tuple(Integer.valueOf(-5), Integer.valueOf(-3)));
+		coinSellingList.put(Item.getItemFromBlock(Blocks.BOOKSHELF), new Tuple(Integer.valueOf(3), Integer.valueOf(4)));
 		coinSellingList.put(ACItems.washcloth, new Tuple(Integer.valueOf(2), Integer.valueOf(4)));
 		coinSellingList.put(ACItems.mre, new Tuple(Integer.valueOf(6), Integer.valueOf(8)));
-		coinSellingList.put(Items.experience_bottle, new Tuple(Integer.valueOf(-4), Integer.valueOf(-1)));
-		coinSellingList.put(Items.redstone, new Tuple(Integer.valueOf(-4), Integer.valueOf(-1)));
-		coinSellingList.put(Items.compass, new Tuple(Integer.valueOf(10), Integer.valueOf(12)));
-		coinSellingList.put(Items.clock, new Tuple(Integer.valueOf(10), Integer.valueOf(12)));
+		coinSellingList.put(Items.EXPERIENCE_BOTTLE, new Tuple(Integer.valueOf(-4), Integer.valueOf(-1)));
+		coinSellingList.put(Items.REDSTONE, new Tuple(Integer.valueOf(-4), Integer.valueOf(-1)));
+		coinSellingList.put(Items.COMPASS, new Tuple(Integer.valueOf(10), Integer.valueOf(12)));
+		coinSellingList.put(Items.CLOCK, new Tuple(Integer.valueOf(10), Integer.valueOf(12)));
 		coinSellingList.put(ACItems.necronomicon, new Tuple(Integer.valueOf(10), Integer.valueOf(12)));
 		coinSellingList.put(ACItems.abyssal_wasteland_necronomicon, new Tuple(Integer.valueOf(10), Integer.valueOf(12)));
 		coinSellingList.put(ACItems.dreadlands_necronomicon, new Tuple(Integer.valueOf(10), Integer.valueOf(12)));
-		coinSellingList.put(Item.getItemFromBlock(Blocks.glowstone), new Tuple(Integer.valueOf(-3), Integer.valueOf(-1)));
+		coinSellingList.put(Item.getItemFromBlock(Blocks.GLOWSTONE), new Tuple(Integer.valueOf(-3), Integer.valueOf(-1)));
 		coinSellingList.put(ACItems.pork_on_a_plate, new Tuple(Integer.valueOf(-7), Integer.valueOf(-5)));
 		coinSellingList.put(ACItems.beef_on_a_plate, new Tuple(Integer.valueOf(-7), Integer.valueOf(-5)));
 		coinSellingList.put(ACItems.chicken_on_a_plate, new Tuple(Integer.valueOf(-7), Integer.valueOf(-5)));
 		coinSellingList.put(ACItems.fish_on_a_plate, new Tuple(Integer.valueOf(-7), Integer.valueOf(-5)));
-		coinSellingList.put(Items.cooked_chicken, new Tuple(Integer.valueOf(-8), Integer.valueOf(-6)));
-		coinSellingList.put(Items.ender_eye, new Tuple(Integer.valueOf(7), Integer.valueOf(11)));
-		coinSellingList.put(Items.arrow, new Tuple(Integer.valueOf(-12), Integer.valueOf(-8)));
+		coinSellingList.put(Items.COOKED_CHICKEN, new Tuple(Integer.valueOf(-8), Integer.valueOf(-6)));
+		coinSellingList.put(Items.ENDER_EYE, new Tuple(Integer.valueOf(7), Integer.valueOf(11)));
+		coinSellingList.put(Items.ARROW, new Tuple(Integer.valueOf(-12), Integer.valueOf(-8)));
 		coinSellingList.put(ACItems.plated_coralium_boots, new Tuple(Integer.valueOf(4), Integer.valueOf(6)));
 		coinSellingList.put(ACItems.dreadium_samurai_boots, new Tuple(Integer.valueOf(7), Integer.valueOf(8)));
 		coinSellingList.put(ACItems.plated_coralium_helmet, new Tuple(Integer.valueOf(4), Integer.valueOf(6)));

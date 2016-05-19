@@ -38,7 +38,7 @@ public class ItemTrackerPSDL extends Item {
 	@Override
 	public ActionResult<ItemStack> onItemRightClick(ItemStack par1ItemStack, World par2World, EntityPlayer par3EntityPlayer, EnumHand hand)
 	{
-		RayTraceResult movingobjectposition = getMovingObjectPositionFromPlayer(par2World, par3EntityPlayer, false);
+		RayTraceResult movingobjectposition = rayTrace(par2World, par3EntityPlayer, false);
 
 		if (movingobjectposition != null && movingobjectposition.typeOfHit == RayTraceResult.Type.BLOCK && par2World.getBlockState(movingobjectposition.getBlockPos()) == ACBlocks.dreadlands_infused_powerstone)
 			return new ActionResult(EnumActionResult.PASS, par1ItemStack);
@@ -52,8 +52,8 @@ public class ItemTrackerPSDL extends Item {
 				EntityPSDLTracker entitypsdltracker = new EntityPSDLTracker(par2World, par3EntityPlayer.posX, par3EntityPlayer.posY, par3EntityPlayer.posZ);
 				entitypsdltracker.moveTowards(blockpos);
 				par2World.spawnEntityInWorld(entitypsdltracker);
-				par2World.playSound((EntityPlayer)null, par3EntityPlayer.posX, par3EntityPlayer.posY, par3EntityPlayer.posZ, SoundEvents.entity_endereye_launch, SoundCategory.NEUTRAL, 0.5F, 0.4F / (itemRand.nextFloat() * 0.4F + 0.8F));
-				par2World.playAuxSFXAtEntity((EntityPlayer)null, 1003, new BlockPos(par3EntityPlayer), 0);
+				par2World.playSound((EntityPlayer)null, par3EntityPlayer.posX, par3EntityPlayer.posY, par3EntityPlayer.posZ, SoundEvents.ENTITY_ENDEREYE_LAUNCH, SoundCategory.NEUTRAL, 0.5F, 0.4F / (itemRand.nextFloat() * 0.4F + 0.8F));
+				par2World.playEvent((EntityPlayer)null, 1003, new BlockPos(par3EntityPlayer), 0);
 
 				if (!par3EntityPlayer.capabilities.isCreativeMode)
 					--par1ItemStack.stackSize;

@@ -40,9 +40,9 @@ public class BlockCrate extends BlockContainer
 	private final Random random = new Random();
 
 	public BlockCrate(){
-		super(Material.wood);
+		super(Material.WOOD);
 		setCreativeTab(AbyssalCraft.tabDecoration);
-		setStepSound(SoundType.WOOD);
+		setSoundType(SoundType.WOOD);
 	}
 
 	@Override
@@ -53,9 +53,9 @@ public class BlockCrate extends BlockContainer
 	}
 
 	@Override
-	public void onNeighborBlockChange(World par1World, BlockPos pos, IBlockState state, Block par5)
+	public void neighborChanged(IBlockState state, World par1World, BlockPos pos, Block par5)
 	{
-		super.onNeighborBlockChange(par1World, pos, state, par5);
+		super.neighborChanged(state, par1World, pos, par5);
 		TileEntityCrate TileEntityCrate = (TileEntityCrate)par1World.getTileEntity(pos);
 
 		if (TileEntityCrate != null)

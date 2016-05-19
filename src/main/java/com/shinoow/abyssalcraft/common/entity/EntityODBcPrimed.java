@@ -98,19 +98,19 @@ public class EntityODBcPrimed extends Entity {
 
 	private void explode()
 	{
-		Blocks.obsidian.setResistance(5.0F);
-		Blocks.lava.setResistance(5.0F);
-		Blocks.flowing_lava.setResistance(5.0F);
-		Blocks.water.setResistance(5.0F);
-		Blocks.flowing_water.setResistance(5.0F);
+		Blocks.OBSIDIAN.setResistance(5.0F);
+		Blocks.LAVA.setResistance(5.0F);
+		Blocks.FLOWING_LAVA.setResistance(5.0F);
+		Blocks.WATER.setResistance(5.0F);
+		Blocks.FLOWING_WATER.setResistance(5.0F);
 		ACBlocks.liquid_coralium.setResistance(50.0F);
 		float var0 = 20.0F;
 		ExplosionUtil.newODBExplosion(worldObj, this, posX, posY, posZ, var0, 32, false, true);
-		Blocks.obsidian.setResistance(2000.0F);
-		Blocks.lava.setResistance(500.0F);
-		Blocks.flowing_lava.setResistance(500.0F);
-		Blocks.water.setResistance(500.0F);
-		Blocks.flowing_water.setResistance(500.0F);
+		Blocks.OBSIDIAN.setResistance(2000.0F);
+		Blocks.LAVA.setResistance(500.0F);
+		Blocks.FLOWING_LAVA.setResistance(500.0F);
+		Blocks.WATER.setResistance(500.0F);
+		Blocks.FLOWING_WATER.setResistance(500.0F);
 		ACBlocks.liquid_coralium.setResistance(500.0F);
 	}
 

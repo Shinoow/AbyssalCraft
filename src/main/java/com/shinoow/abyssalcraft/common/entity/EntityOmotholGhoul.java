@@ -83,9 +83,9 @@ public class EntityOmotholGhoul extends EntityMob implements IAntiEntity, ICoral
 	{
 		if(super.attackEntityAsMob(par1Entity))
 			if(par1Entity instanceof EntityLivingBase){
-				((EntityLivingBase)par1Entity).addPotionEffect(new PotionEffect(MobEffects.moveSlowdown, 100));
-				((EntityLivingBase)par1Entity).addPotionEffect(new PotionEffect(MobEffects.blindness, 20));
-				((EntityLivingBase)par1Entity).addPotionEffect(new PotionEffect(MobEffects.nightVision, 20));
+				((EntityLivingBase)par1Entity).addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, 100));
+				((EntityLivingBase)par1Entity).addPotionEffect(new PotionEffect(MobEffects.BLINDNESS, 20));
+				((EntityLivingBase)par1Entity).addPotionEffect(new PotionEffect(MobEffects.NIGHT_VISION, 20));
 			}
 
 
@@ -123,7 +123,7 @@ public class EntityOmotholGhoul extends EntityMob implements IAntiEntity, ICoral
 	@Override
 	protected void playStepSound(BlockPos pos, Block par4)
 	{
-		playSound(SoundEvents.entity_zombie_step, 0.15F, 1.0F);
+		playSound(SoundEvents.ENTITY_ZOMBIE_STEP, 0.15F, 1.0F);
 	}
 
 	@Override

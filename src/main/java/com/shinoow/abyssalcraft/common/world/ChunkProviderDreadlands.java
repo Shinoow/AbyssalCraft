@@ -23,11 +23,11 @@ import net.minecraft.block.BlockFalling;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.ChunkPos;
 import net.minecraft.util.math.MathHelper;
-import net.minecraft.world.ChunkCoordIntPair;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldType;
-import net.minecraft.world.biome.BiomeGenBase;
+import net.minecraft.world.biome.Biome;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.chunk.ChunkPrimer;
 import net.minecraft.world.chunk.IChunkGenerator;
@@ -73,7 +73,7 @@ public class ChunkProviderDreadlands implements IChunkGenerator {
 	private MapGenBase ravineGenerator = new MapGenRavine();
 
 	/** The biomes that are used to generate the chunk */
-	private BiomeGenBase[] biomesForGeneration;
+	private Biome[] biomesForGeneration;
 
 	double[] doubleArray1;
 	double[] doubleArray2;
@@ -183,18 +183,18 @@ public class ChunkProviderDreadlands implements IChunkGenerator {
 		}
 	}
 
-	public void replaceBlocksForBiome(int par1, int par2, ChunkPrimer primer, BiomeGenBase[] par5BiomeArray)
+	public void replaceBlocksForBiome(int par1, int par2, ChunkPrimer primer, Biome[] par5BiomeArray)
 	{
 		if(!ForgeEventFactory.onReplaceBiomeBlocks(this, par1, par2, primer, worldObj)) return;
 
 		double d0 = 0.03125D;
-		stoneNoise = noiseGen4.func_151599_a(stoneNoise, par1 * 16, par2 * 16, 16, 16, d0 * 2.0D, d0 * 2.0D, 1.0D);
+		stoneNoise = noiseGen4.getRegion(stoneNoise, par1 * 16, par2 * 16, 16, 16, d0 * 2.0D, d0 * 2.0D, 1.0D);
 
 		for (int k = 0; k < 16; ++k)
 			for (int l = 0; l < 16; ++l)
 			{
-				BiomeGenBase biomegenbase = par5BiomeArray[l + k * 16];
-				biomegenbase.genTerrainBlocks(worldObj, rand, primer, par1 * 16 + k, par2 * 16 + l, stoneNoise[l + k * 16]);
+				Biome Biome = par5BiomeArray[l + k * 16];
+				Biome.genTerrainBlocks(worldObj, rand, primer, par1 * 16 + k, par2 * 16 + l, stoneNoise[l + k * 16]);
 			}
 	}
 
@@ -221,7 +221,7 @@ public class ChunkProviderDreadlands implements IChunkGenerator {
 		byte[] abyte1 = chunk.getBiomeArray();
 
 		for (int k = 0; k < abyte1.length; ++k)
-			abyte1[k] = (byte)BiomeGenBase.getIdForBiome(biomesForGeneration[k]);
+			abyte1[k] = (byte)Biome.getIdForBiome(biomesForGeneration[k]);
 
 		chunk.generateSkylightMap();
 		return chunk;
@@ -242,14 +242,14 @@ public class ChunkProviderDreadlands implements IChunkGenerator {
 				float f1 = 0.0F;
 				float f2 = 0.0F;
 				byte b0 = 2;
-				BiomeGenBase biomegenbase = biomesForGeneration[j1 + 2 + (k1 + 2) * 10];
+				Biome Biome = biomesForGeneration[j1 + 2 + (k1 + 2) * 10];
 
 				for (int l1 = -b0; l1 <= b0; ++l1)
 					for (int i2 = -b0; i2 <= b0; ++i2)
 					{
-						BiomeGenBase biomegenbase1 = biomesForGeneration[j1 + l1 + 2 + (k1 + i2 + 2) * 10];
-						float f3 = biomegenbase1.getBaseHeight();
-						float f4 = biomegenbase1.getHeightVariation();
+						Biome Biome1 = biomesForGeneration[j1 + l1 + 2 + (k1 + i2 + 2) * 10];
+						float f3 = Biome1.getBaseHeight();
+						float f4 = Biome1.getHeightVariation();
 
 						if (worldType == WorldType.AMPLIFIED && f3 > 0.0F)
 						{
@@ -259,7 +259,7 @@ public class ChunkProviderDreadlands implements IChunkGenerator {
 
 						float f5 = parabolicField[l1 + 2 + (i2 + 2) * 5] / (f3 + 2.0F);
 
-						if (biomegenbase1.getBaseHeight() > biomegenbase.getBaseHeight())
+						if (Biome1.getBaseHeight() > Biome.getBaseHeight())
 							f5 /= 2.0F;
 
 						f += f4 * f5;
@@ -345,17 +345,17 @@ public class ChunkProviderDreadlands implements IChunkGenerator {
 		BlockFalling.fallInstantly = true;
 		int k = par2 * 16;
 		int l = par3 * 16;
-		BiomeGenBase biomegenbase = worldObj.getBiomeGenForCoords(new BlockPos(k + 16, 0, l + 16));
+		Biome Biome = worldObj.getBiomeGenForCoords(new BlockPos(k + 16, 0, l + 16));
 		rand.setSeed(worldObj.getSeed());
 		long i1 = rand.nextLong() / 2L * 2L + 1L;
 		long j1 = rand.nextLong() / 2L * 2L + 1L;
 		rand.setSeed(par2 * i1 + par3 * j1 ^ worldObj.getSeed());
 		boolean flag = false;
 
-		ForgeEventFactory.onChunkPopulate(true, this, worldObj, par2, par3, flag);
+		ForgeEventFactory.onChunkPopulate(true, this, worldObj, rand, par2, par3, flag);
 
 		if (mapFeaturesEnabled)
-			dmGenerator.generateStructure(worldObj, rand, new ChunkCoordIntPair(par2, par3));
+			dmGenerator.generateStructure(worldObj, rand, new ChunkPos(par2, par3));
 
 		int k1;
 		int l1;
@@ -367,7 +367,7 @@ public class ChunkProviderDreadlands implements IChunkGenerator {
 			k1 = k + rand.nextInt(16) + 8;
 			l1 = rand.nextInt(120) + 4;
 			i2 = l + rand.nextInt(16) + 8;
-			new WorldGenHellLava(Blocks.lava, false).generate(worldObj, rand, new BlockPos(k1, l1, i2));
+			new WorldGenHellLava(Blocks.LAVA, false).generate(worldObj, rand, new BlockPos(k1, l1, i2));
 		}
 
 		if(AbyssalCraft.generateShoggothLairs)
@@ -379,7 +379,7 @@ public class ChunkProviderDreadlands implements IChunkGenerator {
 					new StructureShoggothPit().generate(worldObj, rand, worldObj.getHeight(new BlockPos(Xcoord2, 0, Zcoord2)));
 			}
 
-		biomegenbase.decorate(worldObj, rand, new BlockPos(k, 0, l));
+		Biome.decorate(worldObj, rand, new BlockPos(k, 0, l));
 
 
 		ForgeEventFactory.onChunkPopulate(false, this, worldObj, par2, par3, flag);
@@ -438,7 +438,7 @@ public class ChunkProviderDreadlands implements IChunkGenerator {
 	@SuppressWarnings("rawtypes")
 	public List getPossibleCreatures(EnumCreatureType par1EnumCreatureType, BlockPos pos)
 	{
-		BiomeGenBase biome = worldObj.getBiomeGenForCoords(pos);
+		Biome biome = worldObj.getBiomeGenForCoords(pos);
 		return biome == null ? null : biome.getSpawnableList(par1EnumCreatureType);
 	}
 

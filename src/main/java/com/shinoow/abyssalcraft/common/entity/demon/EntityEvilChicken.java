@@ -75,26 +75,27 @@ public class EntityEvilChicken extends EntityMob {
 	@Override
 	protected SoundEvent getAmbientSound()
 	{
-		return SoundEvents.entity_chicken_ambient;
+		return SoundEvents.ENTITY_CHICKEN_AMBIENT;
 	}
 
 	@Override
 	protected SoundEvent getHurtSound()
 	{
-		return SoundEvents.entity_ghast_hurt;
+		return SoundEvents.ENTITY_GHAST_HURT;
 	}
 
 	@Override
 	protected SoundEvent getDeathSound()
 	{
-		return SoundEvents.entity_chicken_death;
+		return SoundEvents.ENTITY_CHICKEN_DEATH;
 	}
 
 	@Override
 	protected void playStepSound(BlockPos pos, Block par4)
 	{
-		playSound(SoundEvents.entity_chicken_step, 0.15F, 1.0F);
+		playSound(SoundEvents.ENTITY_CHICKEN_STEP, 0.15F, 1.0F);
 	}
+
 
 	@Override
 	public void fall(float p_70069_1_, float par2) {}
@@ -146,8 +147,8 @@ public class EntityEvilChicken extends EntityMob {
 		int j = rand.nextInt(3) + rand.nextInt(1 + p_70628_2_);
 
 		for (int k = 0; k < j; ++k)
-			dropItem(Items.feather, 1);
+			dropItem(Items.FEATHER, 1);
 
-		dropItem(Items.chicken, 1);
+		dropItem(Items.CHICKEN, 1);
 	}
 }

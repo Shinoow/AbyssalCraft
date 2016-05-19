@@ -15,7 +15,7 @@ import java.util.Random;
 
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraft.world.biome.BiomeGenBase;
+import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.feature.WorldGenMinable;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -29,7 +29,7 @@ import com.shinoow.abyssalcraft.common.entity.EntityShadowBeast;
 import com.shinoow.abyssalcraft.common.entity.EntityShadowCreature;
 import com.shinoow.abyssalcraft.common.entity.EntityShadowMonster;
 
-public class BiomeGenDarklandsMountains extends BiomeGenBase implements IDarklandsBiome {
+public class BiomeGenDarklandsMountains extends Biome implements IDarklandsBiome {
 
 	@SuppressWarnings("unchecked")
 	public BiomeGenDarklandsMountains(BiomeProperties par1)

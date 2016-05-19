@@ -31,7 +31,7 @@ import com.shinoow.abyssalcraft.common.world.gen.WorldGenDLT;
 public class BlockDLTSapling extends BlockSapling {
 
 	public BlockDLTSapling() {
-		setStepSound(SoundType.PLANT);
+		setSoundType(SoundType.PLANT);
 		setCreativeTab(AbyssalCraft.tabDecoration);
 	}
 
@@ -39,7 +39,7 @@ public class BlockDLTSapling extends BlockSapling {
 	{
 		if (!net.minecraftforge.event.terraingen.TerrainGen.saplingGrowTree(world, random, pos)) return;
 
-		world.setBlockState(pos, Blocks.air.getDefaultState(), 1);
+		world.setBlockState(pos, Blocks.AIR.getDefaultState(), 1);
 		Object obj = new WorldGenDLT(true);
 		if(!((WorldGenerator) obj).generate(world, random, pos))
 			world.setBlockState(pos, getDefaultState(), 4);

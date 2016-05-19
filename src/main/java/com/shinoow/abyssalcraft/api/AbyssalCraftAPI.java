@@ -85,15 +85,25 @@ public class AbyssalCraftAPI {
 	 */
 	public static EnumCreatureAttribute SHADOW = EnumHelper.addCreatureAttribute("SHADOW");
 
-	public static ArmorMaterial abyssalniteArmor = EnumHelper.addArmorMaterial("Abyssalnite", "abyssalcraft:abyssalnite", 35, new int[]{3, 6, 8, 3}, 13, SoundEvents.item_armor_equip_iron);
-	public static ArmorMaterial dreadedAbyssalniteArmor = EnumHelper.addArmorMaterial("Dread", "abyssalcraft:dread", 36, new int[]{3, 6, 8, 3}, 15, SoundEvents.item_armor_equip_iron);
-	public static ArmorMaterial refinedCoraliumArmor = EnumHelper.addArmorMaterial("Coralium", "abyssalcraft:coralium", 37, new int[]{3, 6, 8, 3}, 14, SoundEvents.item_armor_equip_iron);
-	public static ArmorMaterial platedCoraliumArmor = EnumHelper.addArmorMaterial("CoraliumP", "abyssalcraft:coraliump", 55, new int[]{4, 7, 9, 4}, 14, SoundEvents.item_armor_equip_iron);
-	public static ArmorMaterial depthsArmor = EnumHelper.addArmorMaterial("Depths", "abyssalcraft:depths", 33, new int[]{3, 6, 8, 3}, 25, SoundEvents.item_armor_equip_iron);
-	public static ArmorMaterial dreadiumArmor = EnumHelper.addArmorMaterial("Dreadium", "abyssalcraft:dreadium", 40, new int[]{3, 6, 8, 3}, 15, SoundEvents.item_armor_equip_iron);
-	public static ArmorMaterial dreadiumSamuraiArmor = EnumHelper.addArmorMaterial("DreadiumS", "abyssalcraft:dreadiums", 45, new int[]{3, 6, 8, 3}, 20, SoundEvents.item_armor_equip_iron);
-	public static ArmorMaterial ethaxiumArmor = EnumHelper.addArmorMaterial("Ethaxium", "abyssalcraft:ethaxium", 50, new int[]{3, 6, 8, 3}, 25, SoundEvents.item_armor_equip_iron);
+//	public static ArmorMaterial abyssalniteArmor = EnumHelper.addArmorMaterial("Abyssalnite", "abyssalcraft:abyssalnite", 35, new int[]{3, 6, 8, 3}, 13, SoundEvents.ITEM_ARMOR_EQUIP_IRON);
+//	public static ArmorMaterial dreadedAbyssalniteArmor = EnumHelper.addArmorMaterial("Dread", "abyssalcraft:dread", 36, new int[]{3, 6, 8, 3}, 15, SoundEvents.ITEM_ARMOR_EQUIP_IRON);
+//	public static ArmorMaterial refinedCoraliumArmor = EnumHelper.addArmorMaterial("Coralium", "abyssalcraft:coralium", 37, new int[]{3, 6, 8, 3}, 14, SoundEvents.ITEM_ARMOR_EQUIP_IRON);
+//	public static ArmorMaterial platedCoraliumArmor = EnumHelper.addArmorMaterial("CoraliumP", "abyssalcraft:coraliump", 55, new int[]{4, 7, 9, 4}, 14, SoundEvents.ITEM_ARMOR_EQUIP_IRON);
+//	public static ArmorMaterial depthsArmor = EnumHelper.addArmorMaterial("Depths", "abyssalcraft:depths", 33, new int[]{3, 6, 8, 3}, 25, SoundEvents.ITEM_ARMOR_EQUIP_IRON);
+//	public static ArmorMaterial dreadiumArmor = EnumHelper.addArmorMaterial("Dreadium", "abyssalcraft:dreadium", 40, new int[]{3, 6, 8, 3}, 15, SoundEvents.ITEM_ARMOR_EQUIP_IRON);
+//	public static ArmorMaterial dreadiumSamuraiArmor = EnumHelper.addArmorMaterial("DreadiumS", "abyssalcraft:dreadiums", 45, new int[]{3, 6, 8, 3}, 20, SoundEvents.ITEM_ARMOR_EQUIP_IRON);
+//	public static ArmorMaterial ethaxiumArmor = EnumHelper.addArmorMaterial("Ethaxium", "abyssalcraft:ethaxium", 50, new int[]{3, 6, 8, 3}, 25, SoundEvents.ITEM_ARMOR_EQUIP_IRON);
 
+	//TODO Go back to using the commented out above values when possible (next release or something, should be handled by Forge shortly)
+	public static ArmorMaterial abyssalniteArmor = ArmorMaterial.DIAMOND;
+	public static ArmorMaterial dreadedAbyssalniteArmor = ArmorMaterial.DIAMOND;
+	public static ArmorMaterial refinedCoraliumArmor = ArmorMaterial.DIAMOND;
+	public static ArmorMaterial platedCoraliumArmor = ArmorMaterial.DIAMOND;
+	public static ArmorMaterial depthsArmor = ArmorMaterial.DIAMOND;
+	public static ArmorMaterial dreadiumArmor = ArmorMaterial.DIAMOND;
+	public static ArmorMaterial dreadiumSamuraiArmor = ArmorMaterial.DIAMOND;
+	public static ArmorMaterial ethaxiumArmor = ArmorMaterial.DIAMOND;
+	
 	public static ToolMaterial darkstoneTool = EnumHelper.addToolMaterial("DARKSTONE", 1, 180, 5.0F, 1, 5);
 	public static ToolMaterial abyssalniteTool = EnumHelper.addToolMaterial("ABYSSALNITE", 4, 1261, 10.0F, 4, 12);
 	public static ToolMaterial refinedCoraliumTool = EnumHelper.addToolMaterial("CORALIUM", 5, 1800, 12.0F, 5, 13);
@@ -127,14 +137,14 @@ public class AbyssalCraftAPI {
 	 */
 	public static void setRepairItems(){
 
-		abyssalniteArmor.customCraftingMaterial = ACItems.abyssalnite_ingot;
-		dreadedAbyssalniteArmor.customCraftingMaterial = ACItems.dreaded_shard_of_abyssalnite;
-		refinedCoraliumArmor.customCraftingMaterial = ACItems.refined_coralium_ingot;
-		platedCoraliumArmor.customCraftingMaterial = ACItems.coralium_plate;
-		depthsArmor.customCraftingMaterial = ACItems.coralium_gem_cluster_9;
-		dreadiumArmor.customCraftingMaterial = ACItems.dreadium_ingot;
-		dreadiumSamuraiArmor.customCraftingMaterial = ACItems.dreadium_plate;
-		ethaxiumArmor.customCraftingMaterial = ACItems.ethaxium_ingot;
+//		abyssalniteArmor.customCraftingMaterial = ACItems.abyssalnite_ingot;
+//		dreadedAbyssalniteArmor.customCraftingMaterial = ACItems.dreaded_shard_of_abyssalnite;
+//		refinedCoraliumArmor.customCraftingMaterial = ACItems.refined_coralium_ingot;
+//		platedCoraliumArmor.customCraftingMaterial = ACItems.coralium_plate;
+//		depthsArmor.customCraftingMaterial = ACItems.coralium_gem_cluster_9;
+//		dreadiumArmor.customCraftingMaterial = ACItems.dreadium_ingot;
+//		dreadiumSamuraiArmor.customCraftingMaterial = ACItems.dreadium_plate;
+//		ethaxiumArmor.customCraftingMaterial = ACItems.ethaxium_ingot;
 
 		darkstoneTool.setRepairItem(new ItemStack(ACBlocks.darkstone_cobblestone));
 		abyssalniteTool.setRepairItem(new ItemStack(ACItems.abyssalnite_ingot));

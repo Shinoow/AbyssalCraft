@@ -47,7 +47,7 @@ public class EntityAntiCow extends EntityAnimal implements IAntiEntity {
 		tasks.addTask(0, new EntityAISwimming(this));
 		tasks.addTask(1, new EntityAIPanic(this, 2.0D));
 		tasks.addTask(2, new EntityAIMate(this, 1.0D));
-		tasks.addTask(3, new EntityAITempt(this, 1.25D, Items.wheat, false));
+		tasks.addTask(3, new EntityAITempt(this, 1.25D, Items.WHEAT, false));
 		tasks.addTask(4, new EntityAIFollowParent(this, 1.25D));
 		tasks.addTask(5, new EntityAIWander(this, 1.0D));
 		tasks.addTask(6, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
@@ -65,25 +65,25 @@ public class EntityAntiCow extends EntityAnimal implements IAntiEntity {
 	@Override
 	protected SoundEvent getAmbientSound()
 	{
-		return SoundEvents.entity_cow_ambient;
+		return SoundEvents.ENTITY_COW_AMBIENT;
 	}
 
 	@Override
 	protected SoundEvent getHurtSound()
 	{
-		return SoundEvents.entity_cow_hurt;
+		return SoundEvents.ENTITY_COW_HURT;
 	}
 
 	@Override
 	protected SoundEvent getDeathSound()
 	{
-		return SoundEvents.entity_cow_death;
+		return SoundEvents.ENTITY_COW_DEATH;
 	}
 
 	@Override
 	protected void playStepSound(BlockPos pos, Block par4Block)
 	{
-		playSound(SoundEvents.entity_cow_step, 0.15F, 1.0F);
+		playSound(SoundEvents.ENTITY_COW_STEP, 0.15F, 1.0F);
 	}
 
 	@Override
@@ -95,7 +95,7 @@ public class EntityAntiCow extends EntityAnimal implements IAntiEntity {
 	@Override
 	protected Item getDropItem()
 	{
-		return Items.leather;
+		return Items.LEATHER;
 	}
 
 	@Override
@@ -105,7 +105,7 @@ public class EntityAntiCow extends EntityAnimal implements IAntiEntity {
 		int k;
 
 		for (k = 0; k < j; ++k)
-			dropItem(Items.leather, 1);
+			dropItem(Items.LEATHER, 1);
 
 		j = rand.nextInt(3) + 1 + rand.nextInt(1 + par2);
 
@@ -131,13 +131,13 @@ public class EntityAntiCow extends EntityAnimal implements IAntiEntity {
 	public boolean processInteract(EntityPlayer par1EntityPlayer, EnumHand hand, ItemStack stack)
 	{
 
-		if (stack != null && stack.getItem() == Items.bucket && !par1EntityPlayer.capabilities.isCreativeMode && !isChild())
+		if (stack != null && stack.getItem() == Items.BUCKET && !par1EntityPlayer.capabilities.isCreativeMode && !isChild())
 		{
-			par1EntityPlayer.playSound(SoundEvents.entity_cow_milk, 1.0F, 1.0F);
+			par1EntityPlayer.playSound(SoundEvents.ENTITY_COW_MILK, 1.0F, 1.0F);
 			if (stack.stackSize-- == 1)
-				par1EntityPlayer.setHeldItem(hand, new ItemStack(Items.milk_bucket));
+				par1EntityPlayer.setHeldItem(hand, new ItemStack(Items.MILK_BUCKET));
 			else if (!par1EntityPlayer.inventory.addItemStackToInventory(new ItemStack(ACItems.liquid_antimatter_bucket)))
-				par1EntityPlayer.dropPlayerItemWithRandomChoice(new ItemStack(ACItems.liquid_antimatter_bucket, 1, 0), false);
+				par1EntityPlayer.dropItem(new ItemStack(ACItems.liquid_antimatter_bucket, 1, 0), false);
 
 			return true;
 		} else

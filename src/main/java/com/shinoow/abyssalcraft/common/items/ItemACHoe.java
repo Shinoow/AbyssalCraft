@@ -67,20 +67,20 @@ public class ItemACHoe extends ItemHoe {
 
 			if (facing != EnumFacing.DOWN && worldIn.isAirBlock(pos.up()))
 			{
-				if (block == Blocks.grass || block == Blocks.grass_path || block == ACBlocks.darklands_grass || block == ACBlocks.dreadlands_grass)
+				if (block == Blocks.GRASS || block == Blocks.GRASS_PATH || block == ACBlocks.darklands_grass || block == ACBlocks.dreadlands_grass)
 				{
-					func_185071_a(stack, playerIn, worldIn, pos, Blocks.farmland.getDefaultState());
+					setBlock(stack, playerIn, worldIn, pos, Blocks.FARMLAND.getDefaultState());
 					return EnumActionResult.SUCCESS;
 				}
 
-				if (block == Blocks.dirt)
+				if (block == Blocks.DIRT)
 					switch (iblockstate.getValue(BlockDirt.VARIANT))
 					{
 					case DIRT:
-						func_185071_a(stack, playerIn, worldIn, pos, Blocks.farmland.getDefaultState());
+						setBlock(stack, playerIn, worldIn, pos, Blocks.FARMLAND.getDefaultState());
 						return EnumActionResult.SUCCESS;
 					case COARSE_DIRT:
-						func_185071_a(stack, playerIn, worldIn, pos, Blocks.dirt.getDefaultState().withProperty(BlockDirt.VARIANT, BlockDirt.DirtType.DIRT));
+						setBlock(stack, playerIn, worldIn, pos, Blocks.DIRT.getDefaultState().withProperty(BlockDirt.VARIANT, BlockDirt.DirtType.DIRT));
 						return EnumActionResult.SUCCESS;
 					}
 			}

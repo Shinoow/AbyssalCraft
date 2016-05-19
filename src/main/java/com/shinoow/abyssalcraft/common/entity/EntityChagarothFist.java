@@ -63,6 +63,6 @@ public class EntityChagarothFist extends EntityMob implements IDreadEntity {
 	@Override
 	protected void playStepSound(BlockPos pos, Block par4)
 	{
-		playSound(SoundEvents.entity_spider_step, 0.15F, 1.0F);
+		playSound(SoundEvents.ENTITY_SPIDER_STEP, 0.15F, 1.0F);
 	}
 }

@@ -182,8 +182,8 @@ public class InternalNecroDataHandler extends DummyNecroDataHandler {
 				new Page(14, NecronomiconText.ENTITY_EVIL_ANIMALS_2),
 				new Page(15, NecronomiconResources.LESSER_SHOGGOTH, NecronomiconText.ENTITY_LESSER_SHOGGOTH_1),
 				new Page(16, NecronomiconText.ENTITY_LESSER_SHOGGOTH_2));
-		addPages("overworld", "specialmaterials", new Page(1, new CraftingStack(ACBlocks.coralium_infused_stone, Blocks.stone, Blocks.stone, Blocks.stone, ACItems.coralium_gem_cluster_3,
-				ACItems.coralium_gem_cluster_3, ACItems.coralium_gem_cluster_3, Blocks.stone, Blocks.stone, Blocks.stone),
+		addPages("overworld", "specialmaterials", new Page(1, new CraftingStack(ACBlocks.coralium_infused_stone, Blocks.STONE, Blocks.STONE, Blocks.STONE, ACItems.coralium_gem_cluster_3,
+				ACItems.coralium_gem_cluster_3, ACItems.coralium_gem_cluster_3, Blocks.STONE, Blocks.STONE, Blocks.STONE),
 				NecronomiconText.CRAFTING_CORALIUM_INFUSED_STONE_1),
 				new Page(2, NecronomiconText.CRAFTING_CORALIUM_INFUSED_STONE_2),
 				new Page(3, new CraftingStack(ACItems.shadow_gem), NecronomiconText.CRAFTING_SHADOW_GEM_1),
@@ -317,7 +317,7 @@ public class InternalNecroDataHandler extends DummyNecroDataHandler {
 						new Page(4, NecronomiconText.CRAFTING_ETHAXIUM_INGOT_2),
 						new Page(5, new CraftingStack(ACItems.blank_engraving), NecronomiconText.CRAFTING_BLANK_ENGRAVING_1),
 						new Page(6, NecronomiconText.CRAFTING_BLANK_ENGRAVING_2),
-						new Page(7, new CraftingStack(ACItems.coin, null, Items.iron_ingot, null, Items.iron_ingot, Items.flint, Items.iron_ingot, null, Items.iron_ingot, null), NecronomiconText.CRAFTING_COIN),
+						new Page(7, new CraftingStack(ACItems.coin, null, Items.IRON_INGOT, null, Items.IRON_INGOT, Items.FLINT, Items.IRON_INGOT, null, Items.IRON_INGOT, null), NecronomiconText.CRAFTING_COIN),
 						new Page(8, new CraftingStack(ACBlocks.engraver), NecronomiconText.CRAFTING_ENGRAVER),
 						new Page(9, new CraftingStack(ACItems.small_crystal_bag), NecronomiconText.CRAFTING_CRYSTAL_BAG_1),
 						new Page(10, NecronomiconText.CRAFTING_CRYSTAL_BAG_2),
@@ -371,7 +371,7 @@ public class InternalNecroDataHandler extends DummyNecroDataHandler {
 				new Page(13, NecronomiconText.PE_TUT_13));
 		addPages("miscinfo", "specialmaterials", new Page(1, new CraftingStack(ACItems.cobblestone_upgrade_kit), NecronomiconText.CRAFTING_UPGRADE_KIT_1),
 				new Page(2, new CraftingStack(ACItems.iron_upgrade_kit), NecronomiconText.CRAFTING_UPGRADE_KIT_2),
-				new Page(3, new CraftingStack(new ItemStack(ACItems.iron_plate, 2), null, null, null, null, Items.iron_ingot, null, null, Items.iron_ingot, null), NecronomiconText.CRAFTING_IRON_PLATE),
+				new Page(3, new CraftingStack(new ItemStack(ACItems.iron_plate, 2), null, null, null, null, Items.IRON_INGOT, null, null, Items.IRON_INGOT, null), NecronomiconText.CRAFTING_IRON_PLATE),
 				new Page(4, new CraftingStack(ACItems.washcloth), NecronomiconText.CRAFTING_WASHCLOTH),
 				new Page(5, new CraftingStack(ACItems.mre), NecronomiconText.CRAFTING_MRE),
 				new Page(6, new CraftingStack(ACItems.beef_on_a_plate), NecronomiconText.CRAFTING_PLATE_FOOD),
@@ -380,9 +380,9 @@ public class InternalNecroDataHandler extends DummyNecroDataHandler {
 				new Page(9, new CraftingStack(ACItems.carbon_cluster), NecronomiconText.CRAFTING_CARBON_CLUSTER),
 				new Page(10, new CraftingStack(ACItems.dense_carbon_cluster), NecronomiconText.CRAFTING_DENSE_CARBON_CLUSTER),
 				new Page(11, new CraftingStack(ACBlocks.wooden_crate), NecronomiconText.CRAFTING_CRATE));
-		addPages("miscinfo", "enchantments", new Page(1, Items.enchanted_book.getEnchantedItemStack(new EnchantmentData(AbyssalCraftAPI.coralium_enchantment, 1)), NecronomiconText.ENCHANTMENT_CORALIUM),
-				new Page(2, Items.enchanted_book.getEnchantedItemStack(new EnchantmentData(AbyssalCraftAPI.dread_enchantment, 1)), NecronomiconText.ENCHANTMENT_DREAD),
-				new Page(3, Items.enchanted_book.getEnchantedItemStack(new EnchantmentData(AbyssalCraftAPI.light_pierce, AbyssalCraftAPI.light_pierce.getMaxLevel())), NecronomiconText.ENCHANTMENT_LIGHT_PIERCE),
-				new Page(4, Items.enchanted_book.getEnchantedItemStack(new EnchantmentData(AbyssalCraftAPI.iron_wall, 1)), NecronomiconText.ENCHANTMENT_IRON_WALL));
+		addPages("miscinfo", "enchantments", new Page(1, Items.ENCHANTED_BOOK.getEnchantedItemStack(new EnchantmentData(AbyssalCraftAPI.coralium_enchantment, 1)), NecronomiconText.ENCHANTMENT_CORALIUM),
+				new Page(2, Items.ENCHANTED_BOOK.getEnchantedItemStack(new EnchantmentData(AbyssalCraftAPI.dread_enchantment, 1)), NecronomiconText.ENCHANTMENT_DREAD),
+				new Page(3, Items.ENCHANTED_BOOK.getEnchantedItemStack(new EnchantmentData(AbyssalCraftAPI.light_pierce, AbyssalCraftAPI.light_pierce.getMaxLevel())), NecronomiconText.ENCHANTMENT_LIGHT_PIERCE),
+				new Page(4, Items.ENCHANTED_BOOK.getEnchantedItemStack(new EnchantmentData(AbyssalCraftAPI.iron_wall, 1)), NecronomiconText.ENCHANTMENT_IRON_WALL));
 	}
 }

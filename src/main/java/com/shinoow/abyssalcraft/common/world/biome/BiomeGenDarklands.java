@@ -16,7 +16,7 @@ import java.util.Random;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraft.world.biome.BiomeGenBase;
+import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.feature.WorldGenAbstractTree;
 import net.minecraft.world.gen.feature.WorldGenMinable;
 import net.minecraft.world.gen.feature.WorldGenTrees;
@@ -30,7 +30,7 @@ import com.shinoow.abyssalcraft.common.entity.EntityAbyssalZombie;
 import com.shinoow.abyssalcraft.common.entity.EntityDepthsGhoul;
 import com.shinoow.abyssalcraft.common.world.gen.WorldGenDLT;
 
-public class BiomeGenDarklands extends BiomeGenBase implements IDarklandsBiome {
+public class BiomeGenDarklands extends Biome implements IDarklandsBiome {
 
 	private WorldGenTrees WorldGenDarkTrees;
 
@@ -39,7 +39,7 @@ public class BiomeGenDarklands extends BiomeGenBase implements IDarklandsBiome {
 	{
 		super(par1);
 		topBlock = ACBlocks.darklands_grass.getDefaultState();
-		fillerBlock = Blocks.dirt.getDefaultState();
+		fillerBlock = Blocks.DIRT.getDefaultState();
 		//		waterColorMultiplier = 14745518;
 		WorldGenDarkTrees = new WorldGenDLT(false);
 		theBiomeDecorator.treesPerChunk = 3;
@@ -84,7 +84,7 @@ public class BiomeGenDarklands extends BiomeGenBase implements IDarklandsBiome {
 	@Override
 	public WorldGenAbstractTree genBigTreeChance(Random par1Random)
 	{
-		return par1Random.nextInt(3) == 0 ? worldGeneratorTrees : par1Random.nextInt(5) == 0 ? WorldGenDarkTrees : worldGeneratorTrees;
+		return par1Random.nextInt(3) == 0 ? TREE_FEATURE : par1Random.nextInt(5) == 0 ? WorldGenDarkTrees : TREE_FEATURE;
 	}
 
 	@Override

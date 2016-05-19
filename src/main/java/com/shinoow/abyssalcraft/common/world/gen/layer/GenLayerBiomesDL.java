@@ -11,7 +11,7 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.common.world.gen.layer;
 
-import net.minecraft.world.biome.BiomeGenBase;
+import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.layer.GenLayer;
 import net.minecraft.world.gen.layer.IntCache;
 
@@ -19,7 +19,7 @@ import com.shinoow.abyssalcraft.api.biome.ACBiomes;
 
 public class GenLayerBiomesDL extends GenLayer {
 
-	protected BiomeGenBase[] allowedBiomes = {ACBiomes.dreadlands, ACBiomes.purified_dreadlands, ACBiomes.dreadlands_forest, ACBiomes.dreadlands_mountains};
+	protected Biome[] allowedBiomes = {ACBiomes.dreadlands, ACBiomes.purified_dreadlands, ACBiomes.dreadlands_forest, ACBiomes.dreadlands_mountains};
 
 	public GenLayerBiomesDL(long seed, GenLayer genlayer) {
 		super(seed);
@@ -39,7 +39,7 @@ public class GenLayerBiomesDL extends GenLayer {
 			for (int dx=0; dx<width; dx++)
 			{
 				initChunkSeed(dx+x, dz+z);
-				dest[dx+dz*width] = BiomeGenBase.getIdForBiome(allowedBiomes[nextInt(allowedBiomes.length)]);
+				dest[dx+dz*width] = Biome.getIdForBiome(allowedBiomes[nextInt(allowedBiomes.length)]);
 			}
 		return dest;
 	}

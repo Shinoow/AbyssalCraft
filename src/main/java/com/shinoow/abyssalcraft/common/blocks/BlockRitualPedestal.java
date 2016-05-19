@@ -54,10 +54,10 @@ public class BlockRitualPedestal extends BlockContainer {
 	public static final PropertyEnum MATERIAL = PropertyEnum.create("material", EnumRitualMatType.class);
 
 	public BlockRitualPedestal() {
-		super(Material.rock);
+		super(Material.ROCK);
 		setHardness(6.0F);
 		setResistance(12.0F);
-		setStepSound(SoundType.STONE);
+		setSoundType(SoundType.STONE);
 		//		setBlockBounds(0.25F, 0.0F, 0.25F, 0.75F, 1.0F, 0.75F);
 		setCreativeTab(null);
 	}
@@ -105,7 +105,7 @@ public class BlockRitualPedestal extends BlockContainer {
 			if(((TileEntityRitualPedestal)tile).getItem() != null){
 				player.inventory.addItemStackToInventory(((TileEntityRitualPedestal)tile).getItem());
 				((TileEntityRitualPedestal)tile).setItem(null);
-				world.playSound(pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, SoundEvents.entity_item_pickup, SoundCategory.PLAYERS, 0.5F, world.rand.nextFloat() - world.rand.nextFloat() * 0.2F + 1, false);
+				world.playSound(pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, SoundEvents.ENTITY_ITEM_PICKUP, SoundCategory.PLAYERS, 0.5F, world.rand.nextFloat() - world.rand.nextFloat() * 0.2F + 1, false);
 				return true;
 			} else //				ItemStack heldItem = player.getHeldItem();
 				if(heldItem != null){
@@ -113,7 +113,7 @@ public class BlockRitualPedestal extends BlockContainer {
 					newItem.stackSize = 1;
 					((TileEntityRitualPedestal)tile).setItem(newItem);
 					heldItem.stackSize--;
-					world.playSound(pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, SoundEvents.entity_item_pickup, SoundCategory.PLAYERS, 0.5F, world.rand.nextFloat() - world.rand.nextFloat() * 0.2F + 1, false);
+					world.playSound(pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, SoundEvents.ENTITY_ITEM_PICKUP, SoundCategory.PLAYERS, 0.5F, world.rand.nextFloat() - world.rand.nextFloat() * 0.2F + 1, false);
 					return true;
 				}
 		return false;
@@ -176,7 +176,7 @@ public class BlockRitualPedestal extends BlockContainer {
 	}
 
 	static {
-		blockMeta.put(0, Blocks.cobblestone);
+		blockMeta.put(0, Blocks.COBBLESTONE);
 		blockMeta.put(1, ACBlocks.darkstone_cobblestone);
 		blockMeta.put(2, ACBlocks.abyssal_stone_brick);
 		blockMeta.put(3, ACBlocks.coralium_stone_brick);

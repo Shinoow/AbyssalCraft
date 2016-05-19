@@ -86,39 +86,39 @@ public class ItemSoulReaper extends Item {
 			increaseSouls(par1ItemStack);
 			switch(getSouls(par1ItemStack)){
 			case 32:
-				par3EntityLivingBase.addPotionEffect(new PotionEffect(MobEffects.damageBoost, 600));
+				par3EntityLivingBase.addPotionEffect(new PotionEffect(MobEffects.STRENGTH, 600));
 				par3EntityLivingBase.heal(20.0F);
 				break;
 			case 64:
-				par3EntityLivingBase.addPotionEffect(new PotionEffect(MobEffects.damageBoost, 1200));
+				par3EntityLivingBase.addPotionEffect(new PotionEffect(MobEffects.STRENGTH, 1200));
 				par3EntityLivingBase.heal(20.0F);
 				break;
 			case 128:
-				par3EntityLivingBase.addPotionEffect(new PotionEffect(MobEffects.damageBoost, 1200, 1));
-				par3EntityLivingBase.addPotionEffect(new PotionEffect(MobEffects.moveSpeed, 600));
+				par3EntityLivingBase.addPotionEffect(new PotionEffect(MobEffects.STRENGTH, 1200, 1));
+				par3EntityLivingBase.addPotionEffect(new PotionEffect(MobEffects.SPEED, 600));
 				par3EntityLivingBase.heal(20.0F);
 				break;
 			case 256:
-				par3EntityLivingBase.addPotionEffect(new PotionEffect(MobEffects.damageBoost, 2400, 1));
-				par3EntityLivingBase.addPotionEffect(new PotionEffect(MobEffects.moveSpeed, 1200));
-				par3EntityLivingBase.addPotionEffect(new PotionEffect(MobEffects.resistance, 300));
+				par3EntityLivingBase.addPotionEffect(new PotionEffect(MobEffects.STRENGTH, 2400, 1));
+				par3EntityLivingBase.addPotionEffect(new PotionEffect(MobEffects.SPEED, 1200));
+				par3EntityLivingBase.addPotionEffect(new PotionEffect(MobEffects.RESISTANCE, 300));
 				par3EntityLivingBase.heal(20.0F);
 				break;
 			case 512:
-				par3EntityLivingBase.addPotionEffect(new PotionEffect(MobEffects.damageBoost, 1200, 2));
-				par3EntityLivingBase.addPotionEffect(new PotionEffect(MobEffects.moveSpeed, 1200, 1));
-				par3EntityLivingBase.addPotionEffect(new PotionEffect(MobEffects.resistance, 600));
-				par3EntityLivingBase.addPotionEffect(new PotionEffect(MobEffects.fireResistance, 300));
+				par3EntityLivingBase.addPotionEffect(new PotionEffect(MobEffects.STRENGTH, 1200, 2));
+				par3EntityLivingBase.addPotionEffect(new PotionEffect(MobEffects.SPEED, 1200, 1));
+				par3EntityLivingBase.addPotionEffect(new PotionEffect(MobEffects.RESISTANCE, 600));
+				par3EntityLivingBase.addPotionEffect(new PotionEffect(MobEffects.FIRE_RESISTANCE, 300));
 				par3EntityLivingBase.heal(20.0F);
 				break;
 			case 1024:
 				setSouls(0, par1ItemStack);
-				par3EntityLivingBase.addPotionEffect(new PotionEffect(MobEffects.damageBoost, 2400, 2));
-				par3EntityLivingBase.addPotionEffect(new PotionEffect(MobEffects.moveSpeed, 2400, 2));
-				par3EntityLivingBase.addPotionEffect(new PotionEffect(MobEffects.resistance, 1200));
-				par3EntityLivingBase.addPotionEffect(new PotionEffect(MobEffects.fireResistance, 600));
-				par3EntityLivingBase.addPotionEffect(new PotionEffect(MobEffects.saturation, 300));
-				par3EntityLivingBase.addPotionEffect(new PotionEffect(MobEffects.healthBoost, 2400, 2));
+				par3EntityLivingBase.addPotionEffect(new PotionEffect(MobEffects.STRENGTH, 2400, 2));
+				par3EntityLivingBase.addPotionEffect(new PotionEffect(MobEffects.SPEED, 2400, 2));
+				par3EntityLivingBase.addPotionEffect(new PotionEffect(MobEffects.RESISTANCE, 1200));
+				par3EntityLivingBase.addPotionEffect(new PotionEffect(MobEffects.FIRE_RESISTANCE, 600));
+				par3EntityLivingBase.addPotionEffect(new PotionEffect(MobEffects.SATURATION, 300));
+				par3EntityLivingBase.addPotionEffect(new PotionEffect(MobEffects.HEALTH_BOOST, 2400, 2));
 				par3EntityLivingBase.heal(20.0F);
 				break;
 			}

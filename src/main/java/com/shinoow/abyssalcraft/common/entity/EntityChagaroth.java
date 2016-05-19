@@ -157,23 +157,17 @@ public class EntityChagaroth extends EntityMob implements IDreadEntity {
 			bossInfo.setColor(Color.RED);
 	}
 
-	/**
-	 * Makes this boss Entity visible to the given player. Has no effect if this Entity is not a boss.
-	 */
 	@Override
-	public void setBossVisibleTo(EntityPlayerMP player)
+	public void addTrackingPlayer(EntityPlayerMP player)
 	{
-		super.setBossVisibleTo(player);
+		super.addTrackingPlayer(player);
 		bossInfo.addPlayer(player);
 	}
 
-	/**
-	 * Makes this boss Entity non-visible to the given player. Has no effect if this Entity is not a boss.
-	 */
 	@Override
-	public void setBossNonVisibleTo(EntityPlayerMP player)
+	public void removeTrackingPlayer(EntityPlayerMP player)
 	{
-		super.setBossNonVisibleTo(player);
+		super.removeTrackingPlayer(player);
 		bossInfo.removePlayer(player);
 	}
 

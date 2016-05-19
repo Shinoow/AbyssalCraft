@@ -98,7 +98,7 @@ public class EntitySacthoth extends EntityMob implements IAntiEntity, ICoraliumE
 	protected void entityInit()
 	{
 		super.entityInit();
-		dataWatcher.register(CLIMBING, new Byte((byte)0));
+		dataManager.register(CLIMBING, new Byte((byte)0));
 	}
 
 	@Override
@@ -155,23 +155,17 @@ public class EntitySacthoth extends EntityMob implements IAntiEntity, ICoraliumE
 			bossInfo.setColor(Color.RED);
 	}
 
-	/**
-	 * Makes this boss Entity visible to the given player. Has no effect if this Entity is not a boss.
-	 */
 	@Override
-	public void setBossVisibleTo(EntityPlayerMP player)
+	public void addTrackingPlayer(EntityPlayerMP player)
 	{
-		super.setBossVisibleTo(player);
+		super.addTrackingPlayer(player);
 		bossInfo.addPlayer(player);
 	}
 
-	/**
-	 * Makes this boss Entity non-visible to the given player. Has no effect if this Entity is not a boss.
-	 */
 	@Override
-	public void setBossNonVisibleTo(EntityPlayerMP player)
+	public void removeTrackingPlayer(EntityPlayerMP player)
 	{
-		super.setBossNonVisibleTo(player);
+		super.removeTrackingPlayer(player);
 		bossInfo.removePlayer(player);
 	}
 
@@ -191,7 +185,7 @@ public class EntitySacthoth extends EntityMob implements IAntiEntity, ICoraliumE
 
 		if (super.attackEntityAsMob(par1Entity))
 			if (par1Entity instanceof EntityLivingBase)
-				((EntityLivingBase)par1Entity).addPotionEffect(new PotionEffect(MobEffects.confusion, 60));
+				((EntityLivingBase)par1Entity).addPotionEffect(new PotionEffect(MobEffects.NAUSEA, 60));
 		return super.attackEntityAsMob(par1Entity);
 	}
 
@@ -207,13 +201,13 @@ public class EntitySacthoth extends EntityMob implements IAntiEntity, ICoraliumE
 	@Override
 	protected SoundEvent getAmbientSound()
 	{
-		return SoundEvents.entity_blaze_ambient;
+		return SoundEvents.ENTITY_BLAZE_AMBIENT;
 	}
 
 	@Override
 	protected SoundEvent getHurtSound()
 	{
-		return SoundEvents.entity_blaze_hurt;
+		return SoundEvents.ENTITY_BLAZE_HURT;
 	}
 
 	@Override
@@ -246,7 +240,7 @@ public class EntitySacthoth extends EntityMob implements IAntiEntity, ICoraliumE
 	 */
 	public boolean isBesideClimbableBlock()
 	{
-		return (dataWatcher.get(CLIMBING) & 1) != 0;
+		return (dataManager.get(CLIMBING) & 1) != 0;
 	}
 
 	/**
@@ -255,14 +249,14 @@ public class EntitySacthoth extends EntityMob implements IAntiEntity, ICoraliumE
 	 */
 	public void setBesideClimbableBlock(boolean par1)
 	{
-		byte b0 = dataWatcher.get(CLIMBING);
+		byte b0 = dataManager.get(CLIMBING);
 
 		if (par1)
 			b0 = (byte)(b0 | 1);
 		else
 			b0 &= -2;
 
-		dataWatcher.set(CLIMBING, Byte.valueOf(b0));
+		dataManager.set(CLIMBING, Byte.valueOf(b0));
 	}
 
 	@Override
@@ -334,7 +328,7 @@ public class EntitySacthoth extends EntityMob implements IAntiEntity, ICoraliumE
 			{
 				setPosition(posX, posY, posZ);
 
-				if (worldObj.getCubes(this, getEntityBoundingBox()).isEmpty() && !worldObj.isAnyLiquid(getEntityBoundingBox()))
+				if (worldObj.getCollisionBoxes(this, getEntityBoundingBox()).isEmpty() && !worldObj.containsAnyLiquid(getEntityBoundingBox()))
 					flag = true;
 			}
 		}
@@ -361,8 +355,8 @@ public class EntitySacthoth extends EntityMob implements IAntiEntity, ICoraliumE
 					worldObj.spawnParticle(EnumParticleTypes.SMOKE_LARGE, d7, d8, d9, f, f1, f2);
 			}
 
-			worldObj.playSound(d3, d4, d5, SoundEvents.entity_endermen_teleport, getSoundCategory(), 1.0F, 1.0F, false);
-			playSound(SoundEvents.entity_endermen_teleport, 1.0F, 1.0F);
+			worldObj.playSound(d3, d4, d5, SoundEvents.ENTITY_ENDERMEN_TELEPORT, getSoundCategory(), 1.0F, 1.0F, false);
+			playSound(SoundEvents.ENTITY_ENDERMEN_TELEPORT, 1.0F, 1.0F);
 			return true;
 		}
 	}
@@ -460,7 +454,7 @@ public class EntitySacthoth extends EntityMob implements IAntiEntity, ICoraliumE
 			for (int k2 = 0; k2 < list.size(); k2++) {
 				Entity entity = (Entity)list.get(k2);
 				if (entity instanceof EntityPlayer && !entity.isDead && deathTicks == 0 && !((EntityPlayer)entity).capabilities.isCreativeMode)
-					((EntityPlayer)entity).addPotionEffect(new PotionEffect(MobEffects.blindness, 40));
+					((EntityPlayer)entity).addPotionEffect(new PotionEffect(MobEffects.BLINDNESS, 40));
 			}
 		EntityPlayer player = worldObj.getClosestPlayerToEntity(this, 160D);
 		if(player != null && player.getDistanceToEntity(this) >= 50D && !player.capabilities.isCreativeMode){

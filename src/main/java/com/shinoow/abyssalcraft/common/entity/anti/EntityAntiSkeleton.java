@@ -85,31 +85,31 @@ public class EntityAntiSkeleton extends EntityMob implements IRangedAttackMob, I
 	protected void entityInit()
 	{
 		super.entityInit();
-		dataWatcher.register(field_184728_b, Boolean.valueOf(false));
+		dataManager.register(field_184728_b, Boolean.valueOf(false));
 	}
 
 	@Override
 	protected SoundEvent getAmbientSound()
 	{
-		return SoundEvents.entity_skeleton_ambient;
+		return SoundEvents.ENTITY_SKELETON_AMBIENT;
 	}
 
 	@Override
 	protected SoundEvent getHurtSound()
 	{
-		return SoundEvents.entity_skeleton_hurt;
+		return SoundEvents.ENTITY_SKELETON_HURT;
 	}
 
 	@Override
 	protected SoundEvent getDeathSound()
 	{
-		return SoundEvents.entity_skeleton_death;
+		return SoundEvents.ENTITY_SKELETON_DEATH;
 	}
 
 	@Override
 	protected void playStepSound(BlockPos pos, Block blockIn)
 	{
-		playSound(SoundEvents.entity_skeleton_step, 0.15F, 1.0F);
+		playSound(SoundEvents.ENTITY_SKELETON_STEP, 0.15F, 1.0F);
 	}
 
 	@Override
@@ -133,7 +133,7 @@ public class EntityAntiSkeleton extends EntityMob implements IRangedAttackMob, I
 	@Override
 	protected Item getDropItem()
 	{
-		return Items.arrow;
+		return Items.ARROW;
 	}
 
 	@Override
@@ -145,7 +145,7 @@ public class EntityAntiSkeleton extends EntityMob implements IRangedAttackMob, I
 		j = rand.nextInt(3 + par2);
 
 		for (k = 0; k < j; ++k)
-			dropItem(Items.arrow, 1);
+			dropItem(Items.ARROW, 1);
 
 		j = rand.nextInt(3 + par2);
 
@@ -168,7 +168,7 @@ public class EntityAntiSkeleton extends EntityMob implements IRangedAttackMob, I
 	protected void setEquipmentBasedOnDifficulty(DifficultyInstance difficulty)
 	{
 		super.setEquipmentBasedOnDifficulty(difficulty);
-		setItemStackToSlot(EntityEquipmentSlot.MAINHAND, new ItemStack(Items.bow));
+		setItemStackToSlot(EntityEquipmentSlot.MAINHAND, new ItemStack(Items.BOW));
 	}
 
 	@Override
@@ -196,8 +196,8 @@ public class EntityAntiSkeleton extends EntityMob implements IRangedAttackMob, I
 		double d2 = par1EntityLivingBase.posZ - posZ;
 		double d3 = MathHelper.sqrt_double(d0 * d0 + d2 * d2);
 		entityarrow.setThrowableHeading(d0, d1 + d3 * 0.20000000298023224D, d2, 1.6F, 14 - worldObj.getDifficulty().getDifficultyId() * 4);
-		int i = EnchantmentHelper.getMaxEnchantmentLevel(Enchantments.power, this);
-		int j = EnchantmentHelper.getMaxEnchantmentLevel(Enchantments.punch, this);
+		int i = EnchantmentHelper.getMaxEnchantmentLevel(Enchantments.POWER, this);
+		int j = EnchantmentHelper.getMaxEnchantmentLevel(Enchantments.PUNCH, this);
 		entityarrow.setDamage(par2 * 2.0F + rand.nextGaussian() * 0.25D + worldObj.getDifficulty().getDifficultyId() * 0.11F);
 
 		if (i > 0)
@@ -206,10 +206,10 @@ public class EntityAntiSkeleton extends EntityMob implements IRangedAttackMob, I
 		if (j > 0)
 			entityarrow.setKnockbackStrength(j);
 
-		if (EnchantmentHelper.getMaxEnchantmentLevel(Enchantments.flame, this) > 0)
+		if (EnchantmentHelper.getMaxEnchantmentLevel(Enchantments.FLAME, this) > 0)
 			entityarrow.setFire(100);
 
-		playSound(SoundEvents.entity_skeleton_shoot, 1.0F, 1.0F / (getRNG().nextFloat() * 0.4F + 0.8F));
+		playSound(SoundEvents.ENTITY_SKELETON_SHOOT, 1.0F, 1.0F / (getRNG().nextFloat() * 0.4F + 0.8F));
 		worldObj.spawnEntityInWorld(entityarrow);
 	}
 
@@ -222,11 +222,11 @@ public class EntityAntiSkeleton extends EntityMob implements IRangedAttackMob, I
 	@SideOnly(Side.CLIENT)
 	public boolean func_184725_db()
 	{
-		return dataWatcher.get(field_184728_b).booleanValue();
+		return dataManager.get(field_184728_b).booleanValue();
 	}
 
 	public void func_184724_a(boolean p_184724_1_)
 	{
-		dataWatcher.set(field_184728_b, Boolean.valueOf(p_184724_1_));
+		dataManager.set(field_184728_b, Boolean.valueOf(p_184724_1_));
 	}
 }

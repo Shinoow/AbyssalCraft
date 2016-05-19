@@ -34,8 +34,8 @@ import net.minecraft.stats.AchievementList;
 import net.minecraft.util.*;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.DimensionType;
-import net.minecraft.world.biome.BiomeGenBase;
-import net.minecraft.world.biome.BiomeGenBase.BiomeProperties;
+import net.minecraft.world.biome.Biome;
+import net.minecraft.world.biome.Biome.BiomeProperties;
 import net.minecraft.world.gen.structure.MapGenStructureIO;
 import net.minecraftforge.common.*;
 import net.minecraftforge.common.BiomeDictionary.Type;
@@ -90,7 +90,7 @@ import com.shinoow.abyssalcraft.common.world.WorldProviderDreadlands;
 import com.shinoow.abyssalcraft.common.world.WorldProviderOmothol;
 import com.shinoow.abyssalcraft.common.world.biome.*;
 
-@Mod(modid = AbyssalCraft.modid, name = AbyssalCraft.name, version = AbyssalCraft.version,dependencies = "required-after:Forge@[forgeversion,);after:JEI@[3.3.3,)", useMetadata = false, guiFactory = "com.shinoow.abyssalcraft.client.config.ACGuiFactory", acceptedMinecraftVersions = "[1.9]", updateJSON = "https://raw.githubusercontent.com/Shinoow/AbyssalCraft/master/version.json")
+@Mod(modid = AbyssalCraft.modid, name = AbyssalCraft.name, version = AbyssalCraft.version,dependencies = "required-after:Forge@[forgeversion,);after:JEI@[3.4.0,)", useMetadata = false, guiFactory = "com.shinoow.abyssalcraft.client.config.ACGuiFactory", acceptedMinecraftVersions = "[1.9.4]", updateJSON = "https://raw.githubusercontent.com/Shinoow/AbyssalCraft/master/version.json")
 public class AbyssalCraft {
 
 	public static final String version = "1.9.1.6";
@@ -129,11 +129,6 @@ public class AbyssalCraft {
 	public static Block Darkbrickslab2, Darkcobbleslab2, abyslab2, Darkstoneslab2, DLTslab2,
 	Altar, dreadbrickslab2, abydreadbrickslab2, cstonebrickslab2, ethaxiumslab2, house,
 	darkethaxiumslab2;
-
-	@Deprecated
-	public static BiomeGenBase Darklands, DarklandsForest, DarklandsPlains, DarklandsHills,
-	DarklandsMountains, corswamp, Wastelands, Dreadlands, AbyDreadlands, ForestDreadlands,
-	MountainDreadlands, omothol, darkRealm;
 
 	//"secret" dev stuff
 	public static Item devsword;
@@ -274,27 +269,27 @@ public class AbyssalCraft {
 
 		//Blocks
 		ACBlocks.darkstone = new BlockDarkstone().setCreativeTab(tabBlock).setHardness(1.65F).setResistance(12.0F).setUnlocalizedName("darkstone");
-		ACBlocks.darkstone_brick = new BlockACBasic(Material.rock, 1.65F, 12.0F, SoundType.STONE).setUnlocalizedName("darkstone_brick");
-		ACBlocks.darkstone_cobblestone = new BlockACBasic(Material.rock, 2.2F, 12.0F, SoundType.STONE).setUnlocalizedName("darkstone_cobble");
-		ACBlocks.glowing_darkstone_bricks = new BlockACBasic(Material.rock, "pickaxe", 3, 55F, 3000F, SoundType.STONE).setLightLevel(1.0F).setUnlocalizedName("dsglow");
-		ACBlocks.darkstone_brick_slab = new BlockACSingleSlab(Material.rock, SoundType.STONE).setHardness(1.65F).setResistance(12.0F).setUnlocalizedName("darkbrickslab1");
-		Darkbrickslab2 = new BlockACDoubleSlab(ACBlocks.darkstone_brick_slab, Material.rock).setHardness(1.65F).setResistance(12.0F).setUnlocalizedName("darkbrickslab2");
-		ACBlocks.darkstone_cobblestone_slab = new BlockACSingleSlab(Material.rock, SoundType.STONE).setHardness(1.65F) .setResistance(12.0F).setUnlocalizedName("darkcobbleslab1");
-		Darkcobbleslab2 = new BlockACDoubleSlab(ACBlocks.darkstone_cobblestone_slab, Material.rock).setHardness(1.65F) .setResistance(12.0F).setUnlocalizedName("darkcobbleslab2");
+		ACBlocks.darkstone_brick = new BlockACBasic(Material.ROCK, 1.65F, 12.0F, SoundType.STONE).setUnlocalizedName("darkstone_brick");
+		ACBlocks.darkstone_cobblestone = new BlockACBasic(Material.ROCK, 2.2F, 12.0F, SoundType.STONE).setUnlocalizedName("darkstone_cobble");
+		ACBlocks.glowing_darkstone_bricks = new BlockACBasic(Material.ROCK, "pickaxe", 3, 55F, 3000F, SoundType.STONE).setLightLevel(1.0F).setUnlocalizedName("dsglow");
+		ACBlocks.darkstone_brick_slab = new BlockACSingleSlab(Material.ROCK, SoundType.STONE).setHardness(1.65F).setResistance(12.0F).setUnlocalizedName("darkbrickslab1");
+		Darkbrickslab2 = new BlockACDoubleSlab(ACBlocks.darkstone_brick_slab, Material.ROCK).setHardness(1.65F).setResistance(12.0F).setUnlocalizedName("darkbrickslab2");
+		ACBlocks.darkstone_cobblestone_slab = new BlockACSingleSlab(Material.ROCK, SoundType.STONE).setHardness(1.65F) .setResistance(12.0F).setUnlocalizedName("darkcobbleslab1");
+		Darkcobbleslab2 = new BlockACDoubleSlab(ACBlocks.darkstone_cobblestone_slab, Material.ROCK).setHardness(1.65F) .setResistance(12.0F).setUnlocalizedName("darkcobbleslab2");
 		ACBlocks.darklands_grass = new BlockDarklandsgrass().setCreativeTab(tabBlock).setHardness(0.4F).setUnlocalizedName("darkgrass");
 		ACBlocks.darkstone_brick_stairs = new BlockACStairs(ACBlocks.darkstone_brick).setHardness(1.65F).setResistance(12.0F).setUnlocalizedName("dbstairs");
 		ACBlocks.darkstone_cobblestone_stairs = new BlockACStairs(ACBlocks.darkstone_cobblestone).setHardness(1.65F).setResistance(12.0F).setUnlocalizedName("dcstairs");
 		ACBlocks.darklands_oak_leaves = new BlockDLTLeaves().setHardness(0.2F).setResistance(1.0F).setUnlocalizedName("dltleaves");
 		ACBlocks.darklands_oak_wood = new BlockDLTLog().setHardness(2.0F).setResistance(1.0F).setUnlocalizedName("dltlog");
 		ACBlocks.darklands_oak_sapling = new BlockDLTSapling().setHardness(0.0F).setResistance(0.0F).setUnlocalizedName("dltsapling");
-		ACBlocks.abyssal_stone = new BlockACBasic(Material.rock, "pickaxe", 2, 1.8F, 12.0F, SoundType.STONE).setUnlocalizedName("abystone");
-		ACBlocks.abyssal_stone_brick = new BlockACBasic(Material.rock, "pickaxe", 2, 1.8F, 12.0F, SoundType.STONE).setUnlocalizedName("abybrick");
-		ACBlocks.abyssal_stone_brick_slab = new BlockACSingleSlab(Material.rock, "pickaxe", 2, SoundType.STONE).setCreativeTab(tabBlock).setHardness(1.8F).setResistance(12.0F).setUnlocalizedName("abyslab1");
-		abyslab2 = new BlockACDoubleSlab(ACBlocks.abyssal_stone_brick_slab, Material.rock, "pickaxe", 2).setHardness(1.8F).setResistance(12.0F).setUnlocalizedName("abyslab2");
+		ACBlocks.abyssal_stone = new BlockACBasic(Material.ROCK, "pickaxe", 2, 1.8F, 12.0F, SoundType.STONE).setUnlocalizedName("abystone");
+		ACBlocks.abyssal_stone_brick = new BlockACBasic(Material.ROCK, "pickaxe", 2, 1.8F, 12.0F, SoundType.STONE).setUnlocalizedName("abybrick");
+		ACBlocks.abyssal_stone_brick_slab = new BlockACSingleSlab(Material.ROCK, "pickaxe", 2, SoundType.STONE).setCreativeTab(tabBlock).setHardness(1.8F).setResistance(12.0F).setUnlocalizedName("abyslab1");
+		abyslab2 = new BlockACDoubleSlab(ACBlocks.abyssal_stone_brick_slab, Material.ROCK, "pickaxe", 2).setHardness(1.8F).setResistance(12.0F).setUnlocalizedName("abyslab2");
 		ACBlocks.abyssal_stone_brick_stairs = new BlockACStairs(ACBlocks.abyssal_stone_brick, "pickaxe", 2).setHardness(1.65F).setResistance(12.0F).setUnlocalizedName("abystairs");
 		ACBlocks.coralium_ore = new BlockACOre(2, 3.0F, 6.0F).setUnlocalizedName("coraliumore");
 		ACBlocks.abyssalnite_ore = new BlockACOre(2, 3.0F, 6.0F).setUnlocalizedName("abyore");
-		ACBlocks.abyssal_stone_brick_fence = new BlockACFence(Material.rock, "pickaxe", 2, SoundType.STONE).setHardness(1.8F).setResistance(12.0F).setUnlocalizedName("abyfence");
+		ACBlocks.abyssal_stone_brick_fence = new BlockACFence(Material.ROCK, "pickaxe", 2, SoundType.STONE).setHardness(1.8F).setResistance(12.0F).setUnlocalizedName("abyfence");
 		ACBlocks.darkstone_cobblestone_wall = new BlockDarkstonecobblewall(ACBlocks.darkstone_cobblestone).setHardness(1.65F).setResistance(12.0F).setUnlocalizedName("dscwall");
 		ACBlocks.wooden_crate = new BlockCrate().setHardness(3.0F).setResistance(6.0F).setUnlocalizedName("crate");
 		ACBlocks.oblivion_deathbomb = new BlockODB().setHardness(3.0F).setResistance(0F).setUnlocalizedName("odb");
@@ -302,60 +297,60 @@ public class AbyssalCraft {
 		ACBlocks.coralium_infused_stone = new BlockACOre(3, 3.0F, 6.0F).setUnlocalizedName("coraliumstone");
 		ACBlocks.odb_core = new BlockODBcore().setHardness(3.0F).setResistance(0F).setUnlocalizedName("odbcore");
 		ACBlocks.abyssal_gateway = new BlockAbyssPortal().setUnlocalizedName("abyportal");
-		ACBlocks.darkstone_slab = new BlockACSingleSlab(Material.rock, SoundType.STONE).setCreativeTab(tabBlock).setHardness(1.65F).setResistance(12.0F).setUnlocalizedName("darkstoneslab1");
-		Darkstoneslab2 = new BlockACDoubleSlab(ACBlocks.darkstone_slab, Material.rock).setHardness(1.65F).setResistance(12.0F).setUnlocalizedName("darkstoneslab2");
+		ACBlocks.darkstone_slab = new BlockACSingleSlab(Material.ROCK, SoundType.STONE).setCreativeTab(tabBlock).setHardness(1.65F).setResistance(12.0F).setUnlocalizedName("darkstoneslab1");
+		Darkstoneslab2 = new BlockACDoubleSlab(ACBlocks.darkstone_slab, Material.ROCK).setHardness(1.65F).setResistance(12.0F).setUnlocalizedName("darkstoneslab2");
 		ACBlocks.coralium_fire = new BlockCoraliumfire().setLightLevel(1.0F).setUnlocalizedName("coraliumfire");
 		ACBlocks.darkstone_button = new BlockACButton(true, "DS").setHardness(0.6F).setResistance(12.0F).setUnlocalizedName("dsbutton");
-		ACBlocks.darkstone_pressure_plate = new BlockACPressureplate("DS", Material.rock, BlockACPressureplate.Sensitivity.MOBS, SoundType.STONE).setHardness(0.6F).setResistance(12.0F).setUnlocalizedName("dspplate");
-		ACBlocks.darklands_oak_planks = new BlockACBasic(Material.wood, 2.0F, 5.0F, SoundType.WOOD).setUnlocalizedName("dltplank");
+		ACBlocks.darkstone_pressure_plate = new BlockACPressureplate("DS", Material.ROCK, BlockACPressureplate.Sensitivity.MOBS, SoundType.STONE).setHardness(0.6F).setResistance(12.0F).setUnlocalizedName("dspplate");
+		ACBlocks.darklands_oak_planks = new BlockACBasic(Material.WOOD, 2.0F, 5.0F, SoundType.WOOD).setUnlocalizedName("dltplank");
 		ACBlocks.darklands_oak_button = new BlockACButton(true, "DLTplank").setHardness(0.5F).setUnlocalizedName("dltbutton");
-		ACBlocks.darklands_oak_pressure_plate = new BlockACPressureplate("DLTplank", Material.wood, BlockACPressureplate.Sensitivity.EVERYTHING, SoundType.WOOD).setHardness(0.5F).setUnlocalizedName("dltpplate");
+		ACBlocks.darklands_oak_pressure_plate = new BlockACPressureplate("DLTplank", Material.WOOD, BlockACPressureplate.Sensitivity.EVERYTHING, SoundType.WOOD).setHardness(0.5F).setUnlocalizedName("dltpplate");
 		ACBlocks.darklands_oak_stairs = new BlockACStairs(ACBlocks.darklands_oak_planks).setHardness(2.0F).setResistance(5.0F).setUnlocalizedName("dltstairs");
-		ACBlocks.darklands_oak_slab = new BlockACSingleSlab(Material.wood, SoundType.WOOD).setHardness(2.0F).setResistance(5.0F).setUnlocalizedName("dltslab1");
-		DLTslab2 = new BlockACDoubleSlab(ACBlocks.darklands_oak_slab, Material.wood).setHardness(2.0F).setResistance(5.0F).setUnlocalizedName("dltslab2");
+		ACBlocks.darklands_oak_slab = new BlockACSingleSlab(Material.WOOD, SoundType.WOOD).setHardness(2.0F).setResistance(5.0F).setUnlocalizedName("dltslab1");
+		DLTslab2 = new BlockACDoubleSlab(ACBlocks.darklands_oak_slab, Material.WOOD).setHardness(2.0F).setResistance(5.0F).setUnlocalizedName("dltslab2");
 		ACBlocks.block_of_coralium = new IngotBlock(5).setUnlocalizedName("corblock");
 		ACBlocks.dreadlands_infused_powerstone = new BlockPSDL().setHardness(50.0F).setResistance(3000F).setCreativeTab(tabDecoration).setUnlocalizedName("psdl");
 		ACBlocks.abyssal_coralium_ore = new BlockACOre(3, 3.0F, 6.0F).setUnlocalizedName("abycorore");
 		Altar = new BlockAltar().setHardness(4.0F).setResistance(300.0F).setUnlocalizedName("altar");
 		ACBlocks.abyssal_stone_button = new BlockACButton(false, "pickaxe", 2, "AS").setHardness(0.8F).setResistance(12.0F).setUnlocalizedName("abybutton");
-		ACBlocks.abyssal_stone_pressure_plate = new BlockACPressureplate("AS", Material.rock, BlockACPressureplate.Sensitivity.MOBS, "pickaxe", 2, SoundType.STONE).setHardness(0.8F).setResistance(12.0F).setUnlocalizedName("abypplate");
-		ACBlocks.darkstone_brick_fence = new BlockACFence(Material.rock, SoundType.STONE).setHardness(1.65F).setResistance(12.0F).setUnlocalizedName("dsbfence");
-		ACBlocks.darklands_oak_fence = new BlockACFence(Material.wood, SoundType.WOOD).setHardness(2.0F).setResistance(5.0F).setUnlocalizedName("dltfence");
+		ACBlocks.abyssal_stone_pressure_plate = new BlockACPressureplate("AS", Material.ROCK, BlockACPressureplate.Sensitivity.MOBS, "pickaxe", 2, SoundType.STONE).setHardness(0.8F).setResistance(12.0F).setUnlocalizedName("abypplate");
+		ACBlocks.darkstone_brick_fence = new BlockACFence(Material.ROCK, SoundType.STONE).setHardness(1.65F).setResistance(12.0F).setUnlocalizedName("dsbfence");
+		ACBlocks.darklands_oak_fence = new BlockACFence(Material.WOOD, SoundType.WOOD).setHardness(2.0F).setResistance(5.0F).setUnlocalizedName("dltfence");
 		ACBlocks.dreaded_abyssalnite_ore = new BlockACOre(4, 2.5F, 20.0F).setUnlocalizedName("dreadore");
 		ACBlocks.dreadlands_abyssalnite_ore = new BlockACOre(4, 2.5F, 20.0F).setUnlocalizedName("abydreadore");
-		ACBlocks.dreadstone_brick = new BlockACBasic(Material.rock, "pickaxe", 4, 2.5F, 20.0F, SoundType.STONE).setUnlocalizedName("dreadbrick");
-		ACBlocks.abyssalnite_stone_brick = new BlockACBasic(Material.rock, "pickaxe", 4, 2.5F, 20.0F, SoundType.STONE).setUnlocalizedName("abydreadbrick");
+		ACBlocks.dreadstone_brick = new BlockACBasic(Material.ROCK, "pickaxe", 4, 2.5F, 20.0F, SoundType.STONE).setUnlocalizedName("dreadbrick");
+		ACBlocks.abyssalnite_stone_brick = new BlockACBasic(Material.ROCK, "pickaxe", 4, 2.5F, 20.0F, SoundType.STONE).setUnlocalizedName("abydreadbrick");
 		ACBlocks.dreadlands_log = new BlockDreadLog().setHardness(2.0F).setResistance(12.0F).setUnlocalizedName("dreadlog");
 		ACBlocks.dreadlands_leaves = new BlockDreadLeaves().setHardness(0.2F).setResistance(1.0F).setUnlocalizedName("dreadleaves");
 		ACBlocks.dreadlands_sapling = new BlockDreadSapling().setHardness(0.0F).setResistance(0.0F).setUnlocalizedName("dreadsapling");
-		ACBlocks.dreadlands_planks = new BlockACBasic(Material.wood, 2.0F, 5.0F, SoundType.WOOD).setUnlocalizedName("dreadplanks");
+		ACBlocks.dreadlands_planks = new BlockACBasic(Material.WOOD, 2.0F, 5.0F, SoundType.WOOD).setUnlocalizedName("dreadplanks");
 		ACBlocks.dreaded_gateway = new BlockDreadlandsPortal().setUnlocalizedName("dreadportal");
 		ACBlocks.dreaded_fire = new BlockDreadFire().setLightLevel(1.0F).setUnlocalizedName("dreadfire");
 		ACBlocks.depths_ghoul_head = new BlockDGhead().setHardness(1.0F).setResistance(6.0F).setCreativeTab(tabDecoration).setUnlocalizedName("dghead");
 		ACBlocks.liquid_coralium = new BlockCLiquid().setResistance(500.0F).setLightLevel(1.0F).setUnlocalizedName("cwater");
-		ACBlocks.dreadstone = new BlockACBasic(Material.rock, "pickaxe", 4, 2.5F, 20.0F, SoundType.STONE).setUnlocalizedName("dreadstone");
-		ACBlocks.abyssalnite_stone = new BlockACBasic(Material.rock, "pickaxe", 4, 2.5F, 20.0F, SoundType.STONE).setUnlocalizedName("abydreadstone");
+		ACBlocks.dreadstone = new BlockACBasic(Material.ROCK, "pickaxe", 4, 2.5F, 20.0F, SoundType.STONE).setUnlocalizedName("dreadstone");
+		ACBlocks.abyssalnite_stone = new BlockACBasic(Material.ROCK, "pickaxe", 4, 2.5F, 20.0F, SoundType.STONE).setUnlocalizedName("abydreadstone");
 		ACBlocks.dreadlands_grass = new BlockDreadGrass().setHardness(0.4F).setUnlocalizedName("dreadgrass");
 		ACBlocks.pete_head = new BlockPhead().setHardness(1.0F).setResistance(6.0F).setCreativeTab(tabDecoration).setUnlocalizedName("phead");
 		ACBlocks.mr_wilson_head = new BlockWhead().setHardness(1.0F).setResistance(6.0F).setCreativeTab(tabDecoration).setUnlocalizedName("whead");
 		ACBlocks.dr_orange_head = new BlockOhead().setHardness(1.0F).setResistance(6.0F).setCreativeTab(tabDecoration).setUnlocalizedName("ohead");
 		ACBlocks.dreadstone_brick_stairs = new BlockACStairs(ACBlocks.dreadstone_brick, "pickaxe", 4).setHardness(2.5F).setResistance(20.0F).setUnlocalizedName("dreadbrickstairs");
-		ACBlocks.dreadstone_brick_fence = new BlockACFence(Material.rock, "pickaxe", 4, SoundType.STONE).setHardness(2.5F).setResistance(20.0F).setUnlocalizedName("dreadbrickfence");
-		ACBlocks.dreadstone_brick_slab = new BlockACSingleSlab(Material.rock, "pickaxe", 4, SoundType.STONE).setHardness(2.5F).setResistance(20.0F).setUnlocalizedName("dreadbrickslab1");
-		dreadbrickslab2 = new BlockACDoubleSlab(ACBlocks.dreadstone_brick_slab, Material.rock, "pickaxe", 4).setHardness(2.5F).setResistance(20.0F).setUnlocalizedName("dreadbrickslab2");
+		ACBlocks.dreadstone_brick_fence = new BlockACFence(Material.ROCK, "pickaxe", 4, SoundType.STONE).setHardness(2.5F).setResistance(20.0F).setUnlocalizedName("dreadbrickfence");
+		ACBlocks.dreadstone_brick_slab = new BlockACSingleSlab(Material.ROCK, "pickaxe", 4, SoundType.STONE).setHardness(2.5F).setResistance(20.0F).setUnlocalizedName("dreadbrickslab1");
+		dreadbrickslab2 = new BlockACDoubleSlab(ACBlocks.dreadstone_brick_slab, Material.ROCK, "pickaxe", 4).setHardness(2.5F).setResistance(20.0F).setUnlocalizedName("dreadbrickslab2");
 		ACBlocks.abyssalnite_stone_brick_stairs = new BlockACStairs(ACBlocks.abyssalnite_stone_brick, "pickaxe", 4).setHardness(2.5F).setResistance(20.0F).setUnlocalizedName("abydreadbrickstairs");
-		ACBlocks.abyssalnite_stone_brick_fence = new BlockACFence(Material.rock, "pickaxe", 4, SoundType.STONE).setHardness(2.5F).setResistance(20.0F).setUnlocalizedName("abydreadbrickfence");
-		ACBlocks.abyssalnite_stone_brick_slab = new BlockACSingleSlab(Material.rock, "pickaxe", 4, SoundType.STONE).setHardness(2.5F).setResistance(20.0F).setUnlocalizedName("abydreadbrickslab1");
-		abydreadbrickslab2 = new BlockACDoubleSlab(ACBlocks.abyssalnite_stone_brick_slab, Material.rock, "pickaxe", 4).setHardness(2.5F).setResistance(20.0F).setUnlocalizedName("abydreadbrickslab2");
+		ACBlocks.abyssalnite_stone_brick_fence = new BlockACFence(Material.ROCK, "pickaxe", 4, SoundType.STONE).setHardness(2.5F).setResistance(20.0F).setUnlocalizedName("abydreadbrickfence");
+		ACBlocks.abyssalnite_stone_brick_slab = new BlockACSingleSlab(Material.ROCK, "pickaxe", 4, SoundType.STONE).setHardness(2.5F).setResistance(20.0F).setUnlocalizedName("abydreadbrickslab1");
+		abydreadbrickslab2 = new BlockACDoubleSlab(ACBlocks.abyssalnite_stone_brick_slab, Material.ROCK, "pickaxe", 4).setHardness(2.5F).setResistance(20.0F).setUnlocalizedName("abydreadbrickslab2");
 		ACBlocks.liquid_antimatter = new BlockAntiliquid().setResistance(500.0F).setLightLevel(0.5F).setUnlocalizedName("antiwater");
 		ACBlocks.coralium_stone = new BlockCoraliumstone().setHardness(1.5F).setResistance(10.0F).setUnlocalizedName("cstone");
-		ACBlocks.coralium_stone_brick = new BlockACBasic(Material.rock, 1.5F, 10.0F, SoundType.STONE).setUnlocalizedName("cstonebrick");
-		ACBlocks.coralium_stone_brick_fence = new BlockACFence(Material.rock, SoundType.STONE).setHardness(1.5F).setResistance(10.0F).setUnlocalizedName("cstonebrickfence");
-		ACBlocks.coralium_stone_brick_slab = new BlockACSingleSlab(Material.rock, SoundType.STONE).setHardness(1.5F).setResistance(10.0F).setUnlocalizedName("cstonebrickslab1");
-		cstonebrickslab2 = new BlockACDoubleSlab(ACBlocks.coralium_stone_brick_slab, Material.rock).setHardness(1.5F).setResistance(10.0F).setUnlocalizedName("cstonebrickslab2");
+		ACBlocks.coralium_stone_brick = new BlockACBasic(Material.ROCK, 1.5F, 10.0F, SoundType.STONE).setUnlocalizedName("cstonebrick");
+		ACBlocks.coralium_stone_brick_fence = new BlockACFence(Material.ROCK, SoundType.STONE).setHardness(1.5F).setResistance(10.0F).setUnlocalizedName("cstonebrickfence");
+		ACBlocks.coralium_stone_brick_slab = new BlockACSingleSlab(Material.ROCK, SoundType.STONE).setHardness(1.5F).setResistance(10.0F).setUnlocalizedName("cstonebrickslab1");
+		cstonebrickslab2 = new BlockACDoubleSlab(ACBlocks.coralium_stone_brick_slab, Material.ROCK).setHardness(1.5F).setResistance(10.0F).setUnlocalizedName("cstonebrickslab2");
 		ACBlocks.coralium_stone_brick_stairs = new BlockACStairs(ACBlocks.coralium_stone_brick, "pickaxe", 0).setHardness(1.5F).setResistance(10.0F).setUnlocalizedName("cstonebrickstairs");
 		ACBlocks.coralium_stone_button = new BlockACButton(false, "cstone").setHardness(0.6F).setResistance(12.0F).setUnlocalizedName("cstonebutton");
-		ACBlocks.coralium_stone_pressure_plate = new BlockACPressureplate("cstone", Material.rock, BlockACPressureplate.Sensitivity.MOBS, SoundType.STONE).setHardness(0.6F).setResistance(12.0F).setUnlocalizedName("cstonepplate");
+		ACBlocks.coralium_stone_pressure_plate = new BlockACPressureplate("cstone", Material.ROCK, BlockACPressureplate.Sensitivity.MOBS, SoundType.STONE).setHardness(0.6F).setResistance(12.0F).setUnlocalizedName("cstonepplate");
 		ACBlocks.chagaroth_altar_top = new BlockDreadAltarTop().setHardness(30.0F).setResistance(300.0F).setCreativeTab(tabDecoration).setUnlocalizedName("dreadaltartop");
 		ACBlocks.chagaroth_altar_bottom = new BlockDreadAltarBottom().setHardness(30.0F).setResistance(300.0F).setCreativeTab(tabDecoration).setUnlocalizedName("dreadaltarbottom");
 		ACBlocks.crystallizer_idle = new BlockCrystallizer(false).setHardness(2.5F).setResistance(12.0F).setUnlocalizedName("crystallizer");
@@ -365,7 +360,7 @@ public class AbyssalCraft {
 		ACBlocks.transmutator_active = new BlockTransmutator(true).setHardness(2.5F).setResistance(12.0F).setLightLevel(0.875F).setUnlocalizedName("transmutator_on");
 		ACBlocks.dreadguard_spawner = new BlockDreadguardSpawner().setUnlocalizedName("dreadguardspawner");
 		ACBlocks.chagaroth_spawner = new BlockChagarothSpawner().setUnlocalizedName("chagarothspawner");
-		ACBlocks.dreadlands_wood_fence = new BlockACFence(Material.wood, SoundType.WOOD).setHardness(2.0F).setResistance(5.0F).setUnlocalizedName("drtfence");
+		ACBlocks.dreadlands_wood_fence = new BlockACFence(Material.WOOD, SoundType.WOOD).setHardness(2.0F).setResistance(5.0F).setUnlocalizedName("drtfence");
 		ACBlocks.nitre_ore = new BlockACOre(2, 3.0F, 6.0F).setUnlocalizedName("nitreore");
 		ACBlocks.abyssal_iron_ore = new BlockACOre(2, 3.0F, 6.0F).setUnlocalizedName("abyiroore");
 		ACBlocks.abyssal_gold_ore = new BlockACOre(2, 5.0F, 10.0F).setUnlocalizedName("abygolore");
@@ -376,14 +371,14 @@ public class AbyssalCraft {
 		ACBlocks.pearlescent_coralium_ore = new BlockACOre(5, 8.0F, 10.0F).setUnlocalizedName("abypcorore");
 		ACBlocks.liquified_coralium_ore = new BlockACOre(4, 10.0F, 12.0F).setUnlocalizedName("abylcorore");
 		ACBlocks.solid_lava = new BlockSolidLava("solidlava");
-		ACBlocks.ethaxium = new BlockACBasic(Material.rock, "pickaxe", 8, 100.0F, Float.MAX_VALUE, SoundType.STONE).setUnlocalizedName("ethaxium");
+		ACBlocks.ethaxium = new BlockACBasic(Material.ROCK, "pickaxe", 8, 100.0F, Float.MAX_VALUE, SoundType.STONE).setUnlocalizedName("ethaxium");
 		ACBlocks.ethaxium_brick = new BlockEthaxiumBrick().setUnlocalizedName("ethaxiumbrick");
 		ACBlocks.ethaxium_pillar = new BlockEthaxiumPillar().setUnlocalizedName("ethaxiumpillar");
 		ACBlocks.ethaxium_brick_stairs = new BlockACStairs(ACBlocks.ethaxium_brick, "pickaxe", 8).setHardness(100.0F).setResistance(Float.MAX_VALUE).setUnlocalizedName("ethaxiumbrickstairs");
-		ACBlocks.ethaxium_brick_slab = new BlockACSingleSlab(Material.rock, "pickaxe", 8, SoundType.STONE).setHardness(100.0F).setResistance(Float.MAX_VALUE).setUnlocalizedName("ethaxiumbrickslab1");
-		ethaxiumslab2 = new BlockACDoubleSlab(ACBlocks.ethaxium_brick_slab, Material.rock, "pickaxe", 8).setHardness(100.0F).setResistance(Float.MAX_VALUE).setUnlocalizedName("ethaxiumbrickslab2");
-		ACBlocks.ethaxium_brick_fence = new BlockACFence(Material.rock, "pickaxe", 8, SoundType.STONE).setHardness(100.0F).setResistance(Float.MAX_VALUE).setUnlocalizedName("ethaxiumfence");
-		ACBlocks.omothol_stone = new BlockACBasic(Material.rock, "pickaxe", 6, 10.0F, 12.0F, SoundType.STONE).setUnlocalizedName("omotholstone");
+		ACBlocks.ethaxium_brick_slab = new BlockACSingleSlab(Material.ROCK, "pickaxe", 8, SoundType.STONE).setHardness(100.0F).setResistance(Float.MAX_VALUE).setUnlocalizedName("ethaxiumbrickslab1");
+		ethaxiumslab2 = new BlockACDoubleSlab(ACBlocks.ethaxium_brick_slab, Material.ROCK, "pickaxe", 8).setHardness(100.0F).setResistance(Float.MAX_VALUE).setUnlocalizedName("ethaxiumbrickslab2");
+		ACBlocks.ethaxium_brick_fence = new BlockACFence(Material.ROCK, "pickaxe", 8, SoundType.STONE).setHardness(100.0F).setResistance(Float.MAX_VALUE).setUnlocalizedName("ethaxiumfence");
+		ACBlocks.omothol_stone = new BlockACBasic(Material.ROCK, "pickaxe", 6, 10.0F, 12.0F, SoundType.STONE).setUnlocalizedName("omotholstone");
 		ACBlocks.block_of_ethaxium = new IngotBlock(8).setResistance(Float.MAX_VALUE).setUnlocalizedName("ethaxiumblock");
 		ACBlocks.omothol_gateway = new BlockOmotholPortal().setUnlocalizedName("omotholportal");
 		ACBlocks.omothol_fire = new BlockOmotholFire().setLightLevel(1.0F).setUnlocalizedName("omotholfire");
@@ -393,9 +388,9 @@ public class AbyssalCraft {
 		ACBlocks.dark_ethaxium_brick = new BlockDarkEthaxiumBrick().setUnlocalizedName("darkethaxiumbrick");
 		ACBlocks.dark_ethaxium_pillar = new BlockDarkEthaxiumPillar().setUnlocalizedName("darkethaxiumpillar");
 		ACBlocks.dark_ethaxium_brick_stairs = new BlockACStairs(ACBlocks.dark_ethaxium_brick, "pickaxe", 8).setHardness(150.0F).setResistance(Float.MAX_VALUE).setUnlocalizedName("darkethaxiumbrickstairs");
-		ACBlocks.dark_ethaxium_brick_slab = new BlockACSingleSlab(Material.rock, "pickaxe", 8, SoundType.STONE).setHardness(150.0F).setResistance(Float.MAX_VALUE).setUnlocalizedName("darkethaxiumbrickslab1");
-		darkethaxiumslab2 = new BlockACDoubleSlab(ACBlocks.dark_ethaxium_brick_slab, Material.rock, "pickaxe", 8).setHardness(150.0F).setResistance(Float.MAX_VALUE).setUnlocalizedName("darkethaxiumbrickslab2");
-		ACBlocks.dark_ethaxium_brick_fence = new BlockACFence(Material.rock, "pickaxe", 8, SoundType.STONE).setHardness(150.0F).setResistance(Float.MAX_VALUE).setUnlocalizedName("darkethaxiumbrickfence");
+		ACBlocks.dark_ethaxium_brick_slab = new BlockACSingleSlab(Material.ROCK, "pickaxe", 8, SoundType.STONE).setHardness(150.0F).setResistance(Float.MAX_VALUE).setUnlocalizedName("darkethaxiumbrickslab1");
+		darkethaxiumslab2 = new BlockACDoubleSlab(ACBlocks.dark_ethaxium_brick_slab, Material.ROCK, "pickaxe", 8).setHardness(150.0F).setResistance(Float.MAX_VALUE).setUnlocalizedName("darkethaxiumbrickslab2");
+		ACBlocks.dark_ethaxium_brick_fence = new BlockACFence(Material.ROCK, "pickaxe", 8, SoundType.STONE).setHardness(150.0F).setResistance(Float.MAX_VALUE).setUnlocalizedName("darkethaxiumbrickfence");
 		ACBlocks.ritual_altar = new BlockRitualAltar().setUnlocalizedName("ritualaltar");
 		ACBlocks.ritual_pedestal = new BlockRitualPedestal().setUnlocalizedName("ritualpedestal");
 		ACBlocks.shoggoth_ooze = new BlockShoggothOoze().setUnlocalizedName("shoggothblock");
@@ -406,7 +401,7 @@ public class AbyssalCraft {
 		ACBlocks.nyarlathotep_statue = new BlockNyarlathotepStatue().setUnlocalizedName("nyarlathotepstatue");
 		ACBlocks.yog_sothoth_statue = new BlockYogsothothStatue().setUnlocalizedName("yogsothothstatue");
 		ACBlocks.shub_niggurath_statue = new BlockShubniggurathStatue().setUnlocalizedName("shubniggurathstatue");
-		ACBlocks.monolith_stone = new BlockACBasic(Material.rock, 6.0F, 24.0F, SoundType.STONE).setUnlocalizedName("monolithstone");
+		ACBlocks.monolith_stone = new BlockACBasic(Material.ROCK, 6.0F, 24.0F, SoundType.STONE).setUnlocalizedName("monolithstone");
 		ACBlocks.shoggoth_biomass = new BlockShoggothBiomass();
 		ACBlocks.energy_pedestal = new BlockEnergyPedestal();
 		ACBlocks.monolith_pillar = new BlockMonolithPillar();
@@ -433,21 +428,6 @@ public class AbyssalCraft {
 		ACBiomes.coralium_infested_swamp = new BiomeGenCorSwamp(new BiomeProperties("Coralium Infested Swamp").setWaterColor(0x24FF83).setBaseHeight(-0.2F).setHeightVariation(0.1F));
 		ACBiomes.omothol = new BiomeGenOmothol(new BiomeProperties("Omothol").setWaterColor(14745518).setRainDisabled());
 		ACBiomes.dark_realm = new BiomeGenDarkRealm(new BiomeProperties("Dark Realm").setWaterColor(14745518).setRainDisabled());
-
-		//TODO remove in AC 1.9.2
-		Darklands = ACBiomes.darklands;
-		DarklandsForest = ACBiomes.darklands_forest;
-		DarklandsPlains = ACBiomes.darklands_plains;
-		DarklandsHills = ACBiomes.darklands_hills;
-		DarklandsMountains = ACBiomes.darklands_mountains;
-		corswamp = ACBiomes.coralium_infested_swamp;
-		Wastelands = ACBiomes.abyssal_wastelands;
-		Dreadlands = ACBiomes.dreadlands;
-		AbyDreadlands = ACBiomes.purified_dreadlands;
-		ForestDreadlands = ACBiomes.dreadlands_forest;
-		MountainDreadlands = ACBiomes.dreadlands_mountains;
-		omothol = ACBiomes.omothol;
-		darkRealm = ACBiomes.dark_realm;
 
 		//"secret" dev stuff
 		devsword = new AbyssalCraftTool();
@@ -1083,9 +1063,9 @@ public class AbyssalCraft {
 			CFluid.setBlock(ACBlocks.liquid_coralium);
 		if(antifluid.getBlock() == null)
 			antifluid.setBlock(ACBlocks.liquid_antimatter);
-		FluidContainerRegistry.registerFluidContainer(FluidRegistry.getFluidStack(CFluid.getName(), FluidContainerRegistry.BUCKET_VOLUME), new ItemStack(ACItems.liquid_coralium_bucket), new ItemStack(Items.bucket));
+		FluidContainerRegistry.registerFluidContainer(FluidRegistry.getFluidStack(CFluid.getName(), FluidContainerRegistry.BUCKET_VOLUME), new ItemStack(ACItems.liquid_coralium_bucket), new ItemStack(Items.BUCKET));
 		BucketHandler.INSTANCE.buckets.put(ACBlocks.liquid_coralium.getDefaultState(), ACItems.liquid_coralium_bucket);
-		FluidContainerRegistry.registerFluidContainer(FluidRegistry.getFluidStack(antifluid.getName(), FluidContainerRegistry.BUCKET_VOLUME), new ItemStack(ACItems.liquid_antimatter_bucket), new ItemStack(Items.bucket));
+		FluidContainerRegistry.registerFluidContainer(FluidRegistry.getFluidStack(antifluid.getName(), FluidContainerRegistry.BUCKET_VOLUME), new ItemStack(ACItems.liquid_antimatter_bucket), new ItemStack(Items.BUCKET));
 		BucketHandler.INSTANCE.buckets.put(ACBlocks.liquid_antimatter.getDefaultState(), ACItems.liquid_antimatter_bucket);
 		MinecraftForge.EVENT_BUS.register(BucketHandler.INSTANCE);
 
@@ -1177,15 +1157,15 @@ public class AbyssalCraft {
 		EntityRegistry.addSpawn(EntityDepthsGhoul.class, 10, 1, 3, EnumCreatureType.MONSTER, BiomeDictionary.getBiomesForType(Type.WATER));
 		EntityRegistry.addSpawn(EntityDepthsGhoul.class, 10, 1, 3, EnumCreatureType.MONSTER, BiomeDictionary.getBiomesForType(Type.BEACH));
 		EntityRegistry.addSpawn(EntityDepthsGhoul.class, 10, 1, 3, EnumCreatureType.MONSTER, BiomeDictionary.getBiomesForType(Type.SWAMP));
-		EntityRegistry.removeSpawn(EntityDepthsGhoul.class, EnumCreatureType.MONSTER, new BiomeGenBase[]{ Biomes.mushroomIslandShore });
+		EntityRegistry.removeSpawn(EntityDepthsGhoul.class, EnumCreatureType.MONSTER, new Biome[]{ Biomes.MUSHROOM_ISLAND_SHORE });
 
 		registerEntityWithEgg(EntityEvilpig.class, "evilpig", 26, 80, 3, true, 15771042, 14377823);
 		if(evilAnimalSpawnRate > 0)
-			EntityRegistry.addSpawn(EntityEvilpig.class, evilAnimalSpawnRate, 1, 3, evilAnimalCreatureType ? EnumCreatureType.MONSTER : EnumCreatureType.CREATURE, new BiomeGenBase[] {
-				Biomes.taiga, Biomes.plains, Biomes.forest, Biomes.savanna,
-				Biomes.beach, Biomes.extremeHills, Biomes.jungle, Biomes.savannaPlateau,
-				Biomes.swampland, Biomes.icePlains, Biomes.birchForest,
-				Biomes.birchForestHills, Biomes.roofedForest});
+			EntityRegistry.addSpawn(EntityEvilpig.class, evilAnimalSpawnRate, 1, 3, evilAnimalCreatureType ? EnumCreatureType.MONSTER : EnumCreatureType.CREATURE, new Biome[] {
+				Biomes.TAIGA, Biomes.PLAINS, Biomes.FOREST, Biomes.SAVANNA,
+				Biomes.BEACH, Biomes.EXTREME_HILLS, Biomes.JUNGLE, Biomes.SAVANNA_PLATEAU,
+				Biomes.SWAMPLAND, Biomes.ICE_PLAINS, Biomes.BIRCH_FOREST,
+				Biomes.BIRCH_FOREST_HILLS, Biomes.ROOFED_FOREST});
 
 		registerEntityWithEgg(EntityAbyssalZombie.class , "abyssalzombie", 27, 80, 3, true, 0x36A880, 0x052824);
 		EntityRegistry.addSpawn(EntityAbyssalZombie.class, 10, 1, 3, EnumCreatureType.MONSTER, BiomeDictionary.getBiomesForType(Type.WATER));
@@ -1193,7 +1173,7 @@ public class AbyssalCraft {
 		EntityRegistry.addSpawn(EntityAbyssalZombie.class, 10, 1, 3, EnumCreatureType.MONSTER, BiomeDictionary.getBiomesForType(Type.SWAMP));
 		if(endAbyssalZombie)
 			EntityRegistry.addSpawn(EntityAbyssalZombie.class, 10, 1, 3, EnumCreatureType.MONSTER, BiomeDictionary.getBiomesForType(Type.END));
-		EntityRegistry.removeSpawn(EntityAbyssalZombie.class, EnumCreatureType.MONSTER, new BiomeGenBase[]{ Biomes.mushroomIslandShore });
+		EntityRegistry.removeSpawn(EntityAbyssalZombie.class, EnumCreatureType.MONSTER, new Biome[]{ Biomes.MUSHROOM_ISLAND_SHORE });
 
 		EntityRegistry.registerModEntity(EntityODBPrimed.class, "Primed ODB", 28, this, 80, 3, true);
 
@@ -1222,8 +1202,8 @@ public class AbyssalCraft {
 		registerEntityWithEgg(EntityDreadSpawn.class, "dreadspawn", 40, 80, 3, true, 0xE60000, 0xCC0000);
 
 		registerEntityWithEgg(EntityDemonPig.class, "demonpig", 41, 80, 3, true, 15771042, 14377823);
-		EntityRegistry.addSpawn(EntityDemonPig.class, 30, 1, 3, EnumCreatureType.MONSTER, new BiomeGenBase[] {
-			Biomes.hell});
+		EntityRegistry.addSpawn(EntityDemonPig.class, 30, 1, 3, EnumCreatureType.MONSTER, new Biome[] {
+			Biomes.HELL});
 
 		registerEntityWithEgg(EntitySkeletonGoliath.class, "gskeleton", 42, 80, 3, true, 0xD6D6C9, 0xC6C7AD);
 
@@ -1277,34 +1257,34 @@ public class AbyssalCraft {
 		EntityRegistry.addSpawn(EntityLesserShoggoth.class, 3, 1, 1, EnumCreatureType.MONSTER, BiomeDictionary.getBiomesForType(Type.WATER));
 		EntityRegistry.addSpawn(EntityLesserShoggoth.class, 3, 1, 1, EnumCreatureType.MONSTER, BiomeDictionary.getBiomesForType(Type.BEACH));
 		EntityRegistry.addSpawn(EntityLesserShoggoth.class, 3, 1, 1, EnumCreatureType.MONSTER, BiomeDictionary.getBiomesForType(Type.SWAMP));
-		EntityRegistry.addSpawn(EntityLesserShoggoth.class, 3, 1, 1, EnumCreatureType.MONSTER, new BiomeGenBase[]{
+		EntityRegistry.addSpawn(EntityLesserShoggoth.class, 3, 1, 1, EnumCreatureType.MONSTER, new Biome[]{
 			ACBiomes.abyssal_wastelands, ACBiomes.dreadlands, ACBiomes.purified_dreadlands, ACBiomes.dreadlands_mountains,
 			ACBiomes.dreadlands_forest, ACBiomes.omothol, ACBiomes.dark_realm});
-		EntityRegistry.removeSpawn(EntityLesserShoggoth.class, EnumCreatureType.MONSTER, new BiomeGenBase[]{ Biomes.mushroomIslandShore });
+		EntityRegistry.removeSpawn(EntityLesserShoggoth.class, EnumCreatureType.MONSTER, new Biome[]{ Biomes.MUSHROOM_ISLAND_SHORE });
 
 		registerEntityWithEgg(EntityEvilCow.class, "evilcow", 67, 80, 3, true, 4470310, 10592673);
 		if(evilAnimalSpawnRate > 0)
-			EntityRegistry.addSpawn(EntityEvilCow.class, evilAnimalSpawnRate, 1, 3, evilAnimalCreatureType ? EnumCreatureType.MONSTER : EnumCreatureType.CREATURE, new BiomeGenBase[] {
-				Biomes.taiga, Biomes.plains, Biomes.forest, Biomes.savanna,
-				Biomes.beach, Biomes.extremeHills, Biomes.jungle, Biomes.savannaPlateau,
-				Biomes.swampland, Biomes.icePlains, Biomes.birchForest,
-				Biomes.birchForestHills, Biomes.roofedForest});
+			EntityRegistry.addSpawn(EntityEvilCow.class, evilAnimalSpawnRate, 1, 3, evilAnimalCreatureType ? EnumCreatureType.MONSTER : EnumCreatureType.CREATURE, new Biome[] {
+				Biomes.TAIGA, Biomes.PLAINS, Biomes.FOREST, Biomes.SAVANNA,
+				Biomes.BEACH, Biomes.EXTREME_HILLS, Biomes.JUNGLE, Biomes.SAVANNA_PLATEAU,
+				Biomes.SWAMPLAND, Biomes.ICE_PLAINS, Biomes.BIRCH_FOREST,
+				Biomes.BIRCH_FOREST_HILLS, Biomes.ROOFED_FOREST});
 
 		registerEntityWithEgg(EntityEvilChicken.class, "evilchicken", 68, 80, 3, true, 10592673, 16711680);
 		if(evilAnimalSpawnRate > 0)
-			EntityRegistry.addSpawn(EntityEvilChicken.class, evilAnimalSpawnRate, 1, 3, evilAnimalCreatureType ? EnumCreatureType.MONSTER : EnumCreatureType.CREATURE, new BiomeGenBase[] {
-				Biomes.taiga, Biomes.plains, Biomes.forest, Biomes.savanna,
-				Biomes.beach, Biomes.extremeHills, Biomes.jungle, Biomes.savannaPlateau,
-				Biomes.swampland, Biomes.icePlains, Biomes.birchForest,
-				Biomes.birchForestHills, Biomes.roofedForest});
+			EntityRegistry.addSpawn(EntityEvilChicken.class, evilAnimalSpawnRate, 1, 3, evilAnimalCreatureType ? EnumCreatureType.MONSTER : EnumCreatureType.CREATURE, new Biome[] {
+				Biomes.TAIGA, Biomes.PLAINS, Biomes.FOREST, Biomes.SAVANNA,
+				Biomes.BEACH, Biomes.EXTREME_HILLS, Biomes.JUNGLE, Biomes.SAVANNA_PLATEAU,
+				Biomes.SWAMPLAND, Biomes.ICE_PLAINS, Biomes.BIRCH_FOREST,
+				Biomes.BIRCH_FOREST_HILLS, Biomes.ROOFED_FOREST});
 
 		registerEntityWithEgg(EntityDemonCow.class, "demoncow", 69, 80, 3, true, 4470310, 10592673);
-		EntityRegistry.addSpawn(EntityDemonCow.class, 30, 1, 3, EnumCreatureType.MONSTER, new BiomeGenBase[] {
-			Biomes.hell});
+		EntityRegistry.addSpawn(EntityDemonCow.class, 30, 1, 3, EnumCreatureType.MONSTER, new Biome[] {
+			Biomes.HELL});
 
 		registerEntityWithEgg(EntityDemonChicken.class, "demonchicken", 70, 80, 3, true, 10592673, 16711680);
-		EntityRegistry.addSpawn(EntityDemonChicken.class, 30, 1, 3, EnumCreatureType.MONSTER, new BiomeGenBase[] {
-			Biomes.hell});
+		EntityRegistry.addSpawn(EntityDemonChicken.class, 30, 1, 3, EnumCreatureType.MONSTER, new Biome[] {
+			Biomes.HELL});
 
 		//		registerEntityWithEgg(EntityShadowTitan.class, "shadowtitan", 71, 80, 3, true, 0, 0xFFFFFF);
 		//
@@ -1325,7 +1305,7 @@ public class AbyssalCraft {
 
 		ACLogger.info("Initializing AbyssalCraft.");
 		//Achievements
-		necro = new Achievement("achievement.necro", "necro", 0, 0, ACItems.necronomicon, AchievementList.openInventory).registerStat();
+		necro = new Achievement("achievement.necro", "necro", 0, 0, ACItems.necronomicon, AchievementList.OPEN_INVENTORY).registerStat();
 		//Materials Achievements
 		mineAby = new Achievement("achievement.mineAby", "mineAby", 2, 0, ACBlocks.abyssalnite_ore, necro).registerStat();
 		mineCorgem = new Achievement("achievement.mineCorgem", "mineCorgem", 4, 0, ACItems.coralium_gem, mineAby).registerStat();
@@ -1351,11 +1331,11 @@ public class AbyssalCraft {
 		ritual = new Achievement("achievement.ritual", "ritual", -2, 1, ACBlocks.ritual_altar, necro).setSpecial().registerStat();
 		ritualSummon = new Achievement("achievement.ritualSummon", "ritualSummon", -4, 1, ACBlocks.depths_ghoul_head, ritual).registerStat();
 		ritualCreate = new Achievement("achievement.ritualCreate", "ritualCreate", -4, 2, ACItems.life_crystal, ritual).registerStat();
-		ritualBreed = new Achievement("achievement.ritualBreed", "ritualBreed", -4, 3, Items.egg, ritual).registerStat();
-		ritualPotion = new Achievement("achievement.ritualPotion", "ritualPotion", -4, 4, Items.potionitem, ritual).registerStat();
-		ritualPotionAoE = new Achievement("achievement.ritualPotionAoE", "ritualPotionAoE", -4, 5, new ItemStack(Items.potionitem, 1, 16384), ritual).registerStat();
+		ritualBreed = new Achievement("achievement.ritualBreed", "ritualBreed", -4, 3, Items.EGG, ritual).registerStat();
+		ritualPotion = new Achievement("achievement.ritualPotion", "ritualPotion", -4, 4, Items.POTIONITEM, ritual).registerStat();
+		ritualPotionAoE = new Achievement("achievement.ritualPotionAoE", "ritualPotionAoE", -4, 5, new ItemStack(Items.POTIONITEM, 1, 16384), ritual).registerStat();
 		ritualInfusion = new Achievement("achievement.ritualInfusion", "ritualInfusion", -4, 6, ACItems.depths_helmet, ritual).registerStat();
-		shoggothInfestation = new Achievement("achievement.shoggothInfestation", "shoggothInfestation", -6, 3, Items.skull, ritualBreed).registerStat();
+		shoggothInfestation = new Achievement("achievement.shoggothInfestation", "shoggothInfestation", -6, 3, Items.SKULL, ritualBreed).registerStat();
 		//Progression Achievements
 		enterabyss = new Achievement("achievement.enterabyss", "enterabyss", 0, 2, ACBlocks.abyssal_stone, necro).setSpecial().registerStat();
 		killdragon = new Achievement("achievement.killdragon", "killdragon", 2, 2, ACItems.coralium_plagued_flesh, enterabyss).registerStat();
@@ -1381,7 +1361,7 @@ public class AbyssalCraft {
 		makeCrystallizer = new Achievement("achievement.makeCrystallizer", "makeCrystallizer", 4, -2, ACBlocks.crystallizer_idle, makeTransmutator).registerStat();
 		makeMaterializer = new Achievement("achievement.makeMaterializer", "makeMaterializer", 6, -2, ACBlocks.materializer, makeCrystallizer).registerStat();
 		makeCrystalBag = new Achievement("achievement.makeCrystalBag", "makeCrystalBag", 6, -4, ACItems.small_crystal_bag, makeMaterializer).registerStat();
-		makeEngraver = new Achievement("achievement.makeEngraver", "makeEngraver", 2, -3, ACBlocks.engraver, AchievementList.openInventory).registerStat();
+		makeEngraver = new Achievement("achievement.makeEngraver", "makeEngraver", 2, -3, ACBlocks.engraver, AchievementList.OPEN_INVENTORY).registerStat();
 
 		AchievementPage.registerAchievementPage(new AchievementPage("AbyssalCraft", new Achievement[]{necro, mineAby, killghoul, enterabyss, killdragon, summonAsorah, killAsorah,
 				enterdreadlands, killdreadguard, ghoulhead, petehead, wilsonhead, orangehead, mineCorgem, mineCor, findPSDL, GK1, GK2, GK3, summonChagaroth, killChagaroth,
@@ -2071,7 +2051,7 @@ public class AbyssalCraft {
 	private static int getUniqueEntityId() {
 		do
 			startEntityId++;
-		while (EntityList.idToClassMapping.containsKey(startEntityId));
+		while (EntityList.ID_TO_CLASS.containsKey(startEntityId));
 
 		return startEntityId;
 	}
@@ -2081,10 +2061,10 @@ public class AbyssalCraft {
 		int id = getUniqueEntityId();
 		stringtoIDMapping.put(name, id);
 		EntityRegistry.registerModEntity(entity, name, modid, instance, trackingRange, updateFrequency, sendsVelocityUpdates, primaryColor, secondaryColor);
-		EntityList.idToClassMapping.put(id, entity);
+		EntityList.ID_TO_CLASS.put(id, entity);
 	}
 
-	private static void registerBiomeWithTypes(BiomeGenBase biome, String name, int weight, BiomeType btype, Type...types){
+	private static void registerBiomeWithTypes(Biome biome, String name, int weight, BiomeType btype, Type...types){
 		GameRegistry.register(biome.setRegistryName(new ResourceLocation(modid, name)));
 		BiomeDictionary.registerBiomeType(biome, types);
 		BiomeManager.addBiome(btype, new BiomeEntry(biome, weight));

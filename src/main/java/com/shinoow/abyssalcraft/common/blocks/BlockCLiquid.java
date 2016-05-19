@@ -40,7 +40,7 @@ import com.shinoow.abyssalcraft.common.util.EntityUtil;
 
 public class BlockCLiquid extends BlockFluidClassic {
 
-	public static final MaterialLiquid Cwater = new MaterialLiquid(MapColor.lightBlueColor);
+	public static final MaterialLiquid Cwater = new MaterialLiquid(MapColor.LIGHT_BLUE);
 
 	List<Block> dusts = Lists.newArrayList();
 	List<Block> metalloids = Lists.newArrayList();
@@ -50,7 +50,7 @@ public class BlockCLiquid extends BlockFluidClassic {
 	List<Block> metals = Lists.newArrayList();
 
 	public BlockCLiquid() {
-		super(AbyssalCraft.CFluid, Material.water);
+		super(AbyssalCraft.CFluid, Material.WATER);
 	}
 
 	@Override
@@ -67,14 +67,14 @@ public class BlockCLiquid extends BlockFluidClassic {
 
 	@Override
 	public MapColor getMapColor(IBlockState state){
-		return MapColor.lightBlueColor;
+		return MapColor.LIGHT_BLUE;
 	}
 
 	@Override
 	public boolean canDisplace(IBlockAccess world, BlockPos pos) {
 		if(world.getBlockState(pos).getMaterial().isLiquid() && world.getBlockState(pos).getBlock() != this && world.getBlockState(pos).getBlock() != ACBlocks.liquid_antimatter)
 			return true;
-		if(world.getBlockState(pos).getBlock() == Blocks.lava)
+		if(world.getBlockState(pos).getBlock() == Blocks.LAVA)
 			return true;
 		else if(dusts.contains(world.getBlockState(pos).getBlock()) || metalloids.contains(world.getBlockState(pos).getBlock()) || gems.contains(world.getBlockState(pos).getBlock()) ||
 				stones.contains(world.getBlockState(pos).getBlock()) || bricks.contains(world.getBlockState(pos).getBlock()))
@@ -87,7 +87,7 @@ public class BlockCLiquid extends BlockFluidClassic {
 
 		if(!world.isRemote){
 			if(!world.provider.isSurfaceWorld()){
-				if(world.getBlockState(pos).getBlock() == Blocks.water && AbyssalCraft.shouldSpread == false) return false;
+				if(world.getBlockState(pos).getBlock() == Blocks.WATER && AbyssalCraft.shouldSpread == false) return false;
 				if(world.getBlockState(pos).getMaterial().isLiquid() && world.getBlockState(pos).getBlock() != this && world.getBlockState(pos).getBlock() != ACBlocks.liquid_antimatter)
 					world.setBlockState(pos, getDefaultState());
 				if(AbyssalCraft.breakLogic == true && world.getBlockState(new BlockPos(pos.getX(), pos.getY()+1, pos.getZ())).getMaterial().isLiquid()
@@ -97,7 +97,7 @@ public class BlockCLiquid extends BlockFluidClassic {
 				if(BiomeDictionary.isBiomeOfType(world.getBiomeGenForCoords(pos), Type.OCEAN) && world.getBlockState(pos).getBlock() == this)
 					if(AbyssalCraft.destroyOcean)
 						world.setBlockState(pos, getDefaultState());
-					else world.setBlockState(pos, Blocks.cobblestone.getDefaultState());
+					else world.setBlockState(pos, Blocks.COBBLESTONE.getDefaultState());
 
 				if(AbyssalCraft.shouldSpread){
 					if(world.getBlockState(pos).getMaterial().isLiquid() && world.getBlockState(pos).getBlock() != this && world.getBlockState(pos).getBlock() != ACBlocks.liquid_antimatter)
@@ -128,7 +128,7 @@ public class BlockCLiquid extends BlockFluidClassic {
 				else world.setBlockState(pos, ACBlocks.pearlescent_coralium_ore.getDefaultState());
 			else if(stones.contains(world.getBlockState(pos).getBlock()))
 				if(BiomeDictionary.isBiomeOfType(world.getBiomeGenForCoords(pos), Type.OCEAN)){
-					if(world.getBlockState(pos).getBlock() != Blocks.cobblestone)
+					if(world.getBlockState(pos).getBlock() != Blocks.COBBLESTONE)
 						world.setBlockState(pos, ACBlocks.abyssal_stone.getDefaultState());
 				}else world.setBlockState(pos, ACBlocks.abyssal_stone.getDefaultState());
 			else if(bricks.contains(world.getBlockState(pos).getBlock()))
@@ -148,7 +148,7 @@ public class BlockCLiquid extends BlockFluidClassic {
 	private List<Block> oresToBlocks(List<ItemStack> list){
 		List<Block> blocks = Lists.newArrayList();
 		for(ItemStack stack : list)
-			if(Block.getBlockFromItem(stack.getItem()) != Blocks.air)
+			if(Block.getBlockFromItem(stack.getItem()) != Blocks.AIR)
 				blocks.add(Block.getBlockFromItem(stack.getItem()));
 
 		return blocks;
@@ -189,15 +189,15 @@ public class BlockCLiquid extends BlockFluidClassic {
 		stones.addAll(oresToBlocks(OreDictionary.getOres("stone")));
 		stones.addAll(oresToBlocks(OreDictionary.getOres("sandstone")));
 		stones.addAll(oresToBlocks(OreDictionary.getOres("cobblestone")));
-		stones.add(Blocks.mossy_cobblestone);
-		stones.add(Blocks.netherrack);
-		stones.add(Blocks.end_stone);
+		stones.add(Blocks.MOSSY_COBBLESTONE);
+		stones.add(Blocks.NETHERRACK);
+		stones.add(Blocks.END_STONE);
 		stones.add(ACBlocks.darkstone);
 		stones.add(ACBlocks.abyssalnite_stone);
 		stones.add(ACBlocks.dreadstone);
 		stones.add(ACBlocks.darkstone_cobblestone);
-		bricks.add(Blocks.stonebrick);
-		bricks.add(Blocks.nether_brick);
+		bricks.add(Blocks.STONEBRICK);
+		bricks.add(Blocks.NETHER_BRICK);
 		bricks.add(ACBlocks.darkstone_brick);
 		bricks.add(ACBlocks.abyssalnite_stone_brick);
 		bricks.add(ACBlocks.dreadstone_brick);

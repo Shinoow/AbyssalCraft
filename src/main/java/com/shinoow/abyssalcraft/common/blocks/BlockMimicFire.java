@@ -141,8 +141,8 @@ public class BlockMimicFire extends BlockFire {
 			} else
 				worldIn.setBlockToAir(pos);
 
-			if (iblockstate.getBlock() == Blocks.tnt)
-				Blocks.tnt.onBlockDestroyedByPlayer(worldIn, pos, iblockstate.withProperty(BlockTNT.EXPLODE, Boolean.valueOf(true)));
+			if (iblockstate.getBlock() == Blocks.TNT)
+				Blocks.TNT.onBlockDestroyedByPlayer(worldIn, pos, iblockstate.withProperty(BlockTNT.EXPLODE, Boolean.valueOf(true)));
 		}
 	}
 

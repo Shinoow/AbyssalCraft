@@ -47,23 +47,23 @@ public class ItemCorb extends Item {
 
 	@Override
 	public EnumActionResult onItemUse(ItemStack is, EntityPlayer player, World w, BlockPos pos, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ){
-		if(w.getBlockState(pos) == Blocks.stone){
+		if(w.getBlockState(pos) == Blocks.STONE){
 			w.setBlockState(pos, ACBlocks.darkstone.getDefaultState());
 			is.damageItem(50, player);
 		}else if(w.getBlockState(pos) == ACBlocks.darkstone){
-			w.setBlockState(pos, Blocks.stone.getDefaultState());
+			w.setBlockState(pos, Blocks.STONE.getDefaultState());
 			is.damageItem(50, player);
-		}else if(w.getBlockState(pos) == Blocks.cobblestone){
+		}else if(w.getBlockState(pos) == Blocks.COBBLESTONE){
 			w.setBlockState(pos, ACBlocks.darkstone_cobblestone.getDefaultState());
 			is.damageItem(50, player);
 		}else if(w.getBlockState(pos) == ACBlocks.darkstone_cobblestone){
-			w.setBlockState(pos, Blocks.cobblestone.getDefaultState());
+			w.setBlockState(pos, Blocks.COBBLESTONE.getDefaultState());
 			is.damageItem(50, player);
-		}else if(w.getBlockState(pos) == Blocks.stonebrick){
+		}else if(w.getBlockState(pos) == Blocks.STONEBRICK){
 			w.setBlockState(pos, ACBlocks.darkstone_brick.getDefaultState());
 			is.damageItem(50, player);
 		}else if(w.getBlockState(pos) == ACBlocks.darkstone_brick){
-			w.setBlockState(pos, Blocks.stonebrick.getDefaultState());
+			w.setBlockState(pos, Blocks.STONEBRICK.getDefaultState());
 			is.damageItem(50, player);
 		}
 		return EnumActionResult.PASS;

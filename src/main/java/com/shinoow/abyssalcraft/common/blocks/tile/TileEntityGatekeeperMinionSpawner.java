@@ -25,16 +25,16 @@ public class TileEntityGatekeeperMinionSpawner extends TileEntity implements ITi
 	private int activatingRangeFromPlayer = 16;
 
 	@Override
-	public Packet getDescriptionPacket() {
+	public SPacketUpdateTileEntity getUpdatePacket() {
 		NBTTagCompound nbtTag = new NBTTagCompound();
 		writeToNBT(nbtTag);
 		return new SPacketUpdateTileEntity(pos, 1, nbtTag);
 	}
 
 	public boolean isActivated() {
-		return worldObj.func_184137_a(pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D,
+		return worldObj.getClosestPlayer(pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D,
 				activatingRangeFromPlayer, true) != null &&
-				!worldObj.func_184137_a(pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D,
+				!worldObj.getClosestPlayer(pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D,
 						activatingRangeFromPlayer, true).capabilities.isCreativeMode;
 	}
 
@@ -42,7 +42,7 @@ public class TileEntityGatekeeperMinionSpawner extends TileEntity implements ITi
 	public void update() {
 		if (!worldObj.isRemote && isActivated()) {
 			EntityGatekeeperMinion mob = new EntityGatekeeperMinion(worldObj);
-			mob.setLocationAndAngles(pos.getX(), pos.getY(), pos.getZ(), MathHelper.wrapAngleTo180_float(worldObj.rand.nextFloat() * 360.0F), 10.0F);
+			mob.setLocationAndAngles(pos.getX(), pos.getY(), pos.getZ(), MathHelper.wrapDegrees(worldObj.rand.nextFloat() * 360.0F), 10.0F);
 			worldObj.spawnEntityInWorld(mob);
 			worldObj.setBlockToAir(pos);
 		}

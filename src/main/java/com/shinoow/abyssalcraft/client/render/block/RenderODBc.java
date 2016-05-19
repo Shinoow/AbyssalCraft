@@ -80,6 +80,6 @@ public class RenderODBc extends Render<EntityODBcPrimed> {
 	@Override
 	protected ResourceLocation getEntityTexture(EntityODBcPrimed par1EntityODBPrimed)
 	{
-		return TextureMap.locationBlocksTexture;
+		return TextureMap.LOCATION_BLOCKS_TEXTURE;
 	}
 }

@@ -32,8 +32,8 @@ public class WorldProviderAbyss extends WorldProvider {
 	}
 
 	@Override
-	public void registerWorldChunkManager() {
-		worldChunkMgr = new BiomeProviderSingle(ACBiomes.abyssal_wastelands);
+	public void createBiomeProvider() {
+		biomeProvider = new BiomeProviderSingle(ACBiomes.abyssal_wastelands);
 		isHellWorld= false;
 		setDimension(AbyssalCraft.configDimId1);
 		hasNoSky = true;

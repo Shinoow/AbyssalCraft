@@ -35,7 +35,7 @@ public class BlockACBasic extends Block {
 		setHarvestLevel(tooltype, harvestlevel);
 		setHardness(hardness);
 		setResistance(resistance);
-		setStepSound(stepsound);
+		setSoundType(stepsound);
 		setCreativeTab(AbyssalCraft.tabBlock);
 	}
 
@@ -50,13 +50,13 @@ public class BlockACBasic extends Block {
 		super(material);
 		setHardness(hardness);
 		setResistance(resistance);
-		setStepSound(stepsound);
+		setSoundType(stepsound);
 		setCreativeTab(AbyssalCraft.tabBlock);
 	}
 
 	public static enum EnumType implements IStringSerializable
 	{
-		GENERIC(0, "generic", MapColor.airColor);
+		GENERIC(0, "generic", MapColor.AIR);
 
 		private static final EnumType[] META_LOOKUP = new EnumType[values().length];
 		private final int meta;

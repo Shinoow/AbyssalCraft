@@ -41,7 +41,7 @@ public class BlockACPressureplate extends BlockBasePressurePlate
 		sensitivity = par4EnumMobType;
 		this.setHarvestLevel(par5, par6);
 		setDefaultState(blockState.getBaseState().withProperty(POWERED, Boolean.valueOf(false)));
-		setStepSound(stepSound);
+		setSoundType(stepSound);
 	}
 
 	public BlockACPressureplate(String par2Str, Material par3Material, BlockACPressureplate.Sensitivity par4EnumMobType, SoundType stepSound)
@@ -49,7 +49,7 @@ public class BlockACPressureplate extends BlockBasePressurePlate
 		super(par3Material);
 		sensitivity = par4EnumMobType;
 		setDefaultState(blockState.getBaseState().withProperty(POWERED, Boolean.valueOf(false)));
-		setStepSound(stepSound);
+		setSoundType(stepSound);
 	}
 
 	@Override
@@ -128,18 +128,18 @@ public class BlockACPressureplate extends BlockBasePressurePlate
 	@Override
 	protected void playClickOnSound(World worldIn, BlockPos color)
 	{
-		if (blockMaterial == Material.wood)
-			worldIn.playSound((EntityPlayer)null, color, SoundEvents.block_wood_pressplate_click_on, SoundCategory.BLOCKS, 0.3F, 0.8F);
+		if (blockMaterial == Material.WOOD)
+			worldIn.playSound((EntityPlayer)null, color, SoundEvents.BLOCK_WOOD_PRESSPLATE_CLICK_ON, SoundCategory.BLOCKS, 0.3F, 0.8F);
 		else
-			worldIn.playSound((EntityPlayer)null, color, SoundEvents.block_stone_pressplate_click_on, SoundCategory.BLOCKS, 0.3F, 0.6F);
+			worldIn.playSound((EntityPlayer)null, color, SoundEvents.BLOCK_STONE_PRESSPLATE_CLICK_ON, SoundCategory.BLOCKS, 0.3F, 0.6F);
 	}
 
 	@Override
 	protected void playClickOffSound(World worldIn, BlockPos pos)
 	{
-		if (blockMaterial == Material.wood)
-			worldIn.playSound((EntityPlayer)null, pos, SoundEvents.block_wood_pressplate_click_off, SoundCategory.BLOCKS, 0.3F, 0.7F);
+		if (blockMaterial == Material.WOOD)
+			worldIn.playSound((EntityPlayer)null, pos, SoundEvents.BLOCK_WOOD_PRESSPLATE_CLICK_OFF, SoundCategory.BLOCKS, 0.3F, 0.7F);
 		else
-			worldIn.playSound((EntityPlayer)null, pos, SoundEvents.block_stone_pressplate_click_off, SoundCategory.BLOCKS, 0.3F, 0.5F);
+			worldIn.playSound((EntityPlayer)null, pos, SoundEvents.BLOCK_STONE_PRESSPLATE_CLICK_OFF, SoundCategory.BLOCKS, 0.3F, 0.5F);
 	}
 }

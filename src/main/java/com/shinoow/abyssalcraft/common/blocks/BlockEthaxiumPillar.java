@@ -17,6 +17,6 @@ import net.minecraft.block.material.Material;
 public class BlockEthaxiumPillar extends BlockACBasic {
 
 	public BlockEthaxiumPillar() {
-		super(Material.rock, "pickaxe", 8, 100.0F, Float.MAX_VALUE, SoundType.STONE);
+		super(Material.ROCK, "pickaxe", 8, 100.0F, Float.MAX_VALUE, SoundType.STONE);
 	}
 }

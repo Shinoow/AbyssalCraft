@@ -19,13 +19,13 @@ public class BlockACSingleSlab extends BlockACSlab {
 	public BlockACSingleSlab(Material par3Material, String tooltype, int harvestlevel, SoundType stepSound)
 	{
 		super(par3Material, tooltype, harvestlevel);
-		setStepSound(stepSound);
+		setSoundType(stepSound);
 	}
 
 	public BlockACSingleSlab(Material par3Material, SoundType stepSound)
 	{
 		super(par3Material);
-		setStepSound(stepSound);
+		setSoundType(stepSound);
 	}
 
 	@Override

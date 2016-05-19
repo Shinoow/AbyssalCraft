@@ -52,9 +52,9 @@ public class BlockCrystallizer extends BlockContainer
 
 	public BlockCrystallizer(boolean par1)
 	{
-		super(Material.rock);
+		super(Material.ROCK);
 		setDefaultState(blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH));
-		setStepSound(SoundType.STONE);
+		setSoundType(SoundType.STONE);
 		isLit = par1;
 		if(!isLit)
 			setCreativeTab(AbyssalCraft.tabDecoration);

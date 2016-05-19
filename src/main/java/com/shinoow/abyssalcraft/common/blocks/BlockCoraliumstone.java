@@ -26,10 +26,10 @@ import com.shinoow.abyssalcraft.api.block.ACBlocks;
 public class BlockCoraliumstone extends Block {
 
 	public BlockCoraliumstone() {
-		super(Material.rock);
+		super(Material.ROCK);
 		setCreativeTab(AbyssalCraft.tabBlock);
 		setTickRandomly(true);
-		setStepSound(SoundType.STONE);
+		setSoundType(SoundType.STONE);
 	}
 
 	@Override

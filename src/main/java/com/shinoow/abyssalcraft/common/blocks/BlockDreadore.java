@@ -19,7 +19,7 @@ import com.shinoow.abyssalcraft.AbyssalCraft;
 public class BlockDreadore extends Block {
 
 	public BlockDreadore() {
-		super(Material.rock);
+		super(Material.ROCK);
 		setCreativeTab(AbyssalCraft.tabBlock);
 		this.setHarvestLevel("pickaxe", 4);
 	}

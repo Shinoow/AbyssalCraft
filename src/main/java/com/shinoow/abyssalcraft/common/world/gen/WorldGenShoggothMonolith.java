@@ -80,7 +80,7 @@ public class WorldGenShoggothMonolith extends WorldGenerator {
 			if(te != null && te instanceof TEDirectional)
 				((TEDirectional) te).setDirection(rand.nextInt(3));
 
-			world.playSound(pos.getX(), pos.getY(), pos.getZ(), SoundEvents.block_anvil_use, SoundCategory.BLOCKS, 2, world.rand.nextFloat() * 0.1F * 0.9F, false);
+			world.playSound(pos.getX(), pos.getY(), pos.getZ(), SoundEvents.BLOCK_ANVIL_USE, SoundCategory.BLOCKS, 2, world.rand.nextFloat() * 0.1F * 0.9F, false);
 
 			return true;
 		}

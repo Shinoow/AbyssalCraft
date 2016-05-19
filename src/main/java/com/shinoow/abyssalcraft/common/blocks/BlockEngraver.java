@@ -46,9 +46,9 @@ public class BlockEngraver extends BlockContainer {
 	private static boolean keepInventory;
 
 	public BlockEngraver() {
-		super(Material.rock);
+		super(Material.ROCK);
 		setCreativeTab(AbyssalCraft.tabDecoration);
-		setStepSound(SoundType.STONE);
+		setSoundType(SoundType.STONE);
 	}
 
 	@Override

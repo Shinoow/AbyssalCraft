@@ -29,13 +29,13 @@ import com.shinoow.abyssalcraft.api.item.ACItems;
 public class BlockACOre extends BlockACBasic {
 
 	public BlockACOre(int harvestlevel, float hardness, float resistance) {
-		super(Material.rock, "pickaxe", harvestlevel, hardness, resistance, SoundType.STONE);
+		super(Material.ROCK, "pickaxe", harvestlevel, hardness, resistance, SoundType.STONE);
 	}
 
 	@Override
 	public Item getItemDropped(IBlockState state, Random par2Random, int par3)
 	{
-		return this == ACBlocks.coralium_infused_stone ? ACItems.coralium_pearl: this == ACBlocks.coralium_ore ? ACItems.coralium_gem: this == ACBlocks.nitre_ore ? ACItems.nitre: this == ACBlocks.abyssal_nitre_ore ? ACItems.nitre: this == ACBlocks.abyssal_diamond_ore ? Items.diamond:
+		return this == ACBlocks.coralium_infused_stone ? ACItems.coralium_pearl: this == ACBlocks.coralium_ore ? ACItems.coralium_gem: this == ACBlocks.nitre_ore ? ACItems.nitre: this == ACBlocks.abyssal_nitre_ore ? ACItems.nitre: this == ACBlocks.abyssal_diamond_ore ? Items.DIAMOND:
 			this == ACBlocks.abyssal_coralium_ore ? ACItems.coralium_gem: this == ACBlocks.pearlescent_coralium_ore ? ACItems.coralium_pearl: Item.getItemFromBlock(this);
 	}
 

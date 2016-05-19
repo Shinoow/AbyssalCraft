@@ -20,9 +20,9 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.ChunkCoordIntPair;
+import net.minecraft.util.math.ChunkPos;
 import net.minecraft.world.World;
-import net.minecraft.world.biome.BiomeGenBase;
+import net.minecraft.world.biome.Biome;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.chunk.ChunkPrimer;
 import net.minecraft.world.chunk.IChunkGenerator;
@@ -39,7 +39,7 @@ public class ChunkProviderOmothol implements IChunkGenerator
 	private World worldObj;
 	private double[] densities;
 	/** The biomes that are used to generate the chunk */
-	private BiomeGenBase[] biomesForGeneration;
+	private Biome[] biomesForGeneration;
 	double[] noiseData1, noiseData2, noiseData3, noiseData4, noiseData5;
 	int[][] field_73203_h = new int[32][32];
 	MapGenOmothol omotholGenerator = new MapGenOmothol();
@@ -140,14 +140,14 @@ public class ChunkProviderOmothol implements IChunkGenerator
 				{
 					IBlockState iblockstate2 = primer.getBlockState(i, i1, j);
 
-					if (iblockstate2.getMaterial() == Material.air)
+					if (iblockstate2.getMaterial() == Material.AIR)
 						l = -1;
-					else if (iblockstate2.getBlock() == Blocks.stone)
+					else if (iblockstate2.getBlock() == Blocks.STONE)
 						if (l == -1)
 						{
 							if (k <= 0)
 							{
-								iblockstate = Blocks.air.getDefaultState();
+								iblockstate = Blocks.AIR.getDefaultState();
 								iblockstate1 = ACBlocks.omothol_stone.getDefaultState();
 							}
 
@@ -182,7 +182,7 @@ public class ChunkProviderOmothol implements IChunkGenerator
 		byte[] abyte = chunk.getBiomeArray();
 
 		for (int k = 0; k < abyte.length; ++k)
-			abyte[k] = (byte)BiomeGenBase.getIdForBiome(biomesForGeneration[k]);
+			abyte[k] = (byte)Biome.getIdForBiome(biomesForGeneration[k]);
 
 		chunk.generateSkylightMap();
 		return chunk;
@@ -284,9 +284,9 @@ public class ChunkProviderOmothol implements IChunkGenerator
 
 		int k = x * 16;
 		int l = z * 16;
-		BiomeGenBase biomegenbase = worldObj.getBiomeGenForCoords(new BlockPos(k + 16, 0, l + 16));
+		Biome Biome = worldObj.getBiomeGenForCoords(new BlockPos(k + 16, 0, l + 16));
 
-		ChunkCoordIntPair chunkcoordintpair = new ChunkCoordIntPair(x, z);
+		ChunkPos chunkcoordintpair = new ChunkPos(x, z);
 
 		omotholGenerator.generateStructure(worldObj, rand, chunkcoordintpair);
 
@@ -298,7 +298,7 @@ public class ChunkProviderOmothol implements IChunkGenerator
 				new StructureShoggothPit().generate(worldObj, rand, worldObj.getHeight(new BlockPos(Xcoord2, 0, Zcoord2)));
 		}
 
-		biomegenbase.decorate(worldObj, worldObj.rand, new BlockPos(k, 0, l));
+		Biome.decorate(worldObj, worldObj.rand, new BlockPos(k, 0, l));
 
 		BlockFalling.fallInstantly = false;
 	}
@@ -334,8 +334,8 @@ public class ChunkProviderOmothol implements IChunkGenerator
 	@SuppressWarnings("rawtypes")
 	public List getPossibleCreatures(EnumCreatureType par1EnumCreatureType, BlockPos pos)
 	{
-		BiomeGenBase biomegenbase = worldObj.getBiomeGenForCoords(pos);
-		return biomegenbase == null ? null : biomegenbase.getSpawnableList(par1EnumCreatureType);
+		Biome Biome = worldObj.getBiomeGenForCoords(pos);
+		return Biome == null ? null : Biome.getSpawnableList(par1EnumCreatureType);
 	}
 
 	@Override

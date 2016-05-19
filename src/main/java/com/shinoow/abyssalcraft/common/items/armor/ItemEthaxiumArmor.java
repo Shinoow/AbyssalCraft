@@ -60,38 +60,38 @@ public class ItemEthaxiumArmor extends ItemArmor {
 	public void onArmorTick(World world, EntityPlayer player, ItemStack itemstack) {
 		if (itemstack.getItem() == ACItems.ethaxium_helmet) {
 			if(world.provider.isSurfaceWorld() && !world.provider.isDaytime())
-				player.addPotionEffect(new PotionEffect(MobEffects.nightVision, 260, 0));
-			if(player.getActivePotionEffect(MobEffects.hunger) !=null)
-				player.removePotionEffect(MobEffects.hunger);
-			if(player.getActivePotionEffect(MobEffects.poison) !=null)
-				player.removePotionEffect(MobEffects.poison);
+				player.addPotionEffect(new PotionEffect(MobEffects.NIGHT_VISION, 260, 0));
+			if(player.getActivePotionEffect(MobEffects.HUNGER) !=null)
+				player.removePotionEffect(MobEffects.HUNGER);
+			if(player.getActivePotionEffect(MobEffects.POISON) !=null)
+				player.removePotionEffect(MobEffects.POISON);
 			if(world.rand.nextInt(300) == 0)
-				player.addPotionEffect(new PotionEffect(MobEffects.saturation, 60, 0));
+				player.addPotionEffect(new PotionEffect(MobEffects.SATURATION, 60, 0));
 		}
 		if(itemstack.getItem() == ACItems.ethaxium_chestplate){
 			if(player.isBurning() || world.provider.doesWaterVaporize())
-				player.addPotionEffect(new PotionEffect(MobEffects.fireResistance, 20, 2));
+				player.addPotionEffect(new PotionEffect(MobEffects.FIRE_RESISTANCE, 20, 2));
 			if(player.getActivePotionEffect(AbyssalCraftAPI.antimatter_potion) !=null)
 				player.removePotionEffect(AbyssalCraftAPI.antimatter_potion);
 			if(world.rand.nextInt(200) == 0)
-				player.addPotionEffect(new PotionEffect(MobEffects.damageBoost, 60));
+				player.addPotionEffect(new PotionEffect(MobEffects.STRENGTH, 60));
 		}
 		if(itemstack.getItem() == ACItems.ethaxium_leggings)
 			if(world.rand.nextInt(200) == 0)
-				player.addPotionEffect(new PotionEffect(MobEffects.regeneration, 60));
+				player.addPotionEffect(new PotionEffect(MobEffects.REGENERATION, 60));
 		if(itemstack.getItem() == ACItems.ethaxium_boots)
 			if(player.isInWater()){
-				player.addPotionEffect(new PotionEffect(MobEffects.moveSpeed, 20, 2));
-				player.addPotionEffect(new PotionEffect(MobEffects.waterBreathing, 20, 1));
+				player.addPotionEffect(new PotionEffect(MobEffects.SPEED, 20, 2));
+				player.addPotionEffect(new PotionEffect(MobEffects.WATER_BREATHING, 20, 1));
 			}
 
-		if(player.getActivePotionEffect(MobEffects.saturation) != null && player.getActivePotionEffect(MobEffects.saturation).getDuration() == 0)
-			player.removePotionEffect(MobEffects.saturation);
-		if(player.getActivePotionEffect(MobEffects.damageBoost) != null && player.getActivePotionEffect(MobEffects.damageBoost).getDuration() == 0)
-			player.removePotionEffect(MobEffects.damageBoost);
-		if(player.getActivePotionEffect(MobEffects.regeneration) != null && player.getActivePotionEffect(MobEffects.regeneration).getDuration() == 0)
-			player.removePotionEffect(MobEffects.regeneration);
-		if(player.getActivePotionEffect(MobEffects.fireResistance) != null && player.getActivePotionEffect(MobEffects.fireResistance).getDuration() == 0)
-			player.removePotionEffect(MobEffects.fireResistance);
+		if(player.getActivePotionEffect(MobEffects.SATURATION) != null && player.getActivePotionEffect(MobEffects.SATURATION).getDuration() == 0)
+			player.removePotionEffect(MobEffects.SATURATION);
+		if(player.getActivePotionEffect(MobEffects.STRENGTH) != null && player.getActivePotionEffect(MobEffects.STRENGTH).getDuration() == 0)
+			player.removePotionEffect(MobEffects.STRENGTH);
+		if(player.getActivePotionEffect(MobEffects.REGENERATION) != null && player.getActivePotionEffect(MobEffects.REGENERATION).getDuration() == 0)
+			player.removePotionEffect(MobEffects.REGENERATION);
+		if(player.getActivePotionEffect(MobEffects.FIRE_RESISTANCE) != null && player.getActivePotionEffect(MobEffects.FIRE_RESISTANCE).getDuration() == 0)
+			player.removePotionEffect(MobEffects.FIRE_RESISTANCE);
 	}
 }

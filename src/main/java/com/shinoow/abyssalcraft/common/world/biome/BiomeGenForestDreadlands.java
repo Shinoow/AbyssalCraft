@@ -33,7 +33,7 @@ public class BiomeGenForestDreadlands extends BiomeGenDreadlandsBase
 	public BiomeGenForestDreadlands(BiomeProperties par1) {
 		super(par1);
 		topBlock = ACBlocks.dreadlands_grass.getDefaultState();
-		fillerBlock = Blocks.dirt.getDefaultState();
+		fillerBlock = Blocks.DIRT.getDefaultState();
 		WorldGenDreadTrees = new WorldGenDrT(false);
 		theBiomeDecorator.treesPerChunk = 6;
 		spawnableMonsterList.add(new SpawnListEntry(EntityDemonPig.class, 40, 1, 3));

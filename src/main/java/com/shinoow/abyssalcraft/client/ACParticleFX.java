@@ -11,12 +11,12 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.client;
 
-import net.minecraft.client.particle.EntityFX;
+import net.minecraft.client.particle.Particle;
 import net.minecraft.client.renderer.VertexBuffer;
 import net.minecraft.entity.Entity;
 import net.minecraft.world.World;
 
-public class ACParticleFX extends EntityFX {
+public class ACParticleFX extends Particle {
 
 	float reddustParticleScale;
 
@@ -28,9 +28,9 @@ public class ACParticleFX extends EntityFX {
 	public ACParticleFX(World par1World, double par2, double par4, double par6, float par8, float par9, float par10, float par11)
 	{
 		super(par1World, par2, par4, par6, 0.0D, 0.0D, 0.0D);
-		xSpeed *= 0.10000000149011612D;
-		ySpeed *= 0.10000000149011612D;
-		zSpeed *= 0.10000000149011612D;
+		motionX *= 0.10000000149011612D;
+		motionY *= 0.10000000149011612D;
+		motionZ *= 0.10000000149011612D;
 
 		if (par9 == 0.0F)
 			par9 = 1.0F;
@@ -70,22 +70,22 @@ public class ACParticleFX extends EntityFX {
 			setExpired();
 
 		setParticleTextureIndex(7 - particleAge * 8 / particleMaxAge);
-		moveEntity(xSpeed, ySpeed, zSpeed);
+		moveEntity(motionX, motionY, motionZ);
 
 		if (posY == prevPosY)
 		{
-			xSpeed *= 1.1D;
-			zSpeed *= 1.1D;
+			motionX *= 1.1D;
+			motionZ *= 1.1D;
 		}
 
-		xSpeed *= 0.9599999785423279D;
-		ySpeed *= 0.9599999785423279D;
-		zSpeed *= 0.9599999785423279D;
+		motionX *= 0.9599999785423279D;
+		motionY *= 0.9599999785423279D;
+		motionZ *= 0.9599999785423279D;
 
 		if (isCollided)
 		{
-			xSpeed *= 0.699999988079071D;
-			zSpeed *= 0.699999988079071D;
+			motionX *= 0.699999988079071D;
+			motionZ *= 0.699999988079071D;
 		}
 	}
 }

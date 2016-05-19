@@ -87,31 +87,31 @@ public class EntitySkeletonGoliath extends EntityMob {
 	@Override
 	protected SoundEvent getAmbientSound()
 	{
-		return SoundEvents.entity_skeleton_ambient;
+		return SoundEvents.ENTITY_SKELETON_AMBIENT;
 	}
 
 	@Override
 	protected SoundEvent getHurtSound()
 	{
-		return SoundEvents.entity_skeleton_hurt;
+		return SoundEvents.ENTITY_SKELETON_HURT;
 	}
 
 	@Override
 	protected SoundEvent getDeathSound()
 	{
-		return SoundEvents.entity_skeleton_death;
+		return SoundEvents.ENTITY_SKELETON_DEATH;
 	}
 
 	@Override
 	protected void playStepSound(BlockPos pos, Block par4)
 	{
-		playSound(SoundEvents.entity_skeleton_step, 0.15F, 1.0F);
+		playSound(SoundEvents.ENTITY_SKELETON_STEP, 0.15F, 1.0F);
 	}
 
 	@Override
 	protected Item getDropItem()
 	{
-		return Items.bone;
+		return Items.BONE;
 	}
 
 	@Override

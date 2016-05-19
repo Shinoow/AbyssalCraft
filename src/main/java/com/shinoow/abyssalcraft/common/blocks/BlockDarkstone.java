@@ -25,9 +25,9 @@ import com.shinoow.abyssalcraft.api.block.ACBlocks;
 public class BlockDarkstone extends Block {
 
 	public BlockDarkstone(){
-		super(Material.rock);
+		super(Material.ROCK);
 		setCreativeTab(AbyssalCraft.tabBlock);
-		setStepSound(SoundType.STONE);
+		setSoundType(SoundType.STONE);
 	}
 
 	@Override

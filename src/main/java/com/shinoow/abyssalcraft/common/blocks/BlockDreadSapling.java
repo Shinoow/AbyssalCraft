@@ -31,7 +31,7 @@ import com.shinoow.abyssalcraft.common.world.gen.WorldGenDrT;
 public class BlockDreadSapling extends BlockSapling {
 
 	public BlockDreadSapling() {
-		setStepSound(SoundType.PLANT);
+		setSoundType(SoundType.PLANT);
 		setCreativeTab(AbyssalCraft.tabDecoration);
 	}
 
@@ -39,7 +39,7 @@ public class BlockDreadSapling extends BlockSapling {
 	{
 		if (!net.minecraftforge.event.terraingen.TerrainGen.saplingGrowTree(world, rand, pos)) return;
 
-		world.setBlockState(pos, Blocks.air.getDefaultState(), 1);
+		world.setBlockState(pos, Blocks.AIR.getDefaultState(), 1);
 		Object obj = new WorldGenDrT(true);
 		if(!((WorldGenerator) obj).generate(world, rand, pos))
 			world.setBlockState(pos, getDefaultState(), 4);

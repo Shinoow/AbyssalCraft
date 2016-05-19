@@ -26,13 +26,13 @@ public class BlockACFence extends BlockFence {
 		super(par3Material, par3Material.getMaterialMapColor());
 		setCreativeTab(AbyssalCraft.tabDecoration);
 		this.setHarvestLevel(par4, par5);
-		setStepSound(stepSound);
+		setSoundType(stepSound);
 	}
 
 	public BlockACFence(Material par3Material, SoundType stepSound) {
 		super(par3Material, par3Material.getMaterialMapColor());
 		setCreativeTab(AbyssalCraft.tabDecoration);
-		setStepSound(stepSound);
+		setSoundType(stepSound);
 	}
 
 	@Override

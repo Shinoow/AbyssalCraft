@@ -14,15 +14,14 @@ package com.shinoow.abyssalcraft.common.inventory;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
-import net.minecraft.inventory.ICrafting;
+import net.minecraft.inventory.IContainerListener;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import com.shinoow.abyssalcraft.api.recipe.TransmutatorRecipes;
 import com.shinoow.abyssalcraft.common.blocks.tile.TileEntityTransmutator;
-
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ContainerTransmutator extends Container {
 
@@ -48,12 +47,12 @@ public class ContainerTransmutator extends Container {
 	}
 
 	@Override
-	public void onCraftGuiOpened(ICrafting par1ICrafting)
-	{
-		super.onCraftGuiOpened(par1ICrafting);
-		par1ICrafting.sendProgressBarUpdate(this, 0, tileTransmutator.transmutatorProcessTime);
-		par1ICrafting.sendProgressBarUpdate(this, 1, tileTransmutator.transmutatorBurnTime);
-		par1ICrafting.sendProgressBarUpdate(this, 2, tileTransmutator.currentItemBurnTime);
+	public void addListener(IContainerListener listener)
+    {
+        super.addListener(listener);
+		listener.sendProgressBarUpdate(this, 0, tileTransmutator.transmutatorProcessTime);
+		listener.sendProgressBarUpdate(this, 1, tileTransmutator.transmutatorBurnTime);
+		listener.sendProgressBarUpdate(this, 2, tileTransmutator.currentItemBurnTime);
 	}
 
 	@Override
@@ -61,9 +60,9 @@ public class ContainerTransmutator extends Container {
 	{
 		super.detectAndSendChanges();
 
-		for (int i = 0; i < crafters.size(); ++i)
+		for (int i = 0; i < listeners.size(); ++i)
 		{
-			ICrafting icrafting = crafters.get(i);
+			IContainerListener icrafting = listeners.get(i);
 
 			if (lastProcessTime != tileTransmutator.transmutatorProcessTime)
 				icrafting.sendProgressBarUpdate(this, 0, tileTransmutator.transmutatorProcessTime);

@@ -32,7 +32,7 @@ public class NecronomiconDreadSpawnRitual extends NecronomiconRitual {
 
 	public NecronomiconDreadSpawnRitual() {
 		super("dreadSpawn", 2, 500F, new Object[]{ACItems.dread_fragment, ACBlocks.dreadstone, ACBlocks.abyssalnite_stone, ACItems.chunk_of_abyssalnite,
-				ACItems.dreaded_chunk_of_abyssalnite, Items.rotten_flesh, ACItems.dreaded_shard_of_abyssalnite, ACItems.abyssalnite_ingot});
+				ACItems.dreaded_chunk_of_abyssalnite, Items.ROTTEN_FLESH, ACItems.dreaded_shard_of_abyssalnite, ACItems.abyssalnite_ingot});
 	}
 
 	@Override

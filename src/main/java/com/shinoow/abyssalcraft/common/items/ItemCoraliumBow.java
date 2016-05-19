@@ -127,11 +127,11 @@ public class ItemCoraliumBow extends ItemBow {
 		list.add(I18n.translateToLocal("tooltip.corbow.2"));
 	}
 
-	private ItemStack func_185060_a(EntityPlayer player)
+	private ItemStack findAmmo(EntityPlayer player)
 	{
-		if (func_185058_h_(player.getHeldItem(EnumHand.OFF_HAND)))
+		if (isArrow(player.getHeldItem(EnumHand.OFF_HAND)))
 			return player.getHeldItem(EnumHand.OFF_HAND);
-		else if (func_185058_h_(player.getHeldItem(EnumHand.MAIN_HAND)))
+		else if (isArrow(player.getHeldItem(EnumHand.MAIN_HAND)))
 			return player.getHeldItem(EnumHand.MAIN_HAND);
 		else
 		{
@@ -139,7 +139,7 @@ public class ItemCoraliumBow extends ItemBow {
 			{
 				ItemStack itemstack = player.inventory.getStackInSlot(i);
 
-				if (func_185058_h_(itemstack))
+				if (isArrow(itemstack))
 					return itemstack;
 			}
 
@@ -156,8 +156,8 @@ public class ItemCoraliumBow extends ItemBow {
 		if(par3EntityLivingBase instanceof EntityPlayer){
 
 			EntityPlayer player = (EntityPlayer) par3EntityLivingBase;
-			boolean flag = player.capabilities.isCreativeMode || EnchantmentHelper.getEnchantmentLevel(Enchantments.infinity, par1ItemStack) > 0;
-			ItemStack itemstack = func_185060_a(player);
+			boolean flag = player.capabilities.isCreativeMode || EnchantmentHelper.getEnchantmentLevel(Enchantments.INFINITY, par1ItemStack) > 0;
+			ItemStack itemstack = findAmmo(player);
 
 
 			int i = getMaxItemUseDuration(par1ItemStack) - par4;
@@ -167,9 +167,9 @@ public class ItemCoraliumBow extends ItemBow {
 			if (itemstack != null || flag)
 			{
 				if (itemstack == null)
-					itemstack = new ItemStack(Items.arrow);
+					itemstack = new ItemStack(Items.ARROW);
 
-				float f = func_185059_b(i);
+				float f = getArrowVelocity(i);
 
 				if (f >= 0.1D)
 				{
@@ -178,33 +178,33 @@ public class ItemCoraliumBow extends ItemBow {
 					if (!par2World.isRemote)
 					{
 						EntityCoraliumArrow entityarrow = new EntityCoraliumArrow(par2World, player);
-						entityarrow.func_184547_a(player, player.rotationPitch, player.rotationYaw, 0.0F, f * 3.0F, 1.0F);
+						entityarrow.setAim(player, player.rotationPitch, player.rotationYaw, 0.0F, f * 3.0F, 1.0F);
 
 						if (f == 1.0F)
 							entityarrow.setIsCritical(true);
 
-						int j = EnchantmentHelper.getEnchantmentLevel(Enchantments.power, par1ItemStack);
+						int j = EnchantmentHelper.getEnchantmentLevel(Enchantments.POWER, par1ItemStack);
 
 						if (j > 0)
 							entityarrow.setDamage(entityarrow.getDamage() + j * 0.5D + 0.5D);
 
-						int k = EnchantmentHelper.getEnchantmentLevel(Enchantments.punch, par1ItemStack);
+						int k = EnchantmentHelper.getEnchantmentLevel(Enchantments.PUNCH, par1ItemStack);
 
 						if (k > 0)
 							entityarrow.setKnockbackStrength(k);
 
-						if (EnchantmentHelper.getEnchantmentLevel(Enchantments.flame, par1ItemStack) > 0)
+						if (EnchantmentHelper.getEnchantmentLevel(Enchantments.FLAME, par1ItemStack) > 0)
 							entityarrow.setFire(100);
 
 						par1ItemStack.damageItem(1, player);
 
 						if (flag1)
-							entityarrow.canBePickedUp = EntityArrow.PickupStatus.CREATIVE_ONLY;
+							entityarrow.pickupStatus = EntityArrow.PickupStatus.CREATIVE_ONLY;
 
 						par2World.spawnEntityInWorld(entityarrow);
 					}
 
-					par2World.playSound((EntityPlayer)null, player.posX, player.posY, player.posZ, SoundEvents.entity_arrow_shoot, SoundCategory.NEUTRAL, 1.0F, 1.0F / (itemRand.nextFloat() * 0.4F + 1.2F) + f * 0.5F);
+					par2World.playSound((EntityPlayer)null, player.posX, player.posY, player.posZ, SoundEvents.ENTITY_ARROW_SHOOT, SoundCategory.NEUTRAL, 1.0F, 1.0F / (itemRand.nextFloat() * 0.4F + 1.2F) + f * 0.5F);
 
 					if (!flag1)
 					{
@@ -214,7 +214,7 @@ public class ItemCoraliumBow extends ItemBow {
 							player.inventory.deleteStack(itemstack);
 					}
 
-					player.addStat(StatList.func_188057_b(this));
+					player.addStat(StatList.getObjectUseStats(this));
 				}
 			}
 		}
@@ -245,7 +245,7 @@ public class ItemCoraliumBow extends ItemBow {
 	public ActionResult<ItemStack> onItemRightClick(ItemStack par1ItemStack, World par2World, EntityPlayer par3EntityPlayer, EnumHand hand)
 	{
 
-		boolean flag = func_185060_a(par3EntityPlayer) != null;
+		boolean flag = findAmmo(par3EntityPlayer) != null;
 
 		ActionResult<ItemStack> ret = ForgeEventFactory.onArrowNock(par1ItemStack, par2World, par3EntityPlayer, hand, flag);
 		if(ret != null) return ret;

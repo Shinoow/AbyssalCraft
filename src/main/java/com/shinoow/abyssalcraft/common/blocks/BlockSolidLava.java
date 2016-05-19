@@ -24,7 +24,7 @@ import com.shinoow.abyssalcraft.AbyssalCraft;
 public class BlockSolidLava extends BlockACBasic {
 
 	public BlockSolidLava(String par1) {
-		super(Material.lava, "pickaxe", 2, 10F, 100F, SoundType.STONE);
+		super(Material.LAVA, "pickaxe", 2, 10F, 100F, SoundType.STONE);
 		setUnlocalizedName(par1);
 		//		setBlockTextureName("lava_still");
 		setCreativeTab(AbyssalCraft.tabDecoration);

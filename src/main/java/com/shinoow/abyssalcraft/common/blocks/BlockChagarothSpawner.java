@@ -23,7 +23,7 @@ import com.shinoow.abyssalcraft.common.blocks.tile.TileEntityChagarothSpawner;
 public class BlockChagarothSpawner extends BlockContainer {
 
 	public BlockChagarothSpawner() {
-		super(Material.rock);
+		super(Material.ROCK);
 	}
 
 	@Override

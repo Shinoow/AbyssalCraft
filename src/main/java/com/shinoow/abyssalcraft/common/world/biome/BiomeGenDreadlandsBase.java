@@ -19,7 +19,7 @@ import net.minecraft.block.state.pattern.BlockMatcher;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraft.world.biome.BiomeGenBase;
+import net.minecraft.world.biome.Biome;
 import net.minecraft.world.chunk.ChunkPrimer;
 import net.minecraft.world.gen.feature.WorldGenMinable;
 import net.minecraftforge.fml.relauncher.Side;
@@ -38,7 +38,7 @@ import com.shinoow.abyssalcraft.common.entity.EntityGreaterDreadSpawn;
 import com.shinoow.abyssalcraft.common.entity.EntityLesserDreadbeast;
 import com.shinoow.abyssalcraft.common.entity.demon.EntityDemonPig;
 
-public class BiomeGenDreadlandsBase extends BiomeGenBase implements IDreadlandsBiome {
+public class BiomeGenDreadlandsBase extends Biome implements IDreadlandsBiome {
 
 	@SuppressWarnings("unchecked")
 	public BiomeGenDreadlandsBase(BiomeProperties par1) {
@@ -127,12 +127,12 @@ public class BiomeGenDreadlandsBase extends BiomeGenBase implements IDreadlandsB
 
 		for (int j1 = 255; j1 >= 0; --j1)
 			if (j1 <= rand.nextInt(5))
-				chunkPrimerIn.setBlockState(i1, j1, l, Blocks.bedrock.getDefaultState());
+				chunkPrimerIn.setBlockState(i1, j1, l, Blocks.BEDROCK.getDefaultState());
 			else
 			{
 				IBlockState iblockstate2 = chunkPrimerIn.getBlockState(i1, j1, l);
 
-				if (iblockstate2.getMaterial() == Material.air)
+				if (iblockstate2.getMaterial() == Material.AIR)
 					j = -1;
 				else if (iblockstate2.getBlock() == ACBlocks.dreadstone)
 					if (j == -1)

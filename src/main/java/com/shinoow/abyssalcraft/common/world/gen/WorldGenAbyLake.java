@@ -92,7 +92,7 @@ public class WorldGenAbyLake extends WorldGenerator
 				for (int i3 = 0; i3 < 16; ++i3)
 					for (int i4 = 0; i4 < 8; ++i4)
 						if (aboolean[(l1 * 16 + i3) * 8 + i4])
-							worldIn.setBlockState(position.add(l1, i4, i3), i4 >= 4 ? Blocks.air.getDefaultState() : blockIndex.getDefaultState(), 2);
+							worldIn.setBlockState(position.add(l1, i4, i3), i4 >= 4 ? Blocks.AIR.getDefaultState() : blockIndex.getDefaultState(), 2);
 
 			for (int i2 = 0; i2 < 16; ++i2)
 				for (int j3 = 0; j3 < 16; ++j3)

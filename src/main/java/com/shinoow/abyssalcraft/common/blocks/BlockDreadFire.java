@@ -35,7 +35,7 @@ public class BlockDreadFire extends Block {
 
 	public BlockDreadFire()
 	{
-		super(Material.fire);
+		super(Material.FIRE);
 		setTickRandomly(true);
 	}
 
@@ -52,7 +52,7 @@ public class BlockDreadFire extends Block {
 	}
 
 	@Override
-	public void onNeighborBlockChange(World worldIn, BlockPos pos, IBlockState state, Block neighborBlock)
+	public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block neighborBlock)
 	{
 		if(!worldIn.getBlockState(pos.down()).isSideSolid(worldIn, pos.down(), EnumFacing.UP))
 			worldIn.setBlockToAir(pos);
@@ -108,8 +108,8 @@ public class BlockDreadFire extends Block {
 	}
 
 	@Override
-	public void onEntityCollidedWithBlock(World par1World, BlockPos pos, Entity par5Entity) {
-		super.onEntityCollidedWithBlock(par1World, pos, par5Entity);
+	public void onEntityCollidedWithBlock(World par1World, BlockPos pos, IBlockState state, Entity par5Entity) {
+		super.onEntityCollidedWithBlock(par1World, pos, state, par5Entity);
 
 		if(par5Entity instanceof EntityLivingBase)
 			if((EntityLivingBase)par5Entity instanceof IDreadEntity){}

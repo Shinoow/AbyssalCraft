@@ -23,7 +23,7 @@ import com.shinoow.abyssalcraft.common.blocks.tile.TileEntityDreadguardSpawner;
 public class BlockDreadguardSpawner extends BlockContainer {
 
 	public BlockDreadguardSpawner() {
-		super(Material.rock);
+		super(Material.ROCK);
 	}
 
 	@Override

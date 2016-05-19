@@ -12,7 +12,7 @@
 package com.shinoow.abyssalcraft.client.lib;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.particle.EntityFX;
+import net.minecraft.client.particle.Particle;
 import net.minecraft.world.World;
 
 import com.shinoow.abyssalcraft.client.ACParticleFX;
@@ -21,7 +21,7 @@ public class ParticleEffects {
 
 	private static Minecraft mc = Minecraft.getMinecraft();
 	private static World theWorld = mc.theWorld;
-	public static EntityFX spawnParticle(String particleName, double par2, double par4, double par6, double par8, double par10, double par12)
+	public static Particle spawnParticle(String particleName, double par2, double par4, double par6, double par8, double par10, double par12)
 	{
 		if (mc != null && mc.getRenderViewEntity() != null && mc.effectRenderer != null)
 		{
@@ -33,7 +33,7 @@ public class ParticleEffects {
 			double var15 = mc.getRenderViewEntity().posX - par2;
 			double var17 = mc.getRenderViewEntity().posY - par4;
 			double var19 = mc.getRenderViewEntity().posZ - par6;
-			EntityFX var21 = null;
+			Particle var21 = null;
 			double var22 = 16.0D;
 
 			if (var15 * var15 + var17 * var17 + var19 * var19 > var22 * var22)

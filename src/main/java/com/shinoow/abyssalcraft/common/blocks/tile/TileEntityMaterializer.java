@@ -161,7 +161,7 @@ public class TileEntityMaterializer extends TileEntity implements ISidedInventor
 	}
 
 	@Override
-	public void writeToNBT(NBTTagCompound par1)
+	public NBTTagCompound writeToNBT(NBTTagCompound par1)
 	{
 		super.writeToNBT(par1);
 		NBTTagList nbttaglist = new NBTTagList();
@@ -179,6 +179,8 @@ public class TileEntityMaterializer extends TileEntity implements ISidedInventor
 
 		if (hasCustomName())
 			par1.setString("CustomName", containerName);
+		
+		return par1;
 	}
 
 	/**

@@ -30,15 +30,14 @@ package com.shinoow.abyssalcraft.common.inventory;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
-import net.minecraft.inventory.ICrafting;
+import net.minecraft.inventory.IContainerListener;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import com.shinoow.abyssalcraft.api.recipe.CrystallizerRecipes;
 import com.shinoow.abyssalcraft.common.blocks.tile.TileEntityCrystallizer;
-
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ContainerCrystallizer extends Container {
 
@@ -66,13 +65,13 @@ public class ContainerCrystallizer extends Container {
 	}
 
 	@Override
-	public void onCraftGuiOpened(ICrafting par1ICrafting)
-	{
-		super.onCraftGuiOpened(par1ICrafting);
-		par1ICrafting.sendProgressBarUpdate(this, 0, tileCrystallizer.crystallizerFormTime);
-		par1ICrafting.sendProgressBarUpdate(this, 1, tileCrystallizer.crystallizerShapeTime);
-		par1ICrafting.sendProgressBarUpdate(this, 2, tileCrystallizer.currentItemShapingTime);
-		par1ICrafting.sendProgressBarUpdate(this, 3, tileCrystallizer.crystallizerFormTime);
+	public void addListener(IContainerListener listener)
+    {
+        super.addListener(listener);
+		listener.sendProgressBarUpdate(this, 0, tileCrystallizer.crystallizerFormTime);
+		listener.sendProgressBarUpdate(this, 1, tileCrystallizer.crystallizerShapeTime);
+		listener.sendProgressBarUpdate(this, 2, tileCrystallizer.currentItemShapingTime);
+		listener.sendProgressBarUpdate(this, 3, tileCrystallizer.crystallizerFormTime);
 	}
 
 	@Override
@@ -80,9 +79,9 @@ public class ContainerCrystallizer extends Container {
 	{
 		super.detectAndSendChanges();
 
-		for (int i = 0; i < crafters.size(); ++i)
+		for (int i = 0; i < listeners.size(); ++i)
 		{
-			ICrafting icrafting = crafters.get(i);
+			IContainerListener icrafting = listeners.get(i);
 
 			if (lastCookTime != tileCrystallizer.crystallizerFormTime)
 				icrafting.sendProgressBarUpdate(this, 0, tileCrystallizer.crystallizerFormTime);
