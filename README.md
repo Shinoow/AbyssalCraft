@@ -32,5 +32,27 @@ Contributions are welcome. Most contributions might end up being tweaks and impr
 
 ### Integrations
 
-If you are looking into developing AbyssalCraft Add-ons (eventhough the API isn't complete), or just want to integrate
-it into your mod, check the `dev` branch for compiled mod jars that can be imported into your workspace. It is, of course, also possible to only use the API by itself, in which case you can download the API alone from the `dev` branch, then just extract the contents of the zip file into src/api/java.
+If you want to import AbyssalCraft into your workspace, add the following to the `repositories` block of your **build.gradle**:
+
+```
+repositories {
+  ...
+  maven {
+      name 'shinoow'
+      url 'https://dl.bintray.com/shinoow/maven/'
+  }
+}
+```
+
+Then, in your `dependencies` block, add this:
+
+``` 
+dependencies {
+  deobfCompile "com.shinoow.abyssalcraft:Abyssalcraft:<mcversion>-<acversion>"
+}
+```
+
+Where `mcversion` is the Minecraft version you wish to use, and `acversion` is the AbyssalCraft version you wish to use.
+However, this only works for any AbyssalCraft **1.9.1.6** (version where I finally set up a maven repo) and up, and only for Minecraft **1.8.9**, **1.9** and **1.9.4**.
+
+If you are looking for previous versions of the mod (or Minecraft versions) to integrate, then check the `dev` branch (as I've uploaded deobfuscated jar files there, along with ones containing source code and zip folders containing the API package). The jar files can be imported into your workspace, and the contents of the zip folder can be extracted into `src/api/java`.
