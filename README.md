@@ -48,11 +48,11 @@ Then, in your `dependencies` block, add this:
 
 ``` 
 dependencies {
-  deobfCompile "com.shinoow.abyssalcraft:Abyssalcraft:<mcversion>-<acversion>"
+  deobfCompile "com.shinoow.abyssalcraft:Abyssalcraft:<mcversion>-<acversion>:<classifier>"
 }
 ```
 
-Where `mcversion` is the Minecraft version you wish to use, and `acversion` is the AbyssalCraft version you wish to use.
+Where `mcversion` is the Minecraft version you wish to use, `acversion` is the AbyssalCraft version you wish to use, and `classifier` denotes which type of file (eg. "dev" for a deobfuscated jar file, "src" for a jar file with source code or "api" for a zip folder contanining the API package) to download from the maven repo.
 However, this only works for AbyssalCraft **1.9.1.6** (version where I finally set up a maven repo) and up, and only for Minecraft **1.8.9**, **1.9** and **1.9.4**.
 
 If you are looking for previous versions of the mod (or Minecraft versions) to integrate, then check the `dev` branch (as I've uploaded deobfuscated jar files there, along with ones containing source code and zip folders containing the API package). The jar files can be imported into your workspace, and the contents of the zip folder can be extracted into `src/api/java`.
