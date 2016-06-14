@@ -37,8 +37,8 @@ import net.minecraft.world.Explosion;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.common.entity.EntityODBcPrimed;
+import com.shinoow.abyssalcraft.lib.ACTabs;
 
 public class BlockODBcore extends Block {
 
@@ -47,9 +47,8 @@ public class BlockODBcore extends Block {
 	public BlockODBcore() {
 		super(Material.iron);
 		setDefaultState(blockState.getBaseState().withProperty(EXPLODE, Boolean.valueOf(false)));
-		setCreativeTab(AbyssalCraft.tabBlock);
+		setCreativeTab(ACTabs.tabBlock);
 		setHarvestLevel("pickaxe", 3);
-		//		setBlockBounds(0.25F, 0.0F, 0.25F, 0.75F, 1.0F, 0.75F);
 		setStepSound(SoundType.METAL);
 	}
 

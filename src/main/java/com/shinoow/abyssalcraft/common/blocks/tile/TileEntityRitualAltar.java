@@ -11,6 +11,10 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.common.blocks.tile;
 
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.EnumCreatureAttribute;
+import net.minecraft.entity.effect.EntityLightningBolt;
+import net.minecraft.entity.passive.EntityVillager;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -18,6 +22,7 @@ import net.minecraft.network.NetworkManager;
 import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.math.AxisAlignedBB;
@@ -25,13 +30,15 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 
-import com.shinoow.abyssalcraft.api.energy.IEnergyTransporter;
+import com.shinoow.abyssalcraft.api.energy.IEnergyTransporterItem;
+import com.shinoow.abyssalcraft.api.energy.disruption.DisruptionHandler;
+import com.shinoow.abyssalcraft.api.entity.EntityUtil;
 import com.shinoow.abyssalcraft.api.event.ACEvents.RitualEvent;
 import com.shinoow.abyssalcraft.api.ritual.NecronomiconRitual;
 import com.shinoow.abyssalcraft.api.ritual.RitualRegistry;
 import com.shinoow.abyssalcraft.common.entity.EntityRemnant;
 import com.shinoow.abyssalcraft.common.items.ItemNecronomicon;
-import com.shinoow.abyssalcraft.common.util.IRitualAltar;
+import com.shinoow.abyssalcraft.lib.util.blocks.IRitualAltar;
 
 public class TileEntityRitualAltar extends TileEntity implements ITickable, IRitualAltar {
 
@@ -94,10 +101,10 @@ public class TileEntityRitualAltar extends TileEntity implements ITickable, IRit
 			if(ritual != null){
 				if(user != null){
 					for(ItemStack item : user.inventory.mainInventory)
-						if(item != null && item.getItem() instanceof IEnergyTransporter &&
-						((IEnergyTransporter) item.getItem()).getContainedEnergy(item) > 0){
+						if(item != null && item.getItem() instanceof IEnergyTransporterItem &&
+						((IEnergyTransporterItem) item.getItem()).canTransferPEExternally(item) && ((IEnergyTransporterItem) item.getItem()).getContainedEnergy(item) > 0){
 							if(!worldObj.isRemote)
-								((IEnergyTransporter) item.getItem()).consumeEnergy(item, ritual.getReqEnergy()/200);
+								((IEnergyTransporterItem) item.getItem()).consumeEnergy(item, ritual.getReqEnergy()/200);
 							consumedEnergy += ritual.getReqEnergy()/200;
 							break;
 						}
@@ -106,15 +113,20 @@ public class TileEntityRitualAltar extends TileEntity implements ITickable, IRit
 					if(user != null){
 						if(!MinecraftForge.EVENT_BUS.post(new RitualEvent.Post(user, ritual, worldObj, pos))){
 							for(ItemStack item : user.inventory.mainInventory)
-								if(item != null && item.getItem() instanceof IEnergyTransporter &&
-								((IEnergyTransporter) item.getItem()).getContainedEnergy(item) > 0){
+								if(item != null && item.getItem() instanceof IEnergyTransporterItem &&
+								((IEnergyTransporterItem) item.getItem()).canTransferPEExternally(item) && ((IEnergyTransporterItem) item.getItem()).getContainedEnergy(item) > 0){
 									if(!worldObj.isRemote)
-										((IEnergyTransporter) item.getItem()).consumeEnergy(item, ritual.getReqEnergy()/200);
+										((IEnergyTransporterItem) item.getItem()).consumeEnergy(item, ritual.getReqEnergy()/200);
 									consumedEnergy += ritual.getReqEnergy()/200;
 									break;
 								}
 							if(consumedEnergy == ritual.getReqEnergy())
 								ritual.completeRitual(worldObj, pos, user);
+							else {
+								if(!worldObj.isRemote)
+									worldObj.addWeatherEffect(new EntityLightningBolt(worldObj, pos.getX(), pos.getY() + 1, pos.getZ(), false));
+								DisruptionHandler.instance().generateDisruption(null, worldObj, pos, worldObj.getEntitiesWithinAABB(EntityPlayer.class, new AxisAlignedBB(pos).expand(16, 16, 16)));
+							}
 							ritualTimer = 0;
 							user = null;
 							ritual = null;
@@ -122,6 +134,9 @@ public class TileEntityRitualAltar extends TileEntity implements ITickable, IRit
 							isDirty = true;
 						}
 					} else {
+						if(!worldObj.isRemote)
+							worldObj.addWeatherEffect(new EntityLightningBolt(worldObj, pos.getX(), pos.getY() + 1, pos.getZ(), false));
+						DisruptionHandler.instance().generateDisruption(null, worldObj, pos, worldObj.getEntitiesWithinAABB(EntityPlayer.class, new AxisAlignedBB(pos).expand(16, 16, 16)));
 						ritualTimer = 0;
 						ritual = null;
 						consumedEnergy = 0;
@@ -251,18 +266,24 @@ public class TileEntityRitualAltar extends TileEntity implements ITickable, IRit
 					if(canPerform()){
 						ritual = RitualRegistry.instance().getRitual(world.provider.getDimension(), ((ItemNecronomicon)item.getItem()).getBookType(), offers, this.item);
 						if(ritual != null)
-							if(ritual.canRemnantAid()){
-								if(!world.getEntitiesWithinAABB(EntityRemnant.class, new AxisAlignedBB(pos).expand(32, 32, 32)).isEmpty()
-										&& world.getEntitiesWithinAABB(EntityRemnant.class, new AxisAlignedBB(pos).expand(32, 32, 32)).size() >= ritual.getBookType() + 1)
-									if(ritual.canCompleteRitual(world, pos, player))
-										if(!MinecraftForge.EVENT_BUS.post(new RitualEvent.Pre(player, ritual, world, pos))){
-											//											summonRemnants(world, pos);
-											ritualTimer = 1;
-											resetPedestals(world, pos);
-											user = player;
-											consumedEnergy = 0;
-											isDirty = true;
-										}
+							if(ritual.requiresSacrifice()){
+								if(!world.getEntitiesWithinAABB(EntityLivingBase.class, new AxisAlignedBB(pos, pos.add(1, 1, 1)).expand(4, 4, 4)).isEmpty())
+									for(EntityLivingBase mob : world.getEntitiesWithinAABB(EntityLivingBase.class, new AxisAlignedBB(pos, pos.add(1, 1, 1)).expand(4, 4, 4)))
+										if(canBeSacrificed(mob))
+											if(!world.getEntitiesWithinAABB(EntityRemnant.class, new AxisAlignedBB(pos).expand(32, 32, 32)).isEmpty()
+													&& world.getEntitiesWithinAABB(EntityRemnant.class, new AxisAlignedBB(pos).expand(32, 32, 32)).size() >= ritual.getBookType() + 1)
+												if(ritual.canCompleteRitual(world, pos, player))
+													if(!MinecraftForge.EVENT_BUS.post(new RitualEvent.Pre(player, ritual, world, pos))){
+														if(!world.isRemote){
+															mob.attackEntityFrom(DamageSource.magic, mob.getMaxHealth()*100);
+															world.addWeatherEffect(new EntityLightningBolt(worldObj, mob.posX, mob.posY, mob.posZ, false));
+														}
+														ritualTimer = 1;
+														resetPedestals(world, pos);
+														user = player;
+														consumedEnergy = 0;
+														isDirty = true;
+													}
 							} else if(ritual.canCompleteRitual(world, pos, player))
 								if(!MinecraftForge.EVENT_BUS.post(new RitualEvent.Pre(player, ritual, world, pos))){
 									ritualTimer = 1;
@@ -275,6 +296,17 @@ public class TileEntityRitualAltar extends TileEntity implements ITickable, IRit
 		}
 	}
 
+	/**
+	 * Checks if a certain Entity can be sacrificed
+	 * @param entity Entity to potentially sacrifice
+	 * @return True if the Entity can be sacrificed, otherwise false
+	 */
+	private boolean canBeSacrificed(EntityLivingBase entity){
+		return !(entity instanceof EntityPlayer) && (EntityUtil.isShoggothFood(entity) || entity instanceof EntityVillager) &&
+				entity.getCreatureAttribute() != EnumCreatureAttribute.UNDEAD &&
+				entity.isEntityAlive() && !entity.isChild();
+	}
+
 	@Override
 	public int getRitualCooldown(){
 		return ritualTimer;
@@ -285,6 +317,7 @@ public class TileEntityRitualAltar extends TileEntity implements ITickable, IRit
 		return ritualTimer < 200 && ritualTimer > 0;
 	}
 
+	@Override
 	public int getRotation(){
 		return rot;
 	}
@@ -296,7 +329,7 @@ public class TileEntityRitualAltar extends TileEntity implements ITickable, IRit
 
 	@Override
 	public void setItem(ItemStack item){
-		isDirty = true;
 		this.item = item;
+		isDirty = true;
 	}
 }

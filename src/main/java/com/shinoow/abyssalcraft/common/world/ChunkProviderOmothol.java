@@ -53,14 +53,6 @@ public class ChunkProviderOmothol implements IChunkGenerator
 		noiseGen3 = new NoiseGeneratorOctaves(rand, 8);
 		noiseGen4 = new NoiseGeneratorOctaves(rand, 10);
 		noiseGen5 = new NoiseGeneratorOctaves(rand, 16);
-
-		//		NoiseGenerator[] noiseGens = {noiseGen1, noiseGen2, noiseGen3, noiseGen4, noiseGen5};
-		//		noiseGens = TerrainGen.getModdedNoiseGenerators(par1World, rand, noiseGens);
-		//		noiseGen1 = (NoiseGeneratorOctaves)noiseGens[0];
-		//		noiseGen2 = (NoiseGeneratorOctaves)noiseGens[1];
-		//		noiseGen3 = (NoiseGeneratorOctaves)noiseGens[2];
-		//		noiseGen4 = (NoiseGeneratorOctaves)noiseGens[3];
-		//		noiseGen5 = (NoiseGeneratorOctaves)noiseGens[4];
 	}
 
 	public void setBlocksInChunk(int x, int z, ChunkPrimer primer)
@@ -271,12 +263,6 @@ public class ChunkProviderOmothol implements IChunkGenerator
 		return par1ArrayOfDouble;
 	}
 
-	//	@Override
-	//	public boolean chunkExists(int x, int z)
-	//	{
-	//		return true;
-	//	}
-
 	@Override
 	public void populate(int x, int z)
 	{
@@ -303,33 +289,6 @@ public class ChunkProviderOmothol implements IChunkGenerator
 		BlockFalling.fallInstantly = false;
 	}
 
-	//	@Override
-	//	public boolean saveChunks(boolean par1, IProgressUpdate par2IProgressUpdate)
-	//	{
-	//		return true;
-	//	}
-
-	//	@Override
-	//	public void saveExtraData() {}
-
-	//	@Override
-	//	public boolean unloadQueuedChunks()
-	//	{
-	//		return false;
-	//	}
-
-	//	@Override
-	//	public boolean canSave()
-	//	{
-	//		return true;
-	//	}
-
-	//	@Override
-	//	public String makeString()
-	//	{
-	//		return "ACLevelSource";
-	//	}
-
 	@Override
 	@SuppressWarnings("rawtypes")
 	public List getPossibleCreatures(EnumCreatureType par1EnumCreatureType, BlockPos pos)
@@ -344,12 +303,6 @@ public class ChunkProviderOmothol implements IChunkGenerator
 		return null;
 	}
 
-	//	@Override
-	//	public int getLoadedChunkCount()
-	//	{
-	//		return 0;
-	//	}
-
 	@Override
 	public void recreateStructures(Chunk chunk, int x, int z) {
 
@@ -359,20 +312,7 @@ public class ChunkProviderOmothol implements IChunkGenerator
 
 	@Override
 	public boolean generateStructures(Chunk chunkIn, int x, int z) {
-		// TODO Auto-generated method stub
+
 		return false;
 	}
-
-	//	@Override
-	//	public Chunk provideChunk(BlockPos blockPosIn) {
-	//
-	//		return provideChunk(blockPosIn.getX() >> 4, blockPosIn.getZ() >> 4);
-	//	}
-
-	//	@Override
-	//	public boolean func_177460_a(IChunkProvider p_177460_1_, Chunk p_177460_2_,
-	//			int p_177460_3_, int p_177460_4_) {
-	//
-	//		return false;
-	//	}
 }

@@ -30,10 +30,6 @@ public abstract class GenLayerDL extends GenLayer
 		biomes = new GenLayerZoom(1002L, biomes);
 		biomes = new GenLayerZoom(1003L, biomes);
 		biomes = new GenLayerZoom(1004L, biomes);
-		biomes = new GenLayerZoom(1005L, biomes);
-
-
-
 
 		GenLayer genlayervoronoizoom = new GenLayerVoronoiZoom(10L, biomes);
 

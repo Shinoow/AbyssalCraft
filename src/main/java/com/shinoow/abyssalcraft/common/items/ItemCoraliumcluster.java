@@ -20,7 +20,7 @@ import net.minecraft.util.text.translation.I18n;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import com.shinoow.abyssalcraft.AbyssalCraft;
+import com.shinoow.abyssalcraft.lib.ACTabs;
 
 public class ItemCoraliumcluster extends Item {
 
@@ -30,9 +30,8 @@ public class ItemCoraliumcluster extends Item {
 		super();
 		gemName = par2Str;
 		maxStackSize = 16;
-		//		GameRegistry.registerItem(this, name);
 		setUnlocalizedName(name);
-		setCreativeTab(AbyssalCraft.tabItems);
+		setCreativeTab(ACTabs.tabItems);
 	}
 
 	@Override

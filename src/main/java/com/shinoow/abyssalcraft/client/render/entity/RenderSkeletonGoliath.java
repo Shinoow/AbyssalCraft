@@ -25,27 +25,18 @@ import com.shinoow.abyssalcraft.common.entity.EntitySkeletonGoliath;
 @SideOnly(Side.CLIENT)
 public class RenderSkeletonGoliath extends RenderLiving<EntitySkeletonGoliath> {
 
-	protected ModelSkeletonGoliath model;
-
 	private float scale = 1.5F;
 
 	private static final ResourceLocation mobTexture = new ResourceLocation("abyssalcraft:textures/model/elite/SkeletonGoliath.png");
 
-	public RenderSkeletonGoliath(RenderManager manager, ModelSkeletonGoliath model, float f)
+	public RenderSkeletonGoliath(RenderManager manager)
 	{
-		super(manager, model, f);
-		model = (ModelSkeletonGoliath)mainModel;
+		super(manager, new ModelSkeletonGoliath(true), 0.5F);
 	}
 
 	protected void preRenderScale(EntitySkeletonGoliath par1EntitySkeletonGoliath, float par2)
 	{
 		GL11.glScalef(scale, scale, scale);
-	}
-
-	@Override
-	public void doRender(EntitySkeletonGoliath entity, double par2, double par4, double par6, float par8, float par9)
-	{
-		super.doRender(entity, par2, par4, par6, par8, par9);
 	}
 
 	@Override

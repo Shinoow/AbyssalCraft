@@ -19,7 +19,6 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import com.shinoow.abyssalcraft.client.model.entity.ModelShadowBeast;
-import com.shinoow.abyssalcraft.common.entity.EntityShadowBeast;
 
 @SideOnly(Side.CLIENT)
 public class RenderShadowBeast extends RenderLiving {
@@ -29,11 +28,6 @@ public class RenderShadowBeast extends RenderLiving {
 	public RenderShadowBeast(RenderManager manager)
 	{
 		super(manager, new ModelShadowBeast(), 0.5F);
-	}
-
-	public void doRender(EntityShadowBeast entity, double par2, double par4, double par6, float par8, float par9)
-	{
-		super.doRender(entity, par2, par4, par6, par8, par9);
 	}
 
 	@Override

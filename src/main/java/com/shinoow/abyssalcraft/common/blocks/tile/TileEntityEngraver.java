@@ -16,6 +16,7 @@ import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.text.ITextComponent;
@@ -28,7 +29,7 @@ import com.shinoow.abyssalcraft.api.item.ItemEngraving;
 import com.shinoow.abyssalcraft.api.recipe.EngraverRecipes;
 import com.shinoow.abyssalcraft.common.blocks.BlockEngraver;
 
-public class TileEntityEngraver extends TEDirectional implements ISidedInventory, ITickable {
+public class TileEntityEngraver extends TileEntity implements ISidedInventory, ITickable {
 
 	private static final int[] slotsTop = new int[] {0};
 	private static final int[] slotsBottom = new int[] {2, 1};

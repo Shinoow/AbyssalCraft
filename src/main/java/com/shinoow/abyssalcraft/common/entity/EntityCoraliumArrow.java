@@ -41,7 +41,7 @@ import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
 
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
-import com.shinoow.abyssalcraft.common.util.EntityUtil;
+import com.shinoow.abyssalcraft.api.entity.EntityUtil;
 
 public class EntityCoraliumArrow extends EntityArrow {
 

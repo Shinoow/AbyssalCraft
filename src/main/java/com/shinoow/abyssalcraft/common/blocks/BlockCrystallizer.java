@@ -41,6 +41,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.common.blocks.tile.TileEntityCrystallizer;
+import com.shinoow.abyssalcraft.lib.ACTabs;
 
 public class BlockCrystallizer extends BlockContainer
 {
@@ -57,7 +58,7 @@ public class BlockCrystallizer extends BlockContainer
 		setStepSound(SoundType.STONE);
 		isLit = par1;
 		if(!isLit)
-			setCreativeTab(AbyssalCraft.tabDecoration);
+			setCreativeTab(ACTabs.tabDecoration);
 	}
 
 	@Override
@@ -264,16 +265,6 @@ public class BlockCrystallizer extends BlockContainer
 	{
 		return EnumBlockRenderType.MODEL;
 	}
-
-	//	/**
-	//	 * Possibly modify the given BlockState before rendering it on an Entity (Minecarts, Endermen, ...)
-	//	 */
-	//	@Override
-	//	@SideOnly(Side.CLIENT)
-	//	public IBlockState getStateForEntityRender(IBlockState state)
-	//	{
-	//		return getDefaultState().withProperty(FACING, EnumFacing.SOUTH);
-	//	}
 
 	/**
 	 * Convert the given metadata into a BlockState for this Block

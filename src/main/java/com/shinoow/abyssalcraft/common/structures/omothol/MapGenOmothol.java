@@ -63,37 +63,6 @@ public class MapGenOmothol extends MapGenStructure
 	{
 		if(chunkX == 0 && chunkZ == 0) return true;
 
-		//        int i = chunkX;
-		//        int j = chunkZ;
-		//
-		//        if (chunkX < 0)
-		//        {
-		//            chunkX -= this.field_82665_g - 1;
-		//        }
-		//
-		//        if (chunkZ < 0)
-		//        {
-		//            chunkZ -= this.field_82665_g - 1;
-		//        }
-		//
-		//        int k = chunkX / this.field_82665_g;
-		//        int l = chunkZ / this.field_82665_g;
-		//        Random random = this.worldObj.setRandomSeed(k, l, 10387312);
-		//        k = k * this.field_82665_g;
-		//        l = l * this.field_82665_g;
-		//        k = k + random.nextInt(this.field_82665_g - this.field_82666_h);
-		//        l = l + random.nextInt(this.field_82665_g - this.field_82666_h);
-		//
-		//        if (i == k && j == l)
-		//        {
-		//            boolean flag = this.worldObj.getWorldChunkManager().areBiomesViable(i * 16 + 8, j * 16 + 8, 0, villageSpawnBiomes);
-		//
-		//            if (flag)
-		//            {
-		//                return true;
-		//            }
-		//        }
-
 		return false;
 	}
 

@@ -41,6 +41,7 @@ import net.minecraft.world.World;
 import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.common.blocks.BlockTieredEnergyPedestal.EnumDimType;
 import com.shinoow.abyssalcraft.common.blocks.tile.TileEntityTieredSacrificialAltar;
+import com.shinoow.abyssalcraft.lib.ACTabs;
 
 public class BlockTieredSacrificialAltar extends BlockContainer {
 
@@ -52,9 +53,7 @@ public class BlockTieredSacrificialAltar extends BlockContainer {
 		setResistance(12.0F);
 		setUnlocalizedName("tieredsacrificialaltar");
 		setStepSound(SoundType.STONE);
-		//		setBlockBounds(0.15F, 0.0F, 0.15F, 0.85F, 1.0F, 0.85F);
-		setCreativeTab(AbyssalCraft.tabDecoration);
-		//		setLightLevel(0.375F);
+		setCreativeTab(ACTabs.tabDecoration);
 	}
 
 	@Override

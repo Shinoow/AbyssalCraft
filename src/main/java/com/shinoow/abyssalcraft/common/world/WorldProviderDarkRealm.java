@@ -24,6 +24,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.api.biome.ACBiomes;
+import com.shinoow.abyssalcraft.lib.ACLib;
 
 public class WorldProviderDarkRealm extends WorldProvider {
 
@@ -35,14 +36,9 @@ public class WorldProviderDarkRealm extends WorldProvider {
 	@Override
 	public void registerWorldChunkManager() {
 		worldChunkMgr = new BiomeProviderSingle(ACBiomes.dark_realm);
-		setDimension(AbyssalCraft.configDimId4);
+		setDimension(ACLib.dark_realm_id);
 		hasNoSky = true;
 	}
-
-	//	@Override
-	//	public String getDimensionName()  {
-	//		return "The Dark Realm";
-	//	}
 
 	@Override
 	public boolean canRespawnHere() {
@@ -134,10 +130,4 @@ public class WorldProviderDarkRealm extends WorldProvider {
 
 		return AbyssalCraft.THE_DARK_REALM;
 	}
-
-	//	@Override
-	//	public String getInternalNameSuffix() {
-	//
-	//		return "_dr";
-	//	}
 }

@@ -40,8 +40,8 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
-import com.shinoow.abyssalcraft.client.lib.ParticleEffects;
 import com.shinoow.abyssalcraft.common.blocks.tile.TileEntityTransmutator;
+import com.shinoow.abyssalcraft.lib.ACTabs;
 
 public class BlockTransmutator extends BlockContainer {
 
@@ -57,7 +57,7 @@ public class BlockTransmutator extends BlockContainer {
 		setStepSound(SoundType.STONE);
 		isLit = par1;
 		if(!isLit)
-			setCreativeTab(AbyssalCraft.tabDecoration);
+			setCreativeTab(ACTabs.tabDecoration);
 	}
 
 	@Override
@@ -198,19 +198,19 @@ public class BlockTransmutator extends BlockContainer {
 			{
 			case WEST:
 				world.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, d0 - d3, d1, d2 + d4, 0.0D, 0.0D, 0.0D, new int[0]);
-				ParticleEffects.spawnParticle("CorBlood", d0 - d3, d1, d2 + d4, 0.0D, 0.0D, 0.0D);
+				AbyssalCraft.proxy.spawnParticle("CorBlood", d0 - d3, d1, d2 + d4, 0.0D, 0.0D, 0.0D);
 				break;
 			case EAST:
 				world.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, d0 + d3, d1, d2 + d4, 0.0D, 0.0D, 0.0D, new int[0]);
-				ParticleEffects.spawnParticle("CorBlood", d0 + d3, d1, d2 + d4, 0.0D, 0.0D, 0.0D);
+				AbyssalCraft.proxy.spawnParticle("CorBlood", d0 + d3, d1, d2 + d4, 0.0D, 0.0D, 0.0D);
 				break;
 			case NORTH:
 				world.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, d0 + d4, d1, d2 - d3, 0.0D, 0.0D, 0.0D, new int[0]);
-				ParticleEffects.spawnParticle("CorBlood", d0 + d4, d1, d2 - d3, 0.0D, 0.0D, 0.0D);
+				AbyssalCraft.proxy.spawnParticle("CorBlood", d0 + d4, d1, d2 - d3, 0.0D, 0.0D, 0.0D);
 				break;
 			case SOUTH:
 				world.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, d0 + d4, d1, d2 + d3, 0.0D, 0.0D, 0.0D, new int[0]);
-				ParticleEffects.spawnParticle("CorBlood", d0 + d4, d1, d2 + d3, 0.0D, 0.0D, 0.0D);
+				AbyssalCraft.proxy.spawnParticle("CorBlood", d0 + d4, d1, d2 + d3, 0.0D, 0.0D, 0.0D);
 			default:
 				break;
 			}
@@ -241,16 +241,6 @@ public class BlockTransmutator extends BlockContainer {
 	{
 		return EnumBlockRenderType.MODEL;
 	}
-
-	//	/**
-	//	 * Possibly modify the given BlockState before rendering it on an Entity (Minecarts, Endermen, ...)
-	//	 */
-	//	@Override
-	//	@SideOnly(Side.CLIENT)
-	//	public IBlockState getStateForEntityRender(IBlockState state)
-	//	{
-	//		return getDefaultState().withProperty(FACING, EnumFacing.SOUTH);
-	//	}
 
 	/**
 	 * Convert the given metadata into a BlockState for this Block

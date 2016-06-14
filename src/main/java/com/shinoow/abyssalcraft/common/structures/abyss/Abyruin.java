@@ -22,7 +22,7 @@ import net.minecraft.world.gen.feature.WorldGenerator;
 import net.minecraft.world.storage.loot.LootTableList;
 
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
-import com.shinoow.abyssalcraft.common.util.ACLoot;
+import com.shinoow.abyssalcraft.lib.ACLoot;
 
 public class Abyruin extends WorldGenerator
 {

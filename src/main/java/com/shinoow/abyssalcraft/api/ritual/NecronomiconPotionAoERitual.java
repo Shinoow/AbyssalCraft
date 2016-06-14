@@ -11,7 +11,6 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.api.ritual;
 
-import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 
 import net.minecraft.entity.Entity;
@@ -24,7 +23,7 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
+import com.shinoow.abyssalcraft.api.entity.EntityUtil;
 
 /**
  * A Necronomicon Area-of-Effect Ritual
@@ -88,21 +87,6 @@ public class NecronomiconPotionAoERitual extends NecronomiconRitual {
 		return null;
 	}
 
-	private boolean isEntityImmune(Potion potion, Entity entity){
-		boolean result = false;
-		try {
-			Class utilClass = Class.forName("com.shinoow.abyssalcraft.common.util.EntityUtil");
-
-			result = potion == AbyssalCraftAPI.coralium_plague && (Boolean)utilClass.getDeclaredMethod("isEntityCoralium", EntityLivingBase.class).invoke(null, (EntityLivingBase)entity) ||
-					potion == AbyssalCraftAPI.dread_plague && (Boolean)utilClass.getDeclaredMethod("isEntityDread", EntityLivingBase.class).invoke(null, (EntityLivingBase)entity) ||
-					potion == AbyssalCraftAPI.antimatter_potion && (Boolean)utilClass.getDeclaredMethod("isEntityAnti", EntityLivingBase.class).invoke(null, (EntityLivingBase)entity);
-
-		} catch (ClassNotFoundException | IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchMethodException | SecurityException e) {
-			e.printStackTrace();
-		}
-		return result;
-	}
-
 	@Override
 	public boolean canCompleteRitual(World world, BlockPos pos, EntityPlayer player) {
 
@@ -116,8 +100,8 @@ public class NecronomiconPotionAoERitual extends NecronomiconRitual {
 
 		if(!entities.isEmpty())
 			for(Entity entity : entities)
-				if(entity instanceof EntityLiving && !entity.isDead)
-					if(!isEntityImmune(getPotionEffect(), entity))
+				if(entity instanceof EntityLivingBase && !entity.isDead)
+					if(!EntityUtil.isEntityImmune((EntityLivingBase) entity, getPotionEffect()))
 						((EntityLiving)entity).addPotionEffect(new PotionEffect(getPotionEffect(), 400));
 	}
 

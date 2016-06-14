@@ -80,16 +80,6 @@ public class ChunkProviderDarkRealm implements IChunkGenerator
 				float f = 10.0F / MathHelper.sqrt_float(j * j + k * k + 0.2F);
 				parabolicField[j + 2 + (k + 2) * 5] = f;
 			}
-
-		//		NoiseGenerator[] noiseGens = {noiseGen1, noiseGen2, noiseGen3, noiseGen4, noiseGen5, noiseGen6, mobSpawnerNoise};
-		//		noiseGens = TerrainGen.getModdedNoiseGenerators(par1World, rand, noiseGens);
-		//		noiseGen1 = (NoiseGeneratorOctaves)noiseGens[0];
-		//		noiseGen2 = (NoiseGeneratorOctaves)noiseGens[1];
-		//		noiseGen3 = (NoiseGeneratorOctaves)noiseGens[2];
-		//		noiseGen4 = (NoiseGeneratorPerlin)noiseGens[3];
-		//		noiseGen5 = (NoiseGeneratorOctaves)noiseGens[4];
-		//		noiseGen6 = (NoiseGeneratorOctaves)noiseGens[5];
-		//		mobSpawnerNoise = (NoiseGeneratorOctaves)noiseGens[6];
 	}
 
 	public void setBlocksInChunk(int x, int z, ChunkPrimer primer)
@@ -290,12 +280,6 @@ public class ChunkProviderDarkRealm implements IChunkGenerator
 			}
 	}
 
-	//	@Override
-	//	public boolean chunkExists(int x, int z)
-	//	{
-	//		return true;
-	//	}
-
 	@Override
 	public void populate(int x, int z)
 	{
@@ -309,7 +293,7 @@ public class ChunkProviderDarkRealm implements IChunkGenerator
 		rand.setSeed(x * i1 + z * j1 ^ worldObj.getSeed());
 		boolean flag = false;
 
-		ForgeEventFactory.onChunkPopulate(true, this, worldObj, x, z, flag);
+		ForgeEventFactory.onChunkPopulate(true, this, worldObj, rand, x, z, flag);
 
 		if(AbyssalCraft.generateShoggothLairs)
 			for(int i = 0; i < 1; i++) {
@@ -322,37 +306,10 @@ public class ChunkProviderDarkRealm implements IChunkGenerator
 
 		biomegenbase.decorate(worldObj, rand, new BlockPos(k, 0, l));
 
-		ForgeEventFactory.onChunkPopulate(false, this, worldObj, x, z, flag);
+		ForgeEventFactory.onChunkPopulate(false, this, worldObj, rand, x, z, flag);
 
 		BlockFalling.fallInstantly = false;
 	}
-
-	//	@Override
-	//	public boolean saveChunks(boolean par1, IProgressUpdate par2IProgressUpdate)
-	//	{
-	//		return true;
-	//	}
-
-	//	@Override
-	//	public void saveExtraData() {}
-
-	//	@Override
-	//	public boolean unloadQueuedChunks()
-	//	{
-	//		return false;
-	//	}
-
-	//	@Override
-	//	public boolean canSave()
-	//	{
-	//		return true;
-	//	}
-
-	//	@Override
-	//	public String makeString()
-	//	{
-	//		return "ACLevelSource";
-	//	}
 
 	@Override
 	@SuppressWarnings("rawtypes")
@@ -368,31 +325,12 @@ public class ChunkProviderDarkRealm implements IChunkGenerator
 		return null;
 	}
 
-	//	@Override
-	//	public int getLoadedChunkCount()
-	//	{
-	//		return 0;
-	//	}
-
 	@Override
 	public void recreateStructures(Chunk chunk, int x, int z){}
 
-	//	@Override
-	//	public Chunk provideChunk(BlockPos blockPosIn) {
-	//
-	//		return provideChunk(blockPosIn.getX() >> 4, blockPosIn.getZ() >> 4);
-	//	}
-
-	//	@Override
-	//	public boolean func_177460_a(IChunkProvider p_177460_1_, Chunk p_177460_2_,
-	//			int p_177460_3_, int p_177460_4_) {
-	//
-	//		return false;
-	//	}
-
 	@Override
 	public boolean generateStructures(Chunk chunkIn, int x, int z) {
-		// TODO Auto-generated method stub
+
 		return false;
 	}
 }

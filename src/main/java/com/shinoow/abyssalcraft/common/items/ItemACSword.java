@@ -15,7 +15,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
 import net.minecraft.util.text.TextFormatting;
 
-import com.shinoow.abyssalcraft.AbyssalCraft;
+import com.shinoow.abyssalcraft.lib.ACTabs;
 
 public class ItemACSword extends ItemSword {
 
@@ -27,10 +27,8 @@ public class ItemACSword extends ItemSword {
 
 	public ItemACSword(ToolMaterial mat, String name, TextFormatting format) {
 		super(mat);
-		setCreativeTab(AbyssalCraft.tabCombat);
-		//		GameRegistry.registerItem(this, name);
+		setCreativeTab(ACTabs.tabCombat);
 		setUnlocalizedName(name);
-		//		setTextureName(AbyssalCraft.modid + ":" + name);
 		this.format = format;
 	}
 

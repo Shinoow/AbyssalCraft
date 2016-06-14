@@ -19,24 +19,15 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import com.shinoow.abyssalcraft.client.model.entity.ModelDreadling;
-import com.shinoow.abyssalcraft.common.entity.EntityDreadling;
 
 @SideOnly(Side.CLIENT)
 public class RenderDreadling extends RenderLiving {
 
-	protected ModelDreadling model;
-
 	private static final ResourceLocation field_110865_p = new ResourceLocation("abyssalcraft:textures/model/Dreadling.png");
 
-	public RenderDreadling (RenderManager manager, ModelDreadling ModelDreadling, float f)
+	public RenderDreadling (RenderManager manager)
 	{
-		super(manager, ModelDreadling, f);
-		model = (ModelDreadling)mainModel;
-	}
-
-	public void doRender(EntityDreadling entity, double par2, double par4, double par6, float par8, float par9)
-	{
-		super.doRender(entity, par2, par4, par6, par8, par9);
+		super(manager, new ModelDreadling(), 0.5F);
 	}
 
 	@Override

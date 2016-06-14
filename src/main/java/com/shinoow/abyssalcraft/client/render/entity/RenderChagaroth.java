@@ -31,13 +31,6 @@ public class RenderChagaroth extends RenderLiving<EntityChagaroth> {
 	}
 
 	@Override
-	public void doRender(EntityChagaroth entity, double par2, double par4, double par6, float par8, float par9)
-	{
-		//		BossStatus.setBossStatus(entity, false);
-		super.doRender(entity, par2, par4, par6, par8, par9);
-	}
-
-	@Override
 	protected ResourceLocation getEntityTexture(EntityChagaroth entity) {
 
 		return mobTexture;

@@ -34,7 +34,6 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI.FuelType;
 import com.shinoow.abyssalcraft.api.item.ACItems;
-import com.shinoow.abyssalcraft.api.item.ICrystal;
 import com.shinoow.abyssalcraft.api.recipe.CrystallizerRecipes;
 import com.shinoow.abyssalcraft.common.blocks.BlockCrystallizer;
 
@@ -373,8 +372,6 @@ public class TileEntityCrystallizer extends TileEntity implements ISidedInventor
 			if (item == ACItems.dread_fragment) return 100;
 			if (item == ACItems.dreaded_shard_of_abyssalnite) return 1000;
 			if (item == ACItems.dreaded_chunk_of_abyssalnite) return 1600;
-			if (item instanceof ICrystal) return 1200;
-			if (AbyssalCraftAPI.getCrystals().contains(par1ItemStack)) return 1200;
 			if (item == Items.blaze_powder) return 1200;
 			if (item == Items.blaze_rod) return 2400;
 			if (item == ACItems.methane) return 10000;

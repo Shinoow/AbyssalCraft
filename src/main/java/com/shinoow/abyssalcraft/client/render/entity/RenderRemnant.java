@@ -37,17 +37,6 @@ public class RenderRemnant extends RenderLiving<EntityRemnant> {
 		super(manager, new ModelRemnant(), 0.5F);
 	}
 
-	//	public void doRender(EntityRemnant entity, double par2, double par4, double par6, float par8, float par9)
-	//	{
-	//		super.doRender(entity, par2, par4, par6, par8, par9);
-	//	}
-	//
-	//	@Override
-	//	public void doRender(Entity par1Entity, double par2, double par4, double par6, float par8, float par9)
-	//	{
-	//		doRender((EntityRemnant)par1Entity, par2, par4, par6, par8, par9);
-	//	}
-
 	@Override
 	protected ResourceLocation getEntityTexture(EntityRemnant entity){
 

@@ -16,17 +16,16 @@ import net.minecraft.item.ItemFood;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
-import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.api.item.ACItems;
+import com.shinoow.abyssalcraft.lib.ACTabs;
 
 public class ItemPlatefood extends ItemFood
 {
 
 	public ItemPlatefood(int j, float f, boolean b, String name) {
 		super(j, f, b);
-		//		GameRegistry.registerItem(this, name);
 		setUnlocalizedName(name);
-		setCreativeTab(AbyssalCraft.tabFood);
+		setCreativeTab(ACTabs.tabFood);
 		setMaxStackSize(4);
 	}
 

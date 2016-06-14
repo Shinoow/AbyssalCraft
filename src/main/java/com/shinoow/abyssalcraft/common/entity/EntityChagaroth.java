@@ -47,7 +47,7 @@ import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
 import com.shinoow.abyssalcraft.api.entity.IDreadEntity;
 import com.shinoow.abyssalcraft.api.item.ACItems;
-import com.shinoow.abyssalcraft.common.util.SpecialTextUtil;
+import com.shinoow.abyssalcraft.lib.util.SpecialTextUtil;
 
 public class EntityChagaroth extends EntityMob implements IDreadEntity {
 
@@ -317,15 +317,14 @@ public class EntityChagaroth extends EntityMob implements IDreadEntity {
 				}
 			}
 
-		if(deathTicks == 20 && worldObj.isRemote)
+		if(deathTicks == 20 && !worldObj.isRemote)
 			SpecialTextUtil.ChagarothGroup(worldObj, I18n.translateToLocal("message.chagaroth.death.1"));
-		if(deathTicks == 80 && worldObj.isRemote)
+		if(deathTicks == 80 && !worldObj.isRemote)
 			SpecialTextUtil.ChagarothGroup(worldObj, I18n.translateToLocal("message.chagaroth.death.2"));
-		if(deathTicks == 140 && worldObj.isRemote)
+		if(deathTicks == 140 && !worldObj.isRemote)
 			SpecialTextUtil.ChagarothGroup(worldObj, I18n.translateToLocal("message.chagaroth.death.3"));
-		if(deathTicks == 200 && worldObj.isRemote)
-			SpecialTextUtil.ChagarothGroup(worldObj, I18n.translateToLocal("message.chagaroth.death.4"));
 		if(deathTicks == 200 && !worldObj.isRemote){
+			SpecialTextUtil.ChagarothGroup(worldObj, I18n.translateToLocal("message.chagaroth.death.4"));
 			setDead();
 			worldObj.spawnEntityInWorld(new EntityItem(worldObj, posX, posY, posZ, new ItemStack(ACItems.dread_plagued_gateway_key)));
 		}

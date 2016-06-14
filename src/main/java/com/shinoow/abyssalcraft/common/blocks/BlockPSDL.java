@@ -29,7 +29,6 @@ public class BlockPSDL extends Block {
 	public BlockPSDL()
 	{
 		super(Material.rock);
-		//		setBlockBounds(0.2F, 0.0F, 0.2F, 0.8F, 1.0F, 0.8F);
 		this.setHarvestLevel("pickaxe", 5);
 	}
 

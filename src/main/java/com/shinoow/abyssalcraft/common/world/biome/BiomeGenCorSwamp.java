@@ -46,8 +46,6 @@ public class BiomeGenCorSwamp extends BiomeGenBase {
 	@SuppressWarnings("unchecked")
 	public BiomeGenCorSwamp(BiomeProperties par1) {
 		super(par1);
-		//		minHeight = -0.2F;
-		//		maxHeight = 0.1F;
 		topBlock=Blocks.grass.getDefaultState();
 		fillerBlock=Blocks.dirt.getDefaultState();
 		theBiomeDecorator.treesPerChunk = 2;
@@ -60,7 +58,6 @@ public class BiomeGenCorSwamp extends BiomeGenBase {
 		theBiomeDecorator.sandPerChunk2 = 0;
 		theBiomeDecorator.sandPerChunk = 0;
 		theBiomeDecorator.grassPerChunk = 5;
-		//		waterColorMultiplier = 0x24FF83;
 		spawnableMonsterList.add(new SpawnListEntry(EntityDepthsGhoul.class, 60, 1, 5));
 		spawnableMonsterList.add(new SpawnListEntry(EntityAbyssalZombie.class, 60, 1, 5));
 		spawnableCreatureList.add(new SpawnListEntry(EntityAntiPig.class, 5, 1, 2));

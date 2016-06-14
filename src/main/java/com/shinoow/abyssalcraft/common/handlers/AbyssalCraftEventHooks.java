@@ -14,9 +14,6 @@ package com.shinoow.abyssalcraft.common.handlers;
 import java.util.Random;
 
 import net.minecraft.block.BlockStairs;
-import net.minecraft.enchantment.Enchantment;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
@@ -28,7 +25,6 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
-import net.minecraft.util.EntityDamageSource;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.translation.I18n;
@@ -36,9 +32,7 @@ import net.minecraft.world.WorldServer;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.chunk.storage.ExtendedBlockStorage;
 import net.minecraftforge.event.entity.living.EnderTeleportEvent;
-import net.minecraftforge.event.entity.living.LivingAttackEvent;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
-import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.player.EntityItemPickupEvent;
 import net.minecraftforge.event.terraingen.BiomeEvent;
 import net.minecraftforge.event.terraingen.PopulateChunkEvent;
@@ -47,11 +41,9 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
-import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
 import com.shinoow.abyssalcraft.api.biome.ACBiomes;
 import com.shinoow.abyssalcraft.api.biome.IDarklandsBiome;
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
-import com.shinoow.abyssalcraft.api.entity.IDreadEntity;
 import com.shinoow.abyssalcraft.api.event.ACEvents.RitualEvent;
 import com.shinoow.abyssalcraft.api.item.ACItems;
 import com.shinoow.abyssalcraft.api.item.ItemUpgradeKit;
@@ -65,9 +57,9 @@ import com.shinoow.abyssalcraft.common.items.ItemCrystalBag;
 import com.shinoow.abyssalcraft.common.items.ItemNecronomicon;
 import com.shinoow.abyssalcraft.common.ritual.NecronomiconBreedingRitual;
 import com.shinoow.abyssalcraft.common.ritual.NecronomiconDreadSpawnRitual;
-import com.shinoow.abyssalcraft.common.util.EntityUtil;
-import com.shinoow.abyssalcraft.common.util.SpecialTextUtil;
-import com.shinoow.abyssalcraft.common.world.TeleporterDarkRealm;
+import com.shinoow.abyssalcraft.lib.ACLib;
+import com.shinoow.abyssalcraft.lib.util.SpecialTextUtil;
+import com.shinoow.abyssalcraft.lib.world.TeleporterDarkRealm;
 
 public class AbyssalCraftEventHooks {
 
@@ -148,49 +140,18 @@ public class AbyssalCraftEventHooks {
 	}
 
 	@SubscribeEvent
-	public void enchantmentEffects(LivingAttackEvent event){
-		if(event.getSource() instanceof EntityDamageSource){
-			Entity entity = ((EntityDamageSource)event.getSource()).getEntity();
-			if(entity instanceof EntityLivingBase){
-				ItemStack item = ((EntityLivingBase)entity).getHeldItemMainhand();
-				if(item != null && item.hasTagCompound()){
-					NBTTagList enchTag = item.getEnchantmentTagList();
-					for(int i = 0; i < enchTag.tagCount(); i++)
-						if(enchTag.getCompoundTagAt(i).getInteger("id") == Enchantment.getEnchantmentID(AbyssalCraftAPI.coralium_enchantment))
-							if(EntityUtil.isEntityCoralium(event.getEntityLiving())){}
-							else event.getEntityLiving().addPotionEffect(new PotionEffect(AbyssalCraftAPI.coralium_plague, 100));
-						else if(enchTag.getCompoundTagAt(i).getInteger("id") == Enchantment.getEnchantmentID(AbyssalCraftAPI.dread_enchantment))
-							if(event.getEntityLiving() instanceof IDreadEntity){}
-							else event.getEntityLiving().addPotionEffect(new PotionEffect(AbyssalCraftAPI.dread_plague, 100));
-				}
-			}
-		}
-	}
-
-	@SubscribeEvent
-	public void ironWall(LivingHurtEvent event){
-		ItemStack item = event.getEntityLiving().getItemStackFromSlot(EntityEquipmentSlot.CHEST);
-		if(item != null && item.hasTagCompound()){
-			NBTTagList enchTag = item.getEnchantmentTagList();
-			for(int i = 0; i < enchTag.tagCount(); i++)
-				if(enchTag.getCompoundTagAt(i).getInteger("id") == Enchantment.getEnchantmentID(AbyssalCraftAPI.iron_wall))
-					event.getEntityLiving().setInWeb();
-		}
-	}
-
-	@SubscribeEvent
 	public void darkRealm(LivingUpdateEvent event){
 		if(event.getEntityLiving() instanceof EntityPlayerMP){
 			WorldServer worldServer = (WorldServer)event.getEntityLiving().worldObj;
 			EntityPlayerMP player = (EntityPlayerMP)event.getEntityLiving();
-			if(player.dimension == AbyssalCraft.configDimId3 && player.posY <= 0){
+			if(player.dimension == ACLib.omothol_id && player.posY <= 0){
 				player.addPotionEffect(new PotionEffect(MobEffects.resistance, 80, 255));
 				player.addPotionEffect(new PotionEffect(MobEffects.blindness, 20));
-				player.mcServer.getPlayerList().transferPlayerToDimension(player, AbyssalCraft.configDimId4, new TeleporterDarkRealm(worldServer));
+				player.mcServer.getPlayerList().transferPlayerToDimension(player, ACLib.dark_realm_id, new TeleporterDarkRealm(worldServer));
 				player.addStat(AbyssalCraft.enterDarkRealm, 1);
 			}
 		}
-		if(event.getEntityLiving().worldObj.isRemote && event.getEntityLiving().dimension == AbyssalCraft.configDimId4){
+		if(event.getEntityLiving().dimension == ACLib.dark_realm_id){
 			Random rand = new Random();
 			if(AbyssalCraft.particleEntity)
 				event.getEntityLiving().worldObj.spawnParticle(EnumParticleTypes.SMOKE_LARGE, event.getEntityLiving().posX + (rand.nextDouble() - 0.5D) * event.getEntityLiving().width,
@@ -315,7 +276,7 @@ public class AbyssalCraftEventHooks {
 	@SubscribeEvent
 	public void noTPinOmothol(EnderTeleportEvent event){
 		if(!(event.getEntityLiving() instanceof EntityJzahar))
-			if(event.getEntityLiving().dimension == AbyssalCraft.configDimId3){
+			if(event.getEntityLiving().dimension == ACLib.omothol_id){
 				event.getEntityLiving().attackEntityFrom(DamageSource.fall, event.getAttackDamage());
 				event.getEntityLiving().addPotionEffect(new PotionEffect(MobEffects.moveSlowdown, 200, 1));
 				event.getEntityLiving().addPotionEffect(new PotionEffect(MobEffects.weakness, 200, 1));
@@ -370,10 +331,10 @@ public class AbyssalCraftEventHooks {
 		if(event.getRitual() instanceof NecronomiconSummonRitual){
 			event.getEntityPlayer().addStat(AbyssalCraft.ritualSummon, 1);
 			if(event.getRitual().getUnlocalizedName().substring(10).equals("summonSacthoth"))
-				if(event.getWorld().isRemote)
+				if(!event.getWorld().isRemote)
 					SpecialTextUtil.SacthothGroup(event.getWorld(), I18n.translateToLocal("message.sacthoth.spawn.1"));
 			if(event.getRitual().getUnlocalizedName().substring(10).equals("summonAsorah")){
-				if(event.getWorld().isRemote)
+				if(!event.getWorld().isRemote)
 					SpecialTextUtil.AsorahGroup(event.getWorld(), I18n.translateToLocal("message.asorah.spawn"));
 				event.getEntityPlayer().addStat(AbyssalCraft.summonAsorah, 1);
 			}

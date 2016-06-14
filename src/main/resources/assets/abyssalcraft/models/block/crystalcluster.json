@@ -1,0 +1,188 @@
+{
+    "__comment": "Model generated using MrCrayfish's Model Creator (http://mrcrayfish.com/modelcreator/)",
+    "textures": {
+		"particle": "abyssalcraft:blocks/crystalcluster",
+        "0": "abyssalcraft:blocks/crystalcluster"
+    },
+    "elements": [
+        {
+            "name": "crystal1",
+            "from": [ 6.0, 2.0, 3.0 ], 
+            "to": [ 7.0, 10.0, 4.0 ], 
+            "rotation": { "origin": [ 8.0, 8.0, 8.0 ], "axis": "x", "angle": -45.0 },
+            "faces": {
+                "north": { "texture": "#0", "uv": [ 0.0, 0.0, 1.0, 8.0 ], "tintindex": 0 },
+                "east": { "texture": "#0", "uv": [ 0.0, 0.0, 1.0, 8.0 ], "tintindex": 0 },
+                "south": { "texture": "#0", "uv": [ 0.0, 0.0, 1.0, 8.0 ], "tintindex": 0 },
+                "west": { "texture": "#0", "uv": [ 0.0, 0.0, 0.0, 8.0 ], "tintindex": 0 },
+                "up": { "texture": "#0", "uv": [ 4.0, 0.0, 5.0, 1.0 ], "tintindex": 0 },
+                "down": { "texture": "#-1", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "tintindex": 0 }
+            }
+        },
+        {
+            "name": "crystal2",
+            "from": [ 7.0, 1.0, 4.0 ], 
+            "to": [ 10.0, 12.0, 7.0 ], 
+            "rotation": { "origin": [ 8.0, 8.0, 8.0 ], "axis": "x", "angle": -22.5 },
+            "faces": {
+                "north": { "texture": "#0", "uv": [ 0.0, 0.0, 3.0, 11.0 ], "tintindex": 0 },
+                "east": { "texture": "#0", "uv": [ 0.0, 0.0, 3.0, 11.0 ], "tintindex": 0 },
+                "south": { "texture": "#0", "uv": [ 0.0, 0.0, 3.0, 11.0 ], "tintindex": 0 },
+                "west": { "texture": "#0", "uv": [ 0.0, 0.0, 3.0, 11.0 ], "tintindex": 0 },
+                "up": { "texture": "#0", "uv": [ 3.0, 0.0, 6.0, 3.0 ], "tintindex": 0 },
+                "down": { "texture": "#-1", "uv": [ 0.0, 0.0, 3.0, 3.0 ], "tintindex": 0 }
+            }
+        },
+        {
+            "name": "base1",
+            "from": [ 4.0, 0.0, 6.0 ], 
+            "to": [ 12.0, 2.0, 10.0 ], 
+            "faces": {
+                "north": { "texture": "#0", "uv": [ 8.0, 13.0, 16.0, 15.0 ], "tintindex": 0 },
+                "east": { "texture": "#0", "uv": [ 10.0, 13.0, 14.0, 15.0 ], "tintindex": 0 },
+                "south": { "texture": "#0", "uv": [ 8.0, 13.0, 16.0, 15.0 ], "tintindex": 0 },
+                "west": { "texture": "#0", "uv": [ 12.0, 13.0, 16.0, 15.0 ], "tintindex": 0 },
+                "up": { "texture": "#0", "uv": [ 8.0, 8.0, 16.0, 12.0 ], "tintindex": 0 },
+                "down": { "texture": "#0", "uv": [ 8.0, 4.0, 16.0, 8.0 ], "tintindex": 0 }
+            }
+        },
+        {
+            "name": "crystal3",
+            "from": [ 4.5, 1.0, 7.5 ], 
+            "to": [ 6.5, 9.0, 9.5 ], 
+            "rotation": { "origin": [ 8.0, 8.0, 8.0 ], "axis": "z", "angle": 22.5 },
+            "faces": {
+                "north": { "texture": "#0", "uv": [ 0.0, 0.0, 2.0, 8.0 ], "tintindex": 0 },
+                "east": { "texture": "#0", "uv": [ 0.0, 0.0, 2.0, 8.0 ], "tintindex": 0 },
+                "south": { "texture": "#0", "uv": [ 0.0, 0.0, 2.0, 8.0 ], "tintindex": 0 },
+                "west": { "texture": "#0", "uv": [ 0.0, 0.0, 2.0, 8.0 ], "tintindex": 0 },
+                "up": { "texture": "#0", "uv": [ 3.0, 0.0, 5.0, 2.0 ], "tintindex": 0 },
+                "down": { "texture": "#-1", "uv": [ 0.0, 0.0, 2.0, 2.0 ], "tintindex": 0 }
+            }
+        },
+        {
+            "name": "crystal4",
+            "from": [ 7.0, 2.0, 10.0 ], 
+            "to": [ 10.0, 11.0, 13.0 ], 
+            "rotation": { "origin": [ 8.0, 8.0, 8.0 ], "axis": "x", "angle": 22.5 },
+            "faces": {
+                "north": { "texture": "#0", "uv": [ 0.0, 0.0, 3.0, 9.0 ], "tintindex": 0 },
+                "east": { "texture": "#0", "uv": [ 0.0, 0.0, 3.0, 9.0 ], "tintindex": 0 },
+                "south": { "texture": "#0", "uv": [ 0.0, 0.0, 3.0, 9.0 ], "tintindex": 0 },
+                "west": { "texture": "#0", "uv": [ 0.0, 0.0, 3.0, 9.0 ], "tintindex": 0 },
+                "up": { "texture": "#0", "uv": [ 3.0, 0.0, 6.0, 3.0 ], "tintindex": 0 },
+                "down": { "texture": "#-1", "uv": [ 0.0, 0.0, 3.0, 3.0 ], "tintindex": 0 }
+            }
+        },
+        {
+            "name": "crystal5",
+            "from": [ 5.0, 2.0, 7.5 ], 
+            "to": [ 7.0, 4.0, 11.5 ], 
+            "rotation": { "origin": [ 8.0, 8.0, 8.0 ], "axis": "x", "angle": 22.5 },
+            "faces": {
+                "north": { "texture": "#0", "uv": [ 3.0, 0.0, 5.0, 2.0 ], "tintindex": 0 },
+                "east": { "texture": "#0", "uv": [ 10.0, 13.0, 14.0, 15.0 ], "tintindex": 0 },
+                "south": { "texture": "#0", "uv": [ 3.0, 0.0, 5.0, 2.0 ], "tintindex": 0 },
+                "west": { "texture": "#0", "uv": [ 10.0, 13.0, 14.0, 15.0 ], "tintindex": 0 },
+                "up": { "texture": "#0", "uv": [ 0.0, 0.0, 2.0, 4.0 ], "tintindex": 0 },
+                "down": { "texture": "#0", "uv": [ 0.0, 0.0, 2.0, 4.0 ], "tintindex": 0 }
+            }
+        },
+        {
+            "name": "crystal6",
+            "from": [ 6.0, 3.0, 10.0 ], 
+            "to": [ 8.0, 6.0, 12.0 ], 
+            "rotation": { "origin": [ 8.0, 8.0, 8.0 ], "axis": "x", "angle": 22.5 },
+            "faces": {
+                "north": { "texture": "#0", "uv": [ 0.0, 0.0, 2.0, 3.0 ], "tintindex": 0 },
+                "east": { "texture": "#0", "uv": [ 0.0, 0.0, 2.0, 3.0 ], "tintindex": 0 },
+                "south": { "texture": "#0", "uv": [ 0.0, 0.0, 2.0, 3.0 ], "tintindex": 0 },
+                "west": { "texture": "#0", "uv": [ 0.0, 0.0, 2.0, 3.0 ], "tintindex": 0 },
+                "up": { "texture": "#0", "uv": [ 3.0, 0.0, 5.0, 2.0 ], "tintindex": 0 },
+                "down": { "texture": "#-1", "uv": [ 0.0, 0.0, 2.0, 2.0 ], "tintindex": 0 }
+            }
+        },
+        {
+            "name": "crystal7",
+            "from": [ 11.0, 3.0, 8.0 ], 
+            "to": [ 13.0, 10.0, 10.0 ], 
+            "rotation": { "origin": [ 8.0, 8.0, 8.0 ], "axis": "z", "angle": -22.5 },
+            "faces": {
+                "north": { "texture": "#0", "uv": [ 0.0, 0.0, 2.0, 7.0 ], "tintindex": 0 },
+                "east": { "texture": "#0", "uv": [ 0.0, 0.0, 2.0, 7.0 ], "tintindex": 0 },
+                "south": { "texture": "#0", "uv": [ 0.0, 0.0, 2.0, 7.0 ], "tintindex": 0 },
+                "west": { "texture": "#0", "uv": [ 0.0, 0.0, 2.0, 7.0 ], "tintindex": 0 },
+                "up": { "texture": "#0", "uv": [ 3.0, 0.0, 5.0, 2.0 ], "tintindex": 0 },
+                "down": { "texture": "#-1", "uv": [ 0.0, 0.0, 2.0, 2.0 ], "tintindex": 0 }
+            }
+        },
+        {
+            "name": "crystal8",
+            "from": [ 10.0, 2.0, 8.0 ], 
+            "to": [ 11.0, 6.0, 9.0 ], 
+            "rotation": { "origin": [ 8.0, 8.0, 8.0 ], "axis": "y", "angle": 22.5 },
+            "faces": {
+                "north": { "texture": "#0", "uv": [ 0.0, 0.0, 1.0, 4.0 ], "tintindex": 0 },
+                "east": { "texture": "#0", "uv": [ 0.0, 0.0, 1.0, 4.0 ], "tintindex": 0 },
+                "south": { "texture": "#0", "uv": [ 0.0, 0.0, 1.0, 4.0 ], "tintindex": 0 },
+                "west": { "texture": "#0", "uv": [ 0.0, 0.0, 1.0, 4.0 ], "tintindex": 0 },
+                "up": { "texture": "#0", "uv": [ 3.0, 0.0, 4.0, 1.0 ], "tintindex": 0 },
+                "down": { "texture": "#-1", "uv": [ 0.0, 0.0, 1.0, 1.0 ], "tintindex": 0 }
+            }
+        },
+        {
+            "name": "base2",
+            "from": [ 4.0, 0.0, 6.5 ], 
+            "to": [ 12.0, 2.0, 9.5 ], 
+            "rotation": { "origin": [ 8.0, 8.0, 8.0 ], "axis": "y", "angle": -45.0 },
+            "faces": {
+                "north": { "texture": "#0", "uv": [ 8.0, 13.0, 16.0, 15.0 ], "tintindex": 0 },
+                "east": { "texture": "#0", "uv": [ 7.0, 13.0, 10.0, 15.0 ], "tintindex": 0 },
+                "south": { "texture": "#0", "uv": [ 8.0, 13.0, 16.0, 15.0 ], "tintindex": 0 },
+                "west": { "texture": "#0", "uv": [ 9.0, 13.0, 12.0, 15.0 ], "tintindex": 0 },
+                "up": { "texture": "#0", "uv": [ 8.0, 9.0, 16.0, 12.0 ], "tintindex": 0 },
+                "down": { "texture": "#0", "uv": [ 8.0, 6.0, 16.0, 9.0 ], "tintindex": 0 }
+            }
+        },
+        {
+            "name": "base3",
+            "from": [ 6.0, 0.0, 4.0 ], 
+            "to": [ 10.0, 2.0, 12.0 ], 
+            "faces": {
+                "north": { "texture": "#0", "uv": [ 6.0, 13.0, 10.0, 15.0 ], "tintindex": 0 },
+                "east": { "texture": "#0", "uv": [ 8.0, 13.0, 16.0, 15.0 ], "tintindex": 0 },
+                "south": { "texture": "#0", "uv": [ 9.0, 13.0, 13.0, 15.0 ], "tintindex": 0 },
+                "west": { "texture": "#0", "uv": [ 8.0, 13.0, 16.0, 15.0 ], "tintindex": 0 },
+                "up": { "texture": "#0", "uv": [ 12.0, 4.0, 16.0, 12.0 ], "tintindex": 0 },
+                "down": { "texture": "#0", "uv": [ 8.0, 4.0, 12.0, 12.0 ], "tintindex": 0 }
+            }
+        },
+        {
+            "name": "base4",
+            "from": [ 6.5, 0.0, 4.0 ], 
+            "to": [ 9.5, 2.0, 12.0 ], 
+            "rotation": { "origin": [ 8.0, 8.0, 8.0 ], "axis": "y", "angle": -45.0 },
+            "faces": {
+                "north": { "texture": "#0", "uv": [ 8.0, 12.0, 11.0, 14.0 ], "tintindex": 0 },
+                "east": { "texture": "#0", "uv": [ 8.0, 13.0, 16.0, 15.0 ], "tintindex": 0 },
+                "south": { "texture": "#0", "uv": [ 6.0, 14.0, 9.0, 16.0 ], "tintindex": 0 },
+                "west": { "texture": "#0", "uv": [ 8.0, 13.0, 16.0, 15.0 ], "tintindex": 0 },
+                "up": { "texture": "#0", "uv": [ 13.0, 4.0, 16.0, 12.0 ], "tintindex": 0 },
+                "down": { "texture": "#0", "uv": [ 9.0, 4.0, 12.0, 12.0 ], "tintindex": 0 }
+            }
+        },
+        {
+            "name": "crystal9",
+            "from": [ 7.5, 2.0, 8.0 ], 
+            "to": [ 9.5, 11.0, 10.0 ], 
+            "faces": {
+                "north": { "texture": "#0", "uv": [ 0.0, 0.0, 2.0, 9.0 ], "tintindex": 0 },
+                "east": { "texture": "#0", "uv": [ 0.0, 0.0, 2.0, 9.0 ], "tintindex": 0 },
+                "south": { "texture": "#0", "uv": [ 0.0, 0.0, 2.0, 9.0 ], "tintindex": 0 },
+                "west": { "texture": "#0", "uv": [ 0.0, 0.0, 2.0, 9.0 ], "tintindex": 0 },
+                "up": { "texture": "#0", "uv": [ 3.0, 0.0, 5.0, 2.0 ], "tintindex": 0 },
+                "down": { "texture": "#-1", "uv": [ 0.0, 0.0, 2.0, 2.0 ], "tintindex": 0 }
+            }
+        }
+    ]
+}

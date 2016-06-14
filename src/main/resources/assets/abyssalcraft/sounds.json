@@ -141,5 +141,11 @@
 		"sounds": [
 			"abyssalcraft:shoggoth/death"
 		]
+	},
+	"jzahar.charge": {
+		"category": "hostile",
+		"sounds": [
+			"abyssalcraft:jzahar/charge"
+		]
 	}
 }

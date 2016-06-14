@@ -108,15 +108,6 @@ public class ChunkProviderDreadlands implements IChunkGenerator {
 				float f = 10.0F / MathHelper.sqrt_float(j * j + k * k + 0.2F);
 				parabolicField[j + 2 + (k + 2) * 5] = f;
 			}
-
-		//		NoiseGenerator[] noiseGens = {noiseGen1, noiseGen2, noiseGen3, noiseGen4, noiseGen5, noiseGen6};
-		//		noiseGens = TerrainGen.getModdedNoiseGenerators(par1World, rand, noiseGens);
-		//		noiseGen1 = (NoiseGeneratorOctaves)noiseGens[0];
-		//		noiseGen2 = (NoiseGeneratorOctaves)noiseGens[1];
-		//		noiseGen3 = (NoiseGeneratorOctaves)noiseGens[2];
-		//		noiseGen4 = (NoiseGeneratorPerlin)noiseGens[3];
-		//		noiseGen5 = (NoiseGeneratorOctaves)noiseGens[4];
-		//		noiseGen6 = (NoiseGeneratorOctaves)noiseGens[5];
 	}
 
 	public void setBlocksInChunk(int par1, int par2, ChunkPrimer primer)
@@ -328,15 +319,6 @@ public class ChunkProviderDreadlands implements IChunkGenerator {
 	}
 
 	/**
-	 * Checks to see if a chunk exists at x, y
-	 */
-	//	@Override
-	//	public boolean chunkExists(int par1, int par2)
-	//	{
-	//		return true;
-	//	}
-
-	/**
 	 * Populates chunk with ores etc etc
 	 */
 	@Override
@@ -352,7 +334,7 @@ public class ChunkProviderDreadlands implements IChunkGenerator {
 		rand.setSeed(par2 * i1 + par3 * j1 ^ worldObj.getSeed());
 		boolean flag = false;
 
-		ForgeEventFactory.onChunkPopulate(true, this, worldObj, par2, par3, flag);
+		ForgeEventFactory.onChunkPopulate(true, this, worldObj, rand, par2, par3, flag);
 
 		if (mapFeaturesEnabled)
 			dmGenerator.generateStructure(worldObj, rand, new ChunkCoordIntPair(par2, par3));
@@ -382,54 +364,10 @@ public class ChunkProviderDreadlands implements IChunkGenerator {
 		biomegenbase.decorate(worldObj, rand, new BlockPos(k, 0, l));
 
 
-		ForgeEventFactory.onChunkPopulate(false, this, worldObj, par2, par3, flag);
+		ForgeEventFactory.onChunkPopulate(false, this, worldObj, rand, par2, par3, flag);
 
 		BlockFalling.fallInstantly = false;
 	}
-
-	/**
-	 * Two modes of operation: if passed true, save all Chunks in one go.  If passed false, save up to two chunks.
-	 * Return true if all chunks have been saved.
-	 */
-	//	@Override
-	//	public boolean saveChunks(boolean par1, IProgressUpdate par2IProgressUpdate)
-	//	{
-	//		return true;
-	//	}
-
-	/**
-	 * Save extra data not associated with any Chunk.  Not saved during autosave, only during world unload.  Currently
-	 * unimplemented.
-	 */
-	//	@Override
-	//	public void saveExtraData() {}
-
-	/**
-	 * Unloads chunks that are marked to be unloaded. This is not guaranteed to unload every such chunk.
-	 */
-	//	@Override
-	//	public boolean unloadQueuedChunks()
-	//	{
-	//		return false;
-	//	}
-
-	/**
-	 * Returns if the IChunkProvider supports saving.
-	 */
-	//	@Override
-	//	public boolean canSave()
-	//	{
-	//		return true;
-	//	}
-
-	/**
-	 * Converts the instance data to a readable string.
-	 */
-	//	@Override
-	//	public String makeString()
-	//	{
-	//		return "ACLevelSource";
-	//	}
 
 	/**
 	 * Returns a list of creatures of the specified type that can spawn at the given location.
@@ -448,12 +386,6 @@ public class ChunkProviderDreadlands implements IChunkGenerator {
 		return null;
 	}
 
-	//	@Override
-	//	public int getLoadedChunkCount()
-	//	{
-	//		return 0;
-	//	}
-
 	@Override
 	public void recreateStructures(Chunk chunk, int par1, int par2)
 	{
@@ -463,20 +395,7 @@ public class ChunkProviderDreadlands implements IChunkGenerator {
 
 	@Override
 	public boolean generateStructures(Chunk chunkIn, int x, int z) {
-		// TODO Auto-generated method stub
+
 		return false;
 	}
-
-	//	@Override
-	//	public Chunk provideChunk(BlockPos blockPosIn) {
-	//
-	//		return provideChunk(blockPosIn.getX() >> 4, blockPosIn.getZ() >> 4);
-	//	}
-
-	//	@Override
-	//	public boolean func_177460_a(IChunkProvider p_177460_1_, Chunk p_177460_2_,
-	//			int p_177460_3_, int p_177460_4_) {
-	//
-	//		return false;
-	//	}
 }

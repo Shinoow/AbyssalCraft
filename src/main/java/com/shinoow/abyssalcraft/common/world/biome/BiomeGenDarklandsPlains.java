@@ -56,7 +56,6 @@ public class BiomeGenDarklandsPlains extends BiomeGenBase implements IDarklandsB
 		super(par1);
 		topBlock = ACBlocks.darklands_grass.getDefaultState();
 		fillerBlock = Blocks.dirt.getDefaultState();
-		//		waterColorMultiplier = 14745518;
 		WorldGenDarkTrees = new WorldGenDLT(false);
 		theBiomeDecorator.treesPerChunk = 1;
 		spawnableMonsterList.add(new SpawnListEntry(EntityDepthsGhoul.class, 60, 1, 5));

@@ -25,6 +25,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.api.biome.ACBiomes;
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
+import com.shinoow.abyssalcraft.lib.ACLib;
 
 public class WorldProviderOmothol extends WorldProvider {
 
@@ -32,7 +33,7 @@ public class WorldProviderOmothol extends WorldProvider {
 	public void registerWorldChunkManager()
 	{
 		worldChunkMgr = new BiomeProviderSingle(ACBiomes.omothol);
-		setDimension(AbyssalCraft.configDimId3);
+		setDimension(ACLib.omothol_id);
 		hasNoSky = true;
 	}
 
@@ -41,12 +42,6 @@ public class WorldProviderOmothol extends WorldProvider {
 	{
 		return new ChunkProviderOmothol(worldObj, 1251393890L);
 	}
-
-	//	@Override
-	//	public String getDimensionName()
-	//	{
-	//		return "Omothol";
-	//	}
 
 	@Override
 	protected void generateLightBrightnessTable() {
@@ -153,10 +148,4 @@ public class WorldProviderOmothol extends WorldProvider {
 
 		return AbyssalCraft.OMOTHOL;
 	}
-
-	//	@Override
-	//	public String getInternalNameSuffix() {
-	//
-	//		return "_omt";
-	//	}
 }

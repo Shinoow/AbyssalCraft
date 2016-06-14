@@ -32,8 +32,8 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.common.blocks.tile.TileEntityCrate;
+import com.shinoow.abyssalcraft.lib.ACTabs;
 
 public class BlockCrate extends BlockContainer
 {
@@ -41,7 +41,7 @@ public class BlockCrate extends BlockContainer
 
 	public BlockCrate(){
 		super(Material.wood);
-		setCreativeTab(AbyssalCraft.tabDecoration);
+		setCreativeTab(ACTabs.tabDecoration);
 		setStepSound(SoundType.WOOD);
 	}
 

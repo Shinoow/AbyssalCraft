@@ -17,8 +17,8 @@ import net.minecraft.client.renderer.entity.layers.LayerRenderer;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;
 
+import com.shinoow.abyssalcraft.api.entity.EntityUtil;
 import com.shinoow.abyssalcraft.client.model.player.ModelStarSpawnPlayer;
-import com.shinoow.abyssalcraft.common.util.EntityUtil;
 
 public class LayerStarSpawnTentacles implements LayerRenderer<EntityPlayer> {
 

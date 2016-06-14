@@ -1,6 +1,7 @@
 {
     "pools": [
 	    {
+			"name": "main",
             "rolls": 1,
             "entries": [
                 {
@@ -27,6 +28,7 @@
             ]
         },
 	    {
+			"name": "pool1",
             "conditions": [
                 {
                     "condition": "killed_by_player"

@@ -1,0 +1,34 @@
+{
+    "forge_marker": 1,
+    "defaults": {
+        "textures": {
+          //  "#statue": "abyssalcraft:model/blocks/PSDL" //the identifier must be a name of a material defined by the "model" obj's .mtl file
+        },
+        "model": "abyssalcraft:nyarlathotepstatue.obj",
+		"custom": {"flip-v":true}
+     },
+    "variants": {
+        "normal": [{}],
+        "inventory": [{
+			"transform": "forge:default-block"
+           /* "transform": {
+				"thirdperson": {
+					"rotation": [ {"x":20}, {"y":45}, {"z":170} ],
+					"translation": [ 0, 0.09375, -0.171875 ],
+					"scale": 0.375
+				},
+				"firstperson": {
+					"rotation": [ {"x":0}, {"y":-90}, {"z":0} ]
+				}
+			}*/
+        }],
+		"facing": {
+            "down": { "model": "abyssalcraft:nyarlathotepstatue.obj" },
+            "up": { "model": "abyssalcraft:nyarlathotepstatue.obj" },
+            "north": { "model": "abyssalcraft:nyarlathotepstatue.obj", "y": 90 },
+            "south": { "model": "abyssalcraft:nyarlathotepstatue.obj", "y": 270 },
+            "west": { "model": "abyssalcraft:nyarlathotepstatue.obj" },
+            "east": { "model": "abyssalcraft:nyarlathotepstatue.obj", "y": 180 }
+        }
+    }
+}

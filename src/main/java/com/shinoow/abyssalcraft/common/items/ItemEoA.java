@@ -19,16 +19,14 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.util.text.translation.I18n;
 
-import com.shinoow.abyssalcraft.AbyssalCraft;
+import com.shinoow.abyssalcraft.lib.ACTabs;
 
 public class ItemEoA extends Item {
 
 	public ItemEoA() {
-		super();
 		setMaxStackSize(1);
-		//		GameRegistry.registerItem(this, "eoa");
 		setUnlocalizedName("eoa");
-		setCreativeTab(AbyssalCraft.tabItems);
+		setCreativeTab(ACTabs.tabItems);
 	}
 
 	@Override

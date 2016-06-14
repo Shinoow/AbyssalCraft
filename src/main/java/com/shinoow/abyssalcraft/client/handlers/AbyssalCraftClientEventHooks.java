@@ -18,7 +18,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult.Type;
 import net.minecraft.world.World;
 import net.minecraftforge.client.event.FOVUpdateEvent;
-import net.minecraftforge.client.event.ModelBakeEvent;
 import net.minecraftforge.client.event.MouseEvent;
 import net.minecraftforge.fml.common.eventhandler.Event;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -36,7 +35,8 @@ public class AbyssalCraftClientEventHooks {
 	public void onUpdateFOV(FOVUpdateEvent event) {
 		float fov = event.getFov();
 
-		if( event.getEntity().isHandActive() && event.getEntity().getActiveItemStack().getItem() == ACItems.coralium_longbow) {
+		if( event.getEntity().isHandActive() && event.getEntity().getActiveItemStack() != null
+				&& event.getEntity().getActiveItemStack().getItem() == ACItems.coralium_longbow) {
 			int duration = event.getEntity().getItemInUseCount();
 			float multiplier = duration / 20.0F;
 
@@ -49,14 +49,6 @@ public class AbyssalCraftClientEventHooks {
 		}
 
 		event.setNewfov(fov);
-	}
-
-	@SubscribeEvent
-	public void onModelBakeEvent(ModelBakeEvent event)
-	{
-		event.getModelManager().getBlockModelShapes().registerBuiltInBlocks(ACBlocks.chagaroth_altar_bottom, ACBlocks.chagaroth_altar_top,
-				ACBlocks.oblivion_deathbomb, ACBlocks.engraver, ACBlocks.cthulhu_statue, ACBlocks.hastur_statue, ACBlocks.jzahar_statue,
-				ACBlocks.azathoth_statue, ACBlocks.nyarlathotep_statue, ACBlocks.yog_sothoth_statue, ACBlocks.shub_niggurath_statue);
 	}
 
 	@SubscribeEvent

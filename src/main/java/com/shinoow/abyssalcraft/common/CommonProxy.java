@@ -125,4 +125,6 @@ public class CommonProxy implements IGuiHandler {
 	public IThreadListener getThreadFromContext(MessageContext ctx) {
 		return ctx.getServerHandler().playerEntity.getServerForPlayer();
 	}
+
+	public void spawnParticle(String particleName, double posX, double posY, double posZ, double velX, double velY, double velZ) {}
 }

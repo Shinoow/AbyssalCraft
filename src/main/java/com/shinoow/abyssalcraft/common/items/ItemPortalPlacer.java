@@ -26,8 +26,9 @@ import net.minecraft.util.text.translation.I18n;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.client.FMLClientHandler;
 
-import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
+import com.shinoow.abyssalcraft.lib.ACLib;
+import com.shinoow.abyssalcraft.lib.ACTabs;
 
 public class ItemPortalPlacer extends Item {
 
@@ -35,7 +36,7 @@ public class ItemPortalPlacer extends Item {
 		super();
 		maxStackSize = 1;
 		setUnlocalizedName("gatewaykey");
-		setCreativeTab(AbyssalCraft.tabTools);
+		setCreativeTab(ACTabs.tabTools);
 	}
 
 	@Override
@@ -54,7 +55,7 @@ public class ItemPortalPlacer extends Item {
 	@Override
 	public EnumActionResult onItemUse(ItemStack is, EntityPlayer player, World world, BlockPos pos, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ){
 		if(!world.isRemote){
-			if(player.dimension == 0 || player.dimension == AbyssalCraft.configDimId1)
+			if(player.dimension == 0 || player.dimension == ACLib.abyssal_wasteland_id)
 			{
 				int direction = MathHelper.floor_double(player.rotationYaw * 4.0F / 360.0F + 0.5D) & 3;
 
@@ -114,12 +115,12 @@ public class ItemPortalPlacer extends Item {
 				}
 				return EnumActionResult.SUCCESS;
 			}
-		} else if(player.dimension == AbyssalCraft.configDimId2 || player.dimension == AbyssalCraft.configDimId3 || player.dimension == AbyssalCraft.configDimId4)
+		} else if(player.dimension == ACLib.dreadlands_id || player.dimension == ACLib.omothol_id || player.dimension == ACLib.dark_realm_id)
 		{
 			FMLClientHandler.instance().getClient().ingameGUI.getChatGUI().printChatMessage(new TextComponentTranslation("message.portalplacer.error.2"));
 			return EnumActionResult.FAIL;
 		}
-		else if(player.dimension == 0 || player.dimension == AbyssalCraft.configDimId1){}
+		else if(player.dimension == 0 || player.dimension == ACLib.abyssal_wasteland_id){}
 		else{
 			FMLClientHandler.instance().getClient().ingameGUI.getChatGUI().printChatMessage(new TextComponentTranslation("message.portalplacer.error.1"));
 			return EnumActionResult.FAIL;

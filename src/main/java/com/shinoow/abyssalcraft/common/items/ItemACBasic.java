@@ -15,14 +15,14 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.TextFormatting;
 
-import com.shinoow.abyssalcraft.AbyssalCraft;
+import com.shinoow.abyssalcraft.lib.ACTabs;
 
 public class ItemACBasic extends Item {
 
 	public ItemACBasic(String par1) {
 		super();
 		setUnlocalizedName(par1);
-		setCreativeTab(AbyssalCraft.tabItems);
+		setCreativeTab(ACTabs.tabItems);
 	}
 
 	@Override

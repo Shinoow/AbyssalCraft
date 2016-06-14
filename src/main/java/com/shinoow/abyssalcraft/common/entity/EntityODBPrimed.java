@@ -19,14 +19,11 @@ import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.translation.I18n;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
-
 import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.common.util.ACLogger;
 import com.shinoow.abyssalcraft.common.util.ExplosionUtil;
-import com.shinoow.abyssalcraft.common.util.SpecialTextUtil;
+import com.shinoow.abyssalcraft.lib.util.SpecialTextUtil;
 
 public class EntityODBPrimed extends Entity {
 
@@ -95,24 +92,26 @@ public class EntityODBPrimed extends Entity {
 		{
 			setDead();
 
-			if (!worldObj.isRemote)
-				explode();
-			if (worldObj.isRemote)
-				message();
-		} else if(worldObj.isRemote)
+			explode();
+
+		} else{
+			handleWaterMovement();
 			if(AbyssalCraft.particleEntity)
 				worldObj.spawnParticle(EnumParticleTypes.PORTAL, posX, posY + 0.5D, posZ, 1.0D, 0.0D, 0.0D);
+		}
 	}
 
 	private void explode()
 	{
-		ACLogger.info("Unleashing hell shortly.");
-		Blocks.obsidian.setResistance(5.0F);
-		Blocks.lava.setResistance(5.0F);
-		Blocks.flowing_lava.setResistance(5.0F);
-		Blocks.water.setResistance(5.0F);
-		Blocks.flowing_water.setResistance(5.0F);
-		ACBlocks.liquid_coralium.setResistance(50.0F);
+		if(!worldObj.isRemote){
+			ACLogger.info("Unleashing hell shortly.");
+			Blocks.obsidian.setResistance(5.0F);
+			Blocks.lava.setResistance(5.0F);
+			Blocks.flowing_lava.setResistance(5.0F);
+			Blocks.water.setResistance(5.0F);
+			Blocks.flowing_water.setResistance(5.0F);
+			ACBlocks.liquid_coralium.setResistance(50.0F);
+		}
 		float var0 = 30.0F;
 		ExplosionUtil.newODBExplosion(worldObj, this, posX, posY, posZ, var0, 128, false, true);
 		ExplosionUtil.newODBExplosion(worldObj, this, posX + 10, posY, posZ, var0, 128, false, true);
@@ -123,33 +122,30 @@ public class EntityODBPrimed extends Entity {
 		ExplosionUtil.newODBExplosion(worldObj, this, posX - 10, posY, posZ + 10, var0, 128, false, true);
 		ExplosionUtil.newODBExplosion(worldObj, this, posX + 10, posY, posZ + 10, var0, 128, false, true);
 		ExplosionUtil.newODBExplosion(worldObj, this, posX - 10, posY, posZ - 10, var0, 128, false, true);
-		Blocks.obsidian.setResistance(2000.0F);
-		Blocks.lava.setResistance(500.0F);
-		Blocks.flowing_lava.setResistance(500.0F);
-		Blocks.water.setResistance(500.0F);
-		Blocks.flowing_water.setResistance(500.0F);
-		ACBlocks.liquid_coralium.setResistance(500.0F);
-		ACLogger.info("Hell successfully unleashed.");
+		if(!worldObj.isRemote){
+			Blocks.obsidian.setResistance(2000.0F);
+			Blocks.lava.setResistance(500.0F);
+			Blocks.flowing_lava.setResistance(500.0F);
+			Blocks.water.setResistance(500.0F);
+			Blocks.flowing_water.setResistance(500.0F);
+			ACBlocks.liquid_coralium.setResistance(500.0F);
+			ACLogger.info("Hell successfully unleashed.");
 
-		int x, x1, z, z1;
-		for(x = 0; x < 9; x++)
-			for(z = 0; z < 9; z++)
-				for(x1 = 0; x1 < 9; x1++)
-					for(z1 = 0; z1 < 9; z1++){
-						worldObj.setBlockState(new BlockPos(posX + x, posY, posZ + z), Blocks.obsidian.getDefaultState());
-						worldObj.setBlockState(new BlockPos(posX - x1, posY, posZ - z1), Blocks.obsidian.getDefaultState());
-						worldObj.setBlockState(new BlockPos(posX + x, posY, posZ - z1), Blocks.obsidian.getDefaultState());
-						worldObj.setBlockState(new BlockPos(posX - x1, posY, posZ  + z), Blocks.obsidian.getDefaultState());
-					}
-		EntitySacthoth sacthoth = new EntitySacthoth(worldObj);
-		sacthoth.setPosition(posX, posY + 1, posZ);
-		worldObj.spawnEntityInWorld(sacthoth);
-	}
-
-	@SideOnly(Side.CLIENT)
-	private void message(){
-		SpecialTextUtil.SacthothGroup(worldObj, I18n.translateToLocal("message.sacthoth.spawn.1"));
-		SpecialTextUtil.SacthothGroup(worldObj, I18n.translateToLocal("message.sacthoth.spawn.2"));
+			int x, x1, z, z1;
+			for(x = 0; x < 9; x++)
+				for(z = 0; z < 9; z++)
+					for(x1 = 0; x1 < 9; x1++)
+						for(z1 = 0; z1 < 9; z1++){
+							worldObj.setBlockState(new BlockPos(posX + x, posY, posZ + z), Blocks.obsidian.getDefaultState());
+							worldObj.setBlockState(new BlockPos(posX - x1, posY, posZ - z1), Blocks.obsidian.getDefaultState());
+							worldObj.setBlockState(new BlockPos(posX + x, posY, posZ - z1), Blocks.obsidian.getDefaultState());
+							worldObj.setBlockState(new BlockPos(posX - x1, posY, posZ  + z), Blocks.obsidian.getDefaultState());
+						}
+			EntitySacthoth sacthoth = new EntitySacthoth(worldObj);
+			sacthoth.setPosition(posX, posY + 1, posZ);
+			worldObj.spawnEntityInWorld(sacthoth);
+			SpecialTextUtil.SacthothGroup(worldObj, I18n.translateToLocal("message.sacthoth.spawn.1"));
+		}
 	}
 
 	@Override

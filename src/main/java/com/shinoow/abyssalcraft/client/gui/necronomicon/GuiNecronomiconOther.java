@@ -21,7 +21,7 @@ import com.shinoow.abyssalcraft.api.item.ACItems;
 import com.shinoow.abyssalcraft.api.necronomicon.NecroData;
 import com.shinoow.abyssalcraft.client.gui.necronomicon.buttons.ButtonCategory;
 import com.shinoow.abyssalcraft.client.gui.necronomicon.buttons.ButtonNextPage;
-import com.shinoow.abyssalcraft.client.lib.NecronomiconText;
+import com.shinoow.abyssalcraft.lib.NecronomiconText;
 
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;

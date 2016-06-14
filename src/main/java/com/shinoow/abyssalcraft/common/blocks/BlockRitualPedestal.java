@@ -58,7 +58,6 @@ public class BlockRitualPedestal extends BlockContainer {
 		setHardness(6.0F);
 		setResistance(12.0F);
 		setStepSound(SoundType.STONE);
-		//		setBlockBounds(0.25F, 0.0F, 0.25F, 0.75F, 1.0F, 0.75F);
 		setCreativeTab(null);
 	}
 
@@ -107,15 +106,14 @@ public class BlockRitualPedestal extends BlockContainer {
 				((TileEntityRitualPedestal)tile).setItem(null);
 				world.playSound(pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, SoundEvents.entity_item_pickup, SoundCategory.PLAYERS, 0.5F, world.rand.nextFloat() - world.rand.nextFloat() * 0.2F + 1, false);
 				return true;
-			} else //				ItemStack heldItem = player.getHeldItem();
-				if(heldItem != null){
-					ItemStack newItem = heldItem.copy();
-					newItem.stackSize = 1;
-					((TileEntityRitualPedestal)tile).setItem(newItem);
-					heldItem.stackSize--;
-					world.playSound(pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, SoundEvents.entity_item_pickup, SoundCategory.PLAYERS, 0.5F, world.rand.nextFloat() - world.rand.nextFloat() * 0.2F + 1, false);
-					return true;
-				}
+			} else if(heldItem != null){
+				ItemStack newItem = heldItem.copy();
+				newItem.stackSize = 1;
+				((TileEntityRitualPedestal)tile).setItem(newItem);
+				heldItem.stackSize--;
+				world.playSound(pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, SoundEvents.entity_item_pickup, SoundCategory.PLAYERS, 0.5F, world.rand.nextFloat() - world.rand.nextFloat() * 0.2F + 1, false);
+				return true;
+			}
 		return false;
 	}
 

@@ -19,15 +19,14 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-import com.shinoow.abyssalcraft.AbyssalCraft;
+import com.shinoow.abyssalcraft.lib.ACTabs;
 
 public class BlockSolidLava extends BlockACBasic {
 
 	public BlockSolidLava(String par1) {
 		super(Material.lava, "pickaxe", 2, 10F, 100F, SoundType.STONE);
 		setUnlocalizedName(par1);
-		//		setBlockTextureName("lava_still");
-		setCreativeTab(AbyssalCraft.tabDecoration);
+		setCreativeTab(ACTabs.tabDecoration);
 	}
 
 	@Override

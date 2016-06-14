@@ -30,7 +30,7 @@ import com.google.common.collect.Lists;
 import com.shinoow.abyssalcraft.common.entity.EntityDreadguard;
 
 @SideOnly(Side.CLIENT)
-public class Renderdreadguard extends RenderBiped<EntityDreadguard>
+public class RenderDreadguard extends RenderBiped<EntityDreadguard>
 {
 	/** Scale of the model to use */
 	private float scale = 1.5F;
@@ -40,7 +40,7 @@ public class Renderdreadguard extends RenderBiped<EntityDreadguard>
 	private ModelBiped field_82434_o;
 	private final List<LayerRenderer<EntityDreadguard>> field_177122_o;
 
-	public Renderdreadguard(RenderManager manager)
+	public RenderDreadguard(RenderManager manager)
 	{
 		super(manager, new ModelZombie(), 0.5F, 1.5F);
 		field_82434_o = modelBipedMain;

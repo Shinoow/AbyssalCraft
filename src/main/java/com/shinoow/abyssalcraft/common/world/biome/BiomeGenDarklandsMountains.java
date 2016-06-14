@@ -35,11 +35,8 @@ public class BiomeGenDarklandsMountains extends BiomeGenBase implements IDarklan
 	public BiomeGenDarklandsMountains(BiomeProperties par1)
 	{
 		super(par1);
-		//		minHeight = 1.3F;
-		//		maxHeight = 0.9F;
 		topBlock = ACBlocks.darkstone.getDefaultState();
 		fillerBlock = ACBlocks.darkstone.getDefaultState();
-		//		waterColorMultiplier = 14745518;
 		theBiomeDecorator.treesPerChunk = 0;
 		spawnableMonsterList.add(new SpawnListEntry(EntityDepthsGhoul.class, 45, 1, 2));
 		spawnableMonsterList.add(new SpawnListEntry(EntityAbyssalZombie.class, 45, 1, 2));

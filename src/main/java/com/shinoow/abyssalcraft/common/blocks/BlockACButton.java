@@ -40,11 +40,4 @@ public class BlockACButton extends BlockButton {
 	{
 		worldIn.playSound((EntityPlayer)null, pos, SoundEvents.block_stone_button_click_off, SoundCategory.BLOCKS, 0.3F, 0.5F);
 	}
-
-	//	@Override
-	//	@SideOnly(Side.CLIENT)
-	//	public void registerBlockIcons(IIconRegister par1IconRegister)
-	//	{
-	//		blockIcon = par1IconRegister.registerIcon(AbyssalCraft.modid + ":" + blockTexture);
-	//	}
 }

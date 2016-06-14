@@ -19,7 +19,6 @@ import net.minecraft.world.World;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
-import com.shinoow.abyssalcraft.client.lib.ParticleEffects;
 import com.shinoow.abyssalcraft.common.util.ExplosionUtil;
 
 public class EntityODBcPrimed extends Entity {
@@ -89,29 +88,35 @@ public class EntityODBcPrimed extends Entity {
 		{
 			setDead();
 
-			if (!worldObj.isRemote)
-				explode();
-		} else if(worldObj.isRemote)
+			explode();
+
+		} else {
+			handleWaterMovement();
 			if(AbyssalCraft.particleEntity)
-				ParticleEffects.spawnParticle("CorBlood", posX + (rand.nextDouble() - 0.5D) * width, posY + rand.nextDouble() * height - 0.25D, posZ + (rand.nextDouble() - 0.5D) * width, (rand.nextDouble() - 0.5D) * 100.0D, -rand.nextDouble(), (rand.nextDouble() - 0.5D) * 100.0D);
+				AbyssalCraft.proxy.spawnParticle("CorBlood", posX + (rand.nextDouble() - 0.5D) * width, posY + rand.nextDouble() * height - 0.25D, posZ + (rand.nextDouble() - 0.5D) * width, (rand.nextDouble() - 0.5D) * 100.0D, -rand.nextDouble(), (rand.nextDouble() - 0.5D) * 100.0D);
+		}
 	}
 
 	private void explode()
 	{
-		Blocks.obsidian.setResistance(5.0F);
-		Blocks.lava.setResistance(5.0F);
-		Blocks.flowing_lava.setResistance(5.0F);
-		Blocks.water.setResistance(5.0F);
-		Blocks.flowing_water.setResistance(5.0F);
-		ACBlocks.liquid_coralium.setResistance(50.0F);
+		if(!worldObj.isRemote){
+			Blocks.obsidian.setResistance(5.0F);
+			Blocks.lava.setResistance(5.0F);
+			Blocks.flowing_lava.setResistance(5.0F);
+			Blocks.water.setResistance(5.0F);
+			Blocks.flowing_water.setResistance(5.0F);
+			ACBlocks.liquid_coralium.setResistance(50.0F);
+		}
 		float var0 = 20.0F;
 		ExplosionUtil.newODBExplosion(worldObj, this, posX, posY, posZ, var0, 32, false, true);
-		Blocks.obsidian.setResistance(2000.0F);
-		Blocks.lava.setResistance(500.0F);
-		Blocks.flowing_lava.setResistance(500.0F);
-		Blocks.water.setResistance(500.0F);
-		Blocks.flowing_water.setResistance(500.0F);
-		ACBlocks.liquid_coralium.setResistance(500.0F);
+		if(!worldObj.isRemote){
+			Blocks.obsidian.setResistance(2000.0F);
+			Blocks.lava.setResistance(500.0F);
+			Blocks.flowing_lava.setResistance(500.0F);
+			Blocks.water.setResistance(500.0F);
+			Blocks.flowing_water.setResistance(500.0F);
+			ACBlocks.liquid_coralium.setResistance(500.0F);
+		}
 	}
 
 	@Override

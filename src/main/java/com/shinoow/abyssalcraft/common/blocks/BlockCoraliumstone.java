@@ -20,14 +20,14 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
+import com.shinoow.abyssalcraft.lib.ACTabs;
 
 public class BlockCoraliumstone extends Block {
 
 	public BlockCoraliumstone() {
 		super(Material.rock);
-		setCreativeTab(AbyssalCraft.tabBlock);
+		setCreativeTab(ACTabs.tabBlock);
 		setTickRandomly(true);
 		setStepSound(SoundType.STONE);
 	}

@@ -34,6 +34,7 @@ import net.minecraftforge.oredict.OreDictionary;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
+import com.shinoow.abyssalcraft.api.entity.EntityUtil;
 import com.shinoow.abyssalcraft.api.internal.DummyNecroDataHandler;
 import com.shinoow.abyssalcraft.api.internal.IInternalNecroDataHandler;
 import com.shinoow.abyssalcraft.api.item.ACItems;
@@ -59,7 +60,7 @@ public class AbyssalCraftAPI {
 	/**
 	 * String used to specify the API version in the "package-info.java" classes
 	 */
-	public static final String API_VERSION = "1.7.1";
+	public static final String API_VERSION = "1.7.5";
 
 	public static Enchantment coralium_enchantment, dread_enchantment, light_pierce, iron_wall;
 
@@ -71,8 +72,6 @@ public class AbyssalCraftAPI {
 	public static DamageSource coralium = new DamageSource("coralium").setDamageBypassesArmor().setMagicDamage();
 	public static DamageSource dread = new DamageSource("dread").setDamageBypassesArmor().setMagicDamage();
 	public static DamageSource antimatter = new DamageSource("antimatter").setDamageBypassesArmor().setMagicDamage();
-
-	private static List<Class<? extends EntityLivingBase>> shoggothFood = Lists.newArrayList();
 
 	private static List<Block> shoggothBlockBlacklist = Lists.newArrayList();
 
@@ -517,9 +516,12 @@ public class AbyssalCraftAPI {
 	 * @param clazz The potential "food" for the Lesser Shoggoth
 	 * 
 	 * @since 1.2
+	 * 
+	 * @deprecated use {@link EntityUtil#addShoggothFood(Class)} instead
 	 */
+	@Deprecated
 	public static void addShoggothFood(Class<? extends EntityLivingBase> clazz){
-		shoggothFood.add(clazz);
+		EntityUtil.addShoggothFood(clazz);
 	}
 
 	/**
@@ -527,9 +529,12 @@ public class AbyssalCraftAPI {
 	 * @return An ArrayList containing Entity classes
 	 * 
 	 * @since 1.2
+	 * 
+	 * @deprecated use {@link EntityUtil#getShoggothFood()} instead
 	 */
+	@Deprecated
 	public static List<Class<? extends EntityLivingBase>> getShoggothFood(){
-		return shoggothFood;
+		return EntityUtil.getShoggothFood();
 	}
 
 	/**

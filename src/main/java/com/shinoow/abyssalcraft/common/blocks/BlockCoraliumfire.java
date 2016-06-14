@@ -29,7 +29,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
-import com.shinoow.abyssalcraft.common.util.EntityUtil;
+import com.shinoow.abyssalcraft.api.entity.EntityUtil;
 
 public class BlockCoraliumfire extends Block {
 

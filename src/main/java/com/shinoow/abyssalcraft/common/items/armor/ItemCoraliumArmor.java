@@ -21,15 +21,14 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 
-import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.api.item.ACItems;
+import com.shinoow.abyssalcraft.lib.ACTabs;
 
 public class ItemCoraliumArmor extends ItemArmor {
 	public ItemCoraliumArmor(ArmorMaterial par2EnumArmorMaterial, int par3, EntityEquipmentSlot par4, String name){
 		super(par2EnumArmorMaterial, par3, par4);
-		//		GameRegistry.registerItem(this, name);
 		setUnlocalizedName(name);
-		setCreativeTab(AbyssalCraft.tabCombat);
+		setCreativeTab(ACTabs.tabCombat);
 	}
 
 	@Override
@@ -48,13 +47,6 @@ public class ItemCoraliumArmor extends ItemArmor {
 			return "abyssalcraft:textures/armor/coralium_2.png";
 		else return null;
 	}
-
-	//	@Override
-	//	@SideOnly(Side.CLIENT)
-	//	public void registerIcons(IIconRegister par1IconRegister)
-	//	{
-	//		itemIcon = par1IconRegister.registerIcon(AbyssalCraft.modid + ":" + this.getUnlocalizedName().substring(5));
-	//	}
 
 	@Override
 	public void onArmorTick(World world, EntityPlayer player, ItemStack itemstack) {

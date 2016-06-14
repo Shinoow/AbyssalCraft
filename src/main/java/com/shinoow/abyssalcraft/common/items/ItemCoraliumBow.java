@@ -38,9 +38,9 @@ import net.minecraftforge.event.ForgeEventFactory;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.api.item.ACItems;
 import com.shinoow.abyssalcraft.common.entity.EntityCoraliumArrow;
+import com.shinoow.abyssalcraft.lib.ACTabs;
 
 public class ItemCoraliumBow extends ItemBow {
 
@@ -69,7 +69,7 @@ public class ItemCoraliumBow extends ItemBow {
 	public ItemCoraliumBow(float chargeTime, int anim_0, int anim_1, int anim_2) {
 		maxStackSize = 1;
 		setUnlocalizedName("corbow");
-		setCreativeTab(AbyssalCraft.tabCombat);
+		setCreativeTab(ACTabs.tabCombat);
 
 		charge = chargeTime;
 
@@ -111,14 +111,6 @@ public class ItemCoraliumBow extends ItemBow {
 
 		return TextFormatting.AQUA + super.getItemStackDisplayName(par1ItemStack);
 	}
-
-	//	public String[] bowPullIconNameArray;
-	//
-	//	public void getBowPullIconNameArray(){
-	//
-	//		bowPullIconNameArray = new String[] {"pulling_0", "pulling_1", "pulling_2" };
-	//
-	//	}
 
 	@Override
 	@SuppressWarnings({ "unchecked", "rawtypes" })

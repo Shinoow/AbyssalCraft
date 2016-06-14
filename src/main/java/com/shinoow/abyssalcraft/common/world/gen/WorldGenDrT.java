@@ -69,7 +69,7 @@ public class WorldGenDrT extends WorldGenTrees {
 				hd += 0.5f;
 				world.setBlockState(new BlockPos(x + (int) (c * xd), y + (int) hd, z + (int) (c * yd)), ACBlocks.dreadlands_log.getStateFromMeta(12));
 				if(world.isAirBlock(new BlockPos(x + (int) (c * xd), y + (int) hd + 1, z + (int) (c * yd))))
-					world.setBlockState(new BlockPos(x + (int) (c * xd), y + (int) hd + 1, z + (int) (c * yd)), ACBlocks.dreadlands_leaves.getStateFromMeta(12));
+					world.setBlockState(new BlockPos(x + (int) (c * xd), y + (int) hd + 1, z + (int) (c * yd)), ACBlocks.dreadlands_leaves.getDefaultState());
 			}
 		}
 

@@ -36,7 +36,7 @@ import com.google.common.collect.Lists;
 import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
-import com.shinoow.abyssalcraft.common.util.EntityUtil;
+import com.shinoow.abyssalcraft.api.entity.EntityUtil;
 
 public class BlockCLiquid extends BlockFluidClassic {
 

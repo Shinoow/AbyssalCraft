@@ -11,11 +11,13 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.common;
 
+import net.minecraft.enchantment.EnchantmentData;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.init.MobEffects;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.oredict.ShapedOreRecipe;
@@ -32,11 +34,12 @@ import com.shinoow.abyssalcraft.api.energy.disruption.DisruptionSwarm;
 import com.shinoow.abyssalcraft.api.item.ACItems;
 import com.shinoow.abyssalcraft.api.item.ItemEngraving;
 import com.shinoow.abyssalcraft.api.ritual.NecronomiconCreationRitual;
+import com.shinoow.abyssalcraft.api.ritual.NecronomiconEnchantmentRitual;
 import com.shinoow.abyssalcraft.api.ritual.NecronomiconInfusionRitual;
 import com.shinoow.abyssalcraft.api.ritual.NecronomiconPotionAoERitual;
 import com.shinoow.abyssalcraft.api.ritual.NecronomiconSummonRitual;
 import com.shinoow.abyssalcraft.api.ritual.RitualRegistry;
-import com.shinoow.abyssalcraft.client.lib.NecronomiconText;
+import com.shinoow.abyssalcraft.common.blocks.BlockCrystalCluster.EnumCrystalType;
 import com.shinoow.abyssalcraft.common.disruptions.DisruptionDisplaceEntities;
 import com.shinoow.abyssalcraft.common.disruptions.DisruptionFire;
 import com.shinoow.abyssalcraft.common.disruptions.DisruptionFireRain;
@@ -55,6 +58,8 @@ import com.shinoow.abyssalcraft.common.entity.EntityShadowMonster;
 import com.shinoow.abyssalcraft.common.ritual.NecronomiconBreedingRitual;
 import com.shinoow.abyssalcraft.common.ritual.NecronomiconDreadSpawnRitual;
 import com.shinoow.abyssalcraft.common.ritual.NecronomiconRespawnJzaharRitual;
+import com.shinoow.abyssalcraft.lib.ACLib;
+import com.shinoow.abyssalcraft.lib.NecronomiconText;
 
 public class AbyssalCrafting {
 
@@ -142,8 +147,6 @@ public class AbyssalCrafting {
 		GameRegistry.addRecipe(new ItemStack(ACBlocks.dreadlands_wood_fence, 4), new Object[] {"###", "###", '#', ACBlocks.dreadlands_planks});
 		GameRegistry.addRecipe(new ItemStack(ACBlocks.transmutator_idle, 1), new Object[] {"###", "#%#", "&$&", '#', ACItems.coralium_brick, '%', new ItemStack(ACItems.transmutation_gem, 1, OreDictionary.WILDCARD_VALUE), '&', ACBlocks.block_of_coralium, '$', ACItems.liquid_coralium_bucket});
 		GameRegistry.addRecipe(new ItemStack(ACBlocks.crystallizer_idle, 1), new Object[] {"###", "&%&", "###", '#', ACBlocks.dreadstone_brick, '&', ACBlocks.block_of_dreadium, '%', Blocks.furnace});
-		GameRegistry.addRecipe(new ItemStack(ACBlocks.chagaroth_altar_top, 1), new Object[] {"#%#", "&&&", "@@@", '#', Items.stick, '%', Items.bucket, '&', ACItems.dread_cloth, '@', ACItems.dreadium_ingot});
-		GameRegistry.addRecipe(new ItemStack(ACBlocks.chagaroth_altar_bottom, 1), new Object[] {"#%#", "&@&", "T$T", '#', Items.bone, '%', ACItems.dread_cloth, '&', ACItems.dreadium_ingot, '@', ACItems.dreaded_gateway_key, '$', ACItems.dreaded_shard_of_abyssalnite, 'T', ACBlocks.dreadstone});
 		GameRegistry.addRecipe(new ItemStack(ACBlocks.ethaxium_brick, 1, 0), new Object [] {"##", "##", '#', ACItems.ethaxium_brick});
 		GameRegistry.addRecipe(new ItemStack(ACBlocks.ethaxium_brick, 1, 1), new Object[] {"##", "##", '#', new ItemStack(ACBlocks.ethaxium_brick, 1, 0)});
 		GameRegistry.addRecipe(new ItemStack(ACBlocks.ethaxium_pillar, 2), new Object[] {"#%", "#%", '#', new ItemStack(ACBlocks.ethaxium_brick, 1, 0), '%', ACBlocks.ethaxium});
@@ -170,6 +173,20 @@ public class AbyssalCrafting {
 		GameRegistry.addRecipe(new ItemStack(ACBlocks.energy_pedestal), new Object[]{"#%#", "#&#", "###", '#', ACBlocks.monolith_stone, '%', ACItems.coralium_pearl, '&', ACItems.shadow_gem});
 		GameRegistry.addRecipe(new ItemStack(ACBlocks.monolith_pillar), new Object[]{"##", "##", '#', ACBlocks.monolith_stone});
 		GameRegistry.addRecipe(new ItemStack(ACBlocks.sacrificial_altar), new Object[]{"#%#", "&$&", "&&&", '#', Blocks.torch, '%', ACItems.coralium_pearl, '$', ACItems.shadow_gem, '&', ACBlocks.monolith_stone});
+		GameRegistry.addRecipe(new ItemStack(ACBlocks.decorative_cthulhu_statue), new Object[] {"#", '#', ACBlocks.cthulhu_statue});
+		GameRegistry.addRecipe(new ItemStack(ACBlocks.decorative_hastur_statue), new Object[] {"#", '#', ACBlocks.hastur_statue});
+		GameRegistry.addRecipe(new ItemStack(ACBlocks.decorative_jzahar_statue), new Object[] {"#", '#', ACBlocks.jzahar_statue});
+		GameRegistry.addRecipe(new ItemStack(ACBlocks.decorative_azathoth_statue), new Object[] {"#", '#', ACBlocks.azathoth_statue});
+		GameRegistry.addRecipe(new ItemStack(ACBlocks.decorative_nyarlathotep_statue), new Object[] {"#", '#', ACBlocks.nyarlathotep_statue});
+		GameRegistry.addRecipe(new ItemStack(ACBlocks.decorative_yog_sothoth_statue), new Object[] {"#", '#', ACBlocks.yog_sothoth_statue});
+		GameRegistry.addRecipe(new ItemStack(ACBlocks.decorative_shub_niggurath_statue), new Object[] {"#", '#', ACBlocks.shub_niggurath_statue});
+		GameRegistry.addRecipe(new ItemStack(ACBlocks.cthulhu_statue), new Object[] {"#", '#', ACBlocks.decorative_cthulhu_statue});
+		GameRegistry.addRecipe(new ItemStack(ACBlocks.hastur_statue), new Object[] {"#", '#', ACBlocks.decorative_hastur_statue});
+		GameRegistry.addRecipe(new ItemStack(ACBlocks.jzahar_statue), new Object[] {"#", '#', ACBlocks.decorative_jzahar_statue});
+		GameRegistry.addRecipe(new ItemStack(ACBlocks.azathoth_statue), new Object[] {"#", '#', ACBlocks.decorative_azathoth_statue});
+		GameRegistry.addRecipe(new ItemStack(ACBlocks.nyarlathotep_statue), new Object[] {"#", '#', ACBlocks.decorative_nyarlathotep_statue});
+		GameRegistry.addRecipe(new ItemStack(ACBlocks.yog_sothoth_statue), new Object[] {"#", '#', ACBlocks.decorative_yog_sothoth_statue});
+		GameRegistry.addRecipe(new ItemStack(ACBlocks.shub_niggurath_statue), new Object[] {"#", '#', ACBlocks.decorative_shub_niggurath_statue});
 	}
 
 	private static void addBlockSmelting(){
@@ -251,7 +268,13 @@ public class AbyssalCrafting {
 		GameRegistry.addRecipe(new ItemStack(ACItems.crystal_shard, 1, 23), new Object[] {"#%", '#', new ItemStack(ACItems.crystal_shard, 1, 19), '%', new ItemStack(ACItems.crystal_shard, 1, 4)});
 		GameRegistry.addRecipe(new ItemStack(ACItems.ethaxium_ingot), new Object[] {"###", "#%#", "###", '#', ACItems.ethaxium_brick, '%', ACItems.life_crystal});
 		GameRegistry.addRecipe(new ItemStack(ACItems.ethaxium_ingot), new Object[] {" # ", "#%#", " # ", '#', ACItems.ethaxium_brick, '%', ACItems.oblivion_catalyst});
-		//		GameRegistry.addRecipe(new ItemStack(Items.spawn_egg, 1, AbyssalCraft.stringtoIDMapping.get("shadowboss")), new Object[] {"#", '#', AbyssalCraft.ODB});
+		ItemStack egg = new ItemStack(Items.spawn_egg);
+		NBTTagCompound tag = egg.hasTagCompound() ? egg.getTagCompound() : new NBTTagCompound();
+		NBTTagCompound tag1 = new NBTTagCompound();
+		tag1.setString("id", "abyssalcraft.shadowboss");
+		tag.setTag("EntityTag", tag1);
+		egg.setTagCompound(tag);
+		GameRegistry.addRecipe(egg, new Object[] {"#", '#', ACBlocks.oblivion_deathbomb});
 		GameRegistry.addRecipe(new ItemStack(ACItems.ethaxium_ingot, 9), new Object[] {"#", '#', ACBlocks.block_of_ethaxium});
 		GameRegistry.addRecipe(new ItemStack(ACItems.ethaxium_pickaxe, 1), new Object[] {"###", " % ", " % ", '#', ACItems.ethaxium_ingot, '%', ACItems.ethaxium_brick});
 		GameRegistry.addRecipe(new ItemStack(ACItems.ethaxium_axe, 1), new Object[] {"##", "#%", " %", '#', ACItems.ethaxium_ingot, '%', ACItems.ethaxium_brick});
@@ -288,56 +311,12 @@ public class AbyssalCrafting {
 		GameRegistry.addRecipe(new ItemStack(ACItems.refined_coralium_ingot), new Object[] {"###", "###", "###", '#', new ItemStack(ACItems.ingot_nugget, 1, 1)});
 		GameRegistry.addRecipe(new ItemStack(ACItems.dreadium_ingot), new Object[] {"###", "###", "###", '#', new ItemStack(ACItems.ingot_nugget, 1, 2)});
 		GameRegistry.addRecipe(new ItemStack(ACItems.ethaxium_ingot), new Object[] {"###", "###", "###", '#', new ItemStack(ACItems.ingot_nugget, 1, 3)});
-		GameRegistry.addRecipe(new ItemStack(ACItems.crystal, 1, 0), new Object[] {"###", "###", "###", '#', new ItemStack(ACItems.crystal_shard, 1, 0)});
-		GameRegistry.addRecipe(new ItemStack(ACItems.crystal, 1, 1), new Object[] {"###", "###", "###", '#', new ItemStack(ACItems.crystal_shard, 1, 1)});
-		GameRegistry.addRecipe(new ItemStack(ACItems.crystal, 1, 2), new Object[] {"###", "###", "###", '#', new ItemStack(ACItems.crystal_shard, 1, 2)});
-		GameRegistry.addRecipe(new ItemStack(ACItems.crystal, 1, 3), new Object[] {"###", "###", "###", '#', new ItemStack(ACItems.crystal_shard, 1, 3)});
-		GameRegistry.addRecipe(new ItemStack(ACItems.crystal, 1, 4), new Object[] {"###", "###", "###", '#', new ItemStack(ACItems.crystal_shard, 1, 4)});
-		GameRegistry.addRecipe(new ItemStack(ACItems.crystal, 1, 5), new Object[] {"###", "###", "###", '#', new ItemStack(ACItems.crystal_shard, 1, 5)});
-		GameRegistry.addRecipe(new ItemStack(ACItems.crystal, 1, 6), new Object[] {"###", "###", "###", '#', new ItemStack(ACItems.crystal_shard, 1, 6)});
-		GameRegistry.addRecipe(new ItemStack(ACItems.crystal, 1, 7), new Object[] {"###", "###", "###", '#', new ItemStack(ACItems.crystal_shard, 1, 7)});
-		GameRegistry.addRecipe(new ItemStack(ACItems.crystal, 1, 8), new Object[] {"###", "###", "###", '#', new ItemStack(ACItems.crystal_shard, 1, 8)});
-		GameRegistry.addRecipe(new ItemStack(ACItems.crystal, 1, 9), new Object[] {"###", "###", "###", '#', new ItemStack(ACItems.crystal_shard, 1, 9)});
-		GameRegistry.addRecipe(new ItemStack(ACItems.crystal, 1, 10), new Object[] {"###", "###", "###", '#', new ItemStack(ACItems.crystal_shard, 1, 10)});
-		GameRegistry.addRecipe(new ItemStack(ACItems.crystal, 1, 11), new Object[] {"###", "###", "###", '#', new ItemStack(ACItems.crystal_shard, 1, 11)});
-		GameRegistry.addRecipe(new ItemStack(ACItems.crystal, 1, 12), new Object[] {"###", "###", "###", '#', new ItemStack(ACItems.crystal_shard, 1, 12)});
-		GameRegistry.addRecipe(new ItemStack(ACItems.crystal, 1, 13), new Object[] {"###", "###", "###", '#', new ItemStack(ACItems.crystal_shard, 1, 13)});
-		GameRegistry.addRecipe(new ItemStack(ACItems.crystal, 1, 14), new Object[] {"###", "###", "###", '#', new ItemStack(ACItems.crystal_shard, 1, 14)});
-		GameRegistry.addRecipe(new ItemStack(ACItems.crystal, 1, 15), new Object[] {"###", "###", "###", '#', new ItemStack(ACItems.crystal_shard, 1, 15)});
-		GameRegistry.addRecipe(new ItemStack(ACItems.crystal, 1, 16), new Object[] {"###", "###", "###", '#', new ItemStack(ACItems.crystal_shard, 1, 16)});
-		GameRegistry.addRecipe(new ItemStack(ACItems.crystal, 1, 17), new Object[] {"###", "###", "###", '#', new ItemStack(ACItems.crystal_shard, 1, 17)});
-		GameRegistry.addRecipe(new ItemStack(ACItems.crystal, 1, 18), new Object[] {"###", "###", "###", '#', new ItemStack(ACItems.crystal_shard, 1, 18)});
-		GameRegistry.addRecipe(new ItemStack(ACItems.crystal, 1, 19), new Object[] {"###", "###", "###", '#', new ItemStack(ACItems.crystal_shard, 1, 19)});
-		GameRegistry.addRecipe(new ItemStack(ACItems.crystal, 1, 20), new Object[] {"###", "###", "###", '#', new ItemStack(ACItems.crystal_shard, 1, 20)});
-		GameRegistry.addRecipe(new ItemStack(ACItems.crystal, 1, 21), new Object[] {"###", "###", "###", '#', new ItemStack(ACItems.crystal_shard, 1, 21)});
-		GameRegistry.addRecipe(new ItemStack(ACItems.crystal, 1, 22), new Object[] {"###", "###", "###", '#', new ItemStack(ACItems.crystal_shard, 1, 22)});
-		GameRegistry.addRecipe(new ItemStack(ACItems.crystal, 1, 23), new Object[] {"###", "###", "###", '#', new ItemStack(ACItems.crystal_shard, 1, 23)});
-		GameRegistry.addRecipe(new ItemStack(ACItems.crystal, 1, 24), new Object[] {"###", "###", "###", '#', new ItemStack(ACItems.crystal_shard, 1, 24)});
-		GameRegistry.addRecipe(new ItemStack(ACItems.crystal_shard, 9, 0), new Object[] {"#", '#', new ItemStack(ACItems.crystal, 1, 0)});
-		GameRegistry.addRecipe(new ItemStack(ACItems.crystal_shard, 9, 1), new Object[] {"#", '#', new ItemStack(ACItems.crystal, 1, 1)});
-		GameRegistry.addRecipe(new ItemStack(ACItems.crystal_shard, 9, 2), new Object[] {"#", '#', new ItemStack(ACItems.crystal, 1, 2)});
-		GameRegistry.addRecipe(new ItemStack(ACItems.crystal_shard, 9, 3), new Object[] {"#", '#', new ItemStack(ACItems.crystal, 1, 3)});
-		GameRegistry.addRecipe(new ItemStack(ACItems.crystal_shard, 9, 4), new Object[] {"#", '#', new ItemStack(ACItems.crystal, 1, 4)});
-		GameRegistry.addRecipe(new ItemStack(ACItems.crystal_shard, 9, 5), new Object[] {"#", '#', new ItemStack(ACItems.crystal, 1, 5)});
-		GameRegistry.addRecipe(new ItemStack(ACItems.crystal_shard, 9, 6), new Object[] {"#", '#', new ItemStack(ACItems.crystal, 1, 6)});
-		GameRegistry.addRecipe(new ItemStack(ACItems.crystal_shard, 9, 7), new Object[] {"#", '#', new ItemStack(ACItems.crystal, 1, 7)});
-		GameRegistry.addRecipe(new ItemStack(ACItems.crystal_shard, 9, 8), new Object[] {"#", '#', new ItemStack(ACItems.crystal, 1, 8)});
-		GameRegistry.addRecipe(new ItemStack(ACItems.crystal_shard, 9, 9), new Object[] {"#", '#', new ItemStack(ACItems.crystal, 1, 9)});
-		GameRegistry.addRecipe(new ItemStack(ACItems.crystal_shard, 9, 10), new Object[] {"#", '#', new ItemStack(ACItems.crystal, 1, 10)});
-		GameRegistry.addRecipe(new ItemStack(ACItems.crystal_shard, 9, 11), new Object[] {"#", '#', new ItemStack(ACItems.crystal, 1, 11)});
-		GameRegistry.addRecipe(new ItemStack(ACItems.crystal_shard, 9, 12), new Object[] {"#", '#', new ItemStack(ACItems.crystal, 1, 12)});
-		GameRegistry.addRecipe(new ItemStack(ACItems.crystal_shard, 9, 13), new Object[] {"#", '#', new ItemStack(ACItems.crystal, 1, 13)});
-		GameRegistry.addRecipe(new ItemStack(ACItems.crystal_shard, 9, 14), new Object[] {"#", '#', new ItemStack(ACItems.crystal, 1, 14)});
-		GameRegistry.addRecipe(new ItemStack(ACItems.crystal_shard, 9, 15), new Object[] {"#", '#', new ItemStack(ACItems.crystal, 1, 15)});
-		GameRegistry.addRecipe(new ItemStack(ACItems.crystal_shard, 9, 16), new Object[] {"#", '#', new ItemStack(ACItems.crystal, 1, 16)});
-		GameRegistry.addRecipe(new ItemStack(ACItems.crystal_shard, 9, 17), new Object[] {"#", '#', new ItemStack(ACItems.crystal, 1, 17)});
-		GameRegistry.addRecipe(new ItemStack(ACItems.crystal_shard, 9, 18), new Object[] {"#", '#', new ItemStack(ACItems.crystal, 1, 18)});
-		GameRegistry.addRecipe(new ItemStack(ACItems.crystal_shard, 9, 19), new Object[] {"#", '#', new ItemStack(ACItems.crystal, 1, 19)});
-		GameRegistry.addRecipe(new ItemStack(ACItems.crystal_shard, 9, 20), new Object[] {"#", '#', new ItemStack(ACItems.crystal, 1, 20)});
-		GameRegistry.addRecipe(new ItemStack(ACItems.crystal_shard, 9, 21), new Object[] {"#", '#', new ItemStack(ACItems.crystal, 1, 21)});
-		GameRegistry.addRecipe(new ItemStack(ACItems.crystal_shard, 9, 22), new Object[] {"#", '#', new ItemStack(ACItems.crystal, 1, 22)});
-		GameRegistry.addRecipe(new ItemStack(ACItems.crystal_shard, 9, 23), new Object[] {"#", '#', new ItemStack(ACItems.crystal, 1, 23)});
-		GameRegistry.addRecipe(new ItemStack(ACItems.crystal_shard, 9, 24), new Object[] {"#", '#', new ItemStack(ACItems.crystal, 1, 24)});
+		for(int i = 0; i < EnumCrystalType.values().length; i++){
+			GameRegistry.addRecipe(new ItemStack(ACBlocks.crystal_cluster, 1, i), new Object[] {"###", "###", "###", '#', new ItemStack(ACItems.crystal, 1, i)});
+			GameRegistry.addRecipe(new ItemStack(ACItems.crystal, 9, i), new Object[] {"#", '#', new ItemStack(ACBlocks.crystal_cluster, 1, i)});
+			GameRegistry.addRecipe(new ItemStack(ACItems.crystal, 1, i), new Object[] {"###", "###", "###", '#', new ItemStack(ACItems.crystal_shard, 1, i)});
+			GameRegistry.addRecipe(new ItemStack(ACItems.crystal_shard, 9, i), new Object[] {"#", '#', new ItemStack(ACItems.crystal, 1, i)});
+		}
 		GameRegistry.addRecipe(new ItemStack(ACItems.skin, 1, 0), new Object[] {"###", "#%#", "###", '#', ACItems.coralium_plagued_flesh, '%', new ItemStack(ACItems.essence, 1, 0)});
 		GameRegistry.addRecipe(new ItemStack(ACItems.skin, 1, 1), new Object[] {"###", "#%#", "###", '#', ACItems.dread_fragment, '%', new ItemStack(ACItems.essence, 1, 1)});
 		GameRegistry.addRecipe(new ItemStack(ACItems.skin, 1, 2), new Object[] {"###", "#%#", "###", '#', ACItems.omothol_flesh, '%', new ItemStack(ACItems.essence, 1, 2)});
@@ -746,32 +725,36 @@ public class AbyssalCrafting {
 
 	private static void addRitualRecipes(){
 		RitualRegistry.instance().addDimensionToBookTypeAndName(0, 0, NecronomiconText.LABEL_INFORMATION_OVERWORLD_TITLE);
-		RitualRegistry.instance().addDimensionToBookTypeAndName(AbyssalCraft.configDimId1, 1, NecronomiconText.LABEL_INFORMATION_ABYSSAL_WASTELAND_TITLE);
-		RitualRegistry.instance().addDimensionToBookTypeAndName(AbyssalCraft.configDimId2, 2, NecronomiconText.LABEL_INFORMATION_DREADLANDS_TITLE);
-		RitualRegistry.instance().addDimensionToBookTypeAndName(AbyssalCraft.configDimId3, 3, NecronomiconText.LABEL_INFORMATION_OMOTHOL_TITLE);
-		RitualRegistry.instance().addDimensionToBookTypeAndName(AbyssalCraft.configDimId4, 3, NecronomiconText.LABEL_INFORMATION_DARK_REALM_TITLE);
+		RitualRegistry.instance().addDimensionToBookTypeAndName(ACLib.abyssal_wasteland_id, 1, NecronomiconText.LABEL_INFORMATION_ABYSSAL_WASTELAND_TITLE);
+		RitualRegistry.instance().addDimensionToBookTypeAndName(ACLib.dreadlands_id, 2, NecronomiconText.LABEL_INFORMATION_DREADLANDS_TITLE);
+		RitualRegistry.instance().addDimensionToBookTypeAndName(ACLib.omothol_id, 3, NecronomiconText.LABEL_INFORMATION_OMOTHOL_TITLE);
+		RitualRegistry.instance().addDimensionToBookTypeAndName(ACLib.dark_realm_id, 3, NecronomiconText.LABEL_INFORMATION_DARK_REALM_TITLE);
 
 		Object[] gk2offerings = new Object[]{new ItemStack(ACItems.transmutation_gem), new ItemStack(ACBlocks.dreadlands_infused_powerstone), new ItemStack(ACItems.eye_of_the_abyss)};
-		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("asorahGatewayKey", 1, AbyssalCraft.configDimId1, 10000F, new ItemStack(ACItems.dreaded_gateway_key), new ItemStack(ACItems.gateway_key), gk2offerings));
+		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("asorahGatewayKey", 1, ACLib.abyssal_wasteland_id, 10000F, new ItemStack(ACItems.dreaded_gateway_key), new ItemStack(ACItems.gateway_key), gk2offerings));
 		Object[] ocofferings = new Object[]{new ItemStack(Items.redstone), new ItemStack(ACItems.shard_of_oblivion), new ItemStack(Items.redstone), new ItemStack(ACItems.shard_of_oblivion),
 				new ItemStack(Items.redstone), new ItemStack(ACItems.shard_of_oblivion), new ItemStack(Items.redstone), new ItemStack(ACItems.shard_of_oblivion)};
-		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("oblivionCatalyst", 0, 5000F, new ItemStack(ACItems.oblivion_catalyst), new ItemStack(Items.ender_eye), ocofferings));
+		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("oblivionCatalyst", 0, -1, 5000F, true, new ItemStack(ACItems.oblivion_catalyst), new ItemStack(Items.ender_eye), ocofferings));
 		Object[] tgofferings = new Object[]{new ItemStack(Items.diamond), new ItemStack(Items.blaze_powder), new ItemStack(Items.ender_pearl), new ItemStack(Items.blaze_powder),
 				new ItemStack(Items.diamond), new ItemStack(Items.blaze_powder), new ItemStack(Items.ender_pearl), new ItemStack(Items.blaze_powder)};
 		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("transmutationGem", 0, 300F, new ItemStack(ACItems.transmutation_gem), new ItemStack(ACItems.coralium_pearl), tgofferings));
 		Object[] depthsofferings = new Object[]{new ItemStack(ACItems.coralium_gem_cluster_9), new ItemStack(ACItems.coralium_gem_cluster_9), new ItemStack(ACItems.liquid_coralium_bucket),
 				new ItemStack(Blocks.vine), new ItemStack(Blocks.waterlily), new ItemStack(ACItems.transmutation_gem), new ItemStack(ACItems.coralium_plagued_flesh)};
-		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("depthsHelmet", 1, AbyssalCraft.configDimId1, 300F, new ItemStack(ACItems.depths_helmet), new ItemStack(ACItems.refined_coralium_helmet), depthsofferings));
-		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("depthsChestplate", 1, AbyssalCraft.configDimId1, 300F, new ItemStack(ACItems.depths_chestplate), new ItemStack(ACItems.refined_coralium_chestplate), depthsofferings));
-		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("depthsLeggings", 1, AbyssalCraft.configDimId1, 300F, new ItemStack(ACItems.depths_leggings), new ItemStack(ACItems.refined_coralium_leggings), depthsofferings));
-		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("depthsBoots", 1, AbyssalCraft.configDimId1, 300F, new ItemStack(ACItems.depths_boots), new ItemStack(ACItems.refined_coralium_boots), depthsofferings));
+		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("depthsHelmet", 1, ACLib.abyssal_wasteland_id, 300F, new ItemStack(ACItems.depths_helmet), new ItemStack(ACItems.refined_coralium_helmet), depthsofferings));
+		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("depthsChestplate", 1, ACLib.abyssal_wasteland_id, 300F, new ItemStack(ACItems.depths_chestplate), new ItemStack(ACItems.refined_coralium_chestplate), depthsofferings));
+		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("depthsLeggings", 1, ACLib.abyssal_wasteland_id, 300F, new ItemStack(ACItems.depths_leggings), new ItemStack(ACItems.refined_coralium_leggings), depthsofferings));
+		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("depthsBoots", 1, ACLib.abyssal_wasteland_id, 300F, new ItemStack(ACItems.depths_boots), new ItemStack(ACItems.refined_coralium_boots), depthsofferings));
 		Object[] asorahofferings = new Object[]{new ItemStack(Items.gold_ingot), new ItemStack(ACItems.transmutation_gem), new ItemStack(Items.gold_ingot), new ItemStack(ACItems.liquid_coralium_bucket),
 				new ItemStack(Items.gold_ingot), new ItemStack(Blocks.enchanting_table), new ItemStack(Items.gold_ingot)};
-		RitualRegistry.instance().registerRitual(new NecronomiconSummonRitual("summonAsorah", 1, AbyssalCraft.configDimId1, 1000F, EntityDragonBoss.class, asorahofferings));
+		RitualRegistry.instance().registerRitual(new NecronomiconSummonRitual("summonAsorah", 1, ACLib.abyssal_wasteland_id, 1000F, EntityDragonBoss.class, asorahofferings));
 		RitualRegistry.instance().registerRitual(new NecronomiconBreedingRitual());
 		Object[] sacthothofferings = new Object[]{new ItemStack(ACItems.oblivion_catalyst), new ItemStack(Blocks.obsidian), new ItemStack(ACItems.liquid_coralium_bucket), new ItemStack(Blocks.obsidian),
 				new ItemStack(ACItems.liquid_antimatter_bucket), new ItemStack(Blocks.obsidian), new ItemStack(ACBlocks.odb_core), new ItemStack(Blocks.obsidian)};
 		RitualRegistry.instance().registerRitual(new NecronomiconSummonRitual("summonSacthoth", 1, 1000F, EntitySacthoth.class, sacthothofferings));
+		Object[] dreadaltarbofferings = new Object[]{ACItems.dread_cloth, Items.bone, ACItems.dreadium_ingot, ACBlocks.dreadstone, ACItems.dreaded_gateway_key, ACItems.dreadium_ingot, ACBlocks.dreadstone, Items.bone};
+		RitualRegistry.instance().registerRitual(new NecronomiconCreationRitual("altarOfChagarothBottom", 2, ACLib.dreadlands_id, 20000F, true, new ItemStack(ACBlocks.chagaroth_altar_bottom), dreadaltarbofferings));
+		Object[] dreadaltartofferings = new Object[]{Items.bucket, Items.stick, ACItems.dread_cloth, ACItems.dreadium_ingot, ACItems.dread_cloth, ACItems.dreadium_ingot, ACItems.dread_cloth, Items.stick};
+		RitualRegistry.instance().registerRitual(new NecronomiconCreationRitual("altarOfChagarothTop", 2, ACLib.dreadlands_id, 20000F, true, new ItemStack(ACBlocks.chagaroth_altar_top), dreadaltartofferings));
 		RitualRegistry.instance().registerRitual(new NecronomiconDreadSpawnRitual());
 		Object[] coraoeofferings = new Object[]{new ItemStack(ACItems.coralium_plagued_flesh), new ItemStack(Items.potionitem, 1, 0), new ItemStack(ACItems.coralium_plagued_flesh), new ItemStack(Items.potionitem, 1, 0),
 				new ItemStack(ACItems.coralium_plagued_flesh), new ItemStack(Items.potionitem, 1, 0),new ItemStack(ACItems.coralium_plagued_flesh), new ItemStack(Items.gunpowder)};
@@ -782,44 +765,50 @@ public class AbyssalCrafting {
 		Object[] antiaoeofferings = new Object[]{new ItemStack(ACItems.rotten_anti_flesh), new ItemStack(Items.potionitem, 1, 0), new ItemStack(ACItems.rotten_anti_flesh), new ItemStack(Items.potionitem, 1, 0),
 				new ItemStack(ACItems.rotten_anti_flesh), new ItemStack(Items.potionitem, 1, 0), new ItemStack(ACItems.rotten_anti_flesh), new ItemStack(Items.gunpowder)};
 		RitualRegistry.instance().registerRitual(new NecronomiconPotionAoERitual("antiPotionAoE", 0, 300F, AbyssalCraftAPI.antimatter_potion, antiaoeofferings));
+		Object[] corenchofferings = new Object[]{new ItemStack(ACItems.essence, 1, 0), new ItemStack(ACItems.shoggoth_flesh, 1, 1), ACItems.refined_coralium_ingot, ACItems.coralium_plagued_flesh, Items.book,
+				ACItems.coralium_plagued_flesh, ACItems.refined_coralium_ingot, new ItemStack(ACItems.shoggoth_flesh, 1, 1)};
+		RitualRegistry.instance().registerRitual(new NecronomiconEnchantmentRitual("corEnchantment", 1, ACLib.abyssal_wasteland_id, 5000F, new EnchantmentData(AbyssalCraftAPI.coralium_enchantment, 1), corenchofferings));
+		Object[] dreenchofferings = new Object[]{new ItemStack(ACItems.essence, 1, 1), new ItemStack(ACItems.shoggoth_flesh, 1, 2), ACItems.dreadium_ingot, ACItems.dread_fragment, Items.book, ACItems.dread_fragment,
+				ACItems.dreadium_ingot, new ItemStack(ACItems.shoggoth_flesh, 1, 2)};
+		RitualRegistry.instance().registerRitual(new NecronomiconEnchantmentRitual("dreEnchantment", 2, ACLib.dreadlands_id, 5000F, new EnchantmentData(AbyssalCraftAPI.dread_enchantment, 1), dreenchofferings));
 		Object[] cthulhuofferings = new Object[]{new ItemStack(ACItems.shoggoth_flesh, 1, 0), new ItemStack(ACItems.shoggoth_flesh, 1, 0), new ItemStack(ACItems.shoggoth_flesh, 1, 0),
 				new ItemStack(ACItems.shoggoth_flesh, 1, 0), new ItemStack(ACItems.shoggoth_flesh, 1, 0), new ItemStack(ACItems.essence, 1, 0), new ItemStack(ACItems.essence, 1, 1),
 				new ItemStack(ACItems.essence, 1, 2)};
-		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("cthulhuStatue", 4, AbyssalCraft.configDimId3, 20000F, true, new ItemStack(ACBlocks.cthulhu_statue), ACBlocks.monolith_stone, cthulhuofferings));
+		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("cthulhuStatue", 4, -1, 20000F, true, new ItemStack(ACBlocks.cthulhu_statue), ACBlocks.monolith_stone, cthulhuofferings));
 		Object[] hasturofferings = new Object[]{new ItemStack(ACItems.shoggoth_flesh, 1, 1), new ItemStack(ACItems.shoggoth_flesh, 1, 1), new ItemStack(ACItems.shoggoth_flesh, 1, 1),
 				new ItemStack(ACItems.shoggoth_flesh, 1, 1), new ItemStack(ACItems.shoggoth_flesh, 1, 1), new ItemStack(ACItems.essence, 1, 0), new ItemStack(ACItems.essence, 1, 1),
 				new ItemStack(ACItems.essence, 1, 2)};
-		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("hasturStatue", 4, AbyssalCraft.configDimId3, 20000F, true, new ItemStack(ACBlocks.hastur_statue), ACBlocks.monolith_stone, hasturofferings));
+		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("hasturStatue", 4, -1, 20000F, true, new ItemStack(ACBlocks.hastur_statue), ACBlocks.monolith_stone, hasturofferings));
 		Object[] jzaharofferings = new Object[]{ACItems.eldritch_scale, ACItems.eldritch_scale, ACItems.eldritch_scale, ACItems.eldritch_scale, ACItems.eldritch_scale,
 				new ItemStack(ACItems.essence, 1, 0), new ItemStack(ACItems.essence, 1, 1), new ItemStack(ACItems.essence, 1, 2)};
-		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("jzaharStatue", 4, AbyssalCraft.configDimId3, 20000F, true, new ItemStack(ACBlocks.jzahar_statue), ACBlocks.monolith_stone, jzaharofferings));
+		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("jzaharStatue", 4, -1, 20000F, true, new ItemStack(ACBlocks.jzahar_statue), ACBlocks.monolith_stone, jzaharofferings));
 		Object[] azathothofferings = new Object[]{new ItemStack(ACItems.shoggoth_flesh, 1, 0), new ItemStack(ACItems.shoggoth_flesh, 1, 1), new ItemStack(ACItems.shoggoth_flesh, 1, 2),
 				new ItemStack(ACItems.shoggoth_flesh, 1, 3), new ItemStack(ACItems.shoggoth_flesh, 1, 4), new ItemStack(ACItems.essence, 1, 0), new ItemStack(ACItems.essence, 1, 1),
 				new ItemStack(ACItems.essence, 1, 2)};
-		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("azathothStatue", 4, AbyssalCraft.configDimId3, 20000F, true, new ItemStack(ACBlocks.azathoth_statue), ACBlocks.monolith_stone, azathothofferings));
+		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("azathothStatue", 4, -1, 20000F, true, new ItemStack(ACBlocks.azathoth_statue), ACBlocks.monolith_stone, azathothofferings));
 		Object[] nyarlathotepofferings = new Object[]{new ItemStack(ACItems.shoggoth_flesh, 1, 2), new ItemStack(ACItems.shoggoth_flesh, 1, 2), new ItemStack(ACItems.shoggoth_flesh, 1, 2),
 				new ItemStack(ACItems.shoggoth_flesh, 1, 2), new ItemStack(ACItems.shoggoth_flesh, 1, 2), new ItemStack(ACItems.essence, 1, 0), new ItemStack(ACItems.essence, 1, 1),
 				new ItemStack(ACItems.essence, 1, 2)};
-		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("nyarlathotepStatue", 4, AbyssalCraft.configDimId3, 20000F, true, new ItemStack(ACBlocks.nyarlathotep_statue), ACBlocks.monolith_stone, nyarlathotepofferings));
+		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("nyarlathotepStatue", 4, -1, 20000F, true, new ItemStack(ACBlocks.nyarlathotep_statue), ACBlocks.monolith_stone, nyarlathotepofferings));
 		Object[] yogsothothofferings = new Object[]{new ItemStack(ACItems.shoggoth_flesh, 1, 3), new ItemStack(ACItems.shoggoth_flesh, 1, 3), new ItemStack(ACItems.shoggoth_flesh, 1, 3),
 				new ItemStack(ACItems.shoggoth_flesh, 1, 3), new ItemStack(ACItems.shoggoth_flesh, 1, 3), new ItemStack(ACItems.essence, 1, 0), new ItemStack(ACItems.essence, 1, 1),
 				new ItemStack(ACItems.essence, 1, 2)};
-		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("yogsothothStatue", 4, AbyssalCraft.configDimId3, 20000F, true, new ItemStack(ACBlocks.yog_sothoth_statue), ACBlocks.monolith_stone, yogsothothofferings));
+		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("yogsothothStatue", 4, -1, 20000F, true, new ItemStack(ACBlocks.yog_sothoth_statue), ACBlocks.monolith_stone, yogsothothofferings));
 		Object[] shubniggurathofferings = new Object[]{new ItemStack(ACItems.shoggoth_flesh, 1, 4), new ItemStack(ACItems.shoggoth_flesh, 1, 4), new ItemStack(ACItems.shoggoth_flesh, 1, 4),
 				new ItemStack(ACItems.shoggoth_flesh, 1, 4), new ItemStack(ACItems.shoggoth_flesh, 1, 4), new ItemStack(ACItems.essence, 1, 0), new ItemStack(ACItems.essence, 1, 1),
 				new ItemStack(ACItems.essence, 1, 2)};
-		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("shubniggurathStatue", 4, AbyssalCraft.configDimId3, 20000F, true, new ItemStack(ACBlocks.shub_niggurath_statue), ACBlocks.monolith_stone, shubniggurathofferings));
+		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("shubniggurathStatue", 4, -1, 20000F, true, new ItemStack(ACBlocks.shub_niggurath_statue), ACBlocks.monolith_stone, shubniggurathofferings));
 		Object[] psdlofferings = new Object[]{new ItemStack(ACItems.essence, 1, 1), new ItemStack(ACItems.essence, 1, 1), new ItemStack(ACItems.essence, 1, 1), new ItemStack(ACItems.essence, 1, 1),
 				new ItemStack(ACItems.essence, 1, 1), new ItemStack(ACItems.essence, 1, 1), new ItemStack(ACItems.essence, 1, 1), new ItemStack(ACItems.essence, 1, 1)};
-		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("powerStone", 4, AbyssalCraft.configDimId2, 5000F, new ItemStack(ACBlocks.dreadlands_infused_powerstone), ACBlocks.coralium_infused_stone, psdlofferings));
+		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("powerStone", 4, ACLib.dreadlands_id, 5000F, new ItemStack(ACBlocks.dreadlands_infused_powerstone), ACBlocks.coralium_infused_stone, psdlofferings));
 		Object[] ethofferings = new Object[]{ACItems.ethaxium_brick, ACItems.ethaxium_brick, ACItems.life_crystal, ACItems.ethaxium_brick, ACItems.ethaxium_brick};
-		RitualRegistry.instance().registerRitual(new NecronomiconCreationRitual("ethaxiumIngot", 3, AbyssalCraft.configDimId3, 1000F, new ItemStack(ACItems.ethaxium_ingot), ethofferings));
+		RitualRegistry.instance().registerRitual(new NecronomiconCreationRitual("ethaxiumIngot", 3, ACLib.omothol_id, 1000F, new ItemStack(ACItems.ethaxium_ingot), ethofferings));
 		Object[] dreadofferings = new Object[]{new ItemStack(ACItems.essence, 1, 1), ACItems.dreaded_shard_of_abyssalnite, ACItems.dreaded_shard_of_abyssalnite, ACItems.dreaded_shard_of_abyssalnite, ACItems.dreaded_shard_of_abyssalnite,
 				ACItems.dreaded_shard_of_abyssalnite, ACItems.dreaded_shard_of_abyssalnite, ACItems.dreaded_shard_of_abyssalnite};
-		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("dreadHelmet", 2, AbyssalCraft.configDimId2, 500F, new ItemStack(ACItems.dreaded_abyssalnite_helmet), ACItems.abyssalnite_helmet, dreadofferings));
-		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("dreadChestplate", 2, AbyssalCraft.configDimId2, 500F, new ItemStack(ACItems.dreaded_abyssalnite_chestplate), ACItems.abyssalnite_chestplate, dreadofferings));
-		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("dreadLeggings", 2, AbyssalCraft.configDimId2, 500F, new ItemStack(ACItems.dreaded_abyssalnite_leggings), ACItems.abyssalnite_leggings, dreadofferings));
-		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("dreadBoots", 2, AbyssalCraft.configDimId2, 500F, new ItemStack(ACItems.dreaded_abyssalnite_boots), ACItems.abyssalnite_boots, dreadofferings));
+		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("dreadHelmet", 2, ACLib.dreadlands_id, 500F, new ItemStack(ACItems.dreaded_abyssalnite_helmet), ACItems.abyssalnite_helmet, dreadofferings));
+		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("dreadChestplate", 2, ACLib.dreadlands_id, 500F, new ItemStack(ACItems.dreaded_abyssalnite_chestplate), ACItems.abyssalnite_chestplate, dreadofferings));
+		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("dreadLeggings", 2, ACLib.dreadlands_id, 500F, new ItemStack(ACItems.dreaded_abyssalnite_leggings), ACItems.abyssalnite_leggings, dreadofferings));
+		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("dreadBoots", 2, ACLib.dreadlands_id, 500F, new ItemStack(ACItems.dreaded_abyssalnite_boots), ACItems.abyssalnite_boots, dreadofferings));
 		Object[] rcoffers = new Object[]{ACItems.shadow_fragment, Items.arrow, ACItems.shadow_fragment, Items.arrow, ACItems.shadow_fragment, Items.arrow, ACItems.shadow_fragment, Items.arrow};
 		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("rangeCharm", 0, 100F, new ItemStack(ACItems.ritual_charm, 1, 1), new ItemStack(ACItems.ritual_charm, 1, 0), rcoffers));
 		Object[] dcoffers = new Object[]{ACItems.shadow_fragment, Items.redstone, ACItems.shadow_fragment, Items.redstone, ACItems.shadow_fragment, Items.redstone, ACItems.shadow_fragment,
@@ -829,27 +818,27 @@ public class AbyssalCrafting {
 				ACItems.shadow_fragment, Items.glowstone_dust};
 		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("powerCharm", 0, 100F, new ItemStack(ACItems.ritual_charm, 1, 3), new ItemStack(ACItems.ritual_charm, 1, 0), pcoffers));
 		RitualRegistry.instance().registerRitual(new NecronomiconRespawnJzaharRitual());
-		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("crangeCharm", 3, AbyssalCraft.configDimId3, 200F, new ItemStack(ACItems.cthulhu_charm, 1, 1), new ItemStack(ACItems.cthulhu_charm, 1, 0), rcoffers));
-		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("cdurationCharm", 3, AbyssalCraft.configDimId3, 200F, new ItemStack(ACItems.cthulhu_charm, 1, 2), new ItemStack(ACItems.cthulhu_charm, 1, 0), dcoffers));
-		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("cpowerCharm", 3, AbyssalCraft.configDimId3, 200F, new ItemStack(ACItems.cthulhu_charm, 1, 3), new ItemStack(ACItems.cthulhu_charm, 1, 0), pcoffers));
-		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("hrangeCharm", 3, AbyssalCraft.configDimId3, 200F, new ItemStack(ACItems.hastur_charm, 1, 1), new ItemStack(ACItems.hastur_charm, 1, 0), rcoffers));
-		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("hdurationCharm", 3, AbyssalCraft.configDimId3, 200F, new ItemStack(ACItems.hastur_charm, 1, 2), new ItemStack(ACItems.hastur_charm, 1, 0), dcoffers));
-		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("hpowerCharm", 3, AbyssalCraft.configDimId3, 200F, new ItemStack(ACItems.hastur_charm, 1, 3), new ItemStack(ACItems.hastur_charm, 1, 0), pcoffers));
-		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("jrangeCharm", 3, AbyssalCraft.configDimId3, 200F, new ItemStack(ACItems.jzahar_charm, 1, 1), new ItemStack(ACItems.jzahar_charm, 1, 0), rcoffers));
-		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("jdurationCharm", 3, AbyssalCraft.configDimId3, 200F, new ItemStack(ACItems.jzahar_charm, 1, 2), new ItemStack(ACItems.jzahar_charm, 1, 0), dcoffers));
-		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("jpowerCharm", 3, AbyssalCraft.configDimId3, 200F, new ItemStack(ACItems.jzahar_charm, 1, 3), new ItemStack(ACItems.jzahar_charm, 1, 0), pcoffers));
-		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("arangeCharm", 3, AbyssalCraft.configDimId3, 200F, new ItemStack(ACItems.azathoth_charm, 1, 1), new ItemStack(ACItems.azathoth_charm, 1, 0), rcoffers));
-		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("adurationCharm", 3, AbyssalCraft.configDimId3, 200F, new ItemStack(ACItems.azathoth_charm, 1, 2), new ItemStack(ACItems.azathoth_charm, 1, 0), dcoffers));
-		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("apowerCharm", 3, AbyssalCraft.configDimId3, 200F, new ItemStack(ACItems.azathoth_charm, 1, 3), new ItemStack(ACItems.azathoth_charm, 1, 0), pcoffers));
-		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("nrangeCharm", 3, AbyssalCraft.configDimId3, 200F, new ItemStack(ACItems.nyarlathotep_charm, 1, 1), new ItemStack(ACItems.nyarlathotep_charm, 1, 0), rcoffers));
-		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("ndurationCharm", 3, AbyssalCraft.configDimId3, 200F, new ItemStack(ACItems.nyarlathotep_charm, 1, 2), new ItemStack(ACItems.nyarlathotep_charm, 1, 0), dcoffers));
-		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("npowerCharm", 3, AbyssalCraft.configDimId3, 200F, new ItemStack(ACItems.nyarlathotep_charm, 1, 3), new ItemStack(ACItems.nyarlathotep_charm, 1, 0), pcoffers));
-		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("yrangeCharm", 3, AbyssalCraft.configDimId3, 200F, new ItemStack(ACItems.yog_sothoth_charm, 1, 1), new ItemStack(ACItems.yog_sothoth_charm, 1, 0), rcoffers));
-		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("ydurationCharm", 3, AbyssalCraft.configDimId3, 200F, new ItemStack(ACItems.yog_sothoth_charm, 1, 2), new ItemStack(ACItems.yog_sothoth_charm, 1, 0), dcoffers));
-		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("ypowerCharm", 3, AbyssalCraft.configDimId3, 200F, new ItemStack(ACItems.yog_sothoth_charm, 1, 3), new ItemStack(ACItems.yog_sothoth_charm, 1, 0), pcoffers));
-		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("srangeCharm", 3, AbyssalCraft.configDimId3, 200F, new ItemStack(ACItems.shub_niggurath_charm, 1, 1), new ItemStack(ACItems.shub_niggurath_charm, 1, 0), rcoffers));
-		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("sdurationCharm", 3, AbyssalCraft.configDimId3, 200F, new ItemStack(ACItems.shub_niggurath_charm, 1, 2), new ItemStack(ACItems.shub_niggurath_charm, 1, 0), dcoffers));
-		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("spowerCharm", 3, AbyssalCraft.configDimId3, 200F, new ItemStack(ACItems.shub_niggurath_charm, 1, 3), new ItemStack(ACItems.shub_niggurath_charm, 1, 0), pcoffers));
+		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("crangeCharm", 3, ACLib.omothol_id, 200F, new ItemStack(ACItems.cthulhu_charm, 1, 1), new ItemStack(ACItems.cthulhu_charm, 1, 0), rcoffers));
+		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("cdurationCharm", 3, ACLib.omothol_id, 200F, new ItemStack(ACItems.cthulhu_charm, 1, 2), new ItemStack(ACItems.cthulhu_charm, 1, 0), dcoffers));
+		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("cpowerCharm", 3, ACLib.omothol_id, 200F, new ItemStack(ACItems.cthulhu_charm, 1, 3), new ItemStack(ACItems.cthulhu_charm, 1, 0), pcoffers));
+		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("hrangeCharm", 3, ACLib.omothol_id, 200F, new ItemStack(ACItems.hastur_charm, 1, 1), new ItemStack(ACItems.hastur_charm, 1, 0), rcoffers));
+		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("hdurationCharm", 3, ACLib.omothol_id, 200F, new ItemStack(ACItems.hastur_charm, 1, 2), new ItemStack(ACItems.hastur_charm, 1, 0), dcoffers));
+		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("hpowerCharm", 3, ACLib.omothol_id, 200F, new ItemStack(ACItems.hastur_charm, 1, 3), new ItemStack(ACItems.hastur_charm, 1, 0), pcoffers));
+		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("jrangeCharm", 3, ACLib.omothol_id, 200F, new ItemStack(ACItems.jzahar_charm, 1, 1), new ItemStack(ACItems.jzahar_charm, 1, 0), rcoffers));
+		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("jdurationCharm", 3, ACLib.omothol_id, 200F, new ItemStack(ACItems.jzahar_charm, 1, 2), new ItemStack(ACItems.jzahar_charm, 1, 0), dcoffers));
+		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("jpowerCharm", 3, ACLib.omothol_id, 200F, new ItemStack(ACItems.jzahar_charm, 1, 3), new ItemStack(ACItems.jzahar_charm, 1, 0), pcoffers));
+		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("arangeCharm", 3, ACLib.omothol_id, 200F, new ItemStack(ACItems.azathoth_charm, 1, 1), new ItemStack(ACItems.azathoth_charm, 1, 0), rcoffers));
+		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("adurationCharm", 3, ACLib.omothol_id, 200F, new ItemStack(ACItems.azathoth_charm, 1, 2), new ItemStack(ACItems.azathoth_charm, 1, 0), dcoffers));
+		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("apowerCharm", 3, ACLib.omothol_id, 200F, new ItemStack(ACItems.azathoth_charm, 1, 3), new ItemStack(ACItems.azathoth_charm, 1, 0), pcoffers));
+		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("nrangeCharm", 3, ACLib.omothol_id, 200F, new ItemStack(ACItems.nyarlathotep_charm, 1, 1), new ItemStack(ACItems.nyarlathotep_charm, 1, 0), rcoffers));
+		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("ndurationCharm", 3, ACLib.omothol_id, 200F, new ItemStack(ACItems.nyarlathotep_charm, 1, 2), new ItemStack(ACItems.nyarlathotep_charm, 1, 0), dcoffers));
+		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("npowerCharm", 3, ACLib.omothol_id, 200F, new ItemStack(ACItems.nyarlathotep_charm, 1, 3), new ItemStack(ACItems.nyarlathotep_charm, 1, 0), pcoffers));
+		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("yrangeCharm", 3, ACLib.omothol_id, 200F, new ItemStack(ACItems.yog_sothoth_charm, 1, 1), new ItemStack(ACItems.yog_sothoth_charm, 1, 0), rcoffers));
+		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("ydurationCharm", 3, ACLib.omothol_id, 200F, new ItemStack(ACItems.yog_sothoth_charm, 1, 2), new ItemStack(ACItems.yog_sothoth_charm, 1, 0), dcoffers));
+		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("ypowerCharm", 3, ACLib.omothol_id, 200F, new ItemStack(ACItems.yog_sothoth_charm, 1, 3), new ItemStack(ACItems.yog_sothoth_charm, 1, 0), pcoffers));
+		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("srangeCharm", 3, ACLib.omothol_id, 200F, new ItemStack(ACItems.shub_niggurath_charm, 1, 1), new ItemStack(ACItems.shub_niggurath_charm, 1, 0), rcoffers));
+		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("sdurationCharm", 3, ACLib.omothol_id, 200F, new ItemStack(ACItems.shub_niggurath_charm, 1, 2), new ItemStack(ACItems.shub_niggurath_charm, 1, 0), dcoffers));
+		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("spowerCharm", 3, ACLib.omothol_id, 200F, new ItemStack(ACItems.shub_niggurath_charm, 1, 3), new ItemStack(ACItems.shub_niggurath_charm, 1, 0), pcoffers));
 		Object[] ccoffers = new Object[]{ACItems.cthulhu_engraved_coin, ACItems.cthulhu_engraved_coin, ACItems.cthulhu_engraved_coin, ACItems.cthulhu_engraved_coin, ACItems.cthulhu_engraved_coin, ACItems.cthulhu_engraved_coin,
 				ACItems.cthulhu_engraved_coin, ACItems.cthulhu_engraved_coin};
 		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("cthulhuCharm", 4, 2000F, new ItemStack(ACItems.cthulhu_charm, 1, 0), new ItemStack(ACItems.ritual_charm, 1, 0), ccoffers));
@@ -889,7 +878,7 @@ public class AbyssalCrafting {
 		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("saOMTupgrade", 3, 1600F, new ItemStack(ACBlocks.tiered_sacrificial_altar, 1, 3), new ItemStack(ACBlocks.tiered_sacrificial_altar, 1, 2), omtoffers));
 		Object[] staffofferings = new Object[]{new ItemStack(ACItems.essence, 1, 1), new ItemStack(ACItems.essence, 1, 2), ACItems.eldritch_scale, ACItems.ethaxium_ingot,
 				ACItems.eldritch_scale, ACItems.ethaxium_ingot, ACItems.eldritch_scale, new ItemStack(ACItems.essence, 1, 0)};
-		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("jzaharStaff", 4, AbyssalCraft.configDimId3, 15000F, true, new ItemStack(ACItems.staff_of_the_gatekeeper), ACItems.staff_of_rending, staffofferings));
+		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("jzaharStaff", 4, ACLib.omothol_id, 15000F, new ItemStack(ACItems.staff_of_the_gatekeeper), ACItems.staff_of_rending, staffofferings));
 	}
 
 	private static void addDisruptions(){

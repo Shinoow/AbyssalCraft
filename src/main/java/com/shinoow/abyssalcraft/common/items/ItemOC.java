@@ -27,15 +27,13 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import com.shinoow.abyssalcraft.AbyssalCraft;
+import com.shinoow.abyssalcraft.lib.ACTabs;
 
 public class ItemOC extends Item {
 
 	public ItemOC() {
-		super();
-		//		GameRegistry.registerItem(this, "oc");
 		setUnlocalizedName("oc");
-		setCreativeTab(AbyssalCraft.tabItems);
+		setCreativeTab(ACTabs.tabItems);
 	}
 
 	@Override
@@ -57,7 +55,6 @@ public class ItemOC extends Item {
 		par3EntityPlayer.addPotionEffect(new PotionEffect(MobEffects.waterBreathing, 6000, 6));
 		par3EntityPlayer.addPotionEffect(new PotionEffect(MobEffects.jump, 6000, 6));
 		par3EntityPlayer.addPotionEffect(new PotionEffect(MobEffects.digSpeed, 6000, 6));
-		par3EntityPlayer.addPotionEffect(new PotionEffect(MobEffects.fireResistance, 6000, 6));
 
 		par1ItemStack.stackSize--;
 		return new ActionResult(EnumActionResult.PASS, par1ItemStack);

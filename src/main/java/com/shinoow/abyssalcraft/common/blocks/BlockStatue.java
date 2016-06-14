@@ -14,29 +14,51 @@ package com.shinoow.abyssalcraft.common.blocks;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.properties.IProperty;
+import net.minecraft.block.properties.PropertyDirection;
+import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.item.ItemStack;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumBlockRenderType;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-
-import com.shinoow.abyssalcraft.AbyssalCraft;
-import com.shinoow.abyssalcraft.common.blocks.tile.TileStatueDirectional;
+import net.minecraftforge.client.model.obj.OBJModel;
+import net.minecraftforge.common.property.ExtendedBlockState;
+import net.minecraftforge.common.property.IUnlistedProperty;
+import com.shinoow.abyssalcraft.lib.ACTabs;
 
 public abstract class BlockStatue extends BlockContainer {
 
-	protected BlockStatue() {
+	public static final PropertyDirection FACING = PropertyDirection.create("facing");
+
+	public BlockStatue() {
 		super(Material.rock);
+		setDefaultState(blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH));
 		setHardness(6.0F);
 		setResistance(12.0F);
 		setStepSound(SoundType.STONE);
-		setCreativeTab(AbyssalCraft.tabDecoration);
-		//		setBlockBounds(0.25F, 0.0F, 0.25F, 0.75F, 1.0F, 0.75F);
+		setCreativeTab(ACTabs.tabDecoration);
+	}
+
+	@Override
+	public IBlockState onBlockPlaced(World world, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer)
+	{
+		return getDefaultState().withProperty(FACING, placer.getHorizontalFacing().getOpposite());
+	}
+
+	@Override
+	public IBlockState getStateFromMeta(int meta)
+	{
+		return getDefaultState().withProperty(FACING, EnumFacing.getFront(meta));
+	}
+
+	@Override
+	public int getMetaFromState(IBlockState state)
+	{
+		return state.getValue(FACING).getIndex();
 	}
 
 	@Override
@@ -59,17 +81,12 @@ public abstract class BlockStatue extends BlockContainer {
 
 	@Override
 	public EnumBlockRenderType getRenderType(IBlockState state) {
-		return EnumBlockRenderType.ENTITYBLOCK_ANIMATED;
+		return EnumBlockRenderType.MODEL;
 	}
 
 	@Override
-	public void onBlockPlacedBy(World par1World, BlockPos pos, IBlockState state, EntityLivingBase par5EntityLivingBase, ItemStack par6ItemStack)
+	public BlockStateContainer createBlockState()
 	{
-		if (par5EntityLivingBase == null)
-			return;
-
-		TileEntity tile = par1World.getTileEntity(pos);
-		if(tile instanceof TileStatueDirectional)
-			((TileStatueDirectional)tile).direction = MathHelper.floor_double(par5EntityLivingBase.rotationYaw * 4.0F / 360.0F + 0.5D) & 3;
+		return new ExtendedBlockState(this, new IProperty[] {FACING}, new IUnlistedProperty[] {OBJModel.OBJProperty.INSTANCE});
 	}
 }

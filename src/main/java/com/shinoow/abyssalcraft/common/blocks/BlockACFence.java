@@ -18,20 +18,20 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 
-import com.shinoow.abyssalcraft.AbyssalCraft;
+import com.shinoow.abyssalcraft.lib.ACTabs;
 
 public class BlockACFence extends BlockFence {
 
 	public BlockACFence(Material par3Material, String par4, int par5, SoundType stepSound) {
 		super(par3Material, par3Material.getMaterialMapColor());
-		setCreativeTab(AbyssalCraft.tabDecoration);
+		setCreativeTab(ACTabs.tabDecoration);
 		this.setHarvestLevel(par4, par5);
 		setStepSound(stepSound);
 	}
 
 	public BlockACFence(Material par3Material, SoundType stepSound) {
 		super(par3Material, par3Material.getMaterialMapColor());
-		setCreativeTab(AbyssalCraft.tabDecoration);
+		setCreativeTab(ACTabs.tabDecoration);
 		setStepSound(stepSound);
 	}
 
@@ -39,15 +39,4 @@ public class BlockACFence extends BlockFence {
 	public boolean canPlaceTorchOnTop(IBlockState state, IBlockAccess world, BlockPos pos) {
 		return true;
 	}
-
-	//	public static boolean func_149825_a(Block par0) {
-	//		return par0 == AbyssalCraft.abyfence || par0 == AbyssalCraft.DSBfence || par0 == AbyssalCraft.DLTfence || par0 == AbyssalCraft.dreadbrickfence || par0 == AbyssalCraft.abydreadbrickfence
-	//				|| par0 == AbyssalCraft.cstonebrickfence || par0 == AbyssalCraft.DrTfence || par0 == AbyssalCraft.ethaxiumfence || par0 == AbyssalCraft.darkethaxiumfence;
-	//	}
-
-	//	@Override
-	//	@SideOnly(Side.CLIENT)
-	//	public void registerBlockIcons(IIconRegister par1IconRegister) {
-	//		blockIcon = par1IconRegister.registerIcon(AbyssalCraft.modid + ":" + fenceIconName);
-	//	}
 }

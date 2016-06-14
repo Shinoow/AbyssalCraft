@@ -27,8 +27,9 @@ import net.minecraft.util.text.translation.I18n;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.client.FMLClientHandler;
 
-import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
+import com.shinoow.abyssalcraft.lib.ACLib;
+import com.shinoow.abyssalcraft.lib.ACTabs;
 
 public class ItemPortalPlacerDL extends Item {
 
@@ -36,7 +37,7 @@ public class ItemPortalPlacerDL extends Item {
 		super();
 		maxStackSize = 1;
 		setUnlocalizedName("gatewaykeydl");
-		setCreativeTab(AbyssalCraft.tabTools);
+		setCreativeTab(ACTabs.tabTools);
 	}
 
 	@Override
@@ -61,7 +62,7 @@ public class ItemPortalPlacerDL extends Item {
 	@Override
 	public EnumActionResult onItemUse(ItemStack is, EntityPlayer player, World world, BlockPos pos, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ){
 		if(!world.isRemote){
-			if(player.dimension == AbyssalCraft.configDimId1 || player.dimension == AbyssalCraft.configDimId2)
+			if(player.dimension == ACLib.abyssal_wasteland_id || player.dimension == ACLib.dreadlands_id)
 			{
 				int direction = MathHelper.floor_double(player.rotationYaw * 4.0F / 360.0F + 0.5D) & 3;
 
@@ -121,11 +122,11 @@ public class ItemPortalPlacerDL extends Item {
 				}
 				return EnumActionResult.SUCCESS;
 			}
-		} else if(player.dimension == 0 || player.dimension == AbyssalCraft.configDimId3 || player.dimension == AbyssalCraft.configDimId4)
+		} else if(player.dimension == 0 || player.dimension == ACLib.omothol_id || player.dimension == ACLib.dark_realm_id)
 		{
 			FMLClientHandler.instance().getClient().ingameGUI.getChatGUI().printChatMessage(new TextComponentTranslation("message.portalplacer.error.2"));
 			return EnumActionResult.FAIL;
-		} else if(player.dimension == AbyssalCraft.configDimId1 || player.dimension == AbyssalCraft.configDimId2){}
+		} else if(player.dimension == ACLib.abyssal_wasteland_id || player.dimension == ACLib.dreadlands_id){}
 		else {
 			FMLClientHandler.instance().getClient().ingameGUI.getChatGUI().printChatMessage(new TextComponentTranslation("message.portalplacer.error.1"));
 			return EnumActionResult.FAIL;

@@ -19,7 +19,7 @@ import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ITickable;
 
-import com.shinoow.abyssalcraft.common.util.IRitualPedestal;
+import com.shinoow.abyssalcraft.lib.util.blocks.IRitualPedestal;
 
 public class TileEntityRitualPedestal extends TileEntity implements ITickable, IRitualPedestal {
 
@@ -74,6 +74,7 @@ public class TileEntityRitualPedestal extends TileEntity implements ITickable, I
 			rot++;
 	}
 
+	@Override
 	public int getRotation(){
 		return rot;
 	}
@@ -85,7 +86,7 @@ public class TileEntityRitualPedestal extends TileEntity implements ITickable, I
 
 	@Override
 	public void setItem(ItemStack item){
-		isDirty = true;
 		this.item = item;
+		isDirty = true;
 	}
 }

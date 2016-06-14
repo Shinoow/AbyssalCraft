@@ -18,21 +18,17 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.world.World;
 
-import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
+import com.shinoow.abyssalcraft.api.entity.EntityUtil;
 import com.shinoow.abyssalcraft.api.item.ACItems;
-import com.shinoow.abyssalcraft.common.util.EntityUtil;
+import com.shinoow.abyssalcraft.lib.ACTabs;
 
 public class ItemCorflesh extends ItemFood {
-
 
 	public ItemCorflesh(int j, float f, boolean b, String name) {
 		super(j, f, b);
 		setUnlocalizedName(name);
-		//		setTextureName("abyssalcraft:" + name);
-		//		GameRegistry.registerItem(this, name);
-		setUnlocalizedName(name);
-		setCreativeTab(AbyssalCraft.tabFood);
+		setCreativeTab(ACTabs.tabFood);
 	}
 
 	@Override

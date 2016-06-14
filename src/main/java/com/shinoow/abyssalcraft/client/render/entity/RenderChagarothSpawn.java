@@ -31,12 +31,6 @@ public class RenderChagarothSpawn extends RenderLiving<EntityChagarothSpawn> {
 	}
 
 	@Override
-	public void doRender(EntityChagarothSpawn entity, double par2, double par4, double par6, float par8, float par9)
-	{
-		super.doRender(entity, par2, par4, par6, par8, par9);
-	}
-
-	@Override
 	protected ResourceLocation getEntityTexture(EntityChagarothSpawn entity) {
 
 		return mobTexture;
