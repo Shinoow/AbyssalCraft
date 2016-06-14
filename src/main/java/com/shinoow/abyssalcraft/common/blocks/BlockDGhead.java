@@ -17,7 +17,6 @@ import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemStack;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumBlockRenderType;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
@@ -25,20 +24,19 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-import com.shinoow.abyssalcraft.common.blocks.tile.TileEntityDGhead;
+import com.shinoow.abyssalcraft.lib.ACTabs;
+import com.shinoow.abyssalcraft.lib.tileentity.TEDirectional;
 
 //@Interface(modid = "Thaumcraft", iface = "thaumcraft.api.crafting.IInfusionStabiliser", striprefs = true)
-public class BlockDGhead extends BlockContainer /*implements IInfusionStabiliser*/ {
+public abstract class BlockDGhead extends BlockContainer /*implements IInfusionStabiliser*/ {
+
 
 	public BlockDGhead() {
 		super(Material.CLOTH);
-		//		setBlockBounds(0.1F, 0.0F, 0.1F, 0.8F, 0.7F, 0.8F);
 		setSoundType(SoundType.CLOTH);
-	}
-
-	@Override
-	public TileEntity createNewTileEntity(World var1, int var2) {
-		return new TileEntityDGhead();
+		setHardness(1.0F);
+		setResistance(6.0F);
+		setCreativeTab(ACTabs.tabBlock);
 	}
 
 	@Override
@@ -70,7 +68,7 @@ public class BlockDGhead extends BlockContainer /*implements IInfusionStabiliser
 		if (par5EntityLivingBase == null)
 			return;
 
-		TileEntityDGhead tile = (TileEntityDGhead) par1World.getTileEntity(pos);
+		TEDirectional tile = (TEDirectional) par1World.getTileEntity(pos);
 		tile.direction = MathHelper.floor_double(par5EntityLivingBase.rotationYaw * 4.0F / 360.0F + 0.5D) & 3;
 	}
 

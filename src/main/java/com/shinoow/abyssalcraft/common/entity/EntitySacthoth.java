@@ -60,7 +60,8 @@ import com.shinoow.abyssalcraft.api.entity.IAntiEntity;
 import com.shinoow.abyssalcraft.api.entity.ICoraliumEntity;
 import com.shinoow.abyssalcraft.api.entity.IDreadEntity;
 import com.shinoow.abyssalcraft.api.item.ACItems;
-import com.shinoow.abyssalcraft.common.util.SpecialTextUtil;
+import com.shinoow.abyssalcraft.lib.ACLib;
+import com.shinoow.abyssalcraft.lib.util.SpecialTextUtil;
 
 public class EntitySacthoth extends EntityMob implements IAntiEntity, ICoraliumEntity, IDreadEntity {
 
@@ -137,7 +138,7 @@ public class EntitySacthoth extends EntityMob implements IAntiEntity, ICoraliumE
 	@Override
 	protected boolean canDespawn()
 	{
-		return worldObj.provider.getDimension() == AbyssalCraft.configDimId4 ? true : false;
+		return worldObj.provider.getDimension() == ACLib.dark_realm_id ? true : false;
 	}
 
 	@Override
@@ -155,6 +156,9 @@ public class EntitySacthoth extends EntityMob implements IAntiEntity, ICoraliumE
 			bossInfo.setColor(Color.RED);
 	}
 
+	/**
+	 * Makes this boss Entity visible to the given player. Has no effect if this Entity is not a boss.
+	 */
 	@Override
 	public void addTrackingPlayer(EntityPlayerMP player)
 	{
@@ -162,6 +166,9 @@ public class EntitySacthoth extends EntityMob implements IAntiEntity, ICoraliumE
 		bossInfo.addPlayer(player);
 	}
 
+	/**
+	 * Makes this boss Entity non-visible to the given player. Has no effect if this Entity is not a boss.
+	 */
 	@Override
 	public void removeTrackingPlayer(EntityPlayerMP player)
 	{

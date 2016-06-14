@@ -27,7 +27,7 @@ import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
 import com.shinoow.abyssalcraft.api.item.ACItems;
 import com.shinoow.abyssalcraft.client.gui.necronomicon.buttons.ButtonCategory;
 import com.shinoow.abyssalcraft.client.gui.necronomicon.buttons.ButtonNextPage;
-import com.shinoow.abyssalcraft.client.lib.NecronomiconText;
+import com.shinoow.abyssalcraft.lib.NecronomiconText;
 
 @SideOnly(Side.CLIENT)
 public class GuiNecronomicon extends GuiScreen {

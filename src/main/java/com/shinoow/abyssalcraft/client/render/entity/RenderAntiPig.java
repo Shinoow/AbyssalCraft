@@ -19,24 +19,14 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import com.shinoow.abyssalcraft.common.entity.anti.EntityAntiPig;
-
 @SideOnly(Side.CLIENT)
 public class RenderAntiPig extends RenderLiving {
-
-	protected ModelPig model;
 
 	private static final ResourceLocation mobTexture = new ResourceLocation("abyssalcraft:textures/model/anti/pig.png");
 
 	public RenderAntiPig(RenderManager manager)
 	{
 		super(manager, new ModelPig(), 0.5F);
-		model = (ModelPig)mainModel;
-	}
-
-	public void doRender(EntityAntiPig entity, double par2, double par4, double par6, float par8, float par9)
-	{
-		super.doRender(entity, par2, par4, par6, par8, par9);
 	}
 
 	@Override

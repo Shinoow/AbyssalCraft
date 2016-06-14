@@ -29,8 +29,8 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.client.FMLClientHandler;
 
+import com.shinoow.abyssalcraft.api.entity.EntityUtil;
 import com.shinoow.abyssalcraft.common.structures.StructureHouse;
-import com.shinoow.abyssalcraft.common.util.EntityUtil;
 
 public class BlockHouse extends Block {
 
@@ -38,7 +38,6 @@ public class BlockHouse extends Block {
 
 	public BlockHouse() {
 		super(Material.WOOD);
-		//		setBlockBounds(0.2F, 0.0F, 0.2F, 0.8F, 0.8F, 0.8F);
 		setSoundType(SoundType.WOOD);
 	}
 

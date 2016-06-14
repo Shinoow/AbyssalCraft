@@ -14,7 +14,6 @@ package com.shinoow.abyssalcraft.common.blocks;
 import java.util.Random;
 
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockContainer;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
@@ -29,7 +28,6 @@ import net.minecraft.init.Items;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumBlockRenderType;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
@@ -40,19 +38,17 @@ import net.minecraft.world.Explosion;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-import com.shinoow.abyssalcraft.AbyssalCraft;
-import com.shinoow.abyssalcraft.common.blocks.tile.TileEntityODB;
 import com.shinoow.abyssalcraft.common.entity.EntityODBPrimed;
+import com.shinoow.abyssalcraft.lib.ACTabs;
 
-public class BlockODB extends BlockContainer {
+public class BlockODB extends Block {
 
 	public static final PropertyBool EXPLODE = PropertyBool.create("explode");
 
 	public BlockODB() {
 		super(Material.IRON);
 		setDefaultState(blockState.getBaseState().withProperty(EXPLODE, Boolean.valueOf(false)));
-		setCreativeTab(AbyssalCraft.tabBlock);
-		//		setBlockBounds(0.1F, 0.0F, 0.1F, 1.0F, 0.8F, 1.0F);
+		setCreativeTab(ACTabs.tabBlock);
 		setSoundType(SoundType.METAL);
 	}
 
@@ -63,14 +59,8 @@ public class BlockODB extends BlockContainer {
 	}
 
 	@Override
-	public TileEntity createNewTileEntity(World var1, int var2) {
-
-		return new TileEntityODB();
-	}
-
-	@Override
 	public EnumBlockRenderType getRenderType(IBlockState state) {
-		return EnumBlockRenderType.ENTITYBLOCK_ANIMATED;
+		return EnumBlockRenderType.MODEL;
 	}
 
 	@Override
@@ -97,7 +87,7 @@ public class BlockODB extends BlockContainer {
 	}
 
 	@Override
-	public void neighborChanged(IBlockState state, World par1World, BlockPos pos, Block neighborBlock)
+	public void neighborChanged(IBlockState state, World par1World, BlockPos pos, Block block)
 	{
 		if (par1World.isBlockPowered(pos))
 		{

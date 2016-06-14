@@ -181,7 +181,7 @@ public class ACscion2 extends WorldGenerator
 		world.setBlockState(new BlockPos(i + 3, j + 1, k + 0), Blocks.AIR.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 3, j + 1, k + 1), Blocks.AIR.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 3, j + 1, k + 2), ACBlocks.darkstone_brick.getDefaultState(), 2);
-		world.setBlockState(new BlockPos(i + 3, j + 1, k + 3), Blocks.EMERALD_BLOCK.getDefaultState(), 2);
+		world.setBlockState(new BlockPos(i + 3, j + 1, k + 3), ACBlocks.darkstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 3, j + 1, k + 4), ACBlocks.darkstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 3, j + 1, k + 5), Blocks.AIR.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 3, j + 1, k + 6), Blocks.AIR.getDefaultState(), 2);

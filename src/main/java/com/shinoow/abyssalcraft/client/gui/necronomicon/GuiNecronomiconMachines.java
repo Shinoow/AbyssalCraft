@@ -38,8 +38,8 @@ import com.shinoow.abyssalcraft.api.recipe.TransmutatorRecipes;
 import com.shinoow.abyssalcraft.client.gui.necronomicon.buttons.ButtonCategory;
 import com.shinoow.abyssalcraft.client.gui.necronomicon.buttons.ButtonNextPage;
 import com.shinoow.abyssalcraft.client.lib.GuiRenderHelper;
-import com.shinoow.abyssalcraft.client.lib.NecronomiconResources;
-import com.shinoow.abyssalcraft.client.lib.NecronomiconText;
+import com.shinoow.abyssalcraft.lib.NecronomiconResources;
+import com.shinoow.abyssalcraft.lib.NecronomiconText;
 
 public class GuiNecronomiconMachines extends GuiNecronomicon {
 

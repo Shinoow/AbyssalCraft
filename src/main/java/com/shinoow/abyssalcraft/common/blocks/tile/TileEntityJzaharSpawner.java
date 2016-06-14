@@ -15,7 +15,6 @@ import java.util.List;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ITickable;
@@ -41,7 +40,7 @@ public class TileEntityJzaharSpawner extends TileEntity implements ITickable {
 				!worldObj.getClosestPlayer(pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D,
 						activatingRangeFromPlayer, true).capabilities.isCreativeMode &&
 						worldObj.getClosestPlayer(pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D,
-								activatingRangeFromPlayer, true).posY >= pos.getY();
+								activatingRangeFromPlayer, true).posY >= pos.getY() -1;
 	}
 
 	@Override

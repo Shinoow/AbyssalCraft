@@ -11,8 +11,6 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.common.entity;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.UUID;
 
 import net.minecraft.block.Block;
@@ -35,9 +33,6 @@ import net.minecraft.entity.ai.attributes.IAttributeInstance;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.monster.EntitySkeleton;
 import net.minecraft.entity.monster.EntityZombie;
-import net.minecraft.entity.passive.EntityAmbientCreature;
-import net.minecraft.entity.passive.EntityAnimal;
-import net.minecraft.entity.passive.EntityWaterMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.MobEffects;
 import net.minecraft.init.SoundEvents;
@@ -56,20 +51,19 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeModContainer;
+import net.minecraftforge.common.MinecraftForge;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
+import com.shinoow.abyssalcraft.api.entity.EntityUtil;
 import com.shinoow.abyssalcraft.api.entity.ICoraliumEntity;
 import com.shinoow.abyssalcraft.api.entity.IDreadEntity;
+import com.shinoow.abyssalcraft.api.event.ACEvents.ShoggothOozeEvent;
 import com.shinoow.abyssalcraft.api.item.ACItems;
-import com.shinoow.abyssalcraft.common.entity.demon.EntityDemonAnimal;
 import com.shinoow.abyssalcraft.common.entity.demon.EntityDemonPig;
-import com.shinoow.abyssalcraft.common.entity.demon.EntityEvilChicken;
-import com.shinoow.abyssalcraft.common.entity.demon.EntityEvilCow;
-import com.shinoow.abyssalcraft.common.entity.demon.EntityEvilpig;
-import com.shinoow.abyssalcraft.common.util.EntityUtil;
 import com.shinoow.abyssalcraft.common.world.gen.WorldGenShoggothMonolith;
+import com.shinoow.abyssalcraft.lib.ACLib;
 
 public class EntityLesserShoggoth extends EntityMob implements ICoraliumEntity, IDreadEntity {
 
@@ -79,8 +73,6 @@ public class EntityLesserShoggoth extends EntityMob implements ICoraliumEntity, 
 	private static final DataParameter<Integer> FOOD = EntityDataManager.createKey(EntityLesserShoggoth.class, DataSerializers.VARINT);
 	private static final UUID babySpeedBoostUUID = UUID.fromString("B9766B59-9566-4402-BC1F-2EE2A276D836");
 	private static final AttributeModifier babySpeedBoostModifier = new AttributeModifier(babySpeedBoostUUID, "Baby speed boost", 0.5D, 1);
-
-	private static List<Class<? extends EntityLivingBase>> noms = new ArrayList<Class<? extends EntityLivingBase>>();
 
 	private int monolithTimer;
 	private float shoggothWidth = -1.0F;
@@ -111,8 +103,8 @@ public class EntityLesserShoggoth extends EntityMob implements ICoraliumEntity, 
 		tasks.addTask(7, new EntityAIWatchClosest(this, EntityGatekeeperMinion.class, 8.0F));
 		targetTasks.addTask(1, new EntityAIHurtByTarget(this, false));
 		targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityPlayer.class, true));
-		for(int i = 0; i < noms.size(); i++)
-			targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, noms.get(i), true));
+		for(int i = 0; i < EntityUtil.getShoggothFood().size(); i++)
+			targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityUtil.getShoggothFood().get(i), true));
 		setSize(1.5F, 2.6F);
 	}
 
@@ -287,8 +279,13 @@ public class EntityLesserShoggoth extends EntityMob implements ICoraliumEntity, 
 	private void spawnOoze(int x, int y, int z){
 		BlockPos pos = new BlockPos(x, y, z);
 		if(AbyssalCraft.shoggothOoze)
-			if(ACBlocks.shoggoth_ooze.canPlaceBlockAt(worldObj, pos))
-				worldObj.setBlockState(pos, ACBlocks.shoggoth_ooze.getDefaultState());
+			if(ACBlocks.shoggoth_ooze.canPlaceBlockAt(worldObj, pos)){
+				ShoggothOozeEvent event = new ShoggothOozeEvent(worldObj, pos);
+				if(MinecraftForge.EVENT_BUS.post(event)){
+					if(event.getReplacement() != null)
+						worldObj.setBlockState(pos, event.getReplacement());
+				} else worldObj.setBlockState(pos, ACBlocks.shoggoth_ooze.getDefaultState());
+			}
 	}
 
 	/**
@@ -321,15 +318,15 @@ public class EntityLesserShoggoth extends EntityMob implements ICoraliumEntity, 
 	{
 		if (super.attackEntityAsMob(par1Entity))
 			if (par1Entity instanceof EntityLivingBase)
-				if(worldObj.provider.getDimension() == AbyssalCraft.configDimId1 &&
+				if(worldObj.provider.getDimension() == ACLib.abyssal_wasteland_id &&
 				!EntityUtil.isEntityCoralium((EntityLivingBase)par1Entity))
 					((EntityLivingBase)par1Entity).addPotionEffect(new PotionEffect(AbyssalCraftAPI.coralium_plague, 100));
-				else if(worldObj.provider.getDimension() == AbyssalCraft.configDimId2 &&
+				else if(worldObj.provider.getDimension() == ACLib.dreadlands_id &&
 						!EntityUtil.isEntityDread((EntityLivingBase)par1Entity))
 					((EntityLivingBase)par1Entity).addPotionEffect(new PotionEffect(AbyssalCraftAPI.dread_plague, 100));
-				else if(worldObj.provider.getDimension() == AbyssalCraft.configDimId3)
+				else if(worldObj.provider.getDimension() == ACLib.omothol_id)
 					((EntityLivingBase)par1Entity).addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, 100));
-				else if(worldObj.provider.getDimension() == AbyssalCraft.configDimId4)
+				else if(worldObj.provider.getDimension() == ACLib.dark_realm_id)
 					((EntityLivingBase)par1Entity).addPotionEffect(new PotionEffect(MobEffects.BLINDNESS, 100));
 
 		return super.attackEntityAsMob(par1Entity);
@@ -439,7 +436,7 @@ public class EntityLesserShoggoth extends EntityMob implements ICoraliumEntity, 
 	{
 		super.onKillEntity(par1EntityLivingBase);
 
-		if(isFood(par1EntityLivingBase))
+		if(EntityUtil.isShoggothFood(par1EntityLivingBase))
 			feed();
 	}
 
@@ -450,13 +447,13 @@ public class EntityLesserShoggoth extends EntityMob implements ICoraliumEntity, 
 
 		setShoggothType(0);
 
-		if(worldObj.provider.getDimension() == AbyssalCraft.configDimId1)
+		if(worldObj.provider.getDimension() == ACLib.abyssal_wasteland_id)
 			setShoggothType(1);
-		if(worldObj.provider.getDimension() == AbyssalCraft.configDimId2)
+		if(worldObj.provider.getDimension() == ACLib.dreadlands_id)
 			setShoggothType(2);
-		if(worldObj.provider.getDimension() == AbyssalCraft.configDimId3)
+		if(worldObj.provider.getDimension() == ACLib.omothol_id)
 			setShoggothType(3);
-		if(worldObj.provider.getDimension() == AbyssalCraft.configDimId4)
+		if(worldObj.provider.getDimension() == ACLib.dark_realm_id)
 			setShoggothType(4);
 
 		if (data == null)
@@ -492,27 +489,6 @@ public class EntityLesserShoggoth extends EntityMob implements ICoraliumEntity, 
 	protected final void multiplySize(float p_146069_1_)
 	{
 		super.setSize(shoggothWidth * p_146069_1_, shoggothHeight * p_146069_1_);
-	}
-
-	static {
-		noms.add(EntityAnimal.class);
-		noms.add(EntityAmbientCreature.class);
-		noms.add(EntityWaterMob.class);
-		noms.add(EntityEvilpig.class);
-		noms.add(EntityEvilCow.class);
-		noms.add(EntityEvilChicken.class);
-		noms.add(EntityDemonAnimal.class);
-		noms.addAll(AbyssalCraftAPI.getShoggothFood());
-	}
-
-	/**
-	 * Checks if the Entity class, it's superclass or it's superclass' superclass is food
-	 * @param par1 The Entity to check
-	 * @return true if the Entity was food, otherwise false
-	 */
-	private boolean isFood(EntityLivingBase par1){
-		return noms.contains(par1.getClass()) ? true : noms.contains(par1.getClass().getSuperclass()) ? true :
-			noms.contains(par1.getClass().getSuperclass().getSuperclass()) ? true : false;
 	}
 
 	class GroupData implements IEntityLivingData

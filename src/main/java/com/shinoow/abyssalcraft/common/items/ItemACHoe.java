@@ -13,6 +13,7 @@ package com.shinoow.abyssalcraft.common.items;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockDirt;
+import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
@@ -25,8 +26,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 
-import com.shinoow.abyssalcraft.AbyssalCraft;
-import com.shinoow.abyssalcraft.api.block.ACBlocks;
+import com.shinoow.abyssalcraft.lib.ACTabs;
 
 public class ItemACHoe extends ItemHoe {
 
@@ -38,10 +38,8 @@ public class ItemACHoe extends ItemHoe {
 
 	public ItemACHoe(ToolMaterial mat, String name, TextFormatting format) {
 		super(mat);
-		setCreativeTab(AbyssalCraft.tabTools);
-		//		GameRegistry.registerItem(this, name);
+		setCreativeTab(ACTabs.tabTools);
 		setUnlocalizedName(name);
-		//		setTextureName(AbyssalCraft.modid + ":" + name);
 		this.format = format;
 	}
 
@@ -67,7 +65,7 @@ public class ItemACHoe extends ItemHoe {
 
 			if (facing != EnumFacing.DOWN && worldIn.isAirBlock(pos.up()))
 			{
-				if (block == Blocks.GRASS || block == Blocks.GRASS_PATH || block == ACBlocks.darklands_grass || block == ACBlocks.dreadlands_grass)
+				if (iblockstate.getMaterial() == Material.GRASS || block == Blocks.GRASS_PATH)
 				{
 					setBlock(stack, playerIn, worldIn, pos, Blocks.FARMLAND.getDefaultState());
 					return EnumActionResult.SUCCESS;

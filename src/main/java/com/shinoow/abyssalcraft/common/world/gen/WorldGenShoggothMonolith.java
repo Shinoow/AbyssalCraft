@@ -22,7 +22,7 @@ import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
 
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
-import com.shinoow.abyssalcraft.common.blocks.tile.TEDirectional;
+import com.shinoow.abyssalcraft.lib.tileentity.TEDirectional;
 
 public class WorldGenShoggothMonolith extends WorldGenerator {
 

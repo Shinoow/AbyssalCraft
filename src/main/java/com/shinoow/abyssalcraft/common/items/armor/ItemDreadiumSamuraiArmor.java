@@ -30,12 +30,13 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
 import com.shinoow.abyssalcraft.api.item.ACItems;
+import com.shinoow.abyssalcraft.lib.ACTabs;
 
 public class ItemDreadiumSamuraiArmor extends ItemArmor {
 	public ItemDreadiumSamuraiArmor(ArmorMaterial par2EnumArmorMaterial, int par3, EntityEquipmentSlot par4, String name){
 		super(par2EnumArmorMaterial, par3, par4);
 		setUnlocalizedName(name);
-		setCreativeTab(AbyssalCraft.tabCombat);
+		setCreativeTab(ACTabs.tabCombat);
 	}
 
 	@Override

@@ -31,7 +31,6 @@ import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI.FuelType;
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.api.item.ACItems;
-import com.shinoow.abyssalcraft.api.item.ICrystal;
 import com.shinoow.abyssalcraft.api.recipe.TransmutatorRecipes;
 import com.shinoow.abyssalcraft.common.blocks.BlockTransmutator;
 
@@ -198,7 +197,7 @@ public class TileEntityTransmutator extends TileEntity implements ISidedInventor
 
 		if (hasCustomName())
 			par1.setString("CustomName", containerName);
-		
+
 		return par1;
 	}
 
@@ -363,8 +362,6 @@ public class TileEntityTransmutator extends TileEntity implements ISidedInventor
 			if (item == ACItems.chunk_of_coralium) return 16200;
 			if (item == ACItems.liquid_coralium_bucket) return 20000;
 			if (item == Item.getItemFromBlock(ACBlocks.liquid_coralium)) return 22000;
-			if (item instanceof ICrystal) return 1200;
-			if (AbyssalCraftAPI.getCrystals().contains(par1ItemStack)) return 1200;
 			if (item == Items.BLAZE_POWDER) return 1200;
 			if (item == Items.BLAZE_ROD) return 2400;
 			if (item == ACItems.methane) return 10000;

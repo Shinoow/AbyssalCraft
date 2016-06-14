@@ -27,8 +27,8 @@ import com.shinoow.abyssalcraft.api.necronomicon.CraftingStack;
 import com.shinoow.abyssalcraft.api.necronomicon.NecroData;
 import com.shinoow.abyssalcraft.api.necronomicon.NecroData.Chapter;
 import com.shinoow.abyssalcraft.api.necronomicon.NecroData.Page;
-import com.shinoow.abyssalcraft.client.lib.NecronomiconResources;
-import com.shinoow.abyssalcraft.client.lib.NecronomiconText;
+import com.shinoow.abyssalcraft.lib.NecronomiconResources;
+import com.shinoow.abyssalcraft.lib.NecronomiconText;
 
 public class InternalNecroDataHandler extends DummyNecroDataHandler {
 
@@ -277,13 +277,11 @@ public class InternalNecroDataHandler extends DummyNecroDataHandler {
 				new Page(3, new CraftingStack(ACBlocks.crystallizer_idle), NecronomiconText.CRAFTING_CRYSTALLIZER_1),
 				new Page(4, NecronomiconText.CRAFTING_CRYSTALLIZER_2),
 				new Page(5, new CraftingStack(ACItems.dread_cloth), NecronomiconText.CRAFTING_DREAD_CLOTH),
-				new Page(6, new CraftingStack(ACBlocks.chagaroth_altar_bottom), NecronomiconText.CRAFTING_DREAD_ALTAR_BOTTOM),
-				new Page(7, new CraftingStack(ACBlocks.chagaroth_altar_top), NecronomiconText.CRAFTING_DREAD_ALTAR_TOP),
-				new Page(8, new CraftingStack(ACItems.dreadium_plate), NecronomiconText.CRAFTING_DREADIUM_PLATE),
-				new Page(9, new CraftingStack(ACItems.dreadium_katana_hilt), NecronomiconText.CRAFTING_DREADIUM_HILT),
-				new Page(10, new CraftingStack(ACItems.dreadium_katana_blade), NecronomiconText.CRAFTING_DREADIUM_BLADE),
-				new Page(11, new CraftingStack(new ItemStack(ACItems.skin, 1, 2)), NecronomiconText.CRAFTING_SKIN_OF_OMOTHOL_1),
-				new Page(12, new CraftingStack(ACItems.omothol_necronomicon), NecronomiconText.CRAFTING_NECRONOMICON_O));
+				new Page(6, new CraftingStack(ACItems.dreadium_plate), NecronomiconText.CRAFTING_DREADIUM_PLATE),
+				new Page(7, new CraftingStack(ACItems.dreadium_katana_hilt), NecronomiconText.CRAFTING_DREADIUM_HILT),
+				new Page(8, new CraftingStack(ACItems.dreadium_katana_blade), NecronomiconText.CRAFTING_DREADIUM_BLADE),
+				new Page(9, new CraftingStack(new ItemStack(ACItems.skin, 1, 2)), NecronomiconText.CRAFTING_SKIN_OF_OMOTHOL_1),
+				new Page(10, new CraftingStack(ACItems.omothol_necronomicon), NecronomiconText.CRAFTING_NECRONOMICON_O));
 		addPages("dreadlands", "armortools", new Page(1, new CraftingStack(ACItems.dreadium_samurai_helmet),
 				NecronomiconText.CRAFTING_DREADIUM_SAMURAI_HELMET),
 				new Page(2, new CraftingStack(ACItems.dreadium_samurai_chestplate), NecronomiconText.CRAFTING_DREADIUM_SAMURAI_CHESTPLATE),
@@ -346,7 +344,8 @@ public class InternalNecroDataHandler extends DummyNecroDataHandler {
 				new Page(3, NecronomiconResources.RITUAL_TUT_2, NecronomiconText.RITUAL_TUT_3),
 				new Page(4, NecronomiconResources.BLANK, NecronomiconText.RITUAL_TUT_4),
 				new Page(5, NecronomiconResources.RITUAL_TUT_3, NecronomiconText.RITUAL_TUT_5),
-				new Page(6, NecronomiconText.RITUAL_TUT_6));
+				new Page(6, NecronomiconText.RITUAL_TUT_6),
+				new Page(7, NecronomiconText.RITUAL_TUT_7));
 		addPages("rituals", "materials", new Page(1, new ItemStack(ACBlocks.ritual_altar), NecronomiconText.MATERIAL_RITUAL_ALTAR_1),
 				new Page(2, new ItemStack(ACBlocks.ritual_pedestal), NecronomiconText.MATERIAL_RITUAL_PEDESTAL_1),
 				new Page(3, new ItemStack(ACBlocks.monolith_stone), NecronomiconText.MATERIAL_MONOLITH_STONE_1));

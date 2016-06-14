@@ -15,7 +15,7 @@ import net.minecraft.item.ItemPickaxe;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.TextFormatting;
 
-import com.shinoow.abyssalcraft.AbyssalCraft;
+import com.shinoow.abyssalcraft.lib.ACTabs;
 
 public class ItemACPickaxe extends ItemPickaxe {
 
@@ -27,11 +27,9 @@ public class ItemACPickaxe extends ItemPickaxe {
 
 	public ItemACPickaxe(ToolMaterial mat, String name, int harvestlevel, TextFormatting format) {
 		super(mat);
-		setCreativeTab(AbyssalCraft.tabTools);
+		setCreativeTab(ACTabs.tabTools);
 		setHarvestLevel("pickaxe", harvestlevel);
-		//		GameRegistry.registerItem(this, name);
 		setUnlocalizedName(name);
-		//		setTextureName(AbyssalCraft.modid + ":" + name);
 		this.format = format;
 	}
 

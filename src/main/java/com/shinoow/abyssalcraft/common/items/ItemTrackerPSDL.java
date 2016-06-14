@@ -24,15 +24,15 @@ import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
 
-import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.common.entity.EntityPSDLTracker;
+import com.shinoow.abyssalcraft.lib.ACTabs;
 
 public class ItemTrackerPSDL extends Item {
 
 	public ItemTrackerPSDL() {
 		setUnlocalizedName("powerstonetracker");
-		setCreativeTab(AbyssalCraft.tabItems);
+		setCreativeTab(ACTabs.tabItems);
 	}
 
 	@Override

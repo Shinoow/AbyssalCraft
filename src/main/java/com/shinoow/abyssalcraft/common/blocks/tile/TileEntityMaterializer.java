@@ -179,7 +179,7 @@ public class TileEntityMaterializer extends TileEntity implements ISidedInventor
 
 		if (hasCustomName())
 			par1.setString("CustomName", containerName);
-		
+
 		return par1;
 	}
 

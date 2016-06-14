@@ -26,9 +26,7 @@ public class ItemDeprecated extends Item {
 
 	public ItemDeprecated(String name){
 		super();
-		//		GameRegistry.registerItem(this, name);
 		setUnlocalizedName(name);
-		//		setTextureName("abyssalcraft:deprecated");
 		setCreativeTab(null);
 		setMaxStackSize(1);
 	}

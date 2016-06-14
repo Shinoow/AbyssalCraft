@@ -16,12 +16,14 @@ import java.util.List;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.FMLLog;
 
 import org.apache.logging.log4j.Level;
 
 import com.google.common.collect.Lists;
 import com.shinoow.abyssalcraft.api.energy.EnergyEnum.DeityType;
+import com.shinoow.abyssalcraft.api.event.ACEvents.DisruptionEvent;
 
 /**
  * Handler for disruptions (when something bad happens during Potential Energy manipulation)
@@ -52,7 +54,6 @@ public class DisruptionHandler {
 				return;
 			}
 		disruptions.add(disruption);
-		return;
 	}
 
 	/**
@@ -86,6 +87,9 @@ public class DisruptionHandler {
 				if(entry.getDeity() == deity || entry.getDeity() == null)
 					dis.add(entry);
 
-		dis.get(world.rand.nextInt(dis.size())).disrupt(world, pos, players);
+		DisruptionEntry disruption = dis.get(world.rand.nextInt(dis.size()));
+
+		if(!MinecraftForge.EVENT_BUS.post(new DisruptionEvent(deity, world, pos, players, disruption)))
+			disruption.disrupt(world, pos, players);
 	}
 }

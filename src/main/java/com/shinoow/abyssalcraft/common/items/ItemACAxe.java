@@ -22,7 +22,7 @@ import net.minecraft.item.ItemTool;
 import net.minecraft.util.text.TextFormatting;
 
 import com.google.common.collect.Sets;
-import com.shinoow.abyssalcraft.AbyssalCraft;
+import com.shinoow.abyssalcraft.lib.ACTabs;
 
 public class ItemACAxe extends ItemTool {
 
@@ -36,11 +36,9 @@ public class ItemACAxe extends ItemTool {
 
 	public ItemACAxe(ToolMaterial mat, String name, int harvestlevel, TextFormatting format) {
 		super(mat, EFFECTIVE_ON);
-		setCreativeTab(AbyssalCraft.tabTools);
+		setCreativeTab(ACTabs.tabTools);
 		setHarvestLevel("axe", harvestlevel);
-		//		GameRegistry.registerItem(this, name);
 		setUnlocalizedName(name);
-		//		setTextureName(AbyssalCraft.modid + ":" + name);
 		this.format = format;
 		damageVsEntity = mat.getDamageVsEntity();
 		attackSpeed = -3.0F;

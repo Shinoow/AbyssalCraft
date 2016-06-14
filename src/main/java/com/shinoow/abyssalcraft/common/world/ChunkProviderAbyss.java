@@ -103,16 +103,6 @@ public class ChunkProviderAbyss implements IChunkGenerator
 				float f = 10.0F / MathHelper.sqrt_float(j * j + k * k + 0.2F);
 				parabolicField[j + 2 + (k + 2) * 5] = f;
 			}
-
-		//		NoiseGenerator[] noiseGens = {noiseGen1, noiseGen2, noiseGen3, noiseGen4, noiseGen5, noiseGen6, mobSpawnerNoise};
-		//		noiseGens = TerrainGen.getModdedNoiseGenerators(par1World, rand, noiseGens);
-		//		noiseGen1 = (NoiseGeneratorOctaves)noiseGens[0];
-		//		noiseGen2 = (NoiseGeneratorOctaves)noiseGens[1];
-		//		noiseGen3 = (NoiseGeneratorOctaves)noiseGens[2];
-		//		noiseGen4 = (NoiseGeneratorPerlin)noiseGens[3];
-		//		noiseGen5 = (NoiseGeneratorOctaves)noiseGens[4];
-		//		noiseGen6 = (NoiseGeneratorOctaves)noiseGens[5];
-		//		mobSpawnerNoise = (NoiseGeneratorOctaves)noiseGens[6];
 	}
 
 	public void setBlocksInChunk(int x, int z, ChunkPrimer primer)
@@ -323,15 +313,6 @@ public class ChunkProviderAbyss implements IChunkGenerator
 	}
 
 	/**
-	 * Checks to see if a chunk exists at x, y
-	 */
-	//	@Override
-	//	public boolean chunkExists(int x, int z)
-	//	{
-	//		return true;
-	//	}
-
-	/**
 	 * Populates chunk with ores etc etc
 	 */
 	@Override
@@ -393,61 +374,10 @@ public class ChunkProviderAbyss implements IChunkGenerator
 
 		Biome.decorate(worldObj, rand, new BlockPos(k, 0, l));
 
-		ForgeEventFactory.onChunkPopulate(false, this, worldObj, x, z, flag);
+		ForgeEventFactory.onChunkPopulate(false, this, worldObj, rand, x, z, flag);
 
 		BlockFalling.fallInstantly = false;
 	}
-
-	//	@Override
-	//	public boolean func_177460_a(IChunkProvider p_177460_1_, Chunk p_177460_2_,
-	//			int p_177460_3_, int p_177460_4_) {
-	//
-	//		return false;
-	//	}
-
-	/**
-	 * Two modes of operation: if passed true, save all Chunks in one go.  If passed false, save up to two chunks.
-	 * Return true if all chunks have been saved.
-	 */
-	//	@Override
-	//	public boolean saveChunks(boolean par1, IProgressUpdate par2IProgressUpdate)
-	//	{
-	//		return true;
-	//	}
-
-	/**
-	 * Save extra data not associated with any Chunk.  Not saved during autosave, only during world unload.  Currently
-	 * unimplemented.
-	 */
-	//	@Override
-	//	public void saveExtraData() {}
-
-	/**
-	 * Unloads chunks that are marked to be unloaded. This is not guaranteed to unload every such chunk.
-	 */
-	//	@Override
-	//	public boolean unloadQueuedChunks()
-	//	{
-	//		return false;
-	//	}
-
-	/**
-	 * Returns if the IChunkProvider supports saving.
-	 */
-	//	@Override
-	//	public boolean canSave()
-	//	{
-	//		return true;
-	//	}
-
-	/**
-	 * Converts the instance data to a readable string.
-	 */
-	//	@Override
-	//	public String makeString()
-	//	{
-	//		return "ACLevelSource";
-	//	}
 
 	/**
 	 * Returns a list of creatures of the specified type that can spawn at the given location.
@@ -466,12 +396,6 @@ public class ChunkProviderAbyss implements IChunkGenerator
 		return "AbyStronghold".equals(par2String) && strongholdGenerator != null ? strongholdGenerator.getClosestStrongholdPos(par1World, pos) : null;
 	}
 
-	//	@Override
-	//	public int getLoadedChunkCount()
-	//	{
-	//		return 0;
-	//	}
-
 	@Override
 	public void recreateStructures(Chunk chunk, int x, int z)
 	{
@@ -479,15 +403,9 @@ public class ChunkProviderAbyss implements IChunkGenerator
 			strongholdGenerator.generate(worldObj, x, z, (ChunkPrimer)null);
 	}
 
-	//	@Override
-	//	public Chunk provideChunk(BlockPos blockPosIn) {
-	//
-	//		return provideChunk(blockPosIn.getX() >> 4, blockPosIn.getZ() >> 4);
-	//	}
-
 	@Override
 	public boolean generateStructures(Chunk chunkIn, int x, int z) {
-		// TODO Auto-generated method stub
+
 		return false;
 	}
 }

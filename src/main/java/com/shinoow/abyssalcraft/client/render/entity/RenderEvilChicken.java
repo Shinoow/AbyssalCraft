@@ -11,7 +11,7 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.client.render.entity;
 
-import net.minecraft.client.model.ModelBase;
+import net.minecraft.client.model.ModelChicken;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.entity.Entity;
@@ -28,14 +28,9 @@ public class RenderEvilChicken extends RenderLiving
 {
 	private static final ResourceLocation chickenTextures = new ResourceLocation("textures/entity/chicken.png");
 
-	public RenderEvilChicken(RenderManager manager, ModelBase model, float par2)
+	public RenderEvilChicken(RenderManager manager)
 	{
-		super(manager, model, par2);
-	}
-
-	public void doRender(EntityEvilChicken entity, double par2, double par3, double par4, float par5, float par6)
-	{
-		super.doRender(entity, par2, par3, par4, par5, par6);
+		super(manager, new ModelChicken(), 0.5F);
 	}
 
 	protected float handleRotationFloat(EntityEvilChicken entity, float par2)
@@ -45,29 +40,15 @@ public class RenderEvilChicken extends RenderLiving
 		return (MathHelper.sin(f1) + 1.0F) * f2;
 	}
 
-	//    public void doRender(EntityLiving entity, double par2, double par4, double par6, float par8, float par9)
-	//    {
-	//        this.doRender((EntityEvilChicken)entity, par2, par4, par6, par8, par9);
-	//    }
-
 	@Override
 	protected float handleRotationFloat(EntityLivingBase entity, float par2)
 	{
 		return this.handleRotationFloat((EntityEvilChicken)entity, par2);
 	}
 
-	//    public void doRender(EntityLivingBase entity, double par2, double par4, double par6, float par8, float par9)
-	//    {
-	//        this.doRender((EntityEvilChicken)entity, par2, par4, par6, par8, par9);
-	//    }
-
 	@Override
 	protected ResourceLocation getEntityTexture(Entity p_110775_1_)
 	{
 		return chickenTextures;
 	}
-	//    public void doRender(Entity entity, double par2, double par4, double par6, float par8, float par9)
-	//    {
-	//        this.doRender((EntityEvilChicken)entity, par2, par4, par6, par8, par9);
-	//    }
 }

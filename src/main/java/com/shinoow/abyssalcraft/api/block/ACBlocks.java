@@ -157,4 +157,12 @@ public class ACBlocks {
 	public static Block jzahar_spawner;
 	public static Block minion_of_the_gatekeeper_spawner;
 	public static Block mimic_fire;
+	public static Block decorative_cthulhu_statue;
+	public static Block decorative_hastur_statue;
+	public static Block decorative_jzahar_statue;
+	public static Block decorative_azathoth_statue;
+	public static Block decorative_nyarlathotep_statue;
+	public static Block decorative_yog_sothoth_statue;
+	public static Block decorative_shub_niggurath_statue;
+	public static Block crystal_cluster;
 }

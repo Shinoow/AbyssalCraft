@@ -21,24 +21,33 @@ import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelBiped;
+import net.minecraft.client.particle.Particle;
 import net.minecraft.client.renderer.ItemMeshDefinition;
 import net.minecraft.client.renderer.RenderItem;
 import net.minecraft.client.renderer.block.model.ModelBakery;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.renderer.block.statemap.StateMap;
 import net.minecraft.client.renderer.block.statemap.StateMapperBase;
+import net.minecraft.client.renderer.color.IBlockColor;
 import net.minecraft.client.renderer.color.IItemColor;
+import net.minecraft.client.renderer.entity.Render;
+import net.minecraft.client.renderer.entity.RenderEntityItem;
+import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.entity.RenderPlayer;
+import net.minecraft.client.renderer.entity.RenderSnowball;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IThreadListener;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.client.ForgeHooksClient;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.IBlockAccess;
+import net.minecraft.world.World;
 import net.minecraftforge.client.model.ModelLoader;
+import net.minecraftforge.client.model.obj.OBJLoader;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
+import net.minecraftforge.fml.client.registry.IRenderFactory;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 
@@ -46,16 +55,24 @@ import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.api.item.ACItems;
 import com.shinoow.abyssalcraft.client.handlers.AbyssalCraftClientEventHooks;
+import com.shinoow.abyssalcraft.client.model.block.*;
 import com.shinoow.abyssalcraft.client.model.item.ModelDreadiumSamuraiArmor;
 import com.shinoow.abyssalcraft.client.render.block.*;
+import com.shinoow.abyssalcraft.client.render.entity.*;
 import com.shinoow.abyssalcraft.client.render.entity.layers.LayerStarSpawnTentacles;
-import com.shinoow.abyssalcraft.client.render.factory.*;
+import com.shinoow.abyssalcraft.client.render.item.RenderCoraliumArrow;
 import com.shinoow.abyssalcraft.common.CommonProxy;
 import com.shinoow.abyssalcraft.common.blocks.BlockACSlab;
+import com.shinoow.abyssalcraft.common.blocks.BlockCrystalCluster;
+import com.shinoow.abyssalcraft.common.blocks.BlockCrystalCluster.EnumCrystalType;
 import com.shinoow.abyssalcraft.common.blocks.tile.*;
 import com.shinoow.abyssalcraft.common.entity.*;
 import com.shinoow.abyssalcraft.common.entity.anti.*;
 import com.shinoow.abyssalcraft.common.entity.demon.*;
+import com.shinoow.abyssalcraft.lib.ACLib;
+import com.shinoow.abyssalcraft.lib.client.render.TileEntityAltarBlockRenderer;
+import com.shinoow.abyssalcraft.lib.client.render.TileEntityDirectionalRenderer;
+import com.shinoow.abyssalcraft.lib.client.render.TileEntityPedestalBlockRenderer;
 
 public class ClientProxy extends CommonProxy {
 
@@ -64,53 +81,57 @@ public class ClientProxy extends CommonProxy {
 
 	@Override
 	public void preInit() {
-		RenderingRegistry.registerEntityRenderingHandler(EntityEvilpig.class, new RenderFactoryEvilPig());
-		RenderingRegistry.registerEntityRenderingHandler(EntityDepthsGhoul.class, new RenderFactoryDepthsGhoul());
-		RenderingRegistry.registerEntityRenderingHandler(EntityAbyssalZombie.class, new RenderFactoryAbyssalZombie());
-		RenderingRegistry.registerEntityRenderingHandler(EntityODBPrimed.class, new RenderFactoryODB());
-		RenderingRegistry.registerEntityRenderingHandler(EntityODBcPrimed.class, new RenderFactoryODBc());
-		RenderingRegistry.registerEntityRenderingHandler(EntityJzahar.class, new RenderFactoryJzahar());
-		RenderingRegistry.registerEntityRenderingHandler(EntityAbygolem.class, new RenderFactoryAbyssalniteGolem());
-		RenderingRegistry.registerEntityRenderingHandler(EntityDreadgolem.class, new RenderFactoryDreadedAbyssalniteGolem());
-		RenderingRegistry.registerEntityRenderingHandler(EntityDreadguard.class, new RenderFactoryDreadguard());
-		RenderingRegistry.registerEntityRenderingHandler(EntityDragonMinion.class, new RenderFactoryDragonMinion());
-		RenderingRegistry.registerEntityRenderingHandler(EntityDragonBoss.class, new RenderFactoryDragonBoss());
-		RenderingRegistry.registerEntityRenderingHandler(EntityPSDLTracker.class, new RenderFactoryPowerstoneTracker());
-		RenderingRegistry.registerEntityRenderingHandler(EntityShadowCreature.class, new RenderFactoryShadowCreature());
-		RenderingRegistry.registerEntityRenderingHandler(EntityShadowMonster.class, new RenderFactoryShadowMonster());
-		RenderingRegistry.registerEntityRenderingHandler(EntityDreadling.class, new RenderFactoryDreadling());
-		RenderingRegistry.registerEntityRenderingHandler(EntityDreadSpawn.class, new RenderFactoryDreadSpawn());
-		RenderingRegistry.registerEntityRenderingHandler(EntityDemonPig.class, new RenderFactoryDemonPig());
-		RenderingRegistry.registerEntityRenderingHandler(EntitySkeletonGoliath.class, new RenderFactorySkeletonGoliath());
-		RenderingRegistry.registerEntityRenderingHandler(EntityChagarothSpawn.class, new RenderFactoryChagarothSpawn());
-		RenderingRegistry.registerEntityRenderingHandler(EntityChagarothFist.class, new RenderFactoryChagarothFist());
-		RenderingRegistry.registerEntityRenderingHandler(EntityChagaroth.class, new RenderFactoryChagaroth());
-		RenderingRegistry.registerEntityRenderingHandler(EntityShadowBeast.class, new RenderFactoryShadowBeast());
-		RenderingRegistry.registerEntityRenderingHandler(EntitySacthoth.class, new RenderFactorySacthoth());
-		RenderingRegistry.registerEntityRenderingHandler(EntityRemnant.class, new RenderFactoryRemnant());
-		RenderingRegistry.registerEntityRenderingHandler(EntityOmotholGhoul.class, new RenderFactoryOmotholGhoul());
-		RenderingRegistry.registerEntityRenderingHandler(EntityCoraliumArrow.class, new RenderFactoryCoraliumArrow());
-		RenderingRegistry.registerEntityRenderingHandler(EntityGatekeeperMinion.class, new RenderFactoryGatekeeperMinion());
-		RenderingRegistry.registerEntityRenderingHandler(EntityGreaterDreadSpawn.class, new RenderFactoryGreaterDreadSpawn());
-		RenderingRegistry.registerEntityRenderingHandler(EntityLesserDreadbeast.class, new RenderFactoryLesserDreadbeast());
-		RenderingRegistry.registerEntityRenderingHandler(EntityDreadSlug.class, new RenderFactoryDreadSlug());
-		RenderingRegistry.registerEntityRenderingHandler(EntityLesserShoggoth.class, new RenderFactoryLesserShoggoth());
-		RenderingRegistry.registerEntityRenderingHandler(EntityEvilCow.class, new RenderFactoryEvilCow());
-		RenderingRegistry.registerEntityRenderingHandler(EntityEvilChicken.class, new RenderFactoryEvilChicken());
-		RenderingRegistry.registerEntityRenderingHandler(EntityDemonCow.class, new RenderFactoryDemonCow());
-		RenderingRegistry.registerEntityRenderingHandler(EntityDemonChicken.class, new RenderFactoryDemonChicken());
 
-		RenderingRegistry.registerEntityRenderingHandler(EntityAntiAbyssalZombie.class, new RenderFactoryAntiAbyssalZombie());
-		RenderingRegistry.registerEntityRenderingHandler(EntityAntiBat.class, new RenderFactoryAntiBat());
-		RenderingRegistry.registerEntityRenderingHandler(EntityAntiChicken.class, new RenderFactoryAntiChicken());
-		RenderingRegistry.registerEntityRenderingHandler(EntityAntiCow.class, new RenderFactoryAntiCow());
-		RenderingRegistry.registerEntityRenderingHandler(EntityAntiCreeper.class, new RenderFactoryAntiCreeper());
-		RenderingRegistry.registerEntityRenderingHandler(EntityAntiGhoul.class, new RenderFactoryAntiGhoul());
-		RenderingRegistry.registerEntityRenderingHandler(EntityAntiPig.class, new RenderFactoryAntiPig());
-		RenderingRegistry.registerEntityRenderingHandler(EntityAntiPlayer.class, new RenderFactoryAntiPlayer());
-		RenderingRegistry.registerEntityRenderingHandler(EntityAntiSkeleton.class, new RenderFactoryAntiSkeleton());
-		RenderingRegistry.registerEntityRenderingHandler(EntityAntiSpider.class, new RenderFactoryAntiSpider());
-		RenderingRegistry.registerEntityRenderingHandler(EntityAntiZombie.class, new RenderFactoryAntiZombie());
+		OBJLoader.INSTANCE.addDomain(AbyssalCraft.modid);
+
+		RenderingRegistry.registerEntityRenderingHandler(EntityEvilpig.class, new IRenderFactory(){ @Override public Render createRenderFor(RenderManager manager) { return new RenderEvilPig(manager); }});
+		RenderingRegistry.registerEntityRenderingHandler(EntityDepthsGhoul.class, new IRenderFactory(){ @Override public Render createRenderFor(RenderManager manager) { return new RenderDepthsGhoul(manager); }});
+		RenderingRegistry.registerEntityRenderingHandler(EntityAbyssalZombie.class, new IRenderFactory(){ @Override public Render createRenderFor(RenderManager manager) { return new RenderAbyssalZombie(manager); }});
+		RenderingRegistry.registerEntityRenderingHandler(EntityODBPrimed.class, new IRenderFactory(){ @Override public Render createRenderFor(RenderManager manager) { return new RenderODB(manager); }});
+		RenderingRegistry.registerEntityRenderingHandler(EntityODBcPrimed.class, new IRenderFactory(){ @Override public Render createRenderFor(RenderManager manager) { return new RenderODBc(manager); }});
+		RenderingRegistry.registerEntityRenderingHandler(EntityJzahar.class, new IRenderFactory(){ @Override public Render createRenderFor(RenderManager manager) { return new RenderJzahar(manager); }});
+		RenderingRegistry.registerEntityRenderingHandler(EntityAbygolem.class, new IRenderFactory(){ @Override public Render createRenderFor(RenderManager manager) { return new RenderAbyssalniteGolem(manager); }});
+		RenderingRegistry.registerEntityRenderingHandler(EntityDreadgolem.class, new IRenderFactory(){ @Override public Render createRenderFor(RenderManager manager) { return new RenderDreadedAbyssalniteGolem(manager); }});
+		RenderingRegistry.registerEntityRenderingHandler(EntityDreadguard.class, new IRenderFactory(){ @Override public Render createRenderFor(RenderManager manager) { return new RenderDreadguard(manager); }});
+		RenderingRegistry.registerEntityRenderingHandler(EntityDragonMinion.class, new IRenderFactory(){ @Override public Render createRenderFor(RenderManager manager) {  return new RenderDragonMinion(manager); }});
+		RenderingRegistry.registerEntityRenderingHandler(EntityDragonBoss.class, new IRenderFactory(){@Override public Render createRenderFor(RenderManager manager) { return new RenderDragonBoss(manager); }});
+		RenderingRegistry.registerEntityRenderingHandler(EntityPSDLTracker.class, new IRenderFactory(){ @Override public Render createRenderFor(RenderManager manager) { return new RenderSnowball(manager, ACItems.powerstone_tracker, Minecraft.getMinecraft().getRenderItem()); }});
+		RenderingRegistry.registerEntityRenderingHandler(EntityShadowCreature.class, new IRenderFactory(){ @Override public Render createRenderFor(RenderManager manager) { return new RenderShadowCreature(manager); }});
+		RenderingRegistry.registerEntityRenderingHandler(EntityShadowMonster.class, new IRenderFactory(){ @Override public Render createRenderFor(RenderManager manager) { return new RenderShadowMonster(manager); }});
+		RenderingRegistry.registerEntityRenderingHandler(EntityDreadling.class, new IRenderFactory(){ @Override public Render createRenderFor(RenderManager manager) { return new RenderDreadling(manager); }});
+		RenderingRegistry.registerEntityRenderingHandler(EntityDreadSpawn.class, new IRenderFactory(){ @Override public Render createRenderFor(RenderManager manager) { return new RenderDreadSpawn(manager); }});
+		RenderingRegistry.registerEntityRenderingHandler(EntityDemonPig.class, new IRenderFactory(){ @Override public Render createRenderFor(RenderManager manager) { return new RenderDemonPig(manager); }});
+		RenderingRegistry.registerEntityRenderingHandler(EntitySkeletonGoliath.class, new IRenderFactory(){ @Override public Render createRenderFor(RenderManager manager) { return new RenderSkeletonGoliath(manager); }});
+		RenderingRegistry.registerEntityRenderingHandler(EntityChagarothSpawn.class, new IRenderFactory(){ @Override public Render createRenderFor(RenderManager manager) { return new RenderChagarothSpawn(manager); }});
+		RenderingRegistry.registerEntityRenderingHandler(EntityChagarothFist.class, new IRenderFactory(){ @Override public Render createRenderFor(RenderManager manager) { return new RenderChagarothFist(manager); }});
+		RenderingRegistry.registerEntityRenderingHandler(EntityChagaroth.class, new IRenderFactory(){ @Override public Render createRenderFor(RenderManager manager) { return new RenderChagaroth(manager); }});
+		RenderingRegistry.registerEntityRenderingHandler(EntityShadowBeast.class, new IRenderFactory(){ @Override public Render createRenderFor(RenderManager manager) { return new RenderShadowBeast(manager); }});
+		RenderingRegistry.registerEntityRenderingHandler(EntitySacthoth.class, new IRenderFactory(){ @Override public Render createRenderFor(RenderManager manager) { return new RenderSacthoth(manager); }});
+		RenderingRegistry.registerEntityRenderingHandler(EntityRemnant.class, new IRenderFactory(){ @Override public Render createRenderFor(RenderManager manager) { return new RenderRemnant(manager); }});
+		RenderingRegistry.registerEntityRenderingHandler(EntityOmotholGhoul.class, new IRenderFactory(){ @Override public Render createRenderFor(RenderManager manager) { return new RenderOmotholGhoul(manager); }});
+		RenderingRegistry.registerEntityRenderingHandler(EntityCoraliumArrow.class, new IRenderFactory(){ @Override public Render createRenderFor(RenderManager manager) { return new RenderCoraliumArrow(manager); }});
+		RenderingRegistry.registerEntityRenderingHandler(EntityGatekeeperMinion.class, new IRenderFactory(){ @Override public Render createRenderFor(RenderManager manager) { return new RenderGatekeeperMinion(manager); }});
+		RenderingRegistry.registerEntityRenderingHandler(EntityGreaterDreadSpawn.class, new IRenderFactory(){ @Override public Render createRenderFor(RenderManager manager) { return new RenderGreaterDreadSpawn(manager); }});
+		RenderingRegistry.registerEntityRenderingHandler(EntityLesserDreadbeast.class, new IRenderFactory(){ @Override public Render createRenderFor(RenderManager manager) { return new RenderLesserDreadbeast(manager); }});
+		RenderingRegistry.registerEntityRenderingHandler(EntityDreadSlug.class, new IRenderFactory(){ @Override public Render createRenderFor(RenderManager manager) { return new RenderSnowball(manager, ACItems.dread_fragment, Minecraft.getMinecraft().getRenderItem()); }});
+		RenderingRegistry.registerEntityRenderingHandler(EntityLesserShoggoth.class, new IRenderFactory(){ @Override public Render createRenderFor(RenderManager manager) { return new RenderLesserShoggoth(manager); }});
+		RenderingRegistry.registerEntityRenderingHandler(EntityEvilCow.class, new IRenderFactory(){ @Override public Render createRenderFor(RenderManager manager) { return new RenderEvilCow(manager); }});
+		RenderingRegistry.registerEntityRenderingHandler(EntityEvilChicken.class, new IRenderFactory(){ @Override public Render createRenderFor(RenderManager manager) { return new RenderEvilChicken(manager); }});
+		RenderingRegistry.registerEntityRenderingHandler(EntityDemonCow.class, new IRenderFactory(){ @Override public Render createRenderFor(RenderManager manager) { return new RenderDemonCow(manager); }});
+		RenderingRegistry.registerEntityRenderingHandler(EntityDemonChicken.class, new IRenderFactory(){ @Override public Render createRenderFor(RenderManager manager) { return new RenderDemonChicken(manager); }});
+		RenderingRegistry.registerEntityRenderingHandler(EntityGatekeeperEssence.class, new IRenderFactory(){ @Override public Render createRenderFor(RenderManager manager) { return new RenderEntityItem(manager, Minecraft.getMinecraft().getRenderItem()); }});
+
+		RenderingRegistry.registerEntityRenderingHandler(EntityAntiAbyssalZombie.class, new IRenderFactory(){ @Override public Render createRenderFor(RenderManager manager) { return new RenderAntiAbyssalZombie(manager); }});
+		RenderingRegistry.registerEntityRenderingHandler(EntityAntiBat.class, new IRenderFactory(){ @Override public Render createRenderFor(RenderManager manager) { return new RenderAntiBat(manager); }});
+		RenderingRegistry.registerEntityRenderingHandler(EntityAntiChicken.class, new IRenderFactory(){ @Override public Render createRenderFor(RenderManager manager) { return new RenderAntiChicken(manager); }});
+		RenderingRegistry.registerEntityRenderingHandler(EntityAntiCow.class, new IRenderFactory(){ @Override public Render createRenderFor(RenderManager manager) { return new RenderAntiCow(manager); }});
+		RenderingRegistry.registerEntityRenderingHandler(EntityAntiCreeper.class, new IRenderFactory(){ @Override public Render createRenderFor(RenderManager manager) { return new RenderAntiCreeper(manager); }});
+		RenderingRegistry.registerEntityRenderingHandler(EntityAntiGhoul.class, new IRenderFactory(){ @Override public Render createRenderFor(RenderManager manager) { return new RenderAntiGhoul(manager); }});
+		RenderingRegistry.registerEntityRenderingHandler(EntityAntiPig.class, new IRenderFactory(){ @Override public Render createRenderFor(RenderManager manager) { return new RenderAntiPig(manager); }});
+		RenderingRegistry.registerEntityRenderingHandler(EntityAntiPlayer.class, new IRenderFactory(){ @Override public Render createRenderFor(RenderManager manager) { return new RenderAntiPlayer(manager); }});
+		RenderingRegistry.registerEntityRenderingHandler(EntityAntiSkeleton.class, new IRenderFactory(){ @Override public Render createRenderFor(RenderManager manager) { return new RenderAntiSkeleton(manager); }});
+		RenderingRegistry.registerEntityRenderingHandler(EntityAntiSpider.class, new IRenderFactory(){ @Override public Render createRenderFor(RenderManager manager) { return new RenderAntiSpider(manager); }});
+		RenderingRegistry.registerEntityRenderingHandler(EntityAntiZombie.class, new IRenderFactory(){ @Override public Render createRenderFor(RenderManager manager) { return new RenderAntiZombie(manager); }});
 
 		ModelBakery.registerItemVariants(ACItems.shoggoth_flesh, makerl("shoggothflesh_overworld", "shoggothflesh_abyssalwasteland",
 				"shoggothflesh_dreadlands", "shoggothflesh_omothol", "shoggothflesh_darkrealm"));
@@ -151,76 +172,51 @@ public class ClientProxy extends CommonProxy {
 		ModelLoader.setCustomStateMapper(ACBlocks.dreadlands_sapling, new StateMap.Builder().ignore(new IProperty[] {BlockSapling.TYPE}).build());
 		ModelLoader.setCustomStateMapper(ACBlocks.mimic_fire, new StateMap.Builder().ignore(new IProperty[] {BlockFire.AGE}).build());
 		ModelLoader.setCustomStateMapper(ACBlocks.darkstone_cobblestone_wall, new StateMap.Builder().ignore(new IProperty[] {BlockWall.VARIANT}).build());
+		ModelLoader.setCustomStateMapper(ACBlocks.crystal_cluster, new StateMap.Builder().ignore(new IProperty[]{BlockCrystalCluster.TYPE}).build());
 
-		loatheMyselfForBeingALazyFuck(ACBlocks.chagaroth_altar_bottom, TileEntityDreadAltarBottom.class);
-		loatheMyselfForBeingALazyFuck(ACBlocks.chagaroth_altar_top, TileEntityDreadAltarTop.class);
-		loatheMyselfForBeingALazyFuck(ACBlocks.oblivion_deathbomb, TileEntityODB.class);
-		loatheMyselfForBeingALazyFuck(ACBlocks.engraver, TileEntityEngraver.class);
-		loatheMyselfForBeingALazyFuck(ACBlocks.cthulhu_statue, TileEntityCthulhuStatue.class);
-		loatheMyselfForBeingALazyFuck(ACBlocks.hastur_statue, TileEntityHasturStatue.class);
-		loatheMyselfForBeingALazyFuck(ACBlocks.jzahar_statue, TileEntityJzaharStatue.class);
-		loatheMyselfForBeingALazyFuck(ACBlocks.azathoth_statue, TileEntityAzathothStatue.class);
-		loatheMyselfForBeingALazyFuck(ACBlocks.nyarlathotep_statue, TileEntityNyarlathotepStatue.class);
-		loatheMyselfForBeingALazyFuck(ACBlocks.yog_sothoth_statue, TileEntityYogsothothStatue.class);
-		loatheMyselfForBeingALazyFuck(ACBlocks.shub_niggurath_statue, TileEntityShubniggurathStatue.class);
+		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(ACBlocks.cthulhu_statue), 0, new ModelResourceLocation("abyssalcraft:cthulhustatue", "inventory"));
+		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(ACBlocks.decorative_cthulhu_statue), 0, new ModelResourceLocation("abyssalcraft:cthulhustatue", "inventory"));
+		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(ACBlocks.hastur_statue), 0, new ModelResourceLocation("abyssalcraft:hasturstatue", "inventory"));
+		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(ACBlocks.decorative_hastur_statue), 0, new ModelResourceLocation("abyssalcraft:hasturstatue", "inventory"));
+		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(ACBlocks.jzahar_statue), 0, new ModelResourceLocation("abyssalcraft:jzaharstatue", "inventory"));
+		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(ACBlocks.decorative_jzahar_statue), 0, new ModelResourceLocation("abyssalcraft:jzaharstatue", "inventory"));
+		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(ACBlocks.azathoth_statue), 0, new ModelResourceLocation("abyssalcraft:azathothstatue", "inventory"));
+		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(ACBlocks.decorative_azathoth_statue), 0, new ModelResourceLocation("abyssalcraft:azathothstatue", "inventory"));
+		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(ACBlocks.nyarlathotep_statue), 0, new ModelResourceLocation("abyssalcraft:nyarlathotepstatue", "inventory"));
+		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(ACBlocks.decorative_nyarlathotep_statue), 0, new ModelResourceLocation("abyssalcraft:nyarlathotepstatue", "inventory"));
+		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(ACBlocks.yog_sothoth_statue), 0, new ModelResourceLocation("abyssalcraft:yogsothothstatue", "inventory"));
+		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(ACBlocks.decorative_yog_sothoth_statue), 0, new ModelResourceLocation("abyssalcraft:yogsothothstatue", "inventory"));
+		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(ACBlocks.shub_niggurath_statue), 0, new ModelResourceLocation("abyssalcraft:shubniggurathstatue", "inventory"));
+		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(ACBlocks.decorative_shub_niggurath_statue), 0, new ModelResourceLocation("abyssalcraft:shubniggurathstatue", "inventory"));
+		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(ACBlocks.engraver), 0, new ModelResourceLocation("abyssalcraft:engraver", "inventory"));
+		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(ACBlocks.oblivion_deathbomb), 0, new ModelResourceLocation("abyssalcraft:odb", "inventory"));
+		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(ACBlocks.chagaroth_altar_top), 0, new ModelResourceLocation("abyssalcraft:dreadaltartop", "inventory"));
+		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(ACBlocks.chagaroth_altar_bottom), 0, new ModelResourceLocation("abyssalcraft:dreadaltarbottom", "inventory"));
+
+		ModelLoader.setCustomModelResourceLocation(ACItems.cudgel, 0, new ModelResourceLocation("abyssalcraft:cudgel", "inventory"));
+		ModelLoader.setCustomModelResourceLocation(ACItems.dreadium_katana, 0, new ModelResourceLocation("abyssalcraft:dreadkatana", "inventory"));
+		ModelLoader.setCustomModelResourceLocation(ACItems.staff_of_the_gatekeeper, 0, new ModelResourceLocation("abyssalcraft:staff", "inventory"));
 
 		MinecraftForge.EVENT_BUS.register(new AbyssalCraftClientEventHooks());
 	}
 
 	@Override
 	public void init(){
-		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityDGhead.class, new TileEntityDGheadRenderer());
-		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityPhead.class, new TileEntityPheadRenderer());
-		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityWhead.class, new TileEntityWheadRenderer());
-		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityOhead.class, new TileEntityOheadRenderer());
-		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityDreadAltarBottom.class, new TileEntityDreadAltarBottomRenderer());
-		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityDreadAltarTop.class, new TileEntityDreadAltarTopRenderer());
-		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityODB.class, new TileEntityODBRenderer());
-		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityEngraver.class, new TileEntityEngraverRenderer());
-		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityRitualAltar.class, new TileEntityRitualAltarRenderer());
-		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityRitualPedestal.class, new TileEntityRitualPedestalRenderer());
-		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityCthulhuStatue.class, new TileEntityCthulhuStatueRenderer());
-		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityHasturStatue.class, new TileEntityHasturStatueRenderer());
-		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityJzaharStatue.class, new TileEntityJzaharStatueRenderer());
-		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityAzathothStatue.class, new TileEntityAzathothStatueRenderer());
-		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityNyarlathotepStatue.class, new TileEntityNyarlathotepStatueRenderer());
-		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityYogsothothStatue.class, new TileEntityYogsothothStatueRenderer());
-		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityShubniggurathStatue.class, new TileEntityShubniggurathStatueRenderer());
-		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityEnergyPedestal.class, new TileEntityEnergyPedestalRenderer());
-		ClientRegistry.bindTileEntitySpecialRenderer(TileEntitySacrificialAltar.class, new TileEntitySacrificialAltarRenderer());
-		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityTieredEnergyPedestal.class, new TileEntityTieredEnergyPedestalRenderer());
-		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityTieredSacrificialAltar.class, new TileEntityTieredSacrificialAltarRenderer());
+		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityDGhead.class, new TileEntityDirectionalRenderer(new ModelDGhead(), "abyssalcraft:textures/model/depths_ghoul.png"));
+		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityPhead.class, new TileEntityDirectionalRenderer(new ModelDGhead(), "abyssalcraft:textures/model/depths_ghoul_pete.png"));
+		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityWhead.class, new TileEntityDirectionalRenderer(new ModelDGhead(), "abyssalcraft:textures/model/depths_ghoul_wilson.png"));
+		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityOhead.class, new TileEntityDirectionalRenderer(new ModelDGhead(), "abyssalcraft:textures/model/depths_ghoul_orange.png"));
+		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityRitualAltar.class, new TileEntityAltarBlockRenderer());
+		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityRitualPedestal.class, new TileEntityPedestalBlockRenderer());
+		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityEnergyPedestal.class, new TileEntityPedestalBlockRenderer());
+		ClientRegistry.bindTileEntitySpecialRenderer(TileEntitySacrificialAltar.class, new TileEntityAltarBlockRenderer());
+		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityTieredEnergyPedestal.class, new TileEntityPedestalBlockRenderer());
+		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityTieredSacrificialAltar.class, new TileEntityAltarBlockRenderer());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityJzaharSpawner.class, new TileEntityJzaharSpawnerRenderer());
-
-		//		MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(AbyssalCraft.PSDL), new Block3DRender(new TileEntityPSDLRenderer(), new TileEntityPSDL()));
-		//		MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(AbyssalCraft.Altar), new Block3DRender(new TileEntityAltarRenderer(), new TileEntityAltar()));
-		//		MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(AbyssalCraft.ODB), new Block3DRender(new TileEntityODBRenderer(), new TileEntityODB()));
-		//		MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(AbyssalCraft.dreadaltarbottom), new Block3DRender(new TileEntityDreadAltarBottomRenderer(), new TileEntityDreadAltarBottom()));
-		//		MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(AbyssalCraft.dreadaltartop), new Block3DRender(new TileEntityDreadAltarTopRenderer(), new TileEntityDreadAltarTop()));
-		//		MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(AbyssalCraft.engraver), new Block3DRender(new TileEntityEngraverRenderer(), new TileEntityEngraver()));
-		//		MinecraftForgeClient.registerItemRenderer(AbyssalCraft.Staff, new RenderStaff());
-		//		MinecraftForgeClient.registerItemRenderer(AbyssalCraft.cudgel, new RenderCudgel());
-		//		MinecraftForgeClient.registerItemRenderer(AbyssalCraft.dreadhilt, new RenderHilt());
-		//		MinecraftForgeClient.registerItemRenderer(AbyssalCraft.dreadkatana, new RenderKatana());
-		//		MinecraftForgeClient.registerItemRenderer(AbyssalCraft.corbow, new RenderCoraliumBow());
-		//		MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(ACBlocks.ritual_altar), new RenderRitualAltar());
-		//		MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(ACBlocks.ritual_pedestal), new RenderRitualPedestal());
-		//		MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(AbyssalCraft.cthulhuStatue), new Block3DRender(new TileEntityCthulhuStatueRenderer(), new TileEntityCthulhuStatue()));
-		//		MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(AbyssalCraft.hasturStatue), new Block3DRender(new TileEntityHasturStatueRenderer(), new TileEntityHasturStatue()));
-		//		MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(AbyssalCraft.jzaharStatue), new Block3DRender(new TileEntityJzaharStatueRenderer(), new TileEntityJzaharStatue()));
-		//		MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(AbyssalCraft.azathothStatue), new Block3DRender(new TileEntityAzathothStatueRenderer(), new TileEntityAzathothStatue()));
-		//		MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(AbyssalCraft.nyarlathotepStatue), new Block3DRender(new TileEntityNyarlathotepStatueRenderer(), new TileEntityNyarlathotepStatue()));
-		//		MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(AbyssalCraft.yogsothothStatue), new Block3DRender(new TileEntityYogsothothStatueRenderer(), new TileEntityYogsothothStatue()));
-		//		MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(AbyssalCraft.shubniggurathStatue), new Block3DRender(new TileEntityShubniggurathStatueRenderer(), new TileEntityShubniggurathStatue()));
-		//		MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(AbyssalCraft.energyPedestal), new Block3DRender(new TileEntityEnergyPedestalRenderer(), new TileEntityEnergyPedestal()));
-		//		MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(AbyssalCraft.sacrificialAltar), new Block3DRender(new TileEntitySacrificialAltarRenderer(), new TileEntitySacrificialAltar()));
-		//		MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(ACBlocks.tiered_energy_pedestal), new RenderTieredEnergyPedestal());
-		//		MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(ACBlocks.tiered_sacrificial_altar), new RenderTieredSacrificialAltar());
 
 		registerItemRender(AbyssalCraft.devsword, 0);
 		registerItemRender(ACItems.oblivion_catalyst, 0);
 		registerItemRender(ACItems.gateway_key, 0);
-		registerItemRender(ACItems.staff_of_the_gatekeeper, 0);
 		registerItemRender(ACItems.liquid_coralium_bucket, 0);
 		registerItemRender(ACItems.powerstone_tracker, 0);
 		registerItemRender(ACItems.eye_of_the_abyss, 0);
@@ -303,7 +299,6 @@ public class ClientProxy extends CommonProxy {
 		registerItemRender(ACItems.coralium_longbow, 0);
 		registerItemRender(ACItems.liquid_antimatter_bucket, 0);
 		registerItemRender(ACItems.coralium_brick, 0);
-		registerItemRender(ACItems.cudgel, 0);
 		registerItemRender(ACItems.dreadium_ingot, 0);
 		registerItemRender(ACItems.dread_fragment, 0);
 		registerItemRender(ACItems.dreadium_boots, 0);
@@ -327,7 +322,6 @@ public class ClientProxy extends CommonProxy {
 		registerItemRender(ACItems.dreadium_plate, 0);
 		registerItemRender(ACItems.dreadium_katana_blade, 0);
 		registerItemRender(ACItems.dreadium_katana_hilt, 0);
-		registerItemRender(ACItems.dreadium_katana, 0);
 		registerItemRender(ACItems.dread_plagued_gateway_key, 0);
 		registerItemRender(ACItems.rlyehian_gateway_key, 0);
 		registerItemRender(ACItems.dreadium_samurai_boots, 0);
@@ -439,7 +433,6 @@ public class ClientProxy extends CommonProxy {
 		registerItemRender(ACBlocks.abyssalnite_ore, 0);
 		registerItemRender(ACBlocks.abyssal_stone_brick_fence, 0);
 		registerItemRender(ACBlocks.darkstone_cobblestone_wall, 0);
-		registerItemRender(ACBlocks.oblivion_deathbomb, 0);
 		registerItemRender(ACBlocks.block_of_abyssalnite, 0);
 		registerItemRender(ACBlocks.coralium_infused_stone, 0);
 		registerItemRender(ACBlocks.odb_core, 0);
@@ -497,8 +490,6 @@ public class ClientProxy extends CommonProxy {
 		registerItemRender(ACBlocks.coralium_stone_brick_stairs, 0);
 		registerItemRender(ACBlocks.coralium_stone_button, 0);
 		registerItemRender(ACBlocks.coralium_stone_pressure_plate, 0);
-		registerItemRender(ACBlocks.chagaroth_altar_top, 0);
-		registerItemRender(ACBlocks.chagaroth_altar_bottom, 0);
 		registerItemRender(ACBlocks.crystallizer_idle, 0);
 		registerItemRender(ACBlocks.crystallizer_active, 0);
 		registerItemRender(ACBlocks.block_of_dreadium, 0);
@@ -530,7 +521,6 @@ public class ClientProxy extends CommonProxy {
 		registerItemRender(ACBlocks.omothol_stone, 0);
 		registerItemRender(ACBlocks.omothol_gateway, 0);
 		registerItemRender(ACBlocks.omothol_fire, 0);
-		registerItemRender(ACBlocks.engraver, 0);
 		registerItemRender(AbyssalCraft.house, 0);
 		registerItemRender(ACBlocks.materializer, 0);
 		registerItemRender(ACBlocks.dark_ethaxium_brick, 0, "darkethaxiumbrick_0");
@@ -557,13 +547,6 @@ public class ClientProxy extends CommonProxy {
 		registerItemRender(ACBlocks.ritual_pedestal, 6, "ritualpedestal_6");
 		registerItemRender(ACBlocks.ritual_pedestal, 7, "ritualpedestal_7");
 		registerItemRender(ACBlocks.shoggoth_ooze, 0);
-		registerItemRender(ACBlocks.cthulhu_statue, 0);
-		registerItemRender(ACBlocks.hastur_statue, 0);
-		registerItemRender(ACBlocks.jzahar_statue, 0);
-		registerItemRender(ACBlocks.azathoth_statue, 0);
-		registerItemRender(ACBlocks.nyarlathotep_statue, 0);
-		registerItemRender(ACBlocks.yog_sothoth_statue, 0);
-		registerItemRender(ACBlocks.shub_niggurath_statue, 0);
 		registerItemRender(ACBlocks.monolith_stone, 0);
 		registerItemRender(ACBlocks.shoggoth_biomass, 0);
 		registerItemRender(ACBlocks.energy_pedestal, 0);
@@ -579,6 +562,7 @@ public class ClientProxy extends CommonProxy {
 		registerItemRender(ACBlocks.tiered_sacrificial_altar, 3, "tieredsacrificialaltar_3");
 		registerItemRender(ACBlocks.minion_of_the_gatekeeper_spawner, 0);
 		registerItemRender(ACBlocks.mimic_fire, 0);
+		registerItemRenders(ACBlocks.crystal_cluster, EnumCrystalType.values().length);
 
 		RenderPlayer render1 = Minecraft.getMinecraft().getRenderManager().getSkinMap().get("default");
 		render1.addLayer(new LayerStarSpawnTentacles(render1));
@@ -588,13 +572,10 @@ public class ClientProxy extends CommonProxy {
 
 			@Override
 			public int getColorFromItemstack(ItemStack stack, int tintIndex) {
-				int[] crystalColors = new int[]{0xD9D9D9, 0xF3CC3E, 0xF6FF00, 0x3D3D36, 16777215, 16777215, 16777215, 0x996A18,
-						0xD9D9D9, 0x1500FF, 0x19FC00, 0xFF0000, 0x8002BF, 0x00FFEE, 0xB00000, 0xFFCC00, 0xD9D8D7, 0xE89207, 0xD9D9D9,
-						0xD9D9D9, 0xD9D9D9, 16777215, 0xD9D8D9, 16777215, 0xD7D8D9};
-				return crystalColors[stack.getItemDamage()];
+				return ACLib.crystalColors[stack.getItemDamage()];
 			}
 
-		}, ACItems.crystal, ACItems.crystal_shard);
+		}, ACItems.crystal, ACItems.crystal_shard, Item.getItemFromBlock(ACBlocks.crystal_cluster));
 		Minecraft.getMinecraft().getItemColors().registerItemColorHandler(new IItemColor(){
 
 			@Override
@@ -604,6 +585,14 @@ public class ClientProxy extends CommonProxy {
 
 		}, ACItems.coin, ACItems.elder_engraved_coin, ACItems.cthulhu_engraved_coin, ACItems.hastur_engraved_coin, ACItems.jzahar_engraved_coin,
 		ACItems.azathoth_engraved_coin, ACItems.nyarlathotep_engraved_coin, ACItems.yog_sothoth_engraved_coin, ACItems.shub_niggurath_engraved_coin);
+		Minecraft.getMinecraft().getBlockColors().registerBlockColorHandler(new IBlockColor(){
+
+			@Override
+			public int colorMultiplier(IBlockState state, IBlockAccess world, BlockPos pos, int tintIndex) {
+				return ACLib.crystalColors[state.getBlock().getMetaFromState(state)];
+			}
+
+		}, ACBlocks.crystal_cluster);
 	}
 
 	private void registerFluidModel(Block fluidBlock, String name) {
@@ -665,11 +654,6 @@ public class ClientProxy extends CommonProxy {
 		return res;
 	}
 
-	@SuppressWarnings("deprecation")
-	private void loatheMyselfForBeingALazyFuck(Block block, Class<? extends TileEntity> tile){
-		ForgeHooksClient.registerTESRItemStack(Item.getItemFromBlock(block), 0, tile);
-	}
-
 	@Override
 	public ModelBiped getArmorModel(int id){
 		switch (id) {
@@ -696,5 +680,42 @@ public class ClientProxy extends CommonProxy {
 	@Override
 	public IThreadListener getThreadFromContext(MessageContext ctx) {
 		return ctx.side.isClient() ? Minecraft.getMinecraft() : super.getThreadFromContext(ctx);
+	}
+
+	@Override
+	public void spawnParticle(String particleName, double posX, double posY, double posZ, double velX, double velY, double velZ)
+	{
+		Minecraft mc = Minecraft.getMinecraft();
+		World theWorld = mc.theWorld;
+
+		if (mc != null && mc.getRenderViewEntity() != null && mc.effectRenderer != null)
+		{
+			int var14 = mc.gameSettings.particleSetting;
+
+			if (var14 == 1 && theWorld.rand.nextInt(3) == 0)
+				var14 = 2;
+
+			double var15 = mc.getRenderViewEntity().posX - posX;
+			double var17 = mc.getRenderViewEntity().posY - posY;
+			double var19 = mc.getRenderViewEntity().posZ - posZ;
+			Particle var21 = null;
+			double var22 = 16.0D;
+
+			if (var15 * var15 + var17 * var17 + var19 * var19 > var22 * var22)
+				return;
+			else if (var14 > 1)
+				return;
+			else
+			{
+				if (particleName.equals("CorBlood"))
+				{
+					var21 = new ACParticleFX(theWorld, posX, posY, posZ, (float)velX, (float)velY, (float)velZ);
+					var21.setRBGColorF(0, 1, 1);
+				}
+
+				mc.effectRenderer.addEffect(var21);
+				return;
+			}
+		}
 	}
 }

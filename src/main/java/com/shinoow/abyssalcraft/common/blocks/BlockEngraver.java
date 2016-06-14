@@ -11,11 +11,15 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.common.blocks;
 
+import java.util.Arrays;
 import java.util.Random;
 
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.properties.IProperty;
+import net.minecraft.block.properties.PropertyDirection;
+import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
@@ -30,8 +34,13 @@ import net.minecraft.util.EnumBlockRenderType;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.MathHelper;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.client.model.obj.OBJModel;
+import net.minecraftforge.common.model.TRSRTransformation;
+import net.minecraftforge.common.property.ExtendedBlockState;
+import net.minecraftforge.common.property.IExtendedBlockState;
+import net.minecraftforge.common.property.IUnlistedProperty;
 import net.minecraftforge.fml.common.network.internal.FMLNetworkHandler;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -39,21 +48,44 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.common.blocks.tile.TileEntityEngraver;
+import com.shinoow.abyssalcraft.lib.ACTabs;
 
 public class BlockEngraver extends BlockContainer {
+
+	public static final PropertyDirection FACING = PropertyDirection.create("facing");
+	private ExtendedBlockState state = new ExtendedBlockState(this, new IProperty[] {FACING}, new IUnlistedProperty[]{OBJModel.OBJProperty.INSTANCE});
 
 	private final Random rand = new Random();
 	private static boolean keepInventory;
 
 	public BlockEngraver() {
 		super(Material.ROCK);
-		setCreativeTab(AbyssalCraft.tabDecoration);
+		setDefaultState(blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH));
+		setCreativeTab(ACTabs.tabDecoration);
 		setSoundType(SoundType.STONE);
 	}
 
 	@Override
+	public IBlockState onBlockPlaced(World world, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer)
+	{
+		return getDefaultState().withProperty(FACING, placer.getHorizontalFacing().getOpposite());
+	}
+
+	@Override
+	public IBlockState getStateFromMeta(int meta)
+	{
+		return getDefaultState().withProperty(FACING, EnumFacing.getFront(meta));
+	}
+
+	@Override
+	public int getMetaFromState(IBlockState state)
+	{
+		return state.getValue(FACING).getIndex();
+	}
+
+	@Override
 	public EnumBlockRenderType getRenderType(IBlockState state) {
-		return EnumBlockRenderType.ENTITYBLOCK_ANIMATED;
+		return EnumBlockRenderType.MODEL;
 	}
 
 	@Override
@@ -101,7 +133,6 @@ public class BlockEngraver extends BlockContainer {
 			return;
 
 		TileEntityEngraver tile = (TileEntityEngraver) par1World.getTileEntity(pos);
-		tile.direction = MathHelper.floor_double(par5EntityLivingBase.rotationYaw * 4.0F / 360.0F + 0.5D) & 3;
 
 		if (par6ItemStack.hasDisplayName())
 			tile.func_145951_a(par6ItemStack.getDisplayName());
@@ -166,5 +197,20 @@ public class BlockEngraver extends BlockContainer {
 	public ItemStack getItem(World par1World, BlockPos pos, IBlockState state)
 	{
 		return new ItemStack(ACBlocks.engraver);
+	}
+
+	@Override
+	public IBlockState getExtendedState(IBlockState state, IBlockAccess world, BlockPos pos)
+	{
+		EnumFacing facing = state.getValue(FACING);
+		TRSRTransformation transform = new TRSRTransformation(facing);
+		OBJModel.OBJState retState = new OBJModel.OBJState(Arrays.asList(new String[]{OBJModel.Group.ALL}), true, transform);
+		return ((IExtendedBlockState) state).withProperty(OBJModel.OBJProperty.INSTANCE, retState);
+	}
+
+	@Override
+	public BlockStateContainer createBlockState()
+	{
+		return new ExtendedBlockState(this, new IProperty[] {FACING}, new IUnlistedProperty[] {OBJModel.OBJProperty.INSTANCE});
 	}
 }

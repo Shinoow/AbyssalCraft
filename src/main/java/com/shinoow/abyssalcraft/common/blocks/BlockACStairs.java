@@ -14,20 +14,20 @@ package com.shinoow.abyssalcraft.common.blocks;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockStairs;
 
-import com.shinoow.abyssalcraft.AbyssalCraft;
+import com.shinoow.abyssalcraft.lib.ACTabs;
 
 public class BlockACStairs extends BlockStairs {
 
 	public BlockACStairs(Block par1Block, String tooltype, int harvestlevel){
 		super(par1Block.getDefaultState());
 		setLightOpacity(0);
-		setCreativeTab(AbyssalCraft.tabBlock);
+		setCreativeTab(ACTabs.tabBlock);
 		setHarvestLevel(tooltype, harvestlevel);
 	}
 
 	public BlockACStairs(Block par1Block){
 		super(par1Block.getDefaultState());
 		setLightOpacity(0);
-		setCreativeTab(AbyssalCraft.tabBlock);
+		setCreativeTab(ACTabs.tabBlock);
 	}
 }

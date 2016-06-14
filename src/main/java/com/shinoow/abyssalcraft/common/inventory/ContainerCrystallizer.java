@@ -66,8 +66,8 @@ public class ContainerCrystallizer extends Container {
 
 	@Override
 	public void addListener(IContainerListener listener)
-    {
-        super.addListener(listener);
+	{
+		super.addListener(listener);
 		listener.sendProgressBarUpdate(this, 0, tileCrystallizer.crystallizerFormTime);
 		listener.sendProgressBarUpdate(this, 1, tileCrystallizer.crystallizerShapeTime);
 		listener.sendProgressBarUpdate(this, 2, tileCrystallizer.currentItemShapingTime);

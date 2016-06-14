@@ -20,18 +20,16 @@ import net.minecraft.item.ItemBucket;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.translation.I18n;
 
-import com.shinoow.abyssalcraft.AbyssalCraft;
+import com.shinoow.abyssalcraft.lib.ACTabs;
 
 public class ItemAntiBucket extends ItemBucket{
 
 	public ItemAntiBucket(Block par1){
 		super(par1);
 		setMaxStackSize(1);
-		//		GameRegistry.registerItem(this, "antibucket");
 		setUnlocalizedName("antibucket");
-		setCreativeTab(AbyssalCraft.tabItems);
+		setCreativeTab(ACTabs.tabItems);
 		setContainerItem(Items.BUCKET);
-		//		setTextureName(modid + ":" + "Antibucket")
 	}
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })

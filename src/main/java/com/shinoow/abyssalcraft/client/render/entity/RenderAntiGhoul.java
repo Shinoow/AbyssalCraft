@@ -24,19 +24,11 @@ import com.shinoow.abyssalcraft.common.entity.anti.EntityAntiGhoul;
 @SideOnly(Side.CLIENT)
 public class RenderAntiGhoul extends RenderLiving {
 
-	protected ModelDG model;
-
 	private static final ResourceLocation ghoulResource = new ResourceLocation("abyssalcraft:textures/model/anti/depths_ghoul.png");
 
 	public RenderAntiGhoul(RenderManager manager)
 	{
 		super(manager, new ModelDG(), 0.5F);
-		model = (ModelDG)mainModel;
-	}
-
-	public void doRender(EntityAntiGhoul entity, double par2, double par4, double par6, float par8, float par9)
-	{
-		super.doRender(entity, par2, par4, par6, par8, par9);
 	}
 
 	protected ResourceLocation getGhoulTexture(EntityAntiGhoul par1EntityLiving)

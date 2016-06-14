@@ -127,7 +127,6 @@ public class RitualRegistry {
 					return;
 				}
 			rituals.add(ritual);
-			return;
 		} else FMLLog.log("RitualRegistry", Level.ERROR, "Necronomicon book type does not exist: %d", ritual.getBookType());
 	}
 
@@ -183,7 +182,7 @@ public class RitualRegistry {
 			if(ritual.getBookType() <= bookType)
 				if(ritual.getOfferings() != null && offerings != null)
 					if(areItemStackArraysEqual(ritual.getOfferings(), offerings))
-						if(ritual.getSacrifice() == null && sacrifice == null ||
+						if(ritual.requiresItemSacrifice() || ritual.getSacrifice() == null && sacrifice == null ||
 						areObjectsEqual(sacrifice, ritual.getSacrifice()))
 							return true;
 		return false;

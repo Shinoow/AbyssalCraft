@@ -39,7 +39,8 @@ import net.minecraft.world.World;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.api.item.ACItems;
-import com.shinoow.abyssalcraft.common.util.ACLoot;
+import com.shinoow.abyssalcraft.lib.ACLib;
+import com.shinoow.abyssalcraft.lib.ACLoot;
 
 public class EntitySkeletonGoliath extends EntityMob {
 
@@ -136,7 +137,7 @@ public class EntitySkeletonGoliath extends EntityMob {
 	@Override
 	public void onLivingUpdate()
 	{
-		if (worldObj.isDaytime() && !worldObj.isRemote && worldObj.provider.getDimension() != AbyssalCraft.configDimId1)
+		if (worldObj.isDaytime() && !worldObj.isRemote && worldObj.provider.getDimension() != ACLib.abyssal_wasteland_id)
 		{
 			float f = getBrightness(1.0F);
 

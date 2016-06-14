@@ -16,7 +16,6 @@ import net.minecraft.entity.IEntityLivingData;
 import net.minecraft.init.MobEffects;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
-import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.tileentity.TileEntity;
@@ -48,7 +47,7 @@ public class TileEntityShoggothBiomass extends TileEntity implements ITickable {
 		super.writeToNBT(nbttagcompound);
 		nbttagcompound.setInteger("Cooldown", cooldown);
 		nbttagcompound.setInteger("SpawnedShoggoths", spawnedShoggoths);
-		
+
 		return nbttagcompound;
 	}
 

@@ -35,7 +35,6 @@ public class BiomeGenAbywasteland extends Biome {
 	@SuppressWarnings("unchecked")
 	public BiomeGenAbywasteland(BiomeProperties par1){
 		super(par1);
-		//		waterColorMultiplier = 0x24FF83;
 		spawnableMonsterList.clear();
 		spawnableCreatureList.clear();
 		spawnableWaterCreatureList.clear();

@@ -77,7 +77,7 @@ public class EntityAntiPig extends EntityAnimal implements IAntiEntity {
 	@Override
 	protected SoundEvent getHurtSound()
 	{
-		return SoundEvents.ENTITY_GHAST_HURT;
+		return SoundEvents.ENTITY_PIG_HURT;
 	}
 
 	@Override
@@ -87,7 +87,7 @@ public class EntityAntiPig extends EntityAnimal implements IAntiEntity {
 	}
 
 	@Override
-	protected void playStepSound(BlockPos pos, Block par4)
+	protected void playStepSound(BlockPos pos, Block par4Block)
 	{
 		playSound(SoundEvents.ENTITY_PIG_STEP, 0.15F, 1.0F);
 	}

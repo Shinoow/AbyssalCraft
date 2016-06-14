@@ -31,18 +31,17 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import org.lwjgl.opengl.GL11;
 
-import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
 import com.shinoow.abyssalcraft.api.item.ACItems;
+import com.shinoow.abyssalcraft.lib.ACTabs;
 
 //@InterfaceList(value = { @Interface(iface = "thaumcraft.api.items.IVisDiscountGear", modid = "Thaumcraft"),
 //		@Interface(iface = "thaumcraft.api.items.IRevealer", modid = "Thaumcraft")})
 public class ItemDepthsArmor extends ItemArmor /* implements IVisDiscountGear, IRevealer */ {
 	public ItemDepthsArmor(ArmorMaterial par2EnumArmorMaterial, int par3, EntityEquipmentSlot par4, String name){
 		super(par2EnumArmorMaterial, par3, par4);
-		//		GameRegistry.registerItem(this, name);
 		setUnlocalizedName(name);
-		setCreativeTab(AbyssalCraft.tabCombat);
+		setCreativeTab(ACTabs.tabCombat);
 	}
 
 	@Override

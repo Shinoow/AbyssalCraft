@@ -40,11 +40,8 @@ public class BiomeGenDarklandsHills extends Biome implements IDarklandsBiome {
 	public BiomeGenDarklandsHills(BiomeProperties par1)
 	{
 		super(par1);
-		//		minHeight = 1.1F;
-		//		maxHeight = 0.5F;
 		topBlock = ACBlocks.darklands_grass.getDefaultState();
 		fillerBlock = ACBlocks.darkstone.getDefaultState();
-		//		waterColorMultiplier = 14745518;
 		WorldGenDarkTrees = new WorldGenDLT(false);
 		theBiomeDecorator.treesPerChunk = 1;
 		spawnableMonsterList.add(new SpawnListEntry(EntityDepthsGhoul.class, 60, 1, 5));

@@ -57,7 +57,6 @@ public class BlockRitualAltar extends BlockContainer {
 		setHardness(6.0F);
 		setResistance(12.0F);
 		setSoundType(SoundType.STONE);
-		//		setBlockBounds(0.15F, 0.0F, 0.15F, 0.85F, 1.0F, 0.85F);
 		setCreativeTab(null);
 		setLightLevel(0.375F);
 		setDefaultState(blockState.getBaseState().withProperty(MATERIAL, EnumRitualMatType.COBBLESTONE));
@@ -172,15 +171,14 @@ public class BlockRitualAltar extends BlockContainer {
 				((TileEntityRitualAltar)tile).setItem(null);
 				world.playSound(pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, SoundEvents.ENTITY_ITEM_PICKUP, SoundCategory.PLAYERS, 0.5F, world.rand.nextFloat() - world.rand.nextFloat() * 0.2F + 1, false);
 				return true;
-			} else //				ItemStack heldItem = player.getHeldItem();
-				if(heldItem != null){
-					ItemStack newItem = heldItem.copy();
-					newItem.stackSize = 1;
-					((TileEntityRitualAltar)tile).setItem(newItem);
-					heldItem.stackSize--;
-					world.playSound(pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, SoundEvents.ENTITY_ITEM_PICKUP, SoundCategory.PLAYERS, 0.5F, world.rand.nextFloat() - world.rand.nextFloat() * 0.2F + 1, false);
-					return true;
-				}
+			} else if(heldItem != null){
+				ItemStack newItem = heldItem.copy();
+				newItem.stackSize = 1;
+				((TileEntityRitualAltar)tile).setItem(newItem);
+				heldItem.stackSize--;
+				world.playSound(pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, SoundEvents.ENTITY_ITEM_PICKUP, SoundCategory.PLAYERS, 0.5F, world.rand.nextFloat() - world.rand.nextFloat() * 0.2F + 1, false);
+				return true;
+			}
 		return false;
 	}
 

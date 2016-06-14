@@ -25,8 +25,8 @@ import net.minecraft.util.text.TextFormatting;
 import net.minecraft.util.text.translation.I18n;
 import net.minecraft.world.World;
 
-import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
+import com.shinoow.abyssalcraft.lib.ACTabs;
 
 public class ItemCorb extends Item {
 
@@ -34,9 +34,8 @@ public class ItemCorb extends Item {
 		super();
 		maxStackSize = 1;
 		setMaxDamage(1000);
-		//		GameRegistry.registerItem(this, "transmutationgem");
 		setUnlocalizedName("transmutationgem");
-		setCreativeTab(AbyssalCraft.tabTools);
+		setCreativeTab(ACTabs.tabTools);
 	}
 
 	@Override
@@ -47,22 +46,22 @@ public class ItemCorb extends Item {
 
 	@Override
 	public EnumActionResult onItemUse(ItemStack is, EntityPlayer player, World w, BlockPos pos, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ){
-		if(w.getBlockState(pos) == Blocks.STONE){
+		if(w.getBlockState(pos).getBlock() == Blocks.STONE){
 			w.setBlockState(pos, ACBlocks.darkstone.getDefaultState());
 			is.damageItem(50, player);
-		}else if(w.getBlockState(pos) == ACBlocks.darkstone){
+		}else if(w.getBlockState(pos).getBlock() == ACBlocks.darkstone){
 			w.setBlockState(pos, Blocks.STONE.getDefaultState());
 			is.damageItem(50, player);
-		}else if(w.getBlockState(pos) == Blocks.COBBLESTONE){
+		}else if(w.getBlockState(pos).getBlock() == Blocks.COBBLESTONE){
 			w.setBlockState(pos, ACBlocks.darkstone_cobblestone.getDefaultState());
 			is.damageItem(50, player);
-		}else if(w.getBlockState(pos) == ACBlocks.darkstone_cobblestone){
+		}else if(w.getBlockState(pos).getBlock() == ACBlocks.darkstone_cobblestone){
 			w.setBlockState(pos, Blocks.COBBLESTONE.getDefaultState());
 			is.damageItem(50, player);
-		}else if(w.getBlockState(pos) == Blocks.STONEBRICK){
+		}else if(w.getBlockState(pos).getBlock() == Blocks.STONEBRICK){
 			w.setBlockState(pos, ACBlocks.darkstone_brick.getDefaultState());
 			is.damageItem(50, player);
-		}else if(w.getBlockState(pos) == ACBlocks.darkstone_brick){
+		}else if(w.getBlockState(pos).getBlock() == ACBlocks.darkstone_brick){
 			w.setBlockState(pos, Blocks.STONEBRICK.getDefaultState());
 			is.damageItem(50, player);
 		}

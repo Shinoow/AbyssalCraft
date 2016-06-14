@@ -303,33 +303,6 @@ public class ChunkProviderOmothol implements IChunkGenerator
 		BlockFalling.fallInstantly = false;
 	}
 
-	//	@Override
-	//	public boolean saveChunks(boolean par1, IProgressUpdate par2IProgressUpdate)
-	//	{
-	//		return true;
-	//	}
-
-	//	@Override
-	//	public void saveExtraData() {}
-
-	//	@Override
-	//	public boolean unloadQueuedChunks()
-	//	{
-	//		return false;
-	//	}
-
-	//	@Override
-	//	public boolean canSave()
-	//	{
-	//		return true;
-	//	}
-
-	//	@Override
-	//	public String makeString()
-	//	{
-	//		return "ACLevelSource";
-	//	}
-
 	@Override
 	@SuppressWarnings("rawtypes")
 	public List getPossibleCreatures(EnumCreatureType par1EnumCreatureType, BlockPos pos)
@@ -344,12 +317,6 @@ public class ChunkProviderOmothol implements IChunkGenerator
 		return null;
 	}
 
-	//	@Override
-	//	public int getLoadedChunkCount()
-	//	{
-	//		return 0;
-	//	}
-
 	@Override
 	public void recreateStructures(Chunk chunk, int x, int z) {
 
@@ -359,20 +326,7 @@ public class ChunkProviderOmothol implements IChunkGenerator
 
 	@Override
 	public boolean generateStructures(Chunk chunkIn, int x, int z) {
-		// TODO Auto-generated method stub
+
 		return false;
 	}
-
-	//	@Override
-	//	public Chunk provideChunk(BlockPos blockPosIn) {
-	//
-	//		return provideChunk(blockPosIn.getX() >> 4, blockPosIn.getZ() >> 4);
-	//	}
-
-	//	@Override
-	//	public boolean func_177460_a(IChunkProvider p_177460_1_, Chunk p_177460_2_,
-	//			int p_177460_3_, int p_177460_4_) {
-	//
-	//		return false;
-	//	}
 }

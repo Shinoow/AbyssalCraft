@@ -35,15 +35,14 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.util.text.translation.I18n;
 import net.minecraft.world.BossInfo;
+import net.minecraft.world.BossInfo.Color;
 import net.minecraft.world.BossInfoServer;
 import net.minecraft.world.World;
-import net.minecraft.world.BossInfo.Color;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.api.entity.ICoraliumEntity;
 import com.shinoow.abyssalcraft.api.item.ACItems;
-import com.shinoow.abyssalcraft.client.lib.ParticleEffects;
-import com.shinoow.abyssalcraft.common.util.SpecialTextUtil;
+import com.shinoow.abyssalcraft.lib.util.SpecialTextUtil;
 
 public class EntityDragonBoss extends EntityMob implements IEntityMultiPart, ICoraliumEntity
 {
@@ -176,6 +175,9 @@ public class EntityDragonBoss extends EntityMob implements IEntityMultiPart, ICo
 			bossInfo.setColor(Color.RED);
 	}
 
+	/**
+	 * Makes this boss Entity visible to the given player. Has no effect if this Entity is not a boss.
+	 */
 	@Override
 	public void addTrackingPlayer(EntityPlayerMP player)
 	{
@@ -183,6 +185,9 @@ public class EntityDragonBoss extends EntityMob implements IEntityMultiPart, ICo
 		bossInfo.addPlayer(player);
 	}
 
+	/**
+	 * Makes this boss Entity non-visible to the given player. Has no effect if this Entity is not a boss.
+	 */
 	@Override
 	public void removeTrackingPlayer(EntityPlayerMP player)
 	{
@@ -247,6 +252,10 @@ public class EntityDragonBoss extends EntityMob implements IEntityMultiPart, ICo
 			double d3;
 			float f3;
 
+			for (int i = 0; i < 2; ++i)
+				if(AbyssalCraft.particleEntity)
+					AbyssalCraft.proxy.spawnParticle("CorBlood", posX + (rand.nextDouble() - 0.5D) * width, posY + rand.nextDouble() * height - 0.25D, posZ + (rand.nextDouble() - 0.5D) * width, (rand.nextDouble() - 0.5D) * 2.0D, -rand.nextDouble(), (rand.nextDouble() - 0.5D) * 2.0D);
+
 			if (worldObj.isRemote)
 			{
 				if (newPosRotationIncrements > 0)
@@ -261,10 +270,6 @@ public class EntityDragonBoss extends EntityMob implements IEntityMultiPart, ICo
 					setPosition(d3, d0, d1);
 					setRotation(rotationYaw, rotationPitch);
 				}
-
-				for (int i = 0; i < 2; ++i)
-					if(AbyssalCraft.particleEntity)
-						ParticleEffects.spawnParticle("CorBlood", posX + (rand.nextDouble() - 0.5D) * width, posY + rand.nextDouble() * height - 0.25D, posZ + (rand.nextDouble() - 0.5D) * width, (rand.nextDouble() - 0.5D) * 2.0D, -rand.nextDouble(), (rand.nextDouble() - 0.5D) * 2.0D);
 			}
 			else
 			{
@@ -598,11 +603,11 @@ public class EntityDragonBoss extends EntityMob implements IEntityMultiPart, ICo
 		moveEntity(0.0D, 0.10000000149011612D, 0.0D);
 		renderYawOffset = rotationYaw += 20.0F;
 
-		if(deathTicks == 20 && worldObj.isRemote)
+		if(deathTicks == 20 && !worldObj.isRemote)
 			SpecialTextUtil.OblivionaireGroup(worldObj, I18n.translateToLocal("message.asorah.death.1"));
-		if(deathTicks == 80 && worldObj.isRemote)
+		if(deathTicks == 80 && !worldObj.isRemote)
 			SpecialTextUtil.OblivionaireGroup(worldObj, I18n.translateToLocal("message.asorah.death.2"));
-		if(deathTicks == 140 && worldObj.isRemote)
+		if(deathTicks == 140 && !worldObj.isRemote)
 			SpecialTextUtil.OblivionaireGroup(worldObj, I18n.translateToLocal("message.asorah.death.3"));
 		if (deathTicks == 200 && !worldObj.isRemote){
 			setDead();

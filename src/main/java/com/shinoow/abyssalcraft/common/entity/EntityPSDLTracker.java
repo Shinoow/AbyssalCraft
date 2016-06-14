@@ -230,6 +230,9 @@ public class EntityPSDLTracker extends Entity
 		return 15728880;
 	}
 
+	/**
+	 * If returns false, the item will not inflict any damage against entities.
+	 */
 	@Override
 	public boolean canBeAttackedWithItem()
 	{

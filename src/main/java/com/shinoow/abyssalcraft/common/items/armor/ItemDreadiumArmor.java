@@ -21,16 +21,15 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 
-import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
 import com.shinoow.abyssalcraft.api.item.ACItems;
+import com.shinoow.abyssalcraft.lib.ACTabs;
 
 public class ItemDreadiumArmor extends ItemArmor {
 	public ItemDreadiumArmor(ArmorMaterial par2EnumArmorMaterial, int par3, EntityEquipmentSlot par4, String name){
 		super(par2EnumArmorMaterial, par3, par4);
-		//		GameRegistry.registerItem(this, name);
 		setUnlocalizedName(name);
-		setCreativeTab(AbyssalCraft.tabCombat);
+		setCreativeTab(ACTabs.tabCombat);
 	}
 
 	@Override

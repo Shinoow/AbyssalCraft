@@ -69,7 +69,7 @@ public class WorldGenDLT extends WorldGenTrees {
 				hd += 0.5f;
 				world.setBlockState(new BlockPos(x + (int) (c * xd), y + (int) hd, z + (int) (c * yd)), ACBlocks.darklands_oak_wood.getStateFromMeta(12));
 				if(world.isAirBlock(new BlockPos(x + (int) (c * xd), y + (int) hd + 1, z + (int) (c * yd))))
-					world.setBlockState(new BlockPos(x + (int) (c * xd), y + (int) hd + 1, z + (int) (c * yd)), ACBlocks.darklands_oak_leaves.getStateFromMeta(12));
+					world.setBlockState(new BlockPos(x + (int) (c * xd), y + (int) hd + 1, z + (int) (c * yd)), ACBlocks.darklands_oak_leaves.getDefaultState());
 			}
 		}
 

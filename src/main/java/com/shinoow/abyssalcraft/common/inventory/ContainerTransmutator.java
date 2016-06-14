@@ -48,8 +48,8 @@ public class ContainerTransmutator extends Container {
 
 	@Override
 	public void addListener(IContainerListener listener)
-    {
-        super.addListener(listener);
+	{
+		super.addListener(listener);
 		listener.sendProgressBarUpdate(this, 0, tileTransmutator.transmutatorProcessTime);
 		listener.sendProgressBarUpdate(this, 1, tileTransmutator.transmutatorBurnTime);
 		listener.sendProgressBarUpdate(this, 2, tileTransmutator.currentItemBurnTime);

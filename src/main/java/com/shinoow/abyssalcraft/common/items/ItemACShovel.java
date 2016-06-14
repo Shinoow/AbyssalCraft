@@ -15,7 +15,7 @@ import net.minecraft.item.ItemSpade;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.TextFormatting;
 
-import com.shinoow.abyssalcraft.AbyssalCraft;
+import com.shinoow.abyssalcraft.lib.ACTabs;
 
 public class ItemACShovel extends ItemSpade {
 
@@ -27,11 +27,9 @@ public class ItemACShovel extends ItemSpade {
 
 	public ItemACShovel(ToolMaterial mat, String name, int harvestlevel, TextFormatting format) {
 		super(mat);
-		setCreativeTab(AbyssalCraft.tabTools);
+		setCreativeTab(ACTabs.tabTools);
 		setHarvestLevel("shovel", harvestlevel);
-		//		GameRegistry.registerItem(this, name);
 		setUnlocalizedName(name);
-		//		setTextureName(AbyssalCraft.modid + ":" + name);
 		this.format = format;
 	}
 

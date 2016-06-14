@@ -14,12 +14,11 @@ package com.shinoow.abyssalcraft.common.blocks.tile;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
-import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ITickable;
 
-import com.shinoow.abyssalcraft.common.util.IRitualPedestal;
+import com.shinoow.abyssalcraft.lib.util.blocks.IRitualPedestal;
 
 public class TileEntityRitualPedestal extends TileEntity implements ITickable, IRitualPedestal {
 
@@ -45,7 +44,7 @@ public class TileEntityRitualPedestal extends TileEntity implements ITickable, I
 			item.writeToNBT(nbtItem);
 		nbttagcompound.setTag("Item", nbtItem);
 		nbttagcompound.setInteger("Rot", rot);
-		
+
 		return nbttagcompound;
 	}
 
@@ -76,6 +75,7 @@ public class TileEntityRitualPedestal extends TileEntity implements ITickable, I
 			rot++;
 	}
 
+	@Override
 	public int getRotation(){
 		return rot;
 	}
@@ -87,7 +87,7 @@ public class TileEntityRitualPedestal extends TileEntity implements ITickable, I
 
 	@Override
 	public void setItem(ItemStack item){
-		isDirty = true;
 		this.item = item;
+		isDirty = true;
 	}
 }

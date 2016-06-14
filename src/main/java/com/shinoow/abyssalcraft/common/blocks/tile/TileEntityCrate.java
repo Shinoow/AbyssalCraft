@@ -167,7 +167,7 @@ public class TileEntityCrate extends TileEntity implements IInventory, ITickable
 
 		if (hasCustomName())
 			par1NBTTagCompound.setString("CustomName", customName);
-		
+
 		return par1NBTTagCompound;
 	}
 

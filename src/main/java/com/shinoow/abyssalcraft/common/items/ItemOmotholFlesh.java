@@ -20,17 +20,15 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.world.World;
 
-import com.shinoow.abyssalcraft.AbyssalCraft;
-import com.shinoow.abyssalcraft.common.util.EntityUtil;
+import com.shinoow.abyssalcraft.api.entity.EntityUtil;
+import com.shinoow.abyssalcraft.lib.ACTabs;
 
 public class ItemOmotholFlesh extends ItemFood {
 
 	public ItemOmotholFlesh(int par1, float par2, boolean par3) {
 		super(par1, par2, par3);
-		//		GameRegistry.registerItem(this, "omotholflesh");
 		setUnlocalizedName("omotholflesh");
-		//		setTextureName("abyssalcraft:" + "omotholflesh");
-		setCreativeTab(AbyssalCraft.tabFood);
+		setCreativeTab(ACTabs.tabFood);
 	}
 
 	@Override

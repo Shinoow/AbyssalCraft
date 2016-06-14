@@ -13,6 +13,8 @@ package com.shinoow.abyssalcraft.common.enchantments;
 
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnumEnchantmentType;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.inventory.EntityEquipmentSlot;
 
 public class EnchantmentIronWall extends Enchantment {
@@ -38,5 +40,11 @@ public class EnchantmentIronWall extends Enchantment {
 	@Override
 	public int getMaxLevel(){
 		return 1;
+	}
+
+	@Override
+	public void onUserHurt(EntityLivingBase user, Entity attacker, int level)
+	{
+		user.setInWeb();
 	}
 }

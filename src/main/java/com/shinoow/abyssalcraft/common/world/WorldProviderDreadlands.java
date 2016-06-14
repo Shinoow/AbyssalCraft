@@ -19,14 +19,15 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
+import com.shinoow.abyssalcraft.lib.ACLib;
 
 public class WorldProviderDreadlands extends WorldProvider {
 
 	@Override
 	public void createBiomeProvider() {
-		biomeProvider = new WorldChunkManagerDreadlands(worldObj.getSeed(), worldObj.getWorldInfo().getTerrainType());
+		biomeProvider = new BiomeProviderDreadlands(worldObj.getSeed(), worldObj.getWorldInfo().getTerrainType());
 		hasNoSky = true;
-		setDimension(AbyssalCraft.configDimId2);
+		setDimension(ACLib.dreadlands_id);
 	}
 
 	@Override
@@ -91,15 +92,4 @@ public class WorldProviderDreadlands extends WorldProvider {
 
 		return AbyssalCraft.THE_DREADLANDS;
 	}
-
-	//	@Override
-	//	public String getDimensionName() {
-	//		return "The Dreadlands";
-	//	}
-
-	//	@Override
-	//	public String getInternalNameSuffix() {
-	//
-	//		return "_dl";
-	//	}
 }

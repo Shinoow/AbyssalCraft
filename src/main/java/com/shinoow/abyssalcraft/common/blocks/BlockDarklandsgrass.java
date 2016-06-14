@@ -39,6 +39,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
+import com.shinoow.abyssalcraft.lib.ACTabs;
 
 public class BlockDarklandsgrass extends Block implements IGrowable {
 
@@ -49,7 +50,7 @@ public class BlockDarklandsgrass extends Block implements IGrowable {
 		super(Material.GRASS);
 		setDefaultState(blockState.getBaseState().withProperty(SNOWY, Boolean.valueOf(false)));
 		setTickRandomly(true);
-		setCreativeTab(AbyssalCraft.tabBlock);
+		setCreativeTab(ACTabs.tabBlock);
 		setSoundType(SoundType.PLANT);
 	}
 

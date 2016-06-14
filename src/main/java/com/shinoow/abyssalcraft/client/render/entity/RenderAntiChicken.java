@@ -33,11 +33,6 @@ public class RenderAntiChicken extends RenderLiving
 		super(manager, new ModelChicken(), 0.5F);
 	}
 
-	public void doRender(EntityAntiChicken par1EntityAntiChicken, double par2, double par4, double par6, float par8, float par9)
-	{
-		super.doRender(par1EntityAntiChicken, par2, par4, par6, par8, par9);
-	}
-
 	protected ResourceLocation getEntityTexture(EntityAntiChicken par1EntityAntiChicken)
 	{
 		return chickenTextures;

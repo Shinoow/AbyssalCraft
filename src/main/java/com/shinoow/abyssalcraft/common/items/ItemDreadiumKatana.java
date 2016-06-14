@@ -20,8 +20,8 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
 import com.google.common.collect.Multimap;
-import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.api.item.ACItems;
+import com.shinoow.abyssalcraft.lib.ACTabs;
 
 public class ItemDreadiumKatana extends Item {
 
@@ -29,10 +29,8 @@ public class ItemDreadiumKatana extends Item {
 
 	public ItemDreadiumKatana(String par1Str, float par2, int par3){
 		super();
-		//		GameRegistry.registerItem(this, par1Str);
 		setUnlocalizedName(par1Str);
-		setCreativeTab(AbyssalCraft.tabCombat);
-		//		setTextureName("abyssalcraft:" + par1Str);
+		setCreativeTab(ACTabs.tabCombat);
 		weaponDamage = par2;
 		setMaxDamage(par3);
 		setMaxStackSize(1);
@@ -54,19 +52,17 @@ public class ItemDreadiumKatana extends Item {
 	}
 
 	@Override
+	public boolean isBookEnchantable(ItemStack stack, ItemStack book)
+	{
+		return false;
+	}
+
+	@Override
 	public boolean hitEntity(ItemStack par1ItemStack, EntityLivingBase par2EntityLivingBase, EntityLivingBase par3EntityLivingBase)
 	{
 		par1ItemStack.damageItem(1, par3EntityLivingBase);
 		return true;
 	}
-
-	//	@Override
-	//	public ActionResult<ItemStack> onItemRightClick(ItemStack par1ItemStack, World par2World, EntityPlayer par3EntityPlayer, EnumHand hand) {
-	//
-	////		par3EntityPlayer.setItemInUse(par1ItemStack, getMaxItemUseDuration(par1ItemStack));
-	//
-	//		return new ActionResult(EnumActionResult.PASS, par1ItemStack);
-	//	}
 
 	@Override
 	public boolean getIsRepairable(ItemStack par1ItemStack, ItemStack par2ItemStack)

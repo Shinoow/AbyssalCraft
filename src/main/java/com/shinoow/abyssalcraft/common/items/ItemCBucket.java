@@ -20,18 +20,16 @@ import net.minecraft.item.ItemBucket;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.translation.I18n;
 
-import com.shinoow.abyssalcraft.AbyssalCraft;
+import com.shinoow.abyssalcraft.lib.ACTabs;
 
 public class ItemCBucket extends ItemBucket{
 
 	public ItemCBucket(Block par1){
 		super(par1);
 		setMaxStackSize(1);
-		//		GameRegistry.registerItem(this, "cbucket");
 		setUnlocalizedName("cbucket");
-		setCreativeTab(AbyssalCraft.tabItems);
+		setCreativeTab(ACTabs.tabItems);
 		setContainerItem(Items.BUCKET);
-		//		setTextureName(modid + ":" + "Cbucket")
 	}
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })

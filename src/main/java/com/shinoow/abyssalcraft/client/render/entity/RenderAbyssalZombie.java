@@ -28,9 +28,9 @@ public class RenderAbyssalZombie extends RenderBiped<EntityAbyssalZombie> {
 	private static final ResourceLocation zombieTexture = new ResourceLocation("abyssalcraft:textures/model/abyssal_zombie.png");
 	private static final ResourceLocation zombieTexture_end = new ResourceLocation("abyssalcraft:textures/model/abyssal_zombie_end.png");
 
-	public RenderAbyssalZombie(RenderManager manager, ModelBiped ModelBiped, float f)
+	public RenderAbyssalZombie(RenderManager manager)
 	{
-		super(manager, ModelBiped, f);
+		super(manager, new ModelBiped(), 0.5F);
 		this.addLayer(new LayerHeldItem(this));
 		this.addLayer(new LayerBipedArmor(this)
 		{

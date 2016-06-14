@@ -23,6 +23,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.api.biome.ACBiomes;
+import com.shinoow.abyssalcraft.lib.ACLib;
 
 public class WorldProviderAbyss extends WorldProvider {
 
@@ -35,14 +36,9 @@ public class WorldProviderAbyss extends WorldProvider {
 	public void createBiomeProvider() {
 		biomeProvider = new BiomeProviderSingle(ACBiomes.abyssal_wastelands);
 		isHellWorld= false;
-		setDimension(AbyssalCraft.configDimId1);
+		setDimension(ACLib.abyssal_wasteland_id);
 		hasNoSky = true;
 	}
-
-	//	@Override
-	//	public String getDimensionName()  {
-	//		return "The Abyssal Wasteland";
-	//	}
 
 	@Override
 	public boolean canRespawnHere() {
@@ -115,10 +111,4 @@ public class WorldProviderAbyss extends WorldProvider {
 
 		return AbyssalCraft.THE_ABYSSAL_WASTELAND;
 	}
-
-	//	@Override
-	//	public String getInternalNameSuffix() {
-	//
-	//		return "_aw";
-	//	}
 }

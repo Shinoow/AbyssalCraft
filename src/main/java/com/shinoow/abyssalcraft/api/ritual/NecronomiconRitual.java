@@ -88,17 +88,6 @@ public abstract class NecronomiconRitual {
 	}
 
 	/**
-	 * Used to see if Remnants can aid in the ritual
-	 * @return True if Remnants can aid you, false if they can't
-	 * 
-	 * @deprecated Has been replaced by a living sacrifice
-	 */
-	@Deprecated
-	public boolean canRemnantAid(){
-		return false;
-	}
-
-	/**
 	 * Used to see if this ritual requires a living sacrifice
 	 * @return True if the ritual requires a living sacrifice to be present
 	 */
@@ -152,6 +141,17 @@ public abstract class NecronomiconRitual {
 	 */
 	public String getDescription(){
 		return I18n.translateToLocal(getUnlocalizedName() + ".desc");
+	}
+
+	/**
+	 * Used for Ritual types that don't require a specific Item sacrifice, but needs<br>
+	 * something to be placed on the Ritual Altar.
+	 * @return Whether or not the Ritual requires there to be something placed<br>
+	 * on the Ritual Altar (used in the Enchantment ritual to ensure<br>
+	 * there's an item there to enchant)
+	 */
+	public boolean requiresItemSacrifice(){
+		return false;
 	}
 
 	/**

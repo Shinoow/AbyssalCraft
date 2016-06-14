@@ -33,12 +33,10 @@ import net.minecraft.world.gen.structure.StructureBoundingBox;
 import net.minecraft.world.gen.structure.StructureComponent;
 
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
-import com.shinoow.abyssalcraft.common.util.ACLoot;
+import com.shinoow.abyssalcraft.lib.ACLoot;
 
 public class StructureDreadlandsMinePieces
 {
-	/** List of contents that can generate in Mineshafts. */
-//	public static final List<WeightedRandomChestContent> mineshaftChestContents = Lists.newArrayList(new WeightedRandomChestContent[] {new WeightedRandomChestContent(ACItems.abyssalnite_ingot, 0, 1, 5, 10), new WeightedRandomChestContent(Items.diamond, 0, 1, 3, 5), new WeightedRandomChestContent(ACItems.coralium_gem, 0, 4, 9, 5), new WeightedRandomChestContent(ACItems.shadow_shard, 0, 4, 9, 5), new WeightedRandomChestContent(Items.diamond, 0, 1, 2, 3), new WeightedRandomChestContent(ACItems.dreaded_shard_of_abyssalnite, 0, 3, 8, 10), new WeightedRandomChestContent(Items.bread, 0, 1, 3, 15), new WeightedRandomChestContent(ACItems.refined_coralium_pickaxe, 0, 1, 1, 1), new WeightedRandomChestContent(Item.getItemFromBlock(Blocks.rail), 0, 4, 8, 1), new WeightedRandomChestContent(ACItems.chunk_of_abyssalnite, 0, 2, 4, 10), new WeightedRandomChestContent(ACItems.dreaded_chunk_of_abyssalnite, 0, 2, 4, 10), new WeightedRandomChestContent(ACItems.transmutation_gem, 0, 1, 1, 3), new WeightedRandomChestContent(ACItems.oblivion_catalyst, 0, 1, 1, 1), new WeightedRandomChestContent(ACItems.crystal, 24, 1, 5, 8)});
 
 	public static void registerStructurePieces()
 	{

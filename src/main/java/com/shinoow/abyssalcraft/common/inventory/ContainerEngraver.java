@@ -45,8 +45,8 @@ public class ContainerEngraver extends Container {
 
 	@Override
 	public void addListener(IContainerListener listener)
-    {
-        super.addListener(listener);
+	{
+		super.addListener(listener);
 		listener.sendProgressBarUpdate(this, 0, tileEngraver.engraverProcessTime);
 	}
 

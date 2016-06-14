@@ -148,12 +148,6 @@ public class BiomeGenDreadlandsBase extends Biome implements IDreadlandsBiome {
 							iblockstate1 = fillerBlock;
 						}
 
-						//						if (j1 < i && (iblockstate == null || iblockstate.getBlock().getMaterial() == Material.air))
-						//							if (getFloatTemperature(blockpos$mutableblockpos.set(x, j1, z)) < 0.15F)
-						//								iblockstate = Blocks.ice.getDefaultState();
-						//							else
-						//								iblockstate = Blocks.water.getDefaultState();
-
 						j = k;
 
 						if (j1 >= i - 1)
@@ -170,12 +164,6 @@ public class BiomeGenDreadlandsBase extends Biome implements IDreadlandsBiome {
 					{
 						--j;
 						chunkPrimerIn.setBlockState(i1, j1, l, iblockstate1);
-
-						//						if (j == 0 && iblockstate1.getBlock() == Blocks.sand)
-						//						{
-						//							j = rand.nextInt(4) + Math.max(0, j1 - 63);
-						//							iblockstate1 = iblockstate1.getValue(BlockSand.VARIANT) == BlockSand.EnumType.RED_SAND ? Blocks.red_sandstone.getDefaultState() : Blocks.sandstone.getDefaultState();
-						//						}
 					}
 			}
 	}

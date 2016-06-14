@@ -59,7 +59,6 @@ public class PacketDispatcher
 	 */
 	public static final void registerPackets() {
 
-		//		registerMessage(SyncPlayerPropsMessage.class);
 		registerMessage(FireMessage.class);
 	}
 

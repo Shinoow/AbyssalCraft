@@ -96,7 +96,6 @@ public class EntityEvilChicken extends EntityMob {
 		playSound(SoundEvents.ENTITY_CHICKEN_STEP, 0.15F, 1.0F);
 	}
 
-
 	@Override
 	public void fall(float p_70069_1_, float par2) {}
 

@@ -26,7 +26,7 @@ import com.google.common.collect.Maps;
 import com.shinoow.abyssalcraft.api.ritual.NecronomiconCreationRitual;
 import com.shinoow.abyssalcraft.api.ritual.NecronomiconRitual;
 import com.shinoow.abyssalcraft.api.ritual.RitualRegistry;
-import com.shinoow.abyssalcraft.client.lib.NecronomiconText;
+import com.shinoow.abyssalcraft.lib.NecronomiconText;
 
 public class RitualRecipeWrapper extends BlankRecipeWrapper {
 
@@ -76,8 +76,8 @@ public class RitualRecipeWrapper extends BlankRecipeWrapper {
 		boolean unicode = fr.getUnicodeFlag();
 		fr.setUnicodeFlag(true);
 
-		//		if(ritual.requiresSacrifice())
-		//			fr.drawString(NecronomiconText.LABEL_SACRIFICE, 93, 124, 0xC40000);
+		if(ritual.requiresSacrifice())
+			fr.drawString(NecronomiconText.LABEL_SACRIFICE, 93, 124, 0xC40000);
 		fr.drawSplitString(NecronomiconText.LABEL_LOCATION + ": " + getDimension(ritual.getDimension()), 93, 85, 70, 0);
 		fr.drawSplitString(NecronomiconText.LABEL_REQUIRED_ENERGY + ": " + ritual.getReqEnergy() + " PE", 93, 108, 70, 0);
 

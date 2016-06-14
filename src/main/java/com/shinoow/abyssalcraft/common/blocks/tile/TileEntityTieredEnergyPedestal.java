@@ -16,15 +16,14 @@ import java.util.Random;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
-import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.ITickable;
 
 import com.shinoow.abyssalcraft.api.energy.IEnergyContainer;
-import com.shinoow.abyssalcraft.api.energy.IEnergyTransporter;
-import com.shinoow.abyssalcraft.common.util.ISingletonInventory;
+import com.shinoow.abyssalcraft.api.energy.IEnergyContainerItem;
+import com.shinoow.abyssalcraft.lib.util.blocks.ISingletonInventory;
 
 public class TileEntityTieredEnergyPedestal extends TileEntity implements IEnergyContainer, ISingletonInventory, ITickable {
 
@@ -54,7 +53,7 @@ public class TileEntityTieredEnergyPedestal extends TileEntity implements IEnerg
 		nbttagcompound.setTag("Item", nbtItem);
 		nbttagcompound.setInteger("Rot", rot);
 		nbttagcompound.setFloat("PotEnergy", energy);
-		
+
 		return nbttagcompound;
 	}
 
@@ -102,13 +101,14 @@ public class TileEntityTieredEnergyPedestal extends TileEntity implements IEnerg
 			}
 
 		if(item != null)
-			if(item.getItem() instanceof IEnergyTransporter)
-				if(getContainedEnergy() > 0 && ((IEnergyTransporter) item.getItem()).getContainedEnergy(item) < ((IEnergyTransporter) item.getItem()).getMaxEnergy(item)){
-					((IEnergyTransporter) item.getItem()).addEnergy(item, 1);
+			if(item.getItem() instanceof IEnergyContainerItem)
+				if(((IEnergyContainerItem) item.getItem()).canAcceptPE(item) && getContainedEnergy() > 0 && ((IEnergyContainerItem) item.getItem()).getContainedEnergy(item) < ((IEnergyContainerItem) item.getItem()).getMaxEnergy(item)){
+					((IEnergyContainerItem) item.getItem()).addEnergy(item, 1);
 					consumeEnergy(1);
 				}
 	}
 
+	@Override
 	public int getRotation(){
 		return rot;
 	}
@@ -120,8 +120,8 @@ public class TileEntityTieredEnergyPedestal extends TileEntity implements IEnerg
 
 	@Override
 	public void setItem(ItemStack item){
-		isDirty = true;
 		this.item = item;
+		isDirty = true;
 	}
 
 	@Override
@@ -173,6 +173,11 @@ public class TileEntityTieredEnergyPedestal extends TileEntity implements IEnerg
 
 	@Override
 	public boolean canAcceptPE() {
+		return true;
+	}
+
+	@Override
+	public boolean canTransferPE() {
 		return true;
 	}
 }

@@ -24,8 +24,6 @@ import com.shinoow.abyssalcraft.common.entity.EntityLesserShoggoth;
 @SideOnly(Side.CLIENT)
 public class RenderLesserShoggoth extends RenderLiving {
 
-	protected ModelLesserShoggoth model;
-
 	private static final ResourceLocation shoggothResource = new ResourceLocation("abyssalcraft:textures/model/shoggoth/LesserShoggoth.png");
 	private static final ResourceLocation abyssalResource = new ResourceLocation("abyssalcraft:textures/model/shoggoth/AbyssalShoggoth.png");
 	private static final ResourceLocation dreadedResource = new ResourceLocation("abyssalcraft:textures/model/shoggoth/DreadedShoggoth.png");
@@ -35,12 +33,6 @@ public class RenderLesserShoggoth extends RenderLiving {
 	public RenderLesserShoggoth(RenderManager manager)
 	{
 		super(manager, new ModelLesserShoggoth(), 1.6F);
-		model = (ModelLesserShoggoth)mainModel;
-	}
-
-	public void doRender(EntityLesserShoggoth entity, double par2, double par4, double par6, float par8, float par9)
-	{
-		super.doRender(entity, par2, par4, par6, par8, par9);
 	}
 
 	protected ResourceLocation getShoggothTexture(EntityLesserShoggoth par1EntityLiving)

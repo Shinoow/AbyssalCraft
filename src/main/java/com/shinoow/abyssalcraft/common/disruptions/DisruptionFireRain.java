@@ -32,26 +32,14 @@ public class DisruptionFireRain extends DisruptionEntry {
 		int x = pos.getX();
 		int y = pos.getY();
 		int z = pos.getZ();
-		EntityLargeFireball fireball1 = positionFireball(world, x + 5, y + 10, z + 5, 0, -0.5, 0);
-		EntityLargeFireball fireball2 = positionFireball(world, x - 5, y + 10, z + 5, 0, -0.5, 0);
-		EntityLargeFireball fireball3 = positionFireball(world, x + 5, y + 10, z - 5, 0, -0.5, 0);
-		EntityLargeFireball fireball4 = positionFireball(world, x - 5, y + 10, z - 5, 0, -0.5, 0);
-		EntityLargeFireball fireball5 = positionFireball(world, x + 2.5, y + 10, z + 2.5, 0, -0.5, 0);
-		EntityLargeFireball fireball6 = positionFireball(world, x - 2.5, y + 10, z + 2.5, 0, -0.5, 0);
-		EntityLargeFireball fireball7 = positionFireball(world, x + 2.5, y + 10, z - 2.5, 0, -0.5, 0);
-		EntityLargeFireball fireball8 = positionFireball(world, x - 2.5, y + 10, z - 2.5, 0, -0.5, 0);
-		EntityLargeFireball fireball9 = positionFireball(world, x + 2.5, y + 10, z, 0, -0.5, 0);
-		EntityLargeFireball fireball10 = positionFireball(world, x + 5, y + 10, z + 1, 0, -0.5, 0);
-		EntityLargeFireball fireball11 = positionFireball(world, x + 5, y + 10, z - 1, 0, -0.5, 0);
-		EntityLargeFireball fireball12 = positionFireball(world, x - 2.5, y + 10, z, 0, -0.5, 0);
-		EntityLargeFireball fireball13 = positionFireball(world, x - 5, y + 10, z + 1, 0, -0.5, 0);
-		EntityLargeFireball fireball14 = positionFireball(world, x - 5, y + 10, z - 1, 0, -0.5, 0);
-		EntityLargeFireball fireball15 = positionFireball(world, x, y + 10, z + 2.5, 0, -0.5, 0);
-		EntityLargeFireball fireball16 = positionFireball(world, x + 1, y + 10, z + 5, 0, -0.5, 0);
-		EntityLargeFireball fireball17 = positionFireball(world, x - 1, y + 10, z + 5, 0, -0.5, 0);
-		EntityLargeFireball fireball18 = positionFireball(world, x, y + 10, z - 2.5, 0, -0.5, 0);
-		EntityLargeFireball fireball19 = positionFireball(world, x + 1, y + 10, z - 5, 0, -0.5, 0);
-		EntityLargeFireball fireball20 = positionFireball(world, x - 1, y + 10, z - 5, 0, -0.5, 0);
+		EntityLargeFireball fireball1 = positionFireball(world, x + 2.5, y + 10, z + 2.5, 0, -0.5, 0);
+		EntityLargeFireball fireball2 = positionFireball(world, x - 2.5, y + 10, z + 2.5, 0, -0.5, 0);
+		EntityLargeFireball fireball3 = positionFireball(world, x + 2.5, y + 10, z - 2.5, 0, -0.5, 0);
+		EntityLargeFireball fireball4 = positionFireball(world, x - 2.5, y + 10, z - 2.5, 0, -0.5, 0);
+		EntityLargeFireball fireball5 = positionFireball(world, x + 2.5, y + 10, z, 0, -0.5, 0);
+		EntityLargeFireball fireball6 = positionFireball(world, x - 2.5, y + 10, z, 0, -0.5, 0);
+		EntityLargeFireball fireball7 = positionFireball(world, x, y + 10, z + 2.5, 0, -0.5, 0);
+		EntityLargeFireball fireball8 = positionFireball(world, x, y + 10, z - 2.5, 0, -0.5, 0);
 
 		if(!world.isRemote){
 			world.spawnEntityInWorld(fireball1);
@@ -62,18 +50,6 @@ public class DisruptionFireRain extends DisruptionEntry {
 			world.spawnEntityInWorld(fireball6);
 			world.spawnEntityInWorld(fireball7);
 			world.spawnEntityInWorld(fireball8);
-			world.spawnEntityInWorld(fireball9);
-			world.spawnEntityInWorld(fireball10);
-			world.spawnEntityInWorld(fireball11);
-			world.spawnEntityInWorld(fireball12);
-			world.spawnEntityInWorld(fireball13);
-			world.spawnEntityInWorld(fireball14);
-			world.spawnEntityInWorld(fireball15);
-			world.spawnEntityInWorld(fireball16);
-			world.spawnEntityInWorld(fireball17);
-			world.spawnEntityInWorld(fireball18);
-			world.spawnEntityInWorld(fireball19);
-			world.spawnEntityInWorld(fireball20);
 		}
 	}
 

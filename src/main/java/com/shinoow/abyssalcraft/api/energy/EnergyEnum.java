@@ -115,7 +115,7 @@ public class EnergyEnum {
 	 * @since 1.5
 	 */
 	public AmplifierType addAmplifierType(String enumName, String name){
-		return EnumHelper.addEnum(AmplifierType.class, enumName, name);
+		return EnumHelper.addEnum(AmplifierType.class, enumName, new Class[]{String.class}, name);
 	}
 
 	/**
@@ -127,6 +127,6 @@ public class EnergyEnum {
 	 * @since 1.5
 	 */
 	public DeityType addDeityType(String enumName, String name){
-		return EnumHelper.addEnum(DeityType.class, enumName, name);
+		return EnumHelper.addEnum(DeityType.class, enumName, new Class[]{String.class}, name);
 	}
 }

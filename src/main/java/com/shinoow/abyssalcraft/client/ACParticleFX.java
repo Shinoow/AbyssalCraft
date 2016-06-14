@@ -41,7 +41,6 @@ public class ACParticleFX extends Particle {
 		reddustParticleScale = particleScale;
 		particleMaxAge = (int)(8.0D / (Math.random() * 0.8D + 0.2D));
 		particleMaxAge = (int)(particleMaxAge * par8);
-		//		noClip = false;
 	}
 
 	@Override

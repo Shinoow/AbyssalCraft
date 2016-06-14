@@ -135,7 +135,7 @@ public class EntityAntiCow extends EntityAnimal implements IAntiEntity {
 		{
 			par1EntityPlayer.playSound(SoundEvents.ENTITY_COW_MILK, 1.0F, 1.0F);
 			if (stack.stackSize-- == 1)
-				par1EntityPlayer.setHeldItem(hand, new ItemStack(Items.MILK_BUCKET));
+				par1EntityPlayer.setHeldItem(hand, new ItemStack(ACItems.liquid_antimatter_bucket));
 			else if (!par1EntityPlayer.inventory.addItemStackToInventory(new ItemStack(ACItems.liquid_antimatter_bucket)))
 				par1EntityPlayer.dropItem(new ItemStack(ACItems.liquid_antimatter_bucket, 1, 0), false);
 

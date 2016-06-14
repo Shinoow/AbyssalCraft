@@ -40,6 +40,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.common.blocks.tile.TileEntityMaterializer;
+import com.shinoow.abyssalcraft.lib.ACTabs;
 
 public class BlockMaterializer extends BlockContainer {
 
@@ -55,7 +56,7 @@ public class BlockMaterializer extends BlockContainer {
 		setHardness(100);
 		setResistance(Float.MAX_VALUE);
 		setSoundType(SoundType.STONE);
-		setCreativeTab(AbyssalCraft.tabDecoration);
+		setCreativeTab(ACTabs.tabDecoration);
 	}
 
 	@Override

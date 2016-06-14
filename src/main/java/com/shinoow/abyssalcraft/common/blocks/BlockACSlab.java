@@ -27,7 +27,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import com.shinoow.abyssalcraft.AbyssalCraft;
+import com.shinoow.abyssalcraft.lib.ACTabs;
 
 public abstract class BlockACSlab extends BlockSlab {
 
@@ -62,7 +62,7 @@ public abstract class BlockACSlab extends BlockSlab {
 	{
 		super(par3Material);
 		singleSlab = this;
-		setCreativeTab(AbyssalCraft.tabBlock);
+		setCreativeTab(ACTabs.tabBlock);
 		useNeighborBrightness = true;
 
 		setDefaultState(blockState.getBaseState().withProperty(VARIANT_PROPERTY, false).withProperty(HALF, EnumBlockHalf.BOTTOM));

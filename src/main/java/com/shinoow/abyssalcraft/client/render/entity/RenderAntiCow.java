@@ -31,11 +31,6 @@ public class RenderAntiCow extends RenderLiving
 		super(manager, new ModelCow(), 0.5F);
 	}
 
-	public void doRender(EntityAntiCow par1EntityEntityAntiCow, double par2, double par4, double par6, float par8, float par9)
-	{
-		super.doRender(par1EntityEntityAntiCow, par2, par4, par6, par8, par9);
-	}
-
 	protected ResourceLocation getEntityTexture(EntityAntiCow par1EntityCow)
 	{
 		return cowTextures;

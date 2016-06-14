@@ -42,17 +42,6 @@ public class RenderGreaterDreadSpawn extends RenderLiving<EntityGreaterDreadSpaw
 		GL11.glScalef(scale, scale, scale);
 	}
 
-	//	public void doRender(EntityGreaterDreadSpawn entity, double par2, double par4, double par6, float par8, float par9)
-	//	{
-	//		super.doRender(entity, par2, par4, par6, par8, par9);
-	//	}
-	//
-	//	@Override
-	//	public void doRender(Entity par1Entity, double par2, double par4, double par6, float par8, float par9)
-	//	{
-	//		doRender((EntityGreaterDreadSpawn)par1Entity, par2, par4, par6, par8, par9);
-	//	}
-
 	@Override
 	protected void preRenderCallback(EntityGreaterDreadSpawn par1EntityLivingBase, float par2)
 	{

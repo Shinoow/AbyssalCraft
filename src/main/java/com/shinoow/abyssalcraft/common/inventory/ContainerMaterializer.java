@@ -47,8 +47,8 @@ public class ContainerMaterializer extends Container {
 
 	@Override
 	public void addListener(IContainerListener listener)
-    {
-        super.addListener(listener);
+	{
+		super.addListener(listener);
 	}
 
 	@Override

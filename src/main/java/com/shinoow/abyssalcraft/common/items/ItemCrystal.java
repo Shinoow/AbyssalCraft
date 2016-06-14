@@ -21,21 +21,16 @@ import net.minecraft.util.text.translation.I18n;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.api.item.ICrystal;
+import com.shinoow.abyssalcraft.lib.ACLib;
+import com.shinoow.abyssalcraft.lib.ACTabs;
 
 public class ItemCrystal extends Item implements ICrystal {
 
-	private String[] names = new String[]{"Iron", "Gold", "Sulfur", "Carbon", "Oxygen", "Hydrogen", "Nitrogen", "Phosphorus",
-			"Potassium", "Nitrate", "Methane", "Redstone", "Abyssalnite", "Coralium", "Dreadium", "Blaze", "Tin", "Copper",
-			"Silicon", "Magnesium", "Aluminium", "Silica", "Alumina", "Magnesia", "Zinc"};
-	private String[] atoms = new String[]{"Fe", "Au", "S", "C", "O", "H", "N", "P", "K", "NO\u2083", "CH\u2084", "none", "An",
-			"Cor", "Dr", "none", "Sn", "Cu", "Si", "Mg", "Al", "SiO\u2082", "Al\u2082O\u2083", "MgO", "Zn"};
 	public ItemCrystal(String name){
 		super();
-		//		GameRegistry.registerItem(this, name);
 		setUnlocalizedName(name);
-		setCreativeTab(AbyssalCraft.tabCrystals);
+		setCreativeTab(ACTabs.tabCrystals);
 		setMaxDamage(0);
 		setHasSubtypes(true);
 	}
@@ -60,18 +55,18 @@ public class ItemCrystal extends Item implements ICrystal {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void getSubItems(Item par1Item, CreativeTabs par2CreativeTab, List par3List){
-		for(int i = 0; i < names.length; ++i)
+		for(int i = 0; i < ACLib.crystalNames.length; ++i)
 			par3List.add(new ItemStack(par1Item, 1, i));
 	}
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
 	public void addInformation(ItemStack is, EntityPlayer player, List l, boolean B){
-		l.add(I18n.translateToLocal("tooltip.crystal")+ ": " + atoms[is.getItemDamage()]);
+		l.add(I18n.translateToLocal("tooltip.crystal")+ ": " + ACLib.crystalAtoms[is.getItemDamage()]);
 	}
 
 	@Override
 	public String getItemStackDisplayName(ItemStack par1ItemStack) {
-		return I18n.translateToLocal(getUnlocalizedName() + "." + names[par1ItemStack.getItemDamage()] + ".name");
+		return I18n.translateToLocal(getUnlocalizedName() + "." + ACLib.crystalNames[par1ItemStack.getItemDamage()] + ".name");
 	}
 }

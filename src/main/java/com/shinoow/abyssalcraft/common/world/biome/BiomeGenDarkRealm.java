@@ -26,7 +26,6 @@ public class BiomeGenDarkRealm extends Biome {
 	@SuppressWarnings("unchecked")
 	public BiomeGenDarkRealm(BiomeProperties par1){
 		super(par1);
-		//		waterColorMultiplier = 14745518;
 		spawnableMonsterList.clear();
 		spawnableCreatureList.clear();
 		spawnableWaterCreatureList.clear();

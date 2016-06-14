@@ -20,32 +20,24 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import org.lwjgl.opengl.GL11;
 
 import com.shinoow.abyssalcraft.client.model.entity.ModelJzahar;
+import com.shinoow.abyssalcraft.client.render.entity.layers.LayerJzaharDeath;
 import com.shinoow.abyssalcraft.common.entity.EntityJzahar;
 
 @SideOnly(Side.CLIENT)
 public class RenderJzahar extends RenderLiving<EntityJzahar> {
 
-	protected ModelJzahar model;
-
 	private static final ResourceLocation mobTexture = new ResourceLocation("abyssalcraft:textures/model/boss/J'zahar.png");
 
-	public RenderJzahar(RenderManager manager, ModelJzahar ModelJzahar, float f)
+	public RenderJzahar(RenderManager manager)
 	{
-		super(manager, ModelJzahar, f);
-		model = (ModelJzahar)mainModel;
+		super(manager, new ModelJzahar(true), 1.0F);
+		addLayer(new LayerJzaharDeath());
 	}
 
 	@Override
 	protected ResourceLocation getEntityTexture(EntityJzahar entity) {
 
 		return mobTexture;
-	}
-
-	@Override
-	public void doRender(EntityJzahar par1Entity, double par2, double par4, double par6, float par8, float par9)
-	{
-		//		BossStatus.setBossStatus(par1Entity, false);
-		super.doRender(par1Entity, par2, par4, par6, par8, par9);
 	}
 
 	@Override
