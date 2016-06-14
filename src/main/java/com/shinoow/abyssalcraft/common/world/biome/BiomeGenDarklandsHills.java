@@ -24,6 +24,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.api.biome.IDarklandsBiome;
+import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.common.entity.EntityAbyssalZombie;
 import com.shinoow.abyssalcraft.common.entity.EntityDepthsGhoul;
 import com.shinoow.abyssalcraft.common.entity.EntityShadowBeast;
@@ -41,8 +42,8 @@ public class BiomeGenDarklandsHills extends BiomeGenBase implements IDarklandsBi
 		super(par1);
 		minHeight = 1.1F;
 		maxHeight = 0.5F;
-		topBlock = AbyssalCraft.Darkgrass.getDefaultState();
-		fillerBlock = AbyssalCraft.Darkstone.getDefaultState();
+		topBlock = ACBlocks.darklands_grass.getDefaultState();
+		fillerBlock = ACBlocks.darkstone.getDefaultState();
 		waterColorMultiplier = 14745518;
 		WorldGenDarkTrees = new WorldGenDLT(false);
 		theBiomeDecorator.treesPerChunk = 1;
@@ -67,7 +68,7 @@ public class BiomeGenDarklandsHills extends BiomeGenBase implements IDarklandsBi
 				int y = par2Random.nextInt(28) + 4;
 				int z = par2Random.nextInt(16);
 
-				new WorldGenMinable(AbyssalCraft.abyore.getDefaultState(), veinSize).generate(par1World, par2Random, pos.add(x, y, z));
+				new WorldGenMinable(ACBlocks.abyssalnite_ore.getDefaultState(), veinSize).generate(par1World, par2Random, pos.add(x, y, z));
 			}
 
 		for (int rarity = 0; rarity < 7; ++rarity)
@@ -75,7 +76,7 @@ public class BiomeGenDarklandsHills extends BiomeGenBase implements IDarklandsBi
 			int x = par2Random.nextInt(16);
 			int y = par2Random.nextInt(64);
 			int z = par2Random.nextInt(16);
-			new WorldGenMinable(AbyssalCraft.Darkstone.getDefaultState(), 64).generate(par1World, par2Random, pos.add(x, y, z));
+			new WorldGenMinable(ACBlocks.darkstone.getDefaultState(), 64).generate(par1World, par2Random, pos.add(x, y, z));
 		}
 
 		for (int rarity = 0; rarity < 7; ++rarity)
@@ -83,7 +84,7 @@ public class BiomeGenDarklandsHills extends BiomeGenBase implements IDarklandsBi
 			int x = par2Random.nextInt(16);
 			int y = par2Random.nextInt(64);
 			int z = par2Random.nextInt(16);
-			new WorldGenMinable(AbyssalCraft.abydreadstone.getDefaultState(), 1).generate(par1World, par2Random, pos.add(x, y, z));
+			new WorldGenMinable(ACBlocks.abyssalnite_stone.getDefaultState(), 1).generate(par1World, par2Random, pos.add(x, y, z));
 		}
 
 		for (int rarity = 0; rarity < 7; ++rarity)
@@ -91,7 +92,7 @@ public class BiomeGenDarklandsHills extends BiomeGenBase implements IDarklandsBi
 			int x = par2Random.nextInt(16);
 			int y = par2Random.nextInt(64);
 			int z = par2Random.nextInt(16);
-			new WorldGenMinable(AbyssalCraft.Darkstone.getDefaultState(), 32).generate(par1World, par2Random, pos.add(x, y, z));
+			new WorldGenMinable(ACBlocks.darkstone.getDefaultState(), 32).generate(par1World, par2Random, pos.add(x, y, z));
 		}
 	}
 

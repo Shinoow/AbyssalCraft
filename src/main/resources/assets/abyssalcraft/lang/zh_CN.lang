@@ -182,6 +182,7 @@ message.jzahar.death.10=If you survived the blast, take this mere fragment of my
 message.jzahar.banish.vanilla=我从未想过和你待在同一个维度里. 滚开, 恶心的怪物!
 message.jzahar.banish.ac=呃哼... 我想起在亿万年前我曾给过你一个任命 , 你可曾想到那是永远存在的?
 message.jzahar.banish.jzh=那只有唯一的一个! *凭空创造出剑来*
+message.jzahar.banish.other=I don't believe we've been acquainted, I'm the one that banishes you from this dimension.
 message.jzahar.creative.1=%s, 你可否意识到现在我就可以轻松地切换你的游戏模式并杀死你? 我就是那样的实体.
 message.jzahar.creative.2=不过... 严格上说那是作弊, 所以我还是会坚守 "规则" 和不做任何事情.
 message.sacthoth.spawn.1=我解放了! 凡人, 感受黑暗领域的愤怒吧.
@@ -366,8 +367,6 @@ necronomicon.text.crafting.transmutator.1=嬗变器由珊瑚石砖, 精炼珊瑚
 necronomicon.text.crafting.transmutator.2=要获得珊瑚砖块, 你必须将液态反物质倒在液态珊瑚上面, 然后挖掘由液态珊瑚变成的石头. 然后你必须将珊瑚锭石头烧炼成珊瑚锭.
 necronomicon.text.crafting.crystallizer.1=结晶器由恐惧石砖, 恐惧锭块和一个熔炉合成.
 necronomicon.text.crafting.crystallizer.2=恐惧锭是从深渊锭的恐惧碎片嬗变而来, 深渊锭的恐惧碎片是从在恐惧之地的恐惧守卫掉落. 恐惧锭用结晶器很容易就获得.
-necronomicon.text.crafting.dreadaltarbot=查加洛斯祭坛(底部) 由恐惧石, 恐惧锭, 阿索拉的恐惧之门钥匙, 恐惧之布和深渊锭的恐惧碎片和骨头合成.
-necronomicon.text.crafting.dreadaltartop=查加洛斯祭坛(顶部)由木棍, 一个桶, 恐惧之布和恐惧锭合成.
 necronomicon.text.crafting.necro_o=奥穆索死灵之书是由奥穆索兽皮和一本恐惧之地死灵之书合成.
 necronomicon.text.crafting.lifecrystal.1=生命结晶由一个结晶碳, 一个结晶氢, 一个结晶氮, 一个结晶氧, 一个结晶磷和一个结晶硫合成.
 necronomicon.text.crafting.lifecrystal.2=上述结晶能通过分别晶体化煤炭, 水, 硝石, 腐肉, 青金石来获得. 结晶氮来自晶体化结晶硝酸(来自硝石).
@@ -425,8 +424,8 @@ necronomicon.text.crafting.carboncluster=A Carbon Cluster is crafted with Crysta
 necronomicon.text.crafting.densecarboncluster=A Dense Carbon Cluster is crafted with Carbon Clusters and a block of Obsidian. Can be transmuted into a Diamond.
 necronomicon.text.crafting.crate=A Wooden Crate is crafted with Sticks, Wooden Planks and a Chest. Has an extra row of inventory slots more than a Chest.
 
-necronomicon.text.enchantment.coralium=The Coralium Enchantment allows you to infect any entity you hit with the Coralium Plague (that is, if they aren't immune).
-necronomicon.text.enchantment.dread=The Dread Enchantment allows you to infect any entity you hit with the Dread Plague (that is, if they aren't immune).
+necronomicon.text.enchantment.coralium=The Coralium Enchantment allows you to infect any entity you hit with the Coralium Plague (that is, if they aren't immune). Can only be obtained through a ritual.
+necronomicon.text.enchantment.dread=The Dread Enchantment allows you to infect any entity you hit with the Dread Plague (that is, if they aren't immune). Can only be obtained through a ritual.
 necronomicon.text.enchantment.lightpierce=The Light Pierce Enchantment works like Bane of Arthropods, but on Shadow mobs.
 necronomicon.text.enchantment.ironwall=The Iron Wall Enchantment works as a anti-knockback enchantment, repelling knockback applied when hit.
 
@@ -440,7 +439,7 @@ necronomicon.text.abyssal.progression.1=在你到达了深渊荒芜之地后, �
 necronomicon.text.abyssal.progression.2=阿索拉会用幽灵龙来治疗它自己, 所以幽灵龙需要在战斗中首先解决掉. 在你打败了阿索拉后, 它会掉落它的眼睛和大量经验和这个世界里的一些材料. 恐惧之地蕴能石在深渊要塞里, 能通过使用蕴能石追踪器找到(合成表在特殊材料章节).
 necronomicon.text.abyssal.progression.3=在你追踪到蕴能石之后, 你能用一个精炼珊瑚镐来挖掘它. 最终你能升级你的门钥匙通过将需要成分注入到它("阿索拉的恐惧之门钥匙"仪式). 升级你的死灵之书到恐惧之地死灵之书需要8个恐惧之地兽皮.
 
-necronomicon.text.dreadlands.progression.1=在你到达恐惧之地后, 你下一个目标是到达奥穆索. 你需要一个嬗变器, 同时你要打败恐惧野兽查加罗特. 要见到查加罗特, 你需要查加罗特祭坛,祭坛由两个方块组成. 合成表均可在特殊材料章节找到.
+necronomicon.text.dreadlands.progression.1=Once you have reached the Dreadlands, your next goal is to reach Omothol. You will need to own a Transmutator, and you need to defeat Cha'garoth, The Dreadbeast. In order to reach Cha'garoth, you need the Altar of Cha'garoth, made out of 2 pieces. Both pieces are created through rituals.
 necronomicon.text.dreadlands.progression.2=当你有2个祭坛零件, 你要将它们放在恐惧之地山脉的Y=40的高度并且右击它. 做完后你就能进入到查加罗特的巢穴. 在打败恐惧守卫并杀死查加罗特之后, 你会获得一把恐惧侵染的门钥匙, 随同着战利品. 这把钥匙需要嬗才变成有功能的钥匙.
 necronomicon.text.dreadlands.progression.3=通过前面提及的嬗变器(合成表在深渊荒芜之地特殊材料章节) 你可以将恐惧侵染的门钥匙嬗变成查加罗特的拉莱尔门钥匙, 允许你到达奥穆索. 升级你的死灵之书到奥穆索死灵之书需要8个奥穆索兽皮.
 
@@ -517,6 +516,7 @@ necronomicon.text.rituals.3=To create the altar, simply place the blocks in the 
 necronomicon.text.rituals.4=然后, 你能开始举行仪式! 要进行一个仪式, 将物品放在基座上然后手持死灵之书按住shift右击祭坛.
 necronomicon.text.rituals.5=仪式进行时, 基座会发出射向祭坛的烟雾. 最终仪式获得物品的地方会有一束闪电击中祭坛.
 necronomicon.text.rituals.6=要进行仪式需要位能(每个仪式入口会显示出需要多少). 位能是一种纯净形式的来源于存在于更高维度里的未开发的能量. 主要用作燃料祭品来自旧日支配者(任何仪式).放在修格斯巨石上的雕像据说能适合来抽取它.
+necronomicon.text.rituals.7=Some rituals require a living sacrifice. This means you need to have an Entity within close proximity of the altar and pedestals. If the Entity is of the correct type (living, adult, something a Lesser Shoggoth would eat) a bolt of lightning will kill it, and the ritual will begin. Failing to complete a ritual will trigger a Disruption, which is bad.
 
 necronomicon.text.pe.1=位能(PE)是在深渊国度里新的一种能量. 来源于一个更高的维度(一个没有人类存在的地方), 只能通过用各种方法转变为镭射线来收集. 存在多种物品能做到, 接下来会解释.
 necronomicon.text.pe.2=一个好的地方来开始获得材料需要创造一些位能收集物品是修格斯巢穴, 修格斯巢穴能在沼泽和河流找到.
@@ -678,6 +678,14 @@ ac.ritual.jzaharStaff=Staff of The Gatekeeper
 ac.ritual.jzaharStaff.desc=A Staff of The Gatekeeper is created by infusing a Staff of Rending with a Abyssal Wasteland Essence, a Dreadlands Essence, a Omothol Essence, Eldritch Scales and Ethaxium Ingots.
 ac.ritual.respawnJzahar=Ritual of reversed time
 ac.ritual.respawnJzahar.desc=If you in some way failed to obtain a Essence of The Gatekeeper, you can revert time and fight J'zahar again. Can only be performed at the Ritual Altar inside the Temple of J'zahar (X=4, Y=54, Z=85).
+ac.ritual.altarOfChagarothBottom=Altar of Cha'garoth (bottom)
+ac.ritual.altarOfChagarothBottom.desc=An Altar of Cha'garoth (bottom) is created with Dreadstone. Dreadium Ingots, Asorah's Dreaded Gateway Key, Bones and a piece of Dread Cloth.
+ac.ritual.altarOfChagarothTop=Altar of Cha'garoth (top)
+ac.ritual.altarOfChagarothTop.desc=An Altar of Cha'garoth (top) is created with Sticks, a Bucket, Dread Cloths and Dreadium Ingots.
+ac.ritual.corEnchantment=Coralium Infusion
+ac.ritual.corEnchantment.desc=By combining a Abyssal Wasteland Essence, Abyssal Shoggoth Flesh, Refined Coralium Ingots, Coralium-plagued Flesh and a Book, you can enchant a weapon placed on the altar with the Coralium enchantment (if applicable).
+ac.ritual.dreEnchantment=Dread Infusion
+ac.ritual.dreEnchantment.desc=By combining a Dreadlands Essence, Dreaded Shoggoth Flesh, Dreadium Ingots, Dread Fragments and a Book, you can enchant a weapon placed on the altar with the Dread enchantment (if applicable).
 
 #Configuration
 ac_dimensions=维度
@@ -739,6 +747,7 @@ tooltip.drainstaff.energy.3=奥穆索能量
 tooltip.drainstaff.energy.4=阴影能量
 tooltip.gatekeeperessence.1=A mere fragment of J'zahar.
 tooltip.gatekeeperessence.2=You can feel it pulsating with power.
+tooltip.decorativestatue=This block is purely for decoration, and won't do anything
 
 #Creative Tabs
 itemGroup.acblocks=深渊国度方块
@@ -903,6 +912,10 @@ tile.tieredsacrificialaltar.2.name=恐惧之地献祭祭坛
 tile.tieredsacrificialaltar.3.name=奥穆索献祭祭坛
 tile.jzaharspawner.name=J'zahar Spawner Block
 tile.gatekeeperminionspawner.name=Minion of The Gatekeeper Spawner Block
+
+#Pre/Postfixes
+decorativestatue.prefix=Decorative %s
+crystalcluster.postfix=%s Cluster
 
 #Items
 item.devsword.name=恶魔之刃

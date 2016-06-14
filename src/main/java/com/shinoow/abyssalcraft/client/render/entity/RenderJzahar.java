@@ -21,19 +21,19 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import com.shinoow.abyssalcraft.client.model.entity.ModelJzahar;
+import com.shinoow.abyssalcraft.client.render.entity.layers.LayerJzaharDeath;
 import com.shinoow.abyssalcraft.common.entity.EntityJzahar;
 
 @SideOnly(Side.CLIENT)
 public class RenderJzahar extends RenderLiving<EntityJzahar> {
 
-	protected ModelJzahar model;
 
 	private static final ResourceLocation mobTexture = new ResourceLocation("abyssalcraft:textures/model/boss/J'zahar.png");
 
-	public RenderJzahar(RenderManager manager, ModelJzahar ModelJzahar, float f)
+	public RenderJzahar(RenderManager manager)
 	{
-		super(manager, ModelJzahar, f);
-		model = (ModelJzahar)mainModel;
+		super(manager, new ModelJzahar(true), 1.0F);
+		addLayer(new LayerJzaharDeath());
 	}
 
 	@Override

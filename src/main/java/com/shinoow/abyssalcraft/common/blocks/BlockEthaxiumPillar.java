@@ -11,38 +11,87 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.common.blocks;
 
+import static net.minecraft.block.BlockLog.LOG_AXIS;
+
+import com.shinoow.abyssalcraft.lib.ACTabs;
+
+import net.minecraft.block.BlockLog;
+import net.minecraft.block.BlockRotatedPillar;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.properties.IProperty;
+import net.minecraft.block.state.BlockState;
+import net.minecraft.block.state.IBlockState;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.util.BlockPos;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.world.World;
 
-public class BlockEthaxiumPillar extends BlockACBasic {
+public class BlockEthaxiumPillar extends BlockRotatedPillar {
 
-	//	@SideOnly(Side.CLIENT)
-	//	private IIcon[] icons;
-	//	@SideOnly(Side.CLIENT)
-	//	private static IIcon overlay;
-
-	public BlockEthaxiumPillar() {
-		super(Material.rock, "pickaxe", 8, 100.0F, Float.MAX_VALUE, soundTypeStone);
+	public BlockEthaxiumPillar(float hardness) {
+		super(Material.rock);
+		setDefaultState(blockState.getBaseState().withProperty(LOG_AXIS, BlockLog.EnumAxis.Y));
+		setHarvestLevel("pickaxe", 8);
+		setHardness(hardness);
+		setResistance(Float.MAX_VALUE);
+		setStepSound(soundTypeStone);
+		setCreativeTab(ACTabs.tabBlock);
 	}
 
-	//	@Override
-	//	@SideOnly(Side.CLIENT)
-	//	public IIcon getIcon(int par1, int par2) {
-	//		return par1 == 1 ? icons[1] : par1 == 0 ? icons[1] : icons[0];
-	//	}
 
-	//	@Override
-	//	@SideOnly(Side.CLIENT)
-	//	public void registerBlockIcons(IIconRegister par1IconRegister)
-	//	{
-	//		icons = new IIcon[2];
-	//		icons[0] = par1IconRegister.registerIcon("abyssalCraft:EBP");
-	//		icons[1] = par1IconRegister.registerIcon("abyssalcraft:EBP_top");
-	//		BlockEthaxiumPillar.overlay = par1IconRegister.registerIcon("abyssalcraft:EBP");
-	//	}
+	@Override
+	public IBlockState onBlockPlaced(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer)
+	{
+		return super.onBlockPlaced(worldIn, pos, facing, hitX, hitY, hitZ, meta, placer).withProperty(LOG_AXIS, BlockLog.EnumAxis.fromFacingAxis(facing.getAxis()));
+	}
 
-	//	@SideOnly(Side.CLIENT)
-	//	public static IIcon getIconSideOverlay()
-	//	{
-	//		return overlay;
-	//	}
+	@Override
+	public IBlockState getStateFromMeta(int meta)
+	{
+		IBlockState iblockstate = getDefaultState();
+
+		switch (meta & 12)
+		{
+		case 0:
+			iblockstate = iblockstate.withProperty(LOG_AXIS, BlockLog.EnumAxis.Y);
+			break;
+		case 4:
+			iblockstate = iblockstate.withProperty(LOG_AXIS, BlockLog.EnumAxis.X);
+			break;
+		case 8:
+			iblockstate = iblockstate.withProperty(LOG_AXIS, BlockLog.EnumAxis.Z);
+			break;
+		default:
+			iblockstate = iblockstate.withProperty(LOG_AXIS, BlockLog.EnumAxis.NONE);
+		}
+
+		return iblockstate;
+	}
+
+	@Override
+	@SuppressWarnings("incomplete-switch")
+	public int getMetaFromState(IBlockState state)
+	{
+		int i = 0;
+
+		switch (state.getValue(LOG_AXIS))
+		{
+		case X:
+			i |= 4;
+			break;
+		case Z:
+			i |= 8;
+			break;
+		case NONE:
+			i |= 12;
+		}
+
+		return i;
+	}
+
+	@Override
+	protected BlockState createBlockState()
+	{
+		return new BlockState(this, new IProperty[] {LOG_AXIS});
+	}
 }

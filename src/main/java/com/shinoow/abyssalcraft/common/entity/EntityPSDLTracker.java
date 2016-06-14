@@ -12,6 +12,7 @@
 package com.shinoow.abyssalcraft.common.entity;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
+import com.shinoow.abyssalcraft.api.item.ACItems;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityItem;
@@ -190,7 +191,7 @@ public class EntityPSDLTracker extends Entity
 				setDead();
 
 				if (shatterOrDrop)
-					worldObj.spawnEntityInWorld(new EntityItem(worldObj, posX, posY, posZ, new ItemStack(AbyssalCraft.PSDLfinder)));
+					worldObj.spawnEntityInWorld(new EntityItem(worldObj, posX, posY, posZ, new ItemStack(ACItems.powerstone_tracker)));
 				else
 					worldObj.playAuxSFX(2003, new BlockPos(this), 0);
 			}

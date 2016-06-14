@@ -22,13 +22,13 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.BlockPos;
 import net.minecraft.world.IBlockAccess;
 
-import com.shinoow.abyssalcraft.AbyssalCraft;
+import com.shinoow.abyssalcraft.lib.ACTabs;
 
 public class BlockDarkstonecobblewall extends BlockWall{
 
 	public BlockDarkstonecobblewall(Block par2Block) {
 		super(par2Block);
-		setCreativeTab(AbyssalCraft.tabBlock);
+		setCreativeTab(ACTabs.tabBlock);
 	}
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })

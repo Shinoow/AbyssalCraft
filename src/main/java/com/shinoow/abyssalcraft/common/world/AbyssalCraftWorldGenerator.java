@@ -23,6 +23,7 @@ import net.minecraftforge.common.BiomeDictionary.Type;
 import net.minecraftforge.fml.common.IWorldGenerator;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
+import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.common.structures.StructureShoggothPit;
 import com.shinoow.abyssalcraft.common.structures.overworld.*;
 
@@ -98,7 +99,7 @@ public class AbyssalCraftWorldGenerator implements IWorldGenerator {
 				int y = random.nextInt(40);
 				int z = chunkZ + random.nextInt(16);
 				if(BiomeDictionary.isBiomeOfType(world.getBiomeGenForCoords(new BlockPos(x, 0, z)), Type.SWAMP))
-					new WorldGenMinable(AbyssalCraft.Coraliumore.getDefaultState(), veinSize).generate(world, random, new BlockPos(x, y, z));
+					new WorldGenMinable(ACBlocks.coralium_ore.getDefaultState(), veinSize).generate(world, random, new BlockPos(x, y, z));
 			}
 
 			for(int rarity = 0; rarity < 6; rarity++) {
@@ -108,9 +109,9 @@ public class AbyssalCraftWorldGenerator implements IWorldGenerator {
 				int z = chunkZ + random.nextInt(16);
 				if(BiomeDictionary.isBiomeOfType(world.getBiomeGenForCoords(new BlockPos(x, 0, z)), Type.OCEAN) &&
 						world.getBiomeGenForCoords(new BlockPos(x, 0, z))!=BiomeGenBase.deepOcean)
-					new WorldGenMinable(AbyssalCraft.Coraliumore.getDefaultState(), veinSize).generate(world, random, new BlockPos(x, y, z));
+					new WorldGenMinable(ACBlocks.coralium_ore.getDefaultState(), veinSize).generate(world, random, new BlockPos(x, y, z));
 				if(world.getBiomeGenForCoords(new BlockPos(x, 0, z))==BiomeGenBase.deepOcean)
-					new WorldGenMinable(AbyssalCraft.Coraliumore.getDefaultState(), veinSize).generate(world, random, new BlockPos(x, y-20, z));
+					new WorldGenMinable(ACBlocks.coralium_ore.getDefaultState(), veinSize).generate(world, random, new BlockPos(x, y-20, z));
 			}
 		}
 
@@ -121,7 +122,7 @@ public class AbyssalCraftWorldGenerator implements IWorldGenerator {
 				int y = random.nextInt(30);
 				int z = chunkZ + random.nextInt(16);
 
-				new WorldGenMinable(AbyssalCraft.nitreOre.getDefaultState(), veinSize).generate(world, random, new BlockPos(x, y, z));
+				new WorldGenMinable(ACBlocks.nitre_ore.getDefaultState(), veinSize).generate(world, random, new BlockPos(x, y, z));
 			}
 
 		if(AbyssalCraft.generateShoggothLairs)

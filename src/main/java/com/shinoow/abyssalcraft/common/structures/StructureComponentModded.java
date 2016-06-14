@@ -21,17 +21,18 @@ import net.minecraft.init.Blocks;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.world.gen.structure.StructureComponent;
 
-import com.shinoow.abyssalcraft.AbyssalCraft;
+import com.shinoow.abyssalcraft.api.block.ACBlocks;
 
 public abstract class StructureComponentModded extends StructureComponent {
 
 	/* A bunch of lists to use for metadata block placement in structures generated with this stuff */
 	//	protected List<Block> doors = Arrays.asList(Blocks.wooden_door, Blocks.iron_door);
 	protected List<Block> stairs = Arrays.asList(Blocks.stone_stairs, Blocks.oak_stairs, Blocks.nether_brick_stairs, Blocks.stone_brick_stairs,
-			Blocks.sandstone_stairs, AbyssalCraft.abystairs, AbyssalCraft.DCstairs, AbyssalCraft.DBstairs, AbyssalCraft.DLTstairs, AbyssalCraft.abydreadbrickstairs,
-			AbyssalCraft.dreadbrickstairs, AbyssalCraft.cstonebrickstairs, AbyssalCraft.ethaxiumstairs, AbyssalCraft.darkethaxiumstairs);
-	protected List<Block> buttons = Arrays.asList(Blocks.stone_button, Blocks.wooden_button, AbyssalCraft.Abybutton,
-			AbyssalCraft.DSbutton, AbyssalCraft.DLTbutton, AbyssalCraft.cstonebutton);
+			Blocks.sandstone_stairs, ACBlocks.abyssal_stone_brick_stairs, ACBlocks.darkstone_cobblestone_stairs, ACBlocks.darkstone_brick_stairs,
+			ACBlocks.darklands_oak_stairs, ACBlocks.abyssalnite_stone_brick_stairs, ACBlocks.dreadstone_brick_stairs, ACBlocks.coralium_stone_brick_stairs,
+			ACBlocks.ethaxium_brick_stairs, ACBlocks.dark_ethaxium_brick_stairs);
+	protected List<Block> buttons = Arrays.asList(Blocks.stone_button, Blocks.wooden_button, ACBlocks.abyssal_stone_button,
+			ACBlocks.darkstone_button, ACBlocks.darklands_oak_button, ACBlocks.coralium_stone_button);
 	protected List<Block> redstone = Arrays.asList(Blocks.lever, Blocks.piston, Blocks.sticky_piston, Blocks.dispenser);
 
 	public StructureComponentModded() {}

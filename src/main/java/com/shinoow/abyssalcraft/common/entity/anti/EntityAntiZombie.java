@@ -48,6 +48,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.api.entity.IAntiEntity;
+import com.shinoow.abyssalcraft.api.item.ACItems;
 
 public class EntityAntiZombie extends EntityMob implements IAntiEntity {
 
@@ -215,7 +216,7 @@ public class EntityAntiZombie extends EntityMob implements IAntiEntity {
 	@Override
 	protected Item getDropItem()
 	{
-		return AbyssalCraft.antiFlesh;
+		return ACItems.rotten_anti_flesh;
 	}
 
 	@Override

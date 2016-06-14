@@ -28,8 +28,9 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.player.ArrowLooseEvent;
 import net.minecraftforge.event.entity.player.ArrowNockEvent;
 
-import com.shinoow.abyssalcraft.AbyssalCraft;
+import com.shinoow.abyssalcraft.api.item.ACItems;
 import com.shinoow.abyssalcraft.common.entity.EntityCoraliumArrow;
+import com.shinoow.abyssalcraft.lib.ACTabs;
 
 public class ItemCoraliumBow extends ItemBow {
 
@@ -58,7 +59,7 @@ public class ItemCoraliumBow extends ItemBow {
 	public ItemCoraliumBow(float chargeTime, int anim_0, int anim_1, int anim_2) {
 		maxStackSize = 1;
 		setUnlocalizedName("corbow");
-		setCreativeTab(AbyssalCraft.tabCombat);
+		setCreativeTab(ACTabs.tabCombat);
 
 		charge = chargeTime;
 
@@ -74,7 +75,7 @@ public class ItemCoraliumBow extends ItemBow {
 	@Override
 	public String getItemStackDisplayName(ItemStack par1ItemStack) {
 
-		return EnumChatFormatting.AQUA + StatCollector.translateToLocal(this.getUnlocalizedName() + ".name");
+		return EnumChatFormatting.AQUA + super.getItemStackDisplayName(par1ItemStack);
 	}
 
 	public String[] bowPullIconNameArray;
@@ -221,6 +222,6 @@ public class ItemCoraliumBow extends ItemBow {
 	@Override
 	public boolean getIsRepairable(ItemStack par1ItemStack, ItemStack par2ItemStack)
 	{
-		return AbyssalCraft.Cingot == par2ItemStack.getItem() ? true : super.getIsRepairable(par1ItemStack, par2ItemStack);
+		return ACItems.refined_coralium_ingot == par2ItemStack.getItem() ? true : super.getIsRepairable(par1ItemStack, par2ItemStack);
 	}
 }

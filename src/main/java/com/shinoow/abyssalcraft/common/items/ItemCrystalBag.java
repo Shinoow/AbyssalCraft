@@ -14,6 +14,7 @@ package com.shinoow.abyssalcraft.common.items;
 import java.util.List;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
+import com.shinoow.abyssalcraft.api.item.ACItems;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -53,13 +54,13 @@ public class ItemCrystalBag extends ItemACBasic {
 		if(!stack.hasTagCompound())
 			stack.setTagCompound(new NBTTagCompound());
 		if(!stack.getTagCompound().hasKey("InvSize")){
-			if(stack.getItem() == AbyssalCraft.crystalbag_s)
+			if(stack.getItem() == ACItems.small_crystal_bag)
 				stack.getTagCompound().setInteger("InvSize", 18);
-			if(stack.getItem() == AbyssalCraft.crystalbag_m)
+			if(stack.getItem() == ACItems.medium_crystal_bag)
 				stack.getTagCompound().setInteger("InvSize", 36);
-			if(stack.getItem() == AbyssalCraft.crystalbag_l)
+			if(stack.getItem() == ACItems.large_crystal_bag)
 				stack.getTagCompound().setInteger("InvSize", 54);
-			if(stack.getItem() == AbyssalCraft.crystalbag_h)
+			if(stack.getItem() == ACItems.huge_crystal_bag)
 				stack.getTagCompound().setInteger("InvSize", 72);
 		}
 	}

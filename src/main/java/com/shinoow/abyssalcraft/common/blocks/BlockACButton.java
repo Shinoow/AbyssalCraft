@@ -23,11 +23,4 @@ public class BlockACButton extends BlockButton {
 	public BlockACButton(boolean par1, String texture) {
 		super(par1);
 	}
-
-	//	@Override
-	//	@SideOnly(Side.CLIENT)
-	//	public void registerBlockIcons(IIconRegister par1IconRegister)
-	//	{
-	//		blockIcon = par1IconRegister.registerIcon(AbyssalCraft.modid + ":" + blockTexture);
-	//	}
 }

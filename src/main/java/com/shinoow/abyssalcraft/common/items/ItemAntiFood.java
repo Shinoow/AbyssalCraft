@@ -17,16 +17,16 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.world.World;
-import com.shinoow.abyssalcraft.AbyssalCraft;
+
+import com.shinoow.abyssalcraft.api.item.ACItems;
+import com.shinoow.abyssalcraft.lib.ACTabs;
 
 public class ItemAntiFood extends ItemFood {
 
 	public ItemAntiFood(String par1, boolean par2) {
 		super(0, 0, par2);
-		//		GameRegistry.registerItem(this, par1);
 		setUnlocalizedName(par1);
-		//		setTextureName("abyssalcraft:" + par1);
-		setCreativeTab(AbyssalCraft.tabFood);
+		setCreativeTab(ACTabs.tabFood);
 	}
 
 	public ItemAntiFood(String par1) {
@@ -36,9 +36,9 @@ public class ItemAntiFood extends ItemFood {
 	@Override
 	public void onFoodEaten(ItemStack itemStack, World world, EntityPlayer entityPlayer)
 	{
-		if(itemStack.getItem() == AbyssalCraft.antiFlesh)
+		if(itemStack.getItem() == ACItems.rotten_anti_flesh)
 			entityPlayer.addPotionEffect(new PotionEffect(Potion.saturation.id, 600, 1));
-		else if(itemStack.getItem() == AbyssalCraft.antiSpider_eye)
+		else if(itemStack.getItem() == ACItems.anti_spider_eye)
 			entityPlayer.addPotionEffect(new PotionEffect(Potion.regeneration.id, 400, 0));
 		else entityPlayer.addPotionEffect(new PotionEffect(Potion.hunger.id, 600, 1));
 	}

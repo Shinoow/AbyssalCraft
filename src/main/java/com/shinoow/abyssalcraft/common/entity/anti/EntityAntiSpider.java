@@ -44,6 +44,7 @@ import net.minecraft.world.World;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.api.entity.IAntiEntity;
+import com.shinoow.abyssalcraft.api.item.ACItems;
 
 public class EntityAntiSpider extends EntityMob implements IAntiEntity {
 
@@ -137,7 +138,7 @@ public class EntityAntiSpider extends EntityMob implements IAntiEntity {
 		super.dropFewItems(par1, par2);
 
 		if (par1 && (rand.nextInt(3) == 0 || rand.nextInt(1 + par2) > 0))
-			dropItem(AbyssalCraft.antiSpider_eye, 1);
+			dropItem(ACItems.anti_spider_eye, 1);
 	}
 
 	@Override

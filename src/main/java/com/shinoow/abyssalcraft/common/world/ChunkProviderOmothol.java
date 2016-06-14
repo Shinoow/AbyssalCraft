@@ -14,7 +14,7 @@ package com.shinoow.abyssalcraft.common.world;
 import java.util.List;
 import java.util.Random;
 
-import com.shinoow.abyssalcraft.AbyssalCraft;
+import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.common.structures.StructureShoggothPit;
 import com.shinoow.abyssalcraft.common.structures.omothol.MapGenOmothol;
 
@@ -97,7 +97,7 @@ public class ChunkProviderOmothol implements IChunkProvider
 								IBlockState iblockstate = null;
 
 								if (d15 > 0.0D)
-									iblockstate = AbyssalCraft.omotholstone.getDefaultState();
+									iblockstate = ACBlocks.omothol_stone.getDefaultState();
 
 								int k2 = i2 + i1 * 8;
 								int l2 = l1 + k1 * 4;
@@ -126,8 +126,8 @@ public class ChunkProviderOmothol implements IChunkProvider
 			{
 				int k = 1;
 				int l = -1;
-				IBlockState iblockstate = AbyssalCraft.omotholstone.getDefaultState();
-				IBlockState iblockstate1 = AbyssalCraft.omotholstone.getDefaultState();
+				IBlockState iblockstate = ACBlocks.omothol_stone.getDefaultState();
+				IBlockState iblockstate1 = ACBlocks.omothol_stone.getDefaultState();
 
 				for (int i1 = 127; i1 >= 0; --i1)
 				{
@@ -141,7 +141,7 @@ public class ChunkProviderOmothol implements IChunkProvider
 							if (k <= 0)
 							{
 								iblockstate = Blocks.air.getDefaultState();
-								iblockstate1 = AbyssalCraft.omotholstone.getDefaultState();
+								iblockstate1 = ACBlocks.omothol_stone.getDefaultState();
 							}
 
 							l = k;

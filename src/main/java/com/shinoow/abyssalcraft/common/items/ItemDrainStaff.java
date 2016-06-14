@@ -13,11 +13,13 @@ package com.shinoow.abyssalcraft.common.items;
 
 import java.util.List;
 
-import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
 import com.shinoow.abyssalcraft.api.entity.IAntiEntity;
 import com.shinoow.abyssalcraft.api.entity.ICoraliumEntity;
 import com.shinoow.abyssalcraft.api.entity.IDreadEntity;
+import com.shinoow.abyssalcraft.api.item.ACItems;
+import com.shinoow.abyssalcraft.lib.ACLib;
+import com.shinoow.abyssalcraft.lib.ACTabs;
 
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.boss.IBossDisplayData;
@@ -36,7 +38,7 @@ public class ItemDrainStaff extends Item {
 	public ItemDrainStaff(){
 		super();
 		setUnlocalizedName("drainstaff");
-		setCreativeTab(AbyssalCraft.tabTools);
+		setCreativeTab(ACTabs.tabTools);
 		setMaxStackSize(1);
 	}
 
@@ -64,6 +66,23 @@ public class ItemDrainStaff extends Item {
 	@SuppressWarnings("rawtypes")
 	public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player) {
 
+		if(getEnergy(stack, "Shadow") >= 200){
+			setEnergy(0, stack, "Shadow");
+			player.inventory.addItemStackToInventory(new ItemStack(ACItems.shadow_gem));
+		}
+		if(getEnergy(stack, "Abyssal") >= 100){
+			setEnergy(0, stack, "Abyssal");
+			player.inventory.addItemStackToInventory(new ItemStack(ACItems.essence, 1, 0));
+		}
+		if(getEnergy(stack, "Dread") >= 100){
+			setEnergy(0, stack, "Dread");
+			player.inventory.addItemStackToInventory(new ItemStack(ACItems.essence, 1, 1));
+		}
+		if(getEnergy(stack, "Omothol") >= 100){
+			setEnergy(0, stack, "Omothol");
+			player.inventory.addItemStackToInventory(new ItemStack(ACItems.essence, 1, 2));
+		}
+
 		int range = 50;
 		Vec3 v = player.getLookVec().normalize();
 		for(int i = 1;i<range;i++){
@@ -77,17 +96,17 @@ public class ItemDrainStaff extends Item {
 					if(!target.isDead)
 						if(target.attackEntityFrom(DamageSource.causePlayerDamage(player), 1))
 							increaseEnergy(stack, "Shadow");
-				} else if(world.provider.getDimensionId() == AbyssalCraft.configDimId1 && target instanceof ICoraliumEntity &&
+				} else if(world.provider.getDimensionId() == ACLib.abyssal_wasteland_id && target instanceof ICoraliumEntity &&
 						!(target instanceof IBossDisplayData)){
 					if(!target.isDead)
 						if(target.attackEntityFrom(DamageSource.causePlayerDamage(player), 1))
 							increaseEnergy(stack, "Abyssal");
-				} else if(world.provider.getDimensionId() == AbyssalCraft.configDimId2 && target instanceof IDreadEntity &&
+				} else if(world.provider.getDimensionId() == ACLib.dreadlands_id && target instanceof IDreadEntity &&
 						!(target instanceof IBossDisplayData)){
 					if(!target.isDead)
 						if(target.attackEntityFrom(DamageSource.causePlayerDamage(player), 1))
 							increaseEnergy(stack, "Dread");
-				} else if(world.provider.getDimensionId() == AbyssalCraft.configDimId3 && target instanceof ICoraliumEntity
+				} else if(world.provider.getDimensionId() == ACLib.omothol_id && target instanceof ICoraliumEntity
 						&& target instanceof IDreadEntity && target instanceof IAntiEntity &&
 						target.getCreatureAttribute() != AbyssalCraftAPI.SHADOW && !(target instanceof IBossDisplayData))
 					if(!target.isDead)
@@ -96,23 +115,6 @@ public class ItemDrainStaff extends Item {
 			}
 
 		}
-		if(getEnergy(stack, "Shadow") == 200){
-			setEnergy(0, stack, "Shadow");
-			player.inventory.addItemStackToInventory(new ItemStack(AbyssalCraft.shadowgem));
-		}
-		if(getEnergy(stack, "Abyssal") == 100){
-			setEnergy(0, stack, "Abyssal");
-			player.inventory.addItemStackToInventory(new ItemStack(AbyssalCraft.essence, 1, 0));
-		}
-		if(getEnergy(stack, "Dread") == 100){
-			setEnergy(0, stack, "Dread");
-			player.inventory.addItemStackToInventory(new ItemStack(AbyssalCraft.essence, 1, 1));
-		}
-		if(getEnergy(stack, "Omothol") == 100){
-			setEnergy(0, stack, "Omothol");
-			player.inventory.addItemStackToInventory(new ItemStack(AbyssalCraft.essence, 1, 2));
-		}
-
 
 		return stack;
 	}

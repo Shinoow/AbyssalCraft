@@ -34,6 +34,7 @@ import net.minecraft.world.World;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.api.entity.*;
+import com.shinoow.abyssalcraft.api.item.ACItems;
 
 public class EntityOmotholGhoul extends EntityMob implements IAntiEntity, ICoraliumEntity, IDreadEntity {
 
@@ -122,7 +123,7 @@ public class EntityOmotholGhoul extends EntityMob implements IAntiEntity, ICoral
 	@Override
 	protected Item getDropItem()
 	{
-		return AbyssalCraft.omotholFlesh;
+		return ACItems.omothol_flesh;
 	}
 
 	@Override

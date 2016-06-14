@@ -17,8 +17,9 @@ import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+
 import com.google.common.collect.Multimap;
-import com.shinoow.abyssalcraft.AbyssalCraft;
+import com.shinoow.abyssalcraft.lib.ACTabs;
 
 public class ItemCudgel extends Item {
 
@@ -26,10 +27,15 @@ public class ItemCudgel extends Item {
 		super();
 		setMaxDamage(2000);
 		setMaxStackSize(1);
-		//		GameRegistry.registerItem(this, "cudgel");
 		setUnlocalizedName("cudgel");
-		setCreativeTab(AbyssalCraft.tabCombat);
+		setCreativeTab(ACTabs.tabCombat);
 		setFull3D();
+	}
+
+	@Override
+	public boolean isBookEnchantable(ItemStack stack, ItemStack book)
+	{
+		return false;
 	}
 
 	@Override

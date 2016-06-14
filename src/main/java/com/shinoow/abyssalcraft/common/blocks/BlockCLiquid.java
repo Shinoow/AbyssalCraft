@@ -33,7 +33,9 @@ import net.minecraftforge.oredict.OreDictionary;
 
 import com.google.common.collect.Lists;
 import com.shinoow.abyssalcraft.AbyssalCraft;
-import com.shinoow.abyssalcraft.common.util.EntityUtil;
+import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
+import com.shinoow.abyssalcraft.api.block.ACBlocks;
+import com.shinoow.abyssalcraft.api.entity.EntityUtil;
 
 public class BlockCLiquid extends BlockFluidClassic {
 
@@ -57,7 +59,7 @@ public class BlockCLiquid extends BlockFluidClassic {
 
 	@Override
 	public boolean canDisplace(IBlockAccess world, BlockPos pos) {
-		if(world.getBlockState(pos).getBlock().getMaterial().isLiquid() && world.getBlockState(pos).getBlock() != this && world.getBlockState(pos).getBlock() != AbyssalCraft.anticwater)
+		if(world.getBlockState(pos).getBlock().getMaterial().isLiquid() && world.getBlockState(pos).getBlock() != this && world.getBlockState(pos).getBlock() != ACBlocks.liquid_antimatter)
 			return true;
 		if(world.getBlockState(pos).getBlock() == Blocks.lava)
 			return true;
@@ -73,10 +75,10 @@ public class BlockCLiquid extends BlockFluidClassic {
 		if(!world.isRemote){
 			if(!world.provider.isSurfaceWorld()){
 				if(world.getBlockState(pos).getBlock() == Blocks.water && AbyssalCraft.shouldSpread == false) return false;
-				if(world.getBlockState(pos).getBlock().getMaterial().isLiquid() && world.getBlockState(pos).getBlock() != this && world.getBlockState(pos).getBlock() != AbyssalCraft.anticwater)
+				if(world.getBlockState(pos).getBlock().getMaterial().isLiquid() && world.getBlockState(pos).getBlock() != this && world.getBlockState(pos).getBlock() != ACBlocks.liquid_antimatter)
 					world.setBlockState(pos, getDefaultState());
 				if(AbyssalCraft.breakLogic == true && world.getBlockState(new BlockPos(pos.getX(), pos.getY()+1, pos.getZ())).getBlock().getMaterial().isLiquid()
-						&& world.getBlockState(new BlockPos(pos.getX(), pos.getY()+1, pos.getZ())).getBlock() != this && world.getBlockState(new BlockPos(pos.getX(), pos.getY()+1, pos.getZ())).getBlock() != AbyssalCraft.anticwater)
+						&& world.getBlockState(new BlockPos(pos.getX(), pos.getY()+1, pos.getZ())).getBlock() != this && world.getBlockState(new BlockPos(pos.getX(), pos.getY()+1, pos.getZ())).getBlock() != ACBlocks.liquid_antimatter)
 					world.setBlockState(new BlockPos(pos.getX(), pos.getY()+1, pos.getZ()), getDefaultState());
 			} else {
 				if(BiomeDictionary.isBiomeOfType(world.getBiomeGenForCoords(pos), Type.OCEAN) && world.getBlockState(pos).getBlock() == this)
@@ -85,39 +87,39 @@ public class BlockCLiquid extends BlockFluidClassic {
 					else world.setBlockState(pos, Blocks.cobblestone.getDefaultState());
 
 				if(AbyssalCraft.shouldSpread){
-					if(world.getBlockState(pos).getBlock().getMaterial().isLiquid() && world.getBlockState(pos).getBlock() != this && world.getBlockState(pos).getBlock() != AbyssalCraft.anticwater)
+					if(world.getBlockState(pos).getBlock().getMaterial().isLiquid() && world.getBlockState(pos).getBlock() != this && world.getBlockState(pos).getBlock() != ACBlocks.liquid_antimatter)
 						world.setBlockState(pos, getDefaultState());
 					if(AbyssalCraft.breakLogic == true && world.getBlockState(new BlockPos(pos.getX(), pos.getY()+1, pos.getZ())).getBlock().getMaterial().isLiquid()
-							&& world.getBlockState(new BlockPos(pos.getX(), pos.getY()+1, pos.getZ())).getBlock() != this && world.getBlockState(new BlockPos(pos.getX(), pos.getY()+1, pos.getZ())).getBlock() != AbyssalCraft.anticwater)
+							&& world.getBlockState(new BlockPos(pos.getX(), pos.getY()+1, pos.getZ())).getBlock() != this && world.getBlockState(new BlockPos(pos.getX(), pos.getY()+1, pos.getZ())).getBlock() != ACBlocks.liquid_antimatter)
 						world.setBlockState(new BlockPos(pos.getX(), pos.getY()+1, pos.getZ()), getDefaultState());
 				}
 			}
-			if(dusts.contains(world.getBlockState(pos).getBlock()) && world.getBlockState(pos) != AbyssalCraft.AbyNitOre.getDefaultState() &&
-					world.getBlockState(pos) != AbyssalCraft.AbyCorOre)
+			if(dusts.contains(world.getBlockState(pos).getBlock()) && world.getBlockState(pos) != ACBlocks.abyssal_nitre_ore.getDefaultState() &&
+					world.getBlockState(pos) != ACBlocks.abyssal_coralium_ore.getDefaultState())
 				if(oresToBlocks(OreDictionary.getOres("oreSaltpeter")).contains(world.getBlockState(pos).getBlock()))
-					world.setBlockState(pos, AbyssalCraft.AbyNitOre.getDefaultState());
-				else world.setBlockState(pos, AbyssalCraft.AbyCorOre.getDefaultState());
+					world.setBlockState(pos, ACBlocks.abyssal_nitre_ore.getDefaultState());
+				else world.setBlockState(pos, ACBlocks.abyssal_coralium_ore.getDefaultState());
 			else if(metalloids.contains(world.getBlockState(pos).getBlock()) && !metals.contains(world.getBlockState(pos).getBlock()))
 				if(oresToBlocks(OreDictionary.getOres("oreIron")).contains(world.getBlockState(pos).getBlock()))
-					world.setBlockState(pos, AbyssalCraft.AbyIroOre.getDefaultState());
+					world.setBlockState(pos, ACBlocks.abyssal_iron_ore.getDefaultState());
 				else if(oresToBlocks(OreDictionary.getOres("oreGold")).contains(world.getBlockState(pos).getBlock()))
-					world.setBlockState(pos, AbyssalCraft.AbyGolOre.getDefaultState());
+					world.setBlockState(pos, ACBlocks.abyssal_gold_ore.getDefaultState());
 				else if(oresToBlocks(OreDictionary.getOres("oreTin")).contains(world.getBlockState(pos).getBlock()))
-					world.setBlockState(pos, AbyssalCraft.AbyTinOre.getDefaultState());
+					world.setBlockState(pos, ACBlocks.abyssal_tin_ore.getDefaultState());
 				else if(oresToBlocks(OreDictionary.getOres("oreCopper")).contains(world.getBlockState(pos).getBlock()))
-					world.setBlockState(pos, AbyssalCraft.AbyCopOre.getDefaultState());
-				else world.setBlockState(pos, AbyssalCraft.AbyLCorOre.getDefaultState());
-			else if(gems.contains(world.getBlockState(pos).getBlock()) && world.getBlockState(pos) != AbyssalCraft.AbyDiaOre.getDefaultState())
+					world.setBlockState(pos, ACBlocks.abyssal_copper_ore.getDefaultState());
+				else world.setBlockState(pos, ACBlocks.liquified_coralium_ore.getDefaultState());
+			else if(gems.contains(world.getBlockState(pos).getBlock()) && world.getBlockState(pos) != ACBlocks.abyssal_diamond_ore.getDefaultState())
 				if(oresToBlocks(OreDictionary.getOres("oreDiamond")).contains(world.getBlockState(pos).getBlock()))
-					world.setBlockState(pos, AbyssalCraft.AbyDiaOre.getDefaultState());
-				else world.setBlockState(pos, AbyssalCraft.AbyPCorOre.getDefaultState());
+					world.setBlockState(pos, ACBlocks.abyssal_diamond_ore.getDefaultState());
+				else world.setBlockState(pos, ACBlocks.pearlescent_coralium_ore.getDefaultState());
 			else if(stones.contains(world.getBlockState(pos).getBlock()))
 				if(BiomeDictionary.isBiomeOfType(world.getBiomeGenForCoords(pos), Type.OCEAN)){
 					if(world.getBlockState(pos).getBlock() != Blocks.cobblestone)
-						world.setBlockState(pos, AbyssalCraft.abystone.getDefaultState());
-				}else world.setBlockState(pos, AbyssalCraft.abystone.getDefaultState());
+						world.setBlockState(pos, ACBlocks.abyssal_stone.getDefaultState());
+				}else world.setBlockState(pos, ACBlocks.abyssal_stone.getDefaultState());
 			else if(bricks.contains(world.getBlockState(pos).getBlock()))
-				world.setBlockState(pos, AbyssalCraft.abybrick.getDefaultState());
+				world.setBlockState(pos, ACBlocks.abyssal_stone_brick.getDefaultState());
 		}
 		return super.displaceIfPossible(world, pos);
 	}
@@ -126,8 +128,8 @@ public class BlockCLiquid extends BlockFluidClassic {
 	public void onEntityCollidedWithBlock(World par1World, BlockPos pos, IBlockState state, Entity par5Entity) {
 		super.onEntityCollidedWithBlock(par1World, pos, state, par5Entity);
 
-		if(par5Entity instanceof EntityLivingBase && !EntityUtil.isEntityCoralium((EntityLivingBase)par5Entity) && ((EntityLivingBase)par5Entity).getActivePotionEffect(AbyssalCraft.Cplague) == null)
-			((EntityLivingBase)par5Entity).addPotionEffect(new PotionEffect(AbyssalCraft.Cplague.id, 200));
+		if(par5Entity instanceof EntityLivingBase && !EntityUtil.isEntityCoralium((EntityLivingBase)par5Entity) && ((EntityLivingBase)par5Entity).getActivePotionEffect(AbyssalCraftAPI.coralium_plague) == null)
+			((EntityLivingBase)par5Entity).addPotionEffect(new PotionEffect(AbyssalCraftAPI.coralium_plague.id, 200));
 	}
 
 	private List<Block> oresToBlocks(List<ItemStack> list){
@@ -146,7 +148,7 @@ public class BlockCLiquid extends BlockFluidClassic {
 		dusts.addAll(oresToBlocks(OreDictionary.getOres("oreLapis")));
 		dusts.addAll(oresToBlocks(OreDictionary.getOres("oreRedstone")));
 		dusts.addAll(oresToBlocks(OreDictionary.getOres("oreCoal")));
-		dusts.add(AbyssalCraft.Coraliumore);
+		dusts.addAll(oresToBlocks(OreDictionary.getOres("oreCoralium")));
 		metalloids.addAll(oresToBlocks(OreDictionary.getOres("oreIron")));
 		metalloids.addAll(oresToBlocks(OreDictionary.getOres("oreGold")));
 		metalloids.addAll(oresToBlocks(OreDictionary.getOres("oreAbyssalnite")));
@@ -177,19 +179,19 @@ public class BlockCLiquid extends BlockFluidClassic {
 		stones.add(Blocks.mossy_cobblestone);
 		stones.add(Blocks.netherrack);
 		stones.add(Blocks.end_stone);
-		stones.add(AbyssalCraft.Darkstone);
-		stones.add(AbyssalCraft.abydreadstone);
-		stones.add(AbyssalCraft.dreadstone);
-		stones.add(AbyssalCraft.Darkstone_cobble);
+		stones.add(ACBlocks.darkstone);
+		stones.add(ACBlocks.abyssalnite_stone);
+		stones.add(ACBlocks.dreadstone);
+		stones.add(ACBlocks.darkstone_cobblestone);
 		bricks.add(Blocks.stonebrick);
 		bricks.add(Blocks.nether_brick);
-		bricks.add(AbyssalCraft.Darkstone_brick);
-		bricks.add(AbyssalCraft.abydreadbrick);
-		bricks.add(AbyssalCraft.dreadbrick);
-		metals.add(AbyssalCraft.AbyIroOre);
-		metals.add(AbyssalCraft.AbyGolOre);
-		metals.add(AbyssalCraft.AbyCopOre);
-		metals.add(AbyssalCraft.AbyTinOre);
-		metals.add(AbyssalCraft.AbyLCorOre);
+		bricks.add(ACBlocks.darkstone_brick);
+		bricks.add(ACBlocks.abyssalnite_stone_brick);
+		bricks.add(ACBlocks.dreadstone_brick);
+		metals.add(ACBlocks.abyssal_iron_ore);
+		metals.add(ACBlocks.abyssal_gold_ore);
+		metals.add(ACBlocks.abyssal_copper_ore);
+		metals.add(ACBlocks.abyssal_tin_ore);
+		metals.add(ACBlocks.liquified_coralium_ore);
 	}
 }

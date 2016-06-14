@@ -24,19 +24,11 @@ import com.shinoow.abyssalcraft.common.entity.anti.EntityAntiAbyssalZombie;
 @SideOnly(Side.CLIENT)
 public class RenderAntiAbyssalZombie extends RenderBiped {
 
-	protected ModelBiped model;
+	private static final ResourceLocation zombieTexture = new ResourceLocation("abyssalcraft:textures/model/anti/abyssal_zombie.png");
 
 	public RenderAntiAbyssalZombie(RenderManager manager)
 	{
 		super(manager, new ModelBiped(), 0.5F);
-		model = (ModelBiped)mainModel;
-	}
-
-	private static final ResourceLocation zombieTexture = new ResourceLocation("abyssalcraft:textures/model/anti/abyssal_zombie.png");
-
-	public void doRender(EntityAntiAbyssalZombie entity, double par2, double par4, double par6, float par8, float par9)
-	{
-		super.doRender(entity, par2, par4, par6, par8, par9);
 	}
 
 	protected ResourceLocation getZombieTexture(EntityAntiAbyssalZombie par1EntityLiving)

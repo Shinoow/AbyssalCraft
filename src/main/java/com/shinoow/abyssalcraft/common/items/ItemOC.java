@@ -13,7 +13,7 @@ package com.shinoow.abyssalcraft.common.items;
 
 import java.util.List;
 
-import com.shinoow.abyssalcraft.AbyssalCraft;
+import com.shinoow.abyssalcraft.lib.ACTabs;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
@@ -30,15 +30,14 @@ public class ItemOC extends Item {
 
 	public ItemOC() {
 		super();
-		//		GameRegistry.registerItem(this, "oc");
 		setUnlocalizedName("oc");
-		setCreativeTab(AbyssalCraft.tabItems);
+		setCreativeTab(ACTabs.tabItems);
 	}
 
 	@Override
 	public String getItemStackDisplayName(ItemStack par1ItemStack) {
 
-		return EnumChatFormatting.DARK_RED + StatCollector.translateToLocal(this.getUnlocalizedName() + ".name");
+		return EnumChatFormatting.DARK_RED + super.getItemStackDisplayName(par1ItemStack);
 	}
 
 	@Override
@@ -54,7 +53,6 @@ public class ItemOC extends Item {
 		par3EntityPlayer.addPotionEffect(new PotionEffect(Potion.waterBreathing.id, 6000, 6));
 		par3EntityPlayer.addPotionEffect(new PotionEffect(Potion.jump.id, 6000, 6));
 		par3EntityPlayer.addPotionEffect(new PotionEffect(Potion.digSpeed.id, 6000, 6));
-		par3EntityPlayer.addPotionEffect(new PotionEffect(Potion.fireResistance.id, 6000, 6));
 
 		par1ItemStack.stackSize--;
 		return par1ItemStack;

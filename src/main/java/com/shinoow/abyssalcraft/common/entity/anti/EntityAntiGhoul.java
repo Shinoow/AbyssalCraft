@@ -35,7 +35,9 @@ import net.minecraft.world.World;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
+import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.api.entity.IAntiEntity;
+import com.shinoow.abyssalcraft.api.item.ACItems;
 import com.shinoow.abyssalcraft.common.entity.EntityDepthsGhoul;
 import com.shinoow.abyssalcraft.common.entity.EntityOmotholGhoul;
 
@@ -63,7 +65,7 @@ public class EntityAntiGhoul extends EntityMob implements IAntiEntity {
 	protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
 
-		getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(64.0D);
+		getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(42.0D);
 		getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setBaseValue(0.3D);
 		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.23000000417232513D);
 
@@ -106,7 +108,7 @@ public class EntityAntiGhoul extends EntityMob implements IAntiEntity {
 	@Override
 	protected Item getDropItem()
 	{
-		return AbyssalCraft.antiCorbone;
+		return ACItems.anti_plagued_flesh_on_a_bone;
 	}
 
 	@Override
@@ -127,7 +129,7 @@ public class EntityAntiGhoul extends EntityMob implements IAntiEntity {
 			dropItem(Items.writable_book, 1);
 			break;
 		case 2:
-			dropItem(Item.getItemFromBlock(AbyssalCraft.DGhead), 1);
+			dropItem(Item.getItemFromBlock(ACBlocks.depths_ghoul_head), 1);
 			break;
 		}
 	}

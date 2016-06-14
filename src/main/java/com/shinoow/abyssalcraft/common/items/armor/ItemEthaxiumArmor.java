@@ -18,44 +18,38 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.EnumChatFormatting;
-import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
-import com.shinoow.abyssalcraft.AbyssalCraft;
+
+import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
+import com.shinoow.abyssalcraft.api.item.ACItems;
+import com.shinoow.abyssalcraft.lib.ACTabs;
 
 public class ItemEthaxiumArmor extends ItemArmor {
 	public ItemEthaxiumArmor(ArmorMaterial par2EnumArmorMaterial, int par3, int par4, String name){
 		super(par2EnumArmorMaterial, par3, par4);
-		//		GameRegistry.registerItem(this, name);
 		setUnlocalizedName(name);
-		setCreativeTab(AbyssalCraft.tabCombat);
+		setCreativeTab(ACTabs.tabCombat);
 	}
 
 	@Override
 	public String getItemStackDisplayName(ItemStack par1ItemStack) {
 
-		return EnumChatFormatting.AQUA + StatCollector.translateToLocal(this.getUnlocalizedName() + ".name");
+		return EnumChatFormatting.AQUA + super.getItemStackDisplayName(par1ItemStack);
 	}
 
 	@Override
 	public String getArmorTexture(ItemStack stack, Entity entity, int slot, String layer) {
-		if(stack.getItem() == AbyssalCraft.ethHelmet || stack.getItem() == AbyssalCraft.ethPlate || stack.getItem() == AbyssalCraft.ethBoots)
+		if(stack.getItem() == ACItems.ethaxium_helmet || stack.getItem() == ACItems.ethaxium_chestplate || stack.getItem() == ACItems.ethaxium_boots)
 			return "abyssalcraft:textures/armor/ethaxium_1.png";
 
-		if(stack.getItem() == AbyssalCraft.ethLegs)
+		if(stack.getItem() == ACItems.ethaxium_leggings)
 			return "abyssalcraft:textures/armor/ethaxium_2.png";
 		else return null;
 	}
 
-	//	@Override
-	//	@SideOnly(Side.CLIENT)
-	//	public void registerIcons(IIconRegister par1IconRegister)
-	//	{
-	//		itemIcon = par1IconRegister.registerIcon(AbyssalCraft.modid + ":" + this.getUnlocalizedName().substring(5));
-	//	}
-
 	@Override
 	public void onArmorTick(World world, EntityPlayer player, ItemStack itemstack) {
-		if (itemstack.getItem() == AbyssalCraft.ethHelmet) {
+		if (itemstack.getItem() == ACItems.ethaxium_helmet) {
 			if(world.provider.isSurfaceWorld() && !world.provider.isDaytime())
 				player.addPotionEffect(new PotionEffect(Potion.nightVision.getId(), 260, 0));
 			if(player.getActivePotionEffect(Potion.hunger) !=null)
@@ -65,18 +59,18 @@ public class ItemEthaxiumArmor extends ItemArmor {
 			if(world.rand.nextInt(300) == 0)
 				player.addPotionEffect(new PotionEffect(Potion.saturation.getId(), 60, 0));
 		}
-		if(itemstack.getItem() == AbyssalCraft.ethPlate){
+		if(itemstack.getItem() == ACItems.ethaxium_chestplate){
 			if(player.isBurning() || world.provider.doesWaterVaporize())
 				player.addPotionEffect(new PotionEffect(Potion.fireResistance.id, 20, 2));
-			if(player.getActivePotionEffect(AbyssalCraft.antiMatter) !=null)
-				player.removePotionEffect(AbyssalCraft.antiMatter.getId());
+			if(player.getActivePotionEffect(AbyssalCraftAPI.antimatter_potion) !=null)
+				player.removePotionEffect(AbyssalCraftAPI.antimatter_potion.getId());
 			if(world.rand.nextInt(200) == 0)
 				player.addPotionEffect(new PotionEffect(Potion.damageBoost.id, 60));
 		}
-		if(itemstack.getItem() == AbyssalCraft.ethLegs)
+		if(itemstack.getItem() == ACItems.ethaxium_leggings)
 			if(world.rand.nextInt(200) == 0)
 				player.addPotionEffect(new PotionEffect(Potion.regeneration.id, 60));
-		if(itemstack.getItem() == AbyssalCraft.ethBoots)
+		if(itemstack.getItem() == ACItems.ethaxium_boots)
 			if(player.isInWater()){
 				player.addPotionEffect(new PotionEffect(Potion.moveSpeed.id, 20, 2));
 				player.addPotionEffect(new PotionEffect(Potion.waterBreathing.id, 20, 1));

@@ -37,8 +37,9 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
-import com.shinoow.abyssalcraft.client.lib.ParticleEffects;
+import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.common.blocks.tile.TileEntityTransmutator;
+import com.shinoow.abyssalcraft.lib.ACTabs;
 
 public class BlockTransmutator extends BlockContainer {
 
@@ -53,13 +54,13 @@ public class BlockTransmutator extends BlockContainer {
 		setDefaultState(blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH));
 		isLit = par1;
 		if(!isLit)
-			setCreativeTab(AbyssalCraft.tabDecoration);
+			setCreativeTab(ACTabs.tabDecoration);
 	}
 
 	@Override
 	public Item getItemDropped(IBlockState state, Random par1Random, int par3)
 	{
-		return Item.getItemFromBlock(AbyssalCraft.transmutator);
+		return Item.getItemFromBlock(ACBlocks.transmutator_idle);
 	}
 
 	@Override
@@ -104,9 +105,9 @@ public class BlockTransmutator extends BlockContainer {
 		keepInventory = true;
 
 		if (par0)
-			par1World.setBlockState(pos, AbyssalCraft.transmutator_on.getDefaultState().withProperty(FACING, state.getValue(FACING)), 3);
+			par1World.setBlockState(pos, ACBlocks.transmutator_active.getDefaultState().withProperty(FACING, state.getValue(FACING)), 3);
 		else
-			par1World.setBlockState(pos, AbyssalCraft.transmutator.getDefaultState().withProperty(FACING, state.getValue(FACING)), 3);
+			par1World.setBlockState(pos, ACBlocks.transmutator_idle.getDefaultState().withProperty(FACING, state.getValue(FACING)), 3);
 
 		keepInventory = false;
 
@@ -194,19 +195,19 @@ public class BlockTransmutator extends BlockContainer {
 			{
 			case WEST:
 				world.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, d0 - d3, d1, d2 + d4, 0.0D, 0.0D, 0.0D, new int[0]);
-				ParticleEffects.spawnParticle("CorBlood", d0 - d3, d1, d2 + d4, 0.0D, 0.0D, 0.0D);
+				AbyssalCraft.proxy.spawnParticle("CorBlood", d0 - d3, d1, d2 + d4, 0.0D, 0.0D, 0.0D);
 				break;
 			case EAST:
 				world.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, d0 + d3, d1, d2 + d4, 0.0D, 0.0D, 0.0D, new int[0]);
-				ParticleEffects.spawnParticle("CorBlood", d0 + d3, d1, d2 + d4, 0.0D, 0.0D, 0.0D);
+				AbyssalCraft.proxy.spawnParticle("CorBlood", d0 + d3, d1, d2 + d4, 0.0D, 0.0D, 0.0D);
 				break;
 			case NORTH:
 				world.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, d0 + d4, d1, d2 - d3, 0.0D, 0.0D, 0.0D, new int[0]);
-				ParticleEffects.spawnParticle("CorBlood", d0 + d4, d1, d2 - d3, 0.0D, 0.0D, 0.0D);
+				AbyssalCraft.proxy.spawnParticle("CorBlood", d0 + d4, d1, d2 - d3, 0.0D, 0.0D, 0.0D);
 				break;
 			case SOUTH:
 				world.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, d0 + d4, d1, d2 + d3, 0.0D, 0.0D, 0.0D, new int[0]);
-				ParticleEffects.spawnParticle("CorBlood", d0 + d4, d1, d2 + d3, 0.0D, 0.0D, 0.0D);
+				AbyssalCraft.proxy.spawnParticle("CorBlood", d0 + d4, d1, d2 + d3, 0.0D, 0.0D, 0.0D);
 			default:
 				break;
 			}
@@ -229,7 +230,7 @@ public class BlockTransmutator extends BlockContainer {
 	@SideOnly(Side.CLIENT)
 	public Item getItem(World par1World, BlockPos pos)
 	{
-		return Item.getItemFromBlock(AbyssalCraft.transmutator);
+		return Item.getItemFromBlock(ACBlocks.transmutator_idle);
 	}
 
 	@Override

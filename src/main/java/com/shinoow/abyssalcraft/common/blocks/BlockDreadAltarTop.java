@@ -13,14 +13,13 @@ package com.shinoow.abyssalcraft.common.blocks;
 
 import java.util.Random;
 
-import net.minecraft.block.BlockContainer;
+import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.potion.PotionEffect;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.EnumFacing;
@@ -29,13 +28,15 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.client.FMLClientHandler;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
+import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
 import com.shinoow.abyssalcraft.api.biome.ACBiomes;
+import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.api.entity.IDreadEntity;
-import com.shinoow.abyssalcraft.common.blocks.tile.TileEntityDreadAltarTop;
 import com.shinoow.abyssalcraft.common.structures.dreadlands.chagarothlair;
-import com.shinoow.abyssalcraft.common.util.SpecialTextUtil;
+import com.shinoow.abyssalcraft.lib.ACLib;
+import com.shinoow.abyssalcraft.lib.util.SpecialTextUtil;
 
-public class BlockDreadAltarTop extends BlockContainer {
+public class BlockDreadAltarTop extends Block {
 
 	Random rand;
 
@@ -43,12 +44,6 @@ public class BlockDreadAltarTop extends BlockContainer {
 		super(Material.rock);
 		setHarvestLevel("pickaxe", 6);
 		setBlockBounds(0.2F, 0.0F, 0.2F, 0.8F, 0.7F, 0.8F);
-	}
-
-	@Override
-	public TileEntity createNewTileEntity(World var1, int var2) {
-
-		return new TileEntityDreadAltarTop();
 	}
 
 	@Override
@@ -63,17 +58,12 @@ public class BlockDreadAltarTop extends BlockContainer {
 	}
 
 	@Override
-	public int getRenderType() {
-		return 2;
-	}
-
-	@Override
 	public IBlockState onBlockPlaced(World world, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer){
 		super.onBlockPlaced(world, pos, facing, hitX, hitY, hitZ, meta, placer);
 		if(world.isRemote)
-			if(world.provider.getDimensionId() == AbyssalCraft.configDimId2){
+			if(world.provider.getDimensionId() == ACLib.dreadlands_id){
 				if(world.getBiomeGenForCoords(pos) == ACBiomes.dreadlands_mountains){
-					if(world.getBlockState(pos.down()).getBlock() == AbyssalCraft.dreadaltarbottom)
+					if(world.getBlockState(pos.down()).getBlock() == ACBlocks.chagaroth_altar_bottom)
 						if(pos.getY() == 41)
 							FMLClientHandler.instance().getClient().ingameGUI.getChatGUI().printChatMessage(new ChatComponentText(StatCollector.translateToLocal("message.dreadaltartop.enter")));
 						else if(pos.getY() < 41)
@@ -89,12 +79,11 @@ public class BlockDreadAltarTop extends BlockContainer {
 
 	@Override
 	public boolean onBlockActivated(World par1World, BlockPos pos, IBlockState state, EntityPlayer par5EntityPlayer, EnumFacing side, float par7, float par8, float par9) {
-		if(par1World.provider.getDimensionId() == AbyssalCraft.configDimId2){
+		if(par1World.provider.getDimensionId() == ACLib.dreadlands_id){
 			if(par1World.getBiomeGenForCoords(pos) == ACBiomes.dreadlands_mountains){
-				if(par1World.getBlockState(pos.down()).getBlock() == AbyssalCraft.dreadaltarbottom && pos.getY() == 41){
-					if(par1World.isRemote)
-						SpecialTextUtil.ChagarothGroup(par1World, StatCollector.translateToLocal("message.dreadaltartop.spawn"));
+				if(par1World.getBlockState(pos.down()).getBlock() == ACBlocks.chagaroth_altar_bottom && pos.getY() == 41)
 					if(!par1World.isRemote){
+						SpecialTextUtil.ChagarothGroup(par1World, StatCollector.translateToLocal("message.dreadaltartop.spawn"));
 						par5EntityPlayer.addStat(AbyssalCraft.summonChagaroth, 1);
 						chagarothlair lair = new chagarothlair();
 						lair.generate(par1World, rand, pos.down(2));
@@ -102,7 +91,6 @@ public class BlockDreadAltarTop extends BlockContainer {
 						par1World.setBlockToAir(pos.down());
 						par1World.setBlockToAir(pos);
 					}
-				}
 			} else if(par1World.isRemote)
 				FMLClientHandler.instance().getClient().ingameGUI.getChatGUI().printChatMessage(new ChatComponentText(StatCollector.translateToLocal("message.dreadaltar.error.2")));
 		} else if(par1World.isRemote)
@@ -116,6 +104,6 @@ public class BlockDreadAltarTop extends BlockContainer {
 
 		if(par5Entity instanceof IDreadEntity){}
 		else if(par5Entity instanceof EntityLivingBase)
-			((EntityLivingBase)par5Entity).addPotionEffect(new PotionEffect(AbyssalCraft.Dplague.id, 100));
+			((EntityLivingBase)par5Entity).addPotionEffect(new PotionEffect(AbyssalCraftAPI.dread_plague.id, 100));
 	}
 }

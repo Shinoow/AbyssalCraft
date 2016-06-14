@@ -13,6 +13,7 @@ package com.shinoow.abyssalcraft.common.items;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockDirt;
+import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
@@ -21,9 +22,9 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.EnumFacing;
-import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
-import com.shinoow.abyssalcraft.AbyssalCraft;
+
+import com.shinoow.abyssalcraft.lib.ACTabs;
 
 public class ItemACHoe extends ItemHoe {
 
@@ -35,17 +36,15 @@ public class ItemACHoe extends ItemHoe {
 
 	public ItemACHoe(ToolMaterial mat, String name, EnumChatFormatting format) {
 		super(mat);
-		setCreativeTab(AbyssalCraft.tabTools);
-		//		GameRegistry.registerItem(this, name);
+		setCreativeTab(ACTabs.tabTools);
 		setUnlocalizedName(name);
-		//		setTextureName(AbyssalCraft.modid + ":" + name);
 		this.format = format;
 	}
 
 	@Override
 	public String getItemStackDisplayName(ItemStack par1ItemStack) {
 
-		return format != null ? format + StatCollector.translateToLocal(this.getUnlocalizedName() + ".name") : super.getItemStackDisplayName(par1ItemStack);
+		return format != null ? format + super.getItemStackDisplayName(par1ItemStack) : super.getItemStackDisplayName(par1ItemStack);
 	}
 
 	@Override
@@ -64,7 +63,7 @@ public class ItemACHoe extends ItemHoe {
 
 			if (side != EnumFacing.DOWN && worldIn.isAirBlock(pos.up()))
 			{
-				if (block == Blocks.grass || block == AbyssalCraft.Darkgrass || block == AbyssalCraft.dreadgrass)
+				if (block.getMaterial() == Material.grass)
 					return useHoe(stack, playerIn, worldIn, pos, Blocks.farmland.getDefaultState());
 
 				if (block == Blocks.dirt)

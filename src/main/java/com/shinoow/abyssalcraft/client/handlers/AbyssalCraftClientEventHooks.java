@@ -18,14 +18,14 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.MovingObjectPosition.MovingObjectType;
 import net.minecraft.world.World;
 import net.minecraftforge.client.event.FOVUpdateEvent;
-import net.minecraftforge.client.event.ModelBakeEvent;
 import net.minecraftforge.client.event.MouseEvent;
 import net.minecraftforge.fml.common.eventhandler.Event;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 import org.lwjgl.input.Mouse;
 
-import com.shinoow.abyssalcraft.AbyssalCraft;
+import com.shinoow.abyssalcraft.api.block.ACBlocks;
+import com.shinoow.abyssalcraft.api.item.ACItems;
 import com.shinoow.abyssalcraft.common.network.PacketDispatcher;
 import com.shinoow.abyssalcraft.common.network.server.FireMessage;
 
@@ -35,7 +35,7 @@ public class AbyssalCraftClientEventHooks {
 	public void onUpdateFOV(FOVUpdateEvent event) {
 		float fov = event.fov;
 
-		if( event.entity.isUsingItem() && event.entity.getItemInUse().getItem() == AbyssalCraft.corbow) {
+		if( event.entity.isUsingItem() && event.entity.getItemInUse() != null && event.entity.getItemInUse().getItem() == ACItems.coralium_longbow) {
 			int duration = event.entity.getItemInUseDuration();
 			float multiplier = duration / 20.0F;
 
@@ -48,14 +48,6 @@ public class AbyssalCraftClientEventHooks {
 		}
 
 		event.newfov = fov;
-	}
-
-	@SubscribeEvent
-	public void onModelBakeEvent(ModelBakeEvent event)
-	{
-		event.modelManager.getBlockModelShapes().registerBuiltInBlocks(AbyssalCraft.dreadaltarbottom, AbyssalCraft.dreadaltartop, AbyssalCraft.ODB,
-				AbyssalCraft.engraver, AbyssalCraft.cthulhuStatue, AbyssalCraft.hasturStatue, AbyssalCraft.jzaharStatue, AbyssalCraft.azathothStatue,
-				AbyssalCraft.nyarlathotepStatue, AbyssalCraft.yogsothothStatue, AbyssalCraft.shubniggurathStatue);
 	}
 
 	@SubscribeEvent
@@ -79,10 +71,10 @@ public class AbyssalCraftClientEventHooks {
 	private void extinguishFire(EntityPlayer player, BlockPos posIn, EnumFacing face, World world, Event event) {
 		BlockPos pos = posIn.offset(face);
 
-		if (world.getBlockState(pos).getBlock() == AbyssalCraft.mimicFire ||
-				world.getBlockState(pos).getBlock() == AbyssalCraft.Coraliumfire ||
-				world.getBlockState(pos).getBlock() == AbyssalCraft.dreadfire ||
-				world.getBlockState(pos).getBlock() == AbyssalCraft.omotholfire)
+		if (world.getBlockState(pos).getBlock() == ACBlocks.mimic_fire ||
+				world.getBlockState(pos).getBlock() == ACBlocks.coralium_fire ||
+				world.getBlockState(pos).getBlock() == ACBlocks.dreaded_fire ||
+				world.getBlockState(pos).getBlock() == ACBlocks.omothol_fire)
 			if (event instanceof MouseEvent) {
 				PacketDispatcher.sendToServer(new FireMessage(pos));
 				event.setCanceled(true);

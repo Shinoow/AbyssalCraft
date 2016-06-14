@@ -38,7 +38,9 @@ import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.World;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
+import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
 import com.shinoow.abyssalcraft.api.entity.IDreadEntity;
+import com.shinoow.abyssalcraft.api.item.ACItems;
 
 public class EntityDreadguard extends EntityMob implements IDreadEntity {
 
@@ -96,7 +98,7 @@ public class EntityDreadguard extends EntityMob implements IDreadEntity {
 
 		if (super.attackEntityAsMob(par1Entity))
 			if (par1Entity instanceof EntityLivingBase)
-				((EntityLivingBase)par1Entity).addPotionEffect(new PotionEffect(AbyssalCraft.Dplague.id, 100));
+				((EntityLivingBase)par1Entity).addPotionEffect(new PotionEffect(AbyssalCraftAPI.dread_plague.id, 100));
 		return super.attackEntityAsMob(par1Entity);
 	}
 
@@ -143,17 +145,17 @@ public class EntityDreadguard extends EntityMob implements IDreadEntity {
 	@Override
 	protected Item getDropItem()
 	{
-		return AbyssalCraft.Dreadshard;
+		return ACItems.dreaded_shard_of_abyssalnite;
 	}
 
 	@Override
 	public void onLivingUpdate()
 	{
 		if (worldObj.isRemote){
-			setCurrentItemOrArmor(1, new ItemStack(AbyssalCraft.bootsD));
-			setCurrentItemOrArmor(3, new ItemStack(AbyssalCraft.plateD));
-			setCurrentItemOrArmor(4, new ItemStack(AbyssalCraft.helmetD));
-			setCurrentItemOrArmor(2, new ItemStack(AbyssalCraft.legsD));
+			setCurrentItemOrArmor(1, new ItemStack(ACItems.dreaded_abyssalnite_boots));
+			setCurrentItemOrArmor(3, new ItemStack(ACItems.dreaded_abyssalnite_chestplate));
+			setCurrentItemOrArmor(4, new ItemStack(ACItems.dreaded_abyssalnite_helmet));
+			setCurrentItemOrArmor(2, new ItemStack(ACItems.dreaded_abyssalnite_leggings));
 		}
 		super.onLivingUpdate();
 	}

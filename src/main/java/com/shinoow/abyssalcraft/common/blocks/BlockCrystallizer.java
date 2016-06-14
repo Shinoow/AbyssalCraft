@@ -37,7 +37,9 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
+import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.common.blocks.tile.TileEntityCrystallizer;
+import com.shinoow.abyssalcraft.lib.ACTabs;
 
 public class BlockCrystallizer extends BlockContainer
 {
@@ -53,13 +55,13 @@ public class BlockCrystallizer extends BlockContainer
 		setDefaultState(blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH));
 		isLit = par1;
 		if(!isLit)
-			setCreativeTab(AbyssalCraft.tabDecoration);
+			setCreativeTab(ACTabs.tabDecoration);
 	}
 
 	@Override
 	public Item getItemDropped(IBlockState state, Random par1Random, int par3)
 	{
-		return Item.getItemFromBlock(AbyssalCraft.crystallizer);
+		return Item.getItemFromBlock(ACBlocks.crystallizer_idle);
 	}
 
 	@Override
@@ -108,9 +110,9 @@ public class BlockCrystallizer extends BlockContainer
 		keepInventory = true;
 
 		if (par0)
-			par1World.setBlockState(pos, AbyssalCraft.crystallizer_on.getDefaultState().withProperty(FACING, state.getValue(FACING)), 3);
+			par1World.setBlockState(pos, ACBlocks.crystallizer_active.getDefaultState().withProperty(FACING, state.getValue(FACING)), 3);
 		else
-			par1World.setBlockState(pos, AbyssalCraft.crystallizer.getDefaultState().withProperty(FACING, state.getValue(FACING)), 3);
+			par1World.setBlockState(pos, ACBlocks.crystallizer_idle.getDefaultState().withProperty(FACING, state.getValue(FACING)), 3);
 
 		keepInventory = false;
 
@@ -252,7 +254,7 @@ public class BlockCrystallizer extends BlockContainer
 	@SideOnly(Side.CLIENT)
 	public Item getItem(World par1World, BlockPos pos)
 	{
-		return Item.getItemFromBlock(AbyssalCraft.crystallizer);
+		return Item.getItemFromBlock(ACBlocks.crystallizer_idle);
 	}
 
 	@Override

@@ -26,20 +26,20 @@ import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.renderer.entity.RenderItem;
 import net.minecraft.client.resources.I18n;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.StatCollector;
 import net.minecraftforge.oredict.OreDictionary;
 
-import com.shinoow.abyssalcraft.AbyssalCraft;
+import com.shinoow.abyssalcraft.api.block.ACBlocks;
+import com.shinoow.abyssalcraft.api.item.ACItems;
 import com.shinoow.abyssalcraft.api.recipe.CrystallizerRecipes;
 import com.shinoow.abyssalcraft.api.recipe.TransmutatorRecipes;
 import com.shinoow.abyssalcraft.client.gui.necronomicon.buttons.ButtonCategory;
 import com.shinoow.abyssalcraft.client.gui.necronomicon.buttons.ButtonNextPage;
 import com.shinoow.abyssalcraft.client.lib.GuiRenderHelper;
-import com.shinoow.abyssalcraft.client.lib.NecronomiconResources;
-import com.shinoow.abyssalcraft.client.lib.NecronomiconText;
+import com.shinoow.abyssalcraft.lib.NecronomiconResources;
+import com.shinoow.abyssalcraft.lib.NecronomiconText;
 
 public class GuiNecronomiconMachines extends GuiNecronomicon {
 
@@ -66,30 +66,11 @@ public class GuiNecronomiconMachines extends GuiNecronomicon {
 		byte b0 = 2;
 		buttonList.add(buttonNextPage = new ButtonNextPage(1, i + 220, b0 + 154, true));
 		buttonList.add(buttonPreviousPage = new ButtonNextPage(2, i + 18, b0 + 154, false));
-		buttonList.add(info = new ButtonCategory(3, i + 14, b0 + 24, this, NecronomiconText.LABEL_INFO, AbyssalCraft.necronomicon));
+		buttonList.add(info = new ButtonCategory(3, i + 14, b0 + 24, this, NecronomiconText.LABEL_INFO, ACItems.necronomicon));
 		buttonList.add(transmutator = new ButtonCategory(4, i + 14, b0 + 41, this, StatCollector.translateToLocal("container.abyssalcraft.transmutator"), getItem(1)));
 		buttonList.add(crystallizer = new ButtonCategory(5, i + 14, b0 + 58, this, StatCollector.translateToLocal("container.abyssalcraft.crystallizer"), getItem(2)));
 		//	buttonList.add(engraver = new ButtonCategory(6, i + 14, b0 + 75, this, StatCollector.translateToLocal("container.abyssalcraft.engraver"), getItem(3)));
 		//	buttonList.add(materializer = new ButtonCategory(7, i + 14, b0 + 92, this, StatCollector.translateToLocal("container.abyssalcraft.materializer"), getItem(3)));
-	}
-
-	private Item getItem(int par1){
-		if(par1 > getBookType())
-			return AbyssalCraft.OC;
-		switch(par1){
-		case 0:
-			return AbyssalCraft.necronomicon;
-		case 1:
-			return AbyssalCraft.necronomicon_cor;
-		case 2:
-			return AbyssalCraft.necronomicon_dre;
-		case 3:
-			return AbyssalCraft.necronomicon_omt;
-		case 4:
-			return AbyssalCraft.abyssalnomicon;
-		default:
-			return AbyssalCraft.necronomicon;
-		}
 	}
 
 	private void updateButtons()
@@ -225,16 +206,16 @@ public class GuiNecronomiconMachines extends GuiNecronomicon {
 			setTurnupLimit(4);
 			if(currTurnup == 0){
 				writeText(1, NecronomiconText.MACHINE_INFO_1, 50);
-				renderItem(k + 60, b0 + 28, new ItemStack(AbyssalCraft.transmutator), x, y);
+				renderItem(k + 60, b0 + 28, new ItemStack(ACBlocks.transmutator_idle), x, y);
 			} else if(currTurnup == 1){
 				writeText(1, NecronomiconText.MACHINE_INFO_2, 50);
-				renderItem(k + 60, b0 + 28, new ItemStack(AbyssalCraft.crystallizer), x, y);
+				renderItem(k + 60, b0 + 28, new ItemStack(ACBlocks.crystallizer_idle), x, y);
 			} else if(currTurnup == 2){
 				writeText(1, NecronomiconText.MACHINE_INFO_3, 50);
-				renderItem(k + 60, b0 + 28, new ItemStack(AbyssalCraft.engraver), x, y);
+				renderItem(k + 60, b0 + 28, new ItemStack(ACBlocks.engraver), x, y);
 			} else if(currTurnup == 3){
 				writeText(1, NecronomiconText.MACHINE_INFO_4, 50);
-				renderItem(k + 60, b0 + 28, new ItemStack(AbyssalCraft.materializer), x, y);
+				renderItem(k + 60, b0 + 28, new ItemStack(ACBlocks.materializer), x, y);
 			}
 		}
 		if(isTra){

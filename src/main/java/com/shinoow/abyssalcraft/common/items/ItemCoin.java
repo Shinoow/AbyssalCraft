@@ -15,13 +15,13 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import com.shinoow.abyssalcraft.AbyssalCraft;
+import com.shinoow.abyssalcraft.lib.ACTabs;
 
 public class ItemCoin extends ItemACBasic {
 
 	public ItemCoin(String par1) {
 		super(par1);
-		setCreativeTab(AbyssalCraft.tabCoins);
+		setCreativeTab(ACTabs.tabCoins);
 	}
 
 	@Override

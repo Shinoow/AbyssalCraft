@@ -28,6 +28,7 @@ import net.minecraft.world.World;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.common.blocks.tile.TileEntitySacrificialAltar;
+import com.shinoow.abyssalcraft.lib.ACTabs;
 
 public class BlockSacrificialAltar extends BlockContainer {
 
@@ -38,8 +39,7 @@ public class BlockSacrificialAltar extends BlockContainer {
 		setUnlocalizedName("sacrificialaltar");
 		setStepSound(Block.soundTypeStone);
 		setBlockBounds(0.15F, 0.0F, 0.15F, 0.85F, 1.0F, 0.85F);
-		setCreativeTab(AbyssalCraft.tabDecoration);
-		//		setLightLevel(0.375F);
+		setCreativeTab(ACTabs.tabDecoration);
 	}
 
 	@Override

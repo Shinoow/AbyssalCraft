@@ -21,8 +21,9 @@ import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.api.biome.ACBiomes;
+import com.shinoow.abyssalcraft.api.block.ACBlocks;
+import com.shinoow.abyssalcraft.lib.ACLib;
 
 public class WorldProviderOmothol extends WorldProvider {
 
@@ -30,7 +31,7 @@ public class WorldProviderOmothol extends WorldProvider {
 	public void registerWorldChunkManager()
 	{
 		worldChunkMgr = new WorldChunkManagerHell(ACBiomes.omothol, 0.0F);
-		dimensionId = AbyssalCraft.configDimId3;
+		dimensionId = ACLib.omothol_id;
 		hasNoSky = true;
 	}
 
@@ -125,7 +126,7 @@ public class WorldProviderOmothol extends WorldProvider {
 	@Override
 	public boolean canCoordinateBeSpawn(int x, int z)
 	{
-		return worldObj.getGroundAboveSeaLevel(new BlockPos(x, 0, z)) == AbyssalCraft.omotholstone;
+		return worldObj.getGroundAboveSeaLevel(new BlockPos(x, 0, z)) == ACBlocks.omothol_stone;
 	}
 
 	@Override

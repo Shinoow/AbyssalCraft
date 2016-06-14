@@ -11,13 +11,13 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.api;
 
-import java.lang.reflect.Field;
 import java.util.HashMap;
 import java.util.List;
 
 import org.apache.logging.log4j.Level;
 
 import net.minecraft.block.Block;
+import net.minecraft.enchantment.Enchantment;
 import net.minecraft.entity.*;
 import net.minecraft.entity.passive.*;
 import net.minecraft.item.Item;
@@ -26,7 +26,6 @@ import net.minecraft.item.ItemArmor.ArmorMaterial;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraft.potion.Potion;
-import net.minecraft.potion.PotionHelper;
 import net.minecraft.util.DamageSource;
 import net.minecraftforge.common.util.EnumHelper;
 import net.minecraftforge.oredict.OreDictionary;
@@ -34,6 +33,7 @@ import net.minecraftforge.oredict.OreDictionary;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
+import com.shinoow.abyssalcraft.api.entity.EntityUtil;
 import com.shinoow.abyssalcraft.api.internal.DummyNecroDataHandler;
 import com.shinoow.abyssalcraft.api.internal.IInternalNecroDataHandler;
 import com.shinoow.abyssalcraft.api.item.ACItems;
@@ -59,30 +59,18 @@ public class AbyssalCraftAPI {
 	/**
 	 * String used to specify the API version in the "package-info.java" classes
 	 */
-	public static final String API_VERSION = "1.7.1";
+	public static final String API_VERSION = "1.7.5";
 
-	/**
-	 * Enchantment IDs, first one is the Coralium enchantment, second Dread enchantment,
-	 * third the Light Pierce enchantment, and the fourth is the Iron Wall enchantment.
-	 */
-	public static int enchId1, enchId2, enchId3, enchId4;
+	public static Enchantment coralium_enchantment, dread_enchantment, light_pierce, iron_wall;
 
-	/**
-	 * Potion IDs, first one is the Coralium Plague, second Dread Plague, and third Antimatter
-	 */
-	public static int potionId1, potionId2, potionId3;
+	public static Potion coralium_plague, dread_plague, antimatter_potion;
 
 	private static List<IFuelHandler> crystallizerFuelHandlers = Lists.newArrayList();
 	private static List<IFuelHandler> transmutatorFuelHandlers = Lists.newArrayList();
 
-	private static HashMap<Integer, String> potionRequirements = null;
-	private static HashMap<Integer, String> potionAmplifiers = null;
-
 	public static DamageSource coralium = new DamageSource("coralium").setDamageBypassesArmor().setMagicDamage();
 	public static DamageSource dread = new DamageSource("dread").setDamageBypassesArmor().setMagicDamage();
 	public static DamageSource antimatter = new DamageSource("antimatter").setDamageBypassesArmor().setMagicDamage();
-
-	private static List<Class<? extends EntityLivingBase>> shoggothFood = Lists.newArrayList();
 
 	private static List<Block> shoggothBlockBlacklist = Lists.newArrayList();
 
@@ -133,39 +121,6 @@ public class AbyssalCraftAPI {
 	}
 
 	/**
-	 * Initializes the reflection required for the Potion code, ignore it
-	 */
-	@SuppressWarnings("unchecked")
-	public static void initPotionReflection(){
-		for(Field f : PotionHelper.class.getDeclaredFields())
-			try {
-				if(f.getName().equals("potionRequirements") || f.getName().equals("field_179539_o")){
-					f.setAccessible(true);
-					try {
-						potionRequirements = (HashMap<Integer, String>)f.get(null);
-					} catch (IllegalArgumentException
-							| IllegalAccessException e) {
-						System.err.println("Whoops, something screwed up here, please report this to shinoow:");
-						e.printStackTrace();
-					}
-				}
-				if(f.getName().equals("potionAmplifiers") || f.getName().equals("field_179540_p")){
-					f.setAccessible(true);
-					try {
-						potionAmplifiers = (HashMap<Integer, String>)f.get(null);
-					} catch (IllegalArgumentException
-							| IllegalAccessException e) {
-						System.err.println("Whoops, something screwed up here, please report this to shinoow:");
-						e.printStackTrace();
-					}
-				}
-			} catch (SecurityException e) {
-				System.err.println("Whoops, something screwed up here, please report this to shinoow:");
-				e.printStackTrace();
-			}
-	}
-
-	/**
 	 * Sets the repair items for each armor/tool material
 	 */
 	public static void setRepairItems(){
@@ -184,30 +139,6 @@ public class AbyssalCraftAPI {
 		refinedCoraliumTool.setRepairItem(new ItemStack(ACItems.refined_coralium_ingot));
 		dreadiumTool.setRepairItem(new ItemStack(ACItems.dreadium_ingot));
 		ethaxiumTool.setRepairItem(new ItemStack(ACItems.ethaxium_ingot));
-	}
-
-	/**
-	 * Adds a bit sequence used to calculate the status on a potion.
-	 * This description probably hardly makes any sense, deal with it.
-	 * @param id The potion id
-	 * @param requirements A bit sequence
-	 * 
-	 * @since 1.1
-	 */
-	public static void addPotionRequirements(int id, String requirements){
-		potionRequirements.put(Integer.valueOf(id), requirements);
-	}
-
-	/**
-	 * Adds an amplifier to a potion.
-	 * This description probably hardly makes any sense, deal with it.
-	 * @param id The potion id
-	 * @param amplifier The potion amplifier value (usually 5)
-	 * 
-	 * @since 1.1
-	 */
-	public static void addPotionAmplifiers(int id, String amplifier){
-		potionAmplifiers.put(Integer.valueOf(id), amplifier);
 	}
 
 	/**
@@ -584,9 +515,12 @@ public class AbyssalCraftAPI {
 	 * @param clazz The potential "food" for the Lesser Shoggoth
 	 * 
 	 * @since 1.2
+	 * 
+	 * @deprecated use {@link EntityUtil#addShoggothFood(Class)} instead
 	 */
+	@Deprecated
 	public static void addShoggothFood(Class<? extends EntityLivingBase> clazz){
-		shoggothFood.add(clazz);
+		EntityUtil.addShoggothFood(clazz);
 	}
 
 	/**
@@ -594,9 +528,12 @@ public class AbyssalCraftAPI {
 	 * @return An ArrayList containing Entity classes
 	 * 
 	 * @since 1.2
+	 * 
+	 * @deprecated use {@link EntityUtil#getShoggothFood()} instead
 	 */
+	@Deprecated
 	public static List<Class<? extends EntityLivingBase>> getShoggothFood(){
-		return shoggothFood;
+		return EntityUtil.getShoggothFood();
 	}
 
 	/**
@@ -731,19 +668,5 @@ public class AbyssalCraftAPI {
 		public static String evil_chicken = mobNames[40];
 		public static String demon_cow = mobNames[41];
 		public static String demon_chicken = mobNames[42];
-	}
-
-	/**
-	 * Contains all potion effects added in AbyssalCraft.
-	 * You can reference them from here, or use the ID directly
-	 * 
-	 * @author shinoow
-	 *
-	 */
-	public static class ACPotions {
-
-		public static Potion Coralium_plague = Potion.potionTypes[potionId1];
-		public static Potion Dread_plague = Potion.potionTypes[potionId2];
-		public static Potion Antimatter = Potion.potionTypes[potionId3];
 	}
 }

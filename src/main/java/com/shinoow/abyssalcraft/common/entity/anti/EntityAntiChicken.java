@@ -33,8 +33,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;
 
-import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.api.entity.IAntiEntity;
+import com.shinoow.abyssalcraft.api.item.ACItems;
 
 public class EntityAntiChicken extends EntityAnimal implements IAntiEntity {
 
@@ -143,9 +143,9 @@ public class EntityAntiChicken extends EntityAnimal implements IAntiEntity {
 			dropItem(Items.feather, 1);
 
 		if (isBurning())
-			dropItem(AbyssalCraft.antiChicken, 1);
+			dropItem(ACItems.anti_chicken, 1);
 		else
-			dropItem(AbyssalCraft.antiChicken, 1);
+			dropItem(ACItems.anti_chicken, 1);
 	}
 
 	@Override

@@ -17,6 +17,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.Loader;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
+import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.common.inventory.ContainerCrystallizer;
 import com.shinoow.abyssalcraft.common.inventory.ContainerEngraver;
 import com.shinoow.abyssalcraft.common.inventory.ContainerTransmutator;
@@ -78,8 +79,8 @@ public class ACJEIPlugin implements IModPlugin {
 		registry.addRecipes(EngravingRecipeMaker.getEngraverRecipes());
 
 		jeiHelpers.getItemBlacklist().addItemToBlacklist(new ItemStack(AbyssalCraft.devsword));
-		jeiHelpers.getItemBlacklist().addItemToBlacklist(new ItemStack(AbyssalCraft.crystallizer_on));
-		jeiHelpers.getItemBlacklist().addItemToBlacklist(new ItemStack(AbyssalCraft.transmutator_on));
+		jeiHelpers.getItemBlacklist().addItemToBlacklist(new ItemStack(ACBlocks.crystallizer_active));
+		jeiHelpers.getItemBlacklist().addItemToBlacklist(new ItemStack(ACBlocks.transmutator_active));
 		jeiHelpers.getItemBlacklist().addItemToBlacklist(new ItemStack(AbyssalCraft.house));
 		jeiHelpers.getItemBlacklist().addItemToBlacklist(new ItemStack(AbyssalCraft.Altar));
 	}

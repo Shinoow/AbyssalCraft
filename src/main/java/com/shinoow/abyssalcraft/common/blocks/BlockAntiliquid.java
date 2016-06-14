@@ -27,7 +27,9 @@ import net.minecraft.world.World;
 import net.minecraftforge.fluids.BlockFluidClassic;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
-import com.shinoow.abyssalcraft.common.util.EntityUtil;
+import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
+import com.shinoow.abyssalcraft.api.block.ACBlocks;
+import com.shinoow.abyssalcraft.api.entity.EntityUtil;
 
 public class BlockAntiliquid extends BlockFluidClassic {
 
@@ -45,8 +47,8 @@ public class BlockAntiliquid extends BlockFluidClassic {
 
 	@Override
 	public boolean canDisplace(IBlockAccess world, BlockPos pos) {
-		if(world.getBlockState(pos).getBlock() == AbyssalCraft.Cwater || world.getBlockState(pos).getBlock().getMaterial() == Material.water &&
-				world.getBlockState(pos).getBlock() != AbyssalCraft.Cwater && world.getBlockState(pos).getBlock() != this || world.getBlockState(pos).getBlock().getMaterial() == Material.lava)
+		if(world.getBlockState(pos).getBlock() == ACBlocks.liquid_coralium || world.getBlockState(pos).getBlock().getMaterial() == Material.water &&
+				world.getBlockState(pos).getBlock() != ACBlocks.liquid_coralium && world.getBlockState(pos).getBlock() != this || world.getBlockState(pos).getBlock().getMaterial() == Material.lava)
 			return true;
 		return super.canDisplace(world, pos);
 	}
@@ -54,10 +56,10 @@ public class BlockAntiliquid extends BlockFluidClassic {
 	@Override
 	public boolean displaceIfPossible(World world, BlockPos pos) {
 
-		if(!world.isRemote && world.getBlockState(pos).getBlock() == AbyssalCraft.Cwater)
-			world.setBlockState(pos, AbyssalCraft.cstone.getDefaultState());
+		if(!world.isRemote && world.getBlockState(pos).getBlock() == ACBlocks.liquid_coralium)
+			world.setBlockState(pos, ACBlocks.coralium_stone.getDefaultState());
 
-		if(!world.isRemote && world.getBlockState(pos).getBlock().getMaterial() == Material.water && world.getBlockState(pos).getBlock() != AbyssalCraft.Cwater && world.getBlockState(pos).getBlock() != this)
+		if(!world.isRemote && world.getBlockState(pos).getBlock().getMaterial() == Material.water && world.getBlockState(pos).getBlock() != ACBlocks.liquid_coralium && world.getBlockState(pos).getBlock() != this)
 			world.setBlockState(pos, Blocks.packed_ice.getDefaultState());
 
 		if(!world.isRemote && world.getBlockState(pos).getBlock().getMaterial() == Material.lava)
@@ -76,7 +78,7 @@ public class BlockAntiliquid extends BlockFluidClassic {
 			((EntityLivingBase)par5Entity).addPotionEffect(new PotionEffect(Potion.weakness.id, 400));
 			((EntityLivingBase)par5Entity).addPotionEffect(new PotionEffect(Potion.hunger.id, 400));
 			((EntityLivingBase)par5Entity).addPotionEffect(new PotionEffect(Potion.nightVision.id, 400));
-			((EntityLivingBase)par5Entity).addPotionEffect(new PotionEffect(AbyssalCraft.antiMatter.id, 200));
+			((EntityLivingBase)par5Entity).addPotionEffect(new PotionEffect(AbyssalCraftAPI.antimatter_potion.id, 200));
 		}
 		if(par5Entity instanceof EntityItem && AbyssalCraft.antiItemDisintegration)
 			par5Entity.setDead();

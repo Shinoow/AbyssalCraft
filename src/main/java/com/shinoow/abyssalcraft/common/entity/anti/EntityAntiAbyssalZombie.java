@@ -42,6 +42,7 @@ import net.minecraftforge.common.ForgeModContainer;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.api.entity.IAntiEntity;
+import com.shinoow.abyssalcraft.api.item.ACItems;
 import com.shinoow.abyssalcraft.common.entity.EntityAbyssalZombie;
 
 public class EntityAntiAbyssalZombie extends EntityMob implements IAntiEntity {
@@ -72,7 +73,7 @@ public class EntityAntiAbyssalZombie extends EntityMob implements IAntiEntity {
 	protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
 
-		getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(64.0D);
+		getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(42.0D);
 		getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setBaseValue(0.0D);
 		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.23000000417232513D);
 
@@ -179,7 +180,7 @@ public class EntityAntiAbyssalZombie extends EntityMob implements IAntiEntity {
 	@Override
 	protected Item getDropItem()
 	{
-		return AbyssalCraft.antiCorflesh;
+		return ACItems.anti_plagued_flesh;
 
 	}
 	@Override
@@ -196,10 +197,10 @@ public class EntityAntiAbyssalZombie extends EntityMob implements IAntiEntity {
 			dropItem(Items.bone, 1);
 			break;
 		case 1:
-			dropItem(AbyssalCraft.sword, 1);
+			dropItem(ACItems.darkstone_sword, 1);
 			break;
 		case 2:
-			dropItem(AbyssalCraft.Cpearl, 1);
+			dropItem(ACItems.coralium_pearl, 1);
 		}
 	}
 

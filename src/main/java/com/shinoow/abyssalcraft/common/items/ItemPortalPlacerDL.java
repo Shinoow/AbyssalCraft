@@ -25,7 +25,9 @@ import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.client.FMLClientHandler;
 
-import com.shinoow.abyssalcraft.AbyssalCraft;
+import com.shinoow.abyssalcraft.api.block.ACBlocks;
+import com.shinoow.abyssalcraft.lib.ACLib;
+import com.shinoow.abyssalcraft.lib.ACTabs;
 
 public class ItemPortalPlacerDL extends Item {
 
@@ -33,13 +35,13 @@ public class ItemPortalPlacerDL extends Item {
 		super();
 		maxStackSize = 1;
 		setUnlocalizedName("gatewaykeydl");
-		setCreativeTab(AbyssalCraft.tabTools);
+		setCreativeTab(ACTabs.tabTools);
 	}
 
 	@Override
 	public String getItemStackDisplayName(ItemStack par1ItemStack) {
 
-		return EnumChatFormatting.DARK_RED + StatCollector.translateToLocal(this.getUnlocalizedName() + ".name");
+		return EnumChatFormatting.DARK_RED + super.getItemStackDisplayName(par1ItemStack);
 	}
 
 	@Override
@@ -58,7 +60,7 @@ public class ItemPortalPlacerDL extends Item {
 	@Override
 	public boolean onItemUse(ItemStack is, EntityPlayer player, World world, BlockPos pos, EnumFacing side, float hitX, float hitY, float hitZ){
 		if(!world.isRemote){
-			if(player.dimension == AbyssalCraft.configDimId1 || player.dimension == AbyssalCraft.configDimId2)
+			if(player.dimension == ACLib.abyssal_wasteland_id || player.dimension == ACLib.dreadlands_id)
 			{
 				int direction = MathHelper.floor_double(player.rotationYaw * 4.0F / 360.0F + 0.5D) & 3;
 
@@ -69,25 +71,25 @@ public class ItemPortalPlacerDL extends Item {
 							if(!world.isAirBlock(pos.add(0, y, z)))
 								return false;
 
-					world.setBlockState(pos.add(0, 1, 0), AbyssalCraft.dreadstone.getDefaultState());
-					world.setBlockState(pos.add(0, 1, 1), AbyssalCraft.dreadstone.getDefaultState());
-					world.setBlockState(pos.add(0, 1, 2), AbyssalCraft.dreadstone.getDefaultState());
-					world.setBlockState(pos.add(0, 1, -1), AbyssalCraft.dreadstone.getDefaultState());
+					world.setBlockState(pos.add(0, 1, 0), ACBlocks.dreadstone.getDefaultState());
+					world.setBlockState(pos.add(0, 1, 1), ACBlocks.dreadstone.getDefaultState());
+					world.setBlockState(pos.add(0, 1, 2), ACBlocks.dreadstone.getDefaultState());
+					world.setBlockState(pos.add(0, 1, -1), ACBlocks.dreadstone.getDefaultState());
 
-					world.setBlockState(pos.add(0, 2, -1), AbyssalCraft.dreadstone.getDefaultState());
-					world.setBlockState(pos.add(0, 3, -1), AbyssalCraft.dreadstone.getDefaultState());
-					world.setBlockState(pos.add(0, 4, -1), AbyssalCraft.dreadstone.getDefaultState());
-					world.setBlockState(pos.add(0, 5, -1), AbyssalCraft.dreadstone.getDefaultState());
+					world.setBlockState(pos.add(0, 2, -1), ACBlocks.dreadstone.getDefaultState());
+					world.setBlockState(pos.add(0, 3, -1), ACBlocks.dreadstone.getDefaultState());
+					world.setBlockState(pos.add(0, 4, -1), ACBlocks.dreadstone.getDefaultState());
+					world.setBlockState(pos.add(0, 5, -1), ACBlocks.dreadstone.getDefaultState());
 
-					world.setBlockState(pos.add(0, 2, 2), AbyssalCraft.dreadstone.getDefaultState());
-					world.setBlockState(pos.add(0, 3, 2), AbyssalCraft.dreadstone.getDefaultState());
-					world.setBlockState(pos.add(0, 4, 2), AbyssalCraft.dreadstone.getDefaultState());
-					world.setBlockState(pos.add(0, 5, 2), AbyssalCraft.dreadstone.getDefaultState());
+					world.setBlockState(pos.add(0, 2, 2), ACBlocks.dreadstone.getDefaultState());
+					world.setBlockState(pos.add(0, 3, 2), ACBlocks.dreadstone.getDefaultState());
+					world.setBlockState(pos.add(0, 4, 2), ACBlocks.dreadstone.getDefaultState());
+					world.setBlockState(pos.add(0, 5, 2), ACBlocks.dreadstone.getDefaultState());
 
-					world.setBlockState(pos.add(0, 5, 0), AbyssalCraft.dreadstone.getDefaultState());
-					world.setBlockState(pos.add(0, 5, 1), AbyssalCraft.dreadstone.getDefaultState());
+					world.setBlockState(pos.add(0, 5, 0), ACBlocks.dreadstone.getDefaultState());
+					world.setBlockState(pos.add(0, 5, 1), ACBlocks.dreadstone.getDefaultState());
 
-					world.setBlockState(pos.add(0, 2, 1), AbyssalCraft.dreadfire.getDefaultState());
+					world.setBlockState(pos.add(0, 2, 1), ACBlocks.dreaded_fire.getDefaultState());
 				}
 				else
 				{
@@ -96,33 +98,33 @@ public class ItemPortalPlacerDL extends Item {
 							if(!world.isAirBlock(pos.add(x, y, 0)))
 								return false;
 
-					world.setBlockState(pos.add(0, 1, 0), AbyssalCraft.dreadstone.getDefaultState());
-					world.setBlockState(pos.add(1, 1, 0), AbyssalCraft.dreadstone.getDefaultState());
-					world.setBlockState(pos.add(2, 1, 0), AbyssalCraft.dreadstone.getDefaultState());
-					world.setBlockState(pos.add(-1, 1, 0), AbyssalCraft.dreadstone.getDefaultState());
+					world.setBlockState(pos.add(0, 1, 0), ACBlocks.dreadstone.getDefaultState());
+					world.setBlockState(pos.add(1, 1, 0), ACBlocks.dreadstone.getDefaultState());
+					world.setBlockState(pos.add(2, 1, 0), ACBlocks.dreadstone.getDefaultState());
+					world.setBlockState(pos.add(-1, 1, 0), ACBlocks.dreadstone.getDefaultState());
 
-					world.setBlockState(pos.add(-1, 2, 0), AbyssalCraft.dreadstone.getDefaultState());
-					world.setBlockState(pos.add(-1, 3, 0), AbyssalCraft.dreadstone.getDefaultState());
-					world.setBlockState(pos.add(-1, 4, 0), AbyssalCraft.dreadstone.getDefaultState());
-					world.setBlockState(pos.add(-1, 5, 0), AbyssalCraft.dreadstone.getDefaultState());
+					world.setBlockState(pos.add(-1, 2, 0), ACBlocks.dreadstone.getDefaultState());
+					world.setBlockState(pos.add(-1, 3, 0), ACBlocks.dreadstone.getDefaultState());
+					world.setBlockState(pos.add(-1, 4, 0), ACBlocks.dreadstone.getDefaultState());
+					world.setBlockState(pos.add(-1, 5, 0), ACBlocks.dreadstone.getDefaultState());
 
-					world.setBlockState(pos.add(2, 2, 0), AbyssalCraft.dreadstone.getDefaultState());
-					world.setBlockState(pos.add(2, 3, 0), AbyssalCraft.dreadstone.getDefaultState());
-					world.setBlockState(pos.add(2, 4, 0), AbyssalCraft.dreadstone.getDefaultState());
-					world.setBlockState(pos.add(2, 5, 0), AbyssalCraft.dreadstone.getDefaultState());
+					world.setBlockState(pos.add(2, 2, 0), ACBlocks.dreadstone.getDefaultState());
+					world.setBlockState(pos.add(2, 3, 0), ACBlocks.dreadstone.getDefaultState());
+					world.setBlockState(pos.add(2, 4, 0), ACBlocks.dreadstone.getDefaultState());
+					world.setBlockState(pos.add(2, 5, 0), ACBlocks.dreadstone.getDefaultState());
 
-					world.setBlockState(pos.add(0, 5, 0), AbyssalCraft.dreadstone.getDefaultState());
-					world.setBlockState(pos.add(1, 5, 0), AbyssalCraft.dreadstone.getDefaultState());
+					world.setBlockState(pos.add(0, 5, 0), ACBlocks.dreadstone.getDefaultState());
+					world.setBlockState(pos.add(1, 5, 0), ACBlocks.dreadstone.getDefaultState());
 
-					world.setBlockState(pos.add(1, 2, 0), AbyssalCraft.dreadfire.getDefaultState());
+					world.setBlockState(pos.add(1, 2, 0), ACBlocks.dreaded_fire.getDefaultState());
 				}
 				return true;
 			}
-		} else if(player.dimension == 0 || player.dimension == AbyssalCraft.configDimId3 || player.dimension == AbyssalCraft.configDimId4)
+		} else if(player.dimension == 0 || player.dimension == ACLib.omothol_id || player.dimension == ACLib.dark_realm_id)
 		{
 			FMLClientHandler.instance().getClient().ingameGUI.getChatGUI().printChatMessage(new ChatComponentText(StatCollector.translateToLocal("message.portalplacer.error.2")));
 			return false;
-		} else if(player.dimension == AbyssalCraft.configDimId1 || player.dimension == AbyssalCraft.configDimId2){}
+		} else if(player.dimension == ACLib.abyssal_wasteland_id || player.dimension == ACLib.dreadlands_id){}
 		else {
 			FMLClientHandler.instance().getClient().ingameGUI.getChatGUI().printChatMessage(new ChatComponentText(StatCollector.translateToLocal("message.portalplacer.error.1")));
 			return false;

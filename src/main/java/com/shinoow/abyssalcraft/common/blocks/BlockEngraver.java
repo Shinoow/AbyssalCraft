@@ -11,10 +11,14 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.common.blocks;
 
+import java.util.Arrays;
 import java.util.Random;
 
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.properties.IProperty;
+import net.minecraft.block.properties.PropertyDirection;
+import net.minecraft.block.state.BlockState;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
@@ -27,28 +31,64 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
-import net.minecraft.util.MathHelper;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.client.model.TRSRTransformation;
+import net.minecraftforge.client.model.obj.OBJModel;
+import net.minecraftforge.common.property.ExtendedBlockState;
+import net.minecraftforge.common.property.IExtendedBlockState;
+import net.minecraftforge.common.property.IUnlistedProperty;
 import net.minecraftforge.fml.common.network.internal.FMLNetworkHandler;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
+import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.common.blocks.tile.TileEntityEngraver;
+import com.shinoow.abyssalcraft.lib.ACTabs;
 
 public class BlockEngraver extends BlockContainer {
+
+	public static final PropertyDirection FACING = PropertyDirection.create("facing");
+	private ExtendedBlockState state = new ExtendedBlockState(this, new IProperty[] {FACING}, new IUnlistedProperty[]{OBJModel.OBJProperty.instance});
 
 	private final Random rand = new Random();
 	private static boolean keepInventory;
 
 	public BlockEngraver() {
 		super(Material.rock);
-		setCreativeTab(AbyssalCraft.tabDecoration);
+		setDefaultState(blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH));
+		setCreativeTab(ACTabs.tabDecoration);
+	}
+
+	@Override
+	public IBlockState onBlockPlaced(World world, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer)
+	{
+		return getDefaultState().withProperty(FACING, placer.getHorizontalFacing().getOpposite());
+	}
+
+	@Override
+	public IBlockState getStateFromMeta(int meta)
+	{
+		return getDefaultState().withProperty(FACING, EnumFacing.getFront(meta));
+	}
+
+	@Override
+	public int getMetaFromState(IBlockState state)
+	{
+		return state.getValue(FACING).getIndex();
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public IBlockState getStateForEntityRender(IBlockState state)
+	{
+		return getDefaultState().withProperty(FACING, EnumFacing.NORTH);
 	}
 
 	@Override
 	public int getRenderType() {
-		return 2;
+		return 3;
 	}
 
 	@Override
@@ -59,7 +99,7 @@ public class BlockEngraver extends BlockContainer {
 	@Override
 	public Item getItemDropped(IBlockState state, Random par1Random, int par3)
 	{
-		return Item.getItemFromBlock(AbyssalCraft.engraver);
+		return Item.getItemFromBlock(ACBlocks.engraver);
 	}
 
 	@Override
@@ -74,7 +114,7 @@ public class BlockEngraver extends BlockContainer {
 		TileEntity tileentity = par1World.getTileEntity(pos);
 		keepInventory = true;
 
-		par1World.setBlockState(pos, AbyssalCraft.engraver.getDefaultState());
+		par1World.setBlockState(pos, ACBlocks.engraver.getDefaultState());
 
 		keepInventory = false;
 
@@ -96,7 +136,6 @@ public class BlockEngraver extends BlockContainer {
 			return;
 
 		TileEntityEngraver tile = (TileEntityEngraver) par1World.getTileEntity(pos);
-		tile.direction = MathHelper.floor_double(par5EntityLivingBase.rotationYaw * 4.0F / 360.0F + 0.5D) & 3;
 
 		if (par6ItemStack.hasDisplayName())
 			tile.func_145951_a(par6ItemStack.getDisplayName());
@@ -160,6 +199,21 @@ public class BlockEngraver extends BlockContainer {
 	@SideOnly(Side.CLIENT)
 	public Item getItem(World par1World, BlockPos pos)
 	{
-		return Item.getItemFromBlock(AbyssalCraft.engraver);
+		return Item.getItemFromBlock(ACBlocks.engraver);
+	}
+
+	@Override
+	public IBlockState getExtendedState(IBlockState state, IBlockAccess world, BlockPos pos)
+	{
+		EnumFacing facing = state.getValue(FACING);
+		TRSRTransformation transform = new TRSRTransformation(facing);
+		OBJModel.OBJState retState = new OBJModel.OBJState(Arrays.asList(new String[]{OBJModel.Group.ALL}), true, transform);
+		return ((IExtendedBlockState) state).withProperty(OBJModel.OBJProperty.instance, retState);
+	}
+
+	@Override
+	public BlockState createBlockState()
+	{
+		return new ExtendedBlockState(this, new IProperty[] {FACING}, new IUnlistedProperty[] {OBJModel.OBJProperty.instance});
 	}
 }

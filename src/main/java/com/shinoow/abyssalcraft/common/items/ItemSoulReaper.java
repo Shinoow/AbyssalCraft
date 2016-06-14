@@ -25,8 +25,10 @@ import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
+
 import com.google.common.collect.Multimap;
-import com.shinoow.abyssalcraft.AbyssalCraft;
+import com.shinoow.abyssalcraft.api.item.ACItems;
+import com.shinoow.abyssalcraft.lib.ACTabs;
 
 public class ItemSoulReaper extends Item {
 
@@ -34,10 +36,8 @@ public class ItemSoulReaper extends Item {
 
 	public ItemSoulReaper(String par1Str){
 		super();
-		//		GameRegistry.registerItem(this, par1Str);
 		setUnlocalizedName(par1Str);
-		setCreativeTab(AbyssalCraft.tabCombat);
-		//		setTextureName("abyssalcraft:" + par1Str);
+		setCreativeTab(ACTabs.tabCombat);
 		setMaxDamage(2000);
 		setMaxStackSize(1);
 	}
@@ -55,6 +55,12 @@ public class ItemSoulReaper extends Item {
 	@Override
 	public int getMaxItemUseDuration(ItemStack par1ItemStack) {
 		return 0x11940;
+	}
+
+	@Override
+	public boolean isBookEnchantable(ItemStack stack, ItemStack book)
+	{
+		return false;
 	}
 
 	/** Increases the amount of souls by 1 */
@@ -143,7 +149,7 @@ public class ItemSoulReaper extends Item {
 	@Override
 	public boolean getIsRepairable(ItemStack par1ItemStack, ItemStack par2ItemStack)
 	{
-		return AbyssalCraft.shadowgem == par2ItemStack.getItem() ? true : super.getIsRepairable(par1ItemStack, par2ItemStack);
+		return ACItems.shadow_gem == par2ItemStack.getItem() ? true : super.getIsRepairable(par1ItemStack, par2ItemStack);
 	}
 
 	@Override

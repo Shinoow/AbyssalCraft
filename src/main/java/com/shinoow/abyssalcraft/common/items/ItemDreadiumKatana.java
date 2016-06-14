@@ -19,8 +19,10 @@ import net.minecraft.item.EnumAction;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
+
 import com.google.common.collect.Multimap;
-import com.shinoow.abyssalcraft.AbyssalCraft;
+import com.shinoow.abyssalcraft.api.item.ACItems;
+import com.shinoow.abyssalcraft.lib.ACTabs;
 
 public class ItemDreadiumKatana extends Item {
 
@@ -28,10 +30,8 @@ public class ItemDreadiumKatana extends Item {
 
 	public ItemDreadiumKatana(String par1Str, float par2, int par3){
 		super();
-		//		GameRegistry.registerItem(this, par1Str);
 		setUnlocalizedName(par1Str);
-		setCreativeTab(AbyssalCraft.tabCombat);
-		//		setTextureName("abyssalcraft:" + par1Str);
+		setCreativeTab(ACTabs.tabCombat);
 		weaponDamage = par2;
 		setMaxDamage(par3);
 		setMaxStackSize(1);
@@ -53,6 +53,12 @@ public class ItemDreadiumKatana extends Item {
 	}
 
 	@Override
+	public boolean isBookEnchantable(ItemStack stack, ItemStack book)
+	{
+		return false;
+	}
+
+	@Override
 	public boolean hitEntity(ItemStack par1ItemStack, EntityLivingBase par2EntityLivingBase, EntityLivingBase par3EntityLivingBase)
 	{
 		par1ItemStack.damageItem(1, par3EntityLivingBase);
@@ -70,7 +76,7 @@ public class ItemDreadiumKatana extends Item {
 	@Override
 	public boolean getIsRepairable(ItemStack par1ItemStack, ItemStack par2ItemStack)
 	{
-		return new ItemStack(AbyssalCraft.crystal, 1, 14) == par2ItemStack ? true : super.getIsRepairable(par1ItemStack, par2ItemStack);
+		return new ItemStack(ACItems.crystal, 1, 14) == par2ItemStack ? true : super.getIsRepairable(par1ItemStack, par2ItemStack);
 	}
 
 	@Override

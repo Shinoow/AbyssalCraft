@@ -15,8 +15,8 @@ import java.util.List;
 import java.util.Random;
 
 import com.shinoow.abyssalcraft.api.energy.IEnergyContainer;
-import com.shinoow.abyssalcraft.api.energy.IEnergyTransporter;
-import com.shinoow.abyssalcraft.common.util.ISingletonInventory;
+import com.shinoow.abyssalcraft.api.energy.IEnergyContainerItem;
+import com.shinoow.abyssalcraft.lib.util.blocks.ISingletonInventory;
 
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureAttribute;
@@ -98,9 +98,9 @@ public class TileEntityTieredSacrificialAltar extends TileEntity implements IEne
 			coolDown--;
 
 		if(item != null)
-			if(item.getItem() instanceof IEnergyTransporter)
-				if(getContainedEnergy() > 0 && ((IEnergyTransporter) item.getItem()).getContainedEnergy(item) < ((IEnergyTransporter) item.getItem()).getMaxEnergy(item)){
-					((IEnergyTransporter) item.getItem()).addEnergy(item, 1);
+			if(item.getItem() instanceof IEnergyContainerItem)
+				if(((IEnergyContainerItem) item.getItem()).canAcceptPE(item) && getContainedEnergy() > 0 && ((IEnergyContainerItem) item.getItem()).getContainedEnergy(item) < ((IEnergyContainerItem) item.getItem()).getMaxEnergy(item)){
+					((IEnergyContainerItem) item.getItem()).addEnergy(item, 1);
 					consumeEnergy(1);
 				}
 
@@ -160,6 +160,7 @@ public class TileEntityTieredSacrificialAltar extends TileEntity implements IEne
 		}
 	}
 
+	@Override
 	public int getRotation(){
 		return rot;
 	}
@@ -171,8 +172,8 @@ public class TileEntityTieredSacrificialAltar extends TileEntity implements IEne
 
 	@Override
 	public void setItem(ItemStack item){
-		isDirty = true;
 		this.item = item;
+		isDirty = true;
 	}
 
 	public int getCooldownTimer(){
@@ -233,5 +234,10 @@ public class TileEntityTieredSacrificialAltar extends TileEntity implements IEne
 	@Override
 	public boolean canAcceptPE() {
 		return false;
+	}
+
+	@Override
+	public boolean canTransferPE() {
+		return true;
 	}
 }

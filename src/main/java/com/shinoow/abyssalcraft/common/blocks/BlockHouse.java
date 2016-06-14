@@ -24,8 +24,8 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.client.FMLClientHandler;
 
+import com.shinoow.abyssalcraft.api.entity.EntityUtil;
 import com.shinoow.abyssalcraft.common.structures.StructureHouse;
-import com.shinoow.abyssalcraft.common.util.EntityUtil;
 
 public class BlockHouse extends Block {
 

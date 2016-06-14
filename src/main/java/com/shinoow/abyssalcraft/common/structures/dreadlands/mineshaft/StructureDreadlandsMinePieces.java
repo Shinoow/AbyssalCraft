@@ -22,9 +22,6 @@ import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.item.EntityMinecartChest;
 import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.BlockPos;
@@ -36,14 +33,11 @@ import net.minecraft.world.gen.structure.StructureBoundingBox;
 import net.minecraft.world.gen.structure.StructureComponent;
 import net.minecraftforge.common.ChestGenHooks;
 
-import com.google.common.collect.Lists;
-import com.shinoow.abyssalcraft.AbyssalCraft;
+import com.shinoow.abyssalcraft.api.block.ACBlocks;
+import com.shinoow.abyssalcraft.lib.ACLoot;
 
 public class StructureDreadlandsMinePieces
 {
-	/** List of contents that can generate in Mineshafts. */
-	public static final List<WeightedRandomChestContent> mineshaftChestContents = Lists.newArrayList(new WeightedRandomChestContent[] {new WeightedRandomChestContent(AbyssalCraft.abyingot, 0, 1, 5, 10), new WeightedRandomChestContent(Items.diamond, 0, 1, 3, 5), new WeightedRandomChestContent(AbyssalCraft.Coralium, 0, 4, 9, 5), new WeightedRandomChestContent(AbyssalCraft.shadowshard, 0, 4, 9, 5), new WeightedRandomChestContent(Items.diamond, 0, 1, 2, 3), new WeightedRandomChestContent(AbyssalCraft.Dreadshard, 0, 3, 8, 10), new WeightedRandomChestContent(Items.bread, 0, 1, 3, 15), new WeightedRandomChestContent(AbyssalCraft.Corpickaxe, 0, 1, 1, 1), new WeightedRandomChestContent(Item.getItemFromBlock(Blocks.rail), 0, 4, 8, 1), new WeightedRandomChestContent(AbyssalCraft.abychunk, 0, 2, 4, 10), new WeightedRandomChestContent(AbyssalCraft.dreadchunk, 0, 2, 4, 10), new WeightedRandomChestContent(AbyssalCraft.Corb, 0, 1, 1, 3), new WeightedRandomChestContent(AbyssalCraft.OC, 0, 1, 1, 1), new WeightedRandomChestContent(new ItemStack(AbyssalCraft.crystal, 1, 24), 1, 5, 8)});
-
 	public static void registerStructurePieces()
 	{
 		MapGenStructureIO.registerStructureComponent(StructureDreadlandsMinePieces.Corridor.class, "DLMSCorridor");
@@ -292,25 +286,25 @@ public class StructureDreadlandsMinePieces
 				for (j = 0; j < sectionCount; ++j)
 				{
 					k = 2 + j * 5;
-					fillWithBlocks(par1World, par3StructureBoundingBox, 0, 0, k, 0, 1, k, AbyssalCraft.DrTfence.getDefaultState(), Blocks.air.getDefaultState(), false);
-					fillWithBlocks(par1World, par3StructureBoundingBox, 2, 0, k, 2, 1, k, AbyssalCraft.DrTfence.getDefaultState(), Blocks.air.getDefaultState(), false);
+					fillWithBlocks(par1World, par3StructureBoundingBox, 0, 0, k, 0, 1, k, ACBlocks.dreadlands_wood_fence.getDefaultState(), Blocks.air.getDefaultState(), false);
+					fillWithBlocks(par1World, par3StructureBoundingBox, 2, 0, k, 2, 1, k, ACBlocks.dreadlands_wood_fence.getDefaultState(), Blocks.air.getDefaultState(), false);
 
 					if (par2Random.nextInt(4) == 0)
 					{
-						fillWithBlocks(par1World, par3StructureBoundingBox, 0, 2, k, 0, 2, k, AbyssalCraft.dreadplanks.getDefaultState(), Blocks.air.getDefaultState(), false);
-						fillWithBlocks(par1World, par3StructureBoundingBox, 2, 2, k, 2, 2, k, AbyssalCraft.dreadplanks.getDefaultState(), Blocks.air.getDefaultState(), false);
+						fillWithBlocks(par1World, par3StructureBoundingBox, 0, 2, k, 0, 2, k, ACBlocks.dreadlands_planks.getDefaultState(), Blocks.air.getDefaultState(), false);
+						fillWithBlocks(par1World, par3StructureBoundingBox, 2, 2, k, 2, 2, k, ACBlocks.dreadlands_planks.getDefaultState(), Blocks.air.getDefaultState(), false);
 					} else
-						fillWithBlocks(par1World, par3StructureBoundingBox, 0, 2, k, 2, 2, k, AbyssalCraft.dreadplanks.getDefaultState(), Blocks.air.getDefaultState(), false);
+						fillWithBlocks(par1World, par3StructureBoundingBox, 0, 2, k, 2, 2, k, ACBlocks.dreadlands_planks.getDefaultState(), Blocks.air.getDefaultState(), false);
 
 					randomlyPlaceBlock(par1World, par3StructureBoundingBox, par2Random, 0.05F, 1, 2, k - 1, Blocks.torch.getStateFromMeta(0));
 					randomlyPlaceBlock(par1World, par3StructureBoundingBox, par2Random, 0.05F, 1, 2, k + 1, Blocks.torch.getStateFromMeta(0));
 
 					ChestGenHooks info = ChestGenHooks.getInfo(MINESHAFT_CORRIDOR);
 					if (par2Random.nextInt(100) == 0)
-						generateChestContents(par1World, par3StructureBoundingBox, par2Random, 2, 0, k - 1, mineshaftChestContents, info.getCount(par2Random));
+						generateChestContents(par1World, par3StructureBoundingBox, par2Random, 2, 0, k - 1, ACLoot.mineshaftChestContents, info.getCount(par2Random));
 
 					if (par2Random.nextInt(100) == 0)
-						generateChestContents(par1World, par3StructureBoundingBox, par2Random, 0, 0, k + 1, mineshaftChestContents, info.getCount(par2Random));
+						generateChestContents(par1World, par3StructureBoundingBox, par2Random, 0, 0, k + 1, ACLoot.mineshaftChestContents, info.getCount(par2Random));
 				}
 
 				for (j = 0; j <= 2; ++j)
@@ -322,7 +316,7 @@ public class StructureDreadlandsMinePieces
 						if (block1.getMaterial() == Material.air)
 						{
 							byte b1 = -1;
-							setBlockState(par1World, AbyssalCraft.dreadplanks.getDefaultState(), j, b1, k, par3StructureBoundingBox);
+							setBlockState(par1World, ACBlocks.dreadlands_planks.getDefaultState(), j, b1, k, par3StructureBoundingBox);
 						}
 					}
 
@@ -475,15 +469,15 @@ public class StructureDreadlandsMinePieces
 					fillWithBlocks(par1World, par3StructureBoundingBox, boundingBox.minX, boundingBox.minY, boundingBox.minZ + 1, boundingBox.maxX, boundingBox.maxY, boundingBox.maxZ - 1, Blocks.air.getDefaultState(), Blocks.air.getDefaultState(), false);
 				}
 
-				fillWithBlocks(par1World, par3StructureBoundingBox, boundingBox.minX + 1, boundingBox.minY, boundingBox.minZ + 1, boundingBox.minX + 1, boundingBox.maxY, boundingBox.minZ + 1, AbyssalCraft.dreadplanks.getDefaultState(), Blocks.air.getDefaultState(), false);
-				fillWithBlocks(par1World, par3StructureBoundingBox, boundingBox.minX + 1, boundingBox.minY, boundingBox.maxZ - 1, boundingBox.minX + 1, boundingBox.maxY, boundingBox.maxZ - 1, AbyssalCraft.dreadplanks.getDefaultState(), Blocks.air.getDefaultState(), false);
-				fillWithBlocks(par1World, par3StructureBoundingBox, boundingBox.maxX - 1, boundingBox.minY, boundingBox.minZ + 1, boundingBox.maxX - 1, boundingBox.maxY, boundingBox.minZ + 1, AbyssalCraft.dreadplanks.getDefaultState(), Blocks.air.getDefaultState(), false);
-				fillWithBlocks(par1World, par3StructureBoundingBox, boundingBox.maxX - 1, boundingBox.minY, boundingBox.maxZ - 1, boundingBox.maxX - 1, boundingBox.maxY, boundingBox.maxZ - 1, AbyssalCraft.dreadplanks.getDefaultState(), Blocks.air.getDefaultState(), false);
+				fillWithBlocks(par1World, par3StructureBoundingBox, boundingBox.minX + 1, boundingBox.minY, boundingBox.minZ + 1, boundingBox.minX + 1, boundingBox.maxY, boundingBox.minZ + 1, ACBlocks.dreadlands_planks.getDefaultState(), Blocks.air.getDefaultState(), false);
+				fillWithBlocks(par1World, par3StructureBoundingBox, boundingBox.minX + 1, boundingBox.minY, boundingBox.maxZ - 1, boundingBox.minX + 1, boundingBox.maxY, boundingBox.maxZ - 1, ACBlocks.dreadlands_planks.getDefaultState(), Blocks.air.getDefaultState(), false);
+				fillWithBlocks(par1World, par3StructureBoundingBox, boundingBox.maxX - 1, boundingBox.minY, boundingBox.minZ + 1, boundingBox.maxX - 1, boundingBox.maxY, boundingBox.minZ + 1, ACBlocks.dreadlands_planks.getDefaultState(), Blocks.air.getDefaultState(), false);
+				fillWithBlocks(par1World, par3StructureBoundingBox, boundingBox.maxX - 1, boundingBox.minY, boundingBox.maxZ - 1, boundingBox.maxX - 1, boundingBox.maxY, boundingBox.maxZ - 1, ACBlocks.dreadlands_planks.getDefaultState(), Blocks.air.getDefaultState(), false);
 
 				for (int i = boundingBox.minX; i <= boundingBox.maxX; ++i)
 					for (int j = boundingBox.minZ; j <= boundingBox.maxZ; ++j)
 						if (getBlockStateFromPos(par1World, i, boundingBox.minY - 1, j, par3StructureBoundingBox).getBlock().getMaterial() == Material.air)
-							setBlockState(par1World, AbyssalCraft.dreadplanks.getDefaultState(), i, boundingBox.minY - 1, j, par3StructureBoundingBox);
+							setBlockState(par1World, ACBlocks.dreadlands_planks.getDefaultState(), i, boundingBox.minY - 1, j, par3StructureBoundingBox);
 
 				return true;
 			}
@@ -595,7 +589,7 @@ public class StructureDreadlandsMinePieces
 				return false;
 			else
 			{
-				fillWithBlocks(par1World, par3StructureBoundingBox, boundingBox.minX, boundingBox.minY, boundingBox.minZ, boundingBox.maxX, boundingBox.minY, boundingBox.maxZ, AbyssalCraft.dreadgrass.getDefaultState(), Blocks.air.getDefaultState(), true);
+				fillWithBlocks(par1World, par3StructureBoundingBox, boundingBox.minX, boundingBox.minY, boundingBox.minZ, boundingBox.maxX, boundingBox.minY, boundingBox.maxZ, ACBlocks.dreadlands_grass.getDefaultState(), Blocks.air.getDefaultState(), true);
 				fillWithBlocks(par1World, par3StructureBoundingBox, boundingBox.minX, boundingBox.minY + 1, boundingBox.minZ, boundingBox.maxX, Math.min(boundingBox.minY + 3, boundingBox.maxY), boundingBox.maxZ, Blocks.air.getDefaultState(), Blocks.air.getDefaultState(), false);
 				Iterator<StructureBoundingBox> iterator = roomsLinkedToTheRoom.iterator();
 

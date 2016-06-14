@@ -21,8 +21,8 @@ import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.api.biome.ACBiomes;
+import com.shinoow.abyssalcraft.lib.ACLib;
 
 public class WorldProviderDarkRealm extends WorldProvider {
 
@@ -34,7 +34,7 @@ public class WorldProviderDarkRealm extends WorldProvider {
 	@Override
 	public void registerWorldChunkManager() {
 		worldChunkMgr = new WorldChunkManagerHell(ACBiomes.dark_realm, 0.0F);
-		dimensionId = AbyssalCraft.configDimId4;
+		dimensionId = ACLib.dark_realm_id;
 		hasNoSky = true;
 	}
 

@@ -28,9 +28,9 @@ public class RenderDepthsGhoul extends RenderLiving<EntityDepthsGhoul> {
 	private static final ResourceLocation orangeResource = new ResourceLocation("abyssalcraft:textures/model/depths_ghoul_orange.png");
 	private static final ResourceLocation ghoulResource = new ResourceLocation("abyssalcraft:textures/model/depths_ghoul.png");
 
-	public RenderDepthsGhoul(RenderManager manager, ModelDG ModelDG, float f)
+	public RenderDepthsGhoul(RenderManager manager)
 	{
-		super(manager, ModelDG, f);
+		super(manager, new ModelDG(), 0.8F);
 
 	}
 

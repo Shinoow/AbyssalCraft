@@ -11,7 +11,7 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.client.render.entity;
 
-import net.minecraft.client.model.ModelBase;
+import net.minecraft.client.model.ModelChicken;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.entity.Entity;
@@ -28,14 +28,9 @@ public class RenderDemonChicken extends RenderLiving
 {
 	private static final ResourceLocation chickenTextures = new ResourceLocation("abyssalcraft:textures/model/demon_chicken.png");
 
-	public RenderDemonChicken(RenderManager manager, ModelBase model, float par2)
+	public RenderDemonChicken(RenderManager manager)
 	{
-		super(manager, model, par2);
-	}
-
-	public void doRender(EntityDemonChicken entity, double par2, double par3, double par4, float par5, float par6)
-	{
-		super.doRender(entity, par2, par3, par4, par5, par6);
+		super(manager, new ModelChicken(), 0.5F);
 	}
 
 	protected float handleRotationFloat(EntityDemonChicken entity, float par2)

@@ -22,13 +22,14 @@ import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
-import com.shinoow.abyssalcraft.api.energy.IEnergyTransporter;
+import com.shinoow.abyssalcraft.api.energy.IEnergyTransporterItem;
+import com.shinoow.abyssalcraft.api.item.ACItems;
 import com.shinoow.abyssalcraft.common.blocks.BlockRitualAltar;
-import com.shinoow.abyssalcraft.common.util.IRitualAltar;
-import com.shinoow.abyssalcraft.common.util.RitualUtil;
-import com.shinoow.abyssalcraft.common.util.SpecialTextUtil;
+import com.shinoow.abyssalcraft.lib.util.RitualUtil;
+import com.shinoow.abyssalcraft.lib.util.SpecialTextUtil;
+import com.shinoow.abyssalcraft.lib.util.blocks.IRitualAltar;
 
-public class ItemNecronomicon extends ItemACBasic implements IEnergyTransporter {
+public class ItemNecronomicon extends ItemACBasic implements IEnergyTransporterItem {
 
 	private int bookType;
 
@@ -115,15 +116,15 @@ public class ItemNecronomicon extends ItemACBasic implements IEnergyTransporter 
 
 	@Override
 	public int getMaxEnergy(ItemStack stack) {
-		if(this == AbyssalCraft.necronomicon)
+		if(this == ACItems.necronomicon)
 			return 5000;
-		if(this == AbyssalCraft.necronomicon_cor)
+		if(this == ACItems.abyssal_wasteland_necronomicon)
 			return 10000;
-		if(this == AbyssalCraft.necronomicon_dre)
+		if(this == ACItems.dreadlands_necronomicon)
 			return 20000;
-		if(this == AbyssalCraft.necronomicon_omt)
+		if(this == ACItems.omothol_necronomicon)
 			return 40000;
-		if(this == AbyssalCraft.abyssalnomicon)
+		if(this == ACItems.abyssalnomicon)
 			return 100000;
 		return 0;
 	}
@@ -142,5 +143,25 @@ public class ItemNecronomicon extends ItemACBasic implements IEnergyTransporter 
 		if(contained - energy < 0)
 			stack.getTagCompound().setFloat("PotEnergy", 0);
 		else stack.getTagCompound().setFloat("PotEnergy", contained -= energy);
+	}
+
+	@Override
+	public boolean canAcceptPE(ItemStack stack) {
+		return true;
+	}
+
+	@Override
+	public boolean canTransferPE(ItemStack stack) {
+		return true;
+	}
+
+	@Override
+	public boolean canAcceptPEExternally(ItemStack stack) {
+		return true;
+	}
+
+	@Override
+	public boolean canTransferPEExternally(ItemStack stack) {
+		return true;
 	}
 }

@@ -20,9 +20,7 @@ import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockState;
-import net.minecraft.block.state.BlockWorldState;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.block.state.pattern.BlockPattern;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
@@ -36,9 +34,10 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import com.google.common.cache.LoadingCache;
 import com.shinoow.abyssalcraft.AbyssalCraft;
-import com.shinoow.abyssalcraft.common.world.TeleporterDreadlands;
+import com.shinoow.abyssalcraft.api.block.ACBlocks;
+import com.shinoow.abyssalcraft.common.world.TeleporterAC;
+import com.shinoow.abyssalcraft.lib.ACLib;
 
 public class BlockDreadlandsPortal extends BlockBreakable {
 
@@ -174,15 +173,15 @@ public class BlockDreadlandsPortal extends BlockBreakable {
 			EntityPlayerMP thePlayer = (EntityPlayerMP)par5Entity;
 			thePlayer.addStat(AbyssalCraft.enterdreadlands, 1);
 			if (thePlayer.timeUntilPortal > 0)
-				thePlayer.timeUntilPortal = 10;
-			else if (thePlayer.dimension != AbyssalCraft.configDimId2)
+				thePlayer.timeUntilPortal = thePlayer.getPortalCooldown();
+			else if (thePlayer.dimension != ACLib.dreadlands_id)
 			{
-				thePlayer.timeUntilPortal = 10;
-				thePlayer.mcServer.getConfigurationManager().transferPlayerToDimension(thePlayer, AbyssalCraft.configDimId2, new TeleporterDreadlands(thePlayer.mcServer.worldServerForDimension(AbyssalCraft.configDimId2)));
+				thePlayer.timeUntilPortal = AbyssalCraft.portalCooldown;
+				thePlayer.mcServer.getConfigurationManager().transferPlayerToDimension(thePlayer, ACLib.dreadlands_id, new TeleporterAC(thePlayer.mcServer.worldServerForDimension(ACLib.dreadlands_id), this, ACBlocks.dreadstone));
 			}
 			else {
-				thePlayer.timeUntilPortal = 10;
-				thePlayer.mcServer.getConfigurationManager().transferPlayerToDimension(thePlayer, AbyssalCraft.configDimId1, new TeleporterDreadlands(thePlayer.mcServer.worldServerForDimension(AbyssalCraft.configDimId1)));
+				thePlayer.timeUntilPortal = AbyssalCraft.portalCooldown;
+				thePlayer.mcServer.getConfigurationManager().transferPlayerToDimension(thePlayer, ACLib.abyssal_wasteland_id, new TeleporterAC(thePlayer.mcServer.worldServerForDimension(ACLib.abyssal_wasteland_id), this, ACBlocks.dreadstone));
 			}
 		}
 	}
@@ -217,50 +216,6 @@ public class BlockDreadlandsPortal extends BlockBreakable {
 	protected BlockState createBlockState()
 	{
 		return new BlockState(this, new IProperty[] {AXIS});
-	}
-
-	public BlockPattern.PatternHelper func_181089_f(World p_181089_1_, BlockPos p_181089_2_)
-	{
-		EnumFacing.Axis enumfacing$axis = EnumFacing.Axis.Z;
-		BlockDreadlandsPortal.Size blockportal$size = new BlockDreadlandsPortal.Size(p_181089_1_, p_181089_2_, EnumFacing.Axis.X);
-		LoadingCache<BlockPos, BlockWorldState> loadingcache = BlockPattern.func_181627_a(p_181089_1_, true);
-
-		if (!blockportal$size.func_150860_b())
-		{
-			enumfacing$axis = EnumFacing.Axis.X;
-			blockportal$size = new BlockDreadlandsPortal.Size(p_181089_1_, p_181089_2_, EnumFacing.Axis.Z);
-		}
-
-		if (!blockportal$size.func_150860_b())
-			return new BlockPattern.PatternHelper(p_181089_2_, EnumFacing.NORTH, EnumFacing.UP, loadingcache, 1, 1, 1);
-		else
-		{
-			int[] aint = new int[EnumFacing.AxisDirection.values().length];
-			EnumFacing enumfacing = blockportal$size.field_150866_c.rotateYCCW();
-			BlockPos blockpos = blockportal$size.field_150861_f.up(blockportal$size.func_181100_a() - 1);
-
-			for (EnumFacing.AxisDirection enumfacing$axisdirection : EnumFacing.AxisDirection.values())
-			{
-				BlockPattern.PatternHelper blockpattern$patternhelper = new BlockPattern.PatternHelper(enumfacing.getAxisDirection() == enumfacing$axisdirection ? blockpos : blockpos.offset(blockportal$size.field_150866_c, blockportal$size.func_181101_b() - 1), EnumFacing.func_181076_a(enumfacing$axisdirection, enumfacing$axis), EnumFacing.UP, loadingcache, blockportal$size.func_181101_b(), blockportal$size.func_181100_a(), 1);
-
-				for (int i = 0; i < blockportal$size.func_181101_b(); ++i)
-					for (int j = 0; j < blockportal$size.func_181100_a(); ++j)
-					{
-						BlockWorldState blockworldstate = blockpattern$patternhelper.translateOffset(i, j, 1);
-
-						if (blockworldstate.getBlockState() != null && blockworldstate.getBlockState().getBlock().getMaterial() != Material.air)
-							++aint[enumfacing$axisdirection.ordinal()];
-					}
-			}
-
-			EnumFacing.AxisDirection enumfacing$axisdirection1 = EnumFacing.AxisDirection.POSITIVE;
-
-			for (EnumFacing.AxisDirection enumfacing$axisdirection2 : EnumFacing.AxisDirection.values())
-				if (aint[enumfacing$axisdirection2.ordinal()] < aint[enumfacing$axisdirection1.ordinal()])
-					enumfacing$axisdirection1 = enumfacing$axisdirection2;
-
-			return new BlockPattern.PatternHelper(enumfacing.getAxisDirection() == enumfacing$axisdirection1 ? blockpos : blockpos.offset(blockportal$size.field_150866_c, blockportal$size.func_181101_b() - 1), EnumFacing.func_181076_a(enumfacing$axisdirection1, enumfacing$axis), EnumFacing.UP, loadingcache, blockportal$size.func_181101_b(), blockportal$size.func_181100_a(), 1);
-		}
 	}
 
 	public static class Size
@@ -319,12 +274,12 @@ public class BlockDreadlandsPortal extends BlockBreakable {
 			{
 				BlockPos blockpos = p_180120_1_.offset(p_180120_2_, i);
 
-				if (!func_150857_a(world.getBlockState(blockpos).getBlock()) || world.getBlockState(blockpos.down()).getBlock() != AbyssalCraft.dreadstone)
+				if (!func_150857_a(world.getBlockState(blockpos).getBlock()) || world.getBlockState(blockpos.down()).getBlock() != ACBlocks.dreadstone)
 					break;
 			}
 
 			Block block = world.getBlockState(p_180120_1_.offset(p_180120_2_, i)).getBlock();
-			return block == AbyssalCraft.dreadstone ? i : 0;
+			return block == ACBlocks.dreadstone ? i : 0;
 		}
 
 		public int func_181100_a()
@@ -350,27 +305,27 @@ public class BlockDreadlandsPortal extends BlockBreakable {
 						if (!func_150857_a(block))
 							break label24;
 
-						if (block == AbyssalCraft.dreadportal)
+						if (block == ACBlocks.dreaded_gateway)
 							++field_150864_e;
 
 						if (i == 0)
 						{
 							block = world.getBlockState(blockpos.offset(field_150863_d)).getBlock();
 
-							if (block != AbyssalCraft.dreadstone)
+							if (block != ACBlocks.dreadstone)
 								break label24;
 						}
 						else if (i == field_150868_h - 1)
 						{
 							block = world.getBlockState(blockpos.offset(field_150866_c)).getBlock();
 
-							if (block != AbyssalCraft.dreadstone)
+							if (block != ACBlocks.dreadstone)
 								break label24;
 						}
 					}
 
 		for (int j = 0; j < field_150868_h; ++j)
-			if (world.getBlockState(field_150861_f.offset(field_150866_c, j).up(field_150862_g)).getBlock() != AbyssalCraft.dreadstone)
+			if (world.getBlockState(field_150861_f.offset(field_150866_c, j).up(field_150862_g)).getBlock() != ACBlocks.dreadstone)
 			{
 				field_150862_g = 0;
 				break;
@@ -389,7 +344,7 @@ public class BlockDreadlandsPortal extends BlockBreakable {
 
 		protected boolean func_150857_a(Block p_150857_1_)
 		{
-			return p_150857_1_.getMaterial() == Material.air || p_150857_1_ == AbyssalCraft.dreadfire || p_150857_1_ == AbyssalCraft.dreadportal;
+			return p_150857_1_.getMaterial() == Material.air || p_150857_1_ == ACBlocks.dreaded_fire || p_150857_1_ == ACBlocks.dreaded_gateway;
 		}
 
 		public boolean func_150860_b()
@@ -404,7 +359,7 @@ public class BlockDreadlandsPortal extends BlockBreakable {
 				BlockPos blockpos = field_150861_f.offset(field_150866_c, i);
 
 				for (int j = 0; j < field_150862_g; ++j)
-					world.setBlockState(blockpos.up(j), AbyssalCraft.dreadportal.getDefaultState().withProperty(BlockPortal.AXIS, axis), 2);
+					world.setBlockState(blockpos.up(j), ACBlocks.dreaded_gateway.getDefaultState().withProperty(BlockPortal.AXIS, axis), 2);
 			}
 		}
 	}

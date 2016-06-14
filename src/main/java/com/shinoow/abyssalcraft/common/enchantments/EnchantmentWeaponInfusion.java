@@ -11,8 +11,15 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.common.enchantments;
 
+import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
+import com.shinoow.abyssalcraft.api.entity.EntityUtil;
+
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnumEnchantmentType;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.item.ItemStack;
+import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.ResourceLocation;
 
 public class EnchantmentWeaponInfusion extends Enchantment {
@@ -25,19 +32,51 @@ public class EnchantmentWeaponInfusion extends Enchantment {
 	@Override
 	public int getMinEnchantability(int par1)
 	{
-		return 14;
+		return Short.MAX_VALUE;
 	}
 
 	@Override
 	public int getMaxEnchantability(int par1)
 	{
-		return super.getMinEnchantability(par1) + 30;
+		return getMinEnchantability(par1) + 30;
 	}
 
 	@Override
 	public int getMaxLevel()
 	{
 		return 1;
+	}
+
+	@Override
+	public void onEntityDamaged(EntityLivingBase user, Entity target, int level)
+	{
+		if(target instanceof EntityLivingBase){
+			EntityLivingBase entity = (EntityLivingBase) target;
+			if(this == AbyssalCraftAPI.coralium_enchantment)
+				if(!EntityUtil.isEntityCoralium(entity))
+					entity.addPotionEffect(new PotionEffect(AbyssalCraftAPI.coralium_plague.id, 100));
+			if(this == AbyssalCraftAPI.dread_enchantment)
+				if(!EntityUtil.isEntityDread(entity))
+					entity.addPotionEffect(new PotionEffect(AbyssalCraftAPI.dread_plague.id, 100));
+		}
+	}
+
+	@Override
+	public boolean canApply(ItemStack stack)
+	{
+		return super.canApply(stack);
+	}
+
+	@Override
+	public boolean canApplyAtEnchantingTable(ItemStack stack)
+	{
+		return false;
+	}
+
+	@Override
+	public boolean isAllowedOnBooks()
+	{
+		return false;
 	}
 
 	@Override

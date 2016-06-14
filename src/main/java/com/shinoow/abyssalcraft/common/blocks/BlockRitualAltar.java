@@ -37,6 +37,7 @@ import net.minecraft.world.World;
 
 import com.google.common.collect.Maps;
 import com.shinoow.abyssalcraft.AbyssalCraft;
+import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.common.blocks.tile.TileEntityRitualAltar;
 
 public class BlockRitualAltar extends BlockContainer {
@@ -212,13 +213,13 @@ public class BlockRitualAltar extends BlockContainer {
 
 	static {
 		blockMeta.put(0, Blocks.cobblestone);
-		blockMeta.put(1, AbyssalCraft.Darkstone_cobble);
-		blockMeta.put(2, AbyssalCraft.abybrick);
-		blockMeta.put(3, AbyssalCraft.cstonebrick);
-		blockMeta.put(4, AbyssalCraft.dreadbrick);
-		blockMeta.put(5, AbyssalCraft.abydreadbrick);
-		blockMeta.put(6, AbyssalCraft.ethaxiumbrick);
-		blockMeta.put(7, AbyssalCraft.darkethaxiumbrick);
+		blockMeta.put(1, ACBlocks.darkstone_cobblestone);
+		blockMeta.put(2, ACBlocks.abyssal_stone_brick);
+		blockMeta.put(3, ACBlocks.coralium_stone_brick);
+		blockMeta.put(4, ACBlocks.dreadstone_brick);
+		blockMeta.put(5, ACBlocks.abyssalnite_stone_brick);
+		blockMeta.put(6, ACBlocks.ethaxium_brick);
+		blockMeta.put(7, ACBlocks.dark_ethaxium_brick);
 	}
 
 	public enum EnumRitualMatType implements IStringSerializable {

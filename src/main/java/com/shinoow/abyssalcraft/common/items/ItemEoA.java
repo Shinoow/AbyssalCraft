@@ -13,7 +13,7 @@ package com.shinoow.abyssalcraft.common.items;
 
 import java.util.List;
 
-import com.shinoow.abyssalcraft.AbyssalCraft;
+import com.shinoow.abyssalcraft.lib.ACTabs;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
@@ -26,15 +26,14 @@ public class ItemEoA extends Item {
 	public ItemEoA() {
 		super();
 		setMaxStackSize(1);
-		//		GameRegistry.registerItem(this, "eoa");
 		setUnlocalizedName("eoa");
-		setCreativeTab(AbyssalCraft.tabItems);
+		setCreativeTab(ACTabs.tabItems);
 	}
 
 	@Override
 	public String getItemStackDisplayName(ItemStack par1ItemStack) {
 
-		return EnumChatFormatting.AQUA + StatCollector.translateToLocal(this.getUnlocalizedName() + ".name");
+		return EnumChatFormatting.AQUA + super.getItemStackDisplayName(par1ItemStack);
 	}
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })

@@ -35,7 +35,7 @@ import net.minecraft.util.Vec3;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
 
-import com.shinoow.abyssalcraft.AbyssalCraft;
+import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.common.entity.EntityODBPrimed;
 import com.shinoow.abyssalcraft.common.entity.EntityODBcPrimed;
 
@@ -220,7 +220,7 @@ public class ACExplosion extends Explosion
 				Block block1 = worldObj.getBlockState(pos1.down()).getBlock();
 
 				if (block.getMaterial() == Material.air && block1.isFullBlock() && explosionRNG.nextInt(3) == 0)
-					worldObj.setBlockState(pos1, AbyssalCraft.anticwater.getDefaultState());
+					worldObj.setBlockState(pos1, ACBlocks.liquid_antimatter.getDefaultState());
 			}
 	}
 

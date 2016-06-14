@@ -25,7 +25,6 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
 import com.shinoow.abyssalcraft.api.entity.IDreadEntity;
 import com.shinoow.abyssalcraft.common.entity.*;
@@ -48,7 +47,7 @@ public class PotionDplague extends Potion{
 	public void performEffect(EntityLivingBase par1EntityLivingBase, int par2){
 
 		if(par1EntityLivingBase instanceof IDreadEntity)
-			par1EntityLivingBase.removePotionEffect(AbyssalCraft.Dplague.id);
+			par1EntityLivingBase.removePotionEffect(AbyssalCraftAPI.dread_plague.id);
 		else par1EntityLivingBase.attackEntityFrom(AbyssalCraftAPI.dread, 1);
 
 		if(par1EntityLivingBase instanceof EntityPlayer)

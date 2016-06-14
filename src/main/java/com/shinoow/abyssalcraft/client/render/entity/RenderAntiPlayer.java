@@ -43,12 +43,6 @@ public class RenderAntiPlayer extends RenderBiped<EntityAntiPlayer>
 	}
 
 	@Override
-	public void doRender(EntityAntiPlayer par1EntityEntityAntiPlayer, double par2, double par4, double par6, float par8, float par9)
-	{
-		super.doRender(par1EntityEntityAntiPlayer, par2, par4, par6, par8, par9);
-	}
-
-	@Override
 	protected ResourceLocation getEntityTexture(EntityAntiPlayer par1Entity)
 	{
 		return playerTexture;

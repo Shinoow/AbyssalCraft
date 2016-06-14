@@ -17,7 +17,7 @@ import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import com.shinoow.abyssalcraft.AbyssalCraft;
+import com.shinoow.abyssalcraft.lib.ACLib;
 
 public class WorldProviderDreadlands extends WorldProvider {
 
@@ -25,7 +25,7 @@ public class WorldProviderDreadlands extends WorldProvider {
 	public void registerWorldChunkManager() {
 		worldChunkMgr = new WorldChunkManagerDreadlands(worldObj.getSeed(), worldObj.getWorldInfo().getTerrainType());
 		hasNoSky = true;
-		dimensionId = AbyssalCraft.configDimId2;
+		dimensionId = ACLib.dreadlands_id;
 	}
 
 	@Override

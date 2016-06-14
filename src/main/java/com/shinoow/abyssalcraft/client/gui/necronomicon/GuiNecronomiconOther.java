@@ -16,17 +16,15 @@ import java.util.HashMap;
 import org.lwjgl.input.Keyboard;
 
 import com.google.common.collect.Maps;
-import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
 import com.shinoow.abyssalcraft.api.necronomicon.NecroData;
 import com.shinoow.abyssalcraft.client.gui.necronomicon.buttons.ButtonCategory;
 import com.shinoow.abyssalcraft.client.gui.necronomicon.buttons.ButtonNextPage;
-import com.shinoow.abyssalcraft.client.lib.NecronomiconText;
+import com.shinoow.abyssalcraft.lib.NecronomiconText;
 
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.resources.I18n;
-import net.minecraft.item.Item;
 
 public class GuiNecronomiconOther extends GuiNecronomicon {
 
@@ -102,25 +100,6 @@ public class GuiNecronomiconOther extends GuiNecronomicon {
 		boolean t4 = par1 == par2 - 3 && par2 - 3 >= 0;
 		boolean t5 = par1 == par2 - 4 && par2 - 4 >= 0;
 		return t1 || t2 || t3 || t4 || t5;
-	}
-
-	private Item getItem(int par1){
-		if(par1 > getBookType())
-			return AbyssalCraft.OC;
-		switch(par1){
-		case 0:
-			return AbyssalCraft.necronomicon;
-		case 1:
-			return AbyssalCraft.necronomicon_cor;
-		case 2:
-			return AbyssalCraft.necronomicon_dre;
-		case 3:
-			return AbyssalCraft.necronomicon_omt;
-		case 4:
-			return AbyssalCraft.abyssalnomicon;
-		default:
-			return AbyssalCraft.necronomicon;
-		}
 	}
 
 	private String getTitle(String par1, int par2){

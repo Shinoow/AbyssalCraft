@@ -19,7 +19,7 @@ import net.minecraft.util.BlockPos;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
 
-import com.shinoow.abyssalcraft.api.energy.IEnergyTransporter;
+import com.shinoow.abyssalcraft.api.energy.IEnergyContainerItem;
 import com.shinoow.abyssalcraft.api.energy.disruption.DisruptionEntry;
 
 public class DisruptionPotentialEnergy extends DisruptionEntry {
@@ -33,10 +33,10 @@ public class DisruptionPotentialEnergy extends DisruptionEntry {
 
 		for(EntityPlayer player : players)
 			for(ItemStack item : player.inventory.mainInventory)
-				if(item != null && item.getItem() instanceof IEnergyTransporter &&
-				((IEnergyTransporter) item.getItem()).getContainedEnergy(item) > 0){
+				if(item != null && item.getItem() instanceof IEnergyContainerItem &&
+				((IEnergyContainerItem) item.getItem()).getContainedEnergy(item) > 0){
 					if(!world.isRemote)
-						((IEnergyTransporter) item.getItem()).consumeEnergy(item, ((IEnergyTransporter) item.getItem()).getContainedEnergy(item)/10);
+						((IEnergyContainerItem) item.getItem()).consumeEnergy(item, ((IEnergyContainerItem) item.getItem()).getContainedEnergy(item)/10);
 					player.attackEntityFrom(DamageSource.magic, 2);
 					break;
 				}

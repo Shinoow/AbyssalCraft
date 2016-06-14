@@ -25,10 +25,10 @@ import net.minecraft.util.ITickable;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI.FuelType;
-import com.shinoow.abyssalcraft.api.item.ICrystal;
+import com.shinoow.abyssalcraft.api.block.ACBlocks;
+import com.shinoow.abyssalcraft.api.item.ACItems;
 import com.shinoow.abyssalcraft.api.recipe.TransmutatorRecipes;
 import com.shinoow.abyssalcraft.common.blocks.BlockTransmutator;
 
@@ -341,28 +341,26 @@ public class TileEntityTransmutator extends TileEntity implements ISidedInventor
 		{
 			Item item = par1ItemStack.getItem();
 
-			if (item == AbyssalCraft.Corflesh) return 100;
-			if (item == AbyssalCraft.Corbone) return 100;
-			if (item == AbyssalCraft.cbrick) return 200;
-			if (item == AbyssalCraft.Coralium) return 200;
-			if (item == AbyssalCraft.Coraliumcluster2) return 400;
-			if (item == AbyssalCraft.Coraliumcluster3) return 600;
-			if (item == AbyssalCraft.Coraliumcluster4) return 800;
-			if (item == AbyssalCraft.Coraliumcluster5) return 1000;
-			if (item == AbyssalCraft.Coraliumcluster6) return 1200;
-			if (item == AbyssalCraft.Coraliumcluster7) return 1400;
-			if (item == AbyssalCraft.Coraliumcluster8) return 1600;
-			if (item == AbyssalCraft.Coraliumcluster9) return 1800;
-			if (item == AbyssalCraft.Cpearl) return 2000;
-			if (item == AbyssalCraft.Corb) return 10000;
-			if (item == AbyssalCraft.Cchunk) return 16200;
-			if (item == AbyssalCraft.Cbucket) return 20000;
-			if (item == Item.getItemFromBlock(AbyssalCraft.Cwater)) return 22000;
-			if (item instanceof ICrystal) return 1200;
-			if (AbyssalCraftAPI.getCrystals().contains(par1ItemStack)) return 1200;
+			if (item == ACItems.coralium_plagued_flesh) return 100;
+			if (item == ACItems.coralium_plagued_flesh_on_a_bone) return 100;
+			if (item == ACItems.coralium_brick) return 200;
+			if (item == ACItems.coralium_gem) return 200;
+			if (item == ACItems.coralium_gem_cluster_2) return 400;
+			if (item == ACItems.coralium_gem_cluster_3) return 600;
+			if (item == ACItems.coralium_gem_cluster_4) return 800;
+			if (item == ACItems.coralium_gem_cluster_5) return 1000;
+			if (item == ACItems.coralium_gem_cluster_6) return 1200;
+			if (item == ACItems.coralium_gem_cluster_7) return 1400;
+			if (item == ACItems.coralium_gem_cluster_8) return 1600;
+			if (item == ACItems.coralium_gem_cluster_9) return 1800;
+			if (item == ACItems.coralium_pearl) return 2000;
+			if (item == ACItems.transmutation_gem) return 10000;
+			if (item == ACItems.chunk_of_coralium) return 16200;
+			if (item == ACItems.liquid_coralium_bucket) return 20000;
+			if (item == Item.getItemFromBlock(ACBlocks.liquid_coralium)) return 22000;
 			if (item == Items.blaze_powder) return 1200;
 			if (item == Items.blaze_rod) return 2400;
-			if (item == AbyssalCraft.methane) return 10000;
+			if (item == ACItems.methane) return 10000;
 			return AbyssalCraftAPI.getFuelValue(par1ItemStack, FuelType.TRANSMUTATOR);
 		}
 	}

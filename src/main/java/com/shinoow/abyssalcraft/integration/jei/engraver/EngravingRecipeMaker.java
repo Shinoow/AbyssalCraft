@@ -20,7 +20,7 @@ import javax.annotation.Nonnull;
 
 import net.minecraft.item.ItemStack;
 
-import com.shinoow.abyssalcraft.AbyssalCraft;
+import com.shinoow.abyssalcraft.api.item.ACItems;
 import com.shinoow.abyssalcraft.api.recipe.EngraverRecipes;
 
 public class EngravingRecipeMaker {
@@ -40,14 +40,14 @@ public class EngravingRecipeMaker {
 
 			List<ItemStack> inputs = new ArrayList();
 
-			if(output.getItem() == AbyssalCraft.coin){
+			if(output.getItem() == ACItems.coin){
 				inputs = engraverRecipes.getCoinList();
 				for(ItemStack stack : inputs)
-					if(stack.getItem() == AbyssalCraft.coin){
+					if(stack.getItem() == ACItems.coin){
 						inputs.remove(stack);
 						break;
 					}
-			} else inputs = Collections.singletonList(new ItemStack(AbyssalCraft.coin));
+			} else inputs = Collections.singletonList(new ItemStack(ACItems.coin));
 
 			EngravingRecipeWrapper recipe = new EngravingRecipeWrapper(inputs, engraving, output, experience);
 			recipes.add(recipe);

@@ -18,52 +18,45 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.EnumChatFormatting;
-import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
-import com.shinoow.abyssalcraft.AbyssalCraft;
+
+import com.shinoow.abyssalcraft.api.item.ACItems;
+import com.shinoow.abyssalcraft.lib.ACTabs;
 
 public class ItemCoraliumArmor extends ItemArmor {
 	public ItemCoraliumArmor(ArmorMaterial par2EnumArmorMaterial, int par3, int par4, String name){
 		super(par2EnumArmorMaterial, par3, par4);
-		//		GameRegistry.registerItem(this, name);
 		setUnlocalizedName(name);
-		setCreativeTab(AbyssalCraft.tabCombat);
+		setCreativeTab(ACTabs.tabCombat);
 	}
 
 	@Override
 	public String getItemStackDisplayName(ItemStack par1ItemStack) {
 
-		return EnumChatFormatting.AQUA + StatCollector.translateToLocal(this.getUnlocalizedName() + ".name");
+		return EnumChatFormatting.AQUA + super.getItemStackDisplayName(par1ItemStack);
 	}
 
 	@Override
 	public String getArmorTexture(ItemStack stack, Entity entity, int slot, String type)
 	{
-		if(stack.getItem() == AbyssalCraft.Corhelmet || stack.getItem() == AbyssalCraft.Corplate || stack.getItem() == AbyssalCraft.Corboots)
+		if(stack.getItem() == ACItems.refined_coralium_helmet || stack.getItem() == ACItems.refined_coralium_chestplate || stack.getItem() == ACItems.refined_coralium_boots)
 			return "abyssalcraft:textures/armor/coralium_1.png";
 
-		if(stack.getItem() == AbyssalCraft.Corlegs)
+		if(stack.getItem() == ACItems.refined_coralium_leggings)
 			return "abyssalcraft:textures/armor/coralium_2.png";
 		else return null;
 	}
 
-	//	@Override
-	//	@SideOnly(Side.CLIENT)
-	//	public void registerIcons(IIconRegister par1IconRegister)
-	//	{
-	//		itemIcon = par1IconRegister.registerIcon(AbyssalCraft.modid + ":" + this.getUnlocalizedName().substring(5));
-	//	}
-
 	@Override
 	public void onArmorTick(World world, EntityPlayer player, ItemStack itemstack) {
-		if (itemstack.getItem() == AbyssalCraft.Corhelmet)
+		if (itemstack.getItem() == ACItems.refined_coralium_helmet)
 		{
 			player.addPotionEffect(new PotionEffect(Potion.waterBreathing.getId(), 20, 0));
 			player.addPotionEffect(new PotionEffect(Potion.nightVision.getId(), 260, 0));
 		}
-		if (itemstack.getItem() == AbyssalCraft.Corplate)
+		if (itemstack.getItem() == ACItems.refined_coralium_chestplate)
 			player.addPotionEffect(new PotionEffect(Potion.resistance.getId(), 20, 0));
-		if (itemstack.getItem() == AbyssalCraft.Corboots)
+		if (itemstack.getItem() == ACItems.refined_coralium_boots)
 			player.addPotionEffect(new PotionEffect(Potion.moveSpeed.getId(), 20, 1));
 	}
 }

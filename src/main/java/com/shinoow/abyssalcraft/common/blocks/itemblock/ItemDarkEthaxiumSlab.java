@@ -19,11 +19,12 @@ import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.StatCollector;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
+import com.shinoow.abyssalcraft.api.block.ACBlocks;
 
 public class ItemDarkEthaxiumSlab extends ItemSlab {
 
 	public ItemDarkEthaxiumSlab(Block block) {
-		super(block, (BlockSlab)AbyssalCraft.darkethaxiumslab1, (BlockSlab)AbyssalCraft.darkethaxiumslab2);
+		super(block, (BlockSlab)ACBlocks.dark_ethaxium_brick_slab, (BlockSlab)AbyssalCraft.darkethaxiumslab2);
 		setMaxDamage(0);
 		setHasSubtypes(true);
 	}

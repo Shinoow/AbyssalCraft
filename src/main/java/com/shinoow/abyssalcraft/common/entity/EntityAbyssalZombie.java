@@ -50,8 +50,11 @@ import net.minecraft.world.WorldProviderEnd;
 import net.minecraftforge.common.ForgeModContainer;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
+import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
+import com.shinoow.abyssalcraft.api.entity.EntityUtil;
 import com.shinoow.abyssalcraft.api.entity.ICoraliumEntity;
-import com.shinoow.abyssalcraft.common.util.EntityUtil;
+import com.shinoow.abyssalcraft.api.item.ACItems;
+import com.shinoow.abyssalcraft.lib.ACLib;
 
 public class EntityAbyssalZombie extends EntityMob implements ICoraliumEntity {
 
@@ -88,7 +91,7 @@ public class EntityAbyssalZombie extends EntityMob implements ICoraliumEntity {
 	protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
 
-		getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(64.0D);
+		getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(42.0D);
 		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.23000000417232513D);
 
 		if(AbyssalCraft.hardcoreMode){
@@ -168,7 +171,7 @@ public class EntityAbyssalZombie extends EntityMob implements ICoraliumEntity {
 	@Override
 	public void onLivingUpdate()
 	{
-		if (worldObj.isDaytime() && !worldObj.isRemote && !isChild() && worldObj.provider.getDimensionId() != AbyssalCraft.configDimId1)
+		if (worldObj.isDaytime() && !worldObj.isRemote && !isChild() && worldObj.provider.getDimensionId() != ACLib.abyssal_wasteland_id)
 		{
 			float var1 = getBrightness(1.0F);
 
@@ -210,9 +213,9 @@ public class EntityAbyssalZombie extends EntityMob implements ICoraliumEntity {
 
 		if (super.attackEntityAsMob(par1Entity))
 			if (par1Entity instanceof EntityLivingBase)
-				if(worldObj.provider.getDimensionId() == AbyssalCraft.configDimId1 && !EntityUtil.isEntityCoralium((EntityLivingBase)par1Entity)
+				if(worldObj.provider.getDimensionId() == ACLib.abyssal_wasteland_id && !EntityUtil.isEntityCoralium((EntityLivingBase)par1Entity)
 				|| AbyssalCraft.shouldInfect == true && !EntityUtil.isEntityCoralium((EntityLivingBase)par1Entity))
-					((EntityLivingBase)par1Entity).addPotionEffect(new PotionEffect(AbyssalCraft.Cplague.id, 100));
+					((EntityLivingBase)par1Entity).addPotionEffect(new PotionEffect(AbyssalCraftAPI.coralium_plague.id, 100));
 
 		boolean flag = super.attackEntityAsMob(par1Entity);
 
@@ -249,7 +252,7 @@ public class EntityAbyssalZombie extends EntityMob implements ICoraliumEntity {
 	@Override
 	protected Item getDropItem()
 	{
-		return AbyssalCraft.Corflesh;
+		return ACItems.coralium_plagued_flesh;
 	}
 
 	@Override
@@ -267,10 +270,10 @@ public class EntityAbyssalZombie extends EntityMob implements ICoraliumEntity {
 			dropItem(Items.bone, 1);
 			break;
 		case 1:
-			dropItem(AbyssalCraft.sword, 1);
+			dropItem(ACItems.darkstone_sword, 1);
 			break;
 		case 2:
-			dropItem(AbyssalCraft.Coralium, rand.nextInt(3));
+			dropItem(ACItems.coralium_gem, rand.nextInt(3));
 		}
 	}
 

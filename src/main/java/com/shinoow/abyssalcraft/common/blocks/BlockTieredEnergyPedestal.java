@@ -35,8 +35,8 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.common.blocks.tile.TileEntityTieredEnergyPedestal;
+import com.shinoow.abyssalcraft.lib.ACTabs;
 
 public class BlockTieredEnergyPedestal extends BlockContainer {
 
@@ -48,7 +48,7 @@ public class BlockTieredEnergyPedestal extends BlockContainer {
 		setHardness(6.0F);
 		setResistance(12.0F);
 		setStepSound(Block.soundTypeStone);
-		setCreativeTab(AbyssalCraft.tabDecoration);
+		setCreativeTab(ACTabs.tabDecoration);
 		setBlockBounds(0.25F, 0.0F, 0.25F, 0.75F, 1.0F, 0.75F);
 		setDefaultState(blockState.getBaseState().withProperty(DIMENSION, EnumDimType.OVERWORLD));
 	}

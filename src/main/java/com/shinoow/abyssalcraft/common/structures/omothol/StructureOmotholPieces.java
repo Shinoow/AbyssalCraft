@@ -37,7 +37,7 @@ import net.minecraft.world.gen.structure.StructureBoundingBox;
 import net.minecraft.world.gen.structure.StructureComponent;
 
 import com.google.common.collect.Lists;
-import com.shinoow.abyssalcraft.AbyssalCraft;
+import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.common.entity.EntityRemnant;
 
 @SuppressWarnings("incomplete-switch")
@@ -275,31 +275,31 @@ public class StructureOmotholPieces
 
 			fillWithBlocks(worldIn, structureBoundingBoxIn, 1, 1, 1, 3, 3, 7, Blocks.air.getDefaultState(), Blocks.air.getDefaultState(), false);
 			fillWithBlocks(worldIn, structureBoundingBoxIn, 1, 5, 1, 3, 9, 3, Blocks.air.getDefaultState(), Blocks.air.getDefaultState(), false);
-			fillWithBlocks(worldIn, structureBoundingBoxIn, 1, 0, 0, 3, 0, 8, AbyssalCraft.ethaxiumbrick.getDefaultState(), AbyssalCraft.ethaxiumbrick.getDefaultState(), false);
-			fillWithBlocks(worldIn, structureBoundingBoxIn, 1, 1, 0, 3, 10, 0, AbyssalCraft.ethaxiumbrick.getDefaultState(), AbyssalCraft.ethaxiumbrick.getDefaultState(), false);
-			fillWithBlocks(worldIn, structureBoundingBoxIn, 0, 1, 1, 0, 10, 3, AbyssalCraft.ethaxiumbrick.getDefaultState(), AbyssalCraft.ethaxiumbrick.getDefaultState(), false);
-			fillWithBlocks(worldIn, structureBoundingBoxIn, 4, 1, 1, 4, 10, 3, AbyssalCraft.ethaxiumbrick.getDefaultState(), AbyssalCraft.ethaxiumbrick.getDefaultState(), false);
-			fillWithBlocks(worldIn, structureBoundingBoxIn, 0, 0, 4, 0, 4, 7, AbyssalCraft.ethaxiumbrick.getDefaultState(), AbyssalCraft.ethaxiumbrick.getDefaultState(), false);
-			fillWithBlocks(worldIn, structureBoundingBoxIn, 4, 0, 4, 4, 4, 7, AbyssalCraft.ethaxiumbrick.getDefaultState(), AbyssalCraft.ethaxiumbrick.getDefaultState(), false);
-			fillWithBlocks(worldIn, structureBoundingBoxIn, 1, 1, 8, 3, 4, 8, AbyssalCraft.ethaxiumbrick.getDefaultState(), AbyssalCraft.ethaxiumbrick.getDefaultState(), false);
-			fillWithBlocks(worldIn, structureBoundingBoxIn, 1, 5, 4, 3, 10, 4, AbyssalCraft.ethaxiumbrick.getDefaultState(), AbyssalCraft.ethaxiumbrick.getDefaultState(), false);
-			fillWithBlocks(worldIn, structureBoundingBoxIn, 1, 5, 5, 3, 5, 7, AbyssalCraft.ethaxiumbrick.getDefaultState(), AbyssalCraft.ethaxiumbrick.getDefaultState(), false);
-			fillWithBlocks(worldIn, structureBoundingBoxIn, 0, 9, 0, 4, 9, 4, AbyssalCraft.ethaxiumbrick.getDefaultState(), AbyssalCraft.ethaxiumbrick.getDefaultState(), false);
-			fillWithBlocks(worldIn, structureBoundingBoxIn, 0, 4, 0, 4, 4, 4, AbyssalCraft.ethaxiumbrick.getDefaultState(), AbyssalCraft.ethaxiumbrick.getDefaultState(), false);
-			setBlockState(worldIn, AbyssalCraft.ethaxiumbrick.getDefaultState(), 0, 11, 2, structureBoundingBoxIn);
-			setBlockState(worldIn, AbyssalCraft.ethaxiumbrick.getDefaultState(), 4, 11, 2, structureBoundingBoxIn);
-			setBlockState(worldIn, AbyssalCraft.ethaxiumbrick.getDefaultState(), 2, 11, 0, structureBoundingBoxIn);
-			setBlockState(worldIn, AbyssalCraft.ethaxiumbrick.getDefaultState(), 2, 11, 4, structureBoundingBoxIn);
-			setBlockState(worldIn, AbyssalCraft.ethaxiumbrick.getDefaultState(), 1, 1, 6, structureBoundingBoxIn);
-			setBlockState(worldIn, AbyssalCraft.ethaxiumbrick.getDefaultState(), 1, 1, 7, structureBoundingBoxIn);
-			setBlockState(worldIn, AbyssalCraft.ethaxiumbrick.getDefaultState(), 2, 1, 7, structureBoundingBoxIn);
-			setBlockState(worldIn, AbyssalCraft.ethaxiumbrick.getDefaultState(), 3, 1, 6, structureBoundingBoxIn);
-			setBlockState(worldIn, AbyssalCraft.ethaxiumbrick.getDefaultState(), 3, 1, 7, structureBoundingBoxIn);
-			setBlockState(worldIn, AbyssalCraft.ethaxiumstairs.getStateFromMeta(getMetadataWithOffset(Blocks.stone_stairs, 3)), 1, 1, 5, structureBoundingBoxIn);
-			setBlockState(worldIn, AbyssalCraft.ethaxiumstairs.getStateFromMeta(getMetadataWithOffset(Blocks.stone_stairs, 3)), 2, 1, 6, structureBoundingBoxIn);
-			setBlockState(worldIn, AbyssalCraft.ethaxiumstairs.getStateFromMeta(getMetadataWithOffset(Blocks.stone_stairs, 3)), 3, 1, 5, structureBoundingBoxIn);
-			setBlockState(worldIn, AbyssalCraft.ethaxiumstairs.getStateFromMeta(getMetadataWithOffset(Blocks.stone_stairs, 1)), 1, 2, 7, structureBoundingBoxIn);
-			setBlockState(worldIn, AbyssalCraft.ethaxiumstairs.getStateFromMeta(getMetadataWithOffset(Blocks.stone_stairs, 0)), 3, 2, 7, structureBoundingBoxIn);
+			fillWithBlocks(worldIn, structureBoundingBoxIn, 1, 0, 0, 3, 0, 8, ACBlocks.ethaxium_brick.getDefaultState(), ACBlocks.ethaxium_brick.getDefaultState(), false);
+			fillWithBlocks(worldIn, structureBoundingBoxIn, 1, 1, 0, 3, 10, 0, ACBlocks.ethaxium_brick.getDefaultState(), ACBlocks.ethaxium_brick.getDefaultState(), false);
+			fillWithBlocks(worldIn, structureBoundingBoxIn, 0, 1, 1, 0, 10, 3, ACBlocks.ethaxium_brick.getDefaultState(), ACBlocks.ethaxium_brick.getDefaultState(), false);
+			fillWithBlocks(worldIn, structureBoundingBoxIn, 4, 1, 1, 4, 10, 3, ACBlocks.ethaxium_brick.getDefaultState(), ACBlocks.ethaxium_brick.getDefaultState(), false);
+			fillWithBlocks(worldIn, structureBoundingBoxIn, 0, 0, 4, 0, 4, 7, ACBlocks.ethaxium_brick.getDefaultState(), ACBlocks.ethaxium_brick.getDefaultState(), false);
+			fillWithBlocks(worldIn, structureBoundingBoxIn, 4, 0, 4, 4, 4, 7, ACBlocks.ethaxium_brick.getDefaultState(), ACBlocks.ethaxium_brick.getDefaultState(), false);
+			fillWithBlocks(worldIn, structureBoundingBoxIn, 1, 1, 8, 3, 4, 8, ACBlocks.ethaxium_brick.getDefaultState(), ACBlocks.ethaxium_brick.getDefaultState(), false);
+			fillWithBlocks(worldIn, structureBoundingBoxIn, 1, 5, 4, 3, 10, 4, ACBlocks.ethaxium_brick.getDefaultState(), ACBlocks.ethaxium_brick.getDefaultState(), false);
+			fillWithBlocks(worldIn, structureBoundingBoxIn, 1, 5, 5, 3, 5, 7, ACBlocks.ethaxium_brick.getDefaultState(), ACBlocks.ethaxium_brick.getDefaultState(), false);
+			fillWithBlocks(worldIn, structureBoundingBoxIn, 0, 9, 0, 4, 9, 4, ACBlocks.ethaxium_brick.getDefaultState(), ACBlocks.ethaxium_brick.getDefaultState(), false);
+			fillWithBlocks(worldIn, structureBoundingBoxIn, 0, 4, 0, 4, 4, 4, ACBlocks.ethaxium_brick.getDefaultState(), ACBlocks.ethaxium_brick.getDefaultState(), false);
+			setBlockState(worldIn, ACBlocks.ethaxium_brick.getDefaultState(), 0, 11, 2, structureBoundingBoxIn);
+			setBlockState(worldIn, ACBlocks.ethaxium_brick.getDefaultState(), 4, 11, 2, structureBoundingBoxIn);
+			setBlockState(worldIn, ACBlocks.ethaxium_brick.getDefaultState(), 2, 11, 0, structureBoundingBoxIn);
+			setBlockState(worldIn, ACBlocks.ethaxium_brick.getDefaultState(), 2, 11, 4, structureBoundingBoxIn);
+			setBlockState(worldIn, ACBlocks.ethaxium_brick.getDefaultState(), 1, 1, 6, structureBoundingBoxIn);
+			setBlockState(worldIn, ACBlocks.ethaxium_brick.getDefaultState(), 1, 1, 7, structureBoundingBoxIn);
+			setBlockState(worldIn, ACBlocks.ethaxium_brick.getDefaultState(), 2, 1, 7, structureBoundingBoxIn);
+			setBlockState(worldIn, ACBlocks.ethaxium_brick.getDefaultState(), 3, 1, 6, structureBoundingBoxIn);
+			setBlockState(worldIn, ACBlocks.ethaxium_brick.getDefaultState(), 3, 1, 7, structureBoundingBoxIn);
+			setBlockState(worldIn, ACBlocks.ethaxium_brick_stairs.getStateFromMeta(getMetadataWithOffset(Blocks.stone_stairs, 3)), 1, 1, 5, structureBoundingBoxIn);
+			setBlockState(worldIn, ACBlocks.ethaxium_brick_stairs.getStateFromMeta(getMetadataWithOffset(Blocks.stone_stairs, 3)), 2, 1, 6, structureBoundingBoxIn);
+			setBlockState(worldIn, ACBlocks.ethaxium_brick_stairs.getStateFromMeta(getMetadataWithOffset(Blocks.stone_stairs, 3)), 3, 1, 5, structureBoundingBoxIn);
+			setBlockState(worldIn, ACBlocks.ethaxium_brick_stairs.getStateFromMeta(getMetadataWithOffset(Blocks.stone_stairs, 1)), 1, 2, 7, structureBoundingBoxIn);
+			setBlockState(worldIn, ACBlocks.ethaxium_brick_stairs.getStateFromMeta(getMetadataWithOffset(Blocks.stone_stairs, 0)), 3, 2, 7, structureBoundingBoxIn);
 			setBlockState(worldIn, Blocks.glass_pane.getDefaultState(), 0, 2, 2, structureBoundingBoxIn);
 			setBlockState(worldIn, Blocks.glass_pane.getDefaultState(), 0, 3, 2, structureBoundingBoxIn);
 			setBlockState(worldIn, Blocks.glass_pane.getDefaultState(), 4, 2, 2, structureBoundingBoxIn);
@@ -329,13 +329,13 @@ public class StructureOmotholPieces
 			placeDoorCurrentPosition(worldIn, structureBoundingBoxIn, randomIn, 2, 1, 0, EnumFacing.getHorizontal(getMetadataWithOffset(Blocks.oak_door, 1)));
 
 			if (getBlockStateFromPos(worldIn, 2, 0, -1, structureBoundingBoxIn).getBlock().getMaterial() == Material.air && getBlockStateFromPos(worldIn, 2, -1, -1, structureBoundingBoxIn).getBlock().getMaterial() != Material.air)
-				setBlockState(worldIn, AbyssalCraft.ethaxiumstairs.getStateFromMeta(getMetadataWithOffset(Blocks.stone_stairs, 3)), 2, 0, -1, structureBoundingBoxIn);
+				setBlockState(worldIn, ACBlocks.ethaxium_brick_stairs.getStateFromMeta(getMetadataWithOffset(Blocks.stone_stairs, 3)), 2, 0, -1, structureBoundingBoxIn);
 
 			for (int l = 0; l < 9; ++l)
 				for (int k = 0; k < 5; ++k)
 				{
 					clearCurrentPositionBlocksUpwards(worldIn, k, 12, l, structureBoundingBoxIn);
-					replaceAirAndLiquidDownwards(worldIn, AbyssalCraft.ethaxiumbrick.getDefaultState(), k, -1, l, structureBoundingBoxIn);
+					replaceAirAndLiquidDownwards(worldIn, ACBlocks.ethaxium_brick.getDefaultState(), k, -1, l, structureBoundingBoxIn);
 				}
 
 			spawnRemnants(worldIn, structureBoundingBoxIn, 2, 1, 2, 1);
@@ -442,11 +442,11 @@ public class StructureOmotholPieces
 			fillWithBlocks(worldIn, structureBoundingBoxIn, 4, 0, 1, 5, 0, 7, Blocks.farmland.getDefaultState(), Blocks.farmland.getDefaultState(), false);
 			fillWithBlocks(worldIn, structureBoundingBoxIn, 7, 0, 1, 8, 0, 7, Blocks.farmland.getDefaultState(), Blocks.farmland.getDefaultState(), false);
 			fillWithBlocks(worldIn, structureBoundingBoxIn, 10, 0, 1, 11, 0, 7, Blocks.farmland.getDefaultState(), Blocks.farmland.getDefaultState(), false);
-			fillWithBlocks(worldIn, structureBoundingBoxIn, 0, 0, 0, 0, 0, 8, AbyssalCraft.ethaxiumpillar.getDefaultState(), AbyssalCraft.ethaxiumpillar.getDefaultState(), false);
-			fillWithBlocks(worldIn, structureBoundingBoxIn, 6, 0, 0, 6, 0, 8, AbyssalCraft.ethaxiumpillar.getDefaultState(), AbyssalCraft.ethaxiumpillar.getDefaultState(), false);
-			fillWithBlocks(worldIn, structureBoundingBoxIn, 12, 0, 0, 12, 0, 8, AbyssalCraft.ethaxiumpillar.getDefaultState(), AbyssalCraft.ethaxiumpillar.getDefaultState(), false);
-			fillWithBlocks(worldIn, structureBoundingBoxIn, 1, 0, 0, 11, 0, 0, AbyssalCraft.ethaxiumpillar.getDefaultState(), AbyssalCraft.ethaxiumpillar.getDefaultState(), false);
-			fillWithBlocks(worldIn, structureBoundingBoxIn, 1, 0, 8, 11, 0, 8, AbyssalCraft.ethaxiumpillar.getDefaultState(), AbyssalCraft.ethaxiumpillar.getDefaultState(), false);
+			fillWithBlocks(worldIn, structureBoundingBoxIn, 0, 0, 0, 0, 0, 8, ACBlocks.ethaxium_pillar.getDefaultState(), ACBlocks.ethaxium_pillar.getDefaultState(), false);
+			fillWithBlocks(worldIn, structureBoundingBoxIn, 6, 0, 0, 6, 0, 8, ACBlocks.ethaxium_pillar.getDefaultState(), ACBlocks.ethaxium_pillar.getDefaultState(), false);
+			fillWithBlocks(worldIn, structureBoundingBoxIn, 12, 0, 0, 12, 0, 8, ACBlocks.ethaxium_pillar.getDefaultState(), ACBlocks.ethaxium_pillar.getDefaultState(), false);
+			fillWithBlocks(worldIn, structureBoundingBoxIn, 1, 0, 0, 11, 0, 0, ACBlocks.ethaxium_pillar.getDefaultState(), ACBlocks.ethaxium_pillar.getDefaultState(), false);
+			fillWithBlocks(worldIn, structureBoundingBoxIn, 1, 0, 8, 11, 0, 8, ACBlocks.ethaxium_pillar.getDefaultState(), ACBlocks.ethaxium_pillar.getDefaultState(), false);
 			fillWithBlocks(worldIn, structureBoundingBoxIn, 3, 0, 1, 3, 0, 7, Blocks.water.getDefaultState(), Blocks.water.getDefaultState(), false);
 			fillWithBlocks(worldIn, structureBoundingBoxIn, 9, 0, 1, 9, 0, 7, Blocks.water.getDefaultState(), Blocks.water.getDefaultState(), false);
 
@@ -554,10 +554,10 @@ public class StructureOmotholPieces
 			fillWithBlocks(worldIn, structureBoundingBoxIn, 0, 1, 0, 6, 4, 8, Blocks.air.getDefaultState(), Blocks.air.getDefaultState(), false);
 			fillWithBlocks(worldIn, structureBoundingBoxIn, 1, 0, 1, 2, 0, 7, Blocks.farmland.getDefaultState(), Blocks.farmland.getDefaultState(), false);
 			fillWithBlocks(worldIn, structureBoundingBoxIn, 4, 0, 1, 5, 0, 7, Blocks.farmland.getDefaultState(), Blocks.farmland.getDefaultState(), false);
-			fillWithBlocks(worldIn, structureBoundingBoxIn, 0, 0, 0, 0, 0, 8, AbyssalCraft.ethaxiumpillar.getDefaultState(), AbyssalCraft.ethaxiumpillar.getDefaultState(), false);
-			fillWithBlocks(worldIn, structureBoundingBoxIn, 6, 0, 0, 6, 0, 8, AbyssalCraft.ethaxiumpillar.getDefaultState(), AbyssalCraft.ethaxiumpillar.getDefaultState(), false);
-			fillWithBlocks(worldIn, structureBoundingBoxIn, 1, 0, 0, 5, 0, 0, AbyssalCraft.ethaxiumpillar.getDefaultState(), AbyssalCraft.ethaxiumpillar.getDefaultState(), false);
-			fillWithBlocks(worldIn, structureBoundingBoxIn, 1, 0, 8, 5, 0, 8, AbyssalCraft.ethaxiumpillar.getDefaultState(), AbyssalCraft.ethaxiumpillar.getDefaultState(), false);
+			fillWithBlocks(worldIn, structureBoundingBoxIn, 0, 0, 0, 0, 0, 8, ACBlocks.ethaxium_pillar.getDefaultState(), ACBlocks.ethaxium_pillar.getDefaultState(), false);
+			fillWithBlocks(worldIn, structureBoundingBoxIn, 6, 0, 0, 6, 0, 8, ACBlocks.ethaxium_pillar.getDefaultState(), ACBlocks.ethaxium_pillar.getDefaultState(), false);
+			fillWithBlocks(worldIn, structureBoundingBoxIn, 1, 0, 0, 5, 0, 0, ACBlocks.ethaxium_pillar.getDefaultState(), ACBlocks.ethaxium_pillar.getDefaultState(), false);
+			fillWithBlocks(worldIn, structureBoundingBoxIn, 1, 0, 8, 5, 0, 8, ACBlocks.ethaxium_pillar.getDefaultState(), ACBlocks.ethaxium_pillar.getDefaultState(), false);
 			fillWithBlocks(worldIn, structureBoundingBoxIn, 3, 0, 1, 3, 0, 7, Blocks.water.getDefaultState(), Blocks.water.getDefaultState(), false);
 
 			for (int i = 1; i <= 7; ++i)
@@ -618,38 +618,38 @@ public class StructureOmotholPieces
 			fillWithBlocks(worldIn, structureBoundingBoxIn, 1, 1, 1, 7, 4, 4, Blocks.air.getDefaultState(), Blocks.air.getDefaultState(), false);
 			fillWithBlocks(worldIn, structureBoundingBoxIn, 2, 1, 6, 8, 4, 10, Blocks.air.getDefaultState(), Blocks.air.getDefaultState(), false);
 			fillWithBlocks(worldIn, structureBoundingBoxIn, 2, 0, 6, 8, 0, 10, Blocks.dirt.getDefaultState(), Blocks.dirt.getDefaultState(), false);
-			setBlockState(worldIn, AbyssalCraft.ethaxiumbrick.getDefaultState(), 6, 0, 6, structureBoundingBoxIn);
-			fillWithBlocks(worldIn, structureBoundingBoxIn, 2, 1, 6, 2, 1, 10, AbyssalCraft.ethaxiumfence.getDefaultState(), AbyssalCraft.ethaxiumfence.getDefaultState(), false);
-			fillWithBlocks(worldIn, structureBoundingBoxIn, 8, 1, 6, 8, 1, 10, AbyssalCraft.ethaxiumfence.getDefaultState(), AbyssalCraft.ethaxiumfence.getDefaultState(), false);
-			fillWithBlocks(worldIn, structureBoundingBoxIn, 3, 1, 10, 7, 1, 10, AbyssalCraft.ethaxiumfence.getDefaultState(), AbyssalCraft.ethaxiumfence.getDefaultState(), false);
-			fillWithBlocks(worldIn, structureBoundingBoxIn, 1, 0, 1, 7, 0, 4, AbyssalCraft.ethaxiumbrick.getDefaultState(), AbyssalCraft.ethaxiumbrick.getDefaultState(), false);
-			fillWithBlocks(worldIn, structureBoundingBoxIn, 0, 0, 0, 0, 3, 5, AbyssalCraft.ethaxiumbrick.getDefaultState(), AbyssalCraft.ethaxiumbrick.getDefaultState(), false);
-			fillWithBlocks(worldIn, structureBoundingBoxIn, 8, 0, 0, 8, 3, 5, AbyssalCraft.ethaxiumbrick.getDefaultState(), AbyssalCraft.ethaxiumbrick.getDefaultState(), false);
-			fillWithBlocks(worldIn, structureBoundingBoxIn, 1, 0, 0, 7, 1, 0, AbyssalCraft.ethaxiumbrick.getDefaultState(), AbyssalCraft.ethaxiumbrick.getDefaultState(), false);
-			fillWithBlocks(worldIn, structureBoundingBoxIn, 1, 0, 5, 7, 1, 5, AbyssalCraft.ethaxiumbrick.getDefaultState(), AbyssalCraft.ethaxiumbrick.getDefaultState(), false);
-			fillWithBlocks(worldIn, structureBoundingBoxIn, 1, 2, 0, 7, 3, 0, AbyssalCraft.ethaxiumbrick.getDefaultState(), AbyssalCraft.ethaxiumbrick.getDefaultState(), false);
-			fillWithBlocks(worldIn, structureBoundingBoxIn, 1, 2, 5, 7, 3, 5, AbyssalCraft.ethaxiumbrick.getDefaultState(), AbyssalCraft.ethaxiumbrick.getDefaultState(), false);
-			fillWithBlocks(worldIn, structureBoundingBoxIn, 0, 4, 1, 8, 4, 1, AbyssalCraft.ethaxiumbrick.getDefaultState(), AbyssalCraft.ethaxiumbrick.getDefaultState(), false);
-			fillWithBlocks(worldIn, structureBoundingBoxIn, 0, 4, 4, 8, 4, 4, AbyssalCraft.ethaxiumbrick.getDefaultState(), AbyssalCraft.ethaxiumbrick.getDefaultState(), false);
-			fillWithBlocks(worldIn, structureBoundingBoxIn, 0, 5, 2, 8, 5, 3, AbyssalCraft.ethaxiumbrick.getDefaultState(), AbyssalCraft.ethaxiumbrick.getDefaultState(), false);
-			setBlockState(worldIn, AbyssalCraft.ethaxiumbrick.getDefaultState(), 0, 4, 2, structureBoundingBoxIn);
-			setBlockState(worldIn, AbyssalCraft.ethaxiumbrick.getDefaultState(), 0, 4, 3, structureBoundingBoxIn);
-			setBlockState(worldIn, AbyssalCraft.ethaxiumbrick.getDefaultState(), 8, 4, 2, structureBoundingBoxIn);
-			setBlockState(worldIn, AbyssalCraft.ethaxiumbrick.getDefaultState(), 8, 4, 3, structureBoundingBoxIn);
+			setBlockState(worldIn, ACBlocks.ethaxium_brick.getDefaultState(), 6, 0, 6, structureBoundingBoxIn);
+			fillWithBlocks(worldIn, structureBoundingBoxIn, 2, 1, 6, 2, 1, 10, ACBlocks.ethaxium_brick_fence.getDefaultState(), ACBlocks.ethaxium_brick_fence.getDefaultState(), false);
+			fillWithBlocks(worldIn, structureBoundingBoxIn, 8, 1, 6, 8, 1, 10, ACBlocks.ethaxium_brick_fence.getDefaultState(), ACBlocks.ethaxium_brick_fence.getDefaultState(), false);
+			fillWithBlocks(worldIn, structureBoundingBoxIn, 3, 1, 10, 7, 1, 10, ACBlocks.ethaxium_brick_fence.getDefaultState(), ACBlocks.ethaxium_brick_fence.getDefaultState(), false);
+			fillWithBlocks(worldIn, structureBoundingBoxIn, 1, 0, 1, 7, 0, 4, ACBlocks.ethaxium_brick.getDefaultState(), ACBlocks.ethaxium_brick.getDefaultState(), false);
+			fillWithBlocks(worldIn, structureBoundingBoxIn, 0, 0, 0, 0, 3, 5, ACBlocks.ethaxium_brick.getDefaultState(), ACBlocks.ethaxium_brick.getDefaultState(), false);
+			fillWithBlocks(worldIn, structureBoundingBoxIn, 8, 0, 0, 8, 3, 5, ACBlocks.ethaxium_brick.getDefaultState(), ACBlocks.ethaxium_brick.getDefaultState(), false);
+			fillWithBlocks(worldIn, structureBoundingBoxIn, 1, 0, 0, 7, 1, 0, ACBlocks.ethaxium_brick.getDefaultState(), ACBlocks.ethaxium_brick.getDefaultState(), false);
+			fillWithBlocks(worldIn, structureBoundingBoxIn, 1, 0, 5, 7, 1, 5, ACBlocks.ethaxium_brick.getDefaultState(), ACBlocks.ethaxium_brick.getDefaultState(), false);
+			fillWithBlocks(worldIn, structureBoundingBoxIn, 1, 2, 0, 7, 3, 0, ACBlocks.ethaxium_brick.getDefaultState(), ACBlocks.ethaxium_brick.getDefaultState(), false);
+			fillWithBlocks(worldIn, structureBoundingBoxIn, 1, 2, 5, 7, 3, 5, ACBlocks.ethaxium_brick.getDefaultState(), ACBlocks.ethaxium_brick.getDefaultState(), false);
+			fillWithBlocks(worldIn, structureBoundingBoxIn, 0, 4, 1, 8, 4, 1, ACBlocks.ethaxium_brick.getDefaultState(), ACBlocks.ethaxium_brick.getDefaultState(), false);
+			fillWithBlocks(worldIn, structureBoundingBoxIn, 0, 4, 4, 8, 4, 4, ACBlocks.ethaxium_brick.getDefaultState(), ACBlocks.ethaxium_brick.getDefaultState(), false);
+			fillWithBlocks(worldIn, structureBoundingBoxIn, 0, 5, 2, 8, 5, 3, ACBlocks.ethaxium_brick.getDefaultState(), ACBlocks.ethaxium_brick.getDefaultState(), false);
+			setBlockState(worldIn, ACBlocks.ethaxium_brick.getDefaultState(), 0, 4, 2, structureBoundingBoxIn);
+			setBlockState(worldIn, ACBlocks.ethaxium_brick.getDefaultState(), 0, 4, 3, structureBoundingBoxIn);
+			setBlockState(worldIn, ACBlocks.ethaxium_brick.getDefaultState(), 8, 4, 2, structureBoundingBoxIn);
+			setBlockState(worldIn, ACBlocks.ethaxium_brick.getDefaultState(), 8, 4, 3, structureBoundingBoxIn);
 			int i = getMetadataWithOffset(Blocks.oak_stairs, 3);
 			int j = getMetadataWithOffset(Blocks.oak_stairs, 2);
 
 			for (int k = -1; k <= 2; ++k)
 				for (int l = 0; l <= 8; ++l)
 				{
-					setBlockState(worldIn, AbyssalCraft.ethaxiumstairs.getStateFromMeta(i), l, 4 + k, k, structureBoundingBoxIn);
-					setBlockState(worldIn, AbyssalCraft.ethaxiumstairs.getStateFromMeta(j), l, 4 + k, 5 - k, structureBoundingBoxIn);
+					setBlockState(worldIn, ACBlocks.ethaxium_brick_stairs.getStateFromMeta(i), l, 4 + k, k, structureBoundingBoxIn);
+					setBlockState(worldIn, ACBlocks.ethaxium_brick_stairs.getStateFromMeta(j), l, 4 + k, 5 - k, structureBoundingBoxIn);
 				}
 
-			setBlockState(worldIn, AbyssalCraft.ethaxiumpillar.getDefaultState(), 0, 2, 1, structureBoundingBoxIn);
-			setBlockState(worldIn, AbyssalCraft.ethaxiumpillar.getDefaultState(), 0, 2, 4, structureBoundingBoxIn);
-			setBlockState(worldIn, AbyssalCraft.ethaxiumpillar.getDefaultState(), 8, 2, 1, structureBoundingBoxIn);
-			setBlockState(worldIn, AbyssalCraft.ethaxiumpillar.getDefaultState(), 8, 2, 4, structureBoundingBoxIn);
+			setBlockState(worldIn, ACBlocks.ethaxium_pillar.getDefaultState(), 0, 2, 1, structureBoundingBoxIn);
+			setBlockState(worldIn, ACBlocks.ethaxium_pillar.getDefaultState(), 0, 2, 4, structureBoundingBoxIn);
+			setBlockState(worldIn, ACBlocks.ethaxium_pillar.getDefaultState(), 8, 2, 1, structureBoundingBoxIn);
+			setBlockState(worldIn, ACBlocks.ethaxium_pillar.getDefaultState(), 8, 2, 4, structureBoundingBoxIn);
 			setBlockState(worldIn, Blocks.glass_pane.getDefaultState(), 0, 2, 2, structureBoundingBoxIn);
 			setBlockState(worldIn, Blocks.glass_pane.getDefaultState(), 0, 2, 3, structureBoundingBoxIn);
 			setBlockState(worldIn, Blocks.glass_pane.getDefaultState(), 8, 2, 2, structureBoundingBoxIn);
@@ -660,9 +660,9 @@ public class StructureOmotholPieces
 			setBlockState(worldIn, Blocks.glass_pane.getDefaultState(), 6, 2, 5, structureBoundingBoxIn);
 			setBlockState(worldIn, Blocks.oak_fence.getDefaultState(), 2, 1, 3, structureBoundingBoxIn);
 			setBlockState(worldIn, Blocks.wooden_pressure_plate.getDefaultState(), 2, 2, 3, structureBoundingBoxIn);
-			setBlockState(worldIn, AbyssalCraft.ethaxiumbrick.getDefaultState(), 1, 1, 4, structureBoundingBoxIn);
-			setBlockState(worldIn, AbyssalCraft.ethaxiumstairs.getStateFromMeta(getMetadataWithOffset(Blocks.oak_stairs, 3)), 2, 1, 4, structureBoundingBoxIn);
-			setBlockState(worldIn, AbyssalCraft.ethaxiumstairs.getStateFromMeta(getMetadataWithOffset(Blocks.oak_stairs, 1)), 1, 1, 3, structureBoundingBoxIn);
+			setBlockState(worldIn, ACBlocks.ethaxium_brick.getDefaultState(), 1, 1, 4, structureBoundingBoxIn);
+			setBlockState(worldIn, ACBlocks.ethaxium_brick_stairs.getStateFromMeta(getMetadataWithOffset(Blocks.oak_stairs, 3)), 2, 1, 4, structureBoundingBoxIn);
+			setBlockState(worldIn, ACBlocks.ethaxium_brick_stairs.getStateFromMeta(getMetadataWithOffset(Blocks.oak_stairs, 1)), 1, 1, 3, structureBoundingBoxIn);
 			fillWithBlocks(worldIn, structureBoundingBoxIn, 5, 0, 1, 7, 0, 3, Blocks.double_stone_slab.getDefaultState(), Blocks.double_stone_slab.getDefaultState(), false);
 			setBlockState(worldIn, Blocks.double_stone_slab.getDefaultState(), 6, 1, 1, structureBoundingBoxIn);
 			setBlockState(worldIn, Blocks.double_stone_slab.getDefaultState(), 6, 1, 2, structureBoundingBoxIn);
@@ -672,7 +672,7 @@ public class StructureOmotholPieces
 			placeDoorCurrentPosition(worldIn, structureBoundingBoxIn, randomIn, 2, 1, 0, EnumFacing.getHorizontal(getMetadataWithOffset(Blocks.oak_door, 1)));
 
 			if (getBlockStateFromPos(worldIn, 2, 0, -1, structureBoundingBoxIn).getBlock().getMaterial() == Material.air && getBlockStateFromPos(worldIn, 2, -1, -1, structureBoundingBoxIn).getBlock().getMaterial() != Material.air)
-				setBlockState(worldIn, AbyssalCraft.ethaxiumstairs.getStateFromMeta(getMetadataWithOffset(Blocks.stone_stairs, 3)), 2, 0, -1, structureBoundingBoxIn);
+				setBlockState(worldIn, ACBlocks.ethaxium_brick_stairs.getStateFromMeta(getMetadataWithOffset(Blocks.stone_stairs, 3)), 2, 0, -1, structureBoundingBoxIn);
 
 			setBlockState(worldIn, Blocks.air.getDefaultState(), 6, 1, 5, structureBoundingBoxIn);
 			setBlockState(worldIn, Blocks.air.getDefaultState(), 6, 2, 5, structureBoundingBoxIn);
@@ -683,7 +683,7 @@ public class StructureOmotholPieces
 				for (int j1 = 0; j1 < 9; ++j1)
 				{
 					clearCurrentPositionBlocksUpwards(worldIn, j1, 7, i1, structureBoundingBoxIn);
-					replaceAirAndLiquidDownwards(worldIn, AbyssalCraft.ethaxiumbrick.getDefaultState(), j1, -1, i1, structureBoundingBoxIn);
+					replaceAirAndLiquidDownwards(worldIn, ACBlocks.ethaxium_brick.getDefaultState(), j1, -1, i1, structureBoundingBoxIn);
 				}
 
 			spawnRemnants(worldIn, structureBoundingBoxIn, 4, 1, 2, 2);
@@ -735,32 +735,32 @@ public class StructureOmotholPieces
 			}
 
 			fillWithBlocks(worldIn, structureBoundingBoxIn, 1, 1, 1, 7, 5, 4, Blocks.air.getDefaultState(), Blocks.air.getDefaultState(), false);
-			fillWithBlocks(worldIn, structureBoundingBoxIn, 0, 0, 0, 8, 0, 5, AbyssalCraft.ethaxiumbrick.getDefaultState(), AbyssalCraft.ethaxiumbrick.getDefaultState(), false);
-			fillWithBlocks(worldIn, structureBoundingBoxIn, 0, 5, 0, 8, 5, 5, AbyssalCraft.ethaxiumbrick.getDefaultState(), AbyssalCraft.ethaxiumbrick.getDefaultState(), false);
-			fillWithBlocks(worldIn, structureBoundingBoxIn, 0, 6, 1, 8, 6, 4, AbyssalCraft.ethaxiumbrick.getDefaultState(), AbyssalCraft.ethaxiumbrick.getDefaultState(), false);
-			fillWithBlocks(worldIn, structureBoundingBoxIn, 0, 7, 2, 8, 7, 3, AbyssalCraft.ethaxiumbrick.getDefaultState(), AbyssalCraft.ethaxiumbrick.getDefaultState(), false);
+			fillWithBlocks(worldIn, structureBoundingBoxIn, 0, 0, 0, 8, 0, 5, ACBlocks.ethaxium_brick.getDefaultState(), ACBlocks.ethaxium_brick.getDefaultState(), false);
+			fillWithBlocks(worldIn, structureBoundingBoxIn, 0, 5, 0, 8, 5, 5, ACBlocks.ethaxium_brick.getDefaultState(), ACBlocks.ethaxium_brick.getDefaultState(), false);
+			fillWithBlocks(worldIn, structureBoundingBoxIn, 0, 6, 1, 8, 6, 4, ACBlocks.ethaxium_brick.getDefaultState(), ACBlocks.ethaxium_brick.getDefaultState(), false);
+			fillWithBlocks(worldIn, structureBoundingBoxIn, 0, 7, 2, 8, 7, 3, ACBlocks.ethaxium_brick.getDefaultState(), ACBlocks.ethaxium_brick.getDefaultState(), false);
 			int i = getMetadataWithOffset(Blocks.oak_stairs, 3);
 			int j = getMetadataWithOffset(Blocks.oak_stairs, 2);
 
 			for (int k = -1; k <= 2; ++k)
 				for (int l = 0; l <= 8; ++l)
 				{
-					setBlockState(worldIn, AbyssalCraft.ethaxiumstairs.getStateFromMeta(i), l, 6 + k, k, structureBoundingBoxIn);
-					setBlockState(worldIn, AbyssalCraft.ethaxiumstairs.getStateFromMeta(j), l, 6 + k, 5 - k, structureBoundingBoxIn);
+					setBlockState(worldIn, ACBlocks.ethaxium_brick_stairs.getStateFromMeta(i), l, 6 + k, k, structureBoundingBoxIn);
+					setBlockState(worldIn, ACBlocks.ethaxium_brick_stairs.getStateFromMeta(j), l, 6 + k, 5 - k, structureBoundingBoxIn);
 				}
 
-			fillWithBlocks(worldIn, structureBoundingBoxIn, 0, 1, 0, 0, 1, 5, AbyssalCraft.ethaxiumbrick.getDefaultState(), AbyssalCraft.ethaxiumbrick.getDefaultState(), false);
-			fillWithBlocks(worldIn, structureBoundingBoxIn, 1, 1, 5, 8, 1, 5, AbyssalCraft.ethaxiumbrick.getDefaultState(), AbyssalCraft.ethaxiumbrick.getDefaultState(), false);
-			fillWithBlocks(worldIn, structureBoundingBoxIn, 8, 1, 0, 8, 1, 4, AbyssalCraft.ethaxiumbrick.getDefaultState(), AbyssalCraft.ethaxiumbrick.getDefaultState(), false);
-			fillWithBlocks(worldIn, structureBoundingBoxIn, 2, 1, 0, 7, 1, 0, AbyssalCraft.ethaxiumbrick.getDefaultState(), AbyssalCraft.ethaxiumbrick.getDefaultState(), false);
-			fillWithBlocks(worldIn, structureBoundingBoxIn, 0, 2, 0, 0, 4, 0, AbyssalCraft.ethaxiumbrick.getDefaultState(), AbyssalCraft.ethaxiumbrick.getDefaultState(), false);
-			fillWithBlocks(worldIn, structureBoundingBoxIn, 0, 2, 5, 0, 4, 5, AbyssalCraft.ethaxiumbrick.getDefaultState(), AbyssalCraft.ethaxiumbrick.getDefaultState(), false);
-			fillWithBlocks(worldIn, structureBoundingBoxIn, 8, 2, 5, 8, 4, 5, AbyssalCraft.ethaxiumbrick.getDefaultState(), AbyssalCraft.ethaxiumbrick.getDefaultState(), false);
-			fillWithBlocks(worldIn, structureBoundingBoxIn, 8, 2, 0, 8, 4, 0, AbyssalCraft.ethaxiumbrick.getDefaultState(), AbyssalCraft.ethaxiumbrick.getDefaultState(), false);
-			fillWithBlocks(worldIn, structureBoundingBoxIn, 0, 2, 1, 0, 4, 4, AbyssalCraft.ethaxiumbrick.getDefaultState(), AbyssalCraft.ethaxiumbrick.getDefaultState(), false);
-			fillWithBlocks(worldIn, structureBoundingBoxIn, 1, 2, 5, 7, 4, 5, AbyssalCraft.ethaxiumbrick.getDefaultState(), AbyssalCraft.ethaxiumbrick.getDefaultState(), false);
-			fillWithBlocks(worldIn, structureBoundingBoxIn, 8, 2, 1, 8, 4, 4, AbyssalCraft.ethaxiumbrick.getDefaultState(), AbyssalCraft.ethaxiumbrick.getDefaultState(), false);
-			fillWithBlocks(worldIn, structureBoundingBoxIn, 1, 2, 0, 7, 4, 0, AbyssalCraft.ethaxiumbrick.getDefaultState(), AbyssalCraft.ethaxiumbrick.getDefaultState(), false);
+			fillWithBlocks(worldIn, structureBoundingBoxIn, 0, 1, 0, 0, 1, 5, ACBlocks.ethaxium_brick.getDefaultState(), ACBlocks.ethaxium_brick.getDefaultState(), false);
+			fillWithBlocks(worldIn, structureBoundingBoxIn, 1, 1, 5, 8, 1, 5, ACBlocks.ethaxium_brick.getDefaultState(), ACBlocks.ethaxium_brick.getDefaultState(), false);
+			fillWithBlocks(worldIn, structureBoundingBoxIn, 8, 1, 0, 8, 1, 4, ACBlocks.ethaxium_brick.getDefaultState(), ACBlocks.ethaxium_brick.getDefaultState(), false);
+			fillWithBlocks(worldIn, structureBoundingBoxIn, 2, 1, 0, 7, 1, 0, ACBlocks.ethaxium_brick.getDefaultState(), ACBlocks.ethaxium_brick.getDefaultState(), false);
+			fillWithBlocks(worldIn, structureBoundingBoxIn, 0, 2, 0, 0, 4, 0, ACBlocks.ethaxium_brick.getDefaultState(), ACBlocks.ethaxium_brick.getDefaultState(), false);
+			fillWithBlocks(worldIn, structureBoundingBoxIn, 0, 2, 5, 0, 4, 5, ACBlocks.ethaxium_brick.getDefaultState(), ACBlocks.ethaxium_brick.getDefaultState(), false);
+			fillWithBlocks(worldIn, structureBoundingBoxIn, 8, 2, 5, 8, 4, 5, ACBlocks.ethaxium_brick.getDefaultState(), ACBlocks.ethaxium_brick.getDefaultState(), false);
+			fillWithBlocks(worldIn, structureBoundingBoxIn, 8, 2, 0, 8, 4, 0, ACBlocks.ethaxium_brick.getDefaultState(), ACBlocks.ethaxium_brick.getDefaultState(), false);
+			fillWithBlocks(worldIn, structureBoundingBoxIn, 0, 2, 1, 0, 4, 4, ACBlocks.ethaxium_brick.getDefaultState(), ACBlocks.ethaxium_brick.getDefaultState(), false);
+			fillWithBlocks(worldIn, structureBoundingBoxIn, 1, 2, 5, 7, 4, 5, ACBlocks.ethaxium_brick.getDefaultState(), ACBlocks.ethaxium_brick.getDefaultState(), false);
+			fillWithBlocks(worldIn, structureBoundingBoxIn, 8, 2, 1, 8, 4, 4, ACBlocks.ethaxium_brick.getDefaultState(), ACBlocks.ethaxium_brick.getDefaultState(), false);
+			fillWithBlocks(worldIn, structureBoundingBoxIn, 1, 2, 0, 7, 4, 0, ACBlocks.ethaxium_brick.getDefaultState(), ACBlocks.ethaxium_brick.getDefaultState(), false);
 			setBlockState(worldIn, Blocks.glass_pane.getDefaultState(), 4, 2, 0, structureBoundingBoxIn);
 			setBlockState(worldIn, Blocks.glass_pane.getDefaultState(), 5, 2, 0, structureBoundingBoxIn);
 			setBlockState(worldIn, Blocks.glass_pane.getDefaultState(), 6, 2, 0, structureBoundingBoxIn);
@@ -779,16 +779,16 @@ public class StructureOmotholPieces
 			setBlockState(worldIn, Blocks.glass_pane.getDefaultState(), 3, 2, 5, structureBoundingBoxIn);
 			setBlockState(worldIn, Blocks.glass_pane.getDefaultState(), 5, 2, 5, structureBoundingBoxIn);
 			setBlockState(worldIn, Blocks.glass_pane.getDefaultState(), 6, 2, 5, structureBoundingBoxIn);
-			fillWithBlocks(worldIn, structureBoundingBoxIn, 1, 4, 1, 7, 4, 1, AbyssalCraft.ethaxiumbrick.getDefaultState(), AbyssalCraft.ethaxiumbrick.getDefaultState(), false);
-			fillWithBlocks(worldIn, structureBoundingBoxIn, 1, 4, 4, 7, 4, 4, AbyssalCraft.ethaxiumbrick.getDefaultState(), AbyssalCraft.ethaxiumbrick.getDefaultState(), false);
+			fillWithBlocks(worldIn, structureBoundingBoxIn, 1, 4, 1, 7, 4, 1, ACBlocks.ethaxium_brick.getDefaultState(), ACBlocks.ethaxium_brick.getDefaultState(), false);
+			fillWithBlocks(worldIn, structureBoundingBoxIn, 1, 4, 4, 7, 4, 4, ACBlocks.ethaxium_brick.getDefaultState(), ACBlocks.ethaxium_brick.getDefaultState(), false);
 			fillWithBlocks(worldIn, structureBoundingBoxIn, 1, 3, 4, 7, 3, 4, Blocks.bookshelf.getDefaultState(), Blocks.bookshelf.getDefaultState(), false);
-			setBlockState(worldIn, AbyssalCraft.ethaxiumbrick.getDefaultState(), 7, 1, 4, structureBoundingBoxIn);
-			setBlockState(worldIn, AbyssalCraft.ethaxiumstairs.getStateFromMeta(getMetadataWithOffset(Blocks.oak_stairs, 0)), 7, 1, 3, structureBoundingBoxIn);
+			setBlockState(worldIn, ACBlocks.ethaxium_brick.getDefaultState(), 7, 1, 4, structureBoundingBoxIn);
+			setBlockState(worldIn, ACBlocks.ethaxium_brick_stairs.getStateFromMeta(getMetadataWithOffset(Blocks.oak_stairs, 0)), 7, 1, 3, structureBoundingBoxIn);
 			int j1 = getMetadataWithOffset(Blocks.oak_stairs, 3);
-			setBlockState(worldIn, AbyssalCraft.ethaxiumstairs.getStateFromMeta(j1), 6, 1, 4, structureBoundingBoxIn);
-			setBlockState(worldIn, AbyssalCraft.ethaxiumstairs.getStateFromMeta(j1), 5, 1, 4, structureBoundingBoxIn);
-			setBlockState(worldIn, AbyssalCraft.ethaxiumstairs.getStateFromMeta(j1), 4, 1, 4, structureBoundingBoxIn);
-			setBlockState(worldIn, AbyssalCraft.ethaxiumstairs.getStateFromMeta(j1), 3, 1, 4, structureBoundingBoxIn);
+			setBlockState(worldIn, ACBlocks.ethaxium_brick_stairs.getStateFromMeta(j1), 6, 1, 4, structureBoundingBoxIn);
+			setBlockState(worldIn, ACBlocks.ethaxium_brick_stairs.getStateFromMeta(j1), 5, 1, 4, structureBoundingBoxIn);
+			setBlockState(worldIn, ACBlocks.ethaxium_brick_stairs.getStateFromMeta(j1), 4, 1, 4, structureBoundingBoxIn);
+			setBlockState(worldIn, ACBlocks.ethaxium_brick_stairs.getStateFromMeta(j1), 3, 1, 4, structureBoundingBoxIn);
 			setBlockState(worldIn, Blocks.oak_fence.getDefaultState(), 6, 1, 3, structureBoundingBoxIn);
 			setBlockState(worldIn, Blocks.wooden_pressure_plate.getDefaultState(), 6, 2, 3, structureBoundingBoxIn);
 			setBlockState(worldIn, Blocks.oak_fence.getDefaultState(), 4, 1, 3, structureBoundingBoxIn);
@@ -799,13 +799,13 @@ public class StructureOmotholPieces
 			placeDoorCurrentPosition(worldIn, structureBoundingBoxIn, randomIn, 1, 1, 0, EnumFacing.getHorizontal(getMetadataWithOffset(Blocks.oak_door, 1)));
 
 			if (getBlockStateFromPos(worldIn, 1, 0, -1, structureBoundingBoxIn).getBlock().getMaterial() == Material.air && getBlockStateFromPos(worldIn, 1, -1, -1, structureBoundingBoxIn).getBlock().getMaterial() != Material.air)
-				setBlockState(worldIn, AbyssalCraft.ethaxiumstairs.getStateFromMeta(getMetadataWithOffset(Blocks.oak_stairs, 3)), 1, 0, -1, structureBoundingBoxIn);
+				setBlockState(worldIn, ACBlocks.ethaxium_brick_stairs.getStateFromMeta(getMetadataWithOffset(Blocks.oak_stairs, 3)), 1, 0, -1, structureBoundingBoxIn);
 
 			for (int k1 = 0; k1 < 6; ++k1)
 				for (int i1 = 0; i1 < 9; ++i1)
 				{
 					clearCurrentPositionBlocksUpwards(worldIn, i1, 9, k1, structureBoundingBoxIn);
-					replaceAirAndLiquidDownwards(worldIn, AbyssalCraft.ethaxiumbrick.getDefaultState(), i1, -1, k1, structureBoundingBoxIn);
+					replaceAirAndLiquidDownwards(worldIn, ACBlocks.ethaxium_brick.getDefaultState(), i1, -1, k1, structureBoundingBoxIn);
 				}
 
 			spawnRemnants(worldIn, structureBoundingBoxIn, 2, 1, 2, 1);
@@ -884,28 +884,28 @@ public class StructureOmotholPieces
 			}
 
 			fillWithBlocks(worldIn, structureBoundingBoxIn, 0, 1, 0, 9, 4, 6, Blocks.air.getDefaultState(), Blocks.air.getDefaultState(), false);
-			fillWithBlocks(worldIn, structureBoundingBoxIn, 0, 0, 0, 9, 0, 6, AbyssalCraft.ethaxiumbrick.getDefaultState(), AbyssalCraft.ethaxiumbrick.getDefaultState(), false);
-			fillWithBlocks(worldIn, structureBoundingBoxIn, 0, 4, 0, 9, 4, 6, AbyssalCraft.ethaxiumbrick.getDefaultState(), AbyssalCraft.ethaxiumbrick.getDefaultState(), false);
+			fillWithBlocks(worldIn, structureBoundingBoxIn, 0, 0, 0, 9, 0, 6, ACBlocks.ethaxium_brick.getDefaultState(), ACBlocks.ethaxium_brick.getDefaultState(), false);
+			fillWithBlocks(worldIn, structureBoundingBoxIn, 0, 4, 0, 9, 4, 6, ACBlocks.ethaxium_brick.getDefaultState(), ACBlocks.ethaxium_brick.getDefaultState(), false);
 			fillWithBlocks(worldIn, structureBoundingBoxIn, 0, 5, 0, 9, 5, 6, Blocks.stone_slab.getDefaultState(), Blocks.stone_slab.getDefaultState(), false);
 			fillWithBlocks(worldIn, structureBoundingBoxIn, 1, 5, 1, 8, 5, 5, Blocks.air.getDefaultState(), Blocks.air.getDefaultState(), false);
-			fillWithBlocks(worldIn, structureBoundingBoxIn, 1, 1, 0, 2, 3, 0, AbyssalCraft.ethaxiumbrick.getDefaultState(), AbyssalCraft.ethaxiumbrick.getDefaultState(), false);
-			fillWithBlocks(worldIn, structureBoundingBoxIn, 0, 1, 0, 0, 4, 0, AbyssalCraft.ethaxiumpillar.getDefaultState(), AbyssalCraft.ethaxiumpillar.getDefaultState(), false);
-			fillWithBlocks(worldIn, structureBoundingBoxIn, 3, 1, 0, 3, 4, 0, AbyssalCraft.ethaxiumpillar.getDefaultState(), AbyssalCraft.ethaxiumpillar.getDefaultState(), false);
-			fillWithBlocks(worldIn, structureBoundingBoxIn, 0, 1, 6, 0, 4, 6, AbyssalCraft.ethaxiumpillar.getDefaultState(), AbyssalCraft.ethaxiumpillar.getDefaultState(), false);
-			setBlockState(worldIn, AbyssalCraft.ethaxiumbrick.getDefaultState(), 3, 3, 1, structureBoundingBoxIn);
-			fillWithBlocks(worldIn, structureBoundingBoxIn, 3, 1, 2, 3, 3, 2, AbyssalCraft.ethaxiumbrick.getDefaultState(), AbyssalCraft.ethaxiumbrick.getDefaultState(), false);
-			fillWithBlocks(worldIn, structureBoundingBoxIn, 4, 1, 3, 5, 3, 3, AbyssalCraft.ethaxiumbrick.getDefaultState(), AbyssalCraft.ethaxiumbrick.getDefaultState(), false);
-			fillWithBlocks(worldIn, structureBoundingBoxIn, 0, 1, 1, 0, 3, 5, AbyssalCraft.ethaxiumbrick.getDefaultState(), AbyssalCraft.ethaxiumbrick.getDefaultState(), false);
-			fillWithBlocks(worldIn, structureBoundingBoxIn, 1, 1, 6, 5, 3, 6, AbyssalCraft.ethaxiumbrick.getDefaultState(), AbyssalCraft.ethaxiumbrick.getDefaultState(), false);
-			fillWithBlocks(worldIn, structureBoundingBoxIn, 5, 1, 0, 5, 3, 0, AbyssalCraft.ethaxiumfence.getDefaultState(), AbyssalCraft.ethaxiumfence.getDefaultState(), false);
-			fillWithBlocks(worldIn, structureBoundingBoxIn, 9, 1, 0, 9, 3, 0, AbyssalCraft.ethaxiumfence.getDefaultState(), AbyssalCraft.ethaxiumfence.getDefaultState(), false);
-			fillWithBlocks(worldIn, structureBoundingBoxIn, 6, 1, 4, 9, 4, 6, AbyssalCraft.ethaxiumbrick.getDefaultState(), AbyssalCraft.ethaxiumbrick.getDefaultState(), false);
+			fillWithBlocks(worldIn, structureBoundingBoxIn, 1, 1, 0, 2, 3, 0, ACBlocks.ethaxium_brick.getDefaultState(), ACBlocks.ethaxium_brick.getDefaultState(), false);
+			fillWithBlocks(worldIn, structureBoundingBoxIn, 0, 1, 0, 0, 4, 0, ACBlocks.ethaxium_pillar.getDefaultState(), ACBlocks.ethaxium_pillar.getDefaultState(), false);
+			fillWithBlocks(worldIn, structureBoundingBoxIn, 3, 1, 0, 3, 4, 0, ACBlocks.ethaxium_pillar.getDefaultState(), ACBlocks.ethaxium_pillar.getDefaultState(), false);
+			fillWithBlocks(worldIn, structureBoundingBoxIn, 0, 1, 6, 0, 4, 6, ACBlocks.ethaxium_pillar.getDefaultState(), ACBlocks.ethaxium_pillar.getDefaultState(), false);
+			setBlockState(worldIn, ACBlocks.ethaxium_brick.getDefaultState(), 3, 3, 1, structureBoundingBoxIn);
+			fillWithBlocks(worldIn, structureBoundingBoxIn, 3, 1, 2, 3, 3, 2, ACBlocks.ethaxium_brick.getDefaultState(), ACBlocks.ethaxium_brick.getDefaultState(), false);
+			fillWithBlocks(worldIn, structureBoundingBoxIn, 4, 1, 3, 5, 3, 3, ACBlocks.ethaxium_brick.getDefaultState(), ACBlocks.ethaxium_brick.getDefaultState(), false);
+			fillWithBlocks(worldIn, structureBoundingBoxIn, 0, 1, 1, 0, 3, 5, ACBlocks.ethaxium_brick.getDefaultState(), ACBlocks.ethaxium_brick.getDefaultState(), false);
+			fillWithBlocks(worldIn, structureBoundingBoxIn, 1, 1, 6, 5, 3, 6, ACBlocks.ethaxium_brick.getDefaultState(), ACBlocks.ethaxium_brick.getDefaultState(), false);
+			fillWithBlocks(worldIn, structureBoundingBoxIn, 5, 1, 0, 5, 3, 0, ACBlocks.ethaxium_brick_fence.getDefaultState(), ACBlocks.ethaxium_brick_fence.getDefaultState(), false);
+			fillWithBlocks(worldIn, structureBoundingBoxIn, 9, 1, 0, 9, 3, 0, ACBlocks.ethaxium_brick_fence.getDefaultState(), ACBlocks.ethaxium_brick_fence.getDefaultState(), false);
+			fillWithBlocks(worldIn, structureBoundingBoxIn, 6, 1, 4, 9, 4, 6, ACBlocks.ethaxium_brick.getDefaultState(), ACBlocks.ethaxium_brick.getDefaultState(), false);
 			setBlockState(worldIn, Blocks.flowing_lava.getDefaultState(), 7, 1, 5, structureBoundingBoxIn);
 			setBlockState(worldIn, Blocks.flowing_lava.getDefaultState(), 8, 1, 5, structureBoundingBoxIn);
 			setBlockState(worldIn, Blocks.iron_bars.getDefaultState(), 9, 2, 5, structureBoundingBoxIn);
 			setBlockState(worldIn, Blocks.iron_bars.getDefaultState(), 9, 2, 4, structureBoundingBoxIn);
 			fillWithBlocks(worldIn, structureBoundingBoxIn, 7, 2, 4, 8, 2, 5, Blocks.air.getDefaultState(), Blocks.air.getDefaultState(), false);
-			setBlockState(worldIn, AbyssalCraft.ethaxiumbrick.getDefaultState(), 6, 1, 3, structureBoundingBoxIn);
+			setBlockState(worldIn, ACBlocks.ethaxium_brick.getDefaultState(), 6, 1, 3, structureBoundingBoxIn);
 			setBlockState(worldIn, Blocks.furnace.getDefaultState(), 6, 2, 3, structureBoundingBoxIn);
 			setBlockState(worldIn, Blocks.furnace.getDefaultState(), 6, 3, 3, structureBoundingBoxIn);
 			setBlockState(worldIn, Blocks.double_stone_slab.getDefaultState(), 8, 1, 1, structureBoundingBoxIn);
@@ -915,9 +915,9 @@ public class StructureOmotholPieces
 			setBlockState(worldIn, Blocks.glass_pane.getDefaultState(), 4, 2, 6, structureBoundingBoxIn);
 			setBlockState(worldIn, Blocks.oak_fence.getDefaultState(), 2, 1, 4, structureBoundingBoxIn);
 			setBlockState(worldIn, Blocks.wooden_pressure_plate.getDefaultState(), 2, 2, 4, structureBoundingBoxIn);
-			setBlockState(worldIn, AbyssalCraft.ethaxiumbrick.getDefaultState(), 1, 1, 5, structureBoundingBoxIn);
-			setBlockState(worldIn, AbyssalCraft.ethaxiumstairs.getStateFromMeta(getMetadataWithOffset(Blocks.oak_stairs, 3)), 2, 1, 5, structureBoundingBoxIn);
-			setBlockState(worldIn, AbyssalCraft.ethaxiumstairs.getStateFromMeta(getMetadataWithOffset(Blocks.oak_stairs, 1)), 1, 1, 4, structureBoundingBoxIn);
+			setBlockState(worldIn, ACBlocks.ethaxium_brick.getDefaultState(), 1, 1, 5, structureBoundingBoxIn);
+			setBlockState(worldIn, ACBlocks.ethaxium_brick_stairs.getStateFromMeta(getMetadataWithOffset(Blocks.oak_stairs, 3)), 2, 1, 5, structureBoundingBoxIn);
+			setBlockState(worldIn, ACBlocks.ethaxium_brick_stairs.getStateFromMeta(getMetadataWithOffset(Blocks.oak_stairs, 1)), 1, 1, 4, structureBoundingBoxIn);
 
 			if (!hasMadeChest && structureBoundingBoxIn.isVecInside(new BlockPos(getXWithOffset(5, 5), getYWithOffset(1), getZWithOffset(5, 5))))
 			{
@@ -927,13 +927,13 @@ public class StructureOmotholPieces
 
 			for (int i = 6; i <= 8; ++i)
 				if (getBlockStateFromPos(worldIn, i, 0, -1, structureBoundingBoxIn).getBlock().getMaterial() == Material.air && getBlockStateFromPos(worldIn, i, -1, -1, structureBoundingBoxIn).getBlock().getMaterial() != Material.air)
-					setBlockState(worldIn, AbyssalCraft.ethaxiumstairs.getStateFromMeta(getMetadataWithOffset(Blocks.stone_stairs, 3)), i, 0, -1, structureBoundingBoxIn);
+					setBlockState(worldIn, ACBlocks.ethaxium_brick_stairs.getStateFromMeta(getMetadataWithOffset(Blocks.stone_stairs, 3)), i, 0, -1, structureBoundingBoxIn);
 
 			for (int k = 0; k < 7; ++k)
 				for (int j = 0; j < 10; ++j)
 				{
 					clearCurrentPositionBlocksUpwards(worldIn, j, 6, k, structureBoundingBoxIn);
-					replaceAirAndLiquidDownwards(worldIn, AbyssalCraft.ethaxiumbrick.getDefaultState(), j, -1, k, structureBoundingBoxIn);
+					replaceAirAndLiquidDownwards(worldIn, ACBlocks.ethaxium_brick.getDefaultState(), j, -1, k, structureBoundingBoxIn);
 				}
 
 			spawnRemnants(worldIn, structureBoundingBoxIn, 7, 1, 1, 1);
@@ -986,80 +986,80 @@ public class StructureOmotholPieces
 
 			fillWithBlocks(worldIn, structureBoundingBoxIn, 1, 1, 1, 7, 4, 4, Blocks.air.getDefaultState(), Blocks.air.getDefaultState(), false);
 			fillWithBlocks(worldIn, structureBoundingBoxIn, 2, 1, 6, 8, 4, 10, Blocks.air.getDefaultState(), Blocks.air.getDefaultState(), false);
-			fillWithBlocks(worldIn, structureBoundingBoxIn, 2, 0, 5, 8, 0, 10, AbyssalCraft.ethaxiumbrick.getDefaultState(), AbyssalCraft.ethaxiumbrick.getDefaultState(), false);
-			fillWithBlocks(worldIn, structureBoundingBoxIn, 1, 0, 1, 7, 0, 4, AbyssalCraft.ethaxiumbrick.getDefaultState(), AbyssalCraft.ethaxiumbrick.getDefaultState(), false);
-			fillWithBlocks(worldIn, structureBoundingBoxIn, 0, 0, 0, 0, 3, 5, AbyssalCraft.ethaxiumbrick.getDefaultState(), AbyssalCraft.ethaxiumbrick.getDefaultState(), false);
-			fillWithBlocks(worldIn, structureBoundingBoxIn, 8, 0, 0, 8, 3, 10, AbyssalCraft.ethaxiumbrick.getDefaultState(), AbyssalCraft.ethaxiumbrick.getDefaultState(), false);
-			fillWithBlocks(worldIn, structureBoundingBoxIn, 1, 0, 0, 7, 2, 0, AbyssalCraft.ethaxiumbrick.getDefaultState(), AbyssalCraft.ethaxiumbrick.getDefaultState(), false);
-			fillWithBlocks(worldIn, structureBoundingBoxIn, 1, 0, 5, 2, 1, 5, AbyssalCraft.ethaxiumbrick.getDefaultState(), AbyssalCraft.ethaxiumbrick.getDefaultState(), false);
-			fillWithBlocks(worldIn, structureBoundingBoxIn, 2, 0, 6, 2, 3, 10, AbyssalCraft.ethaxiumbrick.getDefaultState(), AbyssalCraft.ethaxiumbrick.getDefaultState(), false);
-			fillWithBlocks(worldIn, structureBoundingBoxIn, 3, 0, 10, 7, 3, 10, AbyssalCraft.ethaxiumbrick.getDefaultState(), AbyssalCraft.ethaxiumbrick.getDefaultState(), false);
-			fillWithBlocks(worldIn, structureBoundingBoxIn, 1, 2, 0, 7, 3, 0, AbyssalCraft.ethaxiumbrick.getDefaultState(), AbyssalCraft.ethaxiumbrick.getDefaultState(), false);
-			fillWithBlocks(worldIn, structureBoundingBoxIn, 1, 2, 5, 2, 3, 5, AbyssalCraft.ethaxiumbrick.getDefaultState(), AbyssalCraft.ethaxiumbrick.getDefaultState(), false);
-			fillWithBlocks(worldIn, structureBoundingBoxIn, 0, 4, 1, 8, 4, 1, AbyssalCraft.ethaxiumbrick.getDefaultState(), AbyssalCraft.ethaxiumbrick.getDefaultState(), false);
-			fillWithBlocks(worldIn, structureBoundingBoxIn, 0, 4, 4, 3, 4, 4, AbyssalCraft.ethaxiumbrick.getDefaultState(), AbyssalCraft.ethaxiumbrick.getDefaultState(), false);
-			fillWithBlocks(worldIn, structureBoundingBoxIn, 0, 5, 2, 8, 5, 3, AbyssalCraft.ethaxiumbrick.getDefaultState(), AbyssalCraft.ethaxiumbrick.getDefaultState(), false);
-			setBlockState(worldIn, AbyssalCraft.ethaxiumbrick.getDefaultState(), 0, 4, 2, structureBoundingBoxIn);
-			setBlockState(worldIn, AbyssalCraft.ethaxiumbrick.getDefaultState(), 0, 4, 3, structureBoundingBoxIn);
-			setBlockState(worldIn, AbyssalCraft.ethaxiumbrick.getDefaultState(), 8, 4, 2, structureBoundingBoxIn);
-			setBlockState(worldIn, AbyssalCraft.ethaxiumbrick.getDefaultState(), 8, 4, 3, structureBoundingBoxIn);
-			setBlockState(worldIn, AbyssalCraft.ethaxiumbrick.getDefaultState(), 8, 4, 4, structureBoundingBoxIn);
+			fillWithBlocks(worldIn, structureBoundingBoxIn, 2, 0, 5, 8, 0, 10, ACBlocks.ethaxium_brick.getDefaultState(), ACBlocks.ethaxium_brick.getDefaultState(), false);
+			fillWithBlocks(worldIn, structureBoundingBoxIn, 1, 0, 1, 7, 0, 4, ACBlocks.ethaxium_brick.getDefaultState(), ACBlocks.ethaxium_brick.getDefaultState(), false);
+			fillWithBlocks(worldIn, structureBoundingBoxIn, 0, 0, 0, 0, 3, 5, ACBlocks.ethaxium_brick.getDefaultState(), ACBlocks.ethaxium_brick.getDefaultState(), false);
+			fillWithBlocks(worldIn, structureBoundingBoxIn, 8, 0, 0, 8, 3, 10, ACBlocks.ethaxium_brick.getDefaultState(), ACBlocks.ethaxium_brick.getDefaultState(), false);
+			fillWithBlocks(worldIn, structureBoundingBoxIn, 1, 0, 0, 7, 2, 0, ACBlocks.ethaxium_brick.getDefaultState(), ACBlocks.ethaxium_brick.getDefaultState(), false);
+			fillWithBlocks(worldIn, structureBoundingBoxIn, 1, 0, 5, 2, 1, 5, ACBlocks.ethaxium_brick.getDefaultState(), ACBlocks.ethaxium_brick.getDefaultState(), false);
+			fillWithBlocks(worldIn, structureBoundingBoxIn, 2, 0, 6, 2, 3, 10, ACBlocks.ethaxium_brick.getDefaultState(), ACBlocks.ethaxium_brick.getDefaultState(), false);
+			fillWithBlocks(worldIn, structureBoundingBoxIn, 3, 0, 10, 7, 3, 10, ACBlocks.ethaxium_brick.getDefaultState(), ACBlocks.ethaxium_brick.getDefaultState(), false);
+			fillWithBlocks(worldIn, structureBoundingBoxIn, 1, 2, 0, 7, 3, 0, ACBlocks.ethaxium_brick.getDefaultState(), ACBlocks.ethaxium_brick.getDefaultState(), false);
+			fillWithBlocks(worldIn, structureBoundingBoxIn, 1, 2, 5, 2, 3, 5, ACBlocks.ethaxium_brick.getDefaultState(), ACBlocks.ethaxium_brick.getDefaultState(), false);
+			fillWithBlocks(worldIn, structureBoundingBoxIn, 0, 4, 1, 8, 4, 1, ACBlocks.ethaxium_brick.getDefaultState(), ACBlocks.ethaxium_brick.getDefaultState(), false);
+			fillWithBlocks(worldIn, structureBoundingBoxIn, 0, 4, 4, 3, 4, 4, ACBlocks.ethaxium_brick.getDefaultState(), ACBlocks.ethaxium_brick.getDefaultState(), false);
+			fillWithBlocks(worldIn, structureBoundingBoxIn, 0, 5, 2, 8, 5, 3, ACBlocks.ethaxium_brick.getDefaultState(), ACBlocks.ethaxium_brick.getDefaultState(), false);
+			setBlockState(worldIn, ACBlocks.ethaxium_brick.getDefaultState(), 0, 4, 2, structureBoundingBoxIn);
+			setBlockState(worldIn, ACBlocks.ethaxium_brick.getDefaultState(), 0, 4, 3, structureBoundingBoxIn);
+			setBlockState(worldIn, ACBlocks.ethaxium_brick.getDefaultState(), 8, 4, 2, structureBoundingBoxIn);
+			setBlockState(worldIn, ACBlocks.ethaxium_brick.getDefaultState(), 8, 4, 3, structureBoundingBoxIn);
+			setBlockState(worldIn, ACBlocks.ethaxium_brick.getDefaultState(), 8, 4, 4, structureBoundingBoxIn);
 
 			for (int k = -1; k <= 2; ++k)
 				for (int l = 0; l <= 8; ++l)
 				{
-					setBlockState(worldIn, AbyssalCraft.ethaxiumstairs.getStateFromMeta(getMetadataWithOffset(Blocks.oak_stairs, 3)), l, 4 + k, k, structureBoundingBoxIn);
+					setBlockState(worldIn, ACBlocks.ethaxium_brick_stairs.getStateFromMeta(getMetadataWithOffset(Blocks.oak_stairs, 3)), l, 4 + k, k, structureBoundingBoxIn);
 
 					if ((k > -1 || l <= 1) && (k > 0 || l <= 3) && (k > 1 || l <= 4 || l >= 6))
-						setBlockState(worldIn, AbyssalCraft.ethaxiumstairs.getStateFromMeta(getMetadataWithOffset(Blocks.oak_stairs, 2)), l, 4 + k, 5 - k, structureBoundingBoxIn);
+						setBlockState(worldIn, ACBlocks.ethaxium_brick_stairs.getStateFromMeta(getMetadataWithOffset(Blocks.oak_stairs, 2)), l, 4 + k, 5 - k, structureBoundingBoxIn);
 				}
 
-			fillWithBlocks(worldIn, structureBoundingBoxIn, 3, 4, 5, 3, 4, 10, AbyssalCraft.ethaxiumbrick.getDefaultState(), AbyssalCraft.ethaxiumbrick.getDefaultState(), false);
-			fillWithBlocks(worldIn, structureBoundingBoxIn, 7, 4, 2, 7, 4, 10, AbyssalCraft.ethaxiumbrick.getDefaultState(), AbyssalCraft.ethaxiumbrick.getDefaultState(), false);
-			fillWithBlocks(worldIn, structureBoundingBoxIn, 4, 5, 4, 4, 5, 10, AbyssalCraft.ethaxiumbrick.getDefaultState(), AbyssalCraft.ethaxiumbrick.getDefaultState(), false);
-			fillWithBlocks(worldIn, structureBoundingBoxIn, 6, 5, 4, 6, 5, 10, AbyssalCraft.ethaxiumbrick.getDefaultState(), AbyssalCraft.ethaxiumbrick.getDefaultState(), false);
-			fillWithBlocks(worldIn, structureBoundingBoxIn, 5, 6, 3, 5, 6, 10, AbyssalCraft.ethaxiumbrick.getDefaultState(), AbyssalCraft.ethaxiumbrick.getDefaultState(), false);
+			fillWithBlocks(worldIn, structureBoundingBoxIn, 3, 4, 5, 3, 4, 10, ACBlocks.ethaxium_brick.getDefaultState(), ACBlocks.ethaxium_brick.getDefaultState(), false);
+			fillWithBlocks(worldIn, structureBoundingBoxIn, 7, 4, 2, 7, 4, 10, ACBlocks.ethaxium_brick.getDefaultState(), ACBlocks.ethaxium_brick.getDefaultState(), false);
+			fillWithBlocks(worldIn, structureBoundingBoxIn, 4, 5, 4, 4, 5, 10, ACBlocks.ethaxium_brick.getDefaultState(), ACBlocks.ethaxium_brick.getDefaultState(), false);
+			fillWithBlocks(worldIn, structureBoundingBoxIn, 6, 5, 4, 6, 5, 10, ACBlocks.ethaxium_brick.getDefaultState(), ACBlocks.ethaxium_brick.getDefaultState(), false);
+			fillWithBlocks(worldIn, structureBoundingBoxIn, 5, 6, 3, 5, 6, 10, ACBlocks.ethaxium_brick.getDefaultState(), ACBlocks.ethaxium_brick.getDefaultState(), false);
 
 			for (int l1 = 4; l1 >= 1; --l1)
 			{
-				setBlockState(worldIn, AbyssalCraft.ethaxiumbrick.getDefaultState(), l1, 2 + l1, 7 - l1, structureBoundingBoxIn);
+				setBlockState(worldIn, ACBlocks.ethaxium_brick.getDefaultState(), l1, 2 + l1, 7 - l1, structureBoundingBoxIn);
 
 				for (int i1 = 8 - l1; i1 <= 10; ++i1)
-					setBlockState(worldIn, AbyssalCraft.ethaxiumstairs.getStateFromMeta(getMetadataWithOffset(Blocks.oak_stairs, 0)), l1, 2 + l1, i1, structureBoundingBoxIn);
+					setBlockState(worldIn, ACBlocks.ethaxium_brick_stairs.getStateFromMeta(getMetadataWithOffset(Blocks.oak_stairs, 0)), l1, 2 + l1, i1, structureBoundingBoxIn);
 			}
 
-			setBlockState(worldIn, AbyssalCraft.ethaxiumbrick.getDefaultState(), 6, 6, 3, structureBoundingBoxIn);
-			setBlockState(worldIn, AbyssalCraft.ethaxiumbrick.getDefaultState(), 7, 5, 4, structureBoundingBoxIn);
-			setBlockState(worldIn, AbyssalCraft.ethaxiumstairs.getStateFromMeta(getMetadataWithOffset(Blocks.oak_stairs, 1)), 6, 6, 4, structureBoundingBoxIn);
+			setBlockState(worldIn, ACBlocks.ethaxium_brick.getDefaultState(), 6, 6, 3, structureBoundingBoxIn);
+			setBlockState(worldIn, ACBlocks.ethaxium_brick.getDefaultState(), 7, 5, 4, structureBoundingBoxIn);
+			setBlockState(worldIn, ACBlocks.ethaxium_brick_stairs.getStateFromMeta(getMetadataWithOffset(Blocks.oak_stairs, 1)), 6, 6, 4, structureBoundingBoxIn);
 
 			for (int j2 = 6; j2 <= 8; ++j2)
 				for (int j1 = 5; j1 <= 10; ++j1)
-					setBlockState(worldIn, AbyssalCraft.ethaxiumstairs.getStateFromMeta(getMetadataWithOffset(Blocks.oak_stairs, 1)), j2, 12 - j2, j1, structureBoundingBoxIn);
+					setBlockState(worldIn, ACBlocks.ethaxium_brick_stairs.getStateFromMeta(getMetadataWithOffset(Blocks.oak_stairs, 1)), j2, 12 - j2, j1, structureBoundingBoxIn);
 
-			setBlockState(worldIn, AbyssalCraft.ethaxiumpillar.getDefaultState(), 0, 2, 1, structureBoundingBoxIn);
-			setBlockState(worldIn, AbyssalCraft.ethaxiumpillar.getDefaultState(), 0, 2, 4, structureBoundingBoxIn);
+			setBlockState(worldIn, ACBlocks.ethaxium_pillar.getDefaultState(), 0, 2, 1, structureBoundingBoxIn);
+			setBlockState(worldIn, ACBlocks.ethaxium_pillar.getDefaultState(), 0, 2, 4, structureBoundingBoxIn);
 			setBlockState(worldIn, Blocks.glass_pane.getDefaultState(), 0, 2, 2, structureBoundingBoxIn);
 			setBlockState(worldIn, Blocks.glass_pane.getDefaultState(), 0, 2, 3, structureBoundingBoxIn);
-			setBlockState(worldIn, AbyssalCraft.ethaxiumpillar.getDefaultState(), 4, 2, 0, structureBoundingBoxIn);
+			setBlockState(worldIn, ACBlocks.ethaxium_pillar.getDefaultState(), 4, 2, 0, structureBoundingBoxIn);
 			setBlockState(worldIn, Blocks.glass_pane.getDefaultState(), 5, 2, 0, structureBoundingBoxIn);
-			setBlockState(worldIn, AbyssalCraft.ethaxiumpillar.getDefaultState(), 6, 2, 0, structureBoundingBoxIn);
-			setBlockState(worldIn, AbyssalCraft.ethaxiumpillar.getDefaultState(), 8, 2, 1, structureBoundingBoxIn);
+			setBlockState(worldIn, ACBlocks.ethaxium_pillar.getDefaultState(), 6, 2, 0, structureBoundingBoxIn);
+			setBlockState(worldIn, ACBlocks.ethaxium_pillar.getDefaultState(), 8, 2, 1, structureBoundingBoxIn);
 			setBlockState(worldIn, Blocks.glass_pane.getDefaultState(), 8, 2, 2, structureBoundingBoxIn);
 			setBlockState(worldIn, Blocks.glass_pane.getDefaultState(), 8, 2, 3, structureBoundingBoxIn);
-			setBlockState(worldIn, AbyssalCraft.ethaxiumpillar.getDefaultState(), 8, 2, 4, structureBoundingBoxIn);
-			setBlockState(worldIn, AbyssalCraft.ethaxiumbrick.getDefaultState(), 8, 2, 5, structureBoundingBoxIn);
-			setBlockState(worldIn, AbyssalCraft.ethaxiumpillar.getDefaultState(), 8, 2, 6, structureBoundingBoxIn);
+			setBlockState(worldIn, ACBlocks.ethaxium_pillar.getDefaultState(), 8, 2, 4, structureBoundingBoxIn);
+			setBlockState(worldIn, ACBlocks.ethaxium_brick.getDefaultState(), 8, 2, 5, structureBoundingBoxIn);
+			setBlockState(worldIn, ACBlocks.ethaxium_pillar.getDefaultState(), 8, 2, 6, structureBoundingBoxIn);
 			setBlockState(worldIn, Blocks.glass_pane.getDefaultState(), 8, 2, 7, structureBoundingBoxIn);
 			setBlockState(worldIn, Blocks.glass_pane.getDefaultState(), 8, 2, 8, structureBoundingBoxIn);
-			setBlockState(worldIn, AbyssalCraft.ethaxiumpillar.getDefaultState(), 8, 2, 9, structureBoundingBoxIn);
-			setBlockState(worldIn, AbyssalCraft.ethaxiumpillar.getDefaultState(), 2, 2, 6, structureBoundingBoxIn);
+			setBlockState(worldIn, ACBlocks.ethaxium_pillar.getDefaultState(), 8, 2, 9, structureBoundingBoxIn);
+			setBlockState(worldIn, ACBlocks.ethaxium_pillar.getDefaultState(), 2, 2, 6, structureBoundingBoxIn);
 			setBlockState(worldIn, Blocks.glass_pane.getDefaultState(), 2, 2, 7, structureBoundingBoxIn);
 			setBlockState(worldIn, Blocks.glass_pane.getDefaultState(), 2, 2, 8, structureBoundingBoxIn);
-			setBlockState(worldIn, AbyssalCraft.ethaxiumpillar.getDefaultState(), 2, 2, 9, structureBoundingBoxIn);
-			setBlockState(worldIn, AbyssalCraft.ethaxiumpillar.getDefaultState(), 4, 4, 10, structureBoundingBoxIn);
+			setBlockState(worldIn, ACBlocks.ethaxium_pillar.getDefaultState(), 2, 2, 9, structureBoundingBoxIn);
+			setBlockState(worldIn, ACBlocks.ethaxium_pillar.getDefaultState(), 4, 4, 10, structureBoundingBoxIn);
 			setBlockState(worldIn, Blocks.glass_pane.getDefaultState(), 5, 4, 10, structureBoundingBoxIn);
-			setBlockState(worldIn, AbyssalCraft.ethaxiumpillar.getDefaultState(), 6, 4, 10, structureBoundingBoxIn);
-			setBlockState(worldIn, AbyssalCraft.ethaxiumbrick.getDefaultState(), 5, 5, 10, structureBoundingBoxIn);
+			setBlockState(worldIn, ACBlocks.ethaxium_pillar.getDefaultState(), 6, 4, 10, structureBoundingBoxIn);
+			setBlockState(worldIn, ACBlocks.ethaxium_brick.getDefaultState(), 5, 5, 10, structureBoundingBoxIn);
 			setBlockState(worldIn, Blocks.air.getDefaultState(), 2, 1, 0, structureBoundingBoxIn);
 			setBlockState(worldIn, Blocks.air.getDefaultState(), 2, 2, 0, structureBoundingBoxIn);
 			setBlockState(worldIn, Blocks.torch.getDefaultState().withProperty(BlockTorch.FACING, coordBaseMode), 2, 3, 1, structureBoundingBoxIn);
@@ -1067,20 +1067,20 @@ public class StructureOmotholPieces
 			fillWithBlocks(worldIn, structureBoundingBoxIn, 1, 0, -1, 3, 2, -1, Blocks.air.getDefaultState(), Blocks.air.getDefaultState(), false);
 
 			if (getBlockStateFromPos(worldIn, 2, 0, -1, structureBoundingBoxIn).getBlock().getMaterial() == Material.air && getBlockStateFromPos(worldIn, 2, -1, -1, structureBoundingBoxIn).getBlock().getMaterial() != Material.air)
-				setBlockState(worldIn, AbyssalCraft.ethaxiumstairs.getStateFromMeta(getMetadataWithOffset(Blocks.oak_stairs, 3)), 2, 0, -1, structureBoundingBoxIn);
+				setBlockState(worldIn, ACBlocks.ethaxium_brick_stairs.getStateFromMeta(getMetadataWithOffset(Blocks.oak_stairs, 3)), 2, 0, -1, structureBoundingBoxIn);
 
 			for (int k2 = 0; k2 < 5; ++k2)
 				for (int i3 = 0; i3 < 9; ++i3)
 				{
 					clearCurrentPositionBlocksUpwards(worldIn, i3, 7, k2, structureBoundingBoxIn);
-					replaceAirAndLiquidDownwards(worldIn, AbyssalCraft.ethaxiumbrick.getDefaultState(), i3, -1, k2, structureBoundingBoxIn);
+					replaceAirAndLiquidDownwards(worldIn, ACBlocks.ethaxium_brick.getDefaultState(), i3, -1, k2, structureBoundingBoxIn);
 				}
 
 			for (int l2 = 5; l2 < 11; ++l2)
 				for (int j3 = 2; j3 < 9; ++j3)
 				{
 					clearCurrentPositionBlocksUpwards(worldIn, j3, 7, l2, structureBoundingBoxIn);
-					replaceAirAndLiquidDownwards(worldIn, AbyssalCraft.ethaxiumbrick.getDefaultState(), j3, -1, l2, structureBoundingBoxIn);
+					replaceAirAndLiquidDownwards(worldIn, ACBlocks.ethaxium_brick.getDefaultState(), j3, -1, l2, structureBoundingBoxIn);
 				}
 
 			spawnRemnants(worldIn, structureBoundingBoxIn, 4, 1, 2, 2);
@@ -1147,58 +1147,58 @@ public class StructureOmotholPieces
 				boundingBox.offset(0, field_143015_k - boundingBox.maxY + 6 - 1, 0);
 			}
 
-			fillWithBlocks(worldIn, structureBoundingBoxIn, 0, 0, 0, 4, 0, 4, AbyssalCraft.ethaxiumbrick.getDefaultState(), AbyssalCraft.ethaxiumbrick.getDefaultState(), false);
-			fillWithBlocks(worldIn, structureBoundingBoxIn, 0, 4, 0, 4, 4, 4, AbyssalCraft.ethaxiumpillar.getDefaultState(), AbyssalCraft.ethaxiumpillar.getDefaultState(), false);
-			fillWithBlocks(worldIn, structureBoundingBoxIn, 1, 4, 1, 3, 4, 3, AbyssalCraft.ethaxiumbrick.getDefaultState(), AbyssalCraft.ethaxiumbrick.getDefaultState(), false);
-			setBlockState(worldIn, AbyssalCraft.ethaxiumbrick.getDefaultState(), 0, 1, 0, structureBoundingBoxIn);
-			setBlockState(worldIn, AbyssalCraft.ethaxiumbrick.getDefaultState(), 0, 2, 0, structureBoundingBoxIn);
-			setBlockState(worldIn, AbyssalCraft.ethaxiumbrick.getDefaultState(), 0, 3, 0, structureBoundingBoxIn);
-			setBlockState(worldIn, AbyssalCraft.ethaxiumbrick.getDefaultState(), 4, 1, 0, structureBoundingBoxIn);
-			setBlockState(worldIn, AbyssalCraft.ethaxiumbrick.getDefaultState(), 4, 2, 0, structureBoundingBoxIn);
-			setBlockState(worldIn, AbyssalCraft.ethaxiumbrick.getDefaultState(), 4, 3, 0, structureBoundingBoxIn);
-			setBlockState(worldIn, AbyssalCraft.ethaxiumbrick.getDefaultState(), 0, 1, 4, structureBoundingBoxIn);
-			setBlockState(worldIn, AbyssalCraft.ethaxiumbrick.getDefaultState(), 0, 2, 4, structureBoundingBoxIn);
-			setBlockState(worldIn, AbyssalCraft.ethaxiumbrick.getDefaultState(), 0, 3, 4, structureBoundingBoxIn);
-			setBlockState(worldIn, AbyssalCraft.ethaxiumbrick.getDefaultState(), 4, 1, 4, structureBoundingBoxIn);
-			setBlockState(worldIn, AbyssalCraft.ethaxiumbrick.getDefaultState(), 4, 2, 4, structureBoundingBoxIn);
-			setBlockState(worldIn, AbyssalCraft.ethaxiumbrick.getDefaultState(), 4, 3, 4, structureBoundingBoxIn);
-			fillWithBlocks(worldIn, structureBoundingBoxIn, 0, 1, 1, 0, 3, 3, AbyssalCraft.ethaxiumbrick.getDefaultState(), AbyssalCraft.ethaxiumbrick.getDefaultState(), false);
-			fillWithBlocks(worldIn, structureBoundingBoxIn, 4, 1, 1, 4, 3, 3, AbyssalCraft.ethaxiumbrick.getDefaultState(), AbyssalCraft.ethaxiumbrick.getDefaultState(), false);
-			fillWithBlocks(worldIn, structureBoundingBoxIn, 1, 1, 4, 3, 3, 4, AbyssalCraft.ethaxiumbrick.getDefaultState(), AbyssalCraft.ethaxiumbrick.getDefaultState(), false);
+			fillWithBlocks(worldIn, structureBoundingBoxIn, 0, 0, 0, 4, 0, 4, ACBlocks.ethaxium_brick.getDefaultState(), ACBlocks.ethaxium_brick.getDefaultState(), false);
+			fillWithBlocks(worldIn, structureBoundingBoxIn, 0, 4, 0, 4, 4, 4, ACBlocks.ethaxium_pillar.getDefaultState(), ACBlocks.ethaxium_pillar.getDefaultState(), false);
+			fillWithBlocks(worldIn, structureBoundingBoxIn, 1, 4, 1, 3, 4, 3, ACBlocks.ethaxium_brick.getDefaultState(), ACBlocks.ethaxium_brick.getDefaultState(), false);
+			setBlockState(worldIn, ACBlocks.ethaxium_brick.getDefaultState(), 0, 1, 0, structureBoundingBoxIn);
+			setBlockState(worldIn, ACBlocks.ethaxium_brick.getDefaultState(), 0, 2, 0, structureBoundingBoxIn);
+			setBlockState(worldIn, ACBlocks.ethaxium_brick.getDefaultState(), 0, 3, 0, structureBoundingBoxIn);
+			setBlockState(worldIn, ACBlocks.ethaxium_brick.getDefaultState(), 4, 1, 0, structureBoundingBoxIn);
+			setBlockState(worldIn, ACBlocks.ethaxium_brick.getDefaultState(), 4, 2, 0, structureBoundingBoxIn);
+			setBlockState(worldIn, ACBlocks.ethaxium_brick.getDefaultState(), 4, 3, 0, structureBoundingBoxIn);
+			setBlockState(worldIn, ACBlocks.ethaxium_brick.getDefaultState(), 0, 1, 4, structureBoundingBoxIn);
+			setBlockState(worldIn, ACBlocks.ethaxium_brick.getDefaultState(), 0, 2, 4, structureBoundingBoxIn);
+			setBlockState(worldIn, ACBlocks.ethaxium_brick.getDefaultState(), 0, 3, 4, structureBoundingBoxIn);
+			setBlockState(worldIn, ACBlocks.ethaxium_brick.getDefaultState(), 4, 1, 4, structureBoundingBoxIn);
+			setBlockState(worldIn, ACBlocks.ethaxium_brick.getDefaultState(), 4, 2, 4, structureBoundingBoxIn);
+			setBlockState(worldIn, ACBlocks.ethaxium_brick.getDefaultState(), 4, 3, 4, structureBoundingBoxIn);
+			fillWithBlocks(worldIn, structureBoundingBoxIn, 0, 1, 1, 0, 3, 3, ACBlocks.ethaxium_brick.getDefaultState(), ACBlocks.ethaxium_brick.getDefaultState(), false);
+			fillWithBlocks(worldIn, structureBoundingBoxIn, 4, 1, 1, 4, 3, 3, ACBlocks.ethaxium_brick.getDefaultState(), ACBlocks.ethaxium_brick.getDefaultState(), false);
+			fillWithBlocks(worldIn, structureBoundingBoxIn, 1, 1, 4, 3, 3, 4, ACBlocks.ethaxium_brick.getDefaultState(), ACBlocks.ethaxium_brick.getDefaultState(), false);
 			setBlockState(worldIn, Blocks.glass_pane.getDefaultState(), 0, 2, 2, structureBoundingBoxIn);
 			setBlockState(worldIn, Blocks.glass_pane.getDefaultState(), 2, 2, 4, structureBoundingBoxIn);
 			setBlockState(worldIn, Blocks.glass_pane.getDefaultState(), 4, 2, 2, structureBoundingBoxIn);
-			setBlockState(worldIn, AbyssalCraft.ethaxiumbrick.getDefaultState(), 1, 1, 0, structureBoundingBoxIn);
-			setBlockState(worldIn, AbyssalCraft.ethaxiumbrick.getDefaultState(), 1, 2, 0, structureBoundingBoxIn);
-			setBlockState(worldIn, AbyssalCraft.ethaxiumbrick.getDefaultState(), 1, 3, 0, structureBoundingBoxIn);
-			setBlockState(worldIn, AbyssalCraft.ethaxiumbrick.getDefaultState(), 2, 3, 0, structureBoundingBoxIn);
-			setBlockState(worldIn, AbyssalCraft.ethaxiumbrick.getDefaultState(), 3, 3, 0, structureBoundingBoxIn);
-			setBlockState(worldIn, AbyssalCraft.ethaxiumbrick.getDefaultState(), 3, 2, 0, structureBoundingBoxIn);
-			setBlockState(worldIn, AbyssalCraft.ethaxiumbrick.getDefaultState(), 3, 1, 0, structureBoundingBoxIn);
+			setBlockState(worldIn, ACBlocks.ethaxium_brick.getDefaultState(), 1, 1, 0, structureBoundingBoxIn);
+			setBlockState(worldIn, ACBlocks.ethaxium_brick.getDefaultState(), 1, 2, 0, structureBoundingBoxIn);
+			setBlockState(worldIn, ACBlocks.ethaxium_brick.getDefaultState(), 1, 3, 0, structureBoundingBoxIn);
+			setBlockState(worldIn, ACBlocks.ethaxium_brick.getDefaultState(), 2, 3, 0, structureBoundingBoxIn);
+			setBlockState(worldIn, ACBlocks.ethaxium_brick.getDefaultState(), 3, 3, 0, structureBoundingBoxIn);
+			setBlockState(worldIn, ACBlocks.ethaxium_brick.getDefaultState(), 3, 2, 0, structureBoundingBoxIn);
+			setBlockState(worldIn, ACBlocks.ethaxium_brick.getDefaultState(), 3, 1, 0, structureBoundingBoxIn);
 
 			if (getBlockStateFromPos(worldIn, 2, 0, -1, structureBoundingBoxIn).getBlock().getMaterial() == Material.air && getBlockStateFromPos(worldIn, 2, -1, -1, structureBoundingBoxIn).getBlock().getMaterial() != Material.air)
-				setBlockState(worldIn, AbyssalCraft.ethaxiumstairs.getStateFromMeta(getMetadataWithOffset(Blocks.stone_stairs, 3)), 2, 0, -1, structureBoundingBoxIn);
+				setBlockState(worldIn, ACBlocks.ethaxium_brick_stairs.getStateFromMeta(getMetadataWithOffset(Blocks.stone_stairs, 3)), 2, 0, -1, structureBoundingBoxIn);
 
 			fillWithBlocks(worldIn, structureBoundingBoxIn, 1, 1, 1, 3, 3, 3, Blocks.air.getDefaultState(), Blocks.air.getDefaultState(), false);
 
 			if (isRoofAccessible)
 			{
-				setBlockState(worldIn, AbyssalCraft.ethaxiumfence.getDefaultState(), 0, 5, 0, structureBoundingBoxIn);
-				setBlockState(worldIn, AbyssalCraft.ethaxiumfence.getDefaultState(), 1, 5, 0, structureBoundingBoxIn);
-				setBlockState(worldIn, AbyssalCraft.ethaxiumfence.getDefaultState(), 2, 5, 0, structureBoundingBoxIn);
-				setBlockState(worldIn, AbyssalCraft.ethaxiumfence.getDefaultState(), 3, 5, 0, structureBoundingBoxIn);
-				setBlockState(worldIn, AbyssalCraft.ethaxiumfence.getDefaultState(), 4, 5, 0, structureBoundingBoxIn);
-				setBlockState(worldIn, AbyssalCraft.ethaxiumfence.getDefaultState(), 0, 5, 4, structureBoundingBoxIn);
-				setBlockState(worldIn, AbyssalCraft.ethaxiumfence.getDefaultState(), 1, 5, 4, structureBoundingBoxIn);
-				setBlockState(worldIn, AbyssalCraft.ethaxiumfence.getDefaultState(), 2, 5, 4, structureBoundingBoxIn);
-				setBlockState(worldIn, AbyssalCraft.ethaxiumfence.getDefaultState(), 3, 5, 4, structureBoundingBoxIn);
-				setBlockState(worldIn, AbyssalCraft.ethaxiumfence.getDefaultState(), 4, 5, 4, structureBoundingBoxIn);
-				setBlockState(worldIn, AbyssalCraft.ethaxiumfence.getDefaultState(), 4, 5, 1, structureBoundingBoxIn);
-				setBlockState(worldIn, AbyssalCraft.ethaxiumfence.getDefaultState(), 4, 5, 2, structureBoundingBoxIn);
-				setBlockState(worldIn, AbyssalCraft.ethaxiumfence.getDefaultState(), 4, 5, 3, structureBoundingBoxIn);
-				setBlockState(worldIn, AbyssalCraft.ethaxiumfence.getDefaultState(), 0, 5, 1, structureBoundingBoxIn);
-				setBlockState(worldIn, AbyssalCraft.ethaxiumfence.getDefaultState(), 0, 5, 2, structureBoundingBoxIn);
-				setBlockState(worldIn, AbyssalCraft.ethaxiumfence.getDefaultState(), 0, 5, 3, structureBoundingBoxIn);
+				setBlockState(worldIn, ACBlocks.ethaxium_brick_fence.getDefaultState(), 0, 5, 0, structureBoundingBoxIn);
+				setBlockState(worldIn, ACBlocks.ethaxium_brick_fence.getDefaultState(), 1, 5, 0, structureBoundingBoxIn);
+				setBlockState(worldIn, ACBlocks.ethaxium_brick_fence.getDefaultState(), 2, 5, 0, structureBoundingBoxIn);
+				setBlockState(worldIn, ACBlocks.ethaxium_brick_fence.getDefaultState(), 3, 5, 0, structureBoundingBoxIn);
+				setBlockState(worldIn, ACBlocks.ethaxium_brick_fence.getDefaultState(), 4, 5, 0, structureBoundingBoxIn);
+				setBlockState(worldIn, ACBlocks.ethaxium_brick_fence.getDefaultState(), 0, 5, 4, structureBoundingBoxIn);
+				setBlockState(worldIn, ACBlocks.ethaxium_brick_fence.getDefaultState(), 1, 5, 4, structureBoundingBoxIn);
+				setBlockState(worldIn, ACBlocks.ethaxium_brick_fence.getDefaultState(), 2, 5, 4, structureBoundingBoxIn);
+				setBlockState(worldIn, ACBlocks.ethaxium_brick_fence.getDefaultState(), 3, 5, 4, structureBoundingBoxIn);
+				setBlockState(worldIn, ACBlocks.ethaxium_brick_fence.getDefaultState(), 4, 5, 4, structureBoundingBoxIn);
+				setBlockState(worldIn, ACBlocks.ethaxium_brick_fence.getDefaultState(), 4, 5, 1, structureBoundingBoxIn);
+				setBlockState(worldIn, ACBlocks.ethaxium_brick_fence.getDefaultState(), 4, 5, 2, structureBoundingBoxIn);
+				setBlockState(worldIn, ACBlocks.ethaxium_brick_fence.getDefaultState(), 4, 5, 3, structureBoundingBoxIn);
+				setBlockState(worldIn, ACBlocks.ethaxium_brick_fence.getDefaultState(), 0, 5, 1, structureBoundingBoxIn);
+				setBlockState(worldIn, ACBlocks.ethaxium_brick_fence.getDefaultState(), 0, 5, 2, structureBoundingBoxIn);
+				setBlockState(worldIn, ACBlocks.ethaxium_brick_fence.getDefaultState(), 0, 5, 3, structureBoundingBoxIn);
 			}
 
 			if (isRoofAccessible)
@@ -1216,7 +1216,7 @@ public class StructureOmotholPieces
 				for (int j = 0; j < 5; ++j)
 				{
 					clearCurrentPositionBlocksUpwards(worldIn, j, 6, k, structureBoundingBoxIn);
-					replaceAirAndLiquidDownwards(worldIn, AbyssalCraft.ethaxiumbrick.getDefaultState(), j, -1, k, structureBoundingBoxIn);
+					replaceAirAndLiquidDownwards(worldIn, ACBlocks.ethaxium_brick.getDefaultState(), j, -1, k, structureBoundingBoxIn);
 				}
 
 			spawnRemnants(worldIn, structureBoundingBoxIn, 1, 1, 2, 1);
@@ -1283,89 +1283,89 @@ public class StructureOmotholPieces
 				boundingBox.offset(0, field_143015_k - boundingBox.maxY + 6 - 1, 0);
 			}
 
-			fillWithBlocks(worldIn, structureBoundingBoxIn, 0, 0, 0, 4, 0, 4, AbyssalCraft.ethaxiumbrick.getDefaultState(), AbyssalCraft.ethaxiumbrick.getDefaultState(), false);
-			fillWithBlocks(worldIn, structureBoundingBoxIn, 0, 4, 0, 4, 4, 4, AbyssalCraft.ethaxiumpillar.getDefaultState(), AbyssalCraft.ethaxiumpillar.getDefaultState(), false);
-			fillWithBlocks(worldIn, structureBoundingBoxIn, 1, 4, 1, 3, 4, 3, AbyssalCraft.ethaxiumbrick.getDefaultState(), AbyssalCraft.ethaxiumbrick.getDefaultState(), false);
-			setBlockState(worldIn, AbyssalCraft.ethaxiumbrick.getDefaultState(), 0, 1, 0, structureBoundingBoxIn);
-			setBlockState(worldIn, AbyssalCraft.ethaxiumbrick.getDefaultState(), 0, 2, 0, structureBoundingBoxIn);
-			setBlockState(worldIn, AbyssalCraft.ethaxiumbrick.getDefaultState(), 0, 3, 0, structureBoundingBoxIn);
-			setBlockState(worldIn, AbyssalCraft.ethaxiumbrick.getDefaultState(), 4, 1, 0, structureBoundingBoxIn);
-			setBlockState(worldIn, AbyssalCraft.ethaxiumbrick.getDefaultState(), 4, 2, 0, structureBoundingBoxIn);
-			setBlockState(worldIn, AbyssalCraft.ethaxiumbrick.getDefaultState(), 4, 3, 0, structureBoundingBoxIn);
-			setBlockState(worldIn, AbyssalCraft.ethaxiumbrick.getDefaultState(), 0, 1, 4, structureBoundingBoxIn);
-			setBlockState(worldIn, AbyssalCraft.ethaxiumbrick.getDefaultState(), 0, 2, 4, structureBoundingBoxIn);
-			setBlockState(worldIn, AbyssalCraft.ethaxiumbrick.getDefaultState(), 0, 3, 4, structureBoundingBoxIn);
-			setBlockState(worldIn, AbyssalCraft.ethaxiumbrick.getDefaultState(), 4, 1, 4, structureBoundingBoxIn);
-			setBlockState(worldIn, AbyssalCraft.ethaxiumbrick.getDefaultState(), 4, 2, 4, structureBoundingBoxIn);
-			setBlockState(worldIn, AbyssalCraft.ethaxiumbrick.getDefaultState(), 4, 3, 4, structureBoundingBoxIn);
-			fillWithBlocks(worldIn, structureBoundingBoxIn, 0, 1, 1, 0, 3, 3, AbyssalCraft.ethaxiumbrick.getDefaultState(), AbyssalCraft.ethaxiumbrick.getDefaultState(), false);
-			fillWithBlocks(worldIn, structureBoundingBoxIn, 4, 1, 1, 4, 3, 3, AbyssalCraft.ethaxiumbrick.getDefaultState(), AbyssalCraft.ethaxiumbrick.getDefaultState(), false);
-			fillWithBlocks(worldIn, structureBoundingBoxIn, 1, 1, 4, 3, 3, 4, AbyssalCraft.ethaxiumbrick.getDefaultState(), AbyssalCraft.ethaxiumbrick.getDefaultState(), false);
+			fillWithBlocks(worldIn, structureBoundingBoxIn, 0, 0, 0, 4, 0, 4, ACBlocks.ethaxium_brick.getDefaultState(), ACBlocks.ethaxium_brick.getDefaultState(), false);
+			fillWithBlocks(worldIn, structureBoundingBoxIn, 0, 4, 0, 4, 4, 4, ACBlocks.ethaxium_pillar.getDefaultState(), ACBlocks.ethaxium_pillar.getDefaultState(), false);
+			fillWithBlocks(worldIn, structureBoundingBoxIn, 1, 4, 1, 3, 4, 3, ACBlocks.ethaxium_brick.getDefaultState(), ACBlocks.ethaxium_brick.getDefaultState(), false);
+			setBlockState(worldIn, ACBlocks.ethaxium_brick.getDefaultState(), 0, 1, 0, structureBoundingBoxIn);
+			setBlockState(worldIn, ACBlocks.ethaxium_brick.getDefaultState(), 0, 2, 0, structureBoundingBoxIn);
+			setBlockState(worldIn, ACBlocks.ethaxium_brick.getDefaultState(), 0, 3, 0, structureBoundingBoxIn);
+			setBlockState(worldIn, ACBlocks.ethaxium_brick.getDefaultState(), 4, 1, 0, structureBoundingBoxIn);
+			setBlockState(worldIn, ACBlocks.ethaxium_brick.getDefaultState(), 4, 2, 0, structureBoundingBoxIn);
+			setBlockState(worldIn, ACBlocks.ethaxium_brick.getDefaultState(), 4, 3, 0, structureBoundingBoxIn);
+			setBlockState(worldIn, ACBlocks.ethaxium_brick.getDefaultState(), 0, 1, 4, structureBoundingBoxIn);
+			setBlockState(worldIn, ACBlocks.ethaxium_brick.getDefaultState(), 0, 2, 4, structureBoundingBoxIn);
+			setBlockState(worldIn, ACBlocks.ethaxium_brick.getDefaultState(), 0, 3, 4, structureBoundingBoxIn);
+			setBlockState(worldIn, ACBlocks.ethaxium_brick.getDefaultState(), 4, 1, 4, structureBoundingBoxIn);
+			setBlockState(worldIn, ACBlocks.ethaxium_brick.getDefaultState(), 4, 2, 4, structureBoundingBoxIn);
+			setBlockState(worldIn, ACBlocks.ethaxium_brick.getDefaultState(), 4, 3, 4, structureBoundingBoxIn);
+			fillWithBlocks(worldIn, structureBoundingBoxIn, 0, 1, 1, 0, 3, 3, ACBlocks.ethaxium_brick.getDefaultState(), ACBlocks.ethaxium_brick.getDefaultState(), false);
+			fillWithBlocks(worldIn, structureBoundingBoxIn, 4, 1, 1, 4, 3, 3, ACBlocks.ethaxium_brick.getDefaultState(), ACBlocks.ethaxium_brick.getDefaultState(), false);
+			fillWithBlocks(worldIn, structureBoundingBoxIn, 1, 1, 4, 3, 3, 4, ACBlocks.ethaxium_brick.getDefaultState(), ACBlocks.ethaxium_brick.getDefaultState(), false);
 			setBlockState(worldIn, Blocks.glass_pane.getDefaultState(), 0, 2, 2, structureBoundingBoxIn);
 			setBlockState(worldIn, Blocks.glass_pane.getDefaultState(), 2, 2, 4, structureBoundingBoxIn);
 			setBlockState(worldIn, Blocks.glass_pane.getDefaultState(), 4, 2, 2, structureBoundingBoxIn);
-			setBlockState(worldIn, AbyssalCraft.ethaxiumbrick.getDefaultState(), 1, 1, 0, structureBoundingBoxIn);
-			setBlockState(worldIn, AbyssalCraft.ethaxiumbrick.getDefaultState(), 1, 2, 0, structureBoundingBoxIn);
-			setBlockState(worldIn, AbyssalCraft.ethaxiumbrick.getDefaultState(), 1, 3, 0, structureBoundingBoxIn);
-			setBlockState(worldIn, AbyssalCraft.ethaxiumbrick.getDefaultState(), 2, 3, 0, structureBoundingBoxIn);
-			setBlockState(worldIn, AbyssalCraft.ethaxiumbrick.getDefaultState(), 3, 3, 0, structureBoundingBoxIn);
-			setBlockState(worldIn, AbyssalCraft.ethaxiumbrick.getDefaultState(), 3, 2, 0, structureBoundingBoxIn);
-			setBlockState(worldIn, AbyssalCraft.ethaxiumbrick.getDefaultState(), 3, 1, 0, structureBoundingBoxIn);
+			setBlockState(worldIn, ACBlocks.ethaxium_brick.getDefaultState(), 1, 1, 0, structureBoundingBoxIn);
+			setBlockState(worldIn, ACBlocks.ethaxium_brick.getDefaultState(), 1, 2, 0, structureBoundingBoxIn);
+			setBlockState(worldIn, ACBlocks.ethaxium_brick.getDefaultState(), 1, 3, 0, structureBoundingBoxIn);
+			setBlockState(worldIn, ACBlocks.ethaxium_brick.getDefaultState(), 2, 3, 0, structureBoundingBoxIn);
+			setBlockState(worldIn, ACBlocks.ethaxium_brick.getDefaultState(), 3, 3, 0, structureBoundingBoxIn);
+			setBlockState(worldIn, ACBlocks.ethaxium_brick.getDefaultState(), 3, 2, 0, structureBoundingBoxIn);
+			setBlockState(worldIn, ACBlocks.ethaxium_brick.getDefaultState(), 3, 1, 0, structureBoundingBoxIn);
 
 			if (getBlockStateFromPos(worldIn, 2, 0, -1, structureBoundingBoxIn).getBlock().getMaterial() == Material.air && getBlockStateFromPos(worldIn, 2, -1, -1, structureBoundingBoxIn).getBlock().getMaterial() != Material.air)
-				setBlockState(worldIn, AbyssalCraft.ethaxiumstairs.getStateFromMeta(getMetadataWithOffset(Blocks.stone_stairs, 3)), 2, 0, -1, structureBoundingBoxIn);
+				setBlockState(worldIn, ACBlocks.ethaxium_brick_stairs.getStateFromMeta(getMetadataWithOffset(Blocks.stone_stairs, 3)), 2, 0, -1, structureBoundingBoxIn);
 
 			fillWithBlocks(worldIn, structureBoundingBoxIn, 1, 1, 1, 3, 3, 3, Blocks.air.getDefaultState(), Blocks.air.getDefaultState(), false);
 
-			fillWithBlocks(worldIn, structureBoundingBoxIn, 0, 5, 0, 4, 5, 4, AbyssalCraft.ethaxiumbrick.getDefaultState(), AbyssalCraft.ethaxiumbrick.getDefaultState(), false);
-			fillWithBlocks(worldIn, structureBoundingBoxIn, 0, 9, 0, 4, 9, 4, AbyssalCraft.ethaxiumpillar.getDefaultState(), AbyssalCraft.ethaxiumpillar.getDefaultState(), false);
-			fillWithBlocks(worldIn, structureBoundingBoxIn, 1, 9, 1, 3, 9, 3, AbyssalCraft.ethaxiumbrick.getDefaultState(), AbyssalCraft.ethaxiumbrick.getDefaultState(), false);
-			setBlockState(worldIn, AbyssalCraft.ethaxiumbrick.getDefaultState(), 0, 6, 0, structureBoundingBoxIn);
-			setBlockState(worldIn, AbyssalCraft.ethaxiumbrick.getDefaultState(), 0, 7, 0, structureBoundingBoxIn);
-			setBlockState(worldIn, AbyssalCraft.ethaxiumbrick.getDefaultState(), 0, 8, 0, structureBoundingBoxIn);
-			setBlockState(worldIn, AbyssalCraft.ethaxiumbrick.getDefaultState(), 4, 6, 0, structureBoundingBoxIn);
-			setBlockState(worldIn, AbyssalCraft.ethaxiumbrick.getDefaultState(), 4, 7, 0, structureBoundingBoxIn);
-			setBlockState(worldIn, AbyssalCraft.ethaxiumbrick.getDefaultState(), 4, 8, 0, structureBoundingBoxIn);
-			setBlockState(worldIn, AbyssalCraft.ethaxiumbrick.getDefaultState(), 0, 6, 4, structureBoundingBoxIn);
-			setBlockState(worldIn, AbyssalCraft.ethaxiumbrick.getDefaultState(), 0, 7, 4, structureBoundingBoxIn);
-			setBlockState(worldIn, AbyssalCraft.ethaxiumbrick.getDefaultState(), 0, 8, 4, structureBoundingBoxIn);
-			setBlockState(worldIn, AbyssalCraft.ethaxiumbrick.getDefaultState(), 4, 6, 4, structureBoundingBoxIn);
-			setBlockState(worldIn, AbyssalCraft.ethaxiumbrick.getDefaultState(), 4, 7, 4, structureBoundingBoxIn);
-			setBlockState(worldIn, AbyssalCraft.ethaxiumbrick.getDefaultState(), 4, 8, 4, structureBoundingBoxIn);
-			fillWithBlocks(worldIn, structureBoundingBoxIn, 0, 6, 1, 0, 8, 3, AbyssalCraft.ethaxiumbrick.getDefaultState(), AbyssalCraft.ethaxiumbrick.getDefaultState(), false);
-			fillWithBlocks(worldIn, structureBoundingBoxIn, 1, 6, 0, 3, 8, 0, AbyssalCraft.ethaxiumbrick.getDefaultState(), AbyssalCraft.ethaxiumbrick.getDefaultState(), false);
-			fillWithBlocks(worldIn, structureBoundingBoxIn, 4, 6, 1, 4, 8, 3, AbyssalCraft.ethaxiumbrick.getDefaultState(), AbyssalCraft.ethaxiumbrick.getDefaultState(), false);
-			fillWithBlocks(worldIn, structureBoundingBoxIn, 1, 6, 4, 3, 8, 4, AbyssalCraft.ethaxiumbrick.getDefaultState(), AbyssalCraft.ethaxiumbrick.getDefaultState(), false);
+			fillWithBlocks(worldIn, structureBoundingBoxIn, 0, 5, 0, 4, 5, 4, ACBlocks.ethaxium_brick.getDefaultState(), ACBlocks.ethaxium_brick.getDefaultState(), false);
+			fillWithBlocks(worldIn, structureBoundingBoxIn, 0, 9, 0, 4, 9, 4, ACBlocks.ethaxium_pillar.getDefaultState(), ACBlocks.ethaxium_pillar.getDefaultState(), false);
+			fillWithBlocks(worldIn, structureBoundingBoxIn, 1, 9, 1, 3, 9, 3, ACBlocks.ethaxium_brick.getDefaultState(), ACBlocks.ethaxium_brick.getDefaultState(), false);
+			setBlockState(worldIn, ACBlocks.ethaxium_brick.getDefaultState(), 0, 6, 0, structureBoundingBoxIn);
+			setBlockState(worldIn, ACBlocks.ethaxium_brick.getDefaultState(), 0, 7, 0, structureBoundingBoxIn);
+			setBlockState(worldIn, ACBlocks.ethaxium_brick.getDefaultState(), 0, 8, 0, structureBoundingBoxIn);
+			setBlockState(worldIn, ACBlocks.ethaxium_brick.getDefaultState(), 4, 6, 0, structureBoundingBoxIn);
+			setBlockState(worldIn, ACBlocks.ethaxium_brick.getDefaultState(), 4, 7, 0, structureBoundingBoxIn);
+			setBlockState(worldIn, ACBlocks.ethaxium_brick.getDefaultState(), 4, 8, 0, structureBoundingBoxIn);
+			setBlockState(worldIn, ACBlocks.ethaxium_brick.getDefaultState(), 0, 6, 4, structureBoundingBoxIn);
+			setBlockState(worldIn, ACBlocks.ethaxium_brick.getDefaultState(), 0, 7, 4, structureBoundingBoxIn);
+			setBlockState(worldIn, ACBlocks.ethaxium_brick.getDefaultState(), 0, 8, 4, structureBoundingBoxIn);
+			setBlockState(worldIn, ACBlocks.ethaxium_brick.getDefaultState(), 4, 6, 4, structureBoundingBoxIn);
+			setBlockState(worldIn, ACBlocks.ethaxium_brick.getDefaultState(), 4, 7, 4, structureBoundingBoxIn);
+			setBlockState(worldIn, ACBlocks.ethaxium_brick.getDefaultState(), 4, 8, 4, structureBoundingBoxIn);
+			fillWithBlocks(worldIn, structureBoundingBoxIn, 0, 6, 1, 0, 8, 3, ACBlocks.ethaxium_brick.getDefaultState(), ACBlocks.ethaxium_brick.getDefaultState(), false);
+			fillWithBlocks(worldIn, structureBoundingBoxIn, 1, 6, 0, 3, 8, 0, ACBlocks.ethaxium_brick.getDefaultState(), ACBlocks.ethaxium_brick.getDefaultState(), false);
+			fillWithBlocks(worldIn, structureBoundingBoxIn, 4, 6, 1, 4, 8, 3, ACBlocks.ethaxium_brick.getDefaultState(), ACBlocks.ethaxium_brick.getDefaultState(), false);
+			fillWithBlocks(worldIn, structureBoundingBoxIn, 1, 6, 4, 3, 8, 4, ACBlocks.ethaxium_brick.getDefaultState(), ACBlocks.ethaxium_brick.getDefaultState(), false);
 			setBlockState(worldIn, Blocks.glass_pane.getDefaultState(), 0, 7, 2, structureBoundingBoxIn);
 			setBlockState(worldIn, Blocks.glass_pane.getDefaultState(), 2, 7, 4, structureBoundingBoxIn);
 			setBlockState(worldIn, Blocks.glass_pane.getDefaultState(), 4, 7, 2, structureBoundingBoxIn);
 			setBlockState(worldIn, Blocks.glass_pane.getDefaultState(), 2, 7, 0, structureBoundingBoxIn);
-			setBlockState(worldIn, AbyssalCraft.ethaxiumbrick.getDefaultState(), 1, 6, 0, structureBoundingBoxIn);
-			setBlockState(worldIn, AbyssalCraft.ethaxiumbrick.getDefaultState(), 1, 7, 0, structureBoundingBoxIn);
-			setBlockState(worldIn, AbyssalCraft.ethaxiumbrick.getDefaultState(), 1, 8, 0, structureBoundingBoxIn);
-			setBlockState(worldIn, AbyssalCraft.ethaxiumbrick.getDefaultState(), 2, 8, 0, structureBoundingBoxIn);
-			setBlockState(worldIn, AbyssalCraft.ethaxiumbrick.getDefaultState(), 3, 8, 0, structureBoundingBoxIn);
-			setBlockState(worldIn, AbyssalCraft.ethaxiumbrick.getDefaultState(), 3, 7, 0, structureBoundingBoxIn);
-			setBlockState(worldIn, AbyssalCraft.ethaxiumbrick.getDefaultState(), 3, 6, 0, structureBoundingBoxIn);
+			setBlockState(worldIn, ACBlocks.ethaxium_brick.getDefaultState(), 1, 6, 0, structureBoundingBoxIn);
+			setBlockState(worldIn, ACBlocks.ethaxium_brick.getDefaultState(), 1, 7, 0, structureBoundingBoxIn);
+			setBlockState(worldIn, ACBlocks.ethaxium_brick.getDefaultState(), 1, 8, 0, structureBoundingBoxIn);
+			setBlockState(worldIn, ACBlocks.ethaxium_brick.getDefaultState(), 2, 8, 0, structureBoundingBoxIn);
+			setBlockState(worldIn, ACBlocks.ethaxium_brick.getDefaultState(), 3, 8, 0, structureBoundingBoxIn);
+			setBlockState(worldIn, ACBlocks.ethaxium_brick.getDefaultState(), 3, 7, 0, structureBoundingBoxIn);
+			setBlockState(worldIn, ACBlocks.ethaxium_brick.getDefaultState(), 3, 6, 0, structureBoundingBoxIn);
 
 			if (isRoofAccessible)
 			{
-				setBlockState(worldIn, AbyssalCraft.ethaxiumfence.getDefaultState(), 0, 10, 0, structureBoundingBoxIn);
-				setBlockState(worldIn, AbyssalCraft.ethaxiumfence.getDefaultState(), 1, 10, 0, structureBoundingBoxIn);
-				setBlockState(worldIn, AbyssalCraft.ethaxiumfence.getDefaultState(), 2, 10, 0, structureBoundingBoxIn);
-				setBlockState(worldIn, AbyssalCraft.ethaxiumfence.getDefaultState(), 3, 10, 0, structureBoundingBoxIn);
-				setBlockState(worldIn, AbyssalCraft.ethaxiumfence.getDefaultState(), 4, 10, 0, structureBoundingBoxIn);
-				setBlockState(worldIn, AbyssalCraft.ethaxiumfence.getDefaultState(), 0, 10, 4, structureBoundingBoxIn);
-				setBlockState(worldIn, AbyssalCraft.ethaxiumfence.getDefaultState(), 1, 10, 4, structureBoundingBoxIn);
-				setBlockState(worldIn, AbyssalCraft.ethaxiumfence.getDefaultState(), 2, 10, 4, structureBoundingBoxIn);
-				setBlockState(worldIn, AbyssalCraft.ethaxiumfence.getDefaultState(), 3, 10, 4, structureBoundingBoxIn);
-				setBlockState(worldIn, AbyssalCraft.ethaxiumfence.getDefaultState(), 4, 10, 4, structureBoundingBoxIn);
-				setBlockState(worldIn, AbyssalCraft.ethaxiumfence.getDefaultState(), 4, 10, 1, structureBoundingBoxIn);
-				setBlockState(worldIn, AbyssalCraft.ethaxiumfence.getDefaultState(), 4, 10, 2, structureBoundingBoxIn);
-				setBlockState(worldIn, AbyssalCraft.ethaxiumfence.getDefaultState(), 4, 10, 3, structureBoundingBoxIn);
-				setBlockState(worldIn, AbyssalCraft.ethaxiumfence.getDefaultState(), 0, 10, 1, structureBoundingBoxIn);
-				setBlockState(worldIn, AbyssalCraft.ethaxiumfence.getDefaultState(), 0, 10, 2, structureBoundingBoxIn);
-				setBlockState(worldIn, AbyssalCraft.ethaxiumfence.getDefaultState(), 0, 10, 3, structureBoundingBoxIn);
+				setBlockState(worldIn, ACBlocks.ethaxium_brick_fence.getDefaultState(), 0, 10, 0, structureBoundingBoxIn);
+				setBlockState(worldIn, ACBlocks.ethaxium_brick_fence.getDefaultState(), 1, 10, 0, structureBoundingBoxIn);
+				setBlockState(worldIn, ACBlocks.ethaxium_brick_fence.getDefaultState(), 2, 10, 0, structureBoundingBoxIn);
+				setBlockState(worldIn, ACBlocks.ethaxium_brick_fence.getDefaultState(), 3, 10, 0, structureBoundingBoxIn);
+				setBlockState(worldIn, ACBlocks.ethaxium_brick_fence.getDefaultState(), 4, 10, 0, structureBoundingBoxIn);
+				setBlockState(worldIn, ACBlocks.ethaxium_brick_fence.getDefaultState(), 0, 10, 4, structureBoundingBoxIn);
+				setBlockState(worldIn, ACBlocks.ethaxium_brick_fence.getDefaultState(), 1, 10, 4, structureBoundingBoxIn);
+				setBlockState(worldIn, ACBlocks.ethaxium_brick_fence.getDefaultState(), 2, 10, 4, structureBoundingBoxIn);
+				setBlockState(worldIn, ACBlocks.ethaxium_brick_fence.getDefaultState(), 3, 10, 4, structureBoundingBoxIn);
+				setBlockState(worldIn, ACBlocks.ethaxium_brick_fence.getDefaultState(), 4, 10, 4, structureBoundingBoxIn);
+				setBlockState(worldIn, ACBlocks.ethaxium_brick_fence.getDefaultState(), 4, 10, 1, structureBoundingBoxIn);
+				setBlockState(worldIn, ACBlocks.ethaxium_brick_fence.getDefaultState(), 4, 10, 2, structureBoundingBoxIn);
+				setBlockState(worldIn, ACBlocks.ethaxium_brick_fence.getDefaultState(), 4, 10, 3, structureBoundingBoxIn);
+				setBlockState(worldIn, ACBlocks.ethaxium_brick_fence.getDefaultState(), 0, 10, 1, structureBoundingBoxIn);
+				setBlockState(worldIn, ACBlocks.ethaxium_brick_fence.getDefaultState(), 0, 10, 2, structureBoundingBoxIn);
+				setBlockState(worldIn, ACBlocks.ethaxium_brick_fence.getDefaultState(), 0, 10, 3, structureBoundingBoxIn);
 			}
 
 			int i = getMetadataWithOffset(Blocks.ladder, 3);
@@ -1389,7 +1389,7 @@ public class StructureOmotholPieces
 				for (int j = 0; j < 5; ++j)
 				{
 					clearCurrentPositionBlocksUpwards(worldIn, j, 11, k, structureBoundingBoxIn);
-					replaceAirAndLiquidDownwards(worldIn, AbyssalCraft.ethaxiumbrick.getDefaultState(), j, -1, k, structureBoundingBoxIn);
+					replaceAirAndLiquidDownwards(worldIn, ACBlocks.ethaxium_brick.getDefaultState(), j, -1, k, structureBoundingBoxIn);
 				}
 
 			spawnRemnants(worldIn, structureBoundingBoxIn, 1, 1, 2, 1);
@@ -1555,7 +1555,7 @@ public class StructureOmotholPieces
 							if(blockpos.getY() <= 49)
 								blockpos = new BlockPos(blockpos.getX(), 49, blockpos.getZ());
 
-						worldIn.setBlockState(blockpos, AbyssalCraft.ethaxium.getDefaultState(), 2);
+						worldIn.setBlockState(blockpos, ACBlocks.ethaxium.getDefaultState(), 2);
 					}
 				}
 
@@ -1671,9 +1671,9 @@ public class StructureOmotholPieces
 			}
 
 			fillWithBlocks(worldIn, structureBoundingBoxIn, 0, 0, 0, 2, 3, 1, Blocks.air.getDefaultState(), Blocks.air.getDefaultState(), false);
-			setBlockState(worldIn, AbyssalCraft.ethaxiumfence.getDefaultState(), 1, 0, 0, structureBoundingBoxIn);
-			setBlockState(worldIn, AbyssalCraft.ethaxiumfence.getDefaultState(), 1, 1, 0, structureBoundingBoxIn);
-			setBlockState(worldIn, AbyssalCraft.ethaxiumfence.getDefaultState(), 1, 2, 0, structureBoundingBoxIn);
+			setBlockState(worldIn, ACBlocks.ethaxium_brick_fence.getDefaultState(), 1, 0, 0, structureBoundingBoxIn);
+			setBlockState(worldIn, ACBlocks.ethaxium_brick_fence.getDefaultState(), 1, 1, 0, structureBoundingBoxIn);
+			setBlockState(worldIn, ACBlocks.ethaxium_brick_fence.getDefaultState(), 1, 2, 0, structureBoundingBoxIn);
 			setBlockState(worldIn, Blocks.wool.getStateFromMeta(EnumDyeColor.WHITE.getDyeDamage()), 1, 3, 0, structureBoundingBoxIn);
 			boolean flag = coordBaseMode == EnumFacing.EAST || coordBaseMode == EnumFacing.NORTH;
 			setBlockState(worldIn, Blocks.torch.getDefaultState().withProperty(BlockTorch.FACING, coordBaseMode.rotateY()), flag ? 2 : 0, 3, 0, structureBoundingBoxIn);
@@ -1972,32 +1972,32 @@ public class StructureOmotholPieces
 			}
 
 			fillWithBlocks(worldIn, structureBoundingBoxIn, 1, 1, 1, 3, 5, 4, Blocks.air.getDefaultState(), Blocks.air.getDefaultState(), false);
-			fillWithBlocks(worldIn, structureBoundingBoxIn, 0, 0, 0, 3, 0, 4, AbyssalCraft.ethaxiumbrick.getDefaultState(), AbyssalCraft.ethaxiumbrick.getDefaultState(), false);
+			fillWithBlocks(worldIn, structureBoundingBoxIn, 0, 0, 0, 3, 0, 4, ACBlocks.ethaxium_brick.getDefaultState(), ACBlocks.ethaxium_brick.getDefaultState(), false);
 			fillWithBlocks(worldIn, structureBoundingBoxIn, 1, 0, 1, 2, 0, 3, Blocks.dirt.getDefaultState(), Blocks.dirt.getDefaultState(), false);
 
 			if (isTallHouse)
-				fillWithBlocks(worldIn, structureBoundingBoxIn, 1, 4, 1, 2, 4, 3, AbyssalCraft.ethaxiumpillar.getDefaultState(), AbyssalCraft.ethaxiumpillar.getDefaultState(), false);
+				fillWithBlocks(worldIn, structureBoundingBoxIn, 1, 4, 1, 2, 4, 3, ACBlocks.ethaxium_pillar.getDefaultState(), ACBlocks.ethaxium_pillar.getDefaultState(), false);
 			else
-				fillWithBlocks(worldIn, structureBoundingBoxIn, 1, 5, 1, 2, 5, 3, AbyssalCraft.ethaxiumpillar.getDefaultState(), AbyssalCraft.ethaxiumpillar.getDefaultState(), false);
+				fillWithBlocks(worldIn, structureBoundingBoxIn, 1, 5, 1, 2, 5, 3, ACBlocks.ethaxium_pillar.getDefaultState(), ACBlocks.ethaxium_pillar.getDefaultState(), false);
 
-			setBlockState(worldIn, AbyssalCraft.ethaxiumpillar.getDefaultState(), 1, 4, 0, structureBoundingBoxIn);
-			setBlockState(worldIn, AbyssalCraft.ethaxiumpillar.getDefaultState(), 2, 4, 0, structureBoundingBoxIn);
-			setBlockState(worldIn, AbyssalCraft.ethaxiumpillar.getDefaultState(), 1, 4, 4, structureBoundingBoxIn);
-			setBlockState(worldIn, AbyssalCraft.ethaxiumpillar.getDefaultState(), 2, 4, 4, structureBoundingBoxIn);
-			setBlockState(worldIn, AbyssalCraft.ethaxiumpillar.getDefaultState(), 0, 4, 1, structureBoundingBoxIn);
-			setBlockState(worldIn, AbyssalCraft.ethaxiumpillar.getDefaultState(), 0, 4, 2, structureBoundingBoxIn);
-			setBlockState(worldIn, AbyssalCraft.ethaxiumpillar.getDefaultState(), 0, 4, 3, structureBoundingBoxIn);
-			setBlockState(worldIn, AbyssalCraft.ethaxiumpillar.getDefaultState(), 3, 4, 1, structureBoundingBoxIn);
-			setBlockState(worldIn, AbyssalCraft.ethaxiumpillar.getDefaultState(), 3, 4, 2, structureBoundingBoxIn);
-			setBlockState(worldIn, AbyssalCraft.ethaxiumpillar.getDefaultState(), 3, 4, 3, structureBoundingBoxIn);
-			fillWithBlocks(worldIn, structureBoundingBoxIn, 0, 1, 0, 0, 3, 0, AbyssalCraft.ethaxiumpillar.getDefaultState(), AbyssalCraft.ethaxiumpillar.getDefaultState(), false);
-			fillWithBlocks(worldIn, structureBoundingBoxIn, 3, 1, 0, 3, 3, 0, AbyssalCraft.ethaxiumpillar.getDefaultState(), AbyssalCraft.ethaxiumpillar.getDefaultState(), false);
-			fillWithBlocks(worldIn, structureBoundingBoxIn, 0, 1, 4, 0, 3, 4, AbyssalCraft.ethaxiumpillar.getDefaultState(), AbyssalCraft.ethaxiumpillar.getDefaultState(), false);
-			fillWithBlocks(worldIn, structureBoundingBoxIn, 3, 1, 4, 3, 3, 4, AbyssalCraft.ethaxiumpillar.getDefaultState(), AbyssalCraft.ethaxiumpillar.getDefaultState(), false);
-			fillWithBlocks(worldIn, structureBoundingBoxIn, 0, 1, 1, 0, 3, 3, AbyssalCraft.ethaxiumbrick.getDefaultState(), AbyssalCraft.ethaxiumbrick.getDefaultState(), false);
-			fillWithBlocks(worldIn, structureBoundingBoxIn, 3, 1, 1, 3, 3, 3, AbyssalCraft.ethaxiumbrick.getDefaultState(), AbyssalCraft.ethaxiumbrick.getDefaultState(), false);
-			fillWithBlocks(worldIn, structureBoundingBoxIn, 1, 1, 0, 2, 3, 0, AbyssalCraft.ethaxiumbrick.getDefaultState(), AbyssalCraft.ethaxiumbrick.getDefaultState(), false);
-			fillWithBlocks(worldIn, structureBoundingBoxIn, 1, 1, 4, 2, 3, 4, AbyssalCraft.ethaxiumbrick.getDefaultState(), AbyssalCraft.ethaxiumbrick.getDefaultState(), false);
+			setBlockState(worldIn, ACBlocks.ethaxium_pillar.getDefaultState(), 1, 4, 0, structureBoundingBoxIn);
+			setBlockState(worldIn, ACBlocks.ethaxium_pillar.getDefaultState(), 2, 4, 0, structureBoundingBoxIn);
+			setBlockState(worldIn, ACBlocks.ethaxium_pillar.getDefaultState(), 1, 4, 4, structureBoundingBoxIn);
+			setBlockState(worldIn, ACBlocks.ethaxium_pillar.getDefaultState(), 2, 4, 4, structureBoundingBoxIn);
+			setBlockState(worldIn, ACBlocks.ethaxium_pillar.getDefaultState(), 0, 4, 1, structureBoundingBoxIn);
+			setBlockState(worldIn, ACBlocks.ethaxium_pillar.getDefaultState(), 0, 4, 2, structureBoundingBoxIn);
+			setBlockState(worldIn, ACBlocks.ethaxium_pillar.getDefaultState(), 0, 4, 3, structureBoundingBoxIn);
+			setBlockState(worldIn, ACBlocks.ethaxium_pillar.getDefaultState(), 3, 4, 1, structureBoundingBoxIn);
+			setBlockState(worldIn, ACBlocks.ethaxium_pillar.getDefaultState(), 3, 4, 2, structureBoundingBoxIn);
+			setBlockState(worldIn, ACBlocks.ethaxium_pillar.getDefaultState(), 3, 4, 3, structureBoundingBoxIn);
+			fillWithBlocks(worldIn, structureBoundingBoxIn, 0, 1, 0, 0, 3, 0, ACBlocks.ethaxium_pillar.getDefaultState(), ACBlocks.ethaxium_pillar.getDefaultState(), false);
+			fillWithBlocks(worldIn, structureBoundingBoxIn, 3, 1, 0, 3, 3, 0, ACBlocks.ethaxium_pillar.getDefaultState(), ACBlocks.ethaxium_pillar.getDefaultState(), false);
+			fillWithBlocks(worldIn, structureBoundingBoxIn, 0, 1, 4, 0, 3, 4, ACBlocks.ethaxium_pillar.getDefaultState(), ACBlocks.ethaxium_pillar.getDefaultState(), false);
+			fillWithBlocks(worldIn, structureBoundingBoxIn, 3, 1, 4, 3, 3, 4, ACBlocks.ethaxium_pillar.getDefaultState(), ACBlocks.ethaxium_pillar.getDefaultState(), false);
+			fillWithBlocks(worldIn, structureBoundingBoxIn, 0, 1, 1, 0, 3, 3, ACBlocks.ethaxium_brick.getDefaultState(), ACBlocks.ethaxium_brick.getDefaultState(), false);
+			fillWithBlocks(worldIn, structureBoundingBoxIn, 3, 1, 1, 3, 3, 3, ACBlocks.ethaxium_brick.getDefaultState(), ACBlocks.ethaxium_brick.getDefaultState(), false);
+			fillWithBlocks(worldIn, structureBoundingBoxIn, 1, 1, 0, 2, 3, 0, ACBlocks.ethaxium_brick.getDefaultState(), ACBlocks.ethaxium_brick.getDefaultState(), false);
+			fillWithBlocks(worldIn, structureBoundingBoxIn, 1, 1, 4, 2, 3, 4, ACBlocks.ethaxium_brick.getDefaultState(), ACBlocks.ethaxium_brick.getDefaultState(), false);
 			setBlockState(worldIn, Blocks.glass_pane.getDefaultState(), 0, 2, 2, structureBoundingBoxIn);
 			setBlockState(worldIn, Blocks.glass_pane.getDefaultState(), 3, 2, 2, structureBoundingBoxIn);
 
@@ -2012,13 +2012,13 @@ public class StructureOmotholPieces
 			placeDoorCurrentPosition(worldIn, structureBoundingBoxIn, randomIn, 1, 1, 0, EnumFacing.getHorizontal(getMetadataWithOffset(Blocks.oak_door, 1)));
 
 			if (getBlockStateFromPos(worldIn, 1, 0, -1, structureBoundingBoxIn).getBlock().getMaterial() == Material.air && getBlockStateFromPos(worldIn, 1, -1, -1, structureBoundingBoxIn).getBlock().getMaterial() != Material.air)
-				setBlockState(worldIn, AbyssalCraft.ethaxiumstairs.getStateFromMeta(getMetadataWithOffset(Blocks.oak_stairs, 3)), 1, 0, -1, structureBoundingBoxIn);
+				setBlockState(worldIn, ACBlocks.ethaxium_brick_stairs.getStateFromMeta(getMetadataWithOffset(Blocks.oak_stairs, 3)), 1, 0, -1, structureBoundingBoxIn);
 
 			for (int i = 0; i < 5; ++i)
 				for (int j = 0; j < 4; ++j)
 				{
 					clearCurrentPositionBlocksUpwards(worldIn, j, 6, i, structureBoundingBoxIn);
-					replaceAirAndLiquidDownwards(worldIn, AbyssalCraft.ethaxiumbrick.getDefaultState(), j, -1, i, structureBoundingBoxIn);
+					replaceAirAndLiquidDownwards(worldIn, ACBlocks.ethaxium_brick.getDefaultState(), j, -1, i, structureBoundingBoxIn);
 				}
 
 			spawnRemnants(worldIn, structureBoundingBoxIn, 1, 1, 2, 1);

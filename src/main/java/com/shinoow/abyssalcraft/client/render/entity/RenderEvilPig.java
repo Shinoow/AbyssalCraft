@@ -25,9 +25,9 @@ public class RenderEvilPig extends RenderLiving<EntityEvilpig> {
 
 	private static final ResourceLocation mobTexture = new ResourceLocation("textures/entity/pig/pig.png");
 
-	public RenderEvilPig (RenderManager manager, ModelPig ModelPig, float f)
+	public RenderEvilPig (RenderManager manager)
 	{
-		super(manager, ModelPig, f);
+		super(manager, new ModelPig(), 0.5F);
 	}
 
 	@Override

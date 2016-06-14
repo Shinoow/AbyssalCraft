@@ -21,7 +21,8 @@ import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;
 
 import com.google.common.collect.Lists;
-import com.shinoow.abyssalcraft.AbyssalCraft;
+import com.shinoow.abyssalcraft.api.block.ACBlocks;
+import com.shinoow.abyssalcraft.api.item.ACItems;
 import com.shinoow.abyssalcraft.api.ritual.NecronomiconRitual;
 import com.shinoow.abyssalcraft.common.entity.EntityDreadSpawn;
 import com.shinoow.abyssalcraft.common.entity.EntityGreaterDreadSpawn;
@@ -30,8 +31,8 @@ import com.shinoow.abyssalcraft.common.entity.EntityLesserDreadbeast;
 public class NecronomiconDreadSpawnRitual extends NecronomiconRitual {
 
 	public NecronomiconDreadSpawnRitual() {
-		super("dreadSpawn", 2, 500F, new Object[]{AbyssalCraft.dreadfragment, AbyssalCraft.dreadstone, AbyssalCraft.abydreadstone,
-				AbyssalCraft.abychunk, AbyssalCraft.dreadchunk, Items.rotten_flesh, AbyssalCraft.Dreadshard, AbyssalCraft.abyingot});
+		super("dreadSpawn", 2, 500F, new Object[]{ACItems.dread_fragment, ACBlocks.dreadstone, ACBlocks.abyssalnite_stone, ACItems.chunk_of_abyssalnite,
+				ACItems.dreaded_chunk_of_abyssalnite, Items.rotten_flesh, ACItems.dreaded_shard_of_abyssalnite, ACItems.abyssalnite_ingot});
 	}
 
 	@Override

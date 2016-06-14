@@ -18,47 +18,40 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.EnumChatFormatting;
-import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
-import com.shinoow.abyssalcraft.AbyssalCraft;
+
+import com.shinoow.abyssalcraft.api.item.ACItems;
+import com.shinoow.abyssalcraft.lib.ACTabs;
 
 public class ItemAbyssalniteArmor extends ItemArmor {
 	public ItemAbyssalniteArmor(ArmorMaterial par2EnumArmorMaterial, int par3, int par4, String name){
 		super(par2EnumArmorMaterial, par3, par4);
-		//		GameRegistry.registerItem(this, name);
 		setUnlocalizedName(name);
-		setCreativeTab(AbyssalCraft.tabCombat);
+		setCreativeTab(ACTabs.tabCombat);
 	}
 
 	@Override
 	public String getItemStackDisplayName(ItemStack par1ItemStack) {
 
-		return EnumChatFormatting.DARK_AQUA + StatCollector.translateToLocal(this.getUnlocalizedName() + ".name");
+		return EnumChatFormatting.DARK_AQUA + super.getItemStackDisplayName(par1ItemStack);
 	}
 
 	@Override
 	public String getArmorTexture(ItemStack stack, Entity entity, int slot, String type)
 	{
-		if(stack.getItem() == AbyssalCraft.helmet || stack.getItem() == AbyssalCraft.plate || stack.getItem() == AbyssalCraft.boots)
+		if(stack.getItem() == ACItems.abyssalnite_helmet || stack.getItem() == ACItems.abyssalnite_chestplate || stack.getItem() == ACItems.abyssalnite_boots)
 			return "abyssalcraft:textures/armor/abyssalnite_1.png";
 
-		if(stack.getItem() == AbyssalCraft.legs)
+		if(stack.getItem() == ACItems.abyssalnite_leggings)
 			return "abyssalcraft:textures/armor/abyssalnite_2.png";
 		else return null;
 	}
 
-	//	@Override
-	//	@SideOnly(Side.CLIENT)
-	//	public void registerIcons(IIconRegister par1IconRegister)
-	//	{
-	//		itemIcon = par1IconRegister.registerIcon(AbyssalCraft.modid + ":" + this.getUnlocalizedName().substring(5));
-	//	}
-
 	@Override
 	public void onArmorTick(World world, EntityPlayer player, ItemStack itemstack) {
-		if (itemstack.getItem() == AbyssalCraft.helmet)
+		if (itemstack.getItem() == ACItems.abyssalnite_helmet)
 			player.addPotionEffect(new PotionEffect(Potion.waterBreathing.getId(), 20, 0));
-		if (itemstack.getItem() == AbyssalCraft.boots)
+		if (itemstack.getItem() == ACItems.abyssalnite_boots)
 			player.addPotionEffect(new PotionEffect(Potion.moveSpeed.getId(), 20, 0));
 	}
 }

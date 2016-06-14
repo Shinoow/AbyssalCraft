@@ -16,11 +16,12 @@ import net.minecraft.block.BlockSlab;
 import net.minecraft.item.ItemSlab;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
+import com.shinoow.abyssalcraft.api.block.ACBlocks;
 
 public class ItemDLTSlab extends ItemSlab {
 
 	public ItemDLTSlab(Block block) {
-		super(block, (BlockSlab)AbyssalCraft.DLTslab1, (BlockSlab)AbyssalCraft.DLTslab2);
+		super(block, (BlockSlab)ACBlocks.darklands_oak_slab, (BlockSlab)AbyssalCraft.DLTslab2);
 		setMaxDamage(0);
 		setHasSubtypes(true);
 	}

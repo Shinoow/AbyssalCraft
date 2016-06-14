@@ -109,26 +109,6 @@ public class WorldChunkManagerDreadlands extends WorldChunkManager
 		return par1;
 	}
 
-	public float[] getTemperatures(float[] par1ArrayOfFloat, int par2, int par3, int par4, int par5) {
-		IntCache.resetIntCache();
-
-		if (par1ArrayOfFloat == null || par1ArrayOfFloat.length < par4 * par5)
-			par1ArrayOfFloat = new float[par4 * par5];
-
-		int[] aint = biomeIndexLayer.getInts(par2, par3, par4, par5);
-
-		for (int i1 = 0; i1 < par4 * par5; ++i1) {
-			float f = BiomeGenBase.getBiome(aint[i1]).getIntRainfall() / 65536.0F; //getIntTemperature()
-
-			if (f > 1.0F)
-				f = 1.0F;
-
-			par1ArrayOfFloat[i1] = f;
-		}
-
-		return par1ArrayOfFloat;
-	}
-
 	@Override
 	public BiomeGenBase[] getBiomesForGeneration(BiomeGenBase[] par1ArrayOfBiomeGenBase, int par2, int par3, int par4, int par5)
 	{

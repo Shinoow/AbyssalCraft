@@ -17,16 +17,17 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
-import com.shinoow.abyssalcraft.AbyssalCraft;
+
+import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.common.entity.EntityPSDLTracker;
+import com.shinoow.abyssalcraft.lib.ACTabs;
 
 public class ItemTrackerPSDL extends Item {
 
 	public ItemTrackerPSDL() {
 		super();
-		//		GameRegistry.registerItem(this, "powerstonetracker");
 		setUnlocalizedName("powerstonetracker");
-		setCreativeTab(AbyssalCraft.tabItems);
+		setCreativeTab(ACTabs.tabItems);
 	}
 
 	@Override
@@ -34,7 +35,7 @@ public class ItemTrackerPSDL extends Item {
 	{
 		MovingObjectPosition movingobjectposition = getMovingObjectPositionFromPlayer(par2World, par3EntityPlayer, false);
 
-		if (movingobjectposition != null && movingobjectposition.typeOfHit == MovingObjectPosition.MovingObjectType.BLOCK && par2World.getBlockState(movingobjectposition.getBlockPos()) == AbyssalCraft.PSDL)
+		if (movingobjectposition != null && movingobjectposition.typeOfHit == MovingObjectPosition.MovingObjectType.BLOCK && par2World.getBlockState(movingobjectposition.getBlockPos()) == ACBlocks.dreadlands_infused_powerstone)
 			return par1ItemStack;
 
 		if (!par2World.isRemote)

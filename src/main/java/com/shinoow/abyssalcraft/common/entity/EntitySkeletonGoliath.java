@@ -34,6 +34,8 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
+import com.shinoow.abyssalcraft.api.item.ACItems;
+import com.shinoow.abyssalcraft.lib.ACLib;
 
 public class EntitySkeletonGoliath extends EntityMob {
 
@@ -110,14 +112,14 @@ public class EntitySkeletonGoliath extends EntityMob {
 
 	@Override
 	public ItemStack getHeldItem(){
-		return new ItemStack(AbyssalCraft.cudgel);
+		return new ItemStack(ACItems.cudgel);
 
 	}
 
 	@Override
 	protected void addRandomDrop()
 	{
-		dropItem(AbyssalCraft.cudgel, 1);
+		dropItem(ACItems.cudgel, 1);
 	}
 
 	@Override
@@ -129,7 +131,7 @@ public class EntitySkeletonGoliath extends EntityMob {
 	@Override
 	public void onLivingUpdate()
 	{
-		if (worldObj.isDaytime() && !worldObj.isRemote && worldObj.provider.getDimensionId() != AbyssalCraft.configDimId1)
+		if (worldObj.isDaytime() && !worldObj.isRemote && worldObj.provider.getDimensionId() != ACLib.abyssal_wasteland_id)
 		{
 			float f = getBrightness(1.0F);
 

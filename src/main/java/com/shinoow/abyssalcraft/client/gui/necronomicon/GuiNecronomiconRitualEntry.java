@@ -38,8 +38,8 @@ import com.shinoow.abyssalcraft.api.ritual.NecronomiconRitual;
 import com.shinoow.abyssalcraft.api.ritual.RitualRegistry;
 import com.shinoow.abyssalcraft.client.gui.necronomicon.buttons.ButtonNextPage;
 import com.shinoow.abyssalcraft.client.lib.GuiRenderHelper;
-import com.shinoow.abyssalcraft.client.lib.NecronomiconResources;
-import com.shinoow.abyssalcraft.client.lib.NecronomiconText;
+import com.shinoow.abyssalcraft.lib.NecronomiconResources;
+import com.shinoow.abyssalcraft.lib.NecronomiconText;
 
 public class GuiNecronomiconRitualEntry extends GuiNecronomicon {
 
@@ -111,8 +111,8 @@ public class GuiNecronomiconRitualEntry extends GuiNecronomicon {
 		String title = ritual.getLocalizedName();
 		fontRendererObj.drawSplitString(title, k + 20, b0 + 16, 116, 0xC40000);
 
-		//		if(ritual.requiresSacrifice())
-		//			fontRendererObj.drawSplitString(NecronomiconText.LABEL_SACRIFICE, k + 138, 164, 107, 0xC40000);
+		if(ritual.requiresSacrifice())
+			fontRendererObj.drawSplitString(NecronomiconText.LABEL_SACRIFICE, k + 138, 164, 107, 0xC40000);
 		writeText(1, NecronomiconText.LABEL_REQUIRED_ENERGY + ": " + ritual.getReqEnergy() + " PE", 125);
 		writeText(2, NecronomiconText.LABEL_LOCATION + ": " + getDimension(ritual.getDimension()));
 		writeText(2, ritual.getDescription(), 48);

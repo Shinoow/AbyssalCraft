@@ -27,6 +27,7 @@ import net.minecraft.world.World;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
+import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.common.entity.EntityLesserShoggoth;
 
 public class BlockShoggothOoze extends BlockACBasic {
@@ -81,15 +82,16 @@ public class BlockShoggothOoze extends BlockACBasic {
 	}
 
 	public void initBlacklist(){
-		blockBlacklist.add(AbyssalCraft.shoggothBlock);
+		blockBlacklist.add(ACBlocks.shoggoth_ooze);
 		blockBlacklist.add(Blocks.bedrock);
 		blockBlacklist.add(Blocks.crafting_table);
-		blockBlacklist.add(AbyssalCraft.ethaxium);
-		blockBlacklist.add(AbyssalCraft.ethaxiumbrick);
-		blockBlacklist.add(AbyssalCraft.ethaxiumpillar);
-		blockBlacklist.add(AbyssalCraft.darkethaxiumbrick);
-		blockBlacklist.add(AbyssalCraft.darkethaxiumpillar);
-		blockBlacklist.add(AbyssalCraft.monolithStone);
-		blockBlacklist.add(AbyssalCraft.shoggothBiomass);
+		blockBlacklist.add(ACBlocks.ethaxium);
+		blockBlacklist.add(ACBlocks.ethaxium_brick);
+		blockBlacklist.add(ACBlocks.ethaxium_pillar);
+		blockBlacklist.add(ACBlocks.dark_ethaxium_brick);
+		blockBlacklist.add(ACBlocks.dark_ethaxium_pillar);
+		blockBlacklist.add(ACBlocks.monolith_stone);
+		blockBlacklist.add(ACBlocks.shoggoth_biomass);
+		blockBlacklist.add(ACBlocks.block_of_ethaxium);
 	}
 }

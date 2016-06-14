@@ -14,7 +14,6 @@ package com.shinoow.abyssalcraft.common.blocks;
 import java.util.Random;
 
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyBool;
@@ -26,36 +25,28 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
 
-import com.shinoow.abyssalcraft.AbyssalCraft;
-import com.shinoow.abyssalcraft.common.blocks.tile.TileEntityODB;
 import com.shinoow.abyssalcraft.common.entity.EntityODBPrimed;
+import com.shinoow.abyssalcraft.lib.ACTabs;
 
-public class BlockODB extends BlockContainer {
+public class BlockODB extends Block {
 
 	public static final PropertyBool EXPLODE = PropertyBool.create("explode");
 
 	public BlockODB() {
 		super(Material.iron);
 		setDefaultState(blockState.getBaseState().withProperty(EXPLODE, Boolean.valueOf(false)));
-		setCreativeTab(AbyssalCraft.tabBlock);
+		setCreativeTab(ACTabs.tabBlock);
 		setBlockBounds(0.1F, 0.0F, 0.1F, 1.0F, 0.8F, 1.0F);
 	}
 
 	@Override
-	public TileEntity createNewTileEntity(World var1, int var2) {
-
-		return new TileEntityODB();
-	}
-
-	@Override
 	public int getRenderType() {
-		return 2;
+		return 3;
 	}
 
 	@Override

@@ -12,16 +12,15 @@
 package com.shinoow.abyssalcraft.common.handlers;
 
 import net.minecraft.item.ItemStack;
-
-import com.shinoow.abyssalcraft.AbyssalCraft;
-
 import net.minecraftforge.fml.common.IFuelHandler;
+
+import com.shinoow.abyssalcraft.api.item.ACItems;
 
 public class FurnaceFuelHandler implements IFuelHandler {
 
 	@Override
 	public int getBurnTime(ItemStack fuel) {
-		if(fuel.getItem() == AbyssalCraft.methane)
+		if(fuel.getItem() == ACItems.methane)
 			return 10000;
 		return 0;
 	}

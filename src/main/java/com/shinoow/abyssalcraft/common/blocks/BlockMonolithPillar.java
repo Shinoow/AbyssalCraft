@@ -14,9 +14,9 @@ package com.shinoow.abyssalcraft.common.blocks;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 
-import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.api.energy.EnergyEnum.AmplifierType;
 import com.shinoow.abyssalcraft.api.energy.IEnergyAmplifier;
+import com.shinoow.abyssalcraft.lib.ACTabs;
 
 public class BlockMonolithPillar extends BlockACBasic implements IEnergyAmplifier {
 
@@ -24,7 +24,7 @@ public class BlockMonolithPillar extends BlockACBasic implements IEnergyAmplifie
 		super(Material.rock, 6.0F, 24.0F, Block.soundTypeStone);
 		setBlockBounds(0.25F, 0.0F, 0.25F, 0.75F, 1.0F, 0.75F);
 		setUnlocalizedName("monolithpillar");
-		setCreativeTab(AbyssalCraft.tabDecoration);
+		setCreativeTab(ACTabs.tabDecoration);
 	}
 
 	@Override

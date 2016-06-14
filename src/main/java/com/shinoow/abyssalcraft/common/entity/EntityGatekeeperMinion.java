@@ -38,6 +38,7 @@ import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.api.entity.IAntiEntity;
 import com.shinoow.abyssalcraft.api.entity.ICoraliumEntity;
 import com.shinoow.abyssalcraft.api.entity.IDreadEntity;
+import com.shinoow.abyssalcraft.api.item.ACItems;
 
 public class EntityGatekeeperMinion extends EntityMob implements ICoraliumEntity, IDreadEntity, IAntiEntity {
 
@@ -127,9 +128,9 @@ public class EntityGatekeeperMinion extends EntityMob implements ICoraliumEntity
 	@Override
 	protected void dropFewItems(boolean par1, int par2)
 	{
-		ItemStack item = new ItemStack(AbyssalCraft.eldritchScale);
+		ItemStack item = new ItemStack(ACItems.eldritch_scale);
 
-		if(rand.nextInt(10) == 0) item = new ItemStack(AbyssalCraft.ethaxiumIngot);
+		if(rand.nextInt(10) == 0) item = new ItemStack(ACItems.ethaxium_ingot);
 
 		if (item != null)
 		{

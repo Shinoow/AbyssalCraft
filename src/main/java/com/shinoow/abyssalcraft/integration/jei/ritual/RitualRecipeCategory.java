@@ -27,7 +27,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.StatCollector;
 import net.minecraftforge.oredict.OreDictionary;
 
-import com.shinoow.abyssalcraft.AbyssalCraft;
+import com.shinoow.abyssalcraft.api.item.ACItems;
 import com.shinoow.abyssalcraft.integration.jei.AbyssalCraftRecipeCategoryUid;
 
 public class RitualRecipeCategory implements IRecipeCategory {
@@ -119,17 +119,17 @@ public class RitualRecipeCategory implements IRecipeCategory {
 	private ItemStack getItem(int par1){
 		switch(par1){
 		case 0:
-			return new ItemStack(AbyssalCraft.necronomicon);
+			return new ItemStack(ACItems.necronomicon);
 		case 1:
-			return new ItemStack(AbyssalCraft.necronomicon_cor);
+			return new ItemStack(ACItems.abyssal_wasteland_necronomicon);
 		case 2:
-			return new ItemStack(AbyssalCraft.necronomicon_dre);
+			return new ItemStack(ACItems.dreadlands_necronomicon);
 		case 3:
-			return new ItemStack(AbyssalCraft.necronomicon_omt);
+			return new ItemStack(ACItems.omothol_necronomicon);
 		case 4:
-			return new ItemStack(AbyssalCraft.abyssalnomicon);
+			return new ItemStack(ACItems.abyssalnomicon);
 		default:
-			return new ItemStack(AbyssalCraft.necronomicon);
+			return new ItemStack(ACItems.necronomicon);
 		}
 	}
 

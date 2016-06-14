@@ -33,6 +33,7 @@ import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
 import com.shinoow.abyssalcraft.api.entity.IAntiEntity;
 import com.shinoow.abyssalcraft.api.entity.ICoraliumEntity;
 import com.shinoow.abyssalcraft.api.entity.IDreadEntity;
+import com.shinoow.abyssalcraft.api.item.ACItems;
 
 public class EntityShadowBeast extends EntityMob implements IAntiEntity, ICoraliumEntity, IDreadEntity {
 
@@ -95,7 +96,7 @@ public class EntityShadowBeast extends EntityMob implements IAntiEntity, ICorali
 	@Override
 	protected Item getDropItem()
 	{
-		return AbyssalCraft.shadowgem;
+		return ACItems.shadow_gem;
 	}
 
 	@Override

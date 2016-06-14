@@ -13,7 +13,7 @@ package com.shinoow.abyssalcraft.common.blocks.tile;
 
 import com.shinoow.abyssalcraft.api.energy.EnergyEnum.DeityType;
 
-public class TileEntityCthulhuStatue extends TileStatueDirectional {
+public class TileEntityCthulhuStatue extends TileEntityStatue {
 
 	@Override
 	public DeityType getDeity() {

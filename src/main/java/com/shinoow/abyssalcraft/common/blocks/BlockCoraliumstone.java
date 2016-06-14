@@ -19,13 +19,14 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;
 
-import com.shinoow.abyssalcraft.AbyssalCraft;
+import com.shinoow.abyssalcraft.api.block.ACBlocks;
+import com.shinoow.abyssalcraft.lib.ACTabs;
 
 public class BlockCoraliumstone extends Block {
 
 	public BlockCoraliumstone() {
 		super(Material.rock);
-		setCreativeTab(AbyssalCraft.tabBlock);
+		setCreativeTab(ACTabs.tabBlock);
 		setTickRandomly(true);
 	}
 
@@ -37,8 +38,8 @@ public class BlockCoraliumstone extends Block {
 				int j1 = pos.getY() + par5Random.nextInt(5) - 3;
 				int k1 = pos.getZ() + par5Random.nextInt(3) - 1;
 
-				if (par1World.getBlockState(new BlockPos(i1, j1, k1)) == AbyssalCraft.Cwater)
-					par1World.setBlockState(new BlockPos(i1, j1, k1), AbyssalCraft.cstone.getDefaultState());
+				if (par1World.getBlockState(new BlockPos(i1, j1, k1)) == ACBlocks.liquid_coralium)
+					par1World.setBlockState(new BlockPos(i1, j1, k1), ACBlocks.coralium_stone.getDefaultState());
 			}
 	}
 }

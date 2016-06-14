@@ -31,7 +31,9 @@ import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
+import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
 import com.shinoow.abyssalcraft.api.entity.IDreadEntity;
+import com.shinoow.abyssalcraft.api.item.ACItems;
 
 public class EntityChagarothSpawn extends EntityMob implements IDreadEntity {
 
@@ -71,7 +73,7 @@ public class EntityChagarothSpawn extends EntityMob implements IDreadEntity {
 
 		if (super.attackEntityAsMob(par1Entity))
 			if (par1Entity instanceof EntityLivingBase)
-				((EntityLivingBase)par1Entity).addPotionEffect(new PotionEffect(AbyssalCraft.Dplague.id, 100));
+				((EntityLivingBase)par1Entity).addPotionEffect(new PotionEffect(AbyssalCraftAPI.dread_plague.id, 100));
 		return super.attackEntityAsMob(par1Entity);
 	}
 
@@ -102,7 +104,7 @@ public class EntityChagarothSpawn extends EntityMob implements IDreadEntity {
 	@Override
 	protected Item getDropItem()
 	{
-		return AbyssalCraft.dreadfragment;
+		return ACItems.dread_fragment;
 
 	}
 

@@ -16,7 +16,7 @@ import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
 import net.minecraft.util.IStringSerializable;
 
-import com.shinoow.abyssalcraft.AbyssalCraft;
+import com.shinoow.abyssalcraft.lib.ACTabs;
 
 public class BlockACBasic extends Block {
 
@@ -35,7 +35,7 @@ public class BlockACBasic extends Block {
 		setHardness(hardness);
 		setResistance(resistance);
 		setStepSound(stepsound);
-		setCreativeTab(AbyssalCraft.tabBlock);
+		setCreativeTab(ACTabs.tabBlock);
 	}
 
 	/**
@@ -50,7 +50,7 @@ public class BlockACBasic extends Block {
 		setHardness(hardness);
 		setResistance(resistance);
 		setStepSound(stepsound);
-		setCreativeTab(AbyssalCraft.tabBlock);
+		setCreativeTab(ACTabs.tabBlock);
 	}
 
 	public static enum EnumType implements IStringSerializable

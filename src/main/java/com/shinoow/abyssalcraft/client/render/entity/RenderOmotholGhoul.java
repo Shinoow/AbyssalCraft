@@ -29,14 +29,11 @@ public class RenderOmotholGhoul extends RenderLiving {
 
 	private float scale = 1.2F;
 
-	protected ModelDG model;
-
 	private static final ResourceLocation ghoulResource = new ResourceLocation("abyssalcraft:textures/model/omothol_ghoul.png");
 
 	public RenderOmotholGhoul(RenderManager manager)
 	{
 		super(manager, new ModelDG(), 0.8F);
-		model = (ModelDG)mainModel;
 	}
 
 	/**
@@ -45,11 +42,6 @@ public class RenderOmotholGhoul extends RenderLiving {
 	protected void preRenderScale(EntityOmotholGhoul par1EntityOmotholGhoul, float par2)
 	{
 		GL11.glScalef(scale, scale, scale);
-	}
-
-	public void doRender(EntityOmotholGhoul entity, double par2, double par4, double par6, float par8, float par9)
-	{
-		super.doRender(entity, par2, par4, par6, par8, par9);
 	}
 
 	protected ResourceLocation getGhoulTexture(EntityOmotholGhoul par1EntityLiving)

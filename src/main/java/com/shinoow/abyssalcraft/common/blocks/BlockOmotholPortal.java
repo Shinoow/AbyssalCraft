@@ -20,9 +20,7 @@ import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockState;
-import net.minecraft.block.state.BlockWorldState;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.block.state.pattern.BlockPattern;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
@@ -36,9 +34,10 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import com.google.common.cache.LoadingCache;
 import com.shinoow.abyssalcraft.AbyssalCraft;
-import com.shinoow.abyssalcraft.common.world.TeleporterOmothol;
+import com.shinoow.abyssalcraft.api.block.ACBlocks;
+import com.shinoow.abyssalcraft.common.world.TeleporterAC;
+import com.shinoow.abyssalcraft.lib.ACLib;
 
 public class BlockOmotholPortal extends BlockBreakable {
 
@@ -176,15 +175,15 @@ public class BlockOmotholPortal extends BlockBreakable {
 			EntityPlayerMP thePlayer = (EntityPlayerMP)par5Entity;
 			thePlayer.addStat(AbyssalCraft.enterOmothol, 1);
 			if (thePlayer.timeUntilPortal > 0)
-				thePlayer.timeUntilPortal = 10;
-			else if (thePlayer.dimension != AbyssalCraft.configDimId3)
+				thePlayer.timeUntilPortal = thePlayer.getPortalCooldown();
+			else if (thePlayer.dimension != ACLib.omothol_id)
 			{
-				thePlayer.timeUntilPortal = 10;
-				thePlayer.mcServer.getConfigurationManager().transferPlayerToDimension(thePlayer, AbyssalCraft.configDimId3, new TeleporterOmothol(thePlayer.mcServer.worldServerForDimension(AbyssalCraft.configDimId3)));
+				thePlayer.timeUntilPortal = AbyssalCraft.portalCooldown;
+				thePlayer.mcServer.getConfigurationManager().transferPlayerToDimension(thePlayer, ACLib.omothol_id, new TeleporterAC(thePlayer.mcServer.worldServerForDimension(ACLib.omothol_id), this, ACBlocks.omothol_stone));
 			}
 			else {
-				thePlayer.timeUntilPortal = 10;
-				thePlayer.mcServer.getConfigurationManager().transferPlayerToDimension(thePlayer, AbyssalCraft.configDimId2, new TeleporterOmothol(thePlayer.mcServer.worldServerForDimension(AbyssalCraft.configDimId2)));
+				thePlayer.timeUntilPortal = AbyssalCraft.portalCooldown;
+				thePlayer.mcServer.getConfigurationManager().transferPlayerToDimension(thePlayer, ACLib.dreadlands_id, new TeleporterAC(thePlayer.mcServer.worldServerForDimension(ACLib.dreadlands_id), this, ACBlocks.omothol_stone));
 			}
 		}
 	}
@@ -220,50 +219,6 @@ public class BlockOmotholPortal extends BlockBreakable {
 	protected BlockState createBlockState()
 	{
 		return new BlockState(this, new IProperty[] {AXIS});
-	}
-
-	public BlockPattern.PatternHelper func_181089_f(World p_181089_1_, BlockPos p_181089_2_)
-	{
-		EnumFacing.Axis enumfacing$axis = EnumFacing.Axis.Z;
-		BlockOmotholPortal.Size blockportal$size = new BlockOmotholPortal.Size(p_181089_1_, p_181089_2_, EnumFacing.Axis.X);
-		LoadingCache<BlockPos, BlockWorldState> loadingcache = BlockPattern.func_181627_a(p_181089_1_, true);
-
-		if (!blockportal$size.func_150860_b())
-		{
-			enumfacing$axis = EnumFacing.Axis.X;
-			blockportal$size = new BlockOmotholPortal.Size(p_181089_1_, p_181089_2_, EnumFacing.Axis.Z);
-		}
-
-		if (!blockportal$size.func_150860_b())
-			return new BlockPattern.PatternHelper(p_181089_2_, EnumFacing.NORTH, EnumFacing.UP, loadingcache, 1, 1, 1);
-		else
-		{
-			int[] aint = new int[EnumFacing.AxisDirection.values().length];
-			EnumFacing enumfacing = blockportal$size.field_150866_c.rotateYCCW();
-			BlockPos blockpos = blockportal$size.field_150861_f.up(blockportal$size.func_181100_a() - 1);
-
-			for (EnumFacing.AxisDirection enumfacing$axisdirection : EnumFacing.AxisDirection.values())
-			{
-				BlockPattern.PatternHelper blockpattern$patternhelper = new BlockPattern.PatternHelper(enumfacing.getAxisDirection() == enumfacing$axisdirection ? blockpos : blockpos.offset(blockportal$size.field_150866_c, blockportal$size.func_181101_b() - 1), EnumFacing.func_181076_a(enumfacing$axisdirection, enumfacing$axis), EnumFacing.UP, loadingcache, blockportal$size.func_181101_b(), blockportal$size.func_181100_a(), 1);
-
-				for (int i = 0; i < blockportal$size.func_181101_b(); ++i)
-					for (int j = 0; j < blockportal$size.func_181100_a(); ++j)
-					{
-						BlockWorldState blockworldstate = blockpattern$patternhelper.translateOffset(i, j, 1);
-
-						if (blockworldstate.getBlockState() != null && blockworldstate.getBlockState().getBlock().getMaterial() != Material.air)
-							++aint[enumfacing$axisdirection.ordinal()];
-					}
-			}
-
-			EnumFacing.AxisDirection enumfacing$axisdirection1 = EnumFacing.AxisDirection.POSITIVE;
-
-			for (EnumFacing.AxisDirection enumfacing$axisdirection2 : EnumFacing.AxisDirection.values())
-				if (aint[enumfacing$axisdirection2.ordinal()] < aint[enumfacing$axisdirection1.ordinal()])
-					enumfacing$axisdirection1 = enumfacing$axisdirection2;
-
-			return new BlockPattern.PatternHelper(enumfacing.getAxisDirection() == enumfacing$axisdirection1 ? blockpos : blockpos.offset(blockportal$size.field_150866_c, blockportal$size.func_181101_b() - 1), EnumFacing.func_181076_a(enumfacing$axisdirection1, enumfacing$axis), EnumFacing.UP, loadingcache, blockportal$size.func_181101_b(), blockportal$size.func_181100_a(), 1);
-		}
 	}
 
 	public static class Size
@@ -322,12 +277,12 @@ public class BlockOmotholPortal extends BlockBreakable {
 			{
 				BlockPos blockpos = p_180120_1_.offset(p_180120_2_, i);
 
-				if (!func_150857_a(world.getBlockState(blockpos).getBlock()) || world.getBlockState(blockpos.down()).getBlock() != AbyssalCraft.omotholstone)
+				if (!func_150857_a(world.getBlockState(blockpos).getBlock()) || world.getBlockState(blockpos.down()).getBlock() != ACBlocks.omothol_stone)
 					break;
 			}
 
 			Block block = world.getBlockState(p_180120_1_.offset(p_180120_2_, i)).getBlock();
-			return block == AbyssalCraft.omotholstone ? i : 0;
+			return block == ACBlocks.omothol_stone ? i : 0;
 		}
 
 		public int func_181100_a()
@@ -353,27 +308,27 @@ public class BlockOmotholPortal extends BlockBreakable {
 						if (!func_150857_a(block))
 							break label24;
 
-						if (block == AbyssalCraft.omotholportal)
+						if (block == ACBlocks.omothol_gateway)
 							++field_150864_e;
 
 						if (i == 0)
 						{
 							block = world.getBlockState(blockpos.offset(field_150863_d)).getBlock();
 
-							if (block != AbyssalCraft.omotholstone)
+							if (block != ACBlocks.omothol_stone)
 								break label24;
 						}
 						else if (i == field_150868_h - 1)
 						{
 							block = world.getBlockState(blockpos.offset(field_150866_c)).getBlock();
 
-							if (block != AbyssalCraft.omotholstone)
+							if (block != ACBlocks.omothol_stone)
 								break label24;
 						}
 					}
 
 		for (int j = 0; j < field_150868_h; ++j)
-			if (world.getBlockState(field_150861_f.offset(field_150866_c, j).up(field_150862_g)).getBlock() != AbyssalCraft.omotholstone)
+			if (world.getBlockState(field_150861_f.offset(field_150866_c, j).up(field_150862_g)).getBlock() != ACBlocks.omothol_stone)
 			{
 				field_150862_g = 0;
 				break;
@@ -392,7 +347,7 @@ public class BlockOmotholPortal extends BlockBreakable {
 
 		protected boolean func_150857_a(Block p_150857_1_)
 		{
-			return p_150857_1_.getMaterial() == Material.air || p_150857_1_ == AbyssalCraft.omotholfire || p_150857_1_ == AbyssalCraft.omotholportal;
+			return p_150857_1_.getMaterial() == Material.air || p_150857_1_ == ACBlocks.omothol_fire || p_150857_1_ == ACBlocks.omothol_gateway;
 		}
 
 		public boolean func_150860_b()
@@ -407,7 +362,7 @@ public class BlockOmotholPortal extends BlockBreakable {
 				BlockPos blockpos = field_150861_f.offset(field_150866_c, i);
 
 				for (int j = 0; j < field_150862_g; ++j)
-					world.setBlockState(blockpos.up(j), AbyssalCraft.omotholportal.getDefaultState().withProperty(BlockPortal.AXIS, axis), 2);
+					world.setBlockState(blockpos.up(j), ACBlocks.omothol_gateway.getDefaultState().withProperty(BlockPortal.AXIS, axis), 2);
 			}
 		}
 	}

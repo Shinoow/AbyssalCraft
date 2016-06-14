@@ -26,7 +26,7 @@ import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.ITickable;
 import net.minecraft.world.EnumDifficulty;
 
-import com.shinoow.abyssalcraft.AbyssalCraft;
+import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.common.entity.EntityLesserShoggoth;
 
 public class TileEntityShoggothBiomass extends TileEntity implements ITickable {
@@ -78,7 +78,7 @@ public class TileEntityShoggothBiomass extends TileEntity implements ITickable {
 						worldObj.spawnEntityInWorld(mob);
 						spawnedShoggoths++;
 						if(spawnedShoggoths >= 5)
-							worldObj.setBlockState(pos, AbyssalCraft.monolithStone.getDefaultState(), 2);
+							worldObj.setBlockState(pos, ACBlocks.monolith_stone.getDefaultState(), 2);
 					}
 			}
 		}

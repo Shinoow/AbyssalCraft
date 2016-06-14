@@ -19,11 +19,12 @@ import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.StatCollector;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
+import com.shinoow.abyssalcraft.api.block.ACBlocks;
 
 public class ItemAbySlab extends ItemSlab {
 
 	public ItemAbySlab(Block block) {
-		super(block, (BlockSlab)AbyssalCraft.abyslab1, (BlockSlab)AbyssalCraft.abyslab2);
+		super(block, (BlockSlab)ACBlocks.abyssal_stone_brick_slab, (BlockSlab)AbyssalCraft.abyslab2);
 		setMaxDamage(0);
 		setHasSubtypes(true);
 	}

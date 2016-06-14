@@ -11,7 +11,7 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.client.render.entity;
 
-import net.minecraft.client.model.ModelBase;
+import net.minecraft.client.model.ModelCow;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.entity.Entity;
@@ -24,9 +24,9 @@ public class RenderDemonCow extends RenderLiving
 {
 	private static final ResourceLocation cowTextures = new ResourceLocation("abyssalcraft:textures/model/demon_cow.png");
 
-	public RenderDemonCow(RenderManager manager, ModelBase model, float par2)
+	public RenderDemonCow(RenderManager manager)
 	{
-		super(manager, model, par2);
+		super(manager, new ModelCow(), 0.5F);
 	}
 
 	@Override

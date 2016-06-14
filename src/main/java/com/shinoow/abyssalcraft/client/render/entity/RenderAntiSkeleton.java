@@ -30,7 +30,6 @@ public class RenderAntiSkeleton extends RenderBiped<EntityAntiSkeleton>
 {
 	private static final ResourceLocation skeletonTextures = new ResourceLocation("abyssalcraft:textures/model/anti/skeleton.png");
 
-
 	public RenderAntiSkeleton(RenderManager manager)
 	{
 		super(manager, new ModelAntiSkeleton(), 0.5F);

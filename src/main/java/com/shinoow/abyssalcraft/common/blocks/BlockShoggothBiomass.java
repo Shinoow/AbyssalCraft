@@ -23,9 +23,9 @@ import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;
 
-import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.common.blocks.tile.TileEntityShoggothBiomass;
 import com.shinoow.abyssalcraft.common.entity.EntityLesserShoggoth;
+import com.shinoow.abyssalcraft.lib.ACTabs;
 
 public class BlockShoggothBiomass extends BlockContainer {
 
@@ -35,7 +35,7 @@ public class BlockShoggothBiomass extends BlockContainer {
 		setResistance(18.0F);
 		setStepSound(Block.soundTypeSand);
 		setUnlocalizedName("shoggothbiomass");
-		setCreativeTab(AbyssalCraft.tabBlock);
+		setCreativeTab(ACTabs.tabBlock);
 		setLightLevel(0.5F);
 	}
 

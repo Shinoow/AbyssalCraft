@@ -27,6 +27,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.api.biome.IDreadlandsBiome;
+import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.common.entity.EntityAbygolem;
 import com.shinoow.abyssalcraft.common.entity.EntityChagarothFist;
 import com.shinoow.abyssalcraft.common.entity.EntityDreadSpawn;
@@ -42,8 +43,8 @@ public class BiomeGenDreadlandsBase extends BiomeGenBase implements IDreadlandsB
 	@SuppressWarnings("unchecked")
 	public BiomeGenDreadlandsBase(int par1) {
 		super(par1);
-		topBlock = AbyssalCraft.dreadstone.getDefaultState();
-		fillerBlock = AbyssalCraft.dreadstone.getDefaultState();
+		topBlock = ACBlocks.dreadstone.getDefaultState();
+		fillerBlock = ACBlocks.dreadstone.getDefaultState();
 		spawnableMonsterList.clear();
 		spawnableCreatureList.clear();
 		spawnableWaterCreatureList.clear();
@@ -73,7 +74,7 @@ public class BiomeGenDreadlandsBase extends BiomeGenBase implements IDreadlandsB
 				int y = par2Random.nextInt(60);
 				int z = par2Random.nextInt(16) + 8;
 
-				new WorldGenMinable(AbyssalCraft.dreadore.getDefaultState(), veinSize, BlockHelper.forBlock(AbyssalCraft.dreadstone)).generate(par1World, par2Random, pos.add(x, y, z));
+				new WorldGenMinable(ACBlocks.dreaded_abyssalnite_ore.getDefaultState(), veinSize, BlockHelper.forBlock(ACBlocks.dreadstone)).generate(par1World, par2Random, pos.add(x, y, z));
 			}
 
 		for (int rarity = 0; rarity < 3; ++rarity)
@@ -81,8 +82,8 @@ public class BiomeGenDreadlandsBase extends BiomeGenBase implements IDreadlandsB
 			int x = par2Random.nextInt(16) + 8;
 			int y = par2Random.nextInt(55);
 			int z = par2Random.nextInt(16) + 8;
-			new WorldGenMinable(AbyssalCraft.abydreadstone.getDefaultState(), 16,
-					BlockHelper.forBlock(AbyssalCraft.dreadstone)).generate(par1World, par2Random, pos.add(x, y, z));
+			new WorldGenMinable(ACBlocks.abyssalnite_stone.getDefaultState(), 16,
+					BlockHelper.forBlock(ACBlocks.dreadstone)).generate(par1World, par2Random, pos.add(x, y, z));
 		}
 	}
 
@@ -133,25 +134,19 @@ public class BiomeGenDreadlandsBase extends BiomeGenBase implements IDreadlandsB
 
 				if (iblockstate2.getBlock().getMaterial() == Material.air)
 					j = -1;
-				else if (iblockstate2.getBlock() == AbyssalCraft.dreadstone)
+				else if (iblockstate2.getBlock() == ACBlocks.dreadstone)
 					if (j == -1)
 					{
 						if (k <= 0)
 						{
 							iblockstate = null;
-							iblockstate1 = AbyssalCraft.dreadstone.getDefaultState();
+							iblockstate1 = ACBlocks.dreadstone.getDefaultState();
 						}
 						else if (j1 >= i - 4 && j1 <= i + 1)
 						{
 							iblockstate = topBlock;
 							iblockstate1 = fillerBlock;
 						}
-
-						//						if (j1 < i && (iblockstate == null || iblockstate.getBlock().getMaterial() == Material.air))
-						//							if (getFloatTemperature(blockpos$mutableblockpos.set(x, j1, z)) < 0.15F)
-						//								iblockstate = Blocks.ice.getDefaultState();
-						//							else
-						//								iblockstate = Blocks.water.getDefaultState();
 
 						j = k;
 
@@ -160,8 +155,8 @@ public class BiomeGenDreadlandsBase extends BiomeGenBase implements IDreadlandsB
 						else if (j1 < i - 7 - k)
 						{
 							iblockstate = null;
-							iblockstate1 = AbyssalCraft.dreadstone.getDefaultState();
-							chunkPrimerIn.setBlockState(i1, j1, l, AbyssalCraft.dreadstone.getDefaultState());
+							iblockstate1 = ACBlocks.dreadstone.getDefaultState();
+							chunkPrimerIn.setBlockState(i1, j1, l, ACBlocks.dreadstone.getDefaultState());
 						} else
 							chunkPrimerIn.setBlockState(i1, j1, l, iblockstate1);
 					}
@@ -169,12 +164,6 @@ public class BiomeGenDreadlandsBase extends BiomeGenBase implements IDreadlandsB
 					{
 						--j;
 						chunkPrimerIn.setBlockState(i1, j1, l, iblockstate1);
-
-						//						if (j == 0 && iblockstate1.getBlock() == Blocks.sand)
-						//						{
-						//							j = rand.nextInt(4) + Math.max(0, j1 - 63);
-						//							iblockstate1 = iblockstate1.getValue(BlockSand.VARIANT) == BlockSand.EnumType.RED_SAND ? Blocks.red_sandstone.getDefaultState() : Blocks.sandstone.getDefaultState();
-						//						}
 					}
 			}
 	}

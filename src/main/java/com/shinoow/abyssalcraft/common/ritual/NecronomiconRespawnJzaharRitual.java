@@ -17,20 +17,20 @@ import net.minecraft.util.BlockPos;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 
-import com.shinoow.abyssalcraft.AbyssalCraft;
+import com.shinoow.abyssalcraft.api.item.ACItems;
 import com.shinoow.abyssalcraft.api.ritual.NecronomiconRitual;
 import com.shinoow.abyssalcraft.common.structures.omothol.StructureJzaharTemple;
-import com.shinoow.abyssalcraft.common.util.SpecialTextUtil;
+import com.shinoow.abyssalcraft.lib.ACLib;
+import com.shinoow.abyssalcraft.lib.util.SpecialTextUtil;
 
 public class NecronomiconRespawnJzaharRitual extends NecronomiconRitual {
 
 	public NecronomiconRespawnJzaharRitual() {
-		super("respawnJzahar", 3, AbyssalCraft.configDimId3, 20000F,
-				new Object[]{new ItemStack(AbyssalCraft.essence, 1, 2), AbyssalCraft.oblivionshard,
-				new ItemStack(AbyssalCraft.essence, 1, 2), AbyssalCraft.oblivionshard,
-				new ItemStack(AbyssalCraft.essence, 1, 2), AbyssalCraft.oblivionshard,
-				new ItemStack(AbyssalCraft.essence, 1, 2), AbyssalCraft.oblivionshard});
-
+		super("respawnJzahar", 3, ACLib.omothol_id, 20000F,
+				new Object[]{new ItemStack(ACItems.essence, 1, 2), ACItems.shard_of_oblivion,
+				new ItemStack(ACItems.essence, 1, 2), ACItems.shard_of_oblivion,
+				new ItemStack(ACItems.essence, 1, 2), ACItems.shard_of_oblivion,
+				new ItemStack(ACItems.essence, 1, 2), ACItems.shard_of_oblivion});
 	}
 
 	@Override
@@ -40,14 +40,13 @@ public class NecronomiconRespawnJzaharRitual extends NecronomiconRitual {
 	}
 
 	@Override
-	protected void completeRitualClient(World world, BlockPos pos, EntityPlayer player) {
-		SpecialTextUtil.JzaharGroup(world, StatCollector.translateToLocalFormatted("message.jzahar.respawn", player.getName()));
-	}
+	protected void completeRitualClient(World world, BlockPos pos, EntityPlayer player) {}
 
 	@Override
 	protected void completeRitualServer(World world, BlockPos pos, EntityPlayer player) {
 		StructureJzaharTemple temple = new StructureJzaharTemple();
 		temple.generate(world, world.rand, new BlockPos(4, 53, 7));
 		world.getChunkFromBlockCoords(pos).setChunkModified();
+		SpecialTextUtil.JzaharGroup(world, StatCollector.translateToLocalFormatted("message.jzahar.respawn", player.getName()));
 	}
 }

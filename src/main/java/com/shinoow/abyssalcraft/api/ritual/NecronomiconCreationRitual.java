@@ -41,9 +41,9 @@ public class NecronomiconCreationRitual extends NecronomiconRitual {
 	 */
 	public NecronomiconCreationRitual(String unlocalizedName, int bookType, int dimension, float requiredEnergy, boolean requiresSacrifice, ItemStack item, Object...offerings) {
 		super(unlocalizedName, bookType, dimension, requiredEnergy, requiresSacrifice, offerings);
-		this.item = item;
 		if(item.stackSize > 1)
 			item.stackSize = 1;
+		this.item = item;
 	}
 
 	/**

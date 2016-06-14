@@ -21,25 +21,16 @@ import net.minecraft.util.StatCollector;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.api.item.ICrystal;
+import com.shinoow.abyssalcraft.lib.ACLib;
+import com.shinoow.abyssalcraft.lib.ACTabs;
 
 public class ItemCrystal extends Item implements ICrystal {
 
-	private String[] names = new String[]{"Iron", "Gold", "Sulfur", "Carbon", "Oxygen", "Hydrogen", "Nitrogen", "Phosphorus",
-			"Potassium", "Nitrate", "Methane", "Redstone", "Abyssalnite", "Coralium", "Dreadium", "Blaze", "Tin", "Copper",
-			"Silicon", "Magnesium", "Aluminium", "Silica", "Alumina", "Magnesia", "Zinc"};
-	private String[] atoms = new String[]{"Fe", "Au", "S", "C", "O", "H", "N", "P", "K", "NO\u2083", "CH\u2084", "none", "An",
-			"Cor", "Dr", "none", "Sn", "Cu", "Si", "Mg", "Al", "SiO\u2082", "Al\u2082O\u2083", "MgO", "Zn"};
-	private int[] crystalColors = new int[]{0xD9D9D9, 0xF3CC3E, 0xF6FF00, 0x3D3D36, 16777215, 16777215, 16777215, 0x996A18,
-			0xD9D9D9, 0x1500FF, 0x19FC00, 0xFF0000, 0x8002BF, 0x00FFEE, 0xB00000, 0xFFCC00, 0xD9D8D7, 0xE89207, 0xD9D9D9,
-			0xD9D9D9, 0xD9D9D9, 16777215, 0xD9D8D9, 16777215, 0xD7D8D9};
-
 	public ItemCrystal(String name){
 		super();
-		//		GameRegistry.registerItem(this, name);
 		setUnlocalizedName(name);
-		setCreativeTab(AbyssalCraft.tabCrystals);
+		setCreativeTab(ACTabs.tabCrystals);
 		setMaxDamage(0);
 		setHasSubtypes(true);
 	}
@@ -64,24 +55,24 @@ public class ItemCrystal extends Item implements ICrystal {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void getSubItems(Item par1Item, CreativeTabs par2CreativeTab, List par3List){
-		for(int i = 0; i < names.length; ++i)
+		for(int i = 0; i < ACLib.crystalNames.length; ++i)
 			par3List.add(new ItemStack(par1Item, 1, i));
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
 	public int getColorFromItemStack(ItemStack par1ItemStack, int par2) {
-		return crystalColors[par1ItemStack.getItemDamage()];
+		return ACLib.crystalColors[par1ItemStack.getItemDamage()];
 	}
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
 	public void addInformation(ItemStack is, EntityPlayer player, List l, boolean B){
-		l.add(StatCollector.translateToLocal("tooltip.crystal")+ ": " + atoms[is.getItemDamage()]);
+		l.add(StatCollector.translateToLocal("tooltip.crystal")+ ": " + ACLib.crystalAtoms[is.getItemDamage()]);
 	}
 
 	@Override
 	public String getItemStackDisplayName(ItemStack par1ItemStack) {
-		return StatCollector.translateToLocal(getUnlocalizedName() + "." + names[par1ItemStack.getItemDamage()] + ".name");
+		return StatCollector.translateToLocal(getUnlocalizedName() + "." + ACLib.crystalNames[par1ItemStack.getItemDamage()] + ".name");
 	}
 }

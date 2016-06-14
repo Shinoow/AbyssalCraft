@@ -19,24 +19,15 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import com.shinoow.abyssalcraft.client.model.entity.ModelShadowCreature;
-import com.shinoow.abyssalcraft.common.entity.EntityShadowCreature;
 
 @SideOnly(Side.CLIENT)
 public class RenderShadowCreature extends RenderLiving {
 
-	protected ModelShadowCreature model;
-
 	private static final ResourceLocation mobTexture = new ResourceLocation("abyssalcraft:textures/model/ShadowCreature.png");
 
-	public RenderShadowCreature(RenderManager manager, ModelShadowCreature ModelShadowCreature, float f)
+	public RenderShadowCreature(RenderManager manager)
 	{
-		super(manager, ModelShadowCreature, f);
-		model = (ModelShadowCreature)mainModel;
-	}
-
-	public void doRender(EntityShadowCreature entity, double par2, double par4, double par6, float par8, float par9)
-	{
-		super.doRender(entity, par2, par4, par6, par8, par9);
+		super(manager, new ModelShadowCreature(), 0.5F);
 	}
 
 	@Override
