@@ -35,7 +35,6 @@ import com.shinoow.abyssalcraft.api.entity.EntityUtil;
 import com.shinoow.abyssalcraft.api.event.ACEvents.RitualEvent;
 import com.shinoow.abyssalcraft.api.ritual.NecronomiconRitual;
 import com.shinoow.abyssalcraft.api.ritual.RitualRegistry;
-import com.shinoow.abyssalcraft.common.entity.EntityRemnant;
 import com.shinoow.abyssalcraft.common.items.ItemNecronomicon;
 import com.shinoow.abyssalcraft.lib.util.blocks.IRitualAltar;
 
@@ -268,23 +267,21 @@ public class TileEntityRitualAltar extends TileEntity implements ITickable, IRit
 						ritual = RitualRegistry.instance().getRitual(world.provider.getDimension(), ((ItemNecronomicon)item.getItem()).getBookType(), offers, this.item);
 						if(ritual != null)
 							if(ritual.requiresSacrifice()){
-								if(!world.getEntitiesWithinAABB(EntityLivingBase.class, new AxisAlignedBB(pos, pos.add(1, 1, 1)).expand(4, 4, 4)).isEmpty())
-									for(EntityLivingBase mob : world.getEntitiesWithinAABB(EntityLivingBase.class, new AxisAlignedBB(pos, pos.add(1, 1, 1)).expand(4, 4, 4)))
+								if(!world.getEntitiesWithinAABB(EntityLivingBase.class, new AxisAlignedBB(pos).expand(4, 4, 4)).isEmpty())
+									for(EntityLivingBase mob : world.getEntitiesWithinAABB(EntityLivingBase.class, new AxisAlignedBB(pos).expand(4, 4, 4)))
 										if(canBeSacrificed(mob))
-											if(!world.getEntitiesWithinAABB(EntityRemnant.class, new AxisAlignedBB(pos).expand(32, 32, 32)).isEmpty()
-													&& world.getEntitiesWithinAABB(EntityRemnant.class, new AxisAlignedBB(pos).expand(32, 32, 32)).size() >= ritual.getBookType() + 1)
-												if(ritual.canCompleteRitual(world, pos, player))
-													if(!MinecraftForge.EVENT_BUS.post(new RitualEvent.Pre(player, ritual, world, pos))){
-														if(!world.isRemote){
-															mob.attackEntityFrom(DamageSource.magic, mob.getMaxHealth()*100);
-															world.addWeatherEffect(new EntityLightningBolt(worldObj, mob.posX, mob.posY, mob.posZ, false));
-														}
-														ritualTimer = 1;
-														resetPedestals(world, pos);
-														user = player;
-														consumedEnergy = 0;
-														isDirty = true;
+											if(ritual.canCompleteRitual(world, pos, player))
+												if(!MinecraftForge.EVENT_BUS.post(new RitualEvent.Pre(player, ritual, world, pos))){
+													if(!world.isRemote){
+														mob.attackEntityFrom(DamageSource.magic, mob.getMaxHealth()*100);
+														world.addWeatherEffect(new EntityLightningBolt(worldObj, mob.posX, mob.posY, mob.posZ, false));
 													}
+													ritualTimer = 1;
+													resetPedestals(world, pos);
+													user = player;
+													consumedEnergy = 0;
+													isDirty = true;
+												}
 							} else if(ritual.canCompleteRitual(world, pos, player))
 								if(!MinecraftForge.EVENT_BUS.post(new RitualEvent.Pre(player, ritual, world, pos))){
 									ritualTimer = 1;

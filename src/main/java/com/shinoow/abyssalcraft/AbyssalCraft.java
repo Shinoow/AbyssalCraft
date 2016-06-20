@@ -46,7 +46,7 @@ import com.shinoow.abyssalcraft.lib.ACLib;
 @Mod(modid = AbyssalCraft.modid, name = AbyssalCraft.name, version = AbyssalCraft.version,dependencies = "required-after:Forge@[forgeversion,);after:JEI@[3.4.0,)", useMetadata = false, guiFactory = "com.shinoow.abyssalcraft.client.config.ACGuiFactory", acceptedMinecraftVersions = "[1.9.4]", updateJSON = "https://raw.githubusercontent.com/Shinoow/AbyssalCraft/master/version.json")
 public class AbyssalCraft {
 
-	public static final String version = "1.9.2";
+	public static final String version = "1.9.2.1";
 	public static final String modid = "abyssalcraft";
 	public static final String name = "AbyssalCraft";
 
