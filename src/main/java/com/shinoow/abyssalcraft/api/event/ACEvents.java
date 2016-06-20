@@ -30,7 +30,7 @@ import com.shinoow.abyssalcraft.api.ritual.NecronomiconRitual;
 
 /**
  * A class containing events used by AbyssalCraft.<br>
- * All events are fired on the {@link MinecraftForge#EVENT_BUS} if not stated otherwise.
+ * All events are fired on the {@link MinecraftForge#EVENT_BUS}.
  * 
  * @author shinoow
  *

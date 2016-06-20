@@ -11,8 +11,9 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.api;
 
-import java.util.HashMap;
+
 import java.util.List;
+import java.util.Map;
 
 import org.apache.logging.log4j.Level;
 
@@ -76,7 +77,7 @@ public class AbyssalCraftAPI {
 
 	private static List<ItemStack> crystals = Lists.newArrayList();
 
-	private static HashMap<NecroData, Integer> necroData = Maps.newHashMap();
+	private static Map<NecroData, Integer> necroData = Maps.newHashMap();
 
 	/**
 	 *  {@link EnumCreatureAttribute} used for the Shadow mobs
@@ -605,7 +606,7 @@ public class AbyssalCraftAPI {
 	 * 
 	 * @since 1.3.5
 	 */
-	public static HashMap<NecroData,Integer> getNecronomiconData(){
+	public static Map<NecroData,Integer> getNecronomiconData(){
 		return necroData;
 	}
 
