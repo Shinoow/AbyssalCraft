@@ -31,8 +31,8 @@ import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.util.text.translation.I18n;
+import net.minecraft.world.GameType;
 import net.minecraft.world.World;
-import net.minecraft.world.WorldSettings.GameType;
 
 import com.google.common.collect.Multimap;
 import com.shinoow.abyssalcraft.common.entity.EntityJzahar;

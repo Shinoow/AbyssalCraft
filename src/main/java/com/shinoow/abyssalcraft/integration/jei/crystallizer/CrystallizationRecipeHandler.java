@@ -42,4 +42,11 @@ public class CrystallizationRecipeHandler implements IRecipeHandler<Crystallizat
 	public boolean isRecipeValid(@Nonnull CrystallizationRecipe recipe) {
 		return recipe.getInputs().size() != 0 && recipe.getOutputs().size() > 0;
 	}
+
+	@Nonnull
+	@Override
+	public String getRecipeCategoryUid(CrystallizationRecipe recipe) {
+
+		return AbyssalCraftRecipeCategoryUid.CRYSTALLIZATION;
+	}
 }

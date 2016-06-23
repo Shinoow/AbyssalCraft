@@ -46,4 +46,10 @@ public class RitualRecipeHandler implements IRecipeHandler<RitualRecipeWrapper>{
 
 		return recipe.getOfferings().length == 8 && recipe.getOutputs().size() == 1;
 	}
+
+	@Override
+	public String getRecipeCategoryUid(RitualRecipeWrapper recipe) {
+
+		return AbyssalCraftRecipeCategoryUid.RITUAL;
+	}
 }

@@ -1,12 +1,17 @@
 {
   "homepage": "https://shinoow.github.io/AbyssalCraft/",
   "promos": {
+	"1.10-latest": "1.9.2.1",
+	"1.10-recommended": "1.9.2.1",
 	"1.9.4-latest": "1.9.2.1",
 	"1.9.4-recommended": "1.9.2.1",
 	"1.9-latest": "1.9.2.1",
 	"1.9-recommended": "1.9.2.1",
     "1.8.9-latest": "1.9.2.1",
     "1.8.9-recommended": "1.9.2.1"
+  },
+  "1.10": {
+	"1.9.2.1": "- Ported to 1.10"
   },
   "1.9.4": {
 	"1.9.2.1": "- Fixed the missing texture for the Staff of The Gatekeeper\n- The sacrificial mechanic should work now (some old code still present broke it)",

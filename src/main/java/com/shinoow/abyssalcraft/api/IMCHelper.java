@@ -56,7 +56,7 @@ public class IMCHelper {
 	 * You can use the IMC message "addCrystal"
 	 * 
 	 * Example of how it would look like if I added my Abyssalnite Ingot as a crystal:
-	 * FMLInterModComms.sendMessage("abyssalcraft", "addCrystal", new ItemStack(AbyssalCraft.abyingot));
+	 * FMLInterModComms.sendMessage("abyssalcraft", "addCrystal", new ItemStack(ACItems.abyssalnite_ingot));
 	 */
 
 	//CRYSTALLIZATION //////////////////////////////////////////////////////////////////////////
@@ -134,6 +134,6 @@ public class IMCHelper {
 	 * The format for the message should be a ItemStack containing a Block
 	 * 
 	 * Example of how it would look like if I added Darkstone Bricks to the food list:
-	 * FMLInterModComms.sendMessage("abyssalcraft", "shoggothBlacklist", new ItemStack(AbyssalCraft.Darkstone_brick));
+	 * FMLInterModComms.sendMessage("abyssalcraft", "shoggothBlacklist", new ItemStack(ACBlocks.darkstone_brick));
 	 */
 }

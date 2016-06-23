@@ -428,7 +428,7 @@ public class EntityJzahar extends EntityMob implements IRangedAttackMob, IAntiEn
 							WorldServer worldServer = (WorldServer) player.worldObj;
 							EntityPlayerMP mp = (EntityPlayerMP) player;
 							mp.addPotionEffect(new PotionEffect(MobEffects.RESISTANCE, 80, 255));
-							mp.mcServer.getPlayerList().transferPlayerToDimension(mp, ACLib.omothol_id, new TeleporterDarkRealm(worldServer));
+							mp.mcServer.getPlayerList().transferPlayerToDimension(mp, ACLib.dark_realm_id, new TeleporterDarkRealm(worldServer));
 							player.addStat(AbyssalCraft.enterDarkRealm, 1);
 						}
 					}

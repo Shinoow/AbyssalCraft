@@ -41,4 +41,10 @@ public class CrystallizerFuelRecipeHandler implements IRecipeHandler<Crystallize
 	public boolean isRecipeValid(@Nonnull CrystallizerFuelRecipe recipe) {
 		return recipe.getInputs().size() > 0 && recipe.getOutputs().size() == 0;
 	}
+
+	@Override
+	public String getRecipeCategoryUid(CrystallizerFuelRecipe recipe) {
+
+		return AbyssalCraftRecipeCategoryUid.FUEL_CRYSTALLIZATION;
+	}
 }

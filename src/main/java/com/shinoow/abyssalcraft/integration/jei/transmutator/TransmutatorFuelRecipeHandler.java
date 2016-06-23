@@ -41,4 +41,10 @@ public class TransmutatorFuelRecipeHandler implements IRecipeHandler<Transmutato
 	public boolean isRecipeValid(@Nonnull TransmutatorFuelRecipe recipe) {
 		return recipe.getInputs().size() > 0 && recipe.getOutputs().size() == 0;
 	}
+
+	@Override
+	public String getRecipeCategoryUid(TransmutatorFuelRecipe recipe) {
+
+		return AbyssalCraftRecipeCategoryUid.FUEL_TRANSMUTATION;
+	}
 }
