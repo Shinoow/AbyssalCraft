@@ -19,6 +19,8 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import com.shinoow.abyssalcraft.client.model.entity.ModelDG;
+import com.shinoow.abyssalcraft.client.render.entity.layers.LayerGhoulArmor;
+import com.shinoow.abyssalcraft.client.render.entity.layers.LayerGhoulHeldItem;
 import com.shinoow.abyssalcraft.common.entity.anti.EntityAntiGhoul;
 
 @SideOnly(Side.CLIENT)
@@ -29,6 +31,8 @@ public class RenderAntiGhoul extends RenderLiving {
 	public RenderAntiGhoul(RenderManager manager)
 	{
 		super(manager, new ModelDG(), 0.5F);
+		addLayer(new LayerGhoulHeldItem(this));
+		addLayer(new LayerGhoulArmor(this));
 	}
 
 	protected ResourceLocation getGhoulTexture(EntityAntiGhoul par1EntityLiving)

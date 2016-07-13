@@ -31,11 +31,13 @@ import net.minecraft.entity.ai.EntityAIWander;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.ai.attributes.IAttributeInstance;
+import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.monster.EntitySkeleton;
 import net.minecraft.entity.monster.EntityZombie;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
@@ -308,7 +310,12 @@ public class EntityAbyssalZombie extends EntityMob implements ICoraliumEntity {
 		par1NBTTagCompound.setByte("ZombieType", (byte)getZombieType());
 	}
 
-
+	@Override
+	protected void updateEquipmentIfNeeded(EntityItem itemEntity)
+	{
+		if(itemEntity.getEntityItem().getItem() != Items.ROTTEN_FLESH || AbyssalCraft.abyssalZombiesPickupRottenFlesh)
+			super.updateEquipmentIfNeeded(itemEntity);
+	}
 
 	@Override
 	public void onKillEntity(EntityLivingBase par1EntityLivingBase)

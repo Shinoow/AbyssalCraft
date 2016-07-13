@@ -28,7 +28,7 @@ public interface IEnergyManipulator {
 	/**
 	 * Gets the quanta of Potential Energy that the tile entity can drain
 	 */
-	public float energyQuanta();
+	public float getEnergyQuanta();
 
 	/**
 	 * Activates the Amplifier boost

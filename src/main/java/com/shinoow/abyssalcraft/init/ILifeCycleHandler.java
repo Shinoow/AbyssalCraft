@@ -15,6 +15,11 @@ import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 
+/**
+ * Simple interface to create separate modules for things during mod startup
+ * @author shinoow
+ *
+ */
 public interface ILifeCycleHandler {
 
 	public void preInit(FMLPreInitializationEvent event);

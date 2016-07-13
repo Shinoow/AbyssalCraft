@@ -44,6 +44,7 @@ import net.minecraft.entity.projectile.EntityWitherSkull;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.MobEffects;
 import net.minecraft.init.SoundEvents;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumHand;
@@ -324,6 +325,23 @@ public class EntityJzahar extends EntityMob implements IRangedAttackMob, IAntiEn
 		super.onLivingUpdate();
 	}
 
+	@Override
+	public void writeEntityToNBT(NBTTagCompound par1NBTTagCompound)
+	{
+		super.writeEntityToNBT(par1NBTTagCompound);
+
+		if(deathTicks > 0)
+			par1NBTTagCompound.setInteger("DeathTicks", deathTicks);
+	}
+
+	@Override
+	public void readEntityFromNBT(NBTTagCompound par1NBTTagCompound)
+	{
+		super.readEntityFromNBT(par1NBTTagCompound);
+
+		deathTicks = par1NBTTagCompound.getInteger("DeathTicks");
+	}
+
 	double speed = 0.05D;
 
 	@Override
@@ -428,7 +446,7 @@ public class EntityJzahar extends EntityMob implements IRangedAttackMob, IAntiEn
 							WorldServer worldServer = (WorldServer) player.worldObj;
 							EntityPlayerMP mp = (EntityPlayerMP) player;
 							mp.addPotionEffect(new PotionEffect(MobEffects.RESISTANCE, 80, 255));
-							mp.mcServer.getPlayerList().transferPlayerToDimension(mp, ACLib.omothol_id, new TeleporterDarkRealm(worldServer));
+							mp.mcServer.getPlayerList().transferPlayerToDimension(mp, ACLib.dark_realm_id, new TeleporterDarkRealm(worldServer));
 							player.addStat(AbyssalCraft.enterDarkRealm, 1);
 						}
 					}
