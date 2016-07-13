@@ -46,7 +46,7 @@ import com.shinoow.abyssalcraft.lib.ACLib;
 @Mod(modid = AbyssalCraft.modid, name = AbyssalCraft.name, version = AbyssalCraft.version,dependencies = "required-after:Forge@[forgeversion,);after:JEI@[3.3.3,)", useMetadata = false, guiFactory = "com.shinoow.abyssalcraft.client.config.ACGuiFactory", acceptedMinecraftVersions = "[1.9]", updateJSON = "https://raw.githubusercontent.com/Shinoow/AbyssalCraft/master/version.json")
 public class AbyssalCraft {
 
-	public static final String version = "1.9.2.1";
+	public static final String version = "1.9.2.5";
 	public static final String modid = "abyssalcraft";
 	public static final String name = "AbyssalCraft";
 
@@ -109,10 +109,10 @@ public class AbyssalCraft {
 	public static boolean darkspawn1, darkspawn2, darkspawn3, darkspawn4, darkspawn5, coraliumspawn1;
 	public static int darkWeight1, darkWeight2, darkWeight3, darkWeight4, darkWeight5, coraliumWeight;
 
-	public static boolean shouldSpread, shouldInfect, breakLogic, destroyOcean, demonAnimalFire, updateC, darkness,
+	public static boolean shouldSpread, shouldInfect, breakLogic, destroyOcean, demonAnimalFire, darkness,
 	particleBlock, particleEntity, hardcoreMode, useDynamicPotionIds, evilAnimalCreatureType,
-	antiItemDisintegration;
-	public static int evilAnimalSpawnWeight, endAbyssalZombieSpawnWeight, portalCooldown;
+	antiItemDisintegration, abyssalZombiesPickupRottenFlesh;
+	public static int evilAnimalSpawnWeight, endAbyssalZombieSpawnWeight, portalCooldown, demonAnimalSpawnWeight;
 	public static boolean shoggothOoze, oozeLeaves, oozeGrass, oozeGround, oozeSand, oozeRock, oozeCloth, oozeWood,
 	oozeGourd, oozeIron, oozeClay;
 	public static boolean generateDarklandsStructures, generateShoggothLairs, generateAbyssalWastelandPillars,
@@ -254,11 +254,10 @@ public class AbyssalCraft {
 					failed = true;
 				else{
 					ItemStack crystal = imcMessage.getItemStackValue();
-					if(crystal == null){
+					if(crystal == null)
 						failed = true;
-						return;
-					}
-					AbyssalCraftAPI.addCrystal(crystal);
+					if(!failed)
+						AbyssalCraftAPI.addCrystal(crystal);
 				}
 				if(failed)
 					ACLogger.imcWarning("Received invalid Crystal addition from mod %s", imcMessage.getSender());
@@ -272,18 +271,15 @@ public class AbyssalCraft {
 					if(!senders.contains(imcMessage.getSender()))
 						senders.add(imcMessage.getSender());
 					NBTTagCompound stuff = imcMessage.getNBTValue();
-					if(!stuff.hasKey("input") || !stuff.hasKey("output1") || !stuff.hasKey("output2") || !stuff.hasKey("xp")){
+					if(!stuff.hasKey("input") || !stuff.hasKey("output1") || !stuff.hasKey("output2") || !stuff.hasKey("xp"))
 						failed = true;
-						return;
-					}
 					ItemStack input = ItemStack.loadItemStackFromNBT(stuff.getCompoundTag("input"));
 					ItemStack output1 = ItemStack.loadItemStackFromNBT(stuff.getCompoundTag("output1"));
 					ItemStack output2 = ItemStack.loadItemStackFromNBT(stuff.getCompoundTag("output2"));
-					if(input == null || output1 == null || output2 == null){
+					if(input == null || output1 == null || output2 == null)
 						failed = true;
-						return;
-					}
-					AbyssalCraftAPI.addCrystallization(input, output1, output2, stuff.getFloat("xp"));
+					if(!failed)
+						AbyssalCraftAPI.addCrystallization(input, output1, output2, stuff.getFloat("xp"));
 				}
 				if(failed)
 					ACLogger.imcWarning("Received invalid Crystallizer recipe from mod %s!", imcMessage.getSender());
@@ -297,17 +293,14 @@ public class AbyssalCraft {
 					if(!senders.contains(imcMessage.getSender()))
 						senders.add(imcMessage.getSender());
 					NBTTagCompound stuff = imcMessage.getNBTValue();
-					if(!stuff.hasKey("input") || !stuff.hasKey("output") || !stuff.hasKey("xp")){
+					if(!stuff.hasKey("input") || !stuff.hasKey("output") || !stuff.hasKey("xp"))
 						failed = true;
-						return;
-					}
 					ItemStack input = ItemStack.loadItemStackFromNBT(stuff.getCompoundTag("input"));
 					ItemStack output = ItemStack.loadItemStackFromNBT(stuff.getCompoundTag("output"));
-					if(input == null || output == null){
+					if(input == null || output == null)
 						failed = true;
-						return;
-					}
-					AbyssalCraftAPI.addSingleCrystallization(input, output, stuff.getFloat("xp"));
+					if(!failed)
+						AbyssalCraftAPI.addSingleCrystallization(input, output, stuff.getFloat("xp"));
 				}
 				if(failed)
 					ACLogger.imcWarning("Received invalid Single Crystallizer recipe from mod %s!", imcMessage.getSender());
@@ -321,20 +314,17 @@ public class AbyssalCraft {
 					if(!senders.contains(imcMessage.getSender()))
 						senders.add(imcMessage.getSender());
 					NBTTagCompound stuff = imcMessage.getNBTValue();
-					if(!stuff.hasKey("input") || !stuff.hasKey("output1") || !stuff.hasKey("output2") || !stuff.hasKey("xp")){
+					if(!stuff.hasKey("input") || !stuff.hasKey("output1") || !stuff.hasKey("output2") || !stuff.hasKey("xp"))
 						failed = true;
-						return;
-					}
 					String input = stuff.getString("input");
 					String output1 = stuff.getString("output1");
 					String output2 = stuff.getString("output2");
-					if(input == null || output1 == null || output2 == null){
+					if(input == null || output1 == null || output2 == null)
 						failed = true;
-						return;
-					}
-					if(stuff.hasKey("quantity1") && stuff.hasKey("quantity2"))
-						AbyssalCraftAPI.addCrystallization(input, output1, stuff.getInteger("quantity1"), output2, stuff.getInteger("quantity2"), stuff.getFloat("xp"));
-					else AbyssalCraftAPI.addCrystallization(input, output1, output2, stuff.getFloat("xp"));
+					if(!failed)
+						if(stuff.hasKey("quantity1") && stuff.hasKey("quantity2"))
+							AbyssalCraftAPI.addCrystallization(input, output1, stuff.getInteger("quantity1"), output2, stuff.getInteger("quantity2"), stuff.getFloat("xp"));
+						else AbyssalCraftAPI.addCrystallization(input, output1, output2, stuff.getFloat("xp"));
 				}
 				if(failed)
 					ACLogger.imcWarning("Received invalid OreDictionary Crystallizer recipe from mod %s!", imcMessage.getSender());
@@ -348,19 +338,16 @@ public class AbyssalCraft {
 					if(!senders.contains(imcMessage.getSender()))
 						senders.add(imcMessage.getSender());
 					NBTTagCompound stuff = imcMessage.getNBTValue();
-					if(!stuff.hasKey("input") || !stuff.hasKey("output") || !stuff.hasKey("xp")){
+					if(!stuff.hasKey("input") || !stuff.hasKey("output") || !stuff.hasKey("xp"))
 						failed = true;
-						return;
-					}
 					String input = stuff.getString("input");
 					String output = stuff.getString("output");
-					if(input == null || output == null){
+					if(input == null || output == null)
 						failed = true;
-						return;
-					}
-					if(stuff.hasKey("quantity"))
-						AbyssalCraftAPI.addSingleCrystallization(input, output, stuff.getInteger("quantity"), stuff.getFloat("xp"));
-					else AbyssalCraftAPI.addSingleCrystallization(input, output, stuff.getFloat("xp"));
+					if(!failed)
+						if(stuff.hasKey("quantity"))
+							AbyssalCraftAPI.addSingleCrystallization(input, output, stuff.getInteger("quantity"), stuff.getFloat("xp"));
+						else AbyssalCraftAPI.addSingleCrystallization(input, output, stuff.getFloat("xp"));
 				}
 				if(failed)
 					ACLogger.imcWarning("Received invalid Single OreDictionary Crystallizer recipe from mod %s!", imcMessage.getSender());
@@ -375,17 +362,14 @@ public class AbyssalCraft {
 					if(!senders.contains(imcMessage.getSender()))
 						senders.add(imcMessage.getSender());
 					NBTTagCompound stuff = imcMessage.getNBTValue();
-					if(!stuff.hasKey("input") || !stuff.hasKey("output") || !stuff.hasKey("xp")){
+					if(!stuff.hasKey("input") || !stuff.hasKey("output") || !stuff.hasKey("xp"))
 						failed = true;
-						return;
-					}
 					ItemStack input = ItemStack.loadItemStackFromNBT(stuff.getCompoundTag("input"));
 					ItemStack output = ItemStack.loadItemStackFromNBT(stuff.getCompoundTag("output"));
-					if(input == null || output == null){
+					if(input == null || output == null)
 						failed = true;
-						return;
-					}
-					AbyssalCraftAPI.addTransmutation(input, output, stuff.getFloat("xp"));
+					if(!failed)
+						AbyssalCraftAPI.addTransmutation(input, output, stuff.getFloat("xp"));
 				}
 				if(failed)
 					ACLogger.imcWarning("Received invalid Transmutator recipe from mod %s!", imcMessage.getSender());
@@ -399,19 +383,16 @@ public class AbyssalCraft {
 					if(!senders.contains(imcMessage.getSender()))
 						senders.add(imcMessage.getSender());
 					NBTTagCompound stuff = imcMessage.getNBTValue();
-					if(!stuff.hasKey("input") || !stuff.hasKey("output") || !stuff.hasKey("xp")){
+					if(!stuff.hasKey("input") || !stuff.hasKey("output") || !stuff.hasKey("xp"))
 						failed = true;
-						return;
-					}
 					String input = stuff.getString("input");
 					String output = stuff.getString("output");
-					if(input == null || output == null){
+					if(input == null || output == null)
 						failed = true;
-						return;
-					}
-					if(stuff.hasKey("quantity"))
-						AbyssalCraftAPI.addTransmutation(input, output, stuff.getInteger("quantity"), stuff.getFloat("xp"));
-					else AbyssalCraftAPI.addTransmutation(input, output, stuff.getFloat("xp"));
+					if(!failed)
+						if(stuff.hasKey("quantity"))
+							AbyssalCraftAPI.addTransmutation(input, output, stuff.getInteger("quantity"), stuff.getFloat("xp"));
+						else AbyssalCraftAPI.addTransmutation(input, output, stuff.getFloat("xp"));
 				}
 				if(failed)
 					ACLogger.imcWarning("Received invalid OreDictionary Transmutator recipe from mod %s!", imcMessage.getSender());
@@ -426,20 +407,16 @@ public class AbyssalCraft {
 					if(!senders.contains(imcMessage.getSender()))
 						senders.add(imcMessage.getSender());
 					NBTTagCompound stuff = imcMessage.getNBTValue();
-					if(!stuff.hasKey("input1") || !stuff.hasKey("output")){
+					if(!stuff.hasKey("input1") || !stuff.hasKey("output"))
 						failed = true;
-						return;
-					}
 					ItemStack input1 = ItemStack.loadItemStackFromNBT(stuff.getCompoundTag("input1"));
 					ItemStack input2 = ItemStack.loadItemStackFromNBT(stuff.getCompoundTag("input2"));
 					ItemStack input3 = ItemStack.loadItemStackFromNBT(stuff.getCompoundTag("input3"));
 					ItemStack input4 = ItemStack.loadItemStackFromNBT(stuff.getCompoundTag("input4"));
 					ItemStack input5 = ItemStack.loadItemStackFromNBT(stuff.getCompoundTag("input5"));
 					ItemStack output = ItemStack.loadItemStackFromNBT(stuff.getCompoundTag("output"));
-					if(input1 == null || output == null){
+					if(input1 == null || output == null)
 						failed = true;
-						return;
-					}
 					if(input5 != null){
 						items = new ItemStack[5];
 						items[0] = input1;
@@ -466,7 +443,8 @@ public class AbyssalCraft {
 						items = new ItemStack[1];
 						items[0] = input1;
 					}
-					AbyssalCraftAPI.addMaterialization(items, output);
+					if(!failed)
+						AbyssalCraftAPI.addMaterialization(items, output);
 				}
 				if(failed)
 					ACLogger.imcWarning("Received invalid Materializer recipe from mod %s!", imcMessage.getSender());
@@ -484,6 +462,96 @@ public class AbyssalCraft {
 				if(failed)
 					ACLogger.imcWarning("Received invalid Shoggoth Block Blacklist from mod %s!", imcMessage.getSender());
 				else ACLogger.imcInfo("Received Shoggoth Block Blacklist from mod %s", imcMessage.getSender());
+			}
+			else if(imcMessage.key.equals("addGhoulArmor")){
+				boolean failed = false;
+				if(!imcMessage.isNBTMessage())
+					failed = true;
+				else {
+					if(!senders.contains(imcMessage.getSender()))
+						senders.add(imcMessage.getSender());
+					NBTTagCompound tag = imcMessage.getNBTValue();
+					ItemStack helmet = ItemStack.loadItemStackFromNBT(tag.getCompoundTag("helmet"));
+					ItemStack chestplate = ItemStack.loadItemStackFromNBT(tag.getCompoundTag("chestplate"));
+					ItemStack leggings = ItemStack.loadItemStackFromNBT(tag.getCompoundTag("leggings"));
+					ItemStack boots = ItemStack.loadItemStackFromNBT(tag.getCompoundTag("boots"));
+					if(helmet != null && chestplate != null && leggings != null && boots != null){
+						if(tag.hasKey("res1") && tag.hasKey("res2"))
+							AbyssalCraftAPI.addGhoulArmorTextures(helmet.getItem(), chestplate.getItem(), leggings.getItem(), boots.getItem(), tag.getString("res1"), tag.getString("res2"));
+						else failed = true;
+					} else failed = true;
+				}
+				if(failed)
+					ACLogger.imcWarning("Received invalid Ghoul Armor Texture Registration from mod %s!", imcMessage.getSender());
+				else ACLogger.imcInfo("Received Ghoul Armor Texture Registration from mod %s", imcMessage.getSender());
+			}
+			else if(imcMessage.key.equals("addGhoulHelmet")){
+				boolean failed = false;
+				if(!imcMessage.isNBTMessage())
+					failed = true;
+				else {
+					if(!senders.contains(imcMessage.getSender()))
+						senders.add(imcMessage.getSender());
+					NBTTagCompound tag = imcMessage.getNBTValue();
+					ItemStack helmet = ItemStack.loadItemStackFromNBT(tag.getCompoundTag("helmet"));
+					if(helmet != null && tag.hasKey("res"))
+						AbyssalCraftAPI.addGhoulHelmetTexture(helmet.getItem(), tag.getString("res"));
+					else failed = true;
+				}
+				if(failed)
+					ACLogger.imcWarning("Received invalid Ghoul Helmet Texture Registration from mod %s!", imcMessage.getSender());
+				else ACLogger.imcInfo("Received Ghoul Helmet Texture Registration from mod %s", imcMessage.getSender());
+			}
+			else if(imcMessage.key.equals("addGhoulChestplate")){
+				boolean failed = false;
+				if(!imcMessage.isNBTMessage())
+					failed = true;
+				else {
+					if(!senders.contains(imcMessage.getSender()))
+						senders.add(imcMessage.getSender());
+					NBTTagCompound tag = imcMessage.getNBTValue();
+					ItemStack chestplate = ItemStack.loadItemStackFromNBT(tag.getCompoundTag("chestplate"));
+					if(chestplate != null && tag.hasKey("res"))
+						AbyssalCraftAPI.addGhoulChestplateTexture(chestplate.getItem(), tag.getString("res"));
+					else failed = true;
+				}
+				if(failed)
+					ACLogger.imcWarning("Received invalid Ghoul Chestplate Texture Registration from mod %s!", imcMessage.getSender());
+				else ACLogger.imcInfo("Received Ghoul Chestplate Texture Registration from mod %s", imcMessage.getSender());
+			}
+			else if(imcMessage.key.equals("addGhoulLeggings")){
+				boolean failed = false;
+				if(!imcMessage.isNBTMessage())
+					failed = true;
+				else {
+					if(!senders.contains(imcMessage.getSender()))
+						senders.add(imcMessage.getSender());
+					NBTTagCompound tag = imcMessage.getNBTValue();
+					ItemStack leggings = ItemStack.loadItemStackFromNBT(tag.getCompoundTag("leggings"));
+					if(leggings != null && tag.hasKey("res"))
+						AbyssalCraftAPI.addGhoulLeggingsTexture(leggings.getItem(), tag.getString("res"));
+					else failed = true;
+				}
+				if(failed)
+					ACLogger.imcWarning("Received invalid Ghoul Leggings Texture Registration from mod %s!", imcMessage.getSender());
+				else ACLogger.imcInfo("Received Ghoul Leggings Texture Registration from mod %s", imcMessage.getSender());
+			}
+			else if(imcMessage.key.equals("addGhoulBoots")){
+				boolean failed = false;
+				if(!imcMessage.isNBTMessage())
+					failed = true;
+				else {
+					if(!senders.contains(imcMessage.getSender()))
+						senders.add(imcMessage.getSender());
+					NBTTagCompound tag = imcMessage.getNBTValue();
+					ItemStack boots = ItemStack.loadItemStackFromNBT(tag.getCompoundTag("boots"));
+					if(boots != null && tag.hasKey("res"))
+						AbyssalCraftAPI.addGhoulBootsTexture(boots.getItem(), tag.getString("res"));
+					else failed = true;
+				}
+				if(failed)
+					ACLogger.imcWarning("Received invalid Ghoul Boots Texture Registration from mod %s!", imcMessage.getSender());
+				else ACLogger.imcInfo("Received Ghoul Boots Texture Registration from mod %s", imcMessage.getSender());
 			}
 			else ACLogger.imcWarning("Received an IMC Message with unknown key (%s) from mod %s!", imcMessage.key, imcMessage.getSender());
 		if(!senders.isEmpty())
@@ -543,6 +611,8 @@ public class AbyssalCraft {
 				+TextFormatting.RED+"[Minecraft Restart Required]"+TextFormatting.RESET).getBoolean();
 		antiItemDisintegration = cfg.get(Configuration.CATEGORY_GENERAL, "Liquid Antimatter item disintegration", true, "Toggles whether or not Liquid Antimatter will disintegrate any items dropped into a pool of it.").getBoolean();
 		portalCooldown = cfg.get(Configuration.CATEGORY_GENERAL, "Portal cooldown", 10, "Cooldown after using a portal, increasing the value increases the delay until you can teleport again. Measured in ticks (20 ticks = 1 second).", 10, 300).getInt();
+		demonAnimalSpawnWeight = cfg.get(Configuration.CATEGORY_GENERAL, "Demon Animal spawn weight", 30, "Spawn weight for the Demon Animals (Pigs, Cows, Chickens) spawning in the Nether.").getInt();
+		abyssalZombiesPickupRottenFlesh = cfg.get(Configuration.CATEGORY_GENERAL, "Abyssal Zombies picking up Rotten Flesh", true, "Toggles whether or not Abyssal Zombies should pick up Rotten Flesh (entities holding items don't despawn)").getBoolean();
 
 		darkWeight1 = cfg.get("biome_weight", "Darklands", 10, "Biome weight for the Darklands biome, controls the chance of it generating", 0, 100).getInt();
 		darkWeight2 = cfg.get("biome_weight", "Darklands Forest", 10, "Biome weight for the Darklands Forest biome, controls the chance of it generating", 0, 100).getInt();

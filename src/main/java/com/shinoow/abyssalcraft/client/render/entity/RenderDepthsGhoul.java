@@ -18,6 +18,8 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import com.shinoow.abyssalcraft.client.model.entity.ModelDG;
+import com.shinoow.abyssalcraft.client.render.entity.layers.LayerGhoulArmor;
+import com.shinoow.abyssalcraft.client.render.entity.layers.LayerGhoulHeldItem;
 import com.shinoow.abyssalcraft.common.entity.EntityDepthsGhoul;
 
 @SideOnly(Side.CLIENT)
@@ -31,6 +33,8 @@ public class RenderDepthsGhoul extends RenderLiving<EntityDepthsGhoul> {
 	public RenderDepthsGhoul(RenderManager manager)
 	{
 		super(manager, new ModelDG(), 0.8F);
+		addLayer(new LayerGhoulHeldItem(this));
+		addLayer(new LayerGhoulArmor(this));
 	}
 
 	@Override

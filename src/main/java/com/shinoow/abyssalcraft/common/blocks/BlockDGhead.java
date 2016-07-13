@@ -36,7 +36,7 @@ public abstract class BlockDGhead extends BlockContainer /*implements IInfusionS
 		setHardness(1.0F);
 		setResistance(6.0F);
 		setStepSound(SoundType.CLOTH);
-		setCreativeTab(ACTabs.tabBlock);
+		setCreativeTab(ACTabs.tabDecoration);
 	}
 
 	@Override

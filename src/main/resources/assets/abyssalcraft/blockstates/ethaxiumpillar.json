@@ -2,7 +2,6 @@
 	"variants": {
 		"axis=y":  { "model": "abyssalcraft:ethaxiumpillar" },
         "axis=z":   { "model": "abyssalcraft:ethaxiumpillar", "x": 90 },
-        "axis=x":   { "model": "abyssalcraft:ethaxiumpillar", "x": 90, "y": 90 },
-		"axis=none":  { "model": "abyssalcraft:ethaxiumpillar" }
+        "axis=x":   { "model": "abyssalcraft:ethaxiumpillar", "x": 90, "y": 90 }
 	}
 }

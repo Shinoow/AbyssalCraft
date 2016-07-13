@@ -147,7 +147,7 @@ public class EntityAntiBat extends EntityAmbientCreature implements IAntiEntity 
 			if (!worldObj.getBlockState(blockpos1).isNormalCube())
 			{
 				setIsBatHanging(false);
-				worldObj.playAuxSFXAtEntity((EntityPlayer)null, 1015, blockpos, 0);
+				worldObj.playAuxSFXAtEntity((EntityPlayer)null, 1025, blockpos, 0);
 			}
 			else
 			{
@@ -157,7 +157,7 @@ public class EntityAntiBat extends EntityAmbientCreature implements IAntiEntity 
 				if (worldObj.getClosestPlayerToEntity(this, 4.0D) != null)
 				{
 					setIsBatHanging(false);
-					worldObj.playAuxSFXAtEntity((EntityPlayer)null, 1015, blockpos, 0);
+					worldObj.playAuxSFXAtEntity((EntityPlayer)null, 1025, blockpos, 0);
 				}
 			}
 		}

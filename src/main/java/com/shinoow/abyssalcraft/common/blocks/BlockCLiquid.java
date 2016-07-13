@@ -42,12 +42,12 @@ public class BlockCLiquid extends BlockFluidClassic {
 
 	public static final MaterialLiquid Cwater = new MaterialLiquid(MapColor.lightBlueColor);
 
-	List<Block> dusts = Lists.newArrayList();
-	List<Block> metalloids = Lists.newArrayList();
-	List<Block> gems = Lists.newArrayList();
-	List<Block> stones = Lists.newArrayList();
-	List<Block> bricks = Lists.newArrayList();
-	List<Block> metals = Lists.newArrayList();
+	List<IBlockState> dusts = Lists.newArrayList();
+	List<IBlockState> metalloids = Lists.newArrayList();
+	List<IBlockState> gems = Lists.newArrayList();
+	List<IBlockState> stones = Lists.newArrayList();
+	List<IBlockState> bricks = Lists.newArrayList();
+	List<IBlockState> metals = Lists.newArrayList();
 
 	public BlockCLiquid() {
 		super(AbyssalCraft.CFluid, Material.water);
@@ -107,31 +107,31 @@ public class BlockCLiquid extends BlockFluidClassic {
 						world.setBlockState(new BlockPos(pos.getX(), pos.getY()+1, pos.getZ()), getDefaultState());
 				}
 			}
-			if(dusts.contains(world.getBlockState(pos).getBlock()) && world.getBlockState(pos) != ACBlocks.abyssal_nitre_ore.getDefaultState() &&
+			if(dusts.contains(world.getBlockState(pos)) && world.getBlockState(pos) != ACBlocks.abyssal_nitre_ore.getDefaultState() &&
 					world.getBlockState(pos) != ACBlocks.abyssal_coralium_ore)
-				if(oresToBlocks(OreDictionary.getOres("oreSaltpeter")).contains(world.getBlockState(pos).getBlock()))
+				if(oresToBlocks(OreDictionary.getOres("oreSaltpeter")).contains(world.getBlockState(pos)))
 					world.setBlockState(pos, ACBlocks.abyssal_nitre_ore.getDefaultState());
 				else world.setBlockState(pos, ACBlocks.abyssal_coralium_ore.getDefaultState());
-			else if(metalloids.contains(world.getBlockState(pos).getBlock()) && !metals.contains(world.getBlockState(pos).getBlock()))
-				if(oresToBlocks(OreDictionary.getOres("oreIron")).contains(world.getBlockState(pos).getBlock()))
+			else if(metalloids.contains(world.getBlockState(pos)) && !metals.contains(world.getBlockState(pos)))
+				if(oresToBlocks(OreDictionary.getOres("oreIron")).contains(world.getBlockState(pos)))
 					world.setBlockState(pos, ACBlocks.abyssal_iron_ore.getDefaultState());
-				else if(oresToBlocks(OreDictionary.getOres("oreGold")).contains(world.getBlockState(pos).getBlock()))
+				else if(oresToBlocks(OreDictionary.getOres("oreGold")).contains(world.getBlockState(pos)))
 					world.setBlockState(pos, ACBlocks.abyssal_gold_ore.getDefaultState());
-				else if(oresToBlocks(OreDictionary.getOres("oreTin")).contains(world.getBlockState(pos).getBlock()))
+				else if(oresToBlocks(OreDictionary.getOres("oreTin")).contains(world.getBlockState(pos)))
 					world.setBlockState(pos, ACBlocks.abyssal_tin_ore.getDefaultState());
-				else if(oresToBlocks(OreDictionary.getOres("oreCopper")).contains(world.getBlockState(pos).getBlock()))
+				else if(oresToBlocks(OreDictionary.getOres("oreCopper")).contains(world.getBlockState(pos)))
 					world.setBlockState(pos, ACBlocks.abyssal_copper_ore.getDefaultState());
 				else world.setBlockState(pos, ACBlocks.liquified_coralium_ore.getDefaultState());
-			else if(gems.contains(world.getBlockState(pos).getBlock()) && world.getBlockState(pos) != ACBlocks.abyssal_diamond_ore.getDefaultState())
-				if(oresToBlocks(OreDictionary.getOres("oreDiamond")).contains(world.getBlockState(pos).getBlock()))
+			else if(gems.contains(world.getBlockState(pos)) && world.getBlockState(pos) != ACBlocks.abyssal_diamond_ore.getDefaultState())
+				if(oresToBlocks(OreDictionary.getOres("oreDiamond")).contains(world.getBlockState(pos)))
 					world.setBlockState(pos, ACBlocks.abyssal_diamond_ore.getDefaultState());
 				else world.setBlockState(pos, ACBlocks.pearlescent_coralium_ore.getDefaultState());
-			else if(stones.contains(world.getBlockState(pos).getBlock()))
+			else if(stones.contains(world.getBlockState(pos)))
 				if(BiomeDictionary.isBiomeOfType(world.getBiomeGenForCoords(pos), Type.OCEAN)){
 					if(world.getBlockState(pos).getBlock() != Blocks.cobblestone)
 						world.setBlockState(pos, ACBlocks.abyssal_stone.getDefaultState());
 				}else world.setBlockState(pos, ACBlocks.abyssal_stone.getDefaultState());
-			else if(bricks.contains(world.getBlockState(pos).getBlock()))
+			else if(bricks.contains(world.getBlockState(pos)))
 				world.setBlockState(pos, ACBlocks.abyssal_stone_brick.getDefaultState());
 		}
 		return super.displaceIfPossible(world, pos);
@@ -145,11 +145,11 @@ public class BlockCLiquid extends BlockFluidClassic {
 			((EntityLivingBase)par5Entity).addPotionEffect(new PotionEffect(AbyssalCraftAPI.coralium_plague, 200));
 	}
 
-	private List<Block> oresToBlocks(List<ItemStack> list){
-		List<Block> blocks = Lists.newArrayList();
+	private List<IBlockState> oresToBlocks(List<ItemStack> list){
+		List<IBlockState> blocks = Lists.newArrayList();
 		for(ItemStack stack : list)
-			if(Block.getBlockFromItem(stack.getItem()) != Blocks.air)
-				blocks.add(Block.getBlockFromItem(stack.getItem()));
+			if(Block.getBlockFromItem(stack.getItem()) != null && Block.getBlockFromItem(stack.getItem()) != Blocks.air)
+				blocks.add(Block.getBlockFromItem(stack.getItem()).getStateFromMeta(stack.getItemDamage()));
 
 		return blocks;
 	}
@@ -161,7 +161,7 @@ public class BlockCLiquid extends BlockFluidClassic {
 		dusts.addAll(oresToBlocks(OreDictionary.getOres("oreLapis")));
 		dusts.addAll(oresToBlocks(OreDictionary.getOres("oreRedstone")));
 		dusts.addAll(oresToBlocks(OreDictionary.getOres("oreCoal")));
-		dusts.add(ACBlocks.coralium_ore);
+		dusts.addAll(oresToBlocks(OreDictionary.getOres("oreCoralium")));
 		metalloids.addAll(oresToBlocks(OreDictionary.getOres("oreIron")));
 		metalloids.addAll(oresToBlocks(OreDictionary.getOres("oreGold")));
 		metalloids.addAll(oresToBlocks(OreDictionary.getOres("oreAbyssalnite")));
@@ -187,24 +187,33 @@ public class BlockCLiquid extends BlockFluidClassic {
 			gems.addAll(oresToBlocks(OreDictionary.getOres("oreRuby")));
 		gems.addAll(oresToBlocks(OreDictionary.getOres("oreCoraliumStone")));
 		stones.addAll(oresToBlocks(OreDictionary.getOres("stone")));
+		stones.addAll(oresToBlocks(OreDictionary.getOres("stoneGranite")));
+		stones.addAll(oresToBlocks(OreDictionary.getOres("stoneGranitePolished")));
+		stones.addAll(oresToBlocks(OreDictionary.getOres("stoneDiorite")));
+		stones.addAll(oresToBlocks(OreDictionary.getOres("stoneDioritePolished")));
+		stones.addAll(oresToBlocks(OreDictionary.getOres("stoneAndesite")));
+		stones.addAll(oresToBlocks(OreDictionary.getOres("stoneAndesitePolished")));
 		stones.addAll(oresToBlocks(OreDictionary.getOres("sandstone")));
 		stones.addAll(oresToBlocks(OreDictionary.getOres("cobblestone")));
-		stones.add(Blocks.mossy_cobblestone);
-		stones.add(Blocks.netherrack);
-		stones.add(Blocks.end_stone);
-		stones.add(ACBlocks.darkstone);
-		stones.add(ACBlocks.abyssalnite_stone);
-		stones.add(ACBlocks.dreadstone);
-		stones.add(ACBlocks.darkstone_cobblestone);
-		bricks.add(Blocks.stonebrick);
-		bricks.add(Blocks.nether_brick);
-		bricks.add(ACBlocks.darkstone_brick);
-		bricks.add(ACBlocks.abyssalnite_stone_brick);
-		bricks.add(ACBlocks.dreadstone_brick);
-		metals.add(ACBlocks.abyssal_iron_ore);
-		metals.add(ACBlocks.abyssal_gold_ore);
-		metals.add(ACBlocks.abyssal_copper_ore);
-		metals.add(ACBlocks.abyssal_tin_ore);
-		metals.add(ACBlocks.liquified_coralium_ore);
+		stones.add(Blocks.mossy_cobblestone.getDefaultState());
+		stones.add(Blocks.netherrack.getDefaultState());
+		stones.add(Blocks.end_stone.getDefaultState());
+		stones.add(ACBlocks.darkstone.getDefaultState());
+		stones.add(ACBlocks.abyssalnite_stone.getDefaultState());
+		stones.add(ACBlocks.dreadstone.getDefaultState());
+		stones.add(ACBlocks.darkstone_cobblestone.getDefaultState());
+		bricks.add(Blocks.stonebrick.getStateFromMeta(0));
+		bricks.add(Blocks.stonebrick.getStateFromMeta(1));
+		bricks.add(Blocks.stonebrick.getStateFromMeta(2));
+		bricks.add(Blocks.stonebrick.getStateFromMeta(3));
+		bricks.add(Blocks.nether_brick.getDefaultState());
+		bricks.add(ACBlocks.darkstone_brick.getDefaultState());
+		bricks.add(ACBlocks.abyssalnite_stone_brick.getDefaultState());
+		bricks.add(ACBlocks.dreadstone_brick.getDefaultState());
+		metals.add(ACBlocks.abyssal_iron_ore.getDefaultState());
+		metals.add(ACBlocks.abyssal_gold_ore.getDefaultState());
+		metals.add(ACBlocks.abyssal_copper_ore.getDefaultState());
+		metals.add(ACBlocks.abyssal_tin_ore.getDefaultState());
+		metals.add(ACBlocks.liquified_coralium_ore.getDefaultState());
 	}
 }
