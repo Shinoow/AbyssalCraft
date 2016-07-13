@@ -20,6 +20,7 @@ import com.shinoow.abyssalcraft.lib.util.blocks.ISingletonInventory;
 
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureAttribute;
+import net.minecraft.entity.item.EntityArmorStand;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -108,7 +109,7 @@ public class TileEntitySacrificialAltar extends TileEntity implements IEnergyCon
 			List<EntityLivingBase> mobs = worldObj.getEntitiesWithinAABB(EntityLivingBase.class, new AxisAlignedBB(pos, pos.add(1, 1, 1)).expand(8, 3, 8));
 
 			for(EntityLivingBase mob : mobs)
-				if(!(mob instanceof EntityPlayer))
+				if(!(mob instanceof EntityPlayer && mob instanceof EntityArmorStand))
 					if(mob.getCreatureAttribute() != EnumCreatureAttribute.UNDEAD)
 						if(mob.isEntityAlive())
 							if(!mob.isChild()){

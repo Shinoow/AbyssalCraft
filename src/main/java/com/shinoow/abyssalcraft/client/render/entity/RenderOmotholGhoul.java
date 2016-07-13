@@ -22,6 +22,8 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import org.lwjgl.opengl.GL11;
 
 import com.shinoow.abyssalcraft.client.model.entity.ModelDG;
+import com.shinoow.abyssalcraft.client.render.entity.layers.LayerGhoulArmor;
+import com.shinoow.abyssalcraft.client.render.entity.layers.LayerGhoulHeldItem;
 import com.shinoow.abyssalcraft.common.entity.EntityOmotholGhoul;
 
 @SideOnly(Side.CLIENT)
@@ -34,6 +36,8 @@ public class RenderOmotholGhoul extends RenderLiving {
 	public RenderOmotholGhoul(RenderManager manager)
 	{
 		super(manager, new ModelDG(), 0.8F);
+		addLayer(new LayerGhoulHeldItem(this));
+		addLayer(new LayerGhoulArmor(this));
 	}
 
 	/**

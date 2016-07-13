@@ -24,7 +24,7 @@ import net.minecraft.util.EnumFacing;
  */
 public interface IEnergyRelay {
 
-	public void transportPE(EnumFacing facing);
+	public void transportPE(EnumFacing facing, float energy);
 
 	public boolean canTransport(EnumFacing facing);
 }

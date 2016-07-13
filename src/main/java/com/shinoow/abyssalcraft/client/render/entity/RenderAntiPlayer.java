@@ -31,15 +31,7 @@ public class RenderAntiPlayer extends RenderBiped<EntityAntiPlayer>
 	{
 		super(manager, new ModelBiped(), 0.5F);
 		this.addLayer(new LayerHeldItem(this));
-		this.addLayer(new LayerBipedArmor(this)
-		{
-			@Override
-			protected void initArmor()
-			{
-				field_177189_c = new ModelBiped(0.5F);
-				field_177186_d = new ModelBiped(1.0F);
-			}
-		});
+		this.addLayer(new LayerBipedArmor(this));
 	}
 
 	@Override

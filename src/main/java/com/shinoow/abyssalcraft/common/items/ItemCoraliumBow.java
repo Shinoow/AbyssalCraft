@@ -89,16 +89,18 @@ public class ItemCoraliumBow extends ItemBow {
 	@Override
 	public ModelResourceLocation getModel(ItemStack stack, EntityPlayer player, int useRemaining)
 	{
-		ModelResourceLocation modelresourcelocation = new ModelResourceLocation("abyssalcraft:corbow", "inventory");
+		if(player.isUsingItem()){
+			int useTime = stack.getMaxItemUseDuration() - useRemaining;
 
-		if(stack.getItem() == this && player.getItemInUse() != null)
-			if(useRemaining >= 18)
-				modelresourcelocation = new ModelResourceLocation("abyssalcraft:corbow_pulling_0", "inventory");
-			else if(useRemaining > 13)
-				modelresourcelocation = new ModelResourceLocation("abyssalcraft:corbow_pulling_1", "inventory");
-			else if(useRemaining > 0)
-				modelresourcelocation = new ModelResourceLocation("abyssalcraft:corbow_pulling_2", "inventory");
-		return modelresourcelocation;
+			if(useTime >= 18)
+				return new ModelResourceLocation("abyssalcraft:corbow_pulling_2", "inventory");
+			else if(useTime > 13)
+				return new ModelResourceLocation("abyssalcraft:corbow_pulling_1", "inventory");
+			else if(useTime > 0)
+				return new ModelResourceLocation("abyssalcraft:corbow_pulling_0", "inventory");
+		}
+
+		return null;
 	}
 
 	@Override
