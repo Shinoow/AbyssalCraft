@@ -62,20 +62,6 @@
                 },
                 {
                     "type": "item",
-                    "name": "minecraft:diamond",
-                    "functions": [
-                        {
-                            "function": "set_count",
-                            "count": {
-                                "min": 1,
-                                "max": 2
-                            }
-                        }
-                    ],
-                    "weight": 3
-                },
-                {
-                    "type": "item",
                     "name": "abyssalcraft:dreadshard",
                     "functions": [
                         {

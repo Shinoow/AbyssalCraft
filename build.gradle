@@ -50,7 +50,7 @@ sourceCompatibility = 1.7
 targetCompatibility = 1.7
 
 minecraft {
-    version = "1.10-12.18.0.1983-1.10.0"
+    version = "1.10.2-12.18.0.2007-1.10.0"
     runDir = "run"
     
 	useDepAts = true
@@ -69,7 +69,7 @@ minecraft {
 
 dependencies {
 	
-	deobfCompile "mezz.jei:jei_1.10:3.7.0.218"
+	deobfCompile "mezz.jei:jei_1.10.2:3.7.4.224"
 }
 
 version = "${props.mc_version}-${props.ac_version}"

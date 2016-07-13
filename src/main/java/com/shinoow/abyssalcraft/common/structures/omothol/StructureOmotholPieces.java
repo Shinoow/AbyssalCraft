@@ -1838,9 +1838,9 @@ public class StructureOmotholPieces
 		}
 
 		protected void placeDoorCurrentPosition(World p_189927_1_, StructureBoundingBox p_189927_2_, Random p_189927_3_, int p_189927_4_, int p_189927_5_, int p_189927_6_, EnumFacing p_189927_7_)
-        {
-			this.func_189915_a(p_189927_1_, p_189927_2_, p_189927_3_, p_189927_4_, p_189927_5_, p_189927_6_, EnumFacing.NORTH, Blocks.OAK_DOOR);
-        }
+		{
+			func_189915_a(p_189927_1_, p_189927_2_, p_189927_3_, p_189927_4_, p_189927_5_, p_189927_6_, EnumFacing.NORTH, Blocks.OAK_DOOR);
+		}
 
 		/**
 		 * Fill the given area with the selected blocks

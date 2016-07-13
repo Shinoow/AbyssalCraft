@@ -34,6 +34,7 @@ import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.MobEffects;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
@@ -480,6 +481,23 @@ public class EntitySacthoth extends EntityMob implements IAntiEntity, ICoraliumE
 		}
 
 		super.onLivingUpdate();
+	}
+
+	@Override
+	public void writeEntityToNBT(NBTTagCompound par1NBTTagCompound)
+	{
+		super.writeEntityToNBT(par1NBTTagCompound);
+
+		if(deathTicks > 0)
+			par1NBTTagCompound.setInteger("DeathTicks", deathTicks);
+	}
+
+	@Override
+	public void readEntityFromNBT(NBTTagCompound par1NBTTagCompound)
+	{
+		super.readEntityFromNBT(par1NBTTagCompound);
+
+		deathTicks = par1NBTTagCompound.getInteger("DeathTicks");
 	}
 
 	@Override

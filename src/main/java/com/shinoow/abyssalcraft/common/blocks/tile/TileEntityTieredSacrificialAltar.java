@@ -16,6 +16,7 @@ import java.util.Random;
 
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureAttribute;
+import net.minecraft.entity.item.EntityArmorStand;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -71,9 +72,13 @@ public class TileEntityTieredSacrificialAltar extends TileEntity implements IEne
 
 	@Override
 	public SPacketUpdateTileEntity getUpdatePacket() {
-		NBTTagCompound nbtTag = new NBTTagCompound();
-		writeToNBT(nbtTag);
-		return new SPacketUpdateTileEntity(pos, 1, nbtTag);
+		return new SPacketUpdateTileEntity(pos, 1, getUpdateTag());
+	}
+
+	@Override
+	public NBTTagCompound getUpdateTag()
+	{
+		return writeToNBT(new NBTTagCompound());
 	}
 
 	@Override
@@ -109,7 +114,7 @@ public class TileEntityTieredSacrificialAltar extends TileEntity implements IEne
 			List<EntityLivingBase> mobs = worldObj.getEntitiesWithinAABB(EntityLivingBase.class, new AxisAlignedBB(pos).expand(8, 3, 8));
 
 			for(EntityLivingBase mob : mobs)
-				if(!(mob instanceof EntityPlayer))
+				if(!(mob instanceof EntityPlayer && mob instanceof EntityArmorStand))
 					if(mob.getCreatureAttribute() != EnumCreatureAttribute.UNDEAD)
 						if(mob.isEntityAlive())
 							if(!mob.isChild()){

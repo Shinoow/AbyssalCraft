@@ -11,18 +11,10 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.common.blocks;
 
-import static net.minecraft.block.BlockLog.LOG_AXIS;
-import net.minecraft.block.BlockLog;
 import net.minecraft.block.BlockRotatedPillar;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.properties.IProperty;
-import net.minecraft.block.state.BlockStateContainer;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.EnumFacing;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
 
 import com.shinoow.abyssalcraft.lib.ACTabs;
 
@@ -30,68 +22,11 @@ public class BlockEthaxiumPillar extends BlockRotatedPillar {
 
 	public BlockEthaxiumPillar(float hardness) {
 		super(Material.ROCK);
-		setDefaultState(blockState.getBaseState().withProperty(LOG_AXIS, BlockLog.EnumAxis.Y));
+		setDefaultState(blockState.getBaseState().withProperty(AXIS, EnumFacing.Axis.Y));
 		setHarvestLevel("pickaxe", 8);
 		setHardness(hardness);
 		setResistance(Float.MAX_VALUE);
 		setSoundType(SoundType.STONE);
 		setCreativeTab(ACTabs.tabBlock);
-	}
-
-
-	@Override
-	public IBlockState onBlockPlaced(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer)
-	{
-		return getStateFromMeta(meta).withProperty(LOG_AXIS, BlockLog.EnumAxis.fromFacingAxis(facing.getAxis()));
-	}
-
-	@Override
-	public IBlockState getStateFromMeta(int meta)
-	{
-		IBlockState iblockstate = getDefaultState();
-
-		switch (meta & 12)
-		{
-		case 0:
-			iblockstate = iblockstate.withProperty(LOG_AXIS, BlockLog.EnumAxis.Y);
-			break;
-		case 4:
-			iblockstate = iblockstate.withProperty(LOG_AXIS, BlockLog.EnumAxis.X);
-			break;
-		case 8:
-			iblockstate = iblockstate.withProperty(LOG_AXIS, BlockLog.EnumAxis.Z);
-			break;
-		default:
-			iblockstate = iblockstate.withProperty(LOG_AXIS, BlockLog.EnumAxis.NONE);
-		}
-
-		return iblockstate;
-	}
-
-	@Override
-	@SuppressWarnings("incomplete-switch")
-	public int getMetaFromState(IBlockState state)
-	{
-		int i = 0;
-
-		switch (state.getValue(LOG_AXIS))
-		{
-		case X:
-			i |= 4;
-			break;
-		case Z:
-			i |= 8;
-			break;
-		case NONE:
-			i |= 12;
-		}
-
-		return i;
-	}
-
-	@Override
-	protected BlockStateContainer createBlockState()
-	{
-		return new BlockStateContainer.Builder(this).add(new IProperty[] {LOG_AXIS}).build();
 	}
 }

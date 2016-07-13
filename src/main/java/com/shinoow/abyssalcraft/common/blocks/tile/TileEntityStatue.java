@@ -11,14 +11,15 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.common.blocks.tile;
 
-import java.util.List;
-
 import net.minecraft.block.Block;
 import net.minecraft.entity.effect.EntityLightningBolt;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.network.NetworkManager;
+import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.EnumHand;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.math.AxisAlignedBB;
@@ -27,9 +28,9 @@ import net.minecraft.util.math.BlockPos;
 import com.shinoow.abyssalcraft.api.energy.EnergyEnum.AmplifierType;
 import com.shinoow.abyssalcraft.api.energy.EnergyEnum.DeityType;
 import com.shinoow.abyssalcraft.api.energy.IEnergyAmplifier;
-import com.shinoow.abyssalcraft.api.energy.IEnergyContainer;
 import com.shinoow.abyssalcraft.api.energy.IEnergyManipulator;
 import com.shinoow.abyssalcraft.api.energy.IEnergyTransporterItem;
+import com.shinoow.abyssalcraft.api.energy.PEUtils;
 import com.shinoow.abyssalcraft.api.energy.disruption.DisruptionHandler;
 import com.shinoow.abyssalcraft.api.entity.EntityUtil;
 
@@ -68,6 +69,23 @@ public class TileEntityStatue extends TileEntity implements IEnergyManipulator, 
 	}
 
 	@Override
+	public SPacketUpdateTileEntity getUpdatePacket() {
+		return new SPacketUpdateTileEntity(pos, 1, getUpdateTag());
+	}
+
+	@Override
+	public NBTTagCompound getUpdateTag()
+	{
+		return writeToNBT(new NBTTagCompound());
+	}
+
+	@Override
+	public void onDataPacket(NetworkManager net, SPacketUpdateTileEntity packet)
+	{
+		readFromNBT(packet.getNbtCompound());
+	}
+
+	@Override
 	public void setActive(AmplifierType amp, DeityType deity){
 		if(!isActive()){
 			activationTimer = 1200;
@@ -82,7 +100,7 @@ public class TileEntityStatue extends TileEntity implements IEnergyManipulator, 
 	}
 
 	@Override
-	public float energyQuanta() {
+	public float getEnergyQuanta() {
 
 		return isActive() ? 10 * getAmplifier(AmplifierType.POWER) : 5;
 	}
@@ -96,15 +114,15 @@ public class TileEntityStatue extends TileEntity implements IEnergyManipulator, 
 	private int getPillarMultiplier(){
 		Block block1 = worldObj.getBlockState(new BlockPos(pos.getX(), pos.getY() - 1, pos.getZ())).getBlock();
 		Block block2 = worldObj.getBlockState(new BlockPos(pos.getX(), pos.getY() - 2, pos.getZ())).getBlock();
-		int num = 1;
+		int num = 0;
 		if(block1 != null && block1 instanceof IEnergyAmplifier &&
 				((IEnergyAmplifier) block1).getAmplifierType() == AmplifierType.RANGE)
-			num = 5;
+			num = 4;
 		if(block1 != null && block1 instanceof IEnergyAmplifier &&
 				((IEnergyAmplifier) block1).getAmplifierType() == AmplifierType.RANGE
 				&& block2 != null && block2 instanceof IEnergyAmplifier &&
 				((IEnergyAmplifier) block2).getAmplifierType() == AmplifierType.RANGE)
-			num = 9;
+			num = 8;
 		return num;
 	}
 
@@ -171,119 +189,21 @@ public class TileEntityStatue extends TileEntity implements IEnergyManipulator, 
 				!(worldObj.getTileEntity(new BlockPos(xp, yp - 1, zp)) instanceof IEnergyManipulator) &&
 				!(worldObj.getTileEntity(new BlockPos(xp, yp + 2, zp)) instanceof IEnergyManipulator) &&
 				!(worldObj.getTileEntity(new BlockPos(xp, yp - 2, zp)) instanceof IEnergyManipulator)){
-			List<EntityPlayer> players = worldObj.getEntitiesWithinAABB(EntityPlayer.class, new AxisAlignedBB(pos).expand(range, range, range));
-
-			for(EntityPlayer player : players)
-				if(EntityUtil.hasNecronomicon(player)){
-					ItemStack item = player.getActiveItemStack();
-					if(item != null && item.getItem() instanceof IEnergyTransporterItem){
-						timer++;
-						if(timer >= (int)(timerMax / getAmplifier(AmplifierType.DURATION))){
-							timer = worldObj.rand.nextInt(10);
-							if(!worldObj.isRemote && ((IEnergyTransporterItem) item.getItem()).canAcceptPEExternally(item) && ((IEnergyTransporterItem) item.getItem()).getContainedEnergy(item) < ((IEnergyTransporterItem) item.getItem()).getMaxEnergy(item))
-								((IEnergyTransporterItem) item.getItem()).addEnergy(item, energyQuanta());
-							for(double i = 0; i <= 0.7; i += 0.03) {
-								int xPos = xp < (int) player.posX ? 1 : xp > (int) player.posX ? -1 : 0;
-								int yPos = yp < (int) player.posY ? 1 : yp > (int) player.posY ? -1 : 0;
-								int zPos = zp < (int) player.posZ ? 1 : zp > (int) player.posZ ? -1 : 0;
-								double x = i * Math.cos(i) / 2 * xPos;
-								double y = i * Math.sin(i) / 2 * yPos;
-								double z = i * Math.sin(i) / 2 * zPos;
-								worldObj.spawnParticle(EnumParticleTypes.SMOKE_LARGE, xp + 0.5, yp + 0.5, zp + 0.5, x, y, z);
-							}
-						}
+			if(worldObj.getClosestPlayer(xp, yp, zp, range, false) != null &&
+					EntityUtil.hasNecronomicon(worldObj.getClosestPlayer(xp, yp, zp, range, false))){
+				ItemStack item = worldObj.getClosestPlayer(xp, yp, zp, range, false).getHeldItem(EnumHand.MAIN_HAND);
+				ItemStack item1 = worldObj.getClosestPlayer(xp, yp, zp, range, false).getHeldItem(EnumHand.OFF_HAND);
+				if(item != null && item.getItem() instanceof IEnergyTransporterItem ||
+						item1 != null && item1.getItem() instanceof IEnergyTransporterItem){
+					timer++;
+					if(timer >= (int)(timerMax / getAmplifier(AmplifierType.DURATION))){
+						timer = worldObj.rand.nextInt(10);
+						PEUtils.transferPEToNearbyPlayers(worldObj, pos, this, range);
 					}
 				}
+			}
 
-			TileEntity pedestal1 = null;
-			TileEntity pedestal2 = null;
-			TileEntity pedestal3 = null;
-			TileEntity pedestal4 = null;
-
-			if(worldObj.getTileEntity(new BlockPos(xp, yp, zp + 3)) != null)
-				pedestal1 = worldObj.getTileEntity(new BlockPos(xp, zp, zp + 3));
-			if(worldObj.getTileEntity(new BlockPos(xp, yp - 1, zp + 3)) != null && pedestal1 == null)
-				pedestal1 = worldObj.getTileEntity(new BlockPos(xp, yp - 1, zp + 3));
-			if(worldObj.getTileEntity(new BlockPos(xp, yp - 2, zp + 3)) != null && pedestal1 == null)
-				pedestal1 = worldObj.getTileEntity(new BlockPos(xp, yp - 2, zp + 3));
-
-			if(worldObj.getTileEntity(new BlockPos(xp, yp, zp - 3)) != null)
-				pedestal2 = worldObj.getTileEntity(new BlockPos(xp, yp, zp - 3));
-			if(worldObj.getTileEntity(new BlockPos(xp, yp - 1, zp - 3)) != null && pedestal2 == null)
-				pedestal2 = worldObj.getTileEntity(new BlockPos(xp, yp - 1, zp - 3));
-			if(worldObj.getTileEntity(new BlockPos(xp, yp - 2, zp - 3)) != null && pedestal2 == null)
-				pedestal2 = worldObj.getTileEntity(new BlockPos(xp, yp - 2, zp - 3));
-
-			if(worldObj.getTileEntity(new BlockPos(xp + 3, yp, zp)) != null)
-				pedestal3 = worldObj.getTileEntity(new BlockPos(xp + 3, yp, zp));
-			if(worldObj.getTileEntity(new BlockPos(xp + 3, yp - 1, zp)) != null && pedestal3 == null)
-				pedestal3 = worldObj.getTileEntity(new BlockPos(xp + 3, yp - 1, zp));
-			if(worldObj.getTileEntity(new BlockPos(xp + 3, yp - 2, zp)) != null && pedestal3 == null)
-				pedestal3 = worldObj.getTileEntity(new BlockPos(xp + 3, yp - 2, zp));
-
-			if(worldObj.getTileEntity(new BlockPos(xp - 3, yp, zp)) != null)
-				pedestal4 = worldObj.getTileEntity(new BlockPos(xp - 3, yp, zp));
-			if(worldObj.getTileEntity(new BlockPos(xp - 3, yp - 1, zp)) != null && pedestal4 == null)
-				pedestal4 = worldObj.getTileEntity(new BlockPos(xp - 3, yp - 1, zp));
-			if(worldObj.getTileEntity(new BlockPos(xp - 3, yp - 2, zp)) != null && pedestal4 == null)
-				pedestal4 = worldObj.getTileEntity(new BlockPos(xp - 3, yp - 2, zp));
-
-			if(pedestal1 != null && pedestal1 instanceof IEnergyContainer && ((IEnergyContainer) pedestal1).canAcceptPE())
-				if(worldObj.rand.nextInt(timerMax-(int)(20 * getAmplifier(AmplifierType.DURATION))) == 0)
-					if(((IEnergyContainer) pedestal1).getContainedEnergy() < ((IEnergyContainer) pedestal1).getMaxEnergy()){
-						((IEnergyContainer) pedestal1).addEnergy(energyQuanta());
-						for(double i = 0; i <= 0.7; i += 0.03) {
-							int xPos = xp < pedestal1.getPos().getX() ? 1 : xp > pedestal1.getPos().getX() ? -1 : 0;
-							int yPos = yp < pedestal1.getPos().getY() ? 1 : yp > pedestal1.getPos().getY() ? -1 : 0;
-							int zPos = zp < pedestal1.getPos().getZ() ? 1 : zp > pedestal1.getPos().getZ() ? -1 : 0;
-							double x = i * Math.cos(i) / 2 * xPos;
-							double y = i * Math.sin(i) / 2 * yPos;
-							double z = i * Math.sin(i) / 2 * zPos;
-							worldObj.spawnParticle(EnumParticleTypes.SMOKE_LARGE, xp + 0.5, yp + 0.5, zp + 0.5, x, y, z);
-						}
-					}
-			if(pedestal2 != null && pedestal2 instanceof IEnergyContainer && ((IEnergyContainer) pedestal2).canAcceptPE())
-				if(worldObj.rand.nextInt(timerMax-(int)(20 * getAmplifier(AmplifierType.DURATION))) == 0)
-					if(((IEnergyContainer) pedestal2).getContainedEnergy() < ((IEnergyContainer) pedestal2).getMaxEnergy()){
-						((IEnergyContainer) pedestal2).addEnergy(energyQuanta());
-						for(double i = 0; i <= 0.7; i += 0.03) {
-							int xPos = xp < pedestal2.getPos().getX() ? 1 : xp > pedestal2.getPos().getX() ? -1 : 0;
-							int yPos = yp < pedestal2.getPos().getY() ? 1 : yp > pedestal2.getPos().getY() ? -1 : 0;
-							int zPos = zp < pedestal2.getPos().getZ() ? 1 : zp > pedestal2.getPos().getZ() ? -1 : 0;
-							double x = i * Math.cos(i) / 2 * xPos;
-							double y = i * Math.sin(i) / 2 * yPos;
-							double z = i * Math.sin(i) / 2 * zPos;
-							worldObj.spawnParticle(EnumParticleTypes.SMOKE_LARGE, xp + 0.5, yp + 0.5, zp + 0.5, x, y, z);
-						}
-					}
-			if(pedestal3 != null && pedestal3 instanceof IEnergyContainer && ((IEnergyContainer) pedestal3).canAcceptPE())
-				if(worldObj.rand.nextInt(timerMax-(int)(20 * getAmplifier(AmplifierType.DURATION))) == 0)
-					if(((IEnergyContainer) pedestal3).getContainedEnergy() < ((IEnergyContainer) pedestal3).getMaxEnergy()){
-						((IEnergyContainer) pedestal3).addEnergy(energyQuanta());
-						for(double i = 0; i <= 0.7; i += 0.03) {
-							int xPos = xp < pedestal3.getPos().getX() ? 1 : xp > pedestal3.getPos().getX() ? -1 : 0;
-							int yPos = yp < pedestal3.getPos().getY() ? 1 : yp > pedestal3.getPos().getY() ? -1 : 0;
-							int zPos = zp < pedestal3.getPos().getZ() ? 1 : zp > pedestal3.getPos().getZ() ? -1 : 0;
-							double x = i * Math.cos(i) / 2 * xPos;
-							double y = i * Math.sin(i) / 2 * yPos;
-							double z = i * Math.sin(i) / 2 * zPos;
-							worldObj.spawnParticle(EnumParticleTypes.SMOKE_LARGE, xp + 0.5, yp + 0.5, zp + 0.5, x, y, z);
-						}
-					}
-			if(pedestal4 != null && pedestal4 instanceof IEnergyContainer && ((IEnergyContainer) pedestal4).canAcceptPE())
-				if(worldObj.rand.nextInt(timerMax-(int)(20 * getAmplifier(AmplifierType.DURATION))) == 0)
-					if(((IEnergyContainer) pedestal4).getContainedEnergy() < ((IEnergyContainer) pedestal4).getMaxEnergy()){
-						((IEnergyContainer) pedestal4).addEnergy(energyQuanta());
-						for(double i = 0; i <= 0.7; i += 0.03) {
-							int xPos = xp < pedestal4.getPos().getX() ? 1 : xp > pedestal4.getPos().getX() ? -1 : 0;
-							int yPos = yp < pedestal4.getPos().getY() ? 1 : yp > pedestal4.getPos().getY() ? -1 : 0;
-							int zPos = zp < pedestal4.getPos().getZ() ? 1 : zp > pedestal4.getPos().getZ() ? -1 : 0;
-							double x = i * Math.cos(i) / 2 * xPos;
-							double y = i * Math.sin(i) / 2 * yPos;
-							double z = i * Math.sin(i) / 2 * zPos;
-							worldObj.spawnParticle(EnumParticleTypes.SMOKE_LARGE, xp + 0.5, yp + 0.5, zp + 0.5, x, y, z);
-						}
-					}
+			PEUtils.transferPEToCollectors(worldObj, pos, this, (int)(getPillarMultiplier()/4 + getAmplifier(AmplifierType.RANGE)/2));
 		}
 		disrupt(worldObj.rand.nextInt(20 * (isActive() ? 40 : 200) * (worldObj.getClosestPlayer(xp, yp, zp, range * 2, true) != null ? 1 : 10)) == 0);
 		clearData();

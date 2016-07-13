@@ -14,6 +14,8 @@ package com.shinoow.abyssalcraft.client.render.entity;
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.renderer.entity.RenderBiped;
 import net.minecraft.client.renderer.entity.RenderManager;
+import net.minecraft.client.renderer.entity.layers.LayerBipedArmor;
+import net.minecraft.client.renderer.entity.layers.LayerHeldItem;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
@@ -29,6 +31,8 @@ public class RenderAntiAbyssalZombie extends RenderBiped {
 	public RenderAntiAbyssalZombie(RenderManager manager)
 	{
 		super(manager, new ModelBiped(), 0.5F);
+		addLayer(new LayerHeldItem(this));
+		addLayer(new LayerBipedArmor(this));
 	}
 
 	protected ResourceLocation getZombieTexture(EntityAntiAbyssalZombie par1EntityLiving)

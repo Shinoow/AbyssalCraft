@@ -162,7 +162,7 @@ public class BlockEngraver extends BlockContainer {
 							EntityItem entityitem = new EntityItem(par1World, pos.getX() + f, pos.getY() + f1, pos.getZ() + f2, new ItemStack(itemstack.getItem(), j1, itemstack.getItemDamage()));
 
 							if (itemstack.hasTagCompound())
-								entityitem.getEntityItem().setTagCompound((NBTTagCompound)itemstack.getTagCompound().copy());
+								entityitem.getEntityItem().setTagCompound(itemstack.getTagCompound().copy());
 
 							float f3 = 0.05F;
 							entityitem.motionX = (float)rand.nextGaussian() * f3;

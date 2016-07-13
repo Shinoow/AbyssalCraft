@@ -94,7 +94,7 @@ public class BlockCrate extends BlockContainer
 						entityitem.motionZ = (float)random.nextGaussian() * f3;
 
 						if (itemstack.hasTagCompound())
-							entityitem.getEntityItem().setTagCompound((NBTTagCompound)itemstack.getTagCompound().copy());
+							entityitem.getEntityItem().setTagCompound(itemstack.getTagCompound().copy());
 					}
 				}
 			}
