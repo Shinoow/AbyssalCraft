@@ -14,7 +14,7 @@ achievement.shadowGems=Gemas de pura oscuridad
 achievement.shadowGems.desc=Obtuviste una gema oscura.
 
 achievement.mineCor=Cosa verde
-achievement.mineCor.desc=Has picado algunas Abyssal Coralium.
+achievement.mineCor.desc=Has picado Abyssal Coralium.
 
 achievement.mineAbyOres=No veo esto en el  overworld?
 achievement.mineAbyOres.desc=Has picado algunos minerales Abyssales.
@@ -44,7 +44,7 @@ achievement.orangehead=La cabéza medica
 achievement.orangehead.desc=Su diagnóstico ha vuelto a aparecer, usted tiene Squaids.
 
 achievement.necrou1=Conocimiento de Wasteland
-achievement.necrou1.desc=Ha elaborado el Abyssal Wasteland Necronomicon.
+achievement.necrou1.desc=Ha elaborado el Necronomicon del Abyssal Wasteland.
 
 achievement.necrou2=Conocimiento de lo corrupto
 achievement.necrou2.desc=Ha elaborado el Necronomicon del Dreadlands.
@@ -52,11 +52,11 @@ achievement.necrou2.desc=Ha elaborado el Necronomicon del Dreadlands.
 achievement.necrou3=Conocimiento de lo desconocido
 achievement.necrou3.desc=Ha elaborado el Necronomicon de Omothol.
 
-achievement.abyssaln=Todo lo que no estaba destinado a saber
+achievement.abyssaln=Todo a lo que no estaba destinado a saber
 achievement.abyssaln.desc=Ha elaborado el Abyssalnomicon.J'zahar esta un tanto orgulloso de ti.
 
 achievement.ritual=Las artes oscuras
-achievement.ritual.desc=No tienes idea en lo que te estas metiendo, verdad?
+achievement.ritual.desc=No tienes idea en lo que te estas metiendo, ¿verdad?
 
 achievement.ritualSummon=He aquí la ira del Necronomicon!
 achievement.ritualSummon.desc=Realiza un ritual de invocación.
@@ -74,7 +74,7 @@ achievement.ritualPotionAoE=Beacon temporal
 achievement.ritualPotionAoE.desc=Realiza un ritual de una pocion de area con efecto.
 
 achievement.ritualInfusion=Fusión de energía
-achievement.ritualInfusion.desc=Se realiza un ritual de infusión.
+achievement.ritualInfusion.desc=Realiza un ritual de infusión.
 
 achievement.shoggothInfestation=Infestación shoggoth
 achievement.shoggothInfestation.desc=No se podría haber esperado que esto termine así...
@@ -83,12 +83,12 @@ achievement.enterabyss=Bienvenido a wasteland
 achievement.enterabyss.desc=Entraste a la primera dimensión.
 
 achievement.killdragon=Undead undead redead
-achievement.killdragon.desc=Has matado un dragón espectral .
+achievement.killdragon.desc=Has matado un dragón espectral.
 
 achievement.summonAsorah=La caída ha regresado!
 achievement.summonAsorah.desc=Has invocado a Asorah, CORRE!!
 
-achievement.killAsorah=Uno menos, 2 más para ir
+achievement.killAsorah=Uno menos, faltan 2
 achievement.killAsorah.desc=Has matado a Asorah... Oblivionaire te odia ahora.
 
 achievement.enterdreadlands=Bienvenido al infierno... errm el Dreadlands
@@ -97,20 +97,20 @@ achievement.enterdreadlands.desc=Has entrado a la segunda dimensión.
 achievement.killdreadguard=Herir la plaga
 achievement.killdreadguard.desc=Has matado un Dreadguard.
 
-achievement.summonChagaroth=La guarida de Dreadbeast
+achievement.summonChagaroth=La guarida de la Dreadbeast
 achievement.summonChagaroth.desc=Entraste en la guarida de Cha'garoth.
 
-achievement.killChagaroth=Caída del Dreadbeast
+achievement.killChagaroth=Caída de la Dreadbeast
 achievement.killChagaroth.desc=Has matado a Cha'garoth... buen trabajo.
 
-achievement.enterOmothol=Bienvenido a su fin,enserio.
-achievement.enterOmothol.desc=Has encontrado Omothol, El Reino de J'zahar.
+achievement.enterOmothol=Bienvenido a su fin, enserio.
+achievement.enterOmothol.desc=Has encontrado el Omothol, El Reino de J'zahar.
 
 achievement.darkRealm=El fondo del pozo.
 achievement.darkRealm.desc=Sólo había que caer, ¿verdad?
 
 achievement.killOmotholelite=Esa cosa era muy fuerte
-achievement.killOmotholelite.desc=Has matado a un ser poderoso de Omothol.
+achievement.killOmotholelite.desc=Has matado a un ser poderoso del Omothol.
 
 achievement.locateJzahar=Aparece J'zahar salvaje
 achievement.locateJzahar.desc=Espero que hayas traído pociones, o algo.
@@ -125,7 +125,7 @@ achievement.findPSDL=Ahora que es una roca extraña
 achievement.findPSDL.desc=Encontrada una infusión de PowerStone del Dreadlands.
 
 achievement.GK2=La llave del temido
-achievement.GK2.desc=Has crafteado la llave de la puerta de Asorah's Dreaded.
+achievement.GK2.desc=Has crafteado la llave Dreaded de la puerta de Asorah's.
 
 achievement.GK3=La llave antigua
 achievement.GK3.desc=Transmutada la llave de la puerta de Cha'garoth's R'lyehian.
@@ -140,7 +140,7 @@ achievement.makeMaterializer=Crea tus propios materiales
 achievement.makeMaterializer.desc=Has crafteado un Materializador.
 
 achievement.makeCrystalBag=Almacena todos tus cristales aquí!
-achievement.makeCrystalBag.desc=Has crafteado una bolsa de cristal. Se puedden actualizar.
+achievement.makeCrystalBag.desc=Has crafteado una bolsa de cristal.Se pueden actualizar.
 
 achievement.makeEngraver=Monedas falsas infinitas!
 achievement.makeEngraver.desc=Craftea un Grabador.
@@ -157,20 +157,20 @@ ac.amplifier.power=Poder
 
 #Messages
 message.asorah.spawn=JAJA, absurdo humano, estoy desatado!
-message.asorah.death.1=Asorah? ... Asorah?!
+message.asorah.death.1=Asorah?... Asorah?!
 message.asorah.death.2=TU, tendrás que pagar por esto mortal!!
 message.asorah.death.3=Además, no conseguiras llegar más allá del Dreadlands. Diviertete cavando tu propia tumba..
 message.dreadaltar.error.1=Eso sólo funciona en el Dreadlands
 message.dreadaltar.error.2=Es necesario estar dentro de las Montañas del Dreadlands
 message.dreadaltar.error.3=Que todavía sólo funciona en el Dreadlands
 message.dreadaltartop.enter=Haga clic en el bloque superior para entrar en la guarida de Cho'gath
-message.dreadaltartop.spawn=Ah, me parece que tengo un visitante. Dreadguards, por favor devoren nuestro invitado, si puede.
+message.dreadaltartop.spawn=Ah, me parece que tengo un visitante. Dreadguards, por favor devoren a nuestro invitado, si se puede.
 message.chagaroth.death.1=A continuación, haga que su llave, transmute por una que funcione.
 message.chagaroth.death.2=El cofre cerca de mi guarda "El tesoro legendario del Dreadlands".
 message.chagaroth.death.3=dejada por los que dirigían la mina antes de entrar en la imagen.
 message.chagaroth.death.4=No se haga ilusiones, apuesto a que es sólo un bloque de tierra o algo así.
-message.jzahar.death.1=Felicidades, tu me "mataste".No, ni mucho menos. No se puede matar a un Gran Antiguo.
-message.jzahar.death.2=Lo que mataste es un simuraculum (una mera encarnación física de la oscuridad infinita). Algunos lo llaman una marioneta.
+message.jzahar.death.1=Felicidades, tu me "mataste".No, ni mucho menos.No se puede matar a un Gran Antiguo.
+message.jzahar.death.2=Lo que mataste es un simuraculum (una mera encarnación física de la oscuridad infinita).Algunos lo llaman marioneta.
 message.jzahar.death.3=Algo que se le escapa a un ser humano cuando se adentra en la locura es el concepto de la realidad.
 message.jzahar.death.4=Un ejemplo de esto es la creencia de que ha matado a un Gran Antiguo.
 message.jzahar.death.5=Cualquier persona en su sano juicio se da cuenta que va después de un ser tan poderoso no es más que una muerte segura.
@@ -181,9 +181,9 @@ message.jzahar.death.9=Déjame desatar el último poder contenido dentro de este t
 message.jzahar.death.10=Si sobrevivió a la explosión, tome este mero fragmento de mi ser, que le dará acceso a la Abyssalnomicon.
 message.jzahar.banish.vanilla=Nunca pregunté para estar dentro de la misma dimensión que usted. Vete, falsa bestia!
 message.jzahar.banish.ac=Ejem... pensé que te di una asignación eones atrás, ¿se le ha ocurrido pensar que era permanente?
-message.jzahar.banish.jzh=¡Solo puede haber uno! * Crea espada de la nada *
-message.jzahar.banish.other=I don't believe we've been acquainted, I'm the one that banishes you from this dimension.
-message.jzahar.creative.1=%s, te das cuenta de que simplemente podía cambiar su modo de juego y yo matarlo a usted en ese momento? Yo soy ese tipo de entidad..
+message.jzahar.banish.jzh=¡Solo puede haber uno! * Crea una espada de la nada *
+message.jzahar.banish.other=No creo que hemos estado familiarizados, yo soy el que te destierra de esta dimensión.
+message.jzahar.creative.1=%s, te das cuenta de que simplemente podía cambiar su modo de juego y yo haberlo matado a usted en ese momento? Yo soy ese tipo de entidad..
 message.jzahar.creative.2=Pero sí... técnicamente sería hacer trampa, así que sólo cumple las "reglas" y no hagas nada..
 message.sacthoth.spawn.1=Me desaté! Siente la ira de El reino oscuro, mortal.
 message.sacthoth.spawn.2=Pero primero, mira la explosión.
@@ -255,7 +255,7 @@ necronomicon.potentialenergy=Energía potencial
 necronomicon.turnupindicator=Pagina %1$s de %2$s
 necronomicon.miscinformation=Información Miscelánea
 necronomicon.information.enchantments=Encantamientos
-necronomicon.sacrifice=Sacrifice required
+necronomicon.sacrifice=Requiere un sacrificio
 
 #Necronomicon Text
 #Note: the maximum amount of letters per string is 368
@@ -264,15 +264,15 @@ necronomicon.sacrifice=Sacrifice required
 #Anything longer than that will trigger a crash when you try to read it
 necronomicon.text.necronomicon.1=Este es el Necronomicón, un libro escrito por Abdul Alhazred, también conocido como "árabe loco".El libro contiene conocimientos sobre Los Grandes Antiguos, sus nombres y cómo convocarlos.También existe información acerca de los hechizos y rituales que el libro puede realizar.
 necronomicon.text.necronomicon.2=El Necronomicón en sí es un capítulo del Abyssalnomicon, que fue leído a Alhazred por un demonio conocido como J'zahar, que había compuesto el Abyssalnomicon de conocimiento infinito al conocer a Los Grandes Antiguos.
-necronomicon.text.necronomicon.3=Hay 4 tipos de Necronomicones dentro del Abyssalnomicon:El Necronomicon,El abyssal Wasteland Necronomicon,El Necronomicon del Dreadlands y El Necronomicon del Omothol,cada uno con el conocimiento unido a una dimensión específica.
+necronomicon.text.necronomicon.3=Hay 4 tipos de Necronomicones dentro del Abyssalnomicon:El Necronomicon,El Necronomicon del abyssal Wasteland,El Necronomicon del Dreadlands y El Necronomicon del Omothol,cada uno con el conocimiento unido a una dimensión específica.
 necronomicon.text.necronomicon.4=Con el fin de desbloquear el conocimiento,uno debe viajar a dicha dimensión y unir la autonomía del Necronomicon con la carne de ese mundo.El Abyssalnomicon contiene conocimientos adicionales que sólo conoce J'zahar,hombre de conocimiento que no estaba destinado a obtener.
 
-necronomicon.text.abyssalnomicon.1=Este es el Abyssalnomicon,un libro escrito por J'zahar,Guardián del abismo.El libro contiene el conocimiento de los 4 Necronomicones,como lo son en los capítulos de este libro.También hay un amplio conocimiento que no se menciona en los otros.
+necronomicon.text.abyssalnomicon.1=Este es el Abyssalnomicon,un libro escrito por J'zahar,Guardián del abyss.El libro contiene el conocimiento de los 4 Necronomicones,como lo son en los capítulos de este libro.También hay un amplio conocimiento que no se menciona en los otros.
 necronomicon.text.abyssalnomicon.2=A medida que el conocimiento acerca de los hechizos y rituales se limita a la dimensión especificada (y los anteriores,dependiendo del tipo de Necronomicon),el Abyssalnomicon,tiene todo el conocimiento recogido en un solo lugar,con cosas adicionales.
 
-necronomicon.text.abyssalcraft.1=AbyssalCraft es el mod en el cual el libro se utiliza para guiarle a través de su aventura.Se centra principalmente en la exploración, con 4 nuevas dimensiones que se pueden explorar.
+necronomicon.text.abyssalcraft.1=AbyssalCraft es el mod en el cual un libro se utiliza para guiarle a través de su aventura.Se centra principalmente en la exploración,con 4 nuevas dimensiones que se pueden explorar.
 necronomicon.text.abyssalcraft.2=Las dimensiones se alcanzan mediante el uso de "llaves de entrada",que son llaves diseñadas para crear portales entre dimensiones (la cuarta dimensión se alcanza al caer de la 3ª).
-necronomicon.text.abyssalcraft.3=El Overworld se ha ampliado con 6 nuevos biomas:El Darklands (normal,llanuras,bosques,super montañas, montañas) y el pantano infestado de Coralium.
+necronomicon.text.abyssalcraft.3=El Overworld se ha ampliado con 6 nuevos biomas:El Darklands (normal,llanuras,bosques,super montañas,montañas) y el pantano infestado de Coralium.
 necronomicon.text.abyssalcraft.4=También hay 5 nuevos tipos de piedra y 15 nuevos minerales que se encuentran en todo el Overworld y las dimensiones.
 necronomicon.text.abyssalcraft.5=Además de explorar,AbyssalCraft presenta su propio tipo de magia,a través del uso de rituales con el fin de adorar a Los Grandes Antiguos.
 necronomicon.text.abyssalcraft.6=Aparte de la magia y la exploración,también hay máquinas,lo que le permite transmutar,cristalizar y materializar objetos.También hay un grabador de monedas.
@@ -288,8 +288,8 @@ necronomicon.text.shub-niggurath.2=Ella es una deidad de la fertilidad perversa,
 necronomicon.text.cthulhu.1=Cthulhu es un Gran Antiguo,atrapado en un sueño sin fin debajo del mar en la ciudad de R'lyeh.
 necronomicon.text.cthulhu.2=Él tiene la cabeza de un pulpo,y un cuerpo escamoso con alas en su espalda.Su estado de sueño sin fin viene de una guerra contra los seres Elder,que terminó con R'lyeh se hunde hasta el fondo del mar.Un día se levantará para gobernar sobre la tierra.
 necronomicon.text.hastur.1=Hastur,lo indecible,es un Gran Antiguo y el medio hermano de Cthulhu.
-necronomicon.text.hastur.2=No se sabe mucho acerca de Hastur,pero se sabe que toma la forma de un rey en trajes amarillos,con una máscara. Como la mayoría de Grandes Antiguos,que es capaz de tomar cualquier forma que él desea.
-necronomicon.text.jzahar.1=J'zahar,Guardián del Abyss, es el descendiente bastardo de Hastur.
+necronomicon.text.hastur.2=No se sabe mucho acerca de Hastur,pero se sabe que toma la forma de un rey en trajes amarillos,con una máscara.Como la mayoría de Grandes Antiguos,que es capaz de tomar cualquier forma que él desea.
+necronomicon.text.jzahar.1=J'zahar,Guardián del Abyss,es el descendiente bastardo de Hastur.
 necronomicon.text.jzahar.2=Que tiene un deseo de poder,y no quiere el exilio a las estrellas,J'zahar extendió más allá del tiempo y el espacio para lograr su libertad.Los resultados fueron los poderes similares a los de Yog-Sothoth,y el castigo de guardar eternamente sus compañeros presos.
 
 necronomicon.text.greatoldones=Antes de las edades del hombre,el universo estaba gobernado por una raza de antiguos dioses demoníacos conocidos como "Los Grandes Antiguos".Hace eones debido a un conflicto,todos estos seres están presos,lejos donde nadie ha puesto un pie.
@@ -304,7 +304,7 @@ necronomicon.text.darkrealm=En El Omothol se encuentra el Reino en el que las al
 
 necronomicon.text.miscinformation=En esta sección se puede encontrar información variada que no se menciona en ningún otro lugar en el Necronomicon.
 
-necronomicon.text.materials.abyssalnite.1=Abyssalnite es un nuevo mineral que se encuentra en biomas de Darklands. Es más fuerte que los diamantes, y se puede utilizar para crear herramientas, armas y armaduras. Se puede encontrar más adelante y = 32.
+necronomicon.text.materials.abyssalnite.1=Abyssalnite es un nuevo mineral que se encuentra en biomas de Darklands. Es más fuerte que los diamantes, y se puede utilizar para crear herramientas, armas y armaduras. Se puede encontrar más adelante y=32.
 necronomicon.text.materials.abyssalnite.2=Cuando es picado,caen bloques de mineral para fundir lingotes.Los lingotes son de color púrpura,al igual que el propio mineral.
 necronomicon.text.materials.darkstone.1=Darkstone es un nuevo tipo de piedra que se encuentran en biomas de de Darklands.La mayoría de las Montañas de Darklands están hechos de esta piedra.El reino de la oscuridad también se compone de este material.
 necronomicon.text.materials.darkstone.2=Cuando es picado,cae Darkstone de adoquines,y se puede convertir en ladrillos,los ladrillos son llamados ladrillos de Darkstone.Este material es 20% más fuerte que la piedra regular,y se puede utilizar para hacer herramientas que son 20% más fuertes que sus contrapartes.
@@ -316,21 +316,21 @@ necronomicon.text.materials.nitre.1=El nitre es un nuevo mineral encontrado al a
 necronomicon.text.materials.nitre.2=Este material probablemente tendrá usos adicionales en el futuro.
 necronomicon.text.materials.liquidantimatter.1=La antimateria líquida es un líquido recién encontrada bajo tierra en los pantanos infestados de Coralium.Tiene la capacidad de de-materializar entidades,y también puede obligar a otros líquidos a solidificarse tras una colisión.
 necronomicon.text.materials.liquidantimatter.2=Si le sucede que cae en un charco de antimateria líquida,es probable que muera dentro de aproximadamente 5 segundos,ya que se trata de una gran cantidad de daño en un tiempo muy corto,por lo que es bastante difícil de evitar una muerte segura al entrar en contacto con ella.
-necronomicon.text.materials.darklandsgrass.1=Hierba oscura es un nuevo tipo de hierba que se encuentra en los biomas de Darklands.En comparación con la hierba regular,éste es de color púrpura y emite partículas del portal del nether al azar.
-necronomicon.text.materials.darklandsgrass.2=Otra diferencia es que no se puede plantar árboles regulares en él,sólo a los incorporados en AbyssalCraft (Roble de Darklands,árbol Dreadlands).Sin embargo,flores,hierba alta y setas crecerán aquí.
+necronomicon.text.materials.darklandsgrass.1=Hierba oscura es un nuevo tipo de hierba que se encuentra en los biomas del Darklands.En comparación con la hierba regular,éste es de color púrpura y emite partículas del portal del nether al azar.
+necronomicon.text.materials.darklandsgrass.2=Otra diferencia es que no se puede plantar árboles regulares en él,sólo a los incorporados en AbyssalCraft (Roble de Darklands,árbol del Dreadlands).Sin embargo,flores,hierba alta y setas crecerán aquí.
 necronomicon.text.materials.abyssalstone.1=La piedra Abyssal es un nuevo tipo de piedra,tambien el Abyssal Wasteland esta hecho de la piedra abyssal.Es necesario herramientas de hierro o mejor para romperlo.
 necronomicon.text.materials.abyssalstone.2=En comparación con otros tipos de piedra,que es resistente a la transmutación producida por el líquido de Coralium,y se puede convertir en ladrillos de piedra Abyssal.
-necronomicon.text.materials.abyssalores.1=Dentro del Abyssal Wasteland, se pueden encontrar versiones "abismales" de los minerales que se encuentran en el Overworld,que cae en una versión Abyssal en gotas que de su contraparte en el overworld,si no es el mismo.
-necronomicon.text.materials.abyssalores.2=Hay una versión Abyssal de hierro,oro,diamantes,cobre,estaño y minerales de nitre.Que se generan en una altura similar a la del overworld.
+necronomicon.text.materials.abyssalores.1=Dentro del Abyssal Wasteland,se pueden encontrar versiones "abismales" de los minerales que se encuentran en el Overworld,que cae en una versión Abyssal en gotas que de su contraparte en el overworld,si no es el mismo.
+necronomicon.text.materials.abyssalores.2=Hay una versión Abyssal de hierro,oro,diamantes,cobre,estaño y mineral de nitre.Que se generan en una altura similar a la del overworld.
 necronomicon.text.materials.abyssalcoralium.1=El Coralium Abyssal es una variante de Coralium que se encuentra dentro del Abyssal Wasteland.Es casi idéntico a su versión para el overworld.
-necronomicon.text.materials.abyssalcoralium.2=Al igual que el ordinario de Coralium Ore,el mineral de Coralium Abyssal deja caer Gemas de Coralium,que tiene múltiples usos. Se genera alrededor de Y = 55 y por debajo.
+necronomicon.text.materials.abyssalcoralium.2=Al igual que la ordinaria mena de Coralium,el mineral de Coralium Abyssal deja caer Gemas de Coralium,que tiene múltiples usos.Se genera alrededor de Y=55 y por debajo.
 necronomicon.text.materials.liquifiedcoralium.1=El Coralium licuado es una variante de Coralium que se encuentra dentro del Abyssal Wasteland.En comparación con las otras variantes,no da Perlas de Coralium al ser picado.
-necronomicon.text.materials.liquifiedcoralium.2=Cuando es picado,el mineral puede ser fundido para obtener lingotes de Coralium refinados.Se  Genera alrededor de Y = 22 y por debajo.
+necronomicon.text.materials.liquifiedcoralium.2=Cuando es picado,el mineral puede ser fundido para obtener lingotes de Coralium refinados.Se  Genera alrededor de Y=22 y por debajo.
 necronomicon.text.materials.pearlescentcoralium.1=El Coralium Perlado es una variante de Coralium que se encuentra dentro del abyssal Wasteland.Esta variante da perlas de Coralium cuando es picado,en lugar de Gemas de Coralium.
-necronomicon.text.materials.pearlescentcoralium.2=Debido al elemento ganado de la mena,es muy raro,y se genera alrededor de Y = 10 y por debajo.
+necronomicon.text.materials.pearlescentcoralium.2=Debido al elemento ganado de la mena,es muy raro,y se genera alrededor de Y=10 y por debajo.
 necronomicon.text.materials.liquidcoralium.1=El Coralium líquido  es un líquido que se encuentra dentro del nuevo Abyssal Wasteland.Tiene la capacidad de transmutar los elementos en contacto,como en la conversión de cualquier líquido a base de agua en sí misma,y la mayoría de los tipos de piedra en Piedra abyssal.
-necronomicon.text.materials.liquidcoralium.2=También infecta a entidades que toca con la plaga de Coralium,matandolos a ellos si no son inmunes.Algunas entidades pueden ser convertidos en Abyssal Zombis sobre la muerte.Si el líquido choca con líquido antimateria,se convertirá en piedra de Coralium.
-necronomicon.text.materials.powerstonedreadlands.1=Dreadlands infused Powerstone es una piedra especial que se encuentra en lo profundo de las fortalezas abisales.Es necesario un pico más fuerte o igual a un pico de Coralium refinado con el fin de extraerlo.
+necronomicon.text.materials.liquidcoralium.2=También infecta a entidades que toca con la plaga de Coralium,matandolos a ellos si no son inmunes.Algunas entidades pueden ser convertidos en Abyssal Zombis sobre la muerte.Si el líquido choca con antimateria líquida,se convertirá en piedra de Coralium.
+necronomicon.text.materials.powerstonedreadlands.1=Dreadlands infused Powerstone es una piedra especial que se encuentra en lo profundo de las fortalezas abyssales.Es necesario un pico más fuerte o igual a un pico de Coralium refinado con el fin de extraerlo.
 necronomicon.text.materials.powerstonedreadlands.2=Si usted choca con él,recibirá la temible plaga.Una vez extraído,se puede utilizar para actualizar su llave de entrada si usted tiene los otros componentes.
 necronomicon.text.materials.dreadstone.1=Dreadstone es una piedra que se encuentran comúnmente en el Dreadlands.Era antes Abyssinia piedra que fue convertida por la plaga del horror eones atrás.Puede convertirla en ladrillos de Dreadstone.
 necronomicon.text.materials.dreadstone.2=También se utiliza en el momento de elaborar el Altar de Cho'gath.
@@ -341,40 +341,40 @@ necronomicon.text.materials.dreadlandsabyssalnite.2=Irónicamente,en base a las c
 necronomicon.text.materials.dreadedabyssalnite.1=Dreaded Abyssalnite es una variante del Abyssalnite encontrado en el Dreadlands.El mineral obtenido al ser picado puede ser fundido para obtener lingotes de Abyssalnite.
 necronomicon.text.materials.dreadedabyssalnite.2=Si cristaliza este mineral,se puede obtener cristales de Dreadium,ya que esta forma de Abyssalnite ha sido corrompido por la temible plaga.
 necronomicon.text.materials.dreadlandsgrass.1=La hierba del Dreadlands es un tipo de hierba que crece en el bioma Dreadlands forestal dentro del Dreadlands.En comparación con la hierba regular,es de color rojo
-necronomicon.text.materials.dreadlandsgrass.2=Sólo los Árboles de Dreadlands y el roble Darklands pueden crecer en esta hierba.
+necronomicon.text.materials.dreadlandsgrass.2=Sólo los Árboles del Dreadlands y el Roble del Darklands pueden crecer en esta hierba.
 necronomicon.text.materials.dreadlandstree.1=El árbol del Dreadlands es un árbol se encuentra comúnmente en el bioma Dreadlands forestal dentro del Dreadlands.Esta madera puede ser utilizada para hacer tablones,que se pueden utilizar para elaborar escaleras,losas y vallas.
 necronomicon.text.materials.dreadlandstree.2=En comparación con el roble,tanto las hojas como el tronco son de color rojo.
-necronomicon.text.materials.omotholstone.1=La piedra de Omothol es un nuevo tipo de piedra,la cual se encuentra mayormente en el Omotol ya que esta hecho de esa piedra.Se puede combinar con Ethaxium para crear Ethaxium oscuro.
+necronomicon.text.materials.omotholstone.1=La piedra del Omothol es un nuevo tipo de piedra,la cual se encuentra mayormente en el Omotol ya que esta hecho de esa piedra.Se puede combinar con Ethaxium para crear Ethaxium oscuro.
 necronomicon.text.materials.omotholstone.2=
-necronomicon.text.materials.ethaxium.1=Ethaxium es un nuevo material que comúnmente aparece en el Omothol como el material utilizado para las estructuras construidas allí. El Ethaxium es extremadamente difícil de romper,y por lo tanto sólo puede ser destruido con herramientas hechas del mismo material.
-necronomicon.text.materials.ethaxium.2=Ethaxium se dice que, es de lo que estan hechas almas,lo que probablemente explica por qué es casi indestructible.No es de extrañar que J'zahar construyó su templo de la ciudad de este material.
+necronomicon.text.materials.ethaxium.1=El Ethaxium es un nuevo material que comúnmente aparece en el Omothol como el material utilizado para las estructuras construidas allí. El Ethaxium es extremadamente difícil de romper,y por lo tanto sólo puede ser destruido con herramientas hechas del mismo material.
+necronomicon.text.materials.ethaxium.2=El Ethaxium se dice que, es de lo que estan hechas las almas,lo que probablemente explica por qué es casi indestructible.No es de extrañar que J'zahar construyó su templo de la ciudad de este material.
 necronomicon.text.materials.darkethaxium.1=Ethaxium oscuro es una versión más fuerte de Ethaxium creado por la combinación Ethaxium regular con la piedra de Omothol.Este tipo de Ethaxium es más fuerte que su version normal.
 necronomicon.text.materials.darkethaxium.2=Este material se utiliza solamente en una sola estructura,el templo de J'zhar.
-necronomicon.text.materials.ritualaltar.1=El ritual del altar es el componente principal en la realización de rituales.Se usa presionando SHIFT mas clic-derecho con un Necronomicón que tenga la suficiente energía potencial.Para rituales exitosos,los pedestales cercanos al ritual necesitarán las ofrendas correctas puestas en ellas.
+necronomicon.text.materials.ritualaltar.1=El ritual del altar es el componente principal en la realización de rituales.Se usa presionando SHIFT mas clic-derecho con un Necronomicón que tenga la suficiente Energía Potencial.Para rituales exitosos,los pedestales cercanos al ritual necesitarán las ofrendas correctas puestas en ellas.
 necronomicon.text.materials.ritualpedestal.1=Los pedestales de ritual se utilizan para colocar las ofrendas al realizar rituales.Esto se realiza mediante la interacción con el pedestal mientras se mantiene la oferta que desea colocar.
-necronomicon.text.materials.monolithstone.1=Monolito de piedra es un material utilizado en cierta medida con la energía potencial.Sus orígenes son desconocidos,aparte de que Shoggoths son capaces de crearlo.Se puede obtener a partir de los monolitos o en guridas de Shoggoth esparcidas.
+necronomicon.text.materials.monolithstone.1=El Monolito de piedra es un material utilizado en cierta medida con la energía potencial.Sus orígenes son desconocidos,aparte de que los Shoggoths son capaces de crearlo.Se puede obtener a partir de los monolitos o en guridas de Shoggoth esparcidas.
 
-necronomicon.text.crafting.coraliuminfusedstone.1=Coralium Infused Stone se hace a mano con Gemas de Coralium,Clústeres y piedra. Los tres grupos pueden ser de cualquier tamaño, pero debe ser igual a 9.
-necronomicon.text.crafting.coraliuminfusedstone.2=Si se utiliza un grupo 9-joyas,rodealo de bloques de piedra en lugar de 2 filas.Cuando este bloque se rompe (o se funde) se obtiene una Perla de Coralium.
+necronomicon.text.crafting.coraliuminfusedstone.1=La Coralium Infused Stone se hace a mano con Gemas de Coralium,Clústeres y piedra. Los tres grupos pueden ser de cualquier tamaño, pero debe ser igual a 9.
+necronomicon.text.crafting.coraliuminfusedstone.2=Si se utiliza un grupo de 9-joyas,rodealo de bloques de piedra en lugar de 2 filas.Cuando este bloque se rompe (o se funde) se obtiene una Perla de Coralium.
 necronomicon.text.crafting.shadowgem.1=Una Gema Oscura se craftea con los fragmentos de una Gema Oscura.Los fragmentos se craftean de la misma manera,pero con Fragmentos de Oscuridad.
 necronomicon.text.crafting.shadowgem.2=Los Fragmentos de Oscuridad son droppeados por las criaturas de sombra,los Fragmentos de la Gema Oscura las dejan caer los Monstruos Oscuros y las Gemas Oscuras las dejan caer las Bestias Oscuras.Ellos estan en el bioma de Montaña de Darklands y el Reino de la Oscuridad.
 necronomicon.text.crafting.oblivionshard=Un fragmento del Olvido se hace con Gemas Oscuras y una Gema de Transmutación.
 necronomicon.text.crafting.gk1=La llave de entrada se hace con baritas de Blaze,Perlas de Coralium y un catalizador del Olvido.
-necronomicon.text.crafting.necro_c=El Abyssal Wasteland Necronomicon se hace con la piel del Abyssal Wasteland y un Necronomicon.Contiene más conocimiento.
+necronomicon.text.crafting.necro_c=El Necronomicon del Abyssal Wasteland se hace con la piel del Abyssal Wasteland y un Necronomicon.Contiene más conocimiento.
 necronomicon.text.crafting.psdltracker=Un Powerstone Tracker se hace con Gemas Coralium y un ojo de Ender.
-necronomicon.text.crafting.necro_d=Un Dreadlands Necronomicon se hace con piel del Dreadlands y un Abyssal Wasteland Necronomicon.
-necronomicon.text.crafting.transmutator.1=Un Transmutador se hace con ladrillos Coralium,Bloques de refinados de Coralium,una joya Transutacion y un Coralium líquido en un cubo.
+necronomicon.text.crafting.necro_d=Un Necronomicon del Dreadlands se hace con piel del Dreadlands y un Necronomicon del Abyssal Wasteland.
+necronomicon.text.crafting.transmutator.1=Un Transmutador se hace con ladrillos de Coralium,Bloques de refinados de Coralium,una joya de Transutacion y Coralium líquido en un cubo.
 necronomicon.text.crafting.transmutator.2=Para obtener ladrillos de Coralium,debe verter el líquido en Antimateria líquida de Coralium,a continuación,recoge la piedra formada a partir del líquido de Coralium.Luego,debe fundir la piedra de Coralium para los lingotes de Coralium.
 necronomicon.text.crafting.crystallizer.1=Un cristalizador se hace utilizando ladrillos de Dreadstone, bloques de Dreadium y un horno.
-necronomicon.text.crafting.crystallizer.2=Los Lingotes de Dreadium se obtienen transmutando Fragmentos de Dreaded Abyssalnite, que se redujo en el interior de los Dreadguards Dreadlands. El Dreadium es mucho más fácil de obtener una vez que tenga un cristalizador.
-necronomicon.text.crafting.necro_o=El Omothol Necronomicon se hace a mano con piel de Omothol y un Necronomicon del Dreadlands.
-necronomicon.text.crafting.lifecrystal.1=Un cristal De La vida se hace con cristales de Carbon, un Hidrógeno, un Nitrógeno, un Oxígeno, un Fósforo y un Azufre .
-necronomicon.text.crafting.lifecrystal.2=Los cristales se obtienen a partir de la cristalización de Carbón, Agua, Nitre, Carne Podrida y Lapislázuli. El Cristal de Nitrógeno proviene de la cristalización del Cristal de Nitrato de la Nitre.
+necronomicon.text.crafting.crystallizer.2=Los Lingotes de Dreadium se obtienen transmutando Fragmentos de Dreaded Abyssalnite, que se redujo en el interior de los Dreadguards del Dreadlands.El Dreadium es mucho más fácil de obtener una vez que tenga un cristalizador.
+necronomicon.text.crafting.necro_o=El Necronomicon del Omothol se hace a mano con piel del Omothol y un Necronomicon del Dreadlands.
+necronomicon.text.crafting.lifecrystal.1=Un cristal De La vida se hace con cristales de Carbon,Hidrógeno,Nitrógeno,Oxígeno,Fósforo y Azufre .
+necronomicon.text.crafting.lifecrystal.2=Los cristales se obtienen a partir de la cristalización de Carbón,Agua,Nitre,Carne Podrida y Lapislázuli.El Cristal de Nitrógeno proviene de la cristalización del Cristal de Nitrato de la Nitre.
 necronomicon.text.crafting.ethaxiumingot.1=Un lingote de Ethaxium se hace a mano con ladrillos de Ethaxium y un Cristal De La Vida.
 necronomicon.text.crafting.ethaxiumingot.2=Los Ladrillos de Ethaxium se obtienen a partir del horneado del Ethaxium, que se obtiene por la transmutación de La Piedra del Fin. Los lingotes de Ethaxium también pueden ser elaborados con un Catalizador Del Olvido rodeado por 4 ladrillos de Ethaxium, escatimar 4 de ladrillos Ethaxium.
 necronomicon.text.crafting.engravingblank.1=Una Moneda de Grabado se hace con losas de piedra y un lingote de hierro.
-necronomicon.text.crafting.engravingblank.2=Hay 4 Grabados de Moneda: En Blanco, Cthulhu, Elder y J'zahar. Requiere actualizar la Plantilla de Grabado (en el orden anterior), requiere un lingote de Ethaxium.
-necronomicon.text.crafting.coin=Una Moneda se hace con un pedernal y lingotes de hierro. También se pueden fabricar con estaño y lingotes de cobre.
+necronomicon.text.crafting.engravingblank.2=Hay 4 Grabados de Moneda: En Blanco,Cthulhu,Elder y J'zahar.Requiere actualizar la Plantilla de Grabado (en el orden anterior),requiere un lingote de Ethaxium.
+necronomicon.text.crafting.coin=Una Moneda se hace con un pedernal y lingotes de hierro.También se pueden fabricar con estaño y lingotes de cobre.
 necronomicon.text.crafting.engraver=Un Grabador se hace Piedra, una Palanca, un Yunque y una Moineda de Grabado en Blanco.
 necronomicon.text.crafting.crystalbag.1=Una Bolsa de Cristal se hace con cuero y un lingote de oro.
 necronomicon.text.crafting.crystalbag.2=Se pueden actualizar rodeándolo con Piel del Abyssal Wasteland,Piel del Dreadlands,y a continuación,la Piel de Omothol.
@@ -419,29 +419,29 @@ necronomicon.text.crafting.washcloth=Una Toalla de Limpiar se hace con lana y te
 necronomicon.text.crafting.mre=Un MRE (comida, listo para comer) se hace con un plato de de hierro,una zanahoria,una patata y un filete.Tiene la capacidad de llenar la barra de comida entera.
 necronomicon.text.crafting.platefood=Cualquier alimento Vanilla (y huevos fritos) combinados con un plato de hierro crearán alimentos en un plato (que tiene el doble de la saturación de la normal).Devuelve un plato sucio cuando se come.
 necronomicon.text.crafting.odbcore=Un núcleo ODB se hace con lingotes de Abyssalnite,lingotes de hierro,bloques de hierro y una Perla de Coralium.Puede ser utilizado como explosivo.
-necronomicon.text.crafting.odb=Una Deathbomb del olvido se hace con obsidiana,un núcleo ODB,un Catalyst del Olvido,un cubo de Coralium líquido y un cubo de Antimateria líquida. Muy explosivo.
-necronomicon.text.crafting.carboncluster=Un Cluster de Carbono se hace con carbón cristalizado.Se utilizan con el fin de elaborar Clusters de Carbono Denso.
-necronomicon.text.crafting.densecarboncluster=Los clusteres de carbono denso se hacen con Clusters de Carbono y un bloque de obsidiana.Puede ser transmutado en un diamante.
+necronomicon.text.crafting.odb=Una Deathbomb del olvido se hace con obsidiana,un núcleo ODB,un Catalizador del Olvido,un cubo de Coralium líquido y un cubo de Antimateria líquida.Muy explosivo.
+necronomicon.text.crafting.carboncluster=Un Trozo de Carbono se hace con carbón cristalizado.Se utilizan con el fin de elaborar Trozos de Carbono Denso.
+necronomicon.text.crafting.densecarboncluster=Los Trozos de Carbono Denso se hacen con Trozos de Carbono y un bloque de obsidiana.Puede ser transmutado en un diamante.
 necronomicon.text.crafting.crate=Una Caja de Madera se hace con palos,madera y un Cofre.Tiene una fila adicional de inventario,más que un cofre.
 
-necronomicon.text.enchantment.coralium=The Coralium Enchantment allows you to infect any entity you hit with the Coralium Plague (that is, if they aren't immune). Can only be obtained through a ritual.
-necronomicon.text.enchantment.dread=The Dread Enchantment allows you to infect any entity you hit with the Dread Plague (that is, if they aren't immune). Can only be obtained through a ritual.
+necronomicon.text.enchantment.coralium=El encantamiento de Coralium le permite infectar cualquier entidad que se golpea con la plaga de Coralium (es decir, si no son inmunes).
+necronomicon.text.enchantment.dread=El encantamiento de Dread le permite infectar cualquier entidad que se golpea con la plaga de Dread (es decir, si no son inmunes).
 necronomicon.text.enchantment.lightpierce=El encantamiento de La Luz de Pierce funciona como Perdición de los artrópodos,pero en los mobs oscuros.
 necronomicon.text.enchantment.ironwall=El encantamiento de Pared de Hierro funciona como Protección,repeliendo los ataques cuando es golpeado.
 
-necronomicon.text.overworld.progression.1=Con el fin de llegar a Abyssal Wasteland,hay que elaborar una Llave de Entrada,lo que requiere un viaje al Nether,y para visitar El Darklands y un bioma a base de agua.El bioma a base de agua puede ser un pantano o un bioma marino.
-necronomicon.text.overworld.progression.2=Desde el Nether se necesita 2 baritas de Blaze,y probablemente un poco más para más adelante.Desde el bioma Darklands que necesita para matar a las sombras que viven para obtener finalmente las Gemas Oscuras.Se encuentran más comúnmente en los biomas de Montañas del Darklands.Se recomienda obtener un Bastón del Rending con el fin de obtener las Gemas Oscuras más rápido (más información en la sección de armaduras y herramientas especiales).
-necronomicon.text.overworld.progression.3=Desde el bioma a base de agua que necesitas Gemas de Coralium con el fin de crear Perlas de Coralium.Una vez que se cuente con estos elementos,puede comenzar el crafteo de Gemas de Transmutación (se necesitarán 4, y el exceso de Baritas de Blaze se utilizan para hacer polvo de esto).Recetas para este y Fragmentos del Olvido se pueden encontrar en la sección de materiales especiales.
+necronomicon.text.overworld.progression.1=Con el fin de llegar al Abyssal Wasteland,hay que elaborar una Llave de Entrada,lo que requiere un viaje al Nether,y para visitar El Darklands y un bioma a base de agua.El bioma a base de agua puede ser un pantano o un bioma marino.
+necronomicon.text.overworld.progression.2=Desde el Nether se necesita 2 baritas de Blaze,y probablemente un poco más para más adelante.Desde el bioma del Darklands se necesita para matar a las sombras que viven para obtener finalmente las Gemas Oscuras.Se encuentran más comúnmente en las Montañas del Darklands.Se recomienda obtener un Bastón del Rending con el fin de obtener las Gemas Oscuras más rápido (más información en la sección de armaduras y herramientas especiales).
+necronomicon.text.overworld.progression.3=Desde el bioma a base de agua necesitas Gemas de Coralium con el fin de crear Perlas de Coralium.Una vez que se cuente con estos elementos,puede comenzar el crafteo de Gemas de Transmutación (se necesitarán 4, y el exceso de Baritas de Blaze se utilizan para hacer polvo de esto).Recetas para este y Fragmentos del Olvido se pueden encontrar en la sección de materiales especiales.
 necronomicon.text.overworld.progression.4=Cuando tiene 4 Fragmentos del Olvido,utiliza esos y 4 de Redstone para infundir un ojo de Ender (a través de un ritual de infusión,que se encuentra en la sección ritual del Necronomicón) con el fin de crear un Catalizador del Olvido,el componente principal de la Llave de Entrada (la sección de materiales especial tiene la receta).
-necronomicon.text.overworld.progression.5=Una vez que la Llave de Entrada es crafteada,simplemente haga clic derecho en el suelo para formar un portal.Para obtener más información,se necesita el Abyssal Wasteland Necronomicon,que requiere 8 pieles del Abyssal Wasteland con el fin de actualizar.Se necesita el Bastón del Rending con el fin de obtener esencias utilizadas para elaborarlas.
+necronomicon.text.overworld.progression.5=Una vez que la Llave de Entrada es crafteada,simplemente haga clic derecho en el suelo para formar un portal.Para obtener más información,se necesita el Necronomicon del Abyssal Wasteland,que requiere 8 pieles del Abyssal Wasteland con el fin de actualizar.Se necesita el Bastón del Rending con el fin de obtener esencias utilizadas para elaborarlas.
 
 necronomicon.text.abyssal.progression.1=Una vez que haya llegado al Abyssal Wasteland,su próximo objetivo es llegar al Dreadlands.Se necesitan 3 componentes con el fin de actualizar su Llave de Entrada,un Ojo del Abyss,una infusión del Dreadlands Powerstone y una Gema de Transmutación.La primera se obtiene al derrotar a Asorah,El Caído,convocado por el ritual de "ritual del durmiente" (en la sección ritual).
 necronomicon.text.abyssal.progression.2=Asorah utiliza dragones espectrales para curarse a sí mismo,por lo que se deben retirar rápidamente a través de la lucha.Una vez derrotado,Asorah bajará su ojo con una gran cantidad de exp y los materiales encontrados en la dimensión.La infusión del Dreadlands Powerstone se encuentra dentro de una Fortaleza Abyssal,que se puede encontrar utilizando Powerstone Trackers (receta en la sección de materiales especiales).
-necronomicon.text.abyssal.progression.3=Una vez que haya localizado el Powerstone,puede extraerlo con un Pico de Coralium Refinado.Por último se puede actualizar la Llave de Entrada mediante la infusión con los componentes necesarios ("Llave de Entrada de Dreaded Asorah" rituales). Actualiza tu Necronomicon al Necronomicon del Dreadlands requiere 8 pieles del Dreadlands.
+necronomicon.text.abyssal.progression.3=Una vez que haya localizado el Powerstone,puede extraerlo con un Pico de Coralium Refinado.Por último se puede actualizar la Llave de Entrada mediante la infusión con los componentes necesarios ("Llave de Entrada Dreaded de Asorah" rituales). Actualiza tu Necronomicon al Necronomicon del Dreadlands requiere 8 pieles del Dreadlands.
 
-necronomicon.text.dreadlands.progression.1=Once you have reached the Dreadlands, your next goal is to reach Omothol. You will need to own a Transmutator, and you need to defeat Cha'garoth, The Dreadbeast. In order to reach Cha'garoth, you need the Altar of Cha'garoth, made out of 2 pieces. Both pieces are created through rituals.
-necronomicon.text.dreadlands.progression.2=Una vez que tenga las dos piezas de altar,es necesario colocarlos en Y = 40 dentro del bioma de Montaña del Dreadlands y haga clic en él.Si lo hace,se autorizará la entrada a la guarida de Cha'garoth.Después de luchar con Dreadguards y eventualmente matando a Cha'garoth,recibirá una Llave de Entrada plagada-Dread,junto con el botín.La Llave necesita ser transmutada una funcional. 
-necronomicon.text.dreadlands.progression.3=Con el mencionado Transmutador (receta en la sección de materiales especiales Abyssal Wasteland) puede transmutar la Llave de Entrada plagada-Dread en Cha'garoth de la Llave de Entrada de R'lyehian,la concesión de acceso al Omothol.Actualización del Necronomicon al Necronomicon del Omothol requiere 8 Pieles de Omothol.
+necronomicon.text.dreadlands.progression.1=Una vez que haya alcanzado los Dreadlands, su próximo objetivo es llegar a Omothol. Tendrá que poseer un Transmutador, y que necesita para derrotar a Cha'garoth, La Dreadbeast. Con el fin de llegar a Cha'garoth, necesita el Altar de Cha'garoth, hecha de 2 piezas. Ambas piezas se crean a través de rituales.
+necronomicon.text.dreadlands.progression.2=Una vez que tenga las dos piezas de altar,es necesario colocarlos en Y=40 dentro del bioma de Montaña del Dreadlands y haga clic en él.Si lo hace,se autorizará la entrada a la guarida de Cha'garoth.Después de luchar con Dreadguards y eventualmente matando a Cha'garoth,recibirá una Llave de Entrada plagada-Dread,junto con el botín.La Llave necesita ser transmutada una funcional. 
+necronomicon.text.dreadlands.progression.3=Con el mencionado Transmutador (receta en la sección de materiales especiales Abyssal Wasteland) puede transmutar la Llave de Entrada plagada de Dread en Cha'garoth de la Llave de Entrada de R'lyehian,la concesión de acceso al Omothol.Actualización del Necronomicon al Necronomicon del Omothol requiere 8 Pieles de Omothol.
 
 necronomicon.text.omothol.progression.1=Al llegar al Omothol,es el momento de luchar con J'zahar,Guardián del Abyss.El templo de J'zahar puede estar situado en el corazón del Omothol (coordenadas X=4, Y=53, Z=7).Una vez que haya vencido al Guardián de la Puerta,usted será capaz de desbloquear todo el conocimiento oculto a través del Abyssalnomicon.
 necronomicon.text.omothol.progression.2=El Abyssalnomicon requiere Lingotes de Ethaxium,Escalas de Eldritch y la esencia del Guardián de la Puerta (Dado por J'zahar).
@@ -516,14 +516,14 @@ necronomicon.text.rituals.3=Para crear el altar,sólo tiene que colocar los bloqu
 necronomicon.text.rituals.4=Después de eso, usted puede comenzar a realizar rituales! Con el fin de realizar un ritual, coloque objetos sobre los pedestales y presionando shift-clic derecho en el altar con un Necronomicon.
 necronomicon.text.rituals.5=Al realizarse el ritual los pedestales lanzan humo hacia el altar.Rituales donde ganará objetos siempre terminan con un rayo golpeando el altar.
 necronomicon.text.rituals.6=La energía potencial es necesaria con el fin de realizar rituales (cada ritual muestra la cantidad que necesita).La energía potencial es una forma pura de energía sin explotar que se origina a partir de un plano superior de existencia.Se utiliza principalmente para alimentar sacrificios hechos a los Grandes Antiguos (cualquier ritual).Estatuas colocadas en los monolitos de los shoggoth,se dice que son capaz de drenar la misma.
-necronomicon.text.rituals.7=Some rituals require a living sacrifice. This means you need to have an Entity within close proximity of the altar and pedestals. If the Entity is of the correct type (living, adult, something a Lesser Shoggoth would eat) a bolt of lightning will kill it, and the ritual will begin. Failing to complete a ritual will trigger a Disruption, which is bad.
+necronomicon.text.rituals.7=Algunos rituales requieren un sacrificio.Esto significa que necesita tener una Entidad muy cerca del altar y de los pedestales.Si la entidad es del tipo correcto (de vida,adulto,algo un Shoggoth menor comería) un rayo lo matara,y el ritual se iniciará.El no poder completar un ritual dará lugar a una interrupción,lo cual es malo.
 
 necronomicon.text.pe.1=Energía potencial (EP) es una nueva forma de energía que se presenta en AbyssalCraft.Se origina a partir de un plano superior de existencia (donde ningún mortal se ha extraviado),y sólo se pueden recoger con la exploración de ley de líneas utilizando diversos métodos.Existen objetos capaces de hacerlo,que serán explicados aquí.
 necronomicon.text.pe.2=Un buen lugar para comenzar la obtención de los materiales necesarios para crear algunos de los objetos de recolección de EP es en las Guaridas Shoggoth,que se encuentran en pantanos y ríos.
 necronomicon.text.pe.3=Los monolitos Shoggoth también se construyen con monolito de piedra (de ahí el nombre),al tiempo que tienen estatuas colocadas en ellos.Estas estatuas pueden recoger EP.
-necronomicon.text.pe.4=It should be noted that the Lesser Shoggoths only build these monoliths under certain conditions. Theorists claim it has to do with power positions (but they're genderless, and don't understand the concept of hieracrchy). If 6 (or more) Lesser Shoggoths are within 32 blocks of each other, one is prone to rise a monolith out of the ooze.
-necronomicon.text.pe.5=You should take into account that the Lesser Shoggoths have no limit on how many monoliths they construct, leading to a possible infestation.
-necronomicon.text.pe.6=If you notice Shoggoth activity near your homestead, it is highly adviced that you immediately evacuate your land, or construct a large wall (or other defensive measures) to ensure the infestation doesn't spread onto your land. Recovering your land from a Shoggoth infestation is quite difficult, so be cautious.
+necronomicon.text.pe.4=Cabe señalar que los Shoggoths Menores sólo construyen estos monolitos en determinadas condiciones. Los teóricos afirman que tiene que ver con las posiciones de poder (pero son sin género, y no entienden el concepto de hieracrchy). Si 6 (o más) menor Shoggoths estan un radio de 32 bloques el uno del otro,uno es propenso a subir un monolito fuera del exudado.
+necronomicon.text.pe.5=Se debe tener en cuenta que los Shoggoths Menores no tienen ningún límite en el número de monolitos que construyen, dando lugar a una posible infestación.
+necronomicon.text.pe.6=Si nota actividad Shoggoth cerca de su vivienda,se le aconseja evacuar inmediatamente de su tierra,o construir un muro grande (u otras medidas defensivas) para asegurar que la infestación no se propage en su tierra.La recuperación de la tierra de una infestación Shoggoth es bastante difícil,así que tenga cuidado.
 necronomicon.text.pe.7=Las estatuas vienen en diferentes formas,que representan a todos los Grandes Antiguos.De pie cerca de uno en posesión de un Necronomicon le permite el transporte EP a usted.
 necronomicon.text.pe.8=Cabe señalar que la cosecha de EP no se aprecia.Esto provoca interrupciones en el lugar (los mostrados por un rayo golpeando la estatua,u otro manipulador de EP).Las interrupciones son eventos aleatorios que pueden afectar al jugador,otras entidades o el medio ambiente.Su propósito es castigar a los que intenta drenar el EP desde el plano superior.
 necronomicon.text.pe.9=Una forma de aumentar la eficiencia de las estatuas y otros manipuladores (EP) es mediante el uso de rituales de encanto.Pueden impulsar varias estadísticas (comprobar la información sobre herramientas).
@@ -678,14 +678,14 @@ ac.ritual.jzaharStaff=Personal del Guardián de la Puerta
 ac.ritual.jzaharStaff.desc=Un Personal del Guardián de la Puerta se crea mediante la infusión de un Bastón del Rending con una Esencia del abyssal Wasteland,una Esencia del Dreadlands,una Esencia del Omothol,Escalas de Eldritch y Lingotes de Ethaxium.
 ac.ritual.respawnJzahar=Ritual de tiempo inverso
 ac.ritual.respawnJzahar.desc=Si de alguna manera no pudo obtener una Esencia del Guardián de la Puerta, puede volver en el tiempo y luchar con J'zahar de nuevo.Sólo puede ser realizado en el Ritual de Altar dentro del templo de J'zahar (X=4,Y=54,Z=85).
-ac.ritual.altarOfChagarothBottom=Altar of Cha'garoth (bottom)
-ac.ritual.altarOfChagarothBottom.desc=An Altar of Cha'garoth (bottom) is created with Dreadstone. Dreadium Ingots, Asorah's Dreaded Gateway Key, Bones and a piece of Dread Cloth.
-ac.ritual.altarOfChagarothTop=Altar of Cha'garoth (top)
-ac.ritual.altarOfChagarothTop.desc=An Altar of Cha'garoth (top) is created with Sticks, a Bucket, Dread Cloths and Dreadium Ingots.
-ac.ritual.corEnchantment=Coralium Infusion
-ac.ritual.corEnchantment.desc=By combining a Abyssal Wasteland Essence, Abyssal Shoggoth Flesh, Refined Coralium Ingots, Coralium-plagued Flesh and a Book, you can enchant a weapon placed on the altar with the Coralium enchantment (if applicable).
-ac.ritual.dreEnchantment=Dread Infusion
-ac.ritual.dreEnchantment.desc=By combining a Dreadlands Essence, Dreaded Shoggoth Flesh, Dreadium Ingots, Dread Fragments and a Book, you can enchant a weapon placed on the altar with the Dread enchantment (if applicable).
+ac.ritual.altarOfChagarothBottom=Altar de Cha'garoth (Parte de abajo)
+ac.ritual.altarOfChagarothBottom.desc=Un altar de Cha'garoth (Parte Inferior) se crea con una Dreadstone.Lingotes de Dreadium,Llave de Entrada Dreaded de Asorah's,huesos y un pedazo de tela Dread.
+ac.ritual.altarOfChagarothTop=Altar de Cha'garoth (Parte Superior)
+ac.ritual.altarOfChagarothTop.desc=Un altar de Cha'garoth (Parte Superior) se crea con palos,un cubo,Tela Dread y Lingotes de Dreadium.
+ac.ritual.corEnchantment=Infusión de Coralium
+ac.ritual.corEnchantment.desc=Mediante la combinación de una Esencia del Abyssal Wasteland,Carne de Shoggoth Abyssal,Lingotes de Coralium Refinado,Carne-Plagada de Coralium y un libro,puede encantar un arma colocada en el altar con el encanto Coralium (si es aplicable).
+ac.ritual.dreEnchantment=Infusión Dread
+ac.ritual.dreEnchantment.desc=Mediante la combinación de una Esencia del Dreadlands,Carne de Shoggoth Dread,Lingotes de Dreadium,Fragmentos de Dread y un libro,puede encantar un arma colocada en el altar con el encanto Dread (si es aplicable).
 
 #Configuration
 ac_dimensions=Dimensiones
@@ -747,7 +747,7 @@ tooltip.drainstaff.energy.3=Energía del Omothol
 tooltip.drainstaff.energy.4=Energía Oscura
 tooltip.gatekeeperessence.1=Un mero fragmento de J'zahar.
 tooltip.gatekeeperessence.2=Se puede sentir que pulsa con el poder.
-tooltip.decorativestatue=This block is purely for decoration, and won't do anything
+tooltip.decorativestatue=Este bloque es solo decorativo, y no hace nada
 
 #Creative Tabs
 itemGroup.acblocks=AbyssalCraft Bloques
@@ -847,8 +847,8 @@ tile.cstonebrickslab2.name=DobleLosa de Ladrillo de Coralium
 tile.cstonebrickstairs.name=Escaleras de Ladrillo de Coralium
 tile.cstonebutton.name=Botón de Piedra de Coralium
 tile.cstonepplate.name=Placa de Presión de Piedra de Coralium
-tile.dreadaltartop.name=Altar de Cha'garoth (arriba)
-tile.dreadaltarbottom.name=Altar de Cha'garoth (abajo)
+tile.dreadaltartop.name=Altar de Cha'garoth (Parte superior)
+tile.dreadaltarbottom.name=Altar de Cha'garoth (Parte inferior)
 tile.crystallizer.name=Cristalizador
 tile.dreadiumblock.name=Bloque de Dreadium
 tile.transmutator.name=Transmutador
@@ -914,8 +914,8 @@ tile.jzaharspawner.name=Bloque de Spawn de J'zahar
 tile.gatekeeperminionspawner.name=Bloque de spawn de Esbirro del Guardián de la Puerta
 
 #Pre/Postfixes
-decorativestatue.prefix=Decorative %s
-crystalcluster.postfix=%s Cluster
+decorativestatue.prefix=Decorativo %s
+crystalcluster.postfix=%s trozo
 
 #Items
 item.devsword.name=La Hoja Dev 
@@ -1010,8 +1010,8 @@ item.dreadiumshovel.name=Pala de Dreadium
 item.dreadiumsword.name=Espada de Dreadium
 item.dreadiumhoe.name=Azada de Dreadium
 item.dreadiumu.name=Kit de actualización de Dreadium
-item.carboncluster.name=Cluster de carbono
-item.densecarboncluster.name=Cluster de carbono denso
+item.carboncluster.name=Trozo de carbono
+item.densecarboncluster.name=Trozo de carbono denso
 item.methane.name=Metano
 item.nitre.name=Nitre
 item.sulfur.name=Sulfuro
@@ -1045,7 +1045,7 @@ item.dreadplate.name=Placa de Dreadium
 item.dreadblade.name=Hoja de la Katana de Dreadium
 item.dreadhilt.name=Empuñadura de la Katana de Dreadium
 item.dreadkatana.name=Katana de Dreadium
-item.dreadkey.name=Llave de Entrada Plagada-Dread 
+item.dreadkey.name=Llave de Entrada Plagada de Dread 
 item.gatewaykeyjzh.name=Llave de Entrada Cha'garoth's R'lyehian
 item.dreadiumsamuraihelmet.name=Casco de Samurai de Dreadium
 item.dreadiumsamuraiplate.name=Peto de Samurai de Dreadium

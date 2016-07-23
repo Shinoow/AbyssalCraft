@@ -13,7 +13,6 @@ package com.shinoow.abyssalcraft.common.structures.abyss.stronghold;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -79,41 +78,45 @@ public class MapGenAbyStronghold extends MapGenStructure
 	}
 
 	@Override
+	public BlockPos getClosestStrongholdPos(World worldIn, BlockPos pos)
+	{
+		if (!ranBiomeCheck)
+		{
+			checkBiomes();
+			ranBiomeCheck = true;
+		}
+
+		BlockPos blockpos = null;
+		BlockPos.MutableBlockPos blockpos$mutableblockpos = new BlockPos.MutableBlockPos(0, 0, 0);
+		double d0 = Double.MAX_VALUE;
+
+		for (ChunkCoordIntPair chunkcoordintpair : structureCoords)
+		{
+			blockpos$mutableblockpos.set((chunkcoordintpair.chunkXPos << 4) + 8, 32, (chunkcoordintpair.chunkZPos << 4) + 8);
+			double d1 = blockpos$mutableblockpos.distanceSq(pos);
+
+			if (blockpos == null)
+			{
+				blockpos = new BlockPos(blockpos$mutableblockpos);
+				d0 = d1;
+			}
+			else if (d1 < d0)
+			{
+				blockpos = new BlockPos(blockpos$mutableblockpos);
+				d0 = d1;
+			}
+		}
+
+		return blockpos;
+	}
+
+	@Override
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	protected boolean canSpawnStructureAtCoords(int par1, int par2)
 	{
 		if (!ranBiomeCheck)
 		{
-			Random var3 = new Random();
-			var3.setSeed(worldObj.getSeed());
-			double var4 = var3.nextDouble() * Math.PI * 2.0D;
-			int var6 = 1;
-
-			for (int var7 = 0; var7 < structureCoords.length; ++var7)
-			{
-				double var8 = (1.25D * var6 + var3.nextDouble()) * field_82671_h * var6;
-				int var10 = (int)Math.round(Math.cos(var4) * var8);
-				int var11 = (int)Math.round(Math.sin(var4) * var8);
-				ArrayList var12 = new ArrayList();
-				Collections.addAll(var12, allowedBiomeGenBases);
-				BlockPos var13 = worldObj.getWorldChunkManager().findBiomePosition((var10 << 4) + 8, (var11 << 4) + 8, 112, var12, var3);
-
-				if (var13 != null)
-				{
-					var10 = var13.getX() >> 4;
-				var11 = var13.getY() >> 4;
-				}
-
-				structureCoords[var7] = new ChunkCoordIntPair(var10, var11);
-				var4 += Math.PI * 2D * var6 / field_82672_i;
-
-				if (var7 == field_82672_i)
-				{
-					var6 += 2 + var3.nextInt(5);
-					field_82672_i += 1 + var3.nextInt(2);
-				}
-			}
-
+			checkBiomes();
 			ranBiomeCheck = true;
 		}
 
@@ -129,6 +132,52 @@ public class MapGenAbyStronghold extends MapGenStructure
 		}
 
 		return false;
+	}
+
+	private void checkBiomes()
+	{
+		int i = 0;
+
+		for (StructureStart structurestart : structureMap.values())
+			if (i < structureCoords.length)
+				structureCoords[i++] = new ChunkCoordIntPair(structurestart.getChunkPosX(), structurestart.getChunkPosZ());
+
+		Random random = new Random();
+		random.setSeed(worldObj.getSeed());
+		double d1 = random.nextDouble() * Math.PI * 2.0D;
+		int j = 0;
+		int k = 0;
+		int l = structureMap.size();
+
+		if (l < structureCoords.length)
+			for (int i1 = 0; i1 < structureCoords.length; ++i1)
+			{
+				double d0 = 4.0D * field_82671_h + field_82671_h * j * 6.0D + (random.nextDouble() - 0.5D) * field_82671_h * 2.5D;
+				int j1 = (int)Math.round(Math.cos(d1) * d0);
+				int k1 = (int)Math.round(Math.sin(d1) * d0);
+				BlockPos blockpos = worldObj.getWorldChunkManager().findBiomePosition((j1 << 4) + 8, (k1 << 4) + 8, 112, allowedBiomes, random);
+
+				if (blockpos != null)
+				{
+					j1 = blockpos.getX() >> 4;
+				k1 = blockpos.getZ() >> 4;
+				}
+
+				if (i1 >= l)
+					structureCoords[i1] = new ChunkCoordIntPair(j1, k1);
+
+				d1 += Math.PI * 2D / field_82672_i;
+				++k;
+
+				if (k == field_82672_i)
+				{
+					++j;
+					k = 0;
+					field_82672_i += 2 * field_82672_i / (j + 1);
+					field_82672_i = Math.min(field_82672_i, structureCoords.length - i1);
+					d1 += random.nextDouble() * Math.PI * 2.0D;
+				}
+			}
 	}
 
 	/**
