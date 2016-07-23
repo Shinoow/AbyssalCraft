@@ -109,7 +109,7 @@ public class TileEntityTieredSacrificialAltar extends TileEntity implements IEne
 			List<EntityLivingBase> mobs = worldObj.getEntitiesWithinAABB(EntityLivingBase.class, new AxisAlignedBB(pos).expand(8, 3, 8));
 
 			for(EntityLivingBase mob : mobs)
-				if(!(mob instanceof EntityPlayer && mob instanceof EntityArmorStand))
+				if(!(mob instanceof EntityPlayer) && !(mob instanceof EntityArmorStand))
 					if(mob.getCreatureAttribute() != EnumCreatureAttribute.UNDEAD)
 						if(mob.isEntityAlive())
 							if(!mob.isChild()){
