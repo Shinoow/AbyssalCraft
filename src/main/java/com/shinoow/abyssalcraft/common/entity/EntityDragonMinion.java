@@ -14,6 +14,10 @@ package com.shinoow.abyssalcraft.common.entity;
 import java.util.Iterator;
 import java.util.List;
 
+import net.minecraft.block.material.Material;
+import net.minecraft.block.state.IBlockState;
+import net.minecraft.crash.CrashReport;
+import net.minecraft.crash.CrashReportCategory;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.IEntityMultiPart;
@@ -22,9 +26,11 @@ import net.minecraft.entity.boss.EntityDragonPart;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
+import net.minecraft.util.BlockPos;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.MathHelper;
+import net.minecraft.util.ReportedException;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
@@ -286,7 +292,7 @@ public class EntityDragonMinion extends EntityMob implements IEntityMultiPart, I
 
 
 				Vec3 vec32 = new Vec3(motionX, motionY, motionZ).normalize();
-				float f8 = (float)(vec32.dotProduct(vec31) + 1.0D) / 2.0F;
+				float f8 = (float)(vec32.dotProduct(vec31) + 1.0D) / 2.5F;
 				f8 = 0.8F + 0.15F * f8;
 				motionX *= f8;
 				motionZ *= f8;
@@ -354,6 +360,45 @@ public class EntityDragonMinion extends EntityMob implements IEntityMultiPart, I
 				entitydragonpart.setLocationAndAngles(posX - (f11 * f17 + f15 * f18) * f2, posY + (adouble2[1] - adouble[1]) * 1.0D - (f18 + f17) * f9 + 1.5D, posZ + (f12 * f17 + f16 * f18) * f2, 0.0F, 0.0F);
 			}
 		}
+	}
+
+	@Override
+	public void moveEntity(double x, double y, double z)
+	{
+		setEntityBoundingBox(getEntityBoundingBox().offset(x, y, z));
+		posX = (getEntityBoundingBox().minX + getEntityBoundingBox().maxX) / 2.0D;
+		posY = getEntityBoundingBox().minY;
+		posZ = (getEntityBoundingBox().minZ + getEntityBoundingBox().maxZ) / 2.0D;
+		try
+		{
+			doBlockCollisions();
+		}
+		catch (Throwable throwable)
+		{
+			CrashReport crashreport = CrashReport.makeCrashReport(throwable, "Checking entity block collision");
+			CrashReportCategory crashreportcategory = crashreport.makeCategory("Entity being checked for collision");
+			addEntityCrashInfo(crashreportcategory);
+			throw new ReportedException(crashreport);
+		}
+	}
+
+	@Override
+	protected void doBlockCollisions()
+	{
+		BlockPos blockpos = new BlockPos(getEntityBoundingBox().minX + 0.001D, getEntityBoundingBox().minY + 0.001D, getEntityBoundingBox().minZ + 0.001D);
+		BlockPos blockpos1 = new BlockPos(getEntityBoundingBox().maxX - 0.001D, getEntityBoundingBox().maxY - 0.001D, getEntityBoundingBox().maxZ - 0.001D);
+
+		if (worldObj.isAreaLoaded(blockpos, blockpos1))
+			for (int i = blockpos.getX(); i <= blockpos1.getX(); ++i)
+				for (int j = blockpos.getY(); j <= blockpos1.getY(); ++j)
+					for (int k = blockpos.getZ(); k <= blockpos1.getZ(); ++k)
+					{
+						BlockPos blockpos2 = new BlockPos(i, j, k);
+						IBlockState iblockstate = worldObj.getBlockState(blockpos2);
+
+						if(iblockstate.getBlock().getMaterial() == Material.portal)
+							addVelocity(motionX > 0 ? -3 : 3, motionY > 0 ? -3 : 3, motionZ > 0 ? -3 : 3);
+					}
 	}
 
 	private void updateHealingCircle()
@@ -440,9 +485,6 @@ public class EntityDragonMinion extends EntityMob implements IEntityMultiPart, I
 	@Override
 	public boolean attackEntityFromPart(EntityDragonPart par1EntityDragonPart, DamageSource par2DamageSource, float par3)
 	{
-		if (par1EntityDragonPart != dragonPartHead)
-			par3 = par3 / 2.0F;
-
 		float f1 = rotationYaw * (float)Math.PI / 180.0F;
 		float f2 = MathHelper.sin(f1);
 		float f3 = MathHelper.cos(f1);
@@ -451,21 +493,7 @@ public class EntityDragonMinion extends EntityMob implements IEntityMultiPart, I
 		targetZ = posZ - f3 * 5.0F + (rand.nextFloat() - 0.5F) * 2.0F;
 		target = null;
 
-		if (par2DamageSource.getEntity() instanceof EntityPlayer || par2DamageSource.isExplosion())
-			func_82195_e(par2DamageSource, par3);
-
 		return true;
-	}
-
-	@Override
-	public boolean attackEntityFrom(DamageSource par1DamageSource, float par2)
-	{
-		return false;
-	}
-
-	protected boolean func_82195_e(DamageSource par1DamageSource, float par2)
-	{
-		return super.attackEntityFrom(par1DamageSource, par2);
 	}
 
 	@Override
