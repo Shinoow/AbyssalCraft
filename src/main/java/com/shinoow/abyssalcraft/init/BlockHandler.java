@@ -14,6 +14,7 @@ package com.shinoow.abyssalcraft.init;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
@@ -371,6 +372,19 @@ public class BlockHandler implements ILifeCycleHandler {
 		registerBlock(ACBlocks.decorative_yog_sothoth_statue, new ItemDecorativeStatueBlock(ACBlocks.decorative_yog_sothoth_statue), "decorativeyogsothothstatue");
 		registerBlock(ACBlocks.decorative_shub_niggurath_statue, new ItemDecorativeStatueBlock(ACBlocks.decorative_shub_niggurath_statue), "decorativeshubniggurathstatue");
 		registerBlock(ACBlocks.crystal_cluster, new ItemCrystalClusterBlock(ACBlocks.crystal_cluster), "crystalcluster");
+
+		Blocks.FIRE.setFireInfo(ACBlocks.darklands_oak_planks, 5, 20);
+		Blocks.FIRE.setFireInfo(AbyssalCraft.DLTslab2, 5, 20);
+		Blocks.FIRE.setFireInfo(ACBlocks.darklands_oak_slab, 5, 20);
+		Blocks.FIRE.setFireInfo(ACBlocks.darklands_oak_fence, 5, 20);
+		Blocks.FIRE.setFireInfo(ACBlocks.darklands_oak_stairs, 5, 20);
+		Blocks.FIRE.setFireInfo(ACBlocks.darklands_oak_wood, 5, 5);
+		Blocks.FIRE.setFireInfo(ACBlocks.darklands_oak_leaves, 30, 60);
+
+		Blocks.FIRE.setFireInfo(ACBlocks.dreadlands_planks, 5, 20);
+		Blocks.FIRE.setFireInfo(ACBlocks.dreadlands_wood_fence, 5, 20);
+		Blocks.FIRE.setFireInfo(ACBlocks.dreadlands_log, 5, 5);
+		Blocks.FIRE.setFireInfo(ACBlocks.dreadlands_leaves, 30, 60);
 	}
 
 	@Override
