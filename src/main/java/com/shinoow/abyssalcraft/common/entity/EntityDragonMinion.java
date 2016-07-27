@@ -14,6 +14,10 @@ package com.shinoow.abyssalcraft.common.entity;
 import java.util.Iterator;
 import java.util.List;
 
+import net.minecraft.block.material.Material;
+import net.minecraft.block.state.IBlockState;
+import net.minecraft.crash.CrashReport;
+import net.minecraft.crash.CrashReportCategory;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.IEntityMultiPart;
@@ -25,7 +29,10 @@ import net.minecraft.init.SoundEvents;
 import net.minecraft.item.Item;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumParticleTypes;
+import net.minecraft.util.ReportedException;
 import net.minecraft.util.SoundEvent;
+import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.Explosion;
@@ -288,7 +295,7 @@ public class EntityDragonMinion extends EntityMob implements IEntityMultiPart, I
 
 
 				Vec3d vec32 = new Vec3d(motionX, motionY, motionZ).normalize();
-				float f8 = (float)(vec32.dotProduct(vec31) + 1.0D) / 2.0F;
+				float f8 = (float)(vec32.dotProduct(vec31) + 1.0D) / 2.5F;
 				f8 = 0.8F + 0.15F * f8;
 				motionX *= f8;
 				motionZ *= f8;
@@ -356,6 +363,49 @@ public class EntityDragonMinion extends EntityMob implements IEntityMultiPart, I
 				entitydragonpart.setLocationAndAngles(posX - (f11 * f17 + f15 * f18) * f2, posY + (adouble2[1] - adouble[1]) * 1.0D - (f18 + f17) * f9 + 1.5D, posZ + (f12 * f17 + f16 * f18) * f2, 0.0F, 0.0F);
 			}
 		}
+	}
+
+	@Override
+	public void moveEntity(double x, double y, double z)
+	{
+		setEntityBoundingBox(getEntityBoundingBox().offset(x, y, z));
+		resetPositionToBB();
+		try
+		{
+			doBlockCollisions();
+		}
+		catch (Throwable throwable)
+		{
+			CrashReport crashreport = CrashReport.makeCrashReport(throwable, "Checking entity block collision");
+			CrashReportCategory crashreportcategory = crashreport.makeCategory("Entity being checked for collision");
+			addEntityCrashInfo(crashreportcategory);
+			throw new ReportedException(crashreport);
+		}
+	}
+
+	@Override
+	protected void doBlockCollisions()
+	{
+		AxisAlignedBB axisalignedbb = getEntityBoundingBox();
+		BlockPos.PooledMutableBlockPos blockpos$pooledmutableblockpos = BlockPos.PooledMutableBlockPos.retain(axisalignedbb.minX + 0.001D, axisalignedbb.minY + 0.001D, axisalignedbb.minZ + 0.001D);
+		BlockPos.PooledMutableBlockPos blockpos$pooledmutableblockpos1 = BlockPos.PooledMutableBlockPos.retain(axisalignedbb.maxX - 0.001D, axisalignedbb.maxY - 0.001D, axisalignedbb.maxZ - 0.001D);
+		BlockPos.PooledMutableBlockPos blockpos$pooledmutableblockpos2 = BlockPos.PooledMutableBlockPos.retain();
+
+		if (worldObj.isAreaLoaded(blockpos$pooledmutableblockpos, blockpos$pooledmutableblockpos1))
+			for (int i = blockpos$pooledmutableblockpos.getX(); i <= blockpos$pooledmutableblockpos1.getX(); ++i)
+				for (int j = blockpos$pooledmutableblockpos.getY(); j <= blockpos$pooledmutableblockpos1.getY(); ++j)
+					for (int k = blockpos$pooledmutableblockpos.getZ(); k <= blockpos$pooledmutableblockpos1.getZ(); ++k)
+					{
+						blockpos$pooledmutableblockpos2.set(i, j, k);
+						IBlockState iblockstate = worldObj.getBlockState(blockpos$pooledmutableblockpos2);
+
+						if(iblockstate.getMaterial() == Material.portal)
+							addVelocity(motionX > 0 ? -3 : 3, motionY > 0 ? -3 : 3, motionZ > 0 ? -3 : 3);
+					}
+
+		blockpos$pooledmutableblockpos.release();
+		blockpos$pooledmutableblockpos1.release();
+		blockpos$pooledmutableblockpos2.release();
 	}
 
 	private void updateHealingCircle()
@@ -442,9 +492,6 @@ public class EntityDragonMinion extends EntityMob implements IEntityMultiPart, I
 	@Override
 	public boolean attackEntityFromPart(EntityDragonPart par1EntityDragonPart, DamageSource par2DamageSource, float par3)
 	{
-		if (par1EntityDragonPart != dragonPartHead)
-			par3 = par3 / 2.0F;
-
 		float f1 = rotationYaw * (float)Math.PI / 180.0F;
 		float f2 = MathHelper.sin(f1);
 		float f3 = MathHelper.cos(f1);
@@ -453,21 +500,7 @@ public class EntityDragonMinion extends EntityMob implements IEntityMultiPart, I
 		targetZ = posZ - f3 * 5.0F + (rand.nextFloat() - 0.5F) * 2.0F;
 		target = null;
 
-		if (par2DamageSource.getEntity() instanceof EntityPlayer || par2DamageSource.isExplosion())
-			func_82195_e(par2DamageSource, par3);
-
 		return true;
-	}
-
-	@Override
-	public boolean attackEntityFrom(DamageSource par1DamageSource, float par2)
-	{
-		return false;
-	}
-
-	protected boolean func_82195_e(DamageSource par1DamageSource, float par2)
-	{
-		return super.attackEntityFrom(par1DamageSource, par2);
 	}
 
 	@Override
