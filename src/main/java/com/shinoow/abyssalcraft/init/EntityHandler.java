@@ -87,8 +87,7 @@ public class EntityHandler implements ILifeCycleHandler {
 
 		registerEntityWithEgg(EntityDemonPig.class, "demonpig", 41, 80, 3, true, 15771042, 14377823);
 		if(demonAnimalSpawnWeight > 0)
-			EntityRegistry.addSpawn(EntityDemonPig.class, demonAnimalSpawnWeight, 1, 3, EnumCreatureType.MONSTER, new Biome[] {
-				Biomes.HELL});
+			EntityRegistry.addSpawn(EntityDemonPig.class, demonAnimalSpawnWeight, 1, 3, EnumCreatureType.MONSTER, BiomeDictionary.getBiomesForType(Type.NETHER));
 
 		registerEntityWithEgg(EntitySkeletonGoliath.class, "gskeleton", 42, 80, 3, true, 0xD6D6C9, 0xC6C7AD);
 
@@ -165,13 +164,11 @@ public class EntityHandler implements ILifeCycleHandler {
 
 		registerEntityWithEgg(EntityDemonCow.class, "demoncow", 69, 80, 3, true, 4470310, 10592673);
 		if(demonAnimalSpawnWeight > 0)
-			EntityRegistry.addSpawn(EntityDemonCow.class, demonAnimalSpawnWeight, 1, 3, EnumCreatureType.MONSTER, new Biome[] {
-				Biomes.HELL});
+			EntityRegistry.addSpawn(EntityDemonCow.class, demonAnimalSpawnWeight, 1, 3, EnumCreatureType.MONSTER, BiomeDictionary.getBiomesForType(Type.NETHER));
 
 		registerEntityWithEgg(EntityDemonChicken.class, "demonchicken", 70, 80, 3, true, 10592673, 16711680);
 		if(demonAnimalSpawnWeight > 0)
-			EntityRegistry.addSpawn(EntityDemonChicken.class, demonAnimalSpawnWeight, 1, 3, EnumCreatureType.MONSTER, new Biome[] {
-				Biomes.HELL});
+			EntityRegistry.addSpawn(EntityDemonChicken.class, demonAnimalSpawnWeight, 1, 3, EnumCreatureType.MONSTER, BiomeDictionary.getBiomesForType(Type.NETHER));
 
 		EntityRegistry.registerModEntity(EntityGatekeeperEssence.class, "GatekeeperEssence", 71, instance, 64, 10, true);
 
