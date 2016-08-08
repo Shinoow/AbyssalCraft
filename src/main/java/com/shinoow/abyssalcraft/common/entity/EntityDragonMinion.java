@@ -30,6 +30,7 @@ import net.minecraft.item.Item;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.ReportedException;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
@@ -41,6 +42,7 @@ import net.minecraft.world.World;
 import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.api.entity.ICoraliumEntity;
 import com.shinoow.abyssalcraft.api.item.ACItems;
+import com.shinoow.abyssalcraft.lib.ACLoot;
 
 public class EntityDragonMinion extends EntityMob implements IEntityMultiPart, ICoraliumEntity
 {
@@ -135,7 +137,11 @@ public class EntityDragonMinion extends EntityMob implements IEntityMultiPart, I
 	protected Item getDropItem()
 	{
 		return ACItems.coralium_plagued_flesh;
+	}
 
+	@Override
+	protected ResourceLocation getLootTable(){
+		return ACLoot.ENTITY_SPECTRAL_DRAGON;
 	}
 
 	@Override

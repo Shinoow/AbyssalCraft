@@ -25,12 +25,14 @@ import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 
 import com.shinoow.abyssalcraft.api.entity.IAntiEntity;
+import com.shinoow.abyssalcraft.lib.ACLoot;
 
 public class EntityAntiBat extends EntityAmbientCreature implements IAntiEntity {
 
@@ -215,6 +217,11 @@ public class EntityAntiBat extends EntityAmbientCreature implements IAntiEntity 
 
 			return super.attackEntityFrom(par1DamageSource, par2);
 		}
+	}
+
+	@Override
+	protected ResourceLocation getLootTable(){
+		return ACLoot.ENTITY_ANTI_BAT;
 	}
 
 	@Override

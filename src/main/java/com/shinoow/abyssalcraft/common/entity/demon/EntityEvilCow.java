@@ -23,9 +23,9 @@ import net.minecraft.entity.ai.EntityAIWander;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Items;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.translation.I18n;
@@ -33,6 +33,7 @@ import net.minecraft.world.World;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.common.entity.EntityLesserShoggoth;
+import com.shinoow.abyssalcraft.lib.ACLoot;
 
 public class EntityEvilCow extends EntityMob {
 
@@ -114,17 +115,7 @@ public class EntityEvilCow extends EntityMob {
 	}
 
 	@Override
-	protected void dropFewItems(boolean p_70628_1_, int p_70628_2_)
-	{
-		int j = rand.nextInt(3) + rand.nextInt(1 + p_70628_2_);
-		int k;
-
-		for (k = 0; k < j; ++k)
-			dropItem(Items.leather, 1);
-
-		j = rand.nextInt(3) + 1 + rand.nextInt(1 + p_70628_2_);
-
-		for (k = 0; k < j; ++k)
-			dropItem(Items.beef, 1);
+	protected ResourceLocation getLootTable(){
+		return ACLoot.ENTITY_EVIL_COW;
 	}
 }

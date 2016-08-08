@@ -36,6 +36,7 @@ import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumHand;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
@@ -44,6 +45,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.api.entity.IAntiEntity;
 import com.shinoow.abyssalcraft.common.entity.ai.EntityAIAntiCreeperSwell;
+import com.shinoow.abyssalcraft.lib.ACLoot;
 
 public class EntityAntiCreeper extends EntityMob implements IAntiEntity {
 
@@ -233,6 +235,11 @@ public class EntityAntiCreeper extends EntityMob implements IAntiEntity {
 	protected Item getDropItem()
 	{
 		return Items.gunpowder;
+	}
+
+	@Override
+	protected ResourceLocation getLootTable(){
+		return ACLoot.ENTITY_ANTI_CREEPER;
 	}
 
 	/**

@@ -29,6 +29,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.Item;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.DifficultyInstance;
@@ -40,6 +41,7 @@ import com.shinoow.abyssalcraft.api.entity.IAntiEntity;
 import com.shinoow.abyssalcraft.api.item.ACItems;
 import com.shinoow.abyssalcraft.common.entity.EntityDepthsGhoul;
 import com.shinoow.abyssalcraft.common.entity.EntityOmotholGhoul;
+import com.shinoow.abyssalcraft.lib.ACLoot;
 
 public class EntityAntiGhoul extends EntityMob implements IAntiEntity {
 
@@ -109,6 +111,11 @@ public class EntityAntiGhoul extends EntityMob implements IAntiEntity {
 	protected Item getDropItem()
 	{
 		return ACItems.anti_plagued_flesh_on_a_bone;
+	}
+
+	@Override
+	protected ResourceLocation getLootTable(){
+		return ACLoot.ENTITY_ANTI_GHOUL;
 	}
 
 	@Override

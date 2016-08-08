@@ -23,11 +23,13 @@ import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.api.entity.IDreadEntity;
+import com.shinoow.abyssalcraft.lib.ACLoot;
 
 public class EntityChagarothFist extends EntityMob implements IDreadEntity {
 
@@ -64,5 +66,10 @@ public class EntityChagarothFist extends EntityMob implements IDreadEntity {
 	protected void playStepSound(BlockPos pos, Block par4)
 	{
 		playSound(SoundEvents.entity_spider_step, 0.15F, 1.0F);
+	}
+
+	@Override
+	protected ResourceLocation getLootTable(){
+		return ACLoot.ENTITY_FIST_OF_CHAGAROTH;
 	}
 }

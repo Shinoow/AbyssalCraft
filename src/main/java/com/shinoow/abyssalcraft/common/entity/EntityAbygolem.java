@@ -23,13 +23,13 @@ import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
-import net.minecraft.util.DamageSource;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
-import com.shinoow.abyssalcraft.api.item.ACItems;
+import com.shinoow.abyssalcraft.lib.ACLoot;
 
 public class EntityAbygolem extends EntityMob {
 
@@ -73,10 +73,8 @@ public class EntityAbygolem extends EntityMob {
 	}
 
 	@Override
-	public void onDeath(DamageSource par1DamageSource) {
-		if(par1DamageSource.getEntity() instanceof EntityPlayer)
-			dropItem(ACItems.chunk_of_abyssalnite, worldObj.rand.nextInt(3));
-		super.onDeath(par1DamageSource);
+	protected ResourceLocation getLootTable(){
+		return ACLoot.ENTITY_ABYSSALNITE_GOLEM;
 	}
 
 	@Override

@@ -27,6 +27,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.EnumParticleTypes;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.world.World;
 
@@ -36,6 +37,7 @@ import com.shinoow.abyssalcraft.api.entity.IAntiEntity;
 import com.shinoow.abyssalcraft.api.entity.ICoraliumEntity;
 import com.shinoow.abyssalcraft.api.entity.IDreadEntity;
 import com.shinoow.abyssalcraft.api.item.ACItems;
+import com.shinoow.abyssalcraft.lib.ACLoot;
 
 public class EntityShadowBeast extends EntityMob implements IAntiEntity, ICoraliumEntity, IDreadEntity {
 
@@ -100,6 +102,11 @@ public class EntityShadowBeast extends EntityMob implements IAntiEntity, ICorali
 	protected Item getDropItem()
 	{
 		return ACItems.shadow_gem;
+	}
+
+	@Override
+	protected ResourceLocation getLootTable(){
+		return ACLoot.ENTITY_SHADOW_BEAST;
 	}
 
 	@Override

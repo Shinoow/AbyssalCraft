@@ -14,11 +14,13 @@ package com.shinoow.abyssalcraft.common.entity.demon;
 import net.minecraft.block.Block;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.init.SoundEvents;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
+import com.shinoow.abyssalcraft.lib.ACLoot;
 
 public class EntityDemonChicken extends EntityDemonAnimal {
 
@@ -94,5 +96,10 @@ public class EntityDemonChicken extends EntityDemonAnimal {
 
 		field_70886_e += field_70889_i * 2.0F;
 
+	}
+
+	@Override
+	protected ResourceLocation getLootTable(){
+		return ACLoot.ENTITY_DEMON_CHICKEN;
 	}
 }
