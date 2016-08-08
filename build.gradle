@@ -15,7 +15,7 @@ buildscript {
     dependencies {
         classpath 'net.minecraftforge.gradle:ForgeGradle:2.2-SNAPSHOT'
 		classpath "gradle.plugin.com.matthewprenger:CurseGradle:1.0.5"
-		classpath "com.jfrog.bintray.gradle:gradle-bintray-plugin:1.6"
+		classpath "com.jfrog.bintray.gradle:gradle-bintray-plugin:1.7"
     }
 }
 
@@ -50,7 +50,7 @@ sourceCompatibility = 1.7
 targetCompatibility = 1.7
 
 minecraft {
-    version = "1.10.2-12.18.0.2007-1.10.0"
+    version = "1.10.2-12.18.1.2046"
     runDir = "run"
     
 	useDepAts = true
@@ -65,6 +65,7 @@ minecraft {
 	
 	replaceIn "AbyssalCraft.java"
         replace "forgeversion", props.forge_version
+		replace "ac_version", props.ac_version
 }
 
 dependencies {

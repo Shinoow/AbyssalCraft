@@ -27,12 +27,14 @@ import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.World;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.api.entity.IAntiEntity;
+import com.shinoow.abyssalcraft.lib.ACLoot;
 
 public class EntityAntiPlayer extends EntityMob implements IAntiEntity {
 
@@ -69,6 +71,11 @@ public class EntityAntiPlayer extends EntityMob implements IAntiEntity {
 	protected void playStepSound(BlockPos pos, Block par4)
 	{
 		playSound(SoundEvents.ENTITY_ZOMBIE_STEP, 0.15F, 1.0F);
+	}
+
+	@Override
+	protected ResourceLocation getLootTable(){
+		return ACLoot.ENTITY_ANTI_PLAYER;
 	}
 
 	@Override

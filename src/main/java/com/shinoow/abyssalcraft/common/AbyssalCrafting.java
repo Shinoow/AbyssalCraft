@@ -40,6 +40,7 @@ import com.shinoow.abyssalcraft.api.ritual.NecronomiconPotionAoERitual;
 import com.shinoow.abyssalcraft.api.ritual.NecronomiconSummonRitual;
 import com.shinoow.abyssalcraft.api.ritual.RitualRegistry;
 import com.shinoow.abyssalcraft.common.blocks.BlockCrystalCluster.EnumCrystalType;
+import com.shinoow.abyssalcraft.common.blocks.BlockCrystalCluster2.EnumCrystalType2;
 import com.shinoow.abyssalcraft.common.disruptions.DisruptionDisplaceEntities;
 import com.shinoow.abyssalcraft.common.disruptions.DisruptionFire;
 import com.shinoow.abyssalcraft.common.disruptions.DisruptionFireRain;
@@ -316,6 +317,12 @@ public class AbyssalCrafting {
 			GameRegistry.addRecipe(new ItemStack(ACItems.crystal, 9, i), new Object[] {"#", '#', new ItemStack(ACBlocks.crystal_cluster, 1, i)});
 			GameRegistry.addRecipe(new ItemStack(ACItems.crystal, 1, i), new Object[] {"###", "###", "###", '#', new ItemStack(ACItems.crystal_shard, 1, i)});
 			GameRegistry.addRecipe(new ItemStack(ACItems.crystal_shard, 9, i), new Object[] {"#", '#', new ItemStack(ACItems.crystal, 1, i)});
+		}
+		for(int i = 0; i < EnumCrystalType2.values().length; i++){
+			GameRegistry.addRecipe(new ItemStack(ACBlocks.crystal_cluster2, 1, i), new Object[] {"###", "###", "###", '#', new ItemStack(ACItems.crystal, 1, i+16)});
+			GameRegistry.addRecipe(new ItemStack(ACItems.crystal, 9, i+16), new Object[] {"#", '#', new ItemStack(ACBlocks.crystal_cluster2, 1, i)});
+			GameRegistry.addRecipe(new ItemStack(ACItems.crystal, 1, i+16), new Object[] {"###", "###", "###", '#', new ItemStack(ACItems.crystal_shard, 1, i+16)});
+			GameRegistry.addRecipe(new ItemStack(ACItems.crystal_shard, 9, i+16), new Object[] {"#", '#', new ItemStack(ACItems.crystal, 1, i+16)});
 		}
 		GameRegistry.addRecipe(new ItemStack(ACItems.skin, 1, 0), new Object[] {"###", "#%#", "###", '#', ACItems.coralium_plagued_flesh, '%', new ItemStack(ACItems.essence, 1, 0)});
 		GameRegistry.addRecipe(new ItemStack(ACItems.skin, 1, 1), new Object[] {"###", "#%#", "###", '#', ACItems.dread_fragment, '%', new ItemStack(ACItems.essence, 1, 1)});

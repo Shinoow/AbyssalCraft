@@ -165,4 +165,5 @@ public class ACBlocks {
 	public static Block decorative_yog_sothoth_statue;
 	public static Block decorative_shub_niggurath_statue;
 	public static Block crystal_cluster;
+	public static Block crystal_cluster2;
 }

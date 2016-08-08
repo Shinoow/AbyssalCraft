@@ -190,6 +190,7 @@ public class BlockHandler implements ILifeCycleHandler {
 		ACBlocks.decorative_yog_sothoth_statue = new BlockDecorativeStatue().setUnlocalizedName("yogsothothstatue");
 		ACBlocks.decorative_shub_niggurath_statue = new BlockDecorativeStatue().setUnlocalizedName("shubniggurathstatue");
 		ACBlocks.crystal_cluster = new BlockCrystalCluster().setUnlocalizedName("crystalcluster");
+		ACBlocks.crystal_cluster2 = new BlockCrystalCluster2().setUnlocalizedName("crystalcluster2");
 
 		((BlockShoggothOoze) ACBlocks.shoggoth_ooze).initBlacklist();
 
@@ -372,6 +373,7 @@ public class BlockHandler implements ILifeCycleHandler {
 		registerBlock(ACBlocks.decorative_yog_sothoth_statue, new ItemDecorativeStatueBlock(ACBlocks.decorative_yog_sothoth_statue), "decorativeyogsothothstatue");
 		registerBlock(ACBlocks.decorative_shub_niggurath_statue, new ItemDecorativeStatueBlock(ACBlocks.decorative_shub_niggurath_statue), "decorativeshubniggurathstatue");
 		registerBlock(ACBlocks.crystal_cluster, new ItemCrystalClusterBlock(ACBlocks.crystal_cluster), "crystalcluster");
+		registerBlock(ACBlocks.crystal_cluster2, new ItemCrystalClusterBlock2(ACBlocks.crystal_cluster2), "crystalcluster2");
 
 		Blocks.FIRE.setFireInfo(ACBlocks.darklands_oak_planks, 5, 20);
 		Blocks.FIRE.setFireInfo(AbyssalCraft.DLTslab2, 5, 20);
@@ -390,6 +392,7 @@ public class BlockHandler implements ILifeCycleHandler {
 	@Override
 	public void init(FMLInitializationEvent event) {
 		AbyssalCraftAPI.addCrystal(new ItemStack(ACBlocks.crystal_cluster, 1, OreDictionary.WILDCARD_VALUE));
+		AbyssalCraftAPI.addCrystal(new ItemStack(ACBlocks.crystal_cluster2, 1, OreDictionary.WILDCARD_VALUE));
 	}
 
 	@Override

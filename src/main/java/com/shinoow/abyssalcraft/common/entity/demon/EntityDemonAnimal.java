@@ -23,7 +23,6 @@ import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
@@ -79,13 +78,6 @@ public class EntityDemonAnimal extends EntityMob implements IDreadEntity {
 					worldObj.setBlockState(pos, ACBlocks.mimic_fire.getDefaultState());
 			}
 		}
-	}
-
-	@Override
-	protected void dropFewItems(boolean par1, int par2){
-		int var3 = rand.nextInt(3) + 1 + rand.nextInt(1 + par2);
-		for (int var4 = 0; var4 < var3; ++var4)
-			dropItem(Items.ROTTEN_FLESH, 1);
 	}
 
 	@Override

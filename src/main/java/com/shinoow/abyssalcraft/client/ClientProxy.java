@@ -64,7 +64,9 @@ import com.shinoow.abyssalcraft.client.render.item.RenderCoraliumArrow;
 import com.shinoow.abyssalcraft.common.CommonProxy;
 import com.shinoow.abyssalcraft.common.blocks.BlockACSlab;
 import com.shinoow.abyssalcraft.common.blocks.BlockCrystalCluster;
+import com.shinoow.abyssalcraft.common.blocks.BlockCrystalCluster2;
 import com.shinoow.abyssalcraft.common.blocks.BlockCrystalCluster.EnumCrystalType;
+import com.shinoow.abyssalcraft.common.blocks.BlockCrystalCluster2.EnumCrystalType2;
 import com.shinoow.abyssalcraft.common.blocks.tile.*;
 import com.shinoow.abyssalcraft.common.entity.*;
 import com.shinoow.abyssalcraft.common.entity.anti.*;
@@ -173,6 +175,7 @@ public class ClientProxy extends CommonProxy {
 		ModelLoader.setCustomStateMapper(ACBlocks.mimic_fire, new StateMap.Builder().ignore(new IProperty[] {BlockFire.AGE}).build());
 		ModelLoader.setCustomStateMapper(ACBlocks.darkstone_cobblestone_wall, new StateMap.Builder().ignore(new IProperty[] {BlockWall.VARIANT}).build());
 		ModelLoader.setCustomStateMapper(ACBlocks.crystal_cluster, new StateMap.Builder().ignore(new IProperty[]{BlockCrystalCluster.TYPE}).build());
+		ModelLoader.setCustomStateMapper(ACBlocks.crystal_cluster2, new StateMap.Builder().ignore(new IProperty[]{BlockCrystalCluster2.TYPE}).build());
 
 		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(ACBlocks.cthulhu_statue), 0, new ModelResourceLocation("abyssalcraft:cthulhustatue", "inventory"));
 		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(ACBlocks.decorative_cthulhu_statue), 0, new ModelResourceLocation("abyssalcraft:cthulhustatue", "inventory"));
@@ -563,6 +566,7 @@ public class ClientProxy extends CommonProxy {
 		registerItemRender(ACBlocks.minion_of_the_gatekeeper_spawner, 0);
 		registerItemRender(ACBlocks.mimic_fire, 0);
 		registerItemRenders(ACBlocks.crystal_cluster, EnumCrystalType.values().length);
+		registerItemRenders(ACBlocks.crystal_cluster2, EnumCrystalType2.values().length);
 
 		RenderPlayer render1 = Minecraft.getMinecraft().getRenderManager().getSkinMap().get("default");
 		render1.addLayer(new LayerStarSpawnTentacles(render1));
@@ -575,7 +579,7 @@ public class ClientProxy extends CommonProxy {
 				return ACLib.crystalColors[stack.getItemDamage()];
 			}
 
-		}, ACItems.crystal, ACItems.crystal_shard, Item.getItemFromBlock(ACBlocks.crystal_cluster));
+		}, ACItems.crystal, ACItems.crystal_shard, Item.getItemFromBlock(ACBlocks.crystal_cluster), Item.getItemFromBlock(ACBlocks.crystal_cluster2));
 		Minecraft.getMinecraft().getItemColors().registerItemColorHandler(new IItemColor(){
 
 			@Override
@@ -592,7 +596,7 @@ public class ClientProxy extends CommonProxy {
 				return ACLib.crystalColors[state.getBlock().getMetaFromState(state)];
 			}
 
-		}, ACBlocks.crystal_cluster);
+		}, ACBlocks.crystal_cluster, ACBlocks.crystal_cluster2);
 	}
 
 	private void registerFluidModel(Block fluidBlock, String name) {

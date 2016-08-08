@@ -23,7 +23,8 @@ public class CrystalFuelHandler implements IFuelHandler {
 
 	@Override
 	public int getBurnTime(ItemStack fuel) {
-		if(fuel.getItem() == Item.getItemFromBlock(ACBlocks.crystal_cluster))
+		if(fuel.getItem() == Item.getItemFromBlock(ACBlocks.crystal_cluster) ||
+				fuel.getItem() == Item.getItemFromBlock(ACBlocks.crystal_cluster2))
 			return 12150;
 		if(fuel.getItem() == ACItems.crystal)
 			return 1350;

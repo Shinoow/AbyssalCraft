@@ -112,16 +112,7 @@ public class BlockCrystalCluster extends BlockACBasic {
 		ABYSSALNITE(12, "abyssalnite"),
 		CORALIUM(13, "coralium"),
 		DREADIUM(14, "dreadium"),
-		BLAZE(15, "blaze"),
-		TIN(16, "tin"),
-		COPPER(17, "copper"),
-		SILICON(18, "silicon"),
-		MAGNESIUM(19, "magnesium"),
-		ALUMINIUM(20, "aluminium"),
-		SILICA(21, "silica"),
-		ALUMINA(22, "alumina"),
-		MAGNESIA(23, "magnesia"),
-		ZINC(24, "zinc");
+		BLAZE(15, "blaze");
 
 		private static final EnumCrystalType[] META_LOOKUP = new EnumCrystalType[values().length];
 		private final int meta;

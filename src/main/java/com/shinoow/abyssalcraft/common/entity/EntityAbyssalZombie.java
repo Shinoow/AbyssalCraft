@@ -47,6 +47,7 @@ import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.potion.PotionEffect;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
@@ -62,6 +63,7 @@ import com.shinoow.abyssalcraft.api.entity.EntityUtil;
 import com.shinoow.abyssalcraft.api.entity.ICoraliumEntity;
 import com.shinoow.abyssalcraft.api.item.ACItems;
 import com.shinoow.abyssalcraft.lib.ACLib;
+import com.shinoow.abyssalcraft.lib.ACLoot;
 
 public class EntityAbyssalZombie extends EntityMob implements ICoraliumEntity {
 
@@ -261,6 +263,11 @@ public class EntityAbyssalZombie extends EntityMob implements ICoraliumEntity {
 	protected Item getDropItem()
 	{
 		return ACItems.coralium_plagued_flesh;
+	}
+
+	@Override
+	protected ResourceLocation getLootTable(){
+		return ACLoot.ENTITY_ABYSSAL_ZOMBIE;
 	}
 
 	@Override
