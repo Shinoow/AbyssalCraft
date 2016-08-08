@@ -43,15 +43,15 @@ public class EntityHandler implements ILifeCycleHandler {
 		EntityRegistry.addSpawn(EntityDepthsGhoul.class, 10, 1, 3, EnumCreatureType.MONSTER, BiomeDictionary.getBiomesForType(Type.WATER));
 		EntityRegistry.addSpawn(EntityDepthsGhoul.class, 10, 1, 3, EnumCreatureType.MONSTER, BiomeDictionary.getBiomesForType(Type.BEACH));
 		EntityRegistry.addSpawn(EntityDepthsGhoul.class, 10, 1, 3, EnumCreatureType.MONSTER, BiomeDictionary.getBiomesForType(Type.SWAMP));
-		EntityRegistry.removeSpawn(EntityDepthsGhoul.class, EnumCreatureType.MONSTER, new BiomeGenBase[]{ BiomeGenBase.mushroomIslandShore });
+		EntityRegistry.removeSpawn(EntityDepthsGhoul.class, EnumCreatureType.MONSTER, BiomeGenBase.mushroomIslandShore);
 
 		registerEntityWithEgg(EntityEvilpig.class, "evilpig", 26, 80, 3, true, 15771042, 14377823);
 		if(evilAnimalSpawnWeight > 0)
-			EntityRegistry.addSpawn(EntityEvilpig.class, evilAnimalSpawnWeight, 1, 3, evilAnimalCreatureType ? EnumCreatureType.MONSTER : EnumCreatureType.CREATURE, new BiomeGenBase[] {
-				BiomeGenBase.taiga, BiomeGenBase.plains, BiomeGenBase.forest, BiomeGenBase.savanna,
-				BiomeGenBase.beach, BiomeGenBase.extremeHills, BiomeGenBase.jungle, BiomeGenBase.savannaPlateau,
-				BiomeGenBase.swampland, BiomeGenBase.icePlains, BiomeGenBase.birchForest,
-				BiomeGenBase.birchForestHills, BiomeGenBase.roofedForest});
+			EntityRegistry.addSpawn(EntityEvilpig.class, evilAnimalSpawnWeight, 1, 3, evilAnimalCreatureType ? EnumCreatureType.MONSTER : EnumCreatureType.CREATURE,
+					BiomeGenBase.taiga, BiomeGenBase.plains, BiomeGenBase.forest, BiomeGenBase.savanna,
+					BiomeGenBase.beach, BiomeGenBase.extremeHills, BiomeGenBase.jungle, BiomeGenBase.savannaPlateau,
+					BiomeGenBase.swampland, BiomeGenBase.icePlains, BiomeGenBase.birchForest,
+					BiomeGenBase.birchForestHills, BiomeGenBase.roofedForest);
 
 		registerEntityWithEgg(EntityAbyssalZombie.class , "abyssalzombie", 27, 80, 3, true, 0x36A880, 0x052824);
 		EntityRegistry.addSpawn(EntityAbyssalZombie.class, 10, 1, 3, EnumCreatureType.MONSTER, BiomeDictionary.getBiomesForType(Type.WATER));
@@ -59,7 +59,7 @@ public class EntityHandler implements ILifeCycleHandler {
 		EntityRegistry.addSpawn(EntityAbyssalZombie.class, 10, 1, 3, EnumCreatureType.MONSTER, BiomeDictionary.getBiomesForType(Type.SWAMP));
 		if(endAbyssalZombieSpawnWeight > 0)
 			EntityRegistry.addSpawn(EntityAbyssalZombie.class, endAbyssalZombieSpawnWeight, 1, 3, EnumCreatureType.MONSTER, BiomeDictionary.getBiomesForType(Type.END));
-		EntityRegistry.removeSpawn(EntityAbyssalZombie.class, EnumCreatureType.MONSTER, new BiomeGenBase[]{ BiomeGenBase.mushroomIslandShore });
+		EntityRegistry.removeSpawn(EntityAbyssalZombie.class, EnumCreatureType.MONSTER, BiomeGenBase.mushroomIslandShore);
 
 		EntityRegistry.registerModEntity(EntityODBPrimed.class, "Primed ODB", 28, instance, 80, 3, true);
 
@@ -89,8 +89,7 @@ public class EntityHandler implements ILifeCycleHandler {
 
 		registerEntityWithEgg(EntityDemonPig.class, "demonpig", 41, 80, 3, true, 15771042, 14377823);
 		if(demonAnimalSpawnWeight > 0)
-			EntityRegistry.addSpawn(EntityDemonPig.class, demonAnimalSpawnWeight, 1, 3, EnumCreatureType.MONSTER, new BiomeGenBase[] {
-				BiomeGenBase.hell});
+			EntityRegistry.addSpawn(EntityDemonPig.class, demonAnimalSpawnWeight, 1, 3, EnumCreatureType.MONSTER, BiomeDictionary.getBiomesForType(Type.NETHER));
 
 		registerEntityWithEgg(EntitySkeletonGoliath.class, "gskeleton", 42, 80, 3, true, 0xD6D6C9, 0xC6C7AD);
 
@@ -144,36 +143,33 @@ public class EntityHandler implements ILifeCycleHandler {
 		EntityRegistry.addSpawn(EntityLesserShoggoth.class, 3, 1, 1, EnumCreatureType.MONSTER, BiomeDictionary.getBiomesForType(Type.WATER));
 		EntityRegistry.addSpawn(EntityLesserShoggoth.class, 3, 1, 1, EnumCreatureType.MONSTER, BiomeDictionary.getBiomesForType(Type.BEACH));
 		EntityRegistry.addSpawn(EntityLesserShoggoth.class, 3, 1, 1, EnumCreatureType.MONSTER, BiomeDictionary.getBiomesForType(Type.SWAMP));
-		EntityRegistry.addSpawn(EntityLesserShoggoth.class, 3, 1, 1, EnumCreatureType.MONSTER, new BiomeGenBase[]{
-			ACBiomes.abyssal_wastelands, ACBiomes.dreadlands, ACBiomes.purified_dreadlands, ACBiomes.dreadlands_mountains,
-			ACBiomes.dreadlands_forest, ACBiomes.omothol, ACBiomes.dark_realm});
-		EntityRegistry.removeSpawn(EntityLesserShoggoth.class, EnumCreatureType.MONSTER, new BiomeGenBase[]{ BiomeGenBase.mushroomIslandShore });
+		EntityRegistry.addSpawn(EntityLesserShoggoth.class, 3, 1, 1, EnumCreatureType.MONSTER, ACBiomes.abyssal_wastelands, ACBiomes.dreadlands,
+				ACBiomes.purified_dreadlands, ACBiomes.dreadlands_mountains, ACBiomes.dreadlands_forest, ACBiomes.omothol, ACBiomes.dark_realm);
+		EntityRegistry.removeSpawn(EntityLesserShoggoth.class, EnumCreatureType.MONSTER, BiomeGenBase.mushroomIslandShore);
 
 		registerEntityWithEgg(EntityEvilCow.class, "evilcow", 67, 80, 3, true, 4470310, 10592673);
 		if(evilAnimalSpawnWeight > 0)
-			EntityRegistry.addSpawn(EntityEvilCow.class, evilAnimalSpawnWeight, 1, 3, evilAnimalCreatureType ? EnumCreatureType.MONSTER : EnumCreatureType.CREATURE, new BiomeGenBase[] {
-				BiomeGenBase.taiga, BiomeGenBase.plains, BiomeGenBase.forest, BiomeGenBase.savanna,
-				BiomeGenBase.beach, BiomeGenBase.extremeHills, BiomeGenBase.jungle, BiomeGenBase.savannaPlateau,
-				BiomeGenBase.swampland, BiomeGenBase.icePlains, BiomeGenBase.birchForest,
-				BiomeGenBase.birchForestHills, BiomeGenBase.roofedForest});
+			EntityRegistry.addSpawn(EntityEvilCow.class, evilAnimalSpawnWeight, 1, 3, evilAnimalCreatureType ? EnumCreatureType.MONSTER : EnumCreatureType.CREATURE,
+					BiomeGenBase.taiga, BiomeGenBase.plains, BiomeGenBase.forest, BiomeGenBase.savanna,
+					BiomeGenBase.beach, BiomeGenBase.extremeHills, BiomeGenBase.jungle, BiomeGenBase.savannaPlateau,
+					BiomeGenBase.swampland, BiomeGenBase.icePlains, BiomeGenBase.birchForest,
+					BiomeGenBase.birchForestHills, BiomeGenBase.roofedForest);
 
 		registerEntityWithEgg(EntityEvilChicken.class, "evilchicken", 68, 80, 3, true, 10592673, 16711680);
 		if(evilAnimalSpawnWeight > 0)
-			EntityRegistry.addSpawn(EntityEvilChicken.class, evilAnimalSpawnWeight, 1, 3, evilAnimalCreatureType ? EnumCreatureType.MONSTER : EnumCreatureType.CREATURE, new BiomeGenBase[] {
-				BiomeGenBase.taiga, BiomeGenBase.plains, BiomeGenBase.forest, BiomeGenBase.savanna,
-				BiomeGenBase.beach, BiomeGenBase.extremeHills, BiomeGenBase.jungle, BiomeGenBase.savannaPlateau,
-				BiomeGenBase.swampland, BiomeGenBase.icePlains, BiomeGenBase.birchForest,
-				BiomeGenBase.birchForestHills, BiomeGenBase.roofedForest});
+			EntityRegistry.addSpawn(EntityEvilChicken.class, evilAnimalSpawnWeight, 1, 3, evilAnimalCreatureType ? EnumCreatureType.MONSTER : EnumCreatureType.CREATURE,
+					BiomeGenBase.taiga, BiomeGenBase.plains, BiomeGenBase.forest, BiomeGenBase.savanna,
+					BiomeGenBase.beach, BiomeGenBase.extremeHills, BiomeGenBase.jungle, BiomeGenBase.savannaPlateau,
+					BiomeGenBase.swampland, BiomeGenBase.icePlains, BiomeGenBase.birchForest,
+					BiomeGenBase.birchForestHills, BiomeGenBase.roofedForest);
 
 		registerEntityWithEgg(EntityDemonCow.class, "demoncow", 69, 80, 3, true, 4470310, 10592673);
 		if(demonAnimalSpawnWeight > 0)
-			EntityRegistry.addSpawn(EntityDemonCow.class, demonAnimalSpawnWeight, 1, 3, EnumCreatureType.MONSTER, new BiomeGenBase[] {
-				BiomeGenBase.hell});
+			EntityRegistry.addSpawn(EntityDemonCow.class, demonAnimalSpawnWeight, 1, 3, EnumCreatureType.MONSTER, BiomeDictionary.getBiomesForType(Type.NETHER));
 
 		registerEntityWithEgg(EntityDemonChicken.class, "demonchicken", 70, 80, 3, true, 10592673, 16711680);
 		if(demonAnimalSpawnWeight > 0)
-			EntityRegistry.addSpawn(EntityDemonChicken.class, demonAnimalSpawnWeight, 1, 3, EnumCreatureType.MONSTER, new BiomeGenBase[] {
-				BiomeGenBase.hell});
+			EntityRegistry.addSpawn(EntityDemonChicken.class, demonAnimalSpawnWeight, 1, 3, EnumCreatureType.MONSTER, BiomeDictionary.getBiomesForType(Type.NETHER));
 
 		EntityRegistry.registerModEntity(EntityGatekeeperEssence.class, "GatekeeperEssence", 71, instance, 64, 10, true);
 

@@ -11,7 +11,6 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.common.blocks.tile;
 
-import net.minecraft.block.Block;
 import net.minecraft.entity.effect.EntityLightningBolt;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -21,14 +20,12 @@ import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
-import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.ITickable;
 
-import com.shinoow.abyssalcraft.api.energy.EnergyEnum.DeityType;
-import com.shinoow.abyssalcraft.api.energy.IEnergyAmplifier;
-import com.shinoow.abyssalcraft.api.energy.IEnergyManipulator;
 import com.shinoow.abyssalcraft.api.energy.EnergyEnum.AmplifierType;
+import com.shinoow.abyssalcraft.api.energy.EnergyEnum.DeityType;
+import com.shinoow.abyssalcraft.api.energy.IEnergyManipulator;
 import com.shinoow.abyssalcraft.api.energy.IEnergyTransporterItem;
 import com.shinoow.abyssalcraft.api.energy.PEUtils;
 import com.shinoow.abyssalcraft.api.energy.disruption.DisruptionHandler;
@@ -48,10 +45,15 @@ public class TileEntityStatue extends TileEntity implements IEnergyManipulator, 
 		super.readFromNBT(nbttagcompound);
 		timer = nbttagcompound.getInteger("Timer");
 		activationTimer = nbttagcompound.getInteger("ActivationTimer");
-		if(nbttagcompound.hasKey("Deity") && !nbttagcompound.getString("Deity").equals(""))
-			currentDeity = DeityType.valueOf(nbttagcompound.getString("Deity"));
-		if(nbttagcompound.hasKey("Amplifier") && !nbttagcompound.getString("Amplifier").equals(""))
-			currentAmplifier = AmplifierType.valueOf(nbttagcompound.getString("Amplifier"));
+		if(nbttagcompound.hasKey("Deity") && !nbttagcompound.hasKey("ActiveDeity")){//Converting the old tags
+			nbttagcompound.setString("ActiveDeity", nbttagcompound.getString("Deity"));
+			nbttagcompound.removeTag("Deity");
+		}
+		if(nbttagcompound.hasKey("Amplifier") && !nbttagcompound.hasKey("ActiveAmplifier")){
+			nbttagcompound.setString("ActiveAmplifier", nbttagcompound.getString("Amplifier"));
+			nbttagcompound.removeTag("Amplifier");
+		}
+		PEUtils.readManipulatorNBT(this, nbttagcompound);
 	}
 
 	@Override
@@ -60,10 +62,7 @@ public class TileEntityStatue extends TileEntity implements IEnergyManipulator, 
 		super.writeToNBT(nbttagcompound);
 		nbttagcompound.setInteger("Timer", timer);
 		nbttagcompound.setInteger("ActivationTimer", activationTimer);
-		if(currentDeity != null)
-			nbttagcompound.setString("Deity", currentDeity.name());
-		if(currentAmplifier != null)
-			nbttagcompound.setString("Amplifier", currentAmplifier.name());
+		PEUtils.writeManipulatorNBT(this, nbttagcompound);
 
 	}
 
@@ -84,8 +83,8 @@ public class TileEntityStatue extends TileEntity implements IEnergyManipulator, 
 	public void setActive(AmplifierType amp, DeityType deity){
 		if(!isActive()){
 			activationTimer = 1200;
-			currentAmplifier = amp;
-			currentDeity = deity;
+			setActiveDeity(deity);
+			setActiveAmplifier(amp);
 		}
 	}
 
@@ -97,7 +96,7 @@ public class TileEntityStatue extends TileEntity implements IEnergyManipulator, 
 	@Override
 	public float getEnergyQuanta() {
 
-		return isActive() ? 10 * getAmplifier(AmplifierType.POWER) : 5;
+		return isActive() ? 10 * Math.max(getAmplifier(AmplifierType.POWER), 1.0F) : 5;
 	}
 
 	@Override
@@ -106,55 +105,45 @@ public class TileEntityStatue extends TileEntity implements IEnergyManipulator, 
 		return null;
 	}
 
-	private int getPillarMultiplier(){
-		Block block1 = worldObj.getBlockState(new BlockPos(pos.getX(), pos.getY() - 1, pos.getZ())).getBlock();
-		Block block2 = worldObj.getBlockState(new BlockPos(pos.getX(), pos.getY() - 2, pos.getZ())).getBlock();
-		int num = 0;
-		if(block1 != null && block1 instanceof IEnergyAmplifier &&
-				((IEnergyAmplifier) block1).getAmplifierType() == AmplifierType.RANGE)
-			num = 4;
-		if(block1 != null && block1 instanceof IEnergyAmplifier &&
-				((IEnergyAmplifier) block1).getAmplifierType() == AmplifierType.RANGE
-				&& block2 != null && block2 instanceof IEnergyAmplifier &&
-				((IEnergyAmplifier) block2).getAmplifierType() == AmplifierType.RANGE)
-			num = 8;
-		return num;
-	}
-
 	@Override
 	public float getAmplifier(AmplifierType type){
 
-		switch(type){
-		case DURATION:
-			if(type == currentAmplifier)
+		if(type == currentAmplifier)
+			switch(type){
+			case DURATION:
 				return currentDeity == getDeity() ? 4 : 2;
-			else return 1;
-		case POWER:
-			if(type == currentAmplifier)
+			case POWER:
 				return currentDeity == getDeity() ? 2.5F : 1.5F;
-			else return 1;
-		case RANGE:
-			if(type == currentAmplifier)
+			case RANGE:
 				return currentDeity == getDeity() ? 6 : 4;
-			else return 0;
-		default:
-			return 0;
-		}
+			default:
+				return 0;
+			}
+		else return 0;
 	}
 
 	@Override
-	public void clearData(){
-		if(!isActive()){
-			NBTTagCompound tag = new NBTTagCompound();
-			writeToNBT(tag);
+	public DeityType getActiveDeity() {
 
-			tag.setString("Deity", "");
-			tag.setString("Amplifier", "");
-			currentDeity = null;
-			currentAmplifier = null;
+		return currentDeity;
+	}
 
-			readFromNBT(tag);
-		}
+	@Override
+	public AmplifierType getActiveAmplifier() {
+
+		return currentAmplifier;
+	}
+
+	@Override
+	public void setActiveDeity(DeityType deity) {
+
+		currentDeity = deity;
+	}
+
+	@Override
+	public void setActiveAmplifier(AmplifierType amplifier) {
+
+		currentAmplifier = amplifier;
 	}
 
 	@Override
@@ -174,31 +163,28 @@ public class TileEntityStatue extends TileEntity implements IEnergyManipulator, 
 			worldObj.spawnParticle(EnumParticleTypes.PORTAL, pos.getX() + 0.5, pos.getY() + 0.9, pos.getZ() + 0.5, 0, 0, 0);
 		}
 
-		int range = (int) (7 + getPillarMultiplier() + getAmplifier(AmplifierType.RANGE));
+		int range = (int) (7 + PEUtils.getRangeAmplifiers(worldObj, pos)*4 + getAmplifier(AmplifierType.RANGE));
 
 		int xp = pos.getX();
 		int yp = pos.getY();
 		int zp = pos.getZ();
 
-		if(!(worldObj.getTileEntity(new BlockPos(xp, yp + 1, zp)) instanceof IEnergyManipulator) &&
-				!(worldObj.getTileEntity(new BlockPos(xp, yp - 1, zp)) instanceof IEnergyManipulator) &&
-				!(worldObj.getTileEntity(new BlockPos(xp, yp + 2, zp)) instanceof IEnergyManipulator) &&
-				!(worldObj.getTileEntity(new BlockPos(xp, yp - 2, zp)) instanceof IEnergyManipulator)){
+		if(PEUtils.checkForAdjacentManipulators(worldObj, pos)){
 			if(worldObj.getClosestPlayer(xp, yp, zp, range) != null &&
 					EntityUtil.hasNecronomicon(worldObj.getClosestPlayer(xp, yp, zp, range))){
 				ItemStack item = worldObj.getClosestPlayer(xp, yp, zp, range).getCurrentEquippedItem();
 				if(item != null && item.getItem() instanceof IEnergyTransporterItem){
 					timer++;
-					if(timer >= (int)(timerMax / getAmplifier(AmplifierType.DURATION))){
+					if(timer >= (int)(timerMax / Math.max(getAmplifier(AmplifierType.DURATION), 1.0F))){
 						timer = worldObj.rand.nextInt(10);
 						PEUtils.transferPEToNearbyPlayers(worldObj, pos, this, range);
 					}
 				}
 			}
 
-			PEUtils.transferPEToCollectors(worldObj, pos, this, (int)(getPillarMultiplier()/4 + getAmplifier(AmplifierType.RANGE)/2));
+			PEUtils.transferPEToCollectors(worldObj, pos, this, (int)(PEUtils.getRangeAmplifiers(worldObj, pos) + getAmplifier(AmplifierType.RANGE)/2));
 		}
 		disrupt(worldObj.rand.nextInt(20 * (isActive() ? 40 : 200) * (worldObj.getClosestPlayer(xp, yp, zp, range * 2) != null ? 1 : 10)) == 0);
-		clearData();
+		PEUtils.clearManipulatorData(this);
 	}
 }
