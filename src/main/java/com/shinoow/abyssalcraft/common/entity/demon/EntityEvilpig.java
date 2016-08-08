@@ -23,9 +23,9 @@ import net.minecraft.entity.ai.EntityAIWander;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Items;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.translation.I18n;
@@ -33,6 +33,7 @@ import net.minecraft.world.World;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.common.entity.EntityLesserShoggoth;
+import com.shinoow.abyssalcraft.lib.ACLoot;
 
 public class EntityEvilpig extends EntityMob {
 
@@ -107,13 +108,8 @@ public class EntityEvilpig extends EntityMob {
 			}
 	}
 
-	/**
-	 * Drop 0-2 items of this living's type
-	 */
 	@Override
-	protected void dropFewItems(boolean par1, int par2){
-		int var3 = rand.nextInt(3) + 1 + rand.nextInt(1 + par2);
-		for (int var4 = 0; var4 < var3; ++var4)
-			dropItem(Items.PORKCHOP, 1);
+	protected ResourceLocation getLootTable(){
+		return ACLoot.ENTITY_EVIL_PIG;
 	}
 }

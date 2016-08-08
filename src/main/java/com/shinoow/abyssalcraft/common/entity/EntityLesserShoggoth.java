@@ -45,6 +45,7 @@ import net.minecraft.pathfinding.PathNavigate;
 import net.minecraft.pathfinding.PathNavigateClimber;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
@@ -64,6 +65,7 @@ import com.shinoow.abyssalcraft.api.item.ACItems;
 import com.shinoow.abyssalcraft.common.entity.demon.EntityDemonPig;
 import com.shinoow.abyssalcraft.common.world.gen.WorldGenShoggothMonolith;
 import com.shinoow.abyssalcraft.lib.ACLib;
+import com.shinoow.abyssalcraft.lib.ACLoot;
 
 public class EntityLesserShoggoth extends EntityMob implements ICoraliumEntity, IDreadEntity {
 
@@ -386,6 +388,23 @@ public class EntityLesserShoggoth extends EntityMob implements ICoraliumEntity, 
 			for (int j = 0; j < i; ++j)
 				entityDropItem(item, 0);
 		}
+	}
+
+	@Override
+	protected ResourceLocation getLootTable(){
+		switch(getShoggothType()){
+		case 0:
+			return ACLoot.ENTITY_LESSER_SHOGGOTH;
+		case 1:
+			return ACLoot.ENTITY_LESSER_ABYSSAL_SHOGGOTH;
+		case 2:
+			return ACLoot.ENTITY_LESSER_DREADED_SHOGGOTH;
+		case 3:
+			return ACLoot.ENTITY_LESSER_OMOTHOL_SHOGGOTH;
+		case 4:
+			return ACLoot.ENTITY_LESSER_SHADOW_SHOGGOTH;
+		}
+		return null;
 	}
 
 	@Override

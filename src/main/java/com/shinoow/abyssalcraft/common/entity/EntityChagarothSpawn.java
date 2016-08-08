@@ -28,6 +28,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.Item;
 import net.minecraft.potion.PotionEffect;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -36,6 +37,7 @@ import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
 import com.shinoow.abyssalcraft.api.entity.IDreadEntity;
 import com.shinoow.abyssalcraft.api.item.ACItems;
+import com.shinoow.abyssalcraft.lib.ACLoot;
 
 public class EntityChagarothSpawn extends EntityMob implements IDreadEntity {
 
@@ -107,7 +109,11 @@ public class EntityChagarothSpawn extends EntityMob implements IDreadEntity {
 	protected Item getDropItem()
 	{
 		return ACItems.dread_fragment;
+	}
 
+	@Override
+	protected ResourceLocation getLootTable(){
+		return ACLoot.ENTITY_SPAWN_OF_CHAGAROTH;
 	}
 
 	@Override

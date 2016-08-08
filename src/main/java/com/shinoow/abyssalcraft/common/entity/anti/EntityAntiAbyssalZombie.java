@@ -37,6 +37,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.DifficultyInstance;
@@ -48,6 +49,7 @@ import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.api.entity.IAntiEntity;
 import com.shinoow.abyssalcraft.api.item.ACItems;
 import com.shinoow.abyssalcraft.common.entity.EntityAbyssalZombie;
+import com.shinoow.abyssalcraft.lib.ACLoot;
 
 public class EntityAntiAbyssalZombie extends EntityMob implements IAntiEntity {
 
@@ -168,8 +170,13 @@ public class EntityAntiAbyssalZombie extends EntityMob implements IAntiEntity {
 	protected Item getDropItem()
 	{
 		return ACItems.anti_plagued_flesh;
-
 	}
+
+	@Override
+	protected ResourceLocation getLootTable(){
+		return ACLoot.ENTITY_ABYSSAL_ANTI_ZOMBIE;
+	}
+
 	@Override
 	public EnumCreatureAttribute getCreatureAttribute()
 	{

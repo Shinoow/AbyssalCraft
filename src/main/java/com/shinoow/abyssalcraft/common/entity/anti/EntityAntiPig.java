@@ -30,12 +30,14 @@ import net.minecraft.init.Items;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 import com.shinoow.abyssalcraft.api.entity.IAntiEntity;
 import com.shinoow.abyssalcraft.api.item.ACItems;
+import com.shinoow.abyssalcraft.lib.ACLoot;
 
 public class EntityAntiPig extends EntityAnimal implements IAntiEntity {
 
@@ -96,6 +98,11 @@ public class EntityAntiPig extends EntityAnimal implements IAntiEntity {
 	protected Item getDropItem()
 	{
 		return isBurning() ? ACItems.anti_pork : ACItems.anti_pork;
+	}
+
+	@Override
+	protected ResourceLocation getLootTable(){
+		return ACLoot.ENTITY_ANTI_PIG;
 	}
 
 	@Override

@@ -47,7 +47,6 @@ import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.World;
-import net.minecraft.world.storage.loot.LootTableList;
 import net.minecraftforge.common.ForgeModContainer;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -55,6 +54,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.api.entity.IAntiEntity;
 import com.shinoow.abyssalcraft.api.item.ACItems;
+import com.shinoow.abyssalcraft.lib.ACLoot;
 
 public class EntityAntiZombie extends EntityMob implements IAntiEntity {
 
@@ -212,8 +212,8 @@ public class EntityAntiZombie extends EntityMob implements IAntiEntity {
 	}
 
 	@Override
-	public ResourceLocation getLootTable(){
-		return LootTableList.ENTITIES_ZOMBIE;
+	protected ResourceLocation getLootTable(){
+		return ACLoot.ENTITY_ANTI_ZOMBIE;
 	}
 
 	@Override

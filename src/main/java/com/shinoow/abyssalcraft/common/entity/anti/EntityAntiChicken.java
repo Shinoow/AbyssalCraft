@@ -31,12 +31,14 @@ import net.minecraft.init.SoundEvents;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemSeeds;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 import com.shinoow.abyssalcraft.api.entity.IAntiEntity;
 import com.shinoow.abyssalcraft.api.item.ACItems;
+import com.shinoow.abyssalcraft.lib.ACLoot;
 
 public class EntityAntiChicken extends EntityAnimal implements IAntiEntity {
 
@@ -134,6 +136,11 @@ public class EntityAntiChicken extends EntityAnimal implements IAntiEntity {
 	protected Item getDropItem()
 	{
 		return Items.FEATHER;
+	}
+
+	@Override
+	protected ResourceLocation getLootTable(){
+		return ACLoot.ENTITY_ANTI_CHICKEN;
 	}
 
 	@Override
