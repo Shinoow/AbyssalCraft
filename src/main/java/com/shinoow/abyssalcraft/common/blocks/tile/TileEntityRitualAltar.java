@@ -95,6 +95,12 @@ public class TileEntityRitualAltar extends TileEntity implements ITickable, IRit
 		}
 
 		if(isPerformingRitual()){
+			if(ritualTimer == 1){
+				String chant = getRandomChant();
+				worldObj.playSound(pos.getX(), pos.getY(), pos.getZ(), chant, 1, 1, true);
+				worldObj.playSound(pos.getX(), pos.getY(), pos.getZ(), chant, 1, 1, true);
+				worldObj.playSound(pos.getX(), pos.getY(), pos.getZ(), chant, 1, 1, true);
+			}
 			ritualTimer++;
 
 			if(ritual != null){
@@ -303,6 +309,12 @@ public class TileEntityRitualAltar extends TileEntity implements ITickable, IRit
 		return !(entity instanceof EntityPlayer) && (EntityUtil.isShoggothFood(entity) || entity instanceof EntityVillager) &&
 				entity.getCreatureAttribute() != EnumCreatureAttribute.UNDEAD &&
 				entity.isEntityAlive() && !entity.isChild();
+	}
+
+	private String getRandomChant(){
+		String[] chants = {"abyssalcraft:chant.cthulhu", "abyssalcraft:chant.yog_sothoth_1", "abyssalcraft:chant.yog_sothoth_2",
+				"abyssalcraft:chant.hastur_1", "abyssalcraft:chant.hastur_2", "abyssalcraft:chant.sleeping", "abyssalcraft:chant.cthugha"};
+		return chants[worldObj.rand.nextInt(chants.length)];
 	}
 
 	@Override

@@ -1,5 +1,5 @@
 {
-	"parent": "abyssalcraft:block/cstonebrick",
+	"parent": "abyssalcraft:block/darkethaxiumbrick_2",
 	"display": {
 		"thirdperson": {
 			"rotation": [ 10, -45, 170 ],

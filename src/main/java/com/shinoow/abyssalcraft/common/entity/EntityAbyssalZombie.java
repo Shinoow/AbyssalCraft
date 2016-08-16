@@ -306,7 +306,7 @@ public class EntityAbyssalZombie extends EntityMob implements ICoraliumEntity {
 	@Override
 	protected void updateEquipmentIfNeeded(EntityItem itemEntity)
 	{
-		if(itemEntity.getEntityItem().getItem() != Items.rotten_flesh || AbyssalCraft.abyssalZombiesPickupRottenFlesh)
+		if(!AbyssalCraft.isItemBlacklisted(this, itemEntity.getEntityItem()))
 			super.updateEquipmentIfNeeded(itemEntity);
 	}
 

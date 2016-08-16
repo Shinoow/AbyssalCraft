@@ -23,14 +23,18 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IStringSerializable;
 
-public class BlockEthaxiumBrick extends BlockACBasic {
+public class BlockACBrick extends BlockACBasic {
 
-	public static final PropertyEnum TYPE = PropertyEnum.create("type", BlockEthaxiumBrick.EnumBrickType.class);
+	public static final PropertyEnum TYPE = PropertyEnum.create("type", BlockACBrick.EnumBrickType.class);
 
-	public BlockEthaxiumBrick(float hardness) {
-		super(Material.rock, "pickaxe", 8, hardness, Float.MAX_VALUE, soundTypeStone);
+	public BlockACBrick(int harvestlevel, float hardness, float resistance) {
+		super(Material.rock, "pickaxe", harvestlevel, hardness, resistance, soundTypeStone);
 		setDefaultState(blockState.getBaseState().withProperty(TYPE, EnumBrickType.NORMAL));
+	}
 
+	public BlockACBrick(float hardness, float resistance) {
+		super(Material.rock, hardness, resistance, soundTypeStone);
+		setDefaultState(blockState.getBaseState().withProperty(TYPE, EnumBrickType.NORMAL));
 	}
 
 	@Override
@@ -41,8 +45,8 @@ public class BlockEthaxiumBrick extends BlockACBasic {
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
 	public void getSubBlocks(Item par1, CreativeTabs par2CreativeTabs, List par3List) {
-		par3List.add(new ItemStack(par1, 1, 0));
-		par3List.add(new ItemStack(par1, 1, 1));
+		for(int i = 0; i < EnumBrickType.values().length; i++)
+			par3List.add(new ItemStack(par1, 1, i));
 	}
 
 	@Override
@@ -62,9 +66,10 @@ public class BlockEthaxiumBrick extends BlockACBasic {
 
 	public enum EnumBrickType implements IStringSerializable {
 		NORMAL(0, "normal"),
-		CHISELED(1, "chiseled");
+		CHISELED(1, "chiseled"),
+		CRACKED(2, "cracked");
 
-		private static final BlockEthaxiumBrick.EnumBrickType[] META_LOOKUP = new BlockEthaxiumBrick.EnumBrickType[values().length];
+		private static final BlockACBrick.EnumBrickType[] META_LOOKUP = new BlockACBrick.EnumBrickType[values().length];
 
 		private int meta;
 		private String name;
@@ -74,7 +79,7 @@ public class BlockEthaxiumBrick extends BlockACBasic {
 			this.name = name;
 		}
 
-		public static BlockEthaxiumBrick.EnumBrickType byMetadata(int meta)
+		public static BlockACBrick.EnumBrickType byMetadata(int meta)
 		{
 			if (meta < 0 || meta >= META_LOOKUP.length)
 				meta = 0;
@@ -97,7 +102,7 @@ public class BlockEthaxiumBrick extends BlockACBasic {
 		}
 
 		static {
-			for(BlockEthaxiumBrick.EnumBrickType type : values())
+			for(BlockACBrick.EnumBrickType type : values())
 				META_LOOKUP[type.getMeta()] = type;
 		}
 	}

@@ -57,8 +57,8 @@ public class MiscHandler implements ILifeCycleHandler {
 		Enchantment.addToBookList(AbyssalCraftAPI.light_pierce);
 		Enchantment.addToBookList(AbyssalCraftAPI.iron_wall);
 
-		LIQUID_CORALIUM.setBlock(ACBlocks.liquid_coralium).setUnlocalizedName(ACBlocks.liquid_coralium.getUnlocalizedName());
-		LIQUID_ANTIMATTER.setBlock(ACBlocks.liquid_antimatter).setUnlocalizedName(ACBlocks.liquid_antimatter.getUnlocalizedName());
+		LIQUID_CORALIUM.setBlock(ACBlocks.liquid_coralium);
+		LIQUID_ANTIMATTER.setBlock(ACBlocks.liquid_antimatter);
 		if(CFluid.getBlock() == null)
 			CFluid.setBlock(ACBlocks.liquid_coralium);
 		if(antifluid.getBlock() == null)

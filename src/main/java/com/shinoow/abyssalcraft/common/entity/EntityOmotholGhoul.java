@@ -25,6 +25,7 @@ import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
 import net.minecraft.entity.ai.EntityAISwimming;
 import net.minecraft.entity.ai.EntityAIWander;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
+import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
@@ -132,6 +133,13 @@ public class EntityOmotholGhoul extends EntityMob implements IAntiEntity, ICoral
 	public EnumCreatureAttribute getCreatureAttribute()
 	{
 		return EnumCreatureAttribute.UNDEAD;
+	}
+
+	@Override
+	protected void updateEquipmentIfNeeded(EntityItem itemEntity)
+	{
+		if(!AbyssalCraft.isItemBlacklisted(this, itemEntity.getEntityItem()))
+			super.updateEquipmentIfNeeded(itemEntity);
 	}
 
 	@Override

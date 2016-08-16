@@ -42,6 +42,7 @@ public class ACConfigGUI extends GuiConfig {
 		list.add(new DummyCategoryElement(StatCollector.translateToLocal("ac_general"), "ac_general", GeneralEntry.class));
 		list.add(new DummyCategoryElement(StatCollector.translateToLocal("ac_shoggoth"), "ac_shoggoth", ShoggothEntry.class));
 		list.add(new DummyCategoryElement(StatCollector.translateToLocal("ac_worldgen"), "ac_worldgen", WorldGenEntry.class));
+		list.add(new DummyCategoryElement(StatCollector.translateToLocal("ac_itemblacklist"), "ac_itemblacklist", ItemBlacklistEntry.class));
 		return list;
 	}
 
@@ -134,6 +135,18 @@ public class ACConfigGUI extends GuiConfig {
 		@Override
 		protected GuiScreen buildChildScreen(){
 			return new GuiConfig(owningScreen, new ConfigElement(AbyssalCraft.cfg.getCategory("worldgen")).getChildElements(), "abyssalcraft", "worldgen", false, false, StatCollector.translateToLocal("ac_worldgen"));
+
+		}
+	}
+	public static class ItemBlacklistEntry extends CategoryEntry{
+
+		public ItemBlacklistEntry(GuiConfig owningScreen, GuiConfigEntries owningEntryList, IConfigElement configElement) {
+			super(owningScreen, owningEntryList, configElement);
+		}
+
+		@Override
+		protected GuiScreen buildChildScreen(){
+			return new GuiConfig(owningScreen, new ConfigElement(AbyssalCraft.cfg.getCategory("item_blacklist")).getChildElements(), "abyssalcraft", "item_blacklist", true, true, StatCollector.translateToLocal("ac_itemblacklist"));
 
 		}
 	}

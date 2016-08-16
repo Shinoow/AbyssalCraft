@@ -31,6 +31,7 @@ import net.minecraft.entity.ai.EntityAIWander;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.ai.attributes.IAttributeInstance;
+import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.monster.EntitySkeleton;
 import net.minecraft.entity.monster.EntityZombie;
@@ -346,6 +347,13 @@ public class EntityDepthsGhoul extends EntityMob implements ICoraliumEntity {
 			par1NBTTagCompound.setBoolean("IsBaby", true);
 
 		par1NBTTagCompound.setByte("GhoulType", (byte)getGhoulType());
+	}
+
+	@Override
+	protected void updateEquipmentIfNeeded(EntityItem itemEntity)
+	{
+		if(!AbyssalCraft.isItemBlacklisted(this, itemEntity.getEntityItem()))
+			super.updateEquipmentIfNeeded(itemEntity);
 	}
 
 	@Override

@@ -30,11 +30,18 @@ import net.minecraftforge.fml.common.Mod.*;
 import net.minecraftforge.fml.common.event.*;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
+import net.minecraftforge.oredict.OreDictionary;
 
+import com.google.common.collect.Lists;
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI.FuelType;
 import com.shinoow.abyssalcraft.api.entity.EntityUtil;
 import com.shinoow.abyssalcraft.common.CommonProxy;
+import com.shinoow.abyssalcraft.common.entity.EntityAbyssalZombie;
+import com.shinoow.abyssalcraft.common.entity.EntityDepthsGhoul;
+import com.shinoow.abyssalcraft.common.entity.EntityOmotholGhoul;
+import com.shinoow.abyssalcraft.common.entity.anti.EntityAntiAbyssalZombie;
+import com.shinoow.abyssalcraft.common.entity.anti.EntityAntiGhoul;
 import com.shinoow.abyssalcraft.common.handlers.*;
 import com.shinoow.abyssalcraft.common.util.ACLogger;
 import com.shinoow.abyssalcraft.init.*;
@@ -96,9 +103,6 @@ public class AbyssalCraft {
 	//shadow items
 	public static Item shadowPlate;
 
-	@Deprecated
-	public static int configDimId1, configDimId2, configDimId3, configDimId4;
-
 	public static boolean keepLoaded1, keepLoaded2, keepLoaded3, keepLoaded4;
 
 	//Biome Ids
@@ -112,7 +116,7 @@ public class AbyssalCraft {
 
 	public static boolean shouldSpread, shouldInfect, breakLogic, destroyOcean, demonAnimalFire, updateC, darkness,
 	particleBlock, particleEntity, hardcoreMode, useDynamicPotionIds, evilAnimalCreatureType,
-	antiItemDisintegration, abyssalZombiesPickupRottenFlesh;
+	antiItemDisintegration;
 	public static int evilAnimalSpawnWeight, endAbyssalZombieSpawnWeight, portalCooldown, demonAnimalSpawnWeight;
 	public static boolean shoggothOoze, oozeLeaves, oozeGrass, oozeGround, oozeSand, oozeRock, oozeCloth, oozeWood,
 	oozeGourd, oozeIron, oozeClay;
@@ -122,6 +126,15 @@ public class AbyssalCraft {
 	generateDreadlandsAbyssalniteOre, generateDreadedAbyssalniteOre, generateAbyssalIronOre, generateAbyssalGoldOre,
 	generateAbyssalDiamondOre, generateAbyssalNitreOre, generateAbyssalTinOre, generateAbyssalCopperOre,
 	generatePearlescentCoraliumOre, generateLiquifiedCoraliumOre;
+
+	private static String[] abyssalZombieBlacklist, depthsGhoulBlacklist, antiAbyssalZombieBlacklist, antiGhoulBlacklist,
+	omotholGhoulBlacklist;
+
+	private static final List<ItemStack> abyssal_zombie_blacklist = Lists.newArrayList();
+	private static final List<ItemStack> depths_ghoul_blacklist = Lists.newArrayList();
+	private static final List<ItemStack> anti_abyssal_zombie_blacklist = Lists.newArrayList();
+	private static final List<ItemStack> anti_ghoul_blacklist = Lists.newArrayList();
+	private static final List<ItemStack> omothol_ghoul_blacklist = Lists.newArrayList();
 
 	public static final int crystallizerGuiID = 30;
 	public static final int transmutatorGuiID = 31;
@@ -155,6 +168,7 @@ public class AbyssalCraft {
 		cfg.setCategoryComment("biome_weight", "Biome weight configuration (the chance n out of 100 that a biome is picked to generate). Any changes take effect after a Minecraft restart.");
 		cfg.setCategoryComment("shoggoth", "Shoggoth Ooze configuration (blacklist materials from turning into ooze). Any changes take effect immediately.");
 		cfg.setCategoryComment("worldgen", "World generation configuration (things that generate in the world). Any changes take effect immediately.");
+		cfg.setCategoryComment("item_blacklist", "Entity Item Blacklist (allows you to blacklist items/blocks for entities that can pick up things). Any changes take effect after a Minecraft restart.");
 
 		if(!FluidRegistry.isFluidRegistered("liquidcoralium")){
 			CFluid = LIQUID_CORALIUM;
@@ -193,6 +207,7 @@ public class AbyssalCraft {
 
 		ACLogger.info("Post-initializing AbyssalCraft");
 		proxy.postInit();
+		constructBlacklists();
 		for(ILifeCycleHandler handler : handlers)
 			handler.postInit(event);
 		ACLogger.info("AbyssalCraft loaded.");
@@ -574,11 +589,6 @@ public class AbyssalCraft {
 		ACLib.omothol_id = cfg.get("dimensions", "Omothol", 52, "The third dimension, also known as \u00A7oThe Realm of J'zahar\u00A7r.").getInt();
 		ACLib.dark_realm_id = cfg.get("dimensions", "The Dark Realm", 53, "Hidden fourth dimension, reached by falling down from Omothol").getInt();
 
-		configDimId1 = ACLib.abyssal_wasteland_id;
-		configDimId2 = ACLib.dreadlands_id;
-		configDimId3 = ACLib.omothol_id;
-		configDimId4 = ACLib.dark_realm_id;
-
 		keepLoaded1 = cfg.get("dimensions", "Prevent unloading: The Abyssal Wasteland", false, "Set true to prevent The Abyssal Wasteland from automatically unloading (might affect performance)").getBoolean();
 		keepLoaded2 = cfg.get("dimensions", "Prevent unloading: The Dreadlands", false, "Set true to prevent The Dreadlands from automatically unloading (might affect performance)").getBoolean();
 		keepLoaded3 = cfg.get("dimensions", "Prevent unloading: Omothol", false, "Set true to prevent Omothol from automatically unloading (might affect performance)").getBoolean();
@@ -629,7 +639,6 @@ public class AbyssalCraft {
 		antiItemDisintegration = cfg.get(Configuration.CATEGORY_GENERAL, "Liquid Antimatter item disintegration", true, "Toggles whether or not Liquid Antimatter will disintegrate any items dropped into a pool of it.").getBoolean();
 		portalCooldown = cfg.get(Configuration.CATEGORY_GENERAL, "Portal cooldown", 10, "Cooldown after using a portal, increasing the value increases the delay until you can teleport again. Measured in ticks (20 ticks = 1 second).", 10, 300).getInt();
 		demonAnimalSpawnWeight = cfg.get(Configuration.CATEGORY_GENERAL, "Demon Animal spawn weight", 30, "Spawn weight for the Demon Animals (Pigs, Cows, Chickens) spawning in the Nether.").getInt();
-		abyssalZombiesPickupRottenFlesh = cfg.get(Configuration.CATEGORY_GENERAL, "Abyssal Zombies picking up Rotten Flesh", true, "Toggles whether or not Abyssal Zombies should pick up Rotten Flesh (entities holding items don't despawn)").getBoolean();
 
 		darkWeight1 = cfg.get("biome_weight", "Darklands", 10, "Biome weight for the Darklands biome, controls the chance of it generating (n out of 100)", 0, 100).getInt();
 		darkWeight2 = cfg.get("biome_weight", "Darklands Forest", 10, "Biome weight for the Darklands Forest biome, controls the chance of it generating (n out of 100)", 0, 100).getInt();
@@ -673,8 +682,99 @@ public class AbyssalCraft {
 		generatePearlescentCoraliumOre = cfg.get("worldgen", "Pearlescent Coralium Ore", true, "Toggles whether or not to generate Pearlescent Coralium Ore in the Abyssal Wasteland.").getBoolean();
 		generateLiquifiedCoraliumOre = cfg.get("worldgen", "Liquified Coralium Ore", true, "Toggles whether or not to generate Liquified Coralium Ore in the Abyssal Wasteland.").getBoolean();
 
+		abyssalZombieBlacklist = cfg.get("item_blacklist", "Abyssal Zombie Item Blacklist", new String[]{}, "Items/Blocks added to this list won't be picked up by Abyssal Zombies. Format: modid:name:meta, where meta is optional.").getStringList();
+		depthsGhoulBlacklist = cfg.get("item_blacklist", "Depths Ghoul Item Blacklist", new String[]{}, "Items/Blocks added to this list won't be picked up by Depths Ghouls. Format: modid:name:meta, where meta is optional.").getStringList();
+		antiAbyssalZombieBlacklist = cfg.get("item_blacklist", "Abyssal Anti-Zombie Item Blacklist", new String[]{}, "Items/Blocks added to this list won't be picked up by Abyssal Anti-Zombies. Format: modid:name:meta, where meta is optional.").getStringList();
+		antiGhoulBlacklist = cfg.get("item_blacklist", "Anti-Ghoul Item Blacklist", new String[]{}, "Items/Blocks added to this list won't be picked up by Anti-Ghouls. Format: modid:name:meta, where meta is optional.").getStringList();
+		omotholGhoulBlacklist = cfg.get("item_blacklist", "Omothol Ghoul Item Blacklist", new String[]{}, "Items/Blocks added to this list won't be picked up by Omothol Ghouls. Format: modid:name:meta, where meta is optional.").getStringList();
+
 		if(cfg.hasChanged())
 			cfg.save();
+	}
+
+	private void constructBlacklists(){
+		if(abyssalZombieBlacklist.length > 0)
+			for(String str : abyssalZombieBlacklist)
+				if(str.length() > 0){
+					String[] stuff = str.split(":");
+					Item item = Item.itemRegistry.getObject(new ResourceLocation(stuff[0], stuff[1]));
+					if(item != null)
+						abyssal_zombie_blacklist.add(new ItemStack(item, 1, stuff.length == 3 ? Integer.valueOf(stuff[2]) : OreDictionary.WILDCARD_VALUE));
+					else ACLogger.severe("%s is not a valid Item!", str);
+				}
+		if(depthsGhoulBlacklist.length > 0)
+			for(String str : depthsGhoulBlacklist)
+				if(str.length() > 0){
+					String[] stuff = str.split(":");
+					Item item = Item.itemRegistry.getObject(new ResourceLocation(stuff[0], stuff[1]));
+					if(item != null)
+						depths_ghoul_blacklist.add(new ItemStack(item, 1, stuff.length == 3 ? Integer.valueOf(stuff[2]) : OreDictionary.WILDCARD_VALUE));
+					else ACLogger.severe("%s is not a valid Item!", str);
+				}
+		if(antiAbyssalZombieBlacklist.length > 0)
+			for(String str : antiAbyssalZombieBlacklist)
+				if(str.length() > 0){
+					String[] stuff = str.split(":");
+					Item item = Item.itemRegistry.getObject(new ResourceLocation(stuff[0], stuff[1]));
+					if(item != null)
+						anti_abyssal_zombie_blacklist.add(new ItemStack(item, 1, stuff.length == 3 ? Integer.valueOf(stuff[2]) : OreDictionary.WILDCARD_VALUE));
+					else ACLogger.severe("%s is not a valid Item!", str);
+				}
+		if(antiGhoulBlacklist.length > 0)
+			for(String str : antiGhoulBlacklist)
+				if(str.length() > 0){
+					String[] stuff = str.split(":");
+					Item item = Item.itemRegistry.getObject(new ResourceLocation(stuff[0], stuff[1]));
+					if(item != null)
+						anti_ghoul_blacklist.add(new ItemStack(item, 1, stuff.length == 3 ? Integer.valueOf(stuff[2]) : OreDictionary.WILDCARD_VALUE));
+					else ACLogger.severe("%s is not a valid Item!", str);
+				}
+		if(omotholGhoulBlacklist.length > 0)
+			for(String str : omotholGhoulBlacklist)
+				if(str.length() > 0){
+					String[] stuff = str.split(":");
+					Item item = Item.itemRegistry.getObject(new ResourceLocation(stuff[0], stuff[1]));
+					if(item != null)
+						omothol_ghoul_blacklist.add(new ItemStack(item, 1, stuff.length == 3 ? Integer.valueOf(stuff[2]) : OreDictionary.WILDCARD_VALUE));
+					else ACLogger.severe("%s is not a valid Item!", str);
+				}
+	}
+
+	/**
+	 * Checks whether or not an Item is blacklisted for the specified Entity
+	 * @param entity Entity to check
+	 * @param stack ItemStack to check
+	 * @return True if the Item is blacklisted, otherwise false
+	 */
+	public static boolean isItemBlacklisted(Entity entity, ItemStack stack){
+		if(entity instanceof EntityAbyssalZombie)
+			if(!abyssal_zombie_blacklist.isEmpty())
+				for(ItemStack stack2 : abyssal_zombie_blacklist)
+					if(areStacksEqual(stack2, stack)) return true;
+		if(entity instanceof EntityDepthsGhoul)
+			if(!depths_ghoul_blacklist.isEmpty())
+				for(ItemStack stack2 : depths_ghoul_blacklist)
+					if(areStacksEqual(stack2, stack)) return true;
+		if(entity instanceof EntityAntiAbyssalZombie)
+			if(!anti_abyssal_zombie_blacklist.isEmpty())
+				for(ItemStack stack2 : anti_abyssal_zombie_blacklist)
+					if(areStacksEqual(stack2, stack)) return true;
+		if(entity instanceof EntityAntiGhoul)
+			if(!anti_ghoul_blacklist.isEmpty())
+				for(ItemStack stack2 : anti_ghoul_blacklist)
+					if(areStacksEqual(stack2, stack)) return true;
+		if(entity instanceof EntityOmotholGhoul)
+			if(!omothol_ghoul_blacklist.isEmpty())
+				for(ItemStack stack2 : omothol_ghoul_blacklist)
+					if(areStacksEqual(stack2, stack)) return true;
+		return false;
+	}
+
+	private static boolean areStacksEqual(ItemStack stack1, ItemStack stack2)
+	{
+		if (stack1 == null || stack2 == null) return false;
+		return stack1.getItem() == stack2.getItem() && (stack1.getItemDamage() == OreDictionary.WILDCARD_VALUE
+				|| stack1.getItemDamage() == stack2.getItemDamage());
 	}
 
 	private String getSupporterList(){

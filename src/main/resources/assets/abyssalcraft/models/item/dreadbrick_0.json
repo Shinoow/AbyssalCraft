@@ -1,5 +1,5 @@
 {
-	"parent": "abyssalcraft:block/darkstone_brick",
+	"parent": "abyssalcraft:block/dreadbrick_0",
 	"display": {
 		"thirdperson": {
 			"rotation": [ 10, -45, 170 ],

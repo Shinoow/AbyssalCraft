@@ -19,8 +19,8 @@ import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
 
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
-import com.shinoow.abyssalcraft.common.blocks.BlockEthaxiumBrick;
-import com.shinoow.abyssalcraft.common.blocks.BlockEthaxiumBrick.EnumBrickType;
+import com.shinoow.abyssalcraft.common.blocks.BlockACBrick;
+import com.shinoow.abyssalcraft.common.blocks.BlockACBrick.EnumBrickType;
 import com.shinoow.abyssalcraft.lib.util.RitualUtil;
 
 public class StructureJzaharTemple extends WorldGenerator {
@@ -272,8 +272,8 @@ public class StructureJzaharTemple extends WorldGenerator {
 					world.setBlockState(pos.add(x, y, 0), ACBlocks.dark_ethaxium_brick.getDefaultState(), 2);
 				}
 			}
-		world.setBlockState(pos.add(0, 7, 65), ACBlocks.dark_ethaxium_brick.getDefaultState().withProperty(BlockEthaxiumBrick.TYPE, EnumBrickType.CHISELED), 2);
-		world.setBlockState(pos.add(0, 7, 0), ACBlocks.dark_ethaxium_brick.getDefaultState().withProperty(BlockEthaxiumBrick.TYPE, EnumBrickType.CHISELED), 2);
+		world.setBlockState(pos.add(0, 7, 65), ACBlocks.dark_ethaxium_brick.getDefaultState().withProperty(BlockACBrick.TYPE, EnumBrickType.CHISELED), 2);
+		world.setBlockState(pos.add(0, 7, 0), ACBlocks.dark_ethaxium_brick.getDefaultState().withProperty(BlockACBrick.TYPE, EnumBrickType.CHISELED), 2);
 		for(int z = -2; z < 3; z++)
 			for(int y = 1; y < 7; y++){
 				world.setBlockToAir(pos.add(-18, y, z + 33));
@@ -292,8 +292,8 @@ public class StructureJzaharTemple extends WorldGenerator {
 					world.setBlockState(pos.add(17, y, z + 33), ACBlocks.dark_ethaxium_brick.getDefaultState(), 2);
 				}
 			}
-		world.setBlockState(pos.add(-17, 7, 33), ACBlocks.dark_ethaxium_brick.getDefaultState().withProperty(BlockEthaxiumBrick.TYPE, EnumBrickType.CHISELED), 2);
-		world.setBlockState(pos.add(17, 7, 33), ACBlocks.dark_ethaxium_brick.getDefaultState().withProperty(BlockEthaxiumBrick.TYPE, EnumBrickType.CHISELED), 2);
+		world.setBlockState(pos.add(-17, 7, 33), ACBlocks.dark_ethaxium_brick.getDefaultState().withProperty(BlockACBrick.TYPE, EnumBrickType.CHISELED), 2);
+		world.setBlockState(pos.add(17, 7, 33), ACBlocks.dark_ethaxium_brick.getDefaultState().withProperty(BlockACBrick.TYPE, EnumBrickType.CHISELED), 2);
 		for(int z = 8; z < 59; z++)
 			for(int y = 1; y < 11; y++){
 				if(z == 8 || z == 58){
@@ -536,8 +536,8 @@ public class StructureJzaharTemple extends WorldGenerator {
 		world.setBlockState(pos.add(-1, 12, 76), ACBlocks.dark_ethaxium_brick_slab.getDefaultState(), 2);
 		world.setBlockState(pos.add(0, 12, 76), ACBlocks.dark_ethaxium_brick_slab.getDefaultState(), 2);
 		world.setBlockState(pos.add(1, 12, 76), ACBlocks.dark_ethaxium_brick_slab.getDefaultState(), 2);
-		world.setBlockState(pos.add(-2, 13, 77), ACBlocks.dark_ethaxium_brick.getDefaultState().withProperty(BlockEthaxiumBrick.TYPE, EnumBrickType.CHISELED), 2);
-		world.setBlockState(pos.add(2, 13, 77), ACBlocks.dark_ethaxium_brick.getDefaultState().withProperty(BlockEthaxiumBrick.TYPE, EnumBrickType.CHISELED), 2);
+		world.setBlockState(pos.add(-2, 13, 77), ACBlocks.dark_ethaxium_brick.getDefaultState().withProperty(BlockACBrick.TYPE, EnumBrickType.CHISELED), 2);
+		world.setBlockState(pos.add(2, 13, 77), ACBlocks.dark_ethaxium_brick.getDefaultState().withProperty(BlockACBrick.TYPE, EnumBrickType.CHISELED), 2);
 		world.setBlockState(pos.add(-2, 14, 78), ACBlocks.dark_ethaxium_brick_slab.getDefaultState(), 2);
 		world.setBlockState(pos.add(2, 14, 78), ACBlocks.dark_ethaxium_brick_slab.getDefaultState(), 2);
 		world.setBlockState(pos.add(-2, 15, 80), ACBlocks.dark_ethaxium_brick_stairs.getStateFromMeta(0), 2);
@@ -576,8 +576,8 @@ public class StructureJzaharTemple extends WorldGenerator {
 					world.setBlockState(pos.add(4, y, 88), ACBlocks.dark_ethaxium_pillar.getDefaultState(), 2);
 				}
 			}
-		world.setBlockState(pos.add(-4, 17, 88), ACBlocks.dark_ethaxium_brick.getDefaultState().withProperty(BlockEthaxiumBrick.TYPE, EnumBrickType.CHISELED), 2);
-		world.setBlockState(pos.add(4, 17, 88), ACBlocks.dark_ethaxium_brick.getDefaultState().withProperty(BlockEthaxiumBrick.TYPE, EnumBrickType.CHISELED), 2);
+		world.setBlockState(pos.add(-4, 17, 88), ACBlocks.dark_ethaxium_brick.getDefaultState().withProperty(BlockACBrick.TYPE, EnumBrickType.CHISELED), 2);
+		world.setBlockState(pos.add(4, 17, 88), ACBlocks.dark_ethaxium_brick.getDefaultState().withProperty(BlockACBrick.TYPE, EnumBrickType.CHISELED), 2);
 		for(int x = -7; x < 8; x++)
 			for(int z = 66; z < 90; z++){
 				world.setBlockState(pos.add(x, 24, 66), ACBlocks.dark_ethaxium_brick.getDefaultState(), 2);
@@ -752,7 +752,7 @@ public class StructureJzaharTemple extends WorldGenerator {
 				if(y == 18)
 					world.setBlockState(pos.add(x, y, 65), ACBlocks.dark_ethaxium_brick.getDefaultState(), 2);
 			}
-		world.setBlockState(pos.add(0, 18, 65), ACBlocks.dark_ethaxium_brick.getDefaultState().withProperty(BlockEthaxiumBrick.TYPE, EnumBrickType.CHISELED), 2);
+		world.setBlockState(pos.add(0, 18, 65), ACBlocks.dark_ethaxium_brick.getDefaultState().withProperty(BlockACBrick.TYPE, EnumBrickType.CHISELED), 2);
 		for(int z = -2; z < 3; z++)
 			for(int y = 12; y < 18; y++){
 				world.setBlockToAir(pos.add(-18, y, z + 33));
@@ -771,8 +771,8 @@ public class StructureJzaharTemple extends WorldGenerator {
 					world.setBlockState(pos.add(17, y, z + 33), ACBlocks.dark_ethaxium_brick.getDefaultState(), 2);
 				}
 			}
-		world.setBlockState(pos.add(-17, 18, 33), ACBlocks.dark_ethaxium_brick.getDefaultState().withProperty(BlockEthaxiumBrick.TYPE, EnumBrickType.CHISELED), 2);
-		world.setBlockState(pos.add(17, 18, 33), ACBlocks.dark_ethaxium_brick.getDefaultState().withProperty(BlockEthaxiumBrick.TYPE, EnumBrickType.CHISELED), 2);
+		world.setBlockState(pos.add(-17, 18, 33), ACBlocks.dark_ethaxium_brick.getDefaultState().withProperty(BlockACBrick.TYPE, EnumBrickType.CHISELED), 2);
+		world.setBlockState(pos.add(17, 18, 33), ACBlocks.dark_ethaxium_brick.getDefaultState().withProperty(BlockACBrick.TYPE, EnumBrickType.CHISELED), 2);
 		for(int z = 8; z < 60; z++)
 			for(int y = 12; y < 22; y++){
 				if(z == 8 || z == 58){
