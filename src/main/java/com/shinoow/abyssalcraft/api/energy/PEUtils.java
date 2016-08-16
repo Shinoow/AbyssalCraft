@@ -83,7 +83,7 @@ public class PEUtils {
 	 * @param manipulator PE Manipulator to transfer said PE
 	 */
 	private static void transferPEToStack(ItemStack stack, IEnergyManipulator manipulator){
-		if(stack != null && stack.getItem() instanceof IEnergyManipulator)
+		if(stack != null && stack.getItem() instanceof IEnergyTransporterItem)
 			if(((IEnergyTransporterItem) stack.getItem()).canAcceptPEExternally(stack) &&
 					((IEnergyTransporterItem) stack.getItem()).getContainedEnergy(stack) < ((IEnergyTransporterItem) stack.getItem()).getMaxEnergy(stack))
 				((IEnergyTransporterItem) stack.getItem()).addEnergy(stack, manipulator.getEnergyQuanta());

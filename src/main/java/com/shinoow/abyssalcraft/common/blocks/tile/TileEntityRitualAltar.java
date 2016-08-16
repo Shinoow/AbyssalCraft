@@ -24,11 +24,14 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.ITickable;
+import net.minecraft.util.SoundCategory;
+import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 
+import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.api.energy.IEnergyTransporterItem;
 import com.shinoow.abyssalcraft.api.energy.disruption.DisruptionHandler;
 import com.shinoow.abyssalcraft.api.entity.EntityUtil;
@@ -100,6 +103,12 @@ public class TileEntityRitualAltar extends TileEntity implements ITickable, IRit
 		}
 
 		if(isPerformingRitual()){
+			if(ritualTimer == 1){
+				SoundEvent chant = getRandomChant();
+				worldObj.playSound(pos.getX(), pos.getY(), pos.getZ(), chant, SoundCategory.PLAYERS, 1, 1, true);
+				worldObj.playSound(pos.getX(), pos.getY(), pos.getZ(), chant, SoundCategory.PLAYERS, 1, 1, true);
+				worldObj.playSound(pos.getX(), pos.getY(), pos.getZ(), chant, SoundCategory.PLAYERS, 1, 1, true);
+			}
 			ritualTimer++;
 
 			if(ritual != null){
@@ -307,6 +316,12 @@ public class TileEntityRitualAltar extends TileEntity implements ITickable, IRit
 		return !(entity instanceof EntityPlayer) && (EntityUtil.isShoggothFood(entity) || entity instanceof EntityVillager) &&
 				entity.getCreatureAttribute() != EnumCreatureAttribute.UNDEAD &&
 				entity.isEntityAlive() && !entity.isChild();
+	}
+
+	public SoundEvent getRandomChant(){
+		SoundEvent[] chants = {AbyssalCraft.cthulhu_chant, AbyssalCraft.yog_sothoth_chant_1, AbyssalCraft.yog_sothoth_chant_2,
+				AbyssalCraft.hastur_chant_1, AbyssalCraft.hastur_chant_2, AbyssalCraft.sleeping_chant, AbyssalCraft.cthugha_chant};
+		return chants[worldObj.rand.nextInt(chants.length)];
 	}
 
 	@Override

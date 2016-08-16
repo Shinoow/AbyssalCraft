@@ -42,4 +42,10 @@ public class EngravingRecipeHandler implements IRecipeHandler<EngravingRecipeWra
 	public boolean isRecipeValid(@Nonnull EngravingRecipeWrapper recipe) {
 		return recipe.getInputs().size() != 0 && recipe.getOutputs().size() > 0;
 	}
+
+	@Override
+	@Nonnull
+	public String getRecipeCategoryUid(@Nonnull EngravingRecipeWrapper recipe) {
+		return AbyssalCraftRecipeCategoryUid.ENGRAVING;
+	}
 }

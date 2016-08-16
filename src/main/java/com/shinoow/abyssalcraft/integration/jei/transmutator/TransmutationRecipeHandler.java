@@ -42,4 +42,10 @@ public class TransmutationRecipeHandler implements IRecipeHandler<TransmutationR
 	public boolean isRecipeValid(@Nonnull TransmutationRecipe recipe) {
 		return recipe.getInputs().size() != 0 && recipe.getOutputs().size() > 0;
 	}
+
+	@Nonnull
+	@Override
+	public String getRecipeCategoryUid(@Nonnull TransmutationRecipe recipe) {
+		return AbyssalCraftRecipeCategoryUid.TRANSMUTATION;
+	}
 }

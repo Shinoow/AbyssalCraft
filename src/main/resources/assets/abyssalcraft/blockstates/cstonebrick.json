@@ -1,5 +1,7 @@
 {
 	"variants": {
-		"normal": { "model": "abyssalcraft:cstonebrick" }
+		"type=normal": { "model": "abyssalcraft:cstonebrick_0" },
+		"type=chiseled": { "model": "abyssalcraft:cstonebrick_1" },
+		"type=cracked": { "model": "abyssalcraft:cstonebrick_2" }
 	}
 }

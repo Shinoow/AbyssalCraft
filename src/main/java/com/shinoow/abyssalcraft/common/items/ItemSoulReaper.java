@@ -14,47 +14,26 @@ package com.shinoow.abyssalcraft.common.items;
 import java.util.List;
 
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.MobEffects;
-import net.minecraft.inventory.EntityEquipmentSlot;
-import net.minecraft.item.EnumAction;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.ItemSword;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.text.translation.I18n;
+import net.minecraftforge.common.util.EnumHelper;
 
-import com.google.common.collect.Multimap;
 import com.shinoow.abyssalcraft.api.item.ACItems;
 import com.shinoow.abyssalcraft.lib.ACTabs;
 
-public class ItemSoulReaper extends Item {
+public class ItemSoulReaper extends ItemSword {
 
-	private float weaponDamage = 30.0F;
+	static ToolMaterial sword = EnumHelper.addToolMaterial("soulreaper", 0, 2000, 1, 26, 0).setRepairItem(new ItemStack(ACItems.shadow_gem));
 
 	public ItemSoulReaper(String par1Str){
-		super();
+		super(sword);
 		setUnlocalizedName(par1Str);
 		setCreativeTab(ACTabs.tabCombat);
-		setMaxDamage(2000);
-		setMaxStackSize(1);
-	}
-
-	@Override
-	public boolean isFull3D(){
-		return true;
-	}
-
-	@Override
-	public EnumAction getItemUseAction(ItemStack par1ItemStack) {
-		return EnumAction.BLOCK;
-	}
-
-	@Override
-	public int getMaxItemUseDuration(ItemStack par1ItemStack) {
-		return 0x11940;
 	}
 
 	@Override
@@ -136,25 +115,5 @@ public class ItemSoulReaper extends Item {
 	public void addInformation(ItemStack is, EntityPlayer player, List l, boolean B){
 		int souls = getSouls(is);
 		l.add(I18n.translateToLocal("tooltip.soulreaper") + ": " + souls + "/1024");
-	}
-
-	@Override
-	public boolean getIsRepairable(ItemStack par1ItemStack, ItemStack par2ItemStack)
-	{
-		return ACItems.shadow_gem == par2ItemStack.getItem() ? true : super.getIsRepairable(par1ItemStack, par2ItemStack);
-	}
-
-	@Override
-	@SuppressWarnings({ "rawtypes", "unchecked", "deprecation" })
-	public Multimap getItemAttributeModifiers(EntityEquipmentSlot equipmentSlot) {
-		Multimap multimap = super.getItemAttributeModifiers(equipmentSlot);
-
-		if (equipmentSlot == EntityEquipmentSlot.MAINHAND)
-		{
-			multimap.put(SharedMonsterAttributes.ATTACK_DAMAGE.getAttributeUnlocalizedName(), new AttributeModifier(ATTACK_DAMAGE_MODIFIER, "Weapon modifier", weaponDamage, 0));
-			multimap.put(SharedMonsterAttributes.ATTACK_SPEED.getAttributeUnlocalizedName(), new AttributeModifier(ATTACK_SPEED_MODIFIER, "Weapon modifier", -2.4000000953674316D, 0));
-		}
-
-		return multimap;
 	}
 }
