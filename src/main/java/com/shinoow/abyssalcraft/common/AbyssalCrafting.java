@@ -59,6 +59,7 @@ import com.shinoow.abyssalcraft.common.entity.EntityShadowMonster;
 import com.shinoow.abyssalcraft.common.ritual.NecronomiconBreedingRitual;
 import com.shinoow.abyssalcraft.common.ritual.NecronomiconDreadSpawnRitual;
 import com.shinoow.abyssalcraft.common.ritual.NecronomiconRespawnJzaharRitual;
+import com.shinoow.abyssalcraft.common.ritual.NecronomiconWeatherRitual;
 import com.shinoow.abyssalcraft.lib.ACLib;
 import com.shinoow.abyssalcraft.lib.NecronomiconText;
 
@@ -80,9 +81,9 @@ public class AbyssalCrafting {
 
 	private static void addBlockCrafting(){
 
-		GameRegistry.addRecipe(new ItemStack(ACBlocks.darkstone_brick, 4), new Object[] {"AA", "AA", 'A', ACBlocks.darkstone });
-		GameRegistry.addRecipe(new ItemStack(ACBlocks.darkstone_brick_slab, 6), new Object[] {"AAA", 'A', ACBlocks.darkstone_brick });
-		GameRegistry.addRecipe(new ItemStack(ACBlocks.glowing_darkstone_bricks, 4), new Object[] {"#$#", "&%&", "#&#", '#', ACBlocks.darkstone_brick, '$', Items.DIAMOND,'&', Blocks.OBSIDIAN, '%', Blocks.GLOWSTONE });
+		GameRegistry.addRecipe(new ItemStack(ACBlocks.darkstone_brick, 4, 0), new Object[] {"AA", "AA", 'A', ACBlocks.darkstone });
+		GameRegistry.addRecipe(new ItemStack(ACBlocks.darkstone_brick_slab, 6), new Object[] {"AAA", 'A', new ItemStack(ACBlocks.darkstone_brick, 1, 0) });
+		GameRegistry.addRecipe(new ItemStack(ACBlocks.glowing_darkstone_bricks, 4), new Object[] {"#$#", "&%&", "#&#", '#', new ItemStack(ACBlocks.darkstone_brick, 1, 0), '$', Items.DIAMOND,'&', Blocks.OBSIDIAN, '%', Blocks.GLOWSTONE });
 		GameRegistry.addRecipe(new ItemStack(ACBlocks.darkstone_cobblestone_slab, 6), new Object[] {"AAA", 'A', ACBlocks.darkstone_cobblestone });
 		GameRegistry.addRecipe(new ItemStack(ACBlocks.darklands_oak_planks, 4), new Object[] {"A", 'A', ACBlocks.darklands_oak_wood });
 		GameRegistry.addRecipe(new ItemStack(ACBlocks.oblivion_deathbomb, 1), new Object[] {"AOO", "TCO", "LOO", 'A', ACItems.liquid_antimatter_bucket, 'O', Blocks.OBSIDIAN, 'T', ACItems.oblivion_catalyst, 'C', ACBlocks.odb_core, 'L', ACItems.liquid_coralium_bucket});
@@ -116,11 +117,11 @@ public class AbyssalCrafting {
 		GameRegistry.addRecipe(new ItemStack(ACBlocks.coralium_infused_stone, 1), new Object[] {"###", "&$%", "###", '#', Blocks.STONE, '&', ACItems.coralium_gem_cluster_2, '$', ACItems.coralium_gem_cluster_5, '%', ACItems.coralium_gem});
 		GameRegistry.addRecipe(new ItemStack(ACBlocks.coralium_infused_stone, 1), new Object[] {"###", "&$%", "###", '#', Blocks.STONE, '&', ACItems.coralium_gem_cluster_5, '$', ACItems.coralium_gem_cluster_2, '%', ACItems.coralium_gem});
 		GameRegistry.addRecipe(new ItemStack(ACBlocks.coralium_infused_stone, 1), new Object[] {"###", "#%#", "###", '#', Blocks.STONE, '%', ACItems.coralium_gem_cluster_9});
-		GameRegistry.addRecipe(new ItemStack(ACBlocks.abyssal_stone_brick, 4), new Object[] {"##", "##", '#', ACBlocks.abyssal_stone});
-		GameRegistry.addRecipe(new ItemStack(ACBlocks.abyssal_stone_brick_slab, 6), new Object[] {"###", '#', ACBlocks.abyssal_stone_brick});
-		GameRegistry.addRecipe(new ItemStack(ACBlocks.abyssal_stone_brick_fence, 6), new Object[] {"###", "###", '#', ACBlocks.abyssal_stone_brick});
+		GameRegistry.addRecipe(new ItemStack(ACBlocks.abyssal_stone_brick, 4, 0), new Object[] {"##", "##", '#', ACBlocks.abyssal_stone});
+		GameRegistry.addRecipe(new ItemStack(ACBlocks.abyssal_stone_brick_slab, 6), new Object[] {"###", '#', new ItemStack(ACBlocks.abyssal_stone_brick, 1, 0)});
+		GameRegistry.addRecipe(new ItemStack(ACBlocks.abyssal_stone_brick_fence, 6), new Object[] {"###", "###", '#', new ItemStack(ACBlocks.abyssal_stone_brick, 1, 0)});
 		GameRegistry.addRecipe(new ItemStack(ACBlocks.darkstone_cobblestone_wall, 6), new Object[] {"###", "###", '#', ACBlocks.darkstone_cobblestone});
-		GameRegistry.addRecipe(new ItemStack(ACBlocks.wooden_crate, 2), new Object[] {"#&#", "&%&", "#&#", '#', Items.STICK, '&', Blocks.PLANKS, '%', Blocks.CHEST});
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ACBlocks.wooden_crate, 2), new Object[] {"#&#", "&%&", "#&#", '#', "stickWood", '&', "plankWood", '%', Blocks.CHEST}));
 		GameRegistry.addRecipe(new ItemStack(ACBlocks.darkstone_button, 1), new Object[] {"#", '#', ACBlocks.darkstone});
 		GameRegistry.addRecipe(new ItemStack(ACBlocks.darkstone_pressure_plate, 1), new Object[] {"##", '#', ACBlocks.darkstone});
 		GameRegistry.addRecipe(new ItemStack(ACBlocks.darklands_oak_button, 1), new Object[] {"#", '#', ACBlocks.darklands_oak_planks});
@@ -130,34 +131,34 @@ public class AbyssalCrafting {
 		GameRegistry.addRecipe(new ItemStack(ACBlocks.block_of_coralium, 1), new Object[] {"###", "###", "###", '#', ACItems.refined_coralium_ingot});
 		GameRegistry.addRecipe(new ItemStack(ACBlocks.abyssal_stone_button, 1), new Object[] {"#", '#', ACBlocks.abyssal_stone});
 		GameRegistry.addRecipe(new ItemStack(ACBlocks.abyssal_stone_pressure_plate, 1), new Object[] {"##", '#', ACBlocks.abyssal_stone});
-		GameRegistry.addRecipe(new ItemStack(ACBlocks.darkstone_brick_fence, 6), new Object[] {"###", "###", '#', ACBlocks.darkstone_brick});
+		GameRegistry.addRecipe(new ItemStack(ACBlocks.darkstone_brick_fence, 6), new Object[] {"###", "###", '#', new ItemStack(ACBlocks.darkstone_brick, 1, 0)});
 		GameRegistry.addRecipe(new ItemStack(ACBlocks.darklands_oak_fence, 4), new Object[] {"###", "###", '#', ACBlocks.darklands_oak_planks});
-		GameRegistry.addRecipe(new ItemStack(ACBlocks.dreadstone_brick, 4), new Object[] {"##", "##", '#', ACBlocks.dreadstone});
-		GameRegistry.addRecipe(new ItemStack(ACBlocks.abyssalnite_stone_brick, 4), new Object[] {"##", "##", '#', ACBlocks.abyssalnite_stone});
+		GameRegistry.addRecipe(new ItemStack(ACBlocks.dreadstone_brick, 4, 0), new Object[] {"##", "##", '#', ACBlocks.dreadstone});
+		GameRegistry.addRecipe(new ItemStack(ACBlocks.abyssalnite_stone_brick, 4, 0), new Object[] {"##", "##", '#', ACBlocks.abyssalnite_stone});
 		GameRegistry.addRecipe(new ItemStack(ACBlocks.dreadlands_planks, 4), new Object[] {"%", '%', ACBlocks.dreadlands_log});
-		GameRegistry.addRecipe(new ItemStack(ACBlocks.dreadstone_brick_slab, 6), new Object[] {"###", '#', ACBlocks.dreadstone_brick});
-		GameRegistry.addRecipe(new ItemStack(ACBlocks.dreadstone_brick_fence, 6), new Object[] {"###", "###", '#', ACBlocks.dreadstone_brick});
-		GameRegistry.addRecipe(new ItemStack(ACBlocks.abyssalnite_stone_brick_slab, 6), new Object[] {"###", '#', ACBlocks.abyssalnite_stone_brick});
-		GameRegistry.addRecipe(new ItemStack(ACBlocks.abyssalnite_stone_brick_fence, 6), new Object[] {"###", "###", '#', ACBlocks.abyssalnite_stone_brick});
-		GameRegistry.addRecipe(new ItemStack(ACBlocks.coralium_stone_brick, 1), new Object[] {"##", "##", '#', ACItems.coralium_brick});
-		GameRegistry.addRecipe(new ItemStack(ACBlocks.coralium_stone_brick_slab, 6), new Object[] {"###", '#', ACBlocks.coralium_stone_brick});
-		GameRegistry.addRecipe(new ItemStack(ACBlocks.coralium_stone_brick_fence, 6), new Object[] {"###", "###", '#', ACBlocks.coralium_stone_brick});
+		GameRegistry.addRecipe(new ItemStack(ACBlocks.dreadstone_brick_slab, 6), new Object[] {"###", '#', new ItemStack(ACBlocks.dreadstone_brick, 1, 0)});
+		GameRegistry.addRecipe(new ItemStack(ACBlocks.dreadstone_brick_fence, 6), new Object[] {"###", "###", '#', new ItemStack(ACBlocks.dreadstone_brick, 1, 0)});
+		GameRegistry.addRecipe(new ItemStack(ACBlocks.abyssalnite_stone_brick_slab, 6), new Object[] {"###", '#', new ItemStack(ACBlocks.abyssalnite_stone_brick, 1, 0)});
+		GameRegistry.addRecipe(new ItemStack(ACBlocks.abyssalnite_stone_brick_fence, 6), new Object[] {"###", "###", '#', new ItemStack(ACBlocks.abyssalnite_stone_brick, 1, 0)});
+		GameRegistry.addRecipe(new ItemStack(ACBlocks.coralium_stone_brick, 1, 0), new Object[] {"##", "##", '#', ACItems.coralium_brick});
+		GameRegistry.addRecipe(new ItemStack(ACBlocks.coralium_stone_brick_slab, 6), new Object[] {"###", '#', new ItemStack(ACBlocks.coralium_stone_brick, 1, 0)});
+		GameRegistry.addRecipe(new ItemStack(ACBlocks.coralium_stone_brick_fence, 6), new Object[] {"###", "###", '#', new ItemStack(ACBlocks.coralium_stone_brick, 1, 0)});
 		GameRegistry.addRecipe(new ItemStack(ACBlocks.coralium_stone_button, 1), new Object[] {"#", '#', ACBlocks.coralium_stone});
 		GameRegistry.addRecipe(new ItemStack(ACBlocks.coralium_stone_pressure_plate, 1), new Object[] {"##", '#', ACBlocks.coralium_stone});
 		GameRegistry.addRecipe(new ItemStack(ACBlocks.block_of_dreadium, 1), new Object[] {"###", "###", "###", '#', ACItems.dreadium_ingot});
 		GameRegistry.addRecipe(new ItemStack(ACBlocks.dreadlands_wood_fence, 4), new Object[] {"###", "###", '#', ACBlocks.dreadlands_planks});
 		GameRegistry.addRecipe(new ItemStack(ACBlocks.transmutator_idle, 1), new Object[] {"###", "#%#", "&$&", '#', ACItems.coralium_brick, '%', new ItemStack(ACItems.transmutation_gem, 1, OreDictionary.WILDCARD_VALUE), '&', ACBlocks.block_of_coralium, '$', ACItems.liquid_coralium_bucket});
-		GameRegistry.addRecipe(new ItemStack(ACBlocks.crystallizer_idle, 1), new Object[] {"###", "&%&", "###", '#', ACBlocks.dreadstone_brick, '&', ACBlocks.block_of_dreadium, '%', Blocks.FURNACE});
+		GameRegistry.addRecipe(new ItemStack(ACBlocks.crystallizer_idle, 1), new Object[] {"###", "&%&", "###", '#', new ItemStack(ACBlocks.dreadstone_brick, 1, 0), '&', ACBlocks.block_of_dreadium, '%', Blocks.FURNACE});
 		GameRegistry.addRecipe(new ItemStack(ACBlocks.ethaxium_brick, 1, 0), new Object [] {"##", "##", '#', ACItems.ethaxium_brick});
-		GameRegistry.addRecipe(new ItemStack(ACBlocks.ethaxium_brick, 1, 1), new Object[] {"##", "##", '#', new ItemStack(ACBlocks.ethaxium_brick, 1, 0)});
+		GameRegistry.addRecipe(new ItemStack(ACBlocks.ethaxium_brick, 1, 1), new Object[] {"#", "#", '#', ACBlocks.ethaxium_brick_slab});
 		GameRegistry.addRecipe(new ItemStack(ACBlocks.ethaxium_pillar, 2), new Object[] {"#%", "#%", '#', new ItemStack(ACBlocks.ethaxium_brick, 1, 0), '%', ACBlocks.ethaxium});
-		GameRegistry.addRecipe(new ItemStack(ACBlocks.darkstone_brick_stairs, 4), new Object[] {"#  ", "## ", "###", '#', ACBlocks.darkstone_brick});
+		GameRegistry.addRecipe(new ItemStack(ACBlocks.darkstone_brick_stairs, 4), new Object[] {"#  ", "## ", "###", '#', new ItemStack(ACBlocks.darkstone_brick, 1, 0)});
 		GameRegistry.addRecipe(new ItemStack(ACBlocks.darkstone_cobblestone_stairs, 4), new Object[] {"#  ", "## ", "###", '#', ACBlocks.darkstone_cobblestone});
-		GameRegistry.addRecipe(new ItemStack(ACBlocks.abyssal_stone_brick_stairs, 4), new Object[] {"#  ", "## ", "###", '#', ACBlocks.abyssal_stone_brick});
+		GameRegistry.addRecipe(new ItemStack(ACBlocks.abyssal_stone_brick_stairs, 4), new Object[] {"#  ", "## ", "###", '#', new ItemStack(ACBlocks.abyssal_stone_brick, 1, 0)});
 		GameRegistry.addRecipe(new ItemStack(ACBlocks.darklands_oak_stairs, 4), new Object[] {"#  ", "## ", "###", '#', ACBlocks.darklands_oak_planks});
-		GameRegistry.addRecipe(new ItemStack(ACBlocks.dreadstone_brick_stairs, 4), new Object[] {"#  ", "## ", "###", '#', ACBlocks.dreadstone_brick});
-		GameRegistry.addRecipe(new ItemStack(ACBlocks.abyssalnite_stone_brick_stairs, 4), new Object[] {"#  ", "## ", "###", '#', ACBlocks.abyssalnite_stone_brick});
-		GameRegistry.addRecipe(new ItemStack(ACBlocks.coralium_stone_brick_stairs, 4), new Object[] {"#  ", "## ", "###", '#', ACBlocks.coralium_stone_brick});
+		GameRegistry.addRecipe(new ItemStack(ACBlocks.dreadstone_brick_stairs, 4), new Object[] {"#  ", "## ", "###", '#', new ItemStack(ACBlocks.dreadstone_brick, 1, 0)});
+		GameRegistry.addRecipe(new ItemStack(ACBlocks.abyssalnite_stone_brick_stairs, 4), new Object[] {"#  ", "## ", "###", '#', new ItemStack(ACBlocks.abyssalnite_stone_brick, 1, 0)});
+		GameRegistry.addRecipe(new ItemStack(ACBlocks.coralium_stone_brick_stairs, 4), new Object[] {"#  ", "## ", "###", '#', new ItemStack(ACBlocks.coralium_stone_brick, 1, 0)});
 		GameRegistry.addRecipe(new ItemStack(ACBlocks.block_of_ethaxium, 1), new Object[] {"###", "###", "###", '#', ACItems.ethaxium_ingot});
 		GameRegistry.addRecipe(new ItemStack(ACBlocks.ethaxium_brick_stairs, 4), new Object[] {"#  ", "## ", "###", '#', new ItemStack(ACBlocks.ethaxium_brick, 1, 0)});
 		GameRegistry.addRecipe(new ItemStack(ACBlocks.ethaxium_brick_slab, 6), new Object[] {"AAA", 'A', new ItemStack(ACBlocks.ethaxium_brick, 1, 0)});
@@ -166,7 +167,7 @@ public class AbyssalCrafting {
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(AbyssalCraft.house, 1), true, new Object[] {"#%#", "%&%", "%%%", '#', "stairWood", '%', "plankWood", '&', Items.OAK_DOOR})); //Quite frankly, this recipe doesn't exist
 		GameRegistry.addRecipe(new ItemStack(ACBlocks.materializer, 1), new Object[] {"###", "#%#", "&@&", '#', ACItems.ethaxium_brick, '%', Blocks.OBSIDIAN, '&', ACBlocks.block_of_ethaxium, '@', ACItems.liquid_antimatter_bucket});
 		GameRegistry.addRecipe(new ItemStack(ACBlocks.dark_ethaxium_brick, 1, 0), new Object[] {"#%", "#%", '#', ACBlocks.omothol_stone, '%', ACBlocks.ethaxium});
-		GameRegistry.addRecipe(new ItemStack(ACBlocks.dark_ethaxium_brick, 1, 1), new Object[] {"##", "##", '#', new ItemStack(ACBlocks.dark_ethaxium_brick, 1, 0)});
+		GameRegistry.addRecipe(new ItemStack(ACBlocks.dark_ethaxium_brick, 1, 1), new Object[] {"#", "#", '#', ACBlocks.dark_ethaxium_brick_slab});
 		GameRegistry.addRecipe(new ItemStack(ACBlocks.dark_ethaxium_pillar, 2), new Object[] {"#%", "#%", '#', new ItemStack(ACBlocks.dark_ethaxium_brick, 1, 0), '%', ACBlocks.omothol_stone});
 		GameRegistry.addRecipe(new ItemStack(ACBlocks.dark_ethaxium_brick_stairs, 4), new Object[] {"#  ", "## ", "###", '#', new ItemStack(ACBlocks.dark_ethaxium_brick, 0)});
 		GameRegistry.addRecipe(new ItemStack(ACBlocks.dark_ethaxium_brick_slab, 6), new Object[] {"AAA", 'A', new ItemStack(ACBlocks.dark_ethaxium_brick, 0)});
@@ -188,6 +189,11 @@ public class AbyssalCrafting {
 		GameRegistry.addRecipe(new ItemStack(ACBlocks.nyarlathotep_statue), new Object[] {"#", '#', ACBlocks.decorative_nyarlathotep_statue});
 		GameRegistry.addRecipe(new ItemStack(ACBlocks.yog_sothoth_statue), new Object[] {"#", '#', ACBlocks.decorative_yog_sothoth_statue});
 		GameRegistry.addRecipe(new ItemStack(ACBlocks.shub_niggurath_statue), new Object[] {"#", '#', ACBlocks.decorative_shub_niggurath_statue});
+		GameRegistry.addRecipe(new ItemStack(ACBlocks.darkstone_brick, 1, 1), new Object[] {"#", "#", '#', ACBlocks.darkstone_brick_slab});
+		GameRegistry.addRecipe(new ItemStack(ACBlocks.abyssal_stone_brick, 1, 1), new Object[] {"#", "#", '#', ACBlocks.abyssal_stone_brick_slab});
+		GameRegistry.addRecipe(new ItemStack(ACBlocks.dreadstone_brick, 1, 1), new Object[] {"#", "#", '#', ACBlocks.dreadstone_brick_slab});
+		GameRegistry.addRecipe(new ItemStack(ACBlocks.abyssalnite_stone_brick, 1, 1), new Object[] {"#", "#", '#', ACBlocks.abyssalnite_stone_brick_slab});
+		GameRegistry.addRecipe(new ItemStack(ACBlocks.coralium_stone_brick, 1, 1), new Object[] {"#", "#", '#', ACBlocks.coralium_stone_brick_slab});
 	}
 
 	private static void addBlockSmelting(){
@@ -209,41 +215,48 @@ public class AbyssalCrafting {
 		GameRegistry.addSmelting(ACBlocks.abyssal_tin_ore, new ItemStack(ACItems.tin_ingot, 1), 0.7F);
 		GameRegistry.addSmelting(ACBlocks.abyssal_copper_ore, new ItemStack(ACItems.copper_ingot, 1), 0.7F);
 		GameRegistry.addSmelting(ACBlocks.ethaxium, new ItemStack(ACItems.ethaxium_brick), 0.2F);
+		GameRegistry.addSmelting(new ItemStack(ACBlocks.ethaxium_brick, 1, 0), new ItemStack(ACBlocks.ethaxium_brick, 1, 2), 0.1F);
+		GameRegistry.addSmelting(new ItemStack(ACBlocks.dark_ethaxium_brick, 1, 0), new ItemStack(ACBlocks.dark_ethaxium_brick, 1, 2), 0.1F);
+		GameRegistry.addSmelting(new ItemStack(ACBlocks.darkstone_brick, 1, 0), new ItemStack(ACBlocks.darkstone_brick, 1, 2), 0.1F);
+		GameRegistry.addSmelting(new ItemStack(ACBlocks.abyssal_stone_brick, 1, 0), new ItemStack(ACBlocks.abyssal_stone_brick, 1, 2), 0.1F);
+		GameRegistry.addSmelting(new ItemStack(ACBlocks.dreadstone_brick, 1, 0), new ItemStack(ACBlocks.dreadstone_brick, 1, 2), 0.1F);
+		GameRegistry.addSmelting(new ItemStack(ACBlocks.abyssalnite_stone_brick, 1, 0), new ItemStack(ACBlocks.abyssalnite_stone_brick, 1, 2), 0.1F);
+		GameRegistry.addSmelting(new ItemStack(ACBlocks.coralium_stone_brick, 1, 0), new ItemStack(ACBlocks.coralium_stone_brick, 1, 2), 0.1F);
 	}
 
 	private static void addItemCrafting(){
 
-		GameRegistry.addRecipe(new ItemStack(ACItems.darkstone_pickaxe, 1), new Object[] {"###", " % ", " % ", '#', ACBlocks.darkstone_cobblestone, '%', Items.STICK});
-		GameRegistry.addRecipe(new ItemStack(ACItems.darkstone_axe, 1), new Object[] {"##", "#%", " %", '#', ACBlocks.darkstone_cobblestone, '%', Items.STICK});
-		GameRegistry.addRecipe(new ItemStack(ACItems.darkstone_shovel, 1), new Object[] {"#", "%", "%", '#', ACBlocks.darkstone_cobblestone, '%', Items.STICK});
-		GameRegistry.addRecipe(new ItemStack(ACItems.darkstone_sword, 1), new Object[] {"#", "#", "%", '#', ACBlocks.darkstone_cobblestone, '%', Items.STICK});
-		GameRegistry.addRecipe(new ItemStack(ACItems.darkstone_hoe, 1), new Object[] {"##", " %", " %", '#', ACBlocks.darkstone_cobblestone, '%', Items.STICK});
-		GameRegistry.addRecipe(new ItemStack(ACItems.abyssalnite_pickaxe, 1), new Object[] {"###", " % ", " % ", '#', ACItems.abyssalnite_ingot, '%', Items.STICK});
-		GameRegistry.addRecipe(new ItemStack(ACItems.abyssalnite_axe, 1), new Object[] {"##", "#%", " %", '#', ACItems.abyssalnite_ingot, '%', Items.STICK});
-		GameRegistry.addRecipe(new ItemStack(ACItems.abyssalnite_shovel, 1), new Object[] {"#", "%", "%", '#', ACItems.abyssalnite_ingot, '%', Items.STICK});
-		GameRegistry.addRecipe(new ItemStack(ACItems.abyssalnite_sword, 1), new Object[] {"#", "#", "%", '#', ACItems.abyssalnite_ingot, '%', Items.STICK});
-		GameRegistry.addRecipe(new ItemStack(ACItems.abyssalnite_hoe, 1), new Object[] {"##", " %", " %", '#', ACItems.abyssalnite_ingot, '%', Items.STICK});
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ACItems.darkstone_pickaxe, 1), new Object[] {"###", " % ", " % ", '#', ACBlocks.darkstone_cobblestone, '%', "stickWood"}));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ACItems.darkstone_axe, 1), new Object[] {"##", "#%", " %", '#', ACBlocks.darkstone_cobblestone, '%', "stickWood"}));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ACItems.darkstone_shovel, 1), new Object[] {"#", "%", "%", '#', ACBlocks.darkstone_cobblestone, '%', "stickWood"}));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ACItems.darkstone_sword, 1), new Object[] {"#", "#", "%", '#', ACBlocks.darkstone_cobblestone, '%', "stickWood"}));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ACItems.darkstone_hoe, 1), new Object[] {"##", " %", " %", '#', ACBlocks.darkstone_cobblestone, '%', "stickWood"}));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ACItems.abyssalnite_pickaxe, 1), new Object[] {"###", " % ", " % ", '#', ACItems.abyssalnite_ingot, '%', "stickWood"}));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ACItems.abyssalnite_axe, 1), new Object[] {"##", "#%", " %", '#', ACItems.abyssalnite_ingot, '%', "stickWood"}));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ACItems.abyssalnite_shovel, 1), new Object[] {"#", "%", "%", '#', ACItems.abyssalnite_ingot, '%', "stickWood"}));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ACItems.abyssalnite_sword, 1), new Object[] {"#", "#", "%", '#', ACItems.abyssalnite_ingot, '%', "stickWood"}));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ACItems.abyssalnite_hoe, 1), new Object[] {"##", " %", " %", '#', ACItems.abyssalnite_ingot, '%', "stickWood"}));
 		GameRegistry.addRecipe(new ItemStack(ACItems.gateway_key, 1), new Object[] {" #%", " &#", "&  ", '#', ACItems.coralium_pearl, '%', ACItems.oblivion_catalyst, '&', Items.BLAZE_ROD});
 		GameRegistry.addRecipe(new ItemStack(ACItems.abyssalnite_ingot, 9), new Object[] {"#", '#', ACBlocks.block_of_abyssalnite});
 		GameRegistry.addRecipe(new ItemStack(ACItems.coralium_plate, 1), new Object[] {"#%#", "#%#", "#%#", '#', ACItems.refined_coralium_ingot, '%', ACItems.coralium_pearl});
 		GameRegistry.addRecipe(new ItemStack(ACItems.chunk_of_coralium, 1), new Object[] {"###", "#%#", "###", '#', ACItems.coralium_gem_cluster_9, '%', ACBlocks.abyssal_stone});
 		GameRegistry.addRecipe(new ItemStack(ACItems.powerstone_tracker, 4), new Object[] {"###", "#%#", "###", '#', ACItems.coralium_gem, '%', Items.ENDER_EYE});
 		GameRegistry.addRecipe(new ItemStack(ACItems.refined_coralium_ingot, 9), new Object[] {"#", '#', ACBlocks.block_of_coralium});
-		GameRegistry.addRecipe(new ItemStack(ACItems.refined_coralium_pickaxe, 1), new Object[] {"###", " % ", " % ", '#', ACItems.refined_coralium_ingot, '%', Items.STICK});
-		GameRegistry.addRecipe(new ItemStack(ACItems.refined_coralium_axe, 1), new Object[] {"##", "#%", " %", '#', ACItems.refined_coralium_ingot, '%', Items.STICK});
-		GameRegistry.addRecipe(new ItemStack(ACItems.refined_coralium_shovel, 1), new Object[] {"#", "%", "%", '#', ACItems.refined_coralium_ingot, '%', Items.STICK});
-		GameRegistry.addRecipe(new ItemStack(ACItems.refined_coralium_sword, 1), new Object[] {"#", "#", "%", '#', ACItems.refined_coralium_ingot, '%', Items.STICK});
-		GameRegistry.addRecipe(new ItemStack(ACItems.refined_coralium_hoe, 1), new Object[] {"##", " %", " %", '#', ACItems.refined_coralium_ingot, '%', Items.STICK});
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ACItems.refined_coralium_pickaxe, 1), new Object[] {"###", " % ", " % ", '#', ACItems.refined_coralium_ingot, '%', "stickWood"}));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ACItems.refined_coralium_axe, 1), new Object[] {"##", "#%", " %", '#', ACItems.refined_coralium_ingot, '%', "stickWood"}));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ACItems.refined_coralium_shovel, 1), new Object[] {"#", "%", "%", '#', ACItems.refined_coralium_ingot, '%', "stickWood"}));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ACItems.refined_coralium_sword, 1), new Object[] {"#", "#", "%", '#', ACItems.refined_coralium_ingot, '%', "stickWood"}));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ACItems.refined_coralium_hoe, 1), new Object[] {"##", " %", " %", '#', ACItems.refined_coralium_ingot, '%', "stickWood"}));
 		GameRegistry.addRecipe(new ItemStack(ACItems.shadow_shard, 1), new Object[] {"###", "###", "###", '#', ACItems.shadow_fragment});
 		GameRegistry.addRecipe(new ItemStack(ACItems.shadow_gem, 1), new Object[] {"###", "###", "###", '#', ACItems.shadow_shard});
 		GameRegistry.addRecipe(new ItemStack(ACItems.shard_of_oblivion, 1), new Object[] {" # ", "#%#", " # ", '#', ACItems.shadow_gem, '%', new ItemStack(ACItems.transmutation_gem, 1, OreDictionary.WILDCARD_VALUE)});
 		GameRegistry.addRecipe(new ItemStack(ACItems.coralium_longbow, 1), new Object[] {" #%", "&$%", " #%", '#', ACItems.refined_coralium_ingot, '%', Items.STRING, '&', ACItems.coralium_pearl, '$', new ItemStack(Items.BOW, 1, OreDictionary.WILDCARD_VALUE)});
 		GameRegistry.addRecipe(new ItemStack(ACItems.dreadium_ingot, 9), new Object[] {"#", '#', ACBlocks.block_of_dreadium});
-		GameRegistry.addRecipe(new ItemStack(ACItems.dreadium_pickaxe, 1), new Object[] {"###", " % ", " % ", '#', ACItems.dreadium_ingot, '%', Items.STICK});
-		GameRegistry.addRecipe(new ItemStack(ACItems.dreadium_axe, 1), new Object[] {"##", "#%", " %", '#', ACItems.dreadium_ingot, '%', Items.STICK});
-		GameRegistry.addRecipe(new ItemStack(ACItems.dreadium_shovel, 1), new Object[] {"#", "%", "%", '#', ACItems.dreadium_ingot, '%', Items.STICK});
-		GameRegistry.addRecipe(new ItemStack(ACItems.dreadium_sword, 1), new Object[] {"#", "#", "%", '#', ACItems.dreadium_ingot, '%', Items.STICK});
-		GameRegistry.addRecipe(new ItemStack(ACItems.dreadium_hoe, 1), new Object[] {"##", " %", " %", '#', ACItems.dreadium_ingot, '%', Items.STICK});
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ACItems.dreadium_pickaxe, 1), new Object[] {"###", " % ", " % ", '#', ACItems.dreadium_ingot, '%', "stickWood"}));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ACItems.dreadium_axe, 1), new Object[] {"##", "#%", " %", '#', ACItems.dreadium_ingot, '%', "stickWood"}));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ACItems.dreadium_shovel, 1), new Object[] {"#", "%", "%", '#', ACItems.dreadium_ingot, '%', "stickWood"}));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ACItems.dreadium_sword, 1), new Object[] {"#", "#", "%", '#', ACItems.dreadium_ingot, '%', "stickWood"}));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ACItems.dreadium_hoe, 1), new Object[] {"##", " %", " %", '#', ACItems.dreadium_ingot, '%', "stickWood"}));
 		GameRegistry.addRecipe(new ItemStack(ACItems.carbon_cluster, 1), new Object[] {"###", "# #", "###", '#', new ItemStack(ACItems.crystal, 1, 3)});
 		GameRegistry.addRecipe(new ItemStack(ACItems.dense_carbon_cluster, 1), new Object[] {"###", "#%#", "###", '#', ACItems.carbon_cluster, '%', Blocks.OBSIDIAN});
 		GameRegistry.addRecipe(new ItemStack(ACItems.liquid_antimatter_bucket, 1), new Object[] {"#@%", "$&$", "$$$", '#', Items.LAVA_BUCKET, '@', Items.MILK_BUCKET, '%', Items.WATER_BUCKET, '$', Items.IRON_INGOT, '&', ACItems.liquid_coralium_bucket});
@@ -662,11 +675,11 @@ public class AbyssalCrafting {
 		AbyssalCraftAPI.addTransmutation(new ItemStack(ACItems.crystal, 1, 17), new ItemStack(ACItems.copper_ingot, 1), 0.2F);
 		AbyssalCraftAPI.addTransmutation(ACBlocks.darkstone, new ItemStack(Blocks.STONE, 1), 0.0F);
 		AbyssalCraftAPI.addTransmutation(Blocks.STONE, new ItemStack(ACBlocks.darkstone, 1), 0.0F);
-		AbyssalCraftAPI.addTransmutation(Blocks.STONEBRICK, new ItemStack(ACBlocks.darkstone_brick, 1), 0.0F);
-		AbyssalCraftAPI.addTransmutation(ACBlocks.darkstone_brick, new ItemStack(Blocks.STONEBRICK), 0.0F);
+		AbyssalCraftAPI.addTransmutation(Blocks.STONEBRICK, new ItemStack(ACBlocks.darkstone_brick, 1, 0), 0.0F);
+		AbyssalCraftAPI.addTransmutation(new ItemStack(ACBlocks.darkstone_brick, 1, 0), new ItemStack(Blocks.STONEBRICK), 0.0F);
 		AbyssalCraftAPI.addTransmutation(Blocks.COBBLESTONE, new ItemStack(ACBlocks.darkstone_cobblestone, 1), 0.0F);
 		AbyssalCraftAPI.addTransmutation(ACBlocks.darkstone_cobblestone, new ItemStack(Blocks.COBBLESTONE, 1), 0.0F);
-		AbyssalCraftAPI.addTransmutation(ACBlocks.coralium_stone_brick, new ItemStack(ACItems.coralium_brick, 4), 0.0F);
+		AbyssalCraftAPI.addTransmutation(new ItemStack(ACBlocks.coralium_stone_brick, 1, 0), new ItemStack(ACItems.coralium_brick, 4), 0.0F);
 		AbyssalCraftAPI.addTransmutation(ACItems.coralium_brick, new ItemStack(ACBlocks.coralium_stone, 1), 0.0F);
 		AbyssalCraftAPI.addTransmutation(ACItems.liquid_coralium_bucket, new ItemStack(ACBlocks.liquid_coralium, 1), 0.0F);
 		AbyssalCraftAPI.addTransmutation(ACBlocks.liquid_coralium, new ItemStack(ACBlocks.coralium_stone, 8), 0.0F);
@@ -760,7 +773,7 @@ public class AbyssalCrafting {
 		RitualRegistry.instance().registerRitual(new NecronomiconSummonRitual("summonSacthoth", 1, 1000F, EntitySacthoth.class, sacthothofferings));
 		Object[] dreadaltarbofferings = new Object[]{ACItems.dread_cloth, Items.BONE, ACItems.dreadium_ingot, ACBlocks.dreadstone, ACItems.dreaded_gateway_key, ACItems.dreadium_ingot, ACBlocks.dreadstone, Items.BONE};
 		RitualRegistry.instance().registerRitual(new NecronomiconCreationRitual("altarOfChagarothBottom", 2, ACLib.dreadlands_id, 20000F, true, new ItemStack(ACBlocks.chagaroth_altar_bottom), dreadaltarbofferings));
-		Object[] dreadaltartofferings = new Object[]{Items.BUCKET, Items.STICK, ACItems.dread_cloth, ACItems.dreadium_ingot, ACItems.dread_cloth, ACItems.dreadium_ingot, ACItems.dread_cloth, Items.STICK};
+		Object[] dreadaltartofferings = new Object[]{Items.BUCKET, "stickWood", ACItems.dread_cloth, ACItems.dreadium_ingot, ACItems.dread_cloth, ACItems.dreadium_ingot, ACItems.dread_cloth, "stickWood"};
 		RitualRegistry.instance().registerRitual(new NecronomiconCreationRitual("altarOfChagarothTop", 2, ACLib.dreadlands_id, 20000F, true, new ItemStack(ACBlocks.chagaroth_altar_top), dreadaltartofferings));
 		RitualRegistry.instance().registerRitual(new NecronomiconDreadSpawnRitual());
 		Object[] coraoeofferings = new Object[]{new ItemStack(ACItems.coralium_plagued_flesh), new ItemStack(Items.POTIONITEM, 1, 0), new ItemStack(ACItems.coralium_plagued_flesh), new ItemStack(Items.POTIONITEM, 1, 0),
@@ -869,10 +882,10 @@ public class AbyssalCrafting {
 		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("shubniggurathCharm", 4, 2000F, new ItemStack(ACItems.shub_niggurath_charm, 1, 0), new ItemStack(ACItems.ritual_charm, 1, 0), scoffers));
 		Object[] owoffers = new Object[]{ACItems.shadow_shard, Blocks.COBBLESTONE, ACItems.coralium_gem, ACBlocks.darkstone_cobblestone, ACItems.shadow_shard, Blocks.COBBLESTONE,
 				ACItems.coralium_gem, ACBlocks.darkstone_cobblestone};
-		Object[] awoffers = new Object[]{ACItems.shadow_shard, ACBlocks.abyssal_stone_brick, ACItems.coralium_gem, ACBlocks.coralium_stone_brick, ACItems.shadow_shard, ACBlocks.abyssal_stone_brick,
-				ACItems.coralium_gem, ACBlocks.coralium_stone_brick};
-		Object[] dloffers = new Object[]{ACItems.shadow_shard, ACBlocks.dreadstone_brick, ACItems.coralium_gem, ACBlocks.abyssalnite_stone_brick, ACItems.shadow_shard, ACBlocks.dreadstone_brick,
-				ACItems.coralium_gem, ACBlocks.abyssalnite_stone_brick};
+		Object[] awoffers = new Object[]{ACItems.shadow_shard, new ItemStack(ACBlocks.abyssal_stone_brick, 1, 0), ACItems.coralium_gem, new ItemStack(ACBlocks.coralium_stone_brick, 1, 0), ACItems.shadow_shard, new ItemStack(ACBlocks.abyssal_stone_brick, 1, 0),
+				ACItems.coralium_gem, new ItemStack(ACBlocks.coralium_stone_brick, 1, 0)};
+		Object[] dloffers = new Object[]{ACItems.shadow_shard, new ItemStack(ACBlocks.dreadstone_brick, 1, 0), ACItems.coralium_gem, new ItemStack(ACBlocks.abyssalnite_stone_brick, 1, 0), ACItems.shadow_shard, new ItemStack(ACBlocks.dreadstone_brick, 1, 0),
+				ACItems.coralium_gem, new ItemStack(ACBlocks.abyssalnite_stone_brick, 1, 0)};
 		Object[] omtoffers = new Object[]{ACItems.shadow_shard, new ItemStack(ACBlocks.ethaxium_brick, 1, 0), ACItems.coralium_gem, new ItemStack(ACBlocks.dark_ethaxium_brick, 1, 0),
 				ACItems.shadow_shard, new ItemStack(ACBlocks.ethaxium_brick, 1, 0), ACItems.coralium_gem, new ItemStack(ACBlocks.dark_ethaxium_brick, 1, 0)};
 		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("epOWupgrade", 0, 400F, new ItemStack(ACBlocks.tiered_energy_pedestal, 1, 0), ACBlocks.energy_pedestal, owoffers));
@@ -886,6 +899,7 @@ public class AbyssalCrafting {
 		Object[] staffofferings = new Object[]{new ItemStack(ACItems.essence, 1, 1), new ItemStack(ACItems.essence, 1, 2), ACItems.eldritch_scale, ACItems.ethaxium_ingot,
 				ACItems.eldritch_scale, ACItems.ethaxium_ingot, ACItems.eldritch_scale, new ItemStack(ACItems.essence, 1, 0)};
 		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("jzaharStaff", 4, ACLib.omothol_id, 15000F, new ItemStack(ACItems.staff_of_the_gatekeeper), ACItems.staff_of_rending, staffofferings));
+		RitualRegistry.instance().registerRitual(new NecronomiconWeatherRitual());
 	}
 
 	private static void addDisruptions(){

@@ -1,5 +1,7 @@
 {
 	"variants": {
-		"normal": { "model": "abyssalcraft:dreadbrick" }
+		"type=normal": { "model": "abyssalcraft:dreadbrick_0" },
+		"type=chiseled": { "model": "abyssalcraft:dreadbrick_1" },
+		"type=cracked": { "model": "abyssalcraft:dreadbrick_2" }
 	}
 }

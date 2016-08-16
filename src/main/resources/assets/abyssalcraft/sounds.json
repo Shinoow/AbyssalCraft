@@ -116,6 +116,30 @@
 			"abyssalcraft:remnant/scream"
 		]
 	},
+	"remnant.yes": {
+		"category": "hostile",
+		"sounds": [
+			"abyssalcraft:remnant/yes"
+		]
+	},
+	"remnant.no": {
+		"category": "hostile",
+		"sounds": [
+			"abyssalcraft:remnant/no"
+		]
+	},
+	"remnant.priest.chant": {
+		"category": "hostile",
+		"sounds": [
+			"abyssalcraft:chants/cthulhu_1",
+			"abyssalcraft:chants/yog_sothoth_1",
+			"abyssalcraft:chants/yog_sothoth_2_1",
+			"abyssalcraft:chants/hastur_1",
+			"abyssalcraft:chants/hastur_2_1",
+			"abyssalcraft:chants/sleeping_1",
+			"abyssalcraft:chants/cthugha_1"
+		]
+	},
 	"shoggoth.idle": {
 		"category": "hostile",
 		"sounds": [
@@ -146,6 +170,69 @@
 		"category": "hostile",
 		"sounds": [
 			"abyssalcraft:jzahar/charge"
+		]
+	},
+	"chant.cthulhu": {
+		"category": "hostile",
+		"sounds": [
+			"abyssalcraft:chants/cthulhu_1",
+			"abyssalcraft:chants/cthulhu_2",
+			"abyssalcraft:chants/cthulhu_3",
+			"abyssalcraft:chants/cthulhu_4"
+		]
+	},
+	"chant.yog_sothoth_1": {
+		"category": "hostile",
+		"sounds": [
+			"abyssalcraft:chants/yog_sothoth_1",
+			"abyssalcraft:chants/yog_sothoth_2",
+			"abyssalcraft:chants/yog_sothoth_3",
+			"abyssalcraft:chants/yog_sothoth_4"
+		]
+	},
+	"chant.yog_sothoth_2": {
+		"category": "hostile",
+		"sounds": [
+			"abyssalcraft:chants/yog_sothoth_2_1",
+			"abyssalcraft:chants/yog_sothoth_2_2",
+			"abyssalcraft:chants/yog_sothoth_2_3",
+			"abyssalcraft:chants/yog_sothoth_2_4"
+		]
+	},
+	"chant.hastur_1": {
+		"category": "hostile",
+		"sounds": [
+			"abyssalcraft:chants/hastur_1",
+			"abyssalcraft:chants/hastur_2",
+			"abyssalcraft:chants/hastur_3",
+			"abyssalcraft:chants/hastur_4"
+		]
+	},
+	"chant.hastur_2": {
+		"category": "hostile",
+		"sounds": [
+			"abyssalcraft:chants/hastur_2_1",
+			"abyssalcraft:chants/hastur_2_2",
+			"abyssalcraft:chants/hastur_2_3",
+			"abyssalcraft:chants/hastur_2_4"
+		]
+	},
+	"chant.sleeping": {
+		"category": "hostile",
+		"sounds": [
+			"abyssalcraft:chants/sleeping_1",
+			"abyssalcraft:chants/sleeping_2",
+			"abyssalcraft:chants/sleeping_3",
+			"abyssalcraft:chants/sleeping_4"
+		]
+	},
+	"chant.cthugha": {
+		"category": "hostile",
+		"sounds": [
+			"abyssalcraft:chants/cthugha_1",
+			"abyssalcraft:chants/cthugha_2",
+			"abyssalcraft:chants/cthugha_3",
+			"abyssalcraft:chants/cthugha_4"
 		]
 	}
 }

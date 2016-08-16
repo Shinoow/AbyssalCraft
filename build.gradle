@@ -70,7 +70,7 @@ minecraft {
 
 dependencies {
 	
-	deobfCompile "mezz.jei:jei_1.10.2:3.7.4.224"
+	deobfCompile "mezz.jei:jei_1.10.2:3.9.0.244"
 }
 
 version = "${props.mc_version}-${props.ac_version}"

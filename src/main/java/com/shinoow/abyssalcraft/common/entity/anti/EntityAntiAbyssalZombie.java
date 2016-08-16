@@ -29,6 +29,7 @@ import net.minecraft.entity.ai.EntityAIWander;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.ai.attributes.IAttributeInstance;
+import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
@@ -226,6 +227,13 @@ public class EntityAntiAbyssalZombie extends EntityMob implements IAntiEntity {
 			setDead();
 		}
 		else par1Entity.applyEntityCollision(this);
+	}
+
+	@Override
+	protected void updateEquipmentIfNeeded(EntityItem itemEntity)
+	{
+		if(!AbyssalCraft.isItemBlacklisted(this, itemEntity.getEntityItem()))
+			super.updateEquipmentIfNeeded(itemEntity);
 	}
 
 	@Override

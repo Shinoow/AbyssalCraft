@@ -384,6 +384,11 @@ public class EntityRemnant extends EntityMob implements IMerchant, IAntiEntity, 
 	}
 
 	@Override
+	protected SoundEvent getAmbientSound(){
+		return getProfession() == 2 && rand.nextBoolean() ? AbyssalCraft.remnant_priest_chant : null;
+	}
+
+	@Override
 	protected SoundEvent getDeathSound()
 	{
 		return AbyssalCraft.shadow_death;
@@ -640,7 +645,7 @@ public class EntityRemnant extends EntityMob implements IMerchant, IAntiEntity, 
 				var1.getItemToBuy().getItem() instanceof ItemDrainStaff)
 			var1.compensateToolUses();
 		livingSoundTime = -getTalkInterval();
-		playSound(SoundEvents.ENTITY_VILLAGER_YES, getSoundVolume(), getSoundPitch() * 0.5F);
+		playSound(AbyssalCraft.remnant_yes, getSoundVolume(), getSoundPitch());
 
 		if (hasSameIDsAs(var1, tradingList.get(tradingList.size() - 1)))
 		{
@@ -743,9 +748,9 @@ public class EntityRemnant extends EntityMob implements IMerchant, IAntiEntity, 
 			livingSoundTime = -getTalkInterval();
 
 			if (par1ItemStack != null)
-				playSound(SoundEvents.ENTITY_VILLAGER_YES, getSoundVolume(), getSoundPitch() * 0.5F);
+				playSound(AbyssalCraft.remnant_yes, getSoundVolume(), getSoundPitch());
 			else
-				playSound(SoundEvents.ENTITY_VILLAGER_NO, getSoundVolume(), getSoundPitch() * 0.5F);
+				playSound(AbyssalCraft.remnant_no, getSoundVolume(), getSoundPitch());
 		}
 	}
 

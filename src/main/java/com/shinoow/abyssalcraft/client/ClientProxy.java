@@ -142,8 +142,8 @@ public class ClientProxy extends CommonProxy {
 		ModelBakery.registerItemVariants(ACItems.ritual_charm, makerl("ritualcharm_empty", "ritualcharm_range", "ritualcharm_duration", "ritualcharm_power"));
 		ModelBakery.registerItemVariants(ACItems.ingot_nugget, makerl("nugget_abyssalnite", "nugget_coralium", "nugget_dreadium", "nugget_ethaxium"));
 
-		ModelBakery.registerItemVariants(Item.getItemFromBlock(ACBlocks.ethaxium_brick), makerl("ethaxiumbrick_0", "ethaxiumbrick_1"));
-		ModelBakery.registerItemVariants(Item.getItemFromBlock(ACBlocks.dark_ethaxium_brick), makerl("darkethaxiumbrick_0", "darkethaxiumbrick_1"));
+		ModelBakery.registerItemVariants(Item.getItemFromBlock(ACBlocks.ethaxium_brick), makerl("ethaxiumbrick_0", "ethaxiumbrick_1", "ethaxiumbrick_2"));
+		ModelBakery.registerItemVariants(Item.getItemFromBlock(ACBlocks.dark_ethaxium_brick), makerl("darkethaxiumbrick_0", "darkethaxiumbrick_1", "darkethaxiumbrick_2"));
 		ModelBakery.registerItemVariants(Item.getItemFromBlock(ACBlocks.tiered_energy_pedestal), makerl("tieredenergypedestal_0", "tieredenergypedestal_1",
 				"tieredenergypedestal_2", "tieredenergypedestal_3"));
 		ModelBakery.registerItemVariants(Item.getItemFromBlock(ACBlocks.tiered_sacrificial_altar), makerl("tieredsacrificialaltar_0", "tieredsacrificialaltar_1",
@@ -152,6 +152,11 @@ public class ClientProxy extends CommonProxy {
 				"ritualaltar_4", "ritualaltar_5", "ritualaltar_6", "ritualaltar_7"));
 		ModelBakery.registerItemVariants(Item.getItemFromBlock(ACBlocks.ritual_pedestal), makerl("ritualpedestal_0", "ritualpedestal_1", "ritualpedestal_2",
 				"ritualpedestal_3", "ritualpedestal_4", "ritualpedestal_5", "ritualpedestal_6", "ritualpedestal_7"));
+		ModelBakery.registerItemVariants(Item.getItemFromBlock(ACBlocks.darkstone_brick), makerl("darkstone_brick_0", "darkstone_brick_1", "darkstone_brick_2"));
+		ModelBakery.registerItemVariants(Item.getItemFromBlock(ACBlocks.abyssal_stone_brick), makerl("abybrick_0", "abybrick_1", "abybrick_2"));
+		ModelBakery.registerItemVariants(Item.getItemFromBlock(ACBlocks.dreadstone_brick), makerl("dreadbrick_0", "dreadbrick_1", "dreadbrick_2"));
+		ModelBakery.registerItemVariants(Item.getItemFromBlock(ACBlocks.abyssalnite_stone_brick), makerl("abydreadbrick_0", "abydreadbrick_1", "abydreadbrick_2"));
+		ModelBakery.registerItemVariants(Item.getItemFromBlock(ACBlocks.coralium_stone_brick), makerl("cstonebrick_0", "cstonebrick_1", "cstonebrick_2"));
 
 		registerFluidModel(ACBlocks.liquid_coralium, "cor");
 		registerFluidModel(ACBlocks.liquid_antimatter, "anti");
@@ -415,7 +420,9 @@ public class ClientProxy extends CommonProxy {
 
 		registerItemRender(ACBlocks.darkstone, 0);
 		registerItemRender(ACBlocks.darkstone_cobblestone, 0);
-		registerItemRender(ACBlocks.darkstone_brick, 0);
+		registerItemRender(ACBlocks.darkstone_brick, 0, "darkstone_brick_0");
+		registerItemRender(ACBlocks.darkstone_brick, 1, "darkstone_brick_1");
+		registerItemRender(ACBlocks.darkstone_brick, 2, "darkstone_brick_2");
 		registerItemRender(ACBlocks.glowing_darkstone_bricks, 0);
 		registerItemRender(ACBlocks.darkstone_brick_slab, 0);
 		registerItemRender(AbyssalCraft.Darkbrickslab2, 0);
@@ -428,7 +435,9 @@ public class ClientProxy extends CommonProxy {
 		registerItemRender(ACBlocks.darklands_oak_wood, 0);
 		registerItemRender(ACBlocks.darklands_oak_sapling, 0);
 		registerItemRender(ACBlocks.abyssal_stone, 0);
-		registerItemRender(ACBlocks.abyssal_stone_brick, 0);
+		registerItemRender(ACBlocks.abyssal_stone_brick, 0, "abybrick_0");
+		registerItemRender(ACBlocks.abyssal_stone_brick, 1, "abybrick_1");
+		registerItemRender(ACBlocks.abyssal_stone_brick, 2, "abybrick_2");
 		registerItemRender(ACBlocks.abyssal_stone_brick_slab, 0);
 		registerItemRender(AbyssalCraft.abyslab2, 0);
 		registerItemRender(ACBlocks.abyssal_stone_brick_stairs, 0);
@@ -464,8 +473,12 @@ public class ClientProxy extends CommonProxy {
 		registerItemRender(ACBlocks.abyssalnite_stone, 0);
 		registerItemRender(ACBlocks.dreadlands_abyssalnite_ore, 0);
 		registerItemRender(ACBlocks.dreaded_abyssalnite_ore, 0);
-		registerItemRender(ACBlocks.dreadstone_brick, 0);
-		registerItemRender(ACBlocks.abyssalnite_stone_brick, 0);
+		registerItemRender(ACBlocks.dreadstone_brick, 0, "dreadbrick_0");
+		registerItemRender(ACBlocks.dreadstone_brick, 1, "dreadbrick_1");
+		registerItemRender(ACBlocks.dreadstone_brick, 2, "dreadbrick_2");
+		registerItemRender(ACBlocks.abyssalnite_stone_brick, 0, "abydreadbrick_0");
+		registerItemRender(ACBlocks.abyssalnite_stone_brick, 1, "abydreadbrick_1");
+		registerItemRender(ACBlocks.abyssalnite_stone_brick, 2, "abydreadbrick_2");
 		registerItemRender(ACBlocks.dreadlands_grass, 0);
 		registerItemRender(ACBlocks.dreadlands_log, 0);
 		registerItemRender(ACBlocks.dreadlands_leaves, 0);
@@ -486,7 +499,9 @@ public class ClientProxy extends CommonProxy {
 		registerItemRender(ACBlocks.abyssalnite_stone_brick_slab, 0);
 		registerItemRender(AbyssalCraft.abydreadbrickslab2, 0);
 		registerItemRender(ACBlocks.coralium_stone, 0);
-		registerItemRender(ACBlocks.coralium_stone_brick, 0);
+		registerItemRender(ACBlocks.coralium_stone_brick, 0, "cstonebrick_0");
+		registerItemRender(ACBlocks.coralium_stone_brick, 1, "cstonebrick_1");
+		registerItemRender(ACBlocks.coralium_stone_brick, 2, "cstonebrick_2");
 		registerItemRender(ACBlocks.coralium_stone_brick_fence, 0);
 		registerItemRender(ACBlocks.coralium_stone_brick_slab, 0);
 		registerItemRender(AbyssalCraft.cstonebrickslab2, 0);
@@ -515,6 +530,7 @@ public class ClientProxy extends CommonProxy {
 		registerItemRender(ACBlocks.ethaxium, 0);
 		registerItemRender(ACBlocks.ethaxium_brick, 0, "ethaxiumbrick_0");
 		registerItemRender(ACBlocks.ethaxium_brick, 1, "ethaxiumbrick_1");
+		registerItemRender(ACBlocks.ethaxium_brick, 2, "ethaxiumbrick_2");
 		registerItemRender(ACBlocks.ethaxium_pillar, 0);
 		registerItemRender(ACBlocks.ethaxium_brick_stairs, 0);
 		registerItemRender(ACBlocks.ethaxium_brick_slab, 0);
@@ -528,6 +544,7 @@ public class ClientProxy extends CommonProxy {
 		registerItemRender(ACBlocks.materializer, 0);
 		registerItemRender(ACBlocks.dark_ethaxium_brick, 0, "darkethaxiumbrick_0");
 		registerItemRender(ACBlocks.dark_ethaxium_brick, 1, "darkethaxiumbrick_1");
+		registerItemRender(ACBlocks.dark_ethaxium_brick, 2, "darkethaxiumbrick_2");
 		registerItemRender(ACBlocks.dark_ethaxium_pillar, 0);
 		registerItemRender(ACBlocks.dark_ethaxium_brick_stairs, 0);
 		registerItemRender(ACBlocks.dark_ethaxium_brick_slab, 0);

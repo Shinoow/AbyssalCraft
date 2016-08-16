@@ -42,6 +42,8 @@ public class ItemMetadataBlock extends ItemBlock {
 			return TextFormatting.DARK_RED + I18n.translateToLocal(getUnlocalizedName() + "." + subNames[par1ItemStack.getItemDamage()] + ".name");
 		else if(getUnlocalizedName().contains("ethaxiumbrick"))
 			return TextFormatting.AQUA + I18n.translateToLocal(getUnlocalizedName() + "." + subNames[par1ItemStack.getItemDamage()] + ".name");
+		else if(getUnlocalizedName().contains("abybrick"))
+			return TextFormatting.BLUE + I18n.translateToLocal(getUnlocalizedName() + "." + subNames[par1ItemStack.getItemDamage()] + ".name");
 		return I18n.translateToLocal(getUnlocalizedName() + "." + subNames[par1ItemStack.getItemDamage()] + ".name");
 	}
 }
