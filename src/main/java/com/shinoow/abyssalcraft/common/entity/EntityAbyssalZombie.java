@@ -37,7 +37,6 @@ import net.minecraft.entity.monster.EntitySkeleton;
 import net.minecraft.entity.monster.EntityZombie;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
@@ -320,7 +319,7 @@ public class EntityAbyssalZombie extends EntityMob implements ICoraliumEntity {
 	@Override
 	protected void updateEquipmentIfNeeded(EntityItem itemEntity)
 	{
-		if(itemEntity.getEntityItem().getItem() != Items.rotten_flesh || AbyssalCraft.abyssalZombiesPickupRottenFlesh)
+		if(!AbyssalCraft.isItemBlacklisted(this, itemEntity.getEntityItem()))
 			super.updateEquipmentIfNeeded(itemEntity);
 	}
 

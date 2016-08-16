@@ -15,14 +15,14 @@ import java.util.Random;
 
 import net.minecraft.block.Block;
 import net.minecraft.init.SoundEvents;
-import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
 
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
-import com.shinoow.abyssalcraft.lib.tileentity.TEDirectional;
+import com.shinoow.abyssalcraft.common.blocks.BlockStatue;
 
 public class WorldGenShoggothMonolith extends WorldGenerator {
 
@@ -74,11 +74,7 @@ public class WorldGenShoggothMonolith extends WorldGenerator {
 				setBlockAndNotifyAdequately(world, new BlockPos(x -1, y + i, z + 1), ACBlocks.monolith_stone.getDefaultState());
 			}
 			setBlockAndNotifyAdequately(world, pos, ACBlocks.shoggoth_biomass.getDefaultState());
-			setBlockAndNotifyAdequately(world, new BlockPos(x, y + max, z), getStatue(rand).getDefaultState());
-			TileEntity te = world.getTileEntity(new BlockPos(x, y + max, z));
-
-			if(te != null && te instanceof TEDirectional)
-				((TEDirectional) te).setDirection(rand.nextInt(3));
+			setBlockAndNotifyAdequately(world, new BlockPos(x, y + max, z), getStatue(rand).getDefaultState().withProperty(BlockStatue.FACING, EnumFacing.getHorizontal(rand.nextInt(3))));
 
 			world.playSound(pos.getX(), pos.getY(), pos.getZ(), SoundEvents.block_anvil_use, SoundCategory.BLOCKS, 2, world.rand.nextFloat() * 0.1F * 0.9F, false);
 

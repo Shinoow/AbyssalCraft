@@ -100,8 +100,8 @@ public class MiscHandler implements ILifeCycleHandler {
 		registerEnchantment(new ResourceLocation("abyssalcraft", "light_pierce"), AbyssalCraftAPI.light_pierce);
 		registerEnchantment(new ResourceLocation("abyssalcraft", "iron_wall"), AbyssalCraftAPI.iron_wall);
 
-		LIQUID_CORALIUM.setBlock(ACBlocks.liquid_coralium).setUnlocalizedName(ACBlocks.liquid_coralium.getUnlocalizedName());
-		LIQUID_ANTIMATTER.setBlock(ACBlocks.liquid_antimatter).setUnlocalizedName(ACBlocks.liquid_antimatter.getUnlocalizedName());
+		LIQUID_CORALIUM.setBlock(ACBlocks.liquid_coralium);
+		LIQUID_ANTIMATTER.setBlock(ACBlocks.liquid_antimatter);
 		if(CFluid.getBlock() == null)
 			CFluid.setBlock(ACBlocks.liquid_coralium);
 		if(antifluid.getBlock() == null)
@@ -127,10 +127,20 @@ public class MiscHandler implements ILifeCycleHandler {
 		shadow_death = registerSoundEvent("shadow.death");
 		shadow_hurt = registerSoundEvent("shadow.hit");
 		remnant_scream = registerSoundEvent("remnant.scream");
+		remnant_yes = registerSoundEvent("remnant.yes");
+		remnant_no = registerSoundEvent("remnant.no");
+		remnant_priest_chant = registerSoundEvent("remnant.priest.chant");
 		shoggoth_ambient = registerSoundEvent("shoggoth.idle");
 		shoggoth_hurt = registerSoundEvent("shoggoth.hit");
 		shoggoth_death = registerSoundEvent("shoggoth.death");
 		jzahar_charge = registerSoundEvent("jzahar.charge");
+		cthulhu_chant = registerSoundEvent("chant.cthulhu");
+		yog_sothoth_chant_1 = registerSoundEvent("chant.yog_sothoth_1");
+		yog_sothoth_chant_2 = registerSoundEvent("chant.yog_sothoth_2");
+		hastur_chant_1 = registerSoundEvent("chant.hastur_1");
+		hastur_chant_2 = registerSoundEvent("chant.hastur_2");
+		sleeping_chant = registerSoundEvent("chant.sleeping");
+		cthugha_chant = registerSoundEvent("chant.cthugha");
 
 		RitualUtil.addBlocks();
 		addOreDictionaryStuff();

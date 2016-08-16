@@ -182,6 +182,7 @@ message.jzahar.death.10=If you survived the blast, take this mere fragment of my
 message.jzahar.banish.vanilla=I never asked to be within the same dimension as you. Begone, foul beast!
 message.jzahar.banish.ac=Ahem... I thought I gave you an assignment aeons ago, did it ever occur to you that it was permanent?
 message.jzahar.banish.jzh=There can only be ONE! *Creates sword out of thin air*
+message.jzahar.banish.other=I don't believe we've been acquainted, I'm the one that banishes you from this dimension.
 message.jzahar.creative.1=%s, you do realize I could simply switch your Gamemode and slaughter you right now? I'm that kind of Entity.
 message.jzahar.creative.2=But yeah... that would technically be cheating, so I'll just stick to the "rules" and do nothing.
 message.sacthoth.spawn.1=I am unleashed! Feel the wrath of The Dark Realm, mortal.
@@ -366,8 +367,6 @@ necronomicon.text.crafting.transmutator.1=A Transmutator is crafted with Coraliu
 necronomicon.text.crafting.transmutator.2=To obtain Coralium Bricks, you must pour Liquid Antimatter on Liquid Coralium, then harvest the stone formed from the Liquid Coralium. Then you must smelt the Coralium Stone for Coralium Ingots.
 necronomicon.text.crafting.crystallizer.1=A Crystallizer is crafted using Dreadstone Bricks, Blocks of Dreadium and a Furnace.
 necronomicon.text.crafting.crystallizer.2=Dreadium Ingots are obtained by transmuting Dreaded Shards of Abyssalnite, which are dropped by Dreadguards inside the Dreadlands. Dreadium is a lot easier to obtain once you have a Crystallizer.
-necronomicon.text.crafting.dreadaltarbot=An Altar of Cha'garoth (Bottom) is crafted with Dreadstone, Dreadium Ingots, Asorah's Dreaded Gateway Key, Bones, Dread Cloth and a Dreaded Shard of Abyssalnite.
-necronomicon.text.crafting.dreadaltartop=An Altar of Cha'garoth (Top) is crafted with Sticks, a Bucket, Dread Cloths and Dreadium Ingots.
 necronomicon.text.crafting.necro_o=A Omothol Necronomicon is crafted with Skin of Omothol and a Dreadlands Necronomicon.
 necronomicon.text.crafting.lifecrystal.1=A Life Crystal is crafted with a Carbon, a Hydrogen, a Nitrogen, a Oxygen, a Phosphorus and a Sulfur Crystal.
 necronomicon.text.crafting.lifecrystal.2=The Crystals are gained from crystallizing Coal, Water, Nitre, Rotten Flesh and Lapis Lazuli. The Nitrogen Crystal comes from Crystallizing the Nitrate Crystal from the Nitre.
@@ -425,8 +424,8 @@ necronomicon.text.crafting.carboncluster=A Carbon Cluster is crafted with Crysta
 necronomicon.text.crafting.densecarboncluster=A Dense Carbon Cluster is crafted with Carbon Clusters and a block of Obsidian. Can be transmuted into a Diamond.
 necronomicon.text.crafting.crate=A Wooden Crate is crafted with Sticks, Wooden Planks and a Chest. Has an extra row of inventory slots more than a Chest.
 
-necronomicon.text.enchantment.coralium=The Coralium Enchantment allows you to infect any entity you hit with the Coralium Plague (that is, if they aren't immune).
-necronomicon.text.enchantment.dread=The Dread Enchantment allows you to infect any entity you hit with the Dread Plague (that is, if they aren't immune).
+necronomicon.text.enchantment.coralium=The Coralium Enchantment allows you to infect any entity you hit with the Coralium Plague (that is, if they aren't immune). Can only be obtained through a ritual.
+necronomicon.text.enchantment.dread=The Dread Enchantment allows you to infect any entity you hit with the Dread Plague (that is, if they aren't immune). Can only be obtained through a ritual.
 necronomicon.text.enchantment.lightpierce=The Light Pierce Enchantment works like Bane of Arthropods, but on Shadow mobs.
 necronomicon.text.enchantment.ironwall=The Iron Wall Enchantment works as a anti-knockback enchantment, repelling knockback applied when hit.
 
@@ -440,7 +439,7 @@ necronomicon.text.abyssal.progression.1=Once you have reached the Abyssal Wastel
 necronomicon.text.abyssal.progression.2=Asorah uses Spectral Dragons to heal himself, so they should be taken out quickly throughout the fight. Once defeated, Asorah will drop his eye with a large quantity of exp and materials found in the dimension. The Dreadlands Infused Powerstone is located inside a Abyssal Stronghold, which can be found using Powerstone Trackers (recipe in special materials section).
 necronomicon.text.abyssal.progression.3=Once you have tracked down the Powerstone, you can mine it with a Refined Coralium Pickaxe. Lastly you can upgrade your Gateway Key by infusing it with the required components ("Asorah's Dreaded Gateway Key" ritual). Upgrading your Necronomicon to the Dreadlands Necronomicon requires 8 Skins of The Dreadlands.
 
-necronomicon.text.dreadlands.progression.1=Once you have reached the Dreadlands, your next goal is to reach Omothol. You will need to own a Transmutator, and you need to defeat Cha'garoth, The Dreadbeast. In order to reach Cha'garoth, you need the Altar of Cha'garoth, made out of 2 pieces. Both recipes are found in the special materials section.
+necronomicon.text.dreadlands.progression.1=Once you have reached the Dreadlands, your next goal is to reach Omothol. You will need to own a Transmutator, and you need to defeat Cha'garoth, The Dreadbeast. In order to reach Cha'garoth, you need the Altar of Cha'garoth, made out of 2 pieces. Both pieces are created through rituals.
 necronomicon.text.dreadlands.progression.2=Once you have both Altar pieces, you need to place them at Y = 40 inside a Dreadlands Mountain biome and right-click it. Doing so will grant you entry to The Lair of Cha'garoth. After fighting through Dreadguards and eventually killing Cha'garoth, you will receive a Dread-plagued Gateway Key, along with loot. The key needs to be transmuted into a functioning one.
 necronomicon.text.dreadlands.progression.3=With the aforementioned Transmutator (recipe in Abyssal Wasteland special materials section) you can transmute the Dread-plagued Gateway Key into Cha'garoth's R'lyehian Gateway Key, granting you access to Omothol. Upgrading your Necronomicon to the Omothol Necronomicon requires 8 Skins of Omothol.
 
@@ -517,6 +516,7 @@ necronomicon.text.rituals.3=To create the altar, simply place the blocks in the 
 necronomicon.text.rituals.4=After that, you can start performing rituals! In order to perform a ritual, place objects on the pedestals and shift right-click the altar with a Necronomicon.
 necronomicon.text.rituals.5=When peforming, the pedestals project smoke towards the altar. Rituals where you gain objects always end with a bolt of lightning striking the altar.
 necronomicon.text.rituals.6=Potential Energy is required in order to perform rituals (each ritual entry shows how much you need). Potential Energy is a pure form of untapped energy originating from a higher plane of existence. It's mainly used to fuel sacrifices made to The Great Old Ones (any ritual). Statues placed on Shoggoth Monoliths are said to be capable of draining it.
+necronomicon.text.rituals.7=Some rituals require a living sacrifice. This means you need to have an Entity within close proximity of the altar and pedestals. If the Entity is of the correct type (living, adult, something a Lesser Shoggoth would eat) a bolt of lightning will kill it, and the ritual will begin. Failing to complete a ritual will trigger a Disruption, which is bad.
 
 necronomicon.text.pe.1=Potential Energy (PE) is a new form of energy presented in AbyssalCraft. It originates from a higher plane of existence (where no mortal has wandered), and can only be collected by tapping into Ley Lines using various methods. There exist objects capable of doing so, which will be explained here.
 necronomicon.text.pe.2=A good place to start obtaining materials required to create some of the PE collecting objects is Shoggoth Lairs, found in swamps and rivers.
@@ -678,6 +678,16 @@ ac.ritual.jzaharStaff=Staff of The Gatekeeper
 ac.ritual.jzaharStaff.desc=A Staff of The Gatekeeper is created by infusing a Staff of Rending with a Abyssal Wasteland Essence, a Dreadlands Essence, a Omothol Essence, Eldritch Scales and Ethaxium Ingots.
 ac.ritual.respawnJzahar=Ritual of reversed time
 ac.ritual.respawnJzahar.desc=If you in some way failed to obtain a Essence of The Gatekeeper, you can revert time and fight J'zahar again. Can only be performed at the Ritual Altar inside the Temple of J'zahar (X=4, Y=54, Z=85).
+ac.ritual.altarOfChagarothBottom=Altar of Cha'garoth (bottom)
+ac.ritual.altarOfChagarothBottom.desc=An Altar of Cha'garoth (bottom) is created with Dreadstone. Dreadium Ingots, Asorah's Dreaded Gateway Key, Bones and a piece of Dread Cloth.
+ac.ritual.altarOfChagarothTop=Altar of Cha'garoth (top)
+ac.ritual.altarOfChagarothTop.desc=An Altar of Cha'garoth (top) is created with Sticks, a Bucket, Dread Cloths and Dreadium Ingots.
+ac.ritual.corEnchantment=Coralium Infusion
+ac.ritual.corEnchantment.desc=By combining a Abyssal Wasteland Essence, Abyssal Shoggoth Flesh, Refined Coralium Ingots, Coralium-plagued Flesh and a Book, you can enchant a weapon placed on the altar with the Coralium enchantment (if applicable).
+ac.ritual.dreEnchantment=Dread Infusion
+ac.ritual.dreEnchantment.desc=By combining a Dreadlands Essence, Dreaded Shoggoth Flesh, Dreadium Ingots, Dread Fragments and a Book, you can enchant a weapon placed on the altar with the Dread enchantment (if applicable).
+ac.ritual.weather=Ritual of Downpour
+ac.ritual.weather.desc=By sacrificing 8 Feathers, you can control the weather of the Biome you're inside (provided it can rain there). If it's not raining, it will rain. If it's raining, it will start thundering. If it's thundering the rain and thunder will cease.
 
 #Configuration
 ac_dimensions=Dimensions
@@ -692,12 +702,12 @@ ac_biomeweight=Biome Weight
 ac_biomeweight.tooltip=Biome Weight Configuration
 ac_general=General
 ac_general.tooltip=General configuration
-ac_potion=Potions
-ac_potion.tooltip=Potion ID configuration
 ac_shoggoth=Shoggoth Ooze
 ac_shoggoth.tooltip=Shoggoth Ooze Configuration
 ac_worldgen=Worldgen
 ac_worldgen.tooltip=Worldgen configuration
+ac_itemblacklist=Entity Item Blacklist
+ac_itemblacklist.tooltip=Entity Item Blacklist configuration
 
 #Damagesources
 death.attack.coralium=%1$s died from the Coralium Plague
@@ -739,6 +749,7 @@ tooltip.drainstaff.energy.3=Omothol Energy
 tooltip.drainstaff.energy.4=Shadow Energy
 tooltip.gatekeeperessence.1=A mere fragment of J'zahar.
 tooltip.gatekeeperessence.2=You can feel it pulsating with power.
+tooltip.decorativestatue=This block is purely for decoration, and won't do anything
 
 #Creative Tabs
 itemGroup.acblocks=AbyssalCraft Blocks
@@ -756,7 +767,9 @@ fluid.liquidantimatter=Liquid Antimatter
 
 #Blocks
 tile.darkstone.name=Darkstone
-tile.darkstone_brick.name=Darkstone Bricks
+tile.darkstone_brick.0.name=Darkstone Bricks
+tile.darkstone_brick.1.name=Chiseled Darkstone Bricks
+tile.darkstone_brick.2.name=Cracked Darkstone Bricks
 tile.darkstone_cobble.name=Darkstone Cobblestone
 tile.dsglow.name=Glowing Darkstone Bricks
 tile.darkbrickslab1.name=Darkstone Brick Slab
@@ -770,7 +783,9 @@ tile.dltleaves.name=Darklands Oak Leaves
 tile.dltlog.name=Darklands Oak Wood
 tile.dltsapling.name=Darklands Oak Sapling
 tile.abystone.name=Abyssal Stone
-tile.abybrick.name=Abyssal Stone Bricks
+tile.abybrick.0.name=Abyssal Stone Bricks
+tile.abybrick.1.name=Chiseled Abyssal Stone Bricks
+tile.abybrick.2.name=Cracked Abyssal Stone Bricks
 tile.abyslab1.name=Abyssal Stone Brick Slab
 tile.abyslab2.name=Abyssal Stone Brick Doubleslab
 tile.abystairs.name=Abyssal Stone Brick Stairs
@@ -808,8 +823,12 @@ tile.dreadstone.name=Dreadstone
 tile.abydreadstone.name=Abyssalnite Stone
 tile.dreadore.name=Dreaded Abyssalnite Ore
 tile.abydreadore.name=Dreadlands Abyssalnite Ore
-tile.dreadbrick.name=Dreadstone Bricks
-tile.abydreadbrick.name=Abyssalnite Stone Bricks
+tile.dreadbrick.0.name=Dreadstone Bricks
+tile.dreadbrick.1.name=Chiseled Dreadstone Bricks
+tile.dreadbrick.2.name=Cracked Dreadstone Bricks
+tile.abydreadbrick.0.name=Abyssalnite Stone Bricks
+tile.abydreadbrick.1.name=Chiseled Abyssalnite Stone Bricks
+tile.abydreadbrick.2.name=Cracked Abyssalnite Stone Bricks
 tile.dreadgrass.name=Dreadlands Grass
 tile.dreadlog.name=Dreadlands Wood Log
 tile.dreadleaves.name=Dreadlands Wood Leaves
@@ -831,7 +850,9 @@ tile.abydreadbrickslab1.name=Abyssalnite Stone Brick Slab
 tile.abydreadbrickslab2.name=Abyssalnite Stone Brick Doubleslab
 tile.antiwater.name=Liquid Antimatter
 tile.cstone.name=Coralium Stone
-tile.cstonebrick.name=Coralium Brick
+tile.cstonebrick.0.name=Coralium Brick
+tile.cstonebrick.1.name=Chiseled Coralium Brick
+tile.cstonebrick.2.name=Cracked Coralium Brick
 tile.cstonebrickfence.name=Coralium Brick Fence
 tile.cstonebrickslab1.name=Coralium Brick Slab
 tile.cstonebrickslab2.name=Coralium Brick Doubleslab
@@ -859,6 +880,7 @@ tile.solidlava.name=Solid lava
 tile.ethaxium.name=Ethaxium
 tile.ethaxiumbrick.0.name=Ethaxium Brick
 tile.ethaxiumbrick.1.name=Chiseled Ethaxium Brick
+tile.ethaxiumbrick.2.name=Cracked Ethaxium Brick
 tile.ethaxiumpillar.name=Ethaxium Pillar
 tile.ethaxiumbrickstairs.name=Ethaxium Brick Stairs
 tile.ethaxiumbrickslab1.name=Ethaxium Brick Slab
@@ -873,6 +895,7 @@ tile.engraver_on.name=A House
 tile.materializer.name=Materializer
 tile.darkethaxiumbrick.0.name=Dark Ethaxium Brick
 tile.darkethaxiumbrick.1.name=Chiseled Dark Ethaxium Brick
+tile.darkethaxiumbrick.2.name=Cracked Dark Ethaxium Brick
 tile.darkethaxiumpillar.name=Dark Ethaxium Pillar
 tile.darkethaxiumbrickstairs.name=Dark Ethaxium Brick Stairs
 tile.darkethaxiumbrickslab1.name=Dark Ethaxium Brick Slab
@@ -903,6 +926,10 @@ tile.tieredsacrificialaltar.2.name=Dreadlands Sacrificial Altar
 tile.tieredsacrificialaltar.3.name=Omothol Sacrificial Altar
 tile.jzaharspawner.name=J'zahar Spawner Block
 tile.gatekeeperminionspawner.name=Minion of The Gatekeeper Spawner Block
+
+#Pre/Postfixes
+decorativestatue.prefix=Decorative %s
+crystalcluster.postfix=%s Cluster
 
 #Items
 item.devsword.name=The Dev Blade

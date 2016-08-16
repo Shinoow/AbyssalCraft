@@ -23,8 +23,6 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.math.AxisAlignedBB;
-import net.minecraft.util.math.BlockPos;
-
 import com.shinoow.abyssalcraft.api.energy.EnergyEnum.AmplifierType;
 import com.shinoow.abyssalcraft.api.energy.EnergyEnum.DeityType;
 import com.shinoow.abyssalcraft.api.energy.IEnergyManipulator;
@@ -171,10 +169,7 @@ public class TileEntityStatue extends TileEntity implements IEnergyManipulator, 
 		int yp = pos.getY();
 		int zp = pos.getZ();
 
-		if(!(worldObj.getTileEntity(new BlockPos(xp, yp + 1, zp)) instanceof IEnergyManipulator) &&
-				!(worldObj.getTileEntity(new BlockPos(xp, yp - 1, zp)) instanceof IEnergyManipulator) &&
-				!(worldObj.getTileEntity(new BlockPos(xp, yp + 2, zp)) instanceof IEnergyManipulator) &&
-				!(worldObj.getTileEntity(new BlockPos(xp, yp - 2, zp)) instanceof IEnergyManipulator)){
+		if(PEUtils.checkForAdjacentManipulators(worldObj, pos)){
 			if(worldObj.func_184137_a(xp, yp, zp, range, false) != null &&
 					EntityUtil.hasNecronomicon(worldObj.func_184137_a(xp, yp, zp, range, false))){
 				ItemStack item = worldObj.func_184137_a(xp, yp, zp, range, false).getHeldItem(EnumHand.MAIN_HAND);

@@ -11,76 +11,27 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.common.items;
 
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.attributes.AttributeModifier;
-import net.minecraft.inventory.EntityEquipmentSlot;
-import net.minecraft.item.EnumAction;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.ItemSword;
+import net.minecraftforge.common.util.EnumHelper;
 
-import com.google.common.collect.Multimap;
 import com.shinoow.abyssalcraft.api.item.ACItems;
 import com.shinoow.abyssalcraft.lib.ACTabs;
 
-public class ItemDreadiumKatana extends Item {
+public class ItemDreadiumKatana extends ItemSword {
 
-	private float weaponDamage;
+	public static ToolMaterial hilt = EnumHelper.addToolMaterial("dreadiumkatana_hilt", 0, 200, 1, 1, 0).setRepairItem(new ItemStack(ACItems.crystal, 1, 14));
+	public static ToolMaterial katana = EnumHelper.addToolMaterial("dreadiumkatana_katana", 0, 2000, 1, 16, 0).setRepairItem(new ItemStack(ACItems.crystal, 1, 14));
 
-	public ItemDreadiumKatana(String par1Str, float par2, int par3){
-		super();
+	public ItemDreadiumKatana(String par1Str, ToolMaterial mat){
+		super(mat);
 		setUnlocalizedName(par1Str);
 		setCreativeTab(ACTabs.tabCombat);
-		weaponDamage = par2;
-		setMaxDamage(par3);
-		setMaxStackSize(1);
-	}
-
-	@Override
-	public boolean isFull3D() {
-		return true;
-	}
-
-	@Override
-	public EnumAction getItemUseAction(ItemStack par1ItemStack) {
-		return EnumAction.BLOCK;
-	}
-
-	@Override
-	public int getMaxItemUseDuration(ItemStack par1ItemStack) {
-		return 0x11940;
 	}
 
 	@Override
 	public boolean isBookEnchantable(ItemStack stack, ItemStack book)
 	{
 		return false;
-	}
-
-	@Override
-	public boolean hitEntity(ItemStack par1ItemStack, EntityLivingBase par2EntityLivingBase, EntityLivingBase par3EntityLivingBase)
-	{
-		par1ItemStack.damageItem(1, par3EntityLivingBase);
-		return true;
-	}
-
-	@Override
-	public boolean getIsRepairable(ItemStack par1ItemStack, ItemStack par2ItemStack)
-	{
-		return new ItemStack(ACItems.crystal, 1, 14) == par2ItemStack ? true : super.getIsRepairable(par1ItemStack, par2ItemStack);
-	}
-
-	@Override
-	@SuppressWarnings({ "rawtypes", "unchecked", "deprecation" })
-	public Multimap getItemAttributeModifiers(EntityEquipmentSlot equipmentSlot) {
-		Multimap multimap = super.getItemAttributeModifiers(equipmentSlot);
-
-		if (equipmentSlot == EntityEquipmentSlot.MAINHAND)
-		{
-			multimap.put(SharedMonsterAttributes.ATTACK_DAMAGE.getAttributeUnlocalizedName(), new AttributeModifier(ATTACK_DAMAGE_MODIFIER, "Weapon modifier", weaponDamage, 0));
-			multimap.put(SharedMonsterAttributes.ATTACK_SPEED.getAttributeUnlocalizedName(), new AttributeModifier(ATTACK_SPEED_MODIFIER, "Weapon modifier", -2.4000000953674316D, 0));
-		}
-
-		return multimap;
 	}
 }
