@@ -61,7 +61,7 @@ public class Abypillar extends WorldGenerator
 	@Override
 	public boolean generate(World world, Random rand, BlockPos pos) {
 
-		if(!LocationIsValidSpawn(world, pos) || !LocationIsValidSpawn(world, pos.east(7)) || !LocationIsValidSpawn(world, new BlockPos(7, 0, 8)) || !LocationIsValidSpawn(world, pos.south(8)))
+		if(!LocationIsValidSpawn(world, pos) || !LocationIsValidSpawn(world, pos.east(7)) || !LocationIsValidSpawn(world, pos.add(7, 0, 8)) || !LocationIsValidSpawn(world, pos.south(8)))
 			return false;
 
 		int i = pos.getX();

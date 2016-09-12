@@ -36,7 +36,10 @@ import com.shinoow.abyssalcraft.common.entity.EntityDreadguard;
 import com.shinoow.abyssalcraft.common.entity.EntityDreadling;
 import com.shinoow.abyssalcraft.common.entity.EntityGreaterDreadSpawn;
 import com.shinoow.abyssalcraft.common.entity.EntityLesserDreadbeast;
+import com.shinoow.abyssalcraft.common.entity.demon.EntityDemonChicken;
+import com.shinoow.abyssalcraft.common.entity.demon.EntityDemonCow;
 import com.shinoow.abyssalcraft.common.entity.demon.EntityDemonPig;
+import com.shinoow.abyssalcraft.common.entity.demon.EntityDemonSheep;
 
 public class BiomeGenDreadlandsBase extends BiomeGenBase implements IDreadlandsBiome {
 
@@ -57,6 +60,9 @@ public class BiomeGenDreadlandsBase extends BiomeGenBase implements IDreadlandsB
 		spawnableMonsterList.add(new SpawnListEntry(EntityDreadling.class, 40, 1, 2));
 		spawnableMonsterList.add(new SpawnListEntry(EntityChagarothFist.class, 2, 1, 1));
 		spawnableMonsterList.add(new SpawnListEntry(EntityDemonPig.class, 5, 1, 2));
+		spawnableMonsterList.add(new SpawnListEntry(EntityDemonCow.class, 5, 1, 2));
+		spawnableMonsterList.add(new SpawnListEntry(EntityDemonChicken.class, 5, 1, 2));
+		spawnableMonsterList.add(new SpawnListEntry(EntityDemonSheep.class, 5, 1, 2));
 		spawnableMonsterList.add(new SpawnListEntry(EntityGreaterDreadSpawn.class, 5, 1, 1));
 		spawnableMonsterList.add(new SpawnListEntry(EntityDreadguard.class, 8, 1, 1));
 		spawnableMonsterList.add(new SpawnListEntry(EntityLesserDreadbeast.class, 1, 0, 1));

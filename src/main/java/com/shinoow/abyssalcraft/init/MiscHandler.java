@@ -116,10 +116,11 @@ public class MiscHandler implements ILifeCycleHandler {
 		dreadguard_hurt = registerSoundEvent("dreadguard.hit");
 		dreadguard_death = registerSoundEvent("dreadguard.death");
 		ghoul_normal_ambient = registerSoundEvent("ghoul.normal.idle");
-		ghoul_normal_hurt = registerSoundEvent("ghoul.normal.hit");
+		ghoul_hurt = registerSoundEvent("ghoul.hit");
 		ghoul_death = registerSoundEvent("ghoul.death");
-		ghoul_pete_hurt = registerSoundEvent("ghoul.pete.hit");
 		ghoul_pete_ambient = registerSoundEvent("ghoul.pete.idle");
+		ghoul_wilson_ambient = registerSoundEvent("ghoul.wilson.idle");
+		ghoul_orange_ambient = registerSoundEvent("ghoul.orange.idle");
 		golem_death = registerSoundEvent("golem.death");
 		golem_hurt = registerSoundEvent("golem.hit");
 		golem_ambient = registerSoundEvent("golem.idle");
@@ -141,6 +142,9 @@ public class MiscHandler implements ILifeCycleHandler {
 		hastur_chant_2 = registerSoundEvent("chant.hastur_2");
 		sleeping_chant = registerSoundEvent("chant.sleeping");
 		cthugha_chant = registerSoundEvent("chant.cthugha");
+		dread_spawn_ambient = registerSoundEvent("dreadspawn.idle");
+		dread_spawn_hurt = registerSoundEvent("dreadspawn.hit");
+		dread_spawn_death = registerSoundEvent("dreadspawn.death");
 
 		RitualUtil.addBlocks();
 		addOreDictionaryStuff();

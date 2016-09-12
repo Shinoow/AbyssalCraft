@@ -73,22 +73,6 @@ public class BiomeGenDarklandsHills extends BiomeGenBase implements IDarklandsBi
 			int x = par2Random.nextInt(16);
 			int y = par2Random.nextInt(64);
 			int z = par2Random.nextInt(16);
-			new WorldGenMinable(ACBlocks.darkstone.getDefaultState(), 64).generate(par1World, par2Random, pos.add(x, y, z));
-		}
-
-		for (int rarity = 0; rarity < 7; ++rarity)
-		{
-			int x = par2Random.nextInt(16);
-			int y = par2Random.nextInt(64);
-			int z = par2Random.nextInt(16);
-			new WorldGenMinable(ACBlocks.abyssalnite_stone.getDefaultState(), 1).generate(par1World, par2Random, pos.add(x, y, z));
-		}
-
-		for (int rarity = 0; rarity < 7; ++rarity)
-		{
-			int x = par2Random.nextInt(16);
-			int y = par2Random.nextInt(64);
-			int z = par2Random.nextInt(16);
 			new WorldGenMinable(ACBlocks.darkstone.getDefaultState(), 32).generate(par1World, par2Random, pos.add(x, y, z));
 		}
 	}

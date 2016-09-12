@@ -112,19 +112,19 @@ public class EntityDreadSpawn extends EntityMob implements IDreadEntity
 	@Override
 	protected SoundEvent getAmbientSound()
 	{
-		return SoundEvents.entity_zombie_ambient;
+		return AbyssalCraft.dread_spawn_ambient;
 	}
 
 	@Override
 	protected SoundEvent getHurtSound()
 	{
-		return SoundEvents.entity_zombie_hurt;
+		return AbyssalCraft.dread_spawn_hurt;
 	}
 
 	@Override
 	protected SoundEvent getDeathSound()
 	{
-		return SoundEvents.entity_zombie_death;
+		return AbyssalCraft.dread_spawn_death;
 	}
 
 	@Override

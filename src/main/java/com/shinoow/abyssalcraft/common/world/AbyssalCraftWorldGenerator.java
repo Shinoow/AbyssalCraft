@@ -24,6 +24,7 @@ import net.minecraftforge.common.BiomeDictionary.Type;
 import net.minecraftforge.fml.common.IWorldGenerator;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
+import com.shinoow.abyssalcraft.api.biome.IDarklandsBiome;
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.common.structures.StructureShoggothPit;
 import com.shinoow.abyssalcraft.common.structures.overworld.AChouse1;
@@ -54,7 +55,7 @@ public class AbyssalCraftWorldGenerator implements IWorldGenerator {
 
 	public void generateSurface(World world, Random random, int chunkX, int chunkZ) {
 
-		if(AbyssalCraft.generateDarklandsStructures){
+		if(AbyssalCraft.generateDarklandsStructures && world.getBiomeGenForCoords(new BlockPos(chunkX, 0, chunkZ)) instanceof IDarklandsBiome){
 			for(int k = 0; k < 2; k++) {
 				int RandPosX = chunkX + random.nextInt(5);
 				int RandPosY = random.nextInt(75);
@@ -138,7 +139,7 @@ public class AbyssalCraftWorldGenerator implements IWorldGenerator {
 				if(BiomeDictionary.isBiomeOfType(world.getBiomeGenForCoords(new BlockPos(x, 0, z)), Type.SWAMP) ||
 						BiomeDictionary.isBiomeOfType(world.getBiomeGenForCoords(new BlockPos(x, 0, z)), Type.RIVER) &&
 						!BiomeDictionary.isBiomeOfType(world.getBiomeGenForCoords(new BlockPos(x, 0, z)), Type.OCEAN))
-					if(random.nextInt(100) == 0)
+					if(random.nextInt(200) == 0)
 						new StructureShoggothPit().generate(world, random, world.getHeight(new BlockPos(x, 0, z)));
 			}
 	}

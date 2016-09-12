@@ -71,17 +71,7 @@ public class EntityDepthsGhoul extends EntityMob implements ICoraliumEntity {
 	private static final UUID babySpeedBoostUUID = UUID.fromString("B9766B59-9566-4402-BC1F-2EE2A276D836");
 	private static final AttributeModifier babySpeedBoostModifier = new AttributeModifier(babySpeedBoostUUID, "Baby speed boost", 0.5D, 1);
 	private static final UUID attackDamageBoostUUID = UUID.fromString("648D7064-6A60-4F59-8ABE-C2C23A6DD7A9");
-	private static final AttributeModifier peteDamageBoost = new AttributeModifier(attackDamageBoostUUID, "Pete Attack Damage Boost", 2.0D, 0);
-	private static final AttributeModifier wilsonDamageBoost = new AttributeModifier(attackDamageBoostUUID, "Wilson Attack Damage Boost", 4.0D, 0);
-	private static final AttributeModifier orangeDamageBoost = new AttributeModifier(attackDamageBoostUUID, "Orange Attack Damage Boost", 6.0D, 0);
 	private static final AttributeModifier ghoulHDamageBoost = new AttributeModifier(attackDamageBoostUUID, "Halloween Attack Damage Boost", 3.0D, 0);
-	private static final AttributeModifier peteHDamageBoost = new AttributeModifier(attackDamageBoostUUID, "Pete Halloween Attack Damage Boost", 8.0D, 0);
-	private static final AttributeModifier wilsonHDamageBoost = new AttributeModifier(attackDamageBoostUUID, "Wilson Halloween Attack Damage Boost", 10.0D, 0);
-	private static final AttributeModifier orangeHDamageBoost = new AttributeModifier(attackDamageBoostUUID, "Orange Halloween Attack Damage Boost", 12.0D, 0);
-	private static final UUID healthBoostUUID = UUID.fromString("5D6F0BA2-1186-46AC-B896-C61C5CEE99CC");
-	private static final AttributeModifier peteHealthBoost = new AttributeModifier(healthBoostUUID, "Pete Health Boost", 10.0D, 0);
-	private static final AttributeModifier wilsonHealthBoost = new AttributeModifier(healthBoostUUID, "Wilson Health Boost", 20.0D, 0);
-	private static final AttributeModifier orangeHealthBoost = new AttributeModifier(healthBoostUUID, "Orange Health Boost", 30.0D, 0);
 
 	private float ghoulWidth = -1.0F;
 	private float ghoulHeight;
@@ -265,9 +255,9 @@ public class EntityDepthsGhoul extends EntityMob implements ICoraliumEntity {
 		case 1:
 			return AbyssalCraft.ghoul_pete_ambient;
 		case 2:
-			return AbyssalCraft.ghoul_normal_ambient; //abyssalcraft:ghoul.wilson.idle
+			return AbyssalCraft.ghoul_wilson_ambient;
 		case 3:
-			return AbyssalCraft.ghoul_normal_ambient; //abyssalcraft:ghoul.orange.idle
+			return AbyssalCraft.ghoul_orange_ambient;
 		default:
 			return AbyssalCraft.ghoul_normal_ambient;
 		}
@@ -276,19 +266,8 @@ public class EntityDepthsGhoul extends EntityMob implements ICoraliumEntity {
 	@Override
 	protected SoundEvent getHurtSound()
 	{
-		switch (getGhoulType())
-		{
-		case 0:
-			return AbyssalCraft.ghoul_normal_hurt;
-		case 1:
-			return AbyssalCraft.ghoul_pete_hurt;
-		case 2:
-			return AbyssalCraft.ghoul_normal_hurt; //abyssalcraft:ghoul.wilson.hit
-		case 3:
-			return AbyssalCraft.ghoul_normal_hurt; //abyssalcraft:ghoul.orange.hit
-		default:
-			return AbyssalCraft.ghoul_normal_hurt;
-		}
+		return AbyssalCraft.ghoul_hurt;
+
 	}
 
 	@Override
@@ -368,20 +347,15 @@ public class EntityDepthsGhoul extends EntityMob implements ICoraliumEntity {
 	{
 		Object data = super.onInitialSpawn(difficulty, par1EntityLivingData);
 
-		switch(worldObj.rand.nextInt(4))
-		{
-		case 0:
-			setGhoulType(0);
-			break;
-		case 1:
-			setGhoulType(1);
-			break;
-		case 2:
-			setGhoulType(2);
-			break;
-		case 3:
-			setGhoulType(3);
+		int type = 0;
+
+		if(worldObj.rand.nextFloat() < 0.2F){
+			int temp = worldObj.rand.nextInt(4);
+			if(temp < 4)
+				type = temp;
 		}
+
+		setGhoulType(type);
 
 		float f = difficulty.getClampedAdditionalDifficulty();
 		setCanPickUpLoot(rand.nextFloat() < 0.55F * f);
@@ -412,61 +386,13 @@ public class EntityDepthsGhoul extends EntityMob implements ICoraliumEntity {
 		}
 
 		IAttributeInstance attribute = getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE);
-		IAttributeInstance attribute1 = getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH);
 		Calendar calendar = worldObj.getCurrentDate();
 
-		switch(getGhoulType()){
-		case 0:
-			if(worldObj != null && !worldObj.isRemote)
-				clearModifiers(attribute, attribute1);
-			if (calendar.get(2) + 1 == 10 && calendar.get(5) == 31 && rand.nextFloat() < 0.25F)
-				attribute.applyModifier(ghoulHDamageBoost);
-			break;
-		case 1:
-			if(worldObj != null && !worldObj.isRemote)
-				clearModifiers(attribute, attribute1);
-			attribute.applyModifier(peteDamageBoost);
-			attribute1.applyModifier(peteHealthBoost);
-			setHealth(40);
-			if (calendar.get(2) + 1 == 10 && calendar.get(5) == 31 && rand.nextFloat() < 0.25F){
-				attribute.removeModifier(peteDamageBoost);
-				attribute.applyModifier(peteHDamageBoost);
-			}
-			break;
-		case 2:
-			if(worldObj != null && !worldObj.isRemote)
-				clearModifiers(attribute, attribute1);
-			attribute.applyModifier(wilsonDamageBoost);
-			attribute1.applyModifier(wilsonHealthBoost);
-			setHealth(50);
-			if (calendar.get(2) + 1 == 10 && calendar.get(5) == 31 && rand.nextFloat() < 0.25F){
-				attribute.removeModifier(wilsonDamageBoost);
-				attribute.applyModifier(wilsonHDamageBoost);
-			}
-			break;
-		case 3:
-			if(worldObj != null && !worldObj.isRemote)
-				clearModifiers(attribute, attribute1);
-			attribute.applyModifier(orangeDamageBoost);
-			attribute1.applyModifier(orangeHealthBoost);
-			setHealth(60);
-			if (calendar.get(2) + 1 == 10 && calendar.get(5) == 31 && rand.nextFloat() < 0.25F){
-				attribute.removeModifier(orangeDamageBoost);
-				attribute.applyModifier(orangeHDamageBoost);
-			}
-			break;
-		}
+		if (calendar.get(2) + 1 == 10 && calendar.get(5) == 31 && rand.nextFloat() < 0.25F)
+			attribute.applyModifier(ghoulHDamageBoost);
+
 
 		return (IEntityLivingData)data;
-	}
-
-	private void clearModifiers(IAttributeInstance dmg, IAttributeInstance hp){
-		dmg.removeModifier(peteDamageBoost);
-		dmg.removeModifier(wilsonDamageBoost);
-		dmg.removeModifier(orangeDamageBoost);
-		hp.removeModifier(peteHealthBoost);
-		hp.removeModifier(wilsonHealthBoost);
-		hp.removeModifier(orangeHealthBoost);
 	}
 
 	public void setChildSize(boolean p_146071_1_)

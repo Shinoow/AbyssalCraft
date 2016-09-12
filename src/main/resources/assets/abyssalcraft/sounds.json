@@ -3,7 +3,8 @@
 		"category": "hostile",
 		"sounds": [
 			"abyssalcraft:dreadguard/death"
-		]
+		],
+		"subtitle": "subtitle.abyssalcraft.dreadguard.death"
 	},
 	"dreadguard.idle": {
 		"category": "hostile",
@@ -11,7 +12,8 @@
 			"abyssalcraft:dreadguard/idle1",
 			"abyssalcraft:dreadguard/idle2",
 			"abyssalcraft:dreadguard/idle3"
-		]
+		],
+		"subtitle": "subtitle.abyssalcraft.dreadguard.idle"
 	},
 	"dreadguard.hit": {
 		"category": "hostile",
@@ -20,7 +22,8 @@
 			"abyssalcraft:dreadguard/hit2",
 			"abyssalcraft:dreadguard/hit3",
 			"abyssalcraft:dreadguard/hit4"
-		]
+		],
+		"subtitle": "subtitle.abyssalcraft.dreadguard.hit"
 	},
 	"ghoul.normal.idle": {
 		"category": "hostile",
@@ -30,77 +33,104 @@
 			"abyssalcraft:ghoul/normal/idle3",
 			"abyssalcraft:ghoul/normal/idle4",
 			"abyssalcraft:ghoul/normal/idle5"
-		]
+		],
+		"subtitle": "subtitle.abyssalcraft.ghoul.normal.idle"
 	},
-	"ghoul.normal.hit": {
+	"ghoul.hit": {
 		"category": "hostile",
 		"sounds": [
-			"abyssalcraft:ghoul/normal/hurt1",
-			"abyssalcraft:ghoul/normal/hurt2",
-			"abyssalcraft:ghoul/normal/hurt3",
-			"abyssalcraft:ghoul/normal/hurt4",
-			"abyssalcraft:ghoul/normal/hurt5"
-		]
+			"abyssalcraft:ghoul/hurt1",
+			"abyssalcraft:ghoul/hurt2",
+			"abyssalcraft:ghoul/hurt3",
+			"abyssalcraft:ghoul/hurt4",
+			"abyssalcraft:ghoul/hurt5"
+		],
+		"subtitle": "subtitle.abyssalcraft.ghoul.hit"
 	},
 	"ghoul.death": {
 		"category": "hostile",
 		"sounds": [
 			"abyssalcraft:ghoul/death"
-		]
-	},
-	"ghoul.pete.hit": {
-		"category": "hostile",
-		"sounds": [
-			"abyssalcraft:ghoul/pete/hit1",
-			"abyssalcraft:ghoul/pete/hit2",
-			"abyssalcraft:ghoul/pete/hit3",
-			"abyssalcraft:ghoul/pete/hit4",
-			"abyssalcraft:ghoul/pete/hit5"
-		]
+		],
+		"subtitle": "subtitle.abyssalcraft.ghoul.death"
 	},
 	"ghoul.pete.idle": {
 		"category": "hostile",
 		"sounds": [
+			"abyssalcraft:ghoul/normal/idle1",
 			"abyssalcraft:ghoul/pete/idle1",
+			"abyssalcraft:ghoul/normal/idle2",
 			"abyssalcraft:ghoul/pete/idle2",
+			"abyssalcraft:ghoul/normal/idle3",
 			"abyssalcraft:ghoul/pete/idle3",
-			"abyssalcraft:ghoul/pete/idle4",
-			"abyssalcraft:ghoul/pete/idle5",
-			"abyssalcraft:ghoul/pete/idle6",
-			"abyssalcraft:ghoul/pete/idle7",
-			"abyssalcraft:ghoul/pete/idle8"
-		]
+			"abyssalcraft:ghoul/normal/idle4",
+			"abyssalcraft:ghoul/normal/idle5"
+		],
+		"subtitle": "subtitle.abyssalcraft.ghoul.pete.idle"
+	},
+	"ghoul.wilson.idle": {
+		"category": "hostile",
+		"sounds": [
+			"abyssalcraft:ghoul/normal/idle1",
+			"abyssalcraft:ghoul/wilson/idle1",
+			"abyssalcraft:ghoul/normal/idle2",
+			"abyssalcraft:ghoul/wilson/idle2",
+			"abyssalcraft:ghoul/normal/idle3",
+			"abyssalcraft:ghoul/wilson/idle3",
+			"abyssalcraft:ghoul/normal/idle4",
+			"abyssalcraft:ghoul/normal/idle5"
+		],
+		"subtitle": "subtitle.abyssalcraft.ghoul.wilson.idle"
+	},
+	"ghoul.orange.idle": {
+		"category": "hostile",
+		"sounds": [
+			"abyssalcraft:ghoul/normal/idle1",
+			"abyssalcraft:ghoul/orange/idle1",
+			"abyssalcraft:ghoul/normal/idle2",
+			"abyssalcraft:ghoul/orange/idle2",
+			"abyssalcraft:ghoul/normal/idle3",
+			"abyssalcraft:ghoul/orange/idle3",
+			"abyssalcraft:ghoul/normal/idle4",
+			"abyssalcraft:ghoul/normal/idle5"
+		],
+		"subtitle": "subtitle.abyssalcraft.ghoul.orange.idle"
 	},
 	"golem.death": {
 		"category": "hostile",
 		"sounds": [
 			"abyssalcraft:golem/death"
-		]
+		],
+		"subtitle": "subtitle.abyssalcraft.golem.death"
 	},
 	"golem.hit": {
 		"category": "hostile",
 		"sounds": [
 			"abyssalcraft:golem/hit1",
 			"abyssalcraft:golem/hit2"
-		]
+		],
+		"subtitle": "subtitle.abyssalcraft.golem.hit"
 	},
 	"golem.idle": {
 		"category": "hostile",
 		"sounds": [
 			"abyssalcraft:golem/idle1"
-		]
+		],
+		"subtitle": "subtitle.abyssalcraft.golem.idle"
 	},
 	"sacthoth.death": {
 		"category": "hostile",
 		"sounds": [
 			"abyssalcraft:shadow/sacthoth/death"
-		]
+		],
+		"subtitle": "subtitle.abyssalcraft.sacthoth.death"
 	},
 	"shadow.death": {
 		"category": "hostile",
 		"sounds": [
 			"abyssalcraft:shadow/death"
-		]
+		],
+		"subtitle": "subtitle.abyssalcraft.shadow.death"
 	},
 	"shadow.hit": {
 		"category": "hostile",
@@ -108,25 +138,29 @@
 			"abyssalcraft:shadow/hurt1",
 			"abyssalcraft:shadow/hurt2",
 			"abyssalcraft:shadow/hurt3"
-		]
+		],
+		"subtitle": "subtitle.abyssalcraft.shadow.hit"
 	},
 	"remnant.scream": {
 		"category": "hostile",
 		"sounds": [
 			"abyssalcraft:remnant/scream"
-		]
+		],
+		"subtitle": "subtitle.abyssalcraft.remnant.scream"
 	},
 	"remnant.yes": {
 		"category": "hostile",
 		"sounds": [
 			"abyssalcraft:remnant/yes"
-		]
+		],
+		"subtitle": "subtitle.abyssalcraft.remnant.yes"
 	},
 	"remnant.no": {
 		"category": "hostile",
 		"sounds": [
 			"abyssalcraft:remnant/no"
-		]
+		],
+		"subtitle": "subtitle.abyssalcraft.remnant.no"
 	},
 	"remnant.priest.chant": {
 		"category": "hostile",
@@ -138,7 +172,8 @@
 			"abyssalcraft:chants/hastur_2_1",
 			"abyssalcraft:chants/sleeping_1",
 			"abyssalcraft:chants/cthugha_1"
-		]
+		],
+		"subtitle": "subtitle.abyssalcraft.remnant.priest.chant"
 	},
 	"shoggoth.idle": {
 		"category": "hostile",
@@ -148,7 +183,8 @@
 			"abyssalcraft:shoggoth/idle3",
 			"abyssalcraft:shoggoth/idle4",
 			"abyssalcraft:shoggoth/idle5"
-		]
+		],
+		"subtitle": "subtitle.abyssalcraft.shoggoth.idle"
 	},
 	"shoggoth.hit": {
 		"category": "hostile",
@@ -158,19 +194,22 @@
 			"abyssalcraft:shoggoth/hurt3",
 			"abyssalcraft:shoggoth/hurt4",
 			"abyssalcraft:shoggoth/hurt5"
-		]
+		],
+		"subtitle": "subtitle.abyssalcraft.shoggoth.hit"
 	},
 	"shoggoth.death": {
 		"category": "hostile",
 		"sounds": [
 			"abyssalcraft:shoggoth/death"
-		]
+		],
+		"subtitle": "subtitle.abyssalcraft.shoggoth.death"
 	},
 	"jzahar.charge": {
 		"category": "hostile",
 		"sounds": [
 			"abyssalcraft:jzahar/charge"
-		]
+		],
+		"subtitle": "subtitle.abyssalcraft.jzahar.charge"
 	},
 	"chant.cthulhu": {
 		"category": "hostile",
@@ -179,7 +218,8 @@
 			"abyssalcraft:chants/cthulhu_2",
 			"abyssalcraft:chants/cthulhu_3",
 			"abyssalcraft:chants/cthulhu_4"
-		]
+		],
+		"subtitle": "subtitle.abyssalcraft.chant.cthulhu"
 	},
 	"chant.yog_sothoth_1": {
 		"category": "hostile",
@@ -188,7 +228,8 @@
 			"abyssalcraft:chants/yog_sothoth_2",
 			"abyssalcraft:chants/yog_sothoth_3",
 			"abyssalcraft:chants/yog_sothoth_4"
-		]
+		],
+		"subtitle": "subtitle.abyssalcraft.chant.yog_sothoth"
 	},
 	"chant.yog_sothoth_2": {
 		"category": "hostile",
@@ -197,7 +238,8 @@
 			"abyssalcraft:chants/yog_sothoth_2_2",
 			"abyssalcraft:chants/yog_sothoth_2_3",
 			"abyssalcraft:chants/yog_sothoth_2_4"
-		]
+		],
+		"subtitle": "subtitle.abyssalcraft.chant.yog_sothoth"
 	},
 	"chant.hastur_1": {
 		"category": "hostile",
@@ -206,7 +248,8 @@
 			"abyssalcraft:chants/hastur_2",
 			"abyssalcraft:chants/hastur_3",
 			"abyssalcraft:chants/hastur_4"
-		]
+		],
+		"subtitle": "subtitle.abyssalcraft.chant.hastur"
 	},
 	"chant.hastur_2": {
 		"category": "hostile",
@@ -215,7 +258,8 @@
 			"abyssalcraft:chants/hastur_2_2",
 			"abyssalcraft:chants/hastur_2_3",
 			"abyssalcraft:chants/hastur_2_4"
-		]
+		],
+		"subtitle": "subtitle.abyssalcraft.chant.hastur"
 	},
 	"chant.sleeping": {
 		"category": "hostile",
@@ -224,7 +268,8 @@
 			"abyssalcraft:chants/sleeping_2",
 			"abyssalcraft:chants/sleeping_3",
 			"abyssalcraft:chants/sleeping_4"
-		]
+		],
+		"subtitle": "subtitle.abyssalcraft.chant.sleeping"
 	},
 	"chant.cthugha": {
 		"category": "hostile",
@@ -233,6 +278,36 @@
 			"abyssalcraft:chants/cthugha_2",
 			"abyssalcraft:chants/cthugha_3",
 			"abyssalcraft:chants/cthugha_4"
-		]
+		],
+		"subtitle": "subtitle.abyssalcraft.chant.cthugha"
+	},
+	"dreadspawn.idle": {
+		"category": "hostile",
+		"sounds": [
+			"abyssalcraft:dreadspawn/idle1",
+			"abyssalcraft:dreadspawn/idle2",
+			"abyssalcraft:dreadspawn/idle3",
+			"abyssalcraft:dreadspawn/idle4",
+			"abyssalcraft:dreadspawn/idle5"
+		],
+		"subtitle": "subtitle.abyssalcraft.dreadspawn.idle"
+	},
+	"dreadspawn.hit": {
+		"category": "hostile",
+		"sounds": [
+			"abyssalcraft:dreadspawn/hurt1",
+			"abyssalcraft:dreadspawn/hurt2",
+			"abyssalcraft:dreadspawn/hurt3",
+			"abyssalcraft:dreadspawn/hurt4",
+			"abyssalcraft:dreadspawn/hurt5"
+		],
+		"subtitle": "subtitle.abyssalcraft.dreadspawn.hit"
+	},
+	"dreadspawn.death": {
+		"category": "hostile",
+		"sounds": [
+			"abyssalcraft:dreadspawn/death"
+		],
+		"subtitle": "subtitle.abyssalcraft.dreadspawn.death"
 	}
 }

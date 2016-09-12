@@ -192,9 +192,12 @@ public class GuiNecronomiconInformation extends GuiNecronomicon {
 			fontRendererObj.drawSplitString(stuff, k + 20, b0 + 16, 116, 0xC40000);
 			setTurnupLimit(1);
 			writeText(1, "Saice Shoop", 100);
+			writeText(2, "Minecreatr", 100);
 			GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 			mc.renderEngine.bindTexture(new ResourceLocation("abyssalcraft", "textures/gui/necronomicon/patreon/saice.png"));
 			drawTexturedModalRect(k, b0, 0, 0, 256, 256);
+			mc.renderEngine.bindTexture(new ResourceLocation("abyssalcraft", "textures/gui/necronomicon/patreon/minecreatr.png"));
+			drawTexturedModalRect(k + 123, b0, 0, 0, 256, 256);
 		}
 	}
 }
