@@ -22,7 +22,7 @@ import com.shinoow.abyssalcraft.lib.ACTabs;
 public class BlockSolidLava extends BlockACBasic {
 
 	public BlockSolidLava(String par1) {
-		super(Material.LAVA, "pickaxe", 2, 10F, 100F, SoundType.STONE);
+		super(Material.ROCK, "pickaxe", 2, 10F, 100F, SoundType.STONE);
 		setUnlocalizedName(par1);
 		setCreativeTab(ACTabs.tabDecoration);
 	}

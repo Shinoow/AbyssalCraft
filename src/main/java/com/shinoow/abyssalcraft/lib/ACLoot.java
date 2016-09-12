@@ -69,5 +69,7 @@ public class ACLoot {
 	public static final ResourceLocation ENTITY_SHADOW_MONSTER = LootTableList.register(new ResourceLocation("abyssalcraft", "entities/shadow_monster"));
 	public static final ResourceLocation ENTITY_SPAWN_OF_CHAGAROTH = LootTableList.register(new ResourceLocation("abyssalcraft", "entities/spawn_of_chagaroth"));
 	public static final ResourceLocation ENTITY_SPECTRAL_DRAGON = LootTableList.register(new ResourceLocation("abyssalcraft", "entities/spectral_dragon"));
+	public static final ResourceLocation ENTITY_EVIL_SHEEP = LootTableList.register(new ResourceLocation("abyssalcraft", "entities/evil_sheep"));
+	public static final ResourceLocation ENTITY_DEMON_SHEEP = LootTableList.register(new ResourceLocation("abyssalcraft", "entities/demon_sheep"));
 
 }

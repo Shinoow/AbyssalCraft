@@ -195,54 +195,6 @@ public class TileEntityMaterializer extends TileEntity implements ISidedInventor
 	@Override
 	public void update()
 	{
-		//		boolean flag = materializerBurnTime > 0;
-		//		boolean flag1 = false;
-		//
-		//		if (materializerBurnTime > 0)
-		//			--materializerBurnTime;
-		//
-		//		if (!worldObj.isRemote)
-		//		{
-		//			if (materializerBurnTime == 0 && canMaterialize())
-		//			{
-		//				currentItemBurnTime = materializerBurnTime = getItemBurnTime(materializerItemStacks[1]);
-		//
-		//				if (materializerBurnTime > 0)
-		//				{
-		//					flag1 = true;
-		//
-		//					if (materializerItemStacks[1] != null)
-		//					{
-		//						--materializerItemStacks[1].stackSize;
-		//
-		//						if (materializerItemStacks[1].stackSize == 0)
-		//							materializerItemStacks[1] = materializerItemStacks[1].getItem().getContainerItem(materializerItemStacks[1]);
-		//					}
-		//				}
-		//			}
-		//
-		//			if (isMaterializing() && canMaterialize())
-		//			{
-		//				++materializerProcessTime;
-		//
-		//				if (materializerProcessTime == 200)
-		//				{
-		//					materializerProcessTime = 0;
-		//					processItem();
-		//					flag1 = true;
-		//				}
-		//			} else
-		//				materializerProcessTime = 0;
-		//
-		//			if (flag != materializerBurnTime > 0)
-		//			{
-		//				flag1 = true;
-		//				BlockMaterializer.updateMaterializerBlockState(materializerBurnTime > 0, worldObj, xCoord, yCoord, zCoord);
-		//			}
-		//		}
-		//
-		//		if (flag1)
-		//			markDirty();
 		test();
 	}
 
@@ -252,34 +204,12 @@ public class TileEntityMaterializer extends TileEntity implements ISidedInventor
 		//		{
 		//			List<ItemStack> list = MaterializerRecipes.instance().getMaterializationResult(materializerItemStacks[0]);
 		//
-		//			if(list != null){
-		//				Iterator<ItemStack> iter = list.iterator();
-		//
-		//				for(int i = 2; i < materializerItemStacks.length; i++)
-		//					if(iter.hasNext())
-		//						materializerItemStacks[i] = iter.next();
-		//			}
-		//		}
-	}
-
-	/**
-	 * Turn one item from the materializer source stack into the appropriate processed item in the materializer result stack
-	 */
-	public void processItem()
-	{
-		//		if (canMaterialize())
-		//		{
-		//			ItemStack itemstack = MaterializerRecipes.instance().getMaterializationResult(materializerItemStacks[0]);
-		//
-		//			if (materializerItemStacks[2] == null)
-		//				materializerItemStacks[2] = itemstack.copy();
-		//			else if (materializerItemStacks[2].getItem() == itemstack.getItem())
-		//				materializerItemStacks[2].stackSize += itemstack.stackSize;
-		//
-		//			--materializerItemStacks[0].stackSize;
-		//
-		//			if (materializerItemStacks[0].stackSize <= 0)
-		//				materializerItemStacks[0] = null;
+		//			if(!list.isEmpty())
+		//				for(int i = 0; i < list.size(); i++)
+		//					materializerItemStacks[i+2] = list.get(i);
+		//		} else {
+		//			for(int i = 2; i < materializerItemStacks.length; i++)
+		//				materializerItemStacks[i] = null;
 		//		}
 	}
 

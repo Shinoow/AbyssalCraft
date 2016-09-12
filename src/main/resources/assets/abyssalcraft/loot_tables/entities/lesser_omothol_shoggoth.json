@@ -25,7 +25,7 @@
                         },
 						{
 							"function": "set_data",
-							"data": 3,
+							"data": 3
 						}
                     ]
                 }

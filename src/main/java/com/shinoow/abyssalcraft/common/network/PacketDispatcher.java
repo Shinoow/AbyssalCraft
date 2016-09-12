@@ -15,6 +15,8 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
+import com.shinoow.abyssalcraft.common.network.client.DisruptionMessage;
+import com.shinoow.abyssalcraft.common.network.client.EvilSheepMessage;
 import com.shinoow.abyssalcraft.common.network.server.FireMessage;
 
 import net.minecraftforge.fml.common.network.NetworkRegistry;
@@ -60,6 +62,8 @@ public class PacketDispatcher
 	public static final void registerPackets() {
 
 		registerMessage(FireMessage.class);
+		registerMessage(EvilSheepMessage.class);
+		registerMessage(DisruptionMessage.class);
 	}
 
 	/**

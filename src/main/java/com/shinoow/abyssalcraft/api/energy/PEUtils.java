@@ -137,7 +137,7 @@ public class PEUtils {
 	 * @param manipulator PE Manipulator to reset
 	 */
 	public static void clearManipulatorData(IEnergyManipulator manipulator){
-		if(!manipulator.isActive()){
+		if(manipulator.getActiveAmplifier() != null || manipulator.getActiveDeity() != null){
 			NBTTagCompound tag = new NBTTagCompound();
 			((TileEntity) manipulator).writeToNBT(tag);
 			tag.setString("Deity", "");

@@ -1216,6 +1216,8 @@ entity.abyssalcraft.evilcow.name=Cow
 entity.abyssalcraft.evilchicken.name=Chicken
 entity.abyssalcraft.demoncow.name=Demon Cow
 entity.abyssalcraft.demonchicken.name=Demon Chicken
+entity.abyssalcraft.evilsheep.name=Sheep
+entity.abyssalcraft.demonsheep.name=Demon Sheep
 
 #Potions
 potion.Cplague=Coralium Plague
@@ -1232,9 +1234,46 @@ splash_potion.effect.Antimatter=Splash Potion of Annihilation
 lingering_potion.effect.Antimatter=Lingering Potion of Annihilation
 
 #Enchantments
-enchantment.coralium=Coralium
-enchantment.dread=Dread
-enchantment.ironWall=Iron Wall
-enchantment.damage.shadow=Light Pierce
+enchantment.abyssalcraft.coralium=Coralium
+enchantment.abyssalcraft.coralium.desc=Inflicts the Coralium Plague on hit
+enchantment.abyssalcraft.dread=Dread
+enchantment.abyssalcraft.dread.desc=Inflicts the Dread Plague on hit
+enchantment.abyssalcraft.iron_wall=Iron Wall
+enchantment.abyssalcraft.iron_wall.desc=Reduces the amount of knockback applied when hit by an attack
+enchantment.abyssalcraft.light_pierce=Light Pierce
+enchantment.abyssalcraft.light_pierce.desc=Increases damage against Shadow mobs
+
+#Subtitles
+subtitle.abyssalcraft.dreadguard.death=Dreadguard dies
+subtitle.abyssalcraft.dreadguard.idle=Dreadguard mumbles ominously
+subtitle.abyssalcraft.dreadguard.hit=Dreadguard hurts
+subtitle.abyssalcraft.ghoul.normal.idle=Depths Ghoul groans
+subtitle.abyssalcraft.ghoul.hit=Depths Ghoul hurts
+subtitle.abyssalcraft.ghoul.death=Depths Ghoul dies
+subtitle.abyssalcraft.ghoul.pete.idle=Pete groans
+subtitle.abyssalcraft.ghoul.wilson.idle=Mr. Wilson groans
+subtitle.abyssalcraft.ghoul.orange.idle=Dr. Orange groans
+subtitle.abyssalcraft.golem.death=Golem dies
+subtitle.abyssalcraft.golem.hit=Golem hurts
+subtitle.abyssalcraft.golem.idle=Golem makes rumbling noises
+subtitle.abyssalcraft.sacthoth.death=Sacthoth dies
+subtitle.abyssalcraft.shadow.death=Living shadow dies
+subtitle.abyssalcraft.shadow.hit=Living shadow hurts
+subtitle.abyssalcraft.remnant.scream=Remnant screams abysmally
+subtitle.abyssalcraft.remnant.yes=Remnant says yes
+subtitle.abyssalcraft.remnant.no=Remnant says no
+subtitle.abyssalcraft.remnant.priest.chant=Remnant priest chants
+subtitle.abyssalcraft.shoggoth.idle=Lesser Shoggoth makes a noise
+subtitle.abyssalcraft.shoggoth.hit=Lesser Shoggoth hurts
+subtitle.abyssalcraft.shoggoth.death=Lesser Shoggoth dies
+subtitle.abyssalcraft.jzahar.charge=J'zahar intensifies
+subtitle.abyssalcraft.chant.cthulhu=Voices chant to Cthulhu
+subtitle.abyssalcraft.chant.yog_sothoth=Voices chant to Yog-Sothoth
+subtitle.abyssalcraft.chant.hastur=Voices chant to Hastur
+subtitle.abyssalcraft.chant.sleeping=Voices chant to one that sleeps
+subtitle.abyssalcraft.chant.cthugha=Voices chant to Cthugha
+subtitle.abyssalcraft.dreadspawn.idle=Dread Spawn groans
+subtitle.abyssalcraft.dreadspawn.hit=Dread Spawn hurts
+subtitle.abyssalcraft.dreadspawn.death=Dread Spawn dies
 
 #Localization done, Shin out.
