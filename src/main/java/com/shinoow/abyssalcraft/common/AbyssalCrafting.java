@@ -42,11 +42,11 @@ import com.shinoow.abyssalcraft.api.ritual.RitualRegistry;
 import com.shinoow.abyssalcraft.common.blocks.BlockCrystalCluster.EnumCrystalType;
 import com.shinoow.abyssalcraft.common.blocks.BlockCrystalCluster2.EnumCrystalType2;
 import com.shinoow.abyssalcraft.common.disruptions.DisruptionDisplaceEntities;
+import com.shinoow.abyssalcraft.common.disruptions.DisruptionDrainNearbyPE;
 import com.shinoow.abyssalcraft.common.disruptions.DisruptionFire;
 import com.shinoow.abyssalcraft.common.disruptions.DisruptionFireRain;
 import com.shinoow.abyssalcraft.common.disruptions.DisruptionFreeze;
 import com.shinoow.abyssalcraft.common.disruptions.DisruptionLightning;
-import com.shinoow.abyssalcraft.common.disruptions.DisruptionMonolith;
 import com.shinoow.abyssalcraft.common.disruptions.DisruptionPotentialEnergy;
 import com.shinoow.abyssalcraft.common.disruptions.DisruptionTeleportRandomly;
 import com.shinoow.abyssalcraft.common.entity.EntityDragonBoss;
@@ -917,8 +917,9 @@ public class AbyssalCrafting {
 		DisruptionHandler.instance().registerDisruption(new DisruptionSwarm("swarmShadow", null, EntityShadowCreature.class, EntityShadowMonster.class, EntityShadowBeast.class));
 		DisruptionHandler.instance().registerDisruption(new DisruptionFireRain());
 		DisruptionHandler.instance().registerDisruption(new DisruptionDisplaceEntities());
-		DisruptionHandler.instance().registerDisruption(new DisruptionMonolith());
+		//		DisruptionHandler.instance().registerDisruption(new DisruptionMonolith());
 		DisruptionHandler.instance().registerDisruption(new DisruptionTeleportRandomly());
+		DisruptionHandler.instance().registerDisruption(new DisruptionDrainNearbyPE());
 	}
 
 	private static void addArmor(Item helmet, Item chestplate, Item pants, Item boots, Item material, Item upgrade, Item oldh, Item oldc, Item oldp, Item oldb){

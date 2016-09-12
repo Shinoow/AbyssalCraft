@@ -116,7 +116,7 @@ public class EntityOmotholGhoul extends EntityMob implements IAntiEntity, ICoral
 	@Override
 	protected SoundEvent getHurtSound()
 	{
-		return AbyssalCraft.ghoul_normal_hurt;
+		return AbyssalCraft.ghoul_hurt;
 	}
 
 	@Override

@@ -67,6 +67,22 @@ public class DisruptionHandler {
 	}
 
 	/**
+	 * Fetches a Disruption based on it's unlocalized name
+	 * @param name A unlocalized name (the "ac.disruption." prefix will be stripped if present)
+	 * @return A disruption with that unlocalized name, or null if none were found
+	 * 
+	 * @since 1.8.2
+	 */
+	public DisruptionEntry disruptionFromName(String name){
+		if(name.startsWith("ac.disruption."))
+			name.substring("ac.disruption.".length());
+		for(DisruptionEntry dis : disruptions)
+			if(dis.getUnlocalizedName().substring("ac.disruption.".length()).equals(name))
+				return dis;
+		return null;
+	}
+
+	/**
 	 * Generates a Disruption
 	 * @param deity Deity tied to the manipulator
 	 * @param world Current World
@@ -91,5 +107,12 @@ public class DisruptionHandler {
 
 		if(!MinecraftForge.EVENT_BUS.post(new DisruptionEvent(deity, world, pos, players, disruption)))
 			disruption.disrupt(world, pos, players);
+		sendDisruption(deity, disruption.getUnlocalizedName().substring("ac.disruption.".length()), pos, world.provider.getDimension());
+	}
+
+	private void sendDisruption(DeityType deity, String name, BlockPos pos, int dim){
+		try {
+			Class.forName("com.shinoow.abyssalcraft.AbyssalCraft").getMethod("sendDisruption", DeityType.class, String.class, BlockPos.class, int.class).invoke(null, deity, name, pos, dim);
+		} catch (Exception e) {}
 	}
 }

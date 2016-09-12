@@ -27,7 +27,7 @@ public class EnchantmentWeaponInfusion extends Enchantment {
 	public EnchantmentWeaponInfusion(String par3Str) {
 		//		super(par1, new ResourceLocation("abyssalcraft", par3Str), par2, EnumEnchantmentType.WEAPON);
 		super(Rarity.RARE, EnumEnchantmentType.WEAPON, new EntityEquipmentSlot[]{EntityEquipmentSlot.MAINHAND});
-		setName(par3Str);
+		setName("abyssalcraft."+par3Str);
 	}
 
 	@Override

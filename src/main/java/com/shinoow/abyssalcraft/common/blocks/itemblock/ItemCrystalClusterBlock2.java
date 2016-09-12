@@ -36,7 +36,7 @@ public class ItemCrystalClusterBlock2 extends ItemMetadataBlock {
 	@Override
 	public String getItemStackDisplayName(ItemStack par1ItemStack) {
 
-		return I18n.translateToLocalFormatted("crystalcluster.postfix", name(par1ItemStack.getItemDamage()+16));
+		return I18n.translateToLocalFormatted("crystalcluster.postfix", name(par1ItemStack.getItemDamage()));
 	}
 
 	public String name(int meta) {

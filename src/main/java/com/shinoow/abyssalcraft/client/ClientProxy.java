@@ -122,6 +122,8 @@ public class ClientProxy extends CommonProxy {
 		RenderingRegistry.registerEntityRenderingHandler(EntityDemonCow.class, new IRenderFactory(){ @Override public Render createRenderFor(RenderManager manager) { return new RenderDemonCow(manager); }});
 		RenderingRegistry.registerEntityRenderingHandler(EntityDemonChicken.class, new IRenderFactory(){ @Override public Render createRenderFor(RenderManager manager) { return new RenderDemonChicken(manager); }});
 		RenderingRegistry.registerEntityRenderingHandler(EntityGatekeeperEssence.class, new IRenderFactory(){ @Override public Render createRenderFor(RenderManager manager) { return new RenderEntityItem(manager, Minecraft.getMinecraft().getRenderItem()); }});
+		RenderingRegistry.registerEntityRenderingHandler(EntityEvilSheep.class, new IRenderFactory(){ @Override public Render createRenderFor(RenderManager manager) { return new RenderEvilSheep(manager); }});
+		RenderingRegistry.registerEntityRenderingHandler(EntityDemonSheep.class, new IRenderFactory(){ @Override public Render createRenderFor(RenderManager manager) { return new RenderDemonSheep(manager); }});
 
 		RenderingRegistry.registerEntityRenderingHandler(EntityAntiAbyssalZombie.class, new IRenderFactory(){ @Override public Render createRenderFor(RenderManager manager) { return new RenderAntiAbyssalZombie(manager); }});
 		RenderingRegistry.registerEntityRenderingHandler(EntityAntiBat.class, new IRenderFactory(){ @Override public Render createRenderFor(RenderManager manager) { return new RenderAntiBat(manager); }});

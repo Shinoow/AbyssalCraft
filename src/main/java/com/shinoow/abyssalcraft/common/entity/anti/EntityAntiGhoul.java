@@ -90,7 +90,7 @@ public class EntityAntiGhoul extends EntityMob implements IAntiEntity {
 	@Override
 	protected SoundEvent getHurtSound()
 	{
-		return AbyssalCraft.ghoul_normal_hurt;
+		return AbyssalCraft.ghoul_hurt;
 	}
 
 	/**

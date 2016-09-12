@@ -22,6 +22,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.PotionType;
 import net.minecraft.stats.Achievement;
 import net.minecraft.util.*;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.DimensionType;
 import net.minecraftforge.common.*;
@@ -38,6 +39,7 @@ import net.minecraftforge.oredict.OreDictionary;
 import com.google.common.collect.Lists;
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI.FuelType;
+import com.shinoow.abyssalcraft.api.energy.EnergyEnum.DeityType;
 import com.shinoow.abyssalcraft.api.entity.EntityUtil;
 import com.shinoow.abyssalcraft.common.CommonProxy;
 import com.shinoow.abyssalcraft.common.entity.EntityAbyssalZombie;
@@ -46,6 +48,8 @@ import com.shinoow.abyssalcraft.common.entity.EntityOmotholGhoul;
 import com.shinoow.abyssalcraft.common.entity.anti.EntityAntiAbyssalZombie;
 import com.shinoow.abyssalcraft.common.entity.anti.EntityAntiGhoul;
 import com.shinoow.abyssalcraft.common.handlers.*;
+import com.shinoow.abyssalcraft.common.network.PacketDispatcher;
+import com.shinoow.abyssalcraft.common.network.client.DisruptionMessage;
 import com.shinoow.abyssalcraft.common.util.ACLogger;
 import com.shinoow.abyssalcraft.init.*;
 import com.shinoow.abyssalcraft.lib.ACLib;
@@ -145,10 +149,11 @@ public class AbyssalCraft {
 	public static DimensionType THE_ABYSSAL_WASTELAND, THE_DREADLANDS, OMOTHOL, THE_DARK_REALM;
 
 	public static SoundEvent dreadguard_ambient, dreadguard_hurt, dreadguard_death, ghoul_normal_ambient,
-	ghoul_normal_hurt, ghoul_death, ghoul_pete_hurt, ghoul_pete_ambient, golem_death, golem_hurt, golem_ambient,
-	sacthoth_death, shadow_death, shadow_hurt, remnant_scream, remnant_yes, remnant_no, remnant_priest_chant,
-	shoggoth_ambient, shoggoth_hurt, shoggoth_death, jzahar_charge, cthulhu_chant, yog_sothoth_chant_1,
-	yog_sothoth_chant_2, hastur_chant_1, hastur_chant_2, sleeping_chant, cthugha_chant;
+	ghoul_hurt, ghoul_death, ghoul_pete_ambient, ghoul_wilson_ambient, ghoul_orange_ambient, golem_death,
+	golem_hurt, golem_ambient, sacthoth_death, shadow_death, shadow_hurt, remnant_scream, remnant_yes,
+	remnant_no, remnant_priest_chant, shoggoth_ambient, shoggoth_hurt, shoggoth_death, jzahar_charge,
+	cthulhu_chant, yog_sothoth_chant_1, yog_sothoth_chant_2, hastur_chant_1, hastur_chant_2, sleeping_chant,
+	cthugha_chant, dread_spawn_ambient, dread_spawn_hurt, dread_spawn_death;
 
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
@@ -769,6 +774,19 @@ public class AbyssalCraft {
 				|| stack1.getItemDamage() == stack2.getItemDamage());
 	}
 
+	/**
+	 * Fires a message to the client triggering a Disruption<br>
+	 * <b><i>You should probably NEVER ever call this method at all, ever.<br>
+	 * Seriously, this method is reflected in the DisruptionHandler to send<br>
+	 * a Disruption to the client while firing it server-side.</i></b>
+	 * @param name Disruption Unlocalized Name
+	 * @param pos BlockPos
+	 * @param id Dimension ID
+	 */
+	public static void sendDisruption(DeityType deity, String name, BlockPos pos, int id){
+		PacketDispatcher.sendToDimension(new DisruptionMessage(deity, name, pos), id);
+	}
+
 	private String getSupporterList(){
 		BufferedReader nameFile;
 		String names = "";
@@ -780,7 +798,7 @@ public class AbyssalCraft {
 
 		} catch (IOException e) {
 			ACLogger.severe("Failed to fetch supporter list, using local version!");
-			names = "Enfalas, Saice Shoop";
+			names = "Enfalas, Saice Shoop, Minecreatr";
 		}
 
 		return names;

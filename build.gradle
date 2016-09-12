@@ -46,11 +46,13 @@ version = props.ac_version
 group= "com.shinoow.abyssalcraft" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = "AbyssalCraft"
 
-sourceCompatibility = 1.7
-targetCompatibility = 1.7
+sourceCompatibility = targetCompatibility = "1.7"
+compileJava {
+    sourceCompatibility = targetCompatibility = "1.7"
+}
 
 minecraft {
-    version = "1.10.2-12.18.1.2046"
+    version = "1.10.2-12.18.1.2073"
     runDir = "run"
     
 	useDepAts = true

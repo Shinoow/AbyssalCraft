@@ -18,17 +18,22 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.MinecraftForge;
 
 import com.shinoow.abyssalcraft.api.event.ACEvents;
+import com.shinoow.abyssalcraft.api.recipe.MaterializerRecipes;
+import com.shinoow.abyssalcraft.common.blocks.tile.TileEntityMaterializer;
 
 public class SlotMaterializer extends Slot
 {
 	/** The player that is using the GUI where this slot resides. */
 	private EntityPlayer thePlayer;
 	private int stackSize;
+	private TileEntityMaterializer materializer;
 
 	public SlotMaterializer(EntityPlayer par1EntityPlayer, IInventory par2IInventory, int par3, int par4, int par5)
 	{
 		super(par2IInventory, par3, par4, par5);
 		thePlayer = par1EntityPlayer;
+		if(par2IInventory instanceof TileEntityMaterializer)
+			materializer = (TileEntityMaterializer) par2IInventory;
 	}
 
 	@Override
@@ -62,11 +67,12 @@ public class SlotMaterializer extends Slot
 	@Override
 	protected void onCrafting(ItemStack par1ItemStack)
 	{
-		par1ItemStack.onCrafting(thePlayer.worldObj, thePlayer, stackSize);
+		if(materializer != null){
+			par1ItemStack.onCrafting(thePlayer.worldObj, thePlayer, stackSize);
 
-		stackSize = 0;
+			MinecraftForge.EVENT_BUS.post(new ACEvents.ItemMaterializedEvent(thePlayer, par1ItemStack));
 
-		MinecraftForge.EVENT_BUS.post(new ACEvents.ItemMaterializedEvent(thePlayer, par1ItemStack));
-
+			MaterializerRecipes.instance().processMaterialization(par1ItemStack, materializer.getStackInSlot(0));
+		}
 	}
 }
