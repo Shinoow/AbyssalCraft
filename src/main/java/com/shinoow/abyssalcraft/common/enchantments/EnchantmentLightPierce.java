@@ -54,7 +54,7 @@ public class EnchantmentLightPierce extends EnchantmentDamage {
 	@Override
 	public String getName()
 	{
-		return "enchantment.damage.shadow";
+		return "enchantment.abyssalcraft.light_pierce";
 	}
 
 	@Override

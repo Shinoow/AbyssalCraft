@@ -26,6 +26,8 @@ import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
+import net.minecraft.pathfinding.PathNavigate;
+import net.minecraft.pathfinding.PathNavigateClimber;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;
@@ -69,6 +71,12 @@ public class EntityChagarothSpawn extends EntityMob implements IDreadEntity {
 	}
 
 	@Override
+	protected PathNavigate getNewNavigator(World worldIn)
+	{
+		return new PathNavigateClimber(this, worldIn);
+	}
+
+	@Override
 	public boolean attackEntityAsMob(Entity par1Entity){
 
 		if (super.attackEntityAsMob(par1Entity))
@@ -78,21 +86,43 @@ public class EntityChagarothSpawn extends EntityMob implements IDreadEntity {
 	}
 
 	@Override
+	protected void entityInit()
+	{
+		super.entityInit();
+		dataWatcher.addObject(18, Byte.valueOf((byte)0));
+	}
+
+	@Override
+	public void onUpdate()
+	{
+		super.onUpdate();
+
+		if (!worldObj.isRemote)
+			setBesideClimbableBlock(isCollidedHorizontally);
+	}
+
+	@Override
+	protected float getSoundPitch()
+	{
+		return rand.nextFloat() - rand.nextFloat() * 0.2F + 0.6F;
+	}
+
+	@Override
 	protected String getLivingSound()
 	{
-		return "mob.zombie.say";
+		return "abyssalcraft:dreadspawn.idle";
 	}
 
 	@Override
 	protected String getHurtSound()
 	{
-		return "mob.zombie.hurt";
+		return "abyssalcraft:dreadspawn.hit";
 	}
 
 	@Override
 	protected String getDeathSound()
 	{
-		return "mob.zombie.death";
+		return "abyssalcraft:dreadspawn.death";
 	}
 
 	@Override
@@ -100,6 +130,40 @@ public class EntityChagarothSpawn extends EntityMob implements IDreadEntity {
 	{
 		worldObj.playSoundAtEntity(this, "mob.zombie.step", 0.15F, 1.0F);
 	}
+
+	@Override
+	public boolean isOnLadder()
+	{
+		return isBesideClimbableBlock();
+	}
+
+	/**
+	 * Returns true if the WatchableObject (Byte) is 0x01 otherwise returns false. The WatchableObject is updated using
+	 * setBesideClimableBlock.
+	 */
+	public boolean isBesideClimbableBlock()
+	{
+		return (dataWatcher.getWatchableObjectByte(18) & 1) != 0;
+	}
+
+	/**
+	 * Updates the WatchableObject (Byte) created in entityInit(), setting it to 0x01 if par1 is true or 0x00 if it is
+	 * false.
+	 */
+	public void setBesideClimbableBlock(boolean par1)
+	{
+		byte b0 = dataWatcher.getWatchableObjectByte(18);
+
+		if (par1)
+			b0 = (byte)(b0 | 1);
+		else
+			b0 &= -2;
+
+		dataWatcher.updateObject(18, Byte.valueOf(b0));
+	}
+
+	@Override
+	public void fall(float par1, float par2) {}
 
 	@Override
 	protected Item getDropItem()

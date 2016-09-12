@@ -173,9 +173,21 @@ public class EntityHandler implements ILifeCycleHandler {
 
 		EntityRegistry.registerModEntity(EntityGatekeeperEssence.class, "GatekeeperEssence", 71, instance, 64, 10, true);
 
-		//		registerEntityWithEgg(EntityShadowTitan.class, "shadowtitan", 71, 80, 3, true, 0, 0xFFFFFF);
+		registerEntityWithEgg(EntityEvilSheep.class, "evilsheep", 72, 80, 3, true, 15198183, 16758197);
+		if(evilAnimalSpawnWeight > 0)
+			EntityRegistry.addSpawn(EntityEvilSheep.class, evilAnimalSpawnWeight, 1, 3, evilAnimalCreatureType ? EnumCreatureType.MONSTER : EnumCreatureType.CREATURE,
+					BiomeGenBase.taiga, BiomeGenBase.plains, BiomeGenBase.forest, BiomeGenBase.savanna,
+					BiomeGenBase.beach, BiomeGenBase.extremeHills, BiomeGenBase.jungle, BiomeGenBase.savannaPlateau,
+					BiomeGenBase.swampland, BiomeGenBase.icePlains, BiomeGenBase.birchForest,
+					BiomeGenBase.birchForestHills, BiomeGenBase.roofedForest);
+
+		registerEntityWithEgg(EntityDemonSheep.class, "demonsheep", 73, 80, 3, true, 15198183, 16758197);
+		if(demonAnimalSpawnWeight > 0)
+			EntityRegistry.addSpawn(EntityDemonSheep.class, demonAnimalSpawnWeight, 1, 3, EnumCreatureType.MONSTER, BiomeDictionary.getBiomesForType(Type.NETHER));
+
+		//		registerEntityWithEgg(EntityShadowTitan.class, "shadowtitan", 74, 80, 3, true, 0, 0xFFFFFF);
 		//
-		//		registerEntityWithEgg(EntityOmotholWarden.class, "omotholwarden", 72, 80, 3, true, 0x133133, 0x342122);
+		//		registerEntityWithEgg(EntityOmotholWarden.class, "omotholwarden", 75, 80, 3, true, 0x133133, 0x342122);
 
 		EntityUtil.addShoggothFood(EntityAnimal.class);
 		EntityUtil.addShoggothFood(EntityAmbientCreature.class);
@@ -184,6 +196,7 @@ public class EntityHandler implements ILifeCycleHandler {
 		EntityUtil.addShoggothFood(EntityEvilCow.class);
 		EntityUtil.addShoggothFood(EntityEvilChicken.class);
 		EntityUtil.addShoggothFood(EntityDemonAnimal.class);
+		EntityUtil.addShoggothFood(EntityEvilSheep.class);
 	}
 
 	@Override

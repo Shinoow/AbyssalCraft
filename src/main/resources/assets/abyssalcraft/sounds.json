@@ -32,14 +32,14 @@
 			"abyssalcraft:ghoul/normal/idle5"
 		]
 	},
-	"ghoul.normal.hit": {
+	"ghoul.hit": {
 		"category": "hostile",
 		"sounds": [
-			"abyssalcraft:ghoul/normal/hurt1",
-			"abyssalcraft:ghoul/normal/hurt2",
-			"abyssalcraft:ghoul/normal/hurt3",
-			"abyssalcraft:ghoul/normal/hurt4",
-			"abyssalcraft:ghoul/normal/hurt5"
+			"abyssalcraft:ghoul/hurt1",
+			"abyssalcraft:ghoul/hurt2",
+			"abyssalcraft:ghoul/hurt3",
+			"abyssalcraft:ghoul/hurt4",
+			"abyssalcraft:ghoul/hurt5"
 		]
 	},
 	"ghoul.death": {
@@ -48,27 +48,43 @@
 			"abyssalcraft:ghoul/death"
 		]
 	},
-	"ghoul.pete.hit": {
-		"category": "hostile",
-		"sounds": [
-			"abyssalcraft:ghoul/pete/hit1",
-			"abyssalcraft:ghoul/pete/hit2",
-			"abyssalcraft:ghoul/pete/hit3",
-			"abyssalcraft:ghoul/pete/hit4",
-			"abyssalcraft:ghoul/pete/hit5"
-		]
-	},
 	"ghoul.pete.idle": {
 		"category": "hostile",
 		"sounds": [
+			"abyssalcraft:ghoul/normal/idle1",
 			"abyssalcraft:ghoul/pete/idle1",
+			"abyssalcraft:ghoul/normal/idle2",
 			"abyssalcraft:ghoul/pete/idle2",
+			"abyssalcraft:ghoul/normal/idle3",
 			"abyssalcraft:ghoul/pete/idle3",
-			"abyssalcraft:ghoul/pete/idle4",
-			"abyssalcraft:ghoul/pete/idle5",
-			"abyssalcraft:ghoul/pete/idle6",
-			"abyssalcraft:ghoul/pete/idle7",
-			"abyssalcraft:ghoul/pete/idle8"
+			"abyssalcraft:ghoul/normal/idle4",
+			"abyssalcraft:ghoul/normal/idle5"
+		]
+	},
+	"ghoul.wilson.idle": {
+		"category": "hostile",
+		"sounds": [
+			"abyssalcraft:ghoul/normal/idle1",
+			"abyssalcraft:ghoul/wilson/idle1",
+			"abyssalcraft:ghoul/normal/idle2",
+			"abyssalcraft:ghoul/wilson/idle2",
+			"abyssalcraft:ghoul/normal/idle3",
+			"abyssalcraft:ghoul/wilson/idle3",
+			"abyssalcraft:ghoul/normal/idle4",
+			"abyssalcraft:ghoul/normal/idle5"
+		]
+	},
+	"ghoul.orange.idle": {
+		"category": "hostile",
+		"sounds": [
+			"abyssalcraft:ghoul/normal/idle1",
+			"abyssalcraft:ghoul/orange/idle1",
+			"abyssalcraft:ghoul/normal/idle2",
+			"abyssalcraft:ghoul/orange/idle2",
+			"abyssalcraft:ghoul/normal/idle3",
+			"abyssalcraft:ghoul/orange/idle3",
+			"abyssalcraft:ghoul/normal/idle4",
+			"abyssalcraft:ghoul/normal/idle5"
 		]
 	},
 	"golem.death": {
@@ -233,6 +249,32 @@
 			"abyssalcraft:chants/cthugha_2",
 			"abyssalcraft:chants/cthugha_3",
 			"abyssalcraft:chants/cthugha_4"
+		]
+	},
+	"dreadspawn.idle": {
+		"category": "hostile",
+		"sounds": [
+			"abyssalcraft:dreadspawn/idle1",
+			"abyssalcraft:dreadspawn/idle2",
+			"abyssalcraft:dreadspawn/idle3",
+			"abyssalcraft:dreadspawn/idle4",
+			"abyssalcraft:dreadspawn/idle5"
+		]
+	},
+	"dreadspawn.hit": {
+		"category": "hostile",
+		"sounds": [
+			"abyssalcraft:dreadspawn/hurt1",
+			"abyssalcraft:dreadspawn/hurt2",
+			"abyssalcraft:dreadspawn/hurt3",
+			"abyssalcraft:dreadspawn/hurt4",
+			"abyssalcraft:dreadspawn/hurt5"
+		]
+	},
+	"dreadspawn.death": {
+		"category": "hostile",
+		"sounds": [
+			"abyssalcraft:dreadspawn/death"
 		]
 	}
 }

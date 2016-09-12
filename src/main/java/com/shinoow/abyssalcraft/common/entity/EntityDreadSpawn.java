@@ -104,19 +104,19 @@ public class EntityDreadSpawn extends EntityMob implements IDreadEntity
 	@Override
 	protected String getLivingSound()
 	{
-		return "mob.zombie.say";
+		return "abyssalcraft:dreadspawn.idle";
 	}
 
 	@Override
 	protected String getHurtSound()
 	{
-		return "mob.zombie.hurt";
+		return "abyssalcraft:dreadspawn.hit";
 	}
 
 	@Override
 	protected String getDeathSound()
 	{
-		return "mob.zombie.death";
+		return "abyssalcraft:dreadspawn.death";
 	}
 
 	@Override

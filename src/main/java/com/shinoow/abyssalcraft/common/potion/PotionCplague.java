@@ -46,7 +46,7 @@ public class PotionCplague extends Potion{
 			par1EntityLivingBase.removePotionEffect(AbyssalCraftAPI.coralium_plague.id);
 		else par1EntityLivingBase.attackEntityFrom(AbyssalCraftAPI.coralium, 2);
 
-		if(!par1EntityLivingBase.isEntityAlive() && !par1EntityLivingBase.worldObj.isRemote)
+		if(!par1EntityLivingBase.worldObj.isRemote && par1EntityLivingBase.isDead)
 			if(par1EntityLivingBase instanceof EntityZombie){
 				if(par1EntityLivingBase.worldObj.getWorldInfo().isHardcoreModeEnabled() && par1EntityLivingBase.worldObj.rand.nextInt(10) == 0) {
 					EntityDepthsGhoul ghoul = new EntityDepthsGhoul(par1EntityLivingBase.worldObj);

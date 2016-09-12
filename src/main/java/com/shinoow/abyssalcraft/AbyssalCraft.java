@@ -35,6 +35,7 @@ import net.minecraftforge.oredict.OreDictionary;
 import com.google.common.collect.Lists;
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI.FuelType;
+import com.shinoow.abyssalcraft.api.energy.EnergyEnum.DeityType;
 import com.shinoow.abyssalcraft.api.entity.EntityUtil;
 import com.shinoow.abyssalcraft.common.CommonProxy;
 import com.shinoow.abyssalcraft.common.entity.EntityAbyssalZombie;
@@ -43,6 +44,8 @@ import com.shinoow.abyssalcraft.common.entity.EntityOmotholGhoul;
 import com.shinoow.abyssalcraft.common.entity.anti.EntityAntiAbyssalZombie;
 import com.shinoow.abyssalcraft.common.entity.anti.EntityAntiGhoul;
 import com.shinoow.abyssalcraft.common.handlers.*;
+import com.shinoow.abyssalcraft.common.network.PacketDispatcher;
+import com.shinoow.abyssalcraft.common.network.client.DisruptionMessage;
 import com.shinoow.abyssalcraft.common.util.ACLogger;
 import com.shinoow.abyssalcraft.init.*;
 import com.shinoow.abyssalcraft.lib.ACLib;
@@ -777,6 +780,19 @@ public class AbyssalCraft {
 				|| stack1.getItemDamage() == stack2.getItemDamage());
 	}
 
+	/**
+	 * Fires a message to the client triggering a Disruption<br>
+	 * <b><i>You should probably NEVER ever call this method at all, ever.<br>
+	 * Seriously, this method is reflected in the DisruptionHandler to send<br>
+	 * a Disruption to the client while firing it server-side.</i></b>
+	 * @param name Disruption Unlocalized Name
+	 * @param pos BlockPos
+	 * @param id Dimension ID
+	 */
+	public static void sendDisruption(DeityType deity, String name, BlockPos pos, int id){
+		PacketDispatcher.sendToDimension(new DisruptionMessage(deity, name, pos), id);
+	}
+
 	private String getSupporterList(){
 		BufferedReader nameFile;
 		String names = "";
@@ -788,7 +804,7 @@ public class AbyssalCraft {
 
 		} catch (IOException e) {
 			ACLogger.severe("Failed to fetch supporter list, using local version!");
-			names = "Enfalas, Saice Shoop";
+			names = "Enfalas, Saice Shoop, Minecreatr";
 		}
 
 		return names;

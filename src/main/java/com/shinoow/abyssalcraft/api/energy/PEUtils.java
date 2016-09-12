@@ -115,12 +115,12 @@ public class PEUtils {
 	/**
 	 * Utility method for clearing the active Deity and Amplifier<br>
 	 * when a PE Manipulator no longer is active. Should be called in<br>
-	 * update() ({@link ITickable}) every tick to ensure the data is<br>
-	 * properly erased when it should be.
+	 * update() ({@link ITickable}) whenever the manipulator isn't active<br>
+	 * to ensure the data is properly erased when it should be.
 	 * @param manipulator PE Manipulator to reset
 	 */
 	public static void clearManipulatorData(IEnergyManipulator manipulator){
-		if(!manipulator.isActive()){
+		if(manipulator.getActiveAmplifier() != null || manipulator.getActiveDeity() != null){
 			NBTTagCompound tag = new NBTTagCompound();
 			((TileEntity) manipulator).writeToNBT(tag);
 			tag.setString("Deity", "");

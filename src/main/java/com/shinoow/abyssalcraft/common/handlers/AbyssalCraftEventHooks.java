@@ -31,6 +31,7 @@ import net.minecraft.world.WorldServer;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.chunk.storage.ExtendedBlockStorage;
 import net.minecraftforge.event.entity.living.EnderTeleportEvent;
+import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import net.minecraftforge.event.entity.player.EntityItemPickupEvent;
 import net.minecraftforge.event.terraingen.BiomeEvent;
@@ -52,6 +53,7 @@ import com.shinoow.abyssalcraft.api.ritual.NecronomiconPotionAoERitual;
 import com.shinoow.abyssalcraft.api.ritual.NecronomiconPotionRitual;
 import com.shinoow.abyssalcraft.api.ritual.NecronomiconSummonRitual;
 import com.shinoow.abyssalcraft.common.entity.EntityJzahar;
+import com.shinoow.abyssalcraft.common.entity.demon.EntityEvilSheep;
 import com.shinoow.abyssalcraft.common.items.ItemCrystalBag;
 import com.shinoow.abyssalcraft.common.items.ItemNecronomicon;
 import com.shinoow.abyssalcraft.common.ritual.NecronomiconBreedingRitual;
@@ -349,5 +351,14 @@ public class AbyssalCraftEventHooks {
 			event.entityPlayer.addStat(AbyssalCraft.ritualPotionAoE, 1);
 		if(event.ritual instanceof NecronomiconInfusionRitual)
 			event.entityPlayer.addStat(AbyssalCraft.ritualInfusion, 1);
+	}
+
+	@SubscribeEvent
+	public void onDeath(LivingDeathEvent event){
+		if(event.entityLiving instanceof EntityPlayer && !event.entityLiving.worldObj.isRemote){
+			EntityPlayer player = (EntityPlayer)event.entityLiving;
+			if(event.source.getEntity() != null && event.source.getEntity() instanceof EntityEvilSheep)
+				((EntityEvilSheep)event.source.getEntity()).setKilledPlayer(player);
+		}
 	}
 }

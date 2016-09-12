@@ -21,7 +21,7 @@ public class EnchantmentIronWall extends Enchantment {
 
 	public EnchantmentIronWall(int par1, int par2) {
 		super(par1, new ResourceLocation("abyssalcraft", "iron_wall"), par2, EnumEnchantmentType.ARMOR_TORSO);
-		setName("ironWall");
+		setName("abyssalcraft.iron_wall");
 	}
 
 	@Override

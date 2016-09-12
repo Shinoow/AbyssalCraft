@@ -68,13 +68,10 @@ public class WorldHandler implements ILifeCycleHandler {
 			registerBiomeWithTypes(ACBiomes.darklands_plains, darkWeight3, BiomeType.WARM, Type.PLAINS, Type.SPOOKY);
 			BiomeManager.addVillageBiome(ACBiomes.darklands_plains, true);
 		}
-		if(dark4 == true){
+		if(dark4 == true)
 			registerBiomeWithTypes(ACBiomes.darklands_hills, darkWeight4, BiomeType.WARM, Type.HILLS, Type.SPOOKY);
-			BiomeManager.addVillageBiome(ACBiomes.darklands_hills, true);
-		}
 		if(dark5 == true){
 			registerBiomeWithTypes(ACBiomes.darklands_mountains, darkWeight5, BiomeType.WARM, Type.MOUNTAIN, Type.SPOOKY);
-			BiomeManager.addVillageBiome(ACBiomes.darklands_mountains, true);
 			BiomeManager.addStrongholdBiome(ACBiomes.darklands_mountains);
 		}
 		if(coralium1 == true)

@@ -1216,6 +1216,7 @@ entity.abyssalcraft.evilcow.name=牛
 entity.abyssalcraft.evilchicken.name=鸡
 entity.abyssalcraft.demoncow.name=恶魔牛
 entity.abyssalcraft.demonchicken.name=恶魔鸡
+entity.abyssalcraft.evilsheep.name=Sheep
 
 #Potions
 potion.Cplague=珊瑚侵染
@@ -1226,9 +1227,13 @@ potion.Antimatter=反物质
 potion.Antimatter.postfix=湮灭药水
 
 #Enchantments
-enchantment.coralium=珊瑚
-enchantment.dread=恐惧
-enchantment.ironWall=铁墙
-enchantment.damage.shadow=易于穿透
+enchantment.abyssalcraft.coralium=珊瑚
+enchantment.abyssalcraft.coralium.desc=Inflicts the Coralium Plague on hit
+enchantment.abyssalcraft.dread=恐惧
+enchantment.abyssalcraft.dread.desc=Inflicts the Dread Plague on hit
+enchantment.abyssalcraft.iron_wall=铁墙
+enchantment.abyssalcraft.iron_wall.desc=Reduces the amount of knockback applied when hit by an attack
+enchantment.abyssalcraft.light_pierce=易于穿透
+enchantment.abyssalcraft.light_pierce.desc=Increases damage against Shadow mobs
 
 #Localization done, Shin out.

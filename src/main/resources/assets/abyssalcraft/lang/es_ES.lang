@@ -1216,6 +1216,7 @@ entity.abyssalcraft.evilcow.name=Vaca
 entity.abyssalcraft.evilchicken.name=Pollo
 entity.abyssalcraft.demoncow.name=Vaca Demonio
 entity.abyssalcraft.demonchicken.name=Pollo Demonio
+entity.abyssalcraft.evilsheep.name=Sheep
 
 #Potions
 potion.Cplague=Plaga de Coralium
@@ -1226,9 +1227,13 @@ potion.Antimatter=Antimateria
 potion.Antimatter.postfix=Poción de aniquilación
 
 #Enchantments
-enchantment.coralium=Coralium
-enchantment.dread=Dread
-enchantment.ironWall=Muro de hierro
-enchantment.damage.shadow=Luz de Pierce
+enchantment.abyssalcraft.coralium=Coralium
+enchantment.abyssalcraft.coralium.desc=Inflicts the Coralium Plague on hit
+enchantment.abyssalcraft.dread=Dread
+enchantment.abyssalcraft.dread.desc=Inflicts the Dread Plague on hit
+enchantment.abyssalcraft.iron_wall=Muro de hierro
+enchantment.abyssalcraft.iron_wall.desc=Reduces the amount of knockback applied when hit by an attack
+enchantment.abyssalcraft.light_pierce=Luz de Pierce
+enchantment.abyssalcraft.light_pierce.desc=Increases damage against Shadow mobs
 
 #Localization done, Shin out.

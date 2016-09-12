@@ -38,6 +38,7 @@ public class TileEntityStatue extends TileEntity implements IEnergyManipulator, 
 	private int activationTimer;
 	private AmplifierType currentAmplifier;
 	private DeityType currentDeity;
+	private int ticksExisted;
 
 	@Override
 	public void readFromNBT(NBTTagCompound nbttagcompound)
@@ -148,20 +149,22 @@ public class TileEntityStatue extends TileEntity implements IEnergyManipulator, 
 
 	@Override
 	public void disrupt(boolean factor) {
-		if(factor){
-			if(!worldObj.isRemote)
+		if(factor)
+			if(!worldObj.isRemote){
 				worldObj.addWeatherEffect(new EntityLightningBolt(worldObj, pos.getX(), pos.getY() + 1, pos.getZ()));
-			DisruptionHandler.instance().generateDisruption(getDeity(), worldObj, pos, worldObj.getEntitiesWithinAABB(EntityPlayer.class, new AxisAlignedBB(pos, pos.add(1, 1, 1)).expand(16, 16, 16)));
-		}
+				DisruptionHandler.instance().generateDisruption(getDeity(), worldObj, pos, worldObj.getEntitiesWithinAABB(EntityPlayer.class, new AxisAlignedBB(pos, pos.add(1, 1, 1)).expand(16, 16, 16)));
+			}
 	}
 
 	@Override
 	public void update(){
 
+		++ticksExisted;
+
 		if(isActive()){
 			activationTimer--;
 			worldObj.spawnParticle(EnumParticleTypes.PORTAL, pos.getX() + 0.5, pos.getY() + 0.9, pos.getZ() + 0.5, 0, 0, 0);
-		}
+		} else PEUtils.clearManipulatorData(this);
 
 		int range = (int) (7 + PEUtils.getRangeAmplifiers(worldObj, pos)*4 + getAmplifier(AmplifierType.RANGE));
 
@@ -184,7 +187,7 @@ public class TileEntityStatue extends TileEntity implements IEnergyManipulator, 
 
 			PEUtils.transferPEToCollectors(worldObj, pos, this, (int)(PEUtils.getRangeAmplifiers(worldObj, pos) + getAmplifier(AmplifierType.RANGE)/2));
 		}
-		disrupt(worldObj.rand.nextInt(20 * (isActive() ? 40 : 200) * (worldObj.getClosestPlayer(xp, yp, zp, range * 2) != null ? 1 : 10)) == 0);
-		PEUtils.clearManipulatorData(this);
+		if(ticksExisted % (isActive() ? 100 : 200) == 0)
+			disrupt(worldObj.rand.nextInt(2 * (isActive() ? 5 : 25) * (worldObj.getClosestPlayer(xp, yp, zp, range * 2) != null ? 1 : 5)) == 0);
 	}
 }

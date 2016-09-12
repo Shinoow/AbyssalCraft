@@ -108,21 +108,27 @@ public class EntityLesserDreadbeast extends EntityMob implements IDreadEntity, I
 	}
 
 	@Override
+	protected float getSoundPitch()
+	{
+		return rand.nextFloat() - rand.nextFloat() * 0.2F + 0.3F;
+	}
+
+	@Override
 	protected String getLivingSound()
 	{
-		return "mob.zombie.say";
+		return "abyssalcraft:dreadspawn.idle";
 	}
 
 	@Override
 	protected String getHurtSound()
 	{
-		return "mob.zombie.hurt";
+		return "abyssalcraft:dreadspawn.hit";
 	}
 
 	@Override
 	protected String getDeathSound()
 	{
-		return "mob.zombie.death";
+		return "abyssalcraft:dreadspawn.death";
 	}
 
 	@Override

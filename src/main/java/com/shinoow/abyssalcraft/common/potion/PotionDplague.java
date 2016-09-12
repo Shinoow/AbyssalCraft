@@ -19,6 +19,7 @@ import net.minecraft.entity.monster.EntityZombie;
 import net.minecraft.entity.passive.EntityChicken;
 import net.minecraft.entity.passive.EntityCow;
 import net.minecraft.entity.passive.EntityPig;
+import net.minecraft.entity.passive.EntitySheep;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.potion.Potion;
 import net.minecraft.util.ResourceLocation;
@@ -52,7 +53,7 @@ public class PotionDplague extends Potion{
 
 		if(par1EntityLivingBase instanceof EntityPlayer)
 			((EntityPlayer)par1EntityLivingBase).addExhaustion(0.025F * (par2+2));
-		if(!par1EntityLivingBase.worldObj.isRemote && !par1EntityLivingBase.isEntityAlive()
+		if(!par1EntityLivingBase.worldObj.isRemote && par1EntityLivingBase.isDead
 				&& par1EntityLivingBase.worldObj.rand.nextBoolean())
 			if(par1EntityLivingBase instanceof EntityZombie || par1EntityLivingBase instanceof EntityPlayer
 					|| par1EntityLivingBase instanceof EntityAbyssalZombie || par1EntityLivingBase instanceof EntityAntiPlayer
@@ -91,6 +92,13 @@ public class PotionDplague extends Potion{
 				par1EntityLivingBase.worldObj.removeEntity(par1EntityLivingBase);
 				dc.onInitialSpawn(par1EntityLivingBase.worldObj.getDifficultyForLocation(par1EntityLivingBase.getPosition()),(IEntityLivingData)null);
 				par1EntityLivingBase.worldObj.spawnEntityInWorld(dc);
+			}
+			else if(par1EntityLivingBase instanceof EntitySheep){
+				EntitySheep ds = new EntitySheep(par1EntityLivingBase.worldObj);
+				ds.copyLocationAndAnglesFrom(par1EntityLivingBase);
+				par1EntityLivingBase.worldObj.removeEntity(par1EntityLivingBase);
+				ds.onInitialSpawn(par1EntityLivingBase.worldObj.getDifficultyForLocation(par1EntityLivingBase.getPosition()),(IEntityLivingData)null);
+				par1EntityLivingBase.worldObj.spawnEntityInWorld(ds);
 			}
 			else if(par1EntityLivingBase instanceof EntityLivingBase && !(par1EntityLivingBase instanceof EntityAntiGhoul)){
 				EntityDreadSpawn spawn = new EntityDreadSpawn(par1EntityLivingBase.worldObj);
