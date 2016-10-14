@@ -116,7 +116,7 @@ achievement.locateJzahar=一只野生的扎哈尔出现了
 achievement.locateJzahar.desc=我希望你带了药水或者别的.
 
 achievement.killJzahar= 去弑神...  如果神只是傀儡...
-achievement.killJzahar.desc=你真的认为你杀了伟大的古神?
+achievement.killJzahar.desc=你真的认为你杀了旧日支配者?
 
 achievement.GK1=亡灵钥匙
 achievement.GK1.desc=合成一把传送门钥匙
@@ -413,8 +413,7 @@ necronomicon.text.crafting.sacrificialaltar.1=献祭祭坛由火把, 巨石块, 
 necronomicon.text.crafting.sacrificialaltar.2=当一个生物作为目标时, 它会发出烟雾粒子. 在生物死后, 根据它的最大生命值会获得一定数量的位能. 只能把不包括玩家的非不死的成年生物作为目标. 需要注意的是祭坛在收集一定量的位能后需要冷却, 有一分钟的时间不能收集.
 
 necronomicon.text.crafting.upgradekit.1=升级套件是由木头,圆石,线和火药合成. 升级套件可以用于合成以升级.
-necronomicon.text.crafting.upgradekit.2=要升级现有的套件,你需要两单位下一阶材料和一单位当前材料. 材料为木头 -> 圆石 -> 铁 -> 金 -> 钻石 -> 深渊锭  -> 精炼珊瑚锭 -> 恐惧锭 -> 伊桑斯锭.
-necronomicon.text.crafting.ironplate=铁板是由两个铁锭合成. 铁板可以增加某些食物的饱和度.
+necronomicon.text.crafting.upgradekit.2=要升级现有的套件,你需要两单位下一阶材料和一单位当前材料. 材料为木头 -> 圆石 -> 铁 -> 金 -> 钻石 -> 深渊锭  -> 精炼珊瑚锭 -> 恐惧锭 -> 伊桑斯锭.necronomicon.text.crafting.ironplate=铁板是由两个铁锭合成. 铁板可以增加某些食物的饱和度.
 necronomicon.text.crafting.washcloth=洗碟布是由羊毛和蜘蛛网合成.它用于清洗脏盘子(吃盘装事物后得到).
 necronomicon.text.crafting.mre=预制食品是由一块铁板,一个胡萝卜,一个土豆和一块牛排 合成.食用后加满饥饿值.
 necronomicon.text.crafting.platefood=任何原版事物(以及煎蛋) 与铁板合成会得到盘装食物 (饱和度是普通食物的两倍). 吃完留下脏盘子.
@@ -429,8 +428,7 @@ necronomicon.text.enchantment.dread=恐惧附魔使你在击中任何实体后�
 necronomicon.text.enchantment.lightpierce=光之穿刺附魔类似于节肢杀手, 但对阴影生物有效.
 necronomicon.text.enchantment.ironwall=铁壁附魔是一种反击退附魔, 被击中时会反弹击退效果.
 
-necronomicon.text.overworld.progression.1=要想到达深渊荒芜之地, 你必须合成一把门钥匙, 这需要你旅行过下界和黑暗之地和水域. 水域可以是沼泽或者海洋.
-necronomicon.text.overworld.progression.2=从下界你需要2根烈焰棒,以后可能需要更多. 在黑暗之地你需要杀死活阴影以获得暗影宝石. 它们最常见于黑暗之地山区. 推荐使用撕裂法杖以更快获取暗影宝石 (详情见特殊武器装备章节).
+necronomicon.text.overworld.progression.1=要想到达深渊荒芜之地, 你必须合成一把门钥匙, 这需要你旅行过下界和黑暗之地和水域. 水域可以是沼泽或者海洋.necronomicon.text.overworld.progression.2=从下界你需要2根烈焰棒,以后可能需要更多. 在黑暗之地你需要杀死活阴影以获得暗影宝石. 它们最常见于黑暗之地山区. 推荐使用撕裂法杖以更快获取暗影宝石 (详情见特殊武器装备章节).
 necronomicon.text.overworld.progression.3=从水域你需要获得珊瑚宝石来合成珊瑚珍珠. 一旦你获得了上述物品, 你能开始合成嬗变宝石(需要4个, 为此额外的烈焰棒要合成烈焰粉). 这个的和湮灭碎片的合成表能在特殊材料章节找到.
 necronomicon.text.overworld.progression.4=当你有4个湮灭碎片, 将这些和4个红石粉来注入末影之眼(通过注入仪式, 在死灵之书的仪式章节可找到) 来创造一个湮灭媒介, 门钥匙的主要成分(特殊材料章节有合成表).
 necronomicon.text.overworld.progression.5=一旦门钥匙合成了, 将门钥匙右击在地面上就能生成一个传送门. 要获得更多的信息, 你需要深渊荒芜之地死灵之书, 需要8个深渊荒芜之地兽皮来升级. 需要撕裂法杖来获得用作合成的精髓.
@@ -443,7 +441,7 @@ necronomicon.text.dreadlands.progression.1=在你到达了恐惧之地后,你下
 necronomicon.text.dreadlands.progression.2=当你有2个祭坛零件, 你要将它们放在恐惧之地山脉的Y=40的高度并且右击它. 做完后你就能进入到查加罗特的巢穴. 在打败恐惧守卫并杀死查加罗特之后, 你会获得一把恐惧侵染的门钥匙, 随同着战利品. 这把钥匙需要嬗才变成有功能的钥匙.
 necronomicon.text.dreadlands.progression.3=通过前面提及的嬗变器(合成表在深渊荒芜之地特殊材料章节) 你可以将恐惧侵染的门钥匙嬗变成查加罗特的拉莱尔门钥匙, 允许你到达奥穆索. 升级你的死灵之书到奥穆索死灵之书需要8个奥穆索兽皮.
 
-necronomicon.text.omothol.progression.1=现在你已经到了奥穆索, 到了与深渊的守门者扎哈尔战斗的时候了. The Temple of J'zahar can be located at the heart of Omothol (coordinates X=4, Y=53, Z=7). Once you have defeated the Gatekeeper, you will be able to unlock all hidden knowledge through the Abyssalnomicon.
+necronomicon.text.omothol.progression.1=现在你已经到了奥穆索, 到了与深渊的守门者扎哈尔战斗的时候了. 扎哈尔神庙坐落于奥穆索的中心(坐标 X=4, Y=53, Z=7). 击败守门者之后, you will be able to unlock all hidden knowledge through the Abyssalnomicon.
 necronomicon.text.omothol.progression.2=The Abyssalnomicon requires Ethaxium Ingots, Eldritch Scales and the Essence of The Gatekeeper (dropped by J'zahar).
 necronomicon.text.omothol.progression.3=
 necronomicon.text.omothol.progression.4=
