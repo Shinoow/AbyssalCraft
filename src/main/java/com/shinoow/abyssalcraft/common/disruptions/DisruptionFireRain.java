@@ -42,14 +42,22 @@ public class DisruptionFireRain extends DisruptionEntry {
 		EntityLargeFireball fireball8 = positionFireball(world, x, y + 10, z - 2.5, 0, -0.5, 0);
 
 		if(!world.isRemote){
-			world.spawnEntityInWorld(fireball1);
-			world.spawnEntityInWorld(fireball2);
-			world.spawnEntityInWorld(fireball3);
-			world.spawnEntityInWorld(fireball4);
-			world.spawnEntityInWorld(fireball5);
-			world.spawnEntityInWorld(fireball6);
-			world.spawnEntityInWorld(fireball7);
-			world.spawnEntityInWorld(fireball8);
+			if(world.rand.nextBoolean())
+				world.spawnEntityInWorld(fireball1);
+			if(world.rand.nextBoolean())
+				world.spawnEntityInWorld(fireball2);
+			if(world.rand.nextBoolean())
+				world.spawnEntityInWorld(fireball3);
+			if(world.rand.nextBoolean())
+				world.spawnEntityInWorld(fireball4);
+			if(world.rand.nextBoolean())
+				world.spawnEntityInWorld(fireball5);
+			if(world.rand.nextBoolean())
+				world.spawnEntityInWorld(fireball6);
+			if(world.rand.nextBoolean())
+				world.spawnEntityInWorld(fireball7);
+			if(world.rand.nextBoolean())
+				world.spawnEntityInWorld(fireball8);
 		}
 	}
 

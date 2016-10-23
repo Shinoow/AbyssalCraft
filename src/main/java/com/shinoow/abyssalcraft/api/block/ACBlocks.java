@@ -171,4 +171,15 @@ public class ACBlocks {
 	public static Block decorative_shub_niggurath_statue;
 	public static Block crystal_cluster;
 	public static Block crystal_cluster2;
+	public static Block energy_collector;
+	public static Block energy_relay;
+	public static Block energy_container;
+	/** Metadata block, 0 = Overworld, 1 = Abyssal Wasteland, 2 = Dreadlands, 3 = Omothol */
+	public static Block tiered_energy_collector;
+	public static Block overworld_energy_relay;
+	public static Block abyssal_wasteland_energy_relay;
+	public static Block dreadlands_energy_relay;
+	public static Block omothol_energy_relay;
+	/** Metadata block, 0 = Overworld, 1 = Abyssal Wasteland, 2 = Dreadlands, 3 = Omothol */
+	public static Block tiered_energy_container;
 }

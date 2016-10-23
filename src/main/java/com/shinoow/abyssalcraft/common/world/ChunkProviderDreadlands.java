@@ -357,7 +357,7 @@ public class ChunkProviderDreadlands implements IChunkGenerator {
 				int Xcoord2 = k + rand.nextInt(16);
 				int Zcoord2 = l + rand.nextInt(16);
 
-				if(rand.nextInt(200) == 0)
+				if(rand.nextInt(400) == 0)
 					new StructureShoggothPit().generate(worldObj, rand, worldObj.getHeight(new BlockPos(Xcoord2, 0, Zcoord2)));
 			}
 

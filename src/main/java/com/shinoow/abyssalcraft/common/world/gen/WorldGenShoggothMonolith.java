@@ -76,7 +76,7 @@ public class WorldGenShoggothMonolith extends WorldGenerator {
 			setBlockAndNotifyAdequately(world, pos, ACBlocks.shoggoth_biomass.getDefaultState());
 			setBlockAndNotifyAdequately(world, new BlockPos(x, y + max, z), getStatue(rand).getDefaultState().withProperty(BlockStatue.FACING, EnumFacing.getHorizontal(rand.nextInt(3))));
 
-			world.playSound(pos.getX(), pos.getY(), pos.getZ(), SoundEvents.BLOCK_ANVIL_USE, SoundCategory.BLOCKS, 2, world.rand.nextFloat() * 0.1F * 0.9F, false);
+			world.playSound(null, pos.getX(), pos.getY(), pos.getZ(), SoundEvents.BLOCK_ANVIL_USE, SoundCategory.BLOCKS, 2, world.rand.nextFloat() * 0.1F * 0.9F);
 
 			return true;
 		}

@@ -191,6 +191,15 @@ public class BlockHandler implements ILifeCycleHandler {
 		ACBlocks.decorative_shub_niggurath_statue = new BlockDecorativeStatue().setUnlocalizedName("shubniggurathstatue");
 		ACBlocks.crystal_cluster = new BlockCrystalCluster().setUnlocalizedName("crystalcluster");
 		ACBlocks.crystal_cluster2 = new BlockCrystalCluster2().setUnlocalizedName("crystalcluster2");
+		ACBlocks.energy_collector = new BlockEnergyCollector();
+		ACBlocks.energy_relay = new BlockEnergyRelay();
+		ACBlocks.energy_container = new BlockEnergyContainer();
+		ACBlocks.tiered_energy_collector = new BlockTieredEnergyCollector();
+		ACBlocks.overworld_energy_relay = new BlockTieredEnergyRelay("owenergyrelay"){ @Override public TileEntity createNewTileEntity(World worldIn, int meta) { return new TileEntityOverworldEnergyRelay(); }};
+		ACBlocks.abyssal_wasteland_energy_relay = new BlockTieredEnergyRelay("awenergyrelay"){ @Override public TileEntity createNewTileEntity(World worldIn, int meta) { return new TileEntityAbyssalWastelandEnergyRelay(); }};
+		ACBlocks.dreadlands_energy_relay = new BlockTieredEnergyRelay("dlenergyrelay"){ @Override public TileEntity createNewTileEntity(World worldIn, int meta) { return new TileEntityDreadlandsEnergyRelay(); }};
+		ACBlocks.omothol_energy_relay = new BlockTieredEnergyRelay("omtenergyrelay"){ @Override public TileEntity createNewTileEntity(World worldIn, int meta) { return new TileEntityOmotholEnergyRelay(); }};
+		ACBlocks.tiered_energy_container = new BlockTieredEnergyContainer();
 
 		((BlockShoggothOoze) ACBlocks.shoggoth_ooze).initBlacklist();
 
@@ -221,6 +230,15 @@ public class BlockHandler implements ILifeCycleHandler {
 		GameRegistry.registerTileEntity(TileEntityTieredSacrificialAltar.class, "tileEntityTieredSacrificialAltar");
 		GameRegistry.registerTileEntity(TileEntityJzaharSpawner.class, "tileEntityJzaharSpawner");
 		GameRegistry.registerTileEntity(TileEntityGatekeeperMinionSpawner.class, "tileEntityGatekeeperMinionSpawner");
+		GameRegistry.registerTileEntity(TileEntityEnergyCollector.class, "tileEntityEnergyCollector");
+		GameRegistry.registerTileEntity(TileEntityEnergyRelay.class, "tileEntityEnergyRelay");
+		GameRegistry.registerTileEntity(TileEntityEnergyContainer.class, "tileEntityEnergyContainer");
+		GameRegistry.registerTileEntity(TileEntityTieredEnergyCollector.class, "tileEntityTieredEnergyCollector");
+		GameRegistry.registerTileEntity(TileEntityOverworldEnergyRelay.class, "tileEntityOverworldEnergyRelay");
+		GameRegistry.registerTileEntity(TileEntityAbyssalWastelandEnergyRelay.class, "tileEntityAbyssalWastelandEnergyRelay");
+		GameRegistry.registerTileEntity(TileEntityDreadlandsEnergyRelay.class, "tileEntityDreadlandsEnergyRelay");
+		GameRegistry.registerTileEntity(TileEntityOmotholEnergyRelay.class, "tileEntityOmotholEnergyRelay");
+		GameRegistry.registerTileEntity(TileEntityTieredEnergyContainer.class, "tileEntityTieredEnergyContainer");
 
 		registerBlock(ACBlocks.darkstone, "darkstone");
 		registerBlock(ACBlocks.darkstone_cobblestone, "darkstone_cobble");
@@ -357,11 +375,11 @@ public class BlockHandler implements ILifeCycleHandler {
 		registerBlock(ACBlocks.shub_niggurath_statue, "shubniggurathstatue");
 		registerBlock(ACBlocks.monolith_stone, "monolithstone");
 		registerBlock(ACBlocks.shoggoth_biomass, "shoggothbiomass");
-		registerBlock(ACBlocks.energy_pedestal, "energypedestal");
+		registerBlock(ACBlocks.energy_pedestal, new ItemPEContainerBlock(ACBlocks.energy_pedestal), "energypedestal");
 		registerBlock(ACBlocks.monolith_pillar, "monolithpillar");
-		registerBlock(ACBlocks.sacrificial_altar, "sacrificialaltar");
-		registerBlock(ACBlocks.tiered_energy_pedestal, new ItemMetadataBlock(ACBlocks.tiered_energy_pedestal), "tieredenergypedestal");
-		registerBlock(ACBlocks.tiered_sacrificial_altar, new ItemMetadataBlock(ACBlocks.tiered_sacrificial_altar), "tieredsacrificialaltar");
+		registerBlock(ACBlocks.sacrificial_altar, new ItemPEContainerBlock(ACBlocks.sacrificial_altar), "sacrificialaltar");
+		registerBlock(ACBlocks.tiered_energy_pedestal, new ItemMetadataPEContainerBlock(ACBlocks.tiered_energy_pedestal), "tieredenergypedestal");
+		registerBlock(ACBlocks.tiered_sacrificial_altar, new ItemMetadataPEContainerBlock(ACBlocks.tiered_sacrificial_altar), "tieredsacrificialaltar");
 		registerBlock(ACBlocks.jzahar_spawner, "jzaharspawner");
 		registerBlock(ACBlocks.minion_of_the_gatekeeper_spawner, "gatekeeperminionspawner");
 		registerBlock(ACBlocks.mimic_fire, "fire");
@@ -374,6 +392,15 @@ public class BlockHandler implements ILifeCycleHandler {
 		registerBlock(ACBlocks.decorative_shub_niggurath_statue, new ItemDecorativeStatueBlock(ACBlocks.decorative_shub_niggurath_statue), "decorativeshubniggurathstatue");
 		registerBlock(ACBlocks.crystal_cluster, new ItemCrystalClusterBlock(ACBlocks.crystal_cluster), "crystalcluster");
 		registerBlock(ACBlocks.crystal_cluster2, new ItemCrystalClusterBlock2(ACBlocks.crystal_cluster2), "crystalcluster2");
+		registerBlock(ACBlocks.energy_collector, new ItemPEContainerBlock(ACBlocks.energy_collector), "energycollector");
+		registerBlock(ACBlocks.energy_relay, new ItemPEContainerBlock(ACBlocks.energy_relay), "energyrelay");
+		registerBlock(ACBlocks.energy_container, new ItemPEContainerBlock(ACBlocks.energy_container), "energycontainer");
+		registerBlock(ACBlocks.tiered_energy_collector, new ItemTieredEnergyCollectorBlock(ACBlocks.tiered_energy_collector), "tieredenergycollector");
+		registerBlock(ACBlocks.overworld_energy_relay, new ItemPEContainerBlock(ACBlocks.overworld_energy_relay), "owenergyrelay");
+		registerBlock(ACBlocks.abyssal_wasteland_energy_relay, new ItemPEContainerBlock(ACBlocks.abyssal_wasteland_energy_relay), "awenergyrelay");
+		registerBlock(ACBlocks.dreadlands_energy_relay, new ItemPEContainerBlock(ACBlocks.dreadlands_energy_relay), "dlenergyrelay");
+		registerBlock(ACBlocks.omothol_energy_relay, new ItemPEContainerBlock(ACBlocks.omothol_energy_relay), "omtenergyrelay");
+		registerBlock(ACBlocks.tiered_energy_container, new ItemTieredEnergyContainerBlock(ACBlocks.tiered_energy_container), "tieredenergycontainer");
 
 		Blocks.FIRE.setFireInfo(ACBlocks.darklands_oak_planks, 5, 20);
 		Blocks.FIRE.setFireInfo(AbyssalCraft.DLTslab2, 5, 20);

@@ -13,7 +13,9 @@ package com.shinoow.abyssalcraft.common.items;
 
 import java.util.List;
 
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ActionResult;
@@ -23,11 +25,14 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.translation.I18n;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.api.energy.IEnergyTransporterItem;
 import com.shinoow.abyssalcraft.api.item.ACItems;
 import com.shinoow.abyssalcraft.common.blocks.BlockRitualAltar;
+import com.shinoow.abyssalcraft.lib.ACLib;
 import com.shinoow.abyssalcraft.lib.util.RitualUtil;
 import com.shinoow.abyssalcraft.lib.util.SpecialTextUtil;
 import com.shinoow.abyssalcraft.lib.util.blocks.IRitualAltar;
@@ -42,6 +47,16 @@ public class ItemNecronomicon extends ItemACBasic implements IEnergyTransporterI
 		bookType = type;
 	}
 
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	@Override
+	@SideOnly(Side.CLIENT)
+	public void getSubItems(Item par1Item, CreativeTabs par2CreativeTab, List par3List){
+		par3List.add(new ItemStack(par1Item));
+		ItemStack stack = new ItemStack(par1Item);
+		addEnergy(stack, getMaxEnergy(stack));
+		par3List.add(stack);
+	}
+
 	@Override
 	public ActionResult<ItemStack> onItemRightClick(ItemStack par1ItemStack, World par2World, EntityPlayer par3EntityPlayer, EnumHand hand)
 	{
@@ -50,13 +65,13 @@ public class ItemNecronomicon extends ItemACBasic implements IEnergyTransporterI
 		if(!par1ItemStack.getTagCompound().hasKey("owner")){
 			par1ItemStack.getTagCompound().setString("owner", par3EntityPlayer.getName());
 			if(!par3EntityPlayer.isSneaking()){
-				par3EntityPlayer.openGui(AbyssalCraft.instance, AbyssalCraft.necronmiconGuiID, par2World, 0, 0, 0);
+				par3EntityPlayer.openGui(AbyssalCraft.instance, ACLib.necronmiconGuiID, par2World, 0, 0, 0);
 				return new ActionResult(EnumActionResult.SUCCESS, par1ItemStack);
 			}
 		}
 		if(par1ItemStack.getTagCompound().getString("owner").equals(par3EntityPlayer.getName())){
 			if(!par3EntityPlayer.isSneaking()){
-				par3EntityPlayer.openGui(AbyssalCraft.instance, AbyssalCraft.necronmiconGuiID, par2World, 0, 0, 0);
+				par3EntityPlayer.openGui(AbyssalCraft.instance, ACLib.necronmiconGuiID, par2World, 0, 0, 0);
 				return new ActionResult(EnumActionResult.SUCCESS, par1ItemStack);
 			}
 		}
@@ -145,34 +160,34 @@ public class ItemNecronomicon extends ItemACBasic implements IEnergyTransporterI
 	}
 
 	@Override
-	public void consumeEnergy(ItemStack stack, float energy) {
+	public float consumeEnergy(ItemStack stack, float energy) {
 		float contained = getContainedEnergy(stack);
-		if(contained - energy < 0)
+		if(energy < contained){
+			stack.getTagCompound().setFloat("PotEnergy", contained -= energy);
+			return energy;
+		} else {
 			stack.getTagCompound().setFloat("PotEnergy", 0);
-		else stack.getTagCompound().setFloat("PotEnergy", contained -= energy);
-	}
-
-	@Override
-	public boolean canAcceptPEExternally(ItemStack stack) {
-
-		return true;
-	}
-
-	@Override
-	public boolean canTransferPEExternally(ItemStack stack) {
-
-		return true;
+			return contained;
+		}
 	}
 
 	@Override
 	public boolean canAcceptPE(ItemStack stack) {
-
-		return true;
+		return getContainedEnergy(stack) < getMaxEnergy(stack);
 	}
 
 	@Override
 	public boolean canTransferPE(ItemStack stack) {
+		return getContainedEnergy(stack) > 0;
+	}
 
-		return true;
+	@Override
+	public boolean canAcceptPEExternally(ItemStack stack) {
+		return getContainedEnergy(stack) < getMaxEnergy(stack);
+	}
+
+	@Override
+	public boolean canTransferPEExternally(ItemStack stack) {
+		return getContainedEnergy(stack) > 0;
 	}
 }

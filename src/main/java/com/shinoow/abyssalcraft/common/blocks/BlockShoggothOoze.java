@@ -38,6 +38,7 @@ public class BlockShoggothOoze extends BlockACBasic {
 
 	public BlockShoggothOoze(){
 		super(Material.GROUND, 1.0F, 1.0F, SoundType.SAND);
+		setTickRandomly(AbyssalCraft.oozeExpire);
 	}
 
 	@Override
@@ -60,6 +61,19 @@ public class BlockShoggothOoze extends BlockACBasic {
 			entity.motionX *= 0.4D;
 			entity.motionZ *= 0.4D;
 		}
+	}
+
+	@Override
+	public void updateTick(World par1World, BlockPos pos, IBlockState state, Random par5Random) {
+		if(AbyssalCraft.oozeExpire)
+			if (!par1World.isRemote && par5Random.nextInt(10) == 0 && par1World.getLightFromNeighbors(pos.up()) >= 13)
+				par1World.setBlockState(pos, Blocks.DIRT.getDefaultState());
+	}
+
+	@Override
+	public int tickRate(World worldIn)
+	{
+		return AbyssalCraft.oozeExpire ? 200 : super.tickRate(worldIn);
 	}
 
 	@Override

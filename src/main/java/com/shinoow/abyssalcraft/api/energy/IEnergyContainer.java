@@ -11,6 +11,8 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.api.energy;
 
+import net.minecraft.tileentity.TileEntity;
+
 /**
  * Interface to use on tile entities that can hold Potential Energy (WIP)<br>
  * WARNING: Any methods in this interface might end up getting removed,<br>
@@ -41,16 +43,24 @@ public interface IEnergyContainer {
 	/**
 	 * Consumes (removes) Potential Energy from the tile entity
 	 * @param energy Energy quota to consume
+	 * @return The amount of energy consumed
 	 */
-	public void consumeEnergy(float energy);
+	public float consumeEnergy(float energy);
 
 	/**
-	 * Returns Whether or not this container can accept Potential Energy
+	 * Returns whether or not this container can accept Potential Energy<br>
+	 * (eg. if it  has room for more Potential Energy, or if it accepts external input at all)
 	 */
 	public boolean canAcceptPE();
 
 	/**
-	 * Returns whether or not this container can transfer Potential Energy
+	 * Returns whether or not this container can transfer Potential Energy<br>
+	 * (eg. if it has any Potential Energy stored that it can transfer, or if it allows extraction at all)
 	 */
 	public boolean canTransferPE();
+
+	/**
+	 * Returns the TileEntity this interface is bound to
+	 */
+	public TileEntity getContainerTile();
 }

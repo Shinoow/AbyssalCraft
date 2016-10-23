@@ -18,7 +18,6 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.ITickable;
 
 import com.shinoow.abyssalcraft.api.energy.IEnergyContainer;
@@ -87,29 +86,10 @@ public class TileEntityTieredEnergyPedestal extends TileEntity implements IEnerg
 		if(item != null)
 			rot++;
 
-		if(worldObj.canBlockSeeSky(pos))
-			if(rand.nextInt(40) == 0 && getContainedEnergy() < getMaxEnergy()){
-				if(worldObj.isDaytime()){
-					addEnergy(1);
-					worldObj.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, pos.getX() + 0.5, pos.getY() + 0.95, pos.getZ() + 0.5, 0, 0, 0);
-				} else {
-					if(worldObj.getCurrentMoonPhaseFactor() == 1)
-						addEnergy(3);
-					else if(worldObj.getCurrentMoonPhaseFactor() == 0)
-						addEnergy(1);
-					else addEnergy(2);
-					worldObj.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, pos.getX() + 0.5, pos.getY() + 0.95, pos.getZ() + 0.5, 0, 0, 0);
-				}
-				if(getContainedEnergy() > getMaxEnergy())
-					energy = getMaxEnergy();
-			}
-
 		if(item != null)
 			if(item.getItem() instanceof IEnergyContainerItem)
-				if(((IEnergyContainerItem) item.getItem()).canAcceptPE(item) && getContainedEnergy() > 0 && ((IEnergyContainerItem) item.getItem()).getContainedEnergy(item) < ((IEnergyContainerItem) item.getItem()).getMaxEnergy(item)){
-					((IEnergyContainerItem) item.getItem()).addEnergy(item, 1);
-					consumeEnergy(1);
-				}
+				if(!worldObj.isRemote && ((IEnergyContainerItem) item.getItem()).canAcceptPE(item) && canTransferPE())
+					((IEnergyContainerItem) item.getItem()).addEnergy(item, consumeEnergy(1));
 	}
 
 	@Override
@@ -152,36 +132,39 @@ public class TileEntityTieredEnergyPedestal extends TileEntity implements IEnerg
 
 	@Override
 	public void addEnergy(float energy) {
-		int multiplier = 1;
-		switch(getBlockMetadata()){
-		case 0:
-			multiplier = 2;
-			break;
-		case 1:
-			multiplier = 4;
-			break;
-		case 2:
-			multiplier = 6;
-			break;
-		case 3:
-			multiplier = 8;
-			break;
-		}
-		this.energy += energy * multiplier;
+		isDirty = true;
+		this.energy += energy;
+		if(this.energy > getMaxEnergy()) this.energy = getMaxEnergy();
 	}
 
 	@Override
-	public void consumeEnergy(float energy) {
-		this.energy -= energy;
+	public float consumeEnergy(float energy) {
+		isDirty = true;
+		if(energy < this.energy){
+			this.energy -= energy;
+			return energy;
+		} else {
+			float ret = this.energy;
+			this.energy = 0;
+			return ret;
+		}
 	}
 
 	@Override
 	public boolean canAcceptPE() {
-		return true;
+
+		return getContainedEnergy() < getMaxEnergy();
 	}
 
 	@Override
 	public boolean canTransferPE() {
-		return true;
+
+		return getContainedEnergy() > 0;
+	}
+
+	@Override
+	public TileEntity getContainerTile() {
+
+		return this;
 	}
 }

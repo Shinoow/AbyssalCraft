@@ -230,17 +230,21 @@ public class EntityDepthsGhoul extends EntityMob implements ICoraliumEntity {
 	@Override
 	public boolean attackEntityAsMob(Entity par1Entity)
 	{
-		if (super.attackEntityAsMob(par1Entity))
-			if (par1Entity instanceof EntityLivingBase)
-				if(worldObj.provider.getDimension() == ACLib.abyssal_wasteland_id && !EntityUtil.isEntityCoralium((EntityLivingBase)par1Entity)
-				|| AbyssalCraft.shouldInfect == true && !EntityUtil.isEntityCoralium((EntityLivingBase)par1Entity))
-					((EntityLivingBase)par1Entity).addPotionEffect(new PotionEffect(AbyssalCraftAPI.coralium_plague, 100));
 		swingArm(EnumHand.MAIN_HAND);
 		swingArm(EnumHand.OFF_HAND);
 		boolean flag = super.attackEntityAsMob(par1Entity);
 
-		if (flag && getHeldItemMainhand() == null && isBurning() && rand.nextFloat() < worldObj.getDifficulty().getDifficultyId() * 0.3F)
-			par1Entity.setFire(2 * worldObj.getDifficulty().getDifficultyId());
+		if(flag){
+			if(par1Entity instanceof EntityLivingBase)
+				if(worldObj.provider.getDimension() == ACLib.abyssal_wasteland_id && !EntityUtil.isEntityCoralium((EntityLivingBase)par1Entity)
+				|| AbyssalCraft.shouldInfect == true && !EntityUtil.isEntityCoralium((EntityLivingBase)par1Entity))
+					((EntityLivingBase)par1Entity).addPotionEffect(new PotionEffect(AbyssalCraftAPI.coralium_plague, 100));
+			if(getHeldItemMainhand() == null && isBurning() && rand.nextFloat() < worldObj.getDifficulty().getDifficultyId() * 0.3F)
+				par1Entity.setFire(2 * worldObj.getDifficulty().getDifficultyId());
+		}
+
+		if(AbyssalCraft.hardcoreMode && par1Entity instanceof EntityPlayer)
+			par1Entity.attackEntityFrom(DamageSource.causeMobDamage(this).setDamageBypassesArmor(), 1.5F);
 
 		return flag;
 	}
@@ -385,7 +389,6 @@ public class EntityDepthsGhoul extends EntityMob implements ICoraliumEntity {
 		}
 
 		IAttributeInstance attribute = getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE);
-		getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH);
 		Calendar calendar = worldObj.getCurrentDate();
 
 		if (calendar.get(2) + 1 == 10 && calendar.get(5) == 31 && rand.nextFloat() < 0.25F)
