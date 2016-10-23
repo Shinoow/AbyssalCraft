@@ -95,7 +95,7 @@ public class NecronomiconInfusionRitual extends NecronomiconCreationRitual {
 	protected void completeRitualServer(World world, BlockPos pos, EntityPlayer player){
 		if(canCompleteRitual(world, pos, player)){
 			NBTTagCompound data = new NBTTagCompound();
-			if(tags.length > 0){
+			if(tags != null && tags.length > 0){
 				TileEntity altar = world.getTileEntity(pos);
 
 				NBTTagCompound compound = new NBTTagCompound();
@@ -132,7 +132,7 @@ public class NecronomiconInfusionRitual extends NecronomiconCreationRitual {
 	protected void completeRitualClient(World world, BlockPos pos, EntityPlayer player){
 		if(canCompleteRitual(world, pos, player)){
 			NBTTagCompound data = new NBTTagCompound();
-			if(tags.length > 0){
+			if(tags != null && tags.length > 0){
 				TileEntity altar = world.getTileEntity(pos);
 
 				NBTTagCompound compound = new NBTTagCompound();
