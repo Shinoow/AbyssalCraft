@@ -20,6 +20,15 @@ public class ACLib {
 	//Dimension IDs
 	public static int abyssal_wasteland_id, dreadlands_id, omothol_id, dark_realm_id;
 
+	//Gui IDs
+	public static final int crystallizerGuiID = 30;
+	public static final int transmutatorGuiID = 31;
+	public static final int engraverGuiID = 32;
+	public static final int necronmiconGuiID = 33;
+	public static final int crystalbagGuiID = 34;
+	public static final int materializerGuiID = 35;
+	public static final int energycontainerGuiID = 36;
+
 	//Crystal stuff
 	public static final String[] crystalNames = new String[]{"Iron", "Gold", "Sulfur", "Carbon", "Oxygen", "Hydrogen", "Nitrogen", "Phosphorus",
 		"Potassium", "Nitrate", "Methane", "Redstone", "Abyssalnite", "Coralium", "Dreadium", "Blaze", "Tin", "Copper",

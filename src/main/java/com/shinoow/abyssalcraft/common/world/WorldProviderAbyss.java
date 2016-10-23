@@ -87,7 +87,7 @@ public class WorldProviderAbyss extends WorldProvider {
 
 	@Override
 	public Vec3d getSkyColor(Entity cameraEntity, float partialTicks) {
-		return new Vec3d(0, 180, 50);
+		return new Vec3d(0, 5, 0.2);
 	}
 
 	@Override

@@ -75,7 +75,7 @@ public class ItemEthaxiumArmor extends ItemArmor {
 			if(player.isInWater()){
 				player.addPotionEffect(new PotionEffect(MobEffects.moveSpeed, 20, 2));
 				player.addPotionEffect(new PotionEffect(MobEffects.waterBreathing, 20, 1));
-			}
+			} else player.addPotionEffect(new PotionEffect(MobEffects.moveSpeed, 20, 1));
 
 		if(player.getActivePotionEffect(MobEffects.saturation) != null && player.getActivePotionEffect(MobEffects.saturation).getDuration() == 0)
 			player.removePotionEffect(MobEffects.saturation);

@@ -40,6 +40,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.common.blocks.tile.TileEntityMaterializer;
+import com.shinoow.abyssalcraft.lib.ACLib;
 import com.shinoow.abyssalcraft.lib.ACTabs;
 
 public class BlockMaterializer extends BlockContainer {
@@ -98,7 +99,7 @@ public class BlockMaterializer extends BlockContainer {
 	@Override
 	public boolean onBlockActivated(World par1World, BlockPos pos, IBlockState state, EntityPlayer par5EntityPlayer, EnumHand hand, ItemStack heldItem, EnumFacing side, float par7, float par8, float par9) {
 		if(!par1World.isRemote)
-			FMLNetworkHandler.openGui(par5EntityPlayer, AbyssalCraft.instance, AbyssalCraft.materializerGuiID, par1World, pos.getX(), pos.getY(), pos.getZ());
+			FMLNetworkHandler.openGui(par5EntityPlayer, AbyssalCraft.instance, ACLib.materializerGuiID, par1World, pos.getX(), pos.getY(), pos.getZ());
 		return true;
 	}
 

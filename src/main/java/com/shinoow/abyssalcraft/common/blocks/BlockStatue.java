@@ -11,6 +11,9 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.common.blocks;
 
+import java.util.List;
+import java.util.Random;
+
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -19,6 +22,10 @@ import net.minecraft.block.properties.PropertyDirection;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.item.EntityItem;
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumBlockRenderType;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.AxisAlignedBB;
@@ -28,6 +35,9 @@ import net.minecraft.world.World;
 import net.minecraftforge.client.model.obj.OBJModel;
 import net.minecraftforge.common.property.ExtendedBlockState;
 import net.minecraftforge.common.property.IUnlistedProperty;
+
+import com.shinoow.abyssalcraft.api.energy.PEUtils;
+import com.shinoow.abyssalcraft.common.blocks.tile.TileEntityStatue;
 import com.shinoow.abyssalcraft.lib.ACTabs;
 
 public abstract class BlockStatue extends BlockContainer {
@@ -82,6 +92,60 @@ public abstract class BlockStatue extends BlockContainer {
 	@Override
 	public EnumBlockRenderType getRenderType(IBlockState state) {
 		return EnumBlockRenderType.MODEL;
+	}
+
+	@Override
+	public void breakBlock(World world, BlockPos pos, IBlockState state)
+	{
+		Random rand = new Random();
+		TileEntityStatue statue = (TileEntityStatue) world.getTileEntity(pos);
+
+		if(statue != null){
+			ItemStack stack = new ItemStack(getItemDropped(state, rand, 1), 1, damageDropped(state));
+			if(!stack.hasTagCompound())
+				stack.setTagCompound(new NBTTagCompound());
+			NBTTagCompound data = new NBTTagCompound();
+			statue.writeToNBT(data);
+			stack.getTagCompound().setInteger("Timer", data.getInteger("Timer"));
+			stack.getTagCompound().setInteger("ActivationTimer", data.getInteger("ActivationTimer"));
+			stack.getTagCompound().setInteger("Tolerance", data.getInteger("Tolerance") + 10);
+			PEUtils.writeManipulatorNBT(statue, stack.getTagCompound());
+			float f = rand.nextFloat() * 0.8F + 0.1F;
+			float f1 = rand.nextFloat() * 0.8F + 0.1F;
+			float f2 = rand.nextFloat() * 0.8F + 0.1F;
+
+			EntityItem item = new EntityItem(world, pos.getX() + f, pos.getY() + f1, pos.getZ() + f2, stack);
+			float f3 = 0.05F;
+			item.motionX = (float)rand.nextGaussian() * f3;
+			item.motionY = (float)rand.nextGaussian() * f3 + 0.2F;
+			item.motionZ = (float)rand.nextGaussian() * f3;
+			world.spawnEntityInWorld(item);
+		}
+
+		super.breakBlock(world, pos, state);
+	}
+
+	@Override
+	public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack)
+	{
+		if(stack.hasTagCompound()){
+			TileEntity tile = worldIn.getTileEntity(pos);
+			if(tile != null && tile instanceof TileEntityStatue){
+				NBTTagCompound data = new NBTTagCompound();
+				tile.writeToNBT(data);
+				data.setInteger("Timer", stack.getTagCompound().getInteger("Timer"));
+				data.setInteger("ActivationTimer", stack.getTagCompound().getInteger("ActivationTimer"));
+				data.setInteger("Tolerance", stack.getTagCompound().getInteger("Tolerance") + 10);
+				tile.readFromNBT(data);
+				PEUtils.readManipulatorNBT((TileEntityStatue)tile, stack.getTagCompound());
+			}
+		}
+	}
+
+	@Override
+	public List<ItemStack> getDrops(IBlockAccess world, BlockPos pos, IBlockState state, int fortune)
+	{
+		return new java.util.ArrayList<ItemStack>();
 	}
 
 	@Override

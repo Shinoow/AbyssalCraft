@@ -1,0 +1,29 @@
+{
+    "textures": {
+        "particle": "abyssalcraft:blocks/monolithstone",
+		"side": "abyssalcraft:blocks/monolithstone",
+		"thing": "abyssalcraft:blocks/energycollector"
+    },
+    "elements": [
+        {   "from": [ 4, 0, 4 ],
+            "to": [ 12, 13, 12 ],
+            "faces": {
+                "down":  { "uv": [ 4, 4, 12, 12 ], "texture": "#side", "cullface": "down" },
+                "up":    { "uv": [ 4, 4, 12, 12 ], "texture": "#side", "cullface": "up"   },
+                "north": { "uv": [ 4, 0, 12, 16 ], "texture": "#side" },
+                "south": { "uv": [ 4, 0, 12, 16 ], "texture": "#side" },
+                "west":  { "uv": [ 4, 0, 12, 16 ], "texture": "#side" },
+                "east":  { "uv": [ 4, 0, 12, 16 ], "texture": "#side" }
+            }
+        },
+		{   "from": [ 4, 0, 4 ],
+            "to": [ 12, 13, 12 ],
+            "faces": {
+                "north": { "uv": [ 4, 0, 12, 16 ], "texture": "#thing" },
+                "south": { "uv": [ 4, 0, 12, 16 ], "texture": "#thing" },
+                "west":  { "uv": [ 4, 0, 12, 16 ], "texture": "#thing" },
+                "east":  { "uv": [ 4, 0, 12, 16 ], "texture": "#thing" }
+            }
+        }
+    ]
+}

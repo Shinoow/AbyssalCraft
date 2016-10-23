@@ -31,7 +31,12 @@ public class ItemMetadata extends Item {
 
 	private String[] names;
 
+	@Deprecated
 	public ItemMetadata(String name, boolean icons, String...names){
+		this(name, names);
+	}
+
+	public ItemMetadata(String name, String...names){
 		setUnlocalizedName(name);
 		setCreativeTab(ACTabs.tabItems);
 		setMaxDamage(0);

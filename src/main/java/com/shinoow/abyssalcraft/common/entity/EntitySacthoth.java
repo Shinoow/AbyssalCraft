@@ -191,10 +191,16 @@ public class EntitySacthoth extends EntityMob implements IAntiEntity, ICoraliumE
 	@Override
 	public boolean attackEntityAsMob(Entity par1Entity) {
 
-		if (super.attackEntityAsMob(par1Entity))
-			if (par1Entity instanceof EntityLivingBase)
+		boolean flag = super.attackEntityAsMob(par1Entity);
+
+		if(flag)
+			if(par1Entity instanceof EntityLivingBase)
 				((EntityLivingBase)par1Entity).addPotionEffect(new PotionEffect(MobEffects.confusion, 60));
-		return super.attackEntityAsMob(par1Entity);
+
+		if(AbyssalCraft.hardcoreMode && par1Entity instanceof EntityPlayer)
+			par1Entity.attackEntityFrom(DamageSource.causeMobDamage(this).setDamageBypassesArmor(), 4.5F);
+
+		return flag;
 	}
 
 	@Override
@@ -270,10 +276,7 @@ public class EntitySacthoth extends EntityMob implements IAntiEntity, ICoraliumE
 	@Override
 	public boolean attackEntityFrom(DamageSource par1DamageSource, float par2)
 	{
-		if(par2 > 50)
-			if(par2 > 500001 || par2 < 500000)
-				if(par2 > 750001.5F || par2 < 750001)
-					par2 = 30 + worldObj.rand.nextInt(20);
+		if(par2 > 30) par2 = 10 + worldObj.rand.nextInt(10);
 
 		if(par1DamageSource == DamageSource.inWall){
 			teleportRandomly();

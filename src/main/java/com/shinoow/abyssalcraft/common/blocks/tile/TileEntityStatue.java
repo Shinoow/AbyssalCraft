@@ -38,7 +38,7 @@ public class TileEntityStatue extends TileEntity implements IEnergyManipulator, 
 	private int activationTimer;
 	private AmplifierType currentAmplifier;
 	private DeityType currentDeity;
-	private int ticksExisted;
+	private int tolerance;
 
 	@Override
 	public void readFromNBT(NBTTagCompound nbttagcompound)
@@ -46,6 +46,7 @@ public class TileEntityStatue extends TileEntity implements IEnergyManipulator, 
 		super.readFromNBT(nbttagcompound);
 		timer = nbttagcompound.getInteger("Timer");
 		activationTimer = nbttagcompound.getInteger("ActivationTimer");
+		tolerance = nbttagcompound.getInteger("Tolerance");
 		if(nbttagcompound.hasKey("Deity") && !nbttagcompound.hasKey("ActiveDeity")){//Converting the old tags
 			nbttagcompound.setString("ActiveDeity", nbttagcompound.getString("Deity"));
 			nbttagcompound.removeTag("Deity");
@@ -63,6 +64,7 @@ public class TileEntityStatue extends TileEntity implements IEnergyManipulator, 
 		super.writeToNBT(nbttagcompound);
 		nbttagcompound.setInteger("Timer", timer);
 		nbttagcompound.setInteger("ActivationTimer", activationTimer);
+		nbttagcompound.setInteger("Tolerance", tolerance);
 		PEUtils.writeManipulatorNBT(this, nbttagcompound);
 
 	}
@@ -148,18 +150,27 @@ public class TileEntityStatue extends TileEntity implements IEnergyManipulator, 
 	}
 
 	@Override
-	public void disrupt(boolean factor) {
-		if(factor)
-			if(!worldObj.isRemote){
-				worldObj.addWeatherEffect(new EntityLightningBolt(worldObj, pos.getX(), pos.getY() + 1, pos.getZ(), false));
-				DisruptionHandler.instance().generateDisruption(getDeity(), worldObj, pos, worldObj.getEntitiesWithinAABB(EntityPlayer.class, new AxisAlignedBB(pos).expand(16, 16, 16)));
-			}
+	public void addTolerance(int num) {
+		tolerance += num;
+	}
+
+	@Override
+	public int getTolerance() {
+
+		return tolerance;
+	}
+
+	@Override
+	public void disrupt() {
+		tolerance = 0;
+		if(!worldObj.isRemote){
+			worldObj.addWeatherEffect(new EntityLightningBolt(worldObj, pos.getX(), pos.getY() + 1, pos.getZ(), false));
+			DisruptionHandler.instance().generateDisruption(getDeity(), worldObj, pos, worldObj.getEntitiesWithinAABB(EntityPlayer.class, new AxisAlignedBB(pos).expand(16, 16, 16)));
+		}
 	}
 
 	@Override
 	public void update(){
-
-		++ticksExisted;
 
 		if(isActive()){
 			activationTimer--;
@@ -172,24 +183,25 @@ public class TileEntityStatue extends TileEntity implements IEnergyManipulator, 
 		int yp = pos.getY();
 		int zp = pos.getZ();
 
-		if(PEUtils.checkForAdjacentManipulators(worldObj, pos)){
-			if(worldObj.func_184137_a(xp, yp, zp, range, false) != null &&
-					EntityUtil.hasNecronomicon(worldObj.func_184137_a(xp, yp, zp, range, false))){
-				ItemStack item = worldObj.func_184137_a(xp, yp, zp, range, false).getHeldItem(EnumHand.MAIN_HAND);
-				ItemStack item1 = worldObj.func_184137_a(xp, yp, zp, range, false).getHeldItem(EnumHand.OFF_HAND);
-				if(item != null && item.getItem() instanceof IEnergyTransporterItem ||
-						item1 != null && item1.getItem() instanceof IEnergyTransporterItem){
-					timer++;
-					if(timer >= (int)(timerMax / Math.max(getAmplifier(AmplifierType.DURATION), 1.0F))){
-						timer = worldObj.rand.nextInt(10);
-						PEUtils.transferPEToNearbyPlayers(worldObj, pos, this, range);
+		if(worldObj.canBlockSeeSky(pos))
+			if(PEUtils.checkForAdjacentManipulators(worldObj, pos)){
+				if(worldObj.func_184137_a(xp, yp, zp, range, false) != null &&
+						EntityUtil.hasNecronomicon(worldObj.func_184137_a(xp, yp, zp, range, false))){
+					ItemStack item = worldObj.func_184137_a(xp, yp, zp, range, false).getHeldItem(EnumHand.MAIN_HAND);
+					ItemStack item1 = worldObj.func_184137_a(xp, yp, zp, range, false).getHeldItem(EnumHand.OFF_HAND);
+					if(item != null && item.getItem() instanceof IEnergyTransporterItem ||
+							item1 != null && item1.getItem() instanceof IEnergyTransporterItem){
+						timer++;
+						if(timer >= (int)(timerMax / Math.max(getAmplifier(AmplifierType.DURATION), 1.0F))){
+							timer = worldObj.rand.nextInt(10);
+							PEUtils.transferPEToNearbyPlayers(worldObj, pos, this, range);
+						}
 					}
 				}
-			}
 
-			PEUtils.transferPEToCollectors(worldObj, pos, this, (int)(PEUtils.getRangeAmplifiers(worldObj, pos) + getAmplifier(AmplifierType.RANGE)/2));
-		}
-		if(ticksExisted % (isActive() ? 100 : 200) == 0)
-			disrupt(worldObj.rand.nextInt(2 * (isActive() ? 5 : 25) * (worldObj.func_184137_a(xp, yp, zp, range * 2, true) != null ? 1 : 5)) == 0);
+				PEUtils.transferPEToCollectors(worldObj, pos, this, (int)(PEUtils.getRangeAmplifiers(worldObj, pos) + getAmplifier(AmplifierType.RANGE)/2));
+			}
+		if(tolerance >= 100)
+			disrupt();
 	}
 }

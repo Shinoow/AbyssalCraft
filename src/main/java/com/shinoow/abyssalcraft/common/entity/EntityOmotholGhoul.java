@@ -32,6 +32,7 @@ import net.minecraft.init.MobEffects;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.Item;
 import net.minecraft.potion.PotionEffect;
+import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
@@ -84,19 +85,21 @@ public class EntityOmotholGhoul extends EntityMob implements IAntiEntity, ICoral
 	}
 
 	@Override
-	public boolean attackEntityAsMob(Entity par1Entity)
-	{
-		if(super.attackEntityAsMob(par1Entity))
+	public boolean attackEntityAsMob(Entity par1Entity) {
+
+		swingArm(EnumHand.MAIN_HAND);
+		swingArm(EnumHand.OFF_HAND);
+		boolean flag = super.attackEntityAsMob(par1Entity);
+
+		if(flag)
 			if(par1Entity instanceof EntityLivingBase){
 				((EntityLivingBase)par1Entity).addPotionEffect(new PotionEffect(MobEffects.moveSlowdown, 100));
 				((EntityLivingBase)par1Entity).addPotionEffect(new PotionEffect(MobEffects.blindness, 20));
 				((EntityLivingBase)par1Entity).addPotionEffect(new PotionEffect(MobEffects.nightVision, 20));
 			}
 
-
-		swingArm(EnumHand.MAIN_HAND);
-		swingArm(EnumHand.OFF_HAND);
-		boolean flag = super.attackEntityAsMob(par1Entity);
+		if(AbyssalCraft.hardcoreMode && par1Entity instanceof EntityPlayer)
+			par1Entity.attackEntityFrom(DamageSource.causeMobDamage(this).setDamageBypassesArmor(), 3);
 
 		return flag;
 	}

@@ -52,7 +52,7 @@ public class PEUtils {
 		int yp = pos.getY();
 		int zp = pos.getZ();
 
-		List<EntityPlayer> players = world.getEntitiesWithinAABB(EntityPlayer.class, new AxisAlignedBB(pos).expand(range, range, range));
+		List<EntityPlayer> players = world.getEntitiesWithinAABB(EntityPlayer.class, new AxisAlignedBB(pos, pos.add(1, 1, 1)).expand(range, range, range));
 
 		for(EntityPlayer player : players)
 			if(EntityUtil.hasNecronomicon(player)){
@@ -84,9 +84,10 @@ public class PEUtils {
 	 */
 	private static void transferPEToStack(ItemStack stack, IEnergyManipulator manipulator){
 		if(stack != null && stack.getItem() instanceof IEnergyTransporterItem)
-			if(((IEnergyTransporterItem) stack.getItem()).canAcceptPEExternally(stack) &&
-					((IEnergyTransporterItem) stack.getItem()).getContainedEnergy(stack) < ((IEnergyTransporterItem) stack.getItem()).getMaxEnergy(stack))
+			if(((IEnergyTransporterItem) stack.getItem()).canAcceptPEExternally(stack)){
 				((IEnergyTransporterItem) stack.getItem()).addEnergy(stack, manipulator.getEnergyQuanta());
+				manipulator.addTolerance(manipulator.isActive() ? 4 : 2);
+			}
 	}
 
 	/**
@@ -108,15 +109,17 @@ public class PEUtils {
 			for(int y = 0; y <= getRangeAmplifiers(world, pos); y++)
 				for(int z = -1*(3+boost); z <= 3+boost; z++)
 					if(x < -2 || x > 2 || z < -2 || z > 2)
-						if(isCollector(world.getTileEntity(new BlockPos(xp + x, yp - y, zp + z))))
+						if(isCollector(world.getTileEntity(new BlockPos(xp + x, yp - y, zp + z))) && collectors.size() < 20)
 							collectors.add(world.getTileEntity(new BlockPos(xp + x, yp - y, zp + z)));
 
 		for(TileEntity tile : collectors)
 			if(checkForAdjacentCollectors(world, tile.getPos()))
 				if(world.rand.nextInt(120-(int)(20 * manipulator.getAmplifier(AmplifierType.DURATION))) == 0)
-					if(((IEnergyContainer) tile).getContainedEnergy() < ((IEnergyContainer) tile).getMaxEnergy()){
-						if(!world.isRemote)
-							((IEnergyContainer) tile).addEnergy(manipulator.getEnergyQuanta());
+					if(((IEnergyCollector) tile).canAcceptPE()){
+						if(!world.isRemote){
+							((IEnergyCollector) tile).addEnergy(manipulator.getEnergyQuanta());
+							manipulator.addTolerance(manipulator.isActive() ? 2 : 1);
+						}
 						for(double i = 0; i <= 0.7; i += 0.03) {
 							int xPos = xp < tile.getPos().getX() ? 1 : xp > tile.getPos().getX() ? -1 : 0;
 							int yPos = yp < tile.getPos().getY() ? 1 : yp > tile.getPos().getY() ? -1 : 0;
@@ -140,8 +143,8 @@ public class PEUtils {
 		if(manipulator.getActiveAmplifier() != null || manipulator.getActiveDeity() != null){
 			NBTTagCompound tag = new NBTTagCompound();
 			((TileEntity) manipulator).writeToNBT(tag);
-			tag.setString("Deity", "");
-			tag.setString("Amplifier", "");
+			tag.setString("ActiveDeity", "");
+			tag.setString("ActiveAmplifier", "");
 			manipulator.setActiveDeity(null);
 			manipulator.setActiveAmplifier(null);
 			((TileEntity) manipulator).readFromNBT(tag);
@@ -170,8 +173,10 @@ public class PEUtils {
 	public static void writeManipulatorNBT(IEnergyManipulator manipulator, NBTTagCompound compound){
 		if(manipulator.getActiveDeity() != null)
 			compound.setString("ActiveDeity", manipulator.getActiveDeity().name());
+		else compound.setString("ActiveDeity", "");
 		if(manipulator.getActiveAmplifier() != null)
 			compound.setString("ActiveAmplifier", manipulator.getActiveAmplifier().name());
+		else compound.setString("ActiveAmplifier", "");
 	}
 
 	/**
@@ -196,12 +201,12 @@ public class PEUtils {
 	}
 
 	/**
-	 * Checks if a TileEntity is a PE Collector (extends IEnergyContainer and can accept PE)
+	 * Checks if a TileEntity is a PE Collector (extends IEnergyCollector)
 	 * @param tile TileEntity to check
 	 * @return True if the TileEntity is a PE Collector, otherwise false
 	 */
 	public static boolean isCollector(TileEntity tile){
-		if(tile != null) return tile instanceof IEnergyContainer && ((IEnergyContainer)tile).canAcceptPE();
+		if(tile != null) return tile instanceof IEnergyCollector;
 		return false;
 	}
 
@@ -212,6 +217,16 @@ public class PEUtils {
 	 */
 	public static boolean isManipulator(TileEntity tile){
 		if(tile != null) return tile instanceof IEnergyManipulator;
+		return false;
+	}
+
+	/**
+	 * Checks if a TileEntity is a PE Container (extends IEnergyContainer)
+	 * @param tile TileEntity to check
+	 * @return True if the TileEntity is a PE Collector, otherwise false
+	 */
+	public static boolean isContainer(TileEntity tile){
+		if(tile != null) return tile instanceof IEnergyContainer;
 		return false;
 	}
 
@@ -243,5 +258,71 @@ public class PEUtils {
 		if(isManipulator(world.getTileEntity(pos.down(2)))) // ^
 			return false;
 		return true;
+	}
+
+	/**
+	 * Checks for anything accepting PE in the given direction
+	 * @param world Current World
+	 * @param pos Current BlockPos
+	 * @param face Direction to check
+	 * @param dist Transport distance
+	 * @return True if a PE Container is found, otherwise false
+	 */
+	public static boolean canTransfer(World world, BlockPos pos, EnumFacing face, int dist){
+
+		for(int i = 1; i < dist+1; i++){
+			if(world.getBlockState(pos.offset(face, i)).getBlock().isFullCube(world.getBlockState(pos.offset(face, i))) && !world.isAirBlock(pos.offset(face, i))) return false;
+			if(isContainer(world.getTileEntity(pos.offset(face, i))))
+				return ((IEnergyContainer) world.getTileEntity(pos.offset(face, i))).canAcceptPE();
+		}
+		return false;
+	}
+
+	/**
+	 * Looks for a PE Collector in the given direction
+	 * @param world Current World
+	 * @param pos Current BlockPos
+	 * @param face Direction to check
+	 * @param dist Transport distance
+	 * @return A PE Collector if one is found, otherwise null
+	 */
+	public static IEnergyCollector getCollector(World world, BlockPos pos, EnumFacing face, int dist){
+		for(int i = 1; i < dist+1; i++)
+			if(isCollector(world.getTileEntity(pos.offset(face, i))))
+				return (IEnergyCollector) world.getTileEntity(pos.offset(face, i));
+		return null;
+	}
+
+	/**
+	 * Looks for a PE Container in the given distance
+	 * @param world Current World
+	 * @param pos Current BlockPos
+	 * @param face Direction to check
+	 * @param dist Transport distance
+	 * @return A TileEntity that can accept PE, otherwise null
+	 */
+	public static IEnergyContainer getContainer(World world, BlockPos pos, EnumFacing face, int dist){
+		for(int i = 1; i < dist+1; i++)
+			if(isContainer(world.getTileEntity(pos.offset(face, i))))
+				return (IEnergyContainer) world.getTileEntity(pos.offset(face, i));
+		return null;
+	}
+
+	/**
+	 * Attempts to collect PE from nearby PE Collectors
+	 * @param relay PE Relay
+	 * @param world Current World
+	 * @param pos Current BlockPos
+	 * @param face Direction to collect from
+	 * @param amount Amount of PE to drain
+	 */
+	public static void collectNearbyPE(IEnergyRelay relay, World world, BlockPos pos, EnumFacing face, float amount){
+		if(relay.canAcceptPE()){
+			IEnergyCollector collector = getCollector(world, pos, face, 1);
+			if(collector != null && collector.canTransferPE())
+				if(!world.isRemote)
+					relay.addEnergy(collector.consumeEnergy(amount));
+
+		}
 	}
 }

@@ -91,6 +91,9 @@ public class EntityGatekeeperMinion extends EntityMob implements ICoraliumEntity
 		swingArm(EnumHand.OFF_HAND);
 		boolean flag = super.attackEntityAsMob(par1Entity);
 
+		if(AbyssalCraft.hardcoreMode && par1Entity instanceof EntityPlayer)
+			par1Entity.attackEntityFrom(DamageSource.causeMobDamage(this).setDamageBypassesArmor(), 3);
+
 		return flag;
 	}
 

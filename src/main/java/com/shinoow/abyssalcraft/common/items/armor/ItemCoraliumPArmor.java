@@ -11,17 +11,13 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.common.items.armor;
 
-import java.util.List;
-
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.MobEffects;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionEffect;
-import net.minecraft.util.DamageSource;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 
@@ -59,19 +55,6 @@ public class ItemCoraliumPArmor extends ItemArmor {
 			player.addPotionEffect(new PotionEffect(MobEffects.nightVision, 260, 0));
 			if(player.getActivePotionEffect(AbyssalCraftAPI.coralium_plague) !=null)
 				player.removePotionEffect(AbyssalCraftAPI.coralium_plague);
-		}
-		if (itemstack.getItem() == ACItems.plated_coralium_chestplate) {
-			List list = player.worldObj.getEntitiesWithinAABBExcludingEntity(player, player.getEntityBoundingBox().expand(4D, 0.0D, 4D));
-
-			if (list != null)
-				for (int k2 = 0; k2 < list.size(); k2++) {
-					Entity entity = (Entity)list.get(k2);
-
-					if (entity instanceof EntityLiving && !entity.isDead)
-						entity.attackEntityFrom(DamageSource.causePlayerDamage(player), 1);
-					else if (entity instanceof EntityPlayer && !entity.isDead)
-						entity.attackEntityFrom(DamageSource.causePlayerDamage(player), 1);
-				}
 		}
 		if (itemstack.getItem() == ACItems.plated_coralium_boots)
 			if(player.isInWater()){

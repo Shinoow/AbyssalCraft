@@ -126,7 +126,7 @@ public class BlockODB extends Block {
 			{
 				EntityODBPrimed var7 = new EntityODBPrimed(par1World, pos.getX() + 0.5F, pos.getY() + 0.5F, pos.getZ() + 0.5F, par6);
 				par1World.spawnEntityInWorld(var7);
-				par1World.playSound(var7.posX, var7.posY, var7.posZ, SoundEvents.entity_tnt_primed, SoundCategory.BLOCKS, 1.0F, 1.0F, false);
+				par1World.playSound(null, var7.posX, var7.posY, var7.posZ, SoundEvents.entity_tnt_primed, SoundCategory.BLOCKS, 1.0F, 1.0F);
 			}
 	}
 
