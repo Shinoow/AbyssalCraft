@@ -173,6 +173,8 @@ public class NecronomiconText {
 	public static String CRAFTING_RITUAL_CHARM_2 = translate("necronomicon.text.crafting.ritualcharm.2");
 	public static String CRAFTING_SACRIFICIAL_ALTAR_1 = translate("necronomicon.text.crafting.sacrificialaltar.1");
 	public static String CRAFTING_SACRIFICIAL_ALTAR_2 = translate("necronomicon.text.crafting.sacrificialaltar.2");
+	public static String CRAFTING_ENERGY_COLLECTOR = translate("necronomicon.text.crafting.energycollector");
+	public static String CRAFTING_ENERGY_RELAY = translate("necronomicon.text.crafting.energyrelay");
 
 	//Misc crafting
 	public static String CRAFTING_UPGRADE_KIT_1 = translate("necronomicon.text.crafting.upgradekit.1");
@@ -295,6 +297,10 @@ public class NecronomiconText {
 	public static String PE_TUT_11 = translate("necronomicon.text.pe.11");
 	public static String PE_TUT_12 = translate("necronomicon.text.pe.12");
 	public static String PE_TUT_13 = translate("necronomicon.text.pe.13");
+	public static String PE_TUT_14 = translate("necronomicon.text.pe.14");
+	public static String PE_TUT_15 = translate("necronomicon.text.pe.15");
+	public static String PE_TUT_16 = translate("necronomicon.text.pe.16");
+	public static String PE_TUT_17 = translate("necronomicon.text.pe.17");
 
 	public static String MACHINES_INFO = translate("necronomicon.text.machines.info");
 

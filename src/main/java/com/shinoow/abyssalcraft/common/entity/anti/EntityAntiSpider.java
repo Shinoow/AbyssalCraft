@@ -38,6 +38,7 @@ import net.minecraft.pathfinding.PathNavigateClimber;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.BlockPos;
+import net.minecraft.util.DamageSource;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
@@ -100,6 +101,15 @@ public class EntityAntiSpider extends EntityMob implements IAntiEntity {
 		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.30000001192092896D);
 		if(AbyssalCraft.hardcoreMode) getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(64.0D);
 		else getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(32.0D);
+	}
+
+	@Override
+	public boolean attackEntityAsMob(Entity par1Entity)
+	{
+		if(AbyssalCraft.hardcoreMode && par1Entity instanceof EntityPlayer)
+			par1Entity.attackEntityFrom(DamageSource.causeMobDamage(this).setDamageBypassesArmor(), 1.5F);
+
+		return super.attackEntityAsMob(par1Entity);
 	}
 
 	@Override

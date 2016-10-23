@@ -11,13 +11,17 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.api.necronomicon;
 
+import java.io.IOException;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Map;
 import java.util.NavigableMap;
 
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.texture.TextureUtil;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.FMLLog;
 
 import org.apache.logging.log4j.Level;
@@ -287,8 +291,20 @@ public class NecroData {
 			if(icon != null)
 				if(!(icon instanceof ResourceLocation) && !(icon instanceof ItemStack) && !(icon instanceof CraftingStack))
 					throw new IllegalArgumentException("Icon isn't a ResourceLocation, ItemStack or CraftingStack!");
-			this.icon = icon;
+			this.icon = verify(icon);
 			this.text = text;
+		}
+
+		private Object verify(Object obj){
+			if(!(obj instanceof ResourceLocation)) return obj;
+			if(FMLCommonHandler.instance().getSide().isServer()) return obj;
+			ResourceLocation res = (ResourceLocation)obj;
+			try {
+				TextureUtil.readBufferedImage(Minecraft.getMinecraft().getResourceManager().getResource(res).getInputStream());
+			} catch (IOException e) {
+				return new ResourceLocation("abyssalcraft", "textures/gui/necronomicon/missing.png");
+			}
+			return res;
 		}
 
 		/**

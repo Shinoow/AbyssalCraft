@@ -80,6 +80,18 @@ public class EntityAntiGhoul extends EntityMob implements IAntiEntity {
 	}
 
 	@Override
+	public boolean attackEntityAsMob(Entity par1Entity)
+	{
+		swingItem();
+		boolean flag = super.attackEntityAsMob(par1Entity);
+
+		if(AbyssalCraft.hardcoreMode && par1Entity instanceof EntityPlayer)
+			par1Entity.attackEntityFrom(DamageSource.causeMobDamage(this).setDamageBypassesArmor(), 1.5F);
+
+		return flag;
+	}
+
+	@Override
 	protected String getLivingSound()
 	{
 		return "abyssalcraft:ghoul.normal.idle";

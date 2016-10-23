@@ -36,6 +36,7 @@ public class BlockShoggothOoze extends BlockACBasic {
 
 	public BlockShoggothOoze(){
 		super(Material.ground, 1.0F, 1.0F, Block.soundTypeSand);
+		setTickRandomly(AbyssalCraft.oozeExpire);
 	}
 
 	@Override
@@ -61,6 +62,19 @@ public class BlockShoggothOoze extends BlockACBasic {
 	}
 
 	@Override
+	public void updateTick(World par1World, BlockPos pos, IBlockState state, Random par5Random) {
+		if(AbyssalCraft.oozeExpire)
+			if (!par1World.isRemote && par5Random.nextInt(10) == 0 && par1World.getLightFromNeighbors(pos.up()) >= 13)
+				par1World.setBlockState(pos, Blocks.dirt.getDefaultState());
+	}
+
+	@Override
+	public int tickRate(World worldIn)
+	{
+		return AbyssalCraft.oozeExpire ? 200 : super.tickRate(worldIn);
+	}
+
+	@Override
 	public boolean canPlaceBlockOnSide(World worldIn, BlockPos pos, EnumFacing side)
 	{
 		return super.canPlaceBlockAt(worldIn, pos);
@@ -71,7 +85,7 @@ public class BlockShoggothOoze extends BlockACBasic {
 	{
 		Block block = worldIn.getBlockState(pos).getBlock();
 		if(!block.getMaterial().isLiquid() && block.getMaterial() != Material.air && !block.hasTileEntity(worldIn.getBlockState(pos))
-				&& block.isOpaqueCube() && block.isFullCube() && block.getCollisionBoundingBox(worldIn, pos, block.getDefaultState()) != null)
+				&& block.isFullCube() && block.getCollisionBoundingBox(worldIn, pos, block.getDefaultState()) != null)
 			if(block.getMaterial() == Material.leaves && AbyssalCraft.oozeLeaves || block.getMaterial() == Material.grass && AbyssalCraft.oozeGrass
 			|| block.getMaterial() == Material.ground && AbyssalCraft.oozeGround || block.getMaterial() == Material.sand && AbyssalCraft.oozeSand
 			|| block.getMaterial() == Material.rock && AbyssalCraft.oozeRock || block.getMaterial() == Material.cloth && AbyssalCraft.oozeCloth

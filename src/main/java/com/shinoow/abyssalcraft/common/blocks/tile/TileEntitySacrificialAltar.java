@@ -14,10 +14,6 @@ package com.shinoow.abyssalcraft.common.blocks.tile;
 import java.util.List;
 import java.util.Random;
 
-import com.shinoow.abyssalcraft.api.energy.IEnergyContainer;
-import com.shinoow.abyssalcraft.api.energy.IEnergyContainerItem;
-import com.shinoow.abyssalcraft.lib.util.blocks.ISingletonInventory;
-
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.entity.item.EntityArmorStand;
@@ -32,7 +28,11 @@ import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.ITickable;
 
-public class TileEntitySacrificialAltar extends TileEntity implements IEnergyContainer, ISingletonInventory, ITickable {
+import com.shinoow.abyssalcraft.api.energy.IEnergyCollector;
+import com.shinoow.abyssalcraft.api.energy.IEnergyContainerItem;
+import com.shinoow.abyssalcraft.lib.util.blocks.ISingletonInventory;
+
+public class TileEntitySacrificialAltar extends TileEntity implements IEnergyCollector, ISingletonInventory, ITickable {
 
 	private ItemStack item;
 	private int rot;
@@ -100,10 +100,8 @@ public class TileEntitySacrificialAltar extends TileEntity implements IEnergyCon
 
 		if(item != null)
 			if(item.getItem() instanceof IEnergyContainerItem)
-				if(((IEnergyContainerItem) item.getItem()).canAcceptPE(item) && getContainedEnergy() > 0 && ((IEnergyContainerItem) item.getItem()).getContainedEnergy(item) < ((IEnergyContainerItem) item.getItem()).getMaxEnergy(item)){
-					((IEnergyContainerItem) item.getItem()).addEnergy(item, 1);
-					consumeEnergy(1);
-				}
+				if(!worldObj.isRemote && ((IEnergyContainerItem) item.getItem()).canAcceptPE(item) && canTransferPE())
+					((IEnergyContainerItem) item.getItem()).addEnergy(item, consumeEnergy(1));
 
 		if(entity == null){
 			List<EntityLivingBase> mobs = worldObj.getEntitiesWithinAABB(EntityLivingBase.class, new AxisAlignedBB(pos, pos.add(1, 1, 1)).expand(8, 3, 8));
@@ -179,12 +177,22 @@ public class TileEntitySacrificialAltar extends TileEntity implements IEnergyCon
 
 	@Override
 	public void addEnergy(float energy) {
+		isDirty = true;
 		this.energy += energy;
+		if(this.energy > getMaxEnergy()) this.energy = getMaxEnergy();
 	}
 
 	@Override
-	public void consumeEnergy(float energy) {
-		this.energy -= energy;
+	public float consumeEnergy(float energy) {
+		isDirty = true;
+		if(energy < this.energy){
+			this.energy -= energy;
+			return energy;
+		} else {
+			float ret = this.energy;
+			this.energy = 0;
+			return ret;
+		}
 	}
 
 	@Override
@@ -195,6 +203,12 @@ public class TileEntitySacrificialAltar extends TileEntity implements IEnergyCon
 	@Override
 	public boolean canTransferPE() {
 
-		return true;
+		return getContainedEnergy() > 0;
+	}
+
+	@Override
+	public TileEntity getContainerTile() {
+
+		return this;
 	}
 }

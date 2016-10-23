@@ -186,6 +186,15 @@ public class BlockHandler implements ILifeCycleHandler {
 		ACBlocks.decorative_yog_sothoth_statue = new BlockDecorativeStatue().setUnlocalizedName("yogsothothstatue");
 		ACBlocks.decorative_shub_niggurath_statue = new BlockDecorativeStatue().setUnlocalizedName("shubniggurathstatue");
 		ACBlocks.crystal_cluster = new BlockCrystalCluster().setUnlocalizedName("crystalcluster");
+		ACBlocks.energy_collector = new BlockEnergyCollector();
+		ACBlocks.energy_relay = new BlockEnergyRelay();
+		ACBlocks.energy_container = new BlockEnergyContainer();
+		ACBlocks.tiered_energy_collector = new BlockTieredEnergyCollector();
+		ACBlocks.overworld_energy_relay = new BlockTieredEnergyRelay("owenergyrelay"){ @Override public TileEntity createNewTileEntity(World worldIn, int meta) { return new TileEntityOverworldEnergyRelay(); }};
+		ACBlocks.abyssal_wasteland_energy_relay = new BlockTieredEnergyRelay("awenergyrelay"){ @Override public TileEntity createNewTileEntity(World worldIn, int meta) { return new TileEntityAbyssalWastelandEnergyRelay(); }};
+		ACBlocks.dreadlands_energy_relay = new BlockTieredEnergyRelay("dlenergyrelay"){ @Override public TileEntity createNewTileEntity(World worldIn, int meta) { return new TileEntityDreadlandsEnergyRelay(); }};
+		ACBlocks.omothol_energy_relay = new BlockTieredEnergyRelay("omtenergyrelay"){ @Override public TileEntity createNewTileEntity(World worldIn, int meta) { return new TileEntityOmotholEnergyRelay(); }};
+		ACBlocks.tiered_energy_container = new BlockTieredEnergyContainer();
 
 		((BlockShoggothOoze) ACBlocks.shoggoth_ooze).initBlacklist();
 
@@ -216,6 +225,15 @@ public class BlockHandler implements ILifeCycleHandler {
 		GameRegistry.registerTileEntity(TileEntityTieredSacrificialAltar.class, "tileEntityTieredSacrificialAltar");
 		GameRegistry.registerTileEntity(TileEntityJzaharSpawner.class, "tileEntityJzaharSpawner");
 		GameRegistry.registerTileEntity(TileEntityGatekeeperMinionSpawner.class, "tileEntityGatekeeperMinionSpawner");
+		GameRegistry.registerTileEntity(TileEntityEnergyCollector.class, "tileEntityEnergyCollector");
+		GameRegistry.registerTileEntity(TileEntityEnergyRelay.class, "tileEntityEnergyRelay");
+		GameRegistry.registerTileEntity(TileEntityEnergyContainer.class, "tileEntityEnergyContainer");
+		GameRegistry.registerTileEntity(TileEntityTieredEnergyCollector.class, "tileEntityTieredEnergyCollector");
+		GameRegistry.registerTileEntity(TileEntityOverworldEnergyRelay.class, "tileEntityOverworldEnergyRelay");
+		GameRegistry.registerTileEntity(TileEntityAbyssalWastelandEnergyRelay.class, "tileEntityAbyssalWastelandEnergyRelay");
+		GameRegistry.registerTileEntity(TileEntityDreadlandsEnergyRelay.class, "tileEntityDreadlandsEnergyRelay");
+		GameRegistry.registerTileEntity(TileEntityOmotholEnergyRelay.class, "tileEntityOmotholEnergyRelay");
+		GameRegistry.registerTileEntity(TileEntityTieredEnergyContainer.class, "tileEntityTieredEnergyContainer");
 
 		GameRegistry.registerBlock(ACBlocks.darkstone, "darkstone");
 		GameRegistry.registerBlock(ACBlocks.darkstone_cobblestone, "darkstone_cobble");
@@ -352,11 +370,11 @@ public class BlockHandler implements ILifeCycleHandler {
 		GameRegistry.registerBlock(ACBlocks.shub_niggurath_statue, "shubniggurathstatue");
 		GameRegistry.registerBlock(ACBlocks.monolith_stone, "monolithstone");
 		GameRegistry.registerBlock(ACBlocks.shoggoth_biomass, "shoggothbiomass");
-		GameRegistry.registerBlock(ACBlocks.energy_pedestal, "energypedestal");
+		GameRegistry.registerBlock(ACBlocks.energy_pedestal, ItemPEContainerBlock.class, "energypedestal");
 		GameRegistry.registerBlock(ACBlocks.monolith_pillar, "monolithpillar");
-		GameRegistry.registerBlock(ACBlocks.sacrificial_altar, "sacrificialaltar");
-		GameRegistry.registerBlock(ACBlocks.tiered_energy_pedestal, ItemMetadataBlock.class, "tieredenergypedestal");
-		GameRegistry.registerBlock(ACBlocks.tiered_sacrificial_altar, ItemMetadataBlock.class, "tieredsacrificialaltar");
+		GameRegistry.registerBlock(ACBlocks.sacrificial_altar, ItemPEContainerBlock.class, "sacrificialaltar");
+		GameRegistry.registerBlock(ACBlocks.tiered_energy_pedestal, ItemMetadataPEContainerBlock.class, "tieredenergypedestal");
+		GameRegistry.registerBlock(ACBlocks.tiered_sacrificial_altar, ItemMetadataPEContainerBlock.class, "tieredsacrificialaltar");
 		GameRegistry.registerBlock(ACBlocks.jzahar_spawner, "jzaharspawner");
 		GameRegistry.registerBlock(ACBlocks.minion_of_the_gatekeeper_spawner, "gatekeeperminionspawner");
 		GameRegistry.registerBlock(ACBlocks.mimic_fire, "fire");
@@ -368,6 +386,15 @@ public class BlockHandler implements ILifeCycleHandler {
 		GameRegistry.registerBlock(ACBlocks.decorative_yog_sothoth_statue, ItemDecorativeStatueBlock.class, "decorativeyogsothothstatue");
 		GameRegistry.registerBlock(ACBlocks.decorative_shub_niggurath_statue, ItemDecorativeStatueBlock.class, "decorativeshubniggurathstatue");
 		GameRegistry.registerBlock(ACBlocks.crystal_cluster, ItemCrystalClusterBlock.class, "crystalcluster");
+		GameRegistry.registerBlock(ACBlocks.energy_collector, ItemPEContainerBlock.class, "energycollector");
+		GameRegistry.registerBlock(ACBlocks.energy_relay, ItemPEContainerBlock.class, "energyrelay");
+		GameRegistry.registerBlock(ACBlocks.energy_container, ItemPEContainerBlock.class, "energycontainer");
+		GameRegistry.registerBlock(ACBlocks.tiered_energy_collector, ItemTieredEnergyCollectorBlock.class, "tieredenergycollector");
+		GameRegistry.registerBlock(ACBlocks.overworld_energy_relay, ItemPEContainerBlock.class, "owenergyrelay");
+		GameRegistry.registerBlock(ACBlocks.abyssal_wasteland_energy_relay, ItemPEContainerBlock.class, "awenergyrelay");
+		GameRegistry.registerBlock(ACBlocks.dreadlands_energy_relay, ItemPEContainerBlock.class, "dlenergyrelay");
+		GameRegistry.registerBlock(ACBlocks.omothol_energy_relay, ItemPEContainerBlock.class, "omtenergyrelay");
+		GameRegistry.registerBlock(ACBlocks.tiered_energy_container, ItemTieredEnergyContainerBlock.class, "tieredenergycontainer");
 
 		Blocks.fire.setFireInfo(ACBlocks.darklands_oak_planks, 5, 20);
 		Blocks.fire.setFireInfo(AbyssalCraft.DLTslab2, 5, 20);

@@ -37,11 +37,11 @@ public class ItemHandler implements ILifeCycleHandler {
 		//Misc items
 		ACItems.oblivion_catalyst = new ItemOC();
 		ACItems.staff_of_the_gatekeeper = new ItemStaff();
-		ACItems.gateway_key = new ItemPortalPlacer();
+		ACItems.gateway_key = new ItemPortalPlacer(0, "gatewaykey");
 		ACItems.liquid_coralium_bucket = new ItemCBucket(ACBlocks.liquid_coralium);
 		ACItems.powerstone_tracker = new ItemTrackerPSDL();
 		ACItems.eye_of_the_abyss = new ItemEoA();
-		ACItems.dreaded_gateway_key = new ItemPortalPlacerDL();
+		ACItems.dreaded_gateway_key = new ItemPortalPlacer(1, "gatewaykeydl");
 		ACItems.coralium_brick = new ItemACBasic("cbrick");
 		ACItems.cudgel = new ItemCudgel();
 		ACItems.carbon_cluster = new ItemACBasic("carboncluster");
@@ -49,11 +49,11 @@ public class ItemHandler implements ILifeCycleHandler {
 		ACItems.methane = new ItemACBasic("methane");
 		ACItems.nitre = new ItemACBasic("nitre");
 		ACItems.sulfur = new ItemACBasic("sulfur");
-		ACItems.rlyehian_gateway_key = new ItemPortalPlacerJzh();
+		ACItems.rlyehian_gateway_key = new ItemPortalPlacer(2, "gatewaykeyjzh");
 		ACItems.tin_ingot = new ItemACBasic("tiningot");
 		ACItems.copper_ingot = new ItemACBasic("copperingot");
 		ACItems.life_crystal = new ItemACBasic("lifecrystal");
-		ACItems.shoggoth_flesh = new ItemMetadata("shoggothflesh", true, "overworld", "abyssalwasteland", "dreadlands", "omothol", "darkrealm");
+		ACItems.shoggoth_flesh = new ItemMetadata("shoggothflesh", "overworld", "abyssalwasteland", "dreadlands", "omothol", "darkrealm");
 		ACItems.eldritch_scale = new ItemACBasic("eldritchscale");
 		ACItems.omothol_flesh = new ItemOmotholFlesh(3, 0.3F, false);
 		ACItems.necronomicon = new ItemNecronomicon("necronomicon", 0);
@@ -65,10 +65,11 @@ public class ItemHandler implements ILifeCycleHandler {
 		ACItems.medium_crystal_bag = new ItemCrystalBag("crystalbag_medium");
 		ACItems.large_crystal_bag = new ItemCrystalBag("crystalbag_large");
 		ACItems.huge_crystal_bag = new ItemCrystalBag("crystalbag_huge");
-		ACItems.ingot_nugget = new ItemMetadata("nugget", true, "abyssalnite", "coralium", "dreadium", "ethaxium");
-		ACItems.essence = new ItemMetadata("essence", true, "abyssalwasteland", "dreadlands", "omothol");
-		ACItems.skin = new ItemMetadata("skin", true, "abyssalwasteland", "dreadlands", "omothol");
+		ACItems.ingot_nugget = new ItemMetadata("nugget", "abyssalnite", "coralium", "dreadium", "ethaxium");
+		ACItems.essence = new ItemMetadata("essence", "abyssalwasteland", "dreadlands", "omothol");
+		ACItems.skin = new ItemMetadata("skin", "abyssalwasteland", "dreadlands", "omothol");
 		ACItems.essence_of_the_gatekeeper = new ItemGatekeeperEssence();
+		ACItems.interdimensional_cage = new ItemInterdimensionalCage();
 
 		//Coins
 		ACItems.coin = new ItemCoin("coin");
@@ -91,14 +92,14 @@ public class ItemHandler implements ILifeCycleHandler {
 		ACItems.shub_niggurath_engraving = new ItemEngraving("shubniggurath", 10).setCreativeTab(ACTabs.tabCoins);
 
 		//Charms
-		ACItems.ritual_charm = new ItemCharm("ritualcharm", true, null);
-		ACItems.cthulhu_charm = new ItemCharm("cthulhucharm", false, DeityType.CTHULHU);
-		ACItems.hastur_charm = new ItemCharm("hasturcharm", false, DeityType.HASTUR);
-		ACItems.jzahar_charm = new ItemCharm("jzaharcharm", false, DeityType.JZAHAR);
-		ACItems.azathoth_charm = new ItemCharm("azathothcharm", false, DeityType.AZATHOTH);
-		ACItems.nyarlathotep_charm = new ItemCharm("nyarlathotepcharm", false, DeityType.NYARLATHOTEP);
-		ACItems.yog_sothoth_charm = new ItemCharm("yogsothothcharm", false, DeityType.YOGSOTHOTH);
-		ACItems.shub_niggurath_charm = new ItemCharm("shubniggurathcharm", false, DeityType.SHUBNIGGURATH);
+		ACItems.ritual_charm = new ItemCharm("ritualcharm", null);
+		ACItems.cthulhu_charm = new ItemCharm("cthulhucharm", DeityType.CTHULHU);
+		ACItems.hastur_charm = new ItemCharm("hasturcharm", DeityType.HASTUR);
+		ACItems.jzahar_charm = new ItemCharm("jzaharcharm", DeityType.JZAHAR);
+		ACItems.azathoth_charm = new ItemCharm("azathothcharm", DeityType.AZATHOTH);
+		ACItems.nyarlathotep_charm = new ItemCharm("nyarlathotepcharm", DeityType.NYARLATHOTEP);
+		ACItems.yog_sothoth_charm = new ItemCharm("yogsothothcharm", DeityType.YOGSOTHOTH);
+		ACItems.shub_niggurath_charm = new ItemCharm("shubniggurathcharm", DeityType.SHUBNIGGURATH);
 
 		//Ethaxium
 		ACItems.ethaxium_brick = new ItemACBasic("ethbrick");
@@ -430,6 +431,7 @@ public class ItemHandler implements ILifeCycleHandler {
 		GameRegistry.registerItem(ACItems.yog_sothoth_engraving, "engraving_yogsothoth");
 		GameRegistry.registerItem(ACItems.shub_niggurath_engraving, "engraving_shubniggurath");
 		GameRegistry.registerItem(ACItems.essence_of_the_gatekeeper, "gatekeeperessence");
+		GameRegistry.registerItem(ACItems.interdimensional_cage, "interdimensionalcage");
 		//		GameRegistry.registerItem(shadowPlate, "shadowplate");
 
 		AbyssalCraftAPI.setRepairItems();

@@ -11,7 +11,6 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.api;
 
-
 import java.util.List;
 import java.util.Map;
 
@@ -36,7 +35,9 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.api.entity.EntityUtil;
+import com.shinoow.abyssalcraft.api.internal.DummyMethodHandler;
 import com.shinoow.abyssalcraft.api.internal.DummyNecroDataHandler;
+import com.shinoow.abyssalcraft.api.internal.IInternalMethodHandler;
 import com.shinoow.abyssalcraft.api.internal.IInternalNecroDataHandler;
 import com.shinoow.abyssalcraft.api.item.ACItems;
 import com.shinoow.abyssalcraft.api.item.ItemEngraving;
@@ -61,7 +62,7 @@ public class AbyssalCraftAPI {
 	/**
 	 * String used to specify the API version in the "package-info.java" classes
 	 */
-	public static final String API_VERSION = "1.8.2";
+	public static final String API_VERSION = "1.8.4";
 
 	public static Enchantment coralium_enchantment, dread_enchantment, light_pierce, iron_wall;
 
@@ -106,6 +107,7 @@ public class AbyssalCraftAPI {
 	public static ToolMaterial ethaxiumTool = EnumHelper.addToolMaterial("ETHAXIUM", 8, 2800, 16.0F, 8, 20);
 
 	private static IInternalNecroDataHandler internalNDHandler = new DummyNecroDataHandler();
+	private static IInternalMethodHandler internalMethodHandler = new DummyMethodHandler();
 
 	/**
 	 * Used by AbyssalCraft to set the Internal NecroData Handler.<br>
@@ -120,11 +122,31 @@ public class AbyssalCraftAPI {
 	}
 
 	/**
+	 * Used by AbyssalCraft to set the Internal Method Handler.<br>
+	 * If any other mod tries to use this method, nothing will happen.
+	 * @param handler Handler instance
+	 */
+	public static void setInternalMethodHandler(IInternalMethodHandler handler){
+		if(internalMethodHandler.getClass().getName().equals(DummyMethodHandler.class.getName())
+				&& Loader.instance().getLoaderState() == LoaderState.PREINITIALIZATION
+				&& Loader.instance().activeModContainer().getModId().equals("abyssalcraft"))
+			internalMethodHandler = handler;
+	}
+
+	/**
 	 * Internal NecroData handler.<br>
 	 * Use this to alter the internal NecroData instances.
 	 */
 	public static IInternalNecroDataHandler getInternalNDHandler(){
 		return internalNDHandler;
+	}
+
+	/**
+	 * Internal Method handler.<br>
+	 * Use this to handle internal method calls.
+	 */
+	public static IInternalMethodHandler getInternalMethodHandler(){
+		return internalMethodHandler;
 	}
 
 	/**

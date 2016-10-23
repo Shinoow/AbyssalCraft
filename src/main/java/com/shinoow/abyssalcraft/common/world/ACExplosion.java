@@ -13,7 +13,6 @@ package com.shinoow.abyssalcraft.common.world;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
@@ -35,6 +34,7 @@ import net.minecraft.util.Vec3;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
 
+import com.google.common.collect.Sets;
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.common.entity.EntityODBPrimed;
 import com.shinoow.abyssalcraft.common.entity.EntityODBcPrimed;
@@ -77,95 +77,90 @@ public class ACExplosion extends Explosion
 	@Override
 	public void doExplosionA()
 	{
-		float f = explosionSize;
-		Set<BlockPos> hashset = new HashSet<BlockPos>();
-		int i;
-		int j;
-		int k;
-		double d5;
-		double d6;
-		double d7;
-
-		for (i = 0; i < chunkSize; ++i)
-			for (j = 0; j < chunkSize; ++j)
-				for (k = 0; k < chunkSize; ++k)
-					if (i == 0 || i == chunkSize - 1 || j == 0 || j == chunkSize - 1 || k == 0 || k == chunkSize - 1)
+		Set<BlockPos> set = Sets.<BlockPos>newHashSet();
+		for (int j = 0; j < chunkSize; ++j)
+			for (int k = 0; k < chunkSize; ++k)
+				for (int l = 0; l < chunkSize; ++l)
+					if (j == 0 || j == chunkSize - 1 || k == 0 || k == chunkSize - 1 || l == 0 || l == chunkSize - 1)
 					{
-						double d0 = i / (chunkSize - 1.0F) * 2.0F - 1.0F;
-						double d1 = j / (chunkSize - 1.0F) * 2.0F - 1.0F;
-						double d2 = k / (chunkSize - 1.0F) * 2.0F - 1.0F;
+						double d0 = j / (chunkSize - 1.0F) * 2.0F - 1.0F;
+						double d1 = k / (chunkSize - 1.0F) * 2.0F - 1.0F;
+						double d2 = l / (chunkSize - 1.0F) * 2.0F - 1.0F;
 						double d3 = Math.sqrt(d0 * d0 + d1 * d1 + d2 * d2);
 						d0 /= d3;
 						d1 /= d3;
 						d2 /= d3;
-						float f1 = explosionSize * (0.7F + worldObj.rand.nextFloat() * 0.6F);
-						d5 = explosionX;
-						d6 = explosionY;
-						d7 = explosionZ;
+						float f = explosionSize * (0.7F + worldObj.rand.nextFloat() * 0.6F);
+						double d4 = explosionX;
+						double d6 = explosionY;
+						double d8 = explosionZ;
 
-						for (float f2 = 0.3F; f1 > 0.0F; f1 -= f2 * 0.75F)
+						for (; f > 0.0F; f -= 0.22500001F)
 						{
-							BlockPos pos = new BlockPos(d5, d6, d7);
-							IBlockState state = worldObj.getBlockState(pos);
+							BlockPos blockpos = new BlockPos(d4, d6, d8);
+							IBlockState iblockstate = worldObj.getBlockState(blockpos);
 
-							if (state.getBlock().getMaterial() != Material.air)
+							if (iblockstate.getBlock().getMaterial() != Material.air)
 							{
-								float f3 = exploder != null ? exploder.getExplosionResistance(this, worldObj, pos, state) : state.getBlock().getExplosionResistance(worldObj, pos, null, this);
-								f1 -= (f3 + 0.3F) * f2;
+								float f2 = exploder != null ? exploder.getExplosionResistance(this, worldObj, blockpos, iblockstate) : iblockstate.getBlock().getExplosionResistance(worldObj, blockpos, (Entity)null, this);
+								f -= (f2 + 0.3F) * 0.3F;
 							}
 
-							if (f1 > 0.0F && (exploder == null || exploder.verifyExplosion(this, worldObj, pos, state, f1)))
-								hashset.add(pos);
+							if (f > 0.0F && (exploder == null || exploder.verifyExplosion(this, worldObj, blockpos, iblockstate, f)))
+								set.add(blockpos);
 
-							d5 += d0 * 0.30000001192092896D;
+							d4 += d0 * 0.30000001192092896D;
 							d6 += d1 * 0.30000001192092896D;
-							d7 += d2 * 0.30000001192092896D;
+							d8 += d2 * 0.30000001192092896D;
 						}
 					}
 
-		affectedBlockPositions.addAll(hashset);
-		explosionSize *= 2.0F;
-		i = MathHelper.floor_double(explosionX - explosionSize - 1.0D);
-		j = MathHelper.floor_double(explosionX + explosionSize + 1.0D);
-		k = MathHelper.floor_double(explosionY - explosionSize - 1.0D);
-		int i2 = MathHelper.floor_double(explosionY + explosionSize + 1.0D);
-		int l = MathHelper.floor_double(explosionZ - explosionSize - 1.0D);
-		int j2 = MathHelper.floor_double(explosionZ + explosionSize + 1.0D);
-		List<?> list = worldObj.getEntitiesWithinAABBExcludingEntity(exploder, new AxisAlignedBB(i, k, l, j, i2, j2));
+		affectedBlockPositions.addAll(set);
+		float f3 = explosionSize * 2.0F;
+		int k1 = MathHelper.floor_double(explosionX - f3 - 1.0D);
+		int l1 = MathHelper.floor_double(explosionX + f3 + 1.0D);
+		int i2 = MathHelper.floor_double(explosionY - f3 - 1.0D);
+		int i1 = MathHelper.floor_double(explosionY + f3 + 1.0D);
+		int j2 = MathHelper.floor_double(explosionZ - f3 - 1.0D);
+		int j1 = MathHelper.floor_double(explosionZ + f3 + 1.0D);
+		List<Entity> list = worldObj.getEntitiesWithinAABBExcludingEntity(exploder, new AxisAlignedBB(k1, i2, j2, l1, i1, j1));
+		net.minecraftforge.event.ForgeEventFactory.onExplosionDetonate(worldObj, this, list, f3);
 		Vec3 vec3 = new Vec3(explosionX, explosionY, explosionZ);
 
-		for (int i1 = 0; i1 < list.size(); ++i1)
+		for (int k2 = 0; k2 < list.size(); ++k2)
 		{
-			Entity entity = (Entity)list.get(i1);
-			double d4 = entity.getDistance(explosionX, explosionY, explosionZ) / explosionSize;
+			Entity entity = list.get(k2);
 
-			if (d4 <= 1.0D)
+			if (!entity.isImmuneToExplosions())
 			{
-				d5 = entity.posX - explosionX;
-				d6 = entity.posY + entity.getEyeHeight() - explosionY;
-				d7 = entity.posZ - explosionZ;
-				double d9 = MathHelper.sqrt_double(d5 * d5 + d6 * d6 + d7 * d7);
+				double d12 = entity.getDistance(explosionX, explosionY, explosionZ) / f3;
 
-				if (d9 != 0.0D)
+				if (d12 <= 1.0D)
 				{
-					d5 /= d9;
-					d6 /= d9;
-					d7 /= d9;
-					double d10 = worldObj.getBlockDensity(vec3, entity.getEntityBoundingBox());
-					double d11 = (1.0D - d4) * d10;
-					entity.attackEntityFrom(DamageSource.setExplosionSource(this), (int)((d11 * d11 + d11) / 2.0D * 8.0D * explosionSize + 1.0D));
-					double d8 = EnchantmentProtection.func_92092_a(entity, d11);
-					entity.motionX += d5 * d8;
-					entity.motionY += d6 * d8;
-					entity.motionZ += d7 * d8;
+					double d5 = entity.posX - explosionX;
+					double d7 = entity.posY + entity.getEyeHeight() - explosionY;
+					double d9 = entity.posZ - explosionZ;
+					double d13 = MathHelper.sqrt_double(d5 * d5 + d7 * d7 + d9 * d9);
 
-					if (entity instanceof EntityPlayer)
-						field_77288_k.put((EntityPlayer)entity, new Vec3(d5 * d11, d6 * d11, d7 * d11));
+					if (d13 != 0.0D)
+					{
+						d5 /= d13;
+						d7 /= d13;
+						d9 /= d13;
+						double d14 = worldObj.getBlockDensity(vec3, entity.getEntityBoundingBox());
+						double d10 = (1.0D - d12) * d14;
+						entity.attackEntityFrom(DamageSource.setExplosionSource(this), (int)((d10 * d10 + d10) / 2.0D * 8.0D * f3 + 1.0D));
+						double d11 = EnchantmentProtection.func_92092_a(entity, d10);
+						entity.motionX += d5 * d11;
+						entity.motionY += d7 * d11;
+						entity.motionZ += d9 * d11;
+
+						if (entity instanceof EntityPlayer && !((EntityPlayer)entity).capabilities.disableDamage)
+							field_77288_k.put((EntityPlayer)entity, new Vec3(d5 * d10, d7 * d10, d9 * d10));
+					}
 				}
 			}
 		}
-
-		explosionSize = f;
 	}
 
 	/**

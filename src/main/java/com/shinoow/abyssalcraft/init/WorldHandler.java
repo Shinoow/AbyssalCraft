@@ -11,7 +11,7 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.init;
 
-import static com.shinoow.abyssalcraft.AbyssalCraft.*;
+import static com.shinoow.abyssalcraft.init.InitHandler.*;
 import net.minecraft.world.WorldProvider;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.gen.structure.MapGenStructureIO;
@@ -24,6 +24,7 @@ import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.fml.common.event.*;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
+import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.api.biome.ACBiomes;
 import com.shinoow.abyssalcraft.common.structures.abyss.stronghold.MapGenAbyStronghold;
 import com.shinoow.abyssalcraft.common.structures.abyss.stronghold.StructureAbyStrongholdPieces;
@@ -97,10 +98,10 @@ public class WorldHandler implements ILifeCycleHandler {
 		BiomeDictionary.registerBiomeType(ACBiomes.omothol, Type.DEAD);
 		BiomeDictionary.registerBiomeType(ACBiomes.dark_realm, Type.DEAD);
 
-		registerDimension(ACLib.abyssal_wasteland_id, WorldProviderAbyss.class, keepLoaded1);
-		registerDimension(ACLib.dreadlands_id, WorldProviderDreadlands.class, keepLoaded2);
-		registerDimension(ACLib.omothol_id, WorldProviderOmothol.class, keepLoaded3);
-		registerDimension(ACLib.dark_realm_id, WorldProviderDarkRealm.class, keepLoaded4);
+		registerDimension(ACLib.abyssal_wasteland_id, WorldProviderAbyss.class, AbyssalCraft.keepLoaded1);
+		registerDimension(ACLib.dreadlands_id, WorldProviderDreadlands.class, AbyssalCraft.keepLoaded2);
+		registerDimension(ACLib.omothol_id, WorldProviderOmothol.class, AbyssalCraft.keepLoaded3);
+		registerDimension(ACLib.dark_realm_id, WorldProviderDarkRealm.class, AbyssalCraft.keepLoaded4);
 	}
 
 	@Override

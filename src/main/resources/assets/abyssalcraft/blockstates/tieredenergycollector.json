@@ -1,0 +1,8 @@
+{
+	"variants": {
+		"dimension=overworld": { "model": "abyssalcraft:tieredenergycollector_0" },
+		"dimension=abyssal_wasteland": { "model": "abyssalcraft:tieredenergycollector_1" },
+		"dimension=dreadlands": { "model": "abyssalcraft:tieredenergycollector_2" },
+		"dimension=omothol": { "model": "abyssalcraft:tieredenergycollector_3" }
+	}
+}

@@ -27,6 +27,7 @@ import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.BlockPos;
+import net.minecraft.util.DamageSource;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.World;
 
@@ -57,6 +58,15 @@ public class EntityAntiPlayer extends EntityMob implements IAntiEntity {
 			getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(4.0D);
 		} else
 			getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(40.0D);
+	}
+
+	@Override
+	public boolean attackEntityAsMob(Entity par1Entity)
+	{
+		if(AbyssalCraft.hardcoreMode && par1Entity instanceof EntityPlayer)
+			par1Entity.attackEntityFrom(DamageSource.causeMobDamage(this).setDamageBypassesArmor(), 1);
+
+		return super.attackEntityAsMob(par1Entity);
 	}
 
 	@Override

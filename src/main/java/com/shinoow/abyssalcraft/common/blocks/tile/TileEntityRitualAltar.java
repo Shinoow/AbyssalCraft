@@ -107,10 +107,8 @@ public class TileEntityRitualAltar extends TileEntity implements ITickable, IRit
 				if(user != null){
 					for(ItemStack item : user.inventory.mainInventory)
 						if(item != null && item.getItem() instanceof IEnergyTransporterItem &&
-						((IEnergyTransporterItem) item.getItem()).canTransferPEExternally(item) && ((IEnergyTransporterItem) item.getItem()).getContainedEnergy(item) > 0){
-							if(!worldObj.isRemote)
-								((IEnergyTransporterItem) item.getItem()).consumeEnergy(item, ritual.getReqEnergy()/200);
-							consumedEnergy += ritual.getReqEnergy()/200;
+						((IEnergyTransporterItem) item.getItem()).canTransferPEExternally(item)){
+							consumedEnergy += ((IEnergyTransporterItem) item.getItem()).consumeEnergy(item, ritual.getReqEnergy()/200);
 							break;
 						}
 				} else user = worldObj.getClosestPlayer(pos.getX(), pos.getY(), pos.getZ(), 5);
@@ -119,17 +117,14 @@ public class TileEntityRitualAltar extends TileEntity implements ITickable, IRit
 						if(!MinecraftForge.EVENT_BUS.post(new RitualEvent.Post(user, ritual, worldObj, pos))){
 							for(ItemStack item : user.inventory.mainInventory)
 								if(item != null && item.getItem() instanceof IEnergyTransporterItem &&
-								((IEnergyTransporterItem) item.getItem()).canTransferPEExternally(item) && ((IEnergyTransporterItem) item.getItem()).getContainedEnergy(item) > 0){
-									if(!worldObj.isRemote)
-										((IEnergyTransporterItem) item.getItem()).consumeEnergy(item, ritual.getReqEnergy()/200);
-									consumedEnergy += ritual.getReqEnergy()/200;
+								((IEnergyTransporterItem) item.getItem()).canTransferPEExternally(item)){
+									consumedEnergy += ((IEnergyTransporterItem) item.getItem()).consumeEnergy(item, ritual.getReqEnergy()/200);
 									break;
 								}
 							if(consumedEnergy == ritual.getReqEnergy())
 								ritual.completeRitual(worldObj, pos, user);
-							else {
-								if(!worldObj.isRemote)
-									worldObj.addWeatherEffect(new EntityLightningBolt(worldObj, pos.getX(), pos.getY() + 1, pos.getZ()));
+							else if(!worldObj.isRemote){
+								worldObj.addWeatherEffect(new EntityLightningBolt(worldObj, pos.getX(), pos.getY() + 1, pos.getZ()));
 								DisruptionHandler.instance().generateDisruption(null, worldObj, pos, worldObj.getEntitiesWithinAABB(EntityPlayer.class, new AxisAlignedBB(pos, pos.add(1, 1, 1)).expand(16, 16, 16)));
 							}
 							ritualTimer = 0;
@@ -139,9 +134,10 @@ public class TileEntityRitualAltar extends TileEntity implements ITickable, IRit
 							isDirty = true;
 						}
 					} else {
-						if(!worldObj.isRemote)
+						if(!worldObj.isRemote){
 							worldObj.addWeatherEffect(new EntityLightningBolt(worldObj, pos.getX(), pos.getY() + 1, pos.getZ()));
-						DisruptionHandler.instance().generateDisruption(null, worldObj, pos, worldObj.getEntitiesWithinAABB(EntityPlayer.class, new AxisAlignedBB(pos, pos.add(1, 1, 1)).expand(16, 16, 16)));
+							DisruptionHandler.instance().generateDisruption(null, worldObj, pos, worldObj.getEntitiesWithinAABB(EntityPlayer.class, new AxisAlignedBB(pos, pos.add(1, 1, 1)).expand(16, 16, 16)));
+						}
 						ritualTimer = 0;
 						ritual = null;
 						consumedEnergy = 0;
@@ -278,7 +274,7 @@ public class TileEntityRitualAltar extends TileEntity implements ITickable, IRit
 											if(ritual.canCompleteRitual(world, pos, player))
 												if(!MinecraftForge.EVENT_BUS.post(new RitualEvent.Pre(player, ritual, world, pos))){
 													if(!world.isRemote){
-														mob.attackEntityFrom(DamageSource.magic, mob.getMaxHealth()*100);
+														mob.attackEntityFrom(DamageSource.magic, 200000);
 														world.addWeatherEffect(new EntityLightningBolt(worldObj, mob.posX, mob.posY, mob.posZ));
 													}
 													ritualTimer = 1;

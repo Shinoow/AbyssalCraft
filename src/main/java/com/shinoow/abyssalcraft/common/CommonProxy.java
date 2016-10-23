@@ -19,12 +19,12 @@ import net.minecraft.util.BlockPos;
 import net.minecraft.util.IThreadListener;
 import net.minecraft.world.World;
 
-import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.client.gui.*;
 import com.shinoow.abyssalcraft.client.gui.necronomicon.GuiNecronomicon;
 import com.shinoow.abyssalcraft.common.blocks.tile.*;
 import com.shinoow.abyssalcraft.common.inventory.*;
 import com.shinoow.abyssalcraft.common.items.ItemNecronomicon;
+import com.shinoow.abyssalcraft.lib.ACLib;
 
 import net.minecraftforge.fml.common.network.IGuiHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
@@ -38,27 +38,30 @@ public class CommonProxy implements IGuiHandler {
 
 		if(entity != null)
 			switch(ID) {
-			case AbyssalCraft.crystallizerGuiID:
+			case ACLib.crystallizerGuiID:
 				if (entity instanceof TileEntityCrystallizer)
 					return new ContainerCrystallizer(player.inventory, (TileEntityCrystallizer) entity);
 				break;
-			case AbyssalCraft.transmutatorGuiID:
+			case ACLib.transmutatorGuiID:
 				if (entity instanceof TileEntityTransmutator)
 					return new ContainerTransmutator(player.inventory, (TileEntityTransmutator) entity);
 				break;
-			case AbyssalCraft.engraverGuiID:
+			case ACLib.engraverGuiID:
 				if (entity instanceof TileEntityEngraver)
 					return new ContainerEngraver(player.inventory, (TileEntityEngraver) entity);
 				break;
-			case AbyssalCraft.materializerGuiID:
+			case ACLib.materializerGuiID:
 				if (entity instanceof TileEntityMaterializer)
 					return new ContainerMaterializer(player.inventory, (TileEntityMaterializer) entity);
 				break;
-
+			case ACLib.energycontainerGuiID:
+				if (entity instanceof TileEntityEnergyContainer)
+					return new ContainerEnergyContainer(player.inventory, (TileEntityEnergyContainer) entity);
+				break;
 			}
 		if(stack != null)
 			switch(ID){
-			case AbyssalCraft.crystalbagGuiID:
+			case ACLib.crystalbagGuiID:
 				return new ContainerCrystalBag(player.inventory, new InventoryCrystalBag(player.getHeldItem()));
 			}
 		return null;
@@ -71,30 +74,34 @@ public class CommonProxy implements IGuiHandler {
 
 		if(entity != null)
 			switch(ID) {
-			case AbyssalCraft.crystallizerGuiID:
+			case ACLib.crystallizerGuiID:
 				if (entity instanceof TileEntityCrystallizer)
 					return new GuiCrystallizer(player.inventory, (TileEntityCrystallizer) entity);
 				break;
-			case AbyssalCraft.transmutatorGuiID:
+			case ACLib.transmutatorGuiID:
 				if (entity instanceof TileEntityTransmutator)
 					return new GuiTransmutator(player.inventory, (TileEntityTransmutator) entity);
 				break;
-			case AbyssalCraft.engraverGuiID:
+			case ACLib.engraverGuiID:
 				if (entity instanceof TileEntityEngraver)
 					return new GuiEngraver(player.inventory, (TileEntityEngraver) entity);
 				break;
-			case AbyssalCraft.materializerGuiID:
+			case ACLib.materializerGuiID:
 				if (entity instanceof TileEntityMaterializer)
 					return new GuiMaterializer(player.inventory, (TileEntityMaterializer) entity);
+				break;
+			case ACLib.energycontainerGuiID:
+				if (entity instanceof TileEntityEnergyContainer)
+					return new GuiEnergyContainer(player.inventory, (TileEntityEnergyContainer) entity);
 				break;
 			}
 		if(stack != null)
 			switch(ID){
-			case AbyssalCraft.necronmiconGuiID:
+			case ACLib.necronmiconGuiID:
 				if(stack.getItem() instanceof ItemNecronomicon)
 					return new GuiNecronomicon(((ItemNecronomicon)stack.getItem()).getBookType());
 				break;
-			case AbyssalCraft.crystalbagGuiID:
+			case ACLib.crystalbagGuiID:
 				return new GuiCrystalBag(new ContainerCrystalBag(player.inventory, new InventoryCrystalBag(player.getHeldItem())));
 			}
 		return null;

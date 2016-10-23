@@ -26,6 +26,8 @@ import net.minecraft.world.World;
  */
 public class NecronomiconInfusionRitual extends NecronomiconCreationRitual {
 
+	private String[] tags;
+
 	/**
 	 * A Necronomicon Infusion Ritual
 	 * @param unlocalizedName A string representing the ritual name
@@ -72,6 +74,11 @@ public class NecronomiconInfusionRitual extends NecronomiconCreationRitual {
 		this(unlocalizedName, bookType, -1, requiredEnergy, item, sacrifice, offerings);
 	}
 
+	public NecronomiconInfusionRitual setTags(String... strings){
+		tags = strings;
+		return this;
+	}
+
 	@Override
 	public boolean canCompleteRitual(World world, BlockPos pos, EntityPlayer player) {
 
@@ -86,11 +93,74 @@ public class NecronomiconInfusionRitual extends NecronomiconCreationRitual {
 
 	@Override
 	protected void completeRitualServer(World world, BlockPos pos, EntityPlayer player){
-		if(canCompleteRitual(world, pos, player)) super.completeRitualServer(world, pos, player);
+		if(canCompleteRitual(world, pos, player)){
+			NBTTagCompound data = new NBTTagCompound();
+			if(tags.length > 0){
+				TileEntity altar = world.getTileEntity(pos);
+
+				NBTTagCompound compound = new NBTTagCompound();
+				altar.writeToNBT(compound);
+				ItemStack stack = ItemStack.loadItemStackFromNBT(compound.getCompoundTag("Item"));
+				if(!stack.hasTagCompound())
+					stack.setTagCompound(new NBTTagCompound());
+				for(String s : tags)
+					if(stack.getTagCompound().hasKey(s))
+						data.setTag(s, stack.getTagCompound().getTag(s));
+			}
+			super.completeRitualServer(world, pos, player);
+			if(!data.hasNoTags()){
+				TileEntity altar = world.getTileEntity(pos);
+
+				NBTTagCompound compound = new NBTTagCompound();
+				altar.writeToNBT(compound);
+				ItemStack stack = ItemStack.loadItemStackFromNBT(compound.getCompoundTag("Item"));
+				if(!stack.hasTagCompound())
+					stack.setTagCompound(new NBTTagCompound());
+				for(String e : tags)
+					if(data.hasKey(e))
+						stack.getTagCompound().setTag(e, data.getTag(e));
+				NBTTagCompound item = new NBTTagCompound();
+				stack.writeToNBT(item);
+				compound.setTag("Item", item);
+				altar.readFromNBT(compound);
+			}
+		}
 	}
+
 
 	@Override
 	protected void completeRitualClient(World world, BlockPos pos, EntityPlayer player){
-		if(canCompleteRitual(world, pos, player)) super.completeRitualClient(world, pos, player);
+		if(canCompleteRitual(world, pos, player)){
+			NBTTagCompound data = new NBTTagCompound();
+			if(tags.length > 0){
+				TileEntity altar = world.getTileEntity(pos);
+
+				NBTTagCompound compound = new NBTTagCompound();
+				altar.writeToNBT(compound);
+				ItemStack stack = ItemStack.loadItemStackFromNBT(compound.getCompoundTag("Item"));
+				if(!stack.hasTagCompound())
+					stack.setTagCompound(new NBTTagCompound());
+				for(String s : tags)
+					if(stack.getTagCompound().hasKey(s))
+						data.setTag(s, stack.getTagCompound().getTag(s));
+			}
+			super.completeRitualClient(world, pos, player);
+			if(!data.hasNoTags()){
+				TileEntity altar = world.getTileEntity(pos);
+
+				NBTTagCompound compound = new NBTTagCompound();
+				altar.writeToNBT(compound);
+				ItemStack stack = ItemStack.loadItemStackFromNBT(compound.getCompoundTag("Item"));
+				if(!stack.hasTagCompound())
+					stack.setTagCompound(new NBTTagCompound());
+				for(String e : tags)
+					if(data.hasKey(e))
+						stack.getTagCompound().setTag(e, data.getTag(e));
+				NBTTagCompound item = new NBTTagCompound();
+				stack.writeToNBT(item);
+				compound.setTag("Item", item);
+				altar.readFromNBT(compound);
+			}
+		}
 	}
 }

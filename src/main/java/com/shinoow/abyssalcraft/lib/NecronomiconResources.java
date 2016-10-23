@@ -97,7 +97,11 @@ public class NecronomiconResources {
 	public static final ResourceLocation PE_TUT_5 = new ResourceLocation("abyssalcraft", "textures/gui/necronomicon/pe/charms.png");
 	public static final ResourceLocation PE_TUT_6 = new ResourceLocation("abyssalcraft", "textures/gui/necronomicon/pe/energy_pedestal.png");
 	public static final ResourceLocation PE_TUT_7 = new ResourceLocation("abyssalcraft", "textures/gui/necronomicon/pe/sacrificial_altar.png");
-	public static final ResourceLocation PE_TUT_8 = new ResourceLocation("abyssalcraft", "textures/gui/necronomicon/pe/tiers.png");
+	public static final ResourceLocation PE_TUT_8 = new ResourceLocation("abyssalcraft", "textures/gui/necronomicon/pe/energy_collector.png");
+	public static final ResourceLocation PE_TUT_9 = new ResourceLocation("abyssalcraft", "textures/gui/necronomicon/pe/energy_relay.png");
+	public static final ResourceLocation PE_TUT_10 = new ResourceLocation("abyssalcraft", "textures/gui/necronomicon/pe/relays.png");
+	public static final ResourceLocation PE_TUT_11 = new ResourceLocation("abyssalcraft", "textures/gui/necronomicon/pe/energy_container.png");
+	public static final ResourceLocation PE_TUT_12 = new ResourceLocation("abyssalcraft", "textures/gui/necronomicon/pe/tiers.png");
 
 	//Transmutation grid
 	public static final ResourceLocation TRANSMUTATION = new ResourceLocation("abyssalcraft", "textures/gui/necronomicon/transmutation.png");

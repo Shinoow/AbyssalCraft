@@ -354,7 +354,9 @@ public class InternalNecroDataHandler extends DummyNecroDataHandler {
 				new Page(3, new CraftingStack(ACBlocks.monolith_pillar), NecronomiconText.CRAFTING_MONOLITH_PILLAR_1),
 				new Page(4, new CraftingStack(new ItemStack(ACItems.ritual_charm, 1, 0)), NecronomiconText.CRAFTING_RITUAL_CHARM_1),
 				new Page(5, new CraftingStack(ACBlocks.sacrificial_altar), NecronomiconText.CRAFTING_SACRIFICIAL_ALTAR_1),
-				new Page(6, NecronomiconText.CRAFTING_SACRIFICIAL_ALTAR_2));
+				new Page(6, NecronomiconText.CRAFTING_SACRIFICIAL_ALTAR_2),
+				new Page(7, new CraftingStack(ACBlocks.energy_collector), NecronomiconText.CRAFTING_ENERGY_COLLECTOR),
+				new Page(8, new CraftingStack(ACBlocks.energy_relay), NecronomiconText.CRAFTING_ENERGY_RELAY));
 		addPages("rituals", "potentialenergy", new Page(1, NecronomiconText.PE_TUT_1),
 				new Page(2, NecronomiconResources.PE_TUT_1, NecronomiconText.PE_TUT_2),
 				new Page(3, NecronomiconResources.PE_TUT_2, NecronomiconText.PE_TUT_3),
@@ -367,7 +369,11 @@ public class InternalNecroDataHandler extends DummyNecroDataHandler {
 				new Page(10, NecronomiconResources.PE_TUT_6, NecronomiconText.PE_TUT_10),
 				new Page(11, NecronomiconResources.PE_TUT_7, NecronomiconText.PE_TUT_11),
 				new Page(12, NecronomiconResources.PE_TUT_8, NecronomiconText.PE_TUT_12),
-				new Page(13, NecronomiconText.PE_TUT_13));
+				new Page(13, NecronomiconResources.PE_TUT_9, NecronomiconText.PE_TUT_13),
+				new Page(14, NecronomiconResources.PE_TUT_10, NecronomiconText.PE_TUT_14),
+				new Page(15, NecronomiconResources.PE_TUT_11, NecronomiconText.PE_TUT_15),
+				new Page(16, NecronomiconResources.PE_TUT_12, NecronomiconText.PE_TUT_16),
+				new Page(17, NecronomiconText.PE_TUT_17));
 		addPages("miscinfo", "specialmaterials", new Page(1, new CraftingStack(ACItems.cobblestone_upgrade_kit), NecronomiconText.CRAFTING_UPGRADE_KIT_1),
 				new Page(2, new CraftingStack(ACItems.iron_upgrade_kit), NecronomiconText.CRAFTING_UPGRADE_KIT_2),
 				new Page(3, new CraftingStack(new ItemStack(ACItems.iron_plate, 2), null, null, null, null, Items.iron_ingot, null, null, Items.iron_ingot, null), NecronomiconText.CRAFTING_IRON_PLATE),

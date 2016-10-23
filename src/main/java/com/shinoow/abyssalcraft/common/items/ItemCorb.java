@@ -14,16 +14,10 @@ package com.shinoow.abyssalcraft.common.items;
 import java.util.List;
 
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumChatFormatting;
-import net.minecraft.util.EnumFacing;
 import net.minecraft.util.StatCollector;
-import net.minecraft.world.World;
-
-import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.lib.ACTabs;
 
 public class ItemCorb extends Item {
@@ -31,9 +25,21 @@ public class ItemCorb extends Item {
 	public ItemCorb() {
 		super();
 		maxStackSize = 1;
-		setMaxDamage(1000);
+		setMaxDamage(10);
 		setUnlocalizedName("transmutationgem");
 		setCreativeTab(ACTabs.tabTools);
+	}
+
+	@Override
+	public ItemStack getContainerItem(ItemStack stack) {
+		ItemStack result = stack.copy();
+		result.setItemDamage(stack.getItemDamage() + 1);
+		return result;
+	}
+
+	@Override
+	public boolean hasContainerItem(ItemStack stack) {
+		return stack.getItemDamage() < stack.getMaxDamage();
 	}
 
 	@Override
@@ -42,37 +48,11 @@ public class ItemCorb extends Item {
 		return EnumChatFormatting.AQUA + super.getItemStackDisplayName(par1ItemStack);
 	}
 
-	@Override
-	public boolean onItemUse(ItemStack is, EntityPlayer player, World w, BlockPos pos, EnumFacing side, float hitX, float hitY, float hitZ){
-		if(w.getBlockState(pos).getBlock() == Blocks.stone){
-			w.setBlockState(pos, ACBlocks.darkstone.getDefaultState());
-			is.damageItem(50, player);
-		}else if(w.getBlockState(pos).getBlock() == ACBlocks.darkstone){
-			w.setBlockState(pos, Blocks.stone.getDefaultState());
-			is.damageItem(50, player);
-		}else if(w.getBlockState(pos).getBlock() == Blocks.cobblestone){
-			w.setBlockState(pos, ACBlocks.darkstone_cobblestone.getDefaultState());
-			is.damageItem(50, player);
-		}else if(w.getBlockState(pos).getBlock() == ACBlocks.darkstone_cobblestone){
-			w.setBlockState(pos, Blocks.cobblestone.getDefaultState());
-			is.damageItem(50, player);
-		}else if(w.getBlockState(pos).getBlock() == Blocks.stonebrick){
-			w.setBlockState(pos, ACBlocks.darkstone_brick.getDefaultState());
-			is.damageItem(50, player);
-		}else if(w.getBlockState(pos).getBlock() == ACBlocks.darkstone_brick){
-			w.setBlockState(pos, Blocks.stonebrick.getDefaultState());
-			is.damageItem(50, player);
-		}
-		return false;
-	}
-
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
 	public void addInformation(ItemStack is, EntityPlayer player, List l, boolean B){
-		l.add(StatCollector.translateToLocal("tooltip.corb.1"));
-		l.add(StatCollector.translateToLocal("tooltip.corb.2"));
-		l.add(StatCollector.translateToLocal("tooltip.corb.3"));
-		l.add(StatCollector.translateToLocal("tooltip.corb.4"));
+		l.add(StatCollector.translateToLocal("tooltip.corb"));
+		l.add(10 - getDamage(is) + "/" + getMaxDamage(is));
 	}
 
 	@Override

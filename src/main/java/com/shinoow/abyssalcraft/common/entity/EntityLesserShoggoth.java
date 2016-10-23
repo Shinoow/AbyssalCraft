@@ -292,20 +292,31 @@ public class EntityLesserShoggoth extends EntityMob implements ICoraliumEntity, 
 	@Override
 	public boolean attackEntityAsMob(Entity par1Entity)
 	{
-		if (super.attackEntityAsMob(par1Entity))
-			if (par1Entity instanceof EntityLivingBase)
-				if(worldObj.provider.getDimensionId() == ACLib.abyssal_wasteland_id &&
-				!EntityUtil.isEntityCoralium((EntityLivingBase)par1Entity))
-					((EntityLivingBase)par1Entity).addPotionEffect(new PotionEffect(AbyssalCraftAPI.coralium_plague.id, 100));
-				else if(worldObj.provider.getDimensionId() == ACLib.dreadlands_id &&
-						!EntityUtil.isEntityDread((EntityLivingBase)par1Entity))
-					((EntityLivingBase)par1Entity).addPotionEffect(new PotionEffect(AbyssalCraftAPI.dread_plague.id, 100));
-				else if(worldObj.provider.getDimensionId() == ACLib.omothol_id)
-					((EntityLivingBase)par1Entity).addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, 100));
-				else if(worldObj.provider.getDimensionId() == ACLib.dark_realm_id)
-					((EntityLivingBase)par1Entity).addPotionEffect(new PotionEffect(Potion.blindness.id, 100));
+		boolean flag = super.attackEntityAsMob(par1Entity);
 
-		return super.attackEntityAsMob(par1Entity);
+		if (flag)
+			if (par1Entity instanceof EntityLivingBase)
+				switch(getShoggothType()){
+				case 1:
+					if(!EntityUtil.isEntityCoralium((EntityLivingBase)par1Entity))
+						((EntityLivingBase)par1Entity).addPotionEffect(new PotionEffect(AbyssalCraftAPI.coralium_plague.id, 100));
+					break;
+				case 2:
+					if(!EntityUtil.isEntityDread((EntityLivingBase)par1Entity))
+						((EntityLivingBase)par1Entity).addPotionEffect(new PotionEffect(AbyssalCraftAPI.dread_plague.id, 100));
+					break;
+				case 3:
+					((EntityLivingBase)par1Entity).addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, 100));
+					break;
+				case 4:
+					((EntityLivingBase)par1Entity).addPotionEffect(new PotionEffect(Potion.blindness.id, 100));
+					break;
+				}
+
+		if(AbyssalCraft.hardcoreMode && par1Entity instanceof EntityPlayer)
+			par1Entity.attackEntityFrom(DamageSource.causeMobDamage(this).setDamageBypassesArmor(), 3);
+
+		return flag;
 	}
 
 	@Override

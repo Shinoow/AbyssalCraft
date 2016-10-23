@@ -77,8 +77,18 @@ public interface IEnergyManipulator {
 	public void setActiveAmplifier(AmplifierType amplifier);
 
 	/**
-	 * Something bad that has the potential of happening
-	 * @param factor A random occasion (could be 5% trigger chance if activated etc)
+	 * Increases the tolerance value (tolerance determines a disruption is fired)
+	 * @param num Amount to increase with
 	 */
-	public void disrupt(boolean factor);
+	public void addTolerance(int num);
+
+	/**
+	 * Returns the manipulator's current tolerance value (tolerance determines a disruption is fired)
+	 */
+	public int getTolerance();
+
+	/**
+	 * Fires off a Disruption, which can lead to bad things happening
+	 */
+	public void disrupt();
 }

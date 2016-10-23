@@ -30,6 +30,7 @@ import net.minecraft.pathfinding.PathNavigate;
 import net.minecraft.pathfinding.PathNavigateClimber;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.BlockPos;
+import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
@@ -79,10 +80,14 @@ public class EntityChagarothSpawn extends EntityMob implements IDreadEntity {
 	@Override
 	public boolean attackEntityAsMob(Entity par1Entity){
 
-		if (super.attackEntityAsMob(par1Entity))
-			if (par1Entity instanceof EntityLivingBase)
+		boolean flag = super.attackEntityAsMob(par1Entity);
+
+		if(flag)
+			if(par1Entity instanceof EntityLivingBase)
 				((EntityLivingBase)par1Entity).addPotionEffect(new PotionEffect(AbyssalCraftAPI.dread_plague.id, 100));
-		return super.attackEntityAsMob(par1Entity);
+		if(AbyssalCraft.hardcoreMode && par1Entity instanceof EntityPlayer)
+			par1Entity.attackEntityFrom(DamageSource.causeMobDamage(this).setDamageBypassesArmor(), 3);
+		return flag;
 	}
 
 	@Override

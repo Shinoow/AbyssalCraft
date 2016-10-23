@@ -1,0 +1,17 @@
+{
+	"forge_marker": 1,
+	"defaults": {
+		"textures" : {
+			"0": "abyssalcraft:blocks/drs",
+			"particle": "abyssalcraft:blocks/drs"
+		}
+	},
+	"variants": {
+		"facing=north": { "model": "abyssalcraft:energyrelay" },
+        "facing=south": { "model": "abyssalcraft:energyrelay", "y": 180 },
+        "facing=west":  { "model": "abyssalcraft:energyrelay", "y": 270 },
+        "facing=east":  { "model": "abyssalcraft:energyrelay", "y": 90 },
+        "facing=up":    { "model": "abyssalcraft:energyrelay", "x": -90 },
+        "facing=down":  { "model": "abyssalcraft:energyrelay", "x": 90 }
+	}
+}

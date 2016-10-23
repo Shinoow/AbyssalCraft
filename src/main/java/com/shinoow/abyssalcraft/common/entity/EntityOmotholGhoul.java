@@ -32,6 +32,7 @@ import net.minecraft.item.Item;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.BlockPos;
+import net.minecraft.util.DamageSource;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.World;
 
@@ -77,18 +78,20 @@ public class EntityOmotholGhoul extends EntityMob implements IAntiEntity, ICoral
 	}
 
 	@Override
-	public boolean attackEntityAsMob(Entity par1Entity)
-	{
-		if(super.attackEntityAsMob(par1Entity))
+	public boolean attackEntityAsMob(Entity par1Entity) {
+
+		swingItem();
+		boolean flag = super.attackEntityAsMob(par1Entity);
+
+		if(flag)
 			if(par1Entity instanceof EntityLivingBase){
 				((EntityLivingBase)par1Entity).addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, 100));
 				((EntityLivingBase)par1Entity).addPotionEffect(new PotionEffect(Potion.blindness.id, 20));
 				((EntityLivingBase)par1Entity).addPotionEffect(new PotionEffect(Potion.nightVision.id, 20));
 			}
 
-
-		swingItem();
-		boolean flag = super.attackEntityAsMob(par1Entity);
+		if(AbyssalCraft.hardcoreMode && par1Entity instanceof EntityPlayer)
+			par1Entity.attackEntityFrom(DamageSource.causeMobDamage(this).setDamageBypassesArmor(), 3);
 
 		return flag;
 	}

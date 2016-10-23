@@ -354,7 +354,7 @@ public class TileEntityTransmutator extends TileEntity implements ISidedInventor
 			if (item == ACItems.coralium_gem_cluster_8) return 1600;
 			if (item == ACItems.coralium_gem_cluster_9) return 1800;
 			if (item == ACItems.coralium_pearl) return 2000;
-			if (item == ACItems.transmutation_gem) return 10000;
+			if (item == ACItems.transmutation_gem) return 1000 * (10 - par1ItemStack.getItemDamage());
 			if (item == ACItems.chunk_of_coralium) return 16200;
 			if (item == ACItems.liquid_coralium_bucket) return 20000;
 			if (item == Item.getItemFromBlock(ACBlocks.liquid_coralium)) return 22000;

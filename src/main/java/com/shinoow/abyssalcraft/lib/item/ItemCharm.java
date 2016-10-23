@@ -36,8 +36,13 @@ public class ItemCharm extends ItemMetadata implements IAmplifierCharm {
 
 	private DeityType deity;
 
-	public ItemCharm(String name, boolean moreIcons, DeityType deity) {
-		super(name, moreIcons, "empty", "range", "duration", "power");
+	@Deprecated
+	public ItemCharm(String name, boolean moreIcons, DeityType deity){
+		this(name, deity);
+	}
+
+	public ItemCharm(String name, DeityType deity) {
+		super(name, "empty", "range", "duration", "power");
 		this.deity = deity;
 	}
 

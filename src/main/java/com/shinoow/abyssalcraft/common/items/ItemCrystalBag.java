@@ -15,6 +15,7 @@ import java.util.List;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.api.item.ACItems;
+import com.shinoow.abyssalcraft.lib.ACLib;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -39,7 +40,7 @@ public class ItemCrystalBag extends ItemACBasic {
 		setInventorySize(stack);
 		if (!world.isRemote)
 			if (!player.isSneaking())
-				player.openGui(AbyssalCraft.instance, AbyssalCraft.crystalbagGuiID, player.worldObj, (int) player.posX, (int) player.posY, (int) player.posZ);
+				player.openGui(AbyssalCraft.instance, ACLib.crystalbagGuiID, player.worldObj, (int) player.posX, (int) player.posY, (int) player.posZ);
 		return stack;
 	}
 

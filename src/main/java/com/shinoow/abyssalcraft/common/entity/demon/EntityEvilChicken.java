@@ -15,6 +15,7 @@ import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.common.entity.EntityLesserShoggoth;
 
 import net.minecraft.block.Block;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.IEntityLivingData;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIAttackOnCollide;
@@ -64,6 +65,15 @@ public class EntityEvilChicken extends EntityMob {
 			getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(20.0D);
 			getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(4.0D);
 		} else getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(10.0D);
+	}
+
+	@Override
+	public boolean attackEntityAsMob(Entity par1Entity)
+	{
+		if(AbyssalCraft.hardcoreMode && par1Entity instanceof EntityPlayer)
+			par1Entity.attackEntityFrom(DamageSource.causeMobDamage(this).setDamageBypassesArmor(), 1.5F);
+
+		return super.attackEntityAsMob(par1Entity);
 	}
 
 	@Override

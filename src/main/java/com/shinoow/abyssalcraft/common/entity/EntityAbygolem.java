@@ -12,6 +12,7 @@
 package com.shinoow.abyssalcraft.common.entity;
 
 import net.minecraft.block.Block;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIAttackOnCollide;
 import net.minecraft.entity.ai.EntityAIHurtByTarget;
@@ -51,6 +52,15 @@ public class EntityAbygolem extends EntityMob {
 			getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(40.0D);
 			getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(8.0D);
 		} else getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(4.0D);
+	}
+
+	@Override
+	public boolean attackEntityAsMob(Entity par1Entity) {
+
+		if(AbyssalCraft.hardcoreMode && par1Entity instanceof EntityPlayer)
+			par1Entity.attackEntityFrom(DamageSource.causeMobDamage(this).setDamageBypassesArmor(), 1.5F);
+
+		return super.attackEntityAsMob(par1Entity);
 	}
 
 	@Override

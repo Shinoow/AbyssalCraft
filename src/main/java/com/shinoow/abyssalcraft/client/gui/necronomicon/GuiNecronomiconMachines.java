@@ -71,6 +71,8 @@ public class GuiNecronomiconMachines extends GuiNecronomicon {
 		buttonList.add(crystallizer = new ButtonCategory(5, i + 14, b0 + 58, this, StatCollector.translateToLocal("container.abyssalcraft.crystallizer"), getItem(2)));
 		//	buttonList.add(engraver = new ButtonCategory(6, i + 14, b0 + 75, this, StatCollector.translateToLocal("container.abyssalcraft.engraver"), getItem(3)));
 		//	buttonList.add(materializer = new ButtonCategory(7, i + 14, b0 + 92, this, StatCollector.translateToLocal("container.abyssalcraft.materializer"), getItem(3)));
+
+		updateButtons();
 	}
 
 	private void updateButtons()
@@ -89,7 +91,7 @@ public class GuiNecronomiconMachines extends GuiNecronomicon {
 	@Override
 	protected void actionPerformed(GuiButton button)
 	{
-		if (button.enabled)
+		if (button.enabled){
 			if(button.id == 0)
 				mc.displayGuiScreen((GuiScreen)null);
 			else if(button.id == 1){
@@ -101,7 +103,7 @@ public class GuiNecronomiconMachines extends GuiNecronomicon {
 				else if(currTurnup == 0 && isInfo){
 					initGui();
 					isInfo = isMInfo = isTra = isCry = false;
-					setTurnupLimit(1);
+					setTurnupLimit(2);
 				} else if (currTurnup > 0)
 					--currTurnup;
 			} else if(button.id == 3){
@@ -125,7 +127,8 @@ public class GuiNecronomiconMachines extends GuiNecronomicon {
 				//	isMat = true;
 				//	drawButtons();
 			}
-		updateButtons();
+			updateButtons();
+		}
 	}
 
 	@SuppressWarnings("unchecked")
@@ -386,8 +389,6 @@ public class GuiNecronomiconMachines extends GuiNecronomicon {
 	}
 
 	private void drawTItems(Entry<ItemStack, ItemStack> entry, int num, int low, int mid, int high, int x, int y){
-		boolean unicode = fontRendererObj.getUnicodeFlag();
-		fontRendererObj.setUnicodeFlag(false);
 		int k = (width - guiWidth) / 2;
 		byte b0 = 2;
 		if(num < mid && num > low-1){
@@ -397,12 +398,9 @@ public class GuiNecronomiconMachines extends GuiNecronomicon {
 			renderItem(k + 141, b0 + 28 + (num-mid)*20 + num-mid, entry.getKey(), x, y);
 			renderItem(k + 185, b0 + 28 + (num-mid)*20 + num-mid, entry.getValue(), x, y);
 		}
-		fontRendererObj.setUnicodeFlag(unicode);
 	}
 
 	private void drawCItems(Entry<ItemStack, ItemStack[]> entry, int num, int low, int mid, int high, int x, int y){
-		boolean unicode = fontRendererObj.getUnicodeFlag();
-		fontRendererObj.setUnicodeFlag(false);
 		int k = (width - guiWidth) / 2;
 		byte b0 = 2;
 		if(num < mid && num > low-1){
@@ -415,12 +413,13 @@ public class GuiNecronomiconMachines extends GuiNecronomicon {
 			renderItem(k + 185, b0 + 28 + (num-mid)*20 + num-mid, entry.getValue()[0], x, y);
 			renderItem(k + 185 + 34, b0 + 28 + (num-mid)*20 + num-mid, entry.getValue()[1], x, y);
 		}
-		fontRendererObj.setUnicodeFlag(unicode);
 	}
 
 	private ItemStack tooltipStack;
 	public void renderItem(int xPos, int yPos, ItemStack stack, int mx, int my)
 	{
+		if(stack == null) return;
+
 		if(stack != null && stack.getItemDamage() == OreDictionary.WILDCARD_VALUE)
 			stack.setItemDamage(0);
 

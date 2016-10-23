@@ -501,10 +501,7 @@ public class EntityDragonBoss extends EntityMob implements IBossDisplayData, IEn
 		if (par1EntityDragonPart != dragonPartHead)
 			par3 = par3 / 4.0F + 1.0F;
 
-		if(par3 > 50)
-			if(par3 > 500001 || par3 < 500000)
-				if(par3 > 750001.5F || par3 < 750001)
-					par3 = 30 + worldObj.rand.nextInt(20);
+		if(par3 > 30) par3 = 10 + worldObj.rand.nextInt(10);
 
 		float f1 = rotationYaw * (float)Math.PI / 180.0F;
 		float f2 = MathHelper.sin(f1);

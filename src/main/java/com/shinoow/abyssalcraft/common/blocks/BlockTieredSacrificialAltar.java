@@ -22,14 +22,17 @@ import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockState;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumParticleTypes;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
@@ -144,7 +147,7 @@ public class BlockTieredSacrificialAltar extends BlockContainer {
 		Random rand = new Random();
 		TileEntityTieredSacrificialAltar altar = (TileEntityTieredSacrificialAltar) world.getTileEntity(pos);
 
-		if(altar != null)
+		if(altar != null){
 			if(altar.getItem() != null){
 				float f = rand.nextFloat() * 0.8F + 0.1F;
 				float f1 = rand.nextFloat() * 0.8F + 0.1F;
@@ -157,8 +160,49 @@ public class BlockTieredSacrificialAltar extends BlockContainer {
 				item.motionZ = (float)rand.nextGaussian() * f3;
 				world.spawnEntityInWorld(item);
 			}
+			ItemStack stack = new ItemStack(getItemDropped(state, rand, 1), 1, damageDropped(state));
+			if(!stack.hasTagCompound())
+				stack.setTagCompound(new NBTTagCompound());
+			NBTTagCompound data = new NBTTagCompound();
+			altar.writeToNBT(data);
+			stack.getTagCompound().setFloat("PotEnergy", data.getFloat("PotEnergy"));
+			stack.getTagCompound().setInteger("CollectionLimit", data.getInteger("CollectionLimit"));
+			stack.getTagCompound().setInteger("CoolDown", data.getInteger("CoolDown"));
+			float f = rand.nextFloat() * 0.8F + 0.1F;
+			float f1 = rand.nextFloat() * 0.8F + 0.1F;
+			float f2 = rand.nextFloat() * 0.8F + 0.1F;
+
+			EntityItem item = new EntityItem(world, pos.getX() + f, pos.getY() + f1, pos.getZ() + f2, stack);
+			float f3 = 0.05F;
+			item.motionX = (float)rand.nextGaussian() * f3;
+			item.motionY = (float)rand.nextGaussian() * f3 + 0.2F;
+			item.motionZ = (float)rand.nextGaussian() * f3;
+			world.spawnEntityInWorld(item);
+		}
 
 		super.breakBlock(world, pos, state);
+	}
+
+	@Override
+	public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack)
+	{
+		if(stack.hasTagCompound()){
+			TileEntity tile = worldIn.getTileEntity(pos);
+			if(tile != null && tile instanceof TileEntityTieredSacrificialAltar){
+				NBTTagCompound data = new NBTTagCompound();
+				tile.writeToNBT(data);
+				data.setFloat("PotEnergy", stack.getTagCompound().getFloat("PotEnergy"));
+				data.setInteger("CollectionLimit", stack.getTagCompound().getInteger("CollectionLimit"));
+				data.setInteger("CoolDown", stack.getTagCompound().getInteger("CoolDown"));
+				tile.readFromNBT(data);
+			}
+		}
+	}
+
+	@Override
+	public List<ItemStack> getDrops(IBlockAccess world, BlockPos pos, IBlockState state, int fortune)
+	{
+		return new java.util.ArrayList<ItemStack>();
 	}
 
 	@Override

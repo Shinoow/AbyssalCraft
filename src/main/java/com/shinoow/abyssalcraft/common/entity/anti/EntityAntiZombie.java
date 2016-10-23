@@ -40,6 +40,7 @@ import net.minecraft.item.Item;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.pathfinding.PathNavigateGround;
 import net.minecraft.util.BlockPos;
+import net.minecraft.util.DamageSource;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeModContainer;
@@ -185,6 +186,9 @@ public class EntityAntiZombie extends EntityMob implements IAntiEntity {
 			if (getHeldItem() == null && isBurning() && rand.nextFloat() < i * 0.3F)
 				par1Entity.setFire(2 * i);
 		}
+
+		if(AbyssalCraft.hardcoreMode && par1Entity instanceof EntityPlayer)
+			par1Entity.attackEntityFrom(DamageSource.causeMobDamage(this).setDamageBypassesArmor(), 1.5F);
 
 		return flag;
 	}

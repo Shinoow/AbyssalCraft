@@ -21,6 +21,9 @@ import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.common.inventory.ContainerCrystallizer;
 import com.shinoow.abyssalcraft.common.inventory.ContainerEngraver;
 import com.shinoow.abyssalcraft.common.inventory.ContainerTransmutator;
+import com.shinoow.abyssalcraft.integration.jei.rending.RendingRecipeCategory;
+import com.shinoow.abyssalcraft.integration.jei.rending.RendingRecipeHandler;
+import com.shinoow.abyssalcraft.integration.jei.rending.RendingRecipeMaker;
 import com.shinoow.abyssalcraft.integration.jei.ritual.*;
 import com.shinoow.abyssalcraft.integration.jei.transmutator.*;
 import com.shinoow.abyssalcraft.integration.jei.crystallizer.*;
@@ -29,24 +32,21 @@ import com.shinoow.abyssalcraft.integration.jei.engraver.*;
 @JEIPlugin
 public class ACJEIPlugin implements IModPlugin {
 
-	private IJeiHelpers jeiHelpers;
-	private IItemRegistry itemRegistry;
+	@Override
+	public void onJeiHelpersAvailable(IJeiHelpers jeiHelpers) {}
 
 	@Override
-	public void onJeiHelpersAvailable(IJeiHelpers jeiHelpers) {
-		this.jeiHelpers = jeiHelpers;
-	}
-
-	@Override
-	public void onItemRegistryAvailable(IItemRegistry itemRegistry) {
-		this.itemRegistry = itemRegistry;
-	}
+	public void onItemRegistryAvailable(IItemRegistry itemRegistry) {}
 
 	@Override
 	public void register(IModRegistry registry) {
 		if(!Loader.isModLoaded("abyssalcraft")) return;
 
-		JEIUtils utils = new JEIUtils(itemRegistry);
+		IJeiHelpers jeiHelpers = registry.getJeiHelpers();
+
+		jeiHelpers.getNbtIgnoreList().ignoreNbtTagNames("PotEnergy");
+
+		JEIUtils utils = new JEIUtils(registry.getItemRegistry());
 
 		IGuiHelper guiHelper = jeiHelpers.getGuiHelper();
 		registry.addRecipeCategories(new TransmutatorFuelCategory(guiHelper),
@@ -54,14 +54,16 @@ public class ACJEIPlugin implements IModPlugin {
 				new CrystallizerFuelCategory(guiHelper),
 				new CrystallizationCategory(guiHelper),
 				new RitualRecipeCategory(guiHelper),
-				new EngraverRecipeCategory(guiHelper));
+				new EngraverRecipeCategory(guiHelper),
+				new RendingRecipeCategory(guiHelper));
 
 		registry.addRecipeHandlers(new TransmutatorFuelRecipeHandler(),
 				new TransmutationRecipeHandler(),
 				new CrystallizerFuelRecipeHandler(),
 				new CrystallizationRecipeHandler(),
 				new RitualRecipeHandler(),
-				new EngravingRecipeHandler());
+				new EngravingRecipeHandler(),
+				new RendingRecipeHandler());
 
 		IRecipeTransferRegistry recipeTransferRegistry = registry.getRecipeTransferRegistry();
 
@@ -77,6 +79,7 @@ public class ACJEIPlugin implements IModPlugin {
 		registry.addRecipes(CrystallizerFuelRecipeMaker.getFuelRecipes(utils, jeiHelpers));
 		registry.addRecipes(RitualRecipeMaker.getRituals());
 		registry.addRecipes(EngravingRecipeMaker.getEngraverRecipes());
+		registry.addRecipes(RendingRecipeMaker.getRending());
 
 		jeiHelpers.getItemBlacklist().addItemToBlacklist(new ItemStack(AbyssalCraft.devsword));
 		jeiHelpers.getItemBlacklist().addItemToBlacklist(new ItemStack(ACBlocks.crystallizer_active));

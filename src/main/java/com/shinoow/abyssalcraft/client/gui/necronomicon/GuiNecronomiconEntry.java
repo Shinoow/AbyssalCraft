@@ -11,7 +11,6 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.client.gui.necronomicon;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,7 +19,6 @@ import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.renderer.entity.RenderItem;
-import net.minecraft.client.renderer.texture.TextureUtil;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -33,6 +31,7 @@ import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
+import com.google.common.collect.Lists;
 import com.shinoow.abyssalcraft.api.necronomicon.CraftingStack;
 import com.shinoow.abyssalcraft.api.necronomicon.NecroData;
 import com.shinoow.abyssalcraft.api.necronomicon.NecroData.Chapter;
@@ -52,6 +51,8 @@ public class GuiNecronomiconEntry extends GuiNecronomicon {
 	private GuiNecronomicon parent;
 	private Item icon;
 	private boolean bool1, bool2, bool3, bool4, bool5, bool6, bool7;
+	private List<String> failCache = Lists.newArrayList();
+	private List<String> successCache = Lists.newArrayList();
 
 	public GuiNecronomiconEntry(int bookType, NecroData nd, GuiNecronomicon gui, Item item){
 		super(bookType);
@@ -213,7 +214,6 @@ public class GuiNecronomiconEntry extends GuiNecronomicon {
 				renderItem(k + 60, b0 + 28,(ItemStack)icon1, x, y);
 			if(icon1 instanceof ResourceLocation){
 				GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-				icon1 = verify((ResourceLocation)icon1);
 				mc.renderEngine.bindTexture((ResourceLocation)icon1);
 				drawTexturedModalRect(k, b0, 0, 0, 256, 256);
 			}
@@ -221,10 +221,7 @@ public class GuiNecronomiconEntry extends GuiNecronomicon {
 				GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 				mc.renderEngine.bindTexture(NecronomiconResources.CRAFTING);
 				drawTexturedModalRect(k, b0, 0, 0, 256, 256);
-				boolean unicode = fontRendererObj.getUnicodeFlag();
-				fontRendererObj.setUnicodeFlag(false);
 				renderItem(k + 93, b0 + 52,((CraftingStack)icon1).getOutput(), x, y);
-				fontRendererObj.setUnicodeFlag(unicode);
 				for(int i = 0; i <= 2; i++){
 					renderItem(k + 24 +i*21, b0 + 31,((CraftingStack)icon1).getFirstArray()[i], x, y);
 					renderItem(k + 24 +i*21, b0 + 52,((CraftingStack)icon1).getSecondArray()[i], x, y);
@@ -238,7 +235,6 @@ public class GuiNecronomiconEntry extends GuiNecronomicon {
 				renderItem(k + 60 + n, b0 + 28,(ItemStack)icon2, x, y);
 			if(icon2 instanceof ResourceLocation){
 				GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-				icon2 = verify((ResourceLocation)icon2);
 				mc.renderEngine.bindTexture((ResourceLocation)icon2);
 				drawTexturedModalRect(k + n, b0, 0, 0, 256, 256);
 			}
@@ -253,10 +249,7 @@ public class GuiNecronomiconEntry extends GuiNecronomicon {
 				GL11.glEnable(GL11.GL_DEPTH_TEST);
 				GL11.glPopMatrix();
 				GL11.glDisable(GL11.GL_LIGHTING);
-				boolean unicode = fontRendererObj.getUnicodeFlag();
-				fontRendererObj.setUnicodeFlag(false);
 				renderItem(k + 93 + n, b0 + 52,((CraftingStack)icon2).getOutput(), x, y);
-				fontRendererObj.setUnicodeFlag(unicode);
 				for(int i = 0; i <= 2; i++){
 					renderItem(k + 24 + n +i*21, b0 + 31,((CraftingStack)icon2).getFirstArray()[i], x, y);
 					renderItem(k + 24 + n +i*21, b0 + 52,((CraftingStack)icon2).getSecondArray()[i], x, y);
@@ -281,15 +274,6 @@ public class GuiNecronomiconEntry extends GuiNecronomicon {
 			}
 			GuiRenderHelper.renderTooltip(x, y, parsedTooltip);
 		}
-	}
-
-	private ResourceLocation verify(ResourceLocation res){
-		try {
-			TextureUtil.readBufferedImage(mc.getResourceManager().getResource(res).getInputStream());
-		} catch (IOException e) {
-			return new ResourceLocation("abyssalcraft", "textures/gui/necronomicon/missing.png");
-		}
-		return res;
 	}
 
 	private void writeTexts(Object icon1, Object icon2, String text1, String text2){
@@ -325,6 +309,7 @@ public class GuiNecronomiconEntry extends GuiNecronomicon {
 	private ItemStack tooltipStack;
 	public void renderItem(int xPos, int yPos, ItemStack stack, int mx, int my)
 	{
+		if(stack == null) return;
 
 		if(stack != null && stack.getItemDamage() == OreDictionary.WILDCARD_VALUE)
 			stack.setItemDamage(0);

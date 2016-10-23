@@ -11,10 +11,7 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.common.items.armor;
 
-import java.util.List;
-
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
@@ -54,18 +51,8 @@ public class ItemDreadArmor extends ItemArmor {
 	public void onArmorTick(World world, EntityPlayer player, ItemStack itemstack) {
 		if (itemstack.getItem() == ACItems.dreaded_abyssalnite_helmet)
 			player.addPotionEffect(new PotionEffect(Potion.nightVision.getId(), 260, 0));
-		if (itemstack.getItem() == ACItems.dreaded_abyssalnite_chestplate) {
+		if (itemstack.getItem() == ACItems.dreaded_abyssalnite_chestplate)
 			player.addPotionEffect(new PotionEffect(Potion.fireResistance.getId(), 20, 3));
-			List list = player.worldObj.getEntitiesWithinAABBExcludingEntity(player, player.getEntityBoundingBox().expand(4D, 0.0D, 4D));
-			if (list != null)
-				for (int k2 = 0; k2 < list.size(); k2++) {
-					Entity entity = (Entity)list.get(k2);
-					if (entity instanceof EntityLiving && !entity.isDead)
-						entity.setFire(99);
-					else if (entity instanceof EntityPlayer && !entity.isDead)
-						entity.setFire(99);
-				}
-		}
 		if (itemstack.getItem() == ACItems.dreaded_abyssalnite_leggings)
 			player.addPotionEffect(new PotionEffect(Potion.fireResistance.getId(), 20, 3));
 		if (itemstack.getItem() == ACItems.dreaded_abyssalnite_boots)

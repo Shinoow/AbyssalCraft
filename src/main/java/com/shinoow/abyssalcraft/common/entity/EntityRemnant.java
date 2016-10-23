@@ -126,6 +126,9 @@ public class EntityRemnant extends EntityMob implements IMerchant, IAntiEntity, 
 		swingItem();
 		boolean flag = super.attackEntityAsMob(par1Entity);
 
+		if(AbyssalCraft.hardcoreMode && par1Entity instanceof EntityPlayer)
+			par1Entity.attackEntityFrom(DamageSource.causeMobDamage(this).setDamageBypassesArmor(), 3);
+
 		return flag;
 	}
 

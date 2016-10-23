@@ -12,6 +12,7 @@
 package com.shinoow.abyssalcraft.common.entity;
 
 import net.minecraft.block.Block;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIAttackOnCollide;
 import net.minecraft.entity.ai.EntityAIHurtByTarget;
@@ -23,6 +24,7 @@ import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.BlockPos;
+import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
@@ -57,6 +59,15 @@ public class EntityChagarothFist extends EntityMob implements IDreadEntity {
 			getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(50.0D);
 			getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(7.5D);
 		}
+	}
+
+	@Override
+	public boolean attackEntityAsMob(Entity par1Entity) {
+
+		if(AbyssalCraft.hardcoreMode && par1Entity instanceof EntityPlayer)
+			par1Entity.attackEntityFrom(DamageSource.causeMobDamage(this).setDamageBypassesArmor(), 3);
+
+		return super.attackEntityAsMob(par1Entity);
 	}
 
 	@Override

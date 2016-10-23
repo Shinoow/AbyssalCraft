@@ -12,9 +12,9 @@
 package com.shinoow.abyssalcraft.common.ritual;
 
 import java.util.List;
+import java.util.Random;
 
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.IEntityLivingData;
 import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.passive.EntityChicken;
 import net.minecraft.entity.passive.EntityCow;
@@ -28,37 +28,17 @@ import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.BlockPos;
+import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
 
 import com.google.common.collect.Lists;
-import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.api.ritual.NecronomiconRitual;
-import com.shinoow.abyssalcraft.common.entity.EntityLesserShoggoth;
 
 public class NecronomiconBreedingRitual extends NecronomiconRitual {
-
-	private boolean shoggothInfestation;
 
 	public NecronomiconBreedingRitual() {
 		super("breeding", 0, 500F, new Object[]{Items.wheat, Items.potato, Items.carrot, Items.melon,
 				Blocks.pumpkin, Items.wheat_seeds, Items.melon_seeds, Items.pumpkin_seeds});
-	}
-
-	/**
-	 * Used to check if Shoggoths happened
-	 * @return True if a Shoggoth infestation occurred, otherwise false
-	 */
-	public boolean didShoggothInfest(){
-		return shoggothInfestation;
-	}
-
-	private void makeShoggoth(World world, Entity host){
-		EntityLesserShoggoth shoggoth = new EntityLesserShoggoth(world);
-		shoggoth.onInitialSpawn(world.getDifficultyForLocation(new BlockPos(host.posX, host.posY, host.posZ)), (IEntityLivingData)null);
-		shoggoth.setChild(true);
-		shoggoth.copyLocationAndAnglesFrom(host);
-		shoggothInfestation = true;
-		world.spawnEntityInWorld(shoggoth);
 	}
 
 	@Override
@@ -103,8 +83,6 @@ public class NecronomiconBreedingRitual extends NecronomiconRitual {
 					cow.setGrowingAge(-24000);
 					cow.copyLocationAndAnglesFrom(cows.get(i));
 					world.spawnEntityInWorld(cow);
-					if(world.rand.nextInt(4) == 0)
-						makeShoggoth(world, cows.get(i));
 				}
 			else{
 				cows.remove(cows.size()-1);
@@ -113,8 +91,6 @@ public class NecronomiconBreedingRitual extends NecronomiconRitual {
 					cow.setGrowingAge(-24000);
 					cow.copyLocationAndAnglesFrom(cows.get(i));
 					world.spawnEntityInWorld(cow);
-					if(world.rand.nextInt(4) == 0)
-						makeShoggoth(world, cows.get(i));
 				}
 			}
 		if(!chickens.isEmpty() && chickens.size() >= 2)
@@ -124,8 +100,6 @@ public class NecronomiconBreedingRitual extends NecronomiconRitual {
 					chicken.setGrowingAge(-24000);
 					chicken.copyLocationAndAnglesFrom(chickens.get(i));
 					world.spawnEntityInWorld(chicken);
-					if(world.rand.nextInt(4) == 0)
-						makeShoggoth(world, chickens.get(0));
 				}
 			else{
 				chickens.remove(chickens.size()-1);
@@ -134,8 +108,6 @@ public class NecronomiconBreedingRitual extends NecronomiconRitual {
 					chicken.setGrowingAge(-24000);
 					chicken.copyLocationAndAnglesFrom(chickens.get(i));
 					world.spawnEntityInWorld(chicken);
-					if(world.rand.nextInt(4) == 0)
-						makeShoggoth(world, chickens.get(0));
 				}
 			}
 		if(!pigs.isEmpty() && pigs.size() >= 2)
@@ -145,8 +117,6 @@ public class NecronomiconBreedingRitual extends NecronomiconRitual {
 					pig.setGrowingAge(-24000);
 					pig.copyLocationAndAnglesFrom(pigs.get(i));
 					world.spawnEntityInWorld(pig);
-					if(world.rand.nextInt(4) == 0)
-						makeShoggoth(world, pigs.get(0));
 				}
 			else{
 				pigs.remove(pigs.size()-1);
@@ -155,8 +125,6 @@ public class NecronomiconBreedingRitual extends NecronomiconRitual {
 					pig.setGrowingAge(-24000);
 					pig.copyLocationAndAnglesFrom(pigs.get(i));
 					world.spawnEntityInWorld(pig);
-					if(world.rand.nextInt(4) == 0)
-						makeShoggoth(world, pigs.get(0));
 				}
 			}
 		if(!sheeps.isEmpty() && sheeps.size() >= 2)
@@ -166,8 +134,6 @@ public class NecronomiconBreedingRitual extends NecronomiconRitual {
 					sheep.setGrowingAge(-24000);
 					sheep.copyLocationAndAnglesFrom(sheeps.get(i));
 					world.spawnEntityInWorld(sheep);
-					if(world.rand.nextInt(4) == 0)
-						makeShoggoth(world, sheeps.get(0));
 				}
 			else{
 				sheeps.remove(sheeps.size()-1);
@@ -176,8 +142,6 @@ public class NecronomiconBreedingRitual extends NecronomiconRitual {
 					sheep.setGrowingAge(-24000);
 					sheep.copyLocationAndAnglesFrom(sheeps.get(i));
 					world.spawnEntityInWorld(sheep);
-					if(world.rand.nextInt(4) == 0)
-						makeShoggoth(world, sheeps.get(0));
 				}
 			}
 		if(!horses.isEmpty() && horses.size() >= 2)
@@ -187,8 +151,6 @@ public class NecronomiconBreedingRitual extends NecronomiconRitual {
 					horse.setGrowingAge(-24000);
 					horse.copyLocationAndAnglesFrom(horses.get(i));
 					world.spawnEntityInWorld(horse);
-					if(world.rand.nextInt(4) == 0)
-						makeShoggoth(world, horses.get(0));
 				}
 			else{
 				horses.remove(cows.size()-1);
@@ -197,8 +159,6 @@ public class NecronomiconBreedingRitual extends NecronomiconRitual {
 					horse.setGrowingAge(-24000);
 					horse.copyLocationAndAnglesFrom(horses.get(i));
 					world.spawnEntityInWorld(horse);
-					if(world.rand.nextInt(4) == 0)
-						makeShoggoth(world, horses.get(0));
 				}
 			}
 		if(!ocelots.isEmpty() && ocelots.size() >= 2)
@@ -208,8 +168,6 @@ public class NecronomiconBreedingRitual extends NecronomiconRitual {
 					ocelot.setGrowingAge(-24000);
 					ocelot.copyLocationAndAnglesFrom(ocelots.get(i));
 					world.spawnEntityInWorld(ocelot);
-					if(world.rand.nextInt(4) == 0)
-						makeShoggoth(world, ocelots.get(0));
 				}
 			else{
 				ocelots.remove(ocelots.size()-1);
@@ -218,8 +176,6 @@ public class NecronomiconBreedingRitual extends NecronomiconRitual {
 					ocelot.setGrowingAge(-24000);
 					ocelot.copyLocationAndAnglesFrom(ocelots.get(i));
 					world.spawnEntityInWorld(ocelot);
-					if(world.rand.nextInt(4) == 0)
-						makeShoggoth(world, ocelots.get(0));
 				}
 			}
 		if(!wolves.isEmpty() && wolves.size() >= 2)
@@ -229,8 +185,6 @@ public class NecronomiconBreedingRitual extends NecronomiconRitual {
 					wolf.setGrowingAge(-24000);
 					wolf.copyLocationAndAnglesFrom(wolves.get(i));
 					world.spawnEntityInWorld(wolf);
-					if(world.rand.nextInt(4) == 0)
-						makeShoggoth(world, wolves.get(0));
 				}
 			else{
 				wolves.remove(wolves.size()-1);
@@ -239,12 +193,45 @@ public class NecronomiconBreedingRitual extends NecronomiconRitual {
 					wolf.setGrowingAge(-24000);
 					wolf.copyLocationAndAnglesFrom(wolves.get(i));
 					world.spawnEntityInWorld(wolf);
-					if(world.rand.nextInt(4) == 0)
-						makeShoggoth(world, wolves.get(0));
 				}
 			}
-		if(shoggothInfestation)
-			player.addStat(AbyssalCraft.shoggothInfestation, 1);
+
+		if(cows.size() > 2 && getDeathChance(world.rand, cows.size()))
+			cows.get(world.rand.nextInt(cows.size())).attackEntityFrom(DamageSource.magic, 200000);
+		if(chickens.size() > 2 && getDeathChance(world.rand, chickens.size()))
+			chickens.get(world.rand.nextInt(chickens.size())).attackEntityFrom(DamageSource.magic, 200000);
+		if(pigs.size() > 2 && getDeathChance(world.rand, pigs.size()))
+			pigs.get(world.rand.nextInt(pigs.size())).attackEntityFrom(DamageSource.magic, 200000);
+		if(sheeps.size() > 2 && getDeathChance(world.rand, sheeps.size()))
+			sheeps.get(world.rand.nextInt(sheeps.size())).attackEntityFrom(DamageSource.magic, 200000);
+		if(horses.size() > 2 && getDeathChance(world.rand, horses.size()))
+			horses.get(world.rand.nextInt(horses.size())).attackEntityFrom(DamageSource.magic, 200000);
+		if(ocelots.size() > 2 && getDeathChance(world.rand, ocelots.size()))
+			ocelots.get(world.rand.nextInt(ocelots.size())).attackEntityFrom(DamageSource.magic, 200000);
+		if(wolves.size() > 2 && getDeathChance(world.rand, wolves.size()))
+			wolves.get(world.rand.nextInt(wolves.size())).attackEntityFrom(DamageSource.magic, 200000);
+	}
+
+	private boolean getDeathChance(Random rand, int num){
+		if(num < 5)
+			return rand.nextInt(10) == 0;
+		if(num > 5 && num < 10)
+			return rand.nextInt(9) == 0;
+		if(num > 10 && num < 15)
+			return rand.nextInt(8) == 0;
+		if(num > 15 && num < 20)
+			return rand.nextInt(7) == 0;
+		if(num > 20 && num < 25)
+			return rand.nextInt(6) == 0;
+		if(num > 25 && num < 30)
+			return rand.nextInt(5) == 0;
+		if(num > 30 && num < 35)
+			return rand.nextInt(4) == 0;
+		if(num > 35 && num < 40)
+			return rand.nextInt(3) == 0;
+		if(num > 40 && num < 45)
+			return rand.nextInt(2) == 0;
+		return true;
 	}
 
 	@Override
