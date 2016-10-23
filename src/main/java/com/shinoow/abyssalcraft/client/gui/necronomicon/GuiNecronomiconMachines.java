@@ -71,6 +71,8 @@ public class GuiNecronomiconMachines extends GuiNecronomicon {
 		buttonList.add(crystallizer = new ButtonCategory(5, i + 14, b0 + 58, this, I18n.format("container.abyssalcraft.crystallizer", new Object[0]), getItem(2)));
 		//	buttonList.add(engraver = new ButtonCategory(6, i + 14, b0 + 75, this, StatCollector.translateToLocal("container.abyssalcraft.engraver"), getItem(3)));
 		//	buttonList.add(materializer = new ButtonCategory(7, i + 14, b0 + 92, this, StatCollector.translateToLocal("container.abyssalcraft.materializer"), getItem(3)));
+
+		updateButtons();
 	}
 
 	private Item getItem(int par1){
@@ -108,7 +110,7 @@ public class GuiNecronomiconMachines extends GuiNecronomicon {
 	@Override
 	protected void actionPerformed(GuiButton button)
 	{
-		if (button.enabled)
+		if (button.enabled){
 			if(button.id == 0)
 				mc.displayGuiScreen((GuiScreen)null);
 			else if(button.id == 1){
@@ -120,7 +122,7 @@ public class GuiNecronomiconMachines extends GuiNecronomicon {
 				else if(currTurnup == 0 && isInfo){
 					initGui();
 					isInfo = isMInfo = isTra = isCry = false;
-					setTurnupLimit(1);
+					setTurnupLimit(2);
 				} else if (currTurnup > 0)
 					--currTurnup;
 			} else if(button.id == 3){
@@ -144,7 +146,8 @@ public class GuiNecronomiconMachines extends GuiNecronomicon {
 				//	isMat = true;
 				//	drawButtons();
 			}
-		updateButtons();
+			updateButtons();
+		}
 	}
 
 	@SuppressWarnings("unchecked")
@@ -440,6 +443,9 @@ public class GuiNecronomiconMachines extends GuiNecronomicon {
 	private ItemStack tooltipStack;
 	public void renderItem(int xPos, int yPos, ItemStack stack, int mx, int my)
 	{
+
+		if(stack == null) return;
+
 		if(stack != null && stack.getItemDamage() == OreDictionary.WILDCARD_VALUE)
 			stack.setItemDamage(0);
 

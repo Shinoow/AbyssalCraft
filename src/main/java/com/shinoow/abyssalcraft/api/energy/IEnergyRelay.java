@@ -22,9 +22,13 @@ import net.minecraft.util.EnumFacing;
  *
  * @since 1.7.5
  */
-public interface IEnergyRelay {
+public interface IEnergyRelay extends IEnergyContainer {
 
-	public void transportPE(EnumFacing facing);
-
-	public boolean canTransport(EnumFacing facing);
+	/**
+	 * Attempts to transfer PE in a given direction
+	 * @param facing Direction to transfer
+	 * @param energy PE quanta to transfer
+	 * @return True if the transfer succeeded, otherwise false
+	 */
+	public void transferPE(EnumFacing facing, float energy);
 }

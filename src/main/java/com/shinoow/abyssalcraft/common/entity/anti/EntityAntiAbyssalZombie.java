@@ -38,6 +38,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
+import net.minecraft.util.DamageSource;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
@@ -91,6 +92,15 @@ public class EntityAntiAbyssalZombie extends EntityMob implements IAntiEntity {
 			getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(50.0D);
 			getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(6.0D);
 		}
+	}
+
+	@Override
+	public boolean attackEntityAsMob(Entity par1Entity)
+	{
+		if(AbyssalCraft.hardcoreMode && par1Entity instanceof EntityPlayer)
+			par1Entity.attackEntityFrom(DamageSource.causeMobDamage(this).setDamageBypassesArmor(), 1.5F);
+
+		return super.attackEntityAsMob(par1Entity);
 	}
 
 	@Override

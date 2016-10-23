@@ -102,10 +102,16 @@ public class EntityDreadguard extends EntityMob implements IDreadEntity {
 	@Override
 	public boolean attackEntityAsMob(Entity par1Entity) {
 
-		if (super.attackEntityAsMob(par1Entity))
+		boolean flag = super.attackEntityAsMob(par1Entity);
+
+		if (flag)
 			if (par1Entity instanceof EntityLivingBase)
 				((EntityLivingBase)par1Entity).addPotionEffect(new PotionEffect(AbyssalCraftAPI.dread_plague, 100));
-		return super.attackEntityAsMob(par1Entity);
+
+		if(AbyssalCraft.hardcoreMode && par1Entity instanceof EntityPlayer)
+			par1Entity.attackEntityFrom(DamageSource.causeMobDamage(this).setDamageBypassesArmor(), 3);
+
+		return flag;
 	}
 
 	@Override

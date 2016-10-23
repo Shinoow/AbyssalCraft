@@ -11,7 +11,6 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.client.gui.necronomicon;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,7 +19,6 @@ import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.renderer.RenderItem;
-import net.minecraft.client.renderer.texture.TextureUtil;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -212,7 +210,6 @@ public class GuiNecronomiconEntry extends GuiNecronomicon {
 				renderItem(k + 60, b0 + 28,(ItemStack)icon1, x, y);
 			if(icon1 instanceof ResourceLocation){
 				GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-				icon1 = verify((ResourceLocation)icon1);
 				mc.renderEngine.bindTexture((ResourceLocation)icon1);
 				drawTexturedModalRect(k, b0, 0, 0, 256, 256);
 			}
@@ -237,7 +234,6 @@ public class GuiNecronomiconEntry extends GuiNecronomicon {
 				renderItem(k + 60 + n, b0 + 28,(ItemStack)icon2, x, y);
 			if(icon2 instanceof ResourceLocation){
 				GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-				icon2 = verify((ResourceLocation)icon2);
 				mc.renderEngine.bindTexture((ResourceLocation)icon2);
 				drawTexturedModalRect(k + n, b0, 0, 0, 256, 256);
 			}
@@ -282,15 +278,6 @@ public class GuiNecronomiconEntry extends GuiNecronomicon {
 		}
 	}
 
-	private ResourceLocation verify(ResourceLocation res){
-		try {
-			TextureUtil.readBufferedImage(mc.getResourceManager().getResource(res).getInputStream());
-		} catch (IOException e) {
-			return new ResourceLocation("abyssalcraft", "textures/gui/necronomicon/missing.png");
-		}
-		return res;
-	}
-
 	private void writeTexts(Object icon1, Object icon2, String text1, String text2){
 
 		if(icon1 != null){
@@ -324,6 +311,8 @@ public class GuiNecronomiconEntry extends GuiNecronomicon {
 	private ItemStack tooltipStack;
 	public void renderItem(int xPos, int yPos, ItemStack stack, int mx, int my)
 	{
+
+		if(stack == null) return;
 
 		if(stack != null && stack.getItemDamage() == OreDictionary.WILDCARD_VALUE)
 			stack.setItemDamage(0);

@@ -1,0 +1,14 @@
+{
+	"parent": "item/generated",
+	"textures": {
+		"layer0": "abyssalcraft:items/interdimensionalcage"
+	},
+    "overrides": [
+        {
+            "predicate": {
+                "captured": 1
+            },
+            "model": "abyssalcraft:item/interdimensionalcage_captured"
+        }
+    ]
+}

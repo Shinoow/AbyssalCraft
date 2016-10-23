@@ -12,6 +12,7 @@
 package com.shinoow.abyssalcraft.init;
 
 import static com.shinoow.abyssalcraft.AbyssalCraft.*;
+import static com.shinoow.abyssalcraft.init.InitHandler.*;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.DimensionType;
 import net.minecraft.world.biome.Biome;

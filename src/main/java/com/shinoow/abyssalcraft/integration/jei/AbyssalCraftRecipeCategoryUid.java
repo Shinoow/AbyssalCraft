@@ -23,4 +23,5 @@ public class AbyssalCraftRecipeCategoryUid {
 	public static final String RITUAL = "abyssalcraft.ritual";
 	public static final String FUEL_TRANSMUTATION = "abyssalcraft.fuel.transmutation";
 	public static final String FUEL_CRYSTALLIZATION = "abyssalcraft.fuel.crystallization";
+	public static final String RENDING = "abyssalcraft.rending";
 }

@@ -14,6 +14,7 @@ package com.shinoow.abyssalcraft.common.handlers;
 import java.util.Random;
 
 import net.minecraft.block.BlockStairs;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
@@ -34,6 +35,7 @@ import net.minecraft.world.chunk.storage.ExtendedBlockStorage;
 import net.minecraftforge.event.entity.living.EnderTeleportEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
+import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.player.EntityItemPickupEvent;
 import net.minecraftforge.event.terraingen.BiomeEvent;
 import net.minecraftforge.event.terraingen.PopulateChunkEvent;
@@ -142,6 +144,25 @@ public class AbyssalCraftEventHooks {
 	}
 
 	@SubscribeEvent
+	public void armorStuff(LivingHurtEvent event){
+		if(event.getEntityLiving().getItemStackFromSlot(EntityEquipmentSlot.CHEST) != null){
+			ItemStack slot = event.getEntityLiving().getItemStackFromSlot(EntityEquipmentSlot.CHEST);
+			if(slot.getItem() == ACItems.dreaded_abyssalnite_chestplate)
+				if(event.getSource().getEntity() != null && event.getEntityLiving().worldObj.rand.nextBoolean())
+					event.getSource().getEntity().setFire(99);
+			if(slot.getItem() == ACItems.plated_coralium_chestplate)
+				if(event.getSource().getEntity() != null && event.getEntityLiving().worldObj.rand.nextBoolean())
+					event.getSource().getEntity().attackEntityFrom(getSource(event.getEntityLiving()), 1);
+		}
+	}
+
+	private DamageSource getSource(EntityLivingBase entity){
+		if(entity instanceof EntityPlayer)
+			return DamageSource.causePlayerDamage((EntityPlayer)entity);
+		return DamageSource.causeMobDamage(entity);
+	}
+
+	@SubscribeEvent
 	public void darkRealm(LivingUpdateEvent event){
 		if(event.getEntityLiving() instanceof EntityPlayerMP){
 			WorldServer worldServer = (WorldServer)event.getEntityLiving().worldObj;
@@ -153,7 +174,7 @@ public class AbyssalCraftEventHooks {
 				player.addStat(AbyssalCraft.enterDarkRealm, 1);
 			}
 		}
-		if(event.getEntityLiving().dimension == ACLib.dark_realm_id){
+		if(event.getEntityLiving().dimension == ACLib.dark_realm_id && !(event.getEntityLiving() instanceof EntityPlayer)){
 			Random rand = new Random();
 			if(AbyssalCraft.particleEntity)
 				event.getEntityLiving().worldObj.spawnParticle(EnumParticleTypes.SMOKE_LARGE, event.getEntityLiving().posX + (rand.nextDouble() - 0.5D) * event.getEntityLiving().width,
