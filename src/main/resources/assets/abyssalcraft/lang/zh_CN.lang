@@ -76,9 +76,6 @@ achievement.ritualPotionAoE.desc=进行一次范围效果的药水仪式.
 achievement.ritualInfusion=力量融合
 achievement.ritualInfusion.desc=进行一次注魔仪式.
 
-achievement.shoggothInfestation=修格斯群袭
-achievement.shoggothInfestation.desc=你不能期望这是一个好的结束...
-
 achievement.enterabyss=欢迎来到荒芜之地
 achievement.enterabyss.desc=进入第一个维度
 
@@ -204,6 +201,8 @@ container.abyssalcraft.crystallizer=结晶器
 container.abyssalcraft.transmutator=嬗变器
 container.abyssalcraft.engraver=铸造器
 container.abyssalcraft.materializer=物质化器
+container.abyssalcraft.energycontainer=Energy Container
+container.abyssalcraft.tieredenergycontainer=Tiered Energy Container
 
 #NEI Integration
 container.abyssalcraft.crystallizer.nei=结晶化
@@ -211,6 +210,7 @@ container.abyssalcraft.transmutator.nei=嬗变化
 container.abyssalcraft.engraver.nei=钱币铸造
 container.abyssalcraft.materializer.nei=物质化
 container.abyssalcraft.rituals.nei=死灵之书仪式
+container.abyssalcraft.rending.nei=Staff of Rending
 
 #JEI Integration
 gui.acjei.category.fuel.transmutator=嬗变器燃料
@@ -403,7 +403,7 @@ necronomicon.text.crafting.corplatep=珊瑚板胸甲是由精炼珊瑚锭, 珊�
 necronomicon.text.crafting.corlegsp=珊瑚板护腿是由精炼珊瑚锭, 珊瑚板和一个精炼珊瑚护腿合成.
 necronomicon.text.crafting.corbootsp=珊瑚板靴子是由精炼珊瑚锭, 珊瑚板和一个精炼珊瑚靴子合成.
 necronomicon.text.crafting.corbow=珊瑚长弓是由线, 精炼珊瑚锭, 一个珊瑚珍珠和一把弓合成.
-necronomicon.text.crafting.energypedestal.1=能量基座是由巨石块, 一个阴影宝石和一个珊瑚珍珠合成. 它在晴空下能收集位能.
+necronomicon.text.crafting.energypedestal.1=A Energy Pedestal is crafted with Monolith Stones, A Shadow Gem and a Coralium Pearl.
 necronomicon.text.crafting.energypedestal.2=这个方块是一个用作收集位能的工具. 如果你将雕像放在它的3格方块距离处(在x或z轴), 它们会快速地转化能量. 将一本死灵之书(或者别的能保存位能的物品)放在它的上面来抽取能量.
 necronomicon.text.crafting.dreadium.1=恐惧锭能通过许多方式来获得. 第一个方法是嬗变深渊恐惧碎片(由恐惧守卫掉落).
 necronomicon.text.crafting.dreadium.2=当你有足够的恐惧锭就能合成结晶器, 你能结晶化恐惧材料来获得恐惧结晶 (大多数碎片你都能结合成能被嬗变为恐惧锭的结晶).
@@ -411,6 +411,8 @@ necronomicon.text.crafting.monolithpillar.1=巨石柱是由巨石块合成. 它�
 necronomicon.text.crafting.ritualcharm.1=仪式符咒由金粒和一个钻石合成. 单纯的符咒没有任何用途, 但是通过仪式能扩展位能操纵器的不同状态.
 necronomicon.text.crafting.sacrificialaltar.1=献祭祭坛由火把, 巨石块, 一个阴影宝石和一个珊瑚珍珠合成. 能将生命能量变为位能.
 necronomicon.text.crafting.sacrificialaltar.2=当一个生物作为目标时, 它会发出烟雾粒子. 在生物死后, 根据它的最大生命值会获得一定数量的位能. 只能把不包括玩家的非不死的成年生物作为目标. 需要注意的是祭坛在收集一定量的位能后需要冷却, 有一分钟的时间不能收集.
+necronomicon.text.crafting.energycollector=A Energy Collector is crafted with Monolith Stone and a Shadow Gem. They can collect PE, but require a Energy Relay to transport it.
+necronomicon.text.crafting.energyrelay=A Energy Relay is crafted with Monolith Stone, Shadow Gem Shards and a Shadow Gem. They can be used to transport PE between blocks capable of storing it.
 
 necronomicon.text.crafting.upgradekit.1=A Upgrade Kit is crafted with Wooden Planks, Cobblestone, String and Flint. Upgrade kits can upgrade tools and armor through crafting.
 necronomicon.text.crafting.upgradekit.2=To upgrade a kit, you need 2 units of the next material and 1 of the current. Materials are Wood -> Cobblestone -> Iron -> Gold -> Diamond -> Abyssalnite -> Refined Coralium -> Dreadium -> Ethaxium.
@@ -527,10 +529,14 @@ necronomicon.text.pe.6=If you notice Shoggoth activity near your homestead, it i
 necronomicon.text.pe.7=雕像有不同的形状, 全部都是描绘旧日支配者. 手持死灵之书靠近雕像就会有位能转移到你身上.
 necronomicon.text.pe.8=需要注意的是你去收集位能并不合适. 这会造成污染发生(表现为一束闪电击中雕像或其他位能操纵器). 污染是影响玩家, 其它生物和环境的随机事件. 目的是惩罚那些试图从更高维度抽取位能的人.
 necronomicon.text.pe.9=一个加速雕像(其它位能操纵器也是)效率的方式是使用仪式符咒. 能加速不同的效果(可看工具提示).
-necronomicon.text.pe.10=你还能合成一个能量基座, 能从雕像(其它位能操纵器也是)收集位能, 雕像需要放置在距离基座3格的地方.
+necronomicon.text.pe.10=You can also craft a Energy Pedestal, which can collect PE from statues (and other PE manipulators) placed 3 blocks from it. Monolith Stone Pillars boost the range.
 necronomicon.text.pe.11=与能量基座一同的还有献祭祭坛, 献祭祭坛能将生物(目标生物会有烟雾效果)死亡时的生命能量转变为位能.
-necronomicon.text.pe.12=如果位能的产生依旧很缓慢, 你还能通过注入仪式升级能量基座和献祭祭坛.
-necronomicon.text.pe.13=一旦到达奥穆索, 你还能创造特定神祗仪式符咒(用深渊死灵之书), 或者从残存者祭司处购买. 这些符咒会给予额外加速如果使用在关联了与符咒上面显示的神祗相同神祗的操纵器上.
+necronomicon.text.pe.12=Another way to collect PE from manipulators is with a Energy Collector. It works like a Energy Pedestal (except you can't place items on it).
+necronomicon.text.pe.13=Energy Relays are used to transfer PE, and can do so in any direction (but it can't transport it through solid blocks, except glass).
+necronomicon.text.pe.14=Building networks with Energy Relays allows you to tranport PE over larger distances. Energy Relays can drain PE from PE Collector placed next to it.
+necronomicon.text.pe.15=In order to store greater amounts of PE, you can create a Energy Container. They allow insertion through Energy Relays or interaction with the block.
+necronomicon.text.pe.16=If the PE production still is too slow, you can also upgrade the various PE handling blocks through infusion rituals to boost stats.
+necronomicon.text.pe.17=一旦到达奥穆索, 你还能创造特定神祗仪式符咒(用深渊死灵之书), 或者从残存者祭司处购买. 这些符咒会给予额外加速如果使用在关联了与符咒上面显示的神祗相同神祗的操纵器上.
 
 necronomicon.text.machines.info=查看信息章节来获得有关不同机器的信息, 或者其他章节来获得特定机器的合成表. 合成表并没有以任何方式进行分类.
 
@@ -688,6 +694,46 @@ ac.ritual.dreEnchantment=Dread Infusion
 ac.ritual.dreEnchantment.desc=By combining a Dreadlands Essence, Dreaded Shoggoth Flesh, Dreadium Ingots, Dread Fragments and a Book, you can enchant a weapon placed on the altar with the Dread enchantment (if applicable).
 ac.ritual.weather=Ritual of Downpour
 ac.ritual.weather.desc=By sacrificing 8 Feathers, you can control the weather of the Biome you're inside (provided it can rain there). If it's not raining, it will rain. If it's raining, it will start thundering. If it's thundering the rain and thunder will cease.
+ac.ritual.energyContainer=Energy Container
+ac.ritual.energyContainer.desc=A Energy Container is created by infusing a Energy Pedestal with Energy Collectors and Shadow Gem Shards. The Energy Container can store large quantities of PE, while also capable if draining/filling input items.
+ac.ritual.interdimensionalcage=Interdimensional Cage
+ac.ritual.interdimensionalcage.desc=A Interdimensional Cage is created by infusing a Shard of Oblivion with Iron Bars. It can use Potential Energy to capture Entities. The amount of PE required is determined by the Entity's metric volume (ratio: 100 PE/m³), so larger entities require more PE to capture. PE is only drained when you capture an Entity.
+ac.ritual.ecolOWupgrade=Overworld Energy Collector
+ac.ritual.ecolOWupgrade.desc=A Overworld Energy Collector is created by infusing a Energy Collector with Cobblestone, Darkstone Cobblestone, Shadow Gem Shards and Coralium Gems.
+ac.ritual.ecolAWupgrade=Abyssal Wasteland Energy Collector
+ac.ritual.ecolAWupgrade.desc=A Abyssal Wasteland Energy Collector is created by infusing a Overworld Energy Collector with Abyssal Stone Bricks, Coralium Bricks, Shadow Gem Shards and Coralium Gems.
+ac.ritual.ecolDLupgrade=Dreadlands Energy Collector
+ac.ritual.ecolDLupgrade.desc=A Dreadlands Energy Collector is created by infusing a Abyssal Wasteland Energy Collector with Dreadstone Bricks, Abyssalnite Stone Bricks, Shadow Gem Shards and Coralium Gems.
+ac.ritual.ecolOMTupgrade=Omothol Energy Collector
+ac.ritual.ecolOMTupgrade.desc=A Omothol Energy Collector is created by infusing a Dreadlands Energy Collector with Ethaxium Bricks, Dark Ethaxium Bricks, Shadow Gem Shards and Coralium Gems.
+ac.ritual.erOWupgrade=Overworld Energy Relay
+ac.ritual.erOWupgrade.desc=A Overworld Energy Relay is created by infusing a Energy Relay with Cobblestone, Darkstone Cobblestone, Shadow Gem Shards and Coralium Gems.
+ac.ritual.erAWupgrade=Abyssal Wasteland Energy Relay
+ac.ritual.erAWupgrade.desc=A Abyssal Wasteland Energy Relay is created by infusing a Overworld Energy Relay with Abyssal Stone Bricks, Coralium Bricks, Shadow Gem Shards and Coralium Gems.
+ac.ritual.erDLupgrade=Dreadlands Energy Relay
+ac.ritual.erDLupgrade.desc=A Dreadlands Energy Relay is created by infusing a Abyssal Wasteland Energy Relay with Dreadstone Bricks, Abyssalnite Stone Bricks, Shadow Gem Shards and Coralium Gems.
+ac.ritual.erOMTupgrade=Omothol Energy Relay
+ac.ritual.erOMTupgrade.desc=A Omothol Energy Relay is created by infusing a Dreadlands Energy Relay with Ethaxium Bricks, Dark Ethaxium Bricks, Shadow Gem Shards and Coralium Gems.
+ac.ritual.econOWupgrade=Overworld Energy Container
+ac.ritual.econOWupgrade.desc=A Overworld Energy Container is created by infusing a Energy Container with Cobblestone, Darkstone Cobblestone, Shadow Gem Shards and Coralium Gems.
+ac.ritual.econAWupgrade=Abyssal Wasteland Energy Container
+ac.ritual.econAWupgrade.desc=A Abyssal Wasteland Energy Container is created by infusing a Overworld Energy Container with Abyssal Stone Bricks, Coralium Bricks, Shadow Gem Shards and Coralium Gems.
+ac.ritual.econDLupgrade=Dreadlands Energy Container
+ac.ritual.econDLupgrade.desc=A Dreadlands Energy Container is created by infusing a Abyssal Wasteland Energy Container with Dreadstone Bricks, Abyssalnite Stone Bricks, Shadow Gem Shards and Coralium Gems.
+ac.ritual.econOMTupgrade=Omothol Energy Container
+ac.ritual.econOMTupgrade.desc=A Omothol Energy Container is created by infusing a Dreadlands Energy Container with Ethaxium Bricks, Dark Ethaxium Bricks, Shadow Gem Shards and Coralium Gems.
+ac.ritual.sorAWupgrade=Abyssal Wasteland Staff of Rending
+ac.ritual.sorAWupgrade.desc=A Abyssal Wasteland Staff of Rending is creadted by infusing a Staff of Rending with Abyssal Stone, Coralium Plagued Flesh and and a Shadow Gem.
+ac.ritual.sorDLupgrade=Dreadlands Staff of Rending
+ac.ritual.sorDLupgrade.desc=A Dreadlands Staff of Rending is creadted by infusing a Abyssal Wasteland Staff of Rending with Dreadstone, Dread Fragment and and a Shadow Gem.
+ac.ritual.sorOMTupgrade=Omothol Staff of Rending
+ac.ritual.sorOMTupgrade.desc=A Omothol Staff of Rending is creadted by infusing a Dreadlands Staff of Rending with Omothol Stone, Omothol Flesh and and a Shadow Gem.
+
+#Rending
+ac.rending.shadowgem=Shadow Gems are made from harvesting Shadow Energy from living shadows.
+ac.rending.essence_aw=Abyssal Wasteland Essences are made from harvesting Abyssal Wasteland Energy from Coralium entities.
+ac.rending.essence_dl=Dreadlands Essences are made from harvesting Dreadlands Energy from Dread entities.
+ac.rending.essence_omt=Omothol Essences are made from harvesting Omothol Energy from entities in Omothol.
 
 #Configuration
 ac_dimensions=维度
@@ -720,8 +766,8 @@ death.attack.antimatter.player=%1$s被解离成分子在躲避 %2$s 的时候
 #Tooltips
 tooltip.portalplacer.1=右击地面来
 tooltip.portalplacer.2=创建一个传送门. 无限使用.
-tooltip.portalplacerdl.1=使用时只能在
-tooltip.portalplacerdl.2=深渊荒芜之地.
+tooltip.portalplacer.3=Shift right-click to create alternate portal.
+tooltip.portalplacer.4=You can't use this item in this dimension!
 tooltip.oc=这个物品蕴藏不可思议的力量.
 tooltip.staff=扎哈尔的权杖, 深渊之门的守卫者.
 tooltip.eoa=堕落者阿索拉之眼.
@@ -733,14 +779,9 @@ tooltip.cbucket.2=这种液体有着危险的效果
 tooltip.cbucket.3=除了液态反物质. 
 tooltip.corbow.1=弓箭在攻击时会
 tooltip.corbow.2=导致珊瑚侵染
-tooltip.corb.1=该物品能注入深渊锭物品, 
-tooltip.corb.2=给它们新添能力.
-tooltip.corb.3=它也能改动一些主世界
-tooltip.corb.4=的成分(方块).
+tooltip.corb=This item can alter properties of other materials.
 tooltip.odb=巨大的爆炸, 自身也承受危险.
 tooltip.crystal=分子式
-tooltip.portalplacerjzh.1=只能在
-tooltip.portalplacerjzh.2=恐惧之地使用
 tooltip.soulreaper=灵魂收割
 tooltip.crystalbag=这个背包可存储结晶化的元素
 tooltip.drainstaff.energy.1=深渊荒芜之地能量
@@ -926,6 +967,21 @@ tile.tieredsacrificialaltar.2.name=恐惧之地献祭祭坛
 tile.tieredsacrificialaltar.3.name=奥穆索献祭祭坛
 tile.jzaharspawner.name=J'zahar Spawner Block
 tile.gatekeeperminionspawner.name=Minion of The Gatekeeper Spawner Block
+tile.energycollector.name=Energy Collector
+tile.energyrelay.name=Energy Relay
+tile.energycontainer.name=Energy Container
+tile.tieredenergycollector.0.name=Overworld Energy Collector
+tile.tieredenergycollector.1.name=Abyssal Wasteland Energy Collector
+tile.tieredenergycollector.2.name=Dreadlands Energy Collector
+tile.tieredenergycollector.3.name=Omothol Energy Collector
+tile.owenergyrelay.name=Overworld Energy Relay
+tile.awenergyrelay.name=Abyssal Wasteland Energy Relay
+tile.dlenergyrelay.name=Dreadlands Energy Relay
+tile.omtenergyrelay.name=Omothol Energy Relay
+tile.tieredenergycontainer.0.name=Overworld Energy Container
+tile.tieredenergycontainer.1.name=Abyssal Wasteland Energy Container
+tile.tieredenergycontainer.2.name=Dreadlands Energy Container
+tile.tieredenergycontainer.3.name=Omothol Energy Container
 
 #Pre/Postfixes
 decorativestatue.prefix=Decorative %s
@@ -1143,7 +1199,10 @@ item.crystalshard.Silica.name=结晶二氧化硅碎片
 item.crystalshard.Alumina.name=结晶氧化铝碎片
 item.crystalshard.Magnesia.name=结晶氧化镁碎片
 item.crystalshard.Zinc.name=结晶锌碎片
-item.drainstaff.name=撕裂法杖
+item.drainstaff.normal.name=撕裂法杖
+item.drainstaff.aw.name=Abyssal Wasteland Staff of Rending
+item.drainstaff.dl.name=Dreadlands Staff of Rending
+item.drainstaff.omt.name=Omothol Staff of Rending
 item.essence.abyssalwasteland.name=深渊荒芜之地精髓
 item.essence.dreadlands.name=恐惧之地精髓
 item.essence.omothol.name=奥穆索精髓
@@ -1169,6 +1228,7 @@ item.engraving_nyarlathotep.name=奈亚鲁法特钱币铸造
 item.engraving_yogsothoth.name=尤格·索托斯钱币铸造
 item.engraving_shubniggurath.name=舒卜·尼古拉斯钱币铸造
 item.gatekeeperessence.name=Essence of The Gatekeeper
+item.interdimensionalcage.name=Interdimensional Cage
 
 #Entities
 entity.abyssalcraft.depthsghoul.name=深渊食尸鬼

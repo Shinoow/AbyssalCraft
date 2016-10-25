@@ -76,9 +76,6 @@ achievement.ritualPotionAoE.desc=Performed a Area-of-Effect Potion Ritual.
 achievement.ritualInfusion=Power merging
 achievement.ritualInfusion.desc=Performed a Infusion Ritual.
 
-achievement.shoggothInfestation=Shoggoth infestation
-achievement.shoggothInfestation.desc=You could not have expected this to end well...
-
 achievement.enterabyss=Bienvenue aux Terres Abandonnées
 achievement.enterabyss.desc=Est entré dans la première dimension
 
@@ -204,6 +201,8 @@ container.abyssalcraft.crystallizer=Crystallizer
 container.abyssalcraft.transmutator=Transmutator
 container.abyssalcraft.engraver=Engraver
 container.abyssalcraft.materializer=Materializer
+container.abyssalcraft.energycontainer=Energy Container
+container.abyssalcraft.tieredenergycontainer=Tiered Energy Container
 
 #NEI Integration
 container.abyssalcraft.crystallizer.nei=Crystallization
@@ -211,6 +210,7 @@ container.abyssalcraft.transmutator.nei=Transmutation
 container.abyssalcraft.engraver.nei=Coin Engraving
 container.abyssalcraft.materializer.nei=Materialization
 container.abyssalcraft.rituals.nei=Necronomicon Ritual
+container.abyssalcraft.rending.nei=Staff of Rending
 
 #JEI Integration
 gui.acjei.category.fuel.transmutator=Transmutator Fuel
@@ -403,7 +403,7 @@ necronomicon.text.crafting.corplatep=A Plated Coralium Chestplate is crafted wit
 necronomicon.text.crafting.corlegsp=Plated Coralium Leggings are crafted with Refined Coralium Ingots, Coralium Plates and Refined Coralium Leggings.
 necronomicon.text.crafting.corbootsp=Plated Coralium Boots are crafted with Refined Coralium Ingots, Coralium Plates and Refined Coralium Boots.
 necronomicon.text.crafting.corbow=A Coralium Longbow is crafted with Strings, Refined Coralium Ingots, a Coralium Pearl and a Bow.
-necronomicon.text.crafting.energypedestal.1=A Energy Pedestal is crafted with Monolith Stones, A Shadow Gem and a Coralium Pearl. It collects Potential Energy while under a clear sky.
+necronomicon.text.crafting.energypedestal.1=A Energy Pedestal is crafted with Monolith Stones, A Shadow Gem and a Coralium Pearl.
 necronomicon.text.crafting.energypedestal.2=This block serves as a method for obtaining Potential Energy. If you place Statues 3 blocks away from it (on the x or z axis), they will transfer energy to it at a fast rate. Place a Necronomicon (or other source that can hold Potential Energy) on it in order to drain it.
 necronomicon.text.crafting.dreadium.1=Dreadium can be obtained in numerous ways. The first method is to transmute Dreaded Shards of Abyssalnite (dropped by Dreadguards).
 necronomicon.text.crafting.dreadium.2=When you have enough Dreadium Ingots to craft a Crystallizer, you can crystallize Dreaded materials to obtain Dreadium Crystals (mostly shards which you can combine into crystals that can be transmuted for Dreadium Ingots).
@@ -411,6 +411,8 @@ necronomicon.text.crafting.monolithpillar.1=A Monolith Stone Pillar is crafted w
 necronomicon.text.crafting.ritualcharm.1=A Ritual Charm is crafted with Gold Ingots and a Diamond. By itself it has no effect, but through rituals it can amplify various stats of Potential Energy Manipulators.
 necronomicon.text.crafting.sacrificialaltar.1=A Sacrificial Altar is crafted with Torches, Monolith Stone, A Shadow Gem and a Coralium Pearl. They convert life-force into Potential Energy.
 necronomicon.text.crafting.sacrificialaltar.2=When a entity is targeted, it will emit smoke particles. Once the entity dies, an amount of PE equal to it's max health will be collected. It only targets non-undead adult entities that aren't players. It should be noted that the altar goes on a cooldown after collecting a certain amount of PE, preventing collection for a minute.
+necronomicon.text.crafting.energycollector=A Energy Collector is crafted with Monolith Stone and a Shadow Gem. They can collect PE, but require a Energy Relay to transport it.
+necronomicon.text.crafting.energyrelay=A Energy Relay is crafted with Monolith Stone, Shadow Gem Shards and a Shadow Gem. They can be used to transport PE between blocks capable of storing it.
 
 necronomicon.text.crafting.upgradekit.1=A Upgrade Kit is crafted with Wooden Planks, Cobblestone, String and Flint. Upgrade kits can upgrade tools and armor through crafting.
 necronomicon.text.crafting.upgradekit.2=To upgrade a kit, you need 2 units of the next material and 1 of the current. Materials are Wood -> Cobblestone -> Iron -> Gold -> Diamond -> Abyssalnite -> Refined Coralium -> Dreadium -> Ethaxium.
@@ -527,10 +529,14 @@ necronomicon.text.pe.6=If you notice Shoggoth activity near your homestead, it i
 necronomicon.text.pe.7=The statues come in different shapes, all depicting Great Old Ones. Standing close to one while holding a Necronomicon allows it to transport PE to you.
 necronomicon.text.pe.8=It should be noted that you harvesting PE isn't appreciated. This causes disruptions to occur (displayed by a bolt of lightning striking the statue, or other PE manipulator). Disruptions are random events that can affect the player, other entities or the environment. Their purpose is to punish those who tries to drain PE from the higher plane.
 necronomicon.text.pe.9=One way to boost the efficiency of statues (and other PE manipulators) is through the use of Ritual Charms. They can boost various stats (check the tooltip).
-necronomicon.text.pe.10=You can also craft a Energy Pedestal, which can collect PE from statues (and other PE manipulators) that are placed 3 blocks from the pedestal.
+necronomicon.text.pe.10=You can also craft a Energy Pedestal, which can collect PE from statues (and other PE manipulators) placed 3 blocks from it. Monolith Stone Pillars boost the range.
 necronomicon.text.pe.11=Along with the Energy Pedestal there's the Sacrificial Altar, which can convert life-force from dying entities into PE (targeted entities emit smoke).
-necronomicon.text.pe.12=If the PE production still is too slow, you can also upgrade Energy Pedestals and Sacrificial Altars through infusion rituals.
-necronomicon.text.pe.13=Upon reaching Omothol, you will be able to create deity-specific Ritual Charms (with an Abyssalnomicon), or buy them from Remnant Priests. Those charms will give an additional boost if used on manipulators associated with the same deity as the one displayed on the charm.
+necronomicon.text.pe.12=Another way to collect PE from manipulators is with a Energy Collector. It works like a Energy Pedestal (except you can't place items on it).
+necronomicon.text.pe.13=Energy Relays are used to transfer PE, and can do so in any direction (but it can't transport it through solid blocks, except glass).
+necronomicon.text.pe.14=Building networks with Energy Relays allows you to tranport PE over larger distances. Energy Relays can drain PE from PE Collector placed next to it.
+necronomicon.text.pe.15=In order to store greater amounts of PE, you can create a Energy Container. They allow insertion through Energy Relays or interaction with the block.
+necronomicon.text.pe.16=If the PE production still is too slow, you can also upgrade the various PE handling blocks through infusion rituals to boost stats.
+necronomicon.text.pe.17=Upon reaching Omothol, you will be able to create deity-specific Ritual Charms (with an Abyssalnomicon), or buy them from Remnant Priests. Those charms will give an additional boost if used on manipulators associated with the same deity as the one displayed on the charm.
 
 necronomicon.text.machines.info=Check the information section for information regarding the different machines, or the other sections for all recipes for the specified machine. The recipes aren't sorted in any way.
 
@@ -688,6 +694,46 @@ ac.ritual.dreEnchantment=Dread Infusion
 ac.ritual.dreEnchantment.desc=By combining a Dreadlands Essence, Dreaded Shoggoth Flesh, Dreadium Ingots, Dread Fragments and a Book, you can enchant a weapon placed on the altar with the Dread enchantment (if applicable).
 ac.ritual.weather=Ritual of Downpour
 ac.ritual.weather.desc=By sacrificing 8 Feathers, you can control the weather of the Biome you're inside (provided it can rain there). If it's not raining, it will rain. If it's raining, it will start thundering. If it's thundering the rain and thunder will cease.
+ac.ritual.energyContainer=Energy Container
+ac.ritual.energyContainer.desc=A Energy Container is created by infusing a Energy Pedestal with Energy Collectors and Shadow Gem Shards. The Energy Container can store large quantities of PE, while also capable if draining/filling input items.
+ac.ritual.interdimensionalcage=Interdimensional Cage
+ac.ritual.interdimensionalcage.desc=A Interdimensional Cage is created by infusing a Shard of Oblivion with Iron Bars. It can use Potential Energy to capture Entities. The amount of PE required is determined by the Entity's metric volume (ratio: 100 PE/m³), so larger entities require more PE to capture. PE is only drained when you capture an Entity.
+ac.ritual.ecolOWupgrade=Overworld Energy Collector
+ac.ritual.ecolOWupgrade.desc=A Overworld Energy Collector is created by infusing a Energy Collector with Cobblestone, Darkstone Cobblestone, Shadow Gem Shards and Coralium Gems.
+ac.ritual.ecolAWupgrade=Abyssal Wasteland Energy Collector
+ac.ritual.ecolAWupgrade.desc=A Abyssal Wasteland Energy Collector is created by infusing a Overworld Energy Collector with Abyssal Stone Bricks, Coralium Bricks, Shadow Gem Shards and Coralium Gems.
+ac.ritual.ecolDLupgrade=Dreadlands Energy Collector
+ac.ritual.ecolDLupgrade.desc=A Dreadlands Energy Collector is created by infusing a Abyssal Wasteland Energy Collector with Dreadstone Bricks, Abyssalnite Stone Bricks, Shadow Gem Shards and Coralium Gems.
+ac.ritual.ecolOMTupgrade=Omothol Energy Collector
+ac.ritual.ecolOMTupgrade.desc=A Omothol Energy Collector is created by infusing a Dreadlands Energy Collector with Ethaxium Bricks, Dark Ethaxium Bricks, Shadow Gem Shards and Coralium Gems.
+ac.ritual.erOWupgrade=Overworld Energy Relay
+ac.ritual.erOWupgrade.desc=A Overworld Energy Relay is created by infusing a Energy Relay with Cobblestone, Darkstone Cobblestone, Shadow Gem Shards and Coralium Gems.
+ac.ritual.erAWupgrade=Abyssal Wasteland Energy Relay
+ac.ritual.erAWupgrade.desc=A Abyssal Wasteland Energy Relay is created by infusing a Overworld Energy Relay with Abyssal Stone Bricks, Coralium Bricks, Shadow Gem Shards and Coralium Gems.
+ac.ritual.erDLupgrade=Dreadlands Energy Relay
+ac.ritual.erDLupgrade.desc=A Dreadlands Energy Relay is created by infusing a Abyssal Wasteland Energy Relay with Dreadstone Bricks, Abyssalnite Stone Bricks, Shadow Gem Shards and Coralium Gems.
+ac.ritual.erOMTupgrade=Omothol Energy Relay
+ac.ritual.erOMTupgrade.desc=A Omothol Energy Relay is created by infusing a Dreadlands Energy Relay with Ethaxium Bricks, Dark Ethaxium Bricks, Shadow Gem Shards and Coralium Gems.
+ac.ritual.econOWupgrade=Overworld Energy Container
+ac.ritual.econOWupgrade.desc=A Overworld Energy Container is created by infusing a Energy Container with Cobblestone, Darkstone Cobblestone, Shadow Gem Shards and Coralium Gems.
+ac.ritual.econAWupgrade=Abyssal Wasteland Energy Container
+ac.ritual.econAWupgrade.desc=A Abyssal Wasteland Energy Container is created by infusing a Overworld Energy Container with Abyssal Stone Bricks, Coralium Bricks, Shadow Gem Shards and Coralium Gems.
+ac.ritual.econDLupgrade=Dreadlands Energy Container
+ac.ritual.econDLupgrade.desc=A Dreadlands Energy Container is created by infusing a Abyssal Wasteland Energy Container with Dreadstone Bricks, Abyssalnite Stone Bricks, Shadow Gem Shards and Coralium Gems.
+ac.ritual.econOMTupgrade=Omothol Energy Container
+ac.ritual.econOMTupgrade.desc=A Omothol Energy Container is created by infusing a Dreadlands Energy Container with Ethaxium Bricks, Dark Ethaxium Bricks, Shadow Gem Shards and Coralium Gems.
+ac.ritual.sorAWupgrade=Abyssal Wasteland Staff of Rending
+ac.ritual.sorAWupgrade.desc=A Abyssal Wasteland Staff of Rending is creadted by infusing a Staff of Rending with Abyssal Stone, Coralium Plagued Flesh and and a Shadow Gem.
+ac.ritual.sorDLupgrade=Dreadlands Staff of Rending
+ac.ritual.sorDLupgrade.desc=A Dreadlands Staff of Rending is creadted by infusing a Abyssal Wasteland Staff of Rending with Dreadstone, Dread Fragment and and a Shadow Gem.
+ac.ritual.sorOMTupgrade=Omothol Staff of Rending
+ac.ritual.sorOMTupgrade.desc=A Omothol Staff of Rending is creadted by infusing a Dreadlands Staff of Rending with Omothol Stone, Omothol Flesh and and a Shadow Gem.
+
+#Rending
+ac.rending.shadowgem=Shadow Gems are made from harvesting Shadow Energy from living shadows.
+ac.rending.essence_aw=Abyssal Wasteland Essences are made from harvesting Abyssal Wasteland Energy from Coralium entities.
+ac.rending.essence_dl=Dreadlands Essences are made from harvesting Dreadlands Energy from Dread entities.
+ac.rending.essence_omt=Omothol Essences are made from harvesting Omothol Energy from entities in Omothol.
 
 #Configuration
 ac_dimensions=Dimensions
@@ -720,8 +766,8 @@ death.attack.antimatter.player=%1$s was molecularly disassembled trying to escap
 #Tooltips
 tooltip.portalplacer.1=Clic-droit sur le sol pour
 tooltip.portalplacer.2=créer un portail. Utilisations infinies.
-tooltip.portalplacerdl.1=Peut seulement être utilisé dans
-tooltip.portalplacerdl.2=Les Terres Abandonnée Abyssales.
+tooltip.portalplacer.3=Shift right-click to create alternate portal.
+tooltip.portalplacer.4=You can't use this item in this dimension!
 tooltip.oc=Cet item contient un pouvoir incroyable.
 tooltip.staff=Le bâton de J'zahar, Gardien de La porte des Abysses.
 tooltip.eoa=L'oeil d'Asorah, Le Déchu.
@@ -733,14 +779,9 @@ tooltip.cbucket.2=quand il est mixé avec un autre liquide,
 tooltip.cbucket.3=excepté le liquide d'Antimatière.
 tooltip.corbow.1=Les flèches peuvent appliquer
 tooltip.corbow.2=la Peste Coraliène lors de la frappe.
-tooltip.corb.1=Cet item peut infuser les items d'Abyssalnite,
-tooltip.corb.2=ce qui leur ajoutera de nouveaux pouvoirs.
-tooltip.corb.3=Il peut aussi modifier des éléments(Blocs)
-tooltip.corb.4=de l'Overworld.
+tooltip.corb=This item can alter properties of other materials.
 tooltip.odb=Explosif puissant, à utiliser à vos propres risques !
 tooltip.crystal=Molecular formula
-tooltip.portalplacerjzh.1=Can only be used within
-tooltip.portalplacerjzh.2=The Dreadlands.
 tooltip.soulreaper=Souls harvested
 tooltip.crystalbag=This bag holds crystallized elements
 tooltip.drainstaff.energy.1=Abyssal Wasteland Energy
@@ -880,7 +921,7 @@ tile.solidlava.name=Solid lava
 tile.ethaxium.name=Ethaxium
 tile.ethaxiumbrick.0.name=Ethaxium Brick
 tile.ethaxiumbrick.1.name=Chiseled Ethaxium Brick
-tile.ethaxiumbrick.1.name=Chiseled Ethaxium Brick
+tile.ethaxiumbrick.2.name=Cracked Ethaxium Brick
 tile.ethaxiumpillar.name=Ethaxium Pillar
 tile.ethaxiumbrickstairs.name=Ethaxium Brick Stairs
 tile.ethaxiumbrickslab1.name=Ethaxium Brick Slab
@@ -926,6 +967,21 @@ tile.tieredsacrificialaltar.2.name=Dreadlands Sacrificial Altar
 tile.tieredsacrificialaltar.3.name=Omothol Sacrificial Altar
 tile.jzaharspawner.name=J'zahar Spawner Block
 tile.gatekeeperminionspawner.name=Minion of The Gatekeeper Spawner Block
+tile.energycollector.name=Energy Collector
+tile.energyrelay.name=Energy Relay
+tile.energycontainer.name=Energy Container
+tile.tieredenergycollector.0.name=Overworld Energy Collector
+tile.tieredenergycollector.1.name=Abyssal Wasteland Energy Collector
+tile.tieredenergycollector.2.name=Dreadlands Energy Collector
+tile.tieredenergycollector.3.name=Omothol Energy Collector
+tile.owenergyrelay.name=Overworld Energy Relay
+tile.awenergyrelay.name=Abyssal Wasteland Energy Relay
+tile.dlenergyrelay.name=Dreadlands Energy Relay
+tile.omtenergyrelay.name=Omothol Energy Relay
+tile.tieredenergycontainer.0.name=Overworld Energy Container
+tile.tieredenergycontainer.1.name=Abyssal Wasteland Energy Container
+tile.tieredenergycontainer.2.name=Dreadlands Energy Container
+tile.tieredenergycontainer.3.name=Omothol Energy Container
 
 #Pre/Postfixes
 decorativestatue.prefix=Decorative %s
@@ -1143,7 +1199,10 @@ item.crystalshard.Silica.name=Crystallized Silica Shard
 item.crystalshard.Alumina.name=Crystallized Alumina Shard
 item.crystalshard.Magnesia.name=Crystallized Magnesia Shard
 item.crystalshard.Zinc.name=Crystallized Zinc Shard
-item.drainstaff.name=Staff of Rending
+item.drainstaff.normal.name=Staff of Rending
+item.drainstaff.aw.name=Abyssal Wasteland Staff of Rending
+item.drainstaff.dl.name=Dreadlands Staff of Rending
+item.drainstaff.omt.name=Omothol Staff of Rending
 item.essence.abyssalwasteland.name=Abyssal Wasteland Essence
 item.essence.dreadlands.name=Dreadlands Essence
 item.essence.omothol.name=Omothol Essence
@@ -1169,6 +1228,7 @@ item.engraving_nyarlathotep.name=Nyarlathotep Coin Engraving
 item.engraving_yogsothoth.name=Yog-Sothoth Coin Engraving
 item.engraving_shubniggurath.name=Shub-Niggurath Coin Engraving
 item.gatekeeperessence.name=Essence of The Gatekeeper
+item.interdimensionalcage.name=Interdimensional Cage
 
 #Entities
 entity.abyssalcraft.depthsghoul.name=Goule des Profondeurs
