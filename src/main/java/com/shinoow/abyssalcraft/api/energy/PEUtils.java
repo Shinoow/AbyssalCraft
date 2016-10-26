@@ -20,13 +20,14 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
-import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 
 import com.google.common.collect.Lists;
+import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
 import com.shinoow.abyssalcraft.api.energy.EnergyEnum.AmplifierType;
 import com.shinoow.abyssalcraft.api.energy.EnergyEnum.DeityType;
 import com.shinoow.abyssalcraft.api.entity.EntityUtil;
@@ -64,14 +65,26 @@ public class PEUtils {
 						transferPEToStack(item, manipulator);
 						transferPEToStack(item1, manipulator);
 					}
-					for(double i = 0; i <= 0.7; i += 0.03) {
-						int xPos = xp < (int) player.posX ? 1 : xp > (int) player.posX ? -1 : 0;
-						int yPos = yp < (int) player.posY ? 1 : yp > (int) player.posY ? -1 : 0;
-						int zPos = zp < (int) player.posZ ? 1 : zp > (int) player.posZ ? -1 : 0;
-						double x = i * Math.cos(i) / 2 * xPos;
-						double y = i * Math.sin(i) / 2 * yPos;
-						double z = i * Math.sin(i) / 2 * zPos;
-						world.spawnParticle(EnumParticleTypes.SMOKE_LARGE, xp + 0.5, yp + 0.5, zp + 0.5, x, y, z);
+					Vec3d vec = new Vec3d(xp, yp, zp);
+					Vec3d t = new Vec3d(player.posX, player.posY, player.posZ);
+					double vx = vec.xCoord > t.xCoord ? vec.xCoord - t.xCoord : vec.xCoord < t.xCoord ? t.xCoord - vec.xCoord : 0;
+					double vy = vec.yCoord > t.yCoord ? vec.yCoord - t.yCoord : vec.yCoord < t.yCoord ? t.yCoord - vec.yCoord : 0;
+					double vz = vec.zCoord > t.zCoord ? vec.zCoord - t.zCoord : vec.zCoord < t.zCoord ? t.zCoord - vec.zCoord : 0;
+
+					for(int i = 1; i < 11; i++){
+						Vec3d v = new Vec3d(vec.xCoord > t.xCoord ? vec.xCoord - vx/i : vec.xCoord < t.xCoord ? vec.xCoord + vx/i : t.xCoord,
+								vec.yCoord > t.yCoord ? vec.yCoord - vy/i : vec.yCoord < t.yCoord ? vec.yCoord + vy/i : t.yCoord,
+										vec.zCoord > t.zCoord ? vec.zCoord - vz/i : vec.zCoord < t.zCoord ? vec.zCoord + vz/i : t.zCoord);
+						Vec3d v2 = new Vec3d(vec.xCoord > t.xCoord ? t.xCoord + vx/i : vec.xCoord < t.xCoord ? t.xCoord - vx/i : t.xCoord,
+								vec.yCoord > t.yCoord ? t.yCoord + vy/i : vec.yCoord < t.yCoord ? t.yCoord - vy/i : t.yCoord,
+										vec.zCoord > t.zCoord ? t.zCoord + vz/i : vec.zCoord < t.zCoord ? t.zCoord - vz/i : t.zCoord);
+						for(double d = 0; d < 0.1; d += 0.05){
+							int x = vec.xCoord > t.xCoord ? -1 : vec.xCoord < t.xCoord ? 1 : 0;
+							int y = vec.yCoord > t.yCoord ? -1 : vec.yCoord < t.yCoord ? 1 : 0;
+							int z = vec.zCoord > t.zCoord ? -1 : vec.zCoord < t.zCoord ? 1 : 0;
+							AbyssalCraftAPI.getInternalMethodHandler().spawnParticle("PEStream", v.xCoord + 0.5 + x*d, v.yCoord + 0.5 + y*d, v.zCoord + 0.5 + z*d, 0,0,0);
+							AbyssalCraftAPI.getInternalMethodHandler().spawnParticle("PEStream", v2.xCoord + 0.5 + x*d, v2.yCoord + 0.5 + y*d, v2.zCoord + 0.5 + z*d, 0,0,0);
+						}
 					}
 				}
 			}
@@ -120,14 +133,26 @@ public class PEUtils {
 							((IEnergyCollector) tile).addEnergy(manipulator.getEnergyQuanta());
 							manipulator.addTolerance(manipulator.isActive() ? 2 : 1);
 						}
-						for(double i = 0; i <= 0.7; i += 0.03) {
-							int xPos = xp < tile.getPos().getX() ? 1 : xp > tile.getPos().getX() ? -1 : 0;
-							int yPos = yp < tile.getPos().getY() ? 1 : yp > tile.getPos().getY() ? -1 : 0;
-							int zPos = zp < tile.getPos().getZ() ? 1 : zp > tile.getPos().getZ() ? -1 : 0;
-							double x = i * Math.cos(i) / 2 * xPos;
-							double y = i * Math.sin(i) / 2 * yPos;
-							double z = i * Math.sin(i) / 2 * zPos;
-							world.spawnParticle(EnumParticleTypes.SMOKE_LARGE, xp + 0.5, yp + 0.5, zp + 0.5, x, y, z);
+						Vec3d vec = new Vec3d(xp, yp, zp);
+						Vec3d t = new Vec3d(tile.getPos().getX(), tile.getPos().getY(), tile.getPos().getZ());
+						double vx = vec.xCoord > t.xCoord ? vec.xCoord - t.xCoord : vec.xCoord < t.xCoord ? t.xCoord - vec.xCoord : 0;
+						double vy = vec.yCoord > t.yCoord ? vec.yCoord - t.yCoord : vec.yCoord < t.yCoord ? t.yCoord - vec.yCoord : 0;
+						double vz = vec.zCoord > t.zCoord ? vec.zCoord - t.zCoord : vec.zCoord < t.zCoord ? t.zCoord - vec.zCoord : 0;
+
+						for(int i = 1; i < 11; i++){
+							Vec3d v = new Vec3d(vec.xCoord > t.xCoord ? vec.xCoord - vx/i : vec.xCoord < t.xCoord ? vec.xCoord + vx/i : t.xCoord,
+									vec.yCoord > t.yCoord ? vec.yCoord - vy/i : vec.yCoord < t.yCoord ? vec.yCoord + vy/i : t.yCoord,
+											vec.zCoord > t.zCoord ? vec.zCoord - vz/i : vec.zCoord < t.zCoord ? vec.zCoord + vz/i : t.zCoord);
+							Vec3d v2 = new Vec3d(vec.xCoord > t.xCoord ? t.xCoord + vx/i : vec.xCoord < t.xCoord ? t.xCoord - vx/i : t.xCoord,
+									vec.yCoord > t.yCoord ? t.yCoord + vy/i : vec.yCoord < t.yCoord ? t.yCoord - vy/i : t.yCoord,
+											vec.zCoord > t.zCoord ? t.zCoord + vz/i : vec.zCoord < t.zCoord ? t.zCoord - vz/i : t.zCoord);
+							for(double d = 0; d < 0.1; d += 0.05){
+								int x = vec.xCoord > t.xCoord ? -1 : vec.xCoord < t.xCoord ? 1 : 0;
+								int y = vec.yCoord > t.yCoord ? -1 : vec.yCoord < t.yCoord ? 1 : 0;
+								int z = vec.zCoord > t.zCoord ? -1 : vec.zCoord < t.zCoord ? 1 : 0;
+								AbyssalCraftAPI.getInternalMethodHandler().spawnParticle("PEStream", v.xCoord + 0.5 + x*d, v.yCoord + 0.5 + y*d, v.zCoord + 0.5 + z*d, 0,0,0);
+								AbyssalCraftAPI.getInternalMethodHandler().spawnParticle("PEStream", v2.xCoord + 0.5 + x*d, v2.yCoord + 0.5 + y*d, v2.zCoord + 0.5 + z*d, 0,0,0);
+							}
 						}
 					}
 	}

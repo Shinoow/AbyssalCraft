@@ -11,6 +11,8 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.client;
 
+import java.util.Random;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockFire;
 import net.minecraft.block.BlockLeaves;
@@ -57,6 +59,8 @@ import com.shinoow.abyssalcraft.api.item.ACItems;
 import com.shinoow.abyssalcraft.client.handlers.AbyssalCraftClientEventHooks;
 import com.shinoow.abyssalcraft.client.model.block.*;
 import com.shinoow.abyssalcraft.client.model.item.ModelDreadiumSamuraiArmor;
+import com.shinoow.abyssalcraft.client.particles.ACParticleFX;
+import com.shinoow.abyssalcraft.client.particles.PEStreamParticleFX;
 import com.shinoow.abyssalcraft.client.render.block.*;
 import com.shinoow.abyssalcraft.client.render.entity.*;
 import com.shinoow.abyssalcraft.client.render.entity.layers.LayerStarSpawnTentacles;
@@ -732,6 +736,30 @@ public class ClientProxy extends CommonProxy {
 	@Override
 	public void spawnParticle(String particleName, double posX, double posY, double posZ, double velX, double velY, double velZ)
 	{
+		if(particleName.equals("CorBlood")){
+			spawnParticleLegacy(particleName, posX, posY, posZ, velX, velY, velZ);
+			return;
+		}
+		if(particleName.equals("PEStream")){
+			Random rand = new Random();
+			switch(rand.nextInt(3)){
+			case 0:
+				Minecraft.getMinecraft().effectRenderer.addEffect(new PEStreamParticleFX(Minecraft.getMinecraft().theWorld, posX, posY, posZ, velX, velY, velZ, 65, 63, 170));
+				break;
+			case 1:
+				Minecraft.getMinecraft().effectRenderer.addEffect(new PEStreamParticleFX(Minecraft.getMinecraft().theWorld, posX, posY, posZ, velX, velY, velZ, 41, 89, 48));
+				break;
+			case 2:
+				Minecraft.getMinecraft().effectRenderer.addEffect(new PEStreamParticleFX(Minecraft.getMinecraft().theWorld, posX, posY, posZ, velX, velY, velZ, 39, 80, 135));
+				break;
+			default:
+				Minecraft.getMinecraft().effectRenderer.addEffect(new PEStreamParticleFX(Minecraft.getMinecraft().theWorld, posX, posY, posZ, velX, velY, velZ, 3, 122, 120));
+				break;
+			}
+		}
+	}
+
+	public void spawnParticleLegacy(String particleName, double posX, double posY, double posZ, double velX, double velY, double velZ){
 		Minecraft mc = Minecraft.getMinecraft();
 		World theWorld = mc.theWorld;
 
