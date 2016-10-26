@@ -17,10 +17,11 @@ import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
-import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Vec3d;
 
+import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.api.energy.IEnergyContainer;
 import com.shinoow.abyssalcraft.api.energy.IEnergyRelay;
 import com.shinoow.abyssalcraft.api.energy.PEUtils;
@@ -85,14 +86,26 @@ public class TileEntityEnergyRelay extends TileEntity implements IEnergyRelay, I
 					if(!worldObj.isRemote)
 						container.addEnergy(consumeEnergy(energy));
 					BlockPos p = container.getContainerTile().getPos();
-					for(double i = 0; i <= 0.7; i += 0.03) {
-						int xPos = xp < p.getX() ? 1 : xp > p.getX() ? -1 : 0;
-						int yPos = yp < p.getY() ? 1 : yp > p.getY() ? -1 : 0;
-						int zPos = zp < p.getZ() ? 1 : zp > p.getZ() ? -1 : 0;
-						double x = i * xPos;
-						double y = i * yPos;
-						double z = i * zPos;
-						worldObj.spawnParticle(EnumParticleTypes.SMOKE_LARGE, xp + 0.5, yp + 0.5, zp + 0.5, x, y, z);
+					Vec3d vec = new Vec3d(xp, yp, zp);
+					Vec3d t = new Vec3d(p.getX(), p.getY(), p.getZ());
+					double vx = vec.xCoord > t.xCoord ? vec.xCoord - t.xCoord : vec.xCoord < t.xCoord ? t.xCoord - vec.xCoord : 0;
+					double vy = vec.yCoord > t.yCoord ? vec.yCoord - t.yCoord : vec.yCoord < t.yCoord ? t.yCoord - vec.yCoord : 0;
+					double vz = vec.zCoord > t.zCoord ? vec.zCoord - t.zCoord : vec.zCoord < t.zCoord ? t.zCoord - vec.zCoord : 0;
+
+					for(int i = 1; i < 11; i++){
+						Vec3d v = new Vec3d(vec.xCoord > t.xCoord ? vec.xCoord - vx/i : vec.xCoord < t.xCoord ? vec.xCoord + vx/i : t.xCoord,
+								vec.yCoord > t.yCoord ? vec.yCoord - vy/i : vec.yCoord < t.yCoord ? vec.yCoord + vy/i : t.yCoord,
+										vec.zCoord > t.zCoord ? vec.zCoord - vz/i : vec.zCoord < t.zCoord ? vec.zCoord + vz/i : t.zCoord);
+						Vec3d v2 = new Vec3d(vec.xCoord > t.xCoord ? t.xCoord + vx/i : vec.xCoord < t.xCoord ? t.xCoord - vx/i : t.xCoord,
+								vec.yCoord > t.yCoord ? t.yCoord + vy/i : vec.yCoord < t.yCoord ? t.yCoord - vy/i : t.yCoord,
+										vec.zCoord > t.zCoord ? t.zCoord + vz/i : vec.zCoord < t.zCoord ? t.zCoord - vz/i : t.zCoord);
+						for(double d = 0; d < 1; d += 0.05){
+							int x = vec.xCoord > t.xCoord ? -1 : vec.xCoord < t.xCoord ? 1 : 0;
+							int y = vec.yCoord > t.yCoord ? -1 : vec.yCoord < t.yCoord ? 1 : 0;
+							int z = vec.zCoord > t.zCoord ? -1 : vec.zCoord < t.zCoord ? 1 : 0;
+							AbyssalCraft.proxy.spawnParticle("PEStream", v.xCoord + 0.5 + x*d, v.yCoord + 0.5 + y*d, v.zCoord + 0.5 + z*d, 0,0,0);
+							AbyssalCraft.proxy.spawnParticle("PEStream", v2.xCoord + 0.5 + x*d, v2.yCoord + 0.5 + y*d, v2.zCoord + 0.5 + z*d, 0,0,0);
+						}
 					}
 				}
 		}

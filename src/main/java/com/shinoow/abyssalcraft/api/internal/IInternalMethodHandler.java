@@ -28,4 +28,16 @@ public interface IInternalMethodHandler {
 	 * @param id Dimension ID
 	 */
 	public void sendDisruption(DeityType deity, String name, BlockPos pos, int id);
+
+	/**
+	 * Spawns a particle
+	 * @param particleName Particle name
+	 * @param posX X Coordinate
+	 * @param posY Y Coordinate
+	 * @param posZ Z Coordinate
+	 * @param velX X velocity
+	 * @param velY Y velocity
+	 * @param velZ Z velocity
+	 */
+	public void spawnParticle(String particleName, double posX, double posY, double posZ, double velX, double velY, double velZ);
 }

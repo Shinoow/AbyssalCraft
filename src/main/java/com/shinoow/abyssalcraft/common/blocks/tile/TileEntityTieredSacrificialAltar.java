@@ -28,11 +28,11 @@ import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.math.AxisAlignedBB;
 
-import com.shinoow.abyssalcraft.api.energy.IEnergyContainer;
+import com.shinoow.abyssalcraft.api.energy.IEnergyCollector;
 import com.shinoow.abyssalcraft.api.energy.IEnergyContainerItem;
 import com.shinoow.abyssalcraft.lib.util.blocks.ISingletonInventory;
 
-public class TileEntityTieredSacrificialAltar extends TileEntity implements IEnergyContainer, ISingletonInventory, ITickable {
+public class TileEntityTieredSacrificialAltar extends TileEntity implements IEnergyCollector, ISingletonInventory, ITickable {
 
 	private ItemStack item;
 	private int rot;
