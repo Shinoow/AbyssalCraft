@@ -20,11 +20,11 @@ import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ITickable;
 
-import com.shinoow.abyssalcraft.api.energy.IEnergyContainer;
+import com.shinoow.abyssalcraft.api.energy.IEnergyCollector;
 import com.shinoow.abyssalcraft.api.energy.IEnergyContainerItem;
 import com.shinoow.abyssalcraft.lib.util.blocks.ISingletonInventory;
 
-public class TileEntityEnergyPedestal extends TileEntity implements IEnergyContainer, ISingletonInventory, ITickable {
+public class TileEntityEnergyPedestal extends TileEntity implements IEnergyCollector, ISingletonInventory, ITickable {
 
 	private ItemStack item;
 	private int rot;

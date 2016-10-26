@@ -19,4 +19,7 @@ public class DummyMethodHandler implements IInternalMethodHandler {
 
 	@Override
 	public void sendDisruption(DeityType deity, String name, BlockPos pos, int id) {}
+
+	@Override
+	public void spawnParticle(String particleName, double posX, double posY,double posZ, double velX, double velY, double velZ) {}
 }
