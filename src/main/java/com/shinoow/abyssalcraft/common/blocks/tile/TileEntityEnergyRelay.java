@@ -108,8 +108,8 @@ public class TileEntityEnergyRelay extends TileEntity implements IEnergyRelay, I
 							int x = vec.xCoord > t.xCoord ? -1 : vec.xCoord < t.xCoord ? 1 : 0;
 							int y = vec.yCoord > t.yCoord ? -1 : vec.yCoord < t.yCoord ? 1 : 0;
 							int z = vec.zCoord > t.zCoord ? -1 : vec.zCoord < t.zCoord ? 1 : 0;
-							AbyssalCraft.proxy.spawnParticle("PEStream", v.xCoord + 0.5 + x*d, v.yCoord + 0.5 + y*d, v.zCoord + 0.5 + z*d, 0,0,0);
-							AbyssalCraft.proxy.spawnParticle("PEStream", v2.xCoord + 0.5 + x*d, v2.yCoord + 0.5 + y*d, v2.zCoord + 0.5 + z*d, 0,0,0);
+							AbyssalCraft.proxy.spawnParticle("PEStream", worldObj, v.xCoord + 0.5 + x*d, v.yCoord + 0.5 + y*d, v.zCoord + 0.5 + z*d, 0,0,0);
+							AbyssalCraft.proxy.spawnParticle("PEStream", worldObj, v2.xCoord + 0.5 + x*d, v2.yCoord + 0.5 + y*d, v2.zCoord + 0.5 + z*d, 0,0,0);
 						}
 					}
 				}

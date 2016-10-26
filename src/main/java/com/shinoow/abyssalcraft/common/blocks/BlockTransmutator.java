@@ -199,19 +199,19 @@ public class BlockTransmutator extends BlockContainer {
 			{
 			case WEST:
 				world.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, d0 - d3, d1, d2 + d4, 0.0D, 0.0D, 0.0D, new int[0]);
-				AbyssalCraft.proxy.spawnParticle("CorBlood", d0 - d3, d1, d2 + d4, 0.0D, 0.0D, 0.0D);
+				AbyssalCraft.proxy.spawnParticle("CorBlood", world, d0 - d3, d1, d2 + d4, 0.0D, 0.0D, 0.0D);
 				break;
 			case EAST:
 				world.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, d0 + d3, d1, d2 + d4, 0.0D, 0.0D, 0.0D, new int[0]);
-				AbyssalCraft.proxy.spawnParticle("CorBlood", d0 + d3, d1, d2 + d4, 0.0D, 0.0D, 0.0D);
+				AbyssalCraft.proxy.spawnParticle("CorBlood", world, d0 + d3, d1, d2 + d4, 0.0D, 0.0D, 0.0D);
 				break;
 			case NORTH:
 				world.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, d0 + d4, d1, d2 - d3, 0.0D, 0.0D, 0.0D, new int[0]);
-				AbyssalCraft.proxy.spawnParticle("CorBlood", d0 + d4, d1, d2 - d3, 0.0D, 0.0D, 0.0D);
+				AbyssalCraft.proxy.spawnParticle("CorBlood", world, d0 + d4, d1, d2 - d3, 0.0D, 0.0D, 0.0D);
 				break;
 			case SOUTH:
 				world.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, d0 + d4, d1, d2 + d3, 0.0D, 0.0D, 0.0D, new int[0]);
-				AbyssalCraft.proxy.spawnParticle("CorBlood", d0 + d4, d1, d2 + d3, 0.0D, 0.0D, 0.0D);
+				AbyssalCraft.proxy.spawnParticle("CorBlood", world, d0 + d4, d1, d2 + d3, 0.0D, 0.0D, 0.0D);
 			default:
 				break;
 			}

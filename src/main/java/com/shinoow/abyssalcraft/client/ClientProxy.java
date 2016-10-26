@@ -11,8 +11,6 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.client;
 
-import java.util.Random;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockFire;
 import net.minecraft.block.BlockLeaves;
@@ -730,26 +728,25 @@ public class ClientProxy extends CommonProxy {
 	}
 
 	@Override
-	public void spawnParticle(String particleName, double posX, double posY, double posZ, double velX, double velY, double velZ)
+	public void spawnParticle(String particleName, World world, double posX, double posY, double posZ, double velX, double velY, double velZ)
 	{
 		if(particleName.equals("CorBlood")){
 			spawnParticleLegacy(particleName, posX, posY, posZ, velX, velY, velZ);
 			return;
 		}
 		if(particleName.equals("PEStream")){
-			Random rand = new Random();
-			switch(rand.nextInt(3)){
+			switch(world.rand.nextInt(3)){
 			case 0:
-				Minecraft.getMinecraft().effectRenderer.addEffect(new PEStreamParticleFX(Minecraft.getMinecraft().theWorld, posX, posY, posZ, velX, velY, velZ, 65, 63, 170));
+				Minecraft.getMinecraft().effectRenderer.addEffect(new PEStreamParticleFX(world, posX, posY, posZ, velX, velY, velZ, 65, 63, 170));
 				break;
 			case 1:
-				Minecraft.getMinecraft().effectRenderer.addEffect(new PEStreamParticleFX(Minecraft.getMinecraft().theWorld, posX, posY, posZ, velX, velY, velZ, 41, 89, 48));
+				Minecraft.getMinecraft().effectRenderer.addEffect(new PEStreamParticleFX(world, posX, posY, posZ, velX, velY, velZ, 41, 89, 48));
 				break;
 			case 2:
-				Minecraft.getMinecraft().effectRenderer.addEffect(new PEStreamParticleFX(Minecraft.getMinecraft().theWorld, posX, posY, posZ, velX, velY, velZ, 39, 80, 135));
+				Minecraft.getMinecraft().effectRenderer.addEffect(new PEStreamParticleFX(world, posX, posY, posZ, velX, velY, velZ, 39, 80, 135));
 				break;
 			default:
-				Minecraft.getMinecraft().effectRenderer.addEffect(new PEStreamParticleFX(Minecraft.getMinecraft().theWorld, posX, posY, posZ, velX, velY, velZ, 3, 122, 120));
+				Minecraft.getMinecraft().effectRenderer.addEffect(new PEStreamParticleFX(world, posX, posY, posZ, velX, velY, velZ, 3, 122, 120));
 				break;
 			}
 		}

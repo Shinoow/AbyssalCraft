@@ -82,8 +82,8 @@ public class PEUtils {
 							int x = vec.xCoord > t.xCoord ? -1 : vec.xCoord < t.xCoord ? 1 : 0;
 							int y = vec.yCoord > t.yCoord ? -1 : vec.yCoord < t.yCoord ? 1 : 0;
 							int z = vec.zCoord > t.zCoord ? -1 : vec.zCoord < t.zCoord ? 1 : 0;
-							AbyssalCraftAPI.getInternalMethodHandler().spawnParticle("PEStream", v.xCoord + 0.5 + x*d, v.yCoord + 0.5 + y*d, v.zCoord + 0.5 + z*d, 0,0,0);
-							AbyssalCraftAPI.getInternalMethodHandler().spawnParticle("PEStream", v2.xCoord + 0.5 + x*d, v2.yCoord + 0.5 + y*d, v2.zCoord + 0.5 + z*d, 0,0,0);
+							AbyssalCraftAPI.getInternalMethodHandler().spawnParticle("PEStream", world, v.xCoord + 0.5 + x*d, v.yCoord + 0.5 + y*d, v.zCoord + 0.5 + z*d, 0,0,0);
+							AbyssalCraftAPI.getInternalMethodHandler().spawnParticle("PEStream", world, v2.xCoord + 0.5 + x*d, v2.yCoord + 0.5 + y*d, v2.zCoord + 0.5 + z*d, 0,0,0);
 						}
 					}
 				}
@@ -150,8 +150,8 @@ public class PEUtils {
 								int x = vec.xCoord > t.xCoord ? -1 : vec.xCoord < t.xCoord ? 1 : 0;
 								int y = vec.yCoord > t.yCoord ? -1 : vec.yCoord < t.yCoord ? 1 : 0;
 								int z = vec.zCoord > t.zCoord ? -1 : vec.zCoord < t.zCoord ? 1 : 0;
-								AbyssalCraftAPI.getInternalMethodHandler().spawnParticle("PEStream", v.xCoord + 0.5 + x*d, v.yCoord + 0.5 + y*d, v.zCoord + 0.5 + z*d, 0,0,0);
-								AbyssalCraftAPI.getInternalMethodHandler().spawnParticle("PEStream", v2.xCoord + 0.5 + x*d, v2.yCoord + 0.5 + y*d, v2.zCoord + 0.5 + z*d, 0,0,0);
+								AbyssalCraftAPI.getInternalMethodHandler().spawnParticle("PEStream", world, v.xCoord + 0.5 + x*d, v.yCoord + 0.5 + y*d, v.zCoord + 0.5 + z*d, 0,0,0);
+								AbyssalCraftAPI.getInternalMethodHandler().spawnParticle("PEStream", world, v2.xCoord + 0.5 + x*d, v2.yCoord + 0.5 + y*d, v2.zCoord + 0.5 + z*d, 0,0,0);
 							}
 						}
 					}
