@@ -12,6 +12,7 @@
 package com.shinoow.abyssalcraft.api.internal;
 
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
 
 import com.shinoow.abyssalcraft.api.energy.EnergyEnum.DeityType;
 
@@ -32,6 +33,7 @@ public interface IInternalMethodHandler {
 	/**
 	 * Spawns a particle
 	 * @param particleName Particle name
+	 * @param world Current World
 	 * @param posX X Coordinate
 	 * @param posY Y Coordinate
 	 * @param posZ Z Coordinate
@@ -39,5 +41,5 @@ public interface IInternalMethodHandler {
 	 * @param velY Y velocity
 	 * @param velZ Z velocity
 	 */
-	public void spawnParticle(String particleName, double posX, double posY, double posZ, double velX, double velY, double velZ);
+	public void spawnParticle(String particleName, World world, double posX, double posY, double posZ, double velX, double velY, double velZ);
 }
