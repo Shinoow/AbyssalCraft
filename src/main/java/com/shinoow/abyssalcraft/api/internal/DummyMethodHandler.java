@@ -12,6 +12,7 @@
 package com.shinoow.abyssalcraft.api.internal;
 
 import net.minecraft.util.BlockPos;
+import net.minecraft.world.World;
 
 import com.shinoow.abyssalcraft.api.energy.EnergyEnum.DeityType;
 
@@ -21,5 +22,5 @@ public class DummyMethodHandler implements IInternalMethodHandler {
 	public void sendDisruption(DeityType deity, String name, BlockPos pos, int id) {}
 
 	@Override
-	public void spawnParticle(String particleName, double posX, double posY, double posZ, double velX, double velY, double velZ) {}
+	public void spawnParticle(String particleName, World world, double posX, double posY, double posZ, double velX, double velY, double velZ) {}
 }

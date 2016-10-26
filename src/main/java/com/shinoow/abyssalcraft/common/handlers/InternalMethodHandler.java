@@ -12,6 +12,7 @@
 package com.shinoow.abyssalcraft.common.handlers;
 
 import net.minecraft.util.BlockPos;
+import net.minecraft.world.World;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.api.energy.EnergyEnum.DeityType;
@@ -27,7 +28,7 @@ public class InternalMethodHandler extends DummyMethodHandler {
 	}
 
 	@Override
-	public void spawnParticle(String particleName, double posX, double posY, double posZ, double velX, double velY, double velZ) {
-		AbyssalCraft.proxy.spawnParticle(particleName, posX, posY, posZ, velX, velY, velZ);
+	public void spawnParticle(String particleName, World world, double posX, double posY, double posZ, double velX, double velY, double velZ) {
+		AbyssalCraft.proxy.spawnParticle(particleName, world, posX, posY, posZ, velX, velY, velZ);
 	}
 }

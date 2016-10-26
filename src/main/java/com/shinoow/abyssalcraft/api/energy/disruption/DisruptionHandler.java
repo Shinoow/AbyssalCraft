@@ -93,6 +93,7 @@ public class DisruptionHandler {
 	 * @since 1.5
 	 */
 	public void generateDisruption(DeityType deity, World world, BlockPos pos, List<EntityPlayer> players){
+		if(world.isRemote) return;
 		List<DisruptionEntry> dis = Lists.newArrayList();
 
 		if(deity == null){
