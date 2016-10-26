@@ -33,6 +33,7 @@ import net.minecraftforge.common.ChestGenHooks;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
+import com.shinoow.abyssalcraft.common.blocks.BlockACBrick.EnumBrickType;
 import com.shinoow.abyssalcraft.common.structures.StructureComponentModded;
 import com.shinoow.abyssalcraft.lib.ACLoot;
 
@@ -1059,10 +1060,14 @@ public class StructureAbyStrongholdPieces
 		@Override
 		public void selectBlocks(Random par1Random, int par2, int par3, int par4, boolean par5)
 		{
-			if (par5)
-				blockstate = ACBlocks.abyssal_stone_brick.getDefaultState();
-			else
-				blockstate = Blocks.air.getDefaultState();
+			if (par5){
+
+				float f = par1Random.nextFloat();
+
+				if(f < 0.2F)
+					blockstate = ACBlocks.abyssal_stone_brick.getStateFromMeta(EnumBrickType.CRACKED.getMeta());
+				else blockstate = ACBlocks.abyssal_stone_brick.getDefaultState();
+			} else blockstate = Blocks.air.getDefaultState();
 		}
 
 		Stones(Object par1StructureStrongholdPieceWeight2)

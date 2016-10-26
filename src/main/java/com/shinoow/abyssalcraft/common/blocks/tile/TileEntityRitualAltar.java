@@ -30,6 +30,7 @@ import net.minecraft.util.ITickable;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 
+import com.shinoow.abyssalcraft.api.energy.EnergyEnum.DeityType;
 import com.shinoow.abyssalcraft.api.energy.IEnergyTransporterItem;
 import com.shinoow.abyssalcraft.api.energy.disruption.DisruptionHandler;
 import com.shinoow.abyssalcraft.api.entity.EntityUtil;
@@ -125,7 +126,7 @@ public class TileEntityRitualAltar extends TileEntity implements ITickable, IRit
 								ritual.completeRitual(worldObj, pos, user);
 							else if(!worldObj.isRemote){
 								worldObj.addWeatherEffect(new EntityLightningBolt(worldObj, pos.getX(), pos.getY() + 1, pos.getZ()));
-								DisruptionHandler.instance().generateDisruption(null, worldObj, pos, worldObj.getEntitiesWithinAABB(EntityPlayer.class, new AxisAlignedBB(pos, pos.add(1, 1, 1)).expand(16, 16, 16)));
+								DisruptionHandler.instance().generateDisruption(DeityType.values()[worldObj.rand.nextInt(DeityType.values().length)], worldObj, pos, worldObj.getEntitiesWithinAABB(EntityPlayer.class, new AxisAlignedBB(pos, pos.add(1, 1, 1)).expand(16, 16, 16)));
 							}
 							ritualTimer = 0;
 							user = null;
@@ -136,7 +137,7 @@ public class TileEntityRitualAltar extends TileEntity implements ITickable, IRit
 					} else {
 						if(!worldObj.isRemote){
 							worldObj.addWeatherEffect(new EntityLightningBolt(worldObj, pos.getX(), pos.getY() + 1, pos.getZ()));
-							DisruptionHandler.instance().generateDisruption(null, worldObj, pos, worldObj.getEntitiesWithinAABB(EntityPlayer.class, new AxisAlignedBB(pos, pos.add(1, 1, 1)).expand(16, 16, 16)));
+							DisruptionHandler.instance().generateDisruption(DeityType.values()[worldObj.rand.nextInt(DeityType.values().length)], worldObj, pos, worldObj.getEntitiesWithinAABB(EntityPlayer.class, new AxisAlignedBB(pos, pos.add(1, 1, 1)).expand(16, 16, 16)));
 						}
 						ritualTimer = 0;
 						ritual = null;
