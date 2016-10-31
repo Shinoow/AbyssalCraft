@@ -11,6 +11,7 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.common.entity.anti;
 
+import java.util.Calendar;
 import java.util.UUID;
 
 import net.minecraft.block.Block;
@@ -35,8 +36,10 @@ import net.minecraft.entity.ai.attributes.RangedAttribute;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.monster.EntityZombie;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.pathfinding.PathNavigateGround;
 import net.minecraft.util.BlockPos;
@@ -60,6 +63,8 @@ public class EntityAntiZombie extends EntityMob implements IAntiEntity {
 	private boolean canBreak = false;
 	private float width = -1.0F;
 	private float height;
+	private static final UUID attackDamageBoostUUID = UUID.fromString("648D7064-6A60-4F59-8ABE-C2C23A6DD7A9");
+	private static final AttributeModifier attackDamageBoost = new AttributeModifier(attackDamageBoostUUID, "Halloween Attack Damage Boost", 3.0D, 0);
 
 	public EntityAntiZombie(World par1World)
 	{
@@ -285,6 +290,9 @@ public class EntityAntiZombie extends EntityMob implements IAntiEntity {
 		float f = difficulty.getClampedAdditionalDifficulty();
 		setCanPickUpLoot(rand.nextFloat() < 0.55F * f);
 
+		setEquipmentBasedOnDifficulty(difficulty);
+		setEnchantmentBasedOnDifficulty(difficulty);
+
 		if (entity == null)
 			entity = new EntityAntiZombie.GroupData(worldObj.rand.nextFloat() < ForgeModContainer.zombieBabyChance, worldObj.rand.nextFloat() < 0.05F, null);
 
@@ -310,6 +318,25 @@ public class EntityAntiZombie extends EntityMob implements IAntiEntity {
 			getEntityAttribute(SharedMonsterAttributes.maxHealth).applyModifier(new AttributeModifier("Leader zombie bonus", rand.nextDouble() * 3.0D + 1.0D, 2));
 			func_146070_a(true);
 		}
+
+		if (getEquipmentInSlot(4) == null)
+		{
+			Calendar calendar = worldObj.getCurrentDate();
+
+			if (calendar.get(2) + 1 == 10 && calendar.get(5) == 31 && rand.nextFloat() < 0.25F)
+			{
+				setCurrentItemOrArmor(4, new ItemStack(rand.nextFloat() < 0.1F ? Blocks.lit_pumpkin : Blocks.pumpkin));
+				equipmentDropChances[4] = 0.0F;
+			}
+		}
+
+		IAttributeInstance attribute = getEntityAttribute(SharedMonsterAttributes.attackDamage);
+		Calendar calendar = worldObj.getCurrentDate();
+
+		attribute.removeModifier(attackDamageBoost);
+
+		if (calendar.get(2) + 1 == 10 && calendar.get(5) == 31)
+			attribute.applyModifier(attackDamageBoost);
 
 		return (IEntityLivingData)entity;
 	}

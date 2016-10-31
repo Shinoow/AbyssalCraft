@@ -11,8 +11,11 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.common.entity;
 
+import java.util.Calendar;
+
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.IEntityLivingData;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIAttackOnCollide;
 import net.minecraft.entity.ai.EntityAIHurtByTarget;
@@ -21,10 +24,14 @@ import net.minecraft.entity.ai.EntityAIMoveTowardsRestriction;
 import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
 import net.minecraft.entity.ai.EntityAIWander;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
+import net.minecraft.entity.ai.attributes.IAttributeInstance;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.DamageSource;
+import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.World;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
@@ -92,5 +99,24 @@ public class EntityAbygolem extends EntityMob {
 	protected void playStepSound(BlockPos pos, Block par4)
 	{
 		worldObj.playSoundAtEntity(this, "mob.zombie.step", 0.15F, 1.0F);
+	}
+
+	@Override
+	public IEntityLivingData onInitialSpawn(DifficultyInstance difficulty, IEntityLivingData par1EntityLivingData)
+	{
+		par1EntityLivingData = super.onInitialSpawn(difficulty, par1EntityLivingData);
+
+		if (getEquipmentInSlot(4) == null)
+		{
+			Calendar calendar = worldObj.getCurrentDate();
+
+			if (calendar.get(2) + 1 == 10 && calendar.get(5) == 31 && rand.nextFloat() < 0.25F)
+			{
+				setCurrentItemOrArmor(4, new ItemStack(rand.nextFloat() < 0.1F ? Blocks.lit_pumpkin : Blocks.pumpkin));
+				equipmentDropChances[4] = 0.0F;
+			}
+		}
+
+		return par1EntityLivingData;
 	}
 }

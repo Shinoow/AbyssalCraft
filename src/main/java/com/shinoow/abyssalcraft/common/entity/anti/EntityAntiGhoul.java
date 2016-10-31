@@ -11,6 +11,9 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.common.entity.anti;
 
+import java.util.Calendar;
+import java.util.UUID;
+
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EnumCreatureAttribute;
@@ -24,11 +27,15 @@ import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
 import net.minecraft.entity.ai.EntityAISwimming;
 import net.minecraft.entity.ai.EntityAIWander;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
+import net.minecraft.entity.ai.attributes.AttributeModifier;
+import net.minecraft.entity.ai.attributes.IAttributeInstance;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.DifficultyInstance;
@@ -43,6 +50,9 @@ import com.shinoow.abyssalcraft.common.entity.EntityDepthsGhoul;
 import com.shinoow.abyssalcraft.common.entity.EntityOmotholGhoul;
 
 public class EntityAntiGhoul extends EntityMob implements IAntiEntity {
+
+	private static final UUID attackDamageBoostUUID = UUID.fromString("648D7064-6A60-4F59-8ABE-C2C23A6DD7A9");
+	private static final AttributeModifier attackDamageBoost = new AttributeModifier(attackDamageBoostUUID, "Halloween Attack Damage Boost", 3.0D, 0);
 
 	public EntityAntiGhoul(World par1World) {
 		super(par1World);
@@ -186,6 +196,28 @@ public class EntityAntiGhoul extends EntityMob implements IAntiEntity {
 
 		float f = difficulty.getClampedAdditionalDifficulty();
 		setCanPickUpLoot(rand.nextFloat() < 0.55F * f);
+
+		setEquipmentBasedOnDifficulty(difficulty);
+		setEnchantmentBasedOnDifficulty(difficulty);
+
+		if (getEquipmentInSlot(4) == null)
+		{
+			Calendar calendar = worldObj.getCurrentDate();
+
+			if (calendar.get(2) + 1 == 10 && calendar.get(5) == 31 && rand.nextFloat() < 0.25F)
+			{
+				setCurrentItemOrArmor(4, new ItemStack(rand.nextFloat() < 0.1F ? Blocks.lit_pumpkin : Blocks.pumpkin));
+				equipmentDropChances[4] = 0.0F;
+			}
+		}
+
+		IAttributeInstance attribute = getEntityAttribute(SharedMonsterAttributes.attackDamage);
+		Calendar calendar = worldObj.getCurrentDate();
+
+		attribute.removeModifier(attackDamageBoost);
+
+		if (calendar.get(2) + 1 == 10 && calendar.get(5) == 31)
+			attribute.applyModifier(attackDamageBoost);
 
 		return par1EntityLivingData;
 	}

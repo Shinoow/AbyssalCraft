@@ -199,6 +199,7 @@ public class InitHandler implements ILifeCycleHandler {
 		antiItemDisintegration = cfg.get(Configuration.CATEGORY_GENERAL, "Liquid Antimatter item disintegration", true, "Toggles whether or not Liquid Antimatter will disintegrate any items dropped into a pool of it.").getBoolean();
 		portalCooldown = cfg.get(Configuration.CATEGORY_GENERAL, "Portal cooldown", 10, "Cooldown after using a portal, increasing the value increases the delay until you can teleport again. Measured in ticks (20 ticks = 1 second).\n[range: 10 ~ 300, default: 10]", 10, 300).getInt();
 		demonAnimalSpawnWeight = cfg.get(Configuration.CATEGORY_GENERAL, "Demon Animal spawn weight", 15, "Spawn weight for the Demon Animals (Pigs, Cows, Chickens) spawning in the Nether.\n[range: 0 ~ 100, default: 15]", 0, 100).getInt();
+		smeltingRecipes = cfg.get(Configuration.CATEGORY_GENERAL, "Smelting Recipes", true, "Toggles whether or not to add smelting recipes for armor pieces.").getBoolean();
 
 		darkWeight1 = cfg.get("biome_weight", "Darklands", 5, "Biome weight for the Darklands biome, controls the chance of it generating (n out of 100).\n[range: 0 ~ 100, default: 5]", 0, 100).getInt();
 		darkWeight2 = cfg.get("biome_weight", "Darklands Forest", 5, "Biome weight for the Darklands Forest biome, controls the chance of it generating (n out of 100)\n[range: 0 ~ 100, default: 5]", 0, 100).getInt();

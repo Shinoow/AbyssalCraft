@@ -63,7 +63,7 @@ public class EntityAbyssalZombie extends EntityMob implements ICoraliumEntity {
 	private static final UUID babySpeedBoostUUID = UUID.fromString("B9766B59-9566-4402-BC1F-2EE2A276D836");
 	private static final AttributeModifier babySpeedBoostModifier = new AttributeModifier(babySpeedBoostUUID, "Baby speed boost", 0.5D, 1);
 	private static final UUID attackDamageBoostUUID = UUID.fromString("648D7064-6A60-4F59-8ABE-C2C23A6DD7A9");
-	private static final AttributeModifier attackDamageBoostModifier = new AttributeModifier(attackDamageBoostUUID, "Attack Damage Boost", 3.0D, 0);
+	private static final AttributeModifier attackDamageBoost = new AttributeModifier(attackDamageBoostUUID, "Halloween Attack Damage Boost", 3.0D, 0);
 
 	private float zombieWidth = -1.0F;
 	private float zombieHeight;
@@ -391,8 +391,11 @@ public class EntityAbyssalZombie extends EntityMob implements ICoraliumEntity {
 
 		IAttributeInstance attribute = getEntityAttribute(SharedMonsterAttributes.attackDamage);
 		Calendar calendar = worldObj.getCurrentDate();
-		if (calendar.get(2) + 1 == 10 && calendar.get(5) == 31 && rand.nextFloat() < 0.25F)
-			attribute.applyModifier(attackDamageBoostModifier);
+
+		attribute.removeModifier(attackDamageBoost);
+
+		if (calendar.get(2) + 1 == 10 && calendar.get(5) == 31)
+			attribute.applyModifier(attackDamageBoost);
 
 		return (IEntityLivingData)data;
 	}

@@ -89,7 +89,7 @@ public class AbyssalCraft {
 
 	public static boolean shouldSpread, shouldInfect, breakLogic, destroyOcean, demonAnimalFire, updateC, darkness,
 	particleBlock, particleEntity, hardcoreMode, useDynamicPotionIds, evilAnimalCreatureType,
-	antiItemDisintegration;
+	antiItemDisintegration, smeltingRecipes;
 	public static int evilAnimalSpawnWeight, endAbyssalZombieSpawnWeight, portalCooldown, demonAnimalSpawnWeight, shoggothLairSpawnRate;
 	public static boolean shoggothOoze, oozeLeaves, oozeGrass, oozeGround, oozeSand, oozeRock, oozeCloth, oozeWood,
 	oozeGourd, oozeIron, oozeClay, oozeExpire;

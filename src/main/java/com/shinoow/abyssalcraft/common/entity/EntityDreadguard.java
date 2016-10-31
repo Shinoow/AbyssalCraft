@@ -30,6 +30,7 @@ import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.ai.attributes.IAttributeInstance;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionEffect;
@@ -155,27 +156,27 @@ public class EntityDreadguard extends EntityMob implements IDreadEntity {
 	}
 
 	@Override
-	public void onLivingUpdate()
-	{
-		if (worldObj.isRemote){
-			setCurrentItemOrArmor(1, new ItemStack(ACItems.dreaded_abyssalnite_boots));
-			setCurrentItemOrArmor(3, new ItemStack(ACItems.dreaded_abyssalnite_chestplate));
-			setCurrentItemOrArmor(4, new ItemStack(ACItems.dreaded_abyssalnite_helmet));
-			setCurrentItemOrArmor(2, new ItemStack(ACItems.dreaded_abyssalnite_leggings));
-		}
-		super.onLivingUpdate();
-	}
-
-	@Override
 	public IEntityLivingData onInitialSpawn(DifficultyInstance difficulty, IEntityLivingData par1EntityLivingData)
 	{
 		par1EntityLivingData = super.onInitialSpawn(difficulty, par1EntityLivingData);
 
+		setCurrentItemOrArmor(1, new ItemStack(ACItems.dreaded_abyssalnite_boots));
+		setCurrentItemOrArmor(3, new ItemStack(ACItems.dreaded_abyssalnite_chestplate));
+		setCurrentItemOrArmor(4, new ItemStack(ACItems.dreaded_abyssalnite_helmet));
+		setCurrentItemOrArmor(2, new ItemStack(ACItems.dreaded_abyssalnite_leggings));
+
 		IAttributeInstance attribute = getEntityAttribute(SharedMonsterAttributes.attackDamage);
 		Calendar calendar = worldObj.getCurrentDate();
 
-		if (calendar.get(2) + 1 == 10 && calendar.get(5) == 31 && rand.nextFloat() < 0.25F)
+		attribute.removeModifier(attackDamageBoost);
+
+		if (calendar.get(2) + 1 == 10 && calendar.get(5) == 31){
 			attribute.applyModifier(attackDamageBoost);
+			if(rand.nextFloat() < 0.25F){
+				setCurrentItemOrArmor(4, new ItemStack(rand.nextFloat() < 0.1F ? Blocks.lit_pumpkin : Blocks.pumpkin));
+				equipmentDropChances[4] = 0.0F;
+			}
+		}
 
 		return par1EntityLivingData;
 	}

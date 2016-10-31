@@ -11,6 +11,7 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.common.entity;
 
+import java.util.Calendar;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -763,6 +764,18 @@ public class EntityRemnant extends EntityMob implements IMerchant, IAntiEntity, 
 	public IEntityLivingData onInitialSpawn(DifficultyInstance difficulty, IEntityLivingData data){
 		data = super.onInitialSpawn(difficulty, data);
 		applyRandomTrade(worldObj.rand);
+
+		if (getEquipmentInSlot(4) == null)
+		{
+			Calendar calendar = worldObj.getCurrentDate();
+
+			if (calendar.get(2) + 1 == 10 && calendar.get(5) == 31 && rand.nextFloat() < 0.25F)
+			{
+				setCurrentItemOrArmor(4, new ItemStack(rand.nextFloat() < 0.1F ? Blocks.lit_pumpkin : Blocks.pumpkin));
+				equipmentDropChances[4] = 0.0F;
+			}
+		}
+
 		return data;
 	}
 

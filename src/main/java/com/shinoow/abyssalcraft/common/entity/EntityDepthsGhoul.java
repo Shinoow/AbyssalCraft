@@ -384,7 +384,9 @@ public class EntityDepthsGhoul extends EntityMob implements ICoraliumEntity {
 		IAttributeInstance attribute = getEntityAttribute(SharedMonsterAttributes.attackDamage);
 		Calendar calendar = worldObj.getCurrentDate();
 
-		if (calendar.get(2) + 1 == 10 && calendar.get(5) == 31 && rand.nextFloat() < 0.25F)
+		attribute.removeModifier(ghoulHDamageBoost);
+
+		if (calendar.get(2) + 1 == 10 && calendar.get(5) == 31)
 			attribute.applyModifier(ghoulHDamageBoost);
 
 

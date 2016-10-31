@@ -11,6 +11,8 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.common.entity.anti;
 
+import java.util.Calendar;
+
 import net.minecraft.block.Block;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
@@ -33,6 +35,7 @@ import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.monster.EntitySkeleton;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityArrow;
+import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -153,16 +156,33 @@ public class EntityAntiSkeleton extends EntityMob implements IRangedAttackMob, I
 		else par1Entity.applyEntityCollision(this);
 	}
 
+	protected void setEquipmentBasedOnDifficulty(DifficultyInstance difficulty)
+    {
+        super.setEquipmentBasedOnDifficulty(difficulty);
+        this.setCurrentItemOrArmor(0, new ItemStack(Items.bow));
+    }
+
 	@Override
 	public IEntityLivingData onInitialSpawn(DifficultyInstance difficulty, IEntityLivingData par1EntityLivingData)
 	{
 		par1EntityLivingData = super.onInitialSpawn(difficulty, par1EntityLivingData);
 
 		tasks.addTask(4, aiArrowAttack);
-		setCurrentItemOrArmor(0, new ItemStack(Items.bow));
+		setEquipmentBasedOnDifficulty(difficulty);
 		setEnchantmentBasedOnDifficulty(difficulty);
 
 		setCanPickUpLoot(rand.nextFloat() < 0.55F * difficulty.getClampedAdditionalDifficulty());
+
+		if (getEquipmentInSlot(4) == null)
+		{
+			Calendar calendar = worldObj.getCurrentDate();
+
+			if (calendar.get(2) + 1 == 10 && calendar.get(5) == 31 && rand.nextFloat() < 0.25F)
+			{
+				setCurrentItemOrArmor(4, new ItemStack(rand.nextFloat() < 0.1F ? Blocks.lit_pumpkin : Blocks.pumpkin));
+				equipmentDropChances[4] = 0.0F;
+			}
+		}
 
 		return par1EntityLivingData;
 	}

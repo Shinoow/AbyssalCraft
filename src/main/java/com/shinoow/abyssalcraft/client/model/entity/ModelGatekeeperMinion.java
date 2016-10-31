@@ -18,33 +18,33 @@ import net.minecraft.util.MathHelper;
 
 public class ModelGatekeeperMinion extends ModelBase {
 
-	ModelRenderer mask1;
-	ModelRenderer maskpart1;
-	ModelRenderer maskpart2;
-	ModelRenderer mask2;
-	ModelRenderer maskpart3;
-	ModelRenderer maskpart4;
-	ModelRenderer head;
-	ModelRenderer body;
-	ModelRenderer rightshoulder;
-	ModelRenderer leftshoulder;
-	ModelRenderer rightarm1;
-	ModelRenderer rightarm2;
-	ModelRenderer leftarm1;
-	ModelRenderer leftarm2;
-	ModelRenderer tentacle1;
-	ModelRenderer tentacle2;
-	ModelRenderer tentacle3;
-	ModelRenderer tentacle4;
-	ModelRenderer rltentacle1;
-	ModelRenderer rltentacle2;
-	ModelRenderer rltentacle3;
-	ModelRenderer rltentacle4;
-	ModelRenderer lltentacle1;
-	ModelRenderer lltentacle2;
-	ModelRenderer lltentacle3;
-	ModelRenderer lltentacle4;
-	ModelRenderer lowerbody;
+	public ModelRenderer mask1;
+	public ModelRenderer maskpart1;
+	public ModelRenderer maskpart2;
+	public ModelRenderer mask2;
+	public ModelRenderer maskpart3;
+	public ModelRenderer maskpart4;
+	public ModelRenderer head;
+	public ModelRenderer body;
+	public ModelRenderer rightshoulder;
+	public ModelRenderer leftshoulder;
+	public ModelRenderer rightarm1;
+	public ModelRenderer rightarm2;
+	public ModelRenderer leftarm1;
+	public ModelRenderer leftarm2;
+	public ModelRenderer tentacle1;
+	public ModelRenderer tentacle2;
+	public ModelRenderer tentacle3;
+	public ModelRenderer tentacle4;
+	public ModelRenderer rltentacle1;
+	public ModelRenderer rltentacle2;
+	public ModelRenderer rltentacle3;
+	public ModelRenderer rltentacle4;
+	public ModelRenderer lltentacle1;
+	public ModelRenderer lltentacle2;
+	public ModelRenderer lltentacle3;
+	public ModelRenderer lltentacle4;
+	public ModelRenderer lowerbody;
 
 	public ModelGatekeeperMinion()
 	{
