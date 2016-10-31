@@ -11,6 +11,7 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.common.entity.anti;
 
+import java.util.Calendar;
 import java.util.UUID;
 
 import net.minecraft.block.Block;
@@ -35,8 +36,11 @@ import net.minecraft.entity.ai.attributes.RangedAttribute;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.monster.EntityZombie;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.init.SoundEvents;
+import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
@@ -67,6 +71,8 @@ public class EntityAntiZombie extends EntityMob implements IAntiEntity {
 	private boolean canBreak = false;
 	private float width = -1.0F;
 	private float height;
+	private static final UUID attackDamageBoostUUID = UUID.fromString("648D7064-6A60-4F59-8ABE-C2C23A6DD7A9");
+	private static final AttributeModifier attackDamageBoost = new AttributeModifier(attackDamageBoostUUID, "Halloween Attack Damage Boost", 3.0D, 0);
 
 	public EntityAntiZombie(World par1World)
 	{
@@ -273,6 +279,9 @@ public class EntityAntiZombie extends EntityMob implements IAntiEntity {
 
 		func_146070_a(rand.nextFloat() < f * 0.1F);
 
+		setEquipmentBasedOnDifficulty(difficulty);
+		setEnchantmentBasedOnDifficulty(difficulty);
+
 		getEntityAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).applyModifier(new AttributeModifier("Random spawn bonus", rand.nextDouble() * 0.05000000074505806D, 0));
 		double d0 = rand.nextDouble() * 1.5D * difficulty.getClampedAdditionalDifficulty();
 
@@ -285,6 +294,25 @@ public class EntityAntiZombie extends EntityMob implements IAntiEntity {
 			getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).applyModifier(new AttributeModifier("Leader zombie bonus", rand.nextDouble() * 3.0D + 1.0D, 2));
 			func_146070_a(true);
 		}
+
+		if (getItemStackFromSlot(EntityEquipmentSlot.HEAD) == null)
+		{
+			Calendar calendar = worldObj.getCurrentDate();
+
+			if (calendar.get(2) + 1 == 10 && calendar.get(5) == 31 && rand.nextFloat() < 0.25F)
+			{
+				setItemStackToSlot(EntityEquipmentSlot.HEAD, new ItemStack(rand.nextFloat() < 0.1F ? Blocks.LIT_PUMPKIN : Blocks.PUMPKIN));
+				inventoryArmorDropChances[EntityEquipmentSlot.HEAD.getIndex()] = 0.0F;
+			}
+		}
+
+		IAttributeInstance attribute = getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE);
+		Calendar calendar = worldObj.getCurrentDate();
+
+		attribute.removeModifier(attackDamageBoost);
+
+		if (calendar.get(2) + 1 == 10 && calendar.get(5) == 31)
+			attribute.applyModifier(attackDamageBoost);
 
 		return (IEntityLivingData)entity;
 	}

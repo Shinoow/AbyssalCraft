@@ -13,6 +13,7 @@ package com.shinoow.abyssalcraft.client.render.entity;
 
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.entity.RenderManager;
+import net.minecraft.client.renderer.entity.layers.LayerCustomHead;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -27,7 +28,13 @@ public class RenderGatekeeperMinion extends RenderLiving<EntityGatekeeperMinion>
 
 	public RenderGatekeeperMinion(RenderManager manager)
 	{
-		super(manager, new ModelGatekeeperMinion(), 0.5F);
+		this(manager, new ModelGatekeeperMinion());
+	}
+
+	public RenderGatekeeperMinion(RenderManager manager, ModelGatekeeperMinion model)
+	{
+		super(manager, model, 0.5F);
+		addLayer(new LayerCustomHead(model.head));
 	}
 
 	@Override

@@ -13,6 +13,7 @@ package com.shinoow.abyssalcraft.client.render.entity;
 
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.entity.RenderManager;
+import net.minecraft.client.renderer.entity.layers.LayerCustomHead;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
@@ -30,9 +31,14 @@ public class RenderAntiGhoul extends RenderLiving {
 
 	public RenderAntiGhoul(RenderManager manager)
 	{
-		super(manager, new ModelDG(), 0.5F);
+		this(manager, new ModelDG());
+	}
+
+	public RenderAntiGhoul(RenderManager manager, ModelDG model){
+		super(manager, model, 0.8F);
 		addLayer(new LayerGhoulHeldItem(this));
 		addLayer(new LayerGhoulArmor(this));
+		addLayer(new LayerCustomHead(model.Head));
 	}
 
 	protected ResourceLocation getGhoulTexture(EntityAntiGhoul par1EntityLiving)

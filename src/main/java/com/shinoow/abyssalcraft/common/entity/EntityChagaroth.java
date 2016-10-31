@@ -361,7 +361,9 @@ public class EntityChagaroth extends EntityMob implements IDreadEntity {
 		IAttributeInstance attribute = getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE);
 		Calendar calendar = worldObj.getCurrentDate();
 
-		if (calendar.get(2) + 1 == 10 && calendar.get(5) == 31 && rand.nextFloat() < 0.25F)
+		attribute.removeModifier(attackDamageBoost);
+
+		if (calendar.get(2) + 1 == 10 && calendar.get(5) == 31)
 			attribute.applyModifier(attackDamageBoost);
 
 		return par1EntityLivingData;
