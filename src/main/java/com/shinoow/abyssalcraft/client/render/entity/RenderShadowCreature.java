@@ -13,6 +13,7 @@ package com.shinoow.abyssalcraft.client.render.entity;
 
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.entity.RenderManager;
+import net.minecraft.client.renderer.entity.layers.LayerCustomHead;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
@@ -27,7 +28,13 @@ public class RenderShadowCreature extends RenderLiving {
 
 	public RenderShadowCreature(RenderManager manager)
 	{
-		super(manager, new ModelShadowCreature(), 0.5F);
+		this(manager, new ModelShadowCreature());
+	}
+
+	public RenderShadowCreature(RenderManager manager, ModelShadowCreature model)
+	{
+		super(manager, model, 0.5F);
+		addLayer(new LayerCustomHead(model.Head1));
 	}
 
 	@Override

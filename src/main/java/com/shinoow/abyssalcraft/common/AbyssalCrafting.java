@@ -525,25 +525,27 @@ public class AbyssalCrafting {
 
 		GameRegistry.addSmelting(ACItems.coin, new ItemStack(Items.iron_ingot, 4), 0.5F);
 
-		GameRegistry.addSmelting(Items.leather_helmet, new ItemStack(Items.leather), 1F);
-		GameRegistry.addSmelting(Items.leather_chestplate, new ItemStack(Items.leather), 1F);
-		GameRegistry.addSmelting(Items.leather_leggings, new ItemStack(Items.leather), 1F);
-		GameRegistry.addSmelting(Items.leather_boots, new ItemStack(Items.leather), 1F);
+		if(AbyssalCraft.smeltingRecipes){
+			GameRegistry.addSmelting(Items.leather_helmet, new ItemStack(Items.leather), 1F);
+			GameRegistry.addSmelting(Items.leather_chestplate, new ItemStack(Items.leather), 1F);
+			GameRegistry.addSmelting(Items.leather_leggings, new ItemStack(Items.leather), 1F);
+			GameRegistry.addSmelting(Items.leather_boots, new ItemStack(Items.leather), 1F);
 
-		GameRegistry.addSmelting(Items.iron_helmet, new ItemStack(Items.iron_ingot), 1F);
-		GameRegistry.addSmelting(Items.iron_chestplate, new ItemStack(Items.iron_ingot), 1F);
-		GameRegistry.addSmelting(Items.iron_leggings, new ItemStack(Items.iron_ingot), 1F);
-		GameRegistry.addSmelting(Items.iron_boots, new ItemStack(Items.iron_ingot), 1F);
+			GameRegistry.addSmelting(Items.iron_helmet, new ItemStack(Items.iron_ingot), 1F);
+			GameRegistry.addSmelting(Items.iron_chestplate, new ItemStack(Items.iron_ingot), 1F);
+			GameRegistry.addSmelting(Items.iron_leggings, new ItemStack(Items.iron_ingot), 1F);
+			GameRegistry.addSmelting(Items.iron_boots, new ItemStack(Items.iron_ingot), 1F);
 
-		GameRegistry.addSmelting(Items.golden_helmet, new ItemStack(Items.gold_ingot), 1F);
-		GameRegistry.addSmelting(Items.golden_chestplate, new ItemStack(Items.gold_ingot), 1F);
-		GameRegistry.addSmelting(Items.golden_leggings, new ItemStack(Items.gold_ingot), 1F);
-		GameRegistry.addSmelting(Items.golden_boots, new ItemStack(Items.gold_ingot), 1F);
+			GameRegistry.addSmelting(Items.golden_helmet, new ItemStack(Items.gold_ingot), 1F);
+			GameRegistry.addSmelting(Items.golden_chestplate, new ItemStack(Items.gold_ingot), 1F);
+			GameRegistry.addSmelting(Items.golden_leggings, new ItemStack(Items.gold_ingot), 1F);
+			GameRegistry.addSmelting(Items.golden_boots, new ItemStack(Items.gold_ingot), 1F);
 
-		GameRegistry.addSmelting(Items.diamond_helmet, new ItemStack(Items.diamond), 1F);
-		GameRegistry.addSmelting(Items.diamond_chestplate, new ItemStack(Items.diamond), 1F);
-		GameRegistry.addSmelting(Items.diamond_leggings, new ItemStack(Items.diamond), 1F);
-		GameRegistry.addSmelting(Items.diamond_boots, new ItemStack(Items.diamond), 1F);
+			GameRegistry.addSmelting(Items.diamond_helmet, new ItemStack(Items.diamond), 1F);
+			GameRegistry.addSmelting(Items.diamond_chestplate, new ItemStack(Items.diamond), 1F);
+			GameRegistry.addSmelting(Items.diamond_leggings, new ItemStack(Items.diamond), 1F);
+			GameRegistry.addSmelting(Items.diamond_boots, new ItemStack(Items.diamond), 1F);
+		}
 	}
 
 	private static void addCrystallization(){
@@ -914,13 +916,13 @@ public class AbyssalCrafting {
 		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("econOMTupgrade", 3, 1600F, new ItemStack(ACBlocks.tiered_energy_container, 1, 3), new ItemStack(ACBlocks.tiered_energy_container, 1, 2), omtoffers).setTags("PotEnergy"));
 		Object[] sorawofferings = new Object[]{ACItems.shadow_gem, ACBlocks.abyssal_stone, ACItems.coralium_plagued_flesh, ACBlocks.abyssal_stone, ACItems.coralium_plagued_flesh,
 				ACBlocks.abyssal_stone, ACItems.coralium_plagued_flesh, ACBlocks.abyssal_stone};
-		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("sorAWupgrade", 0, ACLib.abyssal_wasteland_id, 1000F, new ItemStack(ACItems.staff_of_rending, 1, 1), new ItemStack(ACItems.staff_of_rending, 1, 0), sorawofferings));
+		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("sorAWupgrade", 1, ACLib.abyssal_wasteland_id, 1000F, new ItemStack(ACItems.staff_of_rending, 1, 1), new ItemStack(ACItems.staff_of_rending, 1, 0), sorawofferings));
 		Object[] sordlofferings = new Object[]{ACItems.shadow_gem, ACBlocks.dreadstone, ACItems.dread_fragment, ACBlocks.dreadstone, ACItems.dread_fragment,
 				ACBlocks.dreadstone, ACItems.dread_fragment, ACBlocks.dreadstone};
-		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("sorDLupgrade", 1, ACLib.dreadlands_id, 2000F, new ItemStack(ACItems.staff_of_rending, 1, 2), new ItemStack(ACItems.staff_of_rending, 1, 1), sordlofferings));
+		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("sorDLupgrade", 2, ACLib.dreadlands_id, 2000F, new ItemStack(ACItems.staff_of_rending, 1, 2), new ItemStack(ACItems.staff_of_rending, 1, 1), sordlofferings));
 		Object[] soromtofferings = new Object[]{ACItems.shadow_gem, ACBlocks.omothol_stone, ACItems.omothol_flesh, ACBlocks.omothol_stone, ACItems.omothol_flesh,
 				ACBlocks.omothol_stone, ACItems.omothol_flesh, ACBlocks.omothol_stone};
-		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("sorOMTupgrade", 2, ACLib.omothol_id, 3000F, new ItemStack(ACItems.staff_of_rending, 1, 3), new ItemStack(ACItems.staff_of_rending, 1, 2), soromtofferings));
+		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("sorOMTupgrade", 3, ACLib.omothol_id, 3000F, new ItemStack(ACItems.staff_of_rending, 1, 3), new ItemStack(ACItems.staff_of_rending, 1, 2), soromtofferings));
 	}
 
 	private static void addDisruptions(){
@@ -955,9 +957,11 @@ public class AbyssalCrafting {
 		GameRegistry.addRecipe(new ItemStack(pants, 1), new Object[] {"#", "@", '#', new ItemStack(oldp, 1, OreDictionary.WILDCARD_VALUE), '@', upgrade});
 		GameRegistry.addRecipe(new ItemStack(boots, 1), new Object[] {"#", "@", '#', new ItemStack(oldb, 1, OreDictionary.WILDCARD_VALUE), '@', upgrade});
 
-		GameRegistry.addSmelting(helmet, new ItemStack(material), 1F);
-		GameRegistry.addSmelting(chestplate, new ItemStack(material), 1F);
-		GameRegistry.addSmelting(pants, new ItemStack(material), 1F);
-		GameRegistry.addSmelting(boots, new ItemStack(material), 1F);
+		if(AbyssalCraft.smeltingRecipes){
+			GameRegistry.addSmelting(helmet, new ItemStack(material), 1F);
+			GameRegistry.addSmelting(chestplate, new ItemStack(material), 1F);
+			GameRegistry.addSmelting(pants, new ItemStack(material), 1F);
+			GameRegistry.addSmelting(boots, new ItemStack(material), 1F);
+		}
 	}
 }

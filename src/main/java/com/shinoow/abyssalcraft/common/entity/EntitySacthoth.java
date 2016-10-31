@@ -11,7 +11,9 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.common.entity;
 
+import java.util.Calendar;
 import java.util.List;
+import java.util.UUID;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
@@ -26,6 +28,8 @@ import net.minecraft.entity.ai.EntityAIMoveTowardsRestriction;
 import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
 import net.minecraft.entity.ai.EntityAIWander;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
+import net.minecraft.entity.ai.attributes.AttributeModifier;
+import net.minecraft.entity.ai.attributes.IAttributeInstance;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.item.EntityXPOrb;
 import net.minecraft.entity.monster.EntityMob;
@@ -67,6 +71,8 @@ import com.shinoow.abyssalcraft.lib.util.SpecialTextUtil;
 public class EntitySacthoth extends EntityMob implements IAntiEntity, ICoraliumEntity, IDreadEntity {
 
 	private static final DataParameter<Byte> CLIMBING = EntityDataManager.createKey(EntitySacthoth.class, DataSerializers.BYTE);
+	private static final UUID attackDamageBoostUUID = UUID.fromString("648D7064-6A60-4F59-8ABE-C2C23A6DD7A9");
+	private static final AttributeModifier attackDamageBoost = new AttributeModifier(attackDamageBoostUUID, "Halloween Attack Damage Boost", 8D, 0);
 	public int deathTicks;
 	private final BossInfoServer bossInfo = (BossInfoServer)new BossInfoServer(getDisplayName(), BossInfo.Color.BLUE, BossInfo.Overlay.PROGRESS).setDarkenSky(true);
 
@@ -510,6 +516,14 @@ public class EntitySacthoth extends EntityMob implements IAntiEntity, ICoraliumE
 
 		if(worldObj.isDaytime())
 			worldObj.setWorldTime(14000L);
+
+		IAttributeInstance attribute = getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE);
+		Calendar calendar = worldObj.getCurrentDate();
+
+		attribute.removeModifier(attackDamageBoost);
+
+		if (calendar.get(2) + 1 == 10 && calendar.get(5) == 31)
+			attribute.applyModifier(attackDamageBoost);
 
 		return par1EntityLivingData;
 	}

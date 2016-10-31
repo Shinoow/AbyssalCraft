@@ -13,6 +13,7 @@ package com.shinoow.abyssalcraft.client.render.entity;
 
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.entity.RenderManager;
+import net.minecraft.client.renderer.entity.layers.LayerCustomHead;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
@@ -25,9 +26,14 @@ public class RenderDreadling extends RenderLiving {
 
 	private static final ResourceLocation field_110865_p = new ResourceLocation("abyssalcraft:textures/model/Dreadling.png");
 
-	public RenderDreadling (RenderManager manager)
+	public RenderDreadling(RenderManager manager)
 	{
-		super(manager, new ModelDreadling(), 0.5F);
+		this(manager, new ModelDreadling());
+	}
+	
+	public RenderDreadling(RenderManager manager, ModelDreadling model){
+		super(manager, model, 0.5F);
+		addLayer(new LayerCustomHead(model.head));
 	}
 
 	@Override
