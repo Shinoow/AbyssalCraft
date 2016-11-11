@@ -808,7 +808,9 @@ fluid.liquidantimatter=液态反物质
 
 #Blocks
 tile.darkstone.name=黑暗石
-tile.darkstone_brick.name=黑暗石砖
+tile.darkstone_brick.0.name=黑暗石砖
+tile.darkstone_brick.1.name=錾制黑暗石砖
+tile.darkstone_brick.2.name=裂黑暗石砖
 tile.darkstone_cobble.name=黑暗圆石
 tile.dsglow.name=发光黑暗石砖
 tile.darkbrickslab1.name=黑暗石砖台阶
@@ -822,7 +824,9 @@ tile.dltleaves.name=黑暗之地橡树树叶
 tile.dltlog.name=黑暗之地橡木
 tile.dltsapling.name=黑暗之地橡树树苗
 tile.abystone.name=深渊石
-tile.abybrick.name=深渊石砖
+tile.abybrick.0.name=深渊石砖
+tile.abybrick.1.name=錾制深渊石砖
+tile.abybrick.2.name=裂深渊石砖
 tile.abyslab1.name=深渊石砖台阶
 tile.abyslab2.name=深渊石砖双层台阶
 tile.abystairs.name=深渊石砖楼梯
@@ -860,8 +864,12 @@ tile.dreadstone.name=恐惧石
 tile.abydreadstone.name=深渊石
 tile.dreadore.name=恐惧深渊矿
 tile.abydreadore.name=恐惧之地深渊矿
-tile.dreadbrick.name=恐惧石砖
-tile.abydreadbrick.name=深渊石砖
+tile.dreadbrick.0.name=恐惧石砖
+tile.dreadbrick.1.name=錾制恐惧石砖
+tile.dreadbrick.2.name=裂恐惧石砖
+tile.abydreadbrick.0.name=深渊石砖
+tile.abydreadbrick.1.name=錾制深渊石砖
+tile.abydreadbrick.2.name=裂深渊石砖
 tile.dreadgrass.name=恐惧之地草方块
 tile.dreadlog.name=恐惧之地树木
 tile.dreadleaves.name=恐惧之地树叶
@@ -883,7 +891,9 @@ tile.abydreadbrickslab1.name=深渊石砖台阶
 tile.abydreadbrickslab2.name=深渊石砖双层台阶
 tile.antiwater.name=液态反物质
 tile.cstone.name=珊瑚石
-tile.cstonebrick.name=珊瑚石砖
+tile.cstonebrick.0.name=珊瑚石砖
+tile.cstonebrick.1.name=錾制珊瑚石砖
+tile.cstonebrick.2.name=裂珊瑚石砖
 tile.cstonebrickfence.name=珊瑚石砖栅栏
 tile.cstonebrickslab1.name=珊瑚石砖台阶
 tile.cstonebrickslab2.name=珊瑚石砖双层台阶
@@ -911,6 +921,7 @@ tile.solidlava.name=固态岩浆
 tile.ethaxium.name=伊桑斯石
 tile.ethaxiumbrick.0.name=伊桑斯石砖
 tile.ethaxiumbrick.1.name=錾制伊桑斯石砖
+tile.ethaxiumbrick.2.name=裂伊桑斯石砖
 tile.ethaxiumpillar.name=伊桑斯柱子
 tile.ethaxiumbrickstairs.name=伊桑斯砖石楼梯
 tile.ethaxiumbrickslab1.name=伊桑斯砖石半阶
@@ -925,6 +936,7 @@ tile.engraver_on.name=一个房子
 tile.materializer.name=物质化器
 tile.darkethaxiumbrick.0.name=黑暗伊桑斯砖块
 tile.darkethaxiumbrick.1.name=錾制黑暗伊桑斯砖块
+tile.darkethaxiumbrick.2.name=裂黑暗伊桑斯砖块
 tile.darkethaxiumpillar.name=黑暗伊桑斯柱
 tile.darkethaxiumbrickstairs.name=黑暗伊桑斯砖块楼梯
 tile.darkethaxiumbrickslab1.name=黑暗伊桑斯砖块台阶
@@ -974,6 +986,7 @@ tile.tieredenergycontainer.3.name=奥穆索能量容器
 #Pre/Postfixes
 decorativestatue.prefix=装饰用 %s
 crystalcluster.postfix=%s 簇
+
 #Items
 item.devsword.name=恶魔之刃
 item.oc.name=湮灭媒介
@@ -1263,6 +1276,8 @@ entity.abyssalcraft.evilcow.name=牛
 entity.abyssalcraft.evilchicken.name=鸡
 entity.abyssalcraft.demoncow.name=恶魔牛
 entity.abyssalcraft.demonchicken.name=恶魔鸡
+entity.abyssalcraft.evilsheep.name=羊
+entity.abyssalcraft.demonsheep.name=恶魔羊
 
 #Potions
 potion.Cplague=珊瑚侵染
@@ -1280,8 +1295,46 @@ lingering_potion.effect.Antimatter=滞留湮灭药水
 
 #Enchantments
 enchantment.coralium=珊瑚
+enchantment.abyssalcraft.coralium.desc=击中时传播珊瑚侵染
 enchantment.dread=恐惧
+enchantment.abyssalcraft.dread.desc=击中时传播恐惧侵染
 enchantment.ironWall=铁墙
+enchantment.abyssalcraft.iron_wall.desc=减少被击中时的击退量
 enchantment.damage.shadow=易于穿透
+enchantment.abyssalcraft.light_pierce=光之穿刺
+enchantment.abyssalcraft.light_pierce.desc=增加对阴影生物的伤害
+
+#Subtitles
+subtitle.abyssalcraft.dreadguard.death=恐惧守卫死亡
+subtitle.abyssalcraft.dreadguard.idle=恐惧守卫不祥地嘀咕着
+subtitle.abyssalcraft.dreadguard.hit=恐惧守卫受伤
+subtitle.abyssalcraft.ghoul.normal.idle=深渊食尸鬼呻吟
+subtitle.abyssalcraft.ghoul.hit=深渊食尸鬼受伤
+subtitle.abyssalcraft.ghoul.death=深渊食尸鬼死亡
+subtitle.abyssalcraft.ghoul.pete.idle=皮特呻吟
+subtitle.abyssalcraft.ghoul.wilson.idle=威尔森先生呻吟
+subtitle.abyssalcraft.ghoul.orange.idle=奥兰治博士呻吟
+subtitle.abyssalcraft.golem.death=傀儡死亡
+subtitle.abyssalcraft.golem.hit=傀儡受伤
+subtitle.abyssalcraft.golem.idle=傀儡发出低沉的噪声
+subtitle.abyssalcraft.sacthoth.death=索托斯死亡
+subtitle.abyssalcraft.shadow.death=活阴影死亡
+subtitle.abyssalcraft.shadow.hit=活阴影受伤
+subtitle.abyssalcraft.remnant.scream=残存者恶狠狠地尖叫
+subtitle.abyssalcraft.remnant.yes=残存者说是
+subtitle.abyssalcraft.remnant.no=残存者说不
+subtitle.abyssalcraft.remnant.priest.chant=残存者牧师吟唱
+subtitle.abyssalcraft.shoggoth.idle=小型修格斯发出噪声
+subtitle.abyssalcraft.shoggoth.hit=小型修格斯受伤
+subtitle.abyssalcraft.shoggoth.death=小型修格斯死亡
+subtitle.abyssalcraft.jzahar.charge=扎哈尔加强
+subtitle.abyssalcraft.chant.cthulhu=声音吟唱着克苏鲁
+subtitle.abyssalcraft.chant.yog_sothoth=声音吟唱着犹格·索托斯
+subtitle.abyssalcraft.chant.hastur=声音吟唱着哈斯特
+subtitle.abyssalcraft.chant.sleeping=声音吟唱着沉睡者
+subtitle.abyssalcraft.chant.cthugha=声音吟唱着克图格亚
+subtitle.abyssalcraft.dreadspawn.idle=恐惧卵呻吟
+subtitle.abyssalcraft.dreadspawn.hit=恐惧卵受伤
+subtitle.abyssalcraft.dreadspawn.death=恐惧卵死亡
 
 #Localization done, Shin out.
