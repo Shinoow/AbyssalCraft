@@ -1294,13 +1294,12 @@ splash_potion.effect.Antimatter=喷溅湮灭药水
 lingering_potion.effect.Antimatter=滞留湮灭药水
 
 #Enchantments
-enchantment.coralium=珊瑚
+enchantment.abyssalcraft.coralium=珊瑚
 enchantment.abyssalcraft.coralium.desc=击中时传播珊瑚侵染
-enchantment.dread=恐惧
+enchantment.abyssalcraft.dread=恐惧
 enchantment.abyssalcraft.dread.desc=击中时传播恐惧侵染
-enchantment.ironWall=铁墙
+enchantment.abyssalcraft.iron_wall=铁墙
 enchantment.abyssalcraft.iron_wall.desc=减少被击中时的击退量
-enchantment.damage.shadow=易于穿透
 enchantment.abyssalcraft.light_pierce=光之穿刺
 enchantment.abyssalcraft.light_pierce.desc=增加对阴影生物的伤害
 
