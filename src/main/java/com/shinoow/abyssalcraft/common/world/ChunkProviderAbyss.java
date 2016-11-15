@@ -368,7 +368,7 @@ public class ChunkProviderAbyss implements IChunkGenerator
 				int Xcoord2 = rand.nextInt(16) + 8;
 				int Zcoord2 = rand.nextInt(16) + 8;
 
-				if(rand.nextInt(200) == 0)
+				if(rand.nextInt(400) == 0)
 					new StructureShoggothPit().generate(worldObj, rand, worldObj.getHeight(pos.add(Xcoord2, 0, Zcoord2)));
 			}
 

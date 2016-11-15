@@ -240,7 +240,7 @@ public class EntityDragonBoss extends EntityMob implements IEntityMultiPart, ICo
 
 			for (int i = 0; i < 2; ++i)
 				if(AbyssalCraft.particleEntity)
-					AbyssalCraft.proxy.spawnParticle("CorBlood", posX + (rand.nextDouble() - 0.5D) * width, posY + rand.nextDouble() * height - 0.25D, posZ + (rand.nextDouble() - 0.5D) * width, (rand.nextDouble() - 0.5D) * 2.0D, -rand.nextDouble(), (rand.nextDouble() - 0.5D) * 2.0D);
+					AbyssalCraft.proxy.spawnParticle("CorBlood", worldObj, posX + (rand.nextDouble() - 0.5D) * width, posY + rand.nextDouble() * height - 0.25D, posZ + (rand.nextDouble() - 0.5D) * width, (rand.nextDouble() - 0.5D) * 2.0D, -rand.nextDouble(), (rand.nextDouble() - 0.5D) * 2.0D);
 
 			if (worldObj.isRemote)
 			{
@@ -543,10 +543,7 @@ public class EntityDragonBoss extends EntityMob implements IEntityMultiPart, ICo
 		if (par1EntityDragonPart != dragonPartHead)
 			par3 = par3 / 4.0F + 1.0F;
 
-		if(par3 > 50)
-			if(par3 > 500001 || par3 < 500000)
-				if(par3 > 750001.5F || par3 < 750001)
-					par3 = 30 + worldObj.rand.nextInt(20);
+		if(par3 > 30) par3 = 10 + worldObj.rand.nextInt(10);
 
 		float f1 = rotationYaw * (float)Math.PI / 180.0F;
 		float f2 = MathHelper.sin(f1);

@@ -47,16 +47,21 @@ public interface IEnergyContainerItem {
 	 * Consumes (removes) Potential Energy from the item
 	 * @param stack ItemStack containing the item
 	 * @param energy Energy quanta to consume
+	 * @return The amount of energy consumed
 	 */
-	public void consumeEnergy(ItemStack stack, float energy);
+	public float consumeEnergy(ItemStack stack, float energy);
 
 	/**
-	 * Returns Whether or not this item can accept Potential Energy
+	 * Returns Whether or not this item can accept Potential Energy<br>
+	 * (eg. if it  has room for more Potential Energy, or if it accepts input at all)
+	 * @param stack ItemStack containing the item
 	 */
 	public boolean canAcceptPE(ItemStack stack);
 
 	/**
-	 * Returns Whether or not this item can transfer Potential Energy
+	 * Returns Whether or not this item can transfer Potential Energy<br>
+	 * (eg. if it has any Potential Energy stored that it can transfer, or if it allows extraction at all)
+	 * @param stack ItemStack containing the item
 	 */
 	public boolean canTransferPE(ItemStack stack);
 }

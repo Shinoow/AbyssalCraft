@@ -143,6 +143,7 @@ public class EntityODBPrimed extends Entity {
 						}
 			EntitySacthoth sacthoth = new EntitySacthoth(worldObj);
 			sacthoth.setPosition(posX, posY + 1, posZ);
+			sacthoth.onInitialSpawn(worldObj.getDifficultyForLocation(new BlockPos(posX, posY + 1, posZ)), null);
 			worldObj.spawnEntityInWorld(sacthoth);
 			SpecialTextUtil.SacthothGroup(worldObj, I18n.translateToLocal("message.sacthoth.spawn.1"));
 		}

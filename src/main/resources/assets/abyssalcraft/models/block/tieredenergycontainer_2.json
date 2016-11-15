@@ -1,0 +1,7 @@
+{
+	"parent": "abyssalcraft:block/energycontainer",
+	"textures": {
+		"0": "abyssalcraft:blocks/drs",
+		"particle": "abyssalcraft:blocks/drs"
+	}
+}

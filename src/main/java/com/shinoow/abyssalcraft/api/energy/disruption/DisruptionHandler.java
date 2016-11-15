@@ -22,6 +22,7 @@ import net.minecraftforge.fml.common.FMLLog;
 import org.apache.logging.log4j.Level;
 
 import com.google.common.collect.Lists;
+import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
 import com.shinoow.abyssalcraft.api.energy.EnergyEnum.DeityType;
 import com.shinoow.abyssalcraft.api.event.ACEvents.DisruptionEvent;
 
@@ -92,6 +93,7 @@ public class DisruptionHandler {
 	 * @since 1.5
 	 */
 	public void generateDisruption(DeityType deity, World world, BlockPos pos, List<EntityPlayer> players){
+		if(world.isRemote) return;
 		List<DisruptionEntry> dis = Lists.newArrayList();
 
 		if(deity == null){
@@ -107,12 +109,6 @@ public class DisruptionHandler {
 
 		if(!MinecraftForge.EVENT_BUS.post(new DisruptionEvent(deity, world, pos, players, disruption)))
 			disruption.disrupt(world, pos, players);
-		sendDisruption(deity, disruption.getUnlocalizedName().substring("ac.disruption.".length()), pos, world.provider.getDimension());
-	}
-
-	private void sendDisruption(DeityType deity, String name, BlockPos pos, int dim){
-		try {
-			Class.forName("com.shinoow.abyssalcraft.AbyssalCraft").getMethod("sendDisruption", DeityType.class, String.class, BlockPos.class, int.class).invoke(null, deity, name, pos, dim);
-		} catch (Exception e) {}
+		AbyssalCraftAPI.getInternalMethodHandler().sendDisruption(deity, disruption.getUnlocalizedName().substring("ac.disruption.".length()), pos, world.provider.getDimension());
 	}
 }

@@ -202,6 +202,8 @@ public class GuiNecronomiconRitualEntry extends GuiNecronomicon {
 	private ItemStack tooltipStack;
 	public void renderItem(int xPos, int yPos, ItemStack stack, int mx, int my)
 	{
+		if(stack == null) return;
+
 		if(stack != null && stack.getItemDamage() == OreDictionary.WILDCARD_VALUE)
 			stack.setItemDamage(0);
 

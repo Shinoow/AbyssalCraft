@@ -40,6 +40,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.common.blocks.tile.TileEntityTransmutator;
+import com.shinoow.abyssalcraft.lib.ACLib;
 import com.shinoow.abyssalcraft.lib.ACTabs;
 
 public class BlockTransmutator extends BlockContainer {
@@ -97,7 +98,7 @@ public class BlockTransmutator extends BlockContainer {
 	@Override
 	public boolean onBlockActivated(World par1World, BlockPos pos, IBlockState state, EntityPlayer par5EntityPlayer, EnumHand hand, ItemStack heldItem, EnumFacing side, float par7, float par8, float par9) {
 		if(!par1World.isRemote)
-			FMLNetworkHandler.openGui(par5EntityPlayer, AbyssalCraft.instance, AbyssalCraft.transmutatorGuiID, par1World, pos.getX(), pos.getY(), pos.getZ());
+			FMLNetworkHandler.openGui(par5EntityPlayer, AbyssalCraft.instance, ACLib.transmutatorGuiID, par1World, pos.getX(), pos.getY(), pos.getZ());
 		return true;
 	}
 
@@ -197,19 +198,19 @@ public class BlockTransmutator extends BlockContainer {
 			{
 			case WEST:
 				world.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, d0 - d3, d1, d2 + d4, 0.0D, 0.0D, 0.0D, new int[0]);
-				AbyssalCraft.proxy.spawnParticle("CorBlood", d0 - d3, d1, d2 + d4, 0.0D, 0.0D, 0.0D);
+				AbyssalCraft.proxy.spawnParticle("CorBlood", world, d0 - d3, d1, d2 + d4, 0.0D, 0.0D, 0.0D);
 				break;
 			case EAST:
 				world.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, d0 + d3, d1, d2 + d4, 0.0D, 0.0D, 0.0D, new int[0]);
-				AbyssalCraft.proxy.spawnParticle("CorBlood", d0 + d3, d1, d2 + d4, 0.0D, 0.0D, 0.0D);
+				AbyssalCraft.proxy.spawnParticle("CorBlood", world, d0 + d3, d1, d2 + d4, 0.0D, 0.0D, 0.0D);
 				break;
 			case NORTH:
 				world.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, d0 + d4, d1, d2 - d3, 0.0D, 0.0D, 0.0D, new int[0]);
-				AbyssalCraft.proxy.spawnParticle("CorBlood", d0 + d4, d1, d2 - d3, 0.0D, 0.0D, 0.0D);
+				AbyssalCraft.proxy.spawnParticle("CorBlood", world, d0 + d4, d1, d2 - d3, 0.0D, 0.0D, 0.0D);
 				break;
 			case SOUTH:
 				world.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, d0 + d4, d1, d2 + d3, 0.0D, 0.0D, 0.0D, new int[0]);
-				AbyssalCraft.proxy.spawnParticle("CorBlood", d0 + d4, d1, d2 + d3, 0.0D, 0.0D, 0.0D);
+				AbyssalCraft.proxy.spawnParticle("CorBlood", world, d0 + d4, d1, d2 + d3, 0.0D, 0.0D, 0.0D);
 			default:
 				break;
 			}

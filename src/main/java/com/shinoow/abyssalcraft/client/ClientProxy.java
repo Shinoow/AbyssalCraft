@@ -57,6 +57,8 @@ import com.shinoow.abyssalcraft.api.item.ACItems;
 import com.shinoow.abyssalcraft.client.handlers.AbyssalCraftClientEventHooks;
 import com.shinoow.abyssalcraft.client.model.block.*;
 import com.shinoow.abyssalcraft.client.model.item.ModelDreadiumSamuraiArmor;
+import com.shinoow.abyssalcraft.client.particles.ACParticleFX;
+import com.shinoow.abyssalcraft.client.particles.PEStreamParticleFX;
 import com.shinoow.abyssalcraft.client.render.block.*;
 import com.shinoow.abyssalcraft.client.render.entity.*;
 import com.shinoow.abyssalcraft.client.render.entity.layers.LayerStarSpawnTentacles;
@@ -143,6 +145,7 @@ public class ClientProxy extends CommonProxy {
 		ModelBakery.registerItemVariants(ACItems.skin, makerl("skin_abyssalwasteland", "skin_dreadlands", "skin_omothol"));
 		ModelBakery.registerItemVariants(ACItems.ritual_charm, makerl("ritualcharm_empty", "ritualcharm_range", "ritualcharm_duration", "ritualcharm_power"));
 		ModelBakery.registerItemVariants(ACItems.ingot_nugget, makerl("nugget_abyssalnite", "nugget_coralium", "nugget_dreadium", "nugget_ethaxium"));
+		ModelBakery.registerItemVariants(ACItems.staff_of_rending, makerl("drainstaff", "drainstaff_aw", "drainstaff_dl", "drainstaff_omt"));
 
 		ModelBakery.registerItemVariants(Item.getItemFromBlock(ACBlocks.ethaxium_brick), makerl("ethaxiumbrick_0", "ethaxiumbrick_1", "ethaxiumbrick_2"));
 		ModelBakery.registerItemVariants(Item.getItemFromBlock(ACBlocks.dark_ethaxium_brick), makerl("darkethaxiumbrick_0", "darkethaxiumbrick_1", "darkethaxiumbrick_2"));
@@ -159,6 +162,10 @@ public class ClientProxy extends CommonProxy {
 		ModelBakery.registerItemVariants(Item.getItemFromBlock(ACBlocks.dreadstone_brick), makerl("dreadbrick_0", "dreadbrick_1", "dreadbrick_2"));
 		ModelBakery.registerItemVariants(Item.getItemFromBlock(ACBlocks.abyssalnite_stone_brick), makerl("abydreadbrick_0", "abydreadbrick_1", "abydreadbrick_2"));
 		ModelBakery.registerItemVariants(Item.getItemFromBlock(ACBlocks.coralium_stone_brick), makerl("cstonebrick_0", "cstonebrick_1", "cstonebrick_2"));
+		ModelBakery.registerItemVariants(Item.getItemFromBlock(ACBlocks.tiered_energy_collector), makerl("tieredenergycollector_0", "tieredenergycollector_1",
+				"tieredenergycollector_2", "tieredenergycollector_3"));
+		ModelBakery.registerItemVariants(Item.getItemFromBlock(ACBlocks.tiered_energy_container), makerl("tieredenergycontainer_0", "tieredenergycontainer_1",
+				"tieredenergycontainer_2", "tieredenergycontainer_3"));
 
 		registerFluidModel(ACBlocks.liquid_coralium, "cor");
 		registerFluidModel(ACBlocks.liquid_antimatter, "anti");
@@ -390,7 +397,10 @@ public class ClientProxy extends CommonProxy {
 		registerItemRender(ACItems.ingot_nugget, 1, "nugget_coralium");
 		registerItemRender(ACItems.ingot_nugget, 2, "nugget_dreadium");
 		registerItemRender(ACItems.ingot_nugget, 3, "nugget_ethaxium");
-		registerItemRender(ACItems.staff_of_rending, 0);
+		registerItemRender(ACItems.staff_of_rending, 0, "drainstaff");
+		registerItemRender(ACItems.staff_of_rending, 1, "drainstaff_aw");
+		registerItemRender(ACItems.staff_of_rending, 2, "drainstaff_dl");
+		registerItemRender(ACItems.staff_of_rending, 3, "drainstaff_omt");
 		registerItemRender(ACItems.essence, 0, "essence_abyssalwasteland");
 		registerItemRender(ACItems.essence, 1, "essence_dreadlands");
 		registerItemRender(ACItems.essence, 2, "essence_omothol");
@@ -419,6 +429,7 @@ public class ClientProxy extends CommonProxy {
 		registerItemRender(ACItems.yog_sothoth_engraving, 0);
 		registerItemRender(ACItems.shub_niggurath_engraving, 0);
 		registerItemRender(ACItems.essence_of_the_gatekeeper, 0);
+		registerItemRender(ACItems.interdimensional_cage, 0);
 
 		registerItemRender(ACBlocks.darkstone, 0);
 		registerItemRender(ACBlocks.darkstone_cobblestone, 0);
@@ -586,6 +597,21 @@ public class ClientProxy extends CommonProxy {
 		registerItemRender(ACBlocks.mimic_fire, 0);
 		registerItemRenders(ACBlocks.crystal_cluster, EnumCrystalType.values().length);
 		registerItemRenders(ACBlocks.crystal_cluster2, EnumCrystalType2.values().length);
+		registerItemRender(ACBlocks.energy_collector, 0);
+		registerItemRender(ACBlocks.energy_relay, 0);
+		registerItemRender(ACBlocks.energy_container, 0);
+		registerItemRender(ACBlocks.tiered_energy_collector, 0, "tieredenergycollector_0");
+		registerItemRender(ACBlocks.tiered_energy_collector, 1, "tieredenergycollector_1");
+		registerItemRender(ACBlocks.tiered_energy_collector, 2, "tieredenergycollector_2");
+		registerItemRender(ACBlocks.tiered_energy_collector, 3, "tieredenergycollector_3");
+		registerItemRender(ACBlocks.overworld_energy_relay, 0);
+		registerItemRender(ACBlocks.abyssal_wasteland_energy_relay, 0);
+		registerItemRender(ACBlocks.dreadlands_energy_relay, 0);
+		registerItemRender(ACBlocks.omothol_energy_relay, 0);
+		registerItemRender(ACBlocks.tiered_energy_container, 0, "tieredenergycontainer_0");
+		registerItemRender(ACBlocks.tiered_energy_container, 1, "tieredenergycontainer_1");
+		registerItemRender(ACBlocks.tiered_energy_container, 2, "tieredenergycontainer_2");
+		registerItemRender(ACBlocks.tiered_energy_container, 3, "tieredenergycontainer_3");
 
 		RenderPlayer render1 = Minecraft.getMinecraft().getRenderManager().getSkinMap().get("default");
 		render1.addLayer(new LayerStarSpawnTentacles(render1));
@@ -706,8 +732,31 @@ public class ClientProxy extends CommonProxy {
 	}
 
 	@Override
-	public void spawnParticle(String particleName, double posX, double posY, double posZ, double velX, double velY, double velZ)
+	public void spawnParticle(String particleName, World world, double posX, double posY, double posZ, double velX, double velY, double velZ)
 	{
+		if(particleName.equals("CorBlood")){
+			spawnParticleLegacy(particleName, posX, posY, posZ, velX, velY, velZ);
+			return;
+		}
+		if(particleName.equals("PEStream")){
+			switch(world.rand.nextInt(3)){
+			case 0:
+				Minecraft.getMinecraft().effectRenderer.addEffect(new PEStreamParticleFX(world, posX, posY, posZ, velX, velY, velZ, 65, 63, 170));
+				break;
+			case 1:
+				Minecraft.getMinecraft().effectRenderer.addEffect(new PEStreamParticleFX(world, posX, posY, posZ, velX, velY, velZ, 41, 89, 48));
+				break;
+			case 2:
+				Minecraft.getMinecraft().effectRenderer.addEffect(new PEStreamParticleFX(world, posX, posY, posZ, velX, velY, velZ, 39, 80, 135));
+				break;
+			default:
+				Minecraft.getMinecraft().effectRenderer.addEffect(new PEStreamParticleFX(world, posX, posY, posZ, velX, velY, velZ, 3, 122, 120));
+				break;
+			}
+		}
+	}
+
+	public void spawnParticleLegacy(String particleName, double posX, double posY, double posZ, double velX, double velY, double velZ){
 		Minecraft mc = Minecraft.getMinecraft();
 		World theWorld = mc.theWorld;
 
