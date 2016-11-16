@@ -13,6 +13,7 @@ package com.shinoow.abyssalcraft.client.render.entity;
 
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.entity.RenderManager;
+import net.minecraft.client.renderer.entity.layers.LayerCustomHead;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -34,7 +35,13 @@ public class RenderRemnant extends RenderLiving<EntityRemnant> {
 
 	public RenderRemnant(RenderManager manager)
 	{
-		super(manager, new ModelRemnant(), 0.5F);
+		this(manager, new ModelRemnant());
+	}
+
+	public RenderRemnant(RenderManager manager, ModelRemnant model)
+	{
+		super(manager, model, 0.5F);
+		addLayer(new LayerCustomHead(model.head));
 	}
 
 	@Override

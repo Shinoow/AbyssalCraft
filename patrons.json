@@ -1,0 +1,28 @@
+{
+	"type": "chapter",
+	"identifier": "patrons",
+	"title": "necronomicon.patrons",
+	"pages": [
+		{
+			"type": "page",
+			"number": 1,
+			"icontype": "resourcelocation",
+			"icon": "abyssalcraft:textures/gui/necronomicon/patreon/saice.png",
+			"text": "Saice Shoop"
+		},
+		{
+			"type": "page",
+			"number": 2,
+			"icontype": "resourcelocation",
+			"icon": "abyssalcraft:textures/gui/necronomicon/patreon/minecreatr.png",
+			"text": "Minecreatr"
+		},
+		{
+			"type": "page",
+			"number": 3,
+			"icontype": "resourcelocation",
+			"icon": "abyssalcraft:textures/gui/necronomicon/missing.png",
+			"text": "Kendoshii"
+		}
+	]
+}

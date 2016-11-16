@@ -13,6 +13,7 @@ package com.shinoow.abyssalcraft.client.render.entity;
 
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.entity.RenderManager;
+import net.minecraft.client.renderer.entity.layers.LayerCustomHead;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -31,7 +32,13 @@ public class RenderSkeletonGoliath extends RenderLiving<EntitySkeletonGoliath> {
 
 	public RenderSkeletonGoliath(RenderManager manager)
 	{
-		super(manager, new ModelSkeletonGoliath(true), 0.5F);
+		this(manager, new ModelSkeletonGoliath(true));
+	}
+
+	public RenderSkeletonGoliath(RenderManager manager, ModelSkeletonGoliath model)
+	{
+		super(manager, model, 0.5F);
+		addLayer(new LayerCustomHead(model.head));
 	}
 
 	protected void preRenderScale(EntitySkeletonGoliath par1EntitySkeletonGoliath, float par2)

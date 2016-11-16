@@ -13,6 +13,7 @@ package com.shinoow.abyssalcraft.client.render.entity;
 
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.entity.RenderManager;
+import net.minecraft.client.renderer.entity.layers.LayerCustomHead;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -32,9 +33,14 @@ public class RenderDepthsGhoul extends RenderLiving<EntityDepthsGhoul> {
 
 	public RenderDepthsGhoul(RenderManager manager)
 	{
-		super(manager, new ModelDG(), 0.8F);
+		this(manager, new ModelDG());
+	}
+
+	public RenderDepthsGhoul(RenderManager manager, ModelDG model){
+		super(manager, model, 0.8F);
 		addLayer(new LayerGhoulHeldItem(this));
 		addLayer(new LayerGhoulArmor(this));
+		addLayer(new LayerCustomHead(model.Head));
 	}
 
 	@Override
