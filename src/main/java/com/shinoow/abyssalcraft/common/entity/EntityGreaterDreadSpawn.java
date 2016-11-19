@@ -5,7 +5,7 @@
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
  * http://www.gnu.org/licenses/lgpl-3.0.txt
- * 
+ *
  * Contributors:
  *     Shinoow -  implementation
  ******************************************************************************/
@@ -38,10 +38,10 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
-import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
 import com.shinoow.abyssalcraft.api.entity.IDreadEntity;
 import com.shinoow.abyssalcraft.api.item.ACItems;
+import com.shinoow.abyssalcraft.lib.ACConfig;
 
 public class EntityGreaterDreadSpawn extends EntityMob implements IDreadEntity, IRangedAttackMob {
 
@@ -72,7 +72,7 @@ public class EntityGreaterDreadSpawn extends EntityMob implements IDreadEntity, 
 		getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setBaseValue(0.2D);
 		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.5D);
 
-		if(AbyssalCraft.hardcoreMode){
+		if(ACConfig.hardcoreMode){
 			getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(200.0D);
 			getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(24.0D);
 		} else {
@@ -96,7 +96,7 @@ public class EntityGreaterDreadSpawn extends EntityMob implements IDreadEntity, 
 			if (par1Entity instanceof EntityLivingBase)
 				((EntityLivingBase)par1Entity).addPotionEffect(new PotionEffect(AbyssalCraftAPI.dread_plague.id, 100));
 
-		if(AbyssalCraft.hardcoreMode && par1Entity instanceof EntityPlayer)
+		if(ACConfig.hardcoreMode && par1Entity instanceof EntityPlayer)
 			par1Entity.attackEntityFrom(DamageSource.causeMobDamage(this).setDamageBypassesArmor(), 3);
 
 		return flag;

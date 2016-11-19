@@ -5,7 +5,7 @@
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
  * http://www.gnu.org/licenses/lgpl-3.0.txt
- * 
+ *
  * Contributors:
  *     Shinoow -  implementation
  ******************************************************************************/
@@ -35,9 +35,9 @@ import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.common.blocks.BlockTieredEnergyPedestal.EnumDimType;
 import com.shinoow.abyssalcraft.common.blocks.tile.TileEntityTieredSacrificialAltar;
+import com.shinoow.abyssalcraft.lib.ACConfig;
 import com.shinoow.abyssalcraft.lib.ACTabs;
 
 public class BlockTieredSacrificialAltar extends BlockContainer {
@@ -54,9 +54,8 @@ public class BlockTieredSacrificialAltar extends BlockContainer {
 		setCreativeTab(ACTabs.tabDecoration);
 	}
 
-	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
-	public void getSubBlocks(Item par1, CreativeTabs par2CreativeTabs, List par3List) {
+	public void getSubBlocks(Item par1, CreativeTabs par2CreativeTabs, List<ItemStack> par3List) {
 		par3List.add(new ItemStack(par1, 1, 0));
 		par3List.add(new ItemStack(par1, 1, 1));
 		par3List.add(new ItemStack(par1, 1, 2));
@@ -93,7 +92,7 @@ public class BlockTieredSacrificialAltar extends BlockContainer {
 		int y = pos.getY();
 		int z = pos.getZ();
 
-		if(AbyssalCraft.particleBlock){
+		if(ACConfig.particleBlock){
 			world.spawnParticle(EnumParticleTypes.FLAME, x + 0.75, y + 1.05, z + 0.75, 0.0D, 0.0D, 0.0D);
 			world.spawnParticle(EnumParticleTypes.FLAME, x + 0.25, y + 1.05, z + 0.75, 0.0D, 0.0D, 0.0D);
 			world.spawnParticle(EnumParticleTypes.FLAME, x + 0.25, y + 1.05, z + 0.25, 0.0D, 0.0D, 0.0D);

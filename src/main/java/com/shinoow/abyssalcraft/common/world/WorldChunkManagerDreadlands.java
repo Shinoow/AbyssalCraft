@@ -5,7 +5,7 @@
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
  * http://www.gnu.org/licenses/lgpl-3.0.txt
- * 
+ *
  * Contributors:
  *     Shinoow -  implementation
  ******************************************************************************/
@@ -118,7 +118,7 @@ public class WorldChunkManagerDreadlands extends WorldChunkManager
 		int[] aint = biomeToUse.getInts(par2, par3, par4, par5);
 
 		for (int i = 0; i < par4 * par5; ++i)
-			if (aint[i] >= 0)
+			if (aint[i] >= 0 && aint[i] <= BiomeGenBase.getBiomeGenArray().length)
 				par1ArrayOfBiomeGenBase[i] = BiomeGenBase.getBiome(aint[i]);
 			else
 				par1ArrayOfBiomeGenBase[i] = ACBiomes.dreadlands;
@@ -148,7 +148,7 @@ public class WorldChunkManagerDreadlands extends WorldChunkManager
 			int[] aint = biomeIndexLayer.getInts(x, y, width, length);
 
 			for (int i = 0; i < width * length; ++i)
-				if (aint[i] >= 0)
+				if (aint[i] >= 0 && aint[i] <= BiomeGenBase.getBiomeGenArray().length)
 					par1ArrayOfBiomeGenBase[i] = BiomeGenBase.getBiome(aint[i]);
 				else
 					par1ArrayOfBiomeGenBase[i] = ACBiomes.dreadlands;
@@ -158,12 +158,11 @@ public class WorldChunkManagerDreadlands extends WorldChunkManager
 	}
 
 	@Override
-	@SuppressWarnings("rawtypes")
-	public boolean areBiomesViable(int par1, int par2, int par3, List par4List) {
+	public boolean areBiomesViable(int par1, int par2, int par3, List<BiomeGenBase> par4List) {
 		IntCache.resetIntCache();
 		int l = par1 - par3 >> 2;
-		int i1 = par2 - par3 >> 2;
-		int j1 = par1 + par3 >> 2;
+				int i1 = par2 - par3 >> 2;
+			int j1 = par1 + par3 >> 2;
 		int k1 = par2 + par3 >> 2;
 		int l1 = j1 - l + 1;
 		int i2 = k1 - i1 + 1;
@@ -180,8 +179,7 @@ public class WorldChunkManagerDreadlands extends WorldChunkManager
 	}
 
 	@Override
-	@SuppressWarnings("rawtypes")
-	public BlockPos findBiomePosition(int par1, int par2, int par3, List par4List, Random par5Random) {
+	public BlockPos findBiomePosition(int par1, int par2, int par3, List<BiomeGenBase> par4List, Random par5Random) {
 		IntCache.resetIntCache();
 		int l = par1 - par3 >> 2;
 		int i1 = par2 - par3 >> 2;

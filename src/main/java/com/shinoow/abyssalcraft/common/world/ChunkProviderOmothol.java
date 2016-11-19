@@ -5,7 +5,7 @@
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
  * http://www.gnu.org/licenses/lgpl-3.0.txt
- * 
+ *
  * Contributors:
  *     Shinoow -  implementation
  ******************************************************************************/
@@ -28,6 +28,7 @@ import net.minecraft.util.IProgressUpdate;
 import net.minecraft.world.ChunkCoordIntPair;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
+import net.minecraft.world.biome.BiomeGenBase.SpawnListEntry;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.chunk.ChunkPrimer;
 import net.minecraft.world.chunk.IChunkProvider;
@@ -324,8 +325,7 @@ public class ChunkProviderOmothol implements IChunkProvider
 	}
 
 	@Override
-	@SuppressWarnings("rawtypes")
-	public List getPossibleCreatures(EnumCreatureType par1EnumCreatureType, BlockPos pos)
+	public List<SpawnListEntry> getPossibleCreatures(EnumCreatureType par1EnumCreatureType, BlockPos pos)
 	{
 		BiomeGenBase biomegenbase = worldObj.getBiomeGenForCoords(pos);
 		return biomegenbase == null ? null : biomegenbase.getSpawnableList(par1EnumCreatureType);

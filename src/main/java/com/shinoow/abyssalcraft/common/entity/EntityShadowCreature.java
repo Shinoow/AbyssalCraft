@@ -5,7 +5,7 @@
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
  * http://www.gnu.org/licenses/lgpl-3.0.txt
- * 
+ *
  * Contributors:
  *     Shinoow -  implementation
  ******************************************************************************/
@@ -35,12 +35,12 @@ import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.World;
 
-import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
 import com.shinoow.abyssalcraft.api.entity.IAntiEntity;
 import com.shinoow.abyssalcraft.api.entity.ICoraliumEntity;
 import com.shinoow.abyssalcraft.api.entity.IDreadEntity;
 import com.shinoow.abyssalcraft.api.item.ACItems;
+import com.shinoow.abyssalcraft.lib.ACConfig;
 
 public class EntityShadowCreature extends EntityMob implements IAntiEntity, ICoraliumEntity, IDreadEntity {
 
@@ -64,7 +64,7 @@ public class EntityShadowCreature extends EntityMob implements IAntiEntity, ICor
 
 		getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setBaseValue(0.2D);
 
-		if(AbyssalCraft.hardcoreMode){
+		if(ACConfig.hardcoreMode){
 			getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(40.0D);
 			getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(12.0D);
 		} else getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(6.0D);
@@ -73,7 +73,7 @@ public class EntityShadowCreature extends EntityMob implements IAntiEntity, ICor
 	@Override
 	public boolean attackEntityAsMob(Entity par1Entity) {
 
-		if(AbyssalCraft.hardcoreMode && par1Entity instanceof EntityPlayer)
+		if(ACConfig.hardcoreMode && par1Entity instanceof EntityPlayer)
 			par1Entity.attackEntityFrom(DamageSource.causeMobDamage(this).setDamageBypassesArmor(), 1.5F);
 
 		return super.attackEntityAsMob(par1Entity);
@@ -113,7 +113,7 @@ public class EntityShadowCreature extends EntityMob implements IAntiEntity, ICor
 	public void onLivingUpdate()
 	{
 		for (int i = 0; i < 2; ++i)
-			if(AbyssalCraft.particleEntity)
+			if(ACConfig.particleEntity)
 				worldObj.spawnParticle(EnumParticleTypes.SMOKE_LARGE, posX + (rand.nextDouble() - 0.5D) * width, posY + rand.nextDouble() * height, posZ + (rand.nextDouble() - 0.5D) * width, 0.0D, 0.0D, 0.0D);
 
 		super.onLivingUpdate();

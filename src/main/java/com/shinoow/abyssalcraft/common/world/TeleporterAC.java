@@ -5,7 +5,7 @@
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
  * http://www.gnu.org/licenses/lgpl-3.0.txt
- * 
+ *
  * Contributors:
  *     Shinoow -  implementation
  ******************************************************************************/
@@ -86,7 +86,7 @@ public class TeleporterAC extends Teleporter
 		int i = MathHelper.floor_double(entityIn.posX);
 		int j = MathHelper.floor_double(entityIn.posZ);
 		boolean flag1 = true;
-		Object object = BlockPos.ORIGIN;
+		BlockPos object = BlockPos.ORIGIN;
 		long k = ChunkCoordIntPair.chunkXZ2Int(i, j);
 
 		if (destinationCoordinateCache.containsItem(k)) {
@@ -123,40 +123,40 @@ public class TeleporterAC extends Teleporter
 
 		if (d0 >= 0.0D) {
 			if (flag1) {
-				destinationCoordinateCache.add(k, new Teleporter.PortalPosition((BlockPos) object, worldServerInstance.getTotalWorldTime()));
+				destinationCoordinateCache.add(k, new Teleporter.PortalPosition(object, worldServerInstance.getTotalWorldTime()));
 				destinationCoordinateKeys.add(Long.valueOf(k));
 			}
 
-			double d4 = ((BlockPos) object).getX() + 0.5D;
-			double d5 = ((BlockPos) object).getY() + 0.5D;
-			double d6 = ((BlockPos) object).getZ() + 0.5D;
+			double d4 = object.getX() + 0.5D;
+			double d5 = object.getY() + 0.5D;
+			double d6 = object.getZ() + 0.5D;
 			EnumFacing enumfacing = null;
 
-			if (worldServerInstance.getBlockState(((BlockPos) object).west()).getBlock() == portal)
+			if (worldServerInstance.getBlockState(object.west()).getBlock() == portal)
 				enumfacing = EnumFacing.NORTH;
 
-			if (worldServerInstance.getBlockState(((BlockPos) object).east()).getBlock() == portal)
+			if (worldServerInstance.getBlockState(object.east()).getBlock() == portal)
 				enumfacing = EnumFacing.SOUTH;
 
-			if (worldServerInstance.getBlockState(((BlockPos) object).north()).getBlock() == portal)
+			if (worldServerInstance.getBlockState(object.north()).getBlock() == portal)
 				enumfacing = EnumFacing.EAST;
 
-			if (worldServerInstance.getBlockState(((BlockPos) object).south()).getBlock() == portal)
+			if (worldServerInstance.getBlockState(object.south()).getBlock() == portal)
 				enumfacing = EnumFacing.WEST;
 
 			EnumFacing enumfacing1 = EnumFacing.getHorizontal(MathHelper.floor_double(entityIn.rotationYaw * 4.0F / 360.0F + 0.5D) & 3);
 
 			if (enumfacing != null) {
 				EnumFacing enumfacing2 = enumfacing.rotateYCCW();
-				BlockPos blockpos2 = ((BlockPos) object).offset(enumfacing);
+				BlockPos blockpos2 = object.offset(enumfacing);
 				boolean flag2 = func_180265_a(blockpos2);
 				boolean flag3 = func_180265_a(blockpos2.offset(enumfacing2));
 
 				if (flag3 && flag2) {
-					object = ((BlockPos) object).offset(enumfacing2);
+					object = object.offset(enumfacing2);
 					enumfacing = enumfacing.getOpposite();
 					enumfacing2 = enumfacing2.getOpposite();
-					BlockPos blockpos3 = ((BlockPos) object).offset(enumfacing);
+					BlockPos blockpos3 = object.offset(enumfacing);
 					flag2 = func_180265_a(blockpos3);
 					flag3 = func_180265_a(blockpos3.offset(enumfacing2));
 				}
@@ -171,9 +171,9 @@ public class TeleporterAC extends Teleporter
 				else if (flag3)
 					f1 = 0.0F;
 
-				d4 = ((BlockPos) object).getX() + 0.5D;
-				d5 = ((BlockPos) object).getY() + 0.5D;
-				d6 = ((BlockPos) object).getZ() + 0.5D;
+				d4 = object.getX() + 0.5D;
+				d5 = object.getY() + 0.5D;
+				d6 = object.getZ() + 0.5D;
 				d4 += enumfacing2.getFrontOffsetX() * f6 + enumfacing.getFrontOffsetX() * f1;
 				d6 += enumfacing2.getFrontOffsetZ() * f6 + enumfacing.getFrontOffsetZ() * f1;
 				float f2 = 0.0F;
@@ -398,12 +398,12 @@ public class TeleporterAC extends Teleporter
 	{
 		if (par1 % 100L == 0L)
 		{
-			Iterator iterator = destinationCoordinateKeys.iterator();
+			Iterator<Long> iterator = destinationCoordinateKeys.iterator();
 			long j = par1 - 600L;
 
 			while (iterator.hasNext())
 			{
-				Long olong = (Long)iterator.next();
+				Long olong = iterator.next();
 				PortalPosition portalposition = destinationCoordinateCache.getValueByKey(olong.longValue());
 
 				if (portalposition == null || portalposition.lastUpdateTime < j)

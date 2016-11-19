@@ -5,7 +5,7 @@
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
  * http://www.gnu.org/licenses/lgpl-3.0.txt
- * 
+ *
  * Contributors:
  *     Shinoow -  implementation
  ******************************************************************************/
@@ -26,10 +26,10 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fluids.BlockFluidClassic;
 
-import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.api.entity.EntityUtil;
+import com.shinoow.abyssalcraft.lib.ACConfig;
 
 public class BlockAntiliquid extends BlockFluidClassic {
 
@@ -37,7 +37,7 @@ public class BlockAntiliquid extends BlockFluidClassic {
 
 
 	public BlockAntiliquid() {
-		super(AbyssalCraft.antifluid, Material.water);
+		super(AbyssalCraftAPI.liquid_antimatter_fluid, Material.water);
 	}
 
 	@Override
@@ -80,7 +80,7 @@ public class BlockAntiliquid extends BlockFluidClassic {
 			((EntityLivingBase)par5Entity).addPotionEffect(new PotionEffect(Potion.nightVision.id, 400));
 			((EntityLivingBase)par5Entity).addPotionEffect(new PotionEffect(AbyssalCraftAPI.antimatter_potion.id, 200));
 		}
-		if(par5Entity instanceof EntityItem && AbyssalCraft.antiItemDisintegration)
+		if(par5Entity instanceof EntityItem && ACConfig.antiItemDisintegration)
 			par5Entity.setDead();
 	}
 }

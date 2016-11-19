@@ -5,18 +5,18 @@
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
  * http://www.gnu.org/licenses/lgpl-3.0.txt
- * 
+ *
  * Contributors:
  *     Shinoow -  implementation
  ******************************************************************************/
 package com.shinoow.abyssalcraft.init;
 
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemFood;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraftforge.fml.common.event.*;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
-import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.api.energy.EnergyEnum.DeityType;
@@ -29,10 +29,12 @@ import com.shinoow.abyssalcraft.lib.item.ItemMetadata;
 
 public class ItemHandler implements ILifeCycleHandler {
 
+	public static Item devsword, shadowPlate;
+
 	@Override
 	public void preInit(FMLPreInitializationEvent event) {
 		//"secret" dev stuff
-		AbyssalCraft.devsword = new AbyssalCraftTool();
+		devsword = new AbyssalCraftTool();
 
 		//Misc items
 		ACItems.oblivion_catalyst = new ItemOC();
@@ -125,7 +127,7 @@ public class ItemHandler implements ILifeCycleHandler {
 		ACItems.shadow_shard = new ItemACBasic("shadowshard");
 		ACItems.shadow_gem = new ItemACBasic("shadowgem");
 		ACItems.shard_of_oblivion = new ItemACBasic("oblivionshard");
-		AbyssalCraft.shadowPlate = new ItemACBasic("shadowplate");
+		shadowPlate = new ItemACBasic("shadowplate");
 
 		//Dread items
 		ACItems.dreaded_shard_of_abyssalnite = new ItemACBasic("dreadshard");
@@ -247,7 +249,7 @@ public class ItemHandler implements ILifeCycleHandler {
 		ACItems.fried_egg_on_a_plate = new ItemPlatefood(10, 1.2F, false, "eggp");
 		ACItems.washcloth = new ItemWashCloth();
 
-		GameRegistry.registerItem(AbyssalCraft.devsword, "devsword");
+		GameRegistry.registerItem(devsword, "devsword");
 		GameRegistry.registerItem(ACItems.oblivion_catalyst, "oc");
 		GameRegistry.registerItem(ACItems.gateway_key, "gatewaykey");
 		GameRegistry.registerItem(ACItems.staff_of_the_gatekeeper, "staff");

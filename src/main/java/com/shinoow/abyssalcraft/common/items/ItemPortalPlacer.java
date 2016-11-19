@@ -5,7 +5,7 @@
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
  * http://www.gnu.org/licenses/lgpl-3.0.txt
- * 
+ *
  * Contributors:
  *     Shinoow -  implementation
  ******************************************************************************/
@@ -50,8 +50,20 @@ public class ItemPortalPlacer extends Item {
 	}
 
 	@Override
-	@SuppressWarnings({ "unchecked", "rawtypes" })
-	public void addInformation(ItemStack par1ItemStack, EntityPlayer entityplayer, List list, boolean is){
+	public String getItemStackDisplayName(ItemStack par1ItemStack) {
+
+		switch(key){
+		case 1:
+			return EnumChatFormatting.DARK_RED + super.getItemStackDisplayName(par1ItemStack);
+		case 2:
+			return EnumChatFormatting.BLUE + super.getItemStackDisplayName(par1ItemStack);
+		default:
+			return super.getItemStackDisplayName(par1ItemStack);
+		}
+	}
+
+	@Override
+	public void addInformation(ItemStack par1ItemStack, EntityPlayer entityplayer, List<String> list, boolean is){
 		list.add(StatCollector.translateToLocal("tooltip.portalplacer.1"));
 		list.add(StatCollector.translateToLocal("tooltip.portalplacer.2"));
 		if(key > 0)

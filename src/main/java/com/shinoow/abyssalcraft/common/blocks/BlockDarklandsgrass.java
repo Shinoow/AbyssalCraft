@@ -5,7 +5,7 @@
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
  * http://www.gnu.org/licenses/lgpl-3.0.txt
- * 
+ *
  * Contributors:
  *     Shinoow -  implementation
  ******************************************************************************/
@@ -36,8 +36,8 @@ import net.minecraftforge.common.IPlantable;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
+import com.shinoow.abyssalcraft.lib.ACConfig;
 import com.shinoow.abyssalcraft.lib.ACTabs;
 
 public class BlockDarklandsgrass extends Block implements IGrowable {
@@ -64,7 +64,7 @@ public class BlockDarklandsgrass extends Block implements IGrowable {
 	{
 		super.randomDisplayTick(par1World, pos, state, par5Random);
 
-		if(AbyssalCraft.particleBlock)
+		if(ACConfig.particleBlock)
 			if (par5Random.nextInt(10) == 0)
 				par1World.spawnParticle(EnumParticleTypes.PORTAL, pos.getX() + par5Random.nextFloat(), pos.getY() + 1.1F, pos.getZ() + par5Random.nextFloat(), 0.0D, 0.0D, 0.0D);
 	}

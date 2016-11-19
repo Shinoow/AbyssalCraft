@@ -5,7 +5,7 @@
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
  * http://www.gnu.org/licenses/lgpl-3.0.txt
- * 
+ *
  * Contributors:
  *     Shinoow -  implementation
  ******************************************************************************/
@@ -55,9 +55,8 @@ public class BlockRitualPedestal extends BlockContainer {
 		setCreativeTab(null);
 	}
 
-	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
-	public void getSubBlocks(Item par1, CreativeTabs par2CreativeTabs, List par3List) {
+	public void getSubBlocks(Item par1, CreativeTabs par2CreativeTabs, List<ItemStack> par3List) {
 		par3List.add(new ItemStack(par1, 1, 0));
 		par3List.add(new ItemStack(par1, 1, 1));
 		par3List.add(new ItemStack(par1, 1, 2));

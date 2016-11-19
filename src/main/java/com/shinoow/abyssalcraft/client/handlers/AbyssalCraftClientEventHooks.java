@@ -5,7 +5,7 @@
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
  * http://www.gnu.org/licenses/lgpl-3.0.txt
- * 
+ *
  * Contributors:
  *     Shinoow -  implementation
  ******************************************************************************/
@@ -120,7 +120,6 @@ public class AbyssalCraftClientEventHooks {
 					lookvec.zCoord * var2);
 			Entity pointedEntity = null;
 			float var9 = 1.0F;
-			@SuppressWarnings("unchecked")
 			List<Entity> list = mc.theWorld.getEntitiesWithinAABBExcludingEntity(
 					theRenderViewEntity,
 					theViewBoundingBox.addCoord(

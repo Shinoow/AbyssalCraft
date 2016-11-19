@@ -5,7 +5,7 @@
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
  * http://www.gnu.org/licenses/lgpl-3.0.txt
- * 
+ *
  * Contributors:
  *     Shinoow -  implementation
  ******************************************************************************/
@@ -29,6 +29,7 @@ import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.api.energy.IEnergyTransporterItem;
 import com.shinoow.abyssalcraft.api.item.ACItems;
 import com.shinoow.abyssalcraft.common.blocks.BlockRitualAltar;
+import com.shinoow.abyssalcraft.lib.ACAchievements;
 import com.shinoow.abyssalcraft.lib.ACLib;
 import com.shinoow.abyssalcraft.lib.util.RitualUtil;
 import com.shinoow.abyssalcraft.lib.util.SpecialTextUtil;
@@ -44,10 +45,9 @@ public class ItemNecronomicon extends ItemACBasic implements IEnergyTransporterI
 		bookType = type;
 	}
 
-	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void getSubItems(Item par1Item, CreativeTabs par2CreativeTab, List par3List){
+	public void getSubItems(Item par1Item, CreativeTabs par2CreativeTab, List<ItemStack> par3List){
 		par3List.add(new ItemStack(par1Item));
 		ItemStack stack = new ItemStack(par1Item);
 		addEnergy(stack, getMaxEnergy(stack));
@@ -80,7 +80,7 @@ public class ItemNecronomicon extends ItemACBasic implements IEnergyTransporterI
 				if(isOwner(player, is))
 					if(RitualUtil.tryAltar(w, pos, bookType)){
 						w.playSoundAtEntity(player, "abyssalcraft:remnant.scream", 3F, 1F);
-						player.addStat(AbyssalCraft.ritual, 1);
+						player.addStat(ACAchievements.ritual_altar, 1);
 						return true;
 					}
 			} else if(w.getTileEntity(pos) instanceof IRitualAltar)
@@ -98,8 +98,7 @@ public class ItemNecronomicon extends ItemACBasic implements IEnergyTransporterI
 	}
 
 	@Override
-	@SuppressWarnings({ "unchecked", "rawtypes" })
-	public void addInformation(ItemStack is, EntityPlayer player, List l, boolean B){
+	public void addInformation(ItemStack is, EntityPlayer player, List<String> l, boolean B){
 		if(is.hasTagCompound() && is.getTagCompound().hasKey("owner"))
 			l.add("Owner: " + is.getTagCompound().getString("owner"));
 		l.add(String.format("%d/%d PE", (int)getContainedEnergy(is), getMaxEnergy(is)));

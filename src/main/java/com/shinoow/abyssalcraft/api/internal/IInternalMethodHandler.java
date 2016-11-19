@@ -5,12 +5,15 @@
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
  * http://www.gnu.org/licenses/lgpl-3.0.txt
- * 
+ *
  * Contributors:
  *     Shinoow -  implementation
  ******************************************************************************/
 package com.shinoow.abyssalcraft.api.internal;
 
+import java.util.Random;
+
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;
 
@@ -42,4 +45,46 @@ public interface IInternalMethodHandler {
 	 * @param velZ Z velocity
 	 */
 	public void spawnParticle(String particleName, World world, double posX, double posY, double posZ, double velX, double velY, double velZ);
+
+	/**
+	 * Attempts to generate a Darklands Structure.<br>
+	 * This should be called during world generation for the result.
+	 * @param type Structure type
+	 * <ul>
+	 * <li>0 = Any structure</li>
+	 * <li>1 = Shrine structures</li>
+	 * <li>2 = Ritual Ground structures</li>
+	 * <li>3 = Buildings</li>
+	 * <li>4 = Misc structures</li>
+	 * </ul>
+	 * @param world Current World
+	 * @param random Random instance
+	 * @param pos A BlockPos <br>
+	 * <i>world.getHeight(new BlockPos(chunkX*16 + random.nextInt(16) + rand.nextInt(5) * (random.nextBoolean() ? -1 : 1),
+	 * 0, chunkZ*16 + random.nextInt(16) rand.nextInt(5) * (random.nextBoolean() ? -1 : 1))<br></i>
+	 * is what's used for the Darklands
+	 */
+	public void generateDarklandsStructure(int type, World world, Random random, BlockPos pos);
+
+	/**
+	 * Attempts to generate a Darklands Structure.<br>
+	 * This should be called during world generation for the result.
+	 * @param type Structure type
+	 * <ul>
+	 * <li>0 = Any structure</li>
+	 * <li>1 = Shrine structures</li>
+	 * <li>2 = Ritual Ground structures</li>
+	 * <li>3 = Buildings</li>
+	 * <li>4 = Misc structures</li>
+	 * </ul>
+	 * @param world Current World
+	 * @param random Random instance
+	 * @param pos A BlockPos <br>
+	 * <i>world.getHeight(new BlockPos(chunkX*16 + random.nextInt(16) + rand.nextInt(5) * (random.nextBoolean() ? -1 : 1),
+	 * 0, chunkZ*16 + random.nextInt(16) rand.nextInt(5) * (random.nextBoolean() ? -1 : 1))<br></i>
+	 * is what's used for the Darklands
+	 * @param spawnBlock BlockState that the structures can generate on
+	 * @param extra (OPTIONAL) Additional BlockStates the structure can generate on
+	 */
+	public void generateDarklandsStructure(int type, World world, Random random, BlockPos pos, IBlockState spawnBlock, IBlockState...extra);
 }

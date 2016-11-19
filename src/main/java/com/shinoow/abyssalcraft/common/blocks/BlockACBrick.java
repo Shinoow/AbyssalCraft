@@ -5,7 +5,7 @@
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
  * http://www.gnu.org/licenses/lgpl-3.0.txt
- * 
+ *
  * Contributors:
  *     Shinoow -  implementation
  ******************************************************************************/
@@ -42,9 +42,8 @@ public class BlockACBrick extends BlockACBasic {
 		return ((EnumBrickType)state.getValue(TYPE)).getMeta();
 	}
 
-	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
-	public void getSubBlocks(Item par1, CreativeTabs par2CreativeTabs, List par3List) {
+	public void getSubBlocks(Item par1, CreativeTabs par2CreativeTabs, List<ItemStack> par3List) {
 		for(int i = 0; i < EnumBrickType.values().length; i++)
 			par3List.add(new ItemStack(par1, 1, i));
 	}

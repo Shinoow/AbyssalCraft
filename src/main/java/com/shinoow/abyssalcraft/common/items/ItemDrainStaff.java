@@ -5,7 +5,7 @@
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
  * http://www.gnu.org/licenses/lgpl-3.0.txt
- * 
+ *
  * Contributors:
  *     Shinoow -  implementation
  ******************************************************************************/
@@ -60,7 +60,6 @@ public class ItemDrainStaff extends ItemMetadata implements IStaffOfRending {
 	}
 
 	@Override
-	@SuppressWarnings("rawtypes")
 	public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player) {
 
 		if(getEnergy(stack, "Shadow") >= 200){
@@ -116,8 +115,7 @@ public class ItemDrainStaff extends ItemMetadata implements IStaffOfRending {
 	}
 
 	@Override
-	@SuppressWarnings({ "unchecked", "rawtypes" })
-	public void addInformation(ItemStack is, EntityPlayer player, List l, boolean B){
+	public void addInformation(ItemStack is, EntityPlayer player, List<String> l, boolean B){
 		int abyssal = getEnergy(is, "Abyssal");
 		int dread = getEnergy(is, "Dread");
 		int omothol = getEnergy(is, "Omothol");

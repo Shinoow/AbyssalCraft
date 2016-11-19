@@ -5,7 +5,7 @@
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
  * http://www.gnu.org/licenses/lgpl-3.0.txt
- * 
+ *
  * Contributors:
  *     Shinoow -  implementation
  ******************************************************************************/
@@ -50,9 +50,9 @@ import net.minecraftforge.common.ForgeModContainer;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.api.entity.IAntiEntity;
 import com.shinoow.abyssalcraft.api.item.ACItems;
+import com.shinoow.abyssalcraft.lib.ACConfig;
 
 public class EntityAntiZombie extends EntityMob implements IAntiEntity {
 
@@ -90,7 +90,7 @@ public class EntityAntiZombie extends EntityMob implements IAntiEntity {
 		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.23000000417232513D);
 		getAttributeMap().registerAttribute(spawnReinforcementsAttribute).setBaseValue(rand.nextDouble() * ForgeModContainer.zombieSummonBaseChance);
 
-		if(AbyssalCraft.hardcoreMode){
+		if(ACConfig.hardcoreMode){
 			getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(80.0D);
 			getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(6.0D);
 		} else {
@@ -192,7 +192,7 @@ public class EntityAntiZombie extends EntityMob implements IAntiEntity {
 				par1Entity.setFire(2 * i);
 		}
 
-		if(AbyssalCraft.hardcoreMode && par1Entity instanceof EntityPlayer)
+		if(ACConfig.hardcoreMode && par1Entity instanceof EntityPlayer)
 			par1Entity.attackEntityFrom(DamageSource.causeMobDamage(this).setDamageBypassesArmor(), 1.5F);
 
 		return flag;

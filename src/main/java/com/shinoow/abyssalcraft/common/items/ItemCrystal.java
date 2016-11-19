@@ -5,7 +5,7 @@
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
  * http://www.gnu.org/licenses/lgpl-3.0.txt
- * 
+ *
  * Contributors:
  *     Shinoow -  implementation
  ******************************************************************************/
@@ -51,10 +51,9 @@ public class ItemCrystal extends Item implements ICrystal {
 		return meta;
 	}
 
-	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void getSubItems(Item par1Item, CreativeTabs par2CreativeTab, List par3List){
+	public void getSubItems(Item par1Item, CreativeTabs par2CreativeTab, List<ItemStack> par3List){
 		for(int i = 0; i < ACLib.crystalNames.length; ++i)
 			par3List.add(new ItemStack(par1Item, 1, i));
 	}
@@ -65,9 +64,8 @@ public class ItemCrystal extends Item implements ICrystal {
 		return ACLib.crystalColors[par1ItemStack.getItemDamage()];
 	}
 
-	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
-	public void addInformation(ItemStack is, EntityPlayer player, List l, boolean B){
+	public void addInformation(ItemStack is, EntityPlayer player, List<String> l, boolean B){
 		l.add(StatCollector.translateToLocal("tooltip.crystal")+ ": " + ACLib.crystalAtoms[is.getItemDamage()]);
 	}
 

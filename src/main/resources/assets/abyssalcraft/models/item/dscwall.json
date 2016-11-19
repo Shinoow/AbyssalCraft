@@ -1,5 +1,8 @@
 {
-	"parent": "abyssalcraft:block/dscwall",
+	"parent": "block/wall_inventory",
+	"textures": {
+		"wall": "abyssalcraft:blocks/dsc"
+	},
 	"display": {
 		"thirdperson": {
 			"rotation": [ 10, -45, 170 ],

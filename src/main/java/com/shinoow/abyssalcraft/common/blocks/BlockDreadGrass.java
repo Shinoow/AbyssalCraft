@@ -5,7 +5,7 @@
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
  * http://www.gnu.org/licenses/lgpl-3.0.txt
- * 
+ *
  * Contributors:
  *     Shinoow -  implementation
  ******************************************************************************/
@@ -60,7 +60,7 @@ public class BlockDreadGrass extends Block implements IGrowable {
 	{
 		if (!worldIn.isRemote)
 			if (worldIn.getLightFromNeighbors(pos.up()) < 4 && worldIn.getBlockState(pos.up()).getBlock().getLightOpacity(worldIn, pos.up()) > 2)
-				worldIn.setBlockState(pos, Blocks.dirt.getDefaultState());
+				worldIn.setBlockState(pos, ACBlocks.dreadlands_dirt.getDefaultState());
 			else if (worldIn.getLightFromNeighbors(pos.up()) >= 9)
 				for (int i = 0; i < 4; ++i)
 				{
@@ -68,7 +68,7 @@ public class BlockDreadGrass extends Block implements IGrowable {
 					Block block = worldIn.getBlockState(blockpos.up()).getBlock();
 					IBlockState iblockstate = worldIn.getBlockState(blockpos);
 
-					if (iblockstate.getBlock() == Blocks.dirt && iblockstate.getValue(BlockDirt.VARIANT) == BlockDirt.DirtType.DIRT && worldIn.getLightFromNeighbors(blockpos.up()) >= 4 && block.getLightOpacity(worldIn, blockpos.up()) <= 2)
+					if ((iblockstate.getBlock() == ACBlocks.dreadlands_dirt || iblockstate.getBlock() == Blocks.dirt && iblockstate.getValue(BlockDirt.VARIANT) == BlockDirt.DirtType.DIRT) && worldIn.getLightFromNeighbors(blockpos.up()) >= 4 && block.getLightOpacity(worldIn, blockpos.up()) <= 2)
 						worldIn.setBlockState(blockpos, ACBlocks.dreadlands_grass.getDefaultState());
 				}
 	}
@@ -85,7 +85,7 @@ public class BlockDreadGrass extends Block implements IGrowable {
 	@Override
 	public Item getItemDropped(IBlockState state, Random par2Random, int par3)
 	{
-		return Blocks.dirt.getItemDropped(state, par2Random, par3);
+		return Item.getItemFromBlock(ACBlocks.dreadlands_dirt);
 	}
 
 	@Override

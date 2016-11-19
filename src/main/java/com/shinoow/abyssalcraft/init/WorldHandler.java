@@ -5,7 +5,7 @@
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
  * http://www.gnu.org/licenses/lgpl-3.0.txt
- * 
+ *
  * Contributors:
  *     Shinoow -  implementation
  ******************************************************************************/
@@ -24,7 +24,6 @@ import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.fml.common.event.*;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
-import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.api.biome.ACBiomes;
 import com.shinoow.abyssalcraft.common.structures.abyss.stronghold.MapGenAbyStronghold;
 import com.shinoow.abyssalcraft.common.structures.abyss.stronghold.StructureAbyStrongholdPieces;
@@ -35,6 +34,7 @@ import com.shinoow.abyssalcraft.common.structures.omothol.StructureOmotholPieces
 import com.shinoow.abyssalcraft.common.util.ACLogger;
 import com.shinoow.abyssalcraft.common.world.*;
 import com.shinoow.abyssalcraft.common.world.biome.*;
+import com.shinoow.abyssalcraft.lib.ACConfig;
 import com.shinoow.abyssalcraft.lib.ACLib;
 
 public class WorldHandler implements ILifeCycleHandler {
@@ -98,10 +98,10 @@ public class WorldHandler implements ILifeCycleHandler {
 		BiomeDictionary.registerBiomeType(ACBiomes.omothol, Type.DEAD);
 		BiomeDictionary.registerBiomeType(ACBiomes.dark_realm, Type.DEAD);
 
-		registerDimension(ACLib.abyssal_wasteland_id, WorldProviderAbyss.class, AbyssalCraft.keepLoaded1);
-		registerDimension(ACLib.dreadlands_id, WorldProviderDreadlands.class, AbyssalCraft.keepLoaded2);
-		registerDimension(ACLib.omothol_id, WorldProviderOmothol.class, AbyssalCraft.keepLoaded3);
-		registerDimension(ACLib.dark_realm_id, WorldProviderDarkRealm.class, AbyssalCraft.keepLoaded4);
+		registerDimension(ACLib.abyssal_wasteland_id, WorldProviderAbyss.class, ACConfig.keepLoaded1);
+		registerDimension(ACLib.dreadlands_id, WorldProviderDreadlands.class, ACConfig.keepLoaded2);
+		registerDimension(ACLib.omothol_id, WorldProviderOmothol.class, ACConfig.keepLoaded3);
+		registerDimension(ACLib.dark_realm_id, WorldProviderDarkRealm.class, ACConfig.keepLoaded4);
 	}
 
 	@Override
@@ -118,6 +118,15 @@ public class WorldHandler implements ILifeCycleHandler {
 	@Override
 	public void postInit(FMLPostInitializationEvent event) {
 		checkBiomeIds(false);
+		if(ACConfig.purgeMobSpawns){
+			((BiomeGenAbywasteland) ACBiomes.abyssal_wastelands).setMobSpawns();
+			((BiomeGenDreadlands) ACBiomes.dreadlands).setMobSpawns();
+			((BiomeGenAbyDreadlands) ACBiomes.purified_dreadlands).setMobSpawns();
+			((BiomeGenForestDreadlands) ACBiomes.dreadlands_forest).setMobSpawns();
+			((BiomeGenMountainDreadlands) ACBiomes.dreadlands_mountains).setMobSpawns();
+			((BiomeGenOmothol) ACBiomes.omothol).setMobSpawns();
+			((BiomeGenDarkRealm) ACBiomes.dark_realm).setMobSpawns();
+		}
 	}
 
 	private static void registerBiomeWithTypes(BiomeGenBase biome, int weight, BiomeType btype, Type...types){

@@ -1,0 +1,17 @@
+{
+	"parent": "block/grass",
+	"textures": {
+		"particle": "abyssalcraft:blocks/abyssalsand",
+        "bottom": "abyssalcraft:blocks/abyssalsand",
+        "top": "abyssalcraft:blocks/fusedabyssalsand",
+        "side": "abyssalcraft:blocks/fusedabyssalsand_side",
+        "overlay": "abyssalcraft:blocks/fusedabyssalsand_side"
+	},
+	"display": {
+		"thirdperson": {
+			"rotation": [ 10, -45, 170 ],
+			"translation": [ 0, 1.5, -2.75 ],
+			"scale": [ 0.375, 0.375, 0.375 ]
+		}
+	}
+}

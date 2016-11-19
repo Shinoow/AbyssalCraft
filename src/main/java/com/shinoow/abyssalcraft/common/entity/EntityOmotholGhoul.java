@@ -5,7 +5,7 @@
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
  * http://www.gnu.org/licenses/lgpl-3.0.txt
- * 
+ *
  * Contributors:
  *     Shinoow -  implementation
  ******************************************************************************/
@@ -43,9 +43,10 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.World;
 
-import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.api.entity.*;
 import com.shinoow.abyssalcraft.api.item.ACItems;
+import com.shinoow.abyssalcraft.init.InitHandler;
+import com.shinoow.abyssalcraft.lib.ACConfig;
 
 public class EntityOmotholGhoul extends EntityMob implements IAntiEntity, ICoraliumEntity, IDreadEntity {
 
@@ -73,7 +74,7 @@ public class EntityOmotholGhoul extends EntityMob implements IAntiEntity, ICoral
 		getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(64.0D);
 		getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setBaseValue(0.2D);
 
-		if(AbyssalCraft.hardcoreMode){
+		if(ACConfig.hardcoreMode){
 			getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(300.0D);
 			getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(30.0D);
 		} else {
@@ -100,7 +101,7 @@ public class EntityOmotholGhoul extends EntityMob implements IAntiEntity, ICoral
 				((EntityLivingBase)par1Entity).addPotionEffect(new PotionEffect(Potion.nightVision.id, 20));
 			}
 
-		if(AbyssalCraft.hardcoreMode && par1Entity instanceof EntityPlayer)
+		if(ACConfig.hardcoreMode && par1Entity instanceof EntityPlayer)
 			par1Entity.attackEntityFrom(DamageSource.causeMobDamage(this).setDamageBypassesArmor(), 3);
 
 		return flag;
@@ -151,7 +152,7 @@ public class EntityOmotholGhoul extends EntityMob implements IAntiEntity, ICoral
 	@Override
 	protected void updateEquipmentIfNeeded(EntityItem itemEntity)
 	{
-		if(!AbyssalCraft.isItemBlacklisted(this, itemEntity.getEntityItem()))
+		if(!InitHandler.INSTANCE.isItemBlacklisted(this, itemEntity.getEntityItem()))
 			super.updateEquipmentIfNeeded(itemEntity);
 	}
 
@@ -184,7 +185,7 @@ public class EntityOmotholGhoul extends EntityMob implements IAntiEntity, ICoral
 
 		if (calendar.get(2) + 1 == 10 && calendar.get(5) == 31)
 			attribute.applyModifier(attackDamageBoost);
-		
+
 		return par1EntityLivingData;
 	}
 }

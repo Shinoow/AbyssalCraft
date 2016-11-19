@@ -5,7 +5,7 @@
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
  * http://www.gnu.org/licenses/lgpl-3.0.txt
- * 
+ *
  * Contributors:
  *     Shinoow -  implementation
  ******************************************************************************/
@@ -27,8 +27,8 @@ import net.minecraft.util.BlockPos;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
 
-import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.api.entity.IDreadEntity;
+import com.shinoow.abyssalcraft.lib.ACConfig;
 
 public class EntityChagarothFist extends EntityMob implements IDreadEntity {
 
@@ -52,7 +52,7 @@ public class EntityChagarothFist extends EntityMob implements IDreadEntity {
 		getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setBaseValue(0.3D);
 		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.23000000417232513D);
 
-		if(AbyssalCraft.hardcoreMode){
+		if(ACConfig.hardcoreMode){
 			getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(100.0D);
 			getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(15D);
 		} else {
@@ -64,7 +64,7 @@ public class EntityChagarothFist extends EntityMob implements IDreadEntity {
 	@Override
 	public boolean attackEntityAsMob(Entity par1Entity) {
 
-		if(AbyssalCraft.hardcoreMode && par1Entity instanceof EntityPlayer)
+		if(ACConfig.hardcoreMode && par1Entity instanceof EntityPlayer)
 			par1Entity.attackEntityFrom(DamageSource.causeMobDamage(this).setDamageBypassesArmor(), 3);
 
 		return super.attackEntityAsMob(par1Entity);

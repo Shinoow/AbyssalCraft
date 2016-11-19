@@ -5,16 +5,19 @@
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
  * http://www.gnu.org/licenses/lgpl-3.0.txt
- * 
+ *
  * Contributors:
  *     Shinoow -  implementation
  ******************************************************************************/
 package com.shinoow.abyssalcraft.client.gui.necronomicon;
 
 import java.io.IOException;
+import java.util.List;
+import java.util.Map;
 
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
+import net.minecraft.client.renderer.texture.DynamicTexture;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
@@ -24,6 +27,8 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.GL11;
 
+import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
 import com.shinoow.abyssalcraft.api.item.ACItems;
 import com.shinoow.abyssalcraft.client.gui.necronomicon.buttons.ButtonCategory;
@@ -52,6 +57,8 @@ public class GuiNecronomicon extends GuiScreen {
 	/** Used to check if we're at a text entry (true), or a index (false) */
 	protected boolean isInfo = false;
 	private boolean isNecroInfo = false;
+	public static final Map<String, DynamicTexture> successcache = Maps.newHashMap();
+	public static final List<String> failcache = Lists.newArrayList();
 
 	public GuiNecronomicon(){
 		this(0);
@@ -91,7 +98,6 @@ public class GuiNecronomicon extends GuiScreen {
 	 * Adds the buttons (and other controls) to the screen in question.
 	 */
 	@Override
-	@SuppressWarnings("unchecked")
 	public void initGui()
 	{
 		buttonList.clear();
@@ -217,7 +223,6 @@ public class GuiNecronomicon extends GuiScreen {
 
 	}
 
-	@SuppressWarnings("unchecked")
 	private void drawButtons(){
 		buttonList.clear();
 		buttonList.add(buttonDone = new GuiButton(0, width / 2 - 100, 4 + guiHeight, 200, 20, I18n.format("gui.done", new Object[0])));

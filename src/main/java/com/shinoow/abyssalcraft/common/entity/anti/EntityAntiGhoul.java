@@ -5,7 +5,7 @@
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
  * http://www.gnu.org/licenses/lgpl-3.0.txt
- * 
+ *
  * Contributors:
  *     Shinoow -  implementation
  ******************************************************************************/
@@ -41,13 +41,14 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.World;
 
-import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.api.entity.IAntiEntity;
 import com.shinoow.abyssalcraft.api.item.ACItems;
 import com.shinoow.abyssalcraft.common.entity.EntityDepthsGhoul;
 import com.shinoow.abyssalcraft.common.entity.EntityOmotholGhoul;
+import com.shinoow.abyssalcraft.init.InitHandler;
+import com.shinoow.abyssalcraft.lib.ACConfig;
 
 public class EntityAntiGhoul extends EntityMob implements IAntiEntity {
 
@@ -80,7 +81,7 @@ public class EntityAntiGhoul extends EntityMob implements IAntiEntity {
 		getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setBaseValue(0.3D);
 		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.23000000417232513D);
 
-		if(AbyssalCraft.hardcoreMode){
+		if(ACConfig.hardcoreMode){
 			getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(120.0D);
 			getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(10.0D);
 		} else {
@@ -95,7 +96,7 @@ public class EntityAntiGhoul extends EntityMob implements IAntiEntity {
 		swingItem();
 		boolean flag = super.attackEntityAsMob(par1Entity);
 
-		if(AbyssalCraft.hardcoreMode && par1Entity instanceof EntityPlayer)
+		if(ACConfig.hardcoreMode && par1Entity instanceof EntityPlayer)
 			par1Entity.attackEntityFrom(DamageSource.causeMobDamage(this).setDamageBypassesArmor(), 1.5F);
 
 		return flag;
@@ -171,7 +172,7 @@ public class EntityAntiGhoul extends EntityMob implements IAntiEntity {
 	@Override
 	protected void updateEquipmentIfNeeded(EntityItem itemEntity)
 	{
-		if(!AbyssalCraft.isItemBlacklisted(this, itemEntity.getEntityItem()))
+		if(!InitHandler.INSTANCE.isItemBlacklisted(this, itemEntity.getEntityItem()))
 			super.updateEquipmentIfNeeded(itemEntity);
 	}
 

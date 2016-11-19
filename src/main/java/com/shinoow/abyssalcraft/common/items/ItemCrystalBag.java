@@ -5,7 +5,7 @@
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
  * http://www.gnu.org/licenses/lgpl-3.0.txt
- * 
+ *
  * Contributors:
  *     Shinoow -  implementation
  ******************************************************************************/
@@ -44,9 +44,8 @@ public class ItemCrystalBag extends ItemACBasic {
 		return stack;
 	}
 
-	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
-	public void addInformation(ItemStack is, EntityPlayer player, List l, boolean B)
+	public void addInformation(ItemStack is, EntityPlayer player, List<String> l, boolean B)
 	{
 		l.add(StatCollector.translateToLocal("tooltip.crystalbag"));
 	}

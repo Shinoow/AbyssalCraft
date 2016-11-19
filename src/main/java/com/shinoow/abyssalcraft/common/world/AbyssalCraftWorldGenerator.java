@@ -5,7 +5,7 @@
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
  * http://www.gnu.org/licenses/lgpl-3.0.txt
- * 
+ *
  * Contributors:
  *     Shinoow -  implementation
  ******************************************************************************/
@@ -22,11 +22,10 @@ import net.minecraftforge.common.BiomeDictionary;
 import net.minecraftforge.common.BiomeDictionary.Type;
 import net.minecraftforge.fml.common.IWorldGenerator;
 
-import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.api.biome.IDarklandsBiome;
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.common.structures.StructureShoggothPit;
-import com.shinoow.abyssalcraft.common.structures.overworld.*;
+import com.shinoow.abyssalcraft.lib.ACConfig;
 
 public class AbyssalCraftWorldGenerator implements IWorldGenerator {
 
@@ -49,51 +48,31 @@ public class AbyssalCraftWorldGenerator implements IWorldGenerator {
 
 	public void generateSurface(World world, Random random, int chunkX, int chunkZ) {
 
-		if(AbyssalCraft.generateDarklandsStructures && world.getBiomeGenForCoords(new BlockPos(chunkX, 0, chunkZ)) instanceof IDarklandsBiome){
-			for(int k = 0; k < 2; k++) {
-				int RandPosX = chunkX + random.nextInt(5);
-				int RandPosY = random.nextInt(75);
-				int RandPosZ = chunkZ + random.nextInt(5);
-				new AChouse1().generate(world, random, new BlockPos(RandPosX, RandPosY, RandPosZ));
-			}
+		if(ACConfig.generateDarklandsStructures && world.getBiomeGenForCoords(new BlockPos(chunkX, 0, chunkZ)) instanceof IDarklandsBiome){
 
-			for(int k = 0; k < 2; k++) {
-				int RandPosX = chunkX + random.nextInt(5);
-				int RandPosY = random.nextInt(75);
-				int RandPosZ = chunkZ + random.nextInt(5);
-				new AChouse2().generate(world, random, new BlockPos(RandPosX, RandPosY, RandPosZ));
-			}
+			int x = chunkX + random.nextInt(16) + random.nextInt(5) * (random.nextBoolean() ? -1 : 1);
+			int z = chunkZ + random.nextInt(16) + random.nextInt(5) * (random.nextBoolean() ? -1 : 1);
+			DarklandsStructureGenerator.generate(1, world, random, world.getHeight(new BlockPos(x, 0, z)));
 
-			for(int k = 0; k < 2; k++) {
-				int RandPosX = chunkX + random.nextInt(5);
-				int RandPosY = random.nextInt(75);
-				int RandPosZ = chunkZ + random.nextInt(5);
-				new ACplatform1().generate(world, random, new BlockPos(RandPosX, RandPosY, RandPosZ));
-			}
+			x = chunkX + random.nextInt(16) + random.nextInt(5) * (random.nextBoolean() ? -1 : 1);
+			z = chunkZ + random.nextInt(16) + random.nextInt(5) * (random.nextBoolean() ? -1 : 1);
+			DarklandsStructureGenerator.generate(2, world, random, world.getHeight(new BlockPos(x, 0, z)));
 
-			for(int k = 0; k < 2; k++) {
-				int RandPosX = chunkX + random.nextInt(5);
-				int RandPosY = random.nextInt(75);
-				int RandPosZ = chunkZ + random.nextInt(5);
-				new ACplatform2().generate(world, random, new BlockPos(RandPosX, RandPosY, RandPosZ));
-			}
+			x = chunkX + random.nextInt(16) + random.nextInt(5) * (random.nextBoolean() ? -1 : 1);
+			z = chunkZ + random.nextInt(16) + random.nextInt(5) * (random.nextBoolean() ? -1 : 1);
+			DarklandsStructureGenerator.generate(3, world, random, world.getHeight(new BlockPos(x, 0, z)));
 
-			for(int k = 0; k < 2; k++) {
-				int RandPosX = chunkX + random.nextInt(5);
-				int RandPosY = random.nextInt(75);
-				int RandPosZ = chunkZ + random.nextInt(5);
-				new ACscion1().generate(world, random, new BlockPos(RandPosX, RandPosY, RandPosZ));
-			}
+			x = chunkX + random.nextInt(16) + random.nextInt(5) * (random.nextBoolean() ? -1 : 1);
+			z = chunkZ + random.nextInt(16) + random.nextInt(5) * (random.nextBoolean() ? -1 : 1);
+			DarklandsStructureGenerator.generate(4, world, random, world.getHeight(new BlockPos(x, 0, z)),
+					ACBlocks.darklands_grass.getDefaultState(), ACBlocks.darkstone.getDefaultState());
 
-			for(int k = 0; k < 2; k++) {
-				int RandPosX = chunkX + random.nextInt(5);
-				int RandPosY = random.nextInt(75);
-				int RandPosZ = chunkZ + random.nextInt(5);
-				new ACscion2().generate(world, random, new BlockPos(RandPosX, RandPosY, RandPosZ));
-			}
+			x = chunkX + random.nextInt(16) + random.nextInt(5) * (random.nextBoolean() ? -1 : 1);
+			z = chunkZ + random.nextInt(16) + random.nextInt(5) * (random.nextBoolean() ? -1 : 1);
+			DarklandsStructureGenerator.generate(0, world, random, world.getHeight(new BlockPos(x, 0, z)));
 		}
 
-		if(AbyssalCraft.generateCoraliumOre){
+		if(ACConfig.generateCoraliumOre){
 			for(int rarity = 0; rarity < 3; rarity++) {
 				int veinSize = 2 + random.nextInt(2);
 				int x = chunkX + random.nextInt(16);
@@ -116,7 +95,7 @@ public class AbyssalCraftWorldGenerator implements IWorldGenerator {
 			}
 		}
 
-		if(AbyssalCraft.generateNitreOre)
+		if(ACConfig.generateNitreOre)
 			for(int rarity = 0; rarity < 3; rarity++) {
 				int veinSize = 4 + random.nextInt(2);
 				int x = chunkX + random.nextInt(16);
@@ -126,14 +105,14 @@ public class AbyssalCraftWorldGenerator implements IWorldGenerator {
 				new WorldGenMinable(ACBlocks.nitre_ore.getDefaultState(), veinSize).generate(world, random, new BlockPos(x, y, z));
 			}
 
-		if(AbyssalCraft.generateShoggothLairs)
+		if(ACConfig.generateShoggothLairs)
 			for(int i = 0; i < 1; i++){
 				int x = chunkX + random.nextInt(16);
 				int z = chunkZ + random.nextInt(16);
 				if(BiomeDictionary.isBiomeOfType(world.getBiomeGenForCoords(new BlockPos(x, 0, z)), Type.SWAMP) ||
 						BiomeDictionary.isBiomeOfType(world.getBiomeGenForCoords(new BlockPos(x, 0, z)), Type.RIVER) &&
 						!BiomeDictionary.isBiomeOfType(world.getBiomeGenForCoords(new BlockPos(x, 0, z)), Type.OCEAN))
-					if(random.nextInt(AbyssalCraft.shoggothLairSpawnRate) == 0)
+					if(random.nextInt(ACConfig.shoggothLairSpawnRate) == 0)
 						new StructureShoggothPit().generate(world, random, world.getHeight(new BlockPos(x, 0, z)));
 			}
 	}

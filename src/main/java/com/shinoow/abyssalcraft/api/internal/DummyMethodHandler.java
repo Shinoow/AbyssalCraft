@@ -5,12 +5,15 @@
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
  * http://www.gnu.org/licenses/lgpl-3.0.txt
- * 
+ *
  * Contributors:
  *     Shinoow -  implementation
  ******************************************************************************/
 package com.shinoow.abyssalcraft.api.internal;
 
+import java.util.Random;
+
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;
 
@@ -23,4 +26,10 @@ public class DummyMethodHandler implements IInternalMethodHandler {
 
 	@Override
 	public void spawnParticle(String particleName, World world, double posX, double posY, double posZ, double velX, double velY, double velZ) {}
+
+	@Override
+	public void generateDarklandsStructure(int type, World world, Random random, BlockPos pos) {}
+
+	@Override
+	public void generateDarklandsStructure(int type, World world, Random random, BlockPos pos, IBlockState spawnBlock, IBlockState... extra) {}
 }

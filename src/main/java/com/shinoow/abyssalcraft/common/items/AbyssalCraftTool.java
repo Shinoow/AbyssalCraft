@@ -5,7 +5,7 @@
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
  * http://www.gnu.org/licenses/lgpl-3.0.txt
- * 
+ *
  * Contributors:
  *     Shinoow -  implementation
  ******************************************************************************/
@@ -44,9 +44,8 @@ public class AbyssalCraftTool extends Item {
 		setCreativeTab(null);
 	}
 
-	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
-	public void addInformation(ItemStack is, EntityPlayer player, List l, boolean B) {
+	public void addInformation(ItemStack is, EntityPlayer player, List<String> l, boolean B) {
 		l.add(StatCollector.translateToLocal("tooltip.devblade.1"));
 		l.add(StatCollector.translateToLocal("tooltip.devblade.2"));
 	}
@@ -73,16 +72,14 @@ public class AbyssalCraftTool extends Item {
 	}
 
 	@Override
-	@SuppressWarnings("rawtypes")
 	public ItemStack onItemRightClick(ItemStack par1ItemStack, World par2World, EntityPlayer par3EntityPlayer) {
 
 		par3EntityPlayer.setItemInUse(par1ItemStack, getMaxItemUseDuration(par1ItemStack));
 
-		List list = par3EntityPlayer.worldObj.getEntitiesWithinAABBExcludingEntity(par3EntityPlayer, par3EntityPlayer.getEntityBoundingBox().expand(40D, 40D, 40D));
+		List<Entity> list = par3EntityPlayer.worldObj.getEntitiesWithinAABBExcludingEntity(par3EntityPlayer, par3EntityPlayer.getEntityBoundingBox().expand(40D, 40D, 40D));
 
 		if(list != null)
-			for(int k2 = 0; k2 < list.size(); k2++) {
-				Entity entity = (Entity)list.get(k2);
+			for(Entity entity : list) {
 
 				if(entity instanceof EntityLiving && !entity.isDead)
 					entity.attackEntityFrom(DamageSource.causePlayerDamage(par3EntityPlayer), 50000);
@@ -105,9 +102,8 @@ public class AbyssalCraftTool extends Item {
 	}
 
 	@Override
-	@SuppressWarnings({ "rawtypes", "unchecked", "deprecation" })
-	public Multimap getItemAttributeModifiers() {
-		Multimap multimap = super.getItemAttributeModifiers();
+	public Multimap<String, AttributeModifier> getAttributeModifiers(ItemStack stack) {
+		Multimap<String, AttributeModifier> multimap = super.getAttributeModifiers(stack);
 		multimap.put(SharedMonsterAttributes.attackDamage.getAttributeUnlocalizedName(), new AttributeModifier(itemModifierUUID, "Weapon modifier", weaponDamage, 0));
 		return multimap;
 	}

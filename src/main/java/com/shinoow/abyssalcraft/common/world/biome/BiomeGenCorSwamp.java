@@ -5,7 +5,7 @@
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
  * http://www.gnu.org/licenses/lgpl-3.0.txt
- * 
+ *
  * Contributors:
  *     Shinoow -  implementation
  ******************************************************************************/
@@ -24,7 +24,6 @@ import net.minecraft.world.gen.feature.WorldGenMinable;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.common.entity.EntityAbyssalZombie;
 import com.shinoow.abyssalcraft.common.entity.EntityDepthsGhoul;
@@ -40,10 +39,10 @@ import com.shinoow.abyssalcraft.common.entity.anti.EntityAntiSkeleton;
 import com.shinoow.abyssalcraft.common.entity.anti.EntityAntiSpider;
 import com.shinoow.abyssalcraft.common.entity.anti.EntityAntiZombie;
 import com.shinoow.abyssalcraft.common.world.gen.WorldGenAntimatterLake;
+import com.shinoow.abyssalcraft.lib.ACConfig;
 
 public class BiomeGenCorSwamp extends BiomeGenBase {
 
-	@SuppressWarnings("unchecked")
 	public BiomeGenCorSwamp(int par1) {
 		super(par1);
 		minHeight = -0.2F;
@@ -82,7 +81,7 @@ public class BiomeGenCorSwamp extends BiomeGenBase {
 		super.decorate(par1World, par2Random, pos);
 		int var5 = 3 + par2Random.nextInt(6);
 
-		if(AbyssalCraft.generateCoraliumOre){
+		if(ACConfig.generateCoraliumOre){
 			for (int var6 = 0; var6 < var5; ++var6)
 			{
 				int var7 = par2Random.nextInt(16);
@@ -104,7 +103,7 @@ public class BiomeGenCorSwamp extends BiomeGenBase {
 			}
 		}
 
-		if(AbyssalCraft.generateAntimatterLake)
+		if(ACConfig.generateAntimatterLake)
 			for(int k = 0; k < 1; k++)
 			{
 				int RandPosX = par2Random.nextInt(16);

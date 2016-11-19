@@ -5,7 +5,7 @@
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
  * http://www.gnu.org/licenses/lgpl-3.0.txt
- * 
+ *
  * Contributors:
  *     Shinoow -  implementation
  ******************************************************************************/
@@ -39,6 +39,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.common.blocks.tile.TileEntityCrystallizer;
+import com.shinoow.abyssalcraft.lib.ACConfig;
 import com.shinoow.abyssalcraft.lib.ACLib;
 import com.shinoow.abyssalcraft.lib.ACTabs;
 
@@ -197,7 +198,7 @@ public class BlockCrystallizer extends BlockContainer
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void randomDisplayTick(World world, BlockPos pos, IBlockState state, Random rand) {
-		if (isLit && AbyssalCraft.particleBlock){
+		if (isLit && ACConfig.particleBlock){
 			EnumFacing enumfacing = state.getValue(FACING);
 			double d0 = pos.getX() + 0.5D;
 			double d1 = pos.getY() + rand.nextDouble() * 6.0D / 16.0D;

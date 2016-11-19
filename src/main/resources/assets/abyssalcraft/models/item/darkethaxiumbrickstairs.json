@@ -1,5 +1,10 @@
 {
-	"parent": "abyssalcraft:block/darkethaxiumbrickstairs",
+	"parent": "block/stairs",
+	"textures": {
+		"bottom": "abyssalcraft:blocks/deb",
+        "top": "abyssalcraft:blocks/deb",
+        "side": "abyssalcraft:blocks/deb"
+	},
 	"display": {
 		"thirdperson": {
 			"rotation": [ 10, -45, 170 ],

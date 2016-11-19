@@ -5,7 +5,7 @@
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
  * http://www.gnu.org/licenses/lgpl-3.0.txt
- * 
+ *
  * Contributors:
  *     Shinoow -  implementation
  ******************************************************************************/
@@ -23,10 +23,13 @@ import com.shinoow.abyssalcraft.common.entity.EntityShadowMonster;
 
 public class BiomeGenDarkRealm extends BiomeGenBase {
 
-	@SuppressWarnings("unchecked")
 	public BiomeGenDarkRealm(int par1){
 		super(par1);
 		waterColorMultiplier = 14745518;
+		setMobSpawns();
+	}
+
+	public final void setMobSpawns(){
 		spawnableMonsterList.clear();
 		spawnableCreatureList.clear();
 		spawnableWaterCreatureList.clear();

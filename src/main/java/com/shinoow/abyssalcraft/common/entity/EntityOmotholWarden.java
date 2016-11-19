@@ -5,7 +5,7 @@
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
  * http://www.gnu.org/licenses/lgpl-3.0.txt
- * 
+ *
  * Contributors:
  *     Shinoow -  implementation
  ******************************************************************************/
@@ -28,9 +28,9 @@ import net.minecraft.item.Item;
 import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;
 
-import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.api.entity.*;
 import com.shinoow.abyssalcraft.api.item.ACItems;
+import com.shinoow.abyssalcraft.lib.ACConfig;
 
 public class EntityOmotholWarden extends EntityMob implements IAntiEntity, ICoraliumEntity, IDreadEntity {
 
@@ -54,7 +54,7 @@ public class EntityOmotholWarden extends EntityMob implements IAntiEntity, ICora
 		getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(64.0D);
 		getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setBaseValue(0.2D);
 
-		if(AbyssalCraft.hardcoreMode){
+		if(ACConfig.hardcoreMode){
 			getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(400.0D);
 			getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(30.0D);
 		} else {

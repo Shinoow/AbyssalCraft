@@ -5,7 +5,7 @@
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
  * http://www.gnu.org/licenses/lgpl-3.0.txt
- * 
+ *
  * Contributors:
  *     Shinoow -  implementation
  ******************************************************************************/
@@ -46,9 +46,9 @@ public class ItemDreadArmor extends ItemArmor {
 		else return null;
 	}
 
-	@SuppressWarnings("rawtypes")
 	@Override
 	public void onArmorTick(World world, EntityPlayer player, ItemStack itemstack) {
+		if(world.isRemote) return;
 		if (itemstack.getItem() == ACItems.dreaded_abyssalnite_helmet)
 			player.addPotionEffect(new PotionEffect(Potion.nightVision.getId(), 260, 0));
 		if (itemstack.getItem() == ACItems.dreaded_abyssalnite_chestplate)

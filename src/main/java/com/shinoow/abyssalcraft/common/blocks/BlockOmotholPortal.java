@@ -5,7 +5,7 @@
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
  * http://www.gnu.org/licenses/lgpl-3.0.txt
- * 
+ *
  * Contributors:
  *     Shinoow -  implementation
  ******************************************************************************/
@@ -34,9 +34,10 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.common.world.TeleporterAC;
+import com.shinoow.abyssalcraft.lib.ACAchievements;
+import com.shinoow.abyssalcraft.lib.ACConfig;
 import com.shinoow.abyssalcraft.lib.ACLib;
 
 public class BlockOmotholPortal extends BlockBreakable {
@@ -173,16 +174,16 @@ public class BlockOmotholPortal extends BlockBreakable {
 		if (par5Entity.ridingEntity == null && par5Entity.riddenByEntity == null && par5Entity instanceof EntityPlayerMP)
 		{
 			EntityPlayerMP thePlayer = (EntityPlayerMP)par5Entity;
-			thePlayer.addStat(AbyssalCraft.enterOmothol, 1);
+			thePlayer.addStat(ACAchievements.enter_omothol, 1);
 			if (thePlayer.timeUntilPortal > 0)
 				thePlayer.timeUntilPortal = thePlayer.getPortalCooldown();
 			else if (thePlayer.dimension != ACLib.omothol_id)
 			{
-				thePlayer.timeUntilPortal = AbyssalCraft.portalCooldown;
+				thePlayer.timeUntilPortal = ACConfig.portalCooldown;
 				thePlayer.mcServer.getConfigurationManager().transferPlayerToDimension(thePlayer, ACLib.omothol_id, new TeleporterAC(thePlayer.mcServer.worldServerForDimension(ACLib.omothol_id), this, ACBlocks.omothol_stone));
 			}
 			else {
-				thePlayer.timeUntilPortal = AbyssalCraft.portalCooldown;
+				thePlayer.timeUntilPortal = ACConfig.portalCooldown;
 				thePlayer.mcServer.getConfigurationManager().transferPlayerToDimension(thePlayer, ACLib.dreadlands_id, new TeleporterAC(thePlayer.mcServer.worldServerForDimension(ACLib.dreadlands_id), this, ACBlocks.omothol_stone));
 			}
 		}

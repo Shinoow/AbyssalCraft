@@ -5,7 +5,7 @@
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
  * http://www.gnu.org/licenses/lgpl-3.0.txt
- * 
+ *
  * Contributors:
  *     Shinoow -  implementation
  ******************************************************************************/
@@ -187,7 +187,6 @@ public class GuiNecronomiconOther extends GuiNecronomicon {
 		}
 	}
 
-	@SuppressWarnings("unchecked")
 	private void drawButtons(){
 		buttonList.clear();
 		buttonList.add(buttonDone = new GuiButton(0, width / 2 - 100, 4 + guiHeight, 200, 20, I18n.format("gui.done", new Object[0])));

@@ -5,7 +5,7 @@
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
  * http://www.gnu.org/licenses/lgpl-3.0.txt
- * 
+ *
  * Contributors:
  *     Shinoow -  implementation
  ******************************************************************************/
@@ -30,7 +30,8 @@ public abstract class StructureComponentModded extends StructureComponent {
 	protected List<Block> stairs = Arrays.asList(Blocks.stone_stairs, Blocks.oak_stairs, Blocks.nether_brick_stairs, Blocks.stone_brick_stairs,
 			Blocks.sandstone_stairs, ACBlocks.abyssal_stone_brick_stairs, ACBlocks.darkstone_cobblestone_stairs, ACBlocks.darkstone_brick_stairs,
 			ACBlocks.darklands_oak_stairs, ACBlocks.abyssalnite_stone_brick_stairs, ACBlocks.dreadstone_brick_stairs, ACBlocks.coralium_stone_brick_stairs,
-			ACBlocks.ethaxium_brick_stairs, ACBlocks.dark_ethaxium_brick_stairs);
+			ACBlocks.ethaxium_brick_stairs, ACBlocks.dark_ethaxium_brick_stairs, ACBlocks.abyssal_cobblestone_stairs, ACBlocks.dreadstone_brick_stairs,
+			ACBlocks.abyssalnite_cobblestone_stairs, ACBlocks.coralium_cobblestone_stairs);
 	protected List<Block> buttons = Arrays.asList(Blocks.stone_button, Blocks.wooden_button, ACBlocks.abyssal_stone_button,
 			ACBlocks.darkstone_button, ACBlocks.darklands_oak_button, ACBlocks.coralium_stone_button);
 	protected List<Block> redstone = Arrays.asList(Blocks.lever, Blocks.piston, Blocks.sticky_piston, Blocks.dispenser);

@@ -5,7 +5,7 @@
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
  * http://www.gnu.org/licenses/lgpl-3.0.txt
- * 
+ *
  * Contributors:
  *     Shinoow -  implementation
  ******************************************************************************/
@@ -27,9 +27,8 @@ public class ItemODB extends ItemBlock {
 		super(p_i45328_1_);
 	}
 
-	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@Override
-	public void addInformation(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, List par3List, boolean par4)
+	public void addInformation(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, List<String> par3List, boolean par4)
 	{
 		par3List.add(StatCollector.translateToLocal("tooltip.odb"));
 	}

@@ -5,13 +5,13 @@
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
  * http://www.gnu.org/licenses/lgpl-3.0.txt
- * 
+ *
  * Contributors:
  *     Shinoow -  implementation
  ******************************************************************************/
 package com.shinoow.abyssalcraft.common.entity.demon;
 
-import com.shinoow.abyssalcraft.AbyssalCraft;
+import com.shinoow.abyssalcraft.lib.ACConfig;
 
 import net.minecraft.block.Block;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -35,7 +35,7 @@ public class EntityDemonChicken extends EntityDemonAnimal {
 	protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
 
-		if(AbyssalCraft.hardcoreMode){
+		if(ACConfig.hardcoreMode){
 			getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(20.0D);
 			getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(4.0D);
 		} else getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(10.0D);

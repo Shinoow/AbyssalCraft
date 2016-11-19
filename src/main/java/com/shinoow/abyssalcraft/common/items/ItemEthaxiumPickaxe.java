@@ -5,7 +5,7 @@
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
  * http://www.gnu.org/licenses/lgpl-3.0.txt
- * 
+ *
  * Contributors:
  *     Shinoow -  implementation
  ******************************************************************************/
@@ -19,12 +19,12 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumChatFormatting;
 
 import com.google.common.collect.Sets;
-import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
+import com.shinoow.abyssalcraft.init.BlockHandler;
 
 public class ItemEthaxiumPickaxe extends ItemACPickaxe {
 
-	private static Set<Block> effectiveBlocks = Sets.newHashSet( new Block[] {ACBlocks.ethaxium, ACBlocks.ethaxium_brick, ACBlocks.ethaxium_pillar, ACBlocks.ethaxium_brick_fence, ACBlocks.ethaxium_brick_slab, AbyssalCraft.ethaxiumslab2, ACBlocks.ethaxium_brick_stairs, ACBlocks.block_of_ethaxium, ACBlocks.materializer, ACBlocks.dark_ethaxium_brick, ACBlocks.dark_ethaxium_pillar, ACBlocks.dark_ethaxium_brick_stairs, ACBlocks.dark_ethaxium_brick_slab, AbyssalCraft.darkethaxiumslab2, ACBlocks.dark_ethaxium_brick_fence});
+	private static Set<Block> effectiveBlocks = Sets.newHashSet( new Block[] {ACBlocks.ethaxium, ACBlocks.ethaxium_brick, ACBlocks.ethaxium_pillar, ACBlocks.ethaxium_brick_fence, ACBlocks.ethaxium_brick_slab, BlockHandler.ethaxiumslab2, ACBlocks.ethaxium_brick_stairs, ACBlocks.block_of_ethaxium, ACBlocks.materializer, ACBlocks.dark_ethaxium_brick, ACBlocks.dark_ethaxium_pillar, ACBlocks.dark_ethaxium_brick_stairs, ACBlocks.dark_ethaxium_brick_slab, BlockHandler.darkethaxiumslab2, ACBlocks.dark_ethaxium_brick_fence});
 
 	public ItemEthaxiumPickaxe(ToolMaterial mat, String name)
 	{

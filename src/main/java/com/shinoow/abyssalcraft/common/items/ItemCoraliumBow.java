@@ -5,7 +5,7 @@
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
  * http://www.gnu.org/licenses/lgpl-3.0.txt
- * 
+ *
  * Contributors:
  *     Shinoow -  implementation
  ******************************************************************************/
@@ -53,7 +53,7 @@ public class ItemCoraliumBow extends ItemBow {
 	 * 8 is default bow
 	 * @param anim_2 is used for syncing charge time with pull_2 animation, ie 17 where
 	 * 16 is default bow
-	 * 
+	 *
 	 * Notes: adjust anim_0-2 whenever chargeTime is changed for smoother animation flow
 	 */
 	public ItemCoraliumBow(float chargeTime, int anim_0, int anim_1, int anim_2) {
@@ -104,8 +104,7 @@ public class ItemCoraliumBow extends ItemBow {
 	}
 
 	@Override
-	@SuppressWarnings({ "unchecked", "rawtypes" })
-	public void addInformation(ItemStack par1ItemStack, EntityPlayer entityplayer, List list, boolean is){
+	public void addInformation(ItemStack par1ItemStack, EntityPlayer entityplayer, List<String> list, boolean is){
 		list.add(StatCollector.translateToLocal("tooltip.corbow.1"));
 		list.add(StatCollector.translateToLocal("tooltip.corbow.2"));
 	}

@@ -5,7 +5,7 @@
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
  * http://www.gnu.org/licenses/lgpl-3.0.txt
- * 
+ *
  * Contributors:
  *     Shinoow -  implementation
  ******************************************************************************/
@@ -31,10 +31,10 @@ import net.minecraft.world.gen.structure.StructureBoundingBox;
 import net.minecraft.world.gen.structure.StructureComponent;
 import net.minecraftforge.common.ChestGenHooks;
 
-import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.common.blocks.BlockACBrick.EnumBrickType;
 import com.shinoow.abyssalcraft.common.structures.StructureComponentModded;
+import com.shinoow.abyssalcraft.init.BlockHandler;
 import com.shinoow.abyssalcraft.lib.ACLoot;
 
 public class StructureAbyStrongholdPieces
@@ -750,31 +750,31 @@ public class StructureAbyStrongholdPieces
 				case 2:
 					for (i = 1; i <= 9; ++i)
 					{
-						setBlockState(par1World, ACBlocks.darkstone_cobblestone.getDefaultState(), 1, 3, i, par3StructureBoundingBox);
-						setBlockState(par1World, ACBlocks.darkstone_cobblestone.getDefaultState(), 9, 3, i, par3StructureBoundingBox);
+						setBlockState(par1World, ACBlocks.abyssal_cobblestone.getDefaultState(), 1, 3, i, par3StructureBoundingBox);
+						setBlockState(par1World, ACBlocks.abyssal_cobblestone.getDefaultState(), 9, 3, i, par3StructureBoundingBox);
 					}
 
 					for (i = 1; i <= 9; ++i)
 					{
-						setBlockState(par1World, ACBlocks.darkstone_cobblestone.getDefaultState(), i, 3, 1, par3StructureBoundingBox);
-						setBlockState(par1World, ACBlocks.darkstone_cobblestone.getDefaultState(), i, 3, 9, par3StructureBoundingBox);
+						setBlockState(par1World, ACBlocks.abyssal_cobblestone.getDefaultState(), i, 3, 1, par3StructureBoundingBox);
+						setBlockState(par1World, ACBlocks.abyssal_cobblestone.getDefaultState(), i, 3, 9, par3StructureBoundingBox);
 					}
 
-					setBlockState(par1World, ACBlocks.darkstone_cobblestone.getDefaultState(), 5, 1, 4, par3StructureBoundingBox);
-					setBlockState(par1World, ACBlocks.darkstone_cobblestone.getDefaultState(), 5, 1, 6, par3StructureBoundingBox);
-					setBlockState(par1World, ACBlocks.darkstone_cobblestone.getDefaultState(), 5, 3, 4, par3StructureBoundingBox);
-					setBlockState(par1World, ACBlocks.darkstone_cobblestone.getDefaultState(), 5, 3, 6, par3StructureBoundingBox);
-					setBlockState(par1World, ACBlocks.darkstone_cobblestone.getDefaultState(), 4, 1, 5, par3StructureBoundingBox);
-					setBlockState(par1World, ACBlocks.darkstone_cobblestone.getDefaultState(), 6, 1, 5, par3StructureBoundingBox);
-					setBlockState(par1World, ACBlocks.darkstone_cobblestone.getDefaultState(), 4, 3, 5, par3StructureBoundingBox);
-					setBlockState(par1World, ACBlocks.darkstone_cobblestone.getDefaultState(), 6, 3, 5, par3StructureBoundingBox);
+					setBlockState(par1World, ACBlocks.abyssal_cobblestone.getDefaultState(), 5, 1, 4, par3StructureBoundingBox);
+					setBlockState(par1World, ACBlocks.abyssal_cobblestone.getDefaultState(), 5, 1, 6, par3StructureBoundingBox);
+					setBlockState(par1World, ACBlocks.abyssal_cobblestone.getDefaultState(), 5, 3, 4, par3StructureBoundingBox);
+					setBlockState(par1World, ACBlocks.abyssal_cobblestone.getDefaultState(), 5, 3, 6, par3StructureBoundingBox);
+					setBlockState(par1World, ACBlocks.abyssal_cobblestone.getDefaultState(), 4, 1, 5, par3StructureBoundingBox);
+					setBlockState(par1World, ACBlocks.abyssal_cobblestone.getDefaultState(), 6, 1, 5, par3StructureBoundingBox);
+					setBlockState(par1World, ACBlocks.abyssal_cobblestone.getDefaultState(), 4, 3, 5, par3StructureBoundingBox);
+					setBlockState(par1World, ACBlocks.abyssal_cobblestone.getDefaultState(), 6, 3, 5, par3StructureBoundingBox);
 
 					for (i = 1; i <= 3; ++i)
 					{
-						setBlockState(par1World, ACBlocks.darkstone_cobblestone.getDefaultState(), 4, i, 4, par3StructureBoundingBox);
-						setBlockState(par1World, ACBlocks.darkstone_cobblestone.getDefaultState(), 6, i, 4, par3StructureBoundingBox);
-						setBlockState(par1World, ACBlocks.darkstone_cobblestone.getDefaultState(), 4, i, 6, par3StructureBoundingBox);
-						setBlockState(par1World, ACBlocks.darkstone_cobblestone.getDefaultState(), 6, i, 6, par3StructureBoundingBox);
+						setBlockState(par1World, ACBlocks.abyssal_cobblestone.getDefaultState(), 4, i, 4, par3StructureBoundingBox);
+						setBlockState(par1World, ACBlocks.abyssal_cobblestone.getDefaultState(), 6, i, 4, par3StructureBoundingBox);
+						setBlockState(par1World, ACBlocks.abyssal_cobblestone.getDefaultState(), 4, i, 6, par3StructureBoundingBox);
+						setBlockState(par1World, ACBlocks.abyssal_cobblestone.getDefaultState(), 6, i, 6, par3StructureBoundingBox);
 					}
 
 					setBlockState(par1World, Blocks.torch.getDefaultState(), 5, 3, 5, par3StructureBoundingBox);
@@ -851,13 +851,13 @@ public class StructureAbyStrongholdPieces
 				fillWithRandomizedBlocks(par1World, par3StructureBoundingBox, 0, 0, 0, 4, 10, 7, true, par2Random, StructureAbyStrongholdPieces.strongholdStones);
 				placeDoor(par1World, par2Random, par3StructureBoundingBox, field_143013_d, 1, 7, 0);
 				placeDoor(par1World, par2Random, par3StructureBoundingBox, StructureAbyStrongholdPieces.Stronghold.Door.OPENING, 1, 1, 7);
-				int i = getMetadataWithOffset(ACBlocks.darkstone_cobblestone_stairs, 2);
+				int i = getMetadataWithOffset(ACBlocks.abyssal_cobblestone_stairs, 2);
 
 				for (int j = 0; j < 6; ++j)
 				{
-					setBlockState(par1World, ACBlocks.darkstone_cobblestone_stairs.getStateFromMeta(i), 1, 6 - j, 1 + j, par3StructureBoundingBox);
-					setBlockState(par1World, ACBlocks.darkstone_cobblestone_stairs.getStateFromMeta(i), 2, 6 - j, 1 + j, par3StructureBoundingBox);
-					setBlockState(par1World, ACBlocks.darkstone_cobblestone_stairs.getStateFromMeta(i), 3, 6 - j, 1 + j, par3StructureBoundingBox);
+					setBlockState(par1World, ACBlocks.abyssal_cobblestone_stairs.getStateFromMeta(i), 1, 6 - j, 1 + j, par3StructureBoundingBox);
+					setBlockState(par1World, ACBlocks.abyssal_cobblestone_stairs.getStateFromMeta(i), 2, 6 - j, 1 + j, par3StructureBoundingBox);
+					setBlockState(par1World, ACBlocks.abyssal_cobblestone_stairs.getStateFromMeta(i), 3, 6 - j, 1 + j, par3StructureBoundingBox);
 
 					if (j < 5)
 					{
@@ -1366,7 +1366,7 @@ public class StructureAbyStrongholdPieces
 				fillWithBlocks(par1World, par3StructureBoundingBox, 5, 2, 7, 7, 2, 7, ACBlocks.abyssal_stone_brick_slab.getDefaultState(), ACBlocks.abyssal_stone_brick_slab.getDefaultState(), false);
 				fillWithBlocks(par1World, par3StructureBoundingBox, 4, 5, 7, 4, 5, 9, ACBlocks.abyssal_stone_brick_slab.getDefaultState(), ACBlocks.abyssal_stone_brick_slab.getDefaultState(), false);
 				fillWithBlocks(par1World, par3StructureBoundingBox, 8, 5, 7, 8, 5, 9, ACBlocks.abyssal_stone_brick_slab.getDefaultState(), ACBlocks.abyssal_stone_brick_slab.getDefaultState(), false);
-				fillWithBlocks(par1World, par3StructureBoundingBox, 5, 5, 7, 7, 5, 9, AbyssalCraft.abyslab2.getDefaultState(), AbyssalCraft.abyslab2.getDefaultState(), false);
+				fillWithBlocks(par1World, par3StructureBoundingBox, 5, 5, 7, 7, 5, 9, BlockHandler.abyslab2.getDefaultState(), BlockHandler.abyslab2.getDefaultState(), false);
 				return true;
 			}
 		}

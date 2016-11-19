@@ -5,7 +5,7 @@
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
  * http://www.gnu.org/licenses/lgpl-3.0.txt
- * 
+ *
  * Contributors:
  *     Shinoow -  implementation
  ******************************************************************************/
@@ -49,8 +49,5 @@ public class GuiEnergyContainer extends GuiContainer {
 		int k = (width - xSize) / 2;
 		int l = (height - ySize) / 2;
 		drawTexturedModalRect(k, l, 0, 0, xSize, ySize);
-
-		//		i1 = tileEnergyContainer.getProcessProgressScaled(24);
-		//		drawTexturedModalRect(k + 79, l + 34, 176, 14, i1 + 1, 16);
 	}
 }

@@ -5,7 +5,7 @@
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
  * http://www.gnu.org/licenses/lgpl-3.0.txt
- * 
+ *
  * Contributors:
  *     Shinoow -  implementation
  ******************************************************************************/
@@ -43,9 +43,9 @@ import net.minecraft.util.BlockPos;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.World;
 
-import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.api.entity.IAntiEntity;
 import com.shinoow.abyssalcraft.api.item.ACItems;
+import com.shinoow.abyssalcraft.lib.ACConfig;
 
 public class EntityAntiSkeleton extends EntityMob implements IRangedAttackMob, IAntiEntity {
 
@@ -69,7 +69,7 @@ public class EntityAntiSkeleton extends EntityMob implements IRangedAttackMob, I
 		super.applyEntityAttributes();
 
 		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.25D);
-		if(AbyssalCraft.hardcoreMode) getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(80.0D);
+		if(ACConfig.hardcoreMode) getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(80.0D);
 		else getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(40.0D);
 	}
 
@@ -156,11 +156,12 @@ public class EntityAntiSkeleton extends EntityMob implements IRangedAttackMob, I
 		else par1Entity.applyEntityCollision(this);
 	}
 
+	@Override
 	protected void setEquipmentBasedOnDifficulty(DifficultyInstance difficulty)
-    {
-        super.setEquipmentBasedOnDifficulty(difficulty);
-        this.setCurrentItemOrArmor(0, new ItemStack(Items.bow));
-    }
+	{
+		super.setEquipmentBasedOnDifficulty(difficulty);
+		setCurrentItemOrArmor(0, new ItemStack(Items.bow));
+	}
 
 	@Override
 	public IEntityLivingData onInitialSpawn(DifficultyInstance difficulty, IEntityLivingData par1EntityLivingData)

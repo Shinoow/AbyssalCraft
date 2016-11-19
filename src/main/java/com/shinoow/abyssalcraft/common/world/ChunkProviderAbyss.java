@@ -5,7 +5,7 @@
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
  * http://www.gnu.org/licenses/lgpl-3.0.txt
- * 
+ *
  * Contributors:
  *     Shinoow -  implementation
  ******************************************************************************/
@@ -27,6 +27,7 @@ import net.minecraft.world.ChunkCoordIntPair;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldType;
 import net.minecraft.world.biome.BiomeGenBase;
+import net.minecraft.world.biome.BiomeGenBase.SpawnListEntry;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.chunk.ChunkPrimer;
 import net.minecraft.world.chunk.IChunkProvider;
@@ -42,13 +43,13 @@ import net.minecraftforge.event.terraingen.PopulateChunkEvent;
 import net.minecraftforge.event.terraingen.TerrainGen;
 import net.minecraftforge.fml.common.eventhandler.Event.Result;
 
-import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.common.structures.StructureShoggothPit;
 import com.shinoow.abyssalcraft.common.structures.abyss.Abypillar;
 import com.shinoow.abyssalcraft.common.structures.abyss.Abyruin;
 import com.shinoow.abyssalcraft.common.structures.abyss.stronghold.MapGenAbyStronghold;
 import com.shinoow.abyssalcraft.common.world.gen.WorldGenAbyLake;
+import com.shinoow.abyssalcraft.lib.ACConfig;
 
 public class ChunkProviderAbyss implements IChunkProvider
 {
@@ -364,7 +365,7 @@ public class ChunkProviderAbyss implements IChunkProvider
 		int l1;
 		int i2;
 
-		if(AbyssalCraft.generateCoraliumLake)
+		if(ACConfig.generateCoraliumLake)
 			if (TerrainGen.populate(par1IChunkProvider, worldObj, rand, x, z, flag, LAKE) &&
 					!flag && rand.nextInt(6) == 0)
 			{
@@ -373,7 +374,13 @@ public class ChunkProviderAbyss implements IChunkProvider
 				i2 = rand.nextInt(16) + 8;
 				new WorldGenAbyLake(ACBlocks.liquid_coralium).generate(worldObj, rand, pos.add(k1, l1, i2));
 			}
-		if(AbyssalCraft.generateAbyssalWastelandPillars)
+		if(rand.nextFloat() < 0.15F) {
+			k1 = rand.nextInt(16) + 8;
+			l1 = rand.nextInt(128);
+			i2 = rand.nextInt(16) + 8;
+			new WorldGenAbyLake(ACBlocks.abyssal_stone).generate(worldObj, rand, pos.add(k1, l1, i2));
+		}
+		if(ACConfig.generateAbyssalWastelandPillars)
 			for(int i = 0; i < 5; i++) {
 				int Xcoord1 = rand.nextInt(16) + 8;
 				int Ycoord1 = rand.nextInt(80);
@@ -381,7 +388,7 @@ public class ChunkProviderAbyss implements IChunkProvider
 
 				new Abypillar().generate(worldObj, rand, pos.add(Xcoord1, Ycoord1, Zcoord1));
 			}
-		if(AbyssalCraft.generateAbyssalWastelandRuins)
+		if(ACConfig.generateAbyssalWastelandRuins)
 			for(int i = 0; i < 5; i++) {
 				int Xcoord2 = rand.nextInt(16) + 8;
 				int Ycoord2 = rand.nextInt(70);
@@ -389,7 +396,7 @@ public class ChunkProviderAbyss implements IChunkProvider
 
 				new Abyruin().generate(worldObj, rand, pos.add(Xcoord2, Ycoord2, Zcoord2));
 			}
-		if(AbyssalCraft.generateShoggothLairs)
+		if(ACConfig.generateShoggothLairs)
 			for(int i = 0; i < 1; i++) {
 				int Xcoord2 = rand.nextInt(16) + 8;
 				int Zcoord2 = rand.nextInt(16) + 8;
@@ -460,8 +467,7 @@ public class ChunkProviderAbyss implements IChunkProvider
 	 * Returns a list of creatures of the specified type that can spawn at the given location.
 	 */
 	@Override
-	@SuppressWarnings("rawtypes")
-	public List getPossibleCreatures(EnumCreatureType par1EnumCreatureType, BlockPos pos)
+	public List<SpawnListEntry> getPossibleCreatures(EnumCreatureType par1EnumCreatureType, BlockPos pos)
 	{
 		BiomeGenBase biome = worldObj.getBiomeGenForCoords(pos);
 		return biome == null ? null : biome.getSpawnableList(par1EnumCreatureType);

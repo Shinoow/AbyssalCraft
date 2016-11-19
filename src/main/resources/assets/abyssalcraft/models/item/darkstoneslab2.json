@@ -1,5 +1,9 @@
 {
-	"parent": "abyssalcraft:block/darkstoneslab2",
+	"parent": "block/cube_column",
+	"textures" : {
+		"end": "abyssalcraft:blocks/dsstop",
+		"side": "abyssalcraft:blocks/dsssides"
+	},
 	"display": {
 		"thirdperson": {
 			"rotation": [ 10, -45, 170 ],

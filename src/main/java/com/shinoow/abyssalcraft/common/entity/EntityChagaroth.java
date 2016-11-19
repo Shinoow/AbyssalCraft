@@ -5,7 +5,7 @@
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
  * http://www.gnu.org/licenses/lgpl-3.0.txt
- * 
+ *
  * Contributors:
  *     Shinoow -  implementation
  ******************************************************************************/
@@ -40,10 +40,11 @@ import net.minecraft.util.StatCollector;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.World;
 
-import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
 import com.shinoow.abyssalcraft.api.entity.IDreadEntity;
 import com.shinoow.abyssalcraft.api.item.ACItems;
+import com.shinoow.abyssalcraft.lib.ACAchievements;
+import com.shinoow.abyssalcraft.lib.ACConfig;
 import com.shinoow.abyssalcraft.lib.util.SpecialTextUtil;
 
 public class EntityChagaroth extends EntityMob implements IBossDisplayData, IDreadEntity {
@@ -78,7 +79,7 @@ public class EntityChagaroth extends EntityMob implements IBossDisplayData, IDre
 		if(flag)
 			if(par1Entity instanceof EntityLivingBase)
 				((EntityLivingBase)par1Entity).addPotionEffect(new PotionEffect(AbyssalCraftAPI.dread_plague.id, 100));
-		if(AbyssalCraft.hardcoreMode && par1Entity instanceof EntityPlayer)
+		if(ACConfig.hardcoreMode && par1Entity instanceof EntityPlayer)
 			par1Entity.attackEntityFrom(DamageSource.causeMobDamage(this).setDamageBypassesArmor(), 4.5F);
 		return flag;
 	}
@@ -91,7 +92,7 @@ public class EntityChagaroth extends EntityMob implements IBossDisplayData, IDre
 		getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setBaseValue(1.0D);
 		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.0D);
 
-		if(AbyssalCraft.hardcoreMode){
+		if(ACConfig.hardcoreMode){
 			getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(2000.0D);
 			getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(30.0D);
 		} else {
@@ -235,7 +236,7 @@ public class EntityChagaroth extends EntityMob implements IBossDisplayData, IDre
 		if (par1DamageSource.getEntity() instanceof EntityPlayer)
 		{
 			EntityPlayer entityplayer = (EntityPlayer)par1DamageSource.getEntity();
-			entityplayer.addStat(AbyssalCraft.killChagaroth, 1);
+			entityplayer.addStat(ACAchievements.kill_chagaroth, 1);
 		}
 		super.onDeath(par1DamageSource);
 	}
@@ -258,7 +259,7 @@ public class EntityChagaroth extends EntityMob implements IBossDisplayData, IDre
 			float f = (rand.nextFloat() - 0.5F) * 8.0F;
 			float f1 = (rand.nextFloat() - 0.5F) * 4.0F;
 			float f2 = (rand.nextFloat() - 0.5F) * 8.0F;
-			if(AbyssalCraft.particleEntity){
+			if(ACConfig.particleEntity){
 				worldObj.spawnParticle(EnumParticleTypes.FLAME, posX + f, posY + 2.0D + f1, posZ + f2, 0.0D, 0.0D, 0.0D);
 				worldObj.spawnParticle(EnumParticleTypes.LAVA, posX + f, posY + 2.0D + f1, posZ + f2, 0.0D, 0.0D, 0.0D);
 				worldObj.spawnParticle(EnumParticleTypes.SMOKE_LARGE, posX + f, posY + 2.0D + f1, posZ + f2, 0.0D, 0.0D, 0.0D);

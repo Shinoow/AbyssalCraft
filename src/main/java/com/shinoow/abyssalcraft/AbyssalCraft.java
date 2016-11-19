@@ -5,29 +5,22 @@
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
  * http://www.gnu.org/licenses/lgpl-3.0.txt
- * 
+ *
  * Contributors:
  *     Shinoow -  implementation
  ******************************************************************************/
 package com.shinoow.abyssalcraft;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
-import net.minecraft.block.Block;
-import net.minecraft.entity.Entity;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
 import net.minecraft.stats.Achievement;
-import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.common.config.Configuration;
-import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fml.common.*;
 import net.minecraftforge.fml.common.Mod.*;
 import net.minecraftforge.fml.common.event.*;
 
 import com.shinoow.abyssalcraft.common.CommonProxy;
 import com.shinoow.abyssalcraft.common.handlers.IMCHandler;
-import com.shinoow.abyssalcraft.common.util.ACLogger;
 import com.shinoow.abyssalcraft.init.*;
 
 @Mod(modid = AbyssalCraft.modid, name = AbyssalCraft.name, version = AbyssalCraft.version,dependencies = "required-after:Forge@[forgeversion,);after:JEI@[2.28,)", useMetadata = false, guiFactory = "com.shinoow.abyssalcraft.client.config.ACGuiFactory", acceptedMinecraftVersions = "[1.8.9]", updateJSON = "https://raw.githubusercontent.com/Shinoow/AbyssalCraft/master/version.json")
@@ -47,8 +40,6 @@ public class AbyssalCraft {
 			serverSide = "com.shinoow.abyssalcraft.common.CommonProxy")
 	public static CommonProxy proxy;
 
-	public static Map<String, Integer> stringtoIDMapping = new HashMap<String, Integer>();
-
 	private static List<ILifeCycleHandler> handlers = new ArrayList<ILifeCycleHandler>(){{
 		add(InitHandler.INSTANCE);
 		add(new BlockHandler());
@@ -59,53 +50,9 @@ public class AbyssalCraft {
 		add(new IntegrationHandler());
 	}};
 
-	public static Configuration cfg;
-
-	public static Fluid CFluid, antifluid;
-
-	public static final Fluid LIQUID_CORALIUM = new Fluid("liquidcoralium", new ResourceLocation("abyssalcraft", "blocks/cwater_still"),
-			new ResourceLocation("abyssalcraft", "blocks/cwater_flow")).setDensity(3000).setTemperature(350);
-	public static final Fluid LIQUID_ANTIMATTER = new Fluid("liquidantimatter", new ResourceLocation("abyssalcraft", "blocks/anti_still"),
-			new ResourceLocation("abyssalcraft", "blocks/anti_flow")).setDensity(4000).setViscosity(1500).setTemperature(100);
-
-	public static Achievement mineAby, killghoul, enterabyss, killdragon, summonAsorah,
-	killAsorah, enterdreadlands, killdreadguard, ghoulhead, petehead, wilsonhead, orangehead,
-	mineCorgem, mineCor, findPSDL, GK1, GK2, GK3, summonChagaroth, killChagaroth, enterOmothol,
-	enterDarkRealm, killJzahar, killOmotholelite, locateJzahar, necro, necrou1, necrou2, necrou3,
-	abyssaln, ritual, ritualSummon, ritualCreate, shadowGems, mineAbyOres, mineDread, dreadium,
-	eth, makeTransmutator, makeCrystallizer, makeMaterializer, makeCrystalBag, makeEngraver,
-	ritualBreed, ritualPotion, ritualPotionAoE, ritualInfusion;
-
-	public static Block Darkbrickslab2, Darkcobbleslab2, abyslab2, Darkstoneslab2, DLTslab2,
-	Altar, dreadbrickslab2, abydreadbrickslab2, cstonebrickslab2, ethaxiumslab2, house,
-	darkethaxiumslab2;
-
-	//"secret" dev stuff
-	public static Item devsword;
-	//shadow items
-	public static Item shadowPlate;
-
-	public static boolean keepLoaded1, keepLoaded2, keepLoaded3, keepLoaded4;
-
-	public static boolean shouldSpread, shouldInfect, breakLogic, destroyOcean, demonAnimalFire, updateC, darkness,
-	particleBlock, particleEntity, hardcoreMode, useDynamicPotionIds, evilAnimalCreatureType,
-	antiItemDisintegration, smeltingRecipes;
-	public static int evilAnimalSpawnWeight, endAbyssalZombieSpawnWeight, portalCooldown, demonAnimalSpawnWeight, shoggothLairSpawnRate;
-	public static boolean shoggothOoze, oozeLeaves, oozeGrass, oozeGround, oozeSand, oozeRock, oozeCloth, oozeWood,
-	oozeGourd, oozeIron, oozeClay, oozeExpire;
-	public static boolean generateDarklandsStructures, generateShoggothLairs, generateAbyssalWastelandPillars,
-	generateAbyssalWastelandRuins, generateAntimatterLake, generateCoraliumLake, generateDreadlandsStalagmite;
-	public static boolean generateCoraliumOre, generateNitreOre, generateAbyssalniteOre, generateAbyssalCoraliumOre,
-	generateDreadlandsAbyssalniteOre, generateDreadedAbyssalniteOre, generateAbyssalIronOre, generateAbyssalGoldOre,
-	generateAbyssalDiamondOre, generateAbyssalNitreOre, generateAbyssalTinOre, generateAbyssalCopperOre,
-	generatePearlescentCoraliumOre, generateLiquifiedCoraliumOre;
-
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
-
-		ACLogger.info("Pre-initializing AbyssalCraft.");
 		instance = this;
-
 		for(ILifeCycleHandler handler : handlers)
 			handler.preInit(event);
 		proxy.preInit();
@@ -113,8 +60,6 @@ public class AbyssalCraft {
 
 	@EventHandler
 	public void Init(FMLInitializationEvent event) {
-
-		ACLogger.info("Initializing AbyssalCraft.");
 		proxy.init();
 		for(ILifeCycleHandler handler : handlers)
 			handler.init(event);
@@ -122,12 +67,9 @@ public class AbyssalCraft {
 
 	@EventHandler
 	public void postInit(FMLPostInitializationEvent event) {
-
-		ACLogger.info("Post-initializing AbyssalCraft");
 		proxy.postInit();
 		for(ILifeCycleHandler handler : handlers)
 			handler.postInit(event);
-		ACLogger.info("AbyssalCraft loaded.");
 	}
 
 	@EventHandler
@@ -135,19 +77,26 @@ public class AbyssalCraft {
 		InitHandler.INSTANCE.serverStart(event);
 	}
 
-	@SuppressWarnings("unchecked")
 	@EventHandler
 	public void handleIMC(FMLInterModComms.IMCEvent event){
 		IMCHandler.handleIMC(event);
 	}
 
-	/**
-	 * Checks whether or not an Item is blacklisted for the specified Entity
-	 * @param entity Entity to check
-	 * @param stack ItemStack to check
-	 * @return True if the Item is blacklisted, otherwise false
-	 */
-	public static boolean isItemBlacklisted(Entity entity, ItemStack stack){
-		return InitHandler.INSTANCE.isItemBlacklisted(entity, stack);
-	}
+	//TODO remove all of this around AC 1.9.4 or 1.9.5
+	@Deprecated
+	public static int evilAnimalSpawnWeight, endAbyssalZombieSpawnWeight, portalCooldown, demonAnimalSpawnWeight, shoggothLairSpawnRate;
+	@Deprecated
+	public static boolean generateCoraliumOre, generateNitreOre, generateAbyssalniteOre, generateAbyssalCoraliumOre, generateDreadlandsAbyssalniteOre,
+	generateDreadedAbyssalniteOre, generateAbyssalIronOre, generateAbyssalGoldOre, generateAbyssalDiamondOre, generateAbyssalNitreOre,
+	generateAbyssalTinOre, generateAbyssalCopperOre, generatePearlescentCoraliumOre, generateLiquifiedCoraliumOre, generateDarklandsStructures,
+	generateShoggothLairs, generateAbyssalWastelandPillars, generateAbyssalWastelandRuins, generateAntimatterLake, generateCoraliumLake,
+	generateDreadlandsStalagmite,shoggothOoze, oozeLeaves, oozeGrass, oozeGround, oozeSand, oozeRock, oozeCloth, oozeWood, oozeGourd, oozeIron,
+	oozeClay, oozeExpire, shouldSpread, shouldInfect, breakLogic, destroyOcean, demonAnimalFire, darkness, particleBlock, particleEntity,
+	hardcoreMode, evilAnimalCreatureType, antiItemDisintegration, smeltingRecipes, keepLoaded1, keepLoaded2, keepLoaded3, keepLoaded4;
+	@Deprecated
+	public static Achievement mineAby, killghoul, enterabyss, killdragon, summonAsorah, killAsorah, enterdreadlands, killdreadguard,
+	ghoulhead, petehead, wilsonhead, orangehead, mineCorgem, mineCor, findPSDL, GK1, GK2, GK3, summonChagaroth, killChagaroth,
+	enterOmothol, enterDarkRealm, killJzahar, killOmotholelite, locateJzahar, necro, necrou1, necrou2, necrou3, abyssaln, ritual,
+	ritualSummon, ritualCreate, shadowGems, mineAbyOres, mineDread, dreadium, eth, makeTransmutator, makeCrystallizer, makeMaterializer,
+	makeCrystalBag, makeEngraver, ritualBreed, ritualPotion, ritualPotionAoE, ritualInfusion;
 }

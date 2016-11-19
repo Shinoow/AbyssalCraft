@@ -5,7 +5,7 @@
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
  * http://www.gnu.org/licenses/lgpl-3.0.txt
- * 
+ *
  * Contributors:
  *     Shinoow -  implementation
  ******************************************************************************/
@@ -63,7 +63,6 @@ import net.minecraftforge.fml.relauncher.ReflectionHelper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.api.APIUtils;
 import com.shinoow.abyssalcraft.api.entity.EntityUtil;
 import com.shinoow.abyssalcraft.api.entity.IAntiEntity;
@@ -72,6 +71,7 @@ import com.shinoow.abyssalcraft.api.entity.IDreadEntity;
 import com.shinoow.abyssalcraft.api.item.ACItems;
 import com.shinoow.abyssalcraft.common.items.ItemDrainStaff;
 import com.shinoow.abyssalcraft.common.items.ItemNecronomicon;
+import com.shinoow.abyssalcraft.lib.ACConfig;
 
 public class EntityRemnant extends EntityMob implements IMerchant, IAntiEntity, ICoraliumEntity, IDreadEntity {
 
@@ -107,7 +107,7 @@ public class EntityRemnant extends EntityMob implements IMerchant, IAntiEntity, 
 		getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(64.0D);
 		getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setBaseValue(0.2D);
 
-		if(AbyssalCraft.hardcoreMode){
+		if(ACConfig.hardcoreMode){
 			getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(200.0D);
 			getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(20.0D);
 		} else {
@@ -127,14 +127,13 @@ public class EntityRemnant extends EntityMob implements IMerchant, IAntiEntity, 
 		swingItem();
 		boolean flag = super.attackEntityAsMob(par1Entity);
 
-		if(AbyssalCraft.hardcoreMode && par1Entity instanceof EntityPlayer)
+		if(ACConfig.hardcoreMode && par1Entity instanceof EntityPlayer)
 			par1Entity.attackEntityFrom(DamageSource.causeMobDamage(this).setDamageBypassesArmor(), 3);
 
 		return flag;
 	}
 
 	@Override
-	@SuppressWarnings("rawtypes")
 	protected void updateAITick() {
 
 		if (!isTrading() && timeUntilReset > 0)
@@ -146,17 +145,9 @@ public class EntityRemnant extends EntityMob implements IMerchant, IAntiEntity, 
 				if (needsInitilization)
 				{
 					if (tradingList.size() > 1)
-					{
-						Iterator iterator = tradingList.iterator();
-
-						while (iterator.hasNext())
-						{
-							MerchantRecipe merchantrecipe = (MerchantRecipe)iterator.next();
-
-							if (merchantrecipe.isRecipeDisabled())
-								merchantrecipe.increaseMaxTradeUses(rand.nextInt(6) + rand.nextInt(6) + 2);
-						}
-					}
+						for(MerchantRecipe recipe : tradingList)
+							if (recipe.isRecipeDisabled())
+								recipe.increaseMaxTradeUses(rand.nextInt(6) + rand.nextInt(6) + 2);
 
 					addDefaultEquipmentAndRecipies(1);
 					needsInitilization = false;
@@ -430,7 +421,6 @@ public class EntityRemnant extends EntityMob implements IMerchant, IAntiEntity, 
 		return f1 > 0.9F ? 0.9F - (f1 - 0.9F) : f1;
 	}
 
-	@SuppressWarnings("unchecked")
 	private void addDefaultEquipmentAndRecipies(int par1)
 	{
 		if (tradingList != null)
@@ -438,8 +428,7 @@ public class EntityRemnant extends EntityMob implements IMerchant, IAntiEntity, 
 		else
 			field_82191_bN = 0.0F;
 
-		MerchantRecipeList list;
-		list = new MerchantRecipeList();
+		MerchantRecipeList list = new MerchantRecipeList();
 		int k;
 		label50:
 
@@ -681,7 +670,6 @@ public class EntityRemnant extends EntityMob implements IMerchant, IAntiEntity, 
 
 	/****************** END OF VANILLA CODE FROM 1.7.10 ******************/
 
-	@SuppressWarnings("unchecked")
 	public static void addItemTrade(MerchantRecipeList list, Item item, Random rand, float probability)
 	{
 		if (rand.nextFloat() < probability)
@@ -699,7 +687,6 @@ public class EntityRemnant extends EntityMob implements IMerchant, IAntiEntity, 
 		return tuple == null ? 1 : ((Integer)tuple.getFirst()).intValue() >= ((Integer)tuple.getSecond()).intValue() ? ((Integer)tuple.getFirst()).intValue() : ((Integer)tuple.getFirst()).intValue() + rand.nextInt(((Integer)tuple.getSecond()).intValue() - ((Integer)tuple.getFirst()).intValue());
 	}
 
-	@SuppressWarnings("unchecked")
 	public static void addCoinTrade(MerchantRecipeList list, Item item, Random rand, float probability)
 	{
 		if (rand.nextFloat() < probability)
@@ -755,7 +742,6 @@ public class EntityRemnant extends EntityMob implements IMerchant, IAntiEntity, 
 		addCoinTrade(list, buy, (ItemStack)null, sell);
 	}
 
-	@SuppressWarnings("unchecked")
 	public void addCoinTrade(MerchantRecipeList list, ItemStack buy1, ItemStack buy2, ItemStack sell){
 		list.add(new MerchantRecipe(buy1, buy2, sell));
 	}

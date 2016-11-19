@@ -5,7 +5,7 @@
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
  * http://www.gnu.org/licenses/lgpl-3.0.txt
- * 
+ *
  * Contributors:
  *     Shinoow -  implementation
  ******************************************************************************/
@@ -73,7 +73,7 @@ public class WorldProviderAbyss extends WorldProvider {
 
 	@Override
 	public float calculateCelestialAngle(long par1, float par3) {
-		return 0.0F;
+		return 0.5F;
 	}
 
 	@Override
@@ -90,7 +90,7 @@ public class WorldProviderAbyss extends WorldProvider {
 
 	@Override
 	public Vec3 getSkyColor(Entity cameraEntity, float partialTicks) {
-		return new Vec3(0, 10, 0.5);
+		return new Vec3(0, 5, 2);
 	}
 
 	@Override

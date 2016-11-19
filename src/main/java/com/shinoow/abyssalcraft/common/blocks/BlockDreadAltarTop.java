@@ -5,7 +5,7 @@
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
  * http://www.gnu.org/licenses/lgpl-3.0.txt
- * 
+ *
  * Contributors:
  *     Shinoow -  implementation
  ******************************************************************************/
@@ -27,12 +27,12 @@ import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.client.FMLClientHandler;
 
-import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
 import com.shinoow.abyssalcraft.api.biome.ACBiomes;
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.api.entity.IDreadEntity;
 import com.shinoow.abyssalcraft.common.structures.dreadlands.chagarothlair;
+import com.shinoow.abyssalcraft.lib.ACAchievements;
 import com.shinoow.abyssalcraft.lib.ACLib;
 import com.shinoow.abyssalcraft.lib.util.SpecialTextUtil;
 
@@ -84,7 +84,7 @@ public class BlockDreadAltarTop extends Block {
 				if(par1World.getBlockState(pos.down()).getBlock() == ACBlocks.chagaroth_altar_bottom && pos.getY() == 41)
 					if(!par1World.isRemote){
 						SpecialTextUtil.ChagarothGroup(par1World, StatCollector.translateToLocal("message.dreadaltartop.spawn"));
-						par5EntityPlayer.addStat(AbyssalCraft.summonChagaroth, 1);
+						par5EntityPlayer.addStat(ACAchievements.summon_chagaroth, 1);
 						chagarothlair lair = new chagarothlair();
 						lair.generate(par1World, rand, pos.down(2));
 						par1World.getChunkFromBlockCoords(pos).setChunkModified();

@@ -5,7 +5,7 @@
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
  * http://www.gnu.org/licenses/lgpl-3.0.txt
- * 
+ *
  * Contributors:
  *     Shinoow -  implementation
  ******************************************************************************/
@@ -16,7 +16,7 @@ import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;
 
-import com.shinoow.abyssalcraft.AbyssalCraft;
+import com.shinoow.abyssalcraft.lib.ACConfig;
 
 public class EntityDemonCow extends EntityDemonAnimal {
 
@@ -30,7 +30,7 @@ public class EntityDemonCow extends EntityDemonAnimal {
 	{
 		super.applyEntityAttributes();
 
-		if(AbyssalCraft.hardcoreMode){
+		if(ACConfig.hardcoreMode){
 			getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(30.0D);
 			getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(4.0D);
 		} else getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(15.0D);

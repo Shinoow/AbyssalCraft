@@ -5,7 +5,7 @@
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
  * http://www.gnu.org/licenses/lgpl-3.0.txt
- * 
+ *
  * Contributors:
  *     Shinoow -  implementation
  ******************************************************************************/
@@ -51,12 +51,12 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.living.EnderTeleportEvent;
 
-import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
 import com.shinoow.abyssalcraft.api.entity.IAntiEntity;
 import com.shinoow.abyssalcraft.api.entity.ICoraliumEntity;
 import com.shinoow.abyssalcraft.api.entity.IDreadEntity;
 import com.shinoow.abyssalcraft.api.item.ACItems;
+import com.shinoow.abyssalcraft.lib.ACConfig;
 import com.shinoow.abyssalcraft.lib.ACLib;
 import com.shinoow.abyssalcraft.lib.util.SpecialTextUtil;
 
@@ -123,7 +123,7 @@ public class EntitySacthoth extends EntityMob implements IBossDisplayData, IAnti
 		getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setBaseValue(0.4D);
 		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.799D);
 
-		if(AbyssalCraft.hardcoreMode){
+		if(ACConfig.hardcoreMode){
 			getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(600.0D);
 			getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(30.0D);
 		} else {
@@ -153,7 +153,7 @@ public class EntitySacthoth extends EntityMob implements IBossDisplayData, IAnti
 			if(par1Entity instanceof EntityLivingBase)
 				((EntityLivingBase)par1Entity).addPotionEffect(new PotionEffect(Potion.confusion.id, 60));
 
-		if(AbyssalCraft.hardcoreMode && par1Entity instanceof EntityPlayer)
+		if(ACConfig.hardcoreMode && par1Entity instanceof EntityPlayer)
 			par1Entity.attackEntityFrom(DamageSource.causeMobDamage(this).setDamageBypassesArmor(), 4.5F);
 
 		return flag;
@@ -318,7 +318,7 @@ public class EntitySacthoth extends EntityMob implements IBossDisplayData, IAnti
 				double d7 = d3 + (posX - d3) * d6 + (rand.nextDouble() - 0.5D) * width * 2.0D;
 				double d8 = d4 + (posY - d4) * d6 + rand.nextDouble() * height;
 				double d9 = d5 + (posZ - d5) * d6 + (rand.nextDouble() - 0.5D) * width * 2.0D;
-				if(AbyssalCraft.particleEntity)
+				if(ACConfig.particleEntity)
 					worldObj.spawnParticle(EnumParticleTypes.SMOKE_LARGE, d7, d8, d9, f, f1, f2);
 			}
 
@@ -340,7 +340,7 @@ public class EntitySacthoth extends EntityMob implements IBossDisplayData, IAnti
 			float f = (rand.nextFloat() - 0.5F) * 8.0F;
 			float f1 = (rand.nextFloat() - 0.5F) * 4.0F;
 			float f2 = (rand.nextFloat() - 0.5F) * 8.0F;
-			if(AbyssalCraft.particleEntity){
+			if(ACConfig.particleEntity){
 				worldObj.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, posX + f, posY + 2.0D + f1, posZ + f2, 0.0D, 0.0D, 0.0D);
 				worldObj.spawnParticle(EnumParticleTypes.SMOKE_LARGE, posX + f, posY + 2.0D + f1, posZ + f2, 0.0D, 0.0D, 0.0D);
 				worldObj.spawnParticle(EnumParticleTypes.EXPLOSION_NORMAL, posX + f, posY + 2.0D + f1, posZ + f2, 0.0D, 0.0D, 0.0D);
@@ -398,21 +398,18 @@ public class EntitySacthoth extends EntityMob implements IBossDisplayData, IAnti
 		return rand.nextBoolean() ? rand.nextInt(num) : -1 * rand.nextInt(num);
 	}
 
-	@SuppressWarnings("rawtypes")
 	@Override
 	public void onLivingUpdate()
 	{
 		for (int i = 0; i < 2; ++i)
-			if(AbyssalCraft.particleEntity)
+			if(ACConfig.particleEntity)
 				worldObj.spawnParticle(EnumParticleTypes.SMOKE_LARGE, posX + (rand.nextDouble() - 0.5D) * width, posY + rand.nextDouble() * height, posZ + (rand.nextDouble() - 0.5D) * width, 0.0D, 0.0D, 0.0D);
 
-		List list = worldObj.getEntitiesWithinAABBExcludingEntity(this, getEntityBoundingBox().expand(30.0D, 30.0D, 30.0D));
+		List<Entity> list = worldObj.getEntitiesWithinAABBExcludingEntity(this, getEntityBoundingBox().expand(30.0D, 30.0D, 30.0D));
 		if (list != null)
-			for (int k2 = 0; k2 < list.size(); k2++) {
-				Entity entity = (Entity)list.get(k2);
+			for (Entity entity : list)
 				if (entity instanceof EntityPlayer && !entity.isDead && deathTicks == 0 && !((EntityPlayer)entity).capabilities.isCreativeMode)
 					((EntityPlayer)entity).addPotionEffect(new PotionEffect(Potion.blindness.id, 40));
-			}
 		EntityPlayer player = worldObj.getClosestPlayerToEntity(this, 160D);
 		if(player != null && player.getDistanceToEntity(this) >= 50D && !player.capabilities.isCreativeMode){
 			if(player.posX - posX > 50)

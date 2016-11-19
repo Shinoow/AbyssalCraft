@@ -1,0 +1,18 @@
+{
+	"parent": "block/stairs",
+	"textures": {
+		"bottom": "abyssalcraft:blocks/coraliumcobblestone",
+        "top": "abyssalcraft:blocks/coraliumcobblestone",
+        "side": "abyssalcraft:blocks/coraliumcobblestone"
+	},
+	"display": {
+		"thirdperson": {
+			"rotation": [ 10, -45, 170 ],
+			"translation": [ 0, 1.5, -2.75 ],
+			"scale": [ 0.375, 0.375, 0.375 ]
+		},
+        "gui": {
+            "rotation": [ 0, 180, 0 ]
+        }
+	}
+}

@@ -5,7 +5,7 @@
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
  * http://www.gnu.org/licenses/lgpl-3.0.txt
- * 
+ *
  * Contributors:
  *     Shinoow -  implementation
  ******************************************************************************/
@@ -19,7 +19,7 @@ import net.minecraft.item.ItemStack;
 
 /**
  * The "fuel" in Coin Engraving. Use this class if you want to make your own engravings.
- * 
+ *
  * @author shinoow
  *
  * @since 1.1
@@ -37,9 +37,8 @@ public class ItemEngraving extends Item {
 		setMaxDamage(par2);
 	}
 
-	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@Override
-	public void addInformation(ItemStack is, EntityPlayer player, List l, boolean B){
+	public void addInformation(ItemStack is, EntityPlayer player, List<String> l, boolean B){
 		l.add(getMaxDamage() - getDamage(is) +"/"+ is.getMaxDamage());
 	}
 }

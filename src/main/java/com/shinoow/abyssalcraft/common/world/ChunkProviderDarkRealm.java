@@ -5,7 +5,7 @@
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
  * http://www.gnu.org/licenses/lgpl-3.0.txt
- * 
+ *
  * Contributors:
  *     Shinoow -  implementation
  ******************************************************************************/
@@ -22,6 +22,7 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldType;
 import net.minecraft.world.biome.BiomeGenBase;
+import net.minecraft.world.biome.BiomeGenBase.SpawnListEntry;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.chunk.ChunkPrimer;
 import net.minecraft.world.chunk.IChunkProvider;
@@ -34,9 +35,9 @@ import net.minecraftforge.event.terraingen.PopulateChunkEvent;
 import net.minecraftforge.event.terraingen.TerrainGen;
 import net.minecraftforge.fml.common.eventhandler.Event.Result;
 
-import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.common.structures.StructureShoggothPit;
+import com.shinoow.abyssalcraft.lib.ACConfig;
 
 public class ChunkProviderDarkRealm implements IChunkProvider
 {
@@ -319,7 +320,7 @@ public class ChunkProviderDarkRealm implements IChunkProvider
 
 		MinecraftForge.EVENT_BUS.post(new PopulateChunkEvent.Pre(par1IChunkProvider, worldObj, rand, x, z, flag));
 
-		if(AbyssalCraft.generateShoggothLairs)
+		if(ACConfig.generateShoggothLairs)
 			for(int i = 0; i < 1; i++) {
 				int Xcoord2 = k + rand.nextInt(16);
 				int Zcoord2 = l + rand.nextInt(16);
@@ -363,8 +364,7 @@ public class ChunkProviderDarkRealm implements IChunkProvider
 	}
 
 	@Override
-	@SuppressWarnings("rawtypes")
-	public List getPossibleCreatures(EnumCreatureType par1EnumCreatureType, BlockPos pos)
+	public List<SpawnListEntry> getPossibleCreatures(EnumCreatureType par1EnumCreatureType, BlockPos pos)
 	{
 		BiomeGenBase biome = worldObj.getBiomeGenForCoords(pos);
 		return biome == null ? null : biome.getSpawnableList(par1EnumCreatureType);

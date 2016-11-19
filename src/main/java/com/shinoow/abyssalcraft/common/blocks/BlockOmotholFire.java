@@ -5,13 +5,15 @@
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
  * http://www.gnu.org/licenses/lgpl-3.0.txt
- * 
+ *
  * Contributors:
  *     Shinoow -  implementation
  ******************************************************************************/
 package com.shinoow.abyssalcraft.common.blocks;
 
 import java.util.Random;
+
+import com.shinoow.abyssalcraft.lib.ACLib;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -116,7 +118,8 @@ public class BlockOmotholFire extends Block {
 	public void onBlockAdded(World par1World, BlockPos pos, IBlockState state)
 	{
 
-		if (!BlockOmotholPortal.tryToCreatePortal(par1World, pos))
+		if ((par1World.provider.getDimensionId() == ACLib.dreadlands_id || par1World.provider.getDimensionId() == ACLib.omothol_id ||
+				par1World.provider.getDimensionId() == ACLib.dark_realm_id) && !BlockOmotholPortal.tryToCreatePortal(par1World, pos))
 			if (!World.doesBlockHaveSolidTopSurface(par1World, pos.down()))
 				par1World.setBlockToAir(pos);
 			else

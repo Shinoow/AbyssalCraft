@@ -5,13 +5,13 @@
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
  * http://www.gnu.org/licenses/lgpl-3.0.txt
- * 
+ *
  * Contributors:
  *     Shinoow -  implementation
  ******************************************************************************/
 package com.shinoow.abyssalcraft.init;
 
-import static com.shinoow.abyssalcraft.AbyssalCraft.*;
+import static com.shinoow.abyssalcraft.lib.ACConfig.*;
 
 import java.io.*;
 import java.net.URL;
@@ -24,6 +24,7 @@ import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.config.Configuration;
+import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fml.client.event.ConfigChangedEvent;
 import net.minecraftforge.fml.common.FMLCommonHandler;
@@ -47,6 +48,8 @@ public class InitHandler implements ILifeCycleHandler {
 
 	public static final InitHandler INSTANCE = new InitHandler();
 
+	public static Configuration cfg;
+
 	private static String[] abyssalZombieBlacklist, depthsGhoulBlacklist, antiAbyssalZombieBlacklist, antiGhoulBlacklist,
 	omotholGhoulBlacklist;
 
@@ -59,6 +62,11 @@ public class InitHandler implements ILifeCycleHandler {
 	public static boolean darkspawn1, darkspawn2, darkspawn3, darkspawn4, darkspawn5, coraliumspawn1;
 	public static int darkWeight1, darkWeight2, darkWeight3, darkWeight4, darkWeight5, coraliumWeight;
 
+	public static final Fluid LIQUID_CORALIUM = new Fluid("liquidcoralium", new ResourceLocation("abyssalcraft", "blocks/cwater_still"),
+			new ResourceLocation("abyssalcraft", "blocks/cwater_flow")).setDensity(3000).setTemperature(350);
+	public static final Fluid LIQUID_ANTIMATTER = new Fluid("liquidantimatter", new ResourceLocation("abyssalcraft", "blocks/anti_still"),
+			new ResourceLocation("abyssalcraft", "blocks/anti_flow")).setDensity(4000).setViscosity(1500).setTemperature(100);
+
 	private static final List<ItemStack> abyssal_zombie_blacklist = Lists.newArrayList();
 	private static final List<ItemStack> depths_ghoul_blacklist = Lists.newArrayList();
 	private static final List<ItemStack> anti_abyssal_zombie_blacklist = Lists.newArrayList();
@@ -67,8 +75,8 @@ public class InitHandler implements ILifeCycleHandler {
 
 	@Override
 	public void preInit(FMLPreInitializationEvent event) {
-		metadata = event.getModMetadata();
-		metadata.description = metadata.description +"\n\n\u00a76Supporters: "+getSupporterList()+"\u00a7r";
+		AbyssalCraft.metadata = event.getModMetadata();
+		AbyssalCraft.metadata.description += "\n\n\u00a76Supporters: "+getSupporterList()+"\u00a7r";
 
 		MinecraftForge.EVENT_BUS.register(new AbyssalCraftEventHooks());
 		MinecraftForge.TERRAIN_GEN_BUS.register(new AbyssalCraftEventHooks());
@@ -91,20 +99,20 @@ public class InitHandler implements ILifeCycleHandler {
 		cfg.setCategoryComment("item_blacklist", "Entity Item Blacklist (allows you to blacklist items/blocks for entities that can pick up things). Any changes take effect after a Minecraft restart.");
 
 		if(!FluidRegistry.isFluidRegistered("liquidcoralium")){
-			CFluid = LIQUID_CORALIUM;
-			FluidRegistry.registerFluid(CFluid);
+			AbyssalCraftAPI.liquid_coralium_fluid = LIQUID_CORALIUM;
+			FluidRegistry.registerFluid(AbyssalCraftAPI.liquid_coralium_fluid);
 		} else {
 			ACLogger.warning("Liquid Coralium was already registered by another mod, adding ours as alternative.");
-			CFluid = FluidRegistry.getFluid("liquidcoralium");
+			AbyssalCraftAPI.liquid_coralium_fluid = FluidRegistry.getFluid("liquidcoralium");
 			FluidRegistry.registerFluid(LIQUID_CORALIUM);
 		}
 
 		if(!FluidRegistry.isFluidRegistered("liquidantimatter")){
-			antifluid = LIQUID_ANTIMATTER;
-			FluidRegistry.registerFluid(antifluid);
+			AbyssalCraftAPI.liquid_antimatter_fluid = LIQUID_ANTIMATTER;
+			FluidRegistry.registerFluid(AbyssalCraftAPI.liquid_antimatter_fluid);
 		} else {
 			ACLogger.warning("Liquid Antimatter was already registered by another mod, adding ours as alternative.");
-			antifluid = FluidRegistry.getFluid("liquidantimatter");
+			AbyssalCraftAPI.liquid_antimatter_fluid = FluidRegistry.getFluid("liquidantimatter");
 			FluidRegistry.registerFluid(LIQUID_ANTIMATTER);
 		}
 	}
@@ -200,6 +208,7 @@ public class InitHandler implements ILifeCycleHandler {
 		portalCooldown = cfg.get(Configuration.CATEGORY_GENERAL, "Portal cooldown", 10, "Cooldown after using a portal, increasing the value increases the delay until you can teleport again. Measured in ticks (20 ticks = 1 second).\n[range: 10 ~ 300, default: 10]", 10, 300).getInt();
 		demonAnimalSpawnWeight = cfg.get(Configuration.CATEGORY_GENERAL, "Demon Animal spawn weight", 15, "Spawn weight for the Demon Animals (Pigs, Cows, Chickens) spawning in the Nether.\n[range: 0 ~ 100, default: 15]", 0, 100).getInt();
 		smeltingRecipes = cfg.get(Configuration.CATEGORY_GENERAL, "Smelting Recipes", true, "Toggles whether or not to add smelting recipes for armor pieces.").getBoolean();
+		purgeMobSpawns = cfg.get(Configuration.CATEGORY_GENERAL, "Purge Mob Spawns", false, "Toggles whether or not to clear and repopulate the monster spawn list of all dimension biomes to ensure no mob from another mod got in there.").getBoolean();
 
 		darkWeight1 = cfg.get("biome_weight", "Darklands", 5, "Biome weight for the Darklands biome, controls the chance of it generating (n out of 100).\n[range: 0 ~ 100, default: 5]", 0, 100).getInt();
 		darkWeight2 = cfg.get("biome_weight", "Darklands Forest", 5, "Biome weight for the Darklands Forest biome, controls the chance of it generating (n out of 100)\n[range: 0 ~ 100, default: 5]", 0, 100).getInt();
@@ -250,6 +259,66 @@ public class InitHandler implements ILifeCycleHandler {
 		antiAbyssalZombieBlacklist = cfg.get("item_blacklist", "Abyssal Anti-Zombie Item Blacklist", new String[]{}, "Items/Blocks added to this list won't be picked up by Abyssal Anti-Zombies. Format: modid:name:meta, where meta is optional.").getStringList();
 		antiGhoulBlacklist = cfg.get("item_blacklist", "Anti-Ghoul Item Blacklist", new String[]{}, "Items/Blocks added to this list won't be picked up by Anti-Ghouls. Format: modid:name:meta, where meta is optional.").getStringList();
 		omotholGhoulBlacklist = cfg.get("item_blacklist", "Omothol Ghoul Item Blacklist", new String[]{}, "Items/Blocks added to this list won't be picked up by Omothol Ghouls. Format: modid:name:meta, where meta is optional.").getStringList();
+
+		//TODO remove all of this around AC 1.9.4 or 1.9.5
+		AbyssalCraft.keepLoaded1 = keepLoaded1;
+		AbyssalCraft.keepLoaded2 = keepLoaded2;
+		AbyssalCraft.keepLoaded3 = keepLoaded3;
+		AbyssalCraft.keepLoaded4 = keepLoaded4;
+
+		AbyssalCraft.shouldSpread = shouldSpread;
+		AbyssalCraft.shouldInfect = shouldInfect;
+		AbyssalCraft.breakLogic = breakLogic;
+		AbyssalCraft.destroyOcean = destroyOcean;
+		AbyssalCraft.demonAnimalFire = demonAnimalFire;
+		AbyssalCraft.evilAnimalSpawnWeight = evilAnimalSpawnWeight;
+		AbyssalCraft.darkness = darkness;
+		AbyssalCraft.particleBlock = particleBlock;
+		AbyssalCraft.particleEntity = particleEntity;
+		AbyssalCraft.hardcoreMode = hardcoreMode;
+		AbyssalCraft.endAbyssalZombieSpawnWeight = endAbyssalZombieSpawnWeight;
+		AbyssalCraft.evilAnimalCreatureType = evilAnimalCreatureType;
+		AbyssalCraft.antiItemDisintegration = antiItemDisintegration;
+		AbyssalCraft.portalCooldown = portalCooldown;
+		AbyssalCraft.demonAnimalSpawnWeight = demonAnimalSpawnWeight;
+		AbyssalCraft.smeltingRecipes = smeltingRecipes;
+
+		AbyssalCraft.shoggothOoze = shoggothOoze;
+		AbyssalCraft.oozeLeaves = oozeLeaves;
+		AbyssalCraft.oozeGrass = oozeGrass;
+		AbyssalCraft.oozeGround = oozeGround;
+		AbyssalCraft.oozeSand = oozeSand;
+		AbyssalCraft.oozeRock = oozeRock;
+		AbyssalCraft.oozeCloth = oozeCloth;
+		AbyssalCraft.oozeWood = oozeWood;
+		AbyssalCraft.oozeGourd = oozeGourd;
+		AbyssalCraft.oozeIron = oozeIron;
+		AbyssalCraft.oozeClay = oozeClay;
+		AbyssalCraft.oozeExpire = oozeExpire;
+
+		AbyssalCraft.generateDarklandsStructures = generateDarklandsStructures;
+		AbyssalCraft.generateShoggothLairs = generateShoggothLairs;
+		AbyssalCraft.generateAbyssalWastelandPillars = generateAbyssalWastelandPillars;
+		AbyssalCraft.generateAbyssalWastelandRuins = generateAbyssalWastelandRuins;
+		AbyssalCraft.generateAntimatterLake = generateAntimatterLake;
+		AbyssalCraft.generateCoraliumLake = generateCoraliumLake;
+		AbyssalCraft.generateDreadlandsStalagmite = generateDreadlandsStalagmite;
+
+		AbyssalCraft.generateCoraliumOre = generateCoraliumOre;
+		AbyssalCraft.generateNitreOre = generateNitreOre;
+		AbyssalCraft.generateAbyssalniteOre = generateAbyssalniteOre;
+		AbyssalCraft.generateAbyssalCoraliumOre = generateAbyssalCoraliumOre;
+		AbyssalCraft.generateDreadlandsAbyssalniteOre = generateDreadlandsAbyssalniteOre;
+		AbyssalCraft.generateDreadedAbyssalniteOre = generateDreadedAbyssalniteOre;
+		AbyssalCraft.generateAbyssalIronOre = generateAbyssalIronOre;
+		AbyssalCraft.generateAbyssalGoldOre = generateAbyssalGoldOre;
+		AbyssalCraft.generateAbyssalDiamondOre = generateAbyssalDiamondOre;
+		AbyssalCraft.generateAbyssalNitreOre = generateAbyssalNitreOre;
+		AbyssalCraft.generateAbyssalTinOre = generateAbyssalTinOre;
+		AbyssalCraft.generateAbyssalCopperOre = generateAbyssalCopperOre;
+		AbyssalCraft.generatePearlescentCoraliumOre = generatePearlescentCoraliumOre;
+		AbyssalCraft.generateLiquifiedCoraliumOre = generateLiquifiedCoraliumOre;
+		AbyssalCraft.shoggothLairSpawnRate = shoggothLairSpawnRate;
 
 		if(cfg.hasChanged())
 			cfg.save();
@@ -333,7 +402,7 @@ public class InitHandler implements ILifeCycleHandler {
 		return false;
 	}
 
-	private static boolean areStacksEqual(ItemStack stack1, ItemStack stack2)
+	private boolean areStacksEqual(ItemStack stack1, ItemStack stack2)
 	{
 		if (stack1 == null || stack2 == null) return false;
 		return stack1.getItem() == stack2.getItem() && (stack1.getItemDamage() == OreDictionary.WILDCARD_VALUE

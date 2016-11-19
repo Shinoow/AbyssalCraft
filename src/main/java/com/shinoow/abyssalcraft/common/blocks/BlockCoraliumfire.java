@@ -5,7 +5,7 @@
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
  * http://www.gnu.org/licenses/lgpl-3.0.txt
- * 
+ *
  * Contributors:
  *     Shinoow -  implementation
  ******************************************************************************/
@@ -29,6 +29,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
 import com.shinoow.abyssalcraft.api.entity.EntityUtil;
+import com.shinoow.abyssalcraft.lib.ACLib;
 
 public class BlockCoraliumfire extends Block {
 
@@ -119,7 +120,8 @@ public class BlockCoraliumfire extends Block {
 	public void onBlockAdded(World par1World, BlockPos pos, IBlockState state)
 	{
 
-		if (!BlockAbyssPortal.tryToCreatePortal(par1World, pos))
+		if ((par1World.provider.getDimensionId() == 0 || par1World.provider.getDimensionId() == ACLib.abyssal_wasteland_id) &&
+				!BlockAbyssPortal.tryToCreatePortal(par1World, pos))
 			if (!World.doesBlockHaveSolidTopSurface(par1World, pos.down()))
 				par1World.setBlockToAir(pos);
 			else

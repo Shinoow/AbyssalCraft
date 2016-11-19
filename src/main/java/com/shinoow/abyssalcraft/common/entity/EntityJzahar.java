@@ -5,7 +5,7 @@
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
  * http://www.gnu.org/licenses/lgpl-3.0.txt
- * 
+ *
  * Contributors:
  *     Shinoow -  implementation
  ******************************************************************************/
@@ -57,11 +57,12 @@ import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
 
-import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.api.entity.EntityUtil;
 import com.shinoow.abyssalcraft.api.entity.IAntiEntity;
 import com.shinoow.abyssalcraft.api.entity.ICoraliumEntity;
 import com.shinoow.abyssalcraft.api.entity.IDreadEntity;
+import com.shinoow.abyssalcraft.lib.ACAchievements;
+import com.shinoow.abyssalcraft.lib.ACConfig;
 import com.shinoow.abyssalcraft.lib.ACLib;
 import com.shinoow.abyssalcraft.lib.util.SpecialTextUtil;
 import com.shinoow.abyssalcraft.lib.world.TeleporterDarkRealm;
@@ -97,7 +98,7 @@ public class EntityJzahar extends EntityMob implements IBossDisplayData, IRanged
 	protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
 
-		if(AbyssalCraft.hardcoreMode){
+		if(ACConfig.hardcoreMode){
 			getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(1000.0D);
 			getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(40.0D);
 		} else {
@@ -148,7 +149,7 @@ public class EntityJzahar extends EntityMob implements IBossDisplayData, IRanged
 		swingItem();
 		boolean flag = super.attackEntityAsMob(par1Entity);
 
-		if(AbyssalCraft.hardcoreMode && par1Entity instanceof EntityPlayer)
+		if(ACConfig.hardcoreMode && par1Entity instanceof EntityPlayer)
 			par1Entity.attackEntityFrom(DamageSource.causeMobDamage(this).setDamageBypassesArmor(), 4.5F);
 
 		return flag;
@@ -172,7 +173,7 @@ public class EntityJzahar extends EntityMob implements IBossDisplayData, IRanged
 
 		List<EntityPlayer> players = worldObj.getEntitiesWithinAABB(EntityPlayer.class, getEntityBoundingBox().expand(10, 10, 10));
 		for(EntityPlayer player : players)
-			player.addStat(AbyssalCraft.killJzahar, 1);
+			player.addStat(ACAchievements.kill_jzahar, 1);
 		super.onDeath(par1DamageSource);
 	}
 
@@ -206,7 +207,6 @@ public class EntityJzahar extends EntityMob implements IBossDisplayData, IRanged
 		return height * 0.90F;
 	}
 
-	@SuppressWarnings("rawtypes")
 	@Override
 	public void onLivingUpdate()
 	{
@@ -217,16 +217,15 @@ public class EntityJzahar extends EntityMob implements IBossDisplayData, IRanged
 		float f1 = (rand.nextFloat() - 0.5F) * 4.0F;
 		float f2 = (rand.nextFloat() - 0.5F) * 8.0F;
 
-		List list = worldObj.getEntitiesWithinAABBExcludingEntity(this, getEntityBoundingBox().expand(64.0D, 64.0D, 64.0D));
+		List<Entity> list = worldObj.getEntitiesWithinAABBExcludingEntity(this, getEntityBoundingBox().expand(64.0D, 64.0D, 64.0D));
 		if (list != null)
-			for (int k2 = 0; k2 < list.size(); k2++) {
-				Entity entity = (Entity)list.get(k2);
+			for (Entity entity : list)
 				if(entity instanceof EntityDragon || entity instanceof EntityWither){
 					if(!worldObj.isRemote){
 						worldObj.removeEntity(entity);
 						if(entity.isDead)
 							SpecialTextUtil.JzaharGroup(worldObj, StatCollector.translateToLocal("message.jzahar.banish.vanilla"));
-					} else if(AbyssalCraft.particleEntity)
+					} else if(ACConfig.particleEntity)
 						worldObj.spawnParticle(EnumParticleTypes.EXPLOSION_HUGE, entity.posX + f, entity.posY + 2.0D + f1, entity.posZ + f2, 0.0D, 0.0D, 0.0D);
 				}
 				else if(entity instanceof EntityDragonBoss || entity instanceof EntitySacthoth || entity instanceof EntityChagaroth){
@@ -234,7 +233,7 @@ public class EntityJzahar extends EntityMob implements IBossDisplayData, IRanged
 						worldObj.removeEntity(entity);
 						if(entity.isDead)
 							SpecialTextUtil.JzaharGroup(worldObj, StatCollector.translateToLocal("message.jzahar.banish.ac"));
-					} else if(AbyssalCraft.particleEntity)
+					} else if(ACConfig.particleEntity)
 						worldObj.spawnParticle(EnumParticleTypes.EXPLOSION_HUGE, entity.posX + f, entity.posY + 2.0D + f1, entity.posZ + f2, 0.0D, 0.0D, 0.0D);
 				}
 				else if(entity instanceof EntityJzahar){
@@ -245,7 +244,7 @@ public class EntityJzahar extends EntityMob implements IBossDisplayData, IRanged
 						newgatekeeper.copyLocationAndAnglesFrom(this);
 						worldObj.spawnEntityInWorld(newgatekeeper);
 						SpecialTextUtil.JzaharGroup(worldObj, StatCollector.translateToLocal("message.jzahar.banish.jzh"));
-					} else if(AbyssalCraft.particleEntity){
+					} else if(ACConfig.particleEntity){
 						worldObj.spawnParticle(EnumParticleTypes.EXPLOSION_HUGE, entity.posX + f, entity.posY + 2.0D + f1, entity.posZ + f2, 0.0D, 0.0D, 0.0D);
 						worldObj.spawnParticle(EnumParticleTypes.EXPLOSION_HUGE, posX + f, posY + 2.0D + f1, posZ + f2, 0.0D, 0.0D, 0.0D);
 					}
@@ -255,7 +254,7 @@ public class EntityJzahar extends EntityMob implements IBossDisplayData, IRanged
 						worldObj.removeEntity(entity);
 						if(entity.isDead)
 							SpecialTextUtil.JzaharGroup(worldObj, StatCollector.translateToLocal("message.jzahar.banish.other"));
-					} else if(AbyssalCraft.particleEntity)
+					} else if(ACConfig.particleEntity)
 						worldObj.spawnParticle(EnumParticleTypes.EXPLOSION_HUGE, entity.posX + f, entity.posY + 2.0D + f1, entity.posZ + f2, 0.0D, 0.0D, 0.0D);
 				}
 				else if(entity instanceof EntityPlayer)
@@ -269,7 +268,6 @@ public class EntityJzahar extends EntityMob implements IBossDisplayData, IRanged
 								SpecialTextUtil.JzaharText(StatCollector.translateToLocal("message.jzahar.creative.2"));
 							}
 					}
-			}
 		super.onLivingUpdate();
 	}
 
@@ -394,7 +392,7 @@ public class EntityJzahar extends EntityMob implements IBossDisplayData, IRanged
 							EntityPlayerMP mp = (EntityPlayerMP) player;
 							mp.addPotionEffect(new PotionEffect(Potion.resistance.getId(), 80, 255));
 							mp.mcServer.getConfigurationManager().transferPlayerToDimension(mp, ACLib.dark_realm_id, new TeleporterDarkRealm(worldServer));
-							player.addStat(AbyssalCraft.enterDarkRealm, 1);
+							player.addStat(ACAchievements.enter_dark_realm, 1);
 						}
 					}
 					else if(entity instanceof EntityLivingBase || entity instanceof EntityItem)

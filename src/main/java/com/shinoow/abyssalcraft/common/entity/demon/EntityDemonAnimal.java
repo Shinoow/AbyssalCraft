@@ -5,7 +5,7 @@
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
  * http://www.gnu.org/licenses/lgpl-3.0.txt
- * 
+ *
  * Contributors:
  *     Shinoow -  implementation
  ******************************************************************************/
@@ -33,9 +33,9 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.World;
 
-import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.api.entity.IDreadEntity;
+import com.shinoow.abyssalcraft.lib.ACConfig;
 
 public class EntityDemonAnimal extends EntityMob implements IDreadEntity {
 
@@ -59,7 +59,7 @@ public class EntityDemonAnimal extends EntityMob implements IDreadEntity {
 	@Override
 	public boolean attackEntityAsMob(Entity par1Entity)
 	{
-		if(AbyssalCraft.hardcoreMode && par1Entity instanceof EntityPlayer)
+		if(ACConfig.hardcoreMode && par1Entity instanceof EntityPlayer)
 			par1Entity.attackEntityFrom(DamageSource.causeMobDamage(this).setDamageBypassesArmor(), 1.5F);
 
 		return super.attackEntityAsMob(par1Entity);
@@ -123,7 +123,7 @@ public class EntityDemonAnimal extends EntityMob implements IDreadEntity {
 	{
 		Object data = super.onInitialSpawn(difficulty, par1EntityLivingData);
 
-		if(worldObj.provider.getDimensionId() == 0 && AbyssalCraft.demonAnimalFire == true && rand.nextInt(3) == 0
+		if(worldObj.provider.getDimensionId() == 0 && ACConfig.demonAnimalFire == true && rand.nextInt(3) == 0
 				|| worldObj.provider.getDimensionId() == -1 && rand.nextBoolean())
 			canBurn = true;
 

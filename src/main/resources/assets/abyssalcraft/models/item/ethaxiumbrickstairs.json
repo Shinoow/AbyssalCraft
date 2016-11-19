@@ -1,5 +1,10 @@
 {
-	"parent": "abyssalcraft:block/ethaxiumbrickstairs",
+	"parent": "block/stairs",
+	"textures": {
+		"bottom": "abyssalcraft:blocks/eb",
+        "top": "abyssalcraft:blocks/eb",
+        "side": "abyssalcraft:blocks/eb"
+	},
 	"display": {
 		"thirdperson": {
 			"rotation": [ 10, -45, 170 ],

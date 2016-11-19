@@ -5,7 +5,7 @@
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
  * http://www.gnu.org/licenses/lgpl-3.0.txt
- * 
+ *
  * Contributors:
  *     Shinoow -  implementation
  ******************************************************************************/
@@ -21,7 +21,6 @@ import net.minecraftforge.fml.common.event.*;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.oredict.OreDictionary;
 
-import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.common.blocks.*;
@@ -33,6 +32,10 @@ import com.shinoow.abyssalcraft.lib.ACTabs;
 
 public class BlockHandler implements ILifeCycleHandler {
 
+	public static Block Darkbrickslab2, Darkcobbleslab2, abyslab2, Darkstoneslab2, DLTslab2,
+	Altar, dreadbrickslab2, abydreadbrickslab2, cstonebrickslab2, ethaxiumslab2, house,
+	darkethaxiumslab2, abycobbleslab2, dreadcobbleslab2, abydreadcobbleslab2, cstonecobbleslab2;
+
 	@Override
 	public void preInit(FMLPreInitializationEvent event) {
 		ACBlocks.darkstone = new BlockDarkstone().setCreativeTab(ACTabs.tabBlock).setStepSound(Block.soundTypeStone).setHardness(1.65F).setResistance(12.0F).setUnlocalizedName("darkstone");
@@ -40,24 +43,24 @@ public class BlockHandler implements ILifeCycleHandler {
 		ACBlocks.darkstone_cobblestone = new BlockACBasic(Material.rock, 2.2F, 12.0F, Block.soundTypeStone).setUnlocalizedName("darkstone_cobble");
 		ACBlocks.glowing_darkstone_bricks = new BlockACBasic(Material.rock, "pickaxe", 3, 55F, 3000F, Block.soundTypeStone).setCreativeTab(ACTabs.tabBlock).setLightLevel(1.0F).setUnlocalizedName("dsglow");
 		ACBlocks.darkstone_brick_slab = new BlockACSingleSlab(Material.rock).setStepSound(Block.soundTypeStone).setHardness(1.65F).setResistance(12.0F).setUnlocalizedName("darkbrickslab1");
-		AbyssalCraft.Darkbrickslab2 = new BlockACDoubleSlab(ACBlocks.darkstone_brick_slab, Material.rock).setStepSound(Block.soundTypeStone).setHardness(1.65F).setResistance(12.0F).setUnlocalizedName("darkbrickslab2");
+		Darkbrickslab2 = new BlockACDoubleSlab(ACBlocks.darkstone_brick_slab, Material.rock).setStepSound(Block.soundTypeStone).setHardness(1.65F).setResistance(12.0F).setUnlocalizedName("darkbrickslab2");
 		ACBlocks.darkstone_cobblestone_slab = new BlockACSingleSlab(Material.rock).setStepSound(Block.soundTypeStone).setHardness(1.65F) .setResistance(12.0F).setUnlocalizedName("darkcobbleslab1");
-		AbyssalCraft.Darkcobbleslab2 = new BlockACDoubleSlab(ACBlocks.darkstone_cobblestone_slab, Material.rock).setStepSound(Block.soundTypeStone).setHardness(1.65F) .setResistance(12.0F).setUnlocalizedName("darkcobbleslab2");
+		Darkcobbleslab2 = new BlockACDoubleSlab(ACBlocks.darkstone_cobblestone_slab, Material.rock).setStepSound(Block.soundTypeStone).setHardness(1.65F) .setResistance(12.0F).setUnlocalizedName("darkcobbleslab2");
 		ACBlocks.darklands_grass = new BlockDarklandsgrass().setStepSound(Block.soundTypeGrass).setCreativeTab(ACTabs.tabBlock).setHardness(0.4F).setUnlocalizedName("darkgrass");
 		ACBlocks.darkstone_brick_stairs = new BlockACStairs(ACBlocks.darkstone_brick).setStepSound(Block.soundTypeStone).setHardness(1.65F).setResistance(12.0F).setUnlocalizedName("dbstairs");
 		ACBlocks.darkstone_cobblestone_stairs = new BlockACStairs(ACBlocks.darkstone_cobblestone).setStepSound(Block.soundTypeStone).setHardness(1.65F).setResistance(12.0F).setUnlocalizedName("dcstairs");
 		ACBlocks.darklands_oak_sapling = new BlockACSapling(new WorldGenDLT(true)).setStepSound(Block.soundTypeGrass).setHardness(0.0F).setResistance(0.0F).setUnlocalizedName("dltsapling");
 		ACBlocks.darklands_oak_leaves = new BlockACLeaves(ACBlocks.darklands_oak_sapling).setStepSound(Block.soundTypeGrass).setHardness(0.2F).setResistance(1.0F).setUnlocalizedName("dltleaves");
 		ACBlocks.darklands_oak_wood = new BlockACLog().setStepSound(Block.soundTypeWood).setHardness(2.0F).setResistance(1.0F).setUnlocalizedName("dltlog");
-		ACBlocks.abyssal_stone = new BlockACBasic(Material.rock, "pickaxe", 2, 1.8F, 12.0F, Block.soundTypeStone).setUnlocalizedName("abystone");
+		ACBlocks.abyssal_stone = new BlockAbyssalStone();
 		ACBlocks.abyssal_stone_brick = new BlockACBrick(2, 1.8F, 12.0F).setUnlocalizedName("abybrick");
 		ACBlocks.abyssal_stone_brick_slab = new BlockACSingleSlab(Material.rock, "pickaxe", 2).setCreativeTab(ACTabs.tabBlock).setStepSound(Block.soundTypeStone).setHardness(1.8F).setResistance(12.0F).setUnlocalizedName("abyslab1");
-		AbyssalCraft.abyslab2 = new BlockACDoubleSlab(ACBlocks.abyssal_stone_brick_slab, Material.rock, "pickaxe", 2).setStepSound(Block.soundTypeStone).setHardness(1.8F).setResistance(12.0F).setUnlocalizedName("abyslab2");
+		abyslab2 = new BlockACDoubleSlab(ACBlocks.abyssal_stone_brick_slab, Material.rock, "pickaxe", 2).setStepSound(Block.soundTypeStone).setHardness(1.8F).setResistance(12.0F).setUnlocalizedName("abyslab2");
 		ACBlocks.abyssal_stone_brick_stairs = new BlockACStairs(ACBlocks.abyssal_stone_brick, "pickaxe", 2).setStepSound(Block.soundTypeStone).setHardness(1.65F).setResistance(12.0F).setUnlocalizedName("abystairs");
 		ACBlocks.coralium_ore = new BlockACOre(2, 3.0F, 6.0F).setUnlocalizedName("coraliumore");
 		ACBlocks.abyssalnite_ore = new BlockACOre(2, 3.0F, 6.0F).setUnlocalizedName("abyore");
 		ACBlocks.abyssal_stone_brick_fence = new BlockACFence(Material.rock, "pickaxe", 2).setHardness(1.8F).setResistance(12.0F).setStepSound(Block.soundTypeStone).setUnlocalizedName("abyfence");
-		ACBlocks.darkstone_cobblestone_wall = new BlockDarkstonecobblewall(ACBlocks.darkstone_cobblestone).setHardness(1.65F).setResistance(12.0F).setStepSound(Block.soundTypeStone).setUnlocalizedName("dscwall");
+		ACBlocks.darkstone_cobblestone_wall = new BlockACWall(ACBlocks.darkstone_cobblestone).setHardness(1.65F).setResistance(12.0F).setStepSound(Block.soundTypeStone).setUnlocalizedName("dscwall");
 		ACBlocks.wooden_crate = new BlockCrate().setStepSound(Block.soundTypeStone).setHardness(3.0F).setResistance(6.0F).setUnlocalizedName("crate");
 		ACBlocks.oblivion_deathbomb = new BlockODB().setStepSound(Block.soundTypeMetal).setHardness(3.0F).setResistance(0F).setUnlocalizedName("odb");
 		ACBlocks.block_of_abyssalnite = new IngotBlock(2).setUnlocalizedName("abyblock");
@@ -65,7 +68,7 @@ public class BlockHandler implements ILifeCycleHandler {
 		ACBlocks.odb_core = new BlockODBcore().setStepSound(Block.soundTypeMetal).setHardness(3.0F).setResistance(0F).setUnlocalizedName("odbcore");
 		ACBlocks.abyssal_gateway = new BlockAbyssPortal().setUnlocalizedName("abyportal");
 		ACBlocks.darkstone_slab = new BlockACSingleSlab(Material.rock).setStepSound(Block.soundTypeStone).setCreativeTab(ACTabs.tabBlock).setHardness(1.65F).setResistance(12.0F).setUnlocalizedName("darkstoneslab1");
-		AbyssalCraft.Darkstoneslab2 = new BlockACDoubleSlab(ACBlocks.darkstone_slab, Material.rock).setStepSound(Block.soundTypeStone).setHardness(1.65F).setResistance(12.0F).setUnlocalizedName("darkstoneslab2");
+		Darkstoneslab2 = new BlockACDoubleSlab(ACBlocks.darkstone_slab, Material.rock).setStepSound(Block.soundTypeStone).setHardness(1.65F).setResistance(12.0F).setUnlocalizedName("darkstoneslab2");
 		ACBlocks.coralium_fire = new BlockCoraliumfire().setLightLevel(1.0F).setUnlocalizedName("coraliumfire");
 		ACBlocks.darkstone_button = new BlockACButton(true, "DS").setHardness(0.6F).setResistance(12.0F).setUnlocalizedName("dsbutton");
 		ACBlocks.darkstone_pressure_plate = new BlockACPressureplate("DS", Material.rock, BlockACPressureplate.Sensitivity.MOBS).setHardness(0.6F).setResistance(12.0F).setStepSound(Block.soundTypeStone).setUnlocalizedName("dspplate");
@@ -74,11 +77,11 @@ public class BlockHandler implements ILifeCycleHandler {
 		ACBlocks.darklands_oak_pressure_plate = new BlockACPressureplate("DLTplank", Material.wood, BlockACPressureplate.Sensitivity.EVERYTHING).setHardness(0.5F).setStepSound(Block.soundTypeWood).setUnlocalizedName("dltpplate");
 		ACBlocks.darklands_oak_stairs = new BlockACStairs(ACBlocks.darklands_oak_planks).setHardness(2.0F).setResistance(5.0F).setStepSound(Block.soundTypeWood).setUnlocalizedName("dltstairs");
 		ACBlocks.darklands_oak_slab = new BlockACSingleSlab(Material.wood).setHardness(2.0F).setResistance(5.0F).setStepSound(Block.soundTypeWood).setUnlocalizedName("dltslab1");
-		AbyssalCraft.DLTslab2 = new BlockACDoubleSlab(ACBlocks.darklands_oak_slab, Material.wood).setHardness(2.0F).setResistance(5.0F).setStepSound(Block.soundTypeWood).setUnlocalizedName("dltslab2");
+		DLTslab2 = new BlockACDoubleSlab(ACBlocks.darklands_oak_slab, Material.wood).setHardness(2.0F).setResistance(5.0F).setStepSound(Block.soundTypeWood).setUnlocalizedName("dltslab2");
 		ACBlocks.block_of_coralium = new IngotBlock(5).setUnlocalizedName("corblock");
 		ACBlocks.dreadlands_infused_powerstone = new BlockPSDL().setHardness(50.0F).setResistance(3000F).setCreativeTab(ACTabs.tabDecoration).setUnlocalizedName("psdl");
 		ACBlocks.abyssal_coralium_ore = new BlockACOre(3, 3.0F, 6.0F).setUnlocalizedName("abycorore");
-		AbyssalCraft.Altar = new BlockAltar().setStepSound(Block.soundTypeStone).setHardness(4.0F).setResistance(300.0F).setUnlocalizedName("altar");
+		Altar = new BlockAltar().setStepSound(Block.soundTypeStone).setHardness(4.0F).setResistance(300.0F).setUnlocalizedName("altar");
 		ACBlocks.abyssal_stone_button = new BlockACButton(false, "pickaxe", 2, "AS").setHardness(0.8F).setResistance(12.0F).setUnlocalizedName("abybutton");
 		ACBlocks.abyssal_stone_pressure_plate = new BlockACPressureplate("AS", Material.rock, BlockACPressureplate.Sensitivity.MOBS, "pickaxe", 2).setHardness(0.8F).setResistance(12.0F).setStepSound(Block.soundTypeStone).setUnlocalizedName("abypplate");
 		ACBlocks.darkstone_brick_fence = new BlockACFence(Material.rock).setHardness(1.65F).setResistance(12.0F).setStepSound(Block.soundTypeStone).setUnlocalizedName("dsbfence");
@@ -95,8 +98,8 @@ public class BlockHandler implements ILifeCycleHandler {
 		ACBlocks.dreaded_fire = new BlockDreadFire().setLightLevel(1.0F).setUnlocalizedName("dreadfire");
 		ACBlocks.depths_ghoul_head = new BlockDGhead(){ @Override public TileEntity createNewTileEntity(World worldIn, int meta) { return new TileEntityDGhead(); }}.setUnlocalizedName("dghead");
 		ACBlocks.liquid_coralium = new BlockCLiquid().setResistance(500.0F).setLightLevel(1.0F).setUnlocalizedName("cwater");
-		ACBlocks.dreadstone = new BlockACBasic(Material.rock, "pickaxe", 4, 2.5F, 20.0F, Block.soundTypeStone).setUnlocalizedName("dreadstone");
-		ACBlocks.abyssalnite_stone = new BlockACBasic(Material.rock, "pickaxe", 4, 2.5F, 20.0F, Block.soundTypeStone).setUnlocalizedName("abydreadstone");
+		ACBlocks.dreadstone = new BlockDreadstone();
+		ACBlocks.abyssalnite_stone = new BlockAbyssalniteStone();
 		ACBlocks.dreadlands_grass = new BlockDreadGrass().setHardness(0.4F).setStepSound(Block.soundTypeGrass).setUnlocalizedName("dreadgrass");
 		ACBlocks.pete_head = new BlockDGhead(){ @Override public TileEntity createNewTileEntity(World worldIn, int meta) { return new TileEntityPhead(); }}.setUnlocalizedName("phead");
 		ACBlocks.mr_wilson_head = new BlockDGhead(){ @Override public TileEntity createNewTileEntity(World worldIn, int meta) { return new TileEntityWhead(); }}.setUnlocalizedName("whead");
@@ -104,17 +107,17 @@ public class BlockHandler implements ILifeCycleHandler {
 		ACBlocks.dreadstone_brick_stairs = new BlockACStairs(ACBlocks.dreadstone_brick, "pickaxe", 4).setHardness(2.5F).setResistance(20.0F).setStepSound(Block.soundTypeStone).setUnlocalizedName("dreadbrickstairs");
 		ACBlocks.dreadstone_brick_fence = new BlockACFence(Material.rock, "pickaxe", 4).setHardness(2.5F).setResistance(20.0F).setStepSound(Block.soundTypeStone).setUnlocalizedName("dreadbrickfence");
 		ACBlocks.dreadstone_brick_slab = new BlockACSingleSlab(Material.rock, "pickaxe", 4).setHardness(2.5F).setResistance(20.0F).setStepSound(Block.soundTypeStone).setUnlocalizedName("dreadbrickslab1");
-		AbyssalCraft.dreadbrickslab2 = new BlockACDoubleSlab(ACBlocks.dreadstone_brick_slab, Material.rock, "pickaxe", 4).setHardness(2.5F).setResistance(20.0F).setStepSound(Block.soundTypeStone).setUnlocalizedName("dreadbrickslab2");
+		dreadbrickslab2 = new BlockACDoubleSlab(ACBlocks.dreadstone_brick_slab, Material.rock, "pickaxe", 4).setHardness(2.5F).setResistance(20.0F).setStepSound(Block.soundTypeStone).setUnlocalizedName("dreadbrickslab2");
 		ACBlocks.abyssalnite_stone_brick_stairs = new BlockACStairs(ACBlocks.abyssalnite_stone_brick, "pickaxe", 4).setHardness(2.5F).setResistance(20.0F).setStepSound(Block.soundTypeStone).setUnlocalizedName("abydreadbrickstairs");
 		ACBlocks.abyssalnite_stone_brick_fence = new BlockACFence(Material.rock, "pickaxe", 4).setHardness(2.5F).setResistance(20.0F).setStepSound(Block.soundTypeStone).setUnlocalizedName("abydreadbrickfence");
 		ACBlocks.abyssalnite_stone_brick_slab = new BlockACSingleSlab(Material.rock, "pickaxe", 4).setHardness(2.5F).setResistance(20.0F).setStepSound(Block.soundTypeStone).setUnlocalizedName("abydreadbrickslab1");
-		AbyssalCraft.abydreadbrickslab2 = new BlockACDoubleSlab(ACBlocks.abyssalnite_stone_brick_slab, Material.rock, "pickaxe", 4).setHardness(2.5F).setResistance(20.0F).setStepSound(Block.soundTypeStone).setUnlocalizedName("abydreadbrickslab2");
+		abydreadbrickslab2 = new BlockACDoubleSlab(ACBlocks.abyssalnite_stone_brick_slab, Material.rock, "pickaxe", 4).setHardness(2.5F).setResistance(20.0F).setStepSound(Block.soundTypeStone).setUnlocalizedName("abydreadbrickslab2");
 		ACBlocks.liquid_antimatter = new BlockAntiliquid().setResistance(500.0F).setLightLevel(0.5F).setUnlocalizedName("antiwater");
 		ACBlocks.coralium_stone = new BlockCoraliumstone().setHardness(1.5F).setResistance(10.0F).setStepSound(Block.soundTypeStone).setUnlocalizedName("cstone");
 		ACBlocks.coralium_stone_brick = new BlockACBrick(1.5F, 10.0F).setUnlocalizedName("cstonebrick");
 		ACBlocks.coralium_stone_brick_fence = new BlockACFence(Material.rock).setHardness(1.5F).setResistance(10.0F).setStepSound(Block.soundTypeStone).setUnlocalizedName("cstonebrickfence");
 		ACBlocks.coralium_stone_brick_slab = new BlockACSingleSlab(Material.rock).setHardness(1.5F).setResistance(10.0F).setStepSound(Block.soundTypeStone).setUnlocalizedName("cstonebrickslab1");
-		AbyssalCraft.cstonebrickslab2 = new BlockACDoubleSlab(ACBlocks.coralium_stone_brick_slab, Material.rock).setHardness(1.5F).setResistance(10.0F).setStepSound(Block.soundTypeStone).setUnlocalizedName("cstonebrickslab2");
+		cstonebrickslab2 = new BlockACDoubleSlab(ACBlocks.coralium_stone_brick_slab, Material.rock).setHardness(1.5F).setResistance(10.0F).setStepSound(Block.soundTypeStone).setUnlocalizedName("cstonebrickslab2");
 		ACBlocks.coralium_stone_brick_stairs = new BlockACStairs(ACBlocks.coralium_stone_brick, "pickaxe", 0).setHardness(1.5F).setResistance(10.0F).setStepSound(Block.soundTypeStone).setUnlocalizedName("cstonebrickstairs");
 		ACBlocks.coralium_stone_button = new BlockACButton(false, "cstone").setHardness(0.6F).setResistance(12.0F).setUnlocalizedName("cstonebutton");
 		ACBlocks.coralium_stone_pressure_plate = new BlockACPressureplate("cstone", Material.rock, BlockACPressureplate.Sensitivity.MOBS).setHardness(0.6F).setResistance(12.0F).setStepSound(Block.soundTypeStone).setUnlocalizedName("cstonepplate");
@@ -143,20 +146,20 @@ public class BlockHandler implements ILifeCycleHandler {
 		ACBlocks.ethaxium_pillar = new BlockEthaxiumPillar(100.0F).setUnlocalizedName("ethaxiumpillar");
 		ACBlocks.ethaxium_brick_stairs = new BlockACStairs(ACBlocks.ethaxium_brick, "pickaxe", 8).setHardness(100.0F).setResistance(Float.MAX_VALUE).setStepSound(Block.soundTypeStone).setUnlocalizedName("ethaxiumbrickstairs");
 		ACBlocks.ethaxium_brick_slab = new BlockACSingleSlab(Material.rock, "pickaxe", 8).setHardness(100.0F).setResistance(Float.MAX_VALUE).setStepSound(Block.soundTypeStone).setUnlocalizedName("ethaxiumbrickslab1");
-		AbyssalCraft.ethaxiumslab2 = new BlockACDoubleSlab(ACBlocks.ethaxium_brick_slab, Material.rock, "pickaxe", 8).setHardness(100.0F).setResistance(Float.MAX_VALUE).setStepSound(Block.soundTypeStone).setUnlocalizedName("ethaxiumbrickslab2");
+		ethaxiumslab2 = new BlockACDoubleSlab(ACBlocks.ethaxium_brick_slab, Material.rock, "pickaxe", 8).setHardness(100.0F).setResistance(Float.MAX_VALUE).setStepSound(Block.soundTypeStone).setUnlocalizedName("ethaxiumbrickslab2");
 		ACBlocks.ethaxium_brick_fence = new BlockACFence(Material.rock, "pickaxe", 8).setHardness(100.0F).setResistance(Float.MAX_VALUE).setStepSound(Block.soundTypeStone).setUnlocalizedName("ethaxiumfence");
 		ACBlocks.omothol_stone = new BlockACBasic(Material.rock, "pickaxe", 6, 10.0F, 12.0F, Block.soundTypeStone).setUnlocalizedName("omotholstone");
 		ACBlocks.block_of_ethaxium = new IngotBlock(8).setResistance(Float.MAX_VALUE).setUnlocalizedName("ethaxiumblock");
 		ACBlocks.omothol_gateway = new BlockOmotholPortal().setUnlocalizedName("omotholportal");
 		ACBlocks.omothol_fire = new BlockOmotholFire().setLightLevel(1.0F).setUnlocalizedName("omotholfire");
 		ACBlocks.engraver = new BlockEngraver().setHardness(2.5F).setResistance(12.0F).setStepSound(Block.soundTypeStone).setUnlocalizedName("engraver");
-		AbyssalCraft.house = new BlockHouse().setHardness(1.0F).setResistance(Float.MAX_VALUE).setStepSound(Block.soundTypeWood).setUnlocalizedName("engraver_on");
+		house = new BlockHouse().setHardness(1.0F).setResistance(Float.MAX_VALUE).setStepSound(Block.soundTypeWood).setUnlocalizedName("engraver_on");
 		ACBlocks.materializer = new BlockMaterializer().setUnlocalizedName("materializer");
 		ACBlocks.dark_ethaxium_brick = new BlockACBrick(8, 150.0F, Float.MAX_VALUE).setUnlocalizedName("darkethaxiumbrick");
 		ACBlocks.dark_ethaxium_pillar = new BlockEthaxiumPillar(150.0F).setUnlocalizedName("darkethaxiumpillar");
 		ACBlocks.dark_ethaxium_brick_stairs = new BlockACStairs(ACBlocks.dark_ethaxium_brick, "pickaxe", 8).setHardness(150.0F).setResistance(Float.MAX_VALUE).setStepSound(Block.soundTypeStone).setUnlocalizedName("darkethaxiumbrickstairs");
 		ACBlocks.dark_ethaxium_brick_slab = new BlockACSingleSlab(Material.rock, "pickaxe", 8).setHardness(150.0F).setResistance(Float.MAX_VALUE).setStepSound(Block.soundTypeStone).setUnlocalizedName("darkethaxiumbrickslab1");
-		AbyssalCraft.darkethaxiumslab2 = new BlockACDoubleSlab(ACBlocks.dark_ethaxium_brick_slab, Material.rock, "pickaxe", 8).setHardness(150.0F).setResistance(Float.MAX_VALUE).setStepSound(Block.soundTypeStone).setUnlocalizedName("darkethaxiumbrickslab2");
+		darkethaxiumslab2 = new BlockACDoubleSlab(ACBlocks.dark_ethaxium_brick_slab, Material.rock, "pickaxe", 8).setHardness(150.0F).setResistance(Float.MAX_VALUE).setStepSound(Block.soundTypeStone).setUnlocalizedName("darkethaxiumbrickslab2");
 		ACBlocks.dark_ethaxium_brick_fence = new BlockACFence(Material.rock, "pickaxe", 8).setHardness(150.0F).setResistance(Float.MAX_VALUE).setStepSound(Block.soundTypeStone).setUnlocalizedName("darkethaxiumbrickfence");
 		ACBlocks.ritual_altar = new BlockRitualAltar().setUnlocalizedName("ritualaltar");
 		ACBlocks.ritual_pedestal = new BlockRitualPedestal().setUnlocalizedName("ritualpedestal");
@@ -195,6 +198,30 @@ public class BlockHandler implements ILifeCycleHandler {
 		ACBlocks.dreadlands_energy_relay = new BlockTieredEnergyRelay("dlenergyrelay"){ @Override public TileEntity createNewTileEntity(World worldIn, int meta) { return new TileEntityDreadlandsEnergyRelay(); }};
 		ACBlocks.omothol_energy_relay = new BlockTieredEnergyRelay("omtenergyrelay"){ @Override public TileEntity createNewTileEntity(World worldIn, int meta) { return new TileEntityOmotholEnergyRelay(); }};
 		ACBlocks.tiered_energy_container = new BlockTieredEnergyContainer();
+		ACBlocks.abyssal_sand = new BlockACBasic(Material.sand, 0.5F, 2.5F, Block.soundTypeSand).setUnlocalizedName("abyssalsand");
+		ACBlocks.fused_abyssal_sand = new BlockFusedAbyssalSand();
+		ACBlocks.abyssal_sand_glass = new BlockAbyssalSandGlass();
+		ACBlocks.dreadlands_dirt = new BlockACBasic(Material.ground, 0.4F, 2.0F, Block.soundTypeGrass).setUnlocalizedName("dreadlandsdirt");
+		ACBlocks.abyssal_cobblestone = new BlockACBasic(Material.rock, "pickaxe", 2, 2.6F, 12.0F, Block.soundTypeStone).setUnlocalizedName("abyssalcobblestone");
+		ACBlocks.dreadstone_cobblestone = new BlockACBasic(Material.rock, "pickaxe", 4, 3.3F, 20.0F, Block.soundTypeStone).setUnlocalizedName("dreadstonecobblestone");
+		ACBlocks.abyssalnite_cobblestone = new BlockACBasic(Material.rock, "pickaxe", 4, 3.3F, 20.0F, Block.soundTypeStone).setUnlocalizedName("abyssalnitecobblestone");
+		ACBlocks.coralium_cobblestone = new BlockACBasic(Material.rock, 2.0F, 10.0F, Block.soundTypeStone).setUnlocalizedName("coraliumcobblestone");
+		ACBlocks.abyssal_cobblestone_stairs = new BlockACStairs(ACBlocks.abyssal_cobblestone, "pickaxe", 2).setStepSound(Block.soundTypeStone).setUnlocalizedName("abyssalcobblestonestairs");
+		ACBlocks.abyssal_cobblestone_slab = new BlockACSingleSlab(Material.rock, "pickaxe", 2).setHardness(2.6F).setResistance(12.0F).setStepSound(Block.soundTypeStone).setUnlocalizedName("abyssalcobblestoneslab1");
+		abycobbleslab2 = new BlockACDoubleSlab(ACBlocks.abyssal_cobblestone_slab, Material.rock, "pickaxe", 2).setHardness(2.6F).setResistance(12.0F).setStepSound(Block.soundTypeStone).setUnlocalizedName("abyssalcobblestoneslab2");
+		ACBlocks.abyssal_cobblestone_wall = new BlockACWall(ACBlocks.abyssal_cobblestone, 2).setHardness(2.6F).setResistance(12.0F).setStepSound(Block.soundTypeStone).setUnlocalizedName("abyssalcobblestonewall");
+		ACBlocks.dreadstone_cobblestone_stairs = new BlockACStairs(ACBlocks.dreadstone_cobblestone, "pickaxe", 4).setStepSound(Block.soundTypeStone).setUnlocalizedName("dreadstonecobblestonestairs");
+		ACBlocks.dreadstone_cobblestone_slab = new BlockACSingleSlab(Material.rock, "pickaxe", 4).setHardness(3.3F).setResistance(20.0F).setStepSound(Block.soundTypeStone).setUnlocalizedName("dreadstonecobblestoneslab1");
+		dreadcobbleslab2 = new BlockACDoubleSlab(ACBlocks.dreadstone_cobblestone_slab, Material.rock, "pickaxe", 4).setHardness(3.3F).setResistance(20.0F).setStepSound(Block.soundTypeStone).setUnlocalizedName("dreadstonecobblestoneslab2");
+		ACBlocks.dreadstone_cobblestone_wall = new BlockACWall(ACBlocks.dreadstone_cobblestone, 4).setHardness(3.3F).setResistance(20.0F).setStepSound(Block.soundTypeStone).setUnlocalizedName("dreadstonecobblestonewall");
+		ACBlocks.abyssalnite_cobblestone_stairs = new BlockACStairs(ACBlocks.abyssalnite_cobblestone, "pickaxe", 4).setStepSound(Block.soundTypeStone).setUnlocalizedName("abyssalnitecobblestonestairs");
+		ACBlocks.abyssalnite_cobblestone_slab = new BlockACSingleSlab(Material.rock, "pickaxe", 4).setHardness(3.3F).setResistance(20.0F).setStepSound(Block.soundTypeStone).setUnlocalizedName("abyssalnitecobblestoneslab1");
+		abydreadcobbleslab2 = new BlockACDoubleSlab(ACBlocks.abyssalnite_cobblestone_slab, Material.rock, "pickaxe", 4).setHardness(3.3F).setResistance(20.0F).setStepSound(Block.soundTypeStone).setUnlocalizedName("abyssalnitecobblestoneslab2");
+		ACBlocks.abyssalnite_cobblestone_wall = new BlockACWall(ACBlocks.abyssalnite_cobblestone, 4).setHardness(3.3F).setResistance(20.0F).setStepSound(Block.soundTypeStone).setUnlocalizedName("abyssalnitecobblestonewall");
+		ACBlocks.coralium_cobblestone_stairs = new BlockACStairs(ACBlocks.coralium_cobblestone).setStepSound(Block.soundTypeStone).setUnlocalizedName("coraliumcobblestonestairs");
+		ACBlocks.coralium_cobblestone_slab = new BlockACSingleSlab(Material.rock).setHardness(2.0F).setResistance(10.0F).setStepSound(Block.soundTypeStone).setUnlocalizedName("coraliumcobblestoneslab1");
+		cstonecobbleslab2 = new BlockACDoubleSlab(ACBlocks.coralium_cobblestone_slab, Material.rock).setHardness(2.0F).setResistance(10.0F).setStepSound(Block.soundTypeStone).setUnlocalizedName("coraliumcobblestoneslab2");
+		ACBlocks.coralium_cobblestone_wall = new BlockACWall(ACBlocks.coralium_cobblestone).setHardness(2.0F).setResistance(10.0F).setStepSound(Block.soundTypeStone).setUnlocalizedName("coraliumcobblestonewall");
 
 		((BlockShoggothOoze) ACBlocks.shoggoth_ooze).initBlacklist();
 
@@ -240,9 +267,9 @@ public class BlockHandler implements ILifeCycleHandler {
 		GameRegistry.registerBlock(ACBlocks.darkstone_brick, ItemMetadataBlock.class, "darkstone_brick");
 		GameRegistry.registerBlock(ACBlocks.glowing_darkstone_bricks, "dsglow");
 		GameRegistry.registerBlock(ACBlocks.darkstone_brick_slab, ItemDarkbrickSlab.class, "darkbrickslab1");
-		GameRegistry.registerBlock(AbyssalCraft.Darkbrickslab2, ItemDarkbrickSlab.class, "darkbrickslab2");
+		GameRegistry.registerBlock(Darkbrickslab2, ItemDarkbrickSlab.class, "darkbrickslab2");
 		GameRegistry.registerBlock(ACBlocks.darkstone_cobblestone_slab, ItemDarkcobbleSlab.class, "darkcobbleslab1");
-		GameRegistry.registerBlock(AbyssalCraft.Darkcobbleslab2, ItemDarkcobbleSlab.class, "darkcobbleslab2");
+		GameRegistry.registerBlock(Darkcobbleslab2, ItemDarkcobbleSlab.class, "darkcobbleslab2");
 		GameRegistry.registerBlock(ACBlocks.darklands_grass, "darkgrass");
 		GameRegistry.registerBlock(ACBlocks.darkstone_brick_stairs, "dbstairs");
 		GameRegistry.registerBlock(ACBlocks.darkstone_cobblestone_stairs, "dcstairs");
@@ -252,7 +279,7 @@ public class BlockHandler implements ILifeCycleHandler {
 		GameRegistry.registerBlock(ACBlocks.abyssal_stone, ItemBlockColorName.class, "abystone");
 		GameRegistry.registerBlock(ACBlocks.abyssal_stone_brick, ItemMetadataBlock.class, "abybrick");
 		GameRegistry.registerBlock(ACBlocks.abyssal_stone_brick_slab, ItemAbySlab.class, "abyslab1");
-		GameRegistry.registerBlock(AbyssalCraft.abyslab2, ItemAbySlab.class, "abyslab2");
+		GameRegistry.registerBlock(abyslab2, ItemAbySlab.class, "abyslab2");
 		GameRegistry.registerBlock(ACBlocks.abyssal_stone_brick_stairs, ItemBlockColorName.class, "abystairs");
 		GameRegistry.registerBlock(ACBlocks.coralium_ore, "coraliumore");
 		GameRegistry.registerBlock(ACBlocks.abyssalnite_ore, "abyore");
@@ -265,7 +292,7 @@ public class BlockHandler implements ILifeCycleHandler {
 		GameRegistry.registerBlock(ACBlocks.wooden_crate, "crate");
 		GameRegistry.registerBlock(ACBlocks.abyssal_gateway, "abyportal");
 		GameRegistry.registerBlock(ACBlocks.darkstone_slab, ItemDarkstoneSlab.class, "darkstoneslab1");
-		GameRegistry.registerBlock(AbyssalCraft.Darkstoneslab2, ItemDarkstoneSlab.class, "darkstoneslab2");
+		GameRegistry.registerBlock(Darkstoneslab2, ItemDarkstoneSlab.class, "darkstoneslab2");
 		GameRegistry.registerBlock(ACBlocks.coralium_fire, "coraliumfire");
 		GameRegistry.registerBlock(ACBlocks.darkstone_button, "dsbutton");
 		GameRegistry.registerBlock(ACBlocks.darkstone_pressure_plate, "dspplate");
@@ -274,12 +301,12 @@ public class BlockHandler implements ILifeCycleHandler {
 		GameRegistry.registerBlock(ACBlocks.darklands_oak_pressure_plate, "dltpplate");
 		GameRegistry.registerBlock(ACBlocks.darklands_oak_stairs, "dltstairs");
 		GameRegistry.registerBlock(ACBlocks.darklands_oak_slab, ItemDLTSlab.class, "dltslab1");
-		GameRegistry.registerBlock(AbyssalCraft.DLTslab2, ItemDLTSlab.class, "dltslab2");
+		GameRegistry.registerBlock(DLTslab2, ItemDLTSlab.class, "dltslab2");
 		GameRegistry.registerBlock(ACBlocks.liquid_coralium, "cwater");
 		GameRegistry.registerBlock(ACBlocks.block_of_coralium, ItemBlockColorName.class, "corblock");
 		GameRegistry.registerBlock(ACBlocks.dreadlands_infused_powerstone, "psdl");
 		GameRegistry.registerBlock(ACBlocks.abyssal_coralium_ore, "abycorore");
-		GameRegistry.registerBlock(AbyssalCraft.Altar, "altar");
+		GameRegistry.registerBlock(Altar, "altar");
 		GameRegistry.registerBlock(ACBlocks.abyssal_stone_button, ItemBlockColorName.class, "abybutton");
 		GameRegistry.registerBlock(ACBlocks.abyssal_stone_pressure_plate, ItemBlockColorName.class, "abypplate");
 		GameRegistry.registerBlock(ACBlocks.darkstone_brick_fence, "dsbfence");
@@ -304,17 +331,17 @@ public class BlockHandler implements ILifeCycleHandler {
 		GameRegistry.registerBlock(ACBlocks.dreadstone_brick_stairs, "dreadbrickstairs");
 		GameRegistry.registerBlock(ACBlocks.dreadstone_brick_fence, "dreadbrickfence");
 		GameRegistry.registerBlock(ACBlocks.dreadstone_brick_slab, ItemDreadbrickSlab.class, "dreadbrickslab1");
-		GameRegistry.registerBlock(AbyssalCraft.dreadbrickslab2, ItemDreadbrickSlab.class, "dreadbrickslab2");
+		GameRegistry.registerBlock(dreadbrickslab2, ItemDreadbrickSlab.class, "dreadbrickslab2");
 		GameRegistry.registerBlock(ACBlocks.abyssalnite_stone_brick_stairs, "abydreadbrickstairs");
 		GameRegistry.registerBlock(ACBlocks.abyssalnite_stone_brick_fence, "abydreadbrickfence");
 		GameRegistry.registerBlock(ACBlocks.abyssalnite_stone_brick_slab, ItemAbyDreadbrickSlab.class, "abydreadbrickslab1");
-		GameRegistry.registerBlock(AbyssalCraft.abydreadbrickslab2, ItemAbyDreadbrickSlab.class, "abydreadbrickslab2");
+		GameRegistry.registerBlock(abydreadbrickslab2, ItemAbyDreadbrickSlab.class, "abydreadbrickslab2");
 		GameRegistry.registerBlock(ACBlocks.liquid_antimatter, "antiwater");
 		GameRegistry.registerBlock(ACBlocks.coralium_stone, "cstone");
 		GameRegistry.registerBlock(ACBlocks.coralium_stone_brick, ItemMetadataBlock.class, "cstonebrick");
 		GameRegistry.registerBlock(ACBlocks.coralium_stone_brick_fence, "cstonebrickfence");
 		GameRegistry.registerBlock(ACBlocks.coralium_stone_brick_slab, ItemCstonebrickSlab.class, "cstonebrickslab1");
-		GameRegistry.registerBlock(AbyssalCraft.cstonebrickslab2, ItemCstonebrickSlab.class, "cstonebrickslab2");
+		GameRegistry.registerBlock(cstonebrickslab2, ItemCstonebrickSlab.class, "cstonebrickslab2");
 		GameRegistry.registerBlock(ACBlocks.coralium_stone_brick_stairs, "cstonebrickstairs");
 		GameRegistry.registerBlock(ACBlocks.coralium_stone_button, "cstonebutton");
 		GameRegistry.registerBlock(ACBlocks.coralium_stone_pressure_plate, "cstonepplate");
@@ -343,20 +370,20 @@ public class BlockHandler implements ILifeCycleHandler {
 		GameRegistry.registerBlock(ACBlocks.ethaxium_pillar, ItemBlockColorName.class, "ethaxiumpillar");
 		GameRegistry.registerBlock(ACBlocks.ethaxium_brick_stairs, ItemBlockColorName.class, "ethaxiumbrickstairs");
 		GameRegistry.registerBlock(ACBlocks.ethaxium_brick_slab, ItemEthaxiumSlab.class, "ethaxiumbrickslab1");
-		GameRegistry.registerBlock(AbyssalCraft.ethaxiumslab2, ItemEthaxiumSlab.class, "ethaxiumbrickslab2");
+		GameRegistry.registerBlock(ethaxiumslab2, ItemEthaxiumSlab.class, "ethaxiumbrickslab2");
 		GameRegistry.registerBlock(ACBlocks.ethaxium_brick_fence, ItemBlockColorName.class, "ethaxiumfence");
 		GameRegistry.registerBlock(ACBlocks.block_of_ethaxium, ItemBlockColorName.class, "ethaxiumblock");
 		GameRegistry.registerBlock(ACBlocks.omothol_stone, "omotholstone");
 		GameRegistry.registerBlock(ACBlocks.omothol_gateway, "omotholportal");
 		GameRegistry.registerBlock(ACBlocks.omothol_fire, "omotholfire");
 		GameRegistry.registerBlock(ACBlocks.engraver, "engraver");
-		GameRegistry.registerBlock(AbyssalCraft.house, "engraver_on");
+		GameRegistry.registerBlock(house, "engraver_on");
 		GameRegistry.registerBlock(ACBlocks.materializer, "materializer");
 		GameRegistry.registerBlock(ACBlocks.dark_ethaxium_brick, ItemMetadataBlock.class, "darkethaxiumbrick");
 		GameRegistry.registerBlock(ACBlocks.dark_ethaxium_pillar, ItemBlockColorName.class, "darkethaxiumpillar");
 		GameRegistry.registerBlock(ACBlocks.dark_ethaxium_brick_stairs, ItemBlockColorName.class, "darkethaxiumbrickstairs");
 		GameRegistry.registerBlock(ACBlocks.dark_ethaxium_brick_slab, ItemDarkEthaxiumSlab.class, "darkethaxiumbrickslab1");
-		GameRegistry.registerBlock(AbyssalCraft.darkethaxiumslab2, ItemDarkEthaxiumSlab.class, "darkethaxiumbrickslab2");
+		GameRegistry.registerBlock(darkethaxiumslab2, ItemDarkEthaxiumSlab.class, "darkethaxiumbrickslab2");
 		GameRegistry.registerBlock(ACBlocks.dark_ethaxium_brick_fence, ItemBlockColorName.class, "darkethaxiumbrickfence");
 		GameRegistry.registerBlock(ACBlocks.ritual_altar, ItemRitualBlock.class, "ritualaltar");
 		GameRegistry.registerBlock(ACBlocks.ritual_pedestal, ItemRitualBlock.class, "ritualpedestal");
@@ -395,9 +422,33 @@ public class BlockHandler implements ILifeCycleHandler {
 		GameRegistry.registerBlock(ACBlocks.dreadlands_energy_relay, ItemPEContainerBlock.class, "dlenergyrelay");
 		GameRegistry.registerBlock(ACBlocks.omothol_energy_relay, ItemPEContainerBlock.class, "omtenergyrelay");
 		GameRegistry.registerBlock(ACBlocks.tiered_energy_container, ItemTieredEnergyContainerBlock.class, "tieredenergycontainer");
+		GameRegistry.registerBlock(ACBlocks.abyssal_sand, "abyssalsand");
+		GameRegistry.registerBlock(ACBlocks.fused_abyssal_sand, "fusedabyssalsand");
+		GameRegistry.registerBlock(ACBlocks.abyssal_sand_glass, "abyssalsandglass");
+		GameRegistry.registerBlock(ACBlocks.dreadlands_dirt, "dreadlandsdirt");
+		GameRegistry.registerBlock(ACBlocks.abyssal_cobblestone, "abyssalcobblestone");
+		GameRegistry.registerBlock(ACBlocks.dreadstone_cobblestone, "dreadstonecobblestone");
+		GameRegistry.registerBlock(ACBlocks.abyssalnite_cobblestone, "abyssalnitecobblestone");
+		GameRegistry.registerBlock(ACBlocks.coralium_cobblestone, "coraliumcobblestone");
+		GameRegistry.registerBlock(ACBlocks.abyssal_cobblestone_stairs, "abyssalcobblestonestairs");
+		GameRegistry.registerBlock(ACBlocks.abyssal_cobblestone_slab, ItemAbyssalcobbleSlab.class, "abyssalcobblestoneslab1");
+		GameRegistry.registerBlock(abycobbleslab2, ItemAbyssalcobbleSlab.class, "abyssalcobblestoneslab2");
+		GameRegistry.registerBlock(ACBlocks.abyssal_cobblestone_wall, "abyssalcobblestonewall");
+		GameRegistry.registerBlock(ACBlocks.dreadstone_cobblestone_stairs, "dreadstonecobblestonestairs");
+		GameRegistry.registerBlock(ACBlocks.dreadstone_cobblestone_slab, ItemDreadcobbleSlab.class, "dreadstonecobblestoneslab1");
+		GameRegistry.registerBlock(dreadcobbleslab2, ItemDreadcobbleSlab.class, "dreadstonecobblestoneslab2");
+		GameRegistry.registerBlock(ACBlocks.dreadstone_cobblestone_wall, "dreadstonecobblestonewall");
+		GameRegistry.registerBlock(ACBlocks.abyssalnite_cobblestone_stairs, "abyssalnitecobblestonestairs");
+		GameRegistry.registerBlock(ACBlocks.abyssalnite_cobblestone_slab, ItemAbyssalnitecobbleSlab.class, "abyssalnitecobblestoneslab1");
+		GameRegistry.registerBlock(abydreadcobbleslab2, ItemAbyssalnitecobbleSlab.class, "abyssalnitecobblestoneslab2");
+		GameRegistry.registerBlock(ACBlocks.abyssalnite_cobblestone_wall, "abyssalnitecobblestonewall");
+		GameRegistry.registerBlock(ACBlocks.coralium_cobblestone_stairs, "coraliumcobblestonestairs");
+		GameRegistry.registerBlock(ACBlocks.coralium_cobblestone_slab, ItemCoraliumcobbleSlab.class, "coraliumcobblestoneslab1");
+		GameRegistry.registerBlock(cstonecobbleslab2, ItemCoraliumcobbleSlab.class, "coraliumcobblestoneslab2");
+		GameRegistry.registerBlock(ACBlocks.coralium_cobblestone_wall, "coraliumcobblestonewall");
 
 		Blocks.fire.setFireInfo(ACBlocks.darklands_oak_planks, 5, 20);
-		Blocks.fire.setFireInfo(AbyssalCraft.DLTslab2, 5, 20);
+		Blocks.fire.setFireInfo(DLTslab2, 5, 20);
 		Blocks.fire.setFireInfo(ACBlocks.darklands_oak_slab, 5, 20);
 		Blocks.fire.setFireInfo(ACBlocks.darklands_oak_fence, 5, 20);
 		Blocks.fire.setFireInfo(ACBlocks.darklands_oak_stairs, 5, 20);

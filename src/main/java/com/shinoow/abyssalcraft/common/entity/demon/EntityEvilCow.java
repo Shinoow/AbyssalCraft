@@ -5,14 +5,14 @@
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
  * http://www.gnu.org/licenses/lgpl-3.0.txt
- * 
+ *
  * Contributors:
  *     Shinoow -  implementation
  ******************************************************************************/
 package com.shinoow.abyssalcraft.common.entity.demon;
 
-import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.common.entity.EntityLesserShoggoth;
+import com.shinoow.abyssalcraft.lib.ACConfig;
 
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
@@ -56,7 +56,7 @@ public class EntityEvilCow extends EntityMob {
 	{
 		super.applyEntityAttributes();
 
-		if(AbyssalCraft.hardcoreMode){
+		if(ACConfig.hardcoreMode){
 			getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(30.0D);
 			getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(4.0D);
 		} else getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(15.0D);
@@ -65,7 +65,7 @@ public class EntityEvilCow extends EntityMob {
 	@Override
 	public boolean attackEntityAsMob(Entity par1Entity)
 	{
-		if(AbyssalCraft.hardcoreMode && par1Entity instanceof EntityPlayer)
+		if(ACConfig.hardcoreMode && par1Entity instanceof EntityPlayer)
 			par1Entity.attackEntityFrom(DamageSource.causeMobDamage(this).setDamageBypassesArmor(), 1.5F);
 
 		return super.attackEntityAsMob(par1Entity);

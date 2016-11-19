@@ -5,7 +5,7 @@
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
  * http://www.gnu.org/licenses/lgpl-3.0.txt
- * 
+ *
  * Contributors:
  *     Shinoow -  implementation
  ******************************************************************************/
@@ -16,7 +16,9 @@ import java.util.Random;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.item.Item;
 import net.minecraft.util.BlockPos;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.world.World;
 
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
@@ -31,15 +33,16 @@ public class BlockCoraliumstone extends Block {
 	}
 
 	@Override
+	public Item getItemDropped(IBlockState state, Random random, int j)
+	{
+		return Item.getItemFromBlock(ACBlocks.coralium_cobblestone);
+	}
+
+	@Override
 	public void updateTick(World par1World, BlockPos pos, IBlockState state, Random par5Random) {
 		if (!par1World.isRemote)
-			for (int l = 0; l < 1; ++l) {
-				int i1 = pos.getX() + par5Random.nextInt(3) - 1;
-				int j1 = pos.getY() + par5Random.nextInt(5) - 3;
-				int k1 = pos.getZ() + par5Random.nextInt(3) - 1;
-
-				if (par1World.getBlockState(new BlockPos(i1, j1, k1)) == ACBlocks.liquid_coralium)
-					par1World.setBlockState(new BlockPos(i1, j1, k1), ACBlocks.coralium_stone.getDefaultState());
-			}
+			for(EnumFacing face : EnumFacing.values())
+				if (par1World.getBlockState(pos.offset(face)).getBlock() == ACBlocks.liquid_coralium && par5Random.nextFloat() < 0.3)
+					par1World.setBlockState(pos.offset(face), ACBlocks.coralium_stone.getDefaultState());
 	}
 }

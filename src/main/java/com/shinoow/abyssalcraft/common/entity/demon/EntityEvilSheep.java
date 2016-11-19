@@ -5,7 +5,7 @@
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
  * http://www.gnu.org/licenses/lgpl-3.0.txt
- * 
+ *
  * Contributors:
  *     Shinoow -  implementation
  ******************************************************************************/
@@ -41,10 +41,10 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.common.entity.EntityLesserShoggoth;
 import com.shinoow.abyssalcraft.common.network.PacketDispatcher;
 import com.shinoow.abyssalcraft.common.network.client.EvilSheepMessage;
+import com.shinoow.abyssalcraft.lib.ACConfig;
 
 public class EntityEvilSheep extends EntityMob {
 
@@ -80,7 +80,7 @@ public class EntityEvilSheep extends EntityMob {
 	protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
 
-		if(AbyssalCraft.hardcoreMode){
+		if(ACConfig.hardcoreMode){
 			getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(24.0D);
 			getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(4.0D);
 		} else getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(12.0D);
@@ -89,7 +89,7 @@ public class EntityEvilSheep extends EntityMob {
 	@Override
 	public boolean attackEntityAsMob(Entity par1Entity)
 	{
-		if(AbyssalCraft.hardcoreMode && par1Entity instanceof EntityPlayer)
+		if(ACConfig.hardcoreMode && par1Entity instanceof EntityPlayer)
 			par1Entity.attackEntityFrom(DamageSource.causeMobDamage(this).setDamageBypassesArmor(), 1.5F);
 
 		return super.attackEntityAsMob(par1Entity);

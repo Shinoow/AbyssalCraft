@@ -5,7 +5,7 @@
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
  * http://www.gnu.org/licenses/lgpl-3.0.txt
- * 
+ *
  * Contributors:
  *     Shinoow -  implementation
  ******************************************************************************/
@@ -16,11 +16,12 @@ import mezz.jei.api.recipe.transfer.IRecipeTransferRegistry;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.Loader;
 
-import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.common.inventory.ContainerCrystallizer;
 import com.shinoow.abyssalcraft.common.inventory.ContainerEngraver;
 import com.shinoow.abyssalcraft.common.inventory.ContainerTransmutator;
+import com.shinoow.abyssalcraft.init.BlockHandler;
+import com.shinoow.abyssalcraft.init.ItemHandler;
 import com.shinoow.abyssalcraft.integration.jei.rending.RendingRecipeCategory;
 import com.shinoow.abyssalcraft.integration.jei.rending.RendingRecipeHandler;
 import com.shinoow.abyssalcraft.integration.jei.rending.RendingRecipeMaker;
@@ -81,11 +82,11 @@ public class ACJEIPlugin implements IModPlugin {
 		registry.addRecipes(EngravingRecipeMaker.getEngraverRecipes());
 		registry.addRecipes(RendingRecipeMaker.getRending());
 
-		jeiHelpers.getItemBlacklist().addItemToBlacklist(new ItemStack(AbyssalCraft.devsword));
+		jeiHelpers.getItemBlacklist().addItemToBlacklist(new ItemStack(ItemHandler.devsword));
 		jeiHelpers.getItemBlacklist().addItemToBlacklist(new ItemStack(ACBlocks.crystallizer_active));
 		jeiHelpers.getItemBlacklist().addItemToBlacklist(new ItemStack(ACBlocks.transmutator_active));
-		jeiHelpers.getItemBlacklist().addItemToBlacklist(new ItemStack(AbyssalCraft.house));
-		jeiHelpers.getItemBlacklist().addItemToBlacklist(new ItemStack(AbyssalCraft.Altar));
+		jeiHelpers.getItemBlacklist().addItemToBlacklist(new ItemStack(BlockHandler.house));
+		jeiHelpers.getItemBlacklist().addItemToBlacklist(new ItemStack(BlockHandler.Altar));
 	}
 
 	@Override

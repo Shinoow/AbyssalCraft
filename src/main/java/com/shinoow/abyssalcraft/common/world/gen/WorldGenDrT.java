@@ -5,7 +5,7 @@
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
  * http://www.gnu.org/licenses/lgpl-3.0.txt
- * 
+ *
  * Contributors:
  *     Shinoow -  implementation
  ******************************************************************************/
@@ -45,10 +45,12 @@ public class WorldGenDrT extends WorldGenTrees {
 
 		Block j1 = world.getBlockState(new BlockPos(x, y -1, z)).getBlock();
 
-		if (j1 != Blocks.dirt && j1 != ACBlocks.dreadstone && j1.getMaterial() != Material.grass || y >= 256 - height - 1)
+		if (j1 != Blocks.dirt && j1 != ACBlocks.dreadlands_dirt && j1 != ACBlocks.dreadstone && j1.getMaterial() != Material.grass || y >= 256 - height - 1)
 			return false;
 
-		setBlockAndNotifyAdequately(world, new BlockPos(x, y -1, z), Blocks.dirt.getDefaultState());
+		if(j1 != ACBlocks.dreadlands_grass && j1 != ACBlocks.dreadstone)
+			setBlockAndNotifyAdequately(world, new BlockPos(x, y -1, z), Blocks.dirt.getDefaultState());
+		else setBlockAndNotifyAdequately(world, new BlockPos(x, y -1, z), ACBlocks.dreadlands_dirt.getDefaultState());
 
 		for (int i = 0; i < height; i++)
 			world.setBlockState(new BlockPos(x, y + i, z), ACBlocks.dreadlands_log.getDefaultState());

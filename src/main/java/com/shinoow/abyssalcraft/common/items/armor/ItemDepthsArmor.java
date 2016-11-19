@@ -5,7 +5,7 @@
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
  * http://www.gnu.org/licenses/lgpl-3.0.txt
- * 
+ *
  * Contributors:
  *     Shinoow -  implementation
  ******************************************************************************/
@@ -74,11 +74,11 @@ public class ItemDepthsArmor extends ItemArmor implements IVisDiscountGear, IRev
 
 	@Override
 	public void onArmorTick(World world, EntityPlayer player, ItemStack itemstack) {
+		if(world.isRemote) return;
 		if (itemstack.getItem() == ACItems.depths_helmet)
 		{
 			player.addPotionEffect(new PotionEffect(Potion.waterBreathing.getId(), 20, 0));
 			player.addPotionEffect(new PotionEffect(Potion.nightVision.getId(), 260, 0));
-			player.addPotionEffect(new PotionEffect(Potion.saturation.getId(), 20, 0));
 			if(player.getActivePotionEffect(AbyssalCraftAPI.coralium_plague) !=null)
 				player.removePotionEffect(AbyssalCraftAPI.coralium_plague.getId());
 		}
@@ -87,7 +87,7 @@ public class ItemDepthsArmor extends ItemArmor implements IVisDiscountGear, IRev
 		if (itemstack.getItem() == ACItems.depths_leggings)
 			player.addPotionEffect(new PotionEffect(Potion.jump.getId(), 20, 1));
 		if (itemstack.getItem() == ACItems.depths_boots)
-			player.addPotionEffect(new PotionEffect(Potion.moveSpeed.getId(), 20, 0));
+			player.addPotionEffect(new PotionEffect(Potion.moveSpeed.getId(), 20, 1));
 	}
 
 	@Override
@@ -133,9 +133,8 @@ public class ItemDepthsArmor extends ItemArmor implements IVisDiscountGear, IRev
 			stack.getItem() == ACItems.depths_leggings ? 2 : stack.getItem() == ACItems.depths_boots ? 1 : 0;
 	}
 
-	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
-	public void addInformation(ItemStack is, EntityPlayer player, List l, boolean B){
+	public void addInformation(ItemStack is, EntityPlayer player, List<String> l, boolean B){
 		if(Loader.isModLoaded("Thaumcraft")){
 			if(is.getItem() == ACItems.depths_helmet)
 				l.add("\u00A75"+StatCollector.translateToLocal("tc.visdiscount")+": 5%");

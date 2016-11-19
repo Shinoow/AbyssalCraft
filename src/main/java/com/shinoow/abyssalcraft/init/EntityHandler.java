@@ -5,13 +5,18 @@
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
  * http://www.gnu.org/licenses/lgpl-3.0.txt
- * 
+ *
  * Contributors:
  *     Shinoow -  implementation
  ******************************************************************************/
 package com.shinoow.abyssalcraft.init;
 
-import static com.shinoow.abyssalcraft.AbyssalCraft.*;
+import static com.shinoow.abyssalcraft.AbyssalCraft.instance;
+import static com.shinoow.abyssalcraft.lib.ACConfig.*;
+
+import java.util.HashMap;
+import java.util.Map;
+
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityList;
 import net.minecraft.entity.EntityList.EntityEggInfo;
@@ -36,6 +41,7 @@ import com.shinoow.abyssalcraft.common.entity.demon.*;
 public class EntityHandler implements ILifeCycleHandler {
 
 	static int startEntityId = 300;
+	public static Map<String, Integer> stringtoIDMapping = new HashMap<String, Integer>();
 
 	@Override
 	public void preInit(FMLPreInitializationEvent event) {
@@ -203,7 +209,11 @@ public class EntityHandler implements ILifeCycleHandler {
 	public void init(FMLInitializationEvent event) {}
 
 	@Override
-	public void postInit(FMLPostInitializationEvent event) {}
+	public void postInit(FMLPostInitializationEvent event) {
+		if(purgeMobSpawns)
+			EntityRegistry.addSpawn(EntityLesserShoggoth.class, 3, 1, 1, EnumCreatureType.MONSTER, ACBiomes.abyssal_wastelands, ACBiomes.dreadlands,
+					ACBiomes.purified_dreadlands, ACBiomes.dreadlands_mountains, ACBiomes.dreadlands_forest, ACBiomes.omothol, ACBiomes.dark_realm);
+	}
 
 	private static int getUniqueEntityId() {
 		do

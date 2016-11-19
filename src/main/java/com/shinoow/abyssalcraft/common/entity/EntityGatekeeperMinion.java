@@ -5,7 +5,7 @@
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
  * http://www.gnu.org/licenses/lgpl-3.0.txt
- * 
+ *
  * Contributors:
  *     Shinoow -  implementation
  ******************************************************************************/
@@ -41,11 +41,11 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.World;
 
-import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.api.entity.IAntiEntity;
 import com.shinoow.abyssalcraft.api.entity.ICoraliumEntity;
 import com.shinoow.abyssalcraft.api.entity.IDreadEntity;
 import com.shinoow.abyssalcraft.api.item.ACItems;
+import com.shinoow.abyssalcraft.lib.ACConfig;
 
 public class EntityGatekeeperMinion extends EntityMob implements ICoraliumEntity, IDreadEntity, IAntiEntity {
 
@@ -75,7 +75,7 @@ public class EntityGatekeeperMinion extends EntityMob implements ICoraliumEntity
 		getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(64.0D);
 		getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setBaseValue(0.2D);
 
-		if(AbyssalCraft.hardcoreMode){
+		if(ACConfig.hardcoreMode){
 			getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(500.0D);
 			getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(36.0D);
 		} else {
@@ -95,7 +95,7 @@ public class EntityGatekeeperMinion extends EntityMob implements ICoraliumEntity
 		swingItem();
 		boolean flag = super.attackEntityAsMob(par1Entity);
 
-		if(AbyssalCraft.hardcoreMode && par1Entity instanceof EntityPlayer)
+		if(ACConfig.hardcoreMode && par1Entity instanceof EntityPlayer)
 			par1Entity.attackEntityFrom(DamageSource.causeMobDamage(this).setDamageBypassesArmor(), 3);
 
 		return flag;
@@ -145,16 +145,13 @@ public class EntityGatekeeperMinion extends EntityMob implements ICoraliumEntity
 
 		if(rand.nextInt(10) == 0) item = new ItemStack(ACItems.ethaxium_ingot);
 
-		if (item != null)
-		{
-			int i = rand.nextInt(3);
+		int i = rand.nextInt(3);
 
-			if (par2 > 0)
-				i += rand.nextInt(par2 + 1);
+		if (par2 > 0)
+			i += rand.nextInt(par2 + 1);
 
-			for (int j = 0; j < i; ++j)
-				entityDropItem(item, 0);
-		}
+		for (int j = 0; j < i; ++j)
+			entityDropItem(item, 0);
 	}
 
 	@Override
