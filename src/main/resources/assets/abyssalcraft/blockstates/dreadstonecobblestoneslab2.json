@@ -1,0 +1,12 @@
+{
+	"forge_marker": 1,
+	"defaults": {
+		"textures" : {
+			"all": "abyssalcraft:blocks/dreadstonecobblestone"
+		}
+	},
+	"variants": {
+		"variant=false": { "model": "cube_all" },
+		"variant=true": { "model": "cube_all" }
+	}
+}

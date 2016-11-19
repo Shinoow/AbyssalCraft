@@ -5,7 +5,7 @@
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
  * http://www.gnu.org/licenses/lgpl-3.0.txt
- * 
+ *
  * Contributors:
  *     Shinoow -  implementation
  ******************************************************************************/
@@ -37,9 +37,10 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.World;
 
-import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.api.entity.IDreadEntity;
+import com.shinoow.abyssalcraft.lib.ACConfig;
 import com.shinoow.abyssalcraft.lib.ACLoot;
+import com.shinoow.abyssalcraft.lib.ACSounds;
 
 public class EntityDreadgolem extends EntityMob implements IDreadEntity {
 
@@ -60,7 +61,7 @@ public class EntityDreadgolem extends EntityMob implements IDreadEntity {
 	protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
 
-		if(AbyssalCraft.hardcoreMode){
+		if(ACConfig.hardcoreMode){
 			getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(40.0D);
 			getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(8.0D);
 		} else getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(4.0D);
@@ -69,7 +70,7 @@ public class EntityDreadgolem extends EntityMob implements IDreadEntity {
 	@Override
 	public boolean attackEntityAsMob(Entity par1Entity)
 	{
-		if(AbyssalCraft.hardcoreMode && par1Entity instanceof EntityPlayer)
+		if(ACConfig.hardcoreMode && par1Entity instanceof EntityPlayer)
 			par1Entity.attackEntityFrom(DamageSource.causeMobDamage(this).setDamageBypassesArmor(), 1.5F);
 
 		return super.attackEntityAsMob(par1Entity);
@@ -78,19 +79,19 @@ public class EntityDreadgolem extends EntityMob implements IDreadEntity {
 	@Override
 	protected SoundEvent getAmbientSound()
 	{
-		return AbyssalCraft.golem_ambient;
+		return ACSounds.golem_ambient;
 	}
 
 	@Override
 	protected SoundEvent getHurtSound()
 	{
-		return AbyssalCraft.golem_hurt;
+		return ACSounds.golem_hurt;
 	}
 
 	@Override
 	protected SoundEvent getDeathSound()
 	{
-		return AbyssalCraft.golem_death;
+		return ACSounds.golem_death;
 	}
 
 	@Override

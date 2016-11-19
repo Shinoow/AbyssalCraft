@@ -5,7 +5,7 @@
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
  * http://www.gnu.org/licenses/lgpl-3.0.txt
- * 
+ *
  * Contributors:
  *     Shinoow -  implementation
  ******************************************************************************/
@@ -49,6 +49,19 @@ public class ItemPortalPlacer extends Item {
 	public boolean isFull3D()
 	{
 		return true;
+	}
+
+	@Override
+	public String getItemStackDisplayName(ItemStack par1ItemStack) {
+
+		switch(key){
+		case 1:
+			return TextFormatting.DARK_RED + super.getItemStackDisplayName(par1ItemStack);
+		case 2:
+			return TextFormatting.BLUE + super.getItemStackDisplayName(par1ItemStack);
+		default:
+			return super.getItemStackDisplayName(par1ItemStack);
+		}
 	}
 
 	@Override

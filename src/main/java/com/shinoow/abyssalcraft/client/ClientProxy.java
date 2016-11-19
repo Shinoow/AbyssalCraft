@@ -5,7 +5,7 @@
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
  * http://www.gnu.org/licenses/lgpl-3.0.txt
- * 
+ *
  * Contributors:
  *     Shinoow -  implementation
  ******************************************************************************/
@@ -73,6 +73,8 @@ import com.shinoow.abyssalcraft.common.blocks.tile.*;
 import com.shinoow.abyssalcraft.common.entity.*;
 import com.shinoow.abyssalcraft.common.entity.anti.*;
 import com.shinoow.abyssalcraft.common.entity.demon.*;
+import com.shinoow.abyssalcraft.init.BlockHandler;
+import com.shinoow.abyssalcraft.init.ItemHandler;
 import com.shinoow.abyssalcraft.lib.ACLib;
 import com.shinoow.abyssalcraft.lib.client.render.TileEntityAltarBlockRenderer;
 import com.shinoow.abyssalcraft.lib.client.render.TileEntityDirectionalRenderer;
@@ -190,6 +192,14 @@ public class ClientProxy extends CommonProxy {
 		ModelLoader.setCustomStateMapper(ACBlocks.darkstone_cobblestone_wall, new StateMap.Builder().ignore(new IProperty[] {BlockWall.VARIANT}).build());
 		ModelLoader.setCustomStateMapper(ACBlocks.crystal_cluster, new StateMap.Builder().ignore(new IProperty[]{BlockCrystalCluster.TYPE}).build());
 		ModelLoader.setCustomStateMapper(ACBlocks.crystal_cluster2, new StateMap.Builder().ignore(new IProperty[]{BlockCrystalCluster2.TYPE}).build());
+		ModelLoader.setCustomStateMapper(ACBlocks.abyssal_cobblestone_wall, new StateMap.Builder().ignore(new IProperty[] {BlockWall.VARIANT}).build());
+		ModelLoader.setCustomStateMapper(ACBlocks.dreadstone_cobblestone_wall, new StateMap.Builder().ignore(new IProperty[] {BlockWall.VARIANT}).build());
+		ModelLoader.setCustomStateMapper(ACBlocks.abyssalnite_cobblestone_wall, new StateMap.Builder().ignore(new IProperty[] {BlockWall.VARIANT}).build());
+		ModelLoader.setCustomStateMapper(ACBlocks.coralium_cobblestone_wall, new StateMap.Builder().ignore(new IProperty[] {BlockWall.VARIANT}).build());
+		ModelLoader.setCustomStateMapper(ACBlocks.abyssal_cobblestone_slab, new StateMap.Builder().ignore(new IProperty[] {BlockACSlab.VARIANT_PROPERTY}).build());
+		ModelLoader.setCustomStateMapper(ACBlocks.dreadstone_cobblestone_slab, new StateMap.Builder().ignore(new IProperty[] {BlockACSlab.VARIANT_PROPERTY}).build());
+		ModelLoader.setCustomStateMapper(ACBlocks.abyssalnite_cobblestone_slab, new StateMap.Builder().ignore(new IProperty[] {BlockACSlab.VARIANT_PROPERTY}).build());
+		ModelLoader.setCustomStateMapper(ACBlocks.coralium_cobblestone_slab, new StateMap.Builder().ignore(new IProperty[] {BlockACSlab.VARIANT_PROPERTY}).build());
 
 		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(ACBlocks.cthulhu_statue), 0, new ModelResourceLocation("abyssalcraft:cthulhustatue", "inventory"));
 		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(ACBlocks.decorative_cthulhu_statue), 0, new ModelResourceLocation("abyssalcraft:cthulhustatue", "inventory"));
@@ -231,7 +241,7 @@ public class ClientProxy extends CommonProxy {
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityTieredSacrificialAltar.class, new TileEntityAltarBlockRenderer());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityJzaharSpawner.class, new TileEntityJzaharSpawnerRenderer());
 
-		registerItemRender(AbyssalCraft.devsword, 0);
+		registerItemRender(ItemHandler.devsword, 0);
 		registerItemRender(ACItems.oblivion_catalyst, 0);
 		registerItemRender(ACItems.gateway_key, 0);
 		registerItemRender(ACItems.liquid_coralium_bucket, 0);
@@ -438,9 +448,9 @@ public class ClientProxy extends CommonProxy {
 		registerItemRender(ACBlocks.darkstone_brick, 2, "darkstone_brick_2");
 		registerItemRender(ACBlocks.glowing_darkstone_bricks, 0);
 		registerItemRender(ACBlocks.darkstone_brick_slab, 0);
-		registerItemRender(AbyssalCraft.Darkbrickslab2, 0);
+		registerItemRender(BlockHandler.Darkbrickslab2, 0);
 		registerItemRender(ACBlocks.darkstone_cobblestone_slab, 0);
-		registerItemRender(AbyssalCraft.Darkcobbleslab2, 0);
+		registerItemRender(BlockHandler.Darkcobbleslab2, 0);
 		registerItemRender(ACBlocks.darklands_grass, 0);
 		registerItemRender(ACBlocks.darkstone_brick_stairs, 0);
 		registerItemRender(ACBlocks.darkstone_cobblestone_stairs, 0);
@@ -452,7 +462,7 @@ public class ClientProxy extends CommonProxy {
 		registerItemRender(ACBlocks.abyssal_stone_brick, 1, "abybrick_1");
 		registerItemRender(ACBlocks.abyssal_stone_brick, 2, "abybrick_2");
 		registerItemRender(ACBlocks.abyssal_stone_brick_slab, 0);
-		registerItemRender(AbyssalCraft.abyslab2, 0);
+		registerItemRender(BlockHandler.abyslab2, 0);
 		registerItemRender(ACBlocks.abyssal_stone_brick_stairs, 0);
 		registerItemRender(ACBlocks.coralium_ore, 0);
 		registerItemRender(ACBlocks.abyssalnite_ore, 0);
@@ -464,7 +474,7 @@ public class ClientProxy extends CommonProxy {
 		registerItemRender(ACBlocks.wooden_crate, 0);
 		registerItemRender(ACBlocks.abyssal_gateway, 0);
 		registerItemRender(ACBlocks.darkstone_slab, 0);
-		registerItemRender(AbyssalCraft.Darkstoneslab2, 0);
+		registerItemRender(BlockHandler.Darkstoneslab2, 0);
 		registerItemRender(ACBlocks.coralium_fire, 0);
 		registerItemRender(ACBlocks.darkstone_button, 0);
 		registerItemRender(ACBlocks.darkstone_pressure_plate, 0);
@@ -473,11 +483,11 @@ public class ClientProxy extends CommonProxy {
 		registerItemRender(ACBlocks.darklands_oak_pressure_plate, 0);
 		registerItemRender(ACBlocks.darklands_oak_stairs, 0);
 		registerItemRender(ACBlocks.darklands_oak_slab, 0);
-		registerItemRender(AbyssalCraft.DLTslab2, 0);
+		registerItemRender(BlockHandler.DLTslab2, 0);
 		registerItemRender(ACBlocks.block_of_coralium, 0);
 		registerItemRender(ACBlocks.dreadlands_infused_powerstone, 0);
 		registerItemRender(ACBlocks.abyssal_coralium_ore, 0);
-		registerItemRender(AbyssalCraft.Altar, 0);
+		registerItemRender(BlockHandler.Altar, 0);
 		registerItemRender(ACBlocks.abyssal_stone_button, 0);
 		registerItemRender(ACBlocks.abyssal_stone_pressure_plate, 0);
 		registerItemRender(ACBlocks.darkstone_brick_fence, 0);
@@ -506,18 +516,18 @@ public class ClientProxy extends CommonProxy {
 		registerItemRender(ACBlocks.dreadstone_brick_stairs, 0);
 		registerItemRender(ACBlocks.dreadstone_brick_fence, 0);
 		registerItemRender(ACBlocks.dreadstone_brick_slab, 0);
-		registerItemRender(AbyssalCraft.dreadbrickslab2, 0);
+		registerItemRender(BlockHandler.dreadbrickslab2, 0);
 		registerItemRender(ACBlocks.abyssalnite_stone_brick_stairs, 0);
 		registerItemRender(ACBlocks.abyssalnite_stone_brick_fence, 0);
 		registerItemRender(ACBlocks.abyssalnite_stone_brick_slab, 0);
-		registerItemRender(AbyssalCraft.abydreadbrickslab2, 0);
+		registerItemRender(BlockHandler.abydreadbrickslab2, 0);
 		registerItemRender(ACBlocks.coralium_stone, 0);
 		registerItemRender(ACBlocks.coralium_stone_brick, 0, "cstonebrick_0");
 		registerItemRender(ACBlocks.coralium_stone_brick, 1, "cstonebrick_1");
 		registerItemRender(ACBlocks.coralium_stone_brick, 2, "cstonebrick_2");
 		registerItemRender(ACBlocks.coralium_stone_brick_fence, 0);
 		registerItemRender(ACBlocks.coralium_stone_brick_slab, 0);
-		registerItemRender(AbyssalCraft.cstonebrickslab2, 0);
+		registerItemRender(BlockHandler.cstonebrickslab2, 0);
 		registerItemRender(ACBlocks.coralium_stone_brick_stairs, 0);
 		registerItemRender(ACBlocks.coralium_stone_button, 0);
 		registerItemRender(ACBlocks.coralium_stone_pressure_plate, 0);
@@ -547,13 +557,13 @@ public class ClientProxy extends CommonProxy {
 		registerItemRender(ACBlocks.ethaxium_pillar, 0);
 		registerItemRender(ACBlocks.ethaxium_brick_stairs, 0);
 		registerItemRender(ACBlocks.ethaxium_brick_slab, 0);
-		registerItemRender(AbyssalCraft.ethaxiumslab2, 0);
+		registerItemRender(BlockHandler.ethaxiumslab2, 0);
 		registerItemRender(ACBlocks.ethaxium_brick_fence, 0);
 		registerItemRender(ACBlocks.block_of_ethaxium, 0);
 		registerItemRender(ACBlocks.omothol_stone, 0);
 		registerItemRender(ACBlocks.omothol_gateway, 0);
 		registerItemRender(ACBlocks.omothol_fire, 0);
-		registerItemRender(AbyssalCraft.house, 0);
+		registerItemRender(BlockHandler.house, 0);
 		registerItemRender(ACBlocks.materializer, 0);
 		registerItemRender(ACBlocks.dark_ethaxium_brick, 0, "darkethaxiumbrick_0");
 		registerItemRender(ACBlocks.dark_ethaxium_brick, 1, "darkethaxiumbrick_1");
@@ -561,7 +571,7 @@ public class ClientProxy extends CommonProxy {
 		registerItemRender(ACBlocks.dark_ethaxium_pillar, 0);
 		registerItemRender(ACBlocks.dark_ethaxium_brick_stairs, 0);
 		registerItemRender(ACBlocks.dark_ethaxium_brick_slab, 0);
-		registerItemRender(AbyssalCraft.darkethaxiumslab2, 0);
+		registerItemRender(BlockHandler.darkethaxiumslab2, 0);
 		registerItemRender(ACBlocks.dark_ethaxium_brick_fence, 0);
 		registerItemRender(ACBlocks.ritual_altar, 0, "ritualaltar_0");
 		registerItemRender(ACBlocks.ritual_altar, 1, "ritualaltar_1");
@@ -612,6 +622,30 @@ public class ClientProxy extends CommonProxy {
 		registerItemRender(ACBlocks.tiered_energy_container, 1, "tieredenergycontainer_1");
 		registerItemRender(ACBlocks.tiered_energy_container, 2, "tieredenergycontainer_2");
 		registerItemRender(ACBlocks.tiered_energy_container, 3, "tieredenergycontainer_3");
+		registerItemRender(ACBlocks.abyssal_sand, 0);
+		registerItemRender(ACBlocks.fused_abyssal_sand, 0);
+		registerItemRender(ACBlocks.abyssal_sand_glass, 0);
+		registerItemRender(ACBlocks.dreadlands_dirt, 0);
+		registerItemRender(ACBlocks.abyssal_cobblestone, 0);
+		registerItemRender(ACBlocks.dreadstone_cobblestone, 0);
+		registerItemRender(ACBlocks.abyssalnite_cobblestone, 0);
+		registerItemRender(ACBlocks.coralium_cobblestone, 0);
+		registerItemRender(ACBlocks.abyssal_cobblestone_stairs, 0);
+		registerItemRender(ACBlocks.abyssal_cobblestone_slab, 0);
+		registerItemRender(BlockHandler.abycobbleslab2, 0);
+		registerItemRender(ACBlocks.abyssal_cobblestone_wall, 0);
+		registerItemRender(ACBlocks.dreadstone_cobblestone_stairs, 0);
+		registerItemRender(ACBlocks.dreadstone_cobblestone_slab, 0);
+		registerItemRender(BlockHandler.dreadcobbleslab2, 0);
+		registerItemRender(ACBlocks.dreadstone_cobblestone_wall, 0);
+		registerItemRender(ACBlocks.abyssalnite_cobblestone_stairs, 0);
+		registerItemRender(ACBlocks.abyssalnite_cobblestone_slab, 0);
+		registerItemRender(BlockHandler.abydreadcobbleslab2, 0);
+		registerItemRender(ACBlocks.abyssalnite_cobblestone_wall, 0);
+		registerItemRender(ACBlocks.coralium_cobblestone_stairs, 0);
+		registerItemRender(ACBlocks.coralium_cobblestone_slab, 0);
+		registerItemRender(BlockHandler.cstonecobbleslab2, 0);
+		registerItemRender(ACBlocks.coralium_cobblestone_wall, 0);
 
 		RenderPlayer render1 = Minecraft.getMinecraft().getRenderManager().getSkinMap().get("default");
 		render1.addLayer(new LayerStarSpawnTentacles(render1));
@@ -738,7 +772,7 @@ public class ClientProxy extends CommonProxy {
 			spawnParticleLegacy(particleName, posX, posY, posZ, velX, velY, velZ);
 			return;
 		}
-		if(particleName.equals("PEStream")){
+		if(particleName.equals("PEStream"))
 			switch(world.rand.nextInt(3)){
 			case 0:
 				Minecraft.getMinecraft().effectRenderer.addEffect(new PEStreamParticleFX(world, posX, posY, posZ, velX, velY, velZ, 65, 63, 170));
@@ -753,7 +787,6 @@ public class ClientProxy extends CommonProxy {
 				Minecraft.getMinecraft().effectRenderer.addEffect(new PEStreamParticleFX(world, posX, posY, posZ, velX, velY, velZ, 3, 122, 120));
 				break;
 			}
-		}
 	}
 
 	public void spawnParticleLegacy(String particleName, double posX, double posY, double posZ, double velX, double velY, double velZ){

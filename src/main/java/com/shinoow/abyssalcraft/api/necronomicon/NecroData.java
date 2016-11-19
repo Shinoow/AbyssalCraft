@@ -5,7 +5,7 @@
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
  * http://www.gnu.org/licenses/lgpl-3.0.txt
- * 
+ *
  * Contributors:
  *     Shinoow -  implementation
  ******************************************************************************/
@@ -27,6 +27,7 @@ import net.minecraftforge.fml.common.FMLLog;
 import org.apache.logging.log4j.Level;
 
 import com.google.common.collect.Maps;
+import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
 
 /**
  * Base data structure for Necronomicon information pages
@@ -289,16 +290,18 @@ public class NecroData {
 			if(pageNum == 0) throw new ArithmeticException("The Page number can't be zero");
 			this.pageNum = pageNum;
 			if(icon != null)
-				if(!(icon instanceof ResourceLocation) && !(icon instanceof ItemStack) && !(icon instanceof CraftingStack))
-					throw new IllegalArgumentException("Icon isn't a ResourceLocation, ItemStack or CraftingStack!");
+				if(!(icon instanceof ResourceLocation) && !(icon instanceof ItemStack) && !(icon instanceof CraftingStack) && !(icon instanceof String))
+					throw new IllegalArgumentException("Icon isn't a ResourceLocation, ItemStack, CraftingStack or URL String!");
 			this.icon = verify(icon);
 			this.text = text;
 		}
 
 		private Object verify(Object obj){
+			if(obj instanceof String) AbyssalCraftAPI.getInternalNDHandler().verifyImageURL((String)obj);
 			if(!(obj instanceof ResourceLocation)) return obj;
 			if(FMLCommonHandler.instance().getSide().isServer()) return obj;
 			ResourceLocation res = (ResourceLocation)obj;
+			if(res.toString().equals("abyssalcraft:textures/gui/necronomicon/missing.png")) return obj;
 			try {
 				TextureUtil.readBufferedImage(Minecraft.getMinecraft().getResourceManager().getResource(res).getInputStream());
 			} catch (IOException e) {

@@ -1,3 +1,6 @@
 {
-	"parent": "abyssalcraft:block/darkcobbleslab2"
+	"parent": "block/cube_all",
+	"textures" : {
+		"all": "abyssalcraft:blocks/dsc"
+	}
 }

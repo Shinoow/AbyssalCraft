@@ -5,7 +5,7 @@
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
  * http://www.gnu.org/licenses/lgpl-3.0.txt
- * 
+ *
  * Contributors:
  *     Shinoow -  implementation
  ******************************************************************************/
@@ -50,6 +50,7 @@ public class ItemAbyssalniteArmor extends ItemArmor {
 
 	@Override
 	public void onArmorTick(World world, EntityPlayer player, ItemStack itemstack) {
+		if(world.isRemote) return;
 		if (itemstack.getItem() == ACItems.abyssalnite_helmet)
 			player.addPotionEffect(new PotionEffect(MobEffects.WATER_BREATHING, 20, 0));
 		if (itemstack.getItem() == ACItems.abyssalnite_boots)

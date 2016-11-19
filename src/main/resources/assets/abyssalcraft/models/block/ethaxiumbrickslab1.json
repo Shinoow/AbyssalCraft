@@ -1,8 +1,0 @@
-{
-	"parent": "block/half_slab",
-	"textures": {
-		"bottom": "abyssalcraft:blocks/eb",
-		"top": "abyssalcraft:blocks/eb",
-		"side": "abyssalcraft:blocks/eb"
-	}
-}

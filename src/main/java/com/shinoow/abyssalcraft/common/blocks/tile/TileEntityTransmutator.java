@@ -5,7 +5,7 @@
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
  * http://www.gnu.org/licenses/lgpl-3.0.txt
- * 
+ *
  * Contributors:
  *     Shinoow -  implementation
  ******************************************************************************/
@@ -29,7 +29,6 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI.FuelType;
-import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.api.item.ACItems;
 import com.shinoow.abyssalcraft.api.recipe.TransmutatorRecipes;
 import com.shinoow.abyssalcraft.common.blocks.BlockTransmutator;
@@ -360,8 +359,8 @@ public class TileEntityTransmutator extends TileEntity implements ISidedInventor
 			if (item == ACItems.coralium_pearl) return 2000;
 			if (item == ACItems.transmutation_gem) return 10000;
 			if (item == ACItems.chunk_of_coralium) return 16200;
-			if (item == ACItems.liquid_coralium_bucket) return 20000;
-			if (item == Item.getItemFromBlock(ACBlocks.liquid_coralium)) return 22000;
+			if (ItemStack.areItemStacksEqual(par1ItemStack, ACItems.liquid_coralium_bucket_stack)
+					&& ItemStack.areItemStackTagsEqual(par1ItemStack, ACItems.liquid_coralium_bucket_stack)) return 20000;
 			if (item == Items.BLAZE_POWDER) return 1200;
 			if (item == Items.BLAZE_ROD) return 2400;
 			if (item == ACItems.methane) return 10000;

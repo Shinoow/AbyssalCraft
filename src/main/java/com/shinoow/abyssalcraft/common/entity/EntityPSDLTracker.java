@@ -5,7 +5,7 @@
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
  * http://www.gnu.org/licenses/lgpl-3.0.txt
- * 
+ *
  * Contributors:
  *     Shinoow -  implementation
  ******************************************************************************/
@@ -22,8 +22,8 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.api.item.ACItems;
+import com.shinoow.abyssalcraft.lib.ACConfig;
 
 public class EntityPSDLTracker extends Entity
 {
@@ -176,9 +176,9 @@ public class EntityPSDLTracker extends Entity
 		if (isInWater())
 		{
 			for (int i = 0; i < 4; ++i)
-				if(AbyssalCraft.particleEntity)
+				if(ACConfig.particleEntity)
 					worldObj.spawnParticle(EnumParticleTypes.WATER_BUBBLE, posX - motionX * f3, posY - motionY * f3, posZ - motionZ * f3, motionX, motionY, motionZ, new int[0]);
-		} else if(AbyssalCraft.particleEntity)
+		} else if(ACConfig.particleEntity)
 			worldObj.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, posX - motionX * f3 + rand.nextDouble() * 0.6D - 0.3D, posY - motionY * f3 - 0.5D, posZ - motionZ * f3 + rand.nextDouble() * 0.6D - 0.3D, motionX, motionY, motionZ, new int[0]);
 
 		if (!worldObj.isRemote)

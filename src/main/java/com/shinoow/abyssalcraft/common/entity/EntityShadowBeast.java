@@ -5,7 +5,7 @@
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
  * http://www.gnu.org/licenses/lgpl-3.0.txt
- * 
+ *
  * Contributors:
  *     Shinoow -  implementation
  ******************************************************************************/
@@ -39,13 +39,14 @@ import net.minecraft.util.SoundEvent;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.World;
 
-import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
 import com.shinoow.abyssalcraft.api.entity.IAntiEntity;
 import com.shinoow.abyssalcraft.api.entity.ICoraliumEntity;
 import com.shinoow.abyssalcraft.api.entity.IDreadEntity;
 import com.shinoow.abyssalcraft.api.item.ACItems;
+import com.shinoow.abyssalcraft.lib.ACConfig;
 import com.shinoow.abyssalcraft.lib.ACLoot;
+import com.shinoow.abyssalcraft.lib.ACSounds;
 
 public class EntityShadowBeast extends EntityMob implements IAntiEntity, ICoraliumEntity, IDreadEntity {
 
@@ -69,7 +70,7 @@ public class EntityShadowBeast extends EntityMob implements IAntiEntity, ICorali
 
 		getEntityAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue(0.3D);
 
-		if(AbyssalCraft.hardcoreMode){
+		if(ACConfig.hardcoreMode){
 			getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(200.0D);
 			getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(20.0D);
 		} else {
@@ -85,7 +86,7 @@ public class EntityShadowBeast extends EntityMob implements IAntiEntity, ICorali
 		swingArm(EnumHand.OFF_HAND);
 		boolean flag = super.attackEntityAsMob(par1Entity);
 
-		if(AbyssalCraft.hardcoreMode && par1Entity instanceof EntityPlayer)
+		if(ACConfig.hardcoreMode && par1Entity instanceof EntityPlayer)
 			par1Entity.attackEntityFrom(DamageSource.causeMobDamage(this).setDamageBypassesArmor(), 3);
 
 		return flag;
@@ -100,13 +101,13 @@ public class EntityShadowBeast extends EntityMob implements IAntiEntity, ICorali
 	@Override
 	protected SoundEvent getHurtSound()
 	{
-		return AbyssalCraft.shadow_hurt;
+		return ACSounds.shadow_hurt;
 	}
 
 	@Override
 	protected SoundEvent getDeathSound()
 	{
-		return AbyssalCraft.shadow_death;
+		return ACSounds.shadow_death;
 	}
 
 	@Override
@@ -130,7 +131,7 @@ public class EntityShadowBeast extends EntityMob implements IAntiEntity, ICorali
 	public void onLivingUpdate()
 	{
 		for (int i = 0; i < 2; ++i)
-			if(AbyssalCraft.particleEntity)
+			if(ACConfig.particleEntity)
 				worldObj.spawnParticle(EnumParticleTypes.SMOKE_LARGE, posX + (rand.nextDouble() - 0.5D) * width, posY + rand.nextDouble() * height, posZ + (rand.nextDouble() - 0.5D) * width, 0.0D, 0.0D, 0.0D);
 
 		super.onLivingUpdate();

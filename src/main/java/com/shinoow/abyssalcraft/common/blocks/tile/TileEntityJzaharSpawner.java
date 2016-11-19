@@ -5,7 +5,7 @@
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
  * http://www.gnu.org/licenses/lgpl-3.0.txt
- * 
+ *
  * Contributors:
  *     Shinoow -  implementation
  ******************************************************************************/
@@ -20,8 +20,8 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.math.MathHelper;
 
-import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.common.entity.EntityJzahar;
+import com.shinoow.abyssalcraft.lib.ACAchievements;
 
 public class TileEntityJzaharSpawner extends TileEntity implements ITickable {
 
@@ -52,7 +52,7 @@ public class TileEntityJzaharSpawner extends TileEntity implements ITickable {
 			worldObj.setBlockToAir(pos);
 			List<EntityPlayer> players = worldObj.getEntitiesWithinAABB(EntityPlayer.class, mob.getEntityBoundingBox().expand(64, 64, 64));
 			for(EntityPlayer player : players)
-				player.addStat(AbyssalCraft.locateJzahar, 1);
+				player.addStat(ACAchievements.locate_jzahar, 1);
 		}
 	}
 }

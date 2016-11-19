@@ -1,3 +1,6 @@
 {
-	"parent": "abyssalcraft:block/dscwall"
+	"parent": "block/wall_inventory",
+	"textures": {
+		"wall": "abyssalcraft:blocks/dsc"
+	}
 }

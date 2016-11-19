@@ -1,4 +1,3 @@
-// For those who want the bleeding edge
 buildscript {
     repositories {
         jcenter()
@@ -46,13 +45,13 @@ version = props.ac_version
 group= "com.shinoow.abyssalcraft" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = "AbyssalCraft"
 
-sourceCompatibility = targetCompatibility = "1.7"
+sourceCompatibility = targetCompatibility = "1.8"
 compileJava {
-    sourceCompatibility = targetCompatibility = "1.7"
+    sourceCompatibility = targetCompatibility = "1.8"
 }
 
 minecraft {
-    version = "1.10.2-12.18.1.2073"
+    version = "1.10.2-12.18.2.2122"
     runDir = "run"
     
 	useDepAts = true

@@ -5,7 +5,7 @@
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
  * http://www.gnu.org/licenses/lgpl-3.0.txt
- * 
+ *
  * Contributors:
  *     Shinoow -  implementation
  ******************************************************************************/
@@ -46,12 +46,13 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.World;
 
-import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.api.entity.IAntiEntity;
 import com.shinoow.abyssalcraft.api.entity.ICoraliumEntity;
 import com.shinoow.abyssalcraft.api.entity.IDreadEntity;
 import com.shinoow.abyssalcraft.api.item.ACItems;
+import com.shinoow.abyssalcraft.lib.ACConfig;
 import com.shinoow.abyssalcraft.lib.ACLoot;
+import com.shinoow.abyssalcraft.lib.ACSounds;
 
 public class EntityGatekeeperMinion extends EntityMob implements ICoraliumEntity, IDreadEntity, IAntiEntity {
 
@@ -81,7 +82,7 @@ public class EntityGatekeeperMinion extends EntityMob implements ICoraliumEntity
 		getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(64.0D);
 		getEntityAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue(0.2D);
 
-		if(AbyssalCraft.hardcoreMode){
+		if(ACConfig.hardcoreMode){
 			getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(500.0D);
 			getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(36.0D);
 		} else {
@@ -102,7 +103,7 @@ public class EntityGatekeeperMinion extends EntityMob implements ICoraliumEntity
 		swingArm(EnumHand.OFF_HAND);
 		boolean flag = super.attackEntityAsMob(par1Entity);
 
-		if(AbyssalCraft.hardcoreMode && par1Entity instanceof EntityPlayer)
+		if(ACConfig.hardcoreMode && par1Entity instanceof EntityPlayer)
 			par1Entity.attackEntityFrom(DamageSource.causeMobDamage(this).setDamageBypassesArmor(), 3);
 
 		return flag;
@@ -117,7 +118,7 @@ public class EntityGatekeeperMinion extends EntityMob implements ICoraliumEntity
 	@Override
 	protected SoundEvent getDeathSound()
 	{
-		return AbyssalCraft.shadow_death;
+		return ACSounds.shadow_death;
 	}
 
 	@Override
@@ -140,7 +141,7 @@ public class EntityGatekeeperMinion extends EntityMob implements ICoraliumEntity
 					while(iter.hasNext())
 						iter.next().enrage(false, enemy);
 				}
-			playSound(AbyssalCraft.remnant_scream, 3F, 1F);
+			playSound(ACSounds.remnant_scream, 3F, 1F);
 		}
 		return super.attackEntityFrom(par1DamageSource, par2);
 	}

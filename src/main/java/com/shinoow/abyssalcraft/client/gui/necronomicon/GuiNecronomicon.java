@@ -5,17 +5,21 @@
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
  * http://www.gnu.org/licenses/lgpl-3.0.txt
- * 
+ *
  * Contributors:
  *     Shinoow -  implementation
  ******************************************************************************/
 package com.shinoow.abyssalcraft.client.gui.necronomicon;
 
 import java.io.IOException;
+import java.util.List;
+import java.util.Map;
 
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
+import net.minecraft.client.renderer.texture.DynamicTexture;
 import net.minecraft.client.resources.I18n;
+import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -23,6 +27,8 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.GL11;
 
+import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
 import com.shinoow.abyssalcraft.api.item.ACItems;
 import com.shinoow.abyssalcraft.client.gui.necronomicon.buttons.ButtonCategory;
@@ -51,6 +57,8 @@ public class GuiNecronomicon extends GuiScreen {
 	/** Used to check if we're at a text entry (true), or a index (false) */
 	protected boolean isInfo = false;
 	private boolean isNecroInfo = false;
+	public static final Map<String, DynamicTexture> successcache = Maps.newHashMap();
+	public static final List<String> failcache = Lists.newArrayList();
 
 	public GuiNecronomicon(){
 		this(0);
@@ -112,6 +120,25 @@ public class GuiNecronomicon extends GuiScreen {
 		if(!AbyssalCraftAPI.getNecronomiconData().isEmpty())
 			buttonList.add(buttonCat6 = new ButtonCategory(8, i + 14, b0 + 109, this, NecronomiconText.LABEL_OTHER, ACItems.necronomicon));
 		updateButtons();
+	}
+
+	protected Item getItem(int par1){
+		if(par1 > getBookType())
+			return ACItems.oblivion_catalyst;
+		switch(par1){
+		case 0:
+			return ACItems.necronomicon;
+		case 1:
+			return ACItems.abyssal_wasteland_necronomicon;
+		case 2:
+			return ACItems.dreadlands_necronomicon;
+		case 3:
+			return ACItems.omothol_necronomicon;
+		case 4:
+			return ACItems.abyssalnomicon;
+		default:
+			return ACItems.necronomicon;
+		}
 	}
 
 	/**

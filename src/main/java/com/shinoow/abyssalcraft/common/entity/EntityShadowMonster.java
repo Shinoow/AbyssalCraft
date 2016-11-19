@@ -5,7 +5,7 @@
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
  * http://www.gnu.org/licenses/lgpl-3.0.txt
- * 
+ *
  * Contributors:
  *     Shinoow -  implementation
  ******************************************************************************/
@@ -38,13 +38,14 @@ import net.minecraft.util.SoundEvent;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.World;
 
-import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
 import com.shinoow.abyssalcraft.api.entity.IAntiEntity;
 import com.shinoow.abyssalcraft.api.entity.ICoraliumEntity;
 import com.shinoow.abyssalcraft.api.entity.IDreadEntity;
 import com.shinoow.abyssalcraft.api.item.ACItems;
+import com.shinoow.abyssalcraft.lib.ACConfig;
 import com.shinoow.abyssalcraft.lib.ACLoot;
+import com.shinoow.abyssalcraft.lib.ACSounds;
 
 public class EntityShadowMonster extends EntityMob implements IAntiEntity, ICoraliumEntity, IDreadEntity {
 
@@ -67,7 +68,7 @@ public class EntityShadowMonster extends EntityMob implements IAntiEntity, ICora
 
 		getEntityAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue(0.2D);
 
-		if(AbyssalCraft.hardcoreMode){
+		if(ACConfig.hardcoreMode){
 			getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(100.0D);
 			getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(16.0D);
 		} else {
@@ -79,7 +80,7 @@ public class EntityShadowMonster extends EntityMob implements IAntiEntity, ICora
 	@Override
 	public boolean attackEntityAsMob(Entity par1Entity) {
 
-		if(AbyssalCraft.hardcoreMode && par1Entity instanceof EntityPlayer)
+		if(ACConfig.hardcoreMode && par1Entity instanceof EntityPlayer)
 			par1Entity.attackEntityFrom(DamageSource.causeMobDamage(this).setDamageBypassesArmor(), 1.5F);
 
 		return super.attackEntityAsMob(par1Entity);
@@ -88,13 +89,13 @@ public class EntityShadowMonster extends EntityMob implements IAntiEntity, ICora
 	@Override
 	protected SoundEvent getHurtSound()
 	{
-		return AbyssalCraft.shadow_hurt;
+		return ACSounds.shadow_hurt;
 	}
 
 	@Override
 	protected SoundEvent getDeathSound()
 	{
-		return AbyssalCraft.shadow_death;
+		return ACSounds.shadow_death;
 	}
 
 	@Override
@@ -118,7 +119,7 @@ public class EntityShadowMonster extends EntityMob implements IAntiEntity, ICora
 	public void onLivingUpdate()
 	{
 		for (int i = 0; i < 2; ++i)
-			if(AbyssalCraft.particleEntity)
+			if(ACConfig.particleEntity)
 				worldObj.spawnParticle(EnumParticleTypes.SMOKE_LARGE, posX + (rand.nextDouble() - 0.5D) * width, posY + rand.nextDouble() * height, posZ + (rand.nextDouble() - 0.5D) * width, 0.0D, 0.0D, 0.0D);
 
 		super.onLivingUpdate();

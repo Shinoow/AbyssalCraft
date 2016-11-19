@@ -5,7 +5,7 @@
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
  * http://www.gnu.org/licenses/lgpl-3.0.txt
- * 
+ *
  * Contributors:
  *     Shinoow -  implementation
  ******************************************************************************/
@@ -28,8 +28,10 @@ import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.world.World;
 
-import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
+import com.shinoow.abyssalcraft.init.ItemHandler;
+import com.shinoow.abyssalcraft.lib.ACConfig;
+import com.shinoow.abyssalcraft.lib.ACSounds;
 
 public class EntityShadowTitan extends EntityMob {
 
@@ -54,7 +56,7 @@ public class EntityShadowTitan extends EntityMob {
 		getEntityAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue(0.2D);
 		getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.699D);
 
-		if(AbyssalCraft.hardcoreMode){
+		if(ACConfig.hardcoreMode){
 			getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(400.0D);
 			getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(30.0D);
 		} else {
@@ -72,19 +74,19 @@ public class EntityShadowTitan extends EntityMob {
 	@Override
 	protected SoundEvent getHurtSound()
 	{
-		return AbyssalCraft.shadow_hurt;
+		return ACSounds.shadow_hurt;
 	}
 
 	@Override
 	protected SoundEvent getDeathSound()
 	{
-		return AbyssalCraft.shadow_death;
+		return ACSounds.shadow_death;
 	}
 
 	@Override
 	protected Item getDropItem()
 	{
-		return AbyssalCraft.shadowPlate;
+		return ItemHandler.shadowPlate;
 	}
 
 	@Override
@@ -97,7 +99,7 @@ public class EntityShadowTitan extends EntityMob {
 	public void onLivingUpdate()
 	{
 		for (int i = 0; i < 2; ++i)
-			if(AbyssalCraft.particleEntity)
+			if(ACConfig.particleEntity)
 				worldObj.spawnParticle(EnumParticleTypes.SMOKE_LARGE, posX + (rand.nextDouble() - 0.5D) * width, posY + rand.nextDouble() * height, posZ + (rand.nextDouble() - 0.5D) * width, 0.0D, 0.0D, 0.0D);
 
 		super.onLivingUpdate();

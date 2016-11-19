@@ -5,7 +5,7 @@
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
  * http://www.gnu.org/licenses/lgpl-3.0.txt
- * 
+ *
  * Contributors:
  *     Shinoow -  implementation
  ******************************************************************************/
@@ -28,19 +28,19 @@ import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import net.minecraftforge.fml.relauncher.Side;
 
 /**
- * 
+ *
  * This class will house the SimpleNetworkWrapper instance, which I will name 'dispatcher',
  * as well as give us a logical place from which to register our packets. These two things
  * could be done anywhere, however, even in your Main class, but I will be adding other
  * functionality (see below) that gives this class a bit more utility.
- * 
+ *
  * While unnecessary, I'm going to turn this class into a 'wrapper' for SimpleNetworkWrapper
  * so that instead of writing "PacketDispatcher.dispatcher.{method}" I can simply write
  * "PacketDispatcher.{method}" All this does is make it quicker to type and slightly shorter;
  * if you do not care about that, then make the 'dispatcher' field public instead of private,
  * or, if you do not want to add a new class just for one field and one static method that
  * you could put anywhere, feel free to put them wherever.
- * 
+ *
  * For further convenience, I have also added two extra sendToAllAround methods: one which
  * takes an EntityPlayer and one which takes coordinates.
  *

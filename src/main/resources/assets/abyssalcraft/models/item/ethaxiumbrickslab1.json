@@ -1,3 +1,8 @@
 {
-	"parent": "abyssalcraft:block/ethaxiumbrickslab1"
+	"parent": "block/half_slab",
+	"textures": {
+		"bottom": "abyssalcraft:blocks/eb",
+		"top": "abyssalcraft:blocks/eb",
+		"side": "abyssalcraft:blocks/eb"
+	}
 }

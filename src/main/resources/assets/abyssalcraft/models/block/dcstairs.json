@@ -1,8 +1,0 @@
-{
-	"parent": "block/stairs",
-	"textures": {
-		"bottom": "abyssalcraft:blocks/dsc",
-        "top": "abyssalcraft:blocks/dsc",
-        "side": "abyssalcraft:blocks/dsc"
-	}
-}
