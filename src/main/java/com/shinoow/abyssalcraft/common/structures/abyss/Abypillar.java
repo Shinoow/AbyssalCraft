@@ -5,7 +5,7 @@
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
  * http://www.gnu.org/licenses/lgpl-3.0.txt
- * 
+ *
  * Contributors:
  *     Shinoow -  implementation
  ******************************************************************************/
@@ -25,7 +25,9 @@ public class Abypillar extends WorldGenerator
 {
 	protected IBlockState[] GetValidSpawnBlocks() {
 		return new IBlockState[] {
-				ACBlocks.abyssal_stone.getDefaultState()
+				ACBlocks.abyssal_stone.getDefaultState(),
+				ACBlocks.fused_abyssal_sand.getDefaultState(),
+				ACBlocks.abyssal_sand.getDefaultState()
 		};
 	}
 

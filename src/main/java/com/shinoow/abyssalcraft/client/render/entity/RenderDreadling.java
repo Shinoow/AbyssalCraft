@@ -5,7 +5,7 @@
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
  * http://www.gnu.org/licenses/lgpl-3.0.txt
- * 
+ *
  * Contributors:
  *     Shinoow -  implementation
  ******************************************************************************/
@@ -30,7 +30,7 @@ public class RenderDreadling extends RenderLiving {
 	{
 		this(manager, new ModelDreadling());
 	}
-	
+
 	public RenderDreadling(RenderManager manager, ModelDreadling model){
 		super(manager, model, 0.5F);
 		addLayer(new LayerCustomHead(model.head));

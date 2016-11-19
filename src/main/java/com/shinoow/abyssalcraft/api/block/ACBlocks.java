@@ -5,7 +5,7 @@
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
  * http://www.gnu.org/licenses/lgpl-3.0.txt
- * 
+ *
  * Contributors:
  *     Shinoow -  implementation
  ******************************************************************************/
@@ -15,7 +15,7 @@ import net.minecraft.block.Block;
 
 /**
  * Contains all blocks added in AbyssalCraft
- * 
+ *
  * @author shinoow
  *
  */
@@ -181,4 +181,24 @@ public class ACBlocks {
 	public static Block omothol_energy_relay;
 	/** Metadata block, 0 = Overworld, 1 = Abyssal Wasteland, 2 = Dreadlands, 3 = Omothol */
 	public static Block tiered_energy_container;
+	public static Block abyssal_sand;
+	public static Block fused_abyssal_sand;
+	public static Block abyssal_sand_glass;
+	public static Block dreadlands_dirt;
+	public static Block abyssal_cobblestone;
+	public static Block dreadstone_cobblestone;
+	public static Block abyssalnite_cobblestone;
+	public static Block coralium_cobblestone;
+	public static Block abyssal_cobblestone_slab;
+	public static Block abyssal_cobblestone_stairs;
+	public static Block abyssal_cobblestone_wall;
+	public static Block dreadstone_cobblestone_slab;
+	public static Block dreadstone_cobblestone_stairs;
+	public static Block dreadstone_cobblestone_wall;
+	public static Block abyssalnite_cobblestone_slab;
+	public static Block abyssalnite_cobblestone_stairs;
+	public static Block abyssalnite_cobblestone_wall;
+	public static Block coralium_cobblestone_slab;
+	public static Block coralium_cobblestone_stairs;
+	public static Block coralium_cobblestone_wall;
 }

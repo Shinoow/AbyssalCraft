@@ -5,7 +5,7 @@
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
  * http://www.gnu.org/licenses/lgpl-3.0.txt
- * 
+ *
  * Contributors:
  *     Shinoow -  implementation
  ******************************************************************************/
@@ -20,7 +20,6 @@ import net.minecraft.world.gen.feature.WorldGenMinable;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.api.biome.IDarklandsBiome;
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.common.entity.EntityAbyssalZombie;
@@ -28,6 +27,7 @@ import com.shinoow.abyssalcraft.common.entity.EntityDepthsGhoul;
 import com.shinoow.abyssalcraft.common.entity.EntityShadowBeast;
 import com.shinoow.abyssalcraft.common.entity.EntityShadowCreature;
 import com.shinoow.abyssalcraft.common.entity.EntityShadowMonster;
+import com.shinoow.abyssalcraft.lib.ACConfig;
 
 public class BiomeGenDarklandsMountains extends BiomeGenBase implements IDarklandsBiome {
 
@@ -50,7 +50,7 @@ public class BiomeGenDarklandsMountains extends BiomeGenBase implements IDarklan
 		super.decorate(par1World, par2Random, pos);
 		int var5 = 3 + par2Random.nextInt(6);
 
-		if(AbyssalCraft.generateAbyssalniteOre)
+		if(ACConfig.generateAbyssalniteOre)
 			for (int rarity = 0; rarity < var5; ++rarity)
 			{
 				int veinSize = 1 + par2Random.nextInt(3);

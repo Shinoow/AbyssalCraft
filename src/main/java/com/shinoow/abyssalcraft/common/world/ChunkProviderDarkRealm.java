@@ -5,7 +5,7 @@
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
  * http://www.gnu.org/licenses/lgpl-3.0.txt
- * 
+ *
  * Contributors:
  *     Shinoow -  implementation
  ******************************************************************************/
@@ -28,9 +28,9 @@ import net.minecraft.world.gen.NoiseGeneratorOctaves;
 import net.minecraft.world.gen.NoiseGeneratorPerlin;
 import net.minecraftforge.event.ForgeEventFactory;
 
-import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.common.structures.StructureShoggothPit;
+import com.shinoow.abyssalcraft.lib.ACConfig;
 
 public class ChunkProviderDarkRealm implements IChunkGenerator
 {
@@ -295,7 +295,7 @@ public class ChunkProviderDarkRealm implements IChunkGenerator
 
 		ForgeEventFactory.onChunkPopulate(true, this, worldObj, rand, x, z, flag);
 
-		if(AbyssalCraft.generateShoggothLairs)
+		if(ACConfig.generateShoggothLairs)
 			for(int i = 0; i < 1; i++) {
 				int Xcoord2 = k + rand.nextInt(16);
 				int Zcoord2 = l + rand.nextInt(16);

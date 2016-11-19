@@ -5,7 +5,7 @@
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
  * http://www.gnu.org/licenses/lgpl-3.0.txt
- * 
+ *
  * Contributors:
  *     Shinoow -  implementation
  ******************************************************************************/
@@ -36,6 +36,7 @@ import com.shinoow.abyssalcraft.common.structures.omothol.MapGenOmothol;
 import com.shinoow.abyssalcraft.common.structures.omothol.StructureOmotholPieces;
 import com.shinoow.abyssalcraft.common.world.*;
 import com.shinoow.abyssalcraft.common.world.biome.*;
+import com.shinoow.abyssalcraft.lib.ACConfig;
 import com.shinoow.abyssalcraft.lib.ACLib;
 
 public class WorldHandler implements ILifeCycleHandler {
@@ -105,15 +106,21 @@ public class WorldHandler implements ILifeCycleHandler {
 		BiomeDictionary.registerBiomeType(ACBiomes.omothol, Type.DEAD);
 		BiomeDictionary.registerBiomeType(ACBiomes.dark_realm, Type.DEAD);
 
-		THE_ABYSSAL_WASTELAND = DimensionType.register("The Abyssal Wasteland", "_aw", ACLib.abyssal_wasteland_id, WorldProviderAbyss.class, keepLoaded1);
-		THE_DREADLANDS = DimensionType.register("The Dreadlands", "_dl", ACLib.dreadlands_id, WorldProviderDreadlands.class, keepLoaded2);
-		OMOTHOL = DimensionType.register("Omothol", "_omt", ACLib.omothol_id, WorldProviderOmothol.class, keepLoaded3);
-		THE_DARK_REALM = DimensionType.register("The Dark Realm", "_dl", ACLib.dark_realm_id, WorldProviderDarkRealm.class, keepLoaded4);
+		ACLib.THE_ABYSSAL_WASTELAND = DimensionType.register("The Abyssal Wasteland", "_aw", ACLib.abyssal_wasteland_id, WorldProviderAbyss.class, ACConfig.keepLoaded1);
+		ACLib.THE_DREADLANDS = DimensionType.register("The Dreadlands", "_dl", ACLib.dreadlands_id, WorldProviderDreadlands.class, ACConfig.keepLoaded2);
+		ACLib.OMOTHOL = DimensionType.register("Omothol", "_omt", ACLib.omothol_id, WorldProviderOmothol.class, ACConfig.keepLoaded3);
+		ACLib.THE_DARK_REALM = DimensionType.register("The Dark Realm", "_dl", ACLib.dark_realm_id, WorldProviderDarkRealm.class, ACConfig.keepLoaded4);
 
-		DimensionManager.registerDimension(ACLib.abyssal_wasteland_id, THE_ABYSSAL_WASTELAND);
-		DimensionManager.registerDimension(ACLib.dreadlands_id, THE_DREADLANDS);
-		DimensionManager.registerDimension(ACLib.omothol_id, OMOTHOL);
-		DimensionManager.registerDimension(ACLib.dark_realm_id, THE_DARK_REALM);
+		//TODO remove all of this around AC 1.9.4 or 1.9.5
+		THE_ABYSSAL_WASTELAND = ACLib.THE_ABYSSAL_WASTELAND;
+		THE_DREADLANDS = ACLib.THE_DREADLANDS;
+		OMOTHOL = ACLib.OMOTHOL;
+		THE_DARK_REALM = ACLib.THE_DARK_REALM;
+
+		DimensionManager.registerDimension(ACLib.abyssal_wasteland_id, ACLib.THE_ABYSSAL_WASTELAND);
+		DimensionManager.registerDimension(ACLib.dreadlands_id, ACLib.THE_DREADLANDS);
+		DimensionManager.registerDimension(ACLib.omothol_id, ACLib.OMOTHOL);
+		DimensionManager.registerDimension(ACLib.dark_realm_id, ACLib.THE_DARK_REALM);
 	}
 
 	@Override
@@ -128,7 +135,17 @@ public class WorldHandler implements ILifeCycleHandler {
 	}
 
 	@Override
-	public void postInit(FMLPostInitializationEvent event) {}
+	public void postInit(FMLPostInitializationEvent event) {
+		if(ACConfig.purgeMobSpawns){
+			((BiomeGenAbywasteland) ACBiomes.abyssal_wastelands).setMobSpawns();
+			((BiomeGenDreadlands) ACBiomes.dreadlands).setMobSpawns();
+			((BiomeGenAbyDreadlands) ACBiomes.purified_dreadlands).setMobSpawns();
+			((BiomeGenForestDreadlands) ACBiomes.dreadlands_forest).setMobSpawns();
+			((BiomeGenMountainDreadlands) ACBiomes.dreadlands_mountains).setMobSpawns();
+			((BiomeGenOmothol) ACBiomes.omothol).setMobSpawns();
+			((BiomeGenDarkRealm) ACBiomes.dark_realm).setMobSpawns();
+		}
+	}
 
 	private static void registerBiomeWithTypes(BiomeGenBase biome, String name, int weight, BiomeType btype, Type...types){
 		GameRegistry.register(biome.setRegistryName(new ResourceLocation(modid, name)));

@@ -1,3 +1,8 @@
 {
-	"parent": "abyssalcraft:block/darkstoneslab1"
+	"parent": "block/half_slab",
+	"textures": {
+		"bottom": "abyssalcraft:blocks/dsstop",
+		"top": "abyssalcraft:blocks/dsstop",
+		"side": "abyssalcraft:blocks/dsssides"
+	}
 }

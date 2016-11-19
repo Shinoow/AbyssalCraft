@@ -5,7 +5,7 @@
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
  * http://www.gnu.org/licenses/lgpl-3.0.txt
- * 
+ *
  * Contributors:
  *     Shinoow -  implementation
  ******************************************************************************/
@@ -19,10 +19,11 @@ import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.translation.I18n;
 import net.minecraft.world.World;
-import com.shinoow.abyssalcraft.AbyssalCraft;
+
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.common.util.ACLogger;
 import com.shinoow.abyssalcraft.common.util.ExplosionUtil;
+import com.shinoow.abyssalcraft.lib.ACConfig;
 import com.shinoow.abyssalcraft.lib.util.SpecialTextUtil;
 
 public class EntityODBPrimed extends Entity {
@@ -96,7 +97,7 @@ public class EntityODBPrimed extends Entity {
 
 		} else{
 			handleWaterMovement();
-			if(AbyssalCraft.particleEntity)
+			if(ACConfig.particleEntity)
 				worldObj.spawnParticle(EnumParticleTypes.PORTAL, posX, posY + 0.5D, posZ, 1.0D, 0.0D, 0.0D);
 		}
 	}

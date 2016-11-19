@@ -5,7 +5,7 @@
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
  * http://www.gnu.org/licenses/lgpl-3.0.txt
- * 
+ *
  * Contributors:
  *     Shinoow -  implementation
  ******************************************************************************/
@@ -45,13 +45,15 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.World;
 
-import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
 import com.shinoow.abyssalcraft.api.entity.IAntiEntity;
 import com.shinoow.abyssalcraft.api.item.ACItems;
 import com.shinoow.abyssalcraft.common.entity.EntityDepthsGhoul;
 import com.shinoow.abyssalcraft.common.entity.EntityOmotholGhoul;
+import com.shinoow.abyssalcraft.init.InitHandler;
+import com.shinoow.abyssalcraft.lib.ACConfig;
 import com.shinoow.abyssalcraft.lib.ACLoot;
+import com.shinoow.abyssalcraft.lib.ACSounds;
 
 public class EntityAntiGhoul extends EntityMob implements IAntiEntity {
 
@@ -84,7 +86,7 @@ public class EntityAntiGhoul extends EntityMob implements IAntiEntity {
 		getEntityAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue(0.3D);
 		getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.23000000417232513D);
 
-		if(AbyssalCraft.hardcoreMode){
+		if(ACConfig.hardcoreMode){
 			getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(120.0D);
 			getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(10.0D);
 		} else {
@@ -100,7 +102,7 @@ public class EntityAntiGhoul extends EntityMob implements IAntiEntity {
 		swingArm(EnumHand.OFF_HAND);
 		boolean flag = super.attackEntityAsMob(par1Entity);
 
-		if(AbyssalCraft.hardcoreMode && par1Entity instanceof EntityPlayer)
+		if(ACConfig.hardcoreMode && par1Entity instanceof EntityPlayer)
 			par1Entity.attackEntityFrom(DamageSource.causeMobDamage(this).setDamageBypassesArmor(), 1.5F);
 
 		return flag;
@@ -109,13 +111,13 @@ public class EntityAntiGhoul extends EntityMob implements IAntiEntity {
 	@Override
 	protected SoundEvent getAmbientSound()
 	{
-		return AbyssalCraft.ghoul_normal_ambient;
+		return ACSounds.ghoul_normal_ambient;
 	}
 
 	@Override
 	protected SoundEvent getHurtSound()
 	{
-		return AbyssalCraft.ghoul_hurt;
+		return ACSounds.ghoul_hurt;
 	}
 
 	/**
@@ -124,7 +126,7 @@ public class EntityAntiGhoul extends EntityMob implements IAntiEntity {
 	@Override
 	protected SoundEvent getDeathSound()
 	{
-		return AbyssalCraft.ghoul_death;
+		return ACSounds.ghoul_death;
 	}
 
 	@Override
@@ -164,7 +166,7 @@ public class EntityAntiGhoul extends EntityMob implements IAntiEntity {
 	@Override
 	protected void updateEquipmentIfNeeded(EntityItem itemEntity)
 	{
-		if(!AbyssalCraft.isItemBlacklisted(this, itemEntity.getEntityItem()))
+		if(!InitHandler.INSTANCE.isItemBlacklisted(this, itemEntity.getEntityItem()))
 			super.updateEquipmentIfNeeded(itemEntity);
 	}
 
@@ -210,7 +212,7 @@ public class EntityAntiGhoul extends EntityMob implements IAntiEntity {
 		attribute.removeModifier(attackDamageBoost);
 
 		if (calendar.get(2) + 1 == 10 && calendar.get(5) == 31)
-			attribute.applyModifier(attackDamageBoost);		
+			attribute.applyModifier(attackDamageBoost);
 
 		return par1EntityLivingData;
 	}

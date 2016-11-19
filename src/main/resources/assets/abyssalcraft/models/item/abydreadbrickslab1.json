@@ -1,3 +1,8 @@
 {
-	"parent": "abyssalcraft:block/abydreadbrickslab1"
+	"parent": "block/half_slab",
+	"textures": {
+		"bottom": "abyssalcraft:blocks/abydrsb",
+		"top": "abyssalcraft:blocks/abydrsb",
+		"side": "abyssalcraft:blocks/abydrsb"
+	}
 }

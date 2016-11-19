@@ -5,7 +5,7 @@
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
  * http://www.gnu.org/licenses/lgpl-3.0.txt
- * 
+ *
  * Contributors:
  *     Shinoow -  implementation
  ******************************************************************************/
@@ -51,6 +51,7 @@ public class ItemCoraliumPArmor extends ItemArmor {
 	@SuppressWarnings("rawtypes")
 	@Override
 	public void onArmorTick(World world, EntityPlayer player, ItemStack itemstack) {
+		if(world.isRemote) return;
 		if (itemstack.getItem() == ACItems.plated_coralium_helmet) {
 			player.addPotionEffect(new PotionEffect(MobEffects.nightVision, 260, 0));
 			if(player.getActivePotionEffect(AbyssalCraftAPI.coralium_plague) !=null)
@@ -60,6 +61,6 @@ public class ItemCoraliumPArmor extends ItemArmor {
 			if(player.isInWater()){
 				player.addPotionEffect(new PotionEffect(MobEffects.moveSpeed, 20, 2));
 				player.addPotionEffect(new PotionEffect(MobEffects.waterBreathing, 20, 1));
-			}
+			} else player.addPotionEffect(new PotionEffect(MobEffects.moveSpeed, 20, 1));
 	}
 }

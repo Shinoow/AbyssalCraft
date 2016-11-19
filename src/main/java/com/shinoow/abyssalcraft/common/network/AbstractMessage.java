@@ -5,7 +5,7 @@
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
  * http://www.gnu.org/licenses/lgpl-3.0.txt
- * 
+ *
  * Contributors:
  *     Shinoow -  implementation
  ******************************************************************************/
@@ -29,25 +29,25 @@ import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 import net.minecraftforge.fml.relauncher.Side;
 
 /**
- * 
+ *
  * Creating an abstract message class similar to {@link Packet} allows us to take
  * advantage of Minecraft's PacketBuffer class, which has many useful methods.
- * 
+ *
  * Should the IMessageHandler be implemented as a GenericMessageHandler class,
  * every child message class will still have to have an empty implementation of
  * the handler, just so it can be registered:
- * 
+ *
  * public static class Handler extends GenericMessageHandler<SomeMessage> {}
- * 
+ *
  * This is kind of ridiculous, so instead the message will also implement the handler,
  * despite the fact that a handler instance shouldn't have any of the class members or
  * methods that a message instance does (since a handler is not a message).
- * 
+ *
  * To combat that incongruity, the #onMessage method will be made final.
- * 
+ *
  * As a bonus, registration of this class can be made less verbose than normal, since the
  * same class is used for both the IMessage and the IMessageHandler.
- * 
+ *
  */
 public abstract class AbstractMessage<T extends AbstractMessage<T>> implements IMessage, IMessageHandler <T, IMessage>
 {
@@ -108,9 +108,9 @@ public abstract class AbstractMessage<T extends AbstractMessage<T>> implements I
 	 * Make the implementation final so child classes don't need to bother
 	 * with it, since the message class shouldn't have anything to do with
 	 * the handler. This is simply to avoid having to have:
-	 * 
+	 *
 	 * public static class Handler extends GenericMessageHandler<OpenGuiMessage> {}
-	 * 
+	 *
 	 * in every single message class for the sole purpose of registration.
 	 */
 	@Override
@@ -129,12 +129,7 @@ public abstract class AbstractMessage<T extends AbstractMessage<T>> implements I
 	private static final <T extends AbstractMessage<T>> void checkThreadAndEnqueue(final AbstractMessage<T> msg, final MessageContext ctx) {
 		IThreadListener thread = AbyssalCraft.proxy.getThreadFromContext(ctx);
 		if (!thread.isCallingFromMinecraftThread())
-			thread.addScheduledTask(new Runnable() {
-				@Override
-				public void run() {
-					msg.process(AbyssalCraft.proxy.getPlayerEntity(ctx), ctx.side);
-				}
-			});
+			thread.addScheduledTask(() -> msg.process(AbyssalCraft.proxy.getPlayerEntity(ctx), ctx.side));
 	}
 
 	/**

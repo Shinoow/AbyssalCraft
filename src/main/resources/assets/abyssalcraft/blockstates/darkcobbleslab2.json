@@ -1,6 +1,12 @@
 {
+	"forge_marker": 1,
+	"defaults": {
+		"textures" : {
+			"all": "abyssalcraft:blocks/dsc"
+		}
+	},
 	"variants": {
-		"variant=false": { "model": "abyssalcraft:darkcobbleslab2" },
-		"variant=true": { "model": "abyssalcraft:darkcobbleslab2" }
+		"variant=false": { "model": "cube_all" },
+		"variant=true": { "model": "cube_all" }
 	}
 }

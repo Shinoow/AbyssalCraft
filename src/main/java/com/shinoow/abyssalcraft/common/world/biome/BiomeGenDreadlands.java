@@ -5,7 +5,7 @@
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
  * http://www.gnu.org/licenses/lgpl-3.0.txt
- * 
+ *
  * Contributors:
  *     Shinoow -  implementation
  ******************************************************************************/
@@ -16,9 +16,9 @@ import java.util.Random;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.common.entity.EntityDreadgolem;
 import com.shinoow.abyssalcraft.common.world.gen.WorldGenDreadlandsStalagmite;
+import com.shinoow.abyssalcraft.lib.ACConfig;
 
 public class BiomeGenDreadlands extends BiomeGenDreadlandsBase
 {
@@ -26,6 +26,11 @@ public class BiomeGenDreadlands extends BiomeGenDreadlandsBase
 	@SuppressWarnings("unchecked")
 	public BiomeGenDreadlands(BiomeProperties par1) {
 		super(par1);
+	}
+
+	@Override
+	public final void setMobSpawns(){
+		super.setMobSpawns();
 		spawnableMonsterList.add(new SpawnListEntry(EntityDreadgolem.class, 100, 1, 5));
 	}
 
@@ -34,7 +39,7 @@ public class BiomeGenDreadlands extends BiomeGenDreadlandsBase
 	{
 		super.decorate(world, rand, pos);
 
-		if(AbyssalCraft.generateDreadlandsStalagmite)
+		if(ACConfig.generateDreadlandsStalagmite)
 			for(int i = 0; i < 1; i++){
 				int xPos = rand.nextInt(16) + 8;
 				int zPos = rand.nextInt(16) + 8;

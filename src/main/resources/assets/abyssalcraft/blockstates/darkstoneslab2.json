@@ -1,10 +1,14 @@
 {
 	"forge_marker": 1,
 		"defaults": {
-			"textures" : { "all": "abyssalcraft:blocks/dsstop" }
+			"textures" : {
+				"all": "abyssalcraft:blocks/dsstop",
+				"end": "abyssalcraft:blocks/dsstop",
+				"side": "abyssalcraft:blocks/dsssides"
+			}
 	},
 	"variants": {
-		"variant=false": { "model": "abyssalcraft:darkstoneslab2" },
+		"variant=false": { "model": "cube_column" },
 		"variant=true": { "model": "cube_all" }
 	}
 }

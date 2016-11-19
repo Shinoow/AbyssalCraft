@@ -1,6 +1,6 @@
 {
 	"parent": "abyssalcraft:block/ritualaltar",
 	"textures": {
-		"0": "abyssalcraft:blocks/drsb"
+		"0": "abyssalcraft:blocks/dreadstonecobblestone"
 	}
 }

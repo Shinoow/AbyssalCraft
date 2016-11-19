@@ -5,7 +5,7 @@
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
  * http://www.gnu.org/licenses/lgpl-3.0.txt
- * 
+ *
  * Contributors:
  *     Shinoow -  implementation
  ******************************************************************************/
@@ -26,10 +26,10 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.common.entity.EntityLesserShoggoth;
+import com.shinoow.abyssalcraft.lib.ACConfig;
 
 public class BlockShoggothOoze extends BlockACBasic {
 
@@ -37,7 +37,7 @@ public class BlockShoggothOoze extends BlockACBasic {
 
 	public BlockShoggothOoze(){
 		super(Material.ground, 1.0F, 1.0F, SoundType.SAND);
-		setTickRandomly(AbyssalCraft.oozeExpire);
+		setTickRandomly(ACConfig.oozeExpire);
 	}
 
 	@Override
@@ -64,7 +64,7 @@ public class BlockShoggothOoze extends BlockACBasic {
 
 	@Override
 	public void updateTick(World par1World, BlockPos pos, IBlockState state, Random par5Random) {
-		if(AbyssalCraft.oozeExpire)
+		if(ACConfig.oozeExpire)
 			if (!par1World.isRemote && par5Random.nextInt(10) == 0 && par1World.getLightFromNeighbors(pos.up()) >= 13)
 				par1World.setBlockState(pos, Blocks.dirt.getDefaultState());
 	}
@@ -72,7 +72,7 @@ public class BlockShoggothOoze extends BlockACBasic {
 	@Override
 	public int tickRate(World worldIn)
 	{
-		return AbyssalCraft.oozeExpire ? 200 : super.tickRate(worldIn);
+		return ACConfig.oozeExpire ? 200 : super.tickRate(worldIn);
 	}
 
 	@Override
@@ -87,11 +87,11 @@ public class BlockShoggothOoze extends BlockACBasic {
 		IBlockState block = worldIn.getBlockState(pos);
 		if(!block.getMaterial().isLiquid() && block.getMaterial() != Material.air && !block.getBlock().hasTileEntity(worldIn.getBlockState(pos))
 				&& block.isOpaqueCube() && block.isFullCube() && block.getBoundingBox(worldIn, pos) != null)
-			if(block.getMaterial() == Material.leaves && AbyssalCraft.oozeLeaves || block.getMaterial() == Material.grass && AbyssalCraft.oozeGrass
-			|| block.getMaterial() == Material.ground && AbyssalCraft.oozeGround || block.getMaterial() == Material.sand && AbyssalCraft.oozeSand
-			|| block.getMaterial() == Material.rock && AbyssalCraft.oozeRock || block.getMaterial() == Material.cloth && AbyssalCraft.oozeCloth
-			|| block.getMaterial() == Material.wood && AbyssalCraft.oozeWood || block.getMaterial() == Material.gourd && AbyssalCraft.oozeGourd
-			|| block.getMaterial() == Material.iron && AbyssalCraft.oozeIron || block.getMaterial() == Material.clay && AbyssalCraft.oozeClay)
+			if(block.getMaterial() == Material.leaves && ACConfig.oozeLeaves || block.getMaterial() == Material.grass && ACConfig.oozeGrass
+			|| block.getMaterial() == Material.ground && ACConfig.oozeGround || block.getMaterial() == Material.sand && ACConfig.oozeSand
+			|| block.getMaterial() == Material.rock && ACConfig.oozeRock || block.getMaterial() == Material.cloth && ACConfig.oozeCloth
+			|| block.getMaterial() == Material.wood && ACConfig.oozeWood || block.getMaterial() == Material.gourd && ACConfig.oozeGourd
+			|| block.getMaterial() == Material.iron && ACConfig.oozeIron || block.getMaterial() == Material.clay && ACConfig.oozeClay)
 				return !blockBlacklist.contains(block.getBlock()) && !AbyssalCraftAPI.getShoggothBlockBlacklist().contains(block.getBlock());
 		return false;
 	}

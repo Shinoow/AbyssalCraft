@@ -5,7 +5,7 @@
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
  * http://www.gnu.org/licenses/lgpl-3.0.txt
- * 
+ *
  * Contributors:
  *     Shinoow -  implementation
  ******************************************************************************/
@@ -21,6 +21,7 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.init.Blocks;
+import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.math.AxisAlignedBB;
@@ -33,10 +34,10 @@ import net.minecraftforge.fluids.BlockFluidClassic;
 import net.minecraftforge.oredict.OreDictionary;
 
 import com.google.common.collect.Lists;
-import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.api.entity.EntityUtil;
+import com.shinoow.abyssalcraft.lib.ACConfig;
 
 public class BlockCLiquid extends BlockFluidClassic {
 
@@ -50,7 +51,7 @@ public class BlockCLiquid extends BlockFluidClassic {
 	List<IBlockState> metals = Lists.newArrayList();
 
 	public BlockCLiquid() {
-		super(AbyssalCraft.CFluid, Material.water);
+		super(AbyssalCraftAPI.liquid_coralium_fluid, Material.water);
 	}
 
 	@Override
@@ -87,22 +88,22 @@ public class BlockCLiquid extends BlockFluidClassic {
 
 		if(!world.isRemote){
 			if(!world.provider.isSurfaceWorld()){
-				if(world.getBlockState(pos).getBlock() == Blocks.water && AbyssalCraft.shouldSpread == false) return false;
+				if(world.getBlockState(pos).getBlock() == Blocks.water && ACConfig.shouldSpread == false) return false;
 				if(world.getBlockState(pos).getMaterial().isLiquid() && world.getBlockState(pos).getBlock() != this && world.getBlockState(pos).getBlock() != ACBlocks.liquid_antimatter)
 					world.setBlockState(pos, getDefaultState());
-				if(AbyssalCraft.breakLogic == true && world.getBlockState(new BlockPos(pos.getX(), pos.getY()+1, pos.getZ())).getMaterial().isLiquid()
+				if(ACConfig.breakLogic == true && world.getBlockState(new BlockPos(pos.getX(), pos.getY()+1, pos.getZ())).getMaterial().isLiquid()
 						&& world.getBlockState(new BlockPos(pos.getX(), pos.getY()+1, pos.getZ())).getBlock() != this && world.getBlockState(new BlockPos(pos.getX(), pos.getY()+1, pos.getZ())).getBlock() != ACBlocks.liquid_antimatter)
 					world.setBlockState(new BlockPos(pos.getX(), pos.getY()+1, pos.getZ()), getDefaultState());
 			} else {
 				if(BiomeDictionary.isBiomeOfType(world.getBiomeGenForCoords(pos), Type.OCEAN) && world.getBlockState(pos).getBlock() == this)
-					if(AbyssalCraft.destroyOcean)
+					if(ACConfig.destroyOcean)
 						world.setBlockState(pos, getDefaultState());
 					else world.setBlockState(pos, Blocks.cobblestone.getDefaultState());
 
-				if(AbyssalCraft.shouldSpread){
+				if(ACConfig.shouldSpread){
 					if(world.getBlockState(pos).getMaterial().isLiquid() && world.getBlockState(pos).getBlock() != this && world.getBlockState(pos).getBlock() != ACBlocks.liquid_antimatter)
 						world.setBlockState(pos, getDefaultState());
-					if(AbyssalCraft.breakLogic == true && world.getBlockState(new BlockPos(pos.getX(), pos.getY()+1, pos.getZ())).getMaterial().isLiquid()
+					if(ACConfig.breakLogic == true && world.getBlockState(new BlockPos(pos.getX(), pos.getY()+1, pos.getZ())).getMaterial().isLiquid()
 							&& world.getBlockState(new BlockPos(pos.getX(), pos.getY()+1, pos.getZ())).getBlock() != this && world.getBlockState(new BlockPos(pos.getX(), pos.getY()+1, pos.getZ())).getBlock() != ACBlocks.liquid_antimatter)
 						world.setBlockState(new BlockPos(pos.getX(), pos.getY()+1, pos.getZ()), getDefaultState());
 				}
@@ -147,9 +148,11 @@ public class BlockCLiquid extends BlockFluidClassic {
 
 	private List<IBlockState> oresToBlocks(List<ItemStack> list){
 		List<IBlockState> blocks = Lists.newArrayList();
-		for(ItemStack stack : list)
-			if(Block.getBlockFromItem(stack.getItem()) != null && Block.getBlockFromItem(stack.getItem()) != Blocks.air)
-				blocks.add(Block.getBlockFromItem(stack.getItem()).getStateFromMeta(stack.getItemDamage()));
+		for(ItemStack stack : list){
+			Block block = Block.getBlockFromItem(stack.getItem());
+			if(block != null && block != Blocks.air)
+				blocks.add(block.getStateFromMeta(((ItemBlock)stack.getItem()).getMetadata(stack.getMetadata())));
+		}
 
 		return blocks;
 	}
@@ -202,14 +205,24 @@ public class BlockCLiquid extends BlockFluidClassic {
 		stones.add(ACBlocks.abyssalnite_stone.getDefaultState());
 		stones.add(ACBlocks.dreadstone.getDefaultState());
 		stones.add(ACBlocks.darkstone_cobblestone.getDefaultState());
+		stones.add(ACBlocks.abyssal_cobblestone.getDefaultState());
+		stones.add(ACBlocks.dreadstone_cobblestone.getDefaultState());
+		stones.add(ACBlocks.abyssalnite_cobblestone.getDefaultState());
+		stones.add(ACBlocks.coralium_cobblestone.getDefaultState());
 		bricks.add(Blocks.stonebrick.getStateFromMeta(0));
 		bricks.add(Blocks.stonebrick.getStateFromMeta(1));
 		bricks.add(Blocks.stonebrick.getStateFromMeta(2));
 		bricks.add(Blocks.stonebrick.getStateFromMeta(3));
 		bricks.add(Blocks.nether_brick.getDefaultState());
 		bricks.add(ACBlocks.darkstone_brick.getDefaultState());
+		bricks.add(ACBlocks.darkstone_brick.getStateFromMeta(1));
+		bricks.add(ACBlocks.darkstone_brick.getStateFromMeta(2));
 		bricks.add(ACBlocks.abyssalnite_stone_brick.getDefaultState());
+		bricks.add(ACBlocks.abyssalnite_stone_brick.getStateFromMeta(1));
+		bricks.add(ACBlocks.abyssalnite_stone_brick.getStateFromMeta(2));
 		bricks.add(ACBlocks.dreadstone_brick.getDefaultState());
+		bricks.add(ACBlocks.dreadstone_brick.getStateFromMeta(1));
+		bricks.add(ACBlocks.dreadstone_brick.getStateFromMeta(2));
 		metals.add(ACBlocks.abyssal_iron_ore.getDefaultState());
 		metals.add(ACBlocks.abyssal_gold_ore.getDefaultState());
 		metals.add(ACBlocks.abyssal_copper_ore.getDefaultState());

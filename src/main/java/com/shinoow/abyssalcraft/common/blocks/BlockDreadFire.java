@@ -5,7 +5,7 @@
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
  * http://www.gnu.org/licenses/lgpl-3.0.txt
- * 
+ *
  * Contributors:
  *     Shinoow -  implementation
  ******************************************************************************/
@@ -30,6 +30,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
 import com.shinoow.abyssalcraft.api.entity.IDreadEntity;
+import com.shinoow.abyssalcraft.lib.ACLib;
 
 public class BlockDreadFire extends Block {
 
@@ -120,7 +121,8 @@ public class BlockDreadFire extends Block {
 	public void onBlockAdded(World par1World, BlockPos pos, IBlockState state)
 	{
 
-		if (!BlockDreadlandsPortal.tryToCreatePortal(par1World, pos))
+		if ((par1World.provider.getDimension() == ACLib.abyssal_wasteland_id || par1World.provider.getDimension() == ACLib.dreadlands_id) &&
+				!BlockDreadlandsPortal.tryToCreatePortal(par1World, pos))
 			if (!par1World.getBlockState(pos.down()).isSideSolid(par1World, pos.down(), EnumFacing.UP))
 				par1World.setBlockToAir(pos);
 			else

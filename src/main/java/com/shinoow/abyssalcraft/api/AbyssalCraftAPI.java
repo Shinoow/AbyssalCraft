@@ -5,7 +5,7 @@
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
  * http://www.gnu.org/licenses/lgpl-3.0.txt
- * 
+ *
  * Contributors:
  *     Shinoow -  implementation
  ******************************************************************************/
@@ -45,6 +45,7 @@ import com.shinoow.abyssalcraft.api.item.ItemEngraving;
 import com.shinoow.abyssalcraft.api.necronomicon.NecroData;
 import com.shinoow.abyssalcraft.api.recipe.*;
 
+import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fml.common.FMLLog;
 import net.minecraftforge.fml.common.IFuelHandler;
 import net.minecraftforge.fml.common.Loader;
@@ -54,7 +55,7 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 /**
  * Main API class for AbyssalCraft, has child classes for most features.<br>
  * Check {@link IMCHelper} for InterModComms registration
- * 
+ *
  * @author shinoow
  *
  */
@@ -63,7 +64,7 @@ public class AbyssalCraftAPI {
 	/**
 	 * String used to specify the API version in the "package-info.java" classes
 	 */
-	public static final String API_VERSION = "1.8.5";
+	public static final String API_VERSION = "1.8.6";
 
 	public static Enchantment coralium_enchantment, dread_enchantment, light_pierce, iron_wall;
 
@@ -109,6 +110,8 @@ public class AbyssalCraftAPI {
 
 	private static IInternalNecroDataHandler internalNDHandler = new DummyNecroDataHandler();
 	private static IInternalMethodHandler internalMethodHandler = new DummyMethodHandler();
+
+	public static Fluid liquid_coralium_fluid, liquid_antimatter_fluid;
 
 	/**
 	 * Used by AbyssalCraft to set the Internal NecroData Handler.<br>
@@ -177,7 +180,7 @@ public class AbyssalCraftAPI {
 	 * @param output1 The first crystal output
 	 * @param output2 The second crystal output
 	 * @param xp Amount of exp given
-	 * 
+	 *
 	 * @since 1.0
 	 */
 	public static void addCrystallization(Block input, ItemStack output1, ItemStack output2, float xp){
@@ -190,7 +193,7 @@ public class AbyssalCraftAPI {
 	 * @param output1 The first crystal output
 	 * @param output2 The second crystal output
 	 * @param xp Amount of exp given
-	 * 
+	 *
 	 * @since 1.0
 	 */
 	public static void addCrystallization(Item input, ItemStack output1, ItemStack output2, float xp){
@@ -203,7 +206,7 @@ public class AbyssalCraftAPI {
 	 * @param output1 The first crystal output
 	 * @param output2 The second crystal output
 	 * @param xp Amount of exp given
-	 * 
+	 *
 	 * @since 1.0
 	 */
 	public static void addCrystallization(ItemStack input, ItemStack output1, ItemStack output2, float xp){
@@ -215,7 +218,7 @@ public class AbyssalCraftAPI {
 	 * @param input The block to crystallize
 	 * @param output The crystal output
 	 * @param xp Amount of exp given
-	 * 
+	 *
 	 * @since 1.0
 	 */
 	public static void addSingleCrystallization(Block input, ItemStack output, float xp){
@@ -227,7 +230,7 @@ public class AbyssalCraftAPI {
 	 * @param input The item to crystallize
 	 * @param output The crystal output
 	 * @param xp Amount of exp given
-	 * 
+	 *
 	 * @since 1.0
 	 */
 	public static void addSingleCrystallization(Item input, ItemStack output, float xp){
@@ -239,7 +242,7 @@ public class AbyssalCraftAPI {
 	 * @param input The itemstack to crystallize
 	 * @param output The crystal output
 	 * @param xp Amount of exp given
-	 * 
+	 *
 	 * @since 1.0
 	 */
 	public static void addSingleCrystallization(ItemStack input, ItemStack output, float xp){
@@ -251,7 +254,7 @@ public class AbyssalCraftAPI {
 	 * @param input The block to transmutate
 	 * @param output The transmutated output
 	 * @param xp Amount of exp given
-	 * 
+	 *
 	 * @since 1.0
 	 */
 	public static void addTransmutation(Block input, ItemStack output, float xp){
@@ -263,7 +266,7 @@ public class AbyssalCraftAPI {
 	 * @param input The item to transmutate
 	 * @param output The transmutated output
 	 * @param xp Amount of exp given
-	 * 
+	 *
 	 * @since 1.0
 	 */
 	public static void addTransmutation(Item input, ItemStack output, float xp){
@@ -275,7 +278,7 @@ public class AbyssalCraftAPI {
 	 * @param input The itemstack to transmutate
 	 * @param output The transmutated output
 	 * @param xp Amount of exp given
-	 * 
+	 *
 	 * @since 1.0
 	 */
 	public static void addTransmutation(ItemStack input, ItemStack output, float xp){
@@ -287,7 +290,7 @@ public class AbyssalCraftAPI {
 	 * @param input The ore input
 	 * @param output The ore output
 	 * @param xp Amount of exp given
-	 * 
+	 *
 	 * @since 1.0
 	 */
 	public static void addOreSmelting(String input, String output, float xp){
@@ -302,7 +305,7 @@ public class AbyssalCraftAPI {
 	 * @param output1 The first ore output
 	 * @param output2 The second ore output
 	 * @param xp Amount of exp given
-	 * 
+	 *
 	 * @since 1.0
 	 */
 	public static void addCrystallization(String input, String output1, String output2, float xp){
@@ -319,7 +322,7 @@ public class AbyssalCraftAPI {
 	 * @param output2 The second ore output
 	 * @param out2 Quantity of the second output
 	 * @param xp Amount of exp given
-	 * 
+	 *
 	 * @since 1.0
 	 */
 	public static void addCrystallization(String input, String output1, int out1, String output2, int out2, float xp){
@@ -338,7 +341,7 @@ public class AbyssalCraftAPI {
 	 * @param input The ore input
 	 * @param output The ore output
 	 * @param xp Amount of exp given
-	 * 
+	 *
 	 * @since 1.0
 	 */
 	public static void addSingleCrystallization(String input, String output, float xp){
@@ -353,7 +356,7 @@ public class AbyssalCraftAPI {
 	 * @param output The ore output
 	 * @param out The output quantity
 	 * @param xp Amount of exp given
-	 * 
+	 *
 	 * @since 1.0
 	 */
 	public static void addSingleCrystallization(String input, String output, int out, float xp){
@@ -370,7 +373,7 @@ public class AbyssalCraftAPI {
 	 * @param input The ore input
 	 * @param output The ore output
 	 * @param xp Amount of exp given
-	 * 
+	 *
 	 * @since 1.0
 	 */
 	public static void addTransmutation(String input, String output, float xp){
@@ -385,7 +388,7 @@ public class AbyssalCraftAPI {
 	 * @param output The ore output
 	 * @param out The output quantity
 	 * @param xp Amount of exp given
-	 * 
+	 *
 	 * @since 1.0
 	 */
 	public static void addTransmutation(String input, String output, int out, float xp){
@@ -402,7 +405,7 @@ public class AbyssalCraftAPI {
 	 * Both regular coins and engraved coins should be registered here
 	 * to register the engraving template and engraved coin)
 	 * @param coin The ItemStack containing a coin
-	 * 
+	 *
 	 * @since 1.3.5
 	 */
 	public static void addCoin(ItemStack coin){
@@ -416,7 +419,7 @@ public class AbyssalCraftAPI {
 	 * Both regular coins and engraved coins should be registered here
 	 * to register the engraving template and engraved coin)
 	 * @param coin The Item representing a coin
-	 * 
+	 *
 	 * @since 1.3.5
 	 */
 	public static void addCoin(Item coin){
@@ -430,7 +433,7 @@ public class AbyssalCraftAPI {
 	 * @param coin The Engraved Coin
 	 * @param engraving The Engraving Template
 	 * @param xp Amount of exp given
-	 * 
+	 *
 	 * @since 1.3.5
 	 */
 	public static void addEngraving(ItemStack coin, ItemEngraving engraving, float xp){
@@ -445,7 +448,7 @@ public class AbyssalCraftAPI {
 	 * @param coin The Engraved Coin
 	 * @param engraving The Engraving Template
 	 * @param xp Amount of exp given
-	 * 
+	 *
 	 * @since 1.3.5
 	 */
 	public static void addEngraving(Item coin, ItemEngraving engraving, float xp){
@@ -461,7 +464,7 @@ public class AbyssalCraftAPI {
 	 * @param input An array of ItemStacks (maximum is 5)
 	 * @param output The output
 	 * @param xp Amount of exp given
-	 * 
+	 *
 	 * @since 1.4.5
 	 */
 	public static void addMaterialization(ItemStack[] input, ItemStack output){
@@ -477,7 +480,7 @@ public class AbyssalCraftAPI {
 	/**
 	 * Basic Materialization.
 	 * @param materialization A Materializer Recipe
-	 * 
+	 *
 	 * @since 1.5
 	 */
 	public static void addMaterialization(Materialization materialization){
@@ -497,7 +500,7 @@ public class AbyssalCraftAPI {
 	 * Registers a fuel handler for an AbyssalCraft fuel type
 	 * @param handler The file that implements {@link IFuelHandler}
 	 * @param type The fuel type
-	 * 
+	 *
 	 * @since 1.0
 	 */
 	public static void registerFuelHandler(IFuelHandler handler, FuelType type){
@@ -518,7 +521,7 @@ public class AbyssalCraftAPI {
 	 * @param itemStack The ItemStack getting checked
 	 * @param type The fuel type
 	 * @return The fuel value for the specified machine
-	 * 
+	 *
 	 * @since 1.0
 	 */
 	public static int getFuelValue(ItemStack itemStack, FuelType type){
@@ -543,9 +546,9 @@ public class AbyssalCraftAPI {
 	 * (Note: It's useless to add your entity here if it extends {@link EntityAnimal}, {@link EntityAmbientCreature}, {@link EntityWaterMob} or {@link EntityTameable}).
 	 * If your Entity's superclass is a subclass of EntityTameable, you will need to add the superclass.
 	 * @param clazz The potential "food" for the Lesser Shoggoth
-	 * 
+	 *
 	 * @since 1.2
-	 * 
+	 *
 	 * @deprecated use {@link EntityUtil#addShoggothFood(Class)} instead
 	 */
 	@Deprecated
@@ -556,9 +559,9 @@ public class AbyssalCraftAPI {
 	/**
 	 * Used by the Lesser Shoggoth to fetch a list of things to eat
 	 * @return An ArrayList containing Entity classes
-	 * 
+	 *
 	 * @since 1.2
-	 * 
+	 *
 	 * @deprecated use {@link EntityUtil#getShoggothFood()} instead
 	 */
 	@Deprecated
@@ -571,7 +574,7 @@ public class AbyssalCraftAPI {
 	 * a fleshy soil when a Lesser Shoggoth walks over it
 	 * (Note: Any liquid block and tile entity block will automatically be blacklisted)
 	 * @param block The block to blacklist
-	 * 
+	 *
 	 * @since 1.4
 	 */
 	public static void addShoggothBlacklist(Block block){
@@ -582,7 +585,7 @@ public class AbyssalCraftAPI {
 	 * Used by the Lesser Shoggoth to fetch a list of blocks that won't be converted when
 	 * it walks over them
 	 * @return An ArrayList containing Blocks
-	 * 
+	 *
 	 * @since 1.4
 	 */
 	public static List<Block> getShoggothBlockBlacklist(){
@@ -592,7 +595,7 @@ public class AbyssalCraftAPI {
 	/**
 	 * Adds the ItemStack to the crystal list. Anything added to this list will function like a {@link ICrystal}
 	 * @param crystal The ItemStack to be added
-	 * 
+	 *
 	 * @since 1.3
 	 */
 	public static void addCrystal(ItemStack crystal){
@@ -602,7 +605,7 @@ public class AbyssalCraftAPI {
 	/**
 	 * Used by various things to fetch a list of ItemStacks that should function like {@link ICrystal}s
 	 * @return An ArrayList of ItemStacks
-	 * 
+	 *
 	 * @since 1.3
 	 */
 	public static List<ItemStack> getCrystals(){
@@ -620,7 +623,7 @@ public class AbyssalCraftAPI {
 	 * <li>3 = Omothol Necronomicon</li>
 	 * <li>4 = Abyssalnomicon</li>
 	 * </ul>
-	 * 
+	 *
 	 * @since 1.3.5
 	 */
 	public static void registerNecronomiconData(NecroData data, int bookType){
@@ -632,7 +635,7 @@ public class AbyssalCraftAPI {
 	/**
 	 * Used by the Necronomicon for fetching pages made outside of AbyssalCraft
 	 * @return A HashMap of NecroDatas and Integers
-	 * 
+	 *
 	 * @since 1.3.5
 	 */
 	public static Map<NecroData,Integer> getNecronomiconData(){
@@ -643,7 +646,7 @@ public class AbyssalCraftAPI {
 	 * Registers a texture for a Helmet (when worn by a Ghoul Entity)
 	 * @param helmet Helmet Item
 	 * @param res Texture ResourceLocation
-	 * 
+	 *
 	 * @since 1.8
 	 */
 	public static void addGhoulHelmetTexture(Item helmet, ResourceLocation res){
@@ -657,7 +660,7 @@ public class AbyssalCraftAPI {
 	 * Registers a texture for a Chestplate (when worn by a Ghoul Entity)
 	 * @param chestplate Chestplate Item
 	 * @param res Texture ResourceLocation
-	 * 
+	 *
 	 * @since 1.8
 	 */
 	public static void addGhoulChestplateTexture(Item chestplate, ResourceLocation res){
@@ -671,7 +674,7 @@ public class AbyssalCraftAPI {
 	 * Registers a texture for a pair of Leggings (when worn by a Ghoul Entity)
 	 * @param leggings Leggings Item
 	 * @param res Texture ResourceLocation
-	 * 
+	 *
 	 * @since 1.8
 	 */
 	public static void addGhoulLeggingsTexture(Item leggings, ResourceLocation res){
@@ -685,7 +688,7 @@ public class AbyssalCraftAPI {
 	 * Registers a texture for a pair of Boots (when worn by a Ghoul Entity)
 	 * @param boots Boots Item
 	 * @param res Texture ResourceLocation
-	 * 
+	 *
 	 * @since 1.8
 	 */
 	public static void addGhoulBootsTexture(Item boots, ResourceLocation res){
@@ -699,7 +702,7 @@ public class AbyssalCraftAPI {
 	 * Registers a texture for a Helmet (when worn by a Ghoul Entity)
 	 * @param helmet Helmet Item
 	 * @param res Texture String (should be formatted as "modid:path/to/texture.png")
-	 * 
+	 *
 	 * @since 1.8
 	 */
 	public static void addGhoulHelmetTexture(Item helmet, String res){
@@ -710,7 +713,7 @@ public class AbyssalCraftAPI {
 	 * Registers a texture for a Chestplate (when worn by a Ghoul Entity)
 	 * @param chestplate Chestplate Item
 	 * @param res Texture String (should be formatted as "modid:path/to/texture.png")
-	 * 
+	 *
 	 * @since 1.8
 	 */
 	public static void addGhoulChestplateTexture(Item chestplate, String res){
@@ -721,7 +724,7 @@ public class AbyssalCraftAPI {
 	 * Registers a texture for a pair of Leggings (when worn by a Ghoul Entity)
 	 * @param leggings Leggings Item
 	 * @param res Texture String (should be formatted as "modid:path/to/texture.png")
-	 * 
+	 *
 	 * @since 1.8
 	 */
 	public static void addGhoulLeggingsTexture(Item leggings, String res){
@@ -732,7 +735,7 @@ public class AbyssalCraftAPI {
 	 * Registers a texture for a pair of Boots (when worn by a Ghoul Entity)
 	 * @param boots Boots Item
 	 * @param res Texture String (should be formatted as "modid:path/to/texture.png")
-	 * 
+	 *
 	 * @since 1.8
 	 */
 	public static void addGhoulBootsTexture(Item boots, String res){
@@ -748,7 +751,7 @@ public class AbyssalCraftAPI {
 	 * @param boots Boots Item
 	 * @param res1 Texture ResourceLocation for Helmet, Chestplate and Boots
 	 * @param res2 Texture ResourceLocation for Leggings
-	 * 
+	 *
 	 * @since 1.8
 	 */
 	public static void addGhoulArmorTextures(Item helmet, Item chestplate, Item leggings, Item boots, ResourceLocation res1, ResourceLocation res2){
@@ -767,7 +770,7 @@ public class AbyssalCraftAPI {
 	 * @param boots Boots Item
 	 * @param res1 Texture String for Helmet, Chestplate and Boots (should be formatted as "modid:path/to/texture.png")
 	 * @param res2 Texture String for Leggings (should be formatted as "modid:path/to/texture.png")
-	 * 
+	 *
 	 * @since 1.8
 	 */
 	public static void addGhoulArmorTextures(Item helmet, Item chestplate, Item leggings, Item boots, String res1, String res2){
@@ -778,7 +781,7 @@ public class AbyssalCraftAPI {
 	 * Fetches a ResourceLocation for the armor texture of a Helmet, if any
 	 * @param helmet Helmet Item
 	 * @return A ResourceLocation for the Helmet texture, if any
-	 * 
+	 *
 	 * @since 1.8
 	 */
 	public static ResourceLocation getGhoulHelmetTexture(Item helmet){
@@ -789,7 +792,7 @@ public class AbyssalCraftAPI {
 	 * Fetches a ResourceLocation for the armor texture of a Chestplate, if any
 	 * @param chestplate Chestplate Item
 	 * @return A ResourceLocation for the Chestplate texture, if any
-	 * 
+	 *
 	 * @since 1.8
 	 */
 	public static ResourceLocation getGhoulChestplateTexture(Item chestplate){
@@ -800,7 +803,7 @@ public class AbyssalCraftAPI {
 	 * Fetches a ResourceLocation for the armor texture of a pair of Leggings, if any
 	 * @param leggings Leggings Item
 	 * @return A ResourceLocation for the Leggings texture, if any
-	 * 
+	 *
 	 * @since 1.8
 	 */
 	public static ResourceLocation getGhoulLeggingsTexture(Item leggings){
@@ -811,7 +814,7 @@ public class AbyssalCraftAPI {
 	 * Fetches a ResourceLocation for the armor texture of a pair of Boots, if any
 	 * @param boots Boots Item
 	 * @return A ResourceLocation for the Boots texture, if any
-	 * 
+	 *
 	 * @since 1.8
 	 */
 	public static ResourceLocation getGhoulBootsTexture(Item boots){
@@ -820,7 +823,7 @@ public class AbyssalCraftAPI {
 
 	/**
 	 * Contains the names of all mobs added in AbyssalCraft.
-	 * 
+	 *
 	 * @author shinoow
 	 *
 	 */

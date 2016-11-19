@@ -5,7 +5,7 @@
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
  * http://www.gnu.org/licenses/lgpl-3.0.txt
- * 
+ *
  * Contributors:
  *     Shinoow -  implementation
  ******************************************************************************/
@@ -142,9 +142,9 @@ public class EntityAntiCow extends EntityAnimal implements IAntiEntity {
 		{
 			par1EntityPlayer.playSound(SoundEvents.entity_cow_milk, 1.0F, 1.0F);
 			if (stack.stackSize-- == 1)
-				par1EntityPlayer.setHeldItem(hand, new ItemStack(Items.milk_bucket));
-			else if (!par1EntityPlayer.inventory.addItemStackToInventory(new ItemStack(ACItems.liquid_antimatter_bucket)))
-				par1EntityPlayer.dropPlayerItemWithRandomChoice(new ItemStack(ACItems.liquid_antimatter_bucket, 1, 0), false);
+				par1EntityPlayer.setHeldItem(hand, ACItems.liquid_antimatter_bucket_stack.copy());
+			else if (!par1EntityPlayer.inventory.addItemStackToInventory(ACItems.liquid_antimatter_bucket_stack.copy()))
+				par1EntityPlayer.dropPlayerItemWithRandomChoice(ACItems.liquid_antimatter_bucket_stack.copy(), false);
 
 			return true;
 		} else

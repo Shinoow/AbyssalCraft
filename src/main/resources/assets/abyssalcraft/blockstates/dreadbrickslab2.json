@@ -1,6 +1,12 @@
 {
+	"forge_marker": 1,
+	"defaults": {
+		"textures" : {
+			"all": "abyssalcraft:blocks/drsb"
+		}
+	},
 	"variants": {
-		"variant=false": { "model": "abyssalcraft:dreadbrickslab2" },
-		"variant=true": { "model": "abyssalcraft:dreadbrickslab2" }
+		"variant=false": { "model": "cube_all" },
+		"variant=true": { "model": "cube_all" }
 	}
 }

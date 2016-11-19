@@ -5,13 +5,20 @@
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
  * http://www.gnu.org/licenses/lgpl-3.0.txt
- * 
+ *
  * Contributors:
  *     Shinoow -  implementation
  ******************************************************************************/
 package com.shinoow.abyssalcraft.init;
 
 import static com.shinoow.abyssalcraft.AbyssalCraft.*;
+import static com.shinoow.abyssalcraft.init.BlockHandler.*;
+import static com.shinoow.abyssalcraft.lib.ACSounds.*;
+
+import java.io.File;
+import java.lang.reflect.Method;
+import java.util.Stack;
+
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.init.Items;
 import net.minecraft.init.PotionTypes;
@@ -28,28 +35,38 @@ import net.minecraft.world.storage.loot.functions.LootFunction;
 import net.minecraft.world.storage.loot.functions.SetCount;
 import net.minecraft.world.storage.loot.functions.SetMetadata;
 import net.minecraftforge.common.*;
-import net.minecraftforge.common.brewing.BrewingRecipeRegistry;
 import net.minecraftforge.event.LootTableLoadEvent;
-import net.minecraftforge.fluids.FluidContainerRegistry;
-import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fml.common.event.*;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraftforge.fml.relauncher.ReflectionHelper;
 import net.minecraftforge.oredict.OreDictionary;
+import net.minecraftforge.oredict.RecipeSorter;
+import net.minecraftforge.oredict.RecipeSorter.Category;
 
+import com.google.common.base.Predicate;
+import com.google.gson.JsonObject;
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI.FuelType;
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.api.item.ACItems;
+import com.shinoow.abyssalcraft.api.necronomicon.NecroData;
 import com.shinoow.abyssalcraft.common.AbyssalCrafting;
 import com.shinoow.abyssalcraft.common.enchantments.*;
 import com.shinoow.abyssalcraft.common.handlers.*;
 import com.shinoow.abyssalcraft.common.network.PacketDispatcher;
 import com.shinoow.abyssalcraft.common.potion.*;
+import com.shinoow.abyssalcraft.common.util.ACLogger;
+import com.shinoow.abyssalcraft.common.util.ShapedNBTRecipe;
+import com.shinoow.abyssalcraft.lib.ACAchievements;
 import com.shinoow.abyssalcraft.lib.ACLib;
+import com.shinoow.abyssalcraft.lib.util.NecroDataJsonUtil;
 import com.shinoow.abyssalcraft.lib.util.RitualUtil;
 
 public class MiscHandler implements ILifeCycleHandler {
+
+	public static PotionType Cplague_normal, Cplague_long, Dplague_normal, Dplague_long,
+	Dplague_strong, antiMatter_normal, antiMatter_long;
 
 	@Override
 	public void preInit(FMLPreInitializationEvent event) {
@@ -80,15 +97,16 @@ public class MiscHandler implements ILifeCycleHandler {
 		registerPotionType(new ResourceLocation("abyssalcraft", "antimatter"), antiMatter_normal);
 		registerPotionType(new ResourceLocation("abyssalcraft", "antimatter_long"), antiMatter_long);
 
-		addBrewing(Items.potionitem, PotionTypes.awkward, new ItemStack(ACItems.coralium_plagued_flesh), Items.potionitem, Cplague_normal);
-		addBrewing(Items.potionitem, PotionTypes.awkward, new ItemStack(ACItems.coralium_plagued_flesh_on_a_bone), Items.potionitem, Cplague_normal);
-		addBrewingConversions(Cplague_normal, Cplague_long, null);
-		addBrewing(Items.potionitem, PotionTypes.awkward, new ItemStack(ACItems.dread_fragment), Items.potionitem, Dplague_normal);
-		addBrewingConversions(Dplague_normal, Dplague_long, Dplague_strong);
-		addBrewing(Items.potionitem, PotionTypes.awkward, new ItemStack(ACItems.rotten_anti_flesh), Items.potionitem, antiMatter_normal);
-		addBrewing(Items.potionitem, PotionTypes.awkward, new ItemStack(ACItems.anti_plagued_flesh), Items.potionitem, antiMatter_normal);
-		addBrewing(Items.potionitem, PotionTypes.awkward, new ItemStack(ACItems.anti_plagued_flesh_on_a_bone), Items.potionitem, antiMatter_normal);
-		addBrewingConversions(antiMatter_normal, antiMatter_long, null);
+		addBrewing(PotionTypes.awkward, ACItems.coralium_plagued_flesh, Cplague_normal);
+		addBrewing(PotionTypes.awkward, ACItems.coralium_plagued_flesh_on_a_bone, Cplague_normal);
+		addBrewing(Cplague_normal, Items.redstone, Cplague_long);
+		addBrewing(PotionTypes.awkward, ACItems.dread_fragment, Dplague_normal);
+		addBrewing(Dplague_normal, Items.redstone, Dplague_long);
+		addBrewing(Dplague_normal, Items.glowstone_dust, Dplague_strong);
+		addBrewing(PotionTypes.awkward, ACItems.rotten_anti_flesh, antiMatter_normal);
+		addBrewing(PotionTypes.awkward, ACItems.anti_plagued_flesh, antiMatter_normal);
+		addBrewing(PotionTypes.awkward, ACItems.anti_plagued_flesh_on_a_bone, antiMatter_normal);
+		addBrewing(antiMatter_normal, Items.redstone, antiMatter_long);
 
 		AbyssalCraftAPI.coralium_enchantment = new EnchantmentWeaponInfusion("coralium");
 		AbyssalCraftAPI.dread_enchantment = new EnchantmentWeaponInfusion("dread");
@@ -100,17 +118,12 @@ public class MiscHandler implements ILifeCycleHandler {
 		registerEnchantment(new ResourceLocation("abyssalcraft", "light_pierce"), AbyssalCraftAPI.light_pierce);
 		registerEnchantment(new ResourceLocation("abyssalcraft", "iron_wall"), AbyssalCraftAPI.iron_wall);
 
-		LIQUID_CORALIUM.setBlock(ACBlocks.liquid_coralium);
-		LIQUID_ANTIMATTER.setBlock(ACBlocks.liquid_antimatter);
-		if(CFluid.getBlock() == null)
-			CFluid.setBlock(ACBlocks.liquid_coralium);
-		if(antifluid.getBlock() == null)
-			antifluid.setBlock(ACBlocks.liquid_antimatter);
-		FluidContainerRegistry.registerFluidContainer(FluidRegistry.getFluidStack(CFluid.getName(), FluidContainerRegistry.BUCKET_VOLUME), new ItemStack(ACItems.liquid_coralium_bucket), new ItemStack(Items.bucket));
-		BucketHandler.INSTANCE.buckets.put(ACBlocks.liquid_coralium.getDefaultState(), ACItems.liquid_coralium_bucket);
-		FluidContainerRegistry.registerFluidContainer(FluidRegistry.getFluidStack(antifluid.getName(), FluidContainerRegistry.BUCKET_VOLUME), new ItemStack(ACItems.liquid_antimatter_bucket), new ItemStack(Items.bucket));
-		BucketHandler.INSTANCE.buckets.put(ACBlocks.liquid_antimatter.getDefaultState(), ACItems.liquid_antimatter_bucket);
-		MinecraftForge.EVENT_BUS.register(BucketHandler.INSTANCE);
+		InitHandler.LIQUID_CORALIUM.setBlock(ACBlocks.liquid_coralium);
+		InitHandler.LIQUID_ANTIMATTER.setBlock(ACBlocks.liquid_antimatter);
+		if(AbyssalCraftAPI.liquid_coralium_fluid.getBlock() == null)
+			AbyssalCraftAPI.liquid_coralium_fluid.setBlock(ACBlocks.liquid_coralium);
+		if(AbyssalCraftAPI.liquid_antimatter_fluid.getBlock() == null)
+			AbyssalCraftAPI.liquid_antimatter_fluid.setBlock(ACBlocks.liquid_antimatter);
 
 		dreadguard_ambient = registerSoundEvent("dreadguard.idle");
 		dreadguard_hurt = registerSoundEvent("dreadguard.hit");
@@ -156,68 +169,114 @@ public class MiscHandler implements ILifeCycleHandler {
 	@Override
 	public void init(FMLInitializationEvent event) {
 		//Achievements
-		necro = new Achievement("achievement.necro", "necro", 0, 0, ACItems.necronomicon, AchievementList.openInventory).registerStat();
+		ACAchievements.necronomicon = new Achievement("achievement.necro", "necro", 0, 0, ACItems.necronomicon, AchievementList.openInventory).registerStat();
 		//Materials Achievements
-		mineAby = new Achievement("achievement.mineAby", "mineAby", 2, 0, ACBlocks.abyssalnite_ore, necro).registerStat();
-		mineCorgem = new Achievement("achievement.mineCorgem", "mineCorgem", 4, 0, ACItems.coralium_gem, mineAby).registerStat();
-		shadowGems = new Achievement("achievement.shadowGems", "shadowGems", 6, 0, ACItems.shadow_gem, mineCorgem).registerStat();
+		ACAchievements.mine_abyssalnite = new Achievement("achievement.mineAby", "mineAby", 2, 0, ACBlocks.abyssalnite_ore, ACAchievements.necronomicon).registerStat();
+		ACAchievements.mine_coralium = new Achievement("achievement.mineCorgem", "mineCorgem", 4, 0, ACItems.coralium_gem, ACAchievements.mine_abyssalnite).registerStat();
+		ACAchievements.shadow_gems = new Achievement("achievement.shadowGems", "shadowGems", 6, 0, ACItems.shadow_gem, ACAchievements.mine_coralium).registerStat();
 		//coraliumpearl
-		mineCor = new Achievement("achievement.mineCor", "mineCor", 8, 0, ACBlocks.liquified_coralium_ore, shadowGems).registerStat();
-		mineAbyOres = new Achievement("achievement.mineAbyOres", "mineAbyOres", 10, 0, ACBlocks.abyssal_diamond_ore, mineCor).registerStat();
-		mineDread = new Achievement("achievement.mineDread", "mineDread", 12, 0, ACBlocks.dreaded_abyssalnite_ore, mineAbyOres).registerStat();
-		dreadium = new Achievement("achievement.dreadium", "dreadium", 14, 0, ACItems.dreadium_ingot, mineDread).registerStat();
-		eth = new Achievement("achievement.ethaxium", "ethaxium", 16, 0, ACItems.ethaxium_ingot, dreadium).setSpecial().registerStat();
+		ACAchievements.mine_abyssal_coralium = new Achievement("achievement.mineCor", "mineCor", 8, 0, ACBlocks.liquified_coralium_ore, ACAchievements.shadow_gems).registerStat();
+		ACAchievements.mine_abyssal_ores = new Achievement("achievement.mineAbyOres", "mineAbyOres", 10, 0, ACBlocks.abyssal_diamond_ore, ACAchievements.mine_abyssal_coralium).registerStat();
+		ACAchievements.mine_dreadlands_ores = new Achievement("achievement.mineDread", "mineDread", 12, 0, ACBlocks.dreaded_abyssalnite_ore, ACAchievements.mine_abyssal_ores).registerStat();
+		ACAchievements.dreadium = new Achievement("achievement.dreadium", "dreadium", 14, 0, ACItems.dreadium_ingot, ACAchievements.mine_dreadlands_ores).registerStat();
+		ACAchievements.ethaxium = new Achievement("achievement.ethaxium", "ethaxium", 16, 0, ACItems.ethaxium_ingot, ACAchievements.dreadium).setSpecial().registerStat();
 		//Depths Ghoul Achievements
-		killghoul = new Achievement("achievement.killghoul", "killghoul", -2, 0, ACItems.coralium_plagued_flesh_on_a_bone, necro).registerStat();
-		ghoulhead = new Achievement("achievement.ghoulhead", "ghoulhead", -4, 0, ACBlocks.depths_ghoul_head, killghoul).registerStat();
-		petehead = new Achievement("achievement.petehead", "petehead", -4, -2, ACBlocks.pete_head, ghoulhead).registerStat();
-		wilsonhead = new Achievement("achievement.wilsonhead", "wilsonhead", -4, -4, ACBlocks.mr_wilson_head, petehead).registerStat();
-		orangehead = new Achievement("achievement.orangehead", "orangehead", -4, -6, ACBlocks.dr_orange_head, wilsonhead).registerStat();
+		ACAchievements.kill_depths_ghoul = new Achievement("achievement.killghoul", "killghoul", -2, 0, ACItems.coralium_plagued_flesh_on_a_bone, ACAchievements.necronomicon).registerStat();
+		ACAchievements.depths_ghoul_head = new Achievement("achievement.ghoulhead", "ghoulhead", -4, 0, ACBlocks.depths_ghoul_head, ACAchievements.kill_depths_ghoul).registerStat();
+		ACAchievements.pete_head = new Achievement("achievement.petehead", "petehead", -4, -2, ACBlocks.pete_head, ACAchievements.depths_ghoul_head).registerStat();
+		ACAchievements.mr_wilson_head = new Achievement("achievement.wilsonhead", "wilsonhead", -4, -4, ACBlocks.mr_wilson_head, ACAchievements.pete_head).registerStat();
+		ACAchievements.dr_orange_head = new Achievement("achievement.orangehead", "orangehead", -4, -6, ACBlocks.dr_orange_head, ACAchievements.mr_wilson_head).registerStat();
 		//Necronomicon Achievements
-		necrou1 = new Achievement("achievement.necrou1", "necrou1", 2, 1, ACItems.abyssal_wasteland_necronomicon, necro).registerStat();
-		necrou2 = new Achievement("achievement.necrou2", "necrou2", 4, 1, ACItems.dreadlands_necronomicon, necrou1).registerStat();
-		necrou3 = new Achievement("achievement.necrou3", "necrou3", 6, 1, ACItems.omothol_necronomicon, necrou2).registerStat();
-		abyssaln = new Achievement("achievement.abyssaln", "abyssaln", 8, 1, ACItems.abyssalnomicon, necrou3).setSpecial().registerStat();
+		ACAchievements.abyssal_wasteland_necronomicon = new Achievement("achievement.necrou1", "necrou1", 2, 1, ACItems.abyssal_wasteland_necronomicon, ACAchievements.necronomicon).registerStat();
+		ACAchievements.dreadlands_necronomicon = new Achievement("achievement.necrou2", "necrou2", 4, 1, ACItems.dreadlands_necronomicon, ACAchievements.abyssal_wasteland_necronomicon).registerStat();
+		ACAchievements.omothol_necronomicon = new Achievement("achievement.necrou3", "necrou3", 6, 1, ACItems.omothol_necronomicon, ACAchievements.dreadlands_necronomicon).registerStat();
+		ACAchievements.abyssalnomicon = new Achievement("achievement.abyssaln", "abyssaln", 8, 1, ACItems.abyssalnomicon, ACAchievements.omothol_necronomicon).setSpecial().registerStat();
 		//Ritual Achievements
-		ritual = new Achievement("achievement.ritual", "ritual", -2, 1, ACBlocks.ritual_altar, necro).setSpecial().registerStat();
-		ritualSummon = new Achievement("achievement.ritualSummon", "ritualSummon", -4, 1, ACBlocks.depths_ghoul_head, ritual).registerStat();
-		ritualCreate = new Achievement("achievement.ritualCreate", "ritualCreate", -4, 2, ACItems.life_crystal, ritual).registerStat();
-		ritualBreed = new Achievement("achievement.ritualBreed", "ritualBreed", -4, 3, Items.egg, ritual).registerStat();
-		ritualPotion = new Achievement("achievement.ritualPotion", "ritualPotion", -4, 4, Items.potionitem, ritual).registerStat();
-		ritualPotionAoE = new Achievement("achievement.ritualPotionAoE", "ritualPotionAoE", -4, 5, Items.splash_potion, ritual).registerStat();
-		ritualInfusion = new Achievement("achievement.ritualInfusion", "ritualInfusion", -4, 6, ACItems.depths_helmet, ritual).registerStat();
+		ACAchievements.ritual_altar = new Achievement("achievement.ritual", "ritual", -2, 1, ACBlocks.ritual_altar, ACAchievements.necronomicon).setSpecial().registerStat();
+		ACAchievements.summoning_ritual = new Achievement("achievement.ritualSummon", "ritualSummon", -4, 1, ACBlocks.depths_ghoul_head, ACAchievements.ritual_altar).registerStat();
+		ACAchievements.creation_ritual = new Achievement("achievement.ritualCreate", "ritualCreate", -4, 2, ACItems.life_crystal, ACAchievements.ritual_altar).registerStat();
+		ACAchievements.breeding_ritual = new Achievement("achievement.ritualBreed", "ritualBreed", -4, 3, Items.egg, ACAchievements.ritual_altar).registerStat();
+		ACAchievements.potion_ritual = new Achievement("achievement.ritualPotion", "ritualPotion", -4, 4, Items.potionitem, ACAchievements.ritual_altar).registerStat();
+		ACAchievements.aoe_potion_ritual = new Achievement("achievement.ritualPotionAoE", "ritualPotionAoE", -4, 5, new ItemStack(Items.potionitem, 1, 16384), ACAchievements.ritual_altar).registerStat();
+		ACAchievements.infusion_ritual = new Achievement("achievement.ritualInfusion", "ritualInfusion", -4, 6, ACItems.depths_helmet, ACAchievements.ritual_altar).registerStat();
 		//Progression Achievements
-		enterabyss = new Achievement("achievement.enterabyss", "enterabyss", 0, 2, ACBlocks.abyssal_stone, necro).setSpecial().registerStat();
-		killdragon = new Achievement("achievement.killdragon", "killdragon", 2, 2, ACItems.coralium_plagued_flesh, enterabyss).registerStat();
-		summonAsorah = new Achievement("achievement.summonAsorah", "summonAsorah", 0, 4, Altar, enterabyss).registerStat();
-		killAsorah = new Achievement("achievement.killAsorah", "killAsorah", 2, 4, ACItems.eye_of_the_abyss, summonAsorah).setSpecial().registerStat();
-		enterdreadlands = new Achievement("achievement.enterdreadlands", "enterdreadlands", 2, 6, ACBlocks.dreadstone, killAsorah).setSpecial().registerStat();
-		killdreadguard = new Achievement("achievement.killdreadguard", "killdreadguard", 4, 6, ACItems.dreaded_shard_of_abyssalnite, enterdreadlands).registerStat();
-		summonChagaroth = new Achievement("achievement.summonChagaroth", "summonChagaroth", 2, 8, ACBlocks.chagaroth_altar_bottom, enterdreadlands).registerStat();
-		killChagaroth = new Achievement("achievement.killChagaroth", "killChagaroth", 4, 8, ACItems.dread_plagued_gateway_key, summonChagaroth).setSpecial().registerStat();
-		enterOmothol = new Achievement("achievement.enterOmothol", "enterOmothol", 4, 10, ACBlocks.omothol_stone, killChagaroth).setSpecial().registerStat();
-		enterDarkRealm = new Achievement("achievement.darkRealm", "darkRealm", 2, 10, ACBlocks.darkstone, enterOmothol).registerStat();
-		killOmotholelite = new Achievement("achievement.killOmotholelite", "killOmotholelite", 6, 10, ACItems.eldritch_scale, enterOmothol).registerStat();
-		locateJzahar = new Achievement("achievement.locateJzahar", "locateJzahar", 4, 12, ACItems.jzahar_charm, enterOmothol).registerStat();
-		killJzahar = new Achievement("achievement.killJzahar", "killJzahar", 6, 12, ACItems.staff_of_the_gatekeeper, locateJzahar).setSpecial().registerStat();
+		ACAchievements.enter_abyssal_wasteland = new Achievement("achievement.enterabyss", "enterabyss", 0, 2, ACBlocks.abyssal_stone, ACAchievements.necronomicon).setSpecial().registerStat();
+		ACAchievements.kill_spectral_dragon = new Achievement("achievement.killdragon", "killdragon", 2, 2, ACItems.coralium_plagued_flesh, ACAchievements.enter_abyssal_wasteland).registerStat();
+		ACAchievements.summon_asorah = new Achievement("achievement.summonAsorah", "summonAsorah", 0, 4, Altar, ACAchievements.enter_abyssal_wasteland).registerStat();
+		ACAchievements.kill_asorah = new Achievement("achievement.killAsorah", "killAsorah", 2, 4, ACItems.eye_of_the_abyss, ACAchievements.summon_asorah).setSpecial().registerStat();
+		ACAchievements.enter_dreadlands = new Achievement("achievement.enterdreadlands", "enterdreadlands", 2, 6, ACBlocks.dreadstone, ACAchievements.kill_asorah).setSpecial().registerStat();
+		ACAchievements.kill_dreadguard = new Achievement("achievement.killdreadguard", "killdreadguard", 4, 6, ACItems.dreaded_shard_of_abyssalnite, ACAchievements.enter_dreadlands).registerStat();
+		ACAchievements.summon_chagaroth = new Achievement("achievement.summonChagaroth", "summonChagaroth", 2, 8, ACBlocks.chagaroth_altar_bottom, ACAchievements.enter_dreadlands).registerStat();
+		ACAchievements.kill_chagaroth = new Achievement("achievement.killChagaroth", "killChagaroth", 4, 8, ACItems.dread_plagued_gateway_key, ACAchievements.summon_chagaroth).setSpecial().registerStat();
+		ACAchievements.enter_omothol = new Achievement("achievement.enterOmothol", "enterOmothol", 4, 10, ACBlocks.omothol_stone, ACAchievements.kill_chagaroth).setSpecial().registerStat();
+		ACAchievements.enter_dark_realm = new Achievement("achievement.darkRealm", "darkRealm", 2, 10, ACBlocks.darkstone, ACAchievements.enter_omothol).registerStat();
+		ACAchievements.kill_omothol_elite = new Achievement("achievement.killOmotholelite", "killOmotholelite", 6, 10, ACItems.eldritch_scale, ACAchievements.enter_omothol).registerStat();
+		ACAchievements.locate_jzahar = new Achievement("achievement.locateJzahar", "locateJzahar", 4, 12, ACItems.jzahar_charm, ACAchievements.enter_omothol).registerStat();
+		ACAchievements.kill_jzahar = new Achievement("achievement.killJzahar", "killJzahar", 6, 12, ACItems.staff_of_the_gatekeeper, ACAchievements.locate_jzahar).setSpecial().registerStat();
 		//nowwhat
 		//Gateway Key Achievements
-		GK1 = new Achievement("achievement.GK1", "GK1", 0, -2, ACItems.gateway_key, necro).registerStat();
-		findPSDL = new Achievement("achievement.findPSDL", "findPSDL", -2, -2, ACBlocks.dreadlands_infused_powerstone, GK1).registerStat();
-		GK2 = new Achievement("achievement.GK2", "GK2", 0, -4, ACItems.dreaded_gateway_key, GK1).registerStat();
-		GK3 = new Achievement("achievement.GK3", "GK3", 0, -6, ACItems.rlyehian_gateway_key, GK2).registerStat();
+		ACAchievements.gateway_key = new Achievement("achievement.GK1", "GK1", 0, -2, ACItems.gateway_key, ACAchievements.necronomicon).registerStat();
+		ACAchievements.find_powerstone = new Achievement("achievement.findPSDL", "findPSDL", -2, -2, ACBlocks.dreadlands_infused_powerstone, ACAchievements.gateway_key).registerStat();
+		ACAchievements.dreaded_gateway_key = new Achievement("achievement.GK2", "GK2", 0, -4, ACItems.dreaded_gateway_key, ACAchievements.gateway_key).registerStat();
+		ACAchievements.rlyehian_gateway_key = new Achievement("achievement.GK3", "GK3", 0, -6, ACItems.rlyehian_gateway_key, ACAchievements.dreaded_gateway_key).registerStat();
 		//Machinery Achievements
-		makeTransmutator = new Achievement("achievement.makeTransmutator", "makeTransmutator", 2, -1, ACBlocks.transmutator_idle, necro).registerStat();
-		makeCrystallizer = new Achievement("achievement.makeCrystallizer", "makeCrystallizer", 4, -2, ACBlocks.crystallizer_idle, makeTransmutator).registerStat();
-		makeMaterializer = new Achievement("achievement.makeMaterializer", "makeMaterializer", 6, -2, ACBlocks.materializer, makeCrystallizer).registerStat();
-		makeCrystalBag = new Achievement("achievement.makeCrystalBag", "makeCrystalBag", 6, -4, ACItems.small_crystal_bag, makeMaterializer).registerStat();
-		makeEngraver = new Achievement("achievement.makeEngraver", "makeEngraver", 2, -3, ACBlocks.engraver, AchievementList.openInventory).registerStat();
+		ACAchievements.make_transmutator = new Achievement("achievement.makeTransmutator", "makeTransmutator", 2, -1, ACBlocks.transmutator_idle, ACAchievements.necronomicon).registerStat();
+		ACAchievements.make_crystallizer = new Achievement("achievement.makeCrystallizer", "makeCrystallizer", 4, -2, ACBlocks.crystallizer_idle, ACAchievements.make_transmutator).registerStat();
+		ACAchievements.make_materializer = new Achievement("achievement.makeMaterializer", "makeMaterializer", 6, -2, ACBlocks.materializer, ACAchievements.make_crystallizer).registerStat();
+		ACAchievements.make_crystal_bag = new Achievement("achievement.makeCrystalBag", "makeCrystalBag", 6, -4, ACItems.small_crystal_bag, ACAchievements.make_materializer).registerStat();
+		ACAchievements.make_engraver = new Achievement("achievement.makeEngraver", "makeEngraver", 2, -3, ACBlocks.engraver, AchievementList.openInventory).registerStat();
 
-		AchievementPage.registerAchievementPage(new AchievementPage("AbyssalCraft", new Achievement[]{necro, mineAby, killghoul, enterabyss, killdragon, summonAsorah, killAsorah,
-				enterdreadlands, killdreadguard, ghoulhead, petehead, wilsonhead, orangehead, mineCorgem, mineCor, findPSDL, GK1, GK2, GK3, summonChagaroth, killChagaroth,
-				enterOmothol, enterDarkRealm, necrou1, necrou2, necrou3, abyssaln, ritual, ritualSummon, ritualCreate, killOmotholelite, locateJzahar, killJzahar, shadowGems,
-				mineAbyOres, mineDread, dreadium, eth, makeTransmutator, makeCrystallizer, makeMaterializer, makeCrystalBag, makeEngraver, ritualBreed, ritualPotion, ritualPotionAoE,
-				ritualInfusion}));
+		AchievementPage.registerAchievementPage(new AchievementPage("AbyssalCraft", ACAchievements.achievements));
+
+		necro = ACAchievements.necronomicon;
+		mineAby = ACAchievements.mine_abyssalnite;
+		killghoul = ACAchievements.kill_depths_ghoul;
+		enterabyss = ACAchievements.enter_abyssal_wasteland;
+		killdragon = ACAchievements.kill_spectral_dragon;
+		summonAsorah = ACAchievements.summon_asorah;
+		killAsorah = ACAchievements.kill_asorah;
+		enterdreadlands = ACAchievements.enter_dreadlands;
+		killdreadguard = ACAchievements.kill_dreadguard;
+		ghoulhead = ACAchievements.depths_ghoul_head;
+		petehead = ACAchievements.pete_head;
+		wilsonhead = ACAchievements.mr_wilson_head;
+		orangehead = ACAchievements.dr_orange_head;
+		mineCorgem = ACAchievements.mine_coralium;
+		mineCor = ACAchievements.mine_abyssal_coralium;
+		findPSDL = ACAchievements.find_powerstone;
+		GK1 = ACAchievements.gateway_key;
+		GK2 = ACAchievements.dreaded_gateway_key;
+		GK3 = ACAchievements.rlyehian_gateway_key;
+		summonChagaroth = ACAchievements.summon_chagaroth;
+		killChagaroth = ACAchievements.kill_chagaroth;
+		enterOmothol = ACAchievements.enter_omothol;
+		enterDarkRealm = ACAchievements.enter_dark_realm;
+		necrou1 = ACAchievements.abyssal_wasteland_necronomicon;
+		necrou2 = ACAchievements.dreadlands_necronomicon;
+		necrou3 = ACAchievements.omothol_necronomicon;
+		abyssaln = ACAchievements.abyssalnomicon;
+		ritual = ACAchievements.ritual_altar;
+		ritualSummon = ACAchievements.summoning_ritual;
+		ritualCreate = ACAchievements.creation_ritual;
+		killOmotholelite = ACAchievements.kill_omothol_elite;
+		locateJzahar = ACAchievements.locate_jzahar;
+		killJzahar = ACAchievements.kill_jzahar;
+		shadowGems = ACAchievements.shadow_gems;
+		mineAbyOres = ACAchievements.mine_abyssal_ores;
+		mineDread = ACAchievements.mine_dreadlands_ores;
+		dreadium = ACAchievements.dreadium;
+		eth = ACAchievements.ethaxium;
+		makeTransmutator = ACAchievements.make_transmutator;
+		makeCrystallizer = ACAchievements.make_crystallizer;
+		makeMaterializer = ACAchievements.make_materializer;
+		makeCrystalBag = ACAchievements.make_crystal_bag;
+		makeEngraver = ACAchievements.make_engraver;
+		ritualBreed = ACAchievements.breeding_ritual;
+		ritualPotion = ACAchievements.potion_ritual;
+		ritualPotionAoE = ACAchievements.aoe_potion_ritual;
+		ritualInfusion = ACAchievements.infusion_ritual;
+
+		RecipeSorter.register("abyssalcraft:shapednbt", ShapedNBTRecipe.class, Category.SHAPED, "after:minecraft:shaped");
 
 		GameRegistry.registerFuelHandler(new FurnaceFuelHandler());
 		AbyssalCraftAPI.registerFuelHandler(new CrystalFuelHandler(), FuelType.CRYSTALLIZER);
@@ -240,7 +299,32 @@ public class MiscHandler implements ILifeCycleHandler {
 	}
 
 	@Override
-	public void postInit(FMLPostInitializationEvent event) {}
+	public void postInit(FMLPostInitializationEvent event) {
+		parseNDJsonFiles();
+	}
+
+	private void parseNDJsonFiles(){
+		File folder = new File("config/abyssalcraft/");
+		folder.mkdirs();
+		Stack<File> folders = new Stack<File>();
+		folders.add(folder);
+		while(!folders.isEmpty()){
+			File dir = folders.pop();
+			File[] listOfFiles = dir.listFiles();
+			for(File file : listOfFiles != null ? listOfFiles : new File[0])
+				if(file.isFile()){
+					JsonObject json = NecroDataJsonUtil.readNecroDataJsonFromFile(file);
+					if(json != null){
+						NecroData nd = NecroDataJsonUtil.deserializeNecroData(json);
+						int book = NecroDataJsonUtil.getInteger(json, "booktype");
+						if(nd != null){
+							ACLogger.info("Successfully deserialized JSON file for NecroData %s", nd.getIdentifier());
+							AbyssalCraftAPI.registerNecronomiconData(nd, book);
+						}
+					}
+				}
+		}
+	}
 
 	private void addOreDictionaryStuff(){
 
@@ -556,30 +640,38 @@ public class MiscHandler implements ILifeCycleHandler {
 		return evt;
 	}
 
-	private void addBrewingConversions(PotionType normal, PotionType duration, PotionType strength){
-		Item[] types = {Items.potionitem, Items.splash_potion, Items.lingering_potion};
-		ItemStack[] ingreds = {new ItemStack(Items.redstone), new ItemStack(Items.glowstone_dust), new ItemStack(Items.gunpowder), new ItemStack(Items.dragon_breath)};
-		addBrewing(types[0], normal, ingreds[2], types[1], normal);
-		addBrewing(types[1], normal, ingreds[3], types[2], normal);
-		if(duration != null){
-			addBrewing(types[0], duration, ingreds[2], types[1], duration);
-			addBrewing(types[1], duration, ingreds[3], types[2], duration);
-		}
-		if(strength != null){
-			addBrewing(types[0], strength, ingreds[2], types[1], strength);
-			addBrewing(types[1], strength, ingreds[3], types[2], strength);
-		}
-		for(int i = 0; i < types.length; i++){
-			if(duration != null)
-				addBrewing(types[i], normal, ingreds[0], types[i], duration);
-			if(strength != null)
-				addBrewing(types[i], normal, ingreds[1], types[i], strength);
+	Method m = null;
+
+	private void addBrewing(PotionType input, Item ingredient, PotionType output){
+		if(m == null) m = ReflectionHelper.findMethod(PotionHelper.class, null, new String[]{"registerPotionTypeConversion", "func_185204_a"}, PotionType.class, Predicate.class, PotionType.class);
+		try {
+			m.invoke(null, input, new ItemPredicateInstance(ingredient), output);
+		} catch (Exception e) {
+			ACLogger.severe("Something went wrong registering a brewing for %s %s %s", input.toString(), ingredient.toString(), output.toString());
+			e.printStackTrace();
 		}
 	}
 
-	private void addBrewing(Item input, PotionType inputpot, ItemStack ingredient, Item output, PotionType outputpot){
-		ItemStack in = PotionUtils.addPotionToItemStack(new ItemStack(input), inputpot);
-		ItemStack out = PotionUtils.addPotionToItemStack(new ItemStack(output), outputpot);
-		BrewingRecipeRegistry.addRecipe(in, ingredient, out);
+	static class ItemPredicateInstance implements Predicate<ItemStack>
+	{
+		private final Item item;
+		private final int meta;
+
+		public ItemPredicateInstance(Item itemIn)
+		{
+			this(itemIn, -1);
+		}
+
+		public ItemPredicateInstance(Item itemIn, int metaIn)
+		{
+			item = itemIn;
+			meta = metaIn;
+		}
+
+		@Override
+		public boolean apply(ItemStack p_apply_1_)
+		{
+			return p_apply_1_ != null && p_apply_1_.getItem() == item && (meta == -1 || meta == p_apply_1_.getMetadata());
+		}
 	}
 }

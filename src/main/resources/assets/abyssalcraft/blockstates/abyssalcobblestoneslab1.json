@@ -1,0 +1,14 @@
+{
+	"forge_marker": 1,
+	"defaults": {
+		"textures" : {
+			"bottom": "abyssalcraft:blocks/abyssalcobblestone",
+			"top": "abyssalcraft:blocks/abyssalcobblestone",
+			"side": "abyssalcraft:blocks/abyssalcobblestone"
+		}
+	},
+	"variants": {
+		"half=bottom": { "model": "half_slab" },
+		"half=top": { "model": "upper_slab" }
+	}
+}

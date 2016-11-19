@@ -5,7 +5,7 @@
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
  * http://www.gnu.org/licenses/lgpl-3.0.txt
- * 
+ *
  * Contributors:
  *     Shinoow -  implementation
  ******************************************************************************/
@@ -97,7 +97,7 @@ public class BiomeProviderDreadlands extends BiomeProvider
 		int[] aint = biomeToUse.getInts(par2, par3, par4, par5);
 
 		for (int i = 0; i < par4 * par5; ++i)
-			if (aint[i] >= 0)
+			if (aint[i] >= 0 && aint[i] <= BiomeGenBase.biomeRegistry.getKeys().size())
 				par1ArrayOfBiomeGenBase[i] = BiomeGenBase.getBiome(aint[i]);
 			else
 				par1ArrayOfBiomeGenBase[i] = ACBiomes.dreadlands;
@@ -127,7 +127,7 @@ public class BiomeProviderDreadlands extends BiomeProvider
 			int[] aint = biomeIndexLayer.getInts(x, y, width, length);
 
 			for (int i = 0; i < width * length; ++i)
-				if (aint[i] >= 0)
+				if (aint[i] >= 0 && aint[i] <= BiomeGenBase.biomeRegistry.getKeys().size())
 					par1ArrayOfBiomeGenBase[i] = BiomeGenBase.getBiome(aint[i]);
 				else
 					par1ArrayOfBiomeGenBase[i] = ACBiomes.dreadlands;
@@ -141,21 +141,21 @@ public class BiomeProviderDreadlands extends BiomeProvider
 	public boolean areBiomesViable(int par1, int par2, int par3, List par4List) {
 		IntCache.resetIntCache();
 		int l = par1 - par3 >> 2;
-		int i1 = par2 - par3 >> 2;
-		int j1 = par1 + par3 >> 2;
-		int k1 = par2 + par3 >> 2;
-		int l1 = j1 - l + 1;
-		int i2 = k1 - i1 + 1;
-		int[] aint = biomeToUse.getInts(l, i1, l1, i2);
+				int i1 = par2 - par3 >> 2;
+			int j1 = par1 + par3 >> 2;
+			int k1 = par2 + par3 >> 2;
+			int l1 = j1 - l + 1;
+			int i2 = k1 - i1 + 1;
+			int[] aint = biomeToUse.getInts(l, i1, l1, i2);
 
-		for (int j2 = 0; j2 < l1 * i2; ++j2) {
-			BiomeGenBase biomegenbase = BiomeGenBase.getBiome(aint[j2]);
+			for (int j2 = 0; j2 < l1 * i2; ++j2) {
+				BiomeGenBase biomegenbase = BiomeGenBase.getBiome(aint[j2]);
 
-			if (!par4List.contains(biomegenbase))
-				return false;
-		}
+				if (!par4List.contains(biomegenbase))
+					return false;
+			}
 
-		return true;
+			return true;
 	}
 
 	@Override
@@ -163,27 +163,27 @@ public class BiomeProviderDreadlands extends BiomeProvider
 	public BlockPos findBiomePosition(int par1, int par2, int par3, List par4List, Random par5Random) {
 		IntCache.resetIntCache();
 		int l = par1 - par3 >> 2;
-		int i1 = par2 - par3 >> 2;
-		int j1 = par1 + par3 >> 2;
-		int k1 = par2 + par3 >> 2;
-		int l1 = j1 - l + 1;
-		int i2 = k1 - i1 + 1;
-		int[] aint = biomeToUse.getInts(l, i1, l1, i2);
-		BlockPos blockpos = null;
-		int j2 = 0;
+			int i1 = par2 - par3 >> 2;
+			int j1 = par1 + par3 >> 2;
+			int k1 = par2 + par3 >> 2;
+			int l1 = j1 - l + 1;
+			int i2 = k1 - i1 + 1;
+			int[] aint = biomeToUse.getInts(l, i1, l1, i2);
+			BlockPos blockpos = null;
+			int j2 = 0;
 
-		for (int k2 = 0; k2 < l1 * i2; ++k2) {
-			int l2 = l + k2 % l1 << 2;
-			int i3 = i1 + k2 / l1 << 2;
-			BiomeGenBase biomegenbase = BiomeGenBase.getBiome(aint[k2]);
+			for (int k2 = 0; k2 < l1 * i2; ++k2) {
+				int l2 = l + k2 % l1 << 2;
+				int i3 = i1 + k2 / l1 << 2;
+				BiomeGenBase biomegenbase = BiomeGenBase.getBiome(aint[k2]);
 
-			if (par4List.contains(biomegenbase) && (blockpos == null || par5Random.nextInt(j2 + 1) == 0)) {
-				blockpos = new BlockPos(l2, 0, i3);
-				++j2;
+				if (par4List.contains(biomegenbase) && (blockpos == null || par5Random.nextInt(j2 + 1) == 0)) {
+					blockpos = new BlockPos(l2, 0, i3);
+					++j2;
+				}
 			}
-		}
 
-		return blockpos;
+			return blockpos;
 	}
 
 	@Override

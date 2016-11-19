@@ -5,7 +5,7 @@
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
  * http://www.gnu.org/licenses/lgpl-3.0.txt
- * 
+ *
  * Contributors:
  *     Shinoow -  implementation
  ******************************************************************************/
@@ -39,9 +39,10 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
 
-import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.api.entity.ICoraliumEntity;
 import com.shinoow.abyssalcraft.api.item.ACItems;
+import com.shinoow.abyssalcraft.lib.ACAchievements;
+import com.shinoow.abyssalcraft.lib.ACConfig;
 import com.shinoow.abyssalcraft.lib.ACLoot;
 
 public class EntityDragonMinion extends EntityMob implements IEntityMultiPart, ICoraliumEntity
@@ -98,13 +99,14 @@ public class EntityDragonMinion extends EntityMob implements IEntityMultiPart, I
 		setSize(8.0F, 4.0F);
 		noClip = true;
 		targetY = 100.0D;
+		isImmuneToFire = true;
 	}
 
 	@Override
 	protected void applyEntityAttributes()
 	{
 		super.applyEntityAttributes();
-		if(AbyssalCraft.hardcoreMode) getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(60.0D);
+		if(ACConfig.hardcoreMode) getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(60.0D);
 		else getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(30.0D);
 	}
 
@@ -152,7 +154,7 @@ public class EntityDragonMinion extends EntityMob implements IEntityMultiPart, I
 		if (par1DamageSource.getEntity() instanceof EntityPlayer)
 		{
 			EntityPlayer entityplayer = (EntityPlayer)par1DamageSource.getEntity();
-			entityplayer.addStat(AbyssalCraft.killdragon, 1);
+			entityplayer.addStat(ACAchievements.kill_spectral_dragon, 1);
 		}
 	}
 
@@ -179,7 +181,7 @@ public class EntityDragonMinion extends EntityMob implements IEntityMultiPart, I
 			f = (rand.nextFloat() - 0.5F) * 8.0F;
 			f1 = (rand.nextFloat() - 0.5F) * 4.0F;
 			f2 = (rand.nextFloat() - 0.5F) * 8.0F;
-			if(AbyssalCraft.particleEntity)
+			if(ACConfig.particleEntity)
 				worldObj.spawnParticle(EnumParticleTypes.EXPLOSION_LARGE, posX + f, posY + 2.0D + f1, posZ + f2, 0.0D, 0.0D, 0.0D);
 		}
 		else

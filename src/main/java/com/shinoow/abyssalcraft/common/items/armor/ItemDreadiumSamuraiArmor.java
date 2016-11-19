@@ -5,7 +5,7 @@
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
  * http://www.gnu.org/licenses/lgpl-3.0.txt
- * 
+ *
  * Contributors:
  *     Shinoow -  implementation
  ******************************************************************************/
@@ -88,6 +88,7 @@ public class ItemDreadiumSamuraiArmor extends ItemArmor {
 
 	@Override
 	public void onArmorTick(World world, EntityPlayer player, ItemStack itemstack) {
+		if(world.isRemote) return;
 		if (itemstack.getItem() == ACItems.dreadium_samurai_helmet) {
 			player.addPotionEffect(new PotionEffect(MobEffects.nightVision, 260, 0));
 			if(player.getActivePotionEffect(AbyssalCraftAPI.dread_plague) !=null)
