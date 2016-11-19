@@ -1,0 +1,8 @@
+{
+	"parent": "block/half_slab",
+	"textures": {
+		"bottom": "abyssalcraft:blocks/abyssalcobblestone",
+		"top": "abyssalcraft:blocks/abyssalcobblestone",
+		"side": "abyssalcraft:blocks/abyssalcobblestone"
+	}
+}

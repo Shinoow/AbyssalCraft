@@ -5,7 +5,7 @@
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
  * http://www.gnu.org/licenses/lgpl-3.0.txt
- * 
+ *
  * Contributors:
  *     Shinoow -  implementation
  ******************************************************************************/
@@ -17,13 +17,13 @@ import net.minecraft.item.ItemSlab;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.TextFormatting;
 
-import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
+import com.shinoow.abyssalcraft.init.BlockHandler;
 
 public class ItemAbySlab extends ItemSlab {
 
 	public ItemAbySlab(Block block) {
-		super(block, (BlockSlab)ACBlocks.abyssal_stone_brick_slab, (BlockSlab)AbyssalCraft.abyslab2);
+		super(block, (BlockSlab)ACBlocks.abyssal_stone_brick_slab, (BlockSlab)BlockHandler.abyslab2);
 		setMaxDamage(0);
 		setHasSubtypes(true);
 	}

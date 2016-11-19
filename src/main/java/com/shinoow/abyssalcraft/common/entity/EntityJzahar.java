@@ -5,7 +5,7 @@
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
  * http://www.gnu.org/licenses/lgpl-3.0.txt
- * 
+ *
  * Contributors:
  *     Shinoow -  implementation
  ******************************************************************************/
@@ -62,12 +62,14 @@ import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
 import net.minecraft.world.BossInfo.Color;
 
-import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.api.entity.EntityUtil;
 import com.shinoow.abyssalcraft.api.entity.IAntiEntity;
 import com.shinoow.abyssalcraft.api.entity.ICoraliumEntity;
 import com.shinoow.abyssalcraft.api.entity.IDreadEntity;
+import com.shinoow.abyssalcraft.lib.ACAchievements;
+import com.shinoow.abyssalcraft.lib.ACConfig;
 import com.shinoow.abyssalcraft.lib.ACLib;
+import com.shinoow.abyssalcraft.lib.ACSounds;
 import com.shinoow.abyssalcraft.lib.util.SpecialTextUtil;
 import com.shinoow.abyssalcraft.lib.world.TeleporterDarkRealm;
 
@@ -104,7 +106,7 @@ public class EntityJzahar extends EntityMob implements IRangedAttackMob, IAntiEn
 	protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
 
-		if(AbyssalCraft.hardcoreMode){
+		if(ACConfig.hardcoreMode){
 			getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(1000.0D);
 			getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(40.0D);
 		} else {
@@ -196,7 +198,7 @@ public class EntityJzahar extends EntityMob implements IRangedAttackMob, IAntiEn
 		swingArm(EnumHand.MAIN_HAND);
 		boolean flag = super.attackEntityAsMob(par1Entity);
 
-		if(AbyssalCraft.hardcoreMode && par1Entity instanceof EntityPlayer)
+		if(ACConfig.hardcoreMode && par1Entity instanceof EntityPlayer)
 			par1Entity.attackEntityFrom(DamageSource.causeMobDamage(this).setDamageBypassesArmor(), 4.5F);
 
 		return flag;
@@ -220,7 +222,7 @@ public class EntityJzahar extends EntityMob implements IRangedAttackMob, IAntiEn
 		bossInfo.setPercent(getHealth() / getMaxHealth());
 		List<EntityPlayer> players = worldObj.getEntitiesWithinAABB(EntityPlayer.class, getEntityBoundingBox().expand(10, 10, 10));
 		for(EntityPlayer player : players)
-			player.addStat(AbyssalCraft.killJzahar, 1);
+			player.addStat(ACAchievements.kill_jzahar, 1);
 		super.onDeath(par1DamageSource);
 	}
 
@@ -274,7 +276,7 @@ public class EntityJzahar extends EntityMob implements IRangedAttackMob, IAntiEn
 						worldObj.removeEntity(entity);
 						if(entity.isDead)
 							SpecialTextUtil.JzaharGroup(worldObj, I18n.translateToLocal("message.jzahar.banish.vanilla"));
-					} else if(AbyssalCraft.particleEntity)
+					} else if(ACConfig.particleEntity)
 						worldObj.spawnParticle(EnumParticleTypes.EXPLOSION_HUGE, entity.posX + f, entity.posY + 2.0D + f1, entity.posZ + f2, 0.0D, 0.0D, 0.0D);
 				}
 				else if(entity instanceof EntityDragonBoss || entity instanceof EntitySacthoth || entity instanceof EntityChagaroth){
@@ -282,7 +284,7 @@ public class EntityJzahar extends EntityMob implements IRangedAttackMob, IAntiEn
 						worldObj.removeEntity(entity);
 						if(entity.isDead)
 							SpecialTextUtil.JzaharGroup(worldObj, I18n.translateToLocal("message.jzahar.banish.ac"));
-					} else if(AbyssalCraft.particleEntity)
+					} else if(ACConfig.particleEntity)
 						worldObj.spawnParticle(EnumParticleTypes.EXPLOSION_HUGE, entity.posX + f, entity.posY + 2.0D + f1, entity.posZ + f2, 0.0D, 0.0D, 0.0D);
 				}
 				else if(entity instanceof EntityJzahar){
@@ -297,7 +299,7 @@ public class EntityJzahar extends EntityMob implements IRangedAttackMob, IAntiEn
 							that = true;
 							SpecialTextUtil.JzaharGroup(worldObj, I18n.translateToLocal("message.jzahar.banish.jzh"));
 						}
-					} else if(AbyssalCraft.particleEntity){
+					} else if(ACConfig.particleEntity){
 						worldObj.spawnParticle(EnumParticleTypes.EXPLOSION_HUGE, entity.posX + f, entity.posY + 2.0D + f1, entity.posZ + f2, 0.0D, 0.0D, 0.0D);
 						worldObj.spawnParticle(EnumParticleTypes.EXPLOSION_HUGE, posX + f, posY + 2.0D + f1, posZ + f2, 0.0D, 0.0D, 0.0D);
 					}
@@ -307,7 +309,7 @@ public class EntityJzahar extends EntityMob implements IRangedAttackMob, IAntiEn
 						worldObj.removeEntity(entity);
 						if(entity.isDead)
 							SpecialTextUtil.JzaharGroup(worldObj, I18n.translateToLocal("message.jzahar.banish.other"));
-					} else if(AbyssalCraft.particleEntity)
+					} else if(ACConfig.particleEntity)
 						worldObj.spawnParticle(EnumParticleTypes.EXPLOSION_HUGE, entity.posX + f, entity.posY + 2.0D + f1, entity.posZ + f2, 0.0D, 0.0D, 0.0D);
 				}
 				else if(entity instanceof EntityPlayer)
@@ -352,7 +354,7 @@ public class EntityJzahar extends EntityMob implements IRangedAttackMob, IAntiEn
 
 		if(deathTicks <= 800){
 			if(deathTicks == 410)
-				playSound(AbyssalCraft.jzahar_charge, 1, 1);
+				playSound(ACSounds.jzahar_charge, 1, 1);
 			if(deathTicks < 400)
 				worldObj.spawnParticle(EnumParticleTypes.SMOKE_LARGE, posX, posY + 2.5D, posZ, 0, 0, 0);
 			float f = (rand.nextFloat() - 0.5F) * 3.0F;
@@ -447,7 +449,7 @@ public class EntityJzahar extends EntityMob implements IRangedAttackMob, IAntiEn
 							EntityPlayerMP mp = (EntityPlayerMP) player;
 							mp.addPotionEffect(new PotionEffect(MobEffects.RESISTANCE, 80, 255));
 							mp.mcServer.getPlayerList().transferPlayerToDimension(mp, ACLib.dark_realm_id, new TeleporterDarkRealm(worldServer));
-							player.addStat(AbyssalCraft.enterDarkRealm, 1);
+							player.addStat(ACAchievements.enter_dark_realm, 1);
 						}
 					}
 					else if(entity instanceof EntityLivingBase || entity instanceof EntityItem)

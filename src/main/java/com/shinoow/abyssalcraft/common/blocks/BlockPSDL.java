@@ -5,7 +5,7 @@
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
  * http://www.gnu.org/licenses/lgpl-3.0.txt
- * 
+ *
  * Contributors:
  *     Shinoow -  implementation
  ******************************************************************************/
@@ -22,7 +22,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-import com.shinoow.abyssalcraft.AbyssalCraft;
+import com.shinoow.abyssalcraft.lib.ACConfig;
 
 public class BlockPSDL extends Block {
 
@@ -55,7 +55,7 @@ public class BlockPSDL extends Block {
 	{
 		super.randomDisplayTick(state, par1World, pos, par5Random);
 
-		if(AbyssalCraft.particleBlock)
+		if(ACConfig.particleBlock)
 			if (par5Random.nextInt(10) == 0)
 				par1World.spawnParticle(EnumParticleTypes.SMOKE_LARGE, pos.getX() + par5Random.nextFloat(), pos.getY() + 1.1F, pos.getZ() + par5Random.nextFloat(), 0.0D, 0.0D, 0.0D);
 	}

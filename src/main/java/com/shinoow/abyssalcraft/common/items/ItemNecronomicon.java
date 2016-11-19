@@ -5,7 +5,7 @@
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
  * http://www.gnu.org/licenses/lgpl-3.0.txt
- * 
+ *
  * Contributors:
  *     Shinoow -  implementation
  ******************************************************************************/
@@ -32,7 +32,9 @@ import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.api.energy.IEnergyTransporterItem;
 import com.shinoow.abyssalcraft.api.item.ACItems;
 import com.shinoow.abyssalcraft.common.blocks.BlockRitualAltar;
+import com.shinoow.abyssalcraft.lib.ACAchievements;
 import com.shinoow.abyssalcraft.lib.ACLib;
+import com.shinoow.abyssalcraft.lib.ACSounds;
 import com.shinoow.abyssalcraft.lib.util.RitualUtil;
 import com.shinoow.abyssalcraft.lib.util.SpecialTextUtil;
 import com.shinoow.abyssalcraft.lib.util.blocks.IRitualAltar;
@@ -86,8 +88,8 @@ public class ItemNecronomicon extends ItemACBasic implements IEnergyTransporterI
 			if(!(w.getBlockState(pos).getBlock() instanceof BlockRitualAltar)){
 				if(isOwner(player, is))
 					if(RitualUtil.tryAltar(w, pos, bookType)){
-						w.playSound(player, pos, AbyssalCraft.remnant_scream, player.getSoundCategory(), 3F, 1F);
-						player.addStat(AbyssalCraft.ritual, 1);
+						w.playSound(player, pos, ACSounds.remnant_scream, player.getSoundCategory(), 3F, 1F);
+						player.addStat(ACAchievements.ritual_altar, 1);
 						return EnumActionResult.SUCCESS;
 					}
 			} else if(w.getTileEntity(pos) instanceof IRitualAltar)

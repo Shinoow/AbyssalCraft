@@ -5,7 +5,7 @@
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
  * http://www.gnu.org/licenses/lgpl-3.0.txt
- * 
+ *
  * Contributors:
  *     Shinoow -  implementation
  ******************************************************************************/
@@ -36,19 +36,19 @@ public class RitualUtil {
 	public static void addBlocks(){
 		ritualBlocks.put(Blocks.COBBLESTONE, 0);
 		ritualBlocks.put(ACBlocks.darkstone_cobblestone, 0);
-		ritualBlocks.put(ACBlocks.abyssal_stone_brick, 1);
-		ritualBlocks.put(ACBlocks.coralium_stone_brick, 1);
-		ritualBlocks.put(ACBlocks.dreadstone_brick, 2);
-		ritualBlocks.put(ACBlocks.abyssalnite_stone_brick, 2);
+		ritualBlocks.put(ACBlocks.abyssal_cobblestone, 1);
+		ritualBlocks.put(ACBlocks.coralium_cobblestone, 1);
+		ritualBlocks.put(ACBlocks.dreadstone_cobblestone, 2);
+		ritualBlocks.put(ACBlocks.abyssalnite_cobblestone, 2);
 		ritualBlocks.put(ACBlocks.ethaxium_brick, 3);
 		ritualBlocks.put(ACBlocks.dark_ethaxium_brick, 3);
 
 		altarMeta.put(Blocks.COBBLESTONE, 0);
 		altarMeta.put(ACBlocks.darkstone_cobblestone, 1);
-		altarMeta.put(ACBlocks.abyssal_stone_brick, 2);
-		altarMeta.put(ACBlocks.coralium_stone_brick, 3);
-		altarMeta.put(ACBlocks.dreadstone_brick, 4);
-		altarMeta.put(ACBlocks.abyssalnite_stone_brick, 5);
+		altarMeta.put(ACBlocks.abyssal_cobblestone, 2);
+		altarMeta.put(ACBlocks.coralium_cobblestone, 3);
+		altarMeta.put(ACBlocks.dreadstone_cobblestone, 4);
+		altarMeta.put(ACBlocks.abyssalnite_cobblestone, 5);
 		altarMeta.put(ACBlocks.ethaxium_brick, 6);
 		altarMeta.put(ACBlocks.dark_ethaxium_brick, 7);
 	}
@@ -125,6 +125,15 @@ public class RitualUtil {
 			int y = 0;
 			int z = 0;
 
+			world.destroyBlock(pos, false);
+			world.destroyBlock(pos.add(x -3, y, z), false);
+			world.destroyBlock(pos.add(x, y, z -3), false);
+			world.destroyBlock(pos.add(x + 3, y, z), false);
+			world.destroyBlock(pos.add(x, y, z + 3), false);
+			world.destroyBlock(pos.add(x -2, y, z + 2), false);
+			world.destroyBlock(pos.add(x -2, y, z -2), false);
+			world.destroyBlock(pos.add(x + 2, y, z + 2), false);
+			world.destroyBlock(pos.add(x + 2, y, z -2), false);
 			world.setBlockState(pos, ACBlocks.ritual_altar.getStateFromMeta(meta), 2);
 			world.setBlockState(pos.add(x -3, y, z), ACBlocks.ritual_pedestal.getStateFromMeta(meta), 2);
 			world.setBlockState(pos.add(x, y, z -3), ACBlocks.ritual_pedestal.getStateFromMeta(meta), 2);

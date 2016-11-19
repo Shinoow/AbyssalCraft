@@ -5,7 +5,7 @@
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
  * http://www.gnu.org/licenses/lgpl-3.0.txt
- * 
+ *
  * Contributors:
  *     Shinoow -  implementation
  ******************************************************************************/
@@ -45,7 +45,7 @@ public class DisruptionHandler {
 	/**
 	 * Registers a Disruption Entry
 	 * @param disruption The Disruption
-	 * 
+	 *
 	 * @since 1.5
 	 */
 	public void registerDisruption(DisruptionEntry disruption){
@@ -60,7 +60,7 @@ public class DisruptionHandler {
 	/**
 	 * Used to fetch a list of disruptions
 	 * @return An ArrayList containing all registered Disruptions
-	 * 
+	 *
 	 * @since 1.5
 	 */
 	public List<DisruptionEntry> getDisruptions(){
@@ -71,7 +71,7 @@ public class DisruptionHandler {
 	 * Fetches a Disruption based on it's unlocalized name
 	 * @param name A unlocalized name (the "ac.disruption." prefix will be stripped if present)
 	 * @return A disruption with that unlocalized name, or null if none were found
-	 * 
+	 *
 	 * @since 1.8.2
 	 */
 	public DisruptionEntry disruptionFromName(String name){
@@ -89,7 +89,7 @@ public class DisruptionHandler {
 	 * @param world Current World
 	 * @param pos Current BlockPos
 	 * @param players Nearby players (16 block radius or larger)
-	 * 
+	 *
 	 * @since 1.5
 	 */
 	public void generateDisruption(DeityType deity, World world, BlockPos pos, List<EntityPlayer> players){

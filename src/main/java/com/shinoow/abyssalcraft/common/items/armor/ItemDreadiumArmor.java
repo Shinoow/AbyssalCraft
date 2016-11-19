@@ -5,7 +5,7 @@
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
  * http://www.gnu.org/licenses/lgpl-3.0.txt
- * 
+ *
  * Contributors:
  *     Shinoow -  implementation
  ******************************************************************************/
@@ -50,6 +50,7 @@ public class ItemDreadiumArmor extends ItemArmor {
 
 	@Override
 	public void onArmorTick(World world, EntityPlayer player, ItemStack itemstack) {
+		if(world.isRemote) return;
 		if (itemstack.getItem() == ACItems.dreadium_helmet) {
 			player.addPotionEffect(new PotionEffect(MobEffects.NIGHT_VISION, 260, 0));
 			if(player.getActivePotionEffect(AbyssalCraftAPI.dread_plague) !=null)
@@ -58,6 +59,6 @@ public class ItemDreadiumArmor extends ItemArmor {
 		if (itemstack.getItem() == ACItems.dreadium_chestplate)
 			player.addPotionEffect(new PotionEffect(MobEffects.RESISTANCE, 20, 0));
 		if (itemstack.getItem() == ACItems.dreadium_boots)
-			player.addPotionEffect(new PotionEffect(MobEffects.SPEED, 20, 1));
+			player.addPotionEffect(new PotionEffect(MobEffects.SPEED, 20, 0));
 	}
 }

@@ -5,7 +5,7 @@
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
  * http://www.gnu.org/licenses/lgpl-3.0.txt
- * 
+ *
  * Contributors:
  *     Shinoow -  implementation
  ******************************************************************************/
@@ -22,7 +22,6 @@ import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.renderer.RenderItem;
 import net.minecraft.client.resources.I18n;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.oredict.OreDictionary;
@@ -73,25 +72,6 @@ public class GuiNecronomiconMachines extends GuiNecronomicon {
 		//	buttonList.add(materializer = new ButtonCategory(7, i + 14, b0 + 92, this, StatCollector.translateToLocal("container.abyssalcraft.materializer"), getItem(3)));
 
 		updateButtons();
-	}
-
-	private Item getItem(int par1){
-		if(par1 > getBookType())
-			return ACItems.oblivion_catalyst;
-		switch(par1){
-		case 0:
-			return ACItems.necronomicon;
-		case 1:
-			return ACItems.abyssal_wasteland_necronomicon;
-		case 2:
-			return ACItems.dreadlands_necronomicon;
-		case 3:
-			return ACItems.omothol_necronomicon;
-		case 4:
-			return ACItems.abyssalnomicon;
-		default:
-			return ACItems.necronomicon;
-		}
 	}
 
 	private void updateButtons()

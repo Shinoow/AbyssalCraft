@@ -5,7 +5,7 @@
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
  * http://www.gnu.org/licenses/lgpl-3.0.txt
- * 
+ *
  * Contributors:
  *     Shinoow -  implementation
  ******************************************************************************/
@@ -17,7 +17,6 @@ import org.lwjgl.input.Keyboard;
 
 import com.google.common.collect.Maps;
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
-import com.shinoow.abyssalcraft.api.item.ACItems;
 import com.shinoow.abyssalcraft.api.necronomicon.NecroData;
 import com.shinoow.abyssalcraft.client.gui.necronomicon.buttons.ButtonCategory;
 import com.shinoow.abyssalcraft.client.gui.necronomicon.buttons.ButtonNextPage;
@@ -26,7 +25,6 @@ import com.shinoow.abyssalcraft.lib.NecronomiconText;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.resources.I18n;
-import net.minecraft.item.Item;
 
 public class GuiNecronomiconOther extends GuiNecronomicon {
 
@@ -102,25 +100,6 @@ public class GuiNecronomiconOther extends GuiNecronomicon {
 		boolean t4 = par1 == par2 - 3 && par2 - 3 >= 0;
 		boolean t5 = par1 == par2 - 4 && par2 - 4 >= 0;
 		return t1 || t2 || t3 || t4 || t5;
-	}
-
-	private Item getItem(int par1){
-		if(par1 > getBookType())
-			return ACItems.oblivion_catalyst;
-		switch(par1){
-		case 0:
-			return ACItems.necronomicon;
-		case 1:
-			return ACItems.abyssal_wasteland_necronomicon;
-		case 2:
-			return ACItems.dreadlands_necronomicon;
-		case 3:
-			return ACItems.omothol_necronomicon;
-		case 4:
-			return ACItems.abyssalnomicon;
-		default:
-			return ACItems.necronomicon;
-		}
 	}
 
 	private String getTitle(String par1, int par2){

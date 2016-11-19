@@ -5,7 +5,7 @@
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
  * http://www.gnu.org/licenses/lgpl-3.0.txt
- * 
+ *
  * Contributors:
  *     Shinoow -  implementation
  ******************************************************************************/
@@ -16,12 +16,13 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemFood;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.TextFormatting;
+import net.minecraftforge.common.ForgeModContainer;
+import net.minecraftforge.fluids.UniversalBucket;
 import net.minecraftforge.fml.common.event.*;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
-import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.api.energy.EnergyEnum.DeityType;
 import com.shinoow.abyssalcraft.api.item.*;
 import com.shinoow.abyssalcraft.common.items.*;
@@ -32,16 +33,18 @@ import com.shinoow.abyssalcraft.lib.item.ItemMetadata;
 
 public class ItemHandler implements ILifeCycleHandler {
 
+	public static Item devsword, shadowPlate;
+
 	@Override
 	public void preInit(FMLPreInitializationEvent event) {
 		//"secret" dev stuff
-		AbyssalCraft.devsword = new AbyssalCraftTool();
+		devsword = new AbyssalCraftTool();
 
 		//Misc items
 		ACItems.oblivion_catalyst = new ItemOC();
 		ACItems.staff_of_the_gatekeeper = new ItemStaff();
 		ACItems.gateway_key = new ItemPortalPlacer(0, "gatewaykey");
-		ACItems.liquid_coralium_bucket = new ItemCBucket(ACBlocks.liquid_coralium);
+		ACItems.liquid_coralium_bucket = new ItemDeprecated("cbucket");
 		ACItems.powerstone_tracker = new ItemTrackerPSDL();
 		ACItems.eye_of_the_abyss = new ItemEoA();
 		ACItems.dreaded_gateway_key = new ItemPortalPlacer(1, "gatewaykeydl");
@@ -73,6 +76,9 @@ public class ItemHandler implements ILifeCycleHandler {
 		ACItems.skin = new ItemMetadata("skin", "abyssalwasteland", "dreadlands", "omothol");
 		ACItems.essence_of_the_gatekeeper = new ItemGatekeeperEssence();
 		ACItems.interdimensional_cage = new ItemInterdimensionalCage();
+
+		ACItems.liquid_coralium_bucket_stack = UniversalBucket.getFilledBucket(ForgeModContainer.getInstance().universalBucket, AbyssalCraftAPI.liquid_coralium_fluid);
+		ACItems.liquid_antimatter_bucket_stack = UniversalBucket.getFilledBucket(ForgeModContainer.getInstance().universalBucket, AbyssalCraftAPI.liquid_antimatter_fluid);
 
 		//Coins
 		ACItems.coin = new ItemCoin("coin");
@@ -109,7 +115,7 @@ public class ItemHandler implements ILifeCycleHandler {
 		ACItems.ethaxium_ingot = new ItemACBasic("ethaxiumingot");
 
 		//anti-items
-		ACItems.liquid_antimatter_bucket = new ItemAntiBucket(ACBlocks.liquid_antimatter);
+		ACItems.liquid_antimatter_bucket = new ItemDeprecated("antibucket");
 		ACItems.anti_beef = new ItemAntiFood("antibeef");
 		ACItems.anti_chicken = new ItemAntiFood("antichicken");
 		ACItems.anti_pork = new ItemAntiFood("antipork");
@@ -128,7 +134,7 @@ public class ItemHandler implements ILifeCycleHandler {
 		ACItems.shadow_shard = new ItemACBasic("shadowshard");
 		ACItems.shadow_gem = new ItemACBasic("shadowgem");
 		ACItems.shard_of_oblivion = new ItemACBasic("oblivionshard");
-		AbyssalCraft.shadowPlate = new ItemACBasic("shadowplate");
+		shadowPlate = new ItemACBasic("shadowplate");
 
 		//Dread items
 		ACItems.dreaded_shard_of_abyssalnite = new ItemACBasic("dreadshard");
@@ -250,7 +256,7 @@ public class ItemHandler implements ILifeCycleHandler {
 		ACItems.fried_egg_on_a_plate = new ItemPlatefood(10, 1.2F, false, "eggp");
 		ACItems.washcloth = new ItemWashCloth();
 
-		registerItem(AbyssalCraft.devsword, "devsword");
+		registerItem(devsword, "devsword");
 		registerItem(ACItems.oblivion_catalyst, "oc");
 		registerItem(ACItems.gateway_key, "gatewaykey");
 		registerItem(ACItems.staff_of_the_gatekeeper, "staff");

@@ -5,22 +5,33 @@
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
  * http://www.gnu.org/licenses/lgpl-3.0.txt
- * 
+ *
  * Contributors:
  *     Shinoow -  implementation
  ******************************************************************************/
 package com.shinoow.abyssalcraft.client.gui.necronomicon;
 
+import java.net.URL;
+
+import javax.imageio.ImageIO;
+
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
+import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.client.renderer.texture.DynamicTexture;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.fml.common.Loader;
+import net.minecraftforge.fml.common.LoaderState;
 
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.GL11;
 
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
 import com.shinoow.abyssalcraft.api.item.ACItems;
+import com.shinoow.abyssalcraft.api.necronomicon.NecroData;
+import com.shinoow.abyssalcraft.api.necronomicon.NecroData.Chapter;
+import com.shinoow.abyssalcraft.api.necronomicon.NecroData.Page;
 import com.shinoow.abyssalcraft.client.gui.necronomicon.buttons.ButtonCategory;
 import com.shinoow.abyssalcraft.client.gui.necronomicon.buttons.ButtonNextPage;
 import com.shinoow.abyssalcraft.lib.NecronomiconResources;
@@ -35,6 +46,7 @@ public class GuiNecronomiconInformation extends GuiNecronomicon {
 	private boolean isAC = false;
 	private boolean isAN = false;
 	private boolean isP = false;
+	private static NecroData data;
 
 	public GuiNecronomiconInformation(int bookType){
 		super(bookType);
@@ -73,7 +85,7 @@ public class GuiNecronomiconInformation extends GuiNecronomicon {
 
 	private void updateButtons()
 	{
-		buttonNextPage.visible = currTurnup < getTurnupLimit() - 1 && isInfo && !isAN && !isP;
+		buttonNextPage.visible = currTurnup < getTurnupLimit() - 1 && isInfo && !isAN;
 		buttonPreviousPage.visible = true;
 		buttonDone.visible = true;
 		buttonCat1.visible = true;
@@ -154,50 +166,130 @@ public class GuiNecronomiconInformation extends GuiNecronomicon {
 		buttonList.add(buttonPreviousPage = new ButtonNextPage(2, i + 18, b0 + 154, false));
 	}
 
+	public static void setPatreonInfo(Chapter info){
+		data = new NecroData("information", "", new Chapter("acinfo", NecronomiconText.LABEL_INFORMATION_ABYSSALCRAFT,
+				new Page(1, NecronomiconResources.ABYSSALCRAFT_1, NecronomiconText.INFORMATION_ABYSSALCRAFT_PAGE_1),
+				new Page(2, NecronomiconResources.BLANK, NecronomiconText.INFORMATION_ABYSSALCRAFT_PAGE_2),
+				new Page(3, NecronomiconResources.ABYSSALCRAFT_2, NecronomiconText.INFORMATION_ABYSSALCRAFT_PAGE_3),
+				new Page(4, NecronomiconResources.BLANK, NecronomiconText.INFORMATION_ABYSSALCRAFT_PAGE_4),
+				new Page(5, NecronomiconResources.ABYSSALCRAFT_3, NecronomiconText.INFORMATION_ABYSSALCRAFT_PAGE_5),
+				new Page(6, NecronomiconResources.BLANK, NecronomiconText.INFORMATION_ABYSSALCRAFT_PAGE_6)),
+				new Chapter("abyssalnomicon", NecronomiconText.LABEL_INFORMATION_ABYSSALNOMICON, new Page(1, NecronomiconText.INFORMATION_ABYSSALNOMICON)));
+		if(Loader.instance().getLoaderState() == LoaderState.INITIALIZATION
+				&& Loader.instance().activeModContainer().getModId().equals("abyssalcraft"))
+			data.addChapter(info);
+	}
+
 	@Override
 	protected void drawInformationText(int x, int y){
+		if(isAC)
+			drawChapter(data.getChapters()[0], x, y);
+		if(isAN)
+			drawChapter(data.getChapters()[1], x, y);
+		if(isP)
+			drawChapter(data.getChapters()[2], x, y);
+	}
+
+	private void drawChapter(Chapter chapter, int x, int y){
 		int k = (width - guiWidth) / 2;
 		byte b0 = 2;
 		String stuff;
-		if(isAC){
-			stuff = I18n.format(NecronomiconText.LABEL_INFORMATION_ABYSSALCRAFT, new Object[0]);
-			fontRendererObj.drawSplitString(stuff, k + 20, b0 + 16, 116, 0xC40000);
-			setTurnupLimit(3);
-			if(currTurnup == 0){
-				writeText(1, NecronomiconText.INFORMATION_ABYSSALCRAFT_PAGE_1, 100);
-				writeText(2, NecronomiconText.INFORMATION_ABYSSALCRAFT_PAGE_2, 100);
+
+		stuff = chapter.getTitle();
+		fontRendererObj.drawSplitString(stuff, k + 20, b0 + 16, 116, 0xC40000);
+		setTurnupLimit(chapter.getTurnupAmount());
+
+		int num = (currTurnup + 1)*2;
+
+		addPage(chapter.getPage(num-1), chapter.getPage(num), num, x, y);
+	}
+
+	private void addPage(Page page1, Page page2, int displayNum, int x, int y){
+		int k = (width - guiWidth) / 2;
+		byte b0 = 2;
+		String text1 = "";
+		String text2 = "";
+		Object icon1 = null;
+		Object icon2 = null;
+
+		if(page1 != null){
+			text1 = page1.getText();
+			icon1 = page1.getIcon();
+		}
+		if(page2 != null){
+			text2 = page2.getText();
+			icon2 = page2.getIcon();
+		}
+
+		if(icon1 != null && icon1 instanceof ResourceLocation || icon1 instanceof String)
+			writeText(1, text1, 100);
+		else writeText(1, text1);
+		if(icon2 != null && icon2 instanceof ResourceLocation || icon2 instanceof String)
+			writeText(2, text2, 100);
+		else writeText(2, text2);
+
+		writeText(1, String.valueOf(displayNum - 1), 165, 50);
+		writeText(2, String.valueOf(displayNum), 165, 50);
+
+		if(icon1 != null){
+			if(icon1 instanceof ResourceLocation){
 				GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-				mc.renderEngine.bindTexture(NecronomiconResources.ABYSSALCRAFT_1);
-				drawTexturedModalRect(k, b0, 0, 0, 256, 256);
-			} else if(currTurnup == 1){
-				writeText(1, NecronomiconText.INFORMATION_ABYSSALCRAFT_PAGE_3, 100);
-				writeText(2, NecronomiconText.INFORMATION_ABYSSALCRAFT_PAGE_4, 100);
-				GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-				mc.renderEngine.bindTexture(NecronomiconResources.ABYSSALCRAFT_2);
-				drawTexturedModalRect(k, b0, 0, 0, 256, 256);
-			} else if(currTurnup == 2){
-				writeText(1, NecronomiconText.INFORMATION_ABYSSALCRAFT_PAGE_5, 100);
-				writeText(2, NecronomiconText.INFORMATION_ABYSSALCRAFT_PAGE_6, 100);
-				GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-				mc.renderEngine.bindTexture(NecronomiconResources.ABYSSALCRAFT_3);
+				mc.renderEngine.bindTexture((ResourceLocation)icon1);
 				drawTexturedModalRect(k, b0, 0, 0, 256, 256);
 			}
-		} else if(isAN){
-			stuff = I18n.format(NecronomiconText.LABEL_INFORMATION_ABYSSALNOMICON, new Object[0]);
-			fontRendererObj.drawSplitString(stuff, k + 20, b0 + 16, 116, 0xC40000);
-			setTurnupLimit(1);
-			writeText(1, NecronomiconText.INFORMATION_ABYSSALNOMICON);
-		} else if(isP){
-			stuff = "Patrons";
-			fontRendererObj.drawSplitString(stuff, k + 20, b0 + 16, 116, 0xC40000);
-			setTurnupLimit(1);
-			writeText(1, "Saice Shoop", 100);
-			writeText(2, "Minecreatr", 100);
-			GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-			mc.renderEngine.bindTexture(new ResourceLocation("abyssalcraft", "textures/gui/necronomicon/patreon/saice.png"));
-			drawTexturedModalRect(k, b0, 0, 0, 256, 256);
-			mc.renderEngine.bindTexture(new ResourceLocation("abyssalcraft", "textures/gui/necronomicon/patreon/minecreatr.png"));
-			drawTexturedModalRect(k + 123, b0, 0, 0, 256, 256);
+			if(icon1 instanceof String)
+				if(failcache.contains(icon1)){
+					GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+					mc.renderEngine.bindTexture(new ResourceLocation("abyssalcraft", "textures/gui/necronomicon/missing.png"));
+					drawTexturedModalRect(k, b0, 0, 0, 256, 256);
+				} else if(successcache.get(icon1) != null){
+					GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+					GlStateManager.bindTexture(successcache.get(icon1).getGlTextureId());
+					drawTexturedModalRect(k, b0, 0, 0, 256, 256);
+				} else {
+					DynamicTexture t = null;
+					try {
+						t = new DynamicTexture(ImageIO.read(new URL((String)icon1)));
+						successcache.put((String)icon1, t);
+					} catch (Exception e) {
+						failcache.add((String)icon1);
+					}
+					GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+					if(t != null)
+						GlStateManager.bindTexture(t.getGlTextureId());
+					else mc.renderEngine.bindTexture(new ResourceLocation("abyssalcraft", "textures/gui/necronomicon/missing.png"));
+					drawTexturedModalRect(k, b0, 0, 0, 256, 256);
+				}
+		}
+		if(icon2 != null){
+			if(icon2 instanceof ResourceLocation){
+				GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+				mc.renderEngine.bindTexture((ResourceLocation)icon2);
+				drawTexturedModalRect(k + 123, b0, 0, 0, 256, 256);
+			}
+			if(icon2 instanceof String)
+				if(failcache.contains(icon2)){
+					GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+					mc.renderEngine.bindTexture(new ResourceLocation("abyssalcraft", "textures/gui/necronomicon/missing.png"));
+					drawTexturedModalRect(k + 123, b0, 0, 0, 256, 256);
+				} else if(successcache.get(icon2) != null){
+					GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+					GlStateManager.bindTexture(successcache.get(icon2).getGlTextureId());
+					drawTexturedModalRect(k + 123, b0, 0, 0, 256, 256);
+				} else {
+					DynamicTexture t = null;
+					try {
+						t = new DynamicTexture(ImageIO.read(new URL((String)icon2)));
+						successcache.put((String)icon2, t);
+					} catch (Exception e) {
+						failcache.add((String)icon2);
+					}
+					GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+					if(t != null)
+						GlStateManager.bindTexture(t.getGlTextureId());
+					else mc.renderEngine.bindTexture(new ResourceLocation("abyssalcraft", "textures/gui/necronomicon/missing.png"));
+					drawTexturedModalRect(k + 123, b0, 0, 0, 256, 256);
+				}
 		}
 	}
 }

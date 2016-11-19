@@ -5,7 +5,7 @@
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
  * http://www.gnu.org/licenses/lgpl-3.0.txt
- * 
+ *
  * Contributors:
  *     Shinoow -  implementation
  ******************************************************************************/
@@ -54,7 +54,6 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeModContainer;
 import net.minecraftforge.common.MinecraftForge;
 
-import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.api.entity.EntityUtil;
@@ -64,8 +63,10 @@ import com.shinoow.abyssalcraft.api.event.ACEvents.ShoggothOozeEvent;
 import com.shinoow.abyssalcraft.api.item.ACItems;
 import com.shinoow.abyssalcraft.common.entity.demon.EntityDemonPig;
 import com.shinoow.abyssalcraft.common.world.gen.WorldGenShoggothMonolith;
+import com.shinoow.abyssalcraft.lib.ACConfig;
 import com.shinoow.abyssalcraft.lib.ACLib;
 import com.shinoow.abyssalcraft.lib.ACLoot;
+import com.shinoow.abyssalcraft.lib.ACSounds;
 
 public class EntityLesserShoggoth extends EntityMob implements ICoraliumEntity, IDreadEntity {
 
@@ -117,7 +118,7 @@ public class EntityLesserShoggoth extends EntityMob implements ICoraliumEntity, 
 
 		getEntityAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue(0.2D);
 
-		if(AbyssalCraft.hardcoreMode){
+		if(ACConfig.hardcoreMode){
 			getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(200.0D);
 			getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(16.0D);
 		} else {
@@ -280,7 +281,7 @@ public class EntityLesserShoggoth extends EntityMob implements ICoraliumEntity, 
 	 */
 	private void spawnOoze(int x, int y, int z){
 		BlockPos pos = new BlockPos(x, y, z);
-		if(AbyssalCraft.shoggothOoze)
+		if(ACConfig.shoggothOoze)
 			if(ACBlocks.shoggoth_ooze.canPlaceBlockAt(worldObj, pos)){
 				ShoggothOozeEvent event = new ShoggothOozeEvent(worldObj, pos);
 				if(MinecraftForge.EVENT_BUS.post(event)){
@@ -339,7 +340,7 @@ public class EntityLesserShoggoth extends EntityMob implements ICoraliumEntity, 
 					break;
 				}
 
-		if(AbyssalCraft.hardcoreMode && par1Entity instanceof EntityPlayer)
+		if(ACConfig.hardcoreMode && par1Entity instanceof EntityPlayer)
 			par1Entity.attackEntityFrom(DamageSource.causeMobDamage(this).setDamageBypassesArmor(), 3);
 
 		return flag;
@@ -363,19 +364,19 @@ public class EntityLesserShoggoth extends EntityMob implements ICoraliumEntity, 
 	@Override
 	protected SoundEvent getAmbientSound()
 	{
-		return AbyssalCraft.shoggoth_ambient;
+		return ACSounds.shoggoth_ambient;
 	}
 
 	@Override
 	protected SoundEvent getHurtSound()
 	{
-		return AbyssalCraft.shoggoth_hurt;
+		return ACSounds.shoggoth_hurt;
 	}
 
 	@Override
 	protected SoundEvent getDeathSound()
 	{
-		return AbyssalCraft.shoggoth_death;
+		return ACSounds.shoggoth_death;
 	}
 
 	@Override

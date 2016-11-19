@@ -5,7 +5,7 @@
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
  * http://www.gnu.org/licenses/lgpl-3.0.txt
- * 
+ *
  * Contributors:
  *     Shinoow -  implementation
  ******************************************************************************/
@@ -63,11 +63,11 @@ public class ItemDepthsArmor extends ItemArmor /* implements IVisDiscountGear, I
 
 	@Override
 	public void onArmorTick(World world, EntityPlayer player, ItemStack itemstack) {
+		if(world.isRemote) return;
 		if (itemstack.getItem() == ACItems.depths_helmet)
 		{
 			player.addPotionEffect(new PotionEffect(MobEffects.WATER_BREATHING, 20, 0));
 			player.addPotionEffect(new PotionEffect(MobEffects.NIGHT_VISION, 260, 0));
-			player.addPotionEffect(new PotionEffect(MobEffects.SATURATION, 20, 0));
 			if(player.getActivePotionEffect(AbyssalCraftAPI.coralium_plague) !=null)
 				player.removePotionEffect(AbyssalCraftAPI.coralium_plague);
 		}
@@ -76,7 +76,7 @@ public class ItemDepthsArmor extends ItemArmor /* implements IVisDiscountGear, I
 		if (itemstack.getItem() == ACItems.depths_leggings)
 			player.addPotionEffect(new PotionEffect(MobEffects.JUMP_BOOST, 20, 1));
 		if (itemstack.getItem() == ACItems.depths_boots)
-			player.addPotionEffect(new PotionEffect(MobEffects.SPEED, 20, 0));
+			player.addPotionEffect(new PotionEffect(MobEffects.SPEED, 20, 1));
 	}
 
 	@Override

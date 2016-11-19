@@ -5,20 +5,30 @@
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
  * http://www.gnu.org/licenses/lgpl-3.0.txt
- * 
+ *
  * Contributors:
  *     Shinoow -  implementation
  ******************************************************************************/
 package com.shinoow.abyssalcraft.common.handlers;
 
+import java.io.InputStream;
+import java.net.URL;
 import java.util.List;
 
+import javax.imageio.ImageIO;
+
+import net.minecraft.client.renderer.texture.DynamicTexture;
 import net.minecraft.enchantment.EnchantmentData;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.fml.common.FMLCommonHandler;
 
 import com.google.common.collect.Lists;
+import com.google.common.io.ByteStreams;
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.api.internal.DummyNecroDataHandler;
@@ -27,8 +37,12 @@ import com.shinoow.abyssalcraft.api.necronomicon.CraftingStack;
 import com.shinoow.abyssalcraft.api.necronomicon.NecroData;
 import com.shinoow.abyssalcraft.api.necronomicon.NecroData.Chapter;
 import com.shinoow.abyssalcraft.api.necronomicon.NecroData.Page;
+import com.shinoow.abyssalcraft.client.gui.necronomicon.GuiNecronomicon;
+import com.shinoow.abyssalcraft.client.gui.necronomicon.GuiNecronomiconInformation;
+import com.shinoow.abyssalcraft.common.util.ACLogger;
 import com.shinoow.abyssalcraft.lib.NecronomiconResources;
 import com.shinoow.abyssalcraft.lib.NecronomiconText;
+import com.shinoow.abyssalcraft.lib.util.NecroDataJsonUtil;
 
 public class InternalNecroDataHandler extends DummyNecroDataHandler {
 
@@ -129,6 +143,20 @@ public class InternalNecroDataHandler extends DummyNecroDataHandler {
 		for(Page page : pages)
 			addPage(page, necroidentifier, chapteridentifier);
 
+	}
+
+	@Override
+	public void verifyImageURL(String url) {
+		if(FMLCommonHandler.instance().getSide().isServer()) return;
+
+		if(GuiNecronomicon.failcache.contains(url) || GuiNecronomicon.successcache.get(url) != null) return;
+
+		try {
+			DynamicTexture t = new DynamicTexture(ImageIO.read(new URL(url)));
+			GuiNecronomicon.successcache.put(url, t);
+		} catch (Exception e) {
+			GuiNecronomicon.failcache.add(url);
+		}
 	}
 
 	@Override
@@ -389,5 +417,28 @@ public class InternalNecroDataHandler extends DummyNecroDataHandler {
 				new Page(2, Items.ENCHANTED_BOOK.getEnchantedItemStack(new EnchantmentData(AbyssalCraftAPI.dread_enchantment, 1)), NecronomiconText.ENCHANTMENT_DREAD),
 				new Page(3, Items.ENCHANTED_BOOK.getEnchantedItemStack(new EnchantmentData(AbyssalCraftAPI.light_pierce, AbyssalCraftAPI.light_pierce.getMaxLevel())), NecronomiconText.ENCHANTMENT_LIGHT_PIERCE),
 				new Page(4, Items.ENCHANTED_BOOK.getEnchantedItemStack(new EnchantmentData(AbyssalCraftAPI.iron_wall, 1)), NecronomiconText.ENCHANTMENT_IRON_WALL));
+		setupPatreonData();
+	}
+
+	private void setupPatreonData(){
+		Chapter chapter = null;
+		try {
+			URL url = new URL("https://raw.githubusercontent.com/Shinoow/AbyssalCraft/master/patrons.json");
+			InputStream con = url.openStream();
+			String data = new String(ByteStreams.toByteArray(con));
+			con.close();
+
+			chapter = NecroDataJsonUtil.deserializeChapter(new Gson().fromJson(data, JsonObject.class));
+
+		} catch (Exception e) {
+			ACLogger.warning("Failed to fetch the Patreon Data, using local version instead!");
+			chapter = new Chapter("patrons", NecronomiconText.LABEL_PATRONS);
+			chapter.addPage(new Page(1, new ResourceLocation("abyssalcraft", "textures/gui/necronomicon/patreon/saice.png"), "Saice Shoop"));
+			chapter.addPage(new Page(2, new ResourceLocation("abyssalcraft", "textures/gui/necronomicon/patreon/minecreatr.png"), "Minecreatr"));
+			chapter.addPage(new Page(3, new ResourceLocation("abyssalcraft", "textures/gui/necronomicon/missing.png"), "Kendoshii"));
+		}
+
+		if(chapter != null)
+			GuiNecronomiconInformation.setPatreonInfo(chapter);
 	}
 }

@@ -5,7 +5,7 @@
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
  * http://www.gnu.org/licenses/lgpl-3.0.txt
- * 
+ *
  * Contributors:
  *     Shinoow -  implementation
  ******************************************************************************/
@@ -13,12 +13,14 @@ package com.shinoow.abyssalcraft.common.items;
 
 import java.util.List;
 
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityList;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.IItemPropertyGetter;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ActionResult;
@@ -29,6 +31,8 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import com.shinoow.abyssalcraft.api.energy.IEnergyContainerItem;
 import com.shinoow.abyssalcraft.client.handlers.AbyssalCraftClientEventHooks;
@@ -52,6 +56,15 @@ public class ItemInterdimensionalCage extends ItemACBasic implements IEnergyCont
 			}
 
 		});
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public void getSubItems(Item par1Item, CreativeTabs par2CreativeTab, List<ItemStack> par3List){
+		par3List.add(new ItemStack(par1Item));
+		ItemStack stack = new ItemStack(par1Item);
+		addEnergy(stack, getMaxEnergy(stack));
+		par3List.add(stack);
 	}
 
 	@Override

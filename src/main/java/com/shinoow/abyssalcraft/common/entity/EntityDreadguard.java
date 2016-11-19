@@ -5,7 +5,7 @@
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
  * http://www.gnu.org/licenses/lgpl-3.0.txt
- * 
+ *
  * Contributors:
  *     Shinoow -  implementation
  ******************************************************************************/
@@ -43,11 +43,13 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.World;
 
-import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
 import com.shinoow.abyssalcraft.api.entity.IDreadEntity;
 import com.shinoow.abyssalcraft.api.item.ACItems;
+import com.shinoow.abyssalcraft.lib.ACAchievements;
+import com.shinoow.abyssalcraft.lib.ACConfig;
 import com.shinoow.abyssalcraft.lib.ACLoot;
+import com.shinoow.abyssalcraft.lib.ACSounds;
 
 public class EntityDreadguard extends EntityMob implements IDreadEntity {
 
@@ -74,7 +76,7 @@ public class EntityDreadguard extends EntityMob implements IDreadEntity {
 
 		getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.23000000417232513D);
 
-		if(AbyssalCraft.hardcoreMode){
+		if(ACConfig.hardcoreMode){
 			getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(240.0D);
 			getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(20.0D);
 		} else {
@@ -95,7 +97,7 @@ public class EntityDreadguard extends EntityMob implements IDreadEntity {
 		if (par1DamageSource.getEntity() instanceof EntityPlayer)
 		{
 			EntityPlayer entityplayer = (EntityPlayer)par1DamageSource.getEntity();
-			entityplayer.addStat(AbyssalCraft.killdreadguard, 1);
+			entityplayer.addStat(ACAchievements.kill_dreadguard, 1);
 		}
 		super.onDeath(par1DamageSource);
 	}
@@ -109,7 +111,7 @@ public class EntityDreadguard extends EntityMob implements IDreadEntity {
 			if (par1Entity instanceof EntityLivingBase)
 				((EntityLivingBase)par1Entity).addPotionEffect(new PotionEffect(AbyssalCraftAPI.dread_plague, 100));
 
-		if(AbyssalCraft.hardcoreMode && par1Entity instanceof EntityPlayer)
+		if(ACConfig.hardcoreMode && par1Entity instanceof EntityPlayer)
 			par1Entity.attackEntityFrom(DamageSource.causeMobDamage(this).setDamageBypassesArmor(), 3);
 
 		return flag;
@@ -129,19 +131,19 @@ public class EntityDreadguard extends EntityMob implements IDreadEntity {
 	@Override
 	protected SoundEvent getAmbientSound()
 	{
-		return AbyssalCraft.dreadguard_ambient;
+		return ACSounds.dreadguard_ambient;
 	}
 
 	@Override
 	protected SoundEvent getHurtSound()
 	{
-		return AbyssalCraft.dreadguard_hurt;
+		return ACSounds.dreadguard_hurt;
 	}
 
 	@Override
 	protected SoundEvent getDeathSound()
 	{
-		return AbyssalCraft.dreadguard_death;
+		return ACSounds.dreadguard_death;
 	}
 
 	protected void playStepSound(BlockPos pos, int par4)

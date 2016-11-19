@@ -5,7 +5,7 @@
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
  * http://www.gnu.org/licenses/lgpl-3.0.txt
- * 
+ *
  * Contributors:
  *     Shinoow -  implementation
  ******************************************************************************/
@@ -50,6 +50,7 @@ public class ItemEthaxiumArmor extends ItemArmor {
 
 	@Override
 	public void onArmorTick(World world, EntityPlayer player, ItemStack itemstack) {
+		if(world.isRemote) return;
 		if (itemstack.getItem() == ACItems.ethaxium_helmet) {
 			if(world.provider.isSurfaceWorld() && !world.provider.isDaytime())
 				player.addPotionEffect(new PotionEffect(MobEffects.NIGHT_VISION, 260, 0));
@@ -57,8 +58,6 @@ public class ItemEthaxiumArmor extends ItemArmor {
 				player.removePotionEffect(MobEffects.HUNGER);
 			if(player.getActivePotionEffect(MobEffects.POISON) !=null)
 				player.removePotionEffect(MobEffects.POISON);
-			if(world.rand.nextInt(300) == 0)
-				player.addPotionEffect(new PotionEffect(MobEffects.SATURATION, 60, 0));
 		}
 		if(itemstack.getItem() == ACItems.ethaxium_chestplate){
 			if(player.isBurning() || world.provider.doesWaterVaporize())
@@ -76,14 +75,5 @@ public class ItemEthaxiumArmor extends ItemArmor {
 				player.addPotionEffect(new PotionEffect(MobEffects.SPEED, 20, 2));
 				player.addPotionEffect(new PotionEffect(MobEffects.WATER_BREATHING, 20, 1));
 			} else player.addPotionEffect(new PotionEffect(MobEffects.SPEED, 20, 1));
-
-		if(player.getActivePotionEffect(MobEffects.SATURATION) != null && player.getActivePotionEffect(MobEffects.SATURATION).getDuration() == 0)
-			player.removePotionEffect(MobEffects.SATURATION);
-		if(player.getActivePotionEffect(MobEffects.STRENGTH) != null && player.getActivePotionEffect(MobEffects.STRENGTH).getDuration() == 0)
-			player.removePotionEffect(MobEffects.STRENGTH);
-		if(player.getActivePotionEffect(MobEffects.REGENERATION) != null && player.getActivePotionEffect(MobEffects.REGENERATION).getDuration() == 0)
-			player.removePotionEffect(MobEffects.REGENERATION);
-		if(player.getActivePotionEffect(MobEffects.FIRE_RESISTANCE) != null && player.getActivePotionEffect(MobEffects.FIRE_RESISTANCE).getDuration() == 0)
-			player.removePotionEffect(MobEffects.FIRE_RESISTANCE);
 	}
 }

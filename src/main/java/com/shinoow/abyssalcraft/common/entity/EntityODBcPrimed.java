@@ -5,7 +5,7 @@
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
  * http://www.gnu.org/licenses/lgpl-3.0.txt
- * 
+ *
  * Contributors:
  *     Shinoow -  implementation
  ******************************************************************************/
@@ -20,6 +20,7 @@ import net.minecraft.world.World;
 import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.common.util.ExplosionUtil;
+import com.shinoow.abyssalcraft.lib.ACConfig;
 
 public class EntityODBcPrimed extends Entity {
 
@@ -92,7 +93,7 @@ public class EntityODBcPrimed extends Entity {
 
 		} else {
 			handleWaterMovement();
-			if(AbyssalCraft.particleEntity)
+			if(ACConfig.particleEntity)
 				AbyssalCraft.proxy.spawnParticle("CorBlood", worldObj, posX + (rand.nextDouble() - 0.5D) * width, posY + rand.nextDouble() * height - 0.25D, posZ + (rand.nextDouble() - 0.5D) * width, (rand.nextDouble() - 0.5D) * 100.0D, -rand.nextDouble(), (rand.nextDouble() - 0.5D) * 100.0D);
 		}
 	}

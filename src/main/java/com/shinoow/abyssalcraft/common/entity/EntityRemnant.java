@@ -5,7 +5,7 @@
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
  * http://www.gnu.org/licenses/lgpl-3.0.txt
- * 
+ *
  * Contributors:
  *     Shinoow -  implementation
  ******************************************************************************/
@@ -71,7 +71,6 @@ import net.minecraftforge.fml.relauncher.ReflectionHelper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.api.APIUtils;
 import com.shinoow.abyssalcraft.api.entity.EntityUtil;
 import com.shinoow.abyssalcraft.api.entity.IAntiEntity;
@@ -80,7 +79,9 @@ import com.shinoow.abyssalcraft.api.entity.IDreadEntity;
 import com.shinoow.abyssalcraft.api.item.ACItems;
 import com.shinoow.abyssalcraft.common.items.ItemDrainStaff;
 import com.shinoow.abyssalcraft.common.items.ItemNecronomicon;
+import com.shinoow.abyssalcraft.lib.ACConfig;
 import com.shinoow.abyssalcraft.lib.ACLoot;
+import com.shinoow.abyssalcraft.lib.ACSounds;
 
 public class EntityRemnant extends EntityMob implements IMerchant, IAntiEntity, ICoraliumEntity, IDreadEntity {
 
@@ -117,7 +118,7 @@ public class EntityRemnant extends EntityMob implements IMerchant, IAntiEntity, 
 		getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(64.0D);
 		getEntityAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue(0.2D);
 
-		if(AbyssalCraft.hardcoreMode){
+		if(ACConfig.hardcoreMode){
 			getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(200.0D);
 			getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(20.0D);
 		} else {
@@ -138,7 +139,7 @@ public class EntityRemnant extends EntityMob implements IMerchant, IAntiEntity, 
 		swingArm(EnumHand.OFF_HAND);
 		boolean flag = super.attackEntityAsMob(par1Entity);
 
-		if(AbyssalCraft.hardcoreMode && par1Entity instanceof EntityPlayer)
+		if(ACConfig.hardcoreMode && par1Entity instanceof EntityPlayer)
 			par1Entity.attackEntityFrom(DamageSource.causeMobDamage(this).setDamageBypassesArmor(), 3);
 
 		return flag;
@@ -272,7 +273,7 @@ public class EntityRemnant extends EntityMob implements IMerchant, IAntiEntity, 
 				while(iter.hasNext())
 					iter.next().enrage(false, getAttackTarget());
 			}
-			playSound(AbyssalCraft.remnant_scream, 3F, 1F);
+			playSound(ACSounds.remnant_scream, 3F, 1F);
 		}
 
 		setAngry();
@@ -390,13 +391,13 @@ public class EntityRemnant extends EntityMob implements IMerchant, IAntiEntity, 
 
 	@Override
 	protected SoundEvent getAmbientSound(){
-		return getProfession() == 2 && rand.nextBoolean() ? AbyssalCraft.remnant_priest_chant : null;
+		return getProfession() == 2 && rand.nextBoolean() ? ACSounds.remnant_priest_chant : null;
 	}
 
 	@Override
 	protected SoundEvent getDeathSound()
 	{
-		return AbyssalCraft.shadow_death;
+		return ACSounds.shadow_death;
 	}
 
 	@Override
@@ -650,7 +651,7 @@ public class EntityRemnant extends EntityMob implements IMerchant, IAntiEntity, 
 				var1.getItemToBuy().getItem() instanceof ItemDrainStaff)
 			var1.compensateToolUses();
 		livingSoundTime = -getTalkInterval();
-		playSound(AbyssalCraft.remnant_yes, getSoundVolume(), getSoundPitch());
+		playSound(ACSounds.remnant_yes, getSoundVolume(), getSoundPitch());
 
 		if (hasSameIDsAs(var1, tradingList.get(tradingList.size() - 1)))
 		{
@@ -753,9 +754,9 @@ public class EntityRemnant extends EntityMob implements IMerchant, IAntiEntity, 
 			livingSoundTime = -getTalkInterval();
 
 			if (par1ItemStack != null)
-				playSound(AbyssalCraft.remnant_yes, getSoundVolume(), getSoundPitch());
+				playSound(ACSounds.remnant_yes, getSoundVolume(), getSoundPitch());
 			else
-				playSound(AbyssalCraft.remnant_no, getSoundVolume(), getSoundPitch());
+				playSound(ACSounds.remnant_no, getSoundVolume(), getSoundPitch());
 		}
 	}
 

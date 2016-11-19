@@ -5,11 +5,13 @@
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
  * http://www.gnu.org/licenses/lgpl-3.0.txt
- * 
+ *
  * Contributors:
  *     Shinoow -  implementation
  ******************************************************************************/
 package com.shinoow.abyssalcraft.lib;
+
+import net.minecraft.world.DimensionType;
 
 /**
  * This package exposes a bit more internal things without forcing too much of a hard dependency
@@ -19,6 +21,9 @@ public class ACLib {
 
 	//Dimension IDs
 	public static int abyssal_wasteland_id, dreadlands_id, omothol_id, dark_realm_id;
+
+	//Dimension Types
+	public static DimensionType THE_ABYSSAL_WASTELAND, THE_DREADLANDS, OMOTHOL, THE_DARK_REALM;
 
 	//Gui IDs
 	public static final int crystallizerGuiID = 30;

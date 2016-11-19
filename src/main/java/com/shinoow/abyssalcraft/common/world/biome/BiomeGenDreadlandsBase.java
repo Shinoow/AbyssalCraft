@@ -5,7 +5,7 @@
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
  * http://www.gnu.org/licenses/lgpl-3.0.txt
- * 
+ *
  * Contributors:
  *     Shinoow -  implementation
  ******************************************************************************/
@@ -25,7 +25,6 @@ import net.minecraft.world.gen.feature.WorldGenMinable;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.api.biome.IDreadlandsBiome;
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.common.entity.EntityAbygolem;
@@ -40,6 +39,7 @@ import com.shinoow.abyssalcraft.common.entity.demon.EntityDemonChicken;
 import com.shinoow.abyssalcraft.common.entity.demon.EntityDemonCow;
 import com.shinoow.abyssalcraft.common.entity.demon.EntityDemonPig;
 import com.shinoow.abyssalcraft.common.entity.demon.EntityDemonSheep;
+import com.shinoow.abyssalcraft.lib.ACConfig;
 
 public class BiomeGenDreadlandsBase extends Biome implements IDreadlandsBiome {
 
@@ -48,12 +48,16 @@ public class BiomeGenDreadlandsBase extends Biome implements IDreadlandsBiome {
 		super(par1);
 		topBlock = ACBlocks.dreadstone.getDefaultState();
 		fillerBlock = ACBlocks.dreadstone.getDefaultState();
+		theBiomeDecorator.treesPerChunk = -1;
+		theBiomeDecorator.flowersPerChunk= -1;
+		setMobSpawns();
+	}
+
+	public void setMobSpawns(){
 		spawnableMonsterList.clear();
 		spawnableCreatureList.clear();
 		spawnableWaterCreatureList.clear();
 		spawnableCaveCreatureList.clear();
-		theBiomeDecorator.treesPerChunk = -1;
-		theBiomeDecorator.flowersPerChunk= -1;
 		spawnableCreatureList.add(new SpawnListEntry(EntityAbygolem.class, 60, 1, 3));
 		spawnableMonsterList.add(new SpawnListEntry(EntityDreadgolem.class, 60, 1, 3));
 		spawnableMonsterList.add(new SpawnListEntry(EntityDreadSpawn.class, 30, 1, 2));
@@ -73,7 +77,7 @@ public class BiomeGenDreadlandsBase extends Biome implements IDreadlandsBiome {
 	{
 		super.decorate(par1World, par2Random, pos);
 
-		if(AbyssalCraft.generateDreadedAbyssalniteOre)
+		if(ACConfig.generateDreadedAbyssalniteOre)
 			for(int rarity = 0; rarity < 8; rarity++) {
 				int veinSize =  4 + par2Random.nextInt(12);
 				int x = par2Random.nextInt(16) + 8;

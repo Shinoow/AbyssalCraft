@@ -5,20 +5,25 @@
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
  * http://www.gnu.org/licenses/lgpl-3.0.txt
- * 
+ *
  * Contributors:
  *     Shinoow -  implementation
  ******************************************************************************/
 package com.shinoow.abyssalcraft.client.gui.necronomicon;
 
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.imageio.ImageIO;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
+import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.renderer.RenderItem;
+import net.minecraft.client.renderer.texture.DynamicTexture;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -227,6 +232,29 @@ public class GuiNecronomiconEntry extends GuiNecronomicon {
 					renderItem(k + 24 +i*21, b0 + 73,((CraftingStack)icon1).getThirdArray()[i], x, y);
 				}
 			}
+			if(icon1 instanceof String)
+				if(failcache.contains(icon1)){
+					GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+					mc.renderEngine.bindTexture(new ResourceLocation("abyssalcraft", "textures/gui/necronomicon/missing.png"));
+					drawTexturedModalRect(k, b0, 0, 0, 256, 256);
+				} else if(successcache.get(icon1) != null){
+					GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+					GlStateManager.bindTexture(successcache.get(icon1).getGlTextureId());
+					drawTexturedModalRect(k, b0, 0, 0, 256, 256);
+				} else {
+					DynamicTexture t = null;
+					try {
+						t = new DynamicTexture(ImageIO.read(new URL((String)icon1)));
+						successcache.put((String)icon1, t);
+					} catch (Exception e) {
+						failcache.add((String)icon1);
+					}
+					GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+					if(t != null)
+						GlStateManager.bindTexture(t.getGlTextureId());
+					else mc.renderEngine.bindTexture(new ResourceLocation("abyssalcraft", "textures/gui/necronomicon/missing.png"));
+					drawTexturedModalRect(k, b0, 0, 0, 256, 256);
+				}
 		}
 		if(icon2 != null){
 			int n = 123;
@@ -258,6 +286,29 @@ public class GuiNecronomiconEntry extends GuiNecronomicon {
 					renderItem(k + 24 + n +i*21, b0 + 73,((CraftingStack)icon2).getThirdArray()[i], x, y);
 				}
 			}
+			if(icon2 instanceof String)
+				if(failcache.contains(icon2)){
+					GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+					mc.renderEngine.bindTexture(new ResourceLocation("abyssalcraft", "textures/gui/necronomicon/missing.png"));
+					drawTexturedModalRect(k + n, b0, 0, 0, 256, 256);
+				} else if(successcache.get(icon2) != null){
+					GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+					GlStateManager.bindTexture(successcache.get(icon2).getGlTextureId());
+					drawTexturedModalRect(k + n, b0, 0, 0, 256, 256);
+				} else {
+					DynamicTexture t = null;
+					try {
+						t = new DynamicTexture(ImageIO.read(new URL((String)icon2)));
+						successcache.put((String)icon2, t);
+					} catch (Exception e) {
+						failcache.add((String)icon2);
+					}
+					GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+					if(t != null)
+						GlStateManager.bindTexture(t.getGlTextureId());
+					else mc.renderEngine.bindTexture(new ResourceLocation("abyssalcraft", "textures/gui/necronomicon/missing.png"));
+					drawTexturedModalRect(k + n, b0, 0, 0, 256, 256);
+				}
 		}
 
 		if(tooltipStack != null)
@@ -283,7 +334,7 @@ public class GuiNecronomiconEntry extends GuiNecronomicon {
 		if(icon1 != null){
 			if(icon1 instanceof ItemStack)
 				writeText(1, text1, 50);
-			if(icon1 instanceof ResourceLocation)
+			if(icon1 instanceof ResourceLocation || icon1 instanceof String)
 				writeText(1, text1, 100);
 			if(icon1 instanceof CraftingStack)
 				writeText(1, text1, 95);
@@ -291,7 +342,7 @@ public class GuiNecronomiconEntry extends GuiNecronomicon {
 		if(icon2 != null){
 			if(icon2 instanceof ItemStack)
 				writeText(2, text2, 50);
-			if(icon2 instanceof ResourceLocation)
+			if(icon2 instanceof ResourceLocation || icon2 instanceof String)
 				writeText(2, text2, 100);
 			if(icon2 instanceof CraftingStack)
 				writeText(2, text2, 95);

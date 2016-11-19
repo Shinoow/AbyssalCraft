@@ -5,7 +5,7 @@
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
  * http://www.gnu.org/licenses/lgpl-3.0.txt
- * 
+ *
  * Contributors:
  *     Shinoow -  implementation
  ******************************************************************************/
@@ -19,10 +19,10 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.common.MinecraftForge;
 
-import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.api.event.ACEvents;
 import com.shinoow.abyssalcraft.api.item.ACItems;
 import com.shinoow.abyssalcraft.api.recipe.CrystallizerRecipes;
+import com.shinoow.abyssalcraft.lib.ACAchievements;
 
 public class SlotCrystallizer extends Slot
 {
@@ -101,6 +101,6 @@ public class SlotCrystallizer extends Slot
 		MinecraftForge.EVENT_BUS.post(new ACEvents.ItemCrystallizedEvent(thePlayer, par1ItemStack));
 
 		if(par1ItemStack.getItem() == ACItems.shadow_gem)
-			thePlayer.addStat(AbyssalCraft.shadowGems, 1);
+			thePlayer.addStat(ACAchievements.shadow_gems, 1);
 	}
 }

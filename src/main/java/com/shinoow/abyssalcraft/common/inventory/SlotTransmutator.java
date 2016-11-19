@@ -5,7 +5,7 @@
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
  * http://www.gnu.org/licenses/lgpl-3.0.txt
- * 
+ *
  * Contributors:
  *     Shinoow -  implementation
  ******************************************************************************/
@@ -19,10 +19,10 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.common.MinecraftForge;
 
-import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.api.event.ACEvents;
 import com.shinoow.abyssalcraft.api.item.ACItems;
 import com.shinoow.abyssalcraft.api.recipe.TransmutatorRecipes;
+import com.shinoow.abyssalcraft.lib.ACAchievements;
 
 public class SlotTransmutator extends Slot
 {
@@ -101,8 +101,8 @@ public class SlotTransmutator extends Slot
 		MinecraftForge.EVENT_BUS.post(new ACEvents.ItemTransmutedEvent(thePlayer, par1ItemStack));
 
 		if (par1ItemStack.getItem() == ACItems.rlyehian_gateway_key)
-			thePlayer.addStat(AbyssalCraft.GK3, 1);
+			thePlayer.addStat(ACAchievements.rlyehian_gateway_key, 1);
 		if(par1ItemStack.getItem() == ACItems.dreadium_ingot)
-			thePlayer.addStat(AbyssalCraft.dreadium, 1);
+			thePlayer.addStat(ACAchievements.dreadium, 1);
 	}
 }
