@@ -1,10 +1,12 @@
 {
 	"type": "chapter",
+	"version": 1,
 	"identifier": "patrons",
 	"title": "necronomicon.patrons",
 	"pages": [
 		{
 			"type": "page",
+			"version": 1,
 			"number": 1,
 			"icontype": "resourcelocation",
 			"icon": "abyssalcraft:textures/gui/necronomicon/patreon/saice.png",
@@ -12,6 +14,7 @@
 		},
 		{
 			"type": "page",
+			"version": 1,
 			"number": 2,
 			"icontype": "resourcelocation",
 			"icon": "abyssalcraft:textures/gui/necronomicon/patreon/minecreatr.png",
@@ -19,6 +22,7 @@
 		},
 		{
 			"type": "page",
+			"version": 1,
 			"number": 3,
 			"icontype": "resourcelocation",
 			"icon": "abyssalcraft:textures/gui/necronomicon/missing.png",
