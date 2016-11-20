@@ -633,6 +633,8 @@ public class ClientProxy extends CommonProxy {
 		registerItemRender(ACBlocks.coralium_cobblestone_slab, 0);
 		registerItemRender(BlockHandler.cstonecobbleslab2, 0);
 		registerItemRender(ACBlocks.coralium_cobblestone_wall, 0);
+		registerItemRender(ACBlocks.luminous_thistle, 0);
+		registerItemRender(ACBlocks.wastelands_thorn, 0);
 
 		RenderPlayer render1 = Minecraft.getMinecraft().getRenderManager().getSkinMap().get("default");
 		render1.addLayer(new LayerStarSpawnTentacles(render1));
