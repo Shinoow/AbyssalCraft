@@ -1,0 +1,11 @@
+{
+	"forge_marker": 1,
+	"defaults": {
+		"textures" : {
+			"cross": "abyssalcraft:blocks/wastelandsthorn"
+		}
+	},
+	"variants": {
+		"normal": { "model": "cross" }
+	}
+}

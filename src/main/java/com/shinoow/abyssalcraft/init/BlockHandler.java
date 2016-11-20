@@ -227,6 +227,8 @@ public class BlockHandler implements ILifeCycleHandler {
 		ACBlocks.coralium_cobblestone_slab = new BlockACSingleSlab(Material.ROCK, SoundType.STONE).setHardness(2.0F).setResistance(10.0F).setUnlocalizedName("coraliumcobblestoneslab1");
 		cstonecobbleslab2 = new BlockACDoubleSlab(ACBlocks.coralium_cobblestone_slab, Material.ROCK).setHardness(2.0F).setResistance(10.0F).setUnlocalizedName("coraliumcobblestoneslab2");
 		ACBlocks.coralium_cobblestone_wall = new BlockACWall(ACBlocks.coralium_cobblestone).setHardness(2.0F).setResistance(10.0F).setUnlocalizedName("coraliumcobblestonewall");
+		ACBlocks.luminous_thistle = new BlockLuminousThistle();
+		ACBlocks.wastelands_thorn = new BlockWastelandsThorn();
 
 		((BlockShoggothOoze) ACBlocks.shoggoth_ooze).initBlacklist();
 
@@ -451,6 +453,8 @@ public class BlockHandler implements ILifeCycleHandler {
 		registerBlock(ACBlocks.coralium_cobblestone_slab, new ItemCoraliumcobbleSlab(ACBlocks.coralium_cobblestone_slab), "coraliumcobblestoneslab1");
 		registerBlock(cstonecobbleslab2, new ItemCoraliumcobbleSlab(cstonecobbleslab2), "coraliumcobblestoneslab2");
 		registerBlock(ACBlocks.coralium_cobblestone_wall, "coraliumcobblestonewall");
+		registerBlock(ACBlocks.luminous_thistle, "luminousthistle");
+		registerBlock(ACBlocks.wastelands_thorn, "wastelandsthorn");
 
 		Blocks.FIRE.setFireInfo(ACBlocks.darklands_oak_planks, 5, 20);
 		Blocks.FIRE.setFireInfo(DLTslab2, 5, 20);
