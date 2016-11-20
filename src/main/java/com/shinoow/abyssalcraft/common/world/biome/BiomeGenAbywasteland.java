@@ -13,6 +13,7 @@ package com.shinoow.abyssalcraft.common.world.biome;
 
 import java.util.Random;
 
+import net.minecraft.block.BlockBush;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.block.state.pattern.BlockHelper;
@@ -23,6 +24,7 @@ import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.chunk.ChunkPrimer;
+import net.minecraft.world.gen.GeneratorBushFeature;
 import net.minecraft.world.gen.feature.WorldGenMinable;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -59,7 +61,59 @@ public class BiomeGenAbywasteland extends BiomeGenBase {
 
 	@Override
 	public void decorate(World par1World, Random par2Random, BlockPos pos){
-		super.decorate(par1World, par2Random, pos);
+		for (int l3 = 0; l3 < 2; ++l3)
+		{
+			if (par2Random.nextInt(4) == 0)
+			{
+				int i4 = par2Random.nextInt(16) + 8;
+				int k8 = par2Random.nextInt(16) + 8;
+				int j12 = par1World.getHeight(pos.add(i4, 0, k8)).getY() * 2;
+
+				if (j12 > 0)
+				{
+					int k15 = par2Random.nextInt(j12);
+					new GeneratorBushFeature((BlockBush)ACBlocks.luminous_thistle).generate(par1World, par2Random, pos.add(i4, k15, k8));
+				}
+			}
+
+			if (par2Random.nextInt(8) == 0)
+			{
+				int j4 = par2Random.nextInt(16) + 8;
+				int l8 = par2Random.nextInt(16) + 8;
+				int k12 = par1World.getHeight(pos.add(j4, 0, l8)).getY() * 2;
+
+				if (k12 > 0)
+				{
+					int l15 = par2Random.nextInt(k12);
+					new GeneratorBushFeature((BlockBush)ACBlocks.wastelands_thorn).generate(par1World, par2Random, pos.add(j4, l15, l8));
+				}
+			}
+		}
+		if (par2Random.nextInt(4) == 0)
+		{
+			int i4 = par2Random.nextInt(16) + 8;
+			int k8 = par2Random.nextInt(16) + 8;
+			int j12 = par1World.getHeight(pos.add(i4, 0, k8)).getY() * 2;
+
+			if (j12 > 0)
+			{
+				int k15 = par2Random.nextInt(j12);
+				new GeneratorBushFeature((BlockBush)ACBlocks.luminous_thistle).generate(par1World, par2Random, pos.add(i4, k15, k8));
+			}
+		}
+		if (par2Random.nextInt(8) == 0)
+		{
+			int j4 = par2Random.nextInt(16) + 8;
+			int l8 = par2Random.nextInt(16) + 8;
+			int k12 = par1World.getHeight(pos.add(j4, 0, l8)).getY() * 2;
+
+			if (k12 > 0)
+			{
+				int l15 = par2Random.nextInt(k12);
+				new GeneratorBushFeature((BlockBush)ACBlocks.wastelands_thorn).generate(par1World, par2Random, pos.add(j4, l15, l8));
+			}
+		}
+
 		int var5 = 3 + par2Random.nextInt(6);
 
 		if(ACConfig.generateLiquifiedCoraliumOre)

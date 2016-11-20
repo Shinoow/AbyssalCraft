@@ -421,6 +421,7 @@ public class InternalNecroDataHandler extends DummyNecroDataHandler {
 	}
 
 	private void setupPatreonData(){
+		if(FMLCommonHandler.instance().getSide().isServer()) return;
 		Chapter chapter = null;
 		try {
 			URL url = new URL("https://raw.githubusercontent.com/Shinoow/AbyssalCraft/master/patrons.json");

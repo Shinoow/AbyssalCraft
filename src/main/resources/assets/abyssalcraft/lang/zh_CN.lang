@@ -1006,6 +1006,8 @@ tile.coraliumcobblestonestairs.name=Coralium Cobblestone Stairs
 tile.coraliumcobblestoneslab1.name=Coralium Cobblestone Slab
 tile.coraliumcobblestoneslab2.name=Coralium Cobblestone Slab
 tile.coraliumcobblestonewall.name=Coralium Cobblestone Wall
+tile.luminousthistle.name=Luminous Thistle
+tile.wastelandsthorn.name=Wasteland's Thorn
 
 #Pre/Postfixes
 decorativestatue.prefix=装饰用 %s

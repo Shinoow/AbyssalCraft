@@ -201,4 +201,6 @@ public class ACBlocks {
 	public static Block coralium_cobblestone_slab;
 	public static Block coralium_cobblestone_stairs;
 	public static Block coralium_cobblestone_wall;
+	public static Block luminous_thistle;
+	public static Block wastelands_thorn;
 }
