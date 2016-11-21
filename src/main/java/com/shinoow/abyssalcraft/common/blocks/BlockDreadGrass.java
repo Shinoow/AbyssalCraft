@@ -62,7 +62,7 @@ public class BlockDreadGrass extends Block implements IGrowable {
 	{
 		if (!worldIn.isRemote)
 			if (worldIn.getLightFromNeighbors(pos.up()) < 4 && worldIn.getBlockState(pos.up()).getBlock().getLightOpacity(worldIn.getBlockState(pos.up()), worldIn, pos.up()) > 2)
-				worldIn.setBlockState(pos, Blocks.DIRT.getDefaultState());
+				worldIn.setBlockState(pos, ACBlocks.dreadlands_dirt.getDefaultState());
 			else if (worldIn.getLightFromNeighbors(pos.up()) >= 9)
 				for (int i = 0; i < 4; ++i)
 				{
