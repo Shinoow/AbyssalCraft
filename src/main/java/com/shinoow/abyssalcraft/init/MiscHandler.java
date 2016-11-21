@@ -226,7 +226,7 @@ public class MiscHandler implements ILifeCycleHandler {
 		ACAchievements.make_crystal_bag = new Achievement("achievement.makeCrystalBag", "makeCrystalBag", 6, -4, ACItems.small_crystal_bag, ACAchievements.make_materializer).registerStat();
 		ACAchievements.make_engraver = new Achievement("achievement.makeEngraver", "makeEngraver", 2, -3, ACBlocks.engraver, AchievementList.openInventory).registerStat();
 
-		AchievementPage.registerAchievementPage(new AchievementPage("AbyssalCraft", ACAchievements.achievements));
+		AchievementPage.registerAchievementPage(new AchievementPage("AbyssalCraft", ACAchievements.getAchievements()));
 
 		necro = ACAchievements.necronomicon;
 		mineAby = ACAchievements.mine_abyssalnite;
