@@ -48,7 +48,7 @@ public class WorldGenDrT extends WorldGenTrees {
 		if (j1 != Blocks.dirt && j1 != ACBlocks.dreadlands_dirt && j1 != ACBlocks.dreadstone && j1.getMaterial() != Material.grass || y >= 256 - height - 1)
 			return false;
 
-		if(j1 != ACBlocks.dreadlands_grass && j1 != ACBlocks.dreadstone)
+		if(j1 != ACBlocks.dreadlands_grass && j1 != ACBlocks.dreadstone && j1 != ACBlocks.dreadlands_dirt)
 			setBlockAndNotifyAdequately(world, new BlockPos(x, y -1, z), Blocks.dirt.getDefaultState());
 		else setBlockAndNotifyAdequately(world, new BlockPos(x, y -1, z), ACBlocks.dreadlands_dirt.getDefaultState());
 
