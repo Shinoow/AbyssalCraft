@@ -68,12 +68,14 @@ public class ACAchievements {
 	public static Achievement aoe_potion_ritual;
 	public static Achievement infusion_ritual;
 
-	public static Achievement[] achievements = {necronomicon, mine_abyssalnite, kill_depths_ghoul, enter_abyssal_wasteland,
-		kill_spectral_dragon, summon_asorah, kill_asorah, enter_dreadlands, kill_dreadguard, depths_ghoul_head, pete_head,
-		mr_wilson_head, dr_orange_head, mine_coralium, mine_abyssal_coralium, find_powerstone, gateway_key,
-		dreaded_gateway_key, rlyehian_gateway_key, summon_chagaroth, kill_chagaroth,enter_omothol, enter_dark_realm,
-		abyssal_wasteland_necronomicon, dreadlands_necronomicon, omothol_necronomicon, abyssalnomicon, ritual_altar,
-		summoning_ritual, creation_ritual, kill_omothol_elite, locate_jzahar, kill_jzahar, shadow_gems, mine_abyssal_ores,
-		mine_dreadlands_ores, dreadium, ethaxium, make_transmutator, make_crystallizer, make_materializer, make_crystal_bag,
-		make_engraver, breeding_ritual, potion_ritual, aoe_potion_ritual, infusion_ritual};
+	public static Achievement[] getAchievements(){
+		return new Achievement[] {necronomicon, mine_abyssalnite, kill_depths_ghoul, enter_abyssal_wasteland,
+				kill_spectral_dragon, summon_asorah, kill_asorah, enter_dreadlands, kill_dreadguard, depths_ghoul_head, pete_head,
+				mr_wilson_head, dr_orange_head, mine_coralium, mine_abyssal_coralium, find_powerstone, gateway_key,
+				dreaded_gateway_key, rlyehian_gateway_key, summon_chagaroth, kill_chagaroth,enter_omothol, enter_dark_realm,
+				abyssal_wasteland_necronomicon, dreadlands_necronomicon, omothol_necronomicon, abyssalnomicon, ritual_altar,
+				summoning_ritual, creation_ritual, kill_omothol_elite, locate_jzahar, kill_jzahar, shadow_gems, mine_abyssal_ores,
+				mine_dreadlands_ores, dreadium, ethaxium, make_transmutator, make_crystallizer, make_materializer, make_crystal_bag,
+				make_engraver, breeding_ritual, potion_ritual, aoe_potion_ritual, infusion_ritual};
+	}
 }
