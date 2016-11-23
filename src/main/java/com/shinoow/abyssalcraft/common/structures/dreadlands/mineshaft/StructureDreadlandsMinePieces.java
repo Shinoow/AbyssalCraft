@@ -18,6 +18,7 @@ import java.util.Random;
 
 import net.minecraft.block.BlockRail;
 import net.minecraft.block.BlockRailBase;
+import net.minecraft.block.BlockTorch;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.item.EntityMinecartChest;
@@ -31,6 +32,7 @@ import net.minecraft.world.World;
 import net.minecraft.world.gen.structure.MapGenStructureIO;
 import net.minecraft.world.gen.structure.StructureBoundingBox;
 import net.minecraft.world.gen.structure.StructureComponent;
+import net.minecraft.world.gen.structure.template.TemplateManager;
 
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.lib.ACLoot;
@@ -112,7 +114,7 @@ public class StructureDreadlandsMinePieces
 		}
 
 		@Override
-		protected void readStructureFromNBT(NBTTagCompound par1NBTTagCompound)
+		protected void readStructureFromNBT(NBTTagCompound par1NBTTagCompound, TemplateManager p_143011_2_)
 		{
 			hasRails = par1NBTTagCompound.getBoolean("hr");
 			sectionCount = par1NBTTagCompound.getInteger("Num");
@@ -257,7 +259,7 @@ public class StructureDreadlandsMinePieces
 				setBlockState(world, iblockstate, x, y, z, structureboundingbox);
 				EntityMinecartChest entityminecartchest = new EntityMinecartChest(world, blockpos.getX() + 0.5F, blockpos.getY() + 0.5F, blockpos.getZ() + 0.5F);
 				entityminecartchest.setLootTable(loot, rand.nextLong());
-				world.spawnEntityInWorld(entityminecartchest);
+				world.spawnEntity(entityminecartchest);
 				return true;
 			} else
 				return false;
@@ -276,7 +278,7 @@ public class StructureDreadlandsMinePieces
 			{
 				int i = sectionCount * 5 - 1;
 				fillWithBlocks(par1World, par3StructureBoundingBox, 0, 0, 0, 2, 1, i, Blocks.AIR.getDefaultState(), Blocks.AIR.getDefaultState(), false);
-				func_189914_a(par1World, par3StructureBoundingBox, par2Random, 0.8F, 0, 2, 0, 2, 2, i, Blocks.AIR.getDefaultState(), Blocks.AIR.getDefaultState(), false, 0);
+				generateMaybeBox(par1World, par3StructureBoundingBox, par2Random, 0.8F, 0, 2, 0, 2, 2, i, Blocks.AIR.getDefaultState(), Blocks.AIR.getDefaultState(), false, 0);
 
 				int j;
 				int k;
@@ -294,8 +296,8 @@ public class StructureDreadlandsMinePieces
 					} else
 						fillWithBlocks(par1World, par3StructureBoundingBox, 0, 2, k, 2, 2, k, ACBlocks.dreadlands_planks.getDefaultState(), Blocks.AIR.getDefaultState(), false);
 
-					randomlyPlaceBlock(par1World, par3StructureBoundingBox, par2Random, 0.05F, 1, 2, k - 1, Blocks.TORCH.getStateFromMeta(0));
-					randomlyPlaceBlock(par1World, par3StructureBoundingBox, par2Random, 0.05F, 1, 2, k + 1, Blocks.TORCH.getStateFromMeta(0));
+					randomlyPlaceBlock(par1World, par3StructureBoundingBox, par2Random, 0.05F, 1, 2, k - 1, Blocks.TORCH.getDefaultState().withProperty(BlockTorch.FACING, EnumFacing.SOUTH));
+					randomlyPlaceBlock(par1World, par3StructureBoundingBox, par2Random, 0.05F, 1, 2, k + 1, Blocks.TORCH.getDefaultState().withProperty(BlockTorch.FACING, EnumFacing.NORTH));
 
 					if (par2Random.nextInt(100) == 0)
 						generateChest(par1World, par3StructureBoundingBox, par2Random, 2, 0, k - 1, ACLoot.CHEST_DREADLANDS_MINESHAFT);
@@ -349,7 +351,7 @@ public class StructureDreadlandsMinePieces
 		}
 
 		@Override
-		protected void readStructureFromNBT(NBTTagCompound par1NBTTagCompound)
+		protected void readStructureFromNBT(NBTTagCompound par1NBTTagCompound, TemplateManager p_143011_2_)
 		{
 			isMultipleFloors = par1NBTTagCompound.getBoolean("tf");
 			corridorDirection = EnumFacing.getHorizontal(par1NBTTagCompound.getInteger("D"));
@@ -621,7 +623,7 @@ public class StructureDreadlandsMinePieces
 		}
 
 		@Override
-		protected void readStructureFromNBT(NBTTagCompound par1NBTTagCompound)
+		protected void readStructureFromNBT(NBTTagCompound par1NBTTagCompound, TemplateManager p_143011_2_)
 		{
 			NBTTagList nbttaglist = par1NBTTagCompound.getTagList("Entrances", 11);
 
@@ -645,7 +647,7 @@ public class StructureDreadlandsMinePieces
 		protected void writeStructureToNBT(NBTTagCompound par1NBTTagCompound) {}
 
 		@Override
-		protected void readStructureFromNBT(NBTTagCompound par1NBTTagCompound) {}
+		protected void readStructureFromNBT(NBTTagCompound par1NBTTagCompound, TemplateManager p_143011_2_) {}
 
 		/**
 		 * Trys to find a valid place to put this component.

@@ -222,7 +222,7 @@ public class NecroDataJsonUtil {
 	 */
 	private static String outputStackToString(ItemStack stack){
 		if(stack == null || stack.getItem() == null) return "";
-		return stack.getItem().getRegistryName() + ":" + stack.stackSize + (stack.getItemDamage() > 0 ? ":" + stack.getItemDamage() : "");
+		return stack.getItem().getRegistryName() + ":" + stack.getCount() + (stack.getItemDamage() > 0 ? ":" + stack.getItemDamage() : "");
 	}
 
 	/**

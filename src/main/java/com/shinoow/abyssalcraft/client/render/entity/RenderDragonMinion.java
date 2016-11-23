@@ -51,7 +51,7 @@ public class RenderDragonMinion extends RenderLiving<EntityDragonMinion> {
 	}
 
 	@Override
-	protected void rotateCorpse(EntityDragonMinion par1EntityDragonMinion, float par2, float par3, float par4)
+	protected void applyRotations(EntityDragonMinion par1EntityDragonMinion, float par2, float par3, float par4)
 	{
 		float f3 = (float)par1EntityDragonMinion.getMovementOffsets(7, par4)[0];
 		float f4 = (float)(par1EntityDragonMinion.getMovementOffsets(5, par4)[1] - par1EntityDragonMinion.getMovementOffsets(10, par4)[1]);
@@ -62,7 +62,7 @@ public class RenderDragonMinion extends RenderLiving<EntityDragonMinion> {
 		if (par1EntityDragonMinion.deathTime > 0)
 		{
 			float f5 = (par1EntityDragonMinion.deathTime + par4 - 1.0F) / 20.0F * 1.6F;
-			f5 = MathHelper.sqrt_float(f5);
+			f5 = MathHelper.sqrt(f5);
 
 			if (f5 > 1.0F)
 				f5 = 1.0F;

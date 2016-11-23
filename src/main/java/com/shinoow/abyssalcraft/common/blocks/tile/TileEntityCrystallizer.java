@@ -18,13 +18,14 @@ import java.util.Map;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.inventory.ISidedInventory;
+import net.minecraft.inventory.ItemStackHelper;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
+import net.minecraft.util.NonNullList;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.util.text.TextComponentTranslation;
@@ -45,7 +46,7 @@ public class TileEntityCrystallizer extends TileEntity implements ISidedInventor
 	/**
 	 * The ItemStacks that hold the items currently being used in the crystallizer
 	 */
-	private ItemStack[] crystallizerItemStacks = new ItemStack[4];
+	private NonNullList<ItemStack> crystallizerItemStacks = NonNullList.<ItemStack>withSize(4, ItemStack.EMPTY);
 	/** The number of ticks that the crystallizer will keep doing it's thing */
 	public int crystallizerShapeTime;
 	/**
@@ -62,7 +63,7 @@ public class TileEntityCrystallizer extends TileEntity implements ISidedInventor
 	@Override
 	public int getSizeInventory()
 	{
-		return crystallizerItemStacks.length;
+		return crystallizerItemStacks.size();
 	}
 
 	/**
@@ -71,7 +72,7 @@ public class TileEntityCrystallizer extends TileEntity implements ISidedInventor
 	@Override
 	public ItemStack getStackInSlot(int par1)
 	{
-		return crystallizerItemStacks[par1];
+		return crystallizerItemStacks.get(par1);
 	}
 
 	/**
@@ -81,27 +82,7 @@ public class TileEntityCrystallizer extends TileEntity implements ISidedInventor
 	@Override
 	public ItemStack decrStackSize(int par1, int par2)
 	{
-		if (crystallizerItemStacks[par1] != null)
-		{
-			ItemStack itemstack;
-
-			if (crystallizerItemStacks[par1].stackSize <= par2)
-			{
-				itemstack = crystallizerItemStacks[par1];
-				crystallizerItemStacks[par1] = null;
-				return itemstack;
-			}
-			else
-			{
-				itemstack = crystallizerItemStacks[par1].splitStack(par2);
-
-				if (crystallizerItemStacks[par1].stackSize == 0)
-					crystallizerItemStacks[par1] = null;
-
-				return itemstack;
-			}
-		} else
-			return null;
+		return ItemStackHelper.getAndSplit(crystallizerItemStacks, par1, par2);
 	}
 
 	/**
@@ -111,13 +92,7 @@ public class TileEntityCrystallizer extends TileEntity implements ISidedInventor
 	@Override
 	public ItemStack removeStackFromSlot(int par1)
 	{
-		if (crystallizerItemStacks[par1] != null)
-		{
-			ItemStack itemstack = crystallizerItemStacks[par1];
-			crystallizerItemStacks[par1] = null;
-			return itemstack;
-		} else
-			return null;
+		return ItemStackHelper.getAndRemove(crystallizerItemStacks, par1);
 	}
 
 	/**
@@ -126,10 +101,10 @@ public class TileEntityCrystallizer extends TileEntity implements ISidedInventor
 	@Override
 	public void setInventorySlotContents(int par1, ItemStack par2ItemStack)
 	{
-		crystallizerItemStacks[par1] = par2ItemStack;
+		crystallizerItemStacks.set(par1, par2ItemStack);
 
-		if (par2ItemStack != null && par2ItemStack.stackSize > getInventoryStackLimit())
-			par2ItemStack.stackSize = getInventoryStackLimit();
+		if (par2ItemStack != null && par2ItemStack.getCount() > getInventoryStackLimit())
+			par2ItemStack.setCount(getInventoryStackLimit());
 	}
 
 	/**
@@ -159,21 +134,11 @@ public class TileEntityCrystallizer extends TileEntity implements ISidedInventor
 	public void readFromNBT(NBTTagCompound par1)
 	{
 		super.readFromNBT(par1);
-		NBTTagList nbttaglist = par1.getTagList("Items", 10);
-		crystallizerItemStacks = new ItemStack[getSizeInventory()];
-
-		for (int i = 0; i < nbttaglist.tagCount(); ++i)
-		{
-			NBTTagCompound nbttagcompound1 = nbttaglist.getCompoundTagAt(i);
-			byte b0 = nbttagcompound1.getByte("Slot");
-
-			if (b0 >= 0 && b0 < crystallizerItemStacks.length)
-				crystallizerItemStacks[b0] = ItemStack.loadItemStackFromNBT(nbttagcompound1);
-		}
-
+		crystallizerItemStacks = NonNullList.withSize(getSizeInventory(), ItemStack.EMPTY);
+		ItemStackHelper.loadAllItems(par1, crystallizerItemStacks);
 		crystallizerShapeTime = par1.getShort("ShapeTime");
 		crystallizerFormTime = par1.getShort("FormTime");
-		currentItemShapingTime = getCrystallizationTime(crystallizerItemStacks[1]);
+		currentItemShapingTime = getCrystallizationTime(crystallizerItemStacks.get(1));
 
 		if (par1.hasKey("CustomName", 8))
 			containerName = par1.getString("CustomName");
@@ -185,18 +150,7 @@ public class TileEntityCrystallizer extends TileEntity implements ISidedInventor
 		super.writeToNBT(par1);
 		par1.setShort("ShapeTime", (short)crystallizerShapeTime);
 		par1.setShort("FormTime", (short)crystallizerFormTime);
-		NBTTagList nbttaglist = new NBTTagList();
-
-		for (int i = 0; i < crystallizerItemStacks.length; ++i)
-			if (crystallizerItemStacks[i] != null)
-			{
-				NBTTagCompound nbttagcompound1 = new NBTTagCompound();
-				nbttagcompound1.setByte("Slot", (byte)i);
-				crystallizerItemStacks[i].writeToNBT(nbttagcompound1);
-				nbttaglist.appendTag(nbttagcompound1);
-			}
-
-		par1.setTag("Items", nbttaglist);
+		ItemStackHelper.saveAllItems(par1, crystallizerItemStacks);
 
 		if (hasCustomName())
 			par1.setString("CustomName", containerName);
@@ -253,22 +207,22 @@ public class TileEntityCrystallizer extends TileEntity implements ISidedInventor
 		if (crystallizerShapeTime > 0)
 			--crystallizerShapeTime;
 
-		if (!worldObj.isRemote)
+		if (!world.isRemote)
 		{
 			if (crystallizerShapeTime == 0 && canCrystallize())
 			{
-				currentItemShapingTime = crystallizerShapeTime = getCrystallizationTime(crystallizerItemStacks[1]);
+				currentItemShapingTime = crystallizerShapeTime = getCrystallizationTime(crystallizerItemStacks.get(1));
 
 				if (crystallizerShapeTime > 0)
 				{
 					flag1 = true;
 
-					if (crystallizerItemStacks[1] != null)
+					if (!crystallizerItemStacks.get(1).isEmpty())
 					{
-						--crystallizerItemStacks[1].stackSize;
+						crystallizerItemStacks.get(1).shrink(1);
 
-						if (crystallizerItemStacks[1].stackSize == 0)
-							crystallizerItemStacks[1] = crystallizerItemStacks[1].getItem().getContainerItem(crystallizerItemStacks[1]);
+						if (crystallizerItemStacks.get(1).isEmpty())
+							crystallizerItemStacks.set(1, crystallizerItemStacks.get(1).getItem().getContainerItem(crystallizerItemStacks.get(1)));
 					}
 				}
 			}
@@ -289,7 +243,7 @@ public class TileEntityCrystallizer extends TileEntity implements ISidedInventor
 			if (flag != crystallizerShapeTime > 0)
 			{
 				flag1 = true;
-				BlockCrystallizer.updateCrystallizerBlockState(crystallizerShapeTime > 0, worldObj, pos);
+				BlockCrystallizer.updateCrystallizerBlockState(crystallizerShapeTime > 0, world, pos);
 			}
 		}
 
@@ -302,29 +256,29 @@ public class TileEntityCrystallizer extends TileEntity implements ISidedInventor
 	 */
 	private boolean canCrystallize()
 	{
-		if (crystallizerItemStacks[0] == null || CrystallizerRecipes.instance().getCrystallizationResult(crystallizerItemStacks[0]) == null)
+		if (crystallizerItemStacks.get(0).isEmpty() || CrystallizerRecipes.instance().getCrystallizationResult(crystallizerItemStacks.get(0)) == null)
 			return false;
 		else
 		{
-			ItemStack[] itemstack = CrystallizerRecipes.instance().getCrystallizationResult(crystallizerItemStacks[0]);
+			ItemStack[] itemstack = CrystallizerRecipes.instance().getCrystallizationResult(crystallizerItemStacks.get(0));
 
-			if(itemstack[0] == null && itemstack[1] == null || itemstack[0] == null) return false;
-			if(crystallizerItemStacks[2] == null && crystallizerItemStacks[3] == null) return true;
-			if(itemstack[1] == null){
-				if(crystallizerItemStacks[2] == null || crystallizerItemStacks[2].isItemEqual(itemstack[0])) return true;
-				if(!crystallizerItemStacks[2].isItemEqual(itemstack[0])) return false;
+			if(itemstack[0].isEmpty() && itemstack[1].isEmpty() || itemstack[0].isEmpty()) return false;
+			if(crystallizerItemStacks.get(2).isEmpty() && crystallizerItemStacks.get(3).isEmpty()) return true;
+			if(itemstack[1].isEmpty()){
+				if(crystallizerItemStacks.get(2).isEmpty() || crystallizerItemStacks.get(2).isItemEqual(itemstack[0])) return true;
+				if(!crystallizerItemStacks.get(2).isItemEqual(itemstack[0])) return false;
 			} else {
-				if(crystallizerItemStacks[2] == null && !crystallizerItemStacks[3].isItemEqual(itemstack[1])) return false;
-				if(crystallizerItemStacks[2] == null && crystallizerItemStacks[3] == null ||
-						crystallizerItemStacks[2] == null && crystallizerItemStacks[3].isItemEqual(itemstack[1]) ||
-						crystallizerItemStacks[2].isItemEqual(itemstack[0]) && crystallizerItemStacks[3] == null && crystallizerItemStacks[2] != null ||
-						crystallizerItemStacks[2].isItemEqual(itemstack[0]) && crystallizerItemStacks[3].isItemEqual(itemstack[1])) return true;
-				if(!crystallizerItemStacks[2].isItemEqual(itemstack[0]) && crystallizerItemStacks[3] == null) return false;
-				if(!crystallizerItemStacks[2].isItemEqual(itemstack[0]) && !crystallizerItemStacks[3].isItemEqual(itemstack[1])) return false;
+				if(crystallizerItemStacks.get(2).isEmpty() && !crystallizerItemStacks.get(3).isItemEqual(itemstack[1])) return false;
+				if(crystallizerItemStacks.get(2).isEmpty() && crystallizerItemStacks.get(3).isEmpty() ||
+						crystallizerItemStacks.get(2).isEmpty() && crystallizerItemStacks.get(3).isItemEqual(itemstack[1]) ||
+						crystallizerItemStacks.get(2).isItemEqual(itemstack[0]) && crystallizerItemStacks.get(3).isEmpty() && !crystallizerItemStacks.get(2).isEmpty() ||
+						crystallizerItemStacks.get(2).isItemEqual(itemstack[0]) && crystallizerItemStacks.get(3).isItemEqual(itemstack[1])) return true;
+				if(!crystallizerItemStacks.get(2).isItemEqual(itemstack[0]) && crystallizerItemStacks.get(3).isEmpty()) return false;
+				if(!crystallizerItemStacks.get(2).isItemEqual(itemstack[0]) && !crystallizerItemStacks.get(3).isItemEqual(itemstack[1])) return false;
 			}
-			int result = crystallizerItemStacks[2].stackSize + itemstack[0].stackSize;
-			int result2 = crystallizerItemStacks[3].stackSize + itemstack[1].stackSize;
-			return result <= getInventoryStackLimit() && result2 <= getInventoryStackLimit() && result <= crystallizerItemStacks[2].getMaxStackSize() && result2 <= crystallizerItemStacks[3].getMaxStackSize();
+			int result = crystallizerItemStacks.get(2).getCount() + itemstack[0].getCount();
+			int result2 = crystallizerItemStacks.get(3).getCount() + itemstack[1].getCount();
+			return result <= getInventoryStackLimit() && result2 <= getInventoryStackLimit() && result <= crystallizerItemStacks.get(2).getMaxStackSize() && result2 <= crystallizerItemStacks.get(3).getMaxStackSize();
 		}
 	}
 
@@ -335,26 +289,26 @@ public class TileEntityCrystallizer extends TileEntity implements ISidedInventor
 	{
 		if (canCrystallize())
 		{
-			ItemStack[] itemstack = CrystallizerRecipes.instance().getCrystallizationResult(crystallizerItemStacks[0]);
+			ItemStack[] itemstack = CrystallizerRecipes.instance().getCrystallizationResult(crystallizerItemStacks.get(0));
 			Map<ItemStack, ItemStack> testList = new HashMap<ItemStack, ItemStack>();
 			testList.put(itemstack[0], itemstack[1]);
 			Iterator<?> iterator = testList.entrySet().iterator();
 
 
-			if (crystallizerItemStacks[2] == null)
-				crystallizerItemStacks[2] = itemstack[0].copy();
-			else if (crystallizerItemStacks[2].getItem() == itemstack[0].getItem())
-				crystallizerItemStacks[2].stackSize += itemstack[0].stackSize;
-			if(iterator.hasNext() && itemstack[1] != null)
-				if (crystallizerItemStacks[3] == null)
-					crystallizerItemStacks[3] = itemstack[1].copy();
-				else if (crystallizerItemStacks[3].getItem() == itemstack[1].getItem())
-					crystallizerItemStacks[3].stackSize += itemstack[1].stackSize;
+			if (crystallizerItemStacks.get(2).isEmpty())
+				crystallizerItemStacks.set(2, itemstack[0].copy());
+			else if (crystallizerItemStacks.get(2).getItem() == itemstack[0].getItem())
+				crystallizerItemStacks.get(2).grow(itemstack[0].getCount());
+			if(iterator.hasNext() && !itemstack[1].isEmpty())
+				if (crystallizerItemStacks.get(3).isEmpty())
+					crystallizerItemStacks.set(3, itemstack[1].copy());
+				else if (crystallizerItemStacks.get(3).getItem() == itemstack[1].getItem())
+					crystallizerItemStacks.get(3).grow(itemstack[1].getCount());
 
-			--crystallizerItemStacks[0].stackSize;
+			crystallizerItemStacks.get(0).shrink(1);
 
-			if (crystallizerItemStacks[0].stackSize <= 0)
-				crystallizerItemStacks[0] = null;
+			if (crystallizerItemStacks.get(0).getCount() <= 0)
+				crystallizerItemStacks.set(0, ItemStack.EMPTY);
 		}
 	}
 
@@ -365,7 +319,7 @@ public class TileEntityCrystallizer extends TileEntity implements ISidedInventor
 	// TODO: create new fuel types
 	public static int getCrystallizationTime(ItemStack par1ItemStack)
 	{
-		if (par1ItemStack == null)
+		if (par1ItemStack.isEmpty())
 			return 0;
 		else
 		{
@@ -394,9 +348,9 @@ public class TileEntityCrystallizer extends TileEntity implements ISidedInventor
 	 * Do not make give this method the name canInteractWith because it clashes with Container
 	 */
 	@Override
-	public boolean isUseableByPlayer(EntityPlayer par1EntityPlayer)
+	public boolean isUsableByPlayer(EntityPlayer par1EntityPlayer)
 	{
-		return worldObj.getTileEntity(pos) != this ? false : par1EntityPlayer.getDistanceSq(pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D) <= 64.0D;
+		return world.getTileEntity(pos) != this ? false : par1EntityPlayer.getDistanceSq(pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D) <= 64.0D;
 	}
 
 	@Override
@@ -498,5 +452,15 @@ public class TileEntityCrystallizer extends TileEntity implements ISidedInventor
 			else
 				return (T) handlerSide;
 		return super.getCapability(capability, facing);
+	}
+
+	@Override
+	public boolean isEmpty()
+	{
+		for (ItemStack itemstack : crystallizerItemStacks)
+			if (!itemstack.isEmpty())
+				return false;
+
+		return true;
 	}
 }

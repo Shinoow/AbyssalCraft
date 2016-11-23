@@ -29,13 +29,6 @@ public class RitualRecipeHandler implements IRecipeHandler<RitualRecipeWrapper>{
 
 	@Nonnull
 	@Override
-	public String getRecipeCategoryUid() {
-
-		return AbyssalCraftRecipeCategoryUid.RITUAL;
-	}
-
-	@Nonnull
-	@Override
 	public IRecipeWrapper getRecipeWrapper(@Nonnull RitualRecipeWrapper recipe) {
 
 		return recipe;

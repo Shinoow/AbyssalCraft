@@ -22,6 +22,7 @@ import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
+import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.translation.I18n;
 import net.minecraft.world.World;
@@ -52,7 +53,7 @@ public class ItemNecronomicon extends ItemACBasic implements IEnergyTransporterI
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void getSubItems(Item par1Item, CreativeTabs par2CreativeTab, List par3List){
+	public void getSubItems(Item par1Item, CreativeTabs par2CreativeTab, NonNullList<ItemStack> par3List){
 		par3List.add(new ItemStack(par1Item));
 		ItemStack stack = new ItemStack(par1Item);
 		addEnergy(stack, getMaxEnergy(stack));
@@ -60,8 +61,9 @@ public class ItemNecronomicon extends ItemACBasic implements IEnergyTransporterI
 	}
 
 	@Override
-	public ActionResult<ItemStack> onItemRightClick(ItemStack par1ItemStack, World par2World, EntityPlayer par3EntityPlayer, EnumHand hand)
+	public ActionResult<ItemStack> onItemRightClick(World par2World, EntityPlayer par3EntityPlayer, EnumHand hand)
 	{
+		ItemStack par1ItemStack = par3EntityPlayer.getHeldItem(hand);
 		if(!par1ItemStack.hasTagCompound())
 			par1ItemStack.setTagCompound(new NBTTagCompound());
 		if(!par1ItemStack.getTagCompound().hasKey("owner")){
@@ -83,7 +85,8 @@ public class ItemNecronomicon extends ItemACBasic implements IEnergyTransporterI
 	}
 
 	@Override
-	public EnumActionResult onItemUse(ItemStack is, EntityPlayer player, World w, BlockPos pos, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ){
+	public EnumActionResult onItemUse(EntityPlayer player, World w, BlockPos pos, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ){
+		ItemStack is = player.getHeldItem(hand);
 		if(player.isSneaking())
 			if(!(w.getBlockState(pos).getBlock() instanceof BlockRitualAltar)){
 				if(isOwner(player, is))

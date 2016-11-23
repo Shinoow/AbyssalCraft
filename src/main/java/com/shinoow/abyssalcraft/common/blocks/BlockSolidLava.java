@@ -28,7 +28,7 @@ public class BlockSolidLava extends BlockACBasic {
 	}
 
 	@Override
-	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess par1World, BlockPos pos)
+	public AxisAlignedBB getCollisionBoundingBox(IBlockState state, IBlockAccess par1World, BlockPos pos)
 	{
 		float f = 0.125F;
 		return new AxisAlignedBB(0, 0, 0, 1, 1 - f, 1);

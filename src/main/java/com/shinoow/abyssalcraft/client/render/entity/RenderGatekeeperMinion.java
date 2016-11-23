@@ -24,7 +24,7 @@ import com.shinoow.abyssalcraft.common.entity.EntityGatekeeperMinion;
 @SideOnly(Side.CLIENT)
 public class RenderGatekeeperMinion extends RenderLiving<EntityGatekeeperMinion> {
 
-	private static ResourceLocation texture = new ResourceLocation("abyssalcraft:textures/model/elite/GatekeeperMinion.png");
+	private static ResourceLocation texture = new ResourceLocation("abyssalcraft:textures/model/elite/gatekeeperminion.png");
 
 	public RenderGatekeeperMinion(RenderManager manager)
 	{

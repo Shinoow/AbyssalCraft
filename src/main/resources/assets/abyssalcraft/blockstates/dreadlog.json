@@ -1,8 +1,8 @@
 {
 	"variants": {
 		"axis=y":  { "model": "abyssalcraft:dreadlog" },
-        "axis=z":   { "model": "abyssalcraft:dreadlog_side" },
-        "axis=x":   { "model": "abyssalcraft:dreadlog_side", "y": 90 },
+        "axis=z":   { "model": "abyssalcraft:dreadlog", "x": 90 },
+        "axis=x":   { "model": "abyssalcraft:dreadlog", "x": 90, "y": 90 },
         "axis=none": { "model": "abyssalcraft:dreadlog_bark" }
 	}
 }

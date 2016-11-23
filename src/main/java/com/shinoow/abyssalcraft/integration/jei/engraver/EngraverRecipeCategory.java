@@ -19,6 +19,7 @@ import mezz.jei.api.gui.IDrawableAnimated;
 import mezz.jei.api.gui.IDrawableStatic;
 import mezz.jei.api.gui.IGuiItemStackGroup;
 import mezz.jei.api.gui.IRecipeLayout;
+import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.recipe.IRecipeCategory;
 import mezz.jei.api.recipe.IRecipeWrapper;
 import net.minecraft.client.Minecraft;
@@ -67,11 +68,6 @@ public class EngraverRecipeCategory implements IRecipeCategory {
 
 	@Override
 	public void drawExtras(Minecraft minecraft) {
-
-	}
-
-	@Override
-	public void drawAnimations(Minecraft minecraft) {
 		arrow.draw(minecraft, 24, 18);
 	}
 
@@ -82,7 +78,7 @@ public class EngraverRecipeCategory implements IRecipeCategory {
 	}
 
 	@Override
-	public void setRecipe(IRecipeLayout recipeLayout, IRecipeWrapper recipeWrapper) {
+	public void setRecipe(IRecipeLayout recipeLayout, IRecipeWrapper recipeWrapper, IIngredients ingredients) {
 		if(recipeWrapper instanceof EngravingRecipeWrapper){
 			IGuiItemStackGroup guiItemStacks = recipeLayout.getItemStacks();
 
@@ -90,9 +86,13 @@ public class EngraverRecipeCategory implements IRecipeCategory {
 			guiItemStacks.init(engravingSlot, true, 0, 36);
 			guiItemStacks.init(outputSlot, false, 60, 18);
 
-			guiItemStacks.setFromRecipe(inputSlot, recipeWrapper.getInputs());
-			guiItemStacks.setFromRecipe(engravingSlot, ((EngravingRecipeWrapper) recipeWrapper).getEngraving());
-			guiItemStacks.setFromRecipe(outputSlot, recipeWrapper.getOutputs());
+			guiItemStacks.set(ingredients);
 		}
+	}
+
+	@Override
+	public IDrawable getIcon() {
+
+		return null;
 	}
 }

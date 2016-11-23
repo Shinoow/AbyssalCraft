@@ -12,11 +12,10 @@
 package com.shinoow.abyssalcraft.integration.jei;
 
 import mezz.jei.api.*;
+import mezz.jei.api.ingredients.IModIngredientRegistration;
 import mezz.jei.api.recipe.transfer.IRecipeTransferRegistry;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.Loader;
-import net.minecraftforge.oredict.OreDictionary;
-
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.api.item.ACItems;
 import com.shinoow.abyssalcraft.common.inventory.ContainerCrystallizer;
@@ -41,7 +40,7 @@ public class ACJEIPlugin implements IModPlugin {
 
 		IJeiHelpers jeiHelpers = registry.getJeiHelpers();
 
-		JEIUtils utils = new JEIUtils(registry.getItemRegistry());
+		JEIUtils utils = new JEIUtils(registry.getIngredientRegistry());
 
 		IGuiHelper guiHelper = jeiHelpers.getGuiHelper();
 		registry.addRecipeCategories(new TransmutatorFuelCategory(guiHelper),
@@ -70,7 +69,10 @@ public class ACJEIPlugin implements IModPlugin {
 		registry.addRecipeCategoryCraftingItem(new ItemStack(ACItems.dreadlands_necronomicon), AbyssalCraftRecipeCategoryUid.RITUAL);
 		registry.addRecipeCategoryCraftingItem(new ItemStack(ACItems.omothol_necronomicon), AbyssalCraftRecipeCategoryUid.RITUAL);
 		registry.addRecipeCategoryCraftingItem(new ItemStack(ACItems.abyssalnomicon), AbyssalCraftRecipeCategoryUid.RITUAL);
-		registry.addRecipeCategoryCraftingItem(new ItemStack(ACItems.staff_of_rending, 1, OreDictionary.WILDCARD_VALUE), AbyssalCraftRecipeCategoryUid.RENDING);
+		registry.addRecipeCategoryCraftingItem(new ItemStack(ACItems.staff_of_rending, 1, 0), AbyssalCraftRecipeCategoryUid.RENDING);
+		registry.addRecipeCategoryCraftingItem(new ItemStack(ACItems.staff_of_rending, 1, 1), AbyssalCraftRecipeCategoryUid.RENDING);
+		registry.addRecipeCategoryCraftingItem(new ItemStack(ACItems.staff_of_rending, 1, 2), AbyssalCraftRecipeCategoryUid.RENDING);
+		registry.addRecipeCategoryCraftingItem(new ItemStack(ACItems.staff_of_rending, 1, 3), AbyssalCraftRecipeCategoryUid.RENDING);
 		registry.addRecipeCategoryCraftingItem(new ItemStack(ACItems.staff_of_the_gatekeeper), AbyssalCraftRecipeCategoryUid.RENDING);
 
 		IRecipeTransferRegistry recipeTransferRegistry = registry.getRecipeTransferRegistry();
@@ -98,4 +100,13 @@ public class ACJEIPlugin implements IModPlugin {
 
 	@Override
 	public void onRuntimeAvailable(IJeiRuntime jeiRuntime) {}
+
+	@Override
+	public void registerItemSubtypes(ISubtypeRegistry subtypeRegistry) {}
+
+	@Override
+	public void registerIngredients(IModIngredientRegistration registry) {
+		// TODO Auto-generated method stub
+
+	}
 }

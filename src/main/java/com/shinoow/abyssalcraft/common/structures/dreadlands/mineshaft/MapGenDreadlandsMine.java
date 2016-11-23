@@ -15,7 +15,9 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
+import net.minecraft.world.World;
 import net.minecraft.world.gen.structure.MapGenStructure;
 import net.minecraft.world.gen.structure.StructureStart;
 
@@ -40,7 +42,7 @@ public class MapGenDreadlandsMine extends MapGenStructure
 			Entry<?, ?> entry = (Entry<?, ?>)iterator.next();
 
 			if (((String)entry.getKey()).equals("chance"))
-				spawnChance = MathHelper.parseDoubleWithDefault((String)entry.getValue(), spawnChance);
+				spawnChance = MathHelper.getDouble((String)entry.getValue(), spawnChance);
 		}
 	}
 
@@ -53,6 +55,13 @@ public class MapGenDreadlandsMine extends MapGenStructure
 	@Override
 	protected StructureStart getStructureStart(int par1, int par2)
 	{
-		return new StructureDreadlandsMineStart(worldObj, rand, par1, par2);
+		return new StructureDreadlandsMineStart(world, rand, par1, par2);
+	}
+
+	@Override
+	public BlockPos getClosestStrongholdPos(World worldIn, BlockPos pos,
+			boolean p_180706_3_) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

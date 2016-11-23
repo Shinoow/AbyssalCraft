@@ -88,7 +88,7 @@ public class NecronomiconInfusionRitual extends NecronomiconCreationRitual {
 		altar.writeToNBT(compound);
 		NBTTagCompound nbtItem = compound.getCompoundTag("Item");
 
-		return RitualRegistry.instance().areObjectsEqual(ItemStack.loadItemStackFromNBT(nbtItem), sacrifice, false);
+		return RitualRegistry.instance().areObjectsEqual(new ItemStack(nbtItem), sacrifice, false);
 	}
 
 	@Override
@@ -100,7 +100,7 @@ public class NecronomiconInfusionRitual extends NecronomiconCreationRitual {
 
 				NBTTagCompound compound = new NBTTagCompound();
 				altar.writeToNBT(compound);
-				ItemStack stack = ItemStack.loadItemStackFromNBT(compound.getCompoundTag("Item"));
+				ItemStack stack = new ItemStack(compound.getCompoundTag("Item"));
 				if(!stack.hasTagCompound())
 					stack.setTagCompound(new NBTTagCompound());
 				for(String s : tags)
@@ -113,7 +113,7 @@ public class NecronomiconInfusionRitual extends NecronomiconCreationRitual {
 
 				NBTTagCompound compound = new NBTTagCompound();
 				altar.writeToNBT(compound);
-				ItemStack stack = ItemStack.loadItemStackFromNBT(compound.getCompoundTag("Item"));
+				ItemStack stack = new ItemStack(compound.getCompoundTag("Item"));
 				if(!stack.hasTagCompound())
 					stack.setTagCompound(new NBTTagCompound());
 				for(String e : tags)
@@ -137,7 +137,7 @@ public class NecronomiconInfusionRitual extends NecronomiconCreationRitual {
 
 				NBTTagCompound compound = new NBTTagCompound();
 				altar.writeToNBT(compound);
-				ItemStack stack = ItemStack.loadItemStackFromNBT(compound.getCompoundTag("Item"));
+				ItemStack stack = new ItemStack(compound.getCompoundTag("Item"));
 				if(!stack.hasTagCompound())
 					stack.setTagCompound(new NBTTagCompound());
 				for(String s : tags)
@@ -150,7 +150,7 @@ public class NecronomiconInfusionRitual extends NecronomiconCreationRitual {
 
 				NBTTagCompound compound = new NBTTagCompound();
 				altar.writeToNBT(compound);
-				ItemStack stack = ItemStack.loadItemStackFromNBT(compound.getCompoundTag("Item"));
+				ItemStack stack = new ItemStack(compound.getCompoundTag("Item"));
 				if(!stack.hasTagCompound())
 					stack.setTagCompound(new NBTTagCompound());
 				for(String e : tags)

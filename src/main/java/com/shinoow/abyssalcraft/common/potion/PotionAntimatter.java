@@ -54,80 +54,80 @@ public class PotionAntimatter extends Potion{
 		if(par1EntityLivingBase instanceof EntityPlayer && !par1EntityLivingBase.isDead && wasKilled)
 			wasKilled = false;
 
-		if(!par1EntityLivingBase.worldObj.isRemote && par1EntityLivingBase.isDead)
+		if(!par1EntityLivingBase.world.isRemote && par1EntityLivingBase.isDead)
 			if(par1EntityLivingBase instanceof EntityZombie){
-				EntityAntiZombie entity = new EntityAntiZombie(par1EntityLivingBase.worldObj);
+				EntityAntiZombie entity = new EntityAntiZombie(par1EntityLivingBase.world);
 				entity.copyLocationAndAnglesFrom(par1EntityLivingBase);
-				par1EntityLivingBase.worldObj.removeEntity(par1EntityLivingBase);
-				entity.onInitialSpawn(par1EntityLivingBase.worldObj.getDifficultyForLocation(par1EntityLivingBase.getPosition()),(IEntityLivingData)null);
-				par1EntityLivingBase.worldObj.spawnEntityInWorld(entity);
+				par1EntityLivingBase.world.removeEntity(par1EntityLivingBase);
+				entity.onInitialSpawn(par1EntityLivingBase.world.getDifficultyForLocation(par1EntityLivingBase.getPosition()),(IEntityLivingData)null);
+				par1EntityLivingBase.world.spawnEntity(entity);
 			} else if(par1EntityLivingBase instanceof EntityAbyssalZombie){
-				EntityAntiAbyssalZombie entity = new EntityAntiAbyssalZombie(par1EntityLivingBase.worldObj);
+				EntityAntiAbyssalZombie entity = new EntityAntiAbyssalZombie(par1EntityLivingBase.world);
 				entity.copyLocationAndAnglesFrom(par1EntityLivingBase);
-				par1EntityLivingBase.worldObj.removeEntity(par1EntityLivingBase);
-				entity.onInitialSpawn(par1EntityLivingBase.worldObj.getDifficultyForLocation(par1EntityLivingBase.getPosition()),(IEntityLivingData)null);
-				par1EntityLivingBase.worldObj.spawnEntityInWorld(entity);
+				par1EntityLivingBase.world.removeEntity(par1EntityLivingBase);
+				entity.onInitialSpawn(par1EntityLivingBase.world.getDifficultyForLocation(par1EntityLivingBase.getPosition()),(IEntityLivingData)null);
+				par1EntityLivingBase.world.spawnEntity(entity);
 			} else if(par1EntityLivingBase instanceof EntityDepthsGhoul){
-				EntityAntiGhoul entity = new EntityAntiGhoul(par1EntityLivingBase.worldObj);
+				EntityAntiGhoul entity = new EntityAntiGhoul(par1EntityLivingBase.world);
 				entity.copyLocationAndAnglesFrom(par1EntityLivingBase);
-				par1EntityLivingBase.worldObj.removeEntity(par1EntityLivingBase);
-				entity.onInitialSpawn(par1EntityLivingBase.worldObj.getDifficultyForLocation(par1EntityLivingBase.getPosition()),(IEntityLivingData)null);
-				par1EntityLivingBase.worldObj.spawnEntityInWorld(entity);
+				par1EntityLivingBase.world.removeEntity(par1EntityLivingBase);
+				entity.onInitialSpawn(par1EntityLivingBase.world.getDifficultyForLocation(par1EntityLivingBase.getPosition()),(IEntityLivingData)null);
+				par1EntityLivingBase.world.spawnEntity(entity);
 			} else if(par1EntityLivingBase instanceof EntityBat){
-				EntityAntiBat entity = new EntityAntiBat(par1EntityLivingBase.worldObj);
+				EntityAntiBat entity = new EntityAntiBat(par1EntityLivingBase.world);
 				entity.copyLocationAndAnglesFrom(par1EntityLivingBase);
-				par1EntityLivingBase.worldObj.removeEntity(par1EntityLivingBase);
+				par1EntityLivingBase.world.removeEntity(par1EntityLivingBase);
 				entity.onInitialSpawn(null, null);
-				par1EntityLivingBase.worldObj.spawnEntityInWorld(entity);
+				par1EntityLivingBase.world.spawnEntity(entity);
 			} else if(par1EntityLivingBase instanceof EntityChicken){
-				EntityAntiChicken entity = new EntityAntiChicken(par1EntityLivingBase.worldObj);
+				EntityAntiChicken entity = new EntityAntiChicken(par1EntityLivingBase.world);
 				entity.copyLocationAndAnglesFrom(par1EntityLivingBase);
-				par1EntityLivingBase.worldObj.removeEntity(par1EntityLivingBase);
+				par1EntityLivingBase.world.removeEntity(par1EntityLivingBase);
 				entity.onInitialSpawn(null, null);
-				par1EntityLivingBase.worldObj.spawnEntityInWorld(entity);
+				par1EntityLivingBase.world.spawnEntity(entity);
 			} else if(par1EntityLivingBase instanceof EntityCow){
-				EntityAntiCow entity = new EntityAntiCow(par1EntityLivingBase.worldObj);
+				EntityAntiCow entity = new EntityAntiCow(par1EntityLivingBase.world);
 				entity.copyLocationAndAnglesFrom(par1EntityLivingBase);
-				par1EntityLivingBase.worldObj.removeEntity(par1EntityLivingBase);
+				par1EntityLivingBase.world.removeEntity(par1EntityLivingBase);
 				entity.onInitialSpawn(null, null);
-				par1EntityLivingBase.worldObj.spawnEntityInWorld(entity);
+				par1EntityLivingBase.world.spawnEntity(entity);
 			} else if(par1EntityLivingBase instanceof EntityCreeper){
-				EntityAntiCreeper entity = new EntityAntiCreeper(par1EntityLivingBase.worldObj);
+				EntityAntiCreeper entity = new EntityAntiCreeper(par1EntityLivingBase.world);
 				entity.copyLocationAndAnglesFrom(par1EntityLivingBase);
-				par1EntityLivingBase.worldObj.removeEntity(par1EntityLivingBase);
+				par1EntityLivingBase.world.removeEntity(par1EntityLivingBase);
 				entity.onInitialSpawn(null, null);
-				par1EntityLivingBase.worldObj.spawnEntityInWorld(entity);
+				par1EntityLivingBase.world.spawnEntity(entity);
 			} else if(par1EntityLivingBase instanceof EntityPig || par1EntityLivingBase instanceof EntityDemonPig){
-				EntityAntiPig entity = new EntityAntiPig(par1EntityLivingBase.worldObj);
+				EntityAntiPig entity = new EntityAntiPig(par1EntityLivingBase.world);
 				entity.copyLocationAndAnglesFrom(par1EntityLivingBase);
-				par1EntityLivingBase.worldObj.removeEntity(par1EntityLivingBase);
+				par1EntityLivingBase.world.removeEntity(par1EntityLivingBase);
 				entity.onInitialSpawn(null, null);
-				par1EntityLivingBase.worldObj.spawnEntityInWorld(entity);
+				par1EntityLivingBase.world.spawnEntity(entity);
 			} else if(par1EntityLivingBase instanceof EntityPlayer && !wasKilled){
 				wasKilled = true;
-				EntityAntiPlayer entity = new EntityAntiPlayer(par1EntityLivingBase.worldObj);
+				EntityAntiPlayer entity = new EntityAntiPlayer(par1EntityLivingBase.world);
 				entity.copyLocationAndAnglesFrom(par1EntityLivingBase);
-				par1EntityLivingBase.worldObj.removeEntity(par1EntityLivingBase);
-				entity.onInitialSpawn(par1EntityLivingBase.worldObj.getDifficultyForLocation(par1EntityLivingBase.getPosition()),(IEntityLivingData)null);
-				par1EntityLivingBase.worldObj.spawnEntityInWorld(entity);
+				par1EntityLivingBase.world.removeEntity(par1EntityLivingBase);
+				entity.onInitialSpawn(par1EntityLivingBase.world.getDifficultyForLocation(par1EntityLivingBase.getPosition()),(IEntityLivingData)null);
+				par1EntityLivingBase.world.spawnEntity(entity);
 			} else if(par1EntityLivingBase instanceof EntitySkeleton){
-				EntityAntiSkeleton entity = new EntityAntiSkeleton(par1EntityLivingBase.worldObj);
+				EntityAntiSkeleton entity = new EntityAntiSkeleton(par1EntityLivingBase.world);
 				entity.copyLocationAndAnglesFrom(par1EntityLivingBase);
-				par1EntityLivingBase.worldObj.removeEntity(par1EntityLivingBase);
-				entity.onInitialSpawn(par1EntityLivingBase.worldObj.getDifficultyForLocation(par1EntityLivingBase.getPosition()),(IEntityLivingData)null);
-				par1EntityLivingBase.worldObj.spawnEntityInWorld(entity);
+				par1EntityLivingBase.world.removeEntity(par1EntityLivingBase);
+				entity.onInitialSpawn(par1EntityLivingBase.world.getDifficultyForLocation(par1EntityLivingBase.getPosition()),(IEntityLivingData)null);
+				par1EntityLivingBase.world.spawnEntity(entity);
 			} else if(par1EntityLivingBase instanceof EntitySpider){
-				EntityAntiSpider entity = new EntityAntiSpider(par1EntityLivingBase.worldObj);
+				EntityAntiSpider entity = new EntityAntiSpider(par1EntityLivingBase.world);
 				entity.copyLocationAndAnglesFrom(par1EntityLivingBase);
-				par1EntityLivingBase.worldObj.removeEntity(par1EntityLivingBase);
-				entity.onInitialSpawn(par1EntityLivingBase.worldObj.getDifficultyForLocation(par1EntityLivingBase.getPosition()),(IEntityLivingData)null);
-				par1EntityLivingBase.worldObj.spawnEntityInWorld(entity);
+				par1EntityLivingBase.world.removeEntity(par1EntityLivingBase);
+				entity.onInitialSpawn(par1EntityLivingBase.world.getDifficultyForLocation(par1EntityLivingBase.getPosition()),(IEntityLivingData)null);
+				par1EntityLivingBase.world.spawnEntity(entity);
 			} else if(par1EntityLivingBase instanceof EntityVillager){
-				EntityRemnant entity = new EntityRemnant(par1EntityLivingBase.worldObj);
+				EntityRemnant entity = new EntityRemnant(par1EntityLivingBase.world);
 				entity.copyLocationAndAnglesFrom(par1EntityLivingBase);
-				par1EntityLivingBase.worldObj.removeEntity(par1EntityLivingBase);
-				entity.onInitialSpawn(par1EntityLivingBase.worldObj.getDifficultyForLocation(par1EntityLivingBase.getPosition()),(IEntityLivingData)null);
-				par1EntityLivingBase.worldObj.spawnEntityInWorld(entity);
+				par1EntityLivingBase.world.removeEntity(par1EntityLivingBase);
+				entity.onInitialSpawn(par1EntityLivingBase.world.getDifficultyForLocation(par1EntityLivingBase.getPosition()),(IEntityLivingData)null);
+				par1EntityLivingBase.world.spawnEntity(entity);
 			}
 	}
 

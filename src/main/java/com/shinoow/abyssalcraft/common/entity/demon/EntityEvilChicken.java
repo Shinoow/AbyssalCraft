@@ -140,14 +140,14 @@ public class EntityEvilChicken extends EntityMob {
 	{
 		super.onDeath(par1DamageSource);
 
-		if(!worldObj.isRemote)
+		if(!world.isRemote)
 			if(!(par1DamageSource.getEntity() instanceof EntityLesserShoggoth))
 			{
-				EntityDemonChicken demonchicken = new EntityDemonChicken(worldObj);
+				EntityDemonChicken demonchicken = new EntityDemonChicken(world);
 				demonchicken.copyLocationAndAnglesFrom(this);
-				worldObj.removeEntity(this);
-				demonchicken.onInitialSpawn(worldObj.getDifficultyForLocation(new BlockPos(posX, posY, posZ)), (IEntityLivingData)null);
-				worldObj.spawnEntityInWorld(demonchicken);
+				world.removeEntity(this);
+				demonchicken.onInitialSpawn(world.getDifficultyForLocation(new BlockPos(posX, posY, posZ)), (IEntityLivingData)null);
+				world.spawnEntity(demonchicken);
 			}
 	}
 

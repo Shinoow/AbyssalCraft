@@ -85,7 +85,7 @@ public class CraftingStack {
 								stuff[i+3] = copy[i+2];
 							}
 						}
-						this.output.stackSize = recipe.getRecipeOutput().stackSize;
+						this.output.setCount(recipe.getRecipeOutput().getCount());
 					}
 				}
 			for(int i = 0; i < 9; i++)

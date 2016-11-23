@@ -227,7 +227,4 @@ public class ACItems {
 	public static Item essence_of_the_gatekeeper;
 	public static Item interdimensional_cage;
 	//	public static Item shadow_titan_armor_plate = getItem("shadowplate");
-
-	@Deprecated
-	public static Item liquid_coralium_bucket, liquid_antimatter_bucket;
 }

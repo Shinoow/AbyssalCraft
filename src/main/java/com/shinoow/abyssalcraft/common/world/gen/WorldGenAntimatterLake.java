@@ -101,7 +101,7 @@ public class WorldGenAntimatterLake extends WorldGenerator
 
 							if (worldIn.getBlockState(blockpos).getBlock() == Blocks.DIRT && worldIn.getLightFor(EnumSkyBlock.SKY, position.add(i2, j4, j3)) > 0)
 							{
-								Biome biome = worldIn.getBiomeGenForCoords(blockpos);
+								Biome biome = worldIn.getBiome(blockpos);
 
 								if (biome.topBlock.getBlock() == Blocks.MYCELIUM)
 									worldIn.setBlockState(blockpos, Blocks.MYCELIUM.getDefaultState(), 2);

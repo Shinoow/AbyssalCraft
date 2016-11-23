@@ -193,8 +193,8 @@ public class MiscHandler implements ILifeCycleHandler {
 		ACAchievements.summoning_ritual = new Achievement("achievement.ritualSummon", "ritualSummon", -4, 1, ACBlocks.depths_ghoul_head, ACAchievements.ritual_altar).registerStat();
 		ACAchievements.creation_ritual = new Achievement("achievement.ritualCreate", "ritualCreate", -4, 2, ACItems.life_crystal, ACAchievements.ritual_altar).registerStat();
 		ACAchievements.breeding_ritual = new Achievement("achievement.ritualBreed", "ritualBreed", -4, 3, Items.EGG, ACAchievements.ritual_altar).registerStat();
-		ACAchievements.potion_ritual = new Achievement("achievement.ritualPotion", "ritualPotion", -4, 4, Items.POTIONITEM, ACAchievements.ritual_altar).registerStat();
-		ACAchievements.aoe_potion_ritual = new Achievement("achievement.ritualPotionAoE", "ritualPotionAoE", -4, 5, new ItemStack(Items.POTIONITEM, 1, 16384), ACAchievements.ritual_altar).registerStat();
+		ACAchievements.potion_ritual = new Achievement("achievement.ritualPotion", "ritualPotion", -4, 4, PotionUtils.addPotionToItemStack(new ItemStack(Items.POTIONITEM), PotionTypes.WATER), ACAchievements.ritual_altar).registerStat();
+		ACAchievements.aoe_potion_ritual = new Achievement("achievement.ritualPotionAoE", "ritualPotionAoE", -4, 5, PotionUtils.addPotionToItemStack(new ItemStack(Items.SPLASH_POTION), PotionTypes.WATER), ACAchievements.ritual_altar).registerStat();
 		ACAchievements.infusion_ritual = new Achievement("achievement.ritualInfusion", "ritualInfusion", -4, 6, ACItems.depths_helmet, ACAchievements.ritual_altar).registerStat();
 		//Progression Achievements
 		ACAchievements.enter_abyssal_wasteland = new Achievement("achievement.enterabyss", "enterabyss", 0, 2, ACBlocks.abyssal_stone, ACAchievements.necronomicon).setSpecial().registerStat();
@@ -224,54 +224,6 @@ public class MiscHandler implements ILifeCycleHandler {
 		ACAchievements.make_engraver = new Achievement("achievement.makeEngraver", "makeEngraver", 2, -3, ACBlocks.engraver, AchievementList.OPEN_INVENTORY).registerStat();
 
 		AchievementPage.registerAchievementPage(new AchievementPage("AbyssalCraft", ACAchievements.getAchievements()));
-
-		necro = ACAchievements.necronomicon;
-		mineAby = ACAchievements.mine_abyssalnite;
-		killghoul = ACAchievements.kill_depths_ghoul;
-		enterabyss = ACAchievements.enter_abyssal_wasteland;
-		killdragon = ACAchievements.kill_spectral_dragon;
-		summonAsorah = ACAchievements.summon_asorah;
-		killAsorah = ACAchievements.kill_asorah;
-		enterdreadlands = ACAchievements.enter_dreadlands;
-		killdreadguard = ACAchievements.kill_dreadguard;
-		ghoulhead = ACAchievements.depths_ghoul_head;
-		petehead = ACAchievements.pete_head;
-		wilsonhead = ACAchievements.mr_wilson_head;
-		orangehead = ACAchievements.dr_orange_head;
-		mineCorgem = ACAchievements.mine_coralium;
-		mineCor = ACAchievements.mine_abyssal_coralium;
-		findPSDL = ACAchievements.find_powerstone;
-		GK1 = ACAchievements.gateway_key;
-		GK2 = ACAchievements.dreaded_gateway_key;
-		GK3 = ACAchievements.rlyehian_gateway_key;
-		summonChagaroth = ACAchievements.summon_chagaroth;
-		killChagaroth = ACAchievements.kill_chagaroth;
-		enterOmothol = ACAchievements.enter_omothol;
-		enterDarkRealm = ACAchievements.enter_dark_realm;
-		necrou1 = ACAchievements.abyssal_wasteland_necronomicon;
-		necrou2 = ACAchievements.dreadlands_necronomicon;
-		necrou3 = ACAchievements.omothol_necronomicon;
-		abyssaln = ACAchievements.abyssalnomicon;
-		ritual = ACAchievements.ritual_altar;
-		ritualSummon = ACAchievements.summoning_ritual;
-		ritualCreate = ACAchievements.creation_ritual;
-		killOmotholelite = ACAchievements.kill_omothol_elite;
-		locateJzahar = ACAchievements.locate_jzahar;
-		killJzahar = ACAchievements.kill_jzahar;
-		shadowGems = ACAchievements.shadow_gems;
-		mineAbyOres = ACAchievements.mine_abyssal_ores;
-		mineDread = ACAchievements.mine_dreadlands_ores;
-		dreadium = ACAchievements.dreadium;
-		eth = ACAchievements.ethaxium;
-		makeTransmutator = ACAchievements.make_transmutator;
-		makeCrystallizer = ACAchievements.make_crystallizer;
-		makeMaterializer = ACAchievements.make_materializer;
-		makeCrystalBag = ACAchievements.make_crystal_bag;
-		makeEngraver = ACAchievements.make_engraver;
-		ritualBreed = ACAchievements.breeding_ritual;
-		ritualPotion = ACAchievements.potion_ritual;
-		ritualPotionAoE = ACAchievements.aoe_potion_ritual;
-		ritualInfusion = ACAchievements.infusion_ritual;
 
 		RecipeSorter.register("abyssalcraft:shapednbt", ShapedNBTRecipe.class, Category.SHAPED, "after:minecraft:shaped");
 
@@ -512,16 +464,16 @@ public class MiscHandler implements ILifeCycleHandler {
 	}
 
 	private void addDungeonHooks(){
-		DungeonHooks.addDungeonMob("abyssalcraft.abyssalzombie", 150);
-		DungeonHooks.addDungeonMob("abyssalcraft.depthsghoul", 100);
-		DungeonHooks.addDungeonMob("abyssalcraft.shadowcreature", 120);
-		DungeonHooks.addDungeonMob("abyssalcraft.shadowmonster", 100);
-		DungeonHooks.addDungeonMob("abyssalcraft.shadowbeast", 30);
-		DungeonHooks.addDungeonMob("abyssalcraft.antiabyssalzombie", 50);
-		DungeonHooks.addDungeonMob("abyssalcraft.antighoul", 50);
-		DungeonHooks.addDungeonMob("abyssalcraft.antiskeleton", 50);
-		DungeonHooks.addDungeonMob("abyssalcraft.antispider", 50);
-		DungeonHooks.addDungeonMob("abyssalcraft.antizombie", 50);
+		DungeonHooks.addDungeonMob(new ResourceLocation("abyssalcraft","abyssalzombie"), 150);
+		DungeonHooks.addDungeonMob(new ResourceLocation("abyssalcraft","depthsghoul"), 100);
+		DungeonHooks.addDungeonMob(new ResourceLocation("abyssalcraft","shadowcreature"), 120);
+		DungeonHooks.addDungeonMob(new ResourceLocation("abyssalcraft","shadowmonster"), 100);
+		DungeonHooks.addDungeonMob(new ResourceLocation("abyssalcraft","shadowbeast"), 30);
+		DungeonHooks.addDungeonMob(new ResourceLocation("abyssalcraft","antiabyssalzombie"), 50);
+		DungeonHooks.addDungeonMob(new ResourceLocation("abyssalcraft","antighoul"), 50);
+		DungeonHooks.addDungeonMob(new ResourceLocation("abyssalcraft","antiskeleton"), 50);
+		DungeonHooks.addDungeonMob(new ResourceLocation("abyssalcraft","antispider"), 50);
+		DungeonHooks.addDungeonMob(new ResourceLocation("abyssalcraft","antizombie"), 50);
 	}
 
 	private void sendIMC(){

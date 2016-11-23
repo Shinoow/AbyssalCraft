@@ -17,6 +17,7 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.NonNullList;
 import net.minecraft.util.text.translation.I18n;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -54,7 +55,7 @@ public class ItemCrystal extends Item implements ICrystal {
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void getSubItems(Item par1Item, CreativeTabs par2CreativeTab, List par3List){
+	public void getSubItems(Item par1Item, CreativeTabs par2CreativeTab, NonNullList<ItemStack> par3List){
 		for(int i = 0; i < ACLib.crystalNames.length; ++i)
 			par3List.add(new ItemStack(par1Item, 1, i));
 	}

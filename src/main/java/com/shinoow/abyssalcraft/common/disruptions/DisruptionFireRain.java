@@ -43,21 +43,21 @@ public class DisruptionFireRain extends DisruptionEntry {
 
 		if(!world.isRemote){
 			if(world.rand.nextBoolean())
-				world.spawnEntityInWorld(fireball1);
+				world.spawnEntity(fireball1);
 			if(world.rand.nextBoolean())
-				world.spawnEntityInWorld(fireball2);
+				world.spawnEntity(fireball2);
 			if(world.rand.nextBoolean())
-				world.spawnEntityInWorld(fireball3);
+				world.spawnEntity(fireball3);
 			if(world.rand.nextBoolean())
-				world.spawnEntityInWorld(fireball4);
+				world.spawnEntity(fireball4);
 			if(world.rand.nextBoolean())
-				world.spawnEntityInWorld(fireball5);
+				world.spawnEntity(fireball5);
 			if(world.rand.nextBoolean())
-				world.spawnEntityInWorld(fireball6);
+				world.spawnEntity(fireball6);
 			if(world.rand.nextBoolean())
-				world.spawnEntityInWorld(fireball7);
+				world.spawnEntity(fireball7);
 			if(world.rand.nextBoolean())
-				world.spawnEntityInWorld(fireball8);
+				world.spawnEntity(fireball8);
 		}
 	}
 
@@ -65,7 +65,7 @@ public class DisruptionFireRain extends DisruptionEntry {
 		EntityLargeFireball fireball = new EntityLargeFireball(world);
 		fireball.setLocationAndAngles(x, y, z, fireball.rotationYaw, fireball.rotationPitch);
 		fireball.setPosition(x, y, z);
-		double d6 = MathHelper.sqrt_double(accx * accx + accy * accy + accz * accz);
+		double d6 = MathHelper.sqrt(accx * accx + accy * accy + accz * accz);
 		fireball.accelerationX = accx / d6 * 0.1D;
 		fireball.accelerationY = accy / d6 * 0.1D;
 		fireball.accelerationZ = accz / d6 * 0.1D;

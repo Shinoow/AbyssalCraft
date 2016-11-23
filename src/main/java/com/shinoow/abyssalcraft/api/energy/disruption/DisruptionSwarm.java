@@ -62,7 +62,7 @@ public class DisruptionSwarm extends DisruptionEntry {
 						BlockPos pos1 = new BlockPos(pos.getX() + randomNum(world.rand), pos.getY() + 1, pos.getZ() + randomNum(world.rand));
 						entity.setLocationAndAngles(pos1.getX(), pos1.getY(), pos1.getZ(), entity.rotationYaw, entity.rotationPitch);
 						((EntityLiving) entity).onInitialSpawn(world.getDifficultyForLocation(pos1), (IEntityLivingData)null);
-						world.spawnEntityInWorld(entity);
+						world.spawnEntity(entity);
 						if(!entity.isImmuneToFire())
 							entity.addPotionEffect(new PotionEffect(MobEffects.FIRE_RESISTANCE, 200));
 					} catch (InstantiationException | IllegalAccessException

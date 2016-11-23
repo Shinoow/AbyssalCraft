@@ -21,9 +21,9 @@ import net.minecraft.block.properties.PropertyDirection;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
+import net.minecraft.inventory.InventoryHelper;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
@@ -101,7 +101,7 @@ public class BlockCrystallizer extends BlockContainer
 	 * Called upon block activation (right click on the block.)
 	 */
 	@Override
-	public boolean onBlockActivated(World par1World, BlockPos pos, IBlockState state, EntityPlayer par5EntityPlayer, EnumHand hand, ItemStack heldItem, EnumFacing side, float par7, float par8, float par9) {
+	public boolean onBlockActivated(World par1World, BlockPos pos, IBlockState state, EntityPlayer par5EntityPlayer, EnumHand hand, EnumFacing side, float par7, float par8, float par9) {
 		if(!par1World.isRemote)
 			FMLNetworkHandler.openGui(par5EntityPlayer, AbyssalCraft.instance, ACLib.crystallizerGuiID, par1World, pos.getX(), pos.getY(), pos.getZ());
 		return true;
@@ -158,37 +158,8 @@ public class BlockCrystallizer extends BlockContainer
 
 			if (tileentitycrystallizer != null)
 			{
-				for (int i1 = 0; i1 < tileentitycrystallizer.getSizeInventory(); ++i1)
-				{
-					ItemStack itemstack = tileentitycrystallizer.getStackInSlot(i1);
 
-					if (itemstack != null)
-					{
-						float f = rand.nextFloat() * 0.8F + 0.1F;
-						float f1 = rand.nextFloat() * 0.8F + 0.1F;
-						float f2 = rand.nextFloat() * 0.8F + 0.1F;
-
-						while (itemstack.stackSize > 0)
-						{
-							int j1 = rand.nextInt(21) + 10;
-
-							if (j1 > itemstack.stackSize)
-								j1 = itemstack.stackSize;
-
-							itemstack.stackSize -= j1;
-							EntityItem entityitem = new EntityItem(par1World, pos.getX() + f, pos.getY() + f1, pos.getZ() + f2, new ItemStack(itemstack.getItem(), j1, itemstack.getItemDamage()));
-
-							if (itemstack.hasTagCompound())
-								entityitem.getEntityItem().setTagCompound(itemstack.getTagCompound().copy());
-
-							float f3 = 0.05F;
-							entityitem.motionX = (float)rand.nextGaussian() * f3;
-							entityitem.motionY = (float)rand.nextGaussian() * f3 + 0.2F;
-							entityitem.motionZ = (float)rand.nextGaussian() * f3;
-							par1World.spawnEntityInWorld(entityitem);
-						}
-					}
-				}
+				InventoryHelper.dropInventoryItems(par1World, pos, tileentitycrystallizer);
 
 				par1World.updateComparatorOutputLevel(pos, this);;
 			}

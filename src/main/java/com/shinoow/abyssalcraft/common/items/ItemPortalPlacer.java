@@ -71,8 +71,9 @@ public class ItemPortalPlacer extends Item {
 		list.add(I18n.translateToLocal("tooltip.portalplacer.2"));
 		if(key > 0)
 			list.add(I18n.translateToLocal("tooltip.portalplacer.3"));
-		if(!isCorrectDim(Minecraft.getMinecraft().theWorld.provider.getDimension()))
-			list.add(TextFormatting.DARK_RED+""+TextFormatting.ITALIC+I18n.translateToLocal("tooltip.portalplacer.4"));
+		if(Minecraft.getMinecraft().world != null && Minecraft.getMinecraft().world.provider != null)
+			if(!isCorrectDim(Minecraft.getMinecraft().world.provider.getDimension()))
+				list.add(TextFormatting.DARK_RED+""+TextFormatting.ITALIC+I18n.translateToLocal("tooltip.portalplacer.4"));
 	}
 
 	private boolean isCorrectDim(int dim){
@@ -117,11 +118,11 @@ public class ItemPortalPlacer extends Item {
 	}
 
 	@Override
-	public EnumActionResult onItemUse(ItemStack is, EntityPlayer player, World world, BlockPos pos, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ){
+	public EnumActionResult onItemUse(EntityPlayer player, World world, BlockPos pos, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ){
 		if(!world.isRemote){
 			if(isCorrectDim(player.dimension))
 			{
-				int direction = MathHelper.floor_double(player.rotationYaw * 4.0F / 360.0F + 0.5D) & 3;
+				int direction = MathHelper.floor(player.rotationYaw * 4.0F / 360.0F + 0.5D) & 3;
 
 				switch(key){
 				case 0:

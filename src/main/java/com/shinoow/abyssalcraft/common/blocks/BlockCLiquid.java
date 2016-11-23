@@ -82,7 +82,7 @@ public class BlockCLiquid extends BlockFluidClassic {
 						&& world.getBlockState(new BlockPos(pos.getX(), pos.getY()+1, pos.getZ())).getBlock() != this && world.getBlockState(new BlockPos(pos.getX(), pos.getY()+1, pos.getZ())).getBlock() != ACBlocks.liquid_antimatter)
 					world.setBlockState(new BlockPos(pos.getX(), pos.getY()+1, pos.getZ()), getDefaultState());
 			} else {
-				if(BiomeDictionary.isBiomeOfType(world.getBiomeGenForCoords(pos), Type.OCEAN) && world.getBlockState(pos).getBlock() == this)
+				if(BiomeDictionary.isBiomeOfType(world.getBiome(pos), Type.OCEAN) && world.getBlockState(pos).getBlock() == this)
 					if(ACConfig.destroyOcean)
 						world.setBlockState(pos, getDefaultState());
 					else world.setBlockState(pos, Blocks.COBBLESTONE.getDefaultState());
@@ -115,7 +115,7 @@ public class BlockCLiquid extends BlockFluidClassic {
 					world.setBlockState(pos, ACBlocks.abyssal_diamond_ore.getDefaultState());
 				else world.setBlockState(pos, ACBlocks.pearlescent_coralium_ore.getDefaultState());
 			else if(stones.contains(world.getBlockState(pos)))
-				if(BiomeDictionary.isBiomeOfType(world.getBiomeGenForCoords(pos), Type.OCEAN)){
+				if(BiomeDictionary.isBiomeOfType(world.getBiome(pos), Type.OCEAN)){
 					if(world.getBlockState(pos).getBlock() != Blocks.COBBLESTONE)
 						world.setBlockState(pos, ACBlocks.abyssal_stone.getDefaultState());
 				}else world.setBlockState(pos, ACBlocks.abyssal_stone.getDefaultState());

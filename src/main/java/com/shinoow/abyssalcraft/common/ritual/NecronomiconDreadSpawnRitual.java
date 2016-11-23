@@ -63,19 +63,19 @@ public class NecronomiconDreadSpawnRitual extends NecronomiconRitual {
 			for(EntityDreadSpawn spawn : dreadSpawns){
 				EntityDreadSpawn copy = new EntityDreadSpawn(world);
 				copy.copyLocationAndAnglesFrom(spawn);
-				world.spawnEntityInWorld(copy);
+				world.spawnEntity(copy);
 			}
 		if(!greaterDreadSpawns.isEmpty())
 			for(EntityGreaterDreadSpawn spawn : greaterDreadSpawns){
 				EntityGreaterDreadSpawn copy = new EntityGreaterDreadSpawn(world);
 				copy.copyLocationAndAnglesFrom(spawn);
-				world.spawnEntityInWorld(copy);
+				world.spawnEntity(copy);
 			}
 		if(!lesserDreadBeasts.isEmpty())
 			for(EntityLesserDreadbeast spawn : lesserDreadBeasts){
 				EntityLesserDreadbeast copy = new EntityLesserDreadbeast(world);
 				copy.copyLocationAndAnglesFrom(spawn);
-				world.spawnEntityInWorld(copy);
+				world.spawnEntity(copy);
 			}
 	}
 

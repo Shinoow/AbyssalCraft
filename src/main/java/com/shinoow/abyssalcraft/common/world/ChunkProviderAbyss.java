@@ -100,7 +100,7 @@ public class ChunkProviderAbyss implements IChunkGenerator
 		for (int j = -2; j <= 2; ++j)
 			for (int k = -2; k <= 2; ++k)
 			{
-				float f = 10.0F / MathHelper.sqrt_float(j * j + k * k + 0.2F);
+				float f = 10.0F / MathHelper.sqrt(j * j + k * k + 0.2F);
 				parabolicField[j + 2 + (k + 2) * 5] = f;
 			}
 	}
@@ -194,7 +194,7 @@ public class ChunkProviderAbyss implements IChunkGenerator
 		rand.setSeed(x * 341873128712L + z * 132897987541L);
 		ChunkPrimer primer = new ChunkPrimer();
 		setBlocksInChunk(x, z, primer);
-		biomesForGeneration = worldObj.getBiomeProvider().loadBlockGeneratorData(biomesForGeneration, x * 16, z * 16, 16, 16);
+		biomesForGeneration = worldObj.getBiomeProvider().getBiomes(biomesForGeneration, x * 16, z * 16, 16, 16);
 		replaceBlocksForBiome(x, z, primer, biomesForGeneration);
 		caveGenerator.generate(worldObj, x, z, primer);
 		ravineGenerator.generate(worldObj, x, z, primer);
@@ -298,7 +298,7 @@ public class ChunkProviderAbyss implements IChunkGenerator
 					double d7 = doubleArray2[l] / 512.0D;
 					double d8 = doubleArray3[l] / 512.0D;
 					double d9 = (doubleArray1[l] / 10.0D + 1.0D) / 2.0D;
-					double d10 = MathHelper.denormalizeClamp(d7, d8, d9) - d6;
+					double d10 = MathHelper.clampedLerp(d7, d8, d9) - d6;
 
 					if (j2 > 29)
 					{
@@ -322,7 +322,7 @@ public class ChunkProviderAbyss implements IChunkGenerator
 		int k = x * 16;
 		int l = z * 16;
 		BlockPos pos = new BlockPos(k, 0, l);
-		Biome Biome = worldObj.getBiomeGenForCoords(pos.add(16, 0, 16));
+		Biome Biome = worldObj.getBiome(pos.add(16, 0, 16));
 		rand.setSeed(worldObj.getSeed());
 		long i1 = rand.nextLong() / 2L * 2L + 1L;
 		long j1 = rand.nextLong() / 2L * 2L + 1L;
@@ -392,14 +392,14 @@ public class ChunkProviderAbyss implements IChunkGenerator
 	@SuppressWarnings("rawtypes")
 	public List getPossibleCreatures(EnumCreatureType par1EnumCreatureType, BlockPos pos)
 	{
-		Biome biome = worldObj.getBiomeGenForCoords(pos);
+		Biome biome = worldObj.getBiome(pos);
 		return biome == null ? null : biome.getSpawnableList(par1EnumCreatureType);
 	}
 
 	@Override
-	public BlockPos getStrongholdGen(World par1World, String par2String, BlockPos pos)
+	public BlockPos getStrongholdGen(World par1World, String par2String, BlockPos pos, boolean bool)
 	{
-		return "AbyStronghold".equals(par2String) && strongholdGenerator != null ? strongholdGenerator.getClosestStrongholdPos(par1World, pos) : null;
+		return "AbyStronghold".equals(par2String) && strongholdGenerator != null ? strongholdGenerator.getClosestStrongholdPos(par1World, pos, bool) : null;
 	}
 
 	@Override

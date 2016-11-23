@@ -13,12 +13,14 @@ package com.shinoow.abyssalcraft.common.blocks.tile;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ISidedInventory;
+import net.minecraft.inventory.ItemStackHelper;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
+import net.minecraft.util.NonNullList;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.util.text.TextComponentTranslation;
@@ -31,7 +33,7 @@ public class TileEntityMaterializer extends TileEntity implements ISidedInventor
 	/**
 	 * The ItemStacks that hold the items currently being used in the materializer
 	 */
-	private ItemStack[] materializerItemStacks = new ItemStack[30];
+	private NonNullList<ItemStack> materializerItemStacks = NonNullList.<ItemStack>withSize(30, ItemStack.EMPTY);
 
 	private String containerName;
 
@@ -41,7 +43,7 @@ public class TileEntityMaterializer extends TileEntity implements ISidedInventor
 	@Override
 	public int getSizeInventory()
 	{
-		return materializerItemStacks.length;
+		return materializerItemStacks.size();
 	}
 
 	/**
@@ -50,7 +52,7 @@ public class TileEntityMaterializer extends TileEntity implements ISidedInventor
 	@Override
 	public ItemStack getStackInSlot(int par1)
 	{
-		return materializerItemStacks[par1];
+		return materializerItemStacks.get(par1);
 	}
 
 	/**
@@ -60,27 +62,7 @@ public class TileEntityMaterializer extends TileEntity implements ISidedInventor
 	@Override
 	public ItemStack decrStackSize(int par1, int par2)
 	{
-		if (materializerItemStacks[par1] != null)
-		{
-			ItemStack itemstack;
-
-			if (materializerItemStacks[par1].stackSize <= par2)
-			{
-				itemstack = materializerItemStacks[par1];
-				materializerItemStacks[par1] = null;
-				return itemstack;
-			}
-			else
-			{
-				itemstack = materializerItemStacks[par1].splitStack(par2);
-
-				if (materializerItemStacks[par1].stackSize == 0)
-					materializerItemStacks[par1] = null;
-
-				return itemstack;
-			}
-		} else
-			return null;
+		return ItemStackHelper.getAndSplit(materializerItemStacks, par1, par2);
 	}
 
 	/**
@@ -90,13 +72,7 @@ public class TileEntityMaterializer extends TileEntity implements ISidedInventor
 	@Override
 	public ItemStack removeStackFromSlot(int par1)
 	{
-		if (materializerItemStacks[par1] != null)
-		{
-			ItemStack itemstack = materializerItemStacks[par1];
-			materializerItemStacks[par1] = null;
-			return itemstack;
-		} else
-			return null;
+		return ItemStackHelper.getAndRemove(materializerItemStacks, par1);
 	}
 
 	/**
@@ -105,10 +81,10 @@ public class TileEntityMaterializer extends TileEntity implements ISidedInventor
 	@Override
 	public void setInventorySlotContents(int par1, ItemStack par2ItemStack)
 	{
-		materializerItemStacks[par1] = par2ItemStack;
+		materializerItemStacks.set(par1, par2ItemStack);
 
-		if (par2ItemStack != null && par2ItemStack.stackSize > getInventoryStackLimit())
-			par2ItemStack.stackSize = getInventoryStackLimit();
+		if (par2ItemStack != null && par2ItemStack.getCount() > getInventoryStackLimit())
+			par2ItemStack.setCount(getInventoryStackLimit());
 	}
 
 	/**
@@ -144,17 +120,9 @@ public class TileEntityMaterializer extends TileEntity implements ISidedInventor
 	public void readFromNBT(NBTTagCompound par1)
 	{
 		super.readFromNBT(par1);
-		NBTTagList nbttaglist = par1.getTagList("Items", 10);
-		materializerItemStacks = new ItemStack[getSizeInventory()];
-
-		for (int i = 0; i < nbttaglist.tagCount(); ++i)
-		{
-			NBTTagCompound nbttagcompound1 = nbttaglist.getCompoundTagAt(i);
-			byte b0 = nbttagcompound1.getByte("Slot");
-
-			if (b0 >= 0 && b0 < materializerItemStacks.length)
-				materializerItemStacks[b0] = ItemStack.loadItemStackFromNBT(nbttagcompound1);
-		}
+		par1.getTagList("Items", 10);
+		materializerItemStacks = NonNullList.<ItemStack>withSize(getSizeInventory(), ItemStack.EMPTY);
+		ItemStackHelper.loadAllItems(par1, materializerItemStacks);
 
 		if (par1.hasKey("CustomName", 8))
 			containerName = par1.getString("CustomName");
@@ -164,18 +132,7 @@ public class TileEntityMaterializer extends TileEntity implements ISidedInventor
 	public NBTTagCompound writeToNBT(NBTTagCompound par1)
 	{
 		super.writeToNBT(par1);
-		NBTTagList nbttaglist = new NBTTagList();
-
-		for (int i = 0; i < getSizeInventory(); ++i)
-			if (materializerItemStacks[i] != null)
-			{
-				NBTTagCompound nbttagcompound1 = new NBTTagCompound();
-				nbttagcompound1.setByte("Slot", (byte)i);
-				materializerItemStacks[i].writeToNBT(nbttagcompound1);
-				nbttaglist.appendTag(nbttagcompound1);
-			}
-
-		par1.setTag("Items", nbttaglist);
+		ItemStackHelper.saveAllItems(par1, materializerItemStacks);
 
 		if (hasCustomName())
 			par1.setString("CustomName", containerName);
@@ -217,9 +174,9 @@ public class TileEntityMaterializer extends TileEntity implements ISidedInventor
 	 * Do not make give this method the name canInteractWith because it clashes with Container
 	 */
 	@Override
-	public boolean isUseableByPlayer(EntityPlayer par1EntityPlayer)
+	public boolean isUsableByPlayer(EntityPlayer par1EntityPlayer)
 	{
-		return worldObj.getTileEntity(pos) != this ? false : par1EntityPlayer.getDistanceSq(pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D) <= 64.0D;
+		return world.getTileEntity(pos) != this ? false : par1EntityPlayer.getDistanceSq(pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D) <= 64.0D;
 	}
 
 	@Override
@@ -289,5 +246,15 @@ public class TileEntityMaterializer extends TileEntity implements ISidedInventor
 	public void clear() {
 		// TODO Auto-generated method stub
 
+	}
+
+	@Override
+	public boolean isEmpty()
+	{
+		for (ItemStack itemstack : materializerItemStacks)
+			if (!itemstack.isEmpty())
+				return false;
+
+		return true;
 	}
 }

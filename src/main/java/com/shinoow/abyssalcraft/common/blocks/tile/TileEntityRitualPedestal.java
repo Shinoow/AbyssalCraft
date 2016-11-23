@@ -22,7 +22,7 @@ import com.shinoow.abyssalcraft.lib.util.blocks.IRitualPedestal;
 
 public class TileEntityRitualPedestal extends TileEntity implements ITickable, IRitualPedestal {
 
-	private ItemStack item;
+	private ItemStack item = ItemStack.EMPTY;
 	private int rot;
 	private boolean isDirty;
 
@@ -31,7 +31,7 @@ public class TileEntityRitualPedestal extends TileEntity implements ITickable, I
 	{
 		super.readFromNBT(nbttagcompound);
 		NBTTagCompound nbtItem = nbttagcompound.getCompoundTag("Item");
-		item = ItemStack.loadItemStackFromNBT(nbtItem);
+		item = new ItemStack(nbtItem);
 		rot = nbttagcompound.getInteger("Rot");
 	}
 
@@ -40,7 +40,7 @@ public class TileEntityRitualPedestal extends TileEntity implements ITickable, I
 	{
 		super.writeToNBT(nbttagcompound);
 		NBTTagCompound nbtItem = new NBTTagCompound();
-		if(item != null)
+		if(!item.isEmpty())
 			item.writeToNBT(nbtItem);
 		nbttagcompound.setTag("Item", nbtItem);
 		nbttagcompound.setInteger("Rot", rot);
@@ -69,13 +69,13 @@ public class TileEntityRitualPedestal extends TileEntity implements ITickable, I
 	public void update()
 	{
 		if(isDirty){
-			worldObj.notifyBlockUpdate(pos, worldObj.getBlockState(pos), worldObj.getBlockState(pos), 2);
+			world.notifyBlockUpdate(pos, world.getBlockState(pos), world.getBlockState(pos), 2);
 			isDirty = false;
 		}
 
 		if(rot == 360)
 			rot = 0;
-		if(item != null)
+		if(!item.isEmpty())
 			rot++;
 	}
 

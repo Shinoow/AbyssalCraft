@@ -46,16 +46,17 @@ public class SlotCrystallizer extends Slot
 	public ItemStack decrStackSize(int par1)
 	{
 		if (getHasStack())
-			stackSize += Math.min(par1, getStack().stackSize);
+			stackSize += Math.min(par1, getStack().getCount());
 
 		return super.decrStackSize(par1);
 	}
 
 	@Override
-	public void onPickupFromSlot(EntityPlayer par1EntityPlayer, ItemStack par2ItemStack)
+	public ItemStack onTake(EntityPlayer player, ItemStack stack)
 	{
-		this.onCrafting(par2ItemStack);
-		super.onPickupFromSlot(par1EntityPlayer, par2ItemStack);
+		this.onCrafting(stack);
+		super.onTake(player, stack);
+		return stack;
 	}
 
 	@Override
@@ -68,9 +69,9 @@ public class SlotCrystallizer extends Slot
 	@Override
 	protected void onCrafting(ItemStack par1ItemStack)
 	{
-		par1ItemStack.onCrafting(thePlayer.worldObj, thePlayer, stackSize);
+		par1ItemStack.onCrafting(thePlayer.world, thePlayer, stackSize);
 
-		if (!thePlayer.worldObj.isRemote)
+		if (!thePlayer.world.isRemote)
 		{
 			int i = stackSize;
 			float f = CrystallizerRecipes.instance().getExperience(par1ItemStack);
@@ -80,9 +81,9 @@ public class SlotCrystallizer extends Slot
 				i = 0;
 			else if (f < 1.0F)
 			{
-				j = MathHelper.floor_float(i * f);
+				j = MathHelper.floor(i * f);
 
-				if (j < MathHelper.ceiling_float_int(i * f) && (float)Math.random() < i * f - j)
+				if (j < MathHelper.ceil(i * f) && (float)Math.random() < i * f - j)
 					++j;
 
 				i = j;
@@ -92,7 +93,7 @@ public class SlotCrystallizer extends Slot
 			{
 				j = EntityXPOrb.getXPSplit(i);
 				i -= j;
-				thePlayer.worldObj.spawnEntityInWorld(new EntityXPOrb(thePlayer.worldObj, thePlayer.posX, thePlayer.posY + 0.5D, thePlayer.posZ + 0.5D, j));
+				thePlayer.world.spawnEntity(new EntityXPOrb(thePlayer.world, thePlayer.posX, thePlayer.posY + 0.5D, thePlayer.posZ + 0.5D, j));
 			}
 		}
 

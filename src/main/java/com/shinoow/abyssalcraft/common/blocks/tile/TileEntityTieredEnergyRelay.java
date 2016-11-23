@@ -29,12 +29,12 @@ public abstract class TileEntityTieredEnergyRelay extends TileEntityEnergyRelay 
 		++ticksExisted;
 
 		if(ticksExisted % 20 == 0)
-			if(worldObj.getBlockState(pos).getProperties().containsKey(BlockEnergyRelay.FACING))
-				PEUtils.collectNearbyPE(this, worldObj, pos, worldObj.getBlockState(pos).getValue(BlockEnergyRelay.FACING).getOpposite(), getDrainQuanta());
+			if(world.getBlockState(pos).getProperties().containsKey(BlockEnergyRelay.FACING))
+				PEUtils.collectNearbyPE(this, world, pos, world.getBlockState(pos).getValue(BlockEnergyRelay.FACING).getOpposite(), getDrainQuanta());
 
 		if(ticksExisted % 40 == 0 && canTransferPE())
-			if(worldObj.getBlockState(pos).getProperties().containsKey(BlockEnergyRelay.FACING))
-				transferPE(worldObj.getBlockState(pos).getValue(BlockEnergyRelay.FACING), getTransferQuanta());
+			if(world.getBlockState(pos).getProperties().containsKey(BlockEnergyRelay.FACING))
+				transferPE(world.getBlockState(pos).getValue(BlockEnergyRelay.FACING), getTransferQuanta());
 	}
 
 	@Override
@@ -44,11 +44,11 @@ public abstract class TileEntityTieredEnergyRelay extends TileEntityEnergyRelay 
 		int yp = pos.getY();
 		int zp = pos.getZ();
 
-		if(PEUtils.canTransfer(worldObj, pos, facing, getRange())){
-			IEnergyContainer container = PEUtils.getContainer(worldObj, pos, facing, getRange());
+		if(PEUtils.canTransfer(world, pos, facing, getRange())){
+			IEnergyContainer container = PEUtils.getContainer(world, pos, facing, getRange());
 			if(container != null)
 				if(container.canAcceptPE()){
-					if(!worldObj.isRemote)
+					if(!world.isRemote)
 						container.addEnergy(consumeEnergy(energy));
 					BlockPos p = container.getContainerTile().getPos();
 					Vec3d vec = new Vec3d(xp, yp, zp);
@@ -68,8 +68,8 @@ public abstract class TileEntityTieredEnergyRelay extends TileEntityEnergyRelay 
 							int x = vec.xCoord > t.xCoord ? -1 : vec.xCoord < t.xCoord ? 1 : 0;
 							int y = vec.yCoord > t.yCoord ? -1 : vec.yCoord < t.yCoord ? 1 : 0;
 							int z = vec.zCoord > t.zCoord ? -1 : vec.zCoord < t.zCoord ? 1 : 0;
-							AbyssalCraft.proxy.spawnParticle("PEStream", worldObj, v.xCoord + 0.5 + x*d, v.yCoord + 0.5 + y*d, v.zCoord + 0.5 + z*d, 0,0,0);
-							AbyssalCraft.proxy.spawnParticle("PEStream", worldObj, v2.xCoord + 0.5 + x*d, v2.yCoord + 0.5 + y*d, v2.zCoord + 0.5 + z*d, 0,0,0);
+							AbyssalCraft.proxy.spawnParticle("PEStream", world, v.xCoord + 0.5 + x*d, v.yCoord + 0.5 + y*d, v.zCoord + 0.5 + z*d, 0,0,0);
+							AbyssalCraft.proxy.spawnParticle("PEStream", world, v2.xCoord + 0.5 + x*d, v2.yCoord + 0.5 + y*d, v2.zCoord + 0.5 + z*d, 0,0,0);
 						}
 					}
 				}

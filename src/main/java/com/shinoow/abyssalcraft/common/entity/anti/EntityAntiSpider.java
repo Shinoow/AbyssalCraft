@@ -81,7 +81,7 @@ public class EntityAntiSpider extends EntityMob implements IAntiEntity {
 	}
 
 	@Override
-	protected PathNavigate getNewNavigator(World worldIn)
+	protected PathNavigate createNavigator(World worldIn)
 	{
 		return new PathNavigateClimber(this, worldIn);
 	}
@@ -98,7 +98,7 @@ public class EntityAntiSpider extends EntityMob implements IAntiEntity {
 	{
 		super.onUpdate();
 
-		if (!worldObj.isRemote)
+		if (!world.isRemote)
 			setBesideClimbableBlock(isCollidedHorizontally);
 	}
 
@@ -189,9 +189,9 @@ public class EntityAntiSpider extends EntityMob implements IAntiEntity {
 	@Override
 	protected void collideWithEntity(Entity par1Entity)
 	{
-		if(!worldObj.isRemote && par1Entity instanceof EntitySpider){
-			boolean flag = worldObj.getGameRules().getBoolean("mobGriefing");
-			worldObj.createExplosion(this, posX, posY, posZ, 5, flag);
+		if(!world.isRemote && par1Entity instanceof EntitySpider){
+			boolean flag = world.getGameRules().getBoolean("mobGriefing");
+			world.createExplosion(this, posX, posY, posZ, 5, flag);
 			setDead();
 		}
 		else par1Entity.applyEntityCollision(this);
@@ -227,12 +227,12 @@ public class EntityAntiSpider extends EntityMob implements IAntiEntity {
 	{
 		Object p_110161_1_1 = super.onInitialSpawn(difficulty, par1EntityLivingData);
 
-		if (worldObj.rand.nextInt(100) == 0)
+		if (world.rand.nextInt(100) == 0)
 		{
-			EntityAntiSkeleton entityskeleton = new EntityAntiSkeleton(worldObj);
+			EntityAntiSkeleton entityskeleton = new EntityAntiSkeleton(world);
 			entityskeleton.setLocationAndAngles(posX, posY, posZ, rotationYaw, 0.0F);
 			entityskeleton.onInitialSpawn(difficulty, (IEntityLivingData)null);
-			worldObj.spawnEntityInWorld(entityskeleton);
+			world.spawnEntity(entityskeleton);
 			entityskeleton.startRiding(this);
 		}
 
@@ -240,8 +240,8 @@ public class EntityAntiSpider extends EntityMob implements IAntiEntity {
 		{
 			p_110161_1_1 = new EntityAntiSpider.GroupData();
 
-			if (worldObj.getDifficulty() == EnumDifficulty.HARD && worldObj.rand.nextFloat() < 0.1F * difficulty.getClampedAdditionalDifficulty())
-				((EntityAntiSpider.GroupData)p_110161_1_1).func_111104_a(worldObj.rand);
+			if (world.getDifficulty() == EnumDifficulty.HARD && world.rand.nextFloat() < 0.1F * difficulty.getClampedAdditionalDifficulty())
+				((EntityAntiSpider.GroupData)p_110161_1_1).func_111104_a(world.rand);
 		}
 
 		if (p_110161_1_1 instanceof EntityAntiSpider.GroupData)

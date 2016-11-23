@@ -78,11 +78,11 @@ public class AbyssalCraftTool extends Item {
 
 	@Override
 	@SuppressWarnings("rawtypes")
-	public ActionResult<ItemStack> onItemRightClick(ItemStack par1ItemStack, World par2World, EntityPlayer par3EntityPlayer, EnumHand hand) {
+	public ActionResult<ItemStack> onItemRightClick(World par2World, EntityPlayer par3EntityPlayer, EnumHand hand) {
 
 		par3EntityPlayer.setActiveHand(hand);
 
-		List list = par3EntityPlayer.worldObj.getEntitiesWithinAABBExcludingEntity(par3EntityPlayer, par3EntityPlayer.getEntityBoundingBox().expand(40D, 40D, 40D));
+		List list = par3EntityPlayer.world.getEntitiesWithinAABBExcludingEntity(par3EntityPlayer, par3EntityPlayer.getEntityBoundingBox().expand(40D, 40D, 40D));
 
 		if(list != null)
 			for(int k2 = 0; k2 < list.size(); k2++) {
@@ -97,10 +97,10 @@ public class AbyssalCraftTool extends Item {
 					par3EntityPlayer.attackTargetEntityWithCurrentItem(par3EntityPlayer);
 					((EntityJzahar)entity).heal(Float.MAX_VALUE);
 					if(par2World.isRemote)
-						Minecraft.getMinecraft().thePlayer.sendChatMessage("I really thought I could do that, didn't I?");
+						Minecraft.getMinecraft().player.sendChatMessage("I really thought I could do that, didn't I?");
 				}
 			}
-		return new ActionResult(EnumActionResult.PASS, par1ItemStack);
+		return new ActionResult(EnumActionResult.PASS, par3EntityPlayer.getHeldItem(hand));
 	}
 
 	@Override
@@ -110,13 +110,13 @@ public class AbyssalCraftTool extends Item {
 
 	@Override
 	@SuppressWarnings({ "rawtypes", "unchecked", "deprecation" })
-	public Multimap getItemAttributeModifiers(EntityEquipmentSlot equipmentSlot) {
-		Multimap multimap = super.getItemAttributeModifiers(equipmentSlot);
+	public Multimap getAttributeModifiers(EntityEquipmentSlot equipmentSlot, ItemStack stack) {
+		Multimap multimap = super.getAttributeModifiers(equipmentSlot, stack);
 
 		if (equipmentSlot == EntityEquipmentSlot.MAINHAND)
 		{
-			multimap.put(SharedMonsterAttributes.ATTACK_DAMAGE.getAttributeUnlocalizedName(), new AttributeModifier(ATTACK_DAMAGE_MODIFIER, "Weapon modifier", weaponDamage, 0));
-			multimap.put(SharedMonsterAttributes.ATTACK_SPEED.getAttributeUnlocalizedName(), new AttributeModifier(ATTACK_SPEED_MODIFIER, "Weapon modifier", -2.4000000953674316D, 0));
+			multimap.put(SharedMonsterAttributes.ATTACK_DAMAGE.getName(), new AttributeModifier(ATTACK_DAMAGE_MODIFIER, "Weapon modifier", weaponDamage, 0));
+			multimap.put(SharedMonsterAttributes.ATTACK_SPEED.getName(), new AttributeModifier(ATTACK_SPEED_MODIFIER, "Weapon modifier", -2.4000000953674316D, 0));
 		}
 
 		return multimap;

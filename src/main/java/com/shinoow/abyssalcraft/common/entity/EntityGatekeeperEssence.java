@@ -22,13 +22,12 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import com.google.common.base.Optional;
 import com.shinoow.abyssalcraft.api.item.ACItems;
 
 public class EntityGatekeeperEssence extends EntityItem {
 
 	private int age;
-	private static final DataParameter<Optional<ItemStack>> ITEM = EntityDataManager.<Optional<ItemStack>>createKey(EntityItem.class, DataSerializers.OPTIONAL_ITEM_STACK);
+	private static final DataParameter<ItemStack> ITEM = EntityDataManager.<ItemStack>createKey(EntityItem.class, DataSerializers.OPTIONAL_ITEM_STACK);
 
 	public EntityGatekeeperEssence(World worldIn) {
 		super(worldIn);
@@ -48,13 +47,13 @@ public class EntityGatekeeperEssence extends EntityItem {
 	@Override
 	protected void entityInit()
 	{
-		getDataManager().register(ITEM, Optional.<ItemStack>absent());
+		getDataManager().register(ITEM, ItemStack.EMPTY);
 	}
 
 	@Override
 	public void onUpdate()
 	{
-		ItemStack stack = getDataManager().get(ITEM).orNull();
+		ItemStack stack = getDataManager().get(ITEM);
 		if (stack != null && stack.getItem() != null && stack.getItem().onEntityItemUpdate(this)) return;
 		if (getEntityItem() == null)
 			setDead();
@@ -72,15 +71,15 @@ public class EntityGatekeeperEssence extends EntityItem {
 
 			handleWaterMovement();
 
-			ItemStack item = getDataManager().get(ITEM).orNull();
+			ItemStack item = getDataManager().get(ITEM);
 
-			if (!worldObj.isRemote && age >= lifespan)
+			if (!world.isRemote && age >= lifespan)
 			{
 				int hook = net.minecraftforge.event.ForgeEventFactory.onItemExpire(this, item);
 				if (hook < 0) setDead();
 				else          lifespan += hook;
 			}
-			if (item != null && item.stackSize <= 0)
+			if (item != null && item.getCount() <= 0)
 				setDead();
 		}
 	}
@@ -98,21 +97,21 @@ public class EntityGatekeeperEssence extends EntityItem {
 		super.readEntityFromNBT(tagCompound);
 		age = tagCompound.getShort("Age");
 
-		ItemStack item = getDataManager().get(ITEM).orNull();
-		if (item == null || item.stackSize <= 0) setDead();
+		ItemStack item = getDataManager().get(ITEM);
+		if (item == null || item.getCount() <= 0) setDead();
 	}
 
 	@Override
 	public void setEntityItemStack(ItemStack stack)
 	{
-		getDataManager().set(ITEM, Optional.fromNullable(stack));
+		getDataManager().set(ITEM, stack);
 		getDataManager().setDirty(ITEM);
 	}
 
 	@Override
 	public ItemStack getEntityItem()
 	{
-		ItemStack itemstack = (ItemStack)((Optional)getDataManager().get(ITEM)).orNull();
+		ItemStack itemstack = getDataManager().get(ITEM);
 
 		if (itemstack == null)
 			return new ItemStack(Blocks.STONE);

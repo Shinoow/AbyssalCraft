@@ -187,67 +187,67 @@ public class EntityChagaroth extends EntityMob implements IDreadEntity {
 	@Override
 	public void onLivingUpdate()
 	{
-		EntityPlayer player = worldObj.getClosestPlayerToEntity(this, 32D);
-		if(!worldObj.isRemote && deathTicks == 0){
+		EntityPlayer player = world.getClosestPlayerToEntity(this, 32D);
+		if(!world.isRemote && deathTicks == 0){
 			if(rand.nextInt(100) == 0 && player != null){
-				EntityChagarothSpawn mob = new EntityChagarothSpawn(worldObj);
+				EntityChagarothSpawn mob = new EntityChagarothSpawn(world);
 				mob.copyLocationAndAnglesFrom(player);
-				worldObj.spawnEntityInWorld(mob);
+				world.spawnEntity(mob);
 			}
 			if(rand.nextInt(1000) == 0){
-				EntityDreadSpawn mob = new EntityDreadSpawn(worldObj);
+				EntityDreadSpawn mob = new EntityDreadSpawn(world);
 				mob.copyLocationAndAnglesFrom(this);
-				worldObj.spawnEntityInWorld(mob);
+				world.spawnEntity(mob);
 
-				EntityChagarothSpawn spawn = new EntityChagarothSpawn(worldObj);
+				EntityChagarothSpawn spawn = new EntityChagarothSpawn(world);
 				spawn.copyLocationAndAnglesFrom(this);
-				worldObj.spawnEntityInWorld(spawn);
+				world.spawnEntity(spawn);
 			}
-			EntityChagarothFist fist = new EntityChagarothFist(worldObj);
+			EntityChagarothFist fist = new EntityChagarothFist(world);
 			fist.copyLocationAndAnglesFrom(this);
-			EntityDreadguard dreadGuard = new EntityDreadguard(worldObj);
+			EntityDreadguard dreadGuard = new EntityDreadguard(world);
 			dreadGuard.copyLocationAndAnglesFrom(fist);
 			if(rand.nextInt(3600) == 0)
-				worldObj.spawnEntityInWorld(fist);
+				world.spawnEntity(fist);
 			if(rand.nextInt(7200) == 0)
-				worldObj.spawnEntityInWorld(dreadGuard);
+				world.spawnEntity(dreadGuard);
 			if(player != null)
 				switch((int)getHealth()){
 				case 900:
-					worldObj.spawnEntityInWorld(fist);
+					world.spawnEntity(fist);
 					damageEntity(DamageSource.generic, 1);
 					break;
 				case 800:
-					worldObj.spawnEntityInWorld(fist);
+					world.spawnEntity(fist);
 					damageEntity(DamageSource.generic, 1);
 					break;
 				case 700:
-					worldObj.spawnEntityInWorld(fist);
+					world.spawnEntity(fist);
 					damageEntity(DamageSource.generic, 1);
 					break;
 				case 600:
-					worldObj.spawnEntityInWorld(fist);
+					world.spawnEntity(fist);
 					damageEntity(DamageSource.generic, 1);
 					break;
 				case 500:
-					worldObj.spawnEntityInWorld(fist);
+					world.spawnEntity(fist);
 					damageEntity(DamageSource.generic, 1);
 					break;
 				case 400:
-					worldObj.spawnEntityInWorld(fist);
+					world.spawnEntity(fist);
 					damageEntity(DamageSource.generic, 1);
 					break;
 				case 300:
-					worldObj.spawnEntityInWorld(fist);
+					world.spawnEntity(fist);
 					damageEntity(DamageSource.generic, 1);
 					break;
 				case 200:
-					worldObj.spawnEntityInWorld(fist);
+					world.spawnEntity(fist);
 					damageEntity(DamageSource.generic, 1);
 					break;
 				case 100:
-					worldObj.spawnEntityInWorld(fist);
-					worldObj.spawnEntityInWorld(dreadGuard);
+					world.spawnEntity(fist);
+					world.spawnEntity(dreadGuard);
 					damageEntity(DamageSource.generic, 1);
 					break;
 				}
@@ -291,7 +291,7 @@ public class EntityChagaroth extends EntityMob implements IDreadEntity {
 	@Override
 	public boolean attackEntityFrom(DamageSource par1DamageSource, float par2)
 	{
-		if(par2 > 30) par2 = 10 + worldObj.rand.nextInt(10);
+		if(par2 > 30) par2 = 10 + world.rand.nextInt(10);
 
 		return super.attackEntityFrom(par1DamageSource, par2);
 	}
@@ -307,19 +307,19 @@ public class EntityChagaroth extends EntityMob implements IDreadEntity {
 			float f1 = (rand.nextFloat() - 0.5F) * 4.0F;
 			float f2 = (rand.nextFloat() - 0.5F) * 8.0F;
 			if(ACConfig.particleEntity){
-				worldObj.spawnParticle(EnumParticleTypes.FLAME, posX + f, posY + 2.0D + f1, posZ + f2, 0.0D, 0.0D, 0.0D);
-				worldObj.spawnParticle(EnumParticleTypes.LAVA, posX + f, posY + 2.0D + f1, posZ + f2, 0.0D, 0.0D, 0.0D);
-				worldObj.spawnParticle(EnumParticleTypes.SMOKE_LARGE, posX + f, posY + 2.0D + f1, posZ + f2, 0.0D, 0.0D, 0.0D);
-				worldObj.spawnParticle(EnumParticleTypes.EXPLOSION_NORMAL, posX + f, posY + 2.0D + f1, posZ + f2, 0.0D, 0.0D, 0.0D);
+				world.spawnParticle(EnumParticleTypes.FLAME, posX + f, posY + 2.0D + f1, posZ + f2, 0.0D, 0.0D, 0.0D);
+				world.spawnParticle(EnumParticleTypes.LAVA, posX + f, posY + 2.0D + f1, posZ + f2, 0.0D, 0.0D, 0.0D);
+				world.spawnParticle(EnumParticleTypes.SMOKE_LARGE, posX + f, posY + 2.0D + f1, posZ + f2, 0.0D, 0.0D, 0.0D);
+				world.spawnParticle(EnumParticleTypes.EXPLOSION_NORMAL, posX + f, posY + 2.0D + f1, posZ + f2, 0.0D, 0.0D, 0.0D);
 				if (deathTicks >= 190 && deathTicks <= 200)
-					worldObj.spawnParticle(EnumParticleTypes.EXPLOSION_HUGE, posX + f, posY + 2.0D + f1, posZ + f2, 0.0D, 0.0D, 0.0D);
+					world.spawnParticle(EnumParticleTypes.EXPLOSION_HUGE, posX + f, posY + 2.0D + f1, posZ + f2, 0.0D, 0.0D, 0.0D);
 			}
 		}
 
 		int i;
 		int j;
 
-		if (!worldObj.isRemote)
+		if (!world.isRemote)
 			if (deathTicks > 150 && deathTicks % 5 == 0)
 			{
 				i = 500;
@@ -328,26 +328,26 @@ public class EntityChagaroth extends EntityMob implements IDreadEntity {
 				{
 					j = EntityXPOrb.getXPSplit(i);
 					i -= j;
-					worldObj.spawnEntityInWorld(new EntityXPOrb(worldObj, posX, posY, posZ, j));
+					world.spawnEntity(new EntityXPOrb(world, posX, posY, posZ, j));
 					if(deathTicks == 100 || deathTicks == 120 || deathTicks == 140 || deathTicks == 160 || deathTicks == 180){
-						worldObj.spawnEntityInWorld(new EntityItem(worldObj, posX + posneg(3), posY + rand.nextInt(3), posZ + posneg(3), new ItemStack(ACItems.dread_fragment, 4)));
-						worldObj.spawnEntityInWorld(new EntityItem(worldObj, posX + posneg(3), posY + rand.nextInt(3), posZ + posneg(3), new ItemStack(ACItems.dreaded_chunk_of_abyssalnite, 2)));
-						worldObj.spawnEntityInWorld(new EntityItem(worldObj, posX + posneg(3), posY + rand.nextInt(3), posZ + posneg(3), new ItemStack(ACItems.dreaded_shard_of_abyssalnite)));
-						worldObj.spawnEntityInWorld(new EntityItem(worldObj, posX + posneg(3), posY + rand.nextInt(3), posZ + posneg(3), new ItemStack(ACItems.dreadium_ingot)));
+						world.spawnEntity(new EntityItem(world, posX + posneg(3), posY + rand.nextInt(3), posZ + posneg(3), new ItemStack(ACItems.dread_fragment, 4)));
+						world.spawnEntity(new EntityItem(world, posX + posneg(3), posY + rand.nextInt(3), posZ + posneg(3), new ItemStack(ACItems.dreaded_chunk_of_abyssalnite, 2)));
+						world.spawnEntity(new EntityItem(world, posX + posneg(3), posY + rand.nextInt(3), posZ + posneg(3), new ItemStack(ACItems.dreaded_shard_of_abyssalnite)));
+						world.spawnEntity(new EntityItem(world, posX + posneg(3), posY + rand.nextInt(3), posZ + posneg(3), new ItemStack(ACItems.dreadium_ingot)));
 					}
 				}
 			}
 
-		if(deathTicks == 20 && !worldObj.isRemote)
-			SpecialTextUtil.ChagarothGroup(worldObj, I18n.translateToLocal("message.chagaroth.death.1"));
-		if(deathTicks == 80 && !worldObj.isRemote)
-			SpecialTextUtil.ChagarothGroup(worldObj, I18n.translateToLocal("message.chagaroth.death.2"));
-		if(deathTicks == 140 && !worldObj.isRemote)
-			SpecialTextUtil.ChagarothGroup(worldObj, I18n.translateToLocal("message.chagaroth.death.3"));
-		if(deathTicks == 200 && !worldObj.isRemote){
-			SpecialTextUtil.ChagarothGroup(worldObj, I18n.translateToLocal("message.chagaroth.death.4"));
+		if(deathTicks == 20 && !world.isRemote)
+			SpecialTextUtil.ChagarothGroup(world, I18n.translateToLocal("message.chagaroth.death.1"));
+		if(deathTicks == 80 && !world.isRemote)
+			SpecialTextUtil.ChagarothGroup(world, I18n.translateToLocal("message.chagaroth.death.2"));
+		if(deathTicks == 140 && !world.isRemote)
+			SpecialTextUtil.ChagarothGroup(world, I18n.translateToLocal("message.chagaroth.death.3"));
+		if(deathTicks == 200 && !world.isRemote){
+			SpecialTextUtil.ChagarothGroup(world, I18n.translateToLocal("message.chagaroth.death.4"));
 			setDead();
-			worldObj.spawnEntityInWorld(new EntityItem(worldObj, posX, posY, posZ, new ItemStack(ACItems.dread_plagued_gateway_key)));
+			world.spawnEntity(new EntityItem(world, posX, posY, posZ, new ItemStack(ACItems.dread_plagued_gateway_key)));
 		}
 	}
 
@@ -361,7 +361,7 @@ public class EntityChagaroth extends EntityMob implements IDreadEntity {
 		par1EntityLivingData = super.onInitialSpawn(difficulty, par1EntityLivingData);
 
 		IAttributeInstance attribute = getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE);
-		Calendar calendar = worldObj.getCurrentDate();
+		Calendar calendar = world.getCurrentDate();
 
 		attribute.removeModifier(attackDamageBoost);
 

@@ -14,13 +14,14 @@ package com.shinoow.abyssalcraft.common.blocks.tile;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.inventory.ISidedInventory;
+import net.minecraft.inventory.ItemStackHelper;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
+import net.minecraft.util.NonNullList;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.util.text.TextComponentTranslation;
@@ -41,7 +42,7 @@ public class TileEntityTransmutator extends TileEntity implements ISidedInventor
 	/**
 	 * The ItemStacks that hold the items currently being used in the transmutator
 	 */
-	private ItemStack[] transmutatorItemStacks = new ItemStack[3];
+	private NonNullList<ItemStack> transmutatorItemStacks = NonNullList.<ItemStack>withSize(3, ItemStack.EMPTY);
 	/** The number of ticks that the transmutator will keep burning */
 	public int transmutatorBurnTime;
 	/**
@@ -58,7 +59,7 @@ public class TileEntityTransmutator extends TileEntity implements ISidedInventor
 	@Override
 	public int getSizeInventory()
 	{
-		return transmutatorItemStacks.length;
+		return transmutatorItemStacks.size();
 	}
 
 	/**
@@ -67,7 +68,7 @@ public class TileEntityTransmutator extends TileEntity implements ISidedInventor
 	@Override
 	public ItemStack getStackInSlot(int par1)
 	{
-		return transmutatorItemStacks[par1];
+		return transmutatorItemStacks.get(par1);
 	}
 
 	/**
@@ -77,27 +78,7 @@ public class TileEntityTransmutator extends TileEntity implements ISidedInventor
 	@Override
 	public ItemStack decrStackSize(int par1, int par2)
 	{
-		if (transmutatorItemStacks[par1] != null)
-		{
-			ItemStack itemstack;
-
-			if (transmutatorItemStacks[par1].stackSize <= par2)
-			{
-				itemstack = transmutatorItemStacks[par1];
-				transmutatorItemStacks[par1] = null;
-				return itemstack;
-			}
-			else
-			{
-				itemstack = transmutatorItemStacks[par1].splitStack(par2);
-
-				if (transmutatorItemStacks[par1].stackSize == 0)
-					transmutatorItemStacks[par1] = null;
-
-				return itemstack;
-			}
-		} else
-			return null;
+		return ItemStackHelper.getAndSplit(transmutatorItemStacks, par1, par2);
 	}
 
 	/**
@@ -107,13 +88,7 @@ public class TileEntityTransmutator extends TileEntity implements ISidedInventor
 	@Override
 	public ItemStack removeStackFromSlot(int par1)
 	{
-		if (transmutatorItemStacks[par1] != null)
-		{
-			ItemStack itemstack = transmutatorItemStacks[par1];
-			transmutatorItemStacks[par1] = null;
-			return itemstack;
-		} else
-			return null;
+		return ItemStackHelper.getAndRemove(transmutatorItemStacks, par1);
 	}
 
 	/**
@@ -122,10 +97,10 @@ public class TileEntityTransmutator extends TileEntity implements ISidedInventor
 	@Override
 	public void setInventorySlotContents(int par1, ItemStack par2ItemStack)
 	{
-		transmutatorItemStacks[par1] = par2ItemStack;
+		transmutatorItemStacks.set(par1, par2ItemStack);
 
-		if (par2ItemStack != null && par2ItemStack.stackSize > getInventoryStackLimit())
-			par2ItemStack.stackSize = getInventoryStackLimit();
+		if (par2ItemStack != null && par2ItemStack.getCount() > getInventoryStackLimit())
+			par2ItemStack.setCount(getInventoryStackLimit());
 	}
 
 	/**
@@ -155,21 +130,11 @@ public class TileEntityTransmutator extends TileEntity implements ISidedInventor
 	public void readFromNBT(NBTTagCompound par1)
 	{
 		super.readFromNBT(par1);
-		NBTTagList nbttaglist = par1.getTagList("Items", 10);
-		transmutatorItemStacks = new ItemStack[getSizeInventory()];
-
-		for (int i = 0; i < nbttaglist.tagCount(); ++i)
-		{
-			NBTTagCompound nbttagcompound1 = nbttaglist.getCompoundTagAt(i);
-			byte b0 = nbttagcompound1.getByte("Slot");
-
-			if (b0 >= 0 && b0 < transmutatorItemStacks.length)
-				transmutatorItemStacks[b0] = ItemStack.loadItemStackFromNBT(nbttagcompound1);
-		}
-
+		transmutatorItemStacks = NonNullList.withSize(getSizeInventory(), ItemStack.EMPTY);
+		ItemStackHelper.loadAllItems(par1, transmutatorItemStacks);
 		transmutatorBurnTime = par1.getShort("BurnTime");
 		transmutatorProcessTime = par1.getShort("ProcessTime");
-		currentItemBurnTime = getItemBurnTime(transmutatorItemStacks[1]);
+		currentItemBurnTime = getItemBurnTime(transmutatorItemStacks.get(1));
 
 		if (par1.hasKey("CustomName", 8))
 			containerName = par1.getString("CustomName");
@@ -181,18 +146,7 @@ public class TileEntityTransmutator extends TileEntity implements ISidedInventor
 		super.writeToNBT(par1);
 		par1.setShort("BurnTime", (short)transmutatorBurnTime);
 		par1.setShort("ProcessTime", (short)transmutatorProcessTime);
-		NBTTagList nbttaglist = new NBTTagList();
-
-		for (int i = 0; i < transmutatorItemStacks.length; ++i)
-			if (transmutatorItemStacks[i] != null)
-			{
-				NBTTagCompound nbttagcompound1 = new NBTTagCompound();
-				nbttagcompound1.setByte("Slot", (byte)i);
-				transmutatorItemStacks[i].writeToNBT(nbttagcompound1);
-				nbttaglist.appendTag(nbttagcompound1);
-			}
-
-		par1.setTag("Items", nbttaglist);
+		ItemStackHelper.saveAllItems(par1, transmutatorItemStacks);
 
 		if (hasCustomName())
 			par1.setString("CustomName", containerName);
@@ -249,22 +203,22 @@ public class TileEntityTransmutator extends TileEntity implements ISidedInventor
 		if (transmutatorBurnTime > 0)
 			--transmutatorBurnTime;
 
-		if (!worldObj.isRemote)
+		if (!world.isRemote)
 		{
 			if (transmutatorBurnTime == 0 && canProcess())
 			{
-				currentItemBurnTime = transmutatorBurnTime = getItemBurnTime(transmutatorItemStacks[1]);
+				currentItemBurnTime = transmutatorBurnTime = getItemBurnTime(transmutatorItemStacks.get(1));
 
 				if (transmutatorBurnTime > 0)
 				{
 					flag1 = true;
 
-					if (transmutatorItemStacks[1] != null)
+					if (!transmutatorItemStacks.get(1).isEmpty())
 					{
-						--transmutatorItemStacks[1].stackSize;
+						transmutatorItemStacks.get(1).shrink(1);
 
-						if (transmutatorItemStacks[1].stackSize == 0)
-							transmutatorItemStacks[1] = transmutatorItemStacks[1].getItem().getContainerItem(transmutatorItemStacks[1]);
+						if (transmutatorItemStacks.get(1).isEmpty())
+							transmutatorItemStacks.set(1, transmutatorItemStacks.get(1).getItem().getContainerItem(transmutatorItemStacks.get(1)));
 					}
 				}
 			}
@@ -285,7 +239,7 @@ public class TileEntityTransmutator extends TileEntity implements ISidedInventor
 			if (flag != transmutatorBurnTime > 0)
 			{
 				flag1 = true;
-				BlockTransmutator.updateTransmutatorBlockState(transmutatorBurnTime > 0, worldObj, pos);
+				BlockTransmutator.updateTransmutatorBlockState(transmutatorBurnTime > 0, world, pos);
 			}
 		}
 
@@ -298,16 +252,16 @@ public class TileEntityTransmutator extends TileEntity implements ISidedInventor
 	 */
 	private boolean canProcess()
 	{
-		if (transmutatorItemStacks[0] == null)
+		if (transmutatorItemStacks.get(0).isEmpty())
 			return false;
 		else
 		{
-			ItemStack itemstack = TransmutatorRecipes.instance().getTransmutationResult(transmutatorItemStacks[0]);
+			ItemStack itemstack = TransmutatorRecipes.instance().getTransmutationResult(transmutatorItemStacks.get(0));
 			if (itemstack == null) return false;
-			if (transmutatorItemStacks[2] == null) return true;
-			if (!transmutatorItemStacks[2].isItemEqual(itemstack)) return false;
-			int result = transmutatorItemStacks[2].stackSize + itemstack.stackSize;
-			return result <= getInventoryStackLimit() && result <= transmutatorItemStacks[2].getMaxStackSize();
+			if (transmutatorItemStacks.get(2).isEmpty()) return true;
+			if (!transmutatorItemStacks.get(2).isItemEqual(itemstack)) return false;
+			int result = transmutatorItemStacks.get(2).getCount() + itemstack.getCount();
+			return result <= getInventoryStackLimit() && result <= transmutatorItemStacks.get(2).getMaxStackSize();
 		}
 	}
 
@@ -318,17 +272,17 @@ public class TileEntityTransmutator extends TileEntity implements ISidedInventor
 	{
 		if (canProcess())
 		{
-			ItemStack itemstack = TransmutatorRecipes.instance().getTransmutationResult(transmutatorItemStacks[0]);
+			ItemStack itemstack = TransmutatorRecipes.instance().getTransmutationResult(transmutatorItemStacks.get(0));
 
-			if (transmutatorItemStacks[2] == null)
-				transmutatorItemStacks[2] = itemstack.copy();
-			else if (transmutatorItemStacks[2].getItem() == itemstack.getItem())
-				transmutatorItemStacks[2].stackSize += itemstack.stackSize;
+			if (transmutatorItemStacks.get(2).isEmpty())
+				transmutatorItemStacks.set(2, itemstack.copy());
+			else if (transmutatorItemStacks.get(2).getItem() == itemstack.getItem())
+				transmutatorItemStacks.get(2).grow(itemstack.getCount());
 
-			--transmutatorItemStacks[0].stackSize;
+			transmutatorItemStacks.get(0).shrink(1);
 
-			if (transmutatorItemStacks[0].stackSize <= 0)
-				transmutatorItemStacks[0] = null;
+			if (transmutatorItemStacks.get(0).getCount() <= 0)
+				transmutatorItemStacks.set(0, ItemStack.EMPTY);
 		}
 	}
 
@@ -338,7 +292,7 @@ public class TileEntityTransmutator extends TileEntity implements ISidedInventor
 	 */
 	public static int getItemBurnTime(ItemStack par1ItemStack)
 	{
-		if (par1ItemStack == null)
+		if (par1ItemStack.isEmpty())
 			return 0;
 		else
 		{
@@ -381,9 +335,9 @@ public class TileEntityTransmutator extends TileEntity implements ISidedInventor
 	 * Do not make give this method the name canInteractWith because it clashes with Container
 	 */
 	@Override
-	public boolean isUseableByPlayer(EntityPlayer par1EntityPlayer)
+	public boolean isUsableByPlayer(EntityPlayer par1EntityPlayer)
 	{
-		return worldObj.getTileEntity(pos) != this ? false : par1EntityPlayer.getDistanceSq(pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D) <= 64.0D;
+		return world.getTileEntity(pos) != this ? false : par1EntityPlayer.getDistanceSq(pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D) <= 64.0D;
 	}
 
 	@Override
@@ -485,5 +439,15 @@ public class TileEntityTransmutator extends TileEntity implements ISidedInventor
 			else
 				return (T) handlerSide;
 		return super.getCapability(capability, facing);
+	}
+
+	@Override
+	public boolean isEmpty()
+	{
+		for (ItemStack itemstack : transmutatorItemStacks)
+			if (!itemstack.isEmpty())
+				return false;
+
+		return true;
 	}
 }

@@ -20,7 +20,6 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.EnumBlockRenderType;
 import net.minecraft.util.EnumFacing;
@@ -78,11 +77,10 @@ public class BlockDreadAltarTop extends Block {
 	}
 
 	@Override
-	public IBlockState onBlockPlaced(World world, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer){
-		super.onBlockPlaced(world, pos, facing, hitX, hitY, hitZ, meta, placer);
+	public IBlockState getStateForPlacement(World world, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer, EnumHand hand){
 		if(world.isRemote)
 			if(world.provider.getDimension() == ACLib.dreadlands_id){
-				if(world.getBiomeGenForCoords(pos) == ACBiomes.dreadlands_mountains){
+				if(world.getBiome(pos) == ACBiomes.dreadlands_mountains){
 					if(world.getBlockState(pos.down()).getBlock() == ACBlocks.chagaroth_altar_bottom)
 						if(pos.getY() == 41)
 							FMLClientHandler.instance().getClient().ingameGUI.getChatGUI().printChatMessage(new TextComponentTranslation("message.dreadaltartop.enter"));
@@ -98,9 +96,9 @@ public class BlockDreadAltarTop extends Block {
 	}
 
 	@Override
-	public boolean onBlockActivated(World par1World, BlockPos pos, IBlockState state, EntityPlayer par5EntityPlayer, EnumHand hand, ItemStack heldItem, EnumFacing side, float par7, float par8, float par9) {
+	public boolean onBlockActivated(World par1World, BlockPos pos, IBlockState state, EntityPlayer par5EntityPlayer, EnumHand hand, EnumFacing side, float par7, float par8, float par9) {
 		if(par1World.provider.getDimension() == ACLib.dreadlands_id){
-			if(par1World.getBiomeGenForCoords(pos) == ACBiomes.dreadlands_mountains){
+			if(par1World.getBiome(pos) == ACBiomes.dreadlands_mountains){
 				if(par1World.getBlockState(pos.down()).getBlock() == ACBlocks.chagaroth_altar_bottom && pos.getY() == 41)
 					if(!par1World.isRemote){
 						SpecialTextUtil.ChagarothGroup(par1World, I18n.translateToLocal("message.dreadaltartop.spawn"));

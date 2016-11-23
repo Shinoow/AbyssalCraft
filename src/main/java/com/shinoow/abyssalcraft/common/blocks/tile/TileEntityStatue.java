@@ -167,9 +167,9 @@ public class TileEntityStatue extends TileEntity implements IEnergyManipulator, 
 	@Override
 	public void disrupt() {
 		tolerance = 0;
-		if(!worldObj.isRemote){
-			worldObj.addWeatherEffect(new EntityLightningBolt(worldObj, pos.getX(), pos.getY() + 1, pos.getZ(), false));
-			DisruptionHandler.instance().generateDisruption(getDeity(), worldObj, pos, worldObj.getEntitiesWithinAABB(EntityPlayer.class, new AxisAlignedBB(pos).expand(16, 16, 16)));
+		if(!world.isRemote){
+			world.addWeatherEffect(new EntityLightningBolt(world, pos.getX(), pos.getY() + 1, pos.getZ(), false));
+			DisruptionHandler.instance().generateDisruption(getDeity(), world, pos, world.getEntitiesWithinAABB(EntityPlayer.class, new AxisAlignedBB(pos).expand(16, 16, 16)));
 		}
 	}
 
@@ -178,32 +178,32 @@ public class TileEntityStatue extends TileEntity implements IEnergyManipulator, 
 
 		if(isActive()){
 			activationTimer--;
-			worldObj.spawnParticle(EnumParticleTypes.PORTAL, pos.getX() + 0.5, pos.getY() + 0.9, pos.getZ() + 0.5, 0, 0, 0);
+			world.spawnParticle(EnumParticleTypes.PORTAL, pos.getX() + 0.5, pos.getY() + 0.9, pos.getZ() + 0.5, 0, 0, 0);
 		} else PEUtils.clearManipulatorData(this);
 
-		int range = (int) (7 + PEUtils.getRangeAmplifiers(worldObj, pos)*4 + getAmplifier(AmplifierType.RANGE));
+		int range = (int) (7 + PEUtils.getRangeAmplifiers(world, pos)*4 + getAmplifier(AmplifierType.RANGE));
 
 		int xp = pos.getX();
 		int yp = pos.getY();
 		int zp = pos.getZ();
 
-		if(worldObj.canBlockSeeSky(pos))
-			if(PEUtils.checkForAdjacentManipulators(worldObj, pos)){
-				if(worldObj.getClosestPlayer(xp, yp, zp, range, false) != null &&
-						EntityUtil.hasNecronomicon(worldObj.getClosestPlayer(xp, yp, zp, range, false))){
-					ItemStack item = worldObj.getClosestPlayer(xp, yp, zp, range, false).getHeldItem(EnumHand.MAIN_HAND);
-					ItemStack item1 = worldObj.getClosestPlayer(xp, yp, zp, range, false).getHeldItem(EnumHand.OFF_HAND);
+		if(world.canBlockSeeSky(pos))
+			if(PEUtils.checkForAdjacentManipulators(world, pos)){
+				if(world.getClosestPlayer(xp, yp, zp, range, false) != null &&
+						EntityUtil.hasNecronomicon(world.getClosestPlayer(xp, yp, zp, range, false))){
+					ItemStack item = world.getClosestPlayer(xp, yp, zp, range, false).getHeldItem(EnumHand.MAIN_HAND);
+					ItemStack item1 = world.getClosestPlayer(xp, yp, zp, range, false).getHeldItem(EnumHand.OFF_HAND);
 					if(item != null && item.getItem() instanceof IEnergyTransporterItem ||
 							item1 != null && item1.getItem() instanceof IEnergyTransporterItem){
 						timer++;
 						if(timer >= (int)(timerMax / Math.max(getAmplifier(AmplifierType.DURATION), 1.0F))){
-							timer = worldObj.rand.nextInt(10);
-							PEUtils.transferPEToNearbyPlayers(worldObj, pos, this, range);
+							timer = world.rand.nextInt(10);
+							PEUtils.transferPEToNearbyPlayers(world, pos, this, range);
 						}
 					}
 				}
 
-				PEUtils.transferPEToCollectors(worldObj, pos, this, (int)(PEUtils.getRangeAmplifiers(worldObj, pos) + getAmplifier(AmplifierType.RANGE)/2));
+				PEUtils.transferPEToCollectors(world, pos, this, (int)(PEUtils.getRangeAmplifiers(world, pos) + getAmplifier(AmplifierType.RANGE)/2));
 			}
 		if(tolerance >= 100)
 			disrupt();

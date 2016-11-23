@@ -24,7 +24,7 @@ public class WorldProviderDreadlands extends WorldProvider {
 
 	@Override
 	public void createBiomeProvider() {
-		biomeProvider = new BiomeProviderDreadlands(worldObj.getSeed(), worldObj.getWorldInfo().getTerrainType());
+		biomeProvider = new BiomeProviderDreadlands(world.getSeed(), world.getWorldInfo().getTerrainType());
 		hasNoSky = true;
 		setDimension(ACLib.dreadlands_id);
 	}
@@ -47,7 +47,7 @@ public class WorldProviderDreadlands extends WorldProvider {
 
 	@Override
 	public IChunkGenerator createChunkGenerator() {
-		return new ChunkProviderDreadlands(worldObj, worldObj.getSeed(), true);
+		return new ChunkProviderDreadlands(world, world.getSeed(), true);
 	}
 
 	@Override

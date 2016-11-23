@@ -166,9 +166,9 @@ public class EntityAntiSkeleton extends EntityMob implements IRangedAttackMob, I
 	@Override
 	protected void collideWithEntity(Entity par1Entity)
 	{
-		if(!worldObj.isRemote && par1Entity instanceof EntitySkeleton){
-			boolean flag = worldObj.getGameRules().getBoolean("mobGriefing");
-			worldObj.createExplosion(this, posX, posY, posZ, 5, flag);
+		if(!world.isRemote && par1Entity instanceof EntitySkeleton){
+			boolean flag = world.getGameRules().getBoolean("mobGriefing");
+			world.createExplosion(this, posX, posY, posZ, 5, flag);
 			setDead();
 		}
 		else par1Entity.applyEntityCollision(this);
@@ -193,7 +193,7 @@ public class EntityAntiSkeleton extends EntityMob implements IRangedAttackMob, I
 
 		if (getItemStackFromSlot(EntityEquipmentSlot.HEAD) == null)
 		{
-			Calendar calendar = worldObj.getCurrentDate();
+			Calendar calendar = world.getCurrentDate();
 
 			if (calendar.get(2) + 1 == 10 && calendar.get(5) == 31 && rand.nextFloat() < 0.25F)
 			{
@@ -211,15 +211,15 @@ public class EntityAntiSkeleton extends EntityMob implements IRangedAttackMob, I
 	@Override
 	public void attackEntityWithRangedAttack(EntityLivingBase par1EntityLivingBase, float par2)
 	{
-		EntityArrow entityarrow = new EntityTippedArrow(worldObj, this);
+		EntityArrow entityarrow = new EntityTippedArrow(world, this);
 		double d0 = par1EntityLivingBase.posX - posX;
 		double d1 = par1EntityLivingBase.getEntityBoundingBox().minY + par1EntityLivingBase.height / 3.0F - entityarrow.posY;
 		double d2 = par1EntityLivingBase.posZ - posZ;
-		double d3 = MathHelper.sqrt_double(d0 * d0 + d2 * d2);
-		entityarrow.setThrowableHeading(d0, d1 + d3 * 0.20000000298023224D, d2, 1.6F, 14 - worldObj.getDifficulty().getDifficultyId() * 4);
+		double d3 = MathHelper.sqrt(d0 * d0 + d2 * d2);
+		entityarrow.setThrowableHeading(d0, d1 + d3 * 0.20000000298023224D, d2, 1.6F, 14 - world.getDifficulty().getDifficultyId() * 4);
 		int i = EnchantmentHelper.getMaxEnchantmentLevel(Enchantments.POWER, this);
 		int j = EnchantmentHelper.getMaxEnchantmentLevel(Enchantments.PUNCH, this);
-		entityarrow.setDamage(par2 * 2.0F + rand.nextGaussian() * 0.25D + worldObj.getDifficulty().getDifficultyId() * 0.11F);
+		entityarrow.setDamage(par2 * 2.0F + rand.nextGaussian() * 0.25D + world.getDifficulty().getDifficultyId() * 0.11F);
 
 		if (i > 0)
 			entityarrow.setDamage(entityarrow.getDamage() + i * 0.5D + 0.5D);
@@ -231,7 +231,7 @@ public class EntityAntiSkeleton extends EntityMob implements IRangedAttackMob, I
 			entityarrow.setFire(100);
 
 		playSound(SoundEvents.ENTITY_SKELETON_SHOOT, 1.0F, 1.0F / (getRNG().nextFloat() * 0.4F + 0.8F));
-		worldObj.spawnEntityInWorld(entityarrow);
+		world.spawnEntity(entityarrow);
 	}
 
 	@Override

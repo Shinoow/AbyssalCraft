@@ -120,7 +120,7 @@ public class EntityShadowMonster extends EntityMob implements IAntiEntity, ICora
 	{
 		for (int i = 0; i < 2; ++i)
 			if(ACConfig.particleEntity)
-				worldObj.spawnParticle(EnumParticleTypes.SMOKE_LARGE, posX + (rand.nextDouble() - 0.5D) * width, posY + rand.nextDouble() * height, posZ + (rand.nextDouble() - 0.5D) * width, 0.0D, 0.0D, 0.0D);
+				world.spawnParticle(EnumParticleTypes.SMOKE_LARGE, posX + (rand.nextDouble() - 0.5D) * width, posY + rand.nextDouble() * height, posZ + (rand.nextDouble() - 0.5D) * width, 0.0D, 0.0D, 0.0D);
 
 		super.onLivingUpdate();
 	}
@@ -132,7 +132,7 @@ public class EntityShadowMonster extends EntityMob implements IAntiEntity, ICora
 
 		if (getItemStackFromSlot(EntityEquipmentSlot.HEAD) == null)
 		{
-			Calendar calendar = worldObj.getCurrentDate();
+			Calendar calendar = world.getCurrentDate();
 
 			if (calendar.get(2) + 1 == 10 && calendar.get(5) == 31 && rand.nextFloat() < 0.25F)
 			{

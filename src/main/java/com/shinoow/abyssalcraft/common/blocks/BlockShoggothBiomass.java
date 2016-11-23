@@ -48,7 +48,7 @@ public class BlockShoggothBiomass extends BlockContainer {
 	}
 
 	@Override
-	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess world, BlockPos pos)
+	public AxisAlignedBB getCollisionBoundingBox(IBlockState state, IBlockAccess world, BlockPos pos)
 	{
 		float f = 0.15F;
 		return new AxisAlignedBB(0, 0, 0, 1, 1 - f, 1);

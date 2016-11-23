@@ -39,12 +39,12 @@ public class ItemCrystalBag extends ItemACBasic {
 	}
 
 	@Override
-	public ActionResult<ItemStack> onItemRightClick(ItemStack stack, World world, EntityPlayer player, EnumHand hand) {
-		setInventorySize(stack);
+	public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, EnumHand hand) {
+		setInventorySize(player.getHeldItem(hand));
 		if (!world.isRemote)
 			if (!player.isSneaking())
-				player.openGui(AbyssalCraft.instance, ACLib.crystalbagGuiID, player.worldObj, (int) player.posX, (int) player.posY, (int) player.posZ);
-		return new ActionResult(EnumActionResult.PASS, stack);
+				player.openGui(AbyssalCraft.instance, ACLib.crystalbagGuiID, player.world, (int) player.posX, (int) player.posY, (int) player.posZ);
+		return new ActionResult(EnumActionResult.PASS, player.getHeldItem(hand));
 	}
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })

@@ -43,7 +43,7 @@ public class ItemOC extends Item {
 	}
 
 	@Override
-	public ActionResult<ItemStack> onItemRightClick(ItemStack par1ItemStack, World par2World, EntityPlayer par3EntityPlayer, EnumHand hand)
+	public ActionResult<ItemStack> onItemRightClick(World par2World, EntityPlayer par3EntityPlayer, EnumHand hand)
 	{
 		par3EntityPlayer.addPotionEffect(new PotionEffect(MobEffects.STRENGTH, 6000, 6));
 		par3EntityPlayer.addPotionEffect(new PotionEffect(MobEffects.NIGHT_VISION, 6000, 6));
@@ -56,13 +56,12 @@ public class ItemOC extends Item {
 		par3EntityPlayer.addPotionEffect(new PotionEffect(MobEffects.JUMP_BOOST, 6000, 6));
 		par3EntityPlayer.addPotionEffect(new PotionEffect(MobEffects.HASTE, 6000, 6));
 
-		par1ItemStack.stackSize--;
-		return new ActionResult(EnumActionResult.PASS, par1ItemStack);
+		par3EntityPlayer.getHeldItem(hand).shrink(1);
+		return new ActionResult(EnumActionResult.PASS, par3EntityPlayer.getHeldItem(hand));
 	}
 
-	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@Override
-	public void addInformation(ItemStack is, EntityPlayer player, List l, boolean B){
+	public void addInformation(ItemStack is, EntityPlayer player, List<String> l, boolean B){
 		l.add(I18n.translateToLocal("tooltip.oc"));
 	}
 

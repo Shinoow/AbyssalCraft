@@ -64,7 +64,7 @@ public class AbyssalCraftAPI {
 	/**
 	 * String used to specify the API version in the "package-info.java" classes
 	 */
-	public static final String API_VERSION = "1.8.6";
+	public static final String API_VERSION = "1.8.7";
 
 	public static Enchantment coralium_enchantment, dread_enchantment, light_pierce, iron_wall;
 
@@ -222,7 +222,7 @@ public class AbyssalCraftAPI {
 	 * @since 1.0
 	 */
 	public static void addSingleCrystallization(Block input, ItemStack output, float xp){
-		addCrystallization(input, output, null, xp);
+		addCrystallization(input, output, ItemStack.EMPTY, xp);
 	}
 
 	/**
@@ -234,7 +234,7 @@ public class AbyssalCraftAPI {
 	 * @since 1.0
 	 */
 	public static void addSingleCrystallization(Item input, ItemStack output, float xp){
-		addCrystallization(input, output, null, xp);
+		addCrystallization(input, output, ItemStack.EMPTY, xp);
 	}
 
 	/**
@@ -246,7 +246,7 @@ public class AbyssalCraftAPI {
 	 * @since 1.0
 	 */
 	public static void addSingleCrystallization(ItemStack input, ItemStack output, float xp){
-		addCrystallization(input, output, null, xp);
+		addCrystallization(input, output, ItemStack.EMPTY, xp);
 	}
 
 	/**
@@ -328,9 +328,9 @@ public class AbyssalCraftAPI {
 	public static void addCrystallization(String input, String output1, int out1, String output2, int out2, float xp){
 		if(!OreDictionary.getOres(output1).isEmpty() && !OreDictionary.getOres(output2).isEmpty()){
 			ItemStack o1 = OreDictionary.getOres(output1).get(0).copy();
-			o1.stackSize = out1;
+			o1.setCount(out1);
 			ItemStack o2 = OreDictionary.getOres(output2).get(0).copy();
-			o2.stackSize = out2;
+			o2.setCount(out2);
 			for(ItemStack stack : OreDictionary.getOres(input))
 				addCrystallization(stack, o1, o2, xp);
 		}
@@ -362,7 +362,7 @@ public class AbyssalCraftAPI {
 	public static void addSingleCrystallization(String input, String output, int out, float xp){
 		if(!OreDictionary.getOres(output).isEmpty()){
 			ItemStack o = OreDictionary.getOres(output).get(0).copy();
-			o.stackSize = out;
+			o.setCount(out);
 			for(ItemStack stack : OreDictionary.getOres(input))
 				addSingleCrystallization(stack, o, xp);
 		}
@@ -394,7 +394,7 @@ public class AbyssalCraftAPI {
 	public static void addTransmutation(String input, String output, int out, float xp){
 		if(!OreDictionary.getOres(output).isEmpty()){
 			ItemStack o = OreDictionary.getOres(output).get(0).copy();
-			o.stackSize = out;
+			o.setCount(out);
 			for(ItemStack stack : OreDictionary.getOres(input))
 				addTransmutation(stack, o, xp);
 		}
@@ -470,7 +470,7 @@ public class AbyssalCraftAPI {
 	public static void addMaterialization(ItemStack[] input, ItemStack output){
 		for(ItemStack item : input)
 			if(!APIUtils.isCrystal(item)) throw new ClassCastException("All of the input items has to be Crystals!");
-		if(input.length > 0 && input != null)
+		if(input.length > 0)
 			if(input.length <= 5)
 				MaterializerRecipes.instance().materialize(input, output);
 			else FMLLog.log("AbyssalCraftAPI", Level.ERROR, "This Materializer recipe has more than 5 inputs! (%d)", input.length);

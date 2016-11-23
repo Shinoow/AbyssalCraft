@@ -182,7 +182,7 @@ public class RitualRegistry {
 			if(ritual.getBookType() <= bookType)
 				if(ritual.getOfferings() != null && offerings != null)
 					if(areItemStackArraysEqual(ritual.getOfferings(), offerings, ritual.isNBTSensitive()))
-						if(ritual.requiresItemSacrifice() || ritual.getSacrifice() == null && sacrifice == null ||
+						if(ritual.requiresItemSacrifice() || ritual.getSacrifice() == null && sacrifice.isEmpty() ||
 						areObjectsEqual(sacrifice, ritual.getSacrifice(), false))
 							return true;
 		return false;
@@ -194,7 +194,7 @@ public class RitualRegistry {
 		List<ItemStack> itemList = Lists.newArrayList();
 
 		for(ItemStack item : array2)
-			if(item != null)
+			if(!item.isEmpty())
 				itemList.add(item);
 
 		if(itemList.size() == compareList.size())
@@ -215,21 +215,30 @@ public class RitualRegistry {
 			return areStacksEqual(stack, new ItemStack((Item)obj), nbt);
 		else if(obj instanceof Block)
 			return areStacksEqual(stack, new ItemStack((Block)obj), nbt);
-		else if(obj instanceof String)
+		else if(obj instanceof ItemStack[]){
+			for(ItemStack item : (ItemStack[])obj)
+				if(areStacksEqual(stack, item, nbt))
+					return true;
+		} else if(obj instanceof String){
 			for(ItemStack item : OreDictionary.getOres((String)obj))
-				return areStacksEqual(stack, item, nbt);
+				if(areStacksEqual(stack, item, nbt))
+					return true;
+		} else if(obj instanceof List)
+			for(ItemStack item :(List<ItemStack>)obj)
+				if(areStacksEqual(stack, item, nbt))
+					return true;
 		return false;
 	}
 
 	public boolean areStacksEqual(ItemStack stack1, ItemStack stack2, boolean nbt){
-		if(stack1 == null || stack2 == null) return false;
+		if(stack1.isEmpty() || stack2.isEmpty()) return false;
 		return nbt ? areStacksEqual(stack1, stack2) && ItemStack.areItemStackTagsEqual(stack1, stack2) :
 			areStacksEqual(stack1, stack2);
 	}
 
 	public boolean areStacksEqual(ItemStack stack1, ItemStack stack2)
 	{
-		if (stack1 == null || stack2 == null) return false;
+		if (stack1.isEmpty() || stack2.isEmpty()) return false;
 		return stack1.getItem() == stack2.getItem() && (stack1.getItemDamage() == OreDictionary.WILDCARD_VALUE
 				|| stack1.getItemDamage() == stack2.getItemDamage());
 	}

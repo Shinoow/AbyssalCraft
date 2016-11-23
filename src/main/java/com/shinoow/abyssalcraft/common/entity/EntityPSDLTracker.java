@@ -79,7 +79,7 @@ public class EntityPSDLTracker extends Entity
 		double d1 = p_180465_1_.getZ();
 		double d2 = d0 - posX;
 		double d3 = d1 - posZ;
-		float f = MathHelper.sqrt_double(d2 * d2 + d3 * d3);
+		float f = MathHelper.sqrt(d2 * d2 + d3 * d3);
 
 		if (f > 12.0F)
 		{
@@ -111,7 +111,7 @@ public class EntityPSDLTracker extends Entity
 
 		if (prevRotationPitch == 0.0F && prevRotationYaw == 0.0F)
 		{
-			float f = MathHelper.sqrt_double(x * x + z * z);
+			float f = MathHelper.sqrt(x * x + z * z);
 			prevRotationYaw = rotationYaw = (float)(MathHelper.atan2(x, z) * 180.0D / Math.PI);
 			prevRotationPitch = rotationPitch = (float)(MathHelper.atan2(y, f) * 180.0D / Math.PI);
 		}
@@ -130,7 +130,7 @@ public class EntityPSDLTracker extends Entity
 		posX += motionX;
 		posY += motionY;
 		posZ += motionZ;
-		float f = MathHelper.sqrt_double(motionX * motionX + motionZ * motionZ);
+		float f = MathHelper.sqrt(motionX * motionX + motionZ * motionZ);
 		rotationYaw = (float)(MathHelper.atan2(motionX, motionZ) * 180.0D / Math.PI);
 
 		for (rotationPitch = (float)(MathHelper.atan2(motionY, f) * 180.0D / Math.PI); rotationPitch - prevRotationPitch < -180.0F; prevRotationPitch -= 360.0F)
@@ -148,7 +148,7 @@ public class EntityPSDLTracker extends Entity
 		rotationPitch = prevRotationPitch + (rotationPitch - prevRotationPitch) * 0.2F;
 		rotationYaw = prevRotationYaw + (rotationYaw - prevRotationYaw) * 0.2F;
 
-		if (!worldObj.isRemote)
+		if (!world.isRemote)
 		{
 			double d0 = targetX - posX;
 			double d1 = targetZ - posZ;
@@ -177,23 +177,23 @@ public class EntityPSDLTracker extends Entity
 		{
 			for (int i = 0; i < 4; ++i)
 				if(ACConfig.particleEntity)
-					worldObj.spawnParticle(EnumParticleTypes.WATER_BUBBLE, posX - motionX * f3, posY - motionY * f3, posZ - motionZ * f3, motionX, motionY, motionZ, new int[0]);
+					world.spawnParticle(EnumParticleTypes.WATER_BUBBLE, posX - motionX * f3, posY - motionY * f3, posZ - motionZ * f3, motionX, motionY, motionZ, new int[0]);
 		} else if(ACConfig.particleEntity)
-			worldObj.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, posX - motionX * f3 + rand.nextDouble() * 0.6D - 0.3D, posY - motionY * f3 - 0.5D, posZ - motionZ * f3 + rand.nextDouble() * 0.6D - 0.3D, motionX, motionY, motionZ, new int[0]);
+			world.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, posX - motionX * f3 + rand.nextDouble() * 0.6D - 0.3D, posY - motionY * f3 - 0.5D, posZ - motionZ * f3 + rand.nextDouble() * 0.6D - 0.3D, motionX, motionY, motionZ, new int[0]);
 
-		if (!worldObj.isRemote)
+		if (!world.isRemote)
 		{
 			setPosition(posX, posY, posZ);
 			++despawnTimer;
 
-			if (despawnTimer > 80 && !worldObj.isRemote)
+			if (despawnTimer > 80 && !world.isRemote)
 			{
 				setDead();
 
 				if (shatterOrDrop)
-					worldObj.spawnEntityInWorld(new EntityItem(worldObj, posX, posY, posZ, new ItemStack(ACItems.powerstone_tracker)));
+					world.spawnEntity(new EntityItem(world, posX, posY, posZ, new ItemStack(ACItems.powerstone_tracker)));
 				else
-					worldObj.playEvent(2003, new BlockPos(this), 0);
+					world.playEvent(2003, new BlockPos(this), 0);
 			}
 		}
 	}

@@ -80,13 +80,13 @@ public class ContainerEngraver extends Container {
 	@Override
 	public boolean canInteractWith(EntityPlayer var1) {
 
-		return tileEngraver.isUseableByPlayer(var1);
+		return tileEngraver.isUsableByPlayer(var1);
 	}
 
 	@Override
 	public ItemStack transferStackInSlot(EntityPlayer par1EntityPlayer, int par2)
 	{
-		ItemStack itemstack = null;
+		ItemStack itemstack = ItemStack.EMPTY;
 		Slot slot = inventorySlots.get(par2);
 
 
@@ -98,7 +98,7 @@ public class ContainerEngraver extends Container {
 			if (par2 == 2)
 			{
 				if (!mergeItemStack(itemstack1, 3, 39, true))
-					return null;
+					return ItemStack.EMPTY;
 
 				slot.onSlotChange(itemstack1, itemstack);
 			}
@@ -107,28 +107,28 @@ public class ContainerEngraver extends Container {
 				if (EngraverRecipes.instance().getEngravingResult(itemstack1) != null)
 				{
 					if (!mergeItemStack(itemstack1, 0, 1, false))
-						return null;
+						return ItemStack.EMPTY;
 				}
 				else if (par2 >= 3 && par2 < 30)
 				{
 					if (!mergeItemStack(itemstack1, 30, 39, false))
-						return null;
+						return ItemStack.EMPTY;
 				}
 				else if (par2 >= 30 && par2 < 39 && !mergeItemStack(itemstack1, 3, 30, false))
-					return null;
+					return ItemStack.EMPTY;
 			}
 			else if (!mergeItemStack(itemstack1, 3, 39, false))
-				return null;
+				return ItemStack.EMPTY;
 
-			if (itemstack1.stackSize == 0)
-				slot.putStack((ItemStack)null);
+			if (itemstack1.isEmpty())
+				slot.putStack(ItemStack.EMPTY);
 			else
 				slot.onSlotChanged();
 
-			if (itemstack1.stackSize == itemstack.stackSize)
-				return null;
+			if (itemstack1.getCount() == itemstack.getCount())
+				return ItemStack.EMPTY;
 
-			slot.onPickupFromSlot(par1EntityPlayer, itemstack1);
+			slot.onTake(par1EntityPlayer, itemstack1);
 		}
 
 		return itemstack;

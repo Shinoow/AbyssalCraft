@@ -51,37 +51,37 @@ public class PotionCplague extends Potion{
 		if(par1EntityLivingBase instanceof EntityPlayer && !par1EntityLivingBase.isDead && wasKilled)
 			wasKilled = false;
 
-		if(!par1EntityLivingBase.worldObj.isRemote && par1EntityLivingBase.isDead)
+		if(!par1EntityLivingBase.world.isRemote && par1EntityLivingBase.isDead)
 			if(par1EntityLivingBase instanceof EntityZombie){
-				if(par1EntityLivingBase.worldObj.getWorldInfo().isHardcoreModeEnabled() && par1EntityLivingBase.worldObj.rand.nextInt(10) == 0) {
-					EntityDepthsGhoul ghoul = new EntityDepthsGhoul(par1EntityLivingBase.worldObj);
+				if(par1EntityLivingBase.world.getWorldInfo().isHardcoreModeEnabled() && par1EntityLivingBase.world.rand.nextInt(10) == 0) {
+					EntityDepthsGhoul ghoul = new EntityDepthsGhoul(par1EntityLivingBase.world);
 					ghoul.copyLocationAndAnglesFrom(par1EntityLivingBase);
-					ghoul.onInitialSpawn(par1EntityLivingBase.worldObj.getDifficultyForLocation(par1EntityLivingBase.getPosition()),(IEntityLivingData)null);
-					par1EntityLivingBase.worldObj.removeEntity(par1EntityLivingBase);
+					ghoul.onInitialSpawn(par1EntityLivingBase.world.getDifficultyForLocation(par1EntityLivingBase.getPosition()),(IEntityLivingData)null);
+					par1EntityLivingBase.world.removeEntity(par1EntityLivingBase);
 					ghoul.setGhoulType(0);
-					par1EntityLivingBase.worldObj.spawnEntityInWorld(ghoul);
+					par1EntityLivingBase.world.spawnEntity(ghoul);
 				}
-				else if(par1EntityLivingBase.worldObj.getDifficulty() == EnumDifficulty.HARD && par1EntityLivingBase.worldObj.rand.nextBoolean()
-						|| par1EntityLivingBase.worldObj.rand.nextInt(8) == 0) {
-					EntityAbyssalZombie entityzombie = new EntityAbyssalZombie(par1EntityLivingBase.worldObj);
+				else if(par1EntityLivingBase.world.getDifficulty() == EnumDifficulty.HARD && par1EntityLivingBase.world.rand.nextBoolean()
+						|| par1EntityLivingBase.world.rand.nextInt(8) == 0) {
+					EntityAbyssalZombie entityzombie = new EntityAbyssalZombie(par1EntityLivingBase.world);
 					entityzombie.copyLocationAndAnglesFrom(par1EntityLivingBase);
-					entityzombie.onInitialSpawn(par1EntityLivingBase.worldObj.getDifficultyForLocation(par1EntityLivingBase.getPosition()),(IEntityLivingData)null);
+					entityzombie.onInitialSpawn(par1EntityLivingBase.world.getDifficultyForLocation(par1EntityLivingBase.getPosition()),(IEntityLivingData)null);
 					if(par1EntityLivingBase.isChild())
 						entityzombie.setChild(true);
-					par1EntityLivingBase.worldObj.removeEntity(par1EntityLivingBase);
-					par1EntityLivingBase.worldObj.spawnEntityInWorld(entityzombie);
+					par1EntityLivingBase.world.removeEntity(par1EntityLivingBase);
+					par1EntityLivingBase.world.spawnEntity(entityzombie);
 				}
 			} else if(par1EntityLivingBase instanceof EntityPlayer && !wasKilled){
 				wasKilled = true;
-				if(par1EntityLivingBase.worldObj.getDifficulty() == EnumDifficulty.HARD && par1EntityLivingBase.worldObj.rand.nextBoolean()
-						|| par1EntityLivingBase.worldObj.rand.nextInt(8) == 0) {
-					EntityAbyssalZombie entityzombie = new EntityAbyssalZombie(par1EntityLivingBase.worldObj);
+				if(par1EntityLivingBase.world.getDifficulty() == EnumDifficulty.HARD && par1EntityLivingBase.world.rand.nextBoolean()
+						|| par1EntityLivingBase.world.rand.nextInt(8) == 0) {
+					EntityAbyssalZombie entityzombie = new EntityAbyssalZombie(par1EntityLivingBase.world);
 					entityzombie.copyLocationAndAnglesFrom(par1EntityLivingBase);
-					entityzombie.onInitialSpawn(par1EntityLivingBase.worldObj.getDifficultyForLocation(par1EntityLivingBase.getPosition()),(IEntityLivingData)null);
+					entityzombie.onInitialSpawn(par1EntityLivingBase.world.getDifficultyForLocation(par1EntityLivingBase.getPosition()),(IEntityLivingData)null);
 					if(par1EntityLivingBase.isChild())
 						entityzombie.setChild(true);
-					par1EntityLivingBase.worldObj.removeEntity(par1EntityLivingBase);
-					par1EntityLivingBase.worldObj.spawnEntityInWorld(entityzombie);
+					par1EntityLivingBase.world.removeEntity(par1EntityLivingBase);
+					par1EntityLivingBase.world.spawnEntity(entityzombie);
 				}
 			}
 	}

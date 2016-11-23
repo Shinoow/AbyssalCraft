@@ -214,7 +214,7 @@ public class ModelRemnant extends ModelBase {
 		if (swingProgress > -9990.0F)
 		{
 			f6 = swingProgress;
-			body.rotateAngleY = MathHelper.sin(MathHelper.sqrt_float(f6) * (float)Math.PI * 2.0F) * 0.2F;
+			body.rotateAngleY = MathHelper.sin(MathHelper.sqrt(f6) * (float)Math.PI * 2.0F) * 0.2F;
 			rightarm.rotateAngleY += body.rotateAngleY;
 			leftarm.rotateAngleY += body.rotateAngleY;
 			f6 = 1.0F - swingProgress;

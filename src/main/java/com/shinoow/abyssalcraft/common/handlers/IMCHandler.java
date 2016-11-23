@@ -93,9 +93,9 @@ public class IMCHandler {
 					NBTTagCompound stuff = imcMessage.getNBTValue();
 					if(!stuff.hasKey("input") || !stuff.hasKey("output1") || !stuff.hasKey("output2") || !stuff.hasKey("xp"))
 						failed = true;
-					ItemStack input = ItemStack.loadItemStackFromNBT(stuff.getCompoundTag("input"));
-					ItemStack output1 = ItemStack.loadItemStackFromNBT(stuff.getCompoundTag("output1"));
-					ItemStack output2 = ItemStack.loadItemStackFromNBT(stuff.getCompoundTag("output2"));
+					ItemStack input = new ItemStack(stuff.getCompoundTag("input"));
+					ItemStack output1 = new ItemStack(stuff.getCompoundTag("output1"));
+					ItemStack output2 = new ItemStack(stuff.getCompoundTag("output2"));
 					if(input == null || output1 == null || output2 == null)
 						failed = true;
 					if(!failed)
@@ -115,8 +115,8 @@ public class IMCHandler {
 					NBTTagCompound stuff = imcMessage.getNBTValue();
 					if(!stuff.hasKey("input") || !stuff.hasKey("output") || !stuff.hasKey("xp"))
 						failed = true;
-					ItemStack input = ItemStack.loadItemStackFromNBT(stuff.getCompoundTag("input"));
-					ItemStack output = ItemStack.loadItemStackFromNBT(stuff.getCompoundTag("output"));
+					ItemStack input = new ItemStack(stuff.getCompoundTag("input"));
+					ItemStack output = new ItemStack(stuff.getCompoundTag("output"));
 					if(input == null || output == null)
 						failed = true;
 					if(!failed)
@@ -184,8 +184,8 @@ public class IMCHandler {
 					NBTTagCompound stuff = imcMessage.getNBTValue();
 					if(!stuff.hasKey("input") || !stuff.hasKey("output") || !stuff.hasKey("xp"))
 						failed = true;
-					ItemStack input = ItemStack.loadItemStackFromNBT(stuff.getCompoundTag("input"));
-					ItemStack output = ItemStack.loadItemStackFromNBT(stuff.getCompoundTag("output"));
+					ItemStack input = new ItemStack(stuff.getCompoundTag("input"));
+					ItemStack output = new ItemStack(stuff.getCompoundTag("output"));
 					if(input == null || output == null)
 						failed = true;
 					if(!failed)
@@ -229,40 +229,20 @@ public class IMCHandler {
 					NBTTagCompound stuff = imcMessage.getNBTValue();
 					if(!stuff.hasKey("input1") || !stuff.hasKey("output"))
 						failed = true;
-					ItemStack input1 = ItemStack.loadItemStackFromNBT(stuff.getCompoundTag("input1"));
-					ItemStack input2 = ItemStack.loadItemStackFromNBT(stuff.getCompoundTag("input2"));
-					ItemStack input3 = ItemStack.loadItemStackFromNBT(stuff.getCompoundTag("input3"));
-					ItemStack input4 = ItemStack.loadItemStackFromNBT(stuff.getCompoundTag("input4"));
-					ItemStack input5 = ItemStack.loadItemStackFromNBT(stuff.getCompoundTag("input5"));
-					ItemStack output = ItemStack.loadItemStackFromNBT(stuff.getCompoundTag("output"));
+					ItemStack input1 = new ItemStack(stuff.getCompoundTag("input1"));
+					ItemStack input2 = new ItemStack(stuff.getCompoundTag("input2"));
+					ItemStack input3 = new ItemStack(stuff.getCompoundTag("input3"));
+					ItemStack input4 = new ItemStack(stuff.getCompoundTag("input4"));
+					ItemStack input5 = new ItemStack(stuff.getCompoundTag("input5"));
+					ItemStack output = new ItemStack(stuff.getCompoundTag("output"));
 					if(input1 == null || output == null)
 						failed = true;
-					if(input5 != null){
-						items = new ItemStack[5];
-						items[0] = input1;
-						items[1] = input2;
-						items[2] = input3;
-						items[3] = input4;
-						items[4] = input5;
-					} else if(input4 != null){
-						items = new ItemStack[4];
-						items[0] = input1;
-						items[1] = input2;
-						items[2] = input3;
-						items[3] = input4;
-					} else if(input3 != null){
-						items = new ItemStack[3];
-						items[0] = input1;
-						items[1] = input2;
-						items[2] = input3;
-					} else if(input2 != null){
-						items = new ItemStack[2];
-						items[0] = input1;
-						items[1] = input2;
-					} else {
-						items = new ItemStack[1];
-						items[0] = input1;
-					}
+					items = new ItemStack[5];
+					items[0] = input1;
+					items[1] = input2;
+					items[2] = input3;
+					items[3] = input4;
+					items[4] = input5;
 					if(!failed)
 						AbyssalCraftAPI.addMaterialization(items, output);
 				}
@@ -291,10 +271,10 @@ public class IMCHandler {
 					if(!senders.contains(imcMessage.getSender()))
 						senders.add(imcMessage.getSender());
 					NBTTagCompound tag = imcMessage.getNBTValue();
-					ItemStack helmet = ItemStack.loadItemStackFromNBT(tag.getCompoundTag("helmet"));
-					ItemStack chestplate = ItemStack.loadItemStackFromNBT(tag.getCompoundTag("chestplate"));
-					ItemStack leggings = ItemStack.loadItemStackFromNBT(tag.getCompoundTag("leggings"));
-					ItemStack boots = ItemStack.loadItemStackFromNBT(tag.getCompoundTag("boots"));
+					ItemStack helmet = new ItemStack(tag.getCompoundTag("helmet"));
+					ItemStack chestplate = new ItemStack(tag.getCompoundTag("chestplate"));
+					ItemStack leggings = new ItemStack(tag.getCompoundTag("leggings"));
+					ItemStack boots = new ItemStack(tag.getCompoundTag("boots"));
 					if(helmet != null && chestplate != null && leggings != null && boots != null){
 						if(tag.hasKey("res1") && tag.hasKey("res2"))
 							AbyssalCraftAPI.addGhoulArmorTextures(helmet.getItem(), chestplate.getItem(), leggings.getItem(), boots.getItem(), tag.getString("res1"), tag.getString("res2"));
@@ -313,7 +293,7 @@ public class IMCHandler {
 					if(!senders.contains(imcMessage.getSender()))
 						senders.add(imcMessage.getSender());
 					NBTTagCompound tag = imcMessage.getNBTValue();
-					ItemStack helmet = ItemStack.loadItemStackFromNBT(tag.getCompoundTag("helmet"));
+					ItemStack helmet = new ItemStack(tag.getCompoundTag("helmet"));
 					if(helmet != null && tag.hasKey("res"))
 						AbyssalCraftAPI.addGhoulHelmetTexture(helmet.getItem(), tag.getString("res"));
 					else failed = true;
@@ -330,7 +310,7 @@ public class IMCHandler {
 					if(!senders.contains(imcMessage.getSender()))
 						senders.add(imcMessage.getSender());
 					NBTTagCompound tag = imcMessage.getNBTValue();
-					ItemStack chestplate = ItemStack.loadItemStackFromNBT(tag.getCompoundTag("chestplate"));
+					ItemStack chestplate = new ItemStack(tag.getCompoundTag("chestplate"));
 					if(chestplate != null && tag.hasKey("res"))
 						AbyssalCraftAPI.addGhoulChestplateTexture(chestplate.getItem(), tag.getString("res"));
 					else failed = true;
@@ -347,7 +327,7 @@ public class IMCHandler {
 					if(!senders.contains(imcMessage.getSender()))
 						senders.add(imcMessage.getSender());
 					NBTTagCompound tag = imcMessage.getNBTValue();
-					ItemStack leggings = ItemStack.loadItemStackFromNBT(tag.getCompoundTag("leggings"));
+					ItemStack leggings = new ItemStack(tag.getCompoundTag("leggings"));
 					if(leggings != null && tag.hasKey("res"))
 						AbyssalCraftAPI.addGhoulLeggingsTexture(leggings.getItem(), tag.getString("res"));
 					else failed = true;
@@ -364,7 +344,7 @@ public class IMCHandler {
 					if(!senders.contains(imcMessage.getSender()))
 						senders.add(imcMessage.getSender());
 					NBTTagCompound tag = imcMessage.getNBTValue();
-					ItemStack boots = ItemStack.loadItemStackFromNBT(tag.getCompoundTag("boots"));
+					ItemStack boots = new ItemStack(tag.getCompoundTag("boots"));
 					if(boots != null && tag.hasKey("res"))
 						AbyssalCraftAPI.addGhoulBootsTexture(boots.getItem(), tag.getString("res"));
 					else failed = true;

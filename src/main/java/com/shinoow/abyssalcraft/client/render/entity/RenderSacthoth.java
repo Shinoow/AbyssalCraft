@@ -23,7 +23,7 @@ import com.shinoow.abyssalcraft.common.entity.EntitySacthoth;
 @SideOnly(Side.CLIENT)
 public class RenderSacthoth extends RenderLiving<EntitySacthoth> {
 
-	private static final ResourceLocation mobTexture = new ResourceLocation("abyssalcraft:textures/model/boss/Sacthoth.png");
+	private static final ResourceLocation mobTexture = new ResourceLocation("abyssalcraft:textures/model/boss/sacthoth.png");
 
 	public RenderSacthoth(RenderManager manager)
 	{

@@ -46,16 +46,17 @@ public class SlotMaterializer extends Slot
 	public ItemStack decrStackSize(int par1)
 	{
 		if (getHasStack())
-			stackSize += Math.min(par1, getStack().stackSize);
+			stackSize += Math.min(par1, getStack().getCount());
 
 		return super.decrStackSize(par1);
 	}
 
 	@Override
-	public void onPickupFromSlot(EntityPlayer par1EntityPlayer, ItemStack par2ItemStack)
+	public ItemStack onTake(EntityPlayer player, ItemStack stack)
 	{
-		this.onCrafting(par2ItemStack);
-		super.onPickupFromSlot(par1EntityPlayer, par2ItemStack);
+		this.onCrafting(stack);
+		super.onTake(player, stack);
+		return stack;
 	}
 
 	@Override
@@ -68,7 +69,7 @@ public class SlotMaterializer extends Slot
 	protected void onCrafting(ItemStack par1ItemStack)
 	{
 		if(materializer != null){
-			par1ItemStack.onCrafting(thePlayer.worldObj, thePlayer, stackSize);
+			par1ItemStack.onCrafting(thePlayer.world, thePlayer, stackSize);
 
 			MinecraftForge.EVENT_BUS.post(new ACEvents.ItemMaterializedEvent(thePlayer, par1ItemStack));
 

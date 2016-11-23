@@ -13,6 +13,7 @@ package com.shinoow.abyssalcraft.common.entity;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.MoverType;
 import net.minecraft.init.Blocks;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
@@ -73,7 +74,7 @@ public class EntityODBcPrimed extends Entity {
 		prevPosY = posY;
 		prevPosZ = posZ;
 		motionY -= 0.03999999910593033D;
-		moveEntity(motionX, motionY, motionZ);
+		move(MoverType.SELF, motionX, motionY, motionZ);
 		motionX *= 0.9800000190734863D;
 		motionY *= 0.9800000190734863D;
 		motionZ *= 0.9800000190734863D;
@@ -94,13 +95,13 @@ public class EntityODBcPrimed extends Entity {
 		} else {
 			handleWaterMovement();
 			if(ACConfig.particleEntity)
-				AbyssalCraft.proxy.spawnParticle("CorBlood", worldObj, posX + (rand.nextDouble() - 0.5D) * width, posY + rand.nextDouble() * height - 0.25D, posZ + (rand.nextDouble() - 0.5D) * width, (rand.nextDouble() - 0.5D) * 100.0D, -rand.nextDouble(), (rand.nextDouble() - 0.5D) * 100.0D);
+				AbyssalCraft.proxy.spawnParticle("CorBlood", world, posX + (rand.nextDouble() - 0.5D) * width, posY + rand.nextDouble() * height - 0.25D, posZ + (rand.nextDouble() - 0.5D) * width, (rand.nextDouble() - 0.5D) * 100.0D, -rand.nextDouble(), (rand.nextDouble() - 0.5D) * 100.0D);
 		}
 	}
 
 	private void explode()
 	{
-		if(!worldObj.isRemote){
+		if(!world.isRemote){
 			Blocks.OBSIDIAN.setResistance(5.0F);
 			Blocks.LAVA.setResistance(5.0F);
 			Blocks.FLOWING_LAVA.setResistance(5.0F);
@@ -109,8 +110,8 @@ public class EntityODBcPrimed extends Entity {
 			ACBlocks.liquid_coralium.setResistance(50.0F);
 		}
 		float var0 = 20.0F;
-		ExplosionUtil.newODBExplosion(worldObj, this, posX, posY, posZ, var0, 32, false, true);
-		if(!worldObj.isRemote){
+		ExplosionUtil.newODBExplosion(world, this, posX, posY, posZ, var0, 32, false, true);
+		if(!world.isRemote){
 			Blocks.OBSIDIAN.setResistance(2000.0F);
 			Blocks.LAVA.setResistance(500.0F);
 			Blocks.FLOWING_LAVA.setResistance(500.0F);

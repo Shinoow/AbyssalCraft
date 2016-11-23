@@ -92,7 +92,7 @@ public class EntitySacthoth extends EntityMob implements IAntiEntity, ICoraliumE
 	}
 
 	@Override
-	protected PathNavigate getNewNavigator(World worldIn)
+	protected PathNavigate createNavigator(World worldIn)
 	{
 		return new PathNavigateClimber(this, worldIn);
 	}
@@ -121,7 +121,7 @@ public class EntitySacthoth extends EntityMob implements IAntiEntity, ICoraliumE
 	{
 		super.onUpdate();
 
-		if (!worldObj.isRemote)
+		if (!world.isRemote)
 			setBesideClimbableBlock(isCollidedHorizontally);
 	}
 
@@ -146,7 +146,7 @@ public class EntitySacthoth extends EntityMob implements IAntiEntity, ICoraliumE
 	@Override
 	protected boolean canDespawn()
 	{
-		return worldObj.provider.getDimension() == ACLib.dark_realm_id ? true : false;
+		return world.provider.getDimension() == ACLib.dark_realm_id ? true : false;
 	}
 
 	@Override
@@ -283,19 +283,19 @@ public class EntitySacthoth extends EntityMob implements IAntiEntity, ICoraliumE
 	@Override
 	public boolean attackEntityFrom(DamageSource par1DamageSource, float par2)
 	{
-		if(par2 > 30) par2 = 10 + worldObj.rand.nextInt(10);
+		if(par2 > 30) par2 = 10 + world.rand.nextInt(10);
 
 		if(par1DamageSource == DamageSource.inWall){
 			teleportRandomly();
 			return false;
 		}
 		else if(par1DamageSource.isExplosion()){
-			if(worldObj.isRemote)
+			if(world.isRemote)
 				SpecialTextUtil.SacthothText(I18n.translateToLocal("message.sacthoth.damage.explosion"));
 			return false;
 		}
 		else if(par1DamageSource.isProjectile()){
-			if(worldObj.isRemote)
+			if(world.isRemote)
 				SpecialTextUtil.SacthothText(I18n.translateToLocal("message.sacthoth.damage.projectile"));
 			return false;
 		}
@@ -324,14 +324,14 @@ public class EntitySacthoth extends EntityMob implements IAntiEntity, ICoraliumE
 		boolean flag = false;
 		BlockPos pos = new BlockPos(posX, posY, posZ);
 
-		if (worldObj.isBlockLoaded(pos))
+		if (world.isBlockLoaded(pos))
 		{
 			boolean flag1 = false;
 
 			while (!flag1 && pos.getY() > 0)
 			{
 				BlockPos pos1 = pos.down();
-				IBlockState block = worldObj.getBlockState(pos1);
+				IBlockState block = world.getBlockState(pos1);
 
 				if (block.getMaterial().blocksMovement())
 					flag1 = true;
@@ -346,7 +346,7 @@ public class EntitySacthoth extends EntityMob implements IAntiEntity, ICoraliumE
 			{
 				setPosition(posX, posY, posZ);
 
-				if (worldObj.getCollisionBoxes(this, getEntityBoundingBox()).isEmpty() && !worldObj.containsAnyLiquid(getEntityBoundingBox()))
+				if (world.getCollisionBoxes(this, getEntityBoundingBox()).isEmpty() && !world.containsAnyLiquid(getEntityBoundingBox()))
 					flag = true;
 			}
 		}
@@ -370,10 +370,10 @@ public class EntitySacthoth extends EntityMob implements IAntiEntity, ICoraliumE
 				double d8 = d4 + (posY - d4) * d6 + rand.nextDouble() * height;
 				double d9 = d5 + (posZ - d5) * d6 + (rand.nextDouble() - 0.5D) * width * 2.0D;
 				if(ACConfig.particleEntity)
-					worldObj.spawnParticle(EnumParticleTypes.SMOKE_LARGE, d7, d8, d9, f, f1, f2);
+					world.spawnParticle(EnumParticleTypes.SMOKE_LARGE, d7, d8, d9, f, f1, f2);
 			}
 
-			worldObj.playSound(d3, d4, d5, SoundEvents.ENTITY_ENDERMEN_TELEPORT, getSoundCategory(), 1.0F, 1.0F, false);
+			world.playSound(d3, d4, d5, SoundEvents.ENTITY_ENDERMEN_TELEPORT, getSoundCategory(), 1.0F, 1.0F, false);
 			playSound(SoundEvents.ENTITY_ENDERMEN_TELEPORT, 1.0F, 1.0F);
 			return true;
 		}
@@ -396,18 +396,18 @@ public class EntitySacthoth extends EntityMob implements IAntiEntity, ICoraliumE
 			float f1 = (rand.nextFloat() - 0.5F) * 4.0F;
 			float f2 = (rand.nextFloat() - 0.5F) * 8.0F;
 			if(ACConfig.particleEntity){
-				worldObj.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, posX + f, posY + 2.0D + f1, posZ + f2, 0.0D, 0.0D, 0.0D);
-				worldObj.spawnParticle(EnumParticleTypes.SMOKE_LARGE, posX + f, posY + 2.0D + f1, posZ + f2, 0.0D, 0.0D, 0.0D);
-				worldObj.spawnParticle(EnumParticleTypes.EXPLOSION_NORMAL, posX + f, posY + 2.0D + f1, posZ + f2, 0.0D, 0.0D, 0.0D);
+				world.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, posX + f, posY + 2.0D + f1, posZ + f2, 0.0D, 0.0D, 0.0D);
+				world.spawnParticle(EnumParticleTypes.SMOKE_LARGE, posX + f, posY + 2.0D + f1, posZ + f2, 0.0D, 0.0D, 0.0D);
+				world.spawnParticle(EnumParticleTypes.EXPLOSION_NORMAL, posX + f, posY + 2.0D + f1, posZ + f2, 0.0D, 0.0D, 0.0D);
 				if (deathTicks >= 190 && deathTicks <= 200)
-					worldObj.spawnParticle(EnumParticleTypes.EXPLOSION_HUGE, posX + f, posY + 2.0D + f1, posZ + f2, 0.0D, 0.0D, 0.0D);
+					world.spawnParticle(EnumParticleTypes.EXPLOSION_HUGE, posX + f, posY + 2.0D + f1, posZ + f2, 0.0D, 0.0D, 0.0D);
 			}
 		}
 
 		int i;
 		int j;
 
-		if (!worldObj.isRemote){
+		if (!world.isRemote){
 			if (deathTicks > 150 && deathTicks % 5 == 0)
 			{
 				i = 500;
@@ -416,35 +416,35 @@ public class EntitySacthoth extends EntityMob implements IAntiEntity, ICoraliumE
 				{
 					j = EntityXPOrb.getXPSplit(i);
 					i -= j;
-					worldObj.spawnEntityInWorld(new EntityXPOrb(worldObj, posX, posY, posZ, j));
+					world.spawnEntity(new EntityXPOrb(world, posX, posY, posZ, j));
 					if(deathTicks == 100 || deathTicks == 120 || deathTicks == 140 || deathTicks == 160 || deathTicks == 180){
-						worldObj.spawnEntityInWorld(new EntityItem(worldObj, posX + posneg(3), posY + rand.nextInt(3), posZ + posneg(3), new ItemStack(ACItems.shadow_fragment, 4)));
-						worldObj.spawnEntityInWorld(new EntityItem(worldObj, posX + posneg(3), posY + rand.nextInt(3), posZ + posneg(3), new ItemStack(ACItems.shadow_shard, 2)));
-						worldObj.spawnEntityInWorld(new EntityItem(worldObj, posX + posneg(3), posY + rand.nextInt(3), posZ + posneg(3), new ItemStack(ACItems.shadow_gem)));
-						worldObj.spawnEntityInWorld(new EntityItem(worldObj, posX + posneg(3), posY + rand.nextInt(3), posZ + posneg(3), new ItemStack(ACItems.shard_of_oblivion)));
+						world.spawnEntity(new EntityItem(world, posX + posneg(3), posY + rand.nextInt(3), posZ + posneg(3), new ItemStack(ACItems.shadow_fragment, 4)));
+						world.spawnEntity(new EntityItem(world, posX + posneg(3), posY + rand.nextInt(3), posZ + posneg(3), new ItemStack(ACItems.shadow_shard, 2)));
+						world.spawnEntity(new EntityItem(world, posX + posneg(3), posY + rand.nextInt(3), posZ + posneg(3), new ItemStack(ACItems.shadow_gem)));
+						world.spawnEntity(new EntityItem(world, posX + posneg(3), posY + rand.nextInt(3), posZ + posneg(3), new ItemStack(ACItems.shard_of_oblivion)));
 					}
 				}
 			}
 			if(deathTicks >= 100 && deathTicks <= 200){
 				if(deathTicks <= 110){
-					EntityShadowCreature shadowCreature = new EntityShadowCreature(worldObj);
+					EntityShadowCreature shadowCreature = new EntityShadowCreature(world);
 					shadowCreature.copyLocationAndAnglesFrom(this);
-					worldObj.spawnEntityInWorld(shadowCreature);
+					world.spawnEntity(shadowCreature);
 				}
 				if(deathTicks >= 160 && deathTicks <= 165){
-					EntityShadowMonster shadowMonster = new EntityShadowMonster(worldObj);
+					EntityShadowMonster shadowMonster = new EntityShadowMonster(world);
 					shadowMonster.copyLocationAndAnglesFrom(this);
-					worldObj.spawnEntityInWorld(shadowMonster);
+					world.spawnEntity(shadowMonster);
 				}
 				if(deathTicks == 200){
-					EntityShadowBeast shadowBeast = new EntityShadowBeast(worldObj);
+					EntityShadowBeast shadowBeast = new EntityShadowBeast(world);
 					shadowBeast.copyLocationAndAnglesFrom(this);
-					worldObj.spawnEntityInWorld(shadowBeast);
+					world.spawnEntity(shadowBeast);
 				}
 			}
-			if(deathTicks == 200 && !worldObj.isRemote){
+			if(deathTicks == 200 && !world.isRemote){
 				setDead();
-				worldObj.spawnEntityInWorld(new EntityItem(worldObj, posX, posY, posZ, new ItemStack(ACItems.sacthoths_soul_harvesting_blade)));
+				world.spawnEntity(new EntityItem(world, posX, posY, posZ, new ItemStack(ACItems.sacthoths_soul_harvesting_blade)));
 			}
 		}
 	}
@@ -465,16 +465,16 @@ public class EntitySacthoth extends EntityMob implements IAntiEntity, ICoraliumE
 	{
 		for (int i = 0; i < 2; ++i)
 			if(ACConfig.particleEntity)
-				worldObj.spawnParticle(EnumParticleTypes.SMOKE_LARGE, posX + (rand.nextDouble() - 0.5D) * width, posY + rand.nextDouble() * height, posZ + (rand.nextDouble() - 0.5D) * width, 0.0D, 0.0D, 0.0D);
+				world.spawnParticle(EnumParticleTypes.SMOKE_LARGE, posX + (rand.nextDouble() - 0.5D) * width, posY + rand.nextDouble() * height, posZ + (rand.nextDouble() - 0.5D) * width, 0.0D, 0.0D, 0.0D);
 
-		List list = worldObj.getEntitiesWithinAABBExcludingEntity(this, getEntityBoundingBox().expand(30.0D, 30.0D, 30.0D));
+		List list = world.getEntitiesWithinAABBExcludingEntity(this, getEntityBoundingBox().expand(30.0D, 30.0D, 30.0D));
 		if (list != null)
 			for (int k2 = 0; k2 < list.size(); k2++) {
 				Entity entity = (Entity)list.get(k2);
 				if (entity instanceof EntityPlayer && !entity.isDead && deathTicks == 0 && !((EntityPlayer)entity).capabilities.isCreativeMode)
 					((EntityPlayer)entity).addPotionEffect(new PotionEffect(MobEffects.BLINDNESS, 40));
 			}
-		EntityPlayer player = worldObj.getClosestPlayerToEntity(this, 160D);
+		EntityPlayer player = world.getClosestPlayerToEntity(this, 160D);
 		if(player != null && player.getDistanceToEntity(this) >= 50D && !player.capabilities.isCreativeMode){
 			if(player.posX - posX > 50)
 				teleportTo(player.posX + 30, player.posY, player.posZ);
@@ -515,11 +515,11 @@ public class EntitySacthoth extends EntityMob implements IAntiEntity, ICoraliumE
 	{
 		par1EntityLivingData = super.onInitialSpawn(difficulty, par1EntityLivingData);
 
-		if(worldObj.isDaytime())
-			worldObj.setWorldTime(14000L);
+		if(world.isDaytime())
+			world.setWorldTime(14000L);
 
 		IAttributeInstance attribute = getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE);
-		Calendar calendar = worldObj.getCurrentDate();
+		Calendar calendar = world.getCurrentDate();
 
 		attribute.removeModifier(attackDamageBoost);
 

@@ -65,14 +65,14 @@ public class RenderAntiBat extends RenderLiving
 		super.renderLivingAt(par1EntityBat, par2, par4, par6);
 	}
 
-	protected void rotateCorpse(EntityAntiBat par1EntityBat, float par2, float par3, float par4)
+	protected void applyRotations(EntityAntiBat par1EntityBat, float par2, float par3, float par4)
 	{
 		if (!par1EntityBat.getIsBatHanging())
 			GL11.glTranslatef(0.0F, MathHelper.cos(par2 * 0.3F) * 0.1F, 0.0F);
 		else
 			GL11.glTranslatef(0.0F, -0.1F, 0.0F);
 
-		super.rotateCorpse(par1EntityBat, par2, par3, par4);
+		super.applyRotations(par1EntityBat, par2, par3, par4);
 	}
 
 	@Override
@@ -82,9 +82,9 @@ public class RenderAntiBat extends RenderLiving
 	}
 
 	@Override
-	protected void rotateCorpse(EntityLivingBase par1EntityLivingBase, float par2, float par3, float par4)
+	protected void applyRotations(EntityLivingBase par1EntityLivingBase, float par2, float par3, float par4)
 	{
-		this.rotateCorpse((EntityAntiBat)par1EntityLivingBase, par2, par3, par4);
+		this.applyRotations((EntityAntiBat)par1EntityLivingBase, par2, par3, par4);
 	}
 
 	@Override

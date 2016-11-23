@@ -16,25 +16,27 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
-import net.minecraft.block.BlockDirectional;
+import net.minecraft.block.BlockButton;
 import net.minecraft.block.BlockDoor;
 import net.minecraft.block.BlockLadder;
 import net.minecraft.block.BlockStairs;
+import net.minecraft.block.BlockTorch;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityMobSpawner;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.structure.MapGenStructureIO;
 import net.minecraft.world.gen.structure.StructureBoundingBox;
 import net.minecraft.world.gen.structure.StructureComponent;
+import net.minecraft.world.gen.structure.template.TemplateManager;
 
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.common.blocks.BlockACBrick.EnumBrickType;
-import com.shinoow.abyssalcraft.common.structures.StructureComponentModded;
 import com.shinoow.abyssalcraft.init.BlockHandler;
 import com.shinoow.abyssalcraft.lib.ACLoot;
 
@@ -262,9 +264,9 @@ public class StructureAbyStrongholdPieces
 		}
 
 		@Override
-		protected void readStructureFromNBT(NBTTagCompound par1NBTTagCompound)
+		protected void readStructureFromNBT(NBTTagCompound par1NBTTagCompound,  TemplateManager p_143011_2_)
 		{
-			super.readStructureFromNBT(par1NBTTagCompound);
+			super.readStructureFromNBT(par1NBTTagCompound, p_143011_2_);
 			field_75024_a = par1NBTTagCompound.getBoolean("Source");
 		}
 
@@ -354,9 +356,9 @@ public class StructureAbyStrongholdPieces
 		}
 
 		@Override
-		protected void readStructureFromNBT(NBTTagCompound par1NBTTagCompound)
+		protected void readStructureFromNBT(NBTTagCompound par1NBTTagCompound,  TemplateManager p_143011_2_)
 		{
-			super.readStructureFromNBT(par1NBTTagCompound);
+			super.readStructureFromNBT(par1NBTTagCompound, p_143011_2_);
 			expandsX = par1NBTTagCompound.getBoolean("Left");
 			expandsZ = par1NBTTagCompound.getBoolean("Right");
 		}
@@ -432,9 +434,9 @@ public class StructureAbyStrongholdPieces
 		}
 
 		@Override
-		protected void readStructureFromNBT(NBTTagCompound par1NBTTagCompound)
+		protected void readStructureFromNBT(NBTTagCompound par1NBTTagCompound,  TemplateManager p_143011_2_)
 		{
-			super.readStructureFromNBT(par1NBTTagCompound);
+			super.readStructureFromNBT(par1NBTTagCompound, p_143011_2_);
 			hasSpawner = par1NBTTagCompound.getBoolean("Mob");
 		}
 
@@ -560,7 +562,7 @@ public class StructureAbyStrongholdPieces
 					TileEntity tileentity = par1World.getTileEntity(blockpos);
 
 					if (tileentity instanceof TileEntityMobSpawner)
-						((TileEntityMobSpawner) tileentity).getSpawnerBaseLogic().setEntityName("abyssalcraft.abyssalzombie");
+						((TileEntityMobSpawner) tileentity).getSpawnerBaseLogic().setEntityId(new ResourceLocation("abyssalcraft","abyssalzombie"));
 				}
 			}
 
@@ -589,9 +591,9 @@ public class StructureAbyStrongholdPieces
 		}
 
 		@Override
-		protected void readStructureFromNBT(NBTTagCompound par1NBTTagCompound)
+		protected void readStructureFromNBT(NBTTagCompound par1NBTTagCompound,  TemplateManager p_143011_2_)
 		{
-			super.readStructureFromNBT(par1NBTTagCompound);
+			super.readStructureFromNBT(par1NBTTagCompound, p_143011_2_);
 			hasMadeChest = par1NBTTagCompound.getBoolean("Chest");
 		}
 
@@ -670,9 +672,9 @@ public class StructureAbyStrongholdPieces
 		}
 
 		@Override
-		protected void readStructureFromNBT(NBTTagCompound par1NBTTagCompound)
+		protected void readStructureFromNBT(NBTTagCompound par1NBTTagCompound,  TemplateManager p_143011_2_)
 		{
-			super.readStructureFromNBT(par1NBTTagCompound);
+			super.readStructureFromNBT(par1NBTTagCompound, p_143011_2_);
 			roomType = par1NBTTagCompound.getInteger("Type");
 		}
 
@@ -721,10 +723,10 @@ public class StructureAbyStrongholdPieces
 					setBlockState(par1World, ACBlocks.abyssal_stone_brick.getDefaultState(), 5, 1, 5, par3StructureBoundingBox);
 					setBlockState(par1World, ACBlocks.abyssal_stone_brick.getDefaultState(), 5, 2, 5, par3StructureBoundingBox);
 					setBlockState(par1World, ACBlocks.abyssal_stone_brick.getDefaultState(), 5, 3, 5, par3StructureBoundingBox);
-					setBlockState(par1World, Blocks.TORCH.getDefaultState(), 4, 3, 5, par3StructureBoundingBox);
-					setBlockState(par1World, Blocks.TORCH.getDefaultState(), 6, 3, 5, par3StructureBoundingBox);
-					setBlockState(par1World, Blocks.TORCH.getDefaultState(), 5, 3, 4, par3StructureBoundingBox);
-					setBlockState(par1World, Blocks.TORCH.getDefaultState(), 5, 3, 6, par3StructureBoundingBox);
+					setBlockState(par1World, Blocks.TORCH.getDefaultState().withProperty(BlockTorch.FACING, EnumFacing.WEST), 4, 3, 5, par3StructureBoundingBox);
+					setBlockState(par1World, Blocks.TORCH.getDefaultState().withProperty(BlockTorch.FACING, EnumFacing.EAST), 6, 3, 5, par3StructureBoundingBox);
+					setBlockState(par1World, Blocks.TORCH.getDefaultState().withProperty(BlockTorch.FACING, EnumFacing.SOUTH), 5, 3, 4, par3StructureBoundingBox);
+					setBlockState(par1World, Blocks.TORCH.getDefaultState().withProperty(BlockTorch.FACING, EnumFacing.NORTH), 5, 3, 6, par3StructureBoundingBox);
 					setBlockState(par1World, ACBlocks.abyssal_stone_brick_slab.getDefaultState(), 4, 1, 4, par3StructureBoundingBox);
 					setBlockState(par1World, ACBlocks.abyssal_stone_brick_slab.getDefaultState(), 4, 1, 5, par3StructureBoundingBox);
 					setBlockState(par1World, ACBlocks.abyssal_stone_brick_slab.getDefaultState(), 4, 1, 6, par3StructureBoundingBox);
@@ -886,11 +888,11 @@ public class StructureAbyStrongholdPieces
 			super(0, par2Random, par3, par4);
 		}
 
-		@Override
-		public BlockPos getBoundingBoxCenter()
-		{
-			return strongholdPortalRoom != null ? strongholdPortalRoom.getBoundingBoxCenter() : super.getBoundingBoxCenter();
-		}
+//		@Override
+//		public BlockPos getBoundingBoxCenter()
+//		{
+//			return strongholdPortalRoom != null ? strongholdPortalRoom.getBoundingBoxCenter() : super.getBoundingBoxCenter();
+//		}
 	}
 
 	public static class Prison extends StructureAbyStrongholdPieces.Stronghold
@@ -1080,7 +1082,7 @@ public class StructureAbyStrongholdPieces
 		}
 	}
 
-	public abstract static class Stronghold extends StructureComponentModded
+	public abstract static class Stronghold extends StructureComponent
 	{
 		protected StructureAbyStrongholdPieces.Stronghold.Door field_143013_d;
 		public Stronghold()
@@ -1101,7 +1103,7 @@ public class StructureAbyStrongholdPieces
 		}
 
 		@Override
-		protected void readStructureFromNBT(NBTTagCompound par1NBTTagCompound)
+		protected void readStructureFromNBT(NBTTagCompound par1NBTTagCompound, TemplateManager p_143011_2_)
 		{
 			field_143013_d = StructureAbyStrongholdPieces.Stronghold.Door.valueOf(par1NBTTagCompound.getString("EntryDoor"));
 		}
@@ -1149,8 +1151,8 @@ public class StructureAbyStrongholdPieces
 				setBlockState(par1World, ACBlocks.abyssal_stone_brick.getDefaultState(), par5 + 2, par6, par7, par3StructureBoundingBox);
 				setBlockState(par1World, Blocks.IRON_DOOR.getDefaultState(), par5 + 1, par6, par7, par3StructureBoundingBox);
 				setBlockState(par1World, Blocks.IRON_DOOR.getDefaultState().withProperty(BlockDoor.HALF, BlockDoor.EnumDoorHalf.UPPER), par5 + 1, par6 + 1, par7, par3StructureBoundingBox);
-				setBlockState(par1World, ACBlocks.abyssal_stone_button.getDefaultState().withProperty(BlockDirectional.FACING, EnumFacing.NORTH), par5 + 2, par6 + 1, par7 + 1, par3StructureBoundingBox);
-				setBlockState(par1World, ACBlocks.abyssal_stone_button.getDefaultState().withProperty(BlockDirectional.FACING, EnumFacing.NORTH), par5 + 2, par6 + 1, par7 - 1, par3StructureBoundingBox);
+				setBlockState(par1World, ACBlocks.abyssal_stone_button.getDefaultState().withProperty(BlockButton.FACING, EnumFacing.NORTH), par5 + 2, par6 + 1, par7 + 1, par3StructureBoundingBox);
+				setBlockState(par1World, ACBlocks.abyssal_stone_button.getDefaultState().withProperty(BlockButton.FACING, EnumFacing.SOUTH), par5 + 2, par6 + 1, par7 - 1, par3StructureBoundingBox);
 			}
 
 		}
@@ -1282,9 +1284,9 @@ public class StructureAbyStrongholdPieces
 		}
 
 		@Override
-		protected void readStructureFromNBT(NBTTagCompound par1NBTTagCompound)
+		protected void readStructureFromNBT(NBTTagCompound par1NBTTagCompound,  TemplateManager p_143011_2_)
 		{
-			super.readStructureFromNBT(par1NBTTagCompound);
+			super.readStructureFromNBT(par1NBTTagCompound, p_143011_2_);
 			field_74996_b = par1NBTTagCompound.getBoolean("leftLow");
 			field_74997_c = par1NBTTagCompound.getBoolean("leftHigh");
 			field_74995_d = par1NBTTagCompound.getBoolean("rightLow");
@@ -1397,9 +1399,9 @@ public class StructureAbyStrongholdPieces
 		}
 
 		@Override
-		protected void readStructureFromNBT(NBTTagCompound par1NBTTagCompound)
+		protected void readStructureFromNBT(NBTTagCompound par1NBTTagCompound,  TemplateManager p_143011_2_)
 		{
-			super.readStructureFromNBT(par1NBTTagCompound);
+			super.readStructureFromNBT(par1NBTTagCompound, p_143011_2_);
 			field_74993_a = par1NBTTagCompound.getInteger("Steps");
 		}
 

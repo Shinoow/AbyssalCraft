@@ -16,16 +16,16 @@ import net.minecraft.client.renderer.VertexBuffer;
 import net.minecraft.entity.Entity;
 import net.minecraft.world.World;
 
-public class ACParticleFX extends Particle {
+public class CorBloodParticleFX extends Particle {
 
 	float reddustParticleScale;
 
-	public ACParticleFX(World par1World, double par2, double par4, double par6, float par8, float par9, float par10)
+	public CorBloodParticleFX(World par1World, double par2, double par4, double par6, float par8, float par9, float par10)
 	{
 		this(par1World, par2, par4, par6, 1.0F, par8, par9, par10);
 	}
 
-	public ACParticleFX(World par1World, double par2, double par4, double par6, float par8, float par9, float par10, float par11)
+	public CorBloodParticleFX(World par1World, double par2, double par4, double par6, float par8, float par9, float par10, float par11)
 	{
 		super(par1World, par2, par4, par6, 0.0D, 0.0D, 0.0D);
 		motionX *= 0.10000000149011612D;
@@ -69,7 +69,7 @@ public class ACParticleFX extends Particle {
 			setExpired();
 
 		setParticleTextureIndex(7 - particleAge * 8 / particleMaxAge);
-		moveEntity(motionX, motionY, motionZ);
+		move(motionX, motionY, motionZ);
 
 		if (posY == prevPosY)
 		{

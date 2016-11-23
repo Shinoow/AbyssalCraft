@@ -23,7 +23,7 @@ import com.shinoow.abyssalcraft.common.entity.EntityChagarothFist;
 @SideOnly(Side.CLIENT)
 public class RenderChagarothFist extends RenderLiving<EntityChagarothFist> {
 
-	private static final ResourceLocation mobTexture = new ResourceLocation("abyssalcraft:textures/model/ChagarothFist.png");
+	private static final ResourceLocation mobTexture = new ResourceLocation("abyssalcraft:textures/model/chagarothfist.png");
 
 	public RenderChagarothFist(RenderManager manager)
 	{

@@ -14,8 +14,6 @@ package com.shinoow.abyssalcraft;
 import java.util.ArrayList;
 import java.util.List;
 
-import net.minecraft.stats.Achievement;
-import net.minecraft.world.DimensionType;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fml.common.*;
 import net.minecraftforge.fml.common.Mod.*;
@@ -25,7 +23,7 @@ import com.shinoow.abyssalcraft.common.CommonProxy;
 import com.shinoow.abyssalcraft.common.handlers.IMCHandler;
 import com.shinoow.abyssalcraft.init.*;
 
-@Mod(modid = AbyssalCraft.modid, name = AbyssalCraft.name, version = AbyssalCraft.version,dependencies = "required-after:Forge@[forgeversion,);after:JEI@[3.9.0,)", useMetadata = false, guiFactory = "com.shinoow.abyssalcraft.client.config.ACGuiFactory", acceptedMinecraftVersions = "[1.10.2]", updateJSON = "https://raw.githubusercontent.com/Shinoow/AbyssalCraft/master/version.json")
+@Mod(modid = AbyssalCraft.modid, name = AbyssalCraft.name, version = AbyssalCraft.version,dependencies = "required-after:Forge@[forgeversion,);after:JEI@[4.0.1,)", useMetadata = false, guiFactory = "com.shinoow.abyssalcraft.client.config.ACGuiFactory", acceptedMinecraftVersions = "[1.11]", updateJSON = "https://raw.githubusercontent.com/Shinoow/AbyssalCraft/master/version.json")
 public class AbyssalCraft {
 
 	public static final String version = "ac_version";
@@ -86,24 +84,4 @@ public class AbyssalCraft {
 	public void handleIMC(FMLInterModComms.IMCEvent event){
 		IMCHandler.handleIMC(event);
 	}
-
-	//TODO remove all of this around AC 1.9.4 or 1.9.5
-	@Deprecated
-	public static DimensionType THE_ABYSSAL_WASTELAND, THE_DREADLANDS, OMOTHOL, THE_DARK_REALM;
-	@Deprecated
-	public static int evilAnimalSpawnWeight, endAbyssalZombieSpawnWeight, portalCooldown, demonAnimalSpawnWeight, shoggothLairSpawnRate;
-	@Deprecated
-	public static boolean generateCoraliumOre, generateNitreOre, generateAbyssalniteOre, generateAbyssalCoraliumOre, generateDreadlandsAbyssalniteOre,
-	generateDreadedAbyssalniteOre, generateAbyssalIronOre, generateAbyssalGoldOre, generateAbyssalDiamondOre, generateAbyssalNitreOre,
-	generateAbyssalTinOre, generateAbyssalCopperOre, generatePearlescentCoraliumOre, generateLiquifiedCoraliumOre, generateDarklandsStructures,
-	generateShoggothLairs, generateAbyssalWastelandPillars, generateAbyssalWastelandRuins, generateAntimatterLake, generateCoraliumLake,
-	generateDreadlandsStalagmite,shoggothOoze, oozeLeaves, oozeGrass, oozeGround, oozeSand, oozeRock, oozeCloth, oozeWood, oozeGourd, oozeIron,
-	oozeClay, oozeExpire, shouldSpread, shouldInfect, breakLogic, destroyOcean, demonAnimalFire, darkness, particleBlock, particleEntity,
-	hardcoreMode, evilAnimalCreatureType, antiItemDisintegration, smeltingRecipes, keepLoaded1, keepLoaded2, keepLoaded3, keepLoaded4;
-	@Deprecated
-	public static Achievement mineAby, killghoul, enterabyss, killdragon, summonAsorah, killAsorah, enterdreadlands, killdreadguard,
-	ghoulhead, petehead, wilsonhead, orangehead, mineCorgem, mineCor, findPSDL, GK1, GK2, GK3, summonChagaroth, killChagaroth,
-	enterOmothol, enterDarkRealm, killJzahar, killOmotholelite, locateJzahar, necro, necrou1, necrou2, necrou3, abyssaln, ritual,
-	ritualSummon, ritualCreate, shadowGems, mineAbyOres, mineDread, dreadium, eth, makeTransmutator, makeCrystallizer, makeMaterializer,
-	makeCrystalBag, makeEngraver, ritualBreed, ritualPotion, ritualPotionAoE, ritualInfusion;
 }

@@ -155,9 +155,9 @@ public class EntityAntiGhoul extends EntityMob implements IAntiEntity {
 	@Override
 	protected void collideWithEntity(Entity par1Entity)
 	{
-		if(!worldObj.isRemote && par1Entity instanceof EntityDepthsGhoul){
-			boolean flag = worldObj.getGameRules().getBoolean("mobGriefing");
-			worldObj.createExplosion(this, posX, posY, posZ, 5, flag);
+		if(!world.isRemote && par1Entity instanceof EntityDepthsGhoul){
+			boolean flag = world.getGameRules().getBoolean("mobGriefing");
+			world.createExplosion(this, posX, posY, posZ, 5, flag);
 			setDead();
 		}
 		else par1Entity.applyEntityCollision(this);
@@ -176,11 +176,11 @@ public class EntityAntiGhoul extends EntityMob implements IAntiEntity {
 		super.onDeath(par1DamageSource);
 
 		if(par1DamageSource == AbyssalCraftAPI.coralium || par1DamageSource == AbyssalCraftAPI.dread){
-			EntityOmotholGhoul entity = new EntityOmotholGhoul(worldObj);
+			EntityOmotholGhoul entity = new EntityOmotholGhoul(world);
 			entity.copyLocationAndAnglesFrom(this);
-			worldObj.removeEntity(this);
-			entity.onInitialSpawn(worldObj.getDifficultyForLocation(new BlockPos(posX, posY, posZ)), (IEntityLivingData)null);
-			worldObj.spawnEntityInWorld(entity);
+			world.removeEntity(this);
+			entity.onInitialSpawn(world.getDifficultyForLocation(new BlockPos(posX, posY, posZ)), (IEntityLivingData)null);
+			world.spawnEntity(entity);
 		}
 	}
 
@@ -197,7 +197,7 @@ public class EntityAntiGhoul extends EntityMob implements IAntiEntity {
 
 		if (getItemStackFromSlot(EntityEquipmentSlot.HEAD) == null)
 		{
-			Calendar calendar = worldObj.getCurrentDate();
+			Calendar calendar = world.getCurrentDate();
 
 			if (calendar.get(2) + 1 == 10 && calendar.get(5) == 31 && rand.nextFloat() < 0.25F)
 			{
@@ -207,7 +207,7 @@ public class EntityAntiGhoul extends EntityMob implements IAntiEntity {
 		}
 
 		IAttributeInstance attribute = getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE);
-		Calendar calendar = worldObj.getCurrentDate();
+		Calendar calendar = world.getCurrentDate();
 
 		attribute.removeModifier(attackDamageBoost);
 

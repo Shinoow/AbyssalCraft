@@ -91,7 +91,7 @@ public class EntityGreaterDreadSpawn extends EntityMob implements IDreadEntity, 
 	}
 
 	@Override
-	protected PathNavigate getNewNavigator(World worldIn)
+	protected PathNavigate createNavigator(World worldIn)
 	{
 		return new PathNavigateClimber(this, worldIn);
 	}
@@ -123,7 +123,7 @@ public class EntityGreaterDreadSpawn extends EntityMob implements IDreadEntity, 
 	{
 		super.onUpdate();
 
-		if (!worldObj.isRemote)
+		if (!world.isRemote)
 			setBesideClimbableBlock(isCollidedHorizontally);
 	}
 
@@ -214,43 +214,43 @@ public class EntityGreaterDreadSpawn extends EntityMob implements IDreadEntity, 
 		super.onLivingUpdate();
 
 		if(getAttackTarget() != null && getDistanceToEntity(getAttackTarget()) >= 5)
-			if(worldObj.rand.nextInt(1000) == 0)
+			if(world.rand.nextInt(1000) == 0)
 				attackEntityWithRangedAttack(getAttackTarget(), 4);
 
 
-		List<EntityGreaterDreadSpawn> greaterspawns = worldObj.getEntitiesWithinAABB(getClass(), getEntityBoundingBox().expand(5D, 5D, 5D));
+		List<EntityGreaterDreadSpawn> greaterspawns = world.getEntitiesWithinAABB(getClass(), getEntityBoundingBox().expand(5D, 5D, 5D));
 
-		if(!worldObj.isRemote)
+		if(!world.isRemote)
 			if(!greaterspawns.isEmpty())
 				if(greaterspawns.size() >= 5 && !hasMerged){
 					hasMerged = true;
 					for(int i = 0; i < 5; i++)
-						worldObj.removeEntity(greaterspawns.get(i));
-					EntityLesserDreadbeast lesserdreadbeast = new EntityLesserDreadbeast(worldObj);
+						world.removeEntity(greaterspawns.get(i));
+					EntityLesserDreadbeast lesserdreadbeast = new EntityLesserDreadbeast(world);
 					lesserdreadbeast.copyLocationAndAnglesFrom(this);
-					worldObj.removeEntity(this);
-					worldObj.spawnEntityInWorld(lesserdreadbeast);
+					world.removeEntity(this);
+					world.spawnEntity(lesserdreadbeast);
 					hasMerged = false;
 				}
 
-		if(worldObj.rand.nextInt(2000) == 0)
-			if(!worldObj.isRemote){
-				EntityDreadSpawn spawn = new EntityDreadSpawn(worldObj);
+		if(world.rand.nextInt(2000) == 0)
+			if(!world.isRemote){
+				EntityDreadSpawn spawn = new EntityDreadSpawn(world);
 				spawn.copyLocationAndAnglesFrom(this);
-				worldObj.spawnEntityInWorld(spawn);
+				world.spawnEntity(spawn);
 			}
 	}
 
 	@Override
 	public void onDeath(DamageSource par1DamageSource) {
 
-		if(!worldObj.isRemote){
-			EntityDreadSpawn spawn1 = new EntityDreadSpawn(worldObj);
-			EntityDreadSpawn spawn2 = new EntityDreadSpawn(worldObj);
+		if(!world.isRemote){
+			EntityDreadSpawn spawn1 = new EntityDreadSpawn(world);
+			EntityDreadSpawn spawn2 = new EntityDreadSpawn(world);
 			spawn1.copyLocationAndAnglesFrom(this);
 			spawn2.copyLocationAndAnglesFrom(this);
-			worldObj.spawnEntityInWorld(spawn1);
-			worldObj.spawnEntityInWorld(spawn2);
+			world.spawnEntity(spawn1);
+			world.spawnEntity(spawn2);
 		}
 		super.onDeath(par1DamageSource);
 	}
@@ -258,13 +258,13 @@ public class EntityGreaterDreadSpawn extends EntityMob implements IDreadEntity, 
 	@Override
 	public void attackEntityWithRangedAttack(EntityLivingBase p_82196_1_,
 			float p_82196_2_) {
-		EntityDreadSlug entitydreadslug = new EntityDreadSlug(worldObj, this);
+		EntityDreadSlug entitydreadslug = new EntityDreadSlug(world, this);
 		double d0 = p_82196_1_.posX - posX;
 		double d1 = p_82196_1_.posY + p_82196_1_.getEyeHeight() - 1.100000023841858D - entitydreadslug.posY;
 		double d2 = p_82196_1_.posZ - posZ;
-		float f1 = MathHelper.sqrt_double(d0 * d0 + d2 * d2) * 0.2F;
+		float f1 = MathHelper.sqrt(d0 * d0 + d2 * d2) * 0.2F;
 		entitydreadslug.setThrowableHeading(d0, d1 + f1, d2, 1.6F, 12.0F);
 		playSound(SoundEvents.ENTITY_SKELETON_SHOOT, 1.0F, 1.0F / (getRNG().nextFloat() * 0.4F + 0.8F));
-		worldObj.spawnEntityInWorld(entitydreadslug);
+		world.spawnEntity(entitydreadslug);
 	}
 }

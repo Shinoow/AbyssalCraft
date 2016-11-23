@@ -73,20 +73,20 @@ public class EntityDemonAnimal extends EntityMob implements IDreadEntity {
 	{
 		super.onLivingUpdate();
 
-		if(!worldObj.isRemote && canBurn){
-			int i = MathHelper.floor_double(posX);
-			int j = MathHelper.floor_double(posY);
-			int k = MathHelper.floor_double(posZ);
+		if(!world.isRemote && canBurn){
+			int i = MathHelper.floor(posX);
+			int j = MathHelper.floor(posY);
+			int k = MathHelper.floor(posZ);
 
 			for (int l = 0; l < 4; ++l)
 			{
-				i = MathHelper.floor_double(posX + (l % 2 * 2 - 1) * 0.25F);
-				j = MathHelper.floor_double(posY);
-				k = MathHelper.floor_double(posZ + (l / 2 % 2 * 2 - 1) * 0.25F);
+				i = MathHelper.floor(posX + (l % 2 * 2 - 1) * 0.25F);
+				j = MathHelper.floor(posY);
+				k = MathHelper.floor(posZ + (l / 2 % 2 * 2 - 1) * 0.25F);
 				BlockPos pos = new BlockPos(i, j, k);
 
-				if (worldObj.getBlockState(pos).getMaterial() == Material.AIR && Blocks.FIRE.canPlaceBlockAt(worldObj, pos))
-					worldObj.setBlockState(pos, ACBlocks.mimic_fire.getDefaultState());
+				if (world.getBlockState(pos).getMaterial() == Material.AIR && Blocks.FIRE.canPlaceBlockAt(world, pos))
+					world.setBlockState(pos, ACBlocks.mimic_fire.getDefaultState());
 			}
 		}
 	}
@@ -113,8 +113,8 @@ public class EntityDemonAnimal extends EntityMob implements IDreadEntity {
 	{
 		Object data = super.onInitialSpawn(difficulty, par1EntityLivingData);
 
-		if(worldObj.provider.getDimension() == 0 && ACConfig.demonAnimalFire == true && rand.nextInt(3) == 0
-				|| worldObj.provider.getDimension() == -1 && rand.nextBoolean())
+		if(world.provider.getDimension() == 0 && ACConfig.demonAnimalFire == true && rand.nextInt(3) == 0
+				|| world.provider.getDimension() == -1 && rand.nextBoolean())
 			canBurn = true;
 
 		return (IEntityLivingData)data;

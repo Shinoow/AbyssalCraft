@@ -67,9 +67,9 @@ public class DisruptionMessage extends AbstractClientMessage<DisruptionMessage> 
 	@Override
 	public void process(EntityPlayer player, Side side) {
 		BlockPos pos = new BlockPos(x, y, z);
-		List<EntityPlayer> players = player.worldObj.getEntitiesWithinAABB(EntityPlayer.class, new AxisAlignedBB(pos, pos.add(1, 1, 1)).expand(16, 16, 16));
+		List<EntityPlayer> players = player.world.getEntitiesWithinAABB(EntityPlayer.class, new AxisAlignedBB(pos, pos.add(1, 1, 1)).expand(16, 16, 16));
 		DisruptionEntry disruption = DisruptionHandler.instance().disruptionFromName(name);
-		if(!MinecraftForge.EVENT_BUS.post(new DisruptionEvent(deity, player.worldObj, pos, players, disruption)))
-			disruption.disrupt(player.worldObj, pos, players);
+		if(!MinecraftForge.EVENT_BUS.post(new DisruptionEvent(deity, player.world, pos, players, disruption)))
+			disruption.disrupt(player.world, pos, players);
 	}
 }

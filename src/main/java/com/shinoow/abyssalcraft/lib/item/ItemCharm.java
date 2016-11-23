@@ -40,11 +40,6 @@ public class ItemCharm extends ItemMetadata implements IAmplifierCharm {
 
 	private DeityType deity;
 
-	@Deprecated
-	public ItemCharm(String name, boolean moreIcons, DeityType deity){
-		this(name, deity);
-	}
-
 	public ItemCharm(String name, DeityType deity) {
 		super(name, "empty", "range", "duration", "power");
 		this.deity = deity;
@@ -81,12 +76,13 @@ public class ItemCharm extends ItemMetadata implements IAmplifierCharm {
 	}
 
 	@Override
-	public EnumActionResult onItemUse(ItemStack stack, EntityPlayer player, World world, BlockPos pos, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ){
+	public EnumActionResult onItemUse(EntityPlayer player, World world, BlockPos pos, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ){
+		ItemStack stack = player.getHeldItem(hand);
 		TileEntity tile = world.getTileEntity(pos);
 		if(tile instanceof IEnergyManipulator && !((IEnergyManipulator) tile).isActive()){
 			((IEnergyManipulator) tile).setActive(getAmplifier(stack), getDeity(stack));
 			if(!world.isRemote)
-				stack.stackSize--;
+				stack.shrink(1);
 			world.playSound(player, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, SoundEvents.ENTITY_ITEM_PICKUP, SoundCategory.PLAYERS, 0.5F, world.rand.nextFloat() - world.rand.nextFloat() * 0.2F + 1);
 			return EnumActionResult.SUCCESS;
 		}

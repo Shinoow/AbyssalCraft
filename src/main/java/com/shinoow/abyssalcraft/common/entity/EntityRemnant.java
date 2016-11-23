@@ -182,20 +182,20 @@ public class EntityRemnant extends EntityMob implements IMerchant, IAntiEntity, 
 	}
 
 	@Override
-	public boolean processInteract(EntityPlayer par1EntityPlayer, EnumHand hand, ItemStack stack)
+	public boolean processInteract(EntityPlayer par1EntityPlayer, EnumHand hand)
 	{
 		if(isEntityAlive() && !par1EntityPlayer.isSneaking() && !isAngry())
 			if(EntityUtil.hasNecronomicon(par1EntityPlayer)){
 				if(!isTrading()){
-					if(!worldObj.isRemote){
+					if(!world.isRemote){
 						setCustomer(par1EntityPlayer);
 						par1EntityPlayer.displayVillagerTradeGui(this);
 						return true;
 					}
-				} else par1EntityPlayer.addChatMessage(new TextComponentString(getName()+": "+I18n.translateToLocal("message.remnant.busy")));
+				} else par1EntityPlayer.sendMessage(new TextComponentString(getName()+": "+I18n.translateToLocal("message.remnant.busy")));
 			} else insult(par1EntityPlayer);
 
-		return super.processInteract(par1EntityPlayer, hand, stack);
+		return super.processInteract(par1EntityPlayer, hand);
 	}
 
 	@Override
@@ -210,19 +210,19 @@ public class EntityRemnant extends EntityMob implements IMerchant, IAntiEntity, 
 	 * @param player The target to insult
 	 */
 	private void insult(EntityPlayer player){
-		int insultNum = worldObj.rand.nextInt(3);
+		int insultNum = world.rand.nextInt(3);
 		String insult = getName()+": "+String.format(getInsult(insultNum), player.getName());
 		String translated = getName()+": "+String.format(I18n.translateToLocal("message.remnant.insult."+insultNum), player.getName());
 
-		if(worldObj.isRemote){
-			List<EntityPlayer> players = worldObj.getEntitiesWithinAABB(EntityPlayer.class, player.getEntityBoundingBox().expand(16D, 16D, 16D));
+		if(world.isRemote){
+			List<EntityPlayer> players = world.getEntitiesWithinAABB(EntityPlayer.class, player.getEntityBoundingBox().expand(16D, 16D, 16D));
 			if(players != null){
 				Iterator<EntityPlayer> i = players.iterator();
 				while(i.hasNext()){
 					EntityPlayer player1 = i.next();
 					if(EntityUtil.hasNecronomicon(player1))
-						player1.addChatMessage(new TextComponentString(translated));
-					else player1.addChatMessage(new TextComponentString(insult));
+						player1.sendMessage(new TextComponentString(translated));
+					else player1.sendMessage(new TextComponentString(insult));
 				}
 			}
 		}
@@ -267,7 +267,7 @@ public class EntityRemnant extends EntityMob implements IMerchant, IAntiEntity, 
 	 */
 	public void enrage(boolean call){
 		if(call){
-			List<EntityRemnant> friends = worldObj.getEntitiesWithinAABB(getClass(), getEntityBoundingBox().expand(16D, 16D, 16D));
+			List<EntityRemnant> friends = world.getEntitiesWithinAABB(getClass(), getEntityBoundingBox().expand(16D, 16D, 16D));
 			if(friends != null){
 				Iterator<EntityRemnant> iter = friends.iterator();
 				while(iter.hasNext())
@@ -451,7 +451,7 @@ public class EntityRemnant extends EntityMob implements IMerchant, IAntiEntity, 
 	private void addDefaultEquipmentAndRecipies(int par1)
 	{
 		if (tradingList != null)
-			field_82191_bN = MathHelper.sqrt_float(tradingList.size()) * 0.2F;
+			field_82191_bN = MathHelper.sqrt(tradingList.size()) * 0.2F;
 		else
 			field_82191_bN = 0.0F;
 
@@ -500,7 +500,7 @@ public class EntityRemnant extends EntityMob implements IMerchant, IAntiEntity, 
 				if (rand.nextFloat() < adjustProbability(0.07F))
 				{
 					Enchantment enchantment = Enchantment.REGISTRY.getRandomObject(rand);
-					int i1 = MathHelper.getRandomIntegerInRange(rand, enchantment.getMinLevel(), enchantment.getMaxLevel());
+					int i1 = MathHelper.getInt(rand, enchantment.getMinLevel(), enchantment.getMaxLevel());
 					ItemStack itemstack = Items.ENCHANTED_BOOK.getEnchantedItemStack(new EnchantmentData(enchantment, i1));
 					k = 2 + rand.nextInt(5 + i1 * 10) + 3 * i1;
 					list.add(new MerchantRecipe(new ItemStack(Items.BOOK), new ItemStack(ACItems.elder_engraved_coin, k), itemstack));
@@ -639,6 +639,18 @@ public class EntityRemnant extends EntityMob implements IMerchant, IAntiEntity, 
 	public void setRecipes(MerchantRecipeList var1) {}
 
 	@Override
+	public World getWorld()
+	{
+		return world;
+	}
+
+	@Override
+	public BlockPos getPos()
+	{
+		return new BlockPos(this);
+	}
+
+	@Override
 	public void useRecipe(MerchantRecipe var1) {
 		var1.incrementToolUses();
 		if(var1.getItemToSell().getItem() instanceof ItemTool ||
@@ -660,7 +672,7 @@ public class EntityRemnant extends EntityMob implements IMerchant, IAntiEntity, 
 		}
 
 		if (APIUtils.isCoin(var1.getItemToBuy()))
-			wealth += var1.getItemToBuy().stackSize;
+			wealth += var1.getItemToBuy().getCount();
 	}
 
 	/****************** START OF VANILLA CODE FROM 1.7.10 ******************/
@@ -692,8 +704,8 @@ public class EntityRemnant extends EntityMob implements IMerchant, IAntiEntity, 
 
 	private boolean hasSameItemsAs(MerchantRecipe r1, MerchantRecipe r2)
 	{
-		return hasSameIDsAs(r1, r2) && (r1.getItemToBuy().stackSize < r2.getItemToBuy().stackSize ||
-				r1.getSecondItemToBuy() != null && r1.getSecondItemToBuy().stackSize < r2.getSecondItemToBuy().stackSize);
+		return hasSameIDsAs(r1, r2) && (r1.getItemToBuy().getCount() < r2.getItemToBuy().getCount() ||
+				r1.getSecondItemToBuy() != null && r1.getSecondItemToBuy().getCount() < r2.getSecondItemToBuy().getCount());
 	}
 
 	/****************** END OF VANILLA CODE FROM 1.7.10 ******************/
@@ -749,7 +761,7 @@ public class EntityRemnant extends EntityMob implements IMerchant, IAntiEntity, 
 	@Override
 	public void verifySellingItem(ItemStack par1ItemStack)
 	{
-		if (!worldObj.isRemote && livingSoundTime > -getTalkInterval() + 20)
+		if (!world.isRemote && livingSoundTime > -getTalkInterval() + 20)
 		{
 			livingSoundTime = -getTalkInterval();
 
@@ -780,11 +792,11 @@ public class EntityRemnant extends EntityMob implements IMerchant, IAntiEntity, 
 	@Override
 	public IEntityLivingData onInitialSpawn(DifficultyInstance difficulty, IEntityLivingData data){
 		data = super.onInitialSpawn(difficulty, data);
-		applyRandomTrade(worldObj.rand);
+		applyRandomTrade(world.rand);
 
 		if (getItemStackFromSlot(EntityEquipmentSlot.HEAD) == null)
 		{
-			Calendar calendar = worldObj.getCurrentDate();
+			Calendar calendar = world.getCurrentDate();
 
 			if (calendar.get(2) + 1 == 10 && calendar.get(5) == 31 && rand.nextFloat() < 0.25F)
 			{

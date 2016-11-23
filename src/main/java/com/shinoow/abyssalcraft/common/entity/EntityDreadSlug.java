@@ -49,7 +49,7 @@ public class EntityDreadSlug extends EntityThrowable {
 			mop.entityHit.attackEntityFrom(DamageSource.causeThrownDamage(this, getThrower()), b0);
 		}
 
-		if (!worldObj.isRemote)
+		if (!world.isRemote)
 			setDead();
 	}
 

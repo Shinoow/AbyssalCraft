@@ -57,11 +57,11 @@ public class MapGenAbyStronghold extends MapGenStructure
 
 		for (Entry var3 : par1Map.entrySet())
 			if (((String)var3.getKey()).equals("distance"))
-				field_82671_h = MathHelper.parseDoubleWithDefaultAndMax((String)var3.getValue(), field_82671_h, 1.0D);
+				field_82671_h = MathHelper.getDouble((String)var3.getValue(), field_82671_h, 1.0D);
 			else if (((String)var3.getKey()).equals("count"))
-				structureCoords = new ChunkPos[MathHelper.parseIntWithDefaultAndMax((String)var3.getValue(), structureCoords.length, 1)];
+				structureCoords = new ChunkPos[MathHelper.getInt((String)var3.getValue(), structureCoords.length, 1)];
 			else if (((String)var3.getKey()).equals("spread"))
-				field_82672_i = MathHelper.parseIntWithDefaultAndMax((String)var3.getValue(), field_82672_i, 1);
+				field_82672_i = MathHelper.getInt((String)var3.getValue(), field_82672_i, 1);
 	}
 
 
@@ -72,7 +72,7 @@ public class MapGenAbyStronghold extends MapGenStructure
 	}
 
 	@Override
-	public BlockPos getClosestStrongholdPos(World worldIn, BlockPos pos)
+	public BlockPos getClosestStrongholdPos(World worldIn, BlockPos pos, boolean bool)
 	{
 		if (!ranBiomeCheck)
 		{
@@ -130,7 +130,7 @@ public class MapGenAbyStronghold extends MapGenStructure
 
 	private void checkBiomes()
 	{
-		initializeStructureData(worldObj);
+		initializeStructureData(world);
 		int i = 0;
 
 		for (StructureStart structurestart : structureMap.values())
@@ -138,7 +138,7 @@ public class MapGenAbyStronghold extends MapGenStructure
 				structureCoords[i++] = new ChunkPos(structurestart.getChunkPosX(), structurestart.getChunkPosZ());
 
 		Random random = new Random();
-		random.setSeed(worldObj.getSeed());
+		random.setSeed(world.getSeed());
 		double d1 = random.nextDouble() * Math.PI * 2.0D;
 		int j = 0;
 		int k = 0;
@@ -150,7 +150,7 @@ public class MapGenAbyStronghold extends MapGenStructure
 				double d0 = 4.0D * field_82671_h + field_82671_h * j * 6.0D + (random.nextDouble() - 0.5D) * field_82671_h * 2.5D;
 				int j1 = (int)Math.round(Math.cos(d1) * d0);
 				int k1 = (int)Math.round(Math.sin(d1) * d0);
-				BlockPos blockpos = worldObj.getBiomeProvider().findBiomePosition((j1 << 4) + 8, (k1 << 4) + 8, 112, allowedBiomes, random);
+				BlockPos blockpos = world.getBiomeProvider().findBiomePosition((j1 << 4) + 8, (k1 << 4) + 8, 112, allowedBiomes, random);
 
 				if (blockpos != null)
 				{
@@ -179,31 +179,31 @@ public class MapGenAbyStronghold extends MapGenStructure
 	 * Returns a list of other locations at which the structure generation has been run, or null if not relevant to this
 	 * structure generator.
 	 */
-	@Override
-	@SuppressWarnings({ "rawtypes", "unchecked" })
-	protected List getCoordList()
-	{
-		ArrayList var1 = new ArrayList();
-		ChunkPos[] var2 = structureCoords;
-		int var3 = var2.length;
-
-		for (int var4 = 0; var4 < var3; ++var4)
-		{
-			ChunkPos var5 = var2[var4];
-
-			if (var5 != null)
-				var1.add(var5.getCenterBlock(64));
-		}
-
-		return var1;
-	}
+	//	@Override
+	//	@SuppressWarnings({ "rawtypes", "unchecked" })
+	//	protected List getCoordList()
+	//	{
+	//		ArrayList var1 = new ArrayList();
+	//		ChunkPos[] var2 = structureCoords;
+	//		int var3 = var2.length;
+	//
+	//		for (int var4 = 0; var4 < var3; ++var4)
+	//		{
+	//			ChunkPos var5 = var2[var4];
+	//
+	//			if (var5 != null)
+	//				var1.add(var5.getCenterBlock(64));
+	//		}
+	//
+	//		return var1;
+	//	}
 
 	@Override
 	protected StructureStart getStructureStart(int par1, int par2)
 	{
 		MapGenAbyStronghold.Start start;
 
-		for (start = new MapGenAbyStronghold.Start(worldObj, rand, par1, par2); start.getComponents().isEmpty() || ((StructureAbyStrongholdPieces.Stairs2)start.getComponents().get(0)).strongholdPortalRoom == null; start = new MapGenAbyStronghold.Start(worldObj, rand, par1, par2))
+		for (start = new MapGenAbyStronghold.Start(world, rand, par1, par2); start.getComponents().isEmpty() || ((StructureAbyStrongholdPieces.Stairs2)start.getComponents().get(0)).strongholdPortalRoom == null; start = new MapGenAbyStronghold.Start(world, rand, par1, par2))
 			;
 
 		return start;

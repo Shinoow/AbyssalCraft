@@ -182,13 +182,13 @@ public class EntityEvilSheep extends EntityMob {
 	@Override
 	public void onLivingUpdate(){
 
-		if (worldObj.isRemote)
+		if (world.isRemote)
 			sheepTimer = Math.max(0, sheepTimer - 1);
 
 		if(ticksExisted % 20 == 0)
 			if(playerUUID != null && playerName != null && playerName.length() > 0)
-				if(worldObj.isRemote){}
-				else PacketDispatcher.sendToDimension(new EvilSheepMessage(playerUUID, playerName, getEntityId()), worldObj.provider.getDimension());
+				if(world.isRemote){}
+				else PacketDispatcher.sendToDimension(new EvilSheepMessage(playerUUID, playerName, getEntityId()), world.provider.getDimension());
 		super.onLivingUpdate();
 	}
 
@@ -197,14 +197,14 @@ public class EntityEvilSheep extends EntityMob {
 	{
 		super.onDeath(par1DamageSource);
 
-		if(!worldObj.isRemote)
+		if(!world.isRemote)
 			if(!(par1DamageSource.getEntity() instanceof EntityLesserShoggoth))
 			{
-				EntityDemonSheep demonsheep = new EntityDemonSheep(worldObj);
+				EntityDemonSheep demonsheep = new EntityDemonSheep(world);
 				demonsheep.copyLocationAndAnglesFrom(this);
-				worldObj.removeEntity(this);
-				demonsheep.onInitialSpawn(worldObj.getDifficultyForLocation(new BlockPos(posX, posY, posZ)), (IEntityLivingData)null);
-				worldObj.spawnEntityInWorld(demonsheep);
+				world.removeEntity(this);
+				demonsheep.onInitialSpawn(world.getDifficultyForLocation(new BlockPos(posX, posY, posZ)), (IEntityLivingData)null);
+				world.spawnEntity(demonsheep);
 			}
 	}
 

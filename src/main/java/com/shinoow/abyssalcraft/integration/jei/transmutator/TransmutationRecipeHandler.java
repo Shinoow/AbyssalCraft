@@ -26,12 +26,6 @@ public class TransmutationRecipeHandler implements IRecipeHandler<TransmutationR
 		return TransmutationRecipe.class;
 	}
 
-	@Nonnull
-	@Override
-	public String getRecipeCategoryUid() {
-		return AbyssalCraftRecipeCategoryUid.TRANSMUTATION;
-	}
-
 	@Override
 	@Nonnull
 	public IRecipeWrapper getRecipeWrapper(@Nonnull TransmutationRecipe recipe) {

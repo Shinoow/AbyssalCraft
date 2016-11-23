@@ -23,7 +23,7 @@ import com.shinoow.abyssalcraft.common.entity.EntityChagarothSpawn;
 @SideOnly(Side.CLIENT)
 public class RenderChagarothSpawn extends RenderLiving<EntityChagarothSpawn> {
 
-	private static final ResourceLocation mobTexture = new ResourceLocation("abyssalcraft:textures/model/elite/Dread_guard.png");
+	private static final ResourceLocation mobTexture = new ResourceLocation("abyssalcraft:textures/model/elite/dread_guard.png");
 
 	public RenderChagarothSpawn(RenderManager manager)
 	{

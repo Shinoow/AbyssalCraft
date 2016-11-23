@@ -46,6 +46,7 @@ import com.shinoow.abyssalcraft.api.entity.IDreadEntity;
 import com.shinoow.abyssalcraft.api.item.ACItems;
 import com.shinoow.abyssalcraft.lib.ACConfig;
 import com.shinoow.abyssalcraft.lib.ACLoot;
+import com.shinoow.abyssalcraft.lib.ACSounds;
 
 public class EntityDreadSpawn extends EntityMob implements IDreadEntity
 {
@@ -80,7 +81,7 @@ public class EntityDreadSpawn extends EntityMob implements IDreadEntity
 	}
 
 	@Override
-	protected PathNavigate getNewNavigator(World worldIn)
+	protected PathNavigate createNavigator(World worldIn)
 	{
 		return new PathNavigateClimber(this, worldIn);
 	}
@@ -112,26 +113,26 @@ public class EntityDreadSpawn extends EntityMob implements IDreadEntity
 	{
 		super.onUpdate();
 
-		if (!worldObj.isRemote)
+		if (!world.isRemote)
 			setBesideClimbableBlock(isCollidedHorizontally);
 	}
 
 	@Override
 	protected SoundEvent getAmbientSound()
 	{
-		return SoundEvents.ENTITY_ZOMBIE_AMBIENT;
+		return ACSounds.dread_spawn_ambient;
 	}
 
 	@Override
 	protected SoundEvent getHurtSound()
 	{
-		return SoundEvents.ENTITY_ZOMBIE_HURT;
+		return ACSounds.dread_spawn_hurt;
 	}
 
 	@Override
 	protected SoundEvent getDeathSound()
 	{
-		return SoundEvents.ENTITY_ZOMBIE_DEATH;
+		return ACSounds.dread_spawn_death;
 	}
 
 	@Override
@@ -196,18 +197,18 @@ public class EntityDreadSpawn extends EntityMob implements IDreadEntity
 	{
 		super.onLivingUpdate();
 
-		List<EntityDreadSpawn> dreadspawns = worldObj.getEntitiesWithinAABB(getClass(), getEntityBoundingBox().expand(2D, 2D, 2D));
+		List<EntityDreadSpawn> dreadspawns = world.getEntitiesWithinAABB(getClass(), getEntityBoundingBox().expand(2D, 2D, 2D));
 
-		if(!worldObj.isRemote)
+		if(!world.isRemote)
 			if(!dreadspawns.isEmpty())
 				if(dreadspawns.size() >= 5 && !hasMerged){
 					hasMerged = true;
 					for(int i = 0; i < 5; i++)
-						worldObj.removeEntity(dreadspawns.get(i));
-					EntityGreaterDreadSpawn greaterspawn = new EntityGreaterDreadSpawn(worldObj);
+						world.removeEntity(dreadspawns.get(i));
+					EntityGreaterDreadSpawn greaterspawn = new EntityGreaterDreadSpawn(world);
 					greaterspawn.copyLocationAndAnglesFrom(this);
-					worldObj.removeEntity(this);
-					worldObj.spawnEntityInWorld(greaterspawn);
+					world.removeEntity(this);
+					world.spawnEntity(greaterspawn);
 					hasMerged = false;
 				}
 	}

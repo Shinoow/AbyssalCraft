@@ -26,12 +26,6 @@ public class EngravingRecipeHandler implements IRecipeHandler<EngravingRecipeWra
 		return EngravingRecipeWrapper.class;
 	}
 
-	@Nonnull
-	@Override
-	public String getRecipeCategoryUid() {
-		return AbyssalCraftRecipeCategoryUid.ENGRAVING;
-	}
-
 	@Override
 	@Nonnull
 	public IRecipeWrapper getRecipeWrapper(@Nonnull EngravingRecipeWrapper recipe) {

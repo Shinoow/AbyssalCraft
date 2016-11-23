@@ -120,9 +120,9 @@ public class EntityAntiPig extends EntityAnimal implements IAntiEntity {
 	@Override
 	protected void collideWithEntity(Entity par1Entity)
 	{
-		if(!worldObj.isRemote && par1Entity instanceof EntityPig){
-			boolean flag = worldObj.getGameRules().getBoolean("mobGriefing");
-			worldObj.createExplosion(this, posX, posY, posZ, 5, flag);
+		if(!world.isRemote && par1Entity instanceof EntityPig){
+			boolean flag = world.getGameRules().getBoolean("mobGriefing");
+			world.createExplosion(this, posX, posY, posZ, 5, flag);
 			setDead();
 		}
 		else par1Entity.applyEntityCollision(this);
@@ -131,7 +131,7 @@ public class EntityAntiPig extends EntityAnimal implements IAntiEntity {
 	@Override
 	public EntityAntiPig createChild(EntityAgeable par1EntityAgeable)
 	{
-		return new EntityAntiPig(worldObj);
+		return new EntityAntiPig(world);
 	}
 
 	@Override

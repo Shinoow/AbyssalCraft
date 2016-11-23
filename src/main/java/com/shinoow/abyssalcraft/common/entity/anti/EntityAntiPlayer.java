@@ -103,13 +103,13 @@ public class EntityAntiPlayer extends EntityMob implements IAntiEntity {
 			if (rand.nextBoolean())
 				return;
 
-			EntityAntiPlayer antiPlayer = new EntityAntiPlayer(worldObj);
+			EntityAntiPlayer antiPlayer = new EntityAntiPlayer(world);
 			antiPlayer.copyLocationAndAnglesFrom(par1EntityLivingBase);
-			worldObj.removeEntity(par1EntityLivingBase);
-			antiPlayer.onInitialSpawn(worldObj.getDifficultyForLocation(new BlockPos(posX, posY, posZ)), (IEntityLivingData)null);
+			world.removeEntity(par1EntityLivingBase);
+			antiPlayer.onInitialSpawn(world.getDifficultyForLocation(new BlockPos(posX, posY, posZ)), (IEntityLivingData)null);
 
-			worldObj.spawnEntityInWorld(antiPlayer);
-			worldObj.playEvent((EntityPlayer)null, 1016, new BlockPos(posX, posY, posZ), 0);
+			world.spawnEntity(antiPlayer);
+			world.playEvent((EntityPlayer)null, 1016, new BlockPos(posX, posY, posZ), 0);
 
 		}
 	}
@@ -117,9 +117,9 @@ public class EntityAntiPlayer extends EntityMob implements IAntiEntity {
 	@Override
 	protected void collideWithEntity(Entity par1Entity)
 	{
-		if(!worldObj.isRemote && par1Entity instanceof EntityPlayer && ACConfig.hardcoreMode){
-			boolean flag = worldObj.getGameRules().getBoolean("mobGriefing");
-			worldObj.createExplosion(this, posX, posY, posZ, 5, flag);
+		if(!world.isRemote && par1Entity instanceof EntityPlayer && ACConfig.hardcoreMode){
+			boolean flag = world.getGameRules().getBoolean("mobGriefing");
+			world.createExplosion(this, posX, posY, posZ, 5, flag);
 			setDead();
 		}
 		else par1Entity.applyEntityCollision(this);
@@ -137,7 +137,7 @@ public class EntityAntiPlayer extends EntityMob implements IAntiEntity {
 
 		if (getItemStackFromSlot(EntityEquipmentSlot.HEAD) == null)
 		{
-			Calendar calendar = worldObj.getCurrentDate();
+			Calendar calendar = world.getCurrentDate();
 
 			if (calendar.get(2) + 1 == 10 && calendar.get(5) == 31 && rand.nextFloat() < 0.25F)
 			{

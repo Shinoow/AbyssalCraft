@@ -87,14 +87,14 @@ public class MaterializerRecipes {
 			for(ItemStack recipeItem : recipe){
 				ItemStack invItem = inventory[i];
 				if(areStacksEqual(invItem, recipeItem))
-					if(invItem.stackSize >= recipeItem.stackSize){
-						invItem.stackSize -= recipeItem.stackSize;
-						if(invItem.stackSize == 0) inventory[i] = null;
+					if(invItem.getCount() >= recipeItem.getCount()){
+						invItem.shrink(recipeItem.getCount());
+						if(invItem.isEmpty()) inventory[i] = ItemStack.EMPTY;
 						recipe.remove(recipeItem);
 						break;
 					} else {
-						recipeItem.stackSize -= invItem.stackSize;
-						inventory[i] = null;
+						recipeItem.shrink(invItem.getCount());
+						inventory[i] = ItemStack.EMPTY;
 						break;
 					}
 			}
@@ -134,7 +134,7 @@ public class MaterializerRecipes {
 				NBTTagCompound item = items.getCompoundTagAt(i);
 				//				byte slot = item.getByte("Slot");
 
-				inventory[i] = ItemStack.loadItemStackFromNBT(item);
+				inventory[i] = new ItemStack(item);
 			}
 		}
 
@@ -160,7 +160,7 @@ public class MaterializerRecipes {
 		NBTTagList items = new NBTTagList();
 
 		for(int i = 0; i < inventory.length; i++)
-			if(inventory[i] != null){
+			if(!inventory[i].isEmpty()){
 				NBTTagCompound item = new NBTTagCompound();
 				item.setInteger("Slot", i);
 				inventory[i].writeToNBT(item);
@@ -170,12 +170,12 @@ public class MaterializerRecipes {
 
 		tag.setTag("ItemInventory", items);
 
-		bag.readFromNBT(tag);
+		bag.deserializeNBT(tag);
 	}
 
 	private boolean areStacksEqual(ItemStack par1ItemStack, ItemStack par2ItemStack)
 	{
-		if(par1ItemStack == null || par2ItemStack == null) return false;
+		if(par1ItemStack.isEmpty() || par2ItemStack.isEmpty()) return false;
 		return par2ItemStack.getItem() == par1ItemStack.getItem() && (par2ItemStack.getItemDamage() == OreDictionary.WILDCARD_VALUE || par2ItemStack.getItemDamage() == par1ItemStack.getItemDamage());
 	}
 
@@ -193,14 +193,14 @@ public class MaterializerRecipes {
 			for(ItemStack invItem : inventory)
 				for(ItemStack recipeItem : recipe)
 					if(areStacksEqual(invItem, recipeItem))
-						if(invItem.stackSize >= recipeItem.stackSize){
-							invItem.stackSize -= recipeItem.stackSize;
-							if(invItem.stackSize == 0) invItem = null;
+						if(invItem.getCount() >= recipeItem.getCount()){
+							invItem.shrink(recipeItem.getCount());
+							if(invItem.isEmpty()) invItem = ItemStack.EMPTY;
 							recipe.remove(recipeItem);
 							break;
 						} else {
-							recipeItem.stackSize -= invItem.stackSize;
-							invItem = null;
+							recipeItem.shrink(invItem.getCount());
+							invItem = ItemStack.EMPTY;
 							break;
 						}
 

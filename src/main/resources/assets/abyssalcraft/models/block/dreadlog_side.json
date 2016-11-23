@@ -1,7 +1,0 @@
-{
-	"parent": "block/column_side",
-	"textures": {
-		"side": "abyssalcraft:blocks/drtside",
-        "end": "abyssalcraft:blocks/drttop"
-	}
-}

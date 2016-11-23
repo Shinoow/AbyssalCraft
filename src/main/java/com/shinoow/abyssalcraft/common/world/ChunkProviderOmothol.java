@@ -172,7 +172,7 @@ public class ChunkProviderOmothol implements IChunkGenerator
 	{
 		rand.setSeed(x * 341873128712L + z * 132897987541L);
 		ChunkPrimer primer = new ChunkPrimer();
-		biomesForGeneration = worldObj.getBiomeProvider().loadBlockGeneratorData(biomesForGeneration, x * 16, z * 16, 16, 16);
+		biomesForGeneration = worldObj.getBiomeProvider().getBiomes(biomesForGeneration, x * 16, z * 16, 16, 16);
 		setBlocksInChunk(x, z, primer);
 		replaceBlocksForBiome(primer);
 
@@ -284,7 +284,7 @@ public class ChunkProviderOmothol implements IChunkGenerator
 
 		int k = x * 16;
 		int l = z * 16;
-		Biome Biome = worldObj.getBiomeGenForCoords(new BlockPos(k + 16, 0, l + 16));
+		Biome Biome = worldObj.getBiome(new BlockPos(k + 16, 0, l + 16));
 
 		ChunkPos chunkcoordintpair = new ChunkPos(x, z);
 
@@ -307,12 +307,12 @@ public class ChunkProviderOmothol implements IChunkGenerator
 	@SuppressWarnings("rawtypes")
 	public List getPossibleCreatures(EnumCreatureType par1EnumCreatureType, BlockPos pos)
 	{
-		Biome Biome = worldObj.getBiomeGenForCoords(pos);
+		Biome Biome = worldObj.getBiome(pos);
 		return Biome == null ? null : Biome.getSpawnableList(par1EnumCreatureType);
 	}
 
 	@Override
-	public BlockPos getStrongholdGen(World par1World, String par2String, BlockPos pos)
+	public BlockPos getStrongholdGen(World par1World, String par2String, BlockPos pos, boolean bool)
 	{
 		return null;
 	}

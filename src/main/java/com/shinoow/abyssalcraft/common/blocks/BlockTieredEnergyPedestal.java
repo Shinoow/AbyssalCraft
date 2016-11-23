@@ -35,6 +35,7 @@ import net.minecraft.util.EnumBlockRenderType;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.IStringSerializable;
+import net.minecraft.util.NonNullList;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
@@ -68,7 +69,7 @@ public class BlockTieredEnergyPedestal extends BlockContainer {
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
-	public void getSubBlocks(Item par1, CreativeTabs par2CreativeTabs, List par3List) {
+	public void getSubBlocks(Item par1, CreativeTabs par2CreativeTabs, NonNullList<ItemStack> par3List) {
 		par3List.add(new ItemStack(par1, 1, 0));
 		par3List.add(new ItemStack(par1, 1, 1));
 		par3List.add(new ItemStack(par1, 1, 2));
@@ -98,19 +99,20 @@ public class BlockTieredEnergyPedestal extends BlockContainer {
 	}
 
 	@Override
-	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, ItemStack heldItem, EnumFacing side, float hitX, float hitY, float hitZ) {
+	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ) {
+		ItemStack heldItem = player.getHeldItem(hand);
 		TileEntity tile = world.getTileEntity(pos);
 		if(tile != null && tile instanceof TileEntityTieredEnergyPedestal)
-			if(((TileEntityTieredEnergyPedestal)tile).getItem() != null){
+			if(!((TileEntityTieredEnergyPedestal)tile).getItem().isEmpty()){
 				player.inventory.addItemStackToInventory(((TileEntityTieredEnergyPedestal)tile).getItem());
-				((TileEntityTieredEnergyPedestal)tile).setItem(null);
+				((TileEntityTieredEnergyPedestal)tile).setItem(ItemStack.EMPTY);
 				world.playSound(pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, SoundEvents.ENTITY_ITEM_PICKUP, SoundCategory.PLAYERS, 0.5F, world.rand.nextFloat() - world.rand.nextFloat() * 0.2F + 1, false);
 				return true;
-			} else if(heldItem != null){
+			} else if(!heldItem.isEmpty()){
 				ItemStack newItem = heldItem.copy();
-				newItem.stackSize = 1;
+				newItem.setCount(1);
 				((TileEntityTieredEnergyPedestal)tile).setItem(newItem);
-				heldItem.stackSize--;
+				heldItem.shrink(1);
 				world.playSound(pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, SoundEvents.ENTITY_ITEM_PICKUP, SoundCategory.PLAYERS, 0.5F, world.rand.nextFloat() - world.rand.nextFloat() * 0.2F + 1, false);
 				return true;
 			}
@@ -129,7 +131,7 @@ public class BlockTieredEnergyPedestal extends BlockContainer {
 		TileEntityTieredEnergyPedestal pedestal = (TileEntityTieredEnergyPedestal) world.getTileEntity(pos);
 
 		if(pedestal != null){
-			if(pedestal.getItem() != null){
+			if(!pedestal.getItem().isEmpty()){
 				float f = rand.nextFloat() * 0.8F + 0.1F;
 				float f1 = rand.nextFloat() * 0.8F + 0.1F;
 				float f2 = rand.nextFloat() * 0.8F + 0.1F;
@@ -139,7 +141,7 @@ public class BlockTieredEnergyPedestal extends BlockContainer {
 				item.motionX = (float)rand.nextGaussian() * f3;
 				item.motionY = (float)rand.nextGaussian() * f3 + 0.2F;
 				item.motionZ = (float)rand.nextGaussian() * f3;
-				world.spawnEntityInWorld(item);
+				world.spawnEntity(item);
 			}
 			ItemStack stack = new ItemStack(getItemDropped(state, rand, 1), 1, damageDropped(state));
 			if(!stack.hasTagCompound())
@@ -154,7 +156,7 @@ public class BlockTieredEnergyPedestal extends BlockContainer {
 			item.motionX = (float)rand.nextGaussian() * f3;
 			item.motionY = (float)rand.nextGaussian() * f3 + 0.2F;
 			item.motionZ = (float)rand.nextGaussian() * f3;
-			world.spawnEntityInWorld(item);
+			world.spawnEntity(item);
 		}
 
 		super.breakBlock(world, pos, state);

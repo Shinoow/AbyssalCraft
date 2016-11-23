@@ -13,6 +13,7 @@ package com.shinoow.abyssalcraft.common.entity;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.MoverType;
 import net.minecraft.init.Blocks;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumParticleTypes;
@@ -77,7 +78,7 @@ public class EntityODBPrimed extends Entity {
 		prevPosY = posY;
 		prevPosZ = posZ;
 		motionY -= 0.03999999910593033D;
-		moveEntity(motionX, motionY, motionZ);
+		move(MoverType.SELF, motionX, motionY, motionZ);
 		motionX *= 0.9800000190734863D;
 		motionY *= 0.9800000190734863D;
 		motionZ *= 0.9800000190734863D;
@@ -98,13 +99,13 @@ public class EntityODBPrimed extends Entity {
 		} else{
 			handleWaterMovement();
 			if(ACConfig.particleEntity)
-				worldObj.spawnParticle(EnumParticleTypes.PORTAL, posX, posY + 0.5D, posZ, 1.0D, 0.0D, 0.0D);
+				world.spawnParticle(EnumParticleTypes.PORTAL, posX, posY + 0.5D, posZ, 1.0D, 0.0D, 0.0D);
 		}
 	}
 
 	private void explode()
 	{
-		if(!worldObj.isRemote){
+		if(!world.isRemote){
 			ACLogger.info("Unleashing hell shortly.");
 			Blocks.OBSIDIAN.setResistance(5.0F);
 			Blocks.LAVA.setResistance(5.0F);
@@ -114,16 +115,16 @@ public class EntityODBPrimed extends Entity {
 			ACBlocks.liquid_coralium.setResistance(50.0F);
 		}
 		float var0 = 30.0F;
-		ExplosionUtil.newODBExplosion(worldObj, this, posX, posY, posZ, var0, 128, false, true);
-		ExplosionUtil.newODBExplosion(worldObj, this, posX + 10, posY, posZ, var0, 128, false, true);
-		ExplosionUtil.newODBExplosion(worldObj, this, posX - 10, posY, posZ, var0, 128, false, true);
-		ExplosionUtil.newODBExplosion(worldObj, this, posX, posY, posZ + 10, var0, 128, false, true);
-		ExplosionUtil.newODBExplosion(worldObj, this, posX, posY, posZ - 10, var0, 128, false, true);
-		ExplosionUtil.newODBExplosion(worldObj, this, posX + 10, posY, posZ - 10, var0, 128, false, true);
-		ExplosionUtil.newODBExplosion(worldObj, this, posX - 10, posY, posZ + 10, var0, 128, false, true);
-		ExplosionUtil.newODBExplosion(worldObj, this, posX + 10, posY, posZ + 10, var0, 128, false, true);
-		ExplosionUtil.newODBExplosion(worldObj, this, posX - 10, posY, posZ - 10, var0, 128, false, true);
-		if(!worldObj.isRemote){
+		ExplosionUtil.newODBExplosion(world, this, posX, posY, posZ, var0, 128, false, true);
+		ExplosionUtil.newODBExplosion(world, this, posX + 10, posY, posZ, var0, 128, false, true);
+		ExplosionUtil.newODBExplosion(world, this, posX - 10, posY, posZ, var0, 128, false, true);
+		ExplosionUtil.newODBExplosion(world, this, posX, posY, posZ + 10, var0, 128, false, true);
+		ExplosionUtil.newODBExplosion(world, this, posX, posY, posZ - 10, var0, 128, false, true);
+		ExplosionUtil.newODBExplosion(world, this, posX + 10, posY, posZ - 10, var0, 128, false, true);
+		ExplosionUtil.newODBExplosion(world, this, posX - 10, posY, posZ + 10, var0, 128, false, true);
+		ExplosionUtil.newODBExplosion(world, this, posX + 10, posY, posZ + 10, var0, 128, false, true);
+		ExplosionUtil.newODBExplosion(world, this, posX - 10, posY, posZ - 10, var0, 128, false, true);
+		if(!world.isRemote){
 			Blocks.OBSIDIAN.setResistance(2000.0F);
 			Blocks.LAVA.setResistance(500.0F);
 			Blocks.FLOWING_LAVA.setResistance(500.0F);
@@ -137,16 +138,16 @@ public class EntityODBPrimed extends Entity {
 				for(z = 0; z < 9; z++)
 					for(x1 = 0; x1 < 9; x1++)
 						for(z1 = 0; z1 < 9; z1++){
-							worldObj.setBlockState(new BlockPos(posX + x, posY, posZ + z), Blocks.OBSIDIAN.getDefaultState());
-							worldObj.setBlockState(new BlockPos(posX - x1, posY, posZ - z1), Blocks.OBSIDIAN.getDefaultState());
-							worldObj.setBlockState(new BlockPos(posX + x, posY, posZ - z1), Blocks.OBSIDIAN.getDefaultState());
-							worldObj.setBlockState(new BlockPos(posX - x1, posY, posZ  + z), Blocks.OBSIDIAN.getDefaultState());
+							world.setBlockState(new BlockPos(posX + x, posY, posZ + z), Blocks.OBSIDIAN.getDefaultState());
+							world.setBlockState(new BlockPos(posX - x1, posY, posZ - z1), Blocks.OBSIDIAN.getDefaultState());
+							world.setBlockState(new BlockPos(posX + x, posY, posZ - z1), Blocks.OBSIDIAN.getDefaultState());
+							world.setBlockState(new BlockPos(posX - x1, posY, posZ  + z), Blocks.OBSIDIAN.getDefaultState());
 						}
-			EntitySacthoth sacthoth = new EntitySacthoth(worldObj);
+			EntitySacthoth sacthoth = new EntitySacthoth(world);
 			sacthoth.setPosition(posX, posY + 1, posZ);
-			sacthoth.onInitialSpawn(worldObj.getDifficultyForLocation(new BlockPos(posX, posY + 1, posZ)), null);
-			worldObj.spawnEntityInWorld(sacthoth);
-			SpecialTextUtil.SacthothGroup(worldObj, I18n.translateToLocal("message.sacthoth.spawn.1"));
+			sacthoth.onInitialSpawn(world.getDifficultyForLocation(new BlockPos(posX, posY + 1, posZ)), null);
+			world.spawnEntity(sacthoth);
+			SpecialTextUtil.SacthothGroup(world, I18n.translateToLocal("message.sacthoth.spawn.1"));
 		}
 	}
 

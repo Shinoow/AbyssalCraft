@@ -102,19 +102,20 @@ public class BlockSacrificialAltar extends BlockContainer {
 	}
 
 	@Override
-	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, ItemStack heldItem, EnumFacing side, float hitX, float hitY, float hitZ) {
+	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ) {
+		ItemStack heldItem = player.getHeldItem(hand);
 		TileEntity tile = world.getTileEntity(pos);
 		if(tile != null && tile instanceof TileEntitySacrificialAltar)
-			if(((TileEntitySacrificialAltar)tile).getItem() != null){
+			if(!((TileEntitySacrificialAltar)tile).getItem().isEmpty()){
 				player.inventory.addItemStackToInventory(((TileEntitySacrificialAltar)tile).getItem());
-				((TileEntitySacrificialAltar)tile).setItem(null);
+				((TileEntitySacrificialAltar)tile).setItem(ItemStack.EMPTY);
 				world.playSound(pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, SoundEvents.ENTITY_ITEM_PICKUP, SoundCategory.PLAYERS, 0.5F, world.rand.nextFloat() - world.rand.nextFloat() * 0.2F + 1, false);
 				return true;
-			} else if(heldItem != null){
+			} else if(!heldItem.isEmpty()){
 				ItemStack newItem = heldItem.copy();
-				newItem.stackSize = 1;
+				newItem.setCount(1);
 				((TileEntitySacrificialAltar)tile).setItem(newItem);
-				heldItem.stackSize--;
+				heldItem.shrink(1);
 				world.playSound(pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, SoundEvents.ENTITY_ITEM_PICKUP, SoundCategory.PLAYERS, 0.5F, world.rand.nextFloat() - world.rand.nextFloat() * 0.2F + 1, false);
 				return true;
 			}
@@ -133,7 +134,7 @@ public class BlockSacrificialAltar extends BlockContainer {
 		TileEntitySacrificialAltar altar = (TileEntitySacrificialAltar) world.getTileEntity(pos);
 
 		if(altar != null){
-			if(altar.getItem() != null){
+			if(!altar.getItem().isEmpty()){
 				float f = rand.nextFloat() * 0.8F + 0.1F;
 				float f1 = rand.nextFloat() * 0.8F + 0.1F;
 				float f2 = rand.nextFloat() * 0.8F + 0.1F;
@@ -143,7 +144,7 @@ public class BlockSacrificialAltar extends BlockContainer {
 				item.motionX = (float)rand.nextGaussian() * f3;
 				item.motionY = (float)rand.nextGaussian() * f3 + 0.2F;
 				item.motionZ = (float)rand.nextGaussian() * f3;
-				world.spawnEntityInWorld(item);
+				world.spawnEntity(item);
 			}
 			ItemStack stack = new ItemStack(getItemDropped(state, rand, 1), 1, damageDropped(state));
 			if(!stack.hasTagCompound())
@@ -162,7 +163,7 @@ public class BlockSacrificialAltar extends BlockContainer {
 			item.motionX = (float)rand.nextGaussian() * f3;
 			item.motionY = (float)rand.nextGaussian() * f3 + 0.2F;
 			item.motionZ = (float)rand.nextGaussian() * f3;
-			world.spawnEntityInWorld(item);
+			world.spawnEntity(item);
 		}
 
 		super.breakBlock(world, pos, state);

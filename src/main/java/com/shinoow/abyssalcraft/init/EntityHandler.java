@@ -14,11 +14,14 @@ package com.shinoow.abyssalcraft.init;
 import static com.shinoow.abyssalcraft.AbyssalCraft.instance;
 import static com.shinoow.abyssalcraft.lib.ACConfig.*;
 
+import java.util.Locale;
+
 import net.minecraft.entity.*;
 import net.minecraft.entity.passive.EntityAmbientCreature;
 import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.passive.EntityWaterMob;
 import net.minecraft.init.Biomes;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.BiomeDictionary;
 import net.minecraftforge.common.BiomeDictionary.Type;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
@@ -60,7 +63,7 @@ public class EntityHandler implements ILifeCycleHandler {
 			EntityRegistry.addSpawn(EntityAbyssalZombie.class, endAbyssalZombieSpawnWeight, 1, 3, EnumCreatureType.MONSTER, BiomeDictionary.getBiomesForType(Type.END));
 		EntityRegistry.removeSpawn(EntityAbyssalZombie.class, EnumCreatureType.MONSTER, Biomes.MUSHROOM_ISLAND_SHORE);
 
-		EntityRegistry.registerModEntity(EntityODBPrimed.class, "Primed ODB", 28, instance, 80, 3, true);
+		EntityRegistry.registerModEntity(new ResourceLocation("abyssalcraft", "primedodb"), EntityODBPrimed.class, "Primed ODB", 28, instance, 80, 3, true);
 
 		registerEntityWithEgg(EntityJzahar.class, "Jzahar", 29, 80, 3, true, 0x133133, 0x342122);
 
@@ -70,13 +73,13 @@ public class EntityHandler implements ILifeCycleHandler {
 
 		registerEntityWithEgg(EntityDreadguard.class, "dreadguard", 32, 80, 3, true, 0xE60000, 0xCC0000);
 
-		EntityRegistry.registerModEntity(EntityPSDLTracker.class, "PowerstoneTracker", 33, instance, 64, 10, true);
+		EntityRegistry.registerModEntity(new ResourceLocation("abyssalcraft", "powerstonetracker"), EntityPSDLTracker.class, "PowerstoneTracker", 33, instance, 64, 10, true);
 
 		registerEntityWithEgg(EntityDragonMinion.class, "dragonminion", 34, 80, 3, true, 0x433434, 0x344344);
 
 		registerEntityWithEgg(EntityDragonBoss.class, "dragonboss", 35, 80, 3, true, 0x476767, 0x768833);
 
-		EntityRegistry.registerModEntity(EntityODBcPrimed.class, "Primed ODB Core", 36, instance, 80, 3, true);
+		EntityRegistry.registerModEntity(new ResourceLocation("abyssalcraft", "primedodbcore"), EntityODBcPrimed.class, "Primed ODB Core", 36, instance, 80, 3, true);
 
 		registerEntityWithEgg(EntityShadowCreature.class, "shadowcreature", 37, 80, 3, true, 0, 0xFFFFFF);
 
@@ -128,7 +131,7 @@ public class EntityHandler implements ILifeCycleHandler {
 
 		registerEntityWithEgg(EntityOmotholGhoul.class, "omotholghoul", 60, 80, 3, true, 0x133133, 0x342122);
 
-		EntityRegistry.registerModEntity(EntityCoraliumArrow.class, "CoraliumArrow", 61, instance, 64, 10, true);
+		EntityRegistry.registerModEntity(new ResourceLocation("abyssalcraft", "coraliumarrow"), EntityCoraliumArrow.class, "CoraliumArrow", 61, instance, 64, 10, true);
 
 		registerEntityWithEgg(EntityGatekeeperMinion.class, "jzaharminion", 62, 80, 3, true, 0x133133, 0x342122);
 
@@ -136,7 +139,7 @@ public class EntityHandler implements ILifeCycleHandler {
 
 		registerEntityWithEgg(EntityLesserDreadbeast.class, "lesserdreadbeast", 64, 80, 3, true, 0xE60000, 0xCC0000);
 
-		EntityRegistry.registerModEntity(EntityDreadSlug.class, "DreadSlug", 65, instance, 64, 10, true);
+		EntityRegistry.registerModEntity(new ResourceLocation("abyssalcraft", "dreadslug"), EntityDreadSlug.class, "DreadSlug", 65, instance, 64, 10, true);
 
 		registerEntityWithEgg(EntityLesserShoggoth.class, "lessershoggoth", 66, 80, 3, true, 0x133133, 0x342122);
 		EntityRegistry.addSpawn(EntityLesserShoggoth.class, 3, 1, 1, EnumCreatureType.MONSTER, BiomeDictionary.getBiomesForType(Type.WATER));
@@ -170,7 +173,7 @@ public class EntityHandler implements ILifeCycleHandler {
 		if(demonAnimalSpawnWeight > 0)
 			EntityRegistry.addSpawn(EntityDemonChicken.class, demonAnimalSpawnWeight, 1, 3, EnumCreatureType.MONSTER, BiomeDictionary.getBiomesForType(Type.NETHER));
 
-		EntityRegistry.registerModEntity(EntityGatekeeperEssence.class, "GatekeeperEssence", 71, instance, 64, 10, true);
+		EntityRegistry.registerModEntity(new ResourceLocation("abyssalcraft", "gatekeeperessence"), EntityGatekeeperEssence.class, "GatekeeperEssence", 71, instance, 64, 10, true);
 
 		registerEntityWithEgg(EntityEvilSheep.class, "evilsheep", 72, 80, 3, true, 15198183, 16758197);
 		if(evilAnimalSpawnWeight > 0)
@@ -208,18 +211,18 @@ public class EntityHandler implements ILifeCycleHandler {
 					ACBiomes.purified_dreadlands, ACBiomes.dreadlands_mountains, ACBiomes.dreadlands_forest, ACBiomes.omothol, ACBiomes.dark_realm);
 	}
 
-	private static int getUniqueEntityId() {
-		do
-			startEntityId++;
-		while (EntityList.ID_TO_CLASS.containsKey(startEntityId));
-
-		return startEntityId;
-	}
+	//	private static int getUniqueEntityId() {
+	//		do
+	//			startEntityId++;
+	//		while (EntityList.ID_TO_CLASS.containsKey(startEntityId));
+	//
+	//		return startEntityId;
+	//	}
 
 	@SuppressWarnings("unchecked")
 	private static void registerEntityWithEgg(Class<? extends Entity> entity, String name, int modid, int trackingRange, int updateFrequency, boolean sendsVelocityUpdates, int primaryColor, int secondaryColor) {
-		int id = getUniqueEntityId();
-		EntityRegistry.registerModEntity(entity, name, modid, instance, trackingRange, updateFrequency, sendsVelocityUpdates, primaryColor, secondaryColor);
-		EntityList.ID_TO_CLASS.put(id, entity);
+		//		int id = getUniqueEntityId();
+		EntityRegistry.registerModEntity(new ResourceLocation("abyssalcraft", name.toLowerCase(Locale.ENGLISH)), entity,"abyssalcraft."+ name, modid, instance, trackingRange, updateFrequency, sendsVelocityUpdates, primaryColor, secondaryColor);
+		//		EntityList.ID_TO_CLASS.put(id, entity);
 	}
 }

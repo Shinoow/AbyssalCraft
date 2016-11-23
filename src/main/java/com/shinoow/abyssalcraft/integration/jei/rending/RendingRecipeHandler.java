@@ -29,13 +29,6 @@ public class RendingRecipeHandler implements IRecipeHandler<RendingRecipeWrapper
 
 	@Nonnull
 	@Override
-	public String getRecipeCategoryUid() {
-
-		return AbyssalCraftRecipeCategoryUid.RENDING;
-	}
-
-	@Nonnull
-	@Override
 	public IRecipeWrapper getRecipeWrapper(@Nonnull RendingRecipeWrapper recipe) {
 
 		return recipe;

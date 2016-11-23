@@ -78,19 +78,19 @@ public class EntityCoraliumArrow extends EntityArrow {
 
 		if (prevRotationPitch == 0.0F && prevRotationYaw == 0.0F)
 		{
-			float f = MathHelper.sqrt_double(motionX * motionX + motionZ * motionZ);
+			float f = MathHelper.sqrt(motionX * motionX + motionZ * motionZ);
 			prevRotationYaw = rotationYaw = (float)(MathHelper.atan2(motionX, motionZ) * 180.0D / Math.PI);
 			prevRotationPitch = rotationPitch = (float)(MathHelper.atan2(motionY, f) * 180.0D / Math.PI);
 		}
 
 		BlockPos blockpos = new BlockPos(xTile, yTile, zTile);
-		IBlockState iblockstate = worldObj.getBlockState(blockpos);
+		IBlockState iblockstate = world.getBlockState(blockpos);
 		Block block = iblockstate.getBlock();
 
 		if (block.getMaterial(iblockstate) != Material.AIR)
 		{
 			//			block.setBlockBoundsBasedOnState(worldObj, blockpos);
-			AxisAlignedBB axisalignedbb = block.getBoundingBox(iblockstate, worldObj, blockpos);
+			AxisAlignedBB axisalignedbb = block.getBoundingBox(iblockstate, world, blockpos);
 
 			if (axisalignedbb != null && axisalignedbb.isVecInside(new Vec3d(posX, posY, posZ)))
 				inGround = true;
@@ -125,7 +125,7 @@ public class EntityCoraliumArrow extends EntityArrow {
 			++ticksInAir;
 			Vec3d vec31 = new Vec3d(posX, posY, posZ);
 			Vec3d vec3 = new Vec3d(posX + motionX, posY + motionY, posZ + motionZ);
-			RayTraceResult movingobjectposition = worldObj.rayTraceBlocks(vec31, vec3, false, true, false);
+			RayTraceResult movingobjectposition = world.rayTraceBlocks(vec31, vec3, false, true, false);
 			vec31 = new Vec3d(posX, posY, posZ);
 			vec3 = new Vec3d(posX + motionX, posY + motionY, posZ + motionZ);
 
@@ -133,7 +133,7 @@ public class EntityCoraliumArrow extends EntityArrow {
 				vec3 = new Vec3d(movingobjectposition.hitVec.xCoord, movingobjectposition.hitVec.yCoord, movingobjectposition.hitVec.zCoord);
 
 			Entity entity = null;
-			List<Entity> list = worldObj.getEntitiesWithinAABBExcludingEntity(this, getEntityBoundingBox().addCoord(motionX, motionY, motionZ).expand(1.0D, 1.0D, 1.0D));
+			List<Entity> list = world.getEntitiesWithinAABBExcludingEntity(this, getEntityBoundingBox().addCoord(motionX, motionY, motionZ).expand(1.0D, 1.0D, 1.0D));
 			double d0 = 0.0D;
 
 			for (int i = 0; i < list.size(); ++i)
@@ -173,8 +173,8 @@ public class EntityCoraliumArrow extends EntityArrow {
 			if (movingobjectposition != null)
 				if (movingobjectposition.entityHit != null)
 				{
-					float f2 = MathHelper.sqrt_double(motionX * motionX + motionY * motionY + motionZ * motionZ);
-					int l = MathHelper.ceiling_double_int(f2 * damage);
+					float f2 = MathHelper.sqrt(motionX * motionX + motionY * motionY + motionZ * motionZ);
+					int l = MathHelper.ceil(f2 * damage);
 
 					if (getIsCritical())
 						l += rand.nextInt(l / 2 + 2);
@@ -198,29 +198,29 @@ public class EntityCoraliumArrow extends EntityArrow {
 							if(EntityUtil.isEntityCoralium(entitylivingbase)){}
 							else entitylivingbase.addPotionEffect(new PotionEffect(AbyssalCraftAPI.coralium_plague, 100));
 
-							if (!worldObj.isRemote)
+							if (!world.isRemote)
 								entitylivingbase.setArrowCountInEntity(entitylivingbase.getArrowCountInEntity() + 1);
 
 							if(entitylivingbase.isDead && entitylivingbase instanceof EntityZombie){
-								EntityDepthsGhoul ghoul = new EntityDepthsGhoul(entitylivingbase.worldObj);
-								if(entitylivingbase.worldObj.getDifficulty() == EnumDifficulty.HARD && entitylivingbase.worldObj.rand.nextBoolean()
-										|| entitylivingbase.worldObj.rand.nextInt(8) == 0) {
+								EntityDepthsGhoul ghoul = new EntityDepthsGhoul(entitylivingbase.world);
+								if(entitylivingbase.world.getDifficulty() == EnumDifficulty.HARD && entitylivingbase.world.rand.nextBoolean()
+										|| entitylivingbase.world.rand.nextInt(8) == 0) {
 									ghoul.copyLocationAndAnglesFrom(entitylivingbase);
-									ghoul.onInitialSpawn(worldObj.getDifficultyForLocation(movingobjectposition.getBlockPos()), (IEntityLivingData)null);
+									ghoul.onInitialSpawn(world.getDifficultyForLocation(movingobjectposition.getBlockPos()), (IEntityLivingData)null);
 									if(entitylivingbase.isChild())
 										ghoul.setChild(true);
 									ghoul.setGhoulType(0);
-									entitylivingbase.worldObj.removeEntity(entitylivingbase);
-									entitylivingbase.worldObj.spawnEntityInWorld(ghoul);
+									entitylivingbase.world.removeEntity(entitylivingbase);
+									entitylivingbase.world.spawnEntity(ghoul);
 								}
 							}
 
-							if (!worldObj.isRemote)
+							if (!world.isRemote)
 								entitylivingbase.setArrowCountInEntity(entitylivingbase.getArrowCountInEntity() + 1);
 
 							if (knockbackStrength > 0)
 							{
-								float f7 = MathHelper.sqrt_double(motionX * motionX + motionZ * motionZ);
+								float f7 = MathHelper.sqrt(motionX * motionX + motionZ * motionZ);
 
 								if (f7 > 0.0F)
 									movingobjectposition.entityHit.addVelocity(motionX * knockbackStrength * 0.6000000238418579D / f7, 0.1D, motionZ * knockbackStrength * 0.6000000238418579D / f7);
@@ -257,13 +257,13 @@ public class EntityCoraliumArrow extends EntityArrow {
 					xTile = blockpos1.getX();
 					yTile = blockpos1.getY();
 					zTile = blockpos1.getZ();
-					IBlockState iblockstate1 = worldObj.getBlockState(blockpos1);
+					IBlockState iblockstate1 = world.getBlockState(blockpos1);
 					inTile = iblockstate1.getBlock();
 					inData = inTile.getMetaFromState(iblockstate1);
 					motionX = (float)(movingobjectposition.hitVec.xCoord - posX);
 					motionY = (float)(movingobjectposition.hitVec.yCoord - posY);
 					motionZ = (float)(movingobjectposition.hitVec.zCoord - posZ);
-					float f5 = MathHelper.sqrt_double(motionX * motionX + motionY * motionY + motionZ * motionZ);
+					float f5 = MathHelper.sqrt(motionX * motionX + motionY * motionY + motionZ * motionZ);
 					posX -= motionX / f5 * 0.05000000074505806D;
 					posY -= motionY / f5 * 0.05000000074505806D;
 					posZ -= motionZ / f5 * 0.05000000074505806D;
@@ -273,17 +273,17 @@ public class EntityCoraliumArrow extends EntityArrow {
 					setIsCritical(false);
 
 					if (inTile.getMaterial(iblockstate1) != Material.AIR)
-						inTile.onEntityCollidedWithBlock(worldObj, blockpos1, iblockstate1, this);
+						inTile.onEntityCollidedWithBlock(world, blockpos1, iblockstate1, this);
 				}
 
 			if (getIsCritical())
 				for (int k = 0; k < 4; ++k)
-					worldObj.spawnParticle(EnumParticleTypes.CRIT, posX + motionX * k / 4.0D, posY + motionY * k / 4.0D, posZ + motionZ * k / 4.0D, -motionX, -motionY + 0.2D, -motionZ, new int[0]);
+					world.spawnParticle(EnumParticleTypes.CRIT, posX + motionX * k / 4.0D, posY + motionY * k / 4.0D, posZ + motionZ * k / 4.0D, -motionX, -motionY + 0.2D, -motionZ, new int[0]);
 
 			posX += motionX;
 			posY += motionY;
 			posZ += motionZ;
-			float f3 = MathHelper.sqrt_double(motionX * motionX + motionZ * motionZ);
+			float f3 = MathHelper.sqrt(motionX * motionX + motionZ * motionZ);
 			rotationYaw = (float)(MathHelper.atan2(motionX, motionZ) * 180.0D / Math.PI);
 
 			for (rotationPitch = (float)(MathHelper.atan2(motionY, f3) * 180.0D / Math.PI); rotationPitch - prevRotationPitch < -180.0F; prevRotationPitch -= 360.0F)
@@ -308,7 +308,7 @@ public class EntityCoraliumArrow extends EntityArrow {
 				for (int i1 = 0; i1 < 4; ++i1)
 				{
 					float f8 = 0.25F;
-					worldObj.spawnParticle(EnumParticleTypes.WATER_BUBBLE, posX - motionX * f8, posY - motionY * f8, posZ - motionZ * f8, motionX, motionY, motionZ, new int[0]);
+					world.spawnParticle(EnumParticleTypes.WATER_BUBBLE, posX - motionX * f8, posY - motionY * f8, posZ - motionZ * f8, motionX, motionY, motionZ, new int[0]);
 				}
 
 				f4 = 0.6F;

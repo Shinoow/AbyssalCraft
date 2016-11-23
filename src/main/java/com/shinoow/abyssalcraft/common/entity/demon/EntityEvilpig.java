@@ -107,14 +107,14 @@ public class EntityEvilpig extends EntityMob {
 	{
 		super.onDeath(par1DamageSource);
 
-		if(!worldObj.isRemote)
+		if(!world.isRemote)
 			if(!(par1DamageSource.getEntity() instanceof EntityLesserShoggoth))
 			{
-				EntityDemonPig demonpig = new EntityDemonPig(worldObj);
+				EntityDemonPig demonpig = new EntityDemonPig(world);
 				demonpig.copyLocationAndAnglesFrom(this);
-				worldObj.removeEntity(this);
-				demonpig.onInitialSpawn(worldObj.getDifficultyForLocation(new BlockPos(posX, posY, posZ)), (IEntityLivingData)null);
-				worldObj.spawnEntityInWorld(demonpig);
+				world.removeEntity(this);
+				demonpig.onInitialSpawn(world.getDifficultyForLocation(new BlockPos(posX, posY, posZ)), (IEntityLivingData)null);
+				world.spawnEntity(demonpig);
 			}
 	}
 

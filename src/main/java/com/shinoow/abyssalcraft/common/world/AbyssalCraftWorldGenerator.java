@@ -49,7 +49,7 @@ public class AbyssalCraftWorldGenerator implements IWorldGenerator {
 
 	public void generateSurface(World world, Random random, int chunkX, int chunkZ) {
 
-		if(ACConfig.generateDarklandsStructures && world.getBiomeGenForCoords(new BlockPos(chunkX, 0, chunkZ)) instanceof IDarklandsBiome){
+		if(ACConfig.generateDarklandsStructures && world.getBiome(new BlockPos(chunkX, 0, chunkZ)) instanceof IDarklandsBiome){
 
 			int x = chunkX + random.nextInt(16) + random.nextInt(5) * (random.nextBoolean() ? -1 : 1);
 			int z = chunkZ + random.nextInt(16) + random.nextInt(5) * (random.nextBoolean() ? -1 : 1);
@@ -79,7 +79,7 @@ public class AbyssalCraftWorldGenerator implements IWorldGenerator {
 				int x = chunkX + random.nextInt(16);
 				int y = random.nextInt(40);
 				int z = chunkZ + random.nextInt(16);
-				if(BiomeDictionary.isBiomeOfType(world.getBiomeGenForCoords(new BlockPos(x, 0, z)), Type.SWAMP))
+				if(BiomeDictionary.isBiomeOfType(world.getBiome(new BlockPos(x, 0, z)), Type.SWAMP))
 					new WorldGenMinable(ACBlocks.coralium_ore.getDefaultState(), veinSize).generate(world, random, new BlockPos(x, y, z));
 			}
 
@@ -88,10 +88,10 @@ public class AbyssalCraftWorldGenerator implements IWorldGenerator {
 				int x = chunkX + random.nextInt(16);
 				int y = random.nextInt(40);
 				int z = chunkZ + random.nextInt(16);
-				if(BiomeDictionary.isBiomeOfType(world.getBiomeGenForCoords(new BlockPos(x, 0, z)), Type.OCEAN) &&
-						world.getBiomeGenForCoords(new BlockPos(x, 0, z))!=Biomes.DEEP_OCEAN)
+				if(BiomeDictionary.isBiomeOfType(world.getBiome(new BlockPos(x, 0, z)), Type.OCEAN) &&
+						world.getBiome(new BlockPos(x, 0, z))!=Biomes.DEEP_OCEAN)
 					new WorldGenMinable(ACBlocks.coralium_ore.getDefaultState(), veinSize).generate(world, random, new BlockPos(x, y, z));
-				if(world.getBiomeGenForCoords(new BlockPos(x, 0, z))==Biomes.DEEP_OCEAN)
+				if(world.getBiome(new BlockPos(x, 0, z))==Biomes.DEEP_OCEAN)
 					new WorldGenMinable(ACBlocks.coralium_ore.getDefaultState(), veinSize).generate(world, random, new BlockPos(x, y-20, z));
 			}
 		}
@@ -110,9 +110,9 @@ public class AbyssalCraftWorldGenerator implements IWorldGenerator {
 			for(int i = 0; i < 1; i++){
 				int x = chunkX + random.nextInt(16);
 				int z = chunkZ + random.nextInt(16);
-				if(BiomeDictionary.isBiomeOfType(world.getBiomeGenForCoords(new BlockPos(x, 0, z)), Type.SWAMP) ||
-						BiomeDictionary.isBiomeOfType(world.getBiomeGenForCoords(new BlockPos(x, 0, z)), Type.RIVER) &&
-						!BiomeDictionary.isBiomeOfType(world.getBiomeGenForCoords(new BlockPos(x, 0, z)), Type.OCEAN))
+				if(BiomeDictionary.isBiomeOfType(world.getBiome(new BlockPos(x, 0, z)), Type.SWAMP) ||
+						BiomeDictionary.isBiomeOfType(world.getBiome(new BlockPos(x, 0, z)), Type.RIVER) &&
+						!BiomeDictionary.isBiomeOfType(world.getBiome(new BlockPos(x, 0, z)), Type.OCEAN))
 					if(random.nextInt(ACConfig.shoggothLairSpawnRate) == 0)
 						new StructureShoggothPit().generate(world, random, world.getHeight(new BlockPos(x, 0, z)));
 			}

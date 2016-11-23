@@ -28,13 +28,12 @@ public class WorldProviderAbyss extends WorldProvider {
 
 	@Override
 	public IChunkGenerator createChunkGenerator() {
-		return new ChunkProviderAbyss(worldObj, worldObj.getSeed(), true);
+		return new ChunkProviderAbyss(world, world.getSeed(), true);
 	}
 
 	@Override
 	public void createBiomeProvider() {
 		biomeProvider = new BiomeProviderSingle(ACBiomes.abyssal_wastelands);
-		isHellWorld= false;
 		setDimension(ACLib.abyssal_wasteland_id);
 		hasNoSky = true;
 	}

@@ -82,7 +82,7 @@ public class NecronomiconBreedingRitual extends NecronomiconRitual {
 					EntityCow cow = cows.get(i).createChild(cows.get(i));
 					cow.setGrowingAge(-24000);
 					cow.copyLocationAndAnglesFrom(cows.get(i));
-					world.spawnEntityInWorld(cow);
+					world.spawnEntity(cow);
 				}
 			else{
 				cows.remove(cows.size()-1);
@@ -90,7 +90,7 @@ public class NecronomiconBreedingRitual extends NecronomiconRitual {
 					EntityCow cow = cows.get(i).createChild(cows.get(i));
 					cow.setGrowingAge(-24000);
 					cow.copyLocationAndAnglesFrom(cows.get(i));
-					world.spawnEntityInWorld(cow);
+					world.spawnEntity(cow);
 				}
 			}
 		if(!chickens.isEmpty() && chickens.size() >= 2)
@@ -99,7 +99,7 @@ public class NecronomiconBreedingRitual extends NecronomiconRitual {
 					EntityChicken chicken = chickens.get(i).createChild(chickens.get(i));
 					chicken.setGrowingAge(-24000);
 					chicken.copyLocationAndAnglesFrom(chickens.get(i));
-					world.spawnEntityInWorld(chicken);
+					world.spawnEntity(chicken);
 				}
 			else{
 				chickens.remove(chickens.size()-1);
@@ -107,7 +107,7 @@ public class NecronomiconBreedingRitual extends NecronomiconRitual {
 					EntityChicken chicken = chickens.get(i).createChild(chickens.get(i));
 					chicken.setGrowingAge(-24000);
 					chicken.copyLocationAndAnglesFrom(chickens.get(i));
-					world.spawnEntityInWorld(chicken);
+					world.spawnEntity(chicken);
 				}
 			}
 		if(!pigs.isEmpty() && pigs.size() >= 2)
@@ -116,7 +116,7 @@ public class NecronomiconBreedingRitual extends NecronomiconRitual {
 					EntityPig pig = pigs.get(i).createChild(pigs.get(i));
 					pig.setGrowingAge(-24000);
 					pig.copyLocationAndAnglesFrom(pigs.get(i));
-					world.spawnEntityInWorld(pig);
+					world.spawnEntity(pig);
 				}
 			else{
 				pigs.remove(pigs.size()-1);
@@ -124,7 +124,7 @@ public class NecronomiconBreedingRitual extends NecronomiconRitual {
 					EntityPig pig = pigs.get(i).createChild(pigs.get(i));
 					pig.setGrowingAge(-24000);
 					pig.copyLocationAndAnglesFrom(pigs.get(i));
-					world.spawnEntityInWorld(pig);
+					world.spawnEntity(pig);
 				}
 			}
 		if(!sheeps.isEmpty() && sheeps.size() >= 2)
@@ -133,7 +133,7 @@ public class NecronomiconBreedingRitual extends NecronomiconRitual {
 					EntitySheep sheep = sheeps.get(i).createChild(sheeps.get(i));
 					sheep.setGrowingAge(-24000);
 					sheep.copyLocationAndAnglesFrom(sheeps.get(i));
-					world.spawnEntityInWorld(sheep);
+					world.spawnEntity(sheep);
 				}
 			else{
 				sheeps.remove(sheeps.size()-1);
@@ -141,7 +141,7 @@ public class NecronomiconBreedingRitual extends NecronomiconRitual {
 					EntitySheep sheep = sheeps.get(i).createChild(sheeps.get(i));
 					sheep.setGrowingAge(-24000);
 					sheep.copyLocationAndAnglesFrom(sheeps.get(i));
-					world.spawnEntityInWorld(sheep);
+					world.spawnEntity(sheep);
 				}
 			}
 		if(!horses.isEmpty() && horses.size() >= 2)
@@ -150,7 +150,7 @@ public class NecronomiconBreedingRitual extends NecronomiconRitual {
 					EntityHorse horse = (EntityHorse) horses.get(i).createChild(horses.get(i));
 					horse.setGrowingAge(-24000);
 					horse.copyLocationAndAnglesFrom(horses.get(i));
-					world.spawnEntityInWorld(horse);
+					world.spawnEntity(horse);
 				}
 			else{
 				horses.remove(cows.size()-1);
@@ -158,7 +158,7 @@ public class NecronomiconBreedingRitual extends NecronomiconRitual {
 					EntityHorse horse = (EntityHorse) horses.get(i).createChild(horses.get(i));
 					horse.setGrowingAge(-24000);
 					horse.copyLocationAndAnglesFrom(horses.get(i));
-					world.spawnEntityInWorld(horse);
+					world.spawnEntity(horse);
 				}
 			}
 		if(!ocelots.isEmpty() && ocelots.size() >= 2)
@@ -167,7 +167,7 @@ public class NecronomiconBreedingRitual extends NecronomiconRitual {
 					EntityOcelot ocelot = ocelots.get(i).createChild(ocelots.get(i));
 					ocelot.setGrowingAge(-24000);
 					ocelot.copyLocationAndAnglesFrom(ocelots.get(i));
-					world.spawnEntityInWorld(ocelot);
+					world.spawnEntity(ocelot);
 				}
 			else{
 				ocelots.remove(ocelots.size()-1);
@@ -175,7 +175,7 @@ public class NecronomiconBreedingRitual extends NecronomiconRitual {
 					EntityOcelot ocelot = ocelots.get(i).createChild(ocelots.get(i));
 					ocelot.setGrowingAge(-24000);
 					ocelot.copyLocationAndAnglesFrom(ocelots.get(i));
-					world.spawnEntityInWorld(ocelot);
+					world.spawnEntity(ocelot);
 				}
 			}
 		if(!wolves.isEmpty() && wolves.size() >= 2)
@@ -184,7 +184,7 @@ public class NecronomiconBreedingRitual extends NecronomiconRitual {
 					EntityWolf wolf = wolves.get(i).createChild(wolves.get(i));
 					wolf.setGrowingAge(-24000);
 					wolf.copyLocationAndAnglesFrom(wolves.get(i));
-					world.spawnEntityInWorld(wolf);
+					world.spawnEntity(wolf);
 				}
 			else{
 				wolves.remove(wolves.size()-1);
@@ -192,7 +192,7 @@ public class NecronomiconBreedingRitual extends NecronomiconRitual {
 					EntityWolf wolf = wolves.get(i).createChild(wolves.get(i));
 					wolf.setGrowingAge(-24000);
 					wolf.copyLocationAndAnglesFrom(wolves.get(i));
-					world.spawnEntityInWorld(wolf);
+					world.spawnEntity(wolf);
 				}
 			}
 

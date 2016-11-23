@@ -12,7 +12,6 @@
 package com.shinoow.abyssalcraft.common.blocks;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Random;
 
 import net.minecraft.block.Block;
@@ -36,6 +35,7 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.IStringSerializable;
+import net.minecraft.util.NonNullList;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
@@ -70,7 +70,7 @@ public class BlockRitualAltar extends BlockContainer {
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
-	public void getSubBlocks(Item par1, CreativeTabs par2CreativeTabs, List par3List) {
+	public void getSubBlocks(Item par1, CreativeTabs par2CreativeTabs, NonNullList<ItemStack> par3List) {
 		par3List.add(new ItemStack(par1, 1, 0));
 		par3List.add(new ItemStack(par1, 1, 1));
 		par3List.add(new ItemStack(par1, 1, 2));
@@ -125,19 +125,20 @@ public class BlockRitualAltar extends BlockContainer {
 	}
 
 	@Override
-	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, ItemStack heldItem, EnumFacing side, float hitX, float hitY, float hitZ) {
+	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ) {
+		ItemStack heldItem = player.getHeldItem(hand);
 		TileEntity tile = world.getTileEntity(pos);
 		if(tile != null && tile instanceof TileEntityRitualAltar)
-			if(((TileEntityRitualAltar)tile).getItem() != null){
+			if(!((TileEntityRitualAltar)tile).getItem().isEmpty()){
 				player.inventory.addItemStackToInventory(((TileEntityRitualAltar)tile).getItem());
-				((TileEntityRitualAltar)tile).setItem(null);
+				((TileEntityRitualAltar)tile).setItem(ItemStack.EMPTY);
 				world.playSound(pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, SoundEvents.ENTITY_ITEM_PICKUP, SoundCategory.PLAYERS, 0.5F, world.rand.nextFloat() - world.rand.nextFloat() * 0.2F + 1, false);
 				return true;
-			} else if(heldItem != null){
+			} else if(!heldItem.isEmpty()){
 				ItemStack newItem = heldItem.copy();
-				newItem.stackSize = 1;
+				newItem.setCount(1);
 				((TileEntityRitualAltar)tile).setItem(newItem);
-				heldItem.stackSize--;
+				heldItem.shrink(1);
 				world.playSound(pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, SoundEvents.ENTITY_ITEM_PICKUP, SoundCategory.PLAYERS, 0.5F, world.rand.nextFloat() - world.rand.nextFloat() * 0.2F + 1, false);
 				return true;
 			}
@@ -151,7 +152,7 @@ public class BlockRitualAltar extends BlockContainer {
 		TileEntityRitualAltar altar = (TileEntityRitualAltar) world.getTileEntity(pos);
 
 		if(altar != null)
-			if(altar.getItem() != null){
+			if(!altar.getItem().isEmpty()){
 				float f = rand.nextFloat() * 0.8F + 0.1F;
 				float f1 = rand.nextFloat() * 0.8F + 0.1F;
 				float f2 = rand.nextFloat() * 0.8F + 0.1F;
@@ -161,7 +162,7 @@ public class BlockRitualAltar extends BlockContainer {
 				item.motionX = (float)rand.nextGaussian() * f3;
 				item.motionY = (float)rand.nextGaussian() * f3 + 0.2F;
 				item.motionZ = (float)rand.nextGaussian() * f3;
-				world.spawnEntityInWorld(item);
+				world.spawnEntity(item);
 			}
 
 		super.breakBlock(world, pos, state);
@@ -182,13 +183,13 @@ public class BlockRitualAltar extends BlockContainer {
 		return new BlockStateContainer(this, new IProperty[] { MATERIAL });
 	}
 
-	static {
+	public void setBlocks() {
 		blockMeta.put(0, Blocks.COBBLESTONE);
 		blockMeta.put(1, ACBlocks.darkstone_cobblestone);
-		blockMeta.put(2, ACBlocks.abyssal_stone_brick);
-		blockMeta.put(3, ACBlocks.coralium_stone_brick);
-		blockMeta.put(4, ACBlocks.dreadstone_brick);
-		blockMeta.put(5, ACBlocks.abyssalnite_stone_brick);
+		blockMeta.put(2, ACBlocks.abyssal_cobblestone);
+		blockMeta.put(3, ACBlocks.coralium_cobblestone);
+		blockMeta.put(4, ACBlocks.dreadstone_cobblestone);
+		blockMeta.put(5, ACBlocks.abyssalnite_cobblestone);
 		blockMeta.put(6, ACBlocks.ethaxium_brick);
 		blockMeta.put(7, ACBlocks.dark_ethaxium_brick);
 	}

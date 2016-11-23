@@ -18,6 +18,7 @@ import java.util.Map.Entry;
 import java.util.Random;
 
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
@@ -47,9 +48,9 @@ public class MapGenOmothol extends MapGenStructure
 
 		for (Entry<String, String> entry : p_i2093_1_.entrySet())
 			if (entry.getKey().equals("size"))
-				terrainType = MathHelper.parseIntWithDefaultAndMax(entry.getValue(), terrainType, 0);
+				terrainType = MathHelper.getInt(entry.getValue(), terrainType, 0);
 			else if (entry.getKey().equals("distance"))
-				field_82665_g = MathHelper.parseIntWithDefaultAndMax(entry.getValue(), field_82665_g, field_82666_h + 1);
+				field_82665_g = MathHelper.getInt(entry.getValue(), field_82665_g, field_82666_h + 1);
 	}
 
 	@Override
@@ -69,7 +70,7 @@ public class MapGenOmothol extends MapGenStructure
 	@Override
 	protected StructureStart getStructureStart(int chunkX, int chunkZ)
 	{
-		return new MapGenOmothol.Start(worldObj, rand, chunkX, chunkZ, terrainType);
+		return new MapGenOmothol.Start(world, rand, chunkX, chunkZ, terrainType);
 	}
 
 	public static class Start extends StructureStart
@@ -137,5 +138,12 @@ public class MapGenOmothol extends MapGenStructure
 			super.readFromNBT(tagCompound);
 			hasMoreThanTwoComponents = tagCompound.getBoolean("Valid");
 		}
+	}
+
+	@Override
+	public BlockPos getClosestStrongholdPos(World worldIn, BlockPos pos,
+			boolean p_180706_3_) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

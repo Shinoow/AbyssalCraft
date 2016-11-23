@@ -13,13 +13,14 @@ package com.shinoow.abyssalcraft.common.blocks.tile;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
+import net.minecraft.inventory.ItemStackHelper;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.nbt.NBTTagList;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ITickable;
+import net.minecraft.util.NonNullList;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentTranslation;
 
@@ -29,24 +30,15 @@ import com.shinoow.abyssalcraft.api.energy.IEnergyContainerItem;
 public class TileEntityEnergyContainer extends TileEntity implements IEnergyContainer, ITickable, IInventory {
 
 	private float energy;
-	private ItemStack[] containerItemStacks = new ItemStack[2];
+	private NonNullList<ItemStack> containerItemStacks = NonNullList.withSize(2, ItemStack.EMPTY);
 
 	@Override
 	public void readFromNBT(NBTTagCompound nbttagcompound)
 	{
 		super.readFromNBT(nbttagcompound);
 		energy = nbttagcompound.getFloat("PotEnergy");
-		NBTTagList nbttaglist = nbttagcompound.getTagList("Items", 10);
-		containerItemStacks = new ItemStack[getSizeInventory()];
-
-		for (int i = 0; i < nbttaglist.tagCount(); ++i)
-		{
-			NBTTagCompound nbttagcompound1 = nbttaglist.getCompoundTagAt(i);
-			byte b0 = nbttagcompound1.getByte("Slot");
-
-			if (b0 >= 0 && b0 < containerItemStacks.length)
-				containerItemStacks[b0] = ItemStack.loadItemStackFromNBT(nbttagcompound1);
-		}
+		containerItemStacks = NonNullList.withSize(getSizeInventory(), ItemStack.EMPTY);
+		ItemStackHelper.loadAllItems(nbttagcompound, containerItemStacks);
 	}
 
 	@Override
@@ -54,18 +46,7 @@ public class TileEntityEnergyContainer extends TileEntity implements IEnergyCont
 	{
 		super.writeToNBT(nbttagcompound);
 		nbttagcompound.setFloat("PotEnergy", energy);
-		NBTTagList nbttaglist = new NBTTagList();
-
-		for (int i = 0; i < containerItemStacks.length; ++i)
-			if (containerItemStacks[i] != null)
-			{
-				NBTTagCompound nbttagcompound1 = new NBTTagCompound();
-				nbttagcompound1.setByte("Slot", (byte)i);
-				containerItemStacks[i].writeToNBT(nbttagcompound1);
-				nbttaglist.appendTag(nbttagcompound1);
-			}
-
-		nbttagcompound.setTag("Items", nbttaglist);
+		ItemStackHelper.saveAllItems(nbttagcompound, containerItemStacks);
 
 		return nbttagcompound;
 	}
@@ -91,14 +72,14 @@ public class TileEntityEnergyContainer extends TileEntity implements IEnergyCont
 	public void update() {
 
 		ItemStack input = getStackInSlot(0);
-		if(input != null)
+		if(!input.isEmpty())
 			if(input.getItem() instanceof IEnergyContainerItem)
-				if(!worldObj.isRemote && ((IEnergyContainerItem) input.getItem()).canTransferPE(input) && canAcceptPE())
+				if(!world.isRemote && ((IEnergyContainerItem) input.getItem()).canTransferPE(input) && canAcceptPE())
 					addEnergy(((IEnergyContainerItem) input.getItem()).consumeEnergy(input, 1));
 		ItemStack output = getStackInSlot(1);
-		if(output != null)
+		if(!output.isEmpty())
 			if(output.getItem() instanceof IEnergyContainerItem)
-				if(!worldObj.isRemote && ((IEnergyContainerItem) output.getItem()).canAcceptPE(output) && canTransferPE())
+				if(!world.isRemote && ((IEnergyContainerItem) output.getItem()).canAcceptPE(output) && canTransferPE())
 					((IEnergyContainerItem) output.getItem()).addEnergy(output, consumeEnergy(1));
 	}
 
@@ -118,19 +99,19 @@ public class TileEntityEnergyContainer extends TileEntity implements IEnergyCont
 	public void addEnergy(float energy) {
 		this.energy += energy;
 		if(this.energy > getMaxEnergy()) this.energy = getMaxEnergy();
-		worldObj.notifyBlockUpdate(pos, worldObj.getBlockState(pos), worldObj.getBlockState(pos), 2);
+		world.notifyBlockUpdate(pos, world.getBlockState(pos), world.getBlockState(pos), 2);
 	}
 
 	@Override
 	public float consumeEnergy(float energy) {
 		if(energy < this.energy){
 			this.energy -= energy;
-			worldObj.notifyBlockUpdate(pos, worldObj.getBlockState(pos), worldObj.getBlockState(pos), 2);
+			world.notifyBlockUpdate(pos, world.getBlockState(pos), world.getBlockState(pos), 2);
 			return energy;
 		} else {
 			float ret = this.energy;
 			this.energy = 0;
-			worldObj.notifyBlockUpdate(pos, worldObj.getBlockState(pos), worldObj.getBlockState(pos), 2);
+			world.notifyBlockUpdate(pos, world.getBlockState(pos), world.getBlockState(pos), 2);
 			return ret;
 		}
 	}
@@ -174,53 +155,34 @@ public class TileEntityEnergyContainer extends TileEntity implements IEnergyCont
 	@Override
 	public int getSizeInventory() {
 
-		return containerItemStacks.length;
+		return containerItemStacks.size();
 	}
 
 	@Override
 	public ItemStack getStackInSlot(int index) {
 
-		return containerItemStacks[index];
+		return containerItemStacks.get(index);
 	}
 
 	@Override
 	public ItemStack decrStackSize(int var1, int var2) {
 
-		if(containerItemStacks[var1] != null){
-			ItemStack itemstack;
-			if(containerItemStacks[var1].stackSize <= var2){
-				itemstack = containerItemStacks[var1];
-				containerItemStacks[var1] = null;
-				return itemstack;
-			} else {
-				itemstack = containerItemStacks[var1].splitStack(var2);
-				if(containerItemStacks[var1].stackSize == 0)
-					containerItemStacks[var1] = null;
-
-				return itemstack;
-			}
-		}
-		return null;
+		return ItemStackHelper.getAndSplit(containerItemStacks, var1, var2);
 	}
 
 	@Override
 	public ItemStack removeStackFromSlot(int index) {
 
-		if(containerItemStacks[index] != null){
-			ItemStack itemstack = containerItemStacks[index];
-			containerItemStacks[index] = null;
-			return itemstack;
-		} else
-			return null;
+		return ItemStackHelper.getAndRemove(containerItemStacks, index);
 	}
 
 	@Override
 	public void setInventorySlotContents(int index, ItemStack stack) {
 
-		containerItemStacks[index] = stack;
+		containerItemStacks.set(index, stack);
 
-		if(stack != null && stack.stackSize > getInventoryStackLimit())
-			stack.stackSize = getInventoryStackLimit();
+		if(!stack.isEmpty() && stack.getCount() > getInventoryStackLimit())
+			stack.setCount(getInventoryStackLimit());
 	}
 
 	@Override
@@ -230,9 +192,9 @@ public class TileEntityEnergyContainer extends TileEntity implements IEnergyCont
 	}
 
 	@Override
-	public boolean isUseableByPlayer(EntityPlayer player) {
+	public boolean isUsableByPlayer(EntityPlayer player) {
 
-		return worldObj.getTileEntity(pos) != this ? false : player.getDistanceSq(pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D) <= 64.0D;
+		return world.getTileEntity(pos) != this ? false : player.getDistanceSq(pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D) <= 64.0D;
 	}
 
 	@Override
@@ -267,5 +229,15 @@ public class TileEntityEnergyContainer extends TileEntity implements IEnergyCont
 	@Override
 	public void clear() {
 
+	}
+
+	@Override
+	public boolean isEmpty()
+	{
+		for (ItemStack itemstack : containerItemStacks)
+			if (!itemstack.isEmpty())
+				return false;
+
+		return true;
 	}
 }

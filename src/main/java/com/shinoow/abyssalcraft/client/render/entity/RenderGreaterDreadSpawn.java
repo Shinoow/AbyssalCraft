@@ -27,7 +27,7 @@ public class RenderGreaterDreadSpawn extends RenderLiving<EntityGreaterDreadSpaw
 
 	private float scale = 2.0F;
 
-	private static final ResourceLocation mobTexture = new ResourceLocation("abyssalcraft:textures/model/elite/Dread_guard.png");
+	private static final ResourceLocation mobTexture = new ResourceLocation("abyssalcraft:textures/model/elite/dread_guard.png");
 
 	public RenderGreaterDreadSpawn(RenderManager manager)
 	{

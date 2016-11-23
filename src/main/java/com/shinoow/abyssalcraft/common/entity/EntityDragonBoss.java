@@ -17,6 +17,7 @@ import java.util.List;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.IEntityMultiPart;
+import net.minecraft.entity.MoverType;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.boss.EntityDragonPart;
 import net.minecraft.entity.item.EntityItem;
@@ -191,14 +192,14 @@ public class EntityDragonBoss extends EntityMob implements IEntityMultiPart, ICo
 		float f;
 		float f1;
 
-		if (worldObj.isRemote)
+		if (world.isRemote)
 		{
 			//			BossStatus.setBossStatus(this, true);
 			f = MathHelper.cos(animTime * (float)Math.PI * 2.0F);
 			f1 = MathHelper.cos(prevAnimTime * (float)Math.PI * 2.0F);
 
 			if (f1 <= -0.3F && f >= -0.3F)
-				worldObj.playSound(posX, posY, posZ, SoundEvents.ENTITY_ENDERDRAGON_FLAP, getSoundCategory(), 5.0F, 0.8F + rand.nextFloat() * 0.3F, false);
+				world.playSound(posX, posY, posZ, SoundEvents.ENTITY_ENDERDRAGON_FLAP, getSoundCategory(), 5.0F, 0.8F + rand.nextFloat() * 0.3F, false);
 		}
 
 		prevAnimTime = animTime;
@@ -210,12 +211,12 @@ public class EntityDragonBoss extends EntityMob implements IEntityMultiPart, ICo
 			f1 = (rand.nextFloat() - 0.5F) * 4.0F;
 			f2 = (rand.nextFloat() - 0.5F) * 8.0F;
 			if(ACConfig.particleEntity)
-				worldObj.spawnParticle(EnumParticleTypes.EXPLOSION_LARGE, posX + f, posY + 2.0D + f1, posZ + f2, 0.0D, 0.0D, 0.0D);
+				world.spawnParticle(EnumParticleTypes.EXPLOSION_LARGE, posX + f, posY + 2.0D + f1, posZ + f2, 0.0D, 0.0D, 0.0D);
 		}
 		else
 		{
 			updateHealingCircle();
-			f = 0.2F / (MathHelper.sqrt_double(motionX * motionX + motionZ * motionZ) * 10.0F + 1.0F);
+			f = 0.2F / (MathHelper.sqrt(motionX * motionX + motionZ * motionZ) * 10.0F + 1.0F);
 			f *= (float)Math.pow(2.0D, motionY);
 
 			animTime += f;
@@ -243,9 +244,9 @@ public class EntityDragonBoss extends EntityMob implements IEntityMultiPart, ICo
 
 			for (int i = 0; i < 2; ++i)
 				if(ACConfig.particleEntity)
-					AbyssalCraft.proxy.spawnParticle("CorBlood", worldObj, posX + (rand.nextDouble() - 0.5D) * width, posY + rand.nextDouble() * height - 0.25D, posZ + (rand.nextDouble() - 0.5D) * width, (rand.nextDouble() - 0.5D) * 2.0D, -rand.nextDouble(), (rand.nextDouble() - 0.5D) * 2.0D);
+					AbyssalCraft.proxy.spawnParticle("CorBlood", world, posX + (rand.nextDouble() - 0.5D) * width, posY + rand.nextDouble() * height - 0.25D, posZ + (rand.nextDouble() - 0.5D) * width, (rand.nextDouble() - 0.5D) * 2.0D, -rand.nextDouble(), (rand.nextDouble() - 0.5D) * 2.0D);
 
-			if (worldObj.isRemote)
+			if (world.isRemote)
 			{
 				if (newPosRotationIncrements > 0)
 				{
@@ -290,7 +291,7 @@ public class EntityDragonBoss extends EntityMob implements IEntityMultiPart, ICo
 				if (forceNewTarget || d2 < 100.0D || d2 > 22500.0D || isCollidedHorizontally || isCollidedVertically)
 					setNewTarget();
 
-				d0 /= MathHelper.sqrt_double(d3 * d3 + d1 * d1);
+				d0 /= MathHelper.sqrt(d3 * d3 + d1 * d1);
 				f3 = 0.6F;
 
 				if (d0 < -f3)
@@ -318,7 +319,7 @@ public class EntityDragonBoss extends EntityMob implements IEntityMultiPart, ICo
 					f4 = 0.0F;
 
 				randomYawVelocity *= 0.8F;
-				float f5 = MathHelper.sqrt_double(motionX * motionX + motionZ * motionZ) * 1.0F + 1.0F;
+				float f5 = MathHelper.sqrt(motionX * motionX + motionZ * motionZ) * 1.0F + 1.0F;
 				double d10 = Math.sqrt(motionX * motionX + motionZ * motionZ) * 1.0D + 1.0D;
 
 				if (d10 > 40.0D)
@@ -331,7 +332,7 @@ public class EntityDragonBoss extends EntityMob implements IEntityMultiPart, ICo
 				moveRelative(0.0F, -1.0F, f7 * (f4 * f6 + (1.0F - f6)));
 
 
-				moveEntity(motionX, motionY, motionZ);
+				move(MoverType.SELF, motionX, motionY, motionZ);
 
 
 				Vec3d vec32 = new Vec3d(motionX, motionY, motionZ).normalize();
@@ -366,11 +367,11 @@ public class EntityDragonBoss extends EntityMob implements IEntityMultiPart, ICo
 			dragonPartWing2.onUpdate();
 			dragonPartWing2.setLocationAndAngles(posX - f12 * 4.5F, posY + 2.0D, posZ - f11 * 4.5F, 0.0F, 0.0F);
 
-			if (!worldObj.isRemote && hurtTime == 0)
+			if (!world.isRemote && hurtTime == 0)
 			{
-				collideWithEntities(worldObj.getEntitiesWithinAABBExcludingEntity(this, dragonPartWing1.getEntityBoundingBox().expand(5.0D, 4.0D, 5.0D).offset(0.0D, -4.0D, 0.0D)));
-				collideWithEntities(worldObj.getEntitiesWithinAABBExcludingEntity(this, dragonPartWing2.getEntityBoundingBox().expand(5.0D, 4.0D, 5.0D).offset(0.0D, -4.0D, 0.0D)));
-				attackEntitiesInList(worldObj.getEntitiesWithinAABBExcludingEntity(this, dragonPartHead.getEntityBoundingBox().expand(1.5D, 1.5D, 1.5D)));
+				collideWithEntities(world.getEntitiesWithinAABBExcludingEntity(this, dragonPartWing1.getEntityBoundingBox().expand(5.0D, 4.0D, 5.0D).offset(0.0D, -4.0D, 0.0D)));
+				collideWithEntities(world.getEntitiesWithinAABBExcludingEntity(this, dragonPartWing2.getEntityBoundingBox().expand(5.0D, 4.0D, 5.0D).offset(0.0D, -4.0D, 0.0D)));
+				attackEntitiesInList(world.getEntitiesWithinAABBExcludingEntity(this, dragonPartHead.getEntityBoundingBox().expand(1.5D, 1.5D, 1.5D)));
 			}
 
 			double[] adouble = getMovementOffsets(5, 1.0F);
@@ -444,13 +445,13 @@ public class EntityDragonBoss extends EntityMob implements IEntityMultiPart, ICo
 			else if (ticksExisted % 10 == 0 && getHealth() < getMaxHealth()/4)
 			{
 				setHealth(getHealth() + 1.0F);
-				healingcircle.worldObj.createExplosion(healingcircle, healingcircle.lastTickPosX, healingcircle.lastTickPosY, healingcircle.lastTickPosZ, 10F, true);
+				healingcircle.world.createExplosion(healingcircle, healingcircle.lastTickPosX, healingcircle.lastTickPosY, healingcircle.lastTickPosZ, 10F, true);
 			}
 
 		if (rand.nextInt(10) == 0)
 		{
 			float f = 32.0F;
-			List<?> list = worldObj.getEntitiesWithinAABB(EntityDragonMinion.class, getEntityBoundingBox().expand(f, f, f));
+			List<?> list = world.getEntitiesWithinAABB(EntityDragonMinion.class, getEntityBoundingBox().expand(f, f, f));
 			EntityDragonMinion entitydragonminion = null;
 			double d0 = Double.MAX_VALUE;
 			Iterator<?> iterator = list.iterator();
@@ -511,8 +512,8 @@ public class EntityDragonBoss extends EntityMob implements IEntityMultiPart, ICo
 	{
 		forceNewTarget = false;
 
-		if (rand.nextInt(2) == 0 && !worldObj.playerEntities.isEmpty())
-			target = worldObj.playerEntities.get(rand.nextInt(worldObj.playerEntities.size()));
+		if (rand.nextInt(2) == 0 && !world.playerEntities.isEmpty())
+			target = world.playerEntities.get(rand.nextInt(world.playerEntities.size()));
 		else
 		{
 			boolean flag = false;
@@ -546,7 +547,7 @@ public class EntityDragonBoss extends EntityMob implements IEntityMultiPart, ICo
 		if (par1EntityDragonPart != dragonPartHead)
 			par3 = par3 / 4.0F + 1.0F;
 
-		if(par3 > 30) par3 = 10 + worldObj.rand.nextInt(10);
+		if(par3 > 30) par3 = 10 + world.rand.nextInt(10);
 
 		float f1 = rotationYaw * (float)Math.PI / 180.0F;
 		float f2 = MathHelper.sin(f1);
@@ -584,13 +585,13 @@ public class EntityDragonBoss extends EntityMob implements IEntityMultiPart, ICo
 			float f1 = (rand.nextFloat() - 0.5F) * 4.0F;
 			float f2 = (rand.nextFloat() - 0.5F) * 8.0F;
 			if(ACConfig.particleEntity)
-				worldObj.spawnParticle(EnumParticleTypes.EXPLOSION_HUGE, posX + f, posY + 2.0D + f1, posZ + f2, 0.0D, 0.0D, 0.0D);
+				world.spawnParticle(EnumParticleTypes.EXPLOSION_HUGE, posX + f, posY + 2.0D + f1, posZ + f2, 0.0D, 0.0D, 0.0D);
 		}
 
 		int i;
 		int j;
 
-		if (!worldObj.isRemote)
+		if (!world.isRemote)
 		{
 			if (deathTicks > 150 && deathTicks % 5 == 0)
 			{
@@ -600,31 +601,31 @@ public class EntityDragonBoss extends EntityMob implements IEntityMultiPart, ICo
 				{
 					j = EntityXPOrb.getXPSplit(i);
 					i -= j;
-					worldObj.spawnEntityInWorld(new EntityXPOrb(worldObj, posX, posY, posZ, j));
+					world.spawnEntity(new EntityXPOrb(world, posX, posY, posZ, j));
 					if(deathTicks == 100 || deathTicks == 120 || deathTicks == 140 || deathTicks == 160 || deathTicks == 180){
-						worldObj.spawnEntityInWorld(new EntityItem(worldObj, posX + posneg(3), posY + rand.nextInt(3), posZ + posneg(3), new ItemStack(ACItems.chunk_of_coralium)));
-						worldObj.spawnEntityInWorld(new EntityItem(worldObj, posX + posneg(3), posY + rand.nextInt(3), posZ + posneg(3), new ItemStack(ACItems.refined_coralium_ingot)));
-						worldObj.spawnEntityInWorld(new EntityItem(worldObj, posX + posneg(3), posY + rand.nextInt(3), posZ + posneg(3), new ItemStack(ACItems.coralium_plagued_flesh)));
+						world.spawnEntity(new EntityItem(world, posX + posneg(3), posY + rand.nextInt(3), posZ + posneg(3), new ItemStack(ACItems.chunk_of_coralium)));
+						world.spawnEntity(new EntityItem(world, posX + posneg(3), posY + rand.nextInt(3), posZ + posneg(3), new ItemStack(ACItems.refined_coralium_ingot)));
+						world.spawnEntity(new EntityItem(world, posX + posneg(3), posY + rand.nextInt(3), posZ + posneg(3), new ItemStack(ACItems.coralium_plagued_flesh)));
 					}
 				}
 			}
 
 			if (deathTicks == 1)
-				worldObj.playBroadcastSound(1018, new BlockPos(posX, posY, posZ), 0);
+				world.playBroadcastSound(1018, new BlockPos(posX, posY, posZ), 0);
 		}
 
-		moveEntity(0.0D, 0.10000000149011612D, 0.0D);
+		move(MoverType.SELF, 0.0D, 0.10000000149011612D, 0.0D);
 		renderYawOffset = rotationYaw += 20.0F;
 
-		if(deathTicks == 20 && !worldObj.isRemote)
-			SpecialTextUtil.OblivionaireGroup(worldObj, I18n.translateToLocal("message.asorah.death.1"));
-		if(deathTicks == 80 && !worldObj.isRemote)
-			SpecialTextUtil.OblivionaireGroup(worldObj, I18n.translateToLocal("message.asorah.death.2"));
-		if(deathTicks == 140 && !worldObj.isRemote)
-			SpecialTextUtil.OblivionaireGroup(worldObj, I18n.translateToLocal("message.asorah.death.3"));
-		if (deathTicks == 200 && !worldObj.isRemote){
+		if(deathTicks == 20 && !world.isRemote)
+			SpecialTextUtil.OblivionaireGroup(world, I18n.translateToLocal("message.asorah.death.1"));
+		if(deathTicks == 80 && !world.isRemote)
+			SpecialTextUtil.OblivionaireGroup(world, I18n.translateToLocal("message.asorah.death.2"));
+		if(deathTicks == 140 && !world.isRemote)
+			SpecialTextUtil.OblivionaireGroup(world, I18n.translateToLocal("message.asorah.death.3"));
+		if (deathTicks == 200 && !world.isRemote){
 			setDead();
-			worldObj.spawnEntityInWorld(new EntityItem(worldObj, posX, posY, posZ, new ItemStack(ACItems.eye_of_the_abyss)));
+			world.spawnEntity(new EntityItem(world, posX, posY, posZ, new ItemStack(ACItems.eye_of_the_abyss)));
 		}
 	}
 
@@ -647,7 +648,7 @@ public class EntityDragonBoss extends EntityMob implements IEntityMultiPart, ICo
 	@Override
 	public World getWorld()
 	{
-		return worldObj;
+		return world;
 	}
 
 	@Override

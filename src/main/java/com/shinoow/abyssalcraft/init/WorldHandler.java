@@ -111,12 +111,6 @@ public class WorldHandler implements ILifeCycleHandler {
 		ACLib.OMOTHOL = DimensionType.register("Omothol", "_omt", ACLib.omothol_id, WorldProviderOmothol.class, ACConfig.keepLoaded3);
 		ACLib.THE_DARK_REALM = DimensionType.register("The Dark Realm", "_dl", ACLib.dark_realm_id, WorldProviderDarkRealm.class, ACConfig.keepLoaded4);
 
-		//TODO remove all of this around AC 1.9.4 or 1.9.5
-		THE_ABYSSAL_WASTELAND = ACLib.THE_ABYSSAL_WASTELAND;
-		THE_DREADLANDS = ACLib.THE_DREADLANDS;
-		OMOTHOL = ACLib.OMOTHOL;
-		THE_DARK_REALM = ACLib.THE_DARK_REALM;
-
 		DimensionManager.registerDimension(ACLib.abyssal_wasteland_id, ACLib.THE_ABYSSAL_WASTELAND);
 		DimensionManager.registerDimension(ACLib.dreadlands_id, ACLib.THE_DREADLANDS);
 		DimensionManager.registerDimension(ACLib.omothol_id, ACLib.OMOTHOL);

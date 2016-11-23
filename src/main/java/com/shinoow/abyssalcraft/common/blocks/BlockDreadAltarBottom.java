@@ -20,6 +20,7 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.EnumBlockRenderType;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
@@ -56,11 +57,10 @@ public class BlockDreadAltarBottom extends Block {
 	}
 
 	@Override
-	public IBlockState onBlockPlaced(World world, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer){
-		super.onBlockPlaced(world, pos, facing, hitX, hitY, hitZ, meta, placer);
+	public IBlockState getStateForPlacement(World world, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer, EnumHand hand){
 		if(world.provider.getDimension() != ACLib.dreadlands_id  && world.isRemote)
 			FMLClientHandler.instance().getClient().ingameGUI.getChatGUI().printChatMessage(new TextComponentTranslation("message.dreadaltar.error.1"));
-		if(world.provider.getDimension() == ACLib.dreadlands_id && world.getBiomeGenForCoords(pos) != ACBiomes.dreadlands_mountains  && world.isRemote)
+		if(world.provider.getDimension() == ACLib.dreadlands_id && world.getBiome(pos) != ACBiomes.dreadlands_mountains  && world.isRemote)
 			FMLClientHandler.instance().getClient().ingameGUI.getChatGUI().printChatMessage(new TextComponentTranslation("message.dreadaltar.error.2"));
 		return getStateFromMeta(meta);
 	}

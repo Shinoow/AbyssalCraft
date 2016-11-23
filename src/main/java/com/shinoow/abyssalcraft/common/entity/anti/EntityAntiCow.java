@@ -126,34 +126,34 @@ public class EntityAntiCow extends EntityAnimal implements IAntiEntity {
 	@Override
 	protected void collideWithEntity(Entity par1Entity)
 	{
-		if(!worldObj.isRemote && par1Entity instanceof EntityCow){
-			boolean flag = worldObj.getGameRules().getBoolean("mobGriefing");
-			worldObj.createExplosion(this, posX, posY, posZ, 5, flag);
+		if(!world.isRemote && par1Entity instanceof EntityCow){
+			boolean flag = world.getGameRules().getBoolean("mobGriefing");
+			world.createExplosion(this, posX, posY, posZ, 5, flag);
 			setDead();
 		}
 		else par1Entity.applyEntityCollision(this);
 	}
 
 	@Override
-	public boolean processInteract(EntityPlayer par1EntityPlayer, EnumHand hand, ItemStack stack)
+	public boolean processInteract(EntityPlayer par1EntityPlayer, EnumHand hand)
 	{
-
+		ItemStack stack = par1EntityPlayer.getHeldItem(hand);
 		if (stack != null && stack.getItem() == Items.BUCKET && !par1EntityPlayer.capabilities.isCreativeMode && !isChild())
 		{
 			par1EntityPlayer.playSound(SoundEvents.ENTITY_COW_MILK, 1.0F, 1.0F);
-			if (stack.stackSize-- == 1)
+			if (stack.getCount()-1 == 1)
 				par1EntityPlayer.setHeldItem(hand, ACItems.liquid_antimatter_bucket_stack.copy());
 			else if (!par1EntityPlayer.inventory.addItemStackToInventory(ACItems.liquid_antimatter_bucket_stack.copy()))
 				par1EntityPlayer.dropItem(ACItems.liquid_antimatter_bucket_stack.copy(), false);
 
 			return true;
 		} else
-			return super.processInteract(par1EntityPlayer, hand, stack);
+			return super.processInteract(par1EntityPlayer, hand);
 	}
 
 	@Override
 	public EntityAntiCow createChild(EntityAgeable par1EntityAgeable)
 	{
-		return new EntityAntiCow(worldObj);
+		return new EntityAntiCow(world);
 	}
 }

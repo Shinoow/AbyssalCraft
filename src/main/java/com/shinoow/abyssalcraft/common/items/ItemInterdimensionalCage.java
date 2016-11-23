@@ -19,13 +19,13 @@ import net.minecraft.entity.EntityList;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.IItemPropertyGetter;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
+import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
@@ -47,20 +47,12 @@ public class ItemInterdimensionalCage extends ItemACBasic implements IEnergyCont
 		setMaxStackSize(1);
 		setCreativeTab(ACTabs.tabTools);
 
-		addPropertyOverride(new ResourceLocation("captured"), new IItemPropertyGetter(){
-
-			@Override
-			public float apply(ItemStack stack, World worldIn, EntityLivingBase entityIn) {
-
-				return stack.hasTagCompound() && stack.getTagCompound().hasKey("Entity") && stack.getTagCompound().hasKey("EntityName") ? 1.0F : 0;
-			}
-
-		});
+		addPropertyOverride(new ResourceLocation("captured"), (stack, worldIn, entityIn) -> stack.hasTagCompound() && stack.getTagCompound().hasKey("Entity") && stack.getTagCompound().hasKey("EntityName") ? 1.0F : 0);
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void getSubItems(Item par1Item, CreativeTabs par2CreativeTab, List<ItemStack> par3List){
+	public void getSubItems(Item par1Item, CreativeTabs par2CreativeTab, NonNullList<ItemStack> par3List){
 		par3List.add(new ItemStack(par1Item));
 		ItemStack stack = new ItemStack(par1Item);
 		addEnergy(stack, getMaxEnergy(stack));
@@ -69,8 +61,9 @@ public class ItemInterdimensionalCage extends ItemACBasic implements IEnergyCont
 
 	@Override
 	@SuppressWarnings("rawtypes")
-	public ActionResult<ItemStack> onItemRightClick(ItemStack stack, World world, EntityPlayer player, EnumHand hand) {
+	public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, EnumHand hand) {
 
+		ItemStack stack = player.getHeldItem(hand);
 		player.setActiveHand(hand);
 
 		if(!stack.hasTagCompound())
@@ -129,7 +122,7 @@ public class ItemInterdimensionalCage extends ItemACBasic implements IEnergyCont
 				entity.setLocationAndAngles(x, y, z, MathHelper.wrapDegrees(worldIn.rand.nextFloat() * 360.0F), 0.0F);
 				entityliving.rotationYawHead = entityliving.rotationYaw;
 				entityliving.renderYawOffset = entityliving.rotationYaw;
-				worldIn.spawnEntityInWorld(entity);
+				worldIn.spawnEntity(entity);
 				entityliving.playLivingSound();
 			}
 		}

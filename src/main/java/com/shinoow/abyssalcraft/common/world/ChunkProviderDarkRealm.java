@@ -77,7 +77,7 @@ public class ChunkProviderDarkRealm implements IChunkGenerator
 		for (int j = -2; j <= 2; ++j)
 			for (int k = -2; k <= 2; ++k)
 			{
-				float f = 10.0F / MathHelper.sqrt_float(j * j + k * k + 0.2F);
+				float f = 10.0F / MathHelper.sqrt(j * j + k * k + 0.2F);
 				parabolicField[j + 2 + (k + 2) * 5] = f;
 			}
 	}
@@ -167,7 +167,7 @@ public class ChunkProviderDarkRealm implements IChunkGenerator
 		rand.setSeed(x * 341873128712L + z * 132897987541L);
 		ChunkPrimer primer = new ChunkPrimer();
 		setBlocksInChunk(x, z, primer);
-		biomesForGeneration = worldObj.getBiomeProvider().loadBlockGeneratorData(biomesForGeneration, x * 16, z * 16, 16, 16);
+		biomesForGeneration = worldObj.getBiomeProvider().getBiomes(biomesForGeneration, x * 16, z * 16, 16, 16);
 		replaceBlocksForBiome(x, z, primer, biomesForGeneration);
 
 		Chunk chunk = new Chunk(worldObj, primer, x, z);
@@ -266,7 +266,7 @@ public class ChunkProviderDarkRealm implements IChunkGenerator
 					double d7 = doubleArray2[l] / 512.0D;
 					double d8 = doubleArray3[l] / 512.0D;
 					double d9 = (doubleArray1[l] / 10.0D + 1.0D) / 2.0D;
-					double d10 = MathHelper.denormalizeClamp(d7, d8, d9) - d6;
+					double d10 = MathHelper.clampedLerp(d7, d8, d9) - d6;
 
 					if (j2 > 29)
 					{
@@ -286,7 +286,7 @@ public class ChunkProviderDarkRealm implements IChunkGenerator
 		BlockFalling.fallInstantly = true;
 		int k = x * 16;
 		int l = z * 16;
-		Biome Biome = worldObj.getBiomeGenForCoords(new BlockPos(k + 16, 0, l + 16));
+		Biome Biome = worldObj.getBiome(new BlockPos(k + 16, 0, l + 16));
 		rand.setSeed(worldObj.getSeed());
 		long i1 = rand.nextLong() / 2L * 2L + 1L;
 		long j1 = rand.nextLong() / 2L * 2L + 1L;
@@ -315,12 +315,12 @@ public class ChunkProviderDarkRealm implements IChunkGenerator
 	@SuppressWarnings("rawtypes")
 	public List getPossibleCreatures(EnumCreatureType par1EnumCreatureType, BlockPos pos)
 	{
-		Biome biome = worldObj.getBiomeGenForCoords(pos);
+		Biome biome = worldObj.getBiome(pos);
 		return biome == null ? null : biome.getSpawnableList(par1EnumCreatureType);
 	}
 
 	@Override
-	public BlockPos getStrongholdGen(World par1World, String par2String, BlockPos pos)
+	public BlockPos getStrongholdGen(World par1World, String par2String, BlockPos pos, boolean bool)
 	{
 		return null;
 	}

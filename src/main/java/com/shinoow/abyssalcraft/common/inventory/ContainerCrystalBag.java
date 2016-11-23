@@ -54,13 +54,13 @@ public class ContainerCrystalBag extends Container
 	@Override
 	public boolean canInteractWith(EntityPlayer player) {
 
-		return inventory.isUseableByPlayer(player);
+		return inventory.isUsableByPlayer(player);
 	}
 
 	@Override
 	public ItemStack transferStackInSlot(EntityPlayer par1EntityPlayer, int par2)
 	{
-		ItemStack itemstack = null;
+		ItemStack itemstack = ItemStack.EMPTY;
 		Slot slot = inventorySlots.get(par2);
 
 		if (slot != null && slot.getHasStack())
@@ -73,22 +73,22 @@ public class ContainerCrystalBag extends Container
 			{
 
 				if (!mergeItemStack(itemstack1, rows * 9, inventorySlots.size(), true))
-					return null;
+					return ItemStack.EMPTY;
 
 				slot.onSlotChange(itemstack1, itemstack);
 			} else if (APIUtils.isCrystal(itemstack1))
 				if (!mergeItemStack(itemstack1, 0, InventoryCrystalBag.INV_SIZE, false))
-					return null;
+					return ItemStack.EMPTY;
 
-			if (itemstack1.stackSize == 0)
-				slot.putStack((ItemStack) null);
+			if (itemstack1.isEmpty())
+				slot.putStack(ItemStack.EMPTY);
 			else
 				slot.onSlotChanged();
 
-			if (itemstack1.stackSize == itemstack.stackSize)
-				return null;
+			if (itemstack1.getCount() == itemstack.getCount())
+				return ItemStack.EMPTY;
 
-			slot.onPickupFromSlot(par1EntityPlayer, itemstack1);
+			slot.onTake(par1EntityPlayer, itemstack1);
 		}
 		return itemstack;
 	}
@@ -96,9 +96,9 @@ public class ContainerCrystalBag extends Container
 	@Override
 	public ItemStack slotClick(int slot, int dragType, ClickType clickType, EntityPlayer player) {
 
-		if (slot >= 0 && getSlot(slot) != null && getSlot(slot).getStack() != null)
+		if (slot >= 0 && getSlot(slot) != null && !getSlot(slot).getStack().isEmpty())
 			if(getSlot(slot).getStack().getItem() instanceof ItemCrystalBag)
-				return null;
+				return ItemStack.EMPTY;
 		return super.slotClick(slot, dragType, clickType, player);
 	}
 

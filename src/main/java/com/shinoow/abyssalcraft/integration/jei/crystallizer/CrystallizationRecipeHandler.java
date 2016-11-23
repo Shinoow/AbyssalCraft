@@ -26,12 +26,6 @@ public class CrystallizationRecipeHandler implements IRecipeHandler<Crystallizat
 		return CrystallizationRecipe.class;
 	}
 
-	@Nonnull
-	@Override
-	public String getRecipeCategoryUid() {
-		return AbyssalCraftRecipeCategoryUid.CRYSTALLIZATION;
-	}
-
 	@Override
 	@Nonnull
 	public IRecipeWrapper getRecipeWrapper(@Nonnull CrystallizationRecipe recipe) {

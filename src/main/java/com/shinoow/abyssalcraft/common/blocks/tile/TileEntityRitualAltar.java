@@ -21,7 +21,6 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.SoundCategory;
@@ -47,7 +46,7 @@ public class TileEntityRitualAltar extends TileEntity implements ITickable, IRit
 	private int ritualTimer;
 	private ItemStack[] offers = new ItemStack[8];
 	private NecronomiconRitual ritual;
-	private ItemStack item;
+	private ItemStack item = ItemStack.EMPTY;
 	private int rot;
 	private EntityPlayer user;
 	private float consumedEnergy;
@@ -59,7 +58,7 @@ public class TileEntityRitualAltar extends TileEntity implements ITickable, IRit
 	{
 		super.readFromNBT(nbttagcompound);
 		NBTTagCompound nbtItem = nbttagcompound.getCompoundTag("Item");
-		item = ItemStack.loadItemStackFromNBT(nbtItem);
+		item = new ItemStack(nbtItem);
 		rot = nbttagcompound.getInteger("Rot");
 		ritualTimer = nbttagcompound.getInteger("Cooldown");
 	}
@@ -69,7 +68,7 @@ public class TileEntityRitualAltar extends TileEntity implements ITickable, IRit
 	{
 		super.writeToNBT(nbttagcompound);
 		NBTTagCompound nbtItem = new NBTTagCompound();
-		if(item != null)
+		if(!item.isEmpty())
 			item.writeToNBT(nbtItem);
 		nbttagcompound.setTag("Item", nbtItem);
 		nbttagcompound.setInteger("Rot", rot);
@@ -99,16 +98,16 @@ public class TileEntityRitualAltar extends TileEntity implements ITickable, IRit
 	public void update()
 	{
 		if(isDirty || isPerformingRitual()){
-			worldObj.notifyBlockUpdate(pos, worldObj.getBlockState(pos), worldObj.getBlockState(pos), 2);
+			world.notifyBlockUpdate(pos, world.getBlockState(pos), world.getBlockState(pos), 2);
 			isDirty = false;
 		}
 
 		if(isPerformingRitual()){
 			if(ritualTimer == 1){
 				SoundEvent chant = getRandomChant();
-				worldObj.playSound(pos.getX(), pos.getY(), pos.getZ(), chant, SoundCategory.PLAYERS, 1, 1, true);
-				worldObj.playSound(pos.getX(), pos.getY(), pos.getZ(), chant, SoundCategory.PLAYERS, 1, 1, true);
-				worldObj.playSound(pos.getX(), pos.getY(), pos.getZ(), chant, SoundCategory.PLAYERS, 1, 1, true);
+				world.playSound(pos.getX(), pos.getY(), pos.getZ(), chant, SoundCategory.PLAYERS, 1, 1, true);
+				world.playSound(pos.getX(), pos.getY(), pos.getZ(), chant, SoundCategory.PLAYERS, 1, 1, true);
+				world.playSound(pos.getX(), pos.getY(), pos.getZ(), chant, SoundCategory.PLAYERS, 1, 1, true);
 			}
 			ritualTimer++;
 
@@ -120,10 +119,10 @@ public class TileEntityRitualAltar extends TileEntity implements ITickable, IRit
 							consumedEnergy += ((IEnergyTransporterItem) item.getItem()).consumeEnergy(item, ritual.getReqEnergy()/200);
 							break;
 						}
-				} else user = worldObj.getClosestPlayer(pos.getX(), pos.getY(), pos.getZ(), 5, true);
+				} else user = world.getClosestPlayer(pos.getX(), pos.getY(), pos.getZ(), 5, true);
 				if(ritualTimer == 200)
 					if(user != null){
-						if(!MinecraftForge.EVENT_BUS.post(new RitualEvent.Post(user, ritual, worldObj, pos))){
+						if(!MinecraftForge.EVENT_BUS.post(new RitualEvent.Post(user, ritual, world, pos))){
 							for(ItemStack item : user.inventory.mainInventory)
 								if(item != null && item.getItem() instanceof IEnergyTransporterItem &&
 								((IEnergyTransporterItem) item.getItem()).canTransferPEExternally(item)){
@@ -131,10 +130,10 @@ public class TileEntityRitualAltar extends TileEntity implements ITickable, IRit
 									break;
 								}
 							if(consumedEnergy == ritual.getReqEnergy())
-								ritual.completeRitual(worldObj, pos, user);
-							else if(!worldObj.isRemote){
-								worldObj.addWeatherEffect(new EntityLightningBolt(worldObj, pos.getX(), pos.getY() + 1, pos.getZ(), false));
-								DisruptionHandler.instance().generateDisruption(DeityType.values()[worldObj.rand.nextInt(DeityType.values().length)], worldObj, pos, worldObj.getEntitiesWithinAABB(EntityPlayer.class, new AxisAlignedBB(pos).expand(16, 16, 16)));
+								ritual.completeRitual(world, pos, user);
+							else if(!world.isRemote){
+								world.addWeatherEffect(new EntityLightningBolt(world, pos.getX(), pos.getY() + 1, pos.getZ(), false));
+								DisruptionHandler.instance().generateDisruption(DeityType.values()[world.rand.nextInt(DeityType.values().length)], world, pos, world.getEntitiesWithinAABB(EntityPlayer.class, new AxisAlignedBB(pos).expand(16, 16, 16)));
 							}
 							ritualTimer = 0;
 							user = null;
@@ -143,9 +142,9 @@ public class TileEntityRitualAltar extends TileEntity implements ITickable, IRit
 							isDirty = true;
 						}
 					} else {
-						if(!worldObj.isRemote){
-							worldObj.addWeatherEffect(new EntityLightningBolt(worldObj, pos.getX(), pos.getY() + 1, pos.getZ(), false));
-							DisruptionHandler.instance().generateDisruption(DeityType.values()[worldObj.rand.nextInt(DeityType.values().length)], worldObj, pos, worldObj.getEntitiesWithinAABB(EntityPlayer.class, new AxisAlignedBB(pos).expand(16, 16, 16)));
+						if(!world.isRemote){
+							world.addWeatherEffect(new EntityLightningBolt(world, pos.getX(), pos.getY() + 1, pos.getZ(), false));
+							DisruptionHandler.instance().generateDisruption(DeityType.values()[world.rand.nextInt(DeityType.values().length)], world, pos, world.getEntitiesWithinAABB(EntityPlayer.class, new AxisAlignedBB(pos).expand(16, 16, 16)));
 						}
 						ritualTimer = 0;
 						ritual = null;
@@ -154,48 +153,48 @@ public class TileEntityRitualAltar extends TileEntity implements ITickable, IRit
 					}
 			} else ritualTimer = 0;
 
-			worldObj.spawnParticle(EnumParticleTypes.LAVA, pos.getX() + 0.5, pos.getY() + 1, pos.getZ() + 0.5, 0,0,0);
+			world.spawnParticle(EnumParticleTypes.LAVA, pos.getX() + 0.5, pos.getY() + 1, pos.getZ() + 0.5, 0,0,0);
 
 			double n = 0.25;
 
-			worldObj.spawnParticle(EnumParticleTypes.SMOKE_LARGE, pos.getX() - 2.5, pos.getY() + 0.95, pos.getZ() + 0.5, n,0,0);
-			worldObj.spawnParticle(EnumParticleTypes.SMOKE_LARGE, pos.getX() + 0.5, pos.getY() + 0.95, pos.getZ() - 2.5, 0,0,n);
-			worldObj.spawnParticle(EnumParticleTypes.SMOKE_LARGE, pos.getX() + 3.5, pos.getY() + 0.95, pos.getZ() + 0.5, -n,0,0);
-			worldObj.spawnParticle(EnumParticleTypes.SMOKE_LARGE, pos.getX() + 0.5, pos.getY() + 0.95, pos.getZ() + 3.5, 0,0,-n);
-			worldObj.spawnParticle(EnumParticleTypes.SMOKE_LARGE, pos.getX() - 1.5, pos.getY() + 0.95, pos.getZ() + 2.5, n,0,-n);
-			worldObj.spawnParticle(EnumParticleTypes.SMOKE_LARGE, pos.getX() - 1.5, pos.getY() + 0.95, pos.getZ() - 1.5, n,0,n);
-			worldObj.spawnParticle(EnumParticleTypes.SMOKE_LARGE, pos.getX() + 2.5, pos.getY() + 0.95, pos.getZ() + 2.5, -n,0,-n);
-			worldObj.spawnParticle(EnumParticleTypes.SMOKE_LARGE, pos.getX() + 2.5, pos.getY() + 0.95, pos.getZ() - 1.5, -n,0,n);
+			world.spawnParticle(EnumParticleTypes.SMOKE_LARGE, pos.getX() - 2.5, pos.getY() + 0.95, pos.getZ() + 0.5, n,0,0);
+			world.spawnParticle(EnumParticleTypes.SMOKE_LARGE, pos.getX() + 0.5, pos.getY() + 0.95, pos.getZ() - 2.5, 0,0,n);
+			world.spawnParticle(EnumParticleTypes.SMOKE_LARGE, pos.getX() + 3.5, pos.getY() + 0.95, pos.getZ() + 0.5, -n,0,0);
+			world.spawnParticle(EnumParticleTypes.SMOKE_LARGE, pos.getX() + 0.5, pos.getY() + 0.95, pos.getZ() + 3.5, 0,0,-n);
+			world.spawnParticle(EnumParticleTypes.SMOKE_LARGE, pos.getX() - 1.5, pos.getY() + 0.95, pos.getZ() + 2.5, n,0,-n);
+			world.spawnParticle(EnumParticleTypes.SMOKE_LARGE, pos.getX() - 1.5, pos.getY() + 0.95, pos.getZ() - 1.5, n,0,n);
+			world.spawnParticle(EnumParticleTypes.SMOKE_LARGE, pos.getX() + 2.5, pos.getY() + 0.95, pos.getZ() + 2.5, -n,0,-n);
+			world.spawnParticle(EnumParticleTypes.SMOKE_LARGE, pos.getX() + 2.5, pos.getY() + 0.95, pos.getZ() - 1.5, -n,0,n);
 
-			worldObj.spawnParticle(EnumParticleTypes.FLAME, pos.getX() - 2.5, pos.getY() + 1.05, pos.getZ() + 0.5, 0,0,0);
-			worldObj.spawnParticle(EnumParticleTypes.FLAME, pos.getX() + 0.5, pos.getY() + 1.05, pos.getZ() - 2.5, 0,0,0);
-			worldObj.spawnParticle(EnumParticleTypes.FLAME, pos.getX() + 3.5, pos.getY() + 1.05, pos.getZ() + 0.5, 0,0,0);
-			worldObj.spawnParticle(EnumParticleTypes.FLAME, pos.getX() + 0.5, pos.getY() + 1.05, pos.getZ() + 3.5, 0,0,0);
-			worldObj.spawnParticle(EnumParticleTypes.FLAME, pos.getX() - 1.5, pos.getY() + 1.05, pos.getZ() + 2.5, 0,0,0);
-			worldObj.spawnParticle(EnumParticleTypes.FLAME, pos.getX() - 1.5, pos.getY() + 1.05, pos.getZ() - 1.5, 0,0,0);
-			worldObj.spawnParticle(EnumParticleTypes.FLAME, pos.getX() + 2.5, pos.getY() + 1.05, pos.getZ() + 2.5, 0,0,0);
-			worldObj.spawnParticle(EnumParticleTypes.FLAME, pos.getX() + 2.5, pos.getY() + 1.05, pos.getZ() - 1.5, 0,0,0);
+			world.spawnParticle(EnumParticleTypes.FLAME, pos.getX() - 2.5, pos.getY() + 1.05, pos.getZ() + 0.5, 0,0,0);
+			world.spawnParticle(EnumParticleTypes.FLAME, pos.getX() + 0.5, pos.getY() + 1.05, pos.getZ() - 2.5, 0,0,0);
+			world.spawnParticle(EnumParticleTypes.FLAME, pos.getX() + 3.5, pos.getY() + 1.05, pos.getZ() + 0.5, 0,0,0);
+			world.spawnParticle(EnumParticleTypes.FLAME, pos.getX() + 0.5, pos.getY() + 1.05, pos.getZ() + 3.5, 0,0,0);
+			world.spawnParticle(EnumParticleTypes.FLAME, pos.getX() - 1.5, pos.getY() + 1.05, pos.getZ() + 2.5, 0,0,0);
+			world.spawnParticle(EnumParticleTypes.FLAME, pos.getX() - 1.5, pos.getY() + 1.05, pos.getZ() - 1.5, 0,0,0);
+			world.spawnParticle(EnumParticleTypes.FLAME, pos.getX() + 2.5, pos.getY() + 1.05, pos.getZ() + 2.5, 0,0,0);
+			world.spawnParticle(EnumParticleTypes.FLAME, pos.getX() + 2.5, pos.getY() + 1.05, pos.getZ() - 1.5, 0,0,0);
 
-			worldObj.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, pos.getX() - 2.5, pos.getY() + 1.05, pos.getZ() + 0.5, 0,0,0);
-			worldObj.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, pos.getX() + 0.5, pos.getY() + 1.05, pos.getZ() - 2.5, 0,0,0);
-			worldObj.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, pos.getX() + 3.5, pos.getY() + 1.05, pos.getZ() + 0.5, 0,0,0);
-			worldObj.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, pos.getX() + 0.5, pos.getY() + 1.05, pos.getZ() + 3.5, 0,0,0);
-			worldObj.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, pos.getX() - 1.5, pos.getY() + 1.05, pos.getZ() + 2.5, 0,0,0);
-			worldObj.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, pos.getX() - 1.5, pos.getY() + 1.05, pos.getZ() - 1.5, 0,0,0);
-			worldObj.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, pos.getX() + 2.5, pos.getY() + 1.05, pos.getZ() + 2.5, 0,0,0);
-			worldObj.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, pos.getX() + 2.5, pos.getY() + 1.05, pos.getZ() - 1.5, 0,0,0);
+			world.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, pos.getX() - 2.5, pos.getY() + 1.05, pos.getZ() + 0.5, 0,0,0);
+			world.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, pos.getX() + 0.5, pos.getY() + 1.05, pos.getZ() - 2.5, 0,0,0);
+			world.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, pos.getX() + 3.5, pos.getY() + 1.05, pos.getZ() + 0.5, 0,0,0);
+			world.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, pos.getX() + 0.5, pos.getY() + 1.05, pos.getZ() + 3.5, 0,0,0);
+			world.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, pos.getX() - 1.5, pos.getY() + 1.05, pos.getZ() + 2.5, 0,0,0);
+			world.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, pos.getX() - 1.5, pos.getY() + 1.05, pos.getZ() - 1.5, 0,0,0);
+			world.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, pos.getX() + 2.5, pos.getY() + 1.05, pos.getZ() + 2.5, 0,0,0);
+			world.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, pos.getX() + 2.5, pos.getY() + 1.05, pos.getZ() - 1.5, 0,0,0);
 		}
 
 		if(rot == 360)
 			rot = 0;
-		if(item != null)
+		if(!item.isEmpty())
 			rot++;
 	}
 
 	@Override
 	public boolean canPerform(){
 
-		if(checkSurroundings(worldObj, pos)) return true;
+		if(checkSurroundings(world, pos)) return true;
 		return false;
 	}
 
@@ -224,8 +223,8 @@ public class TileEntityRitualAltar extends TileEntity implements ITickable, IRit
 				offers[5] = ((TileEntityRitualPedestal)ped6).getItem();
 				offers[6] = ((TileEntityRitualPedestal)ped7).getItem();
 				offers[7] = ((TileEntityRitualPedestal)ped8).getItem();
-				if(offers[0] == null && offers[1] == null && offers[2] == null && offers[3] == null && offers[4] == null &&
-						offers[5] == null && offers[6] == null && offers[7] == null) return false;
+				if(offers[0].isEmpty() && offers[1].isEmpty() && offers[2].isEmpty() && offers[3].isEmpty() && offers[4].isEmpty() &&
+						offers[5].isEmpty() && offers[6].isEmpty() && offers[7].isEmpty()) return false;
 				else return true;
 			}
 		return false;
@@ -249,14 +248,14 @@ public class TileEntityRitualAltar extends TileEntity implements ITickable, IRit
 			if(ped1 instanceof TileEntityRitualPedestal && ped2 instanceof TileEntityRitualPedestal && ped3 instanceof TileEntityRitualPedestal
 					&& ped4 instanceof TileEntityRitualPedestal && ped5 instanceof TileEntityRitualPedestal && ped6 instanceof TileEntityRitualPedestal
 					&& ped7 instanceof TileEntityRitualPedestal && ped8 instanceof TileEntityRitualPedestal){
-				((TileEntityRitualPedestal)ped1).setItem(null);
-				((TileEntityRitualPedestal)ped2).setItem(null);
-				((TileEntityRitualPedestal)ped3).setItem(null);
-				((TileEntityRitualPedestal)ped4).setItem(null);
-				((TileEntityRitualPedestal)ped5).setItem(null);
-				((TileEntityRitualPedestal)ped6).setItem(null);
-				((TileEntityRitualPedestal)ped7).setItem(null);
-				((TileEntityRitualPedestal)ped8).setItem(null);
+				((TileEntityRitualPedestal)ped1).setItem(ItemStack.EMPTY);
+				((TileEntityRitualPedestal)ped2).setItem(ItemStack.EMPTY);
+				((TileEntityRitualPedestal)ped3).setItem(ItemStack.EMPTY);
+				((TileEntityRitualPedestal)ped4).setItem(ItemStack.EMPTY);
+				((TileEntityRitualPedestal)ped5).setItem(ItemStack.EMPTY);
+				((TileEntityRitualPedestal)ped6).setItem(ItemStack.EMPTY);
+				((TileEntityRitualPedestal)ped7).setItem(ItemStack.EMPTY);
+				((TileEntityRitualPedestal)ped8).setItem(ItemStack.EMPTY);
 			}
 	}
 
@@ -277,8 +276,8 @@ public class TileEntityRitualAltar extends TileEntity implements ITickable, IRit
 											if(ritual.canCompleteRitual(world, pos, player))
 												if(!MinecraftForge.EVENT_BUS.post(new RitualEvent.Pre(player, ritual, world, pos))){
 													if(!world.isRemote){
-														mob.attackEntityFrom(DamageSource.magic, 200000);
-														world.addWeatherEffect(new EntityLightningBolt(worldObj, mob.posX, mob.posY, mob.posZ, false));
+														mob.setDead();
+														world.addWeatherEffect(new EntityLightningBolt(world, mob.posX, mob.posY, mob.posZ, false));
 													}
 													ritualTimer = 1;
 													resetPedestals(world, pos);
@@ -312,7 +311,7 @@ public class TileEntityRitualAltar extends TileEntity implements ITickable, IRit
 	public SoundEvent getRandomChant(){
 		SoundEvent[] chants = {ACSounds.cthulhu_chant, ACSounds.yog_sothoth_chant_1, ACSounds.yog_sothoth_chant_2,
 				ACSounds.hastur_chant_1, ACSounds.hastur_chant_2, ACSounds.sleeping_chant, ACSounds.cthugha_chant};
-		return chants[worldObj.rand.nextInt(chants.length)];
+		return chants[world.rand.nextInt(chants.length)];
 	}
 
 	@Override

@@ -24,7 +24,7 @@ import com.shinoow.abyssalcraft.client.model.entity.ModelShadowBeast;
 @SideOnly(Side.CLIENT)
 public class RenderShadowBeast extends RenderLiving {
 
-	private static final ResourceLocation mobTexture = new ResourceLocation("abyssalcraft:textures/model/elite/ShadowBeast.png");
+	private static final ResourceLocation mobTexture = new ResourceLocation("abyssalcraft:textures/model/elite/shadowbeast.png");
 
 	public RenderShadowBeast(RenderManager manager)
 	{

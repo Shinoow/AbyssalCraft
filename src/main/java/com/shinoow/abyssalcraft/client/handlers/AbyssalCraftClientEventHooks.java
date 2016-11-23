@@ -64,8 +64,8 @@ public class AbyssalCraftClientEventHooks {
 	public void onMouseEvent(MouseEvent event) {
 		int button = event.getButton() - 100;
 		Minecraft mc = Minecraft.getMinecraft();
-		EntityPlayer player = mc.thePlayer;
-		World world = mc.theWorld;
+		EntityPlayer player = mc.player;
+		World world = mc.world;
 		int key = mc.gameSettings.keyBindAttack.getKeyCode();
 
 		if (button == key && Mouse.isButtonDown(button + 100))
@@ -106,7 +106,7 @@ public class AbyssalCraftClientEventHooks {
 				theRenderViewEntity.posZ+0.5D
 				);
 		RayTraceResult returnMOP = null;
-		if (mc.theWorld != null)
+		if (mc.world != null)
 		{
 			double var2 = dist;
 			returnMOP = theRenderViewEntity.rayTrace(var2, 0);
@@ -123,7 +123,7 @@ public class AbyssalCraftClientEventHooks {
 			Entity pointedEntity = null;
 			float var9 = 1.0F;
 			@SuppressWarnings("unchecked")
-			List<Entity> list = mc.theWorld.getEntitiesWithinAABBExcludingEntity(
+			List<Entity> list = mc.world.getEntitiesWithinAABBExcludingEntity(
 					theRenderViewEntity,
 					theViewBoundingBox.addCoord(
 							lookvec.xCoord * var2,

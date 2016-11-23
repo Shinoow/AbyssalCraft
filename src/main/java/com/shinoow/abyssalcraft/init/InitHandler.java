@@ -95,19 +95,23 @@ public class InitHandler implements ILifeCycleHandler {
 		if(!FluidRegistry.isFluidRegistered("liquidcoralium")){
 			AbyssalCraftAPI.liquid_coralium_fluid = LIQUID_CORALIUM;
 			FluidRegistry.registerFluid(AbyssalCraftAPI.liquid_coralium_fluid);
+			FluidRegistry.addBucketForFluid(AbyssalCraftAPI.liquid_coralium_fluid);
 		} else {
 			ACLogger.warning("Liquid Coralium was already registered by another mod, adding ours as alternative.");
 			AbyssalCraftAPI.liquid_coralium_fluid = FluidRegistry.getFluid("liquidcoralium");
 			FluidRegistry.registerFluid(LIQUID_CORALIUM);
+			FluidRegistry.addBucketForFluid(LIQUID_CORALIUM);
 		}
 
 		if(!FluidRegistry.isFluidRegistered("liquidantimatter")){
 			AbyssalCraftAPI.liquid_antimatter_fluid = LIQUID_ANTIMATTER;
 			FluidRegistry.registerFluid(AbyssalCraftAPI.liquid_antimatter_fluid);
+			FluidRegistry.addBucketForFluid(AbyssalCraftAPI.liquid_antimatter_fluid);
 		} else {
 			ACLogger.warning("Liquid Antimatter was already registered by another mod, adding ours as alternative.");
 			AbyssalCraftAPI.liquid_antimatter_fluid = FluidRegistry.getFluid("liquidantimatter");
 			FluidRegistry.registerFluid(LIQUID_ANTIMATTER);
+			FluidRegistry.addBucketForFluid(LIQUID_ANTIMATTER);
 		}
 	}
 
@@ -239,66 +243,6 @@ public class InitHandler implements ILifeCycleHandler {
 		antiAbyssalZombieBlacklist = cfg.get("item_blacklist", "Abyssal Anti-Zombie Item Blacklist", new String[]{}, "Items/Blocks added to this list won't be picked up by Abyssal Anti-Zombies. Format: modid:name:meta, where meta is optional.").getStringList();
 		antiGhoulBlacklist = cfg.get("item_blacklist", "Anti-Ghoul Item Blacklist", new String[]{}, "Items/Blocks added to this list won't be picked up by Anti-Ghouls. Format: modid:name:meta, where meta is optional.").getStringList();
 		omotholGhoulBlacklist = cfg.get("item_blacklist", "Omothol Ghoul Item Blacklist", new String[]{}, "Items/Blocks added to this list won't be picked up by Omothol Ghouls. Format: modid:name:meta, where meta is optional.").getStringList();
-
-		//TODO remove all of this around AC 1.9.4 or 1.9.5
-		AbyssalCraft.keepLoaded1 = keepLoaded1;
-		AbyssalCraft.keepLoaded2 = keepLoaded2;
-		AbyssalCraft.keepLoaded3 = keepLoaded3;
-		AbyssalCraft.keepLoaded4 = keepLoaded4;
-
-		AbyssalCraft.shouldSpread = shouldSpread;
-		AbyssalCraft.shouldInfect = shouldInfect;
-		AbyssalCraft.breakLogic = breakLogic;
-		AbyssalCraft.destroyOcean = destroyOcean;
-		AbyssalCraft.demonAnimalFire = demonAnimalFire;
-		AbyssalCraft.evilAnimalSpawnWeight = evilAnimalSpawnWeight;
-		AbyssalCraft.darkness = darkness;
-		AbyssalCraft.particleBlock = particleBlock;
-		AbyssalCraft.particleEntity = particleEntity;
-		AbyssalCraft.hardcoreMode = hardcoreMode;
-		AbyssalCraft.endAbyssalZombieSpawnWeight = endAbyssalZombieSpawnWeight;
-		AbyssalCraft.evilAnimalCreatureType = evilAnimalCreatureType;
-		AbyssalCraft.antiItemDisintegration = antiItemDisintegration;
-		AbyssalCraft.portalCooldown = portalCooldown;
-		AbyssalCraft.demonAnimalSpawnWeight = demonAnimalSpawnWeight;
-		AbyssalCraft.smeltingRecipes = smeltingRecipes;
-
-		AbyssalCraft.shoggothOoze = shoggothOoze;
-		AbyssalCraft.oozeLeaves = oozeLeaves;
-		AbyssalCraft.oozeGrass = oozeGrass;
-		AbyssalCraft.oozeGround = oozeGround;
-		AbyssalCraft.oozeSand = oozeSand;
-		AbyssalCraft.oozeRock = oozeRock;
-		AbyssalCraft.oozeCloth = oozeCloth;
-		AbyssalCraft.oozeWood = oozeWood;
-		AbyssalCraft.oozeGourd = oozeGourd;
-		AbyssalCraft.oozeIron = oozeIron;
-		AbyssalCraft.oozeClay = oozeClay;
-		AbyssalCraft.oozeExpire = oozeExpire;
-
-		AbyssalCraft.generateDarklandsStructures = generateDarklandsStructures;
-		AbyssalCraft.generateShoggothLairs = generateShoggothLairs;
-		AbyssalCraft.generateAbyssalWastelandPillars = generateAbyssalWastelandPillars;
-		AbyssalCraft.generateAbyssalWastelandRuins = generateAbyssalWastelandRuins;
-		AbyssalCraft.generateAntimatterLake = generateAntimatterLake;
-		AbyssalCraft.generateCoraliumLake = generateCoraliumLake;
-		AbyssalCraft.generateDreadlandsStalagmite = generateDreadlandsStalagmite;
-
-		AbyssalCraft.generateCoraliumOre = generateCoraliumOre;
-		AbyssalCraft.generateNitreOre = generateNitreOre;
-		AbyssalCraft.generateAbyssalniteOre = generateAbyssalniteOre;
-		AbyssalCraft.generateAbyssalCoraliumOre = generateAbyssalCoraliumOre;
-		AbyssalCraft.generateDreadlandsAbyssalniteOre = generateDreadlandsAbyssalniteOre;
-		AbyssalCraft.generateDreadedAbyssalniteOre = generateDreadedAbyssalniteOre;
-		AbyssalCraft.generateAbyssalIronOre = generateAbyssalIronOre;
-		AbyssalCraft.generateAbyssalGoldOre = generateAbyssalGoldOre;
-		AbyssalCraft.generateAbyssalDiamondOre = generateAbyssalDiamondOre;
-		AbyssalCraft.generateAbyssalNitreOre = generateAbyssalNitreOre;
-		AbyssalCraft.generateAbyssalTinOre = generateAbyssalTinOre;
-		AbyssalCraft.generateAbyssalCopperOre = generateAbyssalCopperOre;
-		AbyssalCraft.generatePearlescentCoraliumOre = generatePearlescentCoraliumOre;
-		AbyssalCraft.generateLiquifiedCoraliumOre = generateLiquifiedCoraliumOre;
-		AbyssalCraft.shoggothLairSpawnRate = shoggothLairSpawnRate;
 
 		if(cfg.hasChanged())
 			cfg.save();

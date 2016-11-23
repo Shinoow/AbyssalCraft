@@ -30,7 +30,7 @@ public class TeleporterDarkRealm extends Teleporter {
 
 	@Override
 	public void placeInPortal(Entity entity, float par8){
-		entity.setPosition(MathHelper.floor_double(entity.posX), 80, MathHelper.floor_double(entity.posZ));
+		entity.setPosition(MathHelper.floor(entity.posX), 80, MathHelper.floor(entity.posZ));
 		entity.motionX = entity.motionY = entity.motionZ = 0;
 	}
 }

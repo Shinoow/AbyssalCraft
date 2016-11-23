@@ -57,7 +57,7 @@ public class FireMessage extends AbstractMessage<FireMessage> {
 	@Override
 	public void process(EntityPlayer player, Side side) {
 
-		World world = player.worldObj;
+		World world = player.world;
 		BlockPos pos = new BlockPos(x, y, z);
 
 		world.playSound(x, y, z, SoundEvents.BLOCK_FIRE_EXTINGUISH, SoundCategory.BLOCKS, 1.0F, 1.0F, true);

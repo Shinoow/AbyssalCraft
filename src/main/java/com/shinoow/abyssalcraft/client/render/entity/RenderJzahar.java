@@ -26,7 +26,7 @@ import com.shinoow.abyssalcraft.common.entity.EntityJzahar;
 @SideOnly(Side.CLIENT)
 public class RenderJzahar extends RenderLiving<EntityJzahar> {
 
-	private static final ResourceLocation mobTexture = new ResourceLocation("abyssalcraft:textures/model/boss/J'zahar.png");
+	private static final ResourceLocation mobTexture = new ResourceLocation("abyssalcraft:textures/model/boss/j'zahar.png");
 
 	public RenderJzahar(RenderManager manager)
 	{

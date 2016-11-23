@@ -35,22 +35,22 @@ public class TileEntityJzaharSpawner extends TileEntity implements ITickable {
 	}
 
 	public boolean isActivated() {
-		return worldObj.getClosestPlayer(pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D,
+		return world.getClosestPlayer(pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D,
 				activatingRangeFromPlayer, true) != null &&
-				!worldObj.getClosestPlayer(pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D,
+				!world.getClosestPlayer(pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D,
 						activatingRangeFromPlayer, true).capabilities.isCreativeMode &&
-						worldObj.getClosestPlayer(pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D,
+						world.getClosestPlayer(pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D,
 								activatingRangeFromPlayer, true).posY >= pos.getY() -1;
 	}
 
 	@Override
 	public void update() {
-		if (!worldObj.isRemote && isActivated()) {
-			EntityJzahar mob = new EntityJzahar(worldObj);
-			mob.setLocationAndAngles(pos.getX(), pos.getY(), pos.getZ(), MathHelper.wrapDegrees(worldObj.rand.nextFloat() * 360.0F), 10.0F);
-			worldObj.spawnEntityInWorld(mob);
-			worldObj.setBlockToAir(pos);
-			List<EntityPlayer> players = worldObj.getEntitiesWithinAABB(EntityPlayer.class, mob.getEntityBoundingBox().expand(64, 64, 64));
+		if (!world.isRemote && isActivated()) {
+			EntityJzahar mob = new EntityJzahar(world);
+			mob.setLocationAndAngles(pos.getX(), pos.getY(), pos.getZ(), MathHelper.wrapDegrees(world.rand.nextFloat() * 360.0F), 10.0F);
+			world.spawnEntity(mob);
+			world.setBlockToAir(pos);
+			List<EntityPlayer> players = world.getEntitiesWithinAABB(EntityPlayer.class, mob.getEntityBoundingBox().expand(64, 64, 64));
 			for(EntityPlayer player : players)
 				player.addStat(ACAchievements.locate_jzahar, 1);
 		}

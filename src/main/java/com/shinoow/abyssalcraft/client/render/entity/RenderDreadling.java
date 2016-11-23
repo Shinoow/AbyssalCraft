@@ -24,7 +24,7 @@ import com.shinoow.abyssalcraft.client.model.entity.ModelDreadling;
 @SideOnly(Side.CLIENT)
 public class RenderDreadling extends RenderLiving {
 
-	private static final ResourceLocation field_110865_p = new ResourceLocation("abyssalcraft:textures/model/Dreadling.png");
+	private static final ResourceLocation field_110865_p = new ResourceLocation("abyssalcraft:textures/model/dreadling.png");
 
 	public RenderDreadling(RenderManager manager)
 	{

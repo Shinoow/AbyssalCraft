@@ -43,11 +43,11 @@ public class TileEntityPedestalBlockRenderer extends TileEntitySpecialRenderer {
 
 		ISingletonInventory ped = (ISingletonInventory)te;
 
-		if (ped != null && ped.getItem() != null){
+		if (ped != null && !ped.getItem().isEmpty()){
 			GL11.glPushMatrix();
 			EntityItem entityitem = new EntityItem(te.getWorld(), 0.0D, 0.0D, 0.0D, ped.getItem());
 			entityitem.hoverStart = 0.0F;
-			ped.getItem().stackSize = 1;
+			ped.getItem().setCount(1);
 			GL11.glRotatef(180F, 1F, 0F, 0F);
 			GL11.glTranslatef(0.0F, -0.5F, 0F);
 			GL11.glRotatef(ped.getRotation(), 0F, 1F, 0F);

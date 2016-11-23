@@ -24,7 +24,7 @@ import com.shinoow.abyssalcraft.client.model.block.ModelJzaharSpawner;
 public class TileEntityJzaharSpawnerRenderer extends TileEntitySpecialRenderer {
 
 	ModelJzaharSpawner model = new ModelJzaharSpawner();
-	private static final ResourceLocation texture = new ResourceLocation("abyssalcraft:textures/model/boss/J'zahar.png");
+	private static final ResourceLocation texture = new ResourceLocation("abyssalcraft:textures/model/boss/j'zahar.png");
 
 	@Override
 	public void renderTileEntityAt(TileEntity te, double x, double y, double z, float partialTicks, int destroyStage) {

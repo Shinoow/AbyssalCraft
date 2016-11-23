@@ -22,32 +22,23 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.particle.Particle;
-import net.minecraft.client.renderer.ItemMeshDefinition;
 import net.minecraft.client.renderer.RenderItem;
 import net.minecraft.client.renderer.block.model.ModelBakery;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.renderer.block.statemap.StateMap;
 import net.minecraft.client.renderer.block.statemap.StateMapperBase;
-import net.minecraft.client.renderer.color.IBlockColor;
-import net.minecraft.client.renderer.color.IItemColor;
-import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.entity.RenderEntityItem;
-import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.entity.RenderPlayer;
 import net.minecraft.client.renderer.entity.RenderSnowball;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
 import net.minecraft.util.IThreadListener;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.client.model.obj.OBJLoader;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
-import net.minecraftforge.fml.client.registry.IRenderFactory;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 
@@ -57,7 +48,7 @@ import com.shinoow.abyssalcraft.api.item.ACItems;
 import com.shinoow.abyssalcraft.client.handlers.AbyssalCraftClientEventHooks;
 import com.shinoow.abyssalcraft.client.model.block.*;
 import com.shinoow.abyssalcraft.client.model.item.ModelDreadiumSamuraiArmor;
-import com.shinoow.abyssalcraft.client.particles.ACParticleFX;
+import com.shinoow.abyssalcraft.client.particles.CorBloodParticleFX;
 import com.shinoow.abyssalcraft.client.particles.PEStreamParticleFX;
 import com.shinoow.abyssalcraft.client.render.block.*;
 import com.shinoow.abyssalcraft.client.render.entity.*;
@@ -90,56 +81,56 @@ public class ClientProxy extends CommonProxy {
 
 		OBJLoader.INSTANCE.addDomain(AbyssalCraft.modid);
 
-		RenderingRegistry.registerEntityRenderingHandler(EntityEvilpig.class, new IRenderFactory(){ @Override public Render createRenderFor(RenderManager manager) { return new RenderEvilPig(manager); }});
-		RenderingRegistry.registerEntityRenderingHandler(EntityDepthsGhoul.class, new IRenderFactory(){ @Override public Render createRenderFor(RenderManager manager) { return new RenderDepthsGhoul(manager); }});
-		RenderingRegistry.registerEntityRenderingHandler(EntityAbyssalZombie.class, new IRenderFactory(){ @Override public Render createRenderFor(RenderManager manager) { return new RenderAbyssalZombie(manager); }});
-		RenderingRegistry.registerEntityRenderingHandler(EntityODBPrimed.class, new IRenderFactory(){ @Override public Render createRenderFor(RenderManager manager) { return new RenderODB(manager); }});
-		RenderingRegistry.registerEntityRenderingHandler(EntityODBcPrimed.class, new IRenderFactory(){ @Override public Render createRenderFor(RenderManager manager) { return new RenderODBc(manager); }});
-		RenderingRegistry.registerEntityRenderingHandler(EntityJzahar.class, new IRenderFactory(){ @Override public Render createRenderFor(RenderManager manager) { return new RenderJzahar(manager); }});
-		RenderingRegistry.registerEntityRenderingHandler(EntityAbygolem.class, new IRenderFactory(){ @Override public Render createRenderFor(RenderManager manager) { return new RenderAbyssalniteGolem(manager); }});
-		RenderingRegistry.registerEntityRenderingHandler(EntityDreadgolem.class, new IRenderFactory(){ @Override public Render createRenderFor(RenderManager manager) { return new RenderDreadedAbyssalniteGolem(manager); }});
-		RenderingRegistry.registerEntityRenderingHandler(EntityDreadguard.class, new IRenderFactory(){ @Override public Render createRenderFor(RenderManager manager) { return new RenderDreadguard(manager); }});
-		RenderingRegistry.registerEntityRenderingHandler(EntityDragonMinion.class, new IRenderFactory(){ @Override public Render createRenderFor(RenderManager manager) {  return new RenderDragonMinion(manager); }});
-		RenderingRegistry.registerEntityRenderingHandler(EntityDragonBoss.class, new IRenderFactory(){@Override public Render createRenderFor(RenderManager manager) { return new RenderDragonBoss(manager); }});
-		RenderingRegistry.registerEntityRenderingHandler(EntityPSDLTracker.class, new IRenderFactory(){ @Override public Render createRenderFor(RenderManager manager) { return new RenderSnowball(manager, ACItems.powerstone_tracker, Minecraft.getMinecraft().getRenderItem()); }});
-		RenderingRegistry.registerEntityRenderingHandler(EntityShadowCreature.class, new IRenderFactory(){ @Override public Render createRenderFor(RenderManager manager) { return new RenderShadowCreature(manager); }});
-		RenderingRegistry.registerEntityRenderingHandler(EntityShadowMonster.class, new IRenderFactory(){ @Override public Render createRenderFor(RenderManager manager) { return new RenderShadowMonster(manager); }});
-		RenderingRegistry.registerEntityRenderingHandler(EntityDreadling.class, new IRenderFactory(){ @Override public Render createRenderFor(RenderManager manager) { return new RenderDreadling(manager); }});
-		RenderingRegistry.registerEntityRenderingHandler(EntityDreadSpawn.class, new IRenderFactory(){ @Override public Render createRenderFor(RenderManager manager) { return new RenderDreadSpawn(manager); }});
-		RenderingRegistry.registerEntityRenderingHandler(EntityDemonPig.class, new IRenderFactory(){ @Override public Render createRenderFor(RenderManager manager) { return new RenderDemonPig(manager); }});
-		RenderingRegistry.registerEntityRenderingHandler(EntitySkeletonGoliath.class, new IRenderFactory(){ @Override public Render createRenderFor(RenderManager manager) { return new RenderSkeletonGoliath(manager); }});
-		RenderingRegistry.registerEntityRenderingHandler(EntityChagarothSpawn.class, new IRenderFactory(){ @Override public Render createRenderFor(RenderManager manager) { return new RenderChagarothSpawn(manager); }});
-		RenderingRegistry.registerEntityRenderingHandler(EntityChagarothFist.class, new IRenderFactory(){ @Override public Render createRenderFor(RenderManager manager) { return new RenderChagarothFist(manager); }});
-		RenderingRegistry.registerEntityRenderingHandler(EntityChagaroth.class, new IRenderFactory(){ @Override public Render createRenderFor(RenderManager manager) { return new RenderChagaroth(manager); }});
-		RenderingRegistry.registerEntityRenderingHandler(EntityShadowBeast.class, new IRenderFactory(){ @Override public Render createRenderFor(RenderManager manager) { return new RenderShadowBeast(manager); }});
-		RenderingRegistry.registerEntityRenderingHandler(EntitySacthoth.class, new IRenderFactory(){ @Override public Render createRenderFor(RenderManager manager) { return new RenderSacthoth(manager); }});
-		RenderingRegistry.registerEntityRenderingHandler(EntityRemnant.class, new IRenderFactory(){ @Override public Render createRenderFor(RenderManager manager) { return new RenderRemnant(manager); }});
-		RenderingRegistry.registerEntityRenderingHandler(EntityOmotholGhoul.class, new IRenderFactory(){ @Override public Render createRenderFor(RenderManager manager) { return new RenderOmotholGhoul(manager); }});
-		RenderingRegistry.registerEntityRenderingHandler(EntityCoraliumArrow.class, new IRenderFactory(){ @Override public Render createRenderFor(RenderManager manager) { return new RenderCoraliumArrow(manager); }});
-		RenderingRegistry.registerEntityRenderingHandler(EntityGatekeeperMinion.class, new IRenderFactory(){ @Override public Render createRenderFor(RenderManager manager) { return new RenderGatekeeperMinion(manager); }});
-		RenderingRegistry.registerEntityRenderingHandler(EntityGreaterDreadSpawn.class, new IRenderFactory(){ @Override public Render createRenderFor(RenderManager manager) { return new RenderGreaterDreadSpawn(manager); }});
-		RenderingRegistry.registerEntityRenderingHandler(EntityLesserDreadbeast.class, new IRenderFactory(){ @Override public Render createRenderFor(RenderManager manager) { return new RenderLesserDreadbeast(manager); }});
-		RenderingRegistry.registerEntityRenderingHandler(EntityDreadSlug.class, new IRenderFactory(){ @Override public Render createRenderFor(RenderManager manager) { return new RenderSnowball(manager, ACItems.dread_fragment, Minecraft.getMinecraft().getRenderItem()); }});
-		RenderingRegistry.registerEntityRenderingHandler(EntityLesserShoggoth.class, new IRenderFactory(){ @Override public Render createRenderFor(RenderManager manager) { return new RenderLesserShoggoth(manager); }});
-		RenderingRegistry.registerEntityRenderingHandler(EntityEvilCow.class, new IRenderFactory(){ @Override public Render createRenderFor(RenderManager manager) { return new RenderEvilCow(manager); }});
-		RenderingRegistry.registerEntityRenderingHandler(EntityEvilChicken.class, new IRenderFactory(){ @Override public Render createRenderFor(RenderManager manager) { return new RenderEvilChicken(manager); }});
-		RenderingRegistry.registerEntityRenderingHandler(EntityDemonCow.class, new IRenderFactory(){ @Override public Render createRenderFor(RenderManager manager) { return new RenderDemonCow(manager); }});
-		RenderingRegistry.registerEntityRenderingHandler(EntityDemonChicken.class, new IRenderFactory(){ @Override public Render createRenderFor(RenderManager manager) { return new RenderDemonChicken(manager); }});
-		RenderingRegistry.registerEntityRenderingHandler(EntityGatekeeperEssence.class, new IRenderFactory(){ @Override public Render createRenderFor(RenderManager manager) { return new RenderEntityItem(manager, Minecraft.getMinecraft().getRenderItem()); }});
-		RenderingRegistry.registerEntityRenderingHandler(EntityEvilSheep.class, new IRenderFactory(){ @Override public Render createRenderFor(RenderManager manager) { return new RenderEvilSheep(manager); }});
-		RenderingRegistry.registerEntityRenderingHandler(EntityDemonSheep.class, new IRenderFactory(){ @Override public Render createRenderFor(RenderManager manager) { return new RenderDemonSheep(manager); }});
+		RenderingRegistry.registerEntityRenderingHandler(EntityEvilpig.class, manager -> new RenderEvilPig(manager));
+		RenderingRegistry.registerEntityRenderingHandler(EntityDepthsGhoul.class, manager -> new RenderDepthsGhoul(manager));
+		RenderingRegistry.registerEntityRenderingHandler(EntityAbyssalZombie.class, manager -> new RenderAbyssalZombie(manager));
+		RenderingRegistry.registerEntityRenderingHandler(EntityODBPrimed.class, manager -> new RenderODB(manager));
+		RenderingRegistry.registerEntityRenderingHandler(EntityODBcPrimed.class, manager -> new RenderODBc(manager));
+		RenderingRegistry.registerEntityRenderingHandler(EntityJzahar.class, manager -> new RenderJzahar(manager));
+		RenderingRegistry.registerEntityRenderingHandler(EntityAbygolem.class, manager -> new RenderAbyssalniteGolem(manager));
+		RenderingRegistry.registerEntityRenderingHandler(EntityDreadgolem.class, manager -> new RenderDreadedAbyssalniteGolem(manager));
+		RenderingRegistry.registerEntityRenderingHandler(EntityDreadguard.class, manager -> new RenderDreadguard(manager));
+		RenderingRegistry.registerEntityRenderingHandler(EntityDragonMinion.class, manager -> new RenderDragonMinion(manager));
+		RenderingRegistry.registerEntityRenderingHandler(EntityDragonBoss.class, manager -> new RenderDragonBoss(manager));
+		RenderingRegistry.registerEntityRenderingHandler(EntityPSDLTracker.class, manager -> new RenderSnowball(manager, ACItems.powerstone_tracker, Minecraft.getMinecraft().getRenderItem()));
+		RenderingRegistry.registerEntityRenderingHandler(EntityShadowCreature.class, manager -> new RenderShadowCreature(manager));
+		RenderingRegistry.registerEntityRenderingHandler(EntityShadowMonster.class, manager -> new RenderShadowMonster(manager));
+		RenderingRegistry.registerEntityRenderingHandler(EntityDreadling.class, manager -> new RenderDreadling(manager));
+		RenderingRegistry.registerEntityRenderingHandler(EntityDreadSpawn.class, manager -> new RenderDreadSpawn(manager));
+		RenderingRegistry.registerEntityRenderingHandler(EntityDemonPig.class, manager -> new RenderDemonPig(manager));
+		RenderingRegistry.registerEntityRenderingHandler(EntitySkeletonGoliath.class, manager -> new RenderSkeletonGoliath(manager));
+		RenderingRegistry.registerEntityRenderingHandler(EntityChagarothSpawn.class, manager -> new RenderChagarothSpawn(manager));
+		RenderingRegistry.registerEntityRenderingHandler(EntityChagarothFist.class, manager -> new RenderChagarothFist(manager));
+		RenderingRegistry.registerEntityRenderingHandler(EntityChagaroth.class, manager -> new RenderChagaroth(manager));
+		RenderingRegistry.registerEntityRenderingHandler(EntityShadowBeast.class, manager -> new RenderShadowBeast(manager));
+		RenderingRegistry.registerEntityRenderingHandler(EntitySacthoth.class, manager -> new RenderSacthoth(manager));
+		RenderingRegistry.registerEntityRenderingHandler(EntityRemnant.class, manager -> new RenderRemnant(manager));
+		RenderingRegistry.registerEntityRenderingHandler(EntityOmotholGhoul.class, manager -> new RenderOmotholGhoul(manager));
+		RenderingRegistry.registerEntityRenderingHandler(EntityCoraliumArrow.class, manager -> new RenderCoraliumArrow(manager));
+		RenderingRegistry.registerEntityRenderingHandler(EntityGatekeeperMinion.class, manager -> new RenderGatekeeperMinion(manager));
+		RenderingRegistry.registerEntityRenderingHandler(EntityGreaterDreadSpawn.class, manager -> new RenderGreaterDreadSpawn(manager));
+		RenderingRegistry.registerEntityRenderingHandler(EntityLesserDreadbeast.class, manager -> new RenderLesserDreadbeast(manager));
+		RenderingRegistry.registerEntityRenderingHandler(EntityDreadSlug.class, manager -> new RenderSnowball(manager, ACItems.dread_fragment, Minecraft.getMinecraft().getRenderItem()));
+		RenderingRegistry.registerEntityRenderingHandler(EntityLesserShoggoth.class, manager -> new RenderLesserShoggoth(manager));
+		RenderingRegistry.registerEntityRenderingHandler(EntityEvilCow.class, manager -> new RenderEvilCow(manager));
+		RenderingRegistry.registerEntityRenderingHandler(EntityEvilChicken.class, manager -> new RenderEvilChicken(manager));
+		RenderingRegistry.registerEntityRenderingHandler(EntityDemonCow.class, manager -> new RenderDemonCow(manager));
+		RenderingRegistry.registerEntityRenderingHandler(EntityDemonChicken.class, manager -> new RenderDemonChicken(manager));
+		RenderingRegistry.registerEntityRenderingHandler(EntityGatekeeperEssence.class, manager -> new RenderEntityItem(manager, Minecraft.getMinecraft().getRenderItem()));
+		RenderingRegistry.registerEntityRenderingHandler(EntityEvilSheep.class, manager -> new RenderEvilSheep(manager));
+		RenderingRegistry.registerEntityRenderingHandler(EntityDemonSheep.class, manager -> new RenderDemonSheep(manager));
 
-		RenderingRegistry.registerEntityRenderingHandler(EntityAntiAbyssalZombie.class, new IRenderFactory(){ @Override public Render createRenderFor(RenderManager manager) { return new RenderAntiAbyssalZombie(manager); }});
-		RenderingRegistry.registerEntityRenderingHandler(EntityAntiBat.class, new IRenderFactory(){ @Override public Render createRenderFor(RenderManager manager) { return new RenderAntiBat(manager); }});
-		RenderingRegistry.registerEntityRenderingHandler(EntityAntiChicken.class, new IRenderFactory(){ @Override public Render createRenderFor(RenderManager manager) { return new RenderAntiChicken(manager); }});
-		RenderingRegistry.registerEntityRenderingHandler(EntityAntiCow.class, new IRenderFactory(){ @Override public Render createRenderFor(RenderManager manager) { return new RenderAntiCow(manager); }});
-		RenderingRegistry.registerEntityRenderingHandler(EntityAntiCreeper.class, new IRenderFactory(){ @Override public Render createRenderFor(RenderManager manager) { return new RenderAntiCreeper(manager); }});
-		RenderingRegistry.registerEntityRenderingHandler(EntityAntiGhoul.class, new IRenderFactory(){ @Override public Render createRenderFor(RenderManager manager) { return new RenderAntiGhoul(manager); }});
-		RenderingRegistry.registerEntityRenderingHandler(EntityAntiPig.class, new IRenderFactory(){ @Override public Render createRenderFor(RenderManager manager) { return new RenderAntiPig(manager); }});
-		RenderingRegistry.registerEntityRenderingHandler(EntityAntiPlayer.class, new IRenderFactory(){ @Override public Render createRenderFor(RenderManager manager) { return new RenderAntiPlayer(manager); }});
-		RenderingRegistry.registerEntityRenderingHandler(EntityAntiSkeleton.class, new IRenderFactory(){ @Override public Render createRenderFor(RenderManager manager) { return new RenderAntiSkeleton(manager); }});
-		RenderingRegistry.registerEntityRenderingHandler(EntityAntiSpider.class, new IRenderFactory(){ @Override public Render createRenderFor(RenderManager manager) { return new RenderAntiSpider(manager); }});
-		RenderingRegistry.registerEntityRenderingHandler(EntityAntiZombie.class, new IRenderFactory(){ @Override public Render createRenderFor(RenderManager manager) { return new RenderAntiZombie(manager); }});
+		RenderingRegistry.registerEntityRenderingHandler(EntityAntiAbyssalZombie.class, manager -> new RenderAntiAbyssalZombie(manager));
+		RenderingRegistry.registerEntityRenderingHandler(EntityAntiBat.class, manager -> new RenderAntiBat(manager));
+		RenderingRegistry.registerEntityRenderingHandler(EntityAntiChicken.class, manager -> new RenderAntiChicken(manager));
+		RenderingRegistry.registerEntityRenderingHandler(EntityAntiCow.class, manager -> new RenderAntiCow(manager));
+		RenderingRegistry.registerEntityRenderingHandler(EntityAntiCreeper.class, manager -> new RenderAntiCreeper(manager));
+		RenderingRegistry.registerEntityRenderingHandler(EntityAntiGhoul.class, manager -> new RenderAntiGhoul(manager));
+		RenderingRegistry.registerEntityRenderingHandler(EntityAntiPig.class, manager -> new RenderAntiPig(manager));
+		RenderingRegistry.registerEntityRenderingHandler(EntityAntiPlayer.class, manager -> new RenderAntiPlayer(manager));
+		RenderingRegistry.registerEntityRenderingHandler(EntityAntiSkeleton.class, manager -> new RenderAntiSkeleton(manager));
+		RenderingRegistry.registerEntityRenderingHandler(EntityAntiSpider.class, manager -> new RenderAntiSpider(manager));
+		RenderingRegistry.registerEntityRenderingHandler(EntityAntiZombie.class, manager -> new RenderAntiZombie(manager));
 
 		ModelBakery.registerItemVariants(ACItems.shoggoth_flesh, makerl("shoggothflesh_overworld", "shoggothflesh_abyssalwasteland",
 				"shoggothflesh_dreadlands", "shoggothflesh_omothol", "shoggothflesh_darkrealm"));
@@ -244,7 +235,6 @@ public class ClientProxy extends CommonProxy {
 		registerItemRender(ItemHandler.devsword, 0);
 		registerItemRender(ACItems.oblivion_catalyst, 0);
 		registerItemRender(ACItems.gateway_key, 0);
-		registerItemRender(ACItems.liquid_coralium_bucket, 0);
 		registerItemRender(ACItems.powerstone_tracker, 0);
 		registerItemRender(ACItems.eye_of_the_abyss, 0);
 		registerItemRender(ACItems.dreaded_gateway_key, 0);
@@ -324,7 +314,6 @@ public class ClientProxy extends CommonProxy {
 		registerItemRender(ACItems.shadow_gem, 0);
 		registerItemRender(ACItems.shard_of_oblivion, 0);
 		registerItemRender(ACItems.coralium_longbow, 0);
-		registerItemRender(ACItems.liquid_antimatter_bucket, 0);
 		registerItemRender(ACItems.coralium_brick, 0);
 		registerItemRender(ACItems.dreadium_ingot, 0);
 		registerItemRender(ACItems.dread_fragment, 0);
@@ -653,31 +642,10 @@ public class ClientProxy extends CommonProxy {
 		render1.addLayer(new LayerStarSpawnTentacles(render1));
 		RenderPlayer render2 = Minecraft.getMinecraft().getRenderManager().getSkinMap().get("slim");
 		render2.addLayer(new LayerStarSpawnTentacles(render2));
-		Minecraft.getMinecraft().getItemColors().registerItemColorHandler(new IItemColor(){
-
-			@Override
-			public int getColorFromItemstack(ItemStack stack, int tintIndex) {
-				return ACLib.crystalColors[stack.getItemDamage()];
-			}
-
-		}, ACItems.crystal, ACItems.crystal_shard, Item.getItemFromBlock(ACBlocks.crystal_cluster), Item.getItemFromBlock(ACBlocks.crystal_cluster2));
-		Minecraft.getMinecraft().getItemColors().registerItemColorHandler(new IItemColor(){
-
-			@Override
-			public int getColorFromItemstack(ItemStack stack, int tintIndex) {
-				return 0xE8E8E8;
-			}
-
-		}, ACItems.coin, ACItems.elder_engraved_coin, ACItems.cthulhu_engraved_coin, ACItems.hastur_engraved_coin, ACItems.jzahar_engraved_coin,
+		Minecraft.getMinecraft().getItemColors().registerItemColorHandler((stack, tintIndex) -> ACLib.crystalColors[stack.getItemDamage()], ACItems.crystal, ACItems.crystal_shard, Item.getItemFromBlock(ACBlocks.crystal_cluster), Item.getItemFromBlock(ACBlocks.crystal_cluster2));
+		Minecraft.getMinecraft().getItemColors().registerItemColorHandler((stack, tintIndex) -> 0xE8E8E8, ACItems.coin, ACItems.elder_engraved_coin, ACItems.cthulhu_engraved_coin, ACItems.hastur_engraved_coin, ACItems.jzahar_engraved_coin,
 		ACItems.azathoth_engraved_coin, ACItems.nyarlathotep_engraved_coin, ACItems.yog_sothoth_engraved_coin, ACItems.shub_niggurath_engraved_coin);
-		Minecraft.getMinecraft().getBlockColors().registerBlockColorHandler(new IBlockColor(){
-
-			@Override
-			public int colorMultiplier(IBlockState state, IBlockAccess world, BlockPos pos, int tintIndex) {
-				return ACLib.crystalColors[state.getBlock().getMetaFromState(state)];
-			}
-
-		}, ACBlocks.crystal_cluster, ACBlocks.crystal_cluster2);
+		Minecraft.getMinecraft().getBlockColors().registerBlockColorHandler((state, world, pos, tintIndex) -> ACLib.crystalColors[state.getBlock().getMetaFromState(state)], ACBlocks.crystal_cluster, ACBlocks.crystal_cluster2);
 	}
 
 	private void registerFluidModel(Block fluidBlock, String name) {
@@ -687,15 +655,7 @@ public class ClientProxy extends CommonProxy {
 
 		final ModelResourceLocation modelResourceLocation = new ModelResourceLocation("abyssalcraft:fluid", name);
 
-		ModelLoader.setCustomMeshDefinition(item, new ItemMeshDefinition(){
-
-			@Override
-			public ModelResourceLocation getModelLocation(ItemStack stack) {
-
-				return modelResourceLocation;
-			}
-
-		});
+		ModelLoader.setCustomMeshDefinition(item, stack -> modelResourceLocation);
 
 		ModelLoader.setCustomStateMapper(fluidBlock, new StateMapperBase() {
 			@Override
@@ -759,7 +719,7 @@ public class ClientProxy extends CommonProxy {
 		// player even when you are on the server! Sounds absurd, but it's true.
 
 		// Solution is to double-check side before returning the player:
-		return ctx.side.isClient() ? Minecraft.getMinecraft().thePlayer : super.getPlayerEntity(ctx);
+		return ctx.side.isClient() ? Minecraft.getMinecraft().player : super.getPlayerEntity(ctx);
 	}
 
 	@Override
@@ -793,7 +753,7 @@ public class ClientProxy extends CommonProxy {
 
 	public void spawnParticleLegacy(String particleName, double posX, double posY, double posZ, double velX, double velY, double velZ){
 		Minecraft mc = Minecraft.getMinecraft();
-		World theWorld = mc.theWorld;
+		World theWorld = mc.world;
 
 		if (mc != null && mc.getRenderViewEntity() != null && mc.effectRenderer != null)
 		{
@@ -816,7 +776,7 @@ public class ClientProxy extends CommonProxy {
 			{
 				if (particleName.equals("CorBlood"))
 				{
-					var21 = new ACParticleFX(theWorld, posX, posY, posZ, (float)velX, (float)velY, (float)velZ);
+					var21 = new CorBloodParticleFX(theWorld, posX, posY, posZ, (float)velX, (float)velY, (float)velZ);
 					var21.setRBGColorF(0, 1, 1);
 				}
 

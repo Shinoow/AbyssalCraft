@@ -17,6 +17,7 @@ import mezz.jei.api.IGuiHelper;
 import mezz.jei.api.gui.IDrawable;
 import mezz.jei.api.gui.IGuiItemStackGroup;
 import mezz.jei.api.gui.IRecipeLayout;
+import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.recipe.IRecipeWrapper;
 import mezz.jei.util.Translator;
 import net.minecraft.client.Minecraft;
@@ -46,11 +47,6 @@ public class CrystallizerFuelCategory extends CrystallizerRecipeCategory {
 
 	}
 
-	@Override
-	public void drawAnimations(Minecraft minecraft) {
-
-	}
-
 	@Nonnull
 	@Override
 	public String getUid() {
@@ -64,10 +60,17 @@ public class CrystallizerFuelCategory extends CrystallizerRecipeCategory {
 	}
 
 	@Override
-	public void setRecipe(@Nonnull IRecipeLayout recipeLayout, @Nonnull IRecipeWrapper recipeWrapper) {
+	public void setRecipe(@Nonnull IRecipeLayout recipeLayout, @Nonnull IRecipeWrapper recipeWrapper, IIngredients ingredients) {
 		IGuiItemStackGroup guiItemStacks = recipeLayout.getItemStacks();
 
 		guiItemStacks.init(fuelSlot, true, 0, 14);
-		guiItemStacks.setFromRecipe(fuelSlot, recipeWrapper.getInputs());
+		guiItemStacks.set(ingredients);
+		//		guiItemStacks.setFromRecipe(fuelSlot, recipeWrapper.getInputs());
+	}
+
+	@Override
+	public IDrawable getIcon() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

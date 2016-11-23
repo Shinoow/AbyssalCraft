@@ -128,7 +128,7 @@ public class EntityLesserShoggoth extends EntityMob implements ICoraliumEntity, 
 	}
 
 	@Override
-	protected PathNavigate getNewNavigator(World worldIn)
+	protected PathNavigate createNavigator(World worldIn)
 	{
 		return new PathNavigateClimber(this, worldIn);
 	}
@@ -153,7 +153,7 @@ public class EntityLesserShoggoth extends EntityMob implements ICoraliumEntity, 
 	{
 		super.onUpdate();
 
-		if (!worldObj.isRemote)
+		if (!world.isRemote)
 			setBesideClimbableBlock(isCollidedHorizontally);
 	}
 
@@ -167,7 +167,7 @@ public class EntityLesserShoggoth extends EntityMob implements ICoraliumEntity, 
 	{
 		dataManager.set(CHILD, Byte.valueOf((byte)(par1 ? 1 : 0)));
 
-		if (worldObj != null && !worldObj.isRemote)
+		if (world != null && !world.isRemote)
 		{
 			IAttributeInstance attributeinstance = getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED);
 			attributeinstance.removeModifier(babySpeedBoostModifier);
@@ -224,34 +224,34 @@ public class EntityLesserShoggoth extends EntityMob implements ICoraliumEntity, 
 	{
 		super.onLivingUpdate();
 
-		if(worldObj.isRemote)
+		if(world.isRemote)
 			setChildSize(isChild());
 
 		monolithTimer++;
 
-		if(getFoodLevel() == 3 && !worldObj.isRemote){
+		if(getFoodLevel() == 3 && !world.isRemote){
 			setFoodLevel(0);
 			if(!isChild()){
-				EntityLesserShoggoth shoggoth = new EntityLesserShoggoth(worldObj);
+				EntityLesserShoggoth shoggoth = new EntityLesserShoggoth(world);
 				shoggoth.copyLocationAndAnglesFrom(this);
-				shoggoth.onInitialSpawn(worldObj.getDifficultyForLocation(new BlockPos(posX, posY, posZ)),(IEntityLivingData)null);
+				shoggoth.onInitialSpawn(world.getDifficultyForLocation(new BlockPos(posX, posY, posZ)),(IEntityLivingData)null);
 				shoggoth.setChild(true);
-				worldObj.spawnEntityInWorld(shoggoth);
+				world.spawnEntity(shoggoth);
 				playSound(SoundEvents.ENTITY_CHICKEN_EGG, 1.0F, (rand.nextFloat() - rand.nextFloat()) * 0.2F + 1.0F);
 			}
 			else setChild(false);
 		}
 
-		if(!worldObj.isRemote){
-			int x = MathHelper.floor_double(posX);
-			int y = MathHelper.floor_double(posY);
-			int z = MathHelper.floor_double(posZ);
+		if(!world.isRemote){
+			int x = MathHelper.floor(posX);
+			int y = MathHelper.floor(posY);
+			int z = MathHelper.floor(posZ);
 
 			for (int l = 0; l < 4; ++l)
 			{
-				x = MathHelper.floor_double(posX + (l % 2 * 2 - 1) * 0.25F);
-				y = MathHelper.floor_double(posY);
-				z = MathHelper.floor_double(posZ + (l / 2 % 2 * 2 - 1) * 0.25F);
+				x = MathHelper.floor(posX + (l % 2 * 2 - 1) * 0.25F);
+				y = MathHelper.floor(posY);
+				z = MathHelper.floor(posZ + (l / 2 % 2 * 2 - 1) * 0.25F);
 
 				spawnOoze(x, y - 1, z);
 				if(!isChild()){
@@ -264,11 +264,11 @@ public class EntityLesserShoggoth extends EntityMob implements ICoraliumEntity, 
 
 		if(monolithTimer >= 1800){
 			monolithTimer = 0;
-			if(worldObj.getEntitiesWithinAABB(getClass(), getEntityBoundingBox().expand(32D, 32D, 32D)).size() > 5 && !isChild()){
-				for(EntityLesserShoggoth shoggoth : worldObj.getEntitiesWithinAABB(getClass(), getEntityBoundingBox().expand(32D, 32D, 32D)))
+			if(world.getEntitiesWithinAABB(getClass(), getEntityBoundingBox().expand(32D, 32D, 32D)).size() > 5 && !isChild()){
+				for(EntityLesserShoggoth shoggoth : world.getEntitiesWithinAABB(getClass(), getEntityBoundingBox().expand(32D, 32D, 32D)))
 					shoggoth.reduceMonolithTimer();
-				if(!worldObj.isRemote)
-					new WorldGenShoggothMonolith().generate(worldObj, rand, new BlockPos(MathHelper.floor_double(posX) + 3, MathHelper.floor_double(posY), MathHelper.floor_double(posZ) + 3));
+				if(!world.isRemote)
+					new WorldGenShoggothMonolith().generate(world, rand, new BlockPos(MathHelper.floor(posX) + 3, MathHelper.floor(posY), MathHelper.floor(posZ) + 3));
 			}
 		}
 	}
@@ -282,12 +282,12 @@ public class EntityLesserShoggoth extends EntityMob implements ICoraliumEntity, 
 	private void spawnOoze(int x, int y, int z){
 		BlockPos pos = new BlockPos(x, y, z);
 		if(ACConfig.shoggothOoze)
-			if(ACBlocks.shoggoth_ooze.canPlaceBlockAt(worldObj, pos)){
-				ShoggothOozeEvent event = new ShoggothOozeEvent(worldObj, pos);
+			if(ACBlocks.shoggoth_ooze.canPlaceBlockAt(world, pos)){
+				ShoggothOozeEvent event = new ShoggothOozeEvent(world, pos);
 				if(MinecraftForge.EVENT_BUS.post(event)){
 					if(event.getReplacement() != null)
-						worldObj.setBlockState(pos, event.getReplacement());
-				} else worldObj.setBlockState(pos, ACBlocks.shoggoth_ooze.getDefaultState());
+						world.setBlockState(pos, event.getReplacement());
+				} else world.setBlockState(pos, ACBlocks.shoggoth_ooze.getDefaultState());
 			}
 	}
 
@@ -478,17 +478,17 @@ public class EntityLesserShoggoth extends EntityMob implements ICoraliumEntity, 
 
 		setShoggothType(0);
 
-		if(worldObj.provider.getDimension() == ACLib.abyssal_wasteland_id)
+		if(world.provider.getDimension() == ACLib.abyssal_wasteland_id)
 			setShoggothType(1);
-		if(worldObj.provider.getDimension() == ACLib.dreadlands_id)
+		if(world.provider.getDimension() == ACLib.dreadlands_id)
 			setShoggothType(2);
-		if(worldObj.provider.getDimension() == ACLib.omothol_id)
+		if(world.provider.getDimension() == ACLib.omothol_id)
 			setShoggothType(3);
-		if(worldObj.provider.getDimension() == ACLib.dark_realm_id)
+		if(world.provider.getDimension() == ACLib.dark_realm_id)
 			setShoggothType(4);
 
 		if (data == null)
-			data = new EntityLesserShoggoth.GroupData(worldObj.rand.nextFloat() < ForgeModContainer.zombieBabyChance, null);
+			data = new EntityLesserShoggoth.GroupData(world.rand.nextFloat() < ForgeModContainer.zombieBabyChance, null);
 
 		if (data instanceof EntityLesserShoggoth.GroupData)
 		{

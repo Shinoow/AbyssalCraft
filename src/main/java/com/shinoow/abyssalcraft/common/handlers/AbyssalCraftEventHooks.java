@@ -150,10 +150,10 @@ public class AbyssalCraftEventHooks {
 		if(event.getEntityLiving().getItemStackFromSlot(EntityEquipmentSlot.CHEST) != null){
 			ItemStack slot = event.getEntityLiving().getItemStackFromSlot(EntityEquipmentSlot.CHEST);
 			if(slot.getItem() == ACItems.dreaded_abyssalnite_chestplate)
-				if(event.getSource().getEntity() != null && event.getEntityLiving().worldObj.rand.nextBoolean())
+				if(event.getSource().getEntity() != null && event.getEntityLiving().world.rand.nextBoolean())
 					event.getSource().getEntity().setFire(99);
 			if(slot.getItem() == ACItems.plated_coralium_chestplate)
-				if(event.getSource().getEntity() != null && event.getEntityLiving().worldObj.rand.nextBoolean())
+				if(event.getSource().getEntity() != null && event.getEntityLiving().world.rand.nextBoolean())
 					event.getSource().getEntity().attackEntityFrom(getSource(event.getEntityLiving()), 1);
 		}
 	}
@@ -167,7 +167,7 @@ public class AbyssalCraftEventHooks {
 	@SubscribeEvent
 	public void darkRealm(LivingUpdateEvent event){
 		if(event.getEntityLiving() instanceof EntityPlayerMP){
-			WorldServer worldServer = (WorldServer)event.getEntityLiving().worldObj;
+			WorldServer worldServer = (WorldServer)event.getEntityLiving().world;
 			EntityPlayerMP player = (EntityPlayerMP)event.getEntityLiving();
 			if(player.dimension == ACLib.omothol_id && player.posY <= 0){
 				player.addPotionEffect(new PotionEffect(MobEffects.RESISTANCE, 80, 255));
@@ -179,7 +179,7 @@ public class AbyssalCraftEventHooks {
 		if(event.getEntityLiving().dimension == ACLib.dark_realm_id && !(event.getEntityLiving() instanceof EntityPlayer)){
 			Random rand = new Random();
 			if(ACConfig.particleEntity)
-				event.getEntityLiving().worldObj.spawnParticle(EnumParticleTypes.SMOKE_LARGE, event.getEntityLiving().posX + (rand.nextDouble() - 0.5D) * event.getEntityLiving().width,
+				event.getEntityLiving().world.spawnParticle(EnumParticleTypes.SMOKE_LARGE, event.getEntityLiving().posX + (rand.nextDouble() - 0.5D) * event.getEntityLiving().width,
 						event.getEntityLiving().posY + rand.nextDouble() * event.getEntityLiving().height,
 						event.getEntityLiving().posZ + (rand.nextDouble() - 0.5D) * event.getEntityLiving().width, 0,0,0);
 		}
@@ -188,13 +188,13 @@ public class AbyssalCraftEventHooks {
 				EntityPlayer player = (EntityPlayer)event.getEntityLiving();
 				Random rand = new Random();
 				ItemStack helmet = player.getItemStackFromSlot(EntityEquipmentSlot.HEAD);
-				if(player.worldObj.getBiomeGenForCoords(new BlockPos(player.posX, player.posY, player.posZ)) instanceof IDarklandsBiome)
+				if(player.world.getBiome(new BlockPos(player.posX, player.posY, player.posZ)) instanceof IDarklandsBiome)
 					if(rand.nextInt(1000) == 0)
 						if(helmet == null || helmet != null && helmet.getItem() != ACItems.abyssalnite_helmet && helmet.getItem() != ACItems.dreaded_abyssalnite_helmet
 						&& helmet.getItem() != ACItems.refined_coralium_helmet && helmet.getItem() != ACItems.plated_coralium_helmet
 						&& helmet.getItem() != ACItems.depths_helmet && helmet.getItem() != ACItems.dreadium_helmet
 						&& helmet.getItem() != ACItems.dreadium_samurai_helmet && helmet.getItem() != ACItems.ethaxium_helmet)
-							if(!player.capabilities.isCreativeMode && !player.worldObj.isRemote)
+							if(!player.capabilities.isCreativeMode && !player.world.isRemote)
 								player.addPotionEffect(new PotionEffect(MobEffects.BLINDNESS, 100));
 			}
 	}
@@ -377,7 +377,7 @@ public class AbyssalCraftEventHooks {
 
 	@SubscribeEvent
 	public void onDeath(LivingDeathEvent event){
-		if(event.getEntityLiving() instanceof EntityPlayer && !event.getEntityLiving().worldObj.isRemote){
+		if(event.getEntityLiving() instanceof EntityPlayer && !event.getEntityLiving().world.isRemote){
 			EntityPlayer player = (EntityPlayer)event.getEntityLiving();
 			if(event.getSource().getEntity() != null && event.getSource().getEntity() instanceof EntityEvilSheep)
 				((EntityEvilSheep)event.getSource().getEntity()).setKilledPlayer(player);

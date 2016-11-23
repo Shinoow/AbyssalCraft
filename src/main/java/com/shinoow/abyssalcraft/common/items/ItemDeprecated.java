@@ -13,8 +13,6 @@ package com.shinoow.abyssalcraft.common.items;
 
 import java.util.List;
 
-import com.shinoow.abyssalcraft.api.item.ACItems;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -48,14 +46,11 @@ public class ItemDeprecated extends Item {
 
 	@Override
 	@SuppressWarnings("rawtypes")
-	public ActionResult<ItemStack> onItemRightClick(ItemStack stack, World world, EntityPlayer player, EnumHand hand) {
+	public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, EnumHand hand) {
 
-		if(stack.getItem() == ACItems.liquid_antimatter_bucket)
-			player.inventory.addItemStackToInventory(ACItems.liquid_antimatter_bucket_stack.copy());
-		if(stack.getItem() == ACItems.liquid_coralium_bucket)
-			player.inventory.addItemStackToInventory(ACItems.liquid_coralium_bucket_stack.copy());
+		ItemStack stack = player.getHeldItem(hand);
 
-		stack.stackSize--;
+		stack.shrink(1);
 
 		return new ActionResult(EnumActionResult.PASS, stack);
 	}

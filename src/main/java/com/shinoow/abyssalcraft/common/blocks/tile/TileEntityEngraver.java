@@ -13,12 +13,13 @@ package com.shinoow.abyssalcraft.common.blocks.tile;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ISidedInventory;
+import net.minecraft.inventory.ItemStackHelper;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
+import net.minecraft.util.NonNullList;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.util.text.TextComponentTranslation;
@@ -35,59 +36,40 @@ public class TileEntityEngraver extends TileEntity implements ISidedInventory, I
 	private static final int[] slotsBottom = new int[] {2, 1};
 	private static final int[] slotsSides = new int[] {1};
 
-	private ItemStack[] engraverItemStacks = new ItemStack[3];
+	private NonNullList<ItemStack> engraverItemStacks = NonNullList.<ItemStack>withSize(3, ItemStack.EMPTY);
 
 	public int engraverProcessTime;
 	private String containerName;
 
 	@Override
 	public int getSizeInventory() {
-		return engraverItemStacks.length;
+		return engraverItemStacks.size();
 	}
 
 	@Override
 	public ItemStack getStackInSlot(int var1) {
-		return engraverItemStacks[var1];
+		return engraverItemStacks.get(var1);
 	}
 
 	@Override
 	public ItemStack decrStackSize(int var1, int var2) {
 
-		if(engraverItemStacks[var1] != null){
-			ItemStack itemstack;
-			if(engraverItemStacks[var1].stackSize <= var2){
-				itemstack = engraverItemStacks[var1];
-				engraverItemStacks[var1] = null;
-				return itemstack;
-			} else {
-				itemstack = engraverItemStacks[var1].splitStack(var2);
-				if(engraverItemStacks[var1].stackSize == 0)
-					engraverItemStacks[var1] = null;
-
-				return itemstack;
-			}
-		}
-		return null;
+		return ItemStackHelper.getAndSplit(engraverItemStacks, var1, var2);
 	}
 
 	@Override
 	public ItemStack removeStackFromSlot(int index) {
 
-		if(engraverItemStacks[index] != null){
-			ItemStack itemstack = engraverItemStacks[index];
-			engraverItemStacks[index] = null;
-			return itemstack;
-		} else
-			return null;
+		return ItemStackHelper.getAndRemove(engraverItemStacks, index);
 	}
 
 	@Override
 	public void setInventorySlotContents(int var1, ItemStack var2) {
 
-		engraverItemStacks[var1] = var2;
+		engraverItemStacks.set(var1, var2);
 
-		if(var2 != null && var2.stackSize > getInventoryStackLimit())
-			var2.stackSize = getInventoryStackLimit();
+		if(var2 != null && var2.getCount() > getInventoryStackLimit())
+			var2.setCount(getInventoryStackLimit());
 
 	}
 
@@ -120,18 +102,8 @@ public class TileEntityEngraver extends TileEntity implements ISidedInventory, I
 	public void readFromNBT(NBTTagCompound par1)
 	{
 		super.readFromNBT(par1);
-		NBTTagList nbttaglist = par1.getTagList("Items", 10);
-		engraverItemStacks = new ItemStack[getSizeInventory()];
-
-		for (int i = 0; i < nbttaglist.tagCount(); ++i)
-		{
-			NBTTagCompound nbttagcompound1 = nbttaglist.getCompoundTagAt(i);
-			byte b0 = nbttagcompound1.getByte("Slot");
-
-			if (b0 >= 0 && b0 < engraverItemStacks.length)
-				engraverItemStacks[b0] = ItemStack.loadItemStackFromNBT(nbttagcompound1);
-		}
-
+		engraverItemStacks = NonNullList.withSize(getSizeInventory(), ItemStack.EMPTY);
+		ItemStackHelper.loadAllItems(par1, engraverItemStacks);
 		engraverProcessTime = par1.getShort("ProcessTime");
 
 		if (par1.hasKey("CustomName", 8))
@@ -143,18 +115,7 @@ public class TileEntityEngraver extends TileEntity implements ISidedInventory, I
 	{
 		super.writeToNBT(par1);
 		par1.setShort("ProcessTime", (short)engraverProcessTime);
-		NBTTagList nbttaglist = new NBTTagList();
-
-		for (int i = 0; i < engraverItemStacks.length; ++i)
-			if (engraverItemStacks[i] != null)
-			{
-				NBTTagCompound nbttagcompound1 = new NBTTagCompound();
-				nbttagcompound1.setByte("Slot", (byte)i);
-				engraverItemStacks[i].writeToNBT(nbttagcompound1);
-				nbttaglist.appendTag(nbttagcompound1);
-			}
-
-		par1.setTag("Items", nbttaglist);
+		ItemStackHelper.saveAllItems(par1, engraverItemStacks);
 
 		if (hasCustomName())
 			par1.setString("CustomName", containerName);
@@ -175,7 +136,7 @@ public class TileEntityEngraver extends TileEntity implements ISidedInventory, I
 	}
 
 	public boolean isEngraving(){
-		return engraverItemStacks[1] != null;
+		return !engraverItemStacks.get(1).isEmpty();
 	}
 
 	@Override
@@ -184,7 +145,7 @@ public class TileEntityEngraver extends TileEntity implements ISidedInventory, I
 
 		boolean flag1 = false;
 
-		if (!worldObj.isRemote)
+		if (!world.isRemote)
 		{
 			if (isEngraving() && canEngrave())
 			{
@@ -195,9 +156,9 @@ public class TileEntityEngraver extends TileEntity implements ISidedInventory, I
 					engraverProcessTime = 0;
 					engraveItem();
 					flag1 = true;
-					engraverItemStacks[1].setItemDamage(engraverItemStacks[1].getItemDamage() + 1);
-					if (engraverItemStacks[1].getItemDamage() == engraverItemStacks[1].getMaxDamage())
-						engraverItemStacks[1] = engraverItemStacks[1].getItem().getContainerItem(engraverItemStacks[1]);
+					engraverItemStacks.get(1).setItemDamage(engraverItemStacks.get(1).getItemDamage() + 1);
+					if (engraverItemStacks.get(1).getItemDamage() == engraverItemStacks.get(1).getMaxDamage())
+						engraverItemStacks.set(1, engraverItemStacks.get(1).getItem().getContainerItem(engraverItemStacks.get(1)));
 				}
 			} else
 				engraverProcessTime = 0;
@@ -205,7 +166,7 @@ public class TileEntityEngraver extends TileEntity implements ISidedInventory, I
 			if (engraverProcessTime > 0)
 			{
 				flag1 = true;
-				BlockEngraver.updateEngraverBlockState(worldObj, pos);
+				BlockEngraver.updateEngraverBlockState(world, pos);
 			}
 		}
 
@@ -218,16 +179,16 @@ public class TileEntityEngraver extends TileEntity implements ISidedInventory, I
 	 */
 	private boolean canEngrave()
 	{
-		if (engraverItemStacks[0] == null || EngraverRecipes.instance().getEngravingResult(engraverItemStacks[0], (ItemEngraving)engraverItemStacks[1].getItem()) == null)
+		if (engraverItemStacks.get(0).isEmpty() || EngraverRecipes.instance().getEngravingResult(engraverItemStacks.get(0), (ItemEngraving)engraverItemStacks.get(1).getItem()).isEmpty())
 			return false;
 		else
 		{
-			ItemStack itemstack = EngraverRecipes.instance().getEngravingResult(engraverItemStacks[0], (ItemEngraving)engraverItemStacks[1].getItem());
-			if (itemstack == null) return false;
-			if (engraverItemStacks[2] == null) return true;
-			if (!engraverItemStacks[2].isItemEqual(itemstack)) return false;
-			int result = engraverItemStacks[2].stackSize + itemstack.stackSize;
-			return result <= getInventoryStackLimit() && result <= engraverItemStacks[2].getMaxStackSize();
+			ItemStack itemstack = EngraverRecipes.instance().getEngravingResult(engraverItemStacks.get(0), (ItemEngraving)engraverItemStacks.get(1).getItem());
+			if (itemstack.isEmpty()) return false;
+			if (engraverItemStacks.get(2).isEmpty()) return true;
+			if (!engraverItemStacks.get(2).isItemEqual(itemstack)) return false;
+			int result = engraverItemStacks.get(2).getCount() + itemstack.getCount();
+			return result <= getInventoryStackLimit() && result <= engraverItemStacks.get(2).getMaxStackSize();
 		}
 	}
 
@@ -238,24 +199,24 @@ public class TileEntityEngraver extends TileEntity implements ISidedInventory, I
 	{
 		if (canEngrave())
 		{
-			ItemStack itemstack = EngraverRecipes.instance().getEngravingResult(engraverItemStacks[0], (ItemEngraving)engraverItemStacks[1].getItem());
+			ItemStack itemstack = EngraverRecipes.instance().getEngravingResult(engraverItemStacks.get(0), (ItemEngraving)engraverItemStacks.get(1).getItem());
 
-			if (engraverItemStacks[2] == null)
-				engraverItemStacks[2] = itemstack.copy();
-			else if (engraverItemStacks[2].getItem() == itemstack.getItem())
-				engraverItemStacks[2].stackSize += itemstack.stackSize;
+			if (engraverItemStacks.get(2).isEmpty())
+				engraverItemStacks.set(2, itemstack.copy());
+			else if (engraverItemStacks.get(2).getItem() == itemstack.getItem())
+				engraverItemStacks.get(2).grow(itemstack.getCount());
 
-			--engraverItemStacks[0].stackSize;
+			engraverItemStacks.get(0).shrink(1);
 
-			if (engraverItemStacks[0].stackSize <= 0)
-				engraverItemStacks[0] = null;
+			if (engraverItemStacks.get(0).getCount() <= 0)
+				engraverItemStacks.set(0, ItemStack.EMPTY);
 		}
 	}
 
 	@Override
-	public boolean isUseableByPlayer(EntityPlayer par1EntityPlayer)
+	public boolean isUsableByPlayer(EntityPlayer par1EntityPlayer)
 	{
-		return worldObj.getTileEntity(pos) != this ? false : par1EntityPlayer.getDistanceSq(pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D) <= 64.0D;
+		return world.getTileEntity(pos) != this ? false : par1EntityPlayer.getDistanceSq(pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D) <= 64.0D;
 	}
 
 	@Override
@@ -303,4 +264,14 @@ public class TileEntityEngraver extends TileEntity implements ISidedInventory, I
 
 	@Override
 	public void clear() {}
+
+	@Override
+	public boolean isEmpty()
+	{
+		for (ItemStack itemstack : engraverItemStacks)
+			if (!itemstack.isEmpty())
+				return false;
+
+		return true;
+	}
 }

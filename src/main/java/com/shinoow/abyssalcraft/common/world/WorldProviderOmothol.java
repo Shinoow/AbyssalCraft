@@ -39,7 +39,7 @@ public class WorldProviderOmothol extends WorldProvider {
 	@Override
 	public IChunkGenerator createChunkGenerator()
 	{
-		return new ChunkProviderOmothol(worldObj, 1251393890L);
+		return new ChunkProviderOmothol(world, 1251393890L);
 	}
 
 	@Override
@@ -121,7 +121,7 @@ public class WorldProviderOmothol extends WorldProvider {
 	@Override
 	public boolean canCoordinateBeSpawn(int x, int z)
 	{
-		return worldObj.getGroundAboveSeaLevel(new BlockPos(x, 0, z)) == ACBlocks.omothol_stone.getDefaultState();
+		return world.getGroundAboveSeaLevel(new BlockPos(x, 0, z)) == ACBlocks.omothol_stone.getDefaultState();
 	}
 
 	@Override

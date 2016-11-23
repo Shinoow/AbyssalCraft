@@ -24,14 +24,14 @@ import com.shinoow.abyssalcraft.common.entity.EntityRemnant;
 @SideOnly(Side.CLIENT)
 public class RenderRemnant extends RenderLiving<EntityRemnant> {
 
-	private static ResourceLocation defaultTexture = new ResourceLocation("abyssalcraft:textures/model/remnant/Remnant.png");
-	private static final ResourceLocation remnantTexture = new ResourceLocation("abyssalcraft:textures/model/remnant/Remnant.png");
-	private static final ResourceLocation librarianTexture = new ResourceLocation("abyssalcraft:textures/model/remnant/Remnant_librarian.png");
-	private static final ResourceLocation priestTexture = new ResourceLocation("abyssalcraft:textures/model/remnant/Remnant_priest.png");
-	private static final ResourceLocation blacksmithTexture = new ResourceLocation("abyssalcraft:textures/model/remnant/Remnant_blacksmith.png");
-	private static final ResourceLocation butcherTexture = new ResourceLocation("abyssalcraft:textures/model/remnant/Remnant_butcher.png");
-	private static final ResourceLocation bankerTexture = new ResourceLocation("abyssalcraft:textures/model/remnant/Remnant_banker.png");
-	private static final ResourceLocation masterBlacksmithTexture = new ResourceLocation("abyssalcraft:textures/model/remnant/Remnant_master_blacksmith.png");
+	private static ResourceLocation defaultTexture = new ResourceLocation("abyssalcraft:textures/model/remnant/remnant.png");
+	private static final ResourceLocation remnantTexture = new ResourceLocation("abyssalcraft:textures/model/remnant/remnant.png");
+	private static final ResourceLocation librarianTexture = new ResourceLocation("abyssalcraft:textures/model/remnant/remnant_librarian.png");
+	private static final ResourceLocation priestTexture = new ResourceLocation("abyssalcraft:textures/model/remnant/remnant_priest.png");
+	private static final ResourceLocation blacksmithTexture = new ResourceLocation("abyssalcraft:textures/model/remnant/remnant_blacksmith.png");
+	private static final ResourceLocation butcherTexture = new ResourceLocation("abyssalcraft:textures/model/remnant/remnant_butcher.png");
+	private static final ResourceLocation bankerTexture = new ResourceLocation("abyssalcraft:textures/model/remnant/remnant_banker.png");
+	private static final ResourceLocation masterBlacksmithTexture = new ResourceLocation("abyssalcraft:textures/model/remnant/remnant_master_blacksmith.png");
 
 	public RenderRemnant(RenderManager manager)
 	{

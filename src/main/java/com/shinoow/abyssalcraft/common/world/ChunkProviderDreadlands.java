@@ -105,7 +105,7 @@ public class ChunkProviderDreadlands implements IChunkGenerator {
 		for (int j = -2; j <= 2; ++j)
 			for (int k = -2; k <= 2; ++k)
 			{
-				float f = 10.0F / MathHelper.sqrt_float(j * j + k * k + 0.2F);
+				float f = 10.0F / MathHelper.sqrt(j * j + k * k + 0.2F);
 				parabolicField[j + 2 + (k + 2) * 5] = f;
 			}
 	}
@@ -199,7 +199,7 @@ public class ChunkProviderDreadlands implements IChunkGenerator {
 		rand.setSeed(par1 * 341873128712L + par2 * 132897987541L);
 		ChunkPrimer primer = new ChunkPrimer();
 		setBlocksInChunk(par1, par2, primer);
-		biomesForGeneration = worldObj.getBiomeProvider().loadBlockGeneratorData(biomesForGeneration, par1 * 16, par2 * 16, 16, 16);
+		biomesForGeneration = worldObj.getBiomeProvider().getBiomes(biomesForGeneration, par1 * 16, par2 * 16, 16, 16);
 		replaceBlocksForBiome(par1, par2, primer, biomesForGeneration);
 		caveGenerator.generate(worldObj, par1, par2, primer);
 		ravineGenerator.generate(worldObj, par1, par2, primer);
@@ -304,7 +304,7 @@ public class ChunkProviderDreadlands implements IChunkGenerator {
 					double d7 = doubleArray2[l] / 512.0D;
 					double d8 = doubleArray3[l] / 512.0D;
 					double d9 = (doubleArray1[l] / 10.0D + 1.0D) / 2.0D;
-					double d10 = MathHelper.denormalizeClamp(d7, d8, d9) - d6;
+					double d10 = MathHelper.clampedLerp(d7, d8, d9) - d6;
 
 					if (j2 > 29)
 					{
@@ -327,7 +327,7 @@ public class ChunkProviderDreadlands implements IChunkGenerator {
 		BlockFalling.fallInstantly = true;
 		int k = par2 * 16;
 		int l = par3 * 16;
-		Biome Biome = worldObj.getBiomeGenForCoords(new BlockPos(k + 16, 0, l + 16));
+		Biome Biome = worldObj.getBiome(new BlockPos(k + 16, 0, l + 16));
 		rand.setSeed(worldObj.getSeed());
 		long i1 = rand.nextLong() / 2L * 2L + 1L;
 		long j1 = rand.nextLong() / 2L * 2L + 1L;
@@ -376,12 +376,12 @@ public class ChunkProviderDreadlands implements IChunkGenerator {
 	@SuppressWarnings("rawtypes")
 	public List getPossibleCreatures(EnumCreatureType par1EnumCreatureType, BlockPos pos)
 	{
-		Biome biome = worldObj.getBiomeGenForCoords(pos);
+		Biome biome = worldObj.getBiome(pos);
 		return biome == null ? null : biome.getSpawnableList(par1EnumCreatureType);
 	}
 
 	@Override
-	public BlockPos getStrongholdGen(World p_147416_1_, String p_147416_2_, BlockPos pos)
+	public BlockPos getStrongholdGen(World p_147416_1_, String p_147416_2_, BlockPos pos, boolean bool)
 	{
 		return null;
 	}

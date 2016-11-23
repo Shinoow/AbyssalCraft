@@ -30,6 +30,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumBlockRenderType;
+import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
@@ -63,7 +64,7 @@ public class BlockTieredEnergyCollector extends BlockContainer {
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
-	public void getSubBlocks(Item par1, CreativeTabs par2CreativeTabs, List par3List) {
+	public void getSubBlocks(Item par1, CreativeTabs par2CreativeTabs, NonNullList<ItemStack> par3List) {
 		par3List.add(new ItemStack(par1, 1, 0));
 		par3List.add(new ItemStack(par1, 1, 1));
 		par3List.add(new ItemStack(par1, 1, 2));
@@ -117,7 +118,7 @@ public class BlockTieredEnergyCollector extends BlockContainer {
 			item.motionX = (float)rand.nextGaussian() * f3;
 			item.motionY = (float)rand.nextGaussian() * f3 + 0.2F;
 			item.motionZ = (float)rand.nextGaussian() * f3;
-			world.spawnEntityInWorld(item);
+			world.spawnEntity(item);
 		}
 
 		super.breakBlock(world, pos, state);

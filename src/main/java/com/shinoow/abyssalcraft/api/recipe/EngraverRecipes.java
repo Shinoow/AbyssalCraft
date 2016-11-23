@@ -63,7 +63,7 @@ public class EngraverRecipes {
 		if(coins.contains(par1ItemStack))
 			return par1ItemStack;
 
-		return null;
+		return ItemStack.EMPTY;
 	}
 
 	/**
@@ -78,7 +78,7 @@ public class EngraverRecipes {
 					par2.getItem() == ACItems.coin && par1 != ACItems.blank_engraving)
 						return engravings.get(par1);
 
-		return null;
+		return ItemStack.EMPTY;
 	}
 
 	private boolean areStacksEqual(ItemStack par1ItemStack, ItemStack par2ItemStack)

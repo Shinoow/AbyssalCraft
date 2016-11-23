@@ -86,7 +86,7 @@ public class EntityLesserDreadbeast extends EntityMob implements IDreadEntity, I
 	}
 
 	@Override
-	protected PathNavigate getNewNavigator(World worldIn)
+	protected PathNavigate createNavigator(World worldIn)
 	{
 		return new PathNavigateClimber(this, worldIn);
 	}
@@ -118,7 +118,7 @@ public class EntityLesserDreadbeast extends EntityMob implements IDreadEntity, I
 	{
 		super.onUpdate();
 
-		if (!worldObj.isRemote)
+		if (!world.isRemote)
 			setBesideClimbableBlock(isCollidedHorizontally);
 	}
 
@@ -212,17 +212,17 @@ public class EntityLesserDreadbeast extends EntityMob implements IDreadEntity, I
 			setAttackMode(true);
 		else setAttackMode(false);
 
-		if(worldObj.rand.nextInt(200) == 0)
-			if(!worldObj.isRemote){
-				EntityDreadSpawn spawn = new EntityDreadSpawn(worldObj);
+		if(world.rand.nextInt(200) == 0)
+			if(!world.isRemote){
+				EntityDreadSpawn spawn = new EntityDreadSpawn(world);
 				spawn.copyLocationAndAnglesFrom(this);
-				worldObj.spawnEntityInWorld(spawn);
+				world.spawnEntity(spawn);
 			}
-		if(worldObj.rand.nextInt(10000) == 0)
-			if(!worldObj.isRemote){
-				EntityGreaterDreadSpawn spawn = new EntityGreaterDreadSpawn(worldObj);
+		if(world.rand.nextInt(10000) == 0)
+			if(!world.isRemote){
+				EntityGreaterDreadSpawn spawn = new EntityGreaterDreadSpawn(world);
 				spawn.copyLocationAndAnglesFrom(this);
-				worldObj.spawnEntityInWorld(spawn);
+				world.spawnEntity(spawn);
 			}
 	}
 
@@ -238,13 +238,13 @@ public class EntityLesserDreadbeast extends EntityMob implements IDreadEntity, I
 	@Override
 	public void onDeath(DamageSource par1DamageSource) {
 
-		if(!worldObj.isRemote){
-			EntityGreaterDreadSpawn spawn1 = new EntityGreaterDreadSpawn(worldObj);
-			EntityGreaterDreadSpawn spawn2 = new EntityGreaterDreadSpawn(worldObj);
+		if(!world.isRemote){
+			EntityGreaterDreadSpawn spawn1 = new EntityGreaterDreadSpawn(world);
+			EntityGreaterDreadSpawn spawn2 = new EntityGreaterDreadSpawn(world);
 			spawn1.copyLocationAndAnglesFrom(this);
 			spawn2.copyLocationAndAnglesFrom(this);
-			worldObj.spawnEntityInWorld(spawn1);
-			worldObj.spawnEntityInWorld(spawn2);
+			world.spawnEntity(spawn1);
+			world.spawnEntity(spawn2);
 		}
 		super.onDeath(par1DamageSource);
 	}
@@ -252,13 +252,13 @@ public class EntityLesserDreadbeast extends EntityMob implements IDreadEntity, I
 	@Override
 	public void attackEntityWithRangedAttack(EntityLivingBase p_82196_1_,
 			float p_82196_2_) {
-		EntityDreadSlug entitydreadslug = new EntityDreadSlug(worldObj, this);
+		EntityDreadSlug entitydreadslug = new EntityDreadSlug(world, this);
 		double d0 = p_82196_1_.posX - posX;
 		double d1 = p_82196_1_.posY + p_82196_1_.getEyeHeight() - 1.100000023841858D - entitydreadslug.posY;
 		double d2 = p_82196_1_.posZ - posZ;
-		float f1 = MathHelper.sqrt_double(d0 * d0 + d2 * d2) * 0.2F;
+		float f1 = MathHelper.sqrt(d0 * d0 + d2 * d2) * 0.2F;
 		entitydreadslug.setThrowableHeading(d0, d1 + f1, d2, 1.6F, 12.0F);
 		playSound(SoundEvents.ENTITY_SKELETON_SHOOT, 1.0F, 1.0F / (getRNG().nextFloat() * 0.4F + 0.8F));
-		worldObj.spawnEntityInWorld(entitydreadslug);
+		world.spawnEntity(entitydreadslug);
 	}
 }

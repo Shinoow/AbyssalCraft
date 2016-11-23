@@ -17,6 +17,7 @@ import mezz.jei.api.IGuiHelper;
 import mezz.jei.api.gui.IDrawable;
 import mezz.jei.api.gui.IGuiItemStackGroup;
 import mezz.jei.api.gui.IRecipeLayout;
+import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.recipe.IRecipeCategory;
 import mezz.jei.api.recipe.IRecipeWrapper;
 import net.minecraft.client.Minecraft;
@@ -64,17 +65,18 @@ public class RendingRecipeCategory implements IRecipeCategory {
 	public void drawExtras(Minecraft minecraft) {}
 
 	@Override
-	public void drawAnimations(Minecraft minecraft) {}
-
-	@Override
-	public void setRecipe(IRecipeLayout recipeLayout, IRecipeWrapper recipeWrapper) {
+	public void setRecipe(IRecipeLayout recipeLayout, IRecipeWrapper recipeWrapper, IIngredients ingredients) {
 		if(recipeWrapper instanceof RendingRecipeWrapper){
 			IGuiItemStackGroup itemStacks = recipeLayout.getItemStacks();
-			RendingRecipeWrapper wrapper = (RendingRecipeWrapper)recipeWrapper;
-
 			itemStacks.init(output, false, 72, 0);
 
-			itemStacks.setFromRecipe(output, wrapper.getOutputs());
+			itemStacks.set(ingredients);
 		}
+	}
+
+	@Override
+	public IDrawable getIcon() {
+
+		return null;
 	}
 }

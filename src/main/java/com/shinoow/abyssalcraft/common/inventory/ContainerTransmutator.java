@@ -99,13 +99,13 @@ public class ContainerTransmutator extends Container {
 	@Override
 	public boolean canInteractWith(EntityPlayer par1EntityPlayer)
 	{
-		return tileTransmutator.isUseableByPlayer(par1EntityPlayer);
+		return tileTransmutator.isUsableByPlayer(par1EntityPlayer);
 	}
 
 	@Override
 	public ItemStack transferStackInSlot(EntityPlayer par1EntityPlayer, int par2)
 	{
-		ItemStack itemstack = null;
+		ItemStack itemstack = ItemStack.EMPTY;
 		Slot slot = inventorySlots.get(par2);
 
 		if (slot != null && slot.getHasStack())
@@ -116,42 +116,42 @@ public class ContainerTransmutator extends Container {
 			if (par2 == 2)
 			{
 				if (!mergeItemStack(itemstack1, 3, 39, true))
-					return null;
+					return ItemStack.EMPTY;
 
 				slot.onSlotChange(itemstack1, itemstack);
 			}
 			else if (par2 != 1 && par2 != 0)
 			{
-				if (TransmutatorRecipes.instance().getTransmutationResult(itemstack1) != null)
+				if (!TransmutatorRecipes.instance().getTransmutationResult(itemstack1).isEmpty())
 				{
 					if (!mergeItemStack(itemstack1, 0, 1, false))
-						return null;
+						return ItemStack.EMPTY;
 				}
 				else if (TileEntityTransmutator.isItemFuel(itemstack1))
 				{
 					if (!mergeItemStack(itemstack1, 1, 2, false))
-						return null;
+						return ItemStack.EMPTY;
 				}
 				else if (par2 >= 3 && par2 < 30)
 				{
 					if (!mergeItemStack(itemstack1, 30, 39, false))
-						return null;
+						return ItemStack.EMPTY;
 				}
 				else if (par2 >= 30 && par2 < 39 && !mergeItemStack(itemstack1, 3, 30, false))
-					return null;
+					return ItemStack.EMPTY;
 			}
 			else if (!mergeItemStack(itemstack1, 3, 39, false))
-				return null;
+				return ItemStack.EMPTY;
 
-			if (itemstack1.stackSize == 0)
-				slot.putStack((ItemStack)null);
+			if (itemstack1.isEmpty())
+				slot.putStack(ItemStack.EMPTY);
 			else
 				slot.onSlotChanged();
 
-			if (itemstack1.stackSize == itemstack.stackSize)
-				return null;
+			if (itemstack1.getCount() == itemstack.getCount())
+				return ItemStack.EMPTY;
 
-			slot.onPickupFromSlot(par1EntityPlayer, itemstack1);
+			slot.onTake(par1EntityPlayer, itemstack1);
 		}
 
 		return itemstack;

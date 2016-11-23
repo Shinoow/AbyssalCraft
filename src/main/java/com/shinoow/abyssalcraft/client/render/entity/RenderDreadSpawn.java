@@ -23,7 +23,7 @@ import com.shinoow.abyssalcraft.common.entity.EntityDreadSpawn;
 @SideOnly(Side.CLIENT)
 public class RenderDreadSpawn extends RenderLiving<EntityDreadSpawn> {
 
-	private static final ResourceLocation mobTexture = new ResourceLocation("abyssalcraft:textures/model/elite/Dread_guard.png");
+	private static final ResourceLocation mobTexture = new ResourceLocation("abyssalcraft:textures/model/elite/dread_guard.png");
 
 	public RenderDreadSpawn(RenderManager manager)
 	{

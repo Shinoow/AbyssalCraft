@@ -207,7 +207,7 @@ public class EntityJzahar extends EntityMob implements IRangedAttackMob, IAntiEn
 	@Override
 	public boolean attackEntityFrom(DamageSource par1DamageSource, float par2)
 	{
-		if(par2 > 30) par2 = 10 + worldObj.rand.nextInt(10);
+		if(par2 > 30) par2 = 10 + world.rand.nextInt(10);
 
 		return super.attackEntityFrom(par1DamageSource, par2);
 	}
@@ -220,7 +220,7 @@ public class EntityJzahar extends EntityMob implements IRangedAttackMob, IAntiEn
 	@Override
 	public void onDeath(DamageSource par1DamageSource) {
 		bossInfo.setPercent(getHealth() / getMaxHealth());
-		List<EntityPlayer> players = worldObj.getEntitiesWithinAABB(EntityPlayer.class, getEntityBoundingBox().expand(10, 10, 10));
+		List<EntityPlayer> players = world.getEntitiesWithinAABB(EntityPlayer.class, getEntityBoundingBox().expand(10, 10, 10));
 		for(EntityPlayer player : players)
 			player.addStat(ACAchievements.kill_jzahar, 1);
 		super.onDeath(par1DamageSource);
@@ -267,55 +267,55 @@ public class EntityJzahar extends EntityMob implements IRangedAttackMob, IAntiEn
 		float f1 = (rand.nextFloat() - 0.5F) * 4.0F;
 		float f2 = (rand.nextFloat() - 0.5F) * 8.0F;
 
-		List list = worldObj.getEntitiesWithinAABBExcludingEntity(this, getEntityBoundingBox().expand(64.0D, 64.0D, 64.0D));
+		List list = world.getEntitiesWithinAABBExcludingEntity(this, getEntityBoundingBox().expand(64.0D, 64.0D, 64.0D));
 		if (list != null)
 			for (int k2 = 0; k2 < list.size(); k2++) {
 				Entity entity = (Entity)list.get(k2);
 				if(entity instanceof EntityDragon || entity instanceof EntityWither){
-					if(!worldObj.isRemote){
-						worldObj.removeEntity(entity);
+					if(!world.isRemote){
+						world.removeEntity(entity);
 						if(entity.isDead)
-							SpecialTextUtil.JzaharGroup(worldObj, I18n.translateToLocal("message.jzahar.banish.vanilla"));
+							SpecialTextUtil.JzaharGroup(world, I18n.translateToLocal("message.jzahar.banish.vanilla"));
 					} else if(ACConfig.particleEntity)
-						worldObj.spawnParticle(EnumParticleTypes.EXPLOSION_HUGE, entity.posX + f, entity.posY + 2.0D + f1, entity.posZ + f2, 0.0D, 0.0D, 0.0D);
+						world.spawnParticle(EnumParticleTypes.EXPLOSION_HUGE, entity.posX + f, entity.posY + 2.0D + f1, entity.posZ + f2, 0.0D, 0.0D, 0.0D);
 				}
 				else if(entity instanceof EntityDragonBoss || entity instanceof EntitySacthoth || entity instanceof EntityChagaroth){
-					if(!worldObj.isRemote){
-						worldObj.removeEntity(entity);
+					if(!world.isRemote){
+						world.removeEntity(entity);
 						if(entity.isDead)
-							SpecialTextUtil.JzaharGroup(worldObj, I18n.translateToLocal("message.jzahar.banish.ac"));
+							SpecialTextUtil.JzaharGroup(world, I18n.translateToLocal("message.jzahar.banish.ac"));
 					} else if(ACConfig.particleEntity)
-						worldObj.spawnParticle(EnumParticleTypes.EXPLOSION_HUGE, entity.posX + f, entity.posY + 2.0D + f1, entity.posZ + f2, 0.0D, 0.0D, 0.0D);
+						world.spawnParticle(EnumParticleTypes.EXPLOSION_HUGE, entity.posX + f, entity.posY + 2.0D + f1, entity.posZ + f2, 0.0D, 0.0D, 0.0D);
 				}
 				else if(entity instanceof EntityJzahar){
-					if(!worldObj.isRemote){
-						worldObj.removeEntity(entity);
-						worldObj.removeEntity(this);
-						EntityJzahar newgatekeeper = new EntityJzahar(worldObj);
+					if(!world.isRemote){
+						world.removeEntity(entity);
+						world.removeEntity(this);
+						EntityJzahar newgatekeeper = new EntityJzahar(world);
 						newgatekeeper.copyLocationAndAnglesFrom(this);
 						if(rand.nextBoolean())
-							worldObj.spawnEntityInWorld(newgatekeeper);
+							world.spawnEntity(newgatekeeper);
 						if(!that){
 							that = true;
-							SpecialTextUtil.JzaharGroup(worldObj, I18n.translateToLocal("message.jzahar.banish.jzh"));
+							SpecialTextUtil.JzaharGroup(world, I18n.translateToLocal("message.jzahar.banish.jzh"));
 						}
 					} else if(ACConfig.particleEntity){
-						worldObj.spawnParticle(EnumParticleTypes.EXPLOSION_HUGE, entity.posX + f, entity.posY + 2.0D + f1, entity.posZ + f2, 0.0D, 0.0D, 0.0D);
-						worldObj.spawnParticle(EnumParticleTypes.EXPLOSION_HUGE, posX + f, posY + 2.0D + f1, posZ + f2, 0.0D, 0.0D, 0.0D);
+						world.spawnParticle(EnumParticleTypes.EXPLOSION_HUGE, entity.posX + f, entity.posY + 2.0D + f1, entity.posZ + f2, 0.0D, 0.0D, 0.0D);
+						world.spawnParticle(EnumParticleTypes.EXPLOSION_HUGE, posX + f, posY + 2.0D + f1, posZ + f2, 0.0D, 0.0D, 0.0D);
 					}
 				}
 				else if(!entity.isNonBoss()){
-					if(!worldObj.isRemote){
-						worldObj.removeEntity(entity);
+					if(!world.isRemote){
+						world.removeEntity(entity);
 						if(entity.isDead)
-							SpecialTextUtil.JzaharGroup(worldObj, I18n.translateToLocal("message.jzahar.banish.other"));
+							SpecialTextUtil.JzaharGroup(world, I18n.translateToLocal("message.jzahar.banish.other"));
 					} else if(ACConfig.particleEntity)
-						worldObj.spawnParticle(EnumParticleTypes.EXPLOSION_HUGE, entity.posX + f, entity.posY + 2.0D + f1, entity.posZ + f2, 0.0D, 0.0D, 0.0D);
+						world.spawnParticle(EnumParticleTypes.EXPLOSION_HUGE, entity.posX + f, entity.posY + 2.0D + f1, entity.posZ + f2, 0.0D, 0.0D, 0.0D);
 				}
 				else if(entity instanceof EntityPlayer)
 					if(((EntityPlayer)entity).capabilities.isCreativeMode && talkTimer == 0 && getDistanceToEntity(entity) <= 5){
 						talkTimer = 1200;
-						if(worldObj.isRemote)
+						if(world.isRemote)
 							if(EntityUtil.isPlayerCoralium((EntityPlayer)entity))
 								SpecialTextUtil.JzaharText("<insert generic text here>");
 							else {
@@ -356,25 +356,25 @@ public class EntityJzahar extends EntityMob implements IRangedAttackMob, IAntiEn
 			if(deathTicks == 410)
 				playSound(ACSounds.jzahar_charge, 1, 1);
 			if(deathTicks < 400)
-				worldObj.spawnParticle(EnumParticleTypes.SMOKE_LARGE, posX, posY + 2.5D, posZ, 0, 0, 0);
+				world.spawnParticle(EnumParticleTypes.SMOKE_LARGE, posX, posY + 2.5D, posZ, 0, 0, 0);
 			float f = (rand.nextFloat() - 0.5F) * 3.0F;
 			float f1 = (rand.nextFloat() - 0.5F) * 2.0F;
 			float f2 = (rand.nextFloat() - 0.5F) * 3.0F;
 			if(deathTicks >= 100 && deathTicks < 400)
-				worldObj.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, posX + f, posY + f1, posZ + f2, 0.0D, 0.0D, 0.0D);
+				world.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, posX + f, posY + f1, posZ + f2, 0.0D, 0.0D, 0.0D);
 			if(deathTicks >= 200 && deathTicks < 400){
-				worldObj.spawnParticle(EnumParticleTypes.SMOKE_LARGE, posX + f, posY + f1, posZ + f2, 0.0D, 0.0D, 0.0D);
-				worldObj.spawnParticle(EnumParticleTypes.LAVA, posX, posY + 2.5D, posZ, 0, 0, 0, 0);
+				world.spawnParticle(EnumParticleTypes.SMOKE_LARGE, posX + f, posY + f1, posZ + f2, 0.0D, 0.0D, 0.0D);
+				world.spawnParticle(EnumParticleTypes.LAVA, posX, posY + 2.5D, posZ, 0, 0, 0, 0);
 			}
-			worldObj.spawnParticle(EnumParticleTypes.SMOKE_LARGE, posX, posY + 1.5D, posZ, 0, 0, 0);
+			world.spawnParticle(EnumParticleTypes.SMOKE_LARGE, posX, posY + 1.5D, posZ, 0, 0, 0);
 			if (deathTicks >= 790 && deathTicks <= 800){
-				worldObj.spawnParticle(EnumParticleTypes.EXPLOSION_HUGE, posX, posY + 1.5D, posZ, 0.0D, 0.0D, 0.0D);
+				world.spawnParticle(EnumParticleTypes.EXPLOSION_HUGE, posX, posY + 1.5D, posZ, 0.0D, 0.0D, 0.0D);
 				playSound(SoundEvents.ENTITY_GENERIC_EXPLODE, 4, (1.0F + (rand.nextFloat() - rand.nextFloat()) * 0.2F) * 0.7F);
 			}
 			if(deathTicks > 400 && deathTicks < 800){
 				float size = 32F;
 
-				List<Entity> list = worldObj.getEntitiesWithinAABB(Entity.class, getEntityBoundingBox().expand(size, size, size));
+				List<Entity> list = world.getEntitiesWithinAABB(Entity.class, getEntityBoundingBox().expand(size, size, size));
 
 				for(Entity entity : list)
 				{
@@ -392,7 +392,7 @@ public class EntityJzahar extends EntityMob implements IRangedAttackMob, IAntiEn
 		int i;
 		int j;
 
-		if (!worldObj.isRemote)
+		if (!world.isRemote)
 			if (deathTicks > 750 && deathTicks % 5 == 0)
 			{
 				i = 500;
@@ -401,37 +401,37 @@ public class EntityJzahar extends EntityMob implements IRangedAttackMob, IAntiEn
 				{
 					j = EntityXPOrb.getXPSplit(i);
 					i -= j;
-					worldObj.spawnEntityInWorld(new EntityXPOrb(worldObj, posX, posY, posZ, j));
+					world.spawnEntity(new EntityXPOrb(world, posX, posY, posZ, j));
 				}
 			}
-		if(deathTicks == 790 && !worldObj.isRemote){
+		if(deathTicks == 790 && !world.isRemote){
 			List<BlockPos> blocks = new ArrayList<BlockPos>();
 			for(int x = 0; x < 10; x++)
 				for(int y = 0; y < 10; y++)
 					for(int z = 0; z < 10; z++){
-						if(!worldObj.isAirBlock(new BlockPos(posX + x, posY + y, posZ + z)))
+						if(!world.isAirBlock(new BlockPos(posX + x, posY + y, posZ + z)))
 							blocks.add(new BlockPos(posX + x, posY + y, posZ + z));
-						if(!worldObj.isAirBlock(new BlockPos(posX - x, posY + y, posZ + z)))
+						if(!world.isAirBlock(new BlockPos(posX - x, posY + y, posZ + z)))
 							blocks.add(new BlockPos(posX - x, posY + y, posZ + z));
-						if(!worldObj.isAirBlock(new BlockPos(posX + x, posY + y, posZ - z)))
+						if(!world.isAirBlock(new BlockPos(posX + x, posY + y, posZ - z)))
 							blocks.add(new BlockPos(posX + x, posY + y, posZ - z));
-						if(!worldObj.isAirBlock(new BlockPos(posX - x, posY + y, posZ - z)))
+						if(!world.isAirBlock(new BlockPos(posX - x, posY + y, posZ - z)))
 							blocks.add(new BlockPos(posX - x, posY + y, posZ - z));
-						if(!worldObj.isAirBlock(new BlockPos(posX + x, posY - y, posZ + z)))
+						if(!world.isAirBlock(new BlockPos(posX + x, posY - y, posZ + z)))
 							blocks.add(new BlockPos(posX + x, posY - y, posZ + z));
-						if(!worldObj.isAirBlock(new BlockPos(posX - x, posY - y, posZ + z)))
+						if(!world.isAirBlock(new BlockPos(posX - x, posY - y, posZ + z)))
 							blocks.add(new BlockPos(posX - x, posY - y, posZ + z));
-						if(!worldObj.isAirBlock(new BlockPos(posX + x, posY - y, posZ - z)))
+						if(!world.isAirBlock(new BlockPos(posX + x, posY - y, posZ - z)))
 							blocks.add(new BlockPos(posX + x, posY - y, posZ - z));
-						if(!worldObj.isAirBlock(new BlockPos(posX - x, posY - y, posZ - z)))
+						if(!world.isAirBlock(new BlockPos(posX - x, posY - y, posZ - z)))
 							blocks.add(new BlockPos(posX - x, posY - y, posZ - z));
 					}
 			for(BlockPos pos : blocks)
-				if(worldObj.getBlockState(pos).getBlock() != Blocks.BEDROCK)
-					worldObj.setBlockToAir(pos);
+				if(world.getBlockState(pos).getBlock() != Blocks.BEDROCK)
+					world.setBlockToAir(pos);
 
-			if(!worldObj.getEntitiesWithinAABB(Entity.class, getEntityBoundingBox().expand(3,1,3)).isEmpty()){
-				List<Entity> entities = worldObj.getEntitiesWithinAABBExcludingEntity(this, getEntityBoundingBox().expand(3,1,3));
+			if(!world.getEntitiesWithinAABB(Entity.class, getEntityBoundingBox().expand(3,1,3)).isEmpty()){
+				List<Entity> entities = world.getEntitiesWithinAABBExcludingEntity(this, getEntityBoundingBox().expand(3,1,3));
 				for(Entity entity: entities)
 					if(entity instanceof EntityPlayer){
 						EntityPlayer player = (EntityPlayer) entity;
@@ -445,7 +445,7 @@ public class EntityJzahar extends EntityMob implements IRangedAttackMob, IAntiEn
 						player.addPotionEffect(new PotionEffect(MobEffects.HUNGER, 2400, 5));
 						player.addPotionEffect(new PotionEffect(MobEffects.POISON, 2400, 5));
 						if(player instanceof EntityPlayerMP){
-							WorldServer worldServer = (WorldServer) player.worldObj;
+							WorldServer worldServer = (WorldServer) player.world;
 							EntityPlayerMP mp = (EntityPlayerMP) player;
 							mp.addPotionEffect(new PotionEffect(MobEffects.RESISTANCE, 80, 255));
 							mp.mcServer.getPlayerList().transferPlayerToDimension(mp, ACLib.dark_realm_id, new TeleporterDarkRealm(worldServer));
@@ -455,30 +455,30 @@ public class EntityJzahar extends EntityMob implements IRangedAttackMob, IAntiEn
 					else if(entity instanceof EntityLivingBase || entity instanceof EntityItem)
 						entity.setDead();
 			}
-			if(worldObj.getClosestPlayerToEntity(this, 48) != null)
-				worldObj.spawnEntityInWorld(new EntityGatekeeperEssence(worldObj, posX, posY, posZ));
+			if(world.getClosestPlayerToEntity(this, 48) != null)
+				world.spawnEntity(new EntityGatekeeperEssence(world, posX, posY, posZ));
 		}
 
-		if(deathTicks == 20 && !worldObj.isRemote)
-			SpecialTextUtil.JzaharGroup(worldObj, I18n.translateToLocal("message.jzahar.death.1"));
-		if(deathTicks == 100 && !worldObj.isRemote)
-			SpecialTextUtil.JzaharGroup(worldObj, I18n.translateToLocal("message.jzahar.death.2"));
-		if(deathTicks == 180 && !worldObj.isRemote)
-			SpecialTextUtil.JzaharGroup(worldObj, I18n.translateToLocal("message.jzahar.death.3"));
-		if(deathTicks == 260 && !worldObj.isRemote)
-			SpecialTextUtil.JzaharGroup(worldObj, I18n.translateToLocal("message.jzahar.death.4"));
-		if(deathTicks == 340 && !worldObj.isRemote)
-			SpecialTextUtil.JzaharGroup(worldObj, I18n.translateToLocal("message.jzahar.death.5"));
-		if(deathTicks == 420 && !worldObj.isRemote)
-			SpecialTextUtil.JzaharGroup(worldObj, I18n.translateToLocal("message.jzahar.death.6"));
-		if(deathTicks == 500 && !worldObj.isRemote)
-			SpecialTextUtil.JzaharGroup(worldObj, I18n.translateToLocal("message.jzahar.death.7"));
-		if(deathTicks == 580 && !worldObj.isRemote)
-			SpecialTextUtil.JzaharGroup(worldObj, I18n.translateToLocal("message.jzahar.death.8"));
-		if(deathTicks == 660 && !worldObj.isRemote)
-			SpecialTextUtil.JzaharGroup(worldObj, I18n.translateToLocal("message.jzahar.death.9"));
-		if(deathTicks == 800 && !worldObj.isRemote){
-			SpecialTextUtil.JzaharGroup(worldObj, I18n.translateToLocal("message.jzahar.death.10"));
+		if(deathTicks == 20 && !world.isRemote)
+			SpecialTextUtil.JzaharGroup(world, I18n.translateToLocal("message.jzahar.death.1"));
+		if(deathTicks == 100 && !world.isRemote)
+			SpecialTextUtil.JzaharGroup(world, I18n.translateToLocal("message.jzahar.death.2"));
+		if(deathTicks == 180 && !world.isRemote)
+			SpecialTextUtil.JzaharGroup(world, I18n.translateToLocal("message.jzahar.death.3"));
+		if(deathTicks == 260 && !world.isRemote)
+			SpecialTextUtil.JzaharGroup(world, I18n.translateToLocal("message.jzahar.death.4"));
+		if(deathTicks == 340 && !world.isRemote)
+			SpecialTextUtil.JzaharGroup(world, I18n.translateToLocal("message.jzahar.death.5"));
+		if(deathTicks == 420 && !world.isRemote)
+			SpecialTextUtil.JzaharGroup(world, I18n.translateToLocal("message.jzahar.death.6"));
+		if(deathTicks == 500 && !world.isRemote)
+			SpecialTextUtil.JzaharGroup(world, I18n.translateToLocal("message.jzahar.death.7"));
+		if(deathTicks == 580 && !world.isRemote)
+			SpecialTextUtil.JzaharGroup(world, I18n.translateToLocal("message.jzahar.death.8"));
+		if(deathTicks == 660 && !world.isRemote)
+			SpecialTextUtil.JzaharGroup(world, I18n.translateToLocal("message.jzahar.death.9"));
+		if(deathTicks == 800 && !world.isRemote){
+			SpecialTextUtil.JzaharGroup(world, I18n.translateToLocal("message.jzahar.death.10"));
 			setDead();
 		}
 	}
@@ -488,20 +488,20 @@ public class EntityJzahar extends EntityMob implements IRangedAttackMob, IAntiEn
 	}
 
 	private void func_82209_a(int par1, double par2, double par4, double par6, boolean par8) {
-		worldObj.playEvent((EntityPlayer)null, 1014, new BlockPos(posX, posY, posZ), 0);
+		world.playEvent((EntityPlayer)null, 1014, new BlockPos(posX, posY, posZ), 0);
 		double d3 = func_82214_u(par1);
 		double d4 = func_82208_v(par1);
 		double d5 = func_82213_w(par1);
 		double d6 = par2 - d3;
 		double d7 = par4 - d4;
 		double d8 = par6 - d5;
-		EntityWitherSkull entitywitherskull = new EntityWitherSkull(worldObj, this, d6, d7, d8);
+		EntityWitherSkull entitywitherskull = new EntityWitherSkull(world, this, d6, d7, d8);
 		if (par8)
 			entitywitherskull.setInvulnerable(true);
 		entitywitherskull.posY = d4;
 		entitywitherskull.posX = d3;
 		entitywitherskull.posZ = d5;
-		worldObj.spawnEntityInWorld(entitywitherskull);
+		world.spawnEntity(entitywitherskull);
 	}
 
 	@Override
@@ -515,7 +515,7 @@ public class EntityJzahar extends EntityMob implements IRangedAttackMob, IAntiEn
 		par1EntityLivingData = super.onInitialSpawn(difficulty, par1EntityLivingData);
 
 		IAttributeInstance attribute = getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE);
-		Calendar calendar = worldObj.getCurrentDate();
+		Calendar calendar = world.getCurrentDate();
 
 		attribute.removeModifier(attackDamageBoost);
 

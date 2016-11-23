@@ -18,6 +18,7 @@ import java.util.List;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
+import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.recipe.BlankRecipeWrapper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
@@ -43,13 +44,11 @@ public class TransmutationRecipe extends BlankRecipeWrapper {
 			experienceString = null;
 	}
 
-	@Override
 	@Nonnull
 	public List<List<ItemStack>> getInputs() {
 		return input;
 	}
 
-	@Override
 	@Nonnull
 	public List<ItemStack> getOutputs() {
 		return outputs;
@@ -61,5 +60,11 @@ public class TransmutationRecipe extends BlankRecipeWrapper {
 			FontRenderer fontRendererObj = minecraft.fontRendererObj;
 			fontRendererObj.drawString(experienceString, 69 - fontRendererObj.getStringWidth(experienceString) / 2, 0, Color.gray.getRGB());
 		}
+	}
+
+	@Override
+	public void getIngredients(IIngredients ingredients) {
+		ingredients.setInputLists(ItemStack.class, input);
+		ingredients.setOutputs(ItemStack.class, outputs);
 	}
 }

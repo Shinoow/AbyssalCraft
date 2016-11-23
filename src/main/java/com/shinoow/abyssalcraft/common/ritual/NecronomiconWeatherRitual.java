@@ -28,7 +28,7 @@ public class NecronomiconWeatherRitual extends NecronomiconRitual {
 	@Override
 	public boolean canCompleteRitual(World world, BlockPos pos, EntityPlayer player) {
 
-		return world.getBiomeGenForCoords(pos).canRain();
+		return world.getBiome(pos).canRain();
 	}
 
 	@Override

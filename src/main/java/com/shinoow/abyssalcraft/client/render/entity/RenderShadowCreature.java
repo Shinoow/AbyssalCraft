@@ -24,7 +24,7 @@ import com.shinoow.abyssalcraft.client.model.entity.ModelShadowCreature;
 @SideOnly(Side.CLIENT)
 public class RenderShadowCreature extends RenderLiving {
 
-	private static final ResourceLocation mobTexture = new ResourceLocation("abyssalcraft:textures/model/ShadowCreature.png");
+	private static final ResourceLocation mobTexture = new ResourceLocation("abyssalcraft:textures/model/shadowcreature.png");
 
 	public RenderShadowCreature(RenderManager manager)
 	{

@@ -44,7 +44,6 @@ public class ItemHandler implements ILifeCycleHandler {
 		ACItems.oblivion_catalyst = new ItemOC();
 		ACItems.staff_of_the_gatekeeper = new ItemStaff();
 		ACItems.gateway_key = new ItemPortalPlacer(0, "gatewaykey");
-		ACItems.liquid_coralium_bucket = new ItemDeprecated("cbucket");
 		ACItems.powerstone_tracker = new ItemTrackerPSDL();
 		ACItems.eye_of_the_abyss = new ItemEoA();
 		ACItems.dreaded_gateway_key = new ItemPortalPlacer(1, "gatewaykeydl");
@@ -115,7 +114,6 @@ public class ItemHandler implements ILifeCycleHandler {
 		ACItems.ethaxium_ingot = new ItemACBasic("ethaxiumingot");
 
 		//anti-items
-		ACItems.liquid_antimatter_bucket = new ItemDeprecated("antibucket");
 		ACItems.anti_beef = new ItemAntiFood("antibeef");
 		ACItems.anti_chicken = new ItemAntiFood("antichicken");
 		ACItems.anti_pork = new ItemAntiFood("antipork");
@@ -260,7 +258,6 @@ public class ItemHandler implements ILifeCycleHandler {
 		registerItem(ACItems.oblivion_catalyst, "oc");
 		registerItem(ACItems.gateway_key, "gatewaykey");
 		registerItem(ACItems.staff_of_the_gatekeeper, "staff");
-		registerItem(ACItems.liquid_coralium_bucket, "cbucket");
 		registerItem(ACItems.powerstone_tracker, "powerstonetracker");
 		registerItem(ACItems.eye_of_the_abyss, "eoa");
 		registerItem(ACItems.dreaded_gateway_key, "gatewaykeydl");
@@ -340,7 +337,6 @@ public class ItemHandler implements ILifeCycleHandler {
 		registerItem(ACItems.shadow_gem, "shadowgem");
 		registerItem(ACItems.shard_of_oblivion, "oblivionshard");
 		registerItem(ACItems.coralium_longbow, "corbow");
-		registerItem(ACItems.liquid_antimatter_bucket, "antibucket");
 		registerItem(ACItems.coralium_brick, "cbrick");
 		registerItem(ACItems.cudgel, "cudgel");
 		registerItem(ACItems.dreadium_ingot, "dreadiumingot");

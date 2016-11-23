@@ -19,10 +19,10 @@ import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IInventory;
+import net.minecraft.inventory.InventoryHelper;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumBlockRenderType;
@@ -52,9 +52,9 @@ public class BlockCrate extends BlockContainer
 	}
 
 	@Override
-	public void neighborChanged(IBlockState state, World par1World, BlockPos pos, Block par5)
+	public void neighborChanged(IBlockState state, World par1World, BlockPos pos, Block par5, BlockPos pos2)
 	{
-		super.neighborChanged(state, par1World, pos, par5);
+		super.neighborChanged(state, par1World, pos, par5, pos2);
 		TileEntityCrate TileEntityCrate = (TileEntityCrate)par1World.getTileEntity(pos);
 
 		if (TileEntityCrate != null)
@@ -68,35 +68,8 @@ public class BlockCrate extends BlockContainer
 
 		if (TileEntityCrate != null)
 		{
-			for (int j1 = 0; j1 < TileEntityCrate.getSizeInventory(); ++j1)
-			{
-				ItemStack itemstack = TileEntityCrate.getStackInSlot(j1);
 
-				if (itemstack != null)
-				{
-					float f = random.nextFloat() * 0.8F + 0.1F;
-					float f1 = random.nextFloat() * 0.8F + 0.1F;
-					EntityItem entityitem;
-
-					for (float f2 = random.nextFloat() * 0.8F + 0.1F; itemstack.stackSize > 0; par1World.spawnEntityInWorld(entityitem))
-					{
-						int k1 = random.nextInt(21) + 10;
-
-						if (k1 > itemstack.stackSize)
-							k1 = itemstack.stackSize;
-
-						itemstack.stackSize -= k1;
-						entityitem = new EntityItem(par1World, pos.getX() + f, pos.getY() + f1, pos.getZ() + f2, new ItemStack(itemstack.getItem(), k1, itemstack.getItemDamage()));
-						float f3 = 0.05F;
-						entityitem.motionX = (float)random.nextGaussian() * f3;
-						entityitem.motionY = (float)random.nextGaussian() * f3 + 0.2F;
-						entityitem.motionZ = (float)random.nextGaussian() * f3;
-
-						if (itemstack.hasTagCompound())
-							entityitem.getEntityItem().setTagCompound(itemstack.getTagCompound().copy());
-					}
-				}
-			}
+			InventoryHelper.dropInventoryItems(par1World, pos, TileEntityCrate);
 
 			par1World.updateComparatorOutputLevel(pos, this);
 		}
@@ -111,7 +84,7 @@ public class BlockCrate extends BlockContainer
 	}
 
 	@Override
-	public boolean onBlockActivated(World par1World, BlockPos pos, IBlockState state, EntityPlayer par5EntityPlayer, EnumHand hand, ItemStack heldItem, EnumFacing side, float par7, float par8, float par9)
+	public boolean onBlockActivated(World par1World, BlockPos pos, IBlockState state, EntityPlayer par5EntityPlayer, EnumHand hand, EnumFacing side, float par7, float par8, float par9)
 	{
 		if (par1World.isRemote)
 			return true;

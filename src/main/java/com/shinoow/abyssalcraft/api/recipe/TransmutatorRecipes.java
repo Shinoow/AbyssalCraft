@@ -72,7 +72,7 @@ public class TransmutatorRecipes {
 			if(areStacksEqual(par1ItemStack, entry.getKey()))
 				return entry.getValue();
 
-		return null;
+		return ItemStack.EMPTY;
 	}
 
 	private boolean areStacksEqual(ItemStack par1ItemStack, ItemStack par2ItemStack)

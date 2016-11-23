@@ -118,12 +118,12 @@ public class ACExplosion extends Explosion
 
 		affectedBlockPositions.addAll(set);
 		float f3 = explosionSize * 2.0F;
-		int k1 = MathHelper.floor_double(explosionX - f3 - 1.0D);
-		int l1 = MathHelper.floor_double(explosionX + f3 + 1.0D);
-		int i2 = MathHelper.floor_double(explosionY - f3 - 1.0D);
-		int i1 = MathHelper.floor_double(explosionY + f3 + 1.0D);
-		int j2 = MathHelper.floor_double(explosionZ - f3 - 1.0D);
-		int j1 = MathHelper.floor_double(explosionZ + f3 + 1.0D);
+		int k1 = MathHelper.floor(explosionX - f3 - 1.0D);
+		int l1 = MathHelper.floor(explosionX + f3 + 1.0D);
+		int i2 = MathHelper.floor(explosionY - f3 - 1.0D);
+		int i1 = MathHelper.floor(explosionY + f3 + 1.0D);
+		int j2 = MathHelper.floor(explosionZ - f3 - 1.0D);
+		int j1 = MathHelper.floor(explosionZ + f3 + 1.0D);
 		List<Entity> list = worldObj.getEntitiesWithinAABBExcludingEntity(exploder, new AxisAlignedBB(k1, i2, j2, l1, i1, j1));
 		net.minecraftforge.event.ForgeEventFactory.onExplosionDetonate(worldObj, this, list, f3);
 		Vec3d vec3d = new Vec3d(explosionX, explosionY, explosionZ);
@@ -141,7 +141,7 @@ public class ACExplosion extends Explosion
 					double d5 = entity.posX - explosionX;
 					double d7 = entity.posY + entity.getEyeHeight() - explosionY;
 					double d9 = entity.posZ - explosionZ;
-					double d13 = MathHelper.sqrt_double(d5 * d5 + d7 * d7 + d9 * d9);
+					double d13 = MathHelper.sqrt(d5 * d5 + d7 * d7 + d9 * d9);
 
 					if (d13 != 0.0D)
 					{
@@ -201,7 +201,7 @@ public class ACExplosion extends Explosion
 					double d3 = d0 - explosionX;
 					double d4 = d1 - explosionY;
 					double d5 = d2 - explosionZ;
-					double d6 = MathHelper.sqrt_double(d3 * d3 + d4 * d4 + d5 * d5);
+					double d6 = MathHelper.sqrt(d3 * d3 + d4 * d4 + d5 * d5);
 					d3 /= d6;
 					d4 /= d6;
 					d5 /= d6;

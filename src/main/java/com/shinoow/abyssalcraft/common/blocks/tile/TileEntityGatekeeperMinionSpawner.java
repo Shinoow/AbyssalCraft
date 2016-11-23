@@ -31,19 +31,19 @@ public class TileEntityGatekeeperMinionSpawner extends TileEntity implements ITi
 	}
 
 	public boolean isActivated() {
-		return worldObj.getClosestPlayer(pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D,
+		return world.getClosestPlayer(pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D,
 				activatingRangeFromPlayer, true) != null &&
-				!worldObj.getClosestPlayer(pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D,
+				!world.getClosestPlayer(pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D,
 						activatingRangeFromPlayer, true).capabilities.isCreativeMode;
 	}
 
 	@Override
 	public void update() {
-		if (!worldObj.isRemote && isActivated()) {
-			EntityGatekeeperMinion mob = new EntityGatekeeperMinion(worldObj);
-			mob.setLocationAndAngles(pos.getX(), pos.getY(), pos.getZ(), MathHelper.wrapDegrees(worldObj.rand.nextFloat() * 360.0F), 10.0F);
-			worldObj.spawnEntityInWorld(mob);
-			worldObj.setBlockToAir(pos);
+		if (!world.isRemote && isActivated()) {
+			EntityGatekeeperMinion mob = new EntityGatekeeperMinion(world);
+			mob.setLocationAndAngles(pos.getX(), pos.getY(), pos.getZ(), MathHelper.wrapDegrees(world.rand.nextFloat() * 360.0F), 10.0F);
+			world.spawnEntity(mob);
+			world.setBlockToAir(pos);
 		}
 	}
 }

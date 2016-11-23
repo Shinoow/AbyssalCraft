@@ -71,7 +71,7 @@ public class BlockODBcore extends Block {
 	}
 
 	@Override
-	public void neighborChanged(IBlockState state, World par1World, BlockPos pos, Block par5Block)
+	public void neighborChanged(IBlockState state, World par1World, BlockPos pos, Block par5Block, BlockPos pos2)
 	{
 		if (par1World.isBlockPowered(pos))
 		{
@@ -104,7 +104,7 @@ public class BlockODBcore extends Block {
 		{
 			EntityODBcPrimed var6 = new EntityODBcPrimed(par1World, pos.getX() + 0.5F, pos.getY() + 0.5F, pos.getZ() + 0.5F, par5Explosion.getExplosivePlacedBy());
 			var6.fuse = par1World.rand.nextInt(var6.fuse / 4) + var6.fuse / 8;
-			par1World.spawnEntityInWorld(var6);
+			par1World.spawnEntity(var6);
 		}
 	}
 
@@ -120,14 +120,15 @@ public class BlockODBcore extends Block {
 			if (state.getValue(EXPLODE).booleanValue())
 			{
 				EntityODBcPrimed var7 = new EntityODBcPrimed(par1World, pos.getX() + 0.5F, pos.getY() + 0.5F, pos.getZ() + 0.5F, par6);
-				par1World.spawnEntityInWorld(var7);
+				par1World.spawnEntity(var7);
 				par1World.playSound(null, var7.posX, var7.posY, var7.posZ, SoundEvents.ENTITY_TNT_PRIMED, SoundCategory.BLOCKS, 1.0F, 1.0F);
 			}
 	}
 
 	@Override
-	public boolean onBlockActivated(World par1World, BlockPos pos, IBlockState state, EntityPlayer par5EntityPlayer, EnumHand hand, ItemStack heldItem, EnumFacing side, float hitX, float hitY, float hitZ)
+	public boolean onBlockActivated(World par1World, BlockPos pos, IBlockState state, EntityPlayer par5EntityPlayer, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ)
 	{
+		ItemStack heldItem = par5EntityPlayer.getHeldItem(hand);
 		if (heldItem != null)
 		{
 			Item item = heldItem.getItem();
@@ -140,13 +141,13 @@ public class BlockODBcore extends Block {
 				if (item == Items.FLINT_AND_STEEL)
 					heldItem.damageItem(1, par5EntityPlayer);
 				else if (!par5EntityPlayer.capabilities.isCreativeMode)
-					--heldItem.stackSize;
+					heldItem.shrink(1);
 
 				return true;
 			}
 		}
 
-		return super.onBlockActivated(par1World, pos, state, par5EntityPlayer, hand, heldItem, side, hitX, hitY, hitZ);
+		return super.onBlockActivated(par1World, pos, state, par5EntityPlayer, hand, side, hitX, hitY, hitZ);
 	}
 
 	@Override

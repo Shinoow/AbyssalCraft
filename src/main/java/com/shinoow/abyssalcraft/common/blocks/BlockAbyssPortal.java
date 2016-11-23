@@ -72,7 +72,7 @@ public class BlockAbyssPortal extends BlockBreakable {
 	}
 
 	@Override
-	public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, World worldIn, BlockPos pos)
+	public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn, BlockPos pos)
 	{
 		return NULL_AABB;
 	}
@@ -111,7 +111,7 @@ public class BlockAbyssPortal extends BlockBreakable {
 	}
 
 	@Override
-	public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block neighborBlock)
+	public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block neighborBlock, BlockPos pos2)
 	{
 		EnumFacing.Axis enumfacing$axis = state.getValue(AXIS);
 
@@ -193,7 +193,7 @@ public class BlockAbyssPortal extends BlockBreakable {
 	@SideOnly(Side.CLIENT)
 	public ItemStack getItem(World par1World, BlockPos pos, IBlockState state)
 	{
-		return null;
+		return ItemStack.EMPTY;
 	}
 
 	@Override

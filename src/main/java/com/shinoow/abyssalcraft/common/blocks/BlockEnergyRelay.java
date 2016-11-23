@@ -28,10 +28,12 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumBlockRenderType;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+
 import com.shinoow.abyssalcraft.common.blocks.tile.TileEntityEnergyRelay;
 import com.shinoow.abyssalcraft.lib.ACTabs;
 
@@ -115,7 +117,7 @@ public class BlockEnergyRelay extends BlockContainer {
 			item.motionX = (float)rand.nextGaussian() * f3;
 			item.motionY = (float)rand.nextGaussian() * f3 + 0.2F;
 			item.motionZ = (float)rand.nextGaussian() * f3;
-			world.spawnEntityInWorld(item);
+			world.spawnEntity(item);
 		}
 
 		super.breakBlock(world, pos, state);
@@ -138,9 +140,9 @@ public class BlockEnergyRelay extends BlockContainer {
 	}
 
 	@Override
-	public IBlockState onBlockPlaced(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer)
+	public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer, EnumHand hand)
 	{
-		return super.onBlockPlaced(worldIn, pos, facing, hitX, hitY, hitZ, meta, placer).withProperty(FACING, facing);
+		return super.getStateForPlacement(worldIn, pos, facing, hitX, hitY, hitZ, meta, placer, hand).withProperty(FACING, facing);
 	}
 
 	/**

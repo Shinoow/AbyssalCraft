@@ -43,11 +43,11 @@ public class TileEntityAltarBlockRenderer extends TileEntitySpecialRenderer {
 
 		ISingletonInventory altar = (ISingletonInventory) te;
 
-		if (altar != null && altar.getItem() != null){
+		if (altar != null && !altar.getItem().isEmpty()){
 			GL11.glPushMatrix();
 			EntityItem entityitem = new EntityItem(te.getWorld(), 0.0D, 0.0D, 0.0D, altar.getItem());
 			entityitem.hoverStart = 0.0F;
-			altar.getItem().stackSize = 1;
+			altar.getItem().setCount(1);
 			GL11.glRotatef(180F, 1F, 0F, 0F);
 			GL11.glTranslatef(0.0F, -0.56F, 0F);
 			GL11.glRotatef(altar.getRotation(), 0F, 1F, 0F);

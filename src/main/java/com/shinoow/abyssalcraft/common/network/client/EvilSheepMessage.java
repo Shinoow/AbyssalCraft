@@ -40,7 +40,7 @@ public class EvilSheepMessage extends AbstractClientMessage<EvilSheepMessage> {
 	@Override
 	protected void read(PacketBuffer buffer) throws IOException {
 
-		playerUUID = buffer.readUuid();
+		playerUUID = buffer.readUniqueId();
 		playerName = ByteBufUtils.readUTF8String(buffer);
 		id = ByteBufUtils.readVarInt(buffer, 5);
 	}
@@ -48,14 +48,14 @@ public class EvilSheepMessage extends AbstractClientMessage<EvilSheepMessage> {
 	@Override
 	protected void write(PacketBuffer buffer) throws IOException {
 
-		buffer.writeUuid(playerUUID);
+		buffer.writeUniqueId(playerUUID);
 		ByteBufUtils.writeUTF8String(buffer, playerName);
 		ByteBufUtils.writeVarInt(buffer, id, 5);
 	}
 
 	@Override
 	public void process(EntityPlayer player, Side side) {
-		Entity entity = player.worldObj.getEntityByID(id);
+		Entity entity = player.world.getEntityByID(id);
 		if(entity == null || !(entity instanceof EntityEvilSheep)) return;
 		((EntityEvilSheep)entity).setKilledPlayer(playerUUID, playerName);
 	}

@@ -31,19 +31,19 @@ public class TileEntityDreadguardSpawner extends TileEntity implements ITickable
 	}
 
 	public boolean isActivated() {
-		return worldObj.getClosestPlayer(pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D,
+		return world.getClosestPlayer(pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D,
 				activatingRangeFromPlayer, true) != null &&
-				!worldObj.getClosestPlayer(pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D,
+				!world.getClosestPlayer(pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D,
 						activatingRangeFromPlayer, true).capabilities.isCreativeMode;
 	}
 
 	@Override
 	public void update() {
-		if (!worldObj.isRemote && isActivated()) {
-			EntityDreadguard mob = new EntityDreadguard(worldObj);
-			mob.setLocationAndAngles(pos.getX(), pos.getY(), pos.getZ(), MathHelper.wrapDegrees(worldObj.rand.nextFloat() * 360.0F), 10.0F);
-			worldObj.spawnEntityInWorld(mob);
-			worldObj.setBlockToAir(pos);
+		if (!world.isRemote && isActivated()) {
+			EntityDreadguard mob = new EntityDreadguard(world);
+			mob.setLocationAndAngles(pos.getX(), pos.getY(), pos.getZ(), MathHelper.wrapDegrees(world.rand.nextFloat() * 360.0F), 10.0F);
+			world.spawnEntity(mob);
+			world.setBlockToAir(pos);
 		}
 	}
 }

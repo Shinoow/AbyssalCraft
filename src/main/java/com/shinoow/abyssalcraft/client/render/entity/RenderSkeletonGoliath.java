@@ -28,7 +28,7 @@ public class RenderSkeletonGoliath extends RenderLiving<EntitySkeletonGoliath> {
 
 	private float scale = 1.5F;
 
-	private static final ResourceLocation mobTexture = new ResourceLocation("abyssalcraft:textures/model/elite/SkeletonGoliath.png");
+	private static final ResourceLocation mobTexture = new ResourceLocation("abyssalcraft:textures/model/elite/skeletongoliath.png");
 
 	public RenderSkeletonGoliath(RenderManager manager)
 	{

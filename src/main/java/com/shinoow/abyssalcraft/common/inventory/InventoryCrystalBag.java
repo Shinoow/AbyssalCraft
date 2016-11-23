@@ -15,10 +15,12 @@ import com.shinoow.abyssalcraft.api.APIUtils;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
+import net.minecraft.inventory.ItemStackHelper;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.EnumHand;
+import net.minecraft.util.NonNullList;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraftforge.common.util.Constants;
 
@@ -28,7 +30,7 @@ public class InventoryCrystalBag implements IInventory
 
 	public static int INV_SIZE;
 
-	private ItemStack[] inventory;
+	private NonNullList<ItemStack> inventory;
 
 	private final ItemStack invItem;
 
@@ -41,7 +43,7 @@ public class InventoryCrystalBag implements IInventory
 		if (!stack.hasTagCompound())
 			stack.setTagCompound(new NBTTagCompound());
 		INV_SIZE = stack.getTagCompound().getInteger("InvSize");
-		inventory = new ItemStack[INV_SIZE];
+		inventory = NonNullList.withSize(INV_SIZE, ItemStack.EMPTY);
 		name = stack.getDisplayName();
 
 		readFromNBT(stack.getTagCompound());
@@ -50,45 +52,39 @@ public class InventoryCrystalBag implements IInventory
 	@Override
 	public int getSizeInventory()
 	{
-		return inventory.length;
+		return inventory.size();
 	}
 
 	@Override
 	public ItemStack getStackInSlot(int slot)
 	{
-		return inventory[slot];
+		return inventory.get(slot);
 	}
 
 	@Override
 	public ItemStack decrStackSize(int slot, int amount)
 	{
-		ItemStack stack = getStackInSlot(slot);
-		if(stack != null)
-			if(stack.stackSize > amount)
-			{
-				stack = stack.splitStack(amount);
-				markDirty();
-			} else
-				setInventorySlotContents(slot, null);
-		return stack;
+		ItemStack itemstack = ItemStackHelper.getAndSplit(inventory, slot, amount);
+
+		if (!itemstack.isEmpty())
+			markDirty();
+
+		return itemstack;
 	}
 
 	@Override
 	public ItemStack removeStackFromSlot(int slot)
 	{
-		ItemStack stack = getStackInSlot(slot);
-		if(stack != null)
-			setInventorySlotContents(slot, null);
-		return stack;
+		return ItemStackHelper.getAndRemove(inventory, slot);
 	}
 
 	@Override
 	public void setInventorySlotContents(int slot, ItemStack itemstack)
 	{
-		inventory[slot] = itemstack;
+		inventory.set(slot, itemstack);
 
-		if (itemstack != null && itemstack.stackSize > getInventoryStackLimit())
-			itemstack.stackSize = getInventoryStackLimit();
+		if (!itemstack.isEmpty() && itemstack.getCount() > getInventoryStackLimit())
+			itemstack.setCount(getInventoryStackLimit());
 
 		markDirty();
 	}
@@ -107,7 +103,7 @@ public class InventoryCrystalBag implements IInventory
 
 	@Override
 	public ITextComponent getDisplayName() {
-		// TODO Auto-generated method stub
+
 		return null;
 	}
 
@@ -121,13 +117,13 @@ public class InventoryCrystalBag implements IInventory
 	public void markDirty()
 	{
 		for (int i = 0; i < getSizeInventory(); ++i)
-			if (getStackInSlot(i) != null && getStackInSlot(i).stackSize == 0)
-				inventory[i] = null;
+			if (getStackInSlot(i).isEmpty())
+				inventory.set(i, ItemStack.EMPTY);
 		writeToNBT(invItem.getTagCompound());
 	}
 
 	@Override
-	public boolean isUseableByPlayer(EntityPlayer player)
+	public boolean isUsableByPlayer(EntityPlayer player)
 	{
 		return player.getHeldItem(EnumHand.MAIN_HAND) == invItem;
 	}
@@ -154,7 +150,7 @@ public class InventoryCrystalBag implements IInventory
 			byte slot = item.getByte("Slot");
 
 			if (slot >= 0 && slot < getSizeInventory())
-				inventory[slot] = ItemStack.loadItemStackFromNBT(item);
+				inventory.set(slot, new ItemStack(item));
 		}
 	}
 
@@ -163,7 +159,7 @@ public class InventoryCrystalBag implements IInventory
 		NBTTagList items = new NBTTagList();
 
 		for (int i = 0; i < getSizeInventory(); ++i)
-			if (getStackInSlot(i) != null)
+			if (!getStackInSlot(i).isEmpty())
 			{
 				NBTTagCompound item = new NBTTagCompound();
 				item.setInteger("Slot", i);
@@ -194,7 +190,16 @@ public class InventoryCrystalBag implements IInventory
 
 	@Override
 	public void clear() {
-		// TODO Auto-generated method stub
+		inventory.clear();
+	}
 
+	@Override
+	public boolean isEmpty()
+	{
+		for (ItemStack itemstack : inventory)
+			if (!itemstack.isEmpty())
+				return false;
+
+		return true;
 	}
 }

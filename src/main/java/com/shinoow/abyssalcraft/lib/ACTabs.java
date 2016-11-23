@@ -13,6 +13,7 @@ package com.shinoow.abyssalcraft.lib;
 
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.api.item.ACItems;
@@ -26,57 +27,57 @@ public class ACTabs {
 	public static final CreativeTabs tabBlock = new CreativeTabs("acblocks"){
 
 		@Override
-		public Item getTabIconItem() {
-			return Item.getItemFromBlock(ACBlocks.darkstone);
+		public ItemStack getTabIconItem() {
+			return new ItemStack(Item.getItemFromBlock(ACBlocks.darkstone));
 		}
 	};
 	public static final CreativeTabs tabItems = new CreativeTabs("acitems"){
 
 		@Override
-		public Item getTabIconItem() {
-			return ACItems.necronomicon;
+		public ItemStack getTabIconItem() {
+			return new ItemStack(ACItems.necronomicon);
 		}
 	};
 	public static final CreativeTabs tabTools = new CreativeTabs("actools"){
 
 		@Override
-		public Item getTabIconItem() {
-			return ACItems.darkstone_axe;
+		public ItemStack getTabIconItem() {
+			return new ItemStack(ACItems.darkstone_axe);
 		}
 	};
 	public static final CreativeTabs tabCombat = new CreativeTabs("acctools"){
 
 		@Override
-		public Item getTabIconItem() {
-			return ACItems.darkstone_sword;
+		public ItemStack getTabIconItem() {
+			return new ItemStack(ACItems.darkstone_sword);
 		}
 	};
 	public static final CreativeTabs tabFood = new CreativeTabs("acfood"){
 
 		@Override
-		public Item getTabIconItem() {
-			return ACItems.iron_plate;
+		public ItemStack getTabIconItem() {
+			return new ItemStack(ACItems.iron_plate);
 		}
 	};
 	public static final CreativeTabs tabDecoration = new CreativeTabs("acdblocks"){
 
 		@Override
-		public Item getTabIconItem() {
-			return Item.getItemFromBlock(ACBlocks.wooden_crate);
+		public ItemStack getTabIconItem() {
+			return new ItemStack(Item.getItemFromBlock(ACBlocks.wooden_crate));
 		}
 	};
 	public static final CreativeTabs tabCrystals = new CreativeTabs("accrystals"){
 
 		@Override
-		public Item getTabIconItem() {
-			return Item.getItemFromBlock(ACBlocks.crystallizer_idle);
+		public ItemStack getTabIconItem() {
+			return new ItemStack(Item.getItemFromBlock(ACBlocks.crystallizer_idle));
 		}
 	};
 	public static final CreativeTabs tabCoins = new CreativeTabs("accoins"){
 
 		@Override
-		public Item getTabIconItem() {
-			return ACItems.coin;
+		public ItemStack getTabIconItem() {
+			return new ItemStack(ACItems.coin);
 		}
 	};
 }
