@@ -55,7 +55,7 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 /**
  * Main API class for AbyssalCraft, has child classes for most features.<br>
  * Check {@link IMCHelper} for InterModComms registration
- *
+ * 
  * @author shinoow
  *
  */

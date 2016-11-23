@@ -23,7 +23,7 @@ import com.shinoow.abyssalcraft.common.CommonProxy;
 import com.shinoow.abyssalcraft.common.handlers.IMCHandler;
 import com.shinoow.abyssalcraft.init.*;
 
-@Mod(modid = AbyssalCraft.modid, name = AbyssalCraft.name, version = AbyssalCraft.version,dependencies = "required-after:Forge@[forgeversion,);after:JEI@[4.0.1,)", useMetadata = false, guiFactory = "com.shinoow.abyssalcraft.client.config.ACGuiFactory", acceptedMinecraftVersions = "[1.11]", updateJSON = "https://raw.githubusercontent.com/Shinoow/AbyssalCraft/master/version.json")
+@Mod(modid = AbyssalCraft.modid, name = AbyssalCraft.name, version = AbyssalCraft.version,dependencies = "required-after:forge@[forgeversion,);after:jei@[4.0.1,)", useMetadata = false, guiFactory = "com.shinoow.abyssalcraft.client.config.ACGuiFactory", acceptedMinecraftVersions = "[1.11]", updateJSON = "https://raw.githubusercontent.com/Shinoow/AbyssalCraft/master/version.json")
 public class AbyssalCraft {
 
 	public static final String version = "ac_version";
