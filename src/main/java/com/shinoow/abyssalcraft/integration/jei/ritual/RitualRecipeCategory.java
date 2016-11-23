@@ -11,6 +11,9 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.integration.jei.ritual;
 
+import java.util.Collections;
+import java.util.List;
+
 import javax.annotation.Nonnull;
 
 import mezz.jei.api.IGuiHelper;
@@ -19,14 +22,14 @@ import mezz.jei.api.gui.IGuiItemStackGroup;
 import mezz.jei.api.gui.IRecipeLayout;
 import mezz.jei.api.recipe.IRecipeCategory;
 import mezz.jei.api.recipe.IRecipeWrapper;
-import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.translation.I18n;
 import net.minecraftforge.oredict.OreDictionary;
 
+import com.google.common.collect.Lists;
+import com.shinoow.abyssalcraft.api.APIUtils;
 import com.shinoow.abyssalcraft.api.item.ACItems;
 import com.shinoow.abyssalcraft.integration.jei.AbyssalCraftRecipeCategoryUid;
 
@@ -102,15 +105,15 @@ public class RitualRecipeCategory implements IRecipeCategory {
 			itemStacks.init(necronomicon, false, 0 + xBoost, 133 + yBoost);
 			itemStacks.init(reward, false, 58 + xBoost, 139 + yBoost);
 
-			itemStacks.setFromRecipe(pedestal1, getStack(wrapper.getOfferings()[0]));
-			itemStacks.setFromRecipe(pedestal2, getStack(wrapper.getOfferings()[1]));
-			itemStacks.setFromRecipe(pedestal3, getStack(wrapper.getOfferings()[2]));
-			itemStacks.setFromRecipe(pedestal4, getStack(wrapper.getOfferings()[3]));
-			itemStacks.setFromRecipe(pedestal5, getStack(wrapper.getOfferings()[4]));
-			itemStacks.setFromRecipe(pedestal6, getStack(wrapper.getOfferings()[5]));
-			itemStacks.setFromRecipe(pedestal7, getStack(wrapper.getOfferings()[6]));
-			itemStacks.setFromRecipe(pedestal8, getStack(wrapper.getOfferings()[7]));
-			itemStacks.setFromRecipe(sacrifice, getStack(wrapper.getSacrifice()));
+			itemStacks.setFromRecipe(pedestal1, list(wrapper.getOfferings()[0]) ? getList(wrapper.getOfferings()[0]) : Collections.singletonList(APIUtils.convertToStack(wrapper.getOfferings()[0])));
+			itemStacks.setFromRecipe(pedestal2, list(wrapper.getOfferings()[1]) ? getList(wrapper.getOfferings()[1]) : Collections.singletonList(APIUtils.convertToStack(wrapper.getOfferings()[1])));
+			itemStacks.setFromRecipe(pedestal3, list(wrapper.getOfferings()[2]) ? getList(wrapper.getOfferings()[2]) : Collections.singletonList(APIUtils.convertToStack(wrapper.getOfferings()[2])));
+			itemStacks.setFromRecipe(pedestal4, list(wrapper.getOfferings()[3]) ? getList(wrapper.getOfferings()[3]) : Collections.singletonList(APIUtils.convertToStack(wrapper.getOfferings()[3])));
+			itemStacks.setFromRecipe(pedestal5, list(wrapper.getOfferings()[4]) ? getList(wrapper.getOfferings()[4]) : Collections.singletonList(APIUtils.convertToStack(wrapper.getOfferings()[4])));
+			itemStacks.setFromRecipe(pedestal6, list(wrapper.getOfferings()[5]) ? getList(wrapper.getOfferings()[5]) : Collections.singletonList(APIUtils.convertToStack(wrapper.getOfferings()[5])));
+			itemStacks.setFromRecipe(pedestal7, list(wrapper.getOfferings()[6]) ? getList(wrapper.getOfferings()[6]) : Collections.singletonList(APIUtils.convertToStack(wrapper.getOfferings()[6])));
+			itemStacks.setFromRecipe(pedestal8, list(wrapper.getOfferings()[7]) ? getList(wrapper.getOfferings()[7]) : Collections.singletonList(APIUtils.convertToStack(wrapper.getOfferings()[7])));
+			itemStacks.setFromRecipe(sacrifice, APIUtils.convertToStack(wrapper.getSacrifice()));
 			itemStacks.setFromRecipe(necronomicon, getItem(wrapper.getBookType()));
 			itemStacks.setFromRecipe(reward, wrapper.getOutputs());
 		}
@@ -133,17 +136,17 @@ public class RitualRecipeCategory implements IRecipeCategory {
 		}
 	}
 
-	private Object getStack(Object obj){
-		if(obj instanceof Item)
-			return new ItemStack((Item)obj);
-		if(obj instanceof Block)
-			return new ItemStack((Block)obj);
-		if(obj instanceof ItemStack)
-			return obj;
+	private boolean list(Object obj){
+		return obj == null ? false : obj instanceof ItemStack[] || obj instanceof String || obj instanceof List;
+	}
+
+	private List<ItemStack> getList(Object obj){
 		if(obj instanceof ItemStack[])
-			return obj;
+			return Lists.newArrayList((ItemStack[])obj);
 		if(obj instanceof String)
 			return OreDictionary.getOres((String)obj);
-		return obj;
+		if(obj instanceof List)
+			return (List)obj;
+		return Collections.emptyList();
 	}
 }

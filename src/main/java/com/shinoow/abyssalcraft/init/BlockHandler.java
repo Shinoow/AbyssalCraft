@@ -231,6 +231,8 @@ public class BlockHandler implements ILifeCycleHandler {
 		ACBlocks.wastelands_thorn = new BlockWastelandsThorn();
 
 		((BlockShoggothOoze) ACBlocks.shoggoth_ooze).initBlacklist();
+		((BlockRitualAltar)ACBlocks.ritual_altar).setBlocks();
+		((BlockRitualPedestal)ACBlocks.ritual_pedestal).setBlocks();
 
 		GameRegistry.registerTileEntity(TileEntityCrate.class, "tileEntityCrate");
 		GameRegistry.registerTileEntity(TileEntityDGhead.class, "tileEntityDGhead");

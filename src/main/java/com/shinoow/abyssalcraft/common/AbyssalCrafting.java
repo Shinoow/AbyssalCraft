@@ -13,6 +13,7 @@ package com.shinoow.abyssalcraft.common;
 
 import net.minecraft.block.Block;
 import net.minecraft.enchantment.EnchantmentData;
+import net.minecraft.entity.passive.EntitySheep;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.init.MobEffects;
@@ -55,6 +56,7 @@ import com.shinoow.abyssalcraft.common.entity.EntitySacthoth;
 import com.shinoow.abyssalcraft.common.entity.EntityShadowBeast;
 import com.shinoow.abyssalcraft.common.entity.EntityShadowCreature;
 import com.shinoow.abyssalcraft.common.entity.EntityShadowMonster;
+import com.shinoow.abyssalcraft.common.entity.demon.EntityEvilSheep;
 import com.shinoow.abyssalcraft.common.ritual.NecronomiconBreedingRitual;
 import com.shinoow.abyssalcraft.common.ritual.NecronomiconDreadSpawnRitual;
 import com.shinoow.abyssalcraft.common.ritual.NecronomiconRespawnJzaharRitual;
@@ -592,7 +594,7 @@ public class AbyssalCrafting {
 		AbyssalCraftAPI.addCrystallization(ACItems.dreaded_chunk_of_abyssalnite, new ItemStack(ACItems.crystal_shard, 4, 12), new ItemStack(ACItems.crystal_shard, 4, 14), 0.2F);
 		AbyssalCraftAPI.addCrystallization(ACBlocks.dreaded_abyssalnite_ore, new ItemStack(ACItems.crystal_shard, 4, 12), new ItemStack(ACItems.crystal_shard, 4, 14), 0.2F);
 		AbyssalCraftAPI.addCrystallization(Items.water_bucket, new ItemStack(ACItems.crystal_shard, 12, 5), new ItemStack(ACItems.crystal_shard, 6, 4), 0.1F);
-		AbyssalCraftAPI.addCrystallization(new ItemStack(Items.potionitem, 1, 0), new ItemStack(ACItems.crystal_shard, 6, 5), new ItemStack(ACItems.crystal_shard, 3, 4), 0.1F);
+		AbyssalCraftAPI.addCrystallization(new ItemStack(Items.potionitem), new ItemStack(ACItems.crystal_shard, 6, 5), new ItemStack(ACItems.crystal_shard, 3, 4), 0.1F);
 		AbyssalCraftAPI.addCrystallization(new ItemStack(Items.dye, 1, 4), new ItemStack(ACItems.crystal, 2, 21), new ItemStack(ACItems.crystal_shard, 16, 2), 0.15F);
 		AbyssalCraftAPI.addCrystallization(ACItems.methane, new ItemStack(ACItems.crystal_shard, 4, 4), new ItemStack(ACItems.crystal, 16, 5), 0.1F);
 		AbyssalCraftAPI.addCrystallization(Items.gunpowder, new ItemStack(ACItems.crystal_shard, 16, 9), new ItemStack(ACItems.crystal_shard, 4, 2), 0.1F);
@@ -679,7 +681,6 @@ public class AbyssalCrafting {
 		AbyssalCraftAPI.addTransmutation(ACBlocks.darkstone_cobblestone, new ItemStack(Blocks.cobblestone, 1), 0.0F);
 		AbyssalCraftAPI.addTransmutation(new ItemStack(ACBlocks.coralium_stone_brick, 1, 0), new ItemStack(ACItems.coralium_brick, 4), 0.0F);
 		AbyssalCraftAPI.addTransmutation(ACItems.coralium_brick, new ItemStack(ACBlocks.coralium_stone, 1), 0.0F);
-		AbyssalCraftAPI.addTransmutation(ACBlocks.liquid_coralium, new ItemStack(ACBlocks.coralium_stone, 8), 0.0F);
 		AbyssalCraftAPI.addTransmutation(ACItems.dense_carbon_cluster, new ItemStack(Items.diamond), 0.5F);
 		AbyssalCraftAPI.addTransmutation(ACItems.dread_plagued_gateway_key, new ItemStack(ACItems.rlyehian_gateway_key), 1.0F);
 		AbyssalCraftAPI.addTransmutation("crystalAluminium", "ingotAluminum", 0.2F);
@@ -942,6 +943,7 @@ public class AbyssalCrafting {
 		//		DisruptionHandler.instance().registerDisruption(new DisruptionMonolith()); //uncomment at some point when there's a lot more disruptions
 		DisruptionHandler.instance().registerDisruption(new DisruptionTeleportRandomly());
 		DisruptionHandler.instance().registerDisruption(new DisruptionDrainNearbyPE());
+		DisruptionHandler.instance().registerDisruption(new DisruptionSwarm("swarmSheep", DeityType.SHUBNIGGURATH, EntityEvilSheep.class, EntitySheep.class));
 	}
 
 	private static void addArmor(Item helmet, Item chestplate, Item pants, Item boots, Item material, Item upgrade, Item oldh, Item oldc, Item oldp, Item oldb){

@@ -11,12 +11,18 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.common.blocks;
 
+import java.util.Random;
+
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.EnumBlockRenderType;
+import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import com.shinoow.abyssalcraft.common.blocks.tile.TileEntityDreadguardSpawner;
 
@@ -27,9 +33,34 @@ public class BlockDreadguardSpawner extends BlockContainer {
 	}
 
 	@Override
-	public EnumBlockRenderType getRenderType(IBlockState state)
+	public int quantityDropped(Random par1Random)
 	{
-		return EnumBlockRenderType.MODEL;
+		return 0;
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public ItemStack getItem(World par1World, BlockPos pos, IBlockState state)
+	{
+		return null;
+	}
+
+	@Override
+	public AxisAlignedBB getSelectedBoundingBox(IBlockState blockState, World worldIn, BlockPos pos)
+	{
+		return NULL_AABB;
+	}
+
+	@Override
+	public boolean isOpaqueCube(IBlockState state)
+	{
+		return false;
+	}
+
+	@Override
+	public boolean isFullCube(IBlockState state)
+	{
+		return false;
 	}
 
 	@Override

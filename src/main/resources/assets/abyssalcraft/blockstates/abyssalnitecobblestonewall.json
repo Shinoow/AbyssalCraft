@@ -1,7 +1,8 @@
 {
 	"forge_marker": 1,
 	"defaults": {
-		"textures" : { "wall": "abyssalcraft:blocks/abyssalnitecobblestone" }
+		"textures" : { "wall": "abyssalcraft:blocks/abyssalnitecobblestone" },
+		"model": "wall_post"
 	},
 	"variants": {
 		"up": {

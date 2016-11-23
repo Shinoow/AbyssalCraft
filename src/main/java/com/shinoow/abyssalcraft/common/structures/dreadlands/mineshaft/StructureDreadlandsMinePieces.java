@@ -18,6 +18,7 @@ import java.util.Random;
 
 import net.minecraft.block.BlockRail;
 import net.minecraft.block.BlockRailBase;
+import net.minecraft.block.BlockTorch;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.item.EntityMinecartChest;
@@ -293,8 +294,8 @@ public class StructureDreadlandsMinePieces
 					} else
 						fillWithBlocks(par1World, par3StructureBoundingBox, 0, 2, k, 2, 2, k, ACBlocks.dreadlands_planks.getDefaultState(), Blocks.air.getDefaultState(), false);
 
-					randomlyPlaceBlock(par1World, par3StructureBoundingBox, par2Random, 0.05F, 1, 2, k - 1, Blocks.torch.getStateFromMeta(0));
-					randomlyPlaceBlock(par1World, par3StructureBoundingBox, par2Random, 0.05F, 1, 2, k + 1, Blocks.torch.getStateFromMeta(0));
+					randomlyPlaceBlock(par1World, par3StructureBoundingBox, par2Random, 0.05F, 1, 2, k - 1, Blocks.torch.getDefaultState().withProperty(BlockTorch.FACING, EnumFacing.SOUTH));
+					randomlyPlaceBlock(par1World, par3StructureBoundingBox, par2Random, 0.05F, 1, 2, k + 1, Blocks.torch.getDefaultState().withProperty(BlockTorch.FACING, EnumFacing.NORTH));
 
 					if (par2Random.nextInt(100) == 0)
 						func_186167_a(par1World, par3StructureBoundingBox, par2Random, 2, 0, k - 1, ACLoot.CHEST_DREADLANDS_MINESHAFT);
