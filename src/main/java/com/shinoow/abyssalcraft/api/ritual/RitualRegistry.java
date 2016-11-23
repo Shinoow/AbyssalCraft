@@ -215,9 +215,18 @@ public class RitualRegistry {
 			return areStacksEqual(stack, new ItemStack((Item)obj), nbt);
 		else if(obj instanceof Block)
 			return areStacksEqual(stack, new ItemStack((Block)obj), nbt);
-		else if(obj instanceof String)
+		else if(obj instanceof ItemStack[]){
+			for(ItemStack item : (ItemStack[])obj)
+				if(areStacksEqual(stack, item, nbt))
+					return true;
+		} else if(obj instanceof String){
 			for(ItemStack item : OreDictionary.getOres((String)obj))
-				return areStacksEqual(stack, item, nbt);
+				if(areStacksEqual(stack, item, nbt))
+					return true;
+		} else if(obj instanceof List)
+			for(ItemStack item : (List<ItemStack>)obj)
+				if(areStacksEqual(stack, item, nbt))
+					return true;
 		return false;
 	}
 

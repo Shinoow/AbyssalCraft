@@ -75,10 +75,12 @@ public class APIUtils {
 			return new ItemStack((Item)obj);
 		else if(obj instanceof Block)
 			return new ItemStack((Block)obj);
+		else if(obj instanceof ItemStack[])
+			return ((ItemStack[])obj)[0];
 		else if(obj instanceof String)
 			return OreDictionary.getOres((String)obj).get(0).copy();
 		else if(obj instanceof List)
 			return ((ItemStack)((List) obj).get(0)).copy();
-		else throw new ClassCastException("Not a Item, Block, ItemStack, String or List of ItemStacks!");
+		else throw new ClassCastException("Not a Item, Block, ItemStack, Array of ItemStacks, String or List of ItemStacks!");
 	}
 }

@@ -11,10 +11,18 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.common.blocks;
 
+import java.util.Random;
+
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.state.IBlockState;
+import net.minecraft.item.Item;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import com.shinoow.abyssalcraft.common.blocks.tile.TileEntityChagarothSpawner;
 
@@ -25,9 +33,34 @@ public class BlockChagarothSpawner extends BlockContainer {
 	}
 
 	@Override
-	public int getRenderType()
+	public int quantityDropped(Random par1Random)
 	{
-		return 3;
+		return 0;
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public Item getItem(World par1World, BlockPos pos)
+	{
+		return null;
+	}
+
+	@Override
+	public AxisAlignedBB getCollisionBoundingBox(World worldIn, BlockPos pos, IBlockState state)
+	{
+		return null;
+	}
+
+	@Override
+	public boolean isOpaqueCube()
+	{
+		return false;
+	}
+
+	@Override
+	public boolean isFullCube()
+	{
+		return false;
 	}
 
 	@Override

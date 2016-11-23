@@ -15,14 +15,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.renderer.entity.RenderItem;
 import net.minecraft.client.resources.I18n;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraftforge.oredict.OreDictionary;
@@ -33,6 +31,7 @@ import org.lwjgl.opengl.GL12;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
+import com.shinoow.abyssalcraft.api.APIUtils;
 import com.shinoow.abyssalcraft.api.ritual.NecronomiconCreationRitual;
 import com.shinoow.abyssalcraft.api.ritual.NecronomiconRitual;
 import com.shinoow.abyssalcraft.api.ritual.RitualRegistry;
@@ -132,7 +131,7 @@ public class GuiNecronomiconRitualEntry extends GuiNecronomicon {
 		ItemStack[] offerings = new ItemStack[8];
 		if(ritual.getOfferings().length < 8)
 			for(int i = 0; i < ritual.getOfferings().length; i++)
-				offerings[i] = getStack(ritual.getOfferings()[i]);
+				offerings[i] = APIUtils.convertToStack(ritual.getOfferings()[i]);
 		else offerings = getStacks(ritual.getOfferings());
 
 		//north
@@ -152,7 +151,7 @@ public class GuiNecronomiconRitualEntry extends GuiNecronomicon {
 		//north-west
 		renderItem(k + 32, b0 + 40, offerings[7], x, y);
 		//center
-		renderItem(k + 58, b0 + 66, getStack(ritual.getSacrifice()), x, y);
+		renderItem(k + 58, b0 + 66, APIUtils.convertToStack(ritual.getSacrifice()), x, y);
 
 		if(ritual instanceof NecronomiconCreationRitual)
 			renderItem(k + 58, b0 + 139, ((NecronomiconCreationRitual) ritual).getItem(), x, y);
@@ -175,21 +174,10 @@ public class GuiNecronomiconRitualEntry extends GuiNecronomicon {
 		}
 	}
 
-	private ItemStack getStack(Object object){
-		if(object instanceof ItemStack)
-			return (ItemStack) object;
-		else if(object instanceof Item)
-			return new ItemStack((Item) object);
-		else if(object instanceof Block)
-			return new ItemStack((Block) object);
-		else if(object instanceof String)
-			return OreDictionary.getOres((String)object).iterator().next();
-		return null;
-	}
 	private ItemStack[] getStacks(Object[] objects){
 		ItemStack[] stacks = new ItemStack[objects.length];
 		for(int i = 0; i < objects.length; i++)
-			stacks[i] = getStack(objects[i]);
+			stacks[i] = APIUtils.convertToStack(objects[i]);
 		return stacks;
 	}
 
