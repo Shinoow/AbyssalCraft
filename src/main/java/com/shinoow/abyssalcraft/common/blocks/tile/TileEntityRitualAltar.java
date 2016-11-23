@@ -21,7 +21,6 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.SoundCategory;
@@ -277,7 +276,7 @@ public class TileEntityRitualAltar extends TileEntity implements ITickable, IRit
 											if(ritual.canCompleteRitual(world, pos, player))
 												if(!MinecraftForge.EVENT_BUS.post(new RitualEvent.Pre(player, ritual, world, pos))){
 													if(!world.isRemote){
-														mob.attackEntityFrom(DamageSource.magic, 200000);
+														mob.setDead();
 														world.addWeatherEffect(new EntityLightningBolt(worldObj, mob.posX, mob.posY, mob.posZ, false));
 													}
 													ritualTimer = 1;

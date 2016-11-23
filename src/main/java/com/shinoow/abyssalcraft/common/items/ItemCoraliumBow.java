@@ -21,7 +21,6 @@ import net.minecraft.init.Enchantments;
 import net.minecraft.init.Items;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.EnumAction;
-import net.minecraft.item.IItemPropertyGetter;
 import net.minecraft.item.ItemArrow;
 import net.minecraft.item.ItemBow;
 import net.minecraft.item.ItemStack;
@@ -35,8 +34,6 @@ import net.minecraft.util.text.TextFormatting;
 import net.minecraft.util.text.translation.I18n;
 import net.minecraft.world.World;
 import net.minecraftforge.event.ForgeEventFactory;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
 import com.shinoow.abyssalcraft.api.item.ACItems;
 import com.shinoow.abyssalcraft.common.entity.EntityCoraliumArrow;
@@ -80,30 +77,16 @@ public class ItemCoraliumBow extends ItemBow {
 
 		setMaxDamage(637);
 
-		addPropertyOverride(new ResourceLocation("pull"), new IItemPropertyGetter()
-		{
-			@Override
-			@SideOnly(Side.CLIENT)
-			public float apply(ItemStack stack, World worldIn, EntityLivingBase entityIn)
+		addPropertyOverride(new ResourceLocation("pull"), (stack, worldIn, entityIn) -> {
+			if (entityIn == null)
+				return 0.0F;
+			else
 			{
-				if (entityIn == null)
-					return 0.0F;
-				else
-				{
-					ItemStack itemstack = entityIn.getActiveItemStack();
-					return itemstack != null && itemstack.getItem() == ACItems.coralium_longbow ? (stack.getMaxItemUseDuration() - entityIn.getItemInUseCount()) / 20.0F : 0.0F;
-				}
+				ItemStack itemstack = entityIn.getActiveItemStack();
+				return itemstack != null && itemstack.getItem() == ACItems.coralium_longbow ? (stack.getMaxItemUseDuration() - entityIn.getItemInUseCount()) / 20.0F : 0.0F;
 			}
 		});
-		addPropertyOverride(new ResourceLocation("pulling"), new IItemPropertyGetter()
-		{
-			@Override
-			@SideOnly(Side.CLIENT)
-			public float apply(ItemStack stack, World worldIn, EntityLivingBase entityIn)
-			{
-				return entityIn != null && entityIn.isHandActive() && entityIn.getActiveItemStack() == stack ? 1.0F : 0.0F;
-			}
-		});
+		addPropertyOverride(new ResourceLocation("pulling"), (stack, worldIn, entityIn) -> entityIn != null && entityIn.isHandActive() && entityIn.getActiveItemStack() == stack ? 1.0F : 0.0F);
 	}
 
 	@Override

@@ -129,12 +129,7 @@ public abstract class AbstractMessage<T extends AbstractMessage<T>> implements I
 	private static final <T extends AbstractMessage<T>> void checkThreadAndEnqueue(final AbstractMessage<T> msg, final MessageContext ctx) {
 		IThreadListener thread = AbyssalCraft.proxy.getThreadFromContext(ctx);
 		if (!thread.isCallingFromMinecraftThread())
-			thread.addScheduledTask(new Runnable() {
-				@Override
-				public void run() {
-					msg.process(AbyssalCraft.proxy.getPlayerEntity(ctx), ctx.side);
-				}
-			});
+			thread.addScheduledTask(() -> msg.process(AbyssalCraft.proxy.getPlayerEntity(ctx), ctx.side));
 	}
 
 	/**

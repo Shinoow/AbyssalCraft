@@ -13,7 +13,6 @@ package com.shinoow.abyssalcraft.api.necronomicon;
 
 import java.io.IOException;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.Map;
 import java.util.NavigableMap;
 
@@ -156,16 +155,12 @@ public class NecroData {
 	 * @since 1.6
 	 */
 	public static class Chapter{
-		private NavigableMap<Integer, Page> pages = Maps.newTreeMap(new Comparator<Integer>(){
-
-			@Override
-			public int compare(Integer o1, Integer o2) {
-				if(o1 > o2)
-					return 1;
-				if(o1 < o2)
-					return -1;
-				return 0;
-			}
+		private NavigableMap<Integer, Page> pages = Maps.newTreeMap((o1, o2) -> {
+			if(o1 > o2)
+				return 1;
+			if(o1 < o2)
+				return -1;
+			return 0;
 		});
 		private String identifier;
 		private String title;

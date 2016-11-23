@@ -182,13 +182,13 @@ public class BlockRitualAltar extends BlockContainer {
 		return new BlockStateContainer(this, new IProperty[] { MATERIAL });
 	}
 
-	static {
+	public void setBlocks() {
 		blockMeta.put(0, Blocks.COBBLESTONE);
 		blockMeta.put(1, ACBlocks.darkstone_cobblestone);
-		blockMeta.put(2, ACBlocks.abyssal_stone_brick);
-		blockMeta.put(3, ACBlocks.coralium_stone_brick);
-		blockMeta.put(4, ACBlocks.dreadstone_brick);
-		blockMeta.put(5, ACBlocks.abyssalnite_stone_brick);
+		blockMeta.put(2, ACBlocks.abyssal_cobblestone);
+		blockMeta.put(3, ACBlocks.coralium_cobblestone);
+		blockMeta.put(4, ACBlocks.dreadstone_cobblestone);
+		blockMeta.put(5, ACBlocks.abyssalnite_cobblestone);
 		blockMeta.put(6, ACBlocks.ethaxium_brick);
 		blockMeta.put(7, ACBlocks.dark_ethaxium_brick);
 	}

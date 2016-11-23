@@ -22,7 +22,6 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumBlockRenderType;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 import com.shinoow.abyssalcraft.common.blocks.tile.TileEntityShoggothBiomass;
@@ -48,7 +47,7 @@ public class BlockShoggothBiomass extends BlockContainer {
 	}
 
 	@Override
-	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess world, BlockPos pos)
+	public AxisAlignedBB getCollisionBoundingBox(IBlockState state, World world, BlockPos pos)
 	{
 		float f = 0.15F;
 		return new AxisAlignedBB(0, 0, 0, 1, 1 - f, 1);

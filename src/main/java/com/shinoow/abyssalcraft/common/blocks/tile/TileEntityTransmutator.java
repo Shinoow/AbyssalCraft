@@ -29,7 +29,6 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI.FuelType;
-import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.api.item.ACItems;
 import com.shinoow.abyssalcraft.api.recipe.TransmutatorRecipes;
 import com.shinoow.abyssalcraft.common.blocks.BlockTransmutator;

@@ -13,12 +13,15 @@ package com.shinoow.abyssalcraft.common;
 
 import net.minecraft.block.Block;
 import net.minecraft.enchantment.EnchantmentData;
+import net.minecraft.entity.passive.EntitySheep;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.init.MobEffects;
+import net.minecraft.init.PotionTypes;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.potion.PotionUtils;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.oredict.ShapedOreRecipe;
@@ -55,6 +58,7 @@ import com.shinoow.abyssalcraft.common.entity.EntitySacthoth;
 import com.shinoow.abyssalcraft.common.entity.EntityShadowBeast;
 import com.shinoow.abyssalcraft.common.entity.EntityShadowCreature;
 import com.shinoow.abyssalcraft.common.entity.EntityShadowMonster;
+import com.shinoow.abyssalcraft.common.entity.demon.EntityEvilSheep;
 import com.shinoow.abyssalcraft.common.ritual.NecronomiconBreedingRitual;
 import com.shinoow.abyssalcraft.common.ritual.NecronomiconDreadSpawnRitual;
 import com.shinoow.abyssalcraft.common.ritual.NecronomiconRespawnJzaharRitual;
@@ -592,7 +596,7 @@ public class AbyssalCrafting {
 		AbyssalCraftAPI.addCrystallization(ACItems.dreaded_chunk_of_abyssalnite, new ItemStack(ACItems.crystal_shard, 4, 12), new ItemStack(ACItems.crystal_shard, 4, 14), 0.2F);
 		AbyssalCraftAPI.addCrystallization(ACBlocks.dreaded_abyssalnite_ore, new ItemStack(ACItems.crystal_shard, 4, 12), new ItemStack(ACItems.crystal_shard, 4, 14), 0.2F);
 		AbyssalCraftAPI.addCrystallization(Items.WATER_BUCKET, new ItemStack(ACItems.crystal_shard, 12, 5), new ItemStack(ACItems.crystal_shard, 6, 4), 0.1F);
-		AbyssalCraftAPI.addCrystallization(new ItemStack(Items.POTIONITEM, 1, 0), new ItemStack(ACItems.crystal_shard, 6, 5), new ItemStack(ACItems.crystal_shard, 3, 4), 0.1F);
+		AbyssalCraftAPI.addCrystallization(PotionUtils.addPotionToItemStack(new ItemStack(Items.POTIONITEM), PotionTypes.WATER), new ItemStack(ACItems.crystal_shard, 6, 5), new ItemStack(ACItems.crystal_shard, 3, 4), 0.1F);
 		AbyssalCraftAPI.addCrystallization(new ItemStack(Items.DYE, 1, 4), new ItemStack(ACItems.crystal, 2, 21), new ItemStack(ACItems.crystal_shard, 16, 2), 0.15F);
 		AbyssalCraftAPI.addCrystallization(ACItems.methane, new ItemStack(ACItems.crystal_shard, 4, 4), new ItemStack(ACItems.crystal, 16, 5), 0.1F);
 		AbyssalCraftAPI.addCrystallization(Items.GUNPOWDER, new ItemStack(ACItems.crystal_shard, 16, 9), new ItemStack(ACItems.crystal_shard, 4, 2), 0.1F);
@@ -679,7 +683,6 @@ public class AbyssalCrafting {
 		AbyssalCraftAPI.addTransmutation(ACBlocks.darkstone_cobblestone, new ItemStack(Blocks.COBBLESTONE, 1), 0.0F);
 		AbyssalCraftAPI.addTransmutation(new ItemStack(ACBlocks.coralium_stone_brick, 1, 0), new ItemStack(ACItems.coralium_brick, 4), 0.0F);
 		AbyssalCraftAPI.addTransmutation(ACItems.coralium_brick, new ItemStack(ACBlocks.coralium_stone, 1), 0.0F);
-		AbyssalCraftAPI.addTransmutation(ACBlocks.liquid_coralium, new ItemStack(ACBlocks.coralium_stone, 8), 0.0F);
 		AbyssalCraftAPI.addTransmutation(ACItems.dense_carbon_cluster, new ItemStack(Items.DIAMOND), 0.5F);
 		AbyssalCraftAPI.addTransmutation(ACItems.dread_plagued_gateway_key, new ItemStack(ACItems.rlyehian_gateway_key), 1.0F);
 		AbyssalCraftAPI.addTransmutation("crystalAluminium", "ingotAluminum", 0.2F);
@@ -772,14 +775,17 @@ public class AbyssalCrafting {
 		Object[] dreadaltartofferings = new Object[]{Items.BUCKET, "stickWood", ACItems.dread_cloth, ACItems.dreadium_ingot, ACItems.dread_cloth, ACItems.dreadium_ingot, ACItems.dread_cloth, "stickWood"};
 		RitualRegistry.instance().registerRitual(new NecronomiconCreationRitual("altarOfChagarothTop", 2, ACLib.dreadlands_id, 20000F, true, new ItemStack(ACBlocks.chagaroth_altar_top), dreadaltartofferings));
 		RitualRegistry.instance().registerRitual(new NecronomiconDreadSpawnRitual());
-		Object[] coraoeofferings = new Object[]{new ItemStack(ACItems.coralium_plagued_flesh), new ItemStack(Items.POTIONITEM, 1, 0), new ItemStack(ACItems.coralium_plagued_flesh), new ItemStack(Items.POTIONITEM, 1, 0),
-				new ItemStack(ACItems.coralium_plagued_flesh), new ItemStack(Items.POTIONITEM, 1, 0),new ItemStack(ACItems.coralium_plagued_flesh), new ItemStack(Items.GUNPOWDER)};
+		Object[] coraoeofferings = new Object[]{new ItemStack(ACItems.coralium_plagued_flesh), PotionUtils.addPotionToItemStack(new ItemStack(Items.POTIONITEM), PotionTypes.WATER), new ItemStack(ACItems.coralium_plagued_flesh),
+				PotionUtils.addPotionToItemStack(new ItemStack(Items.POTIONITEM), PotionTypes.WATER), new ItemStack(ACItems.coralium_plagued_flesh), PotionUtils.addPotionToItemStack(new ItemStack(Items.POTIONITEM), PotionTypes.WATER),
+				new ItemStack(ACItems.coralium_plagued_flesh), new ItemStack(Items.GUNPOWDER)};
 		RitualRegistry.instance().registerRitual(new NecronomiconPotionAoERitual("corPotionAoE", 1, 300F, AbyssalCraftAPI.coralium_plague, coraoeofferings));
-		Object[] dreaoeofferings = new Object[]{new ItemStack(ACItems.dread_fragment), new ItemStack(Items.POTIONITEM, 1, 0), new ItemStack(ACItems.dread_fragment), new ItemStack(Items.POTIONITEM, 1, 0),
-				new ItemStack(ACItems.dread_fragment), new ItemStack(Items.POTIONITEM, 1, 0), new ItemStack(ACItems.dread_fragment), new ItemStack(Items.GUNPOWDER)};
+		Object[] dreaoeofferings = new Object[]{new ItemStack(ACItems.dread_fragment), PotionUtils.addPotionToItemStack(new ItemStack(Items.POTIONITEM), PotionTypes.WATER), new ItemStack(ACItems.dread_fragment),
+				PotionUtils.addPotionToItemStack(new ItemStack(Items.POTIONITEM), PotionTypes.WATER), new ItemStack(ACItems.dread_fragment), PotionUtils.addPotionToItemStack(new ItemStack(Items.POTIONITEM), PotionTypes.WATER),
+				new ItemStack(ACItems.dread_fragment), new ItemStack(Items.GUNPOWDER)};
 		RitualRegistry.instance().registerRitual(new NecronomiconPotionAoERitual("drePotionAoE", 2, 300F, AbyssalCraftAPI.dread_plague, dreaoeofferings));
-		Object[] antiaoeofferings = new Object[]{new ItemStack(ACItems.rotten_anti_flesh), new ItemStack(Items.POTIONITEM, 1, 0), new ItemStack(ACItems.rotten_anti_flesh), new ItemStack(Items.POTIONITEM, 1, 0),
-				new ItemStack(ACItems.rotten_anti_flesh), new ItemStack(Items.POTIONITEM, 1, 0), new ItemStack(ACItems.rotten_anti_flesh), new ItemStack(Items.GUNPOWDER)};
+		Object[] antiaoeofferings = new Object[]{new ItemStack(ACItems.rotten_anti_flesh), PotionUtils.addPotionToItemStack(new ItemStack(Items.POTIONITEM), PotionTypes.WATER), new ItemStack(ACItems.rotten_anti_flesh),
+				PotionUtils.addPotionToItemStack(new ItemStack(Items.POTIONITEM), PotionTypes.WATER), new ItemStack(ACItems.rotten_anti_flesh), PotionUtils.addPotionToItemStack(new ItemStack(Items.POTIONITEM), PotionTypes.WATER),
+				new ItemStack(ACItems.rotten_anti_flesh), new ItemStack(Items.GUNPOWDER)};
 		RitualRegistry.instance().registerRitual(new NecronomiconPotionAoERitual("antiPotionAoE", 0, 300F, AbyssalCraftAPI.antimatter_potion, antiaoeofferings));
 		Object[] corenchofferings = new Object[]{new ItemStack(ACItems.essence, 1, 0), new ItemStack(ACItems.shoggoth_flesh, 1, 1), ACItems.refined_coralium_ingot, ACItems.coralium_plagued_flesh, Items.BOOK,
 				ACItems.coralium_plagued_flesh, ACItems.refined_coralium_ingot, new ItemStack(ACItems.shoggoth_flesh, 1, 1)};
@@ -942,6 +948,7 @@ public class AbyssalCrafting {
 		//		DisruptionHandler.instance().registerDisruption(new DisruptionMonolith()); //uncomment at some point when there's a lot more disruptions
 		DisruptionHandler.instance().registerDisruption(new DisruptionTeleportRandomly());
 		DisruptionHandler.instance().registerDisruption(new DisruptionDrainNearbyPE());
+		DisruptionHandler.instance().registerDisruption(new DisruptionSwarm("swarmSheep", DeityType.SHUBNIGGURATH, EntityEvilSheep.class, EntitySheep.class));
 	}
 
 	private static void addArmor(Item helmet, Item chestplate, Item pants, Item boots, Item material, Item upgrade, Item oldh, Item oldc, Item oldp, Item oldb){
