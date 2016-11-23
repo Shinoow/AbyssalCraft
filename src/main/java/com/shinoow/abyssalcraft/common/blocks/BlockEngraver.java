@@ -108,17 +108,6 @@ public class BlockEngraver extends BlockContainer {
 
 	public static void updateEngraverBlockState(World par1World, BlockPos pos) {
 
-		TileEntity tileentity = par1World.getTileEntity(pos);
-		keepInventory = true;
-
-		par1World.setBlockState(pos, ACBlocks.engraver.getDefaultState());
-
-		keepInventory = false;
-
-		if (tileentity != null){
-			tileentity.validate();
-			par1World.setTileEntity(pos, tileentity);
-		}
 	}
 
 	@Override

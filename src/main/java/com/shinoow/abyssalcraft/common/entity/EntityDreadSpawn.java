@@ -46,6 +46,7 @@ import com.shinoow.abyssalcraft.api.entity.IDreadEntity;
 import com.shinoow.abyssalcraft.api.item.ACItems;
 import com.shinoow.abyssalcraft.lib.ACConfig;
 import com.shinoow.abyssalcraft.lib.ACLoot;
+import com.shinoow.abyssalcraft.lib.ACSounds;
 
 public class EntityDreadSpawn extends EntityMob implements IDreadEntity
 {
@@ -119,19 +120,19 @@ public class EntityDreadSpawn extends EntityMob implements IDreadEntity
 	@Override
 	protected SoundEvent getAmbientSound()
 	{
-		return SoundEvents.ENTITY_ZOMBIE_AMBIENT;
+		return ACSounds.dread_spawn_ambient;
 	}
 
 	@Override
 	protected SoundEvent getHurtSound()
 	{
-		return SoundEvents.ENTITY_ZOMBIE_HURT;
+		return ACSounds.dread_spawn_hurt;
 	}
 
 	@Override
 	protected SoundEvent getDeathSound()
 	{
-		return SoundEvents.ENTITY_ZOMBIE_DEATH;
+		return ACSounds.dread_spawn_death;
 	}
 
 	@Override

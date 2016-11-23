@@ -95,19 +95,23 @@ public class InitHandler implements ILifeCycleHandler {
 		if(!FluidRegistry.isFluidRegistered("liquidcoralium")){
 			AbyssalCraftAPI.liquid_coralium_fluid = LIQUID_CORALIUM;
 			FluidRegistry.registerFluid(AbyssalCraftAPI.liquid_coralium_fluid);
+			FluidRegistry.addBucketForFluid(AbyssalCraftAPI.liquid_coralium_fluid);
 		} else {
 			ACLogger.warning("Liquid Coralium was already registered by another mod, adding ours as alternative.");
 			AbyssalCraftAPI.liquid_coralium_fluid = FluidRegistry.getFluid("liquidcoralium");
 			FluidRegistry.registerFluid(LIQUID_CORALIUM);
+			FluidRegistry.addBucketForFluid(LIQUID_CORALIUM);
 		}
 
 		if(!FluidRegistry.isFluidRegistered("liquidantimatter")){
 			AbyssalCraftAPI.liquid_antimatter_fluid = LIQUID_ANTIMATTER;
 			FluidRegistry.registerFluid(AbyssalCraftAPI.liquid_antimatter_fluid);
+			FluidRegistry.addBucketForFluid(AbyssalCraftAPI.liquid_antimatter_fluid);
 		} else {
 			ACLogger.warning("Liquid Antimatter was already registered by another mod, adding ours as alternative.");
 			AbyssalCraftAPI.liquid_antimatter_fluid = FluidRegistry.getFluid("liquidantimatter");
 			FluidRegistry.registerFluid(LIQUID_ANTIMATTER);
+			FluidRegistry.addBucketForFluid(LIQUID_ANTIMATTER);
 		}
 	}
 

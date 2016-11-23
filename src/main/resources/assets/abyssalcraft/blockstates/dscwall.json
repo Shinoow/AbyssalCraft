@@ -1,7 +1,8 @@
 {
 	"forge_marker": 1,
 	"defaults": {
-		"textures" : { "wall": "abyssalcraft:blocks/dsc" }
+		"textures" : { "wall": "abyssalcraft:blocks/dsc" },
+		"model": "wall_post"
 	},
 	"variants": {
 		"up": {
