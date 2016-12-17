@@ -13,8 +13,11 @@ package com.shinoow.abyssalcraft.common.items.armor;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.ScaledResolution;
+import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.client.renderer.GlStateManager.DestFactor;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.VertexBuffer;
+import net.minecraft.client.renderer.GlStateManager.SourceFactor;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
@@ -28,8 +31,6 @@ import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-
-import org.lwjgl.opengl.GL11;
 
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
 import com.shinoow.abyssalcraft.api.item.ACItems;
@@ -86,7 +87,7 @@ public class ItemDepthsArmor extends ItemArmor /* implements IVisDiscountGear, I
 
 
 		if(Minecraft.getMinecraft().gameSettings.thirdPersonView == 0 && stack != null && stack.getItem() == ACItems.depths_helmet) {
-			GL11.glPushAttrib(GL11.GL_ALL_ATTRIB_BITS);
+			GlStateManager.pushAttrib();
 
 			Tessellator t = Tessellator.getInstance();
 
@@ -94,11 +95,11 @@ public class ItemDepthsArmor extends ItemArmor /* implements IVisDiscountGear, I
 			int width = scale.getScaledWidth();
 			int height = scale.getScaledHeight();
 
-			GL11.glDisable(GL11.GL_DEPTH_TEST);
-			GL11.glDepthMask(false);
-			GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
-			GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-			GL11.glDisable(GL11.GL_ALPHA_TEST);
+			GlStateManager.disableDepth();
+			GlStateManager.depthMask(false);
+			GlStateManager.blendFunc(SourceFactor.SRC_ALPHA, DestFactor.ONE_MINUS_SRC_ALPHA);
+			GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
+			GlStateManager.disableAlpha();
 			Minecraft.getMinecraft().renderEngine.bindTexture(coraliumBlur);
 
 			VertexBuffer wr = t.getBuffer();
@@ -110,7 +111,7 @@ public class ItemDepthsArmor extends ItemArmor /* implements IVisDiscountGear, I
 			wr.pos(0.0D, 0.0D, 90.0D).tex(0.0D, 0.0D).endVertex();;
 			t.draw();
 
-			GL11.glPopAttrib();
+			GlStateManager.popAttrib();
 		}
 	}
 

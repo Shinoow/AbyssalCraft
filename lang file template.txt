@@ -410,7 +410,7 @@ necronomicon.text.crafting.dreadium.2=When you have enough Dreadium Ingots to cr
 necronomicon.text.crafting.monolithpillar.1=A Monolith Stone Pillar is crafted with Monolith Stone. It's primary use is to amplify the range of Potential Energy Manipulators (statues for example).
 necronomicon.text.crafting.ritualcharm.1=A Ritual Charm is crafted with Gold Ingots and a Diamond. By itself it has no effect, but through rituals it can amplify various stats of Potential Energy Manipulators.
 necronomicon.text.crafting.sacrificialaltar.1=A Sacrificial Altar is crafted with Torches, Monolith Stone, A Shadow Gem and a Coralium Pearl. They convert life-force into Potential Energy.
-necronomicon.text.crafting.sacrificialaltar.2=When a entity is targeted, it will emit smoke particles. Once the entity dies, an amount of PE equal to it's max health will be collected. It only targets non-undead adult entities that aren't players. It should be noted that the altar goes on a cooldown after collecting a certain amount of PE, preventing collection for a minute.
+necronomicon.text.crafting.sacrificialaltar.2=When a entity is targeted, it will emit smoke particles. Once the entity dies, an amount of PE equal to it's max health will be collected. It only targets non-undead adult entities that aren't players. It should be noted that the altar goes on a cooldown after collecting a fifth of it's max capacity, preventing collection for a minute.
 necronomicon.text.crafting.energycollector=A Energy Collector is crafted with Monolith Stone and a Shadow Gem. They can collect PE, but require a Energy Relay to transport it.
 necronomicon.text.crafting.energyrelay=A Energy Relay is crafted with Monolith Stone, Shadow Gem Shards and a Shadow Gem. They can be used to transport PE between blocks capable of storing it.
 
@@ -509,11 +509,13 @@ necronomicon.text.entity.shadowtitan.1=Shadow Titans are inhabitants of The Dark
 necronomicon.text.entity.shadowtitan.2=Shadow Titans are powerful living shadows roaming The Dark Realm. Compared to the Shadow Beast, Shadow Titans are armored, and more powerful. 
 necronomicon.text.entity.sacthoth.1=Sacthoth, Harbinger of Doom is found in The Dark Realm.
 necronomicon.text.entity.sacthoth.2=Sacthoth is the strongest being in The Dark Realm, and the ruler of living shadows. The only way for him to leave The Dark Realm is through the explosion of a Oblivion Deathbomb. He carries a powerful sword capable of tearing out the souls of the living.
+necronomicon.text.entity.coraliumsquid.1=Coralium Infested Squids are found in pools of Liquid Coralium inside the Abyssal Wasteland.
+necronomicon.text.entity.coraliumsquid.2=These Squids have been transformed by the Coralium Plague, enabling them to transfer it to victims touched by them, or the ink they squirt on their targets.
 
 necronomicon.text.rituals.info=Check the information section for information regarding rituals, or the other sections for information about available rituals. "Location" specifies where the ritual can be performed.
 
 necronomicon.text.rituals.1=In order to get started with rituals you need to create the altar to perform them at. There is a total of 8 materials you can create your Ritual Altar from.
-necronomicon.text.rituals.2=Those are: Cobblestone, Darkstone Cobblestone, Abyssal Stone Brick, Coralium Brick, Dreadstone Brick, Abyssalnite Stone Brick, Ethaxium Brick and Dark Ethaxium Brick. The materials can only be used in their specific dimension (eg. Cobblestone and Darkstone Cobblestone in the Overworld, Abyssal Stone Brick and Coralium Brick in the Abyssal Wasteland etc).
+necronomicon.text.rituals.2=Those are: Cobblestone, Darkstone Cobblestone, Abyssal Cobblestone, Coralium Cobblestone, Dreadstone Cobblestone, Abyssalnite Cobblestone, Ethaxium Brick and Dark Ethaxium Brick. The materials can only be used in their specific dimension (eg. Cobblestone and Darkstone Cobblestone in the Overworld, Abyssal Cobblestone in the Abyssal Wasteland etc).
 necronomicon.text.rituals.3=To create the altar, simply place the blocks in the above formation (keep the colored area clear) and shift right-click the center block with a Necronomicon.
 necronomicon.text.rituals.4=After that, you can start performing rituals! In order to perform a ritual, place objects on the pedestals and shift right-click the altar with a Necronomicon.
 necronomicon.text.rituals.5=When peforming, the pedestals project smoke towards the altar. Rituals where you gain objects always end with a bolt of lightning striking the altar.
@@ -526,7 +528,7 @@ necronomicon.text.pe.3=Shoggoth Monoliths are also constructed with Monolith Sto
 necronomicon.text.pe.4=It should be noted that the Lesser Shoggoths only build these monoliths under certain conditions. Theorists claim it has to do with power positions (but they're genderless, and don't understand the concept of hieracrchy). If 6 (or more) Lesser Shoggoths are within 32 blocks of each other, one is prone to rise a monolith out of the ooze.
 necronomicon.text.pe.5=You should take into account that the Lesser Shoggoths have no limit on how many monoliths they construct, leading to a possible infestation.
 necronomicon.text.pe.6=If you notice Shoggoth activity near your homestead, it is highly adviced that you immediately evacuate your land, or construct a large wall (or other defensive measures) to ensure the infestation doesn't spread onto your land. Recovering your land from a Shoggoth infestation is quite difficult, so be cautious.
-necronomicon.text.pe.7=The statues come in different shapes, all depicting Great Old Ones. Standing close to one while holding a Necronomicon allows it to transport PE to you.
+necronomicon.text.pe.7=The statues come in different shapes, all depicting Great Old Ones. They can transport PE to nearby players holding Necronomicons when under open sky.
 necronomicon.text.pe.8=It should be noted that you harvesting PE isn't appreciated. This causes disruptions to occur (displayed by a bolt of lightning striking the statue, or other PE manipulator). Disruptions are random events that can affect the player, other entities or the environment. Their purpose is to punish those who tries to drain PE from the higher plane.
 necronomicon.text.pe.9=One way to boost the efficiency of statues (and other PE manipulators) is through the use of Ritual Charms. They can boost various stats (check the tooltip).
 necronomicon.text.pe.10=You can also craft a Energy Pedestal, which can collect PE from statues (and other PE manipulators) placed 3 blocks from it. Monolith Stone Pillars boost the range.
@@ -982,6 +984,32 @@ tile.tieredenergycontainer.0.name=Overworld Energy Container
 tile.tieredenergycontainer.1.name=Abyssal Wasteland Energy Container
 tile.tieredenergycontainer.2.name=Dreadlands Energy Container
 tile.tieredenergycontainer.3.name=Omothol Energy Container
+tile.abyssalsand.name=Abyssal Sand
+tile.fusedabyssalsand.name=Fused Abyssal Sand
+tile.abyssalsandglass.name=Abyssal Sand Glass
+tile.dreadlandsdirt.name=Dreadlands Dirt
+tile.abyssalcobblestone.name=Abyssal Cobblestone
+tile.dreadstonecobblestone.name=Dreadstone Cobblestone
+tile.abyssalnitecobblestone.name=Abyssalnite Cobblestone
+tile.coraliumcobblestone.name=Coralium Cobblestone
+tile.abyssalcobblestonestairs.name=Abyssal Cobblestone Stairs
+tile.abyssalcobblestoneslab1.name=Abyssal Cobblestone Slab
+tile.abyssalcobblestoneslab2.name=Abyssal Cobblestone Slab
+tile.abyssalcobblestonewall.name=Abyssal Cobblestone Wall
+tile.dreadstonecobblestonestairs.name=Dreadstone Cobblestone Stairs
+tile.dreadstonecobblestoneslab1.name=Dreadstone Cobblestone Slab
+tile.dreadstonecobblestoneslab2.name=Dreadstone Cobblestone Slab
+tile.dreadstonecobblestonewall.name=Dreadstone Cobblestone Wall
+tile.abyssalnitecobblestonestairs.name=Abyssalnite Cobblestone Stairs
+tile.abyssalnitecobblestoneslab1.name=Abyssalnite Cobblestone Slab
+tile.abyssalnitecobblestoneslab2.name=Abyssalnite Cobblestone Slab
+tile.abyssalnitecobblestonewall.name=Abyssalnite Cobblestone Wall
+tile.coraliumcobblestonestairs.name=Coralium Cobblestone Stairs
+tile.coraliumcobblestoneslab1.name=Coralium Cobblestone Slab
+tile.coraliumcobblestoneslab2.name=Coralium Cobblestone Slab
+tile.coraliumcobblestonewall.name=Coralium Cobblestone Wall
+tile.luminousthistle.name=Luminous Thistle
+tile.wastelandsthorn.name=Wasteland's Thorn
 
 #Pre/Postfixes
 decorativestatue.prefix=Decorative %s
@@ -1278,6 +1306,7 @@ entity.abyssalcraft.demoncow.name=Demon Cow
 entity.abyssalcraft.demonchicken.name=Demon Chicken
 entity.abyssalcraft.evilsheep.name=Sheep
 entity.abyssalcraft.demonsheep.name=Demon Sheep
+entity.abyssalcraft.coraliumsquid.name=Coralium Infested Squid
 
 #Potions
 potion.Cplague=Coralium Plague

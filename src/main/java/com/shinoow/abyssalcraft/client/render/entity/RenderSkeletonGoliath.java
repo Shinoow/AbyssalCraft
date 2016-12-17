@@ -11,14 +11,13 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.client.render.entity;
 
+import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.entity.layers.LayerCustomHead;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-
-import org.lwjgl.opengl.GL11;
 
 import com.shinoow.abyssalcraft.client.model.entity.ModelSkeletonGoliath;
 import com.shinoow.abyssalcraft.common.entity.EntitySkeletonGoliath;
@@ -43,7 +42,7 @@ public class RenderSkeletonGoliath extends RenderLiving<EntitySkeletonGoliath> {
 
 	protected void preRenderScale(EntitySkeletonGoliath par1EntitySkeletonGoliath, float par2)
 	{
-		GL11.glScalef(scale, scale, scale);
+		GlStateManager.scale(scale, scale, scale);
 	}
 
 	@Override

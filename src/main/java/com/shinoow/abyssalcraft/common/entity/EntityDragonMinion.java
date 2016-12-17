@@ -27,6 +27,7 @@ import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.Item;
+import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.ReportedException;
@@ -39,6 +40,8 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
 
+import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
+import com.shinoow.abyssalcraft.api.entity.EntityUtil;
 import com.shinoow.abyssalcraft.api.entity.ICoraliumEntity;
 import com.shinoow.abyssalcraft.api.item.ACItems;
 import com.shinoow.abyssalcraft.lib.ACAchievements;
@@ -460,8 +463,11 @@ public class EntityDragonMinion extends EntityMob implements IEntityMultiPart, I
 		{
 			Entity entity = (Entity)par1List.get(i);
 
-			if (entity instanceof EntityLivingBase)
-				entity.attackEntityFrom(DamageSource.causeMobDamage(this), 8.0F);
+			if (entity instanceof EntityLivingBase && !EntityUtil.isEntityCoralium((EntityLivingBase)entity))
+				((EntityLivingBase)entity).addPotionEffect(new PotionEffect(AbyssalCraftAPI.coralium_plague, 200));
+
+			if(ACConfig.hardcoreMode && entity instanceof EntityPlayer)
+				entity.attackEntityFrom(DamageSource.causeMobDamage(this).setDamageBypassesArmor().setDamageIsAbsolute(), 1);
 		}
 	}
 
@@ -510,6 +516,12 @@ public class EntityDragonMinion extends EntityMob implements IEntityMultiPart, I
 		target = null;
 
 		return true;
+	}
+
+	@Override
+	public boolean attackEntityFrom(DamageSource par1DamageSource, float par2)
+	{
+		return par1DamageSource.getEntity() instanceof EntityDragonBoss ? false : super.attackEntityFrom(par1DamageSource, par2);
 	}
 
 	@Override

@@ -40,6 +40,7 @@ import com.shinoow.abyssalcraft.api.ritual.RitualRegistry;
 import com.shinoow.abyssalcraft.common.items.ItemNecronomicon;
 import com.shinoow.abyssalcraft.lib.ACSounds;
 import com.shinoow.abyssalcraft.lib.util.blocks.IRitualAltar;
+import com.shinoow.abyssalcraft.lib.util.blocks.IRitualPedestal;
 
 public class TileEntityRitualAltar extends TileEntity implements ITickable, IRitualAltar {
 
@@ -212,17 +213,17 @@ public class TileEntityRitualAltar extends TileEntity implements ITickable, IRit
 		TileEntity ped7 = world.getTileEntity(new BlockPos(x + 2, y, z + 2));
 		TileEntity ped8 = world.getTileEntity(new BlockPos(x + 2, y, z - 2));
 		if(ped1 != null && ped2 != null && ped3 != null && ped4 != null && ped5 != null && ped6 != null && ped7 != null && ped8 != null)
-			if(ped1 instanceof TileEntityRitualPedestal && ped2 instanceof TileEntityRitualPedestal && ped3 instanceof TileEntityRitualPedestal
-					&& ped4 instanceof TileEntityRitualPedestal && ped5 instanceof TileEntityRitualPedestal && ped6 instanceof TileEntityRitualPedestal
-					&& ped7 instanceof TileEntityRitualPedestal && ped8 instanceof TileEntityRitualPedestal){
-				offers[0] = ((TileEntityRitualPedestal)ped1).getItem();
-				offers[1] = ((TileEntityRitualPedestal)ped2).getItem();
-				offers[2] = ((TileEntityRitualPedestal)ped3).getItem();
-				offers[3] = ((TileEntityRitualPedestal)ped4).getItem();
-				offers[4] = ((TileEntityRitualPedestal)ped5).getItem();
-				offers[5] = ((TileEntityRitualPedestal)ped6).getItem();
-				offers[6] = ((TileEntityRitualPedestal)ped7).getItem();
-				offers[7] = ((TileEntityRitualPedestal)ped8).getItem();
+			if(ped1 instanceof IRitualPedestal && ped2 instanceof IRitualPedestal && ped3 instanceof IRitualPedestal
+					&& ped4 instanceof IRitualPedestal && ped5 instanceof IRitualPedestal && ped6 instanceof IRitualPedestal
+					&& ped7 instanceof IRitualPedestal && ped8 instanceof IRitualPedestal){
+				offers[0] = ((IRitualPedestal)ped1).getItem();
+				offers[1] = ((IRitualPedestal)ped2).getItem();
+				offers[2] = ((IRitualPedestal)ped3).getItem();
+				offers[3] = ((IRitualPedestal)ped4).getItem();
+				offers[4] = ((IRitualPedestal)ped5).getItem();
+				offers[5] = ((IRitualPedestal)ped6).getItem();
+				offers[6] = ((IRitualPedestal)ped7).getItem();
+				offers[7] = ((IRitualPedestal)ped8).getItem();
 				if(offers[0] == null && offers[1] == null && offers[2] == null && offers[3] == null && offers[4] == null &&
 						offers[5] == null && offers[6] == null && offers[7] == null) return false;
 				else return true;
@@ -245,18 +246,24 @@ public class TileEntityRitualAltar extends TileEntity implements ITickable, IRit
 		TileEntity ped7 = world.getTileEntity(new BlockPos(x + 2, y, z + 2));
 		TileEntity ped8 = world.getTileEntity(new BlockPos(x + 2, y, z - 2));
 		if(ped1 != null && ped2 != null && ped3 != null && ped4 != null && ped5 != null && ped6 != null && ped7 != null && ped8 != null)
-			if(ped1 instanceof TileEntityRitualPedestal && ped2 instanceof TileEntityRitualPedestal && ped3 instanceof TileEntityRitualPedestal
-					&& ped4 instanceof TileEntityRitualPedestal && ped5 instanceof TileEntityRitualPedestal && ped6 instanceof TileEntityRitualPedestal
-					&& ped7 instanceof TileEntityRitualPedestal && ped8 instanceof TileEntityRitualPedestal){
-				((TileEntityRitualPedestal)ped1).setItem(null);
-				((TileEntityRitualPedestal)ped2).setItem(null);
-				((TileEntityRitualPedestal)ped3).setItem(null);
-				((TileEntityRitualPedestal)ped4).setItem(null);
-				((TileEntityRitualPedestal)ped5).setItem(null);
-				((TileEntityRitualPedestal)ped6).setItem(null);
-				((TileEntityRitualPedestal)ped7).setItem(null);
-				((TileEntityRitualPedestal)ped8).setItem(null);
+			if(ped1 instanceof IRitualPedestal && ped2 instanceof IRitualPedestal && ped3 instanceof IRitualPedestal
+					&& ped4 instanceof IRitualPedestal && ped5 instanceof IRitualPedestal && ped6 instanceof IRitualPedestal
+					&& ped7 instanceof IRitualPedestal && ped8 instanceof IRitualPedestal){
+				((IRitualPedestal)ped1).setItem(getStack(((IRitualPedestal)ped1).getItem()));
+				((IRitualPedestal)ped2).setItem(getStack(((IRitualPedestal)ped2).getItem()));
+				((IRitualPedestal)ped3).setItem(getStack(((IRitualPedestal)ped3).getItem()));
+				((IRitualPedestal)ped4).setItem(getStack(((IRitualPedestal)ped4).getItem()));
+				((IRitualPedestal)ped5).setItem(getStack(((IRitualPedestal)ped5).getItem()));
+				((IRitualPedestal)ped6).setItem(getStack(((IRitualPedestal)ped6).getItem()));
+				((IRitualPedestal)ped7).setItem(getStack(((IRitualPedestal)ped7).getItem()));
+				((IRitualPedestal)ped8).setItem(getStack(((IRitualPedestal)ped8).getItem()));
 			}
+	}
+
+	private ItemStack getStack(ItemStack stack){
+		if(stack != null && stack.getItem().hasContainerItem(stack))
+			return stack.getItem().getContainerItem(stack);
+		else return null;
 	}
 
 	@Override

@@ -24,6 +24,7 @@ public class ACConfig {
 	particleBlock, particleEntity, hardcoreMode, useDynamicPotionIds, evilAnimalCreatureType,
 	antiItemDisintegration, smeltingRecipes, purgeMobSpawns;
 	public static int evilAnimalSpawnWeight, endAbyssalZombieSpawnWeight, portalCooldown, demonAnimalSpawnWeight, shoggothLairSpawnRate;
+	public static double damageAmpl;
 	public static boolean shoggothOoze, oozeLeaves, oozeGrass, oozeGround, oozeSand, oozeRock, oozeCloth, oozeWood,
 	oozeGourd, oozeIron, oozeClay, oozeExpire;
 	public static boolean generateDarklandsStructures, generateShoggothLairs, generateAbyssalWastelandPillars,

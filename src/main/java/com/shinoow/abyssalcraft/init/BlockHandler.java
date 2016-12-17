@@ -203,7 +203,7 @@ public class BlockHandler implements ILifeCycleHandler {
 		ACBlocks.dreadlands_energy_relay = new BlockTieredEnergyRelay("dlenergyrelay"){ @Override public TileEntity createNewTileEntity(World worldIn, int meta) { return new TileEntityDreadlandsEnergyRelay(); }};
 		ACBlocks.omothol_energy_relay = new BlockTieredEnergyRelay("omtenergyrelay"){ @Override public TileEntity createNewTileEntity(World worldIn, int meta) { return new TileEntityOmotholEnergyRelay(); }};
 		ACBlocks.tiered_energy_container = new BlockTieredEnergyContainer();
-		ACBlocks.abyssal_sand = new BlockACBasic(Material.SAND, 0.5F, 2.5F, SoundType.SAND).setUnlocalizedName("abyssalsand");
+		ACBlocks.abyssal_sand = new BlockAbyssalSand();
 		ACBlocks.fused_abyssal_sand = new BlockFusedAbyssalSand();
 		ACBlocks.abyssal_sand_glass = new BlockAbyssalSandGlass();
 		ACBlocks.dreadlands_dirt = new BlockACBasic(Material.GROUND, 0.4F, 2.0F, SoundType.GROUND).setUnlocalizedName("dreadlandsdirt");
@@ -481,6 +481,9 @@ public class BlockHandler implements ILifeCycleHandler {
 	public void postInit(FMLPostInitializationEvent event) {
 		((BlockCLiquid) ACBlocks.liquid_coralium).addBlocks();
 	}
+
+	@Override
+	public void loadComplete(FMLLoadCompleteEvent event) {}
 
 	private static void registerItem(Item item, String name){
 		GameRegistry.register(item.setRegistryName(new ResourceLocation(AbyssalCraft.modid, name)));

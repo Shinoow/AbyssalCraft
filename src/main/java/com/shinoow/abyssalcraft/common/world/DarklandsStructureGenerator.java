@@ -27,17 +27,18 @@ import com.shinoow.abyssalcraft.common.structures.overworld.ACscion1;
 import com.shinoow.abyssalcraft.common.structures.overworld.ACscion2;
 import com.shinoow.abyssalcraft.common.structures.overworld.StructureCircularShrine;
 import com.shinoow.abyssalcraft.common.structures.overworld.StructureCircularShrineColumns;
+import com.shinoow.abyssalcraft.common.structures.overworld.StructureElevatedShrine;
+import com.shinoow.abyssalcraft.common.structures.overworld.StructureElevatedShrineLarge;
 import com.shinoow.abyssalcraft.common.structures.overworld.StructureRitualGrounds;
 import com.shinoow.abyssalcraft.common.structures.overworld.StructureRitualGroundsColumns;
 
 public class DarklandsStructureGenerator {
 
 	static List<WorldGenerator> structures = Lists.newArrayList((WorldGenerator)new AChouse1(), new AChouse2(), new ACscion1(), new ACscion2(),
-			new StructureRitualGrounds(), new StructureCircularShrine(), new StructureCircularShrineColumns(),
-			new StructureRitualGroundsColumns());
-	//	static List<WorldGenerator> structures = Lists.newArrayList((WorldGenerator)new StructureRitualGrounds(), new StructureCircularShrine(),
-	//			new StructureCircularShrineColumns(), new StructureRitualGroundsColumns());
-	static List<WorldGenerator> shrines = Lists.newArrayList((WorldGenerator)new StructureCircularShrine(), new StructureCircularShrineColumns());
+			new StructureRitualGrounds(), new StructureCircularShrine(), new StructureCircularShrineColumns(), new StructureRitualGroundsColumns(),
+			new StructureElevatedShrine(), new StructureElevatedShrineLarge());
+	static List<WorldGenerator> shrines = Lists.newArrayList((WorldGenerator)new StructureCircularShrine(), new StructureCircularShrineColumns(),
+			new StructureElevatedShrine(), new StructureElevatedShrineLarge());
 	static List<WorldGenerator> ritual_grounds = Lists.newArrayList((WorldGenerator)new StructureRitualGrounds(), new StructureRitualGroundsColumns());
 	static List<WorldGenerator> houses = Lists.newArrayList((WorldGenerator)new AChouse1(), new AChouse2());
 	static List<WorldGenerator> misc = Lists.newArrayList((WorldGenerator)new ACscion1(), new ACscion2());

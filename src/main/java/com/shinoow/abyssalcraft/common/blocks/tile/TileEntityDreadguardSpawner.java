@@ -42,6 +42,7 @@ public class TileEntityDreadguardSpawner extends TileEntity implements ITickable
 		if (!worldObj.isRemote && isActivated()) {
 			EntityDreadguard mob = new EntityDreadguard(worldObj);
 			mob.setLocationAndAngles(pos.getX(), pos.getY(), pos.getZ(), MathHelper.wrapDegrees(worldObj.rand.nextFloat() * 360.0F), 10.0F);
+			mob.onInitialSpawn(worldObj.getDifficultyForLocation(pos), null);
 			worldObj.spawnEntityInWorld(mob);
 			worldObj.setBlockToAir(pos);
 		}

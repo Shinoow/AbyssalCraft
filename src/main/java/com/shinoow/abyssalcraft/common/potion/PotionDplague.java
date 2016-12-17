@@ -19,6 +19,7 @@ import net.minecraft.entity.monster.EntityZombie;
 import net.minecraft.entity.passive.EntityChicken;
 import net.minecraft.entity.passive.EntityCow;
 import net.minecraft.entity.passive.EntityPig;
+import net.minecraft.entity.passive.EntitySheep;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.potion.Potion;
 import net.minecraft.util.ResourceLocation;
@@ -50,7 +51,8 @@ public class PotionDplague extends Potion{
 
 		if(par1EntityLivingBase instanceof IDreadEntity)
 			par1EntityLivingBase.removePotionEffect(this);
-		else par1EntityLivingBase.attackEntityFrom(AbyssalCraftAPI.dread, 1);
+		else if(par1EntityLivingBase.ticksExisted % 25 >> par2 == 0)
+			par1EntityLivingBase.attackEntityFrom(AbyssalCraftAPI.dread, 1);
 
 		if(par1EntityLivingBase instanceof EntityPlayer && !par1EntityLivingBase.isDead && wasKilled)
 			wasKilled = false;
@@ -68,57 +70,50 @@ public class PotionDplague extends Potion{
 				par1EntityLivingBase.worldObj.removeEntity(par1EntityLivingBase);
 				dreadling.onInitialSpawn(null, null);
 				par1EntityLivingBase.worldObj.spawnEntityInWorld(dreadling);
-			}
-			else if(par1EntityLivingBase instanceof EntityPlayer && !wasKilled){
+			} else if(par1EntityLivingBase instanceof EntityPlayer && !wasKilled){
 				wasKilled = true;
 				EntityDreadling dreadling = new EntityDreadling(par1EntityLivingBase.worldObj);
 				dreadling.copyLocationAndAnglesFrom(par1EntityLivingBase);
 				par1EntityLivingBase.worldObj.removeEntity(par1EntityLivingBase);
 				dreadling.onInitialSpawn(null, null);
 				par1EntityLivingBase.worldObj.spawnEntityInWorld(dreadling);
-			}
-			else if(par1EntityLivingBase instanceof EntitySkeletonGoliath){
+			} else if(par1EntityLivingBase instanceof EntitySkeletonGoliath){
 				EntityDreadguard dg = new EntityDreadguard(par1EntityLivingBase.worldObj);
 				dg.copyLocationAndAnglesFrom(par1EntityLivingBase);
 				par1EntityLivingBase.worldObj.removeEntity(par1EntityLivingBase);
 				dg.onInitialSpawn(par1EntityLivingBase.worldObj.getDifficultyForLocation(par1EntityLivingBase.getPosition()),(IEntityLivingData)null);
 				par1EntityLivingBase.worldObj.spawnEntityInWorld(dg);
-			}
-			else if(par1EntityLivingBase instanceof EntityPig){
+			} else if(par1EntityLivingBase instanceof EntityPig){
 				EntityDemonPig dp = new EntityDemonPig(par1EntityLivingBase.worldObj);
 				dp.copyLocationAndAnglesFrom(par1EntityLivingBase);
 				par1EntityLivingBase.worldObj.removeEntity(par1EntityLivingBase);
 				dp.onInitialSpawn(par1EntityLivingBase.worldObj.getDifficultyForLocation(par1EntityLivingBase.getPosition()),(IEntityLivingData)null);
 				par1EntityLivingBase.worldObj.spawnEntityInWorld(dp);
-			}
-			else if(par1EntityLivingBase instanceof EntityCow){
+			} else if(par1EntityLivingBase instanceof EntityCow){
 				EntityDemonCow dc = new EntityDemonCow(par1EntityLivingBase.worldObj);
 				dc.copyLocationAndAnglesFrom(par1EntityLivingBase);
 				par1EntityLivingBase.worldObj.removeEntity(par1EntityLivingBase);
 				dc.onInitialSpawn(par1EntityLivingBase.worldObj.getDifficultyForLocation(par1EntityLivingBase.getPosition()),(IEntityLivingData)null);
 				par1EntityLivingBase.worldObj.spawnEntityInWorld(dc);
-			}
-			else if(par1EntityLivingBase instanceof EntityChicken){
+			} else if(par1EntityLivingBase instanceof EntityChicken){
 				EntityDemonChicken dc = new EntityDemonChicken(par1EntityLivingBase.worldObj);
 				dc.copyLocationAndAnglesFrom(par1EntityLivingBase);
 				par1EntityLivingBase.worldObj.removeEntity(par1EntityLivingBase);
 				dc.onInitialSpawn(par1EntityLivingBase.worldObj.getDifficultyForLocation(par1EntityLivingBase.getPosition()),(IEntityLivingData)null);
 				par1EntityLivingBase.worldObj.spawnEntityInWorld(dc);
-			}
-			else if(par1EntityLivingBase instanceof EntityLivingBase && !(par1EntityLivingBase instanceof EntityAntiGhoul)){
-				EntityDreadSpawn spawn = new EntityDreadSpawn(par1EntityLivingBase.worldObj);
-				spawn.copyLocationAndAnglesFrom(par1EntityLivingBase);
+			} else if(par1EntityLivingBase instanceof EntitySheep){
+				EntityDemonSheep ds = new EntityDemonSheep(par1EntityLivingBase.worldObj);
+				ds.copyLocationAndAnglesFrom(par1EntityLivingBase);
 				par1EntityLivingBase.worldObj.removeEntity(par1EntityLivingBase);
-				spawn.onInitialSpawn(null, null);
-				par1EntityLivingBase.worldObj.spawnEntityInWorld(spawn);
+				ds.onInitialSpawn(par1EntityLivingBase.worldObj.getDifficultyForLocation(par1EntityLivingBase.getPosition()), (IEntityLivingData)null);
+				par1EntityLivingBase.worldObj.spawnEntityInWorld(ds);
 			}
 	}
 
 	@Override
 	public boolean isReady(int par1, int par2)
 	{
-		int k = 25 >> par2;
-		return k > 0 ? par1 % k == 0 : true;
+		return true;
 	}
 
 	@Override
