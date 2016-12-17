@@ -222,6 +222,9 @@ public class MiscHandler implements ILifeCycleHandler {
 		parseNDJsonFiles();
 	}
 
+	@Override
+	public void loadComplete(FMLLoadCompleteEvent event) {}
+
 	private void parseNDJsonFiles(){
 
 		File folder = new File("config/abyssalcraft/");
@@ -362,11 +365,6 @@ public class MiscHandler implements ILifeCycleHandler {
 		ChestGenHooks.addItem(ChestGenHooks.PYRAMID_DESERT_CHEST, new WeightedRandomChestContent(new ItemStack(ACItems.abyssalnite_ingot), 1, 3, 3));
 		ChestGenHooks.addItem(ChestGenHooks.STRONGHOLD_CORRIDOR, new WeightedRandomChestContent(new ItemStack(ACItems.abyssalnite_ingot), 1, 3, 3));
 		ChestGenHooks.addItem(ChestGenHooks.VILLAGE_BLACKSMITH, new WeightedRandomChestContent(new ItemStack(ACItems.abyssalnite_ingot), 1, 3, 3));
-		ChestGenHooks.addItem(ChestGenHooks.DUNGEON_CHEST, new WeightedRandomChestContent(new ItemStack(ACItems.refined_coralium_ingot), 1, 2, 1));
-		ChestGenHooks.addItem(ChestGenHooks.MINESHAFT_CORRIDOR, new WeightedRandomChestContent(new ItemStack(ACItems.refined_coralium_ingot), 1, 1, 1));
-		ChestGenHooks.addItem(ChestGenHooks.PYRAMID_DESERT_CHEST, new WeightedRandomChestContent(new ItemStack(ACItems.refined_coralium_ingot), 1, 1, 1));
-		ChestGenHooks.addItem(ChestGenHooks.STRONGHOLD_CORRIDOR, new WeightedRandomChestContent(new ItemStack(ACItems.refined_coralium_ingot), 1, 1, 1));
-		ChestGenHooks.addItem(ChestGenHooks.VILLAGE_BLACKSMITH, new WeightedRandomChestContent(new ItemStack(ACItems.refined_coralium_ingot), 1, 1, 1));
 		ChestGenHooks.addItem(ChestGenHooks.DUNGEON_CHEST, new WeightedRandomChestContent(new ItemStack(ACItems.copper_ingot), 1, 5, 7));
 		ChestGenHooks.addItem(ChestGenHooks.MINESHAFT_CORRIDOR, new WeightedRandomChestContent(new ItemStack(ACItems.copper_ingot), 1, 5, 7));
 		ChestGenHooks.addItem(ChestGenHooks.PYRAMID_DESERT_CHEST, new WeightedRandomChestContent(new ItemStack(ACItems.copper_ingot), 1, 5, 7));
@@ -383,7 +381,6 @@ public class MiscHandler implements ILifeCycleHandler {
 		ChestGenHooks.addItem(ChestGenHooks.STRONGHOLD_CORRIDOR, new WeightedRandomChestContent(new ItemStack(ACItems.crystal, 1, 24), 1, 5, 8));
 		ChestGenHooks.addItem(ChestGenHooks.VILLAGE_BLACKSMITH, new WeightedRandomChestContent(new ItemStack(ACItems.crystal, 1, 24), 1, 5, 8));
 		ChestGenHooks.addItem(ChestGenHooks.VILLAGE_BLACKSMITH, new WeightedRandomChestContent(new ItemStack(ACItems.abyssalnite_pickaxe), 1, 1, 2));
-		ChestGenHooks.addItem(ChestGenHooks.VILLAGE_BLACKSMITH, new WeightedRandomChestContent(new ItemStack(ACItems.refined_coralium_pickaxe), 1, 1, 1));
 		ChestGenHooks.addItem(ChestGenHooks.VILLAGE_BLACKSMITH, new WeightedRandomChestContent(new ItemStack(ACItems.abyssalnite_helmet), 1, 1, 2));
 		ChestGenHooks.addItem(ChestGenHooks.VILLAGE_BLACKSMITH, new WeightedRandomChestContent(new ItemStack(ACItems.abyssalnite_chestplate), 1, 1, 2));
 		ChestGenHooks.addItem(ChestGenHooks.VILLAGE_BLACKSMITH, new WeightedRandomChestContent(new ItemStack(ACItems.abyssalnite_leggings), 1, 1, 2));

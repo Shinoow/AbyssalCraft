@@ -72,6 +72,12 @@ public class EntityDreadSpawn extends EntityMob implements IDreadEntity
 	}
 
 	@Override
+	public boolean canBreatheUnderwater()
+	{
+		return true;
+	}
+
+	@Override
 	protected PathNavigate getNewNavigator(World worldIn)
 	{
 		return new PathNavigateClimber(this, worldIn);
@@ -87,7 +93,7 @@ public class EntityDreadSpawn extends EntityMob implements IDreadEntity
 				((EntityLivingBase)par1Entity).addPotionEffect(new PotionEffect(AbyssalCraftAPI.dread_plague.id, 100));
 
 		if(ACConfig.hardcoreMode && par1Entity instanceof EntityPlayer)
-			par1Entity.attackEntityFrom(DamageSource.causeMobDamage(this).setDamageBypassesArmor(), 1.5F);
+			par1Entity.attackEntityFrom(DamageSource.causeMobDamage(this).setDamageBypassesArmor().setDamageIsAbsolute(), 1.5F * (float)(ACConfig.damageAmpl > 1.0D ? ACConfig.damageAmpl : 1));
 
 		return flag;
 	}

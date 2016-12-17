@@ -18,11 +18,10 @@ import java.util.Map.Entry;
 
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.GL11;
-import org.lwjgl.opengl.GL12;
-
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
+import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.renderer.entity.RenderItem;
 import net.minecraft.client.resources.I18n;
@@ -224,7 +223,7 @@ public class GuiNecronomiconMachines extends GuiNecronomicon {
 			fontRendererObj.drawSplitString(stuff, k + 20, b0 + 16, 116, 0xC40000);
 			Map<ItemStack, ItemStack> trans = TransmutatorRecipes.instance().getTransmutationList();
 			setTurnups(trans.size());
-			GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+			GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
 			mc.renderEngine.bindTexture(NecronomiconResources.TRANSMUTATION);
 			drawTexturedModalRect(k, b0, 0, 0, 256, 256);
 			for(int n = 0; n < trans.size(); n++){
@@ -297,7 +296,7 @@ public class GuiNecronomiconMachines extends GuiNecronomicon {
 			fontRendererObj.drawSplitString(stuff, k + 20, b0 + 16, 116, 0xC40000);
 			Map<ItemStack, ItemStack[]> cryst = CrystallizerRecipes.instance().getCrystallizationList();
 			setTurnups(cryst.size());
-			GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+			GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
 			mc.renderEngine.bindTexture(NecronomiconResources.TRANSMUTATION);
 			drawTexturedModalRect(k, b0, 0, 0, 256, 256);
 			mc.renderEngine.bindTexture(NecronomiconResources.CRYSTALLIZATION);
@@ -425,17 +424,17 @@ public class GuiNecronomiconMachines extends GuiNecronomicon {
 		if(mx > xPos && mx < xPos+16 && my > yPos && my < yPos+16)
 			tooltipStack = stack;
 
-		GL11.glPushMatrix();
-		GL11.glEnable(GL11.GL_BLEND);
-		GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
+		GlStateManager.pushMatrix();
+		GlStateManager.enableBlend();
+		GlStateManager.blendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
 		RenderHelper.enableGUIStandardItemLighting();
-		GL11.glEnable(GL12.GL_RESCALE_NORMAL);
-		GL11.glEnable(GL11.GL_DEPTH_TEST);
+		GlStateManager.enableRescaleNormal();
+		GlStateManager.enableDepth();
 		render.renderItemAndEffectIntoGUI(stack, xPos, yPos);
 		render.renderItemOverlayIntoGUI(Minecraft.getMinecraft().fontRendererObj, stack, xPos, yPos, null);
 		RenderHelper.disableStandardItemLighting();
-		GL11.glPopMatrix();
+		GlStateManager.popMatrix();
 
-		GL11.glDisable(GL11.GL_LIGHTING);
+		GlStateManager.disableLighting();
 	}
 }

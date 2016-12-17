@@ -150,7 +150,7 @@ public class AbyssalCraftEventHooks {
 			ItemStack slot = event.entityLiving.getEquipmentInSlot(3);
 			if(slot.getItem() == ACItems.dreaded_abyssalnite_chestplate)
 				if(event.source.getEntity() != null && event.entityLiving.worldObj.rand.nextBoolean())
-					event.source.getEntity().setFire(99);
+					event.source.getEntity().setFire(30);
 			if(slot.getItem() == ACItems.plated_coralium_chestplate)
 				if(event.source.getEntity() != null && event.entityLiving.worldObj.rand.nextBoolean())
 					event.source.getEntity().attackEntityFrom(getSource(event.entityLiving), 1);

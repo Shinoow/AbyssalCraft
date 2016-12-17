@@ -78,6 +78,12 @@ public class AbyssalCraft {
 	}
 
 	@EventHandler
+	public void loadComplete(FMLLoadCompleteEvent event){
+		for(ILifeCycleHandler handler : handlers)
+			handler.loadComplete(event);
+	}
+
+	@EventHandler
 	public void handleIMC(FMLInterModComms.IMCEvent event){
 		IMCHandler.handleIMC(event);
 	}

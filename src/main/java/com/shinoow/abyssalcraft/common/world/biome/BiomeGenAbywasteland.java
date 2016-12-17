@@ -31,6 +31,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.common.entity.EntityAbyssalZombie;
+import com.shinoow.abyssalcraft.common.entity.EntityCoraliumSquid;
 import com.shinoow.abyssalcraft.common.entity.EntityDepthsGhoul;
 import com.shinoow.abyssalcraft.common.entity.EntityDragonMinion;
 import com.shinoow.abyssalcraft.common.entity.EntitySkeletonGoliath;
@@ -51,6 +52,7 @@ public class BiomeGenAbywasteland extends BiomeGenBase {
 		spawnableCreatureList.clear();
 		spawnableWaterCreatureList.clear();
 		spawnableCaveCreatureList.clear();
+		spawnableWaterCreatureList.add(new SpawnListEntry(EntityCoraliumSquid.class, 10, 4, 4));
 		spawnableMonsterList.add(new SpawnListEntry(EntityZombie.class, 50, 1, 5));
 		spawnableMonsterList.add(new SpawnListEntry(EntitySkeleton.class, 50, 1, 5));
 		spawnableMonsterList.add(new SpawnListEntry(EntityDepthsGhoul.class, 60, 1, 5));
@@ -61,7 +63,7 @@ public class BiomeGenAbywasteland extends BiomeGenBase {
 
 	@Override
 	public void decorate(World par1World, Random par2Random, BlockPos pos){
-		for (int l3 = 0; l3 < 2; ++l3)
+		for (int l3 = 0; l3 < 4; ++l3)
 		{
 			if (par2Random.nextInt(4) == 0)
 			{
@@ -118,7 +120,7 @@ public class BiomeGenAbywasteland extends BiomeGenBase {
 
 		if(ACConfig.generateLiquifiedCoraliumOre)
 			for (int rarity = 0; rarity < 8; rarity++){
-				int veinSize = 1 + par2Random.nextInt(3);
+				int veinSize = 1 + par2Random.nextInt(4);
 				int x = par2Random.nextInt(16);
 				int y = par2Random.nextInt(30);
 				int z = par2Random.nextInt(16);
@@ -126,8 +128,8 @@ public class BiomeGenAbywasteland extends BiomeGenBase {
 				new WorldGenMinable(ACBlocks.liquified_coralium_ore.getDefaultState(), veinSize, BlockHelper.forBlock(ACBlocks.abyssal_stone)).generate(par1World, par2Random, pos.add(x, y, z));
 			}
 		if(ACConfig.generateAbyssalCoraliumOre)
-			for(int rarity = 0; rarity < 8; rarity++) {
-				int veinSize =  2 + par2Random.nextInt(6);
+			for(int rarity = 0; rarity < var5 + 5 + par2Random.nextInt(3); rarity++) {
+				int veinSize =  2 + par2Random.nextInt(8);
 				int x = par2Random.nextInt(16);
 				int y = par2Random.nextInt(75);
 				int z = par2Random.nextInt(16);
@@ -171,8 +173,8 @@ public class BiomeGenAbywasteland extends BiomeGenBase {
 				new WorldGenMinable(ACBlocks.abyssal_gold_ore.getDefaultState(), veinSize, BlockHelper.forBlock(ACBlocks.abyssal_stone)).generate(par1World, par2Random, pos.add(x, y, z));
 			}
 		if(ACConfig.generateAbyssalDiamondOre)
-			for(int rarity = 0; rarity < var5; rarity++) {
-				int veinSize = 1 + par2Random.nextInt(7);
+			for(int rarity = 0; rarity < 5; rarity++) {
+				int veinSize = 1 + par2Random.nextInt(4);
 				int x = par2Random.nextInt(16);
 				int y = par2Random.nextInt(20);
 				int z = par2Random.nextInt(16);
@@ -181,7 +183,7 @@ public class BiomeGenAbywasteland extends BiomeGenBase {
 			}
 		if(ACConfig.generatePearlescentCoraliumOre)
 			for(int rarity = 0; rarity < var5; rarity++) {
-				int veinSize = 1 + par2Random.nextInt(3);
+				int veinSize = 1 + par2Random.nextInt(4);
 				int x = par2Random.nextInt(16);
 				int y = par2Random.nextInt(15);
 				int z = par2Random.nextInt(16);

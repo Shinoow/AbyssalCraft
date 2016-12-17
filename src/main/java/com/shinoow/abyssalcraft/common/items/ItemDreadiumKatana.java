@@ -11,6 +11,7 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.common.items;
 
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
@@ -50,6 +51,12 @@ public class ItemDreadiumKatana extends Item {
 	@Override
 	public int getMaxItemUseDuration(ItemStack par1ItemStack) {
 		return 0x11940;
+	}
+
+	@Override
+	public void onUpdate(ItemStack stack, World worldIn, Entity entityIn, int itemSlot, boolean isSelected){
+		if(stack.isItemEnchanted())
+			stack.getTagCompound().removeTag("ench");
 	}
 
 	@Override

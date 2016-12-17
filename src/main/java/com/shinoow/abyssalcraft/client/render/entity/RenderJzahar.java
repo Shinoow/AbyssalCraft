@@ -11,8 +11,7 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.client.render.entity;
 
-import org.lwjgl.opengl.GL11;
-
+import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.entity.boss.BossStatus;
@@ -51,6 +50,6 @@ public class RenderJzahar extends RenderLiving<EntityJzahar> {
 
 	@Override
 	public void preRenderCallback(EntityJzahar entity, float par2){
-		GL11.glScalef(1.5F, 1.5F, 1.5F);
+		GlStateManager.scale(1.5F, 1.5F, 1.5F);
 	}
 }

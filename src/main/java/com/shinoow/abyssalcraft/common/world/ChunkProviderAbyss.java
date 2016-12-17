@@ -19,6 +19,7 @@ import java.util.List;
 import java.util.Random;
 
 import net.minecraft.block.BlockFalling;
+import net.minecraft.block.material.Material;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.IProgressUpdate;
@@ -45,7 +46,7 @@ import net.minecraftforge.fml.common.eventhandler.Event.Result;
 
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.common.structures.StructureShoggothPit;
-import com.shinoow.abyssalcraft.common.structures.abyss.Abypillar;
+import com.shinoow.abyssalcraft.common.structures.abyss.Chains;
 import com.shinoow.abyssalcraft.common.structures.abyss.Abyruin;
 import com.shinoow.abyssalcraft.common.structures.abyss.stronghold.MapGenAbyStronghold;
 import com.shinoow.abyssalcraft.common.world.gen.WorldGenAbyLake;
@@ -381,12 +382,12 @@ public class ChunkProviderAbyss implements IChunkProvider
 			new WorldGenAbyLake(ACBlocks.abyssal_stone).generate(worldObj, rand, pos.add(k1, l1, i2));
 		}
 		if(ACConfig.generateAbyssalWastelandPillars)
-			for(int i = 0; i < 5; i++) {
+			for(int i = 0; i < 1; i++) {
 				int Xcoord1 = rand.nextInt(16) + 8;
-				int Ycoord1 = rand.nextInt(80);
 				int Zcoord1 = rand.nextInt(16) + 8;
 
-				new Abypillar().generate(worldObj, rand, pos.add(Xcoord1, Ycoord1, Zcoord1));
+				if(rand.nextFloat() < 0.01F)
+					new Chains().generate(worldObj, rand, pos.add(Xcoord1, 0, Zcoord1));
 			}
 		if(ACConfig.generateAbyssalWastelandRuins)
 			for(int i = 0; i < 5; i++) {
@@ -400,9 +401,11 @@ public class ChunkProviderAbyss implements IChunkProvider
 			for(int i = 0; i < 1; i++) {
 				int Xcoord2 = rand.nextInt(16) + 8;
 				int Zcoord2 = rand.nextInt(16) + 8;
+				BlockPos pos1 = worldObj.getHeight(new BlockPos(Xcoord2, 0, Zcoord2));
+				if(worldObj.getBlockState(pos1).getBlock().getMaterial() == Material.plants) pos1 = pos1.down();
 
-				if(rand.nextInt(400) == 0)
-					new StructureShoggothPit().generate(worldObj, rand, worldObj.getHeight(pos.add(Xcoord2, 0, Zcoord2)));
+				if(rand.nextInt(400) == 0 && !worldObj.isAirBlock(pos1.north(13)) && !worldObj.isAirBlock(pos1.north(20)) && !worldObj.isAirBlock(pos1.north(27)))
+					new StructureShoggothPit().generate(worldObj, rand, pos1);
 			}
 
 		biomegenbase.decorate(worldObj, rand, new BlockPos(k, 0, l));

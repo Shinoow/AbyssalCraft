@@ -12,6 +12,7 @@
 package com.shinoow.abyssalcraft.init;
 
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLLoadCompleteEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 
@@ -27,4 +28,6 @@ public interface ILifeCycleHandler {
 	public void init(FMLInitializationEvent event);
 
 	public void postInit(FMLPostInitializationEvent event);
+
+	public void loadComplete(FMLLoadCompleteEvent event);
 }

@@ -11,6 +11,7 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.client.render.entity;
 
+import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.util.MathHelper;
@@ -47,7 +48,7 @@ public class RenderDragonMinion extends RenderLiving<EntityDragonMinion> {
 	 */
 	protected void preRenderScale(EntityDragonMinion par1EntityDragonMinion, float par2)
 	{
-		GL11.glScalef(scale, scale, scale);
+		GlStateManager.scale(scale, scale, scale);
 	}
 
 	@Override
@@ -55,9 +56,9 @@ public class RenderDragonMinion extends RenderLiving<EntityDragonMinion> {
 	{
 		float f3 = (float)par1EntityDragonMinion.getMovementOffsets(7, par4)[0];
 		float f4 = (float)(par1EntityDragonMinion.getMovementOffsets(5, par4)[1] - par1EntityDragonMinion.getMovementOffsets(10, par4)[1]);
-		GL11.glRotatef(-f3, 0.0F, 1.0F, 0.0F);
-		GL11.glRotatef(f4 * 10.0F, 1.0F, 0.0F, 0.0F);
-		GL11.glTranslatef(0.0F, 0.0F, 1.0F);
+		GlStateManager.rotate(-f3, 0.0F, 1.0F, 0.0F);
+		GlStateManager.rotate(f4 * 10.0F, 1.0F, 0.0F, 0.0F);
+		GlStateManager.translate(0.0F, 0.0F, 1.0F);
 
 		if (par1EntityDragonMinion.deathTime > 0)
 		{
@@ -67,7 +68,7 @@ public class RenderDragonMinion extends RenderLiving<EntityDragonMinion> {
 			if (f5 > 1.0F)
 				f5 = 1.0F;
 
-			GL11.glRotatef(f5 * getDeathMaxRotation(par1EntityDragonMinion), 0.0F, 0.0F, 1.0F);
+			GlStateManager.rotate(f5 * getDeathMaxRotation(par1EntityDragonMinion), 0.0F, 0.0F, 1.0F);
 		}
 	}
 
@@ -75,21 +76,21 @@ public class RenderDragonMinion extends RenderLiving<EntityDragonMinion> {
 	protected void renderModel(EntityDragonMinion par1EntityDragonMinion, float par2, float par3, float par4, float par5, float par6, float par7)
 	{
 		bindEntityTexture(par1EntityDragonMinion);
-		GL11.glEnable(GL11.GL_BLEND);
-		GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
+		GlStateManager.enableBlend();
+		GlStateManager.blendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
 		mainModel.render(par1EntityDragonMinion, par2, par3, par4, par5, par6, par7);
-		GL11.glDisable(GL11.GL_BLEND);
+		GlStateManager.disableBlend();
 
 		if (par1EntityDragonMinion.hurtTime > 0)
 		{
 			GL11.glDepthFunc(GL11.GL_EQUAL);
-			GL11.glDisable(GL11.GL_TEXTURE_2D);
-			GL11.glEnable(GL11.GL_BLEND);
-			GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
+			GlStateManager.disableTexture2D();
+			GlStateManager.enableBlend();
+			GlStateManager.blendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
 			GL11.glColor4f(1.0F, 0.0F, 0.0F, 0.5F);
 			mainModel.render(par1EntityDragonMinion, par2, par3, par4, par5, par6, par7);
-			GL11.glEnable(GL11.GL_TEXTURE_2D);
-			GL11.glDisable(GL11.GL_BLEND);
+			GlStateManager.enableTexture2D();
+			GlStateManager.disableBlend();
 			GL11.glDepthFunc(GL11.GL_LEQUAL);
 		}
 	}

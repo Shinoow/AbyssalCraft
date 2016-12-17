@@ -24,8 +24,6 @@ import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.LoaderState;
 
 import org.lwjgl.input.Keyboard;
-import org.lwjgl.opengl.GL11;
-
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
 import com.shinoow.abyssalcraft.api.item.ACItems;
 import com.shinoow.abyssalcraft.api.necronomicon.NecroData;
@@ -230,17 +228,17 @@ public class GuiNecronomiconInformation extends GuiNecronomicon {
 
 		if(icon1 != null){
 			if(icon1 instanceof ResourceLocation){
-				GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+				GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
 				mc.renderEngine.bindTexture((ResourceLocation)icon1);
 				drawTexturedModalRect(k, b0, 0, 0, 256, 256);
 			}
 			if(icon1 instanceof String)
 				if(failcache.contains(icon1)){
-					GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+					GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
 					mc.renderEngine.bindTexture(new ResourceLocation("abyssalcraft", "textures/gui/necronomicon/missing.png"));
 					drawTexturedModalRect(k, b0, 0, 0, 256, 256);
 				} else if(successcache.get(icon1) != null){
-					GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+					GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
 					GlStateManager.bindTexture(successcache.get(icon1).getGlTextureId());
 					drawTexturedModalRect(k, b0, 0, 0, 256, 256);
 				} else {
@@ -251,7 +249,7 @@ public class GuiNecronomiconInformation extends GuiNecronomicon {
 					} catch (Exception e) {
 						failcache.add((String)icon1);
 					}
-					GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+					GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
 					if(t != null)
 						GlStateManager.bindTexture(t.getGlTextureId());
 					else mc.renderEngine.bindTexture(new ResourceLocation("abyssalcraft", "textures/gui/necronomicon/missing.png"));
@@ -260,17 +258,17 @@ public class GuiNecronomiconInformation extends GuiNecronomicon {
 		}
 		if(icon2 != null){
 			if(icon2 instanceof ResourceLocation){
-				GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+				GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
 				mc.renderEngine.bindTexture((ResourceLocation)icon2);
 				drawTexturedModalRect(k + 123, b0, 0, 0, 256, 256);
 			}
 			if(icon2 instanceof String)
 				if(failcache.contains(icon2)){
-					GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+					GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
 					mc.renderEngine.bindTexture(new ResourceLocation("abyssalcraft", "textures/gui/necronomicon/missing.png"));
 					drawTexturedModalRect(k + 123, b0, 0, 0, 256, 256);
 				} else if(successcache.get(icon2) != null){
-					GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+					GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
 					GlStateManager.bindTexture(successcache.get(icon2).getGlTextureId());
 					drawTexturedModalRect(k + 123, b0, 0, 0, 256, 256);
 				} else {
@@ -281,7 +279,7 @@ public class GuiNecronomiconInformation extends GuiNecronomicon {
 					} catch (Exception e) {
 						failcache.add((String)icon2);
 					}
-					GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+					GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
 					if(t != null)
 						GlStateManager.bindTexture(t.getGlTextureId());
 					else mc.renderEngine.bindTexture(new ResourceLocation("abyssalcraft", "textures/gui/necronomicon/missing.png"));

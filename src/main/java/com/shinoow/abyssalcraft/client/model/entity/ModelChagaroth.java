@@ -13,10 +13,9 @@ package com.shinoow.abyssalcraft.client.model.entity;
 
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
+import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.MathHelper;
-
-import org.lwjgl.opengl.GL11;
 
 import com.shinoow.abyssalcraft.common.entity.EntityChagaroth;
 
@@ -835,10 +834,10 @@ public class ModelChagaroth extends ModelBase {
 	@Override
 	public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5)
 	{
-		GL11.glPushMatrix();
+		GlStateManager.pushMatrix();
 		super.render(entity, f, f1, f2, f3, f4, f5);
-		GL11.glScalef(2.0F, 2.0F, 2.0F);
-		GL11.glTranslatef(0F, -0.75F, 0F);
+		GlStateManager.scale(2.0F, 2.0F, 2.0F);
+		GlStateManager.translate(0F, -0.75F, 0F);
 		setRotationAngles(f, f1, f2, f3, f4, f5, entity);
 		frontspike1.render(f5);
 		frontspike2.render(f5);
@@ -896,7 +895,7 @@ public class ModelChagaroth extends ModelBase {
 		walltentacle6.render(f5);
 		walltentacle7.render(f5);
 		walltentacle8.render(f5);
-		GL11.glPopMatrix();
+		GlStateManager.popMatrix();
 	}
 
 	private void setRotation(ModelRenderer model, float x, float y, float z)

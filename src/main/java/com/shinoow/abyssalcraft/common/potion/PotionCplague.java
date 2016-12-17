@@ -15,6 +15,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.IEntityLivingData;
 import net.minecraft.entity.monster.EntityZombie;
+import net.minecraft.entity.passive.EntitySquid;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.potion.Potion;
 import net.minecraft.util.ResourceLocation;
@@ -25,6 +26,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
 import com.shinoow.abyssalcraft.api.entity.EntityUtil;
 import com.shinoow.abyssalcraft.common.entity.EntityAbyssalZombie;
+import com.shinoow.abyssalcraft.common.entity.EntityCoraliumSquid;
 import com.shinoow.abyssalcraft.common.entity.EntityDepthsGhoul;
 
 public class PotionCplague extends Potion{
@@ -44,7 +46,8 @@ public class PotionCplague extends Potion{
 
 		if(EntityUtil.isEntityCoralium(par1EntityLivingBase))
 			par1EntityLivingBase.removePotionEffect(AbyssalCraftAPI.coralium_plague.id);
-		else par1EntityLivingBase.attackEntityFrom(AbyssalCraftAPI.coralium, 2);
+		else if(par1EntityLivingBase.ticksExisted % 40 >> par2 == 0)
+			par1EntityLivingBase.attackEntityFrom(AbyssalCraftAPI.coralium, 2);
 
 		if(!par1EntityLivingBase.worldObj.isRemote && par1EntityLivingBase.isDead)
 			if(par1EntityLivingBase instanceof EntityZombie){
@@ -66,9 +69,9 @@ public class PotionCplague extends Potion{
 					par1EntityLivingBase.worldObj.removeEntity(par1EntityLivingBase);
 					par1EntityLivingBase.worldObj.spawnEntityInWorld(entityzombie);
 				}
-			} else if(par1EntityLivingBase instanceof EntityPlayer)
+			} else if(par1EntityLivingBase instanceof EntityPlayer){
 				if(par1EntityLivingBase.worldObj.getDifficulty() == EnumDifficulty.HARD && par1EntityLivingBase.worldObj.rand.nextBoolean()
-				|| par1EntityLivingBase.worldObj.rand.nextInt(8) == 0) {
+						|| par1EntityLivingBase.worldObj.rand.nextInt(8) == 0) {
 					EntityAbyssalZombie entityzombie = new EntityAbyssalZombie(par1EntityLivingBase.worldObj);
 					entityzombie.copyLocationAndAnglesFrom(par1EntityLivingBase);
 					entityzombie.onInitialSpawn(par1EntityLivingBase.worldObj.getDifficultyForLocation(par1EntityLivingBase.getPosition()),(IEntityLivingData)null);
@@ -77,13 +80,20 @@ public class PotionCplague extends Potion{
 					par1EntityLivingBase.worldObj.removeEntity(par1EntityLivingBase);
 					par1EntityLivingBase.worldObj.spawnEntityInWorld(entityzombie);
 				}
+			} else if(par1EntityLivingBase instanceof EntitySquid)
+				if(par1EntityLivingBase.worldObj.rand.nextBoolean()){
+					EntityCoraliumSquid squid = new EntityCoraliumSquid(par1EntityLivingBase.worldObj);
+					squid.copyLocationAndAnglesFrom(par1EntityLivingBase);
+					squid.onInitialSpawn(par1EntityLivingBase.worldObj.getDifficultyForLocation(par1EntityLivingBase.getPosition()),(IEntityLivingData)null);
+					par1EntityLivingBase.worldObj.removeEntity(par1EntityLivingBase);
+					par1EntityLivingBase.worldObj.spawnEntityInWorld(squid);
+				}
 	}
 
 	@Override
 	public boolean isReady(int par1, int par2)
 	{
-		int k = 40 >> par2;
-		return k > 0 ? par1 % k == 0 : true;
+		return true;
 	}
 
 	@Override

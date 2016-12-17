@@ -11,12 +11,14 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.common.items;
 
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.world.World;
 
 import com.google.common.collect.Multimap;
 import com.shinoow.abyssalcraft.lib.ACTabs;
@@ -25,7 +27,7 @@ public class ItemCudgel extends Item {
 
 	public ItemCudgel(){
 		super();
-		setMaxDamage(2000);
+		setMaxDamage(1500);
 		setMaxStackSize(1);
 		setUnlocalizedName("cudgel");
 		setCreativeTab(ACTabs.tabCombat);
@@ -43,6 +45,12 @@ public class ItemCudgel extends Item {
 	{
 		par1ItemStack.damageItem(1, par3EntityLivingBase);
 		return true;
+	}
+
+	@Override
+	public void onUpdate(ItemStack stack, World worldIn, Entity entityIn, int itemSlot, boolean isSelected){
+		if(stack.isItemEnchanted())
+			stack.getTagCompound().removeTag("ench");
 	}
 
 	@Override

@@ -18,6 +18,7 @@ import java.util.Set;
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.discovery.ASMDataTable;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLLoadCompleteEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 
@@ -120,4 +121,7 @@ public class IntegrationHandler implements ILifeCycleHandler {
 				plugin.postInit();
 		}
 	}
+
+	@Override
+	public void loadComplete(FMLLoadCompleteEvent event) {}
 }

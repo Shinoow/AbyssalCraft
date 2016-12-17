@@ -67,7 +67,7 @@ public final class GuiRenderHelper
 			drawGradientRect(var6 - 3, var7 - 3, z, var6 + var5 + 3, var7 - 3 + 1, colour, colour);
 			drawGradientRect(var6 - 3, var7 + var9 + 2, z, var6 + var5 + 3, var7 + var9 + 3, var12, var12);
 
-			GL11.glDisable(GL11.GL_DEPTH_TEST);
+			GlStateManager.disableDepth();
 			for (int var13 = 0; var13 < tooltipData.size(); ++var13) {
 				String var14 = tooltipData.get(var13);
 				fontRenderer.drawStringWithShadow(var14, var6, var7, -1);
@@ -75,11 +75,11 @@ public final class GuiRenderHelper
 					var7 += 2;
 				var7 += 10;
 			}
-			GL11.glEnable(GL11.GL_DEPTH_TEST);
+			GlStateManager.enableDepth();
 		}
 		if(!lighting)
 			net.minecraft.client.renderer.RenderHelper.disableStandardItemLighting();
-		GL11.glColor4f(1F, 1F, 1F, 1F);
+		GlStateManager.color(1F, 1F, 1F, 1F);
 	}
 
 	public static void drawGradientRect(int left, int top, float z, int right, int bottom, int startColor, int endColor)

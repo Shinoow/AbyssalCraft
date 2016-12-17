@@ -14,9 +14,7 @@ package com.shinoow.abyssalcraft.api.energy;
 import net.minecraft.tileentity.TileEntity;
 
 /**
- * Interface to use on tile entities that can hold Potential Energy (WIP)<br>
- * WARNING: Any methods in this interface might end up getting removed,<br>
- * so I would suggest not using it until this text (and the WIP part) is removed.
+ * Interface to use on tile entities that can hold Potential Energy
  *
  * @author shinoow
  *

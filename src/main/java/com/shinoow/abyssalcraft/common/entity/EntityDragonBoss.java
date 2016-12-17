@@ -462,6 +462,9 @@ public class EntityDragonBoss extends EntityMob implements IBossDisplayData, IEn
 
 			if (entity instanceof EntityLivingBase)
 				entity.attackEntityFrom(DamageSource.causeMobDamage(this), 10.0F);
+
+			if(ACConfig.hardcoreMode && entity instanceof EntityPlayer)
+				entity.attackEntityFrom(DamageSource.causeMobDamage(this).setDamageBypassesArmor().setDamageIsAbsolute(), 1 * (float)(ACConfig.damageAmpl > 1.0D ? ACConfig.damageAmpl : 1));
 		}
 	}
 

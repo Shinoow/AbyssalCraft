@@ -410,7 +410,7 @@ necronomicon.text.crafting.dreadium.2=当你有足够的恐惧锭就能合成结
 necronomicon.text.crafting.monolithpillar.1=巨石柱是由巨石块合成. 它的主要用途是扩大位能操纵器的范围 (例如雕像).
 necronomicon.text.crafting.ritualcharm.1=仪式符咒由金粒和一个钻石合成. 单纯的符咒没有任何用途, 但是通过仪式能扩展位能操纵器的不同状态.
 necronomicon.text.crafting.sacrificialaltar.1=献祭祭坛由火把, 巨石块, 一个阴影宝石和一个珊瑚珍珠合成. 能将生命能量变为位能.
-necronomicon.text.crafting.sacrificialaltar.2=当一个生物作为目标时, 它会发出烟雾粒子. 在生物死后, 根据它的最大生命值会获得一定数量的位能. 只能把不包括玩家的非不死的成年生物作为目标. 需要注意的是祭坛在收集一定量的位能后需要冷却, 有一分钟的时间不能收集.
+necronomicon.text.crafting.sacrificialaltar.2=When a entity is targeted, it will emit smoke particles. Once the entity dies, an amount of PE equal to it's max health will be collected. It only targets non-undead adult entities that aren't players. It should be noted that the altar goes on a cooldown after collecting a fifth of it's max capacity, preventing collection for a minute.
 necronomicon.text.crafting.energycollector=能量收集器由巨石块和阴影宝石合成. 它们可以收集威能, 但需要能量中继器传送.
 necronomicon.text.crafting.energyrelay=能量中继器由巨石块, 阴影宝石碎片和一个阴影宝石合成. 它们可以在储能方块之间传送位能.
 
@@ -509,6 +509,8 @@ necronomicon.text.entity.shadowtitan.1=阴影泰坦是黑暗领域的居民.
 necronomicon.text.entity.shadowtitan.2=阴影泰坦是游荡在黑暗领域的强大的活阴影. 相比于黑暗野兽, 阴影泰坦有着武装并更为强悍. 
 necronomicon.text.entity.sacthoth.1=末日先驱萨多斯能在黑暗领域中找到.
 necronomicon.text.entity.sacthoth.2=萨多斯是在黑暗领域里的最为强大的生物, 同时也是活阴影的统治者. 他离开黑暗领域的唯一方法就是通过湮灭死亡弹的爆炸. 他有一把能撕裂活物灵魂的强大的剑.
+necronomicon.text.entity.coraliumsquid.1=Coralium Infested Squids are found in pools of Liquid Coralium inside the Abyssal Wasteland.
+necronomicon.text.entity.coraliumsquid.2=These Squids have been transformed by the Coralium Plague, enabling them to transfer it to victims touched by them, or the ink they squirt on their targets.
 
 necronomicon.text.rituals.info=检查关于仪式的部分信息, 或者其它章节有关可用仪式的信息. "位置" 指定仪式能在哪里进行.
 
@@ -1304,6 +1306,7 @@ entity.abyssalcraft.demoncow.name=恶魔牛
 entity.abyssalcraft.demonchicken.name=恶魔鸡
 entity.abyssalcraft.evilsheep.name=羊
 entity.abyssalcraft.demonsheep.name=恶魔羊
+entity.abyssalcraft.coraliumsquid.name=Coralium Infested Squid
 
 #Potions
 potion.Cplague=珊瑚侵染

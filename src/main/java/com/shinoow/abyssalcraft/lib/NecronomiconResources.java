@@ -20,95 +20,100 @@ import net.minecraft.util.ResourceLocation;
  */
 public class NecronomiconResources {
 
-	public static final ResourceLocation ABYSSALCRAFT_1 = new ResourceLocation("abyssalcraft", "textures/gui/necronomicon/abyssalcraft_1.png");
-	public static final ResourceLocation ABYSSALCRAFT_2 = new ResourceLocation("abyssalcraft", "textures/gui/necronomicon/abyssalcraft_2.png");
-	public static final ResourceLocation ABYSSALCRAFT_3 = new ResourceLocation("abyssalcraft", "textures/gui/necronomicon/abyssalcraft_3.png");
+	public static final ResourceLocation ABYSSALCRAFT_1 = res("abyssalcraft_1");
+	public static final ResourceLocation ABYSSALCRAFT_2 = res("abyssalcraft_2");
+	public static final ResourceLocation ABYSSALCRAFT_3 = res("abyssalcraft_3");
 
 	//Overworld entities (only going to use one picture for the anti-entities)
-	public static final ResourceLocation ANTI_ENTITIES = new ResourceLocation("abyssalcraft", "textures/gui/necronomicon/anti-entities.png");
-	public static final ResourceLocation EVIL_ANIMALS = new ResourceLocation("abyssalcraft", "textures/gui/necronomicon/evil-animals.png");
-	public static final ResourceLocation LESSER_SHOGGOTH = new ResourceLocation("abyssalcraft", "textures/gui/necronomicon/lesser-shoggoth.png");
+	public static final ResourceLocation ANTI_ENTITIES = res("anti-entities");
+	public static final ResourceLocation EVIL_ANIMALS = res("evil-animals");
+	public static final ResourceLocation LESSER_SHOGGOTH = res("lesser-shoggoth");
 
 	//Abyssal Wasteland entities (making entries for vanilla mobs is lethally hipster)
-	public static final ResourceLocation ABYSSAL_ZOMBIE = new ResourceLocation("abyssalcraft", "textures/gui/necronomicon/abyssal-zombie.png");
-	public static final ResourceLocation DEPTHS_GHOUL = new ResourceLocation("abyssalcraft", "textures/gui/necronomicon/depths-ghoul.png");
-	public static final ResourceLocation SKELETON_GOLIATH = new ResourceLocation("abyssalcraft", "textures/gui/necronomicon/skeleton-goliath.png");
-	public static final ResourceLocation SPECTRAL_DRAGON = new ResourceLocation("abyssalcraft", "textures/gui/necronomicon/spectral-dragon.png");
-	public static final ResourceLocation ASORAH = new ResourceLocation("abyssalcraft", "textures/gui/necronomicon/asorah.png");
-	public static final ResourceLocation LESSER_SHOGGOTH_ABYSSAL = new ResourceLocation("abyssalcraft", "textures/gui/necronomicon/lesser-shoggoth-abyssal.png");
+	public static final ResourceLocation ABYSSAL_ZOMBIE = res("abyssal-zombie");
+	public static final ResourceLocation DEPTHS_GHOUL = res("depths-ghoul");
+	public static final ResourceLocation SKELETON_GOLIATH = res("skeleton-goliath");
+	public static final ResourceLocation SPECTRAL_DRAGON = res("spectral-dragon");
+	public static final ResourceLocation ASORAH = res("asorah");
+	public static final ResourceLocation LESSER_SHOGGOTH_ABYSSAL = res("lesser-shoggoth-abyssal");
+	public static final ResourceLocation CORALIUM_INFESTED_SQUID = res("coralium-infested-squid");
 
 	//Dreadlands entities
-	public static final ResourceLocation ABYSSALNITE_GOLEM = new ResourceLocation("abyssalcraft", "textures/gui/necronomicon/abyssalnite-golem.png");
-	public static final ResourceLocation DREADED_ABYSSALNITE_GOLEM = new ResourceLocation("abyssalcraft", "textures/gui/necronomicon/dreaded-abyssalnite-golem.png");
-	public static final ResourceLocation DREADLING = new ResourceLocation("abyssalcraft", "textures/gui/necronomicon/dreadling.png");
-	public static final ResourceLocation DREAD_SPAWN = new ResourceLocation("abyssalcraft", "textures/gui/necronomicon/dread-spawn.png");
-	public static final ResourceLocation DEMON_ANIMALS = new ResourceLocation("abyssalcraft", "textures/gui/necronomicon/demon-animals.png");
-	public static final ResourceLocation SPAWN_OF_CHAGAROTH = new ResourceLocation("abyssalcraft", "textures/gui/necronomicon/spawn-of-chagaroth.png");
-	public static final ResourceLocation FIST_OF_CHAGAROTH = new ResourceLocation("abyssalcraft", "textures/gui/necronomicon/fist-of-chagaroth.png");
-	public static final ResourceLocation DREADGUARD = new ResourceLocation("abyssalcraft", "textures/gui/necronomicon/dreadguard.png");
-	public static final ResourceLocation CHAGAROTH = new ResourceLocation("abyssalcraft", "textures/gui/necronomicon/chagaroth.png");
-	public static final ResourceLocation LESSER_SHOGGOTH_DREADED = new ResourceLocation("abyssalcraft", "textures/gui/necronomicon/lesser-shoggoth-dreaded.png");
+	public static final ResourceLocation ABYSSALNITE_GOLEM = res("abyssalnite-golem");
+	public static final ResourceLocation DREADED_ABYSSALNITE_GOLEM = res("dreaded-abyssalnite-golem");
+	public static final ResourceLocation DREADLING = res("dreadling");
+	public static final ResourceLocation DREAD_SPAWN = res("dread-spawn");
+	public static final ResourceLocation DEMON_ANIMALS = res("demon-animals");
+	public static final ResourceLocation SPAWN_OF_CHAGAROTH = res("spawn-of-chagaroth");
+	public static final ResourceLocation FIST_OF_CHAGAROTH = res("fist-of-chagaroth");
+	public static final ResourceLocation DREADGUARD = res("dreadguard");
+	public static final ResourceLocation CHAGAROTH = res("chagaroth");
+	public static final ResourceLocation LESSER_SHOGGOTH_DREADED = res("lesser-shoggoth-dreaded");
 
 	//Omothol entities
-	public static final ResourceLocation REMNANT = new ResourceLocation("abyssalcraft", "textures/gui/necronomicon/remnant.png");
-	public static final ResourceLocation OMOTHOL_GHOUL = new ResourceLocation("abyssalcraft", "textures/gui/necronomicon/omothol-ghoul.png");
-	public static final ResourceLocation OMOTHOL_WARDEN = new ResourceLocation("abyssalcraft", "textures/gui/necronomicon/missing.png"); //TODO: fix
-	public static final ResourceLocation MINION_OF_THE_GATEKEEPER = new ResourceLocation("abyssalcraft", "textures/gui/necronomicon/minion-of-the-gatekeeper.png");
-	public static final ResourceLocation JZAHAR = new ResourceLocation("abyssalcraft", "textures/gui/necronomicon/jzahar.png");
-	public static final ResourceLocation LESSER_SHOGGOTH_OMOTHOL = new ResourceLocation("abyssalcraft", "textures/gui/necronomicon/lesser-shoggoth-omothol.png");
+	public static final ResourceLocation REMNANT = res("remnant");
+	public static final ResourceLocation OMOTHOL_GHOUL = res("omothol-ghoul");
+	public static final ResourceLocation OMOTHOL_WARDEN = res("missing"); //TODO: fix
+	public static final ResourceLocation MINION_OF_THE_GATEKEEPER = res("minion-of-the-gatekeeper");
+	public static final ResourceLocation JZAHAR = res("jzahar");
+	public static final ResourceLocation LESSER_SHOGGOTH_OMOTHOL = res("lesser-shoggoth-omothol");
 
 	//Dark Realm entities
-	public static final ResourceLocation SHADOW_CREATURE = new ResourceLocation("abyssalcraft", "textures/gui/necronomicon/shadow-creature.png");
-	public static final ResourceLocation SHADOW_MONSTER = new ResourceLocation("abyssalcraft", "textures/gui/necronomicon/shadow-monster.png");
-	public static final ResourceLocation SHADOW_BEAST = new ResourceLocation("abyssalcraft", "textures/gui/necronomicon/shadow-beast.png");
-	public static final ResourceLocation SHADOW_TITAN = new ResourceLocation("abyssalcraft", "textures/gui/necronomicon/missing.png"); //TODO: fix
-	public static final ResourceLocation SACTHOTH = new ResourceLocation("abyssalcraft", "textures/gui/necronomicon/sacthoth.png");
-	public static final ResourceLocation LESSER_SHOGGOTH_SHADOW = new ResourceLocation("abyssalcraft", "textures/gui/necronomicon/lesser-shoggoth-shadow.png");
+	public static final ResourceLocation SHADOW_CREATURE = res("shadow-creature");
+	public static final ResourceLocation SHADOW_MONSTER = res("shadow-monster");
+	public static final ResourceLocation SHADOW_BEAST = res("shadow-beast");
+	public static final ResourceLocation SHADOW_TITAN = res("missing"); //TODO: fix
+	public static final ResourceLocation SACTHOTH = res("sacthoth");
+	public static final ResourceLocation LESSER_SHOGGOTH_SHADOW = res("lesser-shoggoth-shadow");
 
 	//Seals representing The Great Old Ones, no idea how many I'm going to do
-	public static final ResourceLocation AZATHOTH_SEAL = new ResourceLocation("abyssalcraft", "textures/gui/necronomicon/azathoth.png");
-	public static final ResourceLocation NYARLATHOTEP_SEAL = new ResourceLocation("abyssalcraft", "textures/gui/necronomicon/nyarlathotep.png");
-	public static final ResourceLocation YOG_SOTHOTH_SEAL = new ResourceLocation("abyssalcraft", "textures/gui/necronomicon/yog-sothoth.png");
-	public static final ResourceLocation SHUB_NIGGURATH_SEAL = new ResourceLocation("abyssalcraft", "textures/gui/necronomicon/shub-niggurath.png");
-	public static final ResourceLocation CTHULHU_SEAL = new ResourceLocation("abyssalcraft", "textures/gui/necronomicon/cthulhu.png");
-	public static final ResourceLocation HASTUR_SEAL = new ResourceLocation("abyssalcraft", "textures/gui/necronomicon/hastur.png");
-	public static final ResourceLocation JZAHAR_SEAL = new ResourceLocation("abyssalcraft", "textures/gui/necronomicon/j-zahar.png");
+	public static final ResourceLocation AZATHOTH_SEAL = res("azathoth");
+	public static final ResourceLocation NYARLATHOTEP_SEAL = res("nyarlathotep");
+	public static final ResourceLocation YOG_SOTHOTH_SEAL = res("yog-sothoth");
+	public static final ResourceLocation SHUB_NIGGURATH_SEAL = res("shub-niggurath");
+	public static final ResourceLocation CTHULHU_SEAL = res("cthulhu");
+	public static final ResourceLocation HASTUR_SEAL = res("hastur");
+	public static final ResourceLocation JZAHAR_SEAL = res("j-zahar");
 
 	//Crafting grid
-	public static final ResourceLocation CRAFTING = new ResourceLocation("abyssalcraft", "textures/gui/necronomicon/crafting.png");
+	public static final ResourceLocation CRAFTING = res("crafting");
 
 	//Ritual grid
-	public static final ResourceLocation RITUAL = new ResourceLocation("abyssalcraft", "textures/gui/necronomicon/ritual.png");
+	public static final ResourceLocation RITUAL = res("ritual");
 
 	//Creation Ritual slot
-	public static final ResourceLocation RITUAL_CREATION = new ResourceLocation("abyssalcraft", "textures/gui/necronomicon/ritual_creation.png");
+	public static final ResourceLocation RITUAL_CREATION = res("ritual_creation");
 
 	//Infusion Ritual slot
-	public static final ResourceLocation RITUAL_INFUSION = new ResourceLocation("abyssalcraft", "textures/gui/necronomicon/ritual_infusion.png");
+	public static final ResourceLocation RITUAL_INFUSION = res("ritual_infusion");
 
-	public static final ResourceLocation RITUAL_TUT_1 = new ResourceLocation("abyssalcraft", "textures/gui/necronomicon/ritual_1.png");
-	public static final ResourceLocation RITUAL_TUT_2 = new ResourceLocation("abyssalcraft", "textures/gui/necronomicon/ritual_2.png");
-	public static final ResourceLocation RITUAL_TUT_3 = new ResourceLocation("abyssalcraft", "textures/gui/necronomicon/ritual_3.png");
+	public static final ResourceLocation RITUAL_TUT_1 = res("ritual_1");
+	public static final ResourceLocation RITUAL_TUT_2 = res("ritual_2");
+	public static final ResourceLocation RITUAL_TUT_3 = res("ritual_3");
 
-	public static final ResourceLocation PE_TUT_1 = new ResourceLocation("abyssalcraft", "textures/gui/necronomicon/pe/shoggoth_lair.png");
-	public static final ResourceLocation PE_TUT_2 = new ResourceLocation("abyssalcraft", "textures/gui/necronomicon/pe/monoliths.png");
-	public static final ResourceLocation PE_TUT_3 = new ResourceLocation("abyssalcraft", "textures/gui/necronomicon/pe/shoggoth_infestation.png");
-	public static final ResourceLocation PE_TUT_4 = new ResourceLocation("abyssalcraft", "textures/gui/necronomicon/pe/statues.png");
-	public static final ResourceLocation PE_TUT_5 = new ResourceLocation("abyssalcraft", "textures/gui/necronomicon/pe/charms.png");
-	public static final ResourceLocation PE_TUT_6 = new ResourceLocation("abyssalcraft", "textures/gui/necronomicon/pe/energy_pedestal.png");
-	public static final ResourceLocation PE_TUT_7 = new ResourceLocation("abyssalcraft", "textures/gui/necronomicon/pe/sacrificial_altar.png");
-	public static final ResourceLocation PE_TUT_8 = new ResourceLocation("abyssalcraft", "textures/gui/necronomicon/pe/energy_collector.png");
-	public static final ResourceLocation PE_TUT_9 = new ResourceLocation("abyssalcraft", "textures/gui/necronomicon/pe/energy_relay.png");
-	public static final ResourceLocation PE_TUT_10 = new ResourceLocation("abyssalcraft", "textures/gui/necronomicon/pe/relays.png");
-	public static final ResourceLocation PE_TUT_11 = new ResourceLocation("abyssalcraft", "textures/gui/necronomicon/pe/energy_container.png");
-	public static final ResourceLocation PE_TUT_12 = new ResourceLocation("abyssalcraft", "textures/gui/necronomicon/pe/tiers.png");
+	public static final ResourceLocation PE_TUT_1 = res("pe/shoggoth_lair");
+	public static final ResourceLocation PE_TUT_2 = res("pe/monoliths");
+	public static final ResourceLocation PE_TUT_3 = res("pe/shoggoth_infestation");
+	public static final ResourceLocation PE_TUT_4 = res("pe/statues");
+	public static final ResourceLocation PE_TUT_5 = res("pe/charms");
+	public static final ResourceLocation PE_TUT_6 = res("pe/energy_pedestal");
+	public static final ResourceLocation PE_TUT_7 = res("pe/sacrificial_altar");
+	public static final ResourceLocation PE_TUT_8 = res("pe/energy_collector");
+	public static final ResourceLocation PE_TUT_9 = res("pe/energy_relay");
+	public static final ResourceLocation PE_TUT_10 = res("pe/relays");
+	public static final ResourceLocation PE_TUT_11 = res("pe/energy_container");
+	public static final ResourceLocation PE_TUT_12 = res("pe/tiers");
 
 	//Transmutation grid
-	public static final ResourceLocation TRANSMUTATION = new ResourceLocation("abyssalcraft", "textures/gui/necronomicon/transmutation.png");
+	public static final ResourceLocation TRANSMUTATION = res("transmutation");
 
 	//Crystallization grid (additional slot to Transmutation grid)
-	public static final ResourceLocation CRYSTALLIZATION = new ResourceLocation("abyssalcraft", "textures/gui/necronomicon/crystallization.png");
+	public static final ResourceLocation CRYSTALLIZATION = res("crystallization");
 
 	//Blank image
-	public static final ResourceLocation BLANK = new ResourceLocation("abyssalcraft", "textures/gui/necronomicon/blank.png");
+	public static final ResourceLocation BLANK = res("blank");
+
+	private static ResourceLocation res(String name){
+		return new ResourceLocation("abyssalcraft", "textures/gui/necronomicon/" + name + ".png");
+	}
 }

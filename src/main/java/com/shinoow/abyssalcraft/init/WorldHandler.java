@@ -50,9 +50,9 @@ public class WorldHandler implements ILifeCycleHandler {
 		ACBiomes.dreadlands_forest = new BiomeGenForestDreadlands(configBiomeId5).setColor(522674).setBiomeName("Dreadlands Forest").setDisableRain();
 		ACBiomes.dreadlands_mountains = new BiomeGenMountainDreadlands(configBiomeId6).setColor(522674).setBiomeName("Dreadlands Mountains").setDisableRain();
 		ACBiomes.darklands_forest = new BiomeGenDarklandsForest(configBiomeId7).setColor(522674).setBiomeName("Darklands Forest");
-		ACBiomes.darklands_plains = new BiomeGenDarklandsPlains(configBiomeId8).setColor(522674).setBiomeName("Darklands Plains").setDisableRain();
+		ACBiomes.darklands_plains = new BiomeGenDarklandsPlains(configBiomeId8).setColor(522674).setBiomeName("Darklands Plains");
 		ACBiomes.darklands_hills = new BiomeGenDarklandsHills(configBiomeId9).setColor(522674).setBiomeName("Darklands Highland");
-		ACBiomes.darklands_mountains = new BiomeGenDarklandsMountains(configBiomeId10).setColor(522674).setBiomeName("Darklands Mountains").setDisableRain();
+		ACBiomes.darklands_mountains = new BiomeGenDarklandsMountains(configBiomeId10).setColor(522674).setBiomeName("Darklands Mountains");
 		ACBiomes.coralium_infested_swamp = new BiomeGenCorSwamp(configBiomeId11).setColor(522674).setBiomeName("Coralium Infested Swamp");
 		ACBiomes.omothol = new BiomeGenOmothol(configBiomeId12).setColor(5522674).setBiomeName("Omothol").setDisableRain();
 		ACBiomes.dark_realm = new BiomeGenDarkRealm(configBiomeId13).setColor(522674).setBiomeName("Dark Realm").setDisableRain();
@@ -116,7 +116,10 @@ public class WorldHandler implements ILifeCycleHandler {
 	}
 
 	@Override
-	public void postInit(FMLPostInitializationEvent event) {
+	public void postInit(FMLPostInitializationEvent event) {}
+
+	@Override
+	public void loadComplete(FMLLoadCompleteEvent event) {
 		checkBiomeIds(false);
 		if(ACConfig.purgeMobSpawns){
 			((BiomeGenAbywasteland) ACBiomes.abyssal_wastelands).setMobSpawns();

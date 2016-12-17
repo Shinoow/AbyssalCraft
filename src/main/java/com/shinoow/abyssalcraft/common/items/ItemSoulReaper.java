@@ -13,6 +13,7 @@ package com.shinoow.abyssalcraft.common.items;
 
 import java.util.List;
 
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
@@ -129,6 +130,12 @@ public class ItemSoulReaper extends Item {
 			return true;
 		}
 		return true;
+	}
+
+	@Override
+	public void onUpdate(ItemStack stack, World worldIn, Entity entityIn, int itemSlot, boolean isSelected){
+		if(stack.isItemEnchanted())
+			stack.getTagCompound().removeTag("ench");
 	}
 
 	@Override

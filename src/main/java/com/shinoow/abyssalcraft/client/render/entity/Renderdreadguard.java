@@ -15,6 +15,7 @@ import java.util.List;
 
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.model.ModelZombie;
+import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.RenderBiped;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.entity.layers.LayerBipedArmor;
@@ -23,8 +24,6 @@ import net.minecraft.client.renderer.entity.layers.LayerRenderer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-
-import org.lwjgl.opengl.GL11;
 
 import com.google.common.collect.Lists;
 import com.shinoow.abyssalcraft.common.entity.EntityDreadguard;
@@ -63,7 +62,7 @@ public class RenderDreadguard extends RenderBiped<EntityDreadguard>
 	 */
 	protected void preRenderScale(EntityDreadguard par1Entitydreadguard, float par2)
 	{
-		GL11.glScalef(scale, scale, scale);
+		GlStateManager.scale(scale, scale, scale);
 	}
 
 	@Override

@@ -12,6 +12,7 @@
 package com.shinoow.abyssalcraft.lib.client.render;
 
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
@@ -19,8 +20,6 @@ import net.minecraft.entity.item.EntityItem;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-
-import org.lwjgl.opengl.GL11;
 
 import com.shinoow.abyssalcraft.lib.util.blocks.ISingletonInventory;
 
@@ -36,27 +35,27 @@ public class TileEntityAltarBlockRenderer extends TileEntitySpecialRenderer {
 	@Override
 	public void renderTileEntityAt(TileEntity te, double x, double y, double z, float partialTicks, int destroyStage) {
 
-		GL11.glPushMatrix();
-		GL11.glTranslatef((float) x + 0.5F, (float) y + 1.5F, (float) z + 0.5F);
-		GL11.glPushMatrix();
-		GL11.glRotatef(180F, 0.0F, 0.0F, 1.0F);
+		GlStateManager.pushMatrix();
+		GlStateManager.translate((float) x + 0.5F, (float) y + 1.5F, (float) z + 0.5F);
+		GlStateManager.pushMatrix();
+		GlStateManager.rotate(180F, 0.0F, 0.0F, 1.0F);
 
 		ISingletonInventory altar = (ISingletonInventory) te;
 
 		if (altar != null && altar.getItem() != null){
-			GL11.glPushMatrix();
+			GlStateManager.pushMatrix();
 			EntityItem entityitem = new EntityItem(te.getWorld(), 0.0D, 0.0D, 0.0D, altar.getItem());
 			entityitem.hoverStart = 0.0F;
 			altar.getItem().stackSize = 1;
-			GL11.glRotatef(180F, 1F, 0F, 0F);
-			GL11.glTranslatef(0.0F, -0.56F, 0F);
-			GL11.glRotatef(altar.getRotation(), 0F, 1F, 0F);
-			GL11.glColor4f(1F, 1F, 1F, 1F);
+			GlStateManager.rotate(180F, 1F, 0F, 0F);
+			GlStateManager.translate(0.0F, -0.56F, 0F);
+			GlStateManager.rotate(altar.getRotation(), 0F, 1F, 0F);
+			GlStateManager.color(1F, 1F, 1F, 1F);
 			RenderManager rm = Minecraft.getMinecraft().getRenderManager();
 			if (rm.options.fancyGraphics)
 				rm.renderEntityWithPosYaw(entityitem, 0.0D, 0.0D, 0.0D, 0.0F, 0.0F);
 			else{
-				GL11.glRotatef(180F, 0F, 1F, 0F);
+				GlStateManager.rotate(180F, 0F, 1F, 0F);
 				rm.options.fancyGraphics = true;
 				int i = 15728880;
 				int j = i % 65536;
@@ -65,10 +64,10 @@ public class TileEntityAltarBlockRenderer extends TileEntitySpecialRenderer {
 				rm.renderEntityWithPosYaw(entityitem, 0.0D, 0.0D, 0.0D, 0.0F, 0.0F);
 				rm.options.fancyGraphics = false;
 			}
-			GL11.glPopMatrix();
+			GlStateManager.popMatrix();
 		}
 
-		GL11.glPopMatrix();
-		GL11.glPopMatrix();
+		GlStateManager.popMatrix();
+		GlStateManager.popMatrix();
 	}
 }

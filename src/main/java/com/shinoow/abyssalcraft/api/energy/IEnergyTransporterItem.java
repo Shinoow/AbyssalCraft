@@ -14,9 +14,7 @@ package com.shinoow.abyssalcraft.api.energy;
 import net.minecraft.item.ItemStack;
 
 /**
- * Interface to use on items that can transport Potential Energy externally (WIP)<br>
- * WARNING: Any methods in this interface might end up getting removed,<br>
- * so I would suggest not using it until this text (and the WIP part) is removed.
+ * Interface to use on items that can transport Potential Energy externally
  *
  * @author shinoow
  *

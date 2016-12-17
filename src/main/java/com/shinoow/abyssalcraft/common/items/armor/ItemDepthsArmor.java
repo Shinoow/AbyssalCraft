@@ -15,6 +15,7 @@ import java.util.List;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.ScaledResolution;
+import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.WorldRenderer;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
@@ -97,7 +98,7 @@ public class ItemDepthsArmor extends ItemArmor implements IVisDiscountGear, IRev
 
 
 		if(Minecraft.getMinecraft().gameSettings.thirdPersonView == 0 && stack != null && stack.getItem() == ACItems.depths_helmet) {
-			GL11.glPushAttrib(GL11.GL_ALL_ATTRIB_BITS);
+			GlStateManager.pushAttrib();
 
 			Tessellator t = Tessellator.getInstance();
 
@@ -105,11 +106,11 @@ public class ItemDepthsArmor extends ItemArmor implements IVisDiscountGear, IRev
 			int width = scale.getScaledWidth();
 			int height = scale.getScaledHeight();
 
-			GL11.glDisable(GL11.GL_DEPTH_TEST);
-			GL11.glDepthMask(false);
-			GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
-			GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-			GL11.glDisable(GL11.GL_ALPHA_TEST);
+			GlStateManager.disableDepth();
+			GlStateManager.depthMask(false);
+			GlStateManager.blendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
+			GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
+			GlStateManager.disableAlpha();
 			Minecraft.getMinecraft().renderEngine.bindTexture(coraliumBlur);
 
 			WorldRenderer wr = t.getWorldRenderer();
@@ -121,7 +122,7 @@ public class ItemDepthsArmor extends ItemArmor implements IVisDiscountGear, IRev
 			wr.pos(0.0D, 0.0D, 90.0D).tex(0.0D, 0.0D).endVertex();;
 			t.draw();
 
-			GL11.glPopAttrib();
+			GlStateManager.popAttrib();
 		}
 	}
 

@@ -33,8 +33,6 @@ import net.minecraftforge.oredict.OreDictionary;
 
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.GL11;
-import org.lwjgl.opengl.GL12;
-
 import com.shinoow.abyssalcraft.api.necronomicon.CraftingStack;
 import com.shinoow.abyssalcraft.api.necronomicon.NecroData;
 import com.shinoow.abyssalcraft.api.necronomicon.NecroData.Chapter;
@@ -212,12 +210,12 @@ public class GuiNecronomiconEntry extends GuiNecronomicon {
 			if(icon1 instanceof ItemStack)
 				renderItem(k + 60, b0 + 28,(ItemStack)icon1, x, y);
 			if(icon1 instanceof ResourceLocation){
-				GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+				GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
 				mc.renderEngine.bindTexture((ResourceLocation)icon1);
 				drawTexturedModalRect(k, b0, 0, 0, 256, 256);
 			}
 			if(icon1 instanceof CraftingStack){
-				GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+				GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
 				mc.renderEngine.bindTexture(NecronomiconResources.CRAFTING);
 				drawTexturedModalRect(k, b0, 0, 0, 256, 256);
 				renderItem(k + 93, b0 + 52,((CraftingStack)icon1).getOutput(), x, y);
@@ -229,11 +227,11 @@ public class GuiNecronomiconEntry extends GuiNecronomicon {
 			}
 			if(icon1 instanceof String)
 				if(failcache.contains(icon1)){
-					GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+					GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
 					mc.renderEngine.bindTexture(new ResourceLocation("abyssalcraft", "textures/gui/necronomicon/missing.png"));
 					drawTexturedModalRect(k, b0, 0, 0, 256, 256);
 				} else if(successcache.get(icon1) != null){
-					GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+					GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
 					GlStateManager.bindTexture(successcache.get(icon1).getGlTextureId());
 					drawTexturedModalRect(k, b0, 0, 0, 256, 256);
 				} else {
@@ -244,7 +242,7 @@ public class GuiNecronomiconEntry extends GuiNecronomicon {
 					} catch (Exception e) {
 						failcache.add((String)icon1);
 					}
-					GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+					GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
 					if(t != null)
 						GlStateManager.bindTexture(t.getGlTextureId());
 					else mc.renderEngine.bindTexture(new ResourceLocation("abyssalcraft", "textures/gui/necronomicon/missing.png"));
@@ -256,21 +254,21 @@ public class GuiNecronomiconEntry extends GuiNecronomicon {
 			if(icon2 instanceof ItemStack)
 				renderItem(k + 60 + n, b0 + 28,(ItemStack)icon2, x, y);
 			if(icon2 instanceof ResourceLocation){
-				GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+				GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
 				mc.renderEngine.bindTexture((ResourceLocation)icon2);
 				drawTexturedModalRect(k + n, b0, 0, 0, 256, 256);
 			}
 			if(icon2 instanceof CraftingStack){
-				GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-				GL11.glPushMatrix();
-				GL11.glEnable(GL11.GL_BLEND);
-				GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
+				GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
+				GlStateManager.pushMatrix();
+				GlStateManager.enableBlend();
+				GlStateManager.blendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
 				mc.renderEngine.bindTexture(NecronomiconResources.CRAFTING);
 				drawTexturedModalRect(k + n, b0, 0, 0, 256, 256);
-				GL11.glEnable(GL12.GL_RESCALE_NORMAL);
-				GL11.glEnable(GL11.GL_DEPTH_TEST);
-				GL11.glPopMatrix();
-				GL11.glDisable(GL11.GL_LIGHTING);
+				GlStateManager.enableRescaleNormal();
+				GlStateManager.enableDepth();
+				GlStateManager.popMatrix();
+				GlStateManager.disableLighting();
 				renderItem(k + 93 + n, b0 + 52,((CraftingStack)icon2).getOutput(), x, y);
 				for(int i = 0; i <= 2; i++){
 					renderItem(k + 24 + n +i*21, b0 + 31,((CraftingStack)icon2).getFirstArray()[i], x, y);
@@ -280,11 +278,11 @@ public class GuiNecronomiconEntry extends GuiNecronomicon {
 			}
 			if(icon2 instanceof String)
 				if(failcache.contains(icon2)){
-					GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+					GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
 					mc.renderEngine.bindTexture(new ResourceLocation("abyssalcraft", "textures/gui/necronomicon/missing.png"));
 					drawTexturedModalRect(k + n, b0, 0, 0, 256, 256);
 				} else if(successcache.get(icon2) != null){
-					GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+					GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
 					GlStateManager.bindTexture(successcache.get(icon2).getGlTextureId());
 					drawTexturedModalRect(k + n, b0, 0, 0, 256, 256);
 				} else {
@@ -295,7 +293,7 @@ public class GuiNecronomiconEntry extends GuiNecronomicon {
 					} catch (Exception e) {
 						failcache.add((String)icon2);
 					}
-					GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+					GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
 					if(t != null)
 						GlStateManager.bindTexture(t.getGlTextureId());
 					else mc.renderEngine.bindTexture(new ResourceLocation("abyssalcraft", "textures/gui/necronomicon/missing.png"));
@@ -363,17 +361,17 @@ public class GuiNecronomiconEntry extends GuiNecronomicon {
 		if(mx > xPos && mx < xPos+16 && my > yPos && my < yPos+16)
 			tooltipStack = stack;
 
-		GL11.glPushMatrix();
-		GL11.glEnable(GL11.GL_BLEND);
-		GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
+		GlStateManager.pushMatrix();
+		GlStateManager.enableBlend();
+		GlStateManager.blendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
 		RenderHelper.enableGUIStandardItemLighting();
-		GL11.glEnable(GL12.GL_RESCALE_NORMAL);
-		GL11.glEnable(GL11.GL_DEPTH_TEST);
+		GlStateManager.enableRescaleNormal();
+		GlStateManager.enableDepth();
 		render.renderItemAndEffectIntoGUI(stack, xPos, yPos);
 		render.renderItemOverlayIntoGUI(Minecraft.getMinecraft().fontRendererObj, stack, xPos, yPos, null);
 		RenderHelper.disableStandardItemLighting();
-		GL11.glPopMatrix();
+		GlStateManager.popMatrix();
 
-		GL11.glDisable(GL11.GL_LIGHTING);
+		GlStateManager.disableLighting();
 	}
 }

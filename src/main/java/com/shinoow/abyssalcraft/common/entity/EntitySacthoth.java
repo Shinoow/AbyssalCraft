@@ -154,7 +154,7 @@ public class EntitySacthoth extends EntityMob implements IBossDisplayData, IAnti
 				((EntityLivingBase)par1Entity).addPotionEffect(new PotionEffect(Potion.confusion.id, 60));
 
 		if(ACConfig.hardcoreMode && par1Entity instanceof EntityPlayer)
-			par1Entity.attackEntityFrom(DamageSource.causeMobDamage(this).setDamageBypassesArmor(), 4.5F);
+			par1Entity.attackEntityFrom(DamageSource.causeMobDamage(this).setDamageBypassesArmor().setDamageIsAbsolute(), 4.5F * (float)(ACConfig.damageAmpl > 1.0D ? ACConfig.damageAmpl : 1));
 
 		return flag;
 	}
