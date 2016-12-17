@@ -11,189 +11,16 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.common.blocks.tile;
 
-import java.util.List;
-import java.util.Random;
-
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.EnumCreatureAttribute;
-import net.minecraft.entity.item.EntityArmorStand;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.network.NetworkManager;
-import net.minecraft.network.Packet;
-import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.EnumParticleTypes;
-import net.minecraft.util.ITickable;
-import net.minecraft.util.math.AxisAlignedBB;
 
-import com.shinoow.abyssalcraft.api.energy.IEnergyCollector;
-import com.shinoow.abyssalcraft.api.energy.IEnergyContainerItem;
-import com.shinoow.abyssalcraft.lib.util.blocks.ISingletonInventory;
-
-public class TileEntityTieredSacrificialAltar extends TileEntity implements IEnergyCollector, ISingletonInventory, ITickable {
-
-	private ItemStack item;
-	private int rot;
-	private float energy;
-	Random rand = new Random();
-	EntityLivingBase entity;
-	private int collectionLimit;
-	private int coolDown;
-	private boolean isDirty;
-
-	@Override
-	public void readFromNBT(NBTTagCompound nbttagcompound)
-	{
-		super.readFromNBT(nbttagcompound);
-		NBTTagCompound nbtItem = nbttagcompound.getCompoundTag("Item");
-		item = ItemStack.loadItemStackFromNBT(nbtItem);
-		rot = nbttagcompound.getInteger("Rot");
-		energy = nbttagcompound.getFloat("PotEnergy");
-		collectionLimit = nbttagcompound.getInteger("CollectionLimit");
-		coolDown = nbttagcompound.getInteger("CoolDown");
-	}
-
-	@Override
-	public void writeToNBT(NBTTagCompound nbttagcompound)
-	{
-		super.writeToNBT(nbttagcompound);
-		NBTTagCompound nbtItem = new NBTTagCompound();
-		if(item != null)
-			item.writeToNBT(nbtItem);
-		nbttagcompound.setTag("Item", nbtItem);
-		nbttagcompound.setInteger("Rot", rot);
-		nbttagcompound.setFloat("PotEnergy", energy);
-		nbttagcompound.setInteger("CollectionLimit", collectionLimit);
-		nbttagcompound.setInteger("CoolDown", coolDown);
-	}
-
-	@Override
-	public Packet getDescriptionPacket() {
-		NBTTagCompound nbtTag = new NBTTagCompound();
-		writeToNBT(nbtTag);
-		return new SPacketUpdateTileEntity(pos, 1, nbtTag);
-	}
-
-	@Override
-	public void onDataPacket(NetworkManager net, SPacketUpdateTileEntity packet)
-	{
-		readFromNBT(packet.getNbtCompound());
-	}
-
-	@Override
-	public void update()
-	{
-		if(isDirty){
-			worldObj.notifyBlockUpdate(pos, worldObj.getBlockState(pos), worldObj.getBlockState(pos), 2);
-			isDirty = false;
-		}
-
-		if(rot == 360)
-			rot = 0;
-		if(item != null)
-			rot++;
-
-		if(isCoolingDown())
-			coolDown--;
-
-		if(item != null)
-			if(item.getItem() instanceof IEnergyContainerItem)
-				if(!worldObj.isRemote && ((IEnergyContainerItem) item.getItem()).canAcceptPE(item) && canTransferPE())
-					((IEnergyContainerItem) item.getItem()).addEnergy(item, consumeEnergy(1));
-
-		if(entity == null){
-			List<EntityLivingBase> mobs = worldObj.getEntitiesWithinAABB(EntityLivingBase.class, new AxisAlignedBB(pos).expand(8, 3, 8));
-
-			for(EntityLivingBase mob : mobs)
-				if(!(mob instanceof EntityPlayer) && !(mob instanceof EntityArmorStand))
-					if(mob.getCreatureAttribute() != EnumCreatureAttribute.UNDEAD)
-						if(mob.isEntityAlive())
-							if(!mob.isChild()){
-								entity = mob;
-								break;
-							}
-		}
-
-		if(entity != null){
-			if(getContainedEnergy() < getMaxEnergy())
-				worldObj.spawnParticle(EnumParticleTypes.SMOKE_LARGE, entity.posX, entity.posY, entity.posZ, 0, 0, 0);
-			if(!entity.isEntityAlive()){
-				float num = entity.getMaxHealth();
-				entity = null;
-				if(!isCoolingDown() && getContainedEnergy() < getMaxEnergy()){
-					//				if(entity.getLastAttacker() instanceof EntityPlayer){
-					addEnergy(num);
-					//				}
-					collectionLimit += num;
-				}
-			}
-		}
-		if(collectionLimit >= getCollectionLimit()){
-			collectionLimit = 0;
-			coolDown = getCooldown();
-		}
-
-		if(getContainedEnergy() > getMaxEnergy())
-			energy = getMaxEnergy();
-	}
-
-	private int getCollectionLimit(){
-		return getMaxEnergy() / 5;
-	}
-
-	private int getCooldown(){
-		int base = 1200;
-		switch(getBlockMetadata()){
-		case 0:
-			return  (int) (base * 1.5);
-		case 1:
-			return base * 2;
-		case 2:
-			return (int) (base * 2.5);
-		case 3:
-			return base * 3;
-		default:
-			return base;
-		}
-	}
-
-	@Override
-	public int getRotation(){
-		return rot;
-	}
-
-	@Override
-	public ItemStack getItem(){
-		return item;
-	}
-
-	@Override
-	public void setItem(ItemStack item){
-		this.item = item;
-		isDirty = true;
-	}
-
-	public int getCooldownTimer(){
-		return coolDown;
-	}
-
-	public boolean isCoolingDown(){
-		return coolDown > 0;
-	}
-
-	@Override
-	public float getContainedEnergy() {
-		return energy;
-	}
+public class TileEntityTieredSacrificialAltar extends TileEntitySacrificialAltar {
 
 	@Override
 	public int getMaxEnergy() {
 		int base = 5000;
 		switch(getBlockMetadata()){
 		case 0:
-			return  (int) (base * 1.5);
+			return (int) (base * 1.5);
 		case 1:
 			return base * 2;
 		case 2:
@@ -203,36 +30,6 @@ public class TileEntityTieredSacrificialAltar extends TileEntity implements IEne
 		default:
 			return base;
 		}
-	}
-
-	@Override
-	public void addEnergy(float energy) {
-		isDirty = true;
-		this.energy += energy;
-		if(this.energy > getMaxEnergy()) this.energy = getMaxEnergy();
-	}
-
-	@Override
-	public float consumeEnergy(float energy) {
-		isDirty = true;
-		if(energy < this.energy){
-			this.energy -= energy;
-			return energy;
-		} else {
-			float ret = this.energy;
-			this.energy = 0;
-			return ret;
-		}
-	}
-
-	@Override
-	public boolean canAcceptPE() {
-		return false;
-	}
-
-	@Override
-	public boolean canTransferPE() {
-		return getContainedEnergy() > 0;
 	}
 
 	@Override

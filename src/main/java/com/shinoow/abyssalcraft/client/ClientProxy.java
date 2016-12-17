@@ -31,6 +31,7 @@ import net.minecraft.client.renderer.entity.RenderEntityItem;
 import net.minecraft.client.renderer.entity.RenderPlayer;
 import net.minecraft.client.renderer.entity.RenderSnowball;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.util.IThreadListener;
 import net.minecraft.util.ResourceLocation;
@@ -117,6 +118,8 @@ public class ClientProxy extends CommonProxy {
 		RenderingRegistry.registerEntityRenderingHandler(EntityGatekeeperEssence.class, manager -> new RenderEntityItem(manager, Minecraft.getMinecraft().getRenderItem()));
 		RenderingRegistry.registerEntityRenderingHandler(EntityEvilSheep.class, manager -> new RenderEvilSheep(manager));
 		RenderingRegistry.registerEntityRenderingHandler(EntityDemonSheep.class, manager -> new RenderDemonSheep(manager));
+		RenderingRegistry.registerEntityRenderingHandler(EntityCoraliumSquid.class, manager -> new RenderCoraliumSquid(manager));
+		RenderingRegistry.registerEntityRenderingHandler(EntityInkProjectile.class, manager -> new RenderSnowball(manager, Items.dye, Minecraft.getMinecraft().getRenderItem()));
 
 		RenderingRegistry.registerEntityRenderingHandler(EntityAntiAbyssalZombie.class, manager -> new RenderAntiAbyssalZombie(manager));
 		RenderingRegistry.registerEntityRenderingHandler(EntityAntiBat.class, manager -> new RenderAntiBat(manager));

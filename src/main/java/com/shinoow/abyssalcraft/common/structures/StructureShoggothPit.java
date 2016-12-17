@@ -34,8 +34,7 @@ public class StructureShoggothPit extends WorldGenerator {
 		if(world.getBlockState(pos).getMaterial() == Material.leaves ||
 				world.getBlockState(pos).getMaterial() == Material.wood ||
 				world.getBlockState(pos).getMaterial() == Material.vine ||
-				world.getBlockState(pos).getMaterial() == Material.cactus ||
-				world.getBlockState(pos).getMaterial() == Material.plants)
+				world.getBlockState(pos).getMaterial() == Material.cactus)
 			return false;
 		else {
 

@@ -13,10 +13,9 @@ package com.shinoow.abyssalcraft.client.model.entity;
 
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
+import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.math.MathHelper;
-
-import org.lwjgl.opengl.GL11;
 
 public class ModelLesserShoggoth extends ModelBase
 {
@@ -622,9 +621,9 @@ public class ModelLesserShoggoth extends ModelBase
 			buldge3.render(par7);
 			buldge4.render(par7);
 		} else {
-			GL11.glPushMatrix();
-			GL11.glScalef(1.5F, 1.5F, 1.5F);
-			GL11.glTranslatef(0.0F, -8.0F * par7, -0.5F);
+			GlStateManager.pushMatrix();
+			GlStateManager.scale(1.5F, 1.5F, 1.5F);
+			GlStateManager.translate(0.0F, -8.0F * par7, -0.5F);
 			jaw1.render(par7);
 			head1.render(par7);
 			body1.render(par7);
@@ -678,7 +677,7 @@ public class ModelLesserShoggoth extends ModelBase
 			buldge2.render(par7);
 			buldge3.render(par7);
 			buldge4.render(par7);
-			GL11.glPopMatrix();
+			GlStateManager.popMatrix();
 		}
 	}
 

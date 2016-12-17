@@ -14,15 +14,13 @@ package com.shinoow.abyssalcraft.api.energy;
 import net.minecraft.util.EnumFacing;
 
 /**
- * Interface to use on tile entities that can transport Potential Energy (WIP)<br>
- * WARNING: Any methods in this interface might end up getting removed,<br>
- * so I would suggest not using it until this text (and the WIP part) is removed.
+ * Interface to use on tile entities that can transport Potential Energy
  *
  * @author shinoow
  *
  * @since 1.7.5
  */
-public interface IEnergyRelay extends IEnergyContainer {
+public interface IEnergyTransporter extends IEnergyContainer {
 
 	/**
 	 * Attempts to transfer PE in a given direction

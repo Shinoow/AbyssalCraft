@@ -18,6 +18,7 @@ import java.net.URL;
 import java.util.List;
 
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityList;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
@@ -51,7 +52,7 @@ public class InitHandler implements ILifeCycleHandler {
 	public static Configuration cfg;
 
 	private static String[] abyssalZombieBlacklist, depthsGhoulBlacklist, antiAbyssalZombieBlacklist, antiGhoulBlacklist,
-	omotholGhoulBlacklist;
+	omotholGhoulBlacklist, interdimensionalCageBlacklist;
 
 	public static boolean dark1, dark2, dark3, dark4, dark5, coralium1;
 	public static boolean darkspawn1, darkspawn2, darkspawn3, darkspawn4, darkspawn5, coraliumspawn1;
@@ -93,6 +94,11 @@ public class InitHandler implements ILifeCycleHandler {
 		cfg.setCategoryComment("worldgen", "World generation configuration (things that generate in the world). Any changes take effect immediately.");
 		cfg.setCategoryComment("item_blacklist", "Entity Item Blacklist (allows you to blacklist items/blocks for entities that can pick up things). Any changes take effect after a Minecraft restart.");
 
+		if(hardcoreMode){
+			AbyssalCraftAPI.coralium.setDamageIsAbsolute();
+			AbyssalCraftAPI.dread.setDamageIsAbsolute();
+		}
+
 		if(!FluidRegistry.isFluidRegistered("liquidcoralium")){
 			AbyssalCraftAPI.liquid_coralium_fluid = LIQUID_CORALIUM;
 			FluidRegistry.registerFluid(AbyssalCraftAPI.liquid_coralium_fluid);
@@ -123,6 +129,9 @@ public class InitHandler implements ILifeCycleHandler {
 	public void postInit(FMLPostInitializationEvent event) {
 		constructBlacklists();
 	}
+
+	@Override
+	public void loadComplete(FMLLoadCompleteEvent event) {}
 
 	public void serverStart(FMLServerAboutToStartEvent event){
 		String clname = AbyssalCraftAPI.getInternalNDHandler().getClass().getName();
@@ -194,6 +203,8 @@ public class InitHandler implements ILifeCycleHandler {
 		demonAnimalSpawnWeight = cfg.get(Configuration.CATEGORY_GENERAL, "Demon Animal spawn weight", 15, "Spawn weight for the Demon Animals (Pigs, Cows, Chickens) spawning in the Nether.\n[range: 0 ~ 100, default: 15]", 0, 100).getInt();
 		smeltingRecipes = cfg.get(Configuration.CATEGORY_GENERAL, "Smelting Recipes", true, "Toggles whether or not to add smelting recipes for armor pieces.").getBoolean();
 		purgeMobSpawns = cfg.get(Configuration.CATEGORY_GENERAL, "Purge Mob Spawns", false, "Toggles whether or not to clear and repopulate the monster spawn list of all dimension biomes to ensure no mob from another mod got in there.").getBoolean();
+		interdimensionalCageBlacklist = cfg.get(Configuration.CATEGORY_GENERAL, "Interdimensional Cage Blacklist", new String[]{}, "Entities added to this list can't be captured with the Interdimensional Cage.").getStringList();
+		damageAmpl = cfg.get(Configuration.CATEGORY_GENERAL, "Hardcore Mode damage amplifier", 1.0D, "When Hardcore Mode is enabled, you can use this to amplify the armor-piercing damage mobs deal.\n[range: 1.0 ~ 10.0, default: 1.0]", 1.0D, 10.0D).getDouble();
 
 		darkWeight1 = cfg.get("biome_weight", "Darklands", 5, "Biome weight for the Darklands biome, controls the chance of it generating (n out of 100).\n[range: 0 ~ 100, default: 5]", 0, 100).getInt();
 		darkWeight2 = cfg.get("biome_weight", "Darklands Forest", 5, "Biome weight for the Darklands Forest biome, controls the chance of it generating (n out of 100)\n[range: 0 ~ 100, default: 5]", 0, 100).getInt();
@@ -392,6 +403,19 @@ public class InitHandler implements ILifeCycleHandler {
 		if (stack1 == null || stack2 == null) return false;
 		return stack1.getItem() == stack2.getItem() && (stack1.getItemDamage() == OreDictionary.WILDCARD_VALUE
 				|| stack1.getItemDamage() == stack2.getItemDamage());
+	}
+
+	/**
+	 * Checks if an Entity is blacklisted from being captured with a Interdimensional Cage
+	 * @param entity Entity to check
+	 * @return True if the Entity is blacklisted, otherwise false
+	 */
+	public boolean isEntityBlacklisted(Entity entity){
+		String id = EntityList.getEntityString(entity);
+		for(String str : interdimensionalCageBlacklist)
+			if(str.equals(id))
+				return true;
+		return false;
 	}
 
 	private String getSupporterList(){

@@ -22,6 +22,7 @@ import net.minecraft.item.ItemTool;
 import net.minecraft.util.text.TextFormatting;
 
 import com.google.common.collect.Sets;
+import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
 import com.shinoow.abyssalcraft.lib.ACTabs;
 
 public class ItemACAxe extends ItemTool {
@@ -40,7 +41,7 @@ public class ItemACAxe extends ItemTool {
 		setHarvestLevel("axe", harvestlevel);
 		setUnlocalizedName(name);
 		this.format = format;
-		damageVsEntity = mat.getDamageVsEntity();
+		damageVsEntity = mat == AbyssalCraftAPI.darkstoneTool ? 8 : mat.getDamageVsEntity() + 5;
 		attackSpeed = -3.0F;
 	}
 

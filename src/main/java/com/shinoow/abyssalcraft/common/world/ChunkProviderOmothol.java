@@ -279,9 +279,11 @@ public class ChunkProviderOmothol implements IChunkGenerator
 		for(int i = 0; i < 1; i++) {
 			int Xcoord2 = k + rand.nextInt(16);
 			int Zcoord2 = l + rand.nextInt(16);
+			BlockPos pos1 = worldObj.getHeight(new BlockPos(Xcoord2, 0, Zcoord2));
+			if(worldObj.getBlockState(pos1).getMaterial() == Material.plants) pos1 = pos1.down();
 
-			if(rand.nextInt(200) == 0)
-				new StructureShoggothPit().generate(worldObj, rand, worldObj.getHeight(new BlockPos(Xcoord2, 0, Zcoord2)));
+			if(rand.nextInt(200) == 0 && !worldObj.isAirBlock(pos1.north(13)) && !worldObj.isAirBlock(pos1.north(20)) && !worldObj.isAirBlock(pos1.north(27)))
+				new StructureShoggothPit().generate(worldObj, rand, pos1);
 		}
 
 		biomegenbase.decorate(worldObj, worldObj.rand, new BlockPos(k, 0, l));

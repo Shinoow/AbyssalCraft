@@ -12,6 +12,7 @@
 package com.shinoow.abyssalcraft.client.render.entity;
 
 import net.minecraft.client.model.ModelCreeper;
+import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.entity.Entity;
@@ -20,8 +21,6 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-
-import org.lwjgl.opengl.GL11;
 
 import com.shinoow.abyssalcraft.common.entity.anti.EntityAntiCreeper;
 
@@ -50,7 +49,7 @@ public class RenderAntiCreeper extends RenderLiving {
 		f1 *= f1;
 		float f3 = (1.0F + f1 * 0.4F) * f2;
 		float f4 = (1.0F + f1 * 0.1F) / f2;
-		GL11.glScalef(f3, f4, f3);
+		GlStateManager.scale(f3, f4, f3);
 	}
 
 	protected int getColorMultiplier(EntityAntiCreeper par1EntityAntiCreeper, float par2, float par3)

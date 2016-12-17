@@ -28,6 +28,7 @@ import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.math.AxisAlignedBB;
 
+import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
 import com.shinoow.abyssalcraft.api.energy.IEnergyCollector;
 import com.shinoow.abyssalcraft.api.energy.IEnergyContainerItem;
 import com.shinoow.abyssalcraft.lib.util.blocks.ISingletonInventory;
@@ -108,7 +109,7 @@ public class TileEntitySacrificialAltar extends TileEntity implements IEnergyCol
 
 			for(EntityLivingBase mob : mobs)
 				if(!(mob instanceof EntityPlayer) && !(mob instanceof EntityArmorStand))
-					if(mob.getCreatureAttribute() != EnumCreatureAttribute.UNDEAD)
+					if(mob.getCreatureAttribute() != EnumCreatureAttribute.UNDEAD && mob.getCreatureAttribute() != AbyssalCraftAPI.SHADOW)
 						if(mob.isEntityAlive())
 							if(!mob.isChild()){
 								entity = mob;
@@ -130,7 +131,7 @@ public class TileEntitySacrificialAltar extends TileEntity implements IEnergyCol
 				}
 			}
 		}
-		if(collectionLimit >= 1000){
+		if(collectionLimit >= getMaxEnergy() / 5){
 			collectionLimit = 0;
 			coolDown = 1200;
 		}

@@ -13,7 +13,6 @@ package com.shinoow.abyssalcraft.init;
 
 import static com.shinoow.abyssalcraft.AbyssalCraft.instance;
 import static com.shinoow.abyssalcraft.lib.ACConfig.*;
-
 import net.minecraft.entity.*;
 import net.minecraft.entity.passive.EntityAmbientCreature;
 import net.minecraft.entity.passive.EntityAnimal;
@@ -22,6 +21,7 @@ import net.minecraft.init.Biomes;
 import net.minecraftforge.common.BiomeDictionary;
 import net.minecraftforge.common.BiomeDictionary.Type;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLLoadCompleteEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.registry.EntityRegistry;
@@ -184,6 +184,10 @@ public class EntityHandler implements ILifeCycleHandler {
 		if(demonAnimalSpawnWeight > 0)
 			EntityRegistry.addSpawn(EntityDemonSheep.class, demonAnimalSpawnWeight, 1, 3, EnumCreatureType.MONSTER, BiomeDictionary.getBiomesForType(Type.NETHER));
 
+		registerEntityWithEgg(EntityCoraliumSquid.class, "coraliumsquid", 74, 63, 3, true, 0x014e43, 0x148f7e);
+
+		EntityRegistry.registerModEntity(EntityInkProjectile.class, "inkprojectile", 75, instance, 64, 10, true);
+
 		//		registerEntityWithEgg(EntityShadowTitan.class, "shadowtitan", 74, 80, 3, true, 0, 0xFFFFFF);
 		//
 		//		registerEntityWithEgg(EntityOmotholWarden.class, "omotholwarden", 75, 80, 3, true, 0x133133, 0x342122);
@@ -196,13 +200,18 @@ public class EntityHandler implements ILifeCycleHandler {
 		EntityUtil.addShoggothFood(EntityEvilChicken.class);
 		EntityUtil.addShoggothFood(EntityDemonAnimal.class);
 		EntityUtil.addShoggothFood(EntityEvilSheep.class);
+
+		EntitySpawnPlacementRegistry.setPlacementType(EntityCoraliumSquid.class, EntityLiving.SpawnPlacementType.IN_WATER);
 	}
 
 	@Override
 	public void init(FMLInitializationEvent event) {}
 
 	@Override
-	public void postInit(FMLPostInitializationEvent event) {
+	public void postInit(FMLPostInitializationEvent event) {}
+
+	@Override
+	public void loadComplete(FMLLoadCompleteEvent event) {
 		if(purgeMobSpawns)
 			EntityRegistry.addSpawn(EntityLesserShoggoth.class, 3, 1, 1, EnumCreatureType.MONSTER, ACBiomes.abyssal_wastelands, ACBiomes.dreadlands,
 					ACBiomes.purified_dreadlands, ACBiomes.dreadlands_mountains, ACBiomes.dreadlands_forest, ACBiomes.omothol, ACBiomes.dark_realm);

@@ -11,13 +11,12 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.client.render.entity;
 
+import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-
-import org.lwjgl.opengl.GL11;
 
 import com.shinoow.abyssalcraft.client.model.entity.ModelJzahar;
 import com.shinoow.abyssalcraft.client.render.entity.layers.LayerJzaharDeath;
@@ -42,6 +41,6 @@ public class RenderJzahar extends RenderLiving<EntityJzahar> {
 
 	@Override
 	public void preRenderCallback(EntityJzahar entity, float par2){
-		GL11.glScalef(1.5F, 1.5F, 1.5F);
+		GlStateManager.scale(1.5F, 1.5F, 1.5F);
 	}
 }

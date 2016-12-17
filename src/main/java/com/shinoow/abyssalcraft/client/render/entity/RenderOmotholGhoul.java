@@ -11,6 +11,7 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.client.render.entity;
 
+import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.entity.layers.LayerCustomHead;
@@ -19,8 +20,6 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-
-import org.lwjgl.opengl.GL11;
 
 import com.shinoow.abyssalcraft.client.model.entity.ModelDG;
 import com.shinoow.abyssalcraft.client.render.entity.layers.LayerGhoulArmor;
@@ -51,7 +50,7 @@ public class RenderOmotholGhoul extends RenderLiving {
 	 */
 	protected void preRenderScale(EntityOmotholGhoul par1EntityOmotholGhoul, float par2)
 	{
-		GL11.glScalef(scale, scale, scale);
+		GlStateManager.scale(scale, scale, scale);
 	}
 
 	protected ResourceLocation getGhoulTexture(EntityOmotholGhoul par1EntityLiving)

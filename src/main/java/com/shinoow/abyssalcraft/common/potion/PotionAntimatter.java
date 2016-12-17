@@ -26,8 +26,9 @@ import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
 import com.shinoow.abyssalcraft.api.entity.IAntiEntity;
 import com.shinoow.abyssalcraft.common.entity.EntityAbyssalZombie;
 import com.shinoow.abyssalcraft.common.entity.EntityDepthsGhoul;
-import com.shinoow.abyssalcraft.common.entity.EntityRemnant;
 import com.shinoow.abyssalcraft.common.entity.anti.*;
+import com.shinoow.abyssalcraft.common.entity.demon.EntityDemonChicken;
+import com.shinoow.abyssalcraft.common.entity.demon.EntityDemonCow;
 import com.shinoow.abyssalcraft.common.entity.demon.EntityDemonPig;
 
 public class PotionAntimatter extends Potion{
@@ -79,13 +80,13 @@ public class PotionAntimatter extends Potion{
 				par1EntityLivingBase.worldObj.removeEntity(par1EntityLivingBase);
 				entity.onInitialSpawn(null, null);
 				par1EntityLivingBase.worldObj.spawnEntityInWorld(entity);
-			} else if(par1EntityLivingBase instanceof EntityChicken){
+			} else if(par1EntityLivingBase instanceof EntityChicken || par1EntityLivingBase instanceof EntityDemonChicken){
 				EntityAntiChicken entity = new EntityAntiChicken(par1EntityLivingBase.worldObj);
 				entity.copyLocationAndAnglesFrom(par1EntityLivingBase);
 				par1EntityLivingBase.worldObj.removeEntity(par1EntityLivingBase);
 				entity.onInitialSpawn(null, null);
 				par1EntityLivingBase.worldObj.spawnEntityInWorld(entity);
-			} else if(par1EntityLivingBase instanceof EntityCow){
+			} else if(par1EntityLivingBase instanceof EntityCow || par1EntityLivingBase instanceof EntityDemonCow){
 				EntityAntiCow entity = new EntityAntiCow(par1EntityLivingBase.worldObj);
 				entity.copyLocationAndAnglesFrom(par1EntityLivingBase);
 				par1EntityLivingBase.worldObj.removeEntity(par1EntityLivingBase);
@@ -118,12 +119,6 @@ public class PotionAntimatter extends Potion{
 				par1EntityLivingBase.worldObj.spawnEntityInWorld(entity);
 			} else if(par1EntityLivingBase instanceof EntitySpider){
 				EntityAntiSpider entity = new EntityAntiSpider(par1EntityLivingBase.worldObj);
-				entity.copyLocationAndAnglesFrom(par1EntityLivingBase);
-				par1EntityLivingBase.worldObj.removeEntity(par1EntityLivingBase);
-				entity.onInitialSpawn(par1EntityLivingBase.worldObj.getDifficultyForLocation(par1EntityLivingBase.getPosition()),(IEntityLivingData)null);
-				par1EntityLivingBase.worldObj.spawnEntityInWorld(entity);
-			} else if(par1EntityLivingBase instanceof EntityVillager){
-				EntityRemnant entity = new EntityRemnant(par1EntityLivingBase.worldObj);
 				entity.copyLocationAndAnglesFrom(par1EntityLivingBase);
 				par1EntityLivingBase.worldObj.removeEntity(par1EntityLivingBase);
 				entity.onInitialSpawn(par1EntityLivingBase.worldObj.getDifficultyForLocation(par1EntityLivingBase.getPosition()),(IEntityLivingData)null);
