@@ -151,7 +151,7 @@ public class AbyssalCraftEventHooks {
 			ItemStack slot = event.getEntityLiving().getItemStackFromSlot(EntityEquipmentSlot.CHEST);
 			if(slot.getItem() == ACItems.dreaded_abyssalnite_chestplate)
 				if(event.getSource().getEntity() != null && event.getEntityLiving().worldObj.rand.nextBoolean())
-					event.getSource().getEntity().setFire(99);
+					event.getSource().getEntity().setFire(30);
 			if(slot.getItem() == ACItems.plated_coralium_chestplate)
 				if(event.getSource().getEntity() != null && event.getEntityLiving().worldObj.rand.nextBoolean())
 					event.getSource().getEntity().attackEntityFrom(getSource(event.getEntityLiving()), 1);
@@ -188,7 +188,7 @@ public class AbyssalCraftEventHooks {
 				EntityPlayer player = (EntityPlayer)event.getEntityLiving();
 				Random rand = new Random();
 				ItemStack helmet = player.getItemStackFromSlot(EntityEquipmentSlot.HEAD);
-				if(player.worldObj.getBiomeGenForCoords(new BlockPos(player.posX, player.posY, player.posZ)) instanceof IDarklandsBiome)
+				if(player.worldObj.getBiome(new BlockPos(player.posX, player.posY, player.posZ)) instanceof IDarklandsBiome)
 					if(rand.nextInt(1000) == 0)
 						if(helmet == null || helmet != null && helmet.getItem() != ACItems.abyssalnite_helmet && helmet.getItem() != ACItems.dreaded_abyssalnite_helmet
 						&& helmet.getItem() != ACItems.refined_coralium_helmet && helmet.getItem() != ACItems.plated_coralium_helmet

@@ -93,7 +93,7 @@ public class TeleporterAC extends Teleporter
 		int j = MathHelper.floor_double(entityIn.posZ);
 		boolean flag1 = true;
 		Object object = BlockPos.ORIGIN;
-		long k = ChunkPos.chunkXZ2Int(i, j);
+		long k = ChunkPos.asLong(i, j);
 
 		if (destinationCoordinateCache.containsKey(k)) {
 			Teleporter.PortalPosition portalposition = destinationCoordinateCache.get(k);

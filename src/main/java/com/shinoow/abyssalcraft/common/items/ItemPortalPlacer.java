@@ -71,8 +71,9 @@ public class ItemPortalPlacer extends Item {
 		list.add(I18n.translateToLocal("tooltip.portalplacer.2"));
 		if(key > 0)
 			list.add(I18n.translateToLocal("tooltip.portalplacer.3"));
-		if(!isCorrectDim(Minecraft.getMinecraft().theWorld.provider.getDimension()))
-			list.add(TextFormatting.DARK_RED+""+TextFormatting.ITALIC+I18n.translateToLocal("tooltip.portalplacer.4"));
+		if(Minecraft.getMinecraft().theWorld != null && Minecraft.getMinecraft().theWorld.provider != null)
+			if(!isCorrectDim(Minecraft.getMinecraft().theWorld.provider.getDimension()))
+				list.add(TextFormatting.DARK_RED+""+TextFormatting.ITALIC+I18n.translateToLocal("tooltip.portalplacer.4"));
 	}
 
 	private boolean isCorrectDim(int dim){

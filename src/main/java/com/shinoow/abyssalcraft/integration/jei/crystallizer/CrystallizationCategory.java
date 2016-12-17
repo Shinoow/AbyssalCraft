@@ -17,6 +17,7 @@ import mezz.jei.api.IGuiHelper;
 import mezz.jei.api.gui.IDrawable;
 import mezz.jei.api.gui.IGuiItemStackGroup;
 import mezz.jei.api.gui.IRecipeLayout;
+import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.recipe.IRecipeWrapper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.util.ResourceLocation;
@@ -67,15 +68,22 @@ public class CrystallizationCategory extends CrystallizerRecipeCategory {
 	}
 
 	@Override
-	public void setRecipe(@Nonnull IRecipeLayout recipeLayout, @Nonnull IRecipeWrapper recipeWrapper) {
+	public void setRecipe(@Nonnull IRecipeLayout recipeLayout, @Nonnull IRecipeWrapper recipeWrapper, IIngredients ingredients) {
 		IGuiItemStackGroup guiItemStacks = recipeLayout.getItemStacks();
 
 		guiItemStacks.init(inputSlot, true, 0, 0);
 		guiItemStacks.init(outputSlot, false, 60, 18);
 		guiItemStacks.init(outputSlot2, false, 77, 18);
 
-		guiItemStacks.setFromRecipe(inputSlot, recipeWrapper.getInputs());
-		guiItemStacks.setFromRecipe(outputSlot, recipeWrapper.getOutputs().get(0));
-		guiItemStacks.setFromRecipe(outputSlot2, recipeWrapper.getOutputs().get(1));
+		guiItemStacks.set(ingredients);
 	}
+
+	@Override
+	public IDrawable getIcon() {
+
+		return null;
+	}
+
+	@Override
+	public void setRecipe(IRecipeLayout recipeLayout, IRecipeWrapper recipeWrapper) {}
 }

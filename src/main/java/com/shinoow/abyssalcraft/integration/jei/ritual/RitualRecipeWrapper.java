@@ -17,12 +17,17 @@ import java.util.Map;
 
 import javax.annotation.Nonnull;
 
+import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.recipe.BlankRecipeWrapper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.oredict.OreDictionary;
 
+import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
+import com.shinoow.abyssalcraft.api.APIUtils;
+import com.shinoow.abyssalcraft.api.item.ACItems;
 import com.shinoow.abyssalcraft.api.ritual.NecronomiconCreationRitual;
 import com.shinoow.abyssalcraft.api.ritual.NecronomiconRitual;
 import com.shinoow.abyssalcraft.api.ritual.RitualRegistry;
@@ -88,5 +93,49 @@ public class RitualRecipeWrapper extends BlankRecipeWrapper {
 		if(!dimToString.containsKey(dim))
 			dimToString.put(dim, "DIM"+dim);
 		return dimToString.get(dim);
+	}
+
+	private ItemStack getItem(int par1){
+		switch(par1){
+		case 0:
+			return new ItemStack(ACItems.necronomicon);
+		case 1:
+			return new ItemStack(ACItems.abyssal_wasteland_necronomicon);
+		case 2:
+			return new ItemStack(ACItems.dreadlands_necronomicon);
+		case 3:
+			return new ItemStack(ACItems.omothol_necronomicon);
+		case 4:
+			return new ItemStack(ACItems.abyssalnomicon);
+		default:
+			return new ItemStack(ACItems.necronomicon);
+		}
+	}
+
+	private boolean list(Object obj){
+		return obj == null ? false : obj instanceof ItemStack[] || obj instanceof String || obj instanceof List;
+	}
+
+	private List<ItemStack> getList(Object obj){
+		if(obj instanceof ItemStack[])
+			return Lists.newArrayList((ItemStack[])obj);
+		if(obj instanceof String)
+			return OreDictionary.getOres((String)obj);
+		if(obj instanceof List)
+			return (List)obj;
+		return Collections.emptyList();
+	}
+
+	@Override
+	public void getIngredients(IIngredients ingredients) {
+
+		List<List<ItemStack>> input = Lists.newArrayList();
+
+		for(Object obj : offerings)
+			input.add(list(obj) ? getList(obj) : Collections.singletonList(APIUtils.convertToStack(obj)));
+		input.add(Collections.singletonList(APIUtils.convertToStack(sacrifice)));
+		input.add(Collections.singletonList(getItem(bookType)));
+		ingredients.setInputLists(ItemStack.class, input);
+		ingredients.setOutput(ItemStack.class, output);
 	}
 }

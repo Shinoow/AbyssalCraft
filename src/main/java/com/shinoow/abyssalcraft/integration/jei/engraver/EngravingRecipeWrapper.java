@@ -18,6 +18,9 @@ import java.util.List;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
+import com.google.common.collect.Lists;
+
+import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.recipe.BlankRecipeWrapper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
@@ -69,5 +72,13 @@ public class EngravingRecipeWrapper extends BlankRecipeWrapper {
 			FontRenderer fontRendererObj = minecraft.fontRendererObj;
 			fontRendererObj.drawString(experienceString, 69 - fontRendererObj.getStringWidth(experienceString) / 2, 0, Color.gray.getRGB());
 		}
+	}
+
+	@Override
+	public void getIngredients(IIngredients ingredients) {
+		List<List<ItemStack>> inputs = Lists.newArrayList(input);
+		inputs.add(Collections.singletonList(engraving));
+		ingredients.setInputLists(ItemStack.class, inputs);
+		ingredients.setOutputs(ItemStack.class, output);
 	}
 }

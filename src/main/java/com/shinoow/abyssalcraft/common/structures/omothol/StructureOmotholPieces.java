@@ -1626,7 +1626,7 @@ public class StructureOmotholPieces
 			worldChunkMngr = chunkManagerIn;
 			structureVillageWeightedPieceList = p_i2104_6_;
 			terrainType = p_i2104_7_;
-			Biome biomegenbase = chunkManagerIn.getBiomeGenerator(new BlockPos(p_i2104_4_, 0, p_i2104_5_), Biomes.OCEAN);
+			Biome biomegenbase = chunkManagerIn.getBiome(new BlockPos(p_i2104_4_, 0, p_i2104_5_), Biomes.OCEAN);
 			//			inDesert = biomegenbase == Biome.desert || biomegenbase == Biome.desertHills;
 			biome = biomegenbase;
 		}

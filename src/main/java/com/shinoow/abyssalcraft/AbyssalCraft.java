@@ -25,7 +25,7 @@ import com.shinoow.abyssalcraft.common.CommonProxy;
 import com.shinoow.abyssalcraft.common.handlers.IMCHandler;
 import com.shinoow.abyssalcraft.init.*;
 
-@Mod(modid = AbyssalCraft.modid, name = AbyssalCraft.name, version = AbyssalCraft.version,dependencies = "required-after:Forge@[forgeversion,);after:JEI@[3.9.0,)", useMetadata = false, guiFactory = "com.shinoow.abyssalcraft.client.config.ACGuiFactory", acceptedMinecraftVersions = "[1.10.2]", updateJSON = "https://raw.githubusercontent.com/Shinoow/AbyssalCraft/master/version.json")
+@Mod(modid = AbyssalCraft.modid, name = AbyssalCraft.name, version = AbyssalCraft.version,dependencies = "required-after:Forge@[forgeversion,);after:JEI@[3.13.6,)", useMetadata = false, guiFactory = "com.shinoow.abyssalcraft.client.config.ACGuiFactory", acceptedMinecraftVersions = "[1.10.2]", updateJSON = "https://raw.githubusercontent.com/Shinoow/AbyssalCraft/master/version.json")
 public class AbyssalCraft {
 
 	public static final String version = "ac_version";
@@ -74,6 +74,12 @@ public class AbyssalCraft {
 		proxy.postInit();
 		for(ILifeCycleHandler handler : handlers)
 			handler.postInit(event);
+	}
+
+	@EventHandler
+	public void loadComplete(FMLLoadCompleteEvent event){
+		for(ILifeCycleHandler handler : handlers)
+			handler.loadComplete(event);
 	}
 
 	@EventHandler

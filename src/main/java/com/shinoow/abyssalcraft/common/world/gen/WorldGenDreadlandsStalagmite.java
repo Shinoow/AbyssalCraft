@@ -34,7 +34,7 @@ public class WorldGenDreadlandsStalagmite extends WorldGenerator {
 			return false;
 
 		IBlockState state;
-		if(world.getBiomeGenForCoords(pos) == ACBiomes.purified_dreadlands)
+		if(world.getBiome(pos) == ACBiomes.purified_dreadlands)
 			state = ACBlocks.abyssalnite_stone.getDefaultState();
 		else state = ACBlocks.dreadstone.getDefaultState();
 

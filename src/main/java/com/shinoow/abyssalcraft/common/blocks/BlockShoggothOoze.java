@@ -30,6 +30,7 @@ import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.common.entity.EntityLesserShoggoth;
 import com.shinoow.abyssalcraft.lib.ACConfig;
+import com.shinoow.abyssalcraft.lib.ACLib;
 
 public class BlockShoggothOoze extends BlockACBasic {
 
@@ -66,7 +67,23 @@ public class BlockShoggothOoze extends BlockACBasic {
 	public void updateTick(World par1World, BlockPos pos, IBlockState state, Random par5Random) {
 		if(ACConfig.oozeExpire)
 			if (!par1World.isRemote && par5Random.nextInt(10) == 0 && par1World.getLightFromNeighbors(pos.up()) >= 13)
-				par1World.setBlockState(pos, Blocks.DIRT.getDefaultState());
+				par1World.setBlockState(pos, getState(par1World));
+	}
+
+	private IBlockState getState(World world){
+		if(world.provider.getDimension() == ACLib.abyssal_wasteland_id)
+			return ACBlocks.abyssal_sand.getDefaultState();
+		if(world.provider.getDimension() == ACLib.dreadlands_id)
+			return ACBlocks.dreadlands_dirt.getDefaultState();
+		if(world.provider.getDimension() == ACLib.omothol_id)
+			return ACBlocks.omothol_stone.getDefaultState();
+		if(world.provider.getDimension() == ACLib.dark_realm_id)
+			return ACBlocks.darkstone.getDefaultState();
+		if(world.provider.getDimension() == -1)
+			return Blocks.NETHERRACK.getDefaultState();
+		if(world.provider.getDimension() == 1)
+			return Blocks.END_STONE.getDefaultState();
+		return Blocks.DIRT.getDefaultState();
 	}
 
 	@Override

@@ -249,8 +249,10 @@ public class InternalNecroDataHandler extends DummyNecroDataHandler {
 				new Page(8, NecronomiconText.ENTITY_SPECTRAL_DRAGON_2),
 				new Page(9, NecronomiconResources.ASORAH, NecronomiconText.ENTITY_ASORAH_1),
 				new Page(10, NecronomiconText.ENTITY_ASORAH_2),
-				new Page(11, NecronomiconResources.LESSER_SHOGGOTH_ABYSSAL, NecronomiconText.ENTITY_LESSER_SHOGGOTH_1),
-				new Page(12, NecronomiconText.ENTITY_LESSER_SHOGGOTH_2));
+				new Page(11, NecronomiconResources.CORALIUM_INFESTED_SQUID, NecronomiconText.ENTITY_CORALIUM_INFESTED_SQUID_1),
+				new Page(12, NecronomiconText.ENTITY_CORALIUM_INFESTED_SQUID_2),
+				new Page(13, NecronomiconResources.LESSER_SHOGGOTH_ABYSSAL, NecronomiconText.ENTITY_LESSER_SHOGGOTH_1),
+				new Page(14, NecronomiconText.ENTITY_LESSER_SHOGGOTH_2));
 		addPages("abyssalwasteland", "specialmaterials", new Page(1, new CraftingStack(ACItems.powerstone_tracker),
 				NecronomiconText.CRAFTING_POWERSTONE_TRACKER),
 				new Page(3, new CraftingStack(ACBlocks.transmutator_idle), NecronomiconText.CRAFTING_TRANSMUTATOR_1),

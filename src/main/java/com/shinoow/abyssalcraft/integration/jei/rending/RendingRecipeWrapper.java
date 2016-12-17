@@ -17,6 +17,7 @@ import java.util.Map;
 
 import javax.annotation.Nonnull;
 
+import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.recipe.BlankRecipeWrapper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
@@ -74,5 +75,10 @@ public class RendingRecipeWrapper extends BlankRecipeWrapper {
 		if(!dimToString.containsKey(dim))
 			dimToString.put(dim, "DIM"+dim);
 		return dimToString.get(dim);
+	}
+
+	@Override
+	public void getIngredients(IIngredients ingredients) {
+		ingredients.setOutput(ItemStack.class, output);
 	}
 }

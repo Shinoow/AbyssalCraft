@@ -67,13 +67,13 @@ public class BiomeProviderDreadlands extends BiomeProvider
 	}
 
 	@Override
-	public Biome getBiomeGenerator(BlockPos pos)
+	public Biome getBiome(BlockPos pos)
 	{
-		return this.getBiomeGenerator(pos, (Biome)null);
+		return this.getBiome(pos, (Biome)null);
 	}
 
 	@Override
-	public Biome getBiomeGenerator(BlockPos pos, Biome biomegen)
+	public Biome getBiome(BlockPos pos, Biome biomegen)
 	{
 		Biome biome = biomeCache.getBiome(pos.getX(), pos.getZ(), biomegen);
 		if (biome == null)
@@ -106,13 +106,13 @@ public class BiomeProviderDreadlands extends BiomeProvider
 	}
 
 	@Override
-	public Biome[] loadBlockGeneratorData(Biome[] par1ArrayOfBiome, int par2, int par3, int par4, int par5)
+	public Biome[] getBiomes(Biome[] par1ArrayOfBiome, int par2, int par3, int par4, int par5)
 	{
-		return getBiomeGenAt(par1ArrayOfBiome, par2, par3, par4, par5, true);
+		return getBiomes(par1ArrayOfBiome, par2, par3, par4, par5, true);
 	}
 
 	@Override
-	public Biome[] getBiomeGenAt(Biome[] par1ArrayOfBiome, int x, int y, int width, int length, boolean cacheFlag)
+	public Biome[] getBiomes(Biome[] par1ArrayOfBiome, int x, int y, int width, int length, boolean cacheFlag)
 	{
 		IntCache.resetIntCache();
 

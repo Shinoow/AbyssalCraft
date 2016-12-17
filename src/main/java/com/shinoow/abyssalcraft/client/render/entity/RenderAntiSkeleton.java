@@ -12,6 +12,7 @@
 package com.shinoow.abyssalcraft.client.render.entity;
 
 import net.minecraft.client.model.ModelSkeleton;
+import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.RenderBiped;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.entity.layers.LayerBipedArmor;
@@ -19,8 +20,6 @@ import net.minecraft.client.renderer.entity.layers.LayerHeldItem;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-
-import org.lwjgl.opengl.GL11;
 
 import com.shinoow.abyssalcraft.client.model.entity.ModelAntiSkeleton;
 import com.shinoow.abyssalcraft.common.entity.anti.EntityAntiSkeleton;
@@ -48,7 +47,7 @@ public class RenderAntiSkeleton extends RenderBiped<EntityAntiSkeleton>
 	@Override
 	public void transformHeldFull3DItemLayer()
 	{
-		GL11.glTranslatef(0.09375F, 0.1875F, 0.0F);
+		GlStateManager.translate(0.09375F, 0.1875F, 0.0F);
 	}
 
 	@Override

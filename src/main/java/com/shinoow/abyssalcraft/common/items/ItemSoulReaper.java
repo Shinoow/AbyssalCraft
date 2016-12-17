@@ -13,6 +13,7 @@ package com.shinoow.abyssalcraft.common.items;
 
 import java.util.List;
 
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.MobEffects;
@@ -21,6 +22,7 @@ import net.minecraft.item.ItemSword;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.text.translation.I18n;
+import net.minecraft.world.World;
 import net.minecraftforge.common.util.EnumHelper;
 
 import com.shinoow.abyssalcraft.api.item.ACItems;
@@ -108,6 +110,12 @@ public class ItemSoulReaper extends ItemSword {
 			return true;
 		}
 		return true;
+	}
+
+	@Override
+	public void onUpdate(ItemStack stack, World worldIn, Entity entityIn, int itemSlot, boolean isSelected){
+		if(stack.isItemEnchanted())
+			stack.getTagCompound().removeTag("ench");
 	}
 
 	@Override

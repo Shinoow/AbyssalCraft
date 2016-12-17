@@ -60,7 +60,7 @@ public class BlockDreadAltarBottom extends Block {
 		super.onBlockPlaced(world, pos, facing, hitX, hitY, hitZ, meta, placer);
 		if(world.provider.getDimension() != ACLib.dreadlands_id  && world.isRemote)
 			FMLClientHandler.instance().getClient().ingameGUI.getChatGUI().printChatMessage(new TextComponentTranslation("message.dreadaltar.error.1"));
-		if(world.provider.getDimension() == ACLib.dreadlands_id && world.getBiomeGenForCoords(pos) != ACBiomes.dreadlands_mountains  && world.isRemote)
+		if(world.provider.getDimension() == ACLib.dreadlands_id && world.getBiome(pos) != ACBiomes.dreadlands_mountains  && world.isRemote)
 			FMLClientHandler.instance().getClient().ingameGUI.getChatGUI().printChatMessage(new TextComponentTranslation("message.dreadaltar.error.2"));
 		return getStateFromMeta(meta);
 	}

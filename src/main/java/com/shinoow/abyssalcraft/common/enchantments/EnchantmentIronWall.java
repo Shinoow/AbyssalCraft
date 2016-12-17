@@ -45,6 +45,6 @@ public class EnchantmentIronWall extends Enchantment {
 	@Override
 	public void onUserHurt(EntityLivingBase user, Entity attacker, int level)
 	{
-		user.setInWeb();
+		user.motionX = user.motionY = user.motionZ = 0;
 	}
 }

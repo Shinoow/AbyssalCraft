@@ -97,6 +97,7 @@ public class DisruptionHandler {
 		List<DisruptionEntry> dis = Lists.newArrayList();
 
 		if(deity == null){
+			deity = DeityType.values()[world.rand.nextInt(DeityType.values().length)];
 			for(DisruptionEntry entry : disruptions)
 				if(entry.getDeity() == null)
 					dis.add(entry);

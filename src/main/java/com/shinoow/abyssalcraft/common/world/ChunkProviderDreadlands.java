@@ -20,6 +20,7 @@ import java.util.List;
 import java.util.Random;
 
 import net.minecraft.block.BlockFalling;
+import net.minecraft.block.material.Material;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
@@ -199,7 +200,7 @@ public class ChunkProviderDreadlands implements IChunkGenerator {
 		rand.setSeed(par1 * 341873128712L + par2 * 132897987541L);
 		ChunkPrimer primer = new ChunkPrimer();
 		setBlocksInChunk(par1, par2, primer);
-		biomesForGeneration = worldObj.getBiomeProvider().loadBlockGeneratorData(biomesForGeneration, par1 * 16, par2 * 16, 16, 16);
+		biomesForGeneration = worldObj.getBiomeProvider().getBiomes(biomesForGeneration, par1 * 16, par2 * 16, 16, 16);
 		replaceBlocksForBiome(par1, par2, primer, biomesForGeneration);
 		caveGenerator.generate(worldObj, par1, par2, primer);
 		ravineGenerator.generate(worldObj, par1, par2, primer);
@@ -327,7 +328,7 @@ public class ChunkProviderDreadlands implements IChunkGenerator {
 		BlockFalling.fallInstantly = true;
 		int k = par2 * 16;
 		int l = par3 * 16;
-		Biome Biome = worldObj.getBiomeGenForCoords(new BlockPos(k + 16, 0, l + 16));
+		Biome Biome = worldObj.getBiome(new BlockPos(k + 16, 0, l + 16));
 		rand.setSeed(worldObj.getSeed());
 		long i1 = rand.nextLong() / 2L * 2L + 1L;
 		long j1 = rand.nextLong() / 2L * 2L + 1L;
@@ -356,9 +357,11 @@ public class ChunkProviderDreadlands implements IChunkGenerator {
 			for(int i = 0; i < 1; i++) {
 				int Xcoord2 = k + rand.nextInt(16);
 				int Zcoord2 = l + rand.nextInt(16);
+				BlockPos pos1 = worldObj.getHeight(new BlockPos(Xcoord2, 0, Zcoord2));
+				if(worldObj.getBlockState(pos1).getMaterial() == Material.PLANTS) pos1 = pos1.down();
 
-				if(rand.nextInt(400) == 0)
-					new StructureShoggothPit().generate(worldObj, rand, worldObj.getHeight(new BlockPos(Xcoord2, 0, Zcoord2)));
+				if(rand.nextInt(400) == 0 && !worldObj.isAirBlock(pos1.north(13)) && !worldObj.isAirBlock(pos1.north(20)) && !worldObj.isAirBlock(pos1.north(27)))
+					new StructureShoggothPit().generate(worldObj, rand, pos1);
 			}
 
 		Biome.decorate(worldObj, rand, new BlockPos(k, 0, l));
@@ -376,7 +379,7 @@ public class ChunkProviderDreadlands implements IChunkGenerator {
 	@SuppressWarnings("rawtypes")
 	public List getPossibleCreatures(EnumCreatureType par1EnumCreatureType, BlockPos pos)
 	{
-		Biome biome = worldObj.getBiomeGenForCoords(pos);
+		Biome biome = worldObj.getBiome(pos);
 		return biome == null ? null : biome.getSpawnableList(par1EnumCreatureType);
 	}
 

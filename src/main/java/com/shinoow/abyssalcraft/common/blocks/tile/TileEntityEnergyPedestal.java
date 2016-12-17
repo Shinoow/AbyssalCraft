@@ -11,8 +11,6 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.common.blocks.tile;
 
-import java.util.Random;
-
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
@@ -29,7 +27,6 @@ public class TileEntityEnergyPedestal extends TileEntity implements IEnergyColle
 	private ItemStack item;
 	private int rot;
 	private float energy;
-	Random rand = new Random();
 	private boolean isDirty;
 
 	@Override

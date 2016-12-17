@@ -16,7 +16,7 @@ import java.util.List;
 
 import javax.annotation.Nonnull;
 
-import mezz.jei.api.IItemRegistry;
+import mezz.jei.api.ingredients.IIngredientRegistry;
 import net.minecraft.item.ItemStack;
 
 import com.google.common.collect.ImmutableList;
@@ -48,11 +48,11 @@ public class JEIUtils {
 	 * compared to the JEI code (since this class is initialized<br>
 	 * at a different time, among things).
 	 */
-	public JEIUtils(IItemRegistry registry){
+	public JEIUtils(IIngredientRegistry registry){
 		List<ItemStack> fuelsTMutable = new ArrayList<>();
 		List<ItemStack> fuelsCMutable = new ArrayList<>();
 
-		for(ItemStack stack : registry.getItemList()){
+		for(ItemStack stack : registry.getIngredients(ItemStack.class)){
 			addItemStack(stack, FuelType.TRANSMUTATOR, fuelsTMutable);
 			addItemStack(stack, FuelType.CRYSTALLIZER, fuelsCMutable);
 		}

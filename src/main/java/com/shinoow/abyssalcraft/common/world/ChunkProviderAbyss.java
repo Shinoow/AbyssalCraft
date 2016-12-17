@@ -19,6 +19,7 @@ import java.util.List;
 import java.util.Random;
 
 import net.minecraft.block.BlockFalling;
+import net.minecraft.block.material.Material;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
@@ -39,8 +40,8 @@ import net.minecraftforge.event.terraingen.TerrainGen;
 
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.common.structures.StructureShoggothPit;
-import com.shinoow.abyssalcraft.common.structures.abyss.Abypillar;
 import com.shinoow.abyssalcraft.common.structures.abyss.Abyruin;
+import com.shinoow.abyssalcraft.common.structures.abyss.Chains;
 import com.shinoow.abyssalcraft.common.structures.abyss.stronghold.MapGenAbyStronghold;
 import com.shinoow.abyssalcraft.common.world.gen.WorldGenAbyLake;
 import com.shinoow.abyssalcraft.lib.ACConfig;
@@ -194,7 +195,7 @@ public class ChunkProviderAbyss implements IChunkGenerator
 		rand.setSeed(x * 341873128712L + z * 132897987541L);
 		ChunkPrimer primer = new ChunkPrimer();
 		setBlocksInChunk(x, z, primer);
-		biomesForGeneration = worldObj.getBiomeProvider().loadBlockGeneratorData(biomesForGeneration, x * 16, z * 16, 16, 16);
+		biomesForGeneration = worldObj.getBiomeProvider().getBiomes(biomesForGeneration, x * 16, z * 16, 16, 16);
 		replaceBlocksForBiome(x, z, primer, biomesForGeneration);
 		caveGenerator.generate(worldObj, x, z, primer);
 		ravineGenerator.generate(worldObj, x, z, primer);
@@ -322,7 +323,7 @@ public class ChunkProviderAbyss implements IChunkGenerator
 		int k = x * 16;
 		int l = z * 16;
 		BlockPos pos = new BlockPos(k, 0, l);
-		Biome Biome = worldObj.getBiomeGenForCoords(pos.add(16, 0, 16));
+		Biome Biome = worldObj.getBiome(pos.add(16, 0, 16));
 		rand.setSeed(worldObj.getSeed());
 		long i1 = rand.nextLong() / 2L * 2L + 1L;
 		long j1 = rand.nextLong() / 2L * 2L + 1L;
@@ -354,12 +355,12 @@ public class ChunkProviderAbyss implements IChunkGenerator
 			new WorldGenAbyLake(ACBlocks.abyssal_stone).generate(worldObj, rand, pos.add(k1, l1, i2));
 		}
 		if(ACConfig.generateAbyssalWastelandPillars)
-			for(int i = 0; i < 5; i++) {
+			for(int i = 0; i < 1; i++) {
 				int Xcoord1 = rand.nextInt(16) + 8;
-				int Ycoord1 = rand.nextInt(80);
 				int Zcoord1 = rand.nextInt(16) + 8;
 
-				new Abypillar().generate(worldObj, rand, pos.add(Xcoord1, Ycoord1, Zcoord1));
+				if(rand.nextFloat() < 0.01F)
+					new Chains().generate(worldObj, rand, pos.add(Xcoord1, 0, Zcoord1));
 			}
 		if(ACConfig.generateAbyssalWastelandRuins)
 			for(int i = 0; i < 5; i++) {
@@ -373,9 +374,11 @@ public class ChunkProviderAbyss implements IChunkGenerator
 			for(int i = 0; i < 1; i++) {
 				int Xcoord2 = rand.nextInt(16) + 8;
 				int Zcoord2 = rand.nextInt(16) + 8;
+				BlockPos pos1 = worldObj.getHeight(pos.add(Xcoord2, 0, Zcoord2));
+				if(worldObj.getBlockState(pos1).getMaterial() == Material.PLANTS) pos1 = pos1.down();
 
-				if(rand.nextInt(400) == 0)
-					new StructureShoggothPit().generate(worldObj, rand, worldObj.getHeight(pos.add(Xcoord2, 0, Zcoord2)));
+				if(rand.nextInt(400) == 0 && !worldObj.isAirBlock(pos1.north(13)) && !worldObj.isAirBlock(pos1.north(20)) && !worldObj.isAirBlock(pos1.north(27)))
+					new StructureShoggothPit().generate(worldObj, rand, pos1);
 			}
 
 		Biome.decorate(worldObj, rand, new BlockPos(k, 0, l));
@@ -392,7 +395,7 @@ public class ChunkProviderAbyss implements IChunkGenerator
 	@SuppressWarnings("rawtypes")
 	public List getPossibleCreatures(EnumCreatureType par1EnumCreatureType, BlockPos pos)
 	{
-		Biome biome = worldObj.getBiomeGenForCoords(pos);
+		Biome biome = worldObj.getBiome(pos);
 		return biome == null ? null : biome.getSpawnableList(par1EnumCreatureType);
 	}
 

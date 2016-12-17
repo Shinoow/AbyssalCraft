@@ -77,13 +77,13 @@ public interface IEnergyManipulator {
 	public void setActiveAmplifier(AmplifierType amplifier);
 
 	/**
-	 * Increases the tolerance value (tolerance determines a disruption is fired)
+	 * Increases the tolerance value (tolerance determines when a disruption is fired)
 	 * @param num Amount to increase with
 	 */
 	public void addTolerance(int num);
 
 	/**
-	 * Returns the manipulator's current tolerance value (tolerance determines a disruption is fired)
+	 * Returns the manipulator's current tolerance value (tolerance determines when a disruption is fired)
 	 */
 	public int getTolerance();
 

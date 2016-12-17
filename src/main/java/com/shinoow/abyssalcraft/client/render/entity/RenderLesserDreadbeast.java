@@ -11,13 +11,12 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.client.render.entity;
 
+import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-
-import org.lwjgl.opengl.GL11;
 
 import com.shinoow.abyssalcraft.client.model.entity.ModelChagarothSpawn;
 import com.shinoow.abyssalcraft.common.entity.EntityLesserDreadbeast;
@@ -39,7 +38,7 @@ public class RenderLesserDreadbeast extends RenderLiving<EntityLesserDreadbeast>
 	 */
 	protected void preRenderScale(EntityLesserDreadbeast par1EntityEntityLesserDreadbeast, float par2)
 	{
-		GL11.glScalef(scale, scale, scale);
+		GlStateManager.scale(scale, scale, scale);
 	}
 
 	@Override
