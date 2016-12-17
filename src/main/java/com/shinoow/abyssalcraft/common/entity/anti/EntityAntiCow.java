@@ -138,10 +138,11 @@ public class EntityAntiCow extends EntityAnimal implements IAntiEntity {
 	public boolean processInteract(EntityPlayer par1EntityPlayer, EnumHand hand)
 	{
 		ItemStack stack = par1EntityPlayer.getHeldItem(hand);
-		if (stack != null && stack.getItem() == Items.BUCKET && !par1EntityPlayer.capabilities.isCreativeMode && !isChild())
+		if (!stack.isEmpty() && stack.getItem() == Items.BUCKET && !par1EntityPlayer.capabilities.isCreativeMode && !isChild())
 		{
 			par1EntityPlayer.playSound(SoundEvents.ENTITY_COW_MILK, 1.0F, 1.0F);
-			if (stack.getCount()-1 == 1)
+			stack.shrink(1);
+			if (stack.isEmpty())
 				par1EntityPlayer.setHeldItem(hand, ACItems.liquid_antimatter_bucket_stack.copy());
 			else if (!par1EntityPlayer.inventory.addItemStackToInventory(ACItems.liquid_antimatter_bucket_stack.copy()))
 				par1EntityPlayer.dropItem(ACItems.liquid_antimatter_bucket_stack.copy(), false);

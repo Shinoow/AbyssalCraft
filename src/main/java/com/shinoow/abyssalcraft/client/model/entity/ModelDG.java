@@ -13,11 +13,10 @@ package com.shinoow.abyssalcraft.client.model.entity;
 
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
+import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.EnumHandSide;
 import net.minecraft.util.math.MathHelper;
-
-import org.lwjgl.opengl.GL11;
 
 public class ModelDG extends ModelBase
 {
@@ -246,14 +245,14 @@ public class ModelDG extends ModelBase
 		if (isChild)
 		{
 			float f6 = 2.0F;
-			GL11.glPushMatrix();
-			GL11.glScalef(1.5F / f6, 1.5F / f6, 1.5F / f6);
-			GL11.glTranslatef(0.0F, 21.0F * par7, 0.0F);
+			GlStateManager.pushMatrix();
+			GlStateManager.scale(1.5F / f6, 1.5F / f6, 1.5F / f6);
+			GlStateManager.translate(0.0F, 21.0F * par7, 0.0F);
 			Head.render(par7);
-			GL11.glPopMatrix();
-			GL11.glPushMatrix();
-			GL11.glScalef(1.0F / f6, 1.0F / f6, 1.0F / f6);
-			GL11.glTranslatef(0.0F, 24.0F * par7, 0.0F);
+			GlStateManager.popMatrix();
+			GlStateManager.pushMatrix();
+			GlStateManager.scale(1.0F / f6, 1.0F / f6, 1.0F / f6);
+			GlStateManager.translate(0.0F, 24.0F * par7, 0.0F);
 			Spine1.render(par7);
 			Spine2.render(par7);
 			lrib1.render(par7);
@@ -271,7 +270,7 @@ public class ModelDG extends ModelBase
 			back.render(par7);
 			lside.render(par7);
 			rside.render(par7);
-			GL11.glPopMatrix();
+			GlStateManager.popMatrix();
 		} else{
 			Head.render(par7);
 			Spine1.render(par7);

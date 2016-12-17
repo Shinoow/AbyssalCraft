@@ -271,6 +271,9 @@ public class MiscHandler implements ILifeCycleHandler {
 		}
 	}
 
+	@Override
+	public void loadComplete(FMLLoadCompleteEvent event) {}
+
 	private void addOreDictionaryStuff(){
 
 		OreDictionary.registerOre("ingotAbyssalnite", ACItems.abyssalnite_ingot);
@@ -391,12 +394,10 @@ public class MiscHandler implements ILifeCycleHandler {
 			if(main != null){
 				main.addEntry(new LootEntryItem(ACItems.oblivion_catalyst, 1, 0 , new LootFunction[0], new LootCondition[0], modid + ":oblivion_catalyst"));
 				main.addEntry(new LootEntryItem(ACItems.abyssalnite_ingot, 3, 0 , new LootFunction[]{new SetCount(new LootCondition[0], new RandomValueRange(1, 3))}, new LootCondition[0], modid + ":abyssalnite_ingot"));
-				main.addEntry(new LootEntryItem(ACItems.refined_coralium_ingot, 1, 0 , new LootFunction[0], new LootCondition[0], modid + ":refined_coralium_ingot"));
 				main.addEntry(new LootEntryItem(ACItems.copper_ingot, 7, 0 , new LootFunction[]{new SetCount(new LootCondition[0], new RandomValueRange(1, 5))}, new LootCondition[0], modid + ":copper_ingot"));
 				main.addEntry(new LootEntryItem(ACItems.tin_ingot, 7, 0 , new LootFunction[]{new SetCount(new LootCondition[0], new RandomValueRange(1, 5))}, new LootCondition[0], modid + ":tin_ingot"));
 				main.addEntry(new LootEntryItem(ACItems.crystal, 8, 0 , new LootFunction[]{new SetCount(new LootCondition[0], new RandomValueRange(1, 5)), new SetMetadata(new LootCondition[0], new RandomValueRange(24))}, new LootCondition[0], modid + ":crystallized_zinc"));
 				main.addEntry(new LootEntryItem(ACItems.abyssalnite_pickaxe, 2, 0 , new LootFunction[0], new LootCondition[0], modid + ":abyssalnite_pickaxe"));
-				main.addEntry(new LootEntryItem(ACItems.refined_coralium_pickaxe, 1, 0 , new LootFunction[0], new LootCondition[0], modid + ":refined_coralium_pickaxe"));
 				main.addEntry(new LootEntryItem(ACItems.abyssalnite_helmet, 2, 0 , new LootFunction[0], new LootCondition[0], modid + ":abyssalnite_helmet"));
 				main.addEntry(new LootEntryItem(ACItems.abyssalnite_chestplate, 2, 0 , new LootFunction[0], new LootCondition[0], modid + ":abyssalnite_chestplate"));
 				main.addEntry(new LootEntryItem(ACItems.abyssalnite_leggings, 2, 0 , new LootFunction[0], new LootCondition[0], modid + ":abyssalnite_leggings"));
@@ -411,7 +412,6 @@ public class MiscHandler implements ILifeCycleHandler {
 			LootPool main = event.getTable().getPool("main");
 			if(main != null){
 				main.addEntry(new LootEntryItem(ACItems.abyssalnite_ingot, 3, 0 , new LootFunction[]{new SetCount(new LootCondition[0], new RandomValueRange(1, 3))}, new LootCondition[0], modid + ":abyssalnite_ingot"));
-				main.addEntry(new LootEntryItem(ACItems.refined_coralium_ingot, 1, 0 , new LootFunction[0], new LootCondition[0], modid + ":refined_coralium_ingot"));
 				main.addEntry(new LootEntryItem(ACItems.copper_ingot, 7, 0 , new LootFunction[]{new SetCount(new LootCondition[0], new RandomValueRange(1, 5))}, new LootCondition[0], modid + ":copper_ingot"));
 				main.addEntry(new LootEntryItem(ACItems.tin_ingot, 7, 0 , new LootFunction[]{new SetCount(new LootCondition[0], new RandomValueRange(1, 5))}, new LootCondition[0], modid + ":tin_ingot"));
 				main.addEntry(new LootEntryItem(ACItems.crystal, 8, 0 , new LootFunction[]{new SetCount(new LootCondition[0], new RandomValueRange(1, 5)), new SetMetadata(new LootCondition[0], new RandomValueRange(24))}, new LootCondition[0], modid + ":crystallized_zinc"));
@@ -426,7 +426,6 @@ public class MiscHandler implements ILifeCycleHandler {
 			LootPool main = event.getTable().getPool("main");
 			if(main != null){
 				main.addEntry(new LootEntryItem(ACItems.abyssalnite_ingot, 3, 0 , new LootFunction[]{new SetCount(new LootCondition[0], new RandomValueRange(1, 3))}, new LootCondition[0], modid + ":abyssalnite_ingot"));
-				main.addEntry(new LootEntryItem(ACItems.refined_coralium_ingot, 1, 0 , new LootFunction[0], new LootCondition[0], modid + ":refined_coralium_ingot"));
 				main.addEntry(new LootEntryItem(ACItems.copper_ingot, 7, 0 , new LootFunction[]{new SetCount(new LootCondition[0], new RandomValueRange(1, 5))}, new LootCondition[0], modid + ":copper_ingot"));
 				main.addEntry(new LootEntryItem(ACItems.tin_ingot, 7, 0 , new LootFunction[]{new SetCount(new LootCondition[0], new RandomValueRange(1, 5))}, new LootCondition[0], modid + ":tin_ingot"));
 				main.addEntry(new LootEntryItem(ACItems.crystal, 8, 0 , new LootFunction[]{new SetCount(new LootCondition[0], new RandomValueRange(1, 5)), new SetMetadata(new LootCondition[0], new RandomValueRange(24))}, new LootCondition[0], modid + ":crystallized_zinc"));
@@ -439,7 +438,6 @@ public class MiscHandler implements ILifeCycleHandler {
 			LootPool main = event.getTable().getPool("main");
 			if(main != null){
 				main.addEntry(new LootEntryItem(ACItems.abyssalnite_ingot, 3, 0 , new LootFunction[]{new SetCount(new LootCondition[0], new RandomValueRange(1, 3))}, new LootCondition[0], modid + ":abyssalnite_ingot"));
-				main.addEntry(new LootEntryItem(ACItems.refined_coralium_ingot, 1, 0 , new LootFunction[0], new LootCondition[0], modid + ":refined_coralium_ingot"));
 				main.addEntry(new LootEntryItem(ACItems.copper_ingot, 7, 0 , new LootFunction[]{new SetCount(new LootCondition[0], new RandomValueRange(1, 5))}, new LootCondition[0], modid + ":copper_ingot"));
 				main.addEntry(new LootEntryItem(ACItems.tin_ingot, 7, 0 , new LootFunction[]{new SetCount(new LootCondition[0], new RandomValueRange(1, 5))}, new LootCondition[0], modid + ":tin_ingot"));
 				main.addEntry(new LootEntryItem(ACItems.crystal, 8, 0 , new LootFunction[]{new SetCount(new LootCondition[0], new RandomValueRange(1, 5)), new SetMetadata(new LootCondition[0], new RandomValueRange(24))}, new LootCondition[0], modid + ":crystallized_zinc"));
@@ -452,7 +450,6 @@ public class MiscHandler implements ILifeCycleHandler {
 			LootPool main = event.getTable().getPool("main");
 			if(main != null){
 				main.addEntry(new LootEntryItem(ACItems.abyssalnite_ingot, 3, 0 , new LootFunction[]{new SetCount(new LootCondition[0], new RandomValueRange(1, 3))}, new LootCondition[0], modid + ":abyssalnite_ingot"));
-				main.addEntry(new LootEntryItem(ACItems.refined_coralium_ingot, 1, 0 , new LootFunction[0], new LootCondition[0], modid + ":refined_coralium_ingot"));
 				main.addEntry(new LootEntryItem(ACItems.copper_ingot, 7, 0 , new LootFunction[]{new SetCount(new LootCondition[0], new RandomValueRange(1, 5))}, new LootCondition[0], modid + ":copper_ingot"));
 				main.addEntry(new LootEntryItem(ACItems.tin_ingot, 7, 0 , new LootFunction[]{new SetCount(new LootCondition[0], new RandomValueRange(1, 5))}, new LootCondition[0], modid + ":tin_ingot"));
 				main.addEntry(new LootEntryItem(ACItems.crystal, 8, 0 , new LootFunction[]{new SetCount(new LootCondition[0], new RandomValueRange(1, 5)), new SetMetadata(new LootCondition[0], new RandomValueRange(24))}, new LootCondition[0], modid + ":crystallized_zinc"));

@@ -269,7 +269,7 @@ public class EntityAntiCreeper extends EntityMob implements IAntiEntity {
 	protected boolean processInteract(EntityPlayer player, EnumHand p_184645_2_)
 	{
 		ItemStack stack = player.getHeldItem(p_184645_2_);
-		if (stack != null && stack.getItem() == Items.FLINT_AND_STEEL)
+		if (!stack.isEmpty() && stack.getItem() == Items.FLINT_AND_STEEL)
 		{
 			world.playSound(player, posX, posY, posZ, SoundEvents.ITEM_FLINTANDSTEEL_USE, getSoundCategory(), 1.0F, rand.nextFloat() * 0.4F + 0.8F);
 			player.swingArm(p_184645_2_);

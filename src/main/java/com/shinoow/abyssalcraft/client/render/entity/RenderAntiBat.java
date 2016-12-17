@@ -11,6 +11,7 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.client.render.entity;
 
+import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.entity.Entity;
@@ -19,8 +20,6 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-
-import org.lwjgl.opengl.GL11;
 
 import com.shinoow.abyssalcraft.client.model.entity.ModelAntiBat;
 import com.shinoow.abyssalcraft.common.entity.anti.EntityAntiBat;
@@ -57,7 +56,7 @@ public class RenderAntiBat extends RenderLiving
 
 	protected void preRenderCallback(EntityAntiBat par1EntityBat, float par2)
 	{
-		GL11.glScalef(0.35F, 0.35F, 0.35F);
+		GlStateManager.scale(0.35F, 0.35F, 0.35F);
 	}
 
 	protected void renderLivingAt(EntityAntiBat par1EntityBat, double par2, double par4, double par6)
@@ -68,9 +67,9 @@ public class RenderAntiBat extends RenderLiving
 	protected void applyRotations(EntityAntiBat par1EntityBat, float par2, float par3, float par4)
 	{
 		if (!par1EntityBat.getIsBatHanging())
-			GL11.glTranslatef(0.0F, MathHelper.cos(par2 * 0.3F) * 0.1F, 0.0F);
+			GlStateManager.translate(0.0F, MathHelper.cos(par2 * 0.3F) * 0.1F, 0.0F);
 		else
-			GL11.glTranslatef(0.0F, -0.1F, 0.0F);
+			GlStateManager.translate(0.0F, -0.1F, 0.0F);
 
 		super.applyRotations(par1EntityBat, par2, par3, par4);
 	}

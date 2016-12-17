@@ -448,6 +448,9 @@ public class ItemHandler implements ILifeCycleHandler {
 	@Override
 	public void postInit(FMLPostInitializationEvent event) {}
 
+	@Override
+	public void loadComplete(FMLLoadCompleteEvent event) {}
+
 	private static void registerItem(Item item, String name){
 		GameRegistry.register(item.setRegistryName(new ResourceLocation(AbyssalCraft.modid, name)));
 	}

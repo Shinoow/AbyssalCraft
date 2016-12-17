@@ -190,7 +190,7 @@ public class EntityDepthsGhoul extends EntityMob implements ICoraliumEntity {
 				boolean var2 = true;
 				ItemStack var3 = getItemStackFromSlot(EntityEquipmentSlot.HEAD);
 
-				if (var3 != null)
+				if (!var3.isEmpty())
 				{
 					if (var3.isItemStackDamageable())
 					{
@@ -199,7 +199,7 @@ public class EntityDepthsGhoul extends EntityMob implements ICoraliumEntity {
 						if (var3.getItemDamage() >= var3.getMaxDamage())
 						{
 							renderBrokenItemStack(var3);
-							setItemStackToSlot(EntityEquipmentSlot.HEAD, null);
+							setItemStackToSlot(EntityEquipmentSlot.HEAD, ItemStack.EMPTY);
 						}
 					}
 
@@ -242,12 +242,12 @@ public class EntityDepthsGhoul extends EntityMob implements ICoraliumEntity {
 				if(world.provider.getDimension() == ACLib.abyssal_wasteland_id && !EntityUtil.isEntityCoralium((EntityLivingBase)par1Entity)
 				|| ACConfig.shouldInfect == true && !EntityUtil.isEntityCoralium((EntityLivingBase)par1Entity))
 					((EntityLivingBase)par1Entity).addPotionEffect(new PotionEffect(AbyssalCraftAPI.coralium_plague, 100));
-			if(getHeldItemMainhand() == null && isBurning() && rand.nextFloat() < world.getDifficulty().getDifficultyId() * 0.3F)
+			if(getHeldItemMainhand().isEmpty() && isBurning() && rand.nextFloat() < world.getDifficulty().getDifficultyId() * 0.3F)
 				par1Entity.setFire(2 * world.getDifficulty().getDifficultyId());
 		}
 
 		if(ACConfig.hardcoreMode && par1Entity instanceof EntityPlayer)
-			par1Entity.attackEntityFrom(DamageSource.causeMobDamage(this).setDamageBypassesArmor(), 1.5F);
+			par1Entity.attackEntityFrom(DamageSource.causeMobDamage(this).setDamageBypassesArmor().setDamageIsAbsolute(), 1.5F * (float)(ACConfig.damageAmpl > 1.0D ? ACConfig.damageAmpl : 1));
 
 		return flag;
 	}
@@ -380,7 +380,7 @@ public class EntityDepthsGhoul extends EntityMob implements ICoraliumEntity {
 		setEquipmentBasedOnDifficulty(difficulty);
 		setEnchantmentBasedOnDifficulty(difficulty);
 
-		if (getItemStackFromSlot(EntityEquipmentSlot.HEAD) == null)
+		if (getItemStackFromSlot(EntityEquipmentSlot.HEAD).isEmpty())
 		{
 			Calendar calendar = world.getCurrentDate();
 

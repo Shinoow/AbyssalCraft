@@ -12,9 +12,11 @@
 package com.shinoow.abyssalcraft.client.render.entity;
 
 import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.client.renderer.GlStateManager.DestFactor;
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.VertexBuffer;
+import net.minecraft.client.renderer.GlStateManager.SourceFactor;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
@@ -57,7 +59,7 @@ public class RenderDragonBoss extends RenderLiving<EntityDragonBoss> {
 	 */
 	protected void preRenderScale(EntityDragonBoss par1EntityDragonMinion, float par2)
 	{
-		GL11.glScalef(scale, scale, scale);
+		GlStateManager.scale(scale, scale, scale);
 	}
 
 	/**
@@ -68,9 +70,9 @@ public class RenderDragonBoss extends RenderLiving<EntityDragonBoss> {
 	{
 		float f3 = (float)par1entitydragonboss.getMovementOffsets(7, par4)[0];
 		float f4 = (float)(par1entitydragonboss.getMovementOffsets(5, par4)[1] - par1entitydragonboss.getMovementOffsets(10, par4)[1]);
-		GL11.glRotatef(-f3, 0.0F, 1.0F, 0.0F);
-		GL11.glRotatef(f4 * 10.0F, 1.0F, 0.0F, 0.0F);
-		GL11.glTranslatef(0.0F, 0.0F, 1.0F);
+		GlStateManager.rotate(-f3, 0.0F, 1.0F, 0.0F);
+		GlStateManager.rotate(f4 * 10.0F, 1.0F, 0.0F, 0.0F);
+		GlStateManager.translate(0.0F, 0.0F, 1.0F);
 
 		if (par1entitydragonboss.deathTime > 0)
 		{
@@ -80,7 +82,7 @@ public class RenderDragonBoss extends RenderLiving<EntityDragonBoss> {
 			if (f5 > 1.0F)
 				f5 = 1.0F;
 
-			GL11.glRotatef(f5 * getDeathMaxRotation(par1entitydragonboss), 0.0F, 0.0F, 1.0F);
+			GlStateManager.rotate(f5 * getDeathMaxRotation(par1entitydragonboss), 0.0F, 0.0F, 1.0F);
 		}
 	}
 
@@ -94,7 +96,7 @@ public class RenderDragonBoss extends RenderLiving<EntityDragonBoss> {
 		{
 			float f6 = par1EntityDragonBoss.deathTicks / 200.0F;
 			GL11.glDepthFunc(GL11.GL_LEQUAL);
-			GL11.glEnable(GL11.GL_ALPHA_TEST);
+			GlStateManager.enableAlpha();
 			GL11.glAlphaFunc(GL11.GL_GREATER, f6);
 			bindTexture(field_110842_f);
 			mainModel.render(par1EntityDragonBoss, par2, par3, par4, par5, par6, par7);
@@ -108,13 +110,13 @@ public class RenderDragonBoss extends RenderLiving<EntityDragonBoss> {
 		if (par1EntityDragonBoss.hurtTime > 0)
 		{
 			GL11.glDepthFunc(GL11.GL_EQUAL);
-			GL11.glDisable(GL11.GL_TEXTURE_2D);
-			GL11.glEnable(GL11.GL_BLEND);
-			GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
-			GL11.glColor4f(1.0F, 0.0F, 0.0F, 0.5F);
+			GlStateManager.disableTexture2D();
+			GlStateManager.enableBlend();
+			GlStateManager.blendFunc(SourceFactor.SRC_ALPHA, DestFactor.ONE_MINUS_SRC_ALPHA);
+			GlStateManager.color(1.0F, 0.0F, 0.0F, 0.5F);
 			mainModel.render(par1EntityDragonBoss, par2, par3, par4, par5, par6, par7);
-			GL11.glEnable(GL11.GL_TEXTURE_2D);
-			GL11.glDisable(GL11.GL_BLEND);
+			GlStateManager.enableTexture2D();
+			GlStateManager.disableBlend();
 			GL11.glDepthFunc(GL11.GL_LEQUAL);
 		}
 	}

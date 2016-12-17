@@ -42,6 +42,7 @@ public class TileEntityGatekeeperMinionSpawner extends TileEntity implements ITi
 		if (!world.isRemote && isActivated()) {
 			EntityGatekeeperMinion mob = new EntityGatekeeperMinion(world);
 			mob.setLocationAndAngles(pos.getX(), pos.getY(), pos.getZ(), MathHelper.wrapDegrees(world.rand.nextFloat() * 360.0F), 10.0F);
+			mob.onInitialSpawn(world.getDifficultyForLocation(pos), null);
 			world.spawnEntity(mob);
 			world.setBlockToAir(pos);
 		}

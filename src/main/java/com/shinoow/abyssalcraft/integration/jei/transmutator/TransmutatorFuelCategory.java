@@ -66,13 +66,11 @@ public class TransmutatorFuelCategory extends TransmutatorRecipeCategory {
 		guiItemStacks.init(fuelSlot, true, 0, 14);
 
 		guiItemStacks.set(ingredients);
-
-		//		guiItemStacks.setFromRecipe(fuelSlot, recipeWrapper.getInputs());
 	}
 
 	@Override
 	public IDrawable getIcon() {
-		// TODO Auto-generated method stub
+
 		return null;
 	}
 }

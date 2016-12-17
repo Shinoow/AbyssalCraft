@@ -48,6 +48,7 @@ public class TileEntityJzaharSpawner extends TileEntity implements ITickable {
 		if (!world.isRemote && isActivated()) {
 			EntityJzahar mob = new EntityJzahar(world);
 			mob.setLocationAndAngles(pos.getX(), pos.getY(), pos.getZ(), MathHelper.wrapDegrees(world.rand.nextFloat() * 360.0F), 10.0F);
+			mob.onInitialSpawn(world.getDifficultyForLocation(pos), null);
 			world.spawnEntity(mob);
 			world.setBlockToAir(pos);
 			List<EntityPlayer> players = world.getEntitiesWithinAABB(EntityPlayer.class, mob.getEntityBoundingBox().expand(64, 64, 64));

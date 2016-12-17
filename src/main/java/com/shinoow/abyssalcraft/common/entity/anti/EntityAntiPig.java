@@ -137,6 +137,6 @@ public class EntityAntiPig extends EntityAnimal implements IAntiEntity {
 	@Override
 	public boolean isBreedingItem(ItemStack par1ItemStack)
 	{
-		return par1ItemStack != null && par1ItemStack.getItem() == Items.CARROT;
+		return !par1ItemStack.isEmpty() && par1ItemStack.getItem() == Items.CARROT;
 	}
 }

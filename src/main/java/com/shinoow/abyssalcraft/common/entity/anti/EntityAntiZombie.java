@@ -175,12 +175,12 @@ public class EntityAntiZombie extends EntityMob implements IAntiEntity {
 		{
 			int i = world.getDifficulty().getDifficultyId();
 
-			if (getHeldItemMainhand() == null && isBurning() && rand.nextFloat() < i * 0.3F)
+			if (getHeldItemMainhand().isEmpty() && isBurning() && rand.nextFloat() < i * 0.3F)
 				par1Entity.setFire(2 * i);
 		}
 
 		if(ACConfig.hardcoreMode && par1Entity instanceof EntityPlayer)
-			par1Entity.attackEntityFrom(DamageSource.causeMobDamage(this).setDamageBypassesArmor(), 1.5F);
+			par1Entity.attackEntityFrom(DamageSource.causeMobDamage(this).setDamageBypassesArmor().setDamageIsAbsolute(), 1.5F * (float)(ACConfig.damageAmpl > 1.0D ? ACConfig.damageAmpl : 1));
 
 		return flag;
 	}
@@ -295,7 +295,7 @@ public class EntityAntiZombie extends EntityMob implements IAntiEntity {
 			func_146070_a(true);
 		}
 
-		if (getItemStackFromSlot(EntityEquipmentSlot.HEAD) == null)
+		if (getItemStackFromSlot(EntityEquipmentSlot.HEAD).isEmpty())
 		{
 			Calendar calendar = world.getCurrentDate();
 

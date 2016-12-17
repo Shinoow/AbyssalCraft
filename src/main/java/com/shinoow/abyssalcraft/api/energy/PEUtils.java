@@ -341,7 +341,7 @@ public class PEUtils {
 	 * @param face Direction to collect from
 	 * @param amount Amount of PE to drain
 	 */
-	public static void collectNearbyPE(IEnergyRelay relay, World world, BlockPos pos, EnumFacing face, float amount){
+	public static void collectNearbyPE(IEnergyTransporter relay, World world, BlockPos pos, EnumFacing face, float amount){
 		if(relay.canAcceptPE()){
 			IEnergyCollector collector = getCollector(world, pos, face, 1);
 			if(collector != null && collector.canTransferPE())

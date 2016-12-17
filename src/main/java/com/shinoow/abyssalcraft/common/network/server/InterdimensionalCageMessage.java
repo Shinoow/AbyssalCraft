@@ -26,6 +26,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import com.shinoow.abyssalcraft.api.energy.IEnergyContainerItem;
 import com.shinoow.abyssalcraft.api.item.ACItems;
 import com.shinoow.abyssalcraft.common.network.AbstractMessage.AbstractServerMessage;
+import com.shinoow.abyssalcraft.init.InitHandler;
 
 public class InterdimensionalCageMessage extends AbstractServerMessage<InterdimensionalCageMessage> {
 
@@ -59,6 +60,7 @@ public class InterdimensionalCageMessage extends AbstractServerMessage<Interdime
 		ItemStack stack = player.getHeldItem(hand);
 		Entity e = player.world.getEntityByID(id);
 		if(e == null) return;
+		if(InitHandler.INSTANCE.isEntityBlacklisted(e)) return;
 
 		if(stack.getItem() == ACItems.interdimensional_cage && stack.getItem() instanceof IEnergyContainerItem)
 			if(e instanceof EntityLivingBase){

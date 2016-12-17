@@ -87,7 +87,7 @@ public class EntityShadowBeast extends EntityMob implements IAntiEntity, ICorali
 		boolean flag = super.attackEntityAsMob(par1Entity);
 
 		if(ACConfig.hardcoreMode && par1Entity instanceof EntityPlayer)
-			par1Entity.attackEntityFrom(DamageSource.causeMobDamage(this).setDamageBypassesArmor(), 3);
+			par1Entity.attackEntityFrom(DamageSource.causeMobDamage(this).setDamageBypassesArmor().setDamageIsAbsolute(), 3 * (float)(ACConfig.damageAmpl > 1.0D ? ACConfig.damageAmpl : 1));
 
 		return flag;
 	}
@@ -142,7 +142,7 @@ public class EntityShadowBeast extends EntityMob implements IAntiEntity, ICorali
 	{
 		par1EntityLivingData = super.onInitialSpawn(difficulty, par1EntityLivingData);
 
-		if (getItemStackFromSlot(EntityEquipmentSlot.HEAD) == null)
+		if (getItemStackFromSlot(EntityEquipmentSlot.HEAD).isEmpty())
 		{
 			Calendar calendar = world.getCurrentDate();
 

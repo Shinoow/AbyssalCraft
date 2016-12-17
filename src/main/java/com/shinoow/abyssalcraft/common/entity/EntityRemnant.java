@@ -140,7 +140,7 @@ public class EntityRemnant extends EntityMob implements IMerchant, IAntiEntity, 
 		boolean flag = super.attackEntityAsMob(par1Entity);
 
 		if(ACConfig.hardcoreMode && par1Entity instanceof EntityPlayer)
-			par1Entity.attackEntityFrom(DamageSource.causeMobDamage(this).setDamageBypassesArmor(), 3);
+			par1Entity.attackEntityFrom(DamageSource.causeMobDamage(this).setDamageBypassesArmor().setDamageIsAbsolute(), 3 * (float)(ACConfig.damageAmpl > 1.0D ? ACConfig.damageAmpl : 1));
 
 		return flag;
 	}
@@ -698,14 +698,14 @@ public class EntityRemnant extends EntityMob implements IMerchant, IAntiEntity, 
 	private boolean hasSameIDsAs(MerchantRecipe r1, MerchantRecipe r2)
 	{
 		return r1.getItemToBuy().getItem() == r2.getItemToBuy().getItem() && r1.getItemToSell().getItem() == r2.getItemToSell().getItem() ?
-				r1.getSecondItemToBuy() == null && r2.getSecondItemToBuy() == null || r1.getSecondItemToBuy() != null && r2.getSecondItemToBuy() != null
+				r1.getSecondItemToBuy().isEmpty() && r2.getSecondItemToBuy().isEmpty() || !r1.getSecondItemToBuy().isEmpty() && !r2.getSecondItemToBuy().isEmpty()
 				&& r1.getSecondItemToBuy().getItem() == r2.getSecondItemToBuy().getItem() : false;
 	}
 
 	private boolean hasSameItemsAs(MerchantRecipe r1, MerchantRecipe r2)
 	{
 		return hasSameIDsAs(r1, r2) && (r1.getItemToBuy().getCount() < r2.getItemToBuy().getCount() ||
-				r1.getSecondItemToBuy() != null && r1.getSecondItemToBuy().getCount() < r2.getSecondItemToBuy().getCount());
+				!r1.getSecondItemToBuy().isEmpty() && r1.getSecondItemToBuy().getCount() < r2.getSecondItemToBuy().getCount());
 	}
 
 	/****************** END OF VANILLA CODE FROM 1.7.10 ******************/
@@ -765,7 +765,7 @@ public class EntityRemnant extends EntityMob implements IMerchant, IAntiEntity, 
 		{
 			livingSoundTime = -getTalkInterval();
 
-			if (par1ItemStack != null)
+			if (!par1ItemStack.isEmpty())
 				playSound(ACSounds.remnant_yes, getSoundVolume(), getSoundPitch());
 			else
 				playSound(ACSounds.remnant_no, getSoundVolume(), getSoundPitch());
@@ -781,7 +781,7 @@ public class EntityRemnant extends EntityMob implements IMerchant, IAntiEntity, 
 	}
 
 	public void addCoinTrade(MerchantRecipeList list, ItemStack buy, ItemStack sell){
-		addCoinTrade(list, buy, (ItemStack)null, sell);
+		addCoinTrade(list, buy, ItemStack.EMPTY, sell);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -794,7 +794,7 @@ public class EntityRemnant extends EntityMob implements IMerchant, IAntiEntity, 
 		data = super.onInitialSpawn(difficulty, data);
 		applyRandomTrade(world.rand);
 
-		if (getItemStackFromSlot(EntityEquipmentSlot.HEAD) == null)
+		if (getItemStackFromSlot(EntityEquipmentSlot.HEAD).isEmpty())
 		{
 			Calendar calendar = world.getCurrentDate();
 

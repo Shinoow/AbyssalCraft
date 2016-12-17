@@ -50,9 +50,9 @@ public class WorldHandler implements ILifeCycleHandler {
 		ACBiomes.dreadlands_forest = new BiomeGenForestDreadlands(new BiomeProperties("Dreadlands Forest").setRainDisabled());
 		ACBiomes.dreadlands_mountains = new BiomeGenMountainDreadlands(new BiomeProperties("Dreadlands Mountains").setBaseHeight(1.3F).setHeightVariation(0.9F).setRainDisabled());
 		ACBiomes.darklands_forest = new BiomeGenDarklandsForest(new BiomeProperties("Darklands Forest").setWaterColor(14745518));
-		ACBiomes.darklands_plains = new BiomeGenDarklandsPlains(new BiomeProperties("Darklands Plains").setWaterColor(14745518).setRainDisabled());
+		ACBiomes.darklands_plains = new BiomeGenDarklandsPlains(new BiomeProperties("Darklands Plains").setWaterColor(14745518));
 		ACBiomes.darklands_hills = new BiomeGenDarklandsHills(new BiomeProperties("Darklands Highland").setWaterColor(14745518).setBaseHeight(1.1F).setHeightVariation(0.5F));
-		ACBiomes.darklands_mountains = new BiomeGenDarklandsMountains(new BiomeProperties("Darklands Mountains").setWaterColor(14745518).setBaseHeight(1.3F).setHeightVariation(0.9F).setRainDisabled());
+		ACBiomes.darklands_mountains = new BiomeGenDarklandsMountains(new BiomeProperties("Darklands Mountains").setWaterColor(14745518).setBaseHeight(1.3F).setHeightVariation(0.9F));
 		ACBiomes.coralium_infested_swamp = new BiomeGenCorSwamp(new BiomeProperties("Coralium Infested Swamp").setWaterColor(0x24FF83).setBaseHeight(-0.2F).setHeightVariation(0.1F));
 		ACBiomes.omothol = new BiomeGenOmothol(new BiomeProperties("Omothol").setWaterColor(14745518).setRainDisabled());
 		ACBiomes.dark_realm = new BiomeGenDarkRealm(new BiomeProperties("Dark Realm").setWaterColor(14745518).setRainDisabled());
@@ -98,13 +98,13 @@ public class WorldHandler implements ILifeCycleHandler {
 		GameRegistry.register(ACBiomes.omothol.setRegistryName(new ResourceLocation(modid, "omothol")));
 		GameRegistry.register(ACBiomes.dark_realm.setRegistryName(new ResourceLocation(modid, "dark_realm")));
 
-		BiomeDictionary.registerBiomeType(ACBiomes.abyssal_wastelands, Type.DEAD);
-		BiomeDictionary.registerBiomeType(ACBiomes.dreadlands, Type.DEAD);
-		BiomeDictionary.registerBiomeType(ACBiomes.purified_dreadlands, Type.DEAD);
-		BiomeDictionary.registerBiomeType(ACBiomes.dreadlands_mountains, Type.DEAD);
-		BiomeDictionary.registerBiomeType(ACBiomes.dreadlands_forest, Type.DEAD);
-		BiomeDictionary.registerBiomeType(ACBiomes.omothol, Type.DEAD);
-		BiomeDictionary.registerBiomeType(ACBiomes.dark_realm, Type.DEAD);
+		BiomeDictionary.addTypes(ACBiomes.abyssal_wastelands, Type.DEAD);
+		BiomeDictionary.addTypes(ACBiomes.dreadlands, Type.DEAD);
+		BiomeDictionary.addTypes(ACBiomes.purified_dreadlands, Type.DEAD);
+		BiomeDictionary.addTypes(ACBiomes.dreadlands_mountains, Type.DEAD);
+		BiomeDictionary.addTypes(ACBiomes.dreadlands_forest, Type.DEAD);
+		BiomeDictionary.addTypes(ACBiomes.omothol, Type.DEAD);
+		BiomeDictionary.addTypes(ACBiomes.dark_realm, Type.DEAD);
 
 		ACLib.THE_ABYSSAL_WASTELAND = DimensionType.register("The Abyssal Wasteland", "_aw", ACLib.abyssal_wasteland_id, WorldProviderAbyss.class, ACConfig.keepLoaded1);
 		ACLib.THE_DREADLANDS = DimensionType.register("The Dreadlands", "_dl", ACLib.dreadlands_id, WorldProviderDreadlands.class, ACConfig.keepLoaded2);
@@ -129,7 +129,10 @@ public class WorldHandler implements ILifeCycleHandler {
 	}
 
 	@Override
-	public void postInit(FMLPostInitializationEvent event) {
+	public void postInit(FMLPostInitializationEvent event) {}
+
+	@Override
+	public void loadComplete(FMLLoadCompleteEvent event) {
 		if(ACConfig.purgeMobSpawns){
 			((BiomeGenAbywasteland) ACBiomes.abyssal_wastelands).setMobSpawns();
 			((BiomeGenDreadlands) ACBiomes.dreadlands).setMobSpawns();
@@ -143,7 +146,7 @@ public class WorldHandler implements ILifeCycleHandler {
 
 	private static void registerBiomeWithTypes(Biome biome, String name, int weight, BiomeType btype, Type...types){
 		GameRegistry.register(biome.setRegistryName(new ResourceLocation(modid, name)));
-		BiomeDictionary.registerBiomeType(biome, types);
+		BiomeDictionary.addTypes(biome, types);
 		BiomeManager.addBiome(btype, new BiomeEntry(biome, weight));
 	}
 }

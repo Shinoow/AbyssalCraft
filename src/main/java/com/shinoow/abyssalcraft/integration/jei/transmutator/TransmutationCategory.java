@@ -70,14 +70,11 @@ public class TransmutationCategory extends TransmutatorRecipeCategory {
 		guiItemStacks.init(outputSlot, false, 60, 18);
 
 		guiItemStacks.set(ingredients);
-
-		//		guiItemStacks.setFromRecipe(inputSlot, recipeWrapper.getInputs());
-		//		guiItemStacks.setFromRecipe(outputSlot, recipeWrapper.getOutputs());
 	}
 
 	@Override
 	public IDrawable getIcon() {
-		// TODO Auto-generated method stub
+
 		return null;
 	}
 }

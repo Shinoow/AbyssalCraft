@@ -11,49 +11,32 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.common.items;
 
-import java.util.Set;
-
-import net.minecraft.block.Block;
-import net.minecraft.block.material.Material;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.init.Blocks;
+import net.minecraft.item.ItemAxe;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.ItemTool;
 import net.minecraft.util.text.TextFormatting;
 
-import com.google.common.collect.Sets;
+import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
 import com.shinoow.abyssalcraft.lib.ACTabs;
 
-public class ItemACAxe extends ItemTool {
+public class ItemACAxe extends ItemAxe {
 
 	private TextFormatting format;
-
-	private static final Set<Block> EFFECTIVE_ON = Sets.newHashSet(new Block[] {Blocks.PLANKS, Blocks.BOOKSHELF, Blocks.LOG, Blocks.LOG2, Blocks.CHEST, Blocks.PUMPKIN, Blocks.LIT_PUMPKIN, Blocks.MELON_BLOCK, Blocks.LADDER, Blocks.WOODEN_BUTTON, Blocks.WOODEN_PRESSURE_PLATE});
 
 	public ItemACAxe(ToolMaterial mat, String name, int harvestlevel){
 		this(mat, name, harvestlevel, null);
 	}
 
 	public ItemACAxe(ToolMaterial mat, String name, int harvestlevel, TextFormatting format) {
-		super(mat, EFFECTIVE_ON);
+		super(mat, mat == AbyssalCraftAPI.darkstoneTool ? 8 : mat.getDamageVsEntity() + 5, -3.0F);
 		setCreativeTab(ACTabs.tabTools);
 		setHarvestLevel("axe", harvestlevel);
 		setUnlocalizedName(name);
 		this.format = format;
-		damageVsEntity = mat.getDamageVsEntity();
-		attackSpeed = -3.0F;
 	}
 
 	@Override
 	public String getItemStackDisplayName(ItemStack par1ItemStack) {
 
 		return format != null ? format + super.getItemStackDisplayName(par1ItemStack) : super.getItemStackDisplayName(par1ItemStack);
-	}
-
-	@Override
-	public float getStrVsBlock(ItemStack stack, IBlockState state)
-	{
-		Material material = state.getMaterial();
-		return material != Material.WOOD && material != Material.PLANTS && material != Material.VINE ? super.getStrVsBlock(stack, state) : efficiencyOnProperMaterial;
 	}
 }

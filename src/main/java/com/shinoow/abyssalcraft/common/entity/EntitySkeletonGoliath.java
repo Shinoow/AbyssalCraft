@@ -97,7 +97,7 @@ public class EntitySkeletonGoliath extends EntityMob {
 	public boolean attackEntityAsMob(Entity par1Entity)
 	{
 		if(ACConfig.hardcoreMode && par1Entity instanceof EntityPlayer)
-			par1Entity.attackEntityFrom(DamageSource.causeMobDamage(this).setDamageBypassesArmor(), 3);
+			par1Entity.attackEntityFrom(DamageSource.causeMobDamage(this).setDamageBypassesArmor().setDamageIsAbsolute(), 3 * (float)(ACConfig.damageAmpl > 1.0D ? ACConfig.damageAmpl : 1));
 
 		return super.attackEntityAsMob(par1Entity);
 	}
@@ -142,7 +142,7 @@ public class EntitySkeletonGoliath extends EntityMob {
 	public ItemStack getHeldItem(EnumHand hand){
 		if(hand == EnumHand.MAIN_HAND)
 			return new ItemStack(ACItems.cudgel);
-		return null;
+		return super.getHeldItem(hand);
 
 	}
 
@@ -169,7 +169,7 @@ public class EntitySkeletonGoliath extends EntityMob {
 				boolean flag = true;
 				ItemStack var3 = getItemStackFromSlot(EntityEquipmentSlot.HEAD);
 
-				if (var3 != null)
+				if (!var3.isEmpty())
 				{
 					if (var3.isItemStackDamageable())
 					{
@@ -178,7 +178,7 @@ public class EntitySkeletonGoliath extends EntityMob {
 						if (var3.getItemDamage() >= var3.getMaxDamage())
 						{
 							renderBrokenItemStack(var3);
-							setItemStackToSlot(EntityEquipmentSlot.HEAD, null);
+							setItemStackToSlot(EntityEquipmentSlot.HEAD, ItemStack.EMPTY);
 						}
 					}
 
@@ -196,7 +196,7 @@ public class EntitySkeletonGoliath extends EntityMob {
 	{
 		par1EntityLivingData = super.onInitialSpawn(difficulty, par1EntityLivingData);
 
-		if (getItemStackFromSlot(EntityEquipmentSlot.HEAD) == null)
+		if (getItemStackFromSlot(EntityEquipmentSlot.HEAD).isEmpty())
 		{
 			Calendar calendar = world.getCurrentDate();
 

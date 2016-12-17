@@ -410,7 +410,7 @@ necronomicon.text.crafting.dreadium.2=Cuando tengas suficientes Lingotes de Drea
 necronomicon.text.crafting.monolithpillar.1=Un Pilar de Piedra de Monolito se hace a mano con Piedra de Monolito.Su uso principal es ampliar la gama de manipuladores de la energía potencial (estatuas, por ejemplo).
 necronomicon.text.crafting.ritualcharm.1=Un ritual de encanto se hace con los lingotes de oro y un diamante.Por sí mismo no tiene ningún efecto,pero a través de los rituales puede amplificar varias estadísticas de manipuladores de la energía potencial.
 necronomicon.text.crafting.sacrificialaltar.1=Un altar de sacrificio se hace con antorchas,Piedra de Monolito,una Gema Oscura y una Perla de Coralium.Convierten la fuerza vital en energía potencial.
-necronomicon.text.crafting.sacrificialaltar.2=Cuando es concentrado en una entidad,emitirá partículas de humo.Una vez que la entidad muere,una cantidad de EP al igual que se recogerá la salud máxima.Que sólo se refiere a las entidades de adultos no-muertos que no son jugadores.Cabe señalar que el altar va en un tiempo de reutilización después de recoger una cierta cantidad de EP,cuyo tiempo es de un minuto.
+necronomicon.text.crafting.sacrificialaltar.2=When a entity is targeted, it will emit smoke particles. Once the entity dies, an amount of PE equal to it's max health will be collected. It only targets non-undead adult entities that aren't players. It should be noted that the altar goes on a cooldown after collecting a fifth of it's max capacity, preventing collection for a minute.
 necronomicon.text.crafting.energycollector=A Energy Collector is crafted with Monolith Stone and a Shadow Gem. They can collect PE, but require a Energy Relay to transport it.
 necronomicon.text.crafting.energyrelay=A Energy Relay is crafted with Monolith Stone, Shadow Gem Shards and a Shadow Gem. They can be used to transport PE between blocks capable of storing it.
 
@@ -509,6 +509,8 @@ necronomicon.text.entity.shadowtitan.1=Los Titanes Oscuros son habitantes del Re
 necronomicon.text.entity.shadowtitan.2=Los Titanes Oscuros son poderosas sombras de vida de itinerancia en El Reino Oscuro.En comparación con la Bestia Oscura,Los Titanes Oscuros son blindados,y más potentes.
 necronomicon.text.entity.sacthoth.1=Sacthoth,mensajero de la muerte se encuentra en El Reino de la Oscuridad.
 necronomicon.text.entity.sacthoth.2=Sacthoth es el ser más fuerte en El Reino de la Oscuridad,y el gobernante de las sombras vivas.La única manera de que se fuese del Reino de La Oscuridad es a través de la explosión de una Bomba del Olvido.Él lleva una espada poderosa capaz de arrancar las almas de los vivos.
+necronomicon.text.entity.coraliumsquid.1=Coralium Infested Squids are found in pools of Liquid Coralium inside the Abyssal Wasteland.
+necronomicon.text.entity.coraliumsquid.2=These Squids have been transformed by the Coralium Plague, enabling them to transfer it to victims touched by them, or the ink they squirt on their targets.
 
 necronomicon.text.rituals.info=Compruebe la sección de información para obtener información sobre los rituales,o las otras secciones para obtener información acerca de los rituales disponibles."Lugar" especifica dónde se puede realizar el ritual.
 
@@ -1304,6 +1306,7 @@ entity.abyssalcraft.demoncow.name=Vaca Demonio
 entity.abyssalcraft.demonchicken.name=Pollo Demonio
 entity.abyssalcraft.evilsheep.name=Sheep
 entity.abyssalcraft.demonsheep.name=Demon Sheep
+entity.abyssalcraft.coraliumsquid.name=Coralium Infested Squid
 
 #Potions
 potion.Cplague=Plaga de Coralium

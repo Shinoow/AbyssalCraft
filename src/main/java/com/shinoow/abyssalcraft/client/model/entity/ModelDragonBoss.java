@@ -13,12 +13,12 @@ package com.shinoow.abyssalcraft.client.model.entity;
 
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
+import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.client.renderer.GlStateManager.CullFace;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-
-import org.lwjgl.opengl.GL11;
 
 import com.shinoow.abyssalcraft.common.entity.EntityDragonBoss;
 
@@ -127,14 +127,14 @@ public class ModelDragonBoss extends ModelBase {
 	@Override
 	public void render(Entity par1Entity, float par2, float par3, float par4, float par5, float par6, float par7)
 	{
-		GL11.glPushMatrix();
+		GlStateManager.pushMatrix();
 		EntityDragonBoss entitydragon = (EntityDragonBoss)par1Entity;
 		float f6 = entitydragon.prevAnimTime + (entitydragon.animTime - entitydragon.prevAnimTime) * partialTicks;
 		jaw.rotateAngleX = (float)(Math.sin(f6 * (float)Math.PI * 2.0F) + 1.0D) * 0.2F;
 		float f7 = (float)(Math.sin(f6 * (float)Math.PI * 2.0F - 1.0F) + 1.0D);
 		f7 = (f7 * f7 * 1.0F + f7 * 2.0F) * 0.05F;
-		GL11.glTranslatef(0.0F, f7 - 2.0F, -3.0F);
-		GL11.glRotatef(f7 * 2.0F, 1.0F, 0.0F, 0.0F);
+		GlStateManager.translate(0.0F, f7 - 2.0F, -3.0F);
+		GlStateManager.rotate(f7 * 2.0F, 1.0F, 0.0F, 0.0F);
 		float f8 = -30.0F;
 		float f9 = 0.0F;
 		float f10 = 1.5F;
@@ -170,16 +170,16 @@ public class ModelDragonBoss extends ModelBase {
 		head.rotateAngleY = updateRotations(adouble2[0] - adouble[0]) * (float)Math.PI / 180.0F * 1.0F;
 		head.rotateAngleZ = -updateRotations(adouble2[0] - f12) * (float)Math.PI / 180.0F * 1.0F;
 		head.render(par7);
-		GL11.glPushMatrix();
-		GL11.glTranslatef(0.0F, 1.0F, 0.0F);
-		GL11.glRotatef(-f11 * f10 * 1.0F, 0.0F, 0.0F, 1.0F);
-		GL11.glTranslatef(0.0F, -1.0F, 0.0F);
+		GlStateManager.pushMatrix();
+		GlStateManager.translate(0.0F, 1.0F, 0.0F);
+		GlStateManager.rotate(-f11 * f10 * 1.0F, 0.0F, 0.0F, 1.0F);
+		GlStateManager.translate(0.0F, -1.0F, 0.0F);
 		body.rotateAngleZ = 0.0F;
 		body.render(par7);
 
 		for (int j = 0; j < 2; ++j)
 		{
-			GL11.glEnable(GL11.GL_CULL_FACE);
+			GlStateManager.enableCull();
 			f15 = f6 * (float)Math.PI * 2.0F;
 			wing.rotateAngleX = 0.125F - (float)Math.cos(f15) * 0.2F;
 			wing.rotateAngleY = 0.25F;
@@ -194,15 +194,15 @@ public class ModelDragonBoss extends ModelBase {
 			wing.render(par7);
 			frontLeg.render(par7);
 			rearLeg.render(par7);
-			GL11.glScalef(-1.0F, 1.0F, 1.0F);
+			GlStateManager.scale(-1.0F, 1.0F, 1.0F);
 
 			if (j == 0)
-				GL11.glCullFace(GL11.GL_FRONT);
+				GlStateManager.cullFace(CullFace.FRONT);
 		}
 
-		GL11.glPopMatrix();
-		GL11.glCullFace(GL11.GL_BACK);
-		GL11.glDisable(GL11.GL_CULL_FACE);
+		GlStateManager.popMatrix();
+		GlStateManager.cullFace(CullFace.BACK);
+		GlStateManager.disableCull();
 		float f16 = -((float)Math.sin(f6 * (float)Math.PI * 2.0F)) * 0.0F;
 		f13 = f6 * (float)Math.PI * 2.0F;
 		f8 = 10.0F;
@@ -226,7 +226,7 @@ public class ModelDragonBoss extends ModelBase {
 			neck.render(par7);
 		}
 
-		GL11.glPopMatrix();
+		GlStateManager.popMatrix();
 	}
 
 	/**

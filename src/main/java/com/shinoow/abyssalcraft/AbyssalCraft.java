@@ -75,6 +75,12 @@ public class AbyssalCraft {
 	}
 
 	@EventHandler
+	public void loadComplete(FMLLoadCompleteEvent event){
+		for(ILifeCycleHandler handler : handlers)
+			handler.loadComplete(event);
+	}
+
+	@EventHandler
 	public void serverStart(FMLServerAboutToStartEvent event){
 		InitHandler.INSTANCE.serverStart(event);
 	}

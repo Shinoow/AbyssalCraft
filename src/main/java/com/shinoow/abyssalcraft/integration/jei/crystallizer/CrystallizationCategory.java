@@ -71,9 +71,6 @@ public class CrystallizationCategory extends CrystallizerRecipeCategory {
 		guiItemStacks.init(outputSlot2, false, 77, 18);
 
 		guiItemStacks.set(ingredients);
-		//		guiItemStacks.setFromRecipe(inputSlot, recipeWrapper.getInputs());
-		//		guiItemStacks.setFromRecipe(outputSlot, recipeWrapper.getOutputs().get(0));
-		//		guiItemStacks.setFromRecipe(outputSlot2, recipeWrapper.getOutputs().get(1));
 	}
 
 	@Override

@@ -55,7 +55,7 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 /**
  * Main API class for AbyssalCraft, has child classes for most features.<br>
  * Check {@link IMCHelper} for InterModComms registration
- * 
+ *
  * @author shinoow
  *
  */
@@ -64,7 +64,7 @@ public class AbyssalCraftAPI {
 	/**
 	 * String used to specify the API version in the "package-info.java" classes
 	 */
-	public static final String API_VERSION = "1.8.7";
+	public static final String API_VERSION = "1.8.8";
 
 	public static Enchantment coralium_enchantment, dread_enchantment, light_pierce, iron_wall;
 
@@ -75,7 +75,7 @@ public class AbyssalCraftAPI {
 
 	public static DamageSource coralium = new DamageSource("coralium").setDamageBypassesArmor().setMagicDamage();
 	public static DamageSource dread = new DamageSource("dread").setDamageBypassesArmor().setMagicDamage();
-	public static DamageSource antimatter = new DamageSource("antimatter").setDamageBypassesArmor().setMagicDamage();
+	public static DamageSource antimatter = new DamageSource("antimatter").setDamageBypassesArmor().setDamageIsAbsolute().setMagicDamage();
 
 	private static List<Block> shoggothBlockBlacklist = Lists.newArrayList();
 
@@ -158,14 +158,14 @@ public class AbyssalCraftAPI {
 	 */
 	public static void setRepairItems(){
 
-		abyssalniteArmor.customCraftingMaterial = ACItems.abyssalnite_ingot;
-		dreadedAbyssalniteArmor.customCraftingMaterial = ACItems.dreaded_shard_of_abyssalnite;
-		refinedCoraliumArmor.customCraftingMaterial = ACItems.refined_coralium_ingot;
-		platedCoraliumArmor.customCraftingMaterial = ACItems.coralium_plate;
-		depthsArmor.customCraftingMaterial = ACItems.coralium_gem_cluster_9;
-		dreadiumArmor.customCraftingMaterial = ACItems.dreadium_ingot;
-		dreadiumSamuraiArmor.customCraftingMaterial = ACItems.dreadium_plate;
-		ethaxiumArmor.customCraftingMaterial = ACItems.ethaxium_ingot;
+		abyssalniteArmor.setRepairItem(new ItemStack(ACItems.abyssalnite_ingot));
+		dreadedAbyssalniteArmor.setRepairItem(new ItemStack(ACItems.dreaded_shard_of_abyssalnite));
+		refinedCoraliumArmor.setRepairItem(new ItemStack(ACItems.refined_coralium_ingot));
+		platedCoraliumArmor.setRepairItem(new ItemStack(ACItems.coralium_plate));
+		depthsArmor.setRepairItem(new ItemStack(ACItems.coralium_gem_cluster_9));
+		dreadiumArmor.setRepairItem(new ItemStack(ACItems.dreadium_ingot));
+		dreadiumSamuraiArmor.setRepairItem(new ItemStack(ACItems.dreadium_plate));
+		ethaxiumArmor.setRepairItem(new ItemStack(ACItems.ethaxium_ingot));
 
 		darkstoneTool.setRepairItem(new ItemStack(ACBlocks.darkstone_cobblestone));
 		abyssalniteTool.setRepairItem(new ItemStack(ACItems.abyssalnite_ingot));

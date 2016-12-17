@@ -12,12 +12,11 @@
 package com.shinoow.abyssalcraft.client.render.block;
 
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
-
-import org.lwjgl.opengl.GL11;
 
 import com.shinoow.abyssalcraft.client.model.block.ModelJzaharSpawner;
 
@@ -29,16 +28,16 @@ public class TileEntityJzaharSpawnerRenderer extends TileEntitySpecialRenderer {
 	@Override
 	public void renderTileEntityAt(TileEntity te, double x, double y, double z, float partialTicks, int destroyStage) {
 
-		GL11.glPushMatrix();
-		GL11.glTranslatef((float) x + 0.675F, (float) y + 0.9F, (float) z + 0.5F);
-		GL11.glPushMatrix();
-		GL11.glRotatef(180F, 0.0F, 0.0F, 1.0F);
-		GL11.glScalef(1.5F, 1.5F, 1.5F);
+		GlStateManager.pushMatrix();
+		GlStateManager.translate((float) x + 0.675F, (float) y + 0.9F, (float) z + 0.5F);
+		GlStateManager.pushMatrix();
+		GlStateManager.rotate(180F, 0.0F, 0.0F, 1.0F);
+		GlStateManager.scale(1.5F, 1.5F, 1.5F);
 
 		Minecraft.getMinecraft().renderEngine.bindTexture(texture);
 		model.render((Entity)null, 0.0F, 0.0F, 8.0F, 0.0F, 0.0F, 0.0625F);
 
-		GL11.glPopMatrix();
-		GL11.glPopMatrix();
+		GlStateManager.popMatrix();
+		GlStateManager.popMatrix();
 	}
 }

@@ -48,6 +48,7 @@ public class BlockCLiquid extends BlockFluidClassic {
 	List<IBlockState> stones = Lists.newArrayList();
 	List<IBlockState> bricks = Lists.newArrayList();
 	List<IBlockState> metals = Lists.newArrayList();
+	List<IBlockState> cobble = Lists.newArrayList();
 
 	public BlockCLiquid() {
 		super(AbyssalCraftAPI.liquid_coralium_fluid, Material.WATER);
@@ -64,8 +65,8 @@ public class BlockCLiquid extends BlockFluidClassic {
 			return true;
 		if(world.getBlockState(pos).getBlock() == Blocks.LAVA)
 			return true;
-		else if(dusts.contains(world.getBlockState(pos).getBlock()) || metalloids.contains(world.getBlockState(pos).getBlock()) || gems.contains(world.getBlockState(pos).getBlock()) ||
-				stones.contains(world.getBlockState(pos).getBlock()) || bricks.contains(world.getBlockState(pos).getBlock()))
+		else if(dusts.contains(world.getBlockState(pos)) || metalloids.contains(world.getBlockState(pos)) || gems.contains(world.getBlockState(pos)) ||
+				stones.contains(world.getBlockState(pos)) || bricks.contains(world.getBlockState(pos)) || cobble.contains(world.getBlockState(pos)))
 			return true;
 		return super.canDisplace(world, pos);
 	}
@@ -82,7 +83,7 @@ public class BlockCLiquid extends BlockFluidClassic {
 						&& world.getBlockState(new BlockPos(pos.getX(), pos.getY()+1, pos.getZ())).getBlock() != this && world.getBlockState(new BlockPos(pos.getX(), pos.getY()+1, pos.getZ())).getBlock() != ACBlocks.liquid_antimatter)
 					world.setBlockState(new BlockPos(pos.getX(), pos.getY()+1, pos.getZ()), getDefaultState());
 			} else {
-				if(BiomeDictionary.isBiomeOfType(world.getBiome(pos), Type.OCEAN) && world.getBlockState(pos).getBlock() == this)
+				if(BiomeDictionary.hasType(world.getBiome(pos), Type.OCEAN) && world.getBlockState(pos).getBlock() == this)
 					if(ACConfig.destroyOcean)
 						world.setBlockState(pos, getDefaultState());
 					else world.setBlockState(pos, Blocks.COBBLESTONE.getDefaultState());
@@ -115,12 +116,14 @@ public class BlockCLiquid extends BlockFluidClassic {
 					world.setBlockState(pos, ACBlocks.abyssal_diamond_ore.getDefaultState());
 				else world.setBlockState(pos, ACBlocks.pearlescent_coralium_ore.getDefaultState());
 			else if(stones.contains(world.getBlockState(pos)))
-				if(BiomeDictionary.isBiomeOfType(world.getBiome(pos), Type.OCEAN)){
-					if(world.getBlockState(pos).getBlock() != Blocks.COBBLESTONE)
-						world.setBlockState(pos, ACBlocks.abyssal_stone.getDefaultState());
-				}else world.setBlockState(pos, ACBlocks.abyssal_stone.getDefaultState());
+				world.setBlockState(pos, ACBlocks.abyssal_stone.getDefaultState());
 			else if(bricks.contains(world.getBlockState(pos)))
 				world.setBlockState(pos, ACBlocks.abyssal_stone_brick.getDefaultState());
+			else if(cobble.contains(world.getBlockState(pos)))
+				if(BiomeDictionary.hasType(world.getBiome(pos), Type.OCEAN)){
+					if(world.getBlockState(pos).getBlock() != Blocks.COBBLESTONE)
+						world.setBlockState(pos, ACBlocks.abyssal_cobblestone.getDefaultState());
+				}else world.setBlockState(pos, ACBlocks.abyssal_cobblestone.getDefaultState());
 		}
 		return super.displaceIfPossible(world, pos);
 	}
@@ -184,18 +187,11 @@ public class BlockCLiquid extends BlockFluidClassic {
 		stones.addAll(oresToBlocks(OreDictionary.getOres("stoneAndesite")));
 		stones.addAll(oresToBlocks(OreDictionary.getOres("stoneAndesitePolished")));
 		stones.addAll(oresToBlocks(OreDictionary.getOres("sandstone")));
-		stones.addAll(oresToBlocks(OreDictionary.getOres("cobblestone")));
-		stones.add(Blocks.MOSSY_COBBLESTONE.getDefaultState());
 		stones.add(Blocks.NETHERRACK.getDefaultState());
 		stones.add(Blocks.END_STONE.getDefaultState());
 		stones.add(ACBlocks.darkstone.getDefaultState());
 		stones.add(ACBlocks.abyssalnite_stone.getDefaultState());
 		stones.add(ACBlocks.dreadstone.getDefaultState());
-		stones.add(ACBlocks.darkstone_cobblestone.getDefaultState());
-		stones.add(ACBlocks.abyssal_cobblestone.getDefaultState());
-		stones.add(ACBlocks.dreadstone_cobblestone.getDefaultState());
-		stones.add(ACBlocks.abyssalnite_cobblestone.getDefaultState());
-		stones.add(ACBlocks.coralium_cobblestone.getDefaultState());
 		bricks.add(Blocks.STONEBRICK.getStateFromMeta(0));
 		bricks.add(Blocks.STONEBRICK.getStateFromMeta(1));
 		bricks.add(Blocks.STONEBRICK.getStateFromMeta(2));
@@ -210,10 +206,18 @@ public class BlockCLiquid extends BlockFluidClassic {
 		bricks.add(ACBlocks.dreadstone_brick.getDefaultState());
 		bricks.add(ACBlocks.dreadstone_brick.getStateFromMeta(1));
 		bricks.add(ACBlocks.dreadstone_brick.getStateFromMeta(2));
+		bricks.add(Blocks.END_BRICKS.getDefaultState());
+		bricks.add(Blocks.RED_NETHER_BRICK.getDefaultState());
 		metals.add(ACBlocks.abyssal_iron_ore.getDefaultState());
 		metals.add(ACBlocks.abyssal_gold_ore.getDefaultState());
 		metals.add(ACBlocks.abyssal_copper_ore.getDefaultState());
 		metals.add(ACBlocks.abyssal_tin_ore.getDefaultState());
 		metals.add(ACBlocks.liquified_coralium_ore.getDefaultState());
+		cobble.addAll(oresToBlocks(OreDictionary.getOres("cobblestone")));
+		cobble.add(Blocks.MOSSY_COBBLESTONE.getDefaultState());
+		cobble.add(ACBlocks.darkstone_cobblestone.getDefaultState());
+		cobble.add(ACBlocks.abyssal_cobblestone.getDefaultState());
+		cobble.add(ACBlocks.dreadstone_cobblestone.getDefaultState());
+		cobble.add(ACBlocks.abyssalnite_cobblestone.getDefaultState());
 	}
 }

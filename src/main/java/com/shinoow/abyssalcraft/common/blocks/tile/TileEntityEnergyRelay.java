@@ -22,11 +22,11 @@ import net.minecraft.util.math.Vec3d;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.api.energy.IEnergyContainer;
-import com.shinoow.abyssalcraft.api.energy.IEnergyRelay;
+import com.shinoow.abyssalcraft.api.energy.IEnergyTransporter;
 import com.shinoow.abyssalcraft.api.energy.PEUtils;
 import com.shinoow.abyssalcraft.common.blocks.BlockEnergyRelay;
 
-public class TileEntityEnergyRelay extends TileEntity implements IEnergyRelay, ITickable {
+public class TileEntityEnergyRelay extends TileEntity implements IEnergyTransporter, ITickable {
 
 	private float energy;
 	private int ticksExisted;

@@ -11,6 +11,7 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.common.items;
 
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
@@ -18,6 +19,7 @@ import net.minecraft.init.Items;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.world.World;
 
 import com.google.common.collect.Multimap;
 import com.shinoow.abyssalcraft.lib.ACTabs;
@@ -26,7 +28,7 @@ public class ItemCudgel extends Item {
 
 	public ItemCudgel(){
 		super();
-		setMaxDamage(2000);
+		setMaxDamage(1500);
 		setMaxStackSize(1);
 		setUnlocalizedName("cudgel");
 		setCreativeTab(ACTabs.tabCombat);
@@ -47,6 +49,12 @@ public class ItemCudgel extends Item {
 	}
 
 	@Override
+	public void onUpdate(ItemStack stack, World worldIn, Entity entityIn, int itemSlot, boolean isSelected){
+		if(stack.isItemEnchanted())
+			stack.getTagCompound().removeTag("ench");
+	}
+
+	@Override
 	public boolean getIsRepairable(ItemStack par1ItemStack, ItemStack par2ItemStack)
 	{
 		return Items.BONE == par2ItemStack.getItem() ? true : super.getIsRepairable(par1ItemStack, par2ItemStack);
@@ -59,7 +67,7 @@ public class ItemCudgel extends Item {
 
 		if (equipmentSlot == EntityEquipmentSlot.MAINHAND)
 		{
-			multimap.put(SharedMonsterAttributes.ATTACK_DAMAGE.getName(), new AttributeModifier(ATTACK_DAMAGE_MODIFIER, "Weapon modifier", 20, 0));
+			multimap.put(SharedMonsterAttributes.ATTACK_DAMAGE.getName(), new AttributeModifier(ATTACK_DAMAGE_MODIFIER, "Weapon modifier", 19, 0));
 			multimap.put(SharedMonsterAttributes.ATTACK_SPEED.getName(), new AttributeModifier(ATTACK_SPEED_MODIFIER, "Weapon modifier", -2.4000000953674316D, 0));
 		}
 

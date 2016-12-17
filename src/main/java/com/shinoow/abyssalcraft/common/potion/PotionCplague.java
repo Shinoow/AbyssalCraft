@@ -15,6 +15,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.IEntityLivingData;
 import net.minecraft.entity.monster.EntityZombie;
+import net.minecraft.entity.passive.EntitySquid;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.potion.Potion;
 import net.minecraft.util.ResourceLocation;
@@ -25,6 +26,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
 import com.shinoow.abyssalcraft.api.entity.EntityUtil;
 import com.shinoow.abyssalcraft.common.entity.EntityAbyssalZombie;
+import com.shinoow.abyssalcraft.common.entity.EntityCoraliumSquid;
 import com.shinoow.abyssalcraft.common.entity.EntityDepthsGhoul;
 
 public class PotionCplague extends Potion{
@@ -46,7 +48,8 @@ public class PotionCplague extends Potion{
 
 		if(EntityUtil.isEntityCoralium(par1EntityLivingBase))
 			par1EntityLivingBase.removePotionEffect(this);
-		else par1EntityLivingBase.attackEntityFrom(AbyssalCraftAPI.coralium, 2);
+		else if(par1EntityLivingBase.ticksExisted % 40 >> par2 == 0)
+			par1EntityLivingBase.attackEntityFrom(AbyssalCraftAPI.coralium, 2);
 
 		if(par1EntityLivingBase instanceof EntityPlayer && !par1EntityLivingBase.isDead && wasKilled)
 			wasKilled = false;
@@ -83,14 +86,20 @@ public class PotionCplague extends Potion{
 					par1EntityLivingBase.world.removeEntity(par1EntityLivingBase);
 					par1EntityLivingBase.world.spawnEntity(entityzombie);
 				}
-			}
+			} else if(par1EntityLivingBase instanceof EntitySquid)
+				if(par1EntityLivingBase.world.rand.nextBoolean()){
+					EntityCoraliumSquid squid = new EntityCoraliumSquid(par1EntityLivingBase.world);
+					squid.copyLocationAndAnglesFrom(par1EntityLivingBase);
+					squid.onInitialSpawn(par1EntityLivingBase.world.getDifficultyForLocation(par1EntityLivingBase.getPosition()),(IEntityLivingData)null);
+					par1EntityLivingBase.world.removeEntity(par1EntityLivingBase);
+					par1EntityLivingBase.world.spawnEntity(squid);
+				}
 	}
 
 	@Override
 	public boolean isReady(int par1, int par2)
 	{
-		int k = 40 >> par2;
-		return k > 0 ? par1 % k == 0 : true;
+		return true;
 	}
 
 	@Override
