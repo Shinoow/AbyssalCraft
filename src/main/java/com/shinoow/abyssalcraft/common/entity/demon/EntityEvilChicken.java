@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2016 Shinoow.
+ * Copyright (c) 2012 - 2017 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -24,19 +24,22 @@ import net.minecraft.entity.ai.EntityAIWander;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Items;
 import net.minecraft.init.SoundEvents;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.translation.I18n;
 import net.minecraft.world.World;
+import net.minecraftforge.common.IShearable;
 
 import com.shinoow.abyssalcraft.common.entity.EntityLesserShoggoth;
 import com.shinoow.abyssalcraft.lib.ACConfig;
 import com.shinoow.abyssalcraft.lib.ACLoot;
 
-public class EntityEvilChicken extends EntityMob {
+public class EntityEvilChicken extends EntityMob implements IShearable {
 
 	public float field_70886_e;
 	public float destPos;
@@ -154,5 +157,27 @@ public class EntityEvilChicken extends EntityMob {
 	@Override
 	protected ResourceLocation getLootTable(){
 		return ACLoot.ENTITY_EVIL_CHICKEN;
+	}
+
+	@Override public boolean isShearable(ItemStack item, net.minecraft.world.IBlockAccess world, BlockPos pos){ return true; }
+	@Override
+	public java.util.List<ItemStack> onSheared(ItemStack item, net.minecraft.world.IBlockAccess world, BlockPos pos, int fortune)
+	{
+		int i = 1 + rand.nextInt(3);
+
+		java.util.List<ItemStack> ret = new java.util.ArrayList<ItemStack>();
+		for (int j = 0; j < i; ++j)
+			ret.add(new ItemStack(Items.FEATHER));
+
+		playSound(SoundEvents.ENTITY_SHEEP_SHEAR, 1.0F, 1.0F);
+		playSound(SoundEvents.ENTITY_GHAST_HURT, 1.0F, 0.2F);
+		if(!worldObj.isRemote){
+			EntityDemonChicken demonchicken = new EntityDemonChicken(worldObj);
+			demonchicken.copyLocationAndAnglesFrom(this);
+			worldObj.removeEntity(this);
+			demonchicken.onInitialSpawn(worldObj.getDifficultyForLocation(new BlockPos(posX, posY, posZ)), (IEntityLivingData)null);
+			worldObj.spawnEntityInWorld(demonchicken);
+		}
+		return ret;
 	}
 }

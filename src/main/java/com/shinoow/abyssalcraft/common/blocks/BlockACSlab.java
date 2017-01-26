@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2016 Shinoow.
+ * Copyright (c) 2012 - 2017 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -15,6 +15,7 @@ import java.util.Random;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockSlab;
+import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyBool;
@@ -34,6 +35,7 @@ public abstract class BlockACSlab extends BlockSlab {
 	public static final PropertyBool VARIANT_PROPERTY = PropertyBool.create("variant");
 
 	private Block singleSlab;
+	private MapColor mapColor;
 
 	private static final int HALF_META_BIT = 8;
 
@@ -48,24 +50,32 @@ public abstract class BlockACSlab extends BlockSlab {
 		super(par3Material);
 		setCreativeTab(null);
 		singleSlab = par1SingleSlab;
+		mapColor = par1SingleSlab.getMapColor(par1SingleSlab.getDefaultState());
 
 		setDefaultState(blockState.getBaseState().withProperty(VARIANT_PROPERTY, false));
 	}
 
-	public BlockACSlab(Material par3Material, String tooltype, int harvestlevel)
+	public BlockACSlab(Material par3Material, String tooltype, int harvestlevel, MapColor mapColor)
 	{
-		this(par3Material);
+		this(par3Material, mapColor);
 		setHarvestLevel(tooltype, harvestlevel);
 	}
 
-	public BlockACSlab(Material par3Material)
+	public BlockACSlab(Material par3Material, MapColor mapColor)
 	{
 		super(par3Material);
 		singleSlab = this;
 		setCreativeTab(ACTabs.tabBlock);
 		useNeighborBrightness = true;
+		this.mapColor = mapColor;
 
 		setDefaultState(blockState.getBaseState().withProperty(VARIANT_PROPERTY, false).withProperty(HALF, EnumBlockHalf.BOTTOM));
+	}
+
+	@Override
+	public MapColor getMapColor(IBlockState state)
+	{
+		return mapColor;
 	}
 
 	@Override

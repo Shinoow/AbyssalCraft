@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2016 Shinoow.
+ * Copyright (c) 2012 - 2017 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -228,54 +228,6 @@ public class MiscHandler implements ILifeCycleHandler {
 
 		AchievementPage.registerAchievementPage(new AchievementPage("AbyssalCraft", ACAchievements.getAchievements()));
 
-		necro = ACAchievements.necronomicon;
-		mineAby = ACAchievements.mine_abyssalnite;
-		killghoul = ACAchievements.kill_depths_ghoul;
-		enterabyss = ACAchievements.enter_abyssal_wasteland;
-		killdragon = ACAchievements.kill_spectral_dragon;
-		summonAsorah = ACAchievements.summon_asorah;
-		killAsorah = ACAchievements.kill_asorah;
-		enterdreadlands = ACAchievements.enter_dreadlands;
-		killdreadguard = ACAchievements.kill_dreadguard;
-		ghoulhead = ACAchievements.depths_ghoul_head;
-		petehead = ACAchievements.pete_head;
-		wilsonhead = ACAchievements.mr_wilson_head;
-		orangehead = ACAchievements.dr_orange_head;
-		mineCorgem = ACAchievements.mine_coralium;
-		mineCor = ACAchievements.mine_abyssal_coralium;
-		findPSDL = ACAchievements.find_powerstone;
-		GK1 = ACAchievements.gateway_key;
-		GK2 = ACAchievements.dreaded_gateway_key;
-		GK3 = ACAchievements.rlyehian_gateway_key;
-		summonChagaroth = ACAchievements.summon_chagaroth;
-		killChagaroth = ACAchievements.kill_chagaroth;
-		enterOmothol = ACAchievements.enter_omothol;
-		enterDarkRealm = ACAchievements.enter_dark_realm;
-		necrou1 = ACAchievements.abyssal_wasteland_necronomicon;
-		necrou2 = ACAchievements.dreadlands_necronomicon;
-		necrou3 = ACAchievements.omothol_necronomicon;
-		abyssaln = ACAchievements.abyssalnomicon;
-		ritual = ACAchievements.ritual_altar;
-		ritualSummon = ACAchievements.summoning_ritual;
-		ritualCreate = ACAchievements.creation_ritual;
-		killOmotholelite = ACAchievements.kill_omothol_elite;
-		locateJzahar = ACAchievements.locate_jzahar;
-		killJzahar = ACAchievements.kill_jzahar;
-		shadowGems = ACAchievements.shadow_gems;
-		mineAbyOres = ACAchievements.mine_abyssal_ores;
-		mineDread = ACAchievements.mine_dreadlands_ores;
-		dreadium = ACAchievements.dreadium;
-		eth = ACAchievements.ethaxium;
-		makeTransmutator = ACAchievements.make_transmutator;
-		makeCrystallizer = ACAchievements.make_crystallizer;
-		makeMaterializer = ACAchievements.make_materializer;
-		makeCrystalBag = ACAchievements.make_crystal_bag;
-		makeEngraver = ACAchievements.make_engraver;
-		ritualBreed = ACAchievements.breeding_ritual;
-		ritualPotion = ACAchievements.potion_ritual;
-		ritualPotionAoE = ACAchievements.aoe_potion_ritual;
-		ritualInfusion = ACAchievements.infusion_ritual;
-
 		RecipeSorter.register("abyssalcraft:shapednbt", ShapedNBTRecipe.class, Category.SHAPED, "after:minecraft:shaped");
 
 		GameRegistry.registerFuelHandler(new FurnaceFuelHandler());
@@ -425,6 +377,32 @@ public class MiscHandler implements ILifeCycleHandler {
 		OreDictionary.registerOre("crystalShardAlumina", new ItemStack(ACItems.crystal_shard, 1, 22));
 		OreDictionary.registerOre("crystalShardMagnesia", new ItemStack(ACItems.crystal_shard, 1, 23));
 		OreDictionary.registerOre("crystalShardZinc", new ItemStack(ACItems.crystal_shard, 1, 24));
+		OreDictionary.registerOre("blockGlass", ACBlocks.abyssal_sand_glass);
+		OreDictionary.registerOre("crystalFragmentIron", new ItemStack(ACItems.crystal_fragment, 1, 0));
+		OreDictionary.registerOre("crystalFragmentGold", new ItemStack(ACItems.crystal_fragment, 1, 1));
+		OreDictionary.registerOre("crystalFragmentSulfur", new ItemStack(ACItems.crystal_fragment, 1, 2));
+		OreDictionary.registerOre("crystalFragmentCarbon", new ItemStack(ACItems.crystal_fragment, 1, 3));
+		OreDictionary.registerOre("crystalFragmentOxygen", new ItemStack(ACItems.crystal_fragment, 1, 4));
+		OreDictionary.registerOre("crystalFragmentHydrogen", new ItemStack(ACItems.crystal_fragment, 1, 5));
+		OreDictionary.registerOre("crystalFragmentNitrogen", new ItemStack(ACItems.crystal_fragment, 1, 6));
+		OreDictionary.registerOre("crystalFragmentPhosphorus", new ItemStack(ACItems.crystal_fragment, 1, 7));
+		OreDictionary.registerOre("crystalFragmentPotassium", new ItemStack(ACItems.crystal_fragment, 1, 8));
+		OreDictionary.registerOre("crystalFragmentNitrate", new ItemStack(ACItems.crystal_fragment, 1, 9));
+		OreDictionary.registerOre("crystalFragmentMethane", new ItemStack(ACItems.crystal_fragment, 1, 10));
+		OreDictionary.registerOre("crystalFragmentRedstone", new ItemStack(ACItems.crystal_fragment, 1, 11));
+		OreDictionary.registerOre("crystalFragmentAbyssalnite", new ItemStack(ACItems.crystal_fragment, 1, 12));
+		OreDictionary.registerOre("crystalFragmentCoralium", new ItemStack(ACItems.crystal_fragment, 1, 13));
+		OreDictionary.registerOre("crystalFragmentDreadium", new ItemStack(ACItems.crystal_fragment, 1, 14));
+		OreDictionary.registerOre("crystalFragmentBlaze", new ItemStack(ACItems.crystal_fragment, 1, 15));
+		OreDictionary.registerOre("crystalFragmentTin", new ItemStack(ACItems.crystal_fragment, 1, 16));
+		OreDictionary.registerOre("crystalFragmentCopper", new ItemStack(ACItems.crystal_fragment, 1, 17));
+		OreDictionary.registerOre("crystalFragmentSilicon", new ItemStack(ACItems.crystal_fragment, 1, 18));
+		OreDictionary.registerOre("crystalFragmentMagnesium", new ItemStack(ACItems.crystal_fragment, 1, 19));
+		OreDictionary.registerOre("crystalFragmentAluminium", new ItemStack(ACItems.crystal_fragment, 1, 20));
+		OreDictionary.registerOre("crystalFragmentSilica", new ItemStack(ACItems.crystal_fragment, 1, 21));
+		OreDictionary.registerOre("crystalFragmentAlumina", new ItemStack(ACItems.crystal_fragment, 1, 22));
+		OreDictionary.registerOre("crystalFragmentMagnesia", new ItemStack(ACItems.crystal_fragment, 1, 23));
+		OreDictionary.registerOre("crystalFragmentZinc", new ItemStack(ACItems.crystal_fragment, 1, 24));
 	}
 
 	@SubscribeEvent

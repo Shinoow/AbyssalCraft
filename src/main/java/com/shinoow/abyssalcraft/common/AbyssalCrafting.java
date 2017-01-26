@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2016 Shinoow.
+ * Copyright (c) 2012 - 2017 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -289,6 +289,11 @@ public class AbyssalCrafting {
 		GameRegistry.addRecipe(new ItemStack(ACItems.crystal_shard, 1, 22), new Object[] {" # ", "%%%", " # ", '#', new ItemStack(ACItems.crystal_shard, 1, 20), '%', new ItemStack(ACItems.crystal_shard, 1, 4)});
 		GameRegistry.addRecipe(new ItemStack(ACItems.crystal_shard, 1, 21), new Object[] {"#%#", '#', new ItemStack(ACItems.crystal_shard, 1, 4), '%', new ItemStack(ACItems.crystal_shard, 1, 18)});
 		GameRegistry.addRecipe(new ItemStack(ACItems.crystal_shard, 1, 23), new Object[] {"#%", '#', new ItemStack(ACItems.crystal_shard, 1, 19), '%', new ItemStack(ACItems.crystal_shard, 1, 4)});
+		GameRegistry.addRecipe(new ItemStack(ACItems.crystal_fragment, 1, 10), new Object[] {" # ", "#%#", " # ", '#', new ItemStack(ACItems.crystal_fragment, 1, 5), '%', new ItemStack(ACItems.crystal_fragment, 1, 3)});
+		GameRegistry.addRecipe(new ItemStack(ACItems.crystal_fragment, 1, 9), new Object[] {" # ", "%%%", '#', new ItemStack(ACItems.crystal_fragment, 1, 6), '%', new ItemStack(ACItems.crystal_fragment, 1, 4)});
+		GameRegistry.addRecipe(new ItemStack(ACItems.crystal_fragment, 1, 22), new Object[] {" # ", "%%%", " # ", '#', new ItemStack(ACItems.crystal_fragment, 1, 20), '%', new ItemStack(ACItems.crystal_fragment, 1, 4)});
+		GameRegistry.addRecipe(new ItemStack(ACItems.crystal_fragment, 1, 21), new Object[] {"#%#", '#', new ItemStack(ACItems.crystal_fragment, 1, 4), '%', new ItemStack(ACItems.crystal_fragment, 1, 18)});
+		GameRegistry.addRecipe(new ItemStack(ACItems.crystal_fragment, 1, 23), new Object[] {"#%", '#', new ItemStack(ACItems.crystal_fragment, 1, 19), '%', new ItemStack(ACItems.crystal_fragment, 1, 4)});
 		GameRegistry.addRecipe(new ItemStack(ACItems.ethaxium_ingot), new Object[] {"###", "#%#", "###", '#', ACItems.ethaxium_brick, '%', ACItems.life_crystal});
 		GameRegistry.addRecipe(new ItemStack(ACItems.ethaxium_ingot), new Object[] {" # ", "#%#", " # ", '#', ACItems.ethaxium_brick, '%', ACItems.oblivion_catalyst});
 		ItemStack egg = new ItemStack(Items.SPAWN_EGG);
@@ -339,6 +344,8 @@ public class AbyssalCrafting {
 			GameRegistry.addRecipe(new ItemStack(ACItems.crystal, 9, i), new Object[] {"#", '#', new ItemStack(ACBlocks.crystal_cluster, 1, i)});
 			GameRegistry.addRecipe(new ItemStack(ACItems.crystal, 1, i), new Object[] {"###", "###", "###", '#', new ItemStack(ACItems.crystal_shard, 1, i)});
 			GameRegistry.addRecipe(new ItemStack(ACItems.crystal_shard, 9, i), new Object[] {"#", '#', new ItemStack(ACItems.crystal, 1, i)});
+			GameRegistry.addRecipe(new ItemStack(ACItems.crystal_shard, 1, i), new Object[] {"###", "###", "###", '#', new ItemStack(ACItems.crystal_fragment, 1, i)});
+			GameRegistry.addRecipe(new ItemStack(ACItems.crystal_fragment, 9, i), new Object[] {"#", '#', new ItemStack(ACItems.crystal_shard, 1, i)});
 		}
 		GameRegistry.addRecipe(new ItemStack(ACItems.skin, 1, 0), new Object[] {"###", "#%#", "###", '#', ACItems.coralium_plagued_flesh, '%', new ItemStack(ACItems.essence, 1, 0)});
 		GameRegistry.addRecipe(new ItemStack(ACItems.skin, 1, 1), new Object[] {"###", "#%#", "###", '#', ACItems.dread_fragment, '%', new ItemStack(ACItems.essence, 1, 1)});
@@ -621,12 +628,12 @@ public class AbyssalCrafting {
 		AbyssalCraftAPI.addCrystallization("oreBrass", "crystalShardCopper", 12, "crystalShardZinc", 8, 0.5F);
 		AbyssalCraftAPI.addSingleCrystallization(Items.ROTTEN_FLESH, new ItemStack(ACItems.crystal_shard, 8, 7), 0.1F);
 		AbyssalCraftAPI.addSingleCrystallization(new ItemStack(ACItems.shoggoth_flesh, 1, 0), new ItemStack(ACItems.crystal_shard, 8, 7), 0.2F);
-		AbyssalCraftAPI.addCrystallization(new ItemStack(ACItems.shoggoth_flesh, 1, 1), new ItemStack(ACItems.crystal_shard, 8, 7), new ItemStack(ACItems.crystal_shard, 4, 13), 0.2F);
-		AbyssalCraftAPI.addCrystallization(new ItemStack(ACItems.shoggoth_flesh, 1, 2), new ItemStack(ACItems.crystal_shard, 8, 7), new ItemStack(ACItems.crystal_shard, 4, 14), 0.2F);
-		AbyssalCraftAPI.addCrystallization(new ItemStack(ACItems.shoggoth_flesh, 1, 3), new ItemStack(ACItems.crystal_shard, 8, 7), new ItemStack(ACItems.crystal_shard, 4, 3), 0.2F);
+		AbyssalCraftAPI.addCrystallization(new ItemStack(ACItems.shoggoth_flesh, 1, 1), new ItemStack(ACItems.crystal_shard, 8, 7), new ItemStack(ACItems.crystal_fragment, 2, 13), 0.2F);
+		AbyssalCraftAPI.addCrystallization(new ItemStack(ACItems.shoggoth_flesh, 1, 2), new ItemStack(ACItems.crystal_shard, 8, 7), new ItemStack(ACItems.crystal_fragment, 2, 14), 0.2F);
+		AbyssalCraftAPI.addCrystallization(new ItemStack(ACItems.shoggoth_flesh, 1, 3), new ItemStack(ACItems.crystal_shard, 8, 7), new ItemStack(ACItems.crystal_fragment, 2, 3), 0.2F);
 		AbyssalCraftAPI.addCrystallization(new ItemStack(ACItems.shoggoth_flesh, 1, 4), new ItemStack(ACItems.crystal_shard, 8, 7), new ItemStack(ACItems.shadow_gem, 1), 0.2F);
-		AbyssalCraftAPI.addCrystallization(new ItemStack(ACItems.coralium_plagued_flesh), new ItemStack(ACItems.crystal_shard, 8, 7), new ItemStack(ACItems.crystal_shard, 4, 13), 0.2F);
-		AbyssalCraftAPI.addCrystallization(new ItemStack(ACItems.coralium_plagued_flesh_on_a_bone), new ItemStack(ACItems.crystal_shard, 12, 7), new ItemStack(ACItems.crystal_shard, 4, 13), 0.2F);
+		AbyssalCraftAPI.addCrystallization(new ItemStack(ACItems.coralium_plagued_flesh), new ItemStack(ACItems.crystal_shard, 8, 7), new ItemStack(ACItems.crystal_fragment, 1, 13), 0.2F);
+		AbyssalCraftAPI.addCrystallization(new ItemStack(ACItems.coralium_plagued_flesh_on_a_bone), new ItemStack(ACItems.crystal_shard, 12, 7), new ItemStack(ACItems.crystal_fragment, 1, 13), 0.2F);
 		AbyssalCraftAPI.addSingleCrystallization(Items.GOLD_NUGGET, new ItemStack(ACItems.crystal_shard, 1, 1), 0.1F);
 		AbyssalCraftAPI.addSingleCrystallization(new ItemStack(ACItems.ingot_nugget, 1, 0), new ItemStack(ACItems.crystal_shard, 1, 12), 0.1F);
 		AbyssalCraftAPI.addSingleCrystallization(new ItemStack(ACItems.ingot_nugget, 1, 1), new ItemStack(ACItems.crystal_shard, 1, 13), 0.1F);

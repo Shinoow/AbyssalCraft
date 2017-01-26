@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2016 Shinoow.
+ * Copyright (c) 2012 - 2017 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -27,12 +27,19 @@ import com.shinoow.abyssalcraft.lib.ACTabs;
 
 public class ItemCrystal extends Item implements ICrystal {
 
+	boolean postfix;
+
 	public ItemCrystal(String name){
+		this(name, false);
+	}
+
+	public ItemCrystal(String name, boolean postfix){
 		super();
 		setUnlocalizedName(name);
 		setCreativeTab(ACTabs.tabCrystals);
 		setMaxDamage(0);
 		setHasSubtypes(true);
+		this.postfix = postfix;
 	}
 
 	//	@Override
@@ -67,6 +74,8 @@ public class ItemCrystal extends Item implements ICrystal {
 
 	@Override
 	public String getItemStackDisplayName(ItemStack par1ItemStack) {
-		return I18n.translateToLocal(getUnlocalizedName() + "." + ACLib.crystalNames[par1ItemStack.getItemDamage()] + ".name");
+		if(postfix)
+			return I18n.translateToLocalFormatted(getUnlocalizedName().substring(5)+ ".postfix", I18n.translateToLocal("item.crystal." + ACLib.crystalNames[par1ItemStack.getItemDamage()] + ".name"));
+		else return I18n.translateToLocal(getUnlocalizedName() + "." + ACLib.crystalNames[par1ItemStack.getItemDamage()] + ".name");
 	}
 }

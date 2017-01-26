@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2016 Shinoow.
+ * Copyright (c) 2012 - 2017 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -27,7 +27,11 @@ import net.minecraft.entity.ai.EntityAIWander;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
 import net.minecraft.init.SoundEvents;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.ResourceLocation;
@@ -36,6 +40,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.text.translation.I18n;
 import net.minecraft.world.World;
+import net.minecraftforge.common.IShearable;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -45,7 +50,7 @@ import com.shinoow.abyssalcraft.common.network.client.EvilSheepMessage;
 import com.shinoow.abyssalcraft.lib.ACConfig;
 import com.shinoow.abyssalcraft.lib.ACLoot;
 
-public class EntityEvilSheep extends EntityMob {
+public class EntityEvilSheep extends EntityMob implements IShearable {
 
 	private UUID playerUUID = null;
 	private String playerName = null;
@@ -211,5 +216,27 @@ public class EntityEvilSheep extends EntityMob {
 	@Override
 	protected ResourceLocation getLootTable(){
 		return ACLoot.ENTITY_EVIL_SHEEP;
+	}
+
+	@Override public boolean isShearable(ItemStack item, net.minecraft.world.IBlockAccess world, BlockPos pos){ return true; }
+	@Override
+	public java.util.List<ItemStack> onSheared(ItemStack item, net.minecraft.world.IBlockAccess world, BlockPos pos, int fortune)
+	{
+		int i = 1 + rand.nextInt(3);
+
+		java.util.List<ItemStack> ret = new java.util.ArrayList<ItemStack>();
+		for (int j = 0; j < i; ++j)
+			ret.add(new ItemStack(playerUUID != null && playerName != null ? Items.ROTTEN_FLESH : Item.getItemFromBlock(Blocks.WOOL)));
+
+		playSound(SoundEvents.ENTITY_SHEEP_SHEAR, 1.0F, 1.0F);
+		playSound(SoundEvents.ENTITY_GHAST_HURT, 1.0F, 0.2F);
+		if(!worldObj.isRemote){
+			EntityDemonSheep demonsheep = new EntityDemonSheep(worldObj);
+			demonsheep.copyLocationAndAnglesFrom(this);
+			worldObj.removeEntity(this);
+			demonsheep.onInitialSpawn(worldObj.getDifficultyForLocation(new BlockPos(posX, posY, posZ)), (IEntityLivingData)null);
+			worldObj.spawnEntityInWorld(demonsheep);
+		}
+		return ret;
 	}
 }
