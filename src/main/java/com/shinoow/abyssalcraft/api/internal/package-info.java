@@ -1,4 +1,4 @@
-@API(apiVersion=AbyssalCraftAPI.API_VERSION,owner="abyssalcraft",provides="AbyssalCraftAPI")
+@API(apiVersion=AbyssalCraftAPI.API_VERSION,owner="abyssalcraft",provides="AbyssalCraftAPI|Internal")
 package com.shinoow.abyssalcraft.api.internal;
 import net.minecraftforge.fml.common.API;
 

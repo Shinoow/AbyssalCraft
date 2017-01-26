@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2016 Shinoow.
+ * Copyright (c) 2012 - 2017 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -53,14 +53,6 @@ public class ChunkProviderOmothol implements IChunkGenerator
 		noiseGen3 = new NoiseGeneratorOctaves(rand, 8);
 		noiseGen4 = new NoiseGeneratorOctaves(rand, 10);
 		noiseGen5 = new NoiseGeneratorOctaves(rand, 16);
-
-		//		NoiseGenerator[] noiseGens = {noiseGen1, noiseGen2, noiseGen3, noiseGen4, noiseGen5};
-		//		noiseGens = TerrainGen.getModdedNoiseGenerators(par1World, rand, noiseGens);
-		//		noiseGen1 = (NoiseGeneratorOctaves)noiseGens[0];
-		//		noiseGen2 = (NoiseGeneratorOctaves)noiseGens[1];
-		//		noiseGen3 = (NoiseGeneratorOctaves)noiseGens[2];
-		//		noiseGen4 = (NoiseGeneratorOctaves)noiseGens[3];
-		//		noiseGen5 = (NoiseGeneratorOctaves)noiseGens[4];
 	}
 
 	public void setBlocksInChunk(int x, int z, ChunkPrimer primer)

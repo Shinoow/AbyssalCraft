@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2016 Shinoow.
+ * Copyright (c) 2012 - 2017 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -18,7 +18,7 @@ import java.util.Random;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLeaves;
 import net.minecraft.block.BlockPlanks.EnumType;
-import net.minecraft.block.properties.IProperty;
+import net.minecraft.block.material.MapColor;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
@@ -38,11 +38,19 @@ import com.shinoow.abyssalcraft.lib.ACTabs;
 public class BlockACLeaves extends BlockLeaves {
 
 	private Block sapling;
+	private MapColor mapColor;
 
-	public BlockACLeaves(Block sapling) {
+	public BlockACLeaves(Block sapling, MapColor mapColor) {
 		setCreativeTab(ACTabs.tabDecoration);
 		setDefaultState(blockState.getBaseState().withProperty(CHECK_DECAY, Boolean.valueOf(true)).withProperty(DECAYABLE, Boolean.valueOf(true)));
 		this.sapling = sapling;
+		this.mapColor = mapColor;
+	}
+
+	@Override
+	public MapColor getMapColor(IBlockState state)
+	{
+		return mapColor;
 	}
 
 	@Override
@@ -127,7 +135,7 @@ public class BlockACLeaves extends BlockLeaves {
 	@Override
 	protected BlockStateContainer createBlockState()
 	{
-		return new BlockStateContainer(this, new IProperty[] {CHECK_DECAY, DECAYABLE});
+		return new BlockStateContainer.Builder(this).add(CHECK_DECAY, DECAYABLE).build();
 	}
 
 	@Override

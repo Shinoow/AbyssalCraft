@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2016 Shinoow.
+ * Copyright (c) 2012 - 2017 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -44,7 +44,6 @@ public class ItemHandler implements ILifeCycleHandler {
 		ACItems.oblivion_catalyst = new ItemOC();
 		ACItems.staff_of_the_gatekeeper = new ItemStaff();
 		ACItems.gateway_key = new ItemPortalPlacer(0, "gatewaykey");
-		ACItems.liquid_coralium_bucket = new ItemDeprecated("cbucket");
 		ACItems.powerstone_tracker = new ItemTrackerPSDL();
 		ACItems.eye_of_the_abyss = new ItemEoA();
 		ACItems.dreaded_gateway_key = new ItemPortalPlacer(1, "gatewaykeydl");
@@ -115,7 +114,6 @@ public class ItemHandler implements ILifeCycleHandler {
 		ACItems.ethaxium_ingot = new ItemACBasic("ethaxiumingot");
 
 		//anti-items
-		ACItems.liquid_antimatter_bucket = new ItemDeprecated("antibucket");
 		ACItems.anti_beef = new ItemAntiFood("antibeef");
 		ACItems.anti_chicken = new ItemAntiFood("antichicken");
 		ACItems.anti_pork = new ItemAntiFood("antipork");
@@ -127,7 +125,8 @@ public class ItemHandler implements ILifeCycleHandler {
 
 		//crystals
 		ACItems.crystal = new ItemCrystal("crystal");
-		ACItems.crystal_shard = new ItemCrystal("crystalshard");
+		ACItems.crystal_shard = new ItemCrystal("crystalshard", true);
+		ACItems.crystal_fragment = new ItemCrystal("crystalfragment", true);
 
 		//Shadow items
 		ACItems.shadow_fragment = new ItemACBasic("shadowfragment");
@@ -247,20 +246,19 @@ public class ItemHandler implements ILifeCycleHandler {
 		//Foodstuffs
 		ACItems.iron_plate = new ItemACBasic("ironp");
 		ACItems.mre = new ItemPlatefood(20, 1F, false, "mre");
-		ACItems.chicken_on_a_plate = new ItemPlatefood(12, 1.2F, false, "chickenp");
-		ACItems.pork_on_a_plate = new ItemPlatefood(16, 1.6F, false, "porkp");
-		ACItems.beef_on_a_plate = new ItemPlatefood(6, 0.6F, false, "beefp");
-		ACItems.fish_on_a_plate = new ItemPlatefood(10, 1.2F, false, "fishp");
+		ACItems.chicken_on_a_plate = new ItemPlatefood(9, 0.9F, false, "chickenp");
+		ACItems.pork_on_a_plate = new ItemPlatefood(12, 1.2F, false, "porkp");
+		ACItems.beef_on_a_plate = new ItemPlatefood(12, 1.2F, false, "beefp");
+		ACItems.fish_on_a_plate = new ItemPlatefood(8, 0.9F, false, "fishp");
 		ACItems.dirty_plate = new ItemACBasic("dirtyplate");
 		ACItems.fried_egg = new ItemFood(5, 0.6F, false).setCreativeTab(ACTabs.tabFood).setUnlocalizedName("friedegg");
-		ACItems.fried_egg_on_a_plate = new ItemPlatefood(10, 1.2F, false, "eggp");
+		ACItems.fried_egg_on_a_plate = new ItemPlatefood(9, 0.9F, false, "eggp");
 		ACItems.washcloth = new ItemWashCloth();
 
 		registerItem(devsword, "devsword");
 		registerItem(ACItems.oblivion_catalyst, "oc");
 		registerItem(ACItems.gateway_key, "gatewaykey");
 		registerItem(ACItems.staff_of_the_gatekeeper, "staff");
-		registerItem(ACItems.liquid_coralium_bucket, "cbucket");
 		registerItem(ACItems.powerstone_tracker, "powerstonetracker");
 		registerItem(ACItems.eye_of_the_abyss, "eoa");
 		registerItem(ACItems.dreaded_gateway_key, "gatewaykeydl");
@@ -340,7 +338,6 @@ public class ItemHandler implements ILifeCycleHandler {
 		registerItem(ACItems.shadow_gem, "shadowgem");
 		registerItem(ACItems.shard_of_oblivion, "oblivionshard");
 		registerItem(ACItems.coralium_longbow, "corbow");
-		registerItem(ACItems.liquid_antimatter_bucket, "antibucket");
 		registerItem(ACItems.coralium_brick, "cbrick");
 		registerItem(ACItems.cudgel, "cudgel");
 		registerItem(ACItems.dreadium_ingot, "dreadiumingot");
@@ -441,6 +438,7 @@ public class ItemHandler implements ILifeCycleHandler {
 		registerItem(ACItems.shub_niggurath_engraving, "engraving_shubniggurath");
 		registerItem(ACItems.essence_of_the_gatekeeper, "gatekeeperessence");
 		registerItem(ACItems.interdimensional_cage, "interdimensionalcage");
+		registerItem(ACItems.crystal_fragment, "crystalfragment");
 		//		registerItem(shadowPlate, "shadowplate");
 
 		AbyssalCraftAPI.setRepairItems();
