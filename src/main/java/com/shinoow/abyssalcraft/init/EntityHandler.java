@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2016 Shinoow.
+ * Copyright (c) 2012 - 2017 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -139,12 +139,14 @@ public class EntityHandler implements ILifeCycleHandler {
 		EntityRegistry.registerModEntity(EntityDreadSlug.class, "DreadSlug", 65, instance, 64, 10, true);
 
 		registerEntityWithEgg(EntityLesserShoggoth.class, "lessershoggoth", 66, 80, 3, true, 0x133133, 0x342122);
-		EntityRegistry.addSpawn(EntityLesserShoggoth.class, 3, 1, 1, EnumCreatureType.MONSTER, BiomeDictionary.getBiomesForType(Type.WATER));
-		EntityRegistry.addSpawn(EntityLesserShoggoth.class, 3, 1, 1, EnumCreatureType.MONSTER, BiomeDictionary.getBiomesForType(Type.BEACH));
-		EntityRegistry.addSpawn(EntityLesserShoggoth.class, 3, 1, 1, EnumCreatureType.MONSTER, BiomeDictionary.getBiomesForType(Type.SWAMP));
+		if(overworldShoggoths){
+			EntityRegistry.addSpawn(EntityLesserShoggoth.class, 3, 1, 1, EnumCreatureType.MONSTER, BiomeDictionary.getBiomesForType(Type.WATER));
+			EntityRegistry.addSpawn(EntityLesserShoggoth.class, 3, 1, 1, EnumCreatureType.MONSTER, BiomeDictionary.getBiomesForType(Type.BEACH));
+			EntityRegistry.addSpawn(EntityLesserShoggoth.class, 3, 1, 1, EnumCreatureType.MONSTER, BiomeDictionary.getBiomesForType(Type.SWAMP));
+			EntityRegistry.removeSpawn(EntityLesserShoggoth.class, EnumCreatureType.MONSTER, Biomes.mushroomIslandShore);
+		}
 		EntityRegistry.addSpawn(EntityLesserShoggoth.class, 3, 1, 1, EnumCreatureType.MONSTER, ACBiomes.abyssal_wastelands, ACBiomes.dreadlands,
 				ACBiomes.purified_dreadlands, ACBiomes.dreadlands_mountains, ACBiomes.dreadlands_forest, ACBiomes.omothol, ACBiomes.dark_realm);
-		EntityRegistry.removeSpawn(EntityLesserShoggoth.class, EnumCreatureType.MONSTER, Biomes.mushroomIslandShore);
 
 		registerEntityWithEgg(EntityEvilCow.class, "evilcow", 67, 80, 3, true, 4470310, 10592673);
 		if(evilAnimalSpawnWeight > 0)

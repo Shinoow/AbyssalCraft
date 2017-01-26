@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2016 Shinoow.
+ * Copyright (c) 2012 - 2017 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -192,8 +192,11 @@ public class EntityRemnant extends EntityMob implements IMerchant, IAntiEntity, 
 						par1EntityPlayer.displayVillagerTradeGui(this);
 						return true;
 					}
-				} else par1EntityPlayer.addChatMessage(new TextComponentString(getName()+": "+I18n.translateToLocal("message.remnant.busy")));
-			} else insult(par1EntityPlayer);
+				} else if(!tradingPlayer.getUniqueID().equals(par1EntityPlayer.getUniqueID())) par1EntityPlayer.addChatMessage(new TextComponentString(getName()+": "+I18n.translateToLocal("message.remnant.busy")));
+			} else {
+				insult(par1EntityPlayer);
+				return true;
+			}
 
 		return super.processInteract(par1EntityPlayer, hand, stack);
 	}

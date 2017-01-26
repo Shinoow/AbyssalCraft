@@ -1,11 +1,11 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2016 Shinoow.
+ * Copyright (c) 2012 - 2017 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
  * http://www.gnu.org/licenses/lgpl-3.0.txt
- *
+ * 
  * Contributors:
  *     Shinoow -  implementation
  ******************************************************************************/
@@ -15,6 +15,7 @@ import java.util.Random;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
+import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.Item;
@@ -28,7 +29,7 @@ import com.shinoow.abyssalcraft.lib.ACTabs;
 public class BlockCoraliumstone extends Block {
 
 	public BlockCoraliumstone() {
-		super(Material.rock);
+		super(Material.rock, MapColor.cyanColor);
 		setCreativeTab(ACTabs.tabBlock);
 		setTickRandomly(true);
 		setStepSound(SoundType.STONE);

@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2016 Shinoow.
+ * Copyright (c) 2012 - 2017 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -29,6 +29,7 @@ import net.minecraft.util.text.translation.I18n;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.client.FMLClientHandler;
 
+import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.lib.ACLib;
 import com.shinoow.abyssalcraft.lib.ACTabs;
@@ -80,10 +81,14 @@ public class ItemPortalPlacer extends Item {
 		case 0:
 			if(dim == 0 || dim == ACLib.abyssal_wasteland_id)
 				return true;
+			else if(AbyssalCraftAPI.getGatewayKeyOverride(dim) == 0)
+				return true;
 			else return false;
 		case 1:
 			if(dim == 0 || dim == ACLib.abyssal_wasteland_id ||
 			dim == ACLib.dreadlands_id)
+				return true;
+			else if(AbyssalCraftAPI.getGatewayKeyOverride(dim) >= 0 && AbyssalCraftAPI.getGatewayKeyOverride(dim) < 2)
 				return true;
 			else return false;
 		case 2:
@@ -91,6 +96,8 @@ public class ItemPortalPlacer extends Item {
 			dim == ACLib.dreadlands_id ||
 			dim == ACLib.omothol_id ||
 			dim == ACLib.dark_realm_id)
+				return true;
+			else if(AbyssalCraftAPI.getGatewayKeyOverride(dim) >= 0)
 				return true;
 			else return false;
 		default:
@@ -105,10 +112,14 @@ public class ItemPortalPlacer extends Item {
 			dim == ACLib.omothol_id ||
 			dim == ACLib.dark_realm_id)
 				return true;
+			else if(AbyssalCraftAPI.getGatewayKeyOverride(dim) > 0)
+				return true;
 			else return false;
 		case 1:
 			if(dim == ACLib.omothol_id ||
 			dim == ACLib.dark_realm_id)
+				return true;
+			else if(AbyssalCraftAPI.getGatewayKeyOverride(dim) > 1)
 				return true;
 			else return false;
 		default:
@@ -122,18 +133,19 @@ public class ItemPortalPlacer extends Item {
 			if(isCorrectDim(player.dimension))
 			{
 				int direction = MathHelper.floor_double(player.rotationYaw * 4.0F / 360.0F + 0.5D) & 3;
+				int o = AbyssalCraftAPI.getGatewayKeyOverride(player.dimension);
 
 				switch(key){
 				case 0:
 					return buildPortal(world, pos, direction, ACBlocks.abyssal_stone.getDefaultState(), ACBlocks.coralium_fire.getDefaultState());
 				case 1:
-					if(player.dimension == ACLib.abyssal_wasteland_id && player.isSneaking() || player.dimension == 0)
+					if(player.dimension == ACLib.abyssal_wasteland_id && player.isSneaking() || player.dimension == 0 || o == 0)
 						return buildPortal(world, pos, direction, ACBlocks.abyssal_stone.getDefaultState(), ACBlocks.coralium_fire.getDefaultState());
 					else return buildPortal(world, pos, direction, ACBlocks.dreadstone.getDefaultState(), ACBlocks.dreaded_fire.getDefaultState());
 				case 2:
-					if(player.dimension == ACLib.abyssal_wasteland_id && player.isSneaking() || player.dimension == 0)
+					if(player.dimension == ACLib.abyssal_wasteland_id && player.isSneaking() || player.dimension == 0 | o == 0)
 						return buildPortal(world, pos, direction, ACBlocks.abyssal_stone.getDefaultState(), ACBlocks.coralium_fire.getDefaultState());
-					else if(player.dimension == ACLib.dreadlands_id && player.isSneaking() || player.dimension == ACLib.abyssal_wasteland_id)
+					else if(player.dimension == ACLib.dreadlands_id && player.isSneaking() || player.dimension == ACLib.abyssal_wasteland_id || o == 1)
 						return buildPortal(world, pos, direction, ACBlocks.dreadstone.getDefaultState(), ACBlocks.dreaded_fire.getDefaultState());
 					else return buildPortal(world, pos, direction, ACBlocks.omothol_stone.getDefaultState(), ACBlocks.omothol_fire.getDefaultState());
 				default:

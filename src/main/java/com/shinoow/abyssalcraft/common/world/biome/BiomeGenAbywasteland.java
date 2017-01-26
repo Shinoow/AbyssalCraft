@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2016 Shinoow.
+ * Copyright (c) 2012 - 2017 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -212,14 +212,14 @@ public class BiomeGenAbywasteland extends BiomeGenBase {
 	@SideOnly(Side.CLIENT)
 	public int getGrassColorAtPos(BlockPos pos)
 	{
-		return 0x6EF5DE;
+		return 0x447329;
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
 	public int getFoliageColorAtPos(BlockPos pos)
 	{
-		return 0x6EF5DE;
+		return 0x447329;
 	}
 
 	@Override

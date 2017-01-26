@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2016 Shinoow.
+ * Copyright (c) 2012 - 2017 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -48,7 +48,7 @@ public class TileEntityAltarBlockRenderer extends TileEntitySpecialRenderer {
 			entityitem.hoverStart = 0.0F;
 			altar.getItem().stackSize = 1;
 			GlStateManager.rotate(180F, 1F, 0F, 0F);
-			GlStateManager.translate(0.0F, -0.56F, 0F);
+			GlStateManager.translate(0.0F, -0.78F, 0F);
 			GlStateManager.rotate(altar.getRotation(), 0F, 1F, 0F);
 			GlStateManager.color(1F, 1F, 1F, 1F);
 			RenderManager rm = Minecraft.getMinecraft().getRenderManager();

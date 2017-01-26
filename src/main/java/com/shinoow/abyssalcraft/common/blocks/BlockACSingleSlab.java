@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2016 Shinoow.
+ * Copyright (c) 2012 - 2017 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -12,19 +12,30 @@
 package com.shinoow.abyssalcraft.common.blocks;
 
 import net.minecraft.block.SoundType;
+import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
 
 public class BlockACSingleSlab extends BlockACSlab {
 
 	public BlockACSingleSlab(Material par3Material, String tooltype, int harvestlevel, SoundType stepSound)
 	{
-		super(par3Material, tooltype, harvestlevel);
+		this(par3Material, tooltype, harvestlevel, stepSound, par3Material.getMaterialMapColor());
+	}
+
+	public BlockACSingleSlab(Material par3Material, String tooltype, int harvestlevel, SoundType stepSound, MapColor mapColor)
+	{
+		super(par3Material, tooltype, harvestlevel, mapColor);
 		setStepSound(stepSound);
 	}
 
 	public BlockACSingleSlab(Material par3Material, SoundType stepSound)
 	{
-		super(par3Material);
+		this(par3Material, stepSound, par3Material.getMaterialMapColor());
+	}
+
+	public BlockACSingleSlab(Material par3Material, SoundType stepSound, MapColor mapColor)
+	{
+		super(par3Material, mapColor);
 		setStepSound(stepSound);
 	}
 

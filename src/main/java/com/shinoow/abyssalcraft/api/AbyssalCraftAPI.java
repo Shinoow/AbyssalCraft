@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2016 Shinoow.
+ * Copyright (c) 2012 - 2017 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -87,6 +87,8 @@ public class AbyssalCraftAPI {
 	private static Map<Item, ResourceLocation> ghoul_chestplate = Maps.newHashMap();
 	private static Map<Item, ResourceLocation> ghoul_leggings = Maps.newHashMap();
 	private static Map<Item, ResourceLocation> ghoul_boots = Maps.newHashMap();
+
+	private static Map<Integer, Integer> gateway_key_overrides = Maps.newHashMap();
 
 	/**
 	 *  {@link EnumCreatureAttribute} used for the Shadow mobs
@@ -822,6 +824,33 @@ public class AbyssalCraftAPI {
 	}
 
 	/**
+	 * Registers a Gateway Key Override, allowing you to use a Gateway Key inside the specified dimension.
+	 * @param dimId Dimension ID
+	 * @param type Which Portal to place down
+	 * <ul>
+	 * <li>0 = The Abyssal Wasteland</li>
+	 * <li>1 = The Dreadlands</li>
+	 * <li>2 = Omothol</li>
+	 * </ul>
+	 *
+	 * @since 1.8.9
+	 */
+	public static void addGatewayKeyOverride(int dimId, int type){
+		gateway_key_overrides.put(dimId, type);
+	}
+
+	/**
+	 * Fetches a Gateway Key Override for the specified dimension (provided one is registered)
+	 * @param dimId Dimension ID to fetch a override for
+	 * @return A Integer in the range 0 - 2 if a override was found, otherwise -1
+	 *
+	 * @since 1.8.9
+	 */
+	public static int getGatewayKeyOverride(int dimId){
+		return !gateway_key_overrides.containsKey(dimId) ? -1 : gateway_key_overrides.get(dimId);
+	}
+
+	/**
 	 * Contains the names of all mobs added in AbyssalCraft.
 	 *
 	 * @author shinoow
@@ -835,7 +864,7 @@ public class AbyssalCraftAPI {
 			"antiabyssalzombie", "antibat", "antichicken", "anticow", "anticreeper", "antighoul", "antipig", "antiplayer",
 			"antiskeleton", "antispider", "antizombie", "lessershoggoth", "shadowtitan", "omotholwarden", "jzaharminion",
 			"omotholghoul", "remnant", "greaterdreadspawn", "lesserdreadbeast", "evilcow", "evilchicken", "demoncow",
-			"demonchicken", "evilsheep", "demonsheep"};
+			"demonchicken", "evilsheep", "demonsheep", "coraliumsquid"};
 
 		public static String depths_ghoul = mobNames[0];
 		public static String evil_pig = mobNames[1];
@@ -882,5 +911,6 @@ public class AbyssalCraftAPI {
 		public static String demon_chicken = mobNames[42];
 		public static String evil_sheep = mobNames[43];
 		public static String demon_sheep = mobNames[44];
+		public static String coralium_squid = mobNames[45];
 	}
 }

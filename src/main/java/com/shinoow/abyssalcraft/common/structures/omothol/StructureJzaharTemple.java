@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2016 Shinoow.
+ * Copyright (c) 2012 - 2017 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -21,7 +21,6 @@ import net.minecraft.world.gen.feature.WorldGenerator;
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.common.blocks.BlockACBrick;
 import com.shinoow.abyssalcraft.common.blocks.BlockACBrick.EnumBrickType;
-import com.shinoow.abyssalcraft.lib.util.RitualUtil;
 
 public class StructureJzaharTemple extends WorldGenerator {
 
@@ -109,7 +108,6 @@ public class StructureJzaharTemple extends WorldGenerator {
 		world.setBlockState(pos.add(2, 2, 76), ACBlocks.dark_ethaxium_brick.getDefaultState(), 2);
 		world.setBlockState(pos.add(-2, 2, 80), ACBlocks.dark_ethaxium_brick.getDefaultState(), 2);
 		world.setBlockState(pos.add(2, 2, 80), ACBlocks.dark_ethaxium_brick.getDefaultState(), 2);
-		RitualUtil.tryAltar(world, pos.add(0, 2, 78), 4);
 		for(int x = -2; x < 3; x++)
 			for(int y = 1; y < 7; y++)
 				world.setBlockToAir(pos.add(x, y, 66));

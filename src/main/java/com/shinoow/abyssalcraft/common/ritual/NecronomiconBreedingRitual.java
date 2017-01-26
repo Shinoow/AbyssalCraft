@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2016 Shinoow.
+ * Copyright (c) 2012 - 2017 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -21,6 +21,7 @@ import net.minecraft.entity.passive.EntityCow;
 import net.minecraft.entity.passive.EntityHorse;
 import net.minecraft.entity.passive.EntityOcelot;
 import net.minecraft.entity.passive.EntityPig;
+import net.minecraft.entity.passive.EntityRabbit;
 import net.minecraft.entity.passive.EntitySheep;
 import net.minecraft.entity.passive.EntityWolf;
 import net.minecraft.entity.player.EntityPlayer;
@@ -58,6 +59,7 @@ public class NecronomiconBreedingRitual extends NecronomiconRitual {
 		List<EntityHorse> horses = Lists.newArrayList();
 		List<EntityOcelot> ocelots = Lists.newArrayList();
 		List<EntityWolf> wolves = Lists.newArrayList();
+		List<EntityRabbit> rabbits = Lists.newArrayList();
 
 		List<Entity> entities = world.getEntitiesWithinAABBExcludingEntity(player, new AxisAlignedBB(pos).expand(16, 3, 16));
 		for(Entity entity : entities){
@@ -75,6 +77,8 @@ public class NecronomiconBreedingRitual extends NecronomiconRitual {
 				ocelots.add((EntityOcelot) entity);
 			if(entity instanceof EntityWolf)
 				wolves.add((EntityWolf) entity);
+			if(entity instanceof EntityRabbit)
+				rabbits.add((EntityRabbit) entity);
 		}
 		if(!cows.isEmpty() && cows.size() >= 2)
 			if((cows.size() & 1) == 0)
@@ -195,6 +199,23 @@ public class NecronomiconBreedingRitual extends NecronomiconRitual {
 					world.spawnEntityInWorld(wolf);
 				}
 			}
+		if(!rabbits.isEmpty() && rabbits.size() >= 2)
+			if((rabbits.size() & 1) == 0)
+				for(int i = 0; i < rabbits.size()/2; i++){
+					EntityRabbit rabbit = rabbits.get(i).createChild(rabbits.get(i));
+					rabbit.setGrowingAge(-24000);
+					rabbit.copyLocationAndAnglesFrom(rabbits.get(i));
+					world.spawnEntityInWorld(rabbit);
+				}
+			else{
+				rabbits.remove(rabbits.size()-1);
+				for(int i = 0; i < rabbits.size()/2; i++){
+					EntityRabbit rabbit = rabbits.get(i).createChild(rabbits.get(i));
+					rabbit.setGrowingAge(-24000);
+					rabbit.copyLocationAndAnglesFrom(rabbits.get(i));
+					world.spawnEntityInWorld(rabbit);
+				}
+			}
 
 		if(cows.size() > 2 && getDeathChance(world.rand, cows.size()))
 			cows.get(world.rand.nextInt(cows.size())).attackEntityFrom(DamageSource.magic, 200000);
@@ -210,6 +231,8 @@ public class NecronomiconBreedingRitual extends NecronomiconRitual {
 			ocelots.get(world.rand.nextInt(ocelots.size())).attackEntityFrom(DamageSource.magic, 200000);
 		if(wolves.size() > 2 && getDeathChance(world.rand, wolves.size()))
 			wolves.get(world.rand.nextInt(wolves.size())).attackEntityFrom(DamageSource.magic, 200000);
+		if(rabbits.size() > 2 && getDeathChance(world.rand, rabbits.size()))
+			rabbits.get(world.rand.nextInt(rabbits.size())).attackEntityFrom(DamageSource.magic, 200000);
 	}
 
 	private boolean getDeathChance(Random rand, int num){
