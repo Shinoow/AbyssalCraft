@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2016 Shinoow.
+ * Copyright (c) 2012 - 2017 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -16,6 +16,7 @@ import java.util.Random;
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
 
 import net.minecraft.block.SoundType;
+import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.Item;
@@ -23,7 +24,7 @@ import net.minecraft.item.Item;
 public class BlockFusedAbyssalSand extends BlockACBasic {
 
 	public BlockFusedAbyssalSand() {
-		super(Material.SAND, 0.5F, 2.5F, SoundType.SAND);
+		super(Material.SAND, 0.5F, 2.5F, SoundType.SAND, MapColor.LIME);
 		setUnlocalizedName("fusedabyssalsand");
 	}
 

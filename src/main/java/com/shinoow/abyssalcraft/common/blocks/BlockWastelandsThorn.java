@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2016 Shinoow.
+ * Copyright (c) 2012 - 2017 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -44,6 +44,6 @@ public class BlockWastelandsThorn extends BlockBush {
 	{
 		if(entityIn instanceof EntityPlayer && ((EntityPlayer)entityIn).getItemStackFromSlot(EntityEquipmentSlot.FEET) == null &&
 				((EntityPlayer)entityIn).getItemStackFromSlot(EntityEquipmentSlot.LEGS) == null)
-			entityIn.attackEntityFrom(DamageSource.cactus, 1.0F);
+			entityIn.attackEntityFrom(DamageSource.CACTUS, 1.0F);
 	}
 }

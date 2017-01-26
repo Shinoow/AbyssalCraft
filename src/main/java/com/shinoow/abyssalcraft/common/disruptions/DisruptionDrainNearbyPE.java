@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2016 Shinoow.
+ * Copyright (c) 2012 - 2017 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -84,7 +84,7 @@ public class DisruptionDrainNearbyPE extends DisruptionEntry {
 					((IEnergyContainerItem) item.getItem()).getContainedEnergy(item) > 0){
 						if(!world.isRemote)
 							((IEnergyContainerItem) item.getItem()).consumeEnergy(item, ((IEnergyContainerItem) item.getItem()).getContainedEnergy(item)/(world.rand.nextInt(4) == 0 ? 2 : 10));
-						if(isNecronomicon(item.getItem())) player.attackEntityFrom(DamageSource.magic, 2);
+						if(isNecronomicon(item.getItem())) player.attackEntityFrom(DamageSource.MAGIC, 2);
 						for(int i = 0; i < 3; i++)
 							world.spawnParticle(EnumParticleTypes.SMOKE_LARGE, player.posX + (world.rand.nextDouble() - 0.5D) * player.width,
 									player.posY + world.rand.nextDouble() * player.height, player.posZ + (world.rand.nextDouble() - 0.5D) * player.width, 0,0,0);

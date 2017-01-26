@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2016 Shinoow.
+ * Copyright (c) 2012 - 2017 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -30,6 +30,8 @@ public class CrystalFuelHandler implements IFuelHandler {
 			return 1350;
 		if(fuel.getItem() == ACItems.crystal_shard)
 			return 150;
+		if(fuel.getItem() == ACItems.crystal_fragment)
+			return 17;
 		if(APIUtils.isCrystal(fuel))
 			return 1000;
 		return 0;

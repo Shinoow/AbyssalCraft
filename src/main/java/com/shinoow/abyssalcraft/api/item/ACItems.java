@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2016 Shinoow.
+ * Copyright (c) 2012 - 2017 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -226,5 +226,9 @@ public class ACItems {
 	public static Item shub_niggurath_engraving;
 	public static Item essence_of_the_gatekeeper;
 	public static Item interdimensional_cage;
+	/** Metadata Item, 0 = Iron, 1 = Gold, 2 = Sulfur, 3 = Carbon, 4 = Oxygen, 5 = Hydrogen, 6 = Nitrogen, 7 = Phosphorus,
+	 * 8 = Potassium, 9 = Nitrate, 10 = Methane, 11 = Redstone, 12 = Abyssalnite, 13 = Coralium, 14 = Dreadium, 15 = Blaze,
+	 * 16 = Tin, 17 = Copper, 18 = Silicon, 19 = Magnesium, 20 = Aluminium, 21 = Silica, 22 = Alumina, 23 = Magnesia, 24 = Zinc */
+	public static Item crystal_fragment;
 	//	public static Item shadow_titan_armor_plate = getItem("shadowplate");
 }

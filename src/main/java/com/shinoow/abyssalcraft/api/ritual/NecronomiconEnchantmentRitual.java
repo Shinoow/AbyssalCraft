@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2016 Shinoow.
+ * Copyright (c) 2012 - 2017 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -99,11 +99,11 @@ public class NecronomiconEnchantmentRitual extends NecronomiconRitual {
 	}
 
 	private boolean canEnchant(ItemStack stack){
-		if(stack == null) return false;
+		if(stack.isEmpty()) return false;
 		if(stack.isItemEnchanted()){
 			Map<Enchantment, Integer> enchantments = EnchantmentHelper.getEnchantments(stack);
 			for(Enchantment ench : enchantments.keySet())
-				if(!ench.canApplyTogether(enchantment.enchantmentobj) || !enchantment.enchantmentobj.canApplyTogether(ench))
+				if(!ench.func_191560_c(enchantment.enchantmentobj))
 					return false;
 			return enchantment.enchantmentobj.canApply(stack);
 		}

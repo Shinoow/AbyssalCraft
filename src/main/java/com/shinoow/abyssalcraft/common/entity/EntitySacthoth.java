@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2016 Shinoow.
+ * Copyright (c) 2012 - 2017 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -285,7 +285,7 @@ public class EntitySacthoth extends EntityMob implements IAntiEntity, ICoraliumE
 	{
 		if(par2 > 30) par2 = 10 + world.rand.nextInt(10);
 
-		if(par1DamageSource == DamageSource.inWall){
+		if(par1DamageSource == DamageSource.IN_WALL){
 			teleportRandomly();
 			return false;
 		}
@@ -463,9 +463,8 @@ public class EntitySacthoth extends EntityMob implements IAntiEntity, ICoraliumE
 	@Override
 	public void onLivingUpdate()
 	{
-		for (int i = 0; i < 2; ++i)
-			if(ACConfig.particleEntity)
-				world.spawnParticle(EnumParticleTypes.SMOKE_LARGE, posX + (rand.nextDouble() - 0.5D) * width, posY + rand.nextDouble() * height, posZ + (rand.nextDouble() - 0.5D) * width, 0.0D, 0.0D, 0.0D);
+		for (int i = 0; i < 2 && ACConfig.particleEntity && world.provider.getDimension() != ACLib.dark_realm_id; ++i)
+			world.spawnParticle(EnumParticleTypes.SMOKE_LARGE, posX + (rand.nextDouble() - 0.5D) * width, posY + rand.nextDouble() * height, posZ + (rand.nextDouble() - 0.5D) * width, 0.0D, 0.0D, 0.0D);
 
 		List list = world.getEntitiesWithinAABBExcludingEntity(this, getEntityBoundingBox().expand(30.0D, 30.0D, 30.0D));
 		if (list != null)

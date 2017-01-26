@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2016 Shinoow.
+ * Copyright (c) 2012 - 2017 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -37,7 +37,7 @@ public class DisruptionPotentialEnergy extends DisruptionEntry {
 				((IEnergyContainerItem) item.getItem()).getContainedEnergy(item) > 0){
 					if(!world.isRemote)
 						((IEnergyContainerItem) item.getItem()).consumeEnergy(item, ((IEnergyContainerItem) item.getItem()).getContainedEnergy(item)/10);
-					player.attackEntityFrom(DamageSource.magic, 2);
+					player.attackEntityFrom(DamageSource.MAGIC, 2);
 					break;
 				}
 	}

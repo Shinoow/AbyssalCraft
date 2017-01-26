@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2016 Shinoow.
+ * Copyright (c) 2012 - 2017 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -45,6 +45,7 @@ import net.minecraft.pathfinding.PathNavigate;
 import net.minecraft.pathfinding.PathNavigateClimber;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
@@ -236,22 +237,19 @@ public class EntityLesserShoggoth extends EntityMob implements ICoraliumEntity, 
 				shoggoth.copyLocationAndAnglesFrom(this);
 				shoggoth.onInitialSpawn(world.getDifficultyForLocation(new BlockPos(posX, posY, posZ)),(IEntityLivingData)null);
 				shoggoth.setChild(true);
+				shoggoth.setShoggothType(getShoggothType());
 				world.spawnEntity(shoggoth);
 				playSound(SoundEvents.ENTITY_CHICKEN_EGG, 1.0F, (rand.nextFloat() - rand.nextFloat()) * 0.2F + 1.0F);
 			}
 			else setChild(false);
 		}
 
-		if(!world.isRemote){
-			int x = MathHelper.floor(posX);
-			int y = MathHelper.floor(posY);
-			int z = MathHelper.floor(posZ);
-
+		if(!world.isRemote)
 			for (int l = 0; l < 4; ++l)
 			{
-				x = MathHelper.floor(posX + (l % 2 * 2 - 1) * 0.25F);
-				y = MathHelper.floor(posY);
-				z = MathHelper.floor(posZ + (l / 2 % 2 * 2 - 1) * 0.25F);
+				int x = MathHelper.floor(posX + (l % 2 * 2 - 1) * 0.25F);
+				int y = roundUp(MathHelper.floor(posY), posY);
+				int z = MathHelper.floor(posZ + (l / 2 % 2 * 2 - 1) * 0.25F);
 
 				spawnOoze(x, y - 1, z);
 				if(!isChild()){
@@ -260,7 +258,6 @@ public class EntityLesserShoggoth extends EntityMob implements ICoraliumEntity, 
 					spawnOoze(x - 1, y - 1, z - 1);
 				}
 			}
-		}
 
 		if(monolithTimer >= 1800){
 			monolithTimer = 0;
@@ -271,6 +268,14 @@ public class EntityLesserShoggoth extends EntityMob implements ICoraliumEntity, 
 					new WorldGenShoggothMonolith().generate(world, rand, new BlockPos(MathHelper.floor(posX) + 3, MathHelper.floor(posY), MathHelper.floor(posZ) + 3));
 			}
 		}
+
+		for (int i = 0; i < 2 && getShoggothType() == 4 && ACConfig.particleEntity && world.provider.getDimension() != ACLib.dark_realm_id; ++i)
+			world.spawnParticle(EnumParticleTypes.SMOKE_LARGE, posX + (rand.nextDouble() - 0.5D) * width, posY + rand.nextDouble() * height, posZ + (rand.nextDouble() - 0.5D) * width, 0.0D, 0.0D, 0.0D);
+	}
+
+	private int roundUp(int num, double d){
+		if(num < d) return num + 1;
+		return num;
 	}
 
 	/**
@@ -353,7 +358,7 @@ public class EntityLesserShoggoth extends EntityMob implements ICoraliumEntity, 
 			playSound(SoundEvents.ENTITY_SMALL_SLIME_JUMP, getSoundVolume(), ((rand.nextFloat() - rand.nextFloat()) * 0.2F + 1.0F) / 0.8F);
 			return false;
 		}
-		if(par1DamageSource == DamageSource.cactus) return false;
+		if(par1DamageSource == DamageSource.CACTUS) return false;
 
 		return super.attackEntityFrom(par1DamageSource, par2);
 	}

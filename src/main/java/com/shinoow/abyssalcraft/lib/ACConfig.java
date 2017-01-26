@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2016 Shinoow.
+ * Copyright (c) 2012 - 2017 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -20,11 +20,11 @@ public class ACConfig {
 
 	public static boolean keepLoaded1, keepLoaded2, keepLoaded3, keepLoaded4;
 
-	public static boolean shouldSpread, shouldInfect, breakLogic, destroyOcean, demonAnimalFire, darkness,
-	particleBlock, particleEntity, hardcoreMode, useDynamicPotionIds, evilAnimalCreatureType,
-	antiItemDisintegration, smeltingRecipes, purgeMobSpawns;
+	public static boolean shouldSpread, shouldInfect, breakLogic, destroyOcean, demonAnimalFire, particleBlock,
+	particleEntity, hardcoreMode, evilAnimalCreatureType, antiItemDisintegration, smeltingRecipes, purgeMobSpawns,
+	overworldShoggoths;
 	public static int evilAnimalSpawnWeight, endAbyssalZombieSpawnWeight, portalCooldown, demonAnimalSpawnWeight, shoggothLairSpawnRate;
-	public static double damageAmpl;
+	public static double damageAmpl, depthsHelmetOverlayOpacity;
 	public static boolean shoggothOoze, oozeLeaves, oozeGrass, oozeGround, oozeSand, oozeRock, oozeCloth, oozeWood,
 	oozeGourd, oozeIron, oozeClay, oozeExpire;
 	public static boolean generateDarklandsStructures, generateShoggothLairs, generateAbyssalWastelandPillars,

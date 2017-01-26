@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2016 Shinoow.
+ * Copyright (c) 2012 - 2017 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -32,7 +32,7 @@ public class WorldProviderAbyss extends WorldProvider {
 	}
 
 	@Override
-	public void createBiomeProvider() {
+	public void init() {
 		biomeProvider = new BiomeProviderSingle(ACBiomes.abyssal_wastelands);
 		setDimension(ACLib.abyssal_wasteland_id);
 		hasNoSky = true;
@@ -68,7 +68,7 @@ public class WorldProviderAbyss extends WorldProvider {
 
 	@Override
 	public float calculateCelestialAngle(long par1, float par3) {
-		return 0.0F;
+		return 0.5F;
 	}
 
 	@Override
@@ -85,7 +85,7 @@ public class WorldProviderAbyss extends WorldProvider {
 
 	@Override
 	public Vec3d getSkyColor(Entity cameraEntity, float partialTicks) {
-		return new Vec3d(0, 5, 0.2);
+		return new Vec3d(0, 4.5, 1.5);
 	}
 
 	@Override

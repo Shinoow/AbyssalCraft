@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2016 Shinoow.
+ * Copyright (c) 2012 - 2017 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -34,6 +34,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
 import com.shinoow.abyssalcraft.api.item.ACItems;
+import com.shinoow.abyssalcraft.lib.ACConfig;
 import com.shinoow.abyssalcraft.lib.ACTabs;
 
 //@InterfaceList(value = { @Interface(iface = "thaumcraft.api.items.IVisDiscountGear", modid = "Thaumcraft"),
@@ -87,31 +88,28 @@ public class ItemDepthsArmor extends ItemArmor /* implements IVisDiscountGear, I
 
 
 		if(Minecraft.getMinecraft().gameSettings.thirdPersonView == 0 && stack != null && stack.getItem() == ACItems.depths_helmet) {
-			GlStateManager.pushAttrib();
-
-			Tessellator t = Tessellator.getInstance();
-
-			ScaledResolution scale = new ScaledResolution(Minecraft.getMinecraft());
-			int width = scale.getScaledWidth();
-			int height = scale.getScaledHeight();
 
 			GlStateManager.disableDepth();
 			GlStateManager.depthMask(false);
+			GlStateManager.enableBlend();
 			GlStateManager.blendFunc(SourceFactor.SRC_ALPHA, DestFactor.ONE_MINUS_SRC_ALPHA);
-			GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
-			GlStateManager.disableAlpha();
+			GlStateManager.color(1.0F, 1.0F, 1.0F, (float)ACConfig.depthsHelmetOverlayOpacity);
+
 			Minecraft.getMinecraft().renderEngine.bindTexture(coraliumBlur);
 
+			Tessellator t = Tessellator.getInstance();
 			VertexBuffer wr = t.getBuffer();
 
 			wr.begin(7, DefaultVertexFormats.POSITION_TEX);
-			wr.pos(0.0D, height, 90.0D).tex(0.0D, 1.0D).endVertex();;
-			wr.pos(width, height, 90.0D).tex(1.0D, 1.0D).endVertex();;
-			wr.pos(width, 0.0D, 90.0D).tex(1.0D, 0.0D).endVertex();;
+			wr.pos(0.0D, resolution.getScaledHeight(), 90.0D).tex(0.0D, 1.0D).endVertex();;
+			wr.pos(resolution.getScaledWidth(), resolution.getScaledHeight(), 90.0D).tex(1.0D, 1.0D).endVertex();;
+			wr.pos(resolution.getScaledWidth(), 0.0D, 90.0D).tex(1.0D, 0.0D).endVertex();;
 			wr.pos(0.0D, 0.0D, 90.0D).tex(0.0D, 0.0D).endVertex();;
 			t.draw();
 
-			GlStateManager.popAttrib();
+			GlStateManager.depthMask(true);
+			GlStateManager.enableDepth();
+			GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
 		}
 	}
 

@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2016 Shinoow.
+ * Copyright (c) 2012 - 2017 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -33,7 +33,7 @@ public class WorldProviderDarkRealm extends WorldProvider {
 	}
 
 	@Override
-	public void createBiomeProvider() {
+	public void init() {
 		biomeProvider = new BiomeProviderSingle(ACBiomes.dark_realm);
 		setDimension(ACLib.dark_realm_id);
 		hasNoSky = true;

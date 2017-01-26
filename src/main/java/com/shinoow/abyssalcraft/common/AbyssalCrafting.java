@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2016 Shinoow.
+ * Copyright (c) 2012 - 2017 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -43,6 +43,7 @@ import com.shinoow.abyssalcraft.api.ritual.NecronomiconPotionAoERitual;
 import com.shinoow.abyssalcraft.api.ritual.NecronomiconSummonRitual;
 import com.shinoow.abyssalcraft.api.ritual.RitualRegistry;
 import com.shinoow.abyssalcraft.common.blocks.BlockCrystalCluster.EnumCrystalType;
+import com.shinoow.abyssalcraft.common.blocks.BlockCrystalCluster2.EnumCrystalType2;
 import com.shinoow.abyssalcraft.common.disruptions.DisruptionDisplaceEntities;
 import com.shinoow.abyssalcraft.common.disruptions.DisruptionDrainNearbyPE;
 import com.shinoow.abyssalcraft.common.disruptions.DisruptionFire;
@@ -289,6 +290,11 @@ public class AbyssalCrafting {
 		GameRegistry.addRecipe(new ItemStack(ACItems.crystal_shard, 1, 22), new Object[] {" # ", "%%%", " # ", '#', new ItemStack(ACItems.crystal_shard, 1, 20), '%', new ItemStack(ACItems.crystal_shard, 1, 4)});
 		GameRegistry.addRecipe(new ItemStack(ACItems.crystal_shard, 1, 21), new Object[] {"#%#", '#', new ItemStack(ACItems.crystal_shard, 1, 4), '%', new ItemStack(ACItems.crystal_shard, 1, 18)});
 		GameRegistry.addRecipe(new ItemStack(ACItems.crystal_shard, 1, 23), new Object[] {"#%", '#', new ItemStack(ACItems.crystal_shard, 1, 19), '%', new ItemStack(ACItems.crystal_shard, 1, 4)});
+		GameRegistry.addRecipe(new ItemStack(ACItems.crystal_fragment, 1, 10), new Object[] {" # ", "#%#", " # ", '#', new ItemStack(ACItems.crystal_fragment, 1, 5), '%', new ItemStack(ACItems.crystal_fragment, 1, 3)});
+		GameRegistry.addRecipe(new ItemStack(ACItems.crystal_fragment, 1, 9), new Object[] {" # ", "%%%", '#', new ItemStack(ACItems.crystal_fragment, 1, 6), '%', new ItemStack(ACItems.crystal_fragment, 1, 4)});
+		GameRegistry.addRecipe(new ItemStack(ACItems.crystal_fragment, 1, 22), new Object[] {" # ", "%%%", " # ", '#', new ItemStack(ACItems.crystal_fragment, 1, 20), '%', new ItemStack(ACItems.crystal_fragment, 1, 4)});
+		GameRegistry.addRecipe(new ItemStack(ACItems.crystal_fragment, 1, 21), new Object[] {"#%#", '#', new ItemStack(ACItems.crystal_fragment, 1, 4), '%', new ItemStack(ACItems.crystal_fragment, 1, 18)});
+		GameRegistry.addRecipe(new ItemStack(ACItems.crystal_fragment, 1, 23), new Object[] {"#%", '#', new ItemStack(ACItems.crystal_fragment, 1, 19), '%', new ItemStack(ACItems.crystal_fragment, 1, 4)});
 		GameRegistry.addRecipe(new ItemStack(ACItems.ethaxium_ingot), new Object[] {"###", "#%#", "###", '#', ACItems.ethaxium_brick, '%', ACItems.life_crystal});
 		GameRegistry.addRecipe(new ItemStack(ACItems.ethaxium_ingot), new Object[] {" # ", "#%#", " # ", '#', ACItems.ethaxium_brick, '%', ACItems.oblivion_catalyst});
 		ItemStack egg = new ItemStack(Items.SPAWN_EGG);
@@ -339,6 +345,16 @@ public class AbyssalCrafting {
 			GameRegistry.addRecipe(new ItemStack(ACItems.crystal, 9, i), new Object[] {"#", '#', new ItemStack(ACBlocks.crystal_cluster, 1, i)});
 			GameRegistry.addRecipe(new ItemStack(ACItems.crystal, 1, i), new Object[] {"###", "###", "###", '#', new ItemStack(ACItems.crystal_shard, 1, i)});
 			GameRegistry.addRecipe(new ItemStack(ACItems.crystal_shard, 9, i), new Object[] {"#", '#', new ItemStack(ACItems.crystal, 1, i)});
+			GameRegistry.addRecipe(new ItemStack(ACItems.crystal_shard, 1, i), new Object[] {"###", "###", "###", '#', new ItemStack(ACItems.crystal_fragment, 1, i)});
+			GameRegistry.addRecipe(new ItemStack(ACItems.crystal_fragment, 9, i), new Object[] {"#", '#', new ItemStack(ACItems.crystal_shard, 1, i)});
+		}
+		for(int i = 0; i < EnumCrystalType2.values().length; i++){
+			GameRegistry.addRecipe(new ItemStack(ACBlocks.crystal_cluster2, 1, i), new Object[] {"###", "###", "###", '#', new ItemStack(ACItems.crystal, 1, i+16)});
+			GameRegistry.addRecipe(new ItemStack(ACItems.crystal, 9, i+16), new Object[] {"#", '#', new ItemStack(ACBlocks.crystal_cluster2, 1, i)});
+			GameRegistry.addRecipe(new ItemStack(ACItems.crystal, 1, i+16), new Object[] {"###", "###", "###", '#', new ItemStack(ACItems.crystal_shard, 1, i+16)});
+			GameRegistry.addRecipe(new ItemStack(ACItems.crystal_shard, 9, i+16), new Object[] {"#", '#', new ItemStack(ACItems.crystal, 1, i+16)});
+			GameRegistry.addRecipe(new ItemStack(ACItems.crystal_shard, 1, i+16), new Object[] {"###", "###", "###", '#', new ItemStack(ACItems.crystal_fragment, 1, i+16)});
+			GameRegistry.addRecipe(new ItemStack(ACItems.crystal_fragment, 9, i+16), new Object[] {"#", '#', new ItemStack(ACItems.crystal_shard, 1, i+16)});
 		}
 		GameRegistry.addRecipe(new ItemStack(ACItems.skin, 1, 0), new Object[] {"###", "#%#", "###", '#', ACItems.coralium_plagued_flesh, '%', new ItemStack(ACItems.essence, 1, 0)});
 		GameRegistry.addRecipe(new ItemStack(ACItems.skin, 1, 1), new Object[] {"###", "#%#", "###", '#', ACItems.dread_fragment, '%', new ItemStack(ACItems.essence, 1, 1)});
@@ -421,18 +437,18 @@ public class AbyssalCrafting {
 		GameRegistry.addRecipe(new ItemStack(ACItems.coralium_gem, 8), new Object[] {"#", '#', ACItems.coralium_gem_cluster_8});
 		GameRegistry.addRecipe(new ItemStack(ACItems.coralium_gem, 9), new Object[] {"#", '#', ACItems.coralium_gem_cluster_9});
 
-		addArmor(ACItems.abyssalnite_helmet, ACItems.abyssalnite_chestplate, ACItems.abyssalnite_leggings, ACItems.abyssalnite_boots, ACItems.abyssalnite_ingot, ACItems.abyssalnite_upgrade_kit, Items.DIAMOND_HELMET, Items.DIAMOND_CHESTPLATE, Items.DIAMOND_LEGGINGS, Items.DIAMOND_BOOTS);
-		addArmor(ACItems.refined_coralium_helmet, ACItems.refined_coralium_chestplate, ACItems.refined_coralium_leggings, ACItems.refined_coralium_boots, ACItems.refined_coralium_ingot, ACItems.coralium_upgrade_kit, ACItems.abyssalnite_helmet, ACItems.abyssalnite_chestplate, ACItems.abyssalnite_leggings, ACItems.abyssalnite_boots);
+		addArmor(ACItems.abyssalnite_helmet, ACItems.abyssalnite_chestplate, ACItems.abyssalnite_leggings, ACItems.abyssalnite_boots, ACItems.abyssalnite_ingot, new ItemStack(ACItems.ingot_nugget, 1, 0), ACItems.abyssalnite_upgrade_kit, Items.DIAMOND_HELMET, Items.DIAMOND_CHESTPLATE, Items.DIAMOND_LEGGINGS, Items.DIAMOND_BOOTS);
+		addArmor(ACItems.refined_coralium_helmet, ACItems.refined_coralium_chestplate, ACItems.refined_coralium_leggings, ACItems.refined_coralium_boots, ACItems.refined_coralium_ingot, new ItemStack(ACItems.ingot_nugget, 1, 1), ACItems.coralium_upgrade_kit, ACItems.abyssalnite_helmet, ACItems.abyssalnite_chestplate, ACItems.abyssalnite_leggings, ACItems.abyssalnite_boots);
 		GameRegistry.addRecipe(new ItemStack(ACItems.plated_coralium_boots, 1), new Object[] {"# #", "%&%", '#', ACItems.refined_coralium_ingot, '%', ACItems.coralium_plate, '&', ACItems.refined_coralium_boots});
 		GameRegistry.addRecipe(new ItemStack(ACItems.plated_coralium_helmet, 1), new Object[] {"&#&", "#@#", "%%%", '#', ACItems.coralium_plate, '&', ACItems.coralium_pearl, '@', ACItems.refined_coralium_helmet, '%', ACItems.refined_coralium_ingot});
 		GameRegistry.addRecipe(new ItemStack(ACItems.plated_coralium_chestplate, 1), new Object[] {"# #", "%@%", "%#%",'#', ACItems.coralium_plate, '%', ACItems.refined_coralium_ingot, '@', ACItems.refined_coralium_chestplate});
 		GameRegistry.addRecipe(new ItemStack(ACItems.plated_coralium_leggings, 1), new Object[] {"%&%", "# #", "# #",'#', ACItems.refined_coralium_ingot, '%', ACItems.coralium_plate, '&', ACItems.refined_coralium_leggings});
-		addArmor(ACItems.dreadium_helmet, ACItems.dreadium_chestplate, ACItems.dreadium_leggings, ACItems.dreadium_boots, ACItems.dreadium_ingot, ACItems.dreadium_upgrade_kit, ACItems.refined_coralium_helmet, ACItems.refined_coralium_chestplate, ACItems.refined_coralium_leggings, ACItems.refined_coralium_boots);
+		addArmor(ACItems.dreadium_helmet, ACItems.dreadium_chestplate, ACItems.dreadium_leggings, ACItems.dreadium_boots, ACItems.dreadium_ingot, new ItemStack(ACItems.ingot_nugget, 1, 2), ACItems.dreadium_upgrade_kit, ACItems.refined_coralium_helmet, ACItems.refined_coralium_chestplate, ACItems.refined_coralium_leggings, ACItems.refined_coralium_boots);
 		GameRegistry.addRecipe(new ItemStack(ACItems.dreadium_samurai_boots, 1), new Object[] {"#%#", "&&&", '#', ACItems.dread_cloth, '%', new ItemStack(ACItems.dreadium_boots, 1, OreDictionary.WILDCARD_VALUE), '&', ACBlocks.dreadlands_planks});
 		GameRegistry.addRecipe(new ItemStack(ACItems.dreadium_samurai_helmet, 1), new Object[] {" # ", "%&%", '#', ACItems.dreadium_ingot, '%', ACItems.dreadium_plate, '&', new ItemStack(ACItems.dreadium_helmet, 1, OreDictionary.WILDCARD_VALUE)});
 		GameRegistry.addRecipe(new ItemStack(ACItems.dreadium_samurai_chestplate, 1), new Object[] {"#%#", "#&#", "@@@", '#', ACItems.dreadium_plate, '%', ACItems.dreadium_ingot, '&', new ItemStack(ACItems.dreadium_chestplate, 1, OreDictionary.WILDCARD_VALUE), '@', ACItems.dread_cloth});
 		GameRegistry.addRecipe(new ItemStack(ACItems.dreadium_samurai_leggings, 1), new Object[] {"#%#", "&&&", '#', ACItems.dreadium_plate, '%', new ItemStack(ACItems.dreadium_leggings, 1, OreDictionary.WILDCARD_VALUE), '&', ACItems.dread_cloth});
-		addArmor(ACItems.ethaxium_helmet, ACItems.ethaxium_chestplate, ACItems.ethaxium_leggings, ACItems.ethaxium_boots, ACItems.ethaxium_ingot, ACItems.ethaxium_upgrade_kit, ACItems.dreadium_helmet, ACItems.dreadium_chestplate, ACItems.dreadium_leggings, ACItems.dreadium_boots);
+		addArmor(ACItems.ethaxium_helmet, ACItems.ethaxium_chestplate, ACItems.ethaxium_leggings, ACItems.ethaxium_boots, ACItems.ethaxium_ingot, new ItemStack(ACItems.ingot_nugget, 1, 3), ACItems.ethaxium_upgrade_kit, ACItems.dreadium_helmet, ACItems.dreadium_chestplate, ACItems.dreadium_leggings, ACItems.dreadium_boots);
 
 		GameRegistry.addRecipe(new ItemStack(ACItems.iron_plate, 2), new Object[] {"#", "#", '#', Items.IRON_INGOT});
 		GameRegistry.addRecipe(new ItemStack(ACItems.washcloth, 1), new Object[] {"###", "#%#", "###", '#', Blocks.WEB, '%', Blocks.WOOL});
@@ -537,21 +553,6 @@ public class AbyssalCrafting {
 			GameRegistry.addSmelting(Items.LEATHER_CHESTPLATE, new ItemStack(Items.LEATHER), 1F);
 			GameRegistry.addSmelting(Items.LEATHER_LEGGINGS, new ItemStack(Items.LEATHER), 1F);
 			GameRegistry.addSmelting(Items.LEATHER_BOOTS, new ItemStack(Items.LEATHER), 1F);
-
-			GameRegistry.addSmelting(Items.IRON_HELMET, new ItemStack(Items.IRON_INGOT), 1F);
-			GameRegistry.addSmelting(Items.IRON_CHESTPLATE, new ItemStack(Items.IRON_INGOT), 1F);
-			GameRegistry.addSmelting(Items.IRON_LEGGINGS, new ItemStack(Items.IRON_INGOT), 1F);
-			GameRegistry.addSmelting(Items.IRON_BOOTS, new ItemStack(Items.IRON_INGOT), 1F);
-
-			GameRegistry.addSmelting(Items.GOLDEN_HELMET, new ItemStack(Items.GOLD_INGOT), 1F);
-			GameRegistry.addSmelting(Items.GOLDEN_CHESTPLATE, new ItemStack(Items.GOLD_INGOT), 1F);
-			GameRegistry.addSmelting(Items.GOLDEN_LEGGINGS, new ItemStack(Items.GOLD_INGOT), 1F);
-			GameRegistry.addSmelting(Items.GOLDEN_BOOTS, new ItemStack(Items.GOLD_INGOT), 1F);
-
-			GameRegistry.addSmelting(Items.DIAMOND_HELMET, new ItemStack(Items.DIAMOND), 1F);
-			GameRegistry.addSmelting(Items.DIAMOND_CHESTPLATE, new ItemStack(Items.DIAMOND), 1F);
-			GameRegistry.addSmelting(Items.DIAMOND_LEGGINGS, new ItemStack(Items.DIAMOND), 1F);
-			GameRegistry.addSmelting(Items.DIAMOND_BOOTS, new ItemStack(Items.DIAMOND), 1F);
 		}
 	}
 
@@ -621,12 +622,12 @@ public class AbyssalCrafting {
 		AbyssalCraftAPI.addCrystallization("oreBrass", "crystalShardCopper", 12, "crystalShardZinc", 8, 0.5F);
 		AbyssalCraftAPI.addSingleCrystallization(Items.ROTTEN_FLESH, new ItemStack(ACItems.crystal_shard, 8, 7), 0.1F);
 		AbyssalCraftAPI.addSingleCrystallization(new ItemStack(ACItems.shoggoth_flesh, 1, 0), new ItemStack(ACItems.crystal_shard, 8, 7), 0.2F);
-		AbyssalCraftAPI.addCrystallization(new ItemStack(ACItems.shoggoth_flesh, 1, 1), new ItemStack(ACItems.crystal_shard, 8, 7), new ItemStack(ACItems.crystal_shard, 4, 13), 0.2F);
-		AbyssalCraftAPI.addCrystallization(new ItemStack(ACItems.shoggoth_flesh, 1, 2), new ItemStack(ACItems.crystal_shard, 8, 7), new ItemStack(ACItems.crystal_shard, 4, 14), 0.2F);
-		AbyssalCraftAPI.addCrystallization(new ItemStack(ACItems.shoggoth_flesh, 1, 3), new ItemStack(ACItems.crystal_shard, 8, 7), new ItemStack(ACItems.crystal_shard, 4, 3), 0.2F);
+		AbyssalCraftAPI.addCrystallization(new ItemStack(ACItems.shoggoth_flesh, 1, 1), new ItemStack(ACItems.crystal_shard, 8, 7), new ItemStack(ACItems.crystal_fragment, 2, 13), 0.2F);
+		AbyssalCraftAPI.addCrystallization(new ItemStack(ACItems.shoggoth_flesh, 1, 2), new ItemStack(ACItems.crystal_shard, 8, 7), new ItemStack(ACItems.crystal_fragment, 2, 14), 0.2F);
+		AbyssalCraftAPI.addCrystallization(new ItemStack(ACItems.shoggoth_flesh, 1, 3), new ItemStack(ACItems.crystal_shard, 8, 7), new ItemStack(ACItems.crystal_fragment, 2, 3), 0.2F);
 		AbyssalCraftAPI.addCrystallization(new ItemStack(ACItems.shoggoth_flesh, 1, 4), new ItemStack(ACItems.crystal_shard, 8, 7), new ItemStack(ACItems.shadow_gem, 1), 0.2F);
-		AbyssalCraftAPI.addCrystallization(new ItemStack(ACItems.coralium_plagued_flesh), new ItemStack(ACItems.crystal_shard, 8, 7), new ItemStack(ACItems.crystal_shard, 4, 13), 0.2F);
-		AbyssalCraftAPI.addCrystallization(new ItemStack(ACItems.coralium_plagued_flesh_on_a_bone), new ItemStack(ACItems.crystal_shard, 12, 7), new ItemStack(ACItems.crystal_shard, 4, 13), 0.2F);
+		AbyssalCraftAPI.addCrystallization(new ItemStack(ACItems.coralium_plagued_flesh), new ItemStack(ACItems.crystal_shard, 8, 7), new ItemStack(ACItems.crystal_fragment, 1, 13), 0.2F);
+		AbyssalCraftAPI.addCrystallization(new ItemStack(ACItems.coralium_plagued_flesh_on_a_bone), new ItemStack(ACItems.crystal_shard, 12, 7), new ItemStack(ACItems.crystal_fragment, 1, 13), 0.2F);
 		AbyssalCraftAPI.addSingleCrystallization(Items.GOLD_NUGGET, new ItemStack(ACItems.crystal_shard, 1, 1), 0.1F);
 		AbyssalCraftAPI.addSingleCrystallization(new ItemStack(ACItems.ingot_nugget, 1, 0), new ItemStack(ACItems.crystal_shard, 1, 12), 0.1F);
 		AbyssalCraftAPI.addSingleCrystallization(new ItemStack(ACItems.ingot_nugget, 1, 1), new ItemStack(ACItems.crystal_shard, 1, 13), 0.1F);
@@ -961,7 +962,7 @@ public class AbyssalCrafting {
 		DisruptionHandler.instance().registerDisruption(new DisruptionSwarm("swarmSheep", DeityType.SHUBNIGGURATH, EntityEvilSheep.class, EntitySheep.class));
 	}
 
-	private static void addArmor(Item helmet, Item chestplate, Item pants, Item boots, Item material, Item upgrade, Item oldh, Item oldc, Item oldp, Item oldb){
+	private static void addArmor(Item helmet, Item chestplate, Item pants, Item boots, Item material, ItemStack nugget, Item upgrade, Item oldh, Item oldc, Item oldp, Item oldb){
 
 		GameRegistry.addRecipe(new ItemStack(helmet), new Object[] {"###", "# #", '#', material});
 		GameRegistry.addRecipe(new ItemStack(chestplate), new Object[] {"# #", "###", "###", '#', material});
@@ -974,10 +975,10 @@ public class AbyssalCrafting {
 		GameRegistry.addRecipe(new ItemStack(boots, 1), new Object[] {"#", "@", '#', new ItemStack(oldb, 1, OreDictionary.WILDCARD_VALUE), '@', upgrade});
 
 		if(ACConfig.smeltingRecipes){
-			GameRegistry.addSmelting(helmet, new ItemStack(material), 1F);
-			GameRegistry.addSmelting(chestplate, new ItemStack(material), 1F);
-			GameRegistry.addSmelting(pants, new ItemStack(material), 1F);
-			GameRegistry.addSmelting(boots, new ItemStack(material), 1F);
+			GameRegistry.addSmelting(helmet, nugget, 1F);
+			GameRegistry.addSmelting(chestplate, nugget, 1F);
+			GameRegistry.addSmelting(pants, nugget, 1F);
+			GameRegistry.addSmelting(boots, nugget, 1F);
 		}
 	}
 

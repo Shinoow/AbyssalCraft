@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2016 Shinoow.
+ * Copyright (c) 2012 - 2017 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -15,9 +15,11 @@ import java.util.Random;
 
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.SoundType;
+import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumBlockRenderType;
 import net.minecraft.util.math.AxisAlignedBB;
@@ -32,7 +34,7 @@ import com.shinoow.abyssalcraft.lib.ACTabs;
 public class BlockShoggothBiomass extends BlockContainer {
 
 	public BlockShoggothBiomass(){
-		super(Material.GROUND);
+		super(Material.GROUND, MapColor.GREEN);
 		setHardness(1.0F);
 		setResistance(18.0F);
 		setSoundType(SoundType.SAND);
@@ -58,6 +60,12 @@ public class BlockShoggothBiomass extends BlockContainer {
 	public int quantityDropped(Random par1Random)
 	{
 		return 0;
+	}
+
+	@Override
+	public boolean canSilkHarvest(World world, BlockPos pos, IBlockState state, EntityPlayer player)
+	{
+		return false;
 	}
 
 	@Override

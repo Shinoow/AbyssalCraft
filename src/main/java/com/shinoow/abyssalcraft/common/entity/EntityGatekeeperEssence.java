@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2016 Shinoow.
+ * Copyright (c) 2012 - 2017 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -12,12 +12,8 @@
 package com.shinoow.abyssalcraft.common.entity;
 
 import net.minecraft.entity.item.EntityItem;
-import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.network.datasync.DataParameter;
-import net.minecraft.network.datasync.DataSerializers;
-import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -27,8 +23,6 @@ import com.shinoow.abyssalcraft.api.item.ACItems;
 public class EntityGatekeeperEssence extends EntityItem {
 
 	private int age;
-	private static final DataParameter<ItemStack> ITEM = EntityDataManager.<ItemStack>createKey(EntityItem.class, DataSerializers.OPTIONAL_ITEM_STACK);
-
 	public EntityGatekeeperEssence(World worldIn) {
 		super(worldIn);
 		motionX = motionY = motionZ = 0;
@@ -45,17 +39,11 @@ public class EntityGatekeeperEssence extends EntityItem {
 	}
 
 	@Override
-	protected void entityInit()
-	{
-		getDataManager().register(ITEM, ItemStack.EMPTY);
-	}
-
-	@Override
 	public void onUpdate()
 	{
-		ItemStack stack = getDataManager().get(ITEM);
-		if (stack != null && stack.getItem() != null && stack.getItem().onEntityItemUpdate(this)) return;
-		if (getEntityItem() == null)
+		ItemStack stack = getEntityItem();
+		if (!stack.isEmpty() && stack.getItem().onEntityItemUpdate(this)) return;
+		if (getEntityItem().isEmpty())
 			setDead();
 		else
 		{
@@ -71,7 +59,7 @@ public class EntityGatekeeperEssence extends EntityItem {
 
 			handleWaterMovement();
 
-			ItemStack item = getDataManager().get(ITEM);
+			ItemStack item = getEntityItem();
 
 			if (!world.isRemote && age >= lifespan)
 			{
@@ -96,27 +84,6 @@ public class EntityGatekeeperEssence extends EntityItem {
 	{
 		super.readEntityFromNBT(tagCompound);
 		age = tagCompound.getShort("Age");
-
-		ItemStack item = getDataManager().get(ITEM);
-		if (item == null || item.getCount() <= 0) setDead();
-	}
-
-	@Override
-	public void setEntityItemStack(ItemStack stack)
-	{
-		getDataManager().set(ITEM, stack);
-		getDataManager().setDirty(ITEM);
-	}
-
-	@Override
-	public ItemStack getEntityItem()
-	{
-		ItemStack itemstack = getDataManager().get(ITEM);
-
-		if (itemstack == null)
-			return new ItemStack(Blocks.STONE);
-		else
-			return itemstack;
 	}
 
 	@Override

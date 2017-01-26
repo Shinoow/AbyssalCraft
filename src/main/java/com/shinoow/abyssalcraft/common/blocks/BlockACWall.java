@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2016 Shinoow.
+ * Copyright (c) 2012 - 2017 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -13,6 +13,7 @@ package com.shinoow.abyssalcraft.common.blocks;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockWall;
+import net.minecraft.block.material.MapColor;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
@@ -25,14 +26,23 @@ import com.shinoow.abyssalcraft.lib.ACTabs;
 
 public class BlockACWall extends BlockWall{
 
+	private MapColor mapColor;
+
 	public BlockACWall(Block par2Block) {
 		super(par2Block);
 		setCreativeTab(ACTabs.tabBlock);
+		mapColor = par2Block.getMapColor(par2Block.getDefaultState());
 	}
 
 	public BlockACWall(Block par2Block, int level){
 		this(par2Block);
 		setHarvestLevel("pickaxe", level);
+	}
+
+	@Override
+	public MapColor getMapColor(IBlockState state)
+	{
+		return mapColor;
 	}
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })

@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2016 Shinoow.
+ * Copyright (c) 2012 - 2017 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -23,7 +23,7 @@ import com.shinoow.abyssalcraft.lib.ACLib;
 public class WorldProviderDreadlands extends WorldProvider {
 
 	@Override
-	public void createBiomeProvider() {
+	public void init() {
 		biomeProvider = new BiomeProviderDreadlands(world.getSeed(), world.getWorldInfo().getTerrainType());
 		hasNoSky = true;
 		setDimension(ACLib.dreadlands_id);
@@ -62,7 +62,7 @@ public class WorldProviderDreadlands extends WorldProvider {
 
 	@Override
 	public float calculateCelestialAngle(long par1, float par3) {
-		return 0.5F;
+		return 0.0F;
 	}
 
 	@Override

@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2016 Shinoow.
+ * Copyright (c) 2012 - 2017 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -81,7 +81,7 @@ public class CorBloodParticleFX extends Particle {
 		motionY *= 0.9599999785423279D;
 		motionZ *= 0.9599999785423279D;
 
-		if (isCollided)
+		if (canCollide)
 		{
 			motionX *= 0.699999988079071D;
 			motionZ *= 0.699999988079071D;

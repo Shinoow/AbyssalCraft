@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2016 Shinoow.
+ * Copyright (c) 2012 - 2017 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -183,20 +183,6 @@ public class AbyssalCraftEventHooks {
 						event.getEntityLiving().posY + rand.nextDouble() * event.getEntityLiving().height,
 						event.getEntityLiving().posZ + (rand.nextDouble() - 0.5D) * event.getEntityLiving().width, 0,0,0);
 		}
-		if(ACConfig.darkness)
-			if(event.getEntityLiving() instanceof EntityPlayer){
-				EntityPlayer player = (EntityPlayer)event.getEntityLiving();
-				Random rand = new Random();
-				ItemStack helmet = player.getItemStackFromSlot(EntityEquipmentSlot.HEAD);
-				if(player.world.getBiome(new BlockPos(player.posX, player.posY, player.posZ)) instanceof IDarklandsBiome)
-					if(rand.nextInt(1000) == 0)
-						if(helmet == null || helmet != null && helmet.getItem() != ACItems.abyssalnite_helmet && helmet.getItem() != ACItems.dreaded_abyssalnite_helmet
-						&& helmet.getItem() != ACItems.refined_coralium_helmet && helmet.getItem() != ACItems.plated_coralium_helmet
-						&& helmet.getItem() != ACItems.depths_helmet && helmet.getItem() != ACItems.dreadium_helmet
-						&& helmet.getItem() != ACItems.dreadium_samurai_helmet && helmet.getItem() != ACItems.ethaxium_helmet)
-							if(!player.capabilities.isCreativeMode && !player.world.isRemote)
-								player.addPotionEffect(new PotionEffect(MobEffects.BLINDNESS, 100));
-			}
 	}
 
 	@SubscribeEvent
@@ -300,7 +286,7 @@ public class AbyssalCraftEventHooks {
 	public void noTPinOmothol(EnderTeleportEvent event){
 		if(!(event.getEntityLiving() instanceof EntityJzahar))
 			if(event.getEntityLiving().dimension == ACLib.omothol_id){
-				event.getEntityLiving().attackEntityFrom(DamageSource.fall, event.getAttackDamage());
+				event.getEntityLiving().attackEntityFrom(DamageSource.FALL, event.getAttackDamage());
 				event.getEntityLiving().addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, 200, 1));
 				event.getEntityLiving().addPotionEffect(new PotionEffect(MobEffects.WEAKNESS, 200, 1));
 				event.setCanceled(true);

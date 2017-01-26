@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2016 Shinoow.
+ * Copyright (c) 2012 - 2017 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -432,6 +432,7 @@ public class ClientProxy extends CommonProxy {
 		registerItemRender(ACItems.shub_niggurath_engraving, 0);
 		registerItemRender(ACItems.essence_of_the_gatekeeper, 0);
 		registerItemRender(ACItems.interdimensional_cage, 0);
+		registerItemRenders(ACItems.crystal_fragment, 25);
 
 		registerItemRender(ACBlocks.darkstone, 0);
 		registerItemRender(ACBlocks.darkstone_cobblestone, 0);
@@ -645,10 +646,12 @@ public class ClientProxy extends CommonProxy {
 		render1.addLayer(new LayerStarSpawnTentacles(render1));
 		RenderPlayer render2 = Minecraft.getMinecraft().getRenderManager().getSkinMap().get("slim");
 		render2.addLayer(new LayerStarSpawnTentacles(render2));
-		Minecraft.getMinecraft().getItemColors().registerItemColorHandler((stack, tintIndex) -> ACLib.crystalColors[stack.getItemDamage()], ACItems.crystal, ACItems.crystal_shard, Item.getItemFromBlock(ACBlocks.crystal_cluster), Item.getItemFromBlock(ACBlocks.crystal_cluster2));
+		Minecraft.getMinecraft().getItemColors().registerItemColorHandler((stack, tintIndex) -> ACLib.crystalColors[stack.getItemDamage()], ACItems.crystal, ACItems.crystal_shard, ACItems.crystal_fragment, Item.getItemFromBlock(ACBlocks.crystal_cluster));
+		Minecraft.getMinecraft().getItemColors().registerItemColorHandler((stack, tintIndex) -> ACLib.crystalColors[stack.getItemDamage() + 16], Item.getItemFromBlock(ACBlocks.crystal_cluster2));
 		Minecraft.getMinecraft().getItemColors().registerItemColorHandler((stack, tintIndex) -> 0xE8E8E8, ACItems.coin, ACItems.elder_engraved_coin, ACItems.cthulhu_engraved_coin, ACItems.hastur_engraved_coin, ACItems.jzahar_engraved_coin,
 				ACItems.azathoth_engraved_coin, ACItems.nyarlathotep_engraved_coin, ACItems.yog_sothoth_engraved_coin, ACItems.shub_niggurath_engraved_coin);
-		Minecraft.getMinecraft().getBlockColors().registerBlockColorHandler((state, world, pos, tintIndex) -> ACLib.crystalColors[state.getBlock().getMetaFromState(state)], ACBlocks.crystal_cluster, ACBlocks.crystal_cluster2);
+		Minecraft.getMinecraft().getBlockColors().registerBlockColorHandler((state, world, pos, tintIndex) -> ACLib.crystalColors[state.getBlock().getMetaFromState(state)], ACBlocks.crystal_cluster);
+		Minecraft.getMinecraft().getBlockColors().registerBlockColorHandler((state, world, pos, tintIndex) -> ACLib.crystalColors[state.getBlock().getMetaFromState(state) + 16], ACBlocks.crystal_cluster2);
 	}
 
 	private void registerFluidModel(Block fluidBlock, String name) {

@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2016 Shinoow.
+ * Copyright (c) 2012 - 2017 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -215,40 +215,40 @@ public class EntityChagaroth extends EntityMob implements IDreadEntity {
 				switch((int)getHealth()){
 				case 900:
 					world.spawnEntity(fist);
-					damageEntity(DamageSource.generic, 1);
+					damageEntity(DamageSource.GENERIC, 1);
 					break;
 				case 800:
 					world.spawnEntity(fist);
-					damageEntity(DamageSource.generic, 1);
+					damageEntity(DamageSource.GENERIC, 1);
 					break;
 				case 700:
 					world.spawnEntity(fist);
-					damageEntity(DamageSource.generic, 1);
+					damageEntity(DamageSource.GENERIC, 1);
 					break;
 				case 600:
 					world.spawnEntity(fist);
-					damageEntity(DamageSource.generic, 1);
+					damageEntity(DamageSource.GENERIC, 1);
 					break;
 				case 500:
 					world.spawnEntity(fist);
-					damageEntity(DamageSource.generic, 1);
+					damageEntity(DamageSource.GENERIC, 1);
 					break;
 				case 400:
 					world.spawnEntity(fist);
-					damageEntity(DamageSource.generic, 1);
+					damageEntity(DamageSource.GENERIC, 1);
 					break;
 				case 300:
 					world.spawnEntity(fist);
-					damageEntity(DamageSource.generic, 1);
+					damageEntity(DamageSource.GENERIC, 1);
 					break;
 				case 200:
 					world.spawnEntity(fist);
-					damageEntity(DamageSource.generic, 1);
+					damageEntity(DamageSource.GENERIC, 1);
 					break;
 				case 100:
 					world.spawnEntity(fist);
 					world.spawnEntity(dreadGuard);
-					damageEntity(DamageSource.generic, 1);
+					damageEntity(DamageSource.GENERIC, 1);
 					break;
 				}
 		}
