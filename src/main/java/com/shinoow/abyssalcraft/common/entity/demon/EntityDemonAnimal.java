@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2016 Shinoow.
+ * Copyright (c) 2012 - 2017 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -25,6 +25,7 @@ import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.pathfinding.PathNavigateGround;
 import net.minecraft.util.BlockPos;
@@ -72,9 +73,40 @@ public class EntityDemonAnimal extends EntityMob implements IDreadEntity {
 	}
 
 	@Override
+	public void setFire(int seconds)
+	{
+		if(!canBurn) canBurn = true;
+		super.setFire(seconds);
+	}
+
+	@Override
+	public boolean interact(EntityPlayer par1EntityPlayer)
+	{
+		ItemStack stack = par1EntityPlayer.getHeldItem();
+
+		if (stack != null && stack.getItem() == Items.flint_and_steel && !canBurn)
+		{
+			worldObj.playSoundEffect(posX, posY, posZ, "fire.ignite", 1.0F, rand.nextFloat() * 0.4F + 0.8F);
+			par1EntityPlayer.swingItem();
+			canBurn = true;
+
+			if (!worldObj.isRemote)
+			{
+				stack.damageItem(1, par1EntityPlayer);
+				return true;
+			}
+		}
+
+		return super.interact(par1EntityPlayer);
+	}
+
+	@Override
 	public void onLivingUpdate()
 	{
 		super.onLivingUpdate();
+
+		if(!canBurn && worldObj.isFlammableWithin(getEntityBoundingBox()))
+			canBurn = true;
 
 		if(!worldObj.isRemote && canBurn){
 			int i = MathHelper.floor_double(posX);

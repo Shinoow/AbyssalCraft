@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2016 Shinoow.
+ * Copyright (c) 2012 - 2017 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -120,7 +120,8 @@ public class ItemHandler implements ILifeCycleHandler {
 
 		//crystals
 		ACItems.crystal = new ItemCrystal("crystal");
-		ACItems.crystal_shard = new ItemCrystal("crystalshard");
+		ACItems.crystal_shard = new ItemCrystal("crystalshard", true);
+		ACItems.crystal_fragment = new ItemCrystal("crystalfragment", true);
 
 		//Shadow items
 		ACItems.shadow_fragment = new ItemACBasic("shadowfragment");
@@ -240,13 +241,13 @@ public class ItemHandler implements ILifeCycleHandler {
 		//Foodstuffs
 		ACItems.iron_plate = new ItemACBasic("ironp");
 		ACItems.mre = new ItemPlatefood(20, 1F, false, "mre");
-		ACItems.chicken_on_a_plate = new ItemPlatefood(12, 1.2F, false, "chickenp");
-		ACItems.pork_on_a_plate = new ItemPlatefood(16, 1.6F, false, "porkp");
-		ACItems.beef_on_a_plate = new ItemPlatefood(6, 0.6F, false, "beefp");
-		ACItems.fish_on_a_plate = new ItemPlatefood(10, 1.2F, false, "fishp");
+		ACItems.chicken_on_a_plate = new ItemPlatefood(9, 0.9F, false, "chickenp");
+		ACItems.pork_on_a_plate = new ItemPlatefood(12, 1.2F, false, "porkp");
+		ACItems.beef_on_a_plate = new ItemPlatefood(12, 1.2F, false, "beefp");
+		ACItems.fish_on_a_plate = new ItemPlatefood(8, 0.9F, false, "fishp");
 		ACItems.dirty_plate = new ItemACBasic("dirtyplate");
 		ACItems.fried_egg = new ItemFood(5, 0.6F, false).setCreativeTab(ACTabs.tabFood).setUnlocalizedName("friedegg");
-		ACItems.fried_egg_on_a_plate = new ItemPlatefood(10, 1.2F, false, "eggp");
+		ACItems.fried_egg_on_a_plate = new ItemPlatefood(9, 0.9F, false, "eggp");
 		ACItems.washcloth = new ItemWashCloth();
 
 		GameRegistry.registerItem(devsword, "devsword");
@@ -434,6 +435,7 @@ public class ItemHandler implements ILifeCycleHandler {
 		GameRegistry.registerItem(ACItems.shub_niggurath_engraving, "engraving_shubniggurath");
 		GameRegistry.registerItem(ACItems.essence_of_the_gatekeeper, "gatekeeperessence");
 		GameRegistry.registerItem(ACItems.interdimensional_cage, "interdimensionalcage");
+		GameRegistry.registerItem(ACItems.crystal_fragment, "crystalfragment");
 		//		GameRegistry.registerItem(shadowPlate, "shadowplate");
 
 		AbyssalCraftAPI.setRepairItems();

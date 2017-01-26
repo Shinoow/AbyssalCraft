@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2016 Shinoow.
+ * Copyright (c) 2012 - 2017 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -33,8 +33,6 @@ import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.chunk.ChunkPrimer;
 import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraft.world.gen.MapGenBase;
-import net.minecraft.world.gen.MapGenCaves;
-import net.minecraft.world.gen.MapGenRavine;
 import net.minecraft.world.gen.NoiseGenerator;
 import net.minecraft.world.gen.NoiseGeneratorOctaves;
 import net.minecraft.world.gen.NoiseGeneratorPerlin;
@@ -49,6 +47,8 @@ import com.shinoow.abyssalcraft.common.structures.StructureShoggothPit;
 import com.shinoow.abyssalcraft.common.structures.abyss.Chains;
 import com.shinoow.abyssalcraft.common.structures.abyss.Abyruin;
 import com.shinoow.abyssalcraft.common.structures.abyss.stronghold.MapGenAbyStronghold;
+import com.shinoow.abyssalcraft.common.world.gen.MapGenCavesAC;
+import com.shinoow.abyssalcraft.common.world.gen.MapGenRavineAC;
 import com.shinoow.abyssalcraft.common.world.gen.WorldGenAbyLake;
 import com.shinoow.abyssalcraft.lib.ACConfig;
 
@@ -72,10 +72,10 @@ public class ChunkProviderAbyss implements IChunkProvider
 	private final double[] field_147434_q;
 	private final float[] parabolicField;
 	private double[] stoneNoise = new double[256];
-	private MapGenBase caveGenerator = new MapGenCaves();
+	private MapGenBase caveGenerator = new MapGenCavesAC();
 
 	private MapGenAbyStronghold strongholdGenerator = new MapGenAbyStronghold();
-	private MapGenBase ravineGenerator = new MapGenRavine();
+	private MapGenBase ravineGenerator = new MapGenRavineAC();
 	private BiomeGenBase[] biomesForGeneration;
 
 	double[] doubleArray1;

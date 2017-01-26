@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2016 Shinoow.
+ * Copyright (c) 2012 - 2017 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -90,7 +90,7 @@ public class PotionDplague extends Potion{
 				dc.onInitialSpawn(par1EntityLivingBase.worldObj.getDifficultyForLocation(par1EntityLivingBase.getPosition()),(IEntityLivingData)null);
 				par1EntityLivingBase.worldObj.spawnEntityInWorld(dc);
 			} else if(par1EntityLivingBase instanceof EntitySheep){
-				EntitySheep ds = new EntitySheep(par1EntityLivingBase.worldObj);
+				EntityDemonSheep ds = new EntityDemonSheep(par1EntityLivingBase.worldObj);
 				ds.copyLocationAndAnglesFrom(par1EntityLivingBase);
 				par1EntityLivingBase.worldObj.removeEntity(par1EntityLivingBase);
 				ds.onInitialSpawn(par1EntityLivingBase.worldObj.getDifficultyForLocation(par1EntityLivingBase.getPosition()),(IEntityLivingData)null);

@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2016 Shinoow.
+ * Copyright (c) 2012 - 2017 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -19,6 +19,7 @@ import net.minecraft.block.BlockFlower;
 import net.minecraft.block.BlockMushroom;
 import net.minecraft.block.BlockTallGrass;
 import net.minecraft.block.IGrowable;
+import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyBool;
@@ -46,7 +47,7 @@ public class BlockDarklandsgrass extends Block implements IGrowable {
 
 	public BlockDarklandsgrass()
 	{
-		super(Material.grass);
+		super(Material.grass, MapColor.blueColor);
 		setDefaultState(blockState.getBaseState().withProperty(SNOWY, Boolean.valueOf(false)));
 		setTickRandomly(true);
 		setCreativeTab(ACTabs.tabBlock);

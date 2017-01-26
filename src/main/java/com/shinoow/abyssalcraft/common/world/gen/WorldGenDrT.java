@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2016 Shinoow.
+ * Copyright (c) 2012 - 2017 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -38,10 +38,10 @@ public class WorldGenDrT extends WorldGenTrees {
 
 	public boolean generate(World world, Random rand, int x, int y, int z) {
 
-		int height = rand.nextInt(6) + 6;
-		int leaveheight = rand.nextInt(3) + 2;
-		int branches = rand.nextInt(3) + 3;
-		int branchLenght = rand.nextInt(3) + 3;
+		int height = rand.nextInt(3) + 9;
+		int leaveheight = rand.nextInt(3);
+		int branches = rand.nextInt(8) + 4;
+		int branchLenght = 6;
 
 		Block j1 = world.getBlockState(new BlockPos(x, y -1, z)).getBlock();
 

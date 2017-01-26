@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2016 Shinoow.
+ * Copyright (c) 2012 - 2017 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -30,12 +30,7 @@ public class BlockACBasic extends Block {
 	 * @param stepsound Block step sound
 	 */
 	public BlockACBasic(Material material, String tooltype, int harvestlevel, float hardness, float resistance, SoundType stepsound) {
-		super(material);
-		setHarvestLevel(tooltype, harvestlevel);
-		setHardness(hardness);
-		setResistance(resistance);
-		setStepSound(stepsound);
-		setCreativeTab(ACTabs.tabBlock);
+		this(material, tooltype, harvestlevel, hardness, resistance, stepsound, material.getMaterialMapColor());
 	}
 
 	/**
@@ -46,7 +41,34 @@ public class BlockACBasic extends Block {
 	 * @param stepsound Block step sound
 	 */
 	public BlockACBasic(Material material, float hardness, float resistance, SoundType stepsound) {
-		super(material);
+		this(material, hardness, resistance, stepsound, material.getMaterialMapColor());
+	}
+
+	/**
+	 * Ultra-generic AbyssalCraft block
+	 * @param material Block material
+	 * @param tooltype Tool to harvest with
+	 * @param harvestlevel Harvest level required
+	 * @param hardness Block hardness
+	 * @param resistance Block resistance
+	 * @param stepsound Block step sound
+	 * @param mapColor Map Color
+	 */
+	public BlockACBasic(Material material, String tooltype, int harvestlevel, float hardness, float resistance, SoundType stepsound, MapColor mapColor) {
+		this(material, hardness, resistance, stepsound, mapColor);
+		setHarvestLevel(tooltype, harvestlevel);
+	}
+
+	/**
+	 * Ultra-generic AbyssalCraft block
+	 * @param material Block material
+	 * @param hardness Block hardness
+	 * @param resistance Block resistance
+	 * @param stepsound Block step sound
+	 * @param mapColor Map Color
+	 */
+	public BlockACBasic(Material material, float hardness, float resistance, SoundType stepsound, MapColor mapColor) {
+		super(material, mapColor);
 		setHardness(hardness);
 		setResistance(resistance);
 		setStepSound(stepsound);

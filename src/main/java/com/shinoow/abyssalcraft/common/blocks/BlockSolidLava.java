@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2016 Shinoow.
+ * Copyright (c) 2012 - 2017 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -11,6 +11,7 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.common.blocks;
 
+import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.AxisAlignedBB;
@@ -23,7 +24,7 @@ import com.shinoow.abyssalcraft.lib.ACTabs;
 public class BlockSolidLava extends BlockACBasic {
 
 	public BlockSolidLava(String par1) {
-		super(Material.rock, "pickaxe", 2, 10F, 100F, soundTypeStone);
+		super(Material.rock, "pickaxe", 2, 10F, 100F, soundTypeStone, MapColor.tntColor);
 		setUnlocalizedName(par1);
 		setCreativeTab(ACTabs.tabDecoration);
 	}

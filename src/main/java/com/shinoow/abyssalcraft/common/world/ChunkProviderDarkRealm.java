@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2016 Shinoow.
+ * Copyright (c) 2012 - 2017 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -10,6 +10,9 @@
  *     Shinoow -  implementation
  ******************************************************************************/
 package com.shinoow.abyssalcraft.common.world;
+
+import static net.minecraftforge.event.terraingen.InitMapGenEvent.EventType.CAVE;
+import static net.minecraftforge.event.terraingen.InitMapGenEvent.EventType.RAVINE;
 
 import java.util.List;
 import java.util.Random;
@@ -29,6 +32,7 @@ import net.minecraft.world.biome.BiomeGenBase.SpawnListEntry;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.chunk.ChunkPrimer;
 import net.minecraft.world.chunk.IChunkProvider;
+import net.minecraft.world.gen.MapGenBase;
 import net.minecraft.world.gen.NoiseGenerator;
 import net.minecraft.world.gen.NoiseGeneratorOctaves;
 import net.minecraft.world.gen.NoiseGeneratorPerlin;
@@ -40,6 +44,8 @@ import net.minecraftforge.fml.common.eventhandler.Event.Result;
 
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.common.structures.StructureShoggothPit;
+import com.shinoow.abyssalcraft.common.world.gen.MapGenCavesAC;
+import com.shinoow.abyssalcraft.common.world.gen.MapGenRavineAC;
 import com.shinoow.abyssalcraft.lib.ACConfig;
 
 public class ChunkProviderDarkRealm implements IChunkProvider
@@ -63,6 +69,9 @@ public class ChunkProviderDarkRealm implements IChunkProvider
 	private double[] stoneNoise = new double[256];
 	private BiomeGenBase[] biomesForGeneration;
 	private double[] densities;
+	private MapGenBase caveGenerator = new MapGenCavesAC();
+
+	private MapGenBase ravineGenerator = new MapGenRavineAC();
 
 	double[] doubleArray1;
 	double[] doubleArray2;
@@ -71,6 +80,10 @@ public class ChunkProviderDarkRealm implements IChunkProvider
 	private NoiseGeneratorOctaves omtNoiseGen1, omtNoiseGen2, omtNoiseGen3, omtNoiseGen4, omtNoiseGen5;
 	double[] noiseData1, noiseData2, noiseData3, noiseData4, noiseData5;
 	int[][] field_73219_j = new int[32][32];
+	{
+		caveGenerator = TerrainGen.getModdedMapGen(caveGenerator, CAVE);
+		ravineGenerator = TerrainGen.getModdedMapGen(ravineGenerator, RAVINE);
+	}
 
 	public ChunkProviderDarkRealm(World par1World, long par2, boolean par4)
 	{
@@ -301,6 +314,8 @@ public class ChunkProviderDarkRealm implements IChunkProvider
 		setBlocksInChunk(x, z, primer);
 		biomesForGeneration = worldObj.getWorldChunkManager().loadBlockGeneratorData(biomesForGeneration, x * 16, z * 16, 16, 16);
 		replaceBlocksForBiome(x, z, primer, biomesForGeneration);
+		caveGenerator.generate(this, worldObj, x, z, primer);
+		ravineGenerator.generate(this, worldObj, x, z, primer);
 
 		Chunk chunk = new Chunk(worldObj, primer, x, z);
 		byte[] abyte1 = chunk.getBiomeArray();

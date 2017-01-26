@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2016 Shinoow.
+ * Copyright (c) 2012 - 2017 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -61,7 +61,7 @@ public class WorldProviderDreadlands extends WorldProvider {
 
 	@Override
 	public float calculateCelestialAngle(long par1, float par3) {
-		return 0.5F;
+		return 0.0F;
 	}
 
 	@Override

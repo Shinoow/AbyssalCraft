@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2016 Shinoow.
+ * Copyright (c) 2012 - 2017 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -429,6 +429,7 @@ public class ClientProxy extends CommonProxy {
 		registerItemRender(ACItems.shub_niggurath_engraving, 0);
 		registerItemRender(ACItems.essence_of_the_gatekeeper, 0);
 		registerItemRender(ACItems.interdimensional_cage, 0);
+		registerItemRenders(ACItems.crystal_fragment, 25);
 
 		registerItemRender(ACBlocks.darkstone, 0);
 		registerItemRender(ACBlocks.darkstone_cobblestone, 0);

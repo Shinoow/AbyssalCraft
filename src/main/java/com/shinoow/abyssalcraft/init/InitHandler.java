@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2016 Shinoow.
+ * Copyright (c) 2012 - 2017 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -22,6 +22,7 @@ import net.minecraft.entity.EntityList;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumChatFormatting;
+import net.minecraft.util.MathHelper;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.config.Configuration;
@@ -205,7 +206,6 @@ public class InitHandler implements ILifeCycleHandler {
 		destroyOcean = cfg.get(Configuration.CATEGORY_GENERAL, "Oceanic Coralium Pollution", false, "Set true to allow the Liquid Coralium to spread across oceans. WARNING: The game can crash from this.").getBoolean();
 		demonAnimalFire = cfg.get(Configuration.CATEGORY_GENERAL, "Demon Animal burning", true, "Set to false to prevent Demon Animals (Pigs, Cows, Chickens) from burning in the overworld.").getBoolean();
 		evilAnimalSpawnWeight = cfg.get(Configuration.CATEGORY_GENERAL, "Evil Animal spawn weight", 20, "Spawn weight for the Evil Animals (Pigs, Cows, Chickens), keep under 35 to avoid complete annihilation.\n[range: 0 ~ 100, default: 20]", 0, 100).getInt();
-		darkness = cfg.get(Configuration.CATEGORY_GENERAL, "Darkness", true, "Set to false to disable the random blindness within Darklands biomes").getBoolean();
 		particleBlock = cfg.get(Configuration.CATEGORY_GENERAL, "Block particles", true, "Toggles whether blocks that emits particles should do so.").getBoolean();
 		particleEntity = cfg.get(Configuration.CATEGORY_GENERAL, "Entity particles", true, "Toggles whether entities that emits particles should do so.").getBoolean();
 		hardcoreMode = cfg.get(Configuration.CATEGORY_GENERAL, "Hardcore Mode", false, "Toggles Hardcore mode. If set to true, all mobs (in the mod) will become tougher.").getBoolean();
@@ -220,6 +220,9 @@ public class InitHandler implements ILifeCycleHandler {
 		purgeMobSpawns = cfg.get(Configuration.CATEGORY_GENERAL, "Purge Mob Spawns", false, "Toggles whether or not to clear and repopulate the monster spawn list of all dimension biomes to ensure no mob from another mod got in there.").getBoolean();
 		interdimensionalCageBlacklist = cfg.get(Configuration.CATEGORY_GENERAL, "Interdimensional Cage Blacklist", new String[]{}, "Entities added to this list can't be captured with the Interdimensional Cage.").getStringList();
 		damageAmpl = cfg.get(Configuration.CATEGORY_GENERAL, "Hardcore Mode damage amplifier", 1.0D, "When Hardcore Mode is enabled, you can use this to amplify the armor-piercing damage mobs deal.\n[range: 1.0 ~ 10.0, default: 1.0]", 1.0D, 10.0D).getDouble();
+		overworldShoggoths = cfg.get(Configuration.CATEGORY_GENERAL, "Lesser Shoggoth Overworld Spawning", true, "Toggles whether or not Lesser Shoggoths should have a chance of spawning in the Overworld.\n"
+				+EnumChatFormatting.RED+"[Minecraft Restart Required]"+EnumChatFormatting.RESET).getBoolean();
+		depthsHelmetOverlayOpacity = cfg.get(Configuration.CATEGORY_GENERAL, "Visage of The Depths Overlay Opacity", 1.0D, "Sets the opacity for the overlay shown when wearing the Visage of The Depths, reducing the value increases the transparency on the texture. Client Side only!\n[range: 0.5 ~ 1.0, default: 1.0]", 0.5D, 1.0D).getDouble();
 
 		darkWeight1 = cfg.get("biome_weight", "Darklands", 5, "Biome weight for the Darklands biome, controls the chance of it generating (n out of 100).\n[range: 0 ~ 100, default: 5]", 0, 100).getInt();
 		darkWeight2 = cfg.get("biome_weight", "Darklands Forest", 5, "Biome weight for the Darklands Forest biome, controls the chance of it generating (n out of 100)\n[range: 0 ~ 100, default: 5]", 0, 100).getInt();
@@ -271,65 +274,19 @@ public class InitHandler implements ILifeCycleHandler {
 		antiGhoulBlacklist = cfg.get("item_blacklist", "Anti-Ghoul Item Blacklist", new String[]{}, "Items/Blocks added to this list won't be picked up by Anti-Ghouls. Format: modid:name:meta, where meta is optional.").getStringList();
 		omotholGhoulBlacklist = cfg.get("item_blacklist", "Omothol Ghoul Item Blacklist", new String[]{}, "Items/Blocks added to this list won't be picked up by Omothol Ghouls. Format: modid:name:meta, where meta is optional.").getStringList();
 
-		//TODO remove all of this around AC 1.9.4 or 1.9.5
-		AbyssalCraft.keepLoaded1 = keepLoaded1;
-		AbyssalCraft.keepLoaded2 = keepLoaded2;
-		AbyssalCraft.keepLoaded3 = keepLoaded3;
-		AbyssalCraft.keepLoaded4 = keepLoaded4;
-
-		AbyssalCraft.shouldSpread = shouldSpread;
-		AbyssalCraft.shouldInfect = shouldInfect;
-		AbyssalCraft.breakLogic = breakLogic;
-		AbyssalCraft.destroyOcean = destroyOcean;
-		AbyssalCraft.demonAnimalFire = demonAnimalFire;
-		AbyssalCraft.evilAnimalSpawnWeight = evilAnimalSpawnWeight;
-		AbyssalCraft.darkness = darkness;
-		AbyssalCraft.particleBlock = particleBlock;
-		AbyssalCraft.particleEntity = particleEntity;
-		AbyssalCraft.hardcoreMode = hardcoreMode;
-		AbyssalCraft.endAbyssalZombieSpawnWeight = endAbyssalZombieSpawnWeight;
-		AbyssalCraft.evilAnimalCreatureType = evilAnimalCreatureType;
-		AbyssalCraft.antiItemDisintegration = antiItemDisintegration;
-		AbyssalCraft.portalCooldown = portalCooldown;
-		AbyssalCraft.demonAnimalSpawnWeight = demonAnimalSpawnWeight;
-		AbyssalCraft.smeltingRecipes = smeltingRecipes;
-
-		AbyssalCraft.shoggothOoze = shoggothOoze;
-		AbyssalCraft.oozeLeaves = oozeLeaves;
-		AbyssalCraft.oozeGrass = oozeGrass;
-		AbyssalCraft.oozeGround = oozeGround;
-		AbyssalCraft.oozeSand = oozeSand;
-		AbyssalCraft.oozeRock = oozeRock;
-		AbyssalCraft.oozeCloth = oozeCloth;
-		AbyssalCraft.oozeWood = oozeWood;
-		AbyssalCraft.oozeGourd = oozeGourd;
-		AbyssalCraft.oozeIron = oozeIron;
-		AbyssalCraft.oozeClay = oozeClay;
-		AbyssalCraft.oozeExpire = oozeExpire;
-
-		AbyssalCraft.generateDarklandsStructures = generateDarklandsStructures;
-		AbyssalCraft.generateShoggothLairs = generateShoggothLairs;
-		AbyssalCraft.generateAbyssalWastelandPillars = generateAbyssalWastelandPillars;
-		AbyssalCraft.generateAbyssalWastelandRuins = generateAbyssalWastelandRuins;
-		AbyssalCraft.generateAntimatterLake = generateAntimatterLake;
-		AbyssalCraft.generateCoraliumLake = generateCoraliumLake;
-		AbyssalCraft.generateDreadlandsStalagmite = generateDreadlandsStalagmite;
-
-		AbyssalCraft.generateCoraliumOre = generateCoraliumOre;
-		AbyssalCraft.generateNitreOre = generateNitreOre;
-		AbyssalCraft.generateAbyssalniteOre = generateAbyssalniteOre;
-		AbyssalCraft.generateAbyssalCoraliumOre = generateAbyssalCoraliumOre;
-		AbyssalCraft.generateDreadlandsAbyssalniteOre = generateDreadlandsAbyssalniteOre;
-		AbyssalCraft.generateDreadedAbyssalniteOre = generateDreadedAbyssalniteOre;
-		AbyssalCraft.generateAbyssalIronOre = generateAbyssalIronOre;
-		AbyssalCraft.generateAbyssalGoldOre = generateAbyssalGoldOre;
-		AbyssalCraft.generateAbyssalDiamondOre = generateAbyssalDiamondOre;
-		AbyssalCraft.generateAbyssalNitreOre = generateAbyssalNitreOre;
-		AbyssalCraft.generateAbyssalTinOre = generateAbyssalTinOre;
-		AbyssalCraft.generateAbyssalCopperOre = generateAbyssalCopperOre;
-		AbyssalCraft.generatePearlescentCoraliumOre = generatePearlescentCoraliumOre;
-		AbyssalCraft.generateLiquifiedCoraliumOre = generateLiquifiedCoraliumOre;
-		AbyssalCraft.shoggothLairSpawnRate = shoggothLairSpawnRate;
+		evilAnimalSpawnWeight = MathHelper.clamp_int(evilAnimalSpawnWeight, 0, 100);
+		endAbyssalZombieSpawnWeight = MathHelper.clamp_int(endAbyssalZombieSpawnWeight, 0, 10);
+		portalCooldown = MathHelper.clamp_int(portalCooldown, 10, 300);
+		demonAnimalSpawnWeight = MathHelper.clamp_int(demonAnimalSpawnWeight, 0, 100);
+		shoggothLairSpawnRate = MathHelper.clamp_int(shoggothLairSpawnRate, 100, 1000);
+		darkWeight1 = MathHelper.clamp_int(darkWeight1, 0, 100);
+		darkWeight2 = MathHelper.clamp_int(darkWeight2, 0, 100);
+		darkWeight3 = MathHelper.clamp_int(darkWeight3, 0, 100);
+		darkWeight4 = MathHelper.clamp_int(darkWeight4, 0, 100);
+		darkWeight5 = MathHelper.clamp_int(darkWeight5, 0, 100);
+		coraliumWeight = MathHelper.clamp_int(coraliumWeight, 0, 100);
+		damageAmpl = MathHelper.clamp_double(damageAmpl, 1, 10);
+		depthsHelmetOverlayOpacity = MathHelper.clamp_double(depthsHelmetOverlayOpacity, 0.5D, 1.0D);
 
 		if(cfg.hasChanged())
 			cfg.save();

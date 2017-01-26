@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2016 Shinoow.
+ * Copyright (c) 2012 - 2017 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -14,6 +14,7 @@ package com.shinoow.abyssalcraft.common.blocks;
 import java.util.Random;
 
 import net.minecraft.block.BlockLog;
+import net.minecraft.block.material.MapColor;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.state.BlockState;
 import net.minecraft.block.state.IBlockState;
@@ -23,9 +24,18 @@ import com.shinoow.abyssalcraft.lib.ACTabs;
 
 public class BlockACLog extends BlockLog {
 
-	public BlockACLog() {
+	private MapColor mapColor;
+
+	public BlockACLog(MapColor mapColor) {
 		setDefaultState(blockState.getBaseState().withProperty(LOG_AXIS, BlockLog.EnumAxis.Y));
 		setCreativeTab(ACTabs.tabBlock);
+		this.mapColor = mapColor;
+	}
+
+	@Override
+	public MapColor getMapColor(IBlockState state)
+	{
+		return mapColor;
 	}
 
 	@Override

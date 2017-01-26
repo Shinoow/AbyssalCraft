@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2016 Shinoow.
+ * Copyright (c) 2012 - 2017 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -182,20 +182,6 @@ public class AbyssalCraftEventHooks {
 						event.entityLiving.posY + rand.nextDouble() * event.entityLiving.height,
 						event.entityLiving.posZ + (rand.nextDouble() - 0.5D) * event.entityLiving.width, 0,0,0);
 		}
-		if(ACConfig.darkness)
-			if(event.entityLiving instanceof EntityPlayer){
-				EntityPlayer player = (EntityPlayer)event.entityLiving;
-				Random rand = new Random();
-				ItemStack helmet = player.getEquipmentInSlot(4);
-				if(player.worldObj.getBiomeGenForCoords(new BlockPos(player.posX, player.posY, player.posZ)) instanceof IDarklandsBiome)
-					if(rand.nextInt(1000) == 0)
-						if(helmet == null || helmet.getItem() != ACItems.abyssalnite_helmet && helmet.getItem() != ACItems.dreaded_abyssalnite_helmet
-						&& helmet.getItem() != ACItems.refined_coralium_helmet && helmet.getItem() != ACItems.plated_coralium_helmet
-						&& helmet.getItem() != ACItems.depths_helmet && helmet.getItem() != ACItems.dreadium_helmet
-						&& helmet.getItem() != ACItems.dreadium_samurai_helmet && helmet.getItem() != ACItems.ethaxium_helmet)
-							if(!player.capabilities.isCreativeMode && !player.worldObj.isRemote)
-								player.addPotionEffect(new PotionEffect(Potion.blindness.id, 100));
-			}
 	}
 
 	@SubscribeEvent

@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2016 Shinoow.
+ * Copyright (c) 2012 - 2017 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -14,13 +14,12 @@ package com.shinoow.abyssalcraft.common.world;
 import static net.minecraftforge.event.terraingen.InitMapGenEvent.EventType.CAVE;
 import static net.minecraftforge.event.terraingen.InitMapGenEvent.EventType.NETHER_CAVE;
 import static net.minecraftforge.event.terraingen.InitMapGenEvent.EventType.RAVINE;
-import static net.minecraftforge.event.terraingen.PopulateChunkEvent.Populate.EventType.NETHER_LAVA;
-
 import java.util.List;
 import java.util.Random;
 
 import net.minecraft.block.BlockFalling;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.BlockPos;
@@ -35,13 +34,9 @@ import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.chunk.ChunkPrimer;
 import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraft.world.gen.MapGenBase;
-import net.minecraft.world.gen.MapGenCaves;
-import net.minecraft.world.gen.MapGenCavesHell;
-import net.minecraft.world.gen.MapGenRavine;
 import net.minecraft.world.gen.NoiseGenerator;
 import net.minecraft.world.gen.NoiseGeneratorOctaves;
 import net.minecraft.world.gen.NoiseGeneratorPerlin;
-import net.minecraft.world.gen.feature.WorldGenHellLava;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.terraingen.ChunkProviderEvent;
 import net.minecraftforge.event.terraingen.PopulateChunkEvent;
@@ -50,6 +45,9 @@ import net.minecraftforge.event.terraingen.TerrainGen;
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.common.structures.StructureShoggothPit;
 import com.shinoow.abyssalcraft.common.structures.dreadlands.mineshaft.MapGenDreadlandsMine;
+import com.shinoow.abyssalcraft.common.world.gen.MapGenCavesAC;
+import com.shinoow.abyssalcraft.common.world.gen.MapGenCavesDreadlands;
+import com.shinoow.abyssalcraft.common.world.gen.MapGenRavineAC;
 import com.shinoow.abyssalcraft.lib.ACConfig;
 
 public class ChunkProviderDreadlands implements IChunkProvider {
@@ -70,13 +68,13 @@ public class ChunkProviderDreadlands implements IChunkProvider {
 	private final double[] field_147434_q;
 	private final float[] parabolicField;
 	private double[] stoneNoise = new double[256];
-	private MapGenBase caveGenerator = new MapGenCaves();
-	private MapGenBase netherCaveGenerator = new MapGenCavesHell();
+	private MapGenBase caveGenerator = new MapGenCavesAC();
+	private MapGenBase dreadlandsCaveGenerator = new MapGenCavesDreadlands();
 
 	private MapGenDreadlandsMine dmGenerator = new MapGenDreadlandsMine();
 
 	/** Holds ravine generator */
-	private MapGenBase ravineGenerator = new MapGenRavine();
+	private MapGenBase ravineGenerator = new MapGenRavineAC();
 
 	/** The biomes that are used to generate the chunk */
 	private BiomeGenBase[] biomesForGeneration;
@@ -90,7 +88,7 @@ public class ChunkProviderDreadlands implements IChunkProvider {
 	{
 		caveGenerator = TerrainGen.getModdedMapGen(caveGenerator, CAVE);
 		ravineGenerator = TerrainGen.getModdedMapGen(ravineGenerator, RAVINE);
-		netherCaveGenerator = TerrainGen.getModdedMapGen(netherCaveGenerator, NETHER_CAVE);
+		dreadlandsCaveGenerator = TerrainGen.getModdedMapGen(dreadlandsCaveGenerator, NETHER_CAVE);
 	}
 
 	public ChunkProviderDreadlands(World par1World, long par2, boolean par4)
@@ -206,6 +204,24 @@ public class ChunkProviderDreadlands implements IChunkProvider {
 			}
 	}
 
+	public void genLava(int par1, int par2, ChunkPrimer primer){
+
+		for (int j = 0; j < 16; ++j)
+			for (int k = 0; k < 16; ++k)
+			{
+				IBlockState iblockstate = Blocks.lava.getDefaultState();
+
+				for (int j1 = 32; j1 >= 0; --j1)
+					if (j1 < 32 && j1 > rand.nextInt(5))
+					{
+						IBlockState iblockstate2 = primer.getBlockState(k, j1, j);
+
+						if (iblockstate2.getBlock() != null && iblockstate2.getBlock() == Blocks.air)
+							primer.setBlockState(k, j1, j, iblockstate);
+					}
+			}
+	}
+
 	/**
 	 * Will return back a chunk, if it doesn't exist and its not a MP client it will generates all the blocks for the
 	 * specified chunk from the map seed and chunk seed
@@ -220,7 +236,8 @@ public class ChunkProviderDreadlands implements IChunkProvider {
 		replaceBlocksForBiome(par1, par2, primer, biomesForGeneration);
 		caveGenerator.generate(this, worldObj, par1, par2, primer);
 		ravineGenerator.generate(this, worldObj, par1, par2, primer);
-		netherCaveGenerator.generate(this, worldObj, par1, par2, primer);
+		dreadlandsCaveGenerator.generate(this, worldObj, par1, par2, primer);
+		genLava(par1, par2, primer);
 
 		if (mapFeaturesEnabled)
 			dmGenerator.generate(this, worldObj, par1, par2, primer);
@@ -364,19 +381,6 @@ public class ChunkProviderDreadlands implements IChunkProvider {
 
 		if (mapFeaturesEnabled)
 			dmGenerator.generateStructure(worldObj, rand, new ChunkCoordIntPair(par2, par3));
-
-		int k1;
-		int l1;
-		int i2;
-
-		boolean doGen = TerrainGen.populate(par1IChunkProvider, worldObj, rand, par2, par3, false, NETHER_LAVA);
-		for (i1 = 0; doGen && i1 < 8; ++i1)
-		{
-			k1 = k + rand.nextInt(16) + 8;
-			l1 = rand.nextInt(120) + 4;
-			i2 = l + rand.nextInt(16) + 8;
-			new WorldGenHellLava(Blocks.lava, false).generate(worldObj, rand, new BlockPos(k1, l1, i2));
-		}
 
 		if(ACConfig.generateShoggothLairs)
 			for(int i = 0; i < 1; i++) {

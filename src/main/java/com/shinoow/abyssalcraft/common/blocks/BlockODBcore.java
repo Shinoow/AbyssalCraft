@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2016 Shinoow.
+ * Copyright (c) 2012 - 2017 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -14,6 +14,7 @@ package com.shinoow.abyssalcraft.common.blocks;
 import java.util.Random;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyBool;
@@ -38,7 +39,7 @@ public class BlockODBcore extends Block {
 	public static final PropertyBool EXPLODE = PropertyBool.create("explode");
 
 	public BlockODBcore() {
-		super(Material.iron);
+		super(Material.iron, MapColor.purpleColor);
 		setDefaultState(blockState.getBaseState().withProperty(EXPLODE, Boolean.valueOf(false)));
 		setCreativeTab(ACTabs.tabBlock);
 		setHarvestLevel("pickaxe", 3);

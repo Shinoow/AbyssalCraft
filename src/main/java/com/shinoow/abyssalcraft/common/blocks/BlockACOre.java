@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2016 Shinoow.
+ * Copyright (c) 2012 - 2017 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -13,6 +13,7 @@ package com.shinoow.abyssalcraft.common.blocks;
 
 import java.util.Random;
 
+import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Items;
@@ -29,6 +30,13 @@ public class BlockACOre extends BlockACBasic {
 
 	public BlockACOre(int harvestlevel, float hardness, float resistance) {
 		super(Material.rock, "pickaxe", harvestlevel, hardness, resistance, soundTypeStone);
+	}
+
+	@Override
+	public MapColor getMapColor(IBlockState state)
+	{
+		return this == ACBlocks.abyssal_coralium_ore || this == ACBlocks.pearlescent_coralium_ore || this == ACBlocks.liquified_coralium_ore || this == ACBlocks.abyssal_iron_ore || this == ACBlocks.abyssal_gold_ore || this == ACBlocks.abyssal_diamond_ore
+				|| this == ACBlocks.abyssal_nitre_ore || this == ACBlocks.abyssal_tin_ore || this == ACBlocks.abyssal_copper_ore ? MapColor.greenColor : this == ACBlocks.dreaded_abyssalnite_ore || this == ACBlocks.dreadlands_abyssalnite_ore ? MapColor.redColor : super.getMapColor(state);
 	}
 
 	@Override

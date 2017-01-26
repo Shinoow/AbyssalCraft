@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2016 Shinoow.
+ * Copyright (c) 2012 - 2017 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -38,6 +38,7 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
+import net.minecraftforge.common.IShearable;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -46,7 +47,7 @@ import com.shinoow.abyssalcraft.common.network.PacketDispatcher;
 import com.shinoow.abyssalcraft.common.network.client.EvilSheepMessage;
 import com.shinoow.abyssalcraft.lib.ACConfig;
 
-public class EntityEvilSheep extends EntityMob {
+public class EntityEvilSheep extends EntityMob implements IShearable {
 
 	private UUID playerUUID = null;
 	private String playerName = null;
@@ -219,5 +220,27 @@ public class EntityEvilSheep extends EntityMob {
 
 		for (int j = 0; j < i; ++j)
 			dropItem(Items.mutton, 1);
+	}
+
+	@Override public boolean isShearable(ItemStack item, net.minecraft.world.IBlockAccess world, BlockPos pos){ return true; }
+	@Override
+	public java.util.List<ItemStack> onSheared(ItemStack item, net.minecraft.world.IBlockAccess world, BlockPos pos, int fortune)
+	{
+		int i = 1 + rand.nextInt(3);
+
+		java.util.List<ItemStack> ret = new java.util.ArrayList<ItemStack>();
+		for (int j = 0; j < i; ++j)
+			ret.add(new ItemStack(playerUUID != null && playerName != null ? Items.rotten_flesh : Item.getItemFromBlock(Blocks.wool)));
+
+		playSound("mob.sheep.shear", 1.0F, 1.0F);
+		playSound("mob.ghast.scream", 1.0F, 0.2F);
+		if(!worldObj.isRemote){
+			EntityDemonSheep demonsheep = new EntityDemonSheep(worldObj);
+			demonsheep.copyLocationAndAnglesFrom(this);
+			worldObj.removeEntity(this);
+			demonsheep.onInitialSpawn(worldObj.getDifficultyForLocation(new BlockPos(posX, posY, posZ)), (IEntityLivingData)null);
+			worldObj.spawnEntityInWorld(demonsheep);
+		}
+		return ret;
 	}
 }

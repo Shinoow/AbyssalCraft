@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2016 Shinoow.
+ * Copyright (c) 2012 - 2017 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -12,6 +12,7 @@
 package com.shinoow.abyssalcraft.common.blocks;
 
 import net.minecraft.block.BlockFence;
+import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
 import net.minecraft.util.BlockPos;
 import net.minecraft.world.IBlockAccess;
@@ -20,14 +21,14 @@ import com.shinoow.abyssalcraft.lib.ACTabs;
 
 public class BlockACFence extends BlockFence {
 
-	public BlockACFence(Material par3Material, String par4, int par5) {
-		super(par3Material);
+	public BlockACFence(Material par3Material, String par4, int par5, MapColor mapColor) {
+		super(par3Material, mapColor);
 		setCreativeTab(ACTabs.tabDecoration);
 		this.setHarvestLevel(par4, par5);
 	}
 
-	public BlockACFence(Material par3Material) {
-		super(par3Material);
+	public BlockACFence(Material par3Material, MapColor mapColor) {
+		super(par3Material, mapColor);
 		setCreativeTab(ACTabs.tabDecoration);
 	}
 
