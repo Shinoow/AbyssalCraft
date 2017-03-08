@@ -1,0 +1,843 @@
+/*******************************************************************************
+ * AbyssalCraft
+ * Copyright (c) 2012 - 2017 Shinoow.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the GNU Lesser Public License v3
+ * which accompanies this distribution, and is available at
+ * http://www.gnu.org/licenses/lgpl-3.0.txt
+ *
+ * Contributors:
+ *     Shinoow -  implementation
+ ******************************************************************************/
+package com.shinoow.abyssalcraft.common.entity;
+
+import java.util.Calendar;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.Random;
+
+import net.minecraft.block.Block;
+import net.minecraft.enchantment.Enchantment;
+import net.minecraft.enchantment.EnchantmentData;
+import net.minecraft.enchantment.EnchantmentHelper;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.IEntityLivingData;
+import net.minecraft.entity.IMerchant;
+import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.ai.EntityAIAttackOnCollide;
+import net.minecraft.entity.ai.EntityAIHurtByTarget;
+import net.minecraft.entity.ai.EntityAILookIdle;
+import net.minecraft.entity.ai.EntityAIMoveTowardsRestriction;
+import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
+import net.minecraft.entity.ai.EntityAIOpenDoor;
+import net.minecraft.entity.ai.EntityAISwimming;
+import net.minecraft.entity.ai.EntityAITasks.EntityAITaskEntry;
+import net.minecraft.entity.ai.EntityAIWander;
+import net.minecraft.entity.ai.EntityAIWatchClosest;
+import net.minecraft.entity.monster.EntityMob;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemArmor;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.ItemTool;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.potion.Potion;
+import net.minecraft.potion.PotionEffect;
+import net.minecraft.util.BlockPos;
+import net.minecraft.util.ChatComponentText;
+import net.minecraft.util.DamageSource;
+import net.minecraft.util.MathHelper;
+import net.minecraft.util.StatCollector;
+import net.minecraft.util.Tuple;
+import net.minecraft.village.MerchantRecipe;
+import net.minecraft.village.MerchantRecipeList;
+import net.minecraft.world.DifficultyInstance;
+import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.ReflectionHelper;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
+
+import com.shinoow.abyssalcraft.api.APIUtils;
+import com.shinoow.abyssalcraft.api.entity.EntityUtil;
+import com.shinoow.abyssalcraft.api.entity.IAntiEntity;
+import com.shinoow.abyssalcraft.api.entity.ICoraliumEntity;
+import com.shinoow.abyssalcraft.api.entity.IDreadEntity;
+import com.shinoow.abyssalcraft.api.item.ACItems;
+import com.shinoow.abyssalcraft.common.items.ItemDrainStaff;
+import com.shinoow.abyssalcraft.common.items.ItemNecronomicon;
+import com.shinoow.abyssalcraft.lib.ACConfig;
+
+public class EntityRemnant extends EntityMob implements IMerchant, IAntiEntity, ICoraliumEntity, IDreadEntity {
+
+	private EntityPlayer tradingPlayer;
+	private MerchantRecipeList tradingList;
+	private int timeUntilReset;
+	private boolean needsInitilization;
+	private int wealth;
+	private int timer;
+	private float field_82191_bN;
+	public static final Map<Item, Tuple> itemSellingList = new HashMap<Item, Tuple>();
+	public static final Map<Item, Tuple> coinSellingList = new HashMap<Item, Tuple>();
+
+	public EntityRemnant(World par1World) {
+		super(par1World);
+		tasks.addTask(0, new EntityAISwimming(this));
+		tasks.addTask(3, new EntityAIAttackOnCollide(this, EntityLivingBase.class, 0.35D, false));
+		tasks.addTask(4, new EntityAIOpenDoor(this, true));
+		tasks.addTask(5, new EntityAIMoveTowardsRestriction(this, 0.35D));
+		tasks.addTask(6, new EntityAIWander(this, 0.35D));
+		tasks.addTask(7, new EntityAILookIdle(this));
+		tasks.addTask(7, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
+		tasks.addTask(7, new EntityAIWatchClosest(this, EntityRemnant.class, 8.0F));
+		tasks.addTask(7, new EntityAIWatchClosest(this, EntityGatekeeperMinion.class, 8.0F));
+		targetTasks.addTask(1, new EntityAIHurtByTarget(this, false));
+	}
+
+	@Override
+	protected void applyEntityAttributes()
+	{
+		super.applyEntityAttributes();
+
+		getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(64.0D);
+		getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setBaseValue(0.2D);
+
+		if(ACConfig.hardcoreMode){
+			getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(200.0D);
+			getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(20.0D);
+		} else {
+			getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(100.0D);
+			getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(10.0D);
+		}
+	}
+
+	@Override
+	public boolean canBreatheUnderwater() {
+		return true;
+	}
+
+	@Override
+	public boolean attackEntityAsMob(Entity par1Entity)
+	{
+		swingItem();
+		boolean flag = super.attackEntityAsMob(par1Entity);
+
+		if(ACConfig.hardcoreMode && par1Entity instanceof EntityPlayer)
+			par1Entity.attackEntityFrom(DamageSource.causeMobDamage(this).setDamageBypassesArmor().setDamageIsAbsolute(), 3 * (float)(ACConfig.damageAmpl > 1.0D ? ACConfig.damageAmpl : 1));
+
+		return flag;
+	}
+
+	@Override
+	protected void updateAITick() {
+
+		if (!isTrading() && timeUntilReset > 0)
+		{
+			--timeUntilReset;
+
+			if (timeUntilReset <= 0)
+			{
+				if (needsInitilization)
+				{
+					if (tradingList.size() > 1)
+						for(MerchantRecipe recipe : tradingList)
+							if (recipe.isRecipeDisabled())
+								recipe.increaseMaxTradeUses(rand.nextInt(6) + rand.nextInt(6) + 2);
+
+					addDefaultEquipmentAndRecipies(1);
+					needsInitilization = false;
+				}
+
+				addPotionEffect(new PotionEffect(Potion.regeneration.id, 200, 0));
+			}
+		}
+
+		super.updateAITick();
+	}
+
+	@Override
+	public boolean interact(EntityPlayer par1EntityPlayer)
+	{
+		if(isEntityAlive() && !par1EntityPlayer.isSneaking() && !isAngry())
+			if(EntityUtil.hasNecronomicon(par1EntityPlayer)){
+				if(!isTrading()){
+					if(!worldObj.isRemote){
+						setCustomer(par1EntityPlayer);
+						par1EntityPlayer.displayVillagerTradeGui(this);
+						return true;
+					}
+				} else par1EntityPlayer.addChatMessage(new ChatComponentText(getName()+": "+StatCollector.translateToLocal("message.remnant.busy")));
+			} else insult(par1EntityPlayer);
+
+		return super.interact(par1EntityPlayer);
+	}
+
+	@Override
+	protected void entityInit()
+	{
+		super.entityInit();
+		dataWatcher.addObject(16, Integer.valueOf(0));
+	}
+
+	/**
+	 * Used by Remnants to insult oblivious Players
+	 * @param player The target to insult
+	 */
+	private void insult(EntityPlayer player){
+		int insultNum = worldObj.rand.nextInt(3);
+		String insult = getName()+": "+String.format(getInsult(insultNum), player.getName());
+		String translated = getName()+": "+String.format(StatCollector.translateToLocal("message.remnant.insult."+insultNum), player.getName());
+
+		if(worldObj.isRemote){
+			List<EntityPlayer> players = worldObj.getEntitiesWithinAABB(EntityPlayer.class, player.getEntityBoundingBox().expand(16D, 16D, 16D));
+			if(players != null){
+				Iterator<EntityPlayer> i = players.iterator();
+				while(i.hasNext()){
+					EntityPlayer player1 = i.next();
+					if(EntityUtil.hasNecronomicon(player1))
+						player1.addChatMessage(new ChatComponentText(translated));
+					else player1.addChatMessage(new ChatComponentText(insult));
+				}
+			}
+		}
+	}
+
+	/**
+	 * Insult generator
+	 * @param num Which insult to pick, number should be generated through Random.nextInt(3)
+	 * @return A insult that humans don't understand
+	 */
+	private String getInsult(int num){
+		switch(num){
+		case 0:
+			return "%s, Aklo g'ai ftrr nfto lagln f'tifh mtli ot aishgft 'ai.";
+		case 1:
+			return "%s ukhoyah g'ka-dish-tu.";
+		case 2:
+			return "%s go-tha ukhoyah Necronomicon g'mnahn'.";
+			//		case 3:
+			//			return "test %s";
+			//		case 4:
+			//			return "test %s";
+		default:
+			return getInsult(0);
+		}
+	}
+
+	/**
+	 * Used by Minions of The Gatekeeper to set the attack target and enrage the Remnant
+	 * @param call If the Remnant should call for backup
+	 * @param enemy The target
+	 */
+	public void enrage(boolean call, EntityLivingBase enemy){
+		setAttackTarget(enemy);
+		enrage(call);
+	}
+
+	/**
+	 * Calling this method will make the Remnant hostile.
+	 * Ever wanted to see a angry Remnant? No you don't.
+	 * @param call If the Remnant should call for backup
+	 */
+	public void enrage(boolean call){
+		if(call){
+			List<EntityRemnant> friends = worldObj.getEntitiesWithinAABB(getClass(), getEntityBoundingBox().expand(16D, 16D, 16D));
+			if(friends != null){
+				Iterator<EntityRemnant> iter = friends.iterator();
+				while(iter.hasNext())
+					iter.next().enrage(false, getAttackTarget());
+			}
+			worldObj.playSoundAtEntity(this, "abyssalcraft:remnant.scream", 3F, 1F);
+		}
+
+		setAngry();
+		setAttackAI();
+	}
+
+	@Override
+	public boolean attackEntityFrom(DamageSource par1DamageSource, float par2)
+	{
+		if(par1DamageSource.getSourceOfDamage() instanceof EntityLivingBase){
+			if(getAttackTarget() != par1DamageSource.getSourceOfDamage()){
+				setAttackTarget((EntityLivingBase) par1DamageSource.getEntity());
+				enrage(true, getAttackTarget());
+			}
+			if(!isAngry()) enrage(true);
+			else enrage(rand.nextInt(10) == 0);
+		}
+		return super.attackEntityFrom(par1DamageSource, par2);
+	}
+
+	@Override
+	public void onLivingUpdate(){
+		super.onLivingUpdate();
+		if(isAngry()){
+			setAttackAI();
+			timer--;
+			if(timer <= 0)
+				timer = 0;
+		}
+
+		if(!isAngry()) clearAttackAI();
+	}
+
+	@Override
+	public void writeEntityToNBT(NBTTagCompound par1NBTTagCompound)
+	{
+		super.writeEntityToNBT(par1NBTTagCompound);
+		par1NBTTagCompound.setInteger("Profession", getProfession());
+		par1NBTTagCompound.setInteger("Money", wealth);
+		par1NBTTagCompound.setInteger("AngerTimer", timer);
+
+		if (tradingList != null)
+			par1NBTTagCompound.setTag("Offers", tradingList.getRecipiesAsTags());
+	}
+
+	@Override
+	public void readEntityFromNBT(NBTTagCompound par1NBTTagCompound)
+	{
+		super.readEntityFromNBT(par1NBTTagCompound);
+		setProfession(par1NBTTagCompound.getInteger("Profession"));
+		wealth = par1NBTTagCompound.getInteger("Money");
+		timer = par1NBTTagCompound.getInteger("AngerTimer");
+
+		if (par1NBTTagCompound.hasKey("Offers", 10))
+		{
+			NBTTagCompound nbttagcompound1 = par1NBTTagCompound.getCompoundTag("Offers");
+			tradingList = new MerchantRecipeList(nbttagcompound1);
+		}
+	}
+
+	public boolean isAngry(){
+		return timer > 0;
+	}
+
+	public void setAngry(){
+		timer = 600;
+	}
+
+	private void clearAttackAI(){
+		if(getAttackTarget() != null)
+			setAttackTarget(null);
+		EntityAINearestAttackableTarget ai = fetchAI();
+		if(ai == null) return;
+		else targetTasks.removeTask(ai);
+		if(targetTasks.taskEntries.size() > 1)
+			clearAttackAI();
+	}
+
+	private void setAttackAI(){
+		if(getAttackTarget() != null){
+			Class temp = getAttackTarget().getClass();
+			EntityAINearestAttackableTarget ai = fetchAI();
+			if(ai != null){
+				if(temp != ReflectionHelper.findField(ai.getClass(), "targetClass", "field_75307_b").getDeclaringClass()){
+					targetTasks.removeTask(ai);
+					targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, temp, true));
+				}
+			} else targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, temp, true));
+		}
+	}
+
+	private EntityAINearestAttackableTarget fetchAI(){
+		for(EntityAITaskEntry entry : targetTasks.taskEntries)
+			if(entry.action instanceof EntityAINearestAttackableTarget)
+				return (EntityAINearestAttackableTarget) entry.action;
+		return null;
+	}
+
+	@Override
+	protected Item getDropItem()
+	{
+		return ACItems.eldritch_scale;
+	}
+
+	@Override
+	protected boolean canDespawn()
+	{
+		return false;
+	}
+
+	@Override
+	protected String getLivingSound(){
+		return getProfession() == 2 && rand.nextBoolean() ? "abyssalcraft:remnant.priest.chant" : null;
+	}
+
+	@Override
+	protected String getDeathSound()
+	{
+		return "abyssalcraft:shadow.death";
+	}
+
+	@Override
+	protected void playStepSound(BlockPos pos, Block par4)
+	{
+		playSound("mob.spider.step", 0.15F, 1.0F);
+	}
+
+	public void setProfession(int par1)
+	{
+		dataWatcher.updateObject(16, Integer.valueOf(par1));
+	}
+
+	public int getProfession()
+	{
+		return dataWatcher.getWatchableObjectInt(16);
+	}
+
+	@Override
+	public void setCustomer(EntityPlayer var1) {
+
+		tradingPlayer = var1;
+	}
+
+	@Override
+	public EntityPlayer getCustomer() {
+
+		return tradingPlayer;
+	}
+
+	public boolean isTrading(){
+		return tradingPlayer != null;
+	}
+
+	@Override
+	public MerchantRecipeList getRecipes(EntityPlayer var1) {
+
+		if(tradingList == null)
+			addDefaultEquipmentAndRecipies(1);
+
+		return tradingList;
+	}
+
+	private float adjustProbability(float par1)
+	{
+		float f1 = par1 + field_82191_bN;
+		return f1 > 0.9F ? 0.9F - (f1 - 0.9F) : f1;
+	}
+
+	private void addDefaultEquipmentAndRecipies(int par1)
+	{
+		if (tradingList != null)
+			field_82191_bN = MathHelper.sqrt_float(tradingList.size()) * 0.2F;
+		else
+			field_82191_bN = 0.0F;
+
+		MerchantRecipeList list = new MerchantRecipeList();
+		int k;
+		label50:
+
+			switch (getProfession())
+			{
+			case 0:
+				addItemTrade(list, Items.wheat, rand, adjustProbability(0.9F));
+				addItemTrade(list, Item.getItemFromBlock(Blocks.wool), rand, adjustProbability(0.5F));
+				addItemTrade(list, Items.chicken, rand, adjustProbability(0.5F));
+				addItemTrade(list, Items.cooked_fish, rand, adjustProbability(0.4F));
+				addCoinTrade(list, Items.bread, rand, adjustProbability(0.9F));
+				addCoinTrade(list, Items.melon, rand, adjustProbability(0.3F));
+				addCoinTrade(list, Items.apple, rand, adjustProbability(0.3F));
+				addCoinTrade(list, Items.cookie, rand, adjustProbability(0.3F));
+				addCoinTrade(list, Items.shears, rand, adjustProbability(0.3F));
+				addCoinTrade(list, Items.flint_and_steel, rand, adjustProbability(0.3F));
+				addCoinTrade(list, ACItems.fish_on_a_plate, rand, adjustProbability(0.3F));
+				addCoinTrade(list, Items.arrow, rand, adjustProbability(0.5F));
+
+				if (rand.nextFloat() < adjustProbability(0.5F))
+					list.add(new MerchantRecipe(new ItemStack(Blocks.gravel, 10), new ItemStack(ACItems.elder_engraved_coin), new ItemStack(Items.flint, 4 + rand.nextInt(2), 0)));
+
+				break;
+			case 1:
+				addItemTrade(list, Items.paper, rand, adjustProbability(0.8F));
+				addItemTrade(list, Items.book, rand, adjustProbability(0.8F));
+				addItemTrade(list, Items.written_book, rand, adjustProbability(0.3F));
+				addItemTrade(list, Items.rotten_flesh, rand, adjustProbability(0.7F));
+				addItemTrade(list, ACItems.coralium_plagued_flesh, rand, adjustProbability(0.7F));
+				addItemTrade(list, ACItems.dread_fragment, rand, adjustProbability(0.7F));
+				addItemTrade(list, ACItems.omothol_flesh, rand, adjustProbability(0.7F));
+				addItemTrade(list, ACItems.rotten_anti_flesh, rand, adjustProbability(0.3F));
+				addCoinTrade(list, Item.getItemFromBlock(Blocks.bookshelf), rand, adjustProbability(0.8F));
+				addCoinTrade(list, Item.getItemFromBlock(Blocks.glass), rand, adjustProbability(0.2F));
+				addCoinTrade(list, Items.compass, rand, adjustProbability(0.2F));
+				addCoinTrade(list, Items.clock, rand, adjustProbability(0.2F));
+				addCoinTrade(list, ACItems.necronomicon, rand, adjustProbability(0.3F));
+				addCoinTrade(list, ACItems.abyssal_wasteland_necronomicon, rand, adjustProbability(0.2F));
+				addCoinTrade(list, ACItems.dreadlands_necronomicon, rand, adjustProbability(0.1F));
+
+				if (rand.nextFloat() < adjustProbability(0.07F))
+				{
+					Enchantment enchantment = Enchantment.enchantmentsBookList[rand.nextInt(Enchantment.enchantmentsBookList.length)];
+					int i1 = MathHelper.getRandomIntegerInRange(rand, enchantment.getMinLevel(), enchantment.getMaxLevel());
+					ItemStack itemstack = Items.enchanted_book.getEnchantedItemStack(new EnchantmentData(enchantment, i1));
+					k = 2 + rand.nextInt(5 + i1 * 10) + 3 * i1;
+					list.add(new MerchantRecipe(new ItemStack(Items.book), new ItemStack(ACItems.elder_engraved_coin, k), itemstack));
+				}
+
+				break;
+			case 2:
+				addCoinTrade(list, Items.ender_eye, rand, adjustProbability(0.3F));
+				addCoinTrade(list, Items.experience_bottle, rand, adjustProbability(0.2F));
+				addCoinTrade(list, Items.redstone, rand, adjustProbability(0.4F));
+				addCoinTrade(list, Item.getItemFromBlock(Blocks.glowstone), rand, adjustProbability(0.3F));
+				addCoinTrade(list, ACItems.ritual_charm, rand, adjustProbability(0.4F));
+				addCoinTrade(list, ACItems.elder_engraved_coin, 8, ACItems.cthulhu_charm, 1);
+				addCoinTrade(list, ACItems.elder_engraved_coin, 8, ACItems.hastur_charm, 1);
+				addCoinTrade(list, ACItems.elder_engraved_coin, 8, ACItems.jzahar_charm, 1);
+				addCoinTrade(list, ACItems.elder_engraved_coin, 8, ACItems.azathoth_charm, 1);
+				addCoinTrade(list, ACItems.elder_engraved_coin, 8, ACItems.nyarlathotep_charm, 1);
+				addCoinTrade(list, ACItems.elder_engraved_coin, 8, ACItems.yog_sothoth_charm, 1);
+				addCoinTrade(list, ACItems.elder_engraved_coin, 8, ACItems.shub_niggurath_charm, 1);
+				addCoinTrade(list, ACItems.staff_of_rending, rand, adjustProbability(0.1F));
+				Item[] aitem = new Item[] {ACItems.ethaxium_sword, ACItems.ethaxium_chestplate, ACItems.ethaxium_axe, ACItems.ethaxium_pickaxe, ACItems.ethaxium_shovel};
+				Item[] aitem1 = aitem;
+				int j = aitem.length;
+				k = 0;
+
+				while (true)
+				{
+					if (k >= j)
+						break label50;
+
+					Item item = aitem1[k];
+
+					if (rand.nextFloat() < adjustProbability(0.05F))
+						list.add(new MerchantRecipe(new ItemStack(item, 1, 0), new ItemStack(ACItems.elder_engraved_coin, 2 + rand.nextInt(3), 0), EnchantmentHelper.addRandomEnchantment(rand, new ItemStack(item, 1, 0), 5 + rand.nextInt(15))));
+
+					++k;
+				}
+			case 3:
+				addItemTrade(list, Items.coal, rand, adjustProbability(0.7F));
+				addItemTrade(list, ACItems.abyssalnite_ingot, rand, adjustProbability(0.5F));
+				addItemTrade(list, ACItems.refined_coralium_ingot, rand, adjustProbability(0.5F));
+				addItemTrade(list, ACItems.dreadium_ingot, rand, adjustProbability(0.5F));
+				addItemTrade(list, ACItems.ethaxium_ingot, rand, adjustProbability(0.3F));
+				addCoinTrade(list, ACItems.ethaxium_sword, rand, adjustProbability(0.5F));
+				addCoinTrade(list, ACItems.ethaxium_axe, rand, adjustProbability(0.3F));
+				addCoinTrade(list, ACItems.ethaxium_pickaxe, rand, adjustProbability(0.5F));
+				addCoinTrade(list, ACItems.ethaxium_shovel, rand, adjustProbability(0.2F));
+				addCoinTrade(list, ACItems.ethaxium_hoe, rand, adjustProbability(0.2F));
+				addCoinTrade(list, ACItems.ethaxium_boots, rand, adjustProbability(0.1F));
+				addCoinTrade(list, ACItems.ethaxium_helmet, rand, adjustProbability(0.1F));
+				addCoinTrade(list, ACItems.ethaxium_chestplate, rand, adjustProbability(0.1F));
+				addCoinTrade(list, ACItems.ethaxium_leggings, rand, adjustProbability(0.1F));
+				addCoinTrade(list, ACItems.blank_engraving, rand, adjustProbability(0.2F));
+				break;
+			case 4:
+				addItemTrade(list, Items.coal, rand, adjustProbability(0.7F));
+				addItemTrade(list, Items.porkchop, rand, adjustProbability(0.5F));
+				addItemTrade(list, Items.beef, rand, adjustProbability(0.5F));
+				addItemTrade(list, Items.chicken, rand, adjustProbability(0.5F));
+				addCoinTrade(list, ACItems.washcloth, rand, adjustProbability(0.4F));
+				addCoinTrade(list, ACItems.mre, rand, adjustProbability(0.1F));
+				addCoinTrade(list, ACItems.pork_on_a_plate, rand, adjustProbability(0.3F));
+				addCoinTrade(list, ACItems.beef_on_a_plate, rand, adjustProbability(0.3F));
+				addCoinTrade(list, ACItems.chicken_on_a_plate, rand, adjustProbability(0.3F));
+				break;
+			case 5:
+				addCoinTrade(list, ACItems.elder_engraved_coin, 8, ACItems.cthulhu_engraved_coin, 1);
+				addCoinTrade(list, ACItems.elder_engraved_coin, 8, ACItems.hastur_engraved_coin, 1);
+				addCoinTrade(list, ACItems.elder_engraved_coin, 8, ACItems.jzahar_engraved_coin, 1);
+				addCoinTrade(list, ACItems.elder_engraved_coin, 8, ACItems.azathoth_engraved_coin, 1);
+				addCoinTrade(list, ACItems.elder_engraved_coin, 8, ACItems.nyarlathotep_engraved_coin, 1);
+				addCoinTrade(list, ACItems.elder_engraved_coin, 8, ACItems.yog_sothoth_engraved_coin, 1);
+				addCoinTrade(list, ACItems.elder_engraved_coin, 8, ACItems.shub_niggurath_engraved_coin, 1);
+				addCoinTrade(list, ACItems.elder_engraved_coin, 16, ACItems.cthulhu_engraved_coin, 2);
+				addCoinTrade(list, ACItems.elder_engraved_coin, 16, ACItems.hastur_engraved_coin, 2);
+				addCoinTrade(list, ACItems.elder_engraved_coin, 16, ACItems.jzahar_engraved_coin, 2);
+				addCoinTrade(list, ACItems.elder_engraved_coin, 16, ACItems.azathoth_engraved_coin, 2);
+				addCoinTrade(list, ACItems.elder_engraved_coin, 16, ACItems.nyarlathotep_engraved_coin, 2);
+				addCoinTrade(list, ACItems.elder_engraved_coin, 16, ACItems.yog_sothoth_engraved_coin, 2);
+				addCoinTrade(list, ACItems.elder_engraved_coin, 16, ACItems.shub_niggurath_engraved_coin, 2);
+				addCoinTrade(list, ACItems.elder_engraved_coin, 24, ACItems.cthulhu_engraved_coin, 3);
+				addCoinTrade(list, ACItems.elder_engraved_coin, 24, ACItems.hastur_engraved_coin, 3);
+				addCoinTrade(list, ACItems.elder_engraved_coin, 24, ACItems.jzahar_engraved_coin, 3);
+				addCoinTrade(list, ACItems.elder_engraved_coin, 24, ACItems.azathoth_engraved_coin, 3);
+				addCoinTrade(list, ACItems.elder_engraved_coin, 24, ACItems.nyarlathotep_engraved_coin, 3);
+				addCoinTrade(list, ACItems.elder_engraved_coin, 24, ACItems.yog_sothoth_engraved_coin, 3);
+				addCoinTrade(list, ACItems.elder_engraved_coin, 24, ACItems.shub_niggurath_engraved_coin, 3);
+				break;
+
+			case 6:
+				addItemTrade(list, Items.coal, rand, adjustProbability(0.7F));
+				addItemTrade(list, ACItems.abyssalnite_ingot, rand, adjustProbability(0.5F));
+				addItemTrade(list, ACItems.refined_coralium_ingot, rand, adjustProbability(0.5F));
+				addItemTrade(list, ACItems.dreadium_ingot, rand, adjustProbability(0.5F));
+				addItemTrade(list, ACItems.ethaxium_ingot, rand, adjustProbability(0.3F));
+				addCoinTrade(list, ACItems.ethaxium_sword, rand, adjustProbability(0.5F));
+				addCoinTrade(list, ACItems.ethaxium_axe, rand, adjustProbability(0.3F));
+				addCoinTrade(list, ACItems.ethaxium_pickaxe, rand, adjustProbability(0.5F));
+				addCoinTrade(list, ACItems.ethaxium_shovel, rand, adjustProbability(0.2F));
+				addCoinTrade(list, ACItems.ethaxium_hoe, rand, adjustProbability(0.2F));
+				addCoinTrade(list, ACItems.plated_coralium_boots, rand, adjustProbability(0.2F));
+				addCoinTrade(list, ACItems.dreadium_samurai_boots, rand, adjustProbability(0.2F));
+				addCoinTrade(list, ACItems.plated_coralium_helmet, rand, adjustProbability(0.2F));
+				addCoinTrade(list, ACItems.dreadium_samurai_helmet, rand, adjustProbability(0.2F));
+				addCoinTrade(list, ACItems.plated_coralium_chestplate, rand, adjustProbability(0.2F));
+				addCoinTrade(list, ACItems.dreadium_samurai_chestplate, rand, adjustProbability(0.2F));
+				addCoinTrade(list, ACItems.plated_coralium_leggings, rand, adjustProbability(0.2F));
+				addCoinTrade(list, ACItems.dreadium_samurai_leggings, rand, adjustProbability(0.2F));
+				addCoinTrade(list, ACItems.ethaxium_boots, rand, adjustProbability(0.1F));
+				addCoinTrade(list, ACItems.ethaxium_helmet, rand, adjustProbability(0.1F));
+				addCoinTrade(list, ACItems.ethaxium_chestplate, rand, adjustProbability(0.1F));
+				addCoinTrade(list, ACItems.ethaxium_leggings, rand, adjustProbability(0.1F));
+				addCoinTrade(list, ACItems.cthulhu_engraving, rand, adjustProbability(0.1F));
+				addCoinTrade(list, ACItems.hastur_engraving, rand, adjustProbability(0.1F));
+				addCoinTrade(list, ACItems.jzahar_engraving, rand, adjustProbability(0.1F));
+				addCoinTrade(list, ACItems.azathoth_engraving, rand, adjustProbability(0.1F));
+				addCoinTrade(list, ACItems.nyarlathotep_engraving, rand, adjustProbability(0.1F));
+				addCoinTrade(list, ACItems.yog_sothoth_engraving, rand, adjustProbability(0.1F));
+				addCoinTrade(list, ACItems.shub_niggurath_engraving, rand, adjustProbability(0.1F));
+			}
+
+		if (list.isEmpty())
+			addItemTrade(list, Items.gold_ingot, rand, 1.0F);
+
+		Collections.shuffle(list);
+
+		if (tradingList == null)
+			tradingList = new MerchantRecipeList();
+
+		for (int l = 0; l < par1 && l < list.size(); ++l)
+			addToListWithCheck(tradingList,list.get(l));
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public void setRecipes(MerchantRecipeList var1) {}
+
+	@Override
+	public void useRecipe(MerchantRecipe var1) {
+		var1.incrementToolUses();
+		if(var1.getItemToSell().getItem() instanceof ItemTool ||
+				var1.getItemToSell().getItem() instanceof ItemArmor){
+			var1.incrementToolUses();
+			var1.incrementToolUses();
+			var1.incrementToolUses();
+		}
+		if(var1.getItemToBuy().getItem() instanceof ItemNecronomicon ||
+				var1.getItemToBuy().getItem() instanceof ItemDrainStaff)
+			var1.compensateToolUses();
+		livingSoundTime = -getTalkInterval();
+		playSound("abyssalcraft:remnant.yes", getSoundVolume(), getSoundPitch());
+
+		if (hasSameIDsAs(var1, tradingList.get(tradingList.size() - 1)))
+		{
+			timeUntilReset = 40;
+			needsInitilization = true;
+		}
+
+		if (APIUtils.isCoin(var1.getItemToBuy()))
+			wealth += var1.getItemToBuy().stackSize;
+	}
+
+	/****************** START OF VANILLA CODE FROM 1.7.10 ******************/
+
+	private void addToListWithCheck(MerchantRecipeList list, MerchantRecipe recipe)
+	{
+		for (int i = 0; i < list.size(); ++i)
+		{
+			MerchantRecipe merchantrecipe1 = list.get(i);
+
+			if (hasSameIDsAs(recipe, merchantrecipe1))
+			{
+				if (hasSameItemsAs(recipe, merchantrecipe1))
+					list.set(i, recipe);
+
+				return;
+			}
+		}
+
+		list.add(recipe);
+	}
+
+	private boolean hasSameIDsAs(MerchantRecipe r1, MerchantRecipe r2)
+	{
+		return r1.getItemToBuy().getItem() == r2.getItemToBuy().getItem() && r1.getItemToSell().getItem() == r2.getItemToSell().getItem() ?
+				r1.getSecondItemToBuy() == null && r2.getSecondItemToBuy() == null || r1.getSecondItemToBuy() != null && r2.getSecondItemToBuy() != null
+				&& r1.getSecondItemToBuy().getItem() == r2.getSecondItemToBuy().getItem() : false;
+	}
+
+	private boolean hasSameItemsAs(MerchantRecipe r1, MerchantRecipe r2)
+	{
+		return hasSameIDsAs(r1, r2) && (r1.getItemToBuy().stackSize < r2.getItemToBuy().stackSize ||
+				r1.getSecondItemToBuy() != null && r1.getSecondItemToBuy().stackSize < r2.getSecondItemToBuy().stackSize);
+	}
+
+	/****************** END OF VANILLA CODE FROM 1.7.10 ******************/
+
+	public static void addItemTrade(MerchantRecipeList list, Item item, Random rand, float probability)
+	{
+		if (rand.nextFloat() < probability)
+			list.add(new MerchantRecipe(getItemStackWithQuantity(item, rand), ACItems.elder_engraved_coin));
+	}
+
+	private static ItemStack getItemStackWithQuantity(Item item, Random rand)
+	{
+		return new ItemStack(item, getQuantity(item, rand), 0);
+	}
+
+	private static int getQuantity(Item item, Random rand)
+	{
+		Tuple tuple = itemSellingList.get(item);
+		return tuple == null ? 1 : ((Integer)tuple.getFirst()).intValue() >= ((Integer)tuple.getSecond()).intValue() ? ((Integer)tuple.getFirst()).intValue() : ((Integer)tuple.getFirst()).intValue() + rand.nextInt(((Integer)tuple.getSecond()).intValue() - ((Integer)tuple.getFirst()).intValue());
+	}
+
+	public static void addCoinTrade(MerchantRecipeList list, Item item, Random rand, float probability)
+	{
+		if (rand.nextFloat() < probability)
+		{
+			int i = getRarity(item, rand);
+			ItemStack itemstack;
+			ItemStack itemstack1;
+
+			if (i < 0)
+			{
+				itemstack = new ItemStack(ACItems.elder_engraved_coin, 1, 0);
+				itemstack1 = new ItemStack(item, -i, 0);
+			}
+			else
+			{
+				itemstack = new ItemStack(ACItems.elder_engraved_coin, i, 0);
+				itemstack1 = new ItemStack(item, 1, 0);
+			}
+
+			list.add(new MerchantRecipe(itemstack, itemstack1));
+		}
+	}
+
+	private static int getRarity(Item par1, Random par2)
+	{
+		Tuple tuple = coinSellingList.get(par1);
+		return tuple == null ? 1 : ((Integer)tuple.getFirst()).intValue() >= ((Integer)tuple.getSecond()).intValue() ? ((Integer)tuple.getFirst()).intValue() : ((Integer)tuple.getFirst()).intValue() + par2.nextInt(((Integer)tuple.getSecond()).intValue() - ((Integer)tuple.getFirst()).intValue());
+	}
+
+	@Override
+	public void verifySellingItem(ItemStack par1ItemStack)
+	{
+		if (!worldObj.isRemote && livingSoundTime > -getTalkInterval() + 20)
+		{
+			livingSoundTime = -getTalkInterval();
+
+			if (par1ItemStack != null)
+				playSound("abyssalcraft:remnant.yes", getSoundVolume(), getSoundPitch());
+			else
+				playSound("abyssalcraft:remnant.no", getSoundVolume(), getSoundPitch());
+		}
+	}
+
+	public void addCoinTrade(MerchantRecipeList list, Item buy, int q1, Item sell, int q2){
+		addCoinTrade(list, new ItemStack(buy, q1), new ItemStack(sell, q2));
+	}
+
+	public void addCoinTrade(MerchantRecipeList list, Item buy1, int q1, Item buy2, int q2, Item sell, int q3){
+		addCoinTrade(list, new ItemStack(buy1, q1), new ItemStack(buy2, q2), new ItemStack(sell, q3));
+	}
+
+	public void addCoinTrade(MerchantRecipeList list, ItemStack buy, ItemStack sell){
+		addCoinTrade(list, buy, (ItemStack)null, sell);
+	}
+
+	public void addCoinTrade(MerchantRecipeList list, ItemStack buy1, ItemStack buy2, ItemStack sell){
+		list.add(new MerchantRecipe(buy1, buy2, sell));
+	}
+
+	@Override
+	public IEntityLivingData onInitialSpawn(DifficultyInstance difficulty, IEntityLivingData data){
+		data = super.onInitialSpawn(difficulty, data);
+		applyRandomTrade(worldObj.rand);
+
+		if (getEquipmentInSlot(4) == null)
+		{
+			Calendar calendar = worldObj.getCurrentDate();
+
+			if (calendar.get(2) + 1 == 10 && calendar.get(5) == 31 && rand.nextFloat() < 0.25F)
+			{
+				setCurrentItemOrArmor(4, new ItemStack(rand.nextFloat() < 0.1F ? Blocks.lit_pumpkin : Blocks.pumpkin));
+				equipmentDropChances[4] = 0.0F;
+			}
+		}
+
+		return data;
+	}
+
+	static
+	{
+		itemSellingList.put(Items.coal, new Tuple(Integer.valueOf(16), Integer.valueOf(24)));
+		itemSellingList.put(ACItems.abyssalnite_ingot, new Tuple(Integer.valueOf(8), Integer.valueOf(10)));
+		itemSellingList.put(ACItems.refined_coralium_ingot, new Tuple(Integer.valueOf(8), Integer.valueOf(10)));
+		itemSellingList.put(ACItems.dreadium_ingot, new Tuple(Integer.valueOf(8), Integer.valueOf(10)));
+		itemSellingList.put(ACItems.ethaxium_ingot, new Tuple(Integer.valueOf(4), Integer.valueOf(6)));
+		itemSellingList.put(Items.paper, new Tuple(Integer.valueOf(24), Integer.valueOf(36)));
+		itemSellingList.put(Items.book, new Tuple(Integer.valueOf(11), Integer.valueOf(13)));
+		itemSellingList.put(Items.written_book, new Tuple(Integer.valueOf(1), Integer.valueOf(1)));
+		itemSellingList.put(Items.ender_pearl, new Tuple(Integer.valueOf(3), Integer.valueOf(4)));
+		itemSellingList.put(Items.ender_eye, new Tuple(Integer.valueOf(2), Integer.valueOf(3)));
+		itemSellingList.put(Items.porkchop, new Tuple(Integer.valueOf(14), Integer.valueOf(18)));
+		itemSellingList.put(Items.beef, new Tuple(Integer.valueOf(14), Integer.valueOf(18)));
+		itemSellingList.put(Items.chicken, new Tuple(Integer.valueOf(14), Integer.valueOf(18)));
+		itemSellingList.put(Items.cooked_fish, new Tuple(Integer.valueOf(9), Integer.valueOf(13)));
+		itemSellingList.put(Items.wheat_seeds, new Tuple(Integer.valueOf(34), Integer.valueOf(48)));
+		itemSellingList.put(Items.melon_seeds, new Tuple(Integer.valueOf(30), Integer.valueOf(38)));
+		itemSellingList.put(Items.pumpkin_seeds, new Tuple(Integer.valueOf(30), Integer.valueOf(38)));
+		itemSellingList.put(Items.wheat, new Tuple(Integer.valueOf(18), Integer.valueOf(22)));
+		itemSellingList.put(Item.getItemFromBlock(Blocks.wool), new Tuple(Integer.valueOf(14), Integer.valueOf(22)));
+		itemSellingList.put(Items.rotten_flesh, new Tuple(Integer.valueOf(16), Integer.valueOf(28)));
+		itemSellingList.put(ACItems.coralium_plagued_flesh, new Tuple(Integer.valueOf(16), Integer.valueOf(28)));
+		itemSellingList.put(ACItems.dread_fragment, new Tuple(Integer.valueOf(16), Integer.valueOf(28)));
+		itemSellingList.put(ACItems.omothol_flesh, new Tuple(Integer.valueOf(32), Integer.valueOf(60)));
+		itemSellingList.put(ACItems.rotten_anti_flesh, new Tuple(Integer.valueOf(8), Integer.valueOf(14)));
+		coinSellingList.put(Items.flint_and_steel, new Tuple(Integer.valueOf(3), Integer.valueOf(4)));
+		coinSellingList.put(Items.shears, new Tuple(Integer.valueOf(3), Integer.valueOf(4)));
+		coinSellingList.put(ACItems.ethaxium_sword, new Tuple(Integer.valueOf(12), Integer.valueOf(14)));
+		coinSellingList.put(ACItems.ethaxium_axe, new Tuple(Integer.valueOf(9), Integer.valueOf(12)));
+		coinSellingList.put(ACItems.ethaxium_pickaxe, new Tuple(Integer.valueOf(10), Integer.valueOf(12)));
+		coinSellingList.put(ACItems.ethaxium_shovel, new Tuple(Integer.valueOf(7), Integer.valueOf(8)));
+		coinSellingList.put(ACItems.ethaxium_hoe, new Tuple(Integer.valueOf(7), Integer.valueOf(8)));
+		coinSellingList.put(ACItems.ethaxium_boots, new Tuple(Integer.valueOf(5), Integer.valueOf(7)));
+		coinSellingList.put(ACItems.ethaxium_helmet, new Tuple(Integer.valueOf(5), Integer.valueOf(7)));
+		coinSellingList.put(ACItems.ethaxium_chestplate, new Tuple(Integer.valueOf(11), Integer.valueOf(15)));
+		coinSellingList.put(ACItems.ethaxium_leggings, new Tuple(Integer.valueOf(9), Integer.valueOf(11)));
+		coinSellingList.put(Items.bread, new Tuple(Integer.valueOf(-4), Integer.valueOf(-2)));
+		coinSellingList.put(Items.melon, new Tuple(Integer.valueOf(-8), Integer.valueOf(-4)));
+		coinSellingList.put(Items.apple, new Tuple(Integer.valueOf(-8), Integer.valueOf(-4)));
+		coinSellingList.put(Items.cookie, new Tuple(Integer.valueOf(-10), Integer.valueOf(-7)));
+		coinSellingList.put(Item.getItemFromBlock(Blocks.glass), new Tuple(Integer.valueOf(-5), Integer.valueOf(-3)));
+		coinSellingList.put(Item.getItemFromBlock(Blocks.bookshelf), new Tuple(Integer.valueOf(3), Integer.valueOf(4)));
+		coinSellingList.put(ACItems.washcloth, new Tuple(Integer.valueOf(2), Integer.valueOf(4)));
+		coinSellingList.put(ACItems.mre, new Tuple(Integer.valueOf(6), Integer.valueOf(8)));
+		coinSellingList.put(Items.experience_bottle, new Tuple(Integer.valueOf(-4), Integer.valueOf(-1)));
+		coinSellingList.put(Items.redstone, new Tuple(Integer.valueOf(-4), Integer.valueOf(-1)));
+		coinSellingList.put(Items.compass, new Tuple(Integer.valueOf(10), Integer.valueOf(12)));
+		coinSellingList.put(Items.clock, new Tuple(Integer.valueOf(10), Integer.valueOf(12)));
+		coinSellingList.put(ACItems.necronomicon, new Tuple(Integer.valueOf(10), Integer.valueOf(12)));
+		coinSellingList.put(ACItems.abyssal_wasteland_necronomicon, new Tuple(Integer.valueOf(10), Integer.valueOf(12)));
+		coinSellingList.put(ACItems.dreadlands_necronomicon, new Tuple(Integer.valueOf(10), Integer.valueOf(12)));
+		coinSellingList.put(Item.getItemFromBlock(Blocks.glowstone), new Tuple(Integer.valueOf(-3), Integer.valueOf(-1)));
+		coinSellingList.put(ACItems.pork_on_a_plate, new Tuple(Integer.valueOf(-7), Integer.valueOf(-5)));
+		coinSellingList.put(ACItems.beef_on_a_plate, new Tuple(Integer.valueOf(-7), Integer.valueOf(-5)));
+		coinSellingList.put(ACItems.chicken_on_a_plate, new Tuple(Integer.valueOf(-7), Integer.valueOf(-5)));
+		coinSellingList.put(ACItems.fish_on_a_plate, new Tuple(Integer.valueOf(-7), Integer.valueOf(-5)));
+		coinSellingList.put(Items.cooked_chicken, new Tuple(Integer.valueOf(-8), Integer.valueOf(-6)));
+		coinSellingList.put(Items.ender_eye, new Tuple(Integer.valueOf(7), Integer.valueOf(11)));
+		coinSellingList.put(Items.arrow, new Tuple(Integer.valueOf(-12), Integer.valueOf(-8)));
+		coinSellingList.put(ACItems.plated_coralium_boots, new Tuple(Integer.valueOf(4), Integer.valueOf(6)));
+		coinSellingList.put(ACItems.dreadium_samurai_boots, new Tuple(Integer.valueOf(7), Integer.valueOf(8)));
+		coinSellingList.put(ACItems.plated_coralium_helmet, new Tuple(Integer.valueOf(4), Integer.valueOf(6)));
+		coinSellingList.put(ACItems.dreadium_samurai_helmet, new Tuple(Integer.valueOf(7), Integer.valueOf(8)));
+		coinSellingList.put(ACItems.plated_coralium_chestplate, new Tuple(Integer.valueOf(10), Integer.valueOf(14)));
+		coinSellingList.put(ACItems.dreadium_samurai_chestplate, new Tuple(Integer.valueOf(16), Integer.valueOf(19)));
+		coinSellingList.put(ACItems.plated_coralium_leggings, new Tuple(Integer.valueOf(8), Integer.valueOf(10)));
+		coinSellingList.put(ACItems.dreadium_samurai_leggings, new Tuple(Integer.valueOf(11), Integer.valueOf(14)));
+		coinSellingList.put(ACItems.staff_of_rending, new Tuple(Integer.valueOf(20), Integer.valueOf(25)));
+	}
+
+	public void applyRandomTrade(Random rand){
+		int trade = rand.nextInt(7);
+		setProfession(trade);
+	}
+}
