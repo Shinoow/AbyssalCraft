@@ -104,9 +104,9 @@ public class BiomeGenCorSwamp extends Biome {
 		if(ACConfig.generateAntimatterLake)
 			for(int k = 0; k < 1; k++)
 			{
-				int RandPosX = par2Random.nextInt(16);
+				int RandPosX = par2Random.nextInt(16) + 8;
 				int RandPosY = par2Random.nextInt(60);
-				int RandPosZ = par2Random.nextInt(16);
+				int RandPosZ = par2Random.nextInt(16) + 8;
 				if(par2Random.nextInt(10) == 0)
 					new WorldGenAntimatterLake(ACBlocks.liquid_antimatter).generate(par1World, par2Random, pos.add(RandPosX, RandPosY, RandPosZ));
 			}

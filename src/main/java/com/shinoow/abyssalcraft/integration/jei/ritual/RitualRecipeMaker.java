@@ -19,16 +19,17 @@ import javax.annotation.Nonnull;
 import com.shinoow.abyssalcraft.api.ritual.NecronomiconCreationRitual;
 import com.shinoow.abyssalcraft.api.ritual.NecronomiconRitual;
 import com.shinoow.abyssalcraft.api.ritual.RitualRegistry;
+import com.shinoow.abyssalcraft.lib.util.IHiddenRitual;
 
 public class RitualRecipeMaker {
 
 	@Nonnull
-	public static List<RitualRecipeWrapper> getRituals(){
-		List<RitualRecipeWrapper> recipes = new ArrayList();
+	public static List<NecronomiconCreationRitual> getRituals(){
+		List<NecronomiconCreationRitual> recipes = new ArrayList();
 
 		for(NecronomiconRitual ritual : RitualRegistry.instance().getRituals())
-			if(ritual instanceof NecronomiconCreationRitual)
-				recipes.add(new RitualRecipeWrapper((NecronomiconCreationRitual) ritual));
+			if(ritual instanceof NecronomiconCreationRitual && !(ritual instanceof IHiddenRitual))
+				recipes.add((NecronomiconCreationRitual) ritual);
 
 		return recipes;
 	}

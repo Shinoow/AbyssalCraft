@@ -16,7 +16,6 @@ import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.RenderBiped;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.entity.layers.LayerBipedArmor;
-import net.minecraft.client.renderer.entity.layers.LayerHeldItem;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -32,7 +31,6 @@ public class RenderAntiSkeleton extends RenderBiped<EntityAntiSkeleton>
 	public RenderAntiSkeleton(RenderManager manager)
 	{
 		super(manager, new ModelAntiSkeleton(), 0.5F);
-		this.addLayer(new LayerHeldItem(this));
 		this.addLayer(new LayerBipedArmor(this)
 		{
 			@Override

@@ -203,6 +203,7 @@ container.abyssalcraft.engraver=铸造器
 container.abyssalcraft.materializer=物质化器
 container.abyssalcraft.energycontainer=能量容器
 container.abyssalcraft.tieredenergycontainer=层叠能量容器
+container.abyssalcraft.rendingpedestal=Rending Pedestal
 
 #NEI Integration
 container.abyssalcraft.crystallizer.nei=结晶化
@@ -413,8 +414,9 @@ necronomicon.text.crafting.sacrificialaltar.1=献祭祭坛由火把, 巨石块, 
 necronomicon.text.crafting.sacrificialaltar.2=When a entity is targeted, it will emit smoke particles. Once the entity dies, an amount of PE equal to it's max health will be collected. It only targets non-undead adult entities that aren't players. It should be noted that the altar goes on a cooldown after collecting a fifth of it's max capacity, preventing collection for a minute.
 necronomicon.text.crafting.energycollector=能量收集器由巨石块和阴影宝石合成. 它们可以收集威能, 但需要能量中继器传送.
 necronomicon.text.crafting.energyrelay=能量中继器由巨石块, 阴影宝石碎片和一个阴影宝石合成. 它们可以在储能方块之间传送位能.
+necronomicon.text.crafting.rendingpedestal=A Rending Pedestal is crafted with Monolith Stone, A Shard of Oblivion and a Coralium Pearl. They can be used to automate the Staff of Rending.
 
-necronomicon.text.crafting.upgradekit.1=升级套件是由木头,圆石,线和火药合成. 升级套件可以用于合成以升级.
+necronomicon.text.crafting.upgradekit.1=A Upgrade Kit is crafted with Wooden Planks, Cobblestone, String and Flint. Upgrade kits can upgrade tools and armor through an anvil.
 necronomicon.text.crafting.upgradekit.2=要升级现有的套件,你需要两单位下一阶材料和一单位当前材料. 材料等级顺序为木头 -> 圆石 -> 铁 -> 金 -> 钻石 -> 深渊锭  -> 精炼珊瑚锭 -> 恐惧锭 -> 伊桑斯锭.
 necronomicon.text.crafting.ironplate=铁板是由两个铁锭合成. 铁板可以增加某些食物的饱和度.
 necronomicon.text.crafting.washcloth=洗碟布是由羊毛和蜘蛛网合成.它用于清洗脏盘子(吃盘装食物后得到).
@@ -1010,6 +1012,7 @@ tile.coraliumcobblestoneslab2.name=Coralium Cobblestone Slab
 tile.coraliumcobblestonewall.name=Coralium Cobblestone Wall
 tile.luminousthistle.name=Luminous Thistle
 tile.wastelandsthorn.name=Wasteland's Thorn
+tile.rendingpedestal.name=Rending Pedestal
 
 #Pre/Postfixes
 decorativestatue.prefix=装饰用 %s
@@ -1339,5 +1342,8 @@ subtitle.abyssalcraft.chant.cthugha=声音吟唱着克图格亚
 subtitle.abyssalcraft.dreadspawn.idle=恐惧卵呻吟
 subtitle.abyssalcraft.dreadspawn.hit=恐惧卵受伤
 subtitle.abyssalcraft.dreadspawn.death=恐惧卵死亡
+subtitle.abyssalcraft.abyssalzombie.idle=Abyssal Zombie groans
+subtitle.abyssalcraft.abyssalzombie.hit=Abyssal Zombie hurts
+subtitle.abyssalcraft.abyssalzombie.death=Abyssal Zombie dies
 
 #Localization done, Shin out.

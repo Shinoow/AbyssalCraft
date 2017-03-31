@@ -90,7 +90,8 @@ public class ItemDreadiumSamuraiArmor extends ItemArmor {
 	public void onArmorTick(World world, EntityPlayer player, ItemStack itemstack) {
 		if(world.isRemote) return;
 		if (itemstack.getItem() == ACItems.dreadium_samurai_helmet) {
-			player.addPotionEffect(new PotionEffect(MobEffects.NIGHT_VISION, 260, 0));
+			if(world.provider.isSurfaceWorld())
+				player.addPotionEffect(new PotionEffect(MobEffects.NIGHT_VISION, 260, 0));
 			if(player.getActivePotionEffect(AbyssalCraftAPI.dread_plague) !=null)
 				player.removePotionEffect(AbyssalCraftAPI.dread_plague);
 		}

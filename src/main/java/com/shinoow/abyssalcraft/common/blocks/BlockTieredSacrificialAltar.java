@@ -24,7 +24,6 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.SoundEvents;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -34,7 +33,6 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.NonNullList;
-import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
@@ -44,6 +42,7 @@ import com.shinoow.abyssalcraft.common.blocks.BlockTieredEnergyPedestal.EnumDimT
 import com.shinoow.abyssalcraft.common.blocks.tile.TileEntityTieredSacrificialAltar;
 import com.shinoow.abyssalcraft.lib.ACConfig;
 import com.shinoow.abyssalcraft.lib.ACTabs;
+import com.shinoow.abyssalcraft.lib.util.blocks.SingletonInventoryUtil;
 
 public class BlockTieredSacrificialAltar extends BlockContainer {
 
@@ -56,6 +55,7 @@ public class BlockTieredSacrificialAltar extends BlockContainer {
 		setUnlocalizedName("tieredsacrificialaltar");
 		setSoundType(SoundType.STONE);
 		setCreativeTab(ACTabs.tabDecoration);
+		setHarvestLevel("pickaxe", 0);
 	}
 
 	@Override
@@ -125,23 +125,7 @@ public class BlockTieredSacrificialAltar extends BlockContainer {
 
 	@Override
 	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ) {
-		ItemStack heldItem = player.getHeldItem(hand);
-		TileEntity tile = world.getTileEntity(pos);
-		if(tile != null && tile instanceof TileEntityTieredSacrificialAltar)
-			if(!((TileEntityTieredSacrificialAltar)tile).getItem().isEmpty()){
-				player.inventory.addItemStackToInventory(((TileEntityTieredSacrificialAltar)tile).getItem());
-				((TileEntityTieredSacrificialAltar)tile).setItem(ItemStack.EMPTY);
-				world.playSound(pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, SoundEvents.ENTITY_ITEM_PICKUP, SoundCategory.PLAYERS, 0.5F, world.rand.nextFloat() - world.rand.nextFloat() * 0.2F + 1, false);
-				return true;
-			} else if(!heldItem.isEmpty()){
-				ItemStack newItem = heldItem.copy();
-				newItem.setCount(1);
-				((TileEntityTieredSacrificialAltar)tile).setItem(newItem);
-				heldItem.shrink(1);
-				world.playSound(pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, SoundEvents.ENTITY_ITEM_PICKUP, SoundCategory.PLAYERS, 0.5F, world.rand.nextFloat() - world.rand.nextFloat() * 0.2F + 1, false);
-				return true;
-			}
-		return false;
+		return SingletonInventoryUtil.handleBlockActivation(world, pos, player, player.getHeldItem(hand));
 	}
 
 	@Override

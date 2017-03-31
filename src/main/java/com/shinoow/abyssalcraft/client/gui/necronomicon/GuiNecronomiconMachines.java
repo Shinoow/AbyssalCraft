@@ -66,8 +66,8 @@ public class GuiNecronomiconMachines extends GuiNecronomicon {
 		buttonList.add(buttonNextPage = new ButtonNextPage(1, i + 220, b0 + 154, true));
 		buttonList.add(buttonPreviousPage = new ButtonNextPage(2, i + 18, b0 + 154, false));
 		buttonList.add(info = new ButtonCategory(3, i + 14, b0 + 24, this, NecronomiconText.LABEL_INFO, ACItems.necronomicon));
-		buttonList.add(transmutator = new ButtonCategory(4, i + 14, b0 + 41, this, I18n.format("container.abyssalcraft.transmutator", new Object[0]), getItem(1)));
-		buttonList.add(crystallizer = new ButtonCategory(5, i + 14, b0 + 58, this, I18n.format("container.abyssalcraft.crystallizer", new Object[0]), getItem(2)));
+		buttonList.add(transmutator = new ButtonCategory(4, i + 14, b0 + 41, this, "container.abyssalcraft.transmutator", getItem(1)));
+		buttonList.add(crystallizer = new ButtonCategory(5, i + 14, b0 + 58, this, "container.abyssalcraft.crystallizer", getItem(2)));
 		//	buttonList.add(engraver = new ButtonCategory(6, i + 14, b0 + 75, this, StatCollector.translateToLocal("container.abyssalcraft.engraver"), getItem(3)));
 		//	buttonList.add(materializer = new ButtonCategory(7, i + 14, b0 + 92, this, StatCollector.translateToLocal("container.abyssalcraft.materializer"), getItem(3)));
 
@@ -146,7 +146,7 @@ public class GuiNecronomiconMachines extends GuiNecronomicon {
 		int k = (width - guiWidth) / 2;
 		byte b0 = 2;
 		String stuff;
-		stuff = NecronomiconText.LABEL_INFORMATION_MACHINES;
+		stuff = localize(NecronomiconText.LABEL_INFORMATION_MACHINES);
 		fontRendererObj.drawSplitString(stuff, k + 20, b0 + 16, 116, 0xC40000);
 		writeText(2, NecronomiconText.MACHINES_INFO);
 	}
@@ -203,25 +203,37 @@ public class GuiNecronomiconMachines extends GuiNecronomicon {
 		tooltipStack = null;
 
 		if(isMInfo){
-			stuff = NecronomiconText.LABEL_INFO;
+			stuff = localize(NecronomiconText.LABEL_INFO);
 			fontRendererObj.drawSplitString(stuff, k + 20, b0 + 16, 116, 0xC40000);
 			setTurnupLimit(4);
 			if(currTurnup == 0){
 				writeText(1, NecronomiconText.MACHINE_INFO_1, 50);
+				GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
+				mc.renderEngine.bindTexture(NecronomiconResources.ITEM);
+				drawTexturedModalRect(k, b0, 0, 0, 256, 256);
 				renderItem(k + 60, b0 + 28, new ItemStack(ACBlocks.transmutator_idle), x, y);
 			} else if(currTurnup == 1){
 				writeText(1, NecronomiconText.MACHINE_INFO_2, 50);
+				GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
+				mc.renderEngine.bindTexture(NecronomiconResources.ITEM);
+				drawTexturedModalRect(k, b0, 0, 0, 256, 256);
 				renderItem(k + 60, b0 + 28, new ItemStack(ACBlocks.crystallizer_idle), x, y);
 			} else if(currTurnup == 2){
 				writeText(1, NecronomiconText.MACHINE_INFO_3, 50);
+				GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
+				mc.renderEngine.bindTexture(NecronomiconResources.ITEM);
+				drawTexturedModalRect(k, b0, 0, 0, 256, 256);
 				renderItem(k + 60, b0 + 28, new ItemStack(ACBlocks.engraver), x, y);
 			} else if(currTurnup == 3){
 				writeText(1, NecronomiconText.MACHINE_INFO_4, 50);
+				GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
+				mc.renderEngine.bindTexture(NecronomiconResources.ITEM);
+				drawTexturedModalRect(k, b0, 0, 0, 256, 256);
 				renderItem(k + 60, b0 + 28, new ItemStack(ACBlocks.materializer), x, y);
 			}
 		}
 		if(isTra){
-			stuff = I18n.format("container.abyssalcraft.transmutator", new Object[0]);
+			stuff = localize("container.abyssalcraft.transmutator");
 			fontRendererObj.drawSplitString(stuff, k + 20, b0 + 16, 116, 0xC40000);
 			Map<ItemStack, ItemStack> trans = TransmutatorRecipes.instance().getTransmutationList();
 			setTurnups(trans.size());
@@ -294,7 +306,7 @@ public class GuiNecronomiconMachines extends GuiNecronomicon {
 			}
 		}
 		if(isCry){
-			stuff = I18n.format("container.abyssalcraft.crystallizer", new Object[0]);
+			stuff = localize("container.abyssalcraft.crystallizer");
 			fontRendererObj.drawSplitString(stuff, k + 20, b0 + 16, 116, 0xC40000);
 			Map<ItemStack, ItemStack[]> cryst = CrystallizerRecipes.instance().getCrystallizationList();
 			setTurnups(cryst.size());
@@ -423,9 +435,9 @@ public class GuiNecronomiconMachines extends GuiNecronomicon {
 	private ItemStack tooltipStack;
 	public void renderItem(int xPos, int yPos, ItemStack stack, int mx, int my)
 	{
-		if(stack == null) return;
+		if(stack == null || stack.isEmpty()) return;
 
-		if(stack != null && stack.getItemDamage() == OreDictionary.WILDCARD_VALUE)
+		if(stack.getItemDamage() == OreDictionary.WILDCARD_VALUE)
 			stack.setItemDamage(0);
 
 		RenderItem render = Minecraft.getMinecraft().getRenderItem();

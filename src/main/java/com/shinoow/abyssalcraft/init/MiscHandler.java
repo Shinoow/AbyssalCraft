@@ -34,6 +34,7 @@ import net.minecraft.world.storage.loot.functions.LootFunction;
 import net.minecraft.world.storage.loot.functions.SetCount;
 import net.minecraft.world.storage.loot.functions.SetMetadata;
 import net.minecraftforge.common.*;
+import net.minecraftforge.common.capabilities.CapabilityManager;
 import net.minecraftforge.event.LootTableLoadEvent;
 import net.minecraftforge.fml.common.event.*;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -49,6 +50,9 @@ import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.api.item.ACItems;
 import com.shinoow.abyssalcraft.api.necronomicon.NecroData;
 import com.shinoow.abyssalcraft.common.AbyssalCrafting;
+import com.shinoow.abyssalcraft.common.caps.INecroDataCapability;
+import com.shinoow.abyssalcraft.common.caps.NecroDataCapability;
+import com.shinoow.abyssalcraft.common.caps.NecroDataCapabilityStorage;
 import com.shinoow.abyssalcraft.common.enchantments.*;
 import com.shinoow.abyssalcraft.common.handlers.*;
 import com.shinoow.abyssalcraft.common.network.PacketDispatcher;
@@ -155,6 +159,11 @@ public class MiscHandler implements ILifeCycleHandler {
 		dread_spawn_ambient = registerSoundEvent("dreadspawn.idle");
 		dread_spawn_hurt = registerSoundEvent("dreadspawn.hit");
 		dread_spawn_death = registerSoundEvent("dreadspawn.death");
+		abyssal_zombie_ambient = registerSoundEvent("abyssalzombie.idle");
+		abyssal_zombie_hurt = registerSoundEvent("abyssalzombie.hit");
+		abyssal_zombie_death = registerSoundEvent("abyssalzombie.death");
+
+		CapabilityManager.INSTANCE.register(INecroDataCapability.class, NecroDataCapabilityStorage.instance, NecroDataCapability.class);
 
 		RitualUtil.addBlocks();
 		addOreDictionaryStuff();
@@ -293,6 +302,7 @@ public class MiscHandler implements ILifeCycleHandler {
 		OreDictionary.registerOre("logWood", ACBlocks.dreadlands_log);
 		OreDictionary.registerOre("plankWood", ACBlocks.darklands_oak_planks);
 		OreDictionary.registerOre("plankWood", ACBlocks.dreadlands_planks);
+		OreDictionary.registerOre("stairWood", ACBlocks.darklands_oak_stairs);
 		OreDictionary.registerOre("treeSapling", ACBlocks.darklands_oak_sapling);
 		OreDictionary.registerOre("treeSapling", ACBlocks.dreadlands_sapling);
 		OreDictionary.registerOre("treeLeaves", ACBlocks.darklands_oak_leaves);

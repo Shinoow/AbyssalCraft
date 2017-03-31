@@ -15,6 +15,7 @@ import java.util.List;
 
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -33,6 +34,8 @@ import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.api.energy.IEnergyTransporterItem;
 import com.shinoow.abyssalcraft.api.item.ACItems;
 import com.shinoow.abyssalcraft.common.blocks.BlockRitualAltar;
+import com.shinoow.abyssalcraft.common.network.PacketDispatcher;
+import com.shinoow.abyssalcraft.common.network.client.NecroDataCapMessage;
 import com.shinoow.abyssalcraft.lib.ACAchievements;
 import com.shinoow.abyssalcraft.lib.ACLib;
 import com.shinoow.abyssalcraft.lib.ACSounds;
@@ -69,12 +72,16 @@ public class ItemNecronomicon extends ItemACBasic implements IEnergyTransporterI
 		if(!par1ItemStack.getTagCompound().hasKey("owner")){
 			par1ItemStack.getTagCompound().setString("owner", par3EntityPlayer.getName());
 			if(!par3EntityPlayer.isSneaking()){
+				if(!par2World.isRemote)
+					PacketDispatcher.sendTo(new NecroDataCapMessage(par3EntityPlayer), (EntityPlayerMP)par3EntityPlayer);
 				par3EntityPlayer.openGui(AbyssalCraft.instance, ACLib.necronmiconGuiID, par2World, 0, 0, 0);
 				return new ActionResult(EnumActionResult.SUCCESS, par1ItemStack);
 			}
 		}
 		if(par1ItemStack.getTagCompound().getString("owner").equals(par3EntityPlayer.getName())){
 			if(!par3EntityPlayer.isSneaking()){
+				if(!par2World.isRemote)
+					PacketDispatcher.sendTo(new NecroDataCapMessage(par3EntityPlayer), (EntityPlayerMP)par3EntityPlayer);
 				par3EntityPlayer.openGui(AbyssalCraft.instance, ACLib.necronmiconGuiID, par2World, 0, 0, 0);
 				return new ActionResult(EnumActionResult.SUCCESS, par1ItemStack);
 			}
@@ -104,7 +111,7 @@ public class ItemNecronomicon extends ItemACBasic implements IEnergyTransporterI
 		return EnumActionResult.PASS;
 	}
 
-	private boolean isOwner(EntityPlayer player, ItemStack stack){
+	public boolean isOwner(EntityPlayer player, ItemStack stack){
 		if(!stack.hasTagCompound()) return false;
 		return stack.getTagCompound().getString("owner").equals(player.getName());
 	}

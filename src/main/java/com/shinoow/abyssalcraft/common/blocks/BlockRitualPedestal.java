@@ -25,7 +25,6 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
-import net.minecraft.init.SoundEvents;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
@@ -34,7 +33,6 @@ import net.minecraft.util.EnumBlockRenderType;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.NonNullList;
-import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
@@ -46,6 +44,7 @@ import com.google.common.collect.Maps;
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.common.blocks.BlockRitualAltar.EnumRitualMatType;
 import com.shinoow.abyssalcraft.common.blocks.tile.TileEntityRitualPedestal;
+import com.shinoow.abyssalcraft.lib.util.blocks.SingletonInventoryUtil;
 
 public class BlockRitualPedestal extends BlockContainer {
 
@@ -58,6 +57,7 @@ public class BlockRitualPedestal extends BlockContainer {
 		setResistance(12.0F);
 		setSoundType(SoundType.STONE);
 		setCreativeTab(null);
+		setHarvestLevel("pickaxe", 0);
 	}
 
 	@Override
@@ -98,23 +98,7 @@ public class BlockRitualPedestal extends BlockContainer {
 
 	@Override
 	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ) {
-		ItemStack heldItem = player.getHeldItem(hand);
-		TileEntity tile = world.getTileEntity(pos);
-		if(tile != null && tile instanceof TileEntityRitualPedestal)
-			if(!((TileEntityRitualPedestal)tile).getItem().isEmpty()){
-				player.inventory.addItemStackToInventory(((TileEntityRitualPedestal)tile).getItem());
-				((TileEntityRitualPedestal)tile).setItem(ItemStack.EMPTY);
-				world.playSound(pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, SoundEvents.ENTITY_ITEM_PICKUP, SoundCategory.PLAYERS, 0.5F, world.rand.nextFloat() - world.rand.nextFloat() * 0.2F + 1, false);
-				return true;
-			} else if(!heldItem.isEmpty()){
-				ItemStack newItem = heldItem.copy();
-				newItem.setCount(1);
-				((TileEntityRitualPedestal)tile).setItem(newItem);
-				heldItem.shrink(1);
-				world.playSound(pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, SoundEvents.ENTITY_ITEM_PICKUP, SoundCategory.PLAYERS, 0.5F, world.rand.nextFloat() - world.rand.nextFloat() * 0.2F + 1, false);
-				return true;
-			}
-		return false;
+		return SingletonInventoryUtil.handleBlockActivation(world, pos, player, player.getHeldItem(hand));
 	}
 
 	@Override

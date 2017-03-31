@@ -16,32 +16,33 @@ import javax.annotation.Nonnull;
 import mezz.jei.api.recipe.IRecipeHandler;
 import mezz.jei.api.recipe.IRecipeWrapper;
 
+import com.shinoow.abyssalcraft.api.ritual.NecronomiconCreationRitual;
 import com.shinoow.abyssalcraft.integration.jei.AbyssalCraftRecipeCategoryUid;
 
-public class RitualRecipeHandler implements IRecipeHandler<RitualRecipeWrapper>{
+public class RitualRecipeHandler implements IRecipeHandler<NecronomiconCreationRitual>{
 
 	@Nonnull
 	@Override
-	public Class<RitualRecipeWrapper> getRecipeClass() {
+	public Class<NecronomiconCreationRitual> getRecipeClass() {
 
-		return RitualRecipeWrapper.class;
+		return NecronomiconCreationRitual.class;
 	}
 
 	@Nonnull
 	@Override
-	public IRecipeWrapper getRecipeWrapper(@Nonnull RitualRecipeWrapper recipe) {
+	public IRecipeWrapper getRecipeWrapper(@Nonnull NecronomiconCreationRitual recipe) {
 
-		return recipe;
+		return new RitualRecipeWrapper(recipe);
 	}
 
 	@Override
-	public boolean isRecipeValid(@Nonnull RitualRecipeWrapper recipe) {
+	public boolean isRecipeValid(@Nonnull NecronomiconCreationRitual recipe) {
 
-		return recipe.getOfferings().length == 8 && recipe.getOutputs().size() == 1;
+		return recipe.getOfferings().length > 0 && !recipe.getItem().isEmpty();
 	}
 
 	@Override
-	public String getRecipeCategoryUid(RitualRecipeWrapper recipe) {
+	public String getRecipeCategoryUid(NecronomiconCreationRitual recipe) {
 
 		return AbyssalCraftRecipeCategoryUid.RITUAL;
 	}

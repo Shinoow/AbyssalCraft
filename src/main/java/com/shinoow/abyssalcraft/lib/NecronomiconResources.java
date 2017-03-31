@@ -78,6 +78,9 @@ public class NecronomiconResources {
 	//Crafting grid
 	public static final ResourceLocation CRAFTING = res("crafting");
 
+	//Item frame
+	public static final ResourceLocation ITEM = res("item");
+
 	//Ritual grid
 	public static final ResourceLocation RITUAL = res("ritual");
 

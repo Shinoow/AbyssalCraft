@@ -203,6 +203,7 @@ container.abyssalcraft.engraver=Grabador
 container.abyssalcraft.materializer=Materializador
 container.abyssalcraft.energycontainer=Energy Container
 container.abyssalcraft.tieredenergycontainer=Tiered Energy Container
+container.abyssalcraft.rendingpedestal=Rending Pedestal
 
 #NEI Integration
 container.abyssalcraft.crystallizer.nei=Cristalización
@@ -413,8 +414,9 @@ necronomicon.text.crafting.sacrificialaltar.1=Un altar de sacrificio se hace con
 necronomicon.text.crafting.sacrificialaltar.2=When a entity is targeted, it will emit smoke particles. Once the entity dies, an amount of PE equal to it's max health will be collected. It only targets non-undead adult entities that aren't players. It should be noted that the altar goes on a cooldown after collecting a fifth of it's max capacity, preventing collection for a minute.
 necronomicon.text.crafting.energycollector=A Energy Collector is crafted with Monolith Stone and a Shadow Gem. They can collect PE, but require a Energy Relay to transport it.
 necronomicon.text.crafting.energyrelay=A Energy Relay is crafted with Monolith Stone, Shadow Gem Shards and a Shadow Gem. They can be used to transport PE between blocks capable of storing it.
+necronomicon.text.crafting.rendingpedestal=A Rending Pedestal is crafted with Monolith Stone, A Shard of Oblivion and a Coralium Pearl. They can be used to automate the Staff of Rending.
 
-necronomicon.text.crafting.upgradekit.1=Un kit de actualización se hace con madera,Piedra,cuerda y un Mechero.Con los kits de actualización se pueden actualizar las herramientas y las armaduras a través de un crafteo.
+necronomicon.text.crafting.upgradekit.1=A Upgrade Kit is crafted with Wooden Planks, Cobblestone, String and Flint. Upgrade kits can upgrade tools and armor through an anvil.
 necronomicon.text.crafting.upgradekit.2=Para actualizar se necesita 2 del material a actualizar y 1 del material actual.Los materiales son madera -> Piedra -> Hierro -> Oro -> Diamante -> Abyssalnite -> Coralium Refinado -> Dreadium -> Ethaxium.
 necronomicon.text.crafting.ironplate=Un plato de hierro se hace a partir de 2 lingotes de hierro.Los platos de hierro pueden mejorar la saturación de ciertos alimentos.
 necronomicon.text.crafting.washcloth=Una Toalla de Limpiar se hace con lana y tela de araña.Se utiliza para limpiar los platos sucios (dados al comer alimentos en un plato).
@@ -1010,6 +1012,7 @@ tile.coraliumcobblestoneslab2.name=Coralium Cobblestone Slab
 tile.coraliumcobblestonewall.name=Coralium Cobblestone Wall
 tile.luminousthistle.name=Luminous Thistle
 tile.wastelandsthorn.name=Wasteland's Thorn
+tile.rendingpedestal.name=Rending Pedestal
 
 #Pre/Postfixes
 decorativestatue.prefix=Decorativo %s
@@ -1339,5 +1342,8 @@ subtitle.abyssalcraft.chant.cthugha=Voices chant to Cthugha
 subtitle.abyssalcraft.dreadspawn.idle=Dread Spawn groans
 subtitle.abyssalcraft.dreadspawn.hit=Dread Spawn hurts
 subtitle.abyssalcraft.dreadspawn.death=Dread Spawn dies
+subtitle.abyssalcraft.abyssalzombie.idle=Abyssal Zombie groans
+subtitle.abyssalcraft.abyssalzombie.hit=Abyssal Zombie hurts
+subtitle.abyssalcraft.abyssalzombie.death=Abyssal Zombie dies
 
 #Localization done, Shin out.

@@ -53,6 +53,13 @@ public abstract class BlockACSlab extends BlockSlab {
 		mapColor = par1SingleSlab.getMapColor(par1SingleSlab.getDefaultState());
 
 		setDefaultState(blockState.getBaseState().withProperty(VARIANT_PROPERTY, false));
+
+		if(getHarvestTool(getDefaultState()) == null)
+			if(par3Material == Material.ROCK || par3Material == Material.IRON || par3Material == Material.ANVIL)
+				setHarvestLevel("pickaxe", 0);
+			else if(par3Material == Material.GROUND || par3Material == Material.GRASS || par3Material == Material.SAND ||
+					par3Material == Material.SNOW || par3Material == Material.CRAFTED_SNOW)
+				setHarvestLevel("shovel", 0);
 	}
 
 	public BlockACSlab(Material par3Material, String tooltype, int harvestlevel, MapColor mapColor)
@@ -70,6 +77,13 @@ public abstract class BlockACSlab extends BlockSlab {
 		this.mapColor = mapColor;
 
 		setDefaultState(blockState.getBaseState().withProperty(VARIANT_PROPERTY, false).withProperty(HALF, EnumBlockHalf.BOTTOM));
+
+		if(getHarvestTool(getDefaultState()) == null)
+			if(par3Material == Material.ROCK || par3Material == Material.IRON || par3Material == Material.ANVIL)
+				setHarvestLevel("pickaxe", 0);
+			else if(par3Material == Material.GROUND || par3Material == Material.GRASS || par3Material == Material.SAND ||
+					par3Material == Material.SNOW || par3Material == Material.CRAFTED_SNOW)
+				setHarvestLevel("shovel", 0);
 	}
 
 	@Override

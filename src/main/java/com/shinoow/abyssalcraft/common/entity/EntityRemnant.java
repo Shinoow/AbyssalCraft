@@ -185,7 +185,7 @@ public class EntityRemnant extends EntityMob implements IMerchant, IAntiEntity, 
 	public boolean processInteract(EntityPlayer par1EntityPlayer, EnumHand hand)
 	{
 		if(isEntityAlive() && !par1EntityPlayer.isSneaking() && !isAngry())
-			if(EntityUtil.hasNecronomicon(par1EntityPlayer)){
+			if(EntityUtil.hasNecronomicon(par1EntityPlayer) && ownsTheirBook(par1EntityPlayer)){
 				if(!isTrading()){
 					if(!world.isRemote){
 						setCustomer(par1EntityPlayer);
@@ -199,6 +199,13 @@ public class EntityRemnant extends EntityMob implements IMerchant, IAntiEntity, 
 			}
 
 		return super.processInteract(par1EntityPlayer, hand);
+	}
+
+	private boolean ownsTheirBook(EntityPlayer player){
+		for(ItemStack stack : player.inventory.mainInventory)
+			if(stack != null && stack.getItem() instanceof ItemNecronomicon && !((ItemNecronomicon)stack.getItem()).isOwner(player, stack))
+				return false;
+		return true;
 	}
 
 	@Override

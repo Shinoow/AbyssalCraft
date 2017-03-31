@@ -54,30 +54,25 @@ public class AbyssalCraft {
 
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
-		instance = this;
-		for(ILifeCycleHandler handler : handlers)
-			handler.preInit(event);
+		handlers.forEach(handler -> handler.preInit(event));
 		proxy.preInit();
 	}
 
 	@EventHandler
 	public void Init(FMLInitializationEvent event) {
 		proxy.init();
-		for(ILifeCycleHandler handler : handlers)
-			handler.init(event);
+		handlers.forEach(handler -> handler.init(event));
 	}
 
 	@EventHandler
 	public void postInit(FMLPostInitializationEvent event) {
 		proxy.postInit();
-		for(ILifeCycleHandler handler : handlers)
-			handler.postInit(event);
+		handlers.forEach(handler -> handler.postInit(event));
 	}
 
 	@EventHandler
 	public void loadComplete(FMLLoadCompleteEvent event){
-		for(ILifeCycleHandler handler : handlers)
-			handler.loadComplete(event);
+		handlers.forEach(handler -> handler.loadComplete(event));
 	}
 
 	@EventHandler

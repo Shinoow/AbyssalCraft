@@ -234,6 +234,7 @@ public class ClientProxy extends CommonProxy {
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityTieredEnergyPedestal.class, new TileEntityPedestalBlockRenderer());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityTieredSacrificialAltar.class, new TileEntityAltarBlockRenderer());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityJzaharSpawner.class, new TileEntityJzaharSpawnerRenderer());
+		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityRendingPedestal.class, new TileEntityPedestalBlockRenderer());
 
 		registerItemRender(ItemHandler.devsword, 0);
 		registerItemRender(ACItems.oblivion_catalyst, 0);
@@ -641,6 +642,7 @@ public class ClientProxy extends CommonProxy {
 		registerItemRender(ACBlocks.coralium_cobblestone_wall, 0);
 		registerItemRender(ACBlocks.luminous_thistle, 0);
 		registerItemRender(ACBlocks.wastelands_thorn, 0);
+		registerItemRender(ACBlocks.rending_pedestal, 0);
 
 		RenderPlayer render1 = Minecraft.getMinecraft().getRenderManager().getSkinMap().get("default");
 		render1.addLayer(new LayerStarSpawnTentacles(render1));

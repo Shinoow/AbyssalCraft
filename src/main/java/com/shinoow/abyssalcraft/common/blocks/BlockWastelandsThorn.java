@@ -12,6 +12,7 @@
 package com.shinoow.abyssalcraft.common.blocks;
 
 import net.minecraft.block.BlockBush;
+import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
@@ -27,7 +28,7 @@ import com.shinoow.abyssalcraft.lib.ACTabs;
 public class BlockWastelandsThorn extends BlockBush {
 
 	public BlockWastelandsThorn(){
-		super();
+		setSoundType(SoundType.PLANT);
 		setUnlocalizedName("wastelandsthorn");
 		setCreativeTab(ACTabs.tabDecoration);
 	}

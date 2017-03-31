@@ -11,6 +11,7 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.common.world;
 
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.DimensionType;
 import net.minecraft.world.WorldProvider;
@@ -18,6 +19,7 @@ import net.minecraft.world.chunk.IChunkGenerator;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import com.shinoow.abyssalcraft.client.render.sky.ACSkyRenderer;
 import com.shinoow.abyssalcraft.lib.ACLib;
 
 public class WorldProviderDreadlands extends WorldProvider {
@@ -84,6 +86,13 @@ public class WorldProviderDreadlands extends WorldProvider {
 	@Override
 	public int getAverageGroundLevel() {
 		return 50;
+	}
+
+	@SideOnly(Side.CLIENT)
+	@Override
+	public net.minecraftforge.client.IRenderHandler getSkyRenderer()
+	{
+		return new ACSkyRenderer(new ResourceLocation("abyssalcraft:textures/environment/dreadlands_sky.png"), 100, 14, 14);
 	}
 
 	@Override

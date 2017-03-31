@@ -50,6 +50,7 @@ public class BiomeGenDreadlandsBase extends Biome implements IDreadlandsBiome {
 		fillerBlock = ACBlocks.dreadstone.getDefaultState();
 		theBiomeDecorator.treesPerChunk = -1;
 		theBiomeDecorator.flowersPerChunk= -1;
+		theBiomeDecorator.grassPerChunk = -1;
 		setMobSpawns();
 	}
 

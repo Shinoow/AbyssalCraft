@@ -13,12 +13,15 @@ package com.shinoow.abyssalcraft.common.handlers;
 
 import java.util.Random;
 
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockStairs;
+import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.MobEffects;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -27,16 +30,20 @@ import net.minecraft.nbt.NBTTagList;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumParticleTypes;
+import net.minecraft.util.SoundCategory;
+import net.minecraft.util.StringUtils;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.translation.I18n;
 import net.minecraft.world.WorldServer;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.chunk.storage.ExtendedBlockStorage;
+import net.minecraftforge.event.AnvilUpdateEvent;
 import net.minecraftforge.event.entity.living.EnderTeleportEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.player.EntityItemPickupEvent;
+import net.minecraftforge.event.entity.player.UseHoeEvent;
 import net.minecraftforge.event.terraingen.BiomeEvent;
 import net.minecraftforge.event.terraingen.PopulateChunkEvent;
 import net.minecraftforge.fml.common.eventhandler.Event.Result;
@@ -49,6 +56,7 @@ import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.api.event.ACEvents.RitualEvent;
 import com.shinoow.abyssalcraft.api.item.ACItems;
 import com.shinoow.abyssalcraft.api.item.ItemUpgradeKit;
+import com.shinoow.abyssalcraft.api.recipe.UpgradeKitRecipes;
 import com.shinoow.abyssalcraft.api.ritual.NecronomiconCreationRitual;
 import com.shinoow.abyssalcraft.api.ritual.NecronomiconInfusionRitual;
 import com.shinoow.abyssalcraft.api.ritual.NecronomiconPotionAoERitual;
@@ -189,67 +197,48 @@ public class AbyssalCraftEventHooks {
 	public void onCraftingEvent(PlayerEvent.ItemCraftedEvent event)
 	{
 		for(int h=0; h < event.craftMatrix.getSizeInventory(); h++)
-			if(event.craftMatrix.getStackInSlot(h) != null)
-				for(int i=0; i < event.craftMatrix.getSizeInventory(); i++)
-					if(event.craftMatrix.getStackInSlot(i) != null)
-					{
-						ItemStack k = event.craftMatrix.getStackInSlot(h);
-						ItemStack j = event.craftMatrix.getStackInSlot(i);
+			if(event.craftMatrix.getStackInSlot(h) != null){
+				ItemStack k = event.craftMatrix.getStackInSlot(h);
 
-						if(k.getItem() != null && j.getItem() != null && k.getItem() instanceof ItemUpgradeKit)
-						{
-							NBTTagCompound compound = new NBTTagCompound();
-							NBTTagList tag = new NBTTagList();
+				if(k.getItem() != null && k.getItem() instanceof ItemCrystalBag){
+					NBTTagCompound compound = new NBTTagCompound();
+					NBTTagList items = new NBTTagList();
 
-							ItemStack l = event.crafting;
+					if(k.getTagCompound() == null)
+						k.setTagCompound(compound);
+					items = k.getTagCompound().getTagList("ItemInventory", 10);
 
-							if(j.isItemEnchanted())
-							{
-								tag = j.getTagCompound().getTagList("ench", 10);
-								if(l.getTagCompound() == null)
-									l.setTagCompound(compound);
-								l.getTagCompound().setTag("ench", tag);
-							}
-						}
-						else if(k.getItem() != null && k.getItem() instanceof ItemCrystalBag){
-							NBTTagCompound compound = new NBTTagCompound();
-							NBTTagList items = new NBTTagList();
+					ItemStack l = event.crafting;
 
-							if(k.getTagCompound() == null)
-								k.setTagCompound(compound);
-							items = k.getTagCompound().getTagList("ItemInventory", 10);
-
-							ItemStack l = event.crafting;
-
-							if(l.getItem() instanceof ItemCrystalBag){
-								((ItemCrystalBag)l.getItem()).setInventorySize(l);
-								if(l.getTagCompound() == null)
-									l.setTagCompound(compound);
-								l.getTagCompound().setTag("ItemInventory", items);
-							}
-						}
-						else if(k.getItem() != null && k.getItem() instanceof ItemNecronomicon){
-							NBTTagCompound compound = new NBTTagCompound();
-							String owner = "";
-							float energy = 0;
-
-							if(k.getTagCompound() == null)
-								k.setTagCompound(compound);
-							owner = k.getTagCompound().getString("owner");
-							energy = k.getTagCompound().getFloat("PotEnergy");
-
-							ItemStack l = event.crafting;
-
-							if(l.getItem() instanceof ItemNecronomicon){
-								if(l.getTagCompound() == null)
-									l.setTagCompound(compound);
-								if(!owner.equals(""))
-									l.getTagCompound().setString("owner", owner);
-								if(energy != 0)
-									l.getTagCompound().setFloat("PotEnergy", energy);
-							}
-						}
+					if(l.getItem() instanceof ItemCrystalBag){
+						((ItemCrystalBag)l.getItem()).setInventorySize(l);
+						if(l.getTagCompound() == null)
+							l.setTagCompound(compound);
+						l.getTagCompound().setTag("ItemInventory", items);
 					}
+				}
+				else if(k.getItem() != null && k.getItem() instanceof ItemNecronomicon){
+					NBTTagCompound compound = new NBTTagCompound();
+					String owner = "";
+					float energy = 0;
+
+					if(k.getTagCompound() == null)
+						k.setTagCompound(compound);
+					owner = k.getTagCompound().getString("owner");
+					energy = k.getTagCompound().getFloat("PotEnergy");
+
+					ItemStack l = event.crafting;
+
+					if(l.getItem() instanceof ItemNecronomicon){
+						if(l.getTagCompound() == null)
+							l.setTagCompound(compound);
+						if(!owner.equals(""))
+							l.getTagCompound().setString("owner", owner);
+						if(energy != 0)
+							l.getTagCompound().setFloat("PotEnergy", energy);
+					}
+				}
+			}
 
 		if(event.crafting.getItem() == ACItems.gateway_key)
 			event.player.addStat(ACAchievements.gateway_key, 1);
@@ -367,6 +356,76 @@ public class AbyssalCraftEventHooks {
 			EntityPlayer player = (EntityPlayer)event.getEntityLiving();
 			if(event.getSource().getEntity() != null && event.getSource().getEntity() instanceof EntityEvilSheep)
 				((EntityEvilSheep)event.getSource().getEntity()).setKilledPlayer(player);
+		}
+	}
+
+	@SubscribeEvent
+	public void upgradeKits(AnvilUpdateEvent event){
+		if(!(event.getRight().getItem() instanceof ItemUpgradeKit)) return;
+
+		int cost = 0;
+
+		float f = (float)(event.getLeft().getMaxDamage() - event.getLeft().getItemDamage()) / (float)event.getLeft().getMaxDamage();
+
+		if(f >= 0)
+			cost = 10;
+		if(f >= 0.1f)
+			cost = 9;
+		if(f >= 0.2f)
+			cost = 8;
+		if(f >= 0.3f)
+			cost = 7;
+		if(f >= 0.4f)
+			cost = 6;
+		if(f >= 0.5f)
+			cost = 5;
+		if(f >= 0.6f)
+			cost = 4;
+		if(f >= 0.7f)
+			cost = 3;
+		if(f >= 0.8f)
+			cost = 2;
+		if(f >= 0.9f)
+			cost = 1;
+
+		ItemStack stack = UpgradeKitRecipes.instance().getUpgrade((ItemUpgradeKit)event.getRight().getItem(), event.getLeft());
+
+		if(!stack.isEmpty()){
+
+			if(StringUtils.isNullOrEmpty(event.getName())){
+				if(event.getLeft().hasDisplayName()){
+					cost += 1;
+					stack.clearCustomName();
+				}
+			} else if(!event.getName().equals(event.getLeft().getDisplayName())){
+				cost += 1;
+				stack.setStackDisplayName(event.getName());
+			}
+
+			for(int i : EnchantmentHelper.getEnchantments(event.getLeft()).values())
+				cost += i;
+
+			EnchantmentHelper.setEnchantments(EnchantmentHelper.getEnchantments(event.getLeft()), stack);
+			stack.setCount(event.getLeft().getCount());
+			event.setOutput(stack);
+		}
+
+		event.setMaterialCost(1);
+		event.setCost(cost == 0 ? 1 : cost);
+	}
+
+	@SubscribeEvent
+	public void onUseHoe(UseHoeEvent event){
+
+		Block b = event.getWorld().getBlockState(event.getPos()).getBlock();
+
+		if(b == ACBlocks.darklands_grass || b == ACBlocks.dreadlands_grass || b == ACBlocks.dreadlands_dirt){
+
+			event.getWorld().playSound(event.getEntityPlayer(), event.getPos(), SoundEvents.ITEM_HOE_TILL, SoundCategory.BLOCKS, 1.0F, 1.0F);
+
+			if(!event.getWorld().isRemote)
+				event.getWorld().setBlockState(event.getPos(), Blocks.FARMLAND.getDefaultState());
+			event.setResult(Result.ALLOW);
 		}
 	}
 }

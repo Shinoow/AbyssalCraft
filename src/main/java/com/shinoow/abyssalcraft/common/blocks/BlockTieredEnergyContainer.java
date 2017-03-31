@@ -60,6 +60,7 @@ public class BlockTieredEnergyContainer extends BlockContainer {
 		setSoundType(SoundType.STONE);
 		setCreativeTab(ACTabs.tabDecoration);
 		setDefaultState(blockState.getBaseState().withProperty(DIMENSION, EnumDimType.OVERWORLD));
+		setHarvestLevel("pickaxe", 0);
 	}
 
 	@Override

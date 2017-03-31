@@ -14,24 +14,30 @@ package com.shinoow.abyssalcraft.client.gui.necronomicon;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.resources.I18n;
+import net.minecraft.item.ItemStack;
 
 import org.lwjgl.input.Keyboard;
 
+import com.shinoow.abyssalcraft.api.item.ACItems;
+import com.shinoow.abyssalcraft.client.gui.necronomicon.buttons.ButtonCategory;
 import com.shinoow.abyssalcraft.client.gui.necronomicon.buttons.ButtonNextPage;
+import com.shinoow.abyssalcraft.common.network.PacketDispatcher;
+import com.shinoow.abyssalcraft.common.network.server.OpenSpellbookMessage;
 import com.shinoow.abyssalcraft.lib.NecronomiconText;
 
 public class GuiNecronomiconSpells extends GuiNecronomicon {
 
-	private ButtonNextPage buttonNextPage;
-	private ButtonNextPage buttonPreviousPage;
+	private ButtonNextPage buttonNextPage, buttonPreviousPage;
+	private ButtonCategory buttonCat1, buttonCat2;
 	private GuiButton buttonDone;
+	private ItemStack book;
 
-	public GuiNecronomiconSpells(int bookType){
+	public GuiNecronomiconSpells(int bookType, ItemStack book){
 		super(bookType);
+		this.book = book;
 	}
 
 	@Override
-	@SuppressWarnings("unchecked")
 	public void initGui()
 	{
 		buttonList.clear();
@@ -41,10 +47,10 @@ public class GuiNecronomiconSpells extends GuiNecronomicon {
 
 		int i = (width - guiWidth) / 2;
 		byte b0 = 2;
-		buttonList.add(buttonNextPage = new ButtonNextPage(1, i + 220, b0 + 154, true));
+		buttonList.add(buttonNextPage = new ButtonNextPage(1, i + 215, b0 + 154, true));
 		buttonList.add(buttonPreviousPage = new ButtonNextPage(2, i + 18, b0 + 154, false));
-		//		buttonList.add(buttonCat1 = new ButtonCategory(3, i + 10, b0 + 30, this, 0, "necronomicon.index.information", AbyssalCraft.necronomicon));
-		//		buttonList.add(buttonCat2 = new ButtonCategory(4, i + 10, b0 + 55, this, 0, "necronomicon.index.spells", AbyssalCraft.necronomicon));
+		buttonList.add(buttonCat1 = new ButtonCategory(3, i + 14, b0 + 24, this, "Create/modify spells", ACItems.necronomicon));
+		buttonList.add(buttonCat2 = new ButtonCategory(4, i + 14, b0 + 41, this, "Open Compendium", hasSpells() ? ACItems.necronomicon : ACItems.oblivion_catalyst));
 		//		buttonList.add(buttonCat3 = new ButtonCategory(5, i + 10, b0 + 80, this, 0, "necronomicon.index.rituals", AbyssalCraft.necronomicon));
 		//		if(bookType == 4)
 		//			buttonList.add(buttonCat4 = new ButtonCategory(6, i + 10, b0 + 105, this, 0, "necronomicon.index.huh", AbyssalCraft.abyssalnomicon));
@@ -57,11 +63,17 @@ public class GuiNecronomiconSpells extends GuiNecronomicon {
 		buttonNextPage.visible = false;
 		buttonPreviousPage.visible = true;
 		buttonDone.visible = true;
-		//		buttonCat1.visible = true;
-		//		buttonCat2.visible = true;
+		buttonCat1.visible = true;
+		buttonCat2.visible = hasSpells();
 		//		buttonCat3.visible = true;
 		//		buttonCat4.visible = true;
 
+	}
+
+	private boolean hasSpells(){
+		if(book.hasTagCompound())
+			return book.getTagCompound().hasKey("Knowledge");
+		return false;
 	}
 
 	@Override
@@ -73,12 +85,19 @@ public class GuiNecronomiconSpells extends GuiNecronomicon {
 				mc.displayGuiScreen((GuiScreen)null);
 			else if (button.id == 2)
 				mc.displayGuiScreen(new GuiNecronomicon(getBookType()));
+			else if (button.id == 3)
+				PacketDispatcher.sendToServer(new OpenSpellbookMessage());
 			updateButtons();
 		}
 	}
 
 	@Override
 	protected void drawIndexText(){
-		writeText(1, NecronomiconText.WIP);
+		int k = (width - guiWidth) / 2;
+		byte b0 = 2;
+		String stuff;
+		stuff = localize(NecronomiconText.LABEL_SPELLBOOK);
+		fontRendererObj.drawSplitString(stuff, k + 20, b0 + 16, 116, 0xC40000);
+		writeText(2, book != null ? NecronomiconText.WIP : "Whoops");
 	}
 }

@@ -65,6 +65,7 @@ import com.shinoow.abyssalcraft.init.InitHandler;
 import com.shinoow.abyssalcraft.lib.ACConfig;
 import com.shinoow.abyssalcraft.lib.ACLib;
 import com.shinoow.abyssalcraft.lib.ACLoot;
+import com.shinoow.abyssalcraft.lib.ACSounds;
 
 public class EntityAbyssalZombie extends EntityMob implements ICoraliumEntity {
 
@@ -131,12 +132,6 @@ public class EntityAbyssalZombie extends EntityMob implements ICoraliumEntity {
 	public boolean isChild()
 	{
 		return dataManager.get(CHILD).byteValue() == 1;
-	}
-
-	@Override
-	protected float getSoundPitch()
-	{
-		return isChild() ? rand.nextFloat() - rand.nextFloat() * 0.2F + 1.3F : 0.9F;
 	}
 
 	/**
@@ -241,19 +236,19 @@ public class EntityAbyssalZombie extends EntityMob implements ICoraliumEntity {
 	@Override
 	protected SoundEvent getAmbientSound()
 	{
-		return SoundEvents.ENTITY_ZOMBIE_AMBIENT;
+		return ACSounds.abyssal_zombie_ambient;
 	}
 
 	@Override
 	protected SoundEvent getHurtSound()
 	{
-		return SoundEvents.ENTITY_ZOMBIE_HURT;
+		return ACSounds.abyssal_zombie_hurt;
 	}
 
 	@Override
 	protected SoundEvent getDeathSound()
 	{
-		return SoundEvents.ENTITY_ZOMBIE_DEATH;
+		return ACSounds.abyssal_zombie_death;
 	}
 
 	@Override
@@ -316,7 +311,7 @@ public class EntityAbyssalZombie extends EntityMob implements ICoraliumEntity {
 	{
 		super.onKillEntity(par1EntityLivingBase);
 
-		if (world.getDifficulty() == EnumDifficulty.NORMAL || world.getDifficulty() == EnumDifficulty.HARD
+		if (world.getDifficulty() == EnumDifficulty.HARD || world.getDifficulty() == EnumDifficulty.NORMAL
 				&& par1EntityLivingBase instanceof EntityZombie) {
 
 			if (rand.nextBoolean())
@@ -333,7 +328,7 @@ public class EntityAbyssalZombie extends EntityMob implements ICoraliumEntity {
 			world.spawnEntity(EntityDephsZombie);
 			world.playEvent((EntityPlayer)null, 1026, new BlockPos(posX, posY, posZ), 0);
 		}
-		else if (world.getDifficulty() == EnumDifficulty.NORMAL || world.getDifficulty() == EnumDifficulty.HARD
+		else if (world.getDifficulty() == EnumDifficulty.HARD || world.getDifficulty() == EnumDifficulty.NORMAL
 				&& par1EntityLivingBase instanceof EntityPlayer) {
 
 			if (rand.nextBoolean())

@@ -15,7 +15,6 @@ import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.renderer.entity.RenderBiped;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.entity.layers.LayerBipedArmor;
-import net.minecraft.client.renderer.entity.layers.LayerHeldItem;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -30,7 +29,6 @@ public class RenderAntiPlayer extends RenderBiped<EntityAntiPlayer>
 	public RenderAntiPlayer(RenderManager manager)
 	{
 		super(manager, new ModelBiped(), 0.5F);
-		this.addLayer(new LayerHeldItem(this));
 		this.addLayer(new LayerBipedArmor(this));
 	}
 

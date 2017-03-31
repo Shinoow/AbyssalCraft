@@ -69,7 +69,8 @@ public class ItemDepthsArmor extends ItemArmor /* implements IVisDiscountGear, I
 		if (itemstack.getItem() == ACItems.depths_helmet)
 		{
 			player.addPotionEffect(new PotionEffect(MobEffects.WATER_BREATHING, 20, 0));
-			player.addPotionEffect(new PotionEffect(MobEffects.NIGHT_VISION, 260, 0));
+			if(world.provider.isSurfaceWorld())
+				player.addPotionEffect(new PotionEffect(MobEffects.NIGHT_VISION, 260, 0));
 			if(player.getActivePotionEffect(AbyssalCraftAPI.coralium_plague) !=null)
 				player.removePotionEffect(AbyssalCraftAPI.coralium_plague);
 		}
