@@ -12,7 +12,7 @@
 package com.shinoow.abyssalcraft.lib.util.blocks;
 
 /**
- * Internal interface for Ritual Pedestals TE's<br>
+ * Internal interface for Ritual Pedestals TEs<br>
  * This shouldn't be used by other mods.<br>
  * This interface exists in case I add more methods to the pedestals
  * @author shinoow

@@ -24,7 +24,7 @@ import net.minecraft.item.Item;
 public class BlockFusedAbyssalSand extends BlockACBasic {
 
 	public BlockFusedAbyssalSand() {
-		super(Material.SAND, 0.5F, 2.5F, SoundType.SAND, MapColor.LIME);
+		super(Material.SAND, "shovel", 0, 0.5F, 2.5F, SoundType.SAND, MapColor.LIME);
 		setUnlocalizedName("fusedabyssalsand");
 	}
 

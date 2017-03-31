@@ -46,6 +46,7 @@ public class BlockEnergyRelay extends BlockContainer {
 		setResistance(12.0F);
 		setSoundType(SoundType.STONE);
 		setCreativeTab(ACTabs.tabDecoration);
+		setHarvestLevel("pickaxe", 0);
 	}
 
 	@Override

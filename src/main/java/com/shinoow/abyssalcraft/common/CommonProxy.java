@@ -59,11 +59,18 @@ public class CommonProxy implements IGuiHandler {
 				if (entity instanceof TileEntityEnergyContainer)
 					return new ContainerEnergyContainer(player.inventory, (TileEntityEnergyContainer) entity);
 				break;
+			case ACLib.rendingPedestalGuiID:
+				if (entity instanceof TileEntityRendingPedestal)
+					return new ContainerRendingPedestal(player.inventory, (TileEntityRendingPedestal) entity);
+				break;
 			}
 		if(stack != null)
 			switch(ID){
 			case ACLib.crystalbagGuiID:
-				return new ContainerCrystalBag(player.inventory, new InventoryCrystalBag(player.getHeldItem(EnumHand.MAIN_HAND)));
+				return new ContainerCrystalBag(player.inventory, new InventoryCrystalBag(stack));
+			case ACLib.necronomiconspellbookGuiID:
+				if(stack.getItem() instanceof ItemNecronomicon && ((ItemNecronomicon)stack.getItem()).isOwner(player, stack))
+					return new ContainerSpellbook(player.inventory, stack);
 			}
 		return null;
 	}
@@ -95,15 +102,22 @@ public class CommonProxy implements IGuiHandler {
 				if (entity instanceof TileEntityEnergyContainer)
 					return new GuiEnergyContainer(player.inventory, (TileEntityEnergyContainer) entity);
 				break;
+			case ACLib.rendingPedestalGuiID:
+				if (entity instanceof TileEntityRendingPedestal)
+					return new GuiRendingPedestal(player.inventory, (TileEntityRendingPedestal) entity);
+				break;
 			}
 		if(stack != null)
 			switch(ID){
 			case ACLib.necronmiconGuiID:
-				if(stack.getItem() instanceof ItemNecronomicon)
+				if(stack.getItem() instanceof ItemNecronomicon && ((ItemNecronomicon)stack.getItem()).isOwner(player, stack))
 					return new GuiNecronomicon(((ItemNecronomicon)stack.getItem()).getBookType());
 				break;
 			case ACLib.crystalbagGuiID:
-				return new GuiCrystalBag(new ContainerCrystalBag(player.inventory, new InventoryCrystalBag(player.getHeldItem(EnumHand.MAIN_HAND))));
+				return new GuiCrystalBag(new ContainerCrystalBag(player.inventory, new InventoryCrystalBag(stack)));
+			case ACLib.necronomiconspellbookGuiID:
+				if(stack.getItem() instanceof ItemNecronomicon && ((ItemNecronomicon)stack.getItem()).isOwner(player, stack))
+					return new GuiSpellbook(new ContainerSpellbook(player.inventory, stack));
 			}
 		return null;
 	}

@@ -21,6 +21,7 @@ import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.recipe.BlankRecipeWrapper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
 
@@ -73,7 +74,7 @@ public class RitualRecipeWrapper extends BlankRecipeWrapper {
 
 	@Override
 	public void drawInfo(@Nonnull Minecraft minecraft, int recipeWidth, int recipeHeight, int mouseX, int mouseY) {
-		dimToString.put(-1, NecronomiconText.LABEL_ANYWHERE);
+		dimToString.put(-1, I18n.format(NecronomiconText.LABEL_ANYWHERE, new Object[0]));
 		dimToString.putAll(RitualRegistry.instance().getDimensionNameMappings());
 
 		FontRenderer fr = Minecraft.getMinecraft().fontRendererObj;
@@ -82,9 +83,9 @@ public class RitualRecipeWrapper extends BlankRecipeWrapper {
 		fr.setUnicodeFlag(true);
 
 		if(ritual.requiresSacrifice())
-			fr.drawString(NecronomiconText.LABEL_SACRIFICE, 93, 124, 0xC40000);
-		fr.drawSplitString(NecronomiconText.LABEL_LOCATION + ": " + getDimension(ritual.getDimension()), 93, 85, 70, 0);
-		fr.drawSplitString(NecronomiconText.LABEL_REQUIRED_ENERGY + ": " + ritual.getReqEnergy() + " PE", 93, 108, 70, 0);
+			fr.drawString(I18n.format(NecronomiconText.LABEL_SACRIFICE, new Object[0]), 93, 124, 0xC40000);
+		fr.drawSplitString(I18n.format(NecronomiconText.LABEL_LOCATION, new Object[0]) + ": " + getDimension(ritual.getDimension()), 93, 85, 70, 0);
+		fr.drawSplitString(I18n.format(NecronomiconText.LABEL_REQUIRED_ENERGY, new Object[0]) + ": " + ritual.getReqEnergy() + " PE", 93, 108, 70, 0);
 
 		fr.setUnicodeFlag(unicode);
 	}

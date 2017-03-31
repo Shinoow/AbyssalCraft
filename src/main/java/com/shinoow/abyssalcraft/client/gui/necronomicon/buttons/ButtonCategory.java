@@ -19,6 +19,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
 
@@ -28,7 +29,7 @@ public class ButtonCategory extends GuiButton {
 	Item icon;
 
 	public ButtonCategory(int par1, int par2, int par3, GuiNecronomicon gui, String label, Item icon) {
-		super(par1, par2, par3, 110, 16, label);
+		super(par1, par2, par3, 110, 16, I18n.format(label, new Object[0]));
 		this.gui = gui;
 		this.icon = icon;
 	}

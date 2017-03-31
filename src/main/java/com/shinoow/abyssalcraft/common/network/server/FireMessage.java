@@ -16,6 +16,7 @@ import java.io.IOException;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.network.PacketBuffer;
+import net.minecraft.util.EnumHand;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -62,6 +63,7 @@ public class FireMessage extends AbstractMessage<FireMessage> {
 
 		world.playSound(x, y, z, SoundEvents.BLOCK_FIRE_EXTINGUISH, SoundCategory.BLOCKS, 1.0F, 1.0F, true);
 		world.setBlockToAir(pos);
+		player.swingArm(EnumHand.MAIN_HAND);
 	}
 
 }

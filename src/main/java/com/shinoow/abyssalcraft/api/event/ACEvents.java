@@ -294,13 +294,17 @@ public class ACEvents {
 	 * @author shinoow
 	 *
 	 * @since 1.7.5
+	 *
+	 * @deprecated 1.9.0: Shoggoth ooze no longer replaces other blocks in that sense
 	 */
 	@Cancelable
+	@Deprecated
 	public static class ShoggothOozeEvent extends Event {
 		private final World world;
 		private final BlockPos pos;
 		private IBlockState replace;
 
+		@Deprecated
 		public ShoggothOozeEvent(World world, BlockPos pos){
 			this.world = world;
 			this.pos = pos;

@@ -29,6 +29,7 @@ import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.oredict.OreDictionary;
 
 import org.lwjgl.input.Keyboard;
+
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.shinoow.abyssalcraft.api.APIUtils;
@@ -39,6 +40,7 @@ import com.shinoow.abyssalcraft.client.gui.necronomicon.buttons.ButtonNextPage;
 import com.shinoow.abyssalcraft.client.lib.GuiRenderHelper;
 import com.shinoow.abyssalcraft.lib.NecronomiconResources;
 import com.shinoow.abyssalcraft.lib.NecronomiconText;
+import com.shinoow.abyssalcraft.lib.util.IHiddenRitual;
 
 public class GuiNecronomiconRitualEntry extends GuiNecronomicon {
 
@@ -111,9 +113,9 @@ public class GuiNecronomiconRitualEntry extends GuiNecronomicon {
 		fontRendererObj.drawSplitString(title, k + 20, b0 + 16, 116, 0xC40000);
 
 		if(ritual.requiresSacrifice())
-			fontRendererObj.drawSplitString(NecronomiconText.LABEL_SACRIFICE, k + 138, 164, 107, 0xC40000);
-		writeText(1, NecronomiconText.LABEL_REQUIRED_ENERGY + ": " + ritual.getReqEnergy() + " PE", 125);
-		writeText(2, NecronomiconText.LABEL_LOCATION + ": " + getDimension(ritual.getDimension()));
+			fontRendererObj.drawSplitString(localize(NecronomiconText.LABEL_SACRIFICE), k + 138, 164, 107, 0xC40000);
+		writeText(1, localize(NecronomiconText.LABEL_REQUIRED_ENERGY) + ": " + ritual.getReqEnergy() + " PE", 125);
+		writeText(2, localize(NecronomiconText.LABEL_LOCATION) + ": " + getDimension(ritual.getDimension()));
 		writeText(2, ritual.getDescription(), 48);
 		GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
 		mc.renderEngine.bindTexture(NecronomiconResources.RITUAL);
@@ -192,7 +194,7 @@ public class GuiNecronomiconRitualEntry extends GuiNecronomicon {
 	{
 		if(stack == null) return;
 
-		if(stack != null && stack.getItemDamage() == OreDictionary.WILDCARD_VALUE)
+		if(stack.getItemDamage() == OreDictionary.WILDCARD_VALUE)
 			stack.setItemDamage(0);
 
 		RenderItem render = Minecraft.getMinecraft().getRenderItem();
@@ -214,11 +216,11 @@ public class GuiNecronomiconRitualEntry extends GuiNecronomicon {
 	}
 
 	private void initStuff(){
-		dimToString.put(-1, NecronomiconText.LABEL_ANYWHERE);
+		dimToString.put(-1, localize(NecronomiconText.LABEL_ANYWHERE));
 		dimToString.putAll(RitualRegistry.instance().getDimensionNameMappings());
 
 		for(NecronomiconRitual ritual : RitualRegistry.instance().getRituals())
-			if(ritual.getBookType() == ritualnum)
+			if(ritual.getBookType() == ritualnum && !(ritual instanceof IHiddenRitual))
 				rituals.add(ritual);
 		setTurnupLimit(rituals.size());
 	}

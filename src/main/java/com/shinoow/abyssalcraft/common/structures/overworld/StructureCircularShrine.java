@@ -19,6 +19,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
+import com.shinoow.abyssalcraft.common.blocks.BlockShoggothOoze;
 
 public class StructureCircularShrine extends StructureDarklandsBase {
 
@@ -30,7 +31,7 @@ public class StructureCircularShrine extends StructureDarklandsBase {
 		IBlockState brick_slab = ACBlocks.darkstone_brick_slab.getDefaultState();
 		IBlockState cobble = ACBlocks.darkstone_cobblestone.getDefaultState();
 		IBlockState cobble_slab = ACBlocks.darkstone_cobblestone_slab.getDefaultState();
-		IBlockState ooze = ACBlocks.shoggoth_ooze.getDefaultState();
+		IBlockState ooze = ACBlocks.shoggoth_ooze.getDefaultState().withProperty(BlockShoggothOoze.LAYERS, 8);
 		IBlockState air = Blocks.AIR.getDefaultState();
 
 		for(int i = -4; i < 5; i++)

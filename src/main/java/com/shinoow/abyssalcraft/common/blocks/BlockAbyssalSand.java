@@ -25,7 +25,7 @@ import com.shinoow.abyssalcraft.api.block.ACBlocks;
 public class BlockAbyssalSand extends BlockACBasic {
 
 	public BlockAbyssalSand() {
-		super(Material.SAND, 0.5F, 2.5F, SoundType.SAND);
+		super(Material.SAND, "shovel", 0, 0.5F, 2.5F, SoundType.SAND);
 		setUnlocalizedName("abyssalsand");
 		setTickRandomly(true);
 	}

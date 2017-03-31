@@ -17,8 +17,10 @@ import net.minecraft.entity.player.EntityPlayerMP;
 import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.common.network.client.DisruptionMessage;
 import com.shinoow.abyssalcraft.common.network.client.EvilSheepMessage;
+import com.shinoow.abyssalcraft.common.network.client.NecroDataCapMessage;
 import com.shinoow.abyssalcraft.common.network.server.FireMessage;
 import com.shinoow.abyssalcraft.common.network.server.InterdimensionalCageMessage;
+import com.shinoow.abyssalcraft.common.network.server.OpenSpellbookMessage;
 import com.shinoow.abyssalcraft.common.network.server.StaffOfRendingMessage;
 
 import net.minecraftforge.fml.common.network.NetworkRegistry;
@@ -68,6 +70,8 @@ public class PacketDispatcher
 		registerMessage(DisruptionMessage.class);
 		registerMessage(StaffOfRendingMessage.class);
 		registerMessage(InterdimensionalCageMessage.class);
+		registerMessage(OpenSpellbookMessage.class);
+		registerMessage(NecroDataCapMessage.class);
 	}
 
 	/**

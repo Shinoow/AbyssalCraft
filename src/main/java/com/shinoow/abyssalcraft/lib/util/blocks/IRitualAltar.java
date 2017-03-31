@@ -16,7 +16,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 /**
- * Internal interface for Ritual Altar TE's<br>
+ * Internal interface for Ritual Altar TEs<br>
  * This shouldn't be used by other mods.
  * @author shinoow
  *

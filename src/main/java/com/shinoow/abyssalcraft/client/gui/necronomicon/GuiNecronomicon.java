@@ -15,29 +15,38 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.texture.DynamicTexture;
 import net.minecraft.client.resources.I18n;
+import net.minecraft.client.resources.IReloadableResourceManager;
 import net.minecraft.item.Item;
+import net.minecraft.util.EnumHand;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import org.lwjgl.input.Keyboard;
+
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
 import com.shinoow.abyssalcraft.api.item.ACItems;
 import com.shinoow.abyssalcraft.client.gui.necronomicon.buttons.ButtonCategory;
 import com.shinoow.abyssalcraft.client.gui.necronomicon.buttons.ButtonNextPage;
+import com.shinoow.abyssalcraft.client.lib.LovecraftFont;
 import com.shinoow.abyssalcraft.lib.NecronomiconText;
 
 @SideOnly(Side.CLIENT)
 public class GuiNecronomicon extends GuiScreen {
 
 	private static ResourceLocation bookGuiTextures = new ResourceLocation("abyssalcraft:textures/gui/necronomicon.png");
+	protected static final ResourceLocation MISSING_PICTURE = new ResourceLocation("abyssalcraft", "textures/gui/necronomicon/missing.png");
+	protected static final ResourceLocation MISSING_ITEM = new ResourceLocation("abyssalcraft", "textures/gui/necronomicon/missing_item.png");
+	protected static final ResourceLocation MISSING_RECIPE = new ResourceLocation("abyssalcraft", "textures/gui/necronomicon/missing_recipe.png");
 	public final int guiWidth = 255;
 	public final int guiHeight = 192;
 	private int bookTotalTurnups = 2;
@@ -58,6 +67,7 @@ public class GuiNecronomicon extends GuiScreen {
 	private boolean isNecroInfo = false;
 	public static final Map<String, DynamicTexture> successcache = Maps.newHashMap();
 	public static final List<String> failcache = Lists.newArrayList();
+	protected FontRenderer test;
 
 	public GuiNecronomicon(){
 		this(0);
@@ -82,6 +92,9 @@ public class GuiNecronomicon extends GuiScreen {
 			bookGuiTextures = new ResourceLocation("abyssalcraft:textures/gui/abyssalnomicon.png");
 			break;
 		}
+		test = new LovecraftFont(Minecraft.getMinecraft().gameSettings, new ResourceLocation("abyssalcraft", "textures/font/aklo.png"), Minecraft.getMinecraft().renderEngine, true);
+		if(Minecraft.getMinecraft().getResourceManager() instanceof IReloadableResourceManager)
+			((IReloadableResourceManager)Minecraft.getMinecraft().getResourceManager()).registerReloadListener(test);
 	}
 
 	/**
@@ -194,7 +207,7 @@ public class GuiNecronomicon extends GuiScreen {
 			} else if (button.id == 3)
 				mc.displayGuiScreen(new GuiNecronomiconInformation(bookType));
 			else if (button.id == 4)
-				mc.displayGuiScreen(new GuiNecronomiconSpells(bookType));
+				mc.displayGuiScreen(new GuiNecronomiconSpells(bookType, Minecraft.getMinecraft().thePlayer.getHeldItem(EnumHand.MAIN_HAND)));
 			else if (button.id == 5)
 				mc.displayGuiScreen(new GuiNecronomiconRituals(bookType));
 			else if (button.id == 6)
@@ -263,7 +276,7 @@ public class GuiNecronomicon extends GuiScreen {
 		byte b0 = 2;
 		String stuff;
 		int length;
-		stuff = NecronomiconText.LABEL_INDEX;
+		stuff = localize(NecronomiconText.LABEL_INDEX);
 		length = fontRendererObj.getStringWidth(stuff);
 		fontRendererObj.drawString(stuff, k + 50 - length, b0 + 16, 0);
 	}
@@ -304,7 +317,7 @@ public class GuiNecronomicon extends GuiScreen {
 
 		if(isInfo){
 			if(isNecroInfo){
-				stuff = NecronomiconText.LABEL_HUH;
+				stuff = localize(NecronomiconText.LABEL_HUH);
 				fontRendererObj.drawSplitString(stuff, k + 20, b0 + 16, 116, 0xC40000);
 			}
 			s = I18n.format("necronomicon.turnupindicator", new Object[] {Integer.valueOf(currTurnup + 1), Integer.valueOf(bookTotalTurnups)});
@@ -329,10 +342,20 @@ public class GuiNecronomicon extends GuiScreen {
 	}
 
 	/**
+	 * Fixed version of writeText used for pages with titles.
+	 * @param page Which open page to write in (can be either 1 or 2)
+	 * @param text A long string of text (max is 368 characters)
+	 */
+	protected void writeText(int page, String text, boolean aklo){
+		writeText(page, text, 28, aklo);
+	}
+
+	/**
 	 * Writes a bunch of text on a Necronomicon page.
 	 * @param page Which open page to write in (can be either 1 or 2)
 	 * @param text A long string of text (max is 368 characters)
 	 * @param height The height where the text will appear at (0 is the top of the GUI)
+	 * @param aklo Whether or not to use the Aklo font instead of the normal
 	 */
 	protected void writeText(int page, String text, int height){
 		writeText(page, text, height, 0);
@@ -343,9 +366,32 @@ public class GuiNecronomicon extends GuiScreen {
 	 * @param page Which open page to write in (can be either 1 or 2)
 	 * @param text A long string of text (max is 368 characters)
 	 * @param height The height where the text will appear at (0 is the top of the GUI)
+	 * @param aklo Whether or not to use the Aklo font instead of the normal
+	 */
+	protected void writeText(int page, String text, int height, boolean aklo){
+		writeText(page, text, height, 0, aklo);
+	}
+
+	/**
+	 * Writes a bunch of text on a Necronomicon page.
+	 * @param page Which open page to write in (can be either 1 or 2)
+	 * @param text A long string of text (max is 368 characters)
+	 * @param height The height where the text will appear at (0 is the top of the GUI)
 	 * @param width The width where the text will appear at (0 is the leftmost part of the page)
 	 */
 	protected void writeText(int page, String text, int height, int width){
+		writeText(page, text, height, width, false);
+	}
+
+	/**
+	 * Writes a bunch of text on a Necronomicon page.
+	 * @param page Which open page to write in (can be either 1 or 2)
+	 * @param text A long string of text (max is 368 characters)
+	 * @param height The height where the text will appear at (0 is the top of the GUI)
+	 * @param width The width where the text will appear at (0 is the leftmost part of the page)
+	 * @param aklo Whether or not to use the Aklo font instead of the normal
+	 */
+	protected void writeText(int page, String text, int height, int width, boolean aklo){
 		int k = (this.width - guiWidth) / 2;
 		if(page > 2)
 			throw new IndexOutOfBoundsException("Number is greater than 2 ("+page+")!");
@@ -355,9 +401,19 @@ public class GuiNecronomicon extends GuiScreen {
 			throw new IndexOutOfBoundsException("Text is longer than 368 characters ("+text.length()+")!");
 		else{
 			if(page == 1)
-				fontRendererObj.drawSplitString(text, k + 20 + width, height, 107, 0);
+				getFontRenderer(aklo).drawSplitString(localize(text), k + 20 + width, height, 107, 0);
 			if(page == 2)
-				fontRendererObj.drawSplitString(text, k + 138 + width, height, 107, 0);
+				getFontRenderer(aklo).drawSplitString(localize(text), k + 138 + width, height, 107, 0);
 		}
+	}
+
+	private FontRenderer getFontRenderer(boolean aklo){
+		if(aklo)
+			return test;
+		return fontRendererObj;
+	}
+
+	protected String localize(String str){
+		return I18n.format(str, new Object[0]);
 	}
 }

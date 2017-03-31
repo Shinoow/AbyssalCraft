@@ -25,12 +25,15 @@ public class ACConfig {
 	overworldShoggoths;
 	public static int evilAnimalSpawnWeight, endAbyssalZombieSpawnWeight, portalCooldown, demonAnimalSpawnWeight, shoggothLairSpawnRate;
 	public static double damageAmpl, depthsHelmetOverlayOpacity;
-	public static boolean shoggothOoze, oozeLeaves, oozeGrass, oozeGround, oozeSand, oozeRock, oozeCloth, oozeWood,
-	oozeGourd, oozeIron, oozeClay, oozeExpire;
+	public static boolean shoggothOoze, oozeExpire;
 	public static boolean generateDarklandsStructures, generateShoggothLairs, generateAbyssalWastelandPillars,
 	generateAbyssalWastelandRuins, generateAntimatterLake, generateCoraliumLake, generateDreadlandsStalagmite;
 	public static boolean generateCoraliumOre, generateNitreOre, generateAbyssalniteOre, generateAbyssalCoraliumOre,
 	generateDreadlandsAbyssalniteOre, generateDreadedAbyssalniteOre, generateAbyssalIronOre, generateAbyssalGoldOre,
 	generateAbyssalDiamondOre, generateAbyssalNitreOre, generateAbyssalTinOre, generateAbyssalCopperOre,
 	generatePearlescentCoraliumOre, generateLiquifiedCoraliumOre;
+
+	@Deprecated
+	public static boolean oozeLeaves, oozeGrass, oozeGround, oozeSand, oozeRock, oozeCloth, oozeWood,
+	oozeGourd, oozeIron, oozeClay;
 }

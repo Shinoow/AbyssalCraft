@@ -22,6 +22,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.PotionUtils;
+import net.minecraft.util.text.translation.I18n;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.oredict.ShapedOreRecipe;
@@ -36,6 +37,7 @@ import com.shinoow.abyssalcraft.api.energy.disruption.DisruptionSpawn;
 import com.shinoow.abyssalcraft.api.energy.disruption.DisruptionSwarm;
 import com.shinoow.abyssalcraft.api.item.ACItems;
 import com.shinoow.abyssalcraft.api.item.ItemEngraving;
+import com.shinoow.abyssalcraft.api.item.ItemUpgradeKit;
 import com.shinoow.abyssalcraft.api.ritual.NecronomiconCreationRitual;
 import com.shinoow.abyssalcraft.api.ritual.NecronomiconEnchantmentRitual;
 import com.shinoow.abyssalcraft.api.ritual.NecronomiconInfusionRitual;
@@ -44,6 +46,7 @@ import com.shinoow.abyssalcraft.api.ritual.NecronomiconSummonRitual;
 import com.shinoow.abyssalcraft.api.ritual.RitualRegistry;
 import com.shinoow.abyssalcraft.common.blocks.BlockCrystalCluster.EnumCrystalType;
 import com.shinoow.abyssalcraft.common.blocks.BlockCrystalCluster2.EnumCrystalType2;
+import com.shinoow.abyssalcraft.common.disruptions.DisruptionAnimalCorruption;
 import com.shinoow.abyssalcraft.common.disruptions.DisruptionDisplaceEntities;
 import com.shinoow.abyssalcraft.common.disruptions.DisruptionDrainNearbyPE;
 import com.shinoow.abyssalcraft.common.disruptions.DisruptionFire;
@@ -62,10 +65,10 @@ import com.shinoow.abyssalcraft.common.entity.EntityShadowMonster;
 import com.shinoow.abyssalcraft.common.entity.demon.EntityEvilSheep;
 import com.shinoow.abyssalcraft.common.ritual.NecronomiconBreedingRitual;
 import com.shinoow.abyssalcraft.common.ritual.NecronomiconDreadSpawnRitual;
+import com.shinoow.abyssalcraft.common.ritual.NecronomiconHouseRitual;
 import com.shinoow.abyssalcraft.common.ritual.NecronomiconRespawnJzaharRitual;
 import com.shinoow.abyssalcraft.common.ritual.NecronomiconWeatherRitual;
 import com.shinoow.abyssalcraft.common.util.ShapedNBTRecipe;
-import com.shinoow.abyssalcraft.init.BlockHandler;
 import com.shinoow.abyssalcraft.lib.ACConfig;
 import com.shinoow.abyssalcraft.lib.ACLib;
 import com.shinoow.abyssalcraft.lib.NecronomiconText;
@@ -180,29 +183,22 @@ public class AbyssalCrafting {
 		GameRegistry.addRecipe(new ItemStack(ACBlocks.crystallizer_idle, 1), new Object[] {"###", "&%&", "###", '#', new ItemStack(ACBlocks.dreadstone_brick, 1, 0), '&', ACBlocks.block_of_dreadium, '%', Blocks.FURNACE});
 		GameRegistry.addRecipe(new ItemStack(ACBlocks.block_of_ethaxium, 1), new Object[] {"###", "###", "###", '#', ACItems.ethaxium_ingot});
 		GameRegistry.addRecipe(new ItemStack(ACBlocks.engraver, 1), new Object[] {"#% ", "#%&", "@% ", '#', ACItems.blank_engraving, '%', Blocks.STONE, '&', Blocks.LEVER, '@', Blocks.ANVIL});
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(BlockHandler.house, 1), true, new Object[] {"#%#", "%&%", "%%%", '#', "stairWood", '%', "plankWood", '&', Items.OAK_DOOR})); //Quite frankly, this recipe doesn't exist
 		ItemStack[] mat = {new ItemStack(ACItems.ethaxium_brick), new ItemStack(ACItems.ethaxium_brick), new ItemStack(ACItems.ethaxium_brick), new ItemStack(ACItems.ethaxium_brick), new ItemStack(Blocks.OBSIDIAN),
 				new ItemStack(ACItems.ethaxium_brick), new ItemStack(ACBlocks.block_of_ethaxium), ACItems.liquid_antimatter_bucket_stack, new ItemStack(ACBlocks.block_of_ethaxium)};
 		GameRegistry.addRecipe(new ShapedNBTRecipe(3, 3, mat, new ItemStack(ACBlocks.materializer)));
 		GameRegistry.addRecipe(new ItemStack(ACBlocks.energy_pedestal), new Object[]{"#%#", "#&#", "###", '#', ACBlocks.monolith_stone, '%', ACItems.coralium_pearl, '&', ACItems.shadow_gem});
 		GameRegistry.addRecipe(new ItemStack(ACBlocks.monolith_pillar), new Object[]{"##", "##", '#', ACBlocks.monolith_stone});
 		GameRegistry.addRecipe(new ItemStack(ACBlocks.sacrificial_altar), new Object[]{"#%#", "&$&", "&&&", '#', Blocks.TORCH, '%', ACItems.coralium_pearl, '$', ACItems.shadow_gem, '&', ACBlocks.monolith_stone});
-		GameRegistry.addRecipe(new ItemStack(ACBlocks.decorative_cthulhu_statue), new Object[] {"#", '#', ACBlocks.cthulhu_statue});
-		GameRegistry.addRecipe(new ItemStack(ACBlocks.decorative_hastur_statue), new Object[] {"#", '#', ACBlocks.hastur_statue});
-		GameRegistry.addRecipe(new ItemStack(ACBlocks.decorative_jzahar_statue), new Object[] {"#", '#', ACBlocks.jzahar_statue});
-		GameRegistry.addRecipe(new ItemStack(ACBlocks.decorative_azathoth_statue), new Object[] {"#", '#', ACBlocks.azathoth_statue});
-		GameRegistry.addRecipe(new ItemStack(ACBlocks.decorative_nyarlathotep_statue), new Object[] {"#", '#', ACBlocks.nyarlathotep_statue});
-		GameRegistry.addRecipe(new ItemStack(ACBlocks.decorative_yog_sothoth_statue), new Object[] {"#", '#', ACBlocks.yog_sothoth_statue});
-		GameRegistry.addRecipe(new ItemStack(ACBlocks.decorative_shub_niggurath_statue), new Object[] {"#", '#', ACBlocks.shub_niggurath_statue});
-		GameRegistry.addRecipe(new ItemStack(ACBlocks.cthulhu_statue), new Object[] {"#", '#', ACBlocks.decorative_cthulhu_statue});
-		GameRegistry.addRecipe(new ItemStack(ACBlocks.hastur_statue), new Object[] {"#", '#', ACBlocks.decorative_hastur_statue});
-		GameRegistry.addRecipe(new ItemStack(ACBlocks.jzahar_statue), new Object[] {"#", '#', ACBlocks.decorative_jzahar_statue});
-		GameRegistry.addRecipe(new ItemStack(ACBlocks.azathoth_statue), new Object[] {"#", '#', ACBlocks.decorative_azathoth_statue});
-		GameRegistry.addRecipe(new ItemStack(ACBlocks.nyarlathotep_statue), new Object[] {"#", '#', ACBlocks.decorative_nyarlathotep_statue});
-		GameRegistry.addRecipe(new ItemStack(ACBlocks.yog_sothoth_statue), new Object[] {"#", '#', ACBlocks.decorative_yog_sothoth_statue});
-		GameRegistry.addRecipe(new ItemStack(ACBlocks.shub_niggurath_statue), new Object[] {"#", '#', ACBlocks.decorative_shub_niggurath_statue});
+		GameRegistry.addShapelessRecipe(new ItemStack(ACBlocks.decorative_cthulhu_statue), ACBlocks.monolith_stone, Items.CLAY_BALL, new ItemStack(Items.DYE, 1, 6));
+		GameRegistry.addShapelessRecipe(new ItemStack(ACBlocks.decorative_hastur_statue), ACBlocks.monolith_stone, Items.CLAY_BALL, new ItemStack(Items.DYE, 1, 11));
+		GameRegistry.addShapelessRecipe(new ItemStack(ACBlocks.decorative_jzahar_statue), ACBlocks.monolith_stone, Items.CLAY_BALL, new ItemStack(Items.DYE, 1, 8));
+		GameRegistry.addShapelessRecipe(new ItemStack(ACBlocks.decorative_azathoth_statue), ACBlocks.monolith_stone, Items.CLAY_BALL, new ItemStack(Items.DYE, 1, 5));
+		GameRegistry.addShapelessRecipe(new ItemStack(ACBlocks.decorative_nyarlathotep_statue), ACBlocks.monolith_stone, Items.CLAY_BALL, new ItemStack(Items.DYE, 1, 4));
+		GameRegistry.addShapelessRecipe(new ItemStack(ACBlocks.decorative_yog_sothoth_statue), ACBlocks.monolith_stone, Items.CLAY_BALL, Items.GLOWSTONE_DUST);
+		GameRegistry.addShapelessRecipe(new ItemStack(ACBlocks.decorative_shub_niggurath_statue), ACBlocks.monolith_stone, Items.CLAY_BALL, new ItemStack(Items.DYE, 1, 0));
 		GameRegistry.addRecipe(new ItemStack(ACBlocks.energy_collector), new Object[] {"###", "#%#", "###", '#', ACBlocks.monolith_stone, '%', ACItems.shadow_gem});
 		GameRegistry.addRecipe(new ItemStack(ACBlocks.energy_relay), new Object[] {"##%", "#&#", "##%", '#', ACBlocks.monolith_stone, '%', ACItems.shadow_shard, '&', ACItems.shadow_gem});
+		GameRegistry.addRecipe(new ItemStack(ACBlocks.rending_pedestal), new Object[] {"#%#", "#&#", "###", '#', ACBlocks.monolith_stone, '%', ACItems.shard_of_oblivion, '&', ACItems.shadow_gem});
 	}
 
 	private static void addBlockSmelting(){
@@ -471,72 +467,72 @@ public class AbyssalCrafting {
 		GameRegistry.addShapelessRecipe(new ItemStack(ACItems.ethaxium_upgrade_kit, 1), ACItems.dreadium_ingot, ACItems.ethaxium_ingot, ACItems.ethaxium_ingot, ACItems.dreadium_upgrade_kit);
 
 		//Wood to Cobble Upgrade
-		GameRegistry.addRecipe(new ItemStack(Items.STONE_PICKAXE, 1), new Object[] {"#", "@", '#', new ItemStack(Items.WOODEN_PICKAXE, 1, OreDictionary.WILDCARD_VALUE), '@', ACItems.cobblestone_upgrade_kit});
-		GameRegistry.addRecipe(new ItemStack(Items.STONE_AXE, 1), new Object[] {"#", "@", '#', new ItemStack(Items.WOODEN_AXE, 1, OreDictionary.WILDCARD_VALUE), '@', ACItems.cobblestone_upgrade_kit});
-		GameRegistry.addRecipe(new ItemStack(Items.STONE_SHOVEL, 1), new Object[] {"#", "@", '#', new ItemStack(Items.WOODEN_SHOVEL, 1, OreDictionary.WILDCARD_VALUE), '@', ACItems.cobblestone_upgrade_kit});
-		GameRegistry.addRecipe(new ItemStack(Items.STONE_SWORD, 1), new Object[] {"#", "@", '#', new ItemStack(Items.WOODEN_SWORD, 1, OreDictionary.WILDCARD_VALUE), '@', ACItems.cobblestone_upgrade_kit});
-		GameRegistry.addRecipe(new ItemStack(Items.STONE_HOE, 1), new Object[] {"#", "@", '#', new ItemStack(Items.WOODEN_HOE, 1, OreDictionary.WILDCARD_VALUE), '@', ACItems.cobblestone_upgrade_kit});
+		AbyssalCraftAPI.addUpgrade((ItemUpgradeKit)ACItems.cobblestone_upgrade_kit, new ItemStack(Items.WOODEN_PICKAXE, 1, OreDictionary.WILDCARD_VALUE), new ItemStack(Items.STONE_PICKAXE));
+		AbyssalCraftAPI.addUpgrade((ItemUpgradeKit)ACItems.cobblestone_upgrade_kit, new ItemStack(Items.WOODEN_AXE, 1, OreDictionary.WILDCARD_VALUE), new ItemStack(Items.STONE_AXE));
+		AbyssalCraftAPI.addUpgrade((ItemUpgradeKit)ACItems.cobblestone_upgrade_kit, new ItemStack(Items.WOODEN_SHOVEL, 1, OreDictionary.WILDCARD_VALUE), new ItemStack(Items.STONE_SHOVEL));
+		AbyssalCraftAPI.addUpgrade((ItemUpgradeKit)ACItems.cobblestone_upgrade_kit, new ItemStack(Items.WOODEN_SWORD, 1, OreDictionary.WILDCARD_VALUE), new ItemStack(Items.STONE_SWORD));
+		AbyssalCraftAPI.addUpgrade((ItemUpgradeKit)ACItems.cobblestone_upgrade_kit, new ItemStack(Items.WOODEN_HOE, 1, OreDictionary.WILDCARD_VALUE), new ItemStack(Items.STONE_HOE));
 
 		//Stone to Iron Upgrade
-		GameRegistry.addRecipe(new ItemStack(Items.IRON_PICKAXE, 1), new Object[] {"#", "@", '#', new ItemStack(Items.STONE_PICKAXE, 1, OreDictionary.WILDCARD_VALUE), '@', ACItems.iron_upgrade_kit});
-		GameRegistry.addRecipe(new ItemStack(Items.IRON_AXE, 1), new Object[] {"#", "@", '#', new ItemStack(Items.STONE_AXE, 1, OreDictionary.WILDCARD_VALUE), '@', ACItems.iron_upgrade_kit});
-		GameRegistry.addRecipe(new ItemStack(Items.IRON_SHOVEL, 1), new Object[] {"#", "@", '#', new ItemStack(Items.STONE_SHOVEL, 1, OreDictionary.WILDCARD_VALUE), '@', ACItems.iron_upgrade_kit});
-		GameRegistry.addRecipe(new ItemStack(Items.IRON_SWORD, 1), new Object[] {"#", "@", '#', new ItemStack(Items.STONE_SWORD, 1, OreDictionary.WILDCARD_VALUE), '@', ACItems.iron_upgrade_kit});
-		GameRegistry.addRecipe(new ItemStack(Items.IRON_HOE, 1), new Object[] {"#", "@", '#', new ItemStack(Items.STONE_HOE, 1, OreDictionary.WILDCARD_VALUE), '@', ACItems.iron_upgrade_kit});
+		AbyssalCraftAPI.addUpgrade((ItemUpgradeKit)ACItems.iron_upgrade_kit, new ItemStack(Items.STONE_PICKAXE, 1, OreDictionary.WILDCARD_VALUE), new ItemStack(Items.IRON_PICKAXE));
+		AbyssalCraftAPI.addUpgrade((ItemUpgradeKit)ACItems.iron_upgrade_kit, new ItemStack(Items.STONE_AXE, 1, OreDictionary.WILDCARD_VALUE), new ItemStack(Items.IRON_AXE));
+		AbyssalCraftAPI.addUpgrade((ItemUpgradeKit)ACItems.iron_upgrade_kit, new ItemStack(Items.STONE_SHOVEL, 1, OreDictionary.WILDCARD_VALUE), new ItemStack(Items.IRON_SHOVEL));
+		AbyssalCraftAPI.addUpgrade((ItemUpgradeKit)ACItems.iron_upgrade_kit, new ItemStack(Items.STONE_SWORD, 1, OreDictionary.WILDCARD_VALUE), new ItemStack(Items.IRON_SWORD));
+		AbyssalCraftAPI.addUpgrade((ItemUpgradeKit)ACItems.iron_upgrade_kit, new ItemStack(Items.STONE_HOE, 1, OreDictionary.WILDCARD_VALUE), new ItemStack(Items.IRON_HOE));
 
 		//Iron to Gold Upgrade
-		GameRegistry.addRecipe(new ItemStack(Items.GOLDEN_PICKAXE, 1), new Object[] {"#", "@", '#', new ItemStack(Items.IRON_PICKAXE, 1, OreDictionary.WILDCARD_VALUE), '@', ACItems.gold_upgrade_kit});
-		GameRegistry.addRecipe(new ItemStack(Items.GOLDEN_AXE, 1), new Object[] {"#", "@", '#', new ItemStack(Items.IRON_AXE, 1, OreDictionary.WILDCARD_VALUE), '@', ACItems.gold_upgrade_kit});
-		GameRegistry.addRecipe(new ItemStack(Items.GOLDEN_SHOVEL, 1), new Object[] {"#", "@", '#', new ItemStack(Items.IRON_SHOVEL, 1, OreDictionary.WILDCARD_VALUE), '@', ACItems.gold_upgrade_kit});
-		GameRegistry.addRecipe(new ItemStack(Items.GOLDEN_SWORD, 1), new Object[] {"#", "@", '#', new ItemStack(Items.IRON_SWORD, 1, OreDictionary.WILDCARD_VALUE), '@', ACItems.gold_upgrade_kit});
-		GameRegistry.addRecipe(new ItemStack(Items.GOLDEN_HOE, 1), new Object[] {"#", "@", '#', new ItemStack(Items.IRON_HOE, 1, OreDictionary.WILDCARD_VALUE), '@', ACItems.gold_upgrade_kit});
+		AbyssalCraftAPI.addUpgrade((ItemUpgradeKit)ACItems.gold_upgrade_kit, new ItemStack(Items.IRON_PICKAXE, 1, OreDictionary.WILDCARD_VALUE), new ItemStack(Items.GOLDEN_PICKAXE));
+		AbyssalCraftAPI.addUpgrade((ItemUpgradeKit)ACItems.gold_upgrade_kit, new ItemStack(Items.IRON_AXE, 1, OreDictionary.WILDCARD_VALUE), new ItemStack(Items.GOLDEN_AXE));
+		AbyssalCraftAPI.addUpgrade((ItemUpgradeKit)ACItems.gold_upgrade_kit, new ItemStack(Items.IRON_SHOVEL, 1, OreDictionary.WILDCARD_VALUE), new ItemStack(Items.GOLDEN_SHOVEL));
+		AbyssalCraftAPI.addUpgrade((ItemUpgradeKit)ACItems.gold_upgrade_kit, new ItemStack(Items.IRON_SWORD, 1, OreDictionary.WILDCARD_VALUE), new ItemStack(Items.GOLDEN_SWORD));
+		AbyssalCraftAPI.addUpgrade((ItemUpgradeKit)ACItems.gold_upgrade_kit, new ItemStack(Items.IRON_HOE, 1, OreDictionary.WILDCARD_VALUE), new ItemStack(Items.GOLDEN_HOE));
 
 		//Gold to Diamond Upgrade
-		GameRegistry.addRecipe(new ItemStack(Items.DIAMOND_PICKAXE, 1), new Object[] {"#", "@", '#', new ItemStack(Items.GOLDEN_PICKAXE, 1, OreDictionary.WILDCARD_VALUE), '@', ACItems.diamond_upgrade_kit});
-		GameRegistry.addRecipe(new ItemStack(Items.DIAMOND_AXE, 1), new Object[] {"#", "@", '#', new ItemStack(Items.GOLDEN_AXE, 1, OreDictionary.WILDCARD_VALUE), '@', ACItems.diamond_upgrade_kit});
-		GameRegistry.addRecipe(new ItemStack(Items.DIAMOND_SHOVEL, 1), new Object[] {"#", "@", '#', new ItemStack(Items.GOLDEN_SHOVEL, 1, OreDictionary.WILDCARD_VALUE), '@', ACItems.diamond_upgrade_kit});
-		GameRegistry.addRecipe(new ItemStack(Items.DIAMOND_SWORD, 1), new Object[] {"#", "@", '#', new ItemStack(Items.GOLDEN_SWORD, 1, OreDictionary.WILDCARD_VALUE), '@', ACItems.diamond_upgrade_kit});
-		GameRegistry.addRecipe(new ItemStack(Items.DIAMOND_HOE, 1), new Object[] {"#", "@", '#', new ItemStack(Items.GOLDEN_HOE, 1, OreDictionary.WILDCARD_VALUE), '@', ACItems.diamond_upgrade_kit});
+		AbyssalCraftAPI.addUpgrade((ItemUpgradeKit)ACItems.diamond_upgrade_kit, new ItemStack(Items.GOLDEN_PICKAXE, 1, OreDictionary.WILDCARD_VALUE), new ItemStack(Items.DIAMOND_PICKAXE));
+		AbyssalCraftAPI.addUpgrade((ItemUpgradeKit)ACItems.diamond_upgrade_kit, new ItemStack(Items.GOLDEN_AXE, 1, OreDictionary.WILDCARD_VALUE), new ItemStack(Items.DIAMOND_AXE));
+		AbyssalCraftAPI.addUpgrade((ItemUpgradeKit)ACItems.diamond_upgrade_kit, new ItemStack(Items.GOLDEN_SHOVEL, 1, OreDictionary.WILDCARD_VALUE), new ItemStack(Items.DIAMOND_SHOVEL));
+		AbyssalCraftAPI.addUpgrade((ItemUpgradeKit)ACItems.diamond_upgrade_kit, new ItemStack(Items.GOLDEN_SWORD, 1, OreDictionary.WILDCARD_VALUE), new ItemStack(Items.DIAMOND_SWORD));
+		AbyssalCraftAPI.addUpgrade((ItemUpgradeKit)ACItems.diamond_upgrade_kit, new ItemStack(Items.GOLDEN_HOE, 1, OreDictionary.WILDCARD_VALUE), new ItemStack(Items.DIAMOND_HOE));
 
 		//Diamond to Abyssalnite Upgrade
-		GameRegistry.addRecipe(new ItemStack(ACItems.abyssalnite_pickaxe, 1), new Object[] {"#", "@", '#', new ItemStack(Items.DIAMOND_PICKAXE, 1, OreDictionary.WILDCARD_VALUE), '@', ACItems.abyssalnite_upgrade_kit});
-		GameRegistry.addRecipe(new ItemStack(ACItems.abyssalnite_axe, 1), new Object[] {"#", "@", '#', new ItemStack(Items.DIAMOND_AXE, 1, OreDictionary.WILDCARD_VALUE), '@', ACItems.abyssalnite_upgrade_kit});
-		GameRegistry.addRecipe(new ItemStack(ACItems.abyssalnite_shovel, 1), new Object[] {"#", "@", '#', new ItemStack(Items.DIAMOND_SHOVEL, 1, OreDictionary.WILDCARD_VALUE), '@', ACItems.abyssalnite_upgrade_kit});
-		GameRegistry.addRecipe(new ItemStack(ACItems.abyssalnite_sword, 1), new Object[] {"#", "@", '#', new ItemStack(Items.DIAMOND_SWORD, 1, OreDictionary.WILDCARD_VALUE), '@', ACItems.abyssalnite_upgrade_kit});
-		GameRegistry.addRecipe(new ItemStack(ACItems.abyssalnite_hoe, 1), new Object[] {"#", "@", '#', new ItemStack(Items.DIAMOND_HOE, 1, OreDictionary.WILDCARD_VALUE), '@', ACItems.abyssalnite_upgrade_kit});
+		AbyssalCraftAPI.addUpgrade((ItemUpgradeKit)ACItems.abyssalnite_upgrade_kit, new ItemStack(Items.DIAMOND_PICKAXE, 1, OreDictionary.WILDCARD_VALUE), new ItemStack(ACItems.abyssalnite_pickaxe));
+		AbyssalCraftAPI.addUpgrade((ItemUpgradeKit)ACItems.abyssalnite_upgrade_kit, new ItemStack(Items.DIAMOND_AXE, 1, OreDictionary.WILDCARD_VALUE), new ItemStack(ACItems.abyssalnite_axe));
+		AbyssalCraftAPI.addUpgrade((ItemUpgradeKit)ACItems.abyssalnite_upgrade_kit, new ItemStack(Items.DIAMOND_SHOVEL, 1, OreDictionary.WILDCARD_VALUE), new ItemStack(ACItems.abyssalnite_shovel));
+		AbyssalCraftAPI.addUpgrade((ItemUpgradeKit)ACItems.abyssalnite_upgrade_kit, new ItemStack(Items.DIAMOND_SWORD, 1, OreDictionary.WILDCARD_VALUE), new ItemStack(ACItems.abyssalnite_sword));
+		AbyssalCraftAPI.addUpgrade((ItemUpgradeKit)ACItems.abyssalnite_upgrade_kit, new ItemStack(Items.DIAMOND_HOE, 1, OreDictionary.WILDCARD_VALUE), new ItemStack(ACItems.abyssalnite_hoe));
 
 		//Abyssalnite to Coralium Upgrade
-		GameRegistry.addRecipe(new ItemStack(ACItems.refined_coralium_pickaxe, 1), new Object[] {"#", "@", '#', new ItemStack(ACItems.abyssalnite_pickaxe, 1, OreDictionary.WILDCARD_VALUE), '@', ACItems.coralium_upgrade_kit});
-		GameRegistry.addRecipe(new ItemStack(ACItems.refined_coralium_axe, 1), new Object[] {"#", "@", '#', new ItemStack(ACItems.abyssalnite_axe, 1, OreDictionary.WILDCARD_VALUE), '@', ACItems.coralium_upgrade_kit});
-		GameRegistry.addRecipe(new ItemStack(ACItems.refined_coralium_shovel, 1), new Object[] {"#", "@", '#', new ItemStack(ACItems.abyssalnite_shovel, 1, OreDictionary.WILDCARD_VALUE), '@', ACItems.coralium_upgrade_kit});
-		GameRegistry.addRecipe(new ItemStack(ACItems.refined_coralium_sword, 1), new Object[] {"#", "@", '#', new ItemStack(ACItems.abyssalnite_sword, 1, OreDictionary.WILDCARD_VALUE), '@', ACItems.coralium_upgrade_kit});
-		GameRegistry.addRecipe(new ItemStack(ACItems.refined_coralium_hoe, 1), new Object[] {"#", "@", '#', new ItemStack(ACItems.abyssalnite_hoe, 1, OreDictionary.WILDCARD_VALUE), '@', ACItems.coralium_upgrade_kit});
+		AbyssalCraftAPI.addUpgrade((ItemUpgradeKit)ACItems.coralium_upgrade_kit, new ItemStack(ACItems.abyssalnite_pickaxe, 1, OreDictionary.WILDCARD_VALUE), new ItemStack(ACItems.refined_coralium_pickaxe));
+		AbyssalCraftAPI.addUpgrade((ItemUpgradeKit)ACItems.coralium_upgrade_kit, new ItemStack(ACItems.abyssalnite_axe, 1, OreDictionary.WILDCARD_VALUE), new ItemStack(ACItems.refined_coralium_axe));
+		AbyssalCraftAPI.addUpgrade((ItemUpgradeKit)ACItems.coralium_upgrade_kit, new ItemStack(ACItems.abyssalnite_shovel, 1, OreDictionary.WILDCARD_VALUE), new ItemStack(ACItems.refined_coralium_shovel));
+		AbyssalCraftAPI.addUpgrade((ItemUpgradeKit)ACItems.coralium_upgrade_kit, new ItemStack(ACItems.abyssalnite_sword, 1, OreDictionary.WILDCARD_VALUE), new ItemStack(ACItems.refined_coralium_sword));
+		AbyssalCraftAPI.addUpgrade((ItemUpgradeKit)ACItems.coralium_upgrade_kit, new ItemStack(ACItems.abyssalnite_hoe, 1, OreDictionary.WILDCARD_VALUE), new ItemStack(ACItems.refined_coralium_hoe));
 
 		//Coralium to Dreadium Upgrade
-		GameRegistry.addRecipe(new ItemStack(ACItems.dreadium_pickaxe, 1), new Object[] {"#", "@", '#', new ItemStack(ACItems.refined_coralium_pickaxe, 1, OreDictionary.WILDCARD_VALUE), '@', ACItems.dreadium_upgrade_kit});
-		GameRegistry.addRecipe(new ItemStack(ACItems.dreadium_axe, 1), new Object[] {"#", "@", '#', new ItemStack(ACItems.refined_coralium_axe, 1, OreDictionary.WILDCARD_VALUE), '@', ACItems.dreadium_upgrade_kit});
-		GameRegistry.addRecipe(new ItemStack(ACItems.dreadium_shovel, 1), new Object[] {"#", "@", '#', new ItemStack(ACItems.refined_coralium_shovel, 1, OreDictionary.WILDCARD_VALUE), '@', ACItems.dreadium_upgrade_kit});
-		GameRegistry.addRecipe(new ItemStack(ACItems.dreadium_sword, 1), new Object[] {"#", "@", '#', new ItemStack(ACItems.refined_coralium_sword, 1, OreDictionary.WILDCARD_VALUE), '@', ACItems.dreadium_upgrade_kit});
-		GameRegistry.addRecipe(new ItemStack(ACItems.dreadium_hoe, 1), new Object[] {"#", "@", '#', new ItemStack(ACItems.refined_coralium_hoe, 1, OreDictionary.WILDCARD_VALUE), '@', ACItems.dreadium_upgrade_kit});
+		AbyssalCraftAPI.addUpgrade((ItemUpgradeKit)ACItems.dreadium_upgrade_kit, new ItemStack(ACItems.refined_coralium_pickaxe, 1, OreDictionary.WILDCARD_VALUE), new ItemStack(ACItems.dreadium_pickaxe));
+		AbyssalCraftAPI.addUpgrade((ItemUpgradeKit)ACItems.dreadium_upgrade_kit, new ItemStack(ACItems.refined_coralium_axe, 1, OreDictionary.WILDCARD_VALUE), new ItemStack(ACItems.dreadium_axe));
+		AbyssalCraftAPI.addUpgrade((ItemUpgradeKit)ACItems.dreadium_upgrade_kit, new ItemStack(ACItems.refined_coralium_shovel, 1, OreDictionary.WILDCARD_VALUE), new ItemStack(ACItems.dreadium_shovel));
+		AbyssalCraftAPI.addUpgrade((ItemUpgradeKit)ACItems.dreadium_upgrade_kit, new ItemStack(ACItems.refined_coralium_sword, 1, OreDictionary.WILDCARD_VALUE), new ItemStack(ACItems.dreadium_sword));
+		AbyssalCraftAPI.addUpgrade((ItemUpgradeKit)ACItems.dreadium_upgrade_kit, new ItemStack(ACItems.refined_coralium_hoe, 1, OreDictionary.WILDCARD_VALUE), new ItemStack(ACItems.dreadium_hoe));
 
 		//Dreadium to Ethaxium Upgrade
-		GameRegistry.addRecipe(new ItemStack(ACItems.ethaxium_pickaxe, 1), new Object[] {"#", "@", '#', new ItemStack(ACItems.dreadium_pickaxe, 1, OreDictionary.WILDCARD_VALUE), '@', ACItems.ethaxium_upgrade_kit});
-		GameRegistry.addRecipe(new ItemStack(ACItems.ethaxium_axe, 1), new Object[] {"#", "@", '#', new ItemStack(ACItems.dreadium_axe, 1, OreDictionary.WILDCARD_VALUE), '@', ACItems.ethaxium_upgrade_kit});
-		GameRegistry.addRecipe(new ItemStack(ACItems.ethaxium_shovel, 1), new Object[] {"#", "@", '#', new ItemStack(ACItems.dreadium_shovel, 1, OreDictionary.WILDCARD_VALUE), '@', ACItems.ethaxium_upgrade_kit});
-		GameRegistry.addRecipe(new ItemStack(ACItems.ethaxium_sword, 1), new Object[] {"#", "@", '#', new ItemStack(ACItems.dreadium_sword, 1, OreDictionary.WILDCARD_VALUE), '@', ACItems.ethaxium_upgrade_kit});
-		GameRegistry.addRecipe(new ItemStack(ACItems.ethaxium_hoe, 1), new Object[] {"#", "@", '#', new ItemStack(ACItems.dreadium_hoe, 1, OreDictionary.WILDCARD_VALUE), '@', ACItems.ethaxium_upgrade_kit});
+		AbyssalCraftAPI.addUpgrade((ItemUpgradeKit)ACItems.ethaxium_upgrade_kit, new ItemStack(ACItems.dreadium_pickaxe, 1, OreDictionary.WILDCARD_VALUE), new ItemStack(ACItems.ethaxium_pickaxe));
+		AbyssalCraftAPI.addUpgrade((ItemUpgradeKit)ACItems.ethaxium_upgrade_kit, new ItemStack(ACItems.dreadium_axe, 1, OreDictionary.WILDCARD_VALUE), new ItemStack(ACItems.ethaxium_axe));
+		AbyssalCraftAPI.addUpgrade((ItemUpgradeKit)ACItems.ethaxium_upgrade_kit, new ItemStack(ACItems.dreadium_shovel, 1, OreDictionary.WILDCARD_VALUE), new ItemStack(ACItems.ethaxium_shovel));
+		AbyssalCraftAPI.addUpgrade((ItemUpgradeKit)ACItems.ethaxium_upgrade_kit, new ItemStack(ACItems.dreadium_sword, 1, OreDictionary.WILDCARD_VALUE), new ItemStack(ACItems.ethaxium_sword));
+		AbyssalCraftAPI.addUpgrade((ItemUpgradeKit)ACItems.ethaxium_upgrade_kit, new ItemStack(ACItems.dreadium_hoe, 1, OreDictionary.WILDCARD_VALUE), new ItemStack(ACItems.ethaxium_hoe));
 
 		//Iron to Gold armor
-		GameRegistry.addRecipe(new ItemStack(Items.GOLDEN_HELMET, 1), new Object[] {"#", "@", '#', new ItemStack(Items.IRON_HELMET, 1, OreDictionary.WILDCARD_VALUE), '@', ACItems.gold_upgrade_kit});
-		GameRegistry.addRecipe(new ItemStack(Items.GOLDEN_CHESTPLATE, 1), new Object[] {"#", "@", '#', new ItemStack(Items.IRON_CHESTPLATE, 1, OreDictionary.WILDCARD_VALUE), '@', ACItems.gold_upgrade_kit});
-		GameRegistry.addRecipe(new ItemStack(Items.GOLDEN_LEGGINGS, 1), new Object[] {"#", "@", '#', new ItemStack(Items.IRON_LEGGINGS, 1, OreDictionary.WILDCARD_VALUE), '@', ACItems.gold_upgrade_kit});
-		GameRegistry.addRecipe(new ItemStack(Items.GOLDEN_BOOTS, 1), new Object[] {"#", "@", '#', new ItemStack(Items.IRON_BOOTS, 1, OreDictionary.WILDCARD_VALUE), '@', ACItems.gold_upgrade_kit});
+		AbyssalCraftAPI.addUpgrade((ItemUpgradeKit)ACItems.gold_upgrade_kit, new ItemStack(Items.IRON_HELMET, 1, OreDictionary.WILDCARD_VALUE), new ItemStack(Items.GOLDEN_HELMET));
+		AbyssalCraftAPI.addUpgrade((ItemUpgradeKit)ACItems.gold_upgrade_kit, new ItemStack(Items.IRON_CHESTPLATE, 1, OreDictionary.WILDCARD_VALUE), new ItemStack(Items.GOLDEN_CHESTPLATE));
+		AbyssalCraftAPI.addUpgrade((ItemUpgradeKit)ACItems.gold_upgrade_kit, new ItemStack(Items.IRON_LEGGINGS, 1, OreDictionary.WILDCARD_VALUE), new ItemStack(Items.GOLDEN_LEGGINGS));
+		AbyssalCraftAPI.addUpgrade((ItemUpgradeKit)ACItems.gold_upgrade_kit, new ItemStack(Items.IRON_BOOTS, 1, OreDictionary.WILDCARD_VALUE), new ItemStack(Items.GOLDEN_BOOTS));
 
 		//Gold to Diamond armor
-		GameRegistry.addRecipe(new ItemStack(Items.DIAMOND_HELMET, 1), new Object[] {"#", "@", '#', new ItemStack(Items.GOLDEN_HELMET, 1, OreDictionary.WILDCARD_VALUE), '@', ACItems.diamond_upgrade_kit});
-		GameRegistry.addRecipe(new ItemStack(Items.DIAMOND_CHESTPLATE, 1), new Object[] {"#", "@", '#', new ItemStack(Items.GOLDEN_CHESTPLATE, 1, OreDictionary.WILDCARD_VALUE), '@', ACItems.diamond_upgrade_kit});
-		GameRegistry.addRecipe(new ItemStack(Items.DIAMOND_LEGGINGS, 1), new Object[] {"#", "@", '#', new ItemStack(Items.GOLDEN_LEGGINGS, 1, OreDictionary.WILDCARD_VALUE), '@', ACItems.diamond_upgrade_kit});
-		GameRegistry.addRecipe(new ItemStack(Items.DIAMOND_BOOTS, 1), new Object[] {"#", "@", '#', new ItemStack(Items.GOLDEN_BOOTS, 1, OreDictionary.WILDCARD_VALUE), '@', ACItems.diamond_upgrade_kit});
+		AbyssalCraftAPI.addUpgrade((ItemUpgradeKit)ACItems.diamond_upgrade_kit, new ItemStack(Items.GOLDEN_HELMET, 1, OreDictionary.WILDCARD_VALUE), new ItemStack(Items.DIAMOND_HELMET));
+		AbyssalCraftAPI.addUpgrade((ItemUpgradeKit)ACItems.diamond_upgrade_kit, new ItemStack(Items.GOLDEN_CHESTPLATE, 1, OreDictionary.WILDCARD_VALUE), new ItemStack(Items.DIAMOND_CHESTPLATE));
+		AbyssalCraftAPI.addUpgrade((ItemUpgradeKit)ACItems.diamond_upgrade_kit, new ItemStack(Items.GOLDEN_LEGGINGS, 1, OreDictionary.WILDCARD_VALUE), new ItemStack(Items.DIAMOND_LEGGINGS));
+		AbyssalCraftAPI.addUpgrade((ItemUpgradeKit)ACItems.diamond_upgrade_kit, new ItemStack(Items.GOLDEN_BOOTS, 1, OreDictionary.WILDCARD_VALUE), new ItemStack(Items.DIAMOND_BOOTS));
 	}
 
 	private static void addItemSmelting(){
@@ -759,11 +755,11 @@ public class AbyssalCrafting {
 	}
 
 	private static void addRitualRecipes(){
-		RitualRegistry.instance().addDimensionToBookTypeAndName(0, 0, NecronomiconText.LABEL_INFORMATION_OVERWORLD_TITLE);
-		RitualRegistry.instance().addDimensionToBookTypeAndName(ACLib.abyssal_wasteland_id, 1, NecronomiconText.LABEL_INFORMATION_ABYSSAL_WASTELAND_TITLE);
-		RitualRegistry.instance().addDimensionToBookTypeAndName(ACLib.dreadlands_id, 2, NecronomiconText.LABEL_INFORMATION_DREADLANDS_TITLE);
-		RitualRegistry.instance().addDimensionToBookTypeAndName(ACLib.omothol_id, 3, NecronomiconText.LABEL_INFORMATION_OMOTHOL_TITLE);
-		RitualRegistry.instance().addDimensionToBookTypeAndName(ACLib.dark_realm_id, 3, NecronomiconText.LABEL_INFORMATION_DARK_REALM_TITLE);
+		RitualRegistry.instance().addDimensionToBookTypeAndName(0, 0, I18n.translateToLocal(NecronomiconText.LABEL_INFORMATION_OVERWORLD_TITLE));
+		RitualRegistry.instance().addDimensionToBookTypeAndName(ACLib.abyssal_wasteland_id, 1, I18n.translateToLocal(NecronomiconText.LABEL_INFORMATION_ABYSSAL_WASTELAND_TITLE));
+		RitualRegistry.instance().addDimensionToBookTypeAndName(ACLib.dreadlands_id, 2, I18n.translateToLocal(NecronomiconText.LABEL_INFORMATION_DREADLANDS_TITLE));
+		RitualRegistry.instance().addDimensionToBookTypeAndName(ACLib.omothol_id, 3, I18n.translateToLocal(NecronomiconText.LABEL_INFORMATION_OMOTHOL_TITLE));
+		RitualRegistry.instance().addDimensionToBookTypeAndName(ACLib.dark_realm_id, 3, I18n.translateToLocal(NecronomiconText.LABEL_INFORMATION_DARK_REALM_TITLE));
 
 		//Overworld progression
 		Object[] tgofferings = new Object[]{new ItemStack(Items.DIAMOND), new ItemStack(Items.BLAZE_POWDER), new ItemStack(Items.ENDER_PEARL), new ItemStack(Items.BLAZE_POWDER),
@@ -954,6 +950,7 @@ public class AbyssalCrafting {
 		Object[] soromtofferings = new Object[]{ACItems.shadow_gem, ACBlocks.omothol_stone, ACItems.omothol_flesh, ACBlocks.omothol_stone, ACItems.omothol_flesh,
 				ACBlocks.omothol_stone, ACItems.omothol_flesh, ACBlocks.omothol_stone};
 		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("sorOMTupgrade", 3, ACLib.omothol_id, 3000F, new ItemStack(ACItems.staff_of_rending, 1, 3), new ItemStack(ACItems.staff_of_rending, 1, 2), soromtofferings).setTags(tags));
+		RitualRegistry.instance().registerRitual(new NecronomiconHouseRitual());
 	}
 
 	private static void addDisruptions(){
@@ -975,6 +972,7 @@ public class AbyssalCrafting {
 		DisruptionHandler.instance().registerDisruption(new DisruptionTeleportRandomly());
 		DisruptionHandler.instance().registerDisruption(new DisruptionDrainNearbyPE());
 		DisruptionHandler.instance().registerDisruption(new DisruptionSwarm("swarmSheep", DeityType.SHUBNIGGURATH, EntityEvilSheep.class, EntitySheep.class));
+		DisruptionHandler.instance().registerDisruption(new DisruptionAnimalCorruption());
 	}
 
 	private static void addArmor(Item helmet, Item chestplate, Item pants, Item boots, Item material, Item upgrade, Item oldh, Item oldc, Item oldp, Item oldb){
@@ -984,10 +982,10 @@ public class AbyssalCrafting {
 		GameRegistry.addRecipe(new ItemStack(pants), new Object[] {"###", "# #", "# #", '#', material});
 		GameRegistry.addRecipe(new ItemStack(boots), new Object[] {"# #", "# #", '#', material});
 
-		GameRegistry.addRecipe(new ItemStack(helmet, 1), new Object[] {"#", "@", '#', new ItemStack(oldh, 1, OreDictionary.WILDCARD_VALUE), '@', upgrade});
-		GameRegistry.addRecipe(new ItemStack(chestplate, 1), new Object[] {"#", "@", '#', new ItemStack(oldc, 1, OreDictionary.WILDCARD_VALUE), '@', upgrade});
-		GameRegistry.addRecipe(new ItemStack(pants, 1), new Object[] {"#", "@", '#', new ItemStack(oldp, 1, OreDictionary.WILDCARD_VALUE), '@', upgrade});
-		GameRegistry.addRecipe(new ItemStack(boots, 1), new Object[] {"#", "@", '#', new ItemStack(oldb, 1, OreDictionary.WILDCARD_VALUE), '@', upgrade});
+		AbyssalCraftAPI.addUpgrade((ItemUpgradeKit)upgrade, new ItemStack(oldh, 1, OreDictionary.WILDCARD_VALUE), new ItemStack(helmet));
+		AbyssalCraftAPI.addUpgrade((ItemUpgradeKit)upgrade, new ItemStack(oldc, 1, OreDictionary.WILDCARD_VALUE), new ItemStack(chestplate));
+		AbyssalCraftAPI.addUpgrade((ItemUpgradeKit)upgrade, new ItemStack(oldp, 1, OreDictionary.WILDCARD_VALUE), new ItemStack(pants));
+		AbyssalCraftAPI.addUpgrade((ItemUpgradeKit)upgrade, new ItemStack(oldb, 1, OreDictionary.WILDCARD_VALUE), new ItemStack(boots));
 
 		if(ACConfig.smeltingRecipes){
 			GameRegistry.addSmelting(helmet, new ItemStack(material), 1F);

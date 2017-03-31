@@ -34,6 +34,12 @@ public class BlockACFence extends BlockFence {
 		super(par3Material, mapColor);
 		setCreativeTab(ACTabs.tabDecoration);
 		setSoundType(stepSound);
+		if(getHarvestTool(getDefaultState()) == null)
+			if(par3Material == Material.ROCK || par3Material == Material.IRON || par3Material == Material.ANVIL)
+				setHarvestLevel("pickaxe", 0);
+			else if(par3Material == Material.GROUND || par3Material == Material.GRASS || par3Material == Material.SAND ||
+					par3Material == Material.SNOW || par3Material == Material.CRAFTED_SNOW)
+				setHarvestLevel("shovel", 0);
 	}
 
 	@Override

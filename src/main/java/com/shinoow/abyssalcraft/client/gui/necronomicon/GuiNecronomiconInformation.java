@@ -193,7 +193,7 @@ public class GuiNecronomiconInformation extends GuiNecronomicon {
 		byte b0 = 2;
 		String stuff;
 
-		stuff = chapter.getTitle();
+		stuff = localize(chapter.getTitle());
 		fontRendererObj.drawSplitString(stuff, k + 20, b0 + 16, 116, 0xC40000);
 		setTurnupLimit(chapter.getTurnupAmount());
 
@@ -238,7 +238,7 @@ public class GuiNecronomiconInformation extends GuiNecronomicon {
 			if(icon1 instanceof String)
 				if(failcache.contains(icon1)){
 					GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
-					mc.renderEngine.bindTexture(new ResourceLocation("abyssalcraft", "textures/gui/necronomicon/missing.png"));
+					mc.renderEngine.bindTexture(MISSING_PICTURE);
 					drawTexturedModalRect(k, b0, 0, 0, 256, 256);
 				} else if(successcache.get(icon1) != null){
 					GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
@@ -255,7 +255,7 @@ public class GuiNecronomiconInformation extends GuiNecronomicon {
 					GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
 					if(t != null)
 						GlStateManager.bindTexture(t.getGlTextureId());
-					else mc.renderEngine.bindTexture(new ResourceLocation("abyssalcraft", "textures/gui/necronomicon/missing.png"));
+					else mc.renderEngine.bindTexture(MISSING_PICTURE);
 					drawTexturedModalRect(k, b0, 0, 0, 256, 256);
 				}
 		}
@@ -268,7 +268,7 @@ public class GuiNecronomiconInformation extends GuiNecronomicon {
 			if(icon2 instanceof String)
 				if(failcache.contains(icon2)){
 					GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
-					mc.renderEngine.bindTexture(new ResourceLocation("abyssalcraft", "textures/gui/necronomicon/missing.png"));
+					mc.renderEngine.bindTexture(MISSING_PICTURE);
 					drawTexturedModalRect(k + 123, b0, 0, 0, 256, 256);
 				} else if(successcache.get(icon2) != null){
 					GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
@@ -285,7 +285,7 @@ public class GuiNecronomiconInformation extends GuiNecronomicon {
 					GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
 					if(t != null)
 						GlStateManager.bindTexture(t.getGlTextureId());
-					else mc.renderEngine.bindTexture(new ResourceLocation("abyssalcraft", "textures/gui/necronomicon/missing.png"));
+					else mc.renderEngine.bindTexture(MISSING_PICTURE);
 					drawTexturedModalRect(k + 123, b0, 0, 0, 256, 256);
 				}
 		}

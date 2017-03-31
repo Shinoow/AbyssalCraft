@@ -21,6 +21,7 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 
+import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
 import com.shinoow.abyssalcraft.api.item.ACItems;
 import com.shinoow.abyssalcraft.lib.ACTabs;
 
@@ -50,8 +51,13 @@ public class ItemDreadArmor extends ItemArmor {
 	@SuppressWarnings("rawtypes")
 	@Override
 	public void onArmorTick(World world, EntityPlayer player, ItemStack itemstack) {
-		if (itemstack.getItem() == ACItems.dreaded_abyssalnite_helmet)
-			player.addPotionEffect(new PotionEffect(MobEffects.NIGHT_VISION, 260, 0));
+		if(world.isRemote) return;
+		if (itemstack.getItem() == ACItems.dreaded_abyssalnite_helmet){
+			if(world.provider.isSurfaceWorld())
+				player.addPotionEffect(new PotionEffect(MobEffects.NIGHT_VISION, 260, 0));
+			if(player.getActivePotionEffect(AbyssalCraftAPI.dread_plague) !=null)
+				player.removePotionEffect(AbyssalCraftAPI.dread_plague);
+		}
 		if (itemstack.getItem() == ACItems.dreaded_abyssalnite_chestplate)
 			player.addPotionEffect(new PotionEffect(MobEffects.FIRE_RESISTANCE, 20, 3));
 		if (itemstack.getItem() == ACItems.dreaded_abyssalnite_leggings)

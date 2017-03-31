@@ -14,6 +14,8 @@ package com.shinoow.abyssalcraft.common.entity;
 import java.util.UUID;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.material.Material;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureAttribute;
@@ -53,15 +55,13 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeModContainer;
-import net.minecraftforge.common.MinecraftForge;
-
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.api.entity.EntityUtil;
 import com.shinoow.abyssalcraft.api.entity.ICoraliumEntity;
 import com.shinoow.abyssalcraft.api.entity.IDreadEntity;
-import com.shinoow.abyssalcraft.api.event.ACEvents.ShoggothOozeEvent;
 import com.shinoow.abyssalcraft.api.item.ACItems;
+import com.shinoow.abyssalcraft.common.blocks.BlockShoggothOoze;
 import com.shinoow.abyssalcraft.common.entity.demon.EntityDemonPig;
 import com.shinoow.abyssalcraft.common.world.gen.WorldGenShoggothMonolith;
 import com.shinoow.abyssalcraft.lib.ACConfig;
@@ -245,17 +245,17 @@ public class EntityLesserShoggoth extends EntityMob implements ICoraliumEntity, 
 		}
 
 		if(!worldObj.isRemote)
-			for (int l = 0; l < 4; ++l)
+			for (int l = 0; l < 1; ++l)
 			{
 				int x = MathHelper.floor_double(posX + (l % 2 * 2 - 1) * 0.25F);
-				int y = roundUp(MathHelper.floor_double(posY), posY);
+				int y = MathHelper.floor_double(posY);
 				int z = MathHelper.floor_double(posZ + (l / 2 % 2 * 2 - 1) * 0.25F);
 
-				spawnOoze(x, y - 1, z);
+				spawnOoze(x, y, z);
 				if(!isChild()){
-					spawnOoze(x - 1, y - 1, z);
-					spawnOoze(x, y - 1, z - 1);
-					spawnOoze(x - 1, y - 1, z - 1);
+					spawnOoze(x - 1, y, z);
+					spawnOoze(x, y, z - 1);
+					spawnOoze(x - 1, y, z - 1);
 				}
 			}
 
@@ -273,11 +273,6 @@ public class EntityLesserShoggoth extends EntityMob implements ICoraliumEntity, 
 			worldObj.spawnParticle(EnumParticleTypes.SMOKE_LARGE, posX + (rand.nextDouble() - 0.5D) * width, posY + rand.nextDouble() * height, posZ + (rand.nextDouble() - 0.5D) * width, 0.0D, 0.0D, 0.0D);
 	}
 
-	private int roundUp(int num, double d){
-		if(num < d) return num + 1;
-		return num;
-	}
-
 	/**
 	 * Checks if a Lesser Shoggoth can generate ooze at the specific coordinates
 	 * @param x X-coord
@@ -287,12 +282,13 @@ public class EntityLesserShoggoth extends EntityMob implements ICoraliumEntity, 
 	private void spawnOoze(int x, int y, int z){
 		BlockPos pos = new BlockPos(x, y, z);
 		if(ACConfig.shoggothOoze)
-			if(ACBlocks.shoggoth_ooze.canPlaceBlockAt(worldObj, pos)){
-				ShoggothOozeEvent event = new ShoggothOozeEvent(worldObj, pos);
-				if(MinecraftForge.EVENT_BUS.post(event)){
-					if(event.getReplacement() != null)
-						worldObj.setBlockState(pos, event.getReplacement());
-				} else worldObj.setBlockState(pos, ACBlocks.shoggoth_ooze.getDefaultState());
+			if((worldObj.getBlockState(pos).getMaterial() == Material.AIR || worldObj.getBlockState(pos).getBlock().isReplaceable(worldObj, pos)) && ACBlocks.shoggoth_ooze.canPlaceBlockAt(worldObj, pos)
+					&& worldObj.getBlockState(pos).getBlock() != ACBlocks.shoggoth_ooze && !worldObj.getBlockState(pos).getMaterial().isLiquid())
+				worldObj.setBlockState(pos, ACBlocks.shoggoth_ooze.getDefaultState());
+			else if(worldObj.getBlockState(pos).getBlock() == ACBlocks.shoggoth_ooze && worldObj.getBlockState(pos).getValue(BlockShoggothOoze.LAYERS) < 8
+					&& ticksExisted % 10 == 0 && rand.nextInt(5) == 0){
+				IBlockState state = worldObj.getBlockState(pos);
+				worldObj.setBlockState(pos, state.withProperty(BlockShoggothOoze.LAYERS, state.getValue(BlockShoggothOoze.LAYERS) + 1));
 			}
 	}
 

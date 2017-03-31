@@ -283,8 +283,8 @@ public class ChunkProviderOmothol implements IChunkGenerator
 		omotholGenerator.generateStructure(worldObj, rand, chunkcoordintpair);
 
 		for(int i = 0; i < 1; i++) {
-			int Xcoord2 = k + rand.nextInt(16);
-			int Zcoord2 = l + rand.nextInt(16);
+			int Xcoord2 = k + rand.nextInt(16) + 8;
+			int Zcoord2 = l + rand.nextInt(16) + 14;
 			BlockPos pos1 = worldObj.getHeight(new BlockPos(Xcoord2, 0, Zcoord2));
 			if(worldObj.getBlockState(pos1).getMaterial() == Material.PLANTS) pos1 = pos1.down();
 

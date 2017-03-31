@@ -47,6 +47,7 @@ import com.shinoow.abyssalcraft.common.entity.EntityShadowBeast;
 import com.shinoow.abyssalcraft.common.entity.EntityShadowCreature;
 import com.shinoow.abyssalcraft.common.entity.EntityShadowMonster;
 import com.shinoow.abyssalcraft.common.world.gen.WorldGenDLT;
+import com.shinoow.abyssalcraft.common.world.gen.WorldGenNoTree;
 import com.shinoow.abyssalcraft.lib.ACConfig;
 
 public class BiomeGenDarklandsPlains extends Biome implements IDarklandsBiome {
@@ -98,7 +99,7 @@ public class BiomeGenDarklandsPlains extends Biome implements IDarklandsBiome {
 	@Override
 	public WorldGenAbstractTree genBigTreeChance(Random par1Random)
 	{
-		return par1Random.nextInt(5) == 0 ? TREE_FEATURE : par1Random.nextInt(10) == 0 ? WorldGenDarkTrees : TREE_FEATURE;
+		return par1Random.nextInt(5) == 0 ? new WorldGenNoTree() : par1Random.nextInt(10) == 0 ? WorldGenDarkTrees : new WorldGenNoTree();
 	}
 
 	@Override

@@ -12,6 +12,7 @@
 package com.shinoow.abyssalcraft.common.world;
 
 import net.minecraft.entity.Entity;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.DimensionType;
@@ -23,6 +24,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import com.shinoow.abyssalcraft.api.biome.ACBiomes;
+import com.shinoow.abyssalcraft.client.render.sky.ACSkyRenderer;
 import com.shinoow.abyssalcraft.lib.ACLib;
 
 public class WorldProviderDarkRealm extends WorldProvider {
@@ -122,6 +124,13 @@ public class WorldProviderDarkRealm extends WorldProvider {
 	@Override
 	public int getAverageGroundLevel() {
 		return 50;
+	}
+
+	@SideOnly(Side.CLIENT)
+	@Override
+	public net.minecraftforge.client.IRenderHandler getSkyRenderer()
+	{
+		return new ACSkyRenderer(new ResourceLocation("abyssalcraft:textures/environment/omothol_sky.png"), 30, 20, 30);
 	}
 
 	@Override

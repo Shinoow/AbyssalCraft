@@ -125,23 +125,23 @@ public class RenderDragonBoss extends RenderLiving<EntityDragonBoss> {
 	 * Renders the dragon, along with its dying animation
 	 */
 	@Override
-	public void doRender(EntityDragonBoss dragon, double par2, double par4, double par6, float par8, float par9)
+	public void doRender(EntityDragonBoss entity, double x, double y, double z, float yaw, float partialTicks)
 	{
 		//		BossStatus.setBossStatus(dragon, false);
-		super.doRender(dragon, par2, par4, par6, par8, par9);
+		super.doRender(entity, x, y, z, yaw, partialTicks);
 
-		if (dragon.healingcircle != null)
+		if (entity.healingcircle != null)
 		{
-			float f = EntityDragonMinion.innerRotation + par9;
+			float f = EntityDragonMinion.innerRotation + partialTicks;
 			float f1 = MathHelper.sin(f * 0.2F) / 2.0F + 0.5F;
 			f1 = (f1 * f1 + f1) * 0.2F;
-			float f2 = (float)(dragon.healingcircle.posX - dragon.posX - (dragon.prevPosX - dragon.posX) * (1.0F - par9));
-			float f3 = (float)(f1 + dragon.healingcircle.posY - 1.0D - dragon.posY - (dragon.prevPosY - dragon.posY) * (1.0F - par9));
-			float f4 = (float)(dragon.healingcircle.posZ - dragon.posZ - (dragon.prevPosZ - dragon.posZ) * (1.0F - par9));
+			float f2 = (float)(entity.healingcircle.posX - entity.posX - (entity.prevPosX - entity.posX) * (1.0F - partialTicks));
+			float f3 = (float)(f1 + entity.healingcircle.posY - 1.0D - entity.posY - (entity.prevPosY - entity.posY) * (1.0F - partialTicks));
+			float f4 = (float)(entity.healingcircle.posZ - entity.posZ - (entity.prevPosZ - entity.posZ) * (1.0F - partialTicks));
 			float f5 = MathHelper.sqrt_float(f2 * f2 + f4 * f4);
 			float f6 = MathHelper.sqrt_float(f2 * f2 + f3 * f3 + f4 * f4);
 			GlStateManager.pushMatrix();
-			GlStateManager.translate((float)par2, (float)par4 + 2.0F, (float)par6);
+			GlStateManager.translate((float)x, (float)y + 2.0F, (float)z);
 			GlStateManager.rotate((float)-Math.atan2(f4, f2) * 180.0F / (float)Math.PI - 90.0F, 0.0F, 1.0F, 0.0F);
 			GlStateManager.rotate((float)-Math.atan2(f5, f3) * 180.0F / (float)Math.PI - 90.0F, 1.0F, 0.0F, 0.0F);
 			Tessellator tessellator = Tessellator.getInstance();
@@ -150,8 +150,8 @@ public class RenderDragonBoss extends RenderLiving<EntityDragonBoss> {
 			GlStateManager.disableCull();
 			bindTexture(field_110842_f);
 			GlStateManager.shadeModel(7425);
-			float f7 = 0.0F - (dragon.ticksExisted + par9) * 0.01F;
-			float f8 = MathHelper.sqrt_float(f2 * f2 + f3 * f3 + f4 * f4) / 32.0F - (dragon.ticksExisted + par9) * 0.01F;
+			float f7 = 0.0F - (entity.ticksExisted + partialTicks) * 0.01F;
+			float f8 = MathHelper.sqrt_float(f2 * f2 + f3 * f3 + f4 * f4) / 32.0F - (entity.ticksExisted + partialTicks) * 0.01F;
 			worldrenderer.begin(5, DefaultVertexFormats.POSITION_TEX_COLOR);
 			for (int j = 0; j <= 8; ++j)
 			{

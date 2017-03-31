@@ -18,7 +18,6 @@ import net.minecraft.client.model.ModelZombie;
 import net.minecraft.client.renderer.entity.RenderBiped;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.entity.layers.LayerBipedArmor;
-import net.minecraft.client.renderer.entity.layers.LayerHeldItem;
 import net.minecraft.client.renderer.entity.layers.LayerRenderer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
@@ -38,7 +37,6 @@ public class RenderAntiZombie extends RenderBiped<EntityAntiZombie>
 	{
 		super(manager, new ModelZombie(), 0.5F, 1.0F);
 		modelBiped = modelBipedMain;
-		this.addLayer(new LayerHeldItem(this));
 		LayerBipedArmor layerbipedarmor = new LayerBipedArmor(this)
 		{
 			@Override

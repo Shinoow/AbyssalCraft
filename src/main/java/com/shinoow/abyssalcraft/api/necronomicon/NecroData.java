@@ -27,6 +27,8 @@ import org.apache.logging.log4j.Level;
 
 import com.google.common.collect.Maps;
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
+import com.shinoow.abyssalcraft.api.necronomicon.condition.DefaultCondition;
+import com.shinoow.abyssalcraft.api.necronomicon.condition.IUnlockCondition;
 
 /**
  * Base data structure for Necronomicon information pages
@@ -265,6 +267,7 @@ public class NecroData {
 		private Object icon;
 		private int pageNum;
 		private String text;
+		private IUnlockCondition condition;
 
 		/**
 		 * A Necronomicon Page
@@ -272,7 +275,17 @@ public class NecroData {
 		 * @param text Text to display on the Page
 		 */
 		public Page(int pageNum, String text){
-			this(pageNum, null, text);
+			this(pageNum, text, new DefaultCondition());
+		}
+
+		/**
+		 * A Necronomicon Page
+		 * @param pageNum Page number
+		 * @param text Text to display on the Page
+		 * @param condition Condition to determine whether or not this page can be read
+		 */
+		public Page(int pageNum, String text, IUnlockCondition condition){
+			this(pageNum, null, text, condition);
 		}
 
 		/**
@@ -282,6 +295,17 @@ public class NecroData {
 		 * @param text Text to display on the Page
 		 */
 		public Page(int pageNum, Object icon, String text){
+			this(pageNum, icon, text, new DefaultCondition());
+		}
+
+		/**
+		 * A Necronomicon Page
+		 * @param pageNum Page number
+		 * @param icon ResourceLocation/ItemStack/CraftingStack to display on the Page
+		 * @param text Text to display on the Page
+		 * @param condition Condition to determine whether or not this page can be read
+		 */
+		public Page(int pageNum, Object icon, String text, IUnlockCondition condition){
 			if(pageNum == 0) throw new ArithmeticException("The Page number can't be zero");
 			this.pageNum = pageNum;
 			if(icon != null)
@@ -289,6 +313,7 @@ public class NecroData {
 					throw new IllegalArgumentException("Icon isn't a ResourceLocation, ItemStack, CraftingStack or URL String!");
 			this.icon = verify(icon);
 			this.text = text;
+			this.condition = condition;
 		}
 
 		private Object verify(Object obj){
@@ -326,6 +351,13 @@ public class NecroData {
 			return text;
 		}
 
+		/**
+		 * Fetches the unlocking condition (determines if the page can be read)
+		 */
+		public IUnlockCondition getCondition(){
+			return condition;
+		}
+
 		@Override
 		public boolean equals(Object obj){
 			if(!(obj instanceof Page)) return false;
@@ -335,8 +367,9 @@ public class NecroData {
 			boolean test1 = page.pageNum == pageNum;
 			boolean test2 = page.icon == null && icon == null || page.icon.equals(icon);
 			boolean test3 = page.text.equals(text);
+			boolean test4 = page.condition.areConditionObjectsEqual(condition.getConditionObject());
 
-			return test1 && test2 && test3;
+			return test1 && test2 && test3 && test4;
 		}
 	}
 }

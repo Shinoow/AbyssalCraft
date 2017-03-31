@@ -208,7 +208,7 @@ public class BlockHandler implements ILifeCycleHandler {
 		ACBlocks.abyssal_sand = new BlockAbyssalSand();
 		ACBlocks.fused_abyssal_sand = new BlockFusedAbyssalSand();
 		ACBlocks.abyssal_sand_glass = new BlockAbyssalSandGlass();
-		ACBlocks.dreadlands_dirt = new BlockACBasic(Material.GROUND, 0.4F, 2.0F, SoundType.GROUND, MapColor.TNT).setUnlocalizedName("dreadlandsdirt");
+		ACBlocks.dreadlands_dirt = new BlockDreadlandsDirt();
 		ACBlocks.abyssal_cobblestone = new BlockACBasic(Material.ROCK, "pickaxe", 2, 2.6F, 12.0F, SoundType.STONE, MapColor.GREEN).setUnlocalizedName("abyssalcobblestone");
 		ACBlocks.dreadstone_cobblestone = new BlockACBasic(Material.ROCK, "pickaxe", 4, 3.3F, 20.0F, SoundType.STONE, MapColor.RED).setUnlocalizedName("dreadstonecobblestone");
 		ACBlocks.abyssalnite_cobblestone = new BlockACBasic(Material.ROCK, "pickaxe", 4, 3.3F, 20.0F, SoundType.STONE, MapColor.PURPLE).setUnlocalizedName("abyssalnitecobblestone");
@@ -231,8 +231,8 @@ public class BlockHandler implements ILifeCycleHandler {
 		ACBlocks.coralium_cobblestone_wall = new BlockACWall(ACBlocks.coralium_cobblestone).setHardness(2.0F).setResistance(10.0F).setUnlocalizedName("coraliumcobblestonewall");
 		ACBlocks.luminous_thistle = new BlockLuminousThistle();
 		ACBlocks.wastelands_thorn = new BlockWastelandsThorn();
+		ACBlocks.rending_pedestal = new BlockRendingPedestal();
 
-		((BlockShoggothOoze) ACBlocks.shoggoth_ooze).initBlacklist();
 		((BlockRitualAltar)ACBlocks.ritual_altar).setBlocks();
 		((BlockRitualPedestal)ACBlocks.ritual_pedestal).setBlocks();
 
@@ -272,6 +272,7 @@ public class BlockHandler implements ILifeCycleHandler {
 		GameRegistry.registerTileEntity(TileEntityDreadlandsEnergyRelay.class, "tileEntityDreadlandsEnergyRelay");
 		GameRegistry.registerTileEntity(TileEntityOmotholEnergyRelay.class, "tileEntityOmotholEnergyRelay");
 		GameRegistry.registerTileEntity(TileEntityTieredEnergyContainer.class, "tileEntityTieredEnergyContainer");
+		GameRegistry.registerTileEntity(TileEntityRendingPedestal.class, "tileEntityRendingPedestal");
 
 		registerBlock(ACBlocks.darkstone, "darkstone");
 		registerBlock(ACBlocks.darkstone_cobblestone, "darkstone_cobble");
@@ -398,7 +399,7 @@ public class BlockHandler implements ILifeCycleHandler {
 		registerBlock(ACBlocks.dark_ethaxium_brick_fence, new ItemBlockColorName(ACBlocks.dark_ethaxium_brick_fence), "darkethaxiumbrickfence");
 		registerBlock(ACBlocks.ritual_altar, new ItemRitualBlock(ACBlocks.ritual_altar), "ritualaltar");
 		registerBlock(ACBlocks.ritual_pedestal, new ItemRitualBlock(ACBlocks.ritual_pedestal), "ritualpedestal");
-		registerBlock(ACBlocks.shoggoth_ooze, "shoggothblock");
+		registerBlock(ACBlocks.shoggoth_ooze, new ItemShoggothOoze(ACBlocks.shoggoth_ooze), "shoggothblock");
 		registerBlock(ACBlocks.cthulhu_statue, "cthulhustatue");
 		registerBlock(ACBlocks.hastur_statue, "hasturstatue");
 		registerBlock(ACBlocks.jzahar_statue, "jzaharstatue");
@@ -460,6 +461,7 @@ public class BlockHandler implements ILifeCycleHandler {
 		registerBlock(ACBlocks.coralium_cobblestone_wall, "coraliumcobblestonewall");
 		registerBlock(ACBlocks.luminous_thistle, "luminousthistle");
 		registerBlock(ACBlocks.wastelands_thorn, "wastelandsthorn");
+		registerBlock(ACBlocks.rending_pedestal, new ItemRendingPedestalBlock(ACBlocks.rending_pedestal), "rendingpedestal");
 
 		Blocks.FIRE.setFireInfo(ACBlocks.darklands_oak_planks, 5, 20);
 		Blocks.FIRE.setFireInfo(DLTslab2, 5, 20);

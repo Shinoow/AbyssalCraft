@@ -19,7 +19,6 @@ import org.apache.logging.log4j.Level;
 import net.minecraft.block.Block;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.entity.*;
-import net.minecraft.entity.passive.*;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.Item;
 import net.minecraft.item.Item.ToolMaterial;
@@ -35,13 +34,13 @@ import net.minecraftforge.oredict.OreDictionary;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
-import com.shinoow.abyssalcraft.api.entity.EntityUtil;
 import com.shinoow.abyssalcraft.api.internal.DummyMethodHandler;
 import com.shinoow.abyssalcraft.api.internal.DummyNecroDataHandler;
 import com.shinoow.abyssalcraft.api.internal.IInternalMethodHandler;
 import com.shinoow.abyssalcraft.api.internal.IInternalNecroDataHandler;
 import com.shinoow.abyssalcraft.api.item.ACItems;
 import com.shinoow.abyssalcraft.api.item.ItemEngraving;
+import com.shinoow.abyssalcraft.api.item.ItemUpgradeKit;
 import com.shinoow.abyssalcraft.api.necronomicon.NecroData;
 import com.shinoow.abyssalcraft.api.recipe.*;
 
@@ -64,7 +63,7 @@ public class AbyssalCraftAPI {
 	/**
 	 * String used to specify the API version in the "package-info.java" classes
 	 */
-	public static final String API_VERSION = "1.8.9";
+	public static final String API_VERSION = "1.9.0";
 
 	public static Enchantment coralium_enchantment, dread_enchantment, light_pierce, iron_wall;
 
@@ -76,8 +75,6 @@ public class AbyssalCraftAPI {
 	public static DamageSource coralium = new DamageSource("coralium").setDamageBypassesArmor().setMagicDamage();
 	public static DamageSource dread = new DamageSource("dread").setDamageBypassesArmor().setMagicDamage();
 	public static DamageSource antimatter = new DamageSource("antimatter").setDamageBypassesArmor().setDamageIsAbsolute().setMagicDamage();
-
-	private static List<Block> shoggothBlockBlacklist = Lists.newArrayList();
 
 	private static List<ItemStack> crystals = Lists.newArrayList();
 
@@ -544,44 +541,17 @@ public class AbyssalCraftAPI {
 	}
 
 	/**
-	 * Adds the entity to a list of entities that the Lesser Shoggoth eats
-	 * (Note: It's useless to add your entity here if it extends {@link EntityAnimal}, {@link EntityAmbientCreature}, {@link EntityWaterMob} or {@link EntityTameable}).
-	 * If your Entity's superclass is a subclass of EntityTameable, you will need to add the superclass.
-	 * @param clazz The potential "food" for the Lesser Shoggoth
-	 *
-	 * @since 1.2
-	 *
-	 * @deprecated use {@link EntityUtil#addShoggothFood(Class)} instead
-	 */
-	@Deprecated
-	public static void addShoggothFood(Class<? extends EntityLivingBase> clazz){
-		EntityUtil.addShoggothFood(clazz);
-	}
-
-	/**
-	 * Used by the Lesser Shoggoth to fetch a list of things to eat
-	 * @return An ArrayList containing Entity classes
-	 *
-	 * @since 1.2
-	 *
-	 * @deprecated use {@link EntityUtil#getShoggothFood()} instead
-	 */
-	@Deprecated
-	public static List<Class<? extends EntityLivingBase>> getShoggothFood(){
-		return EntityUtil.getShoggothFood();
-	}
-
-	/**
 	 * Adds the block to a list of blocks that won't turn into
 	 * a fleshy soil when a Lesser Shoggoth walks over it
 	 * (Note: Any liquid block and tile entity block will automatically be blacklisted)
 	 * @param block The block to blacklist
 	 *
 	 * @since 1.4
+	 *
+	 * @deprecated 1.9.0: Shoggoth ooze no longer replaces other blocks in that sense
 	 */
-	public static void addShoggothBlacklist(Block block){
-		shoggothBlockBlacklist.add(block);
-	}
+	@Deprecated
+	public static void addShoggothBlacklist(Block block){}
 
 	/**
 	 * Used by the Lesser Shoggoth to fetch a list of blocks that won't be converted when
@@ -589,9 +559,12 @@ public class AbyssalCraftAPI {
 	 * @return An ArrayList containing Blocks
 	 *
 	 * @since 1.4
+	 *
+	 * @deprecated 1.9.0: Shoggoth ooze no longer replaces other blocks in that sense
 	 */
+	@Deprecated
 	public static List<Block> getShoggothBlockBlacklist(){
-		return shoggothBlockBlacklist;
+		return Lists.newArrayList();
 	}
 
 	/**
@@ -848,6 +821,28 @@ public class AbyssalCraftAPI {
 	 */
 	public static int getGatewayKeyOverride(int dimId){
 		return !gateway_key_overrides.containsKey(dimId) ? -1 : gateway_key_overrides.get(dimId);
+	}
+
+	/**
+	 * Upgrade Kit recipe.
+	 * @param kit Upgrade Kit to use
+	 * @param input Old Item
+	 * @param output New Item
+	 *
+	 * @since 1.9.0
+	 */
+	public static void addUpgrade(ItemUpgradeKit kit, ItemStack input, ItemStack output){
+		UpgradeKitRecipes.instance().addUpgrade(kit, input, output);
+	}
+
+	/**
+	 * Registers a Upgrade Kit to be used in Upgrade Kit recipes.
+	 * @param kit Upgrade Kit to register
+	 *
+	 * @since 1.9.0
+	 */
+	public static void addUpgradeKit(ItemUpgradeKit kit){
+		UpgradeKitRecipes.instance().addUpgradeKit(kit);
 	}
 
 	/**

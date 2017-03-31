@@ -52,10 +52,7 @@ public class ItemCoraliumArmor extends ItemArmor {
 	public void onArmorTick(World world, EntityPlayer player, ItemStack itemstack) {
 		if(world.isRemote) return;
 		if (itemstack.getItem() == ACItems.refined_coralium_helmet)
-		{
 			player.addPotionEffect(new PotionEffect(MobEffects.WATER_BREATHING, 20, 0));
-			player.addPotionEffect(new PotionEffect(MobEffects.NIGHT_VISION, 260, 0));
-		}
 		if (itemstack.getItem() == ACItems.refined_coralium_chestplate)
 			player.addPotionEffect(new PotionEffect(MobEffects.RESISTANCE, 20, 0));
 		if (itemstack.getItem() == ACItems.refined_coralium_boots)

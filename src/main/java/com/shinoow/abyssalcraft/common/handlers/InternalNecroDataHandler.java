@@ -31,15 +31,46 @@ import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
+import com.shinoow.abyssalcraft.api.entity.IAntiEntity;
 import com.shinoow.abyssalcraft.api.internal.DummyNecroDataHandler;
 import com.shinoow.abyssalcraft.api.item.ACItems;
 import com.shinoow.abyssalcraft.api.necronomicon.CraftingStack;
 import com.shinoow.abyssalcraft.api.necronomicon.NecroData;
 import com.shinoow.abyssalcraft.api.necronomicon.NecroData.Chapter;
 import com.shinoow.abyssalcraft.api.necronomicon.NecroData.Page;
+import com.shinoow.abyssalcraft.api.necronomicon.condition.DimensionCondition;
+import com.shinoow.abyssalcraft.api.necronomicon.condition.EntityCondition;
+import com.shinoow.abyssalcraft.api.necronomicon.condition.EntityPredicateCondition;
+import com.shinoow.abyssalcraft.api.necronomicon.condition.MultiEntityCondition;
 import com.shinoow.abyssalcraft.client.gui.necronomicon.GuiNecronomicon;
 import com.shinoow.abyssalcraft.client.gui.necronomicon.GuiNecronomiconInformation;
+import com.shinoow.abyssalcraft.common.entity.EntityAbygolem;
+import com.shinoow.abyssalcraft.common.entity.EntityAbyssalZombie;
+import com.shinoow.abyssalcraft.common.entity.EntityChagarothFist;
+import com.shinoow.abyssalcraft.common.entity.EntityChagarothSpawn;
+import com.shinoow.abyssalcraft.common.entity.EntityCoraliumSquid;
+import com.shinoow.abyssalcraft.common.entity.EntityDepthsGhoul;
+import com.shinoow.abyssalcraft.common.entity.EntityDragonMinion;
+import com.shinoow.abyssalcraft.common.entity.EntityDreadSpawn;
+import com.shinoow.abyssalcraft.common.entity.EntityDreadgolem;
+import com.shinoow.abyssalcraft.common.entity.EntityDreadguard;
+import com.shinoow.abyssalcraft.common.entity.EntityDreadling;
+import com.shinoow.abyssalcraft.common.entity.EntityGatekeeperMinion;
+import com.shinoow.abyssalcraft.common.entity.EntityGreaterDreadSpawn;
+import com.shinoow.abyssalcraft.common.entity.EntityLesserDreadbeast;
+import com.shinoow.abyssalcraft.common.entity.EntityLesserShoggoth;
+import com.shinoow.abyssalcraft.common.entity.EntityOmotholGhoul;
+import com.shinoow.abyssalcraft.common.entity.EntityShadowBeast;
+import com.shinoow.abyssalcraft.common.entity.EntityShadowCreature;
+import com.shinoow.abyssalcraft.common.entity.EntityShadowMonster;
+import com.shinoow.abyssalcraft.common.entity.EntitySkeletonGoliath;
+import com.shinoow.abyssalcraft.common.entity.demon.EntityDemonAnimal;
+import com.shinoow.abyssalcraft.common.entity.demon.EntityEvilChicken;
+import com.shinoow.abyssalcraft.common.entity.demon.EntityEvilCow;
+import com.shinoow.abyssalcraft.common.entity.demon.EntityEvilSheep;
+import com.shinoow.abyssalcraft.common.entity.demon.EntityEvilpig;
 import com.shinoow.abyssalcraft.common.util.ACLogger;
+import com.shinoow.abyssalcraft.lib.ACLib;
 import com.shinoow.abyssalcraft.lib.NecronomiconResources;
 import com.shinoow.abyssalcraft.lib.NecronomiconText;
 import com.shinoow.abyssalcraft.lib.util.NecroDataJsonUtil;
@@ -194,22 +225,22 @@ public class InternalNecroDataHandler extends DummyNecroDataHandler {
 				new Page(3, NecronomiconText.PROGRESSION_OVERWORLD_3),
 				new Page(4, NecronomiconText.PROGRESSION_OVERWORLD_4),
 				new Page(5, NecronomiconText.PROGRESSION_OVERWORLD_5));
-		addPages("overworld", "entities", new Page(1, NecronomiconResources.ABYSSAL_ZOMBIE, NecronomiconText.ENTITY_ABYSSAL_ZOMBIE_1),
-				new Page(2, NecronomiconText.ENTITY_ABYSSAL_ZOMBIE_2),
-				new Page(3, NecronomiconResources.DEPTHS_GHOUL, NecronomiconText.ENTITY_DEPTHS_GHOUL_1),
-				new Page(4, NecronomiconText.ENTITY_DEPTHS_GHOUL_2),
-				new Page(5, NecronomiconResources.SHADOW_CREATURE, NecronomiconText.ENTITY_SHADOW_CREATURE_1),
-				new Page(6, NecronomiconText.ENTITY_SHADOW_CREATURE_2),
-				new Page(7, NecronomiconResources.SHADOW_MONSTER, NecronomiconText.ENTITY_SHADOW_MONSTER_1),
-				new Page(8, NecronomiconText.ENTITY_SHADOW_MONSTER_2),
-				new Page(9, NecronomiconResources.SHADOW_BEAST, NecronomiconText.ENTITY_SHADOW_BEAST_1),
-				new Page(10, NecronomiconText.ENTITY_SHADOW_BEAST_2),
-				new Page(11, NecronomiconResources.ANTI_ENTITIES, NecronomiconText.ENTITY_ANTI_1),
-				new Page(12, NecronomiconText.ENTITY_ANTI_2),
-				new Page(13, NecronomiconResources.EVIL_ANIMALS, NecronomiconText.ENTITY_EVIL_ANIMALS_1),
-				new Page(14, NecronomiconText.ENTITY_EVIL_ANIMALS_2),
-				new Page(15, NecronomiconResources.LESSER_SHOGGOTH, NecronomiconText.ENTITY_LESSER_SHOGGOTH_1),
-				new Page(16, NecronomiconText.ENTITY_LESSER_SHOGGOTH_2));
+		addPages("overworld", "entities", new Page(1, NecronomiconResources.ABYSSAL_ZOMBIE, NecronomiconText.ENTITY_ABYSSAL_ZOMBIE_1, new EntityCondition(EntityAbyssalZombie.class)),
+				new Page(2, NecronomiconText.ENTITY_ABYSSAL_ZOMBIE_2, new EntityCondition(EntityAbyssalZombie.class)),
+				new Page(3, NecronomiconResources.DEPTHS_GHOUL, NecronomiconText.ENTITY_DEPTHS_GHOUL_1, new EntityCondition(EntityDepthsGhoul.class)),
+				new Page(4, NecronomiconText.ENTITY_DEPTHS_GHOUL_2, new EntityCondition(EntityDepthsGhoul.class)),
+				new Page(5, NecronomiconResources.SHADOW_CREATURE, NecronomiconText.ENTITY_SHADOW_CREATURE_1, new EntityCondition(EntityShadowCreature.class)),
+				new Page(6, NecronomiconText.ENTITY_SHADOW_CREATURE_2, new EntityCondition(EntityShadowCreature.class)),
+				new Page(7, NecronomiconResources.SHADOW_MONSTER, NecronomiconText.ENTITY_SHADOW_MONSTER_1, new EntityCondition(EntityShadowMonster.class)),
+				new Page(8, NecronomiconText.ENTITY_SHADOW_MONSTER_2, new EntityCondition(EntityShadowMonster.class)),
+				new Page(9, NecronomiconResources.SHADOW_BEAST, NecronomiconText.ENTITY_SHADOW_BEAST_1, new EntityCondition(EntityShadowBeast.class)),
+				new Page(10, NecronomiconText.ENTITY_SHADOW_BEAST_2, new EntityCondition(EntityShadowBeast.class)),
+				new Page(11, NecronomiconResources.ANTI_ENTITIES, NecronomiconText.ENTITY_ANTI_1, new EntityPredicateCondition(input -> IAntiEntity.class.isAssignableFrom(input))),
+				new Page(12, NecronomiconText.ENTITY_ANTI_2, new EntityPredicateCondition(input -> IAntiEntity.class.isAssignableFrom(input))),
+				new Page(13, NecronomiconResources.EVIL_ANIMALS, NecronomiconText.ENTITY_EVIL_ANIMALS_1, new MultiEntityCondition(EntityEvilChicken.class, EntityEvilCow.class, EntityEvilpig.class, EntityEvilSheep.class)),
+				new Page(14, NecronomiconText.ENTITY_EVIL_ANIMALS_2, new MultiEntityCondition(EntityEvilChicken.class, EntityEvilCow.class, EntityEvilpig.class, EntityEvilSheep.class)),
+				new Page(15, NecronomiconResources.LESSER_SHOGGOTH, NecronomiconText.ENTITY_LESSER_SHOGGOTH_1, new EntityCondition(EntityLesserShoggoth.class)),
+				new Page(16, NecronomiconText.ENTITY_LESSER_SHOGGOTH_2, new EntityCondition(EntityLesserShoggoth.class)));
 		addPages("overworld", "specialmaterials", new Page(1, new CraftingStack(ACBlocks.coralium_infused_stone, Blocks.STONE, Blocks.STONE, Blocks.STONE, ACItems.coralium_gem_cluster_3,
 				ACItems.coralium_gem_cluster_3, ACItems.coralium_gem_cluster_3, Blocks.STONE, Blocks.STONE, Blocks.STONE),
 				NecronomiconText.CRAFTING_CORALIUM_INFUSED_STONE_1),
@@ -218,8 +249,8 @@ public class InternalNecroDataHandler extends DummyNecroDataHandler {
 				new Page(4, NecronomiconText.CRAFTING_SHADOW_GEM_2),
 				new Page(5, new CraftingStack(ACItems.shard_of_oblivion), NecronomiconText.CRAFTING_SHARD_OF_OBLIVION),
 				new Page(6, new CraftingStack(ACItems.gateway_key), NecronomiconText.CRAFTING_GATEWAY_KEY),
-				new Page(7, new CraftingStack(new ItemStack(ACItems.skin, 1, 0)), NecronomiconText.CRAFTING_SKIN_OF_THE_ABYSSAL_WASTELAND_1),
-				new Page(8, new CraftingStack(ACItems.abyssal_wasteland_necronomicon), NecronomiconText.CRAFTING_NECRONOMICON_C));
+				new Page(7, new CraftingStack(new ItemStack(ACItems.skin, 1, 0)), NecronomiconText.CRAFTING_SKIN_OF_THE_ABYSSAL_WASTELAND_1, new DimensionCondition(ACLib.abyssal_wasteland_id)),
+				new Page(8, new CraftingStack(ACItems.abyssal_wasteland_necronomicon), NecronomiconText.CRAFTING_NECRONOMICON_C, new DimensionCondition(ACLib.abyssal_wasteland_id)));
 		addPages("overworld", "armortools", new Page(1, new CraftingStack(ACItems.staff_of_rending), NecronomiconText.CRAFTING_STAFF_OF_RENDING_1),
 				new Page(2, NecronomiconText.CRAFTING_STAFF_OF_RENDING_2));
 		addPages("abyssalwasteland", "materials", new Page(1, new ItemStack(ACBlocks.abyssal_stone), NecronomiconText.MATERIAL_ABYSSAL_STONE_1),
@@ -239,28 +270,28 @@ public class InternalNecroDataHandler extends DummyNecroDataHandler {
 		addPages("abyssalwasteland", "progression", new Page(1, NecronomiconText.PROGRESSION_ABYSSAL_1),
 				new Page(2, NecronomiconText.PROGRESSION_ABYSSAL_2),
 				new Page(3, NecronomiconText.PROGRESSION_ABYSSAL_3));
-		addPages("abyssalwasteland", "entities", new Page(1, NecronomiconResources.ABYSSAL_ZOMBIE, NecronomiconText.ENTITY_ABYSSAL_ZOMBIE_1),
-				new Page(2, NecronomiconText.ENTITY_ABYSSAL_ZOMBIE_2),
-				new Page(3, NecronomiconResources.DEPTHS_GHOUL, NecronomiconText.ENTITY_DEPTHS_GHOUL_1),
-				new Page(4, NecronomiconText.ENTITY_DEPTHS_GHOUL_2),
-				new Page(5, NecronomiconResources.SKELETON_GOLIATH, NecronomiconText.ENTITY_SKELETON_GOLIATH_1),
-				new Page(6, NecronomiconText.ENTITY_SKELETON_GOLIATH_2),
-				new Page(7, NecronomiconResources.SPECTRAL_DRAGON, NecronomiconText.ENTITY_SPECTRAL_DRAGON_1),
-				new Page(8, NecronomiconText.ENTITY_SPECTRAL_DRAGON_2),
+		addPages("abyssalwasteland", "entities", new Page(1, NecronomiconResources.ABYSSAL_ZOMBIE, NecronomiconText.ENTITY_ABYSSAL_ZOMBIE_1, new EntityCondition(EntityAbyssalZombie.class)),
+				new Page(2, NecronomiconText.ENTITY_ABYSSAL_ZOMBIE_2, new EntityCondition(EntityAbyssalZombie.class)),
+				new Page(3, NecronomiconResources.DEPTHS_GHOUL, NecronomiconText.ENTITY_DEPTHS_GHOUL_1, new EntityCondition(EntityDepthsGhoul.class)),
+				new Page(4, NecronomiconText.ENTITY_DEPTHS_GHOUL_2, new EntityCondition(EntityDepthsGhoul.class)),
+				new Page(5, NecronomiconResources.SKELETON_GOLIATH, NecronomiconText.ENTITY_SKELETON_GOLIATH_1, new EntityCondition(EntitySkeletonGoliath.class)),
+				new Page(6, NecronomiconText.ENTITY_SKELETON_GOLIATH_2, new EntityCondition(EntitySkeletonGoliath.class)),
+				new Page(7, NecronomiconResources.SPECTRAL_DRAGON, NecronomiconText.ENTITY_SPECTRAL_DRAGON_1, new EntityCondition(EntityDragonMinion.class)),
+				new Page(8, NecronomiconText.ENTITY_SPECTRAL_DRAGON_2, new EntityCondition(EntityDragonMinion.class)),
 				new Page(9, NecronomiconResources.ASORAH, NecronomiconText.ENTITY_ASORAH_1),
 				new Page(10, NecronomiconText.ENTITY_ASORAH_2),
-				new Page(11, NecronomiconResources.CORALIUM_INFESTED_SQUID, NecronomiconText.ENTITY_CORALIUM_INFESTED_SQUID_1),
-				new Page(12, NecronomiconText.ENTITY_CORALIUM_INFESTED_SQUID_2),
-				new Page(13, NecronomiconResources.LESSER_SHOGGOTH_ABYSSAL, NecronomiconText.ENTITY_LESSER_SHOGGOTH_1),
-				new Page(14, NecronomiconText.ENTITY_LESSER_SHOGGOTH_2));
+				new Page(11, NecronomiconResources.CORALIUM_INFESTED_SQUID, NecronomiconText.ENTITY_CORALIUM_INFESTED_SQUID_1, new EntityCondition(EntityCoraliumSquid.class)),
+				new Page(12, NecronomiconText.ENTITY_CORALIUM_INFESTED_SQUID_2, new EntityCondition(EntityCoraliumSquid.class)),
+				new Page(13, NecronomiconResources.LESSER_SHOGGOTH_ABYSSAL, NecronomiconText.ENTITY_LESSER_SHOGGOTH_1, new EntityCondition(EntityLesserShoggoth.class)),
+				new Page(14, NecronomiconText.ENTITY_LESSER_SHOGGOTH_2, new EntityCondition(EntityLesserShoggoth.class)));
 		addPages("abyssalwasteland", "specialmaterials", new Page(1, new CraftingStack(ACItems.powerstone_tracker),
 				NecronomiconText.CRAFTING_POWERSTONE_TRACKER),
 				new Page(3, new CraftingStack(ACBlocks.transmutator_idle), NecronomiconText.CRAFTING_TRANSMUTATOR_1),
 				new Page(4, NecronomiconText.CRAFTING_TRANSMUTATOR_2),
 				new Page(5, new CraftingStack(ACItems.chunk_of_coralium), NecronomiconText.CRAFTING_CORALIUM_CHUNK),
 				new Page(6, new CraftingStack(ACItems.coralium_plate), NecronomiconText.CRAFTING_CORALIUM_PLATE),
-				new Page(7, new CraftingStack(new ItemStack(ACItems.skin, 1, 1)), NecronomiconText.CRAFTING_SKIN_OF_THE_DREADLANDS_1),
-				new Page(8, new CraftingStack(ACItems.dreadlands_necronomicon), NecronomiconText.CRAFTING_NECRONOMICON_D));
+				new Page(7, new CraftingStack(new ItemStack(ACItems.skin, 1, 1)), NecronomiconText.CRAFTING_SKIN_OF_THE_DREADLANDS_1, new DimensionCondition(ACLib.dreadlands_id)),
+				new Page(8, new CraftingStack(ACItems.dreadlands_necronomicon), NecronomiconText.CRAFTING_NECRONOMICON_D, new DimensionCondition(ACLib.dreadlands_id)));
 		addPages("abyssalwasteland", "armortools", new Page(1, new CraftingStack(ACItems.plated_coralium_helmet),
 				NecronomiconText.CRAFTING_PLATED_CORALIUM_HELMET),
 				new Page(2, new CraftingStack(ACItems.plated_coralium_chestplate), NecronomiconText.CRAFTING_PLATED_CORALIUM_CHESTPLATE),
@@ -282,26 +313,26 @@ public class InternalNecroDataHandler extends DummyNecroDataHandler {
 		addPages("dreadlands", "progression", new Page(1, NecronomiconText.PROGRESSION_DREADLANDS_1),
 				new Page(2, NecronomiconText.PROGRESSION_DREADLANDS_2),
 				new Page(3, NecronomiconText.PROGRESSION_DREADLANDS_3));
-		addPages("dreadlands", "entities", new Page(1, NecronomiconResources.ABYSSALNITE_GOLEM, NecronomiconText.ENTITY_ABYSSALNITE_GOLEM_1),
-				new Page(2, NecronomiconText.ENTITY_ABYSSALNITE_GOLEM_2),
-				new Page(3, NecronomiconResources.DREADED_ABYSSALNITE_GOLEM, NecronomiconText.ENTITY_DREADED_ABYSSALNITE_GOLEM_1),
-				new Page(4, NecronomiconText.ENTITY_DREADED_ABYSSALNITE_GOLEM_2),
-				new Page(5, NecronomiconResources.DREADLING, NecronomiconText.ENTITY_DREADLING_1),
-				new Page(6, NecronomiconText.ENTITY_DREADLING_2),
-				new Page(7, NecronomiconResources.DREAD_SPAWN, NecronomiconText.ENTITY_DREAD_SPAWN_1),
-				new Page(8, NecronomiconText.ENTITY_DREAD_SPAWN_2),
-				new Page(9, NecronomiconResources.DEMON_ANIMALS, NecronomiconText.ENTITY_DEMON_ANIMALS_1),
-				new Page(10, NecronomiconText.ENTITY_DEMON_ANIMALS_2),
-				new Page(11, NecronomiconResources.SPAWN_OF_CHAGAROTH, NecronomiconText.ENTITY_SPAWN_OF_CHAGAROTH_1),
-				new Page(12, NecronomiconText.ENTITY_SPAWN_OF_CHAGAROTH_2),
-				new Page(13, NecronomiconResources.FIST_OF_CHAGAROTH, NecronomiconText.ENTITY_FIST_OF_CHAGAROTH_1),
-				new Page(14, NecronomiconText.ENTITY_FIST_OF_CHAGAROTH_2),
-				new Page(15, NecronomiconResources.DREADGUARD, NecronomiconText.ENTITY_DREADGUARD_1),
-				new Page(16, NecronomiconText.ENTITY_DREADGUARD_2),
+		addPages("dreadlands", "entities", new Page(1, NecronomiconResources.ABYSSALNITE_GOLEM, NecronomiconText.ENTITY_ABYSSALNITE_GOLEM_1, new EntityCondition(EntityAbygolem.class)),
+				new Page(2, NecronomiconText.ENTITY_ABYSSALNITE_GOLEM_2, new EntityCondition(EntityAbygolem.class)),
+				new Page(3, NecronomiconResources.DREADED_ABYSSALNITE_GOLEM, NecronomiconText.ENTITY_DREADED_ABYSSALNITE_GOLEM_1, new EntityCondition(EntityDreadgolem.class)),
+				new Page(4, NecronomiconText.ENTITY_DREADED_ABYSSALNITE_GOLEM_2, new EntityCondition(EntityDreadgolem.class)),
+				new Page(5, NecronomiconResources.DREADLING, NecronomiconText.ENTITY_DREADLING_1, new EntityCondition(EntityDreadling.class)),
+				new Page(6, NecronomiconText.ENTITY_DREADLING_2, new EntityCondition(EntityDreadling.class)),
+				new Page(7, NecronomiconResources.DREAD_SPAWN, NecronomiconText.ENTITY_DREAD_SPAWN_1, new MultiEntityCondition(EntityDreadSpawn.class, EntityGreaterDreadSpawn.class, EntityLesserDreadbeast.class)),
+				new Page(8, NecronomiconText.ENTITY_DREAD_SPAWN_2, new MultiEntityCondition(EntityDreadSpawn.class, EntityGreaterDreadSpawn.class, EntityLesserDreadbeast.class)),
+				new Page(9, NecronomiconResources.DEMON_ANIMALS, NecronomiconText.ENTITY_DEMON_ANIMALS_1, new EntityPredicateCondition(input -> EntityDemonAnimal.class.isAssignableFrom(input))),
+				new Page(10, NecronomiconText.ENTITY_DEMON_ANIMALS_2, new EntityPredicateCondition(input -> EntityDemonAnimal.class.isAssignableFrom(input))),
+				new Page(11, NecronomiconResources.SPAWN_OF_CHAGAROTH, NecronomiconText.ENTITY_SPAWN_OF_CHAGAROTH_1, new EntityCondition(EntityChagarothSpawn.class)),
+				new Page(12, NecronomiconText.ENTITY_SPAWN_OF_CHAGAROTH_2, new EntityCondition(EntityChagarothSpawn.class)),
+				new Page(13, NecronomiconResources.FIST_OF_CHAGAROTH, NecronomiconText.ENTITY_FIST_OF_CHAGAROTH_1, new EntityCondition(EntityChagarothFist.class)),
+				new Page(14, NecronomiconText.ENTITY_FIST_OF_CHAGAROTH_2, new EntityCondition(EntityChagarothFist.class)),
+				new Page(15, NecronomiconResources.DREADGUARD, NecronomiconText.ENTITY_DREADGUARD_1, new EntityCondition(EntityDreadguard.class)),
+				new Page(16, NecronomiconText.ENTITY_DREADGUARD_2, new EntityCondition(EntityDreadguard.class)),
 				new Page(17, NecronomiconResources.CHAGAROTH, NecronomiconText.ENTITY_CHAGAROTH_1),
 				new Page(18, NecronomiconText.ENTITY_CHAGAROTH_2),
-				new Page(19, NecronomiconResources.LESSER_SHOGGOTH_DREADED, NecronomiconText.ENTITY_LESSER_SHOGGOTH_1),
-				new Page(20, NecronomiconText.ENTITY_LESSER_SHOGGOTH_2));
+				new Page(19, NecronomiconResources.LESSER_SHOGGOTH_DREADED, NecronomiconText.ENTITY_LESSER_SHOGGOTH_1, new EntityCondition(EntityLesserShoggoth.class)),
+				new Page(20, NecronomiconText.ENTITY_LESSER_SHOGGOTH_2, new EntityCondition(EntityLesserShoggoth.class)));
 		addPages("dreadlands", "specialmaterials", new Page(1, new CraftingStack(ACBlocks.block_of_dreadium), NecronomiconText.CRAFTING_DREADIUM_1),
 				new Page(2, NecronomiconText.CRAFTING_DREADIUM_2),
 				new Page(3, new CraftingStack(ACBlocks.crystallizer_idle), NecronomiconText.CRAFTING_CRYSTALLIZER_1),
@@ -310,8 +341,8 @@ public class InternalNecroDataHandler extends DummyNecroDataHandler {
 				new Page(6, new CraftingStack(ACItems.dreadium_plate), NecronomiconText.CRAFTING_DREADIUM_PLATE),
 				new Page(7, new CraftingStack(ACItems.dreadium_katana_hilt), NecronomiconText.CRAFTING_DREADIUM_HILT),
 				new Page(8, new CraftingStack(ACItems.dreadium_katana_blade), NecronomiconText.CRAFTING_DREADIUM_BLADE),
-				new Page(9, new CraftingStack(new ItemStack(ACItems.skin, 1, 2)), NecronomiconText.CRAFTING_SKIN_OF_OMOTHOL_1),
-				new Page(10, new CraftingStack(ACItems.omothol_necronomicon), NecronomiconText.CRAFTING_NECRONOMICON_O));
+				new Page(9, new CraftingStack(new ItemStack(ACItems.skin, 1, 2)), NecronomiconText.CRAFTING_SKIN_OF_OMOTHOL_1, new DimensionCondition(ACLib.omothol_id)),
+				new Page(10, new CraftingStack(ACItems.omothol_necronomicon), NecronomiconText.CRAFTING_NECRONOMICON_O, new DimensionCondition(ACLib.omothol_id)));
 		addPages("dreadlands", "armortools", new Page(1, new CraftingStack(ACItems.dreadium_samurai_helmet),
 				NecronomiconText.CRAFTING_DREADIUM_SAMURAI_HELMET),
 				new Page(2, new CraftingStack(ACItems.dreadium_samurai_chestplate), NecronomiconText.CRAFTING_DREADIUM_SAMURAI_CHESTPLATE),
@@ -328,16 +359,16 @@ public class InternalNecroDataHandler extends DummyNecroDataHandler {
 				new Page(2, NecronomiconText.PROGRESSION_OMOTHOL_2));
 		addPages("omothol", "entities", new Page(1, NecronomiconResources.REMNANT, NecronomiconText.ENTITY_REMNANT_1),
 				new Page(2, NecronomiconText.ENTITY_REMNANT_2),
-				new Page(3, NecronomiconResources.OMOTHOL_GHOUL, NecronomiconText.ENTITY_OMOTHOL_GHOUL_1),
-				new Page(4, NecronomiconText.ENTITY_OMOTHOL_GHOUL_2),
+				new Page(3, NecronomiconResources.OMOTHOL_GHOUL, NecronomiconText.ENTITY_OMOTHOL_GHOUL_1, new EntityCondition(EntityOmotholGhoul.class)),
+				new Page(4, NecronomiconText.ENTITY_OMOTHOL_GHOUL_2, new EntityCondition(EntityOmotholGhoul.class)),
 				new Page(5, NecronomiconResources.OMOTHOL_WARDEN, NecronomiconText.ENTITY_OMOTHOL_WARDEN_1),
 				new Page(6, NecronomiconText.ENTITY_OMOTHOL_WARDEN_2),
-				new Page(7, NecronomiconResources.MINION_OF_THE_GATEKEEPER, NecronomiconText.ENTITY_MINION_OF_THE_GATEKEEPER_1),
-				new Page(8, NecronomiconText.ENTITY_MINION_OF_THE_GATEKEEPER_2),
+				new Page(7, NecronomiconResources.MINION_OF_THE_GATEKEEPER, NecronomiconText.ENTITY_MINION_OF_THE_GATEKEEPER_1, new EntityCondition(EntityGatekeeperMinion.class)),
+				new Page(8, NecronomiconText.ENTITY_MINION_OF_THE_GATEKEEPER_2, new EntityCondition(EntityGatekeeperMinion.class)),
 				new Page(9, NecronomiconResources.JZAHAR, NecronomiconText.ENTITY_JZAHAR_1),
 				new Page(10, NecronomiconText.ENTITY_JZAHAR_2),
-				new Page(11, NecronomiconResources.LESSER_SHOGGOTH_OMOTHOL, NecronomiconText.ENTITY_LESSER_SHOGGOTH_1),
-				new Page(12, NecronomiconText.ENTITY_LESSER_SHOGGOTH_2));
+				new Page(11, NecronomiconResources.LESSER_SHOGGOTH_OMOTHOL, NecronomiconText.ENTITY_LESSER_SHOGGOTH_1, new EntityCondition(EntityLesserShoggoth.class)),
+				new Page(12, NecronomiconText.ENTITY_LESSER_SHOGGOTH_2, new EntityCondition(EntityLesserShoggoth.class)));
 		addPages("omothol", "specialmaterials", new Page(1, new CraftingStack(ACItems.life_crystal), NecronomiconText.CRAFTING_LIFE_CRYSTAL_1),
 				new Page(2, NecronomiconText.CRAFTING_LIFE_CRYSTAL_2),
 				new Page(3, new CraftingStack(ACItems.ethaxium_ingot, ACItems.ethaxium_brick, ACItems.ethaxium_brick, ACItems.ethaxium_brick, ACItems.ethaxium_brick,
@@ -357,18 +388,18 @@ public class InternalNecroDataHandler extends DummyNecroDataHandler {
 				new Page(2, NecronomiconText.MATERIAL_DARKSTONE_2));
 		addPages("darkrealm", "progression", new Page(1, NecronomiconText.PROGRESSION_DARK_REALM_1),
 				new Page(2, NecronomiconText.PROGRESSION_DARK_REALM_2));
-		addPages("darkrealm", "entities", new Page(1, NecronomiconResources.SHADOW_CREATURE, NecronomiconText.ENTITY_SHADOW_CREATURE_1),
-				new Page(2, NecronomiconText.ENTITY_SHADOW_CREATURE_2),
-				new Page(3, NecronomiconResources.SHADOW_MONSTER, NecronomiconText.ENTITY_SHADOW_MONSTER_1),
-				new Page(4, NecronomiconText.ENTITY_SHADOW_MONSTER_2),
-				new Page(5, NecronomiconResources.SHADOW_BEAST, NecronomiconText.ENTITY_SHADOW_BEAST_1),
-				new Page(6, NecronomiconText.ENTITY_SHADOW_BEAST_2),
+		addPages("darkrealm", "entities", new Page(1, NecronomiconResources.SHADOW_CREATURE, NecronomiconText.ENTITY_SHADOW_CREATURE_1, new EntityCondition(EntityShadowCreature.class)),
+				new Page(2, NecronomiconText.ENTITY_SHADOW_CREATURE_2, new EntityCondition(EntityShadowCreature.class)),
+				new Page(3, NecronomiconResources.SHADOW_MONSTER, NecronomiconText.ENTITY_SHADOW_MONSTER_1, new EntityCondition(EntityShadowMonster.class)),
+				new Page(4, NecronomiconText.ENTITY_SHADOW_MONSTER_2, new EntityCondition(EntityShadowMonster.class)),
+				new Page(5, NecronomiconResources.SHADOW_BEAST, NecronomiconText.ENTITY_SHADOW_BEAST_1, new EntityCondition(EntityShadowBeast.class)),
+				new Page(6, NecronomiconText.ENTITY_SHADOW_BEAST_2, new EntityCondition(EntityShadowBeast.class)),
 				new Page(7, NecronomiconResources.SHADOW_TITAN, NecronomiconText.ENTITY_SHADOW_TITAN_1),
 				new Page(8, NecronomiconText.ENTITY_SHADOW_TITAN_2),
 				new Page(9, NecronomiconResources.SACTHOTH, NecronomiconText.ENTITY_SACTHOTH_1),
 				new Page(10, NecronomiconText.ENTITY_SACTHOTH_2),
-				new Page(11, NecronomiconResources.LESSER_SHOGGOTH_SHADOW, NecronomiconText.ENTITY_LESSER_SHOGGOTH_1),
-				new Page(12, NecronomiconText.ENTITY_LESSER_SHOGGOTH_2));
+				new Page(11, NecronomiconResources.LESSER_SHOGGOTH_SHADOW, NecronomiconText.ENTITY_LESSER_SHOGGOTH_1, new EntityCondition(EntityLesserShoggoth.class)),
+				new Page(12, NecronomiconText.ENTITY_LESSER_SHOGGOTH_2, new EntityCondition(EntityLesserShoggoth.class)));
 		addPages("rituals", "gettingstarted", new Page(1, NecronomiconResources.RITUAL_TUT_1, NecronomiconText.RITUAL_TUT_1),
 				new Page(2, NecronomiconText.RITUAL_TUT_2),
 				new Page(3, NecronomiconResources.RITUAL_TUT_2, NecronomiconText.RITUAL_TUT_3),
@@ -386,7 +417,8 @@ public class InternalNecroDataHandler extends DummyNecroDataHandler {
 				new Page(5, new CraftingStack(ACBlocks.sacrificial_altar), NecronomiconText.CRAFTING_SACRIFICIAL_ALTAR_1),
 				new Page(6, NecronomiconText.CRAFTING_SACRIFICIAL_ALTAR_2),
 				new Page(7, new CraftingStack(ACBlocks.energy_collector), NecronomiconText.CRAFTING_ENERGY_COLLECTOR),
-				new Page(8, new CraftingStack(ACBlocks.energy_relay), NecronomiconText.CRAFTING_ENERGY_RELAY));
+				new Page(8, new CraftingStack(ACBlocks.energy_relay), NecronomiconText.CRAFTING_ENERGY_RELAY),
+				new Page(9, new CraftingStack(ACBlocks.rending_pedestal), NecronomiconText.CRAFTING_RENDING_PEDESTAL));
 		addPages("rituals", "potentialenergy", new Page(1, NecronomiconText.PE_TUT_1),
 				new Page(2, NecronomiconResources.PE_TUT_1, NecronomiconText.PE_TUT_2),
 				new Page(3, NecronomiconResources.PE_TUT_2, NecronomiconText.PE_TUT_3),

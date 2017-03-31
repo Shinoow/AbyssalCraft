@@ -100,7 +100,7 @@ public class EntityDragonBoss extends EntityMob implements IEntityMultiPart, ICo
 		super(par1World);
 		dragonPartArray = new EntityDragonPart[] {dragonPartHead = new EntityDragonPart(this, "head", 9.0F, 9.0F), dragonPartBody = new EntityDragonPart(this, "body", 12.0F, 12.0F), dragonPartTail1 = new EntityDragonPart(this, "tail", 6.0F, 6.0F), dragonPartTail2 = new EntityDragonPart(this, "tail", 6.0F, 6.0F), dragonPartTail3 = new EntityDragonPart(this, "tail", 6.0F, 6.0F), dragonPartWing1 = new EntityDragonPart(this, "wing", 6.0F, 6.0F), dragonPartWing2 = new EntityDragonPart(this, "wing", 6.0F, 6.0F)};
 		setHealth(getMaxHealth());
-		setSize(24.0F, 12.0F);
+		setSize(23.0F, 10.0F);
 		noClip = false;
 		targetY = 100.0D;
 		ignoreFrustumCheck = true;
@@ -351,7 +351,7 @@ public class EntityDragonBoss extends EntityMob implements IEntityMultiPart, ICo
 			dragonPartBody.width = 7.5F;
 			dragonPartWing1.height = 3.0F;
 			dragonPartWing1.width = 6.0F;
-			dragonPartWing2.height = 4.5F;
+			dragonPartWing2.height = 3.0F;
 			dragonPartWing2.width = 6.0F;
 			f1 = (float)(getMovementOffsets(5, 1.0F)[1] - getMovementOffsets(10, 1.0F)[1]) * 10.0F / 180.0F * (float)Math.PI;
 			f2 = MathHelper.cos(f1);
@@ -360,11 +360,11 @@ public class EntityDragonBoss extends EntityMob implements IEntityMultiPart, ICo
 			float f11 = MathHelper.sin(f10);
 			float f12 = MathHelper.cos(f10);
 			dragonPartBody.onUpdate();
-			dragonPartBody.setLocationAndAngles(posX + f11 * 0.5F, posY, posZ - f12 * 0.5F, 0.0F, 0.0F);
+			dragonPartBody.setLocationAndAngles(posX + f11 * 1.5F, posY, posZ - f12 * 1.5F, 0.0F, 0.0F);
 			dragonPartWing1.onUpdate();
-			dragonPartWing1.setLocationAndAngles(posX + f12 * 4.5F, posY + 2.0D, posZ + f11 * 4.5F, 0.0F, 0.0F);
+			dragonPartWing1.setLocationAndAngles(posX + f12 * 6.5F, posY + 2.0D, posZ + f11 * 6.5F, 0.0F, 0.0F);
 			dragonPartWing2.onUpdate();
-			dragonPartWing2.setLocationAndAngles(posX - f12 * 4.5F, posY + 2.0D, posZ - f11 * 4.5F, 0.0F, 0.0F);
+			dragonPartWing2.setLocationAndAngles(posX - f12 * 6.5F, posY + 2.0D, posZ - f11 * 6.5F, 0.0F, 0.0F);
 
 			if (!worldObj.isRemote && hurtTime == 0)
 			{
@@ -378,7 +378,7 @@ public class EntityDragonBoss extends EntityMob implements IEntityMultiPart, ICo
 			f3 = MathHelper.sin(rotationYaw * (float)Math.PI / 180.0F - randomYawVelocity * 0.01F);
 			float f13 = MathHelper.cos(rotationYaw * (float)Math.PI / 180.0F - randomYawVelocity * 0.01F);
 			dragonPartHead.onUpdate();
-			dragonPartHead.setLocationAndAngles(posX + f3 * 5.5F * f2, posY + (adouble1[1] - adouble[1]) * 1.0D + f9 * 5.5F, posZ - f13 * 5.5F * f2, 0.0F, 0.0F);
+			dragonPartHead.setLocationAndAngles(posX + f3 * 9.2F * f2, posY + (adouble1[1] - adouble[1]) * 1.0D + f9 * 9.2F, posZ - f13 * 9.2F * f2, 0.0F, 0.0F);
 
 			for (int j = 0; j < 3; ++j)
 			{
@@ -398,7 +398,7 @@ public class EntityDragonBoss extends EntityMob implements IEntityMultiPart, ICo
 				float f15 = MathHelper.sin(f14);
 				float f16 = MathHelper.cos(f14);
 				float f17 = 1.5F;
-				float f18 = (j + 1) * 2.0F;
+				float f18 = (j + 1) * 3.0F;
 				entitydragonpart.onUpdate();
 				entitydragonpart.setLocationAndAngles(posX - (f11 * f17 + f15 * f18) * f2, posY + (adouble2[1] - adouble[1]) * 1.0D - (f18 + f17) * f9 + 1.5D, posZ + (f12 * f17 + f16 * f18) * f2, 0.0F, 0.0F);
 			}
@@ -644,7 +644,7 @@ public class EntityDragonBoss extends EntityMob implements IEntityMultiPart, ICo
 	@Override
 	public boolean canBeCollidedWith()
 	{
-		return true;
+		return false;
 	}
 
 	@Override

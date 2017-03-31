@@ -42,7 +42,10 @@ import com.shinoow.abyssalcraft.api.necronomicon.NecroData.Page;
 import com.shinoow.abyssalcraft.client.gui.necronomicon.buttons.ButtonCategory;
 import com.shinoow.abyssalcraft.client.gui.necronomicon.buttons.ButtonNextPage;
 import com.shinoow.abyssalcraft.client.lib.GuiRenderHelper;
+import com.shinoow.abyssalcraft.common.caps.INecroDataCapability;
+import com.shinoow.abyssalcraft.common.caps.NecroDataCapabilityProvider;
 import com.shinoow.abyssalcraft.lib.NecronomiconResources;
+import com.shinoow.abyssalcraft.lib.NecronomiconText;
 
 public class GuiNecronomiconEntry extends GuiNecronomicon {
 
@@ -54,12 +57,14 @@ public class GuiNecronomiconEntry extends GuiNecronomicon {
 	private GuiNecronomicon parent;
 	private Item icon;
 	private boolean bool1, bool2, bool3, bool4, bool5, bool6, bool7;
+	private INecroDataCapability cap;
 
 	public GuiNecronomiconEntry(int bookType, NecroData nd, GuiNecronomicon gui, Item item){
 		super(bookType);
 		data = nd;
 		parent = gui;
 		icon = item;
+		cap = Minecraft.getMinecraft().thePlayer.getCapability(NecroDataCapabilityProvider.NECRO_DATA_CAP, null);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -193,49 +198,71 @@ public class GuiNecronomiconEntry extends GuiNecronomicon {
 		String text2 = "";
 		Object icon1 = null;
 		Object icon2 = null;
+		boolean locked1 = false;
+		boolean locked2 = false;
 
 		if(page1 != null){
 			text1 = page1.getText();
 			icon1 = page1.getIcon();
+			locked1 = !cap.isUnlocked(page1.getCondition()) && !Minecraft.getMinecraft().thePlayer.capabilities.isCreativeMode;
 		}
 		if(page2 != null){
 			text2 = page2.getText();
 			icon2 = page2.getIcon();
+			locked2 = !cap.isUnlocked(page2.getCondition()) && !Minecraft.getMinecraft().thePlayer.capabilities.isCreativeMode;
 		}
 
 		tooltipStack = null;
 
-		writeTexts(icon1, icon2, text1, text2);
+		writeTexts(icon1, icon2, text1, text2, locked1, locked2);
 
 		writeText(1, String.valueOf(displayNum - 1), 165, 50);
 		writeText(2, String.valueOf(displayNum), 165, 50);
 
 		if(icon1 != null){
-			if(icon1 instanceof ItemStack)
-				renderItem(k + 60, b0 + 28,(ItemStack)icon1, x, y);
+			if(icon1 instanceof ItemStack){
+				GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
+				if(locked1){
+					mc.renderEngine.bindTexture(MISSING_ITEM);
+					drawTexturedModalRect(k, b0, 0, 0, 256, 256);
+				} else {
+					mc.renderEngine.bindTexture(NecronomiconResources.ITEM);
+					drawTexturedModalRect(k, b0, 0, 0, 256, 256);
+					renderItem(k + 60, b0 + 28,(ItemStack)icon1, x, y);
+				}
+			}
 			if(icon1 instanceof ResourceLocation){
 				GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
-				mc.renderEngine.bindTexture((ResourceLocation)icon1);
+				mc.renderEngine.bindTexture(locked1 ? MISSING_PICTURE : (ResourceLocation)icon1);
 				drawTexturedModalRect(k, b0, 0, 0, 256, 256);
 			}
 			if(icon1 instanceof CraftingStack){
 				GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
-				mc.renderEngine.bindTexture(NecronomiconResources.CRAFTING);
-				drawTexturedModalRect(k, b0, 0, 0, 256, 256);
-				boolean unicode = fontRendererObj.getUnicodeFlag();
-				fontRendererObj.setUnicodeFlag(false);
-				renderItem(k + 93, b0 + 52,((CraftingStack)icon1).getOutput(), x, y);
-				fontRendererObj.setUnicodeFlag(unicode);
-				for(int i = 0; i <= 2; i++){
-					renderItem(k + 24 +i*21, b0 + 31,((CraftingStack)icon1).getFirstArray()[i], x, y);
-					renderItem(k + 24 +i*21, b0 + 52,((CraftingStack)icon1).getSecondArray()[i], x, y);
-					renderItem(k + 24 +i*21, b0 + 73,((CraftingStack)icon1).getThirdArray()[i], x, y);
+				if(locked1){
+					mc.renderEngine.bindTexture(MISSING_RECIPE);
+					drawTexturedModalRect(k, b0, 0, 0, 256, 256);
+				} else {
+					mc.renderEngine.bindTexture(NecronomiconResources.CRAFTING);
+					drawTexturedModalRect(k, b0, 0, 0, 256, 256);
+					boolean unicode = fontRendererObj.getUnicodeFlag();
+					fontRendererObj.setUnicodeFlag(false);
+					renderItem(k + 93, b0 + 52,((CraftingStack)icon1).getOutput(), x, y);
+					fontRendererObj.setUnicodeFlag(unicode);
+					for(int i = 0; i <= 2; i++){
+						renderItem(k + 24 +i*21, b0 + 31,((CraftingStack)icon1).getFirstArray()[i], x, y);
+						renderItem(k + 24 +i*21, b0 + 52,((CraftingStack)icon1).getSecondArray()[i], x, y);
+						renderItem(k + 24 +i*21, b0 + 73,((CraftingStack)icon1).getThirdArray()[i], x, y);
+					}
 				}
 			}
 			if(icon1 instanceof String)
-				if(failcache.contains(icon1)){
+				if(locked1){
 					GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
-					mc.renderEngine.bindTexture(new ResourceLocation("abyssalcraft", "textures/gui/necronomicon/missing.png"));
+					mc.renderEngine.bindTexture(MISSING_PICTURE);
+					drawTexturedModalRect(k, b0, 0, 0, 256, 256);
+				} else if(failcache.contains(icon1)){
+					GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
+					mc.renderEngine.bindTexture(MISSING_PICTURE);
 					drawTexturedModalRect(k, b0, 0, 0, 256, 256);
 				} else if(successcache.get(icon1) != null){
 					GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
@@ -252,44 +279,55 @@ public class GuiNecronomiconEntry extends GuiNecronomicon {
 					GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
 					if(t != null)
 						GlStateManager.bindTexture(t.getGlTextureId());
-					else mc.renderEngine.bindTexture(new ResourceLocation("abyssalcraft", "textures/gui/necronomicon/missing.png"));
+					else mc.renderEngine.bindTexture(MISSING_PICTURE);
 					drawTexturedModalRect(k, b0, 0, 0, 256, 256);
 				}
 		}
 		if(icon2 != null){
 			int n = 123;
-			if(icon2 instanceof ItemStack)
-				renderItem(k + 60 + n, b0 + 28,(ItemStack)icon2, x, y);
+			if(icon2 instanceof ItemStack){
+				GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
+				if(locked2){
+					mc.renderEngine.bindTexture(MISSING_ITEM);
+					drawTexturedModalRect(k + n, b0, 0, 0, 256, 256);
+				} else {
+					mc.renderEngine.bindTexture(NecronomiconResources.ITEM);
+					drawTexturedModalRect(k + n, b0, 0, 0, 256, 256);
+					renderItem(k + 60 + n, b0 + 28,(ItemStack)icon2, x, y);
+				}
+			}
 			if(icon2 instanceof ResourceLocation){
 				GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
-				mc.renderEngine.bindTexture((ResourceLocation)icon2);
+				mc.renderEngine.bindTexture(locked2 ? MISSING_PICTURE : (ResourceLocation)icon2);
 				drawTexturedModalRect(k + n, b0, 0, 0, 256, 256);
 			}
 			if(icon2 instanceof CraftingStack){
 				GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
-				GlStateManager.pushMatrix();
-				GlStateManager.enableBlend();
-				GlStateManager.blendFunc(SourceFactor.SRC_ALPHA, DestFactor.ONE_MINUS_SRC_ALPHA);
-				mc.renderEngine.bindTexture(NecronomiconResources.CRAFTING);
-				drawTexturedModalRect(k + n, b0, 0, 0, 256, 256);
-				GlStateManager.enableRescaleNormal();
-				GlStateManager.enableDepth();
-				GlStateManager.popMatrix();
-				GlStateManager.disableLighting();
-				boolean unicode = fontRendererObj.getUnicodeFlag();
-				fontRendererObj.setUnicodeFlag(false);
-				renderItem(k + 93 + n, b0 + 52,((CraftingStack)icon2).getOutput(), x, y);
-				fontRendererObj.setUnicodeFlag(unicode);
-				for(int i = 0; i <= 2; i++){
-					renderItem(k + 24 + n +i*21, b0 + 31,((CraftingStack)icon2).getFirstArray()[i], x, y);
-					renderItem(k + 24 + n +i*21, b0 + 52,((CraftingStack)icon2).getSecondArray()[i], x, y);
-					renderItem(k + 24 + n +i*21, b0 + 73,((CraftingStack)icon2).getThirdArray()[i], x, y);
+				if(locked2){
+					mc.renderEngine.bindTexture(MISSING_RECIPE);
+					drawTexturedModalRect(k + n, b0, 0, 0, 256, 256);
+				} else {
+					mc.renderEngine.bindTexture(NecronomiconResources.CRAFTING);
+					drawTexturedModalRect(k + n, b0, 0, 0, 256, 256);
+					boolean unicode = fontRendererObj.getUnicodeFlag();
+					fontRendererObj.setUnicodeFlag(false);
+					renderItem(k + 93 + n, b0 + 52,((CraftingStack)icon2).getOutput(), x, y);
+					fontRendererObj.setUnicodeFlag(unicode);
+					for(int i = 0; i <= 2; i++){
+						renderItem(k + 24 + n +i*21, b0 + 31,((CraftingStack)icon2).getFirstArray()[i], x, y);
+						renderItem(k + 24 + n +i*21, b0 + 52,((CraftingStack)icon2).getSecondArray()[i], x, y);
+						renderItem(k + 24 + n +i*21, b0 + 73,((CraftingStack)icon2).getThirdArray()[i], x, y);
+					}
 				}
 			}
 			if(icon2 instanceof String)
-				if(failcache.contains(icon2)){
+				if(locked2){
 					GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
-					mc.renderEngine.bindTexture(new ResourceLocation("abyssalcraft", "textures/gui/necronomicon/missing.png"));
+					mc.renderEngine.bindTexture(MISSING_PICTURE);
+					drawTexturedModalRect(k + n, b0, 0, 0, 256, 256);
+				} else if(failcache.contains(icon2)){
+					GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
+					mc.renderEngine.bindTexture(MISSING_PICTURE);
 					drawTexturedModalRect(k + n, b0, 0, 0, 256, 256);
 				} else if(successcache.get(icon2) != null){
 					GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
@@ -306,7 +344,7 @@ public class GuiNecronomiconEntry extends GuiNecronomicon {
 					GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
 					if(t != null)
 						GlStateManager.bindTexture(t.getGlTextureId());
-					else mc.renderEngine.bindTexture(new ResourceLocation("abyssalcraft", "textures/gui/necronomicon/missing.png"));
+					else mc.renderEngine.bindTexture(MISSING_PICTURE);
 					drawTexturedModalRect(k + n, b0, 0, 0, 256, 256);
 				}
 		}
@@ -329,24 +367,24 @@ public class GuiNecronomiconEntry extends GuiNecronomicon {
 		}
 	}
 
-	private void writeTexts(Object icon1, Object icon2, String text1, String text2){
+	private void writeTexts(Object icon1, Object icon2, String text1, String text2, boolean locked1, boolean locked2){
 
 		if(icon1 != null){
 			if(icon1 instanceof ItemStack)
-				writeText(1, text1, 50);
+				writeText(1, locked1 ? NecronomiconText.TEST_95 : text1, 50, locked1);
 			if(icon1 instanceof ResourceLocation || icon1 instanceof String)
-				writeText(1, text1, 100);
+				writeText(1, locked1 ? NecronomiconText.TEST_50_1 : text1, 100, locked1);
 			if(icon1 instanceof CraftingStack)
-				writeText(1, text1, 95);
-		} else writeText(1, text1);
+				writeText(1, locked1 ? NecronomiconText.TEST_50_2 : text1, 95, locked1);
+		} else writeText(1, locked1 ? NecronomiconText.TEST : text1, locked1);
 		if(icon2 != null){
 			if(icon2 instanceof ItemStack)
-				writeText(2, text2, 50);
+				writeText(2, locked2 ? NecronomiconText.TEST_95 : text2, 50, locked2);
 			if(icon2 instanceof ResourceLocation || icon2 instanceof String)
-				writeText(2, text2, 100);
+				writeText(2, locked2 ? NecronomiconText.TEST_50_1 : text2, 100, locked2);
 			if(icon2 instanceof CraftingStack)
-				writeText(2, text2, 95);
-		} else writeText(2, text2);
+				writeText(2, locked2 ? NecronomiconText.TEST_50_2 : text2, 95, locked2);
+		} else writeText(2, locked2 ? NecronomiconText.TEST : text2, locked2);
 	}
 
 	@Override
@@ -364,7 +402,7 @@ public class GuiNecronomiconEntry extends GuiNecronomicon {
 	{
 		if(stack == null) return;
 
-		if(stack != null && stack.getItemDamage() == OreDictionary.WILDCARD_VALUE)
+		if(stack.getItemDamage() == OreDictionary.WILDCARD_VALUE)
 			stack.setItemDamage(0);
 
 		RenderItem render = Minecraft.getMinecraft().getRenderItem();

@@ -57,6 +57,7 @@ import com.shinoow.abyssalcraft.common.entity.EntityAbyssalZombie;
 import com.shinoow.abyssalcraft.init.InitHandler;
 import com.shinoow.abyssalcraft.lib.ACConfig;
 import com.shinoow.abyssalcraft.lib.ACLoot;
+import com.shinoow.abyssalcraft.lib.ACSounds;
 
 public class EntityAntiAbyssalZombie extends EntityMob implements IAntiEntity {
 
@@ -123,17 +124,6 @@ public class EntityAntiAbyssalZombie extends EntityMob implements IAntiEntity {
 		return dataManager.get(CHILD).byteValue() == 1;
 	}
 
-	@Override
-	protected float getSoundPitch()
-	{
-		float pitch;
-		if(isChild())
-			pitch = rand.nextFloat() - rand.nextFloat() * 0.2F + 1.3F;
-		else
-			pitch = 0.9F;
-		return pitch;
-	}
-
 	/**
 	 * Set whether this zombie is a child.
 	 */
@@ -157,7 +147,7 @@ public class EntityAntiAbyssalZombie extends EntityMob implements IAntiEntity {
 	@Override
 	protected SoundEvent getAmbientSound()
 	{
-		return SoundEvents.ENTITY_ZOMBIE_AMBIENT;
+		return ACSounds.abyssal_zombie_ambient;
 	}
 
 	/**
@@ -166,7 +156,7 @@ public class EntityAntiAbyssalZombie extends EntityMob implements IAntiEntity {
 	@Override
 	protected SoundEvent getHurtSound()
 	{
-		return SoundEvents.ENTITY_ZOMBIE_HURT;
+		return ACSounds.abyssal_zombie_hurt;
 	}
 
 	/**
@@ -175,7 +165,7 @@ public class EntityAntiAbyssalZombie extends EntityMob implements IAntiEntity {
 	@Override
 	protected SoundEvent getDeathSound()
 	{
-		return SoundEvents.ENTITY_ZOMBIE_DEATH;
+		return ACSounds.abyssal_zombie_death;
 	}
 
 	@Override
@@ -243,7 +233,7 @@ public class EntityAntiAbyssalZombie extends EntityMob implements IAntiEntity {
 	{
 		super.onKillEntity(par1EntityLivingBase);
 
-		if(worldObj.getDifficulty() == EnumDifficulty.NORMAL || worldObj.getDifficulty() == EnumDifficulty.HARD
+		if(worldObj.getDifficulty() == EnumDifficulty.HARD || worldObj.getDifficulty() == EnumDifficulty.NORMAL
 				&& par1EntityLivingBase instanceof EntityAntiZombie) {
 			if (rand.nextBoolean())
 				return;

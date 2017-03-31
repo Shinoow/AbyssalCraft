@@ -53,7 +53,8 @@ public class ItemCoraliumPArmor extends ItemArmor {
 	public void onArmorTick(World world, EntityPlayer player, ItemStack itemstack) {
 		if(world.isRemote) return;
 		if (itemstack.getItem() == ACItems.plated_coralium_helmet) {
-			player.addPotionEffect(new PotionEffect(MobEffects.NIGHT_VISION, 260, 0));
+			if(world.provider.isSurfaceWorld())
+				player.addPotionEffect(new PotionEffect(MobEffects.NIGHT_VISION, 260, 0));
 			if(player.getActivePotionEffect(AbyssalCraftAPI.coralium_plague) !=null)
 				player.removePotionEffect(AbyssalCraftAPI.coralium_plague);
 		}

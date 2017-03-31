@@ -115,7 +115,8 @@ public class TileEntityRitualAltar extends TileEntity implements ITickable, IRit
 				if(user != null){
 					for(ItemStack item : user.inventory.mainInventory)
 						if(item != null && item.getItem() instanceof IEnergyTransporterItem &&
-						((IEnergyTransporterItem) item.getItem()).canTransferPEExternally(item)){
+						((IEnergyTransporterItem) item.getItem()).canTransferPEExternally(item) &&
+						(item.getItem() instanceof ItemNecronomicon && ((ItemNecronomicon)item.getItem()).isOwner(user, item) || !(item.getItem() instanceof ItemNecronomicon))){
 							consumedEnergy += ((IEnergyTransporterItem) item.getItem()).consumeEnergy(item, ritual.getReqEnergy()/200);
 							break;
 						}
@@ -125,7 +126,8 @@ public class TileEntityRitualAltar extends TileEntity implements ITickable, IRit
 						if(!MinecraftForge.EVENT_BUS.post(new RitualEvent.Post(user, ritual, worldObj, pos))){
 							for(ItemStack item : user.inventory.mainInventory)
 								if(item != null && item.getItem() instanceof IEnergyTransporterItem &&
-								((IEnergyTransporterItem) item.getItem()).canTransferPEExternally(item)){
+								((IEnergyTransporterItem) item.getItem()).canTransferPEExternally(item) &&
+								(item.getItem() instanceof ItemNecronomicon && ((ItemNecronomicon)item.getItem()).isOwner(user, item) || !(item.getItem() instanceof ItemNecronomicon))){
 									consumedEnergy += ((IEnergyTransporterItem) item.getItem()).consumeEnergy(item, ritual.getReqEnergy()/200);
 									break;
 								}
@@ -270,7 +272,7 @@ public class TileEntityRitualAltar extends TileEntity implements ITickable, IRit
 
 		if(!isPerformingRitual()){
 			ItemStack item = player.getHeldItemMainhand();
-			if(item.getItem() instanceof ItemNecronomicon)
+			if(item.getItem() instanceof ItemNecronomicon && ((ItemNecronomicon)item.getItem()).isOwner(player, item))
 				if(RitualRegistry.instance().canPerformAction(world.provider.getDimension(), ((ItemNecronomicon)item.getItem()).getBookType()))
 					if(canPerform()){
 						ritual = RitualRegistry.instance().getRitual(world.provider.getDimension(), ((ItemNecronomicon)item.getItem()).getBookType(), offers, this.item);

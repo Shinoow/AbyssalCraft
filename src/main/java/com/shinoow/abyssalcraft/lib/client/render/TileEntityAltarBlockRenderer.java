@@ -13,10 +13,9 @@ package com.shinoow.abyssalcraft.lib.client.render;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
-import net.minecraft.client.renderer.OpenGlHelper;
-import net.minecraft.client.renderer.entity.RenderManager;
+import net.minecraft.client.renderer.block.model.ItemCameraTransforms;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
-import net.minecraft.entity.item.EntityItem;
+import net.minecraft.item.ItemBlock;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -44,26 +43,15 @@ public class TileEntityAltarBlockRenderer extends TileEntitySpecialRenderer {
 
 		if (altar != null && altar.getItem() != null){
 			GlStateManager.pushMatrix();
-			EntityItem entityitem = new EntityItem(te.getWorld(), 0.0D, 0.0D, 0.0D, altar.getItem());
-			entityitem.hoverStart = 0.0F;
-			altar.getItem().stackSize = 1;
+
+			boolean flag = altar.getItem().getItem() instanceof ItemBlock;
+
 			GlStateManager.rotate(180F, 1F, 0F, 0F);
-			GlStateManager.translate(0.0F, -0.78F, 0F);
+			GlStateManager.translate(0.0F, flag ? -0.62F : -0.43F, 0F);
 			GlStateManager.rotate(altar.getRotation(), 0F, 1F, 0F);
-			GlStateManager.color(1F, 1F, 1F, 1F);
-			RenderManager rm = Minecraft.getMinecraft().getRenderManager();
-			if (rm.options.fancyGraphics)
-				rm.doRenderEntity(entityitem, 0.0D, 0.0D, 0.0D, 0.0F, 0.0F, false);
-			else{
-				GlStateManager.rotate(180F, 0F, 1F, 0F);
-				rm.options.fancyGraphics = true;
-				int i = 15728880;
-				int j = i % 65536;
-				int k = i / 65536;
-				OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, j / 1.0F, k / 1.0F);
-				rm.doRenderEntity(entityitem, 0.0D, 0.0D, 0.0D, 0.0F, 0.0F, false);
-				rm.options.fancyGraphics = false;
-			}
+
+			Minecraft.getMinecraft().getRenderItem().renderItem(altar.getItem(), ItemCameraTransforms.TransformType.GROUND);
+
 			GlStateManager.popMatrix();
 		}
 

@@ -11,6 +11,7 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.common.world;
 
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
@@ -24,6 +25,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import com.shinoow.abyssalcraft.api.biome.ACBiomes;
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
+import com.shinoow.abyssalcraft.client.render.sky.ACSkyRenderer;
 import com.shinoow.abyssalcraft.lib.ACLib;
 
 public class WorldProviderOmothol extends WorldProvider {
@@ -133,6 +135,13 @@ public class WorldProviderOmothol extends WorldProvider {
 	public int getAverageGroundLevel()
 	{
 		return 50;
+	}
+
+	@SideOnly(Side.CLIENT)
+	@Override
+	public net.minecraftforge.client.IRenderHandler getSkyRenderer()
+	{
+		return new ACSkyRenderer(new ResourceLocation("abyssalcraft:textures/environment/omothol_sky.png"), 40, 30, 40);
 	}
 
 	@Override

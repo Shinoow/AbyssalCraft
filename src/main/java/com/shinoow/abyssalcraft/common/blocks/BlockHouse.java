@@ -27,14 +27,13 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.client.FMLClientHandler;
-
 import com.shinoow.abyssalcraft.api.entity.EntityUtil;
 import com.shinoow.abyssalcraft.common.structures.StructureHouse;
 
 public class BlockHouse extends Block {
 
 	Random rand;
+	int temp = 0;
 
 	public BlockHouse() {
 		super(Material.WOOD);
@@ -62,52 +61,63 @@ public class BlockHouse extends Block {
 	public boolean onBlockActivated(World par1World, BlockPos pos, IBlockState state, EntityPlayer par5EntityPlayer, EnumHand hand, ItemStack heldItem, EnumFacing side, float par7, float par8, float par9)
 	{
 		if(EntityUtil.isPlayerCoralium(par5EntityPlayer)){
-			if(par1World.isRemote)
-				FMLClientHandler.instance().getClient().ingameGUI.getChatGUI().printChatMessage(new TextComponentString("Whoppidy-doo, a house."));
 			if(!par1World.isRemote){
 				StructureHouse house = new StructureHouse();
 				house.generate(par1World, rand, pos);
 				par1World.getChunkFromBlockCoords(pos).setChunkModified();
+				return true;
 			}
-		} else{
-			if(par1World.isRemote)
-				FMLClientHandler.instance().getClient().ingameGUI.getChatGUI().printChatMessage(new TextComponentString("Whoppidy-doo, a house."));
-			if(!par1World.isRemote){
-				int x = pos.getX();
-				int y = pos.getY();
-				int z = pos.getZ();
+		} else if(!par1World.isRemote) {
+			if(par1World.rand.nextFloat() > 0.1F){
+				par5EntityPlayer.addChatMessage(new TextComponentString("Not in a dev environment, aborting structure generation test."));
 				par1World.setBlockToAir(pos);
-				par1World.setBlockState(new BlockPos(x, y, z - 1), Blocks.STONE_STAIRS.getStateFromMeta(3), 2);
-				for(int i = 0; i <= 4; i++)
-					for(int j = 0; j <= 4; j++)
-						par1World.setBlockState(new BlockPos(x -2 + i, y, z - (2 + j)), Blocks.COBBLESTONE.getDefaultState(), 2);
-				for(int i = 0; i <= 2; i++){
-					par1World.setBlockState(new BlockPos(x - 1, y + 1 + i, z - 2), Blocks.PLANKS.getDefaultState(), 2);
-					par1World.setBlockState(new BlockPos(x + 1, y + 1 + i, z - 2), Blocks.PLANKS.getDefaultState(), 2);
-					for(int j = 0; j <= 2; j++)
-						par1World.setBlockState(new BlockPos(x - 1 + j, y + 1 + i, z - 6), Blocks.PLANKS.getDefaultState(), 2);
-				} for(int i = 0; i <= 4; i++)
-					for(int j = 0; j <= 2; j++){
-						par1World.setBlockState(new BlockPos(x - 2, y + 1 + j, z - 2 - i), Blocks.PLANKS.getDefaultState(), 2);
-						par1World.setBlockState(new BlockPos(x + 2, y + 1 + j, z - 2 - i), Blocks.PLANKS.getDefaultState(), 2);
-					}
-				par1World.setBlockState(new BlockPos(x, y + 3, z - 2), Blocks.PLANKS.getDefaultState(), 2);
-				for(int i = 0; i <= 4; i++){
-					par1World.setBlockState(new BlockPos(x - 2, y + 4, z - 2 - i), Blocks.LOG.getDefaultState(), 2);
-					par1World.setBlockState(new BlockPos(x + 2, y + 4, z - 2 - i), Blocks.LOG.getDefaultState(), 2);
-				} for(int i = 0; i <= 2; i++)
-					for(int j = 0; j <= 1; j++)
-						par1World.setBlockState(new BlockPos(x - 1 + i, y + 4, z - (2 + j*4)), Blocks.LOG.getDefaultState(), 2);
-				for(int i = 0; i <= 2; i++)
-					for(int j = 0; j <= 2; j++)
-						par1World.setBlockState(new BlockPos(x -1 + i, y + 4, z - (3 + j)), Blocks.PLANKS.getDefaultState(), 2);
-				for(int i = 0; i <= 2; i++)
-					for(int j = 0; j <= 1; j++){
-						par1World.setBlockState(new BlockPos(x - 2, y + 1 + i, z - (2 + j*4)), Blocks.COBBLESTONE.getDefaultState(), 2);
-						par1World.setBlockState(new BlockPos(x + 2, y + 1 + i, z - (2 + j*4)), Blocks.COBBLESTONE.getDefaultState(), 2);
-					}
+				return true;
 			}
+
+			boolean stuff = par1World.rand.nextBoolean();
+
+			par5EntityPlayer.addChatMessage(new TextComponentString(stuff ? "Inverted house... still no windows or a door..." : "A house! Without windows! Nor a door!"));
+
+			IBlockState planks = stuff ? Blocks.COBBLESTONE.getDefaultState() : Blocks.PLANKS.getDefaultState();
+			IBlockState cobble = stuff ? Blocks.PLANKS.getDefaultState() : Blocks.COBBLESTONE.getDefaultState();
+			IBlockState stairs = stuff ? Blocks.OAK_STAIRS.getStateFromMeta(3) : Blocks.STONE_STAIRS.getStateFromMeta(3);
+			IBlockState log = stuff ? Blocks.STONE.getDefaultState() : Blocks.LOG.getDefaultState();
+
+			int x = pos.getX();
+			int y = pos.getY();
+			int z = pos.getZ();
+			par1World.setBlockToAir(pos);
+			par1World.setBlockState(new BlockPos(x, y, z - 1), stairs, 2);
+			for(int i = 0; i <= 4; i++)
+				for(int j = 0; j <= 4; j++)
+					par1World.setBlockState(new BlockPos(x -2 + i, y, z - (2 + j)), cobble, 2);
+			for(int i = 0; i <= 2; i++){
+				par1World.setBlockState(new BlockPos(x - 1, y + 1 + i, z - 2), planks, 2);
+				par1World.setBlockState(new BlockPos(x + 1, y + 1 + i, z - 2), planks, 2);
+				for(int j = 0; j <= 2; j++)
+					par1World.setBlockState(new BlockPos(x - 1 + j, y + 1 + i, z - 6), planks, 2);
+			} for(int i = 0; i <= 4; i++)
+				for(int j = 0; j <= 2; j++){
+					par1World.setBlockState(new BlockPos(x - 2, y + 1 + j, z - 2 - i), planks, 2);
+					par1World.setBlockState(new BlockPos(x + 2, y + 1 + j, z - 2 - i), planks, 2);
+				}
+			par1World.setBlockState(new BlockPos(x, y + 3, z - 2), planks, 2);
+			for(int i = 0; i <= 4; i++){
+				par1World.setBlockState(new BlockPos(x - 2, y + 4, z - 2 - i), log, 2);
+				par1World.setBlockState(new BlockPos(x + 2, y + 4, z - 2 - i), log, 2);
+			} for(int i = 0; i <= 2; i++)
+				for(int j = 0; j <= 1; j++)
+					par1World.setBlockState(new BlockPos(x - 1 + i, y + 4, z - (2 + j*4)), log, 2);
+			for(int i = 0; i <= 2; i++)
+				for(int j = 0; j <= 2; j++)
+					par1World.setBlockState(new BlockPos(x -1 + i, y + 4, z - (3 + j)), planks, 2);
+			for(int i = 0; i <= 2; i++)
+				for(int j = 0; j <= 1; j++){
+					par1World.setBlockState(new BlockPos(x - 2, y + 1 + i, z - (2 + j*4)), cobble, 2);
+					par1World.setBlockState(new BlockPos(x + 2, y + 1 + i, z - (2 + j*4)), cobble, 2);
+				}
+			return true;
 		}
-		return false;
+		return true;
 	}
 }

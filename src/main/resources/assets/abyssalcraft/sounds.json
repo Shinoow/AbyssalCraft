@@ -309,5 +309,34 @@
 			"abyssalcraft:dreadspawn/death"
 		],
 		"subtitle": "subtitle.abyssalcraft.dreadspawn.death"
+	},
+	"abyssalzombie.idle": {
+		"category": "hostile",
+		"sounds": [
+			"abyssalcraft:abyzombie/idle1",
+			"abyssalcraft:abyzombie/idle2",
+			"abyssalcraft:abyzombie/idle3",
+			"abyssalcraft:abyzombie/idle4",
+			"abyssalcraft:abyzombie/idle5"
+		],
+		"subtitle": "subtitle.abyssalcraft.abyssalzombie.idle"
+	},
+	"abyssalzombie.hit": {
+		"category": "hostile",
+		"sounds": [
+			"abyssalcraft:abyzombie/hurt1",
+			"abyssalcraft:abyzombie/hurt2",
+			"abyssalcraft:abyzombie/hurt3",
+			"abyssalcraft:abyzombie/hurt4",
+			"abyssalcraft:abyzombie/hurt5"
+		],
+		"subtitle": "subtitle.abyssalcraft.abyssalzombie.hit"
+	},
+	"abyssalzombie.death": {
+		"category": "hostile",
+		"sounds": [
+			"abyssalcraft:abyzombie/death"
+		],
+		"subtitle": "subtitle.abyssalcraft.abyssalzombie.death"
 	}
 }

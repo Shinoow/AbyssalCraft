@@ -21,6 +21,7 @@ import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.recipe.BlankRecipeWrapper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
 
 import com.google.common.collect.Maps;
@@ -62,7 +63,7 @@ public class RendingRecipeWrapper extends BlankRecipeWrapper {
 		FontRenderer fr = Minecraft.getMinecraft().fontRendererObj;
 
 		if(entry.dimension != -1){
-			fr.drawSplitString(NecronomiconText.LABEL_LOCATION + ": " + getDimension(entry.dimension), 2, 20, 180, 0);
+			fr.drawSplitString(I18n.format(NecronomiconText.LABEL_LOCATION, new Object[0]) + ": " + getDimension(entry.dimension), 2, 20, 180, 0);
 			fr.drawSplitString("Energy type: " + entry.type, 2, 40, 180, 0);
 			fr.drawSplitString(entry.description, 2, 70, 180, 0);
 		} else{

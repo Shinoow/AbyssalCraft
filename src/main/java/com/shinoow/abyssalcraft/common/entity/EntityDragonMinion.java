@@ -99,7 +99,7 @@ public class EntityDragonMinion extends EntityMob implements IEntityMultiPart, I
 		super(par1World);
 		dragonPartArray = new EntityDragonPart[] {dragonPartHead = new EntityDragonPart(this, "head", 3.0F, 3.0F), dragonPartBody = new EntityDragonPart(this, "body", 4.0F, 4.0F), dragonPartTail1 = new EntityDragonPart(this, "tail", 2.0F, 2.0F), dragonPartTail2 = new EntityDragonPart(this, "tail", 2.0F, 2.0F), dragonPartTail3 = new EntityDragonPart(this, "tail", 2.0F, 2.0F), dragonPartWing1 = new EntityDragonPart(this, "wing", 2.0F, 2.0F), dragonPartWing2 = new EntityDragonPart(this, "wing", 2.0F, 2.0F)};
 		setHealth(getMaxHealth());
-		setSize(8.0F, 4.0F);
+		setSize(8.0F, 3.0F);
 		noClip = true;
 		targetY = 100.0D;
 		isImmuneToFire = true;
@@ -323,7 +323,7 @@ public class EntityDragonMinion extends EntityMob implements IEntityMultiPart, I
 			dragonPartBody.width = 2.5F;
 			dragonPartWing1.height = 1.0F;
 			dragonPartWing1.width = 2.0F;
-			dragonPartWing2.height = 1.5F;
+			dragonPartWing2.height = 1.0F;
 			dragonPartWing2.width = 2.0F;
 			f1 = (float)(getMovementOffsets(5, 1.0F)[1] - getMovementOffsets(10, 1.0F)[1]) * 10.0F / 180.0F * (float)Math.PI;
 			f2 = MathHelper.cos(f1);
@@ -332,16 +332,16 @@ public class EntityDragonMinion extends EntityMob implements IEntityMultiPart, I
 			float f11 = MathHelper.sin(f10);
 			float f12 = MathHelper.cos(f10);
 			dragonPartBody.onUpdate();
-			dragonPartBody.setLocationAndAngles(posX + f11 * 0.5F, posY, posZ - f12 * 0.5F, 0.0F, 0.0F);
+			dragonPartBody.setLocationAndAngles(posX + f11 * 0.1F, posY, posZ - f12 * 0.1F, 0.0F, 0.0F);
 			dragonPartWing1.onUpdate();
-			dragonPartWing1.setLocationAndAngles(posX + f12 * 4.5F, posY + 2.0D, posZ + f11 * 4.5F, 0.0F, 0.0F);
+			dragonPartWing1.setLocationAndAngles(posX + f12 * 2.2F, posY + 1.0D, posZ + f11 * 2.2F, 0.0F, 0.0F);
 			dragonPartWing2.onUpdate();
-			dragonPartWing2.setLocationAndAngles(posX - f12 * 4.5F, posY + 2.0D, posZ - f11 * 4.5F, 0.0F, 0.0F);
+			dragonPartWing2.setLocationAndAngles(posX - f12 * 2.2F, posY + 1.0D, posZ - f11 * 2.2F, 0.0F, 0.0F);
 
 			if (!worldObj.isRemote && hurtTime == 0)
 			{
-				attackEntitiesInList(worldObj.getEntitiesWithinAABBExcludingEntity(this, dragonPartWing1.getEntityBoundingBox().expand(1.0D, 0.5D, 1.0D).offset(0.0D, -0.5D, 0.0D)));
-				attackEntitiesInList(worldObj.getEntitiesWithinAABBExcludingEntity(this, dragonPartWing2.getEntityBoundingBox().expand(1.0D, 0.5D, 1.0D).offset(0.0D, -0.5D, 0.0D)));
+				collideWithEntities(worldObj.getEntitiesWithinAABBExcludingEntity(this, dragonPartWing1.getEntityBoundingBox().expand(1.0D, 0.5D, 1.0D).offset(0.0D, -0.5D, 0.0D)));
+				collideWithEntities(worldObj.getEntitiesWithinAABBExcludingEntity(this, dragonPartWing2.getEntityBoundingBox().expand(1.0D, 0.5D, 1.0D).offset(0.0D, -0.5D, 0.0D)));
 				attackEntitiesInList(worldObj.getEntitiesWithinAABBExcludingEntity(this, dragonPartHead.getEntityBoundingBox().expand(0.25D, 0.25D, 0.25D)));
 			}
 
@@ -350,7 +350,7 @@ public class EntityDragonMinion extends EntityMob implements IEntityMultiPart, I
 			f3 = MathHelper.sin(rotationYaw * (float)Math.PI / 180.0F - randomYawVelocity * 0.01F);
 			float f13 = MathHelper.cos(rotationYaw * (float)Math.PI / 180.0F - randomYawVelocity * 0.01F);
 			dragonPartHead.onUpdate();
-			dragonPartHead.setLocationAndAngles(posX + f3 * 5.5F * f2, posY + (adouble1[1] - adouble[1]) * 1.0D + f9 * 5.5F, posZ - f13 * 5.5F * f2, 0.0F, 0.0F);
+			dragonPartHead.setLocationAndAngles(posX + f3 * 2.5F * f2, posY + (adouble1[1] - adouble[1]) * 1.0D + f9 * 2.5F, posZ - f13 * 2.5F * f2, 0.0F, 0.0F);
 
 			for (int j = 0; j < 3; ++j)
 			{
@@ -369,10 +369,10 @@ public class EntityDragonMinion extends EntityMob implements IEntityMultiPart, I
 				float f14 = rotationYaw * (float)Math.PI / 180.0F + simplifyAngle(adouble2[0] - adouble[0]) * (float)Math.PI / 180.0F * 1.0F;
 				float f15 = MathHelper.sin(f14);
 				float f16 = MathHelper.cos(f14);
-				float f17 = 1.5F;
-				float f18 = (j + 1) * 2.0F;
+				float f17 = 0.1F;
+				float f18 = (j + 1) * 1.5F;
 				entitydragonpart.onUpdate();
-				entitydragonpart.setLocationAndAngles(posX - (f11 * f17 + f15 * f18) * f2, posY + (adouble2[1] - adouble[1]) * 1.0D - (f18 + f17) * f9 + 1.5D, posZ + (f12 * f17 + f16 * f18) * f2, 0.0F, 0.0F);
+				entitydragonpart.setLocationAndAngles(posX - (f11 * f17 + f15 * f18) * f2, posY + (adouble2[1] - adouble[1]) * 1.0D - (f18 + f17) * f9 + 1.0D, posZ + (f12 * f17 + f16 * f18) * f2, 0.0F, 0.0F);
 			}
 		}
 	}
@@ -457,6 +457,26 @@ public class EntityDragonMinion extends EntityMob implements IEntityMultiPart, I
 		}
 	}
 
+	private void collideWithEntities(List<?> par1List)
+	{
+		double d0 = (dragonPartBody.getEntityBoundingBox().minX + dragonPartBody.getEntityBoundingBox().maxX) / 2.0D;
+		double d1 = (dragonPartBody.getEntityBoundingBox().minZ + dragonPartBody.getEntityBoundingBox().maxZ) / 2.0D;
+		Iterator<?> iterator = par1List.iterator();
+
+		while (iterator.hasNext())
+		{
+			Entity entity = (Entity)iterator.next();
+
+			if (entity instanceof EntityLivingBase)
+			{
+				double d2 = entity.posX - d0;
+				double d3 = entity.posZ - d1;
+				double d4 = d2 * d2 + d3 * d3;
+				entity.addVelocity(d2 / d4 * 4.0D, 0.20000000298023224D, d3 / d4 * 4.0D);
+			}
+		}
+	}
+
 	private void attackEntitiesInList(List<?> par1List)
 	{
 		for (int i = 0; i < par1List.size(); ++i)
@@ -507,6 +527,9 @@ public class EntityDragonMinion extends EntityMob implements IEntityMultiPart, I
 	@Override
 	public boolean attackEntityFromPart(EntityDragonPart par1EntityDragonPart, DamageSource par2DamageSource, float par3)
 	{
+		if (par1EntityDragonPart != dragonPartHead)
+			par3 = par3 / 2.0F + 1.0F;
+
 		float f1 = rotationYaw * (float)Math.PI / 180.0F;
 		float f2 = MathHelper.sin(f1);
 		float f3 = MathHelper.cos(f1);
@@ -515,13 +538,16 @@ public class EntityDragonMinion extends EntityMob implements IEntityMultiPart, I
 		targetZ = posZ - f3 * 5.0F + (rand.nextFloat() - 0.5F) * 2.0F;
 		target = null;
 
+		if (par2DamageSource.getEntity() instanceof EntityPlayer || par2DamageSource.isExplosion())
+			super.attackEntityFrom(par2DamageSource, par3);
+
 		return true;
 	}
 
 	@Override
 	public boolean attackEntityFrom(DamageSource par1DamageSource, float par2)
 	{
-		return par1DamageSource.getEntity() instanceof EntityDragonBoss ? false : super.attackEntityFrom(par1DamageSource, par2);
+		return false;
 	}
 
 	@Override
@@ -533,7 +559,7 @@ public class EntityDragonMinion extends EntityMob implements IEntityMultiPart, I
 	@Override
 	public boolean canBeCollidedWith()
 	{
-		return true;
+		return false;
 	}
 
 	@Override

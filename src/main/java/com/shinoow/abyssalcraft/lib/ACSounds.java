@@ -53,4 +53,7 @@ public class ACSounds {
 	public static SoundEvent dread_spawn_ambient;
 	public static SoundEvent dread_spawn_hurt;
 	public static SoundEvent dread_spawn_death;
+	public static SoundEvent abyssal_zombie_ambient;
+	public static SoundEvent abyssal_zombie_hurt;
+	public static SoundEvent abyssal_zombie_death;
 }

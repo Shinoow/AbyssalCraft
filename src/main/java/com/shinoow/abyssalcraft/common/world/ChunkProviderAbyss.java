@@ -373,7 +373,7 @@ public class ChunkProviderAbyss implements IChunkGenerator
 		if(ACConfig.generateShoggothLairs)
 			for(int i = 0; i < 1; i++) {
 				int Xcoord2 = rand.nextInt(16) + 8;
-				int Zcoord2 = rand.nextInt(16) + 8;
+				int Zcoord2 = rand.nextInt(16) + 14;
 				BlockPos pos1 = worldObj.getHeight(pos.add(Xcoord2, 0, Zcoord2));
 				if(worldObj.getBlockState(pos1).getMaterial() == Material.PLANTS) pos1 = pos1.down();
 

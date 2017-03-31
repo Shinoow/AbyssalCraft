@@ -14,6 +14,7 @@ package com.shinoow.abyssalcraft.common.structures.overworld;
 import java.util.Random;
 
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
+import com.shinoow.abyssalcraft.common.blocks.BlockShoggothOoze;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.math.BlockPos;
@@ -67,7 +68,7 @@ public class StructureElevatedShrine extends StructureDarklandsBase {
 						}
 					}
 				if(j > -2 && j < 2 && flag)
-					setBlockAndNotifyAdequately(worldIn, pos.add(i, 2, j), ACBlocks.shoggoth_ooze.getDefaultState());
+					setBlockAndNotifyAdequately(worldIn, pos.add(i, 2, j), ACBlocks.shoggoth_ooze.getDefaultState().withProperty(BlockShoggothOoze.LAYERS, 8));
 			}
 
 		placeStatue(worldIn, rand, pos.up(3));

@@ -204,4 +204,5 @@ public class ACBlocks {
 	public static Block coralium_cobblestone_wall;
 	public static Block luminous_thistle;
 	public static Block wastelands_thorn;
+	public static Block rending_pedestal;
 }
