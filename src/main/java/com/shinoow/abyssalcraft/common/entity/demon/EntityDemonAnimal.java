@@ -121,7 +121,7 @@ public class EntityDemonAnimal extends EntityMob implements IDreadEntity {
 				BlockPos pos = new BlockPos(i, j, k);
 
 				if (world.getBlockState(pos).getMaterial() == Material.AIR && Blocks.FIRE.canPlaceBlockAt(world, pos))
-					world.setBlockState(pos, ACBlocks.mimic_fire.getDefaultState());
+					world.setBlockState(pos, ACConfig.mimicFire ? ACBlocks.mimic_fire.getDefaultState() : Blocks.FIRE.getDefaultState());
 			}
 		}
 	}

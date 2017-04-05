@@ -66,17 +66,20 @@ public class NecroDataCapability implements INecroDataCapability {
 
 	@Override
 	public void triggerEntityUnlock(String name) {
-		entity_triggers.add(name);
+		if(name != null && !entity_triggers.contains(name) && name.contains(":"))
+			entity_triggers.add(name);
 	}
 
 	@Override
 	public void triggerBiomeUnlock(String name) {
-		biome_triggers.add(name);
+		if(name != null && !biome_triggers.contains(name))
+			biome_triggers.add(name);
 	}
 
 	@Override
 	public void triggerDimensionUnlock(int id) {
-		dimension_triggers.add(id);
+		if(!dimension_triggers.contains(id))
+			dimension_triggers.add(id);
 	}
 
 	@Override
@@ -99,6 +102,7 @@ public class NecroDataCapability implements INecroDataCapability {
 
 	@Override
 	public void copy(INecroDataCapability cap) {
+
 		biome_triggers.addAll(cap.getBiomeTriggers());
 		entity_triggers.addAll(cap.getEntityTriggers());
 		dimension_triggers.addAll(cap.getDimensionTriggers());

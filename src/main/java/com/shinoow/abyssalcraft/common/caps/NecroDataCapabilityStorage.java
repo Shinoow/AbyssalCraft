@@ -32,11 +32,13 @@ public class NecroDataCapabilityStorage implements IStorage<INecroDataCapability
 
 		NBTTagList l = new NBTTagList();
 		for(String name : instance.getEntityTriggers())
-			l.appendTag(new NBTTagString(name));
+			if(name != null)
+				l.appendTag(new NBTTagString(name));
 		properties.setTag("entityTriggers", l);
 		l = new NBTTagList();
 		for(String name : instance.getBiomeTriggers())
-			l.appendTag(new NBTTagString(name));
+			if(name != null)
+				l.appendTag(new NBTTagString(name));
 		properties.setTag("biomeTriggers", l);
 		l = new NBTTagList();
 		for(int id : instance.getDimensionTriggers())
