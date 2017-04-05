@@ -66,7 +66,7 @@ public class BlockShoggothOoze extends BlockACBasic {
 	@Override
 	public boolean isFullyOpaque(IBlockState state)
 	{
-		return state.getValue(LAYERS).intValue() == 7;
+		return state.getValue(LAYERS).intValue() == 8;
 	}
 
 	@Override
@@ -145,7 +145,8 @@ public class BlockShoggothOoze extends BlockACBasic {
 	@Override
 	public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn)
 	{
-		checkAndDropBlock(worldIn, pos, state);
+		if(state.getValue(LAYERS) < 8)
+			checkAndDropBlock(worldIn, pos, state);
 	}
 
 	private boolean checkAndDropBlock(World worldIn, BlockPos pos, IBlockState state)

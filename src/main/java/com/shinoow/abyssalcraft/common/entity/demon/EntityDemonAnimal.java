@@ -119,7 +119,7 @@ public class EntityDemonAnimal extends EntityMob implements IDreadEntity {
 				BlockPos pos = new BlockPos(i, j, k);
 
 				if (worldObj.getBlockState(pos).getMaterial() == Material.AIR && Blocks.FIRE.canPlaceBlockAt(worldObj, pos))
-					worldObj.setBlockState(pos, ACBlocks.mimic_fire.getDefaultState());
+					worldObj.setBlockState(pos, ACConfig.mimicFire ? ACBlocks.mimic_fire.getDefaultState() : Blocks.FIRE.getDefaultState());
 			}
 		}
 	}
@@ -146,7 +146,7 @@ public class EntityDemonAnimal extends EntityMob implements IDreadEntity {
 	{
 		Object data = super.onInitialSpawn(difficulty, par1EntityLivingData);
 
-		if(worldObj.provider.getDimension() == 0 && ACConfig.demonAnimalFire == true && rand.nextInt(3) == 0
+		if(worldObj.provider.getDimension() == 0 && ACConfig.demonAnimalFire && rand.nextInt(3) == 0
 				|| worldObj.provider.getDimension() == -1 && rand.nextBoolean())
 			canBurn = true;
 
