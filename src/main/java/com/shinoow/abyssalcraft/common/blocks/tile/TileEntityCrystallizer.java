@@ -311,16 +311,11 @@ public class TileEntityCrystallizer extends TileEntity implements ISidedInventor
 			if(itemstack[0] == null && itemstack[1] == null || itemstack[0] == null) return false;
 			if(crystallizerItemStacks[2] == null && crystallizerItemStacks[3] == null) return true;
 			if(itemstack[1] == null){
-				if(crystallizerItemStacks[2] == null || crystallizerItemStacks[2].isItemEqual(itemstack[0])) return true;
+				if(crystallizerItemStacks[2] == null) return true;
 				if(!crystallizerItemStacks[2].isItemEqual(itemstack[0])) return false;
 			} else {
-				if(crystallizerItemStacks[2] == null && !crystallizerItemStacks[3].isItemEqual(itemstack[1])) return false;
-				if(crystallizerItemStacks[2] == null && crystallizerItemStacks[3] == null ||
-						crystallizerItemStacks[2] == null && crystallizerItemStacks[3].isItemEqual(itemstack[1]) ||
-						crystallizerItemStacks[2].isItemEqual(itemstack[0]) && crystallizerItemStacks[3] == null && crystallizerItemStacks[2] != null ||
-						crystallizerItemStacks[2].isItemEqual(itemstack[0]) && crystallizerItemStacks[3].isItemEqual(itemstack[1])) return true;
-				if(!crystallizerItemStacks[2].isItemEqual(itemstack[0]) && crystallizerItemStacks[3] == null) return false;
-				if(!crystallizerItemStacks[2].isItemEqual(itemstack[0]) && !crystallizerItemStacks[3].isItemEqual(itemstack[1])) return false;
+				if(crystallizerItemStacks[2] != null && !crystallizerItemStacks[2].isItemEqual(itemstack[0])) return false;
+				if(crystallizerItemStacks[3] != null && !crystallizerItemStacks[3].isItemEqual(itemstack[1])) return false;
 			}
 			int result = crystallizerItemStacks[2].stackSize + itemstack[0].stackSize;
 			int result2 = crystallizerItemStacks[3].stackSize + itemstack[1].stackSize;
@@ -336,16 +331,12 @@ public class TileEntityCrystallizer extends TileEntity implements ISidedInventor
 		if (canCrystallize())
 		{
 			ItemStack[] itemstack = CrystallizerRecipes.instance().getCrystallizationResult(crystallizerItemStacks[0]);
-			Map<ItemStack, ItemStack> testList = new HashMap<ItemStack, ItemStack>();
-			testList.put(itemstack[0], itemstack[1]);
-			Iterator<?> iterator = testList.entrySet().iterator();
-
 
 			if (crystallizerItemStacks[2] == null)
 				crystallizerItemStacks[2] = itemstack[0].copy();
 			else if (crystallizerItemStacks[2].getItem() == itemstack[0].getItem())
 				crystallizerItemStacks[2].stackSize += itemstack[0].stackSize;
-			if(iterator.hasNext() && itemstack[1] != null)
+			if(itemstack[1] != null)
 				if (crystallizerItemStacks[3] == null)
 					crystallizerItemStacks[3] = itemstack[1].copy();
 				else if (crystallizerItemStacks[3].getItem() == itemstack[1].getItem())

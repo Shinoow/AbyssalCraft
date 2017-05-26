@@ -18,7 +18,10 @@ import org.apache.commons.lang3.StringUtils;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockStairs;
 import net.minecraft.enchantment.EnchantmentHelper;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.IEntityOwnable;
+import net.minecraft.entity.passive.EntityHorse;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
@@ -32,6 +35,7 @@ import net.minecraft.nbt.NBTTagList;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumParticleTypes;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.translation.I18n;
@@ -39,11 +43,13 @@ import net.minecraft.world.WorldServer;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.chunk.storage.ExtendedBlockStorage;
 import net.minecraftforge.event.AnvilUpdateEvent;
+import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.event.entity.living.EnderTeleportEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.player.EntityItemPickupEvent;
+import net.minecraftforge.event.entity.player.PlayerEvent.Clone;
 import net.minecraftforge.event.entity.player.UseHoeEvent;
 import net.minecraftforge.event.terraingen.BiomeEvent;
 import net.minecraftforge.event.terraingen.PopulateChunkEvent;
@@ -63,6 +69,7 @@ import com.shinoow.abyssalcraft.api.ritual.NecronomiconInfusionRitual;
 import com.shinoow.abyssalcraft.api.ritual.NecronomiconPotionAoERitual;
 import com.shinoow.abyssalcraft.api.ritual.NecronomiconPotionRitual;
 import com.shinoow.abyssalcraft.api.ritual.NecronomiconSummonRitual;
+import com.shinoow.abyssalcraft.common.caps.NecromancyCapabilityProvider;
 import com.shinoow.abyssalcraft.common.entity.EntityJzahar;
 import com.shinoow.abyssalcraft.common.entity.demon.EntityEvilSheep;
 import com.shinoow.abyssalcraft.common.items.ItemCrystalBag;
@@ -357,7 +364,28 @@ public class AbyssalCraftEventHooks {
 			EntityPlayer player = (EntityPlayer)event.getEntityLiving();
 			if(event.getSource().getEntity() != null && event.getSource().getEntity() instanceof EntityEvilSheep)
 				((EntityEvilSheep)event.getSource().getEntity()).setKilledPlayer(player);
+		} else if(event.getEntityLiving() instanceof IEntityOwnable){
+			EntityLivingBase e = event.getEntityLiving();
+			if(((IEntityOwnable)e).getOwner() instanceof EntityPlayer && e.hasCustomName()){
+				EntityPlayer p = (EntityPlayer)((IEntityOwnable) e).getOwner();
+				p.getCapability(NecromancyCapabilityProvider.NECROMANCY_CAP, null).storeData(e.getName(), e.serializeNBT(), calculateSize(e.height));
+			}
+		} else if(event.getEntityLiving() instanceof EntityHorse){
+			EntityHorse h = (EntityHorse)event.getEntityLiving();
+			if(h.isTame() && h.hasCustomName()){
+				EntityPlayer p = h.worldObj.getPlayerEntityByUUID(h.getOwnerUniqueId());
+				p.getCapability(NecromancyCapabilityProvider.NECROMANCY_CAP, null).storeData(h.getName(), h.serializeNBT(), calculateSize(h.height));
+			}
 		}
+	}
+
+	private int calculateSize(float height){
+		
+		if(height >= 1.5f)
+			return 2;
+		if(height >= 0.75f)
+			return 1;
+		return 0;
 	}
 
 	@SubscribeEvent
@@ -428,5 +456,16 @@ public class AbyssalCraftEventHooks {
 				event.getWorld().setBlockState(event.getPos(), Blocks.FARMLAND.getDefaultState());
 			event.setResult(Result.ALLOW);
 		}
+	}
+
+	@SubscribeEvent
+	public void attachCapability(AttachCapabilitiesEvent<Entity> event){
+		if(event.getObject() instanceof EntityPlayer)
+			event.addCapability(new ResourceLocation("abyssalcraft", "necromancy"), new NecromancyCapabilityProvider());
+	}
+
+	@SubscribeEvent
+	public void onClonePlayer(Clone event) {
+		event.getEntityPlayer().getCapability(NecromancyCapabilityProvider.NECROMANCY_CAP, null).copy(event.getOriginal().getCapability(NecromancyCapabilityProvider.NECROMANCY_CAP, null));
 	}
 }

@@ -1,0 +1,6 @@
+# Blender MTL File: 'None'
+# Material Count: 2
+
+newmtl None
+Ka 1.000000 1.000000 1.000000
+map_Kd abyssalcraft:model/staff2

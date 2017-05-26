@@ -110,7 +110,7 @@ public class AbyssalCraftWorldGenerator implements IWorldGenerator {
 		if(ACConfig.generateShoggothLairs)
 			for(int i = 0; i < 1; i++){
 				int x = chunkX + random.nextInt(16) + 8;
-				int z = chunkZ + random.nextInt(16) + 14;
+				int z = chunkZ + random.nextInt(2) + 28;
 				BlockPos pos1 = world.getHeight(new BlockPos(x, 0, z));
 				if(world.getBlockState(pos1).getMaterial() == Material.PLANTS) pos1 = pos1.down();
 				if(BiomeDictionary.isBiomeOfType(world.getBiome(pos1), Type.SWAMP) ||

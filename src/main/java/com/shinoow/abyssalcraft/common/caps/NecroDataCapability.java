@@ -102,8 +102,8 @@ public class NecroDataCapability implements INecroDataCapability {
 
 	@Override
 	public void copy(INecroDataCapability cap) {
-		biome_triggers.addAll(cap.getBiomeTriggers());
-		entity_triggers.addAll(cap.getEntityTriggers());
-		dimension_triggers.addAll(cap.getDimensionTriggers());
+		biome_triggers= cap.getBiomeTriggers();
+		entity_triggers = cap.getEntityTriggers();
+		dimension_triggers = cap.getDimensionTriggers();
 	}
 }

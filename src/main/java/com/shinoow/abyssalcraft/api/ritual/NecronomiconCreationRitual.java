@@ -105,19 +105,5 @@ public class NecronomiconCreationRitual extends NecronomiconRitual {
 	}
 
 	@Override
-	protected void completeRitualClient(World world, BlockPos pos, EntityPlayer player){
-
-		TileEntity altar = world.getTileEntity(pos);
-
-		NBTTagCompound compound = new NBTTagCompound();
-		NBTTagCompound newItem = new NBTTagCompound();
-		altar.writeToNBT(compound);
-		NBTTagCompound nbtItem = compound.getCompoundTag("Item");
-
-		if(ItemStack.loadItemStackFromNBT(nbtItem) == null || !ItemStack.loadItemStackFromNBT(nbtItem).isItemEqual(item)){
-			item.writeToNBT(newItem);
-			compound.setTag("Item", newItem);
-		}
-		altar.readFromNBT(compound);
-	}
+	protected void completeRitualClient(World world, BlockPos pos, EntityPlayer player){}
 }

@@ -1,5 +1,25 @@
 <ul>
-	<li>Fixed crashes regarding saving NBT for the NecroData Capability (also cleaned up the saving part)</li>
-	<li>Fixed some small quirks with the Shoggoth Ooze blocks</li>
-	<li>Added a config option to toggle whether or not Demon Animals should place down Mimic Fire instead of normal Fire</li>
+	<li>The Knowledge event handler shouldn't crash from trying to save the ID of an unregistered entity</li>
+	<li>Fixed a small client de-sync when draining energy for a ritual</li>
+	<li>Added a ritual that allows you to "purge" the Darklands, coverting areas of it into their Overworld counterparts</li>
+	<li>Added a ritual that allows you to "corrupt" Overworld biomes, converting areas of them into their Darklands counterparts</li>
+	<li>Added a ritual to resurrect dead companions (tamed and named)</li>
+	<li>Slowed down the spread of Mimic Fire (now it spreads about as fast as normal Fire)</li>
+	<li>Slightly more information is now locked (also overhaul of Necronomicon internals)</li>
+	<li>Changed the model of the Sacrificial Altar (so that it's easily distinguishable from the Ritual Altar)</li>
+	<li>More worldgen performance improvements in the Overworld and Dreadlands</li>
+	<li>Fixed a minor derp in the Gateway Key portal placement code and made it a bit more modular</li>
+	<li>Made some alterations to the Dread Spawn model (the "arm" is now composed of a independently moving tentacle, and the other bit has tendrils sprouting out of it)</li>
+	<li>Reduced the movement speed of Greater Dread Spawns and Lesser Dreadbeasts</li>
+	<li>The Crystallizer now stops trying to crystallize something when the output slots are full</li>
+	<li>Added Energy Depositioner (block that can generate PE by siphoning it out of Stone Tablets)</li>
+	<li>Added Stone Tablets (used in the Energy Depositioner, can also be used as alternate storage solution)</li>
+	<li>Added State Transformer (used for filling the Stone Tablets with items/energy)</li>
+	<li>Performance improvement to most PE blocks</li>
+	<li>Smoke from the pedestals during a ritual only comes from the ones that had something on them</li>
+	<li>The Staff of The Gatekeeper now works like a Staff of Rending and a Gateway Key combined</li>
+	<li>Particles from PE transfers made by statues are now synced to the transfer, instead of random</li>
+	<li>Highly optimized particle rendering for PE transfers</li>
+	<li>Changed the recipe for the Sacrificial Altar (replaced Torches with Shadow Fragments)</li>
+	<li>Upgrade Kit recipes can now be viewed in JEI</li>
 </ul>

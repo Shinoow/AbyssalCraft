@@ -47,6 +47,7 @@ import com.shinoow.abyssalcraft.api.ritual.RitualRegistry;
 import com.shinoow.abyssalcraft.common.blocks.BlockCrystalCluster.EnumCrystalType;
 import com.shinoow.abyssalcraft.common.blocks.BlockCrystalCluster2.EnumCrystalType2;
 import com.shinoow.abyssalcraft.common.disruptions.DisruptionAnimalCorruption;
+import com.shinoow.abyssalcraft.common.disruptions.DisruptionCorruption;
 import com.shinoow.abyssalcraft.common.disruptions.DisruptionDisplaceEntities;
 import com.shinoow.abyssalcraft.common.disruptions.DisruptionDrainNearbyPE;
 import com.shinoow.abyssalcraft.common.disruptions.DisruptionFire;
@@ -64,9 +65,12 @@ import com.shinoow.abyssalcraft.common.entity.EntityShadowCreature;
 import com.shinoow.abyssalcraft.common.entity.EntityShadowMonster;
 import com.shinoow.abyssalcraft.common.entity.demon.EntityEvilSheep;
 import com.shinoow.abyssalcraft.common.ritual.NecronomiconBreedingRitual;
+import com.shinoow.abyssalcraft.common.ritual.NecronomiconCleansingRitual;
+import com.shinoow.abyssalcraft.common.ritual.NecronomiconCorruptionRitual;
 import com.shinoow.abyssalcraft.common.ritual.NecronomiconDreadSpawnRitual;
 import com.shinoow.abyssalcraft.common.ritual.NecronomiconHouseRitual;
 import com.shinoow.abyssalcraft.common.ritual.NecronomiconRespawnJzaharRitual;
+import com.shinoow.abyssalcraft.common.ritual.NecronomiconResurrectionRitual;
 import com.shinoow.abyssalcraft.common.ritual.NecronomiconWeatherRitual;
 import com.shinoow.abyssalcraft.common.util.ShapedNBTRecipe;
 import com.shinoow.abyssalcraft.lib.ACConfig;
@@ -174,7 +178,7 @@ public class AbyssalCrafting {
 		GameRegistry.addRecipe(new ItemStack(ACBlocks.coralium_infused_stone, 1), new Object[] {"###", "&$%", "###", '#', Blocks.STONE, '&', ACItems.coralium_gem_cluster_2, '$', ACItems.coralium_gem_cluster_5, '%', ACItems.coralium_gem});
 		GameRegistry.addRecipe(new ItemStack(ACBlocks.coralium_infused_stone, 1), new Object[] {"###", "&$%", "###", '#', Blocks.STONE, '&', ACItems.coralium_gem_cluster_5, '$', ACItems.coralium_gem_cluster_2, '%', ACItems.coralium_gem});
 		GameRegistry.addRecipe(new ItemStack(ACBlocks.coralium_infused_stone, 1), new Object[] {"###", "#%#", "###", '#', Blocks.STONE, '%', ACItems.coralium_gem_cluster_9});
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ACBlocks.wooden_crate, 2), new Object[] {"#&#", "&%&", "#&#", '#', "stickWood", '&', "plankWood", '%', Blocks.CHEST}));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ACBlocks.wooden_crate, 2), new Object[] {"#&#", "&%&", "#&#", '#', "stickWood", '&', "plankWood", '%', "chestWood"}));
 		GameRegistry.addRecipe(new ItemStack(ACBlocks.block_of_coralium, 1), new Object[] {"###", "###", "###", '#', ACItems.refined_coralium_ingot});
 		GameRegistry.addRecipe(new ItemStack(ACBlocks.block_of_dreadium, 1), new Object[] {"###", "###", "###", '#', ACItems.dreadium_ingot});
 		ItemStack[] tran = {new ItemStack(ACItems.coralium_brick), new ItemStack(ACItems.coralium_brick), new ItemStack(ACItems.coralium_brick), new ItemStack(ACItems.coralium_brick), new ItemStack(ACItems.transmutation_gem, 1, OreDictionary.WILDCARD_VALUE),
@@ -188,7 +192,7 @@ public class AbyssalCrafting {
 		GameRegistry.addRecipe(new ShapedNBTRecipe(3, 3, mat, new ItemStack(ACBlocks.materializer)));
 		GameRegistry.addRecipe(new ItemStack(ACBlocks.energy_pedestal), new Object[]{"#%#", "#&#", "###", '#', ACBlocks.monolith_stone, '%', ACItems.coralium_pearl, '&', ACItems.shadow_gem});
 		GameRegistry.addRecipe(new ItemStack(ACBlocks.monolith_pillar), new Object[]{"##", "##", '#', ACBlocks.monolith_stone});
-		GameRegistry.addRecipe(new ItemStack(ACBlocks.sacrificial_altar), new Object[]{"#%#", "&$&", "&&&", '#', Blocks.TORCH, '%', ACItems.coralium_pearl, '$', ACItems.shadow_gem, '&', ACBlocks.monolith_stone});
+		GameRegistry.addRecipe(new ItemStack(ACBlocks.sacrificial_altar), new Object[]{"#%#", "&$&", "&&&", '#', ACItems.shadow_fragment, '%', ACItems.coralium_pearl, '$', ACItems.shadow_gem, '&', ACBlocks.monolith_stone});
 		GameRegistry.addShapelessRecipe(new ItemStack(ACBlocks.decorative_cthulhu_statue), ACBlocks.monolith_stone, Items.CLAY_BALL, new ItemStack(Items.DYE, 1, 6));
 		GameRegistry.addShapelessRecipe(new ItemStack(ACBlocks.decorative_hastur_statue), ACBlocks.monolith_stone, Items.CLAY_BALL, new ItemStack(Items.DYE, 1, 11));
 		GameRegistry.addShapelessRecipe(new ItemStack(ACBlocks.decorative_jzahar_statue), ACBlocks.monolith_stone, Items.CLAY_BALL, new ItemStack(Items.DYE, 1, 8));
@@ -199,6 +203,8 @@ public class AbyssalCrafting {
 		GameRegistry.addRecipe(new ItemStack(ACBlocks.energy_collector), new Object[] {"###", "#%#", "###", '#', ACBlocks.monolith_stone, '%', ACItems.shadow_gem});
 		GameRegistry.addRecipe(new ItemStack(ACBlocks.energy_relay), new Object[] {"##%", "#&#", "##%", '#', ACBlocks.monolith_stone, '%', ACItems.shadow_shard, '&', ACItems.shadow_gem});
 		GameRegistry.addRecipe(new ItemStack(ACBlocks.rending_pedestal), new Object[] {"#%#", "#&#", "###", '#', ACBlocks.monolith_stone, '%', ACItems.shard_of_oblivion, '&', ACItems.shadow_gem});
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ACBlocks.state_transformer), "###", "#&#", "#@#", '#', ACBlocks.monolith_stone, '&', new ItemStack(ACItems.transmutation_gem, 1, OreDictionary.WILDCARD_VALUE), '@', "chestWood"));
+		GameRegistry.addRecipe(new ItemStack(ACBlocks.energy_depositioner), "###", "%&%", "#@#", '#', ACBlocks.monolith_stone, '%', ACItems.shadow_gem, '&', new ItemStack(ACItems.transmutation_gem, 1, OreDictionary.WILDCARD_VALUE), '@', ACBlocks.energy_relay);
 	}
 
 	private static void addBlockSmelting(){
@@ -359,6 +365,7 @@ public class AbyssalCrafting {
 		GameRegistry.addRecipe(new ItemStack(ACItems.shadow_shard, 9), new Object[] {"#", '#', ACItems.shadow_gem});
 		GameRegistry.addRecipe(new ItemStack(ACItems.shadow_fragment, 9), new Object[] {"#", '#', ACItems.shadow_shard});
 		GameRegistry.addRecipe(new ItemStack(ACItems.ritual_charm, 1, 0), new Object[] {"###", "#%#", "###", '#', Items.GOLD_INGOT, '%', Items.DIAMOND});
+		GameRegistry.addRecipe(new ItemStack(ACItems.stone_tablet), "#%#", "%&%", "#%#", '#', ACItems.shadow_shard, '%', ACBlocks.monolith_stone, '&', ACItems.shadow_gem);
 
 		GameRegistry.addShapelessRecipe(new ItemStack(ACItems.life_crystal), new ItemStack(ACItems.crystal, 1, 3), new ItemStack(ACItems.crystal, 1, 5), new ItemStack(ACItems.crystal, 1, 6),
 				new ItemStack(ACItems.crystal, 1, 4), new ItemStack(ACItems.crystal, 1, 7), new ItemStack(ACItems.crystal, 1, 2));
@@ -815,6 +822,9 @@ public class AbyssalCrafting {
 		Object[] dreenchofferings = new Object[]{new ItemStack(ACItems.essence, 1, 1), new ItemStack(ACItems.shoggoth_flesh, 1, 2), ACItems.dreadium_ingot, ACItems.dread_fragment, Items.BOOK, ACItems.dread_fragment,
 				ACItems.dreadium_ingot, new ItemStack(ACItems.shoggoth_flesh, 1, 2)};
 		RitualRegistry.instance().registerRitual(new NecronomiconEnchantmentRitual("dreEnchantment", 2, ACLib.dreadlands_id, 5000F, new EnchantmentData(AbyssalCraftAPI.dread_enchantment, 1), dreenchofferings));
+		RitualRegistry.instance().registerRitual(new NecronomiconResurrectionRitual());
+		RitualRegistry.instance().registerRitual(new NecronomiconCleansingRitual());
+		RitualRegistry.instance().registerRitual(new NecronomiconCorruptionRitual());
 		Object[] cthulhuofferings = new Object[]{new ItemStack(ACItems.shoggoth_flesh, 1, 0), new ItemStack(ACItems.shoggoth_flesh, 1, 0), new ItemStack(ACItems.shoggoth_flesh, 1, 0),
 				new ItemStack(ACItems.shoggoth_flesh, 1, 0), new ItemStack(ACItems.shoggoth_flesh, 1, 0), new ItemStack(ACItems.essence, 1, 0), new ItemStack(ACItems.essence, 1, 1),
 				new ItemStack(ACItems.essence, 1, 2)};
@@ -973,6 +983,7 @@ public class AbyssalCrafting {
 		DisruptionHandler.instance().registerDisruption(new DisruptionDrainNearbyPE());
 		DisruptionHandler.instance().registerDisruption(new DisruptionSwarm("swarmSheep", DeityType.SHUBNIGGURATH, EntityEvilSheep.class, EntitySheep.class));
 		DisruptionHandler.instance().registerDisruption(new DisruptionAnimalCorruption());
+		DisruptionHandler.instance().registerDisruption(new DisruptionCorruption());
 	}
 
 	private static void addArmor(Item helmet, Item chestplate, Item pants, Item boots, Item material, Item upgrade, Item oldh, Item oldc, Item oldp, Item oldb){

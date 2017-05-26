@@ -80,7 +80,6 @@ public class AbyssalCraft {
 		InitHandler.INSTANCE.serverStart(event);
 	}
 
-	@SuppressWarnings("unchecked")
 	@EventHandler
 	public void handleIMC(FMLInterModComms.IMCEvent event){
 		IMCHandler.handleIMC(event);

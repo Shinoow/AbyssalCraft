@@ -230,5 +230,6 @@ public class ACItems {
 	 * 8 = Potassium, 9 = Nitrate, 10 = Methane, 11 = Redstone, 12 = Abyssalnite, 13 = Coralium, 14 = Dreadium, 15 = Blaze,
 	 * 16 = Tin, 17 = Copper, 18 = Silicon, 19 = Magnesium, 20 = Aluminium, 21 = Silica, 22 = Alumina, 23 = Magnesia, 24 = Zinc */
 	public static Item crystal_fragment;
+	public static Item stone_tablet;
 	//	public static Item shadow_titan_armor_plate = getItem("shadowplate");
 }

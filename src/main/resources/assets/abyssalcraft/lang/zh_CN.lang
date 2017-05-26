@@ -204,6 +204,12 @@ container.abyssalcraft.materializer=物质化器
 container.abyssalcraft.energycontainer=能量容器
 container.abyssalcraft.tieredenergycontainer=层叠能量容器
 container.abyssalcraft.rendingpedestal=撕裂基座
+container.abyssalcraft.statetransformer=State Transformer
+container.abyssalcraft.energydepositioner=Energy Depositioner
+
+#Gui Buttons
+gui.abyssalcraft.statetransformer.insert=Insert
+gui.abyssalcraft.statetransformer.extract=Extract
 
 #NEI Integration
 container.abyssalcraft.crystallizer.nei=结晶化
@@ -212,6 +218,7 @@ container.abyssalcraft.engraver.nei=钱币铸模
 container.abyssalcraft.materializer.nei=物质化
 container.abyssalcraft.rituals.nei=死灵之书仪式
 container.abyssalcraft.rending.nei=撕裂法杖
+container.abyssalcraft.upgrade.nei=Upgrade Kit
 
 #JEI Integration
 gui.acjei.category.fuel.transmutator=嬗变器燃料
@@ -257,6 +264,7 @@ necronomicon.turnupindicator=翻转 %2$s 的 %1$s
 necronomicon.miscinformation=杂项信息
 necronomicon.information.enchantments=附魔
 necronomicon.sacrifice=需要祭品
+necronomicon.information.decorativestatues=Decorative Statues
 
 #Necronomicon Text
 #Note: the maximum amount of letters per string is 368
@@ -410,11 +418,16 @@ necronomicon.text.crafting.dreadium.1=恐惧锭能通过许多方式来获得。
 necronomicon.text.crafting.dreadium.2=当你有足够的恐惧锭就能合成结晶器，你能结晶化恐惧材料来获得恐惧结晶（大多数碎片你都能结合成能被嬗变为恐惧锭的结晶）。
 necronomicon.text.crafting.monolithpillar.1=巨石柱是由巨石块合成。它的主要用途是扩大位能操纵器的范围（例如雕像）。
 necronomicon.text.crafting.ritualcharm.1=仪式符咒由金粒和一个钻石合成。单纯的符咒没有任何用途，但是通过仪式能扩展位能操纵器的不同状态。
-necronomicon.text.crafting.sacrificialaltar.1=献祭祭坛由火把，巨石块，一个阴影宝石和一个珊瑚珍珠合成。能将生命能量变为位能。
+necronomicon.text.crafting.sacrificialaltar.1=A Sacrificial Altar is crafted with Shadow Fragments, Monolith Stone, A Shadow Gem and a Coralium Pearl. They convert life-force into Potential Energy.
 necronomicon.text.crafting.sacrificialaltar.2=当一个实体被作为目标时，它会发出烟雾粒子效果。一旦这个实体死亡，将收集到与其最大生命值的等量的PE。它只将不是玩家的成年亡灵实体作为目标。应当注意的是祭坛在收集至其最大容量的五分之一后会有一段冷却时间，停止收集位能一分钟。
 necronomicon.text.crafting.energycollector=能量收集器由巨石块和阴影宝石合成。它们可以收集威能，但需要能量中继器传送。
 necronomicon.text.crafting.energyrelay=能量中继器由巨石块，阴影宝石碎片和一个阴影宝石合成。它们可以在储能方块之间传送位能。
 necronomicon.text.crafting.rendingpedestal=撕裂基座是由巨石、一个湮灭碎片和一个珊瑚珍珠合成。它们可以用于撕裂法杖的自动化。
+necronomicon.text.crafting.stonetablet=A Stone Tablet is crafted with Monolith Stone, Shadow Gem Shards and a Shadow Gem. Can be used in the State Transformer and Energy Depositioner in order to generate PE.
+necronomicon.text.crafting.statetransformer.1=A State Transformer is crafted with Monolith Stone, a Transmutation Gem and a Chest. It allows you to store input objects as PE in a Stone Tablet.
+necronomicon.text.crafting.statetransformer.2=Fill the input slots with stacks of items, then place a empty Stone Tablet in the leftmost slot to fill it. Press the button to switch modes, allowing you to reverse the process, returning items previously stored in a Stone Tablet. The amount of PE per input item is 1 * (64/max stack size) PE/item. Input/output can be automated.
+necronomicon.text.crafting.energydepositioner.1=A Energy Depositioner is crafted with Monolith Stone, Shadow Gems, a Transmutation Gem and a Energy Relay. This is a PE manipulator, working like statues.
+necronomicon.text.crafting.energydepositioner.2=By placing a charged Stone Tablet in the input slot, the Depositioner will siphon out any PE stored in it, returning either a empty Stone Tablet or a cursed one. This operation will corrupt the surrounding area (17x17 blocks), converting it into Darklands (more Darklands increases the chance of cursed Stone Tablets). Output can be automated.
 
 necronomicon.text.crafting.upgradekit.1=升级套件是由木板、圆石、线和燧石合成。升级套件可以通过铁砧升级工具和护甲。
 necronomicon.text.crafting.upgradekit.2=要升级现有的套件，你需要两单位下一阶材料和一单位当前材料。材料等级顺序为木头->圆石->铁->金->钻石->深渊锭->精炼珊瑚锭->恐惧锭->伊桑斯锭。
@@ -427,6 +440,14 @@ necronomicon.text.crafting.odb=湮灭弹是由黑曜石、一个湮灭弹核心�
 necronomicon.text.crafting.carboncluster=碳簇是由晶化碳合成。用于合成致密碳簇。
 necronomicon.text.crafting.densecarboncluster=致密碳簇是由碳簇和黑曜石合成。可嬗变为钻石。
 necronomicon.text.crafting.crate=木质板条箱是由木棍、木板和箱子合成。比箱子多一排物品栏。
+
+necronomicon.text.crafting.decorativeazathothstatue=A Decorative Azathoth Statue is crafted with Monolith Stone, Clay and Purple Dye.
+necronomicon.text.crafting.decorativecthulhustatue=A Decorative Cthulhu Statue is crafted with Monolith Stone, Clay and Cyan Dye.
+necronomicon.text.crafting.decorativehasturstatue=A Decorative Hastur Statue is crafted with Monolith Stone, Clay and Dandelion Yellow.
+necronomicon.text.crafting.decorativejzaharstatue=A Decorative J'zahar Statue is crafted with Monolith Stone, Clay and Gray Dye.
+necronomicon.text.crafting.decorativenyarlathotepstatue=A Decorative Nyarlathotep Statue is crafted with Monolith Stone, Clay and Lapis Lazuli.
+necronomicon.text.crafting.decorativeshubniggurathstatue=A Decorative Shub-Niggurath Statue is crafted with Monolith Stone, Clay and a Ink Sac.
+necronomicon.text.crafting.decorativeyogsothothstatue=A Decorative Yog-Sothoth Statue is crafted with Monolith Stone, Clay and Glowstone Dust.
 
 necronomicon.text.enchantment.coralium=珊瑚附魔使你在击中任何实体后传染珊瑚侵染（如果不免疫的话）。只能通过仪式获取。
 necronomicon.text.enchantment.dread=恐惧附魔使你在击中任何实体后传染恐惧侵染（如果不免疫的话）。只能通过仪式获取。
@@ -532,15 +553,16 @@ necronomicon.text.pe.5=你应当考虑到小型修格斯修建巨石没有数量
 necronomicon.text.pe.6=如果你发现修格斯在你家四周活动，强烈建议清空你的领地，或者建造高墙（或其他）以保证侵袭不会蔓延到你的领地上。从修格斯侵袭下收复领地相当困难，所以务必小心。
 necronomicon.text.pe.7=雕像有不同的形状，都描绘了伟大的旧日支配者。它们可以给附近在空旷的天空下拿着死灵之书的玩家传输PE。
 necronomicon.text.pe.8=需要注意的是你去收集位能并不合适。这会造成污染发生（表现为一束闪电击中雕像或其他位能操纵器）。污染是影响玩家，其它生物和环境的随机事件。目的是惩罚那些试图从更高维度抽取位能的人。
-necronomicon.text.pe.9=一个加速雕像（其它位能操纵器也是）效率的方式是使用仪式符咒。能加速不同的效果（可看工具提示）。
-necronomicon.text.pe.10=你还能合成一个能量基座，能从距其3格远的雕像（其它位能操纵器也是）收集位能，巨石柱可增加半径。
-necronomicon.text.pe.11=与能量基座一同的还有献祭祭坛，献祭祭坛能将生物（目标生物会有烟雾效果）死亡时的生命能量转变为位能。
-necronomicon.text.pe.12=另一种从操纵器收集位能的方法是使用能量收集器。它与能量基座工作方式类似（除了不能在上面放置物品）。
-necronomicon.text.pe.13=能量中继器用于传输位能，可以在任何方向上传输（但是不能穿过固体方块，除了玻璃）。
-necronomicon.text.pe.14=建立能量中继器网络使你能够远距离传送位能。能量中继器可以从相邻的位能收集器中抽取位能。
-necronomicon.text.pe.15=为了更大规模储存位能，你可以制作能量容器。它们允许能量中继器插入或者与方块互动。
-necronomicon.text.pe.16=如果位能的产生依旧很缓慢，你还能通过注入仪式升级能量基座和献祭祭坛。
-necronomicon.text.pe.17=一旦到达奥穆索，你还能创造特定神祗仪式符咒（用深渊死灵之书），或者从残存者祭司处购买。这些符咒会给予额外加速如果使用在关联了与符咒上面显示的神祗相同的操纵器上。
+necronomicon.text.pe.9=A Energy Depositioner is another PE manipulator. It works like a generator, where the "fuel" are Stone Tablets charged with PE.
+necronomicon.text.pe.10=一个加速雕像（其它位能操纵器也是）效率的方式是使用仪式符咒。能加速不同的效果（可看工具提示）。
+necronomicon.text.pe.11=你还能合成一个能量基座，能从距其3格远的雕像（其它位能操纵器也是）收集位能，巨石柱可增加半径。
+necronomicon.text.pe.12=与能量基座一同的还有献祭祭坛，献祭祭坛能将生物（目标生物会有烟雾效果）死亡时的生命能量转变为位能。
+necronomicon.text.pe.13=另一种从操纵器收集位能的方法是使用能量收集器。它与能量基座工作方式类似（除了不能在上面放置物品）。
+necronomicon.text.pe.14=能量中继器用于传输位能，可以在任何方向上传输（但是不能穿过固体方块，除了玻璃）。
+necronomicon.text.pe.15=建立能量中继器网络使你能够远距离传送位能。能量中继器可以从相邻的位能收集器中抽取位能。
+necronomicon.text.pe.16=为了更大规模储存位能，你可以制作能量容器。它们允许能量中继器插入或者与方块互动。
+necronomicon.text.pe.17=如果位能的产生依旧很缓慢，你还能通过注入仪式升级能量基座和献祭祭坛。
+necronomicon.text.pe.18=一旦到达奥穆索，你还能创造特定神祗仪式符咒（用深渊死灵之书），或者从残存者祭司处购买。这些符咒会给予额外加速如果使用在关联了与符咒上面显示的神祗相同的操纵器上。
 
 necronomicon.text.machines.info=查看信息章节来获得有关不同机器的信息，或者其他章节来获得特定机器的合成表。合成表并没有以任何方式进行分类。
 
@@ -732,6 +754,12 @@ ac.ritual.sorDLupgrade=恐惧之地撕裂法杖
 ac.ritual.sorDLupgrade.desc=恐惧之地撕裂法杖能通过将恐惧石、恐惧碎片和阴影宝石注入深渊荒芜之地撕裂法杖中获得。
 ac.ritual.sorOMTupgrade=奥穆索撕裂法杖
 ac.ritual.sorOMTupgrade.desc=奥穆索撕裂法杖能通过将奥穆索石、奥穆索腐肉和阴影宝石注入恐惧之地撕裂法杖中获得。
+ac.ritual.cleansing=Ritual of Cleansing
+ac.ritual.cleansing.desc=By presenting 8 random statues, a massive amount of energy and a living sacrifice, you revert the corruption of the Abyss from the surrounding area. With far too much power comes no responsibilities, what so ever. It purges the Darklands, restoring it to its pure Overworld state.
+ac.ritual.corruption=Ritual of Corruption
+ac.ritual.corruption.desc=By presenting 4 random statues, 4 blocks of Darkstone, a large amount of energy and a living sacrifice, you summon powers from the Abyss to corrupt the surrounding area. Defile the Overworld's purity in order to bring forth the Darklands.
+ac.ritual.resurrection=Dark Resurrection
+ac.ritual.resurrection.desc=By presenting crystalilzed compounds resembling the elements of life, a living sacrifice and a Name Tag with the name of a fallen companion, you resurrect it. The Crystal size scale with the companion (Shards for something the size of a Chicken, Clusters for a Horse, normal for anything inbetween). Life has limits, however.
 
 #Rending
 ac.rending.shadowgem=阴影宝石可以从活阴影收获阴影能量得到。
@@ -758,6 +786,10 @@ ac_worldgen=世界生成
 ac_worldgen.tooltip=世界生成设置
 ac_itemblacklist=物品实体黑名单
 ac_itemblacklist.tooltip=物品实体黑名单设置
+
+#Keybinds
+key.abyssalcraft.category=AbyssalCraft
+key.staff_mode.desc=Change Staff of The Gatekeeper Mode
 
 #Damagesources
 death.attack.coralium=%1$s 由于珊瑚侵染而死亡
@@ -795,6 +827,10 @@ tooltip.drainstaff.energy.4=阴影能量
 tooltip.gatekeeperessence.1=扎哈尔的碎片。
 tooltip.gatekeeperessence.2=你可以感觉到力量的波动。
 tooltip.decorativestatue=此方块为纯装饰，没有任何功用
+tooltip.staff.mode.1=Mode
+tooltip.staff.mode.2=Press %s to change mode
+tooltip.stonetablet.cursed=Cursed
+tooltip.stonetablet.contents=%d stacks
 
 #Creative Tabs
 itemGroup.acblocks=深渊国度方块
@@ -1013,6 +1049,8 @@ tile.coraliumcobblestonewall.name=珊瑚圆石墙
 tile.luminousthistle.name=发光蓟
 tile.wastelandsthorn.name=荒原之刺
 tile.rendingpedestal.name=撕裂基座
+tile.statetransformer.name=State Transformer
+tile.energydepositioner.name=Energy Depositioner
 
 #Pre/Postfixes
 decorativestatue.prefix=装饰用%s
@@ -1235,6 +1273,7 @@ item.engraving_yogsothoth.name=犹格•索托斯钱币铸模
 item.engraving_shubniggurath.name=莎布•尼古拉丝钱币铸模
 item.gatekeeperessence.name=守门者的精华
 item.interdimensionalcage.name=跨维度笼
+item.stonetablet.name=Stone Tablet
 
 #Entities
 entity.abyssalcraft.depthsghoul.name=深渊食尸鬼

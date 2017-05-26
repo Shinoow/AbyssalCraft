@@ -118,19 +118,16 @@ public class TileEntityEnergyContainer extends TileEntity implements IEnergyCont
 	public void addEnergy(float energy) {
 		this.energy += energy;
 		if(this.energy > getMaxEnergy()) this.energy = getMaxEnergy();
-		worldObj.notifyBlockUpdate(pos, worldObj.getBlockState(pos), worldObj.getBlockState(pos), 2);
 	}
 
 	@Override
 	public float consumeEnergy(float energy) {
 		if(energy < this.energy){
 			this.energy -= energy;
-			worldObj.notifyBlockUpdate(pos, worldObj.getBlockState(pos), worldObj.getBlockState(pos), 2);
 			return energy;
 		} else {
 			float ret = this.energy;
 			this.energy = 0;
-			worldObj.notifyBlockUpdate(pos, worldObj.getBlockState(pos), worldObj.getBlockState(pos), 2);
 			return ret;
 		}
 	}
@@ -250,12 +247,15 @@ public class TileEntityEnergyContainer extends TileEntity implements IEnergyCont
 	@Override
 	public int getField(int id) {
 
+		if(id == 0)
+			return (int) energy;
 		return 0;
 	}
 
 	@Override
 	public void setField(int id, int value) {
-
+		if(id == 0)
+			energy = value;
 	}
 
 	@Override

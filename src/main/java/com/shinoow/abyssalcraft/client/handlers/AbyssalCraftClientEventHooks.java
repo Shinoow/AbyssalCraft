@@ -14,20 +14,27 @@ package com.shinoow.abyssalcraft.client.handlers;
 import java.util.List;
 
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.RayTraceResult.Type;
 import net.minecraft.util.math.Vec3d;
+import net.minecraft.util.text.TextComponentString;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.client.event.FOVUpdateEvent;
 import net.minecraftforge.client.event.MouseEvent;
 import net.minecraftforge.fml.client.FMLClientHandler;
 import net.minecraftforge.fml.common.eventhandler.Event;
+import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.gameevent.InputEvent.KeyInputEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -35,8 +42,10 @@ import org.lwjgl.input.Mouse;
 
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.api.item.ACItems;
+import com.shinoow.abyssalcraft.client.ClientProxy;
 import com.shinoow.abyssalcraft.common.network.PacketDispatcher;
 import com.shinoow.abyssalcraft.common.network.server.FireMessage;
+import com.shinoow.abyssalcraft.common.network.server.StaffModeMessage;
 
 public class AbyssalCraftClientEventHooks {
 
@@ -168,5 +177,39 @@ public class AbyssalCraftClientEventHooks {
 				returnMOP = new RayTraceResult(pointedEntity);
 		}
 		return returnMOP;
+	}
+
+	@SubscribeEvent(priority=EventPriority.NORMAL, receiveCanceled=true)
+	public void onKeyPressed(KeyInputEvent event){
+
+		if(ClientProxy.staff_mode.isPressed()){
+			ItemStack mainStack = Minecraft.getMinecraft().thePlayer.getHeldItem(EnumHand.MAIN_HAND);
+			ItemStack offStack = Minecraft.getMinecraft().thePlayer.getHeldItem(EnumHand.OFF_HAND);
+			int mode1 = -1, mode2 = -1;
+
+			if(mainStack != null && mainStack.getItem() == ACItems.staff_of_the_gatekeeper){
+				if(mainStack.hasTagCompound())
+					mode1 = mainStack.getTagCompound().getInteger("Mode");
+				if(mode1 > -1){
+					if(mode1 == 0)
+						mode1 = 1;
+					else mode1 = 0;
+					Minecraft.getMinecraft().thePlayer.addChatMessage(new TextComponentString(I18n.format("tooltip.staff.mode.1")+": "+TextFormatting.GOLD + I18n.format(mode1 == 1 ? "item.drainstaff.normal.name" : "item.gatewaykey.name")));
+				}
+			}
+			if(offStack != null && offStack.getItem() == ACItems.staff_of_the_gatekeeper){
+				if(offStack.hasTagCompound())
+					mode2 = offStack.getTagCompound().getInteger("Mode");
+				if(mode2 > -1){
+					if(mode2 == 0)
+						mode2 = 1;
+					else mode2 = 0;
+					Minecraft.getMinecraft().thePlayer.addChatMessage(new TextComponentString(I18n.format("tooltip.staff.mode.1")+": "+TextFormatting.GOLD + I18n.format(mode2 == 1 ? "item.drainstaff.normal.name" : "item.gatewaykey.name")));
+				}
+			}
+
+			if(mode1 > -1 || mode2 > -1)
+				PacketDispatcher.sendToServer(new StaffModeMessage());
+		}
 	}
 }

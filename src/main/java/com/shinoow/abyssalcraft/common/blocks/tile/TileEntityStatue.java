@@ -165,6 +165,12 @@ public class TileEntityStatue extends TileEntity implements IEnergyManipulator, 
 	}
 
 	@Override
+	public boolean canTransferPE() {
+
+		return true;
+	}
+
+	@Override
 	public void disrupt() {
 		tolerance = 0;
 		if(!worldObj.isRemote){

@@ -80,14 +80,14 @@ public class BiomeGenCorSwamp extends Biome {
 		int var5 = 3 + par2Random.nextInt(6);
 
 		if(ACConfig.generateCoraliumOre){
-			for (int var6 = 0; var6 < var5; ++var6)
+			for (int var6 = 0; var6 < var5; var6++)
 			{
 				int var7 = par2Random.nextInt(16);
 				int var8 = par2Random.nextInt(28) + 4;
 				int var9 = par2Random.nextInt(16);
 				Block var10 = par1World.getBlockState(pos.add(var7, var8, var9)).getBlock();
 
-				if (var10 != null && var10.isReplaceableOreGen(par1World.getBlockState(pos.add(var7, var8, var9)), par1World, pos.add(var7, var8, var9), BlockMatcher.forBlock(Blocks.STONE)) || var10 == Blocks.IRON_ORE || var10 == Blocks.COAL_ORE)
+				if (var10 == Blocks.IRON_ORE || var10 == Blocks.COAL_ORE)
 					par1World.setBlockState(pos.add(var7, var8, var9), ACBlocks.coralium_ore.getDefaultState(), 2);
 			}
 			for(int rarity = 0; rarity < 6; rarity++)

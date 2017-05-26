@@ -14,6 +14,7 @@ package com.shinoow.abyssalcraft.integration.jei;
 import mezz.jei.api.*;
 import mezz.jei.api.ingredients.IModIngredientRegistration;
 import mezz.jei.api.recipe.transfer.IRecipeTransferRegistry;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.Loader;
 
@@ -29,6 +30,9 @@ import com.shinoow.abyssalcraft.integration.jei.rending.RendingRecipeHandler;
 import com.shinoow.abyssalcraft.integration.jei.rending.RendingRecipeMaker;
 import com.shinoow.abyssalcraft.integration.jei.ritual.*;
 import com.shinoow.abyssalcraft.integration.jei.transmutator.*;
+import com.shinoow.abyssalcraft.integration.jei.upgrades.UpgradeRecipeCategory;
+import com.shinoow.abyssalcraft.integration.jei.upgrades.UpgradeRecipeHandler;
+import com.shinoow.abyssalcraft.integration.jei.upgrades.UpgradeRecipeMaker;
 import com.shinoow.abyssalcraft.integration.jei.crystallizer.*;
 import com.shinoow.abyssalcraft.integration.jei.engraver.*;
 
@@ -50,7 +54,8 @@ public class ACJEIPlugin implements IModPlugin {
 				new CrystallizationCategory(guiHelper),
 				new RitualRecipeCategory(guiHelper),
 				new EngraverRecipeCategory(guiHelper),
-				new RendingRecipeCategory(guiHelper));
+				new RendingRecipeCategory(guiHelper),
+				new UpgradeRecipeCategory(guiHelper));
 
 		registry.addRecipeHandlers(new TransmutatorFuelRecipeHandler(),
 				new TransmutationRecipeHandler(),
@@ -58,7 +63,8 @@ public class ACJEIPlugin implements IModPlugin {
 				new CrystallizationRecipeHandler(),
 				new RitualRecipeHandler(),
 				new EngravingRecipeHandler(),
-				new RendingRecipeHandler());
+				new RendingRecipeHandler(),
+				new UpgradeRecipeHandler());
 
 		registry.addRecipeCategoryCraftingItem(new ItemStack(ACBlocks.transmutator_idle), AbyssalCraftRecipeCategoryUid.TRANSMUTATION,
 				AbyssalCraftRecipeCategoryUid.FUEL_TRANSMUTATION);
@@ -75,6 +81,9 @@ public class ACJEIPlugin implements IModPlugin {
 		registry.addRecipeCategoryCraftingItem(new ItemStack(ACItems.staff_of_rending, 1, 2), AbyssalCraftRecipeCategoryUid.RENDING);
 		registry.addRecipeCategoryCraftingItem(new ItemStack(ACItems.staff_of_rending, 1, 3), AbyssalCraftRecipeCategoryUid.RENDING);
 		registry.addRecipeCategoryCraftingItem(new ItemStack(ACItems.staff_of_the_gatekeeper), AbyssalCraftRecipeCategoryUid.RENDING);
+		registry.addRecipeCategoryCraftingItem(new ItemStack(Blocks.ANVIL, 1, 0), AbyssalCraftRecipeCategoryUid.UPGRADE);
+		registry.addRecipeCategoryCraftingItem(new ItemStack(Blocks.ANVIL, 1, 1), AbyssalCraftRecipeCategoryUid.UPGRADE);
+		registry.addRecipeCategoryCraftingItem(new ItemStack(Blocks.ANVIL, 1, 2), AbyssalCraftRecipeCategoryUid.UPGRADE);
 
 		IRecipeTransferRegistry recipeTransferRegistry = registry.getRecipeTransferRegistry();
 
@@ -91,6 +100,7 @@ public class ACJEIPlugin implements IModPlugin {
 		registry.addRecipes(RitualRecipeMaker.getRituals());
 		registry.addRecipes(EngravingRecipeMaker.getEngraverRecipes());
 		registry.addRecipes(RendingRecipeMaker.getRending());
+		registry.addRecipes(UpgradeRecipeMaker.getUpgrades());
 
 		jeiHelpers.getItemBlacklist().addItemToBlacklist(new ItemStack(ItemHandler.devsword));
 		jeiHelpers.getItemBlacklist().addItemToBlacklist(new ItemStack(ACBlocks.crystallizer_active));

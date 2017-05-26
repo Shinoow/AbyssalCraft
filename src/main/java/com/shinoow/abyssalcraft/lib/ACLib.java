@@ -35,6 +35,8 @@ public class ACLib {
 	public static final int energycontainerGuiID = 36;
 	public static final int necronomiconspellbookGuiID = 37;
 	public static final int rendingPedestalGuiID = 38;
+	public static final int stateTransformerGuiID = 39;
+	public static final int energyDepositionerGuiID = 40;
 
 	//Crystal stuff
 	public static final String[] crystalNames = new String[]{"Iron", "Gold", "Sulfur", "Carbon", "Oxygen", "Hydrogen", "Nitrogen", "Phosphorus",

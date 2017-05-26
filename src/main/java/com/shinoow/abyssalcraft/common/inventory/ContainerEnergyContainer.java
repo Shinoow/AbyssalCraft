@@ -20,11 +20,14 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import com.shinoow.abyssalcraft.api.energy.IEnergyContainerItem;
 import com.shinoow.abyssalcraft.common.blocks.tile.TileEntityEnergyContainer;
 
 public class ContainerEnergyContainer extends Container {
 
 	private TileEntityEnergyContainer tileEnergyContainer;
+	private int lastPE;
+
 	public ContainerEnergyContainer(InventoryPlayer par1InventoryPlayer, TileEntityEnergyContainer par2TileEntityEnergyContainer){
 		tileEnergyContainer = par2TileEntityEnergyContainer;
 		addSlotToContainer(new SlotEnergyContainer(par2TileEntityEnergyContainer, 0, 44, 38));
@@ -43,7 +46,7 @@ public class ContainerEnergyContainer extends Container {
 	public void addListener(IContainerListener listener)
 	{
 		super.addListener(listener);
-		//		par1ICrafting.sendProgressBarUpdate(this, 0, tileEnergyContainer.engraverProcessTime);
+		listener.sendProgressBarUpdate(this, 0, tileEnergyContainer.getField(0));
 	}
 
 	@Override
@@ -51,26 +54,24 @@ public class ContainerEnergyContainer extends Container {
 	{
 		super.detectAndSendChanges();
 
-		//		for (int i = 0; i < crafters.size(); ++i)
-		//		{
-		//			ICrafting icrafting = crafters.get(i);
+		int pe = tileEnergyContainer.getField(0);
 
-		//			if (lastProcessTime != tileEnergyContainer.engraverProcessTime)
-		//				icrafting.sendProgressBarUpdate(this, 0, tileEnergyContainer.engraverProcessTime);
-		//		}
+		for (int i = 0; i < listeners.size(); ++i)
+		{
+			IContainerListener icrafting = listeners.get(i);
 
-		//		lastProcessTime = tileEnergyContainer.engraverProcessTime;
+			if (lastPE != pe)
+				icrafting.sendProgressBarUpdate(this, 0, pe);
+		}
+
+		lastPE = pe;
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void updateProgressBar(int par1, int par2)
 	{
-		//		if (par1 == 0)
-		//			tileEnergyContainer.engraverProcessTime = par2;
-		//
-		//		if (par1 == 3)
-		//			tileEnergyContainer.engraverProcessTime = par2;
+		tileEnergyContainer.setField(par1, par2);
 	}
 
 	@Override
@@ -91,29 +92,26 @@ public class ContainerEnergyContainer extends Container {
 			ItemStack itemstack1 = slot.getStack();
 			itemstack = itemstack1.copy();
 
-			if (par2 == 2)
+			if (par2 == 1)
 			{
-				if (!mergeItemStack(itemstack1, 3, 39, true))
+				if (!mergeItemStack(itemstack1, 2, 38, true))
 					return null;
 
 				slot.onSlotChange(itemstack1, itemstack);
 			}
 			else if (par2 != 1 && par2 != 0)
 			{
-				//				if (EngraverRecipes.instance().getEngravingResult(itemstack1) != null)
-				//				{
-				//					if (!mergeItemStack(itemstack1, 0, 1, false))
-				//						return null;
-				//				}
-				if (par2 >= 3 && par2 < 30)
-				{
-					if (!mergeItemStack(itemstack1, 30, 39, false))
+				if(itemstack1.getItem() instanceof IEnergyContainerItem){
+					if (!mergeItemStack(itemstack1, 0, 2, false))
+						return null;
+				} else if (par2 >= 2 && par2 < 29){
+					if (!mergeItemStack(itemstack1, 29, 38, false))
 						return null;
 				}
-				else if (par2 >= 30 && par2 < 39 && !mergeItemStack(itemstack1, 3, 30, false))
+				else if (par2 >= 29 && par2 < 38 && !mergeItemStack(itemstack1, 2, 29, false))
 					return null;
 			}
-			else if (!mergeItemStack(itemstack1, 3, 39, false))
+			else if (!mergeItemStack(itemstack1, 2, 38, false))
 				return null;
 
 			if (itemstack1.stackSize == 0)

@@ -49,7 +49,8 @@ public class EntityDreadSlug extends EntityThrowable {
 					&& !worldObj.isRemote)
 				((EntityLivingBase)mop.entityHit).addPotionEffect(new PotionEffect(AbyssalCraftAPI.dread_plague, 100));
 
-			mop.entityHit.attackEntityFrom(DamageSource.causeThrownDamage(this, getThrower()), b0);
+			if(!(mop.entityHit instanceof EntityGreaterDreadSpawn))
+				mop.entityHit.attackEntityFrom(DamageSource.causeThrownDamage(this, getThrower()), b0);
 
 			if(ACConfig.hardcoreMode && mop.entityHit instanceof EntityPlayer)
 				mop.entityHit.attackEntityFrom(DamageSource.causeThrownDamage(this, getThrower()).setDamageBypassesArmor().setDamageIsAbsolute(), 1F);

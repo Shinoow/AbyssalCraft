@@ -1,0 +1,92 @@
+{
+    "__comment": "Model generated using MrCrayfish's Model Creator (http://mrcrayfish.com/modelcreator/)",
+    "textures": {
+        "0": "abyssalcraft:blocks/monolithstone",
+		"1": "abyssalcraft:items/curse_glint"
+    },
+    "elements": [
+        {
+            "name": "bottom",
+            "from": [ 3.0, 0.0, 1.0 ], 
+            "to": [ 13.0, 1.0, 15.0 ], 
+            "faces": {
+                "north": { "texture": "#0", "uv": [ 0.0, 0.0, 10.0, 1.0 ] },
+                "east": { "texture": "#0", "uv": [ 0.0, 0.0, 14.0, 1.0 ] },
+                "south": { "texture": "#0", "uv": [ 0.0, 0.0, 10.0, 1.0 ] },
+                "west": { "texture": "#0", "uv": [ 0.0, 0.0, 14.0, 1.0 ] },
+                "up": { "texture": "#0", "uv": [ 0.0, 0.0, 10.0, 14.0 ] },
+                "down": { "texture": "#0", "uv": [ 0.0, 0.0, 10.0, 14.0 ] }
+            }
+        },
+        {
+            "name": "top",
+            "from": [ 3.5, 0.5, 1.5 ], 
+            "to": [ 12.5, 1.5, 14.5 ], 
+            "faces": {
+                "north": { "texture": "#0", "uv": [ 0.0, 0.0, 9.0, 1.0 ] },
+                "east": { "texture": "#0", "uv": [ 0.0, 0.0, 13.0, 1.0 ] },
+                "south": { "texture": "#0", "uv": [ 0.0, 0.0, 9.0, 1.0 ] },
+                "west": { "texture": "#0", "uv": [ 0.0, 0.0, 13.0, 1.0 ] },
+                "up": { "texture": "#0", "uv": [ 0.0, 0.0, 9.0, 13.0 ] },
+                "down": { "texture": "#0", "uv": [ 0.0, 0.0, 9.0, 13.0 ] }
+            }
+        },
+		{
+            "name": "Override1",
+            "from": [ 3.0, 0.0, 1.0 ], 
+            "to": [ 13.0, 1.0, 15.0 ], 
+            "faces": {
+                "north": { "texture": "#1", "uv": [ 0.0, 0.0, 10.0, 1.0 ] },
+                "east": { "texture": "#1", "uv": [ 0.0, 0.0, 14.0, 1.0 ] },
+                "south": { "texture": "#1", "uv": [ 0.0, 0.0, 10.0, 1.0 ] },
+                "west": { "texture": "#1", "uv": [ 0.0, 0.0, 14.0, 1.0 ] },
+                "up": { "texture": "#1", "uv": [ 0.0, 0.0, 10.0, 14.0 ] },
+                "down": { "texture": "#1", "uv": [ 0.0, 0.0, 10.0, 14.0 ] }
+            }
+        },
+        {
+            "name": "Override2",
+            "from": [ 3.5, 0.5, 1.5 ], 
+            "to": [ 12.5, 1.5, 14.5 ], 
+            "faces": {
+                "north": { "texture": "#1", "uv": [ 0.0, 0.0, 9.0, 1.0 ] },
+                "east": { "texture": "#1", "uv": [ 0.0, 0.0, 13.0, 1.0 ] },
+                "south": { "texture": "#1", "uv": [ 0.0, 0.0, 9.0, 1.0 ] },
+                "west": { "texture": "#1", "uv": [ 0.0, 0.0, 13.0, 1.0 ] },
+                "up": { "texture": "#1", "uv": [ 0.0, 0.0, 9.0, 13.0 ] },
+                "down": { "texture": "#1", "uv": [ 0.0, 0.0, 9.0, 13.0 ] }
+            }
+        }
+    ],
+    "display": {
+        "ground": {
+            "rotation": [ 0, 0, 0 ],
+            "translation": [ 0, 2, 0],
+            "scale":[ 0.5, 0.5, 0.5 ]
+        },
+        "head": {
+            "rotation": [ 0, 180, 0 ],
+            "translation": [ 0, 13, 7],
+            "scale":[ 1, 1, 1]
+        },
+        "thirdperson_righthand": {
+            "rotation": [ 90, 0, 0 ],
+            "translation": [ 0, 3, 5 ],
+            "scale": [ 0.55, 0.55, 0.55 ]
+        },
+        "firstperson_righthand": {
+            "rotation": [ 90, 0, 25 ],
+            "translation": [0.63, 3.2, 3.13],
+            "scale": [ 0.68, 0.68, 0.68 ]
+        },
+        "fixed": {
+            "rotation": [ 0, 180, 0 ],
+            "scale": [ 1, 1, 1 ]
+        },
+		"gui": {
+			"rotation": [ 90, -35, 0 ],
+			"translation": [ 0, 0, 0 ],
+			"scale": [ 0.8, 0.8, 0.8 ]
+		}
+    }
+}

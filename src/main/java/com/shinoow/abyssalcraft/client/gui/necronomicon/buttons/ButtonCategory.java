@@ -14,6 +14,7 @@ package com.shinoow.abyssalcraft.client.gui.necronomicon.buttons;
 import com.shinoow.abyssalcraft.api.item.ACItems;
 import com.shinoow.abyssalcraft.client.gui.necronomicon.GuiNecronomicon;
 import com.shinoow.abyssalcraft.client.lib.GuiRenderHelper;
+import com.shinoow.abyssalcraft.lib.NecronomiconText;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
@@ -25,13 +26,15 @@ import net.minecraft.util.ResourceLocation;
 
 public class ButtonCategory extends GuiButton {
 
-	GuiNecronomicon gui;
-	Item icon;
+	private GuiNecronomicon gui;
+	private Item icon;
+	private boolean locked;
 
-	public ButtonCategory(int par1, int par2, int par3, GuiNecronomicon gui, String label, Item icon) {
+	public ButtonCategory(int par1, int par2, int par3, GuiNecronomicon gui, String label, boolean locked, Item icon) {
 		super(par1, par2, par3, 110, 16, I18n.format(label, new Object[0]));
 		this.gui = gui;
 		this.icon = icon;
+		this.locked = locked;
 	}
 
 	@Override
@@ -39,7 +42,7 @@ public class ButtonCategory extends GuiButton {
 		FontRenderer fr = mc.fontRendererObj;
 		boolean inside = mx >= xPosition && my >= yPosition && mx < xPosition + width && my < yPosition + height;
 
-		ResourceLocation res = getTexture(icon);
+		ResourceLocation res = locked ? getTexture(ACItems.oblivion_catalyst) : getTexture(icon);
 		if(res == null)
 			res = getTexture(ACItems.necronomicon);
 
@@ -56,7 +59,7 @@ public class ButtonCategory extends GuiButton {
 			GuiRenderHelper.drawGradientRect(xPosition, yPosition, zLevel, xPosition + width, yPosition + height, -2130706433, 0x505000);
 		GuiRenderHelper.drawTexturedModalRect(xPosition, yPosition, zLevel, 0, 0, 16, 16, s, s);
 		GlStateManager.popMatrix();
-		fr.drawString(displayString, xPosition + 17, yPosition + 3, 0);
+		gui.getFontRenderer(locked).drawString(locked ? NecronomiconText.LABEL_TEST : displayString, xPosition + 17, yPosition + 3, 0);
 	}
 
 	ResourceLocation getTexture(Item par1){

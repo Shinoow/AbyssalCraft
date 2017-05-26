@@ -49,10 +49,6 @@ public class PEUtils {
 	 */
 	public static void transferPEToNearbyPlayers(World world, BlockPos pos, IEnergyManipulator manipulator, int range){
 
-		int xp = pos.getX();
-		int yp = pos.getY();
-		int zp = pos.getZ();
-
 		List<EntityPlayer> players = world.getEntitiesWithinAABB(EntityPlayer.class, new AxisAlignedBB(pos, pos.add(1, 1, 1)).expand(range, range, range));
 
 		for(EntityPlayer player : players)
@@ -64,27 +60,7 @@ public class PEUtils {
 					if(!world.isRemote){
 						transferPEToStack(item, manipulator);
 						transferPEToStack(item1, manipulator);
-					}
-					Vec3d vec = new Vec3d(xp, yp, zp);
-					Vec3d t = new Vec3d(player.posX, player.posY, player.posZ);
-					double vx = vec.xCoord > t.xCoord ? vec.xCoord - t.xCoord : vec.xCoord < t.xCoord ? t.xCoord - vec.xCoord : 0;
-					double vy = vec.yCoord > t.yCoord ? vec.yCoord - t.yCoord : vec.yCoord < t.yCoord ? t.yCoord - vec.yCoord : 0;
-					double vz = vec.zCoord > t.zCoord ? vec.zCoord - t.zCoord : vec.zCoord < t.zCoord ? t.zCoord - vec.zCoord : 0;
-
-					for(int i = 1; i < 11; i++){
-						Vec3d v = new Vec3d(vec.xCoord > t.xCoord ? vec.xCoord - vx/i : vec.xCoord < t.xCoord ? vec.xCoord + vx/i : t.xCoord,
-								vec.yCoord > t.yCoord ? vec.yCoord - vy/i : vec.yCoord < t.yCoord ? vec.yCoord + vy/i : t.yCoord,
-										vec.zCoord > t.zCoord ? vec.zCoord - vz/i : vec.zCoord < t.zCoord ? vec.zCoord + vz/i : t.zCoord);
-						Vec3d v2 = new Vec3d(vec.xCoord > t.xCoord ? t.xCoord + vx/i : vec.xCoord < t.xCoord ? t.xCoord - vx/i : t.xCoord,
-								vec.yCoord > t.yCoord ? t.yCoord + vy/i : vec.yCoord < t.yCoord ? t.yCoord - vy/i : t.yCoord,
-										vec.zCoord > t.zCoord ? t.zCoord + vz/i : vec.zCoord < t.zCoord ? t.zCoord - vz/i : t.zCoord);
-						for(double d = 0; d < 0.1; d += 0.05){
-							int x = vec.xCoord > t.xCoord ? -1 : vec.xCoord < t.xCoord ? 1 : 0;
-							int y = vec.yCoord > t.yCoord ? -1 : vec.yCoord < t.yCoord ? 1 : 0;
-							int z = vec.zCoord > t.zCoord ? -1 : vec.zCoord < t.zCoord ? 1 : 0;
-							AbyssalCraftAPI.getInternalMethodHandler().spawnParticle("PEStream", world, v.xCoord + 0.5 + x*d, v.yCoord + 0.5 + y*d, v.zCoord + 0.5 + z*d, 0,0,0);
-							AbyssalCraftAPI.getInternalMethodHandler().spawnParticle("PEStream", world, v2.xCoord + 0.5 + x*d, v2.yCoord + 0.5 + y*d, v2.zCoord + 0.5 + z*d, 0,0,0);
-						}
+						AbyssalCraftAPI.getInternalMethodHandler().spawnPEStream(pos, player, world.provider.getDimension());
 					}
 				}
 			}
@@ -128,33 +104,12 @@ public class PEUtils {
 		for(TileEntity tile : collectors)
 			if(checkForAdjacentCollectors(world, tile.getPos()))
 				if(world.rand.nextInt(120-(int)(20 * manipulator.getAmplifier(AmplifierType.DURATION))) == 0)
-					if(((IEnergyCollector) tile).canAcceptPE()){
+					if(((IEnergyCollector) tile).canAcceptPE())
 						if(!world.isRemote){
 							((IEnergyCollector) tile).addEnergy(manipulator.getEnergyQuanta());
 							manipulator.addTolerance(manipulator.isActive() ? 2 : 1);
+							AbyssalCraftAPI.getInternalMethodHandler().spawnPEStream(pos, tile.getPos(), world.provider.getDimension());
 						}
-						Vec3d vec = new Vec3d(xp, yp, zp);
-						Vec3d t = new Vec3d(tile.getPos().getX(), tile.getPos().getY(), tile.getPos().getZ());
-						double vx = vec.xCoord > t.xCoord ? vec.xCoord - t.xCoord : vec.xCoord < t.xCoord ? t.xCoord - vec.xCoord : 0;
-						double vy = vec.yCoord > t.yCoord ? vec.yCoord - t.yCoord : vec.yCoord < t.yCoord ? t.yCoord - vec.yCoord : 0;
-						double vz = vec.zCoord > t.zCoord ? vec.zCoord - t.zCoord : vec.zCoord < t.zCoord ? t.zCoord - vec.zCoord : 0;
-
-						for(int i = 1; i < 11; i++){
-							Vec3d v = new Vec3d(vec.xCoord > t.xCoord ? vec.xCoord - vx/i : vec.xCoord < t.xCoord ? vec.xCoord + vx/i : t.xCoord,
-									vec.yCoord > t.yCoord ? vec.yCoord - vy/i : vec.yCoord < t.yCoord ? vec.yCoord + vy/i : t.yCoord,
-											vec.zCoord > t.zCoord ? vec.zCoord - vz/i : vec.zCoord < t.zCoord ? vec.zCoord + vz/i : t.zCoord);
-							Vec3d v2 = new Vec3d(vec.xCoord > t.xCoord ? t.xCoord + vx/i : vec.xCoord < t.xCoord ? t.xCoord - vx/i : t.xCoord,
-									vec.yCoord > t.yCoord ? t.yCoord + vy/i : vec.yCoord < t.yCoord ? t.yCoord - vy/i : t.yCoord,
-											vec.zCoord > t.zCoord ? t.zCoord + vz/i : vec.zCoord < t.zCoord ? t.zCoord - vz/i : t.zCoord);
-							for(double d = 0; d < 0.1; d += 0.05){
-								int x = vec.xCoord > t.xCoord ? -1 : vec.xCoord < t.xCoord ? 1 : 0;
-								int y = vec.yCoord > t.yCoord ? -1 : vec.yCoord < t.yCoord ? 1 : 0;
-								int z = vec.zCoord > t.zCoord ? -1 : vec.zCoord < t.zCoord ? 1 : 0;
-								AbyssalCraftAPI.getInternalMethodHandler().spawnParticle("PEStream", world, v.xCoord + 0.5 + x*d, v.yCoord + 0.5 + y*d, v.zCoord + 0.5 + z*d, 0,0,0);
-								AbyssalCraftAPI.getInternalMethodHandler().spawnParticle("PEStream", world, v2.xCoord + 0.5 + x*d, v2.yCoord + 0.5 + y*d, v2.zCoord + 0.5 + z*d, 0,0,0);
-							}
-						}
-					}
 	}
 
 	/**

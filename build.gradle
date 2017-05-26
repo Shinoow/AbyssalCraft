@@ -122,17 +122,17 @@ task devJar(type: Jar, dependsOn: 'classes') {
     classifier = 'dev'
 }
 
-task apiZip(type: Zip) {
-		from(sourceSets.main.java){
+task apiJar(type: Jar, dependsOn: 'classes') {
+		from sourceSets.main.allSource
+		from sourceSets.main.output
 		include 'com/shinoow/abyssalcraft/api/**'
-	}
 	
-	extension = 'zip'
+	extension = 'jar'
 	classifier = 'api'
 }
 
 artifacts {
-    archives srcJar, devJar, apiZip
+    archives srcJar, devJar, apiJar
 }
 
 curseforge {
@@ -142,7 +142,7 @@ curseforge {
 		releaseType = project.props.release_type //alpha beta release
 		changelogType = 'html'
 		changelog = new File('changelog.html') //must have at least an empty string
-		addArtifact apiZip
+		addArtifact apiJar
 		relations {
 			optionalLibrary 'just-enough-items-jei'
 		}
@@ -154,7 +154,7 @@ publishing {
         mavenStuff(MavenPublication) {
             artifact srcJar
 			artifact devJar
-			artifact apiZip
+			artifact apiJar
             groupId project.group
             artifactId project.archivesBaseName
             version project.version

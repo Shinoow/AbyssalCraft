@@ -59,8 +59,8 @@ public class EntityLesserDreadbeast extends EntityMob implements IDreadEntity, I
 		super(par1World);
 		setSize(1.8F, 1.8F);
 		tasks.addTask(2, attackOnCollide);
-		tasks.addTask(3, new EntityAIMoveTowardsRestriction(this, 0.7D));
-		tasks.addTask(4, new EntityAIWander(this, 0.7D));
+		tasks.addTask(3, new EntityAIMoveTowardsRestriction(this, 0.35D));
+		tasks.addTask(4, new EntityAIWander(this, 0.35D));
 		tasks.addTask(5, new EntityAILookIdle(this));
 		tasks.addTask(5, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
 		targetTasks.addTask(1, new EntityAIHurtByTarget(this, false));
@@ -80,7 +80,7 @@ public class EntityLesserDreadbeast extends EntityMob implements IDreadEntity, I
 		super.applyEntityAttributes();
 
 		getEntityAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue(0.4D);
-		getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.7D);
+		getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.35D);
 
 		if(ACConfig.hardcoreMode){
 			getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(600.0D);

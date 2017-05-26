@@ -60,7 +60,7 @@ public class BlockTieredSacrificialAltar extends BlockContainer {
 	@Override
 	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos)
 	{
-		return new AxisAlignedBB(0.15F, 0.0F, 0.15F, 0.85F, 1.0F, 0.85F);
+		return new AxisAlignedBB(0.15F, 0.0F, 0.15F, 0.85F, 0.9F, 0.85F);
 	}
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })

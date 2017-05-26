@@ -75,6 +75,7 @@ public class ItemHandler implements ILifeCycleHandler {
 		ACItems.skin = new ItemMetadata("skin", "abyssalwasteland", "dreadlands", "omothol");
 		ACItems.essence_of_the_gatekeeper = new ItemGatekeeperEssence();
 		ACItems.interdimensional_cage = new ItemInterdimensionalCage();
+		ACItems.stone_tablet = new ItemStoneTablet();
 
 		ACItems.liquid_coralium_bucket_stack = UniversalBucket.getFilledBucket(ForgeModContainer.getInstance().universalBucket, AbyssalCraftAPI.liquid_coralium_fluid);
 		ACItems.liquid_antimatter_bucket_stack = UniversalBucket.getFilledBucket(ForgeModContainer.getInstance().universalBucket, AbyssalCraftAPI.liquid_antimatter_fluid);
@@ -439,6 +440,7 @@ public class ItemHandler implements ILifeCycleHandler {
 		registerItem(ACItems.essence_of_the_gatekeeper, "gatekeeperessence");
 		registerItem(ACItems.interdimensional_cage, "interdimensionalcage");
 		registerItem(ACItems.crystal_fragment, "crystalfragment");
+		registerItem(ACItems.stone_tablet, "stonetablet");
 		//		registerItem(shadowPlate, "shadowplate");
 
 		AbyssalCraftAPI.setRepairItems();

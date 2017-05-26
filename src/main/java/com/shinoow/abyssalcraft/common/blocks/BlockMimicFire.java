@@ -80,44 +80,46 @@ public class BlockMimicFire extends BlockFire {
 				if (flag1)
 					j = -50;
 
-				tryCatchFire(worldIn, pos.east(), 300 + j, rand, i, EnumFacing.WEST);
-				tryCatchFire(worldIn, pos.west(), 300 + j, rand, i, EnumFacing.EAST);
-				tryCatchFire(worldIn, pos.down(), 250 + j, rand, i, EnumFacing.UP);
-				tryCatchFire(worldIn, pos.up(), 250 + j, rand, i, EnumFacing.DOWN);
-				tryCatchFire(worldIn, pos.north(), 300 + j, rand, i, EnumFacing.SOUTH);
-				tryCatchFire(worldIn, pos.south(), 300 + j, rand, i, EnumFacing.NORTH);
+				if(rand.nextFloat() < 0.2){
+					tryCatchFire(worldIn, pos.east(), 300 + j, rand, i, EnumFacing.WEST);
+					tryCatchFire(worldIn, pos.west(), 300 + j, rand, i, EnumFacing.EAST);
+					tryCatchFire(worldIn, pos.down(), 250 + j, rand, i, EnumFacing.UP);
+					tryCatchFire(worldIn, pos.up(), 250 + j, rand, i, EnumFacing.DOWN);
+					tryCatchFire(worldIn, pos.north(), 300 + j, rand, i, EnumFacing.SOUTH);
+					tryCatchFire(worldIn, pos.south(), 300 + j, rand, i, EnumFacing.NORTH);
 
-				for (int k = -1; k <= 1; ++k)
-					for (int l = -1; l <= 1; ++l)
-						for (int i1 = -1; i1 <= 4; ++i1)
-							if (k != 0 || i1 != 0 || l != 0)
-							{
-								int j1 = 100;
-
-								if (i1 > 1)
-									j1 += (i1 - 1) * 100;
-
-								BlockPos blockpos = pos.add(k, i1, l);
-								int k1 = getNeighborEncouragement(worldIn, blockpos);
-
-								if (k1 > 0)
+					for (int k = -1; k <= 1; ++k)
+						for (int l = -1; l <= 1; ++l)
+							for (int i1 = -1; i1 <= 4; ++i1)
+								if (k != 0 || i1 != 0 || l != 0)
 								{
-									int l1 = (k1 + 40 + worldIn.getDifficulty().getDifficultyId() * 7) / (i + 30);
+									int j1 = 100;
 
-									if (flag1)
-										l1 /= 2;
+									if (i1 > 1)
+										j1 += (i1 - 1) * 100;
 
-									if (l1 > 0 && rand.nextInt(j1) <= l1 && (!worldIn.isRaining() || !canDie(worldIn, blockpos)))
+									BlockPos blockpos = pos.add(k, i1, l);
+									int k1 = getNeighborEncouragement(worldIn, blockpos);
+
+									if (k1 > 0)
 									{
-										int i2 = i + rand.nextInt(5) / 4;
+										int l1 = (k1 + 40 + worldIn.getDifficulty().getDifficultyId() * 7) / (i + 30);
 
-										if (i2 > 15)
-											i2 = 15;
+										if (flag1)
+											l1 /= 2;
 
-										worldIn.setBlockState(blockpos, state.withProperty(AGE, Integer.valueOf(i2)), 3);
+										if (l1 > 0 && rand.nextInt(j1) <= l1 && (!worldIn.isRaining() || !canDie(worldIn, blockpos)))
+										{
+											int i2 = i + rand.nextInt(5) / 4;
+
+											if (i2 > 4)
+												i2 = 4;
+
+											worldIn.setBlockState(blockpos, state.withProperty(AGE, Integer.valueOf(i2)), 3);
+										}
 									}
 								}
-							}
+				}
 			}
 		}
 	}

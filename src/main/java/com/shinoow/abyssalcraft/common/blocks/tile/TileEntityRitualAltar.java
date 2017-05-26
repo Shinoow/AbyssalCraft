@@ -46,6 +46,7 @@ public class TileEntityRitualAltar extends TileEntity implements ITickable, IRit
 
 	private int ritualTimer;
 	private ItemStack[] offers = new ItemStack[8];
+	private boolean[] hasOffer = new boolean[8];
 	private NecronomiconRitual ritual;
 	private ItemStack item;
 	private int rot;
@@ -124,13 +125,14 @@ public class TileEntityRitualAltar extends TileEntity implements ITickable, IRit
 				if(ritualTimer == 200)
 					if(user != null){
 						if(!MinecraftForge.EVENT_BUS.post(new RitualEvent.Post(user, ritual, worldObj, pos))){
-							for(ItemStack item : user.inventory.mainInventory)
-								if(item != null && item.getItem() instanceof IEnergyTransporterItem &&
-								((IEnergyTransporterItem) item.getItem()).canTransferPEExternally(item) &&
-								(item.getItem() instanceof ItemNecronomicon && ((ItemNecronomicon)item.getItem()).isOwner(user, item) || !(item.getItem() instanceof ItemNecronomicon))){
-									consumedEnergy += ((IEnergyTransporterItem) item.getItem()).consumeEnergy(item, ritual.getReqEnergy()/200);
-									break;
-								}
+							if(!worldObj.isRemote)
+								for(ItemStack item : user.inventory.mainInventory)
+									if(item != null && item.getItem() instanceof IEnergyTransporterItem &&
+									((IEnergyTransporterItem) item.getItem()).canTransferPEExternally(item) &&
+									(item.getItem() instanceof ItemNecronomicon && ((ItemNecronomicon)item.getItem()).isOwner(user, item) || !(item.getItem() instanceof ItemNecronomicon))){
+										consumedEnergy += ((IEnergyTransporterItem) item.getItem()).consumeEnergy(item, ritual.getReqEnergy()/200);
+										break;
+									}
 							if(consumedEnergy == ritual.getReqEnergy())
 								ritual.completeRitual(worldObj, pos, user);
 							else if(!worldObj.isRemote){
@@ -159,32 +161,39 @@ public class TileEntityRitualAltar extends TileEntity implements ITickable, IRit
 
 			double n = 0.25;
 
-			worldObj.spawnParticle(EnumParticleTypes.SMOKE_LARGE, pos.getX() - 2.5, pos.getY() + 0.95, pos.getZ() + 0.5, n,0,0);
-			worldObj.spawnParticle(EnumParticleTypes.SMOKE_LARGE, pos.getX() + 0.5, pos.getY() + 0.95, pos.getZ() - 2.5, 0,0,n);
-			worldObj.spawnParticle(EnumParticleTypes.SMOKE_LARGE, pos.getX() + 3.5, pos.getY() + 0.95, pos.getZ() + 0.5, -n,0,0);
-			worldObj.spawnParticle(EnumParticleTypes.SMOKE_LARGE, pos.getX() + 0.5, pos.getY() + 0.95, pos.getZ() + 3.5, 0,0,-n);
-			worldObj.spawnParticle(EnumParticleTypes.SMOKE_LARGE, pos.getX() - 1.5, pos.getY() + 0.95, pos.getZ() + 2.5, n,0,-n);
-			worldObj.spawnParticle(EnumParticleTypes.SMOKE_LARGE, pos.getX() - 1.5, pos.getY() + 0.95, pos.getZ() - 1.5, n,0,n);
-			worldObj.spawnParticle(EnumParticleTypes.SMOKE_LARGE, pos.getX() + 2.5, pos.getY() + 0.95, pos.getZ() + 2.5, -n,0,-n);
-			worldObj.spawnParticle(EnumParticleTypes.SMOKE_LARGE, pos.getX() + 2.5, pos.getY() + 0.95, pos.getZ() - 1.5, -n,0,n);
-
-			worldObj.spawnParticle(EnumParticleTypes.FLAME, pos.getX() - 2.5, pos.getY() + 1.05, pos.getZ() + 0.5, 0,0,0);
-			worldObj.spawnParticle(EnumParticleTypes.FLAME, pos.getX() + 0.5, pos.getY() + 1.05, pos.getZ() - 2.5, 0,0,0);
-			worldObj.spawnParticle(EnumParticleTypes.FLAME, pos.getX() + 3.5, pos.getY() + 1.05, pos.getZ() + 0.5, 0,0,0);
-			worldObj.spawnParticle(EnumParticleTypes.FLAME, pos.getX() + 0.5, pos.getY() + 1.05, pos.getZ() + 3.5, 0,0,0);
-			worldObj.spawnParticle(EnumParticleTypes.FLAME, pos.getX() - 1.5, pos.getY() + 1.05, pos.getZ() + 2.5, 0,0,0);
-			worldObj.spawnParticle(EnumParticleTypes.FLAME, pos.getX() - 1.5, pos.getY() + 1.05, pos.getZ() - 1.5, 0,0,0);
-			worldObj.spawnParticle(EnumParticleTypes.FLAME, pos.getX() + 2.5, pos.getY() + 1.05, pos.getZ() + 2.5, 0,0,0);
-			worldObj.spawnParticle(EnumParticleTypes.FLAME, pos.getX() + 2.5, pos.getY() + 1.05, pos.getZ() - 1.5, 0,0,0);
-
-			worldObj.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, pos.getX() - 2.5, pos.getY() + 1.05, pos.getZ() + 0.5, 0,0,0);
-			worldObj.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, pos.getX() + 0.5, pos.getY() + 1.05, pos.getZ() - 2.5, 0,0,0);
-			worldObj.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, pos.getX() + 3.5, pos.getY() + 1.05, pos.getZ() + 0.5, 0,0,0);
-			worldObj.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, pos.getX() + 0.5, pos.getY() + 1.05, pos.getZ() + 3.5, 0,0,0);
-			worldObj.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, pos.getX() - 1.5, pos.getY() + 1.05, pos.getZ() + 2.5, 0,0,0);
-			worldObj.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, pos.getX() - 1.5, pos.getY() + 1.05, pos.getZ() - 1.5, 0,0,0);
-			worldObj.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, pos.getX() + 2.5, pos.getY() + 1.05, pos.getZ() + 2.5, 0,0,0);
-			worldObj.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, pos.getX() + 2.5, pos.getY() + 1.05, pos.getZ() - 1.5, 0,0,0);
+			if(hasOffer[0]){
+				worldObj.spawnParticle(EnumParticleTypes.SMOKE_LARGE, pos.getX() - 2.5, pos.getY() + 0.95, pos.getZ() + 0.5, n,0,0);
+				worldObj.spawnParticle(EnumParticleTypes.FLAME, pos.getX() - 2.5, pos.getY() + 1.05, pos.getZ() + 0.5, 0,0,0);
+				worldObj.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, pos.getX() - 2.5, pos.getY() + 1.05, pos.getZ() + 0.5, 0,0,0);
+			} if(hasOffer[1]){
+				worldObj.spawnParticle(EnumParticleTypes.SMOKE_LARGE, pos.getX() + 0.5, pos.getY() + 0.95, pos.getZ() - 2.5, 0,0,n);
+				worldObj.spawnParticle(EnumParticleTypes.FLAME, pos.getX() + 0.5, pos.getY() + 1.05, pos.getZ() - 2.5, 0,0,0);
+				worldObj.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, pos.getX() + 0.5, pos.getY() + 1.05, pos.getZ() - 2.5, 0,0,0);
+			} if(hasOffer[2]){
+				worldObj.spawnParticle(EnumParticleTypes.SMOKE_LARGE, pos.getX() + 3.5, pos.getY() + 0.95, pos.getZ() + 0.5, -n,0,0);
+				worldObj.spawnParticle(EnumParticleTypes.FLAME, pos.getX() + 3.5, pos.getY() + 1.05, pos.getZ() + 0.5, 0,0,0);
+				worldObj.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, pos.getX() + 3.5, pos.getY() + 1.05, pos.getZ() + 0.5, 0,0,0);
+			} if(hasOffer[3]){
+				worldObj.spawnParticle(EnumParticleTypes.SMOKE_LARGE, pos.getX() + 0.5, pos.getY() + 0.95, pos.getZ() + 3.5, 0,0,-n);
+				worldObj.spawnParticle(EnumParticleTypes.FLAME, pos.getX() + 0.5, pos.getY() + 1.05, pos.getZ() + 3.5, 0,0,0);
+				worldObj.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, pos.getX() + 0.5, pos.getY() + 1.05, pos.getZ() + 3.5, 0,0,0);
+			} if(hasOffer[4]){
+				worldObj.spawnParticle(EnumParticleTypes.SMOKE_LARGE, pos.getX() - 1.5, pos.getY() + 0.95, pos.getZ() + 2.5, n,0,-n);
+				worldObj.spawnParticle(EnumParticleTypes.FLAME, pos.getX() - 1.5, pos.getY() + 1.05, pos.getZ() + 2.5, 0,0,0);
+				worldObj.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, pos.getX() - 1.5, pos.getY() + 1.05, pos.getZ() + 2.5, 0,0,0);
+			} if(hasOffer[5]){
+				worldObj.spawnParticle(EnumParticleTypes.SMOKE_LARGE, pos.getX() - 1.5, pos.getY() + 0.95, pos.getZ() - 1.5, n,0,n);
+				worldObj.spawnParticle(EnumParticleTypes.FLAME, pos.getX() - 1.5, pos.getY() + 1.05, pos.getZ() - 1.5, 0,0,0);
+				worldObj.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, pos.getX() - 1.5, pos.getY() + 1.05, pos.getZ() - 1.5, 0,0,0);
+			} if(hasOffer[6]){
+				worldObj.spawnParticle(EnumParticleTypes.SMOKE_LARGE, pos.getX() + 2.5, pos.getY() + 0.95, pos.getZ() + 2.5, -n,0,-n);
+				worldObj.spawnParticle(EnumParticleTypes.FLAME, pos.getX() + 2.5, pos.getY() + 1.05, pos.getZ() + 2.5, 0,0,0);
+				worldObj.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, pos.getX() + 2.5, pos.getY() + 1.05, pos.getZ() + 2.5, 0,0,0);
+			} if(hasOffer[7]){
+				worldObj.spawnParticle(EnumParticleTypes.SMOKE_LARGE, pos.getX() + 2.5, pos.getY() + 0.95, pos.getZ() - 1.5, -n,0,n);
+				worldObj.spawnParticle(EnumParticleTypes.FLAME, pos.getX() + 2.5, pos.getY() + 1.05, pos.getZ() - 1.5, 0,0,0);
+				worldObj.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, pos.getX() + 2.5, pos.getY() + 1.05, pos.getZ() - 1.5, 0,0,0);
+			}
 		}
 
 		if(rot == 360)
@@ -225,6 +234,14 @@ public class TileEntityRitualAltar extends TileEntity implements ITickable, IRit
 				offers[5] = ((IRitualPedestal)ped6).getItem();
 				offers[6] = ((IRitualPedestal)ped7).getItem();
 				offers[7] = ((IRitualPedestal)ped8).getItem();
+				hasOffer[0] = offers[0] != null;
+				hasOffer[1] = offers[1] != null;
+				hasOffer[2] = offers[2] != null;
+				hasOffer[3] = offers[3] != null;
+				hasOffer[4] = offers[4] != null;
+				hasOffer[5] = offers[5] != null;
+				hasOffer[6] = offers[6] != null;
+				hasOffer[7] = offers[7] != null;
 				if(offers[0] == null && offers[1] == null && offers[2] == null && offers[3] == null && offers[4] == null &&
 						offers[5] == null && offers[6] == null && offers[7] == null) return false;
 				else return true;

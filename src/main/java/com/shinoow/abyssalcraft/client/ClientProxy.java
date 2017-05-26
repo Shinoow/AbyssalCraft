@@ -11,6 +11,8 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.client;
 
+import org.lwjgl.input.Keyboard;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockFire;
 import net.minecraft.block.BlockLeaves;
@@ -30,6 +32,7 @@ import net.minecraft.client.renderer.block.statemap.StateMapperBase;
 import net.minecraft.client.renderer.entity.RenderEntityItem;
 import net.minecraft.client.renderer.entity.RenderPlayer;
 import net.minecraft.client.renderer.entity.RenderSnowball;
+import net.minecraft.client.settings.KeyBinding;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
@@ -76,6 +79,7 @@ public class ClientProxy extends CommonProxy {
 
 	private static final ModelDreadiumSamuraiArmor chestPlate = new ModelDreadiumSamuraiArmor(1.0f);
 	private static final ModelDreadiumSamuraiArmor leggings = new ModelDreadiumSamuraiArmor(0.5f);
+	public static KeyBinding staff_mode;
 
 	@Override
 	public void preInit() {
@@ -142,6 +146,7 @@ public class ClientProxy extends CommonProxy {
 		ModelBakery.registerItemVariants(ACItems.ritual_charm, makerl("ritualcharm_empty", "ritualcharm_range", "ritualcharm_duration", "ritualcharm_power"));
 		ModelBakery.registerItemVariants(ACItems.ingot_nugget, makerl("nugget_abyssalnite", "nugget_coralium", "nugget_dreadium", "nugget_ethaxium"));
 		ModelBakery.registerItemVariants(ACItems.staff_of_rending, makerl("drainstaff", "drainstaff_aw", "drainstaff_dl", "drainstaff_omt"));
+		ModelBakery.registerItemVariants(ACItems.staff_of_the_gatekeeper, makerl("staff", "staff2"));
 
 		ModelBakery.registerItemVariants(Item.getItemFromBlock(ACBlocks.ethaxium_brick), makerl("ethaxiumbrick_0", "ethaxiumbrick_1", "ethaxiumbrick_2"));
 		ModelBakery.registerItemVariants(Item.getItemFromBlock(ACBlocks.dark_ethaxium_brick), makerl("darkethaxiumbrick_0", "darkethaxiumbrick_1", "darkethaxiumbrick_2"));
@@ -216,9 +221,14 @@ public class ClientProxy extends CommonProxy {
 
 		ModelLoader.setCustomModelResourceLocation(ACItems.cudgel, 0, new ModelResourceLocation("abyssalcraft:cudgel", "inventory"));
 		ModelLoader.setCustomModelResourceLocation(ACItems.dreadium_katana, 0, new ModelResourceLocation("abyssalcraft:dreadkatana", "inventory"));
-		ModelLoader.setCustomModelResourceLocation(ACItems.staff_of_the_gatekeeper, 0, new ModelResourceLocation("abyssalcraft:staff", "inventory"));
+
+		ModelLoader.setCustomMeshDefinition(ACItems.staff_of_the_gatekeeper, stack -> stack.hasTagCompound() && stack.getTagCompound().getInteger("Mode") == 1 ? new ModelResourceLocation("abyssalcraft:staff2", "inventory") : new ModelResourceLocation("abyssalcraft:staff", "inventory"));
 
 		MinecraftForge.EVENT_BUS.register(new AbyssalCraftClientEventHooks());
+
+		staff_mode = new KeyBinding("key.staff_mode.desc", Keyboard.KEY_M, "key.abyssalcraft.category");
+
+		ClientRegistry.registerKeyBinding(staff_mode);
 	}
 
 	@Override
@@ -434,6 +444,7 @@ public class ClientProxy extends CommonProxy {
 		registerItemRender(ACItems.essence_of_the_gatekeeper, 0);
 		registerItemRender(ACItems.interdimensional_cage, 0);
 		registerItemRenders(ACItems.crystal_fragment, 25);
+		registerItemRender(ACItems.stone_tablet, 0);
 
 		registerItemRender(ACBlocks.darkstone, 0);
 		registerItemRender(ACBlocks.darkstone_cobblestone, 0);
@@ -643,6 +654,8 @@ public class ClientProxy extends CommonProxy {
 		registerItemRender(ACBlocks.luminous_thistle, 0);
 		registerItemRender(ACBlocks.wastelands_thorn, 0);
 		registerItemRender(ACBlocks.rending_pedestal, 0);
+		registerItemRender(ACBlocks.state_transformer, 0);
+		registerItemRender(ACBlocks.energy_depositioner, 0);
 
 		RenderPlayer render1 = Minecraft.getMinecraft().getRenderManager().getSkinMap().get("default");
 		render1.addLayer(new LayerStarSpawnTentacles(render1));

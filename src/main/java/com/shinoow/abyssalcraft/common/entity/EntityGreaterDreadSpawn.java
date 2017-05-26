@@ -64,8 +64,8 @@ public class EntityGreaterDreadSpawn extends EntityMob implements IDreadEntity, 
 		setSize(1.2F, 1.2F);
 		tasks.addTask(2, arrowAttack);
 		tasks.addTask(3, attackOnCollide);
-		tasks.addTask(4, new EntityAIMoveTowardsRestriction(this, 0.5D));
-		tasks.addTask(5, new EntityAIWander(this, 0.5D));
+		tasks.addTask(4, new EntityAIMoveTowardsRestriction(this, 0.4D));
+		tasks.addTask(5, new EntityAIWander(this, 0.4D));
 		tasks.addTask(6, new EntityAILookIdle(this));
 		tasks.addTask(6, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
 		targetTasks.addTask(1, new EntityAIHurtByTarget(this, false));
@@ -85,7 +85,7 @@ public class EntityGreaterDreadSpawn extends EntityMob implements IDreadEntity, 
 		super.applyEntityAttributes();
 
 		getEntityAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue(0.2D);
-		getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.5D);
+		getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.4D);
 
 		if(ACConfig.hardcoreMode){
 			getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(200.0D);
