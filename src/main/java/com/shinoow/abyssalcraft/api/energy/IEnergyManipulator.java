@@ -88,6 +88,13 @@ public interface IEnergyManipulator {
 	public int getTolerance();
 
 	/**
+	 * Verifies if the manipulator can transfer PE to nearby Players and/or Collectors.<br>
+	 * This is called in PEUtils before any energy transfer, so use this for something like checking the
+	 * capacity of a PE buffer (provided the manipulator has one, otherwise just return true and call it a day).
+	 */
+	public boolean canTransferPE();
+
+	/**
 	 * Fires off a Disruption, which can lead to bad things happening
 	 */
 	public void disrupt();

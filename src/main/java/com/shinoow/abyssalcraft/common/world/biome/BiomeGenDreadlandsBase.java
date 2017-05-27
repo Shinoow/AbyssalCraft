@@ -81,18 +81,18 @@ public class BiomeGenDreadlandsBase extends Biome implements IDreadlandsBiome {
 		if(ACConfig.generateDreadedAbyssalniteOre)
 			for(int rarity = 0; rarity < 8; rarity++) {
 				int veinSize =  4 + par2Random.nextInt(12);
-				int x = par2Random.nextInt(16) + 8;
+				int x = par2Random.nextInt(16);
 				int y = par2Random.nextInt(60);
-				int z = par2Random.nextInt(16) + 8;
+				int z = par2Random.nextInt(16);
 
 				new WorldGenMinable(ACBlocks.dreaded_abyssalnite_ore.getDefaultState(), veinSize, BlockMatcher.forBlock(ACBlocks.dreadstone)).generate(par1World, par2Random, pos.add(x, y, z));
 			}
 
-		for (int rarity = 0; rarity < 3; ++rarity)
+		for (int rarity = 0; rarity < 3; rarity++)
 		{
-			int x = par2Random.nextInt(16) + 8;
+			int x = par2Random.nextInt(16);
 			int y = par2Random.nextInt(55);
-			int z = par2Random.nextInt(16) + 8;
+			int z = par2Random.nextInt(16);
 			new WorldGenMinable(ACBlocks.abyssalnite_stone.getDefaultState(), 16,
 					BlockMatcher.forBlock(ACBlocks.dreadstone)).generate(par1World, par2Random, pos.add(x, y, z));
 		}

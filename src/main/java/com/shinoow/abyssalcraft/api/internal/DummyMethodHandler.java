@@ -14,6 +14,7 @@ package com.shinoow.abyssalcraft.api.internal;
 import java.util.Random;
 
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.entity.Entity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
@@ -26,6 +27,12 @@ public class DummyMethodHandler implements IInternalMethodHandler {
 
 	@Override
 	public void spawnParticle(String particleName, World world, double posX, double posY, double posZ, double velX, double velY, double velZ) {}
+
+	@Override
+	public void spawnPEStream(BlockPos posFrom, BlockPos posTo, int dimension) {}
+
+	@Override
+	public void spawnPEStream(BlockPos posFrom, Entity target, int dimension) {}
 
 	@Override
 	public void generateDarklandsStructure(int type, World world, Random random, BlockPos pos) {}

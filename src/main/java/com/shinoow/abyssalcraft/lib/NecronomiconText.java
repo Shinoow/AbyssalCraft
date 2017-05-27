@@ -174,6 +174,11 @@ public class NecronomiconText {
 	public static String CRAFTING_ENERGY_COLLECTOR = "necronomicon.text.crafting.energycollector";
 	public static String CRAFTING_ENERGY_RELAY = "necronomicon.text.crafting.energyrelay";
 	public static String CRAFTING_RENDING_PEDESTAL = "necronomicon.text.crafting.rendingpedestal";
+	public static String CRAFTING_STONE_TABLET = "necronomicon.text.crafting.stonetablet";
+	public static String CRAFTING_STATE_TRANSFORMER_1 = "necronomicon.text.crafting.statetransformer.1";
+	public static String CRAFTING_STATE_TRANSFORMER_2 = "necronomicon.text.crafting.statetransformer.2";
+	public static String CRAFTING_ENERGY_DEPOSITIONER_1 = "necronomicon.text.crafting.energydepositioner.1";
+	public static String CRAFTING_ENERGY_DEPOSITIONER_2 = "necronomicon.text.crafting.energydepositioner.2";
 
 	//Misc crafting
 	public static String CRAFTING_UPGRADE_KIT_1 = "necronomicon.text.crafting.upgradekit.1";
@@ -187,6 +192,15 @@ public class NecronomiconText {
 	public static String CRAFTING_CARBON_CLUSTER = "necronomicon.text.crafting.carboncluster";
 	public static String CRAFTING_DENSE_CARBON_CLUSTER = "necronomicon.text.crafting.densecarboncluster";
 	public static String CRAFTING_CRATE = "necronomicon.text.crafting.crate";
+
+	//Decorative Statue crafting
+	public static String CRAFTING_DECORATIVE_AZATHOTH_STATUE = "necronomicon.text.crafting.decorativeazathothstatue";
+	public static String CRAFTING_DECORATIVE_CTHULHU_STATUE = "necronomicon.text.crafting.decorativecthulhustatue";
+	public static String CRAFTING_DECORATIVE_HASTUR_STATUE = "necronomicon.text.crafting.decorativehasturstatue";
+	public static String CRAFTING_DECORATIVE_JZAHAR_STATUE = "necronomicon.text.crafting.decorativejzaharstatue";
+	public static String CRAFTING_DECORATIVE_NYARLATHOTEP_STATUE = "necronomicon.text.crafting.decorativenyarlathotepstatue";
+	public static String CRAFTING_DECORATIVE_SHUB_NIGGURATH_STATUE = "necronomicon.text.crafting.decorativeshubniggurathstatue";
+	public static String CRAFTING_DECORATIVE_YOG_SOTHOTH_STATUE = "necronomicon.text.crafting.decorativeyogsothothstatue";
 
 	//Enchantments
 	public static String ENCHANTMENT_CORALIUM = "necronomicon.text.enchantment.coralium";
@@ -302,6 +316,7 @@ public class NecronomiconText {
 	public static String PE_TUT_15 = "necronomicon.text.pe.15";
 	public static String PE_TUT_16 = "necronomicon.text.pe.16";
 	public static String PE_TUT_17 = "necronomicon.text.pe.17";
+	public static String PE_TUT_18 = "necronomicon.text.pe.18";
 
 	public static String MACHINES_INFO = "necronomicon.text.machines.info";
 
@@ -358,6 +373,7 @@ public class NecronomiconText {
 	public static String LABEL_POTENTIAL_ENERGY = "necronomicon.potentialenergy";
 	public static String LABEL_MISC_INFORMATION = "necronomicon.miscinformation";
 	public static String LABEL_INFORMATION_ENCHANTMENTS = "necronomicon.information.enchantments";
+	public static String LABEL_INFORMATION_DECORATIVE_STATUES = "necronomicon.information.decorativestatues";
 
 	/**
 	 * The best way to drown an array of strings with nonsense

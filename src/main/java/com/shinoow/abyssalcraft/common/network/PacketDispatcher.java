@@ -15,13 +15,17 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
+import com.shinoow.abyssalcraft.common.network.client.CleansingRitualMessage;
 import com.shinoow.abyssalcraft.common.network.client.DisruptionMessage;
 import com.shinoow.abyssalcraft.common.network.client.EvilSheepMessage;
 import com.shinoow.abyssalcraft.common.network.client.NecroDataCapMessage;
+import com.shinoow.abyssalcraft.common.network.client.PEStreamMessage;
 import com.shinoow.abyssalcraft.common.network.server.FireMessage;
 import com.shinoow.abyssalcraft.common.network.server.InterdimensionalCageMessage;
 import com.shinoow.abyssalcraft.common.network.server.OpenSpellbookMessage;
+import com.shinoow.abyssalcraft.common.network.server.StaffModeMessage;
 import com.shinoow.abyssalcraft.common.network.server.StaffOfRendingMessage;
+import com.shinoow.abyssalcraft.common.network.server.UpdateModeMessage;
 
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
@@ -72,6 +76,10 @@ public class PacketDispatcher
 		registerMessage(InterdimensionalCageMessage.class);
 		registerMessage(OpenSpellbookMessage.class);
 		registerMessage(NecroDataCapMessage.class);
+		registerMessage(CleansingRitualMessage.class);
+		registerMessage(UpdateModeMessage.class);
+		registerMessage(StaffModeMessage.class);
+		registerMessage(PEStreamMessage.class);
 	}
 
 	/**
@@ -102,6 +110,14 @@ public class PacketDispatcher
 	 */
 	public static final void sendTo(IMessage message, EntityPlayerMP player) {
 		PacketDispatcher.dispatcher.sendTo(message, player);
+	}
+
+	/**
+	 * Sends this message to everyone.
+	 * See {@link SimpleNetworkWrapper#sendToAll(IMessage)}
+	 */
+	public static final void sendToAll(IMessage message){
+		PacketDispatcher.dispatcher.sendToAll(message);
 	}
 
 	/**

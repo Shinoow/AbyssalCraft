@@ -51,8 +51,11 @@ import com.shinoow.abyssalcraft.api.item.ACItems;
 import com.shinoow.abyssalcraft.api.necronomicon.NecroData;
 import com.shinoow.abyssalcraft.common.AbyssalCrafting;
 import com.shinoow.abyssalcraft.common.caps.INecroDataCapability;
+import com.shinoow.abyssalcraft.common.caps.INecromancyCapability;
 import com.shinoow.abyssalcraft.common.caps.NecroDataCapability;
 import com.shinoow.abyssalcraft.common.caps.NecroDataCapabilityStorage;
+import com.shinoow.abyssalcraft.common.caps.NecromancyCapability;
+import com.shinoow.abyssalcraft.common.caps.NecromancyCapabilityStorage;
 import com.shinoow.abyssalcraft.common.enchantments.*;
 import com.shinoow.abyssalcraft.common.handlers.*;
 import com.shinoow.abyssalcraft.common.network.PacketDispatcher;
@@ -164,6 +167,7 @@ public class MiscHandler implements ILifeCycleHandler {
 		abyssal_zombie_death = registerSoundEvent("abyssalzombie.death");
 
 		CapabilityManager.INSTANCE.register(INecroDataCapability.class, NecroDataCapabilityStorage.instance, NecroDataCapability.class);
+		CapabilityManager.INSTANCE.register(INecromancyCapability.class, NecromancyCapabilityStorage.instance, NecromancyCapability.class);
 
 		RitualUtil.addBlocks();
 		addOreDictionaryStuff();

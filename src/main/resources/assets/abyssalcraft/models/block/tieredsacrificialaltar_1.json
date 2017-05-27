@@ -1,6 +1,7 @@
 {
 	"parent": "abyssalcraft:block/sacrificialaltar",
 	"textures": {
-		"0": "abyssalcraft:blocks/as"
+		"0": "abyssalcraft:blocks/as",
+        "particle": "abyssalcraft:blocks/as"
 	}
 }

@@ -34,7 +34,6 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 import com.shinoow.abyssalcraft.common.blocks.tile.TileEntitySacrificialAltar;
-import com.shinoow.abyssalcraft.lib.ACConfig;
 import com.shinoow.abyssalcraft.lib.ACTabs;
 import com.shinoow.abyssalcraft.lib.util.blocks.SingletonInventoryUtil;
 
@@ -53,7 +52,7 @@ public class BlockSacrificialAltar extends BlockContainer {
 	@Override
 	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos)
 	{
-		return new AxisAlignedBB(0.15F, 0.0F, 0.15F, 0.85F, 1.0F, 0.85F);
+		return new AxisAlignedBB(0.15F, 0.0F, 0.15F, 0.85F, 0.9F, 0.85F);
 	}
 
 	@Override
@@ -80,17 +79,6 @@ public class BlockSacrificialAltar extends BlockContainer {
 		int x = pos.getX();
 		int y = pos.getY();
 		int z = pos.getZ();
-
-		if(ACConfig.particleBlock){
-			world.spawnParticle(EnumParticleTypes.FLAME, x + 0.75, y + 1.05, z + 0.75, 0.0D, 0.0D, 0.0D);
-			world.spawnParticle(EnumParticleTypes.FLAME, x + 0.25, y + 1.05, z + 0.75, 0.0D, 0.0D, 0.0D);
-			world.spawnParticle(EnumParticleTypes.FLAME, x + 0.25, y + 1.05, z + 0.25, 0.0D, 0.0D, 0.0D);
-			world.spawnParticle(EnumParticleTypes.FLAME, x + 0.75, y + 1.05, z + 0.25, 0.0D, 0.0D, 0.0D);
-			world.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, x + 0.75, y + 1.05, z + 0.75, 0.0D, 0.0D, 0.0D);
-			world.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, x + 0.25, y + 1.05, z + 0.75, 0.0D, 0.0D, 0.0D);
-			world.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, x + 0.25, y + 1.05, z + 0.25, 0.0D, 0.0D, 0.0D);
-			world.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, x + 0.75, y + 1.05, z + 0.25, 0.0D, 0.0D, 0.0D);
-		}
 
 		TileEntity tile = world.getTileEntity(pos);
 		if(tile != null && tile instanceof TileEntitySacrificialAltar){

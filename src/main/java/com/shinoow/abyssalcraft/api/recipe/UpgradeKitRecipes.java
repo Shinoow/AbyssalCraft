@@ -26,7 +26,7 @@ public class UpgradeKitRecipes {
 
 	private static final UpgradeKitRecipes instance = new UpgradeKitRecipes();
 
-	Map<ItemUpgradeKit, Map<ItemStack, ItemStack>> upgrades = new HashMap<ItemUpgradeKit, Map<ItemStack, ItemStack>>(){{
+	private Map<ItemUpgradeKit, Map<ItemStack, ItemStack>> upgrades = new HashMap<ItemUpgradeKit, Map<ItemStack, ItemStack>>(){{
 		put((ItemUpgradeKit)ACItems.cobblestone_upgrade_kit, Maps.newHashMap());
 		put((ItemUpgradeKit)ACItems.iron_upgrade_kit, Maps.newHashMap());
 		put((ItemUpgradeKit)ACItems.gold_upgrade_kit, Maps.newHashMap());
@@ -59,6 +59,10 @@ public class UpgradeKitRecipes {
 				return entry.getValue();
 
 		return ItemStack.EMPTY;
+	}
+
+	public Map<ItemUpgradeKit, Map<ItemStack, ItemStack>> getAllUpgrades(){
+		return upgrades;
 	}
 
 	private boolean areStacksEqual(ItemStack input, ItemStack compare)

@@ -56,21 +56,21 @@ public class AbyssalCraftWorldGenerator implements IWorldGenerator {
 			int z = chunkZ + random.nextInt(16) + 8;
 			DarklandsStructureGenerator.generate(1, world, random, world.getHeight(new BlockPos(x, 0, z)));
 
-			x = chunkX + random.nextInt(16) + random.nextInt(5) * (random.nextBoolean() ? -1 : 1);
-			z = chunkZ + random.nextInt(16) + random.nextInt(5) * (random.nextBoolean() ? -1 : 1);
+			x = chunkX + random.nextInt(16) + 8;
+			z = chunkZ + random.nextInt(16) + 8;
 			DarklandsStructureGenerator.generate(2, world, random, world.getHeight(new BlockPos(x, 0, z)));
 
-			x = chunkX + random.nextInt(16) + random.nextInt(5) * (random.nextBoolean() ? -1 : 1);
-			z = chunkZ + random.nextInt(16) + random.nextInt(5) * (random.nextBoolean() ? -1 : 1);
+			x = chunkX + random.nextInt(16) + 8;
+			z = chunkZ + random.nextInt(16) + 8;
 			DarklandsStructureGenerator.generate(3, world, random, world.getHeight(new BlockPos(x, 0, z)));
 
-			x = chunkX + random.nextInt(16) + random.nextInt(5) * (random.nextBoolean() ? -1 : 1);
-			z = chunkZ + random.nextInt(16) + random.nextInt(5) * (random.nextBoolean() ? -1 : 1);
+			x = chunkX + random.nextInt(16) + 8;
+			z = chunkZ + random.nextInt(16) + 8;
 			DarklandsStructureGenerator.generate(4, world, random, world.getHeight(new BlockPos(x, 0, z)),
 					ACBlocks.darklands_grass.getDefaultState(), ACBlocks.darkstone.getDefaultState());
 
-			x = chunkX + random.nextInt(16) + random.nextInt(5) * (random.nextBoolean() ? -1 : 1);
-			z = chunkZ + random.nextInt(16) + random.nextInt(5) * (random.nextBoolean() ? -1 : 1);
+			x = chunkX + random.nextInt(16) + 8;
+			z = chunkZ + random.nextInt(16) + 8;
 			DarklandsStructureGenerator.generate(0, world, random, world.getHeight(new BlockPos(x, 0, z)));
 		}
 
@@ -110,7 +110,7 @@ public class AbyssalCraftWorldGenerator implements IWorldGenerator {
 		if(ACConfig.generateShoggothLairs)
 			for(int i = 0; i < 1; i++){
 				int x = chunkX + random.nextInt(16) + 8;
-				int z = chunkZ + random.nextInt(16) + 14;
+				int z = chunkZ + random.nextInt(2) + 28;
 				BlockPos pos1 = world.getHeight(new BlockPos(x, 0, z));
 				if(world.getBlockState(pos1).getMaterial() == Material.PLANTS) pos1 = pos1.down();
 				if(BiomeDictionary.hasType(world.getBiome(pos1), Type.SWAMP) ||

@@ -63,8 +63,16 @@ public class CommonProxy implements IGuiHandler {
 				if (entity instanceof TileEntityRendingPedestal)
 					return new ContainerRendingPedestal(player.inventory, (TileEntityRendingPedestal) entity);
 				break;
+			case ACLib.stateTransformerGuiID:
+				if (entity instanceof TileEntityStateTransformer)
+					return new ContainerStateTransformer(player.inventory, (TileEntityStateTransformer)entity);
+				break;
+			case ACLib.energyDepositionerGuiID:
+				if (entity instanceof TileEntityEnergyDepositioner)
+					return new ContainerEnergyDepositioner(player.inventory, (TileEntityEnergyDepositioner)entity);
+				break;
 			}
-		if(stack != null)
+		if(!stack.isEmpty())
 			switch(ID){
 			case ACLib.crystalbagGuiID:
 				return new ContainerCrystalBag(player.inventory, new InventoryCrystalBag(stack));
@@ -106,8 +114,16 @@ public class CommonProxy implements IGuiHandler {
 				if (entity instanceof TileEntityRendingPedestal)
 					return new GuiRendingPedestal(player.inventory, (TileEntityRendingPedestal) entity);
 				break;
+			case ACLib.stateTransformerGuiID:
+				if (entity instanceof TileEntityStateTransformer)
+					return new GuiStateTransformer(player.inventory, (TileEntityStateTransformer) entity);
+				break;
+			case ACLib.energyDepositionerGuiID:
+				if (entity instanceof TileEntityEnergyDepositioner)
+					return new GuiEnergyDepositioner(player.inventory, (TileEntityEnergyDepositioner)entity);
+				break;
 			}
-		if(stack != null)
+		if(!stack.isEmpty())
 			switch(ID){
 			case ACLib.necronmiconGuiID:
 				if(stack.getItem() instanceof ItemNecronomicon && ((ItemNecronomicon)stack.getItem()).isOwner(player, stack))

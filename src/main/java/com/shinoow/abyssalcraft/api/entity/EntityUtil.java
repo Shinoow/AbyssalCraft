@@ -125,8 +125,10 @@ public final class EntityUtil {
 	 * @return true if the Entity is food, otherwise false
 	 */
 	public static boolean isShoggothFood(EntityLivingBase entity){
-		return shoggothFood.contains(entity.getClass()) ? true : shoggothFood.contains(entity.getClass().getSuperclass()) ? true :
-			shoggothFood.contains(entity.getClass().getSuperclass().getSuperclass()) ? true : false;
+		for(Class<? extends EntityLivingBase> c : shoggothFood)
+			if(c.isAssignableFrom(entity.getClass()))
+				return true;
+		return false;
 	}
 
 	static class Vars{

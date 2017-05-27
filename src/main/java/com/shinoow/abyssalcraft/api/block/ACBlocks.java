@@ -205,4 +205,6 @@ public class ACBlocks {
 	public static Block luminous_thistle;
 	public static Block wastelands_thorn;
 	public static Block rending_pedestal;
+	public static Block state_transformer;
+	public static Block energy_depositioner;
 }

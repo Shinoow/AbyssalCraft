@@ -11,10 +11,6 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.common.blocks.tile;
 
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.inventory.ISidedInventory;
@@ -265,16 +261,11 @@ public class TileEntityCrystallizer extends TileEntity implements ISidedInventor
 			if(itemstack[0].isEmpty() && itemstack[1].isEmpty() || itemstack[0].isEmpty()) return false;
 			if(crystallizerItemStacks.get(2).isEmpty() && crystallizerItemStacks.get(3).isEmpty()) return true;
 			if(itemstack[1].isEmpty()){
-				if(crystallizerItemStacks.get(2).isEmpty() || crystallizerItemStacks.get(2).isItemEqual(itemstack[0])) return true;
+				if(crystallizerItemStacks.get(2).isEmpty()) return true;
 				if(!crystallizerItemStacks.get(2).isItemEqual(itemstack[0])) return false;
 			} else {
-				if(crystallizerItemStacks.get(2).isEmpty() && !crystallizerItemStacks.get(3).isItemEqual(itemstack[1])) return false;
-				if(crystallizerItemStacks.get(2).isEmpty() && crystallizerItemStacks.get(3).isEmpty() ||
-						crystallizerItemStacks.get(2).isEmpty() && crystallizerItemStacks.get(3).isItemEqual(itemstack[1]) ||
-						crystallizerItemStacks.get(2).isItemEqual(itemstack[0]) && crystallizerItemStacks.get(3).isEmpty() && !crystallizerItemStacks.get(2).isEmpty() ||
-						crystallizerItemStacks.get(2).isItemEqual(itemstack[0]) && crystallizerItemStacks.get(3).isItemEqual(itemstack[1])) return true;
-				if(!crystallizerItemStacks.get(2).isItemEqual(itemstack[0]) && crystallizerItemStacks.get(3).isEmpty()) return false;
-				if(!crystallizerItemStacks.get(2).isItemEqual(itemstack[0]) && !crystallizerItemStacks.get(3).isItemEqual(itemstack[1])) return false;
+				if(!crystallizerItemStacks.get(2).isEmpty() && !crystallizerItemStacks.get(2).isItemEqual(itemstack[0])) return false;
+				if(!crystallizerItemStacks.get(3).isEmpty() && !crystallizerItemStacks.get(3).isItemEqual(itemstack[1])) return false;
 			}
 			int result = crystallizerItemStacks.get(2).getCount() + itemstack[0].getCount();
 			int result2 = crystallizerItemStacks.get(3).getCount() + itemstack[1].getCount();
@@ -290,16 +281,12 @@ public class TileEntityCrystallizer extends TileEntity implements ISidedInventor
 		if (canCrystallize())
 		{
 			ItemStack[] itemstack = CrystallizerRecipes.instance().getCrystallizationResult(crystallizerItemStacks.get(0));
-			Map<ItemStack, ItemStack> testList = new HashMap<ItemStack, ItemStack>();
-			testList.put(itemstack[0], itemstack[1]);
-			Iterator<?> iterator = testList.entrySet().iterator();
-
 
 			if (crystallizerItemStacks.get(2).isEmpty())
 				crystallizerItemStacks.set(2, itemstack[0].copy());
 			else if (crystallizerItemStacks.get(2).getItem() == itemstack[0].getItem())
 				crystallizerItemStacks.get(2).grow(itemstack[0].getCount());
-			if(iterator.hasNext() && !itemstack[1].isEmpty())
+			if(!itemstack[1].isEmpty())
 				if (crystallizerItemStacks.get(3).isEmpty())
 					crystallizerItemStacks.set(3, itemstack[1].copy());
 				else if (crystallizerItemStacks.get(3).getItem() == itemstack[1].getItem())

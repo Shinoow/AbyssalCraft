@@ -10,24 +10,28 @@
  *     Shinoow -  implementation
  ******************************************************************************/
 package com.shinoow.abyssalcraft.common.items;
+
 import java.util.List;
 
+import net.minecraft.client.resources.I18n;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumActionResult;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
-import net.minecraft.util.math.RayTraceResult;
+import net.minecraft.util.NonNullList;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextFormatting;
-import net.minecraft.util.text.translation.I18n;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import com.shinoow.abyssalcraft.api.item.ACItems;
-import com.shinoow.abyssalcraft.client.handlers.AbyssalCraftClientEventHooks;
-import com.shinoow.abyssalcraft.common.network.PacketDispatcher;
-import com.shinoow.abyssalcraft.common.network.server.StaffOfRendingMessage;
+import com.shinoow.abyssalcraft.client.ClientProxy;
 import com.shinoow.abyssalcraft.lib.ACTabs;
 import com.shinoow.abyssalcraft.lib.util.items.IStaffOfRending;
 
@@ -42,6 +46,16 @@ public class ItemStaff extends Item implements IStaffOfRending{
 	}
 
 	@Override
+	@SideOnly(Side.CLIENT)
+	public void getSubItems(Item par1Item, CreativeTabs par2CreativeTab, NonNullList<ItemStack> par3List){
+		par3List.add(new ItemStack(par1Item));
+		ItemStack stack = new ItemStack(par1Item);
+		stack.setTagCompound(new NBTTagCompound());
+		stack.getTagCompound().setInteger("Mode", 1);
+		par3List.add(stack);
+	}
+
+	@Override
 	public String getItemStackDisplayName(ItemStack par1ItemStack) {
 
 		return TextFormatting.BLUE + super.getItemStackDisplayName(par1ItemStack);
@@ -50,15 +64,15 @@ public class ItemStaff extends Item implements IStaffOfRending{
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
 	public void addInformation(ItemStack is, EntityPlayer player, List l, boolean B){
-		l.add(I18n.translateToLocal("tooltip.staff"));
-		int abyssal = getEnergy(is, "Abyssal");
-		int dread = getEnergy(is, "Dread");
-		int omothol = getEnergy(is, "Omothol");
-		int shadow = getEnergy(is, "Shadow");
-		l.add(I18n.translateToLocal("tooltip.drainstaff.energy.1")+": " + abyssal + "/100");
-		l.add(I18n.translateToLocal("tooltip.drainstaff.energy.2")+": " + dread + "/100");
-		l.add(I18n.translateToLocal("tooltip.drainstaff.energy.3")+": " + omothol + "/100");
-		l.add(I18n.translateToLocal("tooltip.drainstaff.energy.4")+": " + shadow + "/200");
+		l.add(I18n.format("tooltip.staff"));
+		if(!is.hasTagCompound())
+			is.setTagCompound(new NBTTagCompound());
+		l.add(I18n.format("tooltip.staff.mode.1")+": "+TextFormatting.GOLD+I18n.format(is.getTagCompound().getInteger("Mode") == 1 ? "item.drainstaff.normal.name" : "item.gatewaykey.name"));
+		l.add(I18n.format("tooltip.staff.mode.2", TextFormatting.GOLD+ClientProxy.staff_mode.getDisplayName()+TextFormatting.GRAY));
+		if(is.getTagCompound().getInteger("Mode") == 1)
+			ACItems.staff_of_rending.addInformation(is, player, l, B);
+		else if(is.getTagCompound().getInteger("Mode") == 0)
+			ACItems.rlyehian_gateway_key.addInformation(is, player, l, B);
 	}
 
 	@Override
@@ -89,34 +103,24 @@ public class ItemStaff extends Item implements IStaffOfRending{
 	public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, EnumHand hand) {
 
 		ItemStack stack = player.getHeldItem(hand);
-		if(world.isRemote){
 
-			RayTraceResult mov = AbyssalCraftClientEventHooks.getMouseOverExtended(50);
+		if(!stack.hasTagCompound())
+			stack.setTagCompound(new NBTTagCompound());
 
-			if (mov != null)
-				if (mov.entityHit != null && !mov.entityHit.isDead)
-					if (mov.entityHit != player )
-						PacketDispatcher.sendToServer(new StaffOfRendingMessage(mov.entityHit.getEntityId(), hand));
-		}
+		if(stack.getTagCompound().getInteger("Mode") != 1) return new ActionResult(EnumActionResult.PASS, stack);
+		else return ACItems.staff_of_rending.onItemRightClick(world, player, hand);
+	}
 
-		if(getEnergy(stack, "Shadow") >= 200){
-			setEnergy(0, stack, "Shadow");
-			player.inventory.addItemStackToInventory(new ItemStack(ACItems.shadow_gem));
-		}
-		if(getEnergy(stack, "Abyssal") >= 100){
-			setEnergy(0, stack, "Abyssal");
-			player.inventory.addItemStackToInventory(new ItemStack(ACItems.essence, 1, 0));
-		}
-		if(getEnergy(stack, "Dread") >= 100){
-			setEnergy(0, stack, "Dread");
-			player.inventory.addItemStackToInventory(new ItemStack(ACItems.essence, 1, 1));
-		}
-		if(getEnergy(stack, "Omothol") >= 100){
-			setEnergy(0, stack, "Omothol");
-			player.inventory.addItemStackToInventory(new ItemStack(ACItems.essence, 1, 2));
-		}
+	@Override
+	public EnumActionResult onItemUse(EntityPlayer player, World world, BlockPos pos, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ){
 
-		return new ActionResult(EnumActionResult.PASS, stack);
+		ItemStack stack = player.getHeldItem(hand);
+
+		if(!stack.hasTagCompound())
+			stack.setTagCompound(new NBTTagCompound());
+
+		if(stack.getTagCompound().getInteger("Mode") != 0) return EnumActionResult.PASS;
+		else return ACItems.rlyehian_gateway_key.onItemUse(player, world, pos, hand, side, hitX, hitY, hitZ);
 	}
 
 	@Override

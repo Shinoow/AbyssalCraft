@@ -107,8 +107,8 @@ public class EntityLesserShoggoth extends EntityMob implements ICoraliumEntity, 
 		tasks.addTask(7, new EntityAIWatchClosest(this, EntityGatekeeperMinion.class, 8.0F));
 		targetTasks.addTask(1, new EntityAIHurtByTarget(this, false));
 		targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityPlayer.class, true));
-		for(int i = 0; i < EntityUtil.getShoggothFood().size(); i++)
-			targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityUtil.getShoggothFood().get(i), true));
+		for(Class<? extends EntityLivingBase> c : EntityUtil.getShoggothFood())
+			targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, c, true));
 		setSize(1.5F, 2.6F);
 	}
 

@@ -47,9 +47,11 @@ public class GuiNecronomiconMachines extends GuiNecronomicon {
 	private GuiButton buttonDone;
 	private ButtonCategory info, transmutator, crystallizer;
 	private boolean isMInfo, isTra, isCry;
+	private GuiNecronomicon parent;
 
-	public GuiNecronomiconMachines(int bookType){
+	public GuiNecronomiconMachines(int bookType, GuiNecronomicon parent){
 		super(bookType);
+		this.parent = parent;
 	}
 
 	@Override
@@ -65,9 +67,9 @@ public class GuiNecronomiconMachines extends GuiNecronomicon {
 		byte b0 = 2;
 		buttonList.add(buttonNextPage = new ButtonNextPage(1, i + 220, b0 + 154, true));
 		buttonList.add(buttonPreviousPage = new ButtonNextPage(2, i + 18, b0 + 154, false));
-		buttonList.add(info = new ButtonCategory(3, i + 14, b0 + 24, this, NecronomiconText.LABEL_INFO, ACItems.necronomicon));
-		buttonList.add(transmutator = new ButtonCategory(4, i + 14, b0 + 41, this, "container.abyssalcraft.transmutator", getItem(1)));
-		buttonList.add(crystallizer = new ButtonCategory(5, i + 14, b0 + 58, this, "container.abyssalcraft.crystallizer", getItem(2)));
+		buttonList.add(info = new ButtonCategory(3, i + 14, b0 + 24, this, NecronomiconText.LABEL_INFO, false, ACItems.necronomicon));
+		buttonList.add(transmutator = new ButtonCategory(4, i + 14, b0 + 41, this, "container.abyssalcraft.transmutator", false, getItem(1)));
+		buttonList.add(crystallizer = new ButtonCategory(5, i + 14, b0 + 58, this, "container.abyssalcraft.crystallizer", false, getItem(2)));
 		//	buttonList.add(engraver = new ButtonCategory(6, i + 14, b0 + 75, this, StatCollector.translateToLocal("container.abyssalcraft.engraver"), getItem(3)));
 		//	buttonList.add(materializer = new ButtonCategory(7, i + 14, b0 + 92, this, StatCollector.translateToLocal("container.abyssalcraft.materializer"), getItem(3)));
 
@@ -98,7 +100,7 @@ public class GuiNecronomiconMachines extends GuiNecronomicon {
 					++currTurnup;
 			} else if(button.id == 2){
 				if(currTurnup == 0 && !isInfo)
-					mc.displayGuiScreen(new GuiNecronomiconInformation(getBookType()));
+					mc.displayGuiScreen(parent);
 				else if(currTurnup == 0 && isInfo){
 					initGui();
 					isInfo = isMInfo = isTra = isCry = false;

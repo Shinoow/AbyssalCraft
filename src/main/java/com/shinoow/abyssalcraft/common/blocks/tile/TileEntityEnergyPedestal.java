@@ -122,14 +122,12 @@ public class TileEntityEnergyPedestal extends TileEntity implements IEnergyColle
 
 	@Override
 	public void addEnergy(float energy) {
-		isDirty = true;
 		this.energy += energy;
 		if(this.energy > getMaxEnergy()) this.energy = getMaxEnergy();
 	}
 
 	@Override
 	public float consumeEnergy(float energy) {
-		isDirty = true;
 		if(energy < this.energy){
 			this.energy -= energy;
 			return energy;

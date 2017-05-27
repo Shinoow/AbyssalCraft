@@ -71,19 +71,16 @@ public class TileEntityEnergyCollector extends TileEntity implements IEnergyColl
 	public void addEnergy(float energy) {
 		this.energy += energy;
 		if(this.energy > getMaxEnergy()) this.energy = getMaxEnergy();
-		world.notifyBlockUpdate(pos, world.getBlockState(pos), world.getBlockState(pos), 2);
 	}
 
 	@Override
 	public float consumeEnergy(float energy) {
 		if(energy < this.energy){
 			this.energy -= energy;
-			world.notifyBlockUpdate(pos, world.getBlockState(pos), world.getBlockState(pos), 2);
 			return energy;
 		} else {
 			float ret = this.energy;
 			this.energy = 0;
-			world.notifyBlockUpdate(pos, world.getBlockState(pos), world.getBlockState(pos), 2);
 			return ret;
 		}
 	}

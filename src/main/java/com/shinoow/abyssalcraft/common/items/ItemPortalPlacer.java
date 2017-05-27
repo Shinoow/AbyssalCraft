@@ -169,9 +169,17 @@ public class ItemPortalPlacer extends Item {
 	private EnumActionResult buildPortal(World world, BlockPos pos, int direction, IBlockState frame, IBlockState fire){
 		if(direction == 1 || direction == 3)
 		{
-			for(int y = 1; y < 5; y++)
-				for (int z = -1; z < 2; z++)
-					if(!world.isAirBlock(pos.add(0, y, z)))
+			boolean b = true;
+
+			for(int z = -1; z < 3; z++)
+				if(!world.getBlockState(pos.add(0, 0, z)).getBlock().isReplaceable(world, pos.add(0, 0, z)))
+					b = false;
+
+			if(b) pos = pos.down();
+
+			for(int y = 1; y < 6; y++)
+				for (int z = -1; z < 3; z++)
+					if(!world.getBlockState(pos.add(0, y, z)).getBlock().isReplaceable(world, pos.add(0, y, z)))
 						return EnumActionResult.FAIL;
 
 			world.setBlockState(pos.add(0, 1, 0), frame);
@@ -198,9 +206,17 @@ public class ItemPortalPlacer extends Item {
 		}
 		else
 		{
-			for(int y = 1; y < 5; y++)
-				for (int x = -1; x < 2; x++)
-					if(!world.isAirBlock(pos.add(x, y, 0)))
+			boolean b = true;
+
+			for(int x = -1; x < 3; x++)
+				if(!world.getBlockState(pos.add(x, 0, 0)).getBlock().isReplaceable(world, pos.add(x, 0, 0)))
+					b = false;
+
+			if(b) pos = pos.down();
+
+			for(int y = 1; y < 6; y++)
+				for (int x = -1; x < 3; x++)
+					if(!world.getBlockState(pos.add(x, y, 0)).getBlock().isReplaceable(world, pos.add(x, y, 0)))
 						return EnumActionResult.FAIL;
 
 			world.setBlockState(pos.add(0, 1, 0), frame);

@@ -14,7 +14,6 @@ package com.shinoow.abyssalcraft.common.handlers;
 import java.util.ArrayList;
 import java.util.List;
 
-import net.minecraft.block.Block;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -249,19 +248,6 @@ public class IMCHandler {
 				if(failed)
 					warning("Received invalid Materializer recipe from mod %s!", imcMessage.getSender());
 				else info("Received Materializer recipe from mod %s", imcMessage.getSender());
-			}
-			else if(imcMessage.key.equals("shoggothBlacklist")){
-				boolean failed = false;
-				if(!imcMessage.isItemStackMessage())
-					failed = true;
-				else if(Block.getBlockFromItem(imcMessage.getItemStackValue().getItem()) != null){
-					if(!senders.contains(imcMessage.getSender()))
-						senders.add(imcMessage.getSender());
-					AbyssalCraftAPI.addShoggothBlacklist(Block.getBlockFromItem(imcMessage.getItemStackValue().getItem()));
-				} else failed = true;
-				if(failed)
-					warning("Received invalid Shoggoth Block Blacklist from mod %s!", imcMessage.getSender());
-				else info("Received Shoggoth Block Blacklist from mod %s", imcMessage.getSender());
 			}
 			else if(imcMessage.key.equals("addGhoulArmor")){
 				boolean failed = false;

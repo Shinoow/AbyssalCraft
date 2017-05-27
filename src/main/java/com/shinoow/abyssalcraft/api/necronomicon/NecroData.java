@@ -13,7 +13,9 @@ package com.shinoow.abyssalcraft.api.necronomicon;
 
 import java.io.IOException;
 import java.util.Collections;
+import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.NavigableMap;
 
 import net.minecraft.client.Minecraft;
@@ -23,8 +25,11 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.FMLLog;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.logging.log4j.Level;
 
+import com.google.common.collect.ImmutableList;
+import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
 import com.shinoow.abyssalcraft.api.necronomicon.condition.DefaultCondition;
@@ -36,118 +41,120 @@ import com.shinoow.abyssalcraft.api.necronomicon.condition.IUnlockCondition;
  *
  * @since 1.2
  */
-public class NecroData {
+public class NecroData implements INecroData {
 
 	private String identifier;
 	private String title;
 	private String information;
-	private Chapter[] chapters;
+	private List<INecroData> containedData = Lists.newArrayList();
+	private IUnlockCondition condition;
+	private int displayIcon;
 
-	/**
-	 * The base data structure for Necronomicon information pages
-	 * @param title Title to display on the "Index" for the information page
-	 * @param info Optional text to write beside buttons for sub-category pages
-	 * @param chapters Chapters for sub-category pages
-	 */
-	public NecroData(String identifier, String title, String info,Chapter...chapters){
+	public NecroData(String identifier, String title, int displayIcon, String info, IUnlockCondition condition, INecroData...data){
 		this.identifier = identifier;
 		this.title = title;
-		this.chapters = chapters;
+		this.displayIcon = displayIcon;
 		information = info;
+		this.condition = condition;
+		for(INecroData t : data)
+			addData(t);
 	}
 
-	/**
-	 * The base data structure for Necronomicon information pages
-	 * @param title Title to display on the "Index" for the information page
-	 * @param chapters Chapters for sub-category pages
-	 */
-	public NecroData(String identifier, String title,Chapter...chapters){
-		this(identifier, title, null, chapters);
+	public NecroData(String identifier, String title, int displayIcon, IUnlockCondition condition, INecroData...data){
+		this(identifier, title, displayIcon, null, condition, data);
+	}
+
+	public NecroData(String identifier, String title, int displayIcon, String info, INecroData...data){
+		this(identifier, title, displayIcon, info, new DefaultCondition(), data);
+	}
+
+	public NecroData(String identifier, String title, int displayIcon, INecroData...data){
+		this(identifier, title, displayIcon, null, new DefaultCondition(), data);
 	}
 
 	/**
 	 * Getter for the NecroData title
 	 * @return A string representing the Title of the information page
 	 */
+	@Override
 	public String getTitle(){
 		return title;
+	}
+
+	@Override
+	public int getDisplayIcon() {
+		return displayIcon;
 	}
 
 	/**
 	 * Getter for the category information
 	 * @return A specified string used to display on the information page
 	 */
-	public String getInformation(){
+	@Override
+	public String getText() {
 		return information;
+	}
+
+	@Override
+	public boolean hasText(){
+		return !StringUtils.isEmpty(information);
 	}
 
 	/**
 	 * Getter for the NecroData identifier
 	 * @return A unique string representing this NecroData
 	 */
+	@Override
 	public String getIdentifier(){
 		return identifier;
 	}
 
-	/**
-	 * Getter for the Chapter array
-	 * @return An array of stored Chapters
-	 */
-	public Chapter[] getChapters(){
-		return chapters;
+	@Override
+	public IUnlockCondition getCondition() {
+
+		return condition;
 	}
 
-	/**
-	 * Method for getting the title of a specific sub-category
-	 * @param index Position in the index to check
-	 * @return A string representing the Chapter title
-	 */
-	public String getChapterTitle(int index){
-		return chapters[index].title;
+	public List<INecroData> getContainedData(){
+		return ImmutableList.copyOf(containedData);
 	}
 
-	/**
-	 * Adds a Chapter (or overrides one that already exists)
-	 * @param chapter Chapter to add
-	 */
-	public void addChapter(Chapter chapter){
-		for(Chapter chap : chapters)
-			if(chap.identifier.equals(chapter.identifier)){
-				chap = chapter;
+	public void addData(INecroData data){
+		for(INecroData t : containedData)
+			if(t.getIdentifier().equals(data.getIdentifier())){
+				t = data;
 				return;
 			}
 
-		if(chapters.length < 7){
-			Chapter[] newchap = new Chapter[chapters.length + 1];
-			for(int i = 0; i < chapters.length; i++)
-				newchap[i] = chapters[i];
-
-			newchap[chapters.length] = chapter;
-
-			chapters = newchap;
-		} else FMLLog.log("AbyssalCraftAPI", Level.ERROR, "NecroData instance is already full, can't add a new Chapter!");
+		if(hasText() ? containedData.size() < 7 : containedData.size() < 14)
+			containedData.add(data);
+		else FMLLog.log("AbyssalCraftAPI", Level.ERROR, "NecroData instance is already full, can't add more data!");
 	}
 
-	/**
-	 * Removes a Chapter (if it exists)
-	 * @param identifier Chapter identifier
-	 */
-	public void removeChapter(String identifier){
-		Chapter[] newchap = new Chapter[chapters.length -1];
-		Chapter[] oldchap = chapters.clone();
-
-		for(Chapter chap : oldchap)
-			if(chap.identifier.equals(identifier)){
-				for(Chapter chapnew : newchap)
-					for(Chapter chap2 : oldchap)
-						if(chap2 != null && !chap2.identifier.equals(identifier)){
-							chapnew = chap2;
-							chap2 = null;
-							break;
-						}
-				chapters = newchap;
-				return;
+	public void removeData(String identifier){
+		for(INecroData data : containedData)
+			if(data.getIdentifier().equals(identifier)){
+				containedData.remove(data);
+				break;
 			}
+	}
+
+	@Override
+	public boolean equals(Object obj){
+		if(!(obj instanceof NecroData)) return false;
+
+		NecroData nd = (NecroData)obj;
+
+		boolean b1 = nd.title.equals(title);
+		boolean b2 = nd.identifier.equals(identifier);
+		boolean b3 = !nd.hasText() && !hasText() || nd.information.equals(information);
+		boolean b4 = true;
+		for(Object o1 : nd.containedData)
+			for(Object o2 : containedData)
+				if(!o1.equals(o2))
+					b4 = false;
+
+		return b1 && b2 && b3 && b4 && nd.condition.areConditionObjectsEqual(condition.getConditionObject());
 	}
 
 	/**
@@ -156,7 +163,7 @@ public class NecroData {
 	 *
 	 * @since 1.6
 	 */
-	public static class Chapter{
+	public static class Chapter implements INecroData {
 		private NavigableMap<Integer, Page> pages = Maps.newTreeMap((o1, o2) -> {
 			if(o1 > o2)
 				return 1;
@@ -166,15 +173,28 @@ public class NecroData {
 		});
 		private String identifier;
 		private String title;
+		private IUnlockCondition condition;
+		private int displayIcon;
 
 		/**
 		 * A Necronomicon Chapter
 		 * @param identifier Identifier (used to locate the chapter, should be unique for every NecroData)
 		 * @param title Title to display on pages in the Chapter
 		 */
-		public Chapter(String identifier, String title){
+		public Chapter(String identifier, String title, int displayIcon, IUnlockCondition condition){
 			this.identifier = identifier;
 			this.title = title;
+			this.displayIcon = displayIcon;
+			this.condition = condition;
+		}
+
+		/**
+		 * A Necronomicon Chapter
+		 * @param identifier Identifier (used to locate the chapter, should be unique for every NecroData)
+		 * @param title Title to display on pages in the Chapter
+		 */
+		public Chapter(String identifier, String title, int displayIcon){
+			this(identifier, title, displayIcon, new DefaultCondition());
 		}
 
 		/**
@@ -183,15 +203,20 @@ public class NecroData {
 		 * @param title Title to display on pages in the Chapter
 		 * @param pages an array of Pages (it is optional to do it this way)
 		 */
-		public Chapter(String identifier, String title, Page...pages){
-			this(identifier, title);
+		public Chapter(String identifier, String title, int displayIcon, IUnlockCondition condition, Page...pages){
+			this(identifier, title, displayIcon, condition);
 			for(Page page : pages)
 				addPage(page);
+		}
+
+		public Chapter(String identifier, String title, int displayIcon, Page...pages){
+			this(identifier, title, displayIcon, new DefaultCondition(), pages);
 		}
 
 		/**
 		 * Getter for the Chapter identifier
 		 */
+		@Override
 		public String getIdentifier(){
 			return identifier;
 		}
@@ -199,8 +224,30 @@ public class NecroData {
 		/**
 		 * Getter for the Chapter title
 		 */
+		@Override
 		public String getTitle(){
 			return title;
+		}
+
+		@Override
+		public int getDisplayIcon() {
+
+			return displayIcon;
+		}
+
+		@Override
+		public String getText() {
+			return null;
+		}
+
+		@Override
+		public boolean hasText() {
+			return false;
+		}
+
+		@Override
+		public IUnlockCondition getCondition() {
+			return condition;
 		}
 
 		/**
@@ -255,6 +302,30 @@ public class NecroData {
 		public boolean hasPage(int pageNum){
 			return pages.containsKey(pageNum);
 		}
+
+		@Override
+		public boolean equals(Object obj){
+
+			if(!(obj instanceof Chapter)) return false;
+
+			Chapter c = (Chapter)obj;
+
+			boolean b1 = c.title.equals(title);
+			boolean b2 = c.identifier.equals(identifier);
+			boolean b3 = true;
+			for(Entry<Integer, Page> e1 : c.pages.entrySet())
+				for(Entry<Integer, Page> e2 : pages.entrySet())
+					if(e1.getKey() != e2.getKey() || !e1.getValue().equals(e2.getValue()))
+						b3 = false;
+
+			return b1 && b2 && b3 && c.condition.areConditionObjectsEqual(condition.getConditionObject());
+		}
+
+		@Deprecated
+		public Chapter(String identifier, String title){ this(identifier, title, 0); }
+
+		@Deprecated
+		public Chapter(String identifier, String title, Page...pages){ this(identifier, title, 0, pages); }
 	}
 
 	/**
@@ -263,19 +334,21 @@ public class NecroData {
 	 *
 	 * @since 1.6
 	 */
-	public static class Page{
+	public static class Page implements INecroData {
 		private Object icon;
+		private String title;
 		private int pageNum;
 		private String text;
 		private IUnlockCondition condition;
+		private int displayIcon;
 
 		/**
 		 * A Necronomicon Page
 		 * @param pageNum Page number
 		 * @param text Text to display on the Page
 		 */
-		public Page(int pageNum, String text){
-			this(pageNum, null, text, new DefaultCondition());
+		public Page(int pageNum, String title, int displayIcon, String text){
+			this(pageNum, title, displayIcon, null, text, new DefaultCondition());
 		}
 
 		/**
@@ -284,8 +357,8 @@ public class NecroData {
 		 * @param text Text to display on the Page
 		 * @param condition Condition to determine whether or not this page can be read
 		 */
-		public Page(int pageNum, String text, IUnlockCondition condition){
-			this(pageNum, null, text, condition);
+		public Page(int pageNum, String title, int displayIcon, String text, IUnlockCondition condition){
+			this(pageNum, title, displayIcon, null, text, condition);
 		}
 
 		/**
@@ -294,8 +367,8 @@ public class NecroData {
 		 * @param icon ResourceLocation/ItemStack/CraftingStack to display on the Page
 		 * @param text Text to display on the Page
 		 */
-		public Page(int pageNum, Object icon, String text){
-			this(pageNum, icon, text, new DefaultCondition());
+		public Page(int pageNum, String title, int displayIcon, Object icon, String text){
+			this(pageNum, title, displayIcon, icon, text, new DefaultCondition());
 		}
 
 		/**
@@ -304,9 +377,11 @@ public class NecroData {
 		 * @param icon ResourceLocation/ItemStack/CraftingStack to display on the Page
 		 * @param text Text to display on the Page
 		 */
-		public Page(int pageNum, Object icon, String text, IUnlockCondition condition){
+		public Page(int pageNum, String title, int displayIcon, Object icon, String text, IUnlockCondition condition){
 			if(pageNum == 0) throw new ArithmeticException("The Page number can't be zero");
 			this.pageNum = pageNum;
+			this.title = title;
+			this.displayIcon = displayIcon;
 			if(icon != null)
 				if(!(icon instanceof ResourceLocation) && !(icon instanceof ItemStack) && !(icon instanceof CraftingStack) && !(icon instanceof String))
 					throw new IllegalArgumentException("Icon isn't a ResourceLocation, ItemStack, CraftingStack or URL String!");
@@ -343,9 +418,34 @@ public class NecroData {
 			return icon;
 		}
 
+		@Override
+		public String getTitle() {
+
+			return title;
+		}
+
+		@Override
+		public int getDisplayIcon() {
+
+			return displayIcon;
+		}
+
+		@Override
+		public boolean hasText() {
+
+			return true;
+		}
+
+		@Override
+		public String getIdentifier() {
+
+			return "";
+		}
+
 		/**
 		 * Fetches the text to display on the page.
 		 */
+		@Override
 		public String getText(){
 			return text;
 		}
@@ -353,6 +453,7 @@ public class NecroData {
 		/**
 		 * Fetches the unlocking condition (determines if the page can be read)
 		 */
+		@Override
 		public IUnlockCondition getCondition(){
 			return condition;
 		}
@@ -363,12 +464,46 @@ public class NecroData {
 
 			Page page = (Page)obj;
 
-			boolean test1 = page.pageNum == pageNum;
-			boolean test2 = page.icon == null && icon == null || page.icon.equals(icon);
-			boolean test3 = page.text.equals(text);
-			boolean test4 = page.condition.areConditionObjectsEqual(condition.getConditionObject());
+			boolean b1 = page.title.equals(title);
+			boolean b2 = page.pageNum == pageNum;
+			boolean b3 = page.icon == null && icon == null || page.icon.equals(icon);
+			boolean b4 = page.text.equals(text);
+			boolean b5 = page.condition.areConditionObjectsEqual(condition.getConditionObject());
 
-			return test1 && test2 && test3 && test4;
+			return b1 && b2 && b3 && b4 && b5;
 		}
+
+		@Deprecated
+		public Page(int pageNum, String text){ this(pageNum, null, text, new DefaultCondition()); }
+
+		@Deprecated
+		public Page(int pageNum, String text, IUnlockCondition condition){ this(pageNum, null, text, condition); }
+
+		@Deprecated
+		public Page(int pageNum, Object icon, String text){ this(pageNum, icon, text, new DefaultCondition()); }
+
+		@Deprecated
+		public Page(int pageNum, Object icon, String text, IUnlockCondition condition){ this(pageNum, "title", 0, icon, text, condition); }
 	}
+
+	@Deprecated
+	public NecroData(String identifier, String title, String info,Chapter...chapters){ this(identifier, title, 0, info, chapters); }
+
+	@Deprecated
+	public NecroData(String identifier, String title,Chapter...chapters){ this(identifier, title, 0, null, new DefaultCondition(), chapters); }
+
+	@Deprecated
+	public String getInformation(){ return getText(); }
+
+	@Deprecated
+	public Chapter[] getChapters(){ return new Chapter[0]; }
+
+	@Deprecated
+	public String getChapterTitle(int index){ return ""; }
+
+	@Deprecated
+	public void addChapter(Chapter chapter){}
+
+	@Deprecated
+	public void removeChapter(String identifier){}
 }

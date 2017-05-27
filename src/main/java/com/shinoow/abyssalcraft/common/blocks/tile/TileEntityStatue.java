@@ -46,14 +46,6 @@ public class TileEntityStatue extends TileEntity implements IEnergyManipulator, 
 		timer = nbttagcompound.getInteger("Timer");
 		activationTimer = nbttagcompound.getInteger("ActivationTimer");
 		tolerance = nbttagcompound.getInteger("Tolerance");
-		if(nbttagcompound.hasKey("Deity") && !nbttagcompound.hasKey("ActiveDeity")){//Converting the old tags
-			nbttagcompound.setString("ActiveDeity", nbttagcompound.getString("Deity"));
-			nbttagcompound.removeTag("Deity");
-		}
-		if(nbttagcompound.hasKey("Amplifier") && !nbttagcompound.hasKey("ActiveAmplifier")){
-			nbttagcompound.setString("ActiveAmplifier", nbttagcompound.getString("Amplifier"));
-			nbttagcompound.removeTag("Amplifier");
-		}
 		PEUtils.readManipulatorNBT(this, nbttagcompound);
 	}
 
@@ -165,6 +157,12 @@ public class TileEntityStatue extends TileEntity implements IEnergyManipulator, 
 	}
 
 	@Override
+	public boolean canTransferPE() {
+
+		return true;
+	}
+
+	@Override
 	public void disrupt() {
 		tolerance = 0;
 		if(!world.isRemote){
@@ -193,8 +191,8 @@ public class TileEntityStatue extends TileEntity implements IEnergyManipulator, 
 						EntityUtil.hasNecronomicon(world.getClosestPlayer(xp, yp, zp, range, false))){
 					ItemStack item = world.getClosestPlayer(xp, yp, zp, range, false).getHeldItem(EnumHand.MAIN_HAND);
 					ItemStack item1 = world.getClosestPlayer(xp, yp, zp, range, false).getHeldItem(EnumHand.OFF_HAND);
-					if(item != null && item.getItem() instanceof IEnergyTransporterItem ||
-							item1 != null && item1.getItem() instanceof IEnergyTransporterItem){
+					if(!item.isEmpty() && item.getItem() instanceof IEnergyTransporterItem ||
+							!item1.isEmpty() && item1.getItem() instanceof IEnergyTransporterItem){
 						timer++;
 						if(timer >= (int)(timerMax / Math.max(getAmplifier(AmplifierType.DURATION), 1.0F))){
 							timer = world.rand.nextInt(10);

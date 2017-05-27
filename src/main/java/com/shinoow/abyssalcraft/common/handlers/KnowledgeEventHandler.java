@@ -23,6 +23,7 @@ import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent.PlayerChangedDimensionEvent;
+import net.minecraftforge.fml.common.registry.ForgeRegistries;
 
 import com.shinoow.abyssalcraft.common.caps.NecroDataCapabilityProvider;
 
@@ -39,8 +40,8 @@ public class KnowledgeEventHandler {
 		if(event.getEntityLiving() instanceof EntityPlayer && !event.getEntityLiving().world.isRemote){
 			EntityPlayer player = (EntityPlayer)event.getEntityLiving();
 			Biome b = player.world.getBiome(player.getPosition());
-			if(player.ticksExisted % 200 == 0)
-				player.getCapability(NecroDataCapabilityProvider.NECRO_DATA_CAP, null).triggerBiomeUnlock(Biome.REGISTRY.getNameForObject(b).toString());
+			if(player.ticksExisted % 200 == 0 && ForgeRegistries.BIOMES.getKey(b) != null)
+				player.getCapability(NecroDataCapabilityProvider.NECRO_DATA_CAP, null).triggerBiomeUnlock(ForgeRegistries.BIOMES.getKey(b).toString());
 		}
 	}
 
@@ -53,7 +54,7 @@ public class KnowledgeEventHandler {
 	public void onDeath(LivingDeathEvent event){
 		if(!(event.getEntityLiving() instanceof EntityPlayer) && !event.getEntityLiving().world.isRemote){
 			EntityLivingBase e = event.getEntityLiving();
-			if(event.getSource().getEntity() != null && event.getSource().getEntity() instanceof EntityPlayer)
+			if(event.getSource() != null && event.getSource().getEntity() instanceof EntityPlayer && EntityList.getKey(e) != null)
 				event.getSource().getEntity().getCapability(NecroDataCapabilityProvider.NECRO_DATA_CAP, null).triggerEntityUnlock(EntityList.getKey(e).toString());
 		}
 	}

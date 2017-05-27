@@ -224,18 +224,7 @@ public class EntityHandler implements ILifeCycleHandler {
 					ACBiomes.purified_dreadlands, ACBiomes.dreadlands_mountains, ACBiomes.dreadlands_forest, ACBiomes.omothol, ACBiomes.dark_realm);
 	}
 
-	//	private static int getUniqueEntityId() {
-	//		do
-	//			startEntityId++;
-	//		while (EntityList.ID_TO_CLASS.containsKey(startEntityId));
-	//
-	//		return startEntityId;
-	//	}
-
-	@SuppressWarnings("unchecked")
 	private static void registerEntityWithEgg(Class<? extends Entity> entity, String name, int modid, int trackingRange, int updateFrequency, boolean sendsVelocityUpdates, int primaryColor, int secondaryColor) {
-		//		int id = getUniqueEntityId();
 		EntityRegistry.registerModEntity(new ResourceLocation("abyssalcraft", name.toLowerCase(Locale.ENGLISH)), entity,"abyssalcraft."+ name, modid, instance, trackingRange, updateFrequency, sendsVelocityUpdates, primaryColor, secondaryColor);
-		//		EntityList.ID_TO_CLASS.put(id, entity);
 	}
 }

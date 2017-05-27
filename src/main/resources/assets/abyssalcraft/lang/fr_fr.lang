@@ -204,6 +204,12 @@ container.abyssalcraft.materializer=Materializer
 container.abyssalcraft.energycontainer=Energy Container
 container.abyssalcraft.tieredenergycontainer=Tiered Energy Container
 container.abyssalcraft.rendingpedestal=Rending Pedestal
+container.abyssalcraft.statetransformer=State Transformer
+container.abyssalcraft.energydepositioner=Energy Depositioner
+
+#Gui Buttons
+gui.abyssalcraft.statetransformer.insert=Insert
+gui.abyssalcraft.statetransformer.extract=Extract
 
 #NEI Integration
 container.abyssalcraft.crystallizer.nei=Crystallization
@@ -212,6 +218,7 @@ container.abyssalcraft.engraver.nei=Coin Engraving
 container.abyssalcraft.materializer.nei=Materialization
 container.abyssalcraft.rituals.nei=Necronomicon Ritual
 container.abyssalcraft.rending.nei=Staff of Rending
+container.abyssalcraft.upgrade.nei=Upgrade Kit
 
 #JEI Integration
 gui.acjei.category.fuel.transmutator=Transmutator Fuel
@@ -257,6 +264,7 @@ necronomicon.turnupindicator=Turn-up %1$s of %2$s
 necronomicon.miscinformation=Misc Information
 necronomicon.information.enchantments=Enchantments
 necronomicon.sacrifice=Sacrifice required
+necronomicon.information.decorativestatues=Decorative Statues
 
 #Necronomicon Text
 #Note: the maximum amount of letters per string is 368
@@ -410,11 +418,16 @@ necronomicon.text.crafting.dreadium.1=Dreadium can be obtained in numerous ways.
 necronomicon.text.crafting.dreadium.2=When you have enough Dreadium Ingots to craft a Crystallizer, you can crystallize Dreaded materials to obtain Dreadium Crystals (mostly shards which you can combine into crystals that can be transmuted for Dreadium Ingots).
 necronomicon.text.crafting.monolithpillar.1=A Monolith Stone Pillar is crafted with Monolith Stone. It's primary use is to amplify the range of Potential Energy Manipulators (statues for example).
 necronomicon.text.crafting.ritualcharm.1=A Ritual Charm is crafted with Gold Ingots and a Diamond. By itself it has no effect, but through rituals it can amplify various stats of Potential Energy Manipulators.
-necronomicon.text.crafting.sacrificialaltar.1=A Sacrificial Altar is crafted with Torches, Monolith Stone, A Shadow Gem and a Coralium Pearl. They convert life-force into Potential Energy.
+necronomicon.text.crafting.sacrificialaltar.1=A Sacrificial Altar is crafted with Shadow Fragments, Monolith Stone, A Shadow Gem and a Coralium Pearl. They convert life-force into Potential Energy.
 necronomicon.text.crafting.sacrificialaltar.2=When a entity is targeted, it will emit smoke particles. Once the entity dies, an amount of PE equal to it's max health will be collected. It only targets non-undead adult entities that aren't players. It should be noted that the altar goes on a cooldown after collecting a fifth of it's max capacity, preventing collection for a minute.
 necronomicon.text.crafting.energycollector=A Energy Collector is crafted with Monolith Stone and a Shadow Gem. They can collect PE, but require a Energy Relay to transport it.
 necronomicon.text.crafting.energyrelay=A Energy Relay is crafted with Monolith Stone, Shadow Gem Shards and a Shadow Gem. They can be used to transport PE between blocks capable of storing it.
 necronomicon.text.crafting.rendingpedestal=A Rending Pedestal is crafted with Monolith Stone, A Shard of Oblivion and a Coralium Pearl. They can be used to automate the Staff of Rending.
+necronomicon.text.crafting.stonetablet=A Stone Tablet is crafted with Monolith Stone, Shadow Gem Shards and a Shadow Gem. Can be used in the State Transformer and Energy Depositioner in order to generate PE.
+necronomicon.text.crafting.statetransformer.1=A State Transformer is crafted with Monolith Stone, a Transmutation Gem and a Chest. It allows you to store input objects as PE in a Stone Tablet.
+necronomicon.text.crafting.statetransformer.2=Fill the input slots with stacks of items, then place a empty Stone Tablet in the leftmost slot to fill it. Press the button to switch modes, allowing you to reverse the process, returning items previously stored in a Stone Tablet. The amount of PE per input item is 1 * (64/max stack size) PE/item. Input/output can be automated.
+necronomicon.text.crafting.energydepositioner.1=A Energy Depositioner is crafted with Monolith Stone, Shadow Gems, a Transmutation Gem and a Energy Relay. This is a PE manipulator, working like statues.
+necronomicon.text.crafting.energydepositioner.2=By placing a charged Stone Tablet in the input slot, the Depositioner will siphon out any PE stored in it, returning either a empty Stone Tablet or a cursed one. This operation will corrupt the surrounding area (17x17 blocks), converting it into Darklands (more Darklands increases the chance of cursed Stone Tablets). Output can be automated.
 
 necronomicon.text.crafting.upgradekit.1=A Upgrade Kit is crafted with Wooden Planks, Cobblestone, String and Flint. Upgrade kits can upgrade tools and armor through an anvil.
 necronomicon.text.crafting.upgradekit.2=To upgrade a kit, you need 2 units of the next material and 1 of the current. Materials are Wood -> Cobblestone -> Iron -> Gold -> Diamond -> Abyssalnite -> Refined Coralium -> Dreadium -> Ethaxium.
@@ -427,6 +440,14 @@ necronomicon.text.crafting.odb=A Oblivion Deathbomb is crafted with Obsidian, A 
 necronomicon.text.crafting.carboncluster=A Carbon Cluster is crafted with Crystallized Carbon. They are used in order to craft Dense Carbon Clusters.
 necronomicon.text.crafting.densecarboncluster=A Dense Carbon Cluster is crafted with Carbon Clusters and a block of Obsidian. Can be transmuted into a Diamond.
 necronomicon.text.crafting.crate=A Wooden Crate is crafted with Sticks, Wooden Planks and a Chest. Has an extra row of inventory slots more than a Chest.
+
+necronomicon.text.crafting.decorativeazathothstatue=A Decorative Azathoth Statue is crafted with Monolith Stone, Clay and Purple Dye.
+necronomicon.text.crafting.decorativecthulhustatue=A Decorative Cthulhu Statue is crafted with Monolith Stone, Clay and Cyan Dye.
+necronomicon.text.crafting.decorativehasturstatue=A Decorative Hastur Statue is crafted with Monolith Stone, Clay and Dandelion Yellow.
+necronomicon.text.crafting.decorativejzaharstatue=A Decorative J'zahar Statue is crafted with Monolith Stone, Clay and Gray Dye.
+necronomicon.text.crafting.decorativenyarlathotepstatue=A Decorative Nyarlathotep Statue is crafted with Monolith Stone, Clay and Lapis Lazuli.
+necronomicon.text.crafting.decorativeshubniggurathstatue=A Decorative Shub-Niggurath Statue is crafted with Monolith Stone, Clay and a Ink Sac.
+necronomicon.text.crafting.decorativeyogsothothstatue=A Decorative Yog-Sothoth Statue is crafted with Monolith Stone, Clay and Glowstone Dust.
 
 necronomicon.text.enchantment.coralium=The Coralium Enchantment allows you to infect any entity you hit with the Coralium Plague (that is, if they aren't immune). Can only be obtained through a ritual.
 necronomicon.text.enchantment.dread=The Dread Enchantment allows you to infect any entity you hit with the Dread Plague (that is, if they aren't immune). Can only be obtained through a ritual.
@@ -532,15 +553,16 @@ necronomicon.text.pe.5=You should take into account that the Lesser Shoggoths ha
 necronomicon.text.pe.6=If you notice Shoggoth activity near your homestead, it is highly adviced that you immediately evacuate your land, or construct a large wall (or other defensive measures) to ensure the infestation doesn't spread onto your land. Recovering your land from a Shoggoth infestation is quite difficult, so be cautious.
 necronomicon.text.pe.7=The statues come in different shapes, all depicting Great Old Ones. They can transport PE to nearby players holding Necronomicons when under open sky.
 necronomicon.text.pe.8=It should be noted that you harvesting PE isn't appreciated. This causes disruptions to occur (displayed by a bolt of lightning striking the statue, or other PE manipulator). Disruptions are random events that can affect the player, other entities or the environment. Their purpose is to punish those who tries to drain PE from the higher plane.
-necronomicon.text.pe.9=One way to boost the efficiency of statues (and other PE manipulators) is through the use of Ritual Charms. They can boost various stats (check the tooltip).
-necronomicon.text.pe.10=You can also craft a Energy Pedestal, which can collect PE from statues (and other PE manipulators) placed 3 blocks from it. Monolith Stone Pillars boost the range.
-necronomicon.text.pe.11=Along with the Energy Pedestal there's the Sacrificial Altar, which can convert life-force from dying entities into PE (targeted entities emit smoke).
-necronomicon.text.pe.12=Another way to collect PE from manipulators is with a Energy Collector. It works like a Energy Pedestal (except you can't place items on it).
-necronomicon.text.pe.13=Energy Relays are used to transfer PE, and can do so in any direction (but it can't transport it through solid blocks, except glass).
-necronomicon.text.pe.14=Building networks with Energy Relays allows you to tranport PE over larger distances. Energy Relays can drain PE from PE Collector placed next to it.
-necronomicon.text.pe.15=In order to store greater amounts of PE, you can create a Energy Container. They allow insertion through Energy Relays or interaction with the block.
-necronomicon.text.pe.16=If the PE production still is too slow, you can also upgrade the various PE handling blocks through infusion rituals to boost stats.
-necronomicon.text.pe.17=Upon reaching Omothol, you will be able to create deity-specific Ritual Charms (with an Abyssalnomicon), or buy them from Remnant Priests. Those charms will give an additional boost if used on manipulators associated with the same deity as the one displayed on the charm.
+necronomicon.text.pe.9=A Energy Depositioner is another PE manipulator. It works like a generator, where the "fuel" are Stone Tablets charged with PE.
+necronomicon.text.pe.10=One way to boost the efficiency of statues (and other PE manipulators) is through the use of Ritual Charms. They can boost various stats (check the tooltip).
+necronomicon.text.pe.11=You can also craft a Energy Pedestal, which can collect PE from statues (and other PE manipulators) placed 3 blocks from it. Monolith Stone Pillars boost the range.
+necronomicon.text.pe.12=Along with the Energy Pedestal there's the Sacrificial Altar, which can convert life-force from dying entities into PE (targeted entities emit smoke).
+necronomicon.text.pe.13=Another way to collect PE from manipulators is with a Energy Collector. It works like a Energy Pedestal (except you can't place items on it).
+necronomicon.text.pe.14=Energy Relays are used to transfer PE, and can do so in any direction (but it can't transport it through solid blocks, except glass).
+necronomicon.text.pe.15=Building networks with Energy Relays allows you to tranport PE over larger distances. Energy Relays can drain PE from PE Collector placed next to it.
+necronomicon.text.pe.16=In order to store greater amounts of PE, you can create a Energy Container. They allow insertion through Energy Relays or interaction with the block.
+necronomicon.text.pe.17=If the PE production still is too slow, you can also upgrade the various PE handling blocks through infusion rituals to boost stats.
+necronomicon.text.pe.18=Upon reaching Omothol, you will be able to create deity-specific Ritual Charms (with an Abyssalnomicon), or buy them from Remnant Priests. Those charms will give an additional boost if used on manipulators associated with the same deity as the one displayed on the charm.
 
 necronomicon.text.machines.info=Check the information section for information regarding the different machines, or the other sections for all recipes for the specified machine. The recipes aren't sorted in any way.
 
@@ -732,6 +754,12 @@ ac.ritual.sorDLupgrade=Dreadlands Staff of Rending
 ac.ritual.sorDLupgrade.desc=A Dreadlands Staff of Rending is creadted by infusing a Abyssal Wasteland Staff of Rending with Dreadstone, Dread Fragment and and a Shadow Gem.
 ac.ritual.sorOMTupgrade=Omothol Staff of Rending
 ac.ritual.sorOMTupgrade.desc=A Omothol Staff of Rending is creadted by infusing a Dreadlands Staff of Rending with Omothol Stone, Omothol Flesh and and a Shadow Gem.
+ac.ritual.cleansing=Ritual of Cleansing
+ac.ritual.cleansing.desc=By presenting 8 random statues, a massive amount of energy and a living sacrifice, you revert the corruption of the Abyss from the surrounding area. With far too much power comes no responsibilities, what so ever. It purges the Darklands, restoring it to its pure Overworld state.
+ac.ritual.corruption=Ritual of Corruption
+ac.ritual.corruption.desc=By presenting 4 random statues, 4 blocks of Darkstone, a large amount of energy and a living sacrifice, you summon powers from the Abyss to corrupt the surrounding area. Defile the Overworld's purity in order to bring forth the Darklands.
+ac.ritual.resurrection=Dark Resurrection
+ac.ritual.resurrection.desc=By presenting crystalilzed compounds resembling the elements of life, a living sacrifice and a Name Tag with the name of a fallen companion, you resurrect it. The Crystal size scale with the companion (Shards for something the size of a Chicken, Clusters for a Horse, normal for anything inbetween). Life has limits, however.
 
 #Rending
 ac.rending.shadowgem=Shadow Gems are made from harvesting Shadow Energy from living shadows.
@@ -758,6 +786,10 @@ ac_worldgen=Worldgen
 ac_worldgen.tooltip=Worldgen configuration
 ac_itemblacklist=Entity Item Blacklist
 ac_itemblacklist.tooltip=Entity Item Blacklist configuration
+
+#Keybinds
+key.abyssalcraft.category=AbyssalCraft
+key.staff_mode.desc=Change Staff of The Gatekeeper Mode
 
 #Damagesources
 death.attack.coralium=%1$s died from the Coralium Plague
@@ -795,6 +827,10 @@ tooltip.drainstaff.energy.4=Shadow Energy
 tooltip.gatekeeperessence.1=A mere fragment of J'zahar.
 tooltip.gatekeeperessence.2=You can feel it pulsating with power.
 tooltip.decorativestatue=This block is purely for decoration, and won't do anything
+tooltip.staff.mode.1=Mode
+tooltip.staff.mode.2=Press %s to change mode
+tooltip.stonetablet.cursed=Cursed
+tooltip.stonetablet.contents=%d stacks
 
 #Creative Tabs
 itemGroup.acblocks= Blocs d'AbyssalCraft
@@ -1013,6 +1049,8 @@ tile.coraliumcobblestonewall.name=Coralium Cobblestone Wall
 tile.luminousthistle.name=Luminous Thistle
 tile.wastelandsthorn.name=Wasteland's Thorn
 tile.rendingpedestal.name=Rending Pedestal
+tile.statetransformer.name=State Transformer
+tile.energydepositioner.name=Energy Depositioner
 
 #Pre/Postfixes
 decorativestatue.prefix=Decorative %s
@@ -1235,6 +1273,7 @@ item.engraving_yogsothoth.name=Yog-Sothoth Coin Engraving
 item.engraving_shubniggurath.name=Shub-Niggurath Coin Engraving
 item.gatekeeperessence.name=Essence of The Gatekeeper
 item.interdimensionalcage.name=Interdimensional Cage
+item.stonetablet.name=Stone Tablet
 
 #Entities
 entity.abyssalcraft.depthsghoul.name=Goule des Profondeurs

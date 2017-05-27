@@ -203,19 +203,16 @@ public class TileEntityRendingPedestal extends TileEntity implements IEnergyCont
 	public void addEnergy(float energy) {
 		this.energy += energy;
 		if(this.energy > getMaxEnergy()) this.energy = getMaxEnergy();
-		world.notifyBlockUpdate(pos, world.getBlockState(pos), world.getBlockState(pos), 2);
 	}
 
 	@Override
 	public float consumeEnergy(float energy) {
 		if(energy < this.energy){
 			this.energy -= energy;
-			world.notifyBlockUpdate(pos, world.getBlockState(pos), world.getBlockState(pos), 2);
 			return energy;
 		} else {
 			float ret = this.energy;
 			this.energy = 0;
-			world.notifyBlockUpdate(pos, world.getBlockState(pos), world.getBlockState(pos), 2);
 			return ret;
 		}
 	}
@@ -268,7 +265,6 @@ public class TileEntityRendingPedestal extends TileEntity implements IEnergyCont
 			omotholEnergy += amount;
 			break;
 		}
-		world.notifyBlockUpdate(pos, world.getBlockState(pos), world.getBlockState(pos), 2);
 	}
 
 	public void setEnergy(int type, int amount){
@@ -286,7 +282,6 @@ public class TileEntityRendingPedestal extends TileEntity implements IEnergyCont
 			omotholEnergy = amount;
 			break;
 		}
-		world.notifyBlockUpdate(pos, world.getBlockState(pos), world.getBlockState(pos), 2);
 	}
 
 	@Override
@@ -338,6 +333,9 @@ public class TileEntityRendingPedestal extends TileEntity implements IEnergyCont
 
 		if(!stack.isEmpty() && stack.getCount() > getInventoryStackLimit())
 			stack.setCount(getInventoryStackLimit());
+
+		if(index == 1)
+			world.notifyBlockUpdate(pos, world.getBlockState(pos), world.getBlockState(pos), 2);
 	}
 
 	@Override
@@ -393,12 +391,19 @@ public class TileEntityRendingPedestal extends TileEntity implements IEnergyCont
 	@Override
 	public int getField(int id) {
 
+		if(id < 4)
+			return getEnergy(id);
+		if(id == 4)
+			return (int)energy;
 		return 0;
 	}
 
 	@Override
 	public void setField(int id, int value) {
-
+		if(id < 4)
+			setEnergy(id, value);
+		if(id == 4)
+			energy = value;
 	}
 
 	@Override
