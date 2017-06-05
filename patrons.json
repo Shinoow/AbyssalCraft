@@ -8,25 +8,9 @@
 			"type": "page",
 			"version": 1,
 			"number": 1,
-			"icontype": "resourcelocation",
-			"icon": "abyssalcraft:textures/gui/necronomicon/patreon/saice.png",
-			"text": "Saice Shoop"
-		},
-		{
-			"type": "page",
-			"version": 1,
-			"number": 2,
-			"icontype": "resourcelocation",
-			"icon": "abyssalcraft:textures/gui/necronomicon/patreon/minecreatr.png",
-			"text": "Minecreatr"
-		},
-		{
-			"type": "page",
-			"version": 1,
-			"number": 3,
-			"icontype": "resourcelocation",
-			"icon": "abyssalcraft:textures/gui/necronomicon/missing.png",
-			"text": "Kendoshii"
+			"icontype": "url",
+			"icon": "http://www.shinoow.com/AbyssalCraft/images/patreon/tedyhere.png",
+			"text": "Tedyhere"
 		}
 	]
 }
