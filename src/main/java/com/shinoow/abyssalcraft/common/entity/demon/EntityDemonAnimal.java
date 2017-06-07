@@ -14,13 +14,7 @@ package com.shinoow.abyssalcraft.common.entity.demon;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.IEntityLivingData;
-import net.minecraft.entity.ai.EntityAIAttackMelee;
-import net.minecraft.entity.ai.EntityAIHurtByTarget;
-import net.minecraft.entity.ai.EntityAILookIdle;
-import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
-import net.minecraft.entity.ai.EntityAISwimming;
-import net.minecraft.entity.ai.EntityAIWander;
-import net.minecraft.entity.ai.EntityAIWatchClosest;
+import net.minecraft.entity.ai.*;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
@@ -147,7 +141,7 @@ public class EntityDemonAnimal extends EntityMob implements IDreadEntity {
 		Object data = super.onInitialSpawn(difficulty, par1EntityLivingData);
 
 		if(worldObj.provider.getDimension() == 0 && ACConfig.demonAnimalFire && rand.nextInt(3) == 0
-				|| worldObj.provider.getDimension() == -1 && rand.nextBoolean())
+			|| worldObj.provider.getDimension() == -1 && rand.nextBoolean())
 			canBurn = true;
 
 		return (IEntityLivingData)data;

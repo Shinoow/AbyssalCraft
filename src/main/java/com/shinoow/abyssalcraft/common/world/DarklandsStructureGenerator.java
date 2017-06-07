@@ -26,10 +26,10 @@ import com.shinoow.abyssalcraft.common.structures.overworld.*;
 public class DarklandsStructureGenerator {
 
 	static List<WorldGenerator> structures = Lists.newArrayList((WorldGenerator)new AChouse1(), new AChouse2(), new ACscion1(), new ACscion2(),
-			new StructureRitualGrounds(), new StructureCircularShrine(), new StructureCircularShrineColumns(), new StructureRitualGroundsColumns(),
-			new StructureElevatedShrine(), new StructureElevatedShrineLarge());
+		new StructureRitualGrounds(), new StructureCircularShrine(), new StructureCircularShrineColumns(), new StructureRitualGroundsColumns(),
+		new StructureElevatedShrine(), new StructureElevatedShrineLarge());
 	static List<WorldGenerator> shrines = Lists.newArrayList((WorldGenerator)new StructureCircularShrine(), new StructureCircularShrineColumns(),
-			new StructureElevatedShrine(), new StructureElevatedShrineLarge());
+		new StructureElevatedShrine(), new StructureElevatedShrineLarge());
 	static List<WorldGenerator> ritual_grounds = Lists.newArrayList((WorldGenerator)new StructureRitualGrounds(), new StructureRitualGroundsColumns());
 	static List<WorldGenerator> houses = Lists.newArrayList((WorldGenerator)new AChouse1(), new AChouse2());
 	static List<WorldGenerator> misc = Lists.newArrayList((WorldGenerator)new ACscion1(), new ACscion2());

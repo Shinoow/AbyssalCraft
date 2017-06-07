@@ -34,7 +34,7 @@ public class EntityDreadSlug extends EntityThrowable {
 	}
 
 	public EntityDreadSlug(World p_i1778_1_, double p_i1778_2_,
-			double p_i1778_4_, double p_i1778_6_) {
+		double p_i1778_4_, double p_i1778_6_) {
 		super(p_i1778_1_, p_i1778_2_, p_i1778_4_, p_i1778_6_);
 	}
 
@@ -46,7 +46,7 @@ public class EntityDreadSlug extends EntityThrowable {
 			byte b0 = 6;
 
 			if(mop.entityHit instanceof EntityLivingBase && !EntityUtil.isEntityDread((EntityLivingBase) mop.entityHit)
-					&& !worldObj.isRemote)
+				&& !worldObj.isRemote)
 				((EntityLivingBase)mop.entityHit).addPotionEffect(new PotionEffect(AbyssalCraftAPI.dread_plague, 100));
 
 			if(!(mop.entityHit instanceof EntityGreaterDreadSpawn))

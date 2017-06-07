@@ -11,10 +11,6 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.common.blocks.tile;
 
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.inventory.ISidedInventory;
@@ -308,18 +304,27 @@ public class TileEntityCrystallizer extends TileEntity implements ISidedInventor
 		{
 			ItemStack[] itemstack = CrystallizerRecipes.instance().getCrystallizationResult(crystallizerItemStacks[0]);
 
+			ItemStack stack = crystallizerItemStacks[2], stack1 = crystallizerItemStacks[3];
+
 			if(itemstack[0] == null && itemstack[1] == null || itemstack[0] == null) return false;
-			if(crystallizerItemStacks[2] == null && crystallizerItemStacks[3] == null) return true;
+			if(stack == null && stack1 == null) return true;
 			if(itemstack[1] == null){
-				if(crystallizerItemStacks[2] == null) return true;
-				if(!crystallizerItemStacks[2].isItemEqual(itemstack[0])) return false;
+				if(stack == null) return true;
+				if(!stack.isItemEqual(itemstack[0])) return false;
+
+				int result = stack.stackSize + itemstack[0].stackSize;
+				return result <= getInventoryStackLimit() && result <= stack.getMaxStackSize();
 			} else {
-				if(crystallizerItemStacks[2] != null && !crystallizerItemStacks[2].isItemEqual(itemstack[0])) return false;
-				if(crystallizerItemStacks[3] != null && !crystallizerItemStacks[3].isItemEqual(itemstack[1])) return false;
+				if(stack == null && stack1 == null) return true;
+				if(stack != null && !stack.isItemEqual(itemstack[0])) return false;
+				if(stack1 != null && !stack1.isItemEqual(itemstack[1])) return false;
+
+				int result = (stack != null ? stack.stackSize : 0) + itemstack[0].stackSize;
+				int result2 = (stack1 != null ? stack1.stackSize : 0) + itemstack[1].stackSize;
+				boolean b1 = stack != null ? result <= stack.getMaxStackSize() : true;
+				boolean b2 = stack1 != null ? result2 <= stack1.getMaxStackSize() : true;
+				return result <= getInventoryStackLimit() && result2 <= getInventoryStackLimit() && b1 && b2;
 			}
-			int result = crystallizerItemStacks[2].stackSize + itemstack[0].stackSize;
-			int result2 = crystallizerItemStacks[3].stackSize + itemstack[1].stackSize;
-			return result <= getInventoryStackLimit() && result2 <= getInventoryStackLimit() && result <= crystallizerItemStacks[2].getMaxStackSize() && result2 <= crystallizerItemStacks[3].getMaxStackSize();
 		}
 	}
 

@@ -20,11 +20,8 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
-import net.minecraft.util.math.AxisAlignedBB;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.RayTraceResult;
+import net.minecraft.util.math.*;
 import net.minecraft.util.math.RayTraceResult.Type;
-import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
@@ -54,7 +51,7 @@ public class AbyssalCraftClientEventHooks {
 		float fov = event.getFov();
 
 		if( event.getEntity().isHandActive() && event.getEntity().getActiveItemStack() != null
-				&& event.getEntity().getActiveItemStack().getItem() == ACItems.coralium_longbow) {
+			&& event.getEntity().getActiveItemStack().getItem() == ACItems.coralium_longbow) {
 			int duration = event.getEntity().getItemInUseCount();
 			float multiplier = duration / 20.0F;
 
@@ -91,9 +88,9 @@ public class AbyssalCraftClientEventHooks {
 		BlockPos pos = posIn.offset(face);
 
 		if (world.getBlockState(pos).getBlock() == ACBlocks.mimic_fire ||
-				world.getBlockState(pos).getBlock() == ACBlocks.coralium_fire ||
-				world.getBlockState(pos).getBlock() == ACBlocks.dreaded_fire ||
-				world.getBlockState(pos).getBlock() == ACBlocks.omothol_fire)
+			world.getBlockState(pos).getBlock() == ACBlocks.coralium_fire ||
+			world.getBlockState(pos).getBlock() == ACBlocks.dreaded_fire ||
+			world.getBlockState(pos).getBlock() == ACBlocks.omothol_fire)
 			if (event instanceof MouseEvent) {
 				PacketDispatcher.sendToServer(new FireMessage(pos));
 				PacketDispatcher.sendToAllAround(new FireMessage(pos), player, 30);
@@ -107,13 +104,13 @@ public class AbyssalCraftClientEventHooks {
 		Minecraft mc = FMLClientHandler.instance().getClient();
 		Entity theRenderViewEntity = mc.getRenderViewEntity();
 		AxisAlignedBB theViewBoundingBox = new AxisAlignedBB(
-				theRenderViewEntity.posX-0.5D,
-				theRenderViewEntity.posY-0.0D,
-				theRenderViewEntity.posZ-0.5D,
-				theRenderViewEntity.posX+0.5D,
-				theRenderViewEntity.posY+1.5D,
-				theRenderViewEntity.posZ+0.5D
-				);
+			theRenderViewEntity.posX-0.5D,
+			theRenderViewEntity.posY-0.0D,
+			theRenderViewEntity.posZ-0.5D,
+			theRenderViewEntity.posX+0.5D,
+			theRenderViewEntity.posY+1.5D,
+			theRenderViewEntity.posZ+0.5D
+			);
 		RayTraceResult returnMOP = null;
 		if (mc.theWorld != null)
 		{
@@ -127,17 +124,17 @@ public class AbyssalCraftClientEventHooks {
 
 			Vec3d lookvec = theRenderViewEntity.getLook(0);
 			Vec3d var8 = pos.addVector(lookvec.xCoord * var2,
-					lookvec.yCoord * var2,
-					lookvec.zCoord * var2);
+				lookvec.yCoord * var2,
+				lookvec.zCoord * var2);
 			Entity pointedEntity = null;
 			float var9 = 1.0F;
 			@SuppressWarnings("unchecked")
 			List<Entity> list = mc.theWorld.getEntitiesWithinAABBExcludingEntity(
-					theRenderViewEntity,
-					theViewBoundingBox.addCoord(
-							lookvec.xCoord * var2,
-							lookvec.yCoord * var2,
-							lookvec.zCoord * var2).expand(var9, var9, var9));
+				theRenderViewEntity,
+				theViewBoundingBox.addCoord(
+					lookvec.xCoord * var2,
+					lookvec.yCoord * var2,
+					lookvec.zCoord * var2).expand(var9, var9, var9));
 			double d = calcdist;
 
 			for (Entity entity : list)
@@ -145,12 +142,12 @@ public class AbyssalCraftClientEventHooks {
 				{
 					float bordersize = entity.getCollisionBorderSize();
 					AxisAlignedBB aabb = new AxisAlignedBB(
-							entity.posX-entity.width/2,
-							entity.posY,
-							entity.posZ-entity.width/2,
-							entity.posX+entity.width/2,
-							entity.posY+entity.height,
-							entity.posZ+entity.width/2);
+						entity.posX-entity.width/2,
+						entity.posY,
+						entity.posZ-entity.width/2,
+						entity.posX+entity.width/2,
+						entity.posY+entity.height,
+						entity.posZ+entity.width/2);
 					aabb.expand(bordersize, bordersize, bordersize);
 					RayTraceResult mop0 = aabb.calculateIntercept(pos, var8);
 

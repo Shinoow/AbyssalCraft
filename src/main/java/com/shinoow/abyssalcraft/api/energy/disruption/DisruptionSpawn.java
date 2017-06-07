@@ -54,8 +54,8 @@ public class DisruptionSpawn extends DisruptionEntry {
 			try {
 				entityliving = entity.getConstructor(World.class).newInstance(world);
 			} catch (InstantiationException | IllegalAccessException
-					| IllegalArgumentException | InvocationTargetException
-					| NoSuchMethodException | SecurityException e) {
+				| IllegalArgumentException | InvocationTargetException
+				| NoSuchMethodException | SecurityException e) {
 				e.printStackTrace();
 			}
 			if(entityliving != null){

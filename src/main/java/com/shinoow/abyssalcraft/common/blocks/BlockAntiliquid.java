@@ -48,7 +48,7 @@ public class BlockAntiliquid extends BlockFluidClassic {
 	@Override
 	public boolean canDisplace(IBlockAccess world, BlockPos pos) {
 		if(world.getBlockState(pos).getBlock() == ACBlocks.liquid_coralium || world.getBlockState(pos).getMaterial() == Material.WATER &&
-				world.getBlockState(pos).getBlock() != ACBlocks.liquid_coralium && world.getBlockState(pos).getBlock() != this || world.getBlockState(pos).getMaterial() == Material.LAVA)
+			world.getBlockState(pos).getBlock() != ACBlocks.liquid_coralium && world.getBlockState(pos).getBlock() != this || world.getBlockState(pos).getMaterial() == Material.LAVA)
 			return true;
 		return super.canDisplace(world, pos);
 	}

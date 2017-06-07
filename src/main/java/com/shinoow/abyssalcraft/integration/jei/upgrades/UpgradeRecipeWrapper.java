@@ -13,6 +13,7 @@ package com.shinoow.abyssalcraft.integration.jei.upgrades;
 
 import java.util.Collections;
 import java.util.List;
+
 import javax.annotation.Nonnull;
 
 import mezz.jei.api.ingredients.IIngredients;
@@ -43,6 +44,7 @@ public class UpgradeRecipeWrapper extends BlankRecipeWrapper {
 		return kit;
 	}
 
+	@Override
 	public List<ItemStack> getOutputs(){
 		return Collections.singletonList(output);
 	}

@@ -341,7 +341,7 @@ public class ChunkProviderAbyss implements IChunkGenerator
 
 		if(ACConfig.generateCoraliumLake)
 			if (TerrainGen.populate(this, worldObj, rand, x, z, flag, LAKE) &&
-					!flag && rand.nextInt(6) == 0)
+				!flag && rand.nextInt(6) == 0)
 			{
 				k1 = rand.nextInt(16) + 8;
 				l1 = rand.nextInt(128);

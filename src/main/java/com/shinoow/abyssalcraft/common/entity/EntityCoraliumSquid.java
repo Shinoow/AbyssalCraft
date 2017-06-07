@@ -61,7 +61,7 @@ public class EntityCoraliumSquid extends EntitySquid implements ICoraliumEntity,
 
 	@Override
 	public void attackEntityWithRangedAttack(EntityLivingBase target,
-			float p_82196_2_) {
+		float p_82196_2_) {
 		EntityInkProjectile entityinkprojectile = new EntityInkProjectile(worldObj, this);
 		double d0 = target.posX - posX;
 		double d1 = target.posY + target.getEyeHeight() - 1.100000023841858D - entityinkprojectile.posY;

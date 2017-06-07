@@ -26,12 +26,12 @@ public class NecronomiconResurrectionRitual extends NecronomiconRitual {
 
 	public NecronomiconResurrectionRitual() {
 		super("resurrection", 2, -1, 1000F, true, new Object[]{ new ItemStack[]{new ItemStack(ACItems.crystal_shard, 1, 3), new ItemStack(ACItems.crystal, 1, 3),
-				new ItemStack(ACBlocks.crystal_cluster, 1, 3)}, new ItemStack[]{new ItemStack(ACItems.crystal_shard, 1, 5), new ItemStack(ACItems.crystal, 1, 5),
-				new ItemStack(ACBlocks.crystal_cluster, 1, 5)}, new ItemStack[]{new ItemStack(ACItems.crystal_shard, 1, 6), new ItemStack(ACItems.crystal, 1, 6),
-				new ItemStack(ACBlocks.crystal_cluster, 1, 6)}, new ItemStack[]{new ItemStack(ACItems.crystal_shard, 1, 4), new ItemStack(ACItems.crystal, 1, 4),
-				new ItemStack(ACBlocks.crystal_cluster, 1, 4)}, new ItemStack[]{new ItemStack(ACItems.crystal_shard, 1, 7), new ItemStack(ACItems.crystal, 1, 7),
-				new ItemStack(ACBlocks.crystal_cluster, 1, 7)}, new ItemStack[]{new ItemStack(ACItems.crystal_shard, 1, 2), new ItemStack(ACItems.crystal, 1, 2),
-				new ItemStack(ACBlocks.crystal_cluster, 1, 2)}});
+			new ItemStack(ACBlocks.crystal_cluster, 1, 3)}, new ItemStack[]{new ItemStack(ACItems.crystal_shard, 1, 5), new ItemStack(ACItems.crystal, 1, 5),
+			new ItemStack(ACBlocks.crystal_cluster, 1, 5)}, new ItemStack[]{new ItemStack(ACItems.crystal_shard, 1, 6), new ItemStack(ACItems.crystal, 1, 6),
+			new ItemStack(ACBlocks.crystal_cluster, 1, 6)}, new ItemStack[]{new ItemStack(ACItems.crystal_shard, 1, 4), new ItemStack(ACItems.crystal, 1, 4),
+			new ItemStack(ACBlocks.crystal_cluster, 1, 4)}, new ItemStack[]{new ItemStack(ACItems.crystal_shard, 1, 7), new ItemStack(ACItems.crystal, 1, 7),
+			new ItemStack(ACBlocks.crystal_cluster, 1, 7)}, new ItemStack[]{new ItemStack(ACItems.crystal_shard, 1, 2), new ItemStack(ACItems.crystal, 1, 2),
+			new ItemStack(ACBlocks.crystal_cluster, 1, 2)}});
 		sacrifice = Items.NAME_TAG;
 	}
 
@@ -55,8 +55,8 @@ public class NecronomiconResurrectionRitual extends NecronomiconRitual {
 		TileEntity ped8 = world.getTileEntity(new BlockPos(x + 2, y, z - 2));
 		if(ped1 != null && ped2 != null && ped3 != null && ped4 != null && ped5 != null && ped6 != null && ped7 != null && ped8 != null)
 			if(ped1 instanceof IRitualPedestal && ped2 instanceof IRitualPedestal && ped3 instanceof IRitualPedestal
-					&& ped4 instanceof IRitualPedestal && ped5 instanceof IRitualPedestal && ped6 instanceof IRitualPedestal
-					&& ped7 instanceof IRitualPedestal && ped8 instanceof IRitualPedestal){
+				&& ped4 instanceof IRitualPedestal && ped5 instanceof IRitualPedestal && ped6 instanceof IRitualPedestal
+				&& ped7 instanceof IRitualPedestal && ped8 instanceof IRitualPedestal){
 				offers[0] = ((IRitualPedestal)ped1).getItem();
 				offers[1] = ((IRitualPedestal)ped2).getItem();
 				offers[2] = ((IRitualPedestal)ped3).getItem();
@@ -77,9 +77,7 @@ public class NecronomiconResurrectionRitual extends NecronomiconRitual {
 
 		if(stack == null) return false;
 
-		if(obj instanceof ItemStack[]){
-			return stack.getItem() != ((ItemStack[])obj)[size].getItem();
-		}
+		if(obj instanceof ItemStack[]) return stack.getItem() != ((ItemStack[])obj)[size].getItem();
 
 		return false;
 	}

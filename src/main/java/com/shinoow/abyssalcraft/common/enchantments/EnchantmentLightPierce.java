@@ -17,6 +17,7 @@ import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemAxe;
 import net.minecraft.item.ItemStack;
+
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
 
 public class EnchantmentLightPierce extends EnchantmentDamage {

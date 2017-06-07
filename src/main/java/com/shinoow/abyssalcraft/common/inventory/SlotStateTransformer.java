@@ -11,11 +11,11 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.common.inventory;
 
-import com.shinoow.abyssalcraft.common.items.ItemStoneTablet;
-
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
+
+import com.shinoow.abyssalcraft.common.items.ItemStoneTablet;
 
 public class SlotStateTransformer extends Slot {
 

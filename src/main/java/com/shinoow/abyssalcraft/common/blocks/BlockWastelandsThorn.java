@@ -37,14 +37,14 @@ public class BlockWastelandsThorn extends BlockBush {
 	protected boolean canSustainBush(IBlockState ground)
 	{
 		return ground.getBlock() == ACBlocks.fused_abyssal_sand || ground.getBlock() == ACBlocks.abyssal_sand ||
-				ground.getMaterial() == Material.GRASS || super.canSustainBush(ground);
+			ground.getMaterial() == Material.GRASS || super.canSustainBush(ground);
 	}
 
 	@Override
 	public void onEntityCollidedWithBlock(World worldIn, BlockPos pos, IBlockState state, Entity entityIn)
 	{
 		if(entityIn instanceof EntityPlayer && ((EntityPlayer)entityIn).getItemStackFromSlot(EntityEquipmentSlot.FEET) == null &&
-				((EntityPlayer)entityIn).getItemStackFromSlot(EntityEquipmentSlot.LEGS) == null)
+			((EntityPlayer)entityIn).getItemStackFromSlot(EntityEquipmentSlot.LEGS) == null)
 			entityIn.attackEntityFrom(DamageSource.cactus, 1.0F);
 	}
 }

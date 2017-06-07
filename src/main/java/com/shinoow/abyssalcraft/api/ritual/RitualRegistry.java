@@ -190,7 +190,7 @@ public class RitualRegistry {
 
 	private boolean areItemStackArraysEqual(Object[] array1, ItemStack[] array2, boolean nbt){
 
-		List<Object> compareList = Lists.newArrayList(array1);
+		List<Object> compareList = nonNullList(array1);
 		List<ItemStack> itemList = Lists.newArrayList();
 
 		for(ItemStack item : array2)
@@ -206,6 +206,22 @@ public class RitualRegistry {
 					}
 
 		return compareList.isEmpty();
+	}
+
+	/**
+	 * Converts an array of Objects into a List without any null elements.<br>
+	 * The only reason any Object would be null in the first place would be
+	 * if the ritual required less than 8 offerings and you wanted to make the
+	 * alignment in the Necronomicon GUI a certain way.
+	 */
+	private List<Object> nonNullList(Object[] array){
+		List<Object> l = Lists.newArrayList();
+
+		for(Object o : array)
+			if(o != null)
+				l.add(o);
+
+		return l;
 	}
 
 	public boolean areObjectsEqual(ItemStack stack, Object obj, boolean nbt){
@@ -240,6 +256,6 @@ public class RitualRegistry {
 	{
 		if (stack1 == null || stack2 == null) return false;
 		return stack1.getItem() == stack2.getItem() && (stack2.getItemDamage() == OreDictionary.WILDCARD_VALUE
-				|| stack1.getItemDamage() == stack2.getItemDamage());
+			|| stack1.getItemDamage() == stack2.getItemDamage());
 	}
 }

@@ -11,11 +11,8 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.common.structures.omothol;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.Map.Entry;
-import java.util.Random;
 
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.math.MathHelper;

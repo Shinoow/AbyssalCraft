@@ -28,12 +28,12 @@ public class ItemACBasic extends Item {
 	@Override
 	public String getItemStackDisplayName(ItemStack par1ItemStack) {
 		if(this.getUnlocalizedName().contains("dreadshard") || this.getUnlocalizedName().contains("dreadchunk") ||
-				this.getUnlocalizedName().contains("dreadiumingot") || this.getUnlocalizedName().contains("dreadfragment"))
+			this.getUnlocalizedName().contains("dreadiumingot") || this.getUnlocalizedName().contains("dreadfragment"))
 			return TextFormatting.DARK_RED + super.getItemStackDisplayName(par1ItemStack);
 		else if(this.getUnlocalizedName().contains("abyingot"))
 			return TextFormatting.DARK_AQUA + super.getItemStackDisplayName(par1ItemStack);
 		else if(this.getUnlocalizedName().contains("cpearl") || this.getUnlocalizedName().contains("cingot")
-				|| this.getUnlocalizedName().contains("ethaxiumingot"))
+			|| this.getUnlocalizedName().contains("ethaxiumingot"))
 			return TextFormatting.AQUA + super.getItemStackDisplayName(par1ItemStack);
 
 		return super.getItemStackDisplayName(par1ItemStack);

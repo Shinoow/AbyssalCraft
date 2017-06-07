@@ -20,7 +20,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.translation.I18n;
 import net.minecraft.world.World;
 
-import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.common.util.ACLogger;
 import com.shinoow.abyssalcraft.common.util.ExplosionUtil;
 import com.shinoow.abyssalcraft.lib.ACConfig;
@@ -106,30 +105,10 @@ public class EntityODBPrimed extends Entity {
 	{
 		if(!worldObj.isRemote){
 			ACLogger.info("Unleashing hell shortly.");
-			Blocks.OBSIDIAN.setResistance(5.0F);
-			Blocks.LAVA.setResistance(5.0F);
-			Blocks.FLOWING_LAVA.setResistance(5.0F);
-			Blocks.WATER.setResistance(5.0F);
-			Blocks.FLOWING_WATER.setResistance(5.0F);
-			ACBlocks.liquid_coralium.setResistance(50.0F);
-		}
-		float var0 = 30.0F;
-		ExplosionUtil.newODBExplosion(worldObj, this, posX, posY, posZ, var0, 128, false, true);
-		ExplosionUtil.newODBExplosion(worldObj, this, posX + 10, posY, posZ, var0, 128, false, true);
-		ExplosionUtil.newODBExplosion(worldObj, this, posX - 10, posY, posZ, var0, 128, false, true);
-		ExplosionUtil.newODBExplosion(worldObj, this, posX, posY, posZ + 10, var0, 128, false, true);
-		ExplosionUtil.newODBExplosion(worldObj, this, posX, posY, posZ - 10, var0, 128, false, true);
-		ExplosionUtil.newODBExplosion(worldObj, this, posX + 10, posY, posZ - 10, var0, 128, false, true);
-		ExplosionUtil.newODBExplosion(worldObj, this, posX - 10, posY, posZ + 10, var0, 128, false, true);
-		ExplosionUtil.newODBExplosion(worldObj, this, posX + 10, posY, posZ + 10, var0, 128, false, true);
-		ExplosionUtil.newODBExplosion(worldObj, this, posX - 10, posY, posZ - 10, var0, 128, false, true);
-		if(!worldObj.isRemote){
-			Blocks.OBSIDIAN.setResistance(2000.0F);
-			Blocks.LAVA.setResistance(500.0F);
-			Blocks.FLOWING_LAVA.setResistance(500.0F);
-			Blocks.WATER.setResistance(500.0F);
-			Blocks.FLOWING_WATER.setResistance(500.0F);
-			ACBlocks.liquid_coralium.setResistance(500.0F);
+
+			float var0 = 80.0F;
+			ExplosionUtil.newODBExplosion(worldObj, this, posX, posY, posZ, var0, false, true);
+
 			ACLogger.info("Hell successfully unleashed.");
 
 			int x, x1, z, z1;

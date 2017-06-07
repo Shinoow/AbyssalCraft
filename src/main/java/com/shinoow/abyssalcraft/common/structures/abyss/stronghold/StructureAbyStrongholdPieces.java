@@ -11,16 +11,9 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.common.structures.abyss.stronghold;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
-import net.minecraft.block.BlockDirectional;
-import net.minecraft.block.BlockDoor;
-import net.minecraft.block.BlockLadder;
-import net.minecraft.block.BlockStairs;
-import net.minecraft.block.BlockTorch;
+import net.minecraft.block.*;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.nbt.NBTTagCompound;

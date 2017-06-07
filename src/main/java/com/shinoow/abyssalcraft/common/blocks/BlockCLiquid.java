@@ -66,7 +66,7 @@ public class BlockCLiquid extends BlockFluidClassic {
 		if(world.getBlockState(pos).getBlock() == Blocks.LAVA)
 			return true;
 		else if(dusts.contains(world.getBlockState(pos)) || metalloids.contains(world.getBlockState(pos)) || gems.contains(world.getBlockState(pos)) ||
-				stones.contains(world.getBlockState(pos)) || bricks.contains(world.getBlockState(pos)) || cobble.contains(world.getBlockState(pos)))
+			stones.contains(world.getBlockState(pos)) || bricks.contains(world.getBlockState(pos)) || cobble.contains(world.getBlockState(pos)))
 			return true;
 		return super.canDisplace(world, pos);
 	}
@@ -80,7 +80,7 @@ public class BlockCLiquid extends BlockFluidClassic {
 				if(world.getBlockState(pos).getMaterial().isLiquid() && world.getBlockState(pos).getBlock() != this && world.getBlockState(pos).getBlock() != ACBlocks.liquid_antimatter)
 					world.setBlockState(pos, getDefaultState());
 				if(ACConfig.breakLogic == true && world.getBlockState(new BlockPos(pos.getX(), pos.getY()+1, pos.getZ())).getMaterial().isLiquid()
-						&& world.getBlockState(new BlockPos(pos.getX(), pos.getY()+1, pos.getZ())).getBlock() != this && world.getBlockState(new BlockPos(pos.getX(), pos.getY()+1, pos.getZ())).getBlock() != ACBlocks.liquid_antimatter)
+					&& world.getBlockState(new BlockPos(pos.getX(), pos.getY()+1, pos.getZ())).getBlock() != this && world.getBlockState(new BlockPos(pos.getX(), pos.getY()+1, pos.getZ())).getBlock() != ACBlocks.liquid_antimatter)
 					world.setBlockState(new BlockPos(pos.getX(), pos.getY()+1, pos.getZ()), getDefaultState());
 			} else {
 				if(BiomeDictionary.isBiomeOfType(world.getBiome(pos), Type.OCEAN) && world.getBlockState(pos).getBlock() == this)
@@ -92,12 +92,12 @@ public class BlockCLiquid extends BlockFluidClassic {
 					if(world.getBlockState(pos).getMaterial().isLiquid() && world.getBlockState(pos).getBlock() != this && world.getBlockState(pos).getBlock() != ACBlocks.liquid_antimatter)
 						world.setBlockState(pos, getDefaultState());
 					if(ACConfig.breakLogic == true && world.getBlockState(new BlockPos(pos.getX(), pos.getY()+1, pos.getZ())).getMaterial().isLiquid()
-							&& world.getBlockState(new BlockPos(pos.getX(), pos.getY()+1, pos.getZ())).getBlock() != this && world.getBlockState(new BlockPos(pos.getX(), pos.getY()+1, pos.getZ())).getBlock() != ACBlocks.liquid_antimatter)
+						&& world.getBlockState(new BlockPos(pos.getX(), pos.getY()+1, pos.getZ())).getBlock() != this && world.getBlockState(new BlockPos(pos.getX(), pos.getY()+1, pos.getZ())).getBlock() != ACBlocks.liquid_antimatter)
 						world.setBlockState(new BlockPos(pos.getX(), pos.getY()+1, pos.getZ()), getDefaultState());
 				}
 			}
 			if(dusts.contains(world.getBlockState(pos)) && world.getBlockState(pos) != ACBlocks.abyssal_nitre_ore.getDefaultState() &&
-					world.getBlockState(pos) != ACBlocks.abyssal_coralium_ore)
+				world.getBlockState(pos) != ACBlocks.abyssal_coralium_ore)
 				if(oresToBlocks(OreDictionary.getOres("oreSaltpeter")).contains(world.getBlockState(pos)))
 					world.setBlockState(pos, ACBlocks.abyssal_nitre_ore.getDefaultState());
 				else world.setBlockState(pos, ACBlocks.abyssal_coralium_ore.getDefaultState());
@@ -141,7 +141,7 @@ public class BlockCLiquid extends BlockFluidClassic {
 		for(ItemStack stack : list){
 			Block block = Block.getBlockFromItem(stack.getItem());
 			if(block != null && block != Blocks.AIR)
-				blocks.add(block.getStateFromMeta(((ItemBlock)stack.getItem()).getMetadata(stack.getMetadata())));
+				blocks.add(block.getStateFromMeta(((ItemBlock)stack.getItem()).getMetadata(stack.getMetadata() == OreDictionary.WILDCARD_VALUE ? 0 : stack.getMetadata())));
 		}
 
 		return blocks;

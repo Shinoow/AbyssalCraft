@@ -13,12 +13,7 @@ package com.shinoow.abyssalcraft.common.blocks;
 
 import java.util.Random;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockDirt;
-import net.minecraft.block.BlockFlower;
-import net.minecraft.block.BlockTallGrass;
-import net.minecraft.block.IGrowable;
-import net.minecraft.block.SoundType;
+import net.minecraft.block.*;
 import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyBool;
@@ -97,11 +92,11 @@ public class BlockDarklandsgrass extends Block implements IGrowable {
 	public boolean canSustainPlant(IBlockState state, IBlockAccess world, BlockPos pos, EnumFacing direction, IPlantable plantable)
 	{
 		boolean hasWater = world.getBlockState(pos.east()).getMaterial() == Material.WATER ||
-				world.getBlockState(pos.west()).getMaterial() == Material.WATER ||
-				world.getBlockState(pos.north()).getMaterial() == Material.WATER ||
-				world.getBlockState(pos.south()).getMaterial() == Material.WATER;
+			world.getBlockState(pos.west()).getMaterial() == Material.WATER ||
+			world.getBlockState(pos.north()).getMaterial() == Material.WATER ||
+			world.getBlockState(pos.south()).getMaterial() == Material.WATER;
 		return plantable.getPlantType(world, pos.offset(direction)) == EnumPlantType.Plains ||
-				plantable.getPlantType(world, pos.offset(direction)) == EnumPlantType.Beach && hasWater;
+			plantable.getPlantType(world, pos.offset(direction)) == EnumPlantType.Beach && hasWater;
 	}
 
 	@Override
@@ -112,14 +107,14 @@ public class BlockDarklandsgrass extends Block implements IGrowable {
 
 	@Override
 	public boolean canGrow(World worldIn, BlockPos pos, IBlockState state,
-			boolean isClient) {
+		boolean isClient) {
 
 		return true;
 	}
 
 	@Override
 	public boolean canUseBonemeal(World worldIn, Random rand, BlockPos pos,
-			IBlockState state) {
+		IBlockState state) {
 
 		return true;
 	}

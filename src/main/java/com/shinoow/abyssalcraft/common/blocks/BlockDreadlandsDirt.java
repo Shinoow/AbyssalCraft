@@ -33,10 +33,10 @@ public class BlockDreadlandsDirt extends BlockACBasic {
 	public boolean canSustainPlant(IBlockState state, IBlockAccess world, BlockPos pos, EnumFacing direction, IPlantable plantable)
 	{
 		boolean hasWater = world.getBlockState(pos.east()).getMaterial() == Material.WATER ||
-				world.getBlockState(pos.west()).getMaterial() == Material.WATER ||
-				world.getBlockState(pos.north()).getMaterial() == Material.WATER ||
-				world.getBlockState(pos.south()).getMaterial() == Material.WATER;
+			world.getBlockState(pos.west()).getMaterial() == Material.WATER ||
+			world.getBlockState(pos.north()).getMaterial() == Material.WATER ||
+			world.getBlockState(pos.south()).getMaterial() == Material.WATER;
 		return plantable.getPlantType(world, pos.offset(direction)) == EnumPlantType.Plains ||
-				plantable.getPlantType(world, pos.offset(direction)) == EnumPlantType.Beach && hasWater;
+			plantable.getPlantType(world, pos.offset(direction)) == EnumPlantType.Beach && hasWater;
 	}
 }

@@ -153,22 +153,22 @@ public class TileEntityRendingPedestal extends TileEntity implements IEnergyCont
 									increaseEnergy(0, staff.getDrainAmount(stack));
 								}
 						} else if(worldObj.provider.getDimension() == ACLib.abyssal_wasteland_id && target instanceof ICoraliumEntity &&
-								target.isNonBoss()){
+							target.isNonBoss()){
 							if(!target.isDead && getContainedEnergy() >= target.getMaxHealth()/2)
 								if(target.attackEntityFrom(DamageSource.magic, staff.getDrainAmount(stack))){
 									consumeEnergy(target.getMaxHealth()/2);
 									increaseEnergy(1, staff.getDrainAmount(stack));
 								}
 						} else if(worldObj.provider.getDimension() == ACLib.dreadlands_id && target instanceof IDreadEntity &&
-								target.isNonBoss()){
+							target.isNonBoss()){
 							if(!target.isDead && getContainedEnergy() >= target.getMaxHealth()/2)
 								if(target.attackEntityFrom(DamageSource.magic, staff.getDrainAmount(stack))){
 									consumeEnergy(target.getMaxHealth()/2);
 									increaseEnergy(2, staff.getDrainAmount(stack));
 								}
 						} else if(worldObj.provider.getDimension() == ACLib.omothol_id && target instanceof ICoraliumEntity
-								&& target instanceof IDreadEntity && target instanceof IAntiEntity &&
-								target.getCreatureAttribute() != AbyssalCraftAPI.SHADOW && target.isNonBoss())
+							&& target instanceof IDreadEntity && target instanceof IAntiEntity &&
+							target.getCreatureAttribute() != AbyssalCraftAPI.SHADOW && target.isNonBoss())
 							if(!target.isDead && getContainedEnergy() >= target.getMaxHealth()/2)
 								if(target.attackEntityFrom(DamageSource.magic, staff.getDrainAmount(stack))){
 									consumeEnergy(target.getMaxHealth()/2);

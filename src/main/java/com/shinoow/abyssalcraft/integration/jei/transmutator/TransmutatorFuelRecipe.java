@@ -12,10 +12,7 @@
 package com.shinoow.abyssalcraft.integration.jei.transmutator;
 
 import java.awt.Color;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 import javax.annotation.Nonnull;
 

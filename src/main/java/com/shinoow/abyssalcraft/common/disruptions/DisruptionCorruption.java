@@ -2,13 +2,7 @@ package com.shinoow.abyssalcraft.common.disruptions;
 
 import java.util.List;
 
-import net.minecraft.block.BlockLeaves;
-import net.minecraft.block.BlockLog;
-import net.minecraft.block.BlockSlab;
-import net.minecraft.block.BlockStairs;
-import net.minecraft.block.BlockStone;
-import net.minecraft.block.BlockStoneBrick;
-import net.minecraft.block.BlockStoneSlab;
+import net.minecraft.block.*;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Biomes;
@@ -20,7 +14,6 @@ import net.minecraft.world.chunk.Chunk;
 
 import com.shinoow.abyssalcraft.api.biome.ACBiomes;
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
-import com.shinoow.abyssalcraft.api.energy.disruption.DisruptionEntry;
 import com.shinoow.abyssalcraft.api.energy.disruption.DisruptionSpawn;
 import com.shinoow.abyssalcraft.common.blocks.BlockACBrick;
 import com.shinoow.abyssalcraft.common.blocks.BlockRitualAltar;
@@ -43,7 +36,7 @@ public class DisruptionCorruption extends DisruptionSpawn {
 		}
 
 		if(world.isRemote) return;
-		
+
 		boolean b1 = world.rand.nextBoolean();
 		for(int x = pos.getX() -8; x < pos.getX() + 9; x++)
 			for(int z = pos.getZ() - 8; z < pos.getZ() + 9; z++){
@@ -115,8 +108,8 @@ public class DisruptionCorruption extends DisruptionSpawn {
 	private boolean isCorrectBiome(World world, BlockPos pos) {
 		Biome b = world.getBiome(pos);
 		return b == Biomes.PLAINS || b == Biomes.EXTREME_HILLS || b == Biomes.FOREST || b == Biomes.ICE_MOUNTAINS ||
-				b == Biomes.MUTATED_PLAINS || b == Biomes.MUTATED_EXTREME_HILLS || b == Biomes.MUTATED_FOREST ||
-				b == Biomes.FOREST_HILLS;
+			b == Biomes.MUTATED_PLAINS || b == Biomes.MUTATED_EXTREME_HILLS || b == Biomes.MUTATED_FOREST ||
+			b == Biomes.FOREST_HILLS;
 	}
 
 	private Biome getDarklandsBiome(Biome b, boolean b1){

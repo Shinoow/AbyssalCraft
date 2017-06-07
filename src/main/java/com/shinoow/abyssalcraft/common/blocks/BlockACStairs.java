@@ -35,7 +35,7 @@ public class BlockACStairs extends BlockStairs {
 			if(blockMaterial == Material.ROCK || blockMaterial == Material.IRON || blockMaterial == Material.ANVIL)
 				setHarvestLevel("pickaxe", 0);
 			else if(blockMaterial == Material.GROUND || blockMaterial == Material.GRASS || blockMaterial == Material.SAND ||
-					blockMaterial == Material.SNOW || blockMaterial == Material.CRAFTED_SNOW)
+				blockMaterial == Material.SNOW || blockMaterial == Material.CRAFTED_SNOW)
 				setHarvestLevel("shovel", 0);
 	}
 }

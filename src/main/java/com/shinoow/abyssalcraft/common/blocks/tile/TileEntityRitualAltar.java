@@ -21,10 +21,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.EnumParticleTypes;
-import net.minecraft.util.ITickable;
-import net.minecraft.util.SoundCategory;
-import net.minecraft.util.SoundEvent;
+import net.minecraft.util.*;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -224,8 +221,8 @@ public class TileEntityRitualAltar extends TileEntity implements ITickable, IRit
 		TileEntity ped8 = world.getTileEntity(new BlockPos(x + 2, y, z - 2));
 		if(ped1 != null && ped2 != null && ped3 != null && ped4 != null && ped5 != null && ped6 != null && ped7 != null && ped8 != null)
 			if(ped1 instanceof IRitualPedestal && ped2 instanceof IRitualPedestal && ped3 instanceof IRitualPedestal
-					&& ped4 instanceof IRitualPedestal && ped5 instanceof IRitualPedestal && ped6 instanceof IRitualPedestal
-					&& ped7 instanceof IRitualPedestal && ped8 instanceof IRitualPedestal){
+				&& ped4 instanceof IRitualPedestal && ped5 instanceof IRitualPedestal && ped6 instanceof IRitualPedestal
+				&& ped7 instanceof IRitualPedestal && ped8 instanceof IRitualPedestal){
 				offers[0] = ((IRitualPedestal)ped1).getItem();
 				offers[1] = ((IRitualPedestal)ped2).getItem();
 				offers[2] = ((IRitualPedestal)ped3).getItem();
@@ -243,7 +240,7 @@ public class TileEntityRitualAltar extends TileEntity implements ITickable, IRit
 				hasOffer[6] = offers[6] != null;
 				hasOffer[7] = offers[7] != null;
 				if(offers[0] == null && offers[1] == null && offers[2] == null && offers[3] == null && offers[4] == null &&
-						offers[5] == null && offers[6] == null && offers[7] == null) return false;
+					offers[5] == null && offers[6] == null && offers[7] == null) return false;
 				else return true;
 			}
 		return false;
@@ -265,8 +262,8 @@ public class TileEntityRitualAltar extends TileEntity implements ITickable, IRit
 		TileEntity ped8 = world.getTileEntity(new BlockPos(x + 2, y, z - 2));
 		if(ped1 != null && ped2 != null && ped3 != null && ped4 != null && ped5 != null && ped6 != null && ped7 != null && ped8 != null)
 			if(ped1 instanceof IRitualPedestal && ped2 instanceof IRitualPedestal && ped3 instanceof IRitualPedestal
-					&& ped4 instanceof IRitualPedestal && ped5 instanceof IRitualPedestal && ped6 instanceof IRitualPedestal
-					&& ped7 instanceof IRitualPedestal && ped8 instanceof IRitualPedestal){
+				&& ped4 instanceof IRitualPedestal && ped5 instanceof IRitualPedestal && ped6 instanceof IRitualPedestal
+				&& ped7 instanceof IRitualPedestal && ped8 instanceof IRitualPedestal){
 				((IRitualPedestal)ped1).setItem(getStack(((IRitualPedestal)ped1).getItem()));
 				((IRitualPedestal)ped2).setItem(getStack(((IRitualPedestal)ped2).getItem()));
 				((IRitualPedestal)ped3).setItem(getStack(((IRitualPedestal)ped3).getItem()));
@@ -329,13 +326,13 @@ public class TileEntityRitualAltar extends TileEntity implements ITickable, IRit
 	 */
 	private boolean canBeSacrificed(EntityLivingBase entity){
 		return !(entity instanceof EntityPlayer) && (EntityUtil.isShoggothFood(entity) || entity instanceof EntityVillager) &&
-				entity.getCreatureAttribute() != EnumCreatureAttribute.UNDEAD &&
-				entity.isEntityAlive() && !entity.isChild();
+			entity.getCreatureAttribute() != EnumCreatureAttribute.UNDEAD &&
+			entity.isEntityAlive() && !entity.isChild();
 	}
 
 	public SoundEvent getRandomChant(){
 		SoundEvent[] chants = {ACSounds.cthulhu_chant, ACSounds.yog_sothoth_chant_1, ACSounds.yog_sothoth_chant_2,
-				ACSounds.hastur_chant_1, ACSounds.hastur_chant_2, ACSounds.sleeping_chant, ACSounds.cthugha_chant};
+			ACSounds.hastur_chant_1, ACSounds.hastur_chant_2, ACSounds.sleeping_chant, ACSounds.cthugha_chant};
 		return chants[worldObj.rand.nextInt(chants.length)];
 	}
 

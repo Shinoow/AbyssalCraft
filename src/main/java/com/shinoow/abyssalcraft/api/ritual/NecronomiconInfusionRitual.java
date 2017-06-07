@@ -40,7 +40,7 @@ public class NecronomiconInfusionRitual extends NecronomiconCreationRitual {
 	 * @param offerings Components used to perform the ritual, are consumed afterwards
 	 */
 	public NecronomiconInfusionRitual(String unlocalizedName, int bookType, int dimension, float requiredEnergy,
-			boolean requiresSacrifice, ItemStack item, Object sacrifice, Object...offerings) {
+		boolean requiresSacrifice, ItemStack item, Object sacrifice, Object...offerings) {
 		super(unlocalizedName, bookType, dimension, requiredEnergy, requiresSacrifice, item, offerings);
 		this.sacrifice = sacrifice;
 	}
@@ -56,7 +56,7 @@ public class NecronomiconInfusionRitual extends NecronomiconCreationRitual {
 	 * @param offerings Components used to perform the ritual, are consumed afterwards
 	 */
 	public NecronomiconInfusionRitual(String unlocalizedName, int bookType, int dimension, float requiredEnergy,
-			ItemStack item, Object sacrifice, Object...offerings) {
+		ItemStack item, Object sacrifice, Object...offerings) {
 		this(unlocalizedName, bookType, dimension, requiredEnergy, false, item, sacrifice, offerings);
 
 	}

@@ -13,7 +13,9 @@ package com.shinoow.abyssalcraft.init;
 
 import static com.shinoow.abyssalcraft.lib.ACConfig.*;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.net.URL;
 import java.util.List;
 
@@ -39,7 +41,9 @@ import com.google.common.collect.Lists;
 import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
 import com.shinoow.abyssalcraft.common.CommonProxy;
-import com.shinoow.abyssalcraft.common.entity.*;
+import com.shinoow.abyssalcraft.common.entity.EntityAbyssalZombie;
+import com.shinoow.abyssalcraft.common.entity.EntityDepthsGhoul;
+import com.shinoow.abyssalcraft.common.entity.EntityOmotholGhoul;
 import com.shinoow.abyssalcraft.common.entity.anti.EntityAntiAbyssalZombie;
 import com.shinoow.abyssalcraft.common.entity.anti.EntityAntiGhoul;
 import com.shinoow.abyssalcraft.common.handlers.*;
@@ -60,9 +64,9 @@ public class InitHandler implements ILifeCycleHandler {
 	public static int darkWeight1, darkWeight2, darkWeight3, darkWeight4, darkWeight5, coraliumWeight;
 
 	public static final Fluid LIQUID_CORALIUM = new Fluid("liquidcoralium", new ResourceLocation("abyssalcraft", "blocks/cwater_still"),
-			new ResourceLocation("abyssalcraft", "blocks/cwater_flow")).setDensity(3000).setTemperature(350);
+		new ResourceLocation("abyssalcraft", "blocks/cwater_flow")).setDensity(3000).setTemperature(350);
 	public static final Fluid LIQUID_ANTIMATTER = new Fluid("liquidantimatter", new ResourceLocation("abyssalcraft", "blocks/anti_still"),
-			new ResourceLocation("abyssalcraft", "blocks/anti_flow")).setDensity(4000).setViscosity(1500).setTemperature(100);
+		new ResourceLocation("abyssalcraft", "blocks/anti_flow")).setDensity(4000).setViscosity(1500).setTemperature(100);
 
 	private static final List<ItemStack> abyssal_zombie_blacklist = Lists.newArrayList();
 	private static final List<ItemStack> depths_ghoul_blacklist = Lists.newArrayList();
@@ -139,16 +143,16 @@ public class InitHandler implements ILifeCycleHandler {
 		String expect = "com.shinoow.abyssalcraft.common.handlers.InternalNecroDataHandler";
 		if(!clname.equals(expect)) {
 			new IllegalAccessError("The AbyssalCraft API internal NecroData handler has been overriden. "
-					+ "Since things are not going to work correctly, the game will now shut down."
-					+ " (Expected classname: " + expect + ", Actual classname: " + clname + ")").printStackTrace();
+				+ "Since things are not going to work correctly, the game will now shut down."
+				+ " (Expected classname: " + expect + ", Actual classname: " + clname + ")").printStackTrace();
 			FMLCommonHandler.instance().exitJava(1, true);
 		}
 		clname = AbyssalCraftAPI.getInternalMethodHandler().getClass().getName();
 		expect = "com.shinoow.abyssalcraft.common.handlers.InternalMethodHandler";
 		if(!clname.equals(expect)) {
 			new IllegalAccessError("The AbyssalCraft API internal Method handler has been overriden. "
-					+ "Since things are not going to work correctly, the game will now shut down."
-					+ " (Expected classname: " + expect + ", Actual classname: " + clname + ")").printStackTrace();
+				+ "Since things are not going to work correctly, the game will now shut down."
+				+ " (Expected classname: " + expect + ", Actual classname: " + clname + ")").printStackTrace();
 			FMLCommonHandler.instance().exitJava(1, true);
 		}
 	}
@@ -196,8 +200,8 @@ public class InitHandler implements ILifeCycleHandler {
 		hardcoreMode = cfg.get(Configuration.CATEGORY_GENERAL, "Hardcore Mode", false, "Toggles Hardcore mode. If set to true, all mobs (in the mod) will become tougher.").getBoolean();
 		endAbyssalZombieSpawnWeight = cfg.get(Configuration.CATEGORY_GENERAL, "End Abyssal Zombie spawn weight", 5, "Spawn weight for Abyssal Zombies in The End. Setting to 0 will stop them from spawning altogether.\n[range: 0 ~ 10, default: 5]", 0, 10).getInt();
 		evilAnimalCreatureType = cfg.get(Configuration.CATEGORY_GENERAL, "Evil Animals Are Monsters", false, "If enabled, sets the creature type of Evil Animals to \"monster\". The creature type affects how a entity spawns, eg \"creature\" "
-				+ "treats the entity as an animal, while \"monster\" treats it as a hostile mob. If you enable this, Evil Animals will spawn like any other hostile mobs, instead of mimicking vanilla animals.\n"
-				+TextFormatting.RED+"[Minecraft Restart Required]"+TextFormatting.RESET).getBoolean();
+			+ "treats the entity as an animal, while \"monster\" treats it as a hostile mob. If you enable this, Evil Animals will spawn like any other hostile mobs, instead of mimicking vanilla animals.\n"
+			+TextFormatting.RED+"[Minecraft Restart Required]"+TextFormatting.RESET).getBoolean();
 		antiItemDisintegration = cfg.get(Configuration.CATEGORY_GENERAL, "Liquid Antimatter item disintegration", true, "Toggles whether or not Liquid Antimatter will disintegrate any items dropped into a pool of it.").getBoolean();
 		portalCooldown = cfg.get(Configuration.CATEGORY_GENERAL, "Portal cooldown", 10, "Cooldown after using a portal, increasing the value increases the delay until you can teleport again. Measured in ticks (20 ticks = 1 second).\n[range: 10 ~ 300, default: 10]", 10, 300).getInt();
 		demonAnimalSpawnWeight = cfg.get(Configuration.CATEGORY_GENERAL, "Demon Animal spawn weight", 15, "Spawn weight for the Demon Animals (Pigs, Cows, Chickens) spawning in the Nether.\n[range: 0 ~ 100, default: 15]", 0, 100).getInt();
@@ -206,7 +210,7 @@ public class InitHandler implements ILifeCycleHandler {
 		interdimensionalCageBlacklist = cfg.get(Configuration.CATEGORY_GENERAL, "Interdimensional Cage Blacklist", new String[]{}, "Entities added to this list can't be captured with the Interdimensional Cage.").getStringList();
 		damageAmpl = cfg.get(Configuration.CATEGORY_GENERAL, "Hardcore Mode damage amplifier", 1.0D, "When Hardcore Mode is enabled, you can use this to amplify the armor-piercing damage mobs deal.\n[range: 1.0 ~ 10.0, default: 1.0]", 1.0D, 10.0D).getDouble();
 		overworldShoggoths = cfg.get(Configuration.CATEGORY_GENERAL, "Lesser Shoggoth Overworld Spawning", true, "Toggles whether or not Lesser Shoggoths should have a chance of spawning in the Overworld.\n"
-				+TextFormatting.RED+"[Minecraft Restart Required]"+TextFormatting.RESET).getBoolean();
+			+TextFormatting.RED+"[Minecraft Restart Required]"+TextFormatting.RESET).getBoolean();
 		depthsHelmetOverlayOpacity = cfg.get(Configuration.CATEGORY_GENERAL, "Visage of The Depths Overlay Opacity", 1.0D, "Sets the opacity for the overlay shown when wearing the Visage of The Depths, reducing the value increases the transparency on the texture. Client Side only!\n[range: 0.5 ~ 1.0, default: 1.0]", 0.5D, 1.0D).getDouble();
 		mimicFire = cfg.get(Configuration.CATEGORY_GENERAL, "Mimic Fire", true, "Toggles whether or not Demon Animals will spread Mimic Fire instead of regular Fire (regular Fire can affect performance)").getBoolean();
 
@@ -350,7 +354,7 @@ public class InitHandler implements ILifeCycleHandler {
 	{
 		if (stack1 == null || stack2 == null) return false;
 		return stack1.getItem() == stack2.getItem() && (stack1.getItemDamage() == OreDictionary.WILDCARD_VALUE
-				|| stack1.getItemDamage() == stack2.getItemDamage());
+			|| stack1.getItemDamage() == stack2.getItemDamage());
 	}
 
 	/**

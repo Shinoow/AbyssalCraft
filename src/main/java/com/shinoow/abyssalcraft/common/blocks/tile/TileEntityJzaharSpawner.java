@@ -36,11 +36,11 @@ public class TileEntityJzaharSpawner extends TileEntity implements ITickable {
 
 	public boolean isActivated() {
 		return worldObj.getClosestPlayer(pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D,
-				activatingRangeFromPlayer, true) != null &&
-				!worldObj.getClosestPlayer(pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D,
-						activatingRangeFromPlayer, true).capabilities.isCreativeMode &&
-						worldObj.getClosestPlayer(pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D,
-								activatingRangeFromPlayer, true).posY >= pos.getY() -1;
+			activatingRangeFromPlayer, true) != null &&
+			!worldObj.getClosestPlayer(pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D,
+				activatingRangeFromPlayer, true).capabilities.isCreativeMode &&
+				worldObj.getClosestPlayer(pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D,
+					activatingRangeFromPlayer, true).posY >= pos.getY() -1;
 	}
 
 	@Override

@@ -27,18 +27,8 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import com.shinoow.abyssalcraft.api.biome.IDreadlandsBiome;
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
-import com.shinoow.abyssalcraft.common.entity.EntityAbygolem;
-import com.shinoow.abyssalcraft.common.entity.EntityChagarothFist;
-import com.shinoow.abyssalcraft.common.entity.EntityDreadSpawn;
-import com.shinoow.abyssalcraft.common.entity.EntityDreadgolem;
-import com.shinoow.abyssalcraft.common.entity.EntityDreadguard;
-import com.shinoow.abyssalcraft.common.entity.EntityDreadling;
-import com.shinoow.abyssalcraft.common.entity.EntityGreaterDreadSpawn;
-import com.shinoow.abyssalcraft.common.entity.EntityLesserDreadbeast;
-import com.shinoow.abyssalcraft.common.entity.demon.EntityDemonChicken;
-import com.shinoow.abyssalcraft.common.entity.demon.EntityDemonCow;
-import com.shinoow.abyssalcraft.common.entity.demon.EntityDemonPig;
-import com.shinoow.abyssalcraft.common.entity.demon.EntityDemonSheep;
+import com.shinoow.abyssalcraft.common.entity.*;
+import com.shinoow.abyssalcraft.common.entity.demon.*;
 import com.shinoow.abyssalcraft.lib.ACConfig;
 
 public class BiomeGenDreadlandsBase extends Biome implements IDreadlandsBiome {
@@ -94,7 +84,7 @@ public class BiomeGenDreadlandsBase extends Biome implements IDreadlandsBiome {
 			int y = par2Random.nextInt(55);
 			int z = par2Random.nextInt(16);
 			new WorldGenMinable(ACBlocks.abyssalnite_stone.getDefaultState(), 16,
-					BlockMatcher.forBlock(ACBlocks.dreadstone)).generate(par1World, par2Random, pos.add(x, y, z));
+				BlockMatcher.forBlock(ACBlocks.dreadstone)).generate(par1World, par2Random, pos.add(x, y, z));
 		}
 	}
 

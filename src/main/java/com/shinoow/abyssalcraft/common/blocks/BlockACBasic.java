@@ -78,7 +78,7 @@ public class BlockACBasic extends Block {
 			if(material == Material.ROCK || material == Material.IRON || material == Material.ANVIL)
 				setHarvestLevel("pickaxe", 0);
 			else if(material == Material.GROUND || material == Material.GRASS || material == Material.SAND ||
-					material == Material.SNOW || material == Material.CRAFTED_SNOW)
+				material == Material.SNOW || material == Material.CRAFTED_SNOW)
 				setHarvestLevel("shovel", 0);
 	}
 

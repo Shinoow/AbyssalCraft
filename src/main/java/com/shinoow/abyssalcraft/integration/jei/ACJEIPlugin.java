@@ -25,16 +25,20 @@ import com.shinoow.abyssalcraft.common.inventory.ContainerEngraver;
 import com.shinoow.abyssalcraft.common.inventory.ContainerTransmutator;
 import com.shinoow.abyssalcraft.init.BlockHandler;
 import com.shinoow.abyssalcraft.init.ItemHandler;
+import com.shinoow.abyssalcraft.integration.jei.crystallizer.*;
+import com.shinoow.abyssalcraft.integration.jei.engraver.EngraverRecipeCategory;
+import com.shinoow.abyssalcraft.integration.jei.engraver.EngravingRecipeHandler;
+import com.shinoow.abyssalcraft.integration.jei.engraver.EngravingRecipeMaker;
 import com.shinoow.abyssalcraft.integration.jei.rending.RendingRecipeCategory;
 import com.shinoow.abyssalcraft.integration.jei.rending.RendingRecipeHandler;
 import com.shinoow.abyssalcraft.integration.jei.rending.RendingRecipeMaker;
-import com.shinoow.abyssalcraft.integration.jei.ritual.*;
+import com.shinoow.abyssalcraft.integration.jei.ritual.RitualRecipeCategory;
+import com.shinoow.abyssalcraft.integration.jei.ritual.RitualRecipeHandler;
+import com.shinoow.abyssalcraft.integration.jei.ritual.RitualRecipeMaker;
 import com.shinoow.abyssalcraft.integration.jei.transmutator.*;
 import com.shinoow.abyssalcraft.integration.jei.upgrades.UpgradeRecipeCategory;
 import com.shinoow.abyssalcraft.integration.jei.upgrades.UpgradeRecipeHandler;
 import com.shinoow.abyssalcraft.integration.jei.upgrades.UpgradeRecipeMaker;
-import com.shinoow.abyssalcraft.integration.jei.crystallizer.*;
-import com.shinoow.abyssalcraft.integration.jei.engraver.*;
 
 @JEIPlugin
 public class ACJEIPlugin implements IModPlugin {
@@ -49,27 +53,27 @@ public class ACJEIPlugin implements IModPlugin {
 
 		IGuiHelper guiHelper = jeiHelpers.getGuiHelper();
 		registry.addRecipeCategories(new TransmutatorFuelCategory(guiHelper),
-				new TransmutationCategory(guiHelper),
-				new CrystallizerFuelCategory(guiHelper),
-				new CrystallizationCategory(guiHelper),
-				new RitualRecipeCategory(guiHelper),
-				new EngraverRecipeCategory(guiHelper),
-				new RendingRecipeCategory(guiHelper),
-				new UpgradeRecipeCategory(guiHelper));
+			new TransmutationCategory(guiHelper),
+			new CrystallizerFuelCategory(guiHelper),
+			new CrystallizationCategory(guiHelper),
+			new RitualRecipeCategory(guiHelper),
+			new EngraverRecipeCategory(guiHelper),
+			new RendingRecipeCategory(guiHelper),
+			new UpgradeRecipeCategory(guiHelper));
 
 		registry.addRecipeHandlers(new TransmutatorFuelRecipeHandler(),
-				new TransmutationRecipeHandler(),
-				new CrystallizerFuelRecipeHandler(),
-				new CrystallizationRecipeHandler(),
-				new RitualRecipeHandler(),
-				new EngravingRecipeHandler(),
-				new RendingRecipeHandler(),
-				new UpgradeRecipeHandler());
+			new TransmutationRecipeHandler(),
+			new CrystallizerFuelRecipeHandler(),
+			new CrystallizationRecipeHandler(),
+			new RitualRecipeHandler(),
+			new EngravingRecipeHandler(),
+			new RendingRecipeHandler(),
+			new UpgradeRecipeHandler());
 
 		registry.addRecipeCategoryCraftingItem(new ItemStack(ACBlocks.transmutator_idle), AbyssalCraftRecipeCategoryUid.TRANSMUTATION,
-				AbyssalCraftRecipeCategoryUid.FUEL_TRANSMUTATION);
+			AbyssalCraftRecipeCategoryUid.FUEL_TRANSMUTATION);
 		registry.addRecipeCategoryCraftingItem(new ItemStack(ACBlocks.crystallizer_idle), AbyssalCraftRecipeCategoryUid.CRYSTALLIZATION,
-				AbyssalCraftRecipeCategoryUid.FUEL_CRYSTALLIZATION);
+			AbyssalCraftRecipeCategoryUid.FUEL_CRYSTALLIZATION);
 		registry.addRecipeCategoryCraftingItem(new ItemStack(ACBlocks.engraver), AbyssalCraftRecipeCategoryUid.ENGRAVING);
 		registry.addRecipeCategoryCraftingItem(new ItemStack(ACItems.necronomicon), AbyssalCraftRecipeCategoryUid.RITUAL);
 		registry.addRecipeCategoryCraftingItem(new ItemStack(ACItems.abyssal_wasteland_necronomicon), AbyssalCraftRecipeCategoryUid.RITUAL);

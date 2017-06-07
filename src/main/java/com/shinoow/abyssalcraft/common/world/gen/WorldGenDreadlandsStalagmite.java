@@ -30,7 +30,7 @@ public class WorldGenDreadlandsStalagmite extends WorldGenerator {
 			pos = pos.down();
 
 		if(world.getBlockState(pos) != ACBlocks.abyssalnite_stone.getDefaultState() &&
-				world.getBlockState(pos) != ACBlocks.dreadstone.getDefaultState())
+			world.getBlockState(pos) != ACBlocks.dreadstone.getDefaultState())
 			return false;
 
 		IBlockState state;

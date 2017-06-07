@@ -23,10 +23,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 import com.shinoow.abyssalcraft.api.energy.EnergyEnum.AmplifierType;
-import com.shinoow.abyssalcraft.api.energy.IEnergyContainer;
-import com.shinoow.abyssalcraft.api.energy.IEnergyContainerItem;
-import com.shinoow.abyssalcraft.api.energy.IEnergyManipulator;
-import com.shinoow.abyssalcraft.api.energy.PEUtils;
+import com.shinoow.abyssalcraft.api.energy.*;
 import com.shinoow.abyssalcraft.api.energy.disruption.DisruptionEntry;
 import com.shinoow.abyssalcraft.api.item.ACItems;
 
@@ -87,12 +84,12 @@ public class DisruptionDrainNearbyPE extends DisruptionEntry {
 						if(isNecronomicon(item.getItem())) player.attackEntityFrom(DamageSource.magic, 2);
 						for(int i = 0; i < 3; i++)
 							world.spawnParticle(EnumParticleTypes.SMOKE_LARGE, player.posX + (world.rand.nextDouble() - 0.5D) * player.width,
-									player.posY + world.rand.nextDouble() * player.height, player.posZ + (world.rand.nextDouble() - 0.5D) * player.width, 0,0,0);
+								player.posY + world.rand.nextDouble() * player.height, player.posZ + (world.rand.nextDouble() - 0.5D) * player.width, 0,0,0);
 					}
 	}
 
 	boolean isNecronomicon(Item item){
 		return item == ACItems.necronomicon || item == ACItems.abyssal_wasteland_necronomicon || item == ACItems.dreadlands_necronomicon
-				|| item == ACItems.omothol_necronomicon || item == ACItems.abyssalnomicon;
+			|| item == ACItems.omothol_necronomicon || item == ACItems.abyssalnomicon;
 	}
 }

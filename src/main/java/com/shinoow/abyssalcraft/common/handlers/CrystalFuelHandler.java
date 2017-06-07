@@ -11,20 +11,20 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.common.handlers;
 
-import com.shinoow.abyssalcraft.api.APIUtils;
-import com.shinoow.abyssalcraft.api.block.ACBlocks;
-import com.shinoow.abyssalcraft.api.item.ACItems;
-
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.IFuelHandler;
+
+import com.shinoow.abyssalcraft.api.APIUtils;
+import com.shinoow.abyssalcraft.api.block.ACBlocks;
+import com.shinoow.abyssalcraft.api.item.ACItems;
 
 public class CrystalFuelHandler implements IFuelHandler {
 
 	@Override
 	public int getBurnTime(ItemStack fuel) {
 		if(fuel.getItem() == Item.getItemFromBlock(ACBlocks.crystal_cluster) ||
-				fuel.getItem() == Item.getItemFromBlock(ACBlocks.crystal_cluster2))
+			fuel.getItem() == Item.getItemFromBlock(ACBlocks.crystal_cluster2))
 			return 12150;
 		if(fuel.getItem() == ACItems.crystal)
 			return 1350;

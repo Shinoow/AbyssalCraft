@@ -65,7 +65,7 @@ public class PotionCplague extends Potion{
 					par1EntityLivingBase.worldObj.spawnEntityInWorld(ghoul);
 				}
 				else if(par1EntityLivingBase.worldObj.getDifficulty() == EnumDifficulty.HARD && par1EntityLivingBase.worldObj.rand.nextBoolean()
-						|| par1EntityLivingBase.worldObj.rand.nextInt(8) == 0) {
+					|| par1EntityLivingBase.worldObj.rand.nextInt(8) == 0) {
 					EntityAbyssalZombie entityzombie = new EntityAbyssalZombie(par1EntityLivingBase.worldObj);
 					entityzombie.copyLocationAndAnglesFrom(par1EntityLivingBase);
 					entityzombie.onInitialSpawn(par1EntityLivingBase.worldObj.getDifficultyForLocation(par1EntityLivingBase.getPosition()),(IEntityLivingData)null);
@@ -77,7 +77,7 @@ public class PotionCplague extends Potion{
 			} else if(par1EntityLivingBase instanceof EntityPlayer && !wasKilled){
 				wasKilled = true;
 				if(par1EntityLivingBase.worldObj.getDifficulty() == EnumDifficulty.HARD && par1EntityLivingBase.worldObj.rand.nextBoolean()
-						|| par1EntityLivingBase.worldObj.rand.nextInt(8) == 0) {
+					|| par1EntityLivingBase.worldObj.rand.nextInt(8) == 0) {
 					EntityAbyssalZombie entityzombie = new EntityAbyssalZombie(par1EntityLivingBase.worldObj);
 					entityzombie.copyLocationAndAnglesFrom(par1EntityLivingBase);
 					entityzombie.onInitialSpawn(par1EntityLivingBase.worldObj.getDifficultyForLocation(par1EntityLivingBase.getPosition()),(IEntityLivingData)null);

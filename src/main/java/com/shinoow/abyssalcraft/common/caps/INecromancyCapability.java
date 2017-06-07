@@ -17,7 +17,7 @@ public interface INecromancyCapability {
 	public void clearEntry(String name);
 
 	public List<Tuple<String, NBTTagCompound>> getData();
-	
+
 	public Map<String, Integer> getSizeData();
 
 	public void copy(INecromancyCapability cap);

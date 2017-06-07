@@ -28,9 +28,9 @@ public class Abyruin extends WorldGenerator
 {
 	protected IBlockState[] GetValidSpawnBlocks() {
 		return new IBlockState[] {
-				ACBlocks.abyssal_stone.getDefaultState(),
-				ACBlocks.fused_abyssal_sand.getDefaultState(),
-				ACBlocks.abyssal_sand.getDefaultState()
+			ACBlocks.abyssal_stone.getDefaultState(),
+			ACBlocks.fused_abyssal_sand.getDefaultState(),
+			ACBlocks.abyssal_sand.getDefaultState()
 		};
 	}
 

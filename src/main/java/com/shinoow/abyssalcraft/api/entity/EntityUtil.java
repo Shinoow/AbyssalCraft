@@ -84,8 +84,8 @@ public final class EntityUtil {
 	 */
 	public static boolean hasNecronomicon(EntityPlayer player){
 		return player.inventory.hasItemStack(new ItemStack(ACItems.necronomicon)) || player.inventory.hasItemStack(new ItemStack(ACItems.abyssal_wasteland_necronomicon))
-				|| player.inventory.hasItemStack(new ItemStack(ACItems.dreadlands_necronomicon)) || player.inventory.hasItemStack(new ItemStack(ACItems.omothol_necronomicon))
-				|| player.inventory.hasItemStack(new ItemStack(ACItems.abyssalnomicon));
+			|| player.inventory.hasItemStack(new ItemStack(ACItems.dreadlands_necronomicon)) || player.inventory.hasItemStack(new ItemStack(ACItems.omothol_necronomicon))
+			|| player.inventory.hasItemStack(new ItemStack(ACItems.abyssalnomicon));
 	}
 
 	/**
@@ -97,8 +97,8 @@ public final class EntityUtil {
 	 */
 	public static boolean isEntityImmune(EntityLivingBase entity, Potion potion){
 		return potion == AbyssalCraftAPI.coralium_plague && isEntityCoralium(entity) ||
-				potion == AbyssalCraftAPI.dread_plague && isEntityDread(entity) ||
-				potion == AbyssalCraftAPI.antimatter_potion && isEntityAnti(entity);
+			potion == AbyssalCraftAPI.dread_plague && isEntityDread(entity) ||
+			potion == AbyssalCraftAPI.antimatter_potion && isEntityAnti(entity);
 	}
 
 	/**

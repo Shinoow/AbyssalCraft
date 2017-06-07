@@ -14,42 +14,32 @@ package com.shinoow.abyssalcraft.api;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.logging.log4j.Level;
-
 import net.minecraft.block.Block;
 import net.minecraft.enchantment.Enchantment;
-import net.minecraft.entity.*;
+import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.init.SoundEvents;
-import net.minecraft.item.Item;
+import net.minecraft.item.*;
 import net.minecraft.item.Item.ToolMaterial;
 import net.minecraft.item.ItemArmor.ArmorMaterial;
-import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraft.potion.Potion;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.util.EnumHelper;
+import net.minecraftforge.fluids.Fluid;
+import net.minecraftforge.fml.common.*;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.oredict.OreDictionary;
+
+import org.apache.logging.log4j.Level;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
-import com.shinoow.abyssalcraft.api.internal.DummyMethodHandler;
-import com.shinoow.abyssalcraft.api.internal.DummyNecroDataHandler;
-import com.shinoow.abyssalcraft.api.internal.IInternalMethodHandler;
-import com.shinoow.abyssalcraft.api.internal.IInternalNecroDataHandler;
-import com.shinoow.abyssalcraft.api.item.ACItems;
-import com.shinoow.abyssalcraft.api.item.ItemEngraving;
-import com.shinoow.abyssalcraft.api.item.ItemUpgradeKit;
+import com.shinoow.abyssalcraft.api.internal.*;
+import com.shinoow.abyssalcraft.api.item.*;
 import com.shinoow.abyssalcraft.api.necronomicon.NecroData;
 import com.shinoow.abyssalcraft.api.recipe.*;
-
-import net.minecraftforge.fluids.Fluid;
-import net.minecraftforge.fml.common.FMLLog;
-import net.minecraftforge.fml.common.IFuelHandler;
-import net.minecraftforge.fml.common.Loader;
-import net.minecraftforge.fml.common.LoaderState;
-import net.minecraftforge.fml.common.registry.GameRegistry;
 
 /**
  * Main API class for AbyssalCraft, has child classes for most features.<br>
@@ -119,8 +109,8 @@ public class AbyssalCraftAPI {
 	 */
 	public static void setInternalNDHandler(IInternalNecroDataHandler handler){
 		if(internalNDHandler.getClass().getName().equals(DummyNecroDataHandler.class.getName())
-				&& Loader.instance().getLoaderState() == LoaderState.PREINITIALIZATION
-				&& Loader.instance().activeModContainer().getModId().equals("abyssalcraft"))
+			&& Loader.instance().getLoaderState() == LoaderState.PREINITIALIZATION
+			&& Loader.instance().activeModContainer().getModId().equals("abyssalcraft"))
 			internalNDHandler = handler;
 	}
 
@@ -131,8 +121,8 @@ public class AbyssalCraftAPI {
 	 */
 	public static void setInternalMethodHandler(IInternalMethodHandler handler){
 		if(internalMethodHandler.getClass().getName().equals(DummyMethodHandler.class.getName())
-				&& Loader.instance().getLoaderState() == LoaderState.PREINITIALIZATION
-				&& Loader.instance().activeModContainer().getModId().equals("abyssalcraft"))
+			&& Loader.instance().getLoaderState() == LoaderState.PREINITIALIZATION
+			&& Loader.instance().activeModContainer().getModId().equals("abyssalcraft"))
 			internalMethodHandler = handler;
 	}
 
@@ -437,7 +427,7 @@ public class AbyssalCraftAPI {
 	 */
 	public static void addEngraving(ItemStack coin, ItemEngraving engraving, float xp){
 		if(!EngraverRecipes.instance().getEngravingList().containsKey(engraving) &&
-				!EngraverRecipes.instance().getEngravingList().containsValue(coin))
+			!EngraverRecipes.instance().getEngravingList().containsValue(coin))
 			EngraverRecipes.instance().addEngraving(coin, engraving, xp);
 		else FMLLog.log("AbyssalCraftAPI", Level.ERROR, "This Engraving Template and/or Engraved Coin is already registered!");
 	}
@@ -452,7 +442,7 @@ public class AbyssalCraftAPI {
 	 */
 	public static void addEngraving(Item coin, ItemEngraving engraving, float xp){
 		if(!EngraverRecipes.instance().getEngravingList().containsKey(engraving) &&
-				!EngraverRecipes.instance().getEngravingList().containsValue(new ItemStack(coin)))
+			!EngraverRecipes.instance().getEngravingList().containsValue(new ItemStack(coin)))
 			EngraverRecipes.instance().addEngraving(coin, engraving, xp);
 		else FMLLog.log("AbyssalCraftAPI", Level.ERROR, "This Engraving Template and/or Engraved Coin is already registered!");
 	}

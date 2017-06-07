@@ -57,11 +57,11 @@ public class PotionDplague extends Potion{
 		if(par1EntityLivingBase instanceof EntityPlayer)
 			((EntityPlayer)par1EntityLivingBase).addExhaustion(0.025F * (par2+2));
 		if(!par1EntityLivingBase.worldObj.isRemote && par1EntityLivingBase.isDead
-				&& par1EntityLivingBase.worldObj.rand.nextBoolean())
+			&& par1EntityLivingBase.worldObj.rand.nextBoolean())
 			if(par1EntityLivingBase instanceof EntityZombie || par1EntityLivingBase instanceof EntityAbyssalZombie
-					|| par1EntityLivingBase instanceof EntityAntiPlayer || par1EntityLivingBase instanceof EntityAntiAbyssalZombie
-					|| par1EntityLivingBase instanceof EntityAntiZombie || par1EntityLivingBase instanceof EntitySkeleton
-					|| par1EntityLivingBase instanceof EntityAntiSkeleton){
+				|| par1EntityLivingBase instanceof EntityAntiPlayer || par1EntityLivingBase instanceof EntityAntiAbyssalZombie
+				|| par1EntityLivingBase instanceof EntityAntiZombie || par1EntityLivingBase instanceof EntitySkeleton
+				|| par1EntityLivingBase instanceof EntityAntiSkeleton){
 				EntityDreadling dreadling = new EntityDreadling(par1EntityLivingBase.worldObj);
 				dreadling.copyLocationAndAnglesFrom(par1EntityLivingBase);
 				par1EntityLivingBase.worldObj.removeEntity(par1EntityLivingBase);

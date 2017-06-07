@@ -31,19 +31,19 @@ public class NecromancyCapability implements INecromancyCapability {
 	@Override
 	public void storeData(String name, NBTTagCompound data, int size) {
 
-			if(getDataForName(name) == null){
-				if(this.data.size() == 5){
-					sizes.remove(this.data.get(0).getFirst());
-					this.data.remove(0);
+		if(getDataForName(name) == null){
+			if(this.data.size() == 5){
+				sizes.remove(this.data.get(0).getFirst());
+				this.data.remove(0);
+			}
+			this.data.add(new Tuple(name, data));
+		} else
+			for(Tuple<String, NBTTagCompound> t : this.data)
+				if(t.getFirst().equals(name)){
+					t = new Tuple(name, data);
+					break;
 				}
-				this.data.add(new Tuple(name, data));
-			} else
-				for(Tuple<String, NBTTagCompound> t : this.data)
-					if(t.getFirst().equals(name)){
-						t = new Tuple(name, data);
-						break;
-					}
-			sizes.put(name, size);
+		sizes.put(name, size);
 	}
 
 	@Override

@@ -22,13 +22,13 @@ public class NecromancyCapabilityStorage implements IStorage<INecromancyCapabili
 		NBTTagCompound sizes = new NBTTagCompound();
 		for(Entry<String, Integer> e : instance.getSizeData().entrySet())
 			sizes.setInteger(e.getKey(), e.getValue());
-		
+
 		properties.setTag("Sizes", sizes);
 
 		NBTTagCompound data = new NBTTagCompound();
 		for(Tuple<String, NBTTagCompound> t : instance.getData())
 			data.setTag(t.getFirst(), t.getSecond());
-		
+
 		properties.setTag("Data", data);
 
 		return properties;

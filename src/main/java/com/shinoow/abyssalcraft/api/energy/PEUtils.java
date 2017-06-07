@@ -23,7 +23,6 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 
 import com.google.common.collect.Lists;
@@ -56,13 +55,11 @@ public class PEUtils {
 				ItemStack item = player.getHeldItem(EnumHand.MAIN_HAND);
 				ItemStack item1 = player.getHeldItem(EnumHand.OFF_HAND);
 				if(item != null && item.getItem() instanceof IEnergyTransporterItem ||
-						item1 != null && item1.getItem() instanceof IEnergyTransporterItem){
-					if(!world.isRemote){
+					item1 != null && item1.getItem() instanceof IEnergyTransporterItem) if(!world.isRemote){
 						transferPEToStack(item, manipulator);
 						transferPEToStack(item1, manipulator);
 						AbyssalCraftAPI.getInternalMethodHandler().spawnPEStream(pos, player, world.provider.getDimension());
 					}
-				}
 			}
 	}
 
@@ -170,12 +167,12 @@ public class PEUtils {
 		Block block2 = world.getBlockState(new BlockPos(pos.getX(), pos.getY() - 2, pos.getZ())).getBlock();
 		int num = 0;
 		if(block1 != null && block1 instanceof IEnergyAmplifier &&
-				((IEnergyAmplifier) block1).getAmplifierType() == AmplifierType.RANGE)
+			((IEnergyAmplifier) block1).getAmplifierType() == AmplifierType.RANGE)
 			num = 1;
 		if(block1 != null && block1 instanceof IEnergyAmplifier &&
-				((IEnergyAmplifier) block1).getAmplifierType() == AmplifierType.RANGE
-				&& block2 != null && block2 instanceof IEnergyAmplifier &&
-				((IEnergyAmplifier) block2).getAmplifierType() == AmplifierType.RANGE)
+			((IEnergyAmplifier) block1).getAmplifierType() == AmplifierType.RANGE
+			&& block2 != null && block2 instanceof IEnergyAmplifier &&
+			((IEnergyAmplifier) block2).getAmplifierType() == AmplifierType.RANGE)
 			num = 2;
 		return num;
 	}

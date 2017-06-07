@@ -11,19 +11,19 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.common.world.gen;
 
-import com.shinoow.abyssalcraft.api.block.ACBlocks;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.chunk.ChunkPrimer;
 import net.minecraft.world.gen.MapGenRavine;
 
+import com.shinoow.abyssalcraft.api.block.ACBlocks;
+
 public class MapGenRavineAC extends MapGenRavine {
 
 	private boolean isACStone(Block block){
 		return block == ACBlocks.darkstone || block == ACBlocks.abyssal_stone || block == ACBlocks.dreadstone ||
-				block == ACBlocks.abyssalnite_stone || block == ACBlocks.coralium_stone || block == ACBlocks.omothol_stone;
+			block == ACBlocks.abyssalnite_stone || block == ACBlocks.coralium_stone || block == ACBlocks.omothol_stone;
 	}
 
 	@Override

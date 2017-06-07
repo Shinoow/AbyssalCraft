@@ -12,10 +12,7 @@
 package com.shinoow.abyssalcraft.common.world.biome;
 
 
-import com.shinoow.abyssalcraft.common.entity.EntityChagarothFist;
-import com.shinoow.abyssalcraft.common.entity.EntityChagarothSpawn;
-import com.shinoow.abyssalcraft.common.entity.EntityDreadguard;
-import com.shinoow.abyssalcraft.common.entity.EntityDreadling;
+import com.shinoow.abyssalcraft.common.entity.*;
 
 public class BiomeGenMountainDreadlands extends BiomeGenDreadlandsBase {
 

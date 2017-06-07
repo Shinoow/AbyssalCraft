@@ -32,11 +32,7 @@ import net.minecraft.network.play.server.SPacketChangeGameState;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumParticleTypes;
-import net.minecraft.util.math.AxisAlignedBB;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.math.RayTraceResult;
-import net.minecraft.util.math.Vec3d;
+import net.minecraft.util.math.*;
 import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
 
@@ -58,12 +54,12 @@ public class EntityCoraliumArrow extends EntityArrow {
 	private int knockbackStrength;
 
 	public EntityCoraliumArrow(World par1World,
-			EntityLivingBase par2EntityLivingBase) {
+		EntityLivingBase par2EntityLivingBase) {
 		super(par1World, par2EntityLivingBase);
 	}
 
 	public EntityCoraliumArrow(World par1World, double par2, double par4,
-			double par6) {
+		double par6) {
 		super(par1World, par2, par4, par6);
 	}
 
@@ -204,7 +200,7 @@ public class EntityCoraliumArrow extends EntityArrow {
 							if(entitylivingbase.isDead && entitylivingbase instanceof EntityZombie){
 								EntityDepthsGhoul ghoul = new EntityDepthsGhoul(entitylivingbase.worldObj);
 								if(entitylivingbase.worldObj.getDifficulty() == EnumDifficulty.HARD && entitylivingbase.worldObj.rand.nextBoolean()
-										|| entitylivingbase.worldObj.rand.nextInt(8) == 0) {
+									|| entitylivingbase.worldObj.rand.nextInt(8) == 0) {
 									ghoul.copyLocationAndAnglesFrom(entitylivingbase);
 									ghoul.onInitialSpawn(worldObj.getDifficultyForLocation(movingobjectposition.getBlockPos()), (IEntityLivingData)null);
 									if(entitylivingbase.isChild())

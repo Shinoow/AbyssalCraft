@@ -22,11 +22,10 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.math.AxisAlignedBB;
+
 import com.shinoow.abyssalcraft.api.energy.EnergyEnum.AmplifierType;
 import com.shinoow.abyssalcraft.api.energy.EnergyEnum.DeityType;
-import com.shinoow.abyssalcraft.api.energy.IEnergyManipulator;
-import com.shinoow.abyssalcraft.api.energy.IEnergyTransporterItem;
-import com.shinoow.abyssalcraft.api.energy.PEUtils;
+import com.shinoow.abyssalcraft.api.energy.*;
 import com.shinoow.abyssalcraft.api.energy.disruption.DisruptionHandler;
 import com.shinoow.abyssalcraft.api.entity.EntityUtil;
 
@@ -196,11 +195,11 @@ public class TileEntityStatue extends TileEntity implements IEnergyManipulator, 
 		if(worldObj.canBlockSeeSky(pos))
 			if(PEUtils.checkForAdjacentManipulators(worldObj, pos)){
 				if(worldObj.getClosestPlayer(xp, yp, zp, range, false) != null &&
-						EntityUtil.hasNecronomicon(worldObj.getClosestPlayer(xp, yp, zp, range, false))){
+					EntityUtil.hasNecronomicon(worldObj.getClosestPlayer(xp, yp, zp, range, false))){
 					ItemStack item = worldObj.getClosestPlayer(xp, yp, zp, range, false).getHeldItem(EnumHand.MAIN_HAND);
 					ItemStack item1 = worldObj.getClosestPlayer(xp, yp, zp, range, false).getHeldItem(EnumHand.OFF_HAND);
 					if(item != null && item.getItem() instanceof IEnergyTransporterItem ||
-							item1 != null && item1.getItem() instanceof IEnergyTransporterItem){
+						item1 != null && item1.getItem() instanceof IEnergyTransporterItem){
 						timer++;
 						if(timer >= (int)(timerMax / Math.max(getAmplifier(AmplifierType.DURATION), 1.0F))){
 							timer = worldObj.rand.nextInt(10);

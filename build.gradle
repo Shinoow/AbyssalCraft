@@ -107,19 +107,10 @@ processResources
 }
 	
 task srcJar(type: Jar) {
-    from sourceSets.main.allSource
+    from sourceSets.main.allJava
 	
 	extension = 'jar'
-	classifier = 'src'
-}
-
-task devJar(type: Jar, dependsOn: 'classes') {
-    from(sourceSets.main.output) {
-        include '**'
-    }
-
-    extension = 'jar'
-    classifier = 'dev'
+	classifier = 'sources'
 }
 
 task apiJar(type: Jar, dependsOn: 'classes') {
@@ -132,7 +123,7 @@ task apiJar(type: Jar, dependsOn: 'classes') {
 }
 
 artifacts {
-    archives srcJar, devJar, apiJar
+    archives srcJar, apiJar
 }
 
 curseforge {
@@ -152,8 +143,8 @@ curseforge {
 publishing {
     publications {
         mavenStuff(MavenPublication) {
+			from components.java
             artifact srcJar
-			artifact devJar
 			artifact apiJar
             groupId project.group
             artifactId project.archivesBaseName

@@ -11,54 +11,26 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.common.entity;
 
-import java.util.Calendar;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.Random;
+import java.util.*;
 
 import net.minecraft.block.Block;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentData;
 import net.minecraft.enchantment.EnchantmentHelper;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.IEntityLivingData;
-import net.minecraft.entity.IMerchant;
-import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.EntityAIAttackMelee;
-import net.minecraft.entity.ai.EntityAIHurtByTarget;
-import net.minecraft.entity.ai.EntityAILookIdle;
-import net.minecraft.entity.ai.EntityAIMoveTowardsRestriction;
-import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
-import net.minecraft.entity.ai.EntityAIOpenDoor;
-import net.minecraft.entity.ai.EntityAISwimming;
+import net.minecraft.entity.*;
+import net.minecraft.entity.ai.*;
 import net.minecraft.entity.ai.EntityAITasks.EntityAITaskEntry;
-import net.minecraft.entity.ai.EntityAIWander;
-import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
-import net.minecraft.init.MobEffects;
-import net.minecraft.init.SoundEvents;
+import net.minecraft.init.*;
 import net.minecraft.inventory.EntityEquipmentSlot;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemArmor;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.ItemTool;
+import net.minecraft.item.*;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.potion.PotionEffect;
-import net.minecraft.util.DamageSource;
-import net.minecraft.util.EnumHand;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.SoundEvent;
-import net.minecraft.util.Tuple;
+import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.text.TextComponentString;
@@ -72,10 +44,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import com.shinoow.abyssalcraft.api.APIUtils;
-import com.shinoow.abyssalcraft.api.entity.EntityUtil;
-import com.shinoow.abyssalcraft.api.entity.IAntiEntity;
-import com.shinoow.abyssalcraft.api.entity.ICoraliumEntity;
-import com.shinoow.abyssalcraft.api.entity.IDreadEntity;
+import com.shinoow.abyssalcraft.api.entity.*;
 import com.shinoow.abyssalcraft.api.item.ACItems;
 import com.shinoow.abyssalcraft.common.items.ItemDrainStaff;
 import com.shinoow.abyssalcraft.common.items.ItemNecronomicon;
@@ -652,13 +621,13 @@ public class EntityRemnant extends EntityMob implements IMerchant, IAntiEntity, 
 	public void useRecipe(MerchantRecipe var1) {
 		var1.incrementToolUses();
 		if(var1.getItemToSell().getItem() instanceof ItemTool ||
-				var1.getItemToSell().getItem() instanceof ItemArmor){
+			var1.getItemToSell().getItem() instanceof ItemArmor){
 			var1.incrementToolUses();
 			var1.incrementToolUses();
 			var1.incrementToolUses();
 		}
 		if(var1.getItemToBuy().getItem() instanceof ItemNecronomicon ||
-				var1.getItemToBuy().getItem() instanceof ItemDrainStaff)
+			var1.getItemToBuy().getItem() instanceof ItemDrainStaff)
 			var1.compensateToolUses();
 		livingSoundTime = -getTalkInterval();
 		playSound(ACSounds.remnant_yes, getSoundVolume(), getSoundPitch());
@@ -696,14 +665,14 @@ public class EntityRemnant extends EntityMob implements IMerchant, IAntiEntity, 
 	private boolean hasSameIDsAs(MerchantRecipe r1, MerchantRecipe r2)
 	{
 		return r1.getItemToBuy().getItem() == r2.getItemToBuy().getItem() && r1.getItemToSell().getItem() == r2.getItemToSell().getItem() ?
-				r1.getSecondItemToBuy() == null && r2.getSecondItemToBuy() == null || r1.getSecondItemToBuy() != null && r2.getSecondItemToBuy() != null
-				&& r1.getSecondItemToBuy().getItem() == r2.getSecondItemToBuy().getItem() : false;
+			r1.getSecondItemToBuy() == null && r2.getSecondItemToBuy() == null || r1.getSecondItemToBuy() != null && r2.getSecondItemToBuy() != null
+			&& r1.getSecondItemToBuy().getItem() == r2.getSecondItemToBuy().getItem() : false;
 	}
 
 	private boolean hasSameItemsAs(MerchantRecipe r1, MerchantRecipe r2)
 	{
 		return hasSameIDsAs(r1, r2) && (r1.getItemToBuy().stackSize < r2.getItemToBuy().stackSize ||
-				r1.getSecondItemToBuy() != null && r1.getSecondItemToBuy().stackSize < r2.getSecondItemToBuy().stackSize);
+			r1.getSecondItemToBuy() != null && r1.getSecondItemToBuy().stackSize < r2.getSecondItemToBuy().stackSize);
 	}
 
 	/****************** END OF VANILLA CODE FROM 1.7.10 ******************/

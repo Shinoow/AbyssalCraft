@@ -22,7 +22,7 @@ public class NecronomiconWeatherRitual extends NecronomiconRitual {
 
 	public NecronomiconWeatherRitual() {
 		super("weather", 0, 100F, Items.FEATHER, Items.FEATHER, Items.FEATHER, Items.FEATHER,
-				Items.FEATHER, Items.FEATHER, Items.FEATHER, Items.FEATHER);
+			Items.FEATHER, Items.FEATHER, Items.FEATHER, Items.FEATHER);
 	}
 
 	@Override

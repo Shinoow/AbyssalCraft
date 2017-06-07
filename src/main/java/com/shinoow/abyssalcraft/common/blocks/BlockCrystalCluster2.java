@@ -25,6 +25,7 @@ import net.minecraft.util.IStringSerializable;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
+
 import com.shinoow.abyssalcraft.lib.ACTabs;
 
 public class BlockCrystalCluster2 extends BlockACBasic {

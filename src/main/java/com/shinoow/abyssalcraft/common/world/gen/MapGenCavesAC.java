@@ -11,22 +11,22 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.common.world.gen;
 
-import com.shinoow.abyssalcraft.api.block.ACBlocks;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.world.gen.MapGenCaves;
+
+import com.shinoow.abyssalcraft.api.block.ACBlocks;
 
 public class MapGenCavesAC extends MapGenCaves {
 
 	private boolean isACStone(Block block){
 		return block == ACBlocks.darkstone || block == ACBlocks.abyssal_stone || block == ACBlocks.dreadstone ||
-				block == ACBlocks.abyssalnite_stone || block == ACBlocks.coralium_stone || block == ACBlocks.omothol_stone;
+			block == ACBlocks.abyssalnite_stone || block == ACBlocks.coralium_stone || block == ACBlocks.omothol_stone;
 	}
 
 	private boolean isACMisc(Block block){
 		return block == ACBlocks.abyssal_sand || block == ACBlocks.fused_abyssal_sand ||
-				block == ACBlocks.dreadlands_dirt || block == ACBlocks.dreadlands_grass;
+			block == ACBlocks.dreadlands_dirt || block == ACBlocks.dreadlands_grass;
 	}
 
 	@Override

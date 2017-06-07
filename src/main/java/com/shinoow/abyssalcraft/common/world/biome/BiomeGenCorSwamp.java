@@ -14,7 +14,6 @@ package com.shinoow.abyssalcraft.common.world.biome;
 import java.util.Random;
 
 import net.minecraft.block.Block;
-import net.minecraft.block.state.pattern.BlockMatcher;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -27,17 +26,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.common.entity.EntityAbyssalZombie;
 import com.shinoow.abyssalcraft.common.entity.EntityDepthsGhoul;
-import com.shinoow.abyssalcraft.common.entity.anti.EntityAntiAbyssalZombie;
-import com.shinoow.abyssalcraft.common.entity.anti.EntityAntiBat;
-import com.shinoow.abyssalcraft.common.entity.anti.EntityAntiChicken;
-import com.shinoow.abyssalcraft.common.entity.anti.EntityAntiCow;
-import com.shinoow.abyssalcraft.common.entity.anti.EntityAntiCreeper;
-import com.shinoow.abyssalcraft.common.entity.anti.EntityAntiGhoul;
-import com.shinoow.abyssalcraft.common.entity.anti.EntityAntiPig;
-import com.shinoow.abyssalcraft.common.entity.anti.EntityAntiPlayer;
-import com.shinoow.abyssalcraft.common.entity.anti.EntityAntiSkeleton;
-import com.shinoow.abyssalcraft.common.entity.anti.EntityAntiSpider;
-import com.shinoow.abyssalcraft.common.entity.anti.EntityAntiZombie;
+import com.shinoow.abyssalcraft.common.entity.anti.*;
 import com.shinoow.abyssalcraft.common.world.gen.WorldGenAntimatterLake;
 import com.shinoow.abyssalcraft.lib.ACConfig;
 

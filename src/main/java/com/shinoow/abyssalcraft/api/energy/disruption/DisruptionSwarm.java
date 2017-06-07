@@ -66,9 +66,9 @@ public class DisruptionSwarm extends DisruptionEntry {
 						if(!entity.isImmuneToFire())
 							entity.addPotionEffect(new PotionEffect(MobEffects.FIRE_RESISTANCE, 200));
 					} catch (InstantiationException | IllegalAccessException
-							| IllegalArgumentException
-							| InvocationTargetException | NoSuchMethodException
-							| SecurityException e) {
+						| IllegalArgumentException
+						| InvocationTargetException | NoSuchMethodException
+						| SecurityException e) {
 						e.printStackTrace();
 					}
 	}

@@ -11,8 +11,6 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.common.blocks.tile;
 
-import com.shinoow.abyssalcraft.common.blocks.BlockStateTransformer;
-import com.shinoow.abyssalcraft.common.items.ItemStoneTablet;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ISidedInventory;
@@ -27,15 +25,18 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
 import net.minecraftforge.common.util.Constants;
 
+import com.shinoow.abyssalcraft.common.blocks.BlockStateTransformer;
+import com.shinoow.abyssalcraft.common.items.ItemStoneTablet;
+
 public class TileEntityStateTransformer extends TileEntity implements ITickable, ISidedInventory {
 
 	public int processingTime;
 	private ItemStack[] containerItemStacks = new ItemStack[50];
 	public int mode;
 	private int[][] slots = {new int[]{0}, new int[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19,
-			20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46,
-			47, 48, 49}, new int[]{0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22,23,
-			24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49}};
+		20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46,
+		47, 48, 49}, new int[]{0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22,23,
+		24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49}};
 	boolean flag1;
 
 	@Override
@@ -344,7 +345,7 @@ public class TileEntityStateTransformer extends TileEntity implements ITickable,
 			direction == EnumFacing.DOWN;
 		case 1:
 			return direction == EnumFacing.DOWN && index == 0 ? stack.getItem() instanceof ItemStoneTablet &&
-					!((ItemStoneTablet)stack.getItem()).hasInventory(stack) : true;
+				!((ItemStoneTablet)stack.getItem()).hasInventory(stack) : true;
 		default:
 			return false;
 		}

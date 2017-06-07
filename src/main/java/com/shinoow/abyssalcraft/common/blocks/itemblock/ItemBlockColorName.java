@@ -28,10 +28,10 @@ public class ItemBlockColorName extends ItemBlock {
 		if(getUnlocalizedName().contains("abyblock"))
 			return TextFormatting.DARK_AQUA + super.getItemStackDisplayName(par1ItemStack);
 		else if(getUnlocalizedName().contains("odb") || getUnlocalizedName().contains("dreadiumblock") ||
-				getUnlocalizedName().contains("darkethaxium"))
+			getUnlocalizedName().contains("darkethaxium"))
 			return TextFormatting.DARK_RED + super.getItemStackDisplayName(par1ItemStack);
 		else if(getUnlocalizedName().contains("corblock") || getUnlocalizedName().contains("Eth")
-				|| getUnlocalizedName().contains("ethaxium") || getUnlocalizedName().contains("BOE"))
+			|| getUnlocalizedName().contains("ethaxium") || getUnlocalizedName().contains("BOE"))
 			return TextFormatting.AQUA + super.getItemStackDisplayName(par1ItemStack);
 		else if(getUnlocalizedName().contains("aby"))
 			return TextFormatting.BLUE + super.getItemStackDisplayName(par1ItemStack);

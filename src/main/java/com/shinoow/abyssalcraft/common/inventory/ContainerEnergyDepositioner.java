@@ -109,7 +109,7 @@ public class ContainerEnergyDepositioner extends Container {
 			else if (par2 != 1 && par2 != 0)
 			{
 				if(itemstack1.getItem() instanceof ItemStoneTablet && !((ItemStoneTablet)itemstack1.getItem()).isCursed(itemstack1)
-						&& ((ItemStoneTablet)itemstack1.getItem()).hasInventory(itemstack1)){
+					&& ((ItemStoneTablet)itemstack1.getItem()).hasInventory(itemstack1)){
 					if (!mergeItemStack(itemstack1, 0, 1, false))
 						return null;
 				} else if (par2 >= 2 && par2 < 29){

@@ -92,8 +92,8 @@ public class NecronomiconSummonRitual extends NecronomiconRitual {
 		try {
 			entityliving = entity.getConstructor(World.class).newInstance(world);
 		} catch (InstantiationException | IllegalAccessException
-				| IllegalArgumentException | InvocationTargetException
-				| NoSuchMethodException | SecurityException e) {
+			| IllegalArgumentException | InvocationTargetException
+			| NoSuchMethodException | SecurityException e) {
 			e.printStackTrace();
 		}
 		if(entityliving != null){
@@ -109,8 +109,8 @@ public class NecronomiconSummonRitual extends NecronomiconRitual {
 		try {
 			entityliving = entity.getConstructor(World.class).newInstance(world);
 		} catch (InstantiationException | IllegalAccessException
-				| IllegalArgumentException | InvocationTargetException
-				| NoSuchMethodException | SecurityException e) {
+			| IllegalArgumentException | InvocationTargetException
+			| NoSuchMethodException | SecurityException e) {
 			e.printStackTrace();
 		}
 		if(entityliving == null) player.addChatMessage(new TextComponentString("The Entity could not be summoned."));

@@ -24,6 +24,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.client.model.obj.OBJModel;
+
 import com.shinoow.abyssalcraft.lib.ACTabs;
 
 public class BlockDecorativeStatue extends Block {

@@ -20,7 +20,7 @@ import com.shinoow.abyssalcraft.common.items.ItemNecronomicon;
 public class SlotNecronomicon extends Slot {
 
 	public SlotNecronomicon(IInventory par1iInventory, int par2, int par3,
-			int par4) {
+		int par4) {
 		super(par1iInventory, par2, par3, par4);
 	}
 

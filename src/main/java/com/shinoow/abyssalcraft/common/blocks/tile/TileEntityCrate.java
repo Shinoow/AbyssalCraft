@@ -284,7 +284,7 @@ public class TileEntityCrate extends TileEntity implements IInventory, ITickable
 
 	@Override
 	public Container createContainer(InventoryPlayer playerInventory,
-			EntityPlayer playerIn) {
+		EntityPlayer playerIn) {
 
 		return new ContainerChest(playerInventory, this, playerIn);
 	}

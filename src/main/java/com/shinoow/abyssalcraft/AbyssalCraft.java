@@ -16,7 +16,9 @@ import java.util.List;
 
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fml.common.*;
-import net.minecraftforge.fml.common.Mod.*;
+import net.minecraftforge.fml.common.Mod.EventHandler;
+import net.minecraftforge.fml.common.Mod.Instance;
+import net.minecraftforge.fml.common.Mod.Metadata;
 import net.minecraftforge.fml.common.event.*;
 
 import com.shinoow.abyssalcraft.common.CommonProxy;
@@ -37,7 +39,7 @@ public class AbyssalCraft {
 	public static AbyssalCraft instance = new AbyssalCraft();
 
 	@SidedProxy(clientSide = "com.shinoow.abyssalcraft.client.ClientProxy",
-			serverSide = "com.shinoow.abyssalcraft.common.CommonProxy")
+		serverSide = "com.shinoow.abyssalcraft.common.CommonProxy")
 	public static CommonProxy proxy;
 
 	private static List<ILifeCycleHandler> handlers = new ArrayList<ILifeCycleHandler>(){{

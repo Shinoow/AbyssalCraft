@@ -11,13 +11,13 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.common.blocks;
 
-import com.shinoow.abyssalcraft.api.block.ACBlocks;
-import com.shinoow.abyssalcraft.lib.ACTabs;
-
 import net.minecraft.block.BlockBush;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
+
+import com.shinoow.abyssalcraft.api.block.ACBlocks;
+import com.shinoow.abyssalcraft.lib.ACTabs;
 
 public class BlockLuminousThistle extends BlockBush {
 
@@ -32,6 +32,6 @@ public class BlockLuminousThistle extends BlockBush {
 	protected boolean canSustainBush(IBlockState ground)
 	{
 		return ground.getBlock() == ACBlocks.fused_abyssal_sand || ground.getBlock() == ACBlocks.abyssal_sand ||
-				ground.getMaterial() == Material.GRASS || super.canSustainBush(ground);
+			ground.getMaterial() == Material.GRASS || super.canSustainBush(ground);
 	}
 }
