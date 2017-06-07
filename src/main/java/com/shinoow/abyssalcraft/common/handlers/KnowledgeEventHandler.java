@@ -61,6 +61,7 @@ public class KnowledgeEventHandler {
 
 	@SubscribeEvent
 	public void onClonePlayer(PlayerEvent.Clone event) {
-		event.getEntityPlayer().getCapability(NecroDataCapabilityProvider.NECRO_DATA_CAP, null).copy(event.getOriginal().getCapability(NecroDataCapabilityProvider.NECRO_DATA_CAP, null));
+		if(event.isWasDeath())
+			event.getEntityPlayer().getCapability(NecroDataCapabilityProvider.NECRO_DATA_CAP, null).copy(event.getOriginal().getCapability(NecroDataCapabilityProvider.NECRO_DATA_CAP, null));
 	}
 }

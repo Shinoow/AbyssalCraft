@@ -17,12 +17,7 @@ import net.minecraft.world.biome.Biome;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import com.shinoow.abyssalcraft.common.entity.EntityGatekeeperMinion;
-import com.shinoow.abyssalcraft.common.entity.EntityOmotholGhoul;
-import com.shinoow.abyssalcraft.common.entity.EntityRemnant;
-import com.shinoow.abyssalcraft.common.entity.EntityShadowBeast;
-import com.shinoow.abyssalcraft.common.entity.EntityShadowCreature;
-import com.shinoow.abyssalcraft.common.entity.EntityShadowMonster;
+import com.shinoow.abyssalcraft.common.entity.*;
 
 public class BiomeGenOmothol extends Biome {
 

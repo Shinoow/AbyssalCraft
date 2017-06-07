@@ -14,17 +14,7 @@ package com.shinoow.abyssalcraft.common.disruptions;
 import java.util.List;
 
 import net.minecraft.entity.EnumCreatureAttribute;
-import net.minecraft.entity.passive.AbstractHorse;
-import net.minecraft.entity.passive.EntityAnimal;
-import net.minecraft.entity.passive.EntityChicken;
-import net.minecraft.entity.passive.EntityCow;
-import net.minecraft.entity.passive.EntityOcelot;
-import net.minecraft.entity.passive.EntityPig;
-import net.minecraft.entity.passive.EntityRabbit;
-import net.minecraft.entity.passive.EntitySheep;
-import net.minecraft.entity.passive.EntitySkeletonHorse;
-import net.minecraft.entity.passive.EntityWolf;
-import net.minecraft.entity.passive.EntityZombieHorse;
+import net.minecraft.entity.passive.*;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.math.AxisAlignedBB;
@@ -33,10 +23,7 @@ import net.minecraft.world.World;
 
 import com.shinoow.abyssalcraft.api.energy.EnergyEnum.DeityType;
 import com.shinoow.abyssalcraft.api.energy.disruption.DisruptionEntry;
-import com.shinoow.abyssalcraft.common.entity.demon.EntityEvilChicken;
-import com.shinoow.abyssalcraft.common.entity.demon.EntityEvilCow;
-import com.shinoow.abyssalcraft.common.entity.demon.EntityEvilSheep;
-import com.shinoow.abyssalcraft.common.entity.demon.EntityEvilpig;
+import com.shinoow.abyssalcraft.common.entity.demon.*;
 
 public class DisruptionAnimalCorruption extends DisruptionEntry {
 

@@ -11,10 +11,7 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.common.structures.dreadlands.mineshaft;
 
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 import net.minecraft.block.BlockRail;
 import net.minecraft.block.BlockRailBase;

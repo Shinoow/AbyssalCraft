@@ -11,21 +11,30 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.common.util;
 
-import com.shinoow.abyssalcraft.common.world.ACExplosion;
-
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.network.play.server.SPacketExplosion;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
+import net.minecraft.world.WorldServer;
+
+import com.shinoow.abyssalcraft.common.world.ACExplosion;
 
 public class ExplosionUtil {
 
-	public static Explosion newODBExplosion(World par0World, Entity par1Entity, double par2, double par4, double par6, float par8, int par9, boolean par10, boolean par11)
+	public static Explosion newODBExplosion(World world, Entity entity, double x, double y, double z, float strength, boolean antimatter, boolean smoke)
 	{
-		ACExplosion explosion = new ACExplosion(par0World, par1Entity, par2, par4, par6, par8, par9, par10, par11);
-		if(net.minecraftforge.event.ForgeEventFactory.onExplosionStart(par0World, explosion)) return explosion;
-		if(!par0World.isRemote)
-			explosion.doExplosionA();
-		explosion.doExplosionB(true);
+		ACExplosion explosion = new ACExplosion(world, entity, x, y, z, strength, antimatter, smoke);
+		if(net.minecraftforge.event.ForgeEventFactory.onExplosionStart(world, explosion)) return explosion;
+		explosion.doExplosionA();
+		explosion.doExplosionB(strength <= 32);
+
+		if(world instanceof WorldServer)
+			for (EntityPlayer entityplayer : ((WorldServer)world).playerEntities)
+				if (entityplayer.getDistanceSq(x, y, z) < 4096.0D)
+					((EntityPlayerMP)entityplayer).connection.sendPacket(new SPacketExplosion(x, y, z , strength, explosion.getAffectedBlockPositions(), explosion.getPlayerKnockbackMap().get(entityplayer)));
+
 		return explosion;
 	}
 }

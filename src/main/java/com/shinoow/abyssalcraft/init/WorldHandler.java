@@ -11,19 +11,17 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.init;
 
-import static com.shinoow.abyssalcraft.AbyssalCraft.*;
+import static com.shinoow.abyssalcraft.AbyssalCraft.modid;
 import static com.shinoow.abyssalcraft.init.InitHandler.*;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.DimensionType;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.Biome.BiomeProperties;
 import net.minecraft.world.gen.structure.MapGenStructureIO;
-import net.minecraftforge.common.BiomeDictionary;
+import net.minecraftforge.common.*;
 import net.minecraftforge.common.BiomeDictionary.Type;
-import net.minecraftforge.common.BiomeManager;
 import net.minecraftforge.common.BiomeManager.BiomeEntry;
 import net.minecraftforge.common.BiomeManager.BiomeType;
-import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.fml.common.event.*;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 

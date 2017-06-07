@@ -11,7 +11,9 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.common.world.gen;
 
-import static java.lang.Math.*;
+import static java.lang.Math.PI;
+import static java.lang.Math.cos;
+import static java.lang.Math.sin;
 
 import java.util.Random;
 

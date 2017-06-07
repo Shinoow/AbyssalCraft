@@ -141,7 +141,7 @@ public class BlockCLiquid extends BlockFluidClassic {
 		for(ItemStack stack : list){
 			Block block = Block.getBlockFromItem(stack.getItem());
 			if(block != null && block != Blocks.AIR)
-				blocks.add(block.getStateFromMeta(((ItemBlock)stack.getItem()).getMetadata(stack.getMetadata())));
+				blocks.add(block.getStateFromMeta(((ItemBlock)stack.getItem()).getMetadata(stack.getMetadata() == OreDictionary.WILDCARD_VALUE ? 0 : stack.getMetadata())));
 		}
 
 		return blocks;

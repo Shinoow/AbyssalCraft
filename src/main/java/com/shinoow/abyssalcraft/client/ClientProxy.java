@@ -11,14 +11,7 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.client;
 
-import org.lwjgl.input.Keyboard;
-
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockFire;
-import net.minecraft.block.BlockLeaves;
-import net.minecraft.block.BlockSapling;
-import net.minecraft.block.BlockTNT;
-import net.minecraft.block.BlockWall;
+import net.minecraft.block.*;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
@@ -46,22 +39,24 @@ import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 
+import org.lwjgl.input.Keyboard;
+
 import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.api.item.ACItems;
 import com.shinoow.abyssalcraft.client.handlers.AbyssalCraftClientEventHooks;
-import com.shinoow.abyssalcraft.client.model.block.*;
+import com.shinoow.abyssalcraft.client.model.block.ModelDGhead;
 import com.shinoow.abyssalcraft.client.model.item.ModelDreadiumSamuraiArmor;
 import com.shinoow.abyssalcraft.client.particles.ACParticleFX;
 import com.shinoow.abyssalcraft.client.particles.PEStreamParticleFX;
-import com.shinoow.abyssalcraft.client.render.block.*;
+import com.shinoow.abyssalcraft.client.render.block.RenderODB;
+import com.shinoow.abyssalcraft.client.render.block.RenderODBc;
+import com.shinoow.abyssalcraft.client.render.block.TileEntityJzaharSpawnerRenderer;
 import com.shinoow.abyssalcraft.client.render.entity.*;
 import com.shinoow.abyssalcraft.client.render.entity.layers.LayerStarSpawnTentacles;
 import com.shinoow.abyssalcraft.client.render.item.RenderCoraliumArrow;
 import com.shinoow.abyssalcraft.common.CommonProxy;
-import com.shinoow.abyssalcraft.common.blocks.BlockACSlab;
-import com.shinoow.abyssalcraft.common.blocks.BlockCrystalCluster;
-import com.shinoow.abyssalcraft.common.blocks.BlockCrystalCluster2;
+import com.shinoow.abyssalcraft.common.blocks.*;
 import com.shinoow.abyssalcraft.common.blocks.BlockCrystalCluster.EnumCrystalType;
 import com.shinoow.abyssalcraft.common.blocks.BlockCrystalCluster2.EnumCrystalType2;
 import com.shinoow.abyssalcraft.common.blocks.tile.*;

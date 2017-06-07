@@ -258,18 +258,25 @@ public class TileEntityCrystallizer extends TileEntity implements ISidedInventor
 		{
 			ItemStack[] itemstack = CrystallizerRecipes.instance().getCrystallizationResult(crystallizerItemStacks.get(0));
 
+			ItemStack stack = crystallizerItemStacks.get(2), stack1 = crystallizerItemStacks.get(3);
+
 			if(itemstack[0].isEmpty() && itemstack[1].isEmpty() || itemstack[0].isEmpty()) return false;
-			if(crystallizerItemStacks.get(2).isEmpty() && crystallizerItemStacks.get(3).isEmpty()) return true;
+			if(stack.isEmpty() && stack1.isEmpty()) return true;
 			if(itemstack[1].isEmpty()){
-				if(crystallizerItemStacks.get(2).isEmpty()) return true;
-				if(!crystallizerItemStacks.get(2).isItemEqual(itemstack[0])) return false;
+				if(stack.isEmpty()) return true;
+				if(!stack.isItemEqual(itemstack[0])) return false;
+
+				int result = stack.getCount() + itemstack[0].getCount();
+				return result <= getInventoryStackLimit() && result <= stack.getMaxStackSize();
 			} else {
-				if(!crystallizerItemStacks.get(2).isEmpty() && !crystallizerItemStacks.get(2).isItemEqual(itemstack[0])) return false;
-				if(!crystallizerItemStacks.get(3).isEmpty() && !crystallizerItemStacks.get(3).isItemEqual(itemstack[1])) return false;
+				if(stack.isEmpty() && stack1.isEmpty()) return true;
+				if(!stack.isEmpty() && !stack.isItemEqual(itemstack[0])) return false;
+				if(!stack1.isEmpty() && !stack1.isItemEqual(itemstack[1])) return false;
+
+				int result = stack.getCount() + itemstack[0].getCount();
+				int result2 = stack1.getCount() + itemstack[1].getCount();
+				return result <= getInventoryStackLimit() && result2 <= getInventoryStackLimit() && result <= stack.getMaxStackSize() && result2 <= stack1.getMaxStackSize();
 			}
-			int result = crystallizerItemStacks.get(2).getCount() + itemstack[0].getCount();
-			int result2 = crystallizerItemStacks.get(3).getCount() + itemstack[1].getCount();
-			return result <= getInventoryStackLimit() && result2 <= getInventoryStackLimit() && result <= crystallizerItemStacks.get(2).getMaxStackSize() && result2 <= crystallizerItemStacks.get(3).getMaxStackSize();
 		}
 	}
 

@@ -30,11 +30,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
-import com.shinoow.abyssalcraft.common.entity.EntityAbyssalZombie;
-import com.shinoow.abyssalcraft.common.entity.EntityCoraliumSquid;
-import com.shinoow.abyssalcraft.common.entity.EntityDepthsGhoul;
-import com.shinoow.abyssalcraft.common.entity.EntityDragonMinion;
-import com.shinoow.abyssalcraft.common.entity.EntitySkeletonGoliath;
+import com.shinoow.abyssalcraft.common.entity.*;
 import com.shinoow.abyssalcraft.lib.ACConfig;
 
 public class BiomeGenAbywasteland extends Biome {

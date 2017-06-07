@@ -25,16 +25,20 @@ import com.shinoow.abyssalcraft.common.inventory.ContainerEngraver;
 import com.shinoow.abyssalcraft.common.inventory.ContainerTransmutator;
 import com.shinoow.abyssalcraft.init.BlockHandler;
 import com.shinoow.abyssalcraft.init.ItemHandler;
+import com.shinoow.abyssalcraft.integration.jei.crystallizer.*;
+import com.shinoow.abyssalcraft.integration.jei.engraver.EngraverRecipeCategory;
+import com.shinoow.abyssalcraft.integration.jei.engraver.EngravingRecipeHandler;
+import com.shinoow.abyssalcraft.integration.jei.engraver.EngravingRecipeMaker;
 import com.shinoow.abyssalcraft.integration.jei.rending.RendingRecipeCategory;
 import com.shinoow.abyssalcraft.integration.jei.rending.RendingRecipeHandler;
 import com.shinoow.abyssalcraft.integration.jei.rending.RendingRecipeMaker;
-import com.shinoow.abyssalcraft.integration.jei.ritual.*;
+import com.shinoow.abyssalcraft.integration.jei.ritual.RitualRecipeCategory;
+import com.shinoow.abyssalcraft.integration.jei.ritual.RitualRecipeHandler;
+import com.shinoow.abyssalcraft.integration.jei.ritual.RitualRecipeMaker;
 import com.shinoow.abyssalcraft.integration.jei.transmutator.*;
 import com.shinoow.abyssalcraft.integration.jei.upgrades.UpgradeRecipeCategory;
 import com.shinoow.abyssalcraft.integration.jei.upgrades.UpgradeRecipeHandler;
 import com.shinoow.abyssalcraft.integration.jei.upgrades.UpgradeRecipeMaker;
-import com.shinoow.abyssalcraft.integration.jei.crystallizer.*;
-import com.shinoow.abyssalcraft.integration.jei.engraver.*;
 
 @JEIPlugin
 public class ACJEIPlugin implements IModPlugin {

@@ -13,11 +13,11 @@ package com.shinoow.abyssalcraft.common.items;
 
 import java.util.List;
 
-import com.shinoow.abyssalcraft.lib.ACTabs;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+
+import com.shinoow.abyssalcraft.lib.ACTabs;
 
 public class ItemWashCloth extends Item {
 

@@ -11,7 +11,7 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.init;
 
-import static com.shinoow.abyssalcraft.AbyssalCraft.*;
+import static com.shinoow.abyssalcraft.AbyssalCraft.modid;
 import static com.shinoow.abyssalcraft.init.BlockHandler.*;
 import static com.shinoow.abyssalcraft.lib.ACSounds.*;
 
@@ -33,7 +33,9 @@ import net.minecraft.world.storage.loot.conditions.LootCondition;
 import net.minecraft.world.storage.loot.functions.LootFunction;
 import net.minecraft.world.storage.loot.functions.SetCount;
 import net.minecraft.world.storage.loot.functions.SetMetadata;
-import net.minecraftforge.common.*;
+import net.minecraftforge.common.AchievementPage;
+import net.minecraftforge.common.DungeonHooks;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.capabilities.CapabilityManager;
 import net.minecraftforge.event.LootTableLoadEvent;
 import net.minecraftforge.fml.common.event.*;
@@ -50,16 +52,16 @@ import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.api.item.ACItems;
 import com.shinoow.abyssalcraft.api.necronomicon.NecroData;
 import com.shinoow.abyssalcraft.common.AbyssalCrafting;
-import com.shinoow.abyssalcraft.common.caps.INecroDataCapability;
-import com.shinoow.abyssalcraft.common.caps.INecromancyCapability;
-import com.shinoow.abyssalcraft.common.caps.NecroDataCapability;
-import com.shinoow.abyssalcraft.common.caps.NecroDataCapabilityStorage;
-import com.shinoow.abyssalcraft.common.caps.NecromancyCapability;
-import com.shinoow.abyssalcraft.common.caps.NecromancyCapabilityStorage;
-import com.shinoow.abyssalcraft.common.enchantments.*;
-import com.shinoow.abyssalcraft.common.handlers.*;
+import com.shinoow.abyssalcraft.common.caps.*;
+import com.shinoow.abyssalcraft.common.enchantments.EnchantmentIronWall;
+import com.shinoow.abyssalcraft.common.enchantments.EnchantmentLightPierce;
+import com.shinoow.abyssalcraft.common.enchantments.EnchantmentWeaponInfusion;
+import com.shinoow.abyssalcraft.common.handlers.CrystalFuelHandler;
+import com.shinoow.abyssalcraft.common.handlers.FurnaceFuelHandler;
 import com.shinoow.abyssalcraft.common.network.PacketDispatcher;
-import com.shinoow.abyssalcraft.common.potion.*;
+import com.shinoow.abyssalcraft.common.potion.PotionAntimatter;
+import com.shinoow.abyssalcraft.common.potion.PotionCplague;
+import com.shinoow.abyssalcraft.common.potion.PotionDplague;
 import com.shinoow.abyssalcraft.common.util.ACLogger;
 import com.shinoow.abyssalcraft.common.util.ShapedNBTRecipe;
 import com.shinoow.abyssalcraft.lib.ACAchievements;

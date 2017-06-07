@@ -11,13 +11,13 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.client.gui;
 
-import com.shinoow.abyssalcraft.common.inventory.ContainerCrystalBag;
-import com.shinoow.abyssalcraft.common.inventory.InventoryCrystalBag;
-
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.util.ResourceLocation;
+
+import com.shinoow.abyssalcraft.common.inventory.ContainerCrystalBag;
+import com.shinoow.abyssalcraft.common.inventory.InventoryCrystalBag;
 
 public class GuiCrystalBag extends GuiContainer
 {

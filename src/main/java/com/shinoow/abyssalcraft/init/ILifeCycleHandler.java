@@ -11,10 +11,7 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.init;
 
-import net.minecraftforge.fml.common.event.FMLInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLLoadCompleteEvent;
-import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.common.event.*;
 
 /**
  * Simple interface to create separate modules for things during mod startup

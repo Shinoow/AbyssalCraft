@@ -21,16 +21,7 @@ import net.minecraft.world.gen.feature.WorldGenerator;
 
 import com.google.common.collect.Lists;
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
-import com.shinoow.abyssalcraft.common.structures.overworld.AChouse1;
-import com.shinoow.abyssalcraft.common.structures.overworld.AChouse2;
-import com.shinoow.abyssalcraft.common.structures.overworld.ACscion1;
-import com.shinoow.abyssalcraft.common.structures.overworld.ACscion2;
-import com.shinoow.abyssalcraft.common.structures.overworld.StructureCircularShrine;
-import com.shinoow.abyssalcraft.common.structures.overworld.StructureCircularShrineColumns;
-import com.shinoow.abyssalcraft.common.structures.overworld.StructureElevatedShrine;
-import com.shinoow.abyssalcraft.common.structures.overworld.StructureElevatedShrineLarge;
-import com.shinoow.abyssalcraft.common.structures.overworld.StructureRitualGrounds;
-import com.shinoow.abyssalcraft.common.structures.overworld.StructureRitualGroundsColumns;
+import com.shinoow.abyssalcraft.common.structures.overworld.*;
 
 public class DarklandsStructureGenerator {
 

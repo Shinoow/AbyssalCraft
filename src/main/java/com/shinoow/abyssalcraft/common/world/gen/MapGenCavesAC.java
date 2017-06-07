@@ -11,11 +11,11 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.common.world.gen;
 
-import com.shinoow.abyssalcraft.api.block.ACBlocks;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.world.gen.MapGenCaves;
+
+import com.shinoow.abyssalcraft.api.block.ACBlocks;
 
 public class MapGenCavesAC extends MapGenCaves {
 

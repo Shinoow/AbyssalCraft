@@ -14,12 +14,10 @@ package com.shinoow.abyssalcraft.common.entity;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.MoverType;
-import net.minecraft.init.Blocks;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
-import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.common.util.ExplosionUtil;
 import com.shinoow.abyssalcraft.lib.ACConfig;
 
@@ -102,22 +100,8 @@ public class EntityODBcPrimed extends Entity {
 	private void explode()
 	{
 		if(!world.isRemote){
-			Blocks.OBSIDIAN.setResistance(5.0F);
-			Blocks.LAVA.setResistance(5.0F);
-			Blocks.FLOWING_LAVA.setResistance(5.0F);
-			Blocks.WATER.setResistance(5.0F);
-			Blocks.FLOWING_WATER.setResistance(5.0F);
-			ACBlocks.liquid_coralium.setResistance(50.0F);
-		}
-		float var0 = 20.0F;
-		ExplosionUtil.newODBExplosion(world, this, posX, posY, posZ, var0, 32, false, true);
-		if(!world.isRemote){
-			Blocks.OBSIDIAN.setResistance(2000.0F);
-			Blocks.LAVA.setResistance(500.0F);
-			Blocks.FLOWING_LAVA.setResistance(500.0F);
-			Blocks.WATER.setResistance(500.0F);
-			Blocks.FLOWING_WATER.setResistance(500.0F);
-			ACBlocks.liquid_coralium.setResistance(500.0F);
+			float var0 = 16.0F;
+			ExplosionUtil.newODBExplosion(world, this, posX, posY, posZ, var0, false, true);
 		}
 	}
 

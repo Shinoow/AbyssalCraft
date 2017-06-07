@@ -11,8 +11,6 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.common.blocks.tile;
 
-import com.shinoow.abyssalcraft.common.blocks.BlockStateTransformer;
-import com.shinoow.abyssalcraft.common.items.ItemStoneTablet;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ISidedInventory;
@@ -27,6 +25,9 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.NonNullList;
 import net.minecraftforge.common.util.Constants;
+
+import com.shinoow.abyssalcraft.common.blocks.BlockStateTransformer;
+import com.shinoow.abyssalcraft.common.items.ItemStoneTablet;
 
 public class TileEntityStateTransformer extends TileEntity implements ITickable, ISidedInventory {
 

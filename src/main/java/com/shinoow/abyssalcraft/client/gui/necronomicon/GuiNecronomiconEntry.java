@@ -20,10 +20,8 @@ import javax.imageio.ImageIO;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
-import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.client.renderer.*;
 import net.minecraft.client.renderer.GlStateManager.DestFactor;
-import net.minecraft.client.renderer.RenderHelper;
-import net.minecraft.client.renderer.RenderItem;
 import net.minecraft.client.renderer.GlStateManager.SourceFactor;
 import net.minecraft.client.renderer.texture.DynamicTexture;
 import net.minecraft.client.resources.I18n;
@@ -35,10 +33,7 @@ import net.minecraftforge.oredict.OreDictionary;
 
 import org.lwjgl.input.Keyboard;
 
-import com.shinoow.abyssalcraft.api.necronomicon.CraftingStack;
-import com.shinoow.abyssalcraft.api.necronomicon.GuiInstance;
-import com.shinoow.abyssalcraft.api.necronomicon.INecroData;
-import com.shinoow.abyssalcraft.api.necronomicon.NecroData;
+import com.shinoow.abyssalcraft.api.necronomicon.*;
 import com.shinoow.abyssalcraft.api.necronomicon.NecroData.Chapter;
 import com.shinoow.abyssalcraft.api.necronomicon.NecroData.Page;
 import com.shinoow.abyssalcraft.api.necronomicon.condition.IUnlockCondition;

@@ -18,10 +18,7 @@ import net.minecraft.world.gen.feature.WorldGenTrees;
 
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.common.entity.EntityDreadSpawn;
-import com.shinoow.abyssalcraft.common.entity.demon.EntityDemonChicken;
-import com.shinoow.abyssalcraft.common.entity.demon.EntityDemonCow;
-import com.shinoow.abyssalcraft.common.entity.demon.EntityDemonPig;
-import com.shinoow.abyssalcraft.common.entity.demon.EntityDemonSheep;
+import com.shinoow.abyssalcraft.common.entity.demon.*;
 import com.shinoow.abyssalcraft.common.world.gen.WorldGenDrT;
 
 public class BiomeGenForestDreadlands extends BiomeGenDreadlandsBase

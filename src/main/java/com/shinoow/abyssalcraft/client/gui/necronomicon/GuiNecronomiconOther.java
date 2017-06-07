@@ -13,6 +13,10 @@ package com.shinoow.abyssalcraft.client.gui.necronomicon;
 
 import java.util.HashMap;
 
+import net.minecraft.client.gui.GuiButton;
+import net.minecraft.client.gui.GuiScreen;
+import net.minecraft.client.resources.I18n;
+
 import org.lwjgl.input.Keyboard;
 
 import com.google.common.collect.Maps;
@@ -21,10 +25,6 @@ import com.shinoow.abyssalcraft.api.necronomicon.NecroData;
 import com.shinoow.abyssalcraft.client.gui.necronomicon.buttons.ButtonCategory;
 import com.shinoow.abyssalcraft.client.gui.necronomicon.buttons.ButtonNextPage;
 import com.shinoow.abyssalcraft.lib.NecronomiconText;
-
-import net.minecraft.client.gui.GuiButton;
-import net.minecraft.client.gui.GuiScreen;
-import net.minecraft.client.resources.I18n;
 
 public class GuiNecronomiconOther extends GuiNecronomicon {
 

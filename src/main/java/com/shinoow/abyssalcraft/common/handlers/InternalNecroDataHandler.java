@@ -34,42 +34,13 @@ import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.api.entity.IAntiEntity;
 import com.shinoow.abyssalcraft.api.internal.DummyNecroDataHandler;
 import com.shinoow.abyssalcraft.api.item.ACItems;
-import com.shinoow.abyssalcraft.api.necronomicon.CraftingStack;
-import com.shinoow.abyssalcraft.api.necronomicon.INecroData;
-import com.shinoow.abyssalcraft.api.necronomicon.NecroData;
+import com.shinoow.abyssalcraft.api.necronomicon.*;
 import com.shinoow.abyssalcraft.api.necronomicon.NecroData.Chapter;
 import com.shinoow.abyssalcraft.api.necronomicon.NecroData.Page;
-import com.shinoow.abyssalcraft.api.necronomicon.condition.DimensionCondition;
-import com.shinoow.abyssalcraft.api.necronomicon.condition.EntityCondition;
-import com.shinoow.abyssalcraft.api.necronomicon.condition.EntityPredicateCondition;
-import com.shinoow.abyssalcraft.api.necronomicon.condition.MultiEntityCondition;
-import com.shinoow.abyssalcraft.api.necronomicon.condition.NecronomiconCondition;
+import com.shinoow.abyssalcraft.api.necronomicon.condition.*;
 import com.shinoow.abyssalcraft.client.gui.necronomicon.GuiNecronomicon;
-import com.shinoow.abyssalcraft.common.entity.EntityAbygolem;
-import com.shinoow.abyssalcraft.common.entity.EntityAbyssalZombie;
-import com.shinoow.abyssalcraft.common.entity.EntityChagarothFist;
-import com.shinoow.abyssalcraft.common.entity.EntityChagarothSpawn;
-import com.shinoow.abyssalcraft.common.entity.EntityCoraliumSquid;
-import com.shinoow.abyssalcraft.common.entity.EntityDepthsGhoul;
-import com.shinoow.abyssalcraft.common.entity.EntityDragonMinion;
-import com.shinoow.abyssalcraft.common.entity.EntityDreadSpawn;
-import com.shinoow.abyssalcraft.common.entity.EntityDreadgolem;
-import com.shinoow.abyssalcraft.common.entity.EntityDreadguard;
-import com.shinoow.abyssalcraft.common.entity.EntityDreadling;
-import com.shinoow.abyssalcraft.common.entity.EntityGatekeeperMinion;
-import com.shinoow.abyssalcraft.common.entity.EntityGreaterDreadSpawn;
-import com.shinoow.abyssalcraft.common.entity.EntityLesserDreadbeast;
-import com.shinoow.abyssalcraft.common.entity.EntityLesserShoggoth;
-import com.shinoow.abyssalcraft.common.entity.EntityOmotholGhoul;
-import com.shinoow.abyssalcraft.common.entity.EntityShadowBeast;
-import com.shinoow.abyssalcraft.common.entity.EntityShadowCreature;
-import com.shinoow.abyssalcraft.common.entity.EntityShadowMonster;
-import com.shinoow.abyssalcraft.common.entity.EntitySkeletonGoliath;
-import com.shinoow.abyssalcraft.common.entity.demon.EntityDemonAnimal;
-import com.shinoow.abyssalcraft.common.entity.demon.EntityEvilChicken;
-import com.shinoow.abyssalcraft.common.entity.demon.EntityEvilCow;
-import com.shinoow.abyssalcraft.common.entity.demon.EntityEvilSheep;
-import com.shinoow.abyssalcraft.common.entity.demon.EntityEvilpig;
+import com.shinoow.abyssalcraft.common.entity.*;
+import com.shinoow.abyssalcraft.common.entity.demon.*;
 import com.shinoow.abyssalcraft.common.util.ACLogger;
 import com.shinoow.abyssalcraft.lib.ACLib;
 import com.shinoow.abyssalcraft.lib.NecronomiconResources;
@@ -484,9 +455,7 @@ public class InternalNecroDataHandler extends DummyNecroDataHandler {
 		} catch (Exception e) {
 			ACLogger.warning("Failed to fetch the Patreon Data, using local version instead!");
 			chapter = new Chapter("patrons", NecronomiconText.LABEL_PATRONS, 0);
-			chapter.addPage(new Page(1, NecronomiconText.LABEL_PATRONS, 0, new ResourceLocation("abyssalcraft", "textures/gui/necronomicon/patreon/saice.png"), "Saice Shoop"));
-			chapter.addPage(new Page(2, NecronomiconText.LABEL_PATRONS, 0, new ResourceLocation("abyssalcraft", "textures/gui/necronomicon/patreon/minecreatr.png"), "Minecreatr"));
-			chapter.addPage(new Page(3, NecronomiconText.LABEL_PATRONS, 0, new ResourceLocation("abyssalcraft", "textures/gui/necronomicon/missing.png"), "Kendoshii"));
+			chapter.addPage(new Page(1, NecronomiconText.LABEL_PATRONS, 0, new ResourceLocation("abyssalcraft", "textures/gui/necronomicon/patreon/tedyhere.png"), "Tedyhere"));
 		}
 
 		if(chapter != null)

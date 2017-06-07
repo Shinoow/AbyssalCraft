@@ -11,10 +11,7 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.integration.jei.engraver;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import javax.annotation.Nonnull;
 

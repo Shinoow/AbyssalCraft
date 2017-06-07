@@ -31,11 +31,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.potion.PotionEffect;
-import net.minecraft.util.DamageSource;
-import net.minecraft.util.EnumParticleTypes;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.SoundCategory;
-import net.minecraft.util.StringUtils;
+import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.translation.I18n;
 import net.minecraft.world.WorldServer;
@@ -43,10 +39,8 @@ import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.chunk.storage.ExtendedBlockStorage;
 import net.minecraftforge.event.AnvilUpdateEvent;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
-import net.minecraftforge.event.entity.living.EnderTeleportEvent;
-import net.minecraftforge.event.entity.living.LivingDeathEvent;
+import net.minecraftforge.event.entity.living.*;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
-import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.player.EntityItemPickupEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent.Clone;
 import net.minecraftforge.event.entity.player.UseHoeEvent;
@@ -63,11 +57,7 @@ import com.shinoow.abyssalcraft.api.event.ACEvents.RitualEvent;
 import com.shinoow.abyssalcraft.api.item.ACItems;
 import com.shinoow.abyssalcraft.api.item.ItemUpgradeKit;
 import com.shinoow.abyssalcraft.api.recipe.UpgradeKitRecipes;
-import com.shinoow.abyssalcraft.api.ritual.NecronomiconCreationRitual;
-import com.shinoow.abyssalcraft.api.ritual.NecronomiconInfusionRitual;
-import com.shinoow.abyssalcraft.api.ritual.NecronomiconPotionAoERitual;
-import com.shinoow.abyssalcraft.api.ritual.NecronomiconPotionRitual;
-import com.shinoow.abyssalcraft.api.ritual.NecronomiconSummonRitual;
+import com.shinoow.abyssalcraft.api.ritual.*;
 import com.shinoow.abyssalcraft.common.caps.NecromancyCapabilityProvider;
 import com.shinoow.abyssalcraft.common.entity.EntityJzahar;
 import com.shinoow.abyssalcraft.common.entity.demon.EntityEvilSheep;
@@ -465,6 +455,7 @@ public class AbyssalCraftEventHooks {
 
 	@SubscribeEvent
 	public void onClonePlayer(Clone event) {
-		event.getEntityPlayer().getCapability(NecromancyCapabilityProvider.NECROMANCY_CAP, null).copy(event.getOriginal().getCapability(NecromancyCapabilityProvider.NECROMANCY_CAP, null));
+		if(event.isWasDeath())
+			event.getEntityPlayer().getCapability(NecromancyCapabilityProvider.NECROMANCY_CAP, null).copy(event.getOriginal().getCapability(NecromancyCapabilityProvider.NECROMANCY_CAP, null));
 	}
 }
