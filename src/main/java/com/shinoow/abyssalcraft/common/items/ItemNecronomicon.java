@@ -13,10 +13,10 @@ package com.shinoow.abyssalcraft.common.items;
 
 import java.util.List;
 
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.*;
@@ -52,11 +52,13 @@ public class ItemNecronomicon extends ItemACBasic implements IEnergyTransporterI
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void getSubItems(Item par1Item, CreativeTabs par2CreativeTab, NonNullList<ItemStack> par3List){
-		par3List.add(new ItemStack(par1Item));
-		ItemStack stack = new ItemStack(par1Item);
-		addEnergy(stack, getMaxEnergy(stack));
-		par3List.add(stack);
+	public void getSubItems(CreativeTabs par2CreativeTab, NonNullList<ItemStack> par3List){
+		if(isInCreativeTab(par2CreativeTab)){
+			par3List.add(new ItemStack(this));
+			ItemStack stack = new ItemStack(this);
+			addEnergy(stack, getMaxEnergy(stack));
+			par3List.add(stack);
+		}
 	}
 
 	@Override
@@ -95,7 +97,7 @@ public class ItemNecronomicon extends ItemACBasic implements IEnergyTransporterI
 				if(isOwner(player, is))
 					if(RitualUtil.tryAltar(w, pos, bookType)){
 						w.playSound(player, pos, ACSounds.remnant_scream, player.getSoundCategory(), 3F, 1F);
-						player.addStat(ACAchievements.ritual_altar, 1);
+						//						player.addStat(ACAchievements.ritual_altar, 1);
 						return EnumActionResult.SUCCESS;
 					}
 			} else if(w.getTileEntity(pos) instanceof IRitualAltar)
@@ -114,7 +116,7 @@ public class ItemNecronomicon extends ItemACBasic implements IEnergyTransporterI
 
 	@Override
 	@SuppressWarnings({ "unchecked", "rawtypes" })
-	public void addInformation(ItemStack is, EntityPlayer player, List l, boolean B){
+	public void addInformation(ItemStack is, World player, List l, ITooltipFlag B){
 		if(is.hasTagCompound() && is.getTagCompound().hasKey("owner"))
 			l.add("Owner: " + is.getTagCompound().getString("owner"));
 		l.add(String.format("%d/%d PE", (int)getContainedEnergy(is), getMaxEnergy(is)));

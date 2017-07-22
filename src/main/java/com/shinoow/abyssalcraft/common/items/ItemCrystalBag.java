@@ -13,6 +13,7 @@ package com.shinoow.abyssalcraft.common.items;
 
 import java.util.List;
 
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -49,7 +50,7 @@ public class ItemCrystalBag extends ItemACBasic {
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
-	public void addInformation(ItemStack is, EntityPlayer player, List l, boolean B)
+	public void addInformation(ItemStack is, World player, List l, ITooltipFlag B)
 	{
 		l.add(I18n.translateToLocal("tooltip.crystalbag"));
 	}

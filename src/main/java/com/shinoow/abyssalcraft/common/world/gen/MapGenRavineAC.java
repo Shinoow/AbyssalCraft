@@ -18,12 +18,13 @@ import net.minecraft.world.chunk.ChunkPrimer;
 import net.minecraft.world.gen.MapGenRavine;
 
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
+import com.shinoow.abyssalcraft.common.blocks.BlockACStone;
+import com.shinoow.abyssalcraft.common.blocks.BlockACStone.EnumStoneType;
 
 public class MapGenRavineAC extends MapGenRavine {
 
-	private boolean isACStone(Block block){
-		return block == ACBlocks.darkstone || block == ACBlocks.abyssal_stone || block == ACBlocks.dreadstone ||
-				block == ACBlocks.abyssalnite_stone || block == ACBlocks.coralium_stone || block == ACBlocks.omothol_stone;
+	private boolean isACStone(IBlockState state){
+		return state.getBlock() == ACBlocks.stone && state.getValue(BlockACStone.TYPE) != EnumStoneType.ETHAXIUM;
 	}
 
 	@Override
@@ -34,7 +35,7 @@ public class MapGenRavineAC extends MapGenRavine {
 		IBlockState top = biome.topBlock;
 		IBlockState filler = biome.fillerBlock;
 
-		if (isACStone(state.getBlock()) || state.getBlock() == top.getBlock() || state.getBlock() == filler.getBlock())
+		if (isACStone(state) || state.getBlock() == top.getBlock() || state.getBlock() == filler.getBlock())
 			if (y - 1 < 10)
 				data.setBlockState(x, y, z, FLOWING_LAVA);
 			else

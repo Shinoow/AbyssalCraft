@@ -46,9 +46,10 @@ public class ItemMetadata extends Item {
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void getSubItems(Item par1Item, CreativeTabs par2CreativeTab, NonNullList<ItemStack> par3List){
-		for(int i = 0; i < names.length; ++i)
-			par3List.add(new ItemStack(par1Item, 1, i));
+	public void getSubItems(CreativeTabs par2CreativeTab, NonNullList<ItemStack> par3List){
+		if(isInCreativeTab(par2CreativeTab))
+			for(int i = 0; i < names.length; ++i)
+				par3List.add(new ItemStack(this, 1, i));
 	}
 
 	@Override

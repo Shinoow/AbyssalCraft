@@ -20,11 +20,13 @@ import net.minecraft.util.text.TextFormatting;
 
 import com.google.common.collect.Sets;
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
+import com.shinoow.abyssalcraft.common.blocks.IngotBlock;
+import com.shinoow.abyssalcraft.common.blocks.IngotBlock.EnumIngotType;
 import com.shinoow.abyssalcraft.init.BlockHandler;
 
 public class ItemEthaxiumPickaxe extends ItemACPickaxe {
 
-	private static Set<Block> effectiveBlocks = Sets.newHashSet( new Block[] {ACBlocks.ethaxium, ACBlocks.ethaxium_brick, ACBlocks.ethaxium_pillar, ACBlocks.ethaxium_brick_fence, ACBlocks.ethaxium_brick_slab, BlockHandler.ethaxiumslab2, ACBlocks.ethaxium_brick_stairs, ACBlocks.block_of_ethaxium, ACBlocks.materializer, ACBlocks.dark_ethaxium_brick, ACBlocks.dark_ethaxium_pillar, ACBlocks.dark_ethaxium_brick_stairs, ACBlocks.dark_ethaxium_brick_slab, BlockHandler.darkethaxiumslab2, ACBlocks.dark_ethaxium_brick_fence});
+	private static Set<Block> effectiveBlocks = Sets.newHashSet( new Block[] {ACBlocks.ethaxium_brick, ACBlocks.ethaxium_pillar, ACBlocks.ethaxium_brick_fence, ACBlocks.ethaxium_brick_slab, BlockHandler.ethaxiumslab2, ACBlocks.ethaxium_brick_stairs, ACBlocks.materializer, ACBlocks.dark_ethaxium_brick, ACBlocks.dark_ethaxium_pillar, ACBlocks.dark_ethaxium_brick_stairs, ACBlocks.dark_ethaxium_brick_slab, BlockHandler.darkethaxiumslab2, ACBlocks.dark_ethaxium_brick_fence});
 
 	public ItemEthaxiumPickaxe(ToolMaterial mat, String name)
 	{
@@ -34,7 +36,8 @@ public class ItemEthaxiumPickaxe extends ItemACPickaxe {
 	@Override
 	public float getStrVsBlock(ItemStack stack, IBlockState state)
 	{
-		if(effectiveBlocks.contains(state.getBlock()))
+		if(effectiveBlocks.contains(state.getBlock()) || state == ACBlocks.ingot_block.getStateFromMeta(3)
+				|| state == ACBlocks.stone.getStateFromMeta(5))
 			return efficiencyOnProperMaterial * 10;
 		if (state.getBlock().isToolEffective("pickaxe", state))
 			return efficiencyOnProperMaterial;

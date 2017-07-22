@@ -31,7 +31,7 @@ public class BlockACWall extends BlockWall{
 	public BlockACWall(Block par2Block) {
 		super(par2Block);
 		setCreativeTab(ACTabs.tabBlock);
-		mapColor = par2Block.getMapColor(par2Block.getDefaultState());
+		mapColor = par2Block.getMapColor(par2Block.getDefaultState(), null, null);
 		setHarvestLevel("pickaxe", 0);
 	}
 
@@ -41,16 +41,16 @@ public class BlockACWall extends BlockWall{
 	}
 
 	@Override
-	public MapColor getMapColor(IBlockState state)
+	public MapColor getMapColor(IBlockState state, IBlockAccess p_180659_2_, BlockPos p_180659_3_)
 	{
 		return mapColor;
 	}
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
-	public void getSubBlocks(Item par1, CreativeTabs par2CreativeTabs, NonNullList<ItemStack> par3List)
+	public void getSubBlocks(CreativeTabs par2CreativeTabs, NonNullList<ItemStack> par3List)
 	{
-		par3List.add(new ItemStack(par1, 1, 0));
+		par3List.add(new ItemStack(this, 1, 0));
 	}
 
 	@Override

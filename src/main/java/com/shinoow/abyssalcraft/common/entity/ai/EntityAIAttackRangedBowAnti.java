@@ -58,7 +58,7 @@ public class EntityAIAttackRangedBowAnti extends EntityAIBase
 	 * Returns whether an in-progress EntityAIBase should continue executing
 	 */
 	@Override
-	public boolean continueExecuting()
+	public boolean shouldContinueExecuting()
 	{
 		return (shouldExecute() || !entity.getNavigator().noPath()) && func_188498_f();
 	}
@@ -70,7 +70,7 @@ public class EntityAIAttackRangedBowAnti extends EntityAIBase
 	public void startExecuting()
 	{
 		super.startExecuting();
-		entity.func_184724_a(true);
+		entity.setSwingingArms(true);
 	}
 
 	/**
@@ -80,7 +80,7 @@ public class EntityAIAttackRangedBowAnti extends EntityAIBase
 	public void resetTask()
 	{
 		super.startExecuting();
-		entity.func_184724_a(false);
+		entity.setSwingingArms(false);
 		field_188504_f = 0;
 		field_188503_e = -1;
 		entity.resetActiveHand();

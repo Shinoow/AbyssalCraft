@@ -52,7 +52,7 @@ public class RenderODBc extends Render<EntityODBcPrimed> {
 		float f2 = (1.0F - (entity.fuse - partialTicks + 1.0F) / 100.0F) * 0.8F;
 		bindEntityTexture(entity);
 		GlStateManager.translate(-0.5F, -0.5F, 0.5F);
-		blockrendererdispatcher.renderBlockBrightness(ACBlocks.odb_core.getDefaultState(), entity.getBrightness(partialTicks));
+		blockrendererdispatcher.renderBlockBrightness(ACBlocks.odb_core.getDefaultState(), entity.getBrightness());
 		GlStateManager.translate(0.0F, 0.0F, 1.0F);
 
 		if (entity.fuse / 5 % 2 == 0)

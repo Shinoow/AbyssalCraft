@@ -33,13 +33,13 @@ public class ButtonNextPage extends GuiButton
 	 * Draws this button to the screen.
 	 */
 	@Override
-	public void drawButton(Minecraft p_146112_1_, int p_146112_2_, int p_146112_3_)
+	public void drawButton(Minecraft mc, int p_146112_2_, int p_146112_3_, float f)
 	{
 		if (visible)
 		{
-			boolean flag = p_146112_2_ >= xPosition && p_146112_3_ >= yPosition && p_146112_2_ < xPosition + width && p_146112_3_ < yPosition + height;
+			boolean flag = p_146112_2_ >= x && p_146112_3_ >= y && p_146112_2_ < x + width && p_146112_3_ < y + height;
 			GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
-			p_146112_1_.getTextureManager().bindTexture(new ResourceLocation("abyssalcraft:textures/gui/necronomicon.png"));
+			mc.getTextureManager().bindTexture(new ResourceLocation("abyssalcraft:textures/gui/necronomicon.png"));
 			int k = 0;
 			int l = 192;
 
@@ -49,7 +49,7 @@ public class ButtonNextPage extends GuiButton
 			if (!field_146151_o)
 				l += 13;
 
-			drawTexturedModalRect(xPosition, yPosition, k, l, 23, 13);
+			drawTexturedModalRect(x, y, k, l, 23, 13);
 		}
 	}
 }

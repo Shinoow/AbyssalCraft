@@ -52,7 +52,7 @@ public class CrystallizerFuelRecipe extends BlankRecipeWrapper {
 	@Override
 	public void drawInfo(@Nonnull Minecraft minecraft, int recipeWidth, int recipeHeight, int mouseX, int mouseY) {
 		flame.draw(minecraft, 2, 0);
-		minecraft.fontRendererObj.drawString(burnTimeString, 24, 12, Color.gray.getRGB());
+		minecraft.fontRenderer.drawString(burnTimeString, 24, 12, Color.gray.getRGB());
 	}
 
 	@Override

@@ -63,7 +63,7 @@ public class BlockHouse extends Block {
 			if(!par1World.isRemote){
 				StructureHouse house = new StructureHouse();
 				house.generate(par1World, rand, pos);
-				par1World.getChunkFromBlockCoords(pos).setChunkModified();
+				par1World.getChunkFromBlockCoords(pos).markDirty();
 				return true;
 			}
 		} else if(!par1World.isRemote) {

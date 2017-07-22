@@ -177,7 +177,7 @@ public class EntityAntiZombie extends EntityMob implements IAntiEntity {
 	}
 
 	@Override
-	protected SoundEvent getHurtSound()
+	protected SoundEvent getHurtSound(DamageSource source)
 	{
 		return SoundEvents.ENTITY_ZOMBIE_HURT;
 	}

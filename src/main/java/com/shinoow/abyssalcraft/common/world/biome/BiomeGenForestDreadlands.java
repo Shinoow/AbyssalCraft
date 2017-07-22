@@ -32,7 +32,7 @@ public class BiomeGenForestDreadlands extends BiomeGenDreadlandsBase
 		topBlock = ACBlocks.dreadlands_grass.getDefaultState();
 		fillerBlock = ACBlocks.dreadlands_dirt.getDefaultState();
 		WorldGenDreadTrees = new WorldGenDrT(false);
-		theBiomeDecorator.treesPerChunk = 6;
+		decorator.treesPerChunk = 6;
 	}
 
 	@Override
@@ -46,7 +46,7 @@ public class BiomeGenForestDreadlands extends BiomeGenDreadlandsBase
 	}
 
 	@Override
-	public WorldGenAbstractTree genBigTreeChance(Random par1Random)
+	public WorldGenAbstractTree getRandomTreeFeature(Random par1Random)
 	{
 		return WorldGenDreadTrees;
 	}

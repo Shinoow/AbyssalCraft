@@ -14,11 +14,12 @@ package com.shinoow.abyssalcraft.common.blocks.itemblock;
 import java.util.List;
 
 import net.minecraft.block.Block;
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.text.translation.I18n;
+import net.minecraft.world.World;
 
 public class ItemMetadataPEContainerBlock extends ItemBlock {
 
@@ -34,7 +35,7 @@ public class ItemMetadataPEContainerBlock extends ItemBlock {
 
 	@Override
 	@SuppressWarnings({ "unchecked", "rawtypes" })
-	public void addInformation(ItemStack is, EntityPlayer player, List l, boolean B){
+	public void addInformation(ItemStack is, World player, List l, ITooltipFlag B){
 		l.add(String.format("%d/%d PE", (int)getContainedEnergy(is), getMaxEnergy(is)));
 	}
 

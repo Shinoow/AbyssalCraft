@@ -13,9 +13,10 @@ package com.shinoow.abyssalcraft.common.items;
 
 import java.util.List;
 
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.world.World;
 
 import com.shinoow.abyssalcraft.lib.ACTabs;
 
@@ -43,7 +44,7 @@ public class ItemWashCloth extends Item {
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@Override
-	public void addInformation(ItemStack is, EntityPlayer player, List l, boolean B){
+	public void addInformation(ItemStack is, World player, List l, ITooltipFlag B){
 		l.add("This item has been used " + getDamage(is) + " out of 20 times");
 	}
 }

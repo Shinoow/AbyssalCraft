@@ -98,7 +98,7 @@ public class EntityDreadling extends EntityMob implements IDreadEntity {
 	 * Returns the sound this mob makes when it is hurt.
 	 */
 	@Override
-	protected SoundEvent getHurtSound()
+	protected SoundEvent getHurtSound(DamageSource source)
 	{
 		return SoundEvents.ENTITY_ZOMBIE_HURT;
 	}

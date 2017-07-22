@@ -62,7 +62,7 @@ public class ModelAntiSkeleton extends ModelBiped {
 		leftArmPose = ModelBiped.ArmPose.EMPTY;
 		ItemStack itemstack = entitylivingbaseIn.getHeldItem(EnumHand.MAIN_HAND);
 
-		if (itemstack != null && itemstack.getItem() == Items.BOW && ((EntityAntiSkeleton)entitylivingbaseIn).func_184725_db())
+		if (itemstack != null && itemstack.getItem() == Items.BOW && ((EntityAntiSkeleton)entitylivingbaseIn).getSwingingArms())
 			if (entitylivingbaseIn.getPrimaryHand() == EnumHandSide.RIGHT)
 				rightArmPose = ModelBiped.ArmPose.BOW_AND_ARROW;
 			else
@@ -83,7 +83,7 @@ public class ModelAntiSkeleton extends ModelBiped {
 		ItemStack itemstack = ((EntityLivingBase)entityIn).getHeldItemMainhand();
 		EntityAntiSkeleton entityskeleton = (EntityAntiSkeleton)entityIn;
 
-		if (entityskeleton.func_184725_db() && (itemstack == null || itemstack.getItem() != Items.BOW))
+		if (entityskeleton.getSwingingArms() && (itemstack == null || itemstack.getItem() != Items.BOW))
 		{
 			float f = MathHelper.sin(swingProgress * (float)Math.PI);
 			float f1 = MathHelper.sin((1.0F - (1.0F - swingProgress) * (1.0F - swingProgress)) * (float)Math.PI);

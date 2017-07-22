@@ -31,10 +31,7 @@ import net.minecraft.world.WorldType;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.chunk.ChunkPrimer;
-import net.minecraft.world.chunk.IChunkGenerator;
-import net.minecraft.world.gen.MapGenBase;
-import net.minecraft.world.gen.NoiseGeneratorOctaves;
-import net.minecraft.world.gen.NoiseGeneratorPerlin;
+import net.minecraft.world.gen.*;
 import net.minecraftforge.event.ForgeEventFactory;
 import net.minecraftforge.event.terraingen.TerrainGen;
 
@@ -156,9 +153,9 @@ public class ChunkProviderDreadlands implements IChunkGenerator {
 
 							for (int k3 = 0; k3 < 4; ++k3)
 								if ((d15 += d16) > 0.0D)
-									primer.setBlockState(k * 4 + i3, k2 * 8 + l2, j1 * 4 + k3, ACBlocks.dreadstone.getDefaultState());
+									primer.setBlockState(k * 4 + i3, k2 * 8 + l2, j1 * 4 + k3, ACBlocks.stone.getStateFromMeta(2));
 								else if (k2 * 8 + l2 < b0)
-									primer.setBlockState(k * 4 + i3, k2 * 8 + l2, j1 * 4 + k3, ACBlocks.abyssalnite_stone.getDefaultState());
+									primer.setBlockState(k * 4 + i3, k2 * 8 + l2, j1 * 4 + k3, ACBlocks.stone.getStateFromMeta(3));
 
 							d10 += d12;
 							d11 += d13;
@@ -212,7 +209,7 @@ public class ChunkProviderDreadlands implements IChunkGenerator {
 	 * specified chunk from the map seed and chunk seed
 	 */
 	@Override
-	public Chunk provideChunk(int par1, int par2)
+	public Chunk generateChunk(int par1, int par2)
 	{
 		rand.setSeed(par1 * 341873128712L + par2 * 132897987541L);
 		ChunkPrimer primer = new ChunkPrimer();
@@ -389,7 +386,7 @@ public class ChunkProviderDreadlands implements IChunkGenerator {
 	}
 
 	@Override
-	public BlockPos getStrongholdGen(World p_147416_1_, String p_147416_2_, BlockPos pos, boolean bool)
+	public BlockPos getNearestStructurePos(World p_147416_1_, String p_147416_2_, BlockPos pos, boolean bool)
 	{
 		return null;
 	}
@@ -403,6 +400,12 @@ public class ChunkProviderDreadlands implements IChunkGenerator {
 
 	@Override
 	public boolean generateStructures(Chunk chunkIn, int x, int z) {
+
+		return false;
+	}
+
+	@Override
+	public boolean isInsideStructure(World p_193414_1_, String p_193414_2_, BlockPos p_193414_3_) {
 
 		return false;
 	}

@@ -88,7 +88,7 @@ public class EntityCoraliumArrow extends EntityArrow {
 			//			block.setBlockBoundsBasedOnState(worldObj, blockpos);
 			AxisAlignedBB axisalignedbb = block.getBoundingBox(iblockstate, world, blockpos);
 
-			if (axisalignedbb != null && axisalignedbb.isVecInside(new Vec3d(posX, posY, posZ)))
+			if (axisalignedbb != null && axisalignedbb.offset(blockpos).contains(new Vec3d(posX, posY, posZ)))
 				inGround = true;
 		}
 
@@ -126,10 +126,10 @@ public class EntityCoraliumArrow extends EntityArrow {
 			vec3 = new Vec3d(posX + motionX, posY + motionY, posZ + motionZ);
 
 			if (movingobjectposition != null)
-				vec3 = new Vec3d(movingobjectposition.hitVec.xCoord, movingobjectposition.hitVec.yCoord, movingobjectposition.hitVec.zCoord);
+				vec3 = new Vec3d(movingobjectposition.hitVec.x, movingobjectposition.hitVec.y, movingobjectposition.hitVec.z);
 
 			Entity entity = null;
-			List<Entity> list = world.getEntitiesWithinAABBExcludingEntity(this, getEntityBoundingBox().addCoord(motionX, motionY, motionZ).expand(1.0D, 1.0D, 1.0D));
+			List<Entity> list = world.getEntitiesWithinAABBExcludingEntity(this, getEntityBoundingBox().expand(motionX, motionY, motionZ).grow(1.0D, 1.0D, 1.0D));
 			double d0 = 0.0D;
 
 			for (int i = 0; i < list.size(); ++i)
@@ -256,9 +256,9 @@ public class EntityCoraliumArrow extends EntityArrow {
 					IBlockState iblockstate1 = world.getBlockState(blockpos1);
 					inTile = iblockstate1.getBlock();
 					inData = inTile.getMetaFromState(iblockstate1);
-					motionX = (float)(movingobjectposition.hitVec.xCoord - posX);
-					motionY = (float)(movingobjectposition.hitVec.yCoord - posY);
-					motionZ = (float)(movingobjectposition.hitVec.zCoord - posZ);
+					motionX = (float)(movingobjectposition.hitVec.x - posX);
+					motionY = (float)(movingobjectposition.hitVec.y - posY);
+					motionZ = (float)(movingobjectposition.hitVec.z - posZ);
 					float f5 = MathHelper.sqrt(motionX * motionX + motionY * motionY + motionZ * motionZ);
 					posX -= motionX / f5 * 0.05000000074505806D;
 					posY -= motionY / f5 * 0.05000000074505806D;

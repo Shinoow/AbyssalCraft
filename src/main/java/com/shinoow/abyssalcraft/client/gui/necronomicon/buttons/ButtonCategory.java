@@ -37,8 +37,8 @@ public class ButtonCategory extends GuiButton {
 	}
 
 	@Override
-	public void drawButton(Minecraft mc, int mx, int my) {
-		boolean inside = mx >= xPosition && my >= yPosition && mx < xPosition + width && my < yPosition + height;
+	public void drawButton(Minecraft mc, int mx, int my, float f) {
+		boolean inside = mx >= x && my >= y && mx < x + width && my < y + height;
 
 		ResourceLocation res = locked ? getTexture(ACItems.oblivion_catalyst) : getTexture(icon);
 		if(res == null)
@@ -54,10 +54,10 @@ public class ButtonCategory extends GuiButton {
 		GlStateManager.tryBlendFuncSeparate(770, 771, 1, 0);
 		GlStateManager.blendFunc(770, 771);
 		if(inside)
-			GuiRenderHelper.drawGradientRect(xPosition, yPosition, zLevel, xPosition + width, yPosition + height, -2130706433, 0x505000);
-		GuiRenderHelper.drawTexturedModalRect(xPosition, yPosition, zLevel, 0, 0, 16, 16, s, s);
+			GuiRenderHelper.drawGradientRect(x, y, zLevel, x + width, y + height, -2130706433, 0x505000);
+		GuiRenderHelper.drawTexturedModalRect(x, y, zLevel, 0, 0, 16, 16, s, s);
 		GlStateManager.popMatrix();
-		gui.getFontRenderer(locked).drawString(locked ? NecronomiconText.LABEL_TEST : displayString, xPosition + 17, yPosition + 3, 0);
+		gui.getFontRenderer(locked).drawString(locked ? NecronomiconText.LABEL_TEST : displayString, x + 17, y + 3, 0);
 	}
 
 	ResourceLocation getTexture(Item par1){

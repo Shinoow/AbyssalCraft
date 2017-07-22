@@ -114,8 +114,8 @@ public class EntityGatekeeperMinion extends EntityMob implements ICoraliumEntity
 	public boolean attackEntityFrom(DamageSource par1DamageSource, float par2)
 	{
 		EntityLivingBase enemy = null;
-		if(par1DamageSource.getSourceOfDamage() != null && par1DamageSource.getSourceOfDamage() instanceof EntityLivingBase)
-			enemy = (EntityLivingBase) par1DamageSource.getSourceOfDamage();
+		if(par1DamageSource.getTrueSource() != null && par1DamageSource.getTrueSource() instanceof EntityLivingBase)
+			enemy = (EntityLivingBase) par1DamageSource.getTrueSource();
 		if(rand.nextInt(10) == 0){
 			List<EntityRemnant> remnants = world.getEntitiesWithinAABB(EntityRemnant.class, getEntityBoundingBox().expand(16D, 16D, 16D));
 			if(remnants != null)

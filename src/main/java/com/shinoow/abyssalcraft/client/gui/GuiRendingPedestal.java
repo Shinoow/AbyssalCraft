@@ -34,14 +34,14 @@ public class GuiRendingPedestal extends GuiContainer {
 	protected void drawGuiContainerForegroundLayer(int par1, int par2)
 	{
 		String s = tileRendingPedestal.hasCustomName() ? tileRendingPedestal.getName() : I18n.format(tileRendingPedestal.getName(), new Object[0]);
-		fontRendererObj.drawString(s, xSize / 2 - fontRendererObj.getStringWidth(s) / 2, 6, 4210752);
-		fontRendererObj.drawString(I18n.format("container.inventory", new Object[0]), 8, ySize - 96 + 2, 4210752);
+		fontRenderer.drawString(s, xSize / 2 - fontRenderer.getStringWidth(s) / 2, 6, 4210752);
+		fontRenderer.drawString(I18n.format("container.inventory", new Object[0]), 8, ySize - 96 + 2, 4210752);
 		String s2 = String.format("%d/%d PE", (int)tileRendingPedestal.getContainedEnergy(), tileRendingPedestal.getMaxEnergy());
-		fontRendererObj.drawString(s2, xSize / 2 - fontRendererObj.getStringWidth(s2) / 2, 20, 4210752);
-		fontRendererObj.drawString("A: " + tileRendingPedestal.getEnergy(1) + "/100", 55, 29, 4210752);
-		fontRendererObj.drawString("D: " + tileRendingPedestal.getEnergy(2) + "/100", 108, 29, 4210752);
-		fontRendererObj.drawString("O: " + tileRendingPedestal.getEnergy(3) + "/100", 55, 37, 4210752);
-		fontRendererObj.drawString("S: " + tileRendingPedestal.getEnergy(0) + "/200", 108, 37, 4210752);
+		fontRenderer.drawString(s2, xSize / 2 - fontRenderer.getStringWidth(s2) / 2, 20, 4210752);
+		fontRenderer.drawString("A: " + tileRendingPedestal.getEnergy(1) + "/100", 55, 29, 4210752);
+		fontRenderer.drawString("D: " + tileRendingPedestal.getEnergy(2) + "/100", 108, 29, 4210752);
+		fontRenderer.drawString("O: " + tileRendingPedestal.getEnergy(3) + "/100", 55, 37, 4210752);
+		fontRenderer.drawString("S: " + tileRendingPedestal.getEnergy(0) + "/200", 108, 37, 4210752);
 	}
 
 	@Override

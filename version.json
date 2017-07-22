@@ -1,6 +1,8 @@
 {
   "homepage": "https://shinoow.github.io/AbyssalCraft/",
   "promos": {
+	"1.12-latest": "1.9.4-pre-4",
+	"1.12-recommended": "1.9.4-pre-4",
 	"1.11.2-latest": "1.9.4-pre-4",
 	"1.11.2-recommended": "1.9.4-pre-4",
 	"1.11-latest": "1.9.3.9",
@@ -15,6 +17,9 @@
 	"1.9-recommended": "1.9.3.10-FINAL",
     "1.8.9-latest": "1.9.3.10-FINAL",
     "1.8.9-recommended": "1.9.3.10-FINAL"
+  },
+  "1.11.2": {
+	"1.9.4": "- Ported to Minecraft 1.12\n- Removed deprecated things from the API\n- Condensed a bunch of blocks to use a single ID\n- Removed Darklands Grass"
   },
   "1.11.2": {
 	"1.9.4-pre-4": "- Fixed a small derp in the Crystallizer recipe handling code\n- Improved explosion code for ODB and ODB Cores (along with some performance improvements)\n- Fixed a crash with BoP (or any other mod adding specific blocks to the OreDictionary with the wildcard value as meta)",

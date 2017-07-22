@@ -83,8 +83,8 @@ public class StructureCircularShrineColumns extends StructureDarklandsBase {
 						}
 				}
 				if(j == -2 || j == 2){
-					setBlockAndNotifyAdequately(worldIn, pos.add(i, 1, j), i > -2 && i < 2 ? ACBlocks.monolith_stone.getDefaultState() : getBrick(rand));
-					setBlockAndNotifyAdequately(worldIn, pos.add(j, 1, i), i > -2 && i < 2 ? ACBlocks.monolith_stone.getDefaultState() : getBrick(rand));
+					setBlockAndNotifyAdequately(worldIn, pos.add(i, 1, j), i > -2 && i < 2 ? ACBlocks.stone.getStateFromMeta(7) : getBrick(rand));
+					setBlockAndNotifyAdequately(worldIn, pos.add(j, 1, i), i > -2 && i < 2 ? ACBlocks.stone.getStateFromMeta(7) : getBrick(rand));
 				}
 				if(j > -2 && j < 2 && i > -2 && i < 2)
 					setBlockAndNotifyAdequately(worldIn, pos.add(i, 1, j), ACBlocks.shoggoth_ooze.getDefaultState().withProperty(BlockShoggothOoze.LAYERS, 8));

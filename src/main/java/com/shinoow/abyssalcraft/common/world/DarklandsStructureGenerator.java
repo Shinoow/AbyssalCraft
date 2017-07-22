@@ -15,6 +15,7 @@ import java.util.List;
 import java.util.Random;
 
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
@@ -35,7 +36,7 @@ public class DarklandsStructureGenerator {
 	static List<WorldGenerator> misc = Lists.newArrayList((WorldGenerator)new ACscion1(), new ACscion2());
 
 	public static void generate(int type, World world, Random random, BlockPos pos){
-		generate(type, world, random, pos, ACBlocks.darklands_grass.getDefaultState(), (IBlockState[])null);
+		generate(type, world, random, pos, Blocks.GRASS.getDefaultState(), (IBlockState[])null);
 	}
 
 	public static void generate(int type, World world, Random random, BlockPos pos, IBlockState spawnBlock, IBlockState...extra){

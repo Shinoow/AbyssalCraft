@@ -13,6 +13,7 @@ package com.shinoow.abyssalcraft.common.items;
 
 import java.util.List;
 
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -38,7 +39,7 @@ public class ItemDeprecated extends Item {
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
-	public void addInformation(ItemStack is, EntityPlayer player, List l, boolean B)
+	public void addInformation(ItemStack is, World player, List l, ITooltipFlag B)
 	{
 		l.add("This Item has been removed.");
 		l.add("Right-click to redeem materials.");

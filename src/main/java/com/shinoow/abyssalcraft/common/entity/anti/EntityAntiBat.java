@@ -72,7 +72,7 @@ public class EntityAntiBat extends EntityAmbientCreature implements IAntiEntity 
 	}
 
 	@Override
-	protected SoundEvent getHurtSound()
+	protected SoundEvent getHurtSound(DamageSource source)
 	{
 		return SoundEvents.ENTITY_BAT_HURT;
 	}

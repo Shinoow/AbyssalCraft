@@ -102,7 +102,7 @@ public class EntityAntiGhoul extends EntityMob implements IAntiEntity {
 	}
 
 	@Override
-	protected SoundEvent getHurtSound()
+	protected SoundEvent getHurtSound(DamageSource source)
 	{
 		return ACSounds.ghoul_hurt;
 	}
@@ -153,7 +153,7 @@ public class EntityAntiGhoul extends EntityMob implements IAntiEntity {
 	@Override
 	protected void updateEquipmentIfNeeded(EntityItem itemEntity)
 	{
-		if(!InitHandler.INSTANCE.isItemBlacklisted(this, itemEntity.getEntityItem()))
+		if(!InitHandler.INSTANCE.isItemBlacklisted(this, itemEntity.getItem()))
 			super.updateEquipmentIfNeeded(itemEntity);
 	}
 

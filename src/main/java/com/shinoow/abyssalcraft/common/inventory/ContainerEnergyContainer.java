@@ -46,7 +46,7 @@ public class ContainerEnergyContainer extends Container {
 	public void addListener(IContainerListener listener)
 	{
 		super.addListener(listener);
-		listener.sendProgressBarUpdate(this, 0, tileEnergyContainer.getField(0));
+		listener.sendWindowProperty(this, 0, tileEnergyContainer.getField(0));
 	}
 
 	@Override
@@ -61,7 +61,7 @@ public class ContainerEnergyContainer extends Container {
 			IContainerListener icrafting = listeners.get(i);
 
 			if (lastPE != pe)
-				icrafting.sendProgressBarUpdate(this, 0, pe);
+				icrafting.sendWindowProperty(this, 0, pe);
 		}
 
 		lastPE = pe;

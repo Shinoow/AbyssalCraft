@@ -41,9 +41,9 @@ public class EntityGatekeeperEssence extends EntityItem {
 	@Override
 	public void onUpdate()
 	{
-		ItemStack stack = getEntityItem();
+		ItemStack stack = getItem();
 		if (!stack.isEmpty() && stack.getItem().onEntityItemUpdate(this)) return;
-		if (getEntityItem().isEmpty())
+		if (getItem().isEmpty())
 			setDead();
 		else
 		{
@@ -59,7 +59,7 @@ public class EntityGatekeeperEssence extends EntityItem {
 
 			handleWaterMovement();
 
-			ItemStack item = getEntityItem();
+			ItemStack item = getItem();
 
 			if (!world.isRemote && age >= lifespan)
 			{

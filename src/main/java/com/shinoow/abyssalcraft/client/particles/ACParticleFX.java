@@ -12,7 +12,7 @@
 package com.shinoow.abyssalcraft.client.particles;
 
 import net.minecraft.client.particle.Particle;
-import net.minecraft.client.renderer.VertexBuffer;
+import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.entity.Entity;
 import net.minecraft.world.World;
 
@@ -44,7 +44,7 @@ public class ACParticleFX extends Particle {
 	}
 
 	@Override
-	public void renderParticle(VertexBuffer worldRendererIn, Entity entityIn, float par2, float par3, float par4, float par5, float par6, float par7)
+	public void renderParticle(BufferBuilder worldRendererIn, Entity entityIn, float par2, float par3, float par4, float par5, float par6, float par7)
 	{
 		float var8 = (particleAge + par2) / particleMaxAge * 32.0F;
 

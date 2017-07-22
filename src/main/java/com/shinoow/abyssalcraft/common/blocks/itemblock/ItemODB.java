@@ -14,11 +14,12 @@ package com.shinoow.abyssalcraft.common.blocks.itemblock;
 import java.util.List;
 
 import net.minecraft.block.Block;
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.util.text.translation.I18n;
+import net.minecraft.world.World;
 
 public class ItemODB extends ItemBlock {
 
@@ -29,7 +30,7 @@ public class ItemODB extends ItemBlock {
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@Override
-	public void addInformation(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, List par3List, boolean par4)
+	public void addInformation(ItemStack par1ItemStack, World par2EntityPlayer, List par3List, ITooltipFlag par4)
 	{
 		par3List.add(I18n.translateToLocal("tooltip.odb"));
 	}

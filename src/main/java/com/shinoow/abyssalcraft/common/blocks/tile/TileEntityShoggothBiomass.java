@@ -79,7 +79,7 @@ public class TileEntityShoggothBiomass extends TileEntity implements ITickable {
 						world.spawnEntity(mob);
 						spawnedShoggoths++;
 						if(spawnedShoggoths >= 5)
-							world.setBlockState(pos, ACBlocks.monolith_stone.getDefaultState(), 2);
+							world.setBlockState(pos, ACBlocks.stone.getStateFromMeta(7), 2);
 					}
 			}
 		}

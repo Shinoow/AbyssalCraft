@@ -262,9 +262,9 @@ public class EntityRemnant extends EntityMob implements IMerchant, IAntiEntity, 
 	@Override
 	public boolean attackEntityFrom(DamageSource par1DamageSource, float par2)
 	{
-		if(par1DamageSource.getSourceOfDamage() instanceof EntityLivingBase){
-			if(getAttackTarget() != par1DamageSource.getSourceOfDamage()){
-				setAttackTarget((EntityLivingBase) par1DamageSource.getEntity());
+		if(par1DamageSource.getTrueSource() instanceof EntityLivingBase){
+			if(getAttackTarget() != par1DamageSource.getTrueSource()){
+				setAttackTarget((EntityLivingBase) par1DamageSource.getTrueSource());
 				enrage(true, getAttackTarget());
 			}
 			if(!isAngry()) enrage(true);
@@ -480,7 +480,7 @@ public class EntityRemnant extends EntityMob implements IMerchant, IAntiEntity, 
 				{
 					Enchantment enchantment = Enchantment.REGISTRY.getRandomObject(rand);
 					int i1 = MathHelper.getInt(rand, enchantment.getMinLevel(), enchantment.getMaxLevel());
-					ItemStack itemstack = Items.ENCHANTED_BOOK.getEnchantedItemStack(new EnchantmentData(enchantment, i1));
+					ItemStack itemstack = ((ItemEnchantedBook)Items.ENCHANTED_BOOK).getEnchantedItemStack(new EnchantmentData(enchantment, i1));
 					k = 2 + rand.nextInt(5 + i1 * 10) + 3 * i1;
 					list.add(new MerchantRecipe(new ItemStack(Items.BOOK), new ItemStack(ACItems.elder_engraved_coin, k), itemstack));
 				}

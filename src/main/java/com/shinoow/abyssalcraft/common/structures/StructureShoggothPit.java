@@ -57,78 +57,78 @@ public class StructureShoggothPit extends WorldGenerator {
 					world.setBlockToAir(new BlockPos(x + i, y - 6, z - 7 - j));
 				}
 			for(int i = -4; i < 5; i++){
-				world.setBlockState(new BlockPos(x + i, y, z), ACBlocks.monolith_stone.getDefaultState(), 2);
-				world.setBlockState(new BlockPos(x + i, y, z - 7), ACBlocks.monolith_stone.getDefaultState(), 2);
-				world.setBlockState(new BlockPos(x + i, y - 1, z - 1), ACBlocks.monolith_stone.getDefaultState(), 2);
-				world.setBlockState(new BlockPos(x + i, y - 1, z - 8), ACBlocks.monolith_stone.getDefaultState(), 2);
-				world.setBlockState(new BlockPos(x + i, y - 2, z - 2), ACBlocks.monolith_stone.getDefaultState(), 2);
-				world.setBlockState(new BlockPos(x + i, y - 3, z - 3), ACBlocks.monolith_stone.getDefaultState(), 2);
-				world.setBlockState(new BlockPos(x + i, y - 4, z - 4), ACBlocks.monolith_stone.getDefaultState(), 2);
-				world.setBlockState(new BlockPos(x + i, y - 5, z - 5), ACBlocks.monolith_stone.getDefaultState(), 2);
-				world.setBlockState(new BlockPos(x + i, y - 6, z - 6), ACBlocks.monolith_stone.getDefaultState(), 2);
-				world.setBlockState(new BlockPos(x + i, y - 7, z - 7), ACBlocks.monolith_stone.getDefaultState(), 2);
+				world.setBlockState(new BlockPos(x + i, y, z), ACBlocks.stone.getStateFromMeta(7), 2);
+				world.setBlockState(new BlockPos(x + i, y, z - 7), ACBlocks.stone.getStateFromMeta(7), 2);
+				world.setBlockState(new BlockPos(x + i, y - 1, z - 1), ACBlocks.stone.getStateFromMeta(7), 2);
+				world.setBlockState(new BlockPos(x + i, y - 1, z - 8), ACBlocks.stone.getStateFromMeta(7), 2);
+				world.setBlockState(new BlockPos(x + i, y - 2, z - 2), ACBlocks.stone.getStateFromMeta(7), 2);
+				world.setBlockState(new BlockPos(x + i, y - 3, z - 3), ACBlocks.stone.getStateFromMeta(7), 2);
+				world.setBlockState(new BlockPos(x + i, y - 4, z - 4), ACBlocks.stone.getStateFromMeta(7), 2);
+				world.setBlockState(new BlockPos(x + i, y - 5, z - 5), ACBlocks.stone.getStateFromMeta(7), 2);
+				world.setBlockState(new BlockPos(x + i, y - 6, z - 6), ACBlocks.stone.getStateFromMeta(7), 2);
+				world.setBlockState(new BlockPos(x + i, y - 7, z - 7), ACBlocks.stone.getStateFromMeta(7), 2);
 			}
 			for(int i = 1; i < 7; i++){
-				world.setBlockState(new BlockPos(x - 4, y, z - i), ACBlocks.monolith_stone.getDefaultState(), 2);
-				world.setBlockState(new BlockPos(x + 4, y, z - i), ACBlocks.monolith_stone.getDefaultState(), 2);
-				world.setBlockState(new BlockPos(x - 4, y - 1, z - 1 - i), ACBlocks.monolith_stone.getDefaultState(), 2);
-				world.setBlockState(new BlockPos(x + 4, y - 1, z - 1 - i), ACBlocks.monolith_stone.getDefaultState(), 2);
+				world.setBlockState(new BlockPos(x - 4, y, z - i), ACBlocks.stone.getStateFromMeta(7), 2);
+				world.setBlockState(new BlockPos(x + 4, y, z - i), ACBlocks.stone.getStateFromMeta(7), 2);
+				world.setBlockState(new BlockPos(x - 4, y - 1, z - 1 - i), ACBlocks.stone.getStateFromMeta(7), 2);
+				world.setBlockState(new BlockPos(x + 4, y - 1, z - 1 - i), ACBlocks.stone.getStateFromMeta(7), 2);
 			}
 			for(int i = 2; i < 8; i++){
-				world.setBlockState(new BlockPos(x - 4, y - 2, z - i), ACBlocks.monolith_stone.getDefaultState(), 2);
-				world.setBlockState(new BlockPos(x + 4, y - 2, z - i), ACBlocks.monolith_stone.getDefaultState(), 2);
+				world.setBlockState(new BlockPos(x - 4, y - 2, z - i), ACBlocks.stone.getStateFromMeta(7), 2);
+				world.setBlockState(new BlockPos(x + 4, y - 2, z - i), ACBlocks.stone.getStateFromMeta(7), 2);
 			}
 			for(int i = 3; i < 8; i++){
-				world.setBlockState(new BlockPos(x - 4, y - 3, z - i), ACBlocks.monolith_stone.getDefaultState(), 2);
-				world.setBlockState(new BlockPos(x + 4, y - 3, z - i), ACBlocks.monolith_stone.getDefaultState(), 2);
+				world.setBlockState(new BlockPos(x - 4, y - 3, z - i), ACBlocks.stone.getStateFromMeta(7), 2);
+				world.setBlockState(new BlockPos(x + 4, y - 3, z - i), ACBlocks.stone.getStateFromMeta(7), 2);
 			}
 			for(int i = 4; i < 8; i++){
-				world.setBlockState(new BlockPos(x - 4, y - 4, z - i), ACBlocks.monolith_stone.getDefaultState(), 2);
-				world.setBlockState(new BlockPos(x + 4, y - 4, z - i), ACBlocks.monolith_stone.getDefaultState(), 2);
+				world.setBlockState(new BlockPos(x - 4, y - 4, z - i), ACBlocks.stone.getStateFromMeta(7), 2);
+				world.setBlockState(new BlockPos(x + 4, y - 4, z - i), ACBlocks.stone.getStateFromMeta(7), 2);
 			}
 			for(int i = 5; i < 8; i++){
-				world.setBlockState(new BlockPos(x - 4, y - 5, z - i), ACBlocks.monolith_stone.getDefaultState(), 2);
-				world.setBlockState(new BlockPos(x + 4, y - 5, z - i), ACBlocks.monolith_stone.getDefaultState(), 2);
+				world.setBlockState(new BlockPos(x - 4, y - 5, z - i), ACBlocks.stone.getStateFromMeta(7), 2);
+				world.setBlockState(new BlockPos(x + 4, y - 5, z - i), ACBlocks.stone.getStateFromMeta(7), 2);
 			}
 			for(int i = 6; i < 8; i++){
-				world.setBlockState(new BlockPos(x - 4, y - 6, z - i), ACBlocks.monolith_stone.getDefaultState(), 2);
-				world.setBlockState(new BlockPos(x + 4, y - 6, z - i), ACBlocks.monolith_stone.getDefaultState(), 2);
+				world.setBlockState(new BlockPos(x - 4, y - 6, z - i), ACBlocks.stone.getStateFromMeta(7), 2);
+				world.setBlockState(new BlockPos(x + 4, y - 6, z - i), ACBlocks.stone.getStateFromMeta(7), 2);
 			}
 			for(int i = 2; i < 7; i++){
-				world.setBlockState(new BlockPos(x - 5, y - i, z - 8), ACBlocks.monolith_stone.getDefaultState(), 2);
-				world.setBlockState(new BlockPos(x - 4, y - i, z - 8), ACBlocks.monolith_stone.getDefaultState(), 2);
-				world.setBlockState(new BlockPos(x + 5, y - i, z - 8), ACBlocks.monolith_stone.getDefaultState(), 2);
-				world.setBlockState(new BlockPos(x + 4, y - i, z - 8), ACBlocks.monolith_stone.getDefaultState(), 2);
+				world.setBlockState(new BlockPos(x - 5, y - i, z - 8), ACBlocks.stone.getStateFromMeta(7), 2);
+				world.setBlockState(new BlockPos(x - 4, y - i, z - 8), ACBlocks.stone.getStateFromMeta(7), 2);
+				world.setBlockState(new BlockPos(x + 5, y - i, z - 8), ACBlocks.stone.getStateFromMeta(7), 2);
+				world.setBlockState(new BlockPos(x + 4, y - i, z - 8), ACBlocks.stone.getStateFromMeta(7), 2);
 			}
 			for(int i = -6; i < 7; i++)
 				for(int j = 0; j < 19; j++){
-					world.setBlockState(new BlockPos(x + i, y - 1, z - 8 - j), ACBlocks.monolith_stone.getDefaultState(), 2);
-					world.setBlockState(new BlockPos(x + i, y - 7, z - 8 - j), ACBlocks.monolith_stone.getDefaultState(), 2);
+					world.setBlockState(new BlockPos(x + i, y - 1, z - 8 - j), ACBlocks.stone.getStateFromMeta(7), 2);
+					world.setBlockState(new BlockPos(x + i, y - 7, z - 8 - j), ACBlocks.stone.getStateFromMeta(7), 2);
 				}
 			for(int i = 0; i < 19; i++)
 				for(int j = 0; j < 7; j++){
-					world.setBlockState(new BlockPos(x - 6, y - 1 - j, z - 8 - i), ACBlocks.monolith_stone.getDefaultState(), 2);
-					world.setBlockState(new BlockPos(x + 6, y - 1 - j, z - 8 - i), ACBlocks.monolith_stone.getDefaultState(), 2);
+					world.setBlockState(new BlockPos(x - 6, y - 1 - j, z - 8 - i), ACBlocks.stone.getStateFromMeta(7), 2);
+					world.setBlockState(new BlockPos(x + 6, y - 1 - j, z - 8 - i), ACBlocks.stone.getStateFromMeta(7), 2);
 				}
 			for(int i = -6; i < 7; i++)
 				for(int j = 0; j < 7; j++)
-					world.setBlockState(new BlockPos(x + i, y - 1 - j, z - 27), ACBlocks.monolith_stone.getDefaultState(), 2);
+					world.setBlockState(new BlockPos(x + i, y - 1 - j, z - 27), ACBlocks.stone.getStateFromMeta(7), 2);
 			for(int i = 0; i < 2; i++){
-				world.setBlockState(new BlockPos(x - 5, y - 5 - i, z - 10), ACBlocks.monolith_stone.getDefaultState(), 2);
-				world.setBlockState(new BlockPos(x - 5, y - 5 - i, z - 12), ACBlocks.monolith_stone.getDefaultState(), 2);
-				world.setBlockState(new BlockPos(x - 5, y - 5 - i, z - 14), ACBlocks.monolith_stone.getDefaultState(), 2);
-				world.setBlockState(new BlockPos(x - 5, y - 5 - i, z - 16), ACBlocks.monolith_stone.getDefaultState(), 2);
-				world.setBlockState(new BlockPos(x + 5, y - 5 - i, z - 10), ACBlocks.monolith_stone.getDefaultState(), 2);
-				world.setBlockState(new BlockPos(x + 5, y - 5 - i, z - 12), ACBlocks.monolith_stone.getDefaultState(), 2);
-				world.setBlockState(new BlockPos(x + 5, y - 5 - i, z - 14), ACBlocks.monolith_stone.getDefaultState(), 2);
-				world.setBlockState(new BlockPos(x + 5, y - 5 - i, z - 16), ACBlocks.monolith_stone.getDefaultState(), 2);
+				world.setBlockState(new BlockPos(x - 5, y - 5 - i, z - 10), ACBlocks.stone.getStateFromMeta(7), 2);
+				world.setBlockState(new BlockPos(x - 5, y - 5 - i, z - 12), ACBlocks.stone.getStateFromMeta(7), 2);
+				world.setBlockState(new BlockPos(x - 5, y - 5 - i, z - 14), ACBlocks.stone.getStateFromMeta(7), 2);
+				world.setBlockState(new BlockPos(x - 5, y - 5 - i, z - 16), ACBlocks.stone.getStateFromMeta(7), 2);
+				world.setBlockState(new BlockPos(x + 5, y - 5 - i, z - 10), ACBlocks.stone.getStateFromMeta(7), 2);
+				world.setBlockState(new BlockPos(x + 5, y - 5 - i, z - 12), ACBlocks.stone.getStateFromMeta(7), 2);
+				world.setBlockState(new BlockPos(x + 5, y - 5 - i, z - 14), ACBlocks.stone.getStateFromMeta(7), 2);
+				world.setBlockState(new BlockPos(x + 5, y - 5 - i, z - 16), ACBlocks.stone.getStateFromMeta(7), 2);
 			}
 			for(int i = -4; i < 5; i++)
 				for(int j = 0; j < 9; j++)
-					world.setBlockState(new BlockPos(x + i, y - 8, z - 17 - j), ACBlocks.monolith_stone.getDefaultState(), 2);
+					world.setBlockState(new BlockPos(x + i, y - 8, z - 17 - j), ACBlocks.stone.getStateFromMeta(7), 2);
 			for(int i = -3; i < 4; i++)
 				for(int j = 0; j < 7; j++)
-					world.setBlockState(new BlockPos(x + i, y - 9, z - 18 - j), ACBlocks.monolith_stone.getDefaultState(), 2);
+					world.setBlockState(new BlockPos(x + i, y - 9, z - 18 - j), ACBlocks.stone.getStateFromMeta(7), 2);
 			for(int i = -2; i < 3; i++)
 				for(int j = 0; j < 9; j++)
 					world.setBlockToAir(new BlockPos(x + i, y - 7, z - 17 - j));

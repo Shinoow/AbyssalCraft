@@ -47,8 +47,8 @@ public class ContainerEnergyDepositioner extends Container {
 	public void addListener(IContainerListener listener)
 	{
 		super.addListener(listener);
-		listener.sendProgressBarUpdate(this, 0, tileEntityPEGenerator.getField(0));
-		listener.sendProgressBarUpdate(this, 1, tileEntityPEGenerator.getField(1));
+		listener.sendWindowProperty(this, 0, tileEntityPEGenerator.getField(0));
+		listener.sendWindowProperty(this, 1, tileEntityPEGenerator.getField(1));
 	}
 
 	@Override
@@ -64,10 +64,10 @@ public class ContainerEnergyDepositioner extends Container {
 			IContainerListener icrafting = listeners.get(i);
 
 			if (lastProcessTime != processingTime)
-				icrafting.sendProgressBarUpdate(this, 0, processingTime);
+				icrafting.sendWindowProperty(this, 0, processingTime);
 
 			if (lastPE != pe)
-				icrafting.sendProgressBarUpdate(this, 1, pe);
+				icrafting.sendWindowProperty(this, 1, pe);
 		}
 
 		lastProcessTime = processingTime;

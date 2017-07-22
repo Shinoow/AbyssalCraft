@@ -41,7 +41,7 @@ public class BlockAntiliquid extends BlockFluidClassic {
 	}
 
 	@Override
-	public MapColor getMapColor(IBlockState state){
+	public MapColor getMapColor(IBlockState state, IBlockAccess p_180659_2_, BlockPos p_180659_3_){
 		return MapColor.SILVER;
 	}
 
@@ -57,7 +57,7 @@ public class BlockAntiliquid extends BlockFluidClassic {
 	public boolean displaceIfPossible(World world, BlockPos pos) {
 
 		if(!world.isRemote && world.getBlockState(pos).getBlock() == ACBlocks.liquid_coralium)
-			world.setBlockState(pos, ACBlocks.coralium_stone.getDefaultState());
+			world.setBlockState(pos, ACBlocks.stone.getStateFromMeta(4));
 
 		if(!world.isRemote && world.getBlockState(pos).getMaterial() == Material.WATER && world.getBlockState(pos).getBlock() != ACBlocks.liquid_coralium && world.getBlockState(pos).getBlock() != this)
 			world.setBlockState(pos, Blocks.PACKED_ICE.getDefaultState());

@@ -93,7 +93,7 @@ public class EntityJzahar extends EntityMob implements IRangedAttackMob, IAntiEn
 	}
 
 	@Override
-	protected SoundEvent getHurtSound()
+	protected SoundEvent getHurtSound(DamageSource source)
 	{
 		return SoundEvents.ENTITY_ENDERDRAGON_HURT;
 	}
@@ -192,8 +192,8 @@ public class EntityJzahar extends EntityMob implements IRangedAttackMob, IAntiEn
 	public void onDeath(DamageSource par1DamageSource) {
 		bossInfo.setPercent(getHealth() / getMaxHealth());
 		List<EntityPlayer> players = world.getEntitiesWithinAABB(EntityPlayer.class, getEntityBoundingBox().expand(10, 10, 10));
-		for(EntityPlayer player : players)
-			player.addStat(ACAchievements.kill_jzahar, 1);
+//		for(EntityPlayer player : players)
+//			player.addStat(ACAchievements.kill_jzahar, 1);
 		super.onDeath(par1DamageSource);
 	}
 
@@ -353,7 +353,7 @@ public class EntityJzahar extends EntityMob implements IRangedAttackMob, IAntiEn
 
 					Vec3d dir = new Vec3d(entity.posX - posX, entity.posY - posY, entity.posZ - posZ);
 					dir = dir.normalize();
-					entity.addVelocity(dir.xCoord * -speed * scale, dir.yCoord * -speed * scale, dir.zCoord * -speed * scale);
+					entity.addVelocity(dir.x * -speed * scale, dir.y * -speed * scale, dir.z * -speed * scale);
 				}
 
 				speed += 0.0001;
@@ -420,7 +420,7 @@ public class EntityJzahar extends EntityMob implements IRangedAttackMob, IAntiEn
 							EntityPlayerMP mp = (EntityPlayerMP) player;
 							mp.addPotionEffect(new PotionEffect(MobEffects.RESISTANCE, 80, 255));
 							mp.mcServer.getPlayerList().transferPlayerToDimension(mp, ACLib.dark_realm_id, new TeleporterDarkRealm(worldServer));
-							player.addStat(ACAchievements.enter_dark_realm, 1);
+//							player.addStat(ACAchievements.enter_dark_realm, 1);
 						}
 					}
 					else if(entity instanceof EntityLivingBase || entity instanceof EntityItem)
@@ -494,5 +494,10 @@ public class EntityJzahar extends EntityMob implements IRangedAttackMob, IAntiEn
 			attribute.applyModifier(attackDamageBoost);
 
 		return par1EntityLivingData;
+	}
+
+	@Override
+	public void setSwingingArms(boolean swingingArms) {
+
 	}
 }

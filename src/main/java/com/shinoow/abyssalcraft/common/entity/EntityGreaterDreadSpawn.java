@@ -135,7 +135,7 @@ public class EntityGreaterDreadSpawn extends EntityMob implements IDreadEntity, 
 	}
 
 	@Override
-	protected SoundEvent getHurtSound()
+	protected SoundEvent getHurtSound(DamageSource source)
 	{
 		return ACSounds.dread_spawn_hurt;
 	}
@@ -261,5 +261,10 @@ public class EntityGreaterDreadSpawn extends EntityMob implements IDreadEntity, 
 		entitydreadslug.setThrowableHeading(d0, d1 + f1, d2, 1.6F, 12.0F);
 		playSound(SoundEvents.ENTITY_SKELETON_SHOOT, 1.0F, 1.0F / (getRNG().nextFloat() * 0.4F + 0.8F));
 		world.spawnEntity(entitydreadslug);
+	}
+
+	@Override
+	public void setSwingingArms(boolean swingingArms) {
+
 	}
 }

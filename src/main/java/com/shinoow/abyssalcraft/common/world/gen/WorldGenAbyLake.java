@@ -15,6 +15,7 @@ import java.util.Random;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.EnumSkyBlock;
@@ -25,11 +26,15 @@ import com.shinoow.abyssalcraft.api.block.ACBlocks;
 
 public class WorldGenAbyLake extends WorldGenerator
 {
-	private Block blockIndex;
+	private IBlockState blockIndex;
 
 	public WorldGenAbyLake(Block par1)
 	{
-		blockIndex = par1;
+		this(par1.getDefaultState());
+	}
+	
+	public WorldGenAbyLake(IBlockState state){
+		blockIndex = state;
 	}
 
 	@Override
@@ -92,7 +97,7 @@ public class WorldGenAbyLake extends WorldGenerator
 				for (int i3 = 0; i3 < 16; ++i3)
 					for (int i4 = 0; i4 < 8; ++i4)
 						if (aboolean[(l1 * 16 + i3) * 8 + i4])
-							worldIn.setBlockState(position.add(l1, i4, i3), i4 >= 4 ? Blocks.AIR.getDefaultState() : blockIndex.getDefaultState(), 2);
+							worldIn.setBlockState(position.add(l1, i4, i3), i4 >= 4 ? Blocks.AIR.getDefaultState() : blockIndex, 2);
 
 			for (int i2 = 0; i2 < 16; ++i2)
 				for (int j3 = 0; j3 < 16; ++j3)
@@ -101,10 +106,10 @@ public class WorldGenAbyLake extends WorldGenerator
 						{
 							BlockPos blockpos = position.add(i2, j4 - 1, j3);
 
-							if (worldIn.getBlockState(blockpos).getBlock() == ACBlocks.abyssal_stone && worldIn.getLightFor(EnumSkyBlock.SKY, position.add(i2, j4, j3)) > 0)
+							if (worldIn.getBlockState(blockpos) == ACBlocks.stone.getStateFromMeta(1) && worldIn.getLightFor(EnumSkyBlock.SKY, position.add(i2, j4, j3)) > 0)
 								if(n <= 32)
 									worldIn.setBlockState(blockpos, ACBlocks.liquified_coralium_ore.getDefaultState(), 2);
-								else worldIn.setBlockState(blockpos, ACBlocks.abyssal_stone.getDefaultState(), 2);
+								else worldIn.setBlockState(blockpos, ACBlocks.stone.getStateFromMeta(1), 2);
 						}
 
 			return true;

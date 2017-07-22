@@ -317,12 +317,6 @@ public class NecroData implements INecroData {
 
 			return b1 && b2 && b3 && c.condition.areConditionObjectsEqual(condition.getConditionObject());
 		}
-
-		@Deprecated
-		public Chapter(String identifier, String title){ this(identifier, title, 0); }
-
-		@Deprecated
-		public Chapter(String identifier, String title, Page...pages){ this(identifier, title, 0, pages); }
 	}
 
 	/**
@@ -469,38 +463,5 @@ public class NecroData implements INecroData {
 
 			return b1 && b2 && b3 && b4 && b5;
 		}
-
-		@Deprecated
-		public Page(int pageNum, String text){ this(pageNum, null, text, new DefaultCondition()); }
-
-		@Deprecated
-		public Page(int pageNum, String text, IUnlockCondition condition){ this(pageNum, null, text, condition); }
-
-		@Deprecated
-		public Page(int pageNum, Object icon, String text){ this(pageNum, icon, text, new DefaultCondition()); }
-
-		@Deprecated
-		public Page(int pageNum, Object icon, String text, IUnlockCondition condition){ this(pageNum, "title", 0, icon, text, condition); }
 	}
-
-	@Deprecated
-	public NecroData(String identifier, String title, String info,Chapter...chapters){ this(identifier, title, 0, info, chapters); }
-
-	@Deprecated
-	public NecroData(String identifier, String title,Chapter...chapters){ this(identifier, title, 0, null, new DefaultCondition(), chapters); }
-
-	@Deprecated
-	public String getInformation(){ return getText(); }
-
-	@Deprecated
-	public Chapter[] getChapters(){ return new Chapter[0]; }
-
-	@Deprecated
-	public String getChapterTitle(int index){ return ""; }
-
-	@Deprecated
-	public void addChapter(Chapter chapter){}
-
-	@Deprecated
-	public void removeChapter(String identifier){}
 }

@@ -11,7 +11,7 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.lib;
 
-import net.minecraft.stats.Achievement;
+import net.minecraft.advancements.Advancement;
 
 /**
  * Achievement references
@@ -20,56 +20,56 @@ import net.minecraft.stats.Achievement;
  */
 public class ACAchievements {
 
-	public static Achievement mine_abyssalnite;
-	public static Achievement kill_depths_ghoul;
-	public static Achievement enter_abyssal_wasteland;
-	public static Achievement kill_spectral_dragon;
-	public static Achievement summon_asorah;
-	public static Achievement kill_asorah;
-	public static Achievement enter_dreadlands;
-	public static Achievement kill_dreadguard;
-	public static Achievement depths_ghoul_head;
-	public static Achievement pete_head;
-	public static Achievement mr_wilson_head;
-	public static Achievement dr_orange_head;
-	public static Achievement mine_coralium;
-	public static Achievement mine_abyssal_coralium;
-	public static Achievement find_powerstone;
-	public static Achievement gateway_key;
-	public static Achievement dreaded_gateway_key;
-	public static Achievement rlyehian_gateway_key;
-	public static Achievement summon_chagaroth;
-	public static Achievement kill_chagaroth;
-	public static Achievement enter_omothol;
-	public static Achievement enter_dark_realm;
-	public static Achievement kill_jzahar;
-	public static Achievement kill_omothol_elite;
-	public static Achievement locate_jzahar;
-	public static Achievement necronomicon;
-	public static Achievement abyssal_wasteland_necronomicon;
-	public static Achievement dreadlands_necronomicon;
-	public static Achievement omothol_necronomicon;
-	public static Achievement abyssalnomicon;
-	public static Achievement ritual_altar;
-	public static Achievement summoning_ritual;
-	public static Achievement creation_ritual;
-	public static Achievement shadow_gems;
-	public static Achievement mine_abyssal_ores;
-	public static Achievement mine_dreadlands_ores;
-	public static Achievement dreadium;
-	public static Achievement ethaxium;
-	public static Achievement make_transmutator;
-	public static Achievement make_crystallizer;
-	public static Achievement make_materializer;
-	public static Achievement make_crystal_bag;
-	public static Achievement make_engraver;
-	public static Achievement breeding_ritual;
-	public static Achievement potion_ritual;
-	public static Achievement aoe_potion_ritual;
-	public static Achievement infusion_ritual;
+	public static Advancement mine_abyssalnite;
+	public static Advancement kill_depths_ghoul;
+	public static Advancement enter_abyssal_wasteland;
+	public static Advancement kill_spectral_dragon;
+	public static Advancement summon_asorah;
+	public static Advancement kill_asorah;
+	public static Advancement enter_dreadlands;
+	public static Advancement kill_dreadguard;
+	public static Advancement depths_ghoul_head;
+	public static Advancement pete_head;
+	public static Advancement mr_wilson_head;
+	public static Advancement dr_orange_head;
+	public static Advancement mine_coralium;
+	public static Advancement mine_abyssal_coralium;
+	public static Advancement find_powerstone;
+	public static Advancement gateway_key;
+	public static Advancement dreaded_gateway_key;
+	public static Advancement rlyehian_gateway_key;
+	public static Advancement summon_chagaroth;
+	public static Advancement kill_chagaroth;
+	public static Advancement enter_omothol;
+	public static Advancement enter_dark_realm;
+	public static Advancement kill_jzahar;
+	public static Advancement kill_omothol_elite;
+	public static Advancement locate_jzahar;
+	public static Advancement necronomicon;
+	public static Advancement abyssal_wasteland_necronomicon;
+	public static Advancement dreadlands_necronomicon;
+	public static Advancement omothol_necronomicon;
+	public static Advancement abyssalnomicon;
+	public static Advancement ritual_altar;
+	public static Advancement summoning_ritual;
+	public static Advancement creation_ritual;
+	public static Advancement shadow_gems;
+	public static Advancement mine_abyssal_ores;
+	public static Advancement mine_dreadlands_ores;
+	public static Advancement dreadium;
+	public static Advancement ethaxium;
+	public static Advancement make_transmutator;
+	public static Advancement make_crystallizer;
+	public static Advancement make_materializer;
+	public static Advancement make_crystal_bag;
+	public static Advancement make_engraver;
+	public static Advancement breeding_ritual;
+	public static Advancement potion_ritual;
+	public static Advancement aoe_potion_ritual;
+	public static Advancement infusion_ritual;
 
-	public static Achievement[] getAchievements(){
-		return new Achievement[] {necronomicon, mine_abyssalnite, kill_depths_ghoul, enter_abyssal_wasteland,
+	public static Advancement[] getAchievements(){
+		return new Advancement[] {necronomicon, mine_abyssalnite, kill_depths_ghoul, enter_abyssal_wasteland,
 				kill_spectral_dragon, summon_asorah, kill_asorah, enter_dreadlands, kill_dreadguard, depths_ghoul_head, pete_head,
 				mr_wilson_head, dr_orange_head, mine_coralium, mine_abyssal_coralium, find_powerstone, gateway_key,
 				dreaded_gateway_key, rlyehian_gateway_key, summon_chagaroth, kill_chagaroth,enter_omothol, enter_dark_realm,

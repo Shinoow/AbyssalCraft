@@ -73,7 +73,7 @@ public class EntityAbygolem extends EntityMob {
 	}
 
 	@Override
-	protected SoundEvent getHurtSound()
+	protected SoundEvent getHurtSound(DamageSource source)
 	{
 		return ACSounds.golem_hurt;
 	}

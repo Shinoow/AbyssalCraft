@@ -171,17 +171,17 @@ public class BlockDreadlandsPortal extends BlockBreakable {
 		if (!par5Entity.isRiding() && !par5Entity.isBeingRidden() && par5Entity instanceof EntityPlayerMP)
 		{
 			EntityPlayerMP thePlayer = (EntityPlayerMP)par5Entity;
-			thePlayer.addStat(ACAchievements.enter_dreadlands, 1);
+//			thePlayer.addStat(ACAchievements.enter_dreadlands, 1);
 			if (thePlayer.timeUntilPortal > 0)
 				thePlayer.timeUntilPortal = thePlayer.getPortalCooldown();
 			else if (thePlayer.dimension != ACLib.dreadlands_id)
 			{
 				thePlayer.timeUntilPortal = ACConfig.portalCooldown;
-				thePlayer.mcServer.getPlayerList().transferPlayerToDimension(thePlayer, ACLib.dreadlands_id, new TeleporterAC(thePlayer.mcServer.worldServerForDimension(ACLib.dreadlands_id), this, ACBlocks.dreadstone));
+				thePlayer.mcServer.getPlayerList().transferPlayerToDimension(thePlayer, ACLib.dreadlands_id, new TeleporterAC(thePlayer.mcServer.getWorld(ACLib.dreadlands_id), this, ACBlocks.stone.getStateFromMeta(2)));
 			}
 			else {
 				thePlayer.timeUntilPortal = ACConfig.portalCooldown;
-				thePlayer.mcServer.getPlayerList().transferPlayerToDimension(thePlayer, ACLib.abyssal_wasteland_id, new TeleporterAC(thePlayer.mcServer.worldServerForDimension(ACLib.abyssal_wasteland_id), this, ACBlocks.dreadstone));
+				thePlayer.mcServer.getPlayerList().transferPlayerToDimension(thePlayer, ACLib.abyssal_wasteland_id, new TeleporterAC(thePlayer.mcServer.getWorld(ACLib.abyssal_wasteland_id), this, ACBlocks.stone.getStateFromMeta(2)));
 			}
 		}
 	}
@@ -274,12 +274,12 @@ public class BlockDreadlandsPortal extends BlockBreakable {
 			{
 				BlockPos blockpos = p_180120_1_.offset(p_180120_2_, i);
 
-				if (!func_150857_a(world.getBlockState(blockpos).getBlock()) || world.getBlockState(blockpos.down()).getBlock() != ACBlocks.dreadstone)
+				if (!func_150857_a(world.getBlockState(blockpos).getBlock()) || world.getBlockState(blockpos.down()) != ACBlocks.stone.getStateFromMeta(2))
 					break;
 			}
 
-			Block block = world.getBlockState(p_180120_1_.offset(p_180120_2_, i)).getBlock();
-			return block == ACBlocks.dreadstone ? i : 0;
+			IBlockState state = world.getBlockState(p_180120_1_.offset(p_180120_2_, i));
+			return state == ACBlocks.stone.getStateFromMeta(2) ? i : 0;
 		}
 
 		public int func_181100_a()
@@ -300,32 +300,32 @@ public class BlockDreadlandsPortal extends BlockBreakable {
 					for (int i = 0; i < field_150868_h; ++i)
 					{
 						BlockPos blockpos = field_150861_f.offset(field_150866_c, i).up(field_150862_g);
-						Block block = world.getBlockState(blockpos).getBlock();
+						IBlockState state = world.getBlockState(blockpos);
 
-						if (!func_150857_a(block))
+						if (!func_150857_a(state.getBlock()))
 							break label24;
 
-						if (block == ACBlocks.dreaded_gateway)
+						if (state.getBlock() == ACBlocks.dreaded_gateway)
 							++field_150864_e;
 
 						if (i == 0)
 						{
-							block = world.getBlockState(blockpos.offset(field_150863_d)).getBlock();
+							state = world.getBlockState(blockpos.offset(field_150863_d));
 
-							if (block != ACBlocks.dreadstone)
+							if (state != ACBlocks.stone.getStateFromMeta(2))
 								break label24;
 						}
 						else if (i == field_150868_h - 1)
 						{
-							block = world.getBlockState(blockpos.offset(field_150866_c)).getBlock();
+							state = world.getBlockState(blockpos.offset(field_150866_c));
 
-							if (block != ACBlocks.dreadstone)
+							if (state != ACBlocks.stone.getStateFromMeta(2))
 								break label24;
 						}
 					}
 
 		for (int j = 0; j < field_150868_h; ++j)
-			if (world.getBlockState(field_150861_f.offset(field_150866_c, j).up(field_150862_g)).getBlock() != ACBlocks.dreadstone)
+			if (world.getBlockState(field_150861_f.offset(field_150866_c, j).up(field_150862_g)) != ACBlocks.stone.getStateFromMeta(2))
 			{
 				field_150862_g = 0;
 				break;

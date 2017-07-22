@@ -25,6 +25,7 @@ import net.minecraft.client.renderer.GlStateManager.DestFactor;
 import net.minecraft.client.renderer.GlStateManager.SourceFactor;
 import net.minecraft.client.renderer.texture.DynamicTexture;
 import net.minecraft.client.resources.I18n;
+import net.minecraft.client.util.ITooltipFlag.TooltipFlags;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
@@ -180,7 +181,7 @@ public class GuiNecronomiconEntry extends GuiNecronomicon {
 		String stuff;
 
 		stuff = I18n.format(chapter.getTitle(), new Object[0]);
-		fontRendererObj.drawSplitString(stuff, k + 20, b0 + 16, 116, 0xC40000);
+		fontRenderer.drawSplitString(stuff, k + 20, b0 + 16, 116, 0xC40000);
 		setTurnupLimit(chapter.getTurnupAmount());
 
 		int num = (currTurnup + 1)*2;
@@ -242,10 +243,10 @@ public class GuiNecronomiconEntry extends GuiNecronomicon {
 				} else {
 					mc.renderEngine.bindTexture(NecronomiconResources.CRAFTING);
 					drawTexturedModalRect(k, b0, 0, 0, 256, 256);
-					boolean unicode = fontRendererObj.getUnicodeFlag();
-					fontRendererObj.setUnicodeFlag(false);
+					boolean unicode = fontRenderer.getUnicodeFlag();
+					fontRenderer.setUnicodeFlag(false);
 					renderItem(k + 93, b0 + 52,((CraftingStack)icon1).getOutput(), x, y);
-					fontRendererObj.setUnicodeFlag(unicode);
+					fontRenderer.setUnicodeFlag(unicode);
 					for(int i = 0; i <= 2; i++){
 						renderItem(k + 24 +i*21, b0 + 31,((CraftingStack)icon1).getFirstArray()[i], x, y);
 						renderItem(k + 24 +i*21, b0 + 52,((CraftingStack)icon1).getSecondArray()[i], x, y);
@@ -315,10 +316,10 @@ public class GuiNecronomiconEntry extends GuiNecronomicon {
 					GlStateManager.enableDepth();
 					GlStateManager.popMatrix();
 					GlStateManager.disableLighting();
-					boolean unicode = fontRendererObj.getUnicodeFlag();
-					fontRendererObj.setUnicodeFlag(false);
+					boolean unicode = fontRenderer.getUnicodeFlag();
+					fontRenderer.setUnicodeFlag(false);
 					renderItem(k + 93 + n, b0 + 52,((CraftingStack)icon2).getOutput(), x, y);
-					fontRendererObj.setUnicodeFlag(unicode);
+					fontRenderer.setUnicodeFlag(unicode);
 					for(int i = 0; i <= 2; i++){
 						renderItem(k + 24 + n +i*21, b0 + 31,((CraftingStack)icon2).getFirstArray()[i], x, y);
 						renderItem(k + 24 + n +i*21, b0 + 52,((CraftingStack)icon2).getSecondArray()[i], x, y);
@@ -357,7 +358,7 @@ public class GuiNecronomiconEntry extends GuiNecronomicon {
 
 		if(tooltipStack != null)
 		{
-			List<String> tooltipData = tooltipStack.getTooltip(Minecraft.getMinecraft().player, false);
+			List<String> tooltipData = tooltipStack.getTooltip(Minecraft.getMinecraft().player, TooltipFlags.NORMAL);
 			List<String> parsedTooltip = new ArrayList();
 			boolean first = true;
 
@@ -423,7 +424,7 @@ public class GuiNecronomiconEntry extends GuiNecronomicon {
 		GlStateManager.enableRescaleNormal();
 		GlStateManager.enableDepth();
 		render.renderItemAndEffectIntoGUI(stack, xPos, yPos);
-		render.renderItemOverlayIntoGUI(Minecraft.getMinecraft().fontRendererObj, stack, xPos, yPos, null);
+		render.renderItemOverlayIntoGUI(Minecraft.getMinecraft().fontRenderer, stack, xPos, yPos, null);
 		RenderHelper.disableStandardItemLighting();
 		GlStateManager.popMatrix();
 

@@ -146,12 +146,12 @@ public class ModelStarSpawnPlayer extends ModelBiped {
 	}
 
 	@Override
-	public void setInvisible(boolean invisible){
-		super.setInvisible(invisible);
-		tentacle1.showModel = invisible;
-		tentacle2.showModel = invisible;
-		tentacle3.showModel = invisible;
-		tentacle4.showModel = invisible;
+	public void setVisible(boolean visible){
+		super.setVisible(visible);
+		tentacle1.showModel = visible;
+		tentacle2.showModel = visible;
+		tentacle3.showModel = visible;
+		tentacle4.showModel = visible;
 	}
 
 	public void renderTentacles(float par1, Entity entity){

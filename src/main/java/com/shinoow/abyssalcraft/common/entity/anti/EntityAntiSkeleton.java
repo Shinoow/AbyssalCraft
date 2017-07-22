@@ -29,6 +29,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
+import net.minecraft.util.DamageSource;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
@@ -85,7 +86,7 @@ public class EntityAntiSkeleton extends EntityMob implements IRangedAttackMob, I
 	}
 
 	@Override
-	protected SoundEvent getHurtSound()
+	protected SoundEvent getHurtSound(DamageSource source)
 	{
 		return SoundEvents.ENTITY_SKELETON_HURT;
 	}
@@ -226,13 +227,13 @@ public class EntityAntiSkeleton extends EntityMob implements IRangedAttackMob, I
 	}
 
 	@SideOnly(Side.CLIENT)
-	public boolean func_184725_db()
+	public boolean getSwingingArms()
 	{
 		return dataManager.get(field_184728_b).booleanValue();
 	}
 
-	public void func_184724_a(boolean p_184724_1_)
-	{
-		dataManager.set(field_184728_b, Boolean.valueOf(p_184724_1_));
+	@Override
+	public void setSwingingArms(boolean swingingArms) {
+		dataManager.set(field_184728_b, Boolean.valueOf(swingingArms));
 	}
 }

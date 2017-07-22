@@ -55,7 +55,7 @@ public class BlockCLiquid extends BlockFluidClassic {
 	}
 
 	@Override
-	public MapColor getMapColor(IBlockState state){
+	public MapColor getMapColor(IBlockState state, IBlockAccess p_180659_2_, BlockPos p_180659_3_){
 		return MapColor.LIGHT_BLUE;
 	}
 
@@ -116,14 +116,14 @@ public class BlockCLiquid extends BlockFluidClassic {
 					world.setBlockState(pos, ACBlocks.abyssal_diamond_ore.getDefaultState());
 				else world.setBlockState(pos, ACBlocks.pearlescent_coralium_ore.getDefaultState());
 			else if(stones.contains(world.getBlockState(pos)))
-				world.setBlockState(pos, ACBlocks.abyssal_stone.getDefaultState());
+				world.setBlockState(pos, ACBlocks.stone.getStateFromMeta(1));
 			else if(bricks.contains(world.getBlockState(pos)))
 				world.setBlockState(pos, ACBlocks.abyssal_stone_brick.getDefaultState());
 			else if(cobble.contains(world.getBlockState(pos)))
 				if(BiomeDictionary.hasType(world.getBiome(pos), Type.OCEAN)){
 					if(world.getBlockState(pos).getBlock() != Blocks.COBBLESTONE)
-						world.setBlockState(pos, ACBlocks.abyssal_cobblestone.getDefaultState());
-				}else world.setBlockState(pos, ACBlocks.abyssal_cobblestone.getDefaultState());
+						world.setBlockState(pos, ACBlocks.cobblestone.getStateFromMeta(1));
+				}else world.setBlockState(pos, ACBlocks.cobblestone.getStateFromMeta(1));
 		}
 		return super.displaceIfPossible(world, pos);
 	}
@@ -189,9 +189,9 @@ public class BlockCLiquid extends BlockFluidClassic {
 		stones.addAll(oresToBlocks(OreDictionary.getOres("sandstone")));
 		stones.add(Blocks.NETHERRACK.getDefaultState());
 		stones.add(Blocks.END_STONE.getDefaultState());
-		stones.add(ACBlocks.darkstone.getDefaultState());
-		stones.add(ACBlocks.abyssalnite_stone.getDefaultState());
-		stones.add(ACBlocks.dreadstone.getDefaultState());
+		stones.add(ACBlocks.stone.getDefaultState());
+		stones.add(ACBlocks.stone.getStateFromMeta(2));
+		stones.add(ACBlocks.stone.getStateFromMeta(3));
 		bricks.add(Blocks.STONEBRICK.getStateFromMeta(0));
 		bricks.add(Blocks.STONEBRICK.getStateFromMeta(1));
 		bricks.add(Blocks.STONEBRICK.getStateFromMeta(2));
@@ -215,9 +215,9 @@ public class BlockCLiquid extends BlockFluidClassic {
 		metals.add(ACBlocks.liquified_coralium_ore.getDefaultState());
 		cobble.addAll(oresToBlocks(OreDictionary.getOres("cobblestone")));
 		cobble.add(Blocks.MOSSY_COBBLESTONE.getDefaultState());
-		cobble.add(ACBlocks.darkstone_cobblestone.getDefaultState());
-		cobble.add(ACBlocks.abyssal_cobblestone.getDefaultState());
-		cobble.add(ACBlocks.dreadstone_cobblestone.getDefaultState());
-		cobble.add(ACBlocks.abyssalnite_cobblestone.getDefaultState());
+		cobble.add(ACBlocks.cobblestone.getStateFromMeta(0));
+		cobble.add(ACBlocks.cobblestone.getStateFromMeta(2));
+		cobble.add(ACBlocks.cobblestone.getStateFromMeta(3));
+		cobble.add(ACBlocks.cobblestone.getStateFromMeta(4));
 	}
 }

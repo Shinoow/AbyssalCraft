@@ -16,12 +16,13 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.world.gen.MapGenCaves;
 
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
+import com.shinoow.abyssalcraft.common.blocks.BlockACStone;
+import com.shinoow.abyssalcraft.common.blocks.BlockACStone.EnumStoneType;
 
 public class MapGenCavesAC extends MapGenCaves {
 
-	private boolean isACStone(Block block){
-		return block == ACBlocks.darkstone || block == ACBlocks.abyssal_stone || block == ACBlocks.dreadstone ||
-				block == ACBlocks.abyssalnite_stone || block == ACBlocks.coralium_stone || block == ACBlocks.omothol_stone;
+	private boolean isACStone(IBlockState state){
+		return state.getBlock() == ACBlocks.stone && state.getValue(BlockACStone.TYPE) != EnumStoneType.ETHAXIUM;
 	}
 
 	private boolean isACMisc(Block block){
@@ -32,7 +33,7 @@ public class MapGenCavesAC extends MapGenCaves {
 	@Override
 	protected boolean canReplaceBlock(IBlockState p_175793_1_, IBlockState p_175793_2_)
 	{
-		return isACStone(p_175793_1_.getBlock()) ? true : isACMisc(p_175793_1_.getBlock()) ? true :
+		return isACStone(p_175793_1_) ? true : isACMisc(p_175793_1_.getBlock()) ? true :
 			super.canReplaceBlock(p_175793_1_, p_175793_2_);
 	}
 }

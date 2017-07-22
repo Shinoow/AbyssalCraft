@@ -26,7 +26,7 @@ public class TileEntityJzaharSpawnerRenderer extends TileEntitySpecialRenderer {
 	private static final ResourceLocation texture = new ResourceLocation("abyssalcraft:textures/model/boss/j'zahar.png");
 
 	@Override
-	public void renderTileEntityAt(TileEntity te, double x, double y, double z, float partialTicks, int destroyStage) {
+	public void render(TileEntity te, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
 
 		GlStateManager.pushMatrix();
 		GlStateManager.translate((float) x + 0.675F, (float) y + 0.9F, (float) z + 0.5F);

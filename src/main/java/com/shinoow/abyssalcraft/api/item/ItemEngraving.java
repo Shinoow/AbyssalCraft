@@ -13,9 +13,11 @@ package com.shinoow.abyssalcraft.api.item;
 
 import java.util.List;
 
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.world.World;
 
 /**
  * The "fuel" in Coin Engraving. Use this class if you want to make your own engravings.
@@ -39,7 +41,7 @@ public class ItemEngraving extends Item {
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@Override
-	public void addInformation(ItemStack is, EntityPlayer player, List l, boolean B){
+	public void addInformation(ItemStack is, World player, List<String> l, ITooltipFlag B){
 		l.add(getMaxDamage() - getDamage(is) +"/"+ is.getMaxDamage());
 	}
 }

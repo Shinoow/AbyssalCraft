@@ -21,6 +21,7 @@ import net.minecraft.client.renderer.texture.DynamicTexture;
 import net.minecraft.enchantment.EnchantmentData;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
+import net.minecraft.item.ItemEnchantedBook;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.FMLCommonHandler;
@@ -182,7 +183,7 @@ public class InternalNecroDataHandler extends DummyNecroDataHandler {
 				new Page(6, NecronomiconText.LABEL_INFORMATION_GREAT_OLD_ONES, 0, NecronomiconText.JZAHAR_2));
 		addPages("overworld", "materials", new Page(1, NecronomiconText.LABEL_INFORMATION_MATERIALS, 0, new ItemStack(ACBlocks.abyssalnite_ore), NecronomiconText.MATERIAL_ABYSSALNITE_1),
 				new Page(2, NecronomiconText.LABEL_INFORMATION_MATERIALS, 0, NecronomiconText.MATERIAL_ABYSSALNITE_2),
-				new Page(3, NecronomiconText.LABEL_INFORMATION_MATERIALS, 0, new ItemStack(ACBlocks.darkstone), NecronomiconText.MATERIAL_DARKSTONE_1),
+				new Page(3, NecronomiconText.LABEL_INFORMATION_MATERIALS, 0, new ItemStack(ACBlocks.stone, 1, 0), NecronomiconText.MATERIAL_DARKSTONE_1),
 				new Page(4, NecronomiconText.LABEL_INFORMATION_MATERIALS, 0, NecronomiconText.MATERIAL_DARKSTONE_2),
 				new Page(5, NecronomiconText.LABEL_INFORMATION_MATERIALS, 0, new ItemStack(ACBlocks.coralium_ore), NecronomiconText.MATERIAL_CORALIUM_1),
 				new Page(6, NecronomiconText.LABEL_INFORMATION_MATERIALS, 0, NecronomiconText.MATERIAL_CORALIUM_2),
@@ -191,9 +192,7 @@ public class InternalNecroDataHandler extends DummyNecroDataHandler {
 				new Page(9, NecronomiconText.LABEL_INFORMATION_MATERIALS, 0, new ItemStack(ACBlocks.nitre_ore), NecronomiconText.MATERIAL_NITRE_1),
 				new Page(10, NecronomiconText.LABEL_INFORMATION_MATERIALS, 0, NecronomiconText.MATERIAL_NITRE_2),
 				new Page(11, NecronomiconText.LABEL_INFORMATION_MATERIALS, 0, new ItemStack(ACBlocks.liquid_antimatter), NecronomiconText.MATERIAL_LIQUID_ANTIMATTER_1),
-				new Page(12, NecronomiconText.LABEL_INFORMATION_MATERIALS, 0, NecronomiconText.MATERIAL_LIQUID_ANTIMATTER_2),
-				new Page(13, NecronomiconText.LABEL_INFORMATION_MATERIALS, 0, new ItemStack(ACBlocks.darklands_grass), NecronomiconText.MATERIAL_DARKLANDS_GRASS_1),
-				new Page(14, NecronomiconText.LABEL_INFORMATION_MATERIALS, 0, NecronomiconText.MATERIAL_DARKLANDS_GRASS_2));
+				new Page(12, NecronomiconText.LABEL_INFORMATION_MATERIALS, 0, NecronomiconText.MATERIAL_LIQUID_ANTIMATTER_2));
 		addPages("overworld", "progression", new Page(1, NecronomiconText.LABEL_INFORMATION_PROGRESSION, 0, NecronomiconText.PROGRESSION_OVERWORLD_1),
 				new Page(2, NecronomiconText.LABEL_INFORMATION_PROGRESSION, 0, NecronomiconText.PROGRESSION_OVERWORLD_2),
 				new Page(3, NecronomiconText.LABEL_INFORMATION_PROGRESSION, 0, NecronomiconText.PROGRESSION_OVERWORLD_3),
@@ -227,7 +226,7 @@ public class InternalNecroDataHandler extends DummyNecroDataHandler {
 				new Page(8, NecronomiconText.LABEL_INFORMATION_SPECIAL_MATERIALS, 0, new CraftingStack(ACItems.abyssal_wasteland_necronomicon), NecronomiconText.CRAFTING_NECRONOMICON_C, new DimensionCondition(ACLib.abyssal_wasteland_id)));
 		addPages("overworld", "armortools", new Page(1, NecronomiconText.LABEL_INFORMATION_ARMOR_TOOLS, 0, new CraftingStack(ACItems.staff_of_rending), NecronomiconText.CRAFTING_STAFF_OF_RENDING_1),
 				new Page(2, NecronomiconText.LABEL_INFORMATION_ARMOR_TOOLS, 0, NecronomiconText.CRAFTING_STAFF_OF_RENDING_2));
-		addPages("abyssalwasteland", "materials", new Page(1, NecronomiconText.LABEL_INFORMATION_MATERIALS, 1, new ItemStack(ACBlocks.abyssal_stone), NecronomiconText.MATERIAL_ABYSSAL_STONE_1),
+		addPages("abyssalwasteland", "materials", new Page(1, NecronomiconText.LABEL_INFORMATION_MATERIALS, 1, new ItemStack(ACBlocks.stone, 1, 1), NecronomiconText.MATERIAL_ABYSSAL_STONE_1),
 				new Page(2, NecronomiconText.LABEL_INFORMATION_MATERIALS, 1, NecronomiconText.MATERIAL_ABYSSAL_STONE_2),
 				new Page(3, NecronomiconText.LABEL_INFORMATION_MATERIALS, 1, new ItemStack(ACBlocks.abyssal_diamond_ore), NecronomiconText.MATERIAL_ABYSSAL_ORES_1),
 				new Page(4, NecronomiconText.LABEL_INFORMATION_MATERIALS, 1, NecronomiconText.MATERIAL_ABYSSAL_ORES_2),
@@ -272,9 +271,9 @@ public class InternalNecroDataHandler extends DummyNecroDataHandler {
 				new Page(3, NecronomiconText.LABEL_INFORMATION_ARMOR_TOOLS, 1, new CraftingStack(ACItems.plated_coralium_leggings), NecronomiconText.CRAFTING_PLATED_CORALIUM_LEGGINGS),
 				new Page(4, NecronomiconText.LABEL_INFORMATION_ARMOR_TOOLS, 1, new CraftingStack(ACItems.plated_coralium_boots), NecronomiconText.CRAFTING_PLATED_CORALIUM_BOOTS),
 				new Page(5, NecronomiconText.LABEL_INFORMATION_ARMOR_TOOLS, 1, new CraftingStack(ACItems.coralium_longbow), NecronomiconText.CRAFTING_CORALIUM_LONGBOW));
-		addPages("dreadlands", "materials", new Page(1, NecronomiconText.LABEL_INFORMATION_MATERIALS, 2, new ItemStack(ACBlocks.dreadstone), NecronomiconText.MATERIAL_DREADSTONE_1),
+		addPages("dreadlands", "materials", new Page(1, NecronomiconText.LABEL_INFORMATION_MATERIALS, 2, new ItemStack(ACBlocks.stone, 1, 2), NecronomiconText.MATERIAL_DREADSTONE_1),
 				new Page(2, NecronomiconText.LABEL_INFORMATION_MATERIALS, 2, NecronomiconText.MATERIAL_DREADSTONE_2),
-				new Page(3, NecronomiconText.LABEL_INFORMATION_MATERIALS, 2, new ItemStack(ACBlocks.abyssalnite_stone), NecronomiconText.MATERIAL_ABYSSALNITE_STONE_1),
+				new Page(3, NecronomiconText.LABEL_INFORMATION_MATERIALS, 2, new ItemStack(ACBlocks.stone, 1, 3), NecronomiconText.MATERIAL_ABYSSALNITE_STONE_1),
 				new Page(4, NecronomiconText.LABEL_INFORMATION_MATERIALS, 2, NecronomiconText.MATERIAL_ABYSSALNITE_STONE_2),
 				new Page(5, NecronomiconText.LABEL_INFORMATION_MATERIALS, 2, new ItemStack(ACBlocks.dreadlands_abyssalnite_ore), NecronomiconText.MATERIAL_DREADLANDS_ABYSSALNITE_1),
 				new Page(6, NecronomiconText.LABEL_INFORMATION_MATERIALS, 2, NecronomiconText.MATERIAL_DREADLANDS_ABYSSALNITE_2),
@@ -307,7 +306,7 @@ public class InternalNecroDataHandler extends DummyNecroDataHandler {
 				new Page(18, NecronomiconText.LABEL_INFORMATION_ENTITIES, 2, NecronomiconText.ENTITY_CHAGAROTH_2),
 				new Page(19, NecronomiconText.LABEL_INFORMATION_ENTITIES, 2, NecronomiconResources.LESSER_SHOGGOTH_DREADED, NecronomiconText.ENTITY_LESSER_SHOGGOTH_1, new EntityCondition(EntityLesserShoggoth.class)),
 				new Page(20, NecronomiconText.LABEL_INFORMATION_ENTITIES, 2, NecronomiconText.ENTITY_LESSER_SHOGGOTH_2, new EntityCondition(EntityLesserShoggoth.class)));
-		addPages("dreadlands", "specialmaterials", new Page(1, NecronomiconText.LABEL_INFORMATION_SPECIAL_MATERIALS, 2, new CraftingStack(ACBlocks.block_of_dreadium), NecronomiconText.CRAFTING_DREADIUM_1),
+		addPages("dreadlands", "specialmaterials", new Page(1, NecronomiconText.LABEL_INFORMATION_SPECIAL_MATERIALS, 2, new CraftingStack(new ItemStack(ACBlocks.ingot_block, 1, 2)), NecronomiconText.CRAFTING_DREADIUM_1),
 				new Page(2, NecronomiconText.LABEL_INFORMATION_SPECIAL_MATERIALS, 2, NecronomiconText.CRAFTING_DREADIUM_2),
 				new Page(3, NecronomiconText.LABEL_INFORMATION_SPECIAL_MATERIALS, 2, new CraftingStack(ACBlocks.crystallizer_idle), NecronomiconText.CRAFTING_CRYSTALLIZER_1),
 				new Page(4, NecronomiconText.LABEL_INFORMATION_SPECIAL_MATERIALS, 2, NecronomiconText.CRAFTING_CRYSTALLIZER_2),
@@ -323,9 +322,9 @@ public class InternalNecroDataHandler extends DummyNecroDataHandler {
 				new Page(3, NecronomiconText.LABEL_INFORMATION_ARMOR_TOOLS, 2, new CraftingStack(ACItems.dreadium_samurai_leggings), NecronomiconText.CRAFTING_DREADIUM_SAMURAI_LEGGINGS),
 				new Page(4, NecronomiconText.LABEL_INFORMATION_ARMOR_TOOLS, 2, new CraftingStack(ACItems.dreadium_samurai_boots), NecronomiconText.CRAFTING_DREADIUM_SAMURAI_BOOTS),
 				new Page(5, NecronomiconText.LABEL_INFORMATION_ARMOR_TOOLS, 2, new CraftingStack(ACItems.dreadium_katana), NecronomiconText.CRAFTING_DREADIUM_KATANA));
-		addPages("omothol", "materials", new Page(1, NecronomiconText.LABEL_INFORMATION_MATERIALS, 3, new ItemStack(ACBlocks.omothol_stone), NecronomiconText.MATERIAL_OMOTHOL_STONE_1),
+		addPages("omothol", "materials", new Page(1, NecronomiconText.LABEL_INFORMATION_MATERIALS, 3, new ItemStack(ACBlocks.stone, 1, 6), NecronomiconText.MATERIAL_OMOTHOL_STONE_1),
 				new Page(2, NecronomiconText.LABEL_INFORMATION_MATERIALS, 3, NecronomiconText.MATERIAL_OMOTHOL_STONE_2),
-				new Page(3, NecronomiconText.LABEL_INFORMATION_MATERIALS, 3, new ItemStack(ACBlocks.ethaxium), NecronomiconText.MATERIAL_ETHAXIUM_1),
+				new Page(3, NecronomiconText.LABEL_INFORMATION_MATERIALS, 3, new ItemStack(ACBlocks.stone, 1, 5), NecronomiconText.MATERIAL_ETHAXIUM_1),
 				new Page(4, NecronomiconText.LABEL_INFORMATION_MATERIALS, 3, NecronomiconText.MATERIAL_ETHAXIUM_2),
 				new Page(5, NecronomiconText.LABEL_INFORMATION_MATERIALS, 3, new ItemStack(ACBlocks.dark_ethaxium_brick), NecronomiconText.MATERIAL_DARK_ETHAXIUM_1),
 				new Page(6, NecronomiconText.LABEL_INFORMATION_MATERIALS, 3, NecronomiconText.MATERIAL_DARK_ETHAXIUM_2));
@@ -358,7 +357,7 @@ public class InternalNecroDataHandler extends DummyNecroDataHandler {
 						new Page(12, NecronomiconText.LABEL_INFORMATION_SPECIAL_MATERIALS, 3, NecronomiconText.CRAFTING_MATERIALIZER_2),
 						new Page(13, NecronomiconText.LABEL_INFORMATION_SPECIAL_MATERIALS, 3, new CraftingStack(ACItems.abyssalnomicon), NecronomiconText.CRAFTING_ABYSSALNOMICON_1),
 						new Page(14, NecronomiconText.LABEL_INFORMATION_SPECIAL_MATERIALS, 3, NecronomiconText.CRAFTING_ABYSSALNOMICON_2));
-		addPages("darkrealm", "materials", new Page(1, NecronomiconText.LABEL_INFORMATION_MATERIALS, 3, new ItemStack(ACBlocks.darkstone), NecronomiconText.MATERIAL_DARKSTONE_1),
+		addPages("darkrealm", "materials", new Page(1, NecronomiconText.LABEL_INFORMATION_MATERIALS, 3, new ItemStack(ACBlocks.stone, 1, 0), NecronomiconText.MATERIAL_DARKSTONE_1),
 				new Page(2, NecronomiconText.LABEL_INFORMATION_MATERIALS, 3, NecronomiconText.MATERIAL_DARKSTONE_2));
 		addPages("darkrealm", "progression", new Page(1, NecronomiconText.LABEL_INFORMATION_PROGRESSION, 3, NecronomiconText.PROGRESSION_DARK_REALM_1),
 				new Page(2, NecronomiconText.LABEL_INFORMATION_PROGRESSION, 3, NecronomiconText.PROGRESSION_DARK_REALM_2));
@@ -383,7 +382,7 @@ public class InternalNecroDataHandler extends DummyNecroDataHandler {
 				new Page(7, NecronomiconText.LABEL_GETTING_STARTED, 0, NecronomiconText.RITUAL_TUT_7));
 		addPages("rituals", "materials", new Page(1, NecronomiconText.LABEL_INFORMATION_MATERIALS, 0, new ItemStack(ACBlocks.ritual_altar), NecronomiconText.MATERIAL_RITUAL_ALTAR_1),
 				new Page(2, NecronomiconText.LABEL_INFORMATION_MATERIALS, 0, new ItemStack(ACBlocks.ritual_pedestal), NecronomiconText.MATERIAL_RITUAL_PEDESTAL_1),
-				new Page(3, NecronomiconText.LABEL_INFORMATION_MATERIALS, 0, new ItemStack(ACBlocks.monolith_stone), NecronomiconText.MATERIAL_MONOLITH_STONE_1));
+				new Page(3, NecronomiconText.LABEL_INFORMATION_MATERIALS, 0, new ItemStack(ACBlocks.stone, 1, 7), NecronomiconText.MATERIAL_MONOLITH_STONE_1));
 		addPages("rituals", "specialmaterials", new Page(1, NecronomiconText.LABEL_INFORMATION_SPECIAL_MATERIALS, 0, new CraftingStack(ACBlocks.energy_pedestal), NecronomiconText.CRAFTING_ENERGY_PEDESTAL_1),
 				new Page(2, NecronomiconText.LABEL_INFORMATION_SPECIAL_MATERIALS, 0, NecronomiconText.CRAFTING_ENERGY_PEDESTAL_2),
 				new Page(3, NecronomiconText.LABEL_INFORMATION_SPECIAL_MATERIALS, 0, new CraftingStack(ACBlocks.monolith_pillar), NecronomiconText.CRAFTING_MONOLITH_PILLAR_1),
@@ -427,17 +426,17 @@ public class InternalNecroDataHandler extends DummyNecroDataHandler {
 				new Page(9, NecronomiconText.LABEL_INFORMATION_SPECIAL_MATERIALS, 0, new CraftingStack(ACItems.carbon_cluster), NecronomiconText.CRAFTING_CARBON_CLUSTER),
 				new Page(10, NecronomiconText.LABEL_INFORMATION_SPECIAL_MATERIALS, 0, new CraftingStack(ACItems.dense_carbon_cluster), NecronomiconText.CRAFTING_DENSE_CARBON_CLUSTER),
 				new Page(11, NecronomiconText.LABEL_INFORMATION_SPECIAL_MATERIALS, 0, new CraftingStack(ACBlocks.wooden_crate), NecronomiconText.CRAFTING_CRATE));
-		addPages("miscinfo", "enchantments", new Page(1, NecronomiconText.LABEL_INFORMATION_ENCHANTMENTS, 0, Items.ENCHANTED_BOOK.getEnchantedItemStack(new EnchantmentData(AbyssalCraftAPI.coralium_enchantment, 1)), NecronomiconText.ENCHANTMENT_CORALIUM, new NecronomiconCondition(1)),
-				new Page(2, NecronomiconText.LABEL_INFORMATION_ENCHANTMENTS, 0, Items.ENCHANTED_BOOK.getEnchantedItemStack(new EnchantmentData(AbyssalCraftAPI.dread_enchantment, 1)), NecronomiconText.ENCHANTMENT_DREAD, new NecronomiconCondition(2)),
-				new Page(3, NecronomiconText.LABEL_INFORMATION_ENCHANTMENTS, 0, Items.ENCHANTED_BOOK.getEnchantedItemStack(new EnchantmentData(AbyssalCraftAPI.light_pierce, AbyssalCraftAPI.light_pierce.getMaxLevel())), NecronomiconText.ENCHANTMENT_LIGHT_PIERCE, new MultiEntityCondition(EntityShadowCreature.class, EntityShadowMonster.class, EntityShadowBeast.class)),
-				new Page(4, NecronomiconText.LABEL_INFORMATION_ENCHANTMENTS, 0, Items.ENCHANTED_BOOK.getEnchantedItemStack(new EnchantmentData(AbyssalCraftAPI.iron_wall, 1)), NecronomiconText.ENCHANTMENT_IRON_WALL));
-		addPages("miscinfo", "decorativestatues", new Page(1, NecronomiconText.LABEL_INFORMATION_DECORATIVE_STATUES, 0, new CraftingStack(ACBlocks.decorative_azathoth_statue), NecronomiconText.CRAFTING_DECORATIVE_AZATHOTH_STATUE),
-				new Page(2, NecronomiconText.LABEL_INFORMATION_DECORATIVE_STATUES, 0, new CraftingStack(ACBlocks.decorative_cthulhu_statue), NecronomiconText.CRAFTING_DECORATIVE_CTHULHU_STATUE),
-				new Page(3, NecronomiconText.LABEL_INFORMATION_DECORATIVE_STATUES, 0, new CraftingStack(ACBlocks.decorative_hastur_statue), NecronomiconText.CRAFTING_DECORATIVE_HASTUR_STATUE),
-				new Page(4, NecronomiconText.LABEL_INFORMATION_DECORATIVE_STATUES, 0, new CraftingStack(ACBlocks.decorative_jzahar_statue), NecronomiconText.CRAFTING_DECORATIVE_JZAHAR_STATUE),
-				new Page(5, NecronomiconText.LABEL_INFORMATION_DECORATIVE_STATUES, 0, new CraftingStack(ACBlocks.decorative_nyarlathotep_statue), NecronomiconText.CRAFTING_DECORATIVE_NYARLATHOTEP_STATUE),
-				new Page(6, NecronomiconText.LABEL_INFORMATION_DECORATIVE_STATUES, 0, new CraftingStack(ACBlocks.decorative_shub_niggurath_statue), NecronomiconText.CRAFTING_DECORATIVE_SHUB_NIGGURATH_STATUE),
-				new Page(7, NecronomiconText.LABEL_INFORMATION_DECORATIVE_STATUES, 0, new CraftingStack(ACBlocks.decorative_yog_sothoth_statue), NecronomiconText.CRAFTING_DECORATIVE_YOG_SOTHOTH_STATUE));
+		addPages("miscinfo", "enchantments", new Page(1, NecronomiconText.LABEL_INFORMATION_ENCHANTMENTS, 0, ((ItemEnchantedBook)Items.ENCHANTED_BOOK).getEnchantedItemStack(new EnchantmentData(AbyssalCraftAPI.coralium_enchantment, 1)), NecronomiconText.ENCHANTMENT_CORALIUM, new NecronomiconCondition(1)),
+				new Page(2, NecronomiconText.LABEL_INFORMATION_ENCHANTMENTS, 0, ((ItemEnchantedBook)Items.ENCHANTED_BOOK).getEnchantedItemStack(new EnchantmentData(AbyssalCraftAPI.dread_enchantment, 1)), NecronomiconText.ENCHANTMENT_DREAD, new NecronomiconCondition(2)),
+				new Page(3, NecronomiconText.LABEL_INFORMATION_ENCHANTMENTS, 0, ((ItemEnchantedBook)Items.ENCHANTED_BOOK).getEnchantedItemStack(new EnchantmentData(AbyssalCraftAPI.light_pierce, AbyssalCraftAPI.light_pierce.getMaxLevel())), NecronomiconText.ENCHANTMENT_LIGHT_PIERCE, new MultiEntityCondition(EntityShadowCreature.class, EntityShadowMonster.class, EntityShadowBeast.class)),
+				new Page(4, NecronomiconText.LABEL_INFORMATION_ENCHANTMENTS, 0, ((ItemEnchantedBook)Items.ENCHANTED_BOOK).getEnchantedItemStack(new EnchantmentData(AbyssalCraftAPI.iron_wall, 1)), NecronomiconText.ENCHANTMENT_IRON_WALL));
+		addPages("miscinfo", "decorativestatues", new Page(1, NecronomiconText.LABEL_INFORMATION_DECORATIVE_STATUES, 0, new CraftingStack(new ItemStack(ACBlocks.decorative_statue, 1, 3)), NecronomiconText.CRAFTING_DECORATIVE_AZATHOTH_STATUE),
+				new Page(2, NecronomiconText.LABEL_INFORMATION_DECORATIVE_STATUES, 0, new CraftingStack(new ItemStack(ACBlocks.decorative_statue, 1, 0)), NecronomiconText.CRAFTING_DECORATIVE_CTHULHU_STATUE),
+				new Page(3, NecronomiconText.LABEL_INFORMATION_DECORATIVE_STATUES, 0, new CraftingStack(new ItemStack(ACBlocks.decorative_statue, 1, 1)), NecronomiconText.CRAFTING_DECORATIVE_HASTUR_STATUE),
+				new Page(4, NecronomiconText.LABEL_INFORMATION_DECORATIVE_STATUES, 0, new CraftingStack(new ItemStack(ACBlocks.decorative_statue, 1, 2)), NecronomiconText.CRAFTING_DECORATIVE_JZAHAR_STATUE),
+				new Page(5, NecronomiconText.LABEL_INFORMATION_DECORATIVE_STATUES, 0, new CraftingStack(new ItemStack(ACBlocks.decorative_statue, 1, 4)), NecronomiconText.CRAFTING_DECORATIVE_NYARLATHOTEP_STATUE),
+				new Page(6, NecronomiconText.LABEL_INFORMATION_DECORATIVE_STATUES, 0, new CraftingStack(new ItemStack(ACBlocks.decorative_statue, 1, 5)), NecronomiconText.CRAFTING_DECORATIVE_SHUB_NIGGURATH_STATUE),
+				new Page(7, NecronomiconText.LABEL_INFORMATION_DECORATIVE_STATUES, 0, new CraftingStack(new ItemStack(ACBlocks.decorative_statue, 1, 6)), NecronomiconText.CRAFTING_DECORATIVE_YOG_SOTHOTH_STATUE));
 		setupPatreonData();
 	}
 

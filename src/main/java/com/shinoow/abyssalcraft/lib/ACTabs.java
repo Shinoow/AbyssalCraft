@@ -28,7 +28,7 @@ public class ACTabs {
 
 		@Override
 		public ItemStack getTabIconItem() {
-			return new ItemStack(Item.getItemFromBlock(ACBlocks.darkstone));
+			return new ItemStack(Item.getItemFromBlock(ACBlocks.stone));
 		}
 	};
 	public static final CreativeTabs tabItems = new CreativeTabs("acitems"){

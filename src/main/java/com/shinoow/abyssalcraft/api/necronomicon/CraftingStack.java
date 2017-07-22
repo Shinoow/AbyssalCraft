@@ -13,6 +13,8 @@ package com.shinoow.abyssalcraft.api.necronomicon;
 
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.*;
+import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 import net.minecraftforge.oredict.ShapelessOreRecipe;
@@ -55,36 +57,37 @@ public class CraftingStack {
 	 */
 	public CraftingStack(Object output){
 		if(output != null){
+			int size = 0;
 			Object[] stuff = new Object[9];
 			this.output = APIUtils.convertToStack(output);
-			for(Object thing : CraftingManager.getInstance().getRecipeList())
-				if(thing instanceof IRecipe){
-					IRecipe recipe = (IRecipe)thing;
-					if(recipe.getRecipeOutput() != null && recipe.getRecipeOutput().isItemEqual(this.output)){
-						if(recipe instanceof ShapedRecipes)
-							for(int i = 0; i < recipe.getRecipeSize(); i++)
-								stuff[i] = ((ShapedRecipes) recipe).recipeItems[i];
-						if(recipe instanceof ShapelessRecipes)
-							for(int i = 0; i < recipe.getRecipeSize(); i++)
-								stuff[i] = ((ShapelessRecipes) recipe).recipeItems.get(i);
-						if(recipe instanceof ShapedOreRecipe)
-							for(int i = 0; i < recipe.getRecipeSize(); i++)
-								stuff[i] = ((ShapedOreRecipe) recipe).getInput()[i];
-						if(recipe instanceof ShapelessOreRecipe)
-							for(int i = 0; i < recipe.getRecipeSize(); i++)
-								stuff[i] = ((ShapelessOreRecipe) recipe).getInput().get(i);
+			for(IRecipe recipe : ForgeRegistries.RECIPES){
+				if(recipe.getRecipeOutput() != null && recipe.getRecipeOutput().isItemEqual(this.output)){
+					if(recipe instanceof ShapedRecipes){
+						for(int i = 0; i < recipe.getIngredients().size(); i++)
+							stuff[i] = ((ShapedRecipes) recipe).getIngredients().get(i);
+						size = ((ShapedRecipes) recipe).recipeHeight * ((ShapedRecipes) recipe).recipeWidth;
+					} if(recipe instanceof ShapelessRecipes)
+						for(int i = 0; i < recipe.getIngredients().size(); i++)
+							stuff[i] = ((ShapelessRecipes) recipe).recipeItems.get(i);
+					if(recipe instanceof ShapedOreRecipe){
+						for(int i = 0; i < recipe.getIngredients().size(); i++)
+							stuff[i] = ((ShapedOreRecipe) recipe).getIngredients().get(i);
+						size = ((ShapedOreRecipe) recipe).getHeight() * ((ShapedOreRecipe) recipe).getWidth();
+					} if(recipe instanceof ShapelessOreRecipe)
+						for(int i = 0; i < recipe.getIngredients().size(); i++)
+							stuff[i] = ((ShapelessOreRecipe) recipe).getIngredients().get(i);
 
-						if(recipe.getRecipeSize() == 4){
-							Object[] copy = stuff.clone();
-							stuff = new Object[9];
-							for(int i = 0; i < 2; i++){
-								stuff[i] = copy[i];
-								stuff[i+3] = copy[i+2];
-							}
+					if(size == 4){
+						Object[] copy = stuff.clone();
+						stuff = new Object[9];
+						for(int i = 0; i < 2; i++){
+							stuff[i] = copy[i];
+							stuff[i+3] = copy[i+2];
 						}
-						this.output.setCount(recipe.getRecipeOutput().getCount());
 					}
+					this.output.setCount(recipe.getRecipeOutput().getCount());
 				}
+			}
 			for(int i = 0; i < 9; i++)
 				recipe[i] = APIUtils.convertToStack(stuff[i]);
 		}

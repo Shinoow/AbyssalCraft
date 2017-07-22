@@ -19,7 +19,7 @@ import net.minecraft.world.DimensionType;
 import net.minecraft.world.WorldProvider;
 import net.minecraft.world.biome.BiomeProviderSingle;
 import net.minecraft.world.chunk.Chunk;
-import net.minecraft.world.chunk.IChunkGenerator;
+import net.minecraft.world.gen.IChunkGenerator;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -35,7 +35,7 @@ public class WorldProviderOmothol extends WorldProvider {
 	{
 		biomeProvider = new BiomeProviderSingle(ACBiomes.omothol);
 		setDimension(ACLib.omothol_id);
-		hasNoSky = true;
+//		hasNoSky = true;
 	}
 
 	@Override
@@ -123,7 +123,7 @@ public class WorldProviderOmothol extends WorldProvider {
 	@Override
 	public boolean canCoordinateBeSpawn(int x, int z)
 	{
-		return world.getGroundAboveSeaLevel(new BlockPos(x, 0, z)) == ACBlocks.omothol_stone.getDefaultState();
+		return world.getGroundAboveSeaLevel(new BlockPos(x, 0, z)) == ACBlocks.stone.getStateFromMeta(6);
 	}
 
 	@Override

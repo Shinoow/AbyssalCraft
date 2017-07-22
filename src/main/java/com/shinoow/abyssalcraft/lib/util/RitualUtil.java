@@ -30,27 +30,27 @@ import com.shinoow.abyssalcraft.api.ritual.RitualRegistry;
  */
 public class RitualUtil {
 
-	private static Map<Block, Integer> ritualBlocks = Maps.newHashMap();
-	private static Map<Block, Integer> altarMeta = Maps.newHashMap();
+	private static Map<IBlockState, Integer> ritualBlocks = Maps.newHashMap();
+	private static Map<IBlockState, Integer> altarMeta = Maps.newHashMap();
 
 	public static void addBlocks(){
-		ritualBlocks.put(Blocks.COBBLESTONE, 0);
-		ritualBlocks.put(ACBlocks.darkstone_cobblestone, 0);
-		ritualBlocks.put(ACBlocks.abyssal_cobblestone, 1);
-		ritualBlocks.put(ACBlocks.coralium_cobblestone, 1);
-		ritualBlocks.put(ACBlocks.dreadstone_cobblestone, 2);
-		ritualBlocks.put(ACBlocks.abyssalnite_cobblestone, 2);
-		ritualBlocks.put(ACBlocks.ethaxium_brick, 3);
-		ritualBlocks.put(ACBlocks.dark_ethaxium_brick, 3);
+		ritualBlocks.put(Blocks.COBBLESTONE.getDefaultState(), 0);
+		ritualBlocks.put(ACBlocks.cobblestone.getStateFromMeta(0), 0);
+		ritualBlocks.put(ACBlocks.cobblestone.getStateFromMeta(1), 1);
+		ritualBlocks.put(ACBlocks.cobblestone.getStateFromMeta(2), 1);
+		ritualBlocks.put(ACBlocks.cobblestone.getStateFromMeta(3), 2);
+		ritualBlocks.put(ACBlocks.cobblestone.getStateFromMeta(4), 2);
+		ritualBlocks.put(ACBlocks.ethaxium_brick.getDefaultState(), 3);
+		ritualBlocks.put(ACBlocks.dark_ethaxium_brick.getDefaultState(), 3);
 
-		altarMeta.put(Blocks.COBBLESTONE, 0);
-		altarMeta.put(ACBlocks.darkstone_cobblestone, 1);
-		altarMeta.put(ACBlocks.abyssal_cobblestone, 2);
-		altarMeta.put(ACBlocks.coralium_cobblestone, 3);
-		altarMeta.put(ACBlocks.dreadstone_cobblestone, 4);
-		altarMeta.put(ACBlocks.abyssalnite_cobblestone, 5);
-		altarMeta.put(ACBlocks.ethaxium_brick, 6);
-		altarMeta.put(ACBlocks.dark_ethaxium_brick, 7);
+		altarMeta.put(Blocks.COBBLESTONE.getDefaultState(), 0);
+		altarMeta.put(ACBlocks.cobblestone.getStateFromMeta(0), 1);
+		altarMeta.put(ACBlocks.cobblestone.getStateFromMeta(1), 2);
+		altarMeta.put(ACBlocks.cobblestone.getStateFromMeta(2), 3);
+		altarMeta.put(ACBlocks.cobblestone.getStateFromMeta(3), 4);
+		altarMeta.put(ACBlocks.cobblestone.getStateFromMeta(4), 5);
+		altarMeta.put(ACBlocks.ethaxium_brick.getDefaultState(), 6);
+		altarMeta.put(ACBlocks.dark_ethaxium_brick.getDefaultState(), 7);
 	}
 
 	/**
@@ -67,8 +67,8 @@ public class RitualUtil {
 		int x = 0;
 		int y = 0;
 		int z = 0;
-		if(ritualBlock != null && ritualBlocks.containsKey(ritualBlock.getBlock()))
-			if(bookType >= ritualBlocks.get(ritualBlock.getBlock()))
+		if(ritualBlock != null && ritualBlocks.containsKey(ritualBlock))
+			if(bookType >= ritualBlocks.get(ritualBlock))
 				if(world.getBlockState(pos.add(x -3, y, z)) == ritualBlock &&
 				world.getBlockState(pos.add(x, y, z -3)) == ritualBlock &&
 				world.getBlockState(pos.add(x + 3, y, z)) == ritualBlock &&
@@ -103,8 +103,8 @@ public class RitualUtil {
 							world.isAirBlock(pos.add(x + 2, y, z)) && world.isAirBlock(pos.add(x + 2, y, z + 1)) &&
 							world.isAirBlock(pos.add(x + 1, y, z + 1)) && world.isAirBlock(pos.add(x + 1, y, z + 2)) &&
 							world.isAirBlock(pos.add(x, y, z + 2)) && world.isAirBlock(pos.add(x -1, y, z + 2)))
-						if(RitualRegistry.instance().sameBookType(world.provider.getDimension(), ritualBlocks.get(ritualBlock.getBlock()))){
-							createAltar(world, pos, ritualBlock.getBlock());
+						if(RitualRegistry.instance().sameBookType(world.provider.getDimension(), ritualBlocks.get(ritualBlock))){
+							createAltar(world, pos, ritualBlock);
 							return true;
 						}
 		return false;
@@ -118,7 +118,7 @@ public class RitualUtil {
 	 * @param z Z coordinate
 	 * @param block Ritual Block
 	 */
-	private static void createAltar(World world, BlockPos pos, Block block){
+	private static void createAltar(World world, BlockPos pos, IBlockState block){
 		if(altarMeta.containsKey(block)){
 			int meta = altarMeta.get(block);
 			int x = 0;

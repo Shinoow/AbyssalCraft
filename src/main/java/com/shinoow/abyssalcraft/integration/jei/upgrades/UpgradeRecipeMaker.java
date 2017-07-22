@@ -28,9 +28,17 @@ public class UpgradeRecipeMaker {
 		List<UpgradeRecipeWrapper> recipes = new ArrayList();
 
 		for(Entry<ItemUpgradeKit, Map<ItemStack, ItemStack>> upgrades : UpgradeKitRecipes.instance().getAllUpgrades().entrySet())
-			for(Entry<ItemStack, ItemStack> e : upgrades.getValue().entrySet())
-				recipes.add(new UpgradeRecipeWrapper(upgrades.getKey(), e.getKey(), e.getValue()));
+			for(Entry<ItemStack, ItemStack> e : upgrades.getValue().entrySet()){
+				UpgradeRecipeWrapper recipe = new UpgradeRecipeWrapper(upgrades.getKey(), e.getKey(), e.getValue());
+				if(isRecipeValid(recipe))
+					recipes.add(recipe);
+			}
 
 		return recipes;
+	}
+
+	private static boolean isRecipeValid(@Nonnull UpgradeRecipeWrapper recipe) {
+
+		return !recipe.getOutputs().isEmpty() && !recipe.getInput().isEmpty() && !recipe.getUpgradeKit().isEmpty();
 	}
 }

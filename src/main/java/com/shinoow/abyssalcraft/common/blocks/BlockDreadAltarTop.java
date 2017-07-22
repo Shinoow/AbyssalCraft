@@ -102,10 +102,10 @@ public class BlockDreadAltarTop extends Block {
 				if(par1World.getBlockState(pos.down()).getBlock() == ACBlocks.chagaroth_altar_bottom && pos.getY() == 41)
 					if(!par1World.isRemote){
 						SpecialTextUtil.ChagarothGroup(par1World, I18n.translateToLocal("message.dreadaltartop.spawn"));
-						par5EntityPlayer.addStat(ACAchievements.summon_chagaroth, 1);
+//						par5EntityPlayer.addStat(ACAchievements.summon_chagaroth, 1);
 						chagarothlair lair = new chagarothlair();
 						lair.generate(par1World, rand, pos.down(2));
-						par1World.getChunkFromBlockCoords(pos).setChunkModified();
+						par1World.getChunkFromBlockCoords(pos).markDirty();
 						par1World.setBlockToAir(pos.down());
 						par1World.setBlockToAir(pos);
 					}

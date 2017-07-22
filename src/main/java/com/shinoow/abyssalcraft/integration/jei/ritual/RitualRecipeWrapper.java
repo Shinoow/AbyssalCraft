@@ -76,7 +76,7 @@ public class RitualRecipeWrapper extends BlankRecipeWrapper {
 		dimToString.put(-1, I18n.format(NecronomiconText.LABEL_ANYWHERE, new Object[0]));
 		dimToString.putAll(RitualRegistry.instance().getDimensionNameMappings());
 
-		FontRenderer fr = Minecraft.getMinecraft().fontRendererObj;
+		FontRenderer fr = Minecraft.getMinecraft().fontRenderer;
 
 		boolean unicode = fr.getUnicodeFlag();
 		fr.setUnicodeFlag(true);

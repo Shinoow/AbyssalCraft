@@ -30,7 +30,7 @@ public class LayerAsorahDeath implements LayerRenderer<EntityDragonBoss>
 		if (entitylivingbaseIn.deathTicks > 0)
 		{
 			Tessellator tessellator = Tessellator.getInstance();
-			VertexBuffer worldrenderer = tessellator.getBuffer();
+			BufferBuilder worldrenderer = tessellator.getBuffer();
 			RenderHelper.disableStandardItemLighting();
 			float f = (entitylivingbaseIn.deathTicks + partialTicks) / 200.0F;
 			float f1 = 0.0F;

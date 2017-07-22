@@ -59,9 +59,8 @@ public class MapGenDreadlandsMine extends MapGenStructure
 	}
 
 	@Override
-	public BlockPos getClosestStrongholdPos(World worldIn, BlockPos pos,
-			boolean p_180706_3_) {
-		// TODO Auto-generated method stub
+	public BlockPos getNearestStructurePos(World worldIn, BlockPos pos, boolean findUnexplored) {
+
 		return null;
 	}
 }

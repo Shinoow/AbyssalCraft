@@ -25,17 +25,12 @@ public class ItemBlockColorName extends ItemBlock {
 
 	@Override
 	public String getItemStackDisplayName(ItemStack par1ItemStack) {
-		if(getUnlocalizedName().contains("abyblock"))
-			return TextFormatting.DARK_AQUA + super.getItemStackDisplayName(par1ItemStack);
-		else if(getUnlocalizedName().contains("odb") || getUnlocalizedName().contains("dreadiumblock") ||
-				getUnlocalizedName().contains("darkethaxium"))
+		if(getUnlocalizedName().contains("odb") || getUnlocalizedName().contains("darkethaxium"))
 			return TextFormatting.DARK_RED + super.getItemStackDisplayName(par1ItemStack);
-		else if(getUnlocalizedName().contains("corblock") || getUnlocalizedName().contains("Eth")
-				|| getUnlocalizedName().contains("ethaxium") || getUnlocalizedName().contains("BOE"))
+		else if(getUnlocalizedName().contains("ethaxium"))
 			return TextFormatting.AQUA + super.getItemStackDisplayName(par1ItemStack);
 		else if(getUnlocalizedName().contains("aby"))
 			return TextFormatting.BLUE + super.getItemStackDisplayName(par1ItemStack);
-
 		return super.getItemStackDisplayName(par1ItemStack);
 	}
 }

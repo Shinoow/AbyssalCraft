@@ -41,7 +41,7 @@ public class ACSkyRenderer extends IRenderHandler {
 		GlStateManager.depthMask(false);
 		mc.renderEngine.bindTexture(texture);
 		Tessellator tessellator = Tessellator.getInstance();
-		VertexBuffer vertexbuffer = tessellator.getBuffer();
+		BufferBuilder vertexbuffer = tessellator.getBuffer();
 
 		for (int i = 0; i < 6; ++i)
 		{

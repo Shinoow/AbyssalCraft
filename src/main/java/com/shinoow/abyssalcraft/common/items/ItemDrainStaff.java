@@ -13,6 +13,7 @@ package com.shinoow.abyssalcraft.common.items;
 
 import java.util.List;
 
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -121,7 +122,7 @@ public class ItemDrainStaff extends ItemMetadata implements IStaffOfRending {
 
 	@Override
 	@SuppressWarnings({ "unchecked", "rawtypes" })
-	public void addInformation(ItemStack is, EntityPlayer player, List l, boolean B){
+	public void addInformation(ItemStack is, World player, List l, ITooltipFlag B){
 		int abyssal = getEnergy(is, "Abyssal");
 		int dread = getEnergy(is, "Dread");
 		int omothol = getEnergy(is, "Omothol");

@@ -156,7 +156,7 @@ public class AbyssalCraftAPI {
 		dreadiumSamuraiArmor.setRepairItem(new ItemStack(ACItems.dreadium_plate));
 		ethaxiumArmor.setRepairItem(new ItemStack(ACItems.ethaxium_ingot));
 
-		darkstoneTool.setRepairItem(new ItemStack(ACBlocks.darkstone_cobblestone));
+		darkstoneTool.setRepairItem(new ItemStack(ACBlocks.cobblestone, 1, 0));
 		abyssalniteTool.setRepairItem(new ItemStack(ACItems.abyssalnite_ingot));
 		refinedCoraliumTool.setRepairItem(new ItemStack(ACItems.refined_coralium_ingot));
 		dreadiumTool.setRepairItem(new ItemStack(ACItems.dreadium_ingot));
@@ -528,33 +528,6 @@ public class AbyssalCraftAPI {
 			GameRegistry.getFuelValue(itemStack);
 		}
 		return fuelValue;
-	}
-
-	/**
-	 * Adds the block to a list of blocks that won't turn into
-	 * a fleshy soil when a Lesser Shoggoth walks over it
-	 * (Note: Any liquid block and tile entity block will automatically be blacklisted)
-	 * @param block The block to blacklist
-	 *
-	 * @since 1.4
-	 *
-	 * @deprecated 1.9.0: Shoggoth ooze no longer replaces other blocks in that sense
-	 */
-	@Deprecated
-	public static void addShoggothBlacklist(Block block){}
-
-	/**
-	 * Used by the Lesser Shoggoth to fetch a list of blocks that won't be converted when
-	 * it walks over them
-	 * @return An ArrayList containing Blocks
-	 *
-	 * @since 1.4
-	 *
-	 * @deprecated 1.9.0: Shoggoth ooze no longer replaces other blocks in that sense
-	 */
-	@Deprecated
-	public static List<Block> getShoggothBlockBlacklist(){
-		return Lists.newArrayList();
 	}
 
 	/**

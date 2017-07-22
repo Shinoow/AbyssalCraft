@@ -49,7 +49,7 @@ public class BlockACLeaves extends BlockLeaves {
 	}
 
 	@Override
-	public MapColor getMapColor(IBlockState state)
+	public MapColor getMapColor(IBlockState state, IBlockAccess p_180659_2_, BlockPos p_180659_3_)
 	{
 		return mapColor;
 	}

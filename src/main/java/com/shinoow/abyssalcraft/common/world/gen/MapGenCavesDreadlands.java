@@ -148,7 +148,7 @@ public class MapGenCavesDreadlands extends MapGenCavesHell {
 									{
 										IBlockState iblockstate1 = primer.getBlockState(i3, i2, j3);
 
-										if (iblockstate1.getBlock() == ACBlocks.dreadstone || iblockstate1.getBlock() == ACBlocks.abyssalnite_stone || iblockstate1.getBlock() == ACBlocks.dreadlands_dirt || iblockstate1.getBlock() == ACBlocks.dreadlands_grass)
+										if (iblockstate1 == ACBlocks.stone.getStateFromMeta(2) || iblockstate1 == ACBlocks.stone.getStateFromMeta(3) || iblockstate1.getBlock() == ACBlocks.dreadlands_dirt || iblockstate1.getBlock() == ACBlocks.dreadlands_grass)
 											primer.setBlockState(i3, i2, j3, AIR);
 									}
 								}

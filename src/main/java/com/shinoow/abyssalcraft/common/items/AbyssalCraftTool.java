@@ -15,6 +15,8 @@ import java.util.List;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.resources.I18n;
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -27,7 +29,6 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.*;
 import net.minecraft.util.text.TextFormatting;
-import net.minecraft.util.text.translation.I18n;
 import net.minecraft.world.GameType;
 import net.minecraft.world.World;
 
@@ -47,9 +48,9 @@ public class AbyssalCraftTool extends Item {
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
-	public void addInformation(ItemStack is, EntityPlayer player, List l, boolean B) {
-		l.add(I18n.translateToLocal("tooltip.devblade.1"));
-		l.add(I18n.translateToLocal("tooltip.devblade.2"));
+	public void addInformation(ItemStack is, World player, List l, ITooltipFlag B) {
+		l.add(I18n.format("tooltip.devblade.1"));
+		l.add(I18n.format("tooltip.devblade.2"));
 	}
 
 	@Override

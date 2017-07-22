@@ -29,7 +29,7 @@ public class ACscion1 extends StructureDarklandsBase {
 	@Override
 	public boolean generate(World world, Random random, BlockPos pos) {
 
-		IBlockState grass = ACBlocks.darklands_grass.getDefaultState();
+		IBlockState grass = Blocks.GRASS.getDefaultState();
 		IBlockState glowing_brick = ACBlocks.glowing_darkstone_bricks.getDefaultState();
 		IBlockState chiseled_brick = ACBlocks.darkstone_brick.getStateFromMeta(1);
 		IBlockState brick_slab = ACBlocks.darkstone_brick_slab.getDefaultState();

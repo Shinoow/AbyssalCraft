@@ -11,6 +11,8 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.api.energy;
 
+import net.minecraft.block.state.IBlockState;
+
 import com.shinoow.abyssalcraft.api.energy.EnergyEnum.AmplifierType;
 import com.shinoow.abyssalcraft.api.energy.EnergyEnum.DeityType;
 
@@ -45,7 +47,7 @@ public interface IEnergyManipulator {
 	/**
 	 * Returns the Deity associated with this manipulator (can be null)
 	 */
-	public DeityType getDeity();
+	public DeityType getDeity(IBlockState state);
 
 	/**
 	 * Used to calculate Amplification through Charms.<br>

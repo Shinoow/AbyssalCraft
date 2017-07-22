@@ -1,20 +1,6 @@
-/*******************************************************************************
- * AbyssalCraft
- * Copyright (c) 2012 - 2017 Shinoow.
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the GNU Lesser Public License v3
- * which accompanies this distribution, and is available at
- * http://www.gnu.org/licenses/lgpl-3.0.txt
- *
- * Contributors:
- *     Shinoow -  implementation
- ******************************************************************************/
 package com.shinoow.abyssalcraft.common.blocks;
 
 import javax.annotation.Nullable;
-
-import com.shinoow.abyssalcraft.common.blocks.BlockACCobblestone.EnumCobblestoneType;
-import com.shinoow.abyssalcraft.lib.ACTabs;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
@@ -29,28 +15,25 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.IStringSerializable;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-public class IngotBlock extends Block {
+import com.shinoow.abyssalcraft.api.block.ACBlocks;
+import com.shinoow.abyssalcraft.lib.ACTabs;
 
-	public static final PropertyEnum<EnumIngotType> TYPE = PropertyEnum.create("type", EnumIngotType.class);
+public class BlockACCobblestone extends Block {
 
-	public IngotBlock() {
-		super(Material.IRON);
-		setDefaultState(getDefaultState().withProperty(TYPE, EnumIngotType.ABYSSALNITE));
-		setHardness(4.0F);
-		setResistance(12.0F);
-		setSoundType(SoundType.METAL);
+	public static final PropertyEnum<EnumCobblestoneType> TYPE = PropertyEnum.create("type", EnumCobblestoneType.class);
+
+	public BlockACCobblestone() {
+		super(Material.ROCK);
+		setDefaultState(getDefaultState().withProperty(TYPE, EnumCobblestoneType.DARKSTONE));
+		setHardness(2.0F);
+		setResistance(10.0F);
+		setSoundType(SoundType.STONE);
 		setCreativeTab(ACTabs.tabBlock);
-		setHarvestLevel("pickaxe", 2);
-	}
-
-	@Override
-	public boolean isBeaconBase(IBlockAccess world, BlockPos pos, BlockPos beaconpos) {
-		return true;
+		setHarvestLevel("pickaxe", 0);
 	}
 
 	@Override
@@ -60,9 +43,15 @@ public class IngotBlock extends Block {
 	}
 
 	@Override
+	public float getBlockHardness(IBlockState blockState, World worldIn, BlockPos pos)
+	{
+		return blockState.getValue(TYPE).getHardness();
+	}
+
+	@Override
 	public float getExplosionResistance(World world, BlockPos pos, @Nullable Entity exploder, Explosion explosion)
 	{
-		return world.getBlockState(pos).getValue(TYPE) == EnumIngotType.ETHAXIUM ? Float.MAX_VALUE : super.getExplosionResistance(world, pos, exploder, explosion);
+		return world.getBlockState(pos).getValue(TYPE).getResistance();
 	}
 
 	@Override
@@ -74,7 +63,7 @@ public class IngotBlock extends Block {
 	@Override
 	public IBlockState getStateFromMeta(int meta)
 	{
-		return getDefaultState().withProperty(TYPE, EnumIngotType.byMetadata(meta));
+		return getDefaultState().withProperty(TYPE, EnumCobblestoneType.byMetadata(meta));
 	}
 
 	@Override
@@ -91,7 +80,7 @@ public class IngotBlock extends Block {
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
 	public void getSubBlocks(CreativeTabs par2CreativeTabs, NonNullList<ItemStack> par3List) {
-		for(int i = 0; i < EnumIngotType.values().length; i++)
+		for(int i = 0; i < EnumCobblestoneType.values().length; i++)
 			par3List.add(new ItemStack(this, 1, i));
 	}
 
@@ -101,29 +90,32 @@ public class IngotBlock extends Block {
 		return new BlockStateContainer.Builder(this).add(TYPE).build();
 	}
 
-	public static enum EnumIngotType implements IStringSerializable
+	public static enum EnumCobblestoneType implements IStringSerializable
 	{
-		ABYSSALNITE(0, "abyssalnite", "abyblock", 2, MapColor.PURPLE, TextFormatting.DARK_AQUA),
-		REFINED_CORALIUM(1, "refinedcoralium", "corblock", 5, MapColor.CYAN, TextFormatting.AQUA),
-		DREADIUM(2, "dreadium", "dreadiumblock", 6, MapColor.RED, TextFormatting.DARK_RED),
-		ETHAXIUM(3, "ethaxium", "ethaxiumblock", 8, MapColor.CLOTH, TextFormatting.AQUA);
+		DARKSTONE(0, "darkstone", "darkstone_cobble", 0, 2.2F, 12.0F, MapColor.BLACK),
+		ABYSSAL_STONE(1, "abyssalstone", "abyssalcobblestone", 2, 2.6F, 12.0F, MapColor.GREEN),
+		DREADSTONE(2, "dreadstone", "dreadstonecobblestone", 4, 3.3F, 20.0F, MapColor.RED),
+		ABYSSALNITE_STONE(3, "abyssalnitestone", "abyssalnitecobblestone", 4, 3.3F, 20.0F, MapColor.PURPLE),
+		CORALIUM_STONE(4, "coraliumstone", "coraliumcobblestone", 0, 2.0F, 10.0F, MapColor.CYAN);
 
-		private static final EnumIngotType[] META_LOOKUP = new EnumIngotType[values().length];
+		private static final EnumCobblestoneType[] META_LOOKUP = new EnumCobblestoneType[values().length];
 		private final int meta;
 		private final String name;
 		private final String state;
 		private final int harvest;
+		private final float hardness;
+		private final float resistance;
 		private final MapColor mapColor;
-		private final TextFormatting format;
 
-		private EnumIngotType(int meta, String name, String state, int harvest, MapColor mapColor, TextFormatting format)
+		private EnumCobblestoneType(int meta, String name, String state, int harvest, float hardness, float resistance, MapColor mapColor)
 		{
 			this.meta = meta;
 			this.name = name;
 			this.state = state;
 			this.harvest = harvest;
+			this.hardness = hardness;
+			this.resistance = resistance;
 			this.mapColor = mapColor;
-			this.format = format;
 		}
 
 		public int getMeta()
@@ -140,21 +132,25 @@ public class IngotBlock extends Block {
 			return harvest;
 		}
 
+		public float getHardness(){
+			return hardness;
+		}
+
+		public float getResistance(){
+			return resistance;
+		}
+
 		@Override
 		public String toString()
 		{
 			return name;
 		}
-
+		
 		public String getState(){
 			return state;
 		}
 
-		public TextFormatting getFormat(){
-			return format;
-		}
-
-		public static EnumIngotType byMetadata(int meta)
+		public static EnumCobblestoneType byMetadata(int meta)
 		{
 			if (meta < 0 || meta >= META_LOOKUP.length)
 				meta = 0;
@@ -170,7 +166,7 @@ public class IngotBlock extends Block {
 
 		static
 		{
-			for (EnumIngotType enumtype : values())
+			for (EnumCobblestoneType enumtype : values())
 				META_LOOKUP[enumtype.getMeta()] = enumtype;
 		}
 	}

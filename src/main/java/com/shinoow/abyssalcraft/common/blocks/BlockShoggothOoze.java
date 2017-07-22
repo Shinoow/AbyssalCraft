@@ -64,7 +64,7 @@ public class BlockShoggothOoze extends BlockACBasic {
 	}
 
 	@Override
-	public boolean isFullyOpaque(IBlockState state)
+	public boolean isTopSolid(IBlockState state)
 	{
 		return state.getValue(LAYERS).intValue() == 8;
 	}
@@ -118,9 +118,9 @@ public class BlockShoggothOoze extends BlockACBasic {
 		if(world.provider.getDimension() == ACLib.dreadlands_id)
 			return ACBlocks.dreadlands_dirt.getDefaultState();
 		if(world.provider.getDimension() == ACLib.omothol_id)
-			return ACBlocks.omothol_stone.getDefaultState();
+			return ACBlocks.stone.getStateFromMeta(6);
 		if(world.provider.getDimension() == ACLib.dark_realm_id)
-			return ACBlocks.darkstone.getDefaultState();
+			return ACBlocks.stone.getDefaultState();
 		if(world.provider.getDimension() == -1)
 			return Blocks.NETHERRACK.getDefaultState();
 		if(world.provider.getDimension() == 1)

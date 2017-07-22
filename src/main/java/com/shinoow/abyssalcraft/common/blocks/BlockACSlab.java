@@ -24,6 +24,7 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -50,7 +51,7 @@ public abstract class BlockACSlab extends BlockSlab {
 		super(par3Material);
 		setCreativeTab(null);
 		singleSlab = par1SingleSlab;
-		mapColor = par1SingleSlab.getMapColor(par1SingleSlab.getDefaultState());
+		mapColor = par1SingleSlab.getMapColor(par1SingleSlab.getDefaultState(), null, null);
 
 		setDefaultState(blockState.getBaseState().withProperty(VARIANT_PROPERTY, false));
 
@@ -87,7 +88,7 @@ public abstract class BlockACSlab extends BlockSlab {
 	}
 
 	@Override
-	public MapColor getMapColor(IBlockState state)
+	public MapColor getMapColor(IBlockState state, IBlockAccess p_180659_2_, BlockPos p_180659_3_)
 	{
 		return mapColor;
 	}

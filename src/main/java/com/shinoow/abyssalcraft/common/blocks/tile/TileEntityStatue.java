@@ -11,6 +11,7 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.common.blocks.tile;
 
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.effect.EntityLightningBolt;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -37,6 +38,7 @@ public class TileEntityStatue extends TileEntity implements IEnergyManipulator, 
 	private AmplifierType currentAmplifier;
 	private DeityType currentDeity;
 	private int tolerance;
+	private int facing;
 
 	@Override
 	public void readFromNBT(NBTTagCompound nbttagcompound)
@@ -46,6 +48,7 @@ public class TileEntityStatue extends TileEntity implements IEnergyManipulator, 
 		activationTimer = nbttagcompound.getInteger("ActivationTimer");
 		tolerance = nbttagcompound.getInteger("Tolerance");
 		PEUtils.readManipulatorNBT(this, nbttagcompound);
+		facing = nbttagcompound.getInteger("Facing");
 	}
 
 	@Override
@@ -56,6 +59,7 @@ public class TileEntityStatue extends TileEntity implements IEnergyManipulator, 
 		nbttagcompound.setInteger("ActivationTimer", activationTimer);
 		nbttagcompound.setInteger("Tolerance", tolerance);
 		PEUtils.writeManipulatorNBT(this, nbttagcompound);
+		nbttagcompound.setInteger("Facing", facing);
 
 		return nbttagcompound;
 	}
@@ -98,7 +102,7 @@ public class TileEntityStatue extends TileEntity implements IEnergyManipulator, 
 	}
 
 	@Override
-	public DeityType getDeity() {
+	public DeityType getDeity(IBlockState state) {
 
 		return null;
 	}
@@ -109,11 +113,11 @@ public class TileEntityStatue extends TileEntity implements IEnergyManipulator, 
 		if(type == currentAmplifier)
 			switch(type){
 			case DURATION:
-				return currentDeity == getDeity() ? 4 : 2;
+				return currentDeity == getDeity(world.getBlockState(pos)) ? 4 : 2;
 			case POWER:
-				return currentDeity == getDeity() ? 2.5F : 1.5F;
+				return currentDeity == getDeity(world.getBlockState(pos)) ? 2.5F : 1.5F;
 			case RANGE:
-				return currentDeity == getDeity() ? 6 : 4;
+				return currentDeity == getDeity(world.getBlockState(pos)) ? 6 : 4;
 			default:
 				return 0;
 			}
@@ -166,7 +170,7 @@ public class TileEntityStatue extends TileEntity implements IEnergyManipulator, 
 		tolerance = 0;
 		if(!world.isRemote){
 			world.addWeatherEffect(new EntityLightningBolt(world, pos.getX(), pos.getY() + 1, pos.getZ(), false));
-			DisruptionHandler.instance().generateDisruption(getDeity(), world, pos, world.getEntitiesWithinAABB(EntityPlayer.class, new AxisAlignedBB(pos).expand(16, 16, 16)));
+			DisruptionHandler.instance().generateDisruption(getDeity(world.getBlockState(pos)), world, pos, world.getEntitiesWithinAABB(EntityPlayer.class, new AxisAlignedBB(pos).expand(16, 16, 16)));
 		}
 	}
 
@@ -204,5 +208,13 @@ public class TileEntityStatue extends TileEntity implements IEnergyManipulator, 
 			}
 		if(tolerance >= 100)
 			disrupt();
+	}
+
+	public int getFacing(){
+		return facing;
+	}
+	
+	public void setFacing(int face){
+		facing = face;
 	}
 }

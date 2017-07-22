@@ -57,7 +57,7 @@ public class TransmutationRecipe extends BlankRecipeWrapper {
 	@Override
 	public void drawInfo(@Nonnull Minecraft minecraft, int recipeWidth, int recipeHeight, int mouseX, int mouseY) {
 		if (experienceString != null) {
-			FontRenderer fontRendererObj = minecraft.fontRendererObj;
+			FontRenderer fontRendererObj = minecraft.fontRenderer;
 			fontRendererObj.drawString(experienceString, 69 - fontRendererObj.getStringWidth(experienceString) / 2, 0, Color.gray.getRGB());
 		}
 	}

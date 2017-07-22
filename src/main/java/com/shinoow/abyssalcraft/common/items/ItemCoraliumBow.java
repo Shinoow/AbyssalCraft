@@ -13,6 +13,7 @@ package com.shinoow.abyssalcraft.common.items;
 
 import java.util.List;
 
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -90,7 +91,7 @@ public class ItemCoraliumBow extends ItemBow {
 
 	@Override
 	@SuppressWarnings({ "unchecked", "rawtypes" })
-	public void addInformation(ItemStack par1ItemStack, EntityPlayer entityplayer, List list, boolean is){
+	public void addInformation(ItemStack par1ItemStack, World entityplayer, List list, ITooltipFlag is){
 		list.add(I18n.translateToLocal("tooltip.corbow.1"));
 		list.add(I18n.translateToLocal("tooltip.corbow.2"));
 	}

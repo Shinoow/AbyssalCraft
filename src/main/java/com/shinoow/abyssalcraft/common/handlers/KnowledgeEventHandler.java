@@ -54,8 +54,8 @@ public class KnowledgeEventHandler {
 	public void onDeath(LivingDeathEvent event){
 		if(!(event.getEntityLiving() instanceof EntityPlayer) && !event.getEntityLiving().world.isRemote){
 			EntityLivingBase e = event.getEntityLiving();
-			if(event.getSource() != null && event.getSource().getEntity() instanceof EntityPlayer && EntityList.getKey(e) != null)
-				event.getSource().getEntity().getCapability(NecroDataCapabilityProvider.NECRO_DATA_CAP, null).triggerEntityUnlock(EntityList.getKey(e).toString());
+			if(event.getSource() != null && event.getSource().getTrueSource() instanceof EntityPlayer && EntityList.getKey(e) != null)
+				event.getSource().getTrueSource().getCapability(NecroDataCapabilityProvider.NECRO_DATA_CAP, null).triggerEntityUnlock(EntityList.getKey(e).toString());
 		}
 	}
 

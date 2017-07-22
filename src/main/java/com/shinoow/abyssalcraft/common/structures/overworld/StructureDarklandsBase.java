@@ -22,13 +22,14 @@ import net.minecraft.world.gen.feature.WorldGenerator;
 
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.common.blocks.BlockStatue;
+import com.shinoow.abyssalcraft.common.blocks.BlockStatue.EnumDeityType;
 
 public abstract class StructureDarklandsBase extends WorldGenerator {
 
 	protected void placeStatue(World world, Random rand, BlockPos pos){
 		if(rand.nextFloat() < 0.3F){
 			setBlockAndNotifyAdequately(world, pos, ACBlocks.monolith_pillar.getDefaultState());
-			setBlockAndNotifyAdequately(world, pos.up(), getStatue(rand).getDefaultState().withProperty(BlockStatue.FACING, EnumFacing.getHorizontal(rand.nextInt(3))));
+			setBlockAndNotifyAdequately(world, pos.up(), getStatue(rand).withProperty(BlockStatue.FACING, EnumFacing.getHorizontal(rand.nextInt(3))));
 		}
 	}
 
@@ -38,24 +39,7 @@ public abstract class StructureDarklandsBase extends WorldGenerator {
 		return rand.nextFloat() < 0.2 ? cracked_brick : brick;
 	}
 
-	private Block getStatue(Random rand){
-		switch(rand.nextInt(7)){
-		case 0:
-			return ACBlocks.cthulhu_statue;
-		case 1:
-			return ACBlocks.hastur_statue;
-		case 2:
-			return ACBlocks.jzahar_statue;
-		case 3:
-			return ACBlocks.azathoth_statue;
-		case 4:
-			return ACBlocks.nyarlathotep_statue;
-		case 5:
-			return ACBlocks.yog_sothoth_statue;
-		case 6:
-			return ACBlocks.shub_niggurath_statue;
-		default:
-			return getStatue(rand);
-		}
+	private IBlockState getStatue(Random rand){
+		return ACBlocks.statue.getDefaultState().withProperty(BlockStatue.TYPE, EnumDeityType.byMetadata(rand.nextInt(7)));
 	}
 }

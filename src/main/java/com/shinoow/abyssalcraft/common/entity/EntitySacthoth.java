@@ -213,7 +213,7 @@ public class EntitySacthoth extends EntityMob implements IAntiEntity, ICoraliumE
 	}
 
 	@Override
-	protected SoundEvent getHurtSound()
+	protected SoundEvent getHurtSound(DamageSource source)
 	{
 		return SoundEvents.ENTITY_BLAZE_HURT;
 	}

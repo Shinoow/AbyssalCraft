@@ -29,10 +29,7 @@ import net.minecraft.world.WorldType;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.chunk.ChunkPrimer;
-import net.minecraft.world.chunk.IChunkGenerator;
-import net.minecraft.world.gen.MapGenBase;
-import net.minecraft.world.gen.NoiseGeneratorOctaves;
-import net.minecraft.world.gen.NoiseGeneratorPerlin;
+import net.minecraft.world.gen.*;
 import net.minecraftforge.event.ForgeEventFactory;
 import net.minecraftforge.event.terraingen.TerrainGen;
 
@@ -152,7 +149,7 @@ public class ChunkProviderAbyss implements IChunkGenerator
 
 							for (int k3 = 0; k3 < 4; ++k3)
 								if ((d15 += d16) > 0.0D)
-									primer.setBlockState(k * 4 + i3, k2 * 8 + l2, j1 * 4 + k3, ACBlocks.abyssal_stone.getDefaultState());
+									primer.setBlockState(k * 4 + i3, k2 * 8 + l2, j1 * 4 + k3, ACBlocks.stone.getStateFromMeta(1));
 								else if (k2 * 8 + l2 < b0)
 									primer.setBlockState(k * 4 + i3, k2 * 8 + l2, j1 * 4 + k3, ACBlocks.liquid_coralium.getDefaultState());
 
@@ -190,7 +187,7 @@ public class ChunkProviderAbyss implements IChunkGenerator
 	 * specified chunk from the map seed and chunk seed
 	 */
 	@Override
-	public Chunk provideChunk(int x, int z)
+	public Chunk generateChunk(int x, int z)
 	{
 		rand.setSeed(x * 341873128712L + z * 132897987541L);
 		ChunkPrimer primer = new ChunkPrimer();
@@ -352,7 +349,7 @@ public class ChunkProviderAbyss implements IChunkGenerator
 			k1 = rand.nextInt(16) + 8;
 			l1 = rand.nextInt(128);
 			i2 = rand.nextInt(16) + 8;
-			new WorldGenAbyLake(ACBlocks.abyssal_stone).generate(worldObj, rand, pos.add(k1, l1, i2));
+			new WorldGenAbyLake(ACBlocks.stone.getStateFromMeta(1)).generate(worldObj, rand, pos.add(k1, l1, i2));
 		}
 		if(ACConfig.generateAbyssalWastelandPillars)
 			for(int i = 0; i < 1; i++) {
@@ -400,9 +397,9 @@ public class ChunkProviderAbyss implements IChunkGenerator
 	}
 
 	@Override
-	public BlockPos getStrongholdGen(World par1World, String par2String, BlockPos pos, boolean bool)
+	public BlockPos getNearestStructurePos(World par1World, String par2String, BlockPos pos, boolean bool)
 	{
-		return "AbyStronghold".equals(par2String) && strongholdGenerator != null ? strongholdGenerator.getClosestStrongholdPos(par1World, pos, bool) : null;
+		return "AbyStronghold".equals(par2String) && strongholdGenerator != null ? strongholdGenerator.getNearestStructurePos(par1World, pos, bool) : null;
 	}
 
 	@Override
@@ -416,5 +413,11 @@ public class ChunkProviderAbyss implements IChunkGenerator
 	public boolean generateStructures(Chunk chunkIn, int x, int z) {
 
 		return false;
+	}
+
+	@Override
+	public boolean isInsideStructure(World par1World, String par2String, BlockPos pos) {
+
+		return "AbyStronghold".equals(par2String) && strongholdGenerator != null ? strongholdGenerator.isInsideStructure(pos) : false;
 	}
 }

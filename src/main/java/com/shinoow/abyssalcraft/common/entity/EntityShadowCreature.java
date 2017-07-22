@@ -76,7 +76,7 @@ public class EntityShadowCreature extends EntityMob implements IAntiEntity, ICor
 	}
 
 	@Override
-	protected SoundEvent getHurtSound()
+	protected SoundEvent getHurtSound(DamageSource source)
 	{
 		return ACSounds.shadow_hurt;
 	}

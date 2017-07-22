@@ -37,16 +37,16 @@ public class BiomeGenCorSwamp extends Biome {
 		super(par1);
 		topBlock=Blocks.GRASS.getDefaultState();
 		fillerBlock=Blocks.DIRT.getDefaultState();
-		theBiomeDecorator.treesPerChunk = 2;
-		theBiomeDecorator.flowersPerChunk = 1;
-		theBiomeDecorator.deadBushPerChunk = 1;
-		theBiomeDecorator.mushroomsPerChunk = 8;
-		theBiomeDecorator.reedsPerChunk = 10;
-		theBiomeDecorator.clayPerChunk = 1;
-		theBiomeDecorator.waterlilyPerChunk = 4;
-		theBiomeDecorator.sandPerChunk2 = 0;
-		theBiomeDecorator.sandPerChunk = 0;
-		theBiomeDecorator.grassPerChunk = 5;
+		decorator.treesPerChunk = 2;
+		decorator.flowersPerChunk = 1;
+		decorator.deadBushPerChunk = 1;
+		decorator.mushroomsPerChunk = 8;
+		decorator.reedsPerChunk = 10;
+		decorator.clayPerChunk = 1;
+		decorator.waterlilyPerChunk = 4;
+		decorator.sandPatchesPerChunk = 0;
+		decorator.gravelPatchesPerChunk = 0;
+		decorator.grassPerChunk = 5;
 		spawnableMonsterList.add(new SpawnListEntry(EntityDepthsGhoul.class, 60, 1, 5));
 		spawnableMonsterList.add(new SpawnListEntry(EntityAbyssalZombie.class, 60, 1, 5));
 		spawnableCreatureList.add(new SpawnListEntry(EntityAntiPig.class, 5, 1, 2));
@@ -102,7 +102,7 @@ public class BiomeGenCorSwamp extends Biome {
 	}
 
 	@Override
-	public WorldGenAbstractTree genBigTreeChance(Random par1Random)
+	public WorldGenAbstractTree getRandomTreeFeature(Random par1Random)
 	{
 		return SWAMP_FEATURE;
 	}

@@ -37,8 +37,8 @@ public class GuiSpellbook extends GuiContainer {
 	{
 		IEnergyContainerItem container = (IEnergyContainerItem)spellbook.book.getItem();
 		String s = String.format("%d/%d PE", (int)container.getContainedEnergy(spellbook.book), container.getMaxEnergy(spellbook.book));
-		fontRendererObj.drawString(s, 15, 15, 4210752);
-		fontRendererObj.drawString(I18n.format("container.inventory"), 6, ySize - 92, 4210752);
+		fontRenderer.drawString(s, 15, 15, 4210752);
+		fontRenderer.drawString(I18n.format("container.inventory"), 6, ySize - 92, 4210752);
 	}
 
 	@Override

@@ -41,10 +41,15 @@ public class TransmutationRecipeMaker {
 
 			List<ItemStack> inputs = stackHelper.getSubtypes(input);
 			TransmutationRecipe recipe = new TransmutationRecipe(inputs, output, experience);
+			if(isRecipeValid(recipe))
 			recipes.add(recipe);
 		}
 
 		return recipes;
+	}
+
+	private static boolean isRecipeValid(@Nonnull TransmutationRecipe recipe) {
+		return recipe.getInputs().size() != 0 && recipe.getOutputs().size() > 0;
 	}
 
 	@SuppressWarnings("unchecked")

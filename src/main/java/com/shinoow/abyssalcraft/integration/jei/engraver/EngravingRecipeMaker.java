@@ -47,10 +47,15 @@ public class EngravingRecipeMaker {
 			} else inputs = Collections.singletonList(new ItemStack(ACItems.coin));
 
 			EngravingRecipeWrapper recipe = new EngravingRecipeWrapper(inputs, engraving, output, experience);
-			recipes.add(recipe);
+			if(isRecipeValid(recipe))
+				recipes.add(recipe);
 		}
 
 		return recipes;
+	}
+
+	private static boolean isRecipeValid(@Nonnull EngravingRecipeWrapper recipe) {
+		return recipe.getInputs().size() != 0 && recipe.getOutputs().size() > 0;
 	}
 
 	@SuppressWarnings("unchecked")

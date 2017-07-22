@@ -83,7 +83,7 @@ public class EntityShadowBeast extends EntityMob implements IAntiEntity, ICorali
 	}
 
 	@Override
-	protected SoundEvent getHurtSound()
+	protected SoundEvent getHurtSound(DamageSource source)
 	{
 		return ACSounds.shadow_hurt;
 	}

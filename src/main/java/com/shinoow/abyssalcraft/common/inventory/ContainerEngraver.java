@@ -47,7 +47,7 @@ public class ContainerEngraver extends Container {
 	public void addListener(IContainerListener listener)
 	{
 		super.addListener(listener);
-		listener.sendProgressBarUpdate(this, 0, tileEngraver.engraverProcessTime);
+		listener.sendWindowProperty(this, 0, tileEngraver.engraverProcessTime);
 	}
 
 	@Override
@@ -60,7 +60,7 @@ public class ContainerEngraver extends Container {
 			IContainerListener icrafting = listeners.get(i);
 
 			if (lastProcessTime != tileEngraver.engraverProcessTime)
-				icrafting.sendProgressBarUpdate(this, 0, tileEngraver.engraverProcessTime);
+				icrafting.sendWindowProperty(this, 0, tileEngraver.engraverProcessTime);
 		}
 
 		lastProcessTime = tileEngraver.engraverProcessTime;

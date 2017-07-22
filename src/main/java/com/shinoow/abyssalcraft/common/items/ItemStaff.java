@@ -14,6 +14,7 @@ package com.shinoow.abyssalcraft.common.items;
 import java.util.List;
 
 import net.minecraft.client.resources.I18n;
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
@@ -43,12 +44,14 @@ public class ItemStaff extends Item implements IStaffOfRending{
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void getSubItems(Item par1Item, CreativeTabs par2CreativeTab, NonNullList<ItemStack> par3List){
-		par3List.add(new ItemStack(par1Item));
-		ItemStack stack = new ItemStack(par1Item);
-		stack.setTagCompound(new NBTTagCompound());
-		stack.getTagCompound().setInteger("Mode", 1);
-		par3List.add(stack);
+	public void getSubItems(CreativeTabs par2CreativeTab, NonNullList<ItemStack> par3List){
+		if(isInCreativeTab(par2CreativeTab)){
+			par3List.add(new ItemStack(this));
+			ItemStack stack = new ItemStack(this);
+			stack.setTagCompound(new NBTTagCompound());
+			stack.getTagCompound().setInteger("Mode", 1);
+			par3List.add(stack);
+		}
 	}
 
 	@Override
@@ -59,7 +62,7 @@ public class ItemStaff extends Item implements IStaffOfRending{
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
-	public void addInformation(ItemStack is, EntityPlayer player, List l, boolean B){
+	public void addInformation(ItemStack is, World player, List l, ITooltipFlag B){
 		l.add(I18n.format("tooltip.staff"));
 		if(!is.hasTagCompound())
 			is.setTagCompound(new NBTTagCompound());

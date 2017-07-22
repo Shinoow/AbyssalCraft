@@ -14,6 +14,7 @@ package com.shinoow.abyssalcraft.common.world.gen;
 import java.util.Random;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.SoundCategory;
@@ -23,6 +24,7 @@ import net.minecraft.world.gen.feature.WorldGenerator;
 
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.common.blocks.BlockStatue;
+import com.shinoow.abyssalcraft.common.blocks.BlockStatue.EnumDeityType;
 
 public class WorldGenShoggothMonolith extends WorldGenerator {
 
@@ -63,18 +65,18 @@ public class WorldGenShoggothMonolith extends WorldGenerator {
 
 			int max = rand.nextInt(8) + 5;
 			for(int i = 0; i < max; i++){
-				setBlockAndNotifyAdequately(world, new BlockPos(x, y + i, z), ACBlocks.monolith_stone.getDefaultState());
-				setBlockAndNotifyAdequately(world, new BlockPos(x + 1, y + i, z), ACBlocks.monolith_stone.getDefaultState());
-				setBlockAndNotifyAdequately(world, new BlockPos(x -1, y + i, z), ACBlocks.monolith_stone.getDefaultState());
-				setBlockAndNotifyAdequately(world, new BlockPos(x, y + i, z + 1), ACBlocks.monolith_stone.getDefaultState());
-				setBlockAndNotifyAdequately(world, new BlockPos(x, y + i, z -1), ACBlocks.monolith_stone.getDefaultState());
-				setBlockAndNotifyAdequately(world, new BlockPos(x + 1, y + i, z + 1), ACBlocks.monolith_stone.getDefaultState());
-				setBlockAndNotifyAdequately(world, new BlockPos(x -1, y + i, z -1), ACBlocks.monolith_stone.getDefaultState());
-				setBlockAndNotifyAdequately(world, new BlockPos(x + 1, y + i, z -1), ACBlocks.monolith_stone.getDefaultState());
-				setBlockAndNotifyAdequately(world, new BlockPos(x -1, y + i, z + 1), ACBlocks.monolith_stone.getDefaultState());
+				setBlockAndNotifyAdequately(world, new BlockPos(x, y + i, z), ACBlocks.stone.getStateFromMeta(7));
+				setBlockAndNotifyAdequately(world, new BlockPos(x + 1, y + i, z), ACBlocks.stone.getStateFromMeta(7));
+				setBlockAndNotifyAdequately(world, new BlockPos(x -1, y + i, z), ACBlocks.stone.getStateFromMeta(7));
+				setBlockAndNotifyAdequately(world, new BlockPos(x, y + i, z + 1), ACBlocks.stone.getStateFromMeta(7));
+				setBlockAndNotifyAdequately(world, new BlockPos(x, y + i, z -1), ACBlocks.stone.getStateFromMeta(7));
+				setBlockAndNotifyAdequately(world, new BlockPos(x + 1, y + i, z + 1), ACBlocks.stone.getStateFromMeta(7));
+				setBlockAndNotifyAdequately(world, new BlockPos(x -1, y + i, z -1), ACBlocks.stone.getStateFromMeta(7));
+				setBlockAndNotifyAdequately(world, new BlockPos(x + 1, y + i, z -1), ACBlocks.stone.getStateFromMeta(7));
+				setBlockAndNotifyAdequately(world, new BlockPos(x -1, y + i, z + 1), ACBlocks.stone.getStateFromMeta(7));
 			}
 			setBlockAndNotifyAdequately(world, pos, ACBlocks.shoggoth_biomass.getDefaultState());
-			setBlockAndNotifyAdequately(world, new BlockPos(x, y + max, z), getStatue(rand).getDefaultState().withProperty(BlockStatue.FACING, EnumFacing.getHorizontal(rand.nextInt(3))));
+			setBlockAndNotifyAdequately(world, new BlockPos(x, y + max, z), getStatue(rand).withProperty(BlockStatue.FACING, EnumFacing.getHorizontal(rand.nextInt(3))));
 
 			world.playSound(null, pos.getX(), pos.getY(), pos.getZ(), SoundEvents.BLOCK_ANVIL_USE, SoundCategory.BLOCKS, 2, world.rand.nextFloat() * 0.1F * 0.9F);
 
@@ -82,24 +84,7 @@ public class WorldGenShoggothMonolith extends WorldGenerator {
 		}
 	}
 
-	private Block getStatue(Random rand){
-		switch(rand.nextInt(7)){
-		case 0:
-			return ACBlocks.cthulhu_statue;
-		case 1:
-			return ACBlocks.hastur_statue;
-		case 2:
-			return ACBlocks.jzahar_statue;
-		case 3:
-			return ACBlocks.azathoth_statue;
-		case 4:
-			return ACBlocks.nyarlathotep_statue;
-		case 5:
-			return ACBlocks.yog_sothoth_statue;
-		case 6:
-			return ACBlocks.shub_niggurath_statue;
-		default:
-			return getStatue(rand);
-		}
+	private IBlockState getStatue(Random rand){
+		return ACBlocks.statue.getDefaultState().withProperty(BlockStatue.TYPE, EnumDeityType.byMetadata(rand.nextInt(7)));
 	}
 }

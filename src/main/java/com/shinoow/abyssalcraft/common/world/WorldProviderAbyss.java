@@ -18,7 +18,7 @@ import net.minecraft.world.DimensionType;
 import net.minecraft.world.WorldProvider;
 import net.minecraft.world.biome.BiomeProviderSingle;
 import net.minecraft.world.chunk.Chunk;
-import net.minecraft.world.chunk.IChunkGenerator;
+import net.minecraft.world.gen.IChunkGenerator;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -37,7 +37,7 @@ public class WorldProviderAbyss extends WorldProvider {
 	public void init() {
 		biomeProvider = new BiomeProviderSingle(ACBiomes.abyssal_wastelands);
 		setDimension(ACLib.abyssal_wasteland_id);
-		hasNoSky = true;
+//		hasNoSky = true;
 	}
 
 	@Override

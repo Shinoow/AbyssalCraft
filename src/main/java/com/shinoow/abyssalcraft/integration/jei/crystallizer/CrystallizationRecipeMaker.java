@@ -42,10 +42,15 @@ public class CrystallizationRecipeMaker {
 
 			List<ItemStack> inputs = stackHelper.getSubtypes(input);
 			CrystallizationRecipe recipe = new CrystallizationRecipe(inputs, output, output2, experience);
-			recipes.add(recipe);
+			if(isRecipeValid(recipe))
+				recipes.add(recipe);
 		}
 
 		return recipes;
+	}
+
+	private static boolean isRecipeValid(@Nonnull CrystallizationRecipe recipe) {
+		return recipe.getInputs().size() != 0 && recipe.getOutputs().size() > 0;
 	}
 
 	@SuppressWarnings("unchecked")

@@ -18,16 +18,16 @@ import net.minecraft.block.BlockContainer;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyDirection;
+import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.EnumBlockRenderType;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.util.EnumHand;
+import net.minecraft.util.*;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
@@ -35,16 +35,19 @@ import net.minecraft.world.World;
 import net.minecraftforge.client.model.obj.OBJModel;
 
 import com.shinoow.abyssalcraft.api.energy.PEUtils;
+import com.shinoow.abyssalcraft.common.blocks.BlockCrystalCluster.EnumCrystalType;
+import com.shinoow.abyssalcraft.common.blocks.BlockRitualAltar.EnumRitualMatType;
 import com.shinoow.abyssalcraft.common.blocks.tile.TileEntityStatue;
 import com.shinoow.abyssalcraft.lib.ACTabs;
 
-public abstract class BlockStatue extends BlockContainer {
+public class BlockStatue extends BlockContainer {
 
 	public static final PropertyDirection FACING = PropertyDirection.create("facing");
+	public static final PropertyEnum<EnumDeityType> TYPE = PropertyEnum.create("type", EnumDeityType.class);
 
 	public BlockStatue() {
 		super(Material.ROCK);
-		setDefaultState(blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH));
+		setDefaultState(blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH).withProperty(TYPE, EnumDeityType.CTHULHU));
 		setHardness(6.0F);
 		setResistance(12.0F);
 		setSoundType(SoundType.STONE);
@@ -55,19 +58,44 @@ public abstract class BlockStatue extends BlockContainer {
 	@Override
 	public IBlockState getStateForPlacement(World world, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer, EnumHand hand)
 	{
-		return getDefaultState().withProperty(FACING, placer.getHorizontalFacing().getOpposite());
+		return getDefaultState().withProperty(FACING, placer.getHorizontalFacing().getOpposite()).withProperty(TYPE, EnumDeityType.byMetadata(meta));
+	}
+
+	@Override
+	public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos)
+	{
+		EnumFacing facing = EnumFacing.NORTH;
+		
+		TileEntity tile = worldIn.getTileEntity(pos);
+		if(tile instanceof TileEntityStatue){
+			facing = EnumFacing.getFront(((TileEntityStatue) tile).getFacing());
+		}
+		
+		return state.withProperty(FACING, facing);
 	}
 
 	@Override
 	public IBlockState getStateFromMeta(int meta)
 	{
-		return getDefaultState().withProperty(FACING, EnumFacing.getFront(meta));
+		return getDefaultState().withProperty(TYPE, EnumDeityType.byMetadata(meta));
 	}
 
 	@Override
 	public int getMetaFromState(IBlockState state)
 	{
-		return state.getValue(FACING).getIndex();
+		return ((EnumDeityType)state.getValue(TYPE)).getMeta();
+	}
+
+	@Override
+	public int damageDropped (IBlockState state) {
+		return ((EnumDeityType)state.getValue(TYPE)).getMeta();
+	}
+
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	@Override
+	public void getSubBlocks(CreativeTabs par2CreativeTabs, NonNullList<ItemStack> par3List) {
+		for(int i = 0; i < EnumDeityType.values().length; i++)
+			par3List.add(new ItemStack(this, 1, i));
 	}
 
 	@Override
@@ -127,9 +155,10 @@ public abstract class BlockStatue extends BlockContainer {
 	@Override
 	public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack)
 	{
-		if(stack.hasTagCompound()){
-			TileEntity tile = worldIn.getTileEntity(pos);
-			if(tile != null && tile instanceof TileEntityStatue){
+		TileEntity tile = worldIn.getTileEntity(pos);
+		if(tile instanceof TileEntityStatue){
+			((TileEntityStatue) tile).setFacing(state.getValue(FACING).getIndex());
+			if(stack.hasTagCompound()){
 				NBTTagCompound data = new NBTTagCompound();
 				tile.writeToNBT(data);
 				data.setInteger("Timer", stack.getTagCompound().getInteger("Timer"));
@@ -148,8 +177,61 @@ public abstract class BlockStatue extends BlockContainer {
 	}
 
 	@Override
+	public TileEntity createNewTileEntity(World worldIn, int meta) {
+
+		return new TileEntityStatue();
+	}
+
+	@Override
 	public BlockStateContainer createBlockState()
 	{
-		return new BlockStateContainer.Builder(this).add(FACING).add(OBJModel.OBJProperty.INSTANCE).build();
+		return new BlockStateContainer.Builder(this).add(FACING).add(OBJModel.OBJProperty.INSTANCE).add(TYPE).build();
+	}
+	
+	public enum EnumDeityType implements IStringSerializable {
+		CTHULHU(0, "cthulhu"),
+		HASTUR(1, "hastur"),
+		JZAHAR(2, "jzahar"),
+		AZATHOTH(3, "azathoth"),
+		NYARLATHOTEP(4, "nyarlathotep"),
+		YOGSOTHOTH(5, "yogsothoth"),
+		SHUBNIGGURATH(6, "shubniggurath");
+
+		private static final EnumDeityType[] META_LOOKUP = new EnumDeityType[values().length];
+
+		private int meta;
+		private String name;
+
+		private EnumDeityType(int meta, String name) {
+			this.meta = meta;
+			this.name = name;
+		}
+
+		public static EnumDeityType byMetadata(int meta)
+		{
+			if (meta < 0 || meta >= META_LOOKUP.length)
+				meta = 0;
+
+			return META_LOOKUP[meta];
+		}
+
+		@Override
+		public String getName() {
+			return name;
+		}
+
+		public int getMeta() {
+			return meta;
+		}
+
+		@Override
+		public String toString() {
+			return getName();
+		}
+
+		static {
+			for(EnumDeityType type : values())
+				META_LOOKUP[type.getMeta()] = type;
+		}
 	}
 }

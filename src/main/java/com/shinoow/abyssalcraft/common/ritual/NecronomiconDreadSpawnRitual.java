@@ -16,6 +16,7 @@ import java.util.List;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -31,7 +32,7 @@ import com.shinoow.abyssalcraft.common.entity.EntityLesserDreadbeast;
 public class NecronomiconDreadSpawnRitual extends NecronomiconRitual {
 
 	public NecronomiconDreadSpawnRitual() {
-		super("dreadSpawn", 2, 500F, new Object[]{ACItems.dread_fragment, ACBlocks.dreadstone, ACBlocks.abyssalnite_stone, ACItems.chunk_of_abyssalnite,
+		super("dreadSpawn", 2, 500F, new Object[]{ACItems.dread_fragment, new ItemStack(ACBlocks.stone, 1, 2), new ItemStack(ACBlocks.stone, 1, 3), ACItems.chunk_of_abyssalnite,
 				ACItems.dreaded_chunk_of_abyssalnite, Items.ROTTEN_FLESH, ACItems.dreaded_shard_of_abyssalnite, ACItems.abyssalnite_ingot});
 	}
 

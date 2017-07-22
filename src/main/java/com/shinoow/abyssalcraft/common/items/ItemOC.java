@@ -13,6 +13,7 @@ package com.shinoow.abyssalcraft.common.items;
 
 import java.util.List;
 
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.MobEffects;
 import net.minecraft.item.Item;
@@ -61,7 +62,7 @@ public class ItemOC extends Item {
 	}
 
 	@Override
-	public void addInformation(ItemStack is, EntityPlayer player, List<String> l, boolean B){
+	public void addInformation(ItemStack is, World player, List<String> l, ITooltipFlag B){
 		l.add(I18n.translateToLocal("tooltip.oc"));
 	}
 

@@ -22,6 +22,7 @@ import net.minecraft.client.renderer.*;
 import net.minecraft.client.renderer.GlStateManager.DestFactor;
 import net.minecraft.client.renderer.GlStateManager.SourceFactor;
 import net.minecraft.client.resources.I18n;
+import net.minecraft.client.util.ITooltipFlag.TooltipFlags;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.oredict.OreDictionary;
@@ -108,10 +109,10 @@ public class GuiNecronomiconRitualEntry extends GuiNecronomicon {
 		int k = (width - guiWidth) / 2;
 		byte b0 = 2;
 		String title = ritual.getLocalizedName();
-		fontRendererObj.drawSplitString(title, k + 20, b0 + 16, 116, 0xC40000);
+		fontRenderer.drawSplitString(title, k + 20, b0 + 16, 116, 0xC40000);
 
 		if(ritual.requiresSacrifice())
-			fontRendererObj.drawSplitString(localize(NecronomiconText.LABEL_SACRIFICE), k + 138, 164, 107, 0xC40000);
+			fontRenderer.drawSplitString(localize(NecronomiconText.LABEL_SACRIFICE), k + 138, 164, 107, 0xC40000);
 		writeText(1, localize(NecronomiconText.LABEL_REQUIRED_ENERGY) + ": " + ritual.getReqEnergy() + " PE", 125);
 		writeText(2, localize(NecronomiconText.LABEL_LOCATION) + ": " + getDimension(ritual.getDimension()));
 		writeText(2, ritual.getDescription(), 48);
@@ -158,7 +159,7 @@ public class GuiNecronomiconRitualEntry extends GuiNecronomicon {
 
 		if(tooltipStack != null)
 		{
-			List<String> tooltipData = tooltipStack.getTooltip(Minecraft.getMinecraft().player, false);
+			List<String> tooltipData = tooltipStack.getTooltip(Minecraft.getMinecraft().player, TooltipFlags.NORMAL);
 			List<String> parsedTooltip = new ArrayList();
 			boolean first = true;
 
@@ -206,7 +207,7 @@ public class GuiNecronomiconRitualEntry extends GuiNecronomicon {
 		GlStateManager.enableRescaleNormal();
 		GlStateManager.enableDepth();
 		render.renderItemAndEffectIntoGUI(stack, xPos, yPos);
-		render.renderItemOverlayIntoGUI(Minecraft.getMinecraft().fontRendererObj, stack, xPos, yPos, null);
+		render.renderItemOverlayIntoGUI(Minecraft.getMinecraft().fontRenderer, stack, xPos, yPos, null);
 		RenderHelper.disableStandardItemLighting();
 		GlStateManager.popMatrix();
 

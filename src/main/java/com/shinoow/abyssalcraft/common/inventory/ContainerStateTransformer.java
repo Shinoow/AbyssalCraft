@@ -46,7 +46,7 @@ public class ContainerStateTransformer extends Container {
 	public void addListener(IContainerListener listener)
 	{
 		super.addListener(listener);
-		listener.sendProgressBarUpdate(this, 0, tileEntityCompressorThing.processingTime);
+		listener.sendWindowProperty(this, 0, tileEntityCompressorThing.processingTime);
 	}
 
 	@Override
@@ -61,7 +61,7 @@ public class ContainerStateTransformer extends Container {
 			IContainerListener icrafting = listeners.get(i);
 
 			if (lastProcessTime != processingTime)
-				icrafting.sendProgressBarUpdate(this, 0, processingTime);
+				icrafting.sendWindowProperty(this, 0, processingTime);
 		}
 
 		lastProcessTime = processingTime;

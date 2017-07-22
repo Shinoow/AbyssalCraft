@@ -68,10 +68,10 @@ public class ContainerCrystallizer extends Container {
 	public void addListener(IContainerListener listener)
 	{
 		super.addListener(listener);
-		listener.sendProgressBarUpdate(this, 0, tileCrystallizer.crystallizerFormTime);
-		listener.sendProgressBarUpdate(this, 1, tileCrystallizer.crystallizerShapeTime);
-		listener.sendProgressBarUpdate(this, 2, tileCrystallizer.currentItemShapingTime);
-		listener.sendProgressBarUpdate(this, 3, tileCrystallizer.crystallizerFormTime);
+		listener.sendWindowProperty(this, 0, tileCrystallizer.crystallizerFormTime);
+		listener.sendWindowProperty(this, 1, tileCrystallizer.crystallizerShapeTime);
+		listener.sendWindowProperty(this, 2, tileCrystallizer.currentItemShapingTime);
+		listener.sendWindowProperty(this, 3, tileCrystallizer.crystallizerFormTime);
 	}
 
 	@Override
@@ -84,15 +84,15 @@ public class ContainerCrystallizer extends Container {
 			IContainerListener icrafting = listeners.get(i);
 
 			if (lastCookTime != tileCrystallizer.crystallizerFormTime)
-				icrafting.sendProgressBarUpdate(this, 0, tileCrystallizer.crystallizerFormTime);
+				icrafting.sendWindowProperty(this, 0, tileCrystallizer.crystallizerFormTime);
 
 			if (lastBurnTime != tileCrystallizer.crystallizerShapeTime)
-				icrafting.sendProgressBarUpdate(this, 1, tileCrystallizer.crystallizerShapeTime);
+				icrafting.sendWindowProperty(this, 1, tileCrystallizer.crystallizerShapeTime);
 
 			if (lastItemBurnTime != tileCrystallizer.currentItemShapingTime)
-				icrafting.sendProgressBarUpdate(this, 2, tileCrystallizer.currentItemShapingTime);
+				icrafting.sendWindowProperty(this, 2, tileCrystallizer.currentItemShapingTime);
 			if (lastCookTime2 != tileCrystallizer.crystallizerFormTime)
-				icrafting.sendProgressBarUpdate(this, 3, tileCrystallizer.crystallizerFormTime);
+				icrafting.sendWindowProperty(this, 3, tileCrystallizer.crystallizerFormTime);
 		}
 
 		lastCookTime = tileCrystallizer.crystallizerFormTime;

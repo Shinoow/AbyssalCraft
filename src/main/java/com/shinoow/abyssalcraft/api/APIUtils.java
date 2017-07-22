@@ -16,6 +16,7 @@ import java.util.List;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.Ingredient;
 import net.minecraftforge.oredict.OreDictionary;
 
 import com.shinoow.abyssalcraft.api.item.ICrystal;
@@ -75,12 +76,14 @@ public class APIUtils {
 			return new ItemStack((Item)obj);
 		else if(obj instanceof Block)
 			return new ItemStack((Block)obj);
+		else if(obj instanceof Ingredient)
+			return ((Ingredient) obj).getMatchingStacks().length > 0 ? ((Ingredient) obj).getMatchingStacks()[0].copy() : ItemStack.EMPTY;
 		else if(obj instanceof ItemStack[])
 			return ((ItemStack[])obj)[0].copy();
 		else if(obj instanceof String)
 			return OreDictionary.getOres((String)obj).get(0).copy();
 		else if(obj instanceof List)
 			return ((ItemStack)((List) obj).get(0)).copy();
-		else throw new ClassCastException("Not a Item, Block, ItemStack, Array of ItemStacks, String or List of ItemStacks!");
+		else throw new ClassCastException("Not a Item, Block, ItemStack, Ingredient, Array of ItemStacks, String or List of ItemStacks!");
 	}
 }

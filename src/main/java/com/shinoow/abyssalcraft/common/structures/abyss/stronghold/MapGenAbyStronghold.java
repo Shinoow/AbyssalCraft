@@ -68,7 +68,7 @@ public class MapGenAbyStronghold extends MapGenStructure
 	}
 
 	@Override
-	public BlockPos getClosestStrongholdPos(World worldIn, BlockPos pos, boolean bool)
+	public BlockPos getNearestStructurePos(World worldIn, BlockPos pos, boolean bool)
 	{
 		if (!ranBiomeCheck)
 		{
@@ -82,7 +82,7 @@ public class MapGenAbyStronghold extends MapGenStructure
 
 		for (ChunkPos chunkcoordintpair : structureCoords)
 		{
-			blockpos$mutableblockpos.setPos((chunkcoordintpair.chunkXPos << 4) + 8, 32, (chunkcoordintpair.chunkZPos << 4) + 8);
+			blockpos$mutableblockpos.setPos((chunkcoordintpair.x << 4) + 8, 32, (chunkcoordintpair.z << 4) + 8);
 			double d1 = blockpos$mutableblockpos.distanceSq(pos);
 
 			if (blockpos == null)
@@ -117,7 +117,7 @@ public class MapGenAbyStronghold extends MapGenStructure
 		{
 			ChunkPos var16 = var14[var5];
 
-			if (par1 == var16.chunkXPos && par2 == var16.chunkZPos)
+			if (par1 == var16.x && par2 == var16.z)
 				return true;
 		}
 

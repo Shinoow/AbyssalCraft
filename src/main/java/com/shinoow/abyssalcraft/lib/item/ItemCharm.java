@@ -13,6 +13,7 @@ package com.shinoow.abyssalcraft.lib.item;
 
 import java.util.List;
 
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
@@ -65,7 +66,7 @@ public class ItemCharm extends ItemMetadata implements IAmplifierCharm {
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
-	public void addInformation(ItemStack is, EntityPlayer player, List l, boolean B){
+	public void addInformation(ItemStack is, World player, List l, ITooltipFlag B){
 		l.add(I18n.translateToLocal("ac.text.amplifier") + ": " + EnergyEnum.getAmplifierName(getAmplifier(is)));
 		l.add(I18n.translateToLocal("ac.text.deity") + ": " + EnergyEnum.getDeityName(getDeity(is)));
 	}

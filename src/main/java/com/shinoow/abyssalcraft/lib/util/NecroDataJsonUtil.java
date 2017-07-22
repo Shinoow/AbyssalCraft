@@ -47,11 +47,11 @@ public class NecroDataJsonUtil {
 		json.addProperty("version", 1);
 		json.addProperty("identifier", data.getIdentifier());
 		json.addProperty("title", data.getTitle());
-		if(!Strings.isNullOrEmpty(data.getInformation()))
-			json.addProperty("information", data.getInformation());
+//		if(!Strings.isNullOrEmpty(data.getInformation())) //TODO clean up
+//			json.addProperty("information", data.getInformation());
 		JsonArray chapters = new JsonArray();
-		for(Chapter c : data.getChapters())
-			chapters.add(serializeChapter(c));
+//		for(Chapter c : data.getChapters())
+//			chapters.add(serializeChapter(c));
 		json.add("chapters", chapters);
 		return json;
 	}
@@ -93,7 +93,7 @@ public class NecroDataJsonUtil {
 						}
 					chaps = newchap;
 				}
-				return new NecroData(identifier, title, information.length() == 0 ? null : information, chaps);
+				return new NecroData(identifier, title, 0, information.length() == 0 ? null : information, chaps);
 			}
 		}
 		return null;
@@ -126,7 +126,7 @@ public class NecroDataJsonUtil {
 		if(getString(json, "type").equals("chapter") && getInteger(json, "version") <= 1){
 			String identifier = getString(json, "identifier");
 			String title = getString(json, "title");
-			Chapter chapter = new Chapter(identifier, I18n.translateToLocal(title));
+			Chapter chapter = new Chapter(identifier, title, 0);
 			JsonArray pages = getArray(json, "pages");
 			if(pages != null)
 				for(JsonElement e : pages)
@@ -165,7 +165,7 @@ public class NecroDataJsonUtil {
 			int num = getInteger(json, "number");
 			Object icon = getIcon(json);
 			String text = getString(json, "text");
-			return new Page(num, icon, I18n.translateToLocal(text));
+			return new Page(num, "Title", 0, icon, text);
 		}
 		return null;
 	}

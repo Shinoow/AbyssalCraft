@@ -97,7 +97,7 @@ public class GuiNecronomiconSpells extends GuiNecronomicon {
 		byte b0 = 2;
 		String stuff;
 		stuff = localize(NecronomiconText.LABEL_SPELLBOOK);
-		fontRendererObj.drawSplitString(stuff, k + 20, b0 + 16, 116, 0xC40000);
+		fontRenderer.drawSplitString(stuff, k + 20, b0 + 16, 116, 0xC40000);
 		writeText(2, book != null ? NecronomiconText.WIP : "Whoops");
 	}
 }

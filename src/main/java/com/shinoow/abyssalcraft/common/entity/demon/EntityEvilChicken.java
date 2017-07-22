@@ -87,7 +87,7 @@ public class EntityEvilChicken extends EntityMob implements IShearable {
 	}
 
 	@Override
-	protected SoundEvent getHurtSound()
+	protected SoundEvent getHurtSound(DamageSource source)
 	{
 		return SoundEvents.ENTITY_GHAST_HURT;
 	}
@@ -138,7 +138,7 @@ public class EntityEvilChicken extends EntityMob implements IShearable {
 		super.onDeath(par1DamageSource);
 
 		if(!world.isRemote)
-			if(!(par1DamageSource.getEntity() instanceof EntityLesserShoggoth))
+			if(!(par1DamageSource.getTrueSource() instanceof EntityLesserShoggoth))
 			{
 				EntityDemonChicken demonchicken = new EntityDemonChicken(world);
 				demonchicken.copyLocationAndAnglesFrom(this);

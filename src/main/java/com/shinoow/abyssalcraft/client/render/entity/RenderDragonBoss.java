@@ -142,7 +142,7 @@ public class RenderDragonBoss extends RenderLiving<EntityDragonBoss> {
 			GlStateManager.rotate((float)-Math.atan2(f4, f2) * 180.0F / (float)Math.PI - 90.0F, 0.0F, 1.0F, 0.0F);
 			GlStateManager.rotate((float)-Math.atan2(f5, f3) * 180.0F / (float)Math.PI - 90.0F, 1.0F, 0.0F, 0.0F);
 			Tessellator tessellator = Tessellator.getInstance();
-			VertexBuffer worldrenderer = tessellator.getBuffer();
+			BufferBuilder worldrenderer = tessellator.getBuffer();
 			RenderHelper.disableStandardItemLighting();
 			GlStateManager.disableCull();
 			bindTexture(field_110842_f);

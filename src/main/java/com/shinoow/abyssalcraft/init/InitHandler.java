@@ -11,6 +11,8 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.init;
 
+import static com.shinoow.abyssalcraft.AbyssalCraft.modid;
+import static com.shinoow.abyssalcraft.init.InitHandler.*;
 import static com.shinoow.abyssalcraft.lib.ACConfig.*;
 
 import java.io.BufferedReader;
@@ -19,28 +21,49 @@ import java.io.InputStreamReader;
 import java.net.URL;
 import java.util.List;
 
+import net.minecraft.block.Block;
+import net.minecraft.enchantment.Enchantment;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityList;
+import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.IRecipe;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.potion.Potion;
+import net.minecraft.potion.PotionType;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.text.TextFormatting;
-import net.minecraftforge.common.MinecraftForge;
+import net.minecraft.world.biome.Biome;
+import net.minecraftforge.common.*;
+import net.minecraftforge.common.BiomeDictionary.Type;
+import net.minecraftforge.common.BiomeManager.BiomeEntry;
+import net.minecraftforge.common.BiomeManager.BiomeType;
 import net.minecraftforge.common.config.Configuration;
-import net.minecraftforge.fluids.Fluid;
-import net.minecraftforge.fluids.FluidRegistry;
+import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.fluids.*;
 import net.minecraftforge.fml.client.event.ConfigChangedEvent;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.event.*;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.oredict.OreDictionary;
+import net.minecraftforge.oredict.ShapedOreRecipe;
+import net.minecraftforge.oredict.ShapelessOreRecipe;
 
 import com.google.common.collect.Lists;
 import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
+import com.shinoow.abyssalcraft.api.biome.ACBiomes;
+import com.shinoow.abyssalcraft.api.block.ACBlocks;
+import com.shinoow.abyssalcraft.api.item.ACItems;
 import com.shinoow.abyssalcraft.common.CommonProxy;
+import com.shinoow.abyssalcraft.common.blocks.BlockCrystalCluster.EnumCrystalType;
+import com.shinoow.abyssalcraft.common.blocks.BlockCrystalCluster2.EnumCrystalType2;
 import com.shinoow.abyssalcraft.common.entity.EntityAbyssalZombie;
 import com.shinoow.abyssalcraft.common.entity.EntityDepthsGhoul;
 import com.shinoow.abyssalcraft.common.entity.EntityOmotholGhoul;
@@ -48,7 +71,9 @@ import com.shinoow.abyssalcraft.common.entity.anti.EntityAntiAbyssalZombie;
 import com.shinoow.abyssalcraft.common.entity.anti.EntityAntiGhoul;
 import com.shinoow.abyssalcraft.common.handlers.*;
 import com.shinoow.abyssalcraft.common.util.ACLogger;
+import com.shinoow.abyssalcraft.common.util.ShapedNBTRecipe;
 import com.shinoow.abyssalcraft.lib.ACLib;
+import com.shinoow.abyssalcraft.lib.util.RitualUtil;
 
 public class InitHandler implements ILifeCycleHandler {
 
@@ -73,6 +98,14 @@ public class InitHandler implements ILifeCycleHandler {
 	private static final List<ItemStack> anti_abyssal_zombie_blacklist = Lists.newArrayList();
 	private static final List<ItemStack> anti_ghoul_blacklist = Lists.newArrayList();
 	private static final List<ItemStack> omothol_ghoul_blacklist = Lists.newArrayList();
+	
+	final List<Block> BLOCKS = Lists.newArrayList();
+	final List<Item> ITEMS = Lists.newArrayList();
+	final List<Biome> BIOMES = Lists.newArrayList();
+	final List<Enchantment> ENCHANTMENTS = Lists.newArrayList();
+	final List<Potion> POTIONS = Lists.newArrayList();
+	final List<PotionType> POTION_TYPES = Lists.newArrayList();
+	final List<SoundEvent> SOUND_EVENTS = Lists.newArrayList();
 
 	@Override
 	public void preInit(FMLPreInitializationEvent event) {
@@ -161,6 +194,88 @@ public class InitHandler implements ILifeCycleHandler {
 	public void onConfigChanged(ConfigChangedEvent.OnConfigChangedEvent eventArgs) {
 		if(eventArgs.getModID().equals("abyssalcraft"))
 			syncConfig();
+	}
+
+	@SubscribeEvent
+	public void registerBlocks(RegistryEvent.Register<Block> event){
+		event.getRegistry().registerAll(BLOCKS.toArray(new Block[0]));
+		RitualUtil.addBlocks();
+	}
+	
+	@SubscribeEvent
+	public void registerItems(RegistryEvent.Register<Item> event){
+		event.getRegistry().registerAll(ITEMS.toArray(new Item[0]));
+		ACItems.liquid_coralium_bucket_stack = FluidUtil.getFilledBucket(new FluidStack(AbyssalCraftAPI.liquid_coralium_fluid, Fluid.BUCKET_VOLUME));
+		ACItems.liquid_antimatter_bucket_stack = FluidUtil.getFilledBucket(new FluidStack(AbyssalCraftAPI.liquid_antimatter_fluid, Fluid.BUCKET_VOLUME));
+
+		AbyssalCraftAPI.setRepairItems();
+		MiscHandler.addOreDictionaryStuff();
+	}
+
+	@SubscribeEvent
+	public void registerBiomes(RegistryEvent.Register<Biome> event){
+		event.getRegistry().registerAll(BIOMES.toArray(new Biome[0]));
+		
+		if(dark1){
+			registerBiomeWithTypes(ACBiomes.darklands, "darklands", darkWeight1, BiomeType.WARM, Type.WASTELAND, Type.SPOOKY);
+			BiomeManager.addVillageBiome(ACBiomes.darklands, true);
+		}
+		if(dark2){
+			registerBiomeWithTypes(ACBiomes.darklands_forest, "darklands_forest", darkWeight2, BiomeType.WARM, Type.FOREST, Type.SPOOKY);
+			BiomeManager.addVillageBiome(ACBiomes.darklands_forest, true);
+		}
+		if(dark3){
+			registerBiomeWithTypes(ACBiomes.darklands_plains, "darklands_plains", darkWeight3, BiomeType.WARM, Type.PLAINS, Type.SPOOKY);
+			BiomeManager.addVillageBiome(ACBiomes.darklands_plains, true);
+		}
+		if(dark4)
+			registerBiomeWithTypes(ACBiomes.darklands_hills, "darklands_hills", darkWeight4, BiomeType.COOL, Type.HILLS, Type.SPOOKY);
+		if(dark5){
+			registerBiomeWithTypes(ACBiomes.darklands_mountains, "darklands_mountains", darkWeight5, BiomeType.COOL, Type.MOUNTAIN, Type.SPOOKY);
+			BiomeManager.addStrongholdBiome(ACBiomes.darklands_mountains);
+		}
+		if(coralium1)
+			registerBiomeWithTypes(ACBiomes.coralium_infested_swamp, "coralium_infested_swamp", coraliumWeight, BiomeType.WARM, Type.SWAMP);
+		if(darkspawn1)
+			BiomeManager.addSpawnBiome(ACBiomes.darklands);
+		if(darkspawn2)
+			BiomeManager.addSpawnBiome(ACBiomes.darklands_forest);
+		if(darkspawn3)
+			BiomeManager.addSpawnBiome(ACBiomes.darklands_plains);
+		if(darkspawn4)
+			BiomeManager.addSpawnBiome(ACBiomes.darklands_hills);
+		if(darkspawn5)
+			BiomeManager.addSpawnBiome(ACBiomes.darklands_mountains);
+		if(coraliumspawn1)
+			BiomeManager.addSpawnBiome(ACBiomes.coralium_infested_swamp);
+		
+		BiomeDictionary.addTypes(ACBiomes.abyssal_wastelands, Type.DEAD);
+		BiomeDictionary.addTypes(ACBiomes.dreadlands, Type.DEAD);
+		BiomeDictionary.addTypes(ACBiomes.purified_dreadlands, Type.DEAD);
+		BiomeDictionary.addTypes(ACBiomes.dreadlands_mountains, Type.DEAD);
+		BiomeDictionary.addTypes(ACBiomes.dreadlands_forest, Type.DEAD);
+		BiomeDictionary.addTypes(ACBiomes.omothol, Type.DEAD);
+		BiomeDictionary.addTypes(ACBiomes.dark_realm, Type.DEAD);
+	}
+	
+	@SubscribeEvent
+	public void registerEnchantments(RegistryEvent.Register<Enchantment> event){
+		event.getRegistry().registerAll(ENCHANTMENTS.toArray(new Enchantment[0]));
+	}
+	
+	@SubscribeEvent
+	public void registerPotions(RegistryEvent.Register<Potion> event){
+		event.getRegistry().registerAll(POTIONS.toArray(new Potion[0]));
+	}
+	
+	@SubscribeEvent
+	public void registerPotionTypes(RegistryEvent.Register<PotionType> event){
+		event.getRegistry().registerAll(POTION_TYPES.toArray(new PotionType[0]));
+	}
+	
+	@SubscribeEvent
+	public void registerSoundEvents(RegistryEvent.Register<SoundEvent> event){
+		event.getRegistry().registerAll(SOUND_EVENTS.toArray(new SoundEvent[0]));
 	}
 
 	private static void syncConfig(){
@@ -368,6 +483,12 @@ public class InitHandler implements ILifeCycleHandler {
 			if(str.equals(id))
 				return true;
 		return false;
+	}
+
+	private static void registerBiomeWithTypes(Biome biome, String name, int weight, BiomeType btype, Type...types){
+//		InitHandler.BIOMES.add(biome.setRegistryName(new ResourceLocation(modid, name)));
+		BiomeDictionary.addTypes(biome, types);
+		BiomeManager.addBiome(btype, new BiomeEntry(biome, weight));
 	}
 
 	private String getSupporterList(){

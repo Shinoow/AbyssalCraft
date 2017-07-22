@@ -31,6 +31,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.*;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
@@ -44,7 +45,7 @@ import com.shinoow.abyssalcraft.lib.util.blocks.SingletonInventoryUtil;
 
 public class BlockRitualPedestal extends BlockContainer {
 
-	private static HashMap<Integer, Block> blockMeta = Maps.newHashMap();
+	private static HashMap<Integer, IBlockState> blockMeta = Maps.newHashMap();
 	public static final PropertyEnum MATERIAL = PropertyEnum.create("material", EnumRitualMatType.class);
 
 	public BlockRitualPedestal() {
@@ -64,15 +65,15 @@ public class BlockRitualPedestal extends BlockContainer {
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
-	public void getSubBlocks(Item par1, CreativeTabs par2CreativeTabs, NonNullList<ItemStack> par3List) {
-		par3List.add(new ItemStack(par1, 1, 0));
-		par3List.add(new ItemStack(par1, 1, 1));
-		par3List.add(new ItemStack(par1, 1, 2));
-		par3List.add(new ItemStack(par1, 1, 3));
-		par3List.add(new ItemStack(par1, 1, 4));
-		par3List.add(new ItemStack(par1, 1, 5));
-		par3List.add(new ItemStack(par1, 1, 6));
-		par3List.add(new ItemStack(par1, 1, 7));
+	public void getSubBlocks(CreativeTabs par2CreativeTabs, NonNullList<ItemStack> par3List) {
+		par3List.add(new ItemStack(this, 1, 0));
+		par3List.add(new ItemStack(this, 1, 1));
+		par3List.add(new ItemStack(this, 1, 2));
+		par3List.add(new ItemStack(this, 1, 3));
+		par3List.add(new ItemStack(this, 1, 4));
+		par3List.add(new ItemStack(this, 1, 5));
+		par3List.add(new ItemStack(this, 1, 6));
+		par3List.add(new ItemStack(this, 1, 7));
 	}
 
 	@Override
@@ -100,8 +101,20 @@ public class BlockRitualPedestal extends BlockContainer {
 	@Override
 	public Item getItemDropped(IBlockState state, Random random, int j)
 	{
-		return Item.getItemFromBlock(blockMeta.get(((EnumRitualMatType)state.getValue(MATERIAL)).getMeta()));
+		return Item.getItemFromBlock(blockMeta.get(((EnumRitualMatType)state.getValue(MATERIAL)).getMeta()).getBlock());
 	}
+
+	@Override
+	public int damageDropped(IBlockState state){
+		IBlockState s = blockMeta.get(((EnumRitualMatType)state.getValue(MATERIAL)).getMeta());
+		return s.getBlock().getMetaFromState(s);
+	}
+
+	@Override
+	public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos, EntityPlayer player)
+    {
+		return new ItemStack(Item.getItemFromBlock(this));
+    }
 
 	@Override
 	public boolean canSilkHarvest(World world, BlockPos pos, IBlockState state, EntityPlayer player)
@@ -160,13 +173,13 @@ public class BlockRitualPedestal extends BlockContainer {
 	}
 
 	public void setBlocks() {
-		blockMeta.put(0, Blocks.COBBLESTONE);
-		blockMeta.put(1, ACBlocks.darkstone_cobblestone);
-		blockMeta.put(2, ACBlocks.abyssal_cobblestone);
-		blockMeta.put(3, ACBlocks.coralium_cobblestone);
-		blockMeta.put(4, ACBlocks.dreadstone_cobblestone);
-		blockMeta.put(5, ACBlocks.abyssalnite_cobblestone);
-		blockMeta.put(6, ACBlocks.ethaxium_brick);
-		blockMeta.put(7, ACBlocks.dark_ethaxium_brick);
+		blockMeta.put(0, Blocks.COBBLESTONE.getDefaultState());
+		blockMeta.put(1, ACBlocks.cobblestone.getStateFromMeta(0));
+		blockMeta.put(2, ACBlocks.cobblestone.getStateFromMeta(1));
+		blockMeta.put(3, ACBlocks.cobblestone.getStateFromMeta(2));
+		blockMeta.put(4, ACBlocks.cobblestone.getStateFromMeta(3));
+		blockMeta.put(5, ACBlocks.cobblestone.getStateFromMeta(4));
+		blockMeta.put(6, ACBlocks.ethaxium_brick.getDefaultState());
+		blockMeta.put(7, ACBlocks.dark_ethaxium_brick.getDefaultState());
 	}
 }

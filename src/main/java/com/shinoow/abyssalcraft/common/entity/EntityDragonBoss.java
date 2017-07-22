@@ -15,7 +15,6 @@ import java.util.Iterator;
 import java.util.List;
 
 import net.minecraft.entity.*;
-import net.minecraft.entity.boss.EntityDragonPart;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.item.EntityXPOrb;
 import net.minecraft.entity.monster.EntityMob;
@@ -60,18 +59,18 @@ public class EntityDragonBoss extends EntityMob implements IEntityMultiPart, ICo
 	public int ringBufferIndex = -1;
 
 	/** An array containing all body parts of this dragon */
-	public EntityDragonPart[] dragonPartArray;
+	public MultiPartEntityPart[] dragonPartArray;
 
 	/** The head bounding box of a dragon */
-	public EntityDragonPart dragonPartHead;
+	public MultiPartEntityPart dragonPartHead;
 
 	/** The body bounding box of a dragon */
-	public EntityDragonPart dragonPartBody;
-	public EntityDragonPart dragonPartTail1;
-	public EntityDragonPart dragonPartTail2;
-	public EntityDragonPart dragonPartTail3;
-	public EntityDragonPart dragonPartWing1;
-	public EntityDragonPart dragonPartWing2;
+	public MultiPartEntityPart dragonPartBody;
+	public MultiPartEntityPart dragonPartTail1;
+	public MultiPartEntityPart dragonPartTail2;
+	public MultiPartEntityPart dragonPartTail3;
+	public MultiPartEntityPart dragonPartWing1;
+	public MultiPartEntityPart dragonPartWing2;
 
 	/** Animation time at previous tick. */
 	public float prevAnimTime;
@@ -93,7 +92,7 @@ public class EntityDragonBoss extends EntityMob implements IEntityMultiPart, ICo
 
 	public EntityDragonBoss(World par1World) {
 		super(par1World);
-		dragonPartArray = new EntityDragonPart[] {dragonPartHead = new EntityDragonPart(this, "head", 9.0F, 9.0F), dragonPartBody = new EntityDragonPart(this, "body", 12.0F, 12.0F), dragonPartTail1 = new EntityDragonPart(this, "tail", 6.0F, 6.0F), dragonPartTail2 = new EntityDragonPart(this, "tail", 6.0F, 6.0F), dragonPartTail3 = new EntityDragonPart(this, "tail", 6.0F, 6.0F), dragonPartWing1 = new EntityDragonPart(this, "wing", 6.0F, 6.0F), dragonPartWing2 = new EntityDragonPart(this, "wing", 6.0F, 6.0F)};
+		dragonPartArray = new MultiPartEntityPart[] {dragonPartHead = new MultiPartEntityPart(this, "head", 9.0F, 9.0F), dragonPartBody = new MultiPartEntityPart(this, "body", 12.0F, 12.0F), dragonPartTail1 = new MultiPartEntityPart(this, "tail", 6.0F, 6.0F), dragonPartTail2 = new MultiPartEntityPart(this, "tail", 6.0F, 6.0F), dragonPartTail3 = new MultiPartEntityPart(this, "tail", 6.0F, 6.0F), dragonPartWing1 = new MultiPartEntityPart(this, "wing", 6.0F, 6.0F), dragonPartWing2 = new MultiPartEntityPart(this, "wing", 6.0F, 6.0F)};
 		setHealth(getMaxHealth());
 		setSize(24.0F, 12.0F);
 		noClip = false;
@@ -151,10 +150,10 @@ public class EntityDragonBoss extends EntityMob implements IEntityMultiPart, ICo
 	public void onDeath(DamageSource par1DamageSource)
 	{
 		bossInfo.setPercent(getHealth() / getMaxHealth());
-		if (par1DamageSource.getEntity() instanceof EntityPlayer)
+		if (par1DamageSource.getTrueSource() instanceof EntityPlayer)
 		{
-			EntityPlayer entityplayer = (EntityPlayer)par1DamageSource.getEntity();
-			entityplayer.addStat(ACAchievements.kill_asorah, 1);
+			EntityPlayer entityplayer = (EntityPlayer)par1DamageSource.getTrueSource();
+//			entityplayer.addStat(ACAchievements.kill_asorah, 1);
 		}
 		super.onDeath(par1DamageSource);
 	}
@@ -323,7 +322,7 @@ public class EntityDragonBoss extends EntityMob implements IEntityMultiPart, ICo
 				rotationYaw += randomYawVelocity * 0.1F;
 				float f6 = (float)(2.0D / (d10 + 1.0D));
 				float f7 = 0.06F;
-				moveRelative(0.0F, -1.0F, f7 * (f4 * f6 + (1.0F - f6)));
+				moveRelative(0.0F, 0.0F, -1.0F, f7 * (f4 * f6 + (1.0F - f6)));
 
 
 				move(MoverType.SELF, motionX, motionY, motionZ);
@@ -377,16 +376,16 @@ public class EntityDragonBoss extends EntityMob implements IEntityMultiPart, ICo
 
 			for (int j = 0; j < 3; ++j)
 			{
-				EntityDragonPart entitydragonpart = null;
+				MultiPartEntityPart MultiPartEntityPart = null;
 
 				if (j == 0)
-					entitydragonpart = dragonPartTail1;
+					MultiPartEntityPart = dragonPartTail1;
 
 				if (j == 1)
-					entitydragonpart = dragonPartTail2;
+					MultiPartEntityPart = dragonPartTail2;
 
 				if (j == 2)
-					entitydragonpart = dragonPartTail3;
+					MultiPartEntityPart = dragonPartTail3;
 
 				double[] adouble2 = getMovementOffsets(12 + j * 2, 1.0F);
 				float f14 = rotationYaw * (float)Math.PI / 180.0F + simplifyAngle(adouble2[0] - adouble[0]) * (float)Math.PI / 180.0F * 1.0F;
@@ -394,8 +393,8 @@ public class EntityDragonBoss extends EntityMob implements IEntityMultiPart, ICo
 				float f16 = MathHelper.cos(f14);
 				float f17 = 1.5F;
 				float f18 = (j + 1) * 3.0F;
-				entitydragonpart.onUpdate();
-				entitydragonpart.setLocationAndAngles(posX - (f11 * f17 + f15 * f18) * f2, posY + (adouble2[1] - adouble[1]) * 1.0D - (f18 + f17) * f9 + 1.5D, posZ + (f12 * f17 + f16 * f18) * f2, 0.0F, 0.0F);
+				MultiPartEntityPart.onUpdate();
+				MultiPartEntityPart.setLocationAndAngles(posX - (f11 * f17 + f15 * f18) * f2, posY + (adouble2[1] - adouble[1]) * 1.0D - (f18 + f17) * f9 + 1.5D, posZ + (f12 * f17 + f16 * f18) * f2, 0.0F, 0.0F);
 			}
 		}
 
@@ -539,9 +538,9 @@ public class EntityDragonBoss extends EntityMob implements IEntityMultiPart, ICo
 	}
 
 	@Override
-	public boolean attackEntityFromPart(EntityDragonPart par1EntityDragonPart, DamageSource par2DamageSource, float par3)
+	public boolean attackEntityFromPart(MultiPartEntityPart par1MultiPartEntityPart, DamageSource par2DamageSource, float par3)
 	{
-		if (par1EntityDragonPart != dragonPartHead)
+		if (par1MultiPartEntityPart != dragonPartHead)
 			par3 = par3 / 4.0F + 1.0F;
 
 		if(par3 > 30) par3 = 10 + world.rand.nextInt(10);
@@ -554,7 +553,7 @@ public class EntityDragonBoss extends EntityMob implements IEntityMultiPart, ICo
 		targetZ = posZ - f3 * 5.0F + (rand.nextFloat() - 0.5F) * 2.0F;
 		target = null;
 
-		if (par2DamageSource.getEntity() instanceof EntityPlayer || par2DamageSource.isExplosion())
+		if (par2DamageSource.getTrueSource() instanceof EntityPlayer || par2DamageSource.isExplosion())
 			func_82195_e(par2DamageSource, par3);
 
 		return true;
@@ -655,7 +654,7 @@ public class EntityDragonBoss extends EntityMob implements IEntityMultiPart, ICo
 	}
 
 	@Override
-	protected SoundEvent getHurtSound()
+	protected SoundEvent getHurtSound(DamageSource source)
 	{
 		return SoundEvents.ENTITY_ENDERDRAGON_HURT;
 	}

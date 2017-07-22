@@ -102,7 +102,7 @@ public class EntitySkeletonGoliath extends EntityMob {
 	}
 
 	@Override
-	protected SoundEvent getHurtSound()
+	protected SoundEvent getHurtSound(DamageSource source)
 	{
 		return SoundEvents.ENTITY_SKELETON_HURT;
 	}
@@ -149,7 +149,7 @@ public class EntitySkeletonGoliath extends EntityMob {
 	{
 		if (world.isDaytime() && !world.isRemote && world.provider.getDimension() != ACLib.abyssal_wasteland_id)
 		{
-			float f = getBrightness(1.0F);
+			float f = getBrightness();
 
 			if (f > 0.5F && rand.nextFloat() * 30.0F < (f - 0.4F) * 2.0F && world.canSeeSky(new BlockPos(MathHelper.floor(posX), MathHelper.floor(posY), MathHelper.floor(posZ))))
 			{

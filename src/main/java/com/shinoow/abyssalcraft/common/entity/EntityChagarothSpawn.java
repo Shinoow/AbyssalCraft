@@ -126,7 +126,7 @@ public class EntityChagarothSpawn extends EntityMob implements IDreadEntity {
 	}
 
 	@Override
-	protected SoundEvent getHurtSound()
+	protected SoundEvent getHurtSound(DamageSource source)
 	{
 		return ACSounds.dread_spawn_hurt;
 	}

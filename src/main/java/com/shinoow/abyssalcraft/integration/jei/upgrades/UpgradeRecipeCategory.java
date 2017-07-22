@@ -11,6 +11,9 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.integration.jei.upgrades;
 
+import java.util.Collections;
+import java.util.List;
+
 import javax.annotation.Nonnull;
 
 import mezz.jei.api.IGuiHelper;
@@ -24,6 +27,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.translation.I18n;
 
+import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.integration.jei.AbyssalCraftRecipeCategoryUid;
 
 public class UpgradeRecipeCategory implements IRecipeCategory {
@@ -85,5 +89,17 @@ public class UpgradeRecipeCategory implements IRecipeCategory {
 	public IDrawable getIcon() {
 
 		return null;
+	}
+
+	@Override
+	public String getModName() {
+
+		return AbyssalCraft.name;
+	}
+
+	@Override
+	public List getTooltipStrings(int mouseX, int mouseY) {
+
+		return Collections.emptyList();
 	}
 }

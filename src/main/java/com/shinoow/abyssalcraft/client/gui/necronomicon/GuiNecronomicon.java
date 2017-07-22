@@ -317,8 +317,8 @@ public class GuiNecronomicon extends GuiScreen {
 		String stuff;
 		int length;
 		stuff = localize(NecronomiconText.LABEL_INDEX);
-		length = fontRendererObj.getStringWidth(stuff);
-		fontRendererObj.drawString(stuff, k + 50 - length, b0 + 16, 0);
+		length = fontRenderer.getStringWidth(stuff);
+		fontRenderer.drawString(stuff, k + 50 - length, b0 + 16, 0);
 	}
 
 	public int getBookType(){
@@ -343,8 +343,8 @@ public class GuiNecronomicon extends GuiScreen {
 	@Override
 	public void drawScreen(int par1, int par2, float par3)
 	{
-		boolean unicode = fontRendererObj.getUnicodeFlag();
-		fontRendererObj.setUnicodeFlag(true);
+		boolean unicode = fontRenderer.getUnicodeFlag();
+		fontRenderer.setUnicodeFlag(true);
 		GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
 		mc.getTextureManager().bindTexture(bookGuiTextures);
 		int k = (width - guiWidth) / 2;
@@ -358,18 +358,18 @@ public class GuiNecronomicon extends GuiScreen {
 		if(isInfo){
 			if(isNecroInfo){
 				stuff = localize(NecronomiconText.LABEL_HUH);
-				fontRendererObj.drawSplitString(stuff, k + 20, b0 + 16, 116, 0xC40000);
+				fontRenderer.drawSplitString(stuff, k + 20, b0 + 16, 116, 0xC40000);
 			}
 			s = I18n.format("necronomicon.turnupindicator", new Object[] {Integer.valueOf(currTurnup + 1), Integer.valueOf(bookTotalTurnups)});
 
-			l = fontRendererObj.getStringWidth(s);
+			l = fontRenderer.getStringWidth(s);
 			if(getTurnupLimit() > 1)
-				fontRendererObj.drawString(s, k - l + guiWidth - 22, b0 + 16, 0);
+				fontRenderer.drawString(s, k - l + guiWidth - 22, b0 + 16, 0);
 			drawInformationText(par1, par2);
 		} else
 			drawIndexText();
 
-		fontRendererObj.setUnicodeFlag(unicode);
+		fontRenderer.setUnicodeFlag(unicode);
 	}
 
 	/**
@@ -449,7 +449,7 @@ public class GuiNecronomicon extends GuiScreen {
 	public FontRenderer getFontRenderer(boolean aklo){
 		if(aklo)
 			return test;
-		return fontRendererObj;
+		return fontRenderer;
 	}
 
 	protected String localize(String str){

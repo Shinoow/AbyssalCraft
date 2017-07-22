@@ -13,6 +13,7 @@ package com.shinoow.abyssalcraft.common.world.biome;
 
 import java.util.Random;
 
+import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
@@ -37,10 +38,9 @@ public class BiomeGenDarklandsHills extends Biome implements IDarklandsBiome {
 	public BiomeGenDarklandsHills(BiomeProperties par1)
 	{
 		super(par1);
-		topBlock = ACBlocks.darklands_grass.getDefaultState();
-		fillerBlock = ACBlocks.darkstone.getDefaultState();
+		fillerBlock = ACBlocks.stone.getDefaultState();
 		WorldGenDarkTrees = new WorldGenDLT(false);
-		theBiomeDecorator.treesPerChunk = 1;
+		decorator.treesPerChunk = 1;
 		spawnableMonsterList.add(new SpawnListEntry(EntityDepthsGhoul.class, 60, 1, 5));
 		spawnableMonsterList.add(new SpawnListEntry(EntityAbyssalZombie.class, 60, 1, 3));
 		spawnableMonsterList.add(new SpawnListEntry(EntityShadowCreature.class, 20, 1, 3));
@@ -70,12 +70,12 @@ public class BiomeGenDarklandsHills extends Biome implements IDarklandsBiome {
 			int x = par2Random.nextInt(16);
 			int y = par2Random.nextInt(64);
 			int z = par2Random.nextInt(16);
-			new WorldGenMinable(ACBlocks.darkstone.getDefaultState(), 32).generate(par1World, par2Random, pos.add(x, y, z));
+			new WorldGenMinable(ACBlocks.stone.getDefaultState(), 32).generate(par1World, par2Random, pos.add(x, y, z));
 		}
 	}
 
 	@Override
-	public WorldGenAbstractTree genBigTreeChance(Random par1Random)
+	public WorldGenAbstractTree getRandomTreeFeature(Random par1Random)
 	{
 		return par1Random.nextInt(5) == 0 ? new WorldGenNoTree() : par1Random.nextInt(10) == 0 ? WorldGenDarkTrees : new WorldGenNoTree();
 	}

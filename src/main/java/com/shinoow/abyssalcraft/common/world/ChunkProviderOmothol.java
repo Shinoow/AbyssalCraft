@@ -25,7 +25,7 @@ import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.chunk.ChunkPrimer;
-import net.minecraft.world.chunk.IChunkGenerator;
+import net.minecraft.world.gen.IChunkGenerator;
 import net.minecraft.world.gen.NoiseGeneratorOctaves;
 
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
@@ -104,7 +104,7 @@ public class ChunkProviderOmothol implements IChunkGenerator
 								IBlockState iblockstate = null;
 
 								if (d15 > 0.0D)
-									iblockstate = ACBlocks.omothol_stone.getDefaultState();
+									iblockstate = ACBlocks.stone.getStateFromMeta(6);
 
 								int k2 = i2 + i1 * 8;
 								int l2 = l1 + k1 * 4;
@@ -133,8 +133,8 @@ public class ChunkProviderOmothol implements IChunkGenerator
 			{
 				int k = 1;
 				int l = -1;
-				IBlockState iblockstate = ACBlocks.omothol_stone.getDefaultState();
-				IBlockState iblockstate1 = ACBlocks.omothol_stone.getDefaultState();
+				IBlockState iblockstate = ACBlocks.stone.getStateFromMeta(6);
+				IBlockState iblockstate1 = ACBlocks.stone.getStateFromMeta(6);
 
 				for (int i1 = 127; i1 >= 0; --i1)
 				{
@@ -148,7 +148,7 @@ public class ChunkProviderOmothol implements IChunkGenerator
 							if (k <= 0)
 							{
 								iblockstate = Blocks.AIR.getDefaultState();
-								iblockstate1 = ACBlocks.omothol_stone.getDefaultState();
+								iblockstate1 = ACBlocks.stone.getStateFromMeta(6);
 							}
 
 							l = k;
@@ -168,7 +168,7 @@ public class ChunkProviderOmothol implements IChunkGenerator
 	}
 
 	@Override
-	public Chunk provideChunk(int x, int z)
+	public Chunk generateChunk(int x, int z)
 	{
 		rand.setSeed(x * 341873128712L + z * 132897987541L);
 		ChunkPrimer primer = new ChunkPrimer();
@@ -314,7 +314,7 @@ public class ChunkProviderOmothol implements IChunkGenerator
 	}
 
 	@Override
-	public BlockPos getStrongholdGen(World par1World, String par2String, BlockPos pos, boolean bool)
+	public BlockPos getNearestStructurePos(World par1World, String par2String, BlockPos pos, boolean bool)
 	{
 		return null;
 	}
@@ -328,6 +328,12 @@ public class ChunkProviderOmothol implements IChunkGenerator
 
 	@Override
 	public boolean generateStructures(Chunk chunkIn, int x, int z) {
+
+		return false;
+	}
+
+	@Override
+	public boolean isInsideStructure(World p_193414_1_, String p_193414_2_, BlockPos p_193414_3_) {
 
 		return false;
 	}

@@ -11,6 +11,9 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.integration.jei.rending;
 
+import java.util.Collections;
+import java.util.List;
+
 import javax.annotation.Nonnull;
 
 import mezz.jei.api.IGuiHelper;
@@ -23,6 +26,7 @@ import mezz.jei.api.recipe.IRecipeWrapper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.util.text.translation.I18n;
 
+import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.integration.jei.AbyssalCraftRecipeCategoryUid;
 
 public class RendingRecipeCategory implements IRecipeCategory {
@@ -78,5 +82,17 @@ public class RendingRecipeCategory implements IRecipeCategory {
 	public IDrawable getIcon() {
 
 		return null;
+	}
+
+	@Override
+	public String getModName() {
+
+		return AbyssalCraft.name;
+	}
+
+	@Override
+	public List getTooltipStrings(int mouseX, int mouseY) {
+
+		return Collections.emptyList();
 	}
 }

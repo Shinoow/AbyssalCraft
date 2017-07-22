@@ -51,11 +51,11 @@ public class ContainerRendingPedestal extends Container {
 	public void addListener(IContainerListener listener)
 	{
 		super.addListener(listener);
-		listener.sendProgressBarUpdate(this, 0, tileRendingPedestal.getField(0));
-		listener.sendProgressBarUpdate(this, 1, tileRendingPedestal.getField(1));
-		listener.sendProgressBarUpdate(this, 2, tileRendingPedestal.getField(2));
-		listener.sendProgressBarUpdate(this, 3, tileRendingPedestal.getField(3));
-		listener.sendProgressBarUpdate(this, 4, tileRendingPedestal.getField(4));
+		listener.sendWindowProperty(this, 0, tileRendingPedestal.getField(0));
+		listener.sendWindowProperty(this, 1, tileRendingPedestal.getField(1));
+		listener.sendWindowProperty(this, 2, tileRendingPedestal.getField(2));
+		listener.sendWindowProperty(this, 3, tileRendingPedestal.getField(3));
+		listener.sendWindowProperty(this, 4, tileRendingPedestal.getField(4));
 	}
 
 	@Override
@@ -74,19 +74,19 @@ public class ContainerRendingPedestal extends Container {
 			IContainerListener icrafting = listeners.get(i);
 
 			if (lastSE != se)
-				icrafting.sendProgressBarUpdate(this, 0, se);
+				icrafting.sendWindowProperty(this, 0, se);
 
 			if (lastAE != ae)
-				icrafting.sendProgressBarUpdate(this, 1, ae);
+				icrafting.sendWindowProperty(this, 1, ae);
 
 			if (lastDE != de)
-				icrafting.sendProgressBarUpdate(this, 2, de);
+				icrafting.sendWindowProperty(this, 2, de);
 
 			if (lastOE != oe)
-				icrafting.sendProgressBarUpdate(this, 3, oe);
+				icrafting.sendWindowProperty(this, 3, oe);
 
 			if (lastPE != pe)
-				icrafting.sendProgressBarUpdate(this, 4, pe);
+				icrafting.sendWindowProperty(this, 4, pe);
 		}
 
 		lastSE = se;

@@ -165,7 +165,7 @@ public class EntityAntiCreeper extends EntityMob implements IAntiEntity {
 	}
 
 	@Override
-	protected SoundEvent getHurtSound()
+	protected SoundEvent getHurtSound(DamageSource source)
 	{
 		return SoundEvents.ENTITY_CREEPER_HURT;
 	}
@@ -181,7 +181,7 @@ public class EntityAntiCreeper extends EntityMob implements IAntiEntity {
 	{
 		super.onDeath(par1DamageSource);
 
-		if (par1DamageSource.getEntity() instanceof EntityAntiSkeleton)
+		if (par1DamageSource.getTrueSource() instanceof EntityAntiSkeleton)
 		{
 			int i = Item.getIdFromItem(Items.RECORD_13);
 			int j = Item.getIdFromItem(Items.RECORD_WAIT);

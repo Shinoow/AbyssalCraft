@@ -81,10 +81,10 @@ public class EntityDreadguard extends EntityMob implements IDreadEntity {
 	@Override
 	public void onDeath(DamageSource par1DamageSource)
 	{
-		if (par1DamageSource.getEntity() instanceof EntityPlayer)
+		if (par1DamageSource.getTrueSource() instanceof EntityPlayer)
 		{
-			EntityPlayer entityplayer = (EntityPlayer)par1DamageSource.getEntity();
-			entityplayer.addStat(ACAchievements.kill_dreadguard, 1);
+			EntityPlayer entityplayer = (EntityPlayer)par1DamageSource.getTrueSource();
+//			entityplayer.addStat(ACAchievements.kill_dreadguard, 1);
 		}
 		super.onDeath(par1DamageSource);
 	}
@@ -122,7 +122,7 @@ public class EntityDreadguard extends EntityMob implements IDreadEntity {
 	}
 
 	@Override
-	protected SoundEvent getHurtSound()
+	protected SoundEvent getHurtSound(DamageSource source)
 	{
 		return ACSounds.dreadguard_hurt;
 	}

@@ -11,6 +11,8 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.common.blocks.tile;
 
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
@@ -20,21 +22,36 @@ import com.shinoow.abyssalcraft.api.energy.IEnergyContainer;
 import com.shinoow.abyssalcraft.api.energy.PEUtils;
 import com.shinoow.abyssalcraft.common.blocks.BlockEnergyRelay;
 
-public abstract class TileEntityTieredEnergyRelay extends TileEntityEnergyRelay {
+public class TileEntityTieredEnergyRelay extends TileEntityEnergyRelay {
 
+	private int facing;
 	private int ticksExisted;
+
+	@Override
+	public void readFromNBT(NBTTagCompound nbttagcompound)
+	{
+		super.readFromNBT(nbttagcompound);
+		facing = nbttagcompound.getInteger("Facing");
+	}
+
+	@Override
+	public NBTTagCompound writeToNBT(NBTTagCompound nbttagcompound)
+	{
+		super.writeToNBT(nbttagcompound);
+		nbttagcompound.setInteger("Facing", facing);
+
+		return nbttagcompound;
+	}
 
 	@Override
 	public void update() {
 		++ticksExisted;
 
 		if(ticksExisted % 20 == 0)
-			if(world.getBlockState(pos).getProperties().containsKey(BlockEnergyRelay.FACING))
-				PEUtils.collectNearbyPE(this, world, pos, world.getBlockState(pos).getValue(BlockEnergyRelay.FACING).getOpposite(), getDrainQuanta());
+			PEUtils.collectNearbyPE(this, world, pos, EnumFacing.getFront(facing).getOpposite(), getDrainQuanta());
 
 		if(ticksExisted % 40 == 0 && canTransferPE())
-			if(world.getBlockState(pos).getProperties().containsKey(BlockEnergyRelay.FACING))
-				transferPE(world.getBlockState(pos).getValue(BlockEnergyRelay.FACING), getTransferQuanta());
+			transferPE(EnumFacing.getFront(facing), getTransferQuanta());
 	}
 
 	@Override
@@ -54,16 +71,71 @@ public abstract class TileEntityTieredEnergyRelay extends TileEntityEnergyRelay 
 
 					for(int i = 0; i < d * 15; i++){
 						double i1 = i / 15D;
-						double xp = pos.getX() + vec.xCoord * i1 + .5;
-						double yp = pos.getY() + vec.yCoord * i1 + .5;
-						double zp = pos.getZ() + vec.zCoord * i1 + .5;
-						AbyssalCraft.proxy.spawnParticle("PEStream", world, xp, yp, zp, vec.xCoord * .1, .15, vec.zCoord * .1);
+						double xp = pos.getX() + vec.x * i1 + .5;
+						double yp = pos.getY() + vec.y * i1 + .5;
+						double zp = pos.getZ() + vec.z * i1 + .5;
+						AbyssalCraft.proxy.spawnParticle("PEStream", world, xp, yp, zp, vec.x * .1, .15, vec.z * .1);
 					}
 				}
 		}
 	}
 
-	protected abstract int getRange();
-	protected abstract float getDrainQuanta();
-	protected abstract float getTransferQuanta();
+	@Override
+	public TileEntity getContainerTile() {
+
+		return this;
+	}
+
+	protected int getRange(){
+		switch(getBlockMetadata()){
+		case 0:
+			return 6;
+		case 1:
+			return 8;
+		case 2:
+			return 10;
+		case 3:
+			return 12;
+		default:
+			return 0;
+		}
+	}
+
+	protected float getDrainQuanta(){
+		switch(getBlockMetadata()){
+		case 0:
+			return 10;
+		case 1:
+			return 15;
+		case 2:
+			return 20;
+		case 3:
+			return 25;
+		default:
+			return 0;
+		}
+	}
+
+	protected float getTransferQuanta(){
+		switch(getBlockMetadata()){
+		case 0:
+			return 15;
+		case 1:
+			return 20;
+		case 2:
+			return 25;
+		case 3:
+			return 30;
+		default:
+			return 0;
+		}
+	}
+
+	public int getFacing(){
+		return facing;
+	}
+
+	public void setFacing(int face){
+		facing = face;
+	}
 }

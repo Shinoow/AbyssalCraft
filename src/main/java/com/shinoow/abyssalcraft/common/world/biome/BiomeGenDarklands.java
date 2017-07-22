@@ -38,10 +38,8 @@ public class BiomeGenDarklands extends Biome implements IDarklandsBiome {
 	public BiomeGenDarklands(BiomeProperties par1)
 	{
 		super(par1);
-		topBlock = ACBlocks.darklands_grass.getDefaultState();
-		fillerBlock = Blocks.DIRT.getDefaultState();
 		WorldGenDarkTrees = new WorldGenDLT(false);
-		theBiomeDecorator.treesPerChunk = 3;
+		decorator.treesPerChunk = 3;
 		spawnableMonsterList.add(new SpawnListEntry(EntityDepthsGhoul.class, 60, 1, 5));
 		spawnableMonsterList.add(new SpawnListEntry(EntityAbyssalZombie.class, 60, 1, 3));
 		spawnableMonsterList.add(new SpawnListEntry(EntityShadowCreature.class, 20, 1, 3));
@@ -71,12 +69,12 @@ public class BiomeGenDarklands extends Biome implements IDarklandsBiome {
 			int x = par2Random.nextInt(16);
 			int y = par2Random.nextInt(64);
 			int z = par2Random.nextInt(16);
-			new WorldGenMinable(ACBlocks.darkstone.getDefaultState(), 20).generate(par1World, par2Random, pos.add(x, y, z));
+			new WorldGenMinable(ACBlocks.stone.getDefaultState(), 20).generate(par1World, par2Random, pos.add(x, y, z));
 		}
 	}
 
 	@Override
-	public WorldGenAbstractTree genBigTreeChance(Random par1Random)
+	public WorldGenAbstractTree getRandomTreeFeature(Random par1Random)
 	{
 		return par1Random.nextInt(3) == 0 ? new WorldGenNoTree() : par1Random.nextInt(5) == 0 ? WorldGenDarkTrees : new WorldGenNoTree();
 	}

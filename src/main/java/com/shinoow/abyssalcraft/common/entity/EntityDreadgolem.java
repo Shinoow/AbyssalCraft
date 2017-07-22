@@ -77,7 +77,7 @@ public class EntityDreadgolem extends EntityMob implements IDreadEntity {
 	}
 
 	@Override
-	protected SoundEvent getHurtSound()
+	protected SoundEvent getHurtSound(DamageSource source)
 	{
 		return ACSounds.golem_hurt;
 	}

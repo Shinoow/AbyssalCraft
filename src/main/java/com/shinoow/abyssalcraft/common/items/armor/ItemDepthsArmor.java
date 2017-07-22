@@ -97,7 +97,7 @@ public class ItemDepthsArmor extends ItemArmor /* implements IVisDiscountGear, I
 			Minecraft.getMinecraft().renderEngine.bindTexture(coraliumBlur);
 
 			Tessellator t = Tessellator.getInstance();
-			VertexBuffer wr = t.getBuffer();
+			BufferBuilder wr = t.getBuffer();
 
 			wr.begin(7, DefaultVertexFormats.POSITION_TEX);
 			wr.pos(0.0D, resolution.getScaledHeight(), 90.0D).tex(0.0D, 1.0D).endVertex();;

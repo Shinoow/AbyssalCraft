@@ -36,7 +36,7 @@ public class DisruptionAnimalCorruption extends DisruptionEntry {
 
 		if(world.isRemote) return;
 
-		List<EntityAnimal> animals = world.getEntitiesWithinAABB(EntityAnimal.class, new AxisAlignedBB(pos).expandXyz(64));
+		List<EntityAnimal> animals = world.getEntitiesWithinAABB(EntityAnimal.class, new AxisAlignedBB(pos).grow(64));
 		for(EntityAnimal animal : animals)
 			if(animal instanceof EntityCow){
 				EntityEvilCow cow = new EntityEvilCow(world);

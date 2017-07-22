@@ -746,31 +746,31 @@ public class StructureAbyStrongholdPieces
 				case 2:
 					for (i = 1; i <= 9; ++i)
 					{
-						setBlockState(par1World, ACBlocks.abyssal_cobblestone.getDefaultState(), 1, 3, i, par3StructureBoundingBox);
-						setBlockState(par1World, ACBlocks.abyssal_cobblestone.getDefaultState(), 9, 3, i, par3StructureBoundingBox);
+						setBlockState(par1World, ACBlocks.cobblestone.getStateFromMeta(1), 1, 3, i, par3StructureBoundingBox);
+						setBlockState(par1World, ACBlocks.cobblestone.getStateFromMeta(1), 9, 3, i, par3StructureBoundingBox);
 					}
 
 					for (i = 1; i <= 9; ++i)
 					{
-						setBlockState(par1World, ACBlocks.abyssal_cobblestone.getDefaultState(), i, 3, 1, par3StructureBoundingBox);
-						setBlockState(par1World, ACBlocks.abyssal_cobblestone.getDefaultState(), i, 3, 9, par3StructureBoundingBox);
+						setBlockState(par1World, ACBlocks.cobblestone.getStateFromMeta(1), i, 3, 1, par3StructureBoundingBox);
+						setBlockState(par1World, ACBlocks.cobblestone.getStateFromMeta(1), i, 3, 9, par3StructureBoundingBox);
 					}
 
-					setBlockState(par1World, ACBlocks.abyssal_cobblestone.getDefaultState(), 5, 1, 4, par3StructureBoundingBox);
-					setBlockState(par1World, ACBlocks.abyssal_cobblestone.getDefaultState(), 5, 1, 6, par3StructureBoundingBox);
-					setBlockState(par1World, ACBlocks.abyssal_cobblestone.getDefaultState(), 5, 3, 4, par3StructureBoundingBox);
-					setBlockState(par1World, ACBlocks.abyssal_cobblestone.getDefaultState(), 5, 3, 6, par3StructureBoundingBox);
-					setBlockState(par1World, ACBlocks.abyssal_cobblestone.getDefaultState(), 4, 1, 5, par3StructureBoundingBox);
-					setBlockState(par1World, ACBlocks.abyssal_cobblestone.getDefaultState(), 6, 1, 5, par3StructureBoundingBox);
-					setBlockState(par1World, ACBlocks.abyssal_cobblestone.getDefaultState(), 4, 3, 5, par3StructureBoundingBox);
-					setBlockState(par1World, ACBlocks.abyssal_cobblestone.getDefaultState(), 6, 3, 5, par3StructureBoundingBox);
+					setBlockState(par1World, ACBlocks.cobblestone.getStateFromMeta(1), 5, 1, 4, par3StructureBoundingBox);
+					setBlockState(par1World, ACBlocks.cobblestone.getStateFromMeta(1), 5, 1, 6, par3StructureBoundingBox);
+					setBlockState(par1World, ACBlocks.cobblestone.getStateFromMeta(1), 5, 3, 4, par3StructureBoundingBox);
+					setBlockState(par1World, ACBlocks.cobblestone.getStateFromMeta(1), 5, 3, 6, par3StructureBoundingBox);
+					setBlockState(par1World, ACBlocks.cobblestone.getStateFromMeta(1), 4, 1, 5, par3StructureBoundingBox);
+					setBlockState(par1World, ACBlocks.cobblestone.getStateFromMeta(1), 6, 1, 5, par3StructureBoundingBox);
+					setBlockState(par1World, ACBlocks.cobblestone.getStateFromMeta(1), 4, 3, 5, par3StructureBoundingBox);
+					setBlockState(par1World, ACBlocks.cobblestone.getStateFromMeta(1), 6, 3, 5, par3StructureBoundingBox);
 
 					for (i = 1; i <= 3; ++i)
 					{
-						setBlockState(par1World, ACBlocks.abyssal_cobblestone.getDefaultState(), 4, i, 4, par3StructureBoundingBox);
-						setBlockState(par1World, ACBlocks.abyssal_cobblestone.getDefaultState(), 6, i, 4, par3StructureBoundingBox);
-						setBlockState(par1World, ACBlocks.abyssal_cobblestone.getDefaultState(), 4, i, 6, par3StructureBoundingBox);
-						setBlockState(par1World, ACBlocks.abyssal_cobblestone.getDefaultState(), 6, i, 6, par3StructureBoundingBox);
+						setBlockState(par1World, ACBlocks.cobblestone.getStateFromMeta(1), 4, i, 4, par3StructureBoundingBox);
+						setBlockState(par1World, ACBlocks.cobblestone.getStateFromMeta(1), 6, i, 4, par3StructureBoundingBox);
+						setBlockState(par1World, ACBlocks.cobblestone.getStateFromMeta(1), 4, i, 6, par3StructureBoundingBox);
+						setBlockState(par1World, ACBlocks.cobblestone.getStateFromMeta(1), 6, i, 6, par3StructureBoundingBox);
 					}
 
 					setBlockState(par1World, Blocks.TORCH.getDefaultState(), 5, 3, 5, par3StructureBoundingBox);

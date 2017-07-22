@@ -11,6 +11,9 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.integration.jei.crystallizer;
 
+import java.util.Collections;
+import java.util.List;
+
 import javax.annotation.Nonnull;
 
 import mezz.jei.api.IGuiHelper;
@@ -22,6 +25,7 @@ import mezz.jei.api.recipe.IRecipeWrapper;
 import mezz.jei.util.Translator;
 import net.minecraft.client.Minecraft;
 
+import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.integration.jei.AbyssalCraftRecipeCategoryUid;
 
 public class CrystallizerFuelCategory extends CrystallizerRecipeCategory {
@@ -71,5 +75,17 @@ public class CrystallizerFuelCategory extends CrystallizerRecipeCategory {
 	public IDrawable getIcon() {
 
 		return null;
+	}
+
+	@Override
+	public String getModName() {
+
+		return AbyssalCraft.name;
+	}
+
+	@Override
+	public List getTooltipStrings(int mouseX, int mouseY) {
+
+		return Collections.emptyList();
 	}
 }

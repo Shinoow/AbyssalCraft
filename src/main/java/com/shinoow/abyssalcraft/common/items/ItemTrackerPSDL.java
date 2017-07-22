@@ -43,7 +43,7 @@ public class ItemTrackerPSDL extends Item {
 
 		if (!par2World.isRemote)
 		{
-			BlockPos blockpos = ((WorldServer)par2World).getChunkProvider().getStrongholdGen(par2World, "AbyStronghold", new BlockPos(par3EntityPlayer), false); //TODO change?
+			BlockPos blockpos = ((WorldServer)par2World).getChunkProvider().getNearestStructurePos(par2World, "AbyStronghold", new BlockPos(par3EntityPlayer), false); //TODO change?
 
 			if (blockpos != null)
 			{

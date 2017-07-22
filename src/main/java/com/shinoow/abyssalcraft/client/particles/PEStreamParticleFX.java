@@ -14,7 +14,7 @@ package com.shinoow.abyssalcraft.client.particles;
 import java.util.Random;
 
 import net.minecraft.client.particle.Particle;
-import net.minecraft.client.renderer.VertexBuffer;
+import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
@@ -50,7 +50,7 @@ public class PEStreamParticleFX extends Particle {
 	}
 
 	@Override
-	public void renderParticle(VertexBuffer worldRendererIn, Entity entityIn, float par2, float par3, float par4, float par5, float par6, float par7)
+	public void renderParticle(BufferBuilder worldRendererIn, Entity entityIn, float par2, float par3, float par4, float par5, float par6, float par7)
 	{
 		float var8 = (particleAge + par2) / particleMaxAge * 32.0F;
 		var8 = MathHelper.clamp(var8, 0.0F, 1.0F);

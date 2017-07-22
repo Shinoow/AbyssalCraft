@@ -21,6 +21,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.chunk.Chunk;
+import net.minecraftforge.oredict.OreDictionary;
 
 import com.shinoow.abyssalcraft.api.biome.ACBiomes;
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
@@ -35,15 +36,8 @@ import com.shinoow.abyssalcraft.lib.util.SpecialTextUtil;
 public class NecronomiconCorruptionRitual extends NecronomiconRitual {
 
 	public NecronomiconCorruptionRitual() {
-		super("corruption", 4, 0, 10000F, true, new Object[]{new ItemStack[]{new ItemStack(ACBlocks.jzahar_statue), new ItemStack(ACBlocks.cthulhu_statue),
-				new ItemStack(ACBlocks.hastur_statue), new ItemStack(ACBlocks.azathoth_statue), new ItemStack(ACBlocks.nyarlathotep_statue), new ItemStack(ACBlocks.yog_sothoth_statue),
-				new ItemStack(ACBlocks.shub_niggurath_statue)}, ACBlocks.darkstone, new ItemStack[]{new ItemStack(ACBlocks.jzahar_statue), new ItemStack(ACBlocks.cthulhu_statue),
-				new ItemStack(ACBlocks.hastur_statue), new ItemStack(ACBlocks.azathoth_statue), new ItemStack(ACBlocks.nyarlathotep_statue), new ItemStack(ACBlocks.yog_sothoth_statue),
-				new ItemStack(ACBlocks.shub_niggurath_statue)}, ACBlocks.darkstone, new ItemStack[]{new ItemStack(ACBlocks.jzahar_statue), new ItemStack(ACBlocks.cthulhu_statue),
-				new ItemStack(ACBlocks.hastur_statue), new ItemStack(ACBlocks.azathoth_statue), new ItemStack(ACBlocks.nyarlathotep_statue), new ItemStack(ACBlocks.yog_sothoth_statue),
-				new ItemStack(ACBlocks.shub_niggurath_statue)}, ACBlocks.darkstone, new ItemStack[]{new ItemStack(ACBlocks.jzahar_statue), new ItemStack(ACBlocks.cthulhu_statue),
-				new ItemStack(ACBlocks.hastur_statue), new ItemStack(ACBlocks.azathoth_statue), new ItemStack(ACBlocks.nyarlathotep_statue), new ItemStack(ACBlocks.yog_sothoth_statue),
-				new ItemStack(ACBlocks.shub_niggurath_statue)}, ACBlocks.darkstone});
+		super("corruption", 4, 0, 10000F, true, new Object[]{new ItemStack(ACBlocks.statue, 1, OreDictionary.WILDCARD_VALUE), new ItemStack(ACBlocks.stone, 1, 0), new ItemStack(ACBlocks.statue, 1, OreDictionary.WILDCARD_VALUE),
+				new ItemStack(ACBlocks.stone, 1, 0), new ItemStack(ACBlocks.statue, 1, OreDictionary.WILDCARD_VALUE), new ItemStack(ACBlocks.stone, 1, 0), new ItemStack(ACBlocks.statue, 1, OreDictionary.WILDCARD_VALUE), new ItemStack(ACBlocks.stone, 1, 0)});
 	}
 
 	@Override
@@ -72,16 +66,14 @@ public class NecronomiconCorruptionRitual extends NecronomiconRitual {
 
 				for(int y = 0; y < 256; y++){
 					IBlockState state = world.getBlockState(pos1.up(y));
-					if(state.getBlock() == Blocks.GRASS)
-						world.setBlockState(pos1.up(y), ACBlocks.darklands_grass.getDefaultState());
-					else if(state.getBlock() == Blocks.STONE && state.getValue(BlockStone.VARIANT) != BlockStone.EnumType.STONE)
-						world.setBlockState(pos1.up(y), ACBlocks.darkstone.getDefaultState());
+					if(state.getBlock() == Blocks.STONE && state.getValue(BlockStone.VARIANT) != BlockStone.EnumType.STONE)
+						world.setBlockState(pos1.up(y), ACBlocks.stone.getDefaultState());
 					else if(state.getBlock() == Blocks.LEAVES)
 						world.setBlockState(pos1.up(y), ACBlocks.darklands_oak_leaves.getDefaultState().withProperty(BlockLeaves.CHECK_DECAY, state.getValue(BlockLeaves.CHECK_DECAY)).withProperty(BlockLeaves.DECAYABLE, state.getValue(BlockLeaves.DECAYABLE)));
 					else if(state.getBlock() == Blocks.LOG)
 						world.setBlockState(pos1.up(y), ACBlocks.darklands_oak_wood.getDefaultState().withProperty(BlockLog.LOG_AXIS, state.getValue(BlockLog.LOG_AXIS)));
 					else if(state.getBlock() == Blocks.COBBLESTONE)
-						world.setBlockState(pos1.up(y), ACBlocks.darkstone_cobblestone.getDefaultState());
+						world.setBlockState(pos1.up(y), ACBlocks.cobblestone.getDefaultState());
 					else if(state.getBlock() == Blocks.STONEBRICK)
 						switch(state.getValue(BlockStoneBrick.VARIANT)){
 						case CHISELED:

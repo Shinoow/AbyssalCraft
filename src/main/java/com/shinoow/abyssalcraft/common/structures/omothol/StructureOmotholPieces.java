@@ -1556,7 +1556,7 @@ public class StructureOmotholPieces
 							if(blockpos.getY() <= 49)
 								blockpos = new BlockPos(blockpos.getX(), 49, blockpos.getZ());
 
-						worldIn.setBlockState(blockpos, ACBlocks.ethaxium.getDefaultState(), 2);
+						worldIn.setBlockState(blockpos, ACBlocks.stone.getStateFromMeta(5), 2);
 					}
 				}
 

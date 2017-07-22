@@ -36,9 +36,10 @@ public class TeleporterAC extends Teleporter
 	private final WorldServer worldServerInstance;
 	private final Random random;
 	private final Long2ObjectMap<Teleporter.PortalPosition> destinationCoordinateCache = new Long2ObjectOpenHashMap(4096);
-	private final Block portal, frame;
+	private final Block portal;
+	private final IBlockState frame;
 
-	public TeleporterAC(WorldServer par1WorldServer, Block portal, Block frame)
+	public TeleporterAC(WorldServer par1WorldServer, Block portal, IBlockState frame)
 	{
 		super(par1WorldServer);
 		worldServerInstance = par1WorldServer;
@@ -77,7 +78,7 @@ public class TeleporterAC extends Teleporter
 						int j2 = j + l1;
 						int k2 = k + k1 * i1 - j1 * l;
 						boolean flag = l1 < 0;
-						worldServerInstance.setBlockState(new BlockPos(i2, j2, k2), flag ? frame.getDefaultState() : Blocks.AIR.getDefaultState());
+						worldServerInstance.setBlockState(new BlockPos(i2, j2, k2), flag ? frame : Blocks.AIR.getDefaultState());
 					}
 
 			entityIn.setLocationAndAngles(i, j, k, entityIn.rotationYaw, 0.0F);
@@ -364,7 +365,7 @@ public class TeleporterAC extends Teleporter
 						int k10 = k2 + k8;
 						int k11 = k6 + (l7 - 1) * i3 - j7 * l6;
 						boolean flag = k8 < 0;
-						worldServerInstance.setBlockState(new BlockPos(k9, k10, k11), flag ? frame.getDefaultState() : Blocks.AIR.getDefaultState());
+						worldServerInstance.setBlockState(new BlockPos(k9, k10, k11), flag ? frame : Blocks.AIR.getDefaultState());
 					}
 		}
 
@@ -379,7 +380,7 @@ public class TeleporterAC extends Teleporter
 					int l11 = k2 + l9;
 					int k12 = k6 + (l8 - 1) * i3;
 					boolean flag1 = l8 == 0 || l8 == 3 || l9 == -1 || l9 == 3;
-					worldServerInstance.setBlockState(new BlockPos(l10, l11, k12), flag1 ? frame.getDefaultState() : iblockstate, 2);
+					worldServerInstance.setBlockState(new BlockPos(l10, l11, k12), flag1 ? frame : iblockstate, 2);
 				}
 
 			for (int i9 = 0; i9 < 4; ++i9)

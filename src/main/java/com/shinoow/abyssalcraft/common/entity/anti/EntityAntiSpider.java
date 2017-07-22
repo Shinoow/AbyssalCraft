@@ -117,7 +117,7 @@ public class EntityAntiSpider extends EntityMob implements IAntiEntity {
 	}
 
 	@Override
-	protected SoundEvent getHurtSound()
+	protected SoundEvent getHurtSound(DamageSource source)
 	{
 		return SoundEvents.ENTITY_SPIDER_HURT;
 	}
@@ -261,16 +261,16 @@ public class EntityAntiSpider extends EntityMob implements IAntiEntity {
 		 * Returns whether an in-progress EntityAIBase should continue executing
 		 */
 		@Override
-		public boolean continueExecuting()
+		public boolean shouldContinueExecuting()
 		{
-			float f = attacker.getBrightness(1.0F);
+			float f = attacker.getBrightness();
 
 			if (f >= 0.5F && attacker.getRNG().nextInt(100) == 0)
 			{
 				attacker.setAttackTarget((EntityLivingBase)null);
 				return false;
 			} else
-				return super.continueExecuting();
+				return super.shouldContinueExecuting();
 		}
 
 		@Override
@@ -293,7 +293,7 @@ public class EntityAntiSpider extends EntityMob implements IAntiEntity {
 		@Override
 		public boolean shouldExecute()
 		{
-			float f = taskOwner.getBrightness(1.0F);
+			float f = taskOwner.getBrightness();
 			return f >= 0.5F ? false : super.shouldExecute();
 		}
 	}

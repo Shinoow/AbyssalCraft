@@ -59,7 +59,7 @@ public class RendingRecipeWrapper extends BlankRecipeWrapper {
 	public void drawInfo(@Nonnull Minecraft minecraft, int recipeWidth, int recipeHeight, int mouseX, int mouseY) {
 		dimToString.putAll(RitualRegistry.instance().getDimensionNameMappings());
 
-		FontRenderer fr = Minecraft.getMinecraft().fontRendererObj;
+		FontRenderer fr = Minecraft.getMinecraft().fontRenderer;
 
 		if(entry.dimension != -1){
 			fr.drawSplitString(I18n.format(NecronomiconText.LABEL_LOCATION, new Object[0]) + ": " + getDimension(entry.dimension), 2, 20, 180, 0);

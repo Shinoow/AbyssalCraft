@@ -21,6 +21,7 @@ import net.minecraft.client.renderer.*;
 import net.minecraft.client.renderer.GlStateManager.DestFactor;
 import net.minecraft.client.renderer.GlStateManager.SourceFactor;
 import net.minecraft.client.resources.I18n;
+import net.minecraft.client.util.ITooltipFlag.TooltipFlags;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.oredict.OreDictionary;
@@ -146,7 +147,7 @@ public class GuiNecronomiconMachines extends GuiNecronomicon {
 		byte b0 = 2;
 		String stuff;
 		stuff = localize(NecronomiconText.LABEL_INFORMATION_MACHINES);
-		fontRendererObj.drawSplitString(stuff, k + 20, b0 + 16, 116, 0xC40000);
+		fontRenderer.drawSplitString(stuff, k + 20, b0 + 16, 116, 0xC40000);
 		writeText(2, NecronomiconText.MACHINES_INFO);
 	}
 
@@ -203,7 +204,7 @@ public class GuiNecronomiconMachines extends GuiNecronomicon {
 
 		if(isMInfo){
 			stuff = localize(NecronomiconText.LABEL_INFO);
-			fontRendererObj.drawSplitString(stuff, k + 20, b0 + 16, 116, 0xC40000);
+			fontRenderer.drawSplitString(stuff, k + 20, b0 + 16, 116, 0xC40000);
 			setTurnupLimit(4);
 			if(currTurnup == 0){
 				writeText(1, NecronomiconText.MACHINE_INFO_1, 50);
@@ -233,7 +234,7 @@ public class GuiNecronomiconMachines extends GuiNecronomicon {
 		}
 		if(isTra){
 			stuff = localize("container.abyssalcraft.transmutator");
-			fontRendererObj.drawSplitString(stuff, k + 20, b0 + 16, 116, 0xC40000);
+			fontRenderer.drawSplitString(stuff, k + 20, b0 + 16, 116, 0xC40000);
 			Map<ItemStack, ItemStack> trans = TransmutatorRecipes.instance().getTransmutationList();
 			setTurnups(trans.size());
 			GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
@@ -306,7 +307,7 @@ public class GuiNecronomiconMachines extends GuiNecronomicon {
 		}
 		if(isCry){
 			stuff = localize("container.abyssalcraft.crystallizer");
-			fontRendererObj.drawSplitString(stuff, k + 20, b0 + 16, 116, 0xC40000);
+			fontRenderer.drawSplitString(stuff, k + 20, b0 + 16, 116, 0xC40000);
 			Map<ItemStack, ItemStack[]> cryst = CrystallizerRecipes.instance().getCrystallizationList();
 			setTurnups(cryst.size());
 			GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
@@ -382,7 +383,7 @@ public class GuiNecronomiconMachines extends GuiNecronomicon {
 
 		if(tooltipStack != null)
 		{
-			List<String> tooltipData = tooltipStack.getTooltip(Minecraft.getMinecraft().player, false);
+			List<String> tooltipData = tooltipStack.getTooltip(Minecraft.getMinecraft().player, TooltipFlags.NORMAL);
 			List<String> parsedTooltip = new ArrayList();
 			boolean first = true;
 
@@ -399,8 +400,8 @@ public class GuiNecronomiconMachines extends GuiNecronomicon {
 	}
 
 	private void drawTItems(Entry<ItemStack, ItemStack> entry, int num, int low, int mid, int high, int x, int y){
-		boolean unicode = fontRendererObj.getUnicodeFlag();
-		fontRendererObj.setUnicodeFlag(false);
+		boolean unicode = fontRenderer.getUnicodeFlag();
+		fontRenderer.setUnicodeFlag(false);
 		int k = (width - guiWidth) / 2;
 		byte b0 = 2;
 		if(num < mid && num > low-1){
@@ -410,12 +411,12 @@ public class GuiNecronomiconMachines extends GuiNecronomicon {
 			renderItem(k + 141, b0 + 28 + (num-mid)*20 + num-mid, entry.getKey(), x, y);
 			renderItem(k + 185, b0 + 28 + (num-mid)*20 + num-mid, entry.getValue(), x, y);
 		}
-		fontRendererObj.setUnicodeFlag(unicode);
+		fontRenderer.setUnicodeFlag(unicode);
 	}
 
 	private void drawCItems(Entry<ItemStack, ItemStack[]> entry, int num, int low, int mid, int high, int x, int y){
-		boolean unicode = fontRendererObj.getUnicodeFlag();
-		fontRendererObj.setUnicodeFlag(false);
+		boolean unicode = fontRenderer.getUnicodeFlag();
+		fontRenderer.setUnicodeFlag(false);
 		int k = (width - guiWidth) / 2;
 		byte b0 = 2;
 		if(num < mid && num > low-1){
@@ -428,7 +429,7 @@ public class GuiNecronomiconMachines extends GuiNecronomicon {
 			renderItem(k + 185, b0 + 28 + (num-mid)*20 + num-mid, entry.getValue()[0], x, y);
 			renderItem(k + 185 + 34, b0 + 28 + (num-mid)*20 + num-mid, entry.getValue()[1], x, y);
 		}
-		fontRendererObj.setUnicodeFlag(unicode);
+		fontRenderer.setUnicodeFlag(unicode);
 	}
 
 	private ItemStack tooltipStack;
@@ -450,7 +451,7 @@ public class GuiNecronomiconMachines extends GuiNecronomicon {
 		GlStateManager.enableRescaleNormal();
 		GlStateManager.enableBlend();
 		render.renderItemAndEffectIntoGUI(stack, xPos, yPos);
-		render.renderItemOverlayIntoGUI(Minecraft.getMinecraft().fontRendererObj, stack, xPos, yPos, null);
+		render.renderItemOverlayIntoGUI(Minecraft.getMinecraft().fontRenderer, stack, xPos, yPos, null);
 		RenderHelper.disableStandardItemLighting();
 		GlStateManager.popMatrix();
 

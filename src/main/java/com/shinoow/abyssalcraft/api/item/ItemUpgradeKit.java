@@ -13,9 +13,11 @@ package com.shinoow.abyssalcraft.api.item;
 
 import java.util.List;
 
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -50,8 +52,7 @@ public class ItemUpgradeKit extends Item {
 	@Override
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@SideOnly(Side.CLIENT)
-	public void addInformation(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, List par3List, boolean par4)
-	{
-		par3List.add(typeName + " To " + typeName2);
+	public void addInformation(ItemStack is, World player, List<String> l, ITooltipFlag B){
+		l.add(typeName + " To " + typeName2);
 	}
 }

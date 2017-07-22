@@ -30,7 +30,7 @@ public class LayerJzaharDeath implements LayerRenderer<EntityJzahar>
 		if (entitylivingbaseIn.deathTicks > 400)
 		{
 			Tessellator tessellator = Tessellator.getInstance();
-			VertexBuffer worldrenderer = tessellator.getBuffer();
+			BufferBuilder worldrenderer = tessellator.getBuffer();
 			RenderHelper.disableStandardItemLighting();
 			float f = (entitylivingbaseIn.deathTicks + partialTicks) / 400.0F;
 			float f1 = 0.0F;

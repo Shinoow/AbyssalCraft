@@ -164,7 +164,7 @@ public class EntityDepthsGhoul extends EntityMob implements ICoraliumEntity {
 	{
 		if (world.isDaytime() && !world.isRemote && !isChild() && world.provider.getDimension() != ACLib.abyssal_wasteland_id)
 		{
-			float var1 = getBrightness(1.0F);
+			float var1 = getBrightness();
 
 			if (var1 > 0.5F && rand.nextFloat() * 30.0F < (var1 - 0.4F) * 2.0F && world.canSeeSky(new BlockPos(MathHelper.floor(posX), MathHelper.floor(posY), MathHelper.floor(posZ))))
 			{
@@ -204,10 +204,10 @@ public class EntityDepthsGhoul extends EntityMob implements ICoraliumEntity {
 	{
 		super.onDeath(par1DamageSource);
 
-		if (par1DamageSource.getEntity() instanceof EntityPlayer)
+		if (par1DamageSource.getTrueSource() instanceof EntityPlayer)
 		{
-			EntityPlayer entityplayer = (EntityPlayer)par1DamageSource.getEntity();
-			entityplayer.addStat(ACAchievements.kill_depths_ghoul,1);
+			EntityPlayer entityplayer = (EntityPlayer)par1DamageSource.getTrueSource();
+//			entityplayer.addStat(ACAchievements.kill_depths_ghoul,1);
 		}
 	}
 
@@ -252,7 +252,7 @@ public class EntityDepthsGhoul extends EntityMob implements ICoraliumEntity {
 	}
 
 	@Override
-	protected SoundEvent getHurtSound()
+	protected SoundEvent getHurtSound(DamageSource source)
 	{
 		return ACSounds.ghoul_hurt;
 	}
@@ -325,7 +325,7 @@ public class EntityDepthsGhoul extends EntityMob implements ICoraliumEntity {
 	@Override
 	protected void updateEquipmentIfNeeded(EntityItem itemEntity)
 	{
-		if(!InitHandler.INSTANCE.isItemBlacklisted(this, itemEntity.getEntityItem()))
+		if(!InitHandler.INSTANCE.isItemBlacklisted(this, itemEntity.getItem()))
 			super.updateEquipmentIfNeeded(itemEntity);
 	}
 

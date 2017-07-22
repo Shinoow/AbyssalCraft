@@ -19,7 +19,6 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.crash.CrashReport;
 import net.minecraft.crash.CrashReportCategory;
 import net.minecraft.entity.*;
-import net.minecraft.entity.boss.EntityDragonPart;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
@@ -57,18 +56,18 @@ public class EntityDragonMinion extends EntityMob implements IEntityMultiPart, I
 	public int ringBufferIndex = -1;
 
 	/** An array containing all body parts of this dragon */
-	public EntityDragonPart[] dragonPartArray;
+	public MultiPartEntityPart[] dragonPartArray;
 
 	/** The head bounding box of a dragon */
-	public EntityDragonPart dragonPartHead;
+	public MultiPartEntityPart dragonPartHead;
 
 	/** The body bounding box of a dragon */
-	public EntityDragonPart dragonPartBody;
-	public EntityDragonPart dragonPartTail1;
-	public EntityDragonPart dragonPartTail2;
-	public EntityDragonPart dragonPartTail3;
-	public EntityDragonPart dragonPartWing1;
-	public EntityDragonPart dragonPartWing2;
+	public MultiPartEntityPart dragonPartBody;
+	public MultiPartEntityPart dragonPartTail1;
+	public MultiPartEntityPart dragonPartTail2;
+	public MultiPartEntityPart dragonPartTail3;
+	public MultiPartEntityPart dragonPartWing1;
+	public MultiPartEntityPart dragonPartWing2;
 
 	/** Animation time at previous tick. */
 	public float prevAnimTime;
@@ -87,7 +86,7 @@ public class EntityDragonMinion extends EntityMob implements IEntityMultiPart, I
 
 	public EntityDragonMinion(World par1World) {
 		super(par1World);
-		dragonPartArray = new EntityDragonPart[] {dragonPartHead = new EntityDragonPart(this, "head", 3.0F, 3.0F), dragonPartBody = new EntityDragonPart(this, "body", 4.0F, 4.0F), dragonPartTail1 = new EntityDragonPart(this, "tail", 2.0F, 2.0F), dragonPartTail2 = new EntityDragonPart(this, "tail", 2.0F, 2.0F), dragonPartTail3 = new EntityDragonPart(this, "tail", 2.0F, 2.0F), dragonPartWing1 = new EntityDragonPart(this, "wing", 2.0F, 2.0F), dragonPartWing2 = new EntityDragonPart(this, "wing", 2.0F, 2.0F)};
+		dragonPartArray = new MultiPartEntityPart[] {dragonPartHead = new MultiPartEntityPart(this, "head", 3.0F, 3.0F), dragonPartBody = new MultiPartEntityPart(this, "body", 4.0F, 4.0F), dragonPartTail1 = new MultiPartEntityPart(this, "tail", 2.0F, 2.0F), dragonPartTail2 = new MultiPartEntityPart(this, "tail", 2.0F, 2.0F), dragonPartTail3 = new MultiPartEntityPart(this, "tail", 2.0F, 2.0F), dragonPartWing1 = new MultiPartEntityPart(this, "wing", 2.0F, 2.0F), dragonPartWing2 = new MultiPartEntityPart(this, "wing", 2.0F, 2.0F)};
 		setHealth(getMaxHealth());
 		setSize(8.0F, 3.0F);
 		noClip = true;
@@ -145,10 +144,10 @@ public class EntityDragonMinion extends EntityMob implements IEntityMultiPart, I
 	{
 		super.onDeath(par1DamageSource);
 
-		if (par1DamageSource.getEntity() instanceof EntityPlayer)
+		if (par1DamageSource.getTrueSource() instanceof EntityPlayer)
 		{
-			EntityPlayer entityplayer = (EntityPlayer)par1DamageSource.getEntity();
-			entityplayer.addStat(ACAchievements.kill_spectral_dragon, 1);
+			EntityPlayer entityplayer = (EntityPlayer)par1DamageSource.getTrueSource();
+//			entityplayer.addStat(ACAchievements.kill_spectral_dragon, 1);
 		}
 	}
 
@@ -290,7 +289,7 @@ public class EntityDragonMinion extends EntityMob implements IEntityMultiPart, I
 				rotationYaw += randomYawVelocity * 0.1F;
 				float f6 = (float)(2.0D / (d10 + 1.0D));
 				float f7 = 0.06F;
-				moveRelative(0.0F, -1.0F, f7 * (f4 * f6 + (1.0F - f6)));
+				moveRelative(0.0F, 0.0F, -1.0F, f7 * (f4 * f6 + (1.0F - f6)));
 
 
 				move(MoverType.SELF, motionX, motionY, motionZ);
@@ -344,7 +343,7 @@ public class EntityDragonMinion extends EntityMob implements IEntityMultiPart, I
 
 			for (int j = 0; j < 3; ++j)
 			{
-				EntityDragonPart entitydragonpart = null;
+				MultiPartEntityPart entitydragonpart = null;
 
 				if (j == 0)
 					entitydragonpart = dragonPartTail1;
@@ -515,7 +514,7 @@ public class EntityDragonMinion extends EntityMob implements IEntityMultiPart, I
 	}
 
 	@Override
-	public boolean attackEntityFromPart(EntityDragonPart par1EntityDragonPart, DamageSource par2DamageSource, float par3)
+	public boolean attackEntityFromPart(MultiPartEntityPart par1EntityDragonPart, DamageSource par2DamageSource, float par3)
 	{
 		if (par1EntityDragonPart != dragonPartHead)
 			par3 = par3 / 2.0F + 1.0F;
@@ -528,7 +527,7 @@ public class EntityDragonMinion extends EntityMob implements IEntityMultiPart, I
 		targetZ = posZ - f3 * 5.0F + (rand.nextFloat() - 0.5F) * 2.0F;
 		target = null;
 
-		if (par2DamageSource.getEntity() instanceof EntityPlayer || par2DamageSource.isExplosion())
+		if (par2DamageSource.getTrueSource() instanceof EntityPlayer || par2DamageSource.isExplosion())
 			super.attackEntityFrom(par2DamageSource, par3);
 
 		return true;
@@ -565,7 +564,7 @@ public class EntityDragonMinion extends EntityMob implements IEntityMultiPart, I
 	}
 
 	@Override
-	protected SoundEvent getHurtSound()
+	protected SoundEvent getHurtSound(DamageSource source)
 	{
 		return SoundEvents.ENTITY_ENDERDRAGON_HURT;
 	}

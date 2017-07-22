@@ -19,6 +19,7 @@ import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.common.ForgeModContainer;
 import net.minecraftforge.fluids.UniversalBucket;
 import net.minecraftforge.fml.common.event.*;
+import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
@@ -79,9 +80,7 @@ public class ItemHandler implements ILifeCycleHandler {
 		ACItems.interdimensional_cage = new ItemInterdimensionalCage();
 		ACItems.stone_tablet = new ItemStoneTablet();
 
-		ACItems.liquid_coralium_bucket_stack = UniversalBucket.getFilledBucket(ForgeModContainer.getInstance().universalBucket, AbyssalCraftAPI.liquid_coralium_fluid);
-		ACItems.liquid_antimatter_bucket_stack = UniversalBucket.getFilledBucket(ForgeModContainer.getInstance().universalBucket, AbyssalCraftAPI.liquid_antimatter_fluid);
-
+		
 		//Coins
 		ACItems.coin = new ItemCoin("coin");
 		ACItems.cthulhu_engraved_coin = new ItemCoin("cthulhucoin");
@@ -445,11 +444,12 @@ public class ItemHandler implements ILifeCycleHandler {
 		registerItem(ACItems.stone_tablet, "stonetablet");
 		//		registerItem(shadowPlate, "shadowplate");
 
-		AbyssalCraftAPI.setRepairItems();
 	}
 
 	@Override
-	public void init(FMLInitializationEvent event) {}
+	public void init(FMLInitializationEvent event) {
+		
+	}
 
 	@Override
 	public void postInit(FMLPostInitializationEvent event) {}
@@ -458,6 +458,6 @@ public class ItemHandler implements ILifeCycleHandler {
 	public void loadComplete(FMLLoadCompleteEvent event) {}
 
 	private static void registerItem(Item item, String name){
-		GameRegistry.register(item.setRegistryName(new ResourceLocation(AbyssalCraft.modid, name)));
+		InitHandler.INSTANCE.ITEMS.add(item.setRegistryName(new ResourceLocation(AbyssalCraft.modid, name)));
 	}
 }

@@ -52,8 +52,8 @@ public class TileEntityJzaharSpawner extends TileEntity implements ITickable {
 			world.spawnEntity(mob);
 			world.setBlockToAir(pos);
 			List<EntityPlayer> players = world.getEntitiesWithinAABB(EntityPlayer.class, mob.getEntityBoundingBox().expand(64, 64, 64));
-			for(EntityPlayer player : players)
-				player.addStat(ACAchievements.locate_jzahar, 1);
+//			for(EntityPlayer player : players)
+//				player.addStat(ACAchievements.locate_jzahar, 1);
 		}
 	}
 }

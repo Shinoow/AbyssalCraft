@@ -11,6 +11,8 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.common.blocks.itemblock;
 
+import com.shinoow.abyssalcraft.common.blocks.IngotBlock.EnumIngotType;
+
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
@@ -40,10 +42,12 @@ public class ItemMetadataBlock extends ItemBlock {
 
 		if(getUnlocalizedName().contains("darkethaxiumbrick"))
 			return TextFormatting.DARK_RED + I18n.translateToLocal(getUnlocalizedName() + "." + subNames[par1ItemStack.getItemDamage()] + ".name");
-		else if(getUnlocalizedName().contains("ethaxiumbrick"))
+		else if(getUnlocalizedName().contains("ethaxiumbrick") || getUnlocalizedName().endsWith("stone") && par1ItemStack.getItemDamage() == 5)
 			return TextFormatting.AQUA + I18n.translateToLocal(getUnlocalizedName() + "." + subNames[par1ItemStack.getItemDamage()] + ".name");
-		else if(getUnlocalizedName().contains("abybrick"))
+		else if(getUnlocalizedName().contains("abybrick") || getUnlocalizedName().endsWith("stone") && par1ItemStack.getItemDamage() == 1)
 			return TextFormatting.BLUE + I18n.translateToLocal(getUnlocalizedName() + "." + subNames[par1ItemStack.getItemDamage()] + ".name");
+		else if(getUnlocalizedName().contains("ingotblock"))
+			return EnumIngotType.byMetadata(par1ItemStack.getItemDamage()).getFormat() + I18n.translateToLocal(getUnlocalizedName() + "." + subNames[par1ItemStack.getItemDamage()] + ".name");
 		return I18n.translateToLocal(getUnlocalizedName() + "." + subNames[par1ItemStack.getItemDamage()] + ".name");
 	}
 }

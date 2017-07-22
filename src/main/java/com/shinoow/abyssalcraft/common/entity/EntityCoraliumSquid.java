@@ -71,4 +71,9 @@ public class EntityCoraliumSquid extends EntitySquid implements ICoraliumEntity,
 		playSound(SoundEvents.ENTITY_SQUID_AMBIENT, 1.0F, 1.0F / (getRNG().nextFloat() * 0.4F + 0.8F));
 		world.spawnEntity(entityinkprojectile);
 	}
+
+	@Override
+	public void setSwingingArms(boolean swingingArms) {
+
+	}
 }

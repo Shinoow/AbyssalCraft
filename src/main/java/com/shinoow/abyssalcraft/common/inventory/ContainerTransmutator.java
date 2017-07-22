@@ -50,9 +50,9 @@ public class ContainerTransmutator extends Container {
 	public void addListener(IContainerListener listener)
 	{
 		super.addListener(listener);
-		listener.sendProgressBarUpdate(this, 0, tileTransmutator.transmutatorProcessTime);
-		listener.sendProgressBarUpdate(this, 1, tileTransmutator.transmutatorBurnTime);
-		listener.sendProgressBarUpdate(this, 2, tileTransmutator.currentItemBurnTime);
+		listener.sendWindowProperty(this, 0, tileTransmutator.transmutatorProcessTime);
+		listener.sendWindowProperty(this, 1, tileTransmutator.transmutatorBurnTime);
+		listener.sendWindowProperty(this, 2, tileTransmutator.currentItemBurnTime);
 	}
 
 	@Override
@@ -65,13 +65,13 @@ public class ContainerTransmutator extends Container {
 			IContainerListener icrafting = listeners.get(i);
 
 			if (lastProcessTime != tileTransmutator.transmutatorProcessTime)
-				icrafting.sendProgressBarUpdate(this, 0, tileTransmutator.transmutatorProcessTime);
+				icrafting.sendWindowProperty(this, 0, tileTransmutator.transmutatorProcessTime);
 
 			if (lastBurnTime != tileTransmutator.transmutatorBurnTime)
-				icrafting.sendProgressBarUpdate(this, 1, tileTransmutator.transmutatorBurnTime);
+				icrafting.sendWindowProperty(this, 1, tileTransmutator.transmutatorBurnTime);
 
 			if (lastItemBurnTime != tileTransmutator.currentItemBurnTime)
-				icrafting.sendProgressBarUpdate(this, 2, tileTransmutator.currentItemBurnTime);
+				icrafting.sendWindowProperty(this, 2, tileTransmutator.currentItemBurnTime);
 		}
 
 		lastProcessTime = tileTransmutator.transmutatorProcessTime;

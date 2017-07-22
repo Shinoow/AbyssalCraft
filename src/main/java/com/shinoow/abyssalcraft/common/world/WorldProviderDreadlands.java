@@ -15,7 +15,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.DimensionType;
 import net.minecraft.world.WorldProvider;
-import net.minecraft.world.chunk.IChunkGenerator;
+import net.minecraft.world.gen.IChunkGenerator;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -27,7 +27,7 @@ public class WorldProviderDreadlands extends WorldProvider {
 	@Override
 	public void init() {
 		biomeProvider = new BiomeProviderDreadlands(world.getSeed(), world.getWorldInfo().getTerrainType());
-		hasNoSky = true;
+//		hasNoSky = true;
 		setDimension(ACLib.dreadlands_id);
 	}
 

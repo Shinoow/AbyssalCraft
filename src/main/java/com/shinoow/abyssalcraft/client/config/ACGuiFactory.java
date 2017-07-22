@@ -18,14 +18,10 @@ import net.minecraft.client.gui.GuiScreen;
 import net.minecraftforge.fml.client.IModGuiFactory;
 
 public class ACGuiFactory implements IModGuiFactory {
+
 	@Override
 	public void initialize(Minecraft minecraftInstance) {
 
-	}
-
-	@Override
-	public Class<? extends GuiScreen> mainConfigGuiClass() {
-		return ACConfigGUI.class;
 	}
 
 	@Override
@@ -34,7 +30,14 @@ public class ACGuiFactory implements IModGuiFactory {
 	}
 
 	@Override
-	public RuntimeOptionGuiHandler getHandlerFor(RuntimeOptionCategoryElement element) {
-		return null;
+	public boolean hasConfigGui() {
+
+		return true;
+	}
+
+	@Override
+	public GuiScreen createConfigGui(GuiScreen parentScreen) {
+
+		return new ACConfigGUI(parentScreen);
 	}
 }
