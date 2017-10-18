@@ -22,8 +22,10 @@ import net.minecraft.block.properties.PropertyInteger;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
+import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
@@ -36,6 +38,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
+import com.shinoow.abyssalcraft.api.item.ACItems;
 import com.shinoow.abyssalcraft.common.entity.EntityLesserShoggoth;
 import com.shinoow.abyssalcraft.lib.ACConfig;
 import com.shinoow.abyssalcraft.lib.ACLib;
@@ -101,6 +104,15 @@ public class BlockShoggothOoze extends BlockACBasic {
 		if(!(entity instanceof EntityLesserShoggoth)){
 			entity.motionX *= 0.4D;
 			entity.motionZ *= 0.4D;
+			if(entity instanceof EntityLivingBase && !world.isRemote){
+				EntityLivingBase e = (EntityLivingBase)entity;
+				ItemStack legs = e.getItemStackFromSlot(EntityEquipmentSlot.LEGS);
+				ItemStack feet = e.getItemStackFromSlot(EntityEquipmentSlot.FEET);
+				if(e.ticksExisted % 60 == 0 && legs != null && legs.getItem() != ACItems.ethaxium_leggings)
+					legs.damageItem(1, e);
+				if(e.ticksExisted % 40 == 0 && feet != null && feet.getItem() != ACItems.ethaxium_boots)
+					feet.damageItem(1, e);
+			}
 		}
 	}
 
@@ -139,7 +151,7 @@ public class BlockShoggothOoze extends BlockACBasic {
 	{
 		IBlockState iblockstate = worldIn.getBlockState(pos.down());
 		Block block = iblockstate.getBlock();
-		return block != ACBlocks.shoggoth_biomass ? iblockstate.getBlock().isLeaves(iblockstate, worldIn, pos.down()) ? true : block == this && iblockstate.getValue(LAYERS).intValue() == 8 ? true : iblockstate.isOpaqueCube() && iblockstate.getMaterial().blocksMovement() : false;
+		return block != ACBlocks.shoggoth_biomass && block != ACBlocks.monolith_stone ? iblockstate.getBlock().isLeaves(iblockstate, worldIn, pos.down()) ? true : block == this && iblockstate.getValue(LAYERS).intValue() == 8 ? true : iblockstate.isOpaqueCube() && iblockstate.getMaterial().blocksMovement() : false;
 	}
 
 	@Override

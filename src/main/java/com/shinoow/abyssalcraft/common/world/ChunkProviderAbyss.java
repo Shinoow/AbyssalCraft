@@ -377,7 +377,7 @@ public class ChunkProviderAbyss implements IChunkGenerator
 				BlockPos pos1 = worldObj.getHeight(pos.add(Xcoord2, 0, Zcoord2));
 				if(worldObj.getBlockState(pos1).getMaterial() == Material.PLANTS) pos1 = pos1.down();
 
-				if(rand.nextInt(400) == 0 && !worldObj.isAirBlock(pos1.north(13)) && !worldObj.isAirBlock(pos1.north(20)) && !worldObj.isAirBlock(pos1.north(27)))
+				if(rand.nextInt(200) == 0 && !worldObj.isAirBlock(pos1.north(13)) && !worldObj.isAirBlock(pos1.north(20)) && !worldObj.isAirBlock(pos1.north(27)))
 					new StructureShoggothPit().generate(worldObj, rand, pos1);
 			}
 

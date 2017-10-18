@@ -17,10 +17,8 @@ import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Vec3d;
 
-import com.shinoow.abyssalcraft.AbyssalCraft;
+import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
 import com.shinoow.abyssalcraft.api.energy.IEnergyContainer;
 import com.shinoow.abyssalcraft.api.energy.IEnergyTransporter;
 import com.shinoow.abyssalcraft.api.energy.PEUtils;
@@ -48,6 +46,12 @@ public class TileEntityEnergyRelay extends TileEntity implements IEnergyTranspor
 	}
 
 	@Override
+	public void onLoad()
+	{
+		ticksExisted = worldObj.rand.nextInt(100);
+	}
+
+	@Override
 	public SPacketUpdateTileEntity getUpdatePacket() {
 		return new SPacketUpdateTileEntity(pos, 1, getUpdateTag());
 	}
@@ -72,7 +76,7 @@ public class TileEntityEnergyRelay extends TileEntity implements IEnergyTranspor
 			if(worldObj.getBlockState(pos).getProperties().containsKey(BlockEnergyRelay.FACING))
 				PEUtils.collectNearbyPE(this, worldObj, pos, worldObj.getBlockState(pos).getValue(BlockEnergyRelay.FACING).getOpposite(), 5);
 
-		if(ticksExisted % 40 == 0 && canTransferPE())
+		if(ticksExisted % 40 == 0 && canTransferPE() && !worldObj.isRemote)
 			if(worldObj.getBlockState(pos).getProperties().containsKey(BlockEnergyRelay.FACING))
 				transferPE(worldObj.getBlockState(pos).getValue(BlockEnergyRelay.FACING), 10);
 	}
@@ -84,21 +88,8 @@ public class TileEntityEnergyRelay extends TileEntity implements IEnergyTranspor
 			IEnergyContainer container = PEUtils.getContainer(worldObj, pos, facing, 4);
 			if(container != null)
 				if(container.canAcceptPE()){
-					if(!worldObj.isRemote)
-						container.addEnergy(consumeEnergy(energy));
-					BlockPos p = container.getContainerTile().getPos();
-
-					Vec3d vec = new Vec3d(p.subtract(pos)).normalize();
-
-					double d = Math.sqrt(p.distanceSq(pos));
-
-					for(int i = 0; i < d * 15; i++){
-						double i1 = i / 15D;
-						double xp = pos.getX() + vec.xCoord * i1 + .5;
-						double yp = pos.getY() + vec.yCoord * i1 + .5;
-						double zp = pos.getZ() + vec.zCoord * i1 + .5;
-						AbyssalCraft.proxy.spawnParticle("PEStream", worldObj, xp, yp, zp, vec.xCoord * .1, .15, vec.zCoord * .1);
-					}
+					container.addEnergy(consumeEnergy(energy));
+					AbyssalCraftAPI.getInternalMethodHandler().spawnPEStream(pos, container.getContainerTile().getPos(), worldObj.provider.getDimension());
 				}
 		}
 	}
@@ -123,7 +114,6 @@ public class TileEntityEnergyRelay extends TileEntity implements IEnergyTranspor
 
 	@Override
 	public float consumeEnergy(float energy) {
-		worldObj.notifyBlockUpdate(pos, worldObj.getBlockState(pos), worldObj.getBlockState(pos), 2);
 		if(energy < this.energy){
 			this.energy -= energy;
 			return energy;

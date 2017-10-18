@@ -13,22 +13,23 @@ package com.shinoow.abyssalcraft.common.inventory;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.inventory.ClickType;
-import net.minecraft.inventory.Container;
-import net.minecraft.inventory.Slot;
+import net.minecraft.inventory.*;
 import net.minecraft.item.ItemStack;
 
+import com.shinoow.abyssalcraft.api.spell.Spell;
+import com.shinoow.abyssalcraft.api.spell.SpellRegistry;
 import com.shinoow.abyssalcraft.common.items.ItemNecronomicon;
 
 public class ContainerSpellbook extends Container {
 
 	private final InventorySpellbook inventory;
-
+	private final InventorySpellbookOutput output = new InventorySpellbookOutput();
 	public ItemStack book;
+	public Spell currentSpell;
 
 	public ContainerSpellbook(InventoryPlayer inventoryPlayer, ItemStack book)
 	{
-		inventory = new InventorySpellbook(book);
+		inventory = new InventorySpellbook(this, book);
 		this.book = book;
 		int i = (8 - 4) * 18 - 1;
 		int j;
@@ -40,7 +41,7 @@ public class ContainerSpellbook extends Container {
 		addSlotToContainer(new Slot(inventory, 3, 65, 116));
 		addSlotToContainer(new Slot(inventory, 4, 37, 116));
 		addSlotToContainer(new Slot(inventory, 5, 26, 87));
-		addSlotToContainer(new Slot(inventory, 6, 134, 91));
+		addSlotToContainer(new SlotSpellOutput(inventory, output, 0, 134, 91));
 
 		for (j = 0; j < 3; ++j)
 			for (k = 0; k < 9; ++k)
@@ -54,6 +55,23 @@ public class ContainerSpellbook extends Container {
 	public boolean canInteractWith(EntityPlayer player) {
 
 		return true;
+	}
+
+	@Override
+	public void onCraftMatrixChanged(IInventory inventoryIn)
+	{
+		ItemStack[] stacks = new ItemStack[5];
+		for(int i = 1; i < 6; i++)
+			stacks[i-1] = inventory.getStackInSlot(i);
+
+		if(inventory.getStackInSlot(0) == null) return;
+		ItemStack stack = inventory.getStackInSlot(0).copy();
+
+		stack.stackSize = 1;
+
+		output.spell = currentSpell = SpellRegistry.instance().getSpell(((ItemNecronomicon) book.getItem()).getBookType(), stack, stacks);
+
+		output.setInventorySlotContents(0, currentSpell != null ? SpellRegistry.instance().inscribeSpell(currentSpell, stack) : null);
 	}
 
 	@Override

@@ -18,6 +18,8 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
+import com.shinoow.abyssalcraft.api.APIUtils;
+
 /**
  * A Necronomicon Infusion Ritual
  * @author shinoow
@@ -88,7 +90,7 @@ public class NecronomiconInfusionRitual extends NecronomiconCreationRitual {
 		altar.writeToNBT(compound);
 		NBTTagCompound nbtItem = compound.getCompoundTag("Item");
 
-		return RitualRegistry.instance().areObjectsEqual(ItemStack.loadItemStackFromNBT(nbtItem), sacrifice, false);
+		return APIUtils.areObjectsEqual(ItemStack.loadItemStackFromNBT(nbtItem), sacrifice, false);
 	}
 
 	@Override

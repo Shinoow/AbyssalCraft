@@ -30,6 +30,7 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -176,10 +177,12 @@ public class BlockDreadlandsPortal extends BlockBreakable {
 				thePlayer.timeUntilPortal = thePlayer.getPortalCooldown();
 			else if (thePlayer.dimension != ACLib.dreadlands_id)
 			{
+				if(!ForgeHooks.onTravelToDimension(thePlayer, ACLib.dreadlands_id)) return;
 				thePlayer.timeUntilPortal = ACConfig.portalCooldown;
 				thePlayer.mcServer.getPlayerList().transferPlayerToDimension(thePlayer, ACLib.dreadlands_id, new TeleporterAC(thePlayer.mcServer.worldServerForDimension(ACLib.dreadlands_id), this, ACBlocks.dreadstone));
 			}
 			else {
+				if(!ForgeHooks.onTravelToDimension(thePlayer, ACLib.abyssal_wasteland_id)) return;
 				thePlayer.timeUntilPortal = ACConfig.portalCooldown;
 				thePlayer.mcServer.getPlayerList().transferPlayerToDimension(thePlayer, ACLib.abyssal_wasteland_id, new TeleporterAC(thePlayer.mcServer.worldServerForDimension(ACLib.abyssal_wasteland_id), this, ACBlocks.dreadstone));
 			}

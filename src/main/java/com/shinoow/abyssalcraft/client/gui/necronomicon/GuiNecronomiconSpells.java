@@ -40,6 +40,7 @@ public class GuiNecronomiconSpells extends GuiNecronomicon {
 	@Override
 	public void initGui()
 	{
+		currentNecro = this;
 		buttonList.clear();
 		Keyboard.enableRepeatEvents(true);
 
@@ -47,8 +48,8 @@ public class GuiNecronomiconSpells extends GuiNecronomicon {
 
 		int i = (width - guiWidth) / 2;
 		byte b0 = 2;
-		buttonList.add(buttonNextPage = new ButtonNextPage(1, i + 215, b0 + 154, true));
-		buttonList.add(buttonPreviousPage = new ButtonNextPage(2, i + 18, b0 + 154, false));
+		buttonList.add(buttonNextPage = new ButtonNextPage(1, i + 215, b0 + 154, true, false));
+		buttonList.add(buttonPreviousPage = new ButtonNextPage(2, i + 18, b0 + 154, false, false));
 		buttonList.add(buttonCat1 = new ButtonCategory(3, i + 14, b0 + 24, this, "Create/modify spells", false, ACItems.necronomicon));
 		buttonList.add(buttonCat2 = new ButtonCategory(4, i + 14, b0 + 41, this, "Open Compendium", false, hasSpells() ? ACItems.necronomicon : ACItems.oblivion_catalyst));
 		//		buttonList.add(buttonCat3 = new ButtonCategory(5, i + 10, b0 + 80, this, 0, "necronomicon.index.rituals", AbyssalCraft.necronomicon));

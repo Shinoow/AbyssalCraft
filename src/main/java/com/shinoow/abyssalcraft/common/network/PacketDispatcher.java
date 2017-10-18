@@ -70,6 +70,7 @@ public class PacketDispatcher
 		registerMessage(UpdateModeMessage.class);
 		registerMessage(StaffModeMessage.class);
 		registerMessage(PEStreamMessage.class);
+		registerMessage(LifeDrainMessage.class);
 	}
 
 	/**

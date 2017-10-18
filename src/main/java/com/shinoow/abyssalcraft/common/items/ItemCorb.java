@@ -45,6 +45,12 @@ public class ItemCorb extends Item {
 	}
 
 	@Override
+	public boolean isBookEnchantable(ItemStack stack, ItemStack book)
+	{
+		return false;
+	}
+
+	@Override
 	public String getItemStackDisplayName(ItemStack par1ItemStack) {
 
 		return TextFormatting.AQUA + super.getItemStackDisplayName(par1ItemStack);

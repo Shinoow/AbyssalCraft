@@ -38,7 +38,6 @@ public class WorldProviderDarkRealm extends WorldProvider {
 	public void createBiomeProvider() {
 		biomeProvider = new BiomeProviderSingle(ACBiomes.dark_realm);
 		setDimension(ACLib.dark_realm_id);
-		hasNoSky = true;
 	}
 
 	@Override

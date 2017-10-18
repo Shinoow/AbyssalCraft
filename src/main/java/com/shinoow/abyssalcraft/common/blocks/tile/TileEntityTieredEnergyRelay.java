@@ -12,10 +12,8 @@
 package com.shinoow.abyssalcraft.common.blocks.tile;
 
 import net.minecraft.util.EnumFacing;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Vec3d;
 
-import com.shinoow.abyssalcraft.AbyssalCraft;
+import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
 import com.shinoow.abyssalcraft.api.energy.IEnergyContainer;
 import com.shinoow.abyssalcraft.api.energy.PEUtils;
 import com.shinoow.abyssalcraft.common.blocks.BlockEnergyRelay;
@@ -25,6 +23,12 @@ public abstract class TileEntityTieredEnergyRelay extends TileEntityEnergyRelay 
 	private int ticksExisted;
 
 	@Override
+	public void onLoad()
+	{
+		ticksExisted = worldObj.rand.nextInt(100);
+	}
+
+	@Override
 	public void update() {
 		++ticksExisted;
 
@@ -32,7 +36,7 @@ public abstract class TileEntityTieredEnergyRelay extends TileEntityEnergyRelay 
 			if(worldObj.getBlockState(pos).getProperties().containsKey(BlockEnergyRelay.FACING))
 				PEUtils.collectNearbyPE(this, worldObj, pos, worldObj.getBlockState(pos).getValue(BlockEnergyRelay.FACING).getOpposite(), getDrainQuanta());
 
-		if(ticksExisted % 40 == 0 && canTransferPE())
+		if(ticksExisted % 40 == 0 && canTransferPE() && !worldObj.isRemote)
 			if(worldObj.getBlockState(pos).getProperties().containsKey(BlockEnergyRelay.FACING))
 				transferPE(worldObj.getBlockState(pos).getValue(BlockEnergyRelay.FACING), getTransferQuanta());
 	}
@@ -44,21 +48,8 @@ public abstract class TileEntityTieredEnergyRelay extends TileEntityEnergyRelay 
 			IEnergyContainer container = PEUtils.getContainer(worldObj, pos, facing, getRange());
 			if(container != null)
 				if(container.canAcceptPE()){
-					if(!worldObj.isRemote)
-						container.addEnergy(consumeEnergy(energy));
-					BlockPos p = container.getContainerTile().getPos();
-
-					Vec3d vec = new Vec3d(p.subtract(pos)).normalize();
-
-					double d = Math.sqrt(p.distanceSq(pos));
-
-					for(int i = 0; i < d * 15; i++){
-						double i1 = i / 15D;
-						double xp = pos.getX() + vec.xCoord * i1 + .5;
-						double yp = pos.getY() + vec.yCoord * i1 + .5;
-						double zp = pos.getZ() + vec.zCoord * i1 + .5;
-						AbyssalCraft.proxy.spawnParticle("PEStream", worldObj, xp, yp, zp, vec.xCoord * .1, .15, vec.zCoord * .1);
-					}
+					container.addEnergy(consumeEnergy(energy));
+					AbyssalCraftAPI.getInternalMethodHandler().spawnPEStream(pos, container.getContainerTile().getPos(), worldObj.provider.getDimension());
 				}
 		}
 	}

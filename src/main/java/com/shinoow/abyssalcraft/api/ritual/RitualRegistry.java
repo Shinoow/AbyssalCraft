@@ -15,16 +15,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import net.minecraft.block.Block;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.FMLLog;
-import net.minecraftforge.oredict.OreDictionary;
 
 import org.apache.logging.log4j.Level;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
+import com.shinoow.abyssalcraft.api.APIUtils;
 
 /**
  * Registry class for Necronomicon Rituals
@@ -181,81 +179,34 @@ public class RitualRegistry {
 		if(ritual.getDimension() == dimension || ritual.getDimension() == -1)
 			if(ritual.getBookType() <= bookType)
 				if(ritual.getOfferings() != null && offerings != null)
-					if(areItemStackArraysEqual(ritual.getOfferings(), offerings, ritual.isNBTSensitive()))
+					if(APIUtils.areItemStackArraysEqual(ritual.getOfferings(), offerings, ritual.isNBTSensitive()))
 						if(ritual.requiresItemSacrifice() || ritual.getSacrifice() == null && sacrifice == null ||
-						areObjectsEqual(sacrifice, ritual.getSacrifice(), false))
+						APIUtils.areObjectsEqual(sacrifice, ritual.getSacrifice(), ritual.isSacrificeNBTSensitive()))
 							return true;
 		return false;
 	}
 
-	private boolean areItemStackArraysEqual(Object[] array1, ItemStack[] array2, boolean nbt){
-
-		List<Object> compareList = nonNullList(array1);
-		List<ItemStack> itemList = Lists.newArrayList();
-
-		for(ItemStack item : array2)
-			if(item != null)
-				itemList.add(item);
-
-		if(itemList.size() == compareList.size())
-			for(ItemStack item : itemList)
-				for(Object compare : compareList)
-					if(areObjectsEqual(item, compare, nbt)){
-						compareList.remove(compare);
-						break;
-					}
-
-		return compareList.isEmpty();
+	/**
+	 * @deprecated see {@link APIUtils#areObjectsEqual(ItemStack, Object, boolean)}
+	 */
+	@Deprecated
+	public boolean areObjectsEqual(ItemStack stack, Object obj, boolean nbt){
+		return APIUtils.areObjectsEqual(stack, obj, nbt);
 	}
 
 	/**
-	 * Converts an array of Objects into a List without any null elements.<br>
-	 * The only reason any Object would be null in the first place would be
-	 * if the ritual required less than 8 offerings and you wanted to make the
-	 * alignment in the Necronomicon GUI a certain way.
+	 * @deprecated see {@link APIUtils#areStacksEqual(ItemStack, ItemStack, boolean)}
 	 */
-	private List<Object> nonNullList(Object[] array){
-		List<Object> l = Lists.newArrayList();
-
-		for(Object o : array)
-			if(o != null)
-				l.add(o);
-
-		return l;
-	}
-
-	public boolean areObjectsEqual(ItemStack stack, Object obj, boolean nbt){
-		if(obj instanceof ItemStack)
-			return areStacksEqual(stack, (ItemStack)obj, nbt);
-		else if(obj instanceof Item)
-			return areStacksEqual(stack, new ItemStack((Item)obj), nbt);
-		else if(obj instanceof Block)
-			return areStacksEqual(stack, new ItemStack((Block)obj), nbt);
-		else if(obj instanceof ItemStack[]){
-			for(ItemStack item : (ItemStack[])obj)
-				if(areStacksEqual(stack, item, nbt))
-					return true;
-		} else if(obj instanceof String){
-			for(ItemStack item : OreDictionary.getOres((String)obj))
-				if(areStacksEqual(stack, item, nbt))
-					return true;
-		} else if(obj instanceof List)
-			for(ItemStack item : (List<ItemStack>)obj)
-				if(areStacksEqual(stack, item, nbt))
-					return true;
-		return false;
-	}
-
+	@Deprecated
 	public boolean areStacksEqual(ItemStack stack1, ItemStack stack2, boolean nbt){
-		if(stack1 == null || stack2 == null) return false;
-		return nbt ? areStacksEqual(stack1, stack2) && ItemStack.areItemStackTagsEqual(stack2, stack1) :
-			areStacksEqual(stack1, stack2);
+		return APIUtils.areStacksEqual(stack1, stack2, nbt);
 	}
 
-	public boolean areStacksEqual(ItemStack stack1, ItemStack stack2)
-	{
-		if (stack1 == null || stack2 == null) return false;
-		return stack1.getItem() == stack2.getItem() && (stack2.getItemDamage() == OreDictionary.WILDCARD_VALUE
-			|| stack1.getItemDamage() == stack2.getItemDamage());
+	/**
+	 * @deprecated see {@link APIUtils#areStacksEqual(ItemStack, ItemStack)}
+	 */
+	@Deprecated
+	public boolean areStacksEqual(ItemStack stack1, ItemStack stack2){
+		return APIUtils.areStacksEqual(stack1, stack2);
 	}
 }

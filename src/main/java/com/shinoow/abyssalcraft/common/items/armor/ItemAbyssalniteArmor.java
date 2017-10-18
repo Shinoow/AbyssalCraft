@@ -22,6 +22,7 @@ import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 
 import com.shinoow.abyssalcraft.api.item.ACItems;
+import com.shinoow.abyssalcraft.lib.ACConfig;
 import com.shinoow.abyssalcraft.lib.ACTabs;
 
 public class ItemAbyssalniteArmor extends ItemArmor {
@@ -50,7 +51,7 @@ public class ItemAbyssalniteArmor extends ItemArmor {
 
 	@Override
 	public void onArmorTick(World world, EntityPlayer player, ItemStack itemstack) {
-		if(world.isRemote) return;
+		if(world.isRemote || !ACConfig.armorPotionEffects) return;
 		if (itemstack.getItem() == ACItems.abyssalnite_helmet)
 			player.addPotionEffect(new PotionEffect(MobEffects.WATER_BREATHING, 20, 0));
 		if (itemstack.getItem() == ACItems.abyssalnite_boots)

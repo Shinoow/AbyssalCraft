@@ -295,10 +295,10 @@ public class PEUtils {
 	 */
 	public static void collectNearbyPE(IEnergyTransporter relay, World world, BlockPos pos, EnumFacing face, float amount){
 		if(relay.canAcceptPE()){
-			IEnergyCollector collector = getCollector(world, pos, face, 1);
-			if(collector != null && collector.canTransferPE())
+			IEnergyContainer container = getContainer(world, pos, face, 1);
+			if(container != null && container.canTransferPE())
 				if(!world.isRemote)
-					relay.addEnergy(collector.consumeEnergy(amount));
+					relay.addEnergy(container.consumeEnergy(amount));
 
 		}
 	}

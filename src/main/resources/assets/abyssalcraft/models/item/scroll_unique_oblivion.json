@@ -1,0 +1,6 @@
+{
+	"parent": "item/generated",
+	"textures": {
+		"layer0": "abyssalcraft:items/scrolls/scroll_unique_oblivion"
+	}
+}
