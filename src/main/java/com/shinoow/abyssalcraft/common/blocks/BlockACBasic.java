@@ -15,8 +15,16 @@ import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.state.IBlockState;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.boss.EntityDragon;
+import net.minecraft.entity.boss.EntityWither;
+import net.minecraft.entity.projectile.EntityWitherSkull;
 import net.minecraft.util.IStringSerializable;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.IBlockAccess;
 
+import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.lib.ACTabs;
 
 public class BlockACBasic extends Block {
@@ -80,6 +88,14 @@ public class BlockACBasic extends Block {
 			else if(material == Material.GROUND || material == Material.GRASS || material == Material.SAND ||
 					material == Material.SNOW || material == Material.CRAFTED_SNOW)
 				setHarvestLevel("shovel", 0);
+	}
+
+	@Override
+	public boolean canEntityDestroy(IBlockState state, IBlockAccess world, BlockPos pos, Entity entity)
+	{
+		if(entity instanceof EntityDragon || entity instanceof EntityWither || entity instanceof EntityWitherSkull)
+			return state.getBlock() != ACBlocks.ethaxium;
+		return super.canEntityDestroy(state, world, pos, entity);
 	}
 
 	public static enum EnumType implements IStringSerializable

@@ -37,7 +37,6 @@ public class WorldProviderAbyss extends WorldProvider {
 	public void init() {
 		biomeProvider = new BiomeProviderSingle(ACBiomes.abyssal_wastelands);
 		setDimension(ACLib.abyssal_wasteland_id);
-		hasNoSky = true;
 	}
 
 	@Override

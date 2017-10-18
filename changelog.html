@@ -1,5 +1,24 @@
 <ul>
-	<li>Fixed a small derp in the Crystallizer recipe handling code</li>
-	<li>Improved explosion code for ODB and ODB Cores (along with some performance improvements)</li>
-	<li>Fixed a crash with BoP (or any other mod adding specific blocks to the OreDictionary with the wildcard value as meta)</li>
+	<li>Added a configurable list of mobs to spawn Demon Animals from on death</li>
+	<li>Maps now works inside AbyssalCraft dimensions</li>
+	<li>The Necronomicon now saves the last page viewed before closing (doesn't persist across restarts, however)</li>
+	<li>Increased the spawn rate of shadow mobs in Darklands biomes</li>
+	<li>Shadow Creatures now have a guaranteed chance of dropping Shadow Fragments</li>
+	<li>Shoggoth Ooze no longer spreads on Monolith Stone</li>
+	<li>Greatly increased the spawn chance of Shoggoth Lairs while making it more configurable</li>
+	<li>If a ritual doesn't have a description, the Necronomicon won't try to display it on the ritual page</li>
+	<li>Optimized the performance of Energy Relays slightly (probably mostly noticeable in larger networks of them)</li>
+	<li>Disruption packets without a Deity are now properly handled, stopping the error log spam</li>
+	<li>Shoggoth Ooze is now corrosive, dealing durability damage to leg and foot armor while exposed to it</li>
+	<li>The NecroData Capability now filters out things that are no longer registered on load</li>
+	<li>All Ethaxium blocks (dark or not) are now Ender Dragon and Wither-proof</li>
+	<li>Transmutator and Crystallizer fuels with container items (like filled buckets) now return the container item</li>
+	<li>Portal blocks now fire the EntityTravelToDimensionEvent prior to teleporting the player, making it possible to cancel teleportation between AbyssalCraft dimensions</li>
+	<li>Added additional buttons to the Necronomicon GUI (skip multiple pages, go back multiple pages, go back to the front page)</li>
+	<li>Energy Relays can now collect PE from Energy Containers too</li>
+	<li>Fixed the eye layer on the Anti-Spiders (now the eyes are the only bits that glow, instead of the whole spider)</li>
+	<li>Ritual altar sacrifices can now also be NBT sensitive</li>
+	<li>Added a config option to stop armor sets from applying Potion Effects or dispell other Potion Effects</li>
+	<li>Added scrolls (currently not usable, nor craftable)</li>
+	<li>Spells are close to being fully implemented, with most of the backing code done</li>
 </ul>

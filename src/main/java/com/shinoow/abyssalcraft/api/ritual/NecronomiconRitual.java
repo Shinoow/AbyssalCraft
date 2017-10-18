@@ -33,6 +33,7 @@ public abstract class NecronomiconRitual {
 	private float requiredEnergy;
 	protected Object sacrifice;
 	private boolean nbtSensitive;
+	private boolean nbtSensitiveSacrifice;
 
 	/**
 	 * A Necronomicon Ritual
@@ -85,6 +86,14 @@ public abstract class NecronomiconRitual {
 	 */
 	public NecronomiconRitual setNBTSensitive(){
 		nbtSensitive = true;
+		return this;
+	}
+
+	/**
+	 * Sets the ritual to require a specific NBT value on the sacrifice
+	 */
+	public NecronomiconRitual setNBTSensitiveSacrifice(){
+		nbtSensitiveSacrifice = true;
 		return this;
 	}
 
@@ -169,6 +178,14 @@ public abstract class NecronomiconRitual {
 	 */
 	public boolean isNBTSensitive(){
 		return nbtSensitive;
+	}
+
+	/**
+	 * Determines if the sacrifice (Item placed on the altar) should be checked for<br>
+	 * identical NBT tag compounds while checking if the sacrifices match (so a stricted Item match).
+	 */
+	public boolean isSacrificeNBTSensitive(){
+		return nbtSensitiveSacrifice;
 	}
 
 	/**

@@ -33,12 +33,16 @@ import com.shinoow.abyssalcraft.api.item.ACItems;
 import com.shinoow.abyssalcraft.api.item.ItemEngraving;
 import com.shinoow.abyssalcraft.api.item.ItemUpgradeKit;
 import com.shinoow.abyssalcraft.api.ritual.*;
+import com.shinoow.abyssalcraft.api.spell.SpellRegistry;
 import com.shinoow.abyssalcraft.common.blocks.BlockCrystalCluster.EnumCrystalType;
 import com.shinoow.abyssalcraft.common.blocks.BlockCrystalCluster2.EnumCrystalType2;
 import com.shinoow.abyssalcraft.common.disruptions.*;
 import com.shinoow.abyssalcraft.common.entity.*;
 import com.shinoow.abyssalcraft.common.entity.demon.EntityEvilSheep;
 import com.shinoow.abyssalcraft.common.ritual.*;
+import com.shinoow.abyssalcraft.common.spells.EntropySpell;
+import com.shinoow.abyssalcraft.common.spells.LifeDrainSpell;
+import com.shinoow.abyssalcraft.common.spells.MiningSpell;
 import com.shinoow.abyssalcraft.common.util.ShapedNBTRecipe;
 import com.shinoow.abyssalcraft.lib.ACConfig;
 import com.shinoow.abyssalcraft.lib.ACLib;
@@ -58,6 +62,7 @@ public class AbyssalCrafting {
 		addMaterialization();
 		addRitualRecipes();
 		addDisruptions();
+		addSpells();
 	}
 
 	private static void addBlockCrafting(){
@@ -936,6 +941,12 @@ public class AbyssalCrafting {
 		DisruptionHandler.instance().registerDisruption(new DisruptionSwarm("swarmSheep", DeityType.SHUBNIGGURATH, EntityEvilSheep.class, EntitySheep.class));
 		DisruptionHandler.instance().registerDisruption(new DisruptionAnimalCorruption());
 		DisruptionHandler.instance().registerDisruption(new DisruptionCorruption());
+	}
+
+	private static void addSpells(){
+		SpellRegistry.instance().registerSpell(new EntropySpell());
+		SpellRegistry.instance().registerSpell(new LifeDrainSpell());
+		SpellRegistry.instance().registerSpell(new MiningSpell());
 	}
 
 	private static void addArmor(Item helmet, Item chestplate, Item pants, Item boots, Item material, ItemStack nugget, Item upgrade, Item oldh, Item oldc, Item oldp, Item oldb){

@@ -20,48 +20,38 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.common.network.ByteBufUtils;
 import net.minecraftforge.fml.relauncher.Side;
 
 import com.shinoow.abyssalcraft.common.network.AbstractMessage;
 
 public class FireMessage extends AbstractMessage<FireMessage> {
 
-	private int x;
-	private int y;
-	private int z;
+	private BlockPos pos;
 
 	public FireMessage() {}
 
 	public FireMessage(BlockPos pos) {
-		x = pos.getX();
-		y = pos.getY();
-		z = pos.getZ();
+		this.pos = pos;
 	}
 
 	@Override
 	protected void read(PacketBuffer buffer) throws IOException {
 
-		x = ByteBufUtils.readVarInt(buffer, 5);
-		y = ByteBufUtils.readVarInt(buffer, 5);
-		z = ByteBufUtils.readVarInt(buffer, 5);
+		pos = buffer.readBlockPos();
 	}
 
 	@Override
 	protected void write(PacketBuffer buffer) throws IOException {
 
-		ByteBufUtils.writeVarInt(buffer, x, 5);
-		ByteBufUtils.writeVarInt(buffer, y, 5);
-		ByteBufUtils.writeVarInt(buffer, z, 5);
+		buffer.writeBlockPos(pos);
 	}
 
 	@Override
 	public void process(EntityPlayer player, Side side) {
 
 		World world = player.world;
-		BlockPos pos = new BlockPos(x, y, z);
 
-		world.playSound(x, y, z, SoundEvents.BLOCK_FIRE_EXTINGUISH, SoundCategory.BLOCKS, 1.0F, 1.0F, true);
+		world.playSound(pos.getX(), pos.getY(), pos.getZ(), SoundEvents.BLOCK_FIRE_EXTINGUISH, SoundCategory.BLOCKS, 1.0F, 1.0F, true);
 		world.setBlockToAir(pos);
 		player.swingArm(EnumHand.MAIN_HAND);
 	}

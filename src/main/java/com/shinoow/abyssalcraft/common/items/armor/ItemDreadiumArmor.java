@@ -22,6 +22,7 @@ import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 
 import com.shinoow.abyssalcraft.api.item.ACItems;
+import com.shinoow.abyssalcraft.lib.ACConfig;
 import com.shinoow.abyssalcraft.lib.ACTabs;
 
 public class ItemDreadiumArmor extends ItemArmor {
@@ -49,7 +50,7 @@ public class ItemDreadiumArmor extends ItemArmor {
 
 	@Override
 	public void onArmorTick(World world, EntityPlayer player, ItemStack itemstack) {
-		if(world.isRemote) return;
+		if(world.isRemote || !ACConfig.armorPotionEffects) return;
 		if (itemstack.getItem() == ACItems.dreadium_chestplate)
 			player.addPotionEffect(new PotionEffect(MobEffects.RESISTANCE, 20, 0));
 		if (itemstack.getItem() == ACItems.dreadium_boots)

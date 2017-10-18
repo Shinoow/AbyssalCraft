@@ -27,7 +27,6 @@ public class WorldProviderDreadlands extends WorldProvider {
 	@Override
 	public void init() {
 		biomeProvider = new BiomeProviderDreadlands(world.getSeed(), world.getWorldInfo().getTerrainType());
-		hasNoSky = true;
 		setDimension(ACLib.dreadlands_id);
 	}
 

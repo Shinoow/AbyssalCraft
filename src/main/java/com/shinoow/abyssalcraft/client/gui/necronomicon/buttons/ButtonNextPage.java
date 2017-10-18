@@ -21,12 +21,13 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 @SideOnly(Side.CLIENT)
 public class ButtonNextPage extends GuiButton
 {
-	private final boolean field_146151_o;
+	private final boolean invert, isLong;
 
-	public ButtonNextPage(int par1, int par2, int par3, boolean par4)
+	public ButtonNextPage(int par1, int par2, int par3, boolean par4, boolean isLong)
 	{
 		super(par1, par2, par3, 23, 13, "");
-		field_146151_o = par4;
+		invert = par4;
+		this.isLong = isLong;
 	}
 
 	/**
@@ -43,13 +44,15 @@ public class ButtonNextPage extends GuiButton
 			int k = 0;
 			int l = 192;
 
+			if(isLong)
+				k += 46;
 			if (flag)
-				k += 23;
+				k += isLong ? 30 : 23;
 
-			if (!field_146151_o)
+			if (!invert)
 				l += 13;
 
-			drawTexturedModalRect(xPosition, yPosition, k, l, 23, 13);
+			drawTexturedModalRect(xPosition, yPosition, k, l, isLong ? 30 : 23, 13);
 		}
 	}
 }

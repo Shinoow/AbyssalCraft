@@ -12,6 +12,7 @@
 package com.shinoow.abyssalcraft.common.inventory;
 
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.ItemStackHelper;
 import net.minecraft.item.ItemStack;
@@ -24,17 +25,19 @@ public class InventorySpellbook implements IInventory
 {
 	private String name;
 
-	public static int INV_SIZE = 7;
+	public static int INV_SIZE = 6;
 
 	private NonNullList<ItemStack> inventory;
 
 	private final ItemStack invItem;
+	private final Container container;
 
 	/**
 	 * @param itemstack - the ItemStack to which this inventory belongs
 	 */
-	public InventorySpellbook(ItemStack stack)
+	public InventorySpellbook(Container container, ItemStack stack)
 	{
+		this.container = container;
 		invItem = stack;
 		if (!stack.hasTagCompound())
 			stack.setTagCompound(new NBTTagCompound());
@@ -57,7 +60,12 @@ public class InventorySpellbook implements IInventory
 	@Override
 	public ItemStack decrStackSize(int slot, int amount)
 	{
-		return ItemStackHelper.getAndSplit(inventory, slot, amount);
+		ItemStack stack = ItemStackHelper.getAndSplit(inventory, slot, amount);
+
+		if(!stack.isEmpty())
+			container.onCraftMatrixChanged(this);
+
+		return stack;
 
 	}
 
@@ -74,6 +82,7 @@ public class InventorySpellbook implements IInventory
 
 		if (!itemstack.isEmpty() && itemstack.getCount() > getInventoryStackLimit())
 			itemstack.setCount(getInventoryStackLimit());
+		container.onCraftMatrixChanged(this);
 	}
 
 	@Override

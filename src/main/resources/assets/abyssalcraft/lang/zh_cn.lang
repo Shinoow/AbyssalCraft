@@ -761,6 +761,11 @@ ac.ritual.corruption.desc=By presenting 4 random statues, 4 blocks of Darkstone,
 ac.ritual.resurrection=Dark Resurrection
 ac.ritual.resurrection.desc=By presenting crystalilzed compounds resembling the elements of life, a living sacrifice and a Name Tag with the name of a fallen companion, you resurrect it. The Crystal size scale with the companion (Shards for something the size of a Chicken, Clusters for a Horse, normal for anything inbetween). Life has limits, however.
 
+#Spells
+ac.spell.lifedrain=Life Drain
+ac.spell.entropy=Entropy
+ac.spell.mining=Mining
+
 #Rending
 ac.rending.shadowgem=阴影宝石可以从活阴影收获阴影能量得到。
 ac.rending.essence_aw=深渊荒芜之地精髓可以从珊瑚实体收获深渊荒芜能量得到。
@@ -1274,6 +1279,12 @@ item.engraving_shubniggurath.name=莎布•尼古拉丝钱币铸模
 item.gatekeeperessence.name=守门者的精华
 item.interdimensionalcage.name=跨维度笼
 item.stonetablet.name=Stone Tablet
+item.scroll.basic.name=Basic Scroll
+item.scroll.lesser.name=Lesser Scroll
+item.scroll.moderate.name=Moderate Scroll
+item.scroll.greater.name=Greater Scroll
+item.unique_scroll.antimatter.name=Antimatter Scroll
+item.unique_scroll.oblivion.name=Oblivion Scroll
 
 #Entities
 entity.abyssalcraft.depthsghoul.name=深渊食尸鬼

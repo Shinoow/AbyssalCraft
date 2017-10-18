@@ -16,9 +16,7 @@ import java.util.Random;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockStairs;
 import net.minecraft.enchantment.EnchantmentHelper;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.IEntityOwnable;
+import net.minecraft.entity.*;
 import net.minecraft.entity.passive.AbstractHorse;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -34,6 +32,7 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.translation.I18n;
+import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.chunk.storage.ExtendedBlockStorage;
@@ -60,12 +59,13 @@ import com.shinoow.abyssalcraft.api.recipe.UpgradeKitRecipes;
 import com.shinoow.abyssalcraft.api.ritual.*;
 import com.shinoow.abyssalcraft.common.caps.NecromancyCapabilityProvider;
 import com.shinoow.abyssalcraft.common.entity.EntityJzahar;
-import com.shinoow.abyssalcraft.common.entity.demon.EntityEvilSheep;
+import com.shinoow.abyssalcraft.common.entity.demon.*;
 import com.shinoow.abyssalcraft.common.items.ItemCrystalBag;
 import com.shinoow.abyssalcraft.common.items.ItemNecronomicon;
 import com.shinoow.abyssalcraft.common.ritual.NecronomiconBreedingRitual;
 import com.shinoow.abyssalcraft.common.ritual.NecronomiconDreadSpawnRitual;
 import com.shinoow.abyssalcraft.init.BlockHandler;
+import com.shinoow.abyssalcraft.init.InitHandler;
 import com.shinoow.abyssalcraft.lib.ACAchievements;
 import com.shinoow.abyssalcraft.lib.ACConfig;
 import com.shinoow.abyssalcraft.lib.ACLib;
@@ -365,6 +365,20 @@ public class AbyssalCraftEventHooks {
 				EntityPlayer p = h.world.getPlayerEntityByUUID(h.getOwnerUniqueId());
 				p.getCapability(NecromancyCapabilityProvider.NECROMANCY_CAP, null).storeData(h.getName(), h.serializeNBT(), calculateSize(h.height));
 			}
+		} else if(EntityList.getKey(event.getEntityLiving()) != null){
+			EntityLivingBase e = event.getEntityLiving();
+			if(!(e instanceof EntityEvilpig) && !(e instanceof EntityEvilCow) && !(e instanceof EntityEvilChicken)
+					&& !(e instanceof EntityEvilSheep) && !(e instanceof EntityDemonAnimal)){
+				Tuple<Integer, Float> data = InitHandler.demon_transformations.get(EntityList.getKey(e));
+				World world = event.getEntityLiving().world;
+				if(data != null && world.rand.nextFloat() < data.getSecond() && !world.isRemote){
+					EntityLiving demon = getDemon(data.getFirst(), world);
+					demon.copyLocationAndAnglesFrom(e);
+					world.removeEntity(e);
+					demon.onInitialSpawn(world.getDifficultyForLocation(e.getPosition()), (IEntityLivingData)null);
+					world.spawnEntity(demon);
+				}
+			}
 		}
 	}
 
@@ -375,6 +389,21 @@ public class AbyssalCraftEventHooks {
 		if(height >= 0.75f)
 			return 1;
 		return 0;
+	}
+
+	private EntityLiving getDemon(int num, World world){
+		switch(num){
+		case 0:
+			return new EntityDemonPig(world);
+		case 1:
+			return new EntityDemonCow(world);
+		case 2:
+			return new EntityDemonChicken(world);
+		case 3:
+			return new EntityDemonSheep(world);
+		default:
+			return new EntityDemonPig(world);
+		}
 	}
 
 	@SubscribeEvent

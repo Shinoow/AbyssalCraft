@@ -18,10 +18,18 @@ import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.boss.EntityDragon;
+import net.minecraft.entity.boss.EntityWither;
+import net.minecraft.entity.projectile.EntityWitherSkull;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IStringSerializable;
 import net.minecraft.util.NonNullList;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.IBlockAccess;
+
+import com.shinoow.abyssalcraft.api.block.ACBlocks;
 
 public class BlockACBrick extends BlockACBasic {
 
@@ -45,6 +53,14 @@ public class BlockACBrick extends BlockACBasic {
 	public BlockACBrick(float hardness, float resistance, MapColor mapColor) {
 		super(Material.ROCK, hardness, resistance, SoundType.STONE, mapColor);
 		setDefaultState(blockState.getBaseState().withProperty(TYPE, EnumBrickType.NORMAL));
+	}
+
+	@Override
+	public boolean canEntityDestroy(IBlockState state, IBlockAccess world, BlockPos pos, Entity entity)
+	{
+		if(entity instanceof EntityDragon || entity instanceof EntityWither || entity instanceof EntityWitherSkull)
+			return state.getBlock() != ACBlocks.ethaxium_brick && state.getBlock() != ACBlocks.dark_ethaxium_brick;
+		return super.canEntityDestroy(state, world, pos, entity);
 	}
 
 	@Override

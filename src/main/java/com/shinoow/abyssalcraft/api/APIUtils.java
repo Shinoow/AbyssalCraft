@@ -18,6 +18,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
 
+import com.google.common.collect.Lists;
 import com.shinoow.abyssalcraft.api.item.ICrystal;
 import com.shinoow.abyssalcraft.api.recipe.EngraverRecipes;
 
@@ -82,5 +83,102 @@ public class APIUtils {
 		else if(obj instanceof List)
 			return ((ItemStack)((List) obj).get(0)).copy();
 		else throw new ClassCastException("Not a Item, Block, ItemStack, Array of ItemStacks, String or List of ItemStacks!");
+	}
+
+	/**
+	 * Compares an array of Objects to one containing ItemStacks
+	 * @param array1 Array of Objects to compare
+	 * @param array2 Array of ItemStacks to compare
+	 * @param nbt If ItemStack NBT should be compared as well
+	 * @return True if the contents are equal, otherwise false
+	 */
+	public static boolean areItemStackArraysEqual(Object[] array1, ItemStack[] array2, boolean nbt){
+
+		List<Object> compareList = nonNullList(array1);
+		List<ItemStack> itemList = Lists.newArrayList();
+
+		for(ItemStack item : array2)
+			if(!item.isEmpty())
+				itemList.add(item);
+
+		if(itemList.size() == compareList.size())
+			for(ItemStack item : itemList)
+				for(Object compare : compareList)
+					if(areObjectsEqual(item, compare, nbt)){
+						compareList.remove(compare);
+						break;
+					}
+
+		return compareList.isEmpty();
+	}
+
+	/**
+	 * Converts an array of Objects into a List without any null elements.<br>
+	 * The only reason any Object would be null in the first place would be
+	 * for visual alignment in a GUI (like, say, the Necronomicon).
+	 */
+	private static List<Object> nonNullList(Object[] array){
+		List<Object> l = Lists.newArrayList();
+
+		for(Object o : array)
+			if(o != null)
+				l.add(o);
+
+		return l;
+	}
+
+	/**
+	 * Compares an ItemStack to an Object
+	 * @param stack ItemStack to compare
+	 * @param obj Object to compare
+	 * @param nbt If ItemStack NBT should be compared as well
+	 * @return True if both Objects are equal, otherwise false
+	 */
+	public static boolean areObjectsEqual(ItemStack stack, Object obj, boolean nbt){
+		if(obj instanceof ItemStack)
+			return areStacksEqual(stack, (ItemStack)obj, nbt);
+		else if(obj instanceof Item)
+			return areStacksEqual(stack, new ItemStack((Item)obj), nbt);
+		else if(obj instanceof Block)
+			return areStacksEqual(stack, new ItemStack((Block)obj), nbt);
+		else if(obj instanceof ItemStack[]){
+			for(ItemStack item : (ItemStack[])obj)
+				if(areStacksEqual(stack, item, nbt))
+					return true;
+		} else if(obj instanceof String){
+			for(ItemStack item : OreDictionary.getOres((String)obj))
+				if(areStacksEqual(stack, item, nbt))
+					return true;
+		} else if(obj instanceof List)
+			for(ItemStack item :(List<ItemStack>)obj)
+				if(areStacksEqual(stack, item, nbt))
+					return true;
+		return false;
+	}
+
+	/**
+	 * Compares two ItemStacks
+	 * @param stack1 First ItemStack to compare
+	 * @param stack2 Second ItemStack to compare
+	 * @param nbt If ItemStack NBT should be compared as well
+	 * @return True if both stacks are equal, otherwise false
+	 */
+	public static boolean areStacksEqual(ItemStack stack1, ItemStack stack2, boolean nbt){
+		if(stack1.isEmpty() || stack2.isEmpty()) return false;
+		return nbt ? areStacksEqual(stack1, stack2) && ItemStack.areItemStackTagsEqual(stack2, stack1) :
+			areStacksEqual(stack1, stack2);
+	}
+
+	/**
+	 * Compares two ItemStacks
+	 * @param stack1 First ItemStack to compare
+	 * @param stack2 Second ItemStack to compare
+	 * @return True if both stacks are equal, otherwise false
+	 */
+	public static boolean areStacksEqual(ItemStack stack1, ItemStack stack2)
+	{
+		if (stack1.isEmpty() || stack2.isEmpty()) return false;
+		return stack1.getItem() == stack2.getItem() && (stack2.getItemDamage() == OreDictionary.WILDCARD_VALUE
+				|| stack1.getItemDamage() == stack2.getItemDamage());
 	}
 }

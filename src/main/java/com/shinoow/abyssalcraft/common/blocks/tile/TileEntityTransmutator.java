@@ -215,10 +215,11 @@ public class TileEntityTransmutator extends TileEntity implements ISidedInventor
 
 					if (!transmutatorItemStacks.get(1).isEmpty())
 					{
+						Item item = transmutatorItemStacks.get(1).getItem();
 						transmutatorItemStacks.get(1).shrink(1);
 
 						if (transmutatorItemStacks.get(1).isEmpty())
-							transmutatorItemStacks.set(1, transmutatorItemStacks.get(1).getItem().getContainerItem(transmutatorItemStacks.get(1)));
+							transmutatorItemStacks.set(1, item.getContainerItem(transmutatorItemStacks.get(1)));
 					}
 				}
 			}
