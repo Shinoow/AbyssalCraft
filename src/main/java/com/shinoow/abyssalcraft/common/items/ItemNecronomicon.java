@@ -32,7 +32,6 @@ import com.shinoow.abyssalcraft.api.item.ACItems;
 import com.shinoow.abyssalcraft.common.blocks.BlockRitualAltar;
 import com.shinoow.abyssalcraft.common.network.PacketDispatcher;
 import com.shinoow.abyssalcraft.common.network.client.NecroDataCapMessage;
-import com.shinoow.abyssalcraft.lib.ACAchievements;
 import com.shinoow.abyssalcraft.lib.ACLib;
 import com.shinoow.abyssalcraft.lib.ACSounds;
 import com.shinoow.abyssalcraft.lib.util.RitualUtil;

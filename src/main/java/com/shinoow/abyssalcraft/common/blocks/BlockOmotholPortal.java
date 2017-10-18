@@ -30,12 +30,12 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.common.world.TeleporterAC;
-import com.shinoow.abyssalcraft.lib.ACAchievements;
 import com.shinoow.abyssalcraft.lib.ACConfig;
 import com.shinoow.abyssalcraft.lib.ACLib;
 
@@ -173,15 +173,17 @@ public class BlockOmotholPortal extends BlockBreakable {
 		if (!par5Entity.isRiding() && !par5Entity.isBeingRidden() && par5Entity instanceof EntityPlayerMP)
 		{
 			EntityPlayerMP thePlayer = (EntityPlayerMP)par5Entity;
-//			thePlayer.addStat(ACAchievements.enter_omothol, 1);
+			//			thePlayer.addStat(ACAchievements.enter_omothol, 1);
 			if (thePlayer.timeUntilPortal > 0)
 				thePlayer.timeUntilPortal = thePlayer.getPortalCooldown();
 			else if (thePlayer.dimension != ACLib.omothol_id)
 			{
+				if(!ForgeHooks.onTravelToDimension(thePlayer, ACLib.omothol_id)) return;
 				thePlayer.timeUntilPortal = ACConfig.portalCooldown;
 				thePlayer.mcServer.getPlayerList().transferPlayerToDimension(thePlayer, ACLib.omothol_id, new TeleporterAC(thePlayer.mcServer.getWorld(ACLib.omothol_id), this, ACBlocks.stone.getStateFromMeta(6)));
 			}
 			else {
+				if(!ForgeHooks.onTravelToDimension(thePlayer, ACLib.dreadlands_id)) return;
 				thePlayer.timeUntilPortal = ACConfig.portalCooldown;
 				thePlayer.mcServer.getPlayerList().transferPlayerToDimension(thePlayer, ACLib.dreadlands_id, new TeleporterAC(thePlayer.mcServer.getWorld(ACLib.dreadlands_id), this, ACBlocks.stone.getStateFromMeta(6)));
 			}

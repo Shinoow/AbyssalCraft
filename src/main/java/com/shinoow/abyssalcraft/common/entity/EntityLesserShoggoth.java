@@ -244,8 +244,8 @@ public class EntityLesserShoggoth extends EntityMob implements ICoraliumEntity, 
 
 		if(monolithTimer >= 1800){
 			monolithTimer = 0;
-			if(world.getEntitiesWithinAABB(getClass(), getEntityBoundingBox().expand(32D, 32D, 32D)).size() > 5 && !isChild()){
-				for(EntityLesserShoggoth shoggoth : world.getEntitiesWithinAABB(getClass(), getEntityBoundingBox().expand(32D, 32D, 32D)))
+			if(world.getEntitiesWithinAABB(getClass(), getEntityBoundingBox().grow(32D, 32D, 32D)).size() > 5 && !isChild()){
+				for(EntityLesserShoggoth shoggoth : world.getEntitiesWithinAABB(getClass(), getEntityBoundingBox().grow(32D, 32D, 32D)))
 					shoggoth.reduceMonolithTimer();
 				if(!world.isRemote)
 					new WorldGenShoggothMonolith().generate(world, rand, new BlockPos(MathHelper.floor(posX) + 3, MathHelper.floor(posY), MathHelper.floor(posZ) + 3));

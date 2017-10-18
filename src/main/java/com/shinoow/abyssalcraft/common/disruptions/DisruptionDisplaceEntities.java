@@ -29,7 +29,7 @@ public class DisruptionDisplaceEntities extends DisruptionEntry {
 
 	@Override
 	public void disrupt(World world, BlockPos pos, List<EntityPlayer> players) {
-		List<EntityLivingBase> entities = world.getEntitiesWithinAABB(EntityLivingBase.class, new AxisAlignedBB(pos).expand(16, 16, 16));
+		List<EntityLivingBase> entities = world.getEntitiesWithinAABB(EntityLivingBase.class, new AxisAlignedBB(pos).grow(16, 16, 16));
 
 		if(!entities.isEmpty())
 			for(EntityLivingBase entity : entities){

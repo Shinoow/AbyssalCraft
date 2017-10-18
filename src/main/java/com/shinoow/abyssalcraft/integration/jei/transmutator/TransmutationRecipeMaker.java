@@ -42,7 +42,7 @@ public class TransmutationRecipeMaker {
 			List<ItemStack> inputs = stackHelper.getSubtypes(input);
 			TransmutationRecipe recipe = new TransmutationRecipe(inputs, output, experience);
 			if(isRecipeValid(recipe))
-			recipes.add(recipe);
+				recipes.add(recipe);
 		}
 
 		return recipes;

@@ -35,7 +35,7 @@ public class WorldProviderOmothol extends WorldProvider {
 	{
 		biomeProvider = new BiomeProviderSingle(ACBiomes.omothol);
 		setDimension(ACLib.omothol_id);
-//		hasNoSky = true;
+		//		hasNoSky = true;
 	}
 
 	@Override

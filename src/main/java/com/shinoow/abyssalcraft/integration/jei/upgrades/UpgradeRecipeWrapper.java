@@ -17,14 +17,14 @@ import java.util.List;
 import javax.annotation.Nonnull;
 
 import mezz.jei.api.ingredients.IIngredients;
-import mezz.jei.api.recipe.BlankRecipeWrapper;
+import mezz.jei.api.recipe.IRecipeWrapper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.item.ItemStack;
 
 import com.google.common.collect.Lists;
 import com.shinoow.abyssalcraft.api.item.ItemUpgradeKit;
 
-public class UpgradeRecipeWrapper extends BlankRecipeWrapper {
+public class UpgradeRecipeWrapper implements IRecipeWrapper {
 
 	private final ItemStack kit;
 	private final ItemStack input;

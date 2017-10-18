@@ -36,9 +36,9 @@ public class BiomeGenDarklandsMountains extends Biome implements IDarklandsBiome
 		decorator.treesPerChunk = 0;
 		spawnableMonsterList.add(new SpawnListEntry(EntityDepthsGhoul.class, 45, 1, 2));
 		spawnableMonsterList.add(new SpawnListEntry(EntityAbyssalZombie.class, 45, 1, 2));
-		spawnableMonsterList.add(new SpawnListEntry(EntityShadowCreature.class, 60, 1, 3));
-		spawnableMonsterList.add(new SpawnListEntry(EntityShadowMonster.class, 45, 1, 2));
-		spawnableMonsterList.add(new SpawnListEntry(EntityShadowBeast.class, 15, 1, 1));
+		spawnableMonsterList.add(new SpawnListEntry(EntityShadowCreature.class, 100, 3, 3));
+		spawnableMonsterList.add(new SpawnListEntry(EntityShadowMonster.class, 80, 2, 2));
+		spawnableMonsterList.add(new SpawnListEntry(EntityShadowBeast.class, 40, 1, 1));
 	}
 	@Override
 	public void decorate(World par1World, Random par2Random, BlockPos pos)

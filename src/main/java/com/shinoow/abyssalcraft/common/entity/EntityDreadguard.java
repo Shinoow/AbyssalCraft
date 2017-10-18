@@ -36,7 +36,9 @@ import net.minecraft.world.World;
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
 import com.shinoow.abyssalcraft.api.entity.IDreadEntity;
 import com.shinoow.abyssalcraft.api.item.ACItems;
-import com.shinoow.abyssalcraft.lib.*;
+import com.shinoow.abyssalcraft.lib.ACConfig;
+import com.shinoow.abyssalcraft.lib.ACLoot;
+import com.shinoow.abyssalcraft.lib.ACSounds;
 
 public class EntityDreadguard extends EntityMob implements IDreadEntity {
 
@@ -78,16 +80,16 @@ public class EntityDreadguard extends EntityMob implements IDreadEntity {
 		return true;
 	}
 
-	@Override
-	public void onDeath(DamageSource par1DamageSource)
-	{
-		if (par1DamageSource.getTrueSource() instanceof EntityPlayer)
-		{
-			EntityPlayer entityplayer = (EntityPlayer)par1DamageSource.getTrueSource();
-//			entityplayer.addStat(ACAchievements.kill_dreadguard, 1);
-		}
-		super.onDeath(par1DamageSource);
-	}
+	//	@Override
+	//	public void onDeath(DamageSource par1DamageSource)
+	//	{
+	//		if (par1DamageSource.getTrueSource() instanceof EntityPlayer)
+	//		{
+	//			EntityPlayer entityplayer = (EntityPlayer)par1DamageSource.getTrueSource();
+	////			entityplayer.addStat(ACAchievements.kill_dreadguard, 1);
+	//		}
+	//		super.onDeath(par1DamageSource);
+	//	}
 
 	@Override
 	public boolean attackEntityAsMob(Entity par1Entity) {

@@ -32,7 +32,7 @@ public class WorldGenAbyLake extends WorldGenerator
 	{
 		this(par1.getDefaultState());
 	}
-	
+
 	public WorldGenAbyLake(IBlockState state){
 		blockIndex = state;
 	}

@@ -19,13 +19,13 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 import mezz.jei.api.ingredients.IIngredients;
-import mezz.jei.api.recipe.BlankRecipeWrapper;
+import mezz.jei.api.recipe.IRecipeWrapper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.translation.I18n;
 
-public class TransmutationRecipe extends BlankRecipeWrapper {
+public class TransmutationRecipe implements IRecipeWrapper {
 	@Nonnull
 	private final List<List<ItemStack>> input;
 	@Nonnull

@@ -1,0 +1,14 @@
+{
+	"parent": "item/generated",
+	"textures": {
+		"layer0": "abyssalcraft:items/scrolls/scroll_greater"
+	},
+    "overrides": [
+        {
+            "predicate": {
+                "inscribed": 1
+            },
+            "model": "abyssalcraft:item/scroll_greater_inscribed"
+        }
+	]
+}

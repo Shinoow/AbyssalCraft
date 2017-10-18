@@ -13,6 +13,7 @@ import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.boss.EntityDragon;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
@@ -75,6 +76,18 @@ public class BlockACStone extends Block {
 	public int getMetaFromState(IBlockState state)
 	{
 		return state.getValue(TYPE).getMeta();
+	}
+
+	@Override
+	public boolean canEntityDestroy(IBlockState state, IBlockAccess world, BlockPos pos, Entity entity)
+	{
+		if(entity instanceof EntityDragon)
+			return state.getValue(TYPE) != EnumStoneType.OMOTHOL_STONE &&
+			state.getValue(TYPE) != EnumStoneType.ETHAXIUM;
+		else if (entity instanceof net.minecraft.entity.boss.EntityWither ||
+				entity instanceof net.minecraft.entity.projectile.EntityWitherSkull)
+			return state.getValue(TYPE) != EnumStoneType.ETHAXIUM;
+		return super.canEntityDestroy(state, world, pos, entity);
 	}
 
 	@Override
@@ -167,7 +180,7 @@ public class BlockACStone extends Block {
 		{
 			return name;
 		}
-		
+
 		public String getState(){
 			return state;
 		}

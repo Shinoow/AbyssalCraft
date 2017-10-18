@@ -47,10 +47,10 @@ import net.minecraftforge.event.LootTableLoadEvent;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.event.*;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import net.minecraftforge.fml.common.registry.GameRegistry;
-import net.minecraftforge.oredict.*;
-import net.minecraftforge.oredict.RecipeSorter.Category;
+import net.minecraftforge.oredict.OreDictionary;
+import net.minecraftforge.oredict.ShapedOreRecipe;
+import net.minecraftforge.oredict.ShapelessOreRecipe;
 import net.minecraftforge.registries.IForgeRegistry;
 
 import com.google.gson.JsonObject;
@@ -74,10 +74,8 @@ import com.shinoow.abyssalcraft.common.potion.PotionCplague;
 import com.shinoow.abyssalcraft.common.potion.PotionDplague;
 import com.shinoow.abyssalcraft.common.util.ACLogger;
 import com.shinoow.abyssalcraft.common.util.ShapedNBTRecipe;
-import com.shinoow.abyssalcraft.lib.ACAchievements;
 import com.shinoow.abyssalcraft.lib.ACLib;
 import com.shinoow.abyssalcraft.lib.util.NecroDataJsonUtil;
-import com.shinoow.abyssalcraft.lib.util.RitualUtil;
 
 public class MiscHandler implements ILifeCycleHandler {
 
@@ -189,69 +187,67 @@ public class MiscHandler implements ILifeCycleHandler {
 	@Override
 	public void init(FMLInitializationEvent event) {
 		//Achievements
-//		ACAchievements.necronomicon = new Achievement("achievement.necro", "necro", 0, 0, ACItems.necronomicon, AchievementList.OPEN_INVENTORY).registerStat();
-//		//Materials Achievements
-//		ACAchievements.mine_abyssalnite = new Achievement("achievement.mineAby", "mineAby", 2, 0, ACBlocks.abyssalnite_ore, ACAchievements.necronomicon).registerStat();
-//		ACAchievements.mine_coralium = new Achievement("achievement.mineCorgem", "mineCorgem", 4, 0, ACItems.coralium_gem, ACAchievements.mine_abyssalnite).registerStat();
-//		ACAchievements.shadow_gems = new Achievement("achievement.shadowGems", "shadowGems", 6, 0, ACItems.shadow_gem, ACAchievements.mine_coralium).registerStat();
-//		//coraliumpearl
-//		ACAchievements.mine_abyssal_coralium = new Achievement("achievement.mineCor", "mineCor", 8, 0, ACBlocks.liquified_coralium_ore, ACAchievements.shadow_gems).registerStat();
-//		ACAchievements.mine_abyssal_ores = new Achievement("achievement.mineAbyOres", "mineAbyOres", 10, 0, ACBlocks.abyssal_diamond_ore, ACAchievements.mine_abyssal_coralium).registerStat();
-//		ACAchievements.mine_dreadlands_ores = new Achievement("achievement.mineDread", "mineDread", 12, 0, ACBlocks.dreaded_abyssalnite_ore, ACAchievements.mine_abyssal_ores).registerStat();
-//		ACAchievements.dreadium = new Achievement("achievement.dreadium", "dreadium", 14, 0, ACItems.dreadium_ingot, ACAchievements.mine_dreadlands_ores).registerStat();
-//		ACAchievements.ethaxium = new Achievement("achievement.ethaxium", "ethaxium", 16, 0, ACItems.ethaxium_ingot, ACAchievements.dreadium).setSpecial().registerStat();
-//		//Depths Ghoul Achievements
-//		ACAchievements.kill_depths_ghoul = new Achievement("achievement.killghoul", "killghoul", -2, 0, ACItems.coralium_plagued_flesh_on_a_bone, ACAchievements.necronomicon).registerStat();
-//		ACAchievements.depths_ghoul_head = new Achievement("achievement.ghoulhead", "ghoulhead", -4, 0, ACBlocks.depths_ghoul_head, ACAchievements.kill_depths_ghoul).registerStat();
-//		ACAchievements.pete_head = new Achievement("achievement.petehead", "petehead", -4, -2, ACBlocks.pete_head, ACAchievements.depths_ghoul_head).registerStat();
-//		ACAchievements.mr_wilson_head = new Achievement("achievement.wilsonhead", "wilsonhead", -4, -4, ACBlocks.mr_wilson_head, ACAchievements.pete_head).registerStat();
-//		ACAchievements.dr_orange_head = new Achievement("achievement.orangehead", "orangehead", -4, -6, ACBlocks.dr_orange_head, ACAchievements.mr_wilson_head).registerStat();
-//		//Necronomicon Achievements
-//		ACAchievements.abyssal_wasteland_necronomicon = new Achievement("achievement.necrou1", "necrou1", 2, 1, ACItems.abyssal_wasteland_necronomicon, ACAchievements.necronomicon).registerStat();
-//		ACAchievements.dreadlands_necronomicon = new Achievement("achievement.necrou2", "necrou2", 4, 1, ACItems.dreadlands_necronomicon, ACAchievements.abyssal_wasteland_necronomicon).registerStat();
-//		ACAchievements.omothol_necronomicon = new Achievement("achievement.necrou3", "necrou3", 6, 1, ACItems.omothol_necronomicon, ACAchievements.dreadlands_necronomicon).registerStat();
-//		ACAchievements.abyssalnomicon = new Achievement("achievement.abyssaln", "abyssaln", 8, 1, ACItems.abyssalnomicon, ACAchievements.omothol_necronomicon).setSpecial().registerStat();
-//		//Ritual Achievements
-//		ACAchievements.ritual_altar = new Achievement("achievement.ritual", "ritual", -2, 1, ACBlocks.ritual_altar, ACAchievements.necronomicon).setSpecial().registerStat();
-//		ACAchievements.summoning_ritual = new Achievement("achievement.ritualSummon", "ritualSummon", -4, 1, ACBlocks.depths_ghoul_head, ACAchievements.ritual_altar).registerStat();
-//		ACAchievements.creation_ritual = new Achievement("achievement.ritualCreate", "ritualCreate", -4, 2, ACItems.life_crystal, ACAchievements.ritual_altar).registerStat();
-//		ACAchievements.breeding_ritual = new Achievement("achievement.ritualBreed", "ritualBreed", -4, 3, Items.EGG, ACAchievements.ritual_altar).registerStat();
-//		ACAchievements.potion_ritual = new Achievement("achievement.ritualPotion", "ritualPotion", -4, 4, PotionUtils.addPotionToItemStack(new ItemStack(Items.POTIONITEM), PotionTypes.WATER), ACAchievements.ritual_altar).registerStat();
-//		ACAchievements.aoe_potion_ritual = new Achievement("achievement.ritualPotionAoE", "ritualPotionAoE", -4, 5, PotionUtils.addPotionToItemStack(new ItemStack(Items.SPLASH_POTION), PotionTypes.WATER), ACAchievements.ritual_altar).registerStat();
-//		ACAchievements.infusion_ritual = new Achievement("achievement.ritualInfusion", "ritualInfusion", -4, 6, ACItems.depths_helmet, ACAchievements.ritual_altar).registerStat();
-//		//Progression Achievements
-//		ACAchievements.enter_abyssal_wasteland = new Achievement("achievement.enterabyss", "enterabyss", 0, 2, ACBlocks.abyssal_stone, ACAchievements.necronomicon).setSpecial().registerStat();
-//		ACAchievements.kill_spectral_dragon = new Achievement("achievement.killdragon", "killdragon", 2, 2, ACItems.coralium_plagued_flesh, ACAchievements.enter_abyssal_wasteland).registerStat();
-//		ACAchievements.summon_asorah = new Achievement("achievement.summonAsorah", "summonAsorah", 0, 4, Altar, ACAchievements.enter_abyssal_wasteland).registerStat();
-//		ACAchievements.kill_asorah = new Achievement("achievement.killAsorah", "killAsorah", 2, 4, ACItems.eye_of_the_abyss, ACAchievements.summon_asorah).setSpecial().registerStat();
-//		ACAchievements.enter_dreadlands = new Achievement("achievement.enterdreadlands", "enterdreadlands", 2, 6, ACBlocks.dreadstone, ACAchievements.kill_asorah).setSpecial().registerStat();
-//		ACAchievements.kill_dreadguard = new Achievement("achievement.killdreadguard", "killdreadguard", 4, 6, ACItems.dreaded_shard_of_abyssalnite, ACAchievements.enter_dreadlands).registerStat();
-//		ACAchievements.summon_chagaroth = new Achievement("achievement.summonChagaroth", "summonChagaroth", 2, 8, ACBlocks.chagaroth_altar_bottom, ACAchievements.enter_dreadlands).registerStat();
-//		ACAchievements.kill_chagaroth = new Achievement("achievement.killChagaroth", "killChagaroth", 4, 8, ACItems.dread_plagued_gateway_key, ACAchievements.summon_chagaroth).setSpecial().registerStat();
-//		ACAchievements.enter_omothol = new Achievement("achievement.enterOmothol", "enterOmothol", 4, 10, ACBlocks.omothol_stone, ACAchievements.kill_chagaroth).setSpecial().registerStat();
-//		ACAchievements.enter_dark_realm = new Achievement("achievement.darkRealm", "darkRealm", 2, 10, ACBlocks.darkstone, ACAchievements.enter_omothol).registerStat();
-//		ACAchievements.kill_omothol_elite = new Achievement("achievement.killOmotholelite", "killOmotholelite", 6, 10, ACItems.eldritch_scale, ACAchievements.enter_omothol).registerStat();
-//		ACAchievements.locate_jzahar = new Achievement("achievement.locateJzahar", "locateJzahar", 4, 12, ACItems.jzahar_charm, ACAchievements.enter_omothol).registerStat();
-//		ACAchievements.kill_jzahar = new Achievement("achievement.killJzahar", "killJzahar", 6, 12, ACItems.staff_of_the_gatekeeper, ACAchievements.locate_jzahar).setSpecial().registerStat();
-//		//nowwhat
-//		//Gateway Key Achievements
-//		ACAchievements.gateway_key = new Achievement("achievement.GK1", "GK1", 0, -2, ACItems.gateway_key, ACAchievements.necronomicon).registerStat();
-//		ACAchievements.find_powerstone = new Achievement("achievement.findPSDL", "findPSDL", -2, -2, ACBlocks.dreadlands_infused_powerstone, ACAchievements.gateway_key).registerStat();
-//		ACAchievements.dreaded_gateway_key = new Achievement("achievement.GK2", "GK2", 0, -4, ACItems.dreaded_gateway_key, ACAchievements.gateway_key).registerStat();
-//		ACAchievements.rlyehian_gateway_key = new Achievement("achievement.GK3", "GK3", 0, -6, ACItems.rlyehian_gateway_key, ACAchievements.dreaded_gateway_key).registerStat();
-//		//Machinery Achievements
-//		ACAchievements.make_transmutator = new Achievement("achievement.makeTransmutator", "makeTransmutator", 2, -1, ACBlocks.transmutator_idle, ACAchievements.necronomicon).registerStat();
-//		ACAchievements.make_crystallizer = new Achievement("achievement.makeCrystallizer", "makeCrystallizer", 4, -2, ACBlocks.crystallizer_idle, ACAchievements.make_transmutator).registerStat();
-//		ACAchievements.make_materializer = new Achievement("achievement.makeMaterializer", "makeMaterializer", 6, -2, ACBlocks.materializer, ACAchievements.make_crystallizer).registerStat();
-//		ACAchievements.make_crystal_bag = new Achievement("achievement.makeCrystalBag", "makeCrystalBag", 6, -4, ACItems.small_crystal_bag, ACAchievements.make_materializer).registerStat();
-//		ACAchievements.make_engraver = new Achievement("achievement.makeEngraver", "makeEngraver", 2, -3, ACBlocks.engraver, AchievementList.OPEN_INVENTORY).registerStat();
-//
-//		AchievementPage.registerAchievementPage(new AchievementPage("AbyssalCraft", ACAchievements.getAchievements()));
+		//		ACAchievements.necronomicon = new Achievement("achievement.necro", "necro", 0, 0, ACItems.necronomicon, AchievementList.OPEN_INVENTORY).registerStat();
+		//		//Materials Achievements
+		//		ACAchievements.mine_abyssalnite = new Achievement("achievement.mineAby", "mineAby", 2, 0, ACBlocks.abyssalnite_ore, ACAchievements.necronomicon).registerStat();
+		//		ACAchievements.mine_coralium = new Achievement("achievement.mineCorgem", "mineCorgem", 4, 0, ACItems.coralium_gem, ACAchievements.mine_abyssalnite).registerStat();
+		//		ACAchievements.shadow_gems = new Achievement("achievement.shadowGems", "shadowGems", 6, 0, ACItems.shadow_gem, ACAchievements.mine_coralium).registerStat();
+		//		//coraliumpearl
+		//		ACAchievements.mine_abyssal_coralium = new Achievement("achievement.mineCor", "mineCor", 8, 0, ACBlocks.liquified_coralium_ore, ACAchievements.shadow_gems).registerStat();
+		//		ACAchievements.mine_abyssal_ores = new Achievement("achievement.mineAbyOres", "mineAbyOres", 10, 0, ACBlocks.abyssal_diamond_ore, ACAchievements.mine_abyssal_coralium).registerStat();
+		//		ACAchievements.mine_dreadlands_ores = new Achievement("achievement.mineDread", "mineDread", 12, 0, ACBlocks.dreaded_abyssalnite_ore, ACAchievements.mine_abyssal_ores).registerStat();
+		//		ACAchievements.dreadium = new Achievement("achievement.dreadium", "dreadium", 14, 0, ACItems.dreadium_ingot, ACAchievements.mine_dreadlands_ores).registerStat();
+		//		ACAchievements.ethaxium = new Achievement("achievement.ethaxium", "ethaxium", 16, 0, ACItems.ethaxium_ingot, ACAchievements.dreadium).setSpecial().registerStat();
+		//		//Depths Ghoul Achievements
+		//		ACAchievements.kill_depths_ghoul = new Achievement("achievement.killghoul", "killghoul", -2, 0, ACItems.coralium_plagued_flesh_on_a_bone, ACAchievements.necronomicon).registerStat();
+		//		ACAchievements.depths_ghoul_head = new Achievement("achievement.ghoulhead", "ghoulhead", -4, 0, ACBlocks.depths_ghoul_head, ACAchievements.kill_depths_ghoul).registerStat();
+		//		ACAchievements.pete_head = new Achievement("achievement.petehead", "petehead", -4, -2, ACBlocks.pete_head, ACAchievements.depths_ghoul_head).registerStat();
+		//		ACAchievements.mr_wilson_head = new Achievement("achievement.wilsonhead", "wilsonhead", -4, -4, ACBlocks.mr_wilson_head, ACAchievements.pete_head).registerStat();
+		//		ACAchievements.dr_orange_head = new Achievement("achievement.orangehead", "orangehead", -4, -6, ACBlocks.dr_orange_head, ACAchievements.mr_wilson_head).registerStat();
+		//		//Necronomicon Achievements
+		//		ACAchievements.abyssal_wasteland_necronomicon = new Achievement("achievement.necrou1", "necrou1", 2, 1, ACItems.abyssal_wasteland_necronomicon, ACAchievements.necronomicon).registerStat();
+		//		ACAchievements.dreadlands_necronomicon = new Achievement("achievement.necrou2", "necrou2", 4, 1, ACItems.dreadlands_necronomicon, ACAchievements.abyssal_wasteland_necronomicon).registerStat();
+		//		ACAchievements.omothol_necronomicon = new Achievement("achievement.necrou3", "necrou3", 6, 1, ACItems.omothol_necronomicon, ACAchievements.dreadlands_necronomicon).registerStat();
+		//		ACAchievements.abyssalnomicon = new Achievement("achievement.abyssaln", "abyssaln", 8, 1, ACItems.abyssalnomicon, ACAchievements.omothol_necronomicon).setSpecial().registerStat();
+		//		//Ritual Achievements
+		//		ACAchievements.ritual_altar = new Achievement("achievement.ritual", "ritual", -2, 1, ACBlocks.ritual_altar, ACAchievements.necronomicon).setSpecial().registerStat();
+		//		ACAchievements.summoning_ritual = new Achievement("achievement.ritualSummon", "ritualSummon", -4, 1, ACBlocks.depths_ghoul_head, ACAchievements.ritual_altar).registerStat();
+		//		ACAchievements.creation_ritual = new Achievement("achievement.ritualCreate", "ritualCreate", -4, 2, ACItems.life_crystal, ACAchievements.ritual_altar).registerStat();
+		//		ACAchievements.breeding_ritual = new Achievement("achievement.ritualBreed", "ritualBreed", -4, 3, Items.EGG, ACAchievements.ritual_altar).registerStat();
+		//		ACAchievements.potion_ritual = new Achievement("achievement.ritualPotion", "ritualPotion", -4, 4, PotionUtils.addPotionToItemStack(new ItemStack(Items.POTIONITEM), PotionTypes.WATER), ACAchievements.ritual_altar).registerStat();
+		//		ACAchievements.aoe_potion_ritual = new Achievement("achievement.ritualPotionAoE", "ritualPotionAoE", -4, 5, PotionUtils.addPotionToItemStack(new ItemStack(Items.SPLASH_POTION), PotionTypes.WATER), ACAchievements.ritual_altar).registerStat();
+		//		ACAchievements.infusion_ritual = new Achievement("achievement.ritualInfusion", "ritualInfusion", -4, 6, ACItems.depths_helmet, ACAchievements.ritual_altar).registerStat();
+		//		//Progression Achievements
+		//		ACAchievements.enter_abyssal_wasteland = new Achievement("achievement.enterabyss", "enterabyss", 0, 2, ACBlocks.abyssal_stone, ACAchievements.necronomicon).setSpecial().registerStat();
+		//		ACAchievements.kill_spectral_dragon = new Achievement("achievement.killdragon", "killdragon", 2, 2, ACItems.coralium_plagued_flesh, ACAchievements.enter_abyssal_wasteland).registerStat();
+		//		ACAchievements.summon_asorah = new Achievement("achievement.summonAsorah", "summonAsorah", 0, 4, Altar, ACAchievements.enter_abyssal_wasteland).registerStat();
+		//		ACAchievements.kill_asorah = new Achievement("achievement.killAsorah", "killAsorah", 2, 4, ACItems.eye_of_the_abyss, ACAchievements.summon_asorah).setSpecial().registerStat();
+		//		ACAchievements.enter_dreadlands = new Achievement("achievement.enterdreadlands", "enterdreadlands", 2, 6, ACBlocks.dreadstone, ACAchievements.kill_asorah).setSpecial().registerStat();
+		//		ACAchievements.kill_dreadguard = new Achievement("achievement.killdreadguard", "killdreadguard", 4, 6, ACItems.dreaded_shard_of_abyssalnite, ACAchievements.enter_dreadlands).registerStat();
+		//		ACAchievements.summon_chagaroth = new Achievement("achievement.summonChagaroth", "summonChagaroth", 2, 8, ACBlocks.chagaroth_altar_bottom, ACAchievements.enter_dreadlands).registerStat();
+		//		ACAchievements.kill_chagaroth = new Achievement("achievement.killChagaroth", "killChagaroth", 4, 8, ACItems.dread_plagued_gateway_key, ACAchievements.summon_chagaroth).setSpecial().registerStat();
+		//		ACAchievements.enter_omothol = new Achievement("achievement.enterOmothol", "enterOmothol", 4, 10, ACBlocks.omothol_stone, ACAchievements.kill_chagaroth).setSpecial().registerStat();
+		//		ACAchievements.enter_dark_realm = new Achievement("achievement.darkRealm", "darkRealm", 2, 10, ACBlocks.darkstone, ACAchievements.enter_omothol).registerStat();
+		//		ACAchievements.kill_omothol_elite = new Achievement("achievement.killOmotholelite", "killOmotholelite", 6, 10, ACItems.eldritch_scale, ACAchievements.enter_omothol).registerStat();
+		//		ACAchievements.locate_jzahar = new Achievement("achievement.locateJzahar", "locateJzahar", 4, 12, ACItems.jzahar_charm, ACAchievements.enter_omothol).registerStat();
+		//		ACAchievements.kill_jzahar = new Achievement("achievement.killJzahar", "killJzahar", 6, 12, ACItems.staff_of_the_gatekeeper, ACAchievements.locate_jzahar).setSpecial().registerStat();
+		//		//nowwhat
+		//		//Gateway Key Achievements
+		//		ACAchievements.gateway_key = new Achievement("achievement.GK1", "GK1", 0, -2, ACItems.gateway_key, ACAchievements.necronomicon).registerStat();
+		//		ACAchievements.find_powerstone = new Achievement("achievement.findPSDL", "findPSDL", -2, -2, ACBlocks.dreadlands_infused_powerstone, ACAchievements.gateway_key).registerStat();
+		//		ACAchievements.dreaded_gateway_key = new Achievement("achievement.GK2", "GK2", 0, -4, ACItems.dreaded_gateway_key, ACAchievements.gateway_key).registerStat();
+		//		ACAchievements.rlyehian_gateway_key = new Achievement("achievement.GK3", "GK3", 0, -6, ACItems.rlyehian_gateway_key, ACAchievements.dreaded_gateway_key).registerStat();
+		//		//Machinery Achievements
+		//		ACAchievements.make_transmutator = new Achievement("achievement.makeTransmutator", "makeTransmutator", 2, -1, ACBlocks.transmutator_idle, ACAchievements.necronomicon).registerStat();
+		//		ACAchievements.make_crystallizer = new Achievement("achievement.makeCrystallizer", "makeCrystallizer", 4, -2, ACBlocks.crystallizer_idle, ACAchievements.make_transmutator).registerStat();
+		//		ACAchievements.make_materializer = new Achievement("achievement.makeMaterializer", "makeMaterializer", 6, -2, ACBlocks.materializer, ACAchievements.make_crystallizer).registerStat();
+		//		ACAchievements.make_crystal_bag = new Achievement("achievement.makeCrystalBag", "makeCrystalBag", 6, -4, ACItems.small_crystal_bag, ACAchievements.make_materializer).registerStat();
+		//		ACAchievements.make_engraver = new Achievement("achievement.makeEngraver", "makeEngraver", 2, -3, ACBlocks.engraver, AchievementList.OPEN_INVENTORY).registerStat();
+		//
+		//		AchievementPage.registerAchievementPage(new AchievementPage("AbyssalCraft", ACAchievements.getAchievements()));
 
-		RecipeSorter.register("abyssalcraft:shapednbt", ShapedNBTRecipe.class, Category.SHAPED, "after:minecraft:shaped");
+		//		RecipeSorter.register("abyssalcraft:shapednbt", ShapedNBTRecipe.class, Category.SHAPED, "after:minecraft:shaped");
 
-		
-//		addOreDictionaryStuff();
 		GameRegistry.registerFuelHandler(new FurnaceFuelHandler());
 		AbyssalCraftAPI.registerFuelHandler(new CrystalFuelHandler(), FuelType.CRYSTALLIZER);
 		AbyssalCraftAPI.registerFuelHandler(new CrystalFuelHandler(), FuelType.TRANSMUTATOR);
@@ -514,9 +510,9 @@ public class MiscHandler implements ILifeCycleHandler {
 
 	@SubscribeEvent
 	public void registerRecipes(RegistryEvent.Register<IRecipe> event){
-		
+
 		IForgeRegistry<IRecipe> reg = event.getRegistry();
-		
+
 		addShapedRecipe(reg, rl("darkstone_bricks_0"), null, new ItemStack(ACBlocks.darkstone_brick, 4, 0), new Object[] {"AA", "AA", 'A', new ItemStack(ACBlocks.stone, 1, 0) });
 		addBlockStuffRecipes(reg, new ItemStack(ACBlocks.darkstone_brick, 1, 0), ACBlocks.darkstone_brick_slab, ACBlocks.darkstone_brick_stairs, ACBlocks.darkstone_brick_fence);
 		addBlockStuffRecipes(reg, new ItemStack(ACBlocks.cobblestone, 1, 0), ACBlocks.darkstone_cobblestone_slab, ACBlocks.darkstone_cobblestone_stairs, ACBlocks.darkstone_cobblestone_wall);
@@ -619,7 +615,7 @@ public class MiscHandler implements ILifeCycleHandler {
 		addShapedRecipe(reg, rl("rending_pedestal"), null, new ItemStack(ACBlocks.rending_pedestal), new Object[] {"#%#", "#&#", "###", '#', new ItemStack(ACBlocks.stone, 1, 7), '%', ACItems.shard_of_oblivion, '&', ACItems.shadow_gem});
 		addShapedOreRecipe(reg, rl("state_transformer"), null, new ItemStack(ACBlocks.state_transformer), "###", "#&#", "#@#", '#', new ItemStack(ACBlocks.stone, 1, 7), '&', new ItemStack(ACItems.transmutation_gem, 1, OreDictionary.WILDCARD_VALUE), '@', "chestWood");
 		addShapedRecipe(reg, rl("energy_depositioner"), null, new ItemStack(ACBlocks.energy_depositioner), "###", "%&%", "#@#", '#', new ItemStack(ACBlocks.stone, 1, 7), '%', ACItems.shadow_gem, '&', new ItemStack(ACItems.transmutation_gem, 1, OreDictionary.WILDCARD_VALUE), '@', ACBlocks.energy_relay);
-		
+
 		addShapedOreRecipe(reg, rl("darkstone_pickaxe"), null, new ItemStack(ACItems.darkstone_pickaxe, 1), new Object[] {"###", " % ", " % ", '#', new ItemStack(ACBlocks.cobblestone, 1, 0), '%', "stickWood"});
 		addShapedOreRecipe(reg, rl("darkstone_axe"), null, new ItemStack(ACItems.darkstone_axe, 1), new Object[] {"##", "#%", " %", '#', new ItemStack(ACBlocks.cobblestone, 1, 0), '%', "stickWood"});
 		addShapedOreRecipe(reg, rl("darkstone_shovel"), null, new ItemStack(ACItems.darkstone_shovel, 1), new Object[] {"#", "%", "%", '#', new ItemStack(ACBlocks.cobblestone, 1, 0), '%', "stickWood"});
@@ -852,7 +848,7 @@ public class MiscHandler implements ILifeCycleHandler {
 		addShapelessRecipe(reg, rl("ethaxium_upgrade_kit"), null, new ItemStack(ACItems.ethaxium_upgrade_kit, 1), ACItems.dreadium_ingot, ACItems.ethaxium_ingot, ACItems.ethaxium_ingot, ACItems.dreadium_upgrade_kit);
 	}
 
-	
+
 
 	private static void addArmor(Item helmet, Item chestplate, Item pants, Item boots, Item material, ItemStack nugget, Item upgrade, Item oldh, Item oldc, Item oldp, Item oldb){
 		GameRegistry.addShapedRecipe(helmet.getRegistryName(), null, new ItemStack(helmet), new Object[] {"###", "# #", '#', material});
@@ -878,35 +874,35 @@ public class MiscHandler implements ILifeCycleHandler {
 	private void addFenceRecipe(IForgeRegistry<IRecipe> reg, ItemStack input, Block fence){ addShapedRecipe(reg, fence.getRegistryName(), null, new ItemStack(fence, 6), new Object[] {"###", "###", '#', input}); }
 	private void addButtonRecipe(IForgeRegistry<IRecipe> reg, ItemStack input, Block button){ addShapedRecipe(reg, button.getRegistryName(), null, new ItemStack(button, 1), new Object[] {"#", '#', input}); }
 	private void addPPlateRecipe(IForgeRegistry<IRecipe> reg, ItemStack input, Block pplate){ addShapedRecipe(reg, pplate.getRegistryName(), null, new ItemStack(pplate, 1), new Object[] {"##", '#', input}); }
-	
+
 	private ResourceLocation rl(String name){
 		return new ResourceLocation("abyssalcraft", name);
 	}
 
 	private void addShapedRecipe(IForgeRegistry<IRecipe> reg, ResourceLocation name, ResourceLocation group, @Nonnull ItemStack output, Object... params)
-    {
-        ShapedPrimer primer = CraftingHelper.parseShaped(params);
-        reg.register(new ShapedRecipes(group == null ? "" : group.toString(), primer.width, primer.height, primer.input, output).setRegistryName(name));
-    }
-	
+	{
+		ShapedPrimer primer = CraftingHelper.parseShaped(params);
+		reg.register(new ShapedRecipes(group == null ? "" : group.toString(), primer.width, primer.height, primer.input, output).setRegistryName(name));
+	}
+
 	private void addShapedNBTRecipe(IForgeRegistry<IRecipe> reg, ResourceLocation name, ResourceLocation group, @Nonnull ItemStack output, Object... params)
-    {
-        ShapedPrimer primer = CraftingHelper.parseShaped(params);
-        reg.register(new ShapedNBTRecipe(group == null ? "" : group.toString(), primer.width, primer.height, primer.input, output).setRegistryName(name));
-    }
+	{
+		ShapedPrimer primer = CraftingHelper.parseShaped(params);
+		reg.register(new ShapedNBTRecipe(group == null ? "" : group.toString(), primer.width, primer.height, primer.input, output).setRegistryName(name));
+	}
 
 	private void addShapedOreRecipe(IForgeRegistry<IRecipe> reg, ResourceLocation name, ResourceLocation group, @Nonnull ItemStack output, Object... params)
 	{
-        reg.register(new ShapedOreRecipe(group, output, params).setRegistryName(name));
-    }
+		reg.register(new ShapedOreRecipe(group, output, params).setRegistryName(name));
+	}
 
 	private void addShapelessRecipe(IForgeRegistry<IRecipe> reg, ResourceLocation name, ResourceLocation group, @Nonnull ItemStack output, Object... params)
-    {
-        NonNullList<Ingredient> lst = NonNullList.create();
-        for (Object i : params)
-            lst.add(CraftingHelper.getIngredient(i));
-        reg.register(new ShapelessRecipes(group == null ? "" : group.toString(), output, lst).setRegistryName(name));
-    }
+	{
+		NonNullList<Ingredient> lst = NonNullList.create();
+		for (Object i : params)
+			lst.add(CraftingHelper.getIngredient(i));
+		reg.register(new ShapelessRecipes(group == null ? "" : group.toString(), output, lst).setRegistryName(name));
+	}
 
 	private void addDungeonHooks(){
 		DungeonHooks.addDungeonMob(new ResourceLocation("abyssalcraft","abyssalzombie"), 150);
@@ -1002,12 +998,6 @@ public class MiscHandler implements ILifeCycleHandler {
 		FMLInterModComms.sendMessage("BuildCraft|Core", "blacklist-facade", new ItemStack(ACBlocks.ritual_altar));
 		FMLInterModComms.sendMessage("BuildCraft|Core", "blacklist-facade", new ItemStack(ACBlocks.ritual_pedestal));
 		FMLInterModComms.sendMessage("BuildCraft|Core", "blacklist-facade", new ItemStack(ACBlocks.statue, 1, OreDictionary.WILDCARD_VALUE));
-//		FMLInterModComms.sendMessage("BuildCraft|Core", "blacklist-facade", new ItemStack(ACBlocks.hastur_statue));
-//		FMLInterModComms.sendMessage("BuildCraft|Core", "blacklist-facade", new ItemStack(ACBlocks.jzahar_statue));
-//		FMLInterModComms.sendMessage("BuildCraft|Core", "blacklist-facade", new ItemStack(ACBlocks.azathoth_statue));
-//		FMLInterModComms.sendMessage("BuildCraft|Core", "blacklist-facade", new ItemStack(ACBlocks.nyarlathotep_statue));
-//		FMLInterModComms.sendMessage("BuildCraft|Core", "blacklist-facade", new ItemStack(ACBlocks.yog_sothoth_statue));
-//		FMLInterModComms.sendMessage("BuildCraft|Core", "blacklist-facade", new ItemStack(ACBlocks.shub_niggurath_statue));
 		FMLInterModComms.sendMessage("BuildCraft|Core", "blacklist-facade", new ItemStack(ACBlocks.energy_pedestal));
 	}
 

@@ -18,7 +18,6 @@ import java.util.Map.Entry;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.text.translation.I18n;
 import net.minecraftforge.fml.common.FMLLog;
 
 import org.apache.logging.log4j.Level;
@@ -47,11 +46,11 @@ public class NecroDataJsonUtil {
 		json.addProperty("version", 1);
 		json.addProperty("identifier", data.getIdentifier());
 		json.addProperty("title", data.getTitle());
-//		if(!Strings.isNullOrEmpty(data.getInformation())) //TODO clean up
-//			json.addProperty("information", data.getInformation());
+		//		if(!Strings.isNullOrEmpty(data.getInformation())) //TODO clean up
+		//			json.addProperty("information", data.getInformation());
 		JsonArray chapters = new JsonArray();
-//		for(Chapter c : data.getChapters())
-//			chapters.add(serializeChapter(c));
+		//		for(Chapter c : data.getChapters())
+		//			chapters.add(serializeChapter(c));
 		json.add("chapters", chapters);
 		return json;
 	}

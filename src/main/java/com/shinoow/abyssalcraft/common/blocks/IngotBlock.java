@@ -13,9 +13,6 @@ package com.shinoow.abyssalcraft.common.blocks;
 
 import javax.annotation.Nullable;
 
-import com.shinoow.abyssalcraft.common.blocks.BlockACCobblestone.EnumCobblestoneType;
-import com.shinoow.abyssalcraft.lib.ACTabs;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.MapColor;
@@ -25,6 +22,9 @@ import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.boss.EntityDragon;
+import net.minecraft.entity.boss.EntityWither;
+import net.minecraft.entity.projectile.EntityWitherSkull;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IStringSerializable;
 import net.minecraft.util.NonNullList;
@@ -33,6 +33,8 @@ import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+
+import com.shinoow.abyssalcraft.lib.ACTabs;
 
 public class IngotBlock extends Block {
 
@@ -51,6 +53,14 @@ public class IngotBlock extends Block {
 	@Override
 	public boolean isBeaconBase(IBlockAccess world, BlockPos pos, BlockPos beaconpos) {
 		return true;
+	}
+
+	@Override
+	public boolean canEntityDestroy(IBlockState state, IBlockAccess world, BlockPos pos, Entity entity)
+	{
+		if(entity instanceof EntityDragon || entity instanceof EntityWither || entity instanceof EntityWitherSkull)
+			return state.getValue(TYPE) != EnumIngotType.ETHAXIUM;
+		return super.canEntityDestroy(state, world, pos, entity);
 	}
 
 	@Override

@@ -18,7 +18,7 @@ import java.util.Map;
 import javax.annotation.Nonnull;
 
 import mezz.jei.api.ingredients.IIngredients;
-import mezz.jei.api.recipe.BlankRecipeWrapper;
+import mezz.jei.api.recipe.IRecipeWrapper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.resources.I18n;
@@ -28,7 +28,7 @@ import com.google.common.collect.Maps;
 import com.shinoow.abyssalcraft.api.ritual.RitualRegistry;
 import com.shinoow.abyssalcraft.lib.NecronomiconText;
 
-public class RendingRecipeWrapper extends BlankRecipeWrapper {
+public class RendingRecipeWrapper implements IRecipeWrapper {
 
 	private final ItemStack output;
 	private final int dimension;

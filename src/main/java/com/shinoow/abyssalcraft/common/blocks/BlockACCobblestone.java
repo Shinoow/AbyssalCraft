@@ -19,7 +19,6 @@ import net.minecraft.world.Explosion;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.lib.ACTabs;
 
 public class BlockACCobblestone extends Block {
@@ -145,7 +144,7 @@ public class BlockACCobblestone extends Block {
 		{
 			return name;
 		}
-		
+
 		public String getState(){
 			return state;
 		}

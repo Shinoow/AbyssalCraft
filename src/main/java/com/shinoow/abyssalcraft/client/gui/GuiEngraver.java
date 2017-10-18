@@ -31,6 +31,14 @@ public class GuiEngraver extends GuiContainer {
 	}
 
 	@Override
+	public void drawScreen(int mouseX, int mouseY, float partialTicks)
+	{
+		drawDefaultBackground();
+		super.drawScreen(mouseX, mouseY, partialTicks);
+		renderHoveredToolTip(mouseX, mouseY);
+	}
+
+	@Override
 	protected void drawGuiContainerForegroundLayer(int par1, int par2)
 	{
 		String s = tileEngraver.hasCustomName() ? tileEngraver.getName() : I18n.format(tileEngraver.getName(), new Object[0]);

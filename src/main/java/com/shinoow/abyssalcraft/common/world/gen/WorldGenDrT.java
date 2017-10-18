@@ -81,12 +81,13 @@ public class WorldGenDrT extends WorldGenTrees {
 	}
 
 	private void createTrunk(World world, Random rand, int x, int y, int z) {
-		int[] pos = new int[] {0, 0, 1, 0, 0, 1, -1, 0, 0, -1};
+		int[] pos = new int[] {1, 0, 0, 1, -1, 0, 0, -1};
 		int sh;
-		for (int t = 0; t < 5; t++) {
+		for (int t = 0; t < 4; t++) {
 			sh = rand.nextInt(3) + y;
+			int i = sh;
 			while (sh > y - 1) {
-				world.setBlockState(new BlockPos(x + pos[t * 2], sh, z + pos[t * 2 + 1]), ACBlocks.dreadlands_log.getStateFromMeta(12));
+				world.setBlockState(new BlockPos(x + pos[t * 2], sh, z + pos[t * 2 + 1]), i == sh ? ACBlocks.dreadlands_log.getStateFromMeta(12) : ACBlocks.dreadlands_log.getDefaultState());
 				sh--;
 			}
 		}

@@ -37,7 +37,8 @@ public class GuiNecronomiconOther extends GuiNecronomicon {
 
 	public GuiNecronomiconOther(int bookType){
 		super(bookType);
-		map.putAll(AbyssalCraftAPI.getNecronomiconData());
+		if(map.isEmpty())
+			map.putAll(AbyssalCraftAPI.getNecronomiconData());
 		if(map.size() > 10 && map.size() <= 20)
 			setTurnupLimit(2);
 		else if(map.size() > 20 && map.size() <= 30)
@@ -47,6 +48,7 @@ public class GuiNecronomiconOther extends GuiNecronomicon {
 
 	@Override
 	public void initGui(){
+		currentNecro = this;
 		buttonList.clear();
 		Keyboard.enableRepeatEvents(true);
 
@@ -54,8 +56,8 @@ public class GuiNecronomiconOther extends GuiNecronomicon {
 
 		int i = (width - guiWidth) / 2;
 		byte b0 = 2;
-		buttonList.add(buttonNextPage = new ButtonNextPage(1, i + 215, b0 + 154, true));
-		buttonList.add(buttonPreviousPage = new ButtonNextPage(2, i + 18, b0 + 154, false));
+		buttonList.add(buttonNextPage = new ButtonNextPage(1, i + 215, b0 + 154, true, false));
+		buttonList.add(buttonPreviousPage = new ButtonNextPage(2, i + 18, b0 + 154, false, false));
 		if(!map.isEmpty())
 			for(int n = 0; n < map.size(); n++)
 				if(currTurnup == 0){
@@ -136,8 +138,8 @@ public class GuiNecronomiconOther extends GuiNecronomicon {
 
 		int i = (width - guiWidth) / 2;
 		byte b0 = 2;
-		buttonList.add(buttonNextPage = new ButtonNextPage(1, i + 215, b0 + 154, true));
-		buttonList.add(buttonPreviousPage = new ButtonNextPage(2, i + 18, b0 + 154, false));
+		buttonList.add(buttonNextPage = new ButtonNextPage(1, i + 215, b0 + 154, true, false));
+		buttonList.add(buttonPreviousPage = new ButtonNextPage(2, i + 18, b0 + 154, false, false));
 
 		if(!map.isEmpty())
 			for(int n = 0; n < map.size(); n++)

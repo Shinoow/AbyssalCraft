@@ -56,12 +56,11 @@ public class BlockDecorativeStatue extends BlockContainer {
 	public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos)
 	{
 		EnumFacing facing = EnumFacing.NORTH;
-		
+
 		TileEntity tile = worldIn.getTileEntity(pos);
-		if(tile instanceof TileEntityDecorativeStatue){
+		if(tile instanceof TileEntityDecorativeStatue)
 			facing = EnumFacing.getFront(((TileEntityDecorativeStatue) tile).getFacing());
-		}
-		
+
 		return state.withProperty(FACING, facing);
 	}
 
@@ -74,12 +73,12 @@ public class BlockDecorativeStatue extends BlockContainer {
 	@Override
 	public int getMetaFromState(IBlockState state)
 	{
-		return ((EnumDeityType)state.getValue(TYPE)).getMeta();
+		return state.getValue(TYPE).getMeta();
 	}
 
 	@Override
 	public int damageDropped (IBlockState state) {
-		return ((EnumDeityType)state.getValue(TYPE)).getMeta();
+		return state.getValue(TYPE).getMeta();
 	}
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })
@@ -119,7 +118,7 @@ public class BlockDecorativeStatue extends BlockContainer {
 		if(tile instanceof TileEntityDecorativeStatue)
 			((TileEntityDecorativeStatue) tile).setFacing(state.getValue(FACING).getIndex());
 	}
-	
+
 	@Override
 	public TileEntity createNewTileEntity(World worldIn, int meta) {
 

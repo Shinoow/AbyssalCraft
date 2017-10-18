@@ -16,9 +16,7 @@ import java.util.Random;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockStairs;
 import net.minecraft.enchantment.EnchantmentHelper;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.IEntityOwnable;
+import net.minecraft.entity.*;
 import net.minecraft.entity.passive.AbstractHorse;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -26,7 +24,6 @@ import net.minecraft.init.Blocks;
 import net.minecraft.init.MobEffects;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.inventory.EntityEquipmentSlot;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
@@ -34,6 +31,7 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.translation.I18n;
+import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.chunk.storage.ExtendedBlockStorage;
@@ -41,7 +39,6 @@ import net.minecraftforge.event.AnvilUpdateEvent;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.event.entity.living.*;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
-import net.minecraftforge.event.entity.player.EntityItemPickupEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent.Clone;
 import net.minecraftforge.event.entity.player.UseHoeEvent;
 import net.minecraftforge.event.terraingen.BiomeEvent;
@@ -57,16 +54,14 @@ import com.shinoow.abyssalcraft.api.event.ACEvents.RitualEvent;
 import com.shinoow.abyssalcraft.api.item.ACItems;
 import com.shinoow.abyssalcraft.api.item.ItemUpgradeKit;
 import com.shinoow.abyssalcraft.api.recipe.UpgradeKitRecipes;
-import com.shinoow.abyssalcraft.api.ritual.*;
+import com.shinoow.abyssalcraft.api.ritual.NecronomiconSummonRitual;
 import com.shinoow.abyssalcraft.common.caps.NecromancyCapabilityProvider;
 import com.shinoow.abyssalcraft.common.entity.EntityJzahar;
-import com.shinoow.abyssalcraft.common.entity.demon.EntityEvilSheep;
+import com.shinoow.abyssalcraft.common.entity.demon.*;
 import com.shinoow.abyssalcraft.common.items.ItemCrystalBag;
 import com.shinoow.abyssalcraft.common.items.ItemNecronomicon;
-import com.shinoow.abyssalcraft.common.ritual.NecronomiconBreedingRitual;
-import com.shinoow.abyssalcraft.common.ritual.NecronomiconDreadSpawnRitual;
 import com.shinoow.abyssalcraft.init.BlockHandler;
-import com.shinoow.abyssalcraft.lib.ACAchievements;
+import com.shinoow.abyssalcraft.init.InitHandler;
 import com.shinoow.abyssalcraft.lib.ACConfig;
 import com.shinoow.abyssalcraft.lib.ACLib;
 import com.shinoow.abyssalcraft.lib.util.SpecialTextUtil;
@@ -87,68 +82,68 @@ public class AbyssalCraftEventHooks {
 									storage.set(x, y, z, ACBlocks.stone.getDefaultState());
 	}
 
-//	@SubscribeEvent
-//	public void onItemPickup(EntityItemPickupEvent event) {
-//		if(event.getItem().getItem().getItem() == Item.getItemFromBlock(ACBlocks.abyssalnite_ore))
-//			event.getEntityPlayer().addStat(ACAchievements.mine_abyssalnite, 1);
-//		if(event.getItem().getItem().getItem() == ACItems.coralium_gem ||
-//				event.getItem().getItem().getItem() == ACItems.coralium_gem_cluster_2 ||
-//				event.getItem().getItem().getItem() == ACItems.coralium_gem_cluster_3 ||
-//				event.getItem().getItem().getItem() == ACItems.coralium_gem_cluster_4 ||
-//				event.getItem().getItem().getItem() == ACItems.coralium_gem_cluster_5 ||
-//				event.getItem().getItem().getItem() == ACItems.coralium_gem_cluster_6 ||
-//				event.getItem().getItem().getItem() == ACItems.coralium_gem_cluster_7 ||
-//				event.getItem().getItem().getItem() == ACItems.coralium_gem_cluster_8 ||
-//				event.getItem().getItem().getItem() == ACItems.coralium_gem_cluster_9 ||
-//				event.getItem().getItem().getItem() == Item.getItemFromBlock(ACBlocks.coralium_ore))
-//			event.getEntityPlayer().addStat(ACAchievements.mine_coralium, 1);
-//		if(event.getItem().getItem().getItem() == Item.getItemFromBlock(ACBlocks.liquified_coralium_ore) ||
-//				event.getItem().getItem().getItem() == Item.getItemFromBlock(ACBlocks.pearlescent_coralium_ore) ||
-//				event.getItem().getItem().getItem() == Item.getItemFromBlock(ACBlocks.abyssal_coralium_ore))
-//			event.getEntityPlayer().addStat(ACAchievements.mine_abyssal_coralium, 1);
-//		if(event.getItem().getItem().getItem() == ACItems.shadow_gem)
-//			event.getEntityPlayer().addStat(ACAchievements.shadow_gems, 1);
-//		if(event.getItem().getItem().getItem() == Item.getItemFromBlock(ACBlocks.abyssal_copper_ore) ||
-//				event.getItem().getItem().getItem() == Item.getItemFromBlock(ACBlocks.abyssal_iron_ore) ||
-//				event.getItem().getItem().getItem() == Item.getItemFromBlock(ACBlocks.abyssal_gold_ore) ||
-//				event.getItem().getItem().getItem() == Item.getItemFromBlock(ACBlocks.abyssal_nitre_ore) ||
-//				event.getItem().getItem().getItem() == Item.getItemFromBlock(ACBlocks.abyssal_diamond_ore) ||
-//				event.getItem().getItem().getItem() == Item.getItemFromBlock(ACBlocks.abyssal_tin_ore))
-//			event.getEntityPlayer().addStat(ACAchievements.mine_abyssal_ores, 1);
-//		if(event.getItem().getItem().getItem() == Item.getItemFromBlock(ACBlocks.dreadlands_abyssalnite_ore) ||
-//				event.getItem().getItem().getItem() == Item.getItemFromBlock(ACBlocks.dreaded_abyssalnite_ore))
-//			event.getEntityPlayer().addStat(ACAchievements.mine_dreadlands_ores, 1);
-//		if(event.getItem().getItem().getItem() == ACItems.dreadium_ingot)
-//			event.getEntityPlayer().addStat(ACAchievements.dreadium, 1);
-//		if(event.getItem().getItem().getItem() == ACItems.ethaxium_ingot)
-//			event.getEntityPlayer().addStat(ACAchievements.ethaxium, 1);
-//		if(event.getItem().getItem().getItem() == ACItems.necronomicon)
-//			event.getEntityPlayer().addStat(ACAchievements.necronomicon, 1);
-//		if(event.getItem().getItem().getItem() == Item.getItemFromBlock(ACBlocks.depths_ghoul_head))
-//			event.getEntityPlayer().addStat(ACAchievements.depths_ghoul_head, 1);
-//		if(event.getItem().getItem().getItem() == Item.getItemFromBlock(ACBlocks.pete_head))
-//			event.getEntityPlayer().addStat(ACAchievements.pete_head, 1);
-//		if(event.getItem().getItem().getItem() == Item.getItemFromBlock(ACBlocks.mr_wilson_head))
-//			event.getEntityPlayer().addStat(ACAchievements.mr_wilson_head, 1);
-//		if(event.getItem().getItem().getItem() == Item.getItemFromBlock(ACBlocks.dr_orange_head))
-//			event.getEntityPlayer().addStat(ACAchievements.dr_orange_head, 1);
-//		if(event.getItem().getItem().getItem() == Item.getItemFromBlock(ACBlocks.dreadlands_infused_powerstone))
-//			event.getEntityPlayer().addStat(ACAchievements.find_powerstone, 1);
-//		if(event.getItem().getItem().getItem() == ACItems.gateway_key)
-//			event.getEntityPlayer().addStat(ACAchievements.gateway_key, 1);
-//		if(event.getItem().getItem().getItem() == ACItems.dreaded_gateway_key)
-//			event.getEntityPlayer().addStat(ACAchievements.dreaded_gateway_key, 1);
-//		if(event.getItem().getItem().getItem() == ACItems.rlyehian_gateway_key)
-//			event.getEntityPlayer().addStat(ACAchievements.rlyehian_gateway_key, 1);
-//		if(event.getItem().getItem().getItem() == Item.getItemFromBlock(ACBlocks.transmutator_idle))
-//			event.getEntityPlayer().addStat(ACAchievements.make_transmutator, 1);
-//		if(event.getItem().getItem().getItem() == Item.getItemFromBlock(ACBlocks.crystallizer_idle))
-//			event.getEntityPlayer().addStat(ACAchievements.make_crystallizer, 1);
-//		if(event.getItem().getItem().getItem() == Item.getItemFromBlock(ACBlocks.materializer))
-//			event.getEntityPlayer().addStat(ACAchievements.make_materializer, 1);
-//		if(event.getItem().getItem().getItem() == Item.getItemFromBlock(ACBlocks.engraver))
-//			event.getEntityPlayer().addStat(ACAchievements.make_engraver, 1);
-//	}
+	//	@SubscribeEvent
+	//	public void onItemPickup(EntityItemPickupEvent event) {
+	//		if(event.getItem().getItem().getItem() == Item.getItemFromBlock(ACBlocks.abyssalnite_ore))
+	//			event.getEntityPlayer().addStat(ACAchievements.mine_abyssalnite, 1);
+	//		if(event.getItem().getItem().getItem() == ACItems.coralium_gem ||
+	//				event.getItem().getItem().getItem() == ACItems.coralium_gem_cluster_2 ||
+	//				event.getItem().getItem().getItem() == ACItems.coralium_gem_cluster_3 ||
+	//				event.getItem().getItem().getItem() == ACItems.coralium_gem_cluster_4 ||
+	//				event.getItem().getItem().getItem() == ACItems.coralium_gem_cluster_5 ||
+	//				event.getItem().getItem().getItem() == ACItems.coralium_gem_cluster_6 ||
+	//				event.getItem().getItem().getItem() == ACItems.coralium_gem_cluster_7 ||
+	//				event.getItem().getItem().getItem() == ACItems.coralium_gem_cluster_8 ||
+	//				event.getItem().getItem().getItem() == ACItems.coralium_gem_cluster_9 ||
+	//				event.getItem().getItem().getItem() == Item.getItemFromBlock(ACBlocks.coralium_ore))
+	//			event.getEntityPlayer().addStat(ACAchievements.mine_coralium, 1);
+	//		if(event.getItem().getItem().getItem() == Item.getItemFromBlock(ACBlocks.liquified_coralium_ore) ||
+	//				event.getItem().getItem().getItem() == Item.getItemFromBlock(ACBlocks.pearlescent_coralium_ore) ||
+	//				event.getItem().getItem().getItem() == Item.getItemFromBlock(ACBlocks.abyssal_coralium_ore))
+	//			event.getEntityPlayer().addStat(ACAchievements.mine_abyssal_coralium, 1);
+	//		if(event.getItem().getItem().getItem() == ACItems.shadow_gem)
+	//			event.getEntityPlayer().addStat(ACAchievements.shadow_gems, 1);
+	//		if(event.getItem().getItem().getItem() == Item.getItemFromBlock(ACBlocks.abyssal_copper_ore) ||
+	//				event.getItem().getItem().getItem() == Item.getItemFromBlock(ACBlocks.abyssal_iron_ore) ||
+	//				event.getItem().getItem().getItem() == Item.getItemFromBlock(ACBlocks.abyssal_gold_ore) ||
+	//				event.getItem().getItem().getItem() == Item.getItemFromBlock(ACBlocks.abyssal_nitre_ore) ||
+	//				event.getItem().getItem().getItem() == Item.getItemFromBlock(ACBlocks.abyssal_diamond_ore) ||
+	//				event.getItem().getItem().getItem() == Item.getItemFromBlock(ACBlocks.abyssal_tin_ore))
+	//			event.getEntityPlayer().addStat(ACAchievements.mine_abyssal_ores, 1);
+	//		if(event.getItem().getItem().getItem() == Item.getItemFromBlock(ACBlocks.dreadlands_abyssalnite_ore) ||
+	//				event.getItem().getItem().getItem() == Item.getItemFromBlock(ACBlocks.dreaded_abyssalnite_ore))
+	//			event.getEntityPlayer().addStat(ACAchievements.mine_dreadlands_ores, 1);
+	//		if(event.getItem().getItem().getItem() == ACItems.dreadium_ingot)
+	//			event.getEntityPlayer().addStat(ACAchievements.dreadium, 1);
+	//		if(event.getItem().getItem().getItem() == ACItems.ethaxium_ingot)
+	//			event.getEntityPlayer().addStat(ACAchievements.ethaxium, 1);
+	//		if(event.getItem().getItem().getItem() == ACItems.necronomicon)
+	//			event.getEntityPlayer().addStat(ACAchievements.necronomicon, 1);
+	//		if(event.getItem().getItem().getItem() == Item.getItemFromBlock(ACBlocks.depths_ghoul_head))
+	//			event.getEntityPlayer().addStat(ACAchievements.depths_ghoul_head, 1);
+	//		if(event.getItem().getItem().getItem() == Item.getItemFromBlock(ACBlocks.pete_head))
+	//			event.getEntityPlayer().addStat(ACAchievements.pete_head, 1);
+	//		if(event.getItem().getItem().getItem() == Item.getItemFromBlock(ACBlocks.mr_wilson_head))
+	//			event.getEntityPlayer().addStat(ACAchievements.mr_wilson_head, 1);
+	//		if(event.getItem().getItem().getItem() == Item.getItemFromBlock(ACBlocks.dr_orange_head))
+	//			event.getEntityPlayer().addStat(ACAchievements.dr_orange_head, 1);
+	//		if(event.getItem().getItem().getItem() == Item.getItemFromBlock(ACBlocks.dreadlands_infused_powerstone))
+	//			event.getEntityPlayer().addStat(ACAchievements.find_powerstone, 1);
+	//		if(event.getItem().getItem().getItem() == ACItems.gateway_key)
+	//			event.getEntityPlayer().addStat(ACAchievements.gateway_key, 1);
+	//		if(event.getItem().getItem().getItem() == ACItems.dreaded_gateway_key)
+	//			event.getEntityPlayer().addStat(ACAchievements.dreaded_gateway_key, 1);
+	//		if(event.getItem().getItem().getItem() == ACItems.rlyehian_gateway_key)
+	//			event.getEntityPlayer().addStat(ACAchievements.rlyehian_gateway_key, 1);
+	//		if(event.getItem().getItem().getItem() == Item.getItemFromBlock(ACBlocks.transmutator_idle))
+	//			event.getEntityPlayer().addStat(ACAchievements.make_transmutator, 1);
+	//		if(event.getItem().getItem().getItem() == Item.getItemFromBlock(ACBlocks.crystallizer_idle))
+	//			event.getEntityPlayer().addStat(ACAchievements.make_crystallizer, 1);
+	//		if(event.getItem().getItem().getItem() == Item.getItemFromBlock(ACBlocks.materializer))
+	//			event.getEntityPlayer().addStat(ACAchievements.make_materializer, 1);
+	//		if(event.getItem().getItem().getItem() == Item.getItemFromBlock(ACBlocks.engraver))
+	//			event.getEntityPlayer().addStat(ACAchievements.make_engraver, 1);
+	//	}
 
 	@SubscribeEvent
 	public void armorStuff(LivingHurtEvent event){
@@ -178,7 +173,7 @@ public class AbyssalCraftEventHooks {
 				player.addPotionEffect(new PotionEffect(MobEffects.RESISTANCE, 80, 255));
 				player.addPotionEffect(new PotionEffect(MobEffects.BLINDNESS, 20));
 				player.mcServer.getPlayerList().transferPlayerToDimension(player, ACLib.dark_realm_id, new TeleporterDarkRealm(worldServer));
-//				player.addStat(ACAchievements.enter_dark_realm, 1);
+				//				player.addStat(ACAchievements.enter_dark_realm, 1);
 			}
 		}
 		if(event.getEntityLiving().dimension == ACLib.dark_realm_id && !(event.getEntityLiving() instanceof EntityPlayer)){
@@ -237,35 +232,35 @@ public class AbyssalCraftEventHooks {
 				}
 			}
 
-//		if(event.crafting.getItem() == ACItems.gateway_key)
-//			event.player.addStat(ACAchievements.gateway_key, 1);
-//		if(event.crafting.getItem() == ACItems.shadow_gem)
-//			event.player.addStat(ACAchievements.shadow_gems, 1);
-//		if(event.crafting.getItem() == ACItems.ethaxium_ingot)
-//			event.player.addStat(ACAchievements.ethaxium, 1);
-//		if(event.crafting.getItem() == ACItems.necronomicon)
-//			event.player.addStat(ACAchievements.necronomicon, 1);
-//		if(event.crafting.getItem() == ACItems.abyssal_wasteland_necronomicon)
-//			event.player.addStat(ACAchievements.abyssal_wasteland_necronomicon, 1);
-//		if(event.crafting.getItem() == ACItems.dreadlands_necronomicon)
-//			event.player.addStat(ACAchievements.dreadlands_necronomicon, 1);
-//		if(event.crafting.getItem() == ACItems.omothol_necronomicon)
-//			event.player.addStat(ACAchievements.omothol_necronomicon, 1);
-//		if(event.crafting.getItem() == ACItems.abyssalnomicon)
-//			event.player.addStat(ACAchievements.abyssalnomicon, 1);
-//		if(event.crafting.getItem() == Item.getItemFromBlock(ACBlocks.transmutator_idle))
-//			event.player.addStat(ACAchievements.make_transmutator, 1);
-//		if(event.crafting.getItem() == Item.getItemFromBlock(ACBlocks.crystallizer_idle))
-//			event.player.addStat(ACAchievements.make_crystallizer, 1);
-//		if(event.crafting.getItem() == Item.getItemFromBlock(ACBlocks.materializer))
-//			event.player.addStat(ACAchievements.make_materializer, 1);
-//		if(event.crafting.getItem() == Item.getItemFromBlock(ACBlocks.engraver))
-//			event.player.addStat(ACAchievements.make_engraver, 1);
-//		if(event.crafting.getItem() == ACItems.small_crystal_bag ||
-//				event.crafting.getItem() == ACItems.medium_crystal_bag ||
-//				event.crafting.getItem() == ACItems.large_crystal_bag ||
-//				event.crafting.getItem() == ACItems.huge_crystal_bag)
-//			event.player.addStat(ACAchievements.make_crystal_bag, 1);
+		//		if(event.crafting.getItem() == ACItems.gateway_key)
+		//			event.player.addStat(ACAchievements.gateway_key, 1);
+		//		if(event.crafting.getItem() == ACItems.shadow_gem)
+		//			event.player.addStat(ACAchievements.shadow_gems, 1);
+		//		if(event.crafting.getItem() == ACItems.ethaxium_ingot)
+		//			event.player.addStat(ACAchievements.ethaxium, 1);
+		//		if(event.crafting.getItem() == ACItems.necronomicon)
+		//			event.player.addStat(ACAchievements.necronomicon, 1);
+		//		if(event.crafting.getItem() == ACItems.abyssal_wasteland_necronomicon)
+		//			event.player.addStat(ACAchievements.abyssal_wasteland_necronomicon, 1);
+		//		if(event.crafting.getItem() == ACItems.dreadlands_necronomicon)
+		//			event.player.addStat(ACAchievements.dreadlands_necronomicon, 1);
+		//		if(event.crafting.getItem() == ACItems.omothol_necronomicon)
+		//			event.player.addStat(ACAchievements.omothol_necronomicon, 1);
+		//		if(event.crafting.getItem() == ACItems.abyssalnomicon)
+		//			event.player.addStat(ACAchievements.abyssalnomicon, 1);
+		//		if(event.crafting.getItem() == Item.getItemFromBlock(ACBlocks.transmutator_idle))
+		//			event.player.addStat(ACAchievements.make_transmutator, 1);
+		//		if(event.crafting.getItem() == Item.getItemFromBlock(ACBlocks.crystallizer_idle))
+		//			event.player.addStat(ACAchievements.make_crystallizer, 1);
+		//		if(event.crafting.getItem() == Item.getItemFromBlock(ACBlocks.materializer))
+		//			event.player.addStat(ACAchievements.make_materializer, 1);
+		//		if(event.crafting.getItem() == Item.getItemFromBlock(ACBlocks.engraver))
+		//			event.player.addStat(ACAchievements.make_engraver, 1);
+		//		if(event.crafting.getItem() == ACItems.small_crystal_bag ||
+		//				event.crafting.getItem() == ACItems.medium_crystal_bag ||
+		//				event.crafting.getItem() == ACItems.large_crystal_bag ||
+		//				event.crafting.getItem() == ACItems.huge_crystal_bag)
+		//			event.player.addStat(ACAchievements.make_crystal_bag, 1);
 	}
 
 	@SubscribeEvent
@@ -324,27 +319,26 @@ public class AbyssalCraftEventHooks {
 	@SubscribeEvent
 	public void onRitualPerformed(RitualEvent.Post event){
 		if(event.getRitual() instanceof NecronomiconSummonRitual){
-//			event.getEntityPlayer().addStat(ACAchievements.summoning_ritual, 1);
+			//			event.getEntityPlayer().addStat(ACAchievements.summoning_ritual, 1);
 			if(event.getRitual().getUnlocalizedName().substring(10).equals("summonSacthoth"))
 				if(!event.getWorld().isRemote)
 					SpecialTextUtil.SacthothGroup(event.getWorld(), I18n.translateToLocal("message.sacthoth.spawn.1"));
-			if(event.getRitual().getUnlocalizedName().substring(10).equals("summonAsorah")){
+			if(event.getRitual().getUnlocalizedName().substring(10).equals("summonAsorah"))
 				if(!event.getWorld().isRemote)
 					SpecialTextUtil.AsorahGroup(event.getWorld(), I18n.translateToLocal("message.asorah.spawn"));
-//				event.getEntityPlayer().addStat(ACAchievements.summon_asorah, 1);
-			}
+			//				event.getEntityPlayer().addStat(ACAchievements.summon_asorah, 1);
 		}
-//		if(event.getRitual() instanceof NecronomiconCreationRitual)
-//			event.getEntityPlayer().addStat(ACAchievements.creation_ritual, 1);
-//		if(event.getRitual() instanceof NecronomiconBreedingRitual
-//				|| event.getRitual() instanceof NecronomiconDreadSpawnRitual)
-//			event.getEntityPlayer().addStat(ACAchievements.breeding_ritual, 1);
-//		if(event.getRitual() instanceof NecronomiconPotionRitual)
-//			event.getEntityPlayer().addStat(ACAchievements.potion_ritual, 1);
-//		if(event.getRitual() instanceof NecronomiconPotionAoERitual)
-//			event.getEntityPlayer().addStat(ACAchievements.aoe_potion_ritual, 1);
-//		if(event.getRitual() instanceof NecronomiconInfusionRitual)
-//			event.getEntityPlayer().addStat(ACAchievements.infusion_ritual, 1);
+		//		if(event.getRitual() instanceof NecronomiconCreationRitual)
+		//			event.getEntityPlayer().addStat(ACAchievements.creation_ritual, 1);
+		//		if(event.getRitual() instanceof NecronomiconBreedingRitual
+		//				|| event.getRitual() instanceof NecronomiconDreadSpawnRitual)
+		//			event.getEntityPlayer().addStat(ACAchievements.breeding_ritual, 1);
+		//		if(event.getRitual() instanceof NecronomiconPotionRitual)
+		//			event.getEntityPlayer().addStat(ACAchievements.potion_ritual, 1);
+		//		if(event.getRitual() instanceof NecronomiconPotionAoERitual)
+		//			event.getEntityPlayer().addStat(ACAchievements.aoe_potion_ritual, 1);
+		//		if(event.getRitual() instanceof NecronomiconInfusionRitual)
+		//			event.getEntityPlayer().addStat(ACAchievements.infusion_ritual, 1);
 	}
 
 	@SubscribeEvent
@@ -365,6 +359,20 @@ public class AbyssalCraftEventHooks {
 				EntityPlayer p = h.world.getPlayerEntityByUUID(h.getOwnerUniqueId());
 				p.getCapability(NecromancyCapabilityProvider.NECROMANCY_CAP, null).storeData(h.getName(), h.serializeNBT(), calculateSize(h.height));
 			}
+		} else if(EntityList.getKey(event.getEntityLiving()) != null){
+			EntityLivingBase e = event.getEntityLiving();
+			if(!(e instanceof EntityEvilpig) && !(e instanceof EntityEvilCow) && !(e instanceof EntityEvilChicken)
+					&& !(e instanceof EntityEvilSheep) && !(e instanceof EntityDemonAnimal)){
+				Tuple<Integer, Float> data = InitHandler.demon_transformations.get(EntityList.getKey(e));
+				World world = event.getEntityLiving().world;
+				if(data != null && world.rand.nextFloat() < data.getSecond() && !world.isRemote){
+					EntityLiving demon = getDemon(data.getFirst(), world);
+					demon.copyLocationAndAnglesFrom(e);
+					world.removeEntity(e);
+					demon.onInitialSpawn(world.getDifficultyForLocation(e.getPosition()), (IEntityLivingData)null);
+					world.spawnEntity(demon);
+				}
+			}
 		}
 	}
 
@@ -375,6 +383,21 @@ public class AbyssalCraftEventHooks {
 		if(height >= 0.75f)
 			return 1;
 		return 0;
+	}
+
+	private EntityLiving getDemon(int num, World world){
+		switch(num){
+		case 0:
+			return new EntityDemonPig(world);
+		case 1:
+			return new EntityDemonCow(world);
+		case 2:
+			return new EntityDemonChicken(world);
+		case 3:
+			return new EntityDemonSheep(world);
+		default:
+			return new EntityDemonPig(world);
+		}
 	}
 
 	@SubscribeEvent

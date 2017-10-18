@@ -11,24 +11,15 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.common;
 
-import net.minecraft.block.Block;
 import net.minecraft.enchantment.EnchantmentData;
 import net.minecraft.entity.passive.EntitySheep;
 import net.minecraft.init.*;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.Ingredient;
-import net.minecraft.item.crafting.ShapedRecipes;
-import net.minecraft.item.crafting.ShapelessRecipes;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.PotionUtils;
-import net.minecraft.util.NonNullList;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.translation.I18n;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.oredict.OreDictionary;
-import net.minecraftforge.oredict.ShapedOreRecipe;
-import net.minecraftforge.oredict.ShapelessOreRecipe;
 
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
@@ -38,13 +29,14 @@ import com.shinoow.abyssalcraft.api.item.ACItems;
 import com.shinoow.abyssalcraft.api.item.ItemEngraving;
 import com.shinoow.abyssalcraft.api.item.ItemUpgradeKit;
 import com.shinoow.abyssalcraft.api.ritual.*;
-import com.shinoow.abyssalcraft.common.blocks.BlockCrystalCluster.EnumCrystalType;
-import com.shinoow.abyssalcraft.common.blocks.BlockCrystalCluster2.EnumCrystalType2;
+import com.shinoow.abyssalcraft.api.spell.SpellRegistry;
 import com.shinoow.abyssalcraft.common.disruptions.*;
 import com.shinoow.abyssalcraft.common.entity.*;
 import com.shinoow.abyssalcraft.common.entity.demon.EntityEvilSheep;
 import com.shinoow.abyssalcraft.common.ritual.*;
-import com.shinoow.abyssalcraft.common.util.ShapedNBTRecipe;
+import com.shinoow.abyssalcraft.common.spells.EntropySpell;
+import com.shinoow.abyssalcraft.common.spells.LifeDrainSpell;
+import com.shinoow.abyssalcraft.common.spells.MiningSpell;
 import com.shinoow.abyssalcraft.lib.ACConfig;
 import com.shinoow.abyssalcraft.lib.ACLib;
 import com.shinoow.abyssalcraft.lib.NecronomiconText;
@@ -53,7 +45,6 @@ public class AbyssalCrafting {
 
 	public static void addRecipes()
 	{
-//		addBlockCrafting();
 		addBlockSmelting();
 		addItemCrafting();
 		addItemSmelting();
@@ -63,9 +54,8 @@ public class AbyssalCrafting {
 		addMaterialization();
 		addRitualRecipes();
 		addDisruptions();
+		addSpells();
 	}
-
-	private static void addBlockCrafting(){}
 
 	private static void addBlockSmelting(){
 
@@ -605,12 +595,13 @@ public class AbyssalCrafting {
 		DisruptionHandler.instance().registerDisruption(new DisruptionCorruption());
 	}
 
-	private static void addArmor(Item helmet, Item chestplate, Item pants, Item boots, Item material, ItemStack nugget, Item upgrade, Item oldh, Item oldc, Item oldp, Item oldb){
+	private static void addSpells(){
+		SpellRegistry.instance().registerSpell(new EntropySpell());
+		SpellRegistry.instance().registerSpell(new LifeDrainSpell());
+		SpellRegistry.instance().registerSpell(new MiningSpell());
+	}
 
-//		GameRegistry.addShapedRecipe(helmet.getRegistryName(), null, new ItemStack(helmet), new Object[] {"###", "# #", '#', material});
-//		GameRegistry.addShapedRecipe(chestplate.getRegistryName(), null, new ItemStack(chestplate), new Object[] {"# #", "###", "###", '#', material});
-//		GameRegistry.addShapedRecipe(pants.getRegistryName(), null, new ItemStack(pants), new Object[] {"###", "# #", "# #", '#', material});
-//		GameRegistry.addShapedRecipe(boots.getRegistryName(), null, new ItemStack(boots), new Object[] {"# #", "# #", '#', material});
+	private static void addArmor(Item helmet, Item chestplate, Item pants, Item boots, Item material, ItemStack nugget, Item upgrade, Item oldh, Item oldc, Item oldp, Item oldb){
 
 		AbyssalCraftAPI.addUpgrade((ItemUpgradeKit)upgrade, new ItemStack(oldh, 1, OreDictionary.WILDCARD_VALUE), new ItemStack(helmet));
 		AbyssalCraftAPI.addUpgrade((ItemUpgradeKit)upgrade, new ItemStack(oldc, 1, OreDictionary.WILDCARD_VALUE), new ItemStack(chestplate));
@@ -623,27 +614,5 @@ public class AbyssalCrafting {
 			GameRegistry.addSmelting(pants, nugget, 1F);
 			GameRegistry.addSmelting(boots, nugget, 1F);
 		}
-	}
-
-	private static void addStoneStuffRecipes(Block stone, Block slab, Block button, Block pplate){
-		if(slab != null) addSlabRecipe(new ItemStack(stone), slab);
-		if(button != null) addButtonRecipe(stone, button);
-		if(pplate != null) addPPlateRecipe(stone, pplate);
-	}
-
-	private static void addBlockStuffRecipes(ItemStack block, Block slab, Block stairs, Block fence){
-		if(slab != null) addSlabRecipe(block, slab);
-		if(stairs != null) addStairsRecipe(block, stairs);
-		if(fence != null) addFenceRecipe(block, fence);
-	}
-
-	private static void addSlabRecipe(ItemStack input, Block slab){ GameRegistry.addShapedRecipe(slab.getRegistryName(), null, new ItemStack(slab, 6), new Object[] {"AAA", 'A', input }); }
-	private static void addStairsRecipe(ItemStack input, Block stairs){ GameRegistry.addShapedRecipe(stairs.getRegistryName(), null, new ItemStack(stairs, 4), new Object[] {"#  ", "## ", "###", '#', input}); }
-	private static void addFenceRecipe(ItemStack input, Block fence){ GameRegistry.addShapedRecipe(fence.getRegistryName(), null, new ItemStack(fence, 6), new Object[] {"###", "###", '#', input}); }
-	private static void addButtonRecipe(Block input, Block button){ GameRegistry.addShapedRecipe(button.getRegistryName(), null, new ItemStack(button, 1), new Object[] {"#", '#', input}); }
-	private static void addPPlateRecipe(Block input, Block pplate){ GameRegistry.addShapedRecipe(pplate.getRegistryName(), null, new ItemStack(pplate, 1), new Object[] {"##", '#', input}); }
-	
-	private static ResourceLocation rl(String name){
-		return new ResourceLocation("abyssalraft", name);
 	}
 }

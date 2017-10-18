@@ -46,15 +46,15 @@ public class StaffOfRendingMessage extends AbstractServerMessage<StaffOfRendingM
 	@Override
 	protected void read(PacketBuffer buffer) throws IOException {
 
-		id = ByteBufUtils.readVarInt(buffer, 4);
-		hand = ByteBufUtils.readVarInt(buffer, 4) == 0 ? EnumHand.MAIN_HAND : EnumHand.OFF_HAND;
+		id = ByteBufUtils.readVarInt(buffer, 5);
+		hand = ByteBufUtils.readVarInt(buffer, 5) == 0 ? EnumHand.MAIN_HAND : EnumHand.OFF_HAND;
 	}
 
 	@Override
 	protected void write(PacketBuffer buffer) throws IOException {
 
-		ByteBufUtils.writeVarInt(buffer, id, 4);
-		ByteBufUtils.writeVarInt(buffer, hand == EnumHand.MAIN_HAND ? 0 : 1, 4);
+		ByteBufUtils.writeVarInt(buffer, id, 5);
+		ByteBufUtils.writeVarInt(buffer, hand == EnumHand.MAIN_HAND ? 0 : 1, 5);
 	}
 
 	@Override

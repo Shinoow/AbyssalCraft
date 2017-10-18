@@ -72,7 +72,7 @@ public class TileEntityShoggothBiomass extends TileEntity implements ITickable {
 				cooldown = world.rand.nextInt(10);
 				resetNearbyBiomass(true);
 				if(!world.isRemote)
-					if(world.getEntitiesWithinAABB(EntityLesserShoggoth.class, new AxisAlignedBB(pos).expand(16, 16, 16)).size() <= 6){
+					if(world.getEntitiesWithinAABB(EntityLesserShoggoth.class, new AxisAlignedBB(pos).grow(16, 16, 16)).size() <= 6){
 						EntityLesserShoggoth mob = new EntityLesserShoggoth(world);
 						setPosition(mob, pos.getX(), pos.getY(), pos.getZ());
 						mob.onInitialSpawn(world.getDifficultyForLocation(pos), (IEntityLivingData)null);

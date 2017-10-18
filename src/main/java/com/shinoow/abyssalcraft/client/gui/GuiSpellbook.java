@@ -14,10 +14,12 @@ package com.shinoow.abyssalcraft.client.gui;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.text.TextFormatting;
 
 import org.lwjgl.opengl.GL11;
 
 import com.shinoow.abyssalcraft.api.energy.IEnergyContainerItem;
+import com.shinoow.abyssalcraft.api.spell.Spell;
 import com.shinoow.abyssalcraft.common.inventory.ContainerSpellbook;
 
 public class GuiSpellbook extends GuiContainer {
@@ -33,12 +35,26 @@ public class GuiSpellbook extends GuiContainer {
 	}
 
 	@Override
+	public void drawScreen(int mouseX, int mouseY, float partialTicks)
+	{
+		drawDefaultBackground();
+		super.drawScreen(mouseX, mouseY, partialTicks);
+		renderHoveredToolTip(mouseX, mouseY);
+	}
+
+	@Override
 	protected void drawGuiContainerForegroundLayer(int par1, int par2)
 	{
 		IEnergyContainerItem container = (IEnergyContainerItem)spellbook.book.getItem();
 		String s = String.format("%d/%d PE", (int)container.getContainedEnergy(spellbook.book), container.getMaxEnergy(spellbook.book));
 		fontRenderer.drawString(s, 15, 15, 4210752);
 		fontRenderer.drawString(I18n.format("container.inventory"), 6, ySize - 92, 4210752);
+
+		Spell spell = spellbook.currentSpell;
+
+		fontRenderer.drawString("Spell name: "+TextFormatting.AQUA+(spell != null ? spell.getLocalizedName() : ""), 15, 30, 4210752);
+		fontRenderer.drawString("PE per cast: "+(spell != null ? (int)spell.getReqEnergy() : ""), 15, 40, 4210752);
+		fontRenderer.drawString("Spell type: "+TextFormatting.GOLD+(spell != null ? spell.requiresCharging() ? "Charging" : "Instant" : ""), 15, 50, 4210752);
 	}
 
 	@Override

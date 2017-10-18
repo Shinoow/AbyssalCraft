@@ -13,7 +13,6 @@ package com.shinoow.abyssalcraft.lib.util;
 
 import java.util.Map;
 
-import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
@@ -37,18 +36,18 @@ public class RitualUtil {
 		ritualBlocks.put(Blocks.COBBLESTONE.getDefaultState(), 0);
 		ritualBlocks.put(ACBlocks.cobblestone.getStateFromMeta(0), 0);
 		ritualBlocks.put(ACBlocks.cobblestone.getStateFromMeta(1), 1);
-		ritualBlocks.put(ACBlocks.cobblestone.getStateFromMeta(2), 1);
+		ritualBlocks.put(ACBlocks.cobblestone.getStateFromMeta(4), 1);
+		ritualBlocks.put(ACBlocks.cobblestone.getStateFromMeta(2), 2);
 		ritualBlocks.put(ACBlocks.cobblestone.getStateFromMeta(3), 2);
-		ritualBlocks.put(ACBlocks.cobblestone.getStateFromMeta(4), 2);
 		ritualBlocks.put(ACBlocks.ethaxium_brick.getDefaultState(), 3);
 		ritualBlocks.put(ACBlocks.dark_ethaxium_brick.getDefaultState(), 3);
 
 		altarMeta.put(Blocks.COBBLESTONE.getDefaultState(), 0);
 		altarMeta.put(ACBlocks.cobblestone.getStateFromMeta(0), 1);
 		altarMeta.put(ACBlocks.cobblestone.getStateFromMeta(1), 2);
-		altarMeta.put(ACBlocks.cobblestone.getStateFromMeta(2), 3);
-		altarMeta.put(ACBlocks.cobblestone.getStateFromMeta(3), 4);
-		altarMeta.put(ACBlocks.cobblestone.getStateFromMeta(4), 5);
+		altarMeta.put(ACBlocks.cobblestone.getStateFromMeta(4), 3);
+		altarMeta.put(ACBlocks.cobblestone.getStateFromMeta(2), 4);
+		altarMeta.put(ACBlocks.cobblestone.getStateFromMeta(3), 5);
 		altarMeta.put(ACBlocks.ethaxium_brick.getDefaultState(), 6);
 		altarMeta.put(ACBlocks.dark_ethaxium_brick.getDefaultState(), 7);
 	}

@@ -20,8 +20,6 @@ import net.minecraft.util.text.TextFormatting;
 
 import com.google.common.collect.Sets;
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
-import com.shinoow.abyssalcraft.common.blocks.IngotBlock;
-import com.shinoow.abyssalcraft.common.blocks.IngotBlock.EnumIngotType;
 import com.shinoow.abyssalcraft.init.BlockHandler;
 
 public class ItemEthaxiumPickaxe extends ItemACPickaxe {

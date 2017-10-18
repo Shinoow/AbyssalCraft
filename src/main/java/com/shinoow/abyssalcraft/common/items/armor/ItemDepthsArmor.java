@@ -63,7 +63,7 @@ public class ItemDepthsArmor extends ItemArmor /* implements IVisDiscountGear, I
 
 	@Override
 	public void onArmorTick(World world, EntityPlayer player, ItemStack itemstack) {
-		if(world.isRemote) return;
+		if(world.isRemote || !ACConfig.armorPotionEffects) return;
 		if (itemstack.getItem() == ACItems.depths_helmet)
 		{
 			player.addPotionEffect(new PotionEffect(MobEffects.WATER_BREATHING, 20, 0));

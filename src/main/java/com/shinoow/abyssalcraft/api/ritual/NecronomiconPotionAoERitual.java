@@ -96,7 +96,7 @@ public class NecronomiconPotionAoERitual extends NecronomiconRitual {
 	@Override
 	protected void completeRitualServer(World world, BlockPos pos, EntityPlayer player){
 
-		List<Entity> entities = world.getEntitiesWithinAABBExcludingEntity(player, new AxisAlignedBB(pos).expand(16, 3, 16));
+		List<Entity> entities = world.getEntitiesWithinAABBExcludingEntity(player, new AxisAlignedBB(pos).grow(16, 3, 16));
 
 		if(!entities.isEmpty())
 			for(Entity entity : entities)

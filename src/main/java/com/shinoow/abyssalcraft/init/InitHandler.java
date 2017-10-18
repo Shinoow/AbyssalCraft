@@ -11,8 +11,6 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.init;
 
-import static com.shinoow.abyssalcraft.AbyssalCraft.modid;
-import static com.shinoow.abyssalcraft.init.InitHandler.*;
 import static com.shinoow.abyssalcraft.lib.ACConfig.*;
 
 import java.io.BufferedReader;
@@ -20,21 +18,19 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.util.List;
+import java.util.Map;
 
 import net.minecraft.block.Block;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityList;
-import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.IRecipe;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionType;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
+import net.minecraft.util.Tuple;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.biome.Biome;
@@ -50,20 +46,15 @@ import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.event.*;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
-import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.oredict.OreDictionary;
-import net.minecraftforge.oredict.ShapedOreRecipe;
-import net.minecraftforge.oredict.ShapelessOreRecipe;
 
 import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
 import com.shinoow.abyssalcraft.api.biome.ACBiomes;
-import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.api.item.ACItems;
 import com.shinoow.abyssalcraft.common.CommonProxy;
-import com.shinoow.abyssalcraft.common.blocks.BlockCrystalCluster.EnumCrystalType;
-import com.shinoow.abyssalcraft.common.blocks.BlockCrystalCluster2.EnumCrystalType2;
 import com.shinoow.abyssalcraft.common.entity.EntityAbyssalZombie;
 import com.shinoow.abyssalcraft.common.entity.EntityDepthsGhoul;
 import com.shinoow.abyssalcraft.common.entity.EntityOmotholGhoul;
@@ -71,7 +62,6 @@ import com.shinoow.abyssalcraft.common.entity.anti.EntityAntiAbyssalZombie;
 import com.shinoow.abyssalcraft.common.entity.anti.EntityAntiGhoul;
 import com.shinoow.abyssalcraft.common.handlers.*;
 import com.shinoow.abyssalcraft.common.util.ACLogger;
-import com.shinoow.abyssalcraft.common.util.ShapedNBTRecipe;
 import com.shinoow.abyssalcraft.lib.ACLib;
 import com.shinoow.abyssalcraft.lib.util.RitualUtil;
 
@@ -98,7 +88,9 @@ public class InitHandler implements ILifeCycleHandler {
 	private static final List<ItemStack> anti_abyssal_zombie_blacklist = Lists.newArrayList();
 	private static final List<ItemStack> anti_ghoul_blacklist = Lists.newArrayList();
 	private static final List<ItemStack> omothol_ghoul_blacklist = Lists.newArrayList();
-	
+
+	public static final Map<ResourceLocation, Tuple<Integer, Float>> demon_transformations = Maps.newHashMap();
+
 	final List<Block> BLOCKS = Lists.newArrayList();
 	final List<Item> ITEMS = Lists.newArrayList();
 	final List<Biome> BIOMES = Lists.newArrayList();
@@ -201,7 +193,7 @@ public class InitHandler implements ILifeCycleHandler {
 		event.getRegistry().registerAll(BLOCKS.toArray(new Block[0]));
 		RitualUtil.addBlocks();
 	}
-	
+
 	@SubscribeEvent
 	public void registerItems(RegistryEvent.Register<Item> event){
 		event.getRegistry().registerAll(ITEMS.toArray(new Item[0]));
@@ -215,27 +207,27 @@ public class InitHandler implements ILifeCycleHandler {
 	@SubscribeEvent
 	public void registerBiomes(RegistryEvent.Register<Biome> event){
 		event.getRegistry().registerAll(BIOMES.toArray(new Biome[0]));
-		
+
 		if(dark1){
-			registerBiomeWithTypes(ACBiomes.darklands, "darklands", darkWeight1, BiomeType.WARM, Type.WASTELAND, Type.SPOOKY);
+			registerBiomeWithTypes(ACBiomes.darklands, darkWeight1, BiomeType.WARM, Type.WASTELAND, Type.SPOOKY);
 			BiomeManager.addVillageBiome(ACBiomes.darklands, true);
 		}
 		if(dark2){
-			registerBiomeWithTypes(ACBiomes.darklands_forest, "darklands_forest", darkWeight2, BiomeType.WARM, Type.FOREST, Type.SPOOKY);
+			registerBiomeWithTypes(ACBiomes.darklands_forest, darkWeight2, BiomeType.WARM, Type.FOREST, Type.SPOOKY);
 			BiomeManager.addVillageBiome(ACBiomes.darklands_forest, true);
 		}
 		if(dark3){
-			registerBiomeWithTypes(ACBiomes.darklands_plains, "darklands_plains", darkWeight3, BiomeType.WARM, Type.PLAINS, Type.SPOOKY);
+			registerBiomeWithTypes(ACBiomes.darklands_plains, darkWeight3, BiomeType.WARM, Type.PLAINS, Type.SPOOKY);
 			BiomeManager.addVillageBiome(ACBiomes.darklands_plains, true);
 		}
 		if(dark4)
-			registerBiomeWithTypes(ACBiomes.darklands_hills, "darklands_hills", darkWeight4, BiomeType.COOL, Type.HILLS, Type.SPOOKY);
+			registerBiomeWithTypes(ACBiomes.darklands_hills, darkWeight4, BiomeType.COOL, Type.HILLS, Type.SPOOKY);
 		if(dark5){
-			registerBiomeWithTypes(ACBiomes.darklands_mountains, "darklands_mountains", darkWeight5, BiomeType.COOL, Type.MOUNTAIN, Type.SPOOKY);
+			registerBiomeWithTypes(ACBiomes.darklands_mountains, darkWeight5, BiomeType.COOL, Type.MOUNTAIN, Type.SPOOKY);
 			BiomeManager.addStrongholdBiome(ACBiomes.darklands_mountains);
 		}
 		if(coralium1)
-			registerBiomeWithTypes(ACBiomes.coralium_infested_swamp, "coralium_infested_swamp", coraliumWeight, BiomeType.WARM, Type.SWAMP);
+			registerBiomeWithTypes(ACBiomes.coralium_infested_swamp, coraliumWeight, BiomeType.WARM, Type.SWAMP);
 		if(darkspawn1)
 			BiomeManager.addSpawnBiome(ACBiomes.darklands);
 		if(darkspawn2)
@@ -248,7 +240,7 @@ public class InitHandler implements ILifeCycleHandler {
 			BiomeManager.addSpawnBiome(ACBiomes.darklands_mountains);
 		if(coraliumspawn1)
 			BiomeManager.addSpawnBiome(ACBiomes.coralium_infested_swamp);
-		
+
 		BiomeDictionary.addTypes(ACBiomes.abyssal_wastelands, Type.DEAD);
 		BiomeDictionary.addTypes(ACBiomes.dreadlands, Type.DEAD);
 		BiomeDictionary.addTypes(ACBiomes.purified_dreadlands, Type.DEAD);
@@ -257,22 +249,22 @@ public class InitHandler implements ILifeCycleHandler {
 		BiomeDictionary.addTypes(ACBiomes.omothol, Type.DEAD);
 		BiomeDictionary.addTypes(ACBiomes.dark_realm, Type.DEAD);
 	}
-	
+
 	@SubscribeEvent
 	public void registerEnchantments(RegistryEvent.Register<Enchantment> event){
 		event.getRegistry().registerAll(ENCHANTMENTS.toArray(new Enchantment[0]));
 	}
-	
+
 	@SubscribeEvent
 	public void registerPotions(RegistryEvent.Register<Potion> event){
 		event.getRegistry().registerAll(POTIONS.toArray(new Potion[0]));
 	}
-	
+
 	@SubscribeEvent
 	public void registerPotionTypes(RegistryEvent.Register<PotionType> event){
 		event.getRegistry().registerAll(POTION_TYPES.toArray(new PotionType[0]));
 	}
-	
+
 	@SubscribeEvent
 	public void registerSoundEvents(RegistryEvent.Register<SoundEvent> event){
 		event.getRegistry().registerAll(SOUND_EVENTS.toArray(new SoundEvent[0]));
@@ -328,6 +320,7 @@ public class InitHandler implements ILifeCycleHandler {
 				+TextFormatting.RED+"[Minecraft Restart Required]"+TextFormatting.RESET).getBoolean();
 		depthsHelmetOverlayOpacity = cfg.get(Configuration.CATEGORY_GENERAL, "Visage of The Depths Overlay Opacity", 1.0D, "Sets the opacity for the overlay shown when wearing the Visage of The Depths, reducing the value increases the transparency on the texture. Client Side only!\n[range: 0.5 ~ 1.0, default: 1.0]", 0.5D, 1.0D).getDouble();
 		mimicFire = cfg.get(Configuration.CATEGORY_GENERAL, "Mimic Fire", true, "Toggles whether or not Demon Animals will spread Mimic Fire instead of regular Fire (regular Fire can affect performance)").getBoolean();
+		armorPotionEffects = cfg.get(Configuration.CATEGORY_GENERAL, "Armor Potion Effects", true, "Toggles any interactions where armor sets either give certain Potion Effects, or dispell others. Useful if you have another mod installed that provides similar customization to any armor set.").getBoolean();
 
 		darkWeight1 = cfg.get("biome_weight", "Darklands", 5, "Biome weight for the Darklands biome, controls the chance of it generating (n out of 100).\n[range: 0 ~ 100, default: 5]", 0, 100).getInt();
 		darkWeight2 = cfg.get("biome_weight", "Darklands Forest", 5, "Biome weight for the Darklands Forest biome, controls the chance of it generating (n out of 100)\n[range: 0 ~ 100, default: 5]", 0, 100).getInt();
@@ -361,7 +354,7 @@ public class InitHandler implements ILifeCycleHandler {
 		generateAbyssalCopperOre = cfg.get("worldgen", "Abyssal Copper Ore", true, "Toggles whether or not to generate Copper Ore in the Abyssal Wasteland.").getBoolean();
 		generatePearlescentCoraliumOre = cfg.get("worldgen", "Pearlescent Coralium Ore", true, "Toggles whether or not to generate Pearlescent Coralium Ore in the Abyssal Wasteland.").getBoolean();
 		generateLiquifiedCoraliumOre = cfg.get("worldgen", "Liquified Coralium Ore", true, "Toggles whether or not to generate Liquified Coralium Ore in the Abyssal Wasteland.").getBoolean();
-		shoggothLairSpawnRate = (int) (100 * cfg.get("worldgen", "Shoggoth Lair Generation Rate", 2.0D, "Generation rate factor of a Shoggoth Lair. Higher numbers decrease the chance of a Lair generating, while lower numbers increase the chance.\n[range: 1.0 ~ 10.0, default: 2.0]", 1.0D, 10.0D).getDouble());
+		shoggothLairSpawnRate = cfg.get("worldgen", "Shoggoth Lair Generation Chance", 30, "Generation chance of a Shoggoth Lair. Higher numbers decrease the chance of a Lair generating, while lower numbers increase the chance.\n[range: 0 ~ 1000, default: 30]", 0, 1000).getInt();
 
 		abyssalZombieBlacklist = cfg.get("item_blacklist", "Abyssal Zombie Item Blacklist", new String[]{}, "Items/Blocks added to this list won't be picked up by Abyssal Zombies. Format: modid:name:meta, where meta is optional.").getStringList();
 		depthsGhoulBlacklist = cfg.get("item_blacklist", "Depths Ghoul Item Blacklist", new String[]{}, "Items/Blocks added to this list won't be picked up by Depths Ghouls. Format: modid:name:meta, where meta is optional.").getStringList();
@@ -369,11 +362,15 @@ public class InitHandler implements ILifeCycleHandler {
 		antiGhoulBlacklist = cfg.get("item_blacklist", "Anti-Ghoul Item Blacklist", new String[]{}, "Items/Blocks added to this list won't be picked up by Anti-Ghouls. Format: modid:name:meta, where meta is optional.").getStringList();
 		omotholGhoulBlacklist = cfg.get("item_blacklist", "Omothol Ghoul Item Blacklist", new String[]{}, "Items/Blocks added to this list won't be picked up by Omothol Ghouls. Format: modid:name:meta, where meta is optional.").getStringList();
 
+		String[] transformations = cfg.getStringList("Demon Animal Transformations", Configuration.CATEGORY_GENERAL, new String[0], "Mobs added to this list will have a chance of spawning a Demon Animal of choice on death."
+				+ "\nFormat: entityid;demonanimal;chance \nwhere entityid is the String used in the /summon command\n demonanimal is a Integer representing the Demon Animal to spawn (0 = Demon Pig, 1 = Demon Cow, 2 = Demon Chicken, 3 = Demon Sheep)"
+				+ "\nchance is a decimal number representing the chance (optional, can be left out) of the Demon Animal being spawned (0.2 would mean a 20% chance, defaults to 100% if not set");
+
 		evilAnimalSpawnWeight = MathHelper.clamp(evilAnimalSpawnWeight, 0, 100);
 		endAbyssalZombieSpawnWeight = MathHelper.clamp(endAbyssalZombieSpawnWeight, 0, 10);
 		portalCooldown = MathHelper.clamp(portalCooldown, 10, 300);
 		demonAnimalSpawnWeight = MathHelper.clamp(demonAnimalSpawnWeight, 0, 100);
-		shoggothLairSpawnRate = MathHelper.clamp(shoggothLairSpawnRate, 100, 1000);
+		shoggothLairSpawnRate = MathHelper.clamp(shoggothLairSpawnRate, 0, 1000);
 		darkWeight1 = MathHelper.clamp(darkWeight1, 0, 100);
 		darkWeight2 = MathHelper.clamp(darkWeight2, 0, 100);
 		darkWeight3 = MathHelper.clamp(darkWeight3, 0, 100);
@@ -382,6 +379,16 @@ public class InitHandler implements ILifeCycleHandler {
 		coraliumWeight = MathHelper.clamp(coraliumWeight, 0, 100);
 		damageAmpl = MathHelper.clamp(damageAmpl, 1, 10);
 		depthsHelmetOverlayOpacity = MathHelper.clamp(depthsHelmetOverlayOpacity, 0.5D, 1.0D);
+
+		demon_transformations.clear();
+
+		for(String str : transformations)
+			if(str.length() > 0){
+				String[] stuff = str.split(";");
+				if(stuff.length >= 2)
+					demon_transformations.put(new ResourceLocation(stuff[0]), new Tuple(Integer.valueOf(stuff[1]), stuff.length == 3 ? Float.valueOf(stuff[2]) : 1));
+				else ACLogger.severe("Invalid Demon Animal Transformation: %s", str);
+			}
 
 		if(cfg.hasChanged())
 			cfg.save();
@@ -485,8 +492,7 @@ public class InitHandler implements ILifeCycleHandler {
 		return false;
 	}
 
-	private static void registerBiomeWithTypes(Biome biome, String name, int weight, BiomeType btype, Type...types){
-//		InitHandler.BIOMES.add(biome.setRegistryName(new ResourceLocation(modid, name)));
+	private static void registerBiomeWithTypes(Biome biome, int weight, BiomeType btype, Type...types){
 		BiomeDictionary.addTypes(biome, types);
 		BiomeManager.addBiome(btype, new BiomeEntry(biome, weight));
 	}

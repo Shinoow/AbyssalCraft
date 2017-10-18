@@ -35,8 +35,6 @@ import net.minecraft.world.World;
 import net.minecraftforge.client.model.obj.OBJModel;
 
 import com.shinoow.abyssalcraft.api.energy.PEUtils;
-import com.shinoow.abyssalcraft.common.blocks.BlockCrystalCluster.EnumCrystalType;
-import com.shinoow.abyssalcraft.common.blocks.BlockRitualAltar.EnumRitualMatType;
 import com.shinoow.abyssalcraft.common.blocks.tile.TileEntityStatue;
 import com.shinoow.abyssalcraft.lib.ACTabs;
 
@@ -65,12 +63,11 @@ public class BlockStatue extends BlockContainer {
 	public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos)
 	{
 		EnumFacing facing = EnumFacing.NORTH;
-		
+
 		TileEntity tile = worldIn.getTileEntity(pos);
-		if(tile instanceof TileEntityStatue){
+		if(tile instanceof TileEntityStatue)
 			facing = EnumFacing.getFront(((TileEntityStatue) tile).getFacing());
-		}
-		
+
 		return state.withProperty(FACING, facing);
 	}
 
@@ -83,12 +80,12 @@ public class BlockStatue extends BlockContainer {
 	@Override
 	public int getMetaFromState(IBlockState state)
 	{
-		return ((EnumDeityType)state.getValue(TYPE)).getMeta();
+		return state.getValue(TYPE).getMeta();
 	}
 
 	@Override
 	public int damageDropped (IBlockState state) {
-		return ((EnumDeityType)state.getValue(TYPE)).getMeta();
+		return state.getValue(TYPE).getMeta();
 	}
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })
@@ -187,7 +184,7 @@ public class BlockStatue extends BlockContainer {
 	{
 		return new BlockStateContainer.Builder(this).add(FACING).add(OBJModel.OBJProperty.INSTANCE).add(TYPE).build();
 	}
-	
+
 	public enum EnumDeityType implements IStringSerializable {
 		CTHULHU(0, "cthulhu"),
 		HASTUR(1, "hastur"),

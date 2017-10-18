@@ -11,17 +11,9 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.client;
 
-import net.minecraft.block.*;
-import net.minecraft.block.properties.IProperty;
-import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.particle.Particle;
-import net.minecraft.client.renderer.RenderItem;
-import net.minecraft.client.renderer.block.model.ModelBakery;
-import net.minecraft.client.renderer.block.model.ModelResourceLocation;
-import net.minecraft.client.renderer.block.statemap.StateMap;
-import net.minecraft.client.renderer.block.statemap.StateMapperBase;
 import net.minecraft.client.renderer.entity.RenderEntityItem;
 import net.minecraft.client.renderer.entity.RenderPlayer;
 import net.minecraft.client.renderer.entity.RenderSnowball;
@@ -30,9 +22,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.util.IThreadListener;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
-import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.client.model.obj.OBJLoader;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
@@ -44,6 +34,7 @@ import org.lwjgl.input.Keyboard;
 import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.api.item.ACItems;
+import com.shinoow.abyssalcraft.api.spell.SpellRegistry;
 import com.shinoow.abyssalcraft.client.handlers.AbyssalCraftClientEventHooks;
 import com.shinoow.abyssalcraft.client.model.block.ModelDGhead;
 import com.shinoow.abyssalcraft.client.model.item.ModelDreadiumSamuraiArmor;
@@ -56,15 +47,10 @@ import com.shinoow.abyssalcraft.client.render.entity.*;
 import com.shinoow.abyssalcraft.client.render.entity.layers.LayerStarSpawnTentacles;
 import com.shinoow.abyssalcraft.client.render.item.RenderCoraliumArrow;
 import com.shinoow.abyssalcraft.common.CommonProxy;
-import com.shinoow.abyssalcraft.common.blocks.*;
-import com.shinoow.abyssalcraft.common.blocks.BlockCrystalCluster.EnumCrystalType;
-import com.shinoow.abyssalcraft.common.blocks.BlockCrystalCluster2.EnumCrystalType2;
 import com.shinoow.abyssalcraft.common.blocks.tile.*;
 import com.shinoow.abyssalcraft.common.entity.*;
 import com.shinoow.abyssalcraft.common.entity.anti.*;
 import com.shinoow.abyssalcraft.common.entity.demon.*;
-import com.shinoow.abyssalcraft.init.BlockHandler;
-import com.shinoow.abyssalcraft.init.ItemHandler;
 import com.shinoow.abyssalcraft.lib.ACLib;
 import com.shinoow.abyssalcraft.lib.client.render.TileEntityAltarBlockRenderer;
 import com.shinoow.abyssalcraft.lib.client.render.TileEntityDirectionalRenderer;
@@ -164,6 +150,7 @@ public class ClientProxy extends CommonProxy {
 		Minecraft.getMinecraft().getItemColors().registerItemColorHandler((stack, tintIndex) -> ACLib.crystalColors[stack.getItemDamage() + 16], Item.getItemFromBlock(ACBlocks.crystal_cluster2));
 		Minecraft.getMinecraft().getItemColors().registerItemColorHandler((stack, tintIndex) -> 0xE8E8E8, ACItems.coin, ACItems.elder_engraved_coin, ACItems.cthulhu_engraved_coin, ACItems.hastur_engraved_coin, ACItems.jzahar_engraved_coin,
 				ACItems.azathoth_engraved_coin, ACItems.nyarlathotep_engraved_coin, ACItems.yog_sothoth_engraved_coin, ACItems.shub_niggurath_engraved_coin);
+		Minecraft.getMinecraft().getItemColors().registerItemColorHandler((stack, tintIndex) -> tintIndex == 1  && stack.hasTagCompound() ? SpellRegistry.instance().getSpell(stack.getTagCompound().getString("Spell")).getColor() : 16777215, ACItems.scroll);
 		Minecraft.getMinecraft().getBlockColors().registerBlockColorHandler((state, world, pos, tintIndex) -> ACLib.crystalColors[state.getBlock().getMetaFromState(state)], ACBlocks.crystal_cluster);
 		Minecraft.getMinecraft().getBlockColors().registerBlockColorHandler((state, world, pos, tintIndex) -> ACLib.crystalColors[state.getBlock().getMetaFromState(state) + 16], ACBlocks.crystal_cluster2);
 	}

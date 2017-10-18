@@ -21,35 +21,38 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 @SideOnly(Side.CLIENT)
 public class ButtonNextPage extends GuiButton
 {
-	private final boolean field_146151_o;
+	private final boolean invert, isLong;
 
-	public ButtonNextPage(int par1, int par2, int par3, boolean par4)
+	public ButtonNextPage(int par1, int par2, int par3, boolean par4, boolean isLong)
 	{
-		super(par1, par2, par3, 23, 13, "");
-		field_146151_o = par4;
+		super(par1, par2, par3, isLong ? 30 : 23, 13, "");
+		invert = par4;
+		this.isLong = isLong;
 	}
 
 	/**
 	 * Draws this button to the screen.
 	 */
 	@Override
-	public void drawButton(Minecraft mc, int p_146112_2_, int p_146112_3_, float f)
+	public void drawButton(Minecraft mc, int mx, int mz, float f)
 	{
 		if (visible)
 		{
-			boolean flag = p_146112_2_ >= x && p_146112_3_ >= y && p_146112_2_ < x + width && p_146112_3_ < y + height;
+			boolean flag = mx >= x && mz >= y && mx < x + width && mz < y + height;
 			GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
 			mc.getTextureManager().bindTexture(new ResourceLocation("abyssalcraft:textures/gui/necronomicon.png"));
 			int k = 0;
 			int l = 192;
 
+			if(isLong)
+				k += 46;
 			if (flag)
-				k += 23;
+				k += isLong ? 30 : 23;
 
-			if (!field_146151_o)
+			if (!invert)
 				l += 13;
 
-			drawTexturedModalRect(x, y, k, l, 23, 13);
+			drawTexturedModalRect(x, y, k, l, isLong ? 30 : 23, 13);
 		}
 	}
 }

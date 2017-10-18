@@ -194,7 +194,7 @@ public class EntityDreadSpawn extends EntityMob implements IDreadEntity
 	{
 		super.onLivingUpdate();
 
-		List<EntityDreadSpawn> dreadspawns = world.getEntitiesWithinAABB(getClass(), getEntityBoundingBox().expand(2D, 2D, 2D));
+		List<EntityDreadSpawn> dreadspawns = world.getEntitiesWithinAABB(getClass(), getEntityBoundingBox().grow(2D, 2D, 2D));
 
 		if(!world.isRemote)
 			if(!dreadspawns.isEmpty())

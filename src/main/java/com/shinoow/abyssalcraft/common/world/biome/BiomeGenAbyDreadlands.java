@@ -13,7 +13,6 @@ package com.shinoow.abyssalcraft.common.world.biome;
 
 import java.util.Random;
 
-import net.minecraft.block.state.pattern.BlockMatcher;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenMinable;

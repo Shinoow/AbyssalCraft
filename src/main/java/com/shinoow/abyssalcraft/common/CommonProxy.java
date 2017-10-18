@@ -126,7 +126,7 @@ public class CommonProxy implements IGuiHandler {
 			switch(ID){
 			case ACLib.necronmiconGuiID:
 				if(stack.getItem() instanceof ItemNecronomicon && ((ItemNecronomicon)stack.getItem()).isOwner(player, stack))
-					return new GuiNecronomicon(((ItemNecronomicon)stack.getItem()).getBookType());
+					return GuiNecronomicon.currentNecro.withBookType(((ItemNecronomicon)stack.getItem()).getBookType());
 				break;
 			case ACLib.crystalbagGuiID:
 				return new GuiCrystalBag(new ContainerCrystalBag(player.inventory, new InventoryCrystalBag(stack)));

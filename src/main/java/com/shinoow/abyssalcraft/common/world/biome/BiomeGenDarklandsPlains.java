@@ -29,7 +29,6 @@ package com.shinoow.abyssalcraft.common.world.biome;
 
 import java.util.Random;
 
-import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
@@ -58,9 +57,9 @@ public class BiomeGenDarklandsPlains extends Biome implements IDarklandsBiome {
 		decorator.treesPerChunk = 1;
 		spawnableMonsterList.add(new SpawnListEntry(EntityDepthsGhoul.class, 60, 1, 5));
 		spawnableMonsterList.add(new SpawnListEntry(EntityAbyssalZombie.class, 60, 1, 3));
-		spawnableMonsterList.add(new SpawnListEntry(EntityShadowCreature.class, 20, 1, 3));
-		spawnableMonsterList.add(new SpawnListEntry(EntityShadowMonster.class, 15, 1, 2));
-		spawnableMonsterList.add(new SpawnListEntry(EntityShadowBeast.class, 5, 1, 1));
+		spawnableMonsterList.add(new SpawnListEntry(EntityShadowCreature.class, 70, 3, 3));
+		spawnableMonsterList.add(new SpawnListEntry(EntityShadowMonster.class, 50, 2, 2));
+		spawnableMonsterList.add(new SpawnListEntry(EntityShadowBeast.class, 20, 1, 1));
 	}
 
 	@Override

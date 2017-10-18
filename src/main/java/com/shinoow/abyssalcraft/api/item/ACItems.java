@@ -231,5 +231,9 @@ public class ACItems {
 	 * 16 = Tin, 17 = Copper, 18 = Silicon, 19 = Magnesium, 20 = Aluminium, 21 = Silica, 22 = Alumina, 23 = Magnesia, 24 = Zinc */
 	public static Item crystal_fragment;
 	public static Item stone_tablet;
+	/** Metadata Item, 0 = basic, 1 = lesser, 2 = moderate, 3 = greater */
+	public static Item scroll;
+	/** Metadata Item, 0 = Antimatter, 1 = Oblivion */
+	public static Item unique_scroll;
 	//	public static Item shadow_titan_armor_plate = getItem("shadowplate");
 }

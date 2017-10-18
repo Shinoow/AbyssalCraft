@@ -36,7 +36,6 @@ import net.minecraft.world.World;
 
 import com.shinoow.abyssalcraft.common.blocks.BlockTieredEnergyPedestal.EnumDimType;
 import com.shinoow.abyssalcraft.common.blocks.tile.TileEntityEnergyRelay;
-import com.shinoow.abyssalcraft.common.blocks.tile.TileEntityStatue;
 import com.shinoow.abyssalcraft.common.blocks.tile.TileEntityTieredEnergyRelay;
 import com.shinoow.abyssalcraft.lib.ACTabs;
 

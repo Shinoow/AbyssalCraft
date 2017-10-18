@@ -20,9 +20,7 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.common.MinecraftForge;
 
 import com.shinoow.abyssalcraft.api.event.ACEvents;
-import com.shinoow.abyssalcraft.api.item.ACItems;
 import com.shinoow.abyssalcraft.api.recipe.CrystallizerRecipes;
-import com.shinoow.abyssalcraft.lib.ACAchievements;
 
 public class SlotCrystallizer extends Slot
 {
@@ -101,7 +99,7 @@ public class SlotCrystallizer extends Slot
 
 		MinecraftForge.EVENT_BUS.post(new ACEvents.ItemCrystallizedEvent(thePlayer, par1ItemStack));
 
-//		if(par1ItemStack.getItem() == ACItems.shadow_gem)
-//			thePlayer.addStat(ACAchievements.shadow_gems, 1);
+		//		if(par1ItemStack.getItem() == ACItems.shadow_gem)
+		//			thePlayer.addStat(ACAchievements.shadow_gems, 1);
 	}
 }

@@ -30,12 +30,12 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.common.world.TeleporterAC;
-import com.shinoow.abyssalcraft.lib.ACAchievements;
 import com.shinoow.abyssalcraft.lib.ACConfig;
 import com.shinoow.abyssalcraft.lib.ACLib;
 
@@ -172,16 +172,18 @@ public class BlockAbyssPortal extends BlockBreakable {
 		if (!par5Entity.isRiding() && !par5Entity.isBeingRidden() && par5Entity instanceof EntityPlayerMP)
 		{
 			EntityPlayerMP thePlayer = (EntityPlayerMP)par5Entity;
-//			thePlayer.addStat(ACAchievements.enter_abyssal_wasteland, 1);
+			//			thePlayer.addStat(ACAchievements.enter_abyssal_wasteland, 1);
 
 			if (thePlayer.timeUntilPortal > 0)
 				thePlayer.timeUntilPortal = thePlayer.getPortalCooldown();
 			else if (thePlayer.dimension != ACLib.abyssal_wasteland_id)
 			{
+				if(!ForgeHooks.onTravelToDimension(thePlayer, ACLib.abyssal_wasteland_id)) return;
 				thePlayer.timeUntilPortal = ACConfig.portalCooldown;
 				thePlayer.mcServer.getPlayerList().transferPlayerToDimension(thePlayer, ACLib.abyssal_wasteland_id, new TeleporterAC(thePlayer.mcServer.getWorld(ACLib.abyssal_wasteland_id), this, ACBlocks.stone.getStateFromMeta(1)));
 			}
 			else {
+				if(!ForgeHooks.onTravelToDimension(thePlayer, 0)) return;
 				thePlayer.timeUntilPortal = ACConfig.portalCooldown;
 				thePlayer.mcServer.getPlayerList().transferPlayerToDimension(thePlayer, 0, new TeleporterAC(thePlayer.mcServer.getWorld(0), this, ACBlocks.stone.getStateFromMeta(1)));
 			}

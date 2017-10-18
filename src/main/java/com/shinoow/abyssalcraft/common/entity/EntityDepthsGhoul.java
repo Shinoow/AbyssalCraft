@@ -199,17 +199,17 @@ public class EntityDepthsGhoul extends EntityMob implements ICoraliumEntity {
 		super.onLivingUpdate();
 	}
 
-	@Override
-	public void onDeath(DamageSource par1DamageSource)
-	{
-		super.onDeath(par1DamageSource);
-
-		if (par1DamageSource.getTrueSource() instanceof EntityPlayer)
-		{
-			EntityPlayer entityplayer = (EntityPlayer)par1DamageSource.getTrueSource();
-//			entityplayer.addStat(ACAchievements.kill_depths_ghoul,1);
-		}
-	}
+	//	@Override
+	//	public void onDeath(DamageSource par1DamageSource)
+	//	{
+	//		super.onDeath(par1DamageSource);
+	//
+	//		if (par1DamageSource.getTrueSource() instanceof EntityPlayer)
+	//		{
+	//			EntityPlayer entityplayer = (EntityPlayer)par1DamageSource.getTrueSource();
+	////			entityplayer.addStat(ACAchievements.kill_depths_ghoul,1);
+	//		}
+	//	}
 
 	@Override
 	public boolean attackEntityAsMob(Entity par1Entity)

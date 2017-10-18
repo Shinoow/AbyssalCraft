@@ -20,13 +20,13 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 import mezz.jei.api.ingredients.IIngredients;
-import mezz.jei.api.recipe.BlankRecipeWrapper;
+import mezz.jei.api.recipe.IRecipeWrapper;
 import mezz.jei.util.Translator;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.item.ItemStack;
 
-public class CrystallizationRecipe extends BlankRecipeWrapper {
+public class CrystallizationRecipe implements IRecipeWrapper {
 
 	@Nonnull
 	private final List<List<ItemStack>> input;

@@ -11,9 +11,6 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.common.blocks.tile;
 
-import java.util.List;
-
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
@@ -21,7 +18,6 @@ import net.minecraft.util.ITickable;
 import net.minecraft.util.math.MathHelper;
 
 import com.shinoow.abyssalcraft.common.entity.EntityJzahar;
-import com.shinoow.abyssalcraft.lib.ACAchievements;
 
 public class TileEntityJzaharSpawner extends TileEntity implements ITickable {
 
@@ -51,9 +47,9 @@ public class TileEntityJzaharSpawner extends TileEntity implements ITickable {
 			mob.onInitialSpawn(world.getDifficultyForLocation(pos), null);
 			world.spawnEntity(mob);
 			world.setBlockToAir(pos);
-			List<EntityPlayer> players = world.getEntitiesWithinAABB(EntityPlayer.class, mob.getEntityBoundingBox().expand(64, 64, 64));
-//			for(EntityPlayer player : players)
-//				player.addStat(ACAchievements.locate_jzahar, 1);
+			//			List<EntityPlayer> players = world.getEntitiesWithinAABB(EntityPlayer.class, mob.getEntityBoundingBox().expand(64, 64, 64));
+			//			for(EntityPlayer player : players)
+			//				player.addStat(ACAchievements.locate_jzahar, 1);
 		}
 	}
 }

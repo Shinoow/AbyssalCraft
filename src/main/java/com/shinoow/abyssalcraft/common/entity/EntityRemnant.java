@@ -194,7 +194,7 @@ public class EntityRemnant extends EntityMob implements IMerchant, IAntiEntity, 
 		String translated = getName()+": "+String.format(I18n.translateToLocal("message.remnant.insult."+insultNum), player.getName());
 
 		if(world.isRemote){
-			List<EntityPlayer> players = world.getEntitiesWithinAABB(EntityPlayer.class, player.getEntityBoundingBox().expand(16D, 16D, 16D));
+			List<EntityPlayer> players = world.getEntitiesWithinAABB(EntityPlayer.class, player.getEntityBoundingBox().grow(16D, 16D, 16D));
 			if(players != null){
 				Iterator<EntityPlayer> i = players.iterator();
 				while(i.hasNext()){
@@ -246,7 +246,7 @@ public class EntityRemnant extends EntityMob implements IMerchant, IAntiEntity, 
 	 */
 	public void enrage(boolean call){
 		if(call){
-			List<EntityRemnant> friends = world.getEntitiesWithinAABB(getClass(), getEntityBoundingBox().expand(16D, 16D, 16D));
+			List<EntityRemnant> friends = world.getEntitiesWithinAABB(getClass(), getEntityBoundingBox().grow(16D, 16D, 16D));
 			if(friends != null){
 				Iterator<EntityRemnant> iter = friends.iterator();
 				while(iter.hasNext())
@@ -480,7 +480,7 @@ public class EntityRemnant extends EntityMob implements IMerchant, IAntiEntity, 
 				{
 					Enchantment enchantment = Enchantment.REGISTRY.getRandomObject(rand);
 					int i1 = MathHelper.getInt(rand, enchantment.getMinLevel(), enchantment.getMaxLevel());
-					ItemStack itemstack = ((ItemEnchantedBook)Items.ENCHANTED_BOOK).getEnchantedItemStack(new EnchantmentData(enchantment, i1));
+					ItemStack itemstack = ItemEnchantedBook.getEnchantedItemStack(new EnchantmentData(enchantment, i1));
 					k = 2 + rand.nextInt(5 + i1 * 10) + 3 * i1;
 					list.add(new MerchantRecipe(new ItemStack(Items.BOOK), new ItemStack(ACItems.elder_engraved_coin, k), itemstack));
 				}

@@ -20,13 +20,13 @@ import mezz.jei.api.IGuiHelper;
 import mezz.jei.api.gui.IDrawableAnimated;
 import mezz.jei.api.gui.IDrawableStatic;
 import mezz.jei.api.ingredients.IIngredients;
-import mezz.jei.api.recipe.BlankRecipeWrapper;
+import mezz.jei.api.recipe.IRecipeWrapper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.translation.I18n;
 
-public class CrystallizerFuelRecipe extends BlankRecipeWrapper {
+public class CrystallizerFuelRecipe implements IRecipeWrapper {
 	@Nonnull
 	private final List<List<ItemStack>> inputs;
 	@Nonnull

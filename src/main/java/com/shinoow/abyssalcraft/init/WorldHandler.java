@@ -15,15 +15,10 @@ import static com.shinoow.abyssalcraft.AbyssalCraft.modid;
 import static com.shinoow.abyssalcraft.init.InitHandler.*;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.DimensionType;
-import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.Biome.BiomeProperties;
 import net.minecraft.world.gen.structure.MapGenStructureIO;
-import net.minecraftforge.common.*;
-import net.minecraftforge.common.BiomeDictionary.Type;
-import net.minecraftforge.common.BiomeManager.BiomeEntry;
-import net.minecraftforge.common.BiomeManager.BiomeType;
+import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.fml.common.event.*;
-import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
 import com.shinoow.abyssalcraft.api.biome.ACBiomes;
@@ -56,38 +51,18 @@ public class WorldHandler implements ILifeCycleHandler {
 		ACBiomes.omothol = new BiomeGenOmothol(new BiomeProperties("Omothol").setWaterColor(14745518).setRainDisabled());
 		ACBiomes.dark_realm = new BiomeGenDarkRealm(new BiomeProperties("Dark Realm").setWaterColor(14745518).setRainDisabled());
 
-		if(dark1){
-			registerBiomeWithTypes(ACBiomes.darklands, "darklands", darkWeight1, BiomeType.WARM, Type.WASTELAND, Type.SPOOKY);
-//			BiomeManager.addVillageBiome(ACBiomes.darklands, true);
-		}
-		if(dark2){
-			registerBiomeWithTypes(ACBiomes.darklands_forest, "darklands_forest", darkWeight2, BiomeType.WARM, Type.FOREST, Type.SPOOKY);
-//			BiomeManager.addVillageBiome(ACBiomes.darklands_forest, true);
-		}
-		if(dark3){
-			registerBiomeWithTypes(ACBiomes.darklands_plains, "darklands_plains", darkWeight3, BiomeType.WARM, Type.PLAINS, Type.SPOOKY);
-//			BiomeManager.addVillageBiome(ACBiomes.darklands_plains, true);
-		}
+		if(dark1)
+			InitHandler.INSTANCE.BIOMES.add(ACBiomes.darklands.setRegistryName(new ResourceLocation(modid, "darklands")));
+		if(dark2)
+			InitHandler.INSTANCE.BIOMES.add(ACBiomes.darklands_forest.setRegistryName(new ResourceLocation(modid, "darklands_forest")));
+		if(dark3)
+			InitHandler.INSTANCE.BIOMES.add(ACBiomes.darklands_plains.setRegistryName(new ResourceLocation(modid, "darklands_plains")));
 		if(dark4)
-			registerBiomeWithTypes(ACBiomes.darklands_hills, "darklands_hills", darkWeight4, BiomeType.COOL, Type.HILLS, Type.SPOOKY);
-		if(dark5){
-			registerBiomeWithTypes(ACBiomes.darklands_mountains, "darklands_mountains", darkWeight5, BiomeType.COOL, Type.MOUNTAIN, Type.SPOOKY);
-//			BiomeManager.addStrongholdBiome(ACBiomes.darklands_mountains);
-		}
+			InitHandler.INSTANCE.BIOMES.add(ACBiomes.darklands_hills.setRegistryName(new ResourceLocation(modid, "darklands_hills")));
+		if(dark5)
+			InitHandler.INSTANCE.BIOMES.add(ACBiomes.darklands_mountains.setRegistryName(new ResourceLocation(modid, "darklands_mountains")));
 		if(coralium1)
-			registerBiomeWithTypes(ACBiomes.coralium_infested_swamp, "coralium_infested_swamp", coraliumWeight, BiomeType.WARM, Type.SWAMP);
-//		if(darkspawn1)
-//			BiomeManager.addSpawnBiome(ACBiomes.darklands);
-//		if(darkspawn2)
-//			BiomeManager.addSpawnBiome(ACBiomes.darklands_forest);
-//		if(darkspawn3)
-//			BiomeManager.addSpawnBiome(ACBiomes.darklands_plains);
-//		if(darkspawn4)
-//			BiomeManager.addSpawnBiome(ACBiomes.darklands_hills);
-//		if(darkspawn5)
-//			BiomeManager.addSpawnBiome(ACBiomes.darklands_mountains);
-//		if(coraliumspawn1)
-//			BiomeManager.addSpawnBiome(ACBiomes.coralium_infested_swamp);
+			InitHandler.INSTANCE.BIOMES.add(ACBiomes.coralium_infested_swamp.setRegistryName(new ResourceLocation(modid, "coralium_infested_swamp")));
 
 		InitHandler.INSTANCE.BIOMES.add(ACBiomes.abyssal_wastelands.setRegistryName(new ResourceLocation(modid, "abyssal_wastelands")));
 		InitHandler.INSTANCE.BIOMES.add(ACBiomes.dreadlands.setRegistryName(new ResourceLocation(modid, "dreadlands")));
@@ -96,14 +71,6 @@ public class WorldHandler implements ILifeCycleHandler {
 		InitHandler.INSTANCE.BIOMES.add(ACBiomes.dreadlands_mountains.setRegistryName(new ResourceLocation(modid, "dreadlands_mountains")));
 		InitHandler.INSTANCE.BIOMES.add(ACBiomes.omothol.setRegistryName(new ResourceLocation(modid, "omothol")));
 		InitHandler.INSTANCE.BIOMES.add(ACBiomes.dark_realm.setRegistryName(new ResourceLocation(modid, "dark_realm")));
-
-//		BiomeDictionary.addTypes(ACBiomes.abyssal_wastelands, Type.DEAD);
-//		BiomeDictionary.addTypes(ACBiomes.dreadlands, Type.DEAD);
-//		BiomeDictionary.addTypes(ACBiomes.purified_dreadlands, Type.DEAD);
-//		BiomeDictionary.addTypes(ACBiomes.dreadlands_mountains, Type.DEAD);
-//		BiomeDictionary.addTypes(ACBiomes.dreadlands_forest, Type.DEAD);
-//		BiomeDictionary.addTypes(ACBiomes.omothol, Type.DEAD);
-//		BiomeDictionary.addTypes(ACBiomes.dark_realm, Type.DEAD);
 
 		ACLib.THE_ABYSSAL_WASTELAND = DimensionType.register("The Abyssal Wasteland", "_aw", ACLib.abyssal_wasteland_id, WorldProviderAbyss.class, ACConfig.keepLoaded1);
 		ACLib.THE_DREADLANDS = DimensionType.register("The Dreadlands", "_dl", ACLib.dreadlands_id, WorldProviderDreadlands.class, ACConfig.keepLoaded2);
@@ -141,11 +108,5 @@ public class WorldHandler implements ILifeCycleHandler {
 			((BiomeGenOmothol) ACBiomes.omothol).setMobSpawns();
 			((BiomeGenDarkRealm) ACBiomes.dark_realm).setMobSpawns();
 		}
-	}
-
-	private static void registerBiomeWithTypes(Biome biome, String name, int weight, BiomeType btype, Type...types){
-		InitHandler.INSTANCE.BIOMES.add(biome.setRegistryName(new ResourceLocation(modid, name)));
-//		BiomeDictionary.addTypes(biome, types);
-//		BiomeManager.addBiome(btype, new BiomeEntry(biome, weight));
 	}
 }

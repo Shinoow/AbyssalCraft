@@ -110,7 +110,7 @@ public class TileEntitySacrificialAltar extends TileEntity implements IEnergyCol
 					((IEnergyContainerItem) item.getItem()).addEnergy(item, consumeEnergy(1));
 
 		if(entity == null){
-			List<EntityLivingBase> mobs = world.getEntitiesWithinAABB(EntityLivingBase.class, new AxisAlignedBB(pos).expand(8, 3, 8));
+			List<EntityLivingBase> mobs = world.getEntitiesWithinAABB(EntityLivingBase.class, new AxisAlignedBB(pos).grow(8, 3, 8));
 
 			for(EntityLivingBase mob : mobs)
 				if(!(mob instanceof EntityPlayer) && !(mob instanceof EntityArmorStand))

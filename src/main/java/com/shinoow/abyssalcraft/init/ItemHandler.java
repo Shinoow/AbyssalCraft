@@ -16,11 +16,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemFood;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.TextFormatting;
-import net.minecraftforge.common.ForgeModContainer;
-import net.minecraftforge.fluids.UniversalBucket;
 import net.minecraftforge.fml.common.event.*;
-import net.minecraftforge.fml.common.registry.ForgeRegistries;
-import net.minecraftforge.fml.common.registry.GameRegistry;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
@@ -79,8 +75,9 @@ public class ItemHandler implements ILifeCycleHandler {
 		ACItems.essence_of_the_gatekeeper = new ItemGatekeeperEssence();
 		ACItems.interdimensional_cage = new ItemInterdimensionalCage();
 		ACItems.stone_tablet = new ItemStoneTablet();
+		ACItems.scroll = new ItemScroll("scroll", "basic", "lesser", "moderate", "greater");
+		ACItems.unique_scroll = new ItemScroll("unique_scroll", "antimatter", "oblivion");
 
-		
 		//Coins
 		ACItems.coin = new ItemCoin("coin");
 		ACItems.cthulhu_engraved_coin = new ItemCoin("cthulhucoin");
@@ -442,13 +439,15 @@ public class ItemHandler implements ILifeCycleHandler {
 		registerItem(ACItems.interdimensional_cage, "interdimensionalcage");
 		registerItem(ACItems.crystal_fragment, "crystalfragment");
 		registerItem(ACItems.stone_tablet, "stonetablet");
+		registerItem(ACItems.scroll, "scroll");
+		registerItem(ACItems.unique_scroll, "unique_scroll");
 		//		registerItem(shadowPlate, "shadowplate");
 
 	}
 
 	@Override
 	public void init(FMLInitializationEvent event) {
-		
+
 	}
 
 	@Override

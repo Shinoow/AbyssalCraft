@@ -11,13 +11,13 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.common.blocks.itemblock;
 
-import com.shinoow.abyssalcraft.common.blocks.IngotBlock.EnumIngotType;
-
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.util.text.translation.I18n;
+
+import com.shinoow.abyssalcraft.common.blocks.IngotBlock.EnumIngotType;
 
 /** Some sort of universal metadata itemblock thingy */
 public class ItemMetadataBlock extends ItemBlock {

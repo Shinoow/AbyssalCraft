@@ -12,7 +12,6 @@
 package com.shinoow.abyssalcraft.common.entity;
 
 import java.util.Calendar;
-import java.util.List;
 import java.util.UUID;
 
 import net.minecraft.block.state.IBlockState;
@@ -453,13 +452,9 @@ public class EntitySacthoth extends EntityMob implements IAntiEntity, ICoraliumE
 		for (int i = 0; i < 2 && ACConfig.particleEntity && world.provider.getDimension() != ACLib.dark_realm_id; ++i)
 			world.spawnParticle(EnumParticleTypes.SMOKE_LARGE, posX + (rand.nextDouble() - 0.5D) * width, posY + rand.nextDouble() * height, posZ + (rand.nextDouble() - 0.5D) * width, 0.0D, 0.0D, 0.0D);
 
-		List list = world.getEntitiesWithinAABBExcludingEntity(this, getEntityBoundingBox().expand(30.0D, 30.0D, 30.0D));
-		if (list != null)
-			for (int k2 = 0; k2 < list.size(); k2++) {
-				Entity entity = (Entity)list.get(k2);
-				if (entity instanceof EntityPlayer && !entity.isDead && deathTicks == 0 && !((EntityPlayer)entity).capabilities.isCreativeMode)
-					((EntityPlayer)entity).addPotionEffect(new PotionEffect(MobEffects.BLINDNESS, 40));
-			}
+		for(Entity entity : world.getEntitiesWithinAABBExcludingEntity(this, getEntityBoundingBox().grow(30.0D, 30.0D, 30.0D)))
+			if (entity instanceof EntityPlayer && !entity.isDead && deathTicks == 0 && !((EntityPlayer)entity).capabilities.isCreativeMode)
+				((EntityPlayer)entity).addPotionEffect(new PotionEffect(MobEffects.BLINDNESS, 40));
 		EntityPlayer player = world.getClosestPlayerToEntity(this, 160D);
 		if(player != null && player.getDistanceToEntity(this) >= 50D && !player.capabilities.isCreativeMode){
 			if(player.posX - posX > 50)

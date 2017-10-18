@@ -40,7 +40,7 @@ public class NecronomiconCleansingRitual extends NecronomiconRitual {
 	public NecronomiconCleansingRitual() {
 		super("cleansing", 4, 0, 100000F, true, new Object[]{new ItemStack(ACBlocks.statue, 1, OreDictionary.WILDCARD_VALUE), new ItemStack(ACBlocks.statue, 1, OreDictionary.WILDCARD_VALUE),
 				new ItemStack(ACBlocks.statue, 1, OreDictionary.WILDCARD_VALUE), new ItemStack(ACBlocks.statue, 1, OreDictionary.WILDCARD_VALUE), new ItemStack(ACBlocks.statue, 1, OreDictionary.WILDCARD_VALUE),
-				new ItemStack(ACBlocks.statue, 1, OreDictionary.WILDCARD_VALUE), new ItemStack(ACBlocks.statue, 1, OreDictionary.WILDCARD_VALUE)});
+				new ItemStack(ACBlocks.statue, 1, OreDictionary.WILDCARD_VALUE), new ItemStack(ACBlocks.statue, 1, OreDictionary.WILDCARD_VALUE), new ItemStack(ACBlocks.statue, 1, OreDictionary.WILDCARD_VALUE)});
 	}
 
 	@Override

@@ -14,7 +14,6 @@ package com.shinoow.abyssalcraft.common.blocks;
 import java.util.HashMap;
 import java.util.Random;
 
-import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -107,9 +106,9 @@ public class BlockRitualAltar extends BlockContainer {
 
 	@Override
 	public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos, EntityPlayer player)
-    {
+	{
 		return new ItemStack(Item.getItemFromBlock(this));
-    }
+	}
 
 	@Override
 	public boolean canSilkHarvest(World world, BlockPos pos, IBlockState state, EntityPlayer player)
@@ -184,9 +183,9 @@ public class BlockRitualAltar extends BlockContainer {
 		blockMeta.put(0, Blocks.COBBLESTONE.getDefaultState());
 		blockMeta.put(1, ACBlocks.cobblestone.getStateFromMeta(0));
 		blockMeta.put(2, ACBlocks.cobblestone.getStateFromMeta(1));
-		blockMeta.put(3, ACBlocks.cobblestone.getStateFromMeta(2));
-		blockMeta.put(4, ACBlocks.cobblestone.getStateFromMeta(3));
-		blockMeta.put(5, ACBlocks.cobblestone.getStateFromMeta(4));
+		blockMeta.put(3, ACBlocks.cobblestone.getStateFromMeta(4));
+		blockMeta.put(4, ACBlocks.cobblestone.getStateFromMeta(2));
+		blockMeta.put(5, ACBlocks.cobblestone.getStateFromMeta(3));
 		blockMeta.put(6, ACBlocks.ethaxium_brick.getDefaultState());
 		blockMeta.put(7, ACBlocks.dark_ethaxium_brick.getDefaultState());
 	}

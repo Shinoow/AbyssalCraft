@@ -23,6 +23,7 @@ import net.minecraft.world.World;
 
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
 import com.shinoow.abyssalcraft.api.item.ACItems;
+import com.shinoow.abyssalcraft.lib.ACConfig;
 import com.shinoow.abyssalcraft.lib.ACTabs;
 
 public class ItemEthaxiumArmor extends ItemArmor {
@@ -50,7 +51,7 @@ public class ItemEthaxiumArmor extends ItemArmor {
 
 	@Override
 	public void onArmorTick(World world, EntityPlayer player, ItemStack itemstack) {
-		if(world.isRemote) return;
+		if(world.isRemote || !ACConfig.armorPotionEffects) return;
 		if (itemstack.getItem() == ACItems.ethaxium_helmet) {
 			if(world.provider.isSurfaceWorld() && !world.provider.isDaytime())
 				player.addPotionEffect(new PotionEffect(MobEffects.NIGHT_VISION, 260, 0));

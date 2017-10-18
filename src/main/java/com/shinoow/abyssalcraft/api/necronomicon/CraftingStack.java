@@ -12,8 +12,9 @@
 package com.shinoow.abyssalcraft.api.necronomicon;
 
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.*;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.item.crafting.IRecipe;
+import net.minecraft.item.crafting.ShapedRecipes;
+import net.minecraft.item.crafting.ShapelessRecipes;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.oredict.ShapedOreRecipe;
@@ -60,7 +61,7 @@ public class CraftingStack {
 			int size = 0;
 			Object[] stuff = new Object[9];
 			this.output = APIUtils.convertToStack(output);
-			for(IRecipe recipe : ForgeRegistries.RECIPES){
+			for(IRecipe recipe : ForgeRegistries.RECIPES)
 				if(recipe.getRecipeOutput() != null && recipe.getRecipeOutput().isItemEqual(this.output)){
 					if(recipe instanceof ShapedRecipes){
 						for(int i = 0; i < recipe.getIngredients().size(); i++)
@@ -87,7 +88,6 @@ public class CraftingStack {
 					}
 					this.output.setCount(recipe.getRecipeOutput().getCount());
 				}
-			}
 			for(int i = 0; i < 9; i++)
 				recipe[i] = APIUtils.convertToStack(stuff[i]);
 		}

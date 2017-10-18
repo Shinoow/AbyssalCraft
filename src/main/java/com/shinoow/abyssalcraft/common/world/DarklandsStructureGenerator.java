@@ -21,7 +21,6 @@ import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
 
 import com.google.common.collect.Lists;
-import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.common.structures.overworld.*;
 
 public class DarklandsStructureGenerator {

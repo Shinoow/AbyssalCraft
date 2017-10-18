@@ -37,7 +37,6 @@ import net.minecraft.world.BossInfo.Color;
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
 import com.shinoow.abyssalcraft.api.entity.IDreadEntity;
 import com.shinoow.abyssalcraft.api.item.ACItems;
-import com.shinoow.abyssalcraft.lib.ACAchievements;
 import com.shinoow.abyssalcraft.lib.ACConfig;
 import com.shinoow.abyssalcraft.lib.ACSounds;
 import com.shinoow.abyssalcraft.lib.util.SpecialTextUtil;
@@ -265,11 +264,11 @@ public class EntityChagaroth extends EntityMob implements IDreadEntity {
 	@Override
 	public void onDeath(DamageSource par1DamageSource) {
 		bossInfo.setPercent(getHealth() / getMaxHealth());
-		if (par1DamageSource.getTrueSource() instanceof EntityPlayer)
-		{
-			EntityPlayer entityplayer = (EntityPlayer)par1DamageSource.getTrueSource();
-//			entityplayer.addStat(ACAchievements.kill_chagaroth, 1);
-		}
+		//		if (par1DamageSource.getTrueSource() instanceof EntityPlayer)
+		//		{
+		//			EntityPlayer entityplayer = (EntityPlayer)par1DamageSource.getTrueSource();
+		////			entityplayer.addStat(ACAchievements.kill_chagaroth, 1);
+		//		}
 		super.onDeath(par1DamageSource);
 	}
 

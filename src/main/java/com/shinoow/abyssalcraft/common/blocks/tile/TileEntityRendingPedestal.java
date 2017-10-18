@@ -123,7 +123,7 @@ public class TileEntityRendingPedestal extends TileEntity implements IEnergyCont
 						staff.setEnergy(0, stack, "Omothol");
 					}
 
-					for(EntityLivingBase target : world.getEntitiesWithinAABB(EntityLivingBase.class, new AxisAlignedBB(pos).expand(15, 3, 15)))
+					for(EntityLivingBase target : world.getEntitiesWithinAABB(EntityLivingBase.class, new AxisAlignedBB(pos).grow(15, 3, 15)))
 						if(target.getCreatureAttribute() == AbyssalCraftAPI.SHADOW && target.isNonBoss()){
 							if(!target.isDead && getContainedEnergy() >= target.getMaxHealth()/2)
 								if(target.attackEntityFrom(DamageSource.MAGIC, staff.getDrainAmount(stack))){

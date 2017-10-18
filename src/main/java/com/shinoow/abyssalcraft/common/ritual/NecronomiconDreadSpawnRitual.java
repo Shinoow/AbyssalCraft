@@ -38,9 +38,9 @@ public class NecronomiconDreadSpawnRitual extends NecronomiconRitual {
 
 	@Override
 	public boolean canCompleteRitual(World world, BlockPos pos, EntityPlayer player) {
-		List<EntityDreadSpawn> dreadSpawns = world.getEntitiesWithinAABB(EntityDreadSpawn.class, new AxisAlignedBB(pos).expand(16, 3, 16));
-		List<EntityGreaterDreadSpawn> greaterDreadSpawns = world.getEntitiesWithinAABB(EntityGreaterDreadSpawn.class, new AxisAlignedBB(pos).expand(16, 3, 16));
-		List<EntityLesserDreadbeast> lesserDreadBeasts = world.getEntitiesWithinAABB(EntityLesserDreadbeast.class, new AxisAlignedBB(pos).expand(16, 3, 16));
+		List<EntityDreadSpawn> dreadSpawns = world.getEntitiesWithinAABB(EntityDreadSpawn.class, new AxisAlignedBB(pos).grow(16, 3, 16));
+		List<EntityGreaterDreadSpawn> greaterDreadSpawns = world.getEntitiesWithinAABB(EntityGreaterDreadSpawn.class, new AxisAlignedBB(pos).grow(16, 3, 16));
+		List<EntityLesserDreadbeast> lesserDreadBeasts = world.getEntitiesWithinAABB(EntityLesserDreadbeast.class, new AxisAlignedBB(pos).grow(16, 3, 16));
 		return !dreadSpawns.isEmpty() || !greaterDreadSpawns.isEmpty() || !lesserDreadBeasts.isEmpty();
 	}
 
@@ -50,7 +50,7 @@ public class NecronomiconDreadSpawnRitual extends NecronomiconRitual {
 		List<EntityGreaterDreadSpawn> greaterDreadSpawns = Lists.newArrayList();
 		List<EntityLesserDreadbeast> lesserDreadBeasts = Lists.newArrayList();
 
-		List<Entity> entities = world.getEntitiesWithinAABBExcludingEntity(player, new AxisAlignedBB(pos).expand(16, 3, 16));
+		List<Entity> entities = world.getEntitiesWithinAABBExcludingEntity(player, new AxisAlignedBB(pos).grow(16, 3, 16));
 		for(Entity entity : entities){
 			if(entity instanceof EntityDreadSpawn)
 				dreadSpawns.add((EntityDreadSpawn) entity);

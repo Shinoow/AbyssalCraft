@@ -22,7 +22,7 @@ public class ACConfig {
 
 	public static boolean shouldSpread, shouldInfect, breakLogic, destroyOcean, demonAnimalFire, particleBlock,
 	particleEntity, hardcoreMode, evilAnimalCreatureType, antiItemDisintegration, smeltingRecipes, purgeMobSpawns,
-	overworldShoggoths, mimicFire;
+	overworldShoggoths, mimicFire, armorPotionEffects;
 	public static int evilAnimalSpawnWeight, endAbyssalZombieSpawnWeight, portalCooldown, demonAnimalSpawnWeight, shoggothLairSpawnRate;
 	public static double damageAmpl, depthsHelmetOverlayOpacity;
 	public static boolean shoggothOoze, oozeExpire;
@@ -32,8 +32,4 @@ public class ACConfig {
 	generateDreadlandsAbyssalniteOre, generateDreadedAbyssalniteOre, generateAbyssalIronOre, generateAbyssalGoldOre,
 	generateAbyssalDiamondOre, generateAbyssalNitreOre, generateAbyssalTinOre, generateAbyssalCopperOre,
 	generatePearlescentCoraliumOre, generateLiquifiedCoraliumOre;
-
-	@Deprecated
-	public static boolean oozeLeaves, oozeGrass, oozeGround, oozeSand, oozeRock, oozeCloth, oozeWood,
-	oozeGourd, oozeIron, oozeClay;
 }

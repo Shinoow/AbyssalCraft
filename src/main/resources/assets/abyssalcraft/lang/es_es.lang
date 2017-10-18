@@ -759,6 +759,11 @@ ac.ritual.corruption.desc=By presenting 4 random statues, 4 blocks of Darkstone,
 ac.ritual.resurrection=Dark Resurrection
 ac.ritual.resurrection.desc=By presenting crystalilzed compounds resembling the elements of life, a living sacrifice and a Name Tag with the name of a fallen companion, you resurrect it. The Crystal size scale with the companion (Shards for something the size of a Chicken, Clusters for a Horse, normal for anything inbetween). Life has limits, however.
 
+#Spells
+ac.spell.lifedrain=Life Drain
+ac.spell.entropy=Entropy
+ac.spell.mining=Mining
+
 #Rending
 ac.rending.shadowgem=Shadow Gems are made from harvesting Shadow Energy from living shadows.
 ac.rending.essence_aw=Abyssal Wasteland Essences are made from harvesting Abyssal Wasteland Energy from Coralium entities.
@@ -1271,6 +1276,12 @@ item.engraving_shubniggurath.name=Moneda de Grabado de Shub-Niggurath
 item.gatekeeperessence.name=Esencia del Guardián de la  Puerta
 item.interdimensionalcage.name=Interdimensional Cage
 item.stonetablet.name=Stone Tablet
+item.scroll.basic.name=Basic Scroll
+item.scroll.lesser.name=Lesser Scroll
+item.scroll.moderate.name=Moderate Scroll
+item.scroll.greater.name=Greater Scroll
+item.unique_scroll.antimatter.name=Antimatter Scroll
+item.unique_scroll.oblivion.name=Oblivion Scroll
 
 #Entities
 entity.abyssalcraft.depthsghoul.name=Espíritu Necrófago de las Profundidades

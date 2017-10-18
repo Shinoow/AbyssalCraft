@@ -20,9 +20,7 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.common.MinecraftForge;
 
 import com.shinoow.abyssalcraft.api.event.ACEvents;
-import com.shinoow.abyssalcraft.api.item.ACItems;
 import com.shinoow.abyssalcraft.api.recipe.TransmutatorRecipes;
-import com.shinoow.abyssalcraft.lib.ACAchievements;
 
 public class SlotTransmutator extends Slot
 {
@@ -101,9 +99,9 @@ public class SlotTransmutator extends Slot
 
 		MinecraftForge.EVENT_BUS.post(new ACEvents.ItemTransmutedEvent(thePlayer, par1ItemStack));
 
-//		if (par1ItemStack.getItem() == ACItems.rlyehian_gateway_key)
-//			thePlayer.addStat(ACAchievements.rlyehian_gateway_key, 1);
-//		if(par1ItemStack.getItem() == ACItems.dreadium_ingot)
-//			thePlayer.addStat(ACAchievements.dreadium, 1);
+		//		if (par1ItemStack.getItem() == ACItems.rlyehian_gateway_key)
+		//			thePlayer.addStat(ACAchievements.rlyehian_gateway_key, 1);
+		//		if(par1ItemStack.getItem() == ACItems.dreadium_ingot)
+		//			thePlayer.addStat(ACAchievements.dreadium, 1);
 	}
 }

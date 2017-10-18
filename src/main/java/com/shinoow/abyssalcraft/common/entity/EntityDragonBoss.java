@@ -37,7 +37,6 @@ import net.minecraft.world.BossInfo.Color;
 import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.api.entity.ICoraliumEntity;
 import com.shinoow.abyssalcraft.api.item.ACItems;
-import com.shinoow.abyssalcraft.lib.ACAchievements;
 import com.shinoow.abyssalcraft.lib.ACConfig;
 import com.shinoow.abyssalcraft.lib.util.SpecialTextUtil;
 
@@ -150,11 +149,11 @@ public class EntityDragonBoss extends EntityMob implements IEntityMultiPart, ICo
 	public void onDeath(DamageSource par1DamageSource)
 	{
 		bossInfo.setPercent(getHealth() / getMaxHealth());
-		if (par1DamageSource.getTrueSource() instanceof EntityPlayer)
-		{
-			EntityPlayer entityplayer = (EntityPlayer)par1DamageSource.getTrueSource();
-//			entityplayer.addStat(ACAchievements.kill_asorah, 1);
-		}
+		//		if (par1DamageSource.getTrueSource() instanceof EntityPlayer)
+		//		{
+		//			EntityPlayer entityplayer = (EntityPlayer)par1DamageSource.getTrueSource();
+		////			entityplayer.addStat(ACAchievements.kill_asorah, 1);
+		//		}
 		super.onDeath(par1DamageSource);
 	}
 
@@ -362,9 +361,9 @@ public class EntityDragonBoss extends EntityMob implements IEntityMultiPart, ICo
 
 			if (!world.isRemote && hurtTime == 0)
 			{
-				collideWithEntities(world.getEntitiesWithinAABBExcludingEntity(this, dragonPartWing1.getEntityBoundingBox().expand(5.0D, 4.0D, 5.0D).offset(0.0D, -4.0D, 0.0D)));
-				collideWithEntities(world.getEntitiesWithinAABBExcludingEntity(this, dragonPartWing2.getEntityBoundingBox().expand(5.0D, 4.0D, 5.0D).offset(0.0D, -4.0D, 0.0D)));
-				attackEntitiesInList(world.getEntitiesWithinAABBExcludingEntity(this, dragonPartHead.getEntityBoundingBox().expand(1.5D, 1.5D, 1.5D)));
+				collideWithEntities(world.getEntitiesWithinAABBExcludingEntity(this, dragonPartWing1.getEntityBoundingBox().grow(5.0D, 4.0D, 5.0D).offset(0.0D, -4.0D, 0.0D)));
+				collideWithEntities(world.getEntitiesWithinAABBExcludingEntity(this, dragonPartWing2.getEntityBoundingBox().grow(5.0D, 4.0D, 5.0D).offset(0.0D, -4.0D, 0.0D)));
+				attackEntitiesInList(world.getEntitiesWithinAABBExcludingEntity(this, dragonPartHead.getEntityBoundingBox().grow(1.5D, 1.5D, 1.5D)));
 			}
 
 			double[] adouble = getMovementOffsets(5, 1.0F);
@@ -444,7 +443,7 @@ public class EntityDragonBoss extends EntityMob implements IEntityMultiPart, ICo
 		if (rand.nextInt(10) == 0)
 		{
 			float f = 32.0F;
-			List<?> list = world.getEntitiesWithinAABB(EntityDragonMinion.class, getEntityBoundingBox().expand(f, f, f));
+			List<?> list = world.getEntitiesWithinAABB(EntityDragonMinion.class, getEntityBoundingBox().grow(f, f, f));
 			EntityDragonMinion entitydragonminion = null;
 			double d0 = Double.MAX_VALUE;
 			Iterator<?> iterator = list.iterator();

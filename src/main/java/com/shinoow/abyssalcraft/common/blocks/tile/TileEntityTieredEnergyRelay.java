@@ -14,13 +14,10 @@ package com.shinoow.abyssalcraft.common.blocks.tile;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Vec3d;
 
-import com.shinoow.abyssalcraft.AbyssalCraft;
+import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
 import com.shinoow.abyssalcraft.api.energy.IEnergyContainer;
 import com.shinoow.abyssalcraft.api.energy.PEUtils;
-import com.shinoow.abyssalcraft.common.blocks.BlockEnergyRelay;
 
 public class TileEntityTieredEnergyRelay extends TileEntityEnergyRelay {
 
@@ -44,13 +41,19 @@ public class TileEntityTieredEnergyRelay extends TileEntityEnergyRelay {
 	}
 
 	@Override
+	public void onLoad()
+	{
+		ticksExisted = world.rand.nextInt(100);
+	}
+
+	@Override
 	public void update() {
 		++ticksExisted;
 
 		if(ticksExisted % 20 == 0)
 			PEUtils.collectNearbyPE(this, world, pos, EnumFacing.getFront(facing).getOpposite(), getDrainQuanta());
 
-		if(ticksExisted % 40 == 0 && canTransferPE())
+		if(ticksExisted % 40 == 0 && canTransferPE() && !world.isRemote)
 			transferPE(EnumFacing.getFront(facing), getTransferQuanta());
 	}
 
@@ -61,21 +64,8 @@ public class TileEntityTieredEnergyRelay extends TileEntityEnergyRelay {
 			IEnergyContainer container = PEUtils.getContainer(world, pos, facing, getRange());
 			if(container != null)
 				if(container.canAcceptPE()){
-					if(!world.isRemote)
-						container.addEnergy(consumeEnergy(energy));
-					BlockPos p = container.getContainerTile().getPos();
-
-					Vec3d vec = new Vec3d(p.subtract(pos)).normalize();
-
-					double d = Math.sqrt(p.distanceSq(pos));
-
-					for(int i = 0; i < d * 15; i++){
-						double i1 = i / 15D;
-						double xp = pos.getX() + vec.x * i1 + .5;
-						double yp = pos.getY() + vec.y * i1 + .5;
-						double zp = pos.getZ() + vec.z * i1 + .5;
-						AbyssalCraft.proxy.spawnParticle("PEStream", world, xp, yp, zp, vec.x * .1, .15, vec.z * .1);
-					}
+					container.addEnergy(consumeEnergy(energy));
+					AbyssalCraftAPI.getInternalMethodHandler().spawnPEStream(pos, container.getContainerTile().getPos(), world.provider.getDimension());
 				}
 		}
 	}

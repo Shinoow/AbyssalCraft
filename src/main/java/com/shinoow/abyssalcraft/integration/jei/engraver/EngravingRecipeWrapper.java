@@ -19,7 +19,7 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 import mezz.jei.api.ingredients.IIngredients;
-import mezz.jei.api.recipe.BlankRecipeWrapper;
+import mezz.jei.api.recipe.IRecipeWrapper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.item.ItemStack;
@@ -27,7 +27,7 @@ import net.minecraft.util.text.translation.I18n;
 
 import com.google.common.collect.Lists;
 
-public class EngravingRecipeWrapper extends BlankRecipeWrapper {
+public class EngravingRecipeWrapper implements IRecipeWrapper {
 
 	@Nonnull
 	private final List<List<ItemStack>> input;

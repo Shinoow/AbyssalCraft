@@ -30,46 +30,38 @@ import com.shinoow.abyssalcraft.common.network.AbstractMessage.AbstractClientMes
 
 public class DisruptionMessage extends AbstractClientMessage<DisruptionMessage> {
 
-	private DeityType deity;
-	private String name;
-	private int x, y, z;
+	private String deity, name;
+	private BlockPos pos;
 
 	public DisruptionMessage(){}
 
 	public DisruptionMessage(DeityType deity, String name, BlockPos pos){
-		this.deity = deity;
+		this.deity = deity != null ? deity.getName() : "";
 		this.name = name;
-		x = pos.getX();
-		y = pos.getY();
-		z = pos.getZ();
+		this.pos = pos;
 	}
 
 	@Override
 	protected void read(PacketBuffer buffer) throws IOException {
 
-		deity = DeityType.valueOf(ByteBufUtils.readUTF8String(buffer));
+		deity = ByteBufUtils.readUTF8String(buffer);
 		name = ByteBufUtils.readUTF8String(buffer);
-		x = ByteBufUtils.readVarInt(buffer, 5);
-		y = ByteBufUtils.readVarInt(buffer, 5);
-		z = ByteBufUtils.readVarInt(buffer, 5);
+		pos = buffer.readBlockPos();
 	}
 
 	@Override
 	protected void write(PacketBuffer buffer) throws IOException {
 
-		ByteBufUtils.writeUTF8String(buffer, deity.name());
+		ByteBufUtils.writeUTF8String(buffer, deity);
 		ByteBufUtils.writeUTF8String(buffer, name);
-		ByteBufUtils.writeVarInt(buffer, x, 5);
-		ByteBufUtils.writeVarInt(buffer, y, 5);
-		ByteBufUtils.writeVarInt(buffer, z, 5);
+		buffer.writeBlockPos(pos);
 	}
 
 	@Override
 	public void process(EntityPlayer player, Side side) {
-		BlockPos pos = new BlockPos(x, y, z);
-		List<EntityPlayer> players = player.world.getEntitiesWithinAABB(EntityPlayer.class, new AxisAlignedBB(pos, pos.add(1, 1, 1)).expand(16, 16, 16));
+		List<EntityPlayer> players = player.world.getEntitiesWithinAABB(EntityPlayer.class, new AxisAlignedBB(pos).grow(16, 16, 16));
 		DisruptionEntry disruption = DisruptionHandler.instance().disruptionFromName(name);
-		if(!MinecraftForge.EVENT_BUS.post(new DisruptionEvent(deity, player.world, pos, players, disruption)))
+		if(!MinecraftForge.EVENT_BUS.post(new DisruptionEvent(!deity.isEmpty() ? DeityType.valueOf(deity) : null, player.world, pos, players, disruption)))
 			disruption.disrupt(player.world, pos, players);
 	}
 }

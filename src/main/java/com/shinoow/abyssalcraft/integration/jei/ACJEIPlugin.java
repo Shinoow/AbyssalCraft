@@ -43,7 +43,7 @@ import com.shinoow.abyssalcraft.integration.jei.upgrades.UpgradeRecipeMaker;
 public class ACJEIPlugin implements IModPlugin {
 
 	IGuiHelper guiHelper;
-	
+
 	@Override
 	public void register(IModRegistry registry) {
 		if(!Loader.isModLoaded("abyssalcraft")) return;

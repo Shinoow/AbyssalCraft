@@ -49,7 +49,7 @@ public class DisruptionPotion extends DisruptionEntry {
 	public void disrupt(World world, BlockPos pos, List<EntityPlayer> players) {
 
 		if(!world.isRemote){
-			List<EntityLivingBase> entities = world.getEntitiesWithinAABB(EntityLivingBase.class, new AxisAlignedBB(pos).expand(16, 16, 16));
+			List<EntityLivingBase> entities = world.getEntitiesWithinAABB(EntityLivingBase.class, new AxisAlignedBB(pos).grow(16, 16, 16));
 
 			for(EntityLivingBase entity : entities)
 				if(!EntityUtil.isEntityImmune(entity, potion))

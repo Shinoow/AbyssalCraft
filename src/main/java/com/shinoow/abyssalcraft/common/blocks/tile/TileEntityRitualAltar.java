@@ -135,7 +135,7 @@ public class TileEntityRitualAltar extends TileEntity implements ITickable, IRit
 								ritual.completeRitual(world, pos, user);
 							else if(!world.isRemote){
 								world.addWeatherEffect(new EntityLightningBolt(world, pos.getX(), pos.getY() + 1, pos.getZ(), false));
-								DisruptionHandler.instance().generateDisruption(DeityType.values()[world.rand.nextInt(DeityType.values().length)], world, pos, world.getEntitiesWithinAABB(EntityPlayer.class, new AxisAlignedBB(pos).expand(16, 16, 16)));
+								DisruptionHandler.instance().generateDisruption(DeityType.values()[world.rand.nextInt(DeityType.values().length)], world, pos, world.getEntitiesWithinAABB(EntityPlayer.class, new AxisAlignedBB(pos).grow(16, 16, 16)));
 							}
 							ritualTimer = 0;
 							user = null;
@@ -146,7 +146,7 @@ public class TileEntityRitualAltar extends TileEntity implements ITickable, IRit
 					} else {
 						if(!world.isRemote){
 							world.addWeatherEffect(new EntityLightningBolt(world, pos.getX(), pos.getY() + 1, pos.getZ(), false));
-							DisruptionHandler.instance().generateDisruption(DeityType.values()[world.rand.nextInt(DeityType.values().length)], world, pos, world.getEntitiesWithinAABB(EntityPlayer.class, new AxisAlignedBB(pos).expand(16, 16, 16)));
+							DisruptionHandler.instance().generateDisruption(DeityType.values()[world.rand.nextInt(DeityType.values().length)], world, pos, world.getEntitiesWithinAABB(EntityPlayer.class, new AxisAlignedBB(pos).grow(16, 16, 16)));
 						}
 						ritualTimer = 0;
 						ritual = null;
@@ -293,8 +293,8 @@ public class TileEntityRitualAltar extends TileEntity implements ITickable, IRit
 						ritual = RitualRegistry.instance().getRitual(world.provider.getDimension(), ((ItemNecronomicon)item.getItem()).getBookType(), offers, this.item);
 						if(ritual != null)
 							if(ritual.requiresSacrifice()){
-								if(!world.getEntitiesWithinAABB(EntityLivingBase.class, new AxisAlignedBB(pos).expand(4, 4, 4)).isEmpty())
-									for(EntityLivingBase mob : world.getEntitiesWithinAABB(EntityLivingBase.class, new AxisAlignedBB(pos).expand(4, 4, 4)))
+								if(!world.getEntitiesWithinAABB(EntityLivingBase.class, new AxisAlignedBB(pos).grow(4, 4, 4)).isEmpty())
+									for(EntityLivingBase mob : world.getEntitiesWithinAABB(EntityLivingBase.class, new AxisAlignedBB(pos).grow(4, 4, 4)))
 										if(canBeSacrificed(mob))
 											if(ritual.canCompleteRitual(world, pos, player))
 												if(!MinecraftForge.EVENT_BUS.post(new RitualEvent.Pre(player, ritual, world, pos))){

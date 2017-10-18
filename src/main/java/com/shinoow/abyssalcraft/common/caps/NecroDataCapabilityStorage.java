@@ -13,8 +13,11 @@ package com.shinoow.abyssalcraft.common.caps;
 
 import net.minecraft.nbt.*;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.Capability.IStorage;
+import net.minecraftforge.fml.common.registry.ForgeRegistries;
 
 public class NecroDataCapabilityStorage implements IStorage<INecroDataCapability> {
 
@@ -51,13 +54,16 @@ public class NecroDataCapabilityStorage implements IStorage<INecroDataCapability
 
 		NBTTagList l = properties.getTagList("entityTriggers", 8);
 		for(int i = 0; i < l.tagCount(); i++)
-			instance.triggerEntityUnlock(l.getStringTagAt(i));
+			if(ForgeRegistries.ENTITIES.containsKey(new ResourceLocation(l.getStringTagAt(i))))
+				instance.triggerEntityUnlock(l.getStringTagAt(i));
 		l = properties.getTagList("biomeTriggers", 8);
 		for(int i = 0; i < l.tagCount(); i++)
-			instance.triggerBiomeUnlock(l.getStringTagAt(i));
+			if(ForgeRegistries.BIOMES.containsKey(new ResourceLocation(l.getStringTagAt(i))))
+				instance.triggerBiomeUnlock(l.getStringTagAt(i));
 		l = properties.getTagList("dimensionTriggers", 3);
 		for(int i = 0; i < l.tagCount(); i++)
-			instance.triggerDimensionUnlock(l.getIntAt(i));
+			if(DimensionManager.isDimensionRegistered(l.getIntAt(i)))
+				instance.triggerDimensionUnlock(l.getIntAt(i));
 	}
 
 }

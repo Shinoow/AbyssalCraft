@@ -37,7 +37,7 @@ public class NecronomiconBreedingRitual extends NecronomiconRitual {
 	@Override
 	public boolean canCompleteRitual(World world, BlockPos pos, EntityPlayer player) {
 
-		List<EntityAnimal> animals = world.getEntitiesWithinAABB(EntityAnimal.class, new AxisAlignedBB(pos).expand(16, 3, 16));
+		List<EntityAnimal> animals = world.getEntitiesWithinAABB(EntityAnimal.class, new AxisAlignedBB(pos).grow(16, 3, 16));
 		return !animals.isEmpty();
 	}
 
@@ -53,7 +53,7 @@ public class NecronomiconBreedingRitual extends NecronomiconRitual {
 		List<EntityWolf> wolves = Lists.newArrayList();
 		List<EntityRabbit> rabbits = Lists.newArrayList();
 
-		List<Entity> entities = world.getEntitiesWithinAABBExcludingEntity(player, new AxisAlignedBB(pos).expand(16, 3, 16));
+		List<Entity> entities = world.getEntitiesWithinAABBExcludingEntity(player, new AxisAlignedBB(pos).grow(16, 3, 16));
 		for(Entity entity : entities){
 			if(entity instanceof EntityCow)
 				cows.add((EntityCow) entity);

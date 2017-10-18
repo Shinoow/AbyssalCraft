@@ -55,6 +55,7 @@ public class GuiNecronomicon extends GuiScreen {
 	protected static final ResourceLocation MISSING_PICTURE = new ResourceLocation("abyssalcraft", "textures/gui/necronomicon/missing.png");
 	protected static final ResourceLocation MISSING_ITEM = new ResourceLocation("abyssalcraft", "textures/gui/necronomicon/missing_item.png");
 	protected static final ResourceLocation MISSING_RECIPE = new ResourceLocation("abyssalcraft", "textures/gui/necronomicon/missing_recipe.png");
+	public static GuiNecronomicon currentNecro = new GuiNecronomicon();
 	public final int guiWidth = 255;
 	public final int guiHeight = 192;
 	private int bookTotalTurnups = 2;
@@ -71,18 +72,28 @@ public class GuiNecronomicon extends GuiScreen {
 	private GuiButton buttonDone;
 	private int bookType;
 	/** Used to check if we're at a text entry (true), or a index (false) */
-	protected boolean isInfo = false;
-	private boolean isNecroInfo = false;
+	protected boolean isInfo;
+	private boolean isNecroInfo;
+	/** Used to invalidate the current Necronomicon Gui (like if a lower Necronomicon tries to read information for a higher one) */
+	protected boolean isInvalid;
 	public static final Map<String, DynamicTexture> successcache = Maps.newHashMap();
 	public static final List<String> failcache = Lists.newArrayList();
 	protected FontRenderer test;
 	private static Chapter patreon;
 
 	public GuiNecronomicon(){
-		this(0);
+		test = new LovecraftFont(Minecraft.getMinecraft().gameSettings, new ResourceLocation("abyssalcraft", "textures/font/aklo.png"), Minecraft.getMinecraft().renderEngine, true);
+		if(Minecraft.getMinecraft().getResourceManager() instanceof IReloadableResourceManager)
+			((IReloadableResourceManager)Minecraft.getMinecraft().getResourceManager()).registerReloadListener(test);
 	}
 
 	public GuiNecronomicon(int par1){
+		this();
+		withBookType(par1);
+	}
+
+	public GuiNecronomicon withBookType(int par1){
+		if(bookType == par1) return this;
 		bookType = par1;
 		switch(par1){
 		case 0:
@@ -101,9 +112,7 @@ public class GuiNecronomicon extends GuiScreen {
 			bookGuiTextures = new ResourceLocation("abyssalcraft:textures/gui/abyssalnomicon.png");
 			break;
 		}
-		test = new LovecraftFont(Minecraft.getMinecraft().gameSettings, new ResourceLocation("abyssalcraft", "textures/font/aklo.png"), Minecraft.getMinecraft().renderEngine, true);
-		if(Minecraft.getMinecraft().getResourceManager() instanceof IReloadableResourceManager)
-			((IReloadableResourceManager)Minecraft.getMinecraft().getResourceManager()).registerReloadListener(test);
+		return this;
 	}
 
 	/**
@@ -122,6 +131,7 @@ public class GuiNecronomicon extends GuiScreen {
 	@SuppressWarnings("unchecked")
 	public void initGui()
 	{
+		currentNecro = this;
 		buttonList.clear();
 		Keyboard.enableRepeatEvents(true);
 
@@ -129,8 +139,8 @@ public class GuiNecronomicon extends GuiScreen {
 
 		int i = (width - guiWidth) / 2;
 		byte b0 = 2;
-		buttonList.add(buttonNextPage = new ButtonNextPage(1, i + 215, b0 + 154, true));
-		buttonList.add(buttonPreviousPage = new ButtonNextPage(2, i + 18, b0 + 154, false));
+		buttonList.add(buttonNextPage = new ButtonNextPage(1, i + 215, b0 + 154, true, false));
+		buttonList.add(buttonPreviousPage = new ButtonNextPage(2, i + 18, b0 + 154, false, false));
 		buttonList.add(buttonCat1 = new ButtonCategory(3, i + 14, b0 + 24, this, NecronomiconText.LABEL_INFORMATION, false, ACItems.necronomicon));
 		buttonList.add(buttonCat2 = new ButtonCategory(4, i + 14, b0 + 41, this, NecronomiconText.LABEL_SPELLBOOK, false, ACItems.necronomicon));
 		buttonList.add(buttonCat3 = new ButtonCategory(5, i + 14, b0 + 58, this, NecronomiconText.LABEL_RITUALS, false, ACItems.necronomicon));
@@ -144,8 +154,6 @@ public class GuiNecronomicon extends GuiScreen {
 	}
 
 	protected Item getItem(int par1){
-		//		if(par1 > getBookType())
-		//			return ACItems.oblivion_catalyst;
 		switch(par1){
 		case 0:
 			return ACItems.necronomicon;
@@ -196,9 +204,12 @@ public class GuiNecronomicon extends GuiScreen {
 	{
 		if (button.enabled)
 		{
-			if (button.id == 0)
+			if (button.id == 0){
+				isInfo = false;
+				isNecroInfo = false;
+				currTurnup = 0;
 				mc.displayGuiScreen((GuiScreen)null);
-			else if (button.id == 1)
+			} else if (button.id == 1)
 			{
 				if (currTurnup < bookTotalTurnups - 1)
 					++currTurnup;
@@ -277,8 +288,8 @@ public class GuiNecronomicon extends GuiScreen {
 
 		int i = (width - guiWidth) / 2;
 		byte b0 = 2;
-		buttonList.add(buttonNextPage = new ButtonNextPage(1, i + 215, b0 + 154, true));
-		buttonList.add(buttonPreviousPage = new ButtonNextPage(2, i + 18, b0 + 154, false));
+		buttonList.add(buttonNextPage = new ButtonNextPage(1, i + 215, b0 + 154, true, false));
+		buttonList.add(buttonPreviousPage = new ButtonNextPage(2, i + 18, b0 + 154, false, false));
 	}
 
 	public static void setPatreonInfo(Chapter info){

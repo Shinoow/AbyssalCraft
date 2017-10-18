@@ -18,7 +18,6 @@ import net.minecraft.block.*;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.RenderItem;
 import net.minecraft.client.renderer.block.model.ModelBakery;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.renderer.block.statemap.StateMap;
@@ -57,7 +56,6 @@ import com.shinoow.abyssalcraft.client.ClientProxy;
 import com.shinoow.abyssalcraft.common.blocks.*;
 import com.shinoow.abyssalcraft.common.blocks.BlockCrystalCluster.EnumCrystalType;
 import com.shinoow.abyssalcraft.common.blocks.BlockCrystalCluster2.EnumCrystalType2;
-import com.shinoow.abyssalcraft.common.blocks.BlockStatue.EnumDeityType;
 import com.shinoow.abyssalcraft.common.blocks.BlockTieredEnergyPedestal.EnumDimType;
 import com.shinoow.abyssalcraft.common.network.PacketDispatcher;
 import com.shinoow.abyssalcraft.common.network.server.FireMessage;
@@ -242,6 +240,8 @@ public class AbyssalCraftClientEventHooks {
 		ModelBakery.registerItemVariants(ACItems.ingot_nugget, makerl("nugget_abyssalnite", "nugget_coralium", "nugget_dreadium", "nugget_ethaxium"));
 		ModelBakery.registerItemVariants(ACItems.staff_of_rending, makerl("drainstaff", "drainstaff_aw", "drainstaff_dl", "drainstaff_omt"));
 		ModelBakery.registerItemVariants(ACItems.staff_of_the_gatekeeper, makerl("staff", "staff2"));
+		ModelBakery.registerItemVariants(ACItems.scroll, makerl("scroll_basic", "scroll_lesser", "scroll_moderate", "scroll_greater"));
+		ModelBakery.registerItemVariants(ACItems.unique_scroll, makerl("scroll_unique_anti", "scroll_unique_oblivion"));
 
 		ModelBakery.registerItemVariants(Item.getItemFromBlock(ACBlocks.ethaxium_brick), makerl("ethaxiumbrick_0", "ethaxiumbrick_1", "ethaxiumbrick_2"));
 		ModelBakery.registerItemVariants(Item.getItemFromBlock(ACBlocks.dark_ethaxium_brick), makerl("darkethaxiumbrick_0", "darkethaxiumbrick_1", "darkethaxiumbrick_2"));
@@ -262,10 +262,10 @@ public class AbyssalCraftClientEventHooks {
 				"tieredenergycollector_2", "tieredenergycollector_3"));
 		ModelBakery.registerItemVariants(Item.getItemFromBlock(ACBlocks.tiered_energy_container), makerl("tieredenergycontainer_0", "tieredenergycontainer_1",
 				"tieredenergycontainer_2", "tieredenergycontainer_3"));
-//		ModelBakery.registerItemVariants(Item.getItemFromBlock(ACBlocks.statue), makerl("cthulhustatue", "hasturstatue", "jzaharstatue", "azathothstatue",
-//				"nyarlathotepstatue", "yogsothothstatue", "shubniggurathstatue"));
-//		ModelBakery.registerItemVariants(Item.getItemFromBlock(ACBlocks.decorative_statue), makerl("cthulhustatue", "hasturstatue", "jzaharstatue", "azathothstatue",
-//				"nyarlathotepstatue", "yogsothothstatue", "shubniggurathstatue"));
+		//		ModelBakery.registerItemVariants(Item.getItemFromBlock(ACBlocks.statue), makerl("cthulhustatue", "hasturstatue", "jzaharstatue", "azathothstatue",
+		//				"nyarlathotepstatue", "yogsothothstatue", "shubniggurathstatue"));
+		//		ModelBakery.registerItemVariants(Item.getItemFromBlock(ACBlocks.decorative_statue), makerl("cthulhustatue", "hasturstatue", "jzaharstatue", "azathothstatue",
+		//				"nyarlathotepstatue", "yogsothothstatue", "shubniggurathstatue"));
 		ModelBakery.registerItemVariants(Item.getItemFromBlock(ACBlocks.cobblestone), makerl("darkstone_cobble", "abyssalcobblestone", "dreadstonecobblestone",
 				"abyssalnitecobblestone", "coraliumcobblestone"));
 
@@ -306,7 +306,7 @@ public class AbyssalCraftClientEventHooks {
 				String stuff = "abyssalcraft:"+state.getValue(BlockStatue.TYPE).getName()+"statue";
 				Map<IProperty<?>, Comparable<?>> map = Maps.newLinkedHashMap(state.getProperties());
 				map.remove(BlockStatue.TYPE);
-				return new ModelResourceLocation(stuff, this.getPropertyString(map));
+				return new ModelResourceLocation(stuff, getPropertyString(map));
 			}});
 		ModelLoader.setCustomStateMapper(ACBlocks.decorative_statue, new StateMapperBase(){
 			@Override
@@ -314,7 +314,7 @@ public class AbyssalCraftClientEventHooks {
 				String stuff = "abyssalcraft:"+state.getValue(BlockStatue.TYPE).getName()+"statue";
 				Map<IProperty<?>, Comparable<?>> map = Maps.newLinkedHashMap(state.getProperties());
 				map.remove(BlockStatue.TYPE);
-				return new ModelResourceLocation(stuff, this.getPropertyString(map));
+				return new ModelResourceLocation(stuff, getPropertyString(map));
 			}});
 		ModelLoader.setCustomStateMapper(ACBlocks.cobblestone, new StateMapperBase(){
 			@Override
@@ -322,7 +322,7 @@ public class AbyssalCraftClientEventHooks {
 				String stuff = "abyssalcraft:"+state.getValue(BlockACCobblestone.TYPE).getState();
 				Map<IProperty<?>, Comparable<?>> map = Maps.newLinkedHashMap(state.getProperties());
 				map.remove(BlockACCobblestone.TYPE);
-				return new ModelResourceLocation(stuff, this.getPropertyString(map));
+				return new ModelResourceLocation(stuff, getPropertyString(map));
 			}});
 		ModelLoader.setCustomStateMapper(ACBlocks.ingot_block, new StateMapperBase(){
 			@Override
@@ -330,13 +330,13 @@ public class AbyssalCraftClientEventHooks {
 				String stuff = "abyssalcraft:"+state.getValue(IngotBlock.TYPE).getState();
 				Map<IProperty<?>, Comparable<?>> map = Maps.newLinkedHashMap(state.getProperties());
 				map.remove(IngotBlock.TYPE);
-				return new ModelResourceLocation(stuff, this.getPropertyString(map));
+				return new ModelResourceLocation(stuff, getPropertyString(map));
 			}});
 		ModelLoader.setCustomStateMapper(ACBlocks.tiered_energy_relay, new StateMapperBase(){
 			@Override
 			protected ModelResourceLocation getModelResourceLocation(IBlockState state) {
 				String stuff = "abyssalcraft:";
-				switch(((EnumDimType)state.getValue(BlockTieredEnergyPedestal.DIMENSION))){
+				switch((EnumDimType)state.getValue(BlockTieredEnergyPedestal.DIMENSION)){
 				case ABYSSAL_WASTELAND:
 					stuff+="awenergyrelay";
 					break;
@@ -354,7 +354,7 @@ public class AbyssalCraftClientEventHooks {
 				}
 				Map<IProperty<?>, Comparable<?>> map = Maps.newLinkedHashMap(state.getProperties());
 				map.remove(BlockTieredEnergyPedestal.DIMENSION);
-				return new ModelResourceLocation(stuff, this.getPropertyString(map));
+				return new ModelResourceLocation(stuff, getPropertyString(map));
 			}});
 		ModelLoader.setCustomStateMapper(ACBlocks.stone, new StateMapperBase(){
 			@Override
@@ -362,7 +362,7 @@ public class AbyssalCraftClientEventHooks {
 				String stuff = "abyssalcraft:"+state.getValue(BlockACStone.TYPE).getState();
 				Map<IProperty<?>, Comparable<?>> map = Maps.newLinkedHashMap(state.getProperties());
 				map.remove(BlockACStone.TYPE);
-				return new ModelResourceLocation(stuff, this.getPropertyString(map));
+				return new ModelResourceLocation(stuff, getPropertyString(map));
 			}});
 
 		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(ACBlocks.statue), 0, new ModelResourceLocation("abyssalcraft:cthulhustatue", "inventory"));
@@ -588,8 +588,13 @@ public class AbyssalCraftClientEventHooks {
 		registerItemRender(ACItems.interdimensional_cage, 0);
 		registerItemRenders(ACItems.crystal_fragment, 25);
 		registerItemRender(ACItems.stone_tablet, 0);
+		registerItemRender(ACItems.scroll, 0, "scroll_basic");
+		registerItemRender(ACItems.scroll, 1, "scroll_lesser");
+		registerItemRender(ACItems.scroll, 2, "scroll_moderate");
+		registerItemRender(ACItems.scroll, 3, "scroll_greater");
+		registerItemRender(ACItems.unique_scroll, 0, "scroll_unique_anti");
+		registerItemRender(ACItems.unique_scroll, 1, "scroll_unique_oblivion");
 
-//		registerItemRender(ACBlocks.darkstone, 0);
 		registerItemRender(ACBlocks.stone, 0, "darkstone");
 		registerItemRender(ACBlocks.stone, 1, "abystone");
 		registerItemRender(ACBlocks.stone, 2, "dreadstone");
@@ -616,7 +621,6 @@ public class AbyssalCraftClientEventHooks {
 		registerItemRender(ACBlocks.darklands_oak_leaves, 0);
 		registerItemRender(ACBlocks.darklands_oak_wood, 0);
 		registerItemRender(ACBlocks.darklands_oak_sapling, 0);
-//		registerItemRender(ACBlocks.abyssal_stone, 0);
 		registerItemRender(ACBlocks.abyssal_stone_brick, 0, "abybrick_0");
 		registerItemRender(ACBlocks.abyssal_stone_brick, 1, "abybrick_1");
 		registerItemRender(ACBlocks.abyssal_stone_brick, 2, "abybrick_2");
@@ -653,8 +657,6 @@ public class AbyssalCraftClientEventHooks {
 		registerItemRender(ACBlocks.abyssal_stone_pressure_plate, 0);
 		registerItemRender(ACBlocks.darkstone_brick_fence, 0);
 		registerItemRender(ACBlocks.darklands_oak_fence, 0);
-//		registerItemRender(ACBlocks.dreadstone, 0);
-//		registerItemRender(ACBlocks.abyssalnite_stone, 0);
 		registerItemRender(ACBlocks.dreadlands_abyssalnite_ore, 0);
 		registerItemRender(ACBlocks.dreaded_abyssalnite_ore, 0);
 		registerItemRender(ACBlocks.dreadstone_brick, 0, "dreadbrick_0");
@@ -682,7 +684,6 @@ public class AbyssalCraftClientEventHooks {
 		registerItemRender(ACBlocks.abyssalnite_stone_brick_fence, 0);
 		registerItemRender(ACBlocks.abyssalnite_stone_brick_slab, 0);
 		registerItemRender(BlockHandler.abydreadbrickslab2, 0);
-//		registerItemRender(ACBlocks.coralium_stone, 0);
 		registerItemRender(ACBlocks.coralium_stone_brick, 0, "cstonebrick_0");
 		registerItemRender(ACBlocks.coralium_stone_brick, 1, "cstonebrick_1");
 		registerItemRender(ACBlocks.coralium_stone_brick, 2, "cstonebrick_2");
@@ -710,7 +711,6 @@ public class AbyssalCraftClientEventHooks {
 		registerItemRender(ACBlocks.pearlescent_coralium_ore, 0);
 		registerItemRender(ACBlocks.liquified_coralium_ore, 0);
 		registerItemRender(ACBlocks.solid_lava, 0);
-//		registerItemRender(ACBlocks.ethaxium, 0);
 		registerItemRender(ACBlocks.ethaxium_brick, 0, "ethaxiumbrick_0");
 		registerItemRender(ACBlocks.ethaxium_brick, 1, "ethaxiumbrick_1");
 		registerItemRender(ACBlocks.ethaxium_brick, 2, "ethaxiumbrick_2");
@@ -719,7 +719,6 @@ public class AbyssalCraftClientEventHooks {
 		registerItemRender(ACBlocks.ethaxium_brick_slab, 0);
 		registerItemRender(BlockHandler.ethaxiumslab2, 0);
 		registerItemRender(ACBlocks.ethaxium_brick_fence, 0);
-//		registerItemRender(ACBlocks.omothol_stone, 0);
 		registerItemRender(ACBlocks.omothol_gateway, 0);
 		registerItemRender(ACBlocks.omothol_fire, 0);
 		registerItemRender(BlockHandler.house, 0);
@@ -749,7 +748,6 @@ public class AbyssalCraftClientEventHooks {
 		registerItemRender(ACBlocks.ritual_pedestal, 6, "ritualpedestal_6");
 		registerItemRender(ACBlocks.ritual_pedestal, 7, "ritualpedestal_7");
 		registerItemRender(ACBlocks.shoggoth_ooze, 0);
-//		registerItemRender(ACBlocks.monolith_stone, 0);
 		registerItemRender(ACBlocks.shoggoth_biomass, 0);
 		registerItemRender(ACBlocks.energy_pedestal, 0);
 		registerItemRender(ACBlocks.monolith_pillar, 0);
@@ -773,10 +771,6 @@ public class AbyssalCraftClientEventHooks {
 		registerItemRender(ACBlocks.tiered_energy_collector, 1, "tieredenergycollector_1");
 		registerItemRender(ACBlocks.tiered_energy_collector, 2, "tieredenergycollector_2");
 		registerItemRender(ACBlocks.tiered_energy_collector, 3, "tieredenergycollector_3");
-//		registerItemRender(ACBlocks.overworld_energy_relay, 0);
-//		registerItemRender(ACBlocks.abyssal_wasteland_energy_relay, 0);
-//		registerItemRender(ACBlocks.dreadlands_energy_relay, 0);
-//		registerItemRender(ACBlocks.omothol_energy_relay, 0);
 		registerItemRender(ACBlocks.tiered_energy_relay, 0, "owenergyrelay");
 		registerItemRender(ACBlocks.tiered_energy_relay, 1, "awenergyrelay");
 		registerItemRender(ACBlocks.tiered_energy_relay, 2, "dlenergyrelay");
