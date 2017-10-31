@@ -81,7 +81,7 @@ public class ModelRemnant extends ModelBase {
 		body.mirror = true;
 		setRotation(body, 0F, 0F, 0F);
 		leg1 = new ModelRenderer(this, 0, 42);
-		leg1.addBox(0F, -1F, -1F, 10, 2, 2);
+		leg1.addBox(0F, -1F, -1F, 2, 2, 2);
 		leg1.setRotationPoint(1F, 23F, 0F);
 		leg1.setTextureSize(128, 64);
 		leg1.mirror = true;
@@ -115,7 +115,7 @@ public class ModelRemnant extends ModelBase {
 		setRotation(leg14, 0F, 0F, 0F);
 		leg13.addChild(leg14);
 		leg2 = new ModelRenderer(this, 0, 42);
-		leg2.addBox(-10F, -1F, -1F, 10, 2, 2);
+		leg2.addBox(-10F, -1F, -1F, 2, 2, 2);
 		leg2.setRotationPoint(-1F, 23F, 0F);
 		leg2.setTextureSize(128, 64);
 		leg2.mirror = true;
@@ -149,7 +149,7 @@ public class ModelRemnant extends ModelBase {
 		setRotation(leg24, 0F, 0F, 0F);
 		leg23.addChild(leg24);
 		leg3 = new ModelRenderer(this, 24, 42);
-		leg3.addBox(-1F, -1F, 0F, 2, 2, 10);
+		leg3.addBox(-1F, -1F, 0F, 2, 2, 2);
 		leg3.setRotationPoint(0F, 23F, 1F);
 		leg3.setTextureSize(128, 64);
 		leg3.mirror = true;
@@ -183,7 +183,7 @@ public class ModelRemnant extends ModelBase {
 		setRotation(leg34, 0F, 0F, 0F);
 		leg33.addChild(leg34);
 		leg4 = new ModelRenderer(this, 24, 42);
-		leg4.addBox(-1F, -1F, -10F, 2, 2, 10);
+		leg4.addBox(-1F, -1F, -10F, 2, 2, 2);
 		leg4.setRotationPoint(0F, 23F, -1F);
 		leg4.setTextureSize(128, 64);
 		leg4.mirror = true;
