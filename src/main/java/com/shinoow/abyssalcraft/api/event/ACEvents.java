@@ -24,6 +24,7 @@ import net.minecraftforge.fml.common.eventhandler.Event;
 
 import com.shinoow.abyssalcraft.api.energy.EnergyEnum.DeityType;
 import com.shinoow.abyssalcraft.api.energy.disruption.DisruptionEntry;
+import com.shinoow.abyssalcraft.api.event.ACEvents.RitualEvent;
 import com.shinoow.abyssalcraft.api.ritual.NecronomiconRitual;
 
 /**

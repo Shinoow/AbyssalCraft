@@ -99,7 +99,7 @@ public class TileEntityTransmutator extends TileEntity implements ISidedInventor
 	{
 		transmutatorItemStacks.set(par1, par2ItemStack);
 
-		if (par2ItemStack != null && par2ItemStack.getCount() > getInventoryStackLimit())
+		if (!par2ItemStack.isEmpty() && par2ItemStack.getCount() > getInventoryStackLimit())
 			par2ItemStack.setCount(getInventoryStackLimit());
 	}
 
@@ -258,7 +258,7 @@ public class TileEntityTransmutator extends TileEntity implements ISidedInventor
 		else
 		{
 			ItemStack itemstack = TransmutatorRecipes.instance().getTransmutationResult(transmutatorItemStacks.get(0));
-			if (itemstack == null) return false;
+			if (itemstack.isEmpty()) return false;
 			if (transmutatorItemStacks.get(2).isEmpty()) return true;
 			if (!transmutatorItemStacks.get(2).isItemEqual(itemstack)) return false;
 			int result = transmutatorItemStacks.get(2).getCount() + itemstack.getCount();

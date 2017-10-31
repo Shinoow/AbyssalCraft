@@ -46,11 +46,11 @@ public class CrystallizerFuelRecipeMaker {
 
 					oreDictNames.add(name);
 					List<ItemStack> oreDictFuels = OreDictionary.getOres(name);
-					Collection<ItemStack> oreDictFuelsSet = stackHelper.getAllSubtypes(oreDictFuels);
+					List<ItemStack> oreDictFuelsSet = stackHelper.getAllSubtypes(oreDictFuels);
 					removeNoBurnTime(oreDictFuelsSet);
-					if (oreDictFuels.isEmpty())
+					if (oreDictFuelsSet.isEmpty())
 						continue;
-					int burnTime = getBurnTime(oreDictFuels.get(0));
+					int burnTime = getBurnTime(oreDictFuelsSet.get(0));
 
 					CrystallizerFuelRecipe recipe = new CrystallizerFuelRecipe(guiHelper, oreDictFuelsSet, burnTime);
 					if(isRecipeValid(recipe))
@@ -75,12 +75,7 @@ public class CrystallizerFuelRecipeMaker {
 	}
 
 	private static void removeNoBurnTime(Collection<ItemStack> itemStacks) {
-		Iterator<ItemStack> iterator = itemStacks.iterator();
-		while (iterator.hasNext()) {
-			ItemStack itemStack = iterator.next();
-			if (getBurnTime(itemStack) == 0)
-				iterator.remove();
-		}
+		itemStacks.removeIf(stack -> getBurnTime(stack) == 0);
 	}
 
 	private static int getBurnTime(ItemStack itemStack) {
