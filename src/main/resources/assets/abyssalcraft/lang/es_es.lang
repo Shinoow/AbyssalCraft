@@ -801,6 +801,8 @@ death.attack.dread=%1$s murio por la Dread Plaga
 death.attack.dread.player=%1$s sucumbio a la fuerza de Cha'garoth al mismo tiempo tratando de escapar de %2$s
 death.attack.antimatter=%1$s fue desarmado molecularmente
 death.attack.antimatter.player=%1$s fue desarmado molecularmente tratando de escapar de %2$s
+death.attack.shadow=%1$s was consumed by darkness
+death.attack.shadow%1$s was consumed by darkness whilst trying to escape %2$s
 
 #Tooltips
 tooltip.portalplacer.1=Haga clic derecho en el suelo para

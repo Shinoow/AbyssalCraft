@@ -65,6 +65,13 @@ public class TileEntityStatue extends TileEntity implements IEnergyManipulator, 
 	}
 
 	@Override
+	public void onLoad()
+	{
+		if(world.isRemote)
+			world.loadedTileEntityList.remove(this);
+	}
+
+	@Override
 	public SPacketUpdateTileEntity getUpdatePacket() {
 		return new SPacketUpdateTileEntity(pos, 1, getUpdateTag());
 	}
@@ -168,10 +175,8 @@ public class TileEntityStatue extends TileEntity implements IEnergyManipulator, 
 	@Override
 	public void disrupt() {
 		tolerance = 0;
-		if(!world.isRemote){
-			world.addWeatherEffect(new EntityLightningBolt(world, pos.getX(), pos.getY() + 1, pos.getZ(), false));
-			DisruptionHandler.instance().generateDisruption(getDeity(world.getBlockState(pos)), world, pos, world.getEntitiesWithinAABB(EntityPlayer.class, new AxisAlignedBB(pos).grow(16, 16, 16)));
-		}
+		world.addWeatherEffect(new EntityLightningBolt(world, pos.getX(), pos.getY() + 1, pos.getZ(), false));
+		DisruptionHandler.instance().generateDisruption(getDeity(world.getBlockState(pos)), world, pos, world.getEntitiesWithinAABB(EntityPlayer.class, new AxisAlignedBB(pos).grow(16, 16, 16)));
 	}
 
 	@Override

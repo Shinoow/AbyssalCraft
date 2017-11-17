@@ -47,9 +47,11 @@ import net.minecraftforge.fml.common.eventhandler.Event.Result;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent;
 
+import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
 import com.shinoow.abyssalcraft.api.biome.ACBiomes;
 import com.shinoow.abyssalcraft.api.biome.IDarklandsBiome;
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
+import com.shinoow.abyssalcraft.api.entity.*;
 import com.shinoow.abyssalcraft.api.event.ACEvents.RitualEvent;
 import com.shinoow.abyssalcraft.api.item.ACItems;
 import com.shinoow.abyssalcraft.api.item.ItemUpgradeKit;
@@ -156,12 +158,48 @@ public class AbyssalCraftEventHooks {
 				if(event.getSource().getTrueSource() != null && event.getEntityLiving().world.rand.nextBoolean())
 					event.getSource().getTrueSource().attackEntityFrom(getSource(event.getEntityLiving()), 1);
 		}
+		if(!event.getEntityLiving().getItemStackFromSlot(EntityEquipmentSlot.HEAD).isEmpty() &&
+				!event.getEntityLiving().getItemStackFromSlot(EntityEquipmentSlot.CHEST).isEmpty() &&
+				!event.getEntityLiving().getItemStackFromSlot(EntityEquipmentSlot.LEGS).isEmpty() &&
+				!event.getEntityLiving().getItemStackFromSlot(EntityEquipmentSlot.FEET).isEmpty()){
+			ItemStack head = event.getEntityLiving().getItemStackFromSlot(EntityEquipmentSlot.HEAD);
+			ItemStack chest = event.getEntityLiving().getItemStackFromSlot(EntityEquipmentSlot.CHEST);
+			ItemStack legs = event.getEntityLiving().getItemStackFromSlot(EntityEquipmentSlot.LEGS);
+			ItemStack feet = event.getEntityLiving().getItemStackFromSlot(EntityEquipmentSlot.FEET);
+			if(head.getItem() == ACItems.dreadium_samurai_helmet && chest.getItem() == ACItems.dreadium_samurai_chestplate &&
+					legs.getItem() == ACItems.dreadium_samurai_leggings && feet.getItem() == ACItems.dreadium_samurai_boots &&
+					event.getSource() == AbyssalCraftAPI.dread) event.setAmount(event.getAmount() * 0.5F);
+		}
 	}
 
 	private DamageSource getSource(EntityLivingBase entity){
 		if(entity instanceof EntityPlayer)
 			return DamageSource.causePlayerDamage((EntityPlayer)entity);
 		return DamageSource.causeMobDamage(entity);
+	}
+
+	@SubscribeEvent
+	public void damageStuff(LivingAttackEvent event){
+		if(event.getEntityLiving() instanceof IDreadEntity && (event.getSource().getTrueSource() instanceof IDreadEntity
+				|| event.getSource() == AbyssalCraftAPI.dread))
+			event.setCanceled(true);
+		if(event.getEntityLiving() instanceof ICoraliumEntity && (event.getSource().getTrueSource() instanceof ICoraliumEntity
+				|| event.getSource() == AbyssalCraftAPI.coralium))
+			event.setCanceled(true);
+		if(event.getEntityLiving() instanceof IAntiEntity && (event.getSource().getTrueSource() instanceof IAntiEntity
+				|| event.getSource() == AbyssalCraftAPI.antimatter))
+			event.setCanceled(true);
+		if(event.getEntityLiving().getCreatureAttribute() == AbyssalCraftAPI.SHADOW && (event.getSource().getTrueSource() instanceof EntityLivingBase
+				&& ((EntityLivingBase) event.getSource().getTrueSource()).getCreatureAttribute() == AbyssalCraftAPI.SHADOW
+				|| event.getSource() == AbyssalCraftAPI.shadow))
+			event.setCanceled(true);
+		if(event.getEntityLiving() instanceof IOmotholEntity && (event.getSource().getTrueSource() instanceof IOmotholEntity
+				|| event.getSource() == AbyssalCraftAPI.dread || event.getSource() == AbyssalCraftAPI.coralium
+				|| event.getSource() == AbyssalCraftAPI.antimatter))
+			event.setCanceled(true);
+		if(event.getEntityLiving() instanceof EntityPlayer && EntityUtil.isEntityCoralium(event.getEntityLiving()) &&
+				event.getSource() == AbyssalCraftAPI.coralium)
+			event.setCanceled(true);
 	}
 
 	@SubscribeEvent

@@ -56,4 +56,5 @@ public class ACSounds {
 	public static SoundEvent abyssal_zombie_ambient;
 	public static SoundEvent abyssal_zombie_hurt;
 	public static SoundEvent abyssal_zombie_death;
+	public static SoundEvent antiplayer_hurt;
 }

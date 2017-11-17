@@ -30,8 +30,7 @@ import org.lwjgl.input.Keyboard;
 
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.api.item.ACItems;
-import com.shinoow.abyssalcraft.api.recipe.CrystallizerRecipes;
-import com.shinoow.abyssalcraft.api.recipe.TransmutatorRecipes;
+import com.shinoow.abyssalcraft.api.recipe.*;
 import com.shinoow.abyssalcraft.client.gui.necronomicon.buttons.ButtonCategory;
 import com.shinoow.abyssalcraft.client.gui.necronomicon.buttons.ButtonHome;
 import com.shinoow.abyssalcraft.client.gui.necronomicon.buttons.ButtonNextPage;
@@ -45,8 +44,8 @@ public class GuiNecronomiconMachines extends GuiNecronomicon {
 	private ButtonNextPage buttonPreviousPage, buttonPreviousPageLong;
 	private GuiButton buttonDone;
 	private ButtonHome buttonHome;
-	private ButtonCategory info, transmutator, crystallizer;
-	private boolean isMInfo, isTra, isCry;
+	private ButtonCategory info, transmutator, crystallizer, materializer;
+	private boolean isMInfo, isTra, isCry, isMat;
 	private GuiNecronomicon parent;
 
 	public GuiNecronomiconMachines(int bookType, GuiNecronomicon parent){
@@ -69,7 +68,11 @@ public class GuiNecronomiconMachines extends GuiNecronomicon {
 			mc.displayGuiScreen(parent.withBookType(getBookType()));
 		currentNecro = this;
 		if(isCry && getBookType() == 1){
-			isInfo = isMInfo = isTra = isCry = false;
+			isInfo = isMInfo = isTra = isCry = isMat = false;
+			currTurnup = 0;
+		}
+		if(isMat && getBookType() <= 2){
+			isInfo = isMInfo = isTra = isCry = isMat = false;
 			currTurnup = 0;
 		}
 		if(isInfo)
@@ -90,8 +93,8 @@ public class GuiNecronomiconMachines extends GuiNecronomicon {
 			buttonList.add(info = new ButtonCategory(6, i + 14, b0 + 24, this, NecronomiconText.LABEL_INFO, false, ACItems.necronomicon));
 			buttonList.add(transmutator = new ButtonCategory(7, i + 14, b0 + 41, this, "container.abyssalcraft.transmutator", false, getItem(1)));
 			buttonList.add(crystallizer = new ButtonCategory(8, i + 14, b0 + 58, this, "container.abyssalcraft.crystallizer", false, getItem(2)));
-			//	buttonList.add(engraver = new ButtonCategory(6, i + 14, b0 + 75, this, StatCollector.translateToLocal("container.abyssalcraft.engraver"), getItem(3)));
-			//	buttonList.add(materializer = new ButtonCategory(7, i + 14, b0 + 92, this, StatCollector.translateToLocal("container.abyssalcraft.materializer"), getItem(3)));
+			buttonList.add(materializer = new ButtonCategory(9, i + 14, b0 + 75, this, "container.abyssalcraft.materializer", false, getItem(3)));
+			//	buttonList.add(engraver = new ButtonCategory(6, i + 14, b0 + 92, this, StatCollector.translateToLocal("container.abyssalcraft.engraver"), getItem(3)));
 		}
 		updateButtons();
 	}
@@ -107,8 +110,8 @@ public class GuiNecronomiconMachines extends GuiNecronomicon {
 		info.visible = true;
 		transmutator.visible = true;
 		crystallizer.visible = true;
+		materializer.visible = true;
 		//	engraver.visible = true;
-		//	materializer.visible = true;
 
 	}
 
@@ -128,7 +131,7 @@ public class GuiNecronomiconMachines extends GuiNecronomicon {
 				if(currTurnup == 0 && !isInfo)
 					mc.displayGuiScreen(parent.withBookType(getBookType()));
 				else if(currTurnup == 0 && isInfo){
-					isInfo = isMInfo = isTra = isCry = false;
+					isInfo = isMInfo = isTra = isCry = isMat = false;
 					initGui();
 					setTurnupLimit(2);
 				} else if (currTurnup > 0)
@@ -141,7 +144,7 @@ public class GuiNecronomiconMachines extends GuiNecronomicon {
 					mc.displayGuiScreen(new GuiNecronomicon(getBookType()));
 				else {
 					currTurnup = 0;
-					isInfo = isMInfo = isTra = isCry = false;
+					isInfo = isMInfo = isTra = isCry = isMat = false;
 					initGui();
 					setTurnupLimit(2);
 				}
@@ -157,13 +160,13 @@ public class GuiNecronomiconMachines extends GuiNecronomicon {
 				isInfo = true;
 				isCry = true;
 				drawButtons();
+			} else if(button.id == 9 && getBookType() >= 3){
+				isInfo = true;
+				isMat = true;
+				drawButtons();
 				//	} else if(button.id == 6 && getBookType() >= 3){
 				//	isInfo = true;
 				//	isEng = true;
-				//	drawButtons();
-				//	} else if(button.id == 7 && getBookType() >= 3){
-				//	isInfo = true;
-				//	isMat = true;
 				//	drawButtons();
 			}
 			updateButtons();
@@ -195,46 +198,12 @@ public class GuiNecronomiconMachines extends GuiNecronomicon {
 	}
 
 	private void setTurnups(int size){
-		if(size <= 12)
-			setTurnupLimit(1);
-		else if(size > 12 && size <= 24)
-			setTurnupLimit(2);
-		else if(size > 24 && size <= 36)
-			setTurnupLimit(3);
-		else if(size > 36 && size <= 48)
-			setTurnupLimit(4);
-		else if(size > 48 && size <= 60)
-			setTurnupLimit(5);
-		else if(size > 60 && size <= 72)
-			setTurnupLimit(6);
-		else if(size > 72 && size <= 84)
-			setTurnupLimit(7);
-		else if(size > 84 && size <= 96)
-			setTurnupLimit(8);
-		else if(size > 96 && size <= 108)
-			setTurnupLimit(9);
-		else if(size > 108 && size <= 120)
-			setTurnupLimit(10);
-		else if(size > 120 && size <= 132)
-			setTurnupLimit(11);
-		else if(size > 132 && size <= 144)
-			setTurnupLimit(12);
-		else if(size > 144 && size <= 156)
-			setTurnupLimit(13);
-		else if(size > 156 && size <= 168)
-			setTurnupLimit(14);
-		else if(size > 168 && size <= 180)
-			setTurnupLimit(15);
-		else if(size > 180 && size <= 192)
-			setTurnupLimit(16);
-		else if(size > 192 && size <= 204)
-			setTurnupLimit(17);
-		else if(size > 204 && size <= 216)
-			setTurnupLimit(18);
-		else if(size > 216 && size <= 228)
-			setTurnupLimit(19);
-		else if(size > 228 && size <= 240)
-			setTurnupLimit(20);
+		setTurnups(size, false);
+	}
+
+	private void setTurnups(int size, boolean isMat){
+		int i = !isMat ? 2 : 1;
+		setTurnupLimit((size+6*i)/(6*i));
 	}
 
 	@Override
@@ -285,67 +254,7 @@ public class GuiNecronomiconMachines extends GuiNecronomicon {
 			drawTexturedModalRect(k, b0, 0, 0, 256, 256);
 			for(int n = 0; n < trans.size(); n++){
 				Entry<ItemStack, ItemStack> entry = (Entry<ItemStack, ItemStack>) trans.entrySet().toArray()[n];
-				if(currTurnup == 0){
-					drawTItems(entry, n, 0, 6, 12, x, y);
-					if(n == 12) break;
-				} else if(currTurnup == 1){
-					drawTItems(entry, n, 12, 18, 24, x, y);
-					if(n == 24) break;
-				} else if(currTurnup == 2){
-					drawTItems(entry, n, 24, 30, 36, x, y);
-					if(n == 36) break;
-				} else if(currTurnup == 3){
-					drawTItems(entry, n, 36, 42, 48, x, y);
-					if(n == 48) break;
-				} else if(currTurnup == 4){
-					drawTItems(entry, n, 48, 54, 60, x, y);
-					if(n == 60) break;
-				} else if(currTurnup == 5){
-					drawTItems(entry, n, 60, 66, 72, x, y);
-					if(n == 72) break;
-				} else if(currTurnup == 6){
-					drawTItems(entry, n, 72, 78, 84, x, y);
-					if(n == 84) break;
-				} else if(currTurnup == 7){
-					drawTItems(entry, n, 84, 90, 96, x, y);
-					if(n == 96) break;
-				} else if(currTurnup == 8){
-					drawTItems(entry, n, 96, 102, 108, x, y);
-					if(n == 108) break;
-				} else if(currTurnup == 9){
-					drawTItems(entry, n, 108, 114, 120, x, y);
-					if(n == 120) break;
-				} else if(currTurnup == 10){
-					drawTItems(entry, n, 120, 126, 132, x, y);
-					if(n == 132) break;
-				} else if(currTurnup == 11){
-					drawTItems(entry, n, 132, 138, 144, x, y);
-					if(n == 144) break;
-				} else if(currTurnup == 12){
-					drawTItems(entry, n, 144, 150, 156, x, y);
-					if(n == 156) break;
-				} else if(currTurnup == 13){
-					drawTItems(entry, n, 156, 162, 168, x, y);
-					if(n == 168) break;
-				} else if(currTurnup == 14){
-					drawTItems(entry, n, 168, 174, 180, x, y);
-					if(n == 180) break;
-				} else if(currTurnup == 15){
-					drawTItems(entry, n, 180, 186, 192, x, y);
-					if(n == 192) break;
-				} else if(currTurnup == 16){
-					drawTItems(entry, n, 192, 198, 204, x, y);
-					if(n == 204) break;
-				} else if(currTurnup == 17){
-					drawTItems(entry, n, 204, 210, 216, x, y);
-					if(n == 216) break;
-				} else if(currTurnup == 18){
-					drawTItems(entry, n, 216, 222, 228, x, y);
-					if(n == 228) break;
-				} else if(currTurnup == 19){
-					drawTItems(entry, n, 228, 234, 240, x, y);
-					if(n == 240) break;
-				}
+				drawTItems(entry, n, currTurnup*12, currTurnup*12+6, (currTurnup+1)*12, x, y);
 			}
 		}
 		if(isCry){
@@ -360,67 +269,21 @@ public class GuiNecronomiconMachines extends GuiNecronomicon {
 			drawTexturedModalRect(k, b0, 0, 0, 256, 256);
 			for(int n = 0; n < cryst.size(); n++){
 				Entry<ItemStack, ItemStack[]> entry = (Entry<ItemStack, ItemStack[]>) cryst.entrySet().toArray()[n];
-				if(currTurnup == 0){
-					drawCItems(entry, n, 0, 6, 12, x, y);
-					if(n == 12) break;
-				} else if(currTurnup == 1){
-					drawCItems(entry, n, 12, 18, 24, x, y);
-					if(n == 24) break;
-				} else if(currTurnup == 2){
-					drawCItems(entry, n, 24, 30, 36, x, y);
-					if(n == 36) break;
-				} else if(currTurnup == 3){
-					drawCItems(entry, n, 36, 42, 48, x, y);
-					if(n == 48) break;
-				} else if(currTurnup == 4){
-					drawCItems(entry, n, 48, 54, 60, x, y);
-					if(n == 60) break;
-				} else if(currTurnup == 5){
-					drawCItems(entry, n, 60, 66, 72, x, y);
-					if(n == 72) break;
-				} else if(currTurnup == 6){
-					drawCItems(entry, n, 72, 78, 84, x, y);
-					if(n == 84) break;
-				} else if(currTurnup == 7){
-					drawCItems(entry, n, 84, 90, 96, x, y);
-					if(n == 96) break;
-				} else if(currTurnup == 8){
-					drawCItems(entry, n, 96, 102, 108, x, y);
-					if(n == 108) break;
-				} else if(currTurnup == 9){
-					drawCItems(entry, n, 108, 114, 120, x, y);
-					if(n == 120) break;
-				} else if(currTurnup == 10){
-					drawCItems(entry, n, 120, 126, 132, x, y);
-					if(n == 132) break;
-				} else if(currTurnup == 11){
-					drawCItems(entry, n, 132, 138, 144, x, y);
-					if(n == 144) break;
-				} else if(currTurnup == 12){
-					drawCItems(entry, n, 144, 150, 156, x, y);
-					if(n == 156) break;
-				} else if(currTurnup == 13){
-					drawCItems(entry, n, 156, 162, 168, x, y);
-					if(n == 168) break;
-				} else if(currTurnup == 14){
-					drawCItems(entry, n, 168, 174, 180, x, y);
-					if(n == 180) break;
-				} else if(currTurnup == 15){
-					drawCItems(entry, n, 180, 186, 192, x, y);
-					if(n == 192) break;
-				} else if(currTurnup == 16){
-					drawCItems(entry, n, 192, 198, 204, x, y);
-					if(n == 204) break;
-				} else if(currTurnup == 17){
-					drawCItems(entry, n, 204, 210, 216, x, y);
-					if(n == 216) break;
-				} else if(currTurnup == 18){
-					drawCItems(entry, n, 216, 222, 228, x, y);
-					if(n == 228) break;
-				} else if(currTurnup == 19){
-					drawCItems(entry, n, 228, 234, 240, x, y);
-					if(n == 240) break;
-				}
+				drawCItems(entry, n, currTurnup*12, currTurnup*12+6, (currTurnup+1)*12, x, y);
+			}
+		}
+		if(isMat){
+			stuff = localize("container.abyssalcraft.materializer");
+			fontRenderer.drawSplitString(stuff, k + 20, b0 + 16, 116, 0xC40000);
+			List<Materialization> mat = MaterializerRecipes.instance().getMaterializationList();
+			setTurnups(mat.size(), true);
+			GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
+			mc.renderEngine.bindTexture(NecronomiconResources.MATERIALIZATION);
+			drawTexturedModalRect(k, b0, 0, 0, 256, 256);
+			for(int n = 0; n < mat.size(); n++){
+				Materialization m = mat.get(n);
+				if((currTurnup+1)*6 > n && n > currTurnup*6-1)
+					drawMItems(m, n, currTurnup*6, 0, 0, x, y);
 			}
 		}
 
@@ -472,6 +335,26 @@ public class GuiNecronomiconMachines extends GuiNecronomicon {
 			renderItem(k + 185, b0 + 28 + (num-mid)*20 + num-mid, entry.getValue()[0], x, y);
 			renderItem(k + 185 + 34, b0 + 28 + (num-mid)*20 + num-mid, entry.getValue()[1], x, y);
 		}
+		fontRenderer.setUnicodeFlag(unicode);
+	}
+
+	private void drawMItems(Materialization mat, int num, int low, int mid, int high, int x, int y){
+		boolean unicode = fontRenderer.getUnicodeFlag();
+		fontRenderer.setUnicodeFlag(false);
+		int k = (width - guiWidth) / 2;
+		byte b0 = 2;
+
+		renderItem(k + 38, b0 + 28 + (num-low)*20 + num-low, mat.input[0].copy(), x, y);
+		if(mat.input.length >= 2)
+			renderItem(k + 59, b0 + 28 + (num-low)*20 + num-low, mat.input[1].copy(), x, y);
+		if(mat.input.length >= 3)
+			renderItem(k + 59 + 21, b0 + 28 + (num-low)*20 + num-low, mat.input[2].copy(), x, y);
+		if(mat.input.length >= 4)
+			renderItem(k + 145, b0 + 28 + (num-low)*20 + num-low, mat.input[3].copy(), x, y);
+		if(mat.input.length == 5)
+			renderItem(k + 166, b0 + 28 + (num-low)*20 + num-low, mat.input[4].copy(), x, y);
+		renderItem(k + 166 + 44, b0 + 28 + (num-low)*20 + num-low, mat.output.copy(), x, y);
+
 		fontRenderer.setUnicodeFlag(unicode);
 	}
 

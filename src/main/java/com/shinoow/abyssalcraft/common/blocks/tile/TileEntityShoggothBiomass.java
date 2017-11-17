@@ -52,6 +52,13 @@ public class TileEntityShoggothBiomass extends TileEntity implements ITickable {
 	}
 
 	@Override
+	public void onLoad()
+	{
+		if(world.isRemote)
+			world.loadedTileEntityList.remove(this);
+	}
+
+	@Override
 	public SPacketUpdateTileEntity getUpdatePacket() {
 		NBTTagCompound nbtTag = new NBTTagCompound();
 		writeToNBT(nbtTag);
@@ -71,16 +78,15 @@ public class TileEntityShoggothBiomass extends TileEntity implements ITickable {
 			if (cooldown >= 400) {
 				cooldown = world.rand.nextInt(10);
 				resetNearbyBiomass(true);
-				if(!world.isRemote)
-					if(world.getEntitiesWithinAABB(EntityLesserShoggoth.class, new AxisAlignedBB(pos).grow(16, 16, 16)).size() <= 6){
-						EntityLesserShoggoth mob = new EntityLesserShoggoth(world);
-						setPosition(mob, pos.getX(), pos.getY(), pos.getZ());
-						mob.onInitialSpawn(world.getDifficultyForLocation(pos), (IEntityLivingData)null);
-						world.spawnEntity(mob);
-						spawnedShoggoths++;
-						if(spawnedShoggoths >= 5)
-							world.setBlockState(pos, ACBlocks.stone.getStateFromMeta(7), 2);
-					}
+				if(world.getEntitiesWithinAABB(EntityLesserShoggoth.class, new AxisAlignedBB(pos).grow(16, 16, 16)).size() <= 6){
+					EntityLesserShoggoth mob = new EntityLesserShoggoth(world);
+					setPosition(mob, pos.getX(), pos.getY(), pos.getZ());
+					mob.onInitialSpawn(world.getDifficultyForLocation(pos), (IEntityLivingData)null);
+					world.spawnEntity(mob);
+					spawnedShoggoths++;
+					if(spawnedShoggoths >= 5)
+						world.setBlockState(pos, ACBlocks.stone.getStateFromMeta(7), 2);
+				}
 			}
 		}
 	}

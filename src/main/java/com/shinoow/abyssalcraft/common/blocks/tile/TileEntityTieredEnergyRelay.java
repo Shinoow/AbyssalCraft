@@ -43,6 +43,8 @@ public class TileEntityTieredEnergyRelay extends TileEntityEnergyRelay {
 	@Override
 	public void onLoad()
 	{
+		if(world.isRemote)
+			world.tickableTileEntities.remove(this);
 		ticksExisted = world.rand.nextInt(100);
 	}
 
@@ -53,7 +55,7 @@ public class TileEntityTieredEnergyRelay extends TileEntityEnergyRelay {
 		if(ticksExisted % 20 == 0)
 			PEUtils.collectNearbyPE(this, world, pos, EnumFacing.getFront(facing).getOpposite(), getDrainQuanta());
 
-		if(ticksExisted % 40 == 0 && canTransferPE() && !world.isRemote)
+		if(ticksExisted % 40 == 0 && canTransferPE())
 			transferPE(EnumFacing.getFront(facing), getTransferQuanta());
 	}
 

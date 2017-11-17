@@ -59,8 +59,9 @@ public class EntityAntiSpider extends EntityMob implements IAntiEntity {
 		tasks.addTask(6, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
 		tasks.addTask(6, new EntityAILookIdle(this));
 		targetTasks.addTask(1, new EntityAIHurtByTarget(this, false, new Class[0]));
-		targetTasks.addTask(2, new AIAntiSpiderTarget(this, EntityPlayer.class));
-		targetTasks.addTask(3, new AIAntiSpiderTarget(this, EntityIronGolem.class));
+		targetTasks.addTask(2, new AIAntiSpiderTarget(this, EntitySpider.class));
+		targetTasks.addTask(3, new AIAntiSpiderTarget(this, EntityPlayer.class));
+		targetTasks.addTask(4, new AIAntiSpiderTarget(this, EntityIronGolem.class));
 	}
 
 	@Override

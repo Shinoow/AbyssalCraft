@@ -758,6 +758,7 @@ ac.ritual.corruption=黑暗污染仪式
 ac.ritual.corruption.desc=提供4个随机的雕像，4个黑暗石，大量的能量，和活祭品，你召唤了来自深渊的能量。 污染主世界的纯净，展示黑暗的力量。
 ac.ritual.resurrection=黑暗复活
 ac.ritual.resurrection.desc=提供类似于生命六种元素的结晶混合物, 一个活祭品和一个写有堕落伙伴名字的命名牌, 来复活它。结晶的大小与堕落伙伴的生成规模有关 (例如一只鸡，一群马，或者介于它们之间的什么东西)。但是生命是有限的。
+
 #Spells
 ac.spell.lifedrain=生命吸取
 ac.spell.entropy=熵
@@ -800,6 +801,8 @@ death.attack.dread=%1$s 由于恐惧侵染而死亡
 death.attack.dread.player=在逃避 %2$s 的时候 %1$s 屈服于查加罗特的拳头之下
 death.attack.antimatter=%1$s 被解离成分子
 death.attack.antimatter.player=%1$s被解离成分子在躲避 %2$s 的时候
+death.attack.shadow=%1$s was consumed by darkness
+death.attack.shadow%1$s was consumed by darkness whilst trying to escape %2$s
 
 #Tooltips
 tooltip.portalplacer.1=右击地面来

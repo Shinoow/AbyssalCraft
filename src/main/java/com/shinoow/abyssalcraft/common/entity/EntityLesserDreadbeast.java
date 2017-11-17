@@ -32,6 +32,7 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
+import com.shinoow.abyssalcraft.api.entity.EntityUtil;
 import com.shinoow.abyssalcraft.api.entity.IDreadEntity;
 import com.shinoow.abyssalcraft.api.item.ACItems;
 import com.shinoow.abyssalcraft.lib.ACConfig;
@@ -41,13 +42,12 @@ import com.shinoow.abyssalcraft.lib.ACSounds;
 public class EntityLesserDreadbeast extends EntityMob implements IDreadEntity, IRangedAttackMob {
 
 	private static final DataParameter<Byte> CLIMBING = EntityDataManager.<Byte>createKey(EntityGreaterDreadSpawn.class, DataSerializers.BYTE);
-	private EntityAIAttackRanged arrowAttack = new EntityAIAttackRanged(this, 1.0D, 20, 15.0F);
+	private EntityAIAttackRanged arrowAttack = new EntityAIAttackRanged(this, 0.4D, 20, 15.0F);
 	private EntityAIAttackMelee attackOnCollide = new EntityAIAttackMelee(this, 0.35D, true);
 
 	public EntityLesserDreadbeast(World par1World) {
 		super(par1World);
 		setSize(1.8F, 1.8F);
-		tasks.addTask(2, attackOnCollide);
 		tasks.addTask(3, new EntityAIMoveTowardsRestriction(this, 0.35D));
 		tasks.addTask(4, new EntityAIWander(this, 0.35D));
 		tasks.addTask(5, new EntityAILookIdle(this));
@@ -92,7 +92,7 @@ public class EntityLesserDreadbeast extends EntityMob implements IDreadEntity, I
 		boolean flag = super.attackEntityAsMob(par1Entity);
 
 		if (flag)
-			if (par1Entity instanceof EntityLivingBase)
+			if (par1Entity instanceof EntityLivingBase && !EntityUtil.isEntityDread((EntityLivingBase) par1Entity))
 				((EntityLivingBase)par1Entity).addPotionEffect(new PotionEffect(AbyssalCraftAPI.dread_plague, 100));
 
 		if(ACConfig.hardcoreMode && par1Entity instanceof EntityPlayer)
@@ -203,9 +203,14 @@ public class EntityLesserDreadbeast extends EntityMob implements IDreadEntity, I
 	{
 		super.onLivingUpdate();
 
-		if(getAttackTarget() != null && getDistanceToEntity(getAttackTarget()) >= 2)
-			setAttackMode(true);
-		else setAttackMode(false);
+		if(getAttackTarget() != null)
+			if(getDistanceSqToEntity(getAttackTarget()) > 15D || getAttackTarget() instanceof EntityFlying || getAttackTarget().posY > posY + 4D){
+				tasks.addTask(2, arrowAttack);
+				tasks.removeTask(attackOnCollide);
+			} else {
+				tasks.addTask(2, attackOnCollide);
+				tasks.removeTask(arrowAttack);
+			}
 
 		if(world.rand.nextInt(200) == 0)
 			if(!world.isRemote){
@@ -219,15 +224,6 @@ public class EntityLesserDreadbeast extends EntityMob implements IDreadEntity, I
 				spawn.copyLocationAndAnglesFrom(this);
 				world.spawnEntity(spawn);
 			}
-	}
-
-	private void setAttackMode(boolean par1){
-		tasks.removeTask(arrowAttack);
-		tasks.removeTask(attackOnCollide);
-
-		if(par1)
-			tasks.addTask(2, arrowAttack);
-		else tasks.addTask(2, attackOnCollide);
 	}
 
 	@Override

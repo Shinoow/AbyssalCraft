@@ -114,6 +114,8 @@ public class NecronomiconResources {
 	//Crystallization grid (additional slot to Transmutation grid)
 	public static final ResourceLocation CRYSTALLIZATION = res("crystallization");
 
+	public static final ResourceLocation MATERIALIZATION = res("materialization");
+
 	//Blank image
 	public static final ResourceLocation BLANK = res("blank");
 

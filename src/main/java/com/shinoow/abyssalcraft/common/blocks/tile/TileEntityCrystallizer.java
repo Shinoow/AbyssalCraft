@@ -99,7 +99,7 @@ public class TileEntityCrystallizer extends TileEntity implements ISidedInventor
 	{
 		crystallizerItemStacks.set(par1, par2ItemStack);
 
-		if (par2ItemStack != null && par2ItemStack.getCount() > getInventoryStackLimit())
+		if (!par2ItemStack.isEmpty() && par2ItemStack.getCount() > getInventoryStackLimit())
 			par2ItemStack.setCount(getInventoryStackLimit());
 	}
 

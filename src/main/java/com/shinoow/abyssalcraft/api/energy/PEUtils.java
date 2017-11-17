@@ -56,12 +56,11 @@ public class PEUtils {
 				ItemStack item1 = player.getHeldItem(EnumHand.OFF_HAND);
 				if(item != null && item.getItem() instanceof IEnergyTransporterItem ||
 						item1 != null && item1.getItem() instanceof IEnergyTransporterItem)
-					if(manipulator.canTransferPE())
-						if(!world.isRemote){
-							transferPEToStack(item, manipulator);
-							transferPEToStack(item1, manipulator);
-							AbyssalCraftAPI.getInternalMethodHandler().spawnPEStream(pos, player, world.provider.getDimension());
-						}
+					if(manipulator.canTransferPE()){
+						transferPEToStack(item, manipulator);
+						transferPEToStack(item1, manipulator);
+						AbyssalCraftAPI.getInternalMethodHandler().spawnPEStream(pos, player, world.provider.getDimension());
+					}
 			}
 	}
 
@@ -103,12 +102,11 @@ public class PEUtils {
 		for(TileEntity tile : collectors)
 			if(checkForAdjacentCollectors(world, tile.getPos()))
 				if(world.rand.nextInt(120-(int)(20 * manipulator.getAmplifier(AmplifierType.DURATION))) == 0)
-					if(((IEnergyCollector) tile).canAcceptPE() && manipulator.canTransferPE())
-						if(!world.isRemote){
-							((IEnergyCollector) tile).addEnergy(manipulator.getEnergyQuanta());
-							manipulator.addTolerance(manipulator.isActive() ? 2 : 1);
-							AbyssalCraftAPI.getInternalMethodHandler().spawnPEStream(pos, tile.getPos(), world.provider.getDimension());
-						}
+					if(((IEnergyCollector) tile).canAcceptPE() && manipulator.canTransferPE()){
+						((IEnergyCollector) tile).addEnergy(manipulator.getEnergyQuanta());
+						manipulator.addTolerance(manipulator.isActive() ? 2 : 1);
+						AbyssalCraftAPI.getInternalMethodHandler().spawnPEStream(pos, tile.getPos(), world.provider.getDimension());
+					}
 	}
 
 	/**
@@ -299,8 +297,7 @@ public class PEUtils {
 		if(relay.canAcceptPE()){
 			IEnergyContainer container = getContainer(world, pos, face, 1);
 			if(container != null && container.canTransferPE())
-				if(!world.isRemote)
-					relay.addEnergy(container.consumeEnergy(amount));
+				relay.addEnergy(container.consumeEnergy(amount));
 
 		}
 	}

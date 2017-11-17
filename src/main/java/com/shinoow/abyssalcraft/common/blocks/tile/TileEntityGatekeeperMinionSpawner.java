@@ -24,6 +24,13 @@ public class TileEntityGatekeeperMinionSpawner extends TileEntity implements ITi
 	private int activatingRangeFromPlayer = 16;
 
 	@Override
+	public void onLoad()
+	{
+		if(world.isRemote)
+			world.loadedTileEntityList.remove(this);
+	}
+
+	@Override
 	public SPacketUpdateTileEntity getUpdatePacket() {
 		NBTTagCompound nbtTag = new NBTTagCompound();
 		writeToNBT(nbtTag);
@@ -39,7 +46,7 @@ public class TileEntityGatekeeperMinionSpawner extends TileEntity implements ITi
 
 	@Override
 	public void update() {
-		if (!world.isRemote && isActivated()) {
+		if (isActivated() && !world.isRemote) {
 			EntityGatekeeperMinion mob = new EntityGatekeeperMinion(world);
 			mob.setLocationAndAngles(pos.getX(), pos.getY(), pos.getZ(), MathHelper.wrapDegrees(world.rand.nextFloat() * 360.0F), 10.0F);
 			mob.onInitialSpawn(world.getDifficultyForLocation(pos), null);

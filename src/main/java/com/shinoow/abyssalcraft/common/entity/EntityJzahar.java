@@ -39,14 +39,15 @@ import net.minecraft.util.text.translation.I18n;
 import net.minecraft.world.*;
 import net.minecraft.world.BossInfo.Color;
 
-import com.shinoow.abyssalcraft.api.entity.*;
+import com.shinoow.abyssalcraft.api.entity.EntityUtil;
+import com.shinoow.abyssalcraft.api.entity.IOmotholEntity;
 import com.shinoow.abyssalcraft.lib.ACConfig;
 import com.shinoow.abyssalcraft.lib.ACLib;
 import com.shinoow.abyssalcraft.lib.ACSounds;
 import com.shinoow.abyssalcraft.lib.util.SpecialTextUtil;
 import com.shinoow.abyssalcraft.lib.world.TeleporterDarkRealm;
 
-public class EntityJzahar extends EntityMob implements IRangedAttackMob, IAntiEntity, ICoraliumEntity, IDreadEntity {
+public class EntityJzahar extends EntityMob implements IRangedAttackMob, IOmotholEntity {
 
 	private static final UUID attackDamageBoostUUID = UUID.fromString("648D7064-6A60-4F59-8ABE-C2C23A6DD7A9");
 	private static final AttributeModifier attackDamageBoost = new AttributeModifier(attackDamageBoostUUID, "Halloween Attack Damage Boost", 10.0D, 0);
@@ -55,18 +56,20 @@ public class EntityJzahar extends EntityMob implements IRangedAttackMob, IAntiEn
 	private final BossInfoServer bossInfo = (BossInfoServer)new BossInfoServer(getDisplayName(), BossInfo.Color.BLUE, BossInfo.Overlay.PROGRESS).setDarkenSky(true);
 	private boolean that = false;
 
+	private EntityAIAttackMelee aiAttackOnCollide = new EntityAIAttackMelee(this, 0.35D, true);
+	private EntityAIAttackRanged aiArrowAttack = new EntityAIAttackRanged(this, 0.4D, 40, 20.0F);
+
 	public EntityJzahar(World par1World) {
 		super(par1World);
 		setSize(1.5F, 5.7F);
 		tasks.addTask(0, new EntityAISwimming(this));
-		tasks.addTask(2, new EntityAIAttackMelee(this, 0.35D, true));
-		tasks.addTask(3, new EntityAIAttackRanged(this, 0.4D, 40, 20.0F));
-		tasks.addTask(4, new EntityAIMoveTowardsRestriction(this, 0.35D));
-		tasks.addTask(5, new EntityAIWander(this, 0.35D));
-		tasks.addTask(6, new EntityAILookIdle(this));
-		tasks.addTask(6, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
+		tasks.addTask(3, new EntityAIMoveTowardsRestriction(this, 0.35D));
+		tasks.addTask(4, new EntityAIWander(this, 0.35D));
+		tasks.addTask(5, new EntityAILookIdle(this));
+		tasks.addTask(5, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
 		targetTasks.addTask(1, new EntityAIHurtByTarget(this, false));
 		targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityPlayer.class, true));
+		isImmuneToFire = true;
 	}
 
 	@Override
@@ -81,12 +84,15 @@ public class EntityJzahar extends EntityMob implements IRangedAttackMob, IAntiEn
 
 		if(ACConfig.hardcoreMode){
 			getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(1000.0D);
-			getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(40.0D);
+			getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(100.0D);
 		} else {
 			getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(500.0D);
-			getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(20.0D);
+			getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(50.0D);
 		}
 	}
+
+	@Override
+	public void fall(float distance, float damageMultiplier) {}
 
 	@Override
 	protected SoundEvent getAmbientSound()
@@ -134,6 +140,10 @@ public class EntityJzahar extends EntityMob implements IRangedAttackMob, IAntiEn
 	protected void updateAITasks()
 	{
 		super.updateAITasks();
+
+		if (isEntityAlive() && getAttackTarget() != null && getAttackTarget().isEntityAlive() && getDistanceSqToEntity(getAttackTarget()) < width * width + getAttackTarget().width * getAttackTarget().width + 36D && (ticksExisted + getEntityId()) % 10 == 0)
+			attackEntityAsMob(getAttackTarget());
+
 		bossInfo.setPercent(getHealth() / getMaxHealth());
 		if(getHealth() > getMaxHealth() * 0.75 && bossInfo.getColor() != BossInfo.Color.BLUE)
 			bossInfo.setColor(Color.BLUE);
@@ -181,6 +191,15 @@ public class EntityJzahar extends EntityMob implements IRangedAttackMob, IAntiEn
 	public boolean attackEntityFrom(DamageSource par1DamageSource, float par2)
 	{
 		if(par2 > 30) par2 = 10 + world.rand.nextInt(10);
+
+		if (par1DamageSource.isFireDamage())
+			return false;
+
+		if (par1DamageSource.isExplosion())
+			return false;
+
+		if (par1DamageSource.isMagicDamage())
+			return false;
 
 		return super.attackEntityFrom(par1DamageSource, par2);
 	}
@@ -235,6 +254,18 @@ public class EntityJzahar extends EntityMob implements IRangedAttackMob, IAntiEn
 	{
 		if(talkTimer > 0)
 			talkTimer--;
+
+		if(getAttackTarget() != null)
+			if(getDistanceSqToEntity(getAttackTarget()) > 20D || getAttackTarget() instanceof EntityFlying || getAttackTarget().posY > posY + 4D)
+			{
+				tasks.addTask(2, aiArrowAttack);
+				tasks.removeTask(aiAttackOnCollide);
+			}
+			else
+			{
+				tasks.addTask(2, aiAttackOnCollide);
+				tasks.removeTask(aiArrowAttack);
+			}
 
 		float f = (rand.nextFloat() - 0.5F) * 8.0F;
 		float f1 = (rand.nextFloat() - 0.5F) * 4.0F;
