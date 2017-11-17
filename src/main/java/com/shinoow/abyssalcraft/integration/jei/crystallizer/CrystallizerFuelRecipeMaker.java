@@ -67,7 +67,12 @@ public class CrystallizerFuelRecipeMaker {
 	}
 
 	private static void removeNoBurnTime(Collection<ItemStack> itemStacks) {
-		itemStacks.removeIf(stack -> getBurnTime(stack) == 0);
+		Iterator<ItemStack> iterator = itemStacks.iterator();
+		while (iterator.hasNext()) {
+			ItemStack itemStack = iterator.next();
+			if (getBurnTime(itemStack) == 0)
+				iterator.remove();
+		}
 	}
 
 	private static int getBurnTime(ItemStack itemStack) {

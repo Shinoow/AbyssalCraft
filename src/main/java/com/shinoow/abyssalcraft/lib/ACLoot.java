@@ -21,6 +21,8 @@ import net.minecraft.world.storage.loot.LootTableList;
  */
 public class ACLoot {
 
+	public static void init(){ /* Nothing special here, just initializing all the static things */}
+
 	public static final ResourceLocation CHEST_ABYSSAL_STRONGHOLD_CORRIDOR = LootTableList.register(new ResourceLocation("abyssalcraft", "chests/stronghold_corridor"));
 	public static final ResourceLocation CHEST_ABYSSAL_STRONGHOLD_CROSSING = LootTableList.register(new ResourceLocation("abyssalcraft", "chests/stronghold_crossing"));
 	public static final ResourceLocation CHEST_DREADLANDS_MINESHAFT = LootTableList.register(new ResourceLocation("abyssalcraft", "chests/mineshaft"));

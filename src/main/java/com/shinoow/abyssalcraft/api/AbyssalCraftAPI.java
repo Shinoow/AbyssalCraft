@@ -53,7 +53,7 @@ public class AbyssalCraftAPI {
 	/**
 	 * String used to specify the API version in the "package-info.java" classes
 	 */
-	public static final String API_VERSION = "1.10.1";
+	public static final String API_VERSION = "1.11.0";
 
 	public static Enchantment coralium_enchantment, dread_enchantment, light_pierce, iron_wall;
 
@@ -65,6 +65,7 @@ public class AbyssalCraftAPI {
 	public static DamageSource coralium = new DamageSource("coralium").setDamageBypassesArmor().setMagicDamage();
 	public static DamageSource dread = new DamageSource("dread").setDamageBypassesArmor().setMagicDamage();
 	public static DamageSource antimatter = new DamageSource("antimatter").setDamageBypassesArmor().setDamageIsAbsolute().setMagicDamage();
+	public static DamageSource shadow = new DamageSource("shadow").setDamageBypassesArmor().setDamageIsAbsolute().setMagicDamage();
 
 	private static List<ItemStack> crystals = Lists.newArrayList();
 
@@ -455,11 +456,26 @@ public class AbyssalCraftAPI {
 	 * @param xp Amount of exp given
 	 *
 	 * @since 1.4.5
+	 *
+	 * @deprecated Use the one where input and output params have swapped places
 	 */
+	@Deprecated
 	public static void addMaterialization(ItemStack[] input, ItemStack output){
+		addMaterialization(output, input);
+	}
+
+	/**
+	 * Basic Materialization.<br>
+	 * Note: all inputs has to be either {@link ICrystal}s or be registered in the Crystal List {@link AbyssalCraftAPI#addCrystal(ItemStack)}
+	 * @param output The output
+	 * @param input An array of ItemStacks (maximum is 5)
+	 *
+	 * @since 1.11.0
+	 */
+	public static void addMaterialization(ItemStack output, ItemStack...input){
 		for(ItemStack item : input)
 			if(!APIUtils.isCrystal(item)) throw new ClassCastException("All of the input items has to be Crystals!");
-		if(input.length > 0)
+		if(input.length > 0 && input != null)
 			if(input.length <= 5)
 				MaterializerRecipes.instance().materialize(input, output);
 			else FMLLog.log("AbyssalCraftAPI", Level.ERROR, "This Materializer recipe has more than 5 inputs! (%d)", input.length);

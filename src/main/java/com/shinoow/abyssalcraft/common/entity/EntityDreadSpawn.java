@@ -33,6 +33,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
+import com.shinoow.abyssalcraft.api.entity.EntityUtil;
 import com.shinoow.abyssalcraft.api.entity.IDreadEntity;
 import com.shinoow.abyssalcraft.api.item.ACItems;
 import com.shinoow.abyssalcraft.lib.ACConfig;
@@ -89,7 +90,7 @@ public class EntityDreadSpawn extends EntityMob implements IDreadEntity
 		boolean flag = super.attackEntityAsMob(par1Entity);
 
 		if (flag)
-			if (par1Entity instanceof EntityLivingBase)
+			if (par1Entity instanceof EntityLivingBase && !EntityUtil.isEntityDread((EntityLivingBase) par1Entity))
 				((EntityLivingBase)par1Entity).addPotionEffect(new PotionEffect(AbyssalCraftAPI.dread_plague, 100));
 
 		if(ACConfig.hardcoreMode && par1Entity instanceof EntityPlayer)

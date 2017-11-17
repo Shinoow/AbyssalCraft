@@ -799,10 +799,12 @@ key.staff_mode.desc=Change Staff of The Gatekeeper Mode
 #Damagesources
 death.attack.coralium=%1$s died from the Coralium Plague
 death.attack.coralium.player=%1$s succumbed to the Coralium Plague whilst trying to escape %2$s
-death.attack.dread=%1$s died from Dread Plague
+death.attack.dread=%1$s died from the Dread Plague
 death.attack.dread.player=%1$s succumbed to the might of Cha'garoth whilst trying to escape %2$s
 death.attack.antimatter=%1$s was molecularly disassembled
 death.attack.antimatter.player=%1$s was molecularly disassembled trying to escape %2$s
+death.attack.shadow=%1$s was consumed by darkness
+death.attack.shadow%1$s was consumed by darkness whilst trying to escape %2$s
 
 #Tooltips
 tooltip.portalplacer.1=Clic-droit sur le sol pour

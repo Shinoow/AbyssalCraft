@@ -12,27 +12,36 @@
 package com.shinoow.abyssalcraft.common.entity;
 
 import java.util.Calendar;
+import java.util.List;
 
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.*;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
+import net.minecraft.init.MobEffects;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.*;
+import net.minecraft.util.math.*;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
+import com.google.common.base.Predicate;
+import com.google.common.base.Predicates;
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
-import com.shinoow.abyssalcraft.api.entity.IAntiEntity;
-import com.shinoow.abyssalcraft.api.entity.ICoraliumEntity;
-import com.shinoow.abyssalcraft.api.entity.IDreadEntity;
+import com.shinoow.abyssalcraft.api.entity.IOmotholEntity;
 import com.shinoow.abyssalcraft.api.item.ACItems;
 import com.shinoow.abyssalcraft.lib.*;
 
-public class EntityShadowBeast extends EntityMob implements IAntiEntity, ICoraliumEntity, IDreadEntity {
+public class EntityShadowBeast extends EntityMob implements IOmotholEntity {
+
+	private int shadowFlameShootTimer;
 
 	public EntityShadowBeast(World par1World) {
 		super(par1World);
@@ -117,7 +126,120 @@ public class EntityShadowBeast extends EntityMob implements IAntiEntity, ICorali
 		for (int i = 0; i < 2 && ACConfig.particleEntity && world.provider.getDimension() != ACLib.dark_realm_id; ++i)
 			world.spawnParticle(EnumParticleTypes.SMOKE_LARGE, posX + (rand.nextDouble() - 0.5D) * width, posY + rand.nextDouble() * height, posZ + (rand.nextDouble() - 0.5D) * width, 0.0D, 0.0D, 0.0D);
 
+		if (getAttackTarget() != null && getDistanceSqToEntity(getAttackTarget()) <= 64D && shadowFlameShootTimer <= -300) shadowFlameShootTimer = 100;
+
+		if (shadowFlameShootTimer > 0)
+		{
+			motionX *= 0.05D;
+			motionZ *= 0.05D;
+			world.setEntityState(this, (byte)23);
+			if (ticksExisted % 5 == 0)
+				world.playSound(null, new BlockPos(posX + 0.5D, posY + getEyeHeight(), posZ + 0.5D), SoundEvents.ENTITY_GHAST_SHOOT, getSoundCategory(), 0.5F + getRNG().nextFloat(), getRNG().nextFloat() * 0.7F + 0.3F);
+			Entity target = getHeadLookTarget();
+			if (target != null) {
+				List<EntityLivingBase> list = world.getEntitiesWithinAABB(EntityLivingBase.class, target.getEntityBoundingBox().expand(2.0D, 2.0D, 2.0D), Predicates.and(new Predicate[] { EntitySelectors.IS_ALIVE }));
+
+				for(EntityLivingBase entity : list)
+					if (entity != null && rand.nextInt(3) == 0) if (entity.attackEntityFrom(AbyssalCraftAPI.shadow, (float)(4.5D - getDistanceToEntity(entity)))) {
+						entity.addPotionEffect(new PotionEffect(MobEffects.BLINDNESS, 100));
+						entity.addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, 100, 1));
+					}
+
+				if (target.attackEntityFrom(AbyssalCraftAPI.shadow, (float)(4.5D - getDistanceToEntity(target)))) if(target instanceof EntityLivingBase)
+				{
+					((EntityLivingBase)target).addPotionEffect(new PotionEffect(MobEffects.BLINDNESS, 200));
+					((EntityLivingBase)target).addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, 200, 1));
+				}
+			}
+		}
+
+		--shadowFlameShootTimer;
+
 		super.onLivingUpdate();
+	}
+
+	private Entity getHeadLookTarget()
+	{
+		Entity pointedEntity = null;
+		double range = 4D + rand.nextDouble() * 8D;
+		Vec3d srcVec = new Vec3d(posX, posY + getEyeHeight(), posZ);
+		Vec3d lookVec = getLook(1.0F);
+		RayTraceResult raytrace = world.rayTraceBlocks(srcVec, srcVec.addVector(lookVec.xCoord * range, lookVec.yCoord * range, lookVec.zCoord * range));
+		BlockPos hitpos = raytrace != null ? raytrace.getBlockPos() : null;
+		double rx = hitpos == null ? range : Math.min(range, Math.abs(posX - hitpos.getX()));
+		double ry = hitpos == null ? range : Math.min(range, Math.abs(posY - hitpos.getY()));
+		double rz = hitpos == null ? range : Math.min(range, Math.abs(posZ - hitpos.getZ()));
+		Vec3d destVec = srcVec.addVector(lookVec.xCoord * range, lookVec.yCoord * range, lookVec.zCoord * range);
+		float var9 = 4.0F;
+		List<Entity> possibleList = world.getEntitiesWithinAABBExcludingEntity(this, getEntityBoundingBox().offset(lookVec.xCoord * rx, lookVec.yCoord * ry, lookVec.zCoord * rz).expand(var9, var9, var9));
+		double hitDist = 0.0D;
+		for (Entity possibleEntity : possibleList)
+			if (possibleEntity != this && possibleEntity instanceof EntityLivingBase)
+			{
+				float borderSize = possibleEntity.getCollisionBorderSize();
+				AxisAlignedBB collisionBB = possibleEntity.getEntityBoundingBox().expand(borderSize, borderSize, borderSize);
+				RayTraceResult interceptPos = collisionBB.calculateIntercept(srcVec, destVec);
+				if (collisionBB.isVecInside(srcVec))
+				{
+					if (0.0D < hitDist || hitDist == 0.0D)
+					{
+						pointedEntity = possibleEntity;
+						hitDist = 0.0D;
+					}
+				}
+				else if (interceptPos != null)
+				{
+					double possibleDist = srcVec.distanceTo(interceptPos.hitVec);
+					if (possibleDist < hitDist || hitDist == 0.0D)
+					{
+						pointedEntity = possibleEntity;
+						hitDist = possibleDist;
+					}
+				}
+			}
+		return pointedEntity;
+	}
+
+	protected void addMouthParticles()
+	{
+		if (world.isRemote)
+		{
+			Vec3d vector = getLookVec();
+
+			double px = posX;
+			double py = posY + getEyeHeight();
+			double pz = posZ;
+
+
+			for (int i = 0; i < 15; i++)
+			{
+				double dx = vector.xCoord;
+				double dy = vector.yCoord;
+				double dz = vector.zCoord;
+
+				double spread = 5.0D + getRNG().nextDouble() * 2.5D;
+				double velocity = 0.5D + getRNG().nextDouble() * 0.5D;
+
+				dx += getRNG().nextGaussian() * 0.007499999832361937D * spread;
+				dy += getRNG().nextGaussian() * 0.007499999832361937D * spread;
+				dz += getRNG().nextGaussian() * 0.007499999832361937D * spread;
+				dx *= velocity;
+				dy *= velocity;
+				dz *= velocity;
+
+				world.spawnParticle(EnumParticleTypes.SMOKE_LARGE, px + getRNG().nextDouble() - 0.5D, py + getRNG().nextDouble() - 0.5D, pz + getRNG().nextDouble() - 0.5D, dx, dy, dz);
+			}
+		} else
+			world.setEntityState(this, (byte)23);
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public void handleStatusUpdate(byte id)
+	{
+		if (id == 23) addMouthParticles();
+		else
+			super.handleStatusUpdate(id);
 	}
 
 	@Override

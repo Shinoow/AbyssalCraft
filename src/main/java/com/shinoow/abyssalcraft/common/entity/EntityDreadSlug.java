@@ -11,6 +11,7 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.common.entity;
 
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityThrowable;
@@ -41,22 +42,27 @@ public class EntityDreadSlug extends EntityThrowable {
 	@Override
 	protected void onImpact(RayTraceResult mop) {
 
-		if (mop.entityHit != null)
+		if (isBeingRidden() && isEntityInsideOpaqueBlock())
+		{
+			for (Entity entity : getPassengers())
+				entity.copyLocationAndAnglesFrom(this);
+			setDead();
+		}
+
+		if(ticksExisted > 10 && mop.entityHit != null)
 		{
 			byte b0 = 6;
 
-			if(mop.entityHit instanceof EntityLivingBase && !EntityUtil.isEntityDread((EntityLivingBase) mop.entityHit))
-				((EntityLivingBase)mop.entityHit).addPotionEffect(new PotionEffect(AbyssalCraftAPI.dread_plague, 100));
-
-			if(!(mop.entityHit instanceof EntityGreaterDreadSpawn))
-				mop.entityHit.attackEntityFrom(DamageSource.causeThrownDamage(this, getThrower()), b0);
-
 			if(ACConfig.hardcoreMode && mop.entityHit instanceof EntityPlayer)
 				mop.entityHit.attackEntityFrom(DamageSource.causeThrownDamage(this, getThrower()).setDamageBypassesArmor().setDamageIsAbsolute(), 1F);
-		}
 
-		if (!world.isRemote)
-			setDead();
+			if(mop.entityHit instanceof EntityLivingBase && !EntityUtil.isEntityDread((EntityLivingBase) mop.entityHit)){
+				if(!world.isRemote)
+					((EntityLivingBase)mop.entityHit).addPotionEffect(new PotionEffect(AbyssalCraftAPI.dread_plague, 100));
+				mop.entityHit.attackEntityFrom(DamageSource.causeThrownDamage(this, getThrower()), b0);
+				setDead();
+			}
+		}
 	}
 
 }

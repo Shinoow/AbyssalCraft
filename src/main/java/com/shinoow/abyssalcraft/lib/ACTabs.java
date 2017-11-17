@@ -24,6 +24,8 @@ import com.shinoow.abyssalcraft.api.item.ACItems;
  */
 public class ACTabs {
 
+	public static void init(){ /* Nothing special here, just initializing all the static things */}
+
 	public static final CreativeTabs tabBlock = new CreativeTabs("acblocks"){
 
 		@Override

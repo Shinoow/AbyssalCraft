@@ -48,6 +48,8 @@ public class TileEntityEnergyRelay extends TileEntity implements IEnergyTranspor
 	@Override
 	public void onLoad()
 	{
+		if(world.isRemote)
+			world.loadedTileEntityList.remove(this);
 		ticksExisted = world.rand.nextInt(100);
 	}
 
@@ -76,7 +78,7 @@ public class TileEntityEnergyRelay extends TileEntity implements IEnergyTranspor
 			if(world.getBlockState(pos).getProperties().containsKey(BlockEnergyRelay.FACING))
 				PEUtils.collectNearbyPE(this, world, pos, world.getBlockState(pos).getValue(BlockEnergyRelay.FACING).getOpposite(), 5);
 
-		if(ticksExisted % 40 == 0 && canTransferPE() && !world.isRemote)
+		if(ticksExisted % 40 == 0 && canTransferPE())
 			if(world.getBlockState(pos).getProperties().containsKey(BlockEnergyRelay.FACING))
 				transferPE(world.getBlockState(pos).getValue(BlockEnergyRelay.FACING), 10);
 	}

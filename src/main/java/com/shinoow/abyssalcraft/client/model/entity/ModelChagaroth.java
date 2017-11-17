@@ -15,6 +15,7 @@ import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.math.MathHelper;
 
 import com.shinoow.abyssalcraft.common.entity.EntityChagaroth;
@@ -837,7 +838,7 @@ public class ModelChagaroth extends ModelBase {
 		GlStateManager.pushMatrix();
 		super.render(entity, f, f1, f2, f3, f4, f5);
 		GlStateManager.scale(2.0F, 2.0F, 2.0F);
-		GlStateManager.translate(0F, -0.75F, 0F);
+		GlStateManager.translate(-0.175F, -0.75F, 0.5F);
 		setRotationAngles(f, f1, f2, f3, f4, f5, entity);
 		frontspike1.render(f5);
 		frontspike2.render(f5);
@@ -911,12 +912,6 @@ public class ModelChagaroth extends ModelBase {
 		lefthead.rotateAngleY = f3 / (180F / (float)Math.PI);
 		lefthead.rotateAngleX = f4 / (180F / (float)Math.PI);
 
-		middlehead.rotateAngleY = f3 / (180F / (float)Math.PI);
-		middlehead.rotateAngleX = f4 / (180F / (float)Math.PI);
-
-		righthead.rotateAngleY = f3 / (180F / (float)Math.PI);
-		righthead.rotateAngleX = f4 / (180F / (float)Math.PI);
-
 		walltentacle1.rotateAngleX = MathHelper.cos(f4 * 0.6662F + (float)Math.PI) * 2.0F * f1 * 0.5F;
 		walltentacle2.rotateAngleX = MathHelper.cos(f4 * 0.6662F) * 2.0F * f1 * 0.5F;
 		walltentacle3.rotateAngleX = MathHelper.cos(f4 * 0.6662F + (float)Math.PI) * 2.0F * f1 * 0.5F;
@@ -972,16 +967,12 @@ public class ModelChagaroth extends ModelBase {
 		}
 		if(((EntityChagaroth)entity).deathTicks == 0){
 
-			lefthead.rotateAngleY = f3 / (180F / (float)Math.PI);
-			lefthead.rotateAngleX = f4 / (180F / (float)Math.PI);
 			lefthead.rotateAngleZ = 0;
 
 			middlehead.rotateAngleY = f3 / (180F / (float)Math.PI);
 			middlehead.rotateAngleX = f4 / (180F / (float)Math.PI);
 			middlehead.rotateAngleZ = 0;
 
-			righthead.rotateAngleY = f3 / (180F / (float)Math.PI);
-			righthead.rotateAngleX = f4 / (180F / (float)Math.PI);
 			righthead.rotateAngleZ = 0;
 
 			walltentacle1.isHidden = false;
@@ -996,5 +987,16 @@ public class ModelChagaroth extends ModelBase {
 			leftwall.isHidden = false;
 			rightwall.isHidden = false;
 		}
+	}
+
+	@Override
+	public void setLivingAnimations(EntityLivingBase p_78086_1_, float p_78086_2, float p_78086_3, float p_78086_4)
+	{
+		EntityChagaroth entitychagaroth = (EntityChagaroth)p_78086_1_;
+
+		lefthead.rotateAngleY = (entitychagaroth.getHeadYRotation(0) - p_78086_1_.renderYawOffset) * 0.017453292F;
+		lefthead.rotateAngleX = entitychagaroth.getHeadXRotation(0) * 0.017453292F;
+		righthead.rotateAngleY = (entitychagaroth.getHeadYRotation(1) - p_78086_1_.renderYawOffset) * 0.017453292F;
+		righthead.rotateAngleX = entitychagaroth.getHeadXRotation(1) * 0.017453292F;
 	}
 }

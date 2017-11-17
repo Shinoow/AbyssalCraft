@@ -57,15 +57,16 @@ public class EntityAntiCreeper extends EntityMob implements IAntiEntity {
 
 	public EntityAntiCreeper(World par1World){
 		super(par1World);
-		tasks.addTask(1, new EntityAISwimming(this));
+		tasks.addTask(0, new EntityAISwimming(this));
 		tasks.addTask(2, new EntityAIAntiCreeperSwell(this));
 		tasks.addTask(3, new EntityAIAvoidEntity(this, EntityOcelot.class, 6.0F, 1.0D, 1.2D));
 		tasks.addTask(4, new EntityAIAttackMelee(this, 1.0D, false));
 		tasks.addTask(5, new EntityAIWander(this, 0.8D));
 		tasks.addTask(6, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
 		tasks.addTask(6, new EntityAILookIdle(this));
-		targetTasks.addTask(1, new EntityAINearestAttackableTarget(this, EntityPlayer.class, true));
-		targetTasks.addTask(2, new EntityAIHurtByTarget(this, false));
+		targetTasks.addTask(1, new EntityAINearestAttackableTarget(this, EntityCreeper.class, true));
+		targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityPlayer.class, true));
+		targetTasks.addTask(3, new EntityAIHurtByTarget(this, false));
 	}
 
 	@Override

@@ -20,6 +20,7 @@ import net.minecraft.entity.ai.*;
 import net.minecraft.entity.ai.attributes.*;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.monster.EntityZombie;
+import net.minecraft.entity.passive.EntityVillager;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.SoundEvents;
@@ -71,7 +72,9 @@ public class EntityAntiZombie extends EntityMob implements IAntiEntity {
 		tasks.addTask(8, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
 		tasks.addTask(8, new EntityAILookIdle(this));
 		targetTasks.addTask(1, new EntityAIHurtByTarget(this, true));
-		targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityPlayer.class, true));
+		targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityZombie.class, true));
+		targetTasks.addTask(3, new EntityAINearestAttackableTarget(this, EntityPlayer.class, true));
+		targetTasks.addTask(4, new EntityAINearestAttackableTarget(this, EntityVillager.class, false));
 		setSize(0.6F, 1.8F);
 	}
 

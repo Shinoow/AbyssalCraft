@@ -90,6 +90,13 @@ public class TileEntityEnergyDepositioner extends TileEntity implements IEnergyM
 	}
 
 	@Override
+	public void onLoad()
+	{
+		if(world.isRemote)
+			world.loadedTileEntityList.remove(this);
+	}
+
+	@Override
 	public SPacketUpdateTileEntity getUpdatePacket() {
 		return new SPacketUpdateTileEntity(pos, 1, getUpdateTag());
 	}
@@ -201,10 +208,8 @@ public class TileEntityEnergyDepositioner extends TileEntity implements IEnergyM
 	@Override
 	public void disrupt() {
 		tolerance = 0;
-		if(!world.isRemote){
-			world.addWeatherEffect(new EntityLightningBolt(world, pos.getX(), pos.getY() + 1, pos.getZ(), false));
-			DisruptionHandler.instance().generateDisruption(DeityType.values()[world.rand.nextInt(DeityType.values().length)], world, pos, world.getEntitiesWithinAABB(EntityPlayer.class, new AxisAlignedBB(pos).expand(16, 16, 16)));
-		}
+		world.addWeatherEffect(new EntityLightningBolt(world, pos.getX(), pos.getY() + 1, pos.getZ(), false));
+		DisruptionHandler.instance().generateDisruption(DeityType.values()[world.rand.nextInt(DeityType.values().length)], world, pos, world.getEntitiesWithinAABB(EntityPlayer.class, new AxisAlignedBB(pos).expand(16, 16, 16)));
 	}
 
 	public float getContainedEnergy(){
@@ -221,21 +226,20 @@ public class TileEntityEnergyDepositioner extends TileEntity implements IEnergyM
 
 		boolean flag = false;
 
-		if(!world.isRemote)
-			if(canProcess()){
+		if(canProcess()){
 
-				++processingTime;
-				energy += drainPEFromInput();
-				if(energy > 10000) energy = 10000;
+			++processingTime;
+			energy += drainPEFromInput();
+			if(energy > 10000) energy = 10000;
 
-				if(processingTime == 200){
+			if(processingTime == 200){
 
-					processingTime = 0;
-					processItem();
-					flag = true;
+				processingTime = 0;
+				processItem();
+				flag = true;
 
-				}
-			} else processingTime = 0;
+			}
+		} else processingTime = 0;
 
 		if(flag)
 			markDirty();

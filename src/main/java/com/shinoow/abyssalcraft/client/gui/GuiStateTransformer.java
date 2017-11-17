@@ -51,7 +51,7 @@ public class GuiStateTransformer extends GuiContainer {
 			buttonList.clear();
 			int i = (width - xSize) / 2;
 			int j = (height - ySize) / 2;
-			buttonList.add(new GuiButton(0, i + 2, j + 95, 40, 20, tileCompressorThing.mode == 0 ? "Insert" : "Extract"));
+			buttonList.add(new GuiButton(0, i + 2, j + 95, 40, 20, I18n.format("gui.abyssalcraft.statetransformer."+ (tileCompressorThing.mode == 0 ? "insert" : "extract"))));
 			PacketDispatcher.sendToServer(new UpdateModeMessage(tileCompressorThing.mode));
 		}
 	}

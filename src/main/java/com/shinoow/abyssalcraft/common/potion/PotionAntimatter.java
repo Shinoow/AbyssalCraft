@@ -23,7 +23,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
-import com.shinoow.abyssalcraft.api.entity.IAntiEntity;
+import com.shinoow.abyssalcraft.api.entity.EntityUtil;
 import com.shinoow.abyssalcraft.common.entity.EntityAbyssalZombie;
 import com.shinoow.abyssalcraft.common.entity.EntityDepthsGhoul;
 import com.shinoow.abyssalcraft.common.entity.anti.*;
@@ -48,9 +48,9 @@ public class PotionAntimatter extends Potion{
 	@Override
 	public void performEffect(EntityLivingBase par1EntityLivingBase, int par2){
 
-		if(par1EntityLivingBase instanceof IAntiEntity)
-			par1EntityLivingBase.removePotionEffect(this);
-		else par1EntityLivingBase.attackEntityFrom(AbyssalCraftAPI.antimatter, 5);
+		if(EntityUtil.isEntityAnti(par1EntityLivingBase)) return;
+
+		par1EntityLivingBase.attackEntityFrom(AbyssalCraftAPI.antimatter, 5);
 
 		if(par1EntityLivingBase instanceof EntityPlayer && !par1EntityLivingBase.isDead && wasKilled)
 			wasKilled = false;

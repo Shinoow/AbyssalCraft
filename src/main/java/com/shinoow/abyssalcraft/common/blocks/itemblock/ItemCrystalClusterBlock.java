@@ -18,10 +18,11 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.translation.I18n;
 
+import com.shinoow.abyssalcraft.api.item.ICrystal;
 import com.shinoow.abyssalcraft.common.blocks.BlockCrystalCluster.EnumCrystalType;
 import com.shinoow.abyssalcraft.lib.ACLib;
 
-public class ItemCrystalClusterBlock extends ItemMetadataBlock {
+public class ItemCrystalClusterBlock extends ItemMetadataBlock implements ICrystal {
 
 	public ItemCrystalClusterBlock(Block block) {
 		super(block);

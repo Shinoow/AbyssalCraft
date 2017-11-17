@@ -154,8 +154,6 @@ public class MaterializerRecipes {
 	private void replaceBagContents(ItemStack bag, ItemStack[] inventory){
 		if(!bag.hasTagCompound())
 			bag.setTagCompound(new NBTTagCompound());
-		NBTTagCompound tag = new NBTTagCompound();
-		bag.writeToNBT(tag);
 
 		NBTTagList items = new NBTTagList();
 
@@ -168,9 +166,7 @@ public class MaterializerRecipes {
 				items.appendTag(item);
 			}
 
-		tag.setTag("ItemInventory", items);
-
-		bag.deserializeNBT(tag);
+		bag.getTagCompound().setTag("ItemInventory", items);
 	}
 
 	private boolean areStacksEqual(ItemStack par1ItemStack, ItemStack par2ItemStack)

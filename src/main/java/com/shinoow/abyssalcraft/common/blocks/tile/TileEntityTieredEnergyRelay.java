@@ -25,6 +25,8 @@ public abstract class TileEntityTieredEnergyRelay extends TileEntityEnergyRelay 
 	@Override
 	public void onLoad()
 	{
+		if(world.isRemote)
+			world.loadedTileEntityList.remove(this);
 		ticksExisted = world.rand.nextInt(100);
 	}
 
@@ -36,7 +38,7 @@ public abstract class TileEntityTieredEnergyRelay extends TileEntityEnergyRelay 
 			if(world.getBlockState(pos).getProperties().containsKey(BlockEnergyRelay.FACING))
 				PEUtils.collectNearbyPE(this, world, pos, world.getBlockState(pos).getValue(BlockEnergyRelay.FACING).getOpposite(), getDrainQuanta());
 
-		if(ticksExisted % 40 == 0 && canTransferPE() && !world.isRemote)
+		if(ticksExisted % 40 == 0 && canTransferPE())
 			if(world.getBlockState(pos).getProperties().containsKey(BlockEnergyRelay.FACING))
 				transferPE(world.getBlockState(pos).getValue(BlockEnergyRelay.FACING), getTransferQuanta());
 	}

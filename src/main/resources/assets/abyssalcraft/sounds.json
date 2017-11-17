@@ -338,5 +338,12 @@
 			"abyssalcraft:abyzombie/death"
 		],
 		"subtitle": "subtitle.abyssalcraft.abyssalzombie.death"
+	},
+	"antiplayer.hurt": {
+		"category": "hostile",
+		"sounds": [
+			"abyssalcraft:antiplayer/hurt"
+		],
+		"subtitle": "subtitle.abyssalcraft.antiplayer.hurt"
 	}
 }

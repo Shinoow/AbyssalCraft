@@ -44,7 +44,8 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import com.shinoow.abyssalcraft.api.APIUtils;
-import com.shinoow.abyssalcraft.api.entity.*;
+import com.shinoow.abyssalcraft.api.entity.EntityUtil;
+import com.shinoow.abyssalcraft.api.entity.IOmotholEntity;
 import com.shinoow.abyssalcraft.api.item.ACItems;
 import com.shinoow.abyssalcraft.common.items.ItemDrainStaff;
 import com.shinoow.abyssalcraft.common.items.ItemNecronomicon;
@@ -52,7 +53,7 @@ import com.shinoow.abyssalcraft.lib.ACConfig;
 import com.shinoow.abyssalcraft.lib.ACLoot;
 import com.shinoow.abyssalcraft.lib.ACSounds;
 
-public class EntityRemnant extends EntityMob implements IMerchant, IAntiEntity, ICoraliumEntity, IDreadEntity {
+public class EntityRemnant extends EntityMob implements IMerchant, IOmotholEntity {
 
 	private static final DataParameter<Integer> PROFESSION = EntityDataManager.<Integer>createKey(EntityRemnant.class, DataSerializers.VARINT);
 	private EntityPlayer tradingPlayer;
@@ -68,15 +69,16 @@ public class EntityRemnant extends EntityMob implements IMerchant, IAntiEntity, 
 	public EntityRemnant(World par1World) {
 		super(par1World);
 		tasks.addTask(0, new EntityAISwimming(this));
-		tasks.addTask(3, new EntityAIAttackMelee(this, 0.35D, false));
-		tasks.addTask(4, new EntityAIOpenDoor(this, true));
-		tasks.addTask(5, new EntityAIMoveTowardsRestriction(this, 0.35D));
-		tasks.addTask(6, new EntityAIWander(this, 0.35D));
+		tasks.addTask(2, new EntityAIAttackMelee(this, 0.35D, false));
+		tasks.addTask(3, new EntityAIOpenDoor(this, true));
+		tasks.addTask(4, new EntityAIMoveTowardsRestriction(this, 0.35D));
+		tasks.addTask(5, new EntityAIWander(this, 0.35D));
 		tasks.addTask(7, new EntityAILookIdle(this));
 		tasks.addTask(7, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
 		tasks.addTask(7, new EntityAIWatchClosest(this, EntityRemnant.class, 8.0F));
 		tasks.addTask(7, new EntityAIWatchClosest(this, EntityGatekeeperMinion.class, 8.0F));
 		targetTasks.addTask(1, new EntityAIHurtByTarget(this, false));
+		setSize(0.6F, 1.95F);
 	}
 
 	@Override
@@ -785,6 +787,12 @@ public class EntityRemnant extends EntityMob implements IMerchant, IAntiEntity, 
 		}
 
 		return data;
+	}
+
+	@Override
+	public float getEyeHeight()
+	{
+		return height * 0.9F;
 	}
 
 	static
