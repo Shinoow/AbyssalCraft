@@ -13,6 +13,7 @@ package com.shinoow.abyssalcraft.common.entity.ai;
 
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.ai.EntityAIBase;
+import net.minecraft.entity.monster.EntityCreeper;
 
 import com.shinoow.abyssalcraft.common.entity.anti.EntityAntiCreeper;
 
@@ -34,6 +35,9 @@ public class EntityAIAntiCreeperSwell extends EntityAIBase
 	public boolean shouldExecute()
 	{
 		EntityLivingBase entitylivingbase = swellingCreeper.getAttackTarget();
+
+		if(entitylivingbase instanceof EntityCreeper) return false;
+
 		return swellingCreeper.getCreeperState() > 0 || entitylivingbase != null && swellingCreeper.getDistanceSqToEntity(entitylivingbase) < 9.0D;
 	}
 

@@ -29,7 +29,7 @@ public abstract class NecronomiconRitual {
 	private boolean requiresSacrifice;
 	private int bookType;
 	private int dimension;
-	private String unlocalizedName;
+	private final String unlocalizedName;
 	private float requiredEnergy;
 	protected Object sacrifice;
 	private boolean nbtSensitive;

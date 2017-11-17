@@ -29,15 +29,13 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.World;
 
-import com.shinoow.abyssalcraft.api.entity.IAntiEntity;
-import com.shinoow.abyssalcraft.api.entity.ICoraliumEntity;
-import com.shinoow.abyssalcraft.api.entity.IDreadEntity;
+import com.shinoow.abyssalcraft.api.entity.IOmotholEntity;
 import com.shinoow.abyssalcraft.api.item.ACItems;
 import com.shinoow.abyssalcraft.lib.ACConfig;
 import com.shinoow.abyssalcraft.lib.ACLoot;
 import com.shinoow.abyssalcraft.lib.ACSounds;
 
-public class EntityGatekeeperMinion extends EntityMob implements ICoraliumEntity, IDreadEntity, IAntiEntity {
+public class EntityGatekeeperMinion extends EntityMob implements IOmotholEntity {
 
 	private static final UUID attackDamageBoostUUID = UUID.fromString("648D7064-6A60-4F59-8ABE-C2C23A6DD7A9");
 	private static final AttributeModifier attackDamageBoost = new AttributeModifier(attackDamageBoostUUID, "Halloween Attack Damage Boost", 5.0D, 0);
@@ -54,7 +52,7 @@ public class EntityGatekeeperMinion extends EntityMob implements ICoraliumEntity
 		tasks.addTask(7, new EntityAIWatchClosest(this, EntityRemnant.class, 8.0F));
 		targetTasks.addTask(1, new EntityAIHurtByTarget(this, false));
 		targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityPlayer.class, true));
-		setSize(1.4F, 2.8F);
+		setSize(0.8F, 2.7F);
 	}
 
 	@Override
@@ -184,5 +182,11 @@ public class EntityGatekeeperMinion extends EntityMob implements ICoraliumEntity
 			attribute.applyModifier(attackDamageBoost);
 
 		return par1EntityLivingData;
+	}
+
+	@Override
+	public float getEyeHeight()
+	{
+		return height * 0.925F;
 	}
 }

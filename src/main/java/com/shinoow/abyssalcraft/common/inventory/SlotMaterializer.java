@@ -26,14 +26,11 @@ public class SlotMaterializer extends Slot
 	/** The player that is using the GUI where this slot resides. */
 	private EntityPlayer thePlayer;
 	private int stackSize;
-	private TileEntityMaterializer materializer;
 
 	public SlotMaterializer(EntityPlayer par1EntityPlayer, IInventory par2IInventory, int par3, int par4, int par5)
 	{
 		super(par2IInventory, par3, par4, par5);
 		thePlayer = par1EntityPlayer;
-		if(par2IInventory instanceof TileEntityMaterializer)
-			materializer = (TileEntityMaterializer) par2IInventory;
 	}
 
 	@Override
@@ -45,6 +42,9 @@ public class SlotMaterializer extends Slot
 	@Override
 	public ItemStack decrStackSize(int par1)
 	{
+		getStack().onCrafting(thePlayer.worldObj, thePlayer, stackSize);
+
+		MinecraftForge.EVENT_BUS.post(new ACEvents.ItemMaterializedEvent(thePlayer, getStack()));
 		if (getHasStack())
 			stackSize += Math.min(par1, getStack().stackSize);
 
@@ -67,12 +67,12 @@ public class SlotMaterializer extends Slot
 	@Override
 	protected void onCrafting(ItemStack par1ItemStack)
 	{
-		if(materializer != null){
+		if(inventory instanceof TileEntityMaterializer){
 			par1ItemStack.onCrafting(thePlayer.worldObj, thePlayer, stackSize);
 
 			MinecraftForge.EVENT_BUS.post(new ACEvents.ItemMaterializedEvent(thePlayer, par1ItemStack));
 
-			MaterializerRecipes.instance().processMaterialization(par1ItemStack, materializer.getStackInSlot(0));
+			MaterializerRecipes.instance().processMaterialization(par1ItemStack, inventory.getStackInSlot(0));
 		}
 	}
 }

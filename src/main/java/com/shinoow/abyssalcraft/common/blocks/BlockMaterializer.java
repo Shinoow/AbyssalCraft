@@ -131,9 +131,6 @@ public class BlockMaterializer extends BlockContainer {
 	public void onBlockPlacedBy(World par1World, BlockPos pos, IBlockState state, EntityLivingBase par5EntityLivingBase, ItemStack par6ItemStack) {
 
 		par1World.setBlockState(pos, state.withProperty(FACING, par5EntityLivingBase.getHorizontalFacing().getOpposite()), 2);
-
-		if (par6ItemStack.hasDisplayName())
-			((TileEntityMaterializer)par1World.getTileEntity(pos)).func_145951_a(par6ItemStack.getDisplayName());
 	}
 
 	@Override

@@ -420,7 +420,7 @@ public class EntityDragonMinion extends EntityMob implements IEntityMultiPart, I
 
 				healingcircle = null;
 			}
-			else if (ticksExisted % 10 == 0 && getHealth() <= getMaxHealth())
+			else if (ticksExisted % 10 == 0 && healingcircle.getHealth() < healingcircle.getMaxHealth())
 				setHealth(getHealth() - 1.0F);
 
 		if (rand.nextInt(10) == 0)
@@ -449,6 +449,7 @@ public class EntityDragonMinion extends EntityMob implements IEntityMultiPart, I
 
 	private void collideWithEntities(List<?> par1List)
 	{
+		if(!ACConfig.hardcoreMode) return;
 		double d0 = (dragonPartBody.getEntityBoundingBox().minX + dragonPartBody.getEntityBoundingBox().maxX) / 2.0D;
 		double d1 = (dragonPartBody.getEntityBoundingBox().minZ + dragonPartBody.getEntityBoundingBox().maxZ) / 2.0D;
 		Iterator<?> iterator = par1List.iterator();

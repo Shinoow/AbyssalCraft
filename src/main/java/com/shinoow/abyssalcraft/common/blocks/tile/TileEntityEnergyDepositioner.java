@@ -114,6 +114,13 @@ public class TileEntityEnergyDepositioner extends TileEntity implements IEnergyM
 	}
 
 	@Override
+	public void onLoad()
+	{
+		if(worldObj.isRemote)
+			worldObj.loadedTileEntityList.remove(this);
+	}
+
+	@Override
 	public SPacketUpdateTileEntity getUpdatePacket() {
 		return new SPacketUpdateTileEntity(pos, 1, getUpdateTag());
 	}

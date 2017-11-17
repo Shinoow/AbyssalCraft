@@ -40,7 +40,7 @@ public class RenderDragonMinion extends RenderLiving<EntityDragonMinion> {
 
 	public RenderDragonMinion(RenderManager manager)
 	{
-		super(manager, new ModelDragonMinion(0.0F), 0.3F);
+		super(manager, new ModelDragonMinion(0.0F), 0.0F);
 		modelDragon = (ModelDragonMinion)mainModel;
 		addLayer(new LayerSpectralDragonEyes(this));
 	}

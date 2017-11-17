@@ -26,6 +26,7 @@ import net.minecraft.world.World;
 
 import com.google.common.collect.Lists;
 import com.shinoow.abyssalcraft.api.ritual.NecronomiconRitual;
+import com.shinoow.abyssalcraft.common.entity.demon.*;
 
 public class NecronomiconBreedingRitual extends NecronomiconRitual {
 
@@ -209,15 +210,31 @@ public class NecronomiconBreedingRitual extends NecronomiconRitual {
 				}
 			}
 
-		if(cows.size() > 2 && getDeathChance(world.rand, cows.size()))
-			cows.get(world.rand.nextInt(cows.size())).attackEntityFrom(DamageSource.magic, 200000);
-		if(chickens.size() > 2 && getDeathChance(world.rand, chickens.size()))
-			chickens.get(world.rand.nextInt(chickens.size())).attackEntityFrom(DamageSource.magic, 200000);
-		if(pigs.size() > 2 && getDeathChance(world.rand, pigs.size()))
-			pigs.get(world.rand.nextInt(pigs.size())).attackEntityFrom(DamageSource.magic, 200000);
-		if(sheeps.size() > 2 && getDeathChance(world.rand, sheeps.size()))
-			sheeps.get(world.rand.nextInt(sheeps.size())).attackEntityFrom(DamageSource.magic, 200000);
-		if(horses.size() > 2 && getDeathChance(world.rand, horses.size()))
+		if(cows.size() > 2 && getDeathChance(world.rand, cows.size())){
+			Entity e = cows.get(world.rand.nextInt(cows.size()));
+			EntityEvilCow cow = new EntityEvilCow(world);
+			cow.copyLocationAndAnglesFrom(e);
+			world.removeEntity(e);
+			world.spawnEntityInWorld(cow);
+		} if(chickens.size() > 2 && getDeathChance(world.rand, chickens.size())){
+			Entity e = chickens.get(world.rand.nextInt(chickens.size()));
+			EntityEvilChicken chicken = new EntityEvilChicken(world);
+			chicken.copyLocationAndAnglesFrom(e);
+			world.removeEntity(e);
+			world.spawnEntityInWorld(chicken);
+		} if(pigs.size() > 2 && getDeathChance(world.rand, pigs.size())){
+			Entity e = pigs.get(world.rand.nextInt(pigs.size()));
+			EntityEvilpig pig = new EntityEvilpig(world);
+			pig.copyLocationAndAnglesFrom(e);
+			world.removeEntity(e);
+			world.spawnEntityInWorld(pig);
+		} if(sheeps.size() > 2 && getDeathChance(world.rand, sheeps.size())){
+			Entity e = sheeps.get(world.rand.nextInt(sheeps.size()));
+			EntityEvilSheep sheep = new EntityEvilSheep(world);
+			sheep.copyLocationAndAnglesFrom(e);
+			world.removeEntity(e);
+			world.spawnEntityInWorld(sheep);
+		} if(horses.size() > 2 && getDeathChance(world.rand, horses.size()))
 			horses.get(world.rand.nextInt(horses.size())).attackEntityFrom(DamageSource.magic, 200000);
 		if(ocelots.size() > 2 && getDeathChance(world.rand, ocelots.size()))
 			ocelots.get(world.rand.nextInt(ocelots.size())).attackEntityFrom(DamageSource.magic, 200000);

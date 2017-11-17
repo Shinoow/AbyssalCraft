@@ -24,6 +24,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
+import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.AxisAlignedBB;
@@ -31,6 +32,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeHooks;
+import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -170,25 +172,49 @@ public class BlockAbyssPortal extends BlockBreakable {
 	public void onEntityCollidedWithBlock(World par1World, BlockPos pos, IBlockState state, Entity par5Entity)
 	{
 
-		if (!par5Entity.isRiding() && !par5Entity.isBeingRidden() && par5Entity instanceof EntityPlayerMP)
-		{
-			EntityPlayerMP thePlayer = (EntityPlayerMP)par5Entity;
-			thePlayer.addStat(ACAchievements.enter_abyssal_wasteland, 1);
+		if (!par5Entity.isRiding() && !par5Entity.isBeingRidden() && !par1World.isRemote)
+			if(par5Entity.timeUntilPortal <= 0){
+				if(par5Entity instanceof EntityPlayerMP){
+					EntityPlayerMP thePlayer = (EntityPlayerMP)par5Entity;
+					thePlayer.addStat(ACAchievements.enter_abyssal_wasteland, 1);
 
-			if (thePlayer.timeUntilPortal > 0)
-				thePlayer.timeUntilPortal = thePlayer.getPortalCooldown();
-			else if (thePlayer.dimension != ACLib.abyssal_wasteland_id)
-			{
-				if(!ForgeHooks.onTravelToDimension(thePlayer, ACLib.abyssal_wasteland_id)) return;
-				thePlayer.timeUntilPortal = ACConfig.portalCooldown;
-				thePlayer.mcServer.getPlayerList().transferPlayerToDimension(thePlayer, ACLib.abyssal_wasteland_id, new TeleporterAC(thePlayer.mcServer.worldServerForDimension(ACLib.abyssal_wasteland_id), this, ACBlocks.abyssal_stone));
-			}
-			else {
-				if(!ForgeHooks.onTravelToDimension(thePlayer, 0)) return;
-				thePlayer.timeUntilPortal = ACConfig.portalCooldown;
-				thePlayer.mcServer.getPlayerList().transferPlayerToDimension(thePlayer, 0, new TeleporterAC(thePlayer.mcServer.worldServerForDimension(0), this, ACBlocks.abyssal_stone));
-			}
-		}
+					thePlayer.timeUntilPortal = ACConfig.portalCooldown;
+					if (thePlayer.dimension != ACLib.abyssal_wasteland_id)
+					{
+						if(!ForgeHooks.onTravelToDimension(thePlayer, ACLib.abyssal_wasteland_id)) return;
+						thePlayer.mcServer.getPlayerList().transferPlayerToDimension(thePlayer, ACLib.abyssal_wasteland_id, new TeleporterAC(thePlayer.mcServer.worldServerForDimension(ACLib.abyssal_wasteland_id), this, ACBlocks.abyssal_stone));
+					}
+					else {
+						if(!ForgeHooks.onTravelToDimension(thePlayer, 0)) return;
+						thePlayer.mcServer.getPlayerList().transferPlayerToDimension(thePlayer, 0, new TeleporterAC(thePlayer.mcServer.worldServerForDimension(0), this, ACBlocks.abyssal_stone));
+					}
+				} else {
+					MinecraftServer server = FMLCommonHandler.instance().getMinecraftServerInstance();
+					par5Entity.timeUntilPortal = par5Entity.getPortalCooldown();
+
+					if(par5Entity.dimension != ACLib.abyssal_wasteland_id){
+						if(!ForgeHooks.onTravelToDimension(par5Entity, ACLib.abyssal_wasteland_id)) return;
+
+						int i = par5Entity.dimension;
+
+						par5Entity.dimension = ACLib.abyssal_wasteland_id;
+						par1World.removeEntityDangerously(par5Entity);
+
+						par5Entity.isDead = false;
+
+						server.getPlayerList().transferEntityToWorld(par5Entity, i, server.worldServerForDimension(i), server.worldServerForDimension(ACLib.abyssal_wasteland_id), new TeleporterAC(server.worldServerForDimension(ACLib.abyssal_wasteland_id), this, ACBlocks.abyssal_stone));
+					} else {
+						if(!ForgeHooks.onTravelToDimension(par5Entity, 0)) return;
+
+						par5Entity.dimension = 0;
+						par1World.removeEntityDangerously(par5Entity);
+
+						par5Entity.isDead = false;
+
+						server.getPlayerList().transferEntityToWorld(par5Entity, ACLib.abyssal_wasteland_id, server.worldServerForDimension(ACLib.abyssal_wasteland_id), server.worldServerForDimension(0), new TeleporterAC(server.worldServerForDimension(0), this, ACBlocks.abyssal_stone));
+					}
+				}
+			} else par5Entity.timeUntilPortal = par5Entity.getPortalCooldown();
 	}
 
 	@Override

@@ -60,8 +60,8 @@ public class EntityAntiAbyssalZombie extends EntityMob implements IAntiEntity {
 		super(par1World);
 		tasks.addTask(0, new EntityAISwimming(this));
 		tasks.addTask(2, new EntityAIAttackMelee(this, 1.0D, true));
-		tasks.addTask(4, new EntityAIMoveTowardsRestriction(this, 1.0D));
-		tasks.addTask(5, new EntityAIWander(this, 1.0D));
+		tasks.addTask(5, new EntityAIMoveTowardsRestriction(this, 1.0D));
+		tasks.addTask(6, new EntityAIWander(this, 1.0D));
 		tasks.addTask(8, new EntityAILookIdle(this));
 		tasks.addTask(8, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
 		tasks.addTask(8, new EntityAIWatchClosest(this, EntityAntiPlayer.class, 8.0F));
@@ -71,7 +71,8 @@ public class EntityAntiAbyssalZombie extends EntityMob implements IAntiEntity {
 		tasks.addTask(8, new EntityAIWatchClosest(this, EntityAntiSkeleton.class, 8.0F));
 		targetTasks.addTask(1, new EntityAIHurtByTarget(this, false));
 		targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityAntiZombie.class, true));
-		targetTasks.addTask(3, new EntityAINearestAttackableTarget(this, EntityPlayer.class, true));
+		targetTasks.addTask(3, new EntityAINearestAttackableTarget(this, EntityAbyssalZombie.class, true));
+		targetTasks.addTask(4, new EntityAINearestAttackableTarget(this, EntityPlayer.class, true));
 	}
 
 	@Override

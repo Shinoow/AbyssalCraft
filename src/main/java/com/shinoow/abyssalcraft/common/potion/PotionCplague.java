@@ -46,9 +46,9 @@ public class PotionCplague extends Potion{
 	@Override
 	public void performEffect(EntityLivingBase par1EntityLivingBase, int par2){
 
-		if(EntityUtil.isEntityCoralium(par1EntityLivingBase))
-			par1EntityLivingBase.removePotionEffect(this);
-		else if(par1EntityLivingBase.ticksExisted % 40 >> par2 == 0)
+		if(EntityUtil.isEntityCoralium(par1EntityLivingBase)) return;
+
+		if(par1EntityLivingBase.ticksExisted % 40 >> par2 == 0)
 			par1EntityLivingBase.attackEntityFrom(AbyssalCraftAPI.coralium, 2);
 
 		if(par1EntityLivingBase instanceof EntityPlayer && !par1EntityLivingBase.isDead && wasKilled)

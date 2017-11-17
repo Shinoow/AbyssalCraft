@@ -29,6 +29,7 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.World;
 
+import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.api.entity.IDreadEntity;
 import com.shinoow.abyssalcraft.lib.ACConfig;
@@ -58,6 +59,12 @@ public class EntityDemonAnimal extends EntityMob implements IDreadEntity {
 			par1Entity.attackEntityFrom(DamageSource.causeMobDamage(this).setDamageBypassesArmor().setDamageIsAbsolute(), 1.5F * (float)(ACConfig.damageAmpl > 1.0D ? ACConfig.damageAmpl : 1));
 
 		return super.attackEntityAsMob(par1Entity);
+	}
+
+	@Override
+	public boolean isEntityInvulnerable(DamageSource source)
+	{
+		return source == AbyssalCraftAPI.dread ? true : super.isEntityInvulnerable(source);
 	}
 
 	@Override

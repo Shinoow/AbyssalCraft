@@ -52,6 +52,8 @@ import com.shinoow.abyssalcraft.common.entity.anti.EntityAntiGhoul;
 import com.shinoow.abyssalcraft.common.handlers.*;
 import com.shinoow.abyssalcraft.common.util.ACLogger;
 import com.shinoow.abyssalcraft.lib.ACLib;
+import com.shinoow.abyssalcraft.lib.ACLoot;
+import com.shinoow.abyssalcraft.lib.ACTabs;
 
 public class InitHandler implements ILifeCycleHandler {
 
@@ -91,6 +93,8 @@ public class InitHandler implements ILifeCycleHandler {
 		NetworkRegistry.INSTANCE.registerGuiHandler(AbyssalCraft.instance, new CommonProxy());
 		AbyssalCraftAPI.setInternalNDHandler(new InternalNecroDataHandler());
 		AbyssalCraftAPI.setInternalMethodHandler(new InternalMethodHandler());
+		ACLoot.init();
+		ACTabs.init();
 
 		cfg = new Configuration(event.getSuggestedConfigurationFile());
 		syncConfig();

@@ -11,6 +11,8 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.common.blocks.tile;
 
+import java.util.List;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
@@ -23,6 +25,8 @@ import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.util.text.TextComponentTranslation;
 
+import com.shinoow.abyssalcraft.api.recipe.MaterializerRecipes;
+
 public class TileEntityMaterializer extends TileEntity implements ISidedInventory, ITickable {
 
 	private static final int[] slotsTop = new int[] {0};
@@ -31,9 +35,11 @@ public class TileEntityMaterializer extends TileEntity implements ISidedInventor
 	/**
 	 * The ItemStacks that hold the items currently being used in the materializer
 	 */
-	private ItemStack[] materializerItemStacks = new ItemStack[30];
+	private ItemStack[] materializerItemStacks = new ItemStack[110];
 
-	private String containerName;
+	private String containerName, invName;
+
+	public boolean isDirty;
 
 	/**
 	 * Returns the number of slots in the inventory.
@@ -60,22 +66,34 @@ public class TileEntityMaterializer extends TileEntity implements ISidedInventor
 	@Override
 	public ItemStack decrStackSize(int par1, int par2)
 	{
+		isDirty = true;
+		if(par1 == 1) setDisplayName(null);
+
 		if (materializerItemStacks[par1] != null)
 		{
 			ItemStack itemstack;
 
 			if (materializerItemStacks[par1].stackSize <= par2)
 			{
-				itemstack = materializerItemStacks[par1];
-				materializerItemStacks[par1] = null;
+				if(par1 > 1)
+					itemstack = materializerItemStacks[par1].copy();
+				else {
+					itemstack = materializerItemStacks[par1];
+					materializerItemStacks[par1] = null;
+				}
 				return itemstack;
 			}
 			else
 			{
-				itemstack = materializerItemStacks[par1].splitStack(par2);
+				if(par1 > 1)
+					itemstack = materializerItemStacks[par1].copy();
+				else {
+					itemstack = materializerItemStacks[par1].splitStack(par2);
 
-				if (materializerItemStacks[par1].stackSize == 0)
-					materializerItemStacks[par1] = null;
+					if (materializerItemStacks[par1].stackSize == 0)
+						materializerItemStacks[par1] = null;
+
+				}
 
 				return itemstack;
 			}
@@ -90,6 +108,8 @@ public class TileEntityMaterializer extends TileEntity implements ISidedInventor
 	@Override
 	public ItemStack removeStackFromSlot(int par1)
 	{
+		if(par1 == 0) isDirty = true;
+		if(par1 == 1) setDisplayName(null);
 		if (materializerItemStacks[par1] != null)
 		{
 			ItemStack itemstack = materializerItemStacks[par1];
@@ -105,10 +125,40 @@ public class TileEntityMaterializer extends TileEntity implements ISidedInventor
 	@Override
 	public void setInventorySlotContents(int par1, ItemStack par2ItemStack)
 	{
+		if(par1 == 0) isDirty = true;
+
+		if(par1 == 1 && par2ItemStack != null) clippyQuote();
+
 		materializerItemStacks[par1] = par2ItemStack;
 
 		if (par2ItemStack != null && par2ItemStack.stackSize > getInventoryStackLimit())
 			par2ItemStack.stackSize = getInventoryStackLimit();
+	}
+
+	private void clippyQuote(){
+		switch(worldObj.rand.nextInt(7)){
+		case 0:
+			setDisplayName("Hi, I'm Clippy! What are we","materializing today?");
+			break;
+		case 1:
+			setDisplayName("It looks like you're trying to","create air. Do you need help?");
+			break;
+		case 2:
+			setDisplayName("The Necronomicon has a recipe","list!");
+			break;
+		case 3:
+			setDisplayName("Do you need assistance?");
+			break;
+		case 4:
+			setDisplayName("Did you know gold consists of","gold atoms?");
+			break;
+		case 5:
+			setDisplayName("I see that you have been using","your mouse.");
+			break;
+		case 6:
+			setDisplayName("Did you mean 'Aluminium'?");
+			break;
+		}
 	}
 
 	/**
@@ -120,6 +170,10 @@ public class TileEntityMaterializer extends TileEntity implements ISidedInventor
 		return hasCustomName() ? containerName : "container.abyssalcraft.materializer";
 	}
 
+	public String getSecondName(){
+		return hasSecondCustomName() ? invName : "container.inventory";
+	}
+
 	/**
 	 * Returns if the inventory is named
 	 */
@@ -129,15 +183,24 @@ public class TileEntityMaterializer extends TileEntity implements ISidedInventor
 		return containerName != null && containerName.length() > 0;
 	}
 
+	public boolean hasSecondCustomName(){
+		return invName != null && invName.length() > 0;
+	}
+
 	@Override
 	public ITextComponent getDisplayName()
 	{
 		return hasCustomName() ? new TextComponentString(getName()) : new TextComponentTranslation(getName(), new Object[0]);
 	}
 
-	public void func_145951_a(String par1)
+	public void setDisplayName(String par1){
+		setDisplayName(par1, null);
+	}
+
+	public void setDisplayName(String par1, String par2)
 	{
 		containerName = par1;
+		invName = par2;
 	}
 
 	@Override
@@ -155,9 +218,6 @@ public class TileEntityMaterializer extends TileEntity implements ISidedInventor
 			if (b0 >= 0 && b0 < materializerItemStacks.length)
 				materializerItemStacks[b0] = ItemStack.loadItemStackFromNBT(nbttagcompound1);
 		}
-
-		if (par1.hasKey("CustomName", 8))
-			containerName = par1.getString("CustomName");
 	}
 
 	@Override
@@ -177,9 +237,6 @@ public class TileEntityMaterializer extends TileEntity implements ISidedInventor
 
 		par1.setTag("Items", nbttaglist);
 
-		if (hasCustomName())
-			par1.setString("CustomName", containerName);
-
 		return par1;
 	}
 
@@ -195,22 +252,24 @@ public class TileEntityMaterializer extends TileEntity implements ISidedInventor
 	@Override
 	public void update()
 	{
-		test();
+		if(isDirty){
+			refreshRecipes();
+			isDirty = false;
+		}
 	}
 
-	private void test()
+	private void refreshRecipes()
 	{
-		//		if (materializerItemStacks[0] != null)
-		//		{
-		//			List<ItemStack> list = MaterializerRecipes.instance().getMaterializationResult(materializerItemStacks[0]);
-		//
-		//			if(!list.isEmpty())
-		//				for(int i = 0; i < list.size(); i++)
-		//					materializerItemStacks[i+2] = list.get(i);
-		//		} else {
-		//			for(int i = 2; i < materializerItemStacks.length; i++)
-		//				materializerItemStacks[i] = null;
-		//		}
+		for(int i = 2; i < materializerItemStacks.length; i++)
+			materializerItemStacks[i] = null;
+		if (materializerItemStacks[0] != null)
+		{
+			List<ItemStack> list = MaterializerRecipes.instance().getMaterializationResult(materializerItemStacks[0]);
+
+			if(!list.isEmpty())
+				for(int i = 0; i < (list.size() > 108 ? 108 : list.size()); i++)
+					materializerItemStacks[i+2] = list.get(i);
+		}
 	}
 
 	/**
@@ -269,25 +328,21 @@ public class TileEntityMaterializer extends TileEntity implements ISidedInventor
 
 	@Override
 	public int getField(int id) {
-		// TODO Auto-generated method stub
 		return 0;
 	}
 
 	@Override
 	public void setField(int id, int value) {
-		// TODO Auto-generated method stub
 
 	}
 
 	@Override
 	public int getFieldCount() {
-		// TODO Auto-generated method stub
 		return 0;
 	}
 
 	@Override
 	public void clear() {
-		// TODO Auto-generated method stub
 
 	}
 }

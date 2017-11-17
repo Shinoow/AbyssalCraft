@@ -35,33 +35,33 @@ import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.pathfinding.PathNavigate;
 import net.minecraft.pathfinding.PathNavigateClimber;
 import net.minecraft.potion.PotionEffect;
-import net.minecraft.util.DamageSource;
-import net.minecraft.util.EnumParticleTypes;
-import net.minecraft.util.SoundEvent;
-import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.*;
+import net.minecraft.util.math.*;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.util.text.translation.I18n;
 import net.minecraft.world.*;
 import net.minecraft.world.BossInfo.Color;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.living.EnderTeleportEvent;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
+import com.google.common.base.Predicate;
+import com.google.common.base.Predicates;
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
-import com.shinoow.abyssalcraft.api.entity.IAntiEntity;
-import com.shinoow.abyssalcraft.api.entity.ICoraliumEntity;
-import com.shinoow.abyssalcraft.api.entity.IDreadEntity;
+import com.shinoow.abyssalcraft.api.entity.IOmotholEntity;
 import com.shinoow.abyssalcraft.api.item.ACItems;
 import com.shinoow.abyssalcraft.lib.ACConfig;
 import com.shinoow.abyssalcraft.lib.ACLib;
 import com.shinoow.abyssalcraft.lib.ACSounds;
 import com.shinoow.abyssalcraft.lib.util.SpecialTextUtil;
 
-public class EntitySacthoth extends EntityMob implements IAntiEntity, ICoraliumEntity, IDreadEntity {
+public class EntitySacthoth extends EntityMob implements IOmotholEntity {
 
 	private static final DataParameter<Byte> CLIMBING = EntityDataManager.createKey(EntitySacthoth.class, DataSerializers.BYTE);
 	private static final UUID attackDamageBoostUUID = UUID.fromString("648D7064-6A60-4F59-8ABE-C2C23A6DD7A9");
 	private static final AttributeModifier attackDamageBoost = new AttributeModifier(attackDamageBoostUUID, "Halloween Attack Damage Boost", 8D, 0);
-	public int deathTicks;
+	public int deathTicks, shadowFlameShootTimer;
 	private final BossInfoServer bossInfo = (BossInfoServer)new BossInfoServer(getDisplayName(), BossInfo.Color.BLUE, BossInfo.Overlay.PROGRESS).setDarkenSky(true);
 
 	public EntitySacthoth(World par1World) {
@@ -446,20 +446,15 @@ public class EntitySacthoth extends EntityMob implements IAntiEntity, ICoraliumE
 		if(deathTicks == 0) par1Entity.applyEntityCollision(this);
 	}
 
-	@SuppressWarnings("rawtypes")
 	@Override
 	public void onLivingUpdate()
 	{
-		for (int i = 0; i < 2 && ACConfig.particleEntity && worldObj.provider.getDimension() != ACLib.dark_realm_id; ++i)
+		for (int i = 0; i < (isWet() ? 1 : 2) && ACConfig.particleEntity && worldObj.provider.getDimension() != ACLib.dark_realm_id; ++i)
 			worldObj.spawnParticle(EnumParticleTypes.SMOKE_LARGE, posX + (rand.nextDouble() - 0.5D) * width, posY + rand.nextDouble() * height, posZ + (rand.nextDouble() - 0.5D) * width, 0.0D, 0.0D, 0.0D);
 
-		List list = worldObj.getEntitiesWithinAABBExcludingEntity(this, getEntityBoundingBox().expand(30.0D, 30.0D, 30.0D));
-		if (list != null)
-			for (int k2 = 0; k2 < list.size(); k2++) {
-				Entity entity = (Entity)list.get(k2);
-				if (entity instanceof EntityPlayer && !entity.isDead && deathTicks == 0 && !((EntityPlayer)entity).capabilities.isCreativeMode)
-					((EntityPlayer)entity).addPotionEffect(new PotionEffect(MobEffects.BLINDNESS, 40));
-			}
+		for(Entity entity : worldObj.getEntitiesWithinAABBExcludingEntity(this, getEntityBoundingBox().expand(30.0D, 30.0D, 30.0D)))
+			if (entity instanceof EntityPlayer && !entity.isDead && deathTicks == 0 && !((EntityPlayer)entity).capabilities.isCreativeMode)
+				((EntityPlayer)entity).addPotionEffect(new PotionEffect(MobEffects.BLINDNESS, 40));
 		EntityPlayer player = worldObj.getClosestPlayerToEntity(this, 160D);
 		if(player != null && player.getDistanceToEntity(this) >= 50D && !player.capabilities.isCreativeMode){
 			if(player.posX - posX > 50)
@@ -476,7 +471,122 @@ public class EntitySacthoth extends EntityMob implements IAntiEntity, ICoraliumE
 				teleportTo(player.posX, player.posY, player.posZ);
 		}
 
+		if (getAttackTarget() != null && getDistanceSqToEntity(getAttackTarget()) <= 64D && shadowFlameShootTimer <= -300) shadowFlameShootTimer = 100;
+
+		if (shadowFlameShootTimer > 0)
+		{
+			motionX *= 0.05D;
+			motionZ *= 0.05D;
+			worldObj.setEntityState(this, (byte)23);
+			if (ticksExisted % 5 == 0)
+				worldObj.playSound(null, new BlockPos(posX + 0.5D, posY + getEyeHeight(), posZ + 0.5D), SoundEvents.ENTITY_GHAST_SHOOT, getSoundCategory(), 0.5F + getRNG().nextFloat(), getRNG().nextFloat() * 0.7F + 0.3F);
+			Entity target = getHeadLookTarget();
+			if (target != null) {
+				List<EntityLivingBase> list1 = worldObj.getEntitiesWithinAABB(EntityLivingBase.class, target.getEntityBoundingBox().expand(2.0D, 2.0D, 2.0D), Predicates.and(new Predicate[] { EntitySelectors.IS_ALIVE }));
+
+				for(EntityLivingBase entity : list1)
+
+					if (entity != null && rand.nextInt(3) == 0) if (entity.attackEntityFrom(AbyssalCraftAPI.shadow, (float)(7.5D - getDistanceToEntity(entity)))) {
+						entity.addPotionEffect(new PotionEffect(MobEffects.BLINDNESS, 100));
+						entity.addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, 100, 1));
+					}
+
+
+				if (target.attackEntityFrom(AbyssalCraftAPI.shadow, (float)(7.5D - getDistanceToEntity(target)))) if(target instanceof EntityLivingBase)
+				{
+					((EntityLivingBase)target).addPotionEffect(new PotionEffect(MobEffects.BLINDNESS, 200));
+					((EntityLivingBase)target).addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, 200, 1));
+				}
+			}
+		}
+
+		--shadowFlameShootTimer;
+
 		super.onLivingUpdate();
+	}
+
+	private Entity getHeadLookTarget()
+	{
+		Entity pointedEntity = null;
+		double range = 4D + rand.nextDouble() * 8D;
+		Vec3d srcVec = new Vec3d(posX, posY + getEyeHeight(), posZ);
+		Vec3d lookVec = getLook(1.0F);
+		RayTraceResult raytrace = worldObj.rayTraceBlocks(srcVec, srcVec.addVector(lookVec.xCoord * range, lookVec.yCoord * range, lookVec.zCoord * range));
+		BlockPos hitpos = raytrace != null ? raytrace.getBlockPos() : null;
+		double rx = hitpos == null ? range : Math.min(range, Math.abs(posX - hitpos.getX()));
+		double ry = hitpos == null ? range : Math.min(range, Math.abs(posY - hitpos.getY()));
+		double rz = hitpos == null ? range : Math.min(range, Math.abs(posZ - hitpos.getZ()));
+		Vec3d destVec = srcVec.addVector(lookVec.xCoord * range, lookVec.yCoord * range, lookVec.zCoord * range);
+		float var9 = 4.0F;
+		List<Entity> possibleList = worldObj.getEntitiesWithinAABBExcludingEntity(this, getEntityBoundingBox().offset(lookVec.xCoord * rx, lookVec.yCoord * ry, lookVec.zCoord * rz).expand(var9, var9, var9));
+		double hitDist = 0.0D;
+		for (Entity possibleEntity : possibleList)
+			if (possibleEntity != this && possibleEntity instanceof EntityLivingBase)
+			{
+				float borderSize = possibleEntity.getCollisionBorderSize();
+				AxisAlignedBB collisionBB = possibleEntity.getEntityBoundingBox().expand(borderSize, borderSize, borderSize);
+				RayTraceResult interceptPos = collisionBB.calculateIntercept(srcVec, destVec);
+				if (collisionBB.isVecInside(srcVec))
+				{
+					if (0.0D < hitDist || hitDist == 0.0D)
+					{
+						pointedEntity = possibleEntity;
+						hitDist = 0.0D;
+					}
+				}
+				else if (interceptPos != null)
+				{
+					double possibleDist = srcVec.distanceTo(interceptPos.hitVec);
+					if (possibleDist < hitDist || hitDist == 0.0D)
+					{
+						pointedEntity = possibleEntity;
+						hitDist = possibleDist;
+					}
+				}
+			}
+		return pointedEntity;
+	}
+
+	protected void addMouthParticles()
+	{
+		if (worldObj.isRemote)
+		{
+			Vec3d vector = getLookVec();
+
+			double px = posX;
+			double py = posY + getEyeHeight();
+			double pz = posZ;
+
+
+			for (int i = 0; i < 45; i++)
+			{
+				double dx = vector.xCoord;
+				double dy = vector.yCoord;
+				double dz = vector.zCoord;
+
+				double spread = 5.0D + getRNG().nextDouble() * 2.5D;
+				double velocity = 0.5D + getRNG().nextDouble() * 0.5D;
+
+				dx += getRNG().nextGaussian() * 0.007499999832361937D * spread;
+				dy += getRNG().nextGaussian() * 0.007499999832361937D * spread;
+				dz += getRNG().nextGaussian() * 0.007499999832361937D * spread;
+				dx *= velocity;
+				dy *= velocity;
+				dz *= velocity;
+
+				worldObj.spawnParticle(EnumParticleTypes.SMOKE_LARGE, px + getRNG().nextDouble() - 0.5D, py + getRNG().nextDouble() - 0.5D, pz + getRNG().nextDouble() - 0.5D, dx, dy, dz);
+			}
+		} else
+			worldObj.setEntityState(this, (byte)23);
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public void handleStatusUpdate(byte id)
+	{
+		if (id == 23) addMouthParticles();
+		else
+			super.handleStatusUpdate(id);
 	}
 
 	@Override

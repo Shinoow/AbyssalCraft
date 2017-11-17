@@ -293,7 +293,7 @@ public class TileEntityStateTransformer extends TileEntity implements ITickable,
 			boolean b = true;
 
 			for(int i = 1; i < containerItemStacks.length; i++)
-				if(containerItemStacks[0] != null)
+				if(containerItemStacks[i] != null)
 					b = false;
 
 			return b && ((ItemStoneTablet)stack.getItem()).hasInventory(stack);

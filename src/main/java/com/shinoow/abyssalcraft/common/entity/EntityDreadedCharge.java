@@ -1,0 +1,147 @@
+/*******************************************************************************
+ * AbyssalCraft
+ * Copyright (c) 2012 - 2017 Shinoow.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the GNU Lesser Public License v3
+ * which accompanies this distribution, and is available at
+ * http://www.gnu.org/licenses/lgpl-3.0.txt
+ *
+ * Contributors:
+ *     Shinoow -  implementation
+ ******************************************************************************/
+package com.shinoow.abyssalcraft.common.entity;
+
+import java.util.List;
+
+import net.minecraft.entity.EntityAreaEffectCloud;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.projectile.EntityFireball;
+import net.minecraft.init.SoundEvents;
+import net.minecraft.potion.PotionEffect;
+import net.minecraft.util.DamageSource;
+import net.minecraft.util.EnumParticleTypes;
+import net.minecraft.util.SoundCategory;
+import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.math.RayTraceResult;
+import net.minecraft.world.World;
+import net.minecraft.world.biome.Biome;
+import net.minecraft.world.chunk.Chunk;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
+
+import com.google.common.collect.Lists;
+import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
+import com.shinoow.abyssalcraft.api.biome.ACBiomes;
+import com.shinoow.abyssalcraft.common.network.PacketDispatcher;
+import com.shinoow.abyssalcraft.common.network.client.CleansingRitualMessage;
+
+public class EntityDreadedCharge extends EntityFireball
+{
+	public EntityDreadedCharge(World worldIn)
+	{
+		super(worldIn);
+		setSize(1.0F, 1.0F);
+	}
+
+	@SideOnly(Side.CLIENT)
+	public EntityDreadedCharge(World worldIn, double x, double y, double z, double accelX, double accelY, double accelZ)
+	{
+		super(worldIn, x, y, z, accelX, accelY, accelZ);
+		setSize(1.0F, 1.0F);
+	}
+
+	public EntityDreadedCharge(World worldIn, EntityLivingBase shooter, double accelX, double accelY, double accelZ)
+	{
+		super(worldIn, shooter, accelX, accelY, accelZ);
+		setSize(1.0F, 1.0F);
+	}
+
+	/**
+	 * Returns true if other Entities should be prevented from moving through this Entity.
+	 */
+	@Override
+	public boolean canBeCollidedWith()
+	{
+		return false;
+	}
+
+	/**
+	 * Called when the entity is attacked.
+	 */
+	@Override
+	public boolean attackEntityFrom(DamageSource source, float amount)
+	{
+		return false;
+	}
+
+	@Override
+	protected EnumParticleTypes getParticleType()
+	{
+		return EnumParticleTypes.FLAME;
+	}
+
+	@Override
+	protected boolean isFireballFiery()
+	{
+		return false;
+	}
+
+
+	@Override
+	protected void onImpact(RayTraceResult movingObject)
+	{
+		if (ticksExisted > 10)
+		{
+			Lists.newArrayList();
+			for(int x = getPosition().getX() -4; x < getPosition().getX() + 4; x++)
+				for(int z = getPosition().getZ() - 4; z < getPosition().getZ() + 4; z++)
+				{
+					Biome b = ACBiomes.dreadlands;
+					Chunk c = worldObj.getChunkFromBlockCoords(getPosition());
+					c.getBiomeArray()[(z & 0xF) << 4 | x & 0xF] = (byte)Biome.getIdForBiome(b);
+					c.setModified(true);
+					PacketDispatcher.sendToDimension(new CleansingRitualMessage(x, z, Biome.getIdForBiome(b)), worldObj.provider.getDimension());
+				}
+
+
+			if (movingObject.entityHit != null) if (shootingEntity instanceof EntityLivingBase)
+			{
+				shootingEntity.attackEntityAsMob(movingObject.entityHit);
+				movingObject.entityHit.hurtResistantTime = 0;
+			}
+
+			List<EntityLivingBase> list = worldObj.getEntitiesWithinAABB(EntityLivingBase.class, getEntityBoundingBox().expandXyz(8.0D));
+			EntityAreaEffectCloud entityareaeffectcloud = new EntityAreaEffectCloud(worldObj, posX, posY, posZ);
+			//     entityareaeffectcloud.setOwner((EntityFriendlyCreature)this.shootingEntity);
+			entityareaeffectcloud.setParticle(EnumParticleTypes.FLAME);
+			entityareaeffectcloud.addEffect(new PotionEffect(AbyssalCraftAPI.dread_plague, 400));
+			entityareaeffectcloud.setRadius(2.0F);
+			entityareaeffectcloud.setDuration(200 + rand.nextInt(200));
+			entityareaeffectcloud.setRadiusPerTick((3F - entityareaeffectcloud.getRadius()) / entityareaeffectcloud.getDuration());
+
+			if (!list.isEmpty()) for (EntityLivingBase entitylivingbase : list)
+			{
+				double d0 = getDistanceSqToEntity(entitylivingbase);
+
+				if (shootingEntity != null && d0 < 64.0D) entityareaeffectcloud.setPosition(entitylivingbase.posX, entitylivingbase.posY, entitylivingbase.posZ);
+			}
+
+			for (int k = 0; k < 200; ++k)
+			{
+				float f2 = rand.nextFloat() * 4.0F;
+				float f3 = rand.nextFloat() * ((float)Math.PI * 2F);
+				double d3 = MathHelper.cos(f3) * f2;
+				double d4 = 0.01D + rand.nextDouble() * 0.5D;
+				double d5 = MathHelper.sin(f3) * f2;
+				worldObj.spawnParticle(EnumParticleTypes.FLAME, getPosition().getX() + d3 * 0.1D, getPosition().getY() + 0.3D, getPosition().getZ() + d5 * 0.1D, d3 * f2, d4, d5 * f2, new int[0]);
+			}
+
+			worldObj.playSound((EntityPlayer)null, getPosition(), SoundEvents.ENTITY_ENDERDRAGON_FIREBALL_EPLD, SoundCategory.MASTER, 1.0F, worldObj.rand.nextFloat() * 0.1F + 0.9F);
+
+			if (!worldObj.isRemote) worldObj.spawnEntityInWorld(entityareaeffectcloud);
+			worldObj.newExplosion(this, posX, posY + 1.0D, posZ, 3.0F, false, false);
+			setDead();
+		}
+	}
+}

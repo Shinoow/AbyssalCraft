@@ -18,16 +18,13 @@ import net.minecraft.block.material.Material;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
-import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.event.*;
 import net.minecraftforge.fml.common.registry.GameRegistry;
-import net.minecraftforge.oredict.OreDictionary;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
-import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.common.blocks.*;
 import com.shinoow.abyssalcraft.common.blocks.itemblock.*;
@@ -484,10 +481,7 @@ public class BlockHandler implements ILifeCycleHandler {
 	}
 
 	@Override
-	public void init(FMLInitializationEvent event) {
-		AbyssalCraftAPI.addCrystal(new ItemStack(ACBlocks.crystal_cluster, 1, OreDictionary.WILDCARD_VALUE));
-		AbyssalCraftAPI.addCrystal(new ItemStack(ACBlocks.crystal_cluster2, 1, OreDictionary.WILDCARD_VALUE));
-	}
+	public void init(FMLInitializationEvent event) {}
 
 	@Override
 	public void postInit(FMLPostInitializationEvent event) {

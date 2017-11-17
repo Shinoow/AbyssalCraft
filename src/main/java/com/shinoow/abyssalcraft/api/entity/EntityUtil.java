@@ -45,7 +45,7 @@ public final class EntityUtil {
 	 * @return True if the Entity is immune, otherwise false
 	 */
 	public static boolean isEntityCoralium(EntityLivingBase par1){
-		return par1 instanceof ICoraliumEntity || par1 instanceof EntityPlayer && isPlayerCoralium((EntityPlayer)par1);
+		return par1 instanceof ICoraliumEntity || par1 instanceof IOmotholEntity || par1 instanceof EntityPlayer && isPlayerCoralium((EntityPlayer)par1);
 	}
 
 	/**
@@ -65,7 +65,7 @@ public final class EntityUtil {
 	 * @return True if the Entity is immune, otherwise false
 	 */
 	public static boolean isEntityDread(EntityLivingBase par1){
-		return par1 instanceof IDreadEntity;
+		return par1 instanceof IDreadEntity || par1 instanceof IOmotholEntity;
 	}
 
 	/**
@@ -74,7 +74,7 @@ public final class EntityUtil {
 	 * @return True if the Entity is immune, otherwise false
 	 */
 	public static boolean isEntityAnti(EntityLivingBase par1){
-		return par1 instanceof IAntiEntity;
+		return par1 instanceof IAntiEntity || par1 instanceof IOmotholEntity;
 	}
 
 	/**

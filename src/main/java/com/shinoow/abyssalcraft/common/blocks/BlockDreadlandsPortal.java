@@ -24,6 +24,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
+import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.AxisAlignedBB;
@@ -31,6 +32,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeHooks;
+import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -169,24 +171,49 @@ public class BlockDreadlandsPortal extends BlockBreakable {
 	@Override
 	public void onEntityCollidedWithBlock(World par1World, BlockPos pos, IBlockState state, Entity par5Entity)
 	{
-		if (!par5Entity.isRiding() && !par5Entity.isBeingRidden() && par5Entity instanceof EntityPlayerMP)
-		{
-			EntityPlayerMP thePlayer = (EntityPlayerMP)par5Entity;
-			thePlayer.addStat(ACAchievements.enter_dreadlands, 1);
-			if (thePlayer.timeUntilPortal > 0)
-				thePlayer.timeUntilPortal = thePlayer.getPortalCooldown();
-			else if (thePlayer.dimension != ACLib.dreadlands_id)
-			{
-				if(!ForgeHooks.onTravelToDimension(thePlayer, ACLib.dreadlands_id)) return;
-				thePlayer.timeUntilPortal = ACConfig.portalCooldown;
-				thePlayer.mcServer.getPlayerList().transferPlayerToDimension(thePlayer, ACLib.dreadlands_id, new TeleporterAC(thePlayer.mcServer.worldServerForDimension(ACLib.dreadlands_id), this, ACBlocks.dreadstone));
-			}
-			else {
-				if(!ForgeHooks.onTravelToDimension(thePlayer, ACLib.abyssal_wasteland_id)) return;
-				thePlayer.timeUntilPortal = ACConfig.portalCooldown;
-				thePlayer.mcServer.getPlayerList().transferPlayerToDimension(thePlayer, ACLib.abyssal_wasteland_id, new TeleporterAC(thePlayer.mcServer.worldServerForDimension(ACLib.abyssal_wasteland_id), this, ACBlocks.dreadstone));
-			}
-		}
+		if (!par5Entity.isRiding() && !par5Entity.isBeingRidden() && !par1World.isRemote)
+			if(par5Entity.timeUntilPortal <= 0){
+				if(par5Entity instanceof EntityPlayerMP){
+					EntityPlayerMP thePlayer = (EntityPlayerMP)par5Entity;
+					thePlayer.addStat(ACAchievements.enter_dreadlands, 1);
+
+					thePlayer.timeUntilPortal = ACConfig.portalCooldown;
+					if (thePlayer.dimension != ACLib.dreadlands_id)
+					{
+						if(!ForgeHooks.onTravelToDimension(thePlayer, ACLib.dreadlands_id)) return;
+						thePlayer.mcServer.getPlayerList().transferPlayerToDimension(thePlayer, ACLib.dreadlands_id, new TeleporterAC(thePlayer.mcServer.worldServerForDimension(ACLib.dreadlands_id), this, ACBlocks.dreadstone));
+					}
+					else {
+						if(!ForgeHooks.onTravelToDimension(thePlayer, ACLib.abyssal_wasteland_id)) return;
+						thePlayer.mcServer.getPlayerList().transferPlayerToDimension(thePlayer, ACLib.abyssal_wasteland_id, new TeleporterAC(thePlayer.mcServer.worldServerForDimension(ACLib.abyssal_wasteland_id), this, ACBlocks.dreadstone));
+					}
+				} else {
+					MinecraftServer server = FMLCommonHandler.instance().getMinecraftServerInstance();
+					par5Entity.timeUntilPortal = par5Entity.getPortalCooldown();
+
+					if(par5Entity.dimension != ACLib.dreadlands_id){
+						if(!ForgeHooks.onTravelToDimension(par5Entity, ACLib.dreadlands_id)) return;
+
+						int i = par5Entity.dimension;
+
+						par5Entity.dimension = ACLib.dreadlands_id;
+						par1World.removeEntityDangerously(par5Entity);
+
+						par5Entity.isDead = false;
+
+						server.getPlayerList().transferEntityToWorld(par5Entity, i, server.worldServerForDimension(i), server.worldServerForDimension(ACLib.dreadlands_id), new TeleporterAC(server.worldServerForDimension(ACLib.dreadlands_id), this, ACBlocks.dreadstone));
+					} else {
+						if(!ForgeHooks.onTravelToDimension(par5Entity, ACLib.abyssal_wasteland_id)) return;
+
+						par5Entity.dimension = ACLib.abyssal_wasteland_id;
+						par1World.removeEntityDangerously(par5Entity);
+
+						par5Entity.isDead = false;
+
+						server.getPlayerList().transferEntityToWorld(par5Entity, ACLib.dreadlands_id, server.worldServerForDimension(ACLib.dreadlands_id), server.worldServerForDimension(ACLib.abyssal_wasteland_id), new TeleporterAC(server.worldServerForDimension(ACLib.abyssal_wasteland_id), this, ACBlocks.dreadstone));
+					}
+				}
+			} else par5Entity.timeUntilPortal = par5Entity.getPortalCooldown();
 	}
 
 	@Override

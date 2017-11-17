@@ -12,8 +12,10 @@
 package com.shinoow.abyssalcraft.common.entity;
 
 import java.util.Calendar;
+import java.util.List;
 import java.util.UUID;
 
+import net.minecraft.block.material.EnumPushReaction;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.*;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
@@ -23,20 +25,34 @@ import net.minecraft.entity.item.EntityXPOrb;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.network.datasync.DataParameter;
+import net.minecraft.network.datasync.DataSerializers;
+import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.potion.PotionEffect;
-import net.minecraft.util.DamageSource;
-import net.minecraft.util.EnumParticleTypes;
-import net.minecraft.util.SoundEvent;
+import net.minecraft.util.*;
+import net.minecraft.util.math.*;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.util.text.translation.I18n;
 import net.minecraft.world.*;
 import net.minecraft.world.BossInfo.Color;
+import net.minecraft.world.biome.Biome;
+import net.minecraft.world.chunk.Chunk;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
+import com.google.common.base.Predicate;
+import com.google.common.base.Predicates;
+import com.google.common.collect.Lists;
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
+import com.shinoow.abyssalcraft.api.biome.ACBiomes;
+import com.shinoow.abyssalcraft.api.entity.EntityUtil;
 import com.shinoow.abyssalcraft.api.entity.IDreadEntity;
 import com.shinoow.abyssalcraft.api.item.ACItems;
+import com.shinoow.abyssalcraft.common.network.PacketDispatcher;
+import com.shinoow.abyssalcraft.common.network.client.CleansingRitualMessage;
 import com.shinoow.abyssalcraft.lib.ACAchievements;
 import com.shinoow.abyssalcraft.lib.ACConfig;
 import com.shinoow.abyssalcraft.lib.ACSounds;
@@ -46,8 +62,18 @@ public class EntityChagaroth extends EntityMob implements IDreadEntity {
 
 	private static final UUID attackDamageBoostUUID = UUID.fromString("648D7064-6A60-4F59-8ABE-C2C23A6DD7A9");
 	private static final AttributeModifier attackDamageBoost = new AttributeModifier(attackDamageBoostUUID, "Halloween Attack Damage Boost", 8D, 0);
-	public int deathTicks;
+	public int deathTicks, flameShootTimer;
 	private final BossInfoServer bossInfo = (BossInfoServer)new BossInfoServer(getDisplayName(), BossInfo.Color.BLUE, BossInfo.Overlay.PROGRESS).setDarkenSky(true);
+	private static final DataParameter<Integer> FIRST_HEAD_TARGET = EntityDataManager.<Integer>createKey(EntityChagaroth.class, DataSerializers.VARINT);
+	private static final DataParameter<Integer> SECOND_HEAD_TARGET = EntityDataManager.<Integer>createKey(EntityChagaroth.class, DataSerializers.VARINT);
+	private static final DataParameter<Integer> THIRD_HEAD_TARGET = EntityDataManager.<Integer>createKey(EntityChagaroth.class, DataSerializers.VARINT);
+	private static final DataParameter<Integer>[] HEAD_TARGETS = new DataParameter[] {FIRST_HEAD_TARGET, SECOND_HEAD_TARGET, THIRD_HEAD_TARGET};
+	private final float[] xRotationHeads = new float[2];
+	private final float[] yRotationHeads = new float[2];
+	private final float[] xRotOHeads = new float[2];
+	private final float[] yRotOHeads = new float[2];
+	private final int[] nextHeadUpdate = new int[2];
+	private final int[] idleHeadUpdates = new int[2];
 
 	public EntityChagaroth(World par1World) {
 		super(par1World);
@@ -56,7 +82,7 @@ public class EntityChagaroth extends EntityMob implements IDreadEntity {
 		tasks.addTask(3, new EntityAILookIdle(this));
 		tasks.addTask(3, new EntityAIWatchClosest(this, EntityPlayer.class, 16.0F));
 		targetTasks.addTask(1, new EntityAIHurtByTarget(this, false));
-		targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityPlayer.class, true));
+		targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityLivingBase.class, 0, true, false, entity -> !(entity instanceof IDreadEntity)));
 		ignoreFrustumCheck = true;
 		isImmuneToFire = true;
 	}
@@ -68,12 +94,40 @@ public class EntityChagaroth extends EntityMob implements IDreadEntity {
 	}
 
 	@Override
+	public AxisAlignedBB getCollisionBoundingBox()
+	{
+		return getEntityBoundingBox();
+	}
+
+	@Override
+	protected void entityInit()
+	{
+		super.entityInit();
+		dataManager.register(FIRST_HEAD_TARGET, Integer.valueOf(0));
+		dataManager.register(SECOND_HEAD_TARGET, Integer.valueOf(0));
+		dataManager.register(THIRD_HEAD_TARGET, Integer.valueOf(0));
+	}
+
+	public int getWatchedTargetId(int head)
+	{
+		return dataManager.get(HEAD_TARGETS[head]).intValue();
+	}
+
+	/**
+	 * Updates the target entity ID
+	 */
+	public void updateWatchedTargetId(int targetOffset, int newId)
+	{
+		dataManager.set(HEAD_TARGETS[targetOffset], Integer.valueOf(newId));
+	}
+
+	@Override
 	public boolean attackEntityAsMob(Entity par1Entity) {
 
 		boolean flag = super.attackEntityAsMob(par1Entity);
 
 		if(flag)
-			if(par1Entity instanceof EntityLivingBase)
+			if(par1Entity instanceof EntityLivingBase && !EntityUtil.isEntityDread((EntityLivingBase) par1Entity))
 				((EntityLivingBase)par1Entity).addPotionEffect(new PotionEffect(AbyssalCraftAPI.dread_plague, 100));
 		if(ACConfig.hardcoreMode && par1Entity instanceof EntityPlayer)
 			par1Entity.attackEntityFrom(DamageSource.causeMobDamage(this).setDamageBypassesArmor().setDamageIsAbsolute(), 4.5F * (float)(ACConfig.damageAmpl > 1.0D ? ACConfig.damageAmpl : 1));
@@ -152,6 +206,215 @@ public class EntityChagaroth extends EntityMob implements IDreadEntity {
 			bossInfo.setColor(Color.YELLOW);
 		if(getHealth() < getMaxHealth() / 4 && getHealth() > 0 && bossInfo.getColor() != BossInfo.Color.RED)
 			bossInfo.setColor(Color.RED);
+
+		for (int i = 1; i < 3; ++i)
+			if (ticksExisted >= nextHeadUpdate[i - 1])
+			{
+				nextHeadUpdate[i - 1] = ticksExisted + 10 + rand.nextInt(10);
+
+				int k1 = getWatchedTargetId(i);
+
+				if (k1 > 0)
+				{
+					Entity entity = worldObj.getEntityByID(k1);
+
+					if (entity != null && entity.isEntityAlive() && getDistanceSqToEntity(entity) <= 48D * 48D && canEntityBeSeen(entity))
+					{
+						if (entity instanceof EntityPlayer && ((EntityPlayer)entity).capabilities.disableDamage)
+							updateWatchedTargetId(i, 0);
+						else
+						{
+							launchWitherSkullToEntity(i + 1, (EntityLivingBase)entity);
+							idleHeadUpdates[i - 1] = 0;
+						}
+					} else
+						updateWatchedTargetId(i, 0);
+				}
+				else
+				{
+					List<EntityLivingBase> list = worldObj.<EntityLivingBase>getEntitiesWithinAABB(EntityLivingBase.class, getEntityBoundingBox().expandXyz(48D), Predicates.<EntityLivingBase>and(EntitySelectors.NOT_SPECTATING, entity -> !EntityUtil.isEntityDread(entity)));
+
+					for (int j2 = 0; j2 < 10 && !list.isEmpty(); ++j2)
+					{
+						EntityLivingBase entitylivingbase = list.get(rand.nextInt(list.size()));
+
+						if (entitylivingbase != this && entitylivingbase.isEntityAlive() && canEntityBeSeen(entitylivingbase))
+						{
+							if (entitylivingbase instanceof EntityPlayer)
+							{
+								if (!((EntityPlayer)entitylivingbase).capabilities.disableDamage) updateWatchedTargetId(i, entitylivingbase.getEntityId());
+							} else
+								updateWatchedTargetId(i, entitylivingbase.getEntityId());
+
+							break;
+						}
+
+						list.remove(entitylivingbase);
+					}
+				}
+			}
+
+		if (getAttackTarget() != null) updateWatchedTargetId(0, getAttackTarget().getEntityId());
+		else
+			updateWatchedTargetId(0, 0);
+	}
+
+	private void launchWitherSkullToEntity(int p_82216_1_, EntityLivingBase p_82216_2_)
+	{
+		launchWitherSkullToCoords(p_82216_1_, p_82216_2_.posX, p_82216_2_.posY + 0.5D, p_82216_2_.posZ, true);
+	}
+
+	/**
+	 * Launches a Wither skull toward (par2, par4, par6)
+	 */
+	private void launchWitherSkullToCoords(int p_82209_1_, double x, double y, double z, boolean invulnerable)
+	{
+		double d0 = getHeadX(p_82209_1_);
+		double d1 = getHeadY(p_82209_1_);
+		double d2 = getHeadZ(p_82209_1_);
+		double d3 = x - d0;
+		double d4 = y - d1;
+		double d5 = z - d2;
+		float f1 = MathHelper.sqrt_double(d3 * d3 + d5 * d5) * 0.2F;
+		float f2 = MathHelper.sqrt_double(d3 * d3 + d4 * d4 + d5 * d5);
+		EntityDreadSlug entitydreadslug = new EntityDreadSlug(worldObj, this);
+		entitydreadslug.posY = d1;
+		entitydreadslug.posX = d0;
+		entitydreadslug.posZ = d2;
+		entitydreadslug.setThrowableHeading(d3, d4 + f1, d5, 1.75F, 1.0F);
+		if(!worldObj.isRemote)
+			worldObj.spawnEntityInWorld(entitydreadslug);
+		entitydreadslug.motionX = d3 / f2 * 0.8D * 0.8D + entitydreadslug.motionX;
+		entitydreadslug.motionY = d4 / f2 * 0.8D * 0.8D + entitydreadslug.motionY;
+		entitydreadslug.motionZ = d5 / f2 * 0.8D * 0.8D + entitydreadslug.motionZ;
+
+		switch (rand.nextInt(5))
+		{
+		case 0:
+			EntityDreadSlug entitydreadslug1 = new EntityDreadSlug(worldObj, this);
+			entitydreadslug1.posY = d1;
+			entitydreadslug1.posX = d0;
+			entitydreadslug1.posZ = d2;
+			entitydreadslug1.setThrowableHeading(d3, d4 + f1, d5, 1.75F, 1.0F);
+			if(!worldObj.isRemote)
+				worldObj.spawnEntityInWorld(entitydreadslug1);
+			entitydreadslug1.motionX = d3 / f2 * 0.8D * 0.8D + entitydreadslug1.motionX;
+			entitydreadslug1.motionY = d4 / f2 * 0.8D * 0.8D + entitydreadslug1.motionY;
+			entitydreadslug1.motionZ = d5 / f2 * 0.8D * 0.8D + entitydreadslug1.motionZ;
+			nextHeadUpdate[p_82209_1_ - 2] = ticksExisted + 10;
+			break;
+		case 1:
+			EntityDreadSlug entitydreadslug11 = new EntityDreadSlug(worldObj, this);
+			entitydreadslug11.posY = d1;
+			entitydreadslug11.posX = d0;
+			entitydreadslug11.posZ = d2;
+			EntityDreadSpawn mob = new EntityDreadSpawn(worldObj);
+			mob.copyLocationAndAnglesFrom(entitydreadslug11);
+			entitydreadslug11.setThrowableHeading(d3, d4 + f1 + rand.nextDouble() * 150D, d5, 1.3F, 1.0F);
+			if(!worldObj.isRemote)
+				worldObj.spawnEntityInWorld(entitydreadslug11);
+			if(!worldObj.isRemote)
+				worldObj.spawnEntityInWorld(mob);
+			mob.startRiding(entitydreadslug11);
+			mob.onInitialSpawn(worldObj.getDifficultyForLocation(getPosition()), null);
+			nextHeadUpdate[p_82209_1_ - 2] = ticksExisted + 20;
+			break;
+		case 2:
+			EntityDreadSlug entitydreadslug111 = new EntityDreadSlug(worldObj, this);
+			entitydreadslug111.posY = d1;
+			entitydreadslug111.posX = d0;
+			entitydreadslug111.posZ = d2;
+			EntityChagarothSpawn spawn = new EntityChagarothSpawn(worldObj);
+			spawn.copyLocationAndAnglesFrom(entitydreadslug111);
+			entitydreadslug111.setThrowableHeading(d3, d4 + f1 + rand.nextDouble() * 150D, d5, 1.3F, 1.0F);
+			if(!worldObj.isRemote)
+				worldObj.spawnEntityInWorld(entitydreadslug111);
+			if(!worldObj.isRemote)
+				worldObj.spawnEntityInWorld(spawn);
+			spawn.startRiding(entitydreadslug111);
+			spawn.onInitialSpawn(worldObj.getDifficultyForLocation(getPosition()), null);
+			nextHeadUpdate[p_82209_1_ - 2] = ticksExisted + 20;
+			break;
+		case 3:
+			EntityDreadSlug entitydreadslug1111 = new EntityDreadSlug(worldObj, this);
+			entitydreadslug1111.posY = d1;
+			entitydreadslug1111.posX = d0;
+			entitydreadslug1111.posZ = d2;
+			EntityChagarothFist fist = new EntityChagarothFist(worldObj);
+			fist.copyLocationAndAnglesFrom(entitydreadslug1111);
+			entitydreadslug1111.setThrowableHeading(d3, d4 + f1 + rand.nextDouble() * 150D, d5, 1.3F, 1.0F);
+			if(!worldObj.isRemote)
+				worldObj.spawnEntityInWorld(entitydreadslug1111);
+			if(!worldObj.isRemote)
+				worldObj.spawnEntityInWorld(fist);
+			fist.startRiding(entitydreadslug1111);
+			fist.onInitialSpawn(worldObj.getDifficultyForLocation(getPosition()), null);
+			nextHeadUpdate[p_82209_1_ - 2] = ticksExisted + 20;
+			break;
+		case 4:
+			worldObj.playEvent((EntityPlayer)null, 1016, new BlockPos(this), 0);
+			d4 = y + 0.5D - d1;
+			EntityDreadedCharge entitydragonfireball = new EntityDreadedCharge(worldObj, this, d3, d4, d5);
+			entitydragonfireball.posX = d0;
+			entitydragonfireball.posY = d1;
+			entitydragonfireball.posZ = d2;
+			if(!worldObj.isRemote)
+				worldObj.spawnEntityInWorld(entitydragonfireball);
+			nextHeadUpdate[p_82209_1_ - 2] = ticksExisted + 100;
+			break;
+		}
+	}
+
+	private double getHeadX(int p_82214_1_)
+	{
+		if (p_82214_1_ <= 0)
+			return posX;
+		else
+		{
+			float f = (renderYawOffset + 180 * (p_82214_1_ - 1)) * 0.017453292F;
+			float f1 = MathHelper.cos(f);
+			return posX + f1 * 1.4D;
+		}
+	}
+
+	private double getHeadY(int p_82208_1_)
+	{
+		return posY + getEyeHeight() * 0.8D;
+	}
+
+	private double getHeadZ(int p_82213_1_)
+	{
+		if (p_82213_1_ <= 0)
+			return posZ;
+		else
+		{
+			float f = (renderYawOffset + 180 * (p_82213_1_ - 1)) * 0.017453292F;
+			float f1 = MathHelper.sin(f);
+			return posZ + f1 * 1.4D;
+		}
+	}
+
+	private float rotlerp(float p_82204_1_, float p_82204_2_, float p_82204_3_)
+	{
+		float f = MathHelper.wrapDegrees(p_82204_2_ - p_82204_1_);
+
+		if (f > p_82204_3_) f = p_82204_3_;
+
+		if (f < -p_82204_3_) f = -p_82204_3_;
+
+		return p_82204_1_ + f;
+	}
+
+	@SideOnly(Side.CLIENT)
+	public float getHeadYRotation(int p_82207_1_)
+	{
+		return yRotationHeads[p_82207_1_];
+	}
+
+	@SideOnly(Side.CLIENT)
+	public float getHeadXRotation(int p_82210_1_)
+	{
+		return xRotationHeads[p_82210_1_];
 	}
 
 	/**
@@ -177,72 +440,274 @@ public class EntityChagaroth extends EntityMob implements IDreadEntity {
 	@Override
 	public void onLivingUpdate()
 	{
-		EntityPlayer player = worldObj.getClosestPlayerToEntity(this, 32D);
-		if(!worldObj.isRemote && deathTicks == 0){
-			if(rand.nextInt(100) == 0 && player != null){
-				EntityChagarothSpawn mob = new EntityChagarothSpawn(worldObj);
-				mob.copyLocationAndAnglesFrom(player);
-				worldObj.spawnEntityInWorld(mob);
+		setSize(2.25F, 4.5F);
+
+		Lists.newArrayList();
+		if (ticksExisted % 40 == 0)
+			for(int x = getPosition().getX() - 3; x <= getPosition().getX() + 3; x++)
+				for(int z = getPosition().getZ() - 3; z <= getPosition().getZ() + 3; z++)
+				{
+					Biome b = ACBiomes.dreadlands;
+					Chunk c = worldObj.getChunkFromBlockCoords(getPosition());
+					c.getBiomeArray()[(z & 0xF) << 4 | x & 0xF] = (byte)Biome.getIdForBiome(b);
+					c.setModified(true);
+					PacketDispatcher.sendToDimension(new CleansingRitualMessage(x, z, Biome.getIdForBiome(b)), worldObj.provider.getDimension());
+				}
+
+		setSprinting(false);
+		motionX = 0.0D;
+		motionZ = 0.0D;
+		if (motionY > 0.0D)
+			motionY = 0.0D;
+		isAirBorne = false;
+		onGround = true;
+
+		for (int i = 0; i < 2; ++i)
+		{
+			yRotOHeads[i] = yRotationHeads[i];
+			xRotOHeads[i] = xRotationHeads[i];
+		}
+
+		for (int j = 0; j < 2; ++j)
+		{
+			int k = getWatchedTargetId(j + 1);
+			Entity entity1 = null;
+
+			if (k > 0) entity1 = worldObj.getEntityByID(k);
+
+			if (entity1 != null)
+			{
+				double d11 = getHeadX(j + 1);
+				double d12 = getHeadY(j + 1);
+				double d13 = getHeadZ(j + 1);
+				double d6 = entity1.posX - d11;
+				double d7 = entity1.posY + entity1.getEyeHeight() - d12;
+				double d8 = entity1.posZ - d13;
+				double d9 = MathHelper.sqrt_double(d6 * d6 + d8 * d8);
+				float f = (float)(MathHelper.atan2(d8, d6) * (180D / Math.PI)) - 90.0F;
+				float f1 = (float)-(MathHelper.atan2(d7, d9) * (180D / Math.PI));
+				xRotationHeads[j] = rotlerp(xRotationHeads[j], f1, 40.0F);
+				yRotationHeads[j] = rotlerp(yRotationHeads[j], f, 10.0F);
 			}
-			if(rand.nextInt(1000) == 0){
+			else
+			{
+				xRotationHeads[j] = rotlerp(xRotationHeads[j], rotationPitch, 40.0F);
+				yRotationHeads[j] = rotlerp(yRotationHeads[j], rotationYawHead, 10.0F);
+			}
+		}
+
+		if (getAttackTarget() != null && getDistanceSqToEntity(getAttackTarget()) <= 256D && flameShootTimer <= -200) flameShootTimer = 150;
+
+		if (flameShootTimer > 0)
+		{
+			worldObj.setEntityState(this, (byte)23);
+			if (ticksExisted % 5 == 0)
+			{
+				worldObj.playSound(null, new BlockPos(posX + 0.5D, posY + getEyeHeight(), posZ + 0.5D), SoundEvents.ENTITY_GHAST_SHOOT, getSoundCategory(), 0.5F + getRNG().nextFloat(), getRNG().nextFloat() * 0.6F + 0.2F);
+				worldObj.playSound(null, new BlockPos(posX + 0.5D, posY + getEyeHeight(), posZ + 0.5D), SoundEvents.ENTITY_GHAST_SHOOT, getSoundCategory(), 0.5F + getRNG().nextFloat(), getRNG().nextFloat() * 0.5F + 0.2F);
+				worldObj.playSound(null, new BlockPos(posX + 0.5D, posY + getEyeHeight(), posZ + 0.5D), SoundEvents.ENTITY_GHAST_SHOOT, getSoundCategory(), 0.5F + getRNG().nextFloat(), getRNG().nextFloat() * 0.4F + 0.2F);
+			}
+			Entity target = getHeadLookTarget();
+			if (target != null) {
+				List list = worldObj.getEntitiesWithinAABB(EntityLivingBase.class, target.getEntityBoundingBox().expand(2.0D, 2.0D, 2.0D), Predicates.and(new Predicate[] { EntitySelectors.IS_ALIVE }));
+
+				if (list != null && !list.isEmpty()) for (int i1 = 0; i1 < list.size(); i1++)
+				{
+					EntityLivingBase entity = (EntityLivingBase)list.get(i1);
+
+					if (entity != null && rand.nextInt(3) == 0) if (entity.attackEntityFrom(AbyssalCraftAPI.dread, (float)(7.5D - getDistanceToEntity(entity)) * 2F))
+					{
+						entity.addPotionEffect(new PotionEffect(AbyssalCraftAPI.dread_plague, 200, 1));
+						entity.setFire((int)(10 - getDistanceToEntity(entity)));
+					}
+				}
+
+				if (target.attackEntityFrom(AbyssalCraftAPI.dread, (float)(7.5D - getDistanceToEntity(target)) * 2F))
+				{
+					if (target instanceof EntityLivingBase)
+						((EntityLivingBase) target).addPotionEffect(new PotionEffect(AbyssalCraftAPI.dread_plague, 200, 1));
+					target.setFire((int)(10 - getDistanceToEntity(target)));
+				}
+			}
+		}
+
+		--flameShootTimer;
+
+		if(!worldObj.isRemote && isEntityAlive())
+		{
+			if(rand.nextInt(800) == 0)
+			{
 				EntityDreadSpawn mob = new EntityDreadSpawn(worldObj);
 				mob.copyLocationAndAnglesFrom(this);
 				worldObj.spawnEntityInWorld(mob);
+				mob.onInitialSpawn(worldObj.getDifficultyForLocation(getPosition()), null);
 
 				EntityChagarothSpawn spawn = new EntityChagarothSpawn(worldObj);
 				spawn.copyLocationAndAnglesFrom(this);
 				worldObj.spawnEntityInWorld(spawn);
+				spawn.onInitialSpawn(worldObj.getDifficultyForLocation(getPosition()), null);
 			}
-			EntityChagarothFist fist = new EntityChagarothFist(worldObj);
-			fist.copyLocationAndAnglesFrom(this);
-			EntityDreadguard dreadGuard = new EntityDreadguard(worldObj);
-			dreadGuard.copyLocationAndAnglesFrom(fist);
-			if(rand.nextInt(3600) == 0)
+
+			if(rand.nextInt(1600) == 0)
+			{
+				EntityChagarothFist fist = new EntityChagarothFist(worldObj);
+				fist.copyLocationAndAnglesFrom(this);
 				worldObj.spawnEntityInWorld(fist);
-			if(rand.nextInt(7200) == 0)
+				fist.onInitialSpawn(worldObj.getDifficultyForLocation(getPosition()), null);
+			}
+
+			if(rand.nextInt(2400) == 0)
+			{
+				EntityDreadguard dreadGuard = new EntityDreadguard(worldObj);
+				dreadGuard.copyLocationAndAnglesFrom(this);
+				++dreadGuard.motionX;
 				worldObj.spawnEntityInWorld(dreadGuard);
-			if(player != null)
-				switch((int)getHealth()){
-				case 900:
-					worldObj.spawnEntityInWorld(fist);
-					damageEntity(DamageSource.generic, 1);
-					break;
-				case 800:
-					worldObj.spawnEntityInWorld(fist);
-					damageEntity(DamageSource.generic, 1);
-					break;
-				case 700:
-					worldObj.spawnEntityInWorld(fist);
-					damageEntity(DamageSource.generic, 1);
-					break;
-				case 600:
-					worldObj.spawnEntityInWorld(fist);
-					damageEntity(DamageSource.generic, 1);
-					break;
-				case 500:
-					worldObj.spawnEntityInWorld(fist);
-					damageEntity(DamageSource.generic, 1);
-					break;
-				case 400:
-					worldObj.spawnEntityInWorld(fist);
-					damageEntity(DamageSource.generic, 1);
-					break;
-				case 300:
-					worldObj.spawnEntityInWorld(fist);
-					damageEntity(DamageSource.generic, 1);
-					break;
-				case 200:
-					worldObj.spawnEntityInWorld(fist);
-					damageEntity(DamageSource.generic, 1);
-					break;
-				case 100:
-					worldObj.spawnEntityInWorld(fist);
-					worldObj.spawnEntityInWorld(dreadGuard);
-					damageEntity(DamageSource.generic, 1);
-					break;
-				}
+				dreadGuard.onInitialSpawn(worldObj.getDifficultyForLocation(getPosition()), null);
+			}
+
+			if(rand.nextInt(4800) == 0)
+			{
+				EntityGreaterDreadSpawn dreadGuard = new EntityGreaterDreadSpawn(worldObj);
+				dreadGuard.copyLocationAndAnglesFrom(this);
+				++dreadGuard.motionX;
+				worldObj.spawnEntityInWorld(dreadGuard);
+				dreadGuard.onInitialSpawn(worldObj.getDifficultyForLocation(getPosition()), null);
+			}
+
+			if(rand.nextInt(7200) == 0)
+			{
+				EntityLesserDreadbeast dreadGuard = new EntityLesserDreadbeast(worldObj);
+				dreadGuard.copyLocationAndAnglesFrom(this);
+				++dreadGuard.motionX;
+				worldObj.spawnEntityInWorld(dreadGuard);
+				dreadGuard.onInitialSpawn(worldObj.getDifficultyForLocation(getPosition()), null);
+			}
 		}
+
 		super.onLivingUpdate();
+	}
+
+	private Entity getHeadLookTarget()
+	{
+		Entity pointedEntity = null;
+		double range = 8D + rand.nextDouble() * 20D;
+		Vec3d srcVec = new Vec3d(posX, posY + getEyeHeight(), posZ);
+		Vec3d lookVec = getLook(1.0F);
+		RayTraceResult raytrace = worldObj.rayTraceBlocks(srcVec, srcVec.addVector(lookVec.xCoord * range, lookVec.yCoord * range, lookVec.zCoord * range));
+		BlockPos hitpos = raytrace != null ? raytrace.getBlockPos() : null;
+		double rx = hitpos == null ? range : Math.min(range, Math.abs(posX - hitpos.getX()));
+		double ry = hitpos == null ? range : Math.min(range, Math.abs(posY - hitpos.getY()));
+		double rz = hitpos == null ? range : Math.min(range, Math.abs(posZ - hitpos.getZ()));
+		Vec3d destVec = srcVec.addVector(lookVec.xCoord * range, lookVec.yCoord * range, lookVec.zCoord * range);
+		float var9 = 8.0F;
+		List<Entity> possibleList = worldObj.getEntitiesWithinAABBExcludingEntity(this, getEntityBoundingBox().offset(lookVec.xCoord * rx, lookVec.yCoord * ry, lookVec.zCoord * rz).expand(var9, var9, var9));
+		double hitDist = 0.0D;
+		for (Entity possibleEntity : possibleList)
+			if (possibleEntity != this && possibleEntity instanceof EntityLivingBase && !EntityUtil.isEntityDread((EntityLivingBase)possibleEntity))
+			{
+				float borderSize = possibleEntity.getCollisionBorderSize();
+				AxisAlignedBB collisionBB = possibleEntity.getEntityBoundingBox().expand(borderSize, borderSize, borderSize);
+				RayTraceResult interceptPos = collisionBB.calculateIntercept(srcVec, destVec);
+				if (collisionBB.isVecInside(srcVec))
+				{
+					if (0.0D < hitDist || hitDist == 0.0D)
+					{
+						pointedEntity = possibleEntity;
+						hitDist = 0.0D;
+					}
+				}
+				else if (interceptPos != null)
+				{
+					double possibleDist = srcVec.distanceTo(interceptPos.hitVec);
+					if (possibleDist < hitDist || hitDist == 0.0D)
+					{
+						pointedEntity = possibleEntity;
+						hitDist = possibleDist;
+					}
+				}
+			}
+		return pointedEntity;
+	}
+
+	protected void addMouthParticles()
+	{
+		if (worldObj.isRemote)
+		{
+			Vec3d vector = getLookVec();
+
+			double px = posX + vector.xCoord * 1.5D;
+			double py = posY + height * 0.75F;
+			double pz = posZ + vector.zCoord * 1.5D;
+
+
+			for (int i = 0; i < 75; i++)
+			{
+				double dx = vector.xCoord;
+				double dy = vector.yCoord;
+				double dz = vector.zCoord;
+
+				double spread = 15.0D + getRNG().nextDouble() * 5.0D;
+				double velocity = 0.5D + getRNG().nextDouble();
+
+				dx += getRNG().nextGaussian() * 0.007499999832361937D * spread;
+				dy += getRNG().nextGaussian() * 0.007499999832361937D;
+				dz += getRNG().nextGaussian() * 0.007499999832361937D * spread;
+				dx *= velocity;
+				dy *= velocity;
+				dz *= velocity;
+
+				worldObj.spawnParticle(EnumParticleTypes.FLAME, px + getRNG().nextDouble() - 0.5D, py + getRNG().nextDouble() - 0.5D, pz + getRNG().nextDouble() - 0.5D, dx, dy, dz);
+			}
+		} else
+			worldObj.setEntityState(this, (byte)23);
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public void handleStatusUpdate(byte id)
+	{
+		if (id == 23) addMouthParticles();
+		else
+			super.handleStatusUpdate(id);
+	}
+
+	@Override
+	public void applyEntityCollision(Entity entityIn)
+	{
+		if (!isRidingSameEntity(entityIn)) if (!entityIn.noClip && !noClip)
+		{
+			double d0 = entityIn.posX - posX;
+			double d1 = entityIn.posZ - posZ;
+			double d2 = MathHelper.abs_max(d0, d1);
+
+			if (d2 >= 0.01D)
+			{
+				d2 = MathHelper.sqrt_double(d2);
+				d0 = d0 / d2;
+				d1 = d1 / d2;
+				double d3 = 1.0D / d2;
+
+				if (d3 > 1.0D) d3 = 1.0D;
+
+				d0 = d0 * d3;
+				d1 = d1 * d3;
+				d0 = d0 * 0.2D;
+				d1 = d1 * 0.2D;
+
+				entityIn.addVelocity(d0, 0.0D, d1);
+
+				d0 = d0 * 0.1D;
+				d1 = d1 * 0.1D;
+
+				addVelocity(d0, 0.0D, d1);
+			}
+		}
+	}
+
+	@Override
+	public EnumPushReaction getPushReaction()
+	{
+		return EnumPushReaction.IGNORE;
 	}
 
 	@Override
@@ -283,6 +748,8 @@ public class EntityChagaroth extends EntityMob implements IDreadEntity {
 	{
 		if(par2 > 30) par2 = 10 + worldObj.rand.nextInt(10);
 
+		if(ACConfig.hardcoreMode && par2 >= 1) par2 *= 0.5;
+
 		return super.attackEntityFrom(par1DamageSource, par2);
 	}
 
@@ -290,6 +757,11 @@ public class EntityChagaroth extends EntityMob implements IDreadEntity {
 	protected void onDeathUpdate()
 	{
 		++deathTicks;
+
+		if(deathTicks % 20 == 0)
+			for(Entity entity : worldObj.getEntitiesInAABBexcluding(this, getEntityBoundingBox().expand(15, 15, 15), entity -> entity instanceof EntityDreadguard || entity instanceof EntityDreadSpawn
+				|| entity instanceof EntityGreaterDreadSpawn || entity instanceof EntityLesserDreadbeast || entity instanceof EntityChagarothSpawn || entity instanceof EntityChagarothFist))
+				entity.attackEntityFrom(DamageSource.outOfWorld, 20);
 
 		if (deathTicks <= 200)
 		{

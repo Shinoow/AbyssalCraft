@@ -61,10 +61,10 @@ public class LayerAsorahDeath implements LayerRenderer<EntityDragonBoss>
 				float f3 = random.nextFloat() * 2.0F + 1.0F + f1 * 2.0F;
 				worldrenderer.begin(6, DefaultVertexFormats.POSITION_COLOR);
 				worldrenderer.pos(0.0D, 0.0D, 0.0D).color(255, 255, 255, (int)(255.0F * (1.0F - f1))).endVertex();
-				worldrenderer.pos(-0.866D * f3, f2, -0.5F * f3).color(255, 0, 255, 0).endVertex();
-				worldrenderer.pos(0.866D * f3, f2, -0.5F * f3).color(255, 0, 255, 0).endVertex();
-				worldrenderer.pos(0.0D, f2, 1.0F * f3).color(255, 0, 255, 0).endVertex();
-				worldrenderer.pos(-0.866D * f3, f2, -0.5F * f3).color(255, 0, 255, 0).endVertex();
+				worldrenderer.pos(-0.866D * f3, f2, -0.5F * f3).color(0, 255, 255, 0).endVertex();
+				worldrenderer.pos(0.866D * f3, f2, -0.5F * f3).color(0, 255, 255, 0).endVertex();
+				worldrenderer.pos(0.0D, f2, 1.0F * f3).color(0, 255, 255, 0).endVertex();
+				worldrenderer.pos(-0.866D * f3, f2, -0.5F * f3).color(0, 255, 255, 0).endVertex();
 				tessellator.draw();
 			}
 

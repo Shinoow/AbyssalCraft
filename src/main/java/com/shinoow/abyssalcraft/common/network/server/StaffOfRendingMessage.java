@@ -24,9 +24,9 @@ import net.minecraftforge.fml.common.network.ByteBufUtils;
 import net.minecraftforge.fml.relauncher.Side;
 
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
-import com.shinoow.abyssalcraft.api.entity.IAntiEntity;
 import com.shinoow.abyssalcraft.api.entity.ICoraliumEntity;
 import com.shinoow.abyssalcraft.api.entity.IDreadEntity;
+import com.shinoow.abyssalcraft.api.entity.IOmotholEntity;
 import com.shinoow.abyssalcraft.common.network.AbstractMessage.AbstractServerMessage;
 import com.shinoow.abyssalcraft.lib.ACLib;
 import com.shinoow.abyssalcraft.lib.util.items.IStaffOfRending;
@@ -82,8 +82,7 @@ public class StaffOfRendingMessage extends AbstractServerMessage<StaffOfRendingM
 					if(!target.isDead)
 						if(target.attackEntityFrom(DamageSource.causePlayerDamage(player), staff.getDrainAmount(stack)))
 							staff.increaseEnergy(stack, "Dread");
-				} else if(player.worldObj.provider.getDimension() == ACLib.omothol_id && target instanceof ICoraliumEntity
-					&& target instanceof IDreadEntity && target instanceof IAntiEntity &&
+				} else if(player.worldObj.provider.getDimension() == ACLib.omothol_id && target instanceof IOmotholEntity &&
 					target.getCreatureAttribute() != AbyssalCraftAPI.SHADOW && target.isNonBoss())
 					if(!target.isDead)
 						if(target.attackEntityFrom(DamageSource.causePlayerDamage(player), staff.getDrainAmount(stack)))

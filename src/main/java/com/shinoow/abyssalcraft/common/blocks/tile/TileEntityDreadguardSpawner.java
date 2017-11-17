@@ -11,8 +11,6 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.common.blocks.tile;
 
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.math.MathHelper;
@@ -24,10 +22,10 @@ public class TileEntityDreadguardSpawner extends TileEntity implements ITickable
 	private int activatingRangeFromPlayer = 16;
 
 	@Override
-	public SPacketUpdateTileEntity getUpdatePacket() {
-		NBTTagCompound nbtTag = new NBTTagCompound();
-		writeToNBT(nbtTag);
-		return new SPacketUpdateTileEntity(pos, 1, nbtTag);
+	public void onLoad()
+	{
+		if(worldObj.isRemote)
+			worldObj.loadedTileEntityList.remove(this);
 	}
 
 	public boolean isActivated() {
@@ -39,7 +37,7 @@ public class TileEntityDreadguardSpawner extends TileEntity implements ITickable
 
 	@Override
 	public void update() {
-		if (!worldObj.isRemote && isActivated()) {
+		if (isActivated() && !worldObj.isRemote) {
 			EntityDreadguard mob = new EntityDreadguard(worldObj);
 			mob.setLocationAndAngles(pos.getX(), pos.getY(), pos.getZ(), MathHelper.wrapDegrees(worldObj.rand.nextFloat() * 360.0F), 10.0F);
 			mob.onInitialSpawn(worldObj.getDifficultyForLocation(pos), null);

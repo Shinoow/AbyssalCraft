@@ -91,8 +91,6 @@ public class TileEntityEngraver extends TileEntity implements ISidedInventory, I
 
 	}
 
-
-
 	@Override
 	public String getName() {
 
@@ -163,6 +161,13 @@ public class TileEntityEngraver extends TileEntity implements ISidedInventory, I
 	}
 
 	@Override
+	public void onLoad()
+	{
+		if(worldObj.isRemote)
+			worldObj.loadedTileEntityList.remove(this);
+	}
+
+	@Override
 	public int getInventoryStackLimit() {
 
 		return 64;
@@ -184,30 +189,28 @@ public class TileEntityEngraver extends TileEntity implements ISidedInventory, I
 
 		boolean flag1 = false;
 
-		if (!worldObj.isRemote)
+		if (isEngraving() && canEngrave())
 		{
-			if (isEngraving() && canEngrave())
-			{
-				++engraverProcessTime;
+			++engraverProcessTime;
 
-				if (engraverProcessTime == 200)
-				{
-					engraverProcessTime = 0;
-					engraveItem();
-					flag1 = true;
-					engraverItemStacks[1].setItemDamage(engraverItemStacks[1].getItemDamage() + 1);
-					if (engraverItemStacks[1].getItemDamage() == engraverItemStacks[1].getMaxDamage())
-						engraverItemStacks[1] = engraverItemStacks[1].getItem().getContainerItem(engraverItemStacks[1]);
-				}
-			} else
+			if (engraverProcessTime == 200)
+			{
 				engraverProcessTime = 0;
-
-			if (engraverProcessTime > 0)
-			{
+				engraveItem();
 				flag1 = true;
-				BlockEngraver.updateEngraverBlockState(worldObj, pos);
+				engraverItemStacks[1].setItemDamage(engraverItemStacks[1].getItemDamage() + 1);
+				if (engraverItemStacks[1].getItemDamage() == engraverItemStacks[1].getMaxDamage())
+					engraverItemStacks[1] = engraverItemStacks[1].getItem().getContainerItem(engraverItemStacks[1]);
 			}
+		} else
+			engraverProcessTime = 0;
+
+		if (engraverProcessTime > 0)
+		{
+			flag1 = true;
+			BlockEngraver.updateEngraverBlockState(worldObj, pos);
 		}
+
 
 		if (flag1)
 			markDirty();

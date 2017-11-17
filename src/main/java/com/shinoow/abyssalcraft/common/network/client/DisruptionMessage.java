@@ -36,7 +36,7 @@ public class DisruptionMessage extends AbstractClientMessage<DisruptionMessage> 
 	public DisruptionMessage(){}
 
 	public DisruptionMessage(DeityType deity, String name, BlockPos pos){
-		this.deity = deity != null ? deity.getName() : "";
+		this.deity = deity != null ? deity.toString() : "";
 		this.name = name;
 		this.pos = pos;
 	}
