@@ -26,6 +26,7 @@ import net.minecraft.entity.item.EntityXPOrb;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.MathHelper;
@@ -373,6 +374,20 @@ public class EntityDragonBoss extends EntityMob implements IBossDisplayData, IEn
 		}
 	}
 
+	@Override
+	public void writeEntityToNBT(NBTTagCompound par1NBTTagCompound)
+	{
+		super.writeEntityToNBT(par1NBTTagCompound);
+		par1NBTTagCompound.setInteger("DeathTicks", deathTicks);
+	}
+
+	@Override
+	public void readEntityFromNBT(NBTTagCompound par1NBTTagCompound)
+	{
+		super.readEntityFromNBT(par1NBTTagCompound);
+		deathTicks = par1NBTTagCompound.getInteger("DeathTicks");
+	}
+
 	private void updateHealingCircle()
 	{
 		if (healingcircle != null)
@@ -555,11 +570,11 @@ public class EntityDragonBoss extends EntityMob implements IBossDisplayData, IEn
 		moveEntity(0.0D, 0.10000000149011612D, 0.0D);
 		renderYawOffset = rotationYaw += 20.0F;
 
-		if(deathTicks == 20 && worldObj.isRemote)
+		if(deathTicks == 20 && !worldObj.isRemote)
 			SpecialTextUtil.OblivionaireGroup(worldObj, StatCollector.translateToLocal("message.asorah.death.1"));
-		if(deathTicks == 80 && worldObj.isRemote)
+		if(deathTicks == 80 && !worldObj.isRemote)
 			SpecialTextUtil.OblivionaireGroup(worldObj, StatCollector.translateToLocal("message.asorah.death.2"));
-		if(deathTicks == 140 && worldObj.isRemote)
+		if(deathTicks == 140 && !worldObj.isRemote)
 			SpecialTextUtil.OblivionaireGroup(worldObj, StatCollector.translateToLocal("message.asorah.death.3"));
 		if (deathTicks == 200 && !worldObj.isRemote){
 			setDead();

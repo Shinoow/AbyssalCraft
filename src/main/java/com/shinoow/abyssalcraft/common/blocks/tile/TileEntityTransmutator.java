@@ -21,9 +21,9 @@ import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
+import com.shinoow.abyssalcraft.api.APIUtils;
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI.FuelType;
-import com.shinoow.abyssalcraft.api.item.ICrystal;
 import com.shinoow.abyssalcraft.api.recipe.TransmutatorRecipes;
 import com.shinoow.abyssalcraft.common.blocks.BlockTransmutator;
 
@@ -356,8 +356,9 @@ public class TileEntityTransmutator extends TileEntity implements ISidedInventor
 			if (item == AbyssalCraft.Cchunk) return 16200;
 			if (item == AbyssalCraft.Cbucket) return 20000;
 			if (item == Item.getItemFromBlock(AbyssalCraft.Cwater)) return 22000;
-			if (item instanceof ICrystal) return 1200;
-			if (AbyssalCraftAPI.getCrystals().contains(par1ItemStack)) return 1200;
+			if (item == AbyssalCraft.crystal) return 1350;
+			if (item == AbyssalCraft.crystalShard) return 150;
+			if (APIUtils.isCrystal(par1ItemStack)) return 1200;
 			if (item == Items.blaze_powder) return 1200;
 			if (item == Items.blaze_rod) return 2400;
 			if (item == AbyssalCraft.methane) return 10000;

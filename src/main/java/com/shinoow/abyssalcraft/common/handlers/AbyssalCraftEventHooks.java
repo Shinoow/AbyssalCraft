@@ -391,10 +391,10 @@ public class AbyssalCraftEventHooks {
 		if(event.ritual instanceof NecronomiconSummonRitual){
 			event.entityPlayer.addStat(AbyssalCraft.ritualSummon, 1);
 			if(event.ritual.getUnlocalizedName().substring(10).equals("summonSacthoth"))
-				if(event.world.isRemote)
+				if(!event.world.isRemote)
 					SpecialTextUtil.SacthothGroup(event.world, StatCollector.translateToLocal("message.sacthoth.spawn.1"));
 			if(event.ritual.getUnlocalizedName().substring(10).equals("summonAsorah")){
-				if(event.world.isRemote)
+				if(!event.world.isRemote)
 					SpecialTextUtil.AsorahGroup(event.world, StatCollector.translateToLocal("message.asorah.spawn"));
 				event.entityPlayer.addStat(AbyssalCraft.summonAsorah, 1);
 			}

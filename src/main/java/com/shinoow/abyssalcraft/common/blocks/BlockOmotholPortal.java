@@ -212,7 +212,7 @@ public class BlockOmotholPortal extends BlockBreakable
 		if (par5Entity.ridingEntity == null && par5Entity.riddenByEntity == null && par5Entity instanceof EntityPlayerMP)
 		{
 			EntityPlayerMP thePlayer = (EntityPlayerMP)par5Entity;
-			//			thePlayer.addStat(AbyssalCraft.enterOmothol, 1);
+			thePlayer.addStat(AbyssalCraft.enterOmothol, 1);
 			if (thePlayer.timeUntilPortal > 0)
 				thePlayer.timeUntilPortal = 10;
 			else if (thePlayer.dimension != AbyssalCraft.configDimId3)

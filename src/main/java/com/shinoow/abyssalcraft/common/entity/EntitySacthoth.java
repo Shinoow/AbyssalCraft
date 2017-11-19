@@ -32,6 +32,7 @@ import net.minecraft.entity.item.EntityXPOrb;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
@@ -419,6 +420,20 @@ public class EntitySacthoth extends EntityMob implements IBossDisplayData, IAnti
 		}
 
 		super.onLivingUpdate();
+	}
+
+	@Override
+	public void writeEntityToNBT(NBTTagCompound par1NBTTagCompound)
+	{
+		super.writeEntityToNBT(par1NBTTagCompound);
+		par1NBTTagCompound.setInteger("DeathTicks", deathTicks);
+	}
+
+	@Override
+	public void readEntityFromNBT(NBTTagCompound par1NBTTagCompound)
+	{
+		super.readEntityFromNBT(par1NBTTagCompound);
+		deathTicks = par1NBTTagCompound.getInteger("DeathTicks");
 	}
 
 	@Override

@@ -89,9 +89,8 @@ public class BlockDreadAltarTop extends BlockContainer {
 		if(par1World.provider.dimensionId == AbyssalCraft.configDimId2){
 			if(par1World.getBiomeGenForCoords(par2, par4) == ACBiomes.dreadlands_mountains){
 				if(par1World.getBlock(par2, par3 - 1, par4) == AbyssalCraft.dreadaltarbottom && par3 == 41){
-					if(par1World.isRemote)
-						SpecialTextUtil.ChagarothGroup(par1World, StatCollector.translateToLocal("message.dreadaltartop.spawn"));
 					if(!par1World.isRemote){
+						SpecialTextUtil.ChagarothGroup(par1World, StatCollector.translateToLocal("message.dreadaltartop.spawn"));
 						par5EntityPlayer.addStat(AbyssalCraft.summonChagaroth, 1);
 						chagarothlair lair = new chagarothlair();
 						lair.generate(par1World, rand, par2, par3 - 2, par4);

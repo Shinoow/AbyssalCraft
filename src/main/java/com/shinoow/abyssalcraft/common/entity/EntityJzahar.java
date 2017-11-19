@@ -41,13 +41,16 @@ import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.entity.projectile.EntityWitherSkull;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.StatCollector;
+import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
 
@@ -222,24 +225,20 @@ public class EntityJzahar extends EntityMob implements IBossDisplayData, IRanged
 			for (int k2 = 0; k2 < list.size(); k2++) {
 				Entity entity = (Entity)list.get(k2);
 				if(entity instanceof EntityDragon || entity instanceof EntityWither){
-					if(!worldObj.isRemote)
+					if(!worldObj.isRemote){
 						worldObj.removeEntity(entity);
-					else {
-						if(AbyssalCraft.particleEntity)
-							worldObj.spawnParticle("hugeexplosion", entity.posX + f, entity.posY + 2.0D + f1, entity.posZ + f2, 0.0D, 0.0D, 0.0D);
 						if(entity.isDead)
 							SpecialTextUtil.JzaharGroup(worldObj, StatCollector.translateToLocal("message.jzahar.banish.vanilla"));
-					}
+					} else if(AbyssalCraft.particleEntity)
+						worldObj.spawnParticle("hugeexplosion", entity.posX + f, entity.posY + 2.0D + f1, entity.posZ + f2, 0.0D, 0.0D, 0.0D);
 				}
 				else if(entity instanceof EntityDragonBoss || entity instanceof EntitySacthoth || entity instanceof EntityChagaroth){
-					if(!worldObj.isRemote)
+					if(!worldObj.isRemote){
 						worldObj.removeEntity(entity);
-					else {
-						if(AbyssalCraft.particleEntity)
-							worldObj.spawnParticle("hugeexplosion", entity.posX + f, entity.posY + 2.0D + f1, entity.posZ + f2, 0.0D, 0.0D, 0.0D);
 						if(entity.isDead)
 							SpecialTextUtil.JzaharGroup(worldObj, StatCollector.translateToLocal("message.jzahar.banish.ac"));
-					}
+					} else if(AbyssalCraft.particleEntity)
+						worldObj.spawnParticle("hugeexplosion", entity.posX + f, entity.posY + 2.0D + f1, entity.posZ + f2, 0.0D, 0.0D, 0.0D);
 				}
 				else if(entity instanceof EntityJzahar){
 					if(!worldObj.isRemote){
@@ -248,17 +247,22 @@ public class EntityJzahar extends EntityMob implements IBossDisplayData, IRanged
 						EntityJzahar newgatekeeper = new EntityJzahar(worldObj);
 						newgatekeeper.copyLocationAndAnglesFrom(this);
 						worldObj.spawnEntityInWorld(newgatekeeper);
-					}
-					else {
-						if(AbyssalCraft.particleEntity){
-							worldObj.spawnParticle("hugeexplosion", entity.posX + f, entity.posY + 2.0D + f1, entity.posZ + f2, 0.0D, 0.0D, 0.0D);
-							worldObj.spawnParticle("hugeexplosion", posX + f, posY + 2.0D + f1, posZ + f2, 0.0D, 0.0D, 0.0D);
-						}
 						if(!that){
 							that = true;
 							SpecialTextUtil.JzaharGroup(worldObj, StatCollector.translateToLocal("message.jzahar.banish.jzh"));
 						}
+					} else if(AbyssalCraft.particleEntity){
+						worldObj.spawnParticle("hugeexplosion", entity.posX + f, entity.posY + 2.0D + f1, entity.posZ + f2, 0.0D, 0.0D, 0.0D);
+						worldObj.spawnParticle("hugeexplosion", posX + f, posY + 2.0D + f1, posZ + f2, 0.0D, 0.0D, 0.0D);
 					}
+				}
+				else if(entity instanceof IBossDisplayData){
+					if(!worldObj.isRemote){
+						worldObj.removeEntity(entity);
+						if(entity.isDead)
+							SpecialTextUtil.JzaharGroup(worldObj, StatCollector.translateToLocal("message.jzahar.banish.other"));
+					} else if(AbyssalCraft.particleEntity)
+						worldObj.spawnParticle("hugeexplosion", entity.posX + f, entity.posY + 2.0D + f1, entity.posZ + f2, 0.0D, 0.0D, 0.0D);
 				}
 				else if(entity instanceof EntityPlayer)
 					if(((EntityPlayer)entity).capabilities.isCreativeMode && talkTimer == 0 && getDistanceToEntity(entity) <= 5){
@@ -276,15 +280,60 @@ public class EntityJzahar extends EntityMob implements IBossDisplayData, IRanged
 	}
 
 	@Override
+	public void writeEntityToNBT(NBTTagCompound par1NBTTagCompound)
+	{
+		super.writeEntityToNBT(par1NBTTagCompound);
+		par1NBTTagCompound.setInteger("DeathTicks", deathTicks);
+	}
+
+	@Override
+	public void readEntityFromNBT(NBTTagCompound par1NBTTagCompound)
+	{
+		super.readEntityFromNBT(par1NBTTagCompound);
+		deathTicks = par1NBTTagCompound.getInteger("DeathTicks");
+	}
+
+	double speed = 0.05D;
+
+	@Override
 	protected void onDeathUpdate()
 	{
+		motionX = motionY = motionZ = 0;
 		++deathTicks;
 
 		if(deathTicks <= 800){
-			worldObj.spawnParticle("largesmoke", posX, posY + 1.5D, posZ, 0, 0, 0);
+			if(deathTicks == 410)
+				worldObj.playSoundAtEntity(this, "abyssalcraft:jzahar.charge", 1, 1);
+			if(deathTicks < 400)
+				worldObj.spawnParticle("largesmoke", posX, posY + 2.5D, posZ, 0, 0, 0);
+			float f = (rand.nextFloat() - 0.5F) * 3.0F;
+			float f1 = (rand.nextFloat() - 0.5F) * 2.0F;
+			float f2 = (rand.nextFloat() - 0.5F) * 3.0F;
+			if(deathTicks >= 100 && deathTicks < 400)
+				worldObj.spawnParticle("smoke", posX + f, posY + f1, posZ + f2, 0, 0, 0);
+			if(deathTicks >= 200 && deathTicks < 400){
+				worldObj.spawnParticle("largesmoke", posX + f, posY + f1, posZ + f2, 0.0D, 0.0D, 0.0D);
+				worldObj.spawnParticle("lava", posX, posY + 2.5D, posZ, 0, 0, 0);
+			}
 			if (deathTicks >= 790 && deathTicks <= 800){
 				worldObj.spawnParticle("hugeexplosion", posX, posY + 1.5D, posZ, 0.0D, 0.0D, 0.0D);
 				worldObj.playSoundAtEntity(this, "random.explode", 4, (1.0F + (rand.nextFloat() - rand.nextFloat()) * 0.2F) * 0.7F);
+			}
+			if(deathTicks > 400 && deathTicks < 800){
+				float size = 32F;
+
+				List<Entity> list = worldObj.getEntitiesWithinAABB(Entity.class, boundingBox.expand(size, size, size));
+
+				for(Entity entity : list)
+				{
+					double scale = (size - entity.getDistance(posX, posY, posZ))/size;
+
+					Vec3 dir = Vec3.createVectorHelper(entity.posX - posX, entity.posY - posY, entity.posZ - posZ);
+					dir = dir.normalize();
+					entity.addVelocity(dir.xCoord * -speed * scale, dir.yCoord * -speed * scale, dir.zCoord * -speed * scale);
+				}
+
+				speed += 0.0001;
 			}
 		}
 
@@ -310,52 +359,86 @@ public class EntityJzahar extends EntityMob implements IBossDisplayData, IRanged
 				}
 			}
 		if(deathTicks == 790 && !worldObj.isRemote){
-			if(!worldObj.getEntitiesWithinAABB(EntityPlayer.class, boundingBox.expand(3,1,3)).isEmpty()){
-				List<EntityPlayer> players = worldObj.getEntitiesWithinAABB(EntityPlayer.class, boundingBox.expand(3,1,3));
-				for(EntityPlayer player: players){
-					player.setHealth(1);
-					player.addPotionEffect(new PotionEffect(Potion.blindness.id, 2400, 5));
-					player.addPotionEffect(new PotionEffect(Potion.nightVision.id, 2400, 5));
-					player.addPotionEffect(new PotionEffect(Potion.confusion.id, 2400, 5));
-					player.addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, 2400, 5));
-					player.addPotionEffect(new PotionEffect(Potion.digSlowdown.id, 2400, 5));
-					player.addPotionEffect(new PotionEffect(Potion.weakness.id, 2400, 5));
-					player.addPotionEffect(new PotionEffect(Potion.hunger.id, 2400, 5));
-					player.addPotionEffect(new PotionEffect(Potion.poison.id, 2400, 5));
-					if(player instanceof EntityPlayerMP){
-						WorldServer worldServer = (WorldServer) player.worldObj;
-						EntityPlayerMP mp = (EntityPlayerMP) player;
-						mp.addPotionEffect(new PotionEffect(Potion.resistance.getId(), 80, 255));
-						mp.mcServer.getConfigurationManager().transferPlayerToDimension(mp, AbyssalCraft.configDimId4, new TeleporterDarkRealm(worldServer));
-						player.addStat(AbyssalCraft.enterDarkRealm, 1);
+			if(!worldObj.getEntitiesWithinAABB(Entity.class, boundingBox.expand(3,1,3)).isEmpty()){
+				List<Entity> entities = worldObj.getEntitiesWithinAABBExcludingEntity(this, boundingBox.expand(3,1,3));
+				for(Entity entity: entities)
+					if(entity instanceof EntityPlayer){
+						EntityPlayer player = (EntityPlayer)entity;
+						player.setHealth(1);
+						player.addPotionEffect(new PotionEffect(Potion.blindness.id, 2400, 5));
+						player.addPotionEffect(new PotionEffect(Potion.nightVision.id, 2400, 5));
+						player.addPotionEffect(new PotionEffect(Potion.confusion.id, 2400, 5));
+						player.addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, 2400, 5));
+						player.addPotionEffect(new PotionEffect(Potion.digSlowdown.id, 2400, 5));
+						player.addPotionEffect(new PotionEffect(Potion.weakness.id, 2400, 5));
+						player.addPotionEffect(new PotionEffect(Potion.hunger.id, 2400, 5));
+						player.addPotionEffect(new PotionEffect(Potion.poison.id, 2400, 5));
+						if(player instanceof EntityPlayerMP){
+							WorldServer worldServer = (WorldServer) player.worldObj;
+							EntityPlayerMP mp = (EntityPlayerMP) player;
+							mp.addPotionEffect(new PotionEffect(Potion.resistance.getId(), 80, 255));
+							mp.mcServer.getConfigurationManager().transferPlayerToDimension(mp, AbyssalCraft.configDimId4, new TeleporterDarkRealm(worldServer));
+							player.addStat(AbyssalCraft.enterDarkRealm, 1);
+						}
 					}
-				}
+					else if(entity instanceof EntityLivingBase || entity instanceof EntityItem)
+						entity.setDead();
 			}
-			if(worldObj.getClosestPlayer(posX, posY, posZ, 32) != null)
-				worldObj.spawnEntityInWorld(new EntityItem(worldObj, posX, posY, posZ, new ItemStack(AbyssalCraft.gatekeeperEssence)));
+
+			for(int x = 0; x < 10; x++)
+				for(int y = 0; y < 10; y++)
+					for(int z = 0; z < 10; z++){
+						if(!worldObj.isAirBlock((int)posX + x, (int)posY + y, (int)posZ + z))
+							if(worldObj.getBlock((int)posX + x, (int)posY + y, (int)posZ + z) != Blocks.bedrock)
+								worldObj.setBlockToAir((int)posX + x, (int)posY + y, (int)posZ + z);
+						if(!worldObj.isAirBlock((int)posX - x, (int)posY + y, (int)posZ + z))
+							if(worldObj.getBlock((int)posX - x, (int)posY + y, (int)posZ + z) != Blocks.bedrock)
+								worldObj.setBlockToAir((int)posX - x, (int)posY + y, (int)posZ + z);
+						if(!worldObj.isAirBlock((int)posX + x, (int)posY + y, (int)posZ - z))
+							if(worldObj.getBlock((int)posX + x, (int)posY + y, (int)posZ - z) != Blocks.bedrock)
+								worldObj.setBlockToAir((int)posX + x, (int)posY + y, (int)posZ - z);
+						if(!worldObj.isAirBlock((int)posX - x, (int)posY + y, (int)posZ - z))
+							if(worldObj.getBlock((int)posX - x, (int)posY + y, (int)posZ - z) != Blocks.bedrock)
+								worldObj.setBlockToAir((int)posX - x, (int)posY + y, (int)posZ - z);
+						if(!worldObj.isAirBlock((int)posX + x, (int)posY - y, (int)posZ + z))
+							if(worldObj.getBlock((int)posX + x, (int)posY - y, (int)posZ + z) != Blocks.bedrock)
+								worldObj.setBlockToAir((int)posX + x, (int)posY - y, (int)posZ + z);
+						if(!worldObj.isAirBlock((int)posX - x, (int)posY - y, (int)posZ + z))
+							if(worldObj.getBlock((int)posX - x, (int)posY - y, (int)posZ + z) != Blocks.bedrock)
+								worldObj.setBlockToAir((int)posX - x, (int)posY - y, (int)posZ + z);
+						if(!worldObj.isAirBlock((int)posX + x, (int)posY - y, (int)posZ - z))
+							if(worldObj.getBlock((int)posX + x, (int)posY - y, (int)posZ - z) != Blocks.bedrock)
+								worldObj.setBlockToAir((int)posX + x, (int)posY - y, (int)posZ - z);
+						if(!worldObj.isAirBlock((int)posX - x, (int)posY - y, (int)posZ - z))
+							if(worldObj.getBlock((int)posX - x, (int)posY - y, (int)posZ - z) != Blocks.bedrock)
+								worldObj.setBlockToAir((int)posX - x, (int)posY - y, (int)posZ - z);
+					}
+
+			if(worldObj.getClosestPlayer(posX, posY, posZ, 48) != null)
+				worldObj.spawnEntityInWorld(new EntityGatekeeperEssence(worldObj, posX, posY, posZ));
 		}
-		if(deathTicks == 20 && worldObj.isRemote)
+		if(deathTicks == 20 && !worldObj.isRemote)
 			SpecialTextUtil.JzaharGroup(worldObj, StatCollector.translateToLocal("message.jzahar.death.1"));
-		if(deathTicks == 100 && worldObj.isRemote)
+		if(deathTicks == 100 && !worldObj.isRemote)
 			SpecialTextUtil.JzaharGroup(worldObj, StatCollector.translateToLocal("message.jzahar.death.2"));
-		if(deathTicks == 180 && worldObj.isRemote)
+		if(deathTicks == 180 && !worldObj.isRemote)
 			SpecialTextUtil.JzaharGroup(worldObj, StatCollector.translateToLocal("message.jzahar.death.3"));
-		if(deathTicks == 260 && worldObj.isRemote)
+		if(deathTicks == 260 && !worldObj.isRemote)
 			SpecialTextUtil.JzaharGroup(worldObj, StatCollector.translateToLocal("message.jzahar.death.4"));
-		if(deathTicks == 340 && worldObj.isRemote)
+		if(deathTicks == 340 && !worldObj.isRemote)
 			SpecialTextUtil.JzaharGroup(worldObj, StatCollector.translateToLocal("message.jzahar.death.5"));
-		if(deathTicks == 420 && worldObj.isRemote)
+		if(deathTicks == 420 && !worldObj.isRemote)
 			SpecialTextUtil.JzaharGroup(worldObj, StatCollector.translateToLocal("message.jzahar.death.6"));
-		if(deathTicks == 500 && worldObj.isRemote)
+		if(deathTicks == 500 && !worldObj.isRemote)
 			SpecialTextUtil.JzaharGroup(worldObj, StatCollector.translateToLocal("message.jzahar.death.7"));
-		if(deathTicks == 580 && worldObj.isRemote)
+		if(deathTicks == 580 && !worldObj.isRemote)
 			SpecialTextUtil.JzaharGroup(worldObj, StatCollector.translateToLocal("message.jzahar.death.8"));
-		if(deathTicks == 660 && worldObj.isRemote)
+		if(deathTicks == 660 && !worldObj.isRemote)
 			SpecialTextUtil.JzaharGroup(worldObj, StatCollector.translateToLocal("message.jzahar.death.9"));
-		if(deathTicks == 800 && worldObj.isRemote)
+		if(deathTicks == 800 && !worldObj.isRemote){
 			SpecialTextUtil.JzaharGroup(worldObj, StatCollector.translateToLocal("message.jzahar.death.10"));
-		if(deathTicks == 800 && !worldObj.isRemote)
 			setDead();
+		}
 	}
 
 	private int posneg(int num){

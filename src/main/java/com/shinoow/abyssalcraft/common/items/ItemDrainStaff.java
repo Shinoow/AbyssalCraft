@@ -65,6 +65,23 @@ public class ItemDrainStaff extends Item {
 	@SuppressWarnings("rawtypes")
 	public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player) {
 
+		if(getEnergy(stack, "Shadow") >= 200){
+			setEnergy(0, stack, "Shadow");
+			player.inventory.addItemStackToInventory(new ItemStack(AbyssalCraft.shadowgem));
+		}
+		if(getEnergy(stack, "Abyssal") >= 100){
+			setEnergy(0, stack, "Abyssal");
+			player.inventory.addItemStackToInventory(new ItemStack(AbyssalCraft.essence, 1, 0));
+		}
+		if(getEnergy(stack, "Dread") >= 100){
+			setEnergy(0, stack, "Dread");
+			player.inventory.addItemStackToInventory(new ItemStack(AbyssalCraft.essence, 1, 1));
+		}
+		if(getEnergy(stack, "Omothol") >= 100){
+			setEnergy(0, stack, "Omothol");
+			player.inventory.addItemStackToInventory(new ItemStack(AbyssalCraft.essence, 1, 2));
+		}
+
 		int range = 50;
 		Vec3 v = player.getLookVec().normalize();
 		for(int i = 1;i<range;i++){
@@ -97,23 +114,6 @@ public class ItemDrainStaff extends Item {
 			}
 
 		}
-		if(getEnergy(stack, "Shadow") == 200){
-			setEnergy(0, stack, "Shadow");
-			player.inventory.addItemStackToInventory(new ItemStack(AbyssalCraft.shadowgem));
-		}
-		if(getEnergy(stack, "Abyssal") == 100){
-			setEnergy(0, stack, "Abyssal");
-			player.inventory.addItemStackToInventory(new ItemStack(AbyssalCraft.essence, 1, 0));
-		}
-		if(getEnergy(stack, "Dread") == 100){
-			setEnergy(0, stack, "Dread");
-			player.inventory.addItemStackToInventory(new ItemStack(AbyssalCraft.essence, 1, 1));
-		}
-		if(getEnergy(stack, "Omothol") == 100){
-			setEnergy(0, stack, "Omothol");
-			player.inventory.addItemStackToInventory(new ItemStack(AbyssalCraft.essence, 1, 2));
-		}
-
 
 		return stack;
 	}

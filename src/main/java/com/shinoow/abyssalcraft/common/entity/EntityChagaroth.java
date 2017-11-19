@@ -31,6 +31,7 @@ import net.minecraft.entity.item.EntityXPOrb;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumChatFormatting;
@@ -211,6 +212,20 @@ public class EntityChagaroth extends EntityMob implements IBossDisplayData, IDre
 	}
 
 	@Override
+	public void writeEntityToNBT(NBTTagCompound par1NBTTagCompound)
+	{
+		super.writeEntityToNBT(par1NBTTagCompound);
+		par1NBTTagCompound.setInteger("DeathTicks", deathTicks);
+	}
+
+	@Override
+	public void readEntityFromNBT(NBTTagCompound par1NBTTagCompound)
+	{
+		super.readEntityFromNBT(par1NBTTagCompound);
+		deathTicks = par1NBTTagCompound.getInteger("DeathTicks");
+	}
+
+	@Override
 	public void onDeath(DamageSource par1DamageSource) {
 		if (par1DamageSource.getEntity() instanceof EntityPlayer)
 		{
@@ -272,15 +287,14 @@ public class EntityChagaroth extends EntityMob implements IBossDisplayData, IDre
 					}
 				}
 			}
-		if(deathTicks == 20 && worldObj.isRemote)
+		if(deathTicks == 20 && !worldObj.isRemote)
 			SpecialTextUtil.ChagarothGroup(worldObj, StatCollector.translateToLocal("message.chagaroth.death.1"));
-		if(deathTicks == 80 && worldObj.isRemote)
+		if(deathTicks == 80 && !worldObj.isRemote)
 			SpecialTextUtil.ChagarothGroup(worldObj, StatCollector.translateToLocal("message.chagaroth.death.2"));
-		if(deathTicks == 140 && worldObj.isRemote)
+		if(deathTicks == 140 && !worldObj.isRemote)
 			SpecialTextUtil.ChagarothGroup(worldObj, StatCollector.translateToLocal("message.chagaroth.death.3"));
-		if(deathTicks == 200 && worldObj.isRemote)
-			SpecialTextUtil.ChagarothGroup(worldObj, StatCollector.translateToLocal("message.chagaroth.death.4"));
 		if(deathTicks == 200 && !worldObj.isRemote){
+			SpecialTextUtil.ChagarothGroup(worldObj, StatCollector.translateToLocal("message.chagaroth.death.4"));
 			setDead();
 			worldObj.spawnEntityInWorld(new EntityItem(worldObj, posX, posY, posZ, new ItemStack(AbyssalCraft.dreadKey)));
 		}

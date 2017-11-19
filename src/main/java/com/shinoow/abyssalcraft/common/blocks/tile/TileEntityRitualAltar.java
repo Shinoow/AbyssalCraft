@@ -11,6 +11,7 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.common.blocks.tile;
 
+import net.minecraft.entity.effect.EntityLightningBolt;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -24,6 +25,7 @@ import net.minecraftforge.common.MinecraftForge;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.api.energy.IEnergyTransporter;
+import com.shinoow.abyssalcraft.api.energy.disruption.DisruptionHandler;
 import com.shinoow.abyssalcraft.api.event.ACEvents.RitualEvent;
 import com.shinoow.abyssalcraft.api.ritual.NecronomiconRitual;
 import com.shinoow.abyssalcraft.api.ritual.RitualRegistry;
@@ -114,6 +116,11 @@ public class TileEntityRitualAltar extends TileEntity implements IRitualAltar {
 								}
 							if(consumedEnergy == ritual.getReqEnergy())
 								ritual.completeRitual(worldObj, xCoord, yCoord, zCoord, user);
+							else {
+								if(!worldObj.isRemote)
+									worldObj.addWeatherEffect(new EntityLightningBolt(worldObj, xCoord, yCoord + 1, zCoord));
+								DisruptionHandler.instance().generateDisruption(null, worldObj, xCoord, yCoord, zCoord, worldObj.getEntitiesWithinAABB(EntityPlayer.class, AxisAlignedBB.getBoundingBox(xCoord, yCoord, zCoord, xCoord + 1, yCoord + 1, zCoord + 1).expand(16, 16, 16)));
+							}
 							ritualTimer = 0;
 							user = null;
 							ritual = null;
@@ -121,6 +128,9 @@ public class TileEntityRitualAltar extends TileEntity implements IRitualAltar {
 							markDirty();
 						}
 					} else {
+						if(!worldObj.isRemote)
+							worldObj.addWeatherEffect(new EntityLightningBolt(worldObj, xCoord, yCoord + 1, zCoord));
+						DisruptionHandler.instance().generateDisruption(null, worldObj, xCoord, yCoord, zCoord, worldObj.getEntitiesWithinAABB(EntityPlayer.class, AxisAlignedBB.getBoundingBox(xCoord, yCoord, zCoord, xCoord + 1, yCoord + 1, zCoord + 1).expand(16, 16, 16)));
 						ritualTimer = 0;
 						ritual = null;
 						consumedEnergy = 0;

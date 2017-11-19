@@ -39,14 +39,13 @@ public class NecronomiconRespawnJzaharRitual extends NecronomiconRitual {
 	}
 
 	@Override
-	protected void completeRitualClient(World world, int x, int y, int z, EntityPlayer player) {
-		SpecialTextUtil.JzaharGroup(world, StatCollector.translateToLocalFormatted("message.jzahar.respawn", player.getCommandSenderName()));
-	}
+	protected void completeRitualClient(World world, int x, int y, int z, EntityPlayer player) {}
 
 	@Override
 	protected void completeRitualServer(World world, int x, int y, int z, EntityPlayer player) {
 		StructureJzaharTemple temple = new StructureJzaharTemple();
 		temple.generate(world, world.rand, 4, 53, 7);
 		world.getChunkFromBlockCoords(x, z).setChunkModified();
+		SpecialTextUtil.JzaharGroup(world, StatCollector.translateToLocalFormatted("message.jzahar.respawn", player.getCommandSenderName()));
 	}
 }

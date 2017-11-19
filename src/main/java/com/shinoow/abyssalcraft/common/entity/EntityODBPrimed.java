@@ -96,10 +96,8 @@ public class EntityODBPrimed extends Entity {
 
 			if (!worldObj.isRemote)
 				explode();
-			if (worldObj.isRemote)
-				message();
-		} else if(worldObj.isRemote)
-			if(AbyssalCraft.particleEntity)
+
+		} else if(AbyssalCraft.particleEntity)
 				worldObj.spawnParticle("portal", posX, posY + 0.5D, posZ, 1.0D, 0.0D, 0.0D);
 	}
 
@@ -143,12 +141,7 @@ public class EntityODBPrimed extends Entity {
 		EntitySacthoth sacthoth = new EntitySacthoth(worldObj);
 		sacthoth.setPosition(posX, posY + 1, posZ);
 		worldObj.spawnEntityInWorld(sacthoth);
-	}
-
-	@SideOnly(Side.CLIENT)
-	private void message(){
 		SpecialTextUtil.SacthothGroup(worldObj, StatCollector.translateToLocal("message.sacthoth.spawn.1"));
-		SpecialTextUtil.SacthothGroup(worldObj, StatCollector.translateToLocal("message.sacthoth.spawn.2"));
 	}
 
 	@Override

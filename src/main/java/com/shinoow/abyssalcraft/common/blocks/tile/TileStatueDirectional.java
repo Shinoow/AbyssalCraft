@@ -150,7 +150,8 @@ public class TileStatueDirectional extends TEDirectional implements IEnergyManip
 	@Override
 	public void disrupt(boolean factor) {
 		if(factor){
-			worldObj.addWeatherEffect(new EntityLightningBolt(worldObj, xCoord, yCoord + 1, zCoord));
+			if(!worldObj.isRemote)
+				worldObj.addWeatherEffect(new EntityLightningBolt(worldObj, xCoord, yCoord + 1, zCoord));
 			DisruptionHandler.instance().generateDisruption(getDeity(), worldObj, xCoord, yCoord, zCoord, worldObj.getEntitiesWithinAABB(EntityPlayer.class, AxisAlignedBB.getBoundingBox(xCoord, yCoord, zCoord, xCoord + 1, yCoord + 1, zCoord + 1).expand(16, 16, 16)));
 		}
 	}

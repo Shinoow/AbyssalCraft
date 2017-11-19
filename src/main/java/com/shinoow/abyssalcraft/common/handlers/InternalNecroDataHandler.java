@@ -361,10 +361,12 @@ public class InternalNecroDataHandler extends DummyNecroDataHandler {
 				new Page(5, NecronomiconResources.PE_TUT_3, NecronomiconText.PE_TUT_5),
 				new Page(6, NecronomiconText.PE_TUT_6),
 				new Page(7, NecronomiconResources.PE_TUT_4, NecronomiconText.PE_TUT_7),
-				new Page(8, NecronomiconResources.PE_TUT_5, NecronomiconText.PE_TUT_8),
-				new Page(9, NecronomiconResources.PE_TUT_6, NecronomiconText.PE_TUT_9),
-				new Page(10, NecronomiconResources.PE_TUT_7, NecronomiconText.PE_TUT_10),
-				new Page(11, NecronomiconText.PE_TUT_11));
+				new Page(8, NecronomiconText.PE_TUT_8),
+				new Page(9, NecronomiconResources.PE_TUT_5, NecronomiconText.PE_TUT_9),
+				new Page(10, NecronomiconResources.PE_TUT_6, NecronomiconText.PE_TUT_10),
+				new Page(11, NecronomiconResources.PE_TUT_7, NecronomiconText.PE_TUT_11),
+				new Page(12, NecronomiconResources.PE_TUT_8, NecronomiconText.PE_TUT_12),
+				new Page(13, NecronomiconText.PE_TUT_13));
 		addPages("miscinfo", "specialmaterials", new Page(1, new CraftingStack(AbyssalCraft.CobbleU), NecronomiconText.CRAFTING_UPGRADE_KIT_1),
 				new Page(2, new CraftingStack(AbyssalCraft.IronU), NecronomiconText.CRAFTING_UPGRADE_KIT_2),
 				new Page(3, new CraftingStack(new ItemStack(AbyssalCraft.ironp, 2), null, null, null, null, Items.iron_ingot, null, null, Items.iron_ingot, null), NecronomiconText.CRAFTING_IRON_PLATE),

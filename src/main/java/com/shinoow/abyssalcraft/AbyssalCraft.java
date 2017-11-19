@@ -69,7 +69,6 @@ import com.shinoow.abyssalcraft.common.structures.omothol.StructureOmotholPieces
 import com.shinoow.abyssalcraft.common.util.*;
 import com.shinoow.abyssalcraft.common.world.*;
 import com.shinoow.abyssalcraft.common.world.biome.*;
-import com.shinoow.abyssalcraft.update.IUpdateProxy;
 
 import cpw.mods.fml.client.event.ConfigChangedEvent;
 import cpw.mods.fml.common.*;
@@ -82,7 +81,7 @@ import cpw.mods.fml.common.registry.*;
 @Mod(modid = AbyssalCraft.modid, name = AbyssalCraft.name, version = AbyssalCraft.version, dependencies = "required-after:Forge@[forgeversion,)", useMetadata = false, guiFactory = "com.shinoow.abyssalcraft.client.config.ACGuiFactory")
 public class AbyssalCraft {
 
-	public static final String version = "1.9.1.2";
+	public static final String version = "1.9.1.3";
 	public static final String modid = "abyssalcraft";
 	public static final String name = "AbyssalCraft";
 
@@ -95,15 +94,6 @@ public class AbyssalCraft {
 	@SidedProxy(clientSide = "com.shinoow.abyssalcraft.client.ClientProxy",
 			serverSide = "com.shinoow.abyssalcraft.common.CommonProxy")
 	public static CommonProxy proxy;
-
-	//Update Checker proxy
-	@SidedProxy(clientSide = "com.shinoow.abyssalcraft.update.UpdateProxyClient",
-			serverSide = "com.shinoow.abyssalcraft.update.UpdateProxyServer")
-	public static IUpdateProxy updateProxy;
-	/**Update Checker Ping*/
-	private boolean hasPinged = false;
-
-	private boolean dev = (Boolean)Launch.blackboard.get("fml.deobfuscatedEnvironment");
 
 	public static Map<String, Integer> stringtoIDMapping = new HashMap<String, Integer>();
 
@@ -153,11 +143,6 @@ public class AbyssalCraft {
 	hasturStatue, jzaharStatue, azathothStatue, nyarlathotepStatue, yogsothothStatue, shubniggurathStatue,
 	monolithStone, shoggothBiomass, energyPedestal, monolithPillar, sacrificialAltar, tieredEnergyPedestal,
 	tieredSacrificialAltar, jzaharspawner, gatekeeperminionspawner, mimicFire;
-
-	@Deprecated
-	public static BiomeGenBase Darklands, DarklandsForest, DarklandsPlains, DarklandsHills,
-	DarklandsMountains, corswamp, Wastelands, Dreadlands, AbyDreadlands, ForestDreadlands,
-	MountainDreadlands, omothol, darkRealm;
 
 	//"secret" dev stuff
 	public static Item devsword;
@@ -281,7 +266,7 @@ public class AbyssalCraft {
 	public static boolean darkspawn1, darkspawn2, darkspawn3, darkspawn4, darkspawn5, coraliumspawn1;
 	public static int darkWeight1, darkWeight2, darkWeight3, darkWeight4, darkWeight5, coraliumWeight;
 
-	public static boolean shouldSpread, shouldInfect, breakLogic, destroyOcean, demonAnimalFire, updateC, darkness,
+	public static boolean shouldSpread, shouldInfect, breakLogic, destroyOcean, demonAnimalFire, darkness,
 	particleBlock, particleEntity, hardcoreMode, useDynamicPotionIds, endAbyssalZombie, evilAnimalCreatureType,
 	antiItemDisintegration;
 	public static int evilAnimalSpawnRate;
@@ -307,8 +292,6 @@ public class AbyssalCraft {
 	public void preInit(FMLPreInitializationEvent event) {
 
 		ACLogger.info("Pre-initializing AbyssalCraft.");
-		if(dev)
-			ACLogger.info("We appear to be inside a Dev environment, disabling UpdateChecker!");
 		metadata = event.getModMetadata();
 		metadata.description = metadata.description +"\n\n\u00a76Supporters: "+getSupporterList()+"\u00a7r";
 
@@ -323,7 +306,6 @@ public class AbyssalCraft {
 
 		cfg = new Configuration(event.getSuggestedConfigurationFile());
 		syncConfig();
-		AbyssalCraftAPI.initPotionReflection();
 
 		if(!useDynamicPotionIds)
 			extendPotionArray();
@@ -507,21 +489,6 @@ public class AbyssalCraft {
 		ACBiomes.coralium_infested_swamp = new BiomeGenCorSwamp(configBiomeId11).setColor(522674).setBiomeName("Coralium Infested Swamp");
 		ACBiomes.omothol = new BiomeGenOmothol(configBiomeId12).setColor(5522674).setBiomeName("Omothol").setDisableRain();
 		ACBiomes.dark_realm = new BiomeGenDarkRealm(configBiomeId13).setColor(522674).setBiomeName("Dark Realm").setDisableRain();
-
-		//TODO remove this in the next release or so
-		Darklands = ACBiomes.darklands;
-		DarklandsForest = ACBiomes.darklands_forest;
-		DarklandsPlains = ACBiomes.darklands_plains;
-		DarklandsHills = ACBiomes.darklands_hills;
-		DarklandsMountains = ACBiomes.darklands_mountains;
-		corswamp = ACBiomes.coralium_infested_swamp;
-		Wastelands = ACBiomes.abyssal_wastelands;
-		Dreadlands = ACBiomes.dreadlands;
-		AbyDreadlands = ACBiomes.purified_dreadlands;
-		ForestDreadlands = ACBiomes.dreadlands_forest;
-		MountainDreadlands = ACBiomes.dreadlands_mountains;
-		omothol = ACBiomes.omothol;
-		darkRealm = ACBiomes.dark_realm;
 
 		//"secret" dev stuff
 		devsword = new AbyssalCraftTool().setUnlocalizedName("DEV_BLADE").setTextureName(modid + ":" + "Sword");
@@ -772,22 +739,8 @@ public class AbyssalCraft {
 		GameRegistry.registerTileEntity(TileEntityGatekeeperMinionSpawner.class, "tileEntityGatekeeperMinionSpawner");
 
 		Cplague = new PotionCplague(useDynamicPotionIds ? getNextAvailablePotionId() : AbyssalCraftAPI.potionId1, true, 0x00FFFF).setIconIndex(1, 0).setPotionName("potion.Cplague");
-		AbyssalCraftAPI.addPotionRequirements(Cplague.id, "0 & 1 & !2 & 3 & 0+6");
-		Corflesh.setPotionEffect("+0+1-2+3&4+4+13");
-		Corbone.setPotionEffect("+0+1-2+3&4+4+13");
 		Dplague = new PotionDplague(useDynamicPotionIds ? getNextAvailablePotionId() : AbyssalCraftAPI.potionId2, true, 0xAD1313).setIconIndex(1, 0).setPotionName("potion.Dplague");
-		AbyssalCraftAPI.addPotionRequirements(Dplague.id, "0 & 1 & 2 & 3 & 2+6");
-		AbyssalCraftAPI.addPotionAmplifiers(Dplague.id, "5");
-		dreadfragment.setPotionEffect("0+1+2+3+13&4-4");
 		antiMatter = new PotionAntimatter(useDynamicPotionIds ? getNextAvailablePotionId() : AbyssalCraftAPI.potionId3, true, 0xFFFFFF).setIconIndex(1, 0).setPotionName("potion.Antimatter");
-		AbyssalCraftAPI.addPotionRequirements(antiMatter.id, "0 & 1 & 2 & !3 & 2+6");
-		antiFlesh.setPotionEffect("0+1+2-3+13&4-4");
-		antiCorflesh.setPotionEffect("0+1+2-3+13&4-4");
-		antiCorbone.setPotionEffect("0+1+2-3+13&4-4");
-		sulfur.setPotionEffect(PotionHelper.spiderEyeEffect);
-		//		crystalOxygen.setPotionEffect(PotionHelper.field_151423_m);
-		//		crystalHydrogen.setPotionEffect("-0-1+2+3&4-4+13");
-		//		crystalNitrogen.setPotionEffect("-0+1-2+3&4-4+13");
 
 		coraliumE = new EnchantmentWeaponInfusion(getNextAvailableEnchantmentId(), 2, "coralium");
 		dreadE = new EnchantmentWeaponInfusion(getNextAvailableEnchantmentId(), 2, "dread");
@@ -1335,6 +1288,8 @@ public class AbyssalCraft {
 		EntityRegistry.addSpawn(EntityDemonChicken.class, 30, 1, 3, EnumCreatureType.monster, new BiomeGenBase[] {
 			BiomeGenBase.hell});
 
+		EntityRegistry.registerModEntity(EntityGatekeeperEssence.class, "GatekeeperEssence", 71, instance, 64, 10, true);
+
 		//		registerEntityWithEgg(EntityShadowTitan.class, "shadowtitan", 71, 80, 3, true, 0, 0xFFFFFF);
 		//
 		//		registerEntityWithEgg(EntityOmotholWarden.class, "omotholwarden", 72, 80, 3, true, 0x133133, 0x342122);
@@ -1802,7 +1757,6 @@ public class AbyssalCraft {
 		destroyOcean = cfg.get(Configuration.CATEGORY_GENERAL, "Oceanic Coralium Pollution", false, "Set true to allow the Liquid Coralium to spread across oceans. WARNING: The game can crash from this.").getBoolean();
 		demonAnimalFire = cfg.get(Configuration.CATEGORY_GENERAL, "Demon Animal burning", true, "Set to false to prevent Demon Animals (Pigs, Cows, Chickens) from burning in the overworld.").getBoolean();
 		evilAnimalSpawnRate = cfg.get(Configuration.CATEGORY_GENERAL, "Evil Animal spawn rate", 20, "Spawn rate for the Evil Animals (Pigs, Cows, Chickens), keep under 35 to avoid complete annihilation.").getInt();
-		updateC = cfg.get(Configuration.CATEGORY_GENERAL, "UpdateChecker", true, "Set to false to disable the UpdateChecker.").getBoolean();
 		darkness = cfg.get(Configuration.CATEGORY_GENERAL, "Darkness", true, "Set to false to disable the random blindness within Darklands biomes").getBoolean();
 		particleBlock = cfg.get(Configuration.CATEGORY_GENERAL, "Block particles", true, "Toggles whether blocks that emits particles should do so.").getBoolean();
 		particleEntity = cfg.get(Configuration.CATEGORY_GENERAL, "Entity particles", true, "Toggles whether entities that emits particles should do so.").getBoolean();
@@ -2336,61 +2290,5 @@ public class AbyssalCraft {
 		}
 
 		return names;
-	}
-
-	@SubscribeEvent
-	public void onWorldLoad(WorldEvent.Load event) {
-		if(!dev && updateC)
-			new UpdateCheck().start();
-	}
-
-	/**
-	 * Update checker for AbyssalCraft,
-	 * based on code from AtomicStryker's UpdateChecker mod (proxy part)
-	 * @author shinoow
-	 */
-	private class UpdateCheck extends Thread {
-
-		private String webVersion;
-
-		@Override
-		public void run() {
-			try {
-				Thread.sleep(10000L);
-
-				if(isUpdateAvailable()) {
-					if(!hasPinged && version.length() > 7){
-						hasPinged = true;
-						updateProxy.announce("[\u00A79AbyssalCraft\u00A7r] Using a development version, not checking for newer versions. (\u00A7b"+ version + "\u00A7r)");
-					}
-					if(!hasPinged){
-						hasPinged = true;
-						updateProxy.announce("[\u00A79AbyssalCraft\u00A7r] Version \u00A7b"+webVersion+"\u00A7r of AbyssalCraft is available. Check https://shinoow.github.io/AbyssalCraft/ for more info. (Your Version: \u00A7b"+AbyssalCraft.version+"\u00A7r)");
-					}
-				} else if(!hasPinged){
-					hasPinged = true;
-					updateProxy.announce("[\u00A79AbyssalCraft\u00A7r] Running the latest version of AbyssalCraft, \u00A7b"+AbyssalCraft.version+"\u00A7r.");
-				}
-			} catch(Exception e) {
-				if(!hasPinged){
-					hasPinged = true;
-					System.err.println("UpdateChecker encountered an Exception, see following stacktrace:");
-					e.printStackTrace();
-					updateProxy.announce("[\u00A79AbyssalCraft\u00A7r] No internet connection found, unable to check mod version.");
-				}
-			}
-		}
-
-		public boolean isUpdateAvailable() throws IOException, MalformedURLException {
-			BufferedReader versionFile = new BufferedReader(new InputStreamReader(new URL("https://raw.githubusercontent.com/Shinoow/AbyssalCraft/master/version.txt").openStream()));
-			String curVersion = versionFile.readLine();
-			webVersion = curVersion;
-			versionFile.close();
-
-			if (!curVersion.equals(AbyssalCraft.version))
-				return true;
-
-			return false;
-		}
 	}
 }

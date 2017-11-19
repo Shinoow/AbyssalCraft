@@ -13,6 +13,7 @@ package com.shinoow.abyssalcraft.client;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.*;
+import net.minecraft.client.renderer.entity.RenderItem;
 import net.minecraft.client.renderer.entity.RenderSnowball;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
@@ -87,6 +88,7 @@ public class ClientProxy extends CommonProxy {
 		RenderingRegistry.registerEntityRenderingHandler(EntityEvilChicken.class, new RenderEvilChicken(new ModelChicken(), 0.5F));
 		RenderingRegistry.registerEntityRenderingHandler(EntityDemonCow.class, new RenderDemonCow(new ModelCow(), 0.5F));
 		RenderingRegistry.registerEntityRenderingHandler(EntityDemonChicken.class, new RenderDemonChicken(new ModelChicken(), 0.5F));
+		RenderingRegistry.registerEntityRenderingHandler(EntityGatekeeperEssence.class, new RenderItem());
 
 		RenderingRegistry.registerEntityRenderingHandler(EntityAntiAbyssalZombie.class, new RenderAntiAbyssalZombie());
 		RenderingRegistry.registerEntityRenderingHandler(EntityAntiBat.class, new RenderAntiBat());

@@ -11,7 +11,10 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.api.necronomicon;
 
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Map;
+import java.util.NavigableMap;
 
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
@@ -39,7 +42,7 @@ public class NecroData {
 	 * The base data structure for Necronomicon information pages
 	 * @param title Title to display on the "Index" for the information page
 	 * @param info Optional text to write beside buttons for sub-category pages
-	 * @param datas Page data for sub-category pages
+	 * @param chapters Chapters for sub-category pages
 	 */
 	public NecroData(String identifier, String title, String info,Chapter...chapters){
 		this.identifier = identifier;
@@ -51,7 +54,7 @@ public class NecroData {
 	/**
 	 * The base data structure for Necronomicon information pages
 	 * @param title Title to display on the "Index" for the information page
-	 * @param datas Page data for sub-category pages
+	 * @param chapters Chapters for sub-category pages
 	 */
 	public NecroData(String identifier, String title,Chapter...chapters){
 		this(identifier, title, null, chapters);
@@ -142,11 +145,6 @@ public class NecroData {
 			}
 	}
 
-	//	@Override
-	//	public String toString(){
-	//		return "NecroData{Title: "+title + ",Information: "+(information != null ? "Yes" : "No") +",PageData: "+pageData.toString() +"}";
-	//	}
-
 	/**
 	 * A Necronomicon Chapter (collection of pages)
 	 * @author shinoow
@@ -154,7 +152,17 @@ public class NecroData {
 	 * @since 1.6
 	 */
 	public static class Chapter{
-		private Map<Integer, Page> pages = Maps.newHashMap();
+		private NavigableMap<Integer, Page> pages = Maps.newTreeMap(new Comparator<Integer>(){
+
+			@Override
+			public int compare(Integer o1, Integer o2) {
+				if(o1 > o2)
+					return 1;
+				if(o1 < o2)
+					return -1;
+				return 0;
+			}
+		});
 		private String identifier;
 		private String title;
 
@@ -195,10 +203,10 @@ public class NecroData {
 		}
 
 		/**
-		 * Fetches a HashMap of all the pages contained in this Chapter
+		 * Fetches a unmodifiable Map of all the Pages contained in this Chapter
 		 */
 		public Map<Integer, Page> getPages(){
-			return pages;
+			return Collections.unmodifiableMap(pages);
 		}
 
 		/**
@@ -209,10 +217,10 @@ public class NecroData {
 		}
 
 		/**
-		 * Getter for the turn-up amount (pages evenly divided by 2)
+		 * Getter for the turn-up amount (last page number evenly divided by 2)
 		 */
 		public int getTurnupAmount(){
-			return getPageAmount() / 2 + (getPageAmount() % 2 == 0 ? 0 : 1);
+			return pages.lastKey() / 2 + (pages.lastKey() % 2 == 0 ? 0 : 1);
 		}
 
 		/**
@@ -220,8 +228,7 @@ public class NecroData {
 		 * @param page Page to add
 		 */
 		public void addPage(Page page){
-			if(pages.size() < 40)
-				pages.put(page.pageNum, page);
+			pages.put(page.pageNum, page);
 		}
 
 		/**
@@ -229,8 +236,7 @@ public class NecroData {
 		 * @param pageNum Page number
 		 */
 		public void removePage(int pageNum){
-			if(pages.containsKey(pageNum))
-				pages.remove(pageNum);
+			pages.remove(pageNum);
 		}
 
 		/**
@@ -238,7 +244,7 @@ public class NecroData {
 		 * @param pageNum Page number
 		 */
 		public Page getPage(int pageNum){
-			return pages.containsKey(pageNum) ? pages.get(pageNum) : null;
+			return pages.get(pageNum);
 		}
 
 		/**

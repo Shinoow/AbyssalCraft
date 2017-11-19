@@ -1216,7 +1216,7 @@ public class AChouse2 extends WorldGenerator
 		world.setBlock (i + 6, j + 11, k + 3, Blocks.air, 0, k);
 		world.setBlock (i + 6, j + 11, k + 4, Blocks.air, 0, k);
 		world.setBlock (i + 6, j + 11, k + 5, AbyssalCraft.DBstairs, 2, 2);
-		world.setBlock (i + 6, j + 11, k + 6, Blocks.emerald_block, k, k);
+		world.setBlock (i + 6, j + 11, k + 6, AbyssalCraft.Darkstone_brick, k, k);
 		world.setBlock (i + 6, j + 11, k + 7, AbyssalCraft.DBstairs, 3, 3);
 		world.setBlock (i + 6, j + 11, k + 8, Blocks.air, 0, k);
 		world.setBlock (i + 6, j + 11, k + 9, Blocks.air, 0, k);

@@ -11,7 +11,6 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.api;
 
-import java.lang.reflect.Field;
 import java.util.HashMap;
 import java.util.List;
 
@@ -26,7 +25,6 @@ import net.minecraft.item.ItemArmor.ArmorMaterial;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraft.potion.Potion;
-import net.minecraft.potion.PotionHelper;
 import net.minecraft.util.DamageSource;
 import net.minecraftforge.common.util.EnumHelper;
 import net.minecraftforge.oredict.OreDictionary;
@@ -74,9 +72,6 @@ public class AbyssalCraftAPI {
 
 	private static List<IFuelHandler> crystallizerFuelHandlers = Lists.newArrayList();
 	private static List<IFuelHandler> transmutatorFuelHandlers = Lists.newArrayList();
-
-	private static HashMap<Integer, String> potionRequirements = null;
-	private static HashMap<Integer, String> potionAmplifiers = null;
 
 	public static DamageSource coralium = new DamageSource("coralium").setDamageBypassesArmor().setMagicDamage();
 	public static DamageSource dread = new DamageSource("dread").setDamageBypassesArmor().setMagicDamage();
@@ -133,39 +128,6 @@ public class AbyssalCraftAPI {
 	}
 
 	/**
-	 * Initializes the reflection required for the Potion code, ignore it
-	 */
-	@SuppressWarnings("unchecked")
-	public static void initPotionReflection(){
-		for(Field f : PotionHelper.class.getDeclaredFields())
-			try {
-				if(f.getName().equals("potionRequirements") || f.getName().equals("field_77927_l")){
-					f.setAccessible(true);
-					try {
-						potionRequirements = (HashMap<Integer, String>)f.get(null);
-					} catch (IllegalArgumentException
-							| IllegalAccessException e) {
-						System.err.println("Whoops, something screwed up here, please report this to shinoow:");
-						e.printStackTrace();
-					}
-				}
-				if(f.getName().equals("potionAmplifiers") || f.getName().equals("field_77928_m")){
-					f.setAccessible(true);
-					try {
-						potionAmplifiers = (HashMap<Integer, String>)f.get(null);
-					} catch (IllegalArgumentException
-							| IllegalAccessException e) {
-						System.err.println("Whoops, something screwed up here, please report this to shinoow:");
-						e.printStackTrace();
-					}
-				}
-			} catch (SecurityException e) {
-				System.err.println("Whoops, something screwed up here, please report this to shinoow:");
-				e.printStackTrace();
-			}
-	}
-
-	/**
 	 * Sets the repair items for each armor/tool material
 	 */
 	public static void setRepairItems(){
@@ -184,30 +146,6 @@ public class AbyssalCraftAPI {
 		refinedCoraliumTool.setRepairItem(new ItemStack(ACItems.refined_coralium_ingot));
 		dreadiumTool.setRepairItem(new ItemStack(ACItems.dreadium_ingot));
 		ethaxiumTool.setRepairItem(new ItemStack(ACItems.ethaxium_ingot));
-	}
-
-	/**
-	 * Adds a bit sequence used to calculate the status on a potion.
-	 * This description probably hardly makes any sense, deal with it.
-	 * @param id The potion id
-	 * @param requirements A bit sequence
-	 * 
-	 * @since 1.1
-	 */
-	public static void addPotionRequirements(int id, String requirements){
-		potionRequirements.put(Integer.valueOf(id), requirements);
-	}
-
-	/**
-	 * Adds an amplifier to a potion.
-	 * This description probably hardly makes any sense, deal with it.
-	 * @param id The potion id
-	 * @param amplifier The potion amplifier value (usually 5)
-	 * 
-	 * @since 1.1
-	 */
-	public static void addPotionAmplifiers(int id, String amplifier){
-		potionAmplifiers.put(Integer.valueOf(id), amplifier);
 	}
 
 	/**

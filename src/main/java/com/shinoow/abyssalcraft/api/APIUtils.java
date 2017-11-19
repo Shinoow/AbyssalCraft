@@ -42,7 +42,9 @@ public class APIUtils {
 		if(item.getItem() instanceof ICrystal)
 			return true;
 		for(ItemStack crystal: AbyssalCraftAPI.getCrystals())
-			return crystal.isItemEqual(item);
+			if(crystal.getItem() == item.getItem() && (crystal.getItemDamage() == OreDictionary.WILDCARD_VALUE
+			|| crystal.getItemDamage() == item.getItemDamage()))
+				return true;
 		return false;
 	}
 

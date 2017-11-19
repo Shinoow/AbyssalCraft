@@ -40,7 +40,7 @@ public class TileEntityJzaharSpawner extends TileEntity {
 				!worldObj.getClosestPlayer(xCoord + 0.5D, yCoord + 0.5D, zCoord + 0.5D,
 						activatingRangeFromPlayer).capabilities.isCreativeMode &&
 						worldObj.getClosestPlayer(xCoord + 0.5D, yCoord + 0.5D, zCoord + 0.5D,
-								activatingRangeFromPlayer).posY >= yCoord;
+								activatingRangeFromPlayer).posY >= yCoord -1;
 	}
 
 	@Override

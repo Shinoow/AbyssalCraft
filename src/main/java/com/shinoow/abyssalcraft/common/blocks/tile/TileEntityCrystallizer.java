@@ -25,9 +25,9 @@ import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
+import com.shinoow.abyssalcraft.api.APIUtils;
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI.FuelType;
-import com.shinoow.abyssalcraft.api.item.ICrystal;
 import com.shinoow.abyssalcraft.api.recipe.CrystallizerRecipes;
 import com.shinoow.abyssalcraft.common.blocks.BlockCrystallizer;
 
@@ -369,8 +369,9 @@ public class TileEntityCrystallizer extends TileEntity implements ISidedInventor
 			if (item == AbyssalCraft.dreadfragment) return 100;
 			if (item == AbyssalCraft.Dreadshard) return 1000;
 			if (item == AbyssalCraft.dreadchunk) return 1600;
-			if (item instanceof ICrystal) return 1200;
-			if (AbyssalCraftAPI.getCrystals().contains(par1ItemStack)) return 1200;
+			if (item == AbyssalCraft.crystal) return 1350;
+			if (item == AbyssalCraft.crystalShard) return 150;
+			if (APIUtils.isCrystal(par1ItemStack)) return 1000;
 			if (item == Items.blaze_powder) return 1200;
 			if (item == Items.blaze_rod) return 2400;
 			if (item == AbyssalCraft.methane) return 10000;
