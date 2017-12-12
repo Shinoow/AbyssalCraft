@@ -128,11 +128,13 @@ public class ACItems {
 	public static Item sulfur;
 	/** Metadata Item, 0 = Iron, 1 = Gold, 2 = Sulfur, 3 = Carbon, 4 = Oxygen, 5 = Hydrogen, 6 = Nitrogen, 7 = Phosphorus,
 	 * 8 = Potassium, 9 = Nitrate, 10 = Methane, 11 = Redstone, 12 = Abyssalnite, 13 = Coralium, 14 = Dreadium, 15 = Blaze,
-	 * 16 = Tin, 17 = Copper, 18 = Silicon, 19 = Magnesium, 20 = Aluminium, 21 = Silica, 22 = Alumina, 23 = Magnesia, 24 = Zinc */
+	 * 16 = Tin, 17 = Copper, 18 = Silicon, 19 = Magnesium, 20 = Aluminium, 21 = Silica, 22 = Alumina, 23 = Magnesia,
+	 * 24 = Zinc, 25 = Calcium, 26 = Beryllium, 27 = Beryl */
 	public static Item crystal;
 	/** Metadata Item, 0 = Iron, 1 = Gold, 2 = Sulfur, 3 = Carbon, 4 = Oxygen, 5 = Hydrogen, 6 = Nitrogen, 7 = Phosphorus,
 	 * 8 = Potassium, 9 = Nitrate, 10 = Methane, 11 = Redstone, 12 = Abyssalnite, 13 = Coralium, 14 = Dreadium, 15 = Blaze,
-	 * 16 = Tin, 17 = Copper, 18 = Silicon, 19 = Magnesium, 20 = Aluminium, 21 = Silica, 22 = Alumina, 23 = Magnesia, 24 = Zinc */
+	 * 16 = Tin, 17 = Copper, 18 = Silicon, 19 = Magnesium, 20 = Aluminium, 21 = Silica, 22 = Alumina, 23 = Magnesia,
+	 * 24 = Zinc, 25 = Calcium, 26 = Beryllium, 27 = Beryl */
 	public static Item crystal_shard;
 	public static Item dread_cloth;
 	public static Item dreadium_plate;
@@ -228,7 +230,8 @@ public class ACItems {
 	public static Item interdimensional_cage;
 	/** Metadata Item, 0 = Iron, 1 = Gold, 2 = Sulfur, 3 = Carbon, 4 = Oxygen, 5 = Hydrogen, 6 = Nitrogen, 7 = Phosphorus,
 	 * 8 = Potassium, 9 = Nitrate, 10 = Methane, 11 = Redstone, 12 = Abyssalnite, 13 = Coralium, 14 = Dreadium, 15 = Blaze,
-	 * 16 = Tin, 17 = Copper, 18 = Silicon, 19 = Magnesium, 20 = Aluminium, 21 = Silica, 22 = Alumina, 23 = Magnesia, 24 = Zinc */
+	 * 16 = Tin, 17 = Copper, 18 = Silicon, 19 = Magnesium, 20 = Aluminium, 21 = Silica, 22 = Alumina, 23 = Magnesia,
+	 * 24 = Zinc, 25 = Calcium, 26 = Beryllium, 27 = Beryl */
 	public static Item crystal_fragment;
 	public static Item stone_tablet;
 	/** Metadata Item, 0 = basic, 1 = lesser, 2 = moderate, 3 = greater */

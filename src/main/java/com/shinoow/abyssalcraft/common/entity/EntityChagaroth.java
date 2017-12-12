@@ -25,7 +25,6 @@ import net.minecraft.entity.item.EntityXPOrb;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.datasync.DataParameter;
@@ -45,9 +44,9 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
-import com.google.common.collect.Lists;
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
 import com.shinoow.abyssalcraft.api.biome.ACBiomes;
+import com.shinoow.abyssalcraft.api.biome.IDreadlandsBiome;
 import com.shinoow.abyssalcraft.api.entity.EntityUtil;
 import com.shinoow.abyssalcraft.api.entity.IDreadEntity;
 import com.shinoow.abyssalcraft.api.item.ACItems;
@@ -441,17 +440,17 @@ public class EntityChagaroth extends EntityMob implements IDreadEntity {
 	{
 		setSize(2.25F, 4.5F);
 
-		Lists.newArrayList();
-		if (ticksExisted % 40 == 0)
+		if (ticksExisted % 40 == 0 && !world.isRemote)
 			for(int x = getPosition().getX() - 3; x <= getPosition().getX() + 3; x++)
 				for(int z = getPosition().getZ() - 3; z <= getPosition().getZ() + 3; z++)
-				{
-					Biome b = ACBiomes.dreadlands;
-					Chunk c = world.getChunkFromBlockCoords(getPosition());
-					c.getBiomeArray()[(z & 0xF) << 4 | x & 0xF] = (byte)Biome.getIdForBiome(b);
-					c.setModified(true);
-					PacketDispatcher.sendToDimension(new CleansingRitualMessage(x, z, Biome.getIdForBiome(b)), world.provider.getDimension());
-				}
+					if(!(world.getBiome(new BlockPos(x, 0, z)) instanceof IDreadlandsBiome))
+					{
+						Biome b = ACBiomes.dreadlands;
+						Chunk c = world.getChunkFromBlockCoords(getPosition());
+						c.getBiomeArray()[(z & 0xF) << 4 | x & 0xF] = (byte)Biome.getIdForBiome(b);
+						c.setModified(true);
+						PacketDispatcher.sendToDimension(new CleansingRitualMessage(x, z, Biome.getIdForBiome(b)), world.provider.getDimension());
+					}
 
 		setSprinting(false);
 		motionX = 0.0D;
@@ -500,11 +499,11 @@ public class EntityChagaroth extends EntityMob implements IDreadEntity {
 		if (flameShootTimer > 0)
 		{
 			world.setEntityState(this, (byte)23);
-			if (ticksExisted % 5 == 0)
+			if (ticksExisted % 5 == 0 && flameShootTimer > 30)
 			{
-				world.playSound(null, new BlockPos(posX + 0.5D, posY + getEyeHeight(), posZ + 0.5D), SoundEvents.ENTITY_GHAST_SHOOT, getSoundCategory(), 0.5F + getRNG().nextFloat(), getRNG().nextFloat() * 0.6F + 0.2F);
-				world.playSound(null, new BlockPos(posX + 0.5D, posY + getEyeHeight(), posZ + 0.5D), SoundEvents.ENTITY_GHAST_SHOOT, getSoundCategory(), 0.5F + getRNG().nextFloat(), getRNG().nextFloat() * 0.5F + 0.2F);
-				world.playSound(null, new BlockPos(posX + 0.5D, posY + getEyeHeight(), posZ + 0.5D), SoundEvents.ENTITY_GHAST_SHOOT, getSoundCategory(), 0.5F + getRNG().nextFloat(), getRNG().nextFloat() * 0.4F + 0.2F);
+				world.playSound(null, new BlockPos(posX + 0.5D, posY + getEyeHeight(), posZ + 0.5D), ACSounds.dreadguard_barf, getSoundCategory(), 0.7F + getRNG().nextFloat(), getRNG().nextFloat() * 0.6F + 0.2F);
+				world.playSound(null, new BlockPos(posX + 0.5D, posY + getEyeHeight(), posZ + 0.5D), ACSounds.dreadguard_barf, getSoundCategory(), 0.7F + getRNG().nextFloat(), getRNG().nextFloat() * 0.5F + 0.2F);
+				world.playSound(null, new BlockPos(posX + 0.5D, posY + getEyeHeight(), posZ + 0.5D), ACSounds.dreadguard_barf, getSoundCategory(), 0.7F + getRNG().nextFloat(), getRNG().nextFloat() * 0.4F + 0.2F);
 			}
 			Entity target = getHeadLookTarget();
 			if (target != null) {
@@ -716,6 +715,7 @@ public class EntityChagaroth extends EntityMob implements IDreadEntity {
 
 		if(deathTicks > 0)
 			par1NBTTagCompound.setInteger("DeathTicks", deathTicks);
+		par1NBTTagCompound.setInteger("BarfTimer", flameShootTimer);
 	}
 
 	@Override
@@ -724,6 +724,7 @@ public class EntityChagaroth extends EntityMob implements IDreadEntity {
 		super.readEntityFromNBT(par1NBTTagCompound);
 
 		deathTicks = par1NBTTagCompound.getInteger("DeathTicks");
+		flameShootTimer = par1NBTTagCompound.getInteger("BarfTimer");
 	}
 
 	@Override

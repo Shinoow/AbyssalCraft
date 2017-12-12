@@ -24,6 +24,7 @@ import net.minecraft.init.SoundEvents;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.*;
 import net.minecraft.util.math.*;
@@ -240,6 +241,22 @@ public class EntityShadowBeast extends EntityMob implements IOmotholEntity {
 		if (id == 23) addMouthParticles();
 		else
 			super.handleStatusUpdate(id);
+	}
+
+	@Override
+	public void writeEntityToNBT(NBTTagCompound par1NBTTagCompound)
+	{
+		super.writeEntityToNBT(par1NBTTagCompound);
+
+		par1NBTTagCompound.setInteger("BreathTimer", shadowFlameShootTimer);
+	}
+
+	@Override
+	public void readEntityFromNBT(NBTTagCompound par1NBTTagCompound)
+	{
+		super.readEntityFromNBT(par1NBTTagCompound);
+
+		shadowFlameShootTimer = par1NBTTagCompound.getInteger("BreathTimer");
 	}
 
 	@Override

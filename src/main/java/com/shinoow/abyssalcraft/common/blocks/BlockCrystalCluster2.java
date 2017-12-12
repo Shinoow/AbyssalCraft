@@ -103,7 +103,10 @@ public class BlockCrystalCluster2 extends BlockACBasic {
 		SILICA(5, "silica"),
 		ALUMINA(6, "alumina"),
 		MAGNESIA(7, "magnesia"),
-		ZINC(8, "zinc");
+		ZINC(8, "zinc"),
+		CALCIUM(9, "calcium"),
+		BERYLLIUM(10, "beryllium"),
+		BERYL(11, "beryl");
 
 		private static final EnumCrystalType2[] META_LOOKUP = new EnumCrystalType2[values().length];
 		private final int meta;

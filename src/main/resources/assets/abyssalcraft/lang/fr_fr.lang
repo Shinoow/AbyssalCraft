@@ -1183,6 +1183,9 @@ item.crystal.Silica.name=Crystallized Silica
 item.crystal.Alumina.name=Crystallized Alumina
 item.crystal.Magnesia.name=Crystallized Magnesia
 item.crystal.Zinc.name=Crystallized Zinc
+item.crystal.Calcium.name=Crystallized Calcium
+item.crystal.Beryllium.name=Crystallized Beryllium
+item.crystal.Beryl.name=Crystallized Beryl
 item.dreadcloth.name=Dread Cloth
 item.dreadplate.name=Dreadium Plate
 item.dreadblade.name=Dreadium Katana Blade
@@ -1394,5 +1397,7 @@ subtitle.abyssalcraft.dreadspawn.death=Dread Spawn dies
 subtitle.abyssalcraft.abyssalzombie.idle=Abyssal Zombie groans
 subtitle.abyssalcraft.abyssalzombie.hit=Abyssal Zombie hurts
 subtitle.abyssalcraft.abyssalzombie.death=Abyssal Zombie dies
+subtitle.abyssalcraft.antiplayer.hurt=Anti-Player hurts
+subtitle.abyssalcraft.dreadguard.barf=Dreadguard barfs
 
 #Localization done, Shin out.

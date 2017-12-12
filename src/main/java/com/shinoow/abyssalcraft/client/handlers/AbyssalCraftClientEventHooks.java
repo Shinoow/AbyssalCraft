@@ -62,6 +62,7 @@ import com.shinoow.abyssalcraft.common.network.server.FireMessage;
 import com.shinoow.abyssalcraft.common.network.server.StaffModeMessage;
 import com.shinoow.abyssalcraft.init.BlockHandler;
 import com.shinoow.abyssalcraft.init.ItemHandler;
+import com.shinoow.abyssalcraft.lib.ACLib;
 
 public class AbyssalCraftClientEventHooks {
 
@@ -489,8 +490,8 @@ public class AbyssalCraftClientEventHooks {
 		registerItemRender(ACItems.methane, 0);
 		registerItemRender(ACItems.nitre, 0);
 		registerItemRender(ACItems.sulfur, 0);
-		registerItemRenders(ACItems.crystal, 25);
-		registerItemRenders(ACItems.crystal_shard, 25);
+		registerItemRenders(ACItems.crystal, ACLib.crystalNames.length);
+		registerItemRenders(ACItems.crystal_shard, ACLib.crystalNames.length);
 		registerItemRender(ACItems.dread_cloth, 0);
 		registerItemRender(ACItems.dreadium_plate, 0);
 		registerItemRender(ACItems.dreadium_katana_blade, 0);
@@ -586,7 +587,7 @@ public class AbyssalCraftClientEventHooks {
 		registerItemRender(ACItems.shub_niggurath_engraving, 0);
 		registerItemRender(ACItems.essence_of_the_gatekeeper, 0);
 		registerItemRender(ACItems.interdimensional_cage, 0);
-		registerItemRenders(ACItems.crystal_fragment, 25);
+		registerItemRenders(ACItems.crystal_fragment, ACLib.crystalNames.length);
 		registerItemRender(ACItems.stone_tablet, 0);
 		registerItemRender(ACItems.scroll, 0, "scroll_basic");
 		registerItemRender(ACItems.scroll, 1, "scroll_lesser");

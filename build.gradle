@@ -136,7 +136,7 @@ curseforge {
 		changelog = new File('changelog.html') //must have at least an empty string
 		addArtifact apiJar
 		relations {
-			optionalLibrary 'just-enough-items-jei'
+			optionalLibrary 'jei'
 		}
 	}
 }

@@ -21,15 +21,17 @@ import net.minecraftforge.fml.common.Loader;
 
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.api.item.ACItems;
+import com.shinoow.abyssalcraft.api.recipe.Materialization;
+import com.shinoow.abyssalcraft.api.recipe.MaterializerRecipes;
 import com.shinoow.abyssalcraft.api.ritual.NecronomiconCreationRitual;
-import com.shinoow.abyssalcraft.common.inventory.ContainerCrystallizer;
-import com.shinoow.abyssalcraft.common.inventory.ContainerEngraver;
-import com.shinoow.abyssalcraft.common.inventory.ContainerTransmutator;
+import com.shinoow.abyssalcraft.common.inventory.*;
 import com.shinoow.abyssalcraft.init.BlockHandler;
 import com.shinoow.abyssalcraft.init.ItemHandler;
 import com.shinoow.abyssalcraft.integration.jei.crystallizer.*;
 import com.shinoow.abyssalcraft.integration.jei.engraver.EngraverRecipeCategory;
 import com.shinoow.abyssalcraft.integration.jei.engraver.EngravingRecipeMaker;
+import com.shinoow.abyssalcraft.integration.jei.materializer.MaterializationRecipeCategory;
+import com.shinoow.abyssalcraft.integration.jei.materializer.MaterializationRecipeWrapper;
 import com.shinoow.abyssalcraft.integration.jei.rending.RendingRecipeCategory;
 import com.shinoow.abyssalcraft.integration.jei.rending.RendingRecipeMaker;
 import com.shinoow.abyssalcraft.integration.jei.ritual.RitualRecipeCategory;
@@ -72,6 +74,7 @@ public class ACJEIPlugin implements IModPlugin {
 		registry.addRecipeCatalyst(new ItemStack(Blocks.ANVIL, 1, 0), AbyssalCraftRecipeCategoryUid.UPGRADE);
 		registry.addRecipeCatalyst(new ItemStack(Blocks.ANVIL, 1, 1), AbyssalCraftRecipeCategoryUid.UPGRADE);
 		registry.addRecipeCatalyst(new ItemStack(Blocks.ANVIL, 1, 2), AbyssalCraftRecipeCategoryUid.UPGRADE);
+		registry.addRecipeCatalyst(new ItemStack(ACBlocks.materializer), AbyssalCraftRecipeCategoryUid.MATERIALIZATION);
 
 		IRecipeTransferRegistry recipeTransferRegistry = registry.getRecipeTransferRegistry();
 
@@ -80,6 +83,7 @@ public class ACJEIPlugin implements IModPlugin {
 		recipeTransferRegistry.addRecipeTransferHandler(ContainerCrystallizer.class, AbyssalCraftRecipeCategoryUid.CRYSTALLIZATION, 0, 1, 1, 36);
 		recipeTransferRegistry.addRecipeTransferHandler(ContainerCrystallizer.class, AbyssalCraftRecipeCategoryUid.FUEL_CRYSTALLIZATION, 1, 1, 1, 36);
 		recipeTransferRegistry.addRecipeTransferHandler(ContainerEngraver.class, AbyssalCraftRecipeCategoryUid.ENGRAVING, 0, 1, 1, 36);
+		recipeTransferRegistry.addRecipeTransferHandler(ContainerMaterializer.class, AbyssalCraftRecipeCategoryUid.MATERIALIZATION, 0, 1, 1, 36);
 
 		registry.addRecipes(TransmutationRecipeMaker.getTransmutatorRecipes(jeiHelpers), AbyssalCraftRecipeCategoryUid.TRANSMUTATION);
 		registry.addRecipes(TransmutatorFuelRecipeMaker.getFuelRecipes(utils, jeiHelpers), AbyssalCraftRecipeCategoryUid.FUEL_TRANSMUTATION);
@@ -89,8 +93,10 @@ public class ACJEIPlugin implements IModPlugin {
 		registry.addRecipes(EngravingRecipeMaker.getEngraverRecipes(), AbyssalCraftRecipeCategoryUid.ENGRAVING);
 		registry.addRecipes(RendingRecipeMaker.getRending(), AbyssalCraftRecipeCategoryUid.RENDING);
 		registry.addRecipes(UpgradeRecipeMaker.getUpgrades(), AbyssalCraftRecipeCategoryUid.UPGRADE);
+		registry.addRecipes(MaterializerRecipes.instance().getMaterializationList(), AbyssalCraftRecipeCategoryUid.MATERIALIZATION);
 
 		registry.handleRecipes(NecronomiconCreationRitual.class, recipe -> new RitualRecipeWrapper(recipe), AbyssalCraftRecipeCategoryUid.RITUAL);
+		registry.handleRecipes(Materialization.class, recipe -> new MaterializationRecipeWrapper(recipe), AbyssalCraftRecipeCategoryUid.MATERIALIZATION);
 
 		jeiHelpers.getIngredientBlacklist().addIngredientToBlacklist(new ItemStack(ItemHandler.devsword));
 		jeiHelpers.getIngredientBlacklist().addIngredientToBlacklist(new ItemStack(ACBlocks.crystallizer_active));
@@ -118,6 +124,7 @@ public class ACJEIPlugin implements IModPlugin {
 				new RitualRecipeCategory(guiHelper),
 				new EngraverRecipeCategory(guiHelper),
 				new RendingRecipeCategory(guiHelper),
-				new UpgradeRecipeCategory(guiHelper));
+				new UpgradeRecipeCategory(guiHelper),
+				new MaterializationRecipeCategory(guiHelper));
 	}
 }
