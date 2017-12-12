@@ -621,6 +621,13 @@ public class AbyssalCrafting {
 		AbyssalCraftAPI.addCrystallization(new ItemStack(ACItems.skin, 1, 1), new ItemStack(ACItems.crystal_shard, 8, 7), new ItemStack(ACItems.essence, 1, 1), 0.2F);
 		AbyssalCraftAPI.addCrystallization(new ItemStack(ACItems.skin, 1, 2), new ItemStack(ACItems.crystal_shard, 8, 7), new ItemStack(ACItems.essence, 1, 2), 0.2F);
 		AbyssalCraftAPI.addCrystallization(ACItems.dreaded_shard_of_abyssalnite, new ItemStack(ACItems.crystal_shard, 1, 12), new ItemStack(ACItems.crystal_shard, 4, 14), 0.2F);
+		AbyssalCraftAPI.addSingleCrystallization(Items.BONE, new ItemStack(ACItems.crystal_shard, 4, 25), 0.2F);
+		AbyssalCraftAPI.addCrystallization(Items.PRISMARINE_SHARD, new ItemStack(ACItems.crystal_shard, 4, 21), new ItemStack(ACItems.crystal_shard, 4, 27), 0.1F);
+		AbyssalCraftAPI.addCrystallization(Items.PRISMARINE_CRYSTALS, new ItemStack(ACItems.crystal_shard, 4, 21), new ItemStack(ACItems.crystal_shard, 4, 27), 0.1F);
+		AbyssalCraftAPI.addCrystallization(new ItemStack(Blocks.PRISMARINE, 1, 0), new ItemStack(ACItems.crystal_shard, 16, 21), new ItemStack(ACItems.crystal_shard, 16, 27), 0.1F);
+		AbyssalCraftAPI.addCrystallization(new ItemStack(Blocks.PRISMARINE, 1, 1), new ItemStack(ACItems.crystal, 4, 21), new ItemStack(ACItems.crystal, 4, 27), 0.1F);
+		AbyssalCraftAPI.addCrystallization(new ItemStack(Blocks.PRISMARINE, 1, 2), new ItemStack(ACItems.crystal_shard, 32, 21), new ItemStack(ACItems.crystal_shard, 32, 27), 0.1F);
+		AbyssalCraftAPI.addCrystallization(Items.EGG, new ItemStack(ACItems.crystal_shard, 4, 25), new ItemStack(ACItems.crystal_shard, 4, 7), 0.1F);
 
 		//Crystallization for dusts
 		AbyssalCraftAPI.addSingleCrystallization("dustIron", "crystalShardIron", 4, 0.1F);
@@ -713,10 +720,10 @@ public class AbyssalCrafting {
 	}
 
 	private static void addMaterialization(){
-		AbyssalCraftAPI.addMaterialization(new ItemStack(Items.BONE), new ItemStack(ACItems.crystal, 1, 7));
+		AbyssalCraftAPI.addMaterialization(new ItemStack(Items.BONE), new ItemStack(ACItems.crystal, 1, 25));
 		AbyssalCraftAPI.addMaterialization(new ItemStack(Items.ROTTEN_FLESH), new ItemStack(ACItems.crystal, 2, 7));
 		AbyssalCraftAPI.addMaterialization(new ItemStack(ACItems.coralium_plagued_flesh), new ItemStack(ACItems.crystal, 2, 7), new ItemStack(ACItems.crystal, 1, 13));
-		AbyssalCraftAPI.addMaterialization(new ItemStack(ACItems.coralium_plagued_flesh_on_a_bone), new ItemStack(ACItems.crystal, 3, 7), new ItemStack(ACItems.crystal, 1, 13));
+		AbyssalCraftAPI.addMaterialization(new ItemStack(ACItems.coralium_plagued_flesh_on_a_bone), new ItemStack(ACItems.crystal, 3, 7), new ItemStack(ACItems.crystal, 1, 25), new ItemStack(ACItems.crystal, 1, 13));
 		AbyssalCraftAPI.addMaterialization(new ItemStack(Items.COAL, 1, 0), new ItemStack(ACItems.crystal, 1, 3));
 		AbyssalCraftAPI.addMaterialization(new ItemStack(Items.COAL, 1, 1), new ItemStack(ACItems.crystal, 1, 3));
 		AbyssalCraftAPI.addMaterialization(new ItemStack(Items.IRON_INGOT), new ItemStack(ACItems.crystal, 1, 0));
@@ -744,6 +751,13 @@ public class AbyssalCrafting {
 		AbyssalCraftAPI.addMaterialization(new ItemStack(ACBlocks.nitre_ore), new ItemStack(ACItems.crystal, 1, 21), new ItemStack(ACItems.crystal, 1, 23), new ItemStack(ACItems.crystal, 1, 8), new ItemStack(ACItems.crystal, 1, 9));
 		AbyssalCraftAPI.addMaterialization(new ItemStack(Blocks.SPONGE), new ItemStack(ACItems.crystal, 1, 21), new ItemStack(ACItems.crystal, 1, 3));
 		AbyssalCraftAPI.addMaterialization(new ItemStack(Items.ELYTRA), new ItemStack(ACItems.crystal, 8, 3), new ItemStack(ACItems.crystal, 13, 5), new ItemStack(ACItems.crystal, 5, 4), new ItemStack(ACItems.crystal, 1, 6));
+		AbyssalCraftAPI.addMaterialization(new ItemStack(Items.PRISMARINE_SHARD), new ItemStack(ACItems.crystal, 1, 21), new ItemStack(ACItems.crystal, 1, 27));
+		AbyssalCraftAPI.addMaterialization(new ItemStack(Items.PRISMARINE_CRYSTALS), new ItemStack(ACItems.crystal, 1, 21), new ItemStack(ACItems.crystal, 1, 27));
+		AbyssalCraftAPI.addMaterialization(new ItemStack(Blocks.PRISMARINE, 1, 0), new ItemStack(ACItems.crystal, 4, 21), new ItemStack(ACItems.crystal, 4, 27));
+		AbyssalCraftAPI.addMaterialization(new ItemStack(Blocks.PRISMARINE, 1, 1), new ItemStack(ACItems.crystal, 9, 21), new ItemStack(ACItems.crystal, 9, 27));
+		AbyssalCraftAPI.addMaterialization(new ItemStack(Blocks.PRISMARINE, 1, 2), new ItemStack(ACItems.crystal, 8, 21), new ItemStack(ACItems.crystal, 8, 27), new ItemStack(ACItems.crystal, 1, 3));
+		AbyssalCraftAPI.addMaterialization(new ItemStack(Blocks.SEA_LANTERN), new ItemStack(ACItems.crystal, 9, 21), new ItemStack(ACItems.crystal, 9, 27));
+		AbyssalCraftAPI.addMaterialization(new ItemStack(Items.EGG), new ItemStack(ACItems.crystal, 1, 25), new ItemStack(ACItems.crystal, 1, 7));
 	}
 
 	private static void addRitualRecipes(){

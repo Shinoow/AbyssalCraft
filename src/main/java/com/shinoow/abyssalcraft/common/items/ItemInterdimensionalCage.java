@@ -28,6 +28,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import com.shinoow.abyssalcraft.api.energy.IEnergyContainerItem;
+import com.shinoow.abyssalcraft.api.energy.PEUtils;
 import com.shinoow.abyssalcraft.client.handlers.AbyssalCraftClientEventHooks;
 import com.shinoow.abyssalcraft.common.network.PacketDispatcher;
 import com.shinoow.abyssalcraft.common.network.server.InterdimensionalCageMessage;
@@ -139,16 +140,7 @@ public class ItemInterdimensionalCage extends ItemACBasic implements IEnergyCont
 
 	@Override
 	public float getContainedEnergy(ItemStack stack) {
-		float energy;
-		if(!stack.hasTagCompound())
-			stack.setTagCompound(new NBTTagCompound());
-		if(stack.getTagCompound().hasKey("PotEnergy"))
-			energy = stack.getTagCompound().getFloat("PotEnergy");
-		else {
-			energy = 0;
-			stack.getTagCompound().setFloat("PotEnergy", energy);
-		}
-		return energy;
+		return PEUtils.getContainedEnergy(stack);
 	}
 
 	@Override
@@ -159,22 +151,12 @@ public class ItemInterdimensionalCage extends ItemACBasic implements IEnergyCont
 
 	@Override
 	public void addEnergy(ItemStack stack, float energy) {
-		float contained = getContainedEnergy(stack);
-		if(contained + energy >= getMaxEnergy(stack))
-			stack.getTagCompound().setFloat("PotEnergy", getMaxEnergy(stack));
-		else stack.getTagCompound().setFloat("PotEnergy", contained += energy);
+		PEUtils.addEnergy(this, stack, energy);
 	}
 
 	@Override
 	public float consumeEnergy(ItemStack stack, float energy) {
-		float contained = getContainedEnergy(stack);
-		if(energy < contained){
-			stack.getTagCompound().setFloat("PotEnergy", contained -= energy);
-			return energy;
-		} else {
-			stack.getTagCompound().setFloat("PotEnergy", 0);
-			return contained;
-		}
+		return PEUtils.consumeEnergy(stack, energy);
 	}
 
 	@Override

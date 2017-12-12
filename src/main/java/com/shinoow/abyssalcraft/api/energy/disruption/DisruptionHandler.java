@@ -34,7 +34,7 @@ import com.shinoow.abyssalcraft.api.event.ACEvents.DisruptionEvent;
  */
 public class DisruptionHandler {
 
-	private List<DisruptionEntry> disruptions = Lists.newArrayList();
+	private final List<DisruptionEntry> disruptions = Lists.newArrayList();
 
 	private static final DisruptionHandler instance = new DisruptionHandler();
 

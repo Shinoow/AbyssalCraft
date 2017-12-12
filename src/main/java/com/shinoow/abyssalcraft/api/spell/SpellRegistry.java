@@ -31,7 +31,7 @@ import com.shinoow.abyssalcraft.api.APIUtils;
  */
 public class SpellRegistry {
 
-	List<Spell> spells = Lists.newArrayList();
+	private final List<Spell> spells = Lists.newArrayList();
 
 	private static final SpellRegistry instance = new SpellRegistry();
 

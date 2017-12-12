@@ -25,7 +25,7 @@ public class MaterializerRecipes {
 
 	private static final MaterializerRecipes materializerBase = new MaterializerRecipes();
 	/** The list of materialization results. */
-	private List<Materialization> materializationList = Lists.newArrayList();
+	private final List<Materialization> materializationList = Lists.newArrayList();
 
 	public static MaterializerRecipes instance()
 	{

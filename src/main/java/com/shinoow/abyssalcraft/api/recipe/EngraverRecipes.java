@@ -28,10 +28,10 @@ public class EngraverRecipes {
 
 	private static final EngraverRecipes engravingBase = new EngraverRecipes();
 
-	private List<ItemStack> coins = Lists.newArrayList();
-	private Map<ItemEngraving, ItemStack> engravings = Maps.newHashMap();
-	private Map<ItemStack, ItemStack> engravingList = Maps.newHashMap();
-	private Map<ItemStack, Float> experienceList = Maps.newHashMap();
+	private final List<ItemStack> coins = Lists.newArrayList();
+	private final Map<ItemEngraving, ItemStack> engravings = Maps.newHashMap();
+	private final Map<ItemStack, ItemStack> engravingList = Maps.newHashMap();
+	private final Map<ItemStack, Float> experienceList = Maps.newHashMap();
 
 	public static EngraverRecipes instance()
 	{

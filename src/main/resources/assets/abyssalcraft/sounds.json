@@ -345,5 +345,12 @@
 			"abyssalcraft:antiplayer/hurt"
 		],
 		"subtitle": "subtitle.abyssalcraft.antiplayer.hurt"
+	},
+	"dreadguard.barf": {
+		"category": "hostile",
+		"sounds": [
+			"abyssalcraft:dreadguard/barf"
+		],
+		"subtitle": "subtitle.abyssalcraft.dreadguard.barf"
 	}
 }

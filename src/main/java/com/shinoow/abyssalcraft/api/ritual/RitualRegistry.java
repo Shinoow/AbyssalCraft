@@ -32,10 +32,10 @@ import com.shinoow.abyssalcraft.api.APIUtils;
  */
 public class RitualRegistry {
 
-	private Map<Integer, Integer> dimToBookType = Maps.newHashMap();
-	private Map<Integer, String> dimToName = Maps.newHashMap();
-	private Map<NecronomiconRitual, Integer> ritualToBookType = Maps.newHashMap();
-	private ArrayList<NecronomiconRitual> rituals = Lists.newArrayList();
+	private final Map<Integer, Integer> dimToBookType = Maps.newHashMap();
+	private final Map<Integer, String> dimToName = Maps.newHashMap();
+	private final Map<NecronomiconRitual, Integer> ritualToBookType = Maps.newHashMap();
+	private final ArrayList<NecronomiconRitual> rituals = Lists.newArrayList();
 
 	private static final RitualRegistry instance = new RitualRegistry();
 

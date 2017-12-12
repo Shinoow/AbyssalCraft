@@ -22,6 +22,7 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.SoundCategory;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
@@ -33,6 +34,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import com.google.common.collect.Lists;
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
 import com.shinoow.abyssalcraft.api.biome.ACBiomes;
+import com.shinoow.abyssalcraft.api.biome.IDreadlandsBiome;
 import com.shinoow.abyssalcraft.common.network.PacketDispatcher;
 import com.shinoow.abyssalcraft.common.network.client.CleansingRitualMessage;
 
@@ -93,17 +95,17 @@ public class EntityDreadedCharge extends EntityFireball
 	{
 		if (ticksExisted > 10)
 		{
-			Lists.newArrayList();
-			for(int x = getPosition().getX() -4; x < getPosition().getX() + 4; x++)
-				for(int z = getPosition().getZ() - 4; z < getPosition().getZ() + 4; z++)
-				{
-					Biome b = ACBiomes.dreadlands;
-					Chunk c = world.getChunkFromBlockCoords(getPosition());
-					c.getBiomeArray()[(z & 0xF) << 4 | x & 0xF] = (byte)Biome.getIdForBiome(b);
-					c.setModified(true);
-					PacketDispatcher.sendToDimension(new CleansingRitualMessage(x, z, Biome.getIdForBiome(b)), world.provider.getDimension());
-				}
-
+			if(!world.isRemote)
+				for(int x = getPosition().getX() -4; x < getPosition().getX() + 4; x++)
+					for(int z = getPosition().getZ() - 4; z < getPosition().getZ() + 4; z++)
+						if(!(world.getBiome(new BlockPos(x, 0, z)) instanceof IDreadlandsBiome))
+						{
+							Biome b = ACBiomes.dreadlands;
+							Chunk c = world.getChunkFromBlockCoords(getPosition());
+							c.getBiomeArray()[(z & 0xF) << 4 | x & 0xF] = (byte)Biome.getIdForBiome(b);
+							c.setModified(true);
+							PacketDispatcher.sendToDimension(new CleansingRitualMessage(x, z, Biome.getIdForBiome(b)), world.provider.getDimension());
+						}
 
 			if (movingObject.entityHit != null) if (shootingEntity instanceof EntityLivingBase)
 			{

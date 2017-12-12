@@ -26,7 +26,7 @@ public class UpgradeKitRecipes {
 
 	private static final UpgradeKitRecipes instance = new UpgradeKitRecipes();
 
-	private Map<ItemUpgradeKit, Map<ItemStack, ItemStack>> upgrades = new HashMap<ItemUpgradeKit, Map<ItemStack, ItemStack>>(){{
+	private final Map<ItemUpgradeKit, Map<ItemStack, ItemStack>> upgrades = new HashMap<ItemUpgradeKit, Map<ItemStack, ItemStack>>(){{
 		put((ItemUpgradeKit)ACItems.cobblestone_upgrade_kit, Maps.newHashMap());
 		put((ItemUpgradeKit)ACItems.iron_upgrade_kit, Maps.newHashMap());
 		put((ItemUpgradeKit)ACItems.gold_upgrade_kit, Maps.newHashMap());
