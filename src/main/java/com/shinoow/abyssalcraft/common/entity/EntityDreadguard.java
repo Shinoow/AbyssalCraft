@@ -26,6 +26,7 @@ import net.minecraft.init.SoundEvents;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.*;
 import net.minecraft.util.math.*;
@@ -173,8 +174,8 @@ public class EntityDreadguard extends EntityMob implements IDreadEntity {
 			motionZ *= 0.0D;
 			setAIMoveSpeed(0F);
 			worldObj.setEntityState(this, (byte)23);
-			if (ticksExisted % 5 == 0)
-				worldObj.playSound(null, new BlockPos(posX + 0.5D, posY + getEyeHeight(), posZ + 0.5D), SoundEvents.ENTITY_GHAST_SHOOT, getSoundCategory(), 0.5F + getRNG().nextFloat(), getRNG().nextFloat() * 0.5F + 0.2F);
+			if (ticksExisted % 5 == 0 && flameShootTimer > 30)
+				worldObj.playSound(null, new BlockPos(posX + 0.5D, posY + getEyeHeight(), posZ + 0.5D), ACSounds.dreadguard_barf, getSoundCategory(), 0.7F + getRNG().nextFloat(), getRNG().nextFloat() * 0.5F + 0.2F);
 			Entity target = getHeadLookTarget();
 			if (target != null) {
 				List<EntityLivingBase> list = worldObj.getEntitiesWithinAABB(EntityLivingBase.class, target.getEntityBoundingBox().expand(2.0D, 2.0D, 2.0D), Predicates.and(new Predicate[] { EntitySelectors.IS_ALIVE }));
@@ -283,6 +284,22 @@ public class EntityDreadguard extends EntityMob implements IDreadEntity {
 		if (id == 23) addMouthParticles();
 		else
 			super.handleStatusUpdate(id);
+	}
+
+	@Override
+	public void writeEntityToNBT(NBTTagCompound par1NBTTagCompound)
+	{
+		super.writeEntityToNBT(par1NBTTagCompound);
+
+		par1NBTTagCompound.setInteger("BarfTimer", flameShootTimer);
+	}
+
+	@Override
+	public void readEntityFromNBT(NBTTagCompound par1NBTTagCompound)
+	{
+		super.readEntityFromNBT(par1NBTTagCompound);
+
+		flameShootTimer = par1NBTTagCompound.getInteger("BarfTimer");
 	}
 
 	@Override

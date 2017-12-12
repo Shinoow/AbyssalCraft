@@ -30,9 +30,9 @@ import net.minecraft.util.text.TextComponentTranslation;
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
 import com.shinoow.abyssalcraft.api.energy.IEnergyContainer;
 import com.shinoow.abyssalcraft.api.energy.IEnergyContainerItem;
-import com.shinoow.abyssalcraft.api.entity.IAntiEntity;
 import com.shinoow.abyssalcraft.api.entity.ICoraliumEntity;
 import com.shinoow.abyssalcraft.api.entity.IDreadEntity;
+import com.shinoow.abyssalcraft.api.entity.IOmotholEntity;
 import com.shinoow.abyssalcraft.api.item.ACItems;
 import com.shinoow.abyssalcraft.lib.ACLib;
 import com.shinoow.abyssalcraft.lib.util.blocks.ISingletonInventory;
@@ -166,8 +166,7 @@ public class TileEntityRendingPedestal extends TileEntity implements IEnergyCont
 									consumeEnergy(target.getMaxHealth()/2);
 									increaseEnergy(2, staff.getDrainAmount(stack));
 								}
-						} else if(worldObj.provider.getDimension() == ACLib.omothol_id && target instanceof ICoraliumEntity
-							&& target instanceof IDreadEntity && target instanceof IAntiEntity &&
+						} else if(worldObj.provider.getDimension() == ACLib.omothol_id && target instanceof IOmotholEntity &&
 							target.getCreatureAttribute() != AbyssalCraftAPI.SHADOW && target.isNonBoss())
 							if(!target.isDead && getContainedEnergy() >= target.getMaxHealth()/2)
 								if(target.attackEntityFrom(DamageSource.magic, staff.getDrainAmount(stack))){

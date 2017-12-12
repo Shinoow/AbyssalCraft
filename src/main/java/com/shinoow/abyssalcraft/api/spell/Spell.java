@@ -30,7 +30,7 @@ public abstract class Spell {
 
 	private Object[] reagents = new Object[5];
 	private ItemStack parchment = null;
-	private String unlocalizedName;
+	private final String unlocalizedName;
 	private int bookType, color;
 	private float requiredEnergy;
 	private boolean nbtSensitive, requiresCharging;

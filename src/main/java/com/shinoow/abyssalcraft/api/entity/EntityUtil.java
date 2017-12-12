@@ -37,7 +37,7 @@ public final class EntityUtil {
 
 	private EntityUtil(){}
 
-	private static List<Class<? extends EntityLivingBase>> shoggothFood = Lists.newArrayList();
+	private static final List<Class<? extends EntityLivingBase>> shoggothFood = Lists.newArrayList();
 
 	/**
 	 * Checks if the Entity is immune to the Coralium Plague

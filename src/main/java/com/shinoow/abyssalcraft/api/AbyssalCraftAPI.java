@@ -59,44 +59,44 @@ public class AbyssalCraftAPI {
 
 	public static Potion coralium_plague, dread_plague, antimatter_potion;
 
-	private static List<IFuelHandler> crystallizerFuelHandlers = Lists.newArrayList();
-	private static List<IFuelHandler> transmutatorFuelHandlers = Lists.newArrayList();
+	private static final List<IFuelHandler> crystallizerFuelHandlers = Lists.newArrayList();
+	private static final List<IFuelHandler> transmutatorFuelHandlers = Lists.newArrayList();
 
-	public static DamageSource coralium = new DamageSource("coralium").setDamageBypassesArmor().setMagicDamage();
-	public static DamageSource dread = new DamageSource("dread").setDamageBypassesArmor().setMagicDamage();
-	public static DamageSource antimatter = new DamageSource("antimatter").setDamageBypassesArmor().setDamageIsAbsolute().setMagicDamage();
-	public static DamageSource shadow = new DamageSource("shadow").setDamageBypassesArmor().setDamageIsAbsolute().setMagicDamage();
+	public static final DamageSource coralium = new DamageSource("coralium").setDamageBypassesArmor().setMagicDamage();
+	public static final DamageSource dread = new DamageSource("dread").setDamageBypassesArmor().setMagicDamage();
+	public static final DamageSource antimatter = new DamageSource("antimatter").setDamageBypassesArmor().setDamageIsAbsolute().setMagicDamage();
+	public static final DamageSource shadow = new DamageSource("shadow").setDamageBypassesArmor().setDamageIsAbsolute().setMagicDamage();
 
-	private static List<ItemStack> crystals = Lists.newArrayList();
+	private static final List<ItemStack> crystals = Lists.newArrayList();
 
-	private static Map<NecroData, Integer> necroData = Maps.newHashMap();
+	private static final Map<NecroData, Integer> necroData = Maps.newHashMap();
 
-	private static Map<Item, ResourceLocation> ghoul_helmet = Maps.newHashMap();
-	private static Map<Item, ResourceLocation> ghoul_chestplate = Maps.newHashMap();
-	private static Map<Item, ResourceLocation> ghoul_leggings = Maps.newHashMap();
-	private static Map<Item, ResourceLocation> ghoul_boots = Maps.newHashMap();
+	private static final Map<Item, ResourceLocation> ghoul_helmet = Maps.newHashMap();
+	private static final Map<Item, ResourceLocation> ghoul_chestplate = Maps.newHashMap();
+	private static final Map<Item, ResourceLocation> ghoul_leggings = Maps.newHashMap();
+	private static final Map<Item, ResourceLocation> ghoul_boots = Maps.newHashMap();
 
-	private static Map<Integer, Integer> gateway_key_overrides = Maps.newHashMap();
+	private static final Map<Integer, Integer> gateway_key_overrides = Maps.newHashMap();
 
 	/**
 	 *  {@link EnumCreatureAttribute} used for the Shadow mobs
 	 */
-	public static EnumCreatureAttribute SHADOW = EnumHelper.addCreatureAttribute("SHADOW");
+	public static final EnumCreatureAttribute SHADOW = EnumHelper.addCreatureAttribute("SHADOW");
 
-	public static ArmorMaterial abyssalniteArmor = EnumHelper.addArmorMaterial("Abyssalnite", "abyssalcraft:abyssalnite", 35, new int[]{3, 6, 8, 3}, 13, SoundEvents.ITEM_ARMOR_EQUIP_IRON, 1.0F);
-	public static ArmorMaterial dreadedAbyssalniteArmor = EnumHelper.addArmorMaterial("Dread", "abyssalcraft:dread", 36, new int[]{3, 6, 8, 3}, 15, SoundEvents.ITEM_ARMOR_EQUIP_IRON, 1.0F);
-	public static ArmorMaterial refinedCoraliumArmor = EnumHelper.addArmorMaterial("Coralium", "abyssalcraft:coralium", 37, new int[]{3, 6, 8, 3}, 14, SoundEvents.ITEM_ARMOR_EQUIP_IRON, 1.0F);
-	public static ArmorMaterial platedCoraliumArmor = EnumHelper.addArmorMaterial("CoraliumP", "abyssalcraft:coraliump", 55, new int[]{4, 7, 9, 4}, 14, SoundEvents.ITEM_ARMOR_EQUIP_IRON, 3.0F);
-	public static ArmorMaterial depthsArmor = EnumHelper.addArmorMaterial("Depths", "abyssalcraft:depths", 33, new int[]{3, 6, 8, 3}, 25, SoundEvents.ITEM_ARMOR_EQUIP_IRON, 1.5F);
-	public static ArmorMaterial dreadiumArmor = EnumHelper.addArmorMaterial("Dreadium", "abyssalcraft:dreadium", 40, new int[]{3, 6, 8, 3}, 15, SoundEvents.ITEM_ARMOR_EQUIP_IRON, 1.0F);
-	public static ArmorMaterial dreadiumSamuraiArmor = EnumHelper.addArmorMaterial("DreadiumS", "abyssalcraft:dreadiums", 45, new int[]{3, 6, 8, 3}, 20, SoundEvents.ITEM_ARMOR_EQUIP_IRON, 1.5F);
-	public static ArmorMaterial ethaxiumArmor = EnumHelper.addArmorMaterial("Ethaxium", "abyssalcraft:ethaxium", 50, new int[]{3, 6, 8, 3}, 25, SoundEvents.ITEM_ARMOR_EQUIP_IRON, 2.0F);
+	public static final ArmorMaterial abyssalniteArmor = EnumHelper.addArmorMaterial("Abyssalnite", "abyssalcraft:abyssalnite", 35, new int[]{3, 6, 8, 3}, 13, SoundEvents.ITEM_ARMOR_EQUIP_IRON, 1.0F);
+	public static final ArmorMaterial dreadedAbyssalniteArmor = EnumHelper.addArmorMaterial("Dread", "abyssalcraft:dread", 36, new int[]{3, 6, 8, 3}, 15, SoundEvents.ITEM_ARMOR_EQUIP_IRON, 1.0F);
+	public static final ArmorMaterial refinedCoraliumArmor = EnumHelper.addArmorMaterial("Coralium", "abyssalcraft:coralium", 37, new int[]{3, 6, 8, 3}, 14, SoundEvents.ITEM_ARMOR_EQUIP_IRON, 1.0F);
+	public static final ArmorMaterial platedCoraliumArmor = EnumHelper.addArmorMaterial("CoraliumP", "abyssalcraft:coraliump", 55, new int[]{4, 7, 9, 4}, 14, SoundEvents.ITEM_ARMOR_EQUIP_IRON, 3.0F);
+	public static final ArmorMaterial depthsArmor = EnumHelper.addArmorMaterial("Depths", "abyssalcraft:depths", 33, new int[]{3, 6, 8, 3}, 25, SoundEvents.ITEM_ARMOR_EQUIP_IRON, 1.5F);
+	public static final ArmorMaterial dreadiumArmor = EnumHelper.addArmorMaterial("Dreadium", "abyssalcraft:dreadium", 40, new int[]{3, 6, 8, 3}, 15, SoundEvents.ITEM_ARMOR_EQUIP_IRON, 1.0F);
+	public static final ArmorMaterial dreadiumSamuraiArmor = EnumHelper.addArmorMaterial("DreadiumS", "abyssalcraft:dreadiums", 45, new int[]{3, 6, 8, 3}, 20, SoundEvents.ITEM_ARMOR_EQUIP_IRON, 1.5F);
+	public static final ArmorMaterial ethaxiumArmor = EnumHelper.addArmorMaterial("Ethaxium", "abyssalcraft:ethaxium", 50, new int[]{3, 6, 8, 3}, 25, SoundEvents.ITEM_ARMOR_EQUIP_IRON, 2.0F);
 
-	public static ToolMaterial darkstoneTool = EnumHelper.addToolMaterial("DARKSTONE", 1, 180, 5.0F, 1, 5);
-	public static ToolMaterial abyssalniteTool = EnumHelper.addToolMaterial("ABYSSALNITE", 4, 1261, 10.0F, 4, 12);
-	public static ToolMaterial refinedCoraliumTool = EnumHelper.addToolMaterial("CORALIUM", 5, 1800, 12.0F, 5, 13);
-	public static ToolMaterial dreadiumTool = EnumHelper.addToolMaterial("DREADIUM", 6, 2300, 14.0F, 6, 14);
-	public static ToolMaterial ethaxiumTool = EnumHelper.addToolMaterial("ETHAXIUM", 8, 2800, 16.0F, 8, 20);
+	public static final ToolMaterial darkstoneTool = EnumHelper.addToolMaterial("DARKSTONE", 1, 180, 5.0F, 1, 5);
+	public static final ToolMaterial abyssalniteTool = EnumHelper.addToolMaterial("ABYSSALNITE", 4, 1261, 10.0F, 4, 12);
+	public static final ToolMaterial refinedCoraliumTool = EnumHelper.addToolMaterial("CORALIUM", 5, 1800, 12.0F, 5, 13);
+	public static final ToolMaterial dreadiumTool = EnumHelper.addToolMaterial("DREADIUM", 6, 2300, 14.0F, 6, 14);
+	public static final ToolMaterial ethaxiumTool = EnumHelper.addToolMaterial("ETHAXIUM", 8, 2800, 16.0F, 8, 20);
 
 	private static IInternalNecroDataHandler internalNDHandler = new DummyNecroDataHandler();
 	private static IInternalMethodHandler internalMethodHandler = new DummyMethodHandler();

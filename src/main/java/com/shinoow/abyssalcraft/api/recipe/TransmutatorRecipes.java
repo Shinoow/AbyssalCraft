@@ -26,8 +26,8 @@ public class TransmutatorRecipes {
 
 	private static final TransmutatorRecipes transmutationBase = new TransmutatorRecipes();
 	/** The list of transmutation results. */
-	private Map<ItemStack, ItemStack> transmutationList = new HashMap<ItemStack, ItemStack>();
-	private Map<ItemStack, Float> experienceList = new HashMap<ItemStack, Float>();
+	private final Map<ItemStack, ItemStack> transmutationList = new HashMap<ItemStack, ItemStack>();
+	private final Map<ItemStack, Float> experienceList = new HashMap<ItemStack, Float>();
 
 	public static TransmutatorRecipes instance()
 	{

@@ -36,6 +36,7 @@ import com.google.common.collect.Lists;
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.api.entity.EntityUtil;
+import com.shinoow.abyssalcraft.common.util.ACLogger;
 import com.shinoow.abyssalcraft.lib.ACConfig;
 
 public class BlockCLiquid extends BlockFluidClassic {
@@ -141,7 +142,11 @@ public class BlockCLiquid extends BlockFluidClassic {
 		for(ItemStack stack : list){
 			Block block = Block.getBlockFromItem(stack.getItem());
 			if(block != null && block != Blocks.AIR)
-				blocks.add(block.getStateFromMeta(((ItemBlock)stack.getItem()).getMetadata(stack.getMetadata() == OreDictionary.WILDCARD_VALUE ? 0 : stack.getMetadata())));
+				try {
+					blocks.add(block.getStateFromMeta(((ItemBlock)stack.getItem()).getMetadata(stack.getMetadata() == OreDictionary.WILDCARD_VALUE ? 0 : stack.getMetadata())));
+				} catch(Exception e){
+					ACLogger.severe("Unable to convert %s with meta %d into a BlockState", block.getRegistryName(), stack.getMetadata());
+				}
 		}
 
 		return blocks;

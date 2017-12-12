@@ -300,4 +300,55 @@ public class PEUtils {
 				relay.addEnergy(container.consumeEnergy(amount));
 		}
 	}
+
+	/**
+	 * Gets the current contained PE from a ItemStack<br>
+	 * Unless you need special code, this can be called in {@link IEnergyContainerItem#getContainedEnergy(ItemStack)}
+	 * @param stack ItemStack containing energy
+	 * @return The contained energy, if any
+	 */
+	public static float getContainedEnergy(ItemStack stack){
+		float energy;
+		if(!stack.hasTagCompound())
+			stack.setTagCompound(new NBTTagCompound());
+		if(stack.getTagCompound().hasKey("PotEnergy"))
+			energy = stack.getTagCompound().getFloat("PotEnergy");
+		else {
+			energy = 0;
+			stack.getTagCompound().setFloat("PotEnergy", energy);
+		}
+		return energy;
+	}
+
+	/**
+	 * Adds PE to the supplied ItemStack<br>
+	 * Unless you need special code, this can be called in {@link IEnergyContainerItem#addEnergy(ItemStack, float)}
+	 * @param container PE container Item instance
+	 * @param stack ItemStack containing the Item
+	 * @param energy Energy quanta to add
+	 */
+	public static void addEnergy(IEnergyContainerItem container, ItemStack stack, float energy){
+		float contained = container.getContainedEnergy(stack);
+		if(contained + energy >= container.getMaxEnergy(stack))
+			stack.getTagCompound().setFloat("PotEnergy", container.getMaxEnergy(stack));
+		else stack.getTagCompound().setFloat("PotEnergy", contained += energy);
+	}
+
+	/**
+	 * Consumes PE from the supplied ItemStack<br>
+	 * Unless you need special code, this can be called in {@link IEnergyContainerItem#consumeEnergy(ItemStack, float)}
+	 * @param stack ItemStack containing energy
+	 * @param energy Energy quanta to consume
+	 * @return The amount of energy consumed
+	 */
+	public static float consumeEnergy(ItemStack stack, float energy){
+		float contained = getContainedEnergy(stack);
+		if(energy < contained){
+			stack.getTagCompound().setFloat("PotEnergy", contained -= energy);
+			return energy;
+		} else {
+			stack.getTagCompound().setFloat("PotEnergy", 0);
+			return contained;
+		}
+	}
 }

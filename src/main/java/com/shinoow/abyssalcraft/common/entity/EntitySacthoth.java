@@ -596,6 +596,7 @@ public class EntitySacthoth extends EntityMob implements IOmotholEntity {
 
 		if(deathTicks > 0)
 			par1NBTTagCompound.setInteger("DeathTicks", deathTicks);
+		par1NBTTagCompound.setInteger("BreathTimer", shadowFlameShootTimer);
 	}
 
 	@Override
@@ -604,6 +605,7 @@ public class EntitySacthoth extends EntityMob implements IOmotholEntity {
 		super.readEntityFromNBT(par1NBTTagCompound);
 
 		deathTicks = par1NBTTagCompound.getInteger("DeathTicks");
+		shadowFlameShootTimer = par1NBTTagCompound.getInteger("BreathTimer");
 	}
 
 	@Override

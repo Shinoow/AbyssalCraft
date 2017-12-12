@@ -28,6 +28,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.api.energy.IEnergyTransporterItem;
+import com.shinoow.abyssalcraft.api.energy.PEUtils;
 import com.shinoow.abyssalcraft.api.item.ACItems;
 import com.shinoow.abyssalcraft.common.blocks.BlockRitualAltar;
 import com.shinoow.abyssalcraft.common.network.PacketDispatcher;
@@ -130,16 +131,7 @@ public class ItemNecronomicon extends ItemACBasic implements IEnergyTransporterI
 
 	@Override
 	public float getContainedEnergy(ItemStack stack) {
-		float energy;
-		if(!stack.hasTagCompound())
-			stack.setTagCompound(new NBTTagCompound());
-		if(stack.getTagCompound().hasKey("PotEnergy"))
-			energy = stack.getTagCompound().getFloat("PotEnergy");
-		else {
-			energy = 0;
-			stack.getTagCompound().setFloat("PotEnergy", energy);
-		}
-		return energy;
+		return PEUtils.getContainedEnergy(stack);
 	}
 
 	@Override
@@ -159,22 +151,12 @@ public class ItemNecronomicon extends ItemACBasic implements IEnergyTransporterI
 
 	@Override
 	public void addEnergy(ItemStack stack, float energy) {
-		float contained = getContainedEnergy(stack);
-		if(contained + energy >= getMaxEnergy(stack))
-			stack.getTagCompound().setFloat("PotEnergy", getMaxEnergy(stack));
-		else stack.getTagCompound().setFloat("PotEnergy", contained += energy);
+		PEUtils.addEnergy(this, stack, energy);
 	}
 
 	@Override
 	public float consumeEnergy(ItemStack stack, float energy) {
-		float contained = getContainedEnergy(stack);
-		if(energy < contained){
-			stack.getTagCompound().setFloat("PotEnergy", contained -= energy);
-			return energy;
-		} else {
-			stack.getTagCompound().setFloat("PotEnergy", 0);
-			return contained;
-		}
+		return PEUtils.consumeEnergy(stack, energy);
 	}
 
 	@Override

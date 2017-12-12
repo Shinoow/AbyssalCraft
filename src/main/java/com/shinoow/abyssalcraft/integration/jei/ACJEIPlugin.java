@@ -20,15 +20,16 @@ import net.minecraftforge.fml.common.Loader;
 
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.api.item.ACItems;
-import com.shinoow.abyssalcraft.common.inventory.ContainerCrystallizer;
-import com.shinoow.abyssalcraft.common.inventory.ContainerEngraver;
-import com.shinoow.abyssalcraft.common.inventory.ContainerTransmutator;
+import com.shinoow.abyssalcraft.api.recipe.MaterializerRecipes;
+import com.shinoow.abyssalcraft.common.inventory.*;
 import com.shinoow.abyssalcraft.init.BlockHandler;
 import com.shinoow.abyssalcraft.init.ItemHandler;
 import com.shinoow.abyssalcraft.integration.jei.crystallizer.*;
 import com.shinoow.abyssalcraft.integration.jei.engraver.EngraverRecipeCategory;
 import com.shinoow.abyssalcraft.integration.jei.engraver.EngravingRecipeHandler;
 import com.shinoow.abyssalcraft.integration.jei.engraver.EngravingRecipeMaker;
+import com.shinoow.abyssalcraft.integration.jei.materializer.MaterializationRecipeCategory;
+import com.shinoow.abyssalcraft.integration.jei.materializer.MaterializationRecipeHandler;
 import com.shinoow.abyssalcraft.integration.jei.rending.RendingRecipeCategory;
 import com.shinoow.abyssalcraft.integration.jei.rending.RendingRecipeHandler;
 import com.shinoow.abyssalcraft.integration.jei.rending.RendingRecipeMaker;
@@ -59,7 +60,8 @@ public class ACJEIPlugin implements IModPlugin {
 			new RitualRecipeCategory(guiHelper),
 			new EngraverRecipeCategory(guiHelper),
 			new RendingRecipeCategory(guiHelper),
-			new UpgradeRecipeCategory(guiHelper));
+			new UpgradeRecipeCategory(guiHelper),
+			new MaterializationRecipeCategory(guiHelper));
 
 		registry.addRecipeHandlers(new TransmutatorFuelRecipeHandler(),
 			new TransmutationRecipeHandler(),
@@ -68,7 +70,8 @@ public class ACJEIPlugin implements IModPlugin {
 			new RitualRecipeHandler(),
 			new EngravingRecipeHandler(),
 			new RendingRecipeHandler(),
-			new UpgradeRecipeHandler());
+			new UpgradeRecipeHandler(),
+			new MaterializationRecipeHandler());
 
 		registry.addRecipeCategoryCraftingItem(new ItemStack(ACBlocks.transmutator_idle), AbyssalCraftRecipeCategoryUid.TRANSMUTATION,
 			AbyssalCraftRecipeCategoryUid.FUEL_TRANSMUTATION);
@@ -88,6 +91,7 @@ public class ACJEIPlugin implements IModPlugin {
 		registry.addRecipeCategoryCraftingItem(new ItemStack(Blocks.ANVIL, 1, 0), AbyssalCraftRecipeCategoryUid.UPGRADE);
 		registry.addRecipeCategoryCraftingItem(new ItemStack(Blocks.ANVIL, 1, 1), AbyssalCraftRecipeCategoryUid.UPGRADE);
 		registry.addRecipeCategoryCraftingItem(new ItemStack(Blocks.ANVIL, 1, 2), AbyssalCraftRecipeCategoryUid.UPGRADE);
+		registry.addRecipeCategoryCraftingItem(new ItemStack(ACBlocks.materializer), AbyssalCraftRecipeCategoryUid.MATERIALIZATION);
 
 		IRecipeTransferRegistry recipeTransferRegistry = registry.getRecipeTransferRegistry();
 
@@ -96,6 +100,7 @@ public class ACJEIPlugin implements IModPlugin {
 		recipeTransferRegistry.addRecipeTransferHandler(ContainerCrystallizer.class, AbyssalCraftRecipeCategoryUid.CRYSTALLIZATION, 0, 1, 1, 36);
 		recipeTransferRegistry.addRecipeTransferHandler(ContainerCrystallizer.class, AbyssalCraftRecipeCategoryUid.FUEL_CRYSTALLIZATION, 1, 1, 1, 36);
 		recipeTransferRegistry.addRecipeTransferHandler(ContainerEngraver.class, AbyssalCraftRecipeCategoryUid.ENGRAVING, 0, 1, 1, 36);
+		recipeTransferRegistry.addRecipeTransferHandler(ContainerMaterializer.class, AbyssalCraftRecipeCategoryUid.MATERIALIZATION, 0, 1, 1, 36);
 
 		registry.addRecipes(TransmutationRecipeMaker.getTransmutatorRecipes(jeiHelpers));
 		registry.addRecipes(TransmutatorFuelRecipeMaker.getFuelRecipes(utils, jeiHelpers));
@@ -105,6 +110,7 @@ public class ACJEIPlugin implements IModPlugin {
 		registry.addRecipes(EngravingRecipeMaker.getEngraverRecipes());
 		registry.addRecipes(RendingRecipeMaker.getRending());
 		registry.addRecipes(UpgradeRecipeMaker.getUpgrades());
+		registry.addRecipes(MaterializerRecipes.instance().getMaterializationList());
 
 		jeiHelpers.getItemBlacklist().addItemToBlacklist(new ItemStack(ItemHandler.devsword));
 		jeiHelpers.getItemBlacklist().addItemToBlacklist(new ItemStack(ACBlocks.crystallizer_active));
