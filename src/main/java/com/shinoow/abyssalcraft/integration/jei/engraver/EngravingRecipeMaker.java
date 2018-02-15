@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2017 Shinoow.
+ * Copyright (c) 2012 - 2018 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -15,10 +15,10 @@ import java.util.*;
 
 import javax.annotation.Nonnull;
 
-import net.minecraft.item.ItemStack;
-
 import com.shinoow.abyssalcraft.api.item.ACItems;
 import com.shinoow.abyssalcraft.api.recipe.EngraverRecipes;
+
+import net.minecraft.item.ItemStack;
 
 public class EngravingRecipeMaker {
 
@@ -53,7 +53,6 @@ public class EngravingRecipeMaker {
 		return recipes;
 	}
 
-	@SuppressWarnings("unchecked")
 	private static Map<ItemStack, ItemStack> getEngravingMap(@Nonnull EngraverRecipes engraverRecipes) {
 		return engraverRecipes.getEngravingList();
 	}

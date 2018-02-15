@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2017 Shinoow.
+ * Copyright (c) 2012 - 2018 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -10,6 +10,9 @@
  *     Shinoow -  implementation
  ******************************************************************************/
 package com.shinoow.abyssalcraft.api.spell;
+
+import com.shinoow.abyssalcraft.api.necronomicon.condition.DefaultCondition;
+import com.shinoow.abyssalcraft.api.necronomicon.condition.IUnlockCondition;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -36,6 +39,7 @@ public abstract class Spell {
 	private boolean nbtSensitive, requiresCharging;
 	private Spell parent;
 	private ResourceLocation glyph;
+	private IUnlockCondition condition = new DefaultCondition();
 
 	/**
 	 * A Necronomicon Spell
@@ -117,6 +121,14 @@ public abstract class Spell {
 	}
 
 	/**
+	 * Sets a condition required in order to unlock this spell
+	 */
+	public Spell setUnlockCondition(IUnlockCondition condition){
+		this.condition = condition;
+		return this;
+	}
+
+	/**
 	 * Used to fetch the reagents used to inscribe this spell
 	 * @return An array of Objects representing reagents
 	 */
@@ -178,6 +190,14 @@ public abstract class Spell {
 	 */
 	public ResourceLocation getSpellGlyph(){
 		return glyph;
+	}
+
+	/**
+	 * Used to fetch the unlock condition, which determines how the spell is unlocked
+	 * @return A IUnlockCondition object, or a DefaultCondition if none was set
+	 */
+	public IUnlockCondition getUnlockCondition(){
+		return condition;
 	}
 
 	/**

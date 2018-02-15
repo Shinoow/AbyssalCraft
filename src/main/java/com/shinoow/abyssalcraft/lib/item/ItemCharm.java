@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2017 Shinoow.
+ * Copyright (c) 2012 - 2018 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -13,6 +13,12 @@ package com.shinoow.abyssalcraft.lib.item;
 
 import java.util.List;
 
+import com.shinoow.abyssalcraft.api.energy.EnergyEnum;
+import com.shinoow.abyssalcraft.api.energy.EnergyEnum.AmplifierType;
+import com.shinoow.abyssalcraft.api.energy.EnergyEnum.DeityType;
+import com.shinoow.abyssalcraft.api.energy.IAmplifierCharm;
+import com.shinoow.abyssalcraft.api.energy.IEnergyManipulator;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
@@ -21,10 +27,6 @@ import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.translation.I18n;
 import net.minecraft.world.World;
-
-import com.shinoow.abyssalcraft.api.energy.*;
-import com.shinoow.abyssalcraft.api.energy.EnergyEnum.AmplifierType;
-import com.shinoow.abyssalcraft.api.energy.EnergyEnum.DeityType;
 
 /**
  * Basic implementation of an Amplifier Charm (based on metadata)
@@ -63,7 +65,6 @@ public class ItemCharm extends ItemMetadata implements IAmplifierCharm {
 		return deity;
 	}
 
-	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
 	public void addInformation(ItemStack is, EntityPlayer player, List l, boolean B){
 		l.add(I18n.translateToLocal("ac.text.amplifier") + ": " + EnergyEnum.getAmplifierName(getAmplifier(is)));

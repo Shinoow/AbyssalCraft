@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2017 Shinoow.
+ * Copyright (c) 2012 - 2018 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -13,22 +13,20 @@ package com.shinoow.abyssalcraft.common.items;
 
 import java.util.List;
 
+import com.shinoow.abyssalcraft.lib.ACTabs;
+
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.TextFormatting;
 
-import com.shinoow.abyssalcraft.lib.ACTabs;
-
-public class ItemCorb extends Item {
+public class ItemCorb extends ItemACBasic {
 
 	public ItemCorb() {
-		super();
+		super("transmutationgem");
 		maxStackSize = 1;
 		setMaxDamage(10);
 		setNoRepair();
-		setUnlocalizedName("transmutationgem");
 		setCreativeTab(ACTabs.tabTools);
 	}
 
@@ -56,9 +54,8 @@ public class ItemCorb extends Item {
 		return TextFormatting.AQUA + super.getItemStackDisplayName(par1ItemStack);
 	}
 
-	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
-	public void addInformation(ItemStack is, EntityPlayer player, List l, boolean B){
+	public void addInformation(ItemStack is, EntityPlayer player, List<String> l, boolean B){
 		l.add(I18n.format("tooltip.corb", new Object[0]));
 		l.add(10 - getDamage(is) + "/" + getMaxDamage(is));
 	}

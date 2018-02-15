@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2017 Shinoow.
+ * Copyright (c) 2012 - 2018 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -13,14 +13,21 @@ package com.shinoow.abyssalcraft.api;
 
 import java.util.List;
 
-import net.minecraft.block.Block;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraftforge.oredict.OreDictionary;
-
 import com.google.common.collect.Lists;
 import com.shinoow.abyssalcraft.api.item.ICrystal;
+import com.shinoow.abyssalcraft.api.item.IUnlockableItem;
+import com.shinoow.abyssalcraft.api.necronomicon.condition.caps.INecroDataCapability;
+import com.shinoow.abyssalcraft.api.necronomicon.condition.caps.NecroDataCapability;
 import com.shinoow.abyssalcraft.api.recipe.EngraverRecipes;
+
+import net.minecraft.block.Block;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.FontRenderer;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.oredict.OreDictionary;
 
 /**
  * Utilities for the AbyssalCraft API
@@ -180,5 +187,19 @@ public class APIUtils {
 		if (stack1.isEmpty() || stack2.isEmpty()) return false;
 		return stack1.getItem() == stack2.getItem() && (stack2.getItemDamage() == OreDictionary.WILDCARD_VALUE
 				|| stack1.getItemDamage() == stack2.getItemDamage());
+	}
+
+	/**
+	 * Convenience method to call in getFontRenderer of any Item implementing IUnlockableItem<br>
+	 * in order to handle the font changing for locked Items
+	 * @param stack The current ItemStack
+	 * @return The Aklo font renderer if the Item is locked, otherwise null
+	 */
+	@SideOnly(Side.CLIENT)
+	public static FontRenderer getFontRenderer(ItemStack stack){
+		if(!(stack.getItem() instanceof IUnlockableItem)) return null;
+		INecroDataCapability cap = NecroDataCapability.getCap(Minecraft.getMinecraft().player);
+
+		return cap.isUnlocked(((IUnlockableItem) stack.getItem()).getUnlockCondition(stack), Minecraft.getMinecraft().player) ? null : AbyssalCraftAPI.getAkloFont();
 	}
 }

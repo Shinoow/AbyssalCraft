@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2017 Shinoow.
+ * Copyright (c) 2012 - 2018 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -13,6 +13,12 @@ package com.shinoow.abyssalcraft.common.blocks;
 
 import java.util.Random;
 
+import com.shinoow.abyssalcraft.AbyssalCraft;
+import com.shinoow.abyssalcraft.api.block.ACBlocks;
+import com.shinoow.abyssalcraft.common.blocks.tile.TileEntityMaterializer;
+import com.shinoow.abyssalcraft.lib.ACLib;
+import com.shinoow.abyssalcraft.lib.ACTabs;
+
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -20,9 +26,9 @@ import net.minecraft.block.properties.PropertyDirection;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
-import net.minecraft.inventory.InventoryHelper;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
@@ -34,12 +40,6 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.internal.FMLNetworkHandler;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-
-import com.shinoow.abyssalcraft.AbyssalCraft;
-import com.shinoow.abyssalcraft.api.block.ACBlocks;
-import com.shinoow.abyssalcraft.common.blocks.tile.TileEntityMaterializer;
-import com.shinoow.abyssalcraft.lib.ACLib;
-import com.shinoow.abyssalcraft.lib.ACTabs;
 
 public class BlockMaterializer extends BlockContainer {
 
@@ -101,20 +101,6 @@ public class BlockMaterializer extends BlockContainer {
 		return true;
 	}
 
-	//	public static void updateMaterializerBlockState(boolean par0, World par1World, int par2, int par3, int par4) {
-	//		TileEntity tileentity = par1World.getTileEntity(par2, par3, par4);
-	//		keepInventory = true;
-	//
-	//		par1World.setBlock(par2, par3, par4, AbyssalCraft.materializer);
-	//
-	//		keepInventory = false;
-	//
-	//		if (tileentity != null){
-	//			tileentity.validate();
-	//			par1World.setTileEntity(par2, par3, par4, tileentity);
-	//		}
-	//	}
-
 	/**
 	 * Returns a new instance of a block's tile entity class. Called on placing the block.
 	 */
@@ -140,7 +126,30 @@ public class BlockMaterializer extends BlockContainer {
 
 			if (tileentitymaterializer != null){
 
-				InventoryHelper.dropInventoryItems(par1World, pos, tileentitymaterializer);
+				if(!tileentitymaterializer.getStackInSlot(0).isEmpty()){
+					float f = rand.nextFloat() * 0.8F + 0.1F;
+					float f1 = rand.nextFloat() * 0.8F + 0.1F;
+					float f2 = rand.nextFloat() * 0.8F + 0.1F;
+
+					EntityItem item = new EntityItem(par1World, pos.getX() + f, pos.getY() + f1, pos.getZ() + f2, tileentitymaterializer.getStackInSlot(0));
+					float f3 = 0.05F;
+					item.motionX = (float)rand.nextGaussian() * f3;
+					item.motionY = (float)rand.nextGaussian() * f3 + 0.2F;
+					item.motionZ = (float)rand.nextGaussian() * f3;
+					par1World.spawnEntity(item);
+				}
+				if(!tileentitymaterializer.getStackInSlot(1).isEmpty()){
+					float f = rand.nextFloat() * 0.8F + 0.1F;
+					float f1 = rand.nextFloat() * 0.8F + 0.1F;
+					float f2 = rand.nextFloat() * 0.8F + 0.1F;
+
+					EntityItem item = new EntityItem(par1World, pos.getX() + f, pos.getY() + f1, pos.getZ() + f2, tileentitymaterializer.getStackInSlot(1));
+					float f3 = 0.05F;
+					item.motionX = (float)rand.nextGaussian() * f3;
+					item.motionY = (float)rand.nextGaussian() * f3 + 0.2F;
+					item.motionZ = (float)rand.nextGaussian() * f3;
+					par1World.spawnEntity(item);
+				}
 
 				par1World.updateComparatorOutputLevel(pos, this);
 			}

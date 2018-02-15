@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2017 Shinoow.
+ * Copyright (c) 2012 - 2018 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -13,6 +13,10 @@ package com.shinoow.abyssalcraft.common.items;
 
 import java.util.List;
 
+import com.shinoow.abyssalcraft.api.item.ICrystal;
+import com.shinoow.abyssalcraft.lib.ACLib;
+import com.shinoow.abyssalcraft.lib.ACTabs;
+
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
@@ -22,11 +26,7 @@ import net.minecraft.util.text.translation.I18n;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import com.shinoow.abyssalcraft.api.item.ICrystal;
-import com.shinoow.abyssalcraft.lib.ACLib;
-import com.shinoow.abyssalcraft.lib.ACTabs;
-
-public class ItemCrystal extends Item implements ICrystal {
+public class ItemCrystal extends ItemACBasic implements ICrystal {
 
 	boolean postfix;
 
@@ -35,8 +35,7 @@ public class ItemCrystal extends Item implements ICrystal {
 	}
 
 	public ItemCrystal(String name, boolean postfix){
-		super();
-		setUnlocalizedName(name);
+		super(name);
 		setCreativeTab(ACTabs.tabCrystals);
 		setMaxDamage(0);
 		setHasSubtypes(true);
@@ -59,7 +58,6 @@ public class ItemCrystal extends Item implements ICrystal {
 		return meta;
 	}
 
-	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void getSubItems(Item par1Item, CreativeTabs par2CreativeTab, NonNullList<ItemStack> par3List){
@@ -67,9 +65,8 @@ public class ItemCrystal extends Item implements ICrystal {
 			par3List.add(new ItemStack(par1Item, 1, i));
 	}
 
-	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
-	public void addInformation(ItemStack is, EntityPlayer player, List l, boolean B){
+	public void addInformation(ItemStack is, EntityPlayer player, List<String> l, boolean B){
 		l.add(I18n.translateToLocal("tooltip.crystal")+ ": " + ACLib.crystalAtoms[is.getItemDamage()]);
 	}
 

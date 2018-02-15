@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2017 Shinoow.
+ * Copyright (c) 2012 - 2018 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -11,21 +11,26 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.common.handlers;
 
+import com.shinoow.abyssalcraft.api.necronomicon.condition.caps.NecroDataCapability;
+import com.shinoow.abyssalcraft.api.necronomicon.condition.caps.NecroDataCapabilityProvider;
+import com.shinoow.abyssalcraft.common.network.PacketDispatcher;
+import com.shinoow.abyssalcraft.common.network.client.NecroDataCapMessage;
+
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityList;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.biome.Biome;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
+import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent.PlayerChangedDimensionEvent;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
-
-import com.shinoow.abyssalcraft.common.caps.NecroDataCapabilityProvider;
 
 public class KnowledgeEventHandler {
 
@@ -41,13 +46,13 @@ public class KnowledgeEventHandler {
 			EntityPlayer player = (EntityPlayer)event.getEntityLiving();
 			Biome b = player.world.getBiome(player.getPosition());
 			if(player.ticksExisted % 200 == 0 && ForgeRegistries.BIOMES.getKey(b) != null)
-				player.getCapability(NecroDataCapabilityProvider.NECRO_DATA_CAP, null).triggerBiomeUnlock(ForgeRegistries.BIOMES.getKey(b).toString());
+				NecroDataCapability.getCap(player).triggerBiomeUnlock(ForgeRegistries.BIOMES.getKey(b).toString());
 		}
 	}
 
 	@SubscribeEvent
 	public void onPlayerChangedDimension(PlayerChangedDimensionEvent event){
-		event.player.getCapability(NecroDataCapabilityProvider.NECRO_DATA_CAP, null).triggerDimensionUnlock(event.toDim);
+		NecroDataCapability.getCap(event.player).triggerDimensionUnlock(event.toDim);
 	}
 
 	@SubscribeEvent
@@ -55,13 +60,19 @@ public class KnowledgeEventHandler {
 		if(!(event.getEntityLiving() instanceof EntityPlayer) && !event.getEntityLiving().world.isRemote){
 			EntityLivingBase e = event.getEntityLiving();
 			if(event.getSource() != null && event.getSource().getEntity() instanceof EntityPlayer && EntityList.getKey(e) != null)
-				event.getSource().getEntity().getCapability(NecroDataCapabilityProvider.NECRO_DATA_CAP, null).triggerEntityUnlock(EntityList.getKey(e).toString());
+				NecroDataCapability.getCap((EntityPlayer)event.getSource().getEntity()).triggerEntityUnlock(EntityList.getKey(e).toString());
 		}
+	}
+
+	@SubscribeEvent
+	public void onEntityJoin(EntityJoinWorldEvent event){
+		if(event.getEntity() instanceof EntityPlayerMP)
+			PacketDispatcher.sendTo(new NecroDataCapMessage((EntityPlayer)event.getEntity()), (EntityPlayerMP) event.getEntity());
 	}
 
 	@SubscribeEvent
 	public void onClonePlayer(PlayerEvent.Clone event) {
 		if(event.isWasDeath())
-			event.getEntityPlayer().getCapability(NecroDataCapabilityProvider.NECRO_DATA_CAP, null).copy(event.getOriginal().getCapability(NecroDataCapabilityProvider.NECRO_DATA_CAP, null));
+			NecroDataCapability.getCap(event.getEntityPlayer()).copy(NecroDataCapability.getCap(event.getOriginal()));
 	}
 }

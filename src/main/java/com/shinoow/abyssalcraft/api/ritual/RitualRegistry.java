@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2017 Shinoow.
+ * Copyright (c) 2012 - 2018 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -11,18 +11,17 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.api.ritual;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-
-import net.minecraft.item.ItemStack;
-import net.minecraftforge.fml.common.FMLLog;
 
 import org.apache.logging.log4j.Level;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.shinoow.abyssalcraft.api.APIUtils;
+
+import net.minecraft.item.ItemStack;
+import net.minecraftforge.fml.common.FMLLog;
 
 /**
  * Registry class for Necronomicon Rituals
@@ -35,7 +34,7 @@ public class RitualRegistry {
 	private final Map<Integer, Integer> dimToBookType = Maps.newHashMap();
 	private final Map<Integer, String> dimToName = Maps.newHashMap();
 	private final Map<NecronomiconRitual, Integer> ritualToBookType = Maps.newHashMap();
-	private final ArrayList<NecronomiconRitual> rituals = Lists.newArrayList();
+	private final List<NecronomiconRitual> rituals = Lists.newArrayList();
 
 	private static final RitualRegistry instance = new RitualRegistry();
 

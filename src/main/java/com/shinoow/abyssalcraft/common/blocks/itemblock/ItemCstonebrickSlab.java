@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2017 Shinoow.
+ * Copyright (c) 2012 - 2018 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -11,18 +11,20 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.common.blocks.itemblock;
 
+import com.shinoow.abyssalcraft.api.block.ACBlocks;
+import com.shinoow.abyssalcraft.api.necronomicon.condition.DimensionCondition;
+import com.shinoow.abyssalcraft.init.BlockHandler;
+import com.shinoow.abyssalcraft.lib.ACLib;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockSlab;
-import net.minecraft.item.ItemSlab;
 
-import com.shinoow.abyssalcraft.api.block.ACBlocks;
-import com.shinoow.abyssalcraft.init.BlockHandler;
-
-public class ItemCstonebrickSlab extends ItemSlab {
+public class ItemCstonebrickSlab extends ItemSlabAC {
 
 	public ItemCstonebrickSlab(Block block) {
 		super(block, (BlockSlab)ACBlocks.coralium_stone_brick_slab, (BlockSlab)BlockHandler.cstonebrickslab2);
 		setMaxDamage(0);
 		setHasSubtypes(true);
+		setUnlockCondition(new DimensionCondition(ACLib.abyssal_wasteland_id));
 	}
 }

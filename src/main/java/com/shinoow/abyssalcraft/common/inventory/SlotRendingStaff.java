@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2017 Shinoow.
+ * Copyright (c) 2012 - 2018 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -11,11 +11,11 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.common.inventory;
 
+import com.shinoow.abyssalcraft.lib.util.items.IStaffOfRending;
+
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
-
-import com.shinoow.abyssalcraft.lib.util.items.IStaffOfRending;
 
 public class SlotRendingStaff extends Slot {
 

@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2017 Shinoow.
+ * Copyright (c) 2012 - 2018 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -17,11 +17,11 @@ import java.util.Map;
 
 import javax.annotation.Nonnull;
 
+import com.shinoow.abyssalcraft.api.recipe.TransmutatorRecipes;
+
 import mezz.jei.api.IJeiHelpers;
 import mezz.jei.api.recipe.IStackHelper;
 import net.minecraft.item.ItemStack;
-
-import com.shinoow.abyssalcraft.api.recipe.TransmutatorRecipes;
 
 public class TransmutationRecipeMaker {
 
@@ -47,7 +47,6 @@ public class TransmutationRecipeMaker {
 		return recipes;
 	}
 
-	@SuppressWarnings("unchecked")
 	private static Map<ItemStack, ItemStack> getTransmutationMap(@Nonnull TransmutatorRecipes transmutatorRecipes) {
 		return transmutatorRecipes.getTransmutationList();
 	}

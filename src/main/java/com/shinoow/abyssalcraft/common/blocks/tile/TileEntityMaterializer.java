@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2017 Shinoow.
+ * Copyright (c) 2012 - 2018 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -12,6 +12,8 @@
 package com.shinoow.abyssalcraft.common.blocks.tile;
 
 import java.util.List;
+
+import com.shinoow.abyssalcraft.api.recipe.MaterializerRecipes;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ISidedInventory;
@@ -25,8 +27,6 @@ import net.minecraft.util.NonNullList;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.util.text.TextComponentTranslation;
-
-import com.shinoow.abyssalcraft.api.recipe.MaterializerRecipes;
 
 public class TileEntityMaterializer extends TileEntity implements ISidedInventory, ITickable {
 
@@ -206,6 +206,12 @@ public class TileEntityMaterializer extends TileEntity implements ISidedInventor
 	public NBTTagCompound writeToNBT(NBTTagCompound par1)
 	{
 		super.writeToNBT(par1);
+		ItemStack stack = getStackInSlot(0).copy();
+		ItemStack stack1 = getStackInSlot(1).copy();
+		clear();
+		materializerItemStacks.set(0, stack);
+		materializerItemStacks.set(1, stack1);
+
 		ItemStackHelper.saveAllItems(par1, materializerItemStacks);
 
 		return par1;
@@ -314,7 +320,7 @@ public class TileEntityMaterializer extends TileEntity implements ISidedInventor
 
 	@Override
 	public void clear() {
-
+		materializerItemStacks.clear();
 	}
 
 	@Override

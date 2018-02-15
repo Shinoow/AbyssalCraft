@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2017 Shinoow.
+ * Copyright (c) 2012 - 2018 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -14,14 +14,16 @@ package com.shinoow.abyssalcraft.client.config;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.shinoow.abyssalcraft.init.InitHandler;
+
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.util.text.translation.I18n;
 import net.minecraftforge.common.config.ConfigElement;
 import net.minecraftforge.fml.client.config.DummyConfigElement.DummyCategoryElement;
-import net.minecraftforge.fml.client.config.*;
+import net.minecraftforge.fml.client.config.GuiConfig;
+import net.minecraftforge.fml.client.config.GuiConfigEntries;
 import net.minecraftforge.fml.client.config.GuiConfigEntries.CategoryEntry;
-
-import com.shinoow.abyssalcraft.init.InitHandler;
+import net.minecraftforge.fml.client.config.IConfigElement;
 
 public class ACConfigGUI extends GuiConfig {
 
@@ -29,7 +31,6 @@ public class ACConfigGUI extends GuiConfig {
 		super(parent, getConfigElements(), "abyssalcraft", true, false, "AbyssalCraft");
 	}
 
-	@SuppressWarnings("rawtypes")
 	private static List<IConfigElement> getConfigElements(){
 		List<IConfigElement> list = new ArrayList<IConfigElement>();
 		list.add(new DummyCategoryElement(I18n.translateToLocal("ac_dimensions"), "ac_dimensions", DimensionEntry.class));

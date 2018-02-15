@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2017 Shinoow.
+ * Copyright (c) 2012 - 2018 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -13,6 +13,15 @@ package com.shinoow.abyssalcraft.client.render.entity.layers;
 
 import java.util.Map;
 
+import com.google.common.collect.Iterables;
+import com.google.common.collect.Maps;
+import com.mojang.authlib.GameProfile;
+import com.mojang.authlib.minecraft.MinecraftProfileTexture;
+import com.mojang.authlib.properties.Property;
+import com.shinoow.abyssalcraft.client.model.entity.ModelEvilSheep1;
+import com.shinoow.abyssalcraft.client.render.entity.RenderEvilSheep;
+import com.shinoow.abyssalcraft.common.entity.demon.EntityEvilSheep;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.client.renderer.GlStateManager;
@@ -23,15 +32,6 @@ import net.minecraft.item.EnumDyeColor;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-
-import com.google.common.collect.Iterables;
-import com.google.common.collect.Maps;
-import com.mojang.authlib.GameProfile;
-import com.mojang.authlib.minecraft.MinecraftProfileTexture;
-import com.mojang.authlib.properties.Property;
-import com.shinoow.abyssalcraft.client.model.entity.ModelEvilSheep1;
-import com.shinoow.abyssalcraft.client.render.entity.RenderEvilSheep;
-import com.shinoow.abyssalcraft.common.entity.demon.EntityEvilSheep;
 
 @SideOnly(Side.CLIENT)
 public class LayerEvilSheepWool implements LayerRenderer<EntityEvilSheep>

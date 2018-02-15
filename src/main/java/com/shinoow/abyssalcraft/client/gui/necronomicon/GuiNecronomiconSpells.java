@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2017 Shinoow.
+ * Copyright (c) 2012 - 2018 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -11,11 +11,6 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.client.gui.necronomicon;
 
-import net.minecraft.client.gui.GuiButton;
-import net.minecraft.client.gui.GuiScreen;
-import net.minecraft.client.resources.I18n;
-import net.minecraft.item.ItemStack;
-
 import org.lwjgl.input.Keyboard;
 
 import com.shinoow.abyssalcraft.api.item.ACItems;
@@ -24,6 +19,11 @@ import com.shinoow.abyssalcraft.client.gui.necronomicon.buttons.ButtonNextPage;
 import com.shinoow.abyssalcraft.common.network.PacketDispatcher;
 import com.shinoow.abyssalcraft.common.network.server.OpenSpellbookMessage;
 import com.shinoow.abyssalcraft.lib.NecronomiconText;
+
+import net.minecraft.client.gui.GuiButton;
+import net.minecraft.client.gui.GuiScreen;
+import net.minecraft.client.resources.I18n;
+import net.minecraft.item.ItemStack;
 
 public class GuiNecronomiconSpells extends GuiNecronomicon {
 
@@ -72,9 +72,9 @@ public class GuiNecronomiconSpells extends GuiNecronomicon {
 	}
 
 	private boolean hasSpells(){
-		if(book.hasTagCompound())
-			return book.getTagCompound().hasKey("Knowledge");
-		return false;
+		//		if(book.hasTagCompound())
+		//			return book.getTagCompound().hasKey("Knowledge");
+		return true;
 	}
 
 	@Override
@@ -88,6 +88,8 @@ public class GuiNecronomiconSpells extends GuiNecronomicon {
 				mc.displayGuiScreen(new GuiNecronomicon(getBookType()));
 			else if (button.id == 3)
 				PacketDispatcher.sendToServer(new OpenSpellbookMessage());
+			else if (button.id == 4)
+				mc.displayGuiScreen(new GuiNecronomiconSpellEntry(getBookType(), this));
 			updateButtons();
 		}
 	}

@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2017 Shinoow.
+ * Copyright (c) 2012 - 2018 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -15,19 +15,20 @@ import java.io.File;
 import java.io.FileReader;
 import java.util.Map.Entry;
 
+import org.apache.logging.log4j.Level;
+
+import com.google.common.base.Strings;
+import com.google.gson.*;
+import com.shinoow.abyssalcraft.api.necronomicon.CraftingStack;
+import com.shinoow.abyssalcraft.api.necronomicon.NecroData;
+import com.shinoow.abyssalcraft.api.necronomicon.NecroData.Chapter;
+import com.shinoow.abyssalcraft.api.necronomicon.NecroData.Page;
+
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.translation.I18n;
 import net.minecraftforge.fml.common.FMLLog;
-
-import org.apache.logging.log4j.Level;
-
-import com.google.common.base.Strings;
-import com.google.gson.*;
-import com.shinoow.abyssalcraft.api.necronomicon.*;
-import com.shinoow.abyssalcraft.api.necronomicon.NecroData.Chapter;
-import com.shinoow.abyssalcraft.api.necronomicon.NecroData.Page;
 
 /**
  * Utility class used to convert NecroData to/from Json

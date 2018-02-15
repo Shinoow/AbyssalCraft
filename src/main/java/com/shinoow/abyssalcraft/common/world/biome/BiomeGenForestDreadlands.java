@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2017 Shinoow.
+ * Copyright (c) 2012 - 2018 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -13,20 +13,18 @@ package com.shinoow.abyssalcraft.common.world.biome;
 
 import java.util.Random;
 
-import net.minecraft.world.gen.feature.WorldGenAbstractTree;
-import net.minecraft.world.gen.feature.WorldGenTrees;
-
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.common.entity.EntityDreadSpawn;
 import com.shinoow.abyssalcraft.common.entity.demon.*;
 import com.shinoow.abyssalcraft.common.world.gen.WorldGenDrT;
 
-public class BiomeGenForestDreadlands extends BiomeGenDreadlandsBase
-{
+import net.minecraft.world.gen.feature.WorldGenAbstractTree;
+import net.minecraft.world.gen.feature.WorldGenTrees;
+
+public class BiomeGenForestDreadlands extends BiomeGenDreadlandsBase {
 
 	private WorldGenTrees WorldGenDreadTrees;
 
-	@SuppressWarnings("unchecked")
 	public BiomeGenForestDreadlands(BiomeProperties par1) {
 		super(par1);
 		topBlock = ACBlocks.dreadlands_grass.getDefaultState();

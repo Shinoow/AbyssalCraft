@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2017 Shinoow.
+ * Copyright (c) 2012 - 2018 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -17,20 +17,6 @@ import java.util.List;
 
 import javax.imageio.ImageIO;
 
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiButton;
-import net.minecraft.client.gui.GuiScreen;
-import net.minecraft.client.renderer.*;
-import net.minecraft.client.renderer.GlStateManager.DestFactor;
-import net.minecraft.client.renderer.GlStateManager.SourceFactor;
-import net.minecraft.client.renderer.texture.DynamicTexture;
-import net.minecraft.client.resources.I18n;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.text.TextFormatting;
-import net.minecraftforge.oredict.OreDictionary;
-
 import org.lwjgl.input.Keyboard;
 
 import com.shinoow.abyssalcraft.api.necronomicon.*;
@@ -38,14 +24,30 @@ import com.shinoow.abyssalcraft.api.necronomicon.NecroData.Chapter;
 import com.shinoow.abyssalcraft.api.necronomicon.NecroData.Page;
 import com.shinoow.abyssalcraft.api.necronomicon.condition.IUnlockCondition;
 import com.shinoow.abyssalcraft.api.necronomicon.condition.NecronomiconCondition;
+import com.shinoow.abyssalcraft.api.necronomicon.condition.caps.INecroDataCapability;
+import com.shinoow.abyssalcraft.api.necronomicon.condition.caps.NecroDataCapability;
 import com.shinoow.abyssalcraft.client.gui.necronomicon.buttons.ButtonCategory;
 import com.shinoow.abyssalcraft.client.gui.necronomicon.buttons.ButtonHome;
 import com.shinoow.abyssalcraft.client.gui.necronomicon.buttons.ButtonNextPage;
 import com.shinoow.abyssalcraft.client.lib.GuiRenderHelper;
-import com.shinoow.abyssalcraft.common.caps.INecroDataCapability;
-import com.shinoow.abyssalcraft.common.caps.NecroDataCapabilityProvider;
 import com.shinoow.abyssalcraft.lib.NecronomiconResources;
 import com.shinoow.abyssalcraft.lib.NecronomiconText;
+
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.GuiButton;
+import net.minecraft.client.gui.GuiScreen;
+import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.client.renderer.GlStateManager.DestFactor;
+import net.minecraft.client.renderer.GlStateManager.SourceFactor;
+import net.minecraft.client.renderer.RenderHelper;
+import net.minecraft.client.renderer.RenderItem;
+import net.minecraft.client.renderer.texture.DynamicTexture;
+import net.minecraft.client.resources.I18n;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.text.TextFormatting;
+import net.minecraftforge.oredict.OreDictionary;
 
 public class GuiNecronomiconEntry extends GuiNecronomicon {
 
@@ -65,7 +67,7 @@ public class GuiNecronomiconEntry extends GuiNecronomicon {
 		data = nd;
 		parent = gui;
 		icon = getItem(nd.getDisplayIcon());
-		cap = Minecraft.getMinecraft().player.getCapability(NecroDataCapabilityProvider.NECRO_DATA_CAP, null);
+		cap = NecroDataCapability.getCap(Minecraft.getMinecraft().player);
 		buttons = new ButtonCategory[data.getContainedData().size()];
 	}
 
@@ -82,7 +84,6 @@ public class GuiNecronomiconEntry extends GuiNecronomicon {
 		return this;
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public void initGui(){
 		if(isInvalid)
@@ -179,7 +180,6 @@ public class GuiNecronomiconEntry extends GuiNecronomicon {
 		}
 	}
 
-	@SuppressWarnings("unchecked")
 	private void drawButtons(){
 		buttonList.clear();
 		buttonList.add(buttonDone = new GuiButton(0, width / 2 - 100, 4 + guiHeight, 200, 20, I18n.format("gui.done", new Object[0])));
@@ -204,7 +204,7 @@ public class GuiNecronomiconEntry extends GuiNecronomicon {
 	private boolean isUnlocked(IUnlockCondition cnd){
 		if(cnd instanceof NecronomiconCondition)
 			return getBookType() >= (int)cnd.getConditionObject();
-			else return cap.isUnlocked(cnd) || Minecraft.getMinecraft().player.capabilities.isCreativeMode;
+			else return cap.isUnlocked(cnd, Minecraft.getMinecraft().player);
 	}
 
 	private void drawChapterOrPage(INecroData data, int x, int y){

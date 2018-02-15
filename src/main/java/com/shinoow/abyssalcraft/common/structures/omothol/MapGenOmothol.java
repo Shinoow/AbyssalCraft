@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2017 Shinoow.
+ * Copyright (c) 2012 - 2018 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -14,6 +14,8 @@ package com.shinoow.abyssalcraft.common.structures.omothol;
 import java.util.*;
 import java.util.Map.Entry;
 
+import com.shinoow.abyssalcraft.api.biome.ACBiomes;
+
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
@@ -22,8 +24,6 @@ import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.structure.MapGenStructure;
 import net.minecraft.world.gen.structure.StructureComponent;
 import net.minecraft.world.gen.structure.StructureStart;
-
-import com.shinoow.abyssalcraft.api.biome.ACBiomes;
 
 public class MapGenOmothol extends MapGenStructure
 {

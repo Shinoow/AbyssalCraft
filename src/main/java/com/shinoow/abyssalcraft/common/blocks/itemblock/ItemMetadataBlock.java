@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2017 Shinoow.
+ * Copyright (c) 2012 - 2018 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -12,17 +12,16 @@
 package com.shinoow.abyssalcraft.common.blocks.itemblock;
 
 import net.minecraft.block.Block;
-import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.util.text.translation.I18n;
 
 /** Some sort of universal metadata itemblock thingy */
-public class ItemMetadataBlock extends ItemBlock {
+public class ItemMetadataBlock extends ItemBlockAC {
 
 	private static final String[] subNames = {
-		"0", "1",  "2", "3", "4", "5", "6", "7",
-		"8", "9", "10", "11", "12", "13", "14", "15"};
+			"0", "1",  "2", "3", "4", "5", "6", "7",
+			"8", "9", "10", "11", "12", "13", "14", "15"};
 
 	public ItemMetadataBlock(Block b) {
 		super(b);

@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2017 Shinoow.
+ * Copyright (c) 2012 - 2018 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -13,18 +13,18 @@ package com.shinoow.abyssalcraft.common.network.server;
 
 import java.io.IOException;
 
+import com.shinoow.abyssalcraft.api.block.ACBlocks;
+import com.shinoow.abyssalcraft.common.network.AbstractMessage.AbstractServerMessage;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.network.PacketBuffer;
-import net.minecraft.util.EnumHand;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 
-import com.shinoow.abyssalcraft.common.network.AbstractMessage;
-
-public class FireMessage extends AbstractMessage<FireMessage> {
+public class FireMessage extends AbstractServerMessage<FireMessage> {
 
 	private BlockPos pos;
 
@@ -51,9 +51,15 @@ public class FireMessage extends AbstractMessage<FireMessage> {
 
 		World world = player.world;
 
-		world.playSound(pos.getX(), pos.getY(), pos.getZ(), SoundEvents.BLOCK_FIRE_EXTINGUISH, SoundCategory.BLOCKS, 1.0F, 1.0F, true);
+		if(world.isRemote) return;
+		if(world.getBlockState(pos).getBlock() != ACBlocks.mimic_fire &&
+				world.getBlockState(pos).getBlock() != ACBlocks.coralium_fire &&
+				world.getBlockState(pos).getBlock() != ACBlocks.dreaded_fire &&
+				world.getBlockState(pos).getBlock() != ACBlocks.omothol_fire)
+			return;
+
+		world.playSound(null, pos.getX(), pos.getY(), pos.getZ(), SoundEvents.BLOCK_FIRE_EXTINGUISH, SoundCategory.BLOCKS, 0.5F, 2.6F + (world.rand.nextFloat() - world.rand.nextFloat()) * 0.8F);
 		world.setBlockToAir(pos);
-		player.swingArm(EnumHand.MAIN_HAND);
 	}
 
 }

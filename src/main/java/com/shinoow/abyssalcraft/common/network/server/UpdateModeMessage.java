@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2017 Shinoow.
+ * Copyright (c) 2012 - 2018 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -13,13 +13,13 @@ package com.shinoow.abyssalcraft.common.network.server;
 
 import java.io.IOException;
 
+import com.shinoow.abyssalcraft.common.inventory.ContainerStateTransformer;
+import com.shinoow.abyssalcraft.common.network.AbstractMessage.AbstractServerMessage;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.network.PacketBuffer;
 import net.minecraftforge.fml.common.network.ByteBufUtils;
 import net.minecraftforge.fml.relauncher.Side;
-
-import com.shinoow.abyssalcraft.common.inventory.ContainerStateTransformer;
-import com.shinoow.abyssalcraft.common.network.AbstractMessage.AbstractServerMessage;
 
 public class UpdateModeMessage extends AbstractServerMessage<UpdateModeMessage> {
 

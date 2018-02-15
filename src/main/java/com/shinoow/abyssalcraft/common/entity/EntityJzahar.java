@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2017 Shinoow.
+ * Copyright (c) 2012 - 2018 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -12,6 +12,12 @@
 package com.shinoow.abyssalcraft.common.entity;
 
 import java.util.*;
+
+import com.shinoow.abyssalcraft.api.entity.EntityUtil;
+import com.shinoow.abyssalcraft.api.entity.IOmotholEntity;
+import com.shinoow.abyssalcraft.lib.*;
+import com.shinoow.abyssalcraft.lib.util.SpecialTextUtil;
+import com.shinoow.abyssalcraft.lib.world.TeleporterDarkRealm;
 
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.*;
@@ -38,14 +44,10 @@ import net.minecraft.util.text.TextFormatting;
 import net.minecraft.util.text.translation.I18n;
 import net.minecraft.world.*;
 import net.minecraft.world.BossInfo.Color;
+import net.minecraftforge.fml.common.Optional.Interface;
 
-import com.shinoow.abyssalcraft.api.entity.EntityUtil;
-import com.shinoow.abyssalcraft.api.entity.IOmotholEntity;
-import com.shinoow.abyssalcraft.lib.*;
-import com.shinoow.abyssalcraft.lib.util.SpecialTextUtil;
-import com.shinoow.abyssalcraft.lib.world.TeleporterDarkRealm;
-
-public class EntityJzahar extends EntityMob implements IRangedAttackMob, IOmotholEntity {
+@Interface(iface = "com.github.alexthe666.iceandfire.entity.IBlacklistedFromStatues", modid = "iceandfire")
+public class EntityJzahar extends EntityMob implements IRangedAttackMob, IOmotholEntity, com.github.alexthe666.iceandfire.entity.IBlacklistedFromStatues {
 
 	private static final UUID attackDamageBoostUUID = UUID.fromString("648D7064-6A60-4F59-8ABE-C2C23A6DD7A9");
 	private static final AttributeModifier attackDamageBoost = new AttributeModifier(attackDamageBoostUUID, "Halloween Attack Damage Boost", 10.0D, 0);
@@ -246,7 +248,6 @@ public class EntityJzahar extends EntityMob implements IRangedAttackMob, IOmotho
 		return height * 0.90F;
 	}
 
-	@SuppressWarnings("rawtypes")
 	@Override
 	public void onLivingUpdate()
 	{

@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2017 Shinoow.
+ * Copyright (c) 2012 - 2018 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -11,6 +11,12 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.common.inventory;
 
+import com.shinoow.abyssalcraft.api.recipe.Materialization;
+import com.shinoow.abyssalcraft.api.recipe.MaterializerRecipes;
+import com.shinoow.abyssalcraft.common.blocks.tile.TileEntityMaterializer;
+import com.shinoow.abyssalcraft.common.items.ItemCrystalBag;
+import com.shinoow.abyssalcraft.common.items.ItemNecronomicon;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
@@ -19,8 +25,6 @@ import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-
-import com.shinoow.abyssalcraft.common.blocks.tile.TileEntityMaterializer;
 
 public class ContainerMaterializer extends Container {
 
@@ -117,25 +121,25 @@ public class ContainerMaterializer extends Container {
 			ItemStack itemstack1 = slot.getStack();
 			itemstack = itemstack1.copy();
 
-			//			if (par2 == 2)
-			//			{
-			//				if (!mergeItemStack(itemstack1, 3, 39, true))
-			//					return ItemStack.EMPTY;
-			//
-			//				slot.onSlotChange(itemstack1, itemstack);
-			//			}
 			if (par2 != 1 && par2 != 0)
 			{
-				//				if (MaterializerRecipes.instance().getMaterializationResult(itemstack1) != null)
-				//				{
-				//					if (!mergeItemStack(itemstack1, 0, 1, false))
-				//						return null;
-				//				}
-				if (par2 >= 2 && par2 < 20)
-				{
-					if (!mergeItemStack(itemstack1, 20, 56, false))
+
+				if(itemstack1.getItem() instanceof ItemCrystalBag) {
+					if(!mergeItemStack(itemstack1, 0, 1, false))
 						return ItemStack.EMPTY;
-					slot.onSlotChange(itemstack1, itemstack);
+				} else if(itemstack1.getItem() instanceof ItemNecronomicon) {
+					if(!mergeItemStack(itemstack1, 1, 2, false))
+						return ItemStack.EMPTY;
+				} else if (par2 >= 2 && par2 < 20){
+
+					ItemStack itemstack2 = itemstack1.copy();
+					int i = 1;
+					if(itemstack2.getMaxStackSize() > 1)
+						i = getMaxCount(itemstack2, inventorySlots.get(0).getStack().copy());
+					itemstack2.setCount(i);
+					if (!mergeItemStack(itemstack2, 20, 56, false))
+						return ItemStack.EMPTY;
+					else slot.decrStackSize(i);
 				}
 				else if (par2 >= 20 && par2 < 56 && !mergeItemStack(itemstack1, 20, 47, false))
 					return ItemStack.EMPTY;
@@ -155,5 +159,23 @@ public class ContainerMaterializer extends Container {
 		}
 
 		return itemstack;
+	}
+
+	private int getMaxCount(ItemStack stack, ItemStack bag) {
+
+		int count = 0;
+
+		ItemStack[] inventory = MaterializerRecipes.instance().extractItemsFromBag(bag);
+
+		if(inventory == null) return 0;
+
+		Materialization mat = MaterializerRecipes.instance().getMaterializationFor(stack);
+
+		if(mat == null) return 0;
+
+		while(MaterializerRecipes.instance().consumeCrystals(inventory, mat.input))
+			count++;
+
+		return count > stack.getMaxStackSize() ? stack.getMaxStackSize() : count;
 	}
 }
