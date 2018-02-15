@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2017 Shinoow.
+ * Copyright (c) 2012 - 2018 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -11,12 +11,6 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.common.ritual;
 
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.text.translation.I18n;
-import net.minecraft.world.World;
-
 import com.shinoow.abyssalcraft.api.item.ACItems;
 import com.shinoow.abyssalcraft.api.ritual.NecronomiconRitual;
 import com.shinoow.abyssalcraft.common.structures.omothol.StructureJzaharTemple;
@@ -24,14 +18,20 @@ import com.shinoow.abyssalcraft.lib.ACLib;
 import com.shinoow.abyssalcraft.lib.util.RitualUtil;
 import com.shinoow.abyssalcraft.lib.util.SpecialTextUtil;
 
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.translation.I18n;
+import net.minecraft.world.World;
+
 public class NecronomiconRespawnJzaharRitual extends NecronomiconRitual {
 
 	public NecronomiconRespawnJzaharRitual() {
 		super("respawnJzahar", 3, ACLib.omothol_id, 20000F,
 			new Object[]{new ItemStack(ACItems.essence, 1, 2), ACItems.shard_of_oblivion,
-			new ItemStack(ACItems.essence, 1, 2), ACItems.shard_of_oblivion,
-			new ItemStack(ACItems.essence, 1, 2), ACItems.shard_of_oblivion,
-			new ItemStack(ACItems.essence, 1, 2), ACItems.shard_of_oblivion});
+				new ItemStack(ACItems.essence, 1, 2), ACItems.shard_of_oblivion,
+				new ItemStack(ACItems.essence, 1, 2), ACItems.shard_of_oblivion,
+				new ItemStack(ACItems.essence, 1, 2), ACItems.shard_of_oblivion});
 
 	}
 

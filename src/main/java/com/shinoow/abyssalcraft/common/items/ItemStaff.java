@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2017 Shinoow.
+ * Copyright (c) 2012 - 2018 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -12,6 +12,11 @@
 package com.shinoow.abyssalcraft.common.items;
 
 import java.util.List;
+
+import com.shinoow.abyssalcraft.api.item.ACItems;
+import com.shinoow.abyssalcraft.client.ClientProxy;
+import com.shinoow.abyssalcraft.lib.ACTabs;
+import com.shinoow.abyssalcraft.lib.util.items.IStaffOfRending;
 
 import net.minecraft.client.resources.I18n;
 import net.minecraft.creativetab.CreativeTabs;
@@ -26,16 +31,10 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import com.shinoow.abyssalcraft.api.item.ACItems;
-import com.shinoow.abyssalcraft.client.ClientProxy;
-import com.shinoow.abyssalcraft.lib.ACTabs;
-import com.shinoow.abyssalcraft.lib.util.items.IStaffOfRending;
-
-public class ItemStaff extends Item implements IStaffOfRending{
+public class ItemStaff extends ItemACBasic implements IStaffOfRending{
 
 	public ItemStaff() {
-		super();
-		setUnlocalizedName("staff");
+		super("staff");
 		setCreativeTab(ACTabs.tabTools);
 		setFull3D();
 		setMaxStackSize(1);
@@ -57,7 +56,6 @@ public class ItemStaff extends Item implements IStaffOfRending{
 		return TextFormatting.BLUE + super.getItemStackDisplayName(par1ItemStack);
 	}
 
-	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
 	public void addInformation(ItemStack is, EntityPlayer player, List l, boolean B){
 		l.add(I18n.format("tooltip.staff"));
@@ -95,7 +93,6 @@ public class ItemStaff extends Item implements IStaffOfRending{
 	}
 
 	@Override
-	@SuppressWarnings("rawtypes")
 	public ActionResult<ItemStack> onItemRightClick(ItemStack stack, World world, EntityPlayer player, EnumHand hand) {
 
 		if(!stack.hasTagCompound())

@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2017 Shinoow.
+ * Copyright (c) 2012 - 2018 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -12,6 +12,9 @@
 package com.shinoow.abyssalcraft.common.structures.dreadlands.mineshaft;
 
 import java.util.*;
+
+import com.shinoow.abyssalcraft.api.block.ACBlocks;
+import com.shinoow.abyssalcraft.lib.ACLoot;
 
 import net.minecraft.block.BlockRail;
 import net.minecraft.block.BlockRailBase;
@@ -29,9 +32,6 @@ import net.minecraft.world.World;
 import net.minecraft.world.gen.structure.MapGenStructureIO;
 import net.minecraft.world.gen.structure.StructureBoundingBox;
 import net.minecraft.world.gen.structure.StructureComponent;
-
-import com.shinoow.abyssalcraft.api.block.ACBlocks;
-import com.shinoow.abyssalcraft.lib.ACLoot;
 
 public class StructureDreadlandsMinePieces
 {
@@ -169,7 +169,7 @@ public class StructureDreadlandsMinePieces
 		 * Initiates construction of the Structure Component picked, at the current Location of StructGen
 		 */
 		@Override
-		@SuppressWarnings({ "rawtypes", "unchecked", "incomplete-switch" })
+		@SuppressWarnings("incomplete-switch")
 		public void buildComponent(StructureComponent par1StructureComponent, List par2List, Random par3Random)
 		{
 			int i = getComponentType();
@@ -399,7 +399,7 @@ public class StructureDreadlandsMinePieces
 		 * Initiates construction of the Structure Component picked, at the current Location of StructGen
 		 */
 		@Override
-		@SuppressWarnings({ "rawtypes", "unchecked", "incomplete-switch" })
+		@SuppressWarnings("incomplete-switch")
 		public void buildComponent(StructureComponent par1StructureComponent, List par2List, Random par3Random)
 		{
 			int i = getComponentType();
@@ -499,7 +499,6 @@ public class StructureDreadlandsMinePieces
 		 * Initiates construction of the Structure Component picked, at the current Location of StructGen
 		 */
 		@Override
-		@SuppressWarnings({ "rawtypes", "unchecked" })
 		public void buildComponent(StructureComponent par1StructureComponent, List par2List, Random par3Random)
 		{
 			int i = getComponentType();
@@ -679,7 +678,7 @@ public class StructureDreadlandsMinePieces
 		 * Initiates construction of the Structure Component picked, at the current Location of StructGen
 		 */
 		@Override
-		@SuppressWarnings({ "rawtypes", "unchecked", "incomplete-switch" })
+		@SuppressWarnings("incomplete-switch")
 		public void buildComponent(StructureComponent par1StructureComponent, List par2List, Random par3Random)
 		{
 			int i = getComponentType();

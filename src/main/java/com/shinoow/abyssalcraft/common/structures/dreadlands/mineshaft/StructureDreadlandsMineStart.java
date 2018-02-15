@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2017 Shinoow.
+ * Copyright (c) 2012 - 2018 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -20,7 +20,6 @@ public class StructureDreadlandsMineStart extends StructureStart {
 
 	public StructureDreadlandsMineStart() {}
 
-	@SuppressWarnings("unchecked")
 	public StructureDreadlandsMineStart(World par1World, Random par2Random, int par3, int par4) {
 		super(par3, par4);
 		StructureDreadlandsMinePieces.Room room = new StructureDreadlandsMinePieces.Room(0, par2Random, (par3 << 4) + 2, (par4 << 4) + 2);

@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2017 Shinoow.
+ * Copyright (c) 2012 - 2018 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -13,13 +13,13 @@ package com.shinoow.abyssalcraft.api.recipe;
 
 import java.util.List;
 
+import com.google.common.collect.Lists;
+import com.shinoow.abyssalcraft.api.APIUtils;
+
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraftforge.oredict.OreDictionary;
-
-import com.google.common.collect.Lists;
-import com.shinoow.abyssalcraft.api.APIUtils;
 
 public class MaterializerRecipes {
 
@@ -61,7 +61,7 @@ public class MaterializerRecipes {
 
 		for(Materialization mat : materializationList)
 			if(arrayContainsOtherArray(inventory, mat.input))
-				displayList.add(mat.output);
+				displayList.add(mat.output.copy());
 
 		return displayList;
 	}
@@ -81,11 +81,32 @@ public class MaterializerRecipes {
 
 		if(mat == null) return;
 
-		List<ItemStack> recipe = Lists.newArrayList(mat.input);
+		int num = output.stackSize;
+		int count = 0;
 
-		for(int i = 0; i < inventory.length; i++)
+		if(num > 1)
+			while(count < num && consumeCrystals(inventory, mat.input.clone()))
+				count++;
+		else consumeCrystals(inventory, mat.input.clone());
+
+		if(num == 1 || count == num)
+			replaceBagContents(bag, inventory);
+	}
+
+	/**
+	 * Helper method for consuming crystals from the inventory of a Crystal Bag
+	 * @param inventory Crystal Bag Inventory
+	 * @param recipe List of things to be consumed from the inventory
+	 * @return True if the consumption was successful, otherwise false
+	 */
+	public boolean consumeCrystals(ItemStack[] inventory, ItemStack[] input) {
+
+		ItemStack[] invTemp = inventory.clone();
+		List<ItemStack> recipe = makeNonWriteThroughList(input);
+
+		for(int i = 0; i < invTemp.length; i++)
 			for(ItemStack recipeItem : recipe){
-				ItemStack invItem = inventory[i];
+				ItemStack invItem = invTemp[i];
 				if(areStacksEqual(invItem, recipeItem))
 					if(invItem.stackSize >= recipeItem.stackSize){
 						invItem.stackSize -= recipeItem.stackSize;
@@ -99,8 +120,12 @@ public class MaterializerRecipes {
 					}
 			}
 
-		if(recipe.isEmpty())
-			replaceBagContents(bag, inventory);
+		if(recipe.isEmpty()) {
+			inventory = invTemp;
+			return true;
+		}
+
+		return recipe.isEmpty();
 	}
 
 	/**
@@ -108,7 +133,7 @@ public class MaterializerRecipes {
 	 * @param output Recipe output to find a recipe for
 	 * @return A materialization recipe if one exists, otherwise null
 	 */
-	private Materialization getMaterializationFor(ItemStack output){
+	public Materialization getMaterializationFor(ItemStack output){
 		for(Materialization mat : materializationList)
 			if(areStacksEqual(output, mat.output)) return mat;
 		return null;
@@ -119,7 +144,7 @@ public class MaterializerRecipes {
 	 * @param bag Crystal Bag to extract crystals from
 	 * @return An array of ItemStacks (provided the bag has an inventory, and it's contents are only crystals), otherwise null
 	 */
-	private ItemStack[] extractItemsFromBag(ItemStack bag){
+	public ItemStack[] extractItemsFromBag(ItemStack bag){
 
 		ItemStack[] inventory = null;
 
@@ -184,7 +209,7 @@ public class MaterializerRecipes {
 	 */
 	private boolean arrayContainsOtherArray(ItemStack[] array1, ItemStack[] array2){
 		List<ItemStack> inventory = Lists.newArrayList(array1);
-		List<ItemStack> recipe = Lists.newArrayList(array2);
+		List<ItemStack> recipe = makeNonWriteThroughList(array2);
 
 		if(inventory.size() >= recipe.size())
 			for(ItemStack invItem : inventory)
@@ -202,6 +227,14 @@ public class MaterializerRecipes {
 						}
 
 		return recipe.isEmpty();
+	}
+
+	private List<ItemStack> makeNonWriteThroughList(ItemStack[] array){
+		ItemStack[] inputTmp = new ItemStack[array.length];
+		for(int i = 0; i < array.length; i++)
+			inputTmp[i] = array[i].copy();
+
+		return Lists.newArrayList(inputTmp);
 	}
 
 	public List<Materialization> getMaterializationList()

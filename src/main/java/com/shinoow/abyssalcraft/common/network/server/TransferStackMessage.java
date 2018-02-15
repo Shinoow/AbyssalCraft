@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2017 Shinoow.
+ * Copyright (c) 2012 - 2018 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -13,14 +13,16 @@ package com.shinoow.abyssalcraft.common.network.server;
 
 import java.io.IOException;
 
+import com.shinoow.abyssalcraft.api.APIUtils;
+import com.shinoow.abyssalcraft.api.recipe.MaterializerRecipes;
+import com.shinoow.abyssalcraft.common.inventory.ContainerMaterializer;
+import com.shinoow.abyssalcraft.common.network.AbstractMessage.AbstractServerMessage;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.PacketBuffer;
 import net.minecraftforge.fml.common.network.ByteBufUtils;
 import net.minecraftforge.fml.relauncher.Side;
-
-import com.shinoow.abyssalcraft.common.inventory.ContainerMaterializer;
-import com.shinoow.abyssalcraft.common.network.AbstractMessage.AbstractServerMessage;
 
 public class TransferStackMessage extends AbstractServerMessage<TransferStackMessage> {
 
@@ -48,10 +50,18 @@ public class TransferStackMessage extends AbstractServerMessage<TransferStackMes
 
 	@Override
 	public void process(EntityPlayer player, Side side) {
-		if(player.openContainer instanceof ContainerMaterializer){
+		if(player.openContainer instanceof ContainerMaterializer && canMaterialize(stack, player.openContainer.getSlot(0).getStack())){
 			player.openContainer.putStackInSlot(slot, stack);
 			player.openContainer.detectAndSendChanges();
 		}
 	}
 
+	private boolean canMaterialize(ItemStack stack, ItemStack bag){
+
+		for(ItemStack stack1 : MaterializerRecipes.instance().getMaterializationResult(bag))
+			if(APIUtils.areStacksEqual(stack, stack1))
+				return true;
+
+		return false;
+	}
 }

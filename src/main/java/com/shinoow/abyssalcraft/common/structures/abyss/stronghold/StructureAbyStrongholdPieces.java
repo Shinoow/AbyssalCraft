@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2017 Shinoow.
+ * Copyright (c) 2012 - 2018 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -12,6 +12,11 @@
 package com.shinoow.abyssalcraft.common.structures.abyss.stronghold;
 
 import java.util.*;
+
+import com.shinoow.abyssalcraft.api.block.ACBlocks;
+import com.shinoow.abyssalcraft.common.blocks.BlockACBrick.EnumBrickType;
+import com.shinoow.abyssalcraft.init.BlockHandler;
+import com.shinoow.abyssalcraft.lib.ACLoot;
 
 import net.minecraft.block.*;
 import net.minecraft.block.state.IBlockState;
@@ -25,11 +30,6 @@ import net.minecraft.world.World;
 import net.minecraft.world.gen.structure.MapGenStructureIO;
 import net.minecraft.world.gen.structure.StructureBoundingBox;
 import net.minecraft.world.gen.structure.StructureComponent;
-
-import com.shinoow.abyssalcraft.api.block.ACBlocks;
-import com.shinoow.abyssalcraft.common.blocks.BlockACBrick.EnumBrickType;
-import com.shinoow.abyssalcraft.init.BlockHandler;
-import com.shinoow.abyssalcraft.lib.ACLoot;
 
 public class StructureAbyStrongholdPieces
 {
@@ -265,7 +265,6 @@ public class StructureAbyStrongholdPieces
 		 * Initiates construction of the Structure Component picked, at the current Location of StructGen
 		 */
 		@Override
-		@SuppressWarnings({ "rawtypes", "unchecked" })
 		public void buildComponent(StructureComponent par1StructureComponent, List par2List, Random par3Random)
 		{
 			if (field_75024_a)
@@ -358,7 +357,6 @@ public class StructureAbyStrongholdPieces
 		 * Initiates construction of the Structure Component picked, at the current Location of StructGen
 		 */
 		@Override
-		@SuppressWarnings({ "rawtypes", "unchecked" })
 		public void buildComponent(StructureComponent par1StructureComponent, List par2List, Random par3Random)
 		{
 			getNextComponentNormal((StructureAbyStrongholdPieces.Stairs2)par1StructureComponent, par2List, par3Random, 1, 1);
@@ -435,7 +433,6 @@ public class StructureAbyStrongholdPieces
 		 * Initiates construction of the Structure Component picked, at the current Location of StructGen
 		 */
 		@Override
-		@SuppressWarnings("rawtypes")
 		public void buildComponent(StructureComponent par1StructureComponent, List par2List, Random par3Random)
 		{
 			if (par1StructureComponent != null)
@@ -592,7 +589,6 @@ public class StructureAbyStrongholdPieces
 		 * Initiates construction of the Structure Component picked, at the current Location of StructGen
 		 */
 		@Override
-		@SuppressWarnings({ "rawtypes", "unchecked" })
 		public void buildComponent(StructureComponent par1StructureComponent, List par2List, Random par3Random)
 		{
 			getNextComponentNormal((StructureAbyStrongholdPieces.Stairs2)par1StructureComponent, par2List, par3Random, 1, 1);
@@ -673,7 +669,6 @@ public class StructureAbyStrongholdPieces
 		 * Initiates construction of the Structure Component picked, at the current Location of StructGen
 		 */
 		@Override
-		@SuppressWarnings({ "rawtypes", "unchecked" })
 		public void buildComponent(StructureComponent par1StructureComponent, List par2List, Random par3Random)
 		{
 			getNextComponentNormal((StructureAbyStrongholdPieces.Stairs2)par1StructureComponent, par2List, par3Random, 4, 1);
@@ -817,7 +812,6 @@ public class StructureAbyStrongholdPieces
 		 * Initiates construction of the Structure Component picked, at the current Location of StructGen
 		 */
 		@Override
-		@SuppressWarnings({ "rawtypes", "unchecked" })
 		public void buildComponent(StructureComponent par1StructureComponent, List par2List, Random par3Random)
 		{
 			getNextComponentNormal((StructureAbyStrongholdPieces.Stairs2)par1StructureComponent, par2List, par3Random, 1, 1);
@@ -902,7 +896,6 @@ public class StructureAbyStrongholdPieces
 		 * Initiates construction of the Structure Component picked, at the current Location of StructGen
 		 */
 		@Override
-		@SuppressWarnings({ "rawtypes", "unchecked" })
 		public void buildComponent(StructureComponent par1StructureComponent, List par2List, Random par3Random)
 		{
 			getNextComponentNormal((StructureAbyStrongholdPieces.Stairs2)par1StructureComponent, par2List, par3Random, 1, 1);
@@ -966,7 +959,6 @@ public class StructureAbyStrongholdPieces
 		 * Initiates construction of the Structure Component picked, at the current Location of StructGen
 		 */
 		@Override
-		@SuppressWarnings({ "rawtypes", "unchecked" })
 		public void buildComponent(StructureComponent par1StructureComponent, List par2List, Random par3Random)
 		{
 			if (getCoordBaseMode() != EnumFacing.NORTH && getCoordBaseMode() != EnumFacing.EAST)
@@ -1014,7 +1006,6 @@ public class StructureAbyStrongholdPieces
 		 * Initiates construction of the Structure Component picked, at the current Location of StructGen
 		 */
 		@Override
-		@SuppressWarnings({ "rawtypes", "unchecked" })
 		public void buildComponent(StructureComponent par1StructureComponent, List par2List, Random par3Random)
 		{
 			if (getCoordBaseMode() != EnumFacing.NORTH && getCoordBaseMode() != EnumFacing.EAST)
@@ -1288,7 +1279,6 @@ public class StructureAbyStrongholdPieces
 		 * Initiates construction of the Structure Component picked, at the current Location of StructGen
 		 */
 		@Override
-		@SuppressWarnings({ "rawtypes", "unchecked" })
 		public void buildComponent(StructureComponent par1StructureComponent, List par2List, Random par3Random)
 		{
 			int i = 3;

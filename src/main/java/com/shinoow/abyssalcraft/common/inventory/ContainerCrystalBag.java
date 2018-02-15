@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2017 Shinoow.
+ * Copyright (c) 2012 - 2018 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -11,15 +11,15 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.common.inventory;
 
+import com.shinoow.abyssalcraft.api.APIUtils;
+import com.shinoow.abyssalcraft.common.items.ItemCrystalBag;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.ClickType;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
-
-import com.shinoow.abyssalcraft.api.APIUtils;
-import com.shinoow.abyssalcraft.common.items.ItemCrystalBag;
 
 //@Interface(iface = "invtweaks.api.container.ChestContainer", modid = "inventorytweaks")
 //@ChestContainer

@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2017 Shinoow.
+ * Copyright (c) 2012 - 2018 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -12,6 +12,10 @@
 package com.shinoow.abyssalcraft.common.world.biome;
 
 import java.util.Random;
+
+import com.shinoow.abyssalcraft.api.block.ACBlocks;
+import com.shinoow.abyssalcraft.common.entity.*;
+import com.shinoow.abyssalcraft.lib.ACConfig;
 
 import net.minecraft.block.BlockBush;
 import net.minecraft.block.material.Material;
@@ -29,13 +33,8 @@ import net.minecraft.world.gen.feature.WorldGenMinable;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import com.shinoow.abyssalcraft.api.block.ACBlocks;
-import com.shinoow.abyssalcraft.common.entity.*;
-import com.shinoow.abyssalcraft.lib.ACConfig;
-
 public class BiomeGenAbywasteland extends Biome {
 
-	@SuppressWarnings("unchecked")
 	public BiomeGenAbywasteland(BiomeProperties par1){
 		super(par1);
 		topBlock = ACBlocks.fused_abyssal_sand.getDefaultState();

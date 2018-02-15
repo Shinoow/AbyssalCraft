@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2017 Shinoow.
+ * Copyright (c) 2012 - 2018 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -12,6 +12,8 @@
 package com.shinoow.abyssalcraft.common.blocks;
 
 import java.util.List;
+
+import com.shinoow.abyssalcraft.api.block.ACBlocks;
 
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.MapColor;
@@ -29,8 +31,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.IStringSerializable;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
-
-import com.shinoow.abyssalcraft.api.block.ACBlocks;
 
 public class BlockACBrick extends BlockACBasic {
 
@@ -69,9 +69,8 @@ public class BlockACBrick extends BlockACBasic {
 		return ((EnumBrickType)state.getValue(TYPE)).getMeta();
 	}
 
-	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
-	public void getSubBlocks(Item par1, CreativeTabs par2CreativeTabs, List par3List) {
+	public void getSubBlocks(Item par1, CreativeTabs par2CreativeTabs, List<ItemStack> par3List) {
 		for(int i = 0; i < EnumBrickType.values().length; i++)
 			par3List.add(new ItemStack(par1, 1, i));
 	}

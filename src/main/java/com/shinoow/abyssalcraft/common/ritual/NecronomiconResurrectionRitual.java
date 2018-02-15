@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2017 Shinoow.
+ * Copyright (c) 2012 - 2018 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -10,6 +10,17 @@
  *     Shinoow -  implementation
  ******************************************************************************/
 package com.shinoow.abyssalcraft.common.ritual;
+
+import com.shinoow.abyssalcraft.api.block.ACBlocks;
+import com.shinoow.abyssalcraft.api.item.ACItems;
+import com.shinoow.abyssalcraft.api.ritual.NecronomiconRitual;
+import com.shinoow.abyssalcraft.common.caps.INecromancyCapability;
+import com.shinoow.abyssalcraft.common.caps.NecromancyCapability;
+import com.shinoow.abyssalcraft.common.entity.EntityDreadSpawn;
+import com.shinoow.abyssalcraft.common.entity.EntityGreaterDreadSpawn;
+import com.shinoow.abyssalcraft.common.entity.EntityLesserDreadbeast;
+import com.shinoow.abyssalcraft.lib.util.blocks.IRitualAltar;
+import com.shinoow.abyssalcraft.lib.util.blocks.IRitualPedestal;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityList;
@@ -22,27 +33,16 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-import com.shinoow.abyssalcraft.api.block.ACBlocks;
-import com.shinoow.abyssalcraft.api.item.ACItems;
-import com.shinoow.abyssalcraft.api.ritual.NecronomiconRitual;
-import com.shinoow.abyssalcraft.common.caps.INecromancyCapability;
-import com.shinoow.abyssalcraft.common.caps.NecromancyCapabilityProvider;
-import com.shinoow.abyssalcraft.common.entity.EntityDreadSpawn;
-import com.shinoow.abyssalcraft.common.entity.EntityGreaterDreadSpawn;
-import com.shinoow.abyssalcraft.common.entity.EntityLesserDreadbeast;
-import com.shinoow.abyssalcraft.lib.util.blocks.IRitualAltar;
-import com.shinoow.abyssalcraft.lib.util.blocks.IRitualPedestal;
-
 public class NecronomiconResurrectionRitual extends NecronomiconRitual {
 
 	public NecronomiconResurrectionRitual() {
 		super("resurrection", 2, -1, 1000F, true, new Object[]{ new ItemStack[]{new ItemStack(ACItems.crystal_shard, 1, 3), new ItemStack(ACItems.crystal, 1, 3),
 			new ItemStack(ACBlocks.crystal_cluster, 1, 3)}, new ItemStack[]{new ItemStack(ACItems.crystal_shard, 1, 5), new ItemStack(ACItems.crystal, 1, 5),
-			new ItemStack(ACBlocks.crystal_cluster, 1, 5)}, new ItemStack[]{new ItemStack(ACItems.crystal_shard, 1, 6), new ItemStack(ACItems.crystal, 1, 6),
-			new ItemStack(ACBlocks.crystal_cluster, 1, 6)}, new ItemStack[]{new ItemStack(ACItems.crystal_shard, 1, 4), new ItemStack(ACItems.crystal, 1, 4),
-			new ItemStack(ACBlocks.crystal_cluster, 1, 4)}, new ItemStack[]{new ItemStack(ACItems.crystal_shard, 1, 7), new ItemStack(ACItems.crystal, 1, 7),
-			new ItemStack(ACBlocks.crystal_cluster, 1, 7)}, new ItemStack[]{new ItemStack(ACItems.crystal_shard, 1, 2), new ItemStack(ACItems.crystal, 1, 2),
-			new ItemStack(ACBlocks.crystal_cluster, 1, 2)}});
+				new ItemStack(ACBlocks.crystal_cluster, 1, 5)}, new ItemStack[]{new ItemStack(ACItems.crystal_shard, 1, 6), new ItemStack(ACItems.crystal, 1, 6),
+					new ItemStack(ACBlocks.crystal_cluster, 1, 6)}, new ItemStack[]{new ItemStack(ACItems.crystal_shard, 1, 4), new ItemStack(ACItems.crystal, 1, 4),
+						new ItemStack(ACBlocks.crystal_cluster, 1, 4)}, new ItemStack[]{new ItemStack(ACItems.crystal_shard, 1, 7), new ItemStack(ACItems.crystal, 1, 7),
+							new ItemStack(ACBlocks.crystal_cluster, 1, 7)}, new ItemStack[]{new ItemStack(ACItems.crystal_shard, 1, 2), new ItemStack(ACItems.crystal, 1, 2),
+								new ItemStack(ACBlocks.crystal_cluster, 1, 2)}});
 		sacrifice = Items.NAME_TAG;
 	}
 
@@ -104,7 +104,7 @@ public class NecronomiconResurrectionRitual extends NecronomiconRitual {
 			stack = ((IRitualAltar) altar).getItem();
 
 		if(stack != null && stack.getItem() == Items.NAME_TAG){
-			INecromancyCapability cap = player.getCapability(NecromancyCapabilityProvider.NECROMANCY_CAP, null);
+			INecromancyCapability cap = NecromancyCapability.getCap(player);
 			return cap.getDataForName(stack.getDisplayName()) != null && checkSurroundings(world, pos, cap.getSizeForName(stack.getDisplayName()));
 		}
 
@@ -121,7 +121,7 @@ public class NecronomiconResurrectionRitual extends NecronomiconRitual {
 			stack = ((IRitualAltar) altar).getItem();
 
 		if(stack != null && stack.getItem() == Items.NAME_TAG){
-			INecromancyCapability cap = player.getCapability(NecromancyCapabilityProvider.NECROMANCY_CAP, null);
+			INecromancyCapability cap = NecromancyCapability.getCap(player);
 			cap.clearEntry(stack.getDisplayName());
 		}
 	}
@@ -136,7 +136,7 @@ public class NecronomiconResurrectionRitual extends NecronomiconRitual {
 			stack = ((IRitualAltar) altar).getItem();
 
 		if(stack != null && stack.getItem() == Items.NAME_TAG){
-			INecromancyCapability cap = player.getCapability(NecromancyCapabilityProvider.NECROMANCY_CAP, null);
+			INecromancyCapability cap = NecromancyCapability.getCap(player);
 			Entity e = EntityList.createEntityFromNBT(cap.getDataForName(stack.getDisplayName()), world);
 			if(e instanceof EntityLiving){
 				EntityLiving entity = getEntity(e, cap.getSizeForName(stack.getDisplayName()));

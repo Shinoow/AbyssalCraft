@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2017 Shinoow.
+ * Copyright (c) 2012 - 2018 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -13,6 +13,11 @@ package com.shinoow.abyssalcraft.common.inventory;
 
 import javax.annotation.Nullable;
 
+import com.shinoow.abyssalcraft.api.recipe.MaterializerRecipes;
+import com.shinoow.abyssalcraft.common.blocks.tile.TileEntityMaterializer;
+import com.shinoow.abyssalcraft.common.network.PacketDispatcher;
+import com.shinoow.abyssalcraft.common.network.server.TransferStackMessage;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
@@ -20,11 +25,6 @@ import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraftforge.fml.common.FMLCommonHandler;
-
-import com.shinoow.abyssalcraft.api.recipe.MaterializerRecipes;
-import com.shinoow.abyssalcraft.common.blocks.tile.TileEntityMaterializer;
-import com.shinoow.abyssalcraft.common.network.PacketDispatcher;
-import com.shinoow.abyssalcraft.common.network.server.TransferStackMessage;
 
 public class InventoryMaterializer implements IInventory
 {
@@ -64,6 +64,7 @@ public class InventoryMaterializer implements IInventory
 
 		if (itemstack != null)
 		{
+			itemstack.stackSize = count;
 			markDirty();
 			if(FMLCommonHandler.instance().getSide().isClient())
 				PacketDispatcher.sendToServer(new TransferStackMessage(index, itemstack));

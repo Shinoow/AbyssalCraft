@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2017 Shinoow.
+ * Copyright (c) 2012 - 2018 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -13,18 +13,18 @@ package com.shinoow.abyssalcraft.lib.util;
 
 import java.util.Map;
 
+import com.google.common.collect.Maps;
+import com.shinoow.abyssalcraft.api.APIUtils;
+import com.shinoow.abyssalcraft.api.block.ACBlocks;
+import com.shinoow.abyssalcraft.api.ritual.NecronomiconRitual;
+import com.shinoow.abyssalcraft.api.ritual.RitualRegistry;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.ReflectionHelper;
-
-import com.google.common.collect.Maps;
-import com.shinoow.abyssalcraft.api.APIUtils;
-import com.shinoow.abyssalcraft.api.block.ACBlocks;
-import com.shinoow.abyssalcraft.api.ritual.NecronomiconRitual;
-import com.shinoow.abyssalcraft.api.ritual.RitualRegistry;
 
 /**
  * Utility class used for assembling Ritual grounds.
@@ -80,32 +80,32 @@ public class RitualUtil {
 				world.getBlockState(pos.add(x -2, y, z -2)) == ritualBlock &&
 				world.getBlockState(pos.add(x + 2, y, z + 2)) == ritualBlock &&
 				world.getBlockState(pos.add(x + 2, y, z -2)) == ritualBlock)
-					if(world.isAirBlock(pos.add(x -3, y, z -1)) && world.isAirBlock(pos.add(x -3, y, z + 1)) &&
-						world.isAirBlock(pos.add(x -4, y, z)) && world.isAirBlock(pos.add(x -4, y, z -1)) &&
-						world.isAirBlock(pos.add(x -4, y, z + 1)) && world.isAirBlock(pos.add(x -3, y, z -2)) &&
-						world.isAirBlock(pos.add(x -3, y, z -3)) && world.isAirBlock(pos.add(x -2, y, z -3)) &&
-						world.isAirBlock(pos.add(x -1, y, z -3)) && world.isAirBlock(pos.add(x -1, y, z -4)) &&
-						world.isAirBlock(pos.add(x, y, z -4)) && world.isAirBlock(pos.add(x + 1, y, z -4)) &&
-						world.isAirBlock(pos.add(x + 1, y, z -3)) && world.isAirBlock(pos.add(x + 2, y, z -3)) &&
-						world.isAirBlock(pos.add(x + 3, y, z -3)) && world.isAirBlock(pos.add(x + 3, y, z -2)) &&
-						world.isAirBlock(pos.add(x + 3, y, z -1)) && world.isAirBlock(pos.add(x + 4, y, z -1)) &&
-						world.isAirBlock(pos.add(x + 4, y, z)) && world.isAirBlock(pos.add(x + 4, y, z + 1)) &&
-						world.isAirBlock(pos.add(x + 3, y, z + 1)) && world.isAirBlock(pos.add(x + 3, y, z + 2)) &&
-						world.isAirBlock(pos.add(x + 3, y, z + 3)) && world.isAirBlock(pos.add(x + 2, y, z + 3)) &&
-						world.isAirBlock(pos.add(x + 1, y, z + 3)) && world.isAirBlock(pos.add(x + 1, y, z + 4)) &&
-						world.isAirBlock(pos.add(x, y, z + 4)) && world.isAirBlock(pos.add(x -1, y, z + 4)) &&
-						world.isAirBlock(pos.add(x -1, y, z + 3)) && world.isAirBlock(pos.add(x -2, y, z + 3)) &&
-						world.isAirBlock(pos.add(x-3, y, z + 3)) && world.isAirBlock(pos.add(x -3, y, z + 2)) &&
-						world.isAirBlock(pos.add(x-1, y, z + 0)) && world.isAirBlock(pos.add(x + 1, y, z)) &&
-						world.isAirBlock(pos.add(x, y, z -1)) && world.isAirBlock(pos.add(x, y, z + 1)) &&
-						world.isAirBlock(pos.add(x-1, y, z + 1)) && world.isAirBlock(pos.add(x -2, y, z)) &&
-						world.isAirBlock(pos.add(x-2, y, z)) && world.isAirBlock(pos.add(x -2, y, z -1)) &&
-						world.isAirBlock(pos.add(x-1, y, z -1)) && world.isAirBlock(pos.add(x -1, y, z -2)) &&
-						world.isAirBlock(pos.add(x, y, z -2)) && world.isAirBlock(pos.add(x + 1, y, z -2)) &&
-						world.isAirBlock(pos.add(x + 1, y, z -1)) && world.isAirBlock(pos.add(x + 2, y, z -1)) &&
-						world.isAirBlock(pos.add(x + 2, y, z)) && world.isAirBlock(pos.add(x + 2, y, z + 1)) &&
-						world.isAirBlock(pos.add(x + 1, y, z + 1)) && world.isAirBlock(pos.add(x + 1, y, z + 2)) &&
-						world.isAirBlock(pos.add(x, y, z + 2)) && world.isAirBlock(pos.add(x -1, y, z + 2)))
+					if(!world.isBlockFullCube(pos.add(x -3, y, z -1)) && !world.isBlockFullCube(pos.add(x -3, y, z + 1)) &&
+						!world.isBlockFullCube(pos.add(x -4, y, z)) && !world.isBlockFullCube(pos.add(x -4, y, z -1)) &&
+						!world.isBlockFullCube(pos.add(x -4, y, z + 1)) && !world.isBlockFullCube(pos.add(x -3, y, z -2)) &&
+						!world.isBlockFullCube(pos.add(x -3, y, z -3)) && !world.isBlockFullCube(pos.add(x -2, y, z -3)) &&
+						!world.isBlockFullCube(pos.add(x -1, y, z -3)) && !world.isBlockFullCube(pos.add(x -1, y, z -4)) &&
+						!world.isBlockFullCube(pos.add(x, y, z -4)) && !world.isBlockFullCube(pos.add(x + 1, y, z -4)) &&
+						!world.isBlockFullCube(pos.add(x + 1, y, z -3)) && !world.isBlockFullCube(pos.add(x + 2, y, z -3)) &&
+						!world.isBlockFullCube(pos.add(x + 3, y, z -3)) && !world.isBlockFullCube(pos.add(x + 3, y, z -2)) &&
+						!world.isBlockFullCube(pos.add(x + 3, y, z -1)) && !world.isBlockFullCube(pos.add(x + 4, y, z -1)) &&
+						!world.isBlockFullCube(pos.add(x + 4, y, z)) && !world.isBlockFullCube(pos.add(x + 4, y, z + 1)) &&
+						!world.isBlockFullCube(pos.add(x + 3, y, z + 1)) && !world.isBlockFullCube(pos.add(x + 3, y, z + 2)) &&
+						!world.isBlockFullCube(pos.add(x + 3, y, z + 3)) && !world.isBlockFullCube(pos.add(x + 2, y, z + 3)) &&
+						!world.isBlockFullCube(pos.add(x + 1, y, z + 3)) && !world.isBlockFullCube(pos.add(x + 1, y, z + 4)) &&
+						!world.isBlockFullCube(pos.add(x, y, z + 4)) && !world.isBlockFullCube(pos.add(x -1, y, z + 4)) &&
+						!world.isBlockFullCube(pos.add(x -1, y, z + 3)) && !world.isBlockFullCube(pos.add(x -2, y, z + 3)) &&
+						!world.isBlockFullCube(pos.add(x-3, y, z + 3)) && !world.isBlockFullCube(pos.add(x -3, y, z + 2)) &&
+						!world.isBlockFullCube(pos.add(x-1, y, z + 0)) && !world.isBlockFullCube(pos.add(x + 1, y, z)) &&
+						!world.isBlockFullCube(pos.add(x, y, z -1)) && !world.isBlockFullCube(pos.add(x, y, z + 1)) &&
+						!world.isBlockFullCube(pos.add(x-1, y, z + 1)) && !world.isBlockFullCube(pos.add(x -2, y, z)) &&
+						!world.isBlockFullCube(pos.add(x-2, y, z)) && !world.isBlockFullCube(pos.add(x -2, y, z -1)) &&
+						!world.isBlockFullCube(pos.add(x-1, y, z -1)) && !world.isBlockFullCube(pos.add(x -1, y, z -2)) &&
+						!world.isBlockFullCube(pos.add(x, y, z -2)) && !world.isBlockFullCube(pos.add(x + 1, y, z -2)) &&
+						!world.isBlockFullCube(pos.add(x + 1, y, z -1)) && !world.isBlockFullCube(pos.add(x + 2, y, z -1)) &&
+						!world.isBlockFullCube(pos.add(x + 2, y, z)) && !world.isBlockFullCube(pos.add(x + 2, y, z + 1)) &&
+						!world.isBlockFullCube(pos.add(x + 1, y, z + 1)) && !world.isBlockFullCube(pos.add(x + 1, y, z + 2)) &&
+						!world.isBlockFullCube(pos.add(x, y, z + 2)) && !world.isBlockFullCube(pos.add(x -1, y, z + 2)))
 						if(RitualRegistry.instance().sameBookType(world.provider.getDimension(), ritualBlocks.get(ritualBlock.getBlock()))){
 							createAltar(world, pos, ritualBlock.getBlock());
 							return true;

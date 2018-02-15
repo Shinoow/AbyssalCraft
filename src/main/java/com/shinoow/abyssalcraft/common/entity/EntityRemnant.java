@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2017 Shinoow.
+ * Copyright (c) 2012 - 2018 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -12,6 +12,16 @@
 package com.shinoow.abyssalcraft.common.entity;
 
 import java.util.*;
+
+import com.shinoow.abyssalcraft.api.APIUtils;
+import com.shinoow.abyssalcraft.api.entity.EntityUtil;
+import com.shinoow.abyssalcraft.api.entity.IOmotholEntity;
+import com.shinoow.abyssalcraft.api.item.ACItems;
+import com.shinoow.abyssalcraft.common.items.ItemDrainStaff;
+import com.shinoow.abyssalcraft.common.items.ItemNecronomicon;
+import com.shinoow.abyssalcraft.lib.ACConfig;
+import com.shinoow.abyssalcraft.lib.ACLoot;
+import com.shinoow.abyssalcraft.lib.ACSounds;
 
 import net.minecraft.block.Block;
 import net.minecraft.enchantment.Enchantment;
@@ -42,16 +52,6 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.ReflectionHelper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-
-import com.shinoow.abyssalcraft.api.APIUtils;
-import com.shinoow.abyssalcraft.api.entity.EntityUtil;
-import com.shinoow.abyssalcraft.api.entity.IOmotholEntity;
-import com.shinoow.abyssalcraft.api.item.ACItems;
-import com.shinoow.abyssalcraft.common.items.ItemDrainStaff;
-import com.shinoow.abyssalcraft.common.items.ItemNecronomicon;
-import com.shinoow.abyssalcraft.lib.ACConfig;
-import com.shinoow.abyssalcraft.lib.ACLoot;
-import com.shinoow.abyssalcraft.lib.ACSounds;
 
 public class EntityRemnant extends EntityMob implements IMerchant, IOmotholEntity {
 
@@ -118,7 +118,6 @@ public class EntityRemnant extends EntityMob implements IMerchant, IOmotholEntit
 	}
 
 	@Override
-	@SuppressWarnings("rawtypes")
 	protected void updateAITasks() {
 
 		if (!isTrading() && timeUntilReset > 0)
@@ -429,7 +428,6 @@ public class EntityRemnant extends EntityMob implements IMerchant, IOmotholEntit
 		return f1 > 0.9F ? 0.9F - (f1 - 0.9F) : f1;
 	}
 
-	@SuppressWarnings("unchecked")
 	private void addDefaultEquipmentAndRecipies(int par1)
 	{
 		if (tradingList != null)
@@ -680,7 +678,6 @@ public class EntityRemnant extends EntityMob implements IMerchant, IOmotholEntit
 
 	/****************** END OF VANILLA CODE FROM 1.7.10 ******************/
 
-	@SuppressWarnings("unchecked")
 	public static void addItemTrade(MerchantRecipeList list, Item item, Random rand, float probability)
 	{
 		if (rand.nextFloat() < probability)
@@ -698,7 +695,6 @@ public class EntityRemnant extends EntityMob implements IMerchant, IOmotholEntit
 		return tuple == null ? 1 : ((Integer)tuple.getFirst()).intValue() >= ((Integer)tuple.getSecond()).intValue() ? ((Integer)tuple.getFirst()).intValue() : ((Integer)tuple.getFirst()).intValue() + rand.nextInt(((Integer)tuple.getSecond()).intValue() - ((Integer)tuple.getFirst()).intValue());
 	}
 
-	@SuppressWarnings("unchecked")
 	public static void addCoinTrade(MerchantRecipeList list, Item item, Random rand, float probability)
 	{
 		if (rand.nextFloat() < probability)
@@ -754,7 +750,6 @@ public class EntityRemnant extends EntityMob implements IMerchant, IOmotholEntit
 		addCoinTrade(list, buy, (ItemStack)null, sell);
 	}
 
-	@SuppressWarnings("unchecked")
 	public void addCoinTrade(MerchantRecipeList list, ItemStack buy1, ItemStack buy2, ItemStack sell){
 		list.add(new MerchantRecipe(buy1, buy2, sell));
 	}

@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2017 Shinoow.
+ * Copyright (c) 2012 - 2018 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -9,59 +9,36 @@
  * Contributors:
  *     Shinoow -  implementation
  ******************************************************************************/
-package com.shinoow.abyssalcraft.common.caps;
+package com.shinoow.abyssalcraft.api.necronomicon.condition.caps;
 
 import java.util.List;
 
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityList;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.world.biome.Biome;
-
-import com.google.common.base.Predicate;
 import com.google.common.collect.Lists;
+import com.shinoow.abyssalcraft.api.necronomicon.condition.ConditionProcessorRegistry;
 import com.shinoow.abyssalcraft.api.necronomicon.condition.IUnlockCondition;
+
+import net.minecraft.entity.player.EntityPlayer;
 
 public class NecroDataCapability implements INecroDataCapability {
 
 	List<String> biome_triggers = Lists.newArrayList();
 	List<String> entity_triggers = Lists.newArrayList();
 	List<Integer> dimension_triggers = Lists.newArrayList();
+	List<String> artifact_triggers = Lists.newArrayList();
+	List<String> page_triggers = Lists.newArrayList();
+	List<String> whisper_triggers = Lists.newArrayList();
+
+	boolean hasAllKnowledge;
+
+	public static INecroDataCapability getCap(EntityPlayer player){
+		return player.getCapability(NecroDataCapabilityProvider.NECRO_DATA_CAP, null);
+	}
 
 	@Override
-	public boolean isUnlocked(IUnlockCondition cond) {
+	public boolean isUnlocked(IUnlockCondition cond, EntityPlayer player) {
 
-		if(cond.getType() == -1) return true;
-		switch(cond.getType()){
-		case 0:
-			return biome_triggers.contains(cond.getConditionObject());
-		case 1:
-			return entity_triggers.contains(cond.getConditionObject());
-		case 2:
-			return dimension_triggers.contains(cond.getConditionObject());
-		case 3:
-			for(String name : (String[])cond.getConditionObject())
-				if(biome_triggers.contains(name))
-					return true;
-			break;
-		case 4:
-			for(String name : (String[])cond.getConditionObject())
-				if(entity_triggers.contains(name))
-					return true;
-			break;
-		case 5:
-			for(String name : biome_triggers)
-				if(((Predicate<Biome>)cond.getConditionObject()).apply(Biome.REGISTRY.getObject(new ResourceLocation(name))))
-					return true;
-			break;
-
-		case 6:
-			for(String name : entity_triggers)
-				if(((Predicate<Class<? extends Entity>>)cond.getConditionObject()).apply(EntityList.NAME_TO_CLASS.get(name)))
-					return true;
-			break;
-		}
-		return false;
+		if(cond.getType() == -1 || hasAllKnowledge) return true;
+		else return ConditionProcessorRegistry.instance().getProcessor(cond.getType()).processUnlock(cond, this, player);
 	}
 
 	@Override
@@ -83,6 +60,29 @@ public class NecroDataCapability implements INecroDataCapability {
 	}
 
 	@Override
+	public void triggerArtifactUnlock(String name) {
+		if(name != null && !artifact_triggers.contains(name))
+			artifact_triggers.add(name);
+	}
+
+	@Override
+	public void triggerPageUnlock(String name) {
+		if(name != null && !page_triggers.contains(name))
+			page_triggers.add(name);
+	}
+
+	@Override
+	public void triggerWhisperUnlock(String name) {
+		if(name != null && !page_triggers.contains(name))
+			page_triggers.add(name);
+	}
+
+	@Override
+	public void unlockAllKnowledge(boolean unlock) {
+		hasAllKnowledge = unlock;
+	}
+
+	@Override
 	public List<String> getBiomeTriggers() {
 
 		return biome_triggers;
@@ -98,6 +98,29 @@ public class NecroDataCapability implements INecroDataCapability {
 	public List<Integer> getDimensionTriggers() {
 
 		return dimension_triggers;
+	}
+
+	@Override
+	public List<String> getArtifactTriggers() {
+
+		return artifact_triggers;
+	}
+
+	@Override
+	public List<String> getPageTriggers() {
+
+		return page_triggers;
+	}
+
+	@Override
+	public List<String> getWhisperTriggers() {
+
+		return whisper_triggers;
+	}
+
+	@Override
+	public boolean hasUnlockedAllKnowledge(){
+		return hasAllKnowledge;
 	}
 
 	@Override

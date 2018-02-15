@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2017 Shinoow.
+ * Copyright (c) 2012 - 2018 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -15,6 +15,9 @@ import static com.shinoow.abyssalcraft.common.blocks.BlockEnergyRelay.FACING;
 
 import java.util.List;
 import java.util.Random;
+
+import com.shinoow.abyssalcraft.common.blocks.tile.TileEntityEnergyRelay;
+import com.shinoow.abyssalcraft.lib.ACTabs;
 
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.SoundType;
@@ -32,9 +35,6 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-
-import com.shinoow.abyssalcraft.common.blocks.tile.TileEntityEnergyRelay;
-import com.shinoow.abyssalcraft.lib.ACTabs;
 
 public abstract class BlockTieredEnergyRelay extends BlockContainer {
 

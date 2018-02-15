@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2017 Shinoow.
+ * Copyright (c) 2012 - 2018 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -13,6 +13,8 @@ package com.shinoow.abyssalcraft.common.blocks.tile;
 
 import java.util.List;
 
+import com.shinoow.abyssalcraft.api.recipe.MaterializerRecipes;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
@@ -24,8 +26,6 @@ import net.minecraft.util.ITickable;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.util.text.TextComponentTranslation;
-
-import com.shinoow.abyssalcraft.api.recipe.MaterializerRecipes;
 
 public class TileEntityMaterializer extends TileEntity implements ISidedInventory, ITickable {
 

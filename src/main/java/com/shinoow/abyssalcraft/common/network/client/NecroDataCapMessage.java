@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2017 Shinoow.
+ * Copyright (c) 2012 - 2018 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -13,16 +13,14 @@ package com.shinoow.abyssalcraft.common.network.client;
 
 import java.io.IOException;
 
+import com.shinoow.abyssalcraft.api.necronomicon.condition.caps.*;
+import com.shinoow.abyssalcraft.common.network.AbstractMessage.AbstractClientMessage;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.PacketBuffer;
 import net.minecraftforge.fml.common.network.ByteBufUtils;
 import net.minecraftforge.fml.relauncher.Side;
-
-import com.shinoow.abyssalcraft.common.caps.INecroDataCapability;
-import com.shinoow.abyssalcraft.common.caps.NecroDataCapabilityProvider;
-import com.shinoow.abyssalcraft.common.caps.NecroDataCapabilityStorage;
-import com.shinoow.abyssalcraft.common.network.AbstractMessage.AbstractClientMessage;
 
 public class NecroDataCapMessage extends AbstractClientMessage<NecroDataCapMessage> {
 
@@ -31,7 +29,7 @@ public class NecroDataCapMessage extends AbstractClientMessage<NecroDataCapMessa
 	public NecroDataCapMessage() {}
 
 	public NecroDataCapMessage(EntityPlayer player){
-		INecroDataCapability cap = player.getCapability(NecroDataCapabilityProvider.NECRO_DATA_CAP, null);
+		INecroDataCapability cap = NecroDataCapability.getCap(player);
 
 		properties = (NBTTagCompound) NecroDataCapabilityStorage.instance.writeNBT(NecroDataCapabilityProvider.NECRO_DATA_CAP, cap, null);
 	}
@@ -49,7 +47,7 @@ public class NecroDataCapMessage extends AbstractClientMessage<NecroDataCapMessa
 
 	@Override
 	public void process(EntityPlayer player, Side side) {
-		INecroDataCapability cap = player.getCapability(NecroDataCapabilityProvider.NECRO_DATA_CAP, null);
+		INecroDataCapability cap = NecroDataCapability.getCap(player);
 
 		NecroDataCapabilityStorage.instance.readNBT(NecroDataCapabilityProvider.NECRO_DATA_CAP, cap, null, properties);
 	}

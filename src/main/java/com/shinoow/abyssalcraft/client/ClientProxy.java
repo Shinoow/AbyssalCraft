@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2017 Shinoow.
+ * Copyright (c) 2012 - 2018 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -10,6 +10,42 @@
  *     Shinoow -  implementation
  ******************************************************************************/
 package com.shinoow.abyssalcraft.client;
+
+import org.lwjgl.input.Keyboard;
+
+import com.shinoow.abyssalcraft.AbyssalCraft;
+import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
+import com.shinoow.abyssalcraft.api.block.ACBlocks;
+import com.shinoow.abyssalcraft.api.item.ACItems;
+import com.shinoow.abyssalcraft.api.spell.SpellRegistry;
+import com.shinoow.abyssalcraft.client.handlers.AbyssalCraftClientEventHooks;
+import com.shinoow.abyssalcraft.client.lib.LovecraftFont;
+import com.shinoow.abyssalcraft.client.model.block.ModelDGhead;
+import com.shinoow.abyssalcraft.client.model.item.ModelDreadiumSamuraiArmor;
+import com.shinoow.abyssalcraft.client.particles.ACParticleFX;
+import com.shinoow.abyssalcraft.client.particles.PEStreamParticleFX;
+import com.shinoow.abyssalcraft.client.render.block.RenderODB;
+import com.shinoow.abyssalcraft.client.render.block.RenderODBc;
+import com.shinoow.abyssalcraft.client.render.block.TileEntityJzaharSpawnerRenderer;
+import com.shinoow.abyssalcraft.client.render.entity.*;
+import com.shinoow.abyssalcraft.client.render.entity.layers.LayerStarSpawnTentacles;
+import com.shinoow.abyssalcraft.client.render.item.RenderCoraliumArrow;
+import com.shinoow.abyssalcraft.common.CommonProxy;
+import com.shinoow.abyssalcraft.common.blocks.BlockACSlab;
+import com.shinoow.abyssalcraft.common.blocks.BlockCrystalCluster;
+import com.shinoow.abyssalcraft.common.blocks.BlockCrystalCluster.EnumCrystalType;
+import com.shinoow.abyssalcraft.common.blocks.BlockCrystalCluster2;
+import com.shinoow.abyssalcraft.common.blocks.BlockCrystalCluster2.EnumCrystalType2;
+import com.shinoow.abyssalcraft.common.blocks.tile.*;
+import com.shinoow.abyssalcraft.common.entity.*;
+import com.shinoow.abyssalcraft.common.entity.anti.*;
+import com.shinoow.abyssalcraft.common.entity.demon.*;
+import com.shinoow.abyssalcraft.init.BlockHandler;
+import com.shinoow.abyssalcraft.init.ItemHandler;
+import com.shinoow.abyssalcraft.lib.ACLib;
+import com.shinoow.abyssalcraft.lib.client.render.TileEntityAltarBlockRenderer;
+import com.shinoow.abyssalcraft.lib.client.render.TileEntityDirectionalRenderer;
+import com.shinoow.abyssalcraft.lib.client.render.TileEntityPedestalBlockRenderer;
 
 import net.minecraft.block.*;
 import net.minecraft.block.properties.IProperty;
@@ -25,6 +61,7 @@ import net.minecraft.client.renderer.block.statemap.StateMapperBase;
 import net.minecraft.client.renderer.entity.RenderEntityItem;
 import net.minecraft.client.renderer.entity.RenderPlayer;
 import net.minecraft.client.renderer.entity.RenderSnowball;
+import net.minecraft.client.resources.IReloadableResourceManager;
 import net.minecraft.client.settings.KeyBinding;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
@@ -38,38 +75,6 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
-
-import org.lwjgl.input.Keyboard;
-
-import com.shinoow.abyssalcraft.AbyssalCraft;
-import com.shinoow.abyssalcraft.api.block.ACBlocks;
-import com.shinoow.abyssalcraft.api.item.ACItems;
-import com.shinoow.abyssalcraft.api.spell.SpellRegistry;
-import com.shinoow.abyssalcraft.client.handlers.AbyssalCraftClientEventHooks;
-import com.shinoow.abyssalcraft.client.model.block.ModelDGhead;
-import com.shinoow.abyssalcraft.client.model.item.ModelDreadiumSamuraiArmor;
-import com.shinoow.abyssalcraft.client.particles.ACParticleFX;
-import com.shinoow.abyssalcraft.client.particles.PEStreamParticleFX;
-import com.shinoow.abyssalcraft.client.render.block.RenderODB;
-import com.shinoow.abyssalcraft.client.render.block.RenderODBc;
-import com.shinoow.abyssalcraft.client.render.block.TileEntityJzaharSpawnerRenderer;
-import com.shinoow.abyssalcraft.client.render.entity.*;
-import com.shinoow.abyssalcraft.client.render.entity.layers.LayerStarSpawnTentacles;
-import com.shinoow.abyssalcraft.client.render.item.RenderCoraliumArrow;
-import com.shinoow.abyssalcraft.common.CommonProxy;
-import com.shinoow.abyssalcraft.common.blocks.*;
-import com.shinoow.abyssalcraft.common.blocks.BlockCrystalCluster.EnumCrystalType;
-import com.shinoow.abyssalcraft.common.blocks.BlockCrystalCluster2.EnumCrystalType2;
-import com.shinoow.abyssalcraft.common.blocks.tile.*;
-import com.shinoow.abyssalcraft.common.entity.*;
-import com.shinoow.abyssalcraft.common.entity.anti.*;
-import com.shinoow.abyssalcraft.common.entity.demon.*;
-import com.shinoow.abyssalcraft.init.BlockHandler;
-import com.shinoow.abyssalcraft.init.ItemHandler;
-import com.shinoow.abyssalcraft.lib.ACLib;
-import com.shinoow.abyssalcraft.lib.client.render.TileEntityAltarBlockRenderer;
-import com.shinoow.abyssalcraft.lib.client.render.TileEntityDirectionalRenderer;
-import com.shinoow.abyssalcraft.lib.client.render.TileEntityPedestalBlockRenderer;
 
 public class ClientProxy extends CommonProxy {
 
@@ -232,6 +237,9 @@ public class ClientProxy extends CommonProxy {
 
 	@Override
 	public void init(){
+		AbyssalCraftAPI.setAkloFont(new LovecraftFont(Minecraft.getMinecraft().gameSettings, new ResourceLocation("abyssalcraft", "textures/font/aklo.png"), Minecraft.getMinecraft().renderEngine, true));
+		if(Minecraft.getMinecraft().getResourceManager() instanceof IReloadableResourceManager)
+			((IReloadableResourceManager)Minecraft.getMinecraft().getResourceManager()).registerReloadListener(AbyssalCraftAPI.getAkloFont());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityDGhead.class, new TileEntityDirectionalRenderer(new ModelDGhead(), "abyssalcraft:textures/model/depths_ghoul.png"));
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityPhead.class, new TileEntityDirectionalRenderer(new ModelDGhead(), "abyssalcraft:textures/model/depths_ghoul_pete.png"));
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityWhead.class, new TileEntityDirectionalRenderer(new ModelDGhead(), "abyssalcraft:textures/model/depths_ghoul_wilson.png"));

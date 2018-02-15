@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2017 Shinoow.
+ * Copyright (c) 2012 - 2018 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -12,6 +12,34 @@
 package com.shinoow.abyssalcraft.common.handlers;
 
 import java.util.Random;
+
+import org.apache.commons.lang3.StringUtils;
+
+import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
+import com.shinoow.abyssalcraft.api.biome.ACBiomes;
+import com.shinoow.abyssalcraft.api.biome.IDarklandsBiome;
+import com.shinoow.abyssalcraft.api.block.ACBlocks;
+import com.shinoow.abyssalcraft.api.entity.*;
+import com.shinoow.abyssalcraft.api.event.ACEvents.RitualEvent;
+import com.shinoow.abyssalcraft.api.item.ACItems;
+import com.shinoow.abyssalcraft.api.item.ItemUpgradeKit;
+import com.shinoow.abyssalcraft.api.recipe.UpgradeKitRecipes;
+import com.shinoow.abyssalcraft.api.ritual.*;
+import com.shinoow.abyssalcraft.common.caps.NecromancyCapability;
+import com.shinoow.abyssalcraft.common.caps.NecromancyCapabilityProvider;
+import com.shinoow.abyssalcraft.common.entity.EntityJzahar;
+import com.shinoow.abyssalcraft.common.entity.demon.*;
+import com.shinoow.abyssalcraft.common.items.ItemCrystalBag;
+import com.shinoow.abyssalcraft.common.items.ItemNecronomicon;
+import com.shinoow.abyssalcraft.common.ritual.NecronomiconBreedingRitual;
+import com.shinoow.abyssalcraft.common.ritual.NecronomiconDreadSpawnRitual;
+import com.shinoow.abyssalcraft.init.BlockHandler;
+import com.shinoow.abyssalcraft.init.InitHandler;
+import com.shinoow.abyssalcraft.lib.ACAchievements;
+import com.shinoow.abyssalcraft.lib.ACConfig;
+import com.shinoow.abyssalcraft.lib.ACLib;
+import com.shinoow.abyssalcraft.lib.util.SpecialTextUtil;
+import com.shinoow.abyssalcraft.lib.world.TeleporterDarkRealm;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockStairs;
@@ -48,33 +76,6 @@ import net.minecraftforge.event.terraingen.PopulateChunkEvent;
 import net.minecraftforge.fml.common.eventhandler.Event.Result;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent;
-
-import org.apache.commons.lang3.StringUtils;
-
-import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
-import com.shinoow.abyssalcraft.api.biome.ACBiomes;
-import com.shinoow.abyssalcraft.api.biome.IDarklandsBiome;
-import com.shinoow.abyssalcraft.api.block.ACBlocks;
-import com.shinoow.abyssalcraft.api.entity.*;
-import com.shinoow.abyssalcraft.api.event.ACEvents.RitualEvent;
-import com.shinoow.abyssalcraft.api.item.ACItems;
-import com.shinoow.abyssalcraft.api.item.ItemUpgradeKit;
-import com.shinoow.abyssalcraft.api.recipe.UpgradeKitRecipes;
-import com.shinoow.abyssalcraft.api.ritual.*;
-import com.shinoow.abyssalcraft.common.caps.NecromancyCapabilityProvider;
-import com.shinoow.abyssalcraft.common.entity.EntityJzahar;
-import com.shinoow.abyssalcraft.common.entity.demon.*;
-import com.shinoow.abyssalcraft.common.items.ItemCrystalBag;
-import com.shinoow.abyssalcraft.common.items.ItemNecronomicon;
-import com.shinoow.abyssalcraft.common.ritual.NecronomiconBreedingRitual;
-import com.shinoow.abyssalcraft.common.ritual.NecronomiconDreadSpawnRitual;
-import com.shinoow.abyssalcraft.init.BlockHandler;
-import com.shinoow.abyssalcraft.init.InitHandler;
-import com.shinoow.abyssalcraft.lib.ACAchievements;
-import com.shinoow.abyssalcraft.lib.ACConfig;
-import com.shinoow.abyssalcraft.lib.ACLib;
-import com.shinoow.abyssalcraft.lib.util.SpecialTextUtil;
-import com.shinoow.abyssalcraft.lib.world.TeleporterDarkRealm;
 
 public class AbyssalCraftEventHooks {
 
@@ -397,13 +398,13 @@ public class AbyssalCraftEventHooks {
 			EntityLivingBase e = event.getEntityLiving();
 			if(((IEntityOwnable)e).getOwner() instanceof EntityPlayer && e.hasCustomName()){
 				EntityPlayer p = (EntityPlayer)((IEntityOwnable) e).getOwner();
-				p.getCapability(NecromancyCapabilityProvider.NECROMANCY_CAP, null).storeData(e.getName(), e.serializeNBT(), calculateSize(e.height));
+				NecromancyCapability.getCap(p).storeData(e.getName(), e.serializeNBT(), calculateSize(e.height));
 			}
 		} else if(event.getEntityLiving() instanceof EntityHorse){
 			EntityHorse h = (EntityHorse)event.getEntityLiving();
 			if(h.isTame() && h.hasCustomName()){
 				EntityPlayer p = h.worldObj.getPlayerEntityByUUID(h.getOwnerUniqueId());
-				p.getCapability(NecromancyCapabilityProvider.NECROMANCY_CAP, null).storeData(h.getName(), h.serializeNBT(), calculateSize(h.height));
+				NecromancyCapability.getCap(p).storeData(h.getName(), h.serializeNBT(), calculateSize(h.height));
 			}
 		} else if(EntityList.getEntityString(event.getEntityLiving()) != null){
 			EntityLivingBase e = event.getEntityLiving();
@@ -524,6 +525,6 @@ public class AbyssalCraftEventHooks {
 
 	@SubscribeEvent
 	public void onClonePlayer(Clone event) {
-		event.getEntityPlayer().getCapability(NecromancyCapabilityProvider.NECROMANCY_CAP, null).copy(event.getOriginal().getCapability(NecromancyCapabilityProvider.NECROMANCY_CAP, null));
+		NecromancyCapability.getCap(event.getEntityPlayer()).copy(NecromancyCapability.getCap(event.getOriginal()));
 	}
 }

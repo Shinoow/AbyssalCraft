@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2017 Shinoow.
+ * Copyright (c) 2012 - 2018 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -15,6 +15,23 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
+import org.lwjgl.input.Keyboard;
+
+import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
+import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
+import com.shinoow.abyssalcraft.api.item.ACItems;
+import com.shinoow.abyssalcraft.api.necronomicon.GuiInstance;
+import com.shinoow.abyssalcraft.api.necronomicon.NecroData;
+import com.shinoow.abyssalcraft.api.necronomicon.NecroData.Chapter;
+import com.shinoow.abyssalcraft.api.necronomicon.NecroData.Page;
+import com.shinoow.abyssalcraft.api.necronomicon.condition.IUnlockCondition;
+import com.shinoow.abyssalcraft.api.necronomicon.condition.NecronomiconCondition;
+import com.shinoow.abyssalcraft.client.gui.necronomicon.buttons.ButtonCategory;
+import com.shinoow.abyssalcraft.client.gui.necronomicon.buttons.ButtonNextPage;
+import com.shinoow.abyssalcraft.lib.NecronomiconResources;
+import com.shinoow.abyssalcraft.lib.NecronomiconText;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.GuiButton;
@@ -22,7 +39,6 @@ import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.texture.DynamicTexture;
 import net.minecraft.client.resources.I18n;
-import net.minecraft.client.resources.IReloadableResourceManager;
 import net.minecraft.item.Item;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.ResourceLocation;
@@ -30,23 +46,6 @@ import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.LoaderState;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-
-import org.lwjgl.input.Keyboard;
-
-import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
-import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
-import com.shinoow.abyssalcraft.api.item.ACItems;
-import com.shinoow.abyssalcraft.api.necronomicon.*;
-import com.shinoow.abyssalcraft.api.necronomicon.NecroData.Chapter;
-import com.shinoow.abyssalcraft.api.necronomicon.NecroData.Page;
-import com.shinoow.abyssalcraft.api.necronomicon.condition.IUnlockCondition;
-import com.shinoow.abyssalcraft.api.necronomicon.condition.NecronomiconCondition;
-import com.shinoow.abyssalcraft.client.gui.necronomicon.buttons.ButtonCategory;
-import com.shinoow.abyssalcraft.client.gui.necronomicon.buttons.ButtonNextPage;
-import com.shinoow.abyssalcraft.client.lib.LovecraftFont;
-import com.shinoow.abyssalcraft.lib.NecronomiconResources;
-import com.shinoow.abyssalcraft.lib.NecronomiconText;
 
 @SideOnly(Side.CLIENT)
 public class GuiNecronomicon extends GuiScreen {
@@ -78,14 +77,9 @@ public class GuiNecronomicon extends GuiScreen {
 	protected boolean isInvalid;
 	public static final Map<String, DynamicTexture> successcache = Maps.newHashMap();
 	public static final List<String> failcache = Lists.newArrayList();
-	protected FontRenderer test;
 	private static Chapter patreon;
 
-	public GuiNecronomicon(){
-		test = new LovecraftFont(Minecraft.getMinecraft().gameSettings, new ResourceLocation("abyssalcraft", "textures/font/aklo.png"), Minecraft.getMinecraft().renderEngine, true);
-		if(Minecraft.getMinecraft().getResourceManager() instanceof IReloadableResourceManager)
-			((IReloadableResourceManager)Minecraft.getMinecraft().getResourceManager()).registerReloadListener(test);
-	}
+	public GuiNecronomicon(){}
 
 	public GuiNecronomicon(int par1){
 		this();
@@ -128,7 +122,6 @@ public class GuiNecronomicon extends GuiScreen {
 	 * Adds the buttons (and other controls) to the screen in question.
 	 */
 	@Override
-	@SuppressWarnings("unchecked")
 	public void initGui()
 	{
 		currentNecro = this;
@@ -238,8 +231,8 @@ public class GuiNecronomicon extends GuiScreen {
 					@Override public IUnlockCondition getCondition() { return new NecronomiconCondition(1); }
 					@Override public GuiScreen getOpenGui(int bookType, GuiScreen parent) { return new GuiNecronomiconMachines(bookType, (GuiNecronomicon) parent); }
 				}, AbyssalCraftAPI.getInternalNDHandler().getInternalNecroData("overworld"), AbyssalCraftAPI.getInternalNDHandler().getInternalNecroData("abyssalwasteland"),
-				AbyssalCraftAPI.getInternalNDHandler().getInternalNecroData("dreadlands"), AbyssalCraftAPI.getInternalNDHandler().getInternalNecroData("omothol"),
-				AbyssalCraftAPI.getInternalNDHandler().getInternalNecroData("darkrealm"));
+					AbyssalCraftAPI.getInternalNDHandler().getInternalNecroData("dreadlands"), AbyssalCraftAPI.getInternalNDHandler().getInternalNecroData("omothol"),
+					AbyssalCraftAPI.getInternalNDHandler().getInternalNecroData("darkrealm"));
 
 				mc.displayGuiScreen(new GuiNecronomiconEntry(bookType, data, this));
 			} else if (button.id == 4)
@@ -280,7 +273,6 @@ public class GuiNecronomicon extends GuiScreen {
 
 	}
 
-	@SuppressWarnings("unchecked")
 	private void drawButtons(){
 		buttonList.clear();
 		buttonList.add(buttonDone = new GuiButton(0, width / 2 - 100, 4 + guiHeight, 200, 20, I18n.format("gui.done", new Object[0])));
@@ -458,7 +450,7 @@ public class GuiNecronomicon extends GuiScreen {
 
 	public FontRenderer getFontRenderer(boolean aklo){
 		if(aklo)
-			return test;
+			return AbyssalCraftAPI.getAkloFont();
 		return fontRendererObj;
 	}
 
