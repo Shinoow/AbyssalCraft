@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2017 Shinoow.
+ * Copyright (c) 2012 - 2018 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -13,11 +13,15 @@ package com.shinoow.abyssalcraft.common.items;
 
 import java.util.List;
 
+import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
+import com.shinoow.abyssalcraft.api.block.ACBlocks;
+import com.shinoow.abyssalcraft.lib.ACLib;
+import com.shinoow.abyssalcraft.lib.ACTabs;
+
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumFacing;
@@ -30,20 +34,14 @@ import net.minecraft.util.text.translation.I18n;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.client.FMLClientHandler;
 
-import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
-import com.shinoow.abyssalcraft.api.block.ACBlocks;
-import com.shinoow.abyssalcraft.lib.ACLib;
-import com.shinoow.abyssalcraft.lib.ACTabs;
-
-public class ItemPortalPlacer extends Item {
+public class ItemPortalPlacer extends ItemACBasic {
 
 	private final int key;
 
 	public ItemPortalPlacer(int key, String unlocalizedName){
-		super();
+		super(unlocalizedName);
 		this.key = key;
 		maxStackSize = 1;
-		setUnlocalizedName(unlocalizedName);
 		setCreativeTab(ACTabs.tabTools);
 	}
 
@@ -67,7 +65,6 @@ public class ItemPortalPlacer extends Item {
 	}
 
 	@Override
-	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public void addInformation(ItemStack par1ItemStack, World entityplayer, List list, ITooltipFlag is){
 		list.add(I18n.translateToLocal("tooltip.portalplacer.1"));
 		list.add(I18n.translateToLocal("tooltip.portalplacer.2"));

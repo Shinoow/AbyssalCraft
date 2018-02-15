@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2017 Shinoow.
+ * Copyright (c) 2012 - 2018 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -12,6 +12,16 @@
 package com.shinoow.abyssalcraft.common.entity;
 
 import java.util.UUID;
+
+import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
+import com.shinoow.abyssalcraft.api.block.ACBlocks;
+import com.shinoow.abyssalcraft.api.entity.EntityUtil;
+import com.shinoow.abyssalcraft.api.entity.IOmotholEntity;
+import com.shinoow.abyssalcraft.api.item.ACItems;
+import com.shinoow.abyssalcraft.common.blocks.BlockShoggothOoze;
+import com.shinoow.abyssalcraft.common.entity.demon.EntityDemonPig;
+import com.shinoow.abyssalcraft.common.world.gen.WorldGenShoggothMonolith;
+import com.shinoow.abyssalcraft.lib.*;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -40,18 +50,10 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeModContainer;
+import net.minecraftforge.fml.common.Optional.Interface;
 
-import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
-import com.shinoow.abyssalcraft.api.block.ACBlocks;
-import com.shinoow.abyssalcraft.api.entity.EntityUtil;
-import com.shinoow.abyssalcraft.api.entity.IOmotholEntity;
-import com.shinoow.abyssalcraft.api.item.ACItems;
-import com.shinoow.abyssalcraft.common.blocks.BlockShoggothOoze;
-import com.shinoow.abyssalcraft.common.entity.demon.EntityDemonPig;
-import com.shinoow.abyssalcraft.common.world.gen.WorldGenShoggothMonolith;
-import com.shinoow.abyssalcraft.lib.*;
-
-public class EntityLesserShoggoth extends EntityMob implements IOmotholEntity {
+@Interface(iface = "com.github.alexthe666.iceandfire.entity.IBlacklistedFromStatues", modid = "iceandfire")
+public class EntityLesserShoggoth extends EntityMob implements IOmotholEntity, com.github.alexthe666.iceandfire.entity.IBlacklistedFromStatues {
 
 	private static final DataParameter<Byte> CLIMBING = EntityDataManager.<Byte>createKey(EntityLesserShoggoth.class, DataSerializers.BYTE);
 	private static final DataParameter<Byte> CHILD = EntityDataManager.createKey(EntityLesserShoggoth.class, DataSerializers.BYTE);
@@ -137,7 +139,7 @@ public class EntityLesserShoggoth extends EntityMob implements IOmotholEntity {
 		super.onUpdate();
 
 		if (!world.isRemote)
-			setBesideClimbableBlock(isCollidedHorizontally);
+			setBesideClimbableBlock(collidedHorizontally);
 	}
 
 	@Override

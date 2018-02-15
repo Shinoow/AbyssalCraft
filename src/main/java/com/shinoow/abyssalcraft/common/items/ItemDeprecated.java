@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2017 Shinoow.
+ * Copyright (c) 2012 - 2018 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -37,7 +37,6 @@ public class ItemDeprecated extends Item {
 		return TextFormatting.STRIKETHROUGH + super.getItemStackDisplayName(par1ItemStack);
 	}
 
-	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
 	public void addInformation(ItemStack is, World player, List l, ITooltipFlag B)
 	{
@@ -46,7 +45,6 @@ public class ItemDeprecated extends Item {
 	}
 
 	@Override
-	@SuppressWarnings("rawtypes")
 	public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, EnumHand hand) {
 
 		ItemStack stack = player.getHeldItem(hand);

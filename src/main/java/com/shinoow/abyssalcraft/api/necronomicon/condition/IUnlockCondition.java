@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2017 Shinoow.
+ * Copyright (c) 2012 - 2018 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -33,8 +33,10 @@ public interface IUnlockCondition {
 	public Object getConditionObject();
 
 	/**
-	 * Internal number used for casting the Condition Object<br>
-	 * when checking if the condition has been met
+	 * Integer associated with the {@link IConditionProcessor}<br>
+	 * used to check if the condition has been met.<br>
+	 * Be sure to register one in {@link ConditionProcessorRegistr}<br>
+	 * when adding your own Unlock Conditions
 	 */
 	public int getType();
 }

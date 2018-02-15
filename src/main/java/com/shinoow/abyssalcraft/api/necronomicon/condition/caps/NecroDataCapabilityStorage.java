@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2017 Shinoow.
+ * Copyright (c) 2012 - 2018 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -9,7 +9,7 @@
  * Contributors:
  *     Shinoow -  implementation
  ******************************************************************************/
-package com.shinoow.abyssalcraft.common.caps;
+package com.shinoow.abyssalcraft.api.necronomicon.condition.caps;
 
 import net.minecraft.nbt.*;
 import net.minecraft.util.EnumFacing;
@@ -43,6 +43,23 @@ public class NecroDataCapabilityStorage implements IStorage<INecroDataCapability
 		for(int id : instance.getDimensionTriggers())
 			l.appendTag(new NBTTagInt(id));
 		properties.setTag("dimensionTriggers", l);
+		l = new NBTTagList();
+		for(String name : instance.getArtifactTriggers())
+			if(name != null)
+				l.appendTag(new NBTTagString(name));
+		properties.setTag("artifactTriggers", l);
+		l = new NBTTagList();
+		for(String name : instance.getPageTriggers())
+			if(name != null)
+				l.appendTag(new NBTTagString(name));
+		properties.setTag("pageTriggers", l);
+		l = new NBTTagList();
+		for(String name : instance.getWhisperTriggers())
+			if(name != null)
+				l.appendTag(new NBTTagString(name));
+		properties.setTag("whisperTriggers", l);
+		if(instance.hasUnlockedAllKnowledge())
+			properties.setBoolean("HasAllKnowledge", true);
 
 		return properties;
 	}
@@ -64,6 +81,16 @@ public class NecroDataCapabilityStorage implements IStorage<INecroDataCapability
 		for(int i = 0; i < l.tagCount(); i++)
 			if(DimensionManager.isDimensionRegistered(l.getIntAt(i)))
 				instance.triggerDimensionUnlock(l.getIntAt(i));
+		l = properties.getTagList("artifactTriggers", 8);
+		for(int i = 0; i < l.tagCount(); i++)
+			instance.triggerArtifactUnlock(l.getStringTagAt(i));
+		l = properties.getTagList("pageTriggers", 8);
+		for(int i = 0; i < l.tagCount(); i++)
+			instance.triggerPageUnlock(l.getStringTagAt(i));
+		l = properties.getTagList("whisperTriggers", 8);
+		for(int i = 0; i < l.tagCount(); i++)
+			instance.triggerWhisperUnlock(l.getStringTagAt(i));
+		instance.unlockAllKnowledge(properties.getBoolean("HasAllKnowledge"));
 	}
 
 }

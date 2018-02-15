@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2017 Shinoow.
+ * Copyright (c) 2012 - 2018 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -12,6 +12,16 @@
 package com.shinoow.abyssalcraft.common.items;
 
 import java.util.List;
+
+import javax.annotation.Nullable;
+
+import com.shinoow.abyssalcraft.api.APIUtils;
+import com.shinoow.abyssalcraft.api.item.ACItems;
+import com.shinoow.abyssalcraft.api.item.IUnlockableItem;
+import com.shinoow.abyssalcraft.api.necronomicon.condition.DefaultCondition;
+import com.shinoow.abyssalcraft.api.necronomicon.condition.IUnlockCondition;
+import com.shinoow.abyssalcraft.common.entity.EntityCoraliumArrow;
+import com.shinoow.abyssalcraft.lib.ACTabs;
 
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.enchantment.EnchantmentHelper;
@@ -28,18 +38,17 @@ import net.minecraft.util.text.TextFormatting;
 import net.minecraft.util.text.translation.I18n;
 import net.minecraft.world.World;
 import net.minecraftforge.event.ForgeEventFactory;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
-import com.shinoow.abyssalcraft.api.item.ACItems;
-import com.shinoow.abyssalcraft.common.entity.EntityCoraliumArrow;
-import com.shinoow.abyssalcraft.lib.ACTabs;
-
-public class ItemCoraliumBow extends ItemBow {
+public class ItemCoraliumBow extends ItemBow implements IUnlockableItem {
 
 	public float charge;
 
 	public int anim_0;
 	public int anim_1;
 	public int anim_2;
+	private IUnlockCondition condition = new DefaultCondition();
 	/**
 	 * @param texture is String of item texture, ie itemName.png
 	 * 		also sets the UnlocalizedName to avoid render issues
@@ -90,7 +99,6 @@ public class ItemCoraliumBow extends ItemBow {
 	}
 
 	@Override
-	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public void addInformation(ItemStack par1ItemStack, World entityplayer, List list, ITooltipFlag is){
 		list.add(I18n.translateToLocal("tooltip.corbow.1"));
 		list.add(I18n.translateToLocal("tooltip.corbow.2"));
@@ -147,7 +155,7 @@ public class ItemCoraliumBow extends ItemBow {
 					if (!par2World.isRemote)
 					{
 						EntityCoraliumArrow entityarrow = new EntityCoraliumArrow(par2World, player);
-						entityarrow.setAim(player, player.rotationPitch, player.rotationYaw, 0.0F, f * 3.0F, 1.0F);
+						entityarrow.shoot(player, player.rotationPitch, player.rotationYaw, 0.0F, f * 3.0F, 1.0F);
 
 						if (f == 1.0F)
 							entityarrow.setIsCritical(true);
@@ -242,5 +250,25 @@ public class ItemCoraliumBow extends ItemBow {
 	public boolean getIsRepairable(ItemStack par1ItemStack, ItemStack par2ItemStack)
 	{
 		return ACItems.refined_coralium_ingot == par2ItemStack.getItem() ? true : super.getIsRepairable(par1ItemStack, par2ItemStack);
+	}
+
+	@Override
+	public Item setUnlockCondition(IUnlockCondition condition) {
+		this.condition = condition;
+		return this;
+	}
+
+	@Override
+	public IUnlockCondition getUnlockCondition(ItemStack stack) {
+
+		return condition;
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	@Nullable
+	public net.minecraft.client.gui.FontRenderer getFontRenderer(ItemStack stack)
+	{
+		return APIUtils.getFontRenderer(stack);
 	}
 }

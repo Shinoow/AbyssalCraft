@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2017 Shinoow.
+ * Copyright (c) 2012 - 2018 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -12,6 +12,12 @@
 package com.shinoow.abyssalcraft.api.item;
 
 import java.util.List;
+
+import javax.annotation.Nullable;
+
+import com.shinoow.abyssalcraft.api.APIUtils;
+import com.shinoow.abyssalcraft.api.necronomicon.condition.DefaultCondition;
+import com.shinoow.abyssalcraft.api.necronomicon.condition.IUnlockCondition;
 
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.item.Item;
@@ -29,7 +35,9 @@ import net.minecraftforge.fml.relauncher.SideOnly;
  *
  * @since 1.0
  */
-public class ItemUpgradeKit extends Item {
+public class ItemUpgradeKit extends Item implements IUnlockableItem {
+
+	private IUnlockCondition condition = new DefaultCondition();
 
 	public final String typeName;
 	public final String typeName2;
@@ -49,9 +57,28 @@ public class ItemUpgradeKit extends Item {
 	}
 
 	@Override
-	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@SideOnly(Side.CLIENT)
 	public void addInformation(ItemStack is, World player, List<String> l, ITooltipFlag B){
 		l.add(typeName + " To " + typeName2);
+	}
+
+	@Override
+	public Item setUnlockCondition(IUnlockCondition condition) {
+		this.condition = condition;
+		return this;
+	}
+
+	@Override
+	public IUnlockCondition getUnlockCondition(ItemStack stack) {
+
+		return condition;
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	@Nullable
+	public net.minecraft.client.gui.FontRenderer getFontRenderer(ItemStack stack)
+	{
+		return APIUtils.getFontRenderer(stack);
 	}
 }

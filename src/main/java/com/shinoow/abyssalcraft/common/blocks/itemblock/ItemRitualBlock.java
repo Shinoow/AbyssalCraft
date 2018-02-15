@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2017 Shinoow.
+ * Copyright (c) 2012 - 2018 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -12,9 +12,8 @@
 package com.shinoow.abyssalcraft.common.blocks.itemblock;
 
 import net.minecraft.block.Block;
-import net.minecraft.item.ItemBlock;
 
-public class ItemRitualBlock extends ItemBlock {
+public class ItemRitualBlock extends ItemBlockAC {
 
 	public ItemRitualBlock(Block b) {
 		super(b);

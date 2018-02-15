@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2017 Shinoow.
+ * Copyright (c) 2012 - 2018 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -13,6 +13,13 @@ package com.shinoow.abyssalcraft.common.entity;
 
 import java.util.Iterator;
 import java.util.List;
+
+import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
+import com.shinoow.abyssalcraft.api.entity.EntityUtil;
+import com.shinoow.abyssalcraft.api.entity.ICoraliumEntity;
+import com.shinoow.abyssalcraft.api.item.ACItems;
+import com.shinoow.abyssalcraft.lib.ACConfig;
+import com.shinoow.abyssalcraft.lib.ACLoot;
 
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -28,13 +35,6 @@ import net.minecraft.util.*;
 import net.minecraft.util.math.*;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
-
-import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
-import com.shinoow.abyssalcraft.api.entity.EntityUtil;
-import com.shinoow.abyssalcraft.api.entity.ICoraliumEntity;
-import com.shinoow.abyssalcraft.api.item.ACItems;
-import com.shinoow.abyssalcraft.lib.ACConfig;
-import com.shinoow.abyssalcraft.lib.ACLoot;
 
 public class EntityDragonMinion extends EntityMob implements IEntityMultiPart, ICoraliumEntity
 {
@@ -247,7 +247,7 @@ public class EntityDragonMinion extends EntityMob implements IEntityMultiPart, I
 					targetZ += rand.nextGaussian() * 2.0D;
 				}
 
-				if (forceNewTarget || d2 < 100.0D || d2 > 22500.0D || isCollidedHorizontally || isCollidedVertically)
+				if (forceNewTarget || d2 < 100.0D || d2 > 22500.0D || collidedHorizontally || collidedVertically)
 					setNewTarget();
 
 				d0 /= MathHelper.sqrt(d3 * d3 + d1 * d1);
@@ -432,7 +432,7 @@ public class EntityDragonMinion extends EntityMob implements IEntityMultiPart, I
 			while (iterator.hasNext())
 			{
 				EntityDragonBoss entitydragonboss1 = (EntityDragonBoss)iterator.next();
-				double d1 = entitydragonboss1.getDistanceSqToEntity(this);
+				double d1 = entitydragonboss1.getDistanceSq(this);
 
 				if (d1 < d0)
 				{

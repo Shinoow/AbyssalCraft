@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2017 Shinoow.
+ * Copyright (c) 2012 - 2018 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -12,6 +12,11 @@
 package com.shinoow.abyssalcraft.common.world;
 
 import java.util.Random;
+
+import com.shinoow.abyssalcraft.api.biome.IDarklandsBiome;
+import com.shinoow.abyssalcraft.api.block.ACBlocks;
+import com.shinoow.abyssalcraft.common.structures.StructureShoggothPit;
+import com.shinoow.abyssalcraft.lib.ACConfig;
 
 import net.minecraft.block.material.Material;
 import net.minecraft.init.Biomes;
@@ -25,11 +30,6 @@ import net.minecraft.world.gen.feature.WorldGenMinable;
 import net.minecraftforge.common.BiomeDictionary;
 import net.minecraftforge.common.BiomeDictionary.Type;
 import net.minecraftforge.fml.common.IWorldGenerator;
-
-import com.shinoow.abyssalcraft.api.biome.IDarklandsBiome;
-import com.shinoow.abyssalcraft.api.block.ACBlocks;
-import com.shinoow.abyssalcraft.common.structures.StructureShoggothPit;
-import com.shinoow.abyssalcraft.lib.ACConfig;
 
 public class AbyssalCraftWorldGenerator implements IWorldGenerator {
 

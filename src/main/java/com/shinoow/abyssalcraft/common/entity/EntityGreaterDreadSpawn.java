@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2017 Shinoow.
+ * Copyright (c) 2012 - 2018 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -12,6 +12,14 @@
 package com.shinoow.abyssalcraft.common.entity;
 
 import java.util.List;
+
+import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
+import com.shinoow.abyssalcraft.api.entity.EntityUtil;
+import com.shinoow.abyssalcraft.api.entity.IDreadEntity;
+import com.shinoow.abyssalcraft.api.item.ACItems;
+import com.shinoow.abyssalcraft.lib.ACConfig;
+import com.shinoow.abyssalcraft.lib.ACLoot;
+import com.shinoow.abyssalcraft.lib.ACSounds;
 
 import net.minecraft.block.Block;
 import net.minecraft.entity.*;
@@ -32,14 +40,6 @@ import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
-
-import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
-import com.shinoow.abyssalcraft.api.entity.EntityUtil;
-import com.shinoow.abyssalcraft.api.entity.IDreadEntity;
-import com.shinoow.abyssalcraft.api.item.ACItems;
-import com.shinoow.abyssalcraft.lib.ACConfig;
-import com.shinoow.abyssalcraft.lib.ACLoot;
-import com.shinoow.abyssalcraft.lib.ACSounds;
 
 public class EntityGreaterDreadSpawn extends EntityMob implements IDreadEntity, IRangedAttackMob {
 
@@ -118,7 +118,7 @@ public class EntityGreaterDreadSpawn extends EntityMob implements IDreadEntity, 
 		super.onUpdate();
 
 		if (!world.isRemote)
-			setBesideClimbableBlock(isCollidedHorizontally);
+			setBesideClimbableBlock(collidedHorizontally);
 	}
 
 	@Override
@@ -208,7 +208,7 @@ public class EntityGreaterDreadSpawn extends EntityMob implements IDreadEntity, 
 		super.onLivingUpdate();
 
 		if(getAttackTarget() != null)
-			if(getDistanceSqToEntity(getAttackTarget()) > 15D || getAttackTarget() instanceof EntityFlying || getAttackTarget().posY > posY + 4D){
+			if(getDistanceSq(getAttackTarget()) > 15D || getAttackTarget() instanceof EntityFlying || getAttackTarget().posY > posY + 4D){
 				tasks.addTask(2, arrowAttack);
 				tasks.removeTask(attackOnCollide);
 			} else {
@@ -261,7 +261,7 @@ public class EntityGreaterDreadSpawn extends EntityMob implements IDreadEntity, 
 		double d1 = p_82196_1_.posY + p_82196_1_.getEyeHeight() - 1.100000023841858D - entitydreadslug.posY;
 		double d2 = p_82196_1_.posZ - posZ;
 		float f1 = MathHelper.sqrt(d0 * d0 + d2 * d2) * 0.2F;
-		entitydreadslug.setThrowableHeading(d0, d1 + f1, d2, 1.6F, 12.0F);
+		entitydreadslug.shoot(d0, d1 + f1, d2, 1.6F, 12.0F);
 		playSound(SoundEvents.ENTITY_SKELETON_SHOOT, 1.0F, 1.0F / (getRNG().nextFloat() * 0.4F + 0.8F));
 		world.spawnEntity(entitydreadslug);
 	}

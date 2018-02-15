@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2017 Shinoow.
+ * Copyright (c) 2012 - 2018 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -15,13 +15,6 @@ import java.io.IOException;
 import java.util.*;
 import java.util.Map.Entry;
 
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.texture.TextureUtil;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.fml.common.FMLCommonHandler;
-import net.minecraftforge.fml.common.FMLLog;
-
 import org.apache.commons.lang3.StringUtils;
 import org.apache.logging.log4j.Level;
 
@@ -31,6 +24,13 @@ import com.google.common.collect.Maps;
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
 import com.shinoow.abyssalcraft.api.necronomicon.condition.DefaultCondition;
 import com.shinoow.abyssalcraft.api.necronomicon.condition.IUnlockCondition;
+
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.texture.TextureUtil;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.fml.common.FMLCommonHandler;
+import net.minecraftforge.fml.common.FMLLog;
 
 /**
  * Base data structure for Necronomicon information pages

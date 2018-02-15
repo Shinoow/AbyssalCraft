@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2017 Shinoow.
+ * Copyright (c) 2012 - 2018 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -11,14 +11,14 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.client.gui;
 
+import com.shinoow.abyssalcraft.common.blocks.tile.TileEntityTransmutator;
+import com.shinoow.abyssalcraft.common.inventory.ContainerTransmutator;
+
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.util.ResourceLocation;
-
-import com.shinoow.abyssalcraft.common.blocks.tile.TileEntityTransmutator;
-import com.shinoow.abyssalcraft.common.inventory.ContainerTransmutator;
 
 public class GuiTransmutator extends GuiContainer {
 

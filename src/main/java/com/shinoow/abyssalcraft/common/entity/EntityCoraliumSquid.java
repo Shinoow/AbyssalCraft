@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2017 Shinoow.
+ * Copyright (c) 2012 - 2018 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -10,6 +10,10 @@
  *     Shinoow -  implementation
  ******************************************************************************/
 package com.shinoow.abyssalcraft.common.entity;
+
+import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
+import com.shinoow.abyssalcraft.api.entity.EntityUtil;
+import com.shinoow.abyssalcraft.api.entity.ICoraliumEntity;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -21,10 +25,6 @@ import net.minecraft.init.SoundEvents;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
-
-import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
-import com.shinoow.abyssalcraft.api.entity.EntityUtil;
-import com.shinoow.abyssalcraft.api.entity.ICoraliumEntity;
 
 public class EntityCoraliumSquid extends EntitySquid implements ICoraliumEntity, IRangedAttackMob {
 
@@ -55,7 +55,7 @@ public class EntityCoraliumSquid extends EntitySquid implements ICoraliumEntity,
 		if(player != null && !player.capabilities.isCreativeMode)
 			setAttackTarget(player);
 
-		if(getAttackTarget() != null && getAttackTarget() instanceof EntityPlayer && getDistanceToEntity(getAttackTarget()) > 8)
+		if(getAttackTarget() != null && getAttackTarget() instanceof EntityPlayer && getDistance(getAttackTarget()) > 8)
 			setAttackTarget(null);
 	}
 
@@ -67,7 +67,7 @@ public class EntityCoraliumSquid extends EntitySquid implements ICoraliumEntity,
 		double d1 = target.posY + target.getEyeHeight() - 1.100000023841858D - entityinkprojectile.posY;
 		double d2 = target.posZ - posZ;
 		float f1 = MathHelper.sqrt(d0 * d0 + d2 * d2) * 0.2F;
-		entityinkprojectile.setThrowableHeading(d0, d1 + f1, d2, 1.6F, 12.0F);
+		entityinkprojectile.shoot(d0, d1 + f1, d2, 1.6F, 12.0F);
 		playSound(SoundEvents.ENTITY_SQUID_AMBIENT, 1.0F, 1.0F / (getRNG().nextFloat() * 0.4F + 0.8F));
 		world.spawnEntity(entityinkprojectile);
 	}

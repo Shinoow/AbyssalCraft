@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2017 Shinoow.
+ * Copyright (c) 2012 - 2018 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -13,6 +13,12 @@ package com.shinoow.abyssalcraft.api.energy;
 
 import java.util.List;
 
+import com.google.common.collect.Lists;
+import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
+import com.shinoow.abyssalcraft.api.energy.EnergyEnum.AmplifierType;
+import com.shinoow.abyssalcraft.api.energy.EnergyEnum.DeityType;
+import com.shinoow.abyssalcraft.api.entity.EntityUtil;
+
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -24,12 +30,6 @@ import net.minecraft.util.ITickable;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-
-import com.google.common.collect.Lists;
-import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
-import com.shinoow.abyssalcraft.api.energy.EnergyEnum.AmplifierType;
-import com.shinoow.abyssalcraft.api.energy.EnergyEnum.DeityType;
-import com.shinoow.abyssalcraft.api.entity.EntityUtil;
 
 /**
  * Backbone for handling interactions between<br>

@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2017 Shinoow.
+ * Copyright (c) 2012 - 2018 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -14,6 +14,16 @@ package com.shinoow.abyssalcraft.common.entity;
 import java.util.Calendar;
 import java.util.List;
 import java.util.UUID;
+
+import com.google.common.base.Predicate;
+import com.google.common.base.Predicates;
+import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
+import com.shinoow.abyssalcraft.api.entity.EntityUtil;
+import com.shinoow.abyssalcraft.api.entity.IDreadEntity;
+import com.shinoow.abyssalcraft.api.item.ACItems;
+import com.shinoow.abyssalcraft.lib.ACConfig;
+import com.shinoow.abyssalcraft.lib.ACLoot;
+import com.shinoow.abyssalcraft.lib.ACSounds;
 
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.*;
@@ -34,16 +44,6 @@ import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-
-import com.google.common.base.Predicate;
-import com.google.common.base.Predicates;
-import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
-import com.shinoow.abyssalcraft.api.entity.EntityUtil;
-import com.shinoow.abyssalcraft.api.entity.IDreadEntity;
-import com.shinoow.abyssalcraft.api.item.ACItems;
-import com.shinoow.abyssalcraft.lib.ACConfig;
-import com.shinoow.abyssalcraft.lib.ACLoot;
-import com.shinoow.abyssalcraft.lib.ACSounds;
 
 public class EntityDreadguard extends EntityMob implements IDreadEntity {
 
@@ -168,7 +168,7 @@ public class EntityDreadguard extends EntityMob implements IDreadEntity {
 	public void onLivingUpdate()
 	{
 
-		if (getAttackTarget() != null && getDistanceSqToEntity(getAttackTarget()) <= 64D && flameShootTimer <= -200) flameShootTimer = 60;
+		if (getAttackTarget() != null && getDistanceSq(getAttackTarget()) <= 64D && flameShootTimer <= -200) flameShootTimer = 60;
 
 		if (flameShootTimer > 0)
 		{
@@ -183,17 +183,17 @@ public class EntityDreadguard extends EntityMob implements IDreadEntity {
 				List<EntityLivingBase> list = world.getEntitiesWithinAABB(EntityLivingBase.class, target.getEntityBoundingBox().grow(2.0D, 2.0D, 2.0D), Predicates.and(new Predicate[] { EntitySelectors.IS_ALIVE }));
 
 				for(EntityLivingBase entity : list)
-					if (entity != null && rand.nextInt(3) == 0) if (entity.attackEntityFrom(AbyssalCraftAPI.dread, (float)(4.5D - getDistanceToEntity(entity))))
+					if (entity != null && rand.nextInt(3) == 0) if (entity.attackEntityFrom(AbyssalCraftAPI.dread, (float)(4.5D - getDistance(entity))))
 					{
 						entity.addPotionEffect(new PotionEffect(AbyssalCraftAPI.dread_plague, 100));
-						entity.setFire((int)(5 - getDistanceToEntity(entity)));
+						entity.setFire((int)(5 - getDistance(entity)));
 					}
 
-				if (target.attackEntityFrom(AbyssalCraftAPI.dread, (float)(4.5D - getDistanceToEntity(target))))
+				if (target.attackEntityFrom(AbyssalCraftAPI.dread, (float)(4.5D - getDistance(target))))
 				{
 					if (target instanceof EntityLivingBase)
 						((EntityLivingBase) target).addPotionEffect(new PotionEffect(AbyssalCraftAPI.dread_plague, 100));
-					target.setFire((int)(5 - getDistanceToEntity(target)));
+					target.setFire((int)(5 - getDistance(target)));
 				}
 			}
 		}

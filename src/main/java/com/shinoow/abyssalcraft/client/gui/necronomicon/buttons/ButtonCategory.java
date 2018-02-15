@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2017 Shinoow.
+ * Copyright (c) 2012 - 2018 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -11,17 +11,17 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.client.gui.necronomicon.buttons;
 
+import com.shinoow.abyssalcraft.api.item.ACItems;
+import com.shinoow.abyssalcraft.client.gui.necronomicon.GuiNecronomicon;
+import com.shinoow.abyssalcraft.client.lib.GuiRenderHelper;
+import com.shinoow.abyssalcraft.lib.NecronomiconText;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
-
-import com.shinoow.abyssalcraft.api.item.ACItems;
-import com.shinoow.abyssalcraft.client.gui.necronomicon.GuiNecronomicon;
-import com.shinoow.abyssalcraft.client.lib.GuiRenderHelper;
-import com.shinoow.abyssalcraft.lib.NecronomiconText;
 
 public class ButtonCategory extends GuiButton {
 

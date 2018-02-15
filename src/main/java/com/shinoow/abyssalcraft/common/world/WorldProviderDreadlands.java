@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2017 Shinoow.
+ * Copyright (c) 2012 - 2018 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -11,6 +11,9 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.common.world;
 
+import com.shinoow.abyssalcraft.client.render.sky.ACSkyRenderer;
+import com.shinoow.abyssalcraft.lib.ACLib;
+
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.DimensionType;
@@ -18,9 +21,6 @@ import net.minecraft.world.WorldProvider;
 import net.minecraft.world.gen.IChunkGenerator;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-
-import com.shinoow.abyssalcraft.client.render.sky.ACSkyRenderer;
-import com.shinoow.abyssalcraft.lib.ACLib;
 
 public class WorldProviderDreadlands extends WorldProvider {
 

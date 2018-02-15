@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2017 Shinoow.
+ * Copyright (c) 2012 - 2018 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -11,14 +11,14 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.common.inventory;
 
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.inventory.*;
-import net.minecraft.item.ItemStack;
-
+import com.shinoow.abyssalcraft.api.necronomicon.condition.caps.NecroDataCapability;
 import com.shinoow.abyssalcraft.api.spell.Spell;
 import com.shinoow.abyssalcraft.api.spell.SpellRegistry;
 import com.shinoow.abyssalcraft.common.items.ItemNecronomicon;
+
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.*;
+import net.minecraft.item.ItemStack;
 
 public class ContainerSpellbook extends Container {
 
@@ -26,10 +26,12 @@ public class ContainerSpellbook extends Container {
 	private final InventorySpellbookOutput output = new InventorySpellbookOutput();
 	public ItemStack book;
 	public Spell currentSpell;
+	private EntityPlayer user;
 
-	public ContainerSpellbook(InventoryPlayer inventoryPlayer, ItemStack book)
+	public ContainerSpellbook(EntityPlayer player, ItemStack book)
 	{
 		inventory = new InventorySpellbook(this, book);
+		user = player;
 		this.book = book;
 		int i = (8 - 4) * 18 - 1;
 		int j;
@@ -45,10 +47,10 @@ public class ContainerSpellbook extends Container {
 
 		for (j = 0; j < 3; ++j)
 			for (k = 0; k < 9; ++k)
-				addSlotToContainer(new Slot(inventoryPlayer, k + j * 9 + 9, 8 + k * 18, 103 + j * 18 + i));
+				addSlotToContainer(new Slot(player.inventory, k + j * 9 + 9, 8 + k * 18, 103 + j * 18 + i));
 
 		for (j = 0; j < 9; ++j)
-			addSlotToContainer(new Slot(inventoryPlayer, j, 8 + j * 18, 161 + i));
+			addSlotToContainer(new Slot(player.inventory, j, 8 + j * 18, 161 + i));
 	}
 
 	@Override
@@ -70,7 +72,11 @@ public class ContainerSpellbook extends Container {
 
 		output.spell = currentSpell = SpellRegistry.instance().getSpell(((ItemNecronomicon) book.getItem()).getBookType(), stack, stacks);
 
-		output.setInventorySlotContents(0, currentSpell != null ? SpellRegistry.instance().inscribeSpell(currentSpell, stack) : ItemStack.EMPTY);
+		output.setInventorySlotContents(0, currentSpell != null && isUnlocked(currentSpell) ? SpellRegistry.instance().inscribeSpell(currentSpell, stack) : ItemStack.EMPTY);
+	}
+
+	public boolean isUnlocked(Spell spell){
+		return NecroDataCapability.getCap(user).isUnlocked(spell.getUnlockCondition(), user);
 	}
 
 	@Override

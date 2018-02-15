@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2017 Shinoow.
+ * Copyright (c) 2012 - 2018 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -11,12 +11,11 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.common.world;
 
+import java.util.Random;
+
 import it.unimi.dsi.fastutil.longs.Long2ObjectMap;
 import it.unimi.dsi.fastutil.longs.Long2ObjectOpenHashMap;
 import it.unimi.dsi.fastutil.objects.ObjectIterator;
-
-import java.util.Random;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockPortal;
 import net.minecraft.block.state.IBlockState;
@@ -86,7 +85,6 @@ public class TeleporterAC extends Teleporter
 		}
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public boolean placeInExistingPortal(Entity entityIn, float p_180620_2_) {
 		double d0 = -1.0D;
@@ -397,7 +395,6 @@ public class TeleporterAC extends Teleporter
 		return true;
 	}
 
-	@SuppressWarnings("rawtypes")
 	@Override
 	public void removeStalePortalLocations(long worldTime)
 	{

@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2017 Shinoow.
+ * Copyright (c) 2012 - 2018 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -18,6 +18,16 @@ import static net.minecraftforge.event.terraingen.PopulateChunkEvent.Populate.Ev
 import java.util.List;
 import java.util.Random;
 
+import com.shinoow.abyssalcraft.api.block.ACBlocks;
+import com.shinoow.abyssalcraft.common.structures.StructureShoggothPit;
+import com.shinoow.abyssalcraft.common.structures.abyss.Abyruin;
+import com.shinoow.abyssalcraft.common.structures.abyss.Chains;
+import com.shinoow.abyssalcraft.common.structures.abyss.stronghold.MapGenAbyStronghold;
+import com.shinoow.abyssalcraft.common.world.gen.MapGenCavesAC;
+import com.shinoow.abyssalcraft.common.world.gen.MapGenRavineAC;
+import com.shinoow.abyssalcraft.common.world.gen.WorldGenAbyLake;
+import com.shinoow.abyssalcraft.lib.ACConfig;
+
 import net.minecraft.block.BlockFalling;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.EnumCreatureType;
@@ -32,16 +42,6 @@ import net.minecraft.world.chunk.ChunkPrimer;
 import net.minecraft.world.gen.*;
 import net.minecraftforge.event.ForgeEventFactory;
 import net.minecraftforge.event.terraingen.TerrainGen;
-
-import com.shinoow.abyssalcraft.api.block.ACBlocks;
-import com.shinoow.abyssalcraft.common.structures.StructureShoggothPit;
-import com.shinoow.abyssalcraft.common.structures.abyss.Abyruin;
-import com.shinoow.abyssalcraft.common.structures.abyss.Chains;
-import com.shinoow.abyssalcraft.common.structures.abyss.stronghold.MapGenAbyStronghold;
-import com.shinoow.abyssalcraft.common.world.gen.MapGenCavesAC;
-import com.shinoow.abyssalcraft.common.world.gen.MapGenRavineAC;
-import com.shinoow.abyssalcraft.common.world.gen.WorldGenAbyLake;
-import com.shinoow.abyssalcraft.lib.ACConfig;
 
 public class ChunkProviderAbyss implements IChunkGenerator
 {
@@ -389,7 +389,6 @@ public class ChunkProviderAbyss implements IChunkGenerator
 	 * Returns a list of creatures of the specified type that can spawn at the given location.
 	 */
 	@Override
-	@SuppressWarnings("rawtypes")
 	public List getPossibleCreatures(EnumCreatureType par1EnumCreatureType, BlockPos pos)
 	{
 		Biome biome = worldObj.getBiome(pos);

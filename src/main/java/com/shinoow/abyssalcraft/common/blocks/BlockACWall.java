@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2017 Shinoow.
+ * Copyright (c) 2012 - 2018 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -11,6 +11,8 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.common.blocks;
 
+import com.shinoow.abyssalcraft.lib.ACTabs;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockWall;
 import net.minecraft.block.material.MapColor;
@@ -20,8 +22,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
-
-import com.shinoow.abyssalcraft.lib.ACTabs;
 
 public class BlockACWall extends BlockWall{
 
@@ -45,7 +45,6 @@ public class BlockACWall extends BlockWall{
 		return mapColor;
 	}
 
-	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
 	public void getSubBlocks(CreativeTabs par2CreativeTabs, NonNullList<ItemStack> par3List)
 	{

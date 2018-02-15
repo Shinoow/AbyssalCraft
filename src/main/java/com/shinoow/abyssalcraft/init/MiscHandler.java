@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2017 Shinoow.
+ * Copyright (c) 2012 - 2018 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -20,8 +20,41 @@ import java.util.Stack;
 
 import javax.annotation.Nonnull;
 
+import com.google.common.base.Predicate;
+import com.google.gson.JsonObject;
+import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
+import com.shinoow.abyssalcraft.api.AbyssalCraftAPI.FuelType;
+import com.shinoow.abyssalcraft.api.block.ACBlocks;
+import com.shinoow.abyssalcraft.api.item.ACItems;
+import com.shinoow.abyssalcraft.api.necronomicon.NecroData;
+import com.shinoow.abyssalcraft.api.necronomicon.condition.ConditionProcessorRegistry;
+import com.shinoow.abyssalcraft.api.necronomicon.condition.caps.INecroDataCapability;
+import com.shinoow.abyssalcraft.api.necronomicon.condition.caps.NecroDataCapability;
+import com.shinoow.abyssalcraft.api.necronomicon.condition.caps.NecroDataCapabilityStorage;
+import com.shinoow.abyssalcraft.common.AbyssalCrafting;
+import com.shinoow.abyssalcraft.common.blocks.BlockCrystalCluster.EnumCrystalType;
+import com.shinoow.abyssalcraft.common.blocks.BlockCrystalCluster2.EnumCrystalType2;
+import com.shinoow.abyssalcraft.common.caps.INecromancyCapability;
+import com.shinoow.abyssalcraft.common.caps.NecromancyCapability;
+import com.shinoow.abyssalcraft.common.caps.NecromancyCapabilityStorage;
+import com.shinoow.abyssalcraft.common.enchantments.EnchantmentIronWall;
+import com.shinoow.abyssalcraft.common.enchantments.EnchantmentLightPierce;
+import com.shinoow.abyssalcraft.common.enchantments.EnchantmentWeaponInfusion;
+import com.shinoow.abyssalcraft.common.handlers.CrystalFuelHandler;
+import com.shinoow.abyssalcraft.common.handlers.FurnaceFuelHandler;
+import com.shinoow.abyssalcraft.common.network.PacketDispatcher;
+import com.shinoow.abyssalcraft.common.potion.PotionAntimatter;
+import com.shinoow.abyssalcraft.common.potion.PotionCplague;
+import com.shinoow.abyssalcraft.common.potion.PotionDplague;
+import com.shinoow.abyssalcraft.common.util.ACLogger;
+import com.shinoow.abyssalcraft.common.util.ShapedNBTRecipe;
+import com.shinoow.abyssalcraft.lib.ACLib;
+import com.shinoow.abyssalcraft.lib.util.NecroDataJsonUtil;
+
 import net.minecraft.block.Block;
 import net.minecraft.enchantment.Enchantment;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityList;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.init.PotionTypes;
@@ -33,6 +66,7 @@ import net.minecraft.potion.*;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
+import net.minecraft.world.biome.Biome;
 import net.minecraft.world.storage.loot.*;
 import net.minecraft.world.storage.loot.conditions.LootCondition;
 import net.minecraft.world.storage.loot.functions.LootFunction;
@@ -47,35 +81,12 @@ import net.minecraftforge.event.LootTableLoadEvent;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.event.*;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 import net.minecraftforge.oredict.ShapelessOreRecipe;
 import net.minecraftforge.registries.IForgeRegistry;
-
-import com.google.gson.JsonObject;
-import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
-import com.shinoow.abyssalcraft.api.AbyssalCraftAPI.FuelType;
-import com.shinoow.abyssalcraft.api.block.ACBlocks;
-import com.shinoow.abyssalcraft.api.item.ACItems;
-import com.shinoow.abyssalcraft.api.necronomicon.NecroData;
-import com.shinoow.abyssalcraft.common.AbyssalCrafting;
-import com.shinoow.abyssalcraft.common.blocks.BlockCrystalCluster.EnumCrystalType;
-import com.shinoow.abyssalcraft.common.blocks.BlockCrystalCluster2.EnumCrystalType2;
-import com.shinoow.abyssalcraft.common.caps.*;
-import com.shinoow.abyssalcraft.common.enchantments.EnchantmentIronWall;
-import com.shinoow.abyssalcraft.common.enchantments.EnchantmentLightPierce;
-import com.shinoow.abyssalcraft.common.enchantments.EnchantmentWeaponInfusion;
-import com.shinoow.abyssalcraft.common.handlers.CrystalFuelHandler;
-import com.shinoow.abyssalcraft.common.handlers.FurnaceFuelHandler;
-import com.shinoow.abyssalcraft.common.network.PacketDispatcher;
-import com.shinoow.abyssalcraft.common.potion.PotionAntimatter;
-import com.shinoow.abyssalcraft.common.potion.PotionCplague;
-import com.shinoow.abyssalcraft.common.potion.PotionDplague;
-import com.shinoow.abyssalcraft.common.util.ACLogger;
-import com.shinoow.abyssalcraft.common.util.ShapedNBTRecipe;
-import com.shinoow.abyssalcraft.lib.ACLib;
-import com.shinoow.abyssalcraft.lib.util.NecroDataJsonUtil;
 
 public class MiscHandler implements ILifeCycleHandler {
 
@@ -178,8 +189,39 @@ public class MiscHandler implements ILifeCycleHandler {
 		antiplayer_hurt = registerSoundEvent("antiplayer.hurt");
 		dreadguard_barf = registerSoundEvent("dreadguard.barf");
 
-		CapabilityManager.INSTANCE.register(INecroDataCapability.class, NecroDataCapabilityStorage.instance, NecroDataCapability.class);
-		CapabilityManager.INSTANCE.register(INecromancyCapability.class, NecromancyCapabilityStorage.instance, NecromancyCapability.class);
+		CapabilityManager.INSTANCE.register(INecroDataCapability.class, NecroDataCapabilityStorage.instance, NecroDataCapability::new);
+		CapabilityManager.INSTANCE.register(INecromancyCapability.class, NecromancyCapabilityStorage.instance, NecromancyCapability::new);
+
+		ConditionProcessorRegistry.instance().registerProcessor(0, (condition, cap, player) -> { return cap.getBiomeTriggers().contains(condition.getConditionObject()); });
+		ConditionProcessorRegistry.instance().registerProcessor(1, (condition, cap, player) -> { return cap.getEntityTriggers().contains(condition.getConditionObject()); });
+		ConditionProcessorRegistry.instance().registerProcessor(2, (condition, cap, player) -> { return cap.getDimensionTriggers().contains(condition.getConditionObject()); });
+		ConditionProcessorRegistry.instance().registerProcessor(3, (condition, cap, player) -> {
+			for(String name : (String[])condition.getConditionObject())
+				if(cap.getBiomeTriggers().contains(name))
+					return true;
+			return false;
+		});
+		ConditionProcessorRegistry.instance().registerProcessor(4, (condition, cap, player) -> {
+			for(String name : (String[])condition.getConditionObject())
+				if(cap.getEntityTriggers().contains(name))
+					return true;
+			return false;
+		});
+		ConditionProcessorRegistry.instance().registerProcessor(5, (condition, cap, player) -> {
+			for(String name : cap.getBiomeTriggers())
+				if(((Predicate<Biome>)condition.getConditionObject()).apply(ForgeRegistries.BIOMES.getValue(new ResourceLocation(name))))
+					return true;
+			return false;
+		});
+		ConditionProcessorRegistry.instance().registerProcessor(6, (condition, cap, player) -> {
+			for(String name : cap.getEntityTriggers())
+				if(((Predicate<Class<? extends Entity>>)condition.getConditionObject()).apply(EntityList.getClass(new ResourceLocation(name))))
+					return true;
+			return false;
+		});
+		ConditionProcessorRegistry.instance().registerProcessor(7, (condition, cap, player) -> { return cap.getArtifactTriggers().contains(condition.getConditionObject()); });
+		ConditionProcessorRegistry.instance().registerProcessor(8, (condition, cap, player) -> { return cap.getPageTriggers().contains(condition.getConditionObject()); });
+		ConditionProcessorRegistry.instance().registerProcessor(9, (condition, cap, player) -> { return cap.getWhisperTriggers().contains(condition.getConditionObject()); });
 
 		addDungeonHooks();
 		sendIMC();

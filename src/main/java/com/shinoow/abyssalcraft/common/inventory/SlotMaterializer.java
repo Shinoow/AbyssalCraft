@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2017 Shinoow.
+ * Copyright (c) 2012 - 2018 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -11,15 +11,13 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.common.inventory;
 
+import com.shinoow.abyssalcraft.api.event.ACEvents;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.MinecraftForge;
-
-import com.shinoow.abyssalcraft.api.event.ACEvents;
-import com.shinoow.abyssalcraft.api.recipe.MaterializerRecipes;
-import com.shinoow.abyssalcraft.common.blocks.tile.TileEntityMaterializer;
 
 public class SlotMaterializer extends Slot
 {
@@ -68,12 +66,14 @@ public class SlotMaterializer extends Slot
 	@Override
 	protected void onCrafting(ItemStack par1ItemStack)
 	{
-		if(inventory instanceof TileEntityMaterializer){
-			par1ItemStack.onCrafting(thePlayer.world, thePlayer, stackSize);
-
-			MinecraftForge.EVENT_BUS.post(new ACEvents.ItemMaterializedEvent(thePlayer, par1ItemStack));
-
-			MaterializerRecipes.instance().processMaterialization(par1ItemStack, inventory.getStackInSlot(0));
-		}
+		//		if(inventory instanceof InventoryMaterializer)
+		//			decrStackSize(1);
+		//		if(inventory instanceof TileEntityMaterializer){
+		//			par1ItemStack.onCrafting(thePlayer.world, thePlayer, stackSize);
+		//
+		//			MinecraftForge.EVENT_BUS.post(new ACEvents.ItemMaterializedEvent(thePlayer, par1ItemStack));
+		//
+		//			MaterializerRecipes.instance().processMaterialization(par1ItemStack, inventory.getStackInSlot(0));
+		//		}
 	}
 }

@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2017 Shinoow.
+ * Copyright (c) 2012 - 2018 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -12,6 +12,12 @@
 package com.shinoow.abyssalcraft.common.entity.anti;
 
 import java.util.Calendar;
+
+import com.shinoow.abyssalcraft.api.entity.IAntiEntity;
+import com.shinoow.abyssalcraft.api.item.ACItems;
+import com.shinoow.abyssalcraft.common.entity.ai.EntityAIAttackRangedBowAnti;
+import com.shinoow.abyssalcraft.lib.ACConfig;
+import com.shinoow.abyssalcraft.lib.ACLoot;
 
 import net.minecraft.block.Block;
 import net.minecraft.enchantment.EnchantmentHelper;
@@ -38,12 +44,6 @@ import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-
-import com.shinoow.abyssalcraft.api.entity.IAntiEntity;
-import com.shinoow.abyssalcraft.api.item.ACItems;
-import com.shinoow.abyssalcraft.common.entity.ai.EntityAIAttackRangedBowAnti;
-import com.shinoow.abyssalcraft.lib.ACConfig;
-import com.shinoow.abyssalcraft.lib.ACLoot;
 
 public class EntityAntiSkeleton extends EntityMob implements IRangedAttackMob, IAntiEntity {
 
@@ -203,7 +203,7 @@ public class EntityAntiSkeleton extends EntityMob implements IRangedAttackMob, I
 		double d1 = par1EntityLivingBase.getEntityBoundingBox().minY + par1EntityLivingBase.height / 3.0F - entityarrow.posY;
 		double d2 = par1EntityLivingBase.posZ - posZ;
 		double d3 = MathHelper.sqrt(d0 * d0 + d2 * d2);
-		entityarrow.setThrowableHeading(d0, d1 + d3 * 0.20000000298023224D, d2, 1.6F, 14 - world.getDifficulty().getDifficultyId() * 4);
+		entityarrow.shoot(d0, d1 + d3 * 0.20000000298023224D, d2, 1.6F, 14 - world.getDifficulty().getDifficultyId() * 4);
 		int i = EnchantmentHelper.getMaxEnchantmentLevel(Enchantments.POWER, this);
 		int j = EnchantmentHelper.getMaxEnchantmentLevel(Enchantments.PUNCH, this);
 		entityarrow.setDamage(par2 * 2.0F + rand.nextGaussian() * 0.25D + world.getDifficulty().getDifficultyId() * 0.11F);

@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2017 Shinoow.
+ * Copyright (c) 2012 - 2018 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -10,6 +10,9 @@
  *     Shinoow -  implementation
  ******************************************************************************/
 package com.shinoow.abyssalcraft.common.blocks.tile;
+
+import com.shinoow.abyssalcraft.api.energy.IEnergyContainer;
+import com.shinoow.abyssalcraft.api.energy.IEnergyContainerItem;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
@@ -23,9 +26,6 @@ import net.minecraft.util.ITickable;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentTranslation;
-
-import com.shinoow.abyssalcraft.api.energy.IEnergyContainer;
-import com.shinoow.abyssalcraft.api.energy.IEnergyContainerItem;
 
 public class TileEntityEnergyContainer extends TileEntity implements IEnergyContainer, ITickable, IInventory {
 

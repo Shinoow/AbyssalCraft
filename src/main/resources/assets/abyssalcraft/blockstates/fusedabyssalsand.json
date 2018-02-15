@@ -10,6 +10,11 @@
 		}
 	},
 	"variants": {
-		"normal": { "model": "grass" }
+		"normal": [
+			{ "model": "grass" },
+			{ "model": "grass", "y": 90 },
+			{ "model": "grass", "y": 180 },
+			{ "model": "grass", "y": 270 }
+		]
 	}
 }

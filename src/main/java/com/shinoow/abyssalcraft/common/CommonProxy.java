@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2017 Shinoow.
+ * Copyright (c) 2012 - 2018 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -10,6 +10,13 @@
  *     Shinoow -  implementation
  ******************************************************************************/
 package com.shinoow.abyssalcraft.common;
+
+import com.shinoow.abyssalcraft.client.gui.*;
+import com.shinoow.abyssalcraft.client.gui.necronomicon.GuiNecronomicon;
+import com.shinoow.abyssalcraft.common.blocks.tile.*;
+import com.shinoow.abyssalcraft.common.inventory.*;
+import com.shinoow.abyssalcraft.common.items.ItemNecronomicon;
+import com.shinoow.abyssalcraft.lib.ACLib;
 
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.entity.player.EntityPlayer;
@@ -21,13 +28,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.IGuiHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
-
-import com.shinoow.abyssalcraft.client.gui.*;
-import com.shinoow.abyssalcraft.client.gui.necronomicon.GuiNecronomicon;
-import com.shinoow.abyssalcraft.common.blocks.tile.*;
-import com.shinoow.abyssalcraft.common.inventory.*;
-import com.shinoow.abyssalcraft.common.items.ItemNecronomicon;
-import com.shinoow.abyssalcraft.lib.ACLib;
 
 public class CommonProxy implements IGuiHandler {
 
@@ -77,7 +77,7 @@ public class CommonProxy implements IGuiHandler {
 				return new ContainerCrystalBag(player.inventory, new InventoryCrystalBag(stack));
 			case ACLib.necronomiconspellbookGuiID:
 				if(stack.getItem() instanceof ItemNecronomicon && ((ItemNecronomicon)stack.getItem()).isOwner(player, stack))
-					return new ContainerSpellbook(player.inventory, stack);
+					return new ContainerSpellbook(player, stack);
 			}
 		return null;
 	}
@@ -132,7 +132,7 @@ public class CommonProxy implements IGuiHandler {
 				return new GuiCrystalBag(new ContainerCrystalBag(player.inventory, new InventoryCrystalBag(stack)));
 			case ACLib.necronomiconspellbookGuiID:
 				if(stack.getItem() instanceof ItemNecronomicon && ((ItemNecronomicon)stack.getItem()).isOwner(player, stack))
-					return new GuiSpellbook(new ContainerSpellbook(player.inventory, stack));
+					return new GuiSpellbook(new ContainerSpellbook(player, stack));
 			}
 		return null;
 	}

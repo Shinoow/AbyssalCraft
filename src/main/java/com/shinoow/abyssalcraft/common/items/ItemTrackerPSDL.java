@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2017 Shinoow.
+ * Copyright (c) 2012 - 2018 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -11,9 +11,11 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.common.items;
 
+import com.shinoow.abyssalcraft.api.block.ACBlocks;
+import com.shinoow.abyssalcraft.common.entity.EntityPSDLTracker;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
@@ -21,15 +23,10 @@ import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
 
-import com.shinoow.abyssalcraft.api.block.ACBlocks;
-import com.shinoow.abyssalcraft.common.entity.EntityPSDLTracker;
-import com.shinoow.abyssalcraft.lib.ACTabs;
-
-public class ItemTrackerPSDL extends Item {
+public class ItemTrackerPSDL extends ItemACBasic {
 
 	public ItemTrackerPSDL() {
-		setUnlocalizedName("powerstonetracker");
-		setCreativeTab(ACTabs.tabItems);
+		super("powerstonetracker");
 	}
 
 	@Override

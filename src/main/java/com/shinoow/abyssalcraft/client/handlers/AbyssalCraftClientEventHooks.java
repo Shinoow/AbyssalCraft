@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2017 Shinoow.
+ * Copyright (c) 2012 - 2018 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -13,6 +13,26 @@ package com.shinoow.abyssalcraft.client.handlers;
 
 import java.util.List;
 import java.util.Map;
+
+import org.lwjgl.input.Mouse;
+
+import com.google.common.collect.Maps;
+import com.shinoow.abyssalcraft.api.block.ACBlocks;
+import com.shinoow.abyssalcraft.api.energy.IEnergyContainerItem;
+import com.shinoow.abyssalcraft.api.item.ACItems;
+import com.shinoow.abyssalcraft.api.item.IUnlockableItem;
+import com.shinoow.abyssalcraft.api.necronomicon.condition.caps.NecroDataCapability;
+import com.shinoow.abyssalcraft.client.ClientProxy;
+import com.shinoow.abyssalcraft.common.blocks.*;
+import com.shinoow.abyssalcraft.common.blocks.BlockCrystalCluster.EnumCrystalType;
+import com.shinoow.abyssalcraft.common.blocks.BlockCrystalCluster2.EnumCrystalType2;
+import com.shinoow.abyssalcraft.common.blocks.BlockTieredEnergyPedestal.EnumDimType;
+import com.shinoow.abyssalcraft.common.network.PacketDispatcher;
+import com.shinoow.abyssalcraft.common.network.server.FireMessage;
+import com.shinoow.abyssalcraft.common.network.server.StaffModeMessage;
+import com.shinoow.abyssalcraft.init.BlockHandler;
+import com.shinoow.abyssalcraft.init.ItemHandler;
+import com.shinoow.abyssalcraft.lib.ACLib;
 
 import net.minecraft.block.*;
 import net.minecraft.block.properties.IProperty;
@@ -39,6 +59,7 @@ import net.minecraftforge.client.event.FOVUpdateEvent;
 import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.client.event.MouseEvent;
 import net.minecraftforge.client.model.ModelLoader;
+import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.fml.client.FMLClientHandler;
 import net.minecraftforge.fml.common.eventhandler.Event;
 import net.minecraftforge.fml.common.eventhandler.EventPriority;
@@ -46,23 +67,6 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.InputEvent.KeyInputEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-
-import org.lwjgl.input.Mouse;
-
-import com.google.common.collect.Maps;
-import com.shinoow.abyssalcraft.api.block.ACBlocks;
-import com.shinoow.abyssalcraft.api.item.ACItems;
-import com.shinoow.abyssalcraft.client.ClientProxy;
-import com.shinoow.abyssalcraft.common.blocks.*;
-import com.shinoow.abyssalcraft.common.blocks.BlockCrystalCluster.EnumCrystalType;
-import com.shinoow.abyssalcraft.common.blocks.BlockCrystalCluster2.EnumCrystalType2;
-import com.shinoow.abyssalcraft.common.blocks.BlockTieredEnergyPedestal.EnumDimType;
-import com.shinoow.abyssalcraft.common.network.PacketDispatcher;
-import com.shinoow.abyssalcraft.common.network.server.FireMessage;
-import com.shinoow.abyssalcraft.common.network.server.StaffModeMessage;
-import com.shinoow.abyssalcraft.init.BlockHandler;
-import com.shinoow.abyssalcraft.init.ItemHandler;
-import com.shinoow.abyssalcraft.lib.ACLib;
 
 public class AbyssalCraftClientEventHooks {
 
@@ -113,7 +117,7 @@ public class AbyssalCraftClientEventHooks {
 				world.getBlockState(pos).getBlock() == ACBlocks.omothol_fire)
 			if (event instanceof MouseEvent) {
 				PacketDispatcher.sendToServer(new FireMessage(pos));
-				PacketDispatcher.sendToAllAround(new FireMessage(pos), player, 30);
+				player.swingArm(EnumHand.MAIN_HAND);
 				event.setCanceled(true);
 			}
 	}
@@ -148,7 +152,6 @@ public class AbyssalCraftClientEventHooks {
 					lookvec.z * var2);
 			Entity pointedEntity = null;
 			float var9 = 1.0F;
-			@SuppressWarnings("unchecked")
 			List<Entity> list = mc.world.getEntitiesWithinAABBExcludingEntity(
 					theRenderViewEntity,
 					theViewBoundingBox.expand(
@@ -227,6 +230,19 @@ public class AbyssalCraftClientEventHooks {
 
 			if(mode1 > -1 || mode2 > -1)
 				PacketDispatcher.sendToServer(new StaffModeMessage());
+		}
+	}
+
+	@SubscribeEvent
+	public void tooltipStuff(ItemTooltipEvent event){
+		ItemStack stack = event.getItemStack();
+
+		if(stack.getItem() instanceof IEnergyContainerItem)
+			event.getToolTip().add(1, String.format("%d/%d PE", (int)((IEnergyContainerItem)stack.getItem()).getContainedEnergy(stack), ((IEnergyContainerItem)stack.getItem()).getMaxEnergy(stack)));
+
+		if(stack.getItem() instanceof IUnlockableItem && event.getEntityPlayer() != null && !NecroDataCapability.getCap(event.getEntityPlayer()).isUnlocked(((IUnlockableItem)stack.getItem()).getUnlockCondition(stack), event.getEntityPlayer())){
+			event.getToolTip().remove(0);
+			event.getToolTip().add(0, "Lorem ipsum");
 		}
 	}
 

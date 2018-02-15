@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2017 Shinoow.
+ * Copyright (c) 2012 - 2018 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -14,9 +14,18 @@ package com.shinoow.abyssalcraft.init;
 import static com.shinoow.abyssalcraft.AbyssalCraft.instance;
 import static com.shinoow.abyssalcraft.lib.ACConfig.*;
 
+import java.lang.reflect.Field;
+import java.lang.reflect.Modifier;
 import java.util.Locale;
 
+import com.shinoow.abyssalcraft.api.biome.ACBiomes;
+import com.shinoow.abyssalcraft.api.entity.EntityUtil;
+import com.shinoow.abyssalcraft.common.entity.*;
+import com.shinoow.abyssalcraft.common.entity.anti.*;
+import com.shinoow.abyssalcraft.common.entity.demon.*;
+
 import net.minecraft.entity.*;
+import net.minecraft.entity.ai.attributes.RangedAttribute;
 import net.minecraft.entity.passive.EntityAmbientCreature;
 import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.passive.EntityWaterMob;
@@ -27,12 +36,7 @@ import net.minecraftforge.common.BiomeDictionary;
 import net.minecraftforge.common.BiomeDictionary.Type;
 import net.minecraftforge.fml.common.event.*;
 import net.minecraftforge.fml.common.registry.EntityRegistry;
-
-import com.shinoow.abyssalcraft.api.biome.ACBiomes;
-import com.shinoow.abyssalcraft.api.entity.EntityUtil;
-import com.shinoow.abyssalcraft.common.entity.*;
-import com.shinoow.abyssalcraft.common.entity.anti.*;
-import com.shinoow.abyssalcraft.common.entity.demon.*;
+import net.minecraftforge.fml.relauncher.ReflectionHelper;
 
 public class EntityHandler implements ILifeCycleHandler {
 
@@ -40,6 +44,16 @@ public class EntityHandler implements ILifeCycleHandler {
 
 	@Override
 	public void preInit(FMLPreInitializationEvent event) {
+
+		if(SharedMonsterAttributes.MAX_HEALTH.clampValue(Integer.MAX_VALUE) <= 2000)
+			try{
+				Field f = ReflectionHelper.findField(RangedAttribute.class, "maximumValue", "field_111118_b");
+				Field modifiersField = Field.class.getDeclaredField("modifiers");
+				modifiersField.setAccessible(true);
+				modifiersField.setInt(f, f.getModifiers() & ~Modifier.FINAL);
+				f.set(SharedMonsterAttributes.MAX_HEALTH, Integer.MAX_VALUE);
+			} catch(Exception e){}
+
 		registerEntityWithEgg(EntityDepthsGhoul.class, "depthsghoul", 25, 80, 3, true, 0x36A880, 0x012626);
 
 		registerEntityWithEgg(EntityEvilpig.class, "evilpig", 26, 80, 3, true, 15771042, 14377823);

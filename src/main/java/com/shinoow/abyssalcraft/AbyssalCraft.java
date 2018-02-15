@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2017 Shinoow.
+ * Copyright (c) 2012 - 2018 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -14,17 +14,20 @@ package com.shinoow.abyssalcraft;
 import java.util.ArrayList;
 import java.util.List;
 
-import net.minecraftforge.fluids.FluidRegistry;
-import net.minecraftforge.fml.common.*;
-import net.minecraftforge.fml.common.Mod.EventHandler;
-import net.minecraftforge.fml.common.Mod.Instance;
-import net.minecraftforge.fml.common.Mod.Metadata;
-import net.minecraftforge.fml.common.event.*;
-
 import com.shinoow.abyssalcraft.common.CommonProxy;
+import com.shinoow.abyssalcraft.common.command.CommandUnlockAllKnowledge;
 import com.shinoow.abyssalcraft.common.handlers.IMCHandler;
 import com.shinoow.abyssalcraft.common.util.ACLogger;
 import com.shinoow.abyssalcraft.init.*;
+
+import net.minecraftforge.fluids.FluidRegistry;
+import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.common.Mod.EventHandler;
+import net.minecraftforge.fml.common.Mod.Instance;
+import net.minecraftforge.fml.common.Mod.Metadata;
+import net.minecraftforge.fml.common.ModMetadata;
+import net.minecraftforge.fml.common.SidedProxy;
+import net.minecraftforge.fml.common.event.*;
 
 @Mod(modid = AbyssalCraft.modid, name = AbyssalCraft.name, version = AbyssalCraft.version,dependencies = "required-after:forge@[forgeversion,);after:jei@[4.8.0,)", useMetadata = false, guiFactory = "com.shinoow.abyssalcraft.client.config.ACGuiFactory", acceptedMinecraftVersions = "[1.12.2]", updateJSON = "https://raw.githubusercontent.com/Shinoow/AbyssalCraft/master/version.json", certificateFingerprint = "cert_fingerprint")
 public class AbyssalCraft {
@@ -83,7 +86,11 @@ public class AbyssalCraft {
 		InitHandler.INSTANCE.serverStart(event);
 	}
 
-	@SuppressWarnings("unchecked")
+	@EventHandler
+	public void serverStarting(FMLServerStartingEvent event){
+		event.registerServerCommand(new CommandUnlockAllKnowledge());
+	}
+
 	@EventHandler
 	public void handleIMC(FMLInterModComms.IMCEvent event){
 		IMCHandler.handleIMC(event);

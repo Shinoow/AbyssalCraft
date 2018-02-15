@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2017 Shinoow.
+ * Copyright (c) 2012 - 2018 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -14,23 +14,6 @@ package com.shinoow.abyssalcraft.api;
 import java.util.List;
 import java.util.Map;
 
-import net.minecraft.block.Block;
-import net.minecraft.enchantment.Enchantment;
-import net.minecraft.entity.EnumCreatureAttribute;
-import net.minecraft.init.SoundEvents;
-import net.minecraft.item.*;
-import net.minecraft.item.Item.ToolMaterial;
-import net.minecraft.item.ItemArmor.ArmorMaterial;
-import net.minecraft.item.crafting.FurnaceRecipes;
-import net.minecraft.potion.Potion;
-import net.minecraft.util.DamageSource;
-import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.common.util.EnumHelper;
-import net.minecraftforge.fluids.Fluid;
-import net.minecraftforge.fml.common.*;
-import net.minecraftforge.fml.common.registry.GameRegistry;
-import net.minecraftforge.oredict.OreDictionary;
-
 import org.apache.logging.log4j.Level;
 
 import com.google.common.collect.Lists;
@@ -40,6 +23,27 @@ import com.shinoow.abyssalcraft.api.internal.*;
 import com.shinoow.abyssalcraft.api.item.*;
 import com.shinoow.abyssalcraft.api.necronomicon.NecroData;
 import com.shinoow.abyssalcraft.api.recipe.*;
+
+import net.minecraft.block.Block;
+import net.minecraft.client.gui.FontRenderer;
+import net.minecraft.enchantment.Enchantment;
+import net.minecraft.entity.EnumCreatureAttribute;
+import net.minecraft.init.SoundEvents;
+import net.minecraft.item.Item;
+import net.minecraft.item.Item.ToolMaterial;
+import net.minecraft.item.ItemArmor.ArmorMaterial;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.FurnaceRecipes;
+import net.minecraft.potion.Potion;
+import net.minecraft.util.DamageSource;
+import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.common.util.EnumHelper;
+import net.minecraftforge.fluids.Fluid;
+import net.minecraftforge.fml.common.*;
+import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.oredict.OreDictionary;
 
 /**
  * Main API class for AbyssalCraft, has child classes for most features.<br>
@@ -53,7 +57,7 @@ public class AbyssalCraftAPI {
 	/**
 	 * String used to specify the API version in the "package-info.java" classes
 	 */
-	public static final String API_VERSION = "1.11.1";
+	public static final String API_VERSION = "1.12.0";
 
 	public static Enchantment coralium_enchantment, dread_enchantment, light_pierce, iron_wall;
 
@@ -102,6 +106,9 @@ public class AbyssalCraftAPI {
 	private static IInternalMethodHandler internalMethodHandler = new DummyMethodHandler();
 
 	public static Fluid liquid_coralium_fluid, liquid_antimatter_fluid;
+
+	@SideOnly(Side.CLIENT)
+	private static FontRenderer aklo_font;
 
 	/**
 	 * Used by AbyssalCraft to set the Internal NecroData Handler.<br>
@@ -427,8 +434,8 @@ public class AbyssalCraftAPI {
 	 * @since 1.3.5
 	 */
 	public static void addEngraving(ItemStack coin, ItemEngraving engraving, float xp){
-		if(!EngraverRecipes.instance().getEngravingList().containsKey(engraving) &&
-				!EngraverRecipes.instance().getEngravingList().containsValue(coin))
+		if(!EngraverRecipes.instance().getEngravings().containsKey(engraving) &&
+				!EngraverRecipes.instance().getEngravings().containsValue(coin))
 			EngraverRecipes.instance().addEngraving(coin, engraving, xp);
 		else FMLLog.log("AbyssalCraftAPI", Level.ERROR, "This Engraving Template and/or Engraved Coin is already registered!");
 	}
@@ -442,8 +449,8 @@ public class AbyssalCraftAPI {
 	 * @since 1.3.5
 	 */
 	public static void addEngraving(Item coin, ItemEngraving engraving, float xp){
-		if(!EngraverRecipes.instance().getEngravingList().containsKey(engraving) &&
-				!EngraverRecipes.instance().getEngravingList().containsValue(new ItemStack(coin)))
+		if(!EngraverRecipes.instance().getEngravings().containsKey(engraving) &&
+				!EngraverRecipes.instance().getEngravings().containsValue(new ItemStack(coin)))
 			EngraverRecipes.instance().addEngraving(coin, engraving, xp);
 		else FMLLog.log("AbyssalCraftAPI", Level.ERROR, "This Engraving Template and/or Engraved Coin is already registered!");
 	}
@@ -825,6 +832,28 @@ public class AbyssalCraftAPI {
 	}
 
 	/**
+	 * Used by AbyssalCraft to set the Aklo Font.<br>
+	 * If any other mod tries to use this method, nothing will happen.
+	 * @param font Font instance
+	 */
+	@SideOnly(Side.CLIENT)
+	public static void setAkloFont(FontRenderer font){
+		if(aklo_font == null && Loader.instance().getLoaderState() == LoaderState.INITIALIZATION
+				&& Loader.instance().activeModContainer().getModId().equals("abyssalcraft"))
+			aklo_font = font;
+	}
+
+	/**
+	 * Getter for the Aklo Font
+	 *
+	 * @since 1.12.0
+	 */
+	@SideOnly(Side.CLIENT)
+	public static FontRenderer getAkloFont(){
+		return aklo_font;
+	}
+
+	/**
 	 * Contains the names of all mobs added in AbyssalCraft.
 	 *
 	 * @author shinoow
@@ -833,12 +862,12 @@ public class AbyssalCraftAPI {
 	public static class ACEntities {
 
 		private static String[] mobNames = {"depthsghoul", "evilpig", "abyssalzombie", "Jzahar", "abygolem", "dreadgolem",
-			"dreadguard", "dragonminion", "dragonboss", "shadowcreature", "shadowmonster", "dreadling", "dreadspawn",
-			"demonpig", "gskeleton", "chagarothspawn", "chagarothfist", "chagaroth", "shadowbeast", "shadowboss",
-			"antiabyssalzombie", "antibat", "antichicken", "anticow", "anticreeper", "antighoul", "antipig", "antiplayer",
-			"antiskeleton", "antispider", "antizombie", "lessershoggoth", "shadowtitan", "omotholwarden", "jzaharminion",
-			"omotholghoul", "remnant", "greaterdreadspawn", "lesserdreadbeast", "evilcow", "evilchicken", "demoncow",
-			"demonchicken", "evilsheep", "demonsheep", "coraliumsquid"};
+				"dreadguard", "dragonminion", "dragonboss", "shadowcreature", "shadowmonster", "dreadling", "dreadspawn",
+				"demonpig", "gskeleton", "chagarothspawn", "chagarothfist", "chagaroth", "shadowbeast", "shadowboss",
+				"antiabyssalzombie", "antibat", "antichicken", "anticow", "anticreeper", "antighoul", "antipig", "antiplayer",
+				"antiskeleton", "antispider", "antizombie", "lessershoggoth", "shadowtitan", "omotholwarden", "jzaharminion",
+				"omotholghoul", "remnant", "greaterdreadspawn", "lesserdreadbeast", "evilcow", "evilchicken", "demoncow",
+				"demonchicken", "evilsheep", "demonsheep", "coraliumsquid"};
 
 		public static String depths_ghoul = mobNames[0];
 		public static String evil_pig = mobNames[1];

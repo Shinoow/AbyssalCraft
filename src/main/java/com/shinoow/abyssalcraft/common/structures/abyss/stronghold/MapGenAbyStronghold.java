@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2017 Shinoow.
+ * Copyright (c) 2012 - 2018 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -14,6 +14,8 @@ package com.shinoow.abyssalcraft.common.structures.abyss.stronghold;
 import java.util.*;
 import java.util.Map.Entry;
 
+import com.shinoow.abyssalcraft.api.biome.ACBiomes;
+
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
 import net.minecraft.util.math.MathHelper;
@@ -22,8 +24,6 @@ import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.structure.MapGenStructure;
 import net.minecraft.world.gen.structure.StructureComponent;
 import net.minecraft.world.gen.structure.StructureStart;
-
-import com.shinoow.abyssalcraft.api.biome.ACBiomes;
 
 public class MapGenAbyStronghold extends MapGenStructure
 {
@@ -46,7 +46,6 @@ public class MapGenAbyStronghold extends MapGenStructure
 		field_82672_i = 3;
 	}
 
-	@SuppressWarnings("rawtypes")
 	public MapGenAbyStronghold(Map<String, String> par1Map)
 	{
 		this();
@@ -101,7 +100,6 @@ public class MapGenAbyStronghold extends MapGenStructure
 	}
 
 	@Override
-	@SuppressWarnings({ "rawtypes", "unchecked" })
 	protected boolean canSpawnStructureAtCoords(int par1, int par2)
 	{
 		if (!ranBiomeCheck)
@@ -210,7 +208,6 @@ public class MapGenAbyStronghold extends MapGenStructure
 
 		public Start() {}
 
-		@SuppressWarnings({ "unchecked", "rawtypes" })
 		public Start(World par1World, Random par2Random, int par3, int par4)
 		{
 			super(par3, par4);

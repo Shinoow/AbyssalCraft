@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2017 Shinoow.
+ * Copyright (c) 2012 - 2018 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -13,14 +13,14 @@ package com.shinoow.abyssalcraft.common.items;
 
 import java.util.Set;
 
+import com.google.common.collect.Sets;
+import com.shinoow.abyssalcraft.api.block.ACBlocks;
+import com.shinoow.abyssalcraft.init.BlockHandler;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.TextFormatting;
-
-import com.google.common.collect.Sets;
-import com.shinoow.abyssalcraft.api.block.ACBlocks;
-import com.shinoow.abyssalcraft.init.BlockHandler;
 
 public class ItemEthaxiumPickaxe extends ItemACPickaxe {
 
@@ -32,13 +32,13 @@ public class ItemEthaxiumPickaxe extends ItemACPickaxe {
 	}
 
 	@Override
-	public float getStrVsBlock(ItemStack stack, IBlockState state)
+	public float getDestroySpeed(ItemStack stack, IBlockState state)
 	{
 		if(effectiveBlocks.contains(state.getBlock()) || state == ACBlocks.ingot_block.getStateFromMeta(3)
 				|| state == ACBlocks.stone.getStateFromMeta(5))
-			return efficiencyOnProperMaterial * 10;
+			return efficiency * 10;
 		if (state.getBlock().isToolEffective("pickaxe", state))
-			return efficiencyOnProperMaterial;
-		return super.getStrVsBlock(stack, state);
+			return efficiency;
+		return super.getDestroySpeed(stack, state);
 	}
 }

@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2017 Shinoow.
+ * Copyright (c) 2012 - 2018 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -14,18 +14,13 @@ package com.shinoow.abyssalcraft.common.items;
 import java.util.List;
 
 import net.minecraft.client.util.ITooltipFlag;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
-import com.shinoow.abyssalcraft.lib.ACTabs;
-
-public class ItemWashCloth extends Item {
+public class ItemWashCloth extends ItemACBasic {
 
 	public ItemWashCloth() {
-		super();
-		setUnlocalizedName("cloth");
-		setCreativeTab(ACTabs.tabItems);
+		super("cloth");
 		setMaxDamage(20);
 		setMaxStackSize(1);
 	}
@@ -42,7 +37,6 @@ public class ItemWashCloth extends Item {
 		return stack.getItemDamage() < stack.getMaxDamage();
 	}
 
-	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@Override
 	public void addInformation(ItemStack is, World player, List l, ITooltipFlag B){
 		l.add("This item has been used " + getDamage(is) + " out of 20 times");

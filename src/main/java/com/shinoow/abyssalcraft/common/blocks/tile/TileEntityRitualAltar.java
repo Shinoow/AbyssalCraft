@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2017 Shinoow.
+ * Copyright (c) 2012 - 2018 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -10,6 +10,18 @@
  *     Shinoow -  implementation
  ******************************************************************************/
 package com.shinoow.abyssalcraft.common.blocks.tile;
+
+import com.shinoow.abyssalcraft.api.energy.EnergyEnum.DeityType;
+import com.shinoow.abyssalcraft.api.energy.IEnergyTransporterItem;
+import com.shinoow.abyssalcraft.api.energy.disruption.DisruptionHandler;
+import com.shinoow.abyssalcraft.api.entity.EntityUtil;
+import com.shinoow.abyssalcraft.api.event.ACEvents.RitualEvent;
+import com.shinoow.abyssalcraft.api.ritual.NecronomiconRitual;
+import com.shinoow.abyssalcraft.api.ritual.RitualRegistry;
+import com.shinoow.abyssalcraft.common.items.ItemNecronomicon;
+import com.shinoow.abyssalcraft.lib.ACSounds;
+import com.shinoow.abyssalcraft.lib.util.blocks.IRitualAltar;
+import com.shinoow.abyssalcraft.lib.util.blocks.IRitualPedestal;
 
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureAttribute;
@@ -26,18 +38,6 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
-
-import com.shinoow.abyssalcraft.api.energy.EnergyEnum.DeityType;
-import com.shinoow.abyssalcraft.api.energy.IEnergyTransporterItem;
-import com.shinoow.abyssalcraft.api.energy.disruption.DisruptionHandler;
-import com.shinoow.abyssalcraft.api.entity.EntityUtil;
-import com.shinoow.abyssalcraft.api.event.ACEvents.RitualEvent;
-import com.shinoow.abyssalcraft.api.ritual.NecronomiconRitual;
-import com.shinoow.abyssalcraft.api.ritual.RitualRegistry;
-import com.shinoow.abyssalcraft.common.items.ItemNecronomicon;
-import com.shinoow.abyssalcraft.lib.ACSounds;
-import com.shinoow.abyssalcraft.lib.util.blocks.IRitualAltar;
-import com.shinoow.abyssalcraft.lib.util.blocks.IRitualPedestal;
 
 public class TileEntityRitualAltar extends TileEntity implements ITickable, IRitualAltar {
 

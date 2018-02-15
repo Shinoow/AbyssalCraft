@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2017 Shinoow.
+ * Copyright (c) 2012 - 2018 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -11,10 +11,10 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.api.energy;
 
-import net.minecraft.block.state.IBlockState;
-
 import com.shinoow.abyssalcraft.api.energy.EnergyEnum.AmplifierType;
 import com.shinoow.abyssalcraft.api.energy.EnergyEnum.DeityType;
+
+import net.minecraft.block.state.IBlockState;
 
 /**
  * Interface to use on tile entities that can manipulate Ley Lines (WIP)<br>

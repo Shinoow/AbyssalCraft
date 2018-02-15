@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2017 Shinoow.
+ * Copyright (c) 2012 - 2018 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -13,6 +13,14 @@ package com.shinoow.abyssalcraft.common.items;
 
 import java.util.List;
 
+import com.shinoow.abyssalcraft.api.item.ACItems;
+import com.shinoow.abyssalcraft.client.handlers.AbyssalCraftClientEventHooks;
+import com.shinoow.abyssalcraft.common.network.PacketDispatcher;
+import com.shinoow.abyssalcraft.common.network.server.StaffOfRendingMessage;
+import com.shinoow.abyssalcraft.lib.ACTabs;
+import com.shinoow.abyssalcraft.lib.item.ItemMetadata;
+import com.shinoow.abyssalcraft.lib.util.items.IStaffOfRending;
+
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -23,14 +31,6 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.text.translation.I18n;
 import net.minecraft.world.World;
-
-import com.shinoow.abyssalcraft.api.item.ACItems;
-import com.shinoow.abyssalcraft.client.handlers.AbyssalCraftClientEventHooks;
-import com.shinoow.abyssalcraft.common.network.PacketDispatcher;
-import com.shinoow.abyssalcraft.common.network.server.StaffOfRendingMessage;
-import com.shinoow.abyssalcraft.lib.ACTabs;
-import com.shinoow.abyssalcraft.lib.item.ItemMetadata;
-import com.shinoow.abyssalcraft.lib.util.items.IStaffOfRending;
 
 public class ItemDrainStaff extends ItemMetadata implements IStaffOfRending {
 
@@ -64,7 +64,6 @@ public class ItemDrainStaff extends ItemMetadata implements IStaffOfRending {
 	}
 
 	@Override
-	@SuppressWarnings("rawtypes")
 	public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, EnumHand hand) {
 
 		ItemStack stack = player.getHeldItem(hand);
@@ -121,7 +120,6 @@ public class ItemDrainStaff extends ItemMetadata implements IStaffOfRending {
 	}
 
 	@Override
-	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public void addInformation(ItemStack is, World player, List l, ITooltipFlag B){
 		int abyssal = getEnergy(is, "Abyssal");
 		int dread = getEnergy(is, "Dread");

@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2017 Shinoow.
+ * Copyright (c) 2012 - 2018 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -14,6 +14,20 @@ package com.shinoow.abyssalcraft.common.entity;
 import java.util.Calendar;
 import java.util.List;
 import java.util.UUID;
+
+import com.google.common.base.Predicate;
+import com.google.common.base.Predicates;
+import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
+import com.shinoow.abyssalcraft.api.biome.ACBiomes;
+import com.shinoow.abyssalcraft.api.biome.IDreadlandsBiome;
+import com.shinoow.abyssalcraft.api.entity.EntityUtil;
+import com.shinoow.abyssalcraft.api.entity.IDreadEntity;
+import com.shinoow.abyssalcraft.api.item.ACItems;
+import com.shinoow.abyssalcraft.common.network.PacketDispatcher;
+import com.shinoow.abyssalcraft.common.network.client.CleansingRitualMessage;
+import com.shinoow.abyssalcraft.lib.ACConfig;
+import com.shinoow.abyssalcraft.lib.ACSounds;
+import com.shinoow.abyssalcraft.lib.util.SpecialTextUtil;
 
 import net.minecraft.block.material.EnumPushReaction;
 import net.minecraft.entity.*;
@@ -39,24 +53,12 @@ import net.minecraft.world.*;
 import net.minecraft.world.BossInfo.Color;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.chunk.Chunk;
+import net.minecraftforge.fml.common.Optional.Interface;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import com.google.common.base.Predicate;
-import com.google.common.base.Predicates;
-import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
-import com.shinoow.abyssalcraft.api.biome.ACBiomes;
-import com.shinoow.abyssalcraft.api.biome.IDreadlandsBiome;
-import com.shinoow.abyssalcraft.api.entity.EntityUtil;
-import com.shinoow.abyssalcraft.api.entity.IDreadEntity;
-import com.shinoow.abyssalcraft.api.item.ACItems;
-import com.shinoow.abyssalcraft.common.network.PacketDispatcher;
-import com.shinoow.abyssalcraft.common.network.client.CleansingRitualMessage;
-import com.shinoow.abyssalcraft.lib.ACConfig;
-import com.shinoow.abyssalcraft.lib.ACSounds;
-import com.shinoow.abyssalcraft.lib.util.SpecialTextUtil;
-
-public class EntityChagaroth extends EntityMob implements IDreadEntity {
+@Interface(iface = "com.github.alexthe666.iceandfire.entity.IBlacklistedFromStatues", modid = "iceandfire")
+public class EntityChagaroth extends EntityMob implements IDreadEntity, com.github.alexthe666.iceandfire.entity.IBlacklistedFromStatues {
 
 	private static final UUID attackDamageBoostUUID = UUID.fromString("648D7064-6A60-4F59-8ABE-C2C23A6DD7A9");
 	private static final AttributeModifier attackDamageBoost = new AttributeModifier(attackDamageBoostUUID, "Halloween Attack Damage Boost", 8D, 0);
@@ -216,7 +218,7 @@ public class EntityChagaroth extends EntityMob implements IDreadEntity {
 				{
 					Entity entity = world.getEntityByID(k1);
 
-					if (entity != null && entity.isEntityAlive() && getDistanceSqToEntity(entity) <= 48D * 48D && canEntityBeSeen(entity))
+					if (entity != null && entity.isEntityAlive() && getDistanceSq(entity) <= 48D * 48D && canEntityBeSeen(entity))
 					{
 						if (entity instanceof EntityPlayer && ((EntityPlayer)entity).capabilities.disableDamage)
 							updateWatchedTargetId(i, 0);
@@ -279,7 +281,7 @@ public class EntityChagaroth extends EntityMob implements IDreadEntity {
 		entitydreadslug.posY = d1;
 		entitydreadslug.posX = d0;
 		entitydreadslug.posZ = d2;
-		entitydreadslug.setThrowableHeading(d3, d4 + f1, d5, 1.75F, 1.0F);
+		entitydreadslug.shoot(d3, d4 + f1, d5, 1.75F, 1.0F);
 		if(!world.isRemote)
 			world.spawnEntity(entitydreadslug);
 		entitydreadslug.motionX = d3 / f2 * 0.8D * 0.8D + entitydreadslug.motionX;
@@ -293,7 +295,7 @@ public class EntityChagaroth extends EntityMob implements IDreadEntity {
 			entitydreadslug1.posY = d1;
 			entitydreadslug1.posX = d0;
 			entitydreadslug1.posZ = d2;
-			entitydreadslug1.setThrowableHeading(d3, d4 + f1, d5, 1.75F, 1.0F);
+			entitydreadslug1.shoot(d3, d4 + f1, d5, 1.75F, 1.0F);
 			if(!world.isRemote)
 				world.spawnEntity(entitydreadslug1);
 			entitydreadslug1.motionX = d3 / f2 * 0.8D * 0.8D + entitydreadslug1.motionX;
@@ -308,7 +310,7 @@ public class EntityChagaroth extends EntityMob implements IDreadEntity {
 			entitydreadslug11.posZ = d2;
 			EntityDreadSpawn mob = new EntityDreadSpawn(world);
 			mob.copyLocationAndAnglesFrom(entitydreadslug11);
-			entitydreadslug11.setThrowableHeading(d3, d4 + f1 + rand.nextDouble() * 150D, d5, 1.3F, 1.0F);
+			entitydreadslug11.shoot(d3, d4 + f1 + rand.nextDouble() * 150D, d5, 1.3F, 1.0F);
 			if(!world.isRemote)
 				world.spawnEntity(entitydreadslug11);
 			if(!world.isRemote)
@@ -324,7 +326,7 @@ public class EntityChagaroth extends EntityMob implements IDreadEntity {
 			entitydreadslug111.posZ = d2;
 			EntityChagarothSpawn spawn = new EntityChagarothSpawn(world);
 			spawn.copyLocationAndAnglesFrom(entitydreadslug111);
-			entitydreadslug111.setThrowableHeading(d3, d4 + f1 + rand.nextDouble() * 150D, d5, 1.3F, 1.0F);
+			entitydreadslug111.shoot(d3, d4 + f1 + rand.nextDouble() * 150D, d5, 1.3F, 1.0F);
 			if(!world.isRemote)
 				world.spawnEntity(entitydreadslug111);
 			if(!world.isRemote)
@@ -340,7 +342,7 @@ public class EntityChagaroth extends EntityMob implements IDreadEntity {
 			entitydreadslug1111.posZ = d2;
 			EntityChagarothFist fist = new EntityChagarothFist(world);
 			fist.copyLocationAndAnglesFrom(entitydreadslug1111);
-			entitydreadslug1111.setThrowableHeading(d3, d4 + f1 + rand.nextDouble() * 150D, d5, 1.3F, 1.0F);
+			entitydreadslug1111.shoot(d3, d4 + f1 + rand.nextDouble() * 150D, d5, 1.3F, 1.0F);
 			if(!world.isRemote)
 				world.spawnEntity(entitydreadslug1111);
 			if(!world.isRemote)
@@ -494,7 +496,7 @@ public class EntityChagaroth extends EntityMob implements IDreadEntity {
 			}
 		}
 
-		if (getAttackTarget() != null && getDistanceSqToEntity(getAttackTarget()) <= 256D && flameShootTimer <= -200) flameShootTimer = 150;
+		if (getAttackTarget() != null && getDistanceSq(getAttackTarget()) <= 256D && flameShootTimer <= -200) flameShootTimer = 150;
 
 		if (flameShootTimer > 0)
 		{
@@ -513,18 +515,18 @@ public class EntityChagaroth extends EntityMob implements IDreadEntity {
 				{
 					EntityLivingBase entity = (EntityLivingBase)list.get(i1);
 
-					if (entity != null && rand.nextInt(3) == 0) if (entity.attackEntityFrom(AbyssalCraftAPI.dread, (float)(7.5D - getDistanceToEntity(entity)) * 2F))
+					if (entity != null && rand.nextInt(3) == 0) if (entity.attackEntityFrom(AbyssalCraftAPI.dread, (float)(7.5D - getDistance(entity)) * 2F))
 					{
 						entity.addPotionEffect(new PotionEffect(AbyssalCraftAPI.dread_plague, 200, 1));
-						entity.setFire((int)(10 - getDistanceToEntity(entity)));
+						entity.setFire((int)(10 - getDistance(entity)));
 					}
 				}
 
-				if (target.attackEntityFrom(AbyssalCraftAPI.dread, (float)(7.5D - getDistanceToEntity(target)) * 2F))
+				if (target.attackEntityFrom(AbyssalCraftAPI.dread, (float)(7.5D - getDistance(target)) * 2F))
 				{
 					if (target instanceof EntityLivingBase)
 						((EntityLivingBase) target).addPotionEffect(new PotionEffect(AbyssalCraftAPI.dread_plague, 200, 1));
-					target.setFire((int)(10 - getDistanceToEntity(target)));
+					target.setFire((int)(10 - getDistance(target)));
 				}
 			}
 		}
@@ -747,8 +749,6 @@ public class EntityChagaroth extends EntityMob implements IDreadEntity {
 	public boolean attackEntityFrom(DamageSource par1DamageSource, float par2)
 	{
 		if(par2 > 30) par2 = 10 + world.rand.nextInt(10);
-
-		if(ACConfig.hardcoreMode && par2 >= 1) par2 *= 0.5;
 
 		return super.attackEntityFrom(par1DamageSource, par2);
 	}

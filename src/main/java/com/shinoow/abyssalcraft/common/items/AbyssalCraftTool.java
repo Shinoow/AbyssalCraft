@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2017 Shinoow.
+ * Copyright (c) 2012 - 2018 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -12,6 +12,9 @@
 package com.shinoow.abyssalcraft.common.items;
 
 import java.util.List;
+
+import com.google.common.collect.Multimap;
+import com.shinoow.abyssalcraft.common.entity.EntityJzahar;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
@@ -32,9 +35,6 @@ import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.GameType;
 import net.minecraft.world.World;
 
-import com.google.common.collect.Multimap;
-import com.shinoow.abyssalcraft.common.entity.EntityJzahar;
-
 public class AbyssalCraftTool extends Item {
 
 	private float weaponDamage;
@@ -46,7 +46,6 @@ public class AbyssalCraftTool extends Item {
 		setCreativeTab(null);
 	}
 
-	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
 	public void addInformation(ItemStack is, World player, List l, ITooltipFlag B) {
 		l.add(I18n.format("tooltip.devblade.1"));
@@ -75,7 +74,6 @@ public class AbyssalCraftTool extends Item {
 	}
 
 	@Override
-	@SuppressWarnings("rawtypes")
 	public ActionResult<ItemStack> onItemRightClick(World par2World, EntityPlayer par3EntityPlayer, EnumHand hand) {
 
 		par3EntityPlayer.setActiveHand(hand);
@@ -100,7 +98,6 @@ public class AbyssalCraftTool extends Item {
 	}
 
 	@Override
-	@SuppressWarnings({ "rawtypes", "unchecked", "deprecation" })
 	public Multimap getAttributeModifiers(EntityEquipmentSlot equipmentSlot, ItemStack stack) {
 		Multimap multimap = super.getAttributeModifiers(equipmentSlot, stack);
 

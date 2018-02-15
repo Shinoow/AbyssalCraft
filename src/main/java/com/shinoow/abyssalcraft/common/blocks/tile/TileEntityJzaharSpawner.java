@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2017 Shinoow.
+ * Copyright (c) 2012 - 2018 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -11,13 +11,13 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.common.blocks.tile;
 
+import com.shinoow.abyssalcraft.common.entity.EntityJzahar;
+
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.math.MathHelper;
-
-import com.shinoow.abyssalcraft.common.entity.EntityJzahar;
 
 public class TileEntityJzaharSpawner extends TileEntity implements ITickable {
 
@@ -42,8 +42,8 @@ public class TileEntityJzaharSpawner extends TileEntity implements ITickable {
 				activatingRangeFromPlayer, true) != null &&
 				!world.getClosestPlayer(pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D,
 						activatingRangeFromPlayer, true).capabilities.isCreativeMode &&
-						world.getClosestPlayer(pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D,
-								activatingRangeFromPlayer, true).posY >= pos.getY() -1;
+				world.getClosestPlayer(pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D,
+						activatingRangeFromPlayer, true).posY >= pos.getY() -1;
 	}
 
 	@Override

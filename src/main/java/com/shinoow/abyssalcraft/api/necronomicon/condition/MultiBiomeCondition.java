@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2017 Shinoow.
+ * Copyright (c) 2012 - 2018 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -20,7 +20,7 @@ public class MultiBiomeCondition implements IUnlockCondition {
 	public MultiBiomeCondition(Biome...biomes){
 		names = new String[biomes.length];
 		for(int i = 0; i < biomes.length; i++)
-			names[i] = Biome.REGISTRY.getNameForObject(biomes[i]).toString();
+			names[i] = biomes[i].getRegistryName().toString();
 	}
 
 	@Override

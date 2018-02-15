@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2017 Shinoow.
+ * Copyright (c) 2012 - 2018 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -11,11 +11,11 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.common.entity.ai;
 
+import com.shinoow.abyssalcraft.common.entity.anti.EntityAntiCreeper;
+
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.entity.monster.EntityCreeper;
-
-import com.shinoow.abyssalcraft.common.entity.anti.EntityAntiCreeper;
 
 public class EntityAIAntiCreeperSwell extends EntityAIBase
 {
@@ -38,13 +38,13 @@ public class EntityAIAntiCreeperSwell extends EntityAIBase
 
 		if(entitylivingbase instanceof EntityCreeper) return false;
 
-		return swellingCreeper.getCreeperState() > 0 || entitylivingbase != null && swellingCreeper.getDistanceSqToEntity(entitylivingbase) < 9.0D;
+		return swellingCreeper.getCreeperState() > 0 || entitylivingbase != null && swellingCreeper.getDistanceSq(entitylivingbase) < 9.0D;
 	}
 
 	@Override
 	public void startExecuting()
 	{
-		swellingCreeper.getNavigator().clearPathEntity();
+		swellingCreeper.getNavigator().clearPath();
 		creeperAttackTarget = swellingCreeper.getAttackTarget();
 	}
 
@@ -59,7 +59,7 @@ public class EntityAIAntiCreeperSwell extends EntityAIBase
 	{
 		if (creeperAttackTarget == null)
 			swellingCreeper.setCreeperState(-1);
-		else if (swellingCreeper.getDistanceSqToEntity(creeperAttackTarget) > 49.0D)
+		else if (swellingCreeper.getDistanceSq(creeperAttackTarget) > 49.0D)
 			swellingCreeper.setCreeperState(-1);
 		else if (!swellingCreeper.getEntitySenses().canSee(creeperAttackTarget))
 			swellingCreeper.setCreeperState(-1);

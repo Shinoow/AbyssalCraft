@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2017 Shinoow.
+ * Copyright (c) 2012 - 2018 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -13,26 +13,28 @@ package com.shinoow.abyssalcraft.common.blocks.itemblock;
 
 import java.util.List;
 
+import com.shinoow.abyssalcraft.api.necronomicon.condition.DimensionCondition;
+import com.shinoow.abyssalcraft.lib.ACLib;
+
 import net.minecraft.block.Block;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
-import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.TextFormatting;
-import net.minecraft.util.text.translation.I18n;
 import net.minecraft.world.World;
 
-public class ItemODB extends ItemBlock {
+public class ItemODB extends ItemBlockAC {
 
 	public ItemODB(Block p_i45328_1_)
 	{
 		super(p_i45328_1_);
+		setUnlockCondition(new DimensionCondition(ACLib.abyssal_wasteland_id));
 	}
 
-	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@Override
 	public void addInformation(ItemStack par1ItemStack, World par2EntityPlayer, List par3List, ITooltipFlag par4)
 	{
-		par3List.add(I18n.translateToLocal("tooltip.odb"));
+		par3List.add(I18n.format("tooltip.odb"));
 	}
 
 	@Override

@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2017 Shinoow.
+ * Copyright (c) 2012 - 2018 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -12,6 +12,14 @@
 package com.shinoow.abyssalcraft.common.entity;
 
 import java.util.*;
+
+import com.shinoow.abyssalcraft.api.entity.EntityUtil;
+import com.shinoow.abyssalcraft.api.entity.IOmotholEntity;
+import com.shinoow.abyssalcraft.lib.ACConfig;
+import com.shinoow.abyssalcraft.lib.ACLib;
+import com.shinoow.abyssalcraft.lib.ACSounds;
+import com.shinoow.abyssalcraft.lib.util.SpecialTextUtil;
+import com.shinoow.abyssalcraft.lib.world.TeleporterDarkRealm;
 
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.*;
@@ -38,16 +46,10 @@ import net.minecraft.util.text.TextFormatting;
 import net.minecraft.util.text.translation.I18n;
 import net.minecraft.world.*;
 import net.minecraft.world.BossInfo.Color;
+import net.minecraftforge.fml.common.Optional.Interface;
 
-import com.shinoow.abyssalcraft.api.entity.EntityUtil;
-import com.shinoow.abyssalcraft.api.entity.IOmotholEntity;
-import com.shinoow.abyssalcraft.lib.ACConfig;
-import com.shinoow.abyssalcraft.lib.ACLib;
-import com.shinoow.abyssalcraft.lib.ACSounds;
-import com.shinoow.abyssalcraft.lib.util.SpecialTextUtil;
-import com.shinoow.abyssalcraft.lib.world.TeleporterDarkRealm;
-
-public class EntityJzahar extends EntityMob implements IRangedAttackMob, IOmotholEntity {
+@Interface(iface = "com.github.alexthe666.iceandfire.entity.IBlacklistedFromStatues", modid = "iceandfire")
+public class EntityJzahar extends EntityMob implements IRangedAttackMob, IOmotholEntity, com.github.alexthe666.iceandfire.entity.IBlacklistedFromStatues {
 
 	private static final UUID attackDamageBoostUUID = UUID.fromString("648D7064-6A60-4F59-8ABE-C2C23A6DD7A9");
 	private static final AttributeModifier attackDamageBoost = new AttributeModifier(attackDamageBoostUUID, "Halloween Attack Damage Boost", 10.0D, 0);
@@ -141,7 +143,7 @@ public class EntityJzahar extends EntityMob implements IRangedAttackMob, IOmotho
 	{
 		super.updateAITasks();
 
-		if (isEntityAlive() && getAttackTarget() != null && getAttackTarget().isEntityAlive() && getDistanceSqToEntity(getAttackTarget()) < width * width + getAttackTarget().width * getAttackTarget().width + 36D && (ticksExisted + getEntityId()) % 10 == 0)
+		if (isEntityAlive() && getAttackTarget() != null && getAttackTarget().isEntityAlive() && getDistanceSq(getAttackTarget()) < width * width + getAttackTarget().width * getAttackTarget().width + 36D && (ticksExisted + getEntityId()) % 10 == 0)
 			attackEntityAsMob(getAttackTarget());
 
 		bossInfo.setPercent(getHealth() / getMaxHealth());
@@ -248,7 +250,6 @@ public class EntityJzahar extends EntityMob implements IRangedAttackMob, IOmotho
 		return height * 0.90F;
 	}
 
-	@SuppressWarnings("rawtypes")
 	@Override
 	public void onLivingUpdate()
 	{
@@ -256,7 +257,7 @@ public class EntityJzahar extends EntityMob implements IRangedAttackMob, IOmotho
 			talkTimer--;
 
 		if(getAttackTarget() != null)
-			if(getDistanceSqToEntity(getAttackTarget()) > 20D || getAttackTarget() instanceof EntityFlying || getAttackTarget().posY > posY + 4D)
+			if(getDistanceSq(getAttackTarget()) > 20D || getAttackTarget() instanceof EntityFlying || getAttackTarget().posY > posY + 4D)
 			{
 				tasks.addTask(2, aiArrowAttack);
 				tasks.removeTask(aiAttackOnCollide);
@@ -314,7 +315,7 @@ public class EntityJzahar extends EntityMob implements IRangedAttackMob, IOmotho
 					world.spawnParticle(EnumParticleTypes.EXPLOSION_HUGE, entity.posX + f, entity.posY + 2.0D + f1, entity.posZ + f2, 0.0D, 0.0D, 0.0D);
 			}
 			else if(entity instanceof EntityPlayer)
-				if(((EntityPlayer)entity).capabilities.isCreativeMode && talkTimer == 0 && getDistanceToEntity(entity) <= 5){
+				if(((EntityPlayer)entity).capabilities.isCreativeMode && talkTimer == 0 && getDistance(entity) <= 5){
 					talkTimer = 1200;
 					if(world.isRemote)
 						if(EntityUtil.isPlayerCoralium((EntityPlayer)entity))

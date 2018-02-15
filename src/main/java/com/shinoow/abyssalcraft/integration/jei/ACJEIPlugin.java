@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2017 Shinoow.
+ * Copyright (c) 2012 - 2018 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -10,14 +10,6 @@
  *     Shinoow -  implementation
  ******************************************************************************/
 package com.shinoow.abyssalcraft.integration.jei;
-
-import mezz.jei.api.*;
-import mezz.jei.api.ingredients.IModIngredientRegistration;
-import mezz.jei.api.recipe.IRecipeCategoryRegistration;
-import mezz.jei.api.recipe.transfer.IRecipeTransferRegistry;
-import net.minecraft.init.Blocks;
-import net.minecraft.item.ItemStack;
-import net.minecraftforge.fml.common.Loader;
 
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.api.item.ACItems;
@@ -40,6 +32,14 @@ import com.shinoow.abyssalcraft.integration.jei.ritual.RitualRecipeWrapper;
 import com.shinoow.abyssalcraft.integration.jei.transmutator.*;
 import com.shinoow.abyssalcraft.integration.jei.upgrades.UpgradeRecipeCategory;
 import com.shinoow.abyssalcraft.integration.jei.upgrades.UpgradeRecipeMaker;
+
+import mezz.jei.api.*;
+import mezz.jei.api.ingredients.IModIngredientRegistration;
+import mezz.jei.api.recipe.IRecipeCategoryRegistration;
+import mezz.jei.api.recipe.transfer.IRecipeTransferRegistry;
+import net.minecraft.init.Blocks;
+import net.minecraft.item.ItemStack;
+import net.minecraftforge.fml.common.Loader;
 
 @JEIPlugin
 public class ACJEIPlugin implements IModPlugin {

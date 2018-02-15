@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2017 Shinoow.
+ * Copyright (c) 2012 - 2018 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -11,26 +11,24 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.common.items;
 
+import com.google.common.collect.Multimap;
+import com.shinoow.abyssalcraft.lib.ACTabs;
+
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.init.Items;
 import net.minecraft.inventory.EntityEquipmentSlot;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
-import com.google.common.collect.Multimap;
-import com.shinoow.abyssalcraft.lib.ACTabs;
-
-public class ItemCudgel extends Item {
+public class ItemCudgel extends ItemACBasic {
 
 	public ItemCudgel(){
-		super();
+		super("cudgel");
 		setMaxDamage(1500);
 		setMaxStackSize(1);
-		setUnlocalizedName("cudgel");
 		setCreativeTab(ACTabs.tabCombat);
 		setFull3D();
 	}
@@ -61,7 +59,6 @@ public class ItemCudgel extends Item {
 	}
 
 	@Override
-	@SuppressWarnings({ "rawtypes", "unchecked", "deprecation" })
 	public Multimap getAttributeModifiers(EntityEquipmentSlot equipmentSlot, ItemStack stack) {
 		Multimap multimap = super.getAttributeModifiers(equipmentSlot, stack);
 

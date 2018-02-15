@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2017 Shinoow.
+ * Copyright (c) 2012 - 2018 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -11,15 +11,17 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.integration.jei.upgrades;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 import java.util.Map.Entry;
 
 import javax.annotation.Nonnull;
 
-import net.minecraft.item.ItemStack;
-
 import com.shinoow.abyssalcraft.api.item.ItemUpgradeKit;
 import com.shinoow.abyssalcraft.api.recipe.UpgradeKitRecipes;
+
+import net.minecraft.item.ItemStack;
 
 public class UpgradeRecipeMaker {
 

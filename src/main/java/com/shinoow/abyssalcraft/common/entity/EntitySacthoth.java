@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2017 Shinoow.
+ * Copyright (c) 2012 - 2018 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -14,6 +14,16 @@ package com.shinoow.abyssalcraft.common.entity;
 import java.util.Calendar;
 import java.util.List;
 import java.util.UUID;
+
+import com.google.common.base.Predicate;
+import com.google.common.base.Predicates;
+import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
+import com.shinoow.abyssalcraft.api.entity.IOmotholEntity;
+import com.shinoow.abyssalcraft.api.item.ACItems;
+import com.shinoow.abyssalcraft.lib.ACConfig;
+import com.shinoow.abyssalcraft.lib.ACLib;
+import com.shinoow.abyssalcraft.lib.ACSounds;
+import com.shinoow.abyssalcraft.lib.util.SpecialTextUtil;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.*;
@@ -43,20 +53,12 @@ import net.minecraft.world.*;
 import net.minecraft.world.BossInfo.Color;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.living.EnderTeleportEvent;
+import net.minecraftforge.fml.common.Optional.Interface;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import com.google.common.base.Predicate;
-import com.google.common.base.Predicates;
-import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
-import com.shinoow.abyssalcraft.api.entity.IOmotholEntity;
-import com.shinoow.abyssalcraft.api.item.ACItems;
-import com.shinoow.abyssalcraft.lib.ACConfig;
-import com.shinoow.abyssalcraft.lib.ACLib;
-import com.shinoow.abyssalcraft.lib.ACSounds;
-import com.shinoow.abyssalcraft.lib.util.SpecialTextUtil;
-
-public class EntitySacthoth extends EntityMob implements IOmotholEntity {
+@Interface(iface = "com.github.alexthe666.iceandfire.entity.IBlacklistedFromStatues", modid = "iceandfire")
+public class EntitySacthoth extends EntityMob implements IOmotholEntity, com.github.alexthe666.iceandfire.entity.IBlacklistedFromStatues {
 
 	private static final DataParameter<Byte> CLIMBING = EntityDataManager.createKey(EntitySacthoth.class, DataSerializers.BYTE);
 	private static final UUID attackDamageBoostUUID = UUID.fromString("648D7064-6A60-4F59-8ABE-C2C23A6DD7A9");
@@ -109,7 +111,7 @@ public class EntitySacthoth extends EntityMob implements IOmotholEntity {
 		super.onUpdate();
 
 		if (!world.isRemote)
-			setBesideClimbableBlock(isCollidedHorizontally);
+			setBesideClimbableBlock(collidedHorizontally);
 	}
 
 	@Override
@@ -456,7 +458,7 @@ public class EntitySacthoth extends EntityMob implements IOmotholEntity {
 			if (entity instanceof EntityPlayer && !entity.isDead && deathTicks == 0 && !((EntityPlayer)entity).capabilities.isCreativeMode)
 				((EntityPlayer)entity).addPotionEffect(new PotionEffect(MobEffects.BLINDNESS, 40));
 		EntityPlayer player = world.getClosestPlayerToEntity(this, 160D);
-		if(player != null && player.getDistanceToEntity(this) >= 50D && !player.capabilities.isCreativeMode){
+		if(player != null && player.getDistance(this) >= 50D && !player.capabilities.isCreativeMode){
 			if(player.posX - posX > 50)
 				teleportTo(player.posX + 30, player.posY, player.posZ);
 			if(player.posX - posX < -50)
@@ -471,7 +473,7 @@ public class EntitySacthoth extends EntityMob implements IOmotholEntity {
 				teleportTo(player.posX, player.posY, player.posZ);
 		}
 
-		if (getAttackTarget() != null && getDistanceSqToEntity(getAttackTarget()) <= 64D && shadowFlameShootTimer <= -300) shadowFlameShootTimer = 100;
+		if (getAttackTarget() != null && getDistanceSq(getAttackTarget()) <= 64D && shadowFlameShootTimer <= -300) shadowFlameShootTimer = 100;
 
 		if (shadowFlameShootTimer > 0)
 		{
@@ -486,12 +488,12 @@ public class EntitySacthoth extends EntityMob implements IOmotholEntity {
 
 				for(EntityLivingBase entity : list1)
 
-					if (entity != null && rand.nextInt(3) == 0) if (entity.attackEntityFrom(AbyssalCraftAPI.shadow, (float)(7.5D - getDistanceToEntity(entity)))) {
+					if (entity != null && rand.nextInt(3) == 0) if (entity.attackEntityFrom(AbyssalCraftAPI.shadow, (float)(7.5D - getDistance(entity)))) {
 						entity.addPotionEffect(new PotionEffect(MobEffects.BLINDNESS, 100));
 						entity.addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, 100, 1));
 					}
 
-				if (target.attackEntityFrom(AbyssalCraftAPI.shadow, (float)(7.5D - getDistanceToEntity(target)))) if(target instanceof EntityLivingBase)
+				if (target.attackEntityFrom(AbyssalCraftAPI.shadow, (float)(7.5D - getDistance(target)))) if(target instanceof EntityLivingBase)
 				{
 					((EntityLivingBase)target).addPotionEffect(new PotionEffect(MobEffects.BLINDNESS, 200));
 					((EntityLivingBase)target).addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, 200, 1));

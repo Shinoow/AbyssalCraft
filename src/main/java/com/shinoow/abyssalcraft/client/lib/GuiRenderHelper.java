@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2017 Shinoow.
+ * Copyright (c) 2012 - 2018 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -13,6 +13,11 @@ package com.shinoow.abyssalcraft.client.lib;
 
 import java.util.List;
 
+import org.lwjgl.input.Keyboard;
+import org.lwjgl.opengl.GL11;
+
+import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.renderer.BufferBuilder;
@@ -20,9 +25,6 @@ import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.client.settings.KeyBinding;
-
-import org.lwjgl.input.Keyboard;
-import org.lwjgl.opengl.GL11;
 
 public final class GuiRenderHelper
 {
@@ -44,7 +46,7 @@ public final class GuiRenderHelper
 			int var5 = 0;
 			int var6;
 			int var7;
-			FontRenderer fontRenderer = Minecraft.getMinecraft().fontRenderer;
+			FontRenderer fontRenderer = !tooltipData.get(0).startsWith("Lorem ipsum") ? Minecraft.getMinecraft().fontRenderer : AbyssalCraftAPI.getAkloFont();
 			for (var6 = 0; var6 < tooltipData.size(); ++var6) {
 				var7 = fontRenderer.getStringWidth(tooltipData.get(var6));
 				if (var7 > var5)
