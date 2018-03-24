@@ -72,6 +72,9 @@ public class TileEntityEnergyRelay extends TileEntity implements IEnergyTranspor
 
 	@Override
 	public void update() {
+		if(world.isBlockPowered(pos))
+			return;
+
 		++ticksExisted;
 
 		if(ticksExisted % 20 == 0)

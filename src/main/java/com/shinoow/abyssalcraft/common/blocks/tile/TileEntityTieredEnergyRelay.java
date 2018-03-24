@@ -50,6 +50,9 @@ public class TileEntityTieredEnergyRelay extends TileEntityEnergyRelay {
 
 	@Override
 	public void update() {
+		if(world.isBlockPowered(pos))
+			return;
+
 		++ticksExisted;
 
 		if(ticksExisted % 20 == 0)

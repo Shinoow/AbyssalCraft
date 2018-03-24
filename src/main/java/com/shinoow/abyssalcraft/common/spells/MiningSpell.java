@@ -162,6 +162,7 @@ public class MiningSpell extends Spell {
 						if(f >= 500) break;
 					}
 				}
+				if(i >= 128) break;
 			}
 	}
 }

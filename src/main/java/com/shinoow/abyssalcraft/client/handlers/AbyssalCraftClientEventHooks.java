@@ -259,6 +259,7 @@ public class AbyssalCraftClientEventHooks {
 		ModelBakery.registerItemVariants(ACItems.staff_of_the_gatekeeper, makerl("staff", "staff2"));
 		ModelBakery.registerItemVariants(ACItems.scroll, makerl("scroll_basic", "scroll_lesser", "scroll_moderate", "scroll_greater"));
 		ModelBakery.registerItemVariants(ACItems.unique_scroll, makerl("scroll_unique_anti", "scroll_unique_oblivion"));
+		ModelBakery.registerItemVariants(ACItems.antidote, makerl("coralium_antidote", "dread_antidote"));
 
 		ModelBakery.registerItemVariants(Item.getItemFromBlock(ACBlocks.ethaxium_brick), makerl("ethaxiumbrick_0", "ethaxiumbrick_1", "ethaxiumbrick_2"));
 		ModelBakery.registerItemVariants(Item.getItemFromBlock(ACBlocks.dark_ethaxium_brick), makerl("darkethaxiumbrick_0", "darkethaxiumbrick_1", "darkethaxiumbrick_2"));
@@ -611,6 +612,8 @@ public class AbyssalCraftClientEventHooks {
 		registerItemRender(ACItems.scroll, 3, "scroll_greater");
 		registerItemRender(ACItems.unique_scroll, 0, "scroll_unique_anti");
 		registerItemRender(ACItems.unique_scroll, 1, "scroll_unique_oblivion");
+		registerItemRender(ACItems.antidote, 0, "coralium_antidote");
+		registerItemRender(ACItems.antidote, 1, "dread_antidote");
 
 		registerItemRender(ACBlocks.stone, 0, "darkstone");
 		registerItemRender(ACBlocks.stone, 1, "abystone");

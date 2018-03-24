@@ -13,7 +13,12 @@ package com.shinoow.abyssalcraft.common.blocks;
 
 import java.util.Random;
 
+import com.shinoow.abyssalcraft.api.biome.ACBiomes;
+import com.shinoow.abyssalcraft.api.biome.IDreadlandsBiome;
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
+import com.shinoow.abyssalcraft.common.entity.EntityDreadSpawn;
+import com.shinoow.abyssalcraft.common.network.PacketDispatcher;
+import com.shinoow.abyssalcraft.common.network.client.CleansingRitualMessage;
 import com.shinoow.abyssalcraft.common.world.TeleporterAC;
 import com.shinoow.abyssalcraft.lib.ACConfig;
 import com.shinoow.abyssalcraft.lib.ACLib;
@@ -26,8 +31,10 @@ import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityList;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
+import net.minecraft.item.ItemMonsterPlacer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.BlockRenderLayer;
@@ -36,6 +43,8 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraft.world.biome.Biome;
+import net.minecraft.world.chunk.Chunk;
 import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.relauncher.Side;
@@ -69,6 +78,69 @@ public class BlockDreadlandsPortal extends BlockBreakable {
 			return field_185685_d;
 		case Z:
 			return field_185684_c;
+		}
+	}
+
+	@Override
+	public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand)
+	{
+		super.updateTick(worldIn, pos, state, rand);
+
+		if (worldIn.provider.getDimension() != ACLib.dreadlands_id && worldIn.getGameRules().getBoolean("doMobSpawning") && rand.nextInt(2000) < worldIn.getDifficulty().getDifficultyId())
+		{
+			int i = pos.getY();
+			BlockPos blockpos;
+
+			for (blockpos = pos; !worldIn.getBlockState(blockpos).isSideSolid(worldIn, blockpos, EnumFacing.UP) && blockpos.getY() > 0; blockpos = blockpos.down())
+				;
+
+			if (i > 0 && !worldIn.getBlockState(blockpos.up()).isNormalCube())
+			{
+				Entity entity = ItemMonsterPlacer.spawnCreature(worldIn, EntityList.getKey(EntityDreadSpawn.class), blockpos.getX() + 0.5D, blockpos.getY() + 1.1D, blockpos.getZ() + 0.5D);
+
+				if (entity != null)
+					entity.timeUntilPortal = entity.getPortalCooldown();
+			}
+		}
+
+
+		if(worldIn.provider.getDimension() != ACLib.dreadlands_id && worldIn.provider.getDimension() != ACLib.omothol_id && !worldIn.isRemote && rand.nextInt(10) < worldIn.getDifficulty().getDifficultyId()) {
+			int distance = 5, num = 0;
+			for(int x = pos.getX() - distance; x <= pos.getX() + distance; x++)
+				for(int z = pos.getZ() - distance; z <= pos.getZ() + distance; z++)
+					if(!(worldIn.getBiome(new BlockPos(x, 0, z)) instanceof IDreadlandsBiome))
+					{
+						int i = (int)pos.distanceSq(x, pos.getY(), z);
+						if(distance > 5)
+							i /= distance;
+
+						if(i == 0 || rand.nextInt(i) == 0) {
+							num++;
+							Biome b = ACBiomes.dreadlands;
+							Chunk c = worldIn.getChunkFromBlockCoords(pos);
+							c.getBiomeArray()[(z & 0xF) << 4 | x & 0xF] = (byte)Biome.getIdForBiome(b);
+							c.setModified(true);
+							PacketDispatcher.sendToDimension(new CleansingRitualMessage(x, z, Biome.getIdForBiome(b)), worldIn.provider.getDimension());
+						}
+					}
+			if(num == 0) {
+				distance +=5;
+				for(int x = pos.getX() - distance; x <= pos.getX() + distance; x++)
+					for(int z = pos.getZ() - distance; z <= pos.getZ() + distance; z++)
+						if(!(worldIn.getBiome(new BlockPos(x, 0, z)) instanceof IDreadlandsBiome))
+						{
+							int i = (int)pos.distanceSq(x, pos.getY(), z);
+							i /= 5;
+
+							if(i == 0 || rand.nextInt(i) == 0) {
+								Biome b = ACBiomes.dreadlands;
+								Chunk c = worldIn.getChunkFromBlockCoords(pos);
+								c.getBiomeArray()[(z & 0xF) << 4 | x & 0xF] = (byte)Biome.getIdForBiome(b);
+								c.setModified(true);
+								PacketDispatcher.sendToDimension(new CleansingRitualMessage(x, z, Biome.getIdForBiome(b)), worldIn.provider.getDimension());
+							}
+						}
+			}
 		}
 	}
 

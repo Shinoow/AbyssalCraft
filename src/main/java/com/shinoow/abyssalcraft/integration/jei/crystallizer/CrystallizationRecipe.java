@@ -21,9 +21,9 @@ import javax.annotation.Nullable;
 
 import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.recipe.IRecipeWrapper;
-import mezz.jei.util.Translator;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
 
 public class CrystallizationRecipe implements IRecipeWrapper {
@@ -43,7 +43,7 @@ public class CrystallizationRecipe implements IRecipeWrapper {
 		Collections.addAll(outputs, output, output2);
 
 		if (experience > 0.0)
-			experienceString = Translator.translateToLocalFormatted("gui.jei.category.smelting.experience", experience);
+			experienceString = I18n.format("gui.jei.category.smelting.experience", experience);
 		else
 			experienceString = null;
 	}

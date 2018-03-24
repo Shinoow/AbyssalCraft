@@ -222,6 +222,7 @@ public class MiscHandler implements ILifeCycleHandler {
 		ConditionProcessorRegistry.instance().registerProcessor(7, (condition, cap, player) -> { return cap.getArtifactTriggers().contains(condition.getConditionObject()); });
 		ConditionProcessorRegistry.instance().registerProcessor(8, (condition, cap, player) -> { return cap.getPageTriggers().contains(condition.getConditionObject()); });
 		ConditionProcessorRegistry.instance().registerProcessor(9, (condition, cap, player) -> { return cap.getWhisperTriggers().contains(condition.getConditionObject()); });
+		ConditionProcessorRegistry.instance().registerProcessor(10, (condition, cap, player) -> { return cap.getMiscTriggers().contains(condition.getConditionObject()); });
 
 		addDungeonHooks();
 		sendIMC();
@@ -890,6 +891,9 @@ public class MiscHandler implements ILifeCycleHandler {
 		addShapelessRecipe(reg, rl("coralium_upgrade_kit"), null, new ItemStack(ACItems.coralium_upgrade_kit, 1), ACItems.abyssalnite_ingot, ACItems.refined_coralium_ingot, ACItems.refined_coralium_ingot, ACItems.abyssalnite_upgrade_kit);
 		addShapelessRecipe(reg, rl("dreadium_upgrade_kit"), null, new ItemStack(ACItems.dreadium_upgrade_kit, 1), ACItems.refined_coralium_ingot, ACItems.dreadium_ingot, ACItems.dreadium_ingot, ACItems.coralium_upgrade_kit);
 		addShapelessRecipe(reg, rl("ethaxium_upgrade_kit"), null, new ItemStack(ACItems.ethaxium_upgrade_kit, 1), ACItems.dreadium_ingot, ACItems.ethaxium_ingot, ACItems.ethaxium_ingot, ACItems.dreadium_upgrade_kit);
+
+		addShapelessRecipe(reg, rl("coralium_plague_antidote"), null, new ItemStack(ACItems.antidote, 1, 0), PotionUtils.addPotionToItemStack(new ItemStack(Items.POTIONITEM), PotionTypes.WATER), ACBlocks.wastelands_thorn, ACItems.anti_plagued_flesh, new ItemStack(ACItems.shoggoth_flesh, 1, 1));
+		addShapelessRecipe(reg, rl("dread_plague_antidote"), null, new ItemStack(ACItems.antidote, 1, 1), PotionUtils.addPotionToItemStack(new ItemStack(Items.POTIONITEM), PotionTypes.WATER), ACItems.omothol_flesh, ACItems.dread_fragment, new ItemStack(ACItems.shoggoth_flesh, 1, 2));
 	}
 
 

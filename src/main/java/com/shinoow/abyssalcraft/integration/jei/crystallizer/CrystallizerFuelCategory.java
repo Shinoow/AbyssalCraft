@@ -25,8 +25,8 @@ import mezz.jei.api.gui.IGuiItemStackGroup;
 import mezz.jei.api.gui.IRecipeLayout;
 import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.recipe.IRecipeWrapper;
-import mezz.jei.util.Translator;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.resources.I18n;
 
 public class CrystallizerFuelCategory extends CrystallizerRecipeCategory {
 	@Nonnull
@@ -37,7 +37,7 @@ public class CrystallizerFuelCategory extends CrystallizerRecipeCategory {
 	public CrystallizerFuelCategory(IGuiHelper guiHelper) {
 		super(guiHelper);
 		background = guiHelper.createDrawable(backgroundLocation, 55, 38, 18, 32, 0, 0, 0, 80);
-		localizedName = Translator.translateToLocal("gui.acjei.category.fuel.crystallizer");
+		localizedName = I18n.format("gui.acjei.category.fuel.crystallizer");
 	}
 
 	@Override

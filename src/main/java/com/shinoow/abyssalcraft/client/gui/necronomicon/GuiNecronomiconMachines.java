@@ -219,31 +219,32 @@ public class GuiNecronomiconMachines extends GuiNecronomicon {
 		if(isMInfo){
 			stuff = localize(NecronomiconText.LABEL_INFO);
 			fontRenderer.drawSplitString(stuff, k + 20, b0 + 16, 116, 0xC40000);
-			setTurnupLimit(4);
+			setTurnupLimit(2);
 			if(currTurnup == 0){
 				writeText(1, NecronomiconText.MACHINE_INFO_1, 50);
 				GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
 				mc.renderEngine.bindTexture(NecronomiconResources.ITEM);
 				drawTexturedModalRect(k, b0, 0, 0, 256, 256);
 				renderItem(k + 60, b0 + 28, new ItemStack(ACBlocks.transmutator_idle), x, y);
-			} else if(currTurnup == 1){
-				writeText(1, NecronomiconText.MACHINE_INFO_2, 50);
+
+				writeText(2, NecronomiconText.MACHINE_INFO_2, 50);
 				GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
 				mc.renderEngine.bindTexture(NecronomiconResources.ITEM);
-				drawTexturedModalRect(k, b0, 0, 0, 256, 256);
-				renderItem(k + 60, b0 + 28, new ItemStack(ACBlocks.crystallizer_idle), x, y);
-			} else if(currTurnup == 2){
+				drawTexturedModalRect(k + 123, b0, 0, 0, 256, 256);
+				renderItem(k + 183, b0 + 28, new ItemStack(ACBlocks.crystallizer_idle), x, y);
+
+			} else if(currTurnup == 1){
 				writeText(1, NecronomiconText.MACHINE_INFO_3, 50);
 				GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
 				mc.renderEngine.bindTexture(NecronomiconResources.ITEM);
 				drawTexturedModalRect(k, b0, 0, 0, 256, 256);
 				renderItem(k + 60, b0 + 28, new ItemStack(ACBlocks.engraver), x, y);
-			} else if(currTurnup == 3){
-				writeText(1, NecronomiconText.MACHINE_INFO_4, 50);
+
+				writeText(2, NecronomiconText.MACHINE_INFO_4, 50);
 				GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
 				mc.renderEngine.bindTexture(NecronomiconResources.ITEM);
-				drawTexturedModalRect(k, b0, 0, 0, 256, 256);
-				renderItem(k + 60, b0 + 28, new ItemStack(ACBlocks.materializer), x, y);
+				drawTexturedModalRect(k + 123, b0, 0, 0, 256, 256);
+				renderItem(k + 183, b0 + 28, new ItemStack(ACBlocks.materializer), x, y);
 			}
 		}
 		if(isTra){

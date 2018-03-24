@@ -82,6 +82,7 @@ public class ItemHandler implements ILifeCycleHandler {
 		ACItems.stone_tablet = new ItemStoneTablet();
 		ACItems.scroll = new ItemScroll("scroll", "basic", "lesser", "moderate", "greater");
 		ACItems.unique_scroll = new ItemScroll("unique_scroll", "antimatter", "oblivion");
+		ACItems.antidote = new ItemAntidote();
 
 		//Coins
 		ACItems.coin = new ItemCoin("coin").setUnlockCondition(new DimensionCondition(ACLib.omothol_id));
@@ -446,6 +447,7 @@ public class ItemHandler implements ILifeCycleHandler {
 		registerItem(ACItems.stone_tablet, "stonetablet");
 		registerItem(ACItems.scroll, "scroll");
 		registerItem(ACItems.unique_scroll, "unique_scroll");
+		registerItem(ACItems.antidote, "antidote");
 		//		registerItem(shadowPlate, "shadowplate");
 
 	}

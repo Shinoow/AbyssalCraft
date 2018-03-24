@@ -111,6 +111,8 @@ public class NecronomiconText {
 	public static String MATERIAL_RITUAL_ALTAR_1 = "necronomicon.text.materials.ritualaltar.1";
 	public static String MATERIAL_RITUAL_PEDESTAL_1 = "necronomicon.text.materials.ritualpedestal.1";
 	public static String MATERIAL_MONOLITH_STONE_1 = "necronomicon.text.materials.monolithstone.1";
+	public static String MATERIAL_ABYSSAL_SAND = "necronomicon.text.materials.abyssalsand";
+	public static String MATERIAL_FUSED_ABYSSAL_SAND = "necronomicon.text.materials.fusedabyssalsand";
 
 	public static String CRAFTING_CORALIUM_INFUSED_STONE_1 = "necronomicon.text.crafting.coraliuminfusedstone.1";
 	public static String CRAFTING_CORALIUM_INFUSED_STONE_2 = "necronomicon.text.crafting.coraliuminfusedstone.2";
@@ -179,6 +181,8 @@ public class NecronomiconText {
 	public static String CRAFTING_STATE_TRANSFORMER_2 = "necronomicon.text.crafting.statetransformer.2";
 	public static String CRAFTING_ENERGY_DEPOSITIONER_1 = "necronomicon.text.crafting.energydepositioner.1";
 	public static String CRAFTING_ENERGY_DEPOSITIONER_2 = "necronomicon.text.crafting.energydepositioner.2";
+	public static String CRAFTING_ETHAXIUM_PILLAR = "necronomicon.text.crafting.ethaxiumpillar";
+	public static String CRAFTING_DARK_ETHAXIUM_PILLAR = "necronomicon.text.crafting.darkethaxiumpillar";
 
 	//Misc crafting
 	public static String CRAFTING_UPGRADE_KIT_1 = "necronomicon.text.crafting.upgradekit.1";
@@ -325,6 +329,16 @@ public class NecronomiconText {
 	public static String MACHINE_INFO_3 = "necronomicon.text.machines.3";
 	public static String MACHINE_INFO_4 = "necronomicon.text.machines.4";
 
+	public static String KNOWLEDGE_INFO_1 = "necronomicon.text.knowledge.1";
+	public static String KNOWLEDGE_INFO_2 = "necronomicon.text.knowledge.2";
+	public static String KNOWLEDGE_INFO_3 = "necronomicon.text.knowledge.3";
+
+	public static String CORALIUM_PLAGUE_INFO_1 = "necronomicon.text.coraliumplague.1";
+	public static String CORALIUM_PLAGUE_INFO_2 = "necronomicon.text.coraliumplague.2";
+
+	public static String DREAD_PLAGUE_INFO_1 = "necronomicon.text.dreadplague.1";
+	public static String DREAD_PLAGUE_INFO_2 = "necronomicon.text.dreadplague.2";
+
 	public static String WIP = "necronomicon.text.wip";
 
 	/** Text limit */
@@ -374,6 +388,9 @@ public class NecronomiconText {
 	public static String LABEL_MISC_INFORMATION = "necronomicon.miscinformation";
 	public static String LABEL_INFORMATION_ENCHANTMENTS = "necronomicon.information.enchantments";
 	public static String LABEL_INFORMATION_DECORATIVE_STATUES = "necronomicon.information.decorativestatues";
+	public static String LABEL_KNOWLEDGE = "necronomicon.information.knowledge";
+	public static String LABEL_CORALIUM_PLAGUE = "necronomicon.information.coraliumplague";
+	public static String LABEL_DREAD_PLAGUE = "necronomicon.information.dreadplague";
 
 	/**
 	 * The best way to drown an array of strings with nonsense

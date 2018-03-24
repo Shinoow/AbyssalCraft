@@ -58,6 +58,11 @@ public class NecroDataCapabilityStorage implements IStorage<INecroDataCapability
 			if(name != null)
 				l.appendTag(new NBTTagString(name));
 		properties.setTag("whisperTriggers", l);
+		l = new NBTTagList();
+		for(String name : instance.getMiscTriggers())
+			if(name != null)
+				l.appendTag(new NBTTagString(name));
+		properties.setTag("miscTriggers", l);
 		if(instance.hasUnlockedAllKnowledge())
 			properties.setBoolean("HasAllKnowledge", true);
 
@@ -90,6 +95,9 @@ public class NecroDataCapabilityStorage implements IStorage<INecroDataCapability
 		l = properties.getTagList("whisperTriggers", 8);
 		for(int i = 0; i < l.tagCount(); i++)
 			instance.triggerWhisperUnlock(l.getStringTagAt(i));
+		l = properties.getTagList("miscTriggers", 8);
+		for(int i = 0; i < l.tagCount(); i++)
+			instance.triggerMiscUnlock(l.getStringTagAt(i));
 		instance.unlockAllKnowledge(properties.getBoolean("HasAllKnowledge"));
 	}
 
