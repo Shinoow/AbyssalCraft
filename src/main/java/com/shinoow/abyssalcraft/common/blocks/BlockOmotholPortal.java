@@ -14,6 +14,7 @@ package com.shinoow.abyssalcraft.common.blocks;
 import java.util.Random;
 
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
+import com.shinoow.abyssalcraft.common.entity.EntityGatekeeperMinion;
 import com.shinoow.abyssalcraft.common.world.TeleporterAC;
 import com.shinoow.abyssalcraft.lib.ACAchievements;
 import com.shinoow.abyssalcraft.lib.ACConfig;
@@ -27,8 +28,10 @@ import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityList;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
+import net.minecraft.item.ItemMonsterPlacer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.BlockRenderLayer;
@@ -71,6 +74,29 @@ public class BlockOmotholPortal extends BlockBreakable {
 			return field_185685_d;
 		case Z:
 			return field_185684_c;
+		}
+	}
+
+	@Override
+	public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand)
+	{
+		super.updateTick(worldIn, pos, state, rand);
+
+		if (worldIn.provider.getDimension() != ACLib.omothol_id && worldIn.getGameRules().getBoolean("doMobSpawning") && rand.nextInt(2000) < worldIn.getDifficulty().getDifficultyId())
+		{
+			int i = pos.getY();
+			BlockPos blockpos;
+
+			for (blockpos = pos; !worldIn.getBlockState(blockpos).isSideSolid(worldIn, blockpos, EnumFacing.UP) && blockpos.getY() > 0; blockpos = blockpos.down())
+				;
+
+			if (i > 0 && !worldIn.getBlockState(blockpos.up()).isNormalCube())
+			{
+				Entity entity = ItemMonsterPlacer.spawnCreature(worldIn, EntityList.getEntityStringFromClass(EntityGatekeeperMinion.class), blockpos.getX() + 0.5D, blockpos.getY() + 1.1D, blockpos.getZ() + 0.5D);
+
+				if (entity != null)
+					entity.timeUntilPortal = entity.getPortalCooldown();
+			}
 		}
 	}
 

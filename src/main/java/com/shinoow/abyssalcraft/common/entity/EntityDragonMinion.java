@@ -570,4 +570,10 @@ public class EntityDragonMinion extends EntityMob implements IEntityMultiPart, I
 	{
 		return SoundEvents.ENTITY_ENDERDRAGON_HURT;
 	}
+
+	@Override
+	public EnumCreatureAttribute getCreatureAttribute()
+	{
+		return EnumCreatureAttribute.UNDEAD;
+	}
 }

@@ -20,6 +20,7 @@ import com.shinoow.abyssalcraft.api.energy.EnergyEnum.DeityType;
 import com.shinoow.abyssalcraft.api.entity.EntityUtil;
 
 import net.minecraft.block.Block;
+import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -54,14 +55,41 @@ public class PEUtils {
 			if(EntityUtil.hasNecronomicon(player)){
 				ItemStack item = player.getHeldItem(EnumHand.MAIN_HAND);
 				ItemStack item1 = player.getHeldItem(EnumHand.OFF_HAND);
-				if(item != null && item.getItem() instanceof IEnergyTransporterItem ||
-					item1 != null && item1.getItem() instanceof IEnergyTransporterItem)
+				if(canStackAcceptPE(item) || canStackAcceptPE(item1))
 					if(manipulator.canTransferPE()){
 						transferPEToStack(item, manipulator);
 						transferPEToStack(item1, manipulator);
 						AbyssalCraftAPI.getInternalMethodHandler().spawnPEStream(pos, player, world.provider.getDimension());
 					}
 			}
+	}
+
+	private static boolean canStackAcceptPE(ItemStack stack) {
+		if(stack != null && stack.getItem() instanceof IEnergyTransporterItem)
+			return ((IEnergyTransporterItem) stack.getItem()).canAcceptPEExternally(stack);
+		else return false;
+	}
+
+	/**
+	 * Attempts to transfer PE from a Manipulator to nearby Dropped Items<br>
+	 * (that are Energy Container Items)
+	 * @param world Current World
+	 * @param pos Current BlockPos
+	 * @param manipulator PE Manipulator
+	 * @param range Transfer Range
+	 */
+	public static void transferPEToNearbyDroppedItems(World world, BlockPos pos, IEnergyManipulator manipulator, int range){
+
+		List<EntityItem> items = world.getEntitiesWithinAABB(EntityItem.class, new AxisAlignedBB(pos, pos.add(1, 1, 1)).expand(range, range, range));
+
+		for(EntityItem item : items)
+			if(item.getEntityItem().getItem() instanceof IEnergyTransporterItem)
+				if(world.rand.nextInt(120-(int)(20 * manipulator.getAmplifier(AmplifierType.DURATION))) == 0)
+					if(canStackAcceptPE(item.getEntityItem()) && manipulator.canTransferPE()){
+						transferPEToStack(item.getEntityItem(), manipulator);
+						AbyssalCraftAPI.getInternalMethodHandler().spawnPEStream(pos, item, world.provider.getDimension());
+					}
+
 	}
 
 	/**

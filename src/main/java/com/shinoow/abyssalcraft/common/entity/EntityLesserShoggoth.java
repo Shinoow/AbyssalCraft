@@ -251,7 +251,7 @@ public class EntityLesserShoggoth extends EntityMob implements IOmotholEntity {
 			}
 		}
 
-		for (int i = 0; i < 2 && getShoggothType() == 4 && ACConfig.particleEntity && worldObj.provider.getDimension() != ACLib.dark_realm_id; ++i)
+		for (int i = 0; i < 2 * getBrightness(1.0f) && getShoggothType() == 4 && ACConfig.particleEntity && worldObj.provider.getDimension() != ACLib.dark_realm_id; ++i)
 			worldObj.spawnParticle(EnumParticleTypes.SMOKE_LARGE, posX + (rand.nextDouble() - 0.5D) * width, posY + rand.nextDouble() * height, posZ + (rand.nextDouble() - 0.5D) * width, 0.0D, 0.0D, 0.0D);
 	}
 

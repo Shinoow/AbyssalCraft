@@ -449,7 +449,7 @@ public class EntitySacthoth extends EntityMob implements IOmotholEntity {
 	@Override
 	public void onLivingUpdate()
 	{
-		for (int i = 0; i < (isWet() ? 1 : 2) && ACConfig.particleEntity && worldObj.provider.getDimension() != ACLib.dark_realm_id; ++i)
+		for (int i = 0; i < 2 * getBrightness(1.0f) && ACConfig.particleEntity && worldObj.provider.getDimension() != ACLib.dark_realm_id; ++i)
 			worldObj.spawnParticle(EnumParticleTypes.SMOKE_LARGE, posX + (rand.nextDouble() - 0.5D) * width, posY + rand.nextDouble() * height, posZ + (rand.nextDouble() - 0.5D) * width, 0.0D, 0.0D, 0.0D);
 
 		for(Entity entity : worldObj.getEntitiesWithinAABBExcludingEntity(this, getEntityBoundingBox().expand(30.0D, 30.0D, 30.0D)))

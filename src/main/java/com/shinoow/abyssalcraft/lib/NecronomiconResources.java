@@ -35,7 +35,6 @@ public class NecronomiconResources {
 	public static final ResourceLocation SKELETON_GOLIATH = res("skeleton-goliath");
 	public static final ResourceLocation SPECTRAL_DRAGON = res("spectral-dragon");
 	public static final ResourceLocation ASORAH = res("asorah");
-	public static final ResourceLocation LESSER_SHOGGOTH_ABYSSAL = res("lesser-shoggoth-abyssal");
 	public static final ResourceLocation CORALIUM_INFESTED_SQUID = res("coralium-infested-squid");
 
 	//Dreadlands entities
@@ -48,7 +47,6 @@ public class NecronomiconResources {
 	public static final ResourceLocation FIST_OF_CHAGAROTH = res("fist-of-chagaroth");
 	public static final ResourceLocation DREADGUARD = res("dreadguard");
 	public static final ResourceLocation CHAGAROTH = res("chagaroth");
-	public static final ResourceLocation LESSER_SHOGGOTH_DREADED = res("lesser-shoggoth-dreaded");
 
 	//Omothol entities
 	public static final ResourceLocation REMNANT = res("remnant");
@@ -56,7 +54,6 @@ public class NecronomiconResources {
 	public static final ResourceLocation OMOTHOL_WARDEN = res("missing"); //TODO: fix
 	public static final ResourceLocation MINION_OF_THE_GATEKEEPER = res("minion-of-the-gatekeeper");
 	public static final ResourceLocation JZAHAR = res("jzahar");
-	public static final ResourceLocation LESSER_SHOGGOTH_OMOTHOL = res("lesser-shoggoth-omothol");
 
 	//Dark Realm entities
 	public static final ResourceLocation SHADOW_CREATURE = res("shadow-creature");
@@ -64,7 +61,6 @@ public class NecronomiconResources {
 	public static final ResourceLocation SHADOW_BEAST = res("shadow-beast");
 	public static final ResourceLocation SHADOW_TITAN = res("missing"); //TODO: fix
 	public static final ResourceLocation SACTHOTH = res("sacthoth");
-	public static final ResourceLocation LESSER_SHOGGOTH_SHADOW = res("lesser-shoggoth-shadow");
 
 	//Seals representing The Great Old Ones, no idea how many I'm going to do
 	public static final ResourceLocation AZATHOTH_SEAL = res("azathoth");

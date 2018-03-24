@@ -72,6 +72,7 @@ public class PacketDispatcher
 		registerMessage(PEStreamMessage.class);
 		registerMessage(LifeDrainMessage.class);
 		registerMessage(TransferStackMessage.class);
+		registerMessage(KnowledgeUnlockMessage.class);
 	}
 
 	/**

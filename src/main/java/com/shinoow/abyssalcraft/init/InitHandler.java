@@ -64,6 +64,8 @@ public class InitHandler implements ILifeCycleHandler {
 	private static String[] abyssalZombieBlacklist, depthsGhoulBlacklist, antiAbyssalZombieBlacklist, antiGhoulBlacklist,
 	omotholGhoulBlacklist, interdimensionalCageBlacklist;
 
+	public static int[] coraliumOreGeneration;
+
 	public static boolean dark1, dark2, dark3, dark4, dark5, coralium1;
 	public static boolean darkspawn1, darkspawn2, darkspawn3, darkspawn4, darkspawn5, coraliumspawn1;
 	public static int darkWeight1, darkWeight2, darkWeight3, darkWeight4, darkWeight5, coraliumWeight;
@@ -90,6 +92,7 @@ public class InitHandler implements ILifeCycleHandler {
 		MinecraftForge.TERRAIN_GEN_BUS.register(new AbyssalCraftEventHooks());
 		MinecraftForge.EVENT_BUS.register(this);
 		MinecraftForge.EVENT_BUS.register(new KnowledgeEventHandler());
+		MinecraftForge.EVENT_BUS.register(new PlagueEventHandler());
 		NetworkRegistry.INSTANCE.registerGuiHandler(AbyssalCraft.instance, new CommonProxy());
 		AbyssalCraftAPI.setInternalNDHandler(new InternalNecroDataHandler());
 		AbyssalCraftAPI.setInternalMethodHandler(new InternalMethodHandler());
@@ -257,6 +260,7 @@ public class InitHandler implements ILifeCycleHandler {
 		generatePearlescentCoraliumOre = cfg.get("worldgen", "Pearlescent Coralium Ore", true, "Toggles whether or not to generate Pearlescent Coralium Ore in the Abyssal Wasteland.").getBoolean();
 		generateLiquifiedCoraliumOre = cfg.get("worldgen", "Liquified Coralium Ore", true, "Toggles whether or not to generate Liquified Coralium Ore in the Abyssal Wasteland.").getBoolean();
 		shoggothLairSpawnRate = cfg.get("worldgen", "Shoggoth Lair Generation Chance", 30, "Generation chance of a Shoggoth Lair. Higher numbers decrease the chance of a Lair generating, while lower numbers increase the chance.\n[range: 0 ~ 1000, default: 30]", 0, 1000).getInt();
+		coraliumOreGeneration = cfg.get("worldgen", "Coralium Ore Generation", new int[] {12, 8, 40}, "Coralium Ore generation. First parameter is the vein count, secound is amount of ores per vein, third is max height for it to generate at. Coralium Ore generation in swamps are half as common as oceans.").getIntList();
 
 		abyssalZombieBlacklist = cfg.get("item_blacklist", "Abyssal Zombie Item Blacklist", new String[]{}, "Items/Blocks added to this list won't be picked up by Abyssal Zombies. Format: modid:name:meta, where meta is optional.").getStringList();
 		depthsGhoulBlacklist = cfg.get("item_blacklist", "Depths Ghoul Item Blacklist", new String[]{}, "Items/Blocks added to this list won't be picked up by Depths Ghouls. Format: modid:name:meta, where meta is optional.").getStringList();
@@ -281,6 +285,8 @@ public class InitHandler implements ILifeCycleHandler {
 		coraliumWeight = MathHelper.clamp_int(coraliumWeight, 0, 100);
 		damageAmpl = MathHelper.clamp_double(damageAmpl, 1, 10);
 		depthsHelmetOverlayOpacity = MathHelper.clamp_double(depthsHelmetOverlayOpacity, 0.5D, 1.0D);
+		if(coraliumOreGeneration.length != 3)
+			coraliumOreGeneration = new int[] {12, 8, 40};
 
 		demon_transformations.clear();
 

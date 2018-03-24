@@ -215,6 +215,7 @@ public class TileEntityStatue extends TileEntity implements IEnergyManipulator, 
 					}
 				}
 
+				PEUtils.transferPEToNearbyDroppedItems(worldObj, pos, this, range);
 				PEUtils.transferPEToCollectors(worldObj, pos, this, (int)(PEUtils.getRangeAmplifiers(worldObj, pos) + getAmplifier(AmplifierType.RANGE)/2));
 			}
 		if(tolerance >= 100)
