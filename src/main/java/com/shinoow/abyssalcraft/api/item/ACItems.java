@@ -235,5 +235,7 @@ public class ACItems {
 	public static Item scroll;
 	/** Metadata Item, 0 = Antimatter, 1 = Oblivion */
 	public static Item unique_scroll;
+	/** Metadata Item, 0 = Coralium Plague Antidote, 1 = Dread Plague Antidote */
+	public static Item antidote;
 	//	public static Item shadow_titan_armor_plate = getItem("shadowplate");
 }

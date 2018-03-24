@@ -33,6 +33,8 @@ public interface INecroDataCapability {
 
 	public void triggerWhisperUnlock(String name);
 
+	public void triggerMiscUnlock(String name);
+
 	public void unlockAllKnowledge(boolean unlock);
 
 	public List<String> getBiomeTriggers();
@@ -46,6 +48,8 @@ public interface INecroDataCapability {
 	public List<String> getPageTriggers();
 
 	public List<String> getWhisperTriggers();
+
+	public List<String> getMiscTriggers();
 
 	public boolean hasUnlockedAllKnowledge();
 

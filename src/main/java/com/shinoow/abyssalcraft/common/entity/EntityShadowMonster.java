@@ -101,7 +101,7 @@ public class EntityShadowMonster extends EntityMob implements IOmotholEntity {
 	@Override
 	public void onLivingUpdate()
 	{
-		for (int i = 0; i < 2 && ACConfig.particleEntity && world.provider.getDimension() != ACLib.dark_realm_id; ++i)
+		for (int i = 0; i < 2 * getBrightness(1.0f) && ACConfig.particleEntity && world.provider.getDimension() != ACLib.dark_realm_id; ++i)
 			world.spawnParticle(EnumParticleTypes.SMOKE_LARGE, posX + (rand.nextDouble() - 0.5D) * width, posY + rand.nextDouble() * height, posZ + (rand.nextDouble() - 0.5D) * width, 0.0D, 0.0D, 0.0D);
 
 		super.onLivingUpdate();

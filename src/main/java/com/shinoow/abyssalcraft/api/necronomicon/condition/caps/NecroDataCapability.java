@@ -27,6 +27,7 @@ public class NecroDataCapability implements INecroDataCapability {
 	List<String> artifact_triggers = Lists.newArrayList();
 	List<String> page_triggers = Lists.newArrayList();
 	List<String> whisper_triggers = Lists.newArrayList();
+	List<String> misc_triggers = Lists.newArrayList();
 
 	boolean hasAllKnowledge;
 
@@ -78,6 +79,12 @@ public class NecroDataCapability implements INecroDataCapability {
 	}
 
 	@Override
+	public void triggerMiscUnlock(String name) {
+		if(name != null && !misc_triggers.contains(name))
+			misc_triggers.add(name);
+	}
+
+	@Override
 	public void unlockAllKnowledge(boolean unlock) {
 		hasAllKnowledge = unlock;
 	}
@@ -119,6 +126,12 @@ public class NecroDataCapability implements INecroDataCapability {
 	}
 
 	@Override
+	public List<String> getMiscTriggers(){
+
+		return misc_triggers;
+	}
+
+	@Override
 	public boolean hasUnlockedAllKnowledge(){
 		return hasAllKnowledge;
 	}
@@ -132,6 +145,7 @@ public class NecroDataCapability implements INecroDataCapability {
 		artifact_triggers = cap.getArtifactTriggers();
 		page_triggers = cap.getPageTriggers();
 		whisper_triggers = cap.getWhisperTriggers();
+		misc_triggers = cap.getMiscTriggers();
 		hasAllKnowledge = cap.hasUnlockedAllKnowledge();
 	}
 }

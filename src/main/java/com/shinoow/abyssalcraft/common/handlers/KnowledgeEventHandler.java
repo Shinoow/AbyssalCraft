@@ -11,9 +11,11 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.common.handlers;
 
+import com.shinoow.abyssalcraft.api.necronomicon.condition.caps.INecroDataCapability;
 import com.shinoow.abyssalcraft.api.necronomicon.condition.caps.NecroDataCapability;
 import com.shinoow.abyssalcraft.api.necronomicon.condition.caps.NecroDataCapabilityProvider;
 import com.shinoow.abyssalcraft.common.network.PacketDispatcher;
+import com.shinoow.abyssalcraft.common.network.client.KnowledgeUnlockMessage;
 import com.shinoow.abyssalcraft.common.network.client.NecroDataCapMessage;
 
 import net.minecraft.entity.Entity;
@@ -45,22 +47,38 @@ public class KnowledgeEventHandler {
 		if(event.getEntityLiving() instanceof EntityPlayer && !event.getEntityLiving().world.isRemote){
 			EntityPlayer player = (EntityPlayer)event.getEntityLiving();
 			Biome b = player.world.getBiome(player.getPosition());
-			if(player.ticksExisted % 200 == 0 && ForgeRegistries.BIOMES.getKey(b) != null)
-				NecroDataCapability.getCap(player).triggerBiomeUnlock(ForgeRegistries.BIOMES.getKey(b).toString());
+			if(player.ticksExisted % 200 == 0 && ForgeRegistries.BIOMES.getKey(b) != null) {
+				String name = ForgeRegistries.BIOMES.getKey(b).toString();
+				INecroDataCapability cap = NecroDataCapability.getCap(player);
+				if(!cap.getBiomeTriggers().contains(name)) {
+					cap.triggerBiomeUnlock(ForgeRegistries.BIOMES.getKey(b).toString());
+					PacketDispatcher.sendTo(new KnowledgeUnlockMessage(0, name), (EntityPlayerMP) player);
+				}
+			}
 		}
 	}
 
 	@SubscribeEvent
 	public void onPlayerChangedDimension(PlayerChangedDimensionEvent event){
-		NecroDataCapability.getCap(event.player).triggerDimensionUnlock(event.toDim);
+		INecroDataCapability cap = NecroDataCapability.getCap(event.player);
+		if(!cap.getDimensionTriggers().contains(event.toDim)) {
+			cap.triggerDimensionUnlock(event.toDim);
+			PacketDispatcher.sendTo(new KnowledgeUnlockMessage(2, event.toDim), (EntityPlayerMP) event.player);
+		}
 	}
 
 	@SubscribeEvent
 	public void onDeath(LivingDeathEvent event){
 		if(!(event.getEntityLiving() instanceof EntityPlayer) && !event.getEntityLiving().world.isRemote){
 			EntityLivingBase e = event.getEntityLiving();
-			if(event.getSource() != null && event.getSource().getEntity() instanceof EntityPlayer && EntityList.getKey(e) != null)
-				NecroDataCapability.getCap((EntityPlayer)event.getSource().getEntity()).triggerEntityUnlock(EntityList.getKey(e).toString());
+			if(event.getSource() != null && event.getSource().getEntity() instanceof EntityPlayer && EntityList.getKey(e) != null) {
+				String name = EntityList.getKey(e).toString();
+				INecroDataCapability cap = NecroDataCapability.getCap((EntityPlayer)event.getSource().getEntity());
+				if(!cap.getEntityTriggers().contains(name)) {
+					cap.triggerEntityUnlock(name);
+					PacketDispatcher.sendTo(new KnowledgeUnlockMessage(1, name), (EntityPlayerMP) event.getSource().getEntity());
+				}
+			}
 		}
 	}
 

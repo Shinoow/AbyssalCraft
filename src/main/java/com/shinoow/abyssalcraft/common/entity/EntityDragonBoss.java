@@ -669,4 +669,10 @@ public class EntityDragonBoss extends EntityMob implements IEntityMultiPart, ICo
 	{
 		return 5.0F;
 	}
+
+	@Override
+	public EnumCreatureAttribute getCreatureAttribute()
+	{
+		return EnumCreatureAttribute.UNDEAD;
+	}
 }

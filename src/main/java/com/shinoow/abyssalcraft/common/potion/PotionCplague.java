@@ -11,11 +11,17 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.common.potion;
 
+import java.util.List;
+
+import com.google.common.collect.Lists;
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
 import com.shinoow.abyssalcraft.api.entity.EntityUtil;
+import com.shinoow.abyssalcraft.api.item.ACItems;
+import com.shinoow.abyssalcraft.api.necronomicon.condition.caps.NecroDataCapability;
 import com.shinoow.abyssalcraft.common.entity.EntityAbyssalZombie;
 import com.shinoow.abyssalcraft.common.entity.EntityCoraliumSquid;
 import com.shinoow.abyssalcraft.common.entity.EntityDepthsGhoul;
+import com.shinoow.abyssalcraft.common.handlers.PlagueEventHandler;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.EntityLivingBase;
@@ -23,8 +29,10 @@ import net.minecraft.entity.IEntityLivingData;
 import net.minecraft.entity.monster.EntityZombie;
 import net.minecraft.entity.passive.EntitySquid;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.world.EnumDifficulty;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -45,6 +53,17 @@ public class PotionCplague extends Potion{
 
 	@Override
 	public void performEffect(EntityLivingBase par1EntityLivingBase, int par2){
+
+		if(par1EntityLivingBase.ticksExisted % 200 == 0 && par1EntityLivingBase.getRNG().nextFloat() > 0.7F) {
+			AxisAlignedBB axisalignedbb = par1EntityLivingBase.getEntityBoundingBox().expand(2.0D, 2.0D, 2.0D);
+			List<EntityLivingBase> list = par1EntityLivingBase.world.<EntityLivingBase>getEntitiesWithinAABB(EntityLivingBase.class, axisalignedbb);
+			for(EntityLivingBase entity : list)
+				if(entity.getRNG().nextBoolean() && !entity.world.isRemote)
+					entity.addPotionEffect(PlagueEventHandler.getEffect(par1EntityLivingBase.getActivePotionEffect(this)));
+		}
+
+		if(par1EntityLivingBase instanceof EntityPlayer && par1EntityLivingBase.ticksExisted % 200 == 0)
+			NecroDataCapability.getCap((EntityPlayer) par1EntityLivingBase).triggerMiscUnlock("coralium_plague");
 
 		if(EntityUtil.isEntityCoralium(par1EntityLivingBase)) return;
 
@@ -108,5 +127,13 @@ public class PotionCplague extends Potion{
 	{
 		Minecraft.getMinecraft().renderEngine.bindTexture(new ResourceLocation("abyssalcraft:textures/misc/potionFX.png"));
 		return 0;
+	}
+
+	@Override
+	public List<ItemStack> getCurativeItems()
+	{
+		List<ItemStack> list = Lists.newArrayList();
+		list.add(new ItemStack(ACItems.antidote));
+		return list;
 	}
 }

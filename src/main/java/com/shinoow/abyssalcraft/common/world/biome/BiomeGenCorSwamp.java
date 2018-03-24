@@ -78,9 +78,9 @@ public class BiomeGenCorSwamp extends Biome {
 				if (var10 == Blocks.IRON_ORE || var10 == Blocks.COAL_ORE)
 					par1World.setBlockState(pos.add(var7, var8, var9), ACBlocks.coralium_ore.getDefaultState());
 			}
-			for(int rarity = 0; rarity < 6; rarity++)
+			for(int rarity = 0; rarity < 9; rarity++)
 			{
-				int veinSize = 4;
+				int veinSize = 4 + par2Random.nextInt(2);
 				int x = par2Random.nextInt(16);
 				int y = par2Random.nextInt(40);
 				int z = par2Random.nextInt(16);

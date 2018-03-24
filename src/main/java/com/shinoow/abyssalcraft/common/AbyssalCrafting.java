@@ -341,6 +341,8 @@ public class AbyssalCrafting {
 
 		GameRegistry.addShapelessRecipe(new ItemStack(ACItems.life_crystal), new ItemStack(ACItems.crystal, 1, 3), new ItemStack(ACItems.crystal, 1, 5), new ItemStack(ACItems.crystal, 1, 6),
 				new ItemStack(ACItems.crystal, 1, 4), new ItemStack(ACItems.crystal, 1, 7), new ItemStack(ACItems.crystal, 1, 2));
+		GameRegistry.addShapelessRecipe(new ItemStack(ACItems.antidote, 1, 0), PotionUtils.addPotionToItemStack(new ItemStack(Items.POTIONITEM), PotionTypes.WATER), ACBlocks.wastelands_thorn, ACItems.anti_plagued_flesh, new ItemStack(ACItems.shoggoth_flesh, 1, 1));
+		GameRegistry.addShapelessRecipe(new ItemStack(ACItems.antidote, 1, 1), PotionUtils.addPotionToItemStack(new ItemStack(Items.POTIONITEM), PotionTypes.WATER), ACItems.omothol_flesh, ACItems.dread_fragment, new ItemStack(ACItems.shoggoth_flesh, 1, 2));
 
 		//Coralium Gem Cluster Recipes
 		GameRegistry.addShapelessRecipe(new ItemStack(ACItems.coralium_gem_cluster_2, 1),ACItems.coralium_gem, ACItems.coralium_gem);
