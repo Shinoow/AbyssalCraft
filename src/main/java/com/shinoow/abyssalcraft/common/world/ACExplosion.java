@@ -225,7 +225,7 @@ public class ACExplosion extends Explosion
 		}
 
 		if (isAntimatter)
-			for(BlockPos pos1 : affectedBlockPositions)
+			for(BlockPos pos1 : explosionSize <= 32 ? affectedBlockPositions : outerBlocks)
 			{
 				IBlockState block = worldObj.getBlockState(pos1);
 				IBlockState block1 = worldObj.getBlockState(pos1.down());

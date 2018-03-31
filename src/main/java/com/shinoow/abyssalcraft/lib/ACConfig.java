@@ -22,7 +22,7 @@ public class ACConfig {
 
 	public static boolean shouldSpread, shouldInfect, breakLogic, destroyOcean, demonAnimalFire, particleBlock,
 	particleEntity, hardcoreMode, evilAnimalCreatureType, antiItemDisintegration, smeltingRecipes, purgeMobSpawns,
-	overworldShoggoths, mimicFire, armorPotionEffects;
+	overworldShoggoths, mimicFire, armorPotionEffects, nuclearAntimatterExplosions;
 	public static int evilAnimalSpawnWeight, endAbyssalZombieSpawnWeight, portalCooldown, demonAnimalSpawnWeight, shoggothLairSpawnRate;
 	public static double damageAmpl, depthsHelmetOverlayOpacity;
 	public static boolean shoggothOoze, oozeExpire;

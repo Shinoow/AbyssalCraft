@@ -19,6 +19,7 @@ import com.shinoow.abyssalcraft.api.entity.IAntiEntity;
 import com.shinoow.abyssalcraft.api.item.ACItems;
 import com.shinoow.abyssalcraft.common.entity.EntityDepthsGhoul;
 import com.shinoow.abyssalcraft.common.entity.EntityOmotholGhoul;
+import com.shinoow.abyssalcraft.common.util.ExplosionUtil;
 import com.shinoow.abyssalcraft.init.InitHandler;
 import com.shinoow.abyssalcraft.lib.ACConfig;
 import com.shinoow.abyssalcraft.lib.ACLoot;
@@ -145,7 +146,9 @@ public class EntityAntiGhoul extends EntityMob implements IAntiEntity {
 	{
 		if(!world.isRemote && par1Entity instanceof EntityDepthsGhoul){
 			boolean flag = world.getGameRules().getBoolean("mobGriefing");
-			world.createExplosion(this, posX, posY, posZ, 5, flag);
+			if(ACConfig.nuclearAntimatterExplosions)
+				ExplosionUtil.newODBExplosion(world, this, posX, posY, posZ, 40, true, flag);
+			else world.createExplosion(this, posX, posY, posZ, 5, flag);
 			setDead();
 		}
 		else par1Entity.applyEntityCollision(this);

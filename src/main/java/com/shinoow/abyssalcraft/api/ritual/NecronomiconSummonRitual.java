@@ -13,10 +13,12 @@ package com.shinoow.abyssalcraft.api.ritual;
 
 import java.lang.reflect.InvocationTargetException;
 
+import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.IEntityLivingData;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.World;
@@ -99,6 +101,8 @@ public class NecronomiconSummonRitual extends NecronomiconRitual {
 		if(entityliving != null){
 			entityliving.setLocationAndAngles(pos.getX(), pos.getY() + 1, pos.getZ(), entityliving.rotationYaw, entityliving.rotationPitch);
 			((EntityLiving) entityliving).onInitialSpawn(world.getDifficultyForLocation(pos.up()), (IEntityLivingData)null);
+			for (EntityPlayerMP entityplayermp : world.getEntitiesWithinAABB(EntityPlayerMP.class, entityliving.getEntityBoundingBox().grow(5)))
+				CriteriaTriggers.SUMMONED_ENTITY.trigger(entityplayermp, entityliving);
 			world.spawnEntity(entityliving);
 		}
 	}

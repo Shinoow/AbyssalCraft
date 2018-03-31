@@ -265,6 +265,9 @@ necronomicon.miscinformation=Información Miscelánea
 necronomicon.information.enchantments=Encantamientos
 necronomicon.sacrifice=Requiere un sacrificio
 necronomicon.information.decorativestatues=Decorative Statues
+necronomicon.information.knowledge=Obtaining Knowledge
+necronomicon.information.coraliumplague=The Coralium Plague
+necronomicon.information.dreadplague=The Dread Plague
 
 #Necronomicon Text
 #Note: the maximum amount of letters per string is 368
@@ -313,53 +316,40 @@ necronomicon.text.darkrealm=En El Omothol se encuentra el Reino en el que las al
 
 necronomicon.text.miscinformation=En esta sección se puede encontrar información variada que no se menciona en ningún otro lugar en el Necronomicon.
 
-necronomicon.text.materials.abyssalnite.1=Abyssalnite es un nuevo mineral que se encuentra en biomas de Darklands. Es más fuerte que los diamantes, y se puede utilizar para crear herramientas, armas y armaduras. Se puede encontrar más adelante y=32.
-necronomicon.text.materials.abyssalnite.2=Cuando es picado,caen bloques de mineral para fundir lingotes.Los lingotes son de color púrpura,al igual que el propio mineral.
-necronomicon.text.materials.darkstone.1=Darkstone es un nuevo tipo de piedra que se encuentran en biomas de de Darklands.La mayoría de las Montañas de Darklands están hechos de esta piedra.El reino de la oscuridad también se compone de este material.
-necronomicon.text.materials.darkstone.2=Cuando es picado,cae Darkstone de adoquines,y se puede convertir en ladrillos,los ladrillos son llamados ladrillos de Darkstone.Este material es 20% más fuerte que la piedra regular,y se puede utilizar para hacer herramientas que son 20% más fuertes que sus contrapartes.
+necronomicon.text.materials.abyssalnite.1=Abyssalnite is a new ore found in Darklands biomes. It is stronger than diamonds, and can be used to create tools, weapons and armor. Can be found below Y = 32. When mined, it drops ore blocks to smelt for ingots. The ingots are purple, much like the ore itself.
+necronomicon.text.materials.darkstone.1=Darkstone is a new type of stone found in Darklands biomes. Darklands Mountains are made out of this stone. The Dark Realm also consists of this material. When mined, it drops Darkstone Cobblestone, and it can be turned into Darkstone Bricks.
+necronomicon.text.materials.darkstone.2=This material is slightly stronger than regular stone, and tools made from it are stronger than their counterparts.
 necronomicon.text.materials.coralium.1=El coralium es un nuevo mineral que se encuentra en los océanos y el bioma del pantano infestado.Las gemas tienen varios usos, entre ellos la creación de Perlas de Coralium.
 necronomicon.text.materials.coralium.2=Grandes cantidades de gemas se pueden utilizar para crear Trozos de Coralium, que puede ser fundido para ser refinado como lingotes de Coralium.Se requieren Perlas de Coralium para crear la primera llave de entrada,que se utiliza para llegar a la primera dimensión,El Abyssal Wasteland.
-necronomicon.text.materials.darklandsoak.1=El roble de Darklands es un árbol nuevo que se encuentran comúnmente en el bioma de Darklands.Esa madera se puede utilizar para crear tablas,que se pueden utilizar para elaborar escaleras,losas y cercas.
-necronomicon.text.materials.darklandsoak.2=En comparación con la madera de roble normal,es de color más oscuro,y por lo tanto podría ser más elegante en los patrones de diseño,distinto de los diferentes tipos de madera.
-necronomicon.text.materials.nitre.1=El nitre es un nuevo mineral encontrado al azar en el Overworld.Puede ser utilizado para crear pólvora,pero no tiene muchos usos.Se puede cristalizar cristales de potasio y nitrato.
-necronomicon.text.materials.nitre.2=Este material probablemente tendrá usos adicionales en el futuro.
+necronomicon.text.materials.darklandsoak.1=Darklands Oak is a new tree commonly found in Darklands biomes. It's wood can be used to create planks, which can be used to craft stairs, slabs and fences. Compared to the normal Oak wood, it's darker in color, and could thus be more stylish in design patterns, shifting the different wood types.
+necronomicon.text.materials.nitre.1=Nitre is a new ore found randomly in the Overworld. It can be used to create gunpowder, but doesn't have that many uses past that. It can be crystallized into Potassium and Nitrate crystals.
 necronomicon.text.materials.liquidantimatter.1=La antimateria líquida es un líquido recién encontrada bajo tierra en los pantanos infestados de Coralium.Tiene la capacidad de de-materializar entidades,y también puede obligar a otros líquidos a solidificarse tras una colisión.
 necronomicon.text.materials.liquidantimatter.2=Si le sucede que cae en un charco de antimateria líquida,es probable que muera dentro de aproximadamente 5 segundos,ya que se trata de una gran cantidad de daño en un tiempo muy corto,por lo que es bastante difícil de evitar una muerte segura al entrar en contacto con ella.
-necronomicon.text.materials.abyssalstone.1=La piedra Abyssal es un nuevo tipo de piedra,tambien el Abyssal Wasteland esta hecho de la piedra abyssal.Es necesario herramientas de hierro o mejor para romperlo.
-necronomicon.text.materials.abyssalstone.2=En comparación con otros tipos de piedra,que es resistente a la transmutación producida por el líquido de Coralium,y se puede convertir en ladrillos de piedra Abyssal.
+necronomicon.text.materials.abyssalstone.1=Abyssal Stone is a new type of stone that the Abyssal Wasteland is made out of. You need iron tools or better to break it. Compared to other stone types, it is resistant to the transmutation produced by Liquid Coralium, and it can be turned into Abyssal Stone Bricks. Drops Abyssal Cobblestone when mined.
 necronomicon.text.materials.abyssalores.1=Dentro del Abyssal Wasteland,se pueden encontrar versiones "abismales" de los minerales que se encuentran en el Overworld,que cae en una versión Abyssal en gotas que de su contraparte en el overworld,si no es el mismo.
 necronomicon.text.materials.abyssalores.2=Hay una versión Abyssal de hierro,oro,diamantes,cobre,estaño y mineral de nitre.Que se generan en una altura similar a la del overworld.
-necronomicon.text.materials.abyssalcoralium.1=El Coralium Abyssal es una variante de Coralium que se encuentra dentro del Abyssal Wasteland.Es casi idéntico a su versión para el overworld.
-necronomicon.text.materials.abyssalcoralium.2=Al igual que la ordinaria mena de Coralium,el mineral de Coralium Abyssal deja caer Gemas de Coralium,que tiene múltiples usos.Se genera alrededor de Y=55 y por debajo.
-necronomicon.text.materials.liquifiedcoralium.1=El Coralium licuado es una variante de Coralium que se encuentra dentro del Abyssal Wasteland.En comparación con las otras variantes,no da Perlas de Coralium al ser picado.
-necronomicon.text.materials.liquifiedcoralium.2=Cuando es picado,el mineral puede ser fundido para obtener lingotes de Coralium refinados.Se  Genera alrededor de Y=22 y por debajo.
-necronomicon.text.materials.pearlescentcoralium.1=El Coralium Perlado es una variante de Coralium que se encuentra dentro del abyssal Wasteland.Esta variante da perlas de Coralium cuando es picado,en lugar de Gemas de Coralium.
-necronomicon.text.materials.pearlescentcoralium.2=Debido al elemento ganado de la mena,es muy raro,y se genera alrededor de Y=10 y por debajo.
+necronomicon.text.materials.abyssalcoralium.1=Abyssal Coralium is a variant of Coralium found within the Abyssal Wasteland. It is almost identical to it's overworld counterpart. Much like the regular Coralium Ore, the Abyssal Coralium Ore drops Coralium Gems, which has multiple uses. Generates around Y = 55 and below.
+necronomicon.text.materials.liquifiedcoralium.1=Liquified Coralium is a variant of Coralium found within the Abyssal Wasteland. Compared to the other variants, it doesn't drop Coralium Gems when mined. When mined, the dropped ore can be smelted down for Refined Coralium Ingots. Generates around Y = 22 and below.
+necronomicon.text.materials.pearlescentcoralium.1=Pearlescent Coralium is a variant of Coralium found within the Abyssal Wasteland. This variant drops Coralium Pearls when mined, instead of Coralium Gems. Due to the item gained from the ore, it is quite rare, and generates around Y = 10 and below.
 necronomicon.text.materials.liquidcoralium.1=El Coralium líquido  es un líquido que se encuentra dentro del nuevo Abyssal Wasteland.Tiene la capacidad de transmutar los elementos en contacto,como en la conversión de cualquier líquido a base de agua en sí misma,y la mayoría de los tipos de piedra en Piedra abyssal.
 necronomicon.text.materials.liquidcoralium.2=También infecta a entidades que toca con la plaga de Coralium,matandolos a ellos si no son inmunes.Algunas entidades pueden ser convertidos en Abyssal Zombis sobre la muerte.Si el líquido choca con antimateria líquida,se convertirá en piedra de Coralium.
-necronomicon.text.materials.powerstonedreadlands.1=Dreadlands infused Powerstone es una piedra especial que se encuentra en lo profundo de las fortalezas abyssales.Es necesario un pico más fuerte o igual a un pico de Coralium refinado con el fin de extraerlo.
-necronomicon.text.materials.powerstonedreadlands.2=Si usted choca con él,recibirá la temible plaga.Una vez extraído,se puede utilizar para actualizar su llave de entrada si usted tiene los otros componentes.
-necronomicon.text.materials.dreadstone.1=Dreadstone es una piedra que se encuentran comúnmente en el Dreadlands.Era antes Abyssinia piedra que fue convertida por la plaga del horror eones atrás.Puede convertirla en ladrillos de Dreadstone.
-necronomicon.text.materials.dreadstone.2=También se utiliza en el momento de elaborar el Altar de Cho'gath.
+necronomicon.text.materials.powerstonedreadlands.1=Dreadlands Infused Powerstone is a special stone found deep within Abyssal Strongholds. You need a pickaxe stronger or equal to a Refined Coralium Pickaxe in order to mine it. Once mined, it can be used to upgrade your Gateway Key if you have the other components.
+necronomicon.text.materials.dreadstone.1=Dreadstone is a stone found commonly in the Dreadlands. It was formerly Abyssalnite Stone that was converted by the Dread Plague aeons ago. You can turn it into Dreadstone Bricks. It is also used in when crafting the Altar of Cha'garoth.
 necronomicon.text.materials.abyssalnitestone.1=Piedra de Abyssalnite es una piedra que se encuentran dentro del bioma Dreadlands purificado dentro de las Dreadlands.Puede convertirlo en ladrillos de piedra de Abyssalnite.
 necronomicon.text.materials.abyssalnitestone.2=Antiguamente era con lo que estaba hecho el Dreadlands de antes de que se convertirse en el Dreadlands,dado que la dimensión fue una vez una mina gigantesca por tener la mayor cantidad de Abyssalnite pura.
-necronomicon.text.materials.dreadlandsabyssalnite.1=Dreadlands Abyssalnite es una variante de Abyssalnite encontrado en el Dreadlands.El mineral obtenido al ser picado  puede ser fundido para obtener lingotes de Abyssalnite.
-necronomicon.text.materials.dreadlandsabyssalnite.2=Irónicamente,en base a las condiciones en que existen,este mineral esta en la forma más pura de la mena de Abyssalnite que pueda encontrar en cualquier otro lugar.
-necronomicon.text.materials.dreadedabyssalnite.1=Dreaded Abyssalnite es una variante del Abyssalnite encontrado en el Dreadlands.El mineral obtenido al ser picado puede ser fundido para obtener lingotes de Abyssalnite.
-necronomicon.text.materials.dreadedabyssalnite.2=Si cristaliza este mineral,se puede obtener cristales de Dreadium,ya que esta forma de Abyssalnite ha sido corrompido por la temible plaga.
+necronomicon.text.materials.dreadlandsabyssalnite.1=Dreadlands Abyssalnite is a variant of Abyssalnite found in the Dreadlands. The ore gained from mining it can be smelted for Abyssalnite Ingots. Ironically enough, based on the conditions where this ore exist, this is the purest form of Abyssalnite Ore found anywhere.
+necronomicon.text.materials.dreadedabyssalnite.1=Dreaded Abyssalnite is a variant of Abyssalnite found in the Dreadlands. The ore gained from mining it can be smelted for Abyssalnite Ingots. If you crystallize this ore, you can get Dreadium Crystals, as this form of Abyssalnite has been corrupted by the Dread Plague.
 necronomicon.text.materials.dreadlandsgrass.1=La hierba del Dreadlands es un tipo de hierba que crece en el bioma Dreadlands forestal dentro del Dreadlands.En comparación con la hierba regular,es de color rojo
-necronomicon.text.materials.dreadlandsgrass.2=Sólo los Árboles del Dreadlands y el Roble del Darklands pueden crecer en esta hierba.
-necronomicon.text.materials.dreadlandstree.1=El árbol del Dreadlands es un árbol se encuentra comúnmente en el bioma Dreadlands forestal dentro del Dreadlands.Esta madera puede ser utilizada para hacer tablones,que se pueden utilizar para elaborar escaleras,losas y vallas.
-necronomicon.text.materials.dreadlandstree.2=En comparación con el roble,tanto las hojas como el tronco son de color rojo.
+necronomicon.text.materials.dreadlandstree.1=Dreadlands Tree is a tree commonly found in Dreadlands Forest biomes inside the Dreadlands. It's wood can be used to make planks, which can be used to craft stairs, slabs and fence. Compared to the Oak, both the leaves and logs are red.
 necronomicon.text.materials.omotholstone.1=La piedra del Omothol es un nuevo tipo de piedra,la cual se encuentra mayormente en el Omotol ya que esta hecho de esa piedra.Se puede combinar con Ethaxium para crear Ethaxium oscuro.
-necronomicon.text.materials.omotholstone.2=
 necronomicon.text.materials.ethaxium.1=El Ethaxium es un nuevo material que comúnmente aparece en el Omothol como el material utilizado para las estructuras construidas allí. El Ethaxium es extremadamente difícil de romper,y por lo tanto sólo puede ser destruido con herramientas hechas del mismo material.
 necronomicon.text.materials.ethaxium.2=El Ethaxium se dice que, es de lo que estan hechas las almas,lo que probablemente explica por qué es casi indestructible.No es de extrañar que J'zahar construyó su templo de la ciudad de este material.
-necronomicon.text.materials.darkethaxium.1=Ethaxium oscuro es una versión más fuerte de Ethaxium creado por la combinación Ethaxium regular con la piedra de Omothol.Este tipo de Ethaxium es más fuerte que su version normal.
-necronomicon.text.materials.darkethaxium.2=Este material se utiliza solamente en una sola estructura,el templo de J'zhar.
+necronomicon.text.materials.darkethaxium.1=Dark Ethaxium is a stronger version of Ethaxium created by combining regular Ethaxium with Omothol Stone. This kind of Ethaxium is harder than it's normal counterpart. This material is only used in one structure, the Temple of J'zahar.
 necronomicon.text.materials.ritualaltar.1=El ritual del altar es el componente principal en la realización de rituales.Se usa presionando SHIFT mas clic-derecho con un Necronomicón que tenga la suficiente Energía Potencial.Para rituales exitosos,los pedestales cercanos al ritual necesitarán las ofrendas correctas puestas en ellas.
 necronomicon.text.materials.ritualpedestal.1=Los pedestales de ritual se utilizan para colocar las ofrendas al realizar rituales.Esto se realiza mediante la interacción con el pedestal mientras se mantiene la oferta que desea colocar.
 necronomicon.text.materials.monolithstone.1=El Monolito de piedra es un material utilizado en cierta medida con la energía potencial.Sus orígenes son desconocidos,aparte de que los Shoggoths son capaces de crearlo.Se puede obtener a partir de los monolitos o en guridas de Shoggoth esparcidas.
+necronomicon.text.materials.abyssalsand=Abyssal Sand is found around the surface layers of the Abyssal Wasteland. It can be smelted into Abyssal Sand Glass, which is green.
+necronomicon.text.materials.fusedabyssalsand=Fused Abyssal Sand covers the surface of the Abyssal Wasteland. It's glassy texture is formed from the sand reacting to the atmosphere of the dimension.
 
 necronomicon.text.crafting.coraliuminfusedstone.1=La Coralium Infused Stone se hace a mano con Gemas de Coralium,Clústeres y piedra. Los tres grupos pueden ser de cualquier tamaño, pero debe ser igual a 9.
 necronomicon.text.crafting.coraliuminfusedstone.2=Si se utiliza un grupo de 9-joyas,rodealo de bloques de piedra en lugar de 2 filas.Cuando este bloque se rompe (o se funde) se obtiene una Perla de Coralium.
@@ -371,7 +361,7 @@ necronomicon.text.crafting.necro_c=El Necronomicon del Abyssal Wasteland se hace
 necronomicon.text.crafting.psdltracker=Un Powerstone Tracker se hace con Gemas Coralium y un ojo de Ender.
 necronomicon.text.crafting.necro_d=Un Necronomicon del Dreadlands se hace con piel del Dreadlands y un Necronomicon del Abyssal Wasteland.
 necronomicon.text.crafting.transmutator.1=Un Transmutador se hace con ladrillos de Coralium,Bloques de refinados de Coralium,una joya de Transutacion y Coralium líquido en un cubo.
-necronomicon.text.crafting.transmutator.2=Para obtener ladrillos de Coralium,debe verter el líquido en Antimateria líquida de Coralium,a continuación,recoge la piedra formada a partir del líquido de Coralium.Luego,debe fundir la piedra de Coralium para los lingotes de Coralium.
+necronomicon.text.crafting.transmutator.2=Para obtener ladrillos de Coralium,debe verter el líquido en Antimateria líquida de Coralium,a continuación,recoge la piedra formada a partir del líquido de Coralium.Luego,debe fundir la piedra de Coralium para los ladrillos de Coralium.
 necronomicon.text.crafting.crystallizer.1=Un cristalizador se hace utilizando ladrillos de Dreadstone, bloques de Dreadium y un horno.
 necronomicon.text.crafting.crystallizer.2=Los Lingotes de Dreadium se obtienen transmutando Fragmentos de Dreaded Abyssalnite, que se redujo en el interior de los Dreadguards del Dreadlands.El Dreadium es mucho más fácil de obtener una vez que tenga un cristalizador.
 necronomicon.text.crafting.necro_o=El Necronomicon del Omothol se hace a mano con piel del Omothol y un Necronomicon del Dreadlands.
@@ -426,6 +416,8 @@ necronomicon.text.crafting.statetransformer.1=A State Transformer is crafted wit
 necronomicon.text.crafting.statetransformer.2=Fill the input slots with stacks of items, then place a empty Stone Tablet in the leftmost slot to fill it. Press the button to switch modes, allowing you to reverse the process, returning items previously stored in a Stone Tablet. The amount of PE per input item is 1 * (64/max stack size) PE/item. Input/output can be automated.
 necronomicon.text.crafting.energydepositioner.1=A Energy Depositioner is crafted with Monolith Stone, Shadow Gems, a Transmutation Gem and a Energy Relay. This is a PE manipulator, working like statues.
 necronomicon.text.crafting.energydepositioner.2=By placing a charged Stone Tablet in the input slot, the Depositioner will siphon out any PE stored in it, returning either a empty Stone Tablet or a cursed one. This operation will corrupt the surrounding area (17x17 blocks), converting it into Darklands (more Darklands increases the chance of cursed Stone Tablets). Output can be automated.
+necronomicon.text.crafting.ethaxiumpillar=Ethaxium Pillars are crafted with Ethaxium Bricks and Ethaxium blocks
+necronomicon.text.crafting.darkethaxiumpillar=Dark Ethaxium Pillars are crafted with Dark Ethaxium Bricks and Omothol Stone
 
 necronomicon.text.crafting.upgradekit.1=A Upgrade Kit is crafted with Wooden Planks, Cobblestone, String and Flint. Upgrade kits can upgrade tools and armor through an anvil.
 necronomicon.text.crafting.upgradekit.2=Para actualizar se necesita 2 del material a actualizar y 1 del material actual.Los materiales son madera -> Piedra -> Hierro -> Oro -> Diamante -> Abyssalnite -> Coralium Refinado -> Dreadium -> Ethaxium.
@@ -454,8 +446,8 @@ necronomicon.text.enchantment.ironwall=El encantamiento de Pared de Hierro funci
 
 necronomicon.text.overworld.progression.1=Con el fin de llegar al Abyssal Wasteland,hay que elaborar una Llave de Entrada,lo que requiere un viaje al Nether,y para visitar El Darklands y un bioma a base de agua.El bioma a base de agua puede ser un pantano o un bioma marino.
 necronomicon.text.overworld.progression.2=Desde el Nether se necesita 2 baritas de Blaze,y probablemente un poco más para más adelante.Desde el bioma del Darklands se necesita para matar a las sombras que viven para obtener finalmente las Gemas Oscuras.Se encuentran más comúnmente en las Montañas del Darklands.Se recomienda obtener un Bastón del Rending con el fin de obtener las Gemas Oscuras más rápido (más información en la sección de armaduras y herramientas especiales).
-necronomicon.text.overworld.progression.3=Desde el bioma a base de agua necesitas Gemas de Coralium con el fin de crear Perlas de Coralium.Una vez que se cuente con estos elementos,puede comenzar el crafteo de Gemas de Transmutación (se necesitarán 4, y el exceso de Baritas de Blaze se utilizan para hacer polvo de esto).Recetas para este y Fragmentos del Olvido se pueden encontrar en la sección de materiales especiales.
-necronomicon.text.overworld.progression.4=Cuando tiene 4 Fragmentos del Olvido,utiliza esos y 4 de Redstone para infundir un ojo de Ender (a través de un ritual de infusión,que se encuentra en la sección ritual del Necronomicón) con el fin de crear un Catalizador del Olvido,el componente principal de la Llave de Entrada (la sección de materiales especial tiene la receta).
+necronomicon.text.overworld.progression.3=From the water-based biome you need Coralium Gems in order to create Coralium Pearls. Once you have obtained these items, you can create a Transmutation Gem through an Infusion Ritual (found in the ritual section). The recipe for Shards of Oblivion can be found in the special materials section.
+necronomicon.text.overworld.progression.4=When you have 4 Shards of Oblivion, use those and 4 units of Redstone Dust to infuse an Eye of Ender (through an infusion ritual, found in the ritual section of the Necronomicon) in order to create an Oblivion Catalyst, main component of the Gateway Key (the special materials section has the recipe).
 necronomicon.text.overworld.progression.5=Una vez que la Llave de Entrada es crafteada,simplemente haga clic derecho en el suelo para formar un portal.Para obtener más información,se necesita el Necronomicon del Abyssal Wasteland,que requiere 8 pieles del Abyssal Wasteland con el fin de actualizar.Se necesita el Bastón del Rending con el fin de obtener esencias utilizadas para elaborarlas.
 
 necronomicon.text.abyssal.progression.1=Una vez que haya llegado al Abyssal Wasteland,su próximo objetivo es llegar al Dreadlands.Se necesitan 3 componentes con el fin de actualizar su Llave de Entrada,un Ojo del Abyss,una infusión del Dreadlands Powerstone y una Gema de Transmutación.La primera se obtiene al derrotar a Asorah,El Caído,convocado por el ritual de "ritual del durmiente" (en la sección ritual).
@@ -568,6 +560,16 @@ necronomicon.text.machines.1=El Transmutador se utiliza para transmutar objetos 
 necronomicon.text.machines.2=El cristalizador se utiliza para cristalizar los elementos,el aislamiento de los elementos de base (o moléculas) de que están hechos.Se alimenta de cualquier material Dread,Fragmentos de Dread y cualquier elemento cristalizado (cristal completo o fragmento).
 necronomicon.text.machines.3=El grabador se utiliza para grabar las monedas,lo que le permite comerciar cosas con los Remanentes.El "combustible" que se utiliza en El Grabador son plantillas de grabado,que se desgastan después de una cierta cantidad de usos.Si desea volver a grabar una moneda,usted tiene que utilizar un grabado en blanco en ella en primer lugar (con un grabado).
 necronomicon.text.machines.4=El materializador se usa para crear objetos mediante la combinación de elementos de base (obtenido a través de la cristalización).El materializador no utiliza combustible,sino que requiere un Necronomicon para funcionar,y una bolsa de cristal con cristales para materializar objetos.
+
+necronomicon.text.knowledge.1=Some information in this book is incomprehensible to your puny, regular, untwisted mortal mind. By studying artifacts, listening to the whispers from statues, defeat monsters and explore the surroundings, you can expand your mind with new knowledge, enabling you to comprehend the information. Some Items and Blocks also require knowledge in order to be comprehended.
+necronomicon.text.knowledge.2=Treasure chests can contain lost pages with information, and in old structures scattered about, you can uncover murals that will grant you knowledge. Statues depicting Great Old Ones can sometimes be heard whispering things. Through combat you can gain knowledge of the enemy after defeating it. Exploring biomes and dimensions will grant you new knowledge.
+necronomicon.text.knowledge.3=Information you can't comprehend appears in Aklo glyphs rather than the human alphabet. The following page has an example of such glyphs:
+
+necronomicon.text.coraliumplague.1=The Coralium Plague is a disease originating from the Abyssal Wasteland. It's capable of transforming infected victims on death into stronger monsters. It's only considered a plague by those harmed by it.
+necronomicon.text.coraliumplague.2=An antidote for the Coralium Plague can be made with a Water Bottle, a Wasteland's Thorn, a piece of Anti-Plagued Flesh and a piece of Abyssal Shoggoth Flesh.
+
+necronomicon.text.dreadplague.1=The Dread Plague is a disease originating from the Dreadlands. It's a very infectious disease, swiftly travelling between hosts, but also transforming the ground around those afflicted by it, thus allowing the plague to grow stronger. The only place known to be completely immune to the Dread Plague is Omothol.
+necronomicon.text.dreadplague.2=An antidote for the Dread Plague can be made with a Water Bottle, a piece of Omothol Ghoul Flesh, a Dread Fragment and a piece of Dreaded Shoggoth Flesh.
 
 necronomicon.text.wip=Esta sección está incompleta.
 
@@ -747,17 +749,17 @@ ac.ritual.econDLupgrade.desc=A Dreadlands Energy Container is created by infusin
 ac.ritual.econOMTupgrade=Omothol Energy Container
 ac.ritual.econOMTupgrade.desc=A Omothol Energy Container is created by infusing a Dreadlands Energy Container with Ethaxium Bricks, Dark Ethaxium Bricks, Shadow Gem Shards and Coralium Gems.
 ac.ritual.sorAWupgrade=Abyssal Wasteland Staff of Rending
-ac.ritual.sorAWupgrade.desc=A Abyssal Wasteland Staff of Rending is creadted by infusing a Staff of Rending with Abyssal Stone, Coralium Plagued Flesh and and a Shadow Gem.
+ac.ritual.sorAWupgrade.desc=A Abyssal Wasteland Staff of Rending is created by infusing a Staff of Rending with Abyssal Stone, Coralium Plagued Flesh and and a Shadow Gem.
 ac.ritual.sorDLupgrade=Dreadlands Staff of Rending
-ac.ritual.sorDLupgrade.desc=A Dreadlands Staff of Rending is creadted by infusing a Abyssal Wasteland Staff of Rending with Dreadstone, Dread Fragment and and a Shadow Gem.
+ac.ritual.sorDLupgrade.desc=A Dreadlands Staff of Rending is created by infusing a Abyssal Wasteland Staff of Rending with Dreadstone, Dread Fragment and and a Shadow Gem.
 ac.ritual.sorOMTupgrade=Omothol Staff of Rending
-ac.ritual.sorOMTupgrade.desc=A Omothol Staff of Rending is creadted by infusing a Dreadlands Staff of Rending with Omothol Stone, Omothol Flesh and and a Shadow Gem.
+ac.ritual.sorOMTupgrade.desc=A Omothol Staff of Rending is created by infusing a Dreadlands Staff of Rending with Omothol Stone, Omothol Flesh and and a Shadow Gem.
 ac.ritual.cleansing=Ritual of Cleansing
 ac.ritual.cleansing.desc=By presenting 8 random statues, a massive amount of energy and a living sacrifice, you revert the corruption of the Abyss from the surrounding area. With far too much power comes no responsibilities, what so ever. It purges the Darklands, restoring it to its pure Overworld state.
 ac.ritual.corruption=Ritual of Corruption
 ac.ritual.corruption.desc=By presenting 4 random statues, 4 blocks of Darkstone, a large amount of energy and a living sacrifice, you summon powers from the Abyss to corrupt the surrounding area. Defile the Overworld's purity in order to bring forth the Darklands.
 ac.ritual.resurrection=Dark Resurrection
-ac.ritual.resurrection.desc=By presenting crystalilzed compounds resembling the elements of life, a living sacrifice and a Name Tag with the name of a fallen companion, you resurrect it. The Crystal size scale with the companion (Shards for something the size of a Chicken, Clusters for a Horse, normal for anything inbetween). Life has limits, however.
+ac.ritual.resurrection.desc=By presenting crystallized compounds resembling the elements of life, a living sacrifice and a Name Tag with the name of a fallen companion, you resurrect it. The Crystal size scale with the companion (Shards for something the size of a Chicken, Clusters for a Horse, normal for anything inbetween). Life has limits, however.
 
 #Spells
 ac.spell.lifedrain=Life Drain
@@ -789,6 +791,8 @@ ac_worldgen=Generación del Mundo
 ac_worldgen.tooltip=Configuración de la generación del mundo
 ac_itemblacklist=Entity Item Blacklist
 ac_itemblacklist.tooltip=Entity Item Blacklist configuration
+ac_silly_settings=Silly Settings
+ac_silly_settings.tooltip=Silly Settings Configuration
 
 #Keybinds
 key.abyssalcraft.category=AbyssalCraft
@@ -1287,6 +1291,8 @@ item.scroll.moderate.name=Moderate Scroll
 item.scroll.greater.name=Greater Scroll
 item.unique_scroll.antimatter.name=Antimatter Scroll
 item.unique_scroll.oblivion.name=Oblivion Scroll
+item.antidote.coralium.name=Coralium Plague Antidote
+item.antidote.dread.name=Dread Plague Antidote
 
 #Entities
 entity.abyssalcraft.depthsghoul.name=Espíritu Necrófago de las Profundidades

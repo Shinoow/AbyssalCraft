@@ -14,6 +14,8 @@ package com.shinoow.abyssalcraft.common.entity.anti;
 import java.util.Calendar;
 
 import com.shinoow.abyssalcraft.api.entity.IAntiEntity;
+import com.shinoow.abyssalcraft.common.util.ExplosionUtil;
+import com.shinoow.abyssalcraft.lib.ACConfig;
 import com.shinoow.abyssalcraft.lib.ACLoot;
 
 import net.minecraft.block.state.IBlockState;
@@ -99,7 +101,9 @@ public class EntityAntiBat extends EntityAmbientCreature implements IAntiEntity 
 	{
 		if(!world.isRemote && par1Entity instanceof EntityBat){
 			boolean flag = world.getGameRules().getBoolean("mobGriefing");
-			world.createExplosion(this, posX, posY, posZ, 5, flag);
+			if(ACConfig.nuclearAntimatterExplosions)
+				ExplosionUtil.newODBExplosion(world, this, posX, posY, posZ, 40, true, flag);
+			else world.createExplosion(this, posX, posY, posZ, 5, flag);
 			setDead();
 		}
 	}
