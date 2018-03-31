@@ -16,6 +16,9 @@ import java.util.List;
 
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
 import com.shinoow.abyssalcraft.api.entity.EntityUtil;
+import com.shinoow.abyssalcraft.api.entity.IDreadEntity;
+import com.shinoow.abyssalcraft.common.entity.demon.EntityDemonAnimal;
+import com.shinoow.abyssalcraft.lib.ACLib;
 
 import net.minecraft.entity.EntityAreaEffectCloud;
 import net.minecraft.entity.EntityLivingBase;
@@ -71,7 +74,7 @@ public class PlagueEventHandler {
 				entity.world.playEvent(2002, new BlockPos(entity), PotionUtils.getPotionColorFromEffectList(Collections.singletonList(entity.getActivePotionEffect(AbyssalCraftAPI.coralium_plague))));
 
 			}
-		if(entity.isPotionActive(AbyssalCraftAPI.dread_plague))
+		if(entity.isPotionActive(AbyssalCraftAPI.dread_plague)) {
 			if(entity.getRNG().nextFloat() > 0.1F) {
 				EntityAreaEffectCloud entityareaeffectcloud = new EntityAreaEffectCloud(entity.world, entity.posX, entity.posY, entity.posZ);
 				entityareaeffectcloud.addEffect(new PotionEffect(AbyssalCraftAPI.dread_plague, 600));
@@ -106,6 +109,16 @@ public class PlagueEventHandler {
 				entity.world.playEvent(2002, new BlockPos(entity), PotionUtils.getPotionColorFromEffectList(Collections.singletonList(entity.getActivePotionEffect(AbyssalCraftAPI.dread_plague))));
 
 			}
+		} else if(entity instanceof IDreadEntity && !(entity instanceof EntityDemonAnimal) && entity.dimension != ACLib.dreadlands_id &&
+				entity.dimension != ACLib.omothol_id && entity.dimension != ACLib.dark_realm_id) {
+			EntityAreaEffectCloud entityareaeffectcloud = new EntityAreaEffectCloud(entity.world, entity.posX, entity.posY, entity.posZ);
+			entityareaeffectcloud.addEffect(new PotionEffect(AbyssalCraftAPI.dread_plague, 600));
+			entityareaeffectcloud.setRadius(entity.width);
+			entityareaeffectcloud.setDuration(100 + entity.getRNG().nextInt(100));
+			entityareaeffectcloud.setRadiusPerTick((3F - entityareaeffectcloud.getRadius()) / entityareaeffectcloud.getDuration());
+
+			entity.world.spawnEntity(entityareaeffectcloud);
+		}
 	}
 
 	@SubscribeEvent
