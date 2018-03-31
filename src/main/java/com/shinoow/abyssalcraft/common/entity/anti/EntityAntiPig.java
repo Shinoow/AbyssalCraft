@@ -13,6 +13,8 @@ package com.shinoow.abyssalcraft.common.entity.anti;
 
 import com.shinoow.abyssalcraft.api.entity.IAntiEntity;
 import com.shinoow.abyssalcraft.api.item.ACItems;
+import com.shinoow.abyssalcraft.common.util.ExplosionUtil;
+import com.shinoow.abyssalcraft.lib.ACConfig;
 import com.shinoow.abyssalcraft.lib.ACLoot;
 
 import net.minecraft.block.Block;
@@ -115,7 +117,9 @@ public class EntityAntiPig extends EntityAnimal implements IAntiEntity {
 	{
 		if(!worldObj.isRemote && par1Entity instanceof EntityPig){
 			boolean flag = worldObj.getGameRules().getBoolean("mobGriefing");
-			worldObj.createExplosion(this, posX, posY, posZ, 5, flag);
+			if(ACConfig.nuclearAntimatterExplosions)
+				ExplosionUtil.newODBExplosion(worldObj, this, posX, posY, posZ, 40, true, flag);
+			else worldObj.createExplosion(this, posX, posY, posZ, 5, flag);
 			setDead();
 		}
 		else par1Entity.applyEntityCollision(this);

@@ -47,6 +47,7 @@ public class EntityShadowBeast extends EntityMob implements IOmotholEntity {
 	public EntityShadowBeast(World par1World) {
 		super(par1World);
 		setSize(1.0F, 2.8F);
+		tasks.addTask(0, new EntityAISwimming(this));
 		tasks.addTask(2, new EntityAIAttackMelee(this, 0.35D, true));
 		tasks.addTask(3, new EntityAIMoveTowardsRestriction(this, 0.35D));
 		tasks.addTask(4, new EntityAIWander(this, 0.35D));
@@ -55,6 +56,13 @@ public class EntityShadowBeast extends EntityMob implements IOmotholEntity {
 		tasks.addTask(6, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
 		targetTasks.addTask(1, new EntityAIHurtByTarget(this, false));
 		targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityPlayer.class, true));
+		isImmuneToFire = true;
+	}
+
+	@Override
+	public boolean canBreatheUnderwater()
+	{
+		return true;
 	}
 
 	@Override

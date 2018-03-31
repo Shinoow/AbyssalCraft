@@ -751,17 +751,17 @@ ac.ritual.econDLupgrade.desc=A Dreadlands Energy Container is created by infusin
 ac.ritual.econOMTupgrade=Omothol Energy Container
 ac.ritual.econOMTupgrade.desc=A Omothol Energy Container is created by infusing a Dreadlands Energy Container with Ethaxium Bricks, Dark Ethaxium Bricks, Shadow Gem Shards and Coralium Gems.
 ac.ritual.sorAWupgrade=Abyssal Wasteland Staff of Rending
-ac.ritual.sorAWupgrade.desc=A Abyssal Wasteland Staff of Rending is creadted by infusing a Staff of Rending with Abyssal Stone, Coralium Plagued Flesh and and a Shadow Gem.
+ac.ritual.sorAWupgrade.desc=A Abyssal Wasteland Staff of Rending is created by infusing a Staff of Rending with Abyssal Stone, Coralium Plagued Flesh and and a Shadow Gem.
 ac.ritual.sorDLupgrade=Dreadlands Staff of Rending
-ac.ritual.sorDLupgrade.desc=A Dreadlands Staff of Rending is creadted by infusing a Abyssal Wasteland Staff of Rending with Dreadstone, Dread Fragment and and a Shadow Gem.
+ac.ritual.sorDLupgrade.desc=A Dreadlands Staff of Rending is created by infusing a Abyssal Wasteland Staff of Rending with Dreadstone, Dread Fragment and and a Shadow Gem.
 ac.ritual.sorOMTupgrade=Omothol Staff of Rending
-ac.ritual.sorOMTupgrade.desc=A Omothol Staff of Rending is creadted by infusing a Dreadlands Staff of Rending with Omothol Stone, Omothol Flesh and and a Shadow Gem.
+ac.ritual.sorOMTupgrade.desc=A Omothol Staff of Rending is created by infusing a Dreadlands Staff of Rending with Omothol Stone, Omothol Flesh and and a Shadow Gem.
 ac.ritual.cleansing=Ritual of Cleansing
 ac.ritual.cleansing.desc=By presenting 8 random statues, a massive amount of energy and a living sacrifice, you revert the corruption of the Abyss from the surrounding area. With far too much power comes no responsibilities, what so ever. It purges the Darklands, restoring it to its pure Overworld state.
 ac.ritual.corruption=Ritual of Corruption
 ac.ritual.corruption.desc=By presenting 4 random statues, 4 blocks of Darkstone, a large amount of energy and a living sacrifice, you summon powers from the Abyss to corrupt the surrounding area. Defile the Overworld's purity in order to bring forth the Darklands.
 ac.ritual.resurrection=Dark Resurrection
-ac.ritual.resurrection.desc=By presenting crystalilzed compounds resembling the elements of life, a living sacrifice and a Name Tag with the name of a fallen companion, you resurrect it. The Crystal size scale with the companion (Shards for something the size of a Chicken, Clusters for a Horse, normal for anything inbetween). Life has limits, however.
+ac.ritual.resurrection.desc=By presenting crystallized compounds resembling the elements of life, a living sacrifice and a Name Tag with the name of a fallen companion, you resurrect it. The Crystal size scale with the companion (Shards for something the size of a Chicken, Clusters for a Horse, normal for anything inbetween). Life has limits, however.
 
 #Spells
 ac.spell.lifedrain=Life Drain
@@ -793,6 +793,8 @@ ac_worldgen=Worldgen
 ac_worldgen.tooltip=Worldgen configuration
 ac_itemblacklist=Entity Item Blacklist
 ac_itemblacklist.tooltip=Entity Item Blacklist configuration
+ac_silly_settings=Silly Settings
+ac_silly_settings.tooltip=Silly Settings Configuration
 
 #Keybinds
 key.abyssalcraft.category=AbyssalCraft

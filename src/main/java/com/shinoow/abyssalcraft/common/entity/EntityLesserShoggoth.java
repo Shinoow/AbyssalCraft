@@ -88,9 +88,7 @@ public class EntityLesserShoggoth extends EntityMob implements IOmotholEntity {
 		tasks.addTask(7, new EntityAIWatchClosest(this, EntityLesserShoggoth.class, 8.0F));
 		tasks.addTask(7, new EntityAIWatchClosest(this, EntityGatekeeperMinion.class, 8.0F));
 		targetTasks.addTask(1, new EntityAIHurtByTarget(this, false));
-		targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityPlayer.class, true));
-		for(Class<? extends EntityLivingBase> c : EntityUtil.getShoggothFood())
-			targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, c, true));
+		targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityLivingBase.class, 10, true, false, entity -> entity instanceof EntityPlayer || EntityUtil.isShoggothFood((EntityLivingBase) entity)));
 		setSize(1.5F, 2.6F);
 	}
 
@@ -182,9 +180,17 @@ public class EntityLesserShoggoth extends EntityMob implements IOmotholEntity {
 		return dataManager.get(FOOD);
 	}
 
-	public void feed(){
-		int food = getFoodLevel() + 1;
+	public void feed(EntityLivingBase entity){
+		int food = getFoodLevel() + getPointsFromSize(entity.height * entity.width);
 		dataManager.set(FOOD, Integer.valueOf(food));
+	}
+
+	private int getPointsFromSize(float size) {
+
+		int food = 0;
+		for(float sizeNum = size; sizeNum > 0; sizeNum-=0.25)
+			food++;
+		return food;
 	}
 
 	@Override
@@ -212,8 +218,8 @@ public class EntityLesserShoggoth extends EntityMob implements IOmotholEntity {
 
 		monolithTimer++;
 
-		if(getFoodLevel() == 3 && !worldObj.isRemote){
-			setFoodLevel(0);
+		if(getFoodLevel() >= 8 && !worldObj.isRemote && ticksExisted % 20 == 0){
+			setFoodLevel(getFoodLevel()-8);
 			if(!isChild()){
 				EntityLesserShoggoth shoggoth = new EntityLesserShoggoth(worldObj);
 				shoggoth.copyLocationAndAnglesFrom(this);
@@ -451,7 +457,7 @@ public class EntityLesserShoggoth extends EntityMob implements IOmotholEntity {
 		super.onKillEntity(par1EntityLivingBase);
 
 		if(EntityUtil.isShoggothFood(par1EntityLivingBase))
-			feed();
+			feed(par1EntityLivingBase);
 	}
 
 	@Override
