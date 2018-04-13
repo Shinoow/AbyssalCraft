@@ -55,7 +55,7 @@ public class TileEntityShoggothBiomass extends TileEntity implements ITickable {
 	public void onLoad()
 	{
 		if(world.isRemote)
-			world.loadedTileEntityList.remove(this);
+			world.tickableTileEntities.remove(this);
 	}
 
 	@Override
@@ -78,15 +78,16 @@ public class TileEntityShoggothBiomass extends TileEntity implements ITickable {
 			if (cooldown >= 400) {
 				cooldown = world.rand.nextInt(10);
 				resetNearbyBiomass(true);
-				if(world.getEntitiesWithinAABB(EntityLesserShoggoth.class, new AxisAlignedBB(pos).expand(16, 16, 16)).size() <= 6){
-					EntityLesserShoggoth mob = new EntityLesserShoggoth(world);
-					setPosition(mob, pos.getX(), pos.getY(), pos.getZ());
-					mob.onInitialSpawn(world.getDifficultyForLocation(pos), (IEntityLivingData)null);
-					world.spawnEntity(mob);
-					spawnedShoggoths++;
-					if(spawnedShoggoths >= 5)
-						world.setBlockState(pos, ACBlocks.monolith_stone.getDefaultState(), 2);
-				}
+				if(world.getClosestPlayer(pos.getX(), pos.getY(), pos.getZ(), 32, false) != null)
+					if(world.getEntitiesWithinAABB(EntityLesserShoggoth.class, new AxisAlignedBB(pos).expand(16, 16, 16)).size() <= 6){
+						EntityLesserShoggoth mob = new EntityLesserShoggoth(world);
+						setPosition(mob, pos.getX(), pos.getY(), pos.getZ());
+						mob.onInitialSpawn(world.getDifficultyForLocation(pos), (IEntityLivingData)null);
+						world.spawnEntity(mob);
+						spawnedShoggoths++;
+						if(spawnedShoggoths >= 5)
+							world.setBlockState(pos, ACBlocks.monolith_stone.getDefaultState(), 2);
+					}
 			}
 		}
 	}
@@ -153,41 +154,29 @@ public class TileEntityShoggothBiomass extends TileEntity implements ITickable {
 	}
 
 	private void setPosition(EntityLiving entity, int x, int y, int z){
-		if(world.getBlockState(new BlockPos(x, y + 1, z)).getMaterial().isSolid()){
-			if(world.getBlockState(new BlockPos(x, y + 2, z)).getMaterial().isSolid()){
-				if(world.getBlockState(new BlockPos(x + 1, y + 1, z)).getMaterial().isSolid()){
-					if(world.getBlockState(new BlockPos(x, y + 1, z + 1)).getMaterial().isSolid()){
-						if(world.getBlockState(new BlockPos(x + 1, y + 1, z + 1)).getMaterial().isSolid()){
-							if(world.getBlockState(new BlockPos(x - 1, y + 1, z)).getMaterial().isSolid()){
-								if(world.getBlockState(new BlockPos(x, y + 1, z - 1)).getMaterial().isSolid()){
-									if(world.getBlockState(new BlockPos(x - 1, y + 1, z - 1)).getMaterial().isSolid()){
-										if(world.getBlockState(new BlockPos(x + 4, y + 1, z)).getMaterial().isSolid()){
-											if(world.getBlockState(new BlockPos(x, y + 1, z + 4)).getMaterial().isSolid()){
-												if(world.getBlockState(new BlockPos(x + 4, y + 1, z + 4)).getMaterial().isSolid()){
-													if(world.getBlockState(new BlockPos(x - 4, y + 1, z)).getMaterial().isSolid()){
-														if(world.getBlockState(new BlockPos(x, y + 1, z - 4)).getMaterial().isSolid()){
-															if(world.getBlockState(new BlockPos(x - 4, y + 1, z - 4)).getMaterial().isSolid()){
-																if(world.getBlockState(new BlockPos(x, y + 15, z)).getMaterial().isSolid()){
-																	entity.addPotionEffect(new PotionEffect(MobEffects.RESISTANCE, 10, 100));
-																	entity.setLocationAndAngles(x, y + 20, z, entity.rotationYaw, entity.rotationPitch);
-																} else {
-																	entity.addPotionEffect(new PotionEffect(MobEffects.RESISTANCE, 10, 100));
-																	entity.setLocationAndAngles(x, y + 15, z, entity.rotationYaw, entity.rotationPitch);
-																}
-															} else entity.setLocationAndAngles(x - 4, y + 1, z - 4, entity.rotationYaw, entity.rotationPitch);
-														} else entity.setLocationAndAngles(x, y + 1, z - 4, entity.rotationYaw, entity.rotationPitch);
-													} else entity.setLocationAndAngles(x - 4, y + 1, z, entity.rotationYaw, entity.rotationPitch);
-												} else entity.setLocationAndAngles(x + 4, y + 1, z + 4, entity.rotationYaw, entity.rotationPitch);
-											} else entity.setLocationAndAngles(x, y + 1, z + 4, entity.rotationYaw, entity.rotationPitch);
-										} else entity.setLocationAndAngles(x + 4, y + 1, z, entity.rotationYaw, entity.rotationPitch);
-									} else entity.setLocationAndAngles(x - 1, y + 1, z - 1, entity.rotationYaw, entity.rotationPitch);
-								} else entity.setLocationAndAngles(x, y + 1, z - 1, entity.rotationYaw, entity.rotationPitch);
-							} else entity.setLocationAndAngles(x - 1, y + 1, z, entity.rotationYaw, entity.rotationPitch);
-						} else entity.setLocationAndAngles(x + 1, y + 1, z + 1, entity.rotationYaw, entity.rotationPitch);
-					} else entity.setLocationAndAngles(x, y + 1, z + 1, entity.rotationYaw, entity.rotationPitch);
-				} else entity.setLocationAndAngles(x + 1, y + 1, z, entity.rotationYaw, entity.rotationPitch);
-			} else entity.setLocationAndAngles(x, y + 2, z, entity.rotationYaw, entity.rotationPitch);
-		} else entity.setLocationAndAngles(x, y + 1, z, entity.rotationYaw, entity.rotationPitch);
+		for(int i = -1; i < 2; i++)
+			for(int j = -1; j < 2; j++)
+				if(!world.getBlockState(new BlockPos(x + i, y + 1, z + j)).getMaterial().isSolid()) {
+					entity.setLocationAndAngles(x + i, y + 1, z + j, entity.rotationYaw, entity.rotationPitch);
+					return;
+				}
+		for(int i = -4; i < 5; i+=4)
+			for(int j = -4; j < 5; j+=4)
+				if(!world.getBlockState(new BlockPos(x + i, y + 1, z + j)).getMaterial().isSolid()) {
+					entity.setLocationAndAngles(x + i, y + 1, z + j, entity.rotationYaw, entity.rotationPitch);
+					return;
+				}
+		if(!world.getBlockState(new BlockPos(x, y + 2, z)).getMaterial().isSolid()) {
+			entity.setLocationAndAngles(x, y + 2, z, entity.rotationYaw, entity.rotationPitch);
+			return;
+		}
+		if(world.getBlockState(new BlockPos(x, y + 15, z)).getMaterial().isSolid()){
+			entity.addPotionEffect(new PotionEffect(MobEffects.RESISTANCE, 10, 100));
+			entity.setLocationAndAngles(x, y + 20, z, entity.rotationYaw, entity.rotationPitch);
+		} else {
+			entity.addPotionEffect(new PotionEffect(MobEffects.RESISTANCE, 10, 100));
+			entity.setLocationAndAngles(x, y + 15, z, entity.rotationYaw, entity.rotationPitch);
+		}
 	}
 
 	public int getCooldown(){

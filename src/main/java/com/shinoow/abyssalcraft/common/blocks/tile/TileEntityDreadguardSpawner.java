@@ -27,7 +27,7 @@ public class TileEntityDreadguardSpawner extends TileEntity implements ITickable
 	public void onLoad()
 	{
 		if(world.isRemote)
-			world.loadedTileEntityList.remove(this);
+			world.tickableTileEntities.remove(this);
 	}
 
 	@Override
@@ -46,7 +46,7 @@ public class TileEntityDreadguardSpawner extends TileEntity implements ITickable
 
 	@Override
 	public void update() {
-		if (isActivated() && !world.isRemote) {
+		if (isActivated()) {
 			EntityDreadguard mob = new EntityDreadguard(world);
 			mob.setLocationAndAngles(pos.getX(), pos.getY(), pos.getZ(), MathHelper.wrapDegrees(world.rand.nextFloat() * 360.0F), 10.0F);
 			mob.onInitialSpawn(world.getDifficultyForLocation(pos), null);

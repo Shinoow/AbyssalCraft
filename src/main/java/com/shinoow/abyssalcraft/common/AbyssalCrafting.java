@@ -342,7 +342,7 @@ public class AbyssalCrafting {
 		GameRegistry.addShapelessRecipe(new ItemStack(ACItems.life_crystal), new ItemStack(ACItems.crystal, 1, 3), new ItemStack(ACItems.crystal, 1, 5), new ItemStack(ACItems.crystal, 1, 6),
 				new ItemStack(ACItems.crystal, 1, 4), new ItemStack(ACItems.crystal, 1, 7), new ItemStack(ACItems.crystal, 1, 2));
 		GameRegistry.addShapelessRecipe(new ItemStack(ACItems.antidote, 1, 0), PotionUtils.addPotionToItemStack(new ItemStack(Items.POTIONITEM), PotionTypes.WATER), ACBlocks.wastelands_thorn, ACItems.anti_plagued_flesh, new ItemStack(ACItems.shoggoth_flesh, 1, 1));
-		GameRegistry.addShapelessRecipe(new ItemStack(ACItems.antidote, 1, 1), PotionUtils.addPotionToItemStack(new ItemStack(Items.POTIONITEM), PotionTypes.WATER), ACItems.omothol_flesh, ACItems.dread_fragment, new ItemStack(ACItems.shoggoth_flesh, 1, 2));
+		GameRegistry.addShapelessRecipe(new ItemStack(ACItems.antidote, 1, 1), PotionUtils.addPotionToItemStack(new ItemStack(Items.POTIONITEM), PotionTypes.WATER), ACBlocks.dreadlands_sapling, ACItems.dread_fragment, new ItemStack(ACItems.shoggoth_flesh, 1, 2));
 
 		//Coralium Gem Cluster Recipes
 		GameRegistry.addShapelessRecipe(new ItemStack(ACItems.coralium_gem_cluster_2, 1),ACItems.coralium_gem, ACItems.coralium_gem);
@@ -857,6 +857,7 @@ public class AbyssalCrafting {
 				new ItemStack(ACItems.essence, 1, 1), new ItemStack(ACItems.essence, 1, 1), new ItemStack(ACItems.essence, 1, 1), new ItemStack(ACItems.essence, 1, 1)};
 		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("powerStone", 4, ACLib.dreadlands_id, 5000F, new ItemStack(ACBlocks.dreadlands_infused_powerstone), ACBlocks.coralium_infused_stone, psdlofferings));
 		Object[] ethofferings = new Object[]{ACItems.ethaxium_brick, ACItems.ethaxium_brick, ACItems.life_crystal, ACItems.ethaxium_brick, ACItems.ethaxium_brick};
+		RitualRegistry.instance().registerRitual(new NecronomiconPurgingRitual());
 		RitualRegistry.instance().registerRitual(new NecronomiconCreationRitual("ethaxiumIngot", 3, ACLib.omothol_id, 1000F, new ItemStack(ACItems.ethaxium_ingot), ethofferings));
 		Object[] dreadofferings = new Object[]{new ItemStack(ACItems.essence, 1, 1), ACItems.dreaded_shard_of_abyssalnite, ACItems.dreaded_shard_of_abyssalnite, ACItems.dreaded_shard_of_abyssalnite, ACItems.dreaded_shard_of_abyssalnite,
 				ACItems.dreaded_shard_of_abyssalnite, ACItems.dreaded_shard_of_abyssalnite, ACItems.dreaded_shard_of_abyssalnite};
@@ -984,7 +985,7 @@ public class AbyssalCrafting {
 		DisruptionHandler.instance().registerDisruption(new DisruptionDrainNearbyPE());
 		DisruptionHandler.instance().registerDisruption(new DisruptionSwarm("swarmSheep", DeityType.SHUBNIGGURATH, EntityEvilSheep.class, EntitySheep.class));
 		DisruptionHandler.instance().registerDisruption(new DisruptionAnimalCorruption());
-		DisruptionHandler.instance().registerDisruption(new DisruptionCorruption());
+		//		DisruptionHandler.instance().registerDisruption(new DisruptionCorruption());
 	}
 
 	private static void addSpells(){

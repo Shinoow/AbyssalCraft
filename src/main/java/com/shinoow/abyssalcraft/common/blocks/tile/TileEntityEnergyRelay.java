@@ -49,7 +49,7 @@ public class TileEntityEnergyRelay extends TileEntity implements IEnergyTranspor
 	public void onLoad()
 	{
 		if(world.isRemote)
-			world.loadedTileEntityList.remove(this);
+			world.tickableTileEntities.remove(this);
 		ticksExisted = world.rand.nextInt(100);
 	}
 

@@ -15,6 +15,7 @@ import java.util.Collections;
 import java.util.List;
 
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
+import com.shinoow.abyssalcraft.api.biome.ACBiomes;
 import com.shinoow.abyssalcraft.api.entity.EntityUtil;
 import com.shinoow.abyssalcraft.api.entity.IDreadEntity;
 import com.shinoow.abyssalcraft.common.entity.demon.EntityDemonAnimal;
@@ -36,7 +37,7 @@ public class PlagueEventHandler {
 
 	@SubscribeEvent
 	public void onDeath(LivingDeathEvent event){
-		if(event.getEntityLiving().world.isRemote) return;
+		if(event.getEntityLiving().world.isRemote || event.getEntityLiving().world.getBiome(event.getEntityLiving().getPosition()) == ACBiomes.purged) return;
 
 		EntityLivingBase entity = event.getEntityLiving();
 		if(entity.isPotionActive(AbyssalCraftAPI.coralium_plague))
@@ -123,7 +124,7 @@ public class PlagueEventHandler {
 
 	@SubscribeEvent
 	public void onLivingHurt(LivingHurtEvent event){
-		if(event.getEntityLiving().world.isRemote) return;
+		if(event.getEntityLiving().world.isRemote || event.getEntityLiving().world.getBiome(event.getEntityLiving().getPosition()) == ACBiomes.purged) return;
 
 		DamageSource source = event.getSource();
 		if(source != null && source.getEntity() instanceof EntityLivingBase) {

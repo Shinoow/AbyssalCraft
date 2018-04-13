@@ -27,7 +27,7 @@ public class TileEntityGatekeeperMinionSpawner extends TileEntity implements ITi
 	public void onLoad()
 	{
 		if(world.isRemote)
-			world.loadedTileEntityList.remove(this);
+			world.tickableTileEntities.remove(this);
 	}
 
 	@Override
@@ -46,7 +46,7 @@ public class TileEntityGatekeeperMinionSpawner extends TileEntity implements ITi
 
 	@Override
 	public void update() {
-		if (isActivated() && !world.isRemote) {
+		if (isActivated()) {
 			EntityGatekeeperMinion mob = new EntityGatekeeperMinion(world);
 			mob.setLocationAndAngles(pos.getX(), pos.getY(), pos.getZ(), MathHelper.wrapDegrees(world.rand.nextFloat() * 360.0F), 10.0F);
 			mob.onInitialSpawn(world.getDifficultyForLocation(pos), null);

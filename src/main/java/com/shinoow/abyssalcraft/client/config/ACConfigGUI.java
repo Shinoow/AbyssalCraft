@@ -17,7 +17,7 @@ import java.util.List;
 import com.shinoow.abyssalcraft.init.InitHandler;
 
 import net.minecraft.client.gui.GuiScreen;
-import net.minecraft.util.text.translation.I18n;
+import net.minecraft.client.resources.I18n;
 import net.minecraftforge.common.config.ConfigElement;
 import net.minecraftforge.fml.client.config.DummyConfigElement.DummyCategoryElement;
 import net.minecraftforge.fml.client.config.GuiConfig;
@@ -33,14 +33,15 @@ public class ACConfigGUI extends GuiConfig {
 
 	private static List<IConfigElement> getConfigElements(){
 		List<IConfigElement> list = new ArrayList<IConfigElement>();
-		list.add(new DummyCategoryElement(I18n.translateToLocal("ac_dimensions"), "ac_dimensions", DimensionEntry.class));
-		list.add(new DummyCategoryElement(I18n.translateToLocal("ac_biomegen"), "ac_biomegen", BiomeGenerationEntry.class));
-		list.add(new DummyCategoryElement(I18n.translateToLocal("ac_biomespawn"), "ac_biomespawn", BiomeSpawnEntry.class));
-		list.add(new DummyCategoryElement(I18n.translateToLocal("ac_biomeweight"), "ac_biomeweight", BiomeWeightEntry.class));
-		list.add(new DummyCategoryElement(I18n.translateToLocal("ac_general"), "ac_general", GeneralEntry.class));
-		list.add(new DummyCategoryElement(I18n.translateToLocal("ac_shoggoth"), "ac_shoggoth", ShoggothEntry.class));
-		list.add(new DummyCategoryElement(I18n.translateToLocal("ac_worldgen"), "ac_worldgen", WorldGenEntry.class));
-		list.add(new DummyCategoryElement(I18n.translateToLocal("ac_itemblacklist"), "ac_itemblacklist", ItemBlacklistEntry.class));
+		list.add(new DummyCategoryElement(I18n.format("ac_dimensions"), "ac_dimensions", DimensionEntry.class));
+		list.add(new DummyCategoryElement(I18n.format("ac_biomegen"), "ac_biomegen", BiomeGenerationEntry.class));
+		list.add(new DummyCategoryElement(I18n.format("ac_biomespawn"), "ac_biomespawn", BiomeSpawnEntry.class));
+		list.add(new DummyCategoryElement(I18n.format("ac_biomeweight"), "ac_biomeweight", BiomeWeightEntry.class));
+		list.add(new DummyCategoryElement(I18n.format("ac_general"), "ac_general", GeneralEntry.class));
+		list.add(new DummyCategoryElement(I18n.format("ac_shoggoth"), "ac_shoggoth", ShoggothEntry.class));
+		list.add(new DummyCategoryElement(I18n.format("ac_worldgen"), "ac_worldgen", WorldGenEntry.class));
+		list.add(new DummyCategoryElement(I18n.format("ac_itemblacklist"), "ac_itemblacklist", ItemBlacklistEntry.class));
+		list.add(new DummyCategoryElement(I18n.format("ac_silly_settings"), "ac_silly_settings", SillySettingsEntry.class));
 		return list;
 	}
 
@@ -52,7 +53,7 @@ public class ACConfigGUI extends GuiConfig {
 
 		@Override
 		protected GuiScreen buildChildScreen(){
-			return new GuiConfig(owningScreen, new ConfigElement(InitHandler.cfg.getCategory("dimensions")).getChildElements(), "abyssalcraft", "dimensions", true, true, I18n.translateToLocal("ac_dimensions"));
+			return new GuiConfig(owningScreen, new ConfigElement(InitHandler.cfg.getCategory("dimensions")).getChildElements(), "abyssalcraft", "dimensions", true, true, I18n.format("ac_dimensions"));
 
 		}
 	}
@@ -64,7 +65,7 @@ public class ACConfigGUI extends GuiConfig {
 
 		@Override
 		protected GuiScreen buildChildScreen(){
-			return new GuiConfig(owningScreen, new ConfigElement(InitHandler.cfg.getCategory("biome_generation")).getChildElements(), "abyssalcraft", "biome_generation", true, true, I18n.translateToLocal("ac_biomegen"));
+			return new GuiConfig(owningScreen, new ConfigElement(InitHandler.cfg.getCategory("biome_generation")).getChildElements(), "abyssalcraft", "biome_generation", true, true, I18n.format("ac_biomegen"));
 		}
 	}
 	public static class BiomeSpawnEntry extends CategoryEntry{
@@ -75,7 +76,7 @@ public class ACConfigGUI extends GuiConfig {
 
 		@Override
 		protected GuiScreen buildChildScreen(){
-			return new GuiConfig(owningScreen, new ConfigElement(InitHandler.cfg.getCategory("biome_spawning")).getChildElements(), "abyssalcraft", "biome_spawning", true, true, I18n.translateToLocal("ac_biomespawn"));
+			return new GuiConfig(owningScreen, new ConfigElement(InitHandler.cfg.getCategory("biome_spawning")).getChildElements(), "abyssalcraft", "biome_spawning", true, true, I18n.format("ac_biomespawn"));
 		}
 	}
 	public static class BiomeWeightEntry extends CategoryEntry{
@@ -86,7 +87,7 @@ public class ACConfigGUI extends GuiConfig {
 
 		@Override
 		protected GuiScreen buildChildScreen(){
-			return new GuiConfig(owningScreen, new ConfigElement(InitHandler.cfg.getCategory("biome_weight")).getChildElements(), "abyssalcraft", "biome_weight", true, true, I18n.translateToLocal("ac_biomeweight"));
+			return new GuiConfig(owningScreen, new ConfigElement(InitHandler.cfg.getCategory("biome_weight")).getChildElements(), "abyssalcraft", "biome_weight", true, true, I18n.format("ac_biomeweight"));
 		}
 	}
 	public static class GeneralEntry extends CategoryEntry{
@@ -97,7 +98,7 @@ public class ACConfigGUI extends GuiConfig {
 
 		@Override
 		protected GuiScreen buildChildScreen(){
-			return new GuiConfig(owningScreen, new ConfigElement(InitHandler.cfg.getCategory("general")).getChildElements(), "abyssalcraft", "general", false, false, I18n.translateToLocal("ac_general"));
+			return new GuiConfig(owningScreen, new ConfigElement(InitHandler.cfg.getCategory("general")).getChildElements(), "abyssalcraft", "general", false, false, I18n.format("ac_general"));
 
 		}
 	}
@@ -109,7 +110,7 @@ public class ACConfigGUI extends GuiConfig {
 
 		@Override
 		protected GuiScreen buildChildScreen(){
-			return new GuiConfig(owningScreen, new ConfigElement(InitHandler.cfg.getCategory("shoggoth")).getChildElements(), "abyssalcraft", "shoggoth", false, false, I18n.translateToLocal("ac_shoggoth"));
+			return new GuiConfig(owningScreen, new ConfigElement(InitHandler.cfg.getCategory("shoggoth")).getChildElements(), "abyssalcraft", "shoggoth", false, false, I18n.format("ac_shoggoth"));
 
 		}
 	}
@@ -121,7 +122,7 @@ public class ACConfigGUI extends GuiConfig {
 
 		@Override
 		protected GuiScreen buildChildScreen(){
-			return new GuiConfig(owningScreen, new ConfigElement(InitHandler.cfg.getCategory("worldgen")).getChildElements(), "abyssalcraft", "worldgen", false, false, I18n.translateToLocal("ac_worldgen"));
+			return new GuiConfig(owningScreen, new ConfigElement(InitHandler.cfg.getCategory("worldgen")).getChildElements(), "abyssalcraft", "worldgen", false, false, I18n.format("ac_worldgen"));
 
 		}
 	}
@@ -133,7 +134,19 @@ public class ACConfigGUI extends GuiConfig {
 
 		@Override
 		protected GuiScreen buildChildScreen(){
-			return new GuiConfig(owningScreen, new ConfigElement(InitHandler.cfg.getCategory("item_blacklist")).getChildElements(), "abyssalcraft", "item_blacklist", true, true, I18n.translateToLocal("ac_itemblacklist"));
+			return new GuiConfig(owningScreen, new ConfigElement(InitHandler.cfg.getCategory("item_blacklist")).getChildElements(), "abyssalcraft", "item_blacklist", true, true, I18n.format("ac_itemblacklist"));
+
+		}
+	}
+	public static class SillySettingsEntry extends CategoryEntry{
+
+		public SillySettingsEntry(GuiConfig owningScreen, GuiConfigEntries owningEntryList, IConfigElement configElement) {
+			super(owningScreen, owningEntryList, configElement);
+		}
+
+		@Override
+		protected GuiScreen buildChildScreen(){
+			return new GuiConfig(owningScreen, new ConfigElement(InitHandler.cfg.getCategory("silly_settings")).getChildElements(), "abyssalcraft", "silly_settings", false, false, I18n.format("ac_silly_settings"));
 
 		}
 	}

@@ -175,6 +175,9 @@ public class AbyssalCraftEventHooks {
 			if(head.getItem() == ACItems.dreadium_samurai_helmet && chest.getItem() == ACItems.dreadium_samurai_chestplate &&
 					legs.getItem() == ACItems.dreadium_samurai_leggings && feet.getItem() == ACItems.dreadium_samurai_boots &&
 					event.getSource() == AbyssalCraftAPI.dread) event.setAmount(event.getAmount() * 0.5F);
+			if(head.getItem() == ACItems.ethaxium_helmet && chest.getItem() == ACItems.ethaxium_chestplate &&
+					legs.getItem() == ACItems.ethaxium_leggings && feet.getItem() == ACItems.ethaxium_boots &&
+					event.getSource() == AbyssalCraftAPI.acid) event.setAmount(0);
 		}
 	}
 
@@ -201,7 +204,7 @@ public class AbyssalCraftEventHooks {
 			event.setCanceled(true);
 		if(event.getEntityLiving() instanceof IOmotholEntity && (event.getSource().getEntity() instanceof IOmotholEntity
 				|| event.getSource() == AbyssalCraftAPI.dread || event.getSource() == AbyssalCraftAPI.coralium
-				|| event.getSource() == AbyssalCraftAPI.antimatter))
+				|| event.getSource() == AbyssalCraftAPI.antimatter || event.getSource() == AbyssalCraftAPI.acid))
 			event.setCanceled(true);
 		if(event.getEntityLiving() instanceof EntityPlayer && EntityUtil.isEntityCoralium(event.getEntityLiving()) &&
 				event.getSource() == AbyssalCraftAPI.coralium)

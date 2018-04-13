@@ -92,12 +92,13 @@ public class EntityDreadedCharge extends EntityFireball
 	@Override
 	protected void onImpact(RayTraceResult movingObject)
 	{
-		if (ticksExisted > 10)
+		if (ticksExisted > 5)
 		{
 			if(!world.isRemote)
 				for(int x = getPosition().getX() -4; x < getPosition().getX() + 4; x++)
 					for(int z = getPosition().getZ() - 4; z < getPosition().getZ() + 4; z++)
-						if(!(world.getBiome(new BlockPos(x, 0, z)) instanceof IDreadlandsBiome))
+						if(!(world.getBiome(new BlockPos(x, 0, z)) instanceof IDreadlandsBiome)
+								&& world.getBiome(new BlockPos(x, 0, z)) != ACBiomes.purged)
 						{
 							Biome b = ACBiomes.dreadlands;
 							Chunk c = world.getChunkFromBlockCoords(getPosition());

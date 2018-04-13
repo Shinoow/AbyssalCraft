@@ -57,7 +57,7 @@ public class AbyssalCraftAPI {
 	/**
 	 * String used to specify the API version in the "package-info.java" classes
 	 */
-	public static final String API_VERSION = "1.13.0";
+	public static final String API_VERSION = "1.14.0";
 
 	public static Enchantment coralium_enchantment, dread_enchantment, light_pierce, iron_wall;
 
@@ -69,7 +69,8 @@ public class AbyssalCraftAPI {
 	public static final DamageSource coralium = new DamageSource("coralium").setDamageBypassesArmor().setMagicDamage();
 	public static final DamageSource dread = new DamageSource("dread").setDamageBypassesArmor().setMagicDamage();
 	public static final DamageSource antimatter = new DamageSource("antimatter").setDamageBypassesArmor().setDamageIsAbsolute().setMagicDamage();
-	public static final DamageSource shadow = new DamageSource("shadow").setDamageBypassesArmor().setDamageIsAbsolute().setMagicDamage();
+	public static final DamageSource shadow = new DamageSource("shadow").setDamageBypassesArmor().setDamageIsAbsolute();
+	public static final DamageSource acid = new DamageSource("shoggoth_acid").setDamageBypassesArmor().setDamageIsAbsolute();
 
 	private static final List<ItemStack> crystals = Lists.newArrayList();
 

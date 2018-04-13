@@ -93,6 +93,7 @@ public class InitHandler implements ILifeCycleHandler {
 		MinecraftForge.EVENT_BUS.register(this);
 		MinecraftForge.EVENT_BUS.register(new KnowledgeEventHandler());
 		MinecraftForge.EVENT_BUS.register(new PlagueEventHandler());
+		MinecraftForge.EVENT_BUS.register(new PurgeEventHandler());
 		NetworkRegistry.INSTANCE.registerGuiHandler(AbyssalCraft.instance, new CommonProxy());
 		AbyssalCraftAPI.setInternalNDHandler(new InternalNecroDataHandler());
 		AbyssalCraftAPI.setInternalMethodHandler(new InternalMethodHandler());
@@ -236,6 +237,7 @@ public class InitHandler implements ILifeCycleHandler {
 
 		shoggothOoze = cfg.get("shoggoth", "Shoggoth Ooze Spread", true, "Toggles whether or not Lesser Shoggoths should spread their ooze when walking around.").getBoolean();
 		oozeExpire = cfg.get("shoggoth", "Ooze expiration", false, "Toggles whether or not Shoggoth Ooze slowly reverts to dirt after constant light exposure.").getBoolean();
+		consumeItems = cfg.get("shoggoth", "Item Consumption", true, "Toggles whether or not Lesser Shoggoths will consume any dropped item they run into.").getBoolean();
 
 		generateDarklandsStructures = cfg.get("worldgen", "Darklands Structures", true, "Toggles whether or not to generate random Darklands structures.").getBoolean();
 		generateShoggothLairs = cfg.get("worldgen", "Shoggoth Lairs", true, "Toggles whether or not to generate Shoggoth Lairs (however, they will still generate in Omothol).").getBoolean();
