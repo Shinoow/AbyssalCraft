@@ -824,6 +824,7 @@ public class AbyssalCraftClientEventHooks {
 		registerItemRender(ACBlocks.rending_pedestal, 0);
 		registerItemRender(ACBlocks.state_transformer, 0);
 		registerItemRender(ACBlocks.energy_depositioner, 0);
+		registerItemRender(ACBlocks.calcified_stone, 0);
 	}
 
 	private void registerFluidModel(Block fluidBlock, String name) {

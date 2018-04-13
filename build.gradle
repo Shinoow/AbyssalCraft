@@ -73,8 +73,6 @@ minecraft {
 dependencies {
 	
 	deobfCompile "mezz.jei:jei_1.12.2:4.8.5.147"
-	
-	runtime "mezz.jei:jei_1.12.2:4.8.5.147"
 }
 
 version = "${props.mc_version}-${props.ac_version}"

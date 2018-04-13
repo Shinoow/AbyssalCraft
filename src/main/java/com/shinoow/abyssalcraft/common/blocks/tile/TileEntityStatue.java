@@ -70,7 +70,7 @@ public class TileEntityStatue extends TileEntity implements IEnergyManipulator, 
 	public void onLoad()
 	{
 		if(world.isRemote)
-			world.loadedTileEntityList.remove(this);
+			world.tickableTileEntities.remove(this);
 	}
 
 	@Override

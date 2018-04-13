@@ -205,6 +205,7 @@ public class BlockHandler implements ILifeCycleHandler {
 		ACBlocks.rending_pedestal = new BlockRendingPedestal();
 		ACBlocks.state_transformer = new BlockStateTransformer();
 		ACBlocks.energy_depositioner = new BlockEnergyDepositioner();
+		ACBlocks.calcified_stone = new BlockCalcifiedStone();
 
 		((BlockRitualAltar)ACBlocks.ritual_altar).setBlocks();
 		((BlockRitualPedestal)ACBlocks.ritual_pedestal).setBlocks();
@@ -401,6 +402,7 @@ public class BlockHandler implements ILifeCycleHandler {
 		registerBlock(ACBlocks.rending_pedestal, new ItemRendingPedestalBlock(ACBlocks.rending_pedestal), "rendingpedestal");
 		registerBlock(ACBlocks.state_transformer, "statetransformer");
 		registerBlock(ACBlocks.energy_depositioner, "energydepositioner");
+		registerBlock(ACBlocks.calcified_stone, "calcifiedstone");
 
 		Blocks.FIRE.setFireInfo(ACBlocks.darklands_oak_planks, 5, 20);
 		Blocks.FIRE.setFireInfo(DLTslab2, 5, 20);

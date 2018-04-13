@@ -53,7 +53,7 @@ public class EntityDreadSlug extends EntityThrowable {
 			setDead();
 		}
 
-		if(ticksExisted > 10 && mop.entityHit != null)
+		if(ticksExisted > 5 && mop.entityHit != null)
 		{
 			byte b0 = 6;
 

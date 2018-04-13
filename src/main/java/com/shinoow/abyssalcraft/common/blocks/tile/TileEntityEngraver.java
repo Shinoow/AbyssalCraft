@@ -125,7 +125,7 @@ public class TileEntityEngraver extends TileEntity implements ISidedInventory, I
 	public void onLoad()
 	{
 		if(world.isRemote)
-			world.loadedTileEntityList.remove(this);
+			world.tickableTileEntities.remove(this);
 	}
 
 	@Override

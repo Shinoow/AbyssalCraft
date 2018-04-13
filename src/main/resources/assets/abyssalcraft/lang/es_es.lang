@@ -402,7 +402,7 @@ necronomicon.text.crafting.corbootsp=Las Botas Bañadas de Coralium se hacen con 
 necronomicon.text.crafting.corbow=El Arco de Coralium se con cuerdas,Lingotes de Coralium Refinado,una Perla de Coralium y un Arco.
 necronomicon.text.crafting.energypedestal.1=El Pedestal de energía se hace con Piedras de Monolito,una Gema Oscura y una Perla de Coralium.
 necronomicon.text.crafting.energypedestal.2=Este bloque sirve como un método para la obtención de energía potencial.Si coloca estatuas a 3 bloques de distancia de ella (en el eje X o Z), van a transferir energía a el mismo ritmo acelerado.Coloque un Necronomicon (u otra fuente que pueda contener la energía potencial) sobre el mismo con el fin de drenarlo.
-necronomicon.text.crafting.dreadium.1=El Dreadium puede obtenerse de muchas maneras.El primer método es transmutar los Fragmentos de Dreaded Abyssalnite (se redujo en Dreadguards).
+necronomicon.text.crafting.dreadium.1=Dreadium can be obtained in numerous ways. One method is to transmute Dreaded Shards of Abyssalnite (dropped by Dreadguards, Greater Dread Spawns and Lesser Dreadbeasts).
 necronomicon.text.crafting.dreadium.2=Cuando tengas suficientes Lingotes de Dreadium para elaborar un cristalizador,podras cristalizar materiales del tipo Dreaded para obtener cristales de Dreadium (en su mayoría cascos que se pueden combinar en cristales que pueden ser transmutadas para Dreadium lingotes).
 necronomicon.text.crafting.monolithpillar.1=Un Pilar de Piedra de Monolito se hace a mano con Piedra de Monolito.Su uso principal es ampliar la gama de manipuladores de la energía potencial (estatuas, por ejemplo).
 necronomicon.text.crafting.ritualcharm.1=Un ritual de encanto se hace con los lingotes de oro y un diamante.Por sí mismo no tiene ningún efecto,pero a través de los rituales puede amplificar varias estadísticas de manipuladores de la energía potencial.
@@ -531,9 +531,9 @@ necronomicon.text.rituals.1=Con el fin de empezar a trabajar con los rituales es
 necronomicon.text.rituals.2=Those are: Cobblestone, Darkstone Cobblestone, Abyssal Cobblestone, Coralium Cobblestone, Dreadstone Cobblestone, Abyssalnite Cobblestone, Ethaxium Brick and Dark Ethaxium Brick. The materials can only be used in their specific dimension (eg. Cobblestone and Darkstone Cobblestone in the Overworld, Abyssal Cobblestone in the Abyssal Wasteland etc).
 necronomicon.text.rituals.3=Para crear el altar,sólo tiene que colocar los bloques en la formación anterior (mantener el área de color limpia) y hacer shift-clic derecho en el bloque central con un Necronomicon.
 necronomicon.text.rituals.4=Después de eso, usted puede comenzar a realizar rituales! Con el fin de realizar un ritual, coloque objetos sobre los pedestales y presionando shift-clic derecho en el altar con un Necronomicon.
-necronomicon.text.rituals.5=Al realizarse el ritual los pedestales lanzan humo hacia el altar.Rituales donde ganará objetos siempre terminan con un rayo golpeando el altar.
+necronomicon.text.rituals.5=When performing, the pedestals project bits of their placed object towards the altar. Rituals where you gain objects always end with a bolt of lightning striking the altar.
 necronomicon.text.rituals.6=La energía potencial es necesaria con el fin de realizar rituales (cada ritual muestra la cantidad que necesita).La energía potencial es una forma pura de energía sin explotar que se origina a partir de un plano superior de existencia.Se utiliza principalmente para alimentar sacrificios hechos a los Grandes Antiguos (cualquier ritual).Estatuas colocadas en los monolitos de los shoggoth,se dice que son capaz de drenar la misma.
-necronomicon.text.rituals.7=Algunos rituales requieren un sacrificio.Esto significa que necesita tener una Entidad muy cerca del altar y de los pedestales.Si la entidad es del tipo correcto (de vida,adulto,algo un Shoggoth menor comería) un rayo lo matara,y el ritual se iniciará.El no poder completar un ritual dará lugar a una interrupción,lo cual es malo.
+necronomicon.text.rituals.7=Some rituals require a living sacrifice. This means you need to have an adult animal within close proximity of the altar and pedestals. When the ritual starts, the target animal will begin to emit smoke particles, and needs to die before the ritual ends. Failing to complete a ritual will trigger a Disruption, which is bad.
 
 necronomicon.text.pe.1=Energía potencial (EP) es una nueva forma de energía que se presenta en AbyssalCraft.Se origina a partir de un plano superior de existencia (donde ningún mortal se ha extraviado),y sólo se pueden recoger con la exploración de ley de líneas utilizando diversos métodos.Existen objetos capaces de hacerlo,que serán explicados aquí.
 necronomicon.text.pe.2=Un buen lugar para comenzar la obtención de los materiales necesarios para crear algunos de los objetos de recolección de EP es en las Guaridas Shoggoth,que se encuentran en pantanos y ríos.
@@ -543,16 +543,18 @@ necronomicon.text.pe.5=Se debe tener en cuenta que los Shoggoths Menores no tien
 necronomicon.text.pe.6=Si nota actividad Shoggoth cerca de su vivienda,se le aconseja evacuar inmediatamente de su tierra,o construir un muro grande (u otras medidas defensivas) para asegurar que la infestación no se propage en su tierra.La recuperación de la tierra de una infestación Shoggoth es bastante difícil,así que tenga cuidado.
 necronomicon.text.pe.7=The statues come in different shapes, all depicting Great Old Ones. They can transport PE to nearby players holding Necronomicons when under open sky.
 necronomicon.text.pe.8=Cabe señalar que la cosecha de EP no se aprecia.Esto provoca interrupciones en el lugar (los mostrados por un rayo golpeando la estatua,u otro manipulador de EP).Las interrupciones son eventos aleatorios que pueden afectar al jugador,otras entidades o el medio ambiente.Su propósito es castigar a los que intenta drenar el EP desde el plano superior.
-necronomicon.text.pe.9=A Energy Depositioner is another PE manipulator. It works like a generator, where the "fuel" are Stone Tablets charged with PE.
-necronomicon.text.pe.10=Una forma de aumentar la eficiencia de las estatuas y otros manipuladores (EP) es mediante el uso de rituales de encanto.Pueden impulsar varias estadísticas (comprobar la información sobre herramientas).
-necronomicon.text.pe.11=You can also craft a Energy Pedestal, which can collect PE from statues (and other PE manipulators) placed 3 blocks from it. Monolith Stone Pillars boost the range.
-necronomicon.text.pe.12=Junto con el Pedestal de Energía está el altar de sacrificio,que puede convertir la fuerza de vida de las entidades que mueren en EP (Las entidades objetivo emiten humo).
-necronomicon.text.pe.13=Another way to collect PE from manipulators is with a Energy Collector. It works like a Energy Pedestal (except you can't place items on it).
-necronomicon.text.pe.14=Energy Relays are used to transfer PE, and can do so in any direction (but it can't transport it through solid blocks, except glass).
-necronomicon.text.pe.15=Building networks with Energy Relays allows you to tranport PE over larger distances. Energy Relays can drain PE from PE Collector placed next to it.
-necronomicon.text.pe.16=In order to store greater amounts of PE, you can create a Energy Container. They allow insertion through Energy Relays or interaction with the block.
-necronomicon.text.pe.17=If the PE production still is too slow, you can also upgrade the various PE handling blocks through infusion rituals to boost stats.
-necronomicon.text.pe.18=Al llegar al Omothol,usted será capaz de crear encantos de Ritual-deidad específicamente (con un Abyssalnomicon),o comprarlos de Remanentes sacerdotes.Esos encantos darán un impulso adicional si se utiliza en manipuladores asociados a la misma deidad como la que se muestra en el encanto.
+necronomicon.text.pe.9=Statues have a limited PE transfer range to nearby collectors. Collectors need to be placed in the yellow frame (with a two block gap between it and the statue).
+necronomicon.text.pe.10=When placed on Monolith Stone Pillar Blocks, the statues range can be increased up to two blocks. Statues on pillars can transfer energy to Collectors further down.
+necronomicon.text.pe.11=A Energy Depositioner is another PE manipulator. It works like a generator, where the "fuel" are Stone Tablets charged with PE.
+necronomicon.text.pe.12=Una forma de aumentar la eficiencia de las estatuas y otros manipuladores (EP) es mediante el uso de rituales de encanto.Pueden impulsar varias estadísticas (comprobar la información sobre herramientas).
+necronomicon.text.pe.13=You can also craft a Energy Pedestal, which can collect PE from statues (and other PE manipulators). Items that can hold PE can be placed on the pedestal to charge.
+necronomicon.text.pe.14=Junto con el Pedestal de Energía está el altar de sacrificio,que puede convertir la fuerza de vida de las entidades que mueren en EP (Las entidades objetivo emiten humo).
+necronomicon.text.pe.15=Another way to collect PE from manipulators is with a Energy Collector. It works like a Energy Pedestal (except you can't place items on it).
+necronomicon.text.pe.16=Energy Relays are used to transfer PE, and can do so in any direction (but it can't transport it through solid blocks, except glass).
+necronomicon.text.pe.17=Building networks with Energy Relays allows you to tranport PE over larger distances. Energy Relays can drain PE from PE Collector placed next to it.
+necronomicon.text.pe.18=In order to store greater amounts of PE, you can create a Energy Container. They allow insertion through Energy Relays or interaction with the block.
+necronomicon.text.pe.19=If the PE production still is too slow, you can also upgrade the various PE handling blocks through infusion rituals to boost stats.
+necronomicon.text.pe.20=Al llegar al Omothol,usted será capaz de crear encantos de Ritual-deidad específicamente (con un Abyssalnomicon),o comprarlos de Remanentes sacerdotes.Esos encantos darán un impulso adicional si se utiliza en manipuladores asociados a la misma deidad como la que se muestra en el encanto.
 
 necronomicon.text.machines.info=Compruebe la sección de información para obtener información sobre las diferentes máquinas,o las otras secciones para todas las recetas de la máquina especificada.Las recetas no están ordenadas de cualquier manera.
 
@@ -569,7 +571,7 @@ necronomicon.text.coraliumplague.1=The Coralium Plague is a disease originating 
 necronomicon.text.coraliumplague.2=An antidote for the Coralium Plague can be made with a Water Bottle, a Wasteland's Thorn, a piece of Anti-Plagued Flesh and a piece of Abyssal Shoggoth Flesh.
 
 necronomicon.text.dreadplague.1=The Dread Plague is a disease originating from the Dreadlands. It's a very infectious disease, swiftly travelling between hosts, but also transforming the ground around those afflicted by it, thus allowing the plague to grow stronger. The only place known to be completely immune to the Dread Plague is Omothol.
-necronomicon.text.dreadplague.2=An antidote for the Dread Plague can be made with a Water Bottle, a piece of Omothol Ghoul Flesh, a Dread Fragment and a piece of Dreaded Shoggoth Flesh.
+necronomicon.text.dreadplague.2=An antidote for the Dread Plague can be made with a Water Bottle, a Dreadlands Sapling, a Dread Fragment and a piece of Dreaded Shoggoth Flesh.
 
 necronomicon.text.wip=Esta sección está incompleta.
 
@@ -760,6 +762,8 @@ ac.ritual.corruption=Ritual of Corruption
 ac.ritual.corruption.desc=By presenting 4 random statues, 4 blocks of Darkstone, a large amount of energy and a living sacrifice, you summon powers from the Abyss to corrupt the surrounding area. Defile the Overworld's purity in order to bring forth the Darklands.
 ac.ritual.resurrection=Dark Resurrection
 ac.ritual.resurrection.desc=By presenting crystallized compounds resembling the elements of life, a living sacrifice and a Name Tag with the name of a fallen companion, you resurrect it. The Crystal size scale with the companion (Shards for something the size of a Chicken, Clusters for a Horse, normal for anything inbetween). Life has limits, however.
+ac.ritual.purging=Ritual of Purging
+ac.ritual.purging.desc=By presenting 4 Crystallized Calcium Clusters and a large amount of energy, you purge every trace of the Dread Plague (and the Dreadlands) from the area, putting a stop to it here (also kills nearby mobs). While it renders the area uninhabitable, no plagues will be able to spread here. Doesn't work in the Dreadlands.
 
 #Spells
 ac.spell.lifedrain=Life Drain
@@ -806,7 +810,9 @@ death.attack.dread.player=%1$s sucumbio a la fuerza de Cha'garoth al mismo tiemp
 death.attack.antimatter=%1$s fue desarmado molecularmente
 death.attack.antimatter.player=%1$s fue desarmado molecularmente tratando de escapar de %2$s
 death.attack.shadow=%1$s was consumed by darkness
-death.attack.shadow%1$s was consumed by darkness whilst trying to escape %2$s
+death.attack.shadow.player=%1$s was consumed by darkness whilst trying to escape %2$s
+death.attack.shoggoth_acid=%1$s was dissolved in Shoggoth Acid
+death.attack.shoggoth_acid.player=%1$s was dissolved in Shoggoth Acid whilst trying to escape %2$s
 
 #Tooltips
 tooltip.portalplacer.1=Haga clic derecho en el suelo para
@@ -1059,6 +1065,7 @@ tile.wastelandsthorn.name=Wasteland's Thorn
 tile.rendingpedestal.name=Rending Pedestal
 tile.statetransformer.name=State Transformer
 tile.energydepositioner.name=Energy Depositioner
+tile.calcifiedstone.name=Calcified Stone
 
 #Pre/Postfixes
 decorativestatue.prefix=Decorativo %s

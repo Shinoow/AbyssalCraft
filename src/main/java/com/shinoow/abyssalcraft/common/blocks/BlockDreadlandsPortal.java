@@ -103,36 +103,19 @@ public class BlockDreadlandsPortal extends BlockBreakable {
 			}
 		}
 
-
-		if(worldIn.provider.getDimension() != ACLib.dreadlands_id && worldIn.provider.getDimension() != ACLib.omothol_id && !worldIn.isRemote && rand.nextInt(10) < worldIn.getDifficulty().getDifficultyId()) {
-			int distance = 5, num = 0;
-			for(int x = pos.getX() - distance; x <= pos.getX() + distance; x++)
-				for(int z = pos.getZ() - distance; z <= pos.getZ() + distance; z++)
-					if(!(worldIn.getBiome(new BlockPos(x, 0, z)) instanceof IDreadlandsBiome))
-					{
-						int i = (int)pos.distanceSq(x, pos.getY(), z);
-						if(distance > 5)
-							i /= distance;
-
-						if(i == 0 || rand.nextInt(i) == 0) {
-							num++;
-							Biome b = ACBiomes.dreadlands;
-							Chunk c = worldIn.getChunkFromBlockCoords(pos);
-							c.getBiomeArray()[(z & 0xF) << 4 | x & 0xF] = (byte)Biome.getIdForBiome(b);
-							c.setModified(true);
-							PacketDispatcher.sendToDimension(new CleansingRitualMessage(x, z, Biome.getIdForBiome(b)), worldIn.provider.getDimension());
-						}
-					}
-			if(num == 0) {
-				distance +=5;
+		if(worldIn.getBiome(pos) != ACBiomes.purged)
+			if(worldIn.provider.getDimension() != ACLib.dreadlands_id && worldIn.provider.getDimension() != ACLib.omothol_id && !worldIn.isRemote && rand.nextInt(10) < worldIn.getDifficulty().getDifficultyId()) {
+				int distance = 5, num = 0;
 				for(int x = pos.getX() - distance; x <= pos.getX() + distance; x++)
 					for(int z = pos.getZ() - distance; z <= pos.getZ() + distance; z++)
 						if(!(worldIn.getBiome(new BlockPos(x, 0, z)) instanceof IDreadlandsBiome))
 						{
 							int i = (int)pos.distanceSq(x, pos.getY(), z);
-							i /= 5;
+							if(distance > 5)
+								i /= distance;
 
 							if(i == 0 || rand.nextInt(i) == 0) {
+								num++;
 								Biome b = ACBiomes.dreadlands;
 								Chunk c = worldIn.getChunkFromBlockCoords(pos);
 								c.getBiomeArray()[(z & 0xF) << 4 | x & 0xF] = (byte)Biome.getIdForBiome(b);
@@ -140,8 +123,25 @@ public class BlockDreadlandsPortal extends BlockBreakable {
 								PacketDispatcher.sendToDimension(new CleansingRitualMessage(x, z, Biome.getIdForBiome(b)), worldIn.provider.getDimension());
 							}
 						}
+				if(num == 0) {
+					distance +=5;
+					for(int x = pos.getX() - distance; x <= pos.getX() + distance; x++)
+						for(int z = pos.getZ() - distance; z <= pos.getZ() + distance; z++)
+							if(!(worldIn.getBiome(new BlockPos(x, 0, z)) instanceof IDreadlandsBiome))
+							{
+								int i = (int)pos.distanceSq(x, pos.getY(), z);
+								i /= 5;
+
+								if(i == 0 || rand.nextInt(i) == 0) {
+									Biome b = ACBiomes.dreadlands;
+									Chunk c = worldIn.getChunkFromBlockCoords(pos);
+									c.getBiomeArray()[(z & 0xF) << 4 | x & 0xF] = (byte)Biome.getIdForBiome(b);
+									c.setModified(true);
+									PacketDispatcher.sendToDimension(new CleansingRitualMessage(x, z, Biome.getIdForBiome(b)), worldIn.provider.getDimension());
+								}
+							}
+				}
 			}
-		}
 	}
 
 	@Override
