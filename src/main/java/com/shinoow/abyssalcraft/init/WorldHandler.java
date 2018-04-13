@@ -56,6 +56,7 @@ public class WorldHandler implements ILifeCycleHandler {
 		ACBiomes.coralium_infested_swamp = new BiomeGenCorSwamp(new BiomeProperties("Coralium Infested Swamp").setWaterColor(0x24FF83).setBaseHeight(-0.2F).setHeightVariation(0.1F));
 		ACBiomes.omothol = new BiomeGenOmothol(new BiomeProperties("Omothol").setWaterColor(14745518).setRainDisabled());
 		ACBiomes.dark_realm = new BiomeGenDarkRealm(new BiomeProperties("Dark Realm").setWaterColor(14745518).setRainDisabled());
+		ACBiomes.purged = new BiomePurged(new BiomeProperties("Purged").setWaterColor(0xD7D8D9).setRainDisabled());
 
 		GameRegistry.register(ACBiomes.darklands.setRegistryName(new ResourceLocation(modid, "darklands")));
 		GameRegistry.register(ACBiomes.darklands_forest.setRegistryName(new ResourceLocation(modid, "darklands_forest")));
@@ -104,6 +105,7 @@ public class WorldHandler implements ILifeCycleHandler {
 		GameRegistry.register(ACBiomes.dreadlands_mountains.setRegistryName(new ResourceLocation(modid, "dreadlands_mountains")));
 		GameRegistry.register(ACBiomes.omothol.setRegistryName(new ResourceLocation(modid, "omothol")));
 		GameRegistry.register(ACBiomes.dark_realm.setRegistryName(new ResourceLocation(modid, "dark_realm")));
+		GameRegistry.register(ACBiomes.purged.setRegistryName(new ResourceLocation(modid, "purged")));
 
 		BiomeDictionary.registerBiomeType(ACBiomes.darklands, Type.WASTELAND, Type.SPOOKY);
 		BiomeDictionary.registerBiomeType(ACBiomes.darklands_forest, Type.FOREST, Type.SPOOKY);
@@ -119,6 +121,7 @@ public class WorldHandler implements ILifeCycleHandler {
 		BiomeDictionary.registerBiomeType(ACBiomes.dreadlands_forest, Type.DEAD);
 		BiomeDictionary.registerBiomeType(ACBiomes.omothol, Type.DEAD);
 		BiomeDictionary.registerBiomeType(ACBiomes.dark_realm, Type.DEAD);
+		BiomeDictionary.registerBiomeType(ACBiomes.purged, Type.DEAD);
 
 		ACLib.THE_ABYSSAL_WASTELAND = DimensionType.register("The Abyssal Wasteland", "_aw", ACLib.abyssal_wasteland_id, WorldProviderAbyss.class, ACConfig.keepLoaded1);
 		ACLib.THE_DREADLANDS = DimensionType.register("The Dreadlands", "_dl", ACLib.dreadlands_id, WorldProviderDreadlands.class, ACConfig.keepLoaded2);

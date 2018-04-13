@@ -34,4 +34,5 @@ public class ACBiomes {
 	public static Biome dreadlands_forest;
 	public static Biome omothol;
 	public static Biome dark_realm;
+	public static Biome purged;
 }

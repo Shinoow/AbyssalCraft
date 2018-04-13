@@ -118,7 +118,7 @@ public class TileEntityEnergyDepositioner extends TileEntity implements IEnergyM
 	public void onLoad()
 	{
 		if(worldObj.isRemote)
-			worldObj.loadedTileEntityList.remove(this);
+			worldObj.tickableTileEntities.remove(this);
 	}
 
 	@Override

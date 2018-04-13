@@ -413,7 +413,9 @@ public class InternalNecroDataHandler extends DummyNecroDataHandler {
 			new Page(15, NecronomiconText.LABEL_POTENTIAL_ENERGY, 0, NecronomiconResources.PE_TUT_11, NecronomiconText.PE_TUT_15),
 			new Page(16, NecronomiconText.LABEL_POTENTIAL_ENERGY, 0, NecronomiconResources.PE_TUT_12, NecronomiconText.PE_TUT_16),
 			new Page(17, NecronomiconText.LABEL_POTENTIAL_ENERGY, 0, NecronomiconResources.PE_TUT_13, NecronomiconText.PE_TUT_17),
-			new Page(18, NecronomiconText.LABEL_POTENTIAL_ENERGY, 0, NecronomiconText.PE_TUT_18));
+			new Page(18, NecronomiconText.LABEL_POTENTIAL_ENERGY, 0, NecronomiconResources.PE_TUT_14, NecronomiconText.PE_TUT_18),
+			new Page(19, NecronomiconText.LABEL_POTENTIAL_ENERGY, 0, NecronomiconResources.PE_TUT_15, NecronomiconText.PE_TUT_19),
+			new Page(20, NecronomiconText.LABEL_POTENTIAL_ENERGY, 0, NecronomiconText.PE_TUT_20));
 		addPages("miscinfo", "specialmaterials", new Page(1, NecronomiconText.LABEL_INFORMATION_SPECIAL_MATERIALS, 0, new CraftingStack(ACItems.cobblestone_upgrade_kit), NecronomiconText.CRAFTING_UPGRADE_KIT_1),
 			new Page(2, NecronomiconText.LABEL_INFORMATION_SPECIAL_MATERIALS, 0, new CraftingStack(ACItems.iron_upgrade_kit), NecronomiconText.CRAFTING_UPGRADE_KIT_2),
 			new Page(3, NecronomiconText.LABEL_INFORMATION_SPECIAL_MATERIALS, 0, new CraftingStack(new ItemStack(ACItems.iron_plate, 2), null, null, null, null, Items.IRON_INGOT, null, null, Items.IRON_INGOT, null), NecronomiconText.CRAFTING_IRON_PLATE),

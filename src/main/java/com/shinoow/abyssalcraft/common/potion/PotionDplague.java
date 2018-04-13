@@ -63,7 +63,8 @@ public class PotionDplague extends Potion{
 	@Override
 	public void performEffect(EntityLivingBase par1EntityLivingBase, int par2){
 
-		if(par1EntityLivingBase.ticksExisted % 100 == 0 && par1EntityLivingBase.getRNG().nextFloat() > 0.3F) {
+		if(par1EntityLivingBase.ticksExisted % 100 == 0 && par1EntityLivingBase.getRNG().nextFloat() > 0.3F
+			&& par1EntityLivingBase.worldObj.getBiome(par1EntityLivingBase.getPosition()) != ACBiomes.purged) {
 			AxisAlignedBB axisalignedbb = par1EntityLivingBase.getEntityBoundingBox().expand(3.0D, 3.0D, 3.0D);
 			List<EntityLivingBase> list = par1EntityLivingBase.worldObj.<EntityLivingBase>getEntitiesWithinAABB(EntityLivingBase.class, axisalignedbb);
 			for(EntityLivingBase entity : list)
@@ -75,7 +76,8 @@ public class PotionDplague extends Potion{
 			if(par1EntityLivingBase.dimension != ACLib.dark_realm_id && par1EntityLivingBase.dimension != ACLib.omothol_id)
 				for(int x = par1EntityLivingBase.getPosition().getX() - 1; x <= par1EntityLivingBase.getPosition().getX() + 1; x++)
 					for(int z = par1EntityLivingBase.getPosition().getZ() - 1; z <= par1EntityLivingBase.getPosition().getZ() + 1; z++)
-						if(!(par1EntityLivingBase.worldObj.getBiome(new BlockPos(x, 0, z)) instanceof IDreadlandsBiome))
+						if(!(par1EntityLivingBase.worldObj.getBiome(new BlockPos(x, 0, z)) instanceof IDreadlandsBiome)
+							&& par1EntityLivingBase.worldObj.getBiome(new BlockPos(x, 0, z)) != ACBiomes.purged)
 						{
 							Biome b = ACBiomes.dreadlands;
 							Chunk c = par1EntityLivingBase.worldObj.getChunkFromBlockCoords(par1EntityLivingBase.getPosition());
@@ -102,7 +104,8 @@ public class PotionDplague extends Potion{
 		if(par1EntityLivingBase instanceof EntityPlayer)
 			((EntityPlayer)par1EntityLivingBase).addExhaustion(0.025F * (par2+2));
 		if(!par1EntityLivingBase.worldObj.isRemote && par1EntityLivingBase.isDead
-			&& par1EntityLivingBase.worldObj.rand.nextBoolean())
+			&& par1EntityLivingBase.worldObj.rand.nextBoolean()
+			&& par1EntityLivingBase.worldObj.getBiome(par1EntityLivingBase.getPosition()) != ACBiomes.purged)
 			if(par1EntityLivingBase instanceof EntityZombie || par1EntityLivingBase instanceof EntityAbyssalZombie
 				|| par1EntityLivingBase instanceof EntityAntiPlayer || par1EntityLivingBase instanceof EntityAntiAbyssalZombie
 				|| par1EntityLivingBase instanceof EntityAntiZombie || par1EntityLivingBase instanceof EntitySkeleton

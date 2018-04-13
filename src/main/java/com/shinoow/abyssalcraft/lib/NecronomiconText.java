@@ -321,6 +321,8 @@ public class NecronomiconText {
 	public static String PE_TUT_16 = "necronomicon.text.pe.16";
 	public static String PE_TUT_17 = "necronomicon.text.pe.17";
 	public static String PE_TUT_18 = "necronomicon.text.pe.18";
+	public static String PE_TUT_19 = "necronomicon.text.pe.19";
+	public static String PE_TUT_20 = "necronomicon.text.pe.20";
 
 	public static String MACHINES_INFO = "necronomicon.text.machines.info";
 

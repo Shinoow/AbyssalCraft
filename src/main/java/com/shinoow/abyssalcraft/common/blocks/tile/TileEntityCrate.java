@@ -295,4 +295,13 @@ public class TileEntityCrate extends TileEntity implements IInventory, ITickable
 		return "minecraft:chest";
 	}
 
+	private net.minecraftforge.items.IItemHandler itemHandler = new net.minecraftforge.items.wrapper.InvWrapper(this);
+
+	@Override
+	public <T> T getCapability(net.minecraftforge.common.capabilities.Capability<T> capability, net.minecraft.util.EnumFacing facing)
+	{
+		if (capability == net.minecraftforge.items.CapabilityItemHandler.ITEM_HANDLER_CAPABILITY)
+			return (T) itemHandler;
+		return super.getCapability(capability, facing);
+	}
 }

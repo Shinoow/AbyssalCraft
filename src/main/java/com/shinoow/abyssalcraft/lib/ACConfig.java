@@ -25,7 +25,7 @@ public class ACConfig {
 	overworldShoggoths, mimicFire, armorPotionEffects, nuclearAntimatterExplosions;
 	public static int evilAnimalSpawnWeight, endAbyssalZombieSpawnWeight, portalCooldown, demonAnimalSpawnWeight, shoggothLairSpawnRate;
 	public static double damageAmpl, depthsHelmetOverlayOpacity;
-	public static boolean shoggothOoze, oozeExpire;
+	public static boolean shoggothOoze, oozeExpire, consumeItems;
 	public static boolean generateDarklandsStructures, generateShoggothLairs, generateAbyssalWastelandPillars,
 	generateAbyssalWastelandRuins, generateAntimatterLake, generateCoraliumLake, generateDreadlandsStalagmite;
 	public static boolean generateCoraliumOre, generateNitreOre, generateAbyssalniteOre, generateAbyssalCoraliumOre,

@@ -15,6 +15,7 @@ import java.util.List;
 
 import com.google.common.collect.Lists;
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
+import com.shinoow.abyssalcraft.api.biome.ACBiomes;
 import com.shinoow.abyssalcraft.api.entity.EntityUtil;
 import com.shinoow.abyssalcraft.api.item.ACItems;
 import com.shinoow.abyssalcraft.api.necronomicon.condition.caps.NecroDataCapability;
@@ -55,7 +56,8 @@ public class PotionCplague extends Potion{
 	@Override
 	public void performEffect(EntityLivingBase par1EntityLivingBase, int par2){
 
-		if(par1EntityLivingBase.ticksExisted % 200 == 0 && par1EntityLivingBase.getRNG().nextFloat() > 0.7F) {
+		if(par1EntityLivingBase.ticksExisted % 200 == 0 && par1EntityLivingBase.getRNG().nextFloat() > 0.7F
+			&& par1EntityLivingBase.worldObj.getBiome(par1EntityLivingBase.getPosition()) != ACBiomes.purged) {
 			AxisAlignedBB axisalignedbb = par1EntityLivingBase.getEntityBoundingBox().expand(2.0D, 2.0D, 2.0D);
 			List<EntityLivingBase> list = par1EntityLivingBase.worldObj.<EntityLivingBase>getEntitiesWithinAABB(EntityLivingBase.class, axisalignedbb);
 			for(EntityLivingBase entity : list)
@@ -78,7 +80,8 @@ public class PotionCplague extends Potion{
 		if(par1EntityLivingBase instanceof EntityPlayer && !par1EntityLivingBase.isDead && wasKilled)
 			wasKilled = false;
 
-		if(!par1EntityLivingBase.worldObj.isRemote && par1EntityLivingBase.isDead)
+		if(!par1EntityLivingBase.worldObj.isRemote && par1EntityLivingBase.isDead
+			&& par1EntityLivingBase.worldObj.getBiome(par1EntityLivingBase.getPosition()) != ACBiomes.purged)
 			if(par1EntityLivingBase instanceof EntityZombie){
 				if(par1EntityLivingBase.worldObj.getWorldInfo().isHardcoreModeEnabled() && par1EntityLivingBase.worldObj.rand.nextInt(10) == 0) {
 					EntityDepthsGhoul ghoul = new EntityDepthsGhoul(par1EntityLivingBase.worldObj);

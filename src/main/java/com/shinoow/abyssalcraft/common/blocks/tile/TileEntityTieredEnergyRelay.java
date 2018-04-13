@@ -26,7 +26,7 @@ public abstract class TileEntityTieredEnergyRelay extends TileEntityEnergyRelay 
 	public void onLoad()
 	{
 		if(worldObj.isRemote)
-			worldObj.loadedTileEntityList.remove(this);
+			worldObj.tickableTileEntities.remove(this);
 		ticksExisted = worldObj.rand.nextInt(100);
 	}
 

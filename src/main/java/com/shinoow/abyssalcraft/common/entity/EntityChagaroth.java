@@ -444,7 +444,8 @@ public class EntityChagaroth extends EntityMob implements IDreadEntity {
 		if (ticksExisted % 40 == 0 && !worldObj.isRemote)
 			for(int x = getPosition().getX() - 3; x <= getPosition().getX() + 3; x++)
 				for(int z = getPosition().getZ() - 3; z <= getPosition().getZ() + 3; z++)
-					if(!(worldObj.getBiome(new BlockPos(x, 0, z)) instanceof IDreadlandsBiome))
+					if(!(worldObj.getBiome(new BlockPos(x, 0, z)) instanceof IDreadlandsBiome)
+						&& worldObj.getBiome(new BlockPos(x, 0, z)) != ACBiomes.purged)
 					{
 						Biome b = ACBiomes.dreadlands;
 						Chunk c = worldObj.getChunkFromBlockCoords(getPosition());

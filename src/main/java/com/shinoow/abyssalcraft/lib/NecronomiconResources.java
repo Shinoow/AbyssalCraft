@@ -94,15 +94,17 @@ public class NecronomiconResources {
 	public static final ResourceLocation PE_TUT_2 = res("pe/monoliths");
 	public static final ResourceLocation PE_TUT_3 = res("pe/shoggoth_infestation");
 	public static final ResourceLocation PE_TUT_4 = res("pe/statues");
-	public static final ResourceLocation PE_TUT_5 = res("pe/energy_depositioner");
-	public static final ResourceLocation PE_TUT_6 = res("pe/charms");
-	public static final ResourceLocation PE_TUT_7 = res("pe/energy_pedestal");
-	public static final ResourceLocation PE_TUT_8 = res("pe/sacrificial_altar");
-	public static final ResourceLocation PE_TUT_9 = res("pe/energy_collector");
-	public static final ResourceLocation PE_TUT_10 = res("pe/energy_relay");
-	public static final ResourceLocation PE_TUT_11 = res("pe/relays");
-	public static final ResourceLocation PE_TUT_12 = res("pe/energy_container");
-	public static final ResourceLocation PE_TUT_13 = res("pe/tiers");
+	public static final ResourceLocation PE_TUT_5 = res("pe/statue_range");
+	public static final ResourceLocation PE_TUT_6 = res("pe/statue_range_2");
+	public static final ResourceLocation PE_TUT_7 = res("pe/energy_depositioner");
+	public static final ResourceLocation PE_TUT_8 = res("pe/charms");
+	public static final ResourceLocation PE_TUT_9 = res("pe/energy_pedestal");
+	public static final ResourceLocation PE_TUT_10 = res("pe/sacrificial_altar");
+	public static final ResourceLocation PE_TUT_11 = res("pe/energy_collector");
+	public static final ResourceLocation PE_TUT_12 = res("pe/energy_relay");
+	public static final ResourceLocation PE_TUT_13 = res("pe/relays");
+	public static final ResourceLocation PE_TUT_14 = res("pe/energy_container");
+	public static final ResourceLocation PE_TUT_15 = res("pe/tiers");
 
 	//Transmutation grid
 	public static final ResourceLocation TRANSMUTATION = res("transmutation");

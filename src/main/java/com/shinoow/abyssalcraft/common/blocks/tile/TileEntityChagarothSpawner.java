@@ -25,7 +25,7 @@ public class TileEntityChagarothSpawner extends TileEntity implements ITickable 
 	public void onLoad()
 	{
 		if(worldObj.isRemote)
-			worldObj.loadedTileEntityList.remove(this);
+			worldObj.tickableTileEntities.remove(this);
 	}
 
 	public boolean isActivated() {
@@ -37,7 +37,7 @@ public class TileEntityChagarothSpawner extends TileEntity implements ITickable 
 
 	@Override
 	public void update() {
-		if (isActivated() && !worldObj.isRemote) {
+		if (isActivated()) {
 			EntityChagaroth mob = new EntityChagaroth(worldObj);
 			mob.setLocationAndAngles(pos.getX(), pos.getY(), pos.getZ(), MathHelper.wrapDegrees(worldObj.rand.nextFloat() * 360.0F), 10.0F);
 			mob.onInitialSpawn(worldObj.getDifficultyForLocation(pos), null);
