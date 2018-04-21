@@ -18,6 +18,7 @@ import com.shinoow.abyssalcraft.api.energy.IEnergyTransporterItem;
 import com.shinoow.abyssalcraft.api.energy.PEUtils;
 import com.shinoow.abyssalcraft.api.energy.disruption.DisruptionHandler;
 import com.shinoow.abyssalcraft.api.entity.EntityUtil;
+import com.shinoow.abyssalcraft.lib.ACLib;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.effect.EntityLightningBolt;
@@ -177,8 +178,10 @@ public class TileEntityStatue extends TileEntity implements IEnergyManipulator, 
 	@Override
 	public void disrupt() {
 		tolerance = 0;
-		world.addWeatherEffect(new EntityLightningBolt(world, pos.getX(), pos.getY() + 1, pos.getZ(), false));
-		DisruptionHandler.instance().generateDisruption(getDeity(world.getBlockState(pos)), world, pos, world.getEntitiesWithinAABB(EntityPlayer.class, new AxisAlignedBB(pos).grow(16, 16, 16)));
+		if(world.provider.getDimension() != ACLib.omothol_id) {
+			world.addWeatherEffect(new EntityLightningBolt(world, pos.getX(), pos.getY() + 1, pos.getZ(), false));
+			DisruptionHandler.instance().generateDisruption(getDeity(world.getBlockState(pos)), world, pos, world.getEntitiesWithinAABB(EntityPlayer.class, new AxisAlignedBB(pos).grow(16, 16, 16)));
+		}
 	}
 
 	@Override

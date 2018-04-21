@@ -30,6 +30,7 @@ import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.monster.EntitySkeleton;
 import net.minecraft.entity.monster.EntityZombie;
+import net.minecraft.entity.passive.EntityVillager;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.SoundEvents;
@@ -78,6 +79,7 @@ public class EntityAbyssalZombie extends EntityMob implements ICoraliumEntity {
 		targetTasks.addTask(1, new EntityAIHurtByTarget(this, false));
 		targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityZombie.class, true));
 		targetTasks.addTask(3, new EntityAINearestAttackableTarget(this, EntityPlayer.class, true));
+		targetTasks.addTask(3, new EntityAINearestAttackableTarget(this, EntityVillager.class, true));
 		setSize(0.6F, 1.8F);
 	}
 
@@ -293,38 +295,21 @@ public class EntityAbyssalZombie extends EntityMob implements ICoraliumEntity {
 	{
 		super.onKillEntity(par1EntityLivingBase);
 
-		if (world.getDifficulty() == EnumDifficulty.HARD || world.getDifficulty() == EnumDifficulty.NORMAL
-				&& par1EntityLivingBase instanceof EntityZombie) {
-
-			if (rand.nextBoolean())
+		if ((world.getDifficulty() == EnumDifficulty.HARD || world.getDifficulty() == EnumDifficulty.NORMAL)
+				&& (par1EntityLivingBase instanceof EntityZombie || par1EntityLivingBase instanceof EntityPlayer
+						|| par1EntityLivingBase instanceof EntityVillager)) {
+			if (world.getDifficulty() != EnumDifficulty.HARD && rand.nextBoolean())
 				return;
 
-			EntityAbyssalZombie EntityDephsZombie = new EntityAbyssalZombie(world);
-			EntityDephsZombie.copyLocationAndAnglesFrom(par1EntityLivingBase);
+			EntityAbyssalZombie entityAbyssalZombie = new EntityAbyssalZombie(world);
+			entityAbyssalZombie.copyLocationAndAnglesFrom(par1EntityLivingBase);
 			world.removeEntity(par1EntityLivingBase);
-			EntityDephsZombie.onInitialSpawn(world.getDifficultyForLocation(new BlockPos(EntityDephsZombie)), (IEntityLivingData)null);
+			entityAbyssalZombie.onInitialSpawn(world.getDifficultyForLocation(new BlockPos(entityAbyssalZombie)), (IEntityLivingData)null);
 
 			if (par1EntityLivingBase.isChild())
-				EntityDephsZombie.setChild(true);
+				entityAbyssalZombie.setChild(true);
 
-			world.spawnEntity(EntityDephsZombie);
-			world.playEvent((EntityPlayer)null, 1026, new BlockPos(posX, posY, posZ), 0);
-		}
-		else if (world.getDifficulty() == EnumDifficulty.HARD || world.getDifficulty() == EnumDifficulty.NORMAL
-				&& par1EntityLivingBase instanceof EntityPlayer) {
-
-			if (rand.nextBoolean())
-				return;
-
-			EntityAbyssalZombie EntityDephsZombie = new EntityAbyssalZombie(world);
-			EntityDephsZombie.copyLocationAndAnglesFrom(par1EntityLivingBase);
-			world.removeEntity(par1EntityLivingBase);
-			EntityDephsZombie.onInitialSpawn(world.getDifficultyForLocation(new BlockPos(EntityDephsZombie)), (IEntityLivingData)null);
-
-			if (par1EntityLivingBase.isChild())
-				EntityDephsZombie.setChild(true);
-
-			world.spawnEntity(EntityDephsZombie);
+			world.spawnEntity(entityAbyssalZombie);
 			world.playEvent((EntityPlayer)null, 1026, new BlockPos(posX, posY, posZ), 0);
 		}
 	}

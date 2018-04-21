@@ -226,20 +226,20 @@ public class EntityAntiAbyssalZombie extends EntityMob implements IAntiEntity {
 	{
 		super.onKillEntity(par1EntityLivingBase);
 
-		if(world.getDifficulty() == EnumDifficulty.HARD || world.getDifficulty() == EnumDifficulty.NORMAL
+		if((world.getDifficulty() == EnumDifficulty.HARD || world.getDifficulty() == EnumDifficulty.NORMAL)
 				&& par1EntityLivingBase instanceof EntityAntiZombie) {
-			if (rand.nextBoolean())
+			if (world.getDifficulty() != EnumDifficulty.HARD && rand.nextBoolean())
 				return;
 
-			EntityAntiAbyssalZombie antiAbyaalZombie = new EntityAntiAbyssalZombie(world);
-			antiAbyaalZombie.copyLocationAndAnglesFrom(par1EntityLivingBase);
+			EntityAntiAbyssalZombie antiAbyssalZombie = new EntityAntiAbyssalZombie(world);
+			antiAbyssalZombie.copyLocationAndAnglesFrom(par1EntityLivingBase);
 			world.removeEntity(par1EntityLivingBase);
-			antiAbyaalZombie.onInitialSpawn(world.getDifficultyForLocation(new BlockPos(posX, posY, posZ)), (IEntityLivingData)null);
+			antiAbyssalZombie.onInitialSpawn(world.getDifficultyForLocation(new BlockPos(posX, posY, posZ)), (IEntityLivingData)null);
 
 			if (par1EntityLivingBase.isChild())
-				antiAbyaalZombie.setChild(true);
+				antiAbyssalZombie.setChild(true);
 
-			world.spawnEntity(antiAbyaalZombie);
+			world.spawnEntity(antiAbyssalZombie);
 			world.playEvent((EntityPlayer)null, 1026, new BlockPos(posX, posY, posZ), 0);
 
 		}

@@ -115,8 +115,6 @@ public class EntityDreadedCharge extends EntityFireball
 
 			List<EntityLivingBase> list = world.getEntitiesWithinAABB(EntityLivingBase.class, getEntityBoundingBox().grow(8.0D));
 			EntityAreaEffectCloud entityareaeffectcloud = new EntityAreaEffectCloud(world, posX, posY, posZ);
-			//     entityareaeffectcloud.setOwner((EntityFriendlyCreature)this.shootingEntity);
-			entityareaeffectcloud.setParticle(EnumParticleTypes.FLAME);
 			entityareaeffectcloud.addEffect(new PotionEffect(AbyssalCraftAPI.dread_plague, 400));
 			entityareaeffectcloud.setRadius(2.0F);
 			entityareaeffectcloud.setDuration(200 + rand.nextInt(200));

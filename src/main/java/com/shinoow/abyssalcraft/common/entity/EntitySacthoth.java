@@ -133,10 +133,7 @@ public class EntitySacthoth extends EntityMob implements IOmotholEntity, com.git
 	}
 
 	@Override
-	protected boolean canDespawn()
-	{
-		return world.provider.getDimension() == ACLib.dark_realm_id ? true : false;
-	}
+	protected void despawnEntity() {}
 
 	@Override
 	protected void updateAITasks()
