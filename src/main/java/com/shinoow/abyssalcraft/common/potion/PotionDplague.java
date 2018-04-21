@@ -68,7 +68,7 @@ public class PotionDplague extends Potion{
 			AxisAlignedBB axisalignedbb = par1EntityLivingBase.getEntityBoundingBox().expand(3.0D, 3.0D, 3.0D);
 			List<EntityLivingBase> list = par1EntityLivingBase.worldObj.<EntityLivingBase>getEntitiesWithinAABB(EntityLivingBase.class, axisalignedbb);
 			for(EntityLivingBase entity : list)
-				if(entity.getRNG().nextBoolean() && !entity.worldObj.isRemote)
+				if(entity.getRNG().nextBoolean() && !entity.worldObj.isRemote && par1EntityLivingBase != entity)
 					entity.addPotionEffect(PlagueEventHandler.getEffect(par1EntityLivingBase.getActivePotionEffect(this)));
 		}
 

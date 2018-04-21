@@ -16,9 +16,11 @@ import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.common.items.armor.ItemEthaxiumArmor;
 import com.shinoow.abyssalcraft.lib.ACConfig;
 
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityThrowable;
+import net.minecraft.item.ItemShield;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumParticleTypes;
@@ -60,49 +62,91 @@ public class EntityAcidProjectile extends EntityThrowable {
 	@Override
 	protected void onImpact(RayTraceResult mop) {
 
-		if(mop.entityHit != null) {
+		if (isBeingRidden() && isEntityInsideOpaqueBlock())
+		{
+			for (Entity entity : getPassengers()){
+				entity.copyLocationAndAnglesFrom(this);
+				entity.motionX += rand.nextGaussian();
+				entity.motionY += 0.5D;
+				entity.motionZ += rand.nextGaussian();
+			}
+			setDead();
+		}
 
-			if(ACConfig.hardcoreMode && mop.entityHit instanceof EntityPlayer)
-				mop.entityHit.attackEntityFrom(DamageSource.causeThrownDamage(this, getThrower()).setDamageBypassesArmor().setDamageIsAbsolute(), 1F);
+		if(!worldObj.isRemote) {
+			if(mop.entityHit != null) {
 
-			if(mop.entityHit instanceof EntityLivingBase && !(mop.entityHit instanceof EntityLesserShoggoth)){
+				if(ACConfig.hardcoreMode && mop.entityHit instanceof EntityPlayer)
+					mop.entityHit.attackEntityFrom(DamageSource.causeThrownDamage(this, getThrower()).setDamageBypassesArmor().setDamageIsAbsolute(), 1F);
 
-				if (mop.entityHit.attackEntityFrom(AbyssalCraftAPI.acid, damage))
-				{
-					for(ItemStack armor : mop.entityHit.getArmorInventoryList())
-						if(!(armor.getItem() instanceof ItemEthaxiumArmor))
-							armor.damageItem(damage + damage == 3 ? 1 : 2, (EntityLivingBase)mop.entityHit);
-					BlockPos pos = getPosition();
-					BlockPos pos1 = mop.entityHit.getPosition();
+				if(mop.entityHit instanceof EntityLivingBase && !(mop.entityHit instanceof EntityLesserShoggoth)){
 
-					Vec3d vec = new Vec3d(pos1.subtract(pos)).normalize();
+					EntityLivingBase entity = (EntityLivingBase)mop.entityHit;
 
-					double d = Math.sqrt(pos1.distanceSq(pos));
+					if(!canEntityBlockDamageSource(DamageSource.causeThrownDamage(this, getThrower()), entity) || !ACConfig.shieldsBlockAcid) {
+						if (mop.entityHit.attackEntityFrom(AbyssalCraftAPI.acid, damage))
+						{
+							for(ItemStack armor : mop.entityHit.getArmorInventoryList())
+								if(armor != null && !(armor.getItem() instanceof ItemEthaxiumArmor))
+									armor.damageItem(damage + damage == 3 ? 1 : 2, (EntityLivingBase)mop.entityHit);
+							BlockPos pos = getPosition();
+							BlockPos pos1 = mop.entityHit.getPosition();
 
-					for(int i = 0; i < d * pos.getDistance(pos1.getX(), pos1.getY(), pos1.getZ()); i++){
-						double i1 = i / pos.getDistance(pos1.getX(), pos1.getY(), pos1.getZ());
-						double xp = pos.getX() + vec.xCoord * i1 + .5;
-						double yp = pos.getY() + vec.yCoord * i1 + .5;
-						double zp = pos.getZ() + vec.zCoord * i1 + .5;
-						BlockPos pos2 = new BlockPos(xp, yp, zp);
-						if(!worldObj.isAirBlock(pos2) && worldObj.getBlockState(pos2).getBlockHardness(worldObj, pos2) < 10 && worldObj.getBlockState(pos2).getBlock() != ACBlocks.shoggoth_ooze
-							&& worldObj.getBlockState(pos2).getBlock() != ACBlocks.monolith_stone
-							&& worldObj.getBlockState(pos2).getBlock() != ACBlocks.shoggoth_biomass && !worldObj.getBlockState(pos).getBlock().hasTileEntity(worldObj.getBlockState(pos)))
-							worldObj.destroyBlock(pos2, false);
+							Vec3d vec = new Vec3d(pos1.subtract(pos)).normalize();
+
+							double d = Math.sqrt(pos1.distanceSq(pos));
+
+							for(int i = 0; i < d * pos.getDistance(pos1.getX(), pos1.getY(), pos1.getZ()); i++){
+								double i1 = i / pos.getDistance(pos1.getX(), pos1.getY(), pos1.getZ());
+								double xp = pos.getX() + vec.xCoord * i1 + .5;
+								double yp = pos.getY() + vec.yCoord * i1 + .5;
+								double zp = pos.getZ() + vec.zCoord * i1 + .5;
+								BlockPos pos2 = new BlockPos(xp, yp, zp);
+								if(!worldObj.isAirBlock(pos2) && worldObj.getBlockState(pos2).getBlockHardness(worldObj, pos2) < ACConfig.acidResistanceHardness && worldObj.getBlockState(pos2).getBlock() != ACBlocks.shoggoth_ooze
+									&& worldObj.getBlockState(pos2).getBlock() != ACBlocks.monolith_stone
+									&& worldObj.getBlockState(pos2).getBlock() != ACBlocks.shoggoth_biomass && !worldObj.getBlockState(pos).getBlock().hasTileEntity(worldObj.getBlockState(pos)))
+									worldObj.destroyBlock(pos2, false);
+							}
+						}
+					} else {
+						ItemStack shield = entity.getActiveItemStack();
+						if(shield != null && shield.getItem() instanceof ItemShield) {
+							shield.damageItem(damage*2, entity);
+							entity.attackEntityFrom(AbyssalCraftAPI.acid, 1);
+						}
 					}
-				}
 
+					setDead();
+				}
+			}
+			if(mop.typeOfHit == Type.BLOCK) {
+				BlockPos pos = mop.getBlockPos();
+				if(!worldObj.isAirBlock(pos) && worldObj.getBlockState(pos).getBlockHardness(worldObj, pos) < 10 && worldObj.getBlockState(pos).getBlock() != ACBlocks.shoggoth_ooze
+					&& worldObj.getBlockState(pos).getBlock() != ACBlocks.monolith_stone
+					&& worldObj.getBlockState(pos).getBlock() != ACBlocks.shoggoth_biomass && !worldObj.getBlockState(pos).getBlock().hasTileEntity(worldObj.getBlockState(pos)))
+					worldObj.destroyBlock(pos, false);
 				setDead();
 			}
 		}
-		if(mop.typeOfHit == Type.BLOCK) {
-			BlockPos pos = mop.getBlockPos();
-			if(!worldObj.isAirBlock(pos) && worldObj.getBlockState(pos).getBlockHardness(worldObj, pos) < 10 && worldObj.getBlockState(pos).getBlock() != ACBlocks.shoggoth_ooze
-				&& worldObj.getBlockState(pos).getBlock() != ACBlocks.monolith_stone
-				&& worldObj.getBlockState(pos).getBlock() != ACBlocks.shoggoth_biomass && !worldObj.getBlockState(pos).getBlock().hasTileEntity(worldObj.getBlockState(pos)))
-				worldObj.destroyBlock(pos, false);
-			setDead();
-		}
 	}
 
+	private boolean canEntityBlockDamageSource(DamageSource damageSourceIn, EntityLivingBase target)
+	{
+		if (!damageSourceIn.isUnblockable() && target.isActiveItemStackBlocking())
+		{
+			Vec3d vec3d = damageSourceIn.getDamageLocation();
+
+			if (vec3d != null)
+			{
+				Vec3d vec3d1 = target.getLook(1.0F);
+				Vec3d vec3d2 = vec3d.subtractReverse(new Vec3d(target.posX, target.posY, target.posZ)).normalize();
+				vec3d2 = new Vec3d(vec3d2.xCoord, 0.0D, vec3d2.zCoord);
+
+				if (vec3d2.dotProduct(vec3d1) < 0.0D)
+					return true;
+			}
+		}
+
+		return false;
+	}
 }

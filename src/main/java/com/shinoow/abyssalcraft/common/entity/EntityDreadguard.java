@@ -15,8 +15,6 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.UUID;
 
-import com.google.common.base.Predicate;
-import com.google.common.base.Predicates;
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
 import com.shinoow.abyssalcraft.api.entity.EntityUtil;
 import com.shinoow.abyssalcraft.api.entity.IDreadEntity;
@@ -148,7 +146,7 @@ public class EntityDreadguard extends EntityMob implements IDreadEntity {
 	@Override
 	public EnumCreatureAttribute getCreatureAttribute()
 	{
-		return EnumCreatureAttribute.UNDEFINED;
+		return EnumCreatureAttribute.UNDEAD;
 	}
 
 	@Override
@@ -178,21 +176,14 @@ public class EntityDreadguard extends EntityMob implements IDreadEntity {
 				worldObj.playSound(null, new BlockPos(posX + 0.5D, posY + getEyeHeight(), posZ + 0.5D), ACSounds.dreadguard_barf, getSoundCategory(), 0.7F + getRNG().nextFloat(), getRNG().nextFloat() * 0.5F + 0.2F);
 			Entity target = getHeadLookTarget();
 			if (target != null) {
-				List<EntityLivingBase> list = worldObj.getEntitiesWithinAABB(EntityLivingBase.class, target.getEntityBoundingBox().expand(2.0D, 2.0D, 2.0D), Predicates.and(new Predicate[] { EntitySelectors.IS_ALIVE }));
-
-				for(EntityLivingBase entity : list)
-					if (entity != null && rand.nextInt(3) == 0) if (entity.attackEntityFrom(AbyssalCraftAPI.dread, (float)(4.5D - getDistanceToEntity(entity))))
-					{
-						entity.addPotionEffect(new PotionEffect(AbyssalCraftAPI.dread_plague, 100));
-						entity.setFire((int)(5 - getDistanceToEntity(entity)));
-					}
+				for(EntityLivingBase entity : worldObj.getEntitiesWithinAABB(EntityLivingBase.class, target.getEntityBoundingBox().expand(2.0D, 2.0D, 2.0D), EntitySelectors.IS_ALIVE))
+					if (rand.nextInt(3) == 0)
+						if (entity.attackEntityFrom(AbyssalCraftAPI.dread, (float)(4.5D - getDistanceToEntity(entity))))
+							entity.addPotionEffect(new PotionEffect(AbyssalCraftAPI.dread_plague, 100));
 
 				if (target.attackEntityFrom(AbyssalCraftAPI.dread, (float)(4.5D - getDistanceToEntity(target))))
-				{
 					if (target instanceof EntityLivingBase)
 						((EntityLivingBase) target).addPotionEffect(new PotionEffect(AbyssalCraftAPI.dread_plague, 100));
-					target.setFire((int)(5 - getDistanceToEntity(target)));
-				}
 			}
 		}
 
@@ -270,8 +261,8 @@ public class EntityDreadguard extends EntityMob implements IDreadEntity {
 				dy *= velocity;
 				dz *= velocity;
 
-				worldObj.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, px + getRNG().nextDouble() - 0.5D, py + getRNG().nextDouble() - 0.5D, pz + getRNG().nextDouble() - 0.5D, dx, dy, dz);
-				worldObj.spawnParticle(EnumParticleTypes.FLAME, px + getRNG().nextDouble() - 0.5D, py + getRNG().nextDouble() - 0.5D, pz + getRNG().nextDouble() - 0.5D, dx, dy, dz);
+				worldObj.spawnParticle(EnumParticleTypes.ITEM_CRACK, px + getRNG().nextDouble() - 0.5D, py + getRNG().nextDouble() - 0.5D, pz + getRNG().nextDouble() - 0.5D, dx, dy, dz, Item.getIdFromItem(ACItems.dreaded_shard_of_abyssalnite));
+				worldObj.spawnParticle(EnumParticleTypes.ITEM_CRACK, px + getRNG().nextDouble() - 0.5D, py + getRNG().nextDouble() - 0.5D, pz + getRNG().nextDouble() - 0.5D, dx, dy, dz, Item.getIdFromItem(ACItems.dread_fragment));
 			}
 		} else
 			worldObj.setEntityState(this, (byte)23);

@@ -230,7 +230,7 @@ public class EntityLesserShoggoth extends EntityMob implements IOmotholEntity {
 
 		if(getFoodLevel() >= 8 && !worldObj.isRemote && ticksExisted % 20 == 0){
 			setFoodLevel(getFoodLevel()-8);
-			if(!isChild()){
+			if(!isChild() && !worldObj.isRemote){
 				EntityLesserShoggoth shoggoth = new EntityLesserShoggoth(worldObj);
 				shoggoth.copyLocationAndAnglesFrom(this);
 				shoggoth.onInitialSpawn(worldObj.getDifficultyForLocation(new BlockPos(posX, posY, posZ)),(IEntityLivingData)null);
@@ -238,6 +238,18 @@ public class EntityLesserShoggoth extends EntityMob implements IOmotholEntity {
 				shoggoth.setShoggothType(getShoggothType());
 				worldObj.spawnEntityInWorld(shoggoth);
 				playSound(SoundEvents.ENTITY_CHICKEN_EGG, 1.0F, (rand.nextFloat() - rand.nextFloat()) * 0.2F + 1.0F);
+				if(getAttackTarget() != null && getAttackTarget().isEntityAlive() && getRNG().nextInt(3) == 0) {
+					EntityLivingBase target = getAttackTarget();
+					EntityAcidProjectile acidprojectile = new EntityAcidProjectile(worldObj, this);
+					double d0 = target.posX - posX;
+					double d1 = target.posY + target.getEyeHeight() - 1.100000023841858D - acidprojectile.posY;
+					double d2 = target.posZ - posZ;
+					float f1 = MathHelper.sqrt_double(d0 * d0 + d2 * d2) * 0.2F;
+					acidprojectile.setThrowableHeading(d0, d1 + f1, d2, 0.8F, 8.0F);
+					shoggoth.startRiding(acidprojectile);
+					playSound(SoundEvents.ENTITY_SKELETON_SHOOT, 1.0F, 1.0F / (getRNG().nextFloat() * 0.4F + 0.8F));
+					worldObj.spawnEntityInWorld(acidprojectile);
+				}
 			}
 			else setChild(false);
 		}
@@ -455,13 +467,13 @@ public class EntityLesserShoggoth extends EntityMob implements IOmotholEntity {
 		for(EntityLivingBase entity : worldObj.getEntitiesWithinAABB(EntityLivingBase.class, aabb, e -> !(e instanceof EntityLesserShoggoth)))
 			if(entity.attackEntityFrom(AbyssalCraftAPI.acid, (float)(4.5D - getDistanceToEntity(entity))))
 				for(ItemStack armor : entity.getArmorInventoryList())
-					if(!(armor.getItem() instanceof ItemEthaxiumArmor))
+					if(armor != null && !(armor.getItem() instanceof ItemEthaxiumArmor))
 						armor.damageItem(isChild() ? 4 : 8, entity);
 		for(int i = (int)aabb.minX; i < aabb.maxX+1; i++)
 			for(int j = (int)aabb.minZ; j < aabb.maxZ+1; j++)
 				for(int k = 0; above ? k < 2 : k > -2; k=above ? k + 1 : k - 1){
 					BlockPos pos = new BlockPos(i, above ? aabb.maxY : aabb.minY , j);
-					if(!worldObj.isAirBlock(pos) && worldObj.getBlockState(pos).getBlockHardness(worldObj, pos) < 10
+					if(!worldObj.isAirBlock(pos) && worldObj.getBlockState(pos).getBlockHardness(worldObj, pos) < ACConfig.acidResistanceHardness
 						&& worldObj.getBlockState(pos).getBlock() != ACBlocks.monolith_stone
 						&& worldObj.getBlockState(pos).getBlock() != ACBlocks.shoggoth_biomass && !worldObj.getBlockState(pos).getBlock().hasTileEntity(worldObj.getBlockState(pos)))
 						worldObj.destroyBlock(pos, false);

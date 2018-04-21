@@ -30,6 +30,7 @@ import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.monster.EntitySkeleton;
 import net.minecraft.entity.monster.EntityZombie;
+import net.minecraft.entity.passive.EntityVillager;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.SoundEvents;
@@ -78,6 +79,7 @@ public class EntityAbyssalZombie extends EntityMob implements ICoraliumEntity {
 		targetTasks.addTask(1, new EntityAIHurtByTarget(this, false));
 		targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityZombie.class, true));
 		targetTasks.addTask(3, new EntityAINearestAttackableTarget(this, EntityPlayer.class, true));
+		targetTasks.addTask(3, new EntityAINearestAttackableTarget(this, EntityVillager.class, true));
 		setSize(0.6F, 1.8F);
 	}
 
@@ -293,27 +295,10 @@ public class EntityAbyssalZombie extends EntityMob implements ICoraliumEntity {
 	{
 		super.onKillEntity(par1EntityLivingBase);
 
-		if (worldObj.getDifficulty() == EnumDifficulty.HARD || worldObj.getDifficulty() == EnumDifficulty.NORMAL
-			&& par1EntityLivingBase instanceof EntityZombie) {
-
-			if (rand.nextBoolean())
-				return;
-
-			EntityAbyssalZombie EntityDephsZombie = new EntityAbyssalZombie(worldObj);
-			EntityDephsZombie.copyLocationAndAnglesFrom(par1EntityLivingBase);
-			worldObj.removeEntity(par1EntityLivingBase);
-			EntityDephsZombie.onInitialSpawn(worldObj.getDifficultyForLocation(new BlockPos(EntityDephsZombie)), (IEntityLivingData)null);
-
-			if (par1EntityLivingBase.isChild())
-				EntityDephsZombie.setChild(true);
-
-			worldObj.spawnEntityInWorld(EntityDephsZombie);
-			worldObj.playEvent((EntityPlayer)null, 1026, new BlockPos(posX, posY, posZ), 0);
-		}
-		else if (worldObj.getDifficulty() == EnumDifficulty.HARD || worldObj.getDifficulty() == EnumDifficulty.NORMAL
-			&& par1EntityLivingBase instanceof EntityPlayer) {
-
-			if (rand.nextBoolean())
+		if ((worldObj.getDifficulty() == EnumDifficulty.HARD || worldObj.getDifficulty() == EnumDifficulty.NORMAL)
+			&& (par1EntityLivingBase instanceof EntityZombie || par1EntityLivingBase instanceof EntityPlayer
+				|| par1EntityLivingBase instanceof EntityVillager)) {
+			if (worldObj.getDifficulty() != EnumDifficulty.HARD && rand.nextBoolean())
 				return;
 
 			EntityAbyssalZombie EntityDephsZombie = new EntityAbyssalZombie(worldObj);
