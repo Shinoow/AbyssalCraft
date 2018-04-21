@@ -116,6 +116,7 @@ public class EntityDragonBoss extends EntityMob implements IEntityMultiPart, ICo
 	protected void applyEntityAttributes()
 	{
 		super.applyEntityAttributes();
+		getEntityAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue(1.0D);
 		if(ACConfig.hardcoreMode) getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(800.0D);
 		else getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(400.0D);
 	}
@@ -146,10 +147,7 @@ public class EntityDragonBoss extends EntityMob implements IEntityMultiPart, ICo
 	}
 
 	@Override
-	protected boolean canDespawn()
-	{
-		return false;
-	}
+	protected void despawnEntity() {}
 
 	@Override
 	public void onDeath(DamageSource par1DamageSource)

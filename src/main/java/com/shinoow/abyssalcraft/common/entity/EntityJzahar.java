@@ -131,10 +131,7 @@ public class EntityJzahar extends EntityMob implements IRangedAttackMob, IOmotho
 	}
 
 	@Override
-	protected boolean canDespawn()
-	{
-		return false;
-	}
+	protected void despawnEntity() {}
 
 	@Override
 	protected void updateAITasks()

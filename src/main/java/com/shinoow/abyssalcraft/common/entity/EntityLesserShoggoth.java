@@ -224,7 +224,7 @@ public class EntityLesserShoggoth extends EntityMob implements IOmotholEntity {
 
 		if(getFoodLevel() >= 8 && !world.isRemote && ticksExisted % 20 == 0){
 			setFoodLevel(getFoodLevel() - 8);
-			if(!isChild()){
+			if(!isChild() && !world.isRemote){
 				EntityLesserShoggoth shoggoth = new EntityLesserShoggoth(world);
 				shoggoth.copyLocationAndAnglesFrom(this);
 				shoggoth.onInitialSpawn(world.getDifficultyForLocation(new BlockPos(posX, posY, posZ)),(IEntityLivingData)null);
@@ -232,6 +232,18 @@ public class EntityLesserShoggoth extends EntityMob implements IOmotholEntity {
 				shoggoth.setShoggothType(getShoggothType());
 				world.spawnEntity(shoggoth);
 				playSound(SoundEvents.ENTITY_CHICKEN_EGG, 1.0F, (rand.nextFloat() - rand.nextFloat()) * 0.2F + 1.0F);
+				if(getAttackTarget() != null && getAttackTarget().isEntityAlive() && getRNG().nextInt(3) == 0) {
+					EntityLivingBase target = getAttackTarget();
+					EntityAcidProjectile acidprojectile = new EntityAcidProjectile(world, this);
+					double d0 = target.posX - posX;
+					double d1 = target.posY + target.getEyeHeight() - 1.100000023841858D - acidprojectile.posY;
+					double d2 = target.posZ - posZ;
+					float f1 = MathHelper.sqrt(d0 * d0 + d2 * d2) * 0.2F;
+					acidprojectile.setThrowableHeading(d0, d1 + f1, d2, 0.8F, 8.0F);
+					shoggoth.startRiding(acidprojectile);
+					playSound(SoundEvents.ENTITY_SKELETON_SHOOT, 1.0F, 1.0F / (getRNG().nextFloat() * 0.4F + 0.8F));
+					world.spawnEntity(acidprojectile);
+				}
 			}
 			else setChild(false);
 		}
@@ -455,7 +467,7 @@ public class EntityLesserShoggoth extends EntityMob implements IOmotholEntity {
 			for(int j = (int)aabb.minZ; j < aabb.maxZ+1; j++)
 				for(int k = 0; above ? k < 2 : k > -2; k=above ? k + 1 : k - 1){
 					BlockPos pos = new BlockPos(i, above ? aabb.maxY : aabb.minY , j);
-					if(!world.isAirBlock(pos) && world.getBlockState(pos).getBlockHardness(world, pos) < 10
+					if(!world.isAirBlock(pos) && world.getBlockState(pos).getBlockHardness(world, pos) < ACConfig.acidResistanceHardness
 							&& world.getBlockState(pos).getBlock() != ACBlocks.monolith_stone
 							&& world.getBlockState(pos).getBlock() != ACBlocks.shoggoth_biomass && !world.getBlockState(pos).getBlock().hasTileEntity(world.getBlockState(pos)))
 						world.destroyBlock(pos, false);

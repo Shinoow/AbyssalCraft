@@ -15,7 +15,6 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.UUID;
 
-import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
 import com.shinoow.abyssalcraft.api.biome.ACBiomes;
@@ -40,6 +39,7 @@ import net.minecraft.entity.item.EntityXPOrb;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.datasync.DataParameter;
@@ -189,10 +189,7 @@ public class EntityChagaroth extends EntityMob implements IDreadEntity, com.gith
 	}
 
 	@Override
-	protected boolean canDespawn()
-	{
-		return false;
-	}
+	protected void despawnEntity() {}
 
 	@Override
 	protected void updateAITasks()
@@ -511,25 +508,14 @@ public class EntityChagaroth extends EntityMob implements IDreadEntity, com.gith
 			}
 			Entity target = getHeadLookTarget();
 			if (target != null) {
-				List list = world.getEntitiesWithinAABB(EntityLivingBase.class, target.getEntityBoundingBox().expand(2.0D, 2.0D, 2.0D), Predicates.and(new Predicate[] { EntitySelectors.IS_ALIVE }));
-
-				if (list != null && !list.isEmpty()) for (int i1 = 0; i1 < list.size(); i1++)
-				{
-					EntityLivingBase entity = (EntityLivingBase)list.get(i1);
-
-					if (entity != null && rand.nextInt(3) == 0) if (entity.attackEntityFrom(AbyssalCraftAPI.dread, (float)(7.5D - getDistanceToEntity(entity)) * 2F))
-					{
-						entity.addPotionEffect(new PotionEffect(AbyssalCraftAPI.dread_plague, 200, 1));
-						entity.setFire((int)(10 - getDistanceToEntity(entity)));
-					}
-				}
+				for(EntityLivingBase entity : world.getEntitiesWithinAABB(EntityLivingBase.class, target.getEntityBoundingBox().expand(2.0D, 2.0D, 2.0D), EntitySelectors.IS_ALIVE))
+					if (rand.nextInt(3) == 0)
+						if (entity.attackEntityFrom(AbyssalCraftAPI.dread, (float)(7.5D - getDistanceToEntity(entity)) * 2F))
+							entity.addPotionEffect(new PotionEffect(AbyssalCraftAPI.dread_plague, 200, 1));
 
 				if (target.attackEntityFrom(AbyssalCraftAPI.dread, (float)(7.5D - getDistanceToEntity(target)) * 2F))
-				{
 					if (target instanceof EntityLivingBase)
 						((EntityLivingBase) target).addPotionEffect(new PotionEffect(AbyssalCraftAPI.dread_plague, 200, 1));
-					target.setFire((int)(10 - getDistanceToEntity(target)));
-				}
 			}
 		}
 
@@ -658,7 +644,8 @@ public class EntityChagaroth extends EntityMob implements IDreadEntity, com.gith
 				dy *= velocity;
 				dz *= velocity;
 
-				world.spawnParticle(EnumParticleTypes.FLAME, px + getRNG().nextDouble() - 0.5D, py + getRNG().nextDouble() - 0.5D, pz + getRNG().nextDouble() - 0.5D, dx, dy, dz);
+				world.spawnParticle(EnumParticleTypes.ITEM_CRACK, px + getRNG().nextDouble() - 0.5D, py + getRNG().nextDouble() - 0.5D, pz + getRNG().nextDouble() - 0.5D, dx, dy, dz, Item.getIdFromItem(ACItems.dreaded_shard_of_abyssalnite));
+				world.spawnParticle(EnumParticleTypes.ITEM_CRACK, px + getRNG().nextDouble() - 0.5D, py + getRNG().nextDouble() - 0.5D, pz + getRNG().nextDouble() - 0.5D, dx, dy, dz, Item.getIdFromItem(ACItems.dread_fragment));
 			}
 		} else
 			world.setEntityState(this, (byte)23);

@@ -226,9 +226,9 @@ public class EntityAntiAbyssalZombie extends EntityMob implements IAntiEntity {
 	{
 		super.onKillEntity(par1EntityLivingBase);
 
-		if(world.getDifficulty() == EnumDifficulty.HARD || world.getDifficulty() == EnumDifficulty.NORMAL
+		if((world.getDifficulty() == EnumDifficulty.HARD || world.getDifficulty() == EnumDifficulty.NORMAL)
 				&& par1EntityLivingBase instanceof EntityAntiZombie) {
-			if (rand.nextBoolean())
+			if (world.getDifficulty() != EnumDifficulty.HARD && rand.nextBoolean())
 				return;
 
 			EntityAntiAbyssalZombie antiAbyaalZombie = new EntityAntiAbyssalZombie(world);
