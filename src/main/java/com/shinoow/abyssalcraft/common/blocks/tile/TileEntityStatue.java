@@ -179,7 +179,7 @@ public class TileEntityStatue extends TileEntity implements IEnergyManipulator, 
 	public void disrupt() {
 		tolerance = 0;
 		if(world.provider.getDimension() != ACLib.omothol_id) {
-			world.addWeatherEffect(new EntityLightningBolt(world, pos.getX(), pos.getY() + 1, pos.getZ(), false));
+			world.addWeatherEffect(new EntityLightningBolt(world, pos.getX(), pos.getY() + 1, pos.getZ(), true));
 			DisruptionHandler.instance().generateDisruption(getDeity(world.getBlockState(pos)), world, pos, world.getEntitiesWithinAABB(EntityPlayer.class, new AxisAlignedBB(pos).grow(16, 16, 16)));
 		}
 	}

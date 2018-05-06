@@ -52,6 +52,13 @@ public class TileEntityEnergyContainer extends TileEntity implements IEnergyCont
 	}
 
 	@Override
+	public void onLoad()
+	{
+		if(world.isRemote)
+			world.tickableTileEntities.remove(this);
+	}
+
+	@Override
 	public SPacketUpdateTileEntity getUpdatePacket() {
 		return new SPacketUpdateTileEntity(pos, 1, getUpdateTag());
 	}
@@ -74,12 +81,12 @@ public class TileEntityEnergyContainer extends TileEntity implements IEnergyCont
 		ItemStack input = getStackInSlot(0);
 		if(!input.isEmpty())
 			if(input.getItem() instanceof IEnergyContainerItem)
-				if(!world.isRemote && ((IEnergyContainerItem) input.getItem()).canTransferPE(input) && canAcceptPE())
+				if(((IEnergyContainerItem) input.getItem()).canTransferPE(input) && canAcceptPE())
 					addEnergy(((IEnergyContainerItem) input.getItem()).consumeEnergy(input, 1));
 		ItemStack output = getStackInSlot(1);
 		if(!output.isEmpty())
 			if(output.getItem() instanceof IEnergyContainerItem)
-				if(!world.isRemote && ((IEnergyContainerItem) output.getItem()).canAcceptPE(output) && canTransferPE())
+				if(((IEnergyContainerItem) output.getItem()).canAcceptPE(output) && canTransferPE())
 					((IEnergyContainerItem) output.getItem()).addEnergy(output, consumeEnergy(1));
 	}
 

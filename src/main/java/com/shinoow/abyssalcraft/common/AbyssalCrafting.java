@@ -636,6 +636,9 @@ public class AbyssalCrafting {
 		DisruptionHandler.instance().registerDisruption(new DisruptionSwarm("swarmSheep", DeityType.SHUBNIGGURATH, EntityEvilSheep.class, EntitySheep.class));
 		DisruptionHandler.instance().registerDisruption(new DisruptionAnimalCorruption());
 		//		DisruptionHandler.instance().registerDisruption(new DisruptionCorruption());
+		DisruptionHandler.instance().registerDisruption(new DisruptionOoze());
+		DisruptionHandler.instance().registerDisruption(new DisruptionRandomSwarm());
+		DisruptionHandler.instance().registerDisruption(new DisruptionRandomSpawn());
 	}
 
 	private static void addSpells(){

@@ -25,7 +25,6 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class RenderAbyssalZombie extends RenderBiped<EntityAbyssalZombie> {
 
 	private static final ResourceLocation zombieTexture = new ResourceLocation("abyssalcraft:textures/model/abyssal_zombie.png");
-	private static final ResourceLocation zombieTexture_end = new ResourceLocation("abyssalcraft:textures/model/abyssal_zombie_end.png");
 
 	public RenderAbyssalZombie(RenderManager manager)
 	{
@@ -44,6 +43,6 @@ public class RenderAbyssalZombie extends RenderBiped<EntityAbyssalZombie> {
 	@Override
 	protected ResourceLocation getEntityTexture(EntityAbyssalZombie par1EntityLiving)
 	{
-		return par1EntityLiving.getZombieType() == 2 ? zombieTexture_end : zombieTexture;
+		return zombieTexture;
 	}
 }

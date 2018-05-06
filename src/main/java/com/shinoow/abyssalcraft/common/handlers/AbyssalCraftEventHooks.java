@@ -150,7 +150,7 @@ public class AbyssalCraftEventHooks {
 
 	@SubscribeEvent
 	public void armorStuff(LivingHurtEvent event){
-		if(event.getEntityLiving().getItemStackFromSlot(EntityEquipmentSlot.CHEST) != null){
+		if(!event.getEntityLiving().getItemStackFromSlot(EntityEquipmentSlot.CHEST).isEmpty()){
 			ItemStack slot = event.getEntityLiving().getItemStackFromSlot(EntityEquipmentSlot.CHEST);
 			if(slot.getItem() == ACItems.dreaded_abyssalnite_chestplate)
 				if(event.getSource().getTrueSource() != null && event.getEntityLiving().world.rand.nextBoolean())
@@ -520,7 +520,6 @@ public class AbyssalCraftEventHooks {
 
 	@SubscribeEvent
 	public void onClonePlayer(Clone event) {
-		if(event.isWasDeath())
-			NecromancyCapability.getCap(event.getEntityPlayer()).copy(NecromancyCapability.getCap(event.getOriginal()));
+		NecromancyCapability.getCap(event.getEntityPlayer()).copy(NecromancyCapability.getCap(event.getOriginal()));
 	}
 }

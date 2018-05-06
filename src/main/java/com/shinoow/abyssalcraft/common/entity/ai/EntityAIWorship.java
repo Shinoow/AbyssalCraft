@@ -16,14 +16,15 @@ import com.shinoow.abyssalcraft.common.blocks.tile.TileEntityStatue;
 import com.shinoow.abyssalcraft.common.entity.EntityLesserShoggoth;
 import com.shinoow.abyssalcraft.lib.ACSounds;
 
+import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-public class EntityAIShoggothWorship extends EntityAIBase
+public class EntityAIWorship extends EntityAIBase
 {
 	/** The entity that is looking idle. */
-	private final EntityLesserShoggoth idleEntity;
+	private final EntityLiving idleEntity;
 	/** X offset to look at */
 	private double lookX;
 	/** Z offset to look at */
@@ -32,7 +33,7 @@ public class EntityAIShoggothWorship extends EntityAIBase
 	private int idleTime;
 	private BlockPos statuePos;
 
-	public EntityAIShoggothWorship(EntityLesserShoggoth entitylivingIn)
+	public EntityAIWorship(EntityLiving entitylivingIn)
 	{
 		idleEntity = entitylivingIn;
 		setMutexBits(3);
@@ -79,7 +80,7 @@ public class EntityAIShoggothWorship extends EntityAIBase
 		if(statuePos != null) {
 			idleEntity.getNavigator().tryMoveToXYZ(statuePos.getX() + (idleEntity.getRNG().nextBoolean() ? 1 : -1), idleEntity.posY, statuePos.getZ()+ (idleEntity.getRNG().nextBoolean() ? 1 : -1), 0.5F);
 			if(!idleEntity.getEntityWorld().isRemote)
-				idleEntity.playSound(ACSounds.remnant_priest_chant, 1.0F, idleEntity.isChild() ? 1.5F : 0.8F);
+				idleEntity.playSound(ACSounds.remnant_priest_chant, 1.0F, idleEntity instanceof EntityLesserShoggoth ? idleEntity.isChild() ? 1.5F : 0.8F : (idleEntity.getRNG().nextFloat() - idleEntity.getRNG().nextFloat()) * 0.2F + 1.0F);
 		}
 	}
 

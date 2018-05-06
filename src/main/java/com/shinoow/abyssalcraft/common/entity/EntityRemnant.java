@@ -17,6 +17,7 @@ import com.shinoow.abyssalcraft.api.APIUtils;
 import com.shinoow.abyssalcraft.api.entity.EntityUtil;
 import com.shinoow.abyssalcraft.api.entity.IOmotholEntity;
 import com.shinoow.abyssalcraft.api.item.ACItems;
+import com.shinoow.abyssalcraft.common.entity.ai.EntityAIWorship;
 import com.shinoow.abyssalcraft.common.items.ItemDrainStaff;
 import com.shinoow.abyssalcraft.common.items.ItemNecronomicon;
 import com.shinoow.abyssalcraft.lib.ACConfig;
@@ -77,6 +78,7 @@ public class EntityRemnant extends EntityMob implements IMerchant, IOmotholEntit
 		tasks.addTask(7, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
 		tasks.addTask(7, new EntityAIWatchClosest(this, EntityRemnant.class, 8.0F));
 		tasks.addTask(7, new EntityAIWatchClosest(this, EntityGatekeeperMinion.class, 8.0F));
+		tasks.addTask(8, new EntityAIWorship(this));
 		targetTasks.addTask(1, new EntityAIHurtByTarget(this, false));
 		setSize(0.6F, 1.95F);
 	}
@@ -350,12 +352,6 @@ public class EntityRemnant extends EntityMob implements IMerchant, IOmotholEntit
 			if(entry.action instanceof EntityAINearestAttackableTarget)
 				return (EntityAINearestAttackableTarget) entry.action;
 		return null;
-	}
-
-	@Override
-	protected Item getDropItem()
-	{
-		return ACItems.eldritch_scale;
 	}
 
 	@Override

@@ -22,8 +22,8 @@ public class ACConfig {
 
 	public static boolean shouldSpread, shouldInfect, breakLogic, destroyOcean, demonAnimalFire, particleBlock,
 	particleEntity, hardcoreMode, evilAnimalCreatureType, antiItemDisintegration, smeltingRecipes, purgeMobSpawns,
-	overworldShoggoths, mimicFire, armorPotionEffects, nuclearAntimatterExplosions;
-	public static int evilAnimalSpawnWeight, endAbyssalZombieSpawnWeight, portalCooldown, demonAnimalSpawnWeight, shoggothLairSpawnRate;
+	overworldShoggoths, mimicFire, armorPotionEffects, nuclearAntimatterExplosions, syncDataOnBookOpening;
+	public static int evilAnimalSpawnWeight, portalCooldown, demonAnimalSpawnWeight, shoggothLairSpawnRate;
 	public static double damageAmpl, depthsHelmetOverlayOpacity;
 	public static boolean shoggothOoze, oozeExpire, consumeItems, shieldsBlockAcid;
 	public static double acidResistanceHardness;
@@ -33,4 +33,7 @@ public class ACConfig {
 	generateDreadlandsAbyssalniteOre, generateDreadedAbyssalniteOre, generateAbyssalIronOre, generateAbyssalGoldOre,
 	generateAbyssalDiamondOre, generateAbyssalNitreOre, generateAbyssalTinOre, generateAbyssalCopperOre,
 	generatePearlescentCoraliumOre, generateLiquifiedCoraliumOre;
+
+	@Deprecated
+	public static int endAbyssalZombieSpawnWeight;
 }

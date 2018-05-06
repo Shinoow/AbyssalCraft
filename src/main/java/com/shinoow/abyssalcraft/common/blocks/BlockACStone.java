@@ -134,11 +134,11 @@ public class BlockACStone extends Block {
 
 	public static enum EnumStoneType implements IStringSerializable
 	{
-		DARKSTONE(0, "darkstone", "darkstone", 0, 2.2F, 12.0F, MapColor.BLACK),
-		ABYSSAL_STONE(1, "abyssalstone", "abystone", 2, 2.6F, 12.0F, MapColor.GREEN),
-		DREADSTONE(2, "dreadstone", "dreadstone", 4, 3.3F, 20.0F, MapColor.RED),
-		ABYSSALNITE_STONE(3, "abyssalnitestone", "abydreadstone", 4, 3.3F, 20.0F, MapColor.PURPLE),
-		CORALIUM_STONE(4, "coraliumstone", "cstone", 0, 2.0F, 10.0F, MapColor.CYAN),
+		DARKSTONE(0, "darkstone", "darkstone", 0, 1.65F, 12.0F, MapColor.BLACK),
+		ABYSSAL_STONE(1, "abyssalstone", "abystone", 2, 1.8F, 12.0F, MapColor.GREEN),
+		DREADSTONE(2, "dreadstone", "dreadstone", 4, 2.5F, 20.0F, MapColor.RED),
+		ABYSSALNITE_STONE(3, "abyssalnitestone", "abydreadstone", 4, 2.5F, 20.0F, MapColor.PURPLE),
+		CORALIUM_STONE(4, "coraliumstone", "cstone", 0, 1.5F, 10.0F, MapColor.CYAN),
 		ETHAXIUM(5, "ethaxium", "ethaxium", 8, 100.0F, Float.MAX_VALUE, MapColor.CLOTH),
 		OMOTHOL_STONE(6, "omotholstone", "omotholstone", 6, 10.0F, 12.0F, MapColor.BLACK),
 		MONOLITH_STONE(7, "monolithstone", "monolithstone", 0, 6.0F, 24.0F, MapColor.BLACK);
