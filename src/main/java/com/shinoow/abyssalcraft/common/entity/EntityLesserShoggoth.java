@@ -20,7 +20,7 @@ import com.shinoow.abyssalcraft.api.entity.IOmotholEntity;
 import com.shinoow.abyssalcraft.api.item.ACItems;
 import com.shinoow.abyssalcraft.common.blocks.BlockShoggothOoze;
 import com.shinoow.abyssalcraft.common.entity.ai.EntityAILesserShoggothAttackMelee;
-import com.shinoow.abyssalcraft.common.entity.ai.EntityAIShoggothWorship;
+import com.shinoow.abyssalcraft.common.entity.ai.EntityAIWorship;
 import com.shinoow.abyssalcraft.common.entity.demon.EntityDemonPig;
 import com.shinoow.abyssalcraft.common.items.armor.ItemEthaxiumArmor;
 import com.shinoow.abyssalcraft.common.world.gen.WorldGenShoggothMonolith;
@@ -93,7 +93,7 @@ public class EntityLesserShoggoth extends EntityMob implements IOmotholEntity {
 		tasks.addTask(7, new EntityAIWatchClosest(this, EntityRemnant.class, 8.0F));
 		tasks.addTask(7, new EntityAIWatchClosest(this, EntityLesserShoggoth.class, 8.0F));
 		tasks.addTask(7, new EntityAIWatchClosest(this, EntityGatekeeperMinion.class, 8.0F));
-		tasks.addTask(8, new EntityAIShoggothWorship(this));
+		tasks.addTask(8, new EntityAIWorship(this));
 		targetTasks.addTask(1, new EntityAIHurtByTarget(this, false));
 		targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityLivingBase.class, 20, true, false, entity -> EntityUtil.isShoggothFood((EntityLivingBase) entity)));
 		targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityPlayer.class, 10, true, false, null));
@@ -369,7 +369,7 @@ public class EntityLesserShoggoth extends EntityMob implements IOmotholEntity {
 			return false;
 		}
 		if(par1DamageSource == DamageSource.IN_WALL)
-			if(world.getBlockState(getPosition()).getBlock() != ACBlocks.monolith_stone)
+			if(world.getBlockState(getPosition()).getBlock() != ACBlocks.monolith_stone && world.getGameRules().getBoolean("mobGriefing"))
 				sprayAcid(true);
 			else return false;
 		if(par1DamageSource == DamageSource.CACTUS) return false;
@@ -459,10 +459,13 @@ public class EntityLesserShoggoth extends EntityMob implements IOmotholEntity {
 		AxisAlignedBB aabb = getEntityBoundingBox().expand(1, 0, 1);
 		world.setEntityState(this, (byte)23);
 		for(EntityLivingBase entity : world.getEntitiesWithinAABB(EntityLivingBase.class, aabb, e -> !(e instanceof EntityLesserShoggoth)))
-			if(entity.attackEntityFrom(AbyssalCraftAPI.acid, (float)(4.5D - getDistanceToEntity(entity))))
-				for(ItemStack armor : entity.getArmorInventoryList())
-					if(!(armor.getItem() instanceof ItemEthaxiumArmor))
-						armor.damageItem(isChild() ? 4 : 8, entity);
+			if(!EntityUtil.canEntityBlockDamageSource(DamageSource.causeMobDamage(this), entity) || !ACConfig.shieldsBlockAcid) {
+				if(entity.attackEntityFrom(AbyssalCraftAPI.acid, (float)(4.5D - getDistanceToEntity(entity))))
+					for(ItemStack armor : entity.getArmorInventoryList())
+						if(!(armor.getItem() instanceof ItemEthaxiumArmor))
+							armor.damageItem(isChild() ? 4 : 8, entity);
+			} else if(EntityUtil.damageShield(entity, isChild() ? 6 : 12))
+				entity.attackEntityFrom(AbyssalCraftAPI.acid, 1);
 		for(int i = (int)aabb.minX; i < aabb.maxX+1; i++)
 			for(int j = (int)aabb.minZ; j < aabb.maxZ+1; j++)
 				for(int k = 0; above ? k < 2 : k > -2; k=above ? k + 1 : k - 1){

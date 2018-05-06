@@ -55,7 +55,7 @@ public class TileEntityEnergyContainer extends TileEntity implements IEnergyCont
 	public void onLoad()
 	{
 		if(world.isRemote)
-			world.loadedTileEntityList.remove(this);
+			world.tickableTileEntities.remove(this);
 	}
 
 	@Override

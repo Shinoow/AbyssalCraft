@@ -526,7 +526,6 @@ public class AbyssalCraftEventHooks {
 
 	@SubscribeEvent
 	public void onClonePlayer(Clone event) {
-		if(event.isWasDeath())
-			NecromancyCapability.getCap(event.getEntityPlayer()).copy(NecromancyCapability.getCap(event.getOriginal()));
+		NecromancyCapability.getCap(event.getEntityPlayer()).copy(NecromancyCapability.getCap(event.getOriginal()));
 	}
 }

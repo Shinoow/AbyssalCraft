@@ -185,7 +185,7 @@ public class EntityAILesserShoggothAttackMelee extends EntityAIBase
 				attacker.attackEntityAsMob(p_190102_1_);
 			} else {
 				attackTick = 20;
-				if(attacker.motionX == 0 && attacker.motionZ == 0)
+				if(attacker.motionX == 0 && attacker.motionZ == 0 && world.getGameRules().getBoolean("mobGriefing"))
 					attacker.sprayAcid(p_190102_1_.posY >= attacker.posY);
 				else if(attacker.getDistanceSqToEntity(p_190102_1_) > 32D && attacker.getRNG().nextBoolean())
 					attacker.sprayAcidAt(p_190102_1_);

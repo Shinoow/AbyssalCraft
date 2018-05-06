@@ -47,12 +47,13 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
-import net.minecraft.world.*;
+import net.minecraft.world.DifficultyInstance;
+import net.minecraft.world.EnumDifficulty;
+import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeModContainer;
 
 public class EntityAbyssalZombie extends EntityMob implements ICoraliumEntity {
 
-	private static final DataParameter<Integer> TYPE = EntityDataManager.createKey(EntityAbyssalZombie.class, DataSerializers.VARINT);
 	private static final DataParameter<Byte> CHILD = EntityDataManager.createKey(EntityAbyssalZombie.class, DataSerializers.BYTE);
 	private static final UUID babySpeedBoostUUID = UUID.fromString("B9766B59-9566-4402-BC1F-2EE2A276D836");
 	private static final AttributeModifier babySpeedBoostModifier = new AttributeModifier(babySpeedBoostUUID, "Baby speed boost", 0.5D, 1);
@@ -90,13 +91,8 @@ public class EntityAbyssalZombie extends EntityMob implements ICoraliumEntity {
 		getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(42.0D);
 		getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.23000000417232513D);
 
-		if(ACConfig.hardcoreMode){
-			getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(50.0D);
-			getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(12.0D);
-		} else {
-			getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(25.0D);
-			getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(6.0D);
-		}
+		getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(ACConfig.hardcoreMode ? 50.0D : 25.0D);
+		getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(ACConfig.hardcoreMode ? 12.0D : 6.0D);
 	}
 
 	@Override
@@ -104,7 +100,6 @@ public class EntityAbyssalZombie extends EntityMob implements ICoraliumEntity {
 	{
 		super.entityInit();
 		dataManager.register(CHILD, Byte.valueOf((byte)0));
-		dataManager.register(TYPE, Integer.valueOf(0));
 	}
 
 	@Override
@@ -146,16 +141,6 @@ public class EntityAbyssalZombie extends EntityMob implements ICoraliumEntity {
 			var1 = 20;
 
 		return var1;
-	}
-
-	public int getZombieType()
-	{
-		return dataManager.get(TYPE);
-	}
-
-	public void setZombieType(int par1)
-	{
-		dataManager.set(TYPE, Integer.valueOf(par1));
 	}
 
 	@Override
@@ -265,11 +250,6 @@ public class EntityAbyssalZombie extends EntityMob implements ICoraliumEntity {
 
 		if(par1NBTTagCompound.getBoolean("IsBaby"))
 			setChild(true);;
-			if (par1NBTTagCompound.hasKey("ZombieType"))
-			{
-				byte var2 = par1NBTTagCompound.getByte("ZombieType");
-				setZombieType(var2);
-			}
 	}
 
 	@Override
@@ -279,8 +259,6 @@ public class EntityAbyssalZombie extends EntityMob implements ICoraliumEntity {
 
 		if (isChild())
 			par1NBTTagCompound.setBoolean("IsBaby", true);
-
-		par1NBTTagCompound.setByte("ZombieType", (byte)getZombieType());
 	}
 
 	@Override
@@ -318,9 +296,6 @@ public class EntityAbyssalZombie extends EntityMob implements ICoraliumEntity {
 	public IEntityLivingData onInitialSpawn(DifficultyInstance difficulty, IEntityLivingData par1EntityLivingData)
 	{
 		Object data = super.onInitialSpawn(difficulty, par1EntityLivingData);
-
-		if (world.provider instanceof WorldProviderEnd)
-			setZombieType(2);
 
 		float f = difficulty.getClampedAdditionalDifficulty();
 		setCanPickUpLoot(rand.nextFloat() < 0.55F * f);

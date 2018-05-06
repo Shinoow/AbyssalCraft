@@ -54,7 +54,7 @@ public class PurgeEventHandler {
 
 	@SubscribeEvent(priority = EventPriority.HIGHEST)
 	public void stopSpawnPoint(PlayerSetSpawnEvent event) {
-		if(event.getEntityPlayer().getEntityWorld().getBiome(event.getNewSpawn()) == ACBiomes.purged)
+		if(event.getNewSpawn() != null && event.getEntityPlayer().getEntityWorld().getBiome(event.getNewSpawn()) == ACBiomes.purged)
 			event.setCanceled(true);
 	}
 }
