@@ -21,9 +21,12 @@ import com.shinoow.abyssalcraft.api.item.ACItems;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.passive.*;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemShield;
 import net.minecraft.item.ItemStack;
 import net.minecraft.launchwrapper.Launch;
 import net.minecraft.potion.Potion;
+import net.minecraft.util.DamageSource;
+import net.minecraft.util.math.Vec3d;
 
 /**
  * Utility class for handling things regarding entities.<br>
@@ -128,6 +131,48 @@ public final class EntityUtil {
 		for(Class<? extends EntityLivingBase> c : shoggothFood)
 			if(c.isAssignableFrom(entity.getClass()))
 				return true;
+		return false;
+	}
+
+	/**
+	 * Determines whether the entity can block the damage source based on the damage source's location, whether the
+	 * damage source is blockable, and whether the entity is blocking.
+	 * @param damageSource Attacking Damage Source
+	 * @param target Entity being attacked
+	 */
+	public static boolean canEntityBlockDamageSource(DamageSource damageSource, EntityLivingBase target)
+	{
+		if (!damageSource.isUnblockable() && target.isActiveItemStackBlocking())
+		{
+			Vec3d vec3d = damageSource.getDamageLocation();
+
+			if (vec3d != null)
+			{
+				Vec3d vec3d1 = target.getLook(1.0F);
+				Vec3d vec3d2 = vec3d.subtractReverse(new Vec3d(target.posX, target.posY, target.posZ)).normalize();
+				vec3d2 = new Vec3d(vec3d2.xCoord, 0.0D, vec3d2.zCoord);
+
+				if (vec3d2.dotProduct(vec3d1) < 0.0D)
+					return true;
+			}
+		}
+
+		return false;
+	}
+
+	/**
+	 * Damages the shield held by the entity, if it is holding one
+	 * @param entity Target Entity
+	 * @param amount Amount of durability damage to apply
+	 *
+	 * @return True if the Entity was holding a shield, otherwise false
+	 */
+	public static boolean damageShield(EntityLivingBase entity, int amount) {
+		ItemStack shield = entity.getActiveItemStack();
+		if(shield != null && shield.getItem() instanceof ItemShield) {
+			shield.damageItem(amount, entity);
+			return true;
+		}
 		return false;
 	}
 

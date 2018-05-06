@@ -31,7 +31,7 @@ public class WorldProviderDarkRealm extends WorldProvider {
 
 	@Override
 	public IChunkGenerator createChunkGenerator() {
-		return new ChunkProviderDarkRealm(worldObj, worldObj.getSeed(), true);
+		return new ChunkProviderDarkRealm(world, world.getSeed(), true);
 	}
 
 	@Override

@@ -118,14 +118,14 @@ public class TileEntityRendingPedestal extends TileEntity implements IEnergyCont
 		ItemStack input = getStackInSlot(0);
 		if(input != null)
 			if(input.getItem() instanceof IEnergyContainerItem)
-				if(!worldObj.isRemote && ((IEnergyContainerItem) input.getItem()).canTransferPE(input) && canAcceptPE())
+				if(!world.isRemote && ((IEnergyContainerItem) input.getItem()).canTransferPE(input) && canAcceptPE())
 					addEnergy(((IEnergyContainerItem) input.getItem()).consumeEnergy(input, 1));
 
 		ItemStack stack = getStackInSlot(1);
 
 		if(stack != null)
 			if(stack.getItem() instanceof IStaffOfRending)
-				if(ticksExisted % 40 == 0 && !worldObj.isRemote){
+				if(ticksExisted % 40 == 0 && !world.isRemote){
 					IStaffOfRending staff = (IStaffOfRending)stack.getItem();
 
 					if(staff.getEnergy(stack, "Shadow") > 0){
@@ -145,28 +145,28 @@ public class TileEntityRendingPedestal extends TileEntity implements IEnergyCont
 						staff.setEnergy(0, stack, "Omothol");
 					}
 
-					for(EntityLivingBase target : worldObj.getEntitiesWithinAABB(EntityLivingBase.class, new AxisAlignedBB(pos).expand(15, 3, 15)))
+					for(EntityLivingBase target : world.getEntitiesWithinAABB(EntityLivingBase.class, new AxisAlignedBB(pos).expand(15, 3, 15)))
 						if(target.getCreatureAttribute() == AbyssalCraftAPI.SHADOW && target.isNonBoss()){
 							if(!target.isDead && getContainedEnergy() >= target.getMaxHealth()/2)
 								if(target.attackEntityFrom(DamageSource.magic, staff.getDrainAmount(stack))){
 									consumeEnergy(target.getMaxHealth()/2);
 									increaseEnergy(0, staff.getDrainAmount(stack));
 								}
-						} else if(worldObj.provider.getDimension() == ACLib.abyssal_wasteland_id && target instanceof ICoraliumEntity &&
+						} else if(world.provider.getDimension() == ACLib.abyssal_wasteland_id && target instanceof ICoraliumEntity &&
 							target.isNonBoss()){
 							if(!target.isDead && getContainedEnergy() >= target.getMaxHealth()/2)
 								if(target.attackEntityFrom(DamageSource.magic, staff.getDrainAmount(stack))){
 									consumeEnergy(target.getMaxHealth()/2);
 									increaseEnergy(1, staff.getDrainAmount(stack));
 								}
-						} else if(worldObj.provider.getDimension() == ACLib.dreadlands_id && target instanceof IDreadEntity &&
+						} else if(world.provider.getDimension() == ACLib.dreadlands_id && target instanceof IDreadEntity &&
 							target.isNonBoss()){
 							if(!target.isDead && getContainedEnergy() >= target.getMaxHealth()/2)
 								if(target.attackEntityFrom(DamageSource.magic, staff.getDrainAmount(stack))){
 									consumeEnergy(target.getMaxHealth()/2);
 									increaseEnergy(2, staff.getDrainAmount(stack));
 								}
-						} else if(worldObj.provider.getDimension() == ACLib.omothol_id && target instanceof IOmotholEntity &&
+						} else if(world.provider.getDimension() == ACLib.omothol_id && target instanceof IOmotholEntity &&
 							target.getCreatureAttribute() != AbyssalCraftAPI.SHADOW && target.isNonBoss())
 							if(!target.isDead && getContainedEnergy() >= target.getMaxHealth()/2)
 								if(target.attackEntityFrom(DamageSource.magic, staff.getDrainAmount(stack))){
@@ -372,7 +372,7 @@ public class TileEntityRendingPedestal extends TileEntity implements IEnergyCont
 			stack.stackSize = getInventoryStackLimit();
 
 		if(index == 1)
-			worldObj.notifyBlockUpdate(pos, worldObj.getBlockState(pos), worldObj.getBlockState(pos), 2);
+			world.notifyBlockUpdate(pos, world.getBlockState(pos), world.getBlockState(pos), 2);
 	}
 
 	@Override
@@ -382,9 +382,9 @@ public class TileEntityRendingPedestal extends TileEntity implements IEnergyCont
 	}
 
 	@Override
-	public boolean isUseableByPlayer(EntityPlayer player) {
+	public boolean isUsableByPlayer(EntityPlayer player) {
 
-		return worldObj.getTileEntity(pos) != this ? false : player.getDistanceSq(pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D) <= 64.0D;
+		return world.getTileEntity(pos) != this ? false : player.getDistanceSq(pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D) <= 64.0D;
 	}
 
 	@Override

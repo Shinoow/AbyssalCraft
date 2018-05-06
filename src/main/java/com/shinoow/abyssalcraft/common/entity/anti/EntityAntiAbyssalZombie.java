@@ -122,7 +122,7 @@ public class EntityAntiAbyssalZombie extends EntityMob implements IAntiEntity {
 	{
 		dataManager.set(CHILD, Byte.valueOf((byte)(par1 ? 1 : 0)));
 
-		if (worldObj != null && !worldObj.isRemote)
+		if (world != null && !world.isRemote)
 		{
 			IAttributeInstance attributeinstance = getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED);
 			attributeinstance.removeModifier(babySpeedBoostModifier);
@@ -204,11 +204,11 @@ public class EntityAntiAbyssalZombie extends EntityMob implements IAntiEntity {
 	@Override
 	protected void collideWithEntity(Entity par1Entity)
 	{
-		if(!worldObj.isRemote && par1Entity instanceof EntityAbyssalZombie){
-			boolean flag = worldObj.getGameRules().getBoolean("mobGriefing");
+		if(!world.isRemote && par1Entity instanceof EntityAbyssalZombie){
+			boolean flag = world.getGameRules().getBoolean("mobGriefing");
 			if(ACConfig.nuclearAntimatterExplosions)
-				ExplosionUtil.newODBExplosion(worldObj, this, posX, posY, posZ, 40, true, flag);
-			else worldObj.createExplosion(this, posX, posY, posZ, 5, flag);
+				ExplosionUtil.newODBExplosion(world, this, posX, posY, posZ, 40, true, flag);
+			else world.createExplosion(this, posX, posY, posZ, 5, flag);
 			setDead();
 		}
 		else par1Entity.applyEntityCollision(this);
@@ -226,21 +226,21 @@ public class EntityAntiAbyssalZombie extends EntityMob implements IAntiEntity {
 	{
 		super.onKillEntity(par1EntityLivingBase);
 
-		if((worldObj.getDifficulty() == EnumDifficulty.HARD || worldObj.getDifficulty() == EnumDifficulty.NORMAL)
+		if((world.getDifficulty() == EnumDifficulty.HARD || world.getDifficulty() == EnumDifficulty.NORMAL)
 			&& par1EntityLivingBase instanceof EntityAntiZombie) {
-			if (worldObj.getDifficulty() != EnumDifficulty.HARD && rand.nextBoolean())
+			if (world.getDifficulty() != EnumDifficulty.HARD && rand.nextBoolean())
 				return;
 
-			EntityAntiAbyssalZombie antiAbyaalZombie = new EntityAntiAbyssalZombie(worldObj);
+			EntityAntiAbyssalZombie antiAbyaalZombie = new EntityAntiAbyssalZombie(world);
 			antiAbyaalZombie.copyLocationAndAnglesFrom(par1EntityLivingBase);
-			worldObj.removeEntity(par1EntityLivingBase);
-			antiAbyaalZombie.onInitialSpawn(worldObj.getDifficultyForLocation(new BlockPos(posX, posY, posZ)), (IEntityLivingData)null);
+			world.removeEntity(par1EntityLivingBase);
+			antiAbyaalZombie.onInitialSpawn(world.getDifficultyForLocation(new BlockPos(posX, posY, posZ)), (IEntityLivingData)null);
 
 			if (par1EntityLivingBase.isChild())
 				antiAbyaalZombie.setChild(true);
 
-			worldObj.spawnEntityInWorld(antiAbyaalZombie);
-			worldObj.playEvent((EntityPlayer)null, 1026, new BlockPos(posX, posY, posZ), 0);
+			world.spawnEntity(antiAbyaalZombie);
+			world.playEvent((EntityPlayer)null, 1026, new BlockPos(posX, posY, posZ), 0);
 
 		}
 	}
@@ -254,7 +254,7 @@ public class EntityAntiAbyssalZombie extends EntityMob implements IAntiEntity {
 		setCanPickUpLoot(rand.nextFloat() < 0.55F * f);
 
 		if (data == null)
-			data = new EntityAntiAbyssalZombie.GroupData(worldObj.rand.nextFloat() < ForgeModContainer.zombieBabyChance, worldObj.rand.nextFloat() < 0.05F, null);
+			data = new EntityAntiAbyssalZombie.GroupData(world.rand.nextFloat() < ForgeModContainer.zombieBabyChance, world.rand.nextFloat() < 0.05F, null);
 
 		if (data instanceof EntityAntiAbyssalZombie.GroupData)
 		{
@@ -269,7 +269,7 @@ public class EntityAntiAbyssalZombie extends EntityMob implements IAntiEntity {
 
 		if (getItemStackFromSlot(EntityEquipmentSlot.HEAD) == null)
 		{
-			Calendar calendar = worldObj.getCurrentDate();
+			Calendar calendar = world.getCurrentDate();
 
 			if (calendar.get(2) + 1 == 10 && calendar.get(5) == 31 && rand.nextFloat() < 0.25F)
 			{
@@ -279,7 +279,7 @@ public class EntityAntiAbyssalZombie extends EntityMob implements IAntiEntity {
 		}
 
 		IAttributeInstance attribute = getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE);
-		Calendar calendar = worldObj.getCurrentDate();
+		Calendar calendar = world.getCurrentDate();
 
 		attribute.removeModifier(attackDamageBoost);
 

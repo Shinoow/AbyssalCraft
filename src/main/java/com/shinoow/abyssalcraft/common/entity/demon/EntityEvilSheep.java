@@ -180,13 +180,13 @@ public class EntityEvilSheep extends EntityMob implements IShearable {
 	@Override
 	public void onLivingUpdate(){
 
-		if (worldObj.isRemote)
+		if (world.isRemote)
 			sheepTimer = Math.max(0, sheepTimer - 1);
 
 		if(ticksExisted % 20 == 0)
 			if(playerUUID != null && playerName != null && playerName.length() > 0)
-				if(worldObj.isRemote){}
-				else PacketDispatcher.sendToDimension(new EvilSheepMessage(playerUUID, playerName, getEntityId()), worldObj.provider.getDimension());
+				if(world.isRemote){}
+				else PacketDispatcher.sendToDimension(new EvilSheepMessage(playerUUID, playerName, getEntityId()), world.provider.getDimension());
 		super.onLivingUpdate();
 	}
 
@@ -195,14 +195,14 @@ public class EntityEvilSheep extends EntityMob implements IShearable {
 	{
 		super.onDeath(par1DamageSource);
 
-		if(!worldObj.isRemote)
+		if(!world.isRemote)
 			if(!(par1DamageSource.getEntity() instanceof EntityLesserShoggoth))
 			{
-				EntityDemonSheep demonsheep = new EntityDemonSheep(worldObj);
+				EntityDemonSheep demonsheep = new EntityDemonSheep(world);
 				demonsheep.copyLocationAndAnglesFrom(this);
-				worldObj.removeEntity(this);
-				demonsheep.onInitialSpawn(worldObj.getDifficultyForLocation(new BlockPos(posX, posY, posZ)), (IEntityLivingData)null);
-				worldObj.spawnEntityInWorld(demonsheep);
+				world.removeEntity(this);
+				demonsheep.onInitialSpawn(world.getDifficultyForLocation(new BlockPos(posX, posY, posZ)), (IEntityLivingData)null);
+				world.spawnEntity(demonsheep);
 			}
 	}
 
@@ -213,7 +213,7 @@ public class EntityEvilSheep extends EntityMob implements IShearable {
 
 	@Override public boolean isShearable(ItemStack item, net.minecraft.world.IBlockAccess world, BlockPos pos){ return true; }
 	@Override
-	public java.util.List<ItemStack> onSheared(ItemStack item, net.minecraft.world.IBlockAccess world, BlockPos pos, int fortune)
+	public java.util.List<ItemStack> onSheared(ItemStack item, net.minecraft.world.IBlockAccess worldIn, BlockPos pos, int fortune)
 	{
 		int i = 1 + rand.nextInt(3);
 
@@ -223,12 +223,12 @@ public class EntityEvilSheep extends EntityMob implements IShearable {
 
 		playSound(SoundEvents.ENTITY_SHEEP_SHEAR, 1.0F, 1.0F);
 		playSound(SoundEvents.ENTITY_GHAST_HURT, 1.0F, 0.2F);
-		if(!worldObj.isRemote){
-			EntityDemonSheep demonsheep = new EntityDemonSheep(worldObj);
+		if(!world.isRemote){
+			EntityDemonSheep demonsheep = new EntityDemonSheep(world);
 			demonsheep.copyLocationAndAnglesFrom(this);
-			worldObj.removeEntity(this);
-			demonsheep.onInitialSpawn(worldObj.getDifficultyForLocation(new BlockPos(posX, posY, posZ)), (IEntityLivingData)null);
-			worldObj.spawnEntityInWorld(demonsheep);
+			world.removeEntity(this);
+			demonsheep.onInitialSpawn(world.getDifficultyForLocation(new BlockPos(posX, posY, posZ)), (IEntityLivingData)null);
+			world.spawnEntity(demonsheep);
 		}
 		return ret;
 	}

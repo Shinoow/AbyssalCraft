@@ -40,7 +40,7 @@ public class SlotMaterializer extends Slot
 	@Override
 	public ItemStack decrStackSize(int par1)
 	{
-		getStack().onCrafting(thePlayer.worldObj, thePlayer, stackSize);
+		getStack().onCrafting(thePlayer.world, thePlayer, stackSize);
 
 		MinecraftForge.EVENT_BUS.post(new ACEvents.ItemMaterializedEvent(thePlayer, getStack()));
 		if (getHasStack())

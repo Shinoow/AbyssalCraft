@@ -63,7 +63,7 @@ public class PEStreamMessage extends AbstractClientMessage<PEStreamMessage> {
 			double xp = posFrom.getX() + vec.xCoord * i1 + .5;
 			double yp = posFrom.getY() + vec.yCoord * i1 + .5;
 			double zp = posFrom.getZ() + vec.zCoord * i1 + .5;
-			AbyssalCraft.proxy.spawnParticle("PEStream", player.worldObj, xp, yp, zp, vec.xCoord * .1, .15, vec.zCoord * .1);
+			AbyssalCraft.proxy.spawnParticle("PEStream", player.world, xp, yp, zp, vec.xCoord * .1, .15, vec.zCoord * .1);
 		}
 	}
 }

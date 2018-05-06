@@ -143,7 +143,7 @@ public class EntityAntiZombie extends EntityMob implements IAntiEntity {
 	{
 		dataManager.set(CHILD, Byte.valueOf((byte)(par1 ? 1 : 0)));
 
-		if (worldObj != null && !worldObj.isRemote)
+		if (world != null && !world.isRemote)
 		{
 			IAttributeInstance iattributeinstance = getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED);
 			iattributeinstance.removeModifier(babySpeedBoostModifier);
@@ -162,7 +162,7 @@ public class EntityAntiZombie extends EntityMob implements IAntiEntity {
 
 		if (flag)
 		{
-			int i = worldObj.getDifficulty().getDifficultyId();
+			int i = world.getDifficulty().getDifficultyId();
 
 			if (getHeldItemMainhand() == null && isBurning() && rand.nextFloat() < i * 0.3F)
 				par1Entity.setFire(2 * i);
@@ -240,11 +240,11 @@ public class EntityAntiZombie extends EntityMob implements IAntiEntity {
 	@Override
 	protected void collideWithEntity(Entity par1Entity)
 	{
-		if(!worldObj.isRemote && par1Entity instanceof EntityZombie){
-			boolean flag = worldObj.getGameRules().getBoolean("mobGriefing");
+		if(!world.isRemote && par1Entity instanceof EntityZombie){
+			boolean flag = world.getGameRules().getBoolean("mobGriefing");
 			if(ACConfig.nuclearAntimatterExplosions)
-				ExplosionUtil.newODBExplosion(worldObj, this, posX, posY, posZ, 40, true, flag);
-			else worldObj.createExplosion(this, posX, posY, posZ, 5, flag);
+				ExplosionUtil.newODBExplosion(world, this, posX, posY, posZ, 40, true, flag);
+			else world.createExplosion(this, posX, posY, posZ, 5, flag);
 			setDead();
 		}
 		else par1Entity.applyEntityCollision(this);
@@ -261,7 +261,7 @@ public class EntityAntiZombie extends EntityMob implements IAntiEntity {
 		setEnchantmentBasedOnDifficulty(difficulty);
 
 		if (entity == null)
-			entity = new EntityAntiZombie.GroupData(worldObj.rand.nextFloat() < ForgeModContainer.zombieBabyChance, worldObj.rand.nextFloat() < 0.05F, null);
+			entity = new EntityAntiZombie.GroupData(world.rand.nextFloat() < ForgeModContainer.zombieBabyChance, world.rand.nextFloat() < 0.05F, null);
 
 		if (entity instanceof EntityAntiZombie.GroupData)
 		{
@@ -288,7 +288,7 @@ public class EntityAntiZombie extends EntityMob implements IAntiEntity {
 
 		if (getItemStackFromSlot(EntityEquipmentSlot.HEAD) == null)
 		{
-			Calendar calendar = worldObj.getCurrentDate();
+			Calendar calendar = world.getCurrentDate();
 
 			if (calendar.get(2) + 1 == 10 && calendar.get(5) == 31 && rand.nextFloat() < 0.25F)
 			{
@@ -298,7 +298,7 @@ public class EntityAntiZombie extends EntityMob implements IAntiEntity {
 		}
 
 		IAttributeInstance attribute = getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE);
-		Calendar calendar = worldObj.getCurrentDate();
+		Calendar calendar = world.getCurrentDate();
 
 		attribute.removeModifier(attackDamageBoost);
 
@@ -313,7 +313,7 @@ public class EntityAntiZombie extends EntityMob implements IAntiEntity {
 	public void handleStatusUpdate(byte par1)
 	{
 		if (par1 == 16)
-			worldObj.playSound(posX + 0.5D, posY + 0.5D, posZ + 0.5D, SoundEvents.ENTITY_ZOMBIE_VILLAGER_CURE, getSoundCategory(), 1.0F + rand.nextFloat(), rand.nextFloat() * 0.7F + 0.3F, false);
+			world.playSound(posX + 0.5D, posY + 0.5D, posZ + 0.5D, SoundEvents.ENTITY_ZOMBIE_VILLAGER_CURE, getSoundCategory(), 1.0F + rand.nextFloat(), rand.nextFloat() * 0.7F + 0.3F, false);
 		else
 			super.handleStatusUpdate(par1);
 	}

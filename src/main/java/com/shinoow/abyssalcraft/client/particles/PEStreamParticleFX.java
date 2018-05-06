@@ -53,7 +53,7 @@ public class PEStreamParticleFX extends Particle {
 	public void renderParticle(VertexBuffer worldRendererIn, Entity entityIn, float par2, float par3, float par4, float par5, float par6, float par7)
 	{
 		float var8 = (particleAge + par2) / particleMaxAge * 32.0F;
-		var8 = MathHelper.clamp_float(var8, 0.0F, 1.0F);
+		var8 = MathHelper.clamp(var8, 0.0F, 1.0F);
 		particleScale = scale * var8;
 		super.renderParticle(worldRendererIn, entityIn, par2, par3, par4, par5, par6, par7);
 	}

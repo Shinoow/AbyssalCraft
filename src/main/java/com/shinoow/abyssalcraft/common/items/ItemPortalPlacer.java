@@ -69,8 +69,8 @@ public class ItemPortalPlacer extends ItemACBasic {
 		list.add(I18n.translateToLocal("tooltip.portalplacer.2"));
 		if(key > 0)
 			list.add(I18n.translateToLocal("tooltip.portalplacer.3"));
-		if(Minecraft.getMinecraft().theWorld != null && Minecraft.getMinecraft().theWorld.provider != null)
-			if(!isCorrectDim(Minecraft.getMinecraft().theWorld.provider.getDimension()))
+		if(Minecraft.getMinecraft().world != null && Minecraft.getMinecraft().world.provider != null)
+			if(!isCorrectDim(Minecraft.getMinecraft().world.provider.getDimension()))
 				list.add(TextFormatting.DARK_RED+""+TextFormatting.ITALIC+I18n.translateToLocal("tooltip.portalplacer.4"));
 	}
 
@@ -130,7 +130,7 @@ public class ItemPortalPlacer extends ItemACBasic {
 		if(!world.isRemote){
 			if(isCorrectDim(player.dimension))
 			{
-				int direction = MathHelper.floor_double(player.rotationYaw * 4.0F / 360.0F + 0.5D) & 3;
+				int direction = MathHelper.floor(player.rotationYaw * 4.0F / 360.0F + 0.5D) & 3;
 				int o = AbyssalCraftAPI.getGatewayKeyOverride(player.dimension);
 
 				switch(key){

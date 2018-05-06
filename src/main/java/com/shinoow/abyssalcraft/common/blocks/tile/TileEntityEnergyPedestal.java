@@ -74,7 +74,7 @@ public class TileEntityEnergyPedestal extends TileEntity implements IEnergyColle
 	public void update()
 	{
 		if(isDirty){
-			worldObj.notifyBlockUpdate(pos, worldObj.getBlockState(pos), worldObj.getBlockState(pos), 2);
+			world.notifyBlockUpdate(pos, world.getBlockState(pos), world.getBlockState(pos), 2);
 			isDirty = false;
 		}
 
@@ -85,7 +85,7 @@ public class TileEntityEnergyPedestal extends TileEntity implements IEnergyColle
 
 		if(item != null)
 			if(item.getItem() instanceof IEnergyContainerItem)
-				if(!worldObj.isRemote && ((IEnergyContainerItem) item.getItem()).canAcceptPE(item) && canTransferPE())
+				if(!world.isRemote && ((IEnergyContainerItem) item.getItem()).canAcceptPE(item) && canTransferPE())
 					((IEnergyContainerItem) item.getItem()).addEnergy(item, consumeEnergy(1));
 	}
 

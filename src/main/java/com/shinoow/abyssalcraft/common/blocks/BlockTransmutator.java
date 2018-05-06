@@ -168,7 +168,7 @@ public class BlockTransmutator extends BlockContainer {
 							entityitem.motionX = (float)rand.nextGaussian() * f3;
 							entityitem.motionY = (float)rand.nextGaussian() * f3 + 0.2F;
 							entityitem.motionZ = (float)rand.nextGaussian() * f3;
-							par1World.spawnEntityInWorld(entityitem);
+							par1World.spawnEntity(entityitem);
 						}
 					}
 				}

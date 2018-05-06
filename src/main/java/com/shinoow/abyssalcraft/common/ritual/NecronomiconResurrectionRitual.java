@@ -143,7 +143,7 @@ public class NecronomiconResurrectionRitual extends NecronomiconRitual {
 				world.addWeatherEffect(new EntityLightningBolt(world, pos.getX(), pos.getY() + 2, pos.getZ(), true));
 				entity.setLocationAndAngles(pos.getX(), pos.getY() + 1, pos.getZ(), entity.rotationYaw, entity.rotationPitch);
 				entity.setHealth(entity.getMaxHealth());
-				world.spawnEntityInWorld(entity);
+				world.spawnEntity(entity);
 				cap.clearEntry(stack.getDisplayName());
 				((IRitualAltar) altar).setItem(null);
 			}
@@ -159,22 +159,22 @@ public class NecronomiconResurrectionRitual extends NecronomiconRitual {
 
 			switch(i){
 			case 4:
-				b = e.worldObj.rand.nextFloat() < 0.9;
+				b = e.world.rand.nextFloat() < 0.9;
 				break;
 			case 5:
-				b = e.worldObj.rand.nextFloat() < 0.75;
+				b = e.world.rand.nextFloat() < 0.75;
 				break;
 			case 6:
-				b = e.worldObj.rand.nextFloat() < 0.6;
+				b = e.world.rand.nextFloat() < 0.6;
 				break;
 			case 7:
-				b = e.worldObj.rand.nextFloat() < 0.45;
+				b = e.world.rand.nextFloat() < 0.45;
 				break;
 			case 8:
-				b = e.worldObj.rand.nextFloat() < 0.3;
+				b = e.world.rand.nextFloat() < 0.3;
 				break;
 			case 9:
-				b = e.worldObj.rand.nextFloat() < 0.15;
+				b = e.world.rand.nextFloat() < 0.15;
 				break;
 			case 10:
 				b = true;
@@ -183,17 +183,17 @@ public class NecronomiconResurrectionRitual extends NecronomiconRitual {
 
 			if(b){
 
-				EntityLiving e1 = new EntityDreadSpawn(e.worldObj);
+				EntityLiving e1 = new EntityDreadSpawn(e.world);
 
 				switch(size){
 				case 0:
-					e1 = new EntityDreadSpawn(e.worldObj);
+					e1 = new EntityDreadSpawn(e.world);
 					break;
 				case 1:
-					e1 = new EntityGreaterDreadSpawn(e.worldObj);
+					e1 = new EntityGreaterDreadSpawn(e.world);
 					break;
 				case 2:
-					e1 = new EntityLesserDreadbeast(e.worldObj);
+					e1 = new EntityLesserDreadbeast(e.world);
 					break;
 				}
 

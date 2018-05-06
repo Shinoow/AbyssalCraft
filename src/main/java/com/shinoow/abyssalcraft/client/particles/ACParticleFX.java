@@ -69,7 +69,7 @@ public class ACParticleFX extends Particle {
 			setExpired();
 
 		setParticleTextureIndex(7 - particleAge * 8 / particleMaxAge);
-		moveEntity(motionX, motionY, motionZ);
+		move(motionX, motionY, motionZ);
 
 		if (posY == prevPosY)
 		{

@@ -66,7 +66,7 @@ public class BlockEngraver extends BlockContainer {
 	}
 
 	@Override
-	public IBlockState onBlockPlaced(World world, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer)
+	public IBlockState getStateForPlacement(World world, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer)
 	{
 		return getDefaultState().withProperty(FACING, placer.getHorizontalFacing().getOpposite());
 	}
@@ -157,7 +157,7 @@ public class BlockEngraver extends BlockContainer {
 							entityitem.motionX = (float)rand.nextGaussian() * f3;
 							entityitem.motionY = (float)rand.nextGaussian() * f3 + 0.2F;
 							entityitem.motionZ = (float)rand.nextGaussian() * f3;
-							par1World.spawnEntityInWorld(entityitem);
+							par1World.spawnEntity(entityitem);
 						}
 					}
 				}

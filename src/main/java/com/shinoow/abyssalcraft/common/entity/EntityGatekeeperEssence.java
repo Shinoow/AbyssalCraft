@@ -62,7 +62,7 @@ public class EntityGatekeeperEssence extends EntityItem {
 
 			ItemStack item = getEntityItem();
 
-			if (!worldObj.isRemote && age >= lifespan)
+			if (!world.isRemote && age >= lifespan)
 			{
 				int hook = net.minecraftforge.event.ForgeEventFactory.onItemExpire(this, item);
 				if (hook < 0) setDead();

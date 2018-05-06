@@ -49,7 +49,7 @@ public class FireMessage extends AbstractServerMessage<FireMessage> {
 	@Override
 	public void process(EntityPlayer player, Side side) {
 
-		World world = player.worldObj;
+		World world = player.world;
 
 		if(world.isRemote) return;
 		if(world.getBlockState(pos).getBlock() != ACBlocks.mimic_fire &&

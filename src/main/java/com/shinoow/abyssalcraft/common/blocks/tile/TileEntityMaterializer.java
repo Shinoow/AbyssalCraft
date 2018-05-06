@@ -136,7 +136,7 @@ public class TileEntityMaterializer extends TileEntity implements ISidedInventor
 	}
 
 	private void clippyQuote(){
-		switch(worldObj.rand.nextInt(7)){
+		switch(world.rand.nextInt(7)){
 		case 0:
 			setDisplayName("Hi, I'm Clippy! What are we","materializing today?");
 			break;
@@ -276,9 +276,9 @@ public class TileEntityMaterializer extends TileEntity implements ISidedInventor
 	 * Do not make give this method the name canInteractWith because it clashes with Container
 	 */
 	@Override
-	public boolean isUseableByPlayer(EntityPlayer par1EntityPlayer)
+	public boolean isUsableByPlayer(EntityPlayer par1EntityPlayer)
 	{
-		return worldObj.getTileEntity(pos) != this ? false : par1EntityPlayer.getDistanceSq(pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D) <= 64.0D;
+		return world.getTileEntity(pos) != this ? false : par1EntityPlayer.getDistanceSq(pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D) <= 64.0D;
 	}
 
 	@Override

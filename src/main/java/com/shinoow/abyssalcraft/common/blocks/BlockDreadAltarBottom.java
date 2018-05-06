@@ -56,8 +56,8 @@ public class BlockDreadAltarBottom extends Block {
 	}
 
 	@Override
-	public IBlockState onBlockPlaced(World world, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer){
-		super.onBlockPlaced(world, pos, facing, hitX, hitY, hitZ, meta, placer);
+	public IBlockState getStateForPlacement(World world, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer){
+		super.getStateForPlacement(world, pos, facing, hitX, hitY, hitZ, meta, placer);
 		if(world.provider.getDimension() != ACLib.dreadlands_id  && world.isRemote)
 			FMLClientHandler.instance().getClient().ingameGUI.getChatGUI().printChatMessage(new TextComponentTranslation("message.dreadaltar.error.1"));
 		if(world.provider.getDimension() == ACLib.dreadlands_id && world.getBiome(pos) != ACBiomes.dreadlands_mountains  && world.isRemote)

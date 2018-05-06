@@ -80,7 +80,7 @@ public class EntityChagarothSpawn extends EntityMob implements IDreadEntity {
 	}
 
 	@Override
-	protected PathNavigate getNewNavigator(World worldIn)
+	protected PathNavigate createNavigator(World worldIn)
 	{
 		return new PathNavigateClimber(this, worldIn);
 	}
@@ -110,7 +110,7 @@ public class EntityChagarothSpawn extends EntityMob implements IDreadEntity {
 	{
 		super.onUpdate();
 
-		if (!worldObj.isRemote)
+		if (!world.isRemote)
 			setBesideClimbableBlock(isCollidedHorizontally);
 	}
 

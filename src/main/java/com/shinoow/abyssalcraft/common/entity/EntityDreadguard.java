@@ -171,12 +171,12 @@ public class EntityDreadguard extends EntityMob implements IDreadEntity {
 			motionX *= 0.0D;
 			motionZ *= 0.0D;
 			setAIMoveSpeed(0F);
-			worldObj.setEntityState(this, (byte)23);
+			world.setEntityState(this, (byte)23);
 			if (ticksExisted % 5 == 0 && flameShootTimer > 30)
-				worldObj.playSound(null, new BlockPos(posX + 0.5D, posY + getEyeHeight(), posZ + 0.5D), ACSounds.dreadguard_barf, getSoundCategory(), 0.7F + getRNG().nextFloat(), getRNG().nextFloat() * 0.5F + 0.2F);
+				world.playSound(null, new BlockPos(posX + 0.5D, posY + getEyeHeight(), posZ + 0.5D), ACSounds.dreadguard_barf, getSoundCategory(), 0.7F + getRNG().nextFloat(), getRNG().nextFloat() * 0.5F + 0.2F);
 			Entity target = getHeadLookTarget();
 			if (target != null) {
-				for(EntityLivingBase entity : worldObj.getEntitiesWithinAABB(EntityLivingBase.class, target.getEntityBoundingBox().expand(2.0D, 2.0D, 2.0D), EntitySelectors.IS_ALIVE))
+				for(EntityLivingBase entity : world.getEntitiesWithinAABB(EntityLivingBase.class, target.getEntityBoundingBox().expand(2.0D, 2.0D, 2.0D), EntitySelectors.IS_ALIVE))
 					if (rand.nextInt(3) == 0)
 						if (entity.attackEntityFrom(AbyssalCraftAPI.dread, (float)(4.5D - getDistanceToEntity(entity))))
 							entity.addPotionEffect(new PotionEffect(AbyssalCraftAPI.dread_plague, 100));
@@ -198,14 +198,14 @@ public class EntityDreadguard extends EntityMob implements IDreadEntity {
 		double range = 4D + rand.nextDouble() * 8D;
 		Vec3d srcVec = new Vec3d(posX, posY + getEyeHeight(), posZ);
 		Vec3d lookVec = getLook(1.0F);
-		RayTraceResult raytrace = worldObj.rayTraceBlocks(srcVec, srcVec.addVector(lookVec.xCoord * range, lookVec.yCoord * range, lookVec.zCoord * range));
+		RayTraceResult raytrace = world.rayTraceBlocks(srcVec, srcVec.addVector(lookVec.xCoord * range, lookVec.yCoord * range, lookVec.zCoord * range));
 		BlockPos hitpos = raytrace != null ? raytrace.getBlockPos() : null;
 		double rx = hitpos == null ? range : Math.min(range, Math.abs(posX - hitpos.getX()));
 		double ry = hitpos == null ? range : Math.min(range, Math.abs(posY - hitpos.getY()));
 		double rz = hitpos == null ? range : Math.min(range, Math.abs(posZ - hitpos.getZ()));
 		Vec3d destVec = srcVec.addVector(lookVec.xCoord * range, lookVec.yCoord * range, lookVec.zCoord * range);
 		float var9 = 4.0F;
-		List<Entity> possibleList = worldObj.getEntitiesWithinAABBExcludingEntity(this, getEntityBoundingBox().offset(lookVec.xCoord * rx, lookVec.yCoord * ry, lookVec.zCoord * rz).expand(var9, var9, var9));
+		List<Entity> possibleList = world.getEntitiesWithinAABBExcludingEntity(this, getEntityBoundingBox().offset(lookVec.xCoord * rx, lookVec.yCoord * ry, lookVec.zCoord * rz).expand(var9, var9, var9));
 		double hitDist = 0.0D;
 		for (Entity possibleEntity : possibleList)
 			if (possibleEntity != this && possibleEntity instanceof EntityLivingBase)
@@ -236,7 +236,7 @@ public class EntityDreadguard extends EntityMob implements IDreadEntity {
 
 	protected void addMouthParticles()
 	{
-		if (worldObj.isRemote)
+		if (world.isRemote)
 		{
 			Vec3d vector = getLookVec();
 
@@ -261,11 +261,11 @@ public class EntityDreadguard extends EntityMob implements IDreadEntity {
 				dy *= velocity;
 				dz *= velocity;
 
-				worldObj.spawnParticle(EnumParticleTypes.ITEM_CRACK, px + getRNG().nextDouble() - 0.5D, py + getRNG().nextDouble() - 0.5D, pz + getRNG().nextDouble() - 0.5D, dx, dy, dz, Item.getIdFromItem(ACItems.dreaded_shard_of_abyssalnite));
-				worldObj.spawnParticle(EnumParticleTypes.ITEM_CRACK, px + getRNG().nextDouble() - 0.5D, py + getRNG().nextDouble() - 0.5D, pz + getRNG().nextDouble() - 0.5D, dx, dy, dz, Item.getIdFromItem(ACItems.dread_fragment));
+				world.spawnParticle(EnumParticleTypes.ITEM_CRACK, px + getRNG().nextDouble() - 0.5D, py + getRNG().nextDouble() - 0.5D, pz + getRNG().nextDouble() - 0.5D, dx, dy, dz, Item.getIdFromItem(ACItems.dreaded_shard_of_abyssalnite));
+				world.spawnParticle(EnumParticleTypes.ITEM_CRACK, px + getRNG().nextDouble() - 0.5D, py + getRNG().nextDouble() - 0.5D, pz + getRNG().nextDouble() - 0.5D, dx, dy, dz, Item.getIdFromItem(ACItems.dread_fragment));
 			}
 		} else
-			worldObj.setEntityState(this, (byte)23);
+			world.setEntityState(this, (byte)23);
 	}
 
 	@Override
@@ -304,7 +304,7 @@ public class EntityDreadguard extends EntityMob implements IDreadEntity {
 		setItemStackToSlot(EntityEquipmentSlot.FEET, new ItemStack(ACItems.dreaded_abyssalnite_boots));
 
 		IAttributeInstance attribute = getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE);
-		Calendar calendar = worldObj.getCurrentDate();
+		Calendar calendar = world.getCurrentDate();
 
 		attribute.removeModifier(attackDamageBoost);
 

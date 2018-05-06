@@ -38,6 +38,6 @@ public class OpenSpellbookMessage extends AbstractServerMessage<OpenSpellbookMes
 
 	@Override
 	public void process(EntityPlayer player, Side side) {
-		FMLNetworkHandler.openGui(player, AbyssalCraft.instance, ACLib.necronomiconspellbookGuiID, player.worldObj, (int)player.posX, (int)player.posY, (int)player.posZ);
+		FMLNetworkHandler.openGui(player, AbyssalCraft.instance, ACLib.necronomiconspellbookGuiID, player.world, (int)player.posX, (int)player.posY, (int)player.posZ);
 	}
 }

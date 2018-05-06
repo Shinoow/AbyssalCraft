@@ -25,36 +25,36 @@ public abstract class TileEntityTieredEnergyRelay extends TileEntityEnergyRelay 
 	@Override
 	public void onLoad()
 	{
-		if(worldObj.isRemote)
-			worldObj.tickableTileEntities.remove(this);
-		ticksExisted = worldObj.rand.nextInt(100);
+		if(world.isRemote)
+			world.tickableTileEntities.remove(this);
+		ticksExisted = world.rand.nextInt(100);
 	}
 
 	@Override
 	public void update() {
-		if(worldObj.isBlockPowered(pos))
+		if(world.isBlockPowered(pos))
 			return;
 
 		++ticksExisted;
 
 		if(ticksExisted % 20 == 0)
-			if(worldObj.getBlockState(pos).getProperties().containsKey(BlockEnergyRelay.FACING))
-				PEUtils.collectNearbyPE(this, worldObj, pos, worldObj.getBlockState(pos).getValue(BlockEnergyRelay.FACING).getOpposite(), getDrainQuanta());
+			if(world.getBlockState(pos).getProperties().containsKey(BlockEnergyRelay.FACING))
+				PEUtils.collectNearbyPE(this, world, pos, world.getBlockState(pos).getValue(BlockEnergyRelay.FACING).getOpposite(), getDrainQuanta());
 
 		if(ticksExisted % 40 == 0 && canTransferPE())
-			if(worldObj.getBlockState(pos).getProperties().containsKey(BlockEnergyRelay.FACING))
-				transferPE(worldObj.getBlockState(pos).getValue(BlockEnergyRelay.FACING), getTransferQuanta());
+			if(world.getBlockState(pos).getProperties().containsKey(BlockEnergyRelay.FACING))
+				transferPE(world.getBlockState(pos).getValue(BlockEnergyRelay.FACING), getTransferQuanta());
 	}
 
 	@Override
 	public void transferPE(EnumFacing facing, float energy) {
 
-		if(PEUtils.canTransfer(worldObj, pos, facing, getRange())){
-			IEnergyContainer container = PEUtils.getContainer(worldObj, pos, facing, getRange());
+		if(PEUtils.canTransfer(world, pos, facing, getRange())){
+			IEnergyContainer container = PEUtils.getContainer(world, pos, facing, getRange());
 			if(container != null)
 				if(container.canAcceptPE()){
 					container.addEnergy(consumeEnergy(energy));
-					AbyssalCraftAPI.getInternalMethodHandler().spawnPEStream(pos, container.getContainerTile().getPos(), worldObj.provider.getDimension());
+					AbyssalCraftAPI.getInternalMethodHandler().spawnPEStream(pos, container.getContainerTile().getPos(), world.provider.getDimension());
 				}
 		}
 	}

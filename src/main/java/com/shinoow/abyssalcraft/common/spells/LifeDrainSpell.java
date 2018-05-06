@@ -63,7 +63,7 @@ public class LifeDrainSpell extends Spell {
 				double xp = pos.getX() + vec.xCoord * i1 + .5;
 				double yp = pos.getY() + vec.yCoord * i1 + .5;
 				double zp = pos.getZ() + vec.zCoord * i1 + .5;
-				player.worldObj.spawnParticle(EnumParticleTypes.FLAME, xp, yp, zp, vec.xCoord * .1, .15, vec.zCoord * .1);
+				player.world.spawnParticle(EnumParticleTypes.FLAME, xp, yp, zp, vec.xCoord * .1, .15, vec.zCoord * .1);
 			}
 		}
 	}

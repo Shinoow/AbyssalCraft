@@ -114,7 +114,7 @@ public class ItemInterdimensionalCage extends ItemACBasic implements IEnergyCont
 				entity.setLocationAndAngles(x, y, z, MathHelper.wrapDegrees(worldIn.rand.nextFloat() * 360.0F), 0.0F);
 				entityliving.rotationYawHead = entityliving.rotationYaw;
 				entityliving.renderYawOffset = entityliving.rotationYaw;
-				worldIn.spawnEntityInWorld(entity);
+				worldIn.spawnEntity(entity);
 				entityliving.playLivingSound();
 			}
 		}

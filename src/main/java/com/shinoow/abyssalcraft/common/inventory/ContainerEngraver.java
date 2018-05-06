@@ -80,7 +80,7 @@ public class ContainerEngraver extends Container {
 	@Override
 	public boolean canInteractWith(EntityPlayer var1) {
 
-		return tileEngraver.isUseableByPlayer(var1);
+		return tileEngraver.isUsableByPlayer(var1);
 	}
 
 	@Override

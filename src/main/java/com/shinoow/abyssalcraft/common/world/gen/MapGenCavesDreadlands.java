@@ -89,12 +89,12 @@ public class MapGenCavesDreadlands extends MapGenCavesHell {
 
 				if (x >= d0 - 16.0D - d2 * 2.0D && z >= d1 - 16.0D - d2 * 2.0D && x <= d0 + 16.0D + d2 * 2.0D && z <= d1 + 16.0D + d2 * 2.0D)
 				{
-					int j2 = MathHelper.floor_double(x - d2) - par2 * 16 - 1;
-					int k = MathHelper.floor_double(x + d2) - par2 * 16 + 1;
-					int k2 = MathHelper.floor_double(y - d3) - 1;
-					int l = MathHelper.floor_double(y + d3) + 1;
-					int l2 = MathHelper.floor_double(z - d2) - par3 * 16 - 1;
-					int i1 = MathHelper.floor_double(z + d2) - par3 * 16 + 1;
+					int j2 = MathHelper.floor(x - d2) - par2 * 16 - 1;
+					int k = MathHelper.floor(x + d2) - par2 * 16 + 1;
+					int k2 = MathHelper.floor(y - d3) - 1;
+					int l = MathHelper.floor(y + d3) + 1;
+					int l2 = MathHelper.floor(z - d2) - par3 * 16 - 1;
+					int i1 = MathHelper.floor(z + d2) - par3 * 16 + 1;
 
 					if (j2 < 0)
 						j2 = 0;

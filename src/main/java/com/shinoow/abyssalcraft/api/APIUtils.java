@@ -198,8 +198,8 @@ public class APIUtils {
 	@SideOnly(Side.CLIENT)
 	public static FontRenderer getFontRenderer(ItemStack stack){
 		if(!(stack.getItem() instanceof IUnlockableItem)) return null;
-		INecroDataCapability cap = NecroDataCapability.getCap(Minecraft.getMinecraft().thePlayer);
+		INecroDataCapability cap = NecroDataCapability.getCap(Minecraft.getMinecraft().player);
 
-		return cap.isUnlocked(((IUnlockableItem) stack.getItem()).getUnlockCondition(stack), Minecraft.getMinecraft().thePlayer) ? null : AbyssalCraftAPI.getAkloFont();
+		return cap.isUnlocked(((IUnlockableItem) stack.getItem()).getUnlockCondition(stack), Minecraft.getMinecraft().player) ? null : AbyssalCraftAPI.getAkloFont();
 	}
 }

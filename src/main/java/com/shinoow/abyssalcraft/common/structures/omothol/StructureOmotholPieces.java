@@ -61,16 +61,16 @@ public class StructureOmotholPieces
 	public static List<StructureOmotholPieces.PieceWeight> getStructureVillageWeightedPieceList(Random random, int p_75084_1_)
 	{
 		List<StructureOmotholPieces.PieceWeight> list = Lists.<StructureOmotholPieces.PieceWeight>newArrayList();
-		list.add(new StructureOmotholPieces.PieceWeight(StructureOmotholPieces.House4Garden.class, 4, MathHelper.getRandomIntegerInRange(random, 2 + p_75084_1_, 4 + p_75084_1_ * 2)));
-		list.add(new StructureOmotholPieces.PieceWeight(StructureOmotholPieces.Church.class, 20, MathHelper.getRandomIntegerInRange(random, 0 + p_75084_1_, 1 + p_75084_1_)));
-		list.add(new StructureOmotholPieces.PieceWeight(StructureOmotholPieces.House1.class, 20, MathHelper.getRandomIntegerInRange(random, 0 + p_75084_1_, 2 + p_75084_1_)));
-		list.add(new StructureOmotholPieces.PieceWeight(StructureOmotholPieces.WoodHut.class, 3, MathHelper.getRandomIntegerInRange(random, 2 + p_75084_1_, 5 + p_75084_1_ * 3)));
-		list.add(new StructureOmotholPieces.PieceWeight(StructureOmotholPieces.Hall.class, 15, MathHelper.getRandomIntegerInRange(random, 0 + p_75084_1_, 2 + p_75084_1_)));
-		list.add(new StructureOmotholPieces.PieceWeight(StructureOmotholPieces.Field1.class, 3, MathHelper.getRandomIntegerInRange(random, 1 + p_75084_1_, 4 + p_75084_1_)));
-		list.add(new StructureOmotholPieces.PieceWeight(StructureOmotholPieces.Field2.class, 3, MathHelper.getRandomIntegerInRange(random, 2 + p_75084_1_, 4 + p_75084_1_ * 2)));
-		list.add(new StructureOmotholPieces.PieceWeight(StructureOmotholPieces.House2.class, 15, MathHelper.getRandomIntegerInRange(random, 0, 1 + p_75084_1_)));
-		list.add(new StructureOmotholPieces.PieceWeight(StructureOmotholPieces.House3.class, 8, MathHelper.getRandomIntegerInRange(random, 0 + p_75084_1_, 3 + p_75084_1_ * 2)));
-		list.add(new StructureOmotholPieces.PieceWeight(StructureOmotholPieces.HouseBanker.class, 8, MathHelper.getRandomIntegerInRange(random, 2 + p_75084_1_, 4 + p_75084_1_ * 2)));
+		list.add(new StructureOmotholPieces.PieceWeight(StructureOmotholPieces.House4Garden.class, 4, MathHelper.getInt(random, 2 + p_75084_1_, 4 + p_75084_1_ * 2)));
+		list.add(new StructureOmotholPieces.PieceWeight(StructureOmotholPieces.Church.class, 20, MathHelper.getInt(random, 0 + p_75084_1_, 1 + p_75084_1_)));
+		list.add(new StructureOmotholPieces.PieceWeight(StructureOmotholPieces.House1.class, 20, MathHelper.getInt(random, 0 + p_75084_1_, 2 + p_75084_1_)));
+		list.add(new StructureOmotholPieces.PieceWeight(StructureOmotholPieces.WoodHut.class, 3, MathHelper.getInt(random, 2 + p_75084_1_, 5 + p_75084_1_ * 3)));
+		list.add(new StructureOmotholPieces.PieceWeight(StructureOmotholPieces.Hall.class, 15, MathHelper.getInt(random, 0 + p_75084_1_, 2 + p_75084_1_)));
+		list.add(new StructureOmotholPieces.PieceWeight(StructureOmotholPieces.Field1.class, 3, MathHelper.getInt(random, 1 + p_75084_1_, 4 + p_75084_1_)));
+		list.add(new StructureOmotholPieces.PieceWeight(StructureOmotholPieces.Field2.class, 3, MathHelper.getInt(random, 2 + p_75084_1_, 4 + p_75084_1_ * 2)));
+		list.add(new StructureOmotholPieces.PieceWeight(StructureOmotholPieces.House2.class, 15, MathHelper.getInt(random, 0, 1 + p_75084_1_)));
+		list.add(new StructureOmotholPieces.PieceWeight(StructureOmotholPieces.House3.class, 8, MathHelper.getInt(random, 0 + p_75084_1_, 3 + p_75084_1_ * 2)));
+		list.add(new StructureOmotholPieces.PieceWeight(StructureOmotholPieces.HouseBanker.class, 8, MathHelper.getInt(random, 2 + p_75084_1_, 4 + p_75084_1_ * 2)));
 		//        net.minecraftforge.fml.common.registry.VillagerRegistry.addExtraVillageComponents(list, random, p_75084_1_);
 		Iterator<StructureOmotholPieces.PieceWeight> iterator = list.iterator();
 
@@ -452,14 +452,14 @@ public class StructureOmotholPieces
 
 			for (int i = 1; i <= 7; ++i)
 			{
-				setBlockState(worldIn, cropTypeA.getStateFromMeta(MathHelper.getRandomIntegerInRange(randomIn, 2, 7)), 1, 1, i, structureBoundingBoxIn);
-				setBlockState(worldIn, cropTypeA.getStateFromMeta(MathHelper.getRandomIntegerInRange(randomIn, 2, 7)), 2, 1, i, structureBoundingBoxIn);
-				setBlockState(worldIn, cropTypeB.getStateFromMeta(MathHelper.getRandomIntegerInRange(randomIn, 2, 7)), 4, 1, i, structureBoundingBoxIn);
-				setBlockState(worldIn, cropTypeB.getStateFromMeta(MathHelper.getRandomIntegerInRange(randomIn, 2, 7)), 5, 1, i, structureBoundingBoxIn);
-				setBlockState(worldIn, cropTypeC.getStateFromMeta(MathHelper.getRandomIntegerInRange(randomIn, 2, 7)), 7, 1, i, structureBoundingBoxIn);
-				setBlockState(worldIn, cropTypeC.getStateFromMeta(MathHelper.getRandomIntegerInRange(randomIn, 2, 7)), 8, 1, i, structureBoundingBoxIn);
-				setBlockState(worldIn, cropTypeD.getStateFromMeta(MathHelper.getRandomIntegerInRange(randomIn, 2, 7)), 10, 1, i, structureBoundingBoxIn);
-				setBlockState(worldIn, cropTypeD.getStateFromMeta(MathHelper.getRandomIntegerInRange(randomIn, 2, 7)), 11, 1, i, structureBoundingBoxIn);
+				setBlockState(worldIn, cropTypeA.getStateFromMeta(MathHelper.getInt(randomIn, 2, 7)), 1, 1, i, structureBoundingBoxIn);
+				setBlockState(worldIn, cropTypeA.getStateFromMeta(MathHelper.getInt(randomIn, 2, 7)), 2, 1, i, structureBoundingBoxIn);
+				setBlockState(worldIn, cropTypeB.getStateFromMeta(MathHelper.getInt(randomIn, 2, 7)), 4, 1, i, structureBoundingBoxIn);
+				setBlockState(worldIn, cropTypeB.getStateFromMeta(MathHelper.getInt(randomIn, 2, 7)), 5, 1, i, structureBoundingBoxIn);
+				setBlockState(worldIn, cropTypeC.getStateFromMeta(MathHelper.getInt(randomIn, 2, 7)), 7, 1, i, structureBoundingBoxIn);
+				setBlockState(worldIn, cropTypeC.getStateFromMeta(MathHelper.getInt(randomIn, 2, 7)), 8, 1, i, structureBoundingBoxIn);
+				setBlockState(worldIn, cropTypeD.getStateFromMeta(MathHelper.getInt(randomIn, 2, 7)), 10, 1, i, structureBoundingBoxIn);
+				setBlockState(worldIn, cropTypeD.getStateFromMeta(MathHelper.getInt(randomIn, 2, 7)), 11, 1, i, structureBoundingBoxIn);
 			}
 
 			for (int k = 0; k < 9; ++k)
@@ -562,10 +562,10 @@ public class StructureOmotholPieces
 
 			for (int i = 1; i <= 7; ++i)
 			{
-				setBlockState(worldIn, cropTypeA.getStateFromMeta(MathHelper.getRandomIntegerInRange(randomIn, 2, 7)), 1, 1, i, structureBoundingBoxIn);
-				setBlockState(worldIn, cropTypeA.getStateFromMeta(MathHelper.getRandomIntegerInRange(randomIn, 2, 7)), 2, 1, i, structureBoundingBoxIn);
-				setBlockState(worldIn, cropTypeB.getStateFromMeta(MathHelper.getRandomIntegerInRange(randomIn, 2, 7)), 4, 1, i, structureBoundingBoxIn);
-				setBlockState(worldIn, cropTypeB.getStateFromMeta(MathHelper.getRandomIntegerInRange(randomIn, 2, 7)), 5, 1, i, structureBoundingBoxIn);
+				setBlockState(worldIn, cropTypeA.getStateFromMeta(MathHelper.getInt(randomIn, 2, 7)), 1, 1, i, structureBoundingBoxIn);
+				setBlockState(worldIn, cropTypeA.getStateFromMeta(MathHelper.getInt(randomIn, 2, 7)), 2, 1, i, structureBoundingBoxIn);
+				setBlockState(worldIn, cropTypeB.getStateFromMeta(MathHelper.getInt(randomIn, 2, 7)), 4, 1, i, structureBoundingBoxIn);
+				setBlockState(worldIn, cropTypeB.getStateFromMeta(MathHelper.getInt(randomIn, 2, 7)), 5, 1, i, structureBoundingBoxIn);
 			}
 
 			for (int k = 0; k < 9; ++k)
@@ -1504,7 +1504,7 @@ public class StructureOmotholPieces
 
 		public static StructureBoundingBox func_175848_a(StructureOmotholPieces.Start start, List<StructureComponent> p_175848_1_, Random rand, int p_175848_3_, int p_175848_4_, int p_175848_5_, EnumFacing facing)
 		{
-			for (int i = 7 * MathHelper.getRandomIntegerInRange(rand, 3, 5); i >= 7; i -= 7)
+			for (int i = 7 * MathHelper.getInt(rand, 3, 5); i >= 7; i -= 7)
 			{
 				StructureBoundingBox structureboundingbox = StructureBoundingBox.getComponentToAddBoundingBox(p_175848_3_, p_175848_4_, p_175848_5_, 0, 0, 0, 3, 3, i, facing);
 
@@ -1819,7 +1819,7 @@ public class StructureOmotholPieces
 					remnant.setLocationAndAngles(j + 0.5D, k, l + 0.5D, 0.0F, 0.0F);
 					remnant.onInitialSpawn(worldIn.getDifficultyForLocation(new BlockPos(remnant)), (IEntityLivingData)null);
 					remnant.setProfession(func_180779_c(i, remnant.getProfession()));
-					worldIn.spawnEntityInWorld(remnant);
+					worldIn.spawnEntity(remnant);
 				}
 		}
 

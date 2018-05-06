@@ -62,9 +62,9 @@ public class TeleporterAC extends Teleporter
 		}
 		else
 		{
-			int i = MathHelper.floor_double(entityIn.posX);
-			int j = MathHelper.floor_double(entityIn.posY) - 1;
-			int k = MathHelper.floor_double(entityIn.posZ);
+			int i = MathHelper.floor(entityIn.posX);
+			int j = MathHelper.floor(entityIn.posY) - 1;
+			int k = MathHelper.floor(entityIn.posZ);
 			int l = 1;
 			int i1 = 0;
 
@@ -87,8 +87,8 @@ public class TeleporterAC extends Teleporter
 	@Override
 	public boolean placeInExistingPortal(Entity entityIn, float p_180620_2_) {
 		double d0 = -1.0D;
-		int i = MathHelper.floor_double(entityIn.posX);
-		int j = MathHelper.floor_double(entityIn.posZ);
+		int i = MathHelper.floor(entityIn.posX);
+		int j = MathHelper.floor(entityIn.posZ);
 		boolean flag1 = true;
 		Object object = BlockPos.ORIGIN;
 		long k = ChunkPos.asLong(i, j);
@@ -146,7 +146,7 @@ public class TeleporterAC extends Teleporter
 			if (worldServerInstance.getBlockState(((BlockPos) object).south()).getBlock() == portal)
 				enumfacing = EnumFacing.WEST;
 
-			EnumFacing enumfacing1 = EnumFacing.getHorizontal(MathHelper.floor_double(entityIn.rotationYaw * 4.0F / 360.0F + 0.5D) & 3);
+			EnumFacing enumfacing1 = EnumFacing.getHorizontal(MathHelper.floor(entityIn.rotationYaw * 4.0F / 360.0F + 0.5D) & 3);
 
 			if (enumfacing != null) {
 				EnumFacing enumfacing2 = enumfacing.rotateYCCW();
@@ -223,9 +223,9 @@ public class TeleporterAC extends Teleporter
 	{
 		int i = 16;
 		double d0 = -1.0D;
-		int j = MathHelper.floor_double(p_85188_1_.posX);
-		int k = MathHelper.floor_double(p_85188_1_.posY);
-		int l = MathHelper.floor_double(p_85188_1_.posZ);
+		int j = MathHelper.floor(p_85188_1_.posX);
+		int k = MathHelper.floor(p_85188_1_.posY);
+		int l = MathHelper.floor(p_85188_1_.posZ);
 		int i1 = j;
 		int j1 = k;
 		int k1 = l;
@@ -351,7 +351,7 @@ public class TeleporterAC extends Teleporter
 
 		if (d0 < 0.0D)
 		{
-			j1 = MathHelper.clamp_int(j1, 70, worldServerInstance.getActualHeight() - 10);
+			j1 = MathHelper.clamp(j1, 70, worldServerInstance.getActualHeight() - 10);
 			k2 = j1;
 
 			for (int j7 = -1; j7 <= 1; ++j7)

@@ -249,7 +249,7 @@ public class TileEntityTransmutator extends TileEntity implements ISidedInventor
 		if (transmutatorBurnTime > 0)
 			--transmutatorBurnTime;
 
-		if (!worldObj.isRemote)
+		if (!world.isRemote)
 		{
 			if (transmutatorBurnTime == 0 && canProcess())
 			{
@@ -285,7 +285,7 @@ public class TileEntityTransmutator extends TileEntity implements ISidedInventor
 			if (flag != transmutatorBurnTime > 0)
 			{
 				flag1 = true;
-				BlockTransmutator.updateTransmutatorBlockState(transmutatorBurnTime > 0, worldObj, pos);
+				BlockTransmutator.updateTransmutatorBlockState(transmutatorBurnTime > 0, world, pos);
 			}
 		}
 
@@ -381,9 +381,9 @@ public class TileEntityTransmutator extends TileEntity implements ISidedInventor
 	 * Do not make give this method the name canInteractWith because it clashes with Container
 	 */
 	@Override
-	public boolean isUseableByPlayer(EntityPlayer par1EntityPlayer)
+	public boolean isUsableByPlayer(EntityPlayer par1EntityPlayer)
 	{
-		return worldObj.getTileEntity(pos) != this ? false : par1EntityPlayer.getDistanceSq(pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D) <= 64.0D;
+		return world.getTileEntity(pos) != this ? false : par1EntityPlayer.getDistanceSq(pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D) <= 64.0D;
 	}
 
 	@Override

@@ -157,7 +157,7 @@ public class GuiNecronomiconSpellEntry extends GuiNecronomicon {
 
 		if(tooltipStack != null)
 		{
-			List<String> tooltipData = tooltipStack.getTooltip(Minecraft.getMinecraft().thePlayer, false);
+			List<String> tooltipData = tooltipStack.getTooltip(Minecraft.getMinecraft().player, false);
 			List<String> parsedTooltip = new ArrayList();
 			boolean first = true;
 
@@ -208,7 +208,7 @@ public class GuiNecronomiconSpellEntry extends GuiNecronomicon {
 
 	private void initStuff(){
 		for(Spell spell : SpellRegistry.instance().getSpells())
-			if(NecroDataCapability.getCap(Minecraft.getMinecraft().thePlayer).isUnlocked(spell.getUnlockCondition(), Minecraft.getMinecraft().thePlayer)
+			if(NecroDataCapability.getCap(Minecraft.getMinecraft().player).isUnlocked(spell.getUnlockCondition(), Minecraft.getMinecraft().player)
 				&& spell.getBookType() <= getBookType())
 				spells.add(spell);
 		setTurnupLimit(spells.size());

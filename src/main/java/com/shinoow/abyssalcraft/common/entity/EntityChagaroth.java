@@ -212,7 +212,7 @@ public class EntityChagaroth extends EntityMob implements IDreadEntity {
 
 				if (k1 > 0)
 				{
-					Entity entity = worldObj.getEntityByID(k1);
+					Entity entity = world.getEntityByID(k1);
 
 					if (entity != null && entity.isEntityAlive() && getDistanceSqToEntity(entity) <= 48D * 48D && canEntityBeSeen(entity))
 					{
@@ -228,7 +228,7 @@ public class EntityChagaroth extends EntityMob implements IDreadEntity {
 				}
 				else
 				{
-					List<EntityLivingBase> list = worldObj.<EntityLivingBase>getEntitiesWithinAABB(EntityLivingBase.class, getEntityBoundingBox().expandXyz(48D), Predicates.<EntityLivingBase>and(EntitySelectors.NOT_SPECTATING, entity -> !EntityUtil.isEntityDread(entity)));
+					List<EntityLivingBase> list = world.<EntityLivingBase>getEntitiesWithinAABB(EntityLivingBase.class, getEntityBoundingBox().expandXyz(48D), Predicates.<EntityLivingBase>and(EntitySelectors.NOT_SPECTATING, entity -> !EntityUtil.isEntityDread(entity)));
 
 					for (int j2 = 0; j2 < 10 && !list.isEmpty(); ++j2)
 					{
@@ -271,15 +271,15 @@ public class EntityChagaroth extends EntityMob implements IDreadEntity {
 		double d3 = x - d0;
 		double d4 = y - d1;
 		double d5 = z - d2;
-		float f1 = MathHelper.sqrt_double(d3 * d3 + d5 * d5) * 0.2F;
-		float f2 = MathHelper.sqrt_double(d3 * d3 + d4 * d4 + d5 * d5);
-		EntityDreadSlug entitydreadslug = new EntityDreadSlug(worldObj, this);
+		float f1 = MathHelper.sqrt(d3 * d3 + d5 * d5) * 0.2F;
+		float f2 = MathHelper.sqrt(d3 * d3 + d4 * d4 + d5 * d5);
+		EntityDreadSlug entitydreadslug = new EntityDreadSlug(world, this);
 		entitydreadslug.posY = d1;
 		entitydreadslug.posX = d0;
 		entitydreadslug.posZ = d2;
 		entitydreadslug.setThrowableHeading(d3, d4 + f1, d5, 1.75F, 1.0F);
-		if(!worldObj.isRemote)
-			worldObj.spawnEntityInWorld(entitydreadslug);
+		if(!world.isRemote)
+			world.spawnEntity(entitydreadslug);
 		entitydreadslug.motionX = d3 / f2 * 0.8D * 0.8D + entitydreadslug.motionX;
 		entitydreadslug.motionY = d4 / f2 * 0.8D * 0.8D + entitydreadslug.motionY;
 		entitydreadslug.motionZ = d5 / f2 * 0.8D * 0.8D + entitydreadslug.motionZ;
@@ -287,75 +287,75 @@ public class EntityChagaroth extends EntityMob implements IDreadEntity {
 		switch (rand.nextInt(5))
 		{
 		case 0:
-			EntityDreadSlug entitydreadslug1 = new EntityDreadSlug(worldObj, this);
+			EntityDreadSlug entitydreadslug1 = new EntityDreadSlug(world, this);
 			entitydreadslug1.posY = d1;
 			entitydreadslug1.posX = d0;
 			entitydreadslug1.posZ = d2;
 			entitydreadslug1.setThrowableHeading(d3, d4 + f1, d5, 1.75F, 1.0F);
-			if(!worldObj.isRemote)
-				worldObj.spawnEntityInWorld(entitydreadslug1);
+			if(!world.isRemote)
+				world.spawnEntity(entitydreadslug1);
 			entitydreadslug1.motionX = d3 / f2 * 0.8D * 0.8D + entitydreadslug1.motionX;
 			entitydreadslug1.motionY = d4 / f2 * 0.8D * 0.8D + entitydreadslug1.motionY;
 			entitydreadslug1.motionZ = d5 / f2 * 0.8D * 0.8D + entitydreadslug1.motionZ;
 			nextHeadUpdate[p_82209_1_ - 2] = ticksExisted + 10;
 			break;
 		case 1:
-			EntityDreadSlug entitydreadslug11 = new EntityDreadSlug(worldObj, this);
+			EntityDreadSlug entitydreadslug11 = new EntityDreadSlug(world, this);
 			entitydreadslug11.posY = d1;
 			entitydreadslug11.posX = d0;
 			entitydreadslug11.posZ = d2;
-			EntityDreadSpawn mob = new EntityDreadSpawn(worldObj);
+			EntityDreadSpawn mob = new EntityDreadSpawn(world);
 			mob.copyLocationAndAnglesFrom(entitydreadslug11);
 			entitydreadslug11.setThrowableHeading(d3, d4 + f1 + rand.nextDouble() * 150D, d5, 1.3F, 1.0F);
-			if(!worldObj.isRemote)
-				worldObj.spawnEntityInWorld(entitydreadslug11);
-			if(!worldObj.isRemote)
-				worldObj.spawnEntityInWorld(mob);
+			if(!world.isRemote)
+				world.spawnEntity(entitydreadslug11);
+			if(!world.isRemote)
+				world.spawnEntity(mob);
 			mob.startRiding(entitydreadslug11);
-			mob.onInitialSpawn(worldObj.getDifficultyForLocation(getPosition()), null);
+			mob.onInitialSpawn(world.getDifficultyForLocation(getPosition()), null);
 			nextHeadUpdate[p_82209_1_ - 2] = ticksExisted + 20;
 			break;
 		case 2:
-			EntityDreadSlug entitydreadslug111 = new EntityDreadSlug(worldObj, this);
+			EntityDreadSlug entitydreadslug111 = new EntityDreadSlug(world, this);
 			entitydreadslug111.posY = d1;
 			entitydreadslug111.posX = d0;
 			entitydreadslug111.posZ = d2;
-			EntityChagarothSpawn spawn = new EntityChagarothSpawn(worldObj);
+			EntityChagarothSpawn spawn = new EntityChagarothSpawn(world);
 			spawn.copyLocationAndAnglesFrom(entitydreadslug111);
 			entitydreadslug111.setThrowableHeading(d3, d4 + f1 + rand.nextDouble() * 150D, d5, 1.3F, 1.0F);
-			if(!worldObj.isRemote)
-				worldObj.spawnEntityInWorld(entitydreadslug111);
-			if(!worldObj.isRemote)
-				worldObj.spawnEntityInWorld(spawn);
+			if(!world.isRemote)
+				world.spawnEntity(entitydreadslug111);
+			if(!world.isRemote)
+				world.spawnEntity(spawn);
 			spawn.startRiding(entitydreadslug111);
-			spawn.onInitialSpawn(worldObj.getDifficultyForLocation(getPosition()), null);
+			spawn.onInitialSpawn(world.getDifficultyForLocation(getPosition()), null);
 			nextHeadUpdate[p_82209_1_ - 2] = ticksExisted + 20;
 			break;
 		case 3:
-			EntityDreadSlug entitydreadslug1111 = new EntityDreadSlug(worldObj, this);
+			EntityDreadSlug entitydreadslug1111 = new EntityDreadSlug(world, this);
 			entitydreadslug1111.posY = d1;
 			entitydreadslug1111.posX = d0;
 			entitydreadslug1111.posZ = d2;
-			EntityChagarothFist fist = new EntityChagarothFist(worldObj);
+			EntityChagarothFist fist = new EntityChagarothFist(world);
 			fist.copyLocationAndAnglesFrom(entitydreadslug1111);
 			entitydreadslug1111.setThrowableHeading(d3, d4 + f1 + rand.nextDouble() * 150D, d5, 1.3F, 1.0F);
-			if(!worldObj.isRemote)
-				worldObj.spawnEntityInWorld(entitydreadslug1111);
-			if(!worldObj.isRemote)
-				worldObj.spawnEntityInWorld(fist);
+			if(!world.isRemote)
+				world.spawnEntity(entitydreadslug1111);
+			if(!world.isRemote)
+				world.spawnEntity(fist);
 			fist.startRiding(entitydreadslug1111);
-			fist.onInitialSpawn(worldObj.getDifficultyForLocation(getPosition()), null);
+			fist.onInitialSpawn(world.getDifficultyForLocation(getPosition()), null);
 			nextHeadUpdate[p_82209_1_ - 2] = ticksExisted + 20;
 			break;
 		case 4:
-			worldObj.playEvent((EntityPlayer)null, 1016, new BlockPos(this), 0);
+			world.playEvent((EntityPlayer)null, 1016, new BlockPos(this), 0);
 			d4 = y + 0.5D - d1;
-			EntityDreadedCharge entitydragonfireball = new EntityDreadedCharge(worldObj, this, d3, d4, d5);
+			EntityDreadedCharge entitydragonfireball = new EntityDreadedCharge(world, this, d3, d4, d5);
 			entitydragonfireball.posX = d0;
 			entitydragonfireball.posY = d1;
 			entitydragonfireball.posZ = d2;
-			if(!worldObj.isRemote)
-				worldObj.spawnEntityInWorld(entitydragonfireball);
+			if(!world.isRemote)
+				world.spawnEntity(entitydragonfireball);
 			nextHeadUpdate[p_82209_1_ - 2] = ticksExisted + 100;
 			break;
 		}
@@ -438,17 +438,17 @@ public class EntityChagaroth extends EntityMob implements IDreadEntity {
 	{
 		setSize(2.25F, 4.5F);
 
-		if (ticksExisted % 40 == 0 && !worldObj.isRemote)
+		if (ticksExisted % 40 == 0 && !world.isRemote)
 			for(int x = getPosition().getX() - 3; x <= getPosition().getX() + 3; x++)
 				for(int z = getPosition().getZ() - 3; z <= getPosition().getZ() + 3; z++)
-					if(!(worldObj.getBiome(new BlockPos(x, 0, z)) instanceof IDreadlandsBiome)
-						&& worldObj.getBiome(new BlockPos(x, 0, z)) != ACBiomes.purged)
+					if(!(world.getBiome(new BlockPos(x, 0, z)) instanceof IDreadlandsBiome)
+						&& world.getBiome(new BlockPos(x, 0, z)) != ACBiomes.purged)
 					{
 						Biome b = ACBiomes.dreadlands;
-						Chunk c = worldObj.getChunkFromBlockCoords(getPosition());
+						Chunk c = world.getChunkFromBlockCoords(getPosition());
 						c.getBiomeArray()[(z & 0xF) << 4 | x & 0xF] = (byte)Biome.getIdForBiome(b);
 						c.setModified(true);
-						PacketDispatcher.sendToDimension(new CleansingRitualMessage(x, z, Biome.getIdForBiome(b)), worldObj.provider.getDimension());
+						PacketDispatcher.sendToDimension(new CleansingRitualMessage(x, z, Biome.getIdForBiome(b)), world.provider.getDimension());
 					}
 
 		setSprinting(false);
@@ -470,7 +470,7 @@ public class EntityChagaroth extends EntityMob implements IDreadEntity {
 			int k = getWatchedTargetId(j + 1);
 			Entity entity1 = null;
 
-			if (k > 0) entity1 = worldObj.getEntityByID(k);
+			if (k > 0) entity1 = world.getEntityByID(k);
 
 			if (entity1 != null)
 			{
@@ -480,7 +480,7 @@ public class EntityChagaroth extends EntityMob implements IDreadEntity {
 				double d6 = entity1.posX - d11;
 				double d7 = entity1.posY + entity1.getEyeHeight() - d12;
 				double d8 = entity1.posZ - d13;
-				double d9 = MathHelper.sqrt_double(d6 * d6 + d8 * d8);
+				double d9 = MathHelper.sqrt(d6 * d6 + d8 * d8);
 				float f = (float)(MathHelper.atan2(d8, d6) * (180D / Math.PI)) - 90.0F;
 				float f1 = (float)-(MathHelper.atan2(d7, d9) * (180D / Math.PI));
 				xRotationHeads[j] = rotlerp(xRotationHeads[j], f1, 40.0F);
@@ -497,16 +497,16 @@ public class EntityChagaroth extends EntityMob implements IDreadEntity {
 
 		if (flameShootTimer > 0)
 		{
-			worldObj.setEntityState(this, (byte)23);
+			world.setEntityState(this, (byte)23);
 			if (ticksExisted % 5 == 0 && flameShootTimer > 30)
 			{
-				worldObj.playSound(null, new BlockPos(posX + 0.5D, posY + getEyeHeight(), posZ + 0.5D), ACSounds.dreadguard_barf, getSoundCategory(), 0.7F + getRNG().nextFloat(), getRNG().nextFloat() * 0.6F + 0.2F);
-				worldObj.playSound(null, new BlockPos(posX + 0.5D, posY + getEyeHeight(), posZ + 0.5D), ACSounds.dreadguard_barf, getSoundCategory(), 0.7F + getRNG().nextFloat(), getRNG().nextFloat() * 0.5F + 0.2F);
-				worldObj.playSound(null, new BlockPos(posX + 0.5D, posY + getEyeHeight(), posZ + 0.5D), ACSounds.dreadguard_barf, getSoundCategory(), 0.7F + getRNG().nextFloat(), getRNG().nextFloat() * 0.4F + 0.2F);
+				world.playSound(null, new BlockPos(posX + 0.5D, posY + getEyeHeight(), posZ + 0.5D), ACSounds.dreadguard_barf, getSoundCategory(), 0.7F + getRNG().nextFloat(), getRNG().nextFloat() * 0.6F + 0.2F);
+				world.playSound(null, new BlockPos(posX + 0.5D, posY + getEyeHeight(), posZ + 0.5D), ACSounds.dreadguard_barf, getSoundCategory(), 0.7F + getRNG().nextFloat(), getRNG().nextFloat() * 0.5F + 0.2F);
+				world.playSound(null, new BlockPos(posX + 0.5D, posY + getEyeHeight(), posZ + 0.5D), ACSounds.dreadguard_barf, getSoundCategory(), 0.7F + getRNG().nextFloat(), getRNG().nextFloat() * 0.4F + 0.2F);
 			}
 			Entity target = getHeadLookTarget();
 			if (target != null) {
-				for(EntityLivingBase entity : worldObj.getEntitiesWithinAABB(EntityLivingBase.class, target.getEntityBoundingBox().expand(2.0D, 2.0D, 2.0D), EntitySelectors.IS_ALIVE))
+				for(EntityLivingBase entity : world.getEntitiesWithinAABB(EntityLivingBase.class, target.getEntityBoundingBox().expand(2.0D, 2.0D, 2.0D), EntitySelectors.IS_ALIVE))
 					if (rand.nextInt(3) == 0)
 						if (entity.attackEntityFrom(AbyssalCraftAPI.dread, (float)(7.5D - getDistanceToEntity(entity)) * 2F))
 							entity.addPotionEffect(new PotionEffect(AbyssalCraftAPI.dread_plague, 200, 1));
@@ -519,54 +519,54 @@ public class EntityChagaroth extends EntityMob implements IDreadEntity {
 
 		--flameShootTimer;
 
-		if(!worldObj.isRemote && isEntityAlive())
+		if(!world.isRemote && isEntityAlive())
 		{
 			if(rand.nextInt(800) == 0)
 			{
-				EntityDreadSpawn mob = new EntityDreadSpawn(worldObj);
+				EntityDreadSpawn mob = new EntityDreadSpawn(world);
 				mob.copyLocationAndAnglesFrom(this);
-				worldObj.spawnEntityInWorld(mob);
-				mob.onInitialSpawn(worldObj.getDifficultyForLocation(getPosition()), null);
+				world.spawnEntity(mob);
+				mob.onInitialSpawn(world.getDifficultyForLocation(getPosition()), null);
 
-				EntityChagarothSpawn spawn = new EntityChagarothSpawn(worldObj);
+				EntityChagarothSpawn spawn = new EntityChagarothSpawn(world);
 				spawn.copyLocationAndAnglesFrom(this);
-				worldObj.spawnEntityInWorld(spawn);
-				spawn.onInitialSpawn(worldObj.getDifficultyForLocation(getPosition()), null);
+				world.spawnEntity(spawn);
+				spawn.onInitialSpawn(world.getDifficultyForLocation(getPosition()), null);
 			}
 
 			if(rand.nextInt(1600) == 0)
 			{
-				EntityChagarothFist fist = new EntityChagarothFist(worldObj);
+				EntityChagarothFist fist = new EntityChagarothFist(world);
 				fist.copyLocationAndAnglesFrom(this);
-				worldObj.spawnEntityInWorld(fist);
-				fist.onInitialSpawn(worldObj.getDifficultyForLocation(getPosition()), null);
+				world.spawnEntity(fist);
+				fist.onInitialSpawn(world.getDifficultyForLocation(getPosition()), null);
 			}
 
 			if(rand.nextInt(2400) == 0)
 			{
-				EntityDreadguard dreadGuard = new EntityDreadguard(worldObj);
+				EntityDreadguard dreadGuard = new EntityDreadguard(world);
 				dreadGuard.copyLocationAndAnglesFrom(this);
 				++dreadGuard.motionX;
-				worldObj.spawnEntityInWorld(dreadGuard);
-				dreadGuard.onInitialSpawn(worldObj.getDifficultyForLocation(getPosition()), null);
+				world.spawnEntity(dreadGuard);
+				dreadGuard.onInitialSpawn(world.getDifficultyForLocation(getPosition()), null);
 			}
 
 			if(rand.nextInt(4800) == 0)
 			{
-				EntityGreaterDreadSpawn dreadGuard = new EntityGreaterDreadSpawn(worldObj);
+				EntityGreaterDreadSpawn dreadGuard = new EntityGreaterDreadSpawn(world);
 				dreadGuard.copyLocationAndAnglesFrom(this);
 				++dreadGuard.motionX;
-				worldObj.spawnEntityInWorld(dreadGuard);
-				dreadGuard.onInitialSpawn(worldObj.getDifficultyForLocation(getPosition()), null);
+				world.spawnEntity(dreadGuard);
+				dreadGuard.onInitialSpawn(world.getDifficultyForLocation(getPosition()), null);
 			}
 
 			if(rand.nextInt(7200) == 0)
 			{
-				EntityLesserDreadbeast dreadGuard = new EntityLesserDreadbeast(worldObj);
+				EntityLesserDreadbeast dreadGuard = new EntityLesserDreadbeast(world);
 				dreadGuard.copyLocationAndAnglesFrom(this);
 				++dreadGuard.motionX;
-				worldObj.spawnEntityInWorld(dreadGuard);
-				dreadGuard.onInitialSpawn(worldObj.getDifficultyForLocation(getPosition()), null);
+				world.spawnEntity(dreadGuard);
+				dreadGuard.onInitialSpawn(world.getDifficultyForLocation(getPosition()), null);
 			}
 		}
 
@@ -579,14 +579,14 @@ public class EntityChagaroth extends EntityMob implements IDreadEntity {
 		double range = 8D + rand.nextDouble() * 20D;
 		Vec3d srcVec = new Vec3d(posX, posY + getEyeHeight(), posZ);
 		Vec3d lookVec = getLook(1.0F);
-		RayTraceResult raytrace = worldObj.rayTraceBlocks(srcVec, srcVec.addVector(lookVec.xCoord * range, lookVec.yCoord * range, lookVec.zCoord * range));
+		RayTraceResult raytrace = world.rayTraceBlocks(srcVec, srcVec.addVector(lookVec.xCoord * range, lookVec.yCoord * range, lookVec.zCoord * range));
 		BlockPos hitpos = raytrace != null ? raytrace.getBlockPos() : null;
 		double rx = hitpos == null ? range : Math.min(range, Math.abs(posX - hitpos.getX()));
 		double ry = hitpos == null ? range : Math.min(range, Math.abs(posY - hitpos.getY()));
 		double rz = hitpos == null ? range : Math.min(range, Math.abs(posZ - hitpos.getZ()));
 		Vec3d destVec = srcVec.addVector(lookVec.xCoord * range, lookVec.yCoord * range, lookVec.zCoord * range);
 		float var9 = 8.0F;
-		List<Entity> possibleList = worldObj.getEntitiesWithinAABBExcludingEntity(this, getEntityBoundingBox().offset(lookVec.xCoord * rx, lookVec.yCoord * ry, lookVec.zCoord * rz).expand(var9, var9, var9));
+		List<Entity> possibleList = world.getEntitiesWithinAABBExcludingEntity(this, getEntityBoundingBox().offset(lookVec.xCoord * rx, lookVec.yCoord * ry, lookVec.zCoord * rz).expand(var9, var9, var9));
 		double hitDist = 0.0D;
 		for (Entity possibleEntity : possibleList)
 			if (possibleEntity != this && possibleEntity instanceof EntityLivingBase && !EntityUtil.isEntityDread((EntityLivingBase)possibleEntity))
@@ -617,7 +617,7 @@ public class EntityChagaroth extends EntityMob implements IDreadEntity {
 
 	protected void addMouthParticles()
 	{
-		if (worldObj.isRemote)
+		if (world.isRemote)
 		{
 			Vec3d vector = getLookVec();
 
@@ -642,11 +642,11 @@ public class EntityChagaroth extends EntityMob implements IDreadEntity {
 				dy *= velocity;
 				dz *= velocity;
 
-				worldObj.spawnParticle(EnumParticleTypes.ITEM_CRACK, px + getRNG().nextDouble() - 0.5D, py + getRNG().nextDouble() - 0.5D, pz + getRNG().nextDouble() - 0.5D, dx, dy, dz, Item.getIdFromItem(ACItems.dreaded_shard_of_abyssalnite));
-				worldObj.spawnParticle(EnumParticleTypes.ITEM_CRACK, px + getRNG().nextDouble() - 0.5D, py + getRNG().nextDouble() - 0.5D, pz + getRNG().nextDouble() - 0.5D, dx, dy, dz, Item.getIdFromItem(ACItems.dread_fragment));
+				world.spawnParticle(EnumParticleTypes.ITEM_CRACK, px + getRNG().nextDouble() - 0.5D, py + getRNG().nextDouble() - 0.5D, pz + getRNG().nextDouble() - 0.5D, dx, dy, dz, Item.getIdFromItem(ACItems.dreaded_shard_of_abyssalnite));
+				world.spawnParticle(EnumParticleTypes.ITEM_CRACK, px + getRNG().nextDouble() - 0.5D, py + getRNG().nextDouble() - 0.5D, pz + getRNG().nextDouble() - 0.5D, dx, dy, dz, Item.getIdFromItem(ACItems.dread_fragment));
 			}
 		} else
-			worldObj.setEntityState(this, (byte)23);
+			world.setEntityState(this, (byte)23);
 	}
 
 	@Override
@@ -665,11 +665,11 @@ public class EntityChagaroth extends EntityMob implements IDreadEntity {
 		{
 			double d0 = entityIn.posX - posX;
 			double d1 = entityIn.posZ - posZ;
-			double d2 = MathHelper.abs_max(d0, d1);
+			double d2 = MathHelper.absMax(d0, d1);
 
 			if (d2 >= 0.01D)
 			{
-				d2 = MathHelper.sqrt_double(d2);
+				d2 = MathHelper.sqrt(d2);
 				d0 = d0 / d2;
 				d1 = d1 / d2;
 				double d3 = 1.0D / d2;
@@ -735,7 +735,7 @@ public class EntityChagaroth extends EntityMob implements IDreadEntity {
 	@Override
 	public boolean attackEntityFrom(DamageSource par1DamageSource, float par2)
 	{
-		if(par2 > 30) par2 = 10 + worldObj.rand.nextInt(10);
+		if(par2 > 30) par2 = 10 + world.rand.nextInt(10);
 
 		return super.attackEntityFrom(par1DamageSource, par2);
 	}
@@ -746,7 +746,7 @@ public class EntityChagaroth extends EntityMob implements IDreadEntity {
 		++deathTicks;
 
 		if(deathTicks % 20 == 0)
-			for(Entity entity : worldObj.getEntitiesInAABBexcluding(this, getEntityBoundingBox().expand(15, 15, 15), entity -> entity instanceof EntityDreadguard || entity instanceof EntityDreadSpawn
+			for(Entity entity : world.getEntitiesInAABBexcluding(this, getEntityBoundingBox().expand(15, 15, 15), entity -> entity instanceof EntityDreadguard || entity instanceof EntityDreadSpawn
 				|| entity instanceof EntityGreaterDreadSpawn || entity instanceof EntityLesserDreadbeast || entity instanceof EntityChagarothSpawn || entity instanceof EntityChagarothFist))
 				entity.attackEntityFrom(DamageSource.outOfWorld, 20);
 
@@ -756,19 +756,19 @@ public class EntityChagaroth extends EntityMob implements IDreadEntity {
 			float f1 = (rand.nextFloat() - 0.5F) * 4.0F;
 			float f2 = (rand.nextFloat() - 0.5F) * 8.0F;
 			if(ACConfig.particleEntity){
-				worldObj.spawnParticle(EnumParticleTypes.FLAME, posX + f, posY + 2.0D + f1, posZ + f2, 0.0D, 0.0D, 0.0D);
-				worldObj.spawnParticle(EnumParticleTypes.LAVA, posX + f, posY + 2.0D + f1, posZ + f2, 0.0D, 0.0D, 0.0D);
-				worldObj.spawnParticle(EnumParticleTypes.SMOKE_LARGE, posX + f, posY + 2.0D + f1, posZ + f2, 0.0D, 0.0D, 0.0D);
-				worldObj.spawnParticle(EnumParticleTypes.EXPLOSION_NORMAL, posX + f, posY + 2.0D + f1, posZ + f2, 0.0D, 0.0D, 0.0D);
+				world.spawnParticle(EnumParticleTypes.FLAME, posX + f, posY + 2.0D + f1, posZ + f2, 0.0D, 0.0D, 0.0D);
+				world.spawnParticle(EnumParticleTypes.LAVA, posX + f, posY + 2.0D + f1, posZ + f2, 0.0D, 0.0D, 0.0D);
+				world.spawnParticle(EnumParticleTypes.SMOKE_LARGE, posX + f, posY + 2.0D + f1, posZ + f2, 0.0D, 0.0D, 0.0D);
+				world.spawnParticle(EnumParticleTypes.EXPLOSION_NORMAL, posX + f, posY + 2.0D + f1, posZ + f2, 0.0D, 0.0D, 0.0D);
 				if (deathTicks >= 190 && deathTicks <= 200)
-					worldObj.spawnParticle(EnumParticleTypes.EXPLOSION_HUGE, posX + f, posY + 2.0D + f1, posZ + f2, 0.0D, 0.0D, 0.0D);
+					world.spawnParticle(EnumParticleTypes.EXPLOSION_HUGE, posX + f, posY + 2.0D + f1, posZ + f2, 0.0D, 0.0D, 0.0D);
 			}
 		}
 
 		int i;
 		int j;
 
-		if (!worldObj.isRemote)
+		if (!world.isRemote)
 			if (deathTicks > 150 && deathTicks % 5 == 0)
 			{
 				i = 500;
@@ -777,26 +777,26 @@ public class EntityChagaroth extends EntityMob implements IDreadEntity {
 				{
 					j = EntityXPOrb.getXPSplit(i);
 					i -= j;
-					worldObj.spawnEntityInWorld(new EntityXPOrb(worldObj, posX, posY, posZ, j));
+					world.spawnEntity(new EntityXPOrb(world, posX, posY, posZ, j));
 					if(deathTicks == 100 || deathTicks == 120 || deathTicks == 140 || deathTicks == 160 || deathTicks == 180){
-						worldObj.spawnEntityInWorld(new EntityItem(worldObj, posX + posneg(3), posY + rand.nextInt(3), posZ + posneg(3), new ItemStack(ACItems.dread_fragment, 4)));
-						worldObj.spawnEntityInWorld(new EntityItem(worldObj, posX + posneg(3), posY + rand.nextInt(3), posZ + posneg(3), new ItemStack(ACItems.dreaded_chunk_of_abyssalnite, 2)));
-						worldObj.spawnEntityInWorld(new EntityItem(worldObj, posX + posneg(3), posY + rand.nextInt(3), posZ + posneg(3), new ItemStack(ACItems.dreaded_shard_of_abyssalnite)));
-						worldObj.spawnEntityInWorld(new EntityItem(worldObj, posX + posneg(3), posY + rand.nextInt(3), posZ + posneg(3), new ItemStack(ACItems.dreadium_ingot)));
+						world.spawnEntity(new EntityItem(world, posX + posneg(3), posY + rand.nextInt(3), posZ + posneg(3), new ItemStack(ACItems.dread_fragment, 4)));
+						world.spawnEntity(new EntityItem(world, posX + posneg(3), posY + rand.nextInt(3), posZ + posneg(3), new ItemStack(ACItems.dreaded_chunk_of_abyssalnite, 2)));
+						world.spawnEntity(new EntityItem(world, posX + posneg(3), posY + rand.nextInt(3), posZ + posneg(3), new ItemStack(ACItems.dreaded_shard_of_abyssalnite)));
+						world.spawnEntity(new EntityItem(world, posX + posneg(3), posY + rand.nextInt(3), posZ + posneg(3), new ItemStack(ACItems.dreadium_ingot)));
 					}
 				}
 			}
 
-		if(deathTicks == 20 && !worldObj.isRemote)
-			SpecialTextUtil.ChagarothGroup(worldObj, I18n.translateToLocal("message.chagaroth.death.1"));
-		if(deathTicks == 80 && !worldObj.isRemote)
-			SpecialTextUtil.ChagarothGroup(worldObj, I18n.translateToLocal("message.chagaroth.death.2"));
-		if(deathTicks == 140 && !worldObj.isRemote)
-			SpecialTextUtil.ChagarothGroup(worldObj, I18n.translateToLocal("message.chagaroth.death.3"));
-		if(deathTicks == 200 && !worldObj.isRemote){
-			SpecialTextUtil.ChagarothGroup(worldObj, I18n.translateToLocal("message.chagaroth.death.4"));
+		if(deathTicks == 20 && !world.isRemote)
+			SpecialTextUtil.ChagarothGroup(world, I18n.translateToLocal("message.chagaroth.death.1"));
+		if(deathTicks == 80 && !world.isRemote)
+			SpecialTextUtil.ChagarothGroup(world, I18n.translateToLocal("message.chagaroth.death.2"));
+		if(deathTicks == 140 && !world.isRemote)
+			SpecialTextUtil.ChagarothGroup(world, I18n.translateToLocal("message.chagaroth.death.3"));
+		if(deathTicks == 200 && !world.isRemote){
+			SpecialTextUtil.ChagarothGroup(world, I18n.translateToLocal("message.chagaroth.death.4"));
 			setDead();
-			worldObj.spawnEntityInWorld(new EntityItem(worldObj, posX, posY, posZ, new ItemStack(ACItems.dread_plagued_gateway_key)));
+			world.spawnEntity(new EntityItem(world, posX, posY, posZ, new ItemStack(ACItems.dread_plagued_gateway_key)));
 		}
 	}
 
@@ -810,7 +810,7 @@ public class EntityChagaroth extends EntityMob implements IDreadEntity {
 		par1EntityLivingData = super.onInitialSpawn(difficulty, par1EntityLivingData);
 
 		IAttributeInstance attribute = getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE);
-		Calendar calendar = worldObj.getCurrentDate();
+		Calendar calendar = world.getCurrentDate();
 
 		attribute.removeModifier(attackDamageBoost);
 

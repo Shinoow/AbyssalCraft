@@ -92,7 +92,7 @@ public class EntityAntiChicken extends EntityAnimal implements IAntiEntity {
 
 		field_70886_e += field_70889_i * 2.0F;
 
-		if (!isChild() && !worldObj.isRemote && --timeUntilNextEgg <= 0)
+		if (!isChild() && !world.isRemote && --timeUntilNextEgg <= 0)
 		{
 			playSound(SoundEvents.ENTITY_CHICKEN_EGG, 1.0F, (rand.nextFloat() - rand.nextFloat()) * 0.2F + 1.0F);
 			dropItem(Items.EGG, 1);
@@ -155,11 +155,11 @@ public class EntityAntiChicken extends EntityAnimal implements IAntiEntity {
 	@Override
 	protected void collideWithEntity(Entity par1Entity)
 	{
-		if(!worldObj.isRemote && par1Entity instanceof EntityChicken){
-			boolean flag = worldObj.getGameRules().getBoolean("mobGriefing");
+		if(!world.isRemote && par1Entity instanceof EntityChicken){
+			boolean flag = world.getGameRules().getBoolean("mobGriefing");
 			if(ACConfig.nuclearAntimatterExplosions)
-				ExplosionUtil.newODBExplosion(worldObj, this, posX, posY, posZ, 40, true, flag);
-			else worldObj.createExplosion(this, posX, posY, posZ, 5, flag);
+				ExplosionUtil.newODBExplosion(world, this, posX, posY, posZ, 40, true, flag);
+			else world.createExplosion(this, posX, posY, posZ, 5, flag);
 			setDead();
 		}
 		else par1Entity.applyEntityCollision(this);
@@ -168,7 +168,7 @@ public class EntityAntiChicken extends EntityAnimal implements IAntiEntity {
 	@Override
 	public EntityAntiChicken createChild(EntityAgeable par1EntityAgeable)
 	{
-		return new EntityAntiChicken(worldObj);
+		return new EntityAntiChicken(world);
 	}
 
 	@Override

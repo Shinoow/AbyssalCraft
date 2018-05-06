@@ -78,7 +78,7 @@ public class BlockCrate extends BlockContainer
 					float f1 = random.nextFloat() * 0.8F + 0.1F;
 					EntityItem entityitem;
 
-					for (float f2 = random.nextFloat() * 0.8F + 0.1F; itemstack.stackSize > 0; par1World.spawnEntityInWorld(entityitem))
+					for (float f2 = random.nextFloat() * 0.8F + 0.1F; itemstack.stackSize > 0; par1World.spawnEntity(entityitem))
 					{
 						int k1 = random.nextInt(21) + 10;
 

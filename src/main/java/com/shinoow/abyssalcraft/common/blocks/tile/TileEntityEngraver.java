@@ -163,8 +163,8 @@ public class TileEntityEngraver extends TileEntity implements ISidedInventory, I
 	@Override
 	public void onLoad()
 	{
-		if(worldObj.isRemote)
-			worldObj.loadedTileEntityList.remove(this);
+		if(world.isRemote)
+			world.tickableTileEntities.remove(this);
 	}
 
 	@Override
@@ -208,7 +208,7 @@ public class TileEntityEngraver extends TileEntity implements ISidedInventory, I
 		if (engraverProcessTime > 0)
 		{
 			flag1 = true;
-			BlockEngraver.updateEngraverBlockState(worldObj, pos);
+			BlockEngraver.updateEngraverBlockState(world, pos);
 		}
 
 
@@ -256,9 +256,9 @@ public class TileEntityEngraver extends TileEntity implements ISidedInventory, I
 	}
 
 	@Override
-	public boolean isUseableByPlayer(EntityPlayer par1EntityPlayer)
+	public boolean isUsableByPlayer(EntityPlayer par1EntityPlayer)
 	{
-		return worldObj.getTileEntity(pos) != this ? false : par1EntityPlayer.getDistanceSq(pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D) <= 64.0D;
+		return world.getTileEntity(pos) != this ? false : par1EntityPlayer.getDistanceSq(pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D) <= 64.0D;
 	}
 
 	@Override

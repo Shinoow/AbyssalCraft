@@ -52,7 +52,7 @@ public class CleansingRitualMessage extends AbstractClientMessage<CleansingRitua
 	@Override
 	public void process(EntityPlayer player, Side side) {
 
-		Chunk chunk = player.worldObj.getChunkFromBlockCoords(new BlockPos(x, 0, z));
+		Chunk chunk = player.world.getChunkFromBlockCoords(new BlockPos(x, 0, z));
 		int chunkX = x & 0xF;
 		int chunkZ = z & 0xF;
 		chunk.getBiomeArray()[ chunkZ << 4 | chunkX ] = (byte) biomeID;

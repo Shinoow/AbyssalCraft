@@ -40,7 +40,7 @@ public class MapGenDreadlandsMine extends MapGenStructure
 			Entry<?, ?> entry = (Entry<?, ?>)iterator.next();
 
 			if (((String)entry.getKey()).equals("chance"))
-				spawnChance = MathHelper.parseDoubleWithDefault((String)entry.getValue(), spawnChance);
+				spawnChance = MathHelper.getDouble((String)entry.getValue(), spawnChance);
 		}
 	}
 
@@ -53,6 +53,6 @@ public class MapGenDreadlandsMine extends MapGenStructure
 	@Override
 	protected StructureStart getStructureStart(int par1, int par2)
 	{
-		return new StructureDreadlandsMineStart(worldObj, rand, par1, par2);
+		return new StructureDreadlandsMineStart(world, rand, par1, par2);
 	}
 }

@@ -41,28 +41,28 @@ public class DisruptionAnimalCorruption extends DisruptionEntry {
 				cow.copyLocationAndAnglesFrom(animal);
 				cow.onInitialSpawn(world.getDifficultyForLocation(pos), null);
 				world.removeEntity(animal);
-				world.spawnEntityInWorld(cow);
+				world.spawnEntity(cow);
 			}
 			else if(animal instanceof EntityChicken){
 				EntityEvilChicken chicken = new EntityEvilChicken(world);
 				chicken.copyLocationAndAnglesFrom(animal);
 				chicken.onInitialSpawn(world.getDifficultyForLocation(pos), null);
 				world.removeEntity(animal);
-				world.spawnEntityInWorld(chicken);
+				world.spawnEntity(chicken);
 			}
 			else if(animal instanceof EntityPig){
 				EntityEvilpig pig = new EntityEvilpig(world);
 				pig.copyLocationAndAnglesFrom(animal);
 				pig.onInitialSpawn(world.getDifficultyForLocation(pos), null);
 				world.removeEntity(animal);
-				world.spawnEntityInWorld(pig);
+				world.spawnEntity(pig);
 			}
 			else if(animal instanceof EntitySheep){
 				EntityEvilSheep sheep = new EntityEvilSheep(world);
 				sheep.copyLocationAndAnglesFrom(animal);
 				sheep.onInitialSpawn(world.getDifficultyForLocation(pos), null);
 				world.removeEntity(animal);
-				world.spawnEntityInWorld(sheep);
+				world.spawnEntity(sheep);
 			}
 			else if(animal instanceof EntityHorse && !((EntityHorse) animal).getType().isUndead()){
 				((EntityHorse) animal).setHorseTamed(false);

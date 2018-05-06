@@ -17,6 +17,7 @@ import com.shinoow.abyssalcraft.api.APIUtils;
 import com.shinoow.abyssalcraft.api.entity.EntityUtil;
 import com.shinoow.abyssalcraft.api.entity.IOmotholEntity;
 import com.shinoow.abyssalcraft.api.item.ACItems;
+import com.shinoow.abyssalcraft.common.entity.ai.EntityAIWorship;
 import com.shinoow.abyssalcraft.common.items.ItemDrainStaff;
 import com.shinoow.abyssalcraft.common.items.ItemNecronomicon;
 import com.shinoow.abyssalcraft.lib.ACConfig;
@@ -77,6 +78,7 @@ public class EntityRemnant extends EntityMob implements IMerchant, IOmotholEntit
 		tasks.addTask(7, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
 		tasks.addTask(7, new EntityAIWatchClosest(this, EntityRemnant.class, 8.0F));
 		tasks.addTask(7, new EntityAIWatchClosest(this, EntityGatekeeperMinion.class, 8.0F));
+		tasks.addTask(8, new EntityAIWorship(this));
 		targetTasks.addTask(1, new EntityAIHurtByTarget(this, false));
 		setSize(0.6F, 1.95F);
 
@@ -158,12 +160,12 @@ public class EntityRemnant extends EntityMob implements IMerchant, IOmotholEntit
 		if(isEntityAlive() && !par1EntityPlayer.isSneaking() && !isAngry())
 			if(EntityUtil.hasNecronomicon(par1EntityPlayer) && ownsTheirBook(par1EntityPlayer)){
 				if(!isTrading()){
-					if(!worldObj.isRemote){
+					if(!world.isRemote){
 						setCustomer(par1EntityPlayer);
 						par1EntityPlayer.displayVillagerTradeGui(this);
 						return true;
 					}
-				} else if(!tradingPlayer.getUniqueID().equals(par1EntityPlayer.getUniqueID())) par1EntityPlayer.addChatMessage(new TextComponentString(getName()+": "+I18n.translateToLocal("message.remnant.busy")));
+				} else if(!tradingPlayer.getUniqueID().equals(par1EntityPlayer.getUniqueID())) par1EntityPlayer.sendMessage(new TextComponentString(getName()+": "+I18n.translateToLocal("message.remnant.busy")));
 			} else {
 				insult(par1EntityPlayer);
 				return true;
@@ -191,19 +193,19 @@ public class EntityRemnant extends EntityMob implements IMerchant, IOmotholEntit
 	 * @param player The target to insult
 	 */
 	private void insult(EntityPlayer player){
-		int insultNum = worldObj.rand.nextInt(3);
+		int insultNum = world.rand.nextInt(3);
 		String insult = getName()+": "+String.format(getInsult(insultNum), player.getName());
 		String translated = getName()+": "+String.format(I18n.translateToLocal("message.remnant.insult."+insultNum), player.getName());
 
-		if(worldObj.isRemote){
-			List<EntityPlayer> players = worldObj.getEntitiesWithinAABB(EntityPlayer.class, player.getEntityBoundingBox().expand(16D, 16D, 16D));
+		if(world.isRemote){
+			List<EntityPlayer> players = world.getEntitiesWithinAABB(EntityPlayer.class, player.getEntityBoundingBox().expand(16D, 16D, 16D));
 			if(players != null){
 				Iterator<EntityPlayer> i = players.iterator();
 				while(i.hasNext()){
 					EntityPlayer player1 = i.next();
 					if(EntityUtil.hasNecronomicon(player1))
-						player1.addChatMessage(new TextComponentString(translated));
-					else player1.addChatMessage(new TextComponentString(insult));
+						player1.sendMessage(new TextComponentString(translated));
+					else player1.sendMessage(new TextComponentString(insult));
 				}
 			}
 		}
@@ -248,7 +250,7 @@ public class EntityRemnant extends EntityMob implements IMerchant, IOmotholEntit
 	 */
 	public void enrage(boolean call){
 		if(call){
-			List<EntityRemnant> friends = worldObj.getEntitiesWithinAABB(getClass(), getEntityBoundingBox().expand(16D, 16D, 16D));
+			List<EntityRemnant> friends = world.getEntitiesWithinAABB(getClass(), getEntityBoundingBox().expand(16D, 16D, 16D));
 			if(friends != null){
 				Iterator<EntityRemnant> iter = friends.iterator();
 				while(iter.hasNext())
@@ -431,7 +433,7 @@ public class EntityRemnant extends EntityMob implements IMerchant, IOmotholEntit
 	private void addDefaultEquipmentAndRecipies(int par1)
 	{
 		if (tradingList != null)
-			field_82191_bN = MathHelper.sqrt_float(tradingList.size()) * 0.2F;
+			field_82191_bN = MathHelper.sqrt(tradingList.size()) * 0.2F;
 		else
 			field_82191_bN = 0.0F;
 
@@ -480,7 +482,7 @@ public class EntityRemnant extends EntityMob implements IMerchant, IOmotholEntit
 				if (rand.nextFloat() < adjustProbability(0.07F))
 				{
 					Enchantment enchantment = Enchantment.REGISTRY.getRandomObject(rand);
-					int i1 = MathHelper.getRandomIntegerInRange(rand, enchantment.getMinLevel(), enchantment.getMaxLevel());
+					int i1 = MathHelper.getInt(rand, enchantment.getMinLevel(), enchantment.getMaxLevel());
 					ItemStack itemstack = Items.ENCHANTED_BOOK.getEnchantedItemStack(new EnchantmentData(enchantment, i1));
 					k = 2 + rand.nextInt(5 + i1 * 10) + 3 * i1;
 					list.add(new MerchantRecipe(new ItemStack(Items.BOOK), new ItemStack(ACItems.elder_engraved_coin, k), itemstack));
@@ -727,7 +729,7 @@ public class EntityRemnant extends EntityMob implements IMerchant, IOmotholEntit
 	@Override
 	public void verifySellingItem(ItemStack par1ItemStack)
 	{
-		if (!worldObj.isRemote && livingSoundTime > -getTalkInterval() + 20)
+		if (!world.isRemote && livingSoundTime > -getTalkInterval() + 20)
 		{
 			livingSoundTime = -getTalkInterval();
 
@@ -757,11 +759,11 @@ public class EntityRemnant extends EntityMob implements IMerchant, IOmotholEntit
 	@Override
 	public IEntityLivingData onInitialSpawn(DifficultyInstance difficulty, IEntityLivingData data){
 		data = super.onInitialSpawn(difficulty, data);
-		applyRandomTrade(worldObj.rand);
+		applyRandomTrade(world.rand);
 
 		if (getItemStackFromSlot(EntityEquipmentSlot.HEAD) == null)
 		{
-			Calendar calendar = worldObj.getCurrentDate();
+			Calendar calendar = world.getCurrentDate();
 
 			if (calendar.get(2) + 1 == 10 && calendar.get(5) == 31 && rand.nextFloat() < 0.25F)
 			{

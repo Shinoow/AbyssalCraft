@@ -74,8 +74,8 @@ public class AbyssalCraftClientEventHooks {
 	public void onMouseEvent(MouseEvent event) {
 		int button = event.getButton() - 100;
 		Minecraft mc = Minecraft.getMinecraft();
-		EntityPlayer player = mc.thePlayer;
-		World world = mc.theWorld;
+		EntityPlayer player = mc.player;
+		World world = mc.world;
 		int key = mc.gameSettings.keyBindAttack.getKeyCode();
 
 		if (button == key && Mouse.isButtonDown(button + 100))
@@ -116,7 +116,7 @@ public class AbyssalCraftClientEventHooks {
 			theRenderViewEntity.posZ+0.5D
 			);
 		RayTraceResult returnMOP = null;
-		if (mc.theWorld != null)
+		if (mc.world != null)
 		{
 			double var2 = dist;
 			returnMOP = theRenderViewEntity.rayTrace(var2, 0);
@@ -132,7 +132,7 @@ public class AbyssalCraftClientEventHooks {
 				lookvec.zCoord * var2);
 			Entity pointedEntity = null;
 			float var9 = 1.0F;
-			List<Entity> list = mc.theWorld.getEntitiesWithinAABBExcludingEntity(
+			List<Entity> list = mc.world.getEntitiesWithinAABBExcludingEntity(
 				theRenderViewEntity,
 				theViewBoundingBox.addCoord(
 					lookvec.xCoord * var2,
@@ -183,8 +183,8 @@ public class AbyssalCraftClientEventHooks {
 	public void onKeyPressed(KeyInputEvent event){
 
 		if(ClientProxy.staff_mode.isPressed()){
-			ItemStack mainStack = Minecraft.getMinecraft().thePlayer.getHeldItem(EnumHand.MAIN_HAND);
-			ItemStack offStack = Minecraft.getMinecraft().thePlayer.getHeldItem(EnumHand.OFF_HAND);
+			ItemStack mainStack = Minecraft.getMinecraft().player.getHeldItem(EnumHand.MAIN_HAND);
+			ItemStack offStack = Minecraft.getMinecraft().player.getHeldItem(EnumHand.OFF_HAND);
 			int mode1 = -1, mode2 = -1;
 
 			if(mainStack != null && mainStack.getItem() == ACItems.staff_of_the_gatekeeper){
@@ -194,7 +194,7 @@ public class AbyssalCraftClientEventHooks {
 					if(mode1 == 0)
 						mode1 = 1;
 					else mode1 = 0;
-					Minecraft.getMinecraft().thePlayer.addChatMessage(new TextComponentString(I18n.format("tooltip.staff.mode.1")+": "+TextFormatting.GOLD + I18n.format(mode1 == 1 ? "item.drainstaff.normal.name" : "item.gatewaykey.name")));
+					Minecraft.getMinecraft().player.sendMessage(new TextComponentString(I18n.format("tooltip.staff.mode.1")+": "+TextFormatting.GOLD + I18n.format(mode1 == 1 ? "item.drainstaff.normal.name" : "item.gatewaykey.name")));
 				}
 			}
 			if(offStack != null && offStack.getItem() == ACItems.staff_of_the_gatekeeper){
@@ -204,7 +204,7 @@ public class AbyssalCraftClientEventHooks {
 					if(mode2 == 0)
 						mode2 = 1;
 					else mode2 = 0;
-					Minecraft.getMinecraft().thePlayer.addChatMessage(new TextComponentString(I18n.format("tooltip.staff.mode.1")+": "+TextFormatting.GOLD + I18n.format(mode2 == 1 ? "item.drainstaff.normal.name" : "item.gatewaykey.name")));
+					Minecraft.getMinecraft().player.sendMessage(new TextComponentString(I18n.format("tooltip.staff.mode.1")+": "+TextFormatting.GOLD + I18n.format(mode2 == 1 ? "item.drainstaff.normal.name" : "item.gatewaykey.name")));
 				}
 			}
 

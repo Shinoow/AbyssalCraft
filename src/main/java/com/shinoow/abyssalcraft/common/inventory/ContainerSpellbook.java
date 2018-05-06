@@ -79,7 +79,7 @@ public class ContainerSpellbook extends Container {
 	{
 		super.onContainerClosed(playerIn);
 
-		if (!playerIn.worldObj.isRemote)
+		if (!playerIn.world.isRemote)
 			for (int i = 0; i < 9; ++i)
 			{
 				ItemStack itemstack = inventory.removeStackFromSlot(i);

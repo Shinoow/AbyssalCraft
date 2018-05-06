@@ -70,14 +70,14 @@ public class BlockHouse extends Block {
 			}
 		} else if(!par1World.isRemote) {
 			if(par1World.rand.nextFloat() > 0.1F){
-				par5EntityPlayer.addChatMessage(new TextComponentString("Not in a dev environment, aborting structure generation test."));
+				par5EntityPlayer.sendMessage(new TextComponentString("Not in a dev environment, aborting structure generation test."));
 				par1World.setBlockToAir(pos);
 				return true;
 			}
 
 			boolean stuff = par1World.rand.nextBoolean();
 
-			par5EntityPlayer.addChatMessage(new TextComponentString(stuff ? "Inverted house... still no windows or a door..." : "A house! Without windows! Nor a door!"));
+			par5EntityPlayer.sendMessage(new TextComponentString(stuff ? "Inverted house... still no windows or a door..." : "A house! Without windows! Nor a door!"));
 
 			IBlockState planks = stuff ? Blocks.COBBLESTONE.getDefaultState() : Blocks.PLANKS.getDefaultState();
 			IBlockState cobble = stuff ? Blocks.PLANKS.getDefaultState() : Blocks.COBBLESTONE.getDefaultState();

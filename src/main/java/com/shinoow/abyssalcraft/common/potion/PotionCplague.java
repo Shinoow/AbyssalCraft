@@ -57,11 +57,11 @@ public class PotionCplague extends Potion{
 	public void performEffect(EntityLivingBase par1EntityLivingBase, int par2){
 
 		if(par1EntityLivingBase.ticksExisted % 200 == 0 && par1EntityLivingBase.getRNG().nextFloat() > 0.7F
-			&& par1EntityLivingBase.worldObj.getBiome(par1EntityLivingBase.getPosition()) != ACBiomes.purged) {
+			&& par1EntityLivingBase.world.getBiome(par1EntityLivingBase.getPosition()) != ACBiomes.purged) {
 			AxisAlignedBB axisalignedbb = par1EntityLivingBase.getEntityBoundingBox().expand(2.0D, 2.0D, 2.0D);
-			List<EntityLivingBase> list = par1EntityLivingBase.worldObj.<EntityLivingBase>getEntitiesWithinAABB(EntityLivingBase.class, axisalignedbb);
+			List<EntityLivingBase> list = par1EntityLivingBase.world.<EntityLivingBase>getEntitiesWithinAABB(EntityLivingBase.class, axisalignedbb);
 			for(EntityLivingBase entity : list)
-				if(entity.getRNG().nextBoolean() && !entity.worldObj.isRemote && par1EntityLivingBase != entity)
+				if(entity.getRNG().nextBoolean() && !entity.world.isRemote && par1EntityLivingBase != entity)
 					entity.addPotionEffect(PlagueEventHandler.getEffect(par1EntityLivingBase.getActivePotionEffect(this)));
 		}
 
@@ -80,46 +80,46 @@ public class PotionCplague extends Potion{
 		if(par1EntityLivingBase instanceof EntityPlayer && !par1EntityLivingBase.isDead && wasKilled)
 			wasKilled = false;
 
-		if(!par1EntityLivingBase.worldObj.isRemote && par1EntityLivingBase.isDead
-			&& par1EntityLivingBase.worldObj.getBiome(par1EntityLivingBase.getPosition()) != ACBiomes.purged)
+		if(!par1EntityLivingBase.world.isRemote && par1EntityLivingBase.isDead
+			&& par1EntityLivingBase.world.getBiome(par1EntityLivingBase.getPosition()) != ACBiomes.purged)
 			if(par1EntityLivingBase instanceof EntityZombie){
-				if(par1EntityLivingBase.worldObj.getWorldInfo().isHardcoreModeEnabled() && par1EntityLivingBase.worldObj.rand.nextInt(10) == 0) {
-					EntityDepthsGhoul ghoul = new EntityDepthsGhoul(par1EntityLivingBase.worldObj);
+				if(par1EntityLivingBase.world.getWorldInfo().isHardcoreModeEnabled() && par1EntityLivingBase.world.rand.nextInt(10) == 0) {
+					EntityDepthsGhoul ghoul = new EntityDepthsGhoul(par1EntityLivingBase.world);
 					ghoul.copyLocationAndAnglesFrom(par1EntityLivingBase);
-					ghoul.onInitialSpawn(par1EntityLivingBase.worldObj.getDifficultyForLocation(par1EntityLivingBase.getPosition()),(IEntityLivingData)null);
-					par1EntityLivingBase.worldObj.removeEntity(par1EntityLivingBase);
+					ghoul.onInitialSpawn(par1EntityLivingBase.world.getDifficultyForLocation(par1EntityLivingBase.getPosition()),(IEntityLivingData)null);
+					par1EntityLivingBase.world.removeEntity(par1EntityLivingBase);
 					ghoul.setGhoulType(0);
-					par1EntityLivingBase.worldObj.spawnEntityInWorld(ghoul);
+					par1EntityLivingBase.world.spawnEntity(ghoul);
 				}
-				else if(par1EntityLivingBase.worldObj.getDifficulty() == EnumDifficulty.HARD && par1EntityLivingBase.worldObj.rand.nextBoolean()
-					|| par1EntityLivingBase.worldObj.rand.nextInt(8) == 0) {
-					EntityAbyssalZombie entityzombie = new EntityAbyssalZombie(par1EntityLivingBase.worldObj);
+				else if(par1EntityLivingBase.world.getDifficulty() == EnumDifficulty.HARD && par1EntityLivingBase.world.rand.nextBoolean()
+					|| par1EntityLivingBase.world.rand.nextInt(8) == 0) {
+					EntityAbyssalZombie entityzombie = new EntityAbyssalZombie(par1EntityLivingBase.world);
 					entityzombie.copyLocationAndAnglesFrom(par1EntityLivingBase);
-					entityzombie.onInitialSpawn(par1EntityLivingBase.worldObj.getDifficultyForLocation(par1EntityLivingBase.getPosition()),(IEntityLivingData)null);
+					entityzombie.onInitialSpawn(par1EntityLivingBase.world.getDifficultyForLocation(par1EntityLivingBase.getPosition()),(IEntityLivingData)null);
 					if(par1EntityLivingBase.isChild())
 						entityzombie.setChild(true);
-					par1EntityLivingBase.worldObj.removeEntity(par1EntityLivingBase);
-					par1EntityLivingBase.worldObj.spawnEntityInWorld(entityzombie);
+					par1EntityLivingBase.world.removeEntity(par1EntityLivingBase);
+					par1EntityLivingBase.world.spawnEntity(entityzombie);
 				}
 			} else if(par1EntityLivingBase instanceof EntityPlayer && !wasKilled){
 				wasKilled = true;
-				if(par1EntityLivingBase.worldObj.getDifficulty() == EnumDifficulty.HARD && par1EntityLivingBase.worldObj.rand.nextBoolean()
-					|| par1EntityLivingBase.worldObj.rand.nextInt(8) == 0) {
-					EntityAbyssalZombie entityzombie = new EntityAbyssalZombie(par1EntityLivingBase.worldObj);
+				if(par1EntityLivingBase.world.getDifficulty() == EnumDifficulty.HARD && par1EntityLivingBase.world.rand.nextBoolean()
+					|| par1EntityLivingBase.world.rand.nextInt(8) == 0) {
+					EntityAbyssalZombie entityzombie = new EntityAbyssalZombie(par1EntityLivingBase.world);
 					entityzombie.copyLocationAndAnglesFrom(par1EntityLivingBase);
-					entityzombie.onInitialSpawn(par1EntityLivingBase.worldObj.getDifficultyForLocation(par1EntityLivingBase.getPosition()),(IEntityLivingData)null);
+					entityzombie.onInitialSpawn(par1EntityLivingBase.world.getDifficultyForLocation(par1EntityLivingBase.getPosition()),(IEntityLivingData)null);
 					if(par1EntityLivingBase.isChild())
 						entityzombie.setChild(true);
-					par1EntityLivingBase.worldObj.removeEntity(par1EntityLivingBase);
-					par1EntityLivingBase.worldObj.spawnEntityInWorld(entityzombie);
+					par1EntityLivingBase.world.removeEntity(par1EntityLivingBase);
+					par1EntityLivingBase.world.spawnEntity(entityzombie);
 				}
 			} else if(par1EntityLivingBase instanceof EntitySquid)
-				if(par1EntityLivingBase.worldObj.rand.nextBoolean()){
-					EntityCoraliumSquid squid = new EntityCoraliumSquid(par1EntityLivingBase.worldObj);
+				if(par1EntityLivingBase.world.rand.nextBoolean()){
+					EntityCoraliumSquid squid = new EntityCoraliumSquid(par1EntityLivingBase.world);
 					squid.copyLocationAndAnglesFrom(par1EntityLivingBase);
-					squid.onInitialSpawn(par1EntityLivingBase.worldObj.getDifficultyForLocation(par1EntityLivingBase.getPosition()),(IEntityLivingData)null);
-					par1EntityLivingBase.worldObj.removeEntity(par1EntityLivingBase);
-					par1EntityLivingBase.worldObj.spawnEntityInWorld(squid);
+					squid.onInitialSpawn(par1EntityLivingBase.world.getDifficultyForLocation(par1EntityLivingBase.getPosition()),(IEntityLivingData)null);
+					par1EntityLivingBase.world.removeEntity(par1EntityLivingBase);
+					par1EntityLivingBase.world.spawnEntity(squid);
 				}
 	}
 

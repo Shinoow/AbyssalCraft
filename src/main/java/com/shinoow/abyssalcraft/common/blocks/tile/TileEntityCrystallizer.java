@@ -249,7 +249,7 @@ public class TileEntityCrystallizer extends TileEntity implements ISidedInventor
 		if (crystallizerShapeTime > 0)
 			--crystallizerShapeTime;
 
-		if (!worldObj.isRemote)
+		if (!world.isRemote)
 		{
 			if (crystallizerShapeTime == 0 && canCrystallize())
 			{
@@ -285,7 +285,7 @@ public class TileEntityCrystallizer extends TileEntity implements ISidedInventor
 			if (flag != crystallizerShapeTime > 0)
 			{
 				flag1 = true;
-				BlockCrystallizer.updateCrystallizerBlockState(crystallizerShapeTime > 0, worldObj, pos);
+				BlockCrystallizer.updateCrystallizerBlockState(crystallizerShapeTime > 0, world, pos);
 			}
 		}
 
@@ -390,9 +390,9 @@ public class TileEntityCrystallizer extends TileEntity implements ISidedInventor
 	 * Do not make give this method the name canInteractWith because it clashes with Container
 	 */
 	@Override
-	public boolean isUseableByPlayer(EntityPlayer par1EntityPlayer)
+	public boolean isUsableByPlayer(EntityPlayer par1EntityPlayer)
 	{
-		return worldObj.getTileEntity(pos) != this ? false : par1EntityPlayer.getDistanceSq(pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D) <= 64.0D;
+		return world.getTileEntity(pos) != this ? false : par1EntityPlayer.getDistanceSq(pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D) <= 64.0D;
 	}
 
 	@Override

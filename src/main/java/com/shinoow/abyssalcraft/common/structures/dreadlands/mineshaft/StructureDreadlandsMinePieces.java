@@ -255,7 +255,7 @@ public class StructureDreadlandsMinePieces
 				setBlockState(world, iblockstate, x, y, z, structureboundingbox);
 				EntityMinecartChest entityminecartchest = new EntityMinecartChest(world, blockpos.getX() + 0.5F, blockpos.getY() + 0.5F, blockpos.getZ() + 0.5F);
 				entityminecartchest.setLootTable(loot, rand.nextLong());
-				world.spawnEntityInWorld(entityminecartchest);
+				world.spawnEntity(entityminecartchest);
 				return true;
 			} else
 				return false;

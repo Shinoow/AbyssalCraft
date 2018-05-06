@@ -43,7 +43,7 @@ public class ItemCrystalBag extends ItemACBasic {
 		setInventorySize(stack);
 		if (!world.isRemote)
 			if (!player.isSneaking())
-				player.openGui(AbyssalCraft.instance, ACLib.crystalbagGuiID, player.worldObj, (int) player.posX, (int) player.posY, (int) player.posZ);
+				player.openGui(AbyssalCraft.instance, ACLib.crystalbagGuiID, player.world, (int) player.posX, (int) player.posY, (int) player.posZ);
 		return new ActionResult(EnumActionResult.PASS, stack);
 	}
 

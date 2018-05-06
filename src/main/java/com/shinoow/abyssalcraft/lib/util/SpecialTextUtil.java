@@ -135,6 +135,6 @@ public class SpecialTextUtil {
 	public static void customGroup(World world, String name, String text){
 		List<EntityPlayer> players = world.playerEntities;
 		for(EntityPlayer player : players)
-			player.addChatMessage(new TextComponentString(name + ": " + text));
+			player.sendMessage(new TextComponentString(name + ": " + text));
 	}
 }

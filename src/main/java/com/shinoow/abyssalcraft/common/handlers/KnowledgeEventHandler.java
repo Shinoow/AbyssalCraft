@@ -44,9 +44,9 @@ public class KnowledgeEventHandler {
 
 	@SubscribeEvent
 	public void onLivingUpdate(LivingUpdateEvent event){
-		if(event.getEntityLiving() instanceof EntityPlayer && !event.getEntityLiving().worldObj.isRemote){
+		if(event.getEntityLiving() instanceof EntityPlayer && !event.getEntityLiving().world.isRemote){
 			EntityPlayer player = (EntityPlayer)event.getEntityLiving();
-			Biome b = player.worldObj.getBiome(player.getPosition());
+			Biome b = player.world.getBiome(player.getPosition());
 			if(player.ticksExisted % 200 == 0 && ForgeRegistries.BIOMES.getKey(b) != null) {
 				String name = ForgeRegistries.BIOMES.getKey(b).toString();
 				INecroDataCapability cap = NecroDataCapability.getCap(player);
@@ -69,7 +69,7 @@ public class KnowledgeEventHandler {
 
 	@SubscribeEvent
 	public void onDeath(LivingDeathEvent event){
-		if(!(event.getEntityLiving() instanceof EntityPlayer) && !event.getEntityLiving().worldObj.isRemote){
+		if(!(event.getEntityLiving() instanceof EntityPlayer) && !event.getEntityLiving().world.isRemote){
 			EntityLivingBase e = event.getEntityLiving();
 			if(event.getSource() != null && event.getSource().getEntity() instanceof EntityPlayer && EntityList.getEntityString(e) != null) {
 				String name = EntityList.getEntityString(e);

@@ -121,11 +121,11 @@ public class EntityAntiCow extends EntityAnimal implements IAntiEntity {
 	@Override
 	protected void collideWithEntity(Entity par1Entity)
 	{
-		if(!worldObj.isRemote && par1Entity instanceof EntityCow){
-			boolean flag = worldObj.getGameRules().getBoolean("mobGriefing");
+		if(!world.isRemote && par1Entity instanceof EntityCow){
+			boolean flag = world.getGameRules().getBoolean("mobGriefing");
 			if(ACConfig.nuclearAntimatterExplosions)
-				ExplosionUtil.newODBExplosion(worldObj, this, posX, posY, posZ, 40, true, flag);
-			else worldObj.createExplosion(this, posX, posY, posZ, 5, flag);
+				ExplosionUtil.newODBExplosion(world, this, posX, posY, posZ, 40, true, flag);
+			else world.createExplosion(this, posX, posY, posZ, 5, flag);
 			setDead();
 		}
 		else par1Entity.applyEntityCollision(this);
@@ -151,6 +151,6 @@ public class EntityAntiCow extends EntityAnimal implements IAntiEntity {
 	@Override
 	public EntityAntiCow createChild(EntityAgeable par1EntityAgeable)
 	{
-		return new EntityAntiCow(worldObj);
+		return new EntityAntiCow(world);
 	}
 }

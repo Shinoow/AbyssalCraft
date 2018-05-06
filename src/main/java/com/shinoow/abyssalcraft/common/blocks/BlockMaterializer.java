@@ -136,7 +136,7 @@ public class BlockMaterializer extends BlockContainer {
 					entityitem.motionX = (float)rand.nextGaussian() * f3;
 					entityitem.motionY = (float)rand.nextGaussian() * f3 + 0.2F;
 					entityitem.motionZ = (float)rand.nextGaussian() * f3;
-					par1World.spawnEntityInWorld(entityitem);
+					par1World.spawnEntity(entityitem);
 				}
 				if (tileentitymaterializer.getStackInSlot(1) != null){
 					float f = rand.nextFloat() * 0.8F + 0.1F;
@@ -148,7 +148,7 @@ public class BlockMaterializer extends BlockContainer {
 					entityitem.motionX = (float)rand.nextGaussian() * f3;
 					entityitem.motionY = (float)rand.nextGaussian() * f3 + 0.2F;
 					entityitem.motionZ = (float)rand.nextGaussian() * f3;
-					par1World.spawnEntityInWorld(entityitem);
+					par1World.spawnEntity(entityitem);
 				}
 
 				par1World.updateComparatorOutputLevel(pos, this);

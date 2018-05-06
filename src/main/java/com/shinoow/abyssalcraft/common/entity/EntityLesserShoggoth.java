@@ -20,7 +20,7 @@ import com.shinoow.abyssalcraft.api.entity.IOmotholEntity;
 import com.shinoow.abyssalcraft.api.item.ACItems;
 import com.shinoow.abyssalcraft.common.blocks.BlockShoggothOoze;
 import com.shinoow.abyssalcraft.common.entity.ai.EntityAILesserShoggothAttackMelee;
-import com.shinoow.abyssalcraft.common.entity.ai.EntityAIShoggothWorship;
+import com.shinoow.abyssalcraft.common.entity.ai.EntityAIWorship;
 import com.shinoow.abyssalcraft.common.entity.demon.EntityDemonPig;
 import com.shinoow.abyssalcraft.common.items.armor.ItemEthaxiumArmor;
 import com.shinoow.abyssalcraft.common.world.gen.WorldGenShoggothMonolith;
@@ -93,7 +93,7 @@ public class EntityLesserShoggoth extends EntityMob implements IOmotholEntity {
 		tasks.addTask(7, new EntityAIWatchClosest(this, EntityRemnant.class, 8.0F));
 		tasks.addTask(7, new EntityAIWatchClosest(this, EntityLesserShoggoth.class, 8.0F));
 		tasks.addTask(7, new EntityAIWatchClosest(this, EntityGatekeeperMinion.class, 8.0F));
-		tasks.addTask(8, new EntityAIShoggothWorship(this));
+		tasks.addTask(8, new EntityAIWorship(this));
 		targetTasks.addTask(1, new EntityAIHurtByTarget(this, false));
 		targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityLivingBase.class, 20, true, false, entity -> EntityUtil.isShoggothFood((EntityLivingBase) entity)));
 		targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityPlayer.class, 10, true, false, null));
@@ -111,7 +111,7 @@ public class EntityLesserShoggoth extends EntityMob implements IOmotholEntity {
 	}
 
 	@Override
-	protected PathNavigate getNewNavigator(World worldIn)
+	protected PathNavigate createNavigator(World worldIn)
 	{
 		return new PathNavigateClimber(this, worldIn);
 	}
@@ -136,7 +136,7 @@ public class EntityLesserShoggoth extends EntityMob implements IOmotholEntity {
 	{
 		super.onUpdate();
 
-		if (!worldObj.isRemote)
+		if (!world.isRemote)
 			setBesideClimbableBlock(isCollidedHorizontally);
 	}
 
@@ -150,7 +150,7 @@ public class EntityLesserShoggoth extends EntityMob implements IOmotholEntity {
 	{
 		dataManager.set(CHILD, Byte.valueOf((byte)(par1 ? 1 : 0)));
 
-		if (worldObj != null && !worldObj.isRemote)
+		if (world != null && !world.isRemote)
 		{
 			IAttributeInstance attributeinstance = getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED);
 			attributeinstance.removeModifier(babySpeedBoostModifier);
@@ -223,43 +223,43 @@ public class EntityLesserShoggoth extends EntityMob implements IOmotholEntity {
 	{
 		super.onLivingUpdate();
 
-		if(worldObj.isRemote)
+		if(world.isRemote)
 			setChildSize(isChild());
 
 		monolithTimer++;
 
-		if(getFoodLevel() >= 8 && !worldObj.isRemote && ticksExisted % 20 == 0){
+		if(getFoodLevel() >= 8 && !world.isRemote && ticksExisted % 20 == 0){
 			setFoodLevel(getFoodLevel()-8);
-			if(!isChild() && !worldObj.isRemote){
-				EntityLesserShoggoth shoggoth = new EntityLesserShoggoth(worldObj);
+			if(!isChild() && !world.isRemote){
+				EntityLesserShoggoth shoggoth = new EntityLesserShoggoth(world);
 				shoggoth.copyLocationAndAnglesFrom(this);
-				shoggoth.onInitialSpawn(worldObj.getDifficultyForLocation(new BlockPos(posX, posY, posZ)),(IEntityLivingData)null);
+				shoggoth.onInitialSpawn(world.getDifficultyForLocation(new BlockPos(posX, posY, posZ)),(IEntityLivingData)null);
 				shoggoth.setChild(true);
 				shoggoth.setShoggothType(getShoggothType());
-				worldObj.spawnEntityInWorld(shoggoth);
+				world.spawnEntity(shoggoth);
 				playSound(SoundEvents.ENTITY_CHICKEN_EGG, 1.0F, (rand.nextFloat() - rand.nextFloat()) * 0.2F + 1.0F);
 				if(getAttackTarget() != null && getAttackTarget().isEntityAlive() && getRNG().nextInt(3) == 0) {
 					EntityLivingBase target = getAttackTarget();
-					EntityAcidProjectile acidprojectile = new EntityAcidProjectile(worldObj, this);
+					EntityAcidProjectile acidprojectile = new EntityAcidProjectile(world, this);
 					double d0 = target.posX - posX;
 					double d1 = target.posY + target.getEyeHeight() - 1.100000023841858D - acidprojectile.posY;
 					double d2 = target.posZ - posZ;
-					float f1 = MathHelper.sqrt_double(d0 * d0 + d2 * d2) * 0.2F;
+					float f1 = MathHelper.sqrt(d0 * d0 + d2 * d2) * 0.2F;
 					acidprojectile.setThrowableHeading(d0, d1 + f1, d2, 0.8F, 8.0F);
 					shoggoth.startRiding(acidprojectile);
 					playSound(SoundEvents.ENTITY_SKELETON_SHOOT, 1.0F, 1.0F / (getRNG().nextFloat() * 0.4F + 0.8F));
-					worldObj.spawnEntityInWorld(acidprojectile);
+					world.spawnEntity(acidprojectile);
 				}
 			}
 			else setChild(false);
 		}
 
-		if(!worldObj.isRemote)
+		if(!world.isRemote)
 			for (int l = 0; l < 1; ++l)
 			{
-				int x = MathHelper.floor_double(posX + (l % 2 * 2 - 1) * 0.25F);
-				int y = MathHelper.floor_double(posY);
-				int z = MathHelper.floor_double(posZ + (l / 2 % 2 * 2 - 1) * 0.25F);
+				int x = MathHelper.floor(posX + (l % 2 * 2 - 1) * 0.25F);
+				int y = MathHelper.floor(posY);
+				int z = MathHelper.floor(posZ + (l / 2 % 2 * 2 - 1) * 0.25F);
 
 				spawnOoze(x, y, z);
 				if(!isChild()){
@@ -271,26 +271,26 @@ public class EntityLesserShoggoth extends EntityMob implements IOmotholEntity {
 
 		if(monolithTimer >= 1800){
 			monolithTimer = 0;
-			if(worldObj.getEntitiesWithinAABB(getClass(), getEntityBoundingBox().expand(32D, 32D, 32D)).size() > 5 && !isChild()){
-				for(EntityLesserShoggoth shoggoth : worldObj.getEntitiesWithinAABB(getClass(), getEntityBoundingBox().expand(32D, 32D, 32D)))
+			if(world.getEntitiesWithinAABB(getClass(), getEntityBoundingBox().expand(32D, 32D, 32D)).size() > 5 && !isChild()){
+				for(EntityLesserShoggoth shoggoth : world.getEntitiesWithinAABB(getClass(), getEntityBoundingBox().expand(32D, 32D, 32D)))
 					shoggoth.reduceMonolithTimer();
-				if(!worldObj.isRemote)
-					new WorldGenShoggothMonolith().generate(worldObj, rand, new BlockPos(MathHelper.floor_double(posX) + 3, MathHelper.floor_double(posY), MathHelper.floor_double(posZ) + 3));
+				if(!world.isRemote)
+					new WorldGenShoggothMonolith().generate(world, rand, new BlockPos(MathHelper.floor(posX) + 3, MathHelper.floor(posY), MathHelper.floor(posZ) + 3));
 			}
 		}
 
-		if(ticksExisted % 40 == 0 && ACConfig.consumeItems && !worldObj.isRemote)
-			for(EntityItem entity : worldObj.getEntitiesWithinAABB(EntityItem.class, getEntityBoundingBox())) {
+		if(ticksExisted % 40 == 0 && ACConfig.consumeItems && !world.isRemote)
+			for(EntityItem entity : world.getEntitiesWithinAABB(EntityItem.class, getEntityBoundingBox())) {
 				if(entity.getEntityItem().getItem() instanceof ItemFood) {
 					int food = getFoodLevel() + entity.getEntityItem().stackSize;
 					dataManager.set(FOOD, Integer.valueOf(food));
 					playSound(SoundEvents.ENTITY_PLAYER_BURP, getSoundVolume(), getSoundPitch());
 				} else playSound(SoundEvents.ENTITY_ITEM_BREAK, getSoundVolume(), 1.0F);
-				worldObj.removeEntity(entity);
+				world.removeEntity(entity);
 			}
 
-		for (int i = 0; i < 2 * getBrightness(1.0f) && getShoggothType() == 4 && ACConfig.particleEntity && worldObj.provider.getDimension() != ACLib.dark_realm_id; ++i)
-			worldObj.spawnParticle(EnumParticleTypes.SMOKE_LARGE, posX + (rand.nextDouble() - 0.5D) * width, posY + rand.nextDouble() * height, posZ + (rand.nextDouble() - 0.5D) * width, 0.0D, 0.0D, 0.0D);
+		for (int i = 0; i < 2 * getBrightness(1.0f) && getShoggothType() == 4 && ACConfig.particleEntity && world.provider.getDimension() != ACLib.dark_realm_id; ++i)
+			world.spawnParticle(EnumParticleTypes.SMOKE_LARGE, posX + (rand.nextDouble() - 0.5D) * width, posY + rand.nextDouble() * height, posZ + (rand.nextDouble() - 0.5D) * width, 0.0D, 0.0D, 0.0D);
 	}
 
 	/**
@@ -302,13 +302,13 @@ public class EntityLesserShoggoth extends EntityMob implements IOmotholEntity {
 	private void spawnOoze(int x, int y, int z){
 		BlockPos pos = new BlockPos(x, y, z);
 		if(ACConfig.shoggothOoze)
-			if((worldObj.getBlockState(pos).getMaterial() == Material.AIR || worldObj.getBlockState(pos).getBlock().isReplaceable(worldObj, pos)) && ACBlocks.shoggoth_ooze.canPlaceBlockAt(worldObj, pos)
-				&& worldObj.getBlockState(pos).getBlock() != ACBlocks.shoggoth_ooze && !worldObj.getBlockState(pos).getMaterial().isLiquid())
-				worldObj.setBlockState(pos, ACBlocks.shoggoth_ooze.getDefaultState());
-			else if(worldObj.getBlockState(pos).getBlock() == ACBlocks.shoggoth_ooze && worldObj.getBlockState(pos).getValue(BlockShoggothOoze.LAYERS) < 8
+			if((world.getBlockState(pos).getMaterial() == Material.AIR || world.getBlockState(pos).getBlock().isReplaceable(world, pos)) && ACBlocks.shoggoth_ooze.canPlaceBlockAt(world, pos)
+				&& world.getBlockState(pos).getBlock() != ACBlocks.shoggoth_ooze && !world.getBlockState(pos).getMaterial().isLiquid())
+				world.setBlockState(pos, ACBlocks.shoggoth_ooze.getDefaultState());
+			else if(world.getBlockState(pos).getBlock() == ACBlocks.shoggoth_ooze && world.getBlockState(pos).getValue(BlockShoggothOoze.LAYERS) < 8
 				&& ticksExisted % 10 == 0 && rand.nextInt(5) == 0){
-				IBlockState state = worldObj.getBlockState(pos);
-				worldObj.setBlockState(pos, state.withProperty(BlockShoggothOoze.LAYERS, state.getValue(BlockShoggothOoze.LAYERS) + 1));
+				IBlockState state = world.getBlockState(pos);
+				world.setBlockState(pos, state.withProperty(BlockShoggothOoze.LAYERS, state.getValue(BlockShoggothOoze.LAYERS) + 1));
 			}
 	}
 
@@ -375,7 +375,7 @@ public class EntityLesserShoggoth extends EntityMob implements IOmotholEntity {
 			return false;
 		}
 		if(par1DamageSource == DamageSource.inWall)
-			if(worldObj.getBlockState(getPosition()).getBlock() != ACBlocks.monolith_stone)
+			if(world.getBlockState(getPosition()).getBlock() != ACBlocks.monolith_stone && world.getGameRules().getBoolean("mobGriefing"))
 				sprayAcid(true);
 			else return false;
 		if(par1DamageSource == DamageSource.cactus) return false;
@@ -451,38 +451,41 @@ public class EntityLesserShoggoth extends EntityMob implements IOmotholEntity {
 	}
 
 	public void sprayAcidAt(Entity target) {
-		EntityAcidProjectile acidprojectile = new EntityAcidProjectile(worldObj, this);
+		EntityAcidProjectile acidprojectile = new EntityAcidProjectile(world, this);
 		double d0 = target.posX - posX;
 		double d1 = target.posY + target.getEyeHeight() - 1.100000023841858D - acidprojectile.posY;
 		double d2 = target.posZ - posZ;
-		float f1 = MathHelper.sqrt_double(d0 * d0 + d2 * d2) * 0.2F;
+		float f1 = MathHelper.sqrt(d0 * d0 + d2 * d2) * 0.2F;
 		acidprojectile.setThrowableHeading(d0, d1 + f1, d2, 1.6F, 12.0F);
 		playSound(SoundEvents.ENTITY_SKELETON_SHOOT, 1.0F, 1.0F / (getRNG().nextFloat() * 0.4F + 0.8F));
-		worldObj.spawnEntityInWorld(acidprojectile);
+		world.spawnEntity(acidprojectile);
 	}
 
 	public void sprayAcid(boolean above) {
 		AxisAlignedBB aabb = getEntityBoundingBox().expand(1, 0, 1);
-		worldObj.setEntityState(this, (byte)23);
-		for(EntityLivingBase entity : worldObj.getEntitiesWithinAABB(EntityLivingBase.class, aabb, e -> !(e instanceof EntityLesserShoggoth)))
-			if(entity.attackEntityFrom(AbyssalCraftAPI.acid, (float)(4.5D - getDistanceToEntity(entity))))
-				for(ItemStack armor : entity.getArmorInventoryList())
-					if(armor != null && !(armor.getItem() instanceof ItemEthaxiumArmor))
-						armor.damageItem(isChild() ? 4 : 8, entity);
+		world.setEntityState(this, (byte)23);
+		for(EntityLivingBase entity : world.getEntitiesWithinAABB(EntityLivingBase.class, aabb, e -> !(e instanceof EntityLesserShoggoth)))
+			if(!EntityUtil.canEntityBlockDamageSource(DamageSource.causeMobDamage(this), entity) || !ACConfig.shieldsBlockAcid) {
+				if(entity.attackEntityFrom(AbyssalCraftAPI.acid, (float)(4.5D - getDistanceToEntity(entity))))
+					for(ItemStack armor : entity.getArmorInventoryList())
+						if(armor != null && !(armor.getItem() instanceof ItemEthaxiumArmor))
+							armor.damageItem(isChild() ? 4 : 8, entity);
+			} else if(EntityUtil.damageShield(entity, isChild() ? 6 : 12))
+				entity.attackEntityFrom(AbyssalCraftAPI.acid, 1);
 		for(int i = (int)aabb.minX; i < aabb.maxX+1; i++)
 			for(int j = (int)aabb.minZ; j < aabb.maxZ+1; j++)
 				for(int k = 0; above ? k < 2 : k > -2; k=above ? k + 1 : k - 1){
 					BlockPos pos = new BlockPos(i, above ? aabb.maxY : aabb.minY , j);
-					if(!worldObj.isAirBlock(pos) && worldObj.getBlockState(pos).getBlockHardness(worldObj, pos) < ACConfig.acidResistanceHardness
-						&& worldObj.getBlockState(pos).getBlock() != ACBlocks.monolith_stone
-						&& worldObj.getBlockState(pos).getBlock() != ACBlocks.shoggoth_biomass && !worldObj.getBlockState(pos).getBlock().hasTileEntity(worldObj.getBlockState(pos)))
-						worldObj.destroyBlock(pos, false);
+					if(!world.isAirBlock(pos) && world.getBlockState(pos).getBlockHardness(world, pos) < ACConfig.acidResistanceHardness
+						&& world.getBlockState(pos).getBlock() != ACBlocks.monolith_stone
+						&& world.getBlockState(pos).getBlock() != ACBlocks.shoggoth_biomass && !world.getBlockState(pos).getBlock().hasTileEntity(world.getBlockState(pos)))
+						world.destroyBlock(pos, false);
 				}
 	}
 
 	protected void addAcidParticles()
 	{
-		if (worldObj.isRemote)
+		if (world.isRemote)
 		{
 			AxisAlignedBB aabb = getEntityBoundingBox();
 			Vec3d vector = getLookVec();
@@ -504,10 +507,10 @@ public class EntityLesserShoggoth extends EntityMob implements IOmotholEntity {
 						dy *= velocity;
 						dz *= velocity;
 
-						worldObj.spawnParticle(EnumParticleTypes.SLIME, i, j, k, dx, dy, dz);
+						world.spawnParticle(EnumParticleTypes.SLIME, i, j, k, dx, dy, dz);
 					}
 		} else
-			worldObj.setEntityState(this, (byte)23);
+			world.setEntityState(this, (byte)23);
 	}
 
 	@Override
@@ -572,17 +575,17 @@ public class EntityLesserShoggoth extends EntityMob implements IOmotholEntity {
 
 		setShoggothType(0);
 
-		if(worldObj.provider.getDimension() == ACLib.abyssal_wasteland_id)
+		if(world.provider.getDimension() == ACLib.abyssal_wasteland_id)
 			setShoggothType(1);
-		if(worldObj.provider.getDimension() == ACLib.dreadlands_id)
+		if(world.provider.getDimension() == ACLib.dreadlands_id)
 			setShoggothType(2);
-		if(worldObj.provider.getDimension() == ACLib.omothol_id)
+		if(world.provider.getDimension() == ACLib.omothol_id)
 			setShoggothType(3);
-		if(worldObj.provider.getDimension() == ACLib.dark_realm_id)
+		if(world.provider.getDimension() == ACLib.dark_realm_id)
 			setShoggothType(4);
 
 		if (data == null)
-			data = new EntityLesserShoggoth.GroupData(worldObj.rand.nextFloat() < ForgeModContainer.zombieBabyChance, null);
+			data = new EntityLesserShoggoth.GroupData(world.rand.nextFloat() < ForgeModContainer.zombieBabyChance, null);
 
 		if (data instanceof EntityLesserShoggoth.GroupData)
 		{

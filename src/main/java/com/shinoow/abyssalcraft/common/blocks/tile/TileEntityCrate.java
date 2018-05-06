@@ -178,9 +178,9 @@ public class TileEntityCrate extends TileEntity implements IInventory, ITickable
 	}
 
 	@Override
-	public boolean isUseableByPlayer(EntityPlayer par1EntityPlayer)
+	public boolean isUsableByPlayer(EntityPlayer par1EntityPlayer)
 	{
-		return worldObj.getTileEntity(pos) != this ? false : par1EntityPlayer.getDistanceSq(pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D) <= 64.0D;
+		return world.getTileEntity(pos) != this ? false : par1EntityPlayer.getDistanceSq(pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D) <= 64.0D;
 	}
 
 	@Override
@@ -193,7 +193,7 @@ public class TileEntityCrate extends TileEntity implements IInventory, ITickable
 	public void update()
 	{
 		++ticksSinceSync;
-		if (!worldObj.isRemote && numUsingPlayers != 0 && (ticksSinceSync + pos.getX() + pos.getY() + pos.getZ()) % 200 == 0)
+		if (!world.isRemote && numUsingPlayers != 0 && (ticksSinceSync + pos.getX() + pos.getY() + pos.getZ()) % 200 == 0)
 			numUsingPlayers = 0;
 	}
 
@@ -215,9 +215,9 @@ public class TileEntityCrate extends TileEntity implements IInventory, ITickable
 			numUsingPlayers = 0;
 
 		++numUsingPlayers;
-		worldObj.addBlockEvent(pos, getBlockType(), 1, numUsingPlayers);
-		worldObj.notifyBlockOfStateChange(pos, getBlockType());
-		worldObj.notifyBlockOfStateChange(new BlockPos(pos.getX(), pos.getY() - 1, pos.getZ()), getBlockType());
+		world.addBlockEvent(pos, getBlockType(), 1, numUsingPlayers);
+		world.notifyBlockOfStateChange(pos, getBlockType());
+		world.notifyBlockOfStateChange(new BlockPos(pos.getX(), pos.getY() - 1, pos.getZ()), getBlockType());
 	}
 
 	@Override
@@ -226,9 +226,9 @@ public class TileEntityCrate extends TileEntity implements IInventory, ITickable
 		if (getBlockType() != null && getBlockType() instanceof BlockCrate)
 		{
 			--numUsingPlayers;
-			worldObj.addBlockEvent(pos, getBlockType(), 1, numUsingPlayers);
-			worldObj.notifyBlockOfStateChange(pos, getBlockType());
-			worldObj.notifyBlockOfStateChange(new BlockPos(pos.getX(), pos.getY() - 1, pos.getZ()), getBlockType());
+			world.addBlockEvent(pos, getBlockType(), 1, numUsingPlayers);
+			world.notifyBlockOfStateChange(pos, getBlockType());
+			world.notifyBlockOfStateChange(new BlockPos(pos.getX(), pos.getY() - 1, pos.getZ()), getBlockType());
 		}
 	}
 
@@ -248,7 +248,7 @@ public class TileEntityCrate extends TileEntity implements IInventory, ITickable
 	public int func_98041_l()
 	{
 		if (cachedCrateType == -1)
-			if (worldObj == null || !(getBlockType() instanceof BlockCrate))
+			if (world == null || !(getBlockType() instanceof BlockCrate))
 				return 0;
 
 		return cachedCrateType;

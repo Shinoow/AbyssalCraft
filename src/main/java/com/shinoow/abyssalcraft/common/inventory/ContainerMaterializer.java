@@ -73,7 +73,7 @@ public class ContainerMaterializer extends Container {
 	@Override
 	public boolean canInteractWith(EntityPlayer par1EntityPlayer)
 	{
-		return tileMaterializer.isUseableByPlayer(par1EntityPlayer);
+		return tileMaterializer.isUsableByPlayer(par1EntityPlayer);
 	}
 
 	private int getRecipeAmount(){

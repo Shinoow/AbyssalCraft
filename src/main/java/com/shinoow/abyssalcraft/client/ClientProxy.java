@@ -759,7 +759,7 @@ public class ClientProxy extends CommonProxy {
 		// player even when you are on the server! Sounds absurd, but it's true.
 
 		// Solution is to double-check side before returning the player:
-		return ctx.side.isClient() ? Minecraft.getMinecraft().thePlayer : super.getPlayerEntity(ctx);
+		return ctx.side.isClient() ? Minecraft.getMinecraft().player : super.getPlayerEntity(ctx);
 	}
 
 	@Override
@@ -793,7 +793,7 @@ public class ClientProxy extends CommonProxy {
 
 	public void spawnParticleLegacy(String particleName, double posX, double posY, double posZ, double velX, double velY, double velZ){
 		Minecraft mc = Minecraft.getMinecraft();
-		World theWorld = mc.theWorld;
+		World theWorld = mc.world;
 
 		if (mc != null && mc.getRenderViewEntity() != null && mc.effectRenderer != null)
 		{

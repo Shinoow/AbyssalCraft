@@ -104,7 +104,7 @@ public class BlockODBcore extends Block {
 		{
 			EntityODBcPrimed var6 = new EntityODBcPrimed(par1World, pos.getX() + 0.5F, pos.getY() + 0.5F, pos.getZ() + 0.5F, par5Explosion.getExplosivePlacedBy());
 			var6.fuse = par1World.rand.nextInt(var6.fuse / 4) + var6.fuse / 8;
-			par1World.spawnEntityInWorld(var6);
+			par1World.spawnEntity(var6);
 		}
 	}
 
@@ -120,7 +120,7 @@ public class BlockODBcore extends Block {
 			if (state.getValue(EXPLODE).booleanValue())
 			{
 				EntityODBcPrimed var7 = new EntityODBcPrimed(par1World, pos.getX() + 0.5F, pos.getY() + 0.5F, pos.getZ() + 0.5F, par6);
-				par1World.spawnEntityInWorld(var7);
+				par1World.spawnEntity(var7);
 				par1World.playSound(null, var7.posX, var7.posY, var7.posZ, SoundEvents.ENTITY_TNT_PRIMED, SoundCategory.BLOCKS, 1.0F, 1.0F);
 			}
 	}

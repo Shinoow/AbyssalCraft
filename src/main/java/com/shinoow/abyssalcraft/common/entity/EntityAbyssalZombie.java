@@ -47,12 +47,13 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
-import net.minecraft.world.*;
+import net.minecraft.world.DifficultyInstance;
+import net.minecraft.world.EnumDifficulty;
+import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeModContainer;
 
 public class EntityAbyssalZombie extends EntityMob implements ICoraliumEntity {
 
-	private static final DataParameter<Integer> TYPE = EntityDataManager.createKey(EntityAbyssalZombie.class, DataSerializers.VARINT);
 	private static final DataParameter<Byte> CHILD = EntityDataManager.createKey(EntityAbyssalZombie.class, DataSerializers.BYTE);
 	private static final UUID babySpeedBoostUUID = UUID.fromString("B9766B59-9566-4402-BC1F-2EE2A276D836");
 	private static final AttributeModifier babySpeedBoostModifier = new AttributeModifier(babySpeedBoostUUID, "Baby speed boost", 0.5D, 1);
@@ -90,13 +91,8 @@ public class EntityAbyssalZombie extends EntityMob implements ICoraliumEntity {
 		getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(42.0D);
 		getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.23000000417232513D);
 
-		if(ACConfig.hardcoreMode){
-			getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(50.0D);
-			getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(12.0D);
-		} else {
-			getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(25.0D);
-			getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(6.0D);
-		}
+		getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(ACConfig.hardcoreMode ? 50.0D : 25.0D);
+		getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(ACConfig.hardcoreMode ? 12.0D : 6.0D);
 	}
 
 	@Override
@@ -104,7 +100,6 @@ public class EntityAbyssalZombie extends EntityMob implements ICoraliumEntity {
 	{
 		super.entityInit();
 		dataManager.register(CHILD, Byte.valueOf((byte)0));
-		dataManager.register(TYPE, Integer.valueOf(0));
 	}
 
 	@Override
@@ -125,7 +120,7 @@ public class EntityAbyssalZombie extends EntityMob implements ICoraliumEntity {
 	{
 		dataManager.set(CHILD, Byte.valueOf((byte)(par1 ? 1 : 0)));
 
-		if (worldObj != null && !worldObj.isRemote)
+		if (world != null && !world.isRemote)
 		{
 			IAttributeInstance attributeinstance = getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED);
 			attributeinstance.removeModifier(babySpeedBoostModifier);
@@ -148,24 +143,14 @@ public class EntityAbyssalZombie extends EntityMob implements ICoraliumEntity {
 		return var1;
 	}
 
-	public int getZombieType()
-	{
-		return dataManager.get(TYPE);
-	}
-
-	public void setZombieType(int par1)
-	{
-		dataManager.set(TYPE, Integer.valueOf(par1));
-	}
-
 	@Override
 	public void onLivingUpdate()
 	{
-		if (worldObj.isDaytime() && !worldObj.isRemote && !isChild() && worldObj.provider.getDimension() != ACLib.abyssal_wasteland_id)
+		if (world.isDaytime() && !world.isRemote && !isChild() && world.provider.getDimension() != ACLib.abyssal_wasteland_id)
 		{
 			float var1 = getBrightness(1.0F);
 
-			if (var1 > 0.5F && rand.nextFloat() * 30.0F < (var1 - 0.4F) * 2.0F && worldObj.canSeeSky(new BlockPos(MathHelper.floor_double(posX), MathHelper.floor_double(posY), MathHelper.floor_double(posZ))))
+			if (var1 > 0.5F && rand.nextFloat() * 30.0F < (var1 - 0.4F) * 2.0F && world.canSeeSky(new BlockPos(MathHelper.floor(posX), MathHelper.floor(posY), MathHelper.floor(posZ))))
 			{
 				boolean var2 = true;
 				ItemStack var3 = getItemStackFromSlot(EntityEquipmentSlot.HEAD);
@@ -191,7 +176,7 @@ public class EntityAbyssalZombie extends EntityMob implements ICoraliumEntity {
 			}
 		}
 
-		if(worldObj.isRemote)
+		if(world.isRemote)
 			setChildSize(isChild());
 
 		super.onLivingUpdate();
@@ -204,11 +189,11 @@ public class EntityAbyssalZombie extends EntityMob implements ICoraliumEntity {
 
 		if(flag){
 			if(par1Entity instanceof EntityLivingBase)
-				if(worldObj.provider.getDimension() == ACLib.abyssal_wasteland_id && !EntityUtil.isEntityCoralium((EntityLivingBase)par1Entity)
+				if(world.provider.getDimension() == ACLib.abyssal_wasteland_id && !EntityUtil.isEntityCoralium((EntityLivingBase)par1Entity)
 				|| ACConfig.shouldInfect == true && !EntityUtil.isEntityCoralium((EntityLivingBase)par1Entity))
 					((EntityLivingBase)par1Entity).addPotionEffect(new PotionEffect(AbyssalCraftAPI.coralium_plague, 100));
-			if(getHeldItemMainhand() == null && isBurning() && rand.nextFloat() < worldObj.getDifficulty().getDifficultyId() * 0.3F)
-				par1Entity.setFire(2 * worldObj.getDifficulty().getDifficultyId());
+			if(getHeldItemMainhand() == null && isBurning() && rand.nextFloat() < world.getDifficulty().getDifficultyId() * 0.3F)
+				par1Entity.setFire(2 * world.getDifficulty().getDifficultyId());
 		}
 
 		if(ACConfig.hardcoreMode && par1Entity instanceof EntityPlayer)
@@ -265,11 +250,6 @@ public class EntityAbyssalZombie extends EntityMob implements ICoraliumEntity {
 
 		if(par1NBTTagCompound.getBoolean("IsBaby"))
 			setChild(true);;
-			if (par1NBTTagCompound.hasKey("ZombieType"))
-			{
-				byte var2 = par1NBTTagCompound.getByte("ZombieType");
-				setZombieType(var2);
-			}
 	}
 
 	@Override
@@ -279,8 +259,6 @@ public class EntityAbyssalZombie extends EntityMob implements ICoraliumEntity {
 
 		if (isChild())
 			par1NBTTagCompound.setBoolean("IsBaby", true);
-
-		par1NBTTagCompound.setByte("ZombieType", (byte)getZombieType());
 	}
 
 	@Override
@@ -295,22 +273,22 @@ public class EntityAbyssalZombie extends EntityMob implements ICoraliumEntity {
 	{
 		super.onKillEntity(par1EntityLivingBase);
 
-		if ((worldObj.getDifficulty() == EnumDifficulty.HARD || worldObj.getDifficulty() == EnumDifficulty.NORMAL)
+		if ((world.getDifficulty() == EnumDifficulty.HARD || world.getDifficulty() == EnumDifficulty.NORMAL)
 			&& (par1EntityLivingBase instanceof EntityZombie || par1EntityLivingBase instanceof EntityPlayer
 				|| par1EntityLivingBase instanceof EntityVillager)) {
-			if (worldObj.getDifficulty() != EnumDifficulty.HARD && rand.nextBoolean())
+			if (world.getDifficulty() != EnumDifficulty.HARD && rand.nextBoolean())
 				return;
 
-			EntityAbyssalZombie EntityDephsZombie = new EntityAbyssalZombie(worldObj);
+			EntityAbyssalZombie EntityDephsZombie = new EntityAbyssalZombie(world);
 			EntityDephsZombie.copyLocationAndAnglesFrom(par1EntityLivingBase);
-			worldObj.removeEntity(par1EntityLivingBase);
-			EntityDephsZombie.onInitialSpawn(worldObj.getDifficultyForLocation(new BlockPos(EntityDephsZombie)), (IEntityLivingData)null);
+			world.removeEntity(par1EntityLivingBase);
+			EntityDephsZombie.onInitialSpawn(world.getDifficultyForLocation(new BlockPos(EntityDephsZombie)), (IEntityLivingData)null);
 
 			if (par1EntityLivingBase.isChild())
 				EntityDephsZombie.setChild(true);
 
-			worldObj.spawnEntityInWorld(EntityDephsZombie);
-			worldObj.playEvent((EntityPlayer)null, 1026, new BlockPos(posX, posY, posZ), 0);
+			world.spawnEntity(EntityDephsZombie);
+			world.playEvent((EntityPlayer)null, 1026, new BlockPos(posX, posY, posZ), 0);
 		}
 	}
 
@@ -319,14 +297,11 @@ public class EntityAbyssalZombie extends EntityMob implements ICoraliumEntity {
 	{
 		Object data = super.onInitialSpawn(difficulty, par1EntityLivingData);
 
-		if (worldObj.provider instanceof WorldProviderEnd)
-			setZombieType(2);
-
 		float f = difficulty.getClampedAdditionalDifficulty();
 		setCanPickUpLoot(rand.nextFloat() < 0.55F * f);
 
 		if (data == null)
-			data = new EntityAbyssalZombie.GroupData(worldObj.rand.nextFloat() < ForgeModContainer.zombieBabyChance, null);
+			data = new EntityAbyssalZombie.GroupData(world.rand.nextFloat() < ForgeModContainer.zombieBabyChance, null);
 
 		if (data instanceof EntityAbyssalZombie.GroupData)
 		{
@@ -341,7 +316,7 @@ public class EntityAbyssalZombie extends EntityMob implements ICoraliumEntity {
 
 		if (getItemStackFromSlot(EntityEquipmentSlot.HEAD) == null)
 		{
-			Calendar calendar = worldObj.getCurrentDate();
+			Calendar calendar = world.getCurrentDate();
 
 			if (calendar.get(2) + 1 == 10 && calendar.get(5) == 31 && rand.nextFloat() < 0.25F)
 			{
@@ -351,7 +326,7 @@ public class EntityAbyssalZombie extends EntityMob implements ICoraliumEntity {
 		}
 
 		IAttributeInstance attribute = getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE);
-		Calendar calendar = worldObj.getCurrentDate();
+		Calendar calendar = world.getCurrentDate();
 
 		attribute.removeModifier(attackDamageBoost);
 

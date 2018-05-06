@@ -29,7 +29,7 @@ public class MapGenRavineAC extends MapGenRavine {
 	@Override
 	protected void digBlock(ChunkPrimer data, int x, int y, int z, int chunkX, int chunkZ, boolean foundTop)
 	{
-		net.minecraft.world.biome.Biome biome = worldObj.getBiome(new BlockPos(x + chunkX * 16, 0, z + chunkZ * 16));
+		net.minecraft.world.biome.Biome biome = world.getBiome(new BlockPos(x + chunkX * 16, 0, z + chunkZ * 16));
 		IBlockState state = data.getBlockState(x, y, z);
 		IBlockState top = biome.topBlock;
 		IBlockState filler = biome.fillerBlock;

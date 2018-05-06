@@ -132,8 +132,8 @@ public class EntityShadowBeast extends EntityMob implements IOmotholEntity {
 	@Override
 	public void onLivingUpdate()
 	{
-		for (int i = 0; i < 2 * getBrightness(1.0f) && ACConfig.particleEntity && worldObj.provider.getDimension() != ACLib.dark_realm_id; ++i)
-			worldObj.spawnParticle(EnumParticleTypes.SMOKE_LARGE, posX + (rand.nextDouble() - 0.5D) * width, posY + rand.nextDouble() * height, posZ + (rand.nextDouble() - 0.5D) * width, 0.0D, 0.0D, 0.0D);
+		for (int i = 0; i < 2 * getBrightness(1.0f) && ACConfig.particleEntity && world.provider.getDimension() != ACLib.dark_realm_id; ++i)
+			world.spawnParticle(EnumParticleTypes.SMOKE_LARGE, posX + (rand.nextDouble() - 0.5D) * width, posY + rand.nextDouble() * height, posZ + (rand.nextDouble() - 0.5D) * width, 0.0D, 0.0D, 0.0D);
 
 		if (getAttackTarget() != null && getDistanceSqToEntity(getAttackTarget()) <= 64D && shadowFlameShootTimer <= -300) shadowFlameShootTimer = 100;
 
@@ -141,12 +141,12 @@ public class EntityShadowBeast extends EntityMob implements IOmotholEntity {
 		{
 			motionX *= 0.05D;
 			motionZ *= 0.05D;
-			worldObj.setEntityState(this, (byte)23);
+			world.setEntityState(this, (byte)23);
 			if (ticksExisted % 5 == 0)
-				worldObj.playSound(null, new BlockPos(posX + 0.5D, posY + getEyeHeight(), posZ + 0.5D), SoundEvents.ENTITY_GHAST_SHOOT, getSoundCategory(), 0.5F + getRNG().nextFloat(), getRNG().nextFloat() * 0.7F + 0.3F);
+				world.playSound(null, new BlockPos(posX + 0.5D, posY + getEyeHeight(), posZ + 0.5D), SoundEvents.ENTITY_GHAST_SHOOT, getSoundCategory(), 0.5F + getRNG().nextFloat(), getRNG().nextFloat() * 0.7F + 0.3F);
 			Entity target = getHeadLookTarget();
 			if (target != null) {
-				List<EntityLivingBase> list = worldObj.getEntitiesWithinAABB(EntityLivingBase.class, target.getEntityBoundingBox().expand(2.0D, 2.0D, 2.0D), Predicates.and(new Predicate[] { EntitySelectors.IS_ALIVE }));
+				List<EntityLivingBase> list = world.getEntitiesWithinAABB(EntityLivingBase.class, target.getEntityBoundingBox().expand(2.0D, 2.0D, 2.0D), Predicates.and(new Predicate[] { EntitySelectors.IS_ALIVE }));
 
 				for(EntityLivingBase entity : list)
 					if (entity != null && rand.nextInt(3) == 0) if (entity.attackEntityFrom(AbyssalCraftAPI.shadow, (float)(4.5D - getDistanceToEntity(entity)))) {
@@ -173,14 +173,14 @@ public class EntityShadowBeast extends EntityMob implements IOmotholEntity {
 		double range = 4D + rand.nextDouble() * 8D;
 		Vec3d srcVec = new Vec3d(posX, posY + getEyeHeight(), posZ);
 		Vec3d lookVec = getLook(1.0F);
-		RayTraceResult raytrace = worldObj.rayTraceBlocks(srcVec, srcVec.addVector(lookVec.xCoord * range, lookVec.yCoord * range, lookVec.zCoord * range));
+		RayTraceResult raytrace = world.rayTraceBlocks(srcVec, srcVec.addVector(lookVec.xCoord * range, lookVec.yCoord * range, lookVec.zCoord * range));
 		BlockPos hitpos = raytrace != null ? raytrace.getBlockPos() : null;
 		double rx = hitpos == null ? range : Math.min(range, Math.abs(posX - hitpos.getX()));
 		double ry = hitpos == null ? range : Math.min(range, Math.abs(posY - hitpos.getY()));
 		double rz = hitpos == null ? range : Math.min(range, Math.abs(posZ - hitpos.getZ()));
 		Vec3d destVec = srcVec.addVector(lookVec.xCoord * range, lookVec.yCoord * range, lookVec.zCoord * range);
 		float var9 = 4.0F;
-		List<Entity> possibleList = worldObj.getEntitiesWithinAABBExcludingEntity(this, getEntityBoundingBox().offset(lookVec.xCoord * rx, lookVec.yCoord * ry, lookVec.zCoord * rz).expand(var9, var9, var9));
+		List<Entity> possibleList = world.getEntitiesWithinAABBExcludingEntity(this, getEntityBoundingBox().offset(lookVec.xCoord * rx, lookVec.yCoord * ry, lookVec.zCoord * rz).expand(var9, var9, var9));
 		double hitDist = 0.0D;
 		for (Entity possibleEntity : possibleList)
 			if (possibleEntity != this && possibleEntity instanceof EntityLivingBase)
@@ -211,7 +211,7 @@ public class EntityShadowBeast extends EntityMob implements IOmotholEntity {
 
 	protected void addMouthParticles()
 	{
-		if (worldObj.isRemote)
+		if (world.isRemote)
 		{
 			Vec3d vector = getLookVec();
 
@@ -236,10 +236,10 @@ public class EntityShadowBeast extends EntityMob implements IOmotholEntity {
 				dy *= velocity;
 				dz *= velocity;
 
-				worldObj.spawnParticle(EnumParticleTypes.SMOKE_LARGE, px + getRNG().nextDouble() - 0.5D, py + getRNG().nextDouble() - 0.5D, pz + getRNG().nextDouble() - 0.5D, dx, dy, dz);
+				world.spawnParticle(EnumParticleTypes.SMOKE_LARGE, px + getRNG().nextDouble() - 0.5D, py + getRNG().nextDouble() - 0.5D, pz + getRNG().nextDouble() - 0.5D, dx, dy, dz);
 			}
 		} else
-			worldObj.setEntityState(this, (byte)23);
+			world.setEntityState(this, (byte)23);
 	}
 
 	@Override
@@ -274,7 +274,7 @@ public class EntityShadowBeast extends EntityMob implements IOmotholEntity {
 
 		if (getItemStackFromSlot(EntityEquipmentSlot.HEAD) == null)
 		{
-			Calendar calendar = worldObj.getCurrentDate();
+			Calendar calendar = world.getCurrentDate();
 
 			if (calendar.get(2) + 1 == 10 && calendar.get(5) == 31 && rand.nextFloat() < 0.25F)
 			{

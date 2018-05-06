@@ -90,7 +90,7 @@ public class TileEntitySacrificialAltar extends TileEntity implements IEnergyCol
 	public void update()
 	{
 		if(isDirty){
-			worldObj.notifyBlockUpdate(pos, worldObj.getBlockState(pos), worldObj.getBlockState(pos), 2);
+			world.notifyBlockUpdate(pos, world.getBlockState(pos), world.getBlockState(pos), 2);
 			isDirty = false;
 		}
 
@@ -104,11 +104,11 @@ public class TileEntitySacrificialAltar extends TileEntity implements IEnergyCol
 
 		if(item != null)
 			if(item.getItem() instanceof IEnergyContainerItem)
-				if(!worldObj.isRemote && ((IEnergyContainerItem) item.getItem()).canAcceptPE(item) && canTransferPE())
+				if(!world.isRemote && ((IEnergyContainerItem) item.getItem()).canAcceptPE(item) && canTransferPE())
 					((IEnergyContainerItem) item.getItem()).addEnergy(item, consumeEnergy(1));
 
 		if(entity == null){
-			List<EntityLivingBase> mobs = worldObj.getEntitiesWithinAABB(EntityLivingBase.class, new AxisAlignedBB(pos).expand(8, 3, 8));
+			List<EntityLivingBase> mobs = world.getEntitiesWithinAABB(EntityLivingBase.class, new AxisAlignedBB(pos).expand(8, 3, 8));
 
 			for(EntityLivingBase mob : mobs)
 				if(!(mob instanceof EntityPlayer) && !(mob instanceof EntityArmorStand))
@@ -122,7 +122,7 @@ public class TileEntitySacrificialAltar extends TileEntity implements IEnergyCol
 
 		if(entity != null){
 			if(getContainedEnergy() < getMaxEnergy())
-				worldObj.spawnParticle(EnumParticleTypes.SMOKE_LARGE, entity.posX, entity.posY, entity.posZ, 0, 0, 0);
+				world.spawnParticle(EnumParticleTypes.SMOKE_LARGE, entity.posX, entity.posY, entity.posZ, 0, 0, 0);
 			if(!entity.isEntityAlive()){
 				float num = entity.getMaxHealth();
 				entity = null;

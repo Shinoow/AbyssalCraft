@@ -188,7 +188,7 @@ public class GuiNecronomiconRitualEntry extends GuiNecronomicon {
 
 		if(tooltipStack != null)
 		{
-			List<String> tooltipData = tooltipStack.getTooltip(Minecraft.getMinecraft().thePlayer, false);
+			List<String> tooltipData = tooltipStack.getTooltip(Minecraft.getMinecraft().player, false);
 			List<String> parsedTooltip = new ArrayList();
 			boolean first = true;
 

@@ -105,7 +105,7 @@ public class ChunkProviderDreadlands implements IChunkGenerator {
 		for (int j = -2; j <= 2; ++j)
 			for (int k = -2; k <= 2; ++k)
 			{
-				float f = 10.0F / MathHelper.sqrt_float(j * j + k * k + 0.2F);
+				float f = 10.0F / MathHelper.sqrt(j * j + k * k + 0.2F);
 				parabolicField[j + 2 + (k + 2) * 5] = f;
 			}
 	}
@@ -323,7 +323,7 @@ public class ChunkProviderDreadlands implements IChunkGenerator {
 					double d7 = doubleArray2[l] / 512.0D;
 					double d8 = doubleArray3[l] / 512.0D;
 					double d9 = (doubleArray1[l] / 10.0D + 1.0D) / 2.0D;
-					double d10 = MathHelper.denormalizeClamp(d7, d8, d9) - d6;
+					double d10 = MathHelper.clampedLerp(d7, d8, d9) - d6;
 
 					if (j2 > 29)
 					{

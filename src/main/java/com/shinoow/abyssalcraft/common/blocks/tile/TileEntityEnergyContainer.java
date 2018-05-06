@@ -73,8 +73,8 @@ public class TileEntityEnergyContainer extends TileEntity implements IEnergyCont
 	@Override
 	public void onLoad()
 	{
-		if(worldObj.isRemote)
-			worldObj.loadedTileEntityList.remove(this);
+		if(world.isRemote)
+			world.tickableTileEntities.remove(this);
 	}
 
 	@Override
@@ -234,9 +234,9 @@ public class TileEntityEnergyContainer extends TileEntity implements IEnergyCont
 	}
 
 	@Override
-	public boolean isUseableByPlayer(EntityPlayer player) {
+	public boolean isUsableByPlayer(EntityPlayer player) {
 
-		return worldObj.getTileEntity(pos) != this ? false : player.getDistanceSq(pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D) <= 64.0D;
+		return world.getTileEntity(pos) != this ? false : player.getDistanceSq(pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D) <= 64.0D;
 	}
 
 	@Override

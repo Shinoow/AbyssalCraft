@@ -106,7 +106,7 @@ public class ContainerRendingPedestal extends Container {
 	@Override
 	public boolean canInteractWith(EntityPlayer var1) {
 
-		return tileRendingPedestal.isUseableByPlayer(var1);
+		return tileRendingPedestal.isUsableByPlayer(var1);
 	}
 
 	@Override

@@ -41,7 +41,7 @@ public class RenderCoraliumSquid extends RenderLiving<EntityCoraliumSquid>
 	}
 
 	@Override
-	protected void rotateCorpse(EntityCoraliumSquid entityLiving, float p_77043_2_, float p_77043_3_, float partialTicks)
+	protected void applyRotations(EntityCoraliumSquid entityLiving, float p_77043_2_, float p_77043_3_, float partialTicks)
 	{
 		float f = entityLiving.prevSquidPitch + (entityLiving.squidPitch - entityLiving.prevSquidPitch) * partialTicks;
 		float f1 = entityLiving.prevSquidYaw + (entityLiving.squidYaw - entityLiving.prevSquidYaw) * partialTicks;

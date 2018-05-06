@@ -69,7 +69,7 @@ public class TileEntityRitualPedestal extends TileEntity implements ITickable, I
 	public void update()
 	{
 		if(isDirty){
-			worldObj.notifyBlockUpdate(pos, worldObj.getBlockState(pos), worldObj.getBlockState(pos), 2);
+			world.notifyBlockUpdate(pos, world.getBlockState(pos), world.getBlockState(pos), 2);
 			isDirty = false;
 		}
 

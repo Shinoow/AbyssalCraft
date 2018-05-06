@@ -93,17 +93,17 @@ public class EntityDreadedCharge extends EntityFireball
 	{
 		if (ticksExisted > 5)
 		{
-			if(!worldObj.isRemote)
+			if(!world.isRemote)
 				for(int x = getPosition().getX() -4; x < getPosition().getX() + 4; x++)
 					for(int z = getPosition().getZ() - 4; z < getPosition().getZ() + 4; z++)
-						if(!(worldObj.getBiome(new BlockPos(x, 0, z)) instanceof IDreadlandsBiome)
-							&& worldObj.getBiome(new BlockPos(x, 0, z)) != ACBiomes.purged)
+						if(!(world.getBiome(new BlockPos(x, 0, z)) instanceof IDreadlandsBiome)
+							&& world.getBiome(new BlockPos(x, 0, z)) != ACBiomes.purged)
 						{
 							Biome b = ACBiomes.dreadlands;
-							Chunk c = worldObj.getChunkFromBlockCoords(getPosition());
+							Chunk c = world.getChunkFromBlockCoords(getPosition());
 							c.getBiomeArray()[(z & 0xF) << 4 | x & 0xF] = (byte)Biome.getIdForBiome(b);
 							c.setModified(true);
-							PacketDispatcher.sendToDimension(new CleansingRitualMessage(x, z, Biome.getIdForBiome(b)), worldObj.provider.getDimension());
+							PacketDispatcher.sendToDimension(new CleansingRitualMessage(x, z, Biome.getIdForBiome(b)), world.provider.getDimension());
 						}
 
 			if (movingObject.entityHit != null) if (shootingEntity instanceof EntityLivingBase)
@@ -112,8 +112,8 @@ public class EntityDreadedCharge extends EntityFireball
 				movingObject.entityHit.hurtResistantTime = 0;
 			}
 
-			List<EntityLivingBase> list = worldObj.getEntitiesWithinAABB(EntityLivingBase.class, getEntityBoundingBox().expandXyz(8.0D));
-			EntityAreaEffectCloud entityareaeffectcloud = new EntityAreaEffectCloud(worldObj, posX, posY, posZ);
+			List<EntityLivingBase> list = world.getEntitiesWithinAABB(EntityLivingBase.class, getEntityBoundingBox().expandXyz(8.0D));
+			EntityAreaEffectCloud entityareaeffectcloud = new EntityAreaEffectCloud(world, posX, posY, posZ);
 			entityareaeffectcloud.addEffect(new PotionEffect(AbyssalCraftAPI.dread_plague, 400));
 			entityareaeffectcloud.setRadius(2.0F);
 			entityareaeffectcloud.setDuration(200 + rand.nextInt(200));
@@ -133,13 +133,13 @@ public class EntityDreadedCharge extends EntityFireball
 				double d3 = MathHelper.cos(f3) * f2;
 				double d4 = 0.01D + rand.nextDouble() * 0.5D;
 				double d5 = MathHelper.sin(f3) * f2;
-				worldObj.spawnParticle(EnumParticleTypes.FLAME, getPosition().getX() + d3 * 0.1D, getPosition().getY() + 0.3D, getPosition().getZ() + d5 * 0.1D, d3 * f2, d4, d5 * f2, new int[0]);
+				world.spawnParticle(EnumParticleTypes.FLAME, getPosition().getX() + d3 * 0.1D, getPosition().getY() + 0.3D, getPosition().getZ() + d5 * 0.1D, d3 * f2, d4, d5 * f2, new int[0]);
 			}
 
-			worldObj.playSound((EntityPlayer)null, getPosition(), SoundEvents.ENTITY_ENDERDRAGON_FIREBALL_EPLD, SoundCategory.MASTER, 1.0F, worldObj.rand.nextFloat() * 0.1F + 0.9F);
+			world.playSound((EntityPlayer)null, getPosition(), SoundEvents.ENTITY_ENDERDRAGON_FIREBALL_EPLD, SoundCategory.MASTER, 1.0F, world.rand.nextFloat() * 0.1F + 0.9F);
 
-			if (!worldObj.isRemote) worldObj.spawnEntityInWorld(entityareaeffectcloud);
-			worldObj.newExplosion(this, posX, posY + 1.0D, posZ, 3.0F, false, false);
+			if (!world.isRemote) world.spawnEntity(entityareaeffectcloud);
+			world.newExplosion(this, posX, posY + 1.0D, posZ, 3.0F, false, false);
 			setDead();
 		}
 	}

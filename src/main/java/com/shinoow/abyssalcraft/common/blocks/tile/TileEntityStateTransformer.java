@@ -153,9 +153,9 @@ public class TileEntityStateTransformer extends TileEntity implements ITickable,
 	}
 
 	@Override
-	public boolean isUseableByPlayer(EntityPlayer player) {
+	public boolean isUsableByPlayer(EntityPlayer player) {
 
-		return worldObj.getTileEntity(pos) != this ? false : player.getDistanceSq(pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D) <= 64.0D;
+		return world.getTileEntity(pos) != this ? false : player.getDistanceSq(pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D) <= 64.0D;
 	}
 
 	@Override
@@ -198,7 +198,7 @@ public class TileEntityStateTransformer extends TileEntity implements ITickable,
 
 		boolean flag = false;
 
-		if(!worldObj.isRemote)
+		if(!world.isRemote)
 			if(canDoThing()){
 				++processingTime;
 				if(processingTime == 200){
@@ -212,19 +212,19 @@ public class TileEntityStateTransformer extends TileEntity implements ITickable,
 			markDirty();
 
 		if(flag1){
-			if(!worldObj.isRemote){
-				IBlockState state = worldObj.getBlockState(pos);
+			if(!world.isRemote){
+				IBlockState state = world.getBlockState(pos);
 				boolean b = containerItemStacks[0] != null;
 
 				if(state.getValue(BlockStateTransformer.TABLET).booleanValue() != b){
 
-					TileEntity te = worldObj.getTileEntity(pos);
+					TileEntity te = world.getTileEntity(pos);
 
-					worldObj.setBlockState(pos, state.withProperty(BlockStateTransformer.TABLET, b));
+					world.setBlockState(pos, state.withProperty(BlockStateTransformer.TABLET, b));
 
 					if(te != null){
 						te.validate();
-						worldObj.setTileEntity(pos, te);
+						world.setTileEntity(pos, te);
 					}
 				}
 			}

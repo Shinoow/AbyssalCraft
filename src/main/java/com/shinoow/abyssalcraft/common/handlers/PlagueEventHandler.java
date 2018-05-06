@@ -37,22 +37,22 @@ public class PlagueEventHandler {
 
 	@SubscribeEvent
 	public void onDeath(LivingDeathEvent event){
-		if(event.getEntityLiving().worldObj.isRemote || event.getEntityLiving().worldObj.getBiome(event.getEntityLiving().getPosition()) == ACBiomes.purged) return;
+		if(event.getEntityLiving().world.isRemote || event.getEntityLiving().world.getBiome(event.getEntityLiving().getPosition()) == ACBiomes.purged) return;
 
 		EntityLivingBase entity = event.getEntityLiving();
 		if(entity.isPotionActive(AbyssalCraftAPI.coralium_plague))
 			if(entity.getRNG().nextFloat() > 0.1F) {
-				EntityAreaEffectCloud entityareaeffectcloud = new EntityAreaEffectCloud(entity.worldObj, entity.posX, entity.posY, entity.posZ);
+				EntityAreaEffectCloud entityareaeffectcloud = new EntityAreaEffectCloud(entity.world, entity.posX, entity.posY, entity.posZ);
 				entityareaeffectcloud.addEffect(new PotionEffect(AbyssalCraftAPI.coralium_plague, 600));
 				entityareaeffectcloud.setRadius(entity.width);
 				entityareaeffectcloud.setDuration(100 + entity.getRNG().nextInt(100));
 				entityareaeffectcloud.setRadiusPerTick((3F - entityareaeffectcloud.getRadius()) / entityareaeffectcloud.getDuration());
 
-				entity.worldObj.spawnEntityInWorld(entityareaeffectcloud);
+				entity.world.spawnEntity(entityareaeffectcloud);
 			} else {
 
 				AxisAlignedBB axisalignedbb = entity.getEntityBoundingBox().expand(6.0D, 2.0D, 6.0D);
-				List<EntityLivingBase> list = entity.worldObj.<EntityLivingBase>getEntitiesWithinAABB(EntityLivingBase.class, axisalignedbb);
+				List<EntityLivingBase> list = entity.world.<EntityLivingBase>getEntitiesWithinAABB(EntityLivingBase.class, axisalignedbb);
 
 				if (!list.isEmpty())
 					for (EntityLivingBase entitylivingbase : list)
@@ -72,22 +72,22 @@ public class PlagueEventHandler {
 									entitylivingbase.addPotionEffect(new PotionEffect(AbyssalCraftAPI.coralium_plague, i, potioneffect.getAmplifier(), potioneffect.getIsAmbient(), potioneffect.doesShowParticles()));
 							}
 						}
-				entity.worldObj.playEvent(2002, new BlockPos(entity), PotionUtils.getPotionColorFromEffectList(Collections.singletonList(entity.getActivePotionEffect(AbyssalCraftAPI.coralium_plague))));
+				entity.world.playEvent(2002, new BlockPos(entity), PotionUtils.getPotionColorFromEffectList(Collections.singletonList(entity.getActivePotionEffect(AbyssalCraftAPI.coralium_plague))));
 
 			}
 		if(entity.isPotionActive(AbyssalCraftAPI.dread_plague)) {
 			if(entity.getRNG().nextFloat() > 0.1F) {
-				EntityAreaEffectCloud entityareaeffectcloud = new EntityAreaEffectCloud(entity.worldObj, entity.posX, entity.posY, entity.posZ);
+				EntityAreaEffectCloud entityareaeffectcloud = new EntityAreaEffectCloud(entity.world, entity.posX, entity.posY, entity.posZ);
 				entityareaeffectcloud.addEffect(new PotionEffect(AbyssalCraftAPI.dread_plague, 600));
 				entityareaeffectcloud.setRadius(entity.width);
 				entityareaeffectcloud.setDuration(100 + entity.getRNG().nextInt(100));
 				entityareaeffectcloud.setRadiusPerTick((3F - entityareaeffectcloud.getRadius()) / entityareaeffectcloud.getDuration());
 
-				entity.worldObj.spawnEntityInWorld(entityareaeffectcloud);
+				entity.world.spawnEntity(entityareaeffectcloud);
 			} else {
 
 				AxisAlignedBB axisalignedbb = entity.getEntityBoundingBox().expand(6.0D, 2.0D, 6.0D);
-				List<EntityLivingBase> list = entity.worldObj.<EntityLivingBase>getEntitiesWithinAABB(EntityLivingBase.class, axisalignedbb);
+				List<EntityLivingBase> list = entity.world.<EntityLivingBase>getEntitiesWithinAABB(EntityLivingBase.class, axisalignedbb);
 
 				if (!list.isEmpty())
 					for (EntityLivingBase entitylivingbase : list)
@@ -107,24 +107,24 @@ public class PlagueEventHandler {
 									entitylivingbase.addPotionEffect(new PotionEffect(AbyssalCraftAPI.dread_plague, i, potioneffect.getAmplifier(), potioneffect.getIsAmbient(), potioneffect.doesShowParticles()));
 							}
 						}
-				entity.worldObj.playEvent(2002, new BlockPos(entity), PotionUtils.getPotionColorFromEffectList(Collections.singletonList(entity.getActivePotionEffect(AbyssalCraftAPI.dread_plague))));
+				entity.world.playEvent(2002, new BlockPos(entity), PotionUtils.getPotionColorFromEffectList(Collections.singletonList(entity.getActivePotionEffect(AbyssalCraftAPI.dread_plague))));
 
 			}
 		} else if(entity instanceof IDreadEntity && !(entity instanceof EntityDemonAnimal) && entity.dimension != ACLib.dreadlands_id &&
 			entity.dimension != ACLib.omothol_id && entity.dimension != ACLib.dark_realm_id) {
-			EntityAreaEffectCloud entityareaeffectcloud = new EntityAreaEffectCloud(entity.worldObj, entity.posX, entity.posY, entity.posZ);
+			EntityAreaEffectCloud entityareaeffectcloud = new EntityAreaEffectCloud(entity.world, entity.posX, entity.posY, entity.posZ);
 			entityareaeffectcloud.addEffect(new PotionEffect(AbyssalCraftAPI.dread_plague, 600));
 			entityareaeffectcloud.setRadius(entity.width);
 			entityareaeffectcloud.setDuration(100 + entity.getRNG().nextInt(100));
 			entityareaeffectcloud.setRadiusPerTick((3F - entityareaeffectcloud.getRadius()) / entityareaeffectcloud.getDuration());
 
-			entity.worldObj.spawnEntityInWorld(entityareaeffectcloud);
+			entity.world.spawnEntity(entityareaeffectcloud);
 		}
 	}
 
 	@SubscribeEvent
 	public void onLivingHurt(LivingHurtEvent event){
-		if(event.getEntityLiving().worldObj.isRemote || event.getEntityLiving().worldObj.getBiome(event.getEntityLiving().getPosition()) == ACBiomes.purged) return;
+		if(event.getEntityLiving().world.isRemote || event.getEntityLiving().world.getBiome(event.getEntityLiving().getPosition()) == ACBiomes.purged) return;
 
 		DamageSource source = event.getSource();
 		if(source != null && source.getEntity() instanceof EntityLivingBase) {

@@ -67,7 +67,7 @@ public class GuiNecronomiconEntry extends GuiNecronomicon {
 		data = nd;
 		parent = gui;
 		icon = getItem(nd.getDisplayIcon());
-		cap = NecroDataCapability.getCap(Minecraft.getMinecraft().thePlayer);
+		cap = NecroDataCapability.getCap(Minecraft.getMinecraft().player);
 		buttons = new ButtonCategory[data.getContainedData().size()];
 	}
 
@@ -204,7 +204,7 @@ public class GuiNecronomiconEntry extends GuiNecronomicon {
 	private boolean isUnlocked(IUnlockCondition cnd){
 		if(cnd instanceof NecronomiconCondition)
 			return getBookType() >= (int)cnd.getConditionObject();
-			else return cap.isUnlocked(cnd, Minecraft.getMinecraft().thePlayer);
+			else return cap.isUnlocked(cnd, Minecraft.getMinecraft().player);
 	}
 
 	private void drawChapterOrPage(INecroData data, int x, int y){
@@ -399,7 +399,7 @@ public class GuiNecronomiconEntry extends GuiNecronomicon {
 
 		if(tooltipStack != null)
 		{
-			List<String> tooltipData = tooltipStack.getTooltip(Minecraft.getMinecraft().thePlayer, false);
+			List<String> tooltipData = tooltipStack.getTooltip(Minecraft.getMinecraft().player, false);
 			List<String> parsedTooltip = new ArrayList();
 			boolean first = true;
 

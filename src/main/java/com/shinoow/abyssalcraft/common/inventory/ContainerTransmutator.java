@@ -99,7 +99,7 @@ public class ContainerTransmutator extends Container {
 	@Override
 	public boolean canInteractWith(EntityPlayer par1EntityPlayer)
 	{
-		return tileTransmutator.isUseableByPlayer(par1EntityPlayer);
+		return tileTransmutator.isUsableByPlayer(par1EntityPlayer);
 	}
 
 	@Override

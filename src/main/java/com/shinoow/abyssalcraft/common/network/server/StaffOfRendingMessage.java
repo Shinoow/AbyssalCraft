@@ -61,7 +61,7 @@ public class StaffOfRendingMessage extends AbstractServerMessage<StaffOfRendingM
 	public void process(EntityPlayer player, Side side) {
 		if(player.getHeldItem(hand) == null) return;
 		ItemStack stack = player.getHeldItem(hand);
-		Entity e = player.worldObj.getEntityByID(id);
+		Entity e = player.world.getEntityByID(id);
 		if(e == null) return;
 
 		if(stack.getItem() instanceof IStaffOfRending)
@@ -72,17 +72,17 @@ public class StaffOfRendingMessage extends AbstractServerMessage<StaffOfRendingM
 					if(!target.isDead)
 						if(target.attackEntityFrom(DamageSource.causePlayerDamage(player), staff.getDrainAmount(stack)))
 							staff.increaseEnergy(stack, "Shadow");
-				} else if(player.worldObj.provider.getDimension() == ACLib.abyssal_wasteland_id && target instanceof ICoraliumEntity &&
+				} else if(player.world.provider.getDimension() == ACLib.abyssal_wasteland_id && target instanceof ICoraliumEntity &&
 					target.isNonBoss()){
 					if(!target.isDead)
 						if(target.attackEntityFrom(DamageSource.causePlayerDamage(player), staff.getDrainAmount(stack)))
 							staff.increaseEnergy(stack, "Abyssal");
-				} else if(player.worldObj.provider.getDimension() == ACLib.dreadlands_id && target instanceof IDreadEntity &&
+				} else if(player.world.provider.getDimension() == ACLib.dreadlands_id && target instanceof IDreadEntity &&
 					target.isNonBoss()){
 					if(!target.isDead)
 						if(target.attackEntityFrom(DamageSource.causePlayerDamage(player), staff.getDrainAmount(stack)))
 							staff.increaseEnergy(stack, "Dread");
-				} else if(player.worldObj.provider.getDimension() == ACLib.omothol_id && target instanceof IOmotholEntity &&
+				} else if(player.world.provider.getDimension() == ACLib.omothol_id && target instanceof IOmotholEntity &&
 					target.getCreatureAttribute() != AbyssalCraftAPI.SHADOW && target.isNonBoss())
 					if(!target.isDead)
 						if(target.attackEntityFrom(DamageSource.causePlayerDamage(player), staff.getDrainAmount(stack)))

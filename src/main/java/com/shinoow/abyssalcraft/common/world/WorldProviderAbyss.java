@@ -30,7 +30,7 @@ public class WorldProviderAbyss extends WorldProvider {
 
 	@Override
 	public IChunkGenerator createChunkGenerator() {
-		return new ChunkProviderAbyss(worldObj, worldObj.getSeed(), true);
+		return new ChunkProviderAbyss(world, world.getSeed(), true);
 	}
 
 	@Override

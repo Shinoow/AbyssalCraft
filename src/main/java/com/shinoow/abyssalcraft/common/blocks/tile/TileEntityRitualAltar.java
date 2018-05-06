@@ -99,22 +99,22 @@ public class TileEntityRitualAltar extends TileEntity implements ITickable, IRit
 	public void update()
 	{
 		if(isDirty || isPerformingRitual()){
-			worldObj.notifyBlockUpdate(pos, worldObj.getBlockState(pos), worldObj.getBlockState(pos), 2);
+			world.notifyBlockUpdate(pos, world.getBlockState(pos), world.getBlockState(pos), 2);
 			isDirty = false;
 		}
 
 		if(isPerformingRitual()){
 			if(ritualTimer == 1){
 				SoundEvent chant = getRandomChant();
-				worldObj.playSound(pos.getX(), pos.getY(), pos.getZ(), chant, SoundCategory.PLAYERS, 1, 1, true);
-				worldObj.playSound(pos.getX(), pos.getY(), pos.getZ(), chant, SoundCategory.PLAYERS, 1, 1, true);
-				worldObj.playSound(pos.getX(), pos.getY(), pos.getZ(), chant, SoundCategory.PLAYERS, 1, 1, true);
+				world.playSound(pos.getX(), pos.getY(), pos.getZ(), chant, SoundCategory.PLAYERS, 1, 1, true);
+				world.playSound(pos.getX(), pos.getY(), pos.getZ(), chant, SoundCategory.PLAYERS, 1, 1, true);
+				world.playSound(pos.getX(), pos.getY(), pos.getZ(), chant, SoundCategory.PLAYERS, 1, 1, true);
 			}
 			ritualTimer++;
 
 			if(ritual != null){
 				if(sacrifice != null && sacrifice.isEntityAlive())
-					worldObj.spawnParticle(EnumParticleTypes.SMOKE_LARGE, sacrifice.posX, sacrifice.posY + sacrifice.getEyeHeight(), sacrifice.posZ, 0, 0, 0);
+					world.spawnParticle(EnumParticleTypes.SMOKE_LARGE, sacrifice.posX, sacrifice.posY + sacrifice.getEyeHeight(), sacrifice.posZ, 0, 0, 0);
 				if(user != null){
 					for(ItemStack item : user.inventory.mainInventory)
 						if(item != null && item.getItem() instanceof IEnergyTransporterItem &&
@@ -123,11 +123,11 @@ public class TileEntityRitualAltar extends TileEntity implements ITickable, IRit
 							consumedEnergy += ((IEnergyTransporterItem) item.getItem()).consumeEnergy(item, ritual.getReqEnergy()/200);
 							break;
 						}
-				} else user = worldObj.getClosestPlayer(pos.getX(), pos.getY(), pos.getZ(), 5, true);
+				} else user = world.getClosestPlayer(pos.getX(), pos.getY(), pos.getZ(), 5, true);
 				if(ritualTimer == 200)
 					if(user != null){
-						if(!MinecraftForge.EVENT_BUS.post(new RitualEvent.Post(user, ritual, worldObj, pos))){
-							if(!worldObj.isRemote)
+						if(!MinecraftForge.EVENT_BUS.post(new RitualEvent.Post(user, ritual, world, pos))){
+							if(!world.isRemote)
 								for(ItemStack item : user.inventory.mainInventory)
 									if(item != null && item.getItem() instanceof IEnergyTransporterItem &&
 									((IEnergyTransporterItem) item.getItem()).canTransferPEExternally(item) &&
@@ -136,10 +136,10 @@ public class TileEntityRitualAltar extends TileEntity implements ITickable, IRit
 										break;
 									}
 							if(consumedEnergy == ritual.getReqEnergy() && (sacrifice == null || !sacrifice.isEntityAlive()))
-								ritual.completeRitual(worldObj, pos, user);
-							else if(!worldObj.isRemote){
-								worldObj.addWeatherEffect(new EntityLightningBolt(worldObj, pos.getX(), pos.getY() + 1, pos.getZ(), false));
-								DisruptionHandler.instance().generateDisruption(DeityType.values()[worldObj.rand.nextInt(DeityType.values().length)], worldObj, pos, worldObj.getEntitiesWithinAABB(EntityPlayer.class, new AxisAlignedBB(pos).expand(16, 16, 16)));
+								ritual.completeRitual(world, pos, user);
+							else if(!world.isRemote){
+								world.addWeatherEffect(new EntityLightningBolt(world, pos.getX(), pos.getY() + 1, pos.getZ(), true));
+								DisruptionHandler.instance().generateDisruption(DeityType.values()[world.rand.nextInt(DeityType.values().length)], world, pos, world.getEntitiesWithinAABB(EntityPlayer.class, new AxisAlignedBB(pos).expand(16, 16, 16)));
 							}
 							ritualTimer = 0;
 							user = null;
@@ -149,9 +149,9 @@ public class TileEntityRitualAltar extends TileEntity implements ITickable, IRit
 							sacrifice = null;
 						}
 					} else {
-						if(!worldObj.isRemote){
-							worldObj.addWeatherEffect(new EntityLightningBolt(worldObj, pos.getX(), pos.getY() + 1, pos.getZ(), false));
-							DisruptionHandler.instance().generateDisruption(DeityType.values()[worldObj.rand.nextInt(DeityType.values().length)], worldObj, pos, worldObj.getEntitiesWithinAABB(EntityPlayer.class, new AxisAlignedBB(pos).expand(16, 16, 16)));
+						if(!world.isRemote){
+							world.addWeatherEffect(new EntityLightningBolt(world, pos.getX(), pos.getY() + 1, pos.getZ(), true));
+							DisruptionHandler.instance().generateDisruption(DeityType.values()[world.rand.nextInt(DeityType.values().length)], world, pos, world.getEntitiesWithinAABB(EntityPlayer.class, new AxisAlignedBB(pos).expand(16, 16, 16)));
 						}
 						ritualTimer = 0;
 						ritual = null;
@@ -161,7 +161,7 @@ public class TileEntityRitualAltar extends TileEntity implements ITickable, IRit
 					}
 			} else ritualTimer = 0;
 
-			worldObj.spawnParticle(EnumParticleTypes.LAVA, pos.getX() + 0.5, pos.getY() + 1, pos.getZ() + 0.5, 0,0,0);
+			world.spawnParticle(EnumParticleTypes.LAVA, pos.getX() + 0.5, pos.getY() + 1, pos.getZ() + 0.5, 0,0,0);
 
 			double n = 0.5;
 
@@ -190,15 +190,15 @@ public class TileEntityRitualAltar extends TileEntity implements ITickable, IRit
 	}
 
 	private void spawnParticles(double xOffset, double zOffset, double velX, double velZ, int[] data) {
-		worldObj.spawnParticle(EnumParticleTypes.ITEM_CRACK, pos.getX() + xOffset, pos.getY() + 0.95, pos.getZ() + zOffset, velX,.15,velZ, data);
-		worldObj.spawnParticle(EnumParticleTypes.FLAME, pos.getX() + xOffset, pos.getY() + 1.05, pos.getZ() + zOffset, 0,0,0);
-		worldObj.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, pos.getX() + xOffset, pos.getY() + 1.05, pos.getZ() + zOffset, 0,0,0);
+		world.spawnParticle(EnumParticleTypes.ITEM_CRACK, pos.getX() + xOffset, pos.getY() + 0.95, pos.getZ() + zOffset, velX,.15,velZ, data);
+		world.spawnParticle(EnumParticleTypes.FLAME, pos.getX() + xOffset, pos.getY() + 1.05, pos.getZ() + zOffset, 0,0,0);
+		world.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, pos.getX() + xOffset, pos.getY() + 1.05, pos.getZ() + zOffset, 0,0,0);
 	}
 
 	@Override
 	public boolean canPerform(){
 
-		if(checkSurroundings(worldObj, pos)) return true;
+		if(checkSurroundings(world, pos)) return true;
 		return false;
 	}
 
@@ -324,7 +324,7 @@ public class TileEntityRitualAltar extends TileEntity implements ITickable, IRit
 	public SoundEvent getRandomChant(){
 		SoundEvent[] chants = {ACSounds.cthulhu_chant, ACSounds.yog_sothoth_chant_1, ACSounds.yog_sothoth_chant_2,
 			ACSounds.hastur_chant_1, ACSounds.hastur_chant_2, ACSounds.sleeping_chant, ACSounds.cthugha_chant};
-		return chants[worldObj.rand.nextInt(chants.length)];
+		return chants[world.rand.nextInt(chants.length)];
 	}
 
 	@Override

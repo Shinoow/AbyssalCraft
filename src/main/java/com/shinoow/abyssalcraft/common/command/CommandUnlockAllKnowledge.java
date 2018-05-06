@@ -27,13 +27,13 @@ import net.minecraft.util.text.TextComponentString;
 public class CommandUnlockAllKnowledge extends CommandBase {
 
 	@Override
-	public String getCommandName() {
+	public String getName() {
 
 		return "acunlockallknowledge";
 	}
 
 	@Override
-	public String getCommandUsage(ICommandSender sender) {
+	public String getUsage(ICommandSender sender) {
 
 		return "/acunlockallknowledge";
 	}
@@ -45,10 +45,10 @@ public class CommandUnlockAllKnowledge extends CommandBase {
 			INecroDataCapability cap = NecroDataCapability.getCap((EntityPlayer) sender);
 			if(!cap.hasUnlockedAllKnowledge()){
 				cap.unlockAllKnowledge(true);
-				sender.addChatMessage(new TextComponentString("All knowledge has been unlocked!"));
+				sender.sendMessage(new TextComponentString("All knowledge has been unlocked!"));
 			} else {
 				cap.unlockAllKnowledge(false);
-				sender.addChatMessage(new TextComponentString("All knowledge has been re-locked... kinda!"));
+				sender.sendMessage(new TextComponentString("All knowledge has been re-locked... kinda!"));
 			}
 
 			PacketDispatcher.sendTo(new NecroDataCapMessage((EntityPlayer) sender), (EntityPlayerMP)sender);

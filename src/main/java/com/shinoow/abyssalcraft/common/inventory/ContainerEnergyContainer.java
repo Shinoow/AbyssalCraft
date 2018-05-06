@@ -77,7 +77,7 @@ public class ContainerEnergyContainer extends Container {
 	@Override
 	public boolean canInteractWith(EntityPlayer var1) {
 
-		return tileEnergyContainer.isUseableByPlayer(var1);
+		return tileEnergyContainer.isUsableByPlayer(var1);
 	}
 
 	@Override

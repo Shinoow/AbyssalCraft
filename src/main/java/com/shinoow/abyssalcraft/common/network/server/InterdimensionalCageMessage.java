@@ -58,7 +58,7 @@ public class InterdimensionalCageMessage extends AbstractServerMessage<Interdime
 	public void process(EntityPlayer player, Side side) {
 		if(player.getHeldItem(hand) == null) return;
 		ItemStack stack = player.getHeldItem(hand);
-		Entity e = player.worldObj.getEntityByID(id);
+		Entity e = player.world.getEntityByID(id);
 		if(e == null) return;
 		if(InitHandler.INSTANCE.isEntityBlacklisted(e)) return;
 
@@ -71,7 +71,7 @@ public class InterdimensionalCageMessage extends AbstractServerMessage<Interdime
 						stack.getTagCompound().setTag("Entity", tag);
 						stack.getTagCompound().setString("EntityName", target.getName());
 						((IEnergyContainerItem)stack.getItem()).consumeEnergy(stack, getPEFromSize(target.width, target.height));
-						player.worldObj.removeEntity(target);
+						player.world.removeEntity(target);
 					}
 			}
 	}

@@ -187,7 +187,7 @@ public class BlockStateTransformer extends BlockACBasic {
 			}
 
 			f /= thing.getSizeInventory();
-			return MathHelper.floor_float(f * 14.0F) + (i > 0 ? 1 : 0);
+			return MathHelper.floor(f * 14.0F) + (i > 0 ? 1 : 0);
 		} else return 0;
 	}
 

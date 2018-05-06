@@ -244,7 +244,7 @@ public class GuiNecronomicon extends GuiScreen {
 
 				mc.displayGuiScreen(new GuiNecronomiconEntry(bookType, data, this));
 			} else if (button.id == 4)
-				mc.displayGuiScreen(new GuiNecronomiconSpells(bookType, Minecraft.getMinecraft().thePlayer.getHeldItem(EnumHand.MAIN_HAND)));
+				mc.displayGuiScreen(new GuiNecronomiconSpells(bookType, Minecraft.getMinecraft().player.getHeldItem(EnumHand.MAIN_HAND)));
 			else if (button.id == 5){
 
 				NecroData data = new NecroData("ritualinfo", NecronomiconText.LABEL_RITUALS, 0, NecronomiconText.RITUAL_INFO, AbyssalCraftAPI.getInternalNDHandler().getInternalNecroData("rituals"),

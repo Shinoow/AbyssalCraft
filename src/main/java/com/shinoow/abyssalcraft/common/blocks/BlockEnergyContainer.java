@@ -116,7 +116,7 @@ public class BlockEnergyContainer extends BlockContainer {
 						entityitem.motionX = (float)rand.nextGaussian() * f3;
 						entityitem.motionY = (float)rand.nextGaussian() * f3 + 0.2F;
 						entityitem.motionZ = (float)rand.nextGaussian() * f3;
-						world.spawnEntityInWorld(entityitem);
+						world.spawnEntity(entityitem);
 					}
 				}
 			}
@@ -133,7 +133,7 @@ public class BlockEnergyContainer extends BlockContainer {
 			item.motionX = (float)rand.nextGaussian() * f3;
 			item.motionY = (float)rand.nextGaussian() * f3 + 0.2F;
 			item.motionZ = (float)rand.nextGaussian() * f3;
-			world.spawnEntityInWorld(item);
+			world.spawnEntity(item);
 		}
 
 		super.breakBlock(world, pos, state);

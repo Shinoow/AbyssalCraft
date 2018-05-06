@@ -121,7 +121,7 @@ public class ContainerCrystallizer extends Container {
 	@Override
 	public boolean canInteractWith(EntityPlayer par1EntityPlayer)
 	{
-		return tileCrystallizer.isUseableByPlayer(par1EntityPlayer);
+		return tileCrystallizer.isUsableByPlayer(par1EntityPlayer);
 	}
 
 	@Override

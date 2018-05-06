@@ -99,11 +99,11 @@ public class EntityAntiBat extends EntityAmbientCreature implements IAntiEntity 
 	@Override
 	protected void collideWithEntity(Entity par1Entity)
 	{
-		if(!worldObj.isRemote && par1Entity instanceof EntityBat){
-			boolean flag = worldObj.getGameRules().getBoolean("mobGriefing");
+		if(!world.isRemote && par1Entity instanceof EntityBat){
+			boolean flag = world.getGameRules().getBoolean("mobGriefing");
 			if(ACConfig.nuclearAntimatterExplosions)
-				ExplosionUtil.newODBExplosion(worldObj, this, posX, posY, posZ, 40, true, flag);
-			else worldObj.createExplosion(this, posX, posY, posZ, 5, flag);
+				ExplosionUtil.newODBExplosion(world, this, posX, posY, posZ, 40, true, flag);
+			else world.createExplosion(this, posX, posY, posZ, 5, flag);
 			setDead();
 		}
 	}
@@ -141,7 +141,7 @@ public class EntityAntiBat extends EntityAmbientCreature implements IAntiEntity 
 		if (getIsBatHanging())
 		{
 			motionX = motionY = motionZ = 0.0D;
-			posY = MathHelper.floor_double(posY) + 1.0D - height;
+			posY = MathHelper.floor(posY) + 1.0D - height;
 		} else
 			motionY *= 0.6000000238418579D;
 	}
@@ -155,26 +155,26 @@ public class EntityAntiBat extends EntityAmbientCreature implements IAntiEntity 
 
 		if (getIsBatHanging())
 		{
-			if (!worldObj.getBlockState(blockpos1).isNormalCube())
+			if (!world.getBlockState(blockpos1).isNormalCube())
 			{
 				setIsBatHanging(false);
-				worldObj.playEvent((EntityPlayer)null, 1025, blockpos, 0);
+				world.playEvent((EntityPlayer)null, 1025, blockpos, 0);
 			}
 			else
 			{
 				if (rand.nextInt(200) == 0)
 					rotationYawHead = rand.nextInt(360);
 
-				if (worldObj.getClosestPlayerToEntity(this, 4.0D) != null)
+				if (world.getClosestPlayerToEntity(this, 4.0D) != null)
 				{
 					setIsBatHanging(false);
-					worldObj.playEvent((EntityPlayer)null, 1025, blockpos, 0);
+					world.playEvent((EntityPlayer)null, 1025, blockpos, 0);
 				}
 			}
 		}
 		else
 		{
-			if (spawnPosition != null && (!worldObj.isAirBlock(spawnPosition) || spawnPosition.getY() < 1))
+			if (spawnPosition != null && (!world.isAirBlock(spawnPosition) || spawnPosition.getY() < 1))
 				spawnPosition = null;
 
 			if (spawnPosition == null || rand.nextInt(30) == 0 || spawnPosition.distanceSq((int)posX, (int)posY, (int)posZ) < 4.0D)
@@ -191,7 +191,7 @@ public class EntityAntiBat extends EntityAmbientCreature implements IAntiEntity 
 			moveForward = 0.5F;
 			rotationYaw += f1;
 
-			if (rand.nextInt(100) == 0 && worldObj.getBlockState(blockpos1).isNormalCube())
+			if (rand.nextInt(100) == 0 && world.getBlockState(blockpos1).isNormalCube())
 				setIsBatHanging(true);
 		}
 	}
@@ -221,7 +221,7 @@ public class EntityAntiBat extends EntityAmbientCreature implements IAntiEntity 
 			return false;
 		else
 		{
-			if (!worldObj.isRemote && getIsBatHanging())
+			if (!world.isRemote && getIsBatHanging())
 				setIsBatHanging(false);
 
 			return super.attackEntityFrom(par1DamageSource, par2);
@@ -249,14 +249,14 @@ public class EntityAntiBat extends EntityAmbientCreature implements IAntiEntity 
 	{
 		BlockPos blockpos = new BlockPos(posX, getEntityBoundingBox().minY, posZ);
 
-		if (blockpos.getY() >= worldObj.getSeaLevel())
+		if (blockpos.getY() >= world.getSeaLevel())
 			return false;
 		else
 		{
-			int i = worldObj.getLightFromNeighbors(blockpos);
+			int i = world.getLightFromNeighbors(blockpos);
 			int j = 4;
 
-			if (isDateAroundHalloween(worldObj.getCurrentDate()))
+			if (isDateAroundHalloween(world.getCurrentDate()))
 				j = 7;
 			else if (rand.nextBoolean())
 				return false;

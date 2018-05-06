@@ -54,7 +54,7 @@ public class ItemPEContainerBlock extends ItemBlockAC {
 	@SideOnly(Side.CLIENT)
 	public int getMaxEnergy(ItemStack stack) {
 		if(block.hasTileEntity(block.getStateFromMeta(stack.getItemDamage()))){
-			TileEntity tile = block.createTileEntity(Minecraft.getMinecraft().theWorld, block.getStateFromMeta(stack.getItemDamage()));
+			TileEntity tile = block.createTileEntity(Minecraft.getMinecraft().world, block.getStateFromMeta(stack.getItemDamage()));
 			if(tile instanceof IEnergyContainer)
 				return ((IEnergyContainer)tile).getMaxEnergy();
 		}

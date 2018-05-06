@@ -79,7 +79,7 @@ public class EntitySacthoth extends EntityMob implements IOmotholEntity {
 	}
 
 	@Override
-	protected PathNavigate getNewNavigator(World worldIn)
+	protected PathNavigate createNavigator(World worldIn)
 	{
 		return new PathNavigateClimber(this, worldIn);
 	}
@@ -108,7 +108,7 @@ public class EntitySacthoth extends EntityMob implements IOmotholEntity {
 	{
 		super.onUpdate();
 
-		if (!worldObj.isRemote)
+		if (!world.isRemote)
 			setBesideClimbableBlock(isCollidedHorizontally);
 	}
 
@@ -267,19 +267,19 @@ public class EntitySacthoth extends EntityMob implements IOmotholEntity {
 	@Override
 	public boolean attackEntityFrom(DamageSource par1DamageSource, float par2)
 	{
-		if(par2 > 30) par2 = 10 + worldObj.rand.nextInt(10);
+		if(par2 > 30) par2 = 10 + world.rand.nextInt(10);
 
 		if(par1DamageSource == DamageSource.inWall){
 			teleportRandomly();
 			return false;
 		}
 		else if(par1DamageSource.isExplosion()){
-			if(worldObj.isRemote)
+			if(world.isRemote)
 				SpecialTextUtil.SacthothText(I18n.translateToLocal("message.sacthoth.damage.explosion"));
 			return false;
 		}
 		else if(par1DamageSource.isProjectile()){
-			if(worldObj.isRemote)
+			if(world.isRemote)
 				SpecialTextUtil.SacthothText(I18n.translateToLocal("message.sacthoth.damage.projectile"));
 			return false;
 		}
@@ -308,14 +308,14 @@ public class EntitySacthoth extends EntityMob implements IOmotholEntity {
 		boolean flag = false;
 		BlockPos pos = new BlockPos(posX, posY, posZ);
 
-		if (worldObj.isBlockLoaded(pos))
+		if (world.isBlockLoaded(pos))
 		{
 			boolean flag1 = false;
 
 			while (!flag1 && pos.getY() > 0)
 			{
 				BlockPos pos1 = pos.down();
-				IBlockState block = worldObj.getBlockState(pos1);
+				IBlockState block = world.getBlockState(pos1);
 
 				if (block.getMaterial().blocksMovement())
 					flag1 = true;
@@ -330,7 +330,7 @@ public class EntitySacthoth extends EntityMob implements IOmotholEntity {
 			{
 				setPosition(posX, posY, posZ);
 
-				if (worldObj.getCollisionBoxes(this, getEntityBoundingBox()).isEmpty() && !worldObj.containsAnyLiquid(getEntityBoundingBox()))
+				if (world.getCollisionBoxes(this, getEntityBoundingBox()).isEmpty() && !world.containsAnyLiquid(getEntityBoundingBox()))
 					flag = true;
 			}
 		}
@@ -354,10 +354,10 @@ public class EntitySacthoth extends EntityMob implements IOmotholEntity {
 				double d8 = d4 + (posY - d4) * d6 + rand.nextDouble() * height;
 				double d9 = d5 + (posZ - d5) * d6 + (rand.nextDouble() - 0.5D) * width * 2.0D;
 				if(ACConfig.particleEntity)
-					worldObj.spawnParticle(EnumParticleTypes.SMOKE_LARGE, d7, d8, d9, f, f1, f2);
+					world.spawnParticle(EnumParticleTypes.SMOKE_LARGE, d7, d8, d9, f, f1, f2);
 			}
 
-			worldObj.playSound(d3, d4, d5, SoundEvents.ENTITY_ENDERMEN_TELEPORT, getSoundCategory(), 1.0F, 1.0F, false);
+			world.playSound(d3, d4, d5, SoundEvents.ENTITY_ENDERMEN_TELEPORT, getSoundCategory(), 1.0F, 1.0F, false);
 			playSound(SoundEvents.ENTITY_ENDERMEN_TELEPORT, 1.0F, 1.0F);
 			return true;
 		}
@@ -380,18 +380,18 @@ public class EntitySacthoth extends EntityMob implements IOmotholEntity {
 			float f1 = (rand.nextFloat() - 0.5F) * 4.0F;
 			float f2 = (rand.nextFloat() - 0.5F) * 8.0F;
 			if(ACConfig.particleEntity){
-				worldObj.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, posX + f, posY + 2.0D + f1, posZ + f2, 0.0D, 0.0D, 0.0D);
-				worldObj.spawnParticle(EnumParticleTypes.SMOKE_LARGE, posX + f, posY + 2.0D + f1, posZ + f2, 0.0D, 0.0D, 0.0D);
-				worldObj.spawnParticle(EnumParticleTypes.EXPLOSION_NORMAL, posX + f, posY + 2.0D + f1, posZ + f2, 0.0D, 0.0D, 0.0D);
+				world.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, posX + f, posY + 2.0D + f1, posZ + f2, 0.0D, 0.0D, 0.0D);
+				world.spawnParticle(EnumParticleTypes.SMOKE_LARGE, posX + f, posY + 2.0D + f1, posZ + f2, 0.0D, 0.0D, 0.0D);
+				world.spawnParticle(EnumParticleTypes.EXPLOSION_NORMAL, posX + f, posY + 2.0D + f1, posZ + f2, 0.0D, 0.0D, 0.0D);
 				if (deathTicks >= 190 && deathTicks <= 200)
-					worldObj.spawnParticle(EnumParticleTypes.EXPLOSION_HUGE, posX + f, posY + 2.0D + f1, posZ + f2, 0.0D, 0.0D, 0.0D);
+					world.spawnParticle(EnumParticleTypes.EXPLOSION_HUGE, posX + f, posY + 2.0D + f1, posZ + f2, 0.0D, 0.0D, 0.0D);
 			}
 		}
 
 		int i;
 		int j;
 
-		if (!worldObj.isRemote){
+		if (!world.isRemote){
 			if (deathTicks > 150 && deathTicks % 5 == 0)
 			{
 				i = 500;
@@ -400,35 +400,35 @@ public class EntitySacthoth extends EntityMob implements IOmotholEntity {
 				{
 					j = EntityXPOrb.getXPSplit(i);
 					i -= j;
-					worldObj.spawnEntityInWorld(new EntityXPOrb(worldObj, posX, posY, posZ, j));
+					world.spawnEntity(new EntityXPOrb(world, posX, posY, posZ, j));
 					if(deathTicks == 100 || deathTicks == 120 || deathTicks == 140 || deathTicks == 160 || deathTicks == 180){
-						worldObj.spawnEntityInWorld(new EntityItem(worldObj, posX + posneg(3), posY + rand.nextInt(3), posZ + posneg(3), new ItemStack(ACItems.shadow_fragment, 4)));
-						worldObj.spawnEntityInWorld(new EntityItem(worldObj, posX + posneg(3), posY + rand.nextInt(3), posZ + posneg(3), new ItemStack(ACItems.shadow_shard, 2)));
-						worldObj.spawnEntityInWorld(new EntityItem(worldObj, posX + posneg(3), posY + rand.nextInt(3), posZ + posneg(3), new ItemStack(ACItems.shadow_gem)));
-						worldObj.spawnEntityInWorld(new EntityItem(worldObj, posX + posneg(3), posY + rand.nextInt(3), posZ + posneg(3), new ItemStack(ACItems.shard_of_oblivion)));
+						world.spawnEntity(new EntityItem(world, posX + posneg(3), posY + rand.nextInt(3), posZ + posneg(3), new ItemStack(ACItems.shadow_fragment, 4)));
+						world.spawnEntity(new EntityItem(world, posX + posneg(3), posY + rand.nextInt(3), posZ + posneg(3), new ItemStack(ACItems.shadow_shard, 2)));
+						world.spawnEntity(new EntityItem(world, posX + posneg(3), posY + rand.nextInt(3), posZ + posneg(3), new ItemStack(ACItems.shadow_gem)));
+						world.spawnEntity(new EntityItem(world, posX + posneg(3), posY + rand.nextInt(3), posZ + posneg(3), new ItemStack(ACItems.shard_of_oblivion)));
 					}
 				}
 			}
 			if(deathTicks >= 100 && deathTicks <= 200){
 				if(deathTicks <= 110){
-					EntityShadowCreature shadowCreature = new EntityShadowCreature(worldObj);
+					EntityShadowCreature shadowCreature = new EntityShadowCreature(world);
 					shadowCreature.copyLocationAndAnglesFrom(this);
-					worldObj.spawnEntityInWorld(shadowCreature);
+					world.spawnEntity(shadowCreature);
 				}
 				if(deathTicks >= 160 && deathTicks <= 165){
-					EntityShadowMonster shadowMonster = new EntityShadowMonster(worldObj);
+					EntityShadowMonster shadowMonster = new EntityShadowMonster(world);
 					shadowMonster.copyLocationAndAnglesFrom(this);
-					worldObj.spawnEntityInWorld(shadowMonster);
+					world.spawnEntity(shadowMonster);
 				}
 				if(deathTicks == 200){
-					EntityShadowBeast shadowBeast = new EntityShadowBeast(worldObj);
+					EntityShadowBeast shadowBeast = new EntityShadowBeast(world);
 					shadowBeast.copyLocationAndAnglesFrom(this);
-					worldObj.spawnEntityInWorld(shadowBeast);
+					world.spawnEntity(shadowBeast);
 				}
 			}
-			if(deathTicks == 200 && !worldObj.isRemote){
+			if(deathTicks == 200 && !world.isRemote){
 				setDead();
-				worldObj.spawnEntityInWorld(new EntityItem(worldObj, posX, posY, posZ, new ItemStack(ACItems.sacthoths_soul_harvesting_blade)));
+				world.spawnEntity(new EntityItem(world, posX, posY, posZ, new ItemStack(ACItems.sacthoths_soul_harvesting_blade)));
 			}
 		}
 	}
@@ -446,13 +446,13 @@ public class EntitySacthoth extends EntityMob implements IOmotholEntity {
 	@Override
 	public void onLivingUpdate()
 	{
-		for (int i = 0; i < 2 * getBrightness(1.0f) && ACConfig.particleEntity && worldObj.provider.getDimension() != ACLib.dark_realm_id; ++i)
-			worldObj.spawnParticle(EnumParticleTypes.SMOKE_LARGE, posX + (rand.nextDouble() - 0.5D) * width, posY + rand.nextDouble() * height, posZ + (rand.nextDouble() - 0.5D) * width, 0.0D, 0.0D, 0.0D);
+		for (int i = 0; i < 2 * getBrightness(1.0f) && ACConfig.particleEntity && world.provider.getDimension() != ACLib.dark_realm_id; ++i)
+			world.spawnParticle(EnumParticleTypes.SMOKE_LARGE, posX + (rand.nextDouble() - 0.5D) * width, posY + rand.nextDouble() * height, posZ + (rand.nextDouble() - 0.5D) * width, 0.0D, 0.0D, 0.0D);
 
-		for(Entity entity : worldObj.getEntitiesWithinAABBExcludingEntity(this, getEntityBoundingBox().expand(30.0D, 30.0D, 30.0D)))
+		for(Entity entity : world.getEntitiesWithinAABBExcludingEntity(this, getEntityBoundingBox().expand(30.0D, 30.0D, 30.0D)))
 			if (entity instanceof EntityPlayer && !entity.isDead && deathTicks == 0 && !((EntityPlayer)entity).capabilities.isCreativeMode)
 				((EntityPlayer)entity).addPotionEffect(new PotionEffect(MobEffects.BLINDNESS, 40));
-		EntityPlayer player = worldObj.getClosestPlayerToEntity(this, 160D);
+		EntityPlayer player = world.getClosestPlayerToEntity(this, 160D);
 		if(player != null && player.getDistanceToEntity(this) >= 50D && !player.capabilities.isCreativeMode){
 			if(player.posX - posX > 50)
 				teleportTo(player.posX + 30, player.posY, player.posZ);
@@ -474,12 +474,12 @@ public class EntitySacthoth extends EntityMob implements IOmotholEntity {
 		{
 			motionX *= 0.05D;
 			motionZ *= 0.05D;
-			worldObj.setEntityState(this, (byte)23);
+			world.setEntityState(this, (byte)23);
 			if (ticksExisted % 5 == 0)
-				worldObj.playSound(null, new BlockPos(posX + 0.5D, posY + getEyeHeight(), posZ + 0.5D), SoundEvents.ENTITY_GHAST_SHOOT, getSoundCategory(), 0.5F + getRNG().nextFloat(), getRNG().nextFloat() * 0.7F + 0.3F);
+				world.playSound(null, new BlockPos(posX + 0.5D, posY + getEyeHeight(), posZ + 0.5D), SoundEvents.ENTITY_GHAST_SHOOT, getSoundCategory(), 0.5F + getRNG().nextFloat(), getRNG().nextFloat() * 0.7F + 0.3F);
 			Entity target = getHeadLookTarget();
 			if (target != null) {
-				List<EntityLivingBase> list1 = worldObj.getEntitiesWithinAABB(EntityLivingBase.class, target.getEntityBoundingBox().expand(2.0D, 2.0D, 2.0D), Predicates.and(new Predicate[] { EntitySelectors.IS_ALIVE }));
+				List<EntityLivingBase> list1 = world.getEntitiesWithinAABB(EntityLivingBase.class, target.getEntityBoundingBox().expand(2.0D, 2.0D, 2.0D), Predicates.and(new Predicate[] { EntitySelectors.IS_ALIVE }));
 
 				for(EntityLivingBase entity : list1)
 
@@ -508,14 +508,14 @@ public class EntitySacthoth extends EntityMob implements IOmotholEntity {
 		double range = 4D + rand.nextDouble() * 8D;
 		Vec3d srcVec = new Vec3d(posX, posY + getEyeHeight(), posZ);
 		Vec3d lookVec = getLook(1.0F);
-		RayTraceResult raytrace = worldObj.rayTraceBlocks(srcVec, srcVec.addVector(lookVec.xCoord * range, lookVec.yCoord * range, lookVec.zCoord * range));
+		RayTraceResult raytrace = world.rayTraceBlocks(srcVec, srcVec.addVector(lookVec.xCoord * range, lookVec.yCoord * range, lookVec.zCoord * range));
 		BlockPos hitpos = raytrace != null ? raytrace.getBlockPos() : null;
 		double rx = hitpos == null ? range : Math.min(range, Math.abs(posX - hitpos.getX()));
 		double ry = hitpos == null ? range : Math.min(range, Math.abs(posY - hitpos.getY()));
 		double rz = hitpos == null ? range : Math.min(range, Math.abs(posZ - hitpos.getZ()));
 		Vec3d destVec = srcVec.addVector(lookVec.xCoord * range, lookVec.yCoord * range, lookVec.zCoord * range);
 		float var9 = 4.0F;
-		List<Entity> possibleList = worldObj.getEntitiesWithinAABBExcludingEntity(this, getEntityBoundingBox().offset(lookVec.xCoord * rx, lookVec.yCoord * ry, lookVec.zCoord * rz).expand(var9, var9, var9));
+		List<Entity> possibleList = world.getEntitiesWithinAABBExcludingEntity(this, getEntityBoundingBox().offset(lookVec.xCoord * rx, lookVec.yCoord * ry, lookVec.zCoord * rz).expand(var9, var9, var9));
 		double hitDist = 0.0D;
 		for (Entity possibleEntity : possibleList)
 			if (possibleEntity != this && possibleEntity instanceof EntityLivingBase)
@@ -546,7 +546,7 @@ public class EntitySacthoth extends EntityMob implements IOmotholEntity {
 
 	protected void addMouthParticles()
 	{
-		if (worldObj.isRemote)
+		if (world.isRemote)
 		{
 			Vec3d vector = getLookVec();
 
@@ -571,10 +571,10 @@ public class EntitySacthoth extends EntityMob implements IOmotholEntity {
 				dy *= velocity;
 				dz *= velocity;
 
-				worldObj.spawnParticle(EnumParticleTypes.SMOKE_LARGE, px + getRNG().nextDouble() - 0.5D, py + getRNG().nextDouble() - 0.5D, pz + getRNG().nextDouble() - 0.5D, dx, dy, dz);
+				world.spawnParticle(EnumParticleTypes.SMOKE_LARGE, px + getRNG().nextDouble() - 0.5D, py + getRNG().nextDouble() - 0.5D, pz + getRNG().nextDouble() - 0.5D, dx, dy, dz);
 			}
 		} else
-			worldObj.setEntityState(this, (byte)23);
+			world.setEntityState(this, (byte)23);
 	}
 
 	@Override
@@ -610,11 +610,11 @@ public class EntitySacthoth extends EntityMob implements IOmotholEntity {
 	{
 		par1EntityLivingData = super.onInitialSpawn(difficulty, par1EntityLivingData);
 
-		if(worldObj.isDaytime())
-			worldObj.setWorldTime(14000L);
+		if(world.isDaytime())
+			world.setWorldTime(14000L);
 
 		IAttributeInstance attribute = getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE);
-		Calendar calendar = worldObj.getCurrentDate();
+		Calendar calendar = world.getCurrentDate();
 
 		attribute.removeModifier(attackDamageBoost);
 

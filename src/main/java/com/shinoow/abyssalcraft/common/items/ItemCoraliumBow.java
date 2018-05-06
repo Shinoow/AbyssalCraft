@@ -178,7 +178,7 @@ public class ItemCoraliumBow extends ItemBow implements IUnlockableItem {
 						if (flag1)
 							entityarrow.pickupStatus = EntityArrow.PickupStatus.CREATIVE_ONLY;
 
-						par2World.spawnEntityInWorld(entityarrow);
+						par2World.spawnEntity(entityarrow);
 					}
 
 					par2World.playSound((EntityPlayer)null, player.posX, player.posY, player.posZ, SoundEvents.ENTITY_ARROW_SHOOT, SoundCategory.NEUTRAL, 1.0F, 1.0F / (itemRand.nextFloat() * 0.4F + 1.2F) + f * 0.5F);

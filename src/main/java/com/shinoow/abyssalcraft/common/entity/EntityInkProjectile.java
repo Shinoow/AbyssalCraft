@@ -45,9 +45,9 @@ public class EntityInkProjectile extends EntityThrowable {
 	{
 		if(ACConfig.particleEntity)
 			for(int i = 0; i < 4; i++){
-				worldObj.spawnParticle(EnumParticleTypes.WATER_BUBBLE, posX - motionX * 0.25F + rand.nextDouble() * 0.6D - 0.3D, posY - motionY * 0.25F - 0.5D, posZ - motionZ * 0.25F + rand.nextDouble() * 0.6D - 0.3D, motionX, motionY, motionZ, new int[0]);
-				worldObj.spawnParticle(EnumParticleTypes.WATER_SPLASH, posX - motionX * 0.25F + rand.nextDouble() * 0.6D - 0.3D, posY - motionY * 0.25F - 0.5D, posZ - motionZ * 0.25F + rand.nextDouble() * 0.6D - 0.3D, motionX, motionY, motionZ, new int[0]);
-				worldObj.spawnParticle(EnumParticleTypes.SPELL_MOB, posX - motionX * 0.25F + rand.nextDouble() * 0.6D - 0.3D, posY - motionY * 0.25F - 0.5D, posZ - motionZ * 0.25F + rand.nextDouble() * 0.6D - 0.3D, 0, 0, 0, new int[0]);
+				world.spawnParticle(EnumParticleTypes.WATER_BUBBLE, posX - motionX * 0.25F + rand.nextDouble() * 0.6D - 0.3D, posY - motionY * 0.25F - 0.5D, posZ - motionZ * 0.25F + rand.nextDouble() * 0.6D - 0.3D, motionX, motionY, motionZ, new int[0]);
+				world.spawnParticle(EnumParticleTypes.WATER_SPLASH, posX - motionX * 0.25F + rand.nextDouble() * 0.6D - 0.3D, posY - motionY * 0.25F - 0.5D, posZ - motionZ * 0.25F + rand.nextDouble() * 0.6D - 0.3D, motionX, motionY, motionZ, new int[0]);
+				world.spawnParticle(EnumParticleTypes.SPELL_MOB, posX - motionX * 0.25F + rand.nextDouble() * 0.6D - 0.3D, posY - motionY * 0.25F - 0.5D, posZ - motionZ * 0.25F + rand.nextDouble() * 0.6D - 0.3D, 0, 0, 0, new int[0]);
 			}
 		super.onUpdate();
 	}
@@ -59,7 +59,7 @@ public class EntityInkProjectile extends EntityThrowable {
 		{
 			byte b0 = 2;
 
-			if(result.entityHit instanceof EntityLivingBase && !worldObj.isRemote){
+			if(result.entityHit instanceof EntityLivingBase && !world.isRemote){
 				if(rand.nextBoolean() && !EntityUtil.isEntityCoralium((EntityLivingBase) result.entityHit))
 					((EntityLivingBase)result.entityHit).addPotionEffect(new PotionEffect(AbyssalCraftAPI.coralium_plague, 100));
 				if(rand.nextInt(4) == 0)
@@ -75,7 +75,7 @@ public class EntityInkProjectile extends EntityThrowable {
 				result.entityHit.attackEntityFrom(DamageSource.causeThrownDamage(this, getThrower()).setDamageBypassesArmor().setDamageIsAbsolute(), 1F);
 		}
 
-		if (!worldObj.isRemote)
+		if (!world.isRemote)
 			setDead();
 	}
 }

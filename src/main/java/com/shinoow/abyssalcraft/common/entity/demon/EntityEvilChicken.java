@@ -137,14 +137,14 @@ public class EntityEvilChicken extends EntityMob implements IShearable {
 	{
 		super.onDeath(par1DamageSource);
 
-		if(!worldObj.isRemote)
+		if(!world.isRemote)
 			if(!(par1DamageSource.getEntity() instanceof EntityLesserShoggoth))
 			{
-				EntityDemonChicken demonchicken = new EntityDemonChicken(worldObj);
+				EntityDemonChicken demonchicken = new EntityDemonChicken(world);
 				demonchicken.copyLocationAndAnglesFrom(this);
-				worldObj.removeEntity(this);
-				demonchicken.onInitialSpawn(worldObj.getDifficultyForLocation(new BlockPos(posX, posY, posZ)), (IEntityLivingData)null);
-				worldObj.spawnEntityInWorld(demonchicken);
+				world.removeEntity(this);
+				demonchicken.onInitialSpawn(world.getDifficultyForLocation(new BlockPos(posX, posY, posZ)), (IEntityLivingData)null);
+				world.spawnEntity(demonchicken);
 			}
 	}
 
@@ -155,7 +155,7 @@ public class EntityEvilChicken extends EntityMob implements IShearable {
 
 	@Override public boolean isShearable(ItemStack item, net.minecraft.world.IBlockAccess world, BlockPos pos){ return true; }
 	@Override
-	public java.util.List<ItemStack> onSheared(ItemStack item, net.minecraft.world.IBlockAccess world, BlockPos pos, int fortune)
+	public java.util.List<ItemStack> onSheared(ItemStack item, net.minecraft.world.IBlockAccess worldIn, BlockPos pos, int fortune)
 	{
 		int i = 1 + rand.nextInt(3);
 
@@ -165,12 +165,12 @@ public class EntityEvilChicken extends EntityMob implements IShearable {
 
 		playSound(SoundEvents.ENTITY_SHEEP_SHEAR, 1.0F, 1.0F);
 		playSound(SoundEvents.ENTITY_GHAST_HURT, 1.0F, 0.2F);
-		if(!worldObj.isRemote){
-			EntityDemonChicken demonchicken = new EntityDemonChicken(worldObj);
+		if(!world.isRemote){
+			EntityDemonChicken demonchicken = new EntityDemonChicken(world);
 			demonchicken.copyLocationAndAnglesFrom(this);
-			worldObj.removeEntity(this);
-			demonchicken.onInitialSpawn(worldObj.getDifficultyForLocation(new BlockPos(posX, posY, posZ)), (IEntityLivingData)null);
-			worldObj.spawnEntityInWorld(demonchicken);
+			world.removeEntity(this);
+			demonchicken.onInitialSpawn(world.getDifficultyForLocation(new BlockPos(posX, posY, posZ)), (IEntityLivingData)null);
+			world.spawnEntity(demonchicken);
 		}
 		return ret;
 	}

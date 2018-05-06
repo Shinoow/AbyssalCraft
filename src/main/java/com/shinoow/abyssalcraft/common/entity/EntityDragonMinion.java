@@ -158,13 +158,13 @@ public class EntityDragonMinion extends EntityMob implements IEntityMultiPart, I
 		float f;
 		float f1;
 
-		if (worldObj.isRemote)
+		if (world.isRemote)
 		{
 			f = MathHelper.cos(animTime * (float)Math.PI * 2.0F);
 			f1 = MathHelper.cos(prevAnimTime * (float)Math.PI * 2.0F);
 
 			if (f1 <= -0.3F && f >= -0.3F)
-				worldObj.playSound(posX, posY, posZ, SoundEvents.ENTITY_ENDERDRAGON_FLAP, getSoundCategory(), 5.0F, 0.8F + rand.nextFloat() * 0.3F, false);
+				world.playSound(posX, posY, posZ, SoundEvents.ENTITY_ENDERDRAGON_FLAP, getSoundCategory(), 5.0F, 0.8F + rand.nextFloat() * 0.3F, false);
 		}
 
 		prevAnimTime = animTime;
@@ -176,12 +176,12 @@ public class EntityDragonMinion extends EntityMob implements IEntityMultiPart, I
 			f1 = (rand.nextFloat() - 0.5F) * 4.0F;
 			f2 = (rand.nextFloat() - 0.5F) * 8.0F;
 			if(ACConfig.particleEntity)
-				worldObj.spawnParticle(EnumParticleTypes.EXPLOSION_LARGE, posX + f, posY + 2.0D + f1, posZ + f2, 0.0D, 0.0D, 0.0D);
+				world.spawnParticle(EnumParticleTypes.EXPLOSION_LARGE, posX + f, posY + 2.0D + f1, posZ + f2, 0.0D, 0.0D, 0.0D);
 		}
 		else
 		{
 			updateHealingCircle();
-			f = 0.2F / (MathHelper.sqrt_double(motionX * motionX + motionZ * motionZ) * 10.0F + 1.0F);
+			f = 0.2F / (MathHelper.sqrt(motionX * motionX + motionZ * motionZ) * 10.0F + 1.0F);
 			f *= (float)Math.pow(2.0D, motionY);
 
 			animTime += f;
@@ -207,7 +207,7 @@ public class EntityDragonMinion extends EntityMob implements IEntityMultiPart, I
 			double d3;
 			float f3;
 
-			if (worldObj.isRemote)
+			if (world.isRemote)
 			{
 				if (newPosRotationIncrements > 0)
 				{
@@ -252,7 +252,7 @@ public class EntityDragonMinion extends EntityMob implements IEntityMultiPart, I
 				if (forceNewTarget || d2 < 100.0D || d2 > 22500.0D || isCollidedHorizontally || isCollidedVertically)
 					setNewTarget();
 
-				d0 /= MathHelper.sqrt_double(d3 * d3 + d1 * d1);
+				d0 /= MathHelper.sqrt(d3 * d3 + d1 * d1);
 				f3 = 0.6F;
 
 				if (d0 < -f3)
@@ -280,7 +280,7 @@ public class EntityDragonMinion extends EntityMob implements IEntityMultiPart, I
 					f4 = 0.0F;
 
 				randomYawVelocity *= 0.8F;
-				float f5 = MathHelper.sqrt_double(motionX * motionX + motionZ * motionZ) * 1.0F + 1.0F;
+				float f5 = MathHelper.sqrt(motionX * motionX + motionZ * motionZ) * 1.0F + 1.0F;
 				double d10 = Math.sqrt(motionX * motionX + motionZ * motionZ) * 1.0D + 1.0D;
 
 				if (d10 > 40.0D)
@@ -293,7 +293,7 @@ public class EntityDragonMinion extends EntityMob implements IEntityMultiPart, I
 				moveRelative(0.0F, -1.0F, f7 * (f4 * f6 + (1.0F - f6)));
 
 
-				moveEntity(motionX, motionY, motionZ);
+				move(motionX, motionY, motionZ);
 
 
 				Vec3d vec32 = new Vec3d(motionX, motionY, motionZ).normalize();
@@ -328,11 +328,11 @@ public class EntityDragonMinion extends EntityMob implements IEntityMultiPart, I
 			dragonPartWing2.onUpdate();
 			dragonPartWing2.setLocationAndAngles(posX - f12 * 2.2F, posY + 1.0D, posZ - f11 * 2.2F, 0.0F, 0.0F);
 
-			if (!worldObj.isRemote && hurtTime == 0)
+			if (!world.isRemote && hurtTime == 0)
 			{
-				collideWithEntities(worldObj.getEntitiesWithinAABBExcludingEntity(this, dragonPartWing1.getEntityBoundingBox().expand(1.0D, 0.5D, 1.0D).offset(0.0D, -0.5D, 0.0D)));
-				collideWithEntities(worldObj.getEntitiesWithinAABBExcludingEntity(this, dragonPartWing2.getEntityBoundingBox().expand(1.0D, 0.5D, 1.0D).offset(0.0D, -0.5D, 0.0D)));
-				attackEntitiesInList(worldObj.getEntitiesWithinAABBExcludingEntity(this, dragonPartHead.getEntityBoundingBox().expand(0.25D, 0.25D, 0.25D)));
+				collideWithEntities(world.getEntitiesWithinAABBExcludingEntity(this, dragonPartWing1.getEntityBoundingBox().expand(1.0D, 0.5D, 1.0D).offset(0.0D, -0.5D, 0.0D)));
+				collideWithEntities(world.getEntitiesWithinAABBExcludingEntity(this, dragonPartWing2.getEntityBoundingBox().expand(1.0D, 0.5D, 1.0D).offset(0.0D, -0.5D, 0.0D)));
+				attackEntitiesInList(world.getEntitiesWithinAABBExcludingEntity(this, dragonPartHead.getEntityBoundingBox().expand(0.25D, 0.25D, 0.25D)));
 			}
 
 			double[] adouble = getMovementOffsets(5, 1.0F);
@@ -368,7 +368,7 @@ public class EntityDragonMinion extends EntityMob implements IEntityMultiPart, I
 	}
 
 	@Override
-	public void moveEntity(double x, double y, double z)
+	public void move(double x, double y, double z)
 	{
 		setEntityBoundingBox(getEntityBoundingBox().offset(x, y, z));
 		resetPositionToBB();
@@ -393,13 +393,13 @@ public class EntityDragonMinion extends EntityMob implements IEntityMultiPart, I
 		BlockPos.PooledMutableBlockPos blockpos$pooledmutableblockpos1 = BlockPos.PooledMutableBlockPos.retain(axisalignedbb.maxX - 0.001D, axisalignedbb.maxY - 0.001D, axisalignedbb.maxZ - 0.001D);
 		BlockPos.PooledMutableBlockPos blockpos$pooledmutableblockpos2 = BlockPos.PooledMutableBlockPos.retain();
 
-		if (worldObj.isAreaLoaded(blockpos$pooledmutableblockpos, blockpos$pooledmutableblockpos1))
+		if (world.isAreaLoaded(blockpos$pooledmutableblockpos, blockpos$pooledmutableblockpos1))
 			for (int i = blockpos$pooledmutableblockpos.getX(); i <= blockpos$pooledmutableblockpos1.getX(); ++i)
 				for (int j = blockpos$pooledmutableblockpos.getY(); j <= blockpos$pooledmutableblockpos1.getY(); ++j)
 					for (int k = blockpos$pooledmutableblockpos.getZ(); k <= blockpos$pooledmutableblockpos1.getZ(); ++k)
 					{
 						blockpos$pooledmutableblockpos2.setPos(i, j, k);
-						IBlockState iblockstate = worldObj.getBlockState(blockpos$pooledmutableblockpos2);
+						IBlockState iblockstate = world.getBlockState(blockpos$pooledmutableblockpos2);
 
 						if(iblockstate.getMaterial() == Material.PORTAL)
 							addVelocity(motionX > 0 ? -3 : 3, motionY > 0 ? -3 : 3, motionZ > 0 ? -3 : 3);
@@ -415,7 +415,7 @@ public class EntityDragonMinion extends EntityMob implements IEntityMultiPart, I
 		if (healingcircle != null)
 			if (healingcircle.isDead)
 			{
-				if (!worldObj.isRemote)
+				if (!world.isRemote)
 					attackEntityFromPart(dragonPartHead, DamageSource.causeExplosionDamage((Explosion)null), 100.0F);
 
 				healingcircle = null;
@@ -426,7 +426,7 @@ public class EntityDragonMinion extends EntityMob implements IEntityMultiPart, I
 		if (rand.nextInt(10) == 0)
 		{
 			float f = 32.0F;
-			List<?> list = worldObj.getEntitiesWithinAABB(EntityDragonBoss.class, getEntityBoundingBox().expand(f, f, f));
+			List<?> list = world.getEntitiesWithinAABB(EntityDragonBoss.class, getEntityBoundingBox().expand(f, f, f));
 			EntityDragonBoss entitydragonboss = null;
 			double d0 = Double.MAX_VALUE;
 			Iterator<?> iterator = list.iterator();
@@ -486,8 +486,8 @@ public class EntityDragonMinion extends EntityMob implements IEntityMultiPart, I
 	{
 		forceNewTarget = false;
 
-		if (rand.nextInt(2) == 0 && !worldObj.playerEntities.isEmpty())
-			target = worldObj.playerEntities.get(rand.nextInt(worldObj.playerEntities.size()));
+		if (rand.nextInt(2) == 0 && !world.playerEntities.isEmpty())
+			target = world.playerEntities.get(rand.nextInt(world.playerEntities.size()));
 		else
 		{
 			boolean flag = false;
@@ -556,7 +556,7 @@ public class EntityDragonMinion extends EntityMob implements IEntityMultiPart, I
 	@Override
 	public World getWorld()
 	{
-		return worldObj;
+		return world;
 	}
 
 	@Override

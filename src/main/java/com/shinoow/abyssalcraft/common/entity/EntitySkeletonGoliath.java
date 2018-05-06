@@ -147,11 +147,11 @@ public class EntitySkeletonGoliath extends EntityMob {
 	@Override
 	public void onLivingUpdate()
 	{
-		if (worldObj.isDaytime() && !worldObj.isRemote && worldObj.provider.getDimension() != ACLib.abyssal_wasteland_id)
+		if (world.isDaytime() && !world.isRemote && world.provider.getDimension() != ACLib.abyssal_wasteland_id)
 		{
 			float f = getBrightness(1.0F);
 
-			if (f > 0.5F && rand.nextFloat() * 30.0F < (f - 0.4F) * 2.0F && worldObj.canSeeSky(new BlockPos(MathHelper.floor_double(posX), MathHelper.floor_double(posY), MathHelper.floor_double(posZ))))
+			if (f > 0.5F && rand.nextFloat() * 30.0F < (f - 0.4F) * 2.0F && world.canSeeSky(new BlockPos(MathHelper.floor(posX), MathHelper.floor(posY), MathHelper.floor(posZ))))
 			{
 				boolean flag = true;
 				ItemStack var3 = getItemStackFromSlot(EntityEquipmentSlot.HEAD);
@@ -185,7 +185,7 @@ public class EntitySkeletonGoliath extends EntityMob {
 
 		if (getItemStackFromSlot(EntityEquipmentSlot.HEAD) == null)
 		{
-			Calendar calendar = worldObj.getCurrentDate();
+			Calendar calendar = world.getCurrentDate();
 
 			if (calendar.get(2) + 1 == 10 && calendar.get(5) == 31 && rand.nextFloat() < 0.25F)
 			{
@@ -195,7 +195,7 @@ public class EntitySkeletonGoliath extends EntityMob {
 		}
 
 		IAttributeInstance attribute = getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE);
-		Calendar calendar = worldObj.getCurrentDate();
+		Calendar calendar = world.getCurrentDate();
 
 		attribute.removeModifier(attackDamageBoost);
 

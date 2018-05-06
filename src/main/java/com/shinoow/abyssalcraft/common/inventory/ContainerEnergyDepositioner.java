@@ -84,7 +84,7 @@ public class ContainerEnergyDepositioner extends Container {
 	@Override
 	public boolean canInteractWith(EntityPlayer var1) {
 
-		return tileEntityPEGenerator.isUseableByPlayer(var1);
+		return tileEntityPEGenerator.isUsableByPlayer(var1);
 	}
 
 	@Override

@@ -79,7 +79,7 @@ public class EntityDreadSpawn extends EntityMob implements IDreadEntity
 	}
 
 	@Override
-	protected PathNavigate getNewNavigator(World worldIn)
+	protected PathNavigate createNavigator(World worldIn)
 	{
 		return new PathNavigateClimber(this, worldIn);
 	}
@@ -111,7 +111,7 @@ public class EntityDreadSpawn extends EntityMob implements IDreadEntity
 	{
 		super.onUpdate();
 
-		if (!worldObj.isRemote)
+		if (!world.isRemote)
 			setBesideClimbableBlock(isCollidedHorizontally);
 	}
 
@@ -195,18 +195,18 @@ public class EntityDreadSpawn extends EntityMob implements IDreadEntity
 	{
 		super.onLivingUpdate();
 
-		List<EntityDreadSpawn> dreadspawns = worldObj.getEntitiesWithinAABB(getClass(), getEntityBoundingBox().expand(2D, 2D, 2D));
+		List<EntityDreadSpawn> dreadspawns = world.getEntitiesWithinAABB(getClass(), getEntityBoundingBox().expand(2D, 2D, 2D));
 
-		if(!worldObj.isRemote)
+		if(!world.isRemote)
 			if(!dreadspawns.isEmpty())
 				if(dreadspawns.size() >= 5 && !hasMerged){
 					hasMerged = true;
 					for(int i = 0; i < 5; i++)
-						worldObj.removeEntity(dreadspawns.get(i));
-					EntityGreaterDreadSpawn greaterspawn = new EntityGreaterDreadSpawn(worldObj);
+						world.removeEntity(dreadspawns.get(i));
+					EntityGreaterDreadSpawn greaterspawn = new EntityGreaterDreadSpawn(world);
 					greaterspawn.copyLocationAndAnglesFrom(this);
-					worldObj.removeEntity(this);
-					worldObj.spawnEntityInWorld(greaterspawn);
+					world.removeEntity(this);
+					world.spawnEntity(greaterspawn);
 					hasMerged = false;
 				}
 	}

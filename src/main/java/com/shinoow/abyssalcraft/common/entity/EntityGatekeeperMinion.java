@@ -115,7 +115,7 @@ public class EntityGatekeeperMinion extends EntityMob implements IOmotholEntity 
 		if(par1DamageSource.getSourceOfDamage() != null && par1DamageSource.getSourceOfDamage() instanceof EntityLivingBase)
 			enemy = (EntityLivingBase) par1DamageSource.getSourceOfDamage();
 		if(rand.nextInt(10) == 0){
-			List<EntityRemnant> remnants = worldObj.getEntitiesWithinAABB(EntityRemnant.class, getEntityBoundingBox().expand(16D, 16D, 16D));
+			List<EntityRemnant> remnants = world.getEntitiesWithinAABB(EntityRemnant.class, getEntityBoundingBox().expand(16D, 16D, 16D));
 			if(remnants != null)
 				if(enemy != null){
 					Iterator<EntityRemnant> iter = remnants.iterator();
@@ -164,7 +164,7 @@ public class EntityGatekeeperMinion extends EntityMob implements IOmotholEntity 
 
 		if (getItemStackFromSlot(EntityEquipmentSlot.HEAD) == null)
 		{
-			Calendar calendar = worldObj.getCurrentDate();
+			Calendar calendar = world.getCurrentDate();
 
 			if (calendar.get(2) + 1 == 10 && calendar.get(5) == 31 && rand.nextFloat() < 0.25F)
 			{
@@ -174,7 +174,7 @@ public class EntityGatekeeperMinion extends EntityMob implements IOmotholEntity 
 		}
 
 		IAttributeInstance attribute = getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE);
-		Calendar calendar = worldObj.getCurrentDate();
+		Calendar calendar = world.getCurrentDate();
 
 		attribute.removeModifier(attackDamageBoost);
 

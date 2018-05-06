@@ -212,7 +212,7 @@ public class InventoryMaterializer implements IInventory
 	 * Don't rename this method to canInteractWith due to conflicts with Container
 	 */
 	@Override
-	public boolean isUseableByPlayer(EntityPlayer player)
+	public boolean isUsableByPlayer(EntityPlayer player)
 	{
 		return true;
 	}

@@ -146,7 +146,7 @@ public class BlockRitualAltar extends BlockContainer {
 				item.motionX = (float)rand.nextGaussian() * f3;
 				item.motionY = (float)rand.nextGaussian() * f3 + 0.2F;
 				item.motionZ = (float)rand.nextGaussian() * f3;
-				world.spawnEntityInWorld(item);
+				world.spawnEntity(item);
 			}
 
 		super.breakBlock(world, pos, state);

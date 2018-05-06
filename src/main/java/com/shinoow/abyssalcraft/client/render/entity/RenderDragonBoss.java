@@ -63,7 +63,7 @@ public class RenderDragonBoss extends RenderLiving<EntityDragonBoss> {
 	 * Used to rotate the dragon as a whole in RenderDragon. It's called in the rotateCorpse method.
 	 */
 	@Override
-	protected void rotateCorpse(EntityDragonBoss par1entitydragonboss, float par2, float par3, float par4)
+	protected void applyRotations(EntityDragonBoss par1entitydragonboss, float par2, float par3, float par4)
 	{
 		float f3 = (float)par1entitydragonboss.getMovementOffsets(7, par4)[0];
 		float f4 = (float)(par1entitydragonboss.getMovementOffsets(5, par4)[1] - par1entitydragonboss.getMovementOffsets(10, par4)[1]);
@@ -74,7 +74,7 @@ public class RenderDragonBoss extends RenderLiving<EntityDragonBoss> {
 		if (par1entitydragonboss.deathTime > 0)
 		{
 			float f5 = (par1entitydragonboss.deathTime + par4 - 1.0F) / 20.0F * 1.6F;
-			f5 = MathHelper.sqrt_float(f5);
+			f5 = MathHelper.sqrt(f5);
 
 			if (f5 > 1.0F)
 				f5 = 1.0F;
@@ -135,8 +135,8 @@ public class RenderDragonBoss extends RenderLiving<EntityDragonBoss> {
 			float f2 = (float)(entity.healingcircle.posX - entity.posX - (entity.prevPosX - entity.posX) * (1.0F - partialTicks));
 			float f3 = (float)(f1 + entity.healingcircle.posY - 1.0D - entity.posY - (entity.prevPosY - entity.posY) * (1.0F - partialTicks));
 			float f4 = (float)(entity.healingcircle.posZ - entity.posZ - (entity.prevPosZ - entity.posZ) * (1.0F - partialTicks));
-			float f5 = MathHelper.sqrt_float(f2 * f2 + f4 * f4);
-			float f6 = MathHelper.sqrt_float(f2 * f2 + f3 * f3 + f4 * f4);
+			float f5 = MathHelper.sqrt(f2 * f2 + f4 * f4);
+			float f6 = MathHelper.sqrt(f2 * f2 + f3 * f3 + f4 * f4);
 			GlStateManager.pushMatrix();
 			GlStateManager.translate((float)x, (float)y + 2.0F, (float)z);
 			GlStateManager.rotate((float)-Math.atan2(f4, f2) * 180.0F / (float)Math.PI - 90.0F, 0.0F, 1.0F, 0.0F);
@@ -148,7 +148,7 @@ public class RenderDragonBoss extends RenderLiving<EntityDragonBoss> {
 			bindTexture(field_110842_f);
 			GlStateManager.shadeModel(7425);
 			float f7 = 0.0F - (entity.ticksExisted + partialTicks) * 0.01F;
-			float f8 = MathHelper.sqrt_float(f2 * f2 + f3 * f3 + f4 * f4) / 32.0F - (entity.ticksExisted + partialTicks) * 0.01F;
+			float f8 = MathHelper.sqrt(f2 * f2 + f3 * f3 + f4 * f4) / 32.0F - (entity.ticksExisted + partialTicks) * 0.01F;
 			worldrenderer.begin(5, DefaultVertexFormats.POSITION_TEX_COLOR);
 			for (int j = 0; j <= 8; ++j)
 			{

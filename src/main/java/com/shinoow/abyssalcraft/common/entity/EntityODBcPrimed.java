@@ -71,7 +71,7 @@ public class EntityODBcPrimed extends Entity {
 		prevPosY = posY;
 		prevPosZ = posZ;
 		motionY -= 0.03999999910593033D;
-		moveEntity(motionX, motionY, motionZ);
+		move(motionX, motionY, motionZ);
 		motionX *= 0.9800000190734863D;
 		motionY *= 0.9800000190734863D;
 		motionZ *= 0.9800000190734863D;
@@ -92,15 +92,15 @@ public class EntityODBcPrimed extends Entity {
 		} else {
 			handleWaterMovement();
 			if(ACConfig.particleEntity)
-				AbyssalCraft.proxy.spawnParticle("CorBlood", worldObj, posX + (rand.nextDouble() - 0.5D) * width, posY + rand.nextDouble() * height - 0.25D, posZ + (rand.nextDouble() - 0.5D) * width, (rand.nextDouble() - 0.5D) * 100.0D, -rand.nextDouble(), (rand.nextDouble() - 0.5D) * 100.0D);
+				AbyssalCraft.proxy.spawnParticle("CorBlood", world, posX + (rand.nextDouble() - 0.5D) * width, posY + rand.nextDouble() * height - 0.25D, posZ + (rand.nextDouble() - 0.5D) * width, (rand.nextDouble() - 0.5D) * 100.0D, -rand.nextDouble(), (rand.nextDouble() - 0.5D) * 100.0D);
 		}
 	}
 
 	private void explode()
 	{
-		if(!worldObj.isRemote){
+		if(!world.isRemote){
 			float var0 = 16.0F;
-			ExplosionUtil.newODBExplosion(worldObj, this, posX, posY, posZ, var0, false, true);
+			ExplosionUtil.newODBExplosion(world, this, posX, posY, posZ, var0, false, true);
 		}
 	}
 

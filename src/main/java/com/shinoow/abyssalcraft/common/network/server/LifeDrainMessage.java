@@ -50,7 +50,7 @@ public class LifeDrainMessage extends AbstractServerMessage<LifeDrainMessage> {
 	@Override
 	public void process(EntityPlayer player, Side side) {
 
-		Entity e = player.worldObj.getEntityByID(id);
+		Entity e = player.world.getEntityByID(id);
 		if(e == null) return;
 
 		if(e instanceof EntityLivingBase){

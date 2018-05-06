@@ -160,10 +160,10 @@ public class AbyssalCraftEventHooks {
 		if(event.getEntityLiving().getItemStackFromSlot(EntityEquipmentSlot.CHEST) != null){
 			ItemStack slot = event.getEntityLiving().getItemStackFromSlot(EntityEquipmentSlot.CHEST);
 			if(slot.getItem() == ACItems.dreaded_abyssalnite_chestplate)
-				if(event.getSource().getEntity() != null && event.getEntityLiving().worldObj.rand.nextBoolean())
+				if(event.getSource().getEntity() != null && event.getEntityLiving().world.rand.nextBoolean())
 					event.getSource().getEntity().setFire(5);
 			if(slot.getItem() == ACItems.plated_coralium_chestplate)
-				if(event.getSource().getEntity() != null && event.getEntityLiving().worldObj.rand.nextBoolean())
+				if(event.getSource().getEntity() != null && event.getEntityLiving().world.rand.nextBoolean())
 					event.getSource().getEntity().attackEntityFrom(getSource(event.getEntityLiving()), 1);
 		}
 		if(event.getEntityLiving().getItemStackFromSlot(EntityEquipmentSlot.HEAD) != null &&
@@ -216,7 +216,7 @@ public class AbyssalCraftEventHooks {
 	@SubscribeEvent
 	public void darkRealm(LivingUpdateEvent event){
 		if(event.getEntityLiving() instanceof EntityPlayerMP){
-			WorldServer worldServer = (WorldServer)event.getEntityLiving().worldObj;
+			WorldServer worldServer = (WorldServer)event.getEntityLiving().world;
 			EntityPlayerMP player = (EntityPlayerMP)event.getEntityLiving();
 			if(player.dimension == ACLib.omothol_id && player.posY <= 0){
 				player.addPotionEffect(new PotionEffect(MobEffects.RESISTANCE, 80, 255));
@@ -228,7 +228,7 @@ public class AbyssalCraftEventHooks {
 		if(event.getEntityLiving().dimension == ACLib.dark_realm_id && !(event.getEntityLiving() instanceof EntityPlayer)){
 			Random rand = new Random();
 			if(ACConfig.particleEntity)
-				event.getEntityLiving().worldObj.spawnParticle(EnumParticleTypes.SMOKE_LARGE, event.getEntityLiving().posX + (rand.nextDouble() - 0.5D) * event.getEntityLiving().width,
+				event.getEntityLiving().world.spawnParticle(EnumParticleTypes.SMOKE_LARGE, event.getEntityLiving().posX + (rand.nextDouble() - 0.5D) * event.getEntityLiving().width,
 					event.getEntityLiving().posY + rand.nextDouble() * event.getEntityLiving().height,
 					event.getEntityLiving().posZ + (rand.nextDouble() - 0.5D) * event.getEntityLiving().width, 0,0,0);
 		}
@@ -393,7 +393,7 @@ public class AbyssalCraftEventHooks {
 
 	@SubscribeEvent
 	public void onDeath(LivingDeathEvent event){
-		if(event.getEntityLiving() instanceof EntityPlayer && !event.getEntityLiving().worldObj.isRemote){
+		if(event.getEntityLiving() instanceof EntityPlayer && !event.getEntityLiving().world.isRemote){
 			EntityPlayer player = (EntityPlayer)event.getEntityLiving();
 			if(event.getSource().getEntity() != null && event.getSource().getEntity() instanceof EntityEvilSheep)
 				((EntityEvilSheep)event.getSource().getEntity()).setKilledPlayer(player);
@@ -406,7 +406,7 @@ public class AbyssalCraftEventHooks {
 		} else if(event.getEntityLiving() instanceof EntityHorse){
 			EntityHorse h = (EntityHorse)event.getEntityLiving();
 			if(h.isTame() && h.hasCustomName()){
-				EntityPlayer p = h.worldObj.getPlayerEntityByUUID(h.getOwnerUniqueId());
+				EntityPlayer p = h.world.getPlayerEntityByUUID(h.getOwnerUniqueId());
 				NecromancyCapability.getCap(p).storeData(h.getName(), h.serializeNBT(), calculateSize(h.height));
 			}
 		} else if(EntityList.getEntityString(event.getEntityLiving()) != null){
@@ -414,13 +414,13 @@ public class AbyssalCraftEventHooks {
 			if(!(e instanceof EntityEvilpig) && !(e instanceof EntityEvilCow) && !(e instanceof EntityEvilChicken)
 				&& !(e instanceof EntityEvilSheep) && !(e instanceof EntityDemonAnimal)){
 				Tuple<Integer, Float> data = InitHandler.demon_transformations.get(EntityList.getEntityString(e));
-				World world = event.getEntityLiving().worldObj;
+				World world = event.getEntityLiving().world;
 				if(data != null && world.rand.nextFloat() < data.getSecond() && !world.isRemote){
 					EntityLiving demon = getDemon(data.getFirst(), world);
 					demon.copyLocationAndAnglesFrom(e);
 					world.removeEntity(e);
 					demon.onInitialSpawn(world.getDifficultyForLocation(e.getPosition()), (IEntityLivingData)null);
-					world.spawnEntityInWorld(demon);
+					world.spawnEntity(demon);
 				}
 			}
 		}

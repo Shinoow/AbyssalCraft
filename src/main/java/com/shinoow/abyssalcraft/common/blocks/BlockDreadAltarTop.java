@@ -78,8 +78,8 @@ public class BlockDreadAltarTop extends Block {
 	}
 
 	@Override
-	public IBlockState onBlockPlaced(World world, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer){
-		super.onBlockPlaced(world, pos, facing, hitX, hitY, hitZ, meta, placer);
+	public IBlockState getStateForPlacement(World world, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer){
+		super.getStateForPlacement(world, pos, facing, hitX, hitY, hitZ, meta, placer);
 		if(world.isRemote)
 			if(world.provider.getDimension() == ACLib.dreadlands_id){
 				if(world.getBiome(pos) == ACBiomes.dreadlands_mountains){

@@ -69,7 +69,7 @@ public abstract class BlockDGhead extends BlockContainer /*implements IInfusionS
 			return;
 
 		TEDirectional tile = (TEDirectional) par1World.getTileEntity(pos);
-		tile.direction = MathHelper.floor_double(par5EntityLivingBase.rotationYaw * 4.0F / 360.0F + 0.5D) & 3;
+		tile.direction = MathHelper.floor(par5EntityLivingBase.rotationYaw * 4.0F / 360.0F + 0.5D) & 3;
 	}
 
 	//	@Override

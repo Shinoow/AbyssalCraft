@@ -195,11 +195,11 @@ public class EntityAntiCreeper extends EntityMob implements IAntiEntity {
 	@Override
 	protected void collideWithEntity(Entity par1Entity)
 	{
-		if(!worldObj.isRemote && par1Entity instanceof EntityCreeper){
-			boolean flag = worldObj.getGameRules().getBoolean("mobGriefing");
+		if(!world.isRemote && par1Entity instanceof EntityCreeper){
+			boolean flag = world.getGameRules().getBoolean("mobGriefing");
 			if(ACConfig.nuclearAntimatterExplosions)
-				ExplosionUtil.newODBExplosion(worldObj, this, posX, posY, posZ, 40, true, flag);
-			else worldObj.createExplosion(this, posX, posY, posZ, 5, flag);
+				ExplosionUtil.newODBExplosion(world, this, posX, posY, posZ, 40, true, flag);
+			else world.createExplosion(this, posX, posY, posZ, 5, flag);
 			setDead();
 		}
 		else par1Entity.applyEntityCollision(this);
@@ -264,10 +264,10 @@ public class EntityAntiCreeper extends EntityMob implements IAntiEntity {
 	{
 		if (stack != null && stack.getItem() == Items.FLINT_AND_STEEL)
 		{
-			worldObj.playSound(player, posX, posY, posZ, SoundEvents.ITEM_FLINTANDSTEEL_USE, getSoundCategory(), 1.0F, rand.nextFloat() * 0.4F + 0.8F);
+			world.playSound(player, posX, posY, posZ, SoundEvents.ITEM_FLINTANDSTEEL_USE, getSoundCategory(), 1.0F, rand.nextFloat() * 0.4F + 0.8F);
 			player.swingArm(p_184645_2_);
 
-			if (!worldObj.isRemote)
+			if (!world.isRemote)
 			{
 				ignite();
 				stack.damageItem(1, player);
@@ -280,10 +280,10 @@ public class EntityAntiCreeper extends EntityMob implements IAntiEntity {
 
 	private void explode()
 	{
-		if (!worldObj.isRemote){
-			boolean flag = worldObj.getGameRules().getBoolean("mobGriefing");
+		if (!world.isRemote){
+			boolean flag = world.getGameRules().getBoolean("mobGriefing");
 			float f = getPowered() ? 2.0F : 1.0F;
-			worldObj.createExplosion(this, posX, posY, posZ, explosionRadius * f, flag);
+			world.createExplosion(this, posX, posY, posZ, explosionRadius * f, flag);
 			setDead();
 		}
 	}

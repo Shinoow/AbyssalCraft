@@ -51,7 +51,7 @@ public class EntityCoraliumSquid extends EntitySquid implements ICoraliumEntity,
 	{
 		super.onLivingUpdate();
 
-		EntityPlayer player = worldObj.getClosestPlayer(posX, posY, posZ, 7, false);
+		EntityPlayer player = world.getClosestPlayer(posX, posY, posZ, 7, false);
 		if(player != null && !player.capabilities.isCreativeMode)
 			setAttackTarget(player);
 
@@ -62,13 +62,13 @@ public class EntityCoraliumSquid extends EntitySquid implements ICoraliumEntity,
 	@Override
 	public void attackEntityWithRangedAttack(EntityLivingBase target,
 		float p_82196_2_) {
-		EntityInkProjectile entityinkprojectile = new EntityInkProjectile(worldObj, this);
+		EntityInkProjectile entityinkprojectile = new EntityInkProjectile(world, this);
 		double d0 = target.posX - posX;
 		double d1 = target.posY + target.getEyeHeight() - 1.100000023841858D - entityinkprojectile.posY;
 		double d2 = target.posZ - posZ;
-		float f1 = MathHelper.sqrt_double(d0 * d0 + d2 * d2) * 0.2F;
+		float f1 = MathHelper.sqrt(d0 * d0 + d2 * d2) * 0.2F;
 		entityinkprojectile.setThrowableHeading(d0, d1 + f1, d2, 1.6F, 12.0F);
 		playSound(SoundEvents.ENTITY_SQUID_AMBIENT, 1.0F, 1.0F / (getRNG().nextFloat() * 0.4F + 0.8F));
-		worldObj.spawnEntityInWorld(entityinkprojectile);
+		world.spawnEntity(entityinkprojectile);
 	}
 }

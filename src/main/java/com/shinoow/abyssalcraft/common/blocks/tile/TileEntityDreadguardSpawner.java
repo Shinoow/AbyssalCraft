@@ -24,25 +24,25 @@ public class TileEntityDreadguardSpawner extends TileEntity implements ITickable
 	@Override
 	public void onLoad()
 	{
-		if(worldObj.isRemote)
-			worldObj.tickableTileEntities.remove(this);
+		if(world.isRemote)
+			world.tickableTileEntities.remove(this);
 	}
 
 	public boolean isActivated() {
-		return worldObj.getClosestPlayer(pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D,
+		return world.getClosestPlayer(pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D,
 			activatingRangeFromPlayer, true) != null &&
-			!worldObj.getClosestPlayer(pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D,
+			!world.getClosestPlayer(pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D,
 				activatingRangeFromPlayer, true).capabilities.isCreativeMode;
 	}
 
 	@Override
 	public void update() {
 		if (isActivated()) {
-			EntityDreadguard mob = new EntityDreadguard(worldObj);
-			mob.setLocationAndAngles(pos.getX(), pos.getY(), pos.getZ(), MathHelper.wrapDegrees(worldObj.rand.nextFloat() * 360.0F), 10.0F);
-			mob.onInitialSpawn(worldObj.getDifficultyForLocation(pos), null);
-			worldObj.spawnEntityInWorld(mob);
-			worldObj.setBlockToAir(pos);
+			EntityDreadguard mob = new EntityDreadguard(world);
+			mob.setLocationAndAngles(pos.getX(), pos.getY(), pos.getZ(), MathHelper.wrapDegrees(world.rand.nextFloat() * 360.0F), 10.0F);
+			mob.onInitialSpawn(world.getDifficultyForLocation(pos), null);
+			world.spawnEntity(mob);
+			world.setBlockToAir(pos);
 		}
 	}
 }

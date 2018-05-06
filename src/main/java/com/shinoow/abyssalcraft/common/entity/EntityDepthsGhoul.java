@@ -137,7 +137,7 @@ public class EntityDepthsGhoul extends EntityMob implements ICoraliumEntity {
 	{
 		dataManager.set(CHILD, Byte.valueOf((byte)(par1 ? 1 : 0)));
 
-		if (worldObj != null && !worldObj.isRemote)
+		if (world != null && !world.isRemote)
 		{
 			IAttributeInstance attributeinstance = getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED);
 			attributeinstance.removeModifier(babySpeedBoostModifier);
@@ -162,11 +162,11 @@ public class EntityDepthsGhoul extends EntityMob implements ICoraliumEntity {
 	@Override
 	public void onLivingUpdate()
 	{
-		if (worldObj.isDaytime() && !worldObj.isRemote && !isChild() && worldObj.provider.getDimension() != ACLib.abyssal_wasteland_id)
+		if (world.isDaytime() && !world.isRemote && !isChild() && world.provider.getDimension() != ACLib.abyssal_wasteland_id)
 		{
 			float var1 = getBrightness(1.0F);
 
-			if (var1 > 0.5F && rand.nextFloat() * 30.0F < (var1 - 0.4F) * 2.0F && worldObj.canSeeSky(new BlockPos(MathHelper.floor_double(posX), MathHelper.floor_double(posY), MathHelper.floor_double(posZ))))
+			if (var1 > 0.5F && rand.nextFloat() * 30.0F < (var1 - 0.4F) * 2.0F && world.canSeeSky(new BlockPos(MathHelper.floor(posX), MathHelper.floor(posY), MathHelper.floor(posZ))))
 			{
 				boolean var2 = true;
 				ItemStack var3 = getItemStackFromSlot(EntityEquipmentSlot.HEAD);
@@ -193,7 +193,7 @@ public class EntityDepthsGhoul extends EntityMob implements ICoraliumEntity {
 			}
 		}
 
-		if(worldObj.isRemote)
+		if(world.isRemote)
 			setChildSize(isChild());
 
 		super.onLivingUpdate();
@@ -220,11 +220,11 @@ public class EntityDepthsGhoul extends EntityMob implements ICoraliumEntity {
 
 		if(flag){
 			if(par1Entity instanceof EntityLivingBase)
-				if(worldObj.provider.getDimension() == ACLib.abyssal_wasteland_id && !EntityUtil.isEntityCoralium((EntityLivingBase)par1Entity)
+				if(world.provider.getDimension() == ACLib.abyssal_wasteland_id && !EntityUtil.isEntityCoralium((EntityLivingBase)par1Entity)
 				|| ACConfig.shouldInfect == true && !EntityUtil.isEntityCoralium((EntityLivingBase)par1Entity))
 					((EntityLivingBase)par1Entity).addPotionEffect(new PotionEffect(AbyssalCraftAPI.coralium_plague, 100));
-			if(getHeldItemMainhand() == null && isBurning() && rand.nextFloat() < worldObj.getDifficulty().getDifficultyId() * 0.3F)
-				par1Entity.setFire(2 * worldObj.getDifficulty().getDifficultyId());
+			if(getHeldItemMainhand() == null && isBurning() && rand.nextFloat() < world.getDifficulty().getDifficultyId() * 0.3F)
+				par1Entity.setFire(2 * world.getDifficulty().getDifficultyId());
 		}
 
 		if(ACConfig.hardcoreMode && par1Entity instanceof EntityPlayer)
@@ -336,8 +336,8 @@ public class EntityDepthsGhoul extends EntityMob implements ICoraliumEntity {
 
 		int type = 0;
 
-		if(worldObj.rand.nextFloat() < 0.2F){
-			int temp = worldObj.rand.nextInt(4);
+		if(world.rand.nextFloat() < 0.2F){
+			int temp = world.rand.nextInt(4);
 			if(temp < 4)
 				type = temp;
 		}
@@ -348,7 +348,7 @@ public class EntityDepthsGhoul extends EntityMob implements ICoraliumEntity {
 		setCanPickUpLoot(rand.nextFloat() < 0.55F * f);
 
 		if (data == null)
-			data = new EntityDepthsGhoul.GroupData(worldObj.rand.nextFloat() < ForgeModContainer.zombieBabyChance, null);
+			data = new EntityDepthsGhoul.GroupData(world.rand.nextFloat() < ForgeModContainer.zombieBabyChance, null);
 
 		if (data instanceof EntityDepthsGhoul.GroupData)
 		{
@@ -363,7 +363,7 @@ public class EntityDepthsGhoul extends EntityMob implements ICoraliumEntity {
 
 		if (getItemStackFromSlot(EntityEquipmentSlot.HEAD) == null)
 		{
-			Calendar calendar = worldObj.getCurrentDate();
+			Calendar calendar = world.getCurrentDate();
 
 			if (calendar.get(2) + 1 == 10 && calendar.get(5) == 31 && rand.nextFloat() < 0.25F)
 			{
@@ -373,7 +373,7 @@ public class EntityDepthsGhoul extends EntityMob implements ICoraliumEntity {
 		}
 
 		IAttributeInstance attribute = getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE);
-		Calendar calendar = worldObj.getCurrentDate();
+		Calendar calendar = world.getCurrentDate();
 
 		attribute.removeModifier(ghoulHDamageBoost);
 

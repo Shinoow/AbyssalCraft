@@ -78,7 +78,7 @@ public class ContainerStateTransformer extends Container {
 	@Override
 	public boolean canInteractWith(EntityPlayer var1) {
 
-		return tileEntityCompressorThing.isUseableByPlayer(var1);
+		return tileEntityCompressorThing.isUsableByPlayer(var1);
 	}
 
 	@Override
