@@ -107,9 +107,9 @@ public class EntityDreadedCharge extends EntityFireball
 							PacketDispatcher.sendToDimension(new CleansingRitualMessage(x, z, Biome.getIdForBiome(b)), world.provider.getDimension());
 						}
 
-			if (movingObject.entityHit != null) if (shootingEntity instanceof EntityLivingBase)
+			if (movingObject.entityHit != null)
 			{
-				shootingEntity.attackEntityAsMob(movingObject.entityHit);
+				movingObject.entityHit.attackEntityFrom(AbyssalCraftAPI.dread, 4);
 				movingObject.entityHit.hurtResistantTime = 0;
 			}
 
@@ -120,11 +120,12 @@ public class EntityDreadedCharge extends EntityFireball
 			entityareaeffectcloud.setDuration(200 + rand.nextInt(200));
 			entityareaeffectcloud.setRadiusPerTick((3F - entityareaeffectcloud.getRadius()) / entityareaeffectcloud.getDuration());
 
-			if (!list.isEmpty()) for (EntityLivingBase entitylivingbase : list)
+			for (EntityLivingBase entitylivingbase : list)
 			{
 				double d0 = getDistanceSq(entitylivingbase);
 
-				if (shootingEntity != null && d0 < 64.0D) entityareaeffectcloud.setPosition(entitylivingbase.posX, entitylivingbase.posY, entitylivingbase.posZ);
+				if (shootingEntity != null && d0 < 64.0D)
+					entityareaeffectcloud.setPosition(entitylivingbase.posX, entitylivingbase.posY, entitylivingbase.posZ);
 			}
 
 			for (int k = 0; k < 200; ++k)
@@ -139,7 +140,8 @@ public class EntityDreadedCharge extends EntityFireball
 
 			world.playSound((EntityPlayer)null, getPosition(), SoundEvents.ENTITY_ENDERDRAGON_FIREBALL_EPLD, SoundCategory.MASTER, 1.0F, world.rand.nextFloat() * 0.1F + 0.9F);
 
-			if (!world.isRemote) world.spawnEntity(entityareaeffectcloud);
+			if (!world.isRemote)
+				world.spawnEntity(entityareaeffectcloud);
 			world.newExplosion(this, posX, posY + 1.0D, posZ, 3.0F, false, false);
 			setDead();
 		}

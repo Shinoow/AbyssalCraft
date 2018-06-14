@@ -461,7 +461,7 @@ public class EntityLesserShoggoth extends EntityMob implements IOmotholEntity, c
 		double d1 = target.posY + target.getEyeHeight() - 1.100000023841858D - acidprojectile.posY;
 		double d2 = target.posZ - posZ;
 		float f1 = MathHelper.sqrt(d0 * d0 + d2 * d2) * 0.2F;
-		acidprojectile.shoot(d0, d1 + f1, d2, 1.6F, 12.0F);
+		acidprojectile.shoot(d0, d1 + f1, d2, 1.0F, 12.0F);
 		playSound(SoundEvents.ENTITY_SKELETON_SHOOT, 1.0F, 1.0F / (getRNG().nextFloat() * 0.4F + 0.8F));
 		world.spawnEntity(acidprojectile);
 	}
@@ -483,7 +483,8 @@ public class EntityLesserShoggoth extends EntityMob implements IOmotholEntity, c
 					BlockPos pos = new BlockPos(i, above ? aabb.maxY : aabb.minY , j);
 					if(!world.isAirBlock(pos) && world.getBlockState(pos).getBlockHardness(world, pos) < ACConfig.acidResistanceHardness
 							&& world.getBlockState(pos) != ACBlocks.stone.getDefaultState().withProperty(BlockACStone.TYPE, EnumStoneType.MONOLITH_STONE)
-							&& world.getBlockState(pos).getBlock() != ACBlocks.shoggoth_biomass && !world.getBlockState(pos).getBlock().hasTileEntity(world.getBlockState(pos)))
+							&& world.getBlockState(pos).getBlock() != ACBlocks.shoggoth_biomass && !world.getBlockState(pos).getBlock().hasTileEntity(world.getBlockState(pos))
+							&& world.getBlockState(pos).getBlockHardness(world, pos) != -1 && world.getBlockState(pos).getBlock().canEntityDestroy(world.getBlockState(pos), world, pos, this))
 						world.destroyBlock(pos, false);
 				}
 	}
@@ -605,7 +606,7 @@ public class EntityLesserShoggoth extends EntityMob implements IOmotholEntity, c
 
 	public void setChildSize(boolean p_146071_1_)
 	{
-		multiplySize(p_146071_1_ ? 0.6F : 1.0F);
+		multiplySize(p_146071_1_ ? 0.5F : 1.0F);
 	}
 
 	@Override

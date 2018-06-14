@@ -104,6 +104,7 @@ public class NecronomiconSummonRitual extends NecronomiconRitual {
 			for (EntityPlayerMP entityplayermp : world.getEntitiesWithinAABB(EntityPlayerMP.class, entityliving.getEntityBoundingBox().grow(5)))
 				CriteriaTriggers.SUMMONED_ENTITY.trigger(entityplayermp, entityliving);
 			world.spawnEntity(entityliving);
+			entityliving.timeUntilPortal = entityliving.getPortalCooldown();
 		}
 	}
 
