@@ -232,7 +232,7 @@ public class EntityGreaterDreadSpawn extends EntityMob implements IDreadEntity, 
 					hasMerged = false;
 				}
 
-		if(world.rand.nextInt(2000) == 0)
+		if(ticksExisted % 2000 == 0)
 			if(!world.isRemote){
 				EntityDreadSpawn spawn = new EntityDreadSpawn(world);
 				spawn.copyLocationAndAnglesFrom(this);

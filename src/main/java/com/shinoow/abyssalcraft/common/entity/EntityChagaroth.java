@@ -22,6 +22,7 @@ import com.shinoow.abyssalcraft.api.biome.IDreadlandsBiome;
 import com.shinoow.abyssalcraft.api.entity.EntityUtil;
 import com.shinoow.abyssalcraft.api.entity.IDreadEntity;
 import com.shinoow.abyssalcraft.api.item.ACItems;
+import com.shinoow.abyssalcraft.common.entity.ai.EntityAIChagarothAttackMelee;
 import com.shinoow.abyssalcraft.common.network.PacketDispatcher;
 import com.shinoow.abyssalcraft.common.network.client.CleansingRitualMessage;
 import com.shinoow.abyssalcraft.lib.ACAchievements;
@@ -77,7 +78,7 @@ public class EntityChagaroth extends EntityMob implements IDreadEntity {
 	public EntityChagaroth(World par1World) {
 		super(par1World);
 		setSize(2.0F, 4.8F);
-		tasks.addTask(2, new EntityAIAttackMelee(this, 0.0D, true));
+		tasks.addTask(2, new EntityAIChagarothAttackMelee(this, 0.0D, true));
 		tasks.addTask(3, new EntityAILookIdle(this));
 		tasks.addTask(3, new EntityAIWatchClosest(this, EntityPlayer.class, 16.0F));
 		targetTasks.addTask(1, new EntityAIHurtByTarget(this, false));
@@ -521,20 +522,19 @@ public class EntityChagaroth extends EntityMob implements IDreadEntity {
 
 		if(!world.isRemote && isEntityAlive())
 		{
-			if(rand.nextInt(800) == 0)
-			{
+			if(ticksExisted % 800 == 0) if(rand.nextBoolean()) {
 				EntityDreadSpawn mob = new EntityDreadSpawn(world);
 				mob.copyLocationAndAnglesFrom(this);
 				world.spawnEntity(mob);
 				mob.onInitialSpawn(world.getDifficultyForLocation(getPosition()), null);
-
+			} else {
 				EntityChagarothSpawn spawn = new EntityChagarothSpawn(world);
 				spawn.copyLocationAndAnglesFrom(this);
 				world.spawnEntity(spawn);
 				spawn.onInitialSpawn(world.getDifficultyForLocation(getPosition()), null);
 			}
 
-			if(rand.nextInt(1600) == 0)
+			if(ticksExisted % 1600 == 0)
 			{
 				EntityChagarothFist fist = new EntityChagarothFist(world);
 				fist.copyLocationAndAnglesFrom(this);
@@ -542,7 +542,7 @@ public class EntityChagaroth extends EntityMob implements IDreadEntity {
 				fist.onInitialSpawn(world.getDifficultyForLocation(getPosition()), null);
 			}
 
-			if(rand.nextInt(2400) == 0)
+			if(ticksExisted % 2400 == 0)
 			{
 				EntityDreadguard dreadGuard = new EntityDreadguard(world);
 				dreadGuard.copyLocationAndAnglesFrom(this);
@@ -551,18 +551,9 @@ public class EntityChagaroth extends EntityMob implements IDreadEntity {
 				dreadGuard.onInitialSpawn(world.getDifficultyForLocation(getPosition()), null);
 			}
 
-			if(rand.nextInt(4800) == 0)
+			if(ticksExisted % 4800 == 0)
 			{
 				EntityGreaterDreadSpawn dreadGuard = new EntityGreaterDreadSpawn(world);
-				dreadGuard.copyLocationAndAnglesFrom(this);
-				++dreadGuard.motionX;
-				world.spawnEntity(dreadGuard);
-				dreadGuard.onInitialSpawn(world.getDifficultyForLocation(getPosition()), null);
-			}
-
-			if(rand.nextInt(7200) == 0)
-			{
-				EntityLesserDreadbeast dreadGuard = new EntityLesserDreadbeast(world);
 				dreadGuard.copyLocationAndAnglesFrom(this);
 				++dreadGuard.motionX;
 				world.spawnEntity(dreadGuard);

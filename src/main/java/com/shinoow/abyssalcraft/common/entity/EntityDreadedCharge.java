@@ -108,7 +108,7 @@ public class EntityDreadedCharge extends EntityFireball
 
 			if (movingObject.entityHit != null) if (shootingEntity instanceof EntityLivingBase)
 			{
-				shootingEntity.attackEntityAsMob(movingObject.entityHit);
+				movingObject.entityHit.attackEntityFrom(AbyssalCraftAPI.dread, 4);
 				movingObject.entityHit.hurtResistantTime = 0;
 			}
 

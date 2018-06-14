@@ -12,6 +12,7 @@
 package com.shinoow.abyssalcraft.common.entity.ai;
 
 import com.shinoow.abyssalcraft.common.entity.EntityLesserShoggoth;
+import com.shinoow.abyssalcraft.lib.ACConfig;
 
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.ai.EntityAIBase;
@@ -26,7 +27,7 @@ public class EntityAILesserShoggothAttackMelee extends EntityAIBase
 	World world;
 	protected EntityLesserShoggoth attacker;
 	/** An amount of decrementing ticks that allows the entity to attack once the tick reaches 0. */
-	protected int attackTick;
+	protected int attackTick, rangedAttackTick;
 	/** The speed with which the mob will approach the target */
 	double speedTowardsTarget;
 	/** When true, the mob will continue chasing its target, even if it can't find a path to them right now. */
@@ -170,6 +171,8 @@ public class EntityAILesserShoggothAttackMelee extends EntityAIBase
 		}
 
 		attackTick = Math.max(attackTick - 1, 0);
+		if((!attacker.isChild() || ACConfig.hardcoreMode) && ACConfig.acidSpitFrequency > 0)
+			rangedAttackTick = Math.max(rangedAttackTick - 1, 0);
 		checkAndPerformAttack(entitylivingbase, d0);
 	}
 
@@ -187,8 +190,11 @@ public class EntityAILesserShoggothAttackMelee extends EntityAIBase
 				attackTick = 20;
 				if(attacker.motionX == 0 && attacker.motionZ == 0 && world.getGameRules().getBoolean("mobGriefing"))
 					attacker.sprayAcid(p_190102_1_.posY >= attacker.posY);
-				else if(attacker.getDistanceSqToEntity(p_190102_1_) > 32D && attacker.getRNG().nextBoolean())
-					attacker.sprayAcidAt(p_190102_1_);
+			}
+		if(rangedAttackTick <= 0 && (!attacker.isChild() || ACConfig.hardcoreMode) && ACConfig.acidSpitFrequency > 0)
+			if(attacker.getDistanceSqToEntity(p_190102_1_) > 32D) {
+				rangedAttackTick = ACConfig.acidSpitFrequency;
+				attacker.sprayAcidAt(p_190102_1_);
 			}
 	}
 

@@ -100,6 +100,7 @@ public class NecronomiconSummonRitual extends NecronomiconRitual {
 			entityliving.setLocationAndAngles(pos.getX(), pos.getY() + 1, pos.getZ(), entityliving.rotationYaw, entityliving.rotationPitch);
 			((EntityLiving) entityliving).onInitialSpawn(world.getDifficultyForLocation(pos.up()), (IEntityLivingData)null);
 			world.spawnEntity(entityliving);
+			entityliving.timeUntilPortal = entityliving.getPortalCooldown();
 		}
 	}
 

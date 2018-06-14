@@ -144,7 +144,12 @@ public class ContainerMaterializer extends Container {
 						return null;
 					else slot.decrStackSize(i);
 				}
-				else if (par2 >= 20 && par2 < 56 && !mergeItemStack(itemstack1, 20, 47, false))
+				else if (par2 >= 20 && par2 < 47)
+				{
+					if (!mergeItemStack(itemstack1, 47, 56, false))
+						return null;
+				}
+				else if (par2 >= 47 && par2 < 56 && !mergeItemStack(itemstack1, 20, 47, false))
 					return null;
 			}
 			else if (!mergeItemStack(itemstack1, 20, 56, false))

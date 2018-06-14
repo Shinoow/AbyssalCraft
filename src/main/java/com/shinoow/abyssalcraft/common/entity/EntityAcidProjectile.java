@@ -105,7 +105,8 @@ public class EntityAcidProjectile extends EntityThrowable {
 									BlockPos pos2 = new BlockPos(xp, yp, zp);
 									if(!world.isAirBlock(pos2) && world.getBlockState(pos2).getBlockHardness(world, pos2) < ACConfig.acidResistanceHardness && world.getBlockState(pos2).getBlock() != ACBlocks.shoggoth_ooze
 										&& world.getBlockState(pos2).getBlock() != ACBlocks.monolith_stone
-										&& world.getBlockState(pos2).getBlock() != ACBlocks.shoggoth_biomass && !world.getBlockState(pos).getBlock().hasTileEntity(world.getBlockState(pos)))
+										&& world.getBlockState(pos2).getBlock() != ACBlocks.shoggoth_biomass && !world.getBlockState(pos2).getBlock().hasTileEntity(world.getBlockState(pos2))
+										&& world.getBlockState(pos2).getBlockHardness(world, pos2) != -1 && world.getBlockState(pos2).getBlock().canEntityDestroy(world.getBlockState(pos2), world, pos2, getThrower()))
 										world.destroyBlock(pos2, false);
 								}
 						}
@@ -119,7 +120,8 @@ public class EntityAcidProjectile extends EntityThrowable {
 				BlockPos pos = mop.getBlockPos();
 				if(!world.isAirBlock(pos) && world.getBlockState(pos).getBlockHardness(world, pos) < 10 && world.getBlockState(pos).getBlock() != ACBlocks.shoggoth_ooze
 					&& world.getBlockState(pos).getBlock() != ACBlocks.monolith_stone
-					&& world.getBlockState(pos).getBlock() != ACBlocks.shoggoth_biomass && !world.getBlockState(pos).getBlock().hasTileEntity(world.getBlockState(pos)))
+					&& world.getBlockState(pos).getBlock() != ACBlocks.shoggoth_biomass && !world.getBlockState(pos).getBlock().hasTileEntity(world.getBlockState(pos))
+					&& world.getBlockState(pos).getBlockHardness(world, pos) != -1 && world.getBlockState(pos).getBlock().canEntityDestroy(world.getBlockState(pos), world, pos, getThrower()))
 					world.destroyBlock(pos, false);
 				setDead();
 			}

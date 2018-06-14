@@ -212,13 +212,13 @@ public class EntityLesserDreadbeast extends EntityMob implements IDreadEntity, I
 				tasks.removeTask(arrowAttack);
 			}
 
-		if(world.rand.nextInt(200) == 0)
+		if(ticksExisted % 200 == 0)
 			if(!world.isRemote){
 				EntityDreadSpawn spawn = new EntityDreadSpawn(world);
 				spawn.copyLocationAndAnglesFrom(this);
 				world.spawnEntity(spawn);
 			}
-		if(world.rand.nextInt(10000) == 0)
+		if(ticksExisted % 10000 == 0)
 			if(!world.isRemote){
 				EntityGreaterDreadSpawn spawn = new EntityGreaterDreadSpawn(world);
 				spawn.copyLocationAndAnglesFrom(this);
