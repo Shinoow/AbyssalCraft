@@ -405,30 +405,32 @@ public class EntityJzahar extends EntityMob implements IRangedAttackMob, IOmotho
 				}
 			}
 		if(deathTicks == 790 && !world.isRemote){
-			List<BlockPos> blocks = new ArrayList<BlockPos>();
-			for(int x = 0; x < 10; x++)
-				for(int y = 0; y < 10; y++)
-					for(int z = 0; z < 10; z++){
-						if(!world.isAirBlock(new BlockPos(posX + x, posY + y, posZ + z)))
-							blocks.add(new BlockPos(posX + x, posY + y, posZ + z));
-						if(!world.isAirBlock(new BlockPos(posX - x, posY + y, posZ + z)))
-							blocks.add(new BlockPos(posX - x, posY + y, posZ + z));
-						if(!world.isAirBlock(new BlockPos(posX + x, posY + y, posZ - z)))
-							blocks.add(new BlockPos(posX + x, posY + y, posZ - z));
-						if(!world.isAirBlock(new BlockPos(posX - x, posY + y, posZ - z)))
-							blocks.add(new BlockPos(posX - x, posY + y, posZ - z));
-						if(!world.isAirBlock(new BlockPos(posX + x, posY - y, posZ + z)))
-							blocks.add(new BlockPos(posX + x, posY - y, posZ + z));
-						if(!world.isAirBlock(new BlockPos(posX - x, posY - y, posZ + z)))
-							blocks.add(new BlockPos(posX - x, posY - y, posZ + z));
-						if(!world.isAirBlock(new BlockPos(posX + x, posY - y, posZ - z)))
-							blocks.add(new BlockPos(posX + x, posY - y, posZ - z));
-						if(!world.isAirBlock(new BlockPos(posX - x, posY - y, posZ - z)))
-							blocks.add(new BlockPos(posX - x, posY - y, posZ - z));
-					}
-			for(BlockPos pos : blocks)
-				if(world.getBlockState(pos).getBlock() != Blocks.BEDROCK)
-					world.setBlockToAir(pos);
+			if(world.getGameRules().getBoolean("mobGriefing")) {
+				List<BlockPos> blocks = new ArrayList<BlockPos>();
+				for(int x = 0; x < 10; x++)
+					for(int y = 0; y < 10; y++)
+						for(int z = 0; z < 10; z++){
+							if(!world.isAirBlock(new BlockPos(posX + x, posY + y, posZ + z)))
+								blocks.add(new BlockPos(posX + x, posY + y, posZ + z));
+							if(!world.isAirBlock(new BlockPos(posX - x, posY + y, posZ + z)))
+								blocks.add(new BlockPos(posX - x, posY + y, posZ + z));
+							if(!world.isAirBlock(new BlockPos(posX + x, posY + y, posZ - z)))
+								blocks.add(new BlockPos(posX + x, posY + y, posZ - z));
+							if(!world.isAirBlock(new BlockPos(posX - x, posY + y, posZ - z)))
+								blocks.add(new BlockPos(posX - x, posY + y, posZ - z));
+							if(!world.isAirBlock(new BlockPos(posX + x, posY - y, posZ + z)))
+								blocks.add(new BlockPos(posX + x, posY - y, posZ + z));
+							if(!world.isAirBlock(new BlockPos(posX - x, posY - y, posZ + z)))
+								blocks.add(new BlockPos(posX - x, posY - y, posZ + z));
+							if(!world.isAirBlock(new BlockPos(posX + x, posY - y, posZ - z)))
+								blocks.add(new BlockPos(posX + x, posY - y, posZ - z));
+							if(!world.isAirBlock(new BlockPos(posX - x, posY - y, posZ - z)))
+								blocks.add(new BlockPos(posX - x, posY - y, posZ - z));
+						}
+				for(BlockPos pos : blocks)
+					if(world.getBlockState(pos).getBlock() != Blocks.BEDROCK)
+						world.setBlockToAir(pos);
+			}
 
 			if(!world.getEntitiesWithinAABB(Entity.class, getEntityBoundingBox().expand(3,1,3)).isEmpty()){
 				List<Entity> entities = world.getEntitiesWithinAABBExcludingEntity(this, getEntityBoundingBox().expand(3,1,3));

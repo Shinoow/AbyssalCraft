@@ -240,6 +240,7 @@ public class InitHandler implements ILifeCycleHandler {
 		consumeItems = cfg.get("shoggoth", "Item Consumption", true, "Toggles whether or not Lesser Shoggoths will consume any dropped item they run into.").getBoolean();
 		shieldsBlockAcid = cfg.get("shoggoth", "Shields Block Acid", true, "Toggles whether or not Shields can block the acid projectiles spat by Lesser Shoggoths.").getBoolean();
 		acidResistanceHardness = cfg.get("shoggoth", "Acid Resistance Hardness", 3.0D, "The minimum Block Hardness required for a Block to not be destroyed by Shoggoth Acid (some blocks are unaffected regardless of their hardness)\\n[range: 2.1 ~ 51.0, default: 3.0]", 2.1D, 51.0D).getDouble();
+		acidSpitFrequency = cfg.get("shoggoth", "Acid Spit Frequency", 100, "The frequency (in ticks) at which a Lesser Shoggoth can spit acid. Higher values increase the time between each spit attack, while lower values descrease the time (and 0 disables it).\\n[range: 0 ~ 300, default: 100]", 0, 300).getInt();
 
 		generateDarklandsStructures = cfg.get("worldgen", "Darklands Structures", true, "Toggles whether or not to generate random Darklands structures.").getBoolean();
 		generateShoggothLairs = cfg.get("worldgen", "Shoggoth Lairs", true, "Toggles whether or not to generate Shoggoth Lairs (however, they will still generate in Omothol).").getBoolean();
@@ -294,6 +295,7 @@ public class InitHandler implements ILifeCycleHandler {
 		if(coraliumOreGeneration.length != 3)
 			coraliumOreGeneration = new int[] {12, 8, 40};
 		acidResistanceHardness = MathHelper.clamp(acidResistanceHardness, 2.1D, 51.0D);
+		acidSpitFrequency = MathHelper.clamp(acidSpitFrequency, 0, 300);
 
 		demon_transformations.clear();
 
