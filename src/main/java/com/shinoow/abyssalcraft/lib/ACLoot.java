@@ -73,5 +73,16 @@ public class ACLoot {
 	public static final ResourceLocation ENTITY_SPECTRAL_DRAGON = LootTableList.register(new ResourceLocation("abyssalcraft", "entities/spectral_dragon"));
 	public static final ResourceLocation ENTITY_EVIL_SHEEP = LootTableList.register(new ResourceLocation("abyssalcraft", "entities/evil_sheep"));
 	public static final ResourceLocation ENTITY_DEMON_SHEEP = LootTableList.register(new ResourceLocation("abyssalcraft", "entities/demon_sheep"));
+	public static final ResourceLocation ENTITY_CORALIUM_INFESTED_SQUID = LootTableList.register(new ResourceLocation("abyssalcraft", "entities/coralium_infested_squid"));
+	public static final ResourceLocation ENTITY_ASORAH = LootTableList.register(new ResourceLocation("abyssalcraft", "entities/asorah"));
+	public static final ResourceLocation ENTITY_CHAGAROTH = LootTableList.register(new ResourceLocation("abyssalcraft", "entities/chagaroth"));
+	public static final ResourceLocation ENTITY_JZAHAR = LootTableList.register(new ResourceLocation("abyssalcraft", "entities/jzahar"));
+	public static final ResourceLocation ENTITY_SACTHOTH = LootTableList.register(new ResourceLocation("abyssalcraft", "entities/sacthoth"));
+	public static final ResourceLocation ENTITY_REMNANT_BANKER = LootTableList.register(new ResourceLocation("abyssalcraft", "entities/remnant_banker"));
+	public static final ResourceLocation ENTITY_REMNANT_BLACKSMITH = LootTableList.register(new ResourceLocation("abyssalcraft", "entities/remnant_blacksmith"));
+	public static final ResourceLocation ENTITY_REMNANT_BUTCHER = LootTableList.register(new ResourceLocation("abyssalcraft", "entities/remnant_butcher"));
+	public static final ResourceLocation ENTITY_REMNANT_LIBRARIAN = LootTableList.register(new ResourceLocation("abyssalcraft", "entities/remnant_librarian"));
+	public static final ResourceLocation ENTITY_REMNANT_MASTER_BLACKSMITH = LootTableList.register(new ResourceLocation("abyssalcraft", "entities/remnant_master_blacksmith"));
+	public static final ResourceLocation ENTITY_REMNANT_PRIEST = LootTableList.register(new ResourceLocation("abyssalcraft", "entities/remnant_priest"));
 
 }

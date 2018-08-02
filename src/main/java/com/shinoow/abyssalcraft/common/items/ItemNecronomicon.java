@@ -16,6 +16,7 @@ import java.util.List;
 import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.api.energy.IEnergyTransporterItem;
 import com.shinoow.abyssalcraft.api.energy.PEUtils;
+import com.shinoow.abyssalcraft.api.energy.structure.StructureHandler;
 import com.shinoow.abyssalcraft.api.item.ACItems;
 import com.shinoow.abyssalcraft.common.blocks.BlockRitualAltar;
 import com.shinoow.abyssalcraft.common.network.PacketDispatcher;
@@ -95,7 +96,7 @@ public class ItemNecronomicon extends ItemACBasic implements IEnergyTransporterI
 		if(player.isSneaking())
 			if(!(w.getBlockState(pos).getBlock() instanceof BlockRitualAltar)){
 				if(isOwner(player, is))
-					if(RitualUtil.tryAltar(w, pos, bookType)){
+					if(RitualUtil.tryAltar(w, pos, bookType) || StructureHandler.instance().tryFormStructure(w, pos, bookType, player)){
 						w.playSound(player, pos, ACSounds.remnant_scream, player.getSoundCategory(), 3F, 1F);
 						//						player.addStat(ACAchievements.ritual_altar, 1);
 						return EnumActionResult.SUCCESS;

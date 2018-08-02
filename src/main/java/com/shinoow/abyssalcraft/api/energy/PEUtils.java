@@ -17,6 +17,8 @@ import com.google.common.collect.Lists;
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
 import com.shinoow.abyssalcraft.api.energy.EnergyEnum.AmplifierType;
 import com.shinoow.abyssalcraft.api.energy.EnergyEnum.DeityType;
+import com.shinoow.abyssalcraft.api.energy.structure.IStructureBase;
+import com.shinoow.abyssalcraft.api.energy.structure.IStructureComponent;
 import com.shinoow.abyssalcraft.api.entity.EntityUtil;
 
 import net.minecraft.block.Block;
@@ -121,7 +123,7 @@ public class PEUtils {
 		List<TileEntity> collectors = Lists.newArrayList();
 
 		for(int x = -1*(3+boost); x <= 3+boost; x++)
-			for(int y = 0; y <= getRangeAmplifiers(world, pos); y++)
+			for(int y = 0; y <= getRangeAmplifiers(world, pos, manipulator); y++)
 				for(int z = -1*(3+boost); z <= 3+boost; z++)
 					if(x < -2 || x > 2 || z < -2 || z > 2)
 						if(isCollector(world.getTileEntity(new BlockPos(xp + x, yp - y, zp + z))) && collectors.size() < 20)
@@ -190,7 +192,7 @@ public class PEUtils {
 	 * @param pos Current BlockPos
 	 * @return A number between 0 and 2, representing the amount of range amplifiers below this BlockPos
 	 */
-	public static int getRangeAmplifiers(World world, BlockPos pos){
+	public static int getRangeAmplifiers(World world, BlockPos pos, IEnergyManipulator manipulator){
 		Block block1 = world.getBlockState(new BlockPos(pos.getX(), pos.getY() - 1, pos.getZ())).getBlock();
 		Block block2 = world.getBlockState(new BlockPos(pos.getX(), pos.getY() - 2, pos.getZ())).getBlock();
 		int num = 0;
@@ -202,7 +204,33 @@ public class PEUtils {
 				&& block2 != null && block2 instanceof IEnergyAmplifier &&
 				((IEnergyAmplifier) block2).getAmplifierType() == AmplifierType.RANGE)
 			num = 2;
+
+		if(manipulator instanceof IStructureComponent)
+			num += PEUtils.getStructureAmplifier(world, (IStructureComponent) manipulator, AmplifierType.RANGE);
+
 		return num;
+	}
+
+	/**
+	 * Checks if the Structure Component is currently part of a structure, then attempts to fetch any amplifiers
+	 * @param world Current World
+	 * @param component Component being checked
+	 * @param type Amplifier Type to check for
+	 * @return A value to amplify a stat with, or 0
+	 */
+	public static float getStructureAmplifier(World world, IStructureComponent component, AmplifierType type) {
+
+		float amplifier = 0;
+
+		if(component.isInMultiblock() && component.getBasePosition() != null) {
+			if(world.getTileEntity(component.getBasePosition()) instanceof IStructureBase)
+				amplifier = ((IStructureBase) world.getTileEntity(component.getBasePosition())).getAmplifier(type);
+		} else {
+			component.setInMultiblock(false);
+			component.setBasePosition(null);
+		}
+
+		return amplifier;
 	}
 
 	/**

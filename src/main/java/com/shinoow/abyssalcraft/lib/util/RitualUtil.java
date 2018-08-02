@@ -106,7 +106,8 @@ public class RitualUtil {
 							!world.isBlockFullCube(pos.add(x + 1, y, z + 1)) && !world.isBlockFullCube(pos.add(x + 1, y, z + 2)) &&
 							!world.isBlockFullCube(pos.add(x, y, z + 2)) && !world.isBlockFullCube(pos.add(x -1, y, z + 2)))
 						if(RitualRegistry.instance().sameBookType(world.provider.getDimension(), ritualBlocks.get(ritualBlock))){
-							createAltar(world, pos, ritualBlock);
+							if(!world.isRemote)
+								createAltar(world, pos, ritualBlock);
 							return true;
 						}
 		return false;

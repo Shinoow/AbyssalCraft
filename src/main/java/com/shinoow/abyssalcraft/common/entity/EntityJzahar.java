@@ -15,9 +15,7 @@ import java.util.*;
 
 import com.shinoow.abyssalcraft.api.entity.EntityUtil;
 import com.shinoow.abyssalcraft.api.entity.IOmotholEntity;
-import com.shinoow.abyssalcraft.lib.ACConfig;
-import com.shinoow.abyssalcraft.lib.ACLib;
-import com.shinoow.abyssalcraft.lib.ACSounds;
+import com.shinoow.abyssalcraft.lib.*;
 import com.shinoow.abyssalcraft.lib.util.SpecialTextUtil;
 import com.shinoow.abyssalcraft.lib.world.TeleporterDarkRealm;
 
@@ -112,6 +110,12 @@ public class EntityJzahar extends EntityMob implements IRangedAttackMob, IOmotho
 	protected SoundEvent getDeathSound()
 	{
 		return SoundEvents.ENTITY_WITHER_DEATH;
+	}
+
+	@Override
+	protected ResourceLocation getLootTable()
+	{
+		return ACLoot.ENTITY_JZAHAR;
 	}
 
 	@Override
@@ -528,5 +532,11 @@ public class EntityJzahar extends EntityMob implements IRangedAttackMob, IOmotho
 	@Override
 	public void setSwingingArms(boolean swingingArms) {
 
+	}
+
+	@Override
+	public boolean canBeTurnedToStone() {
+
+		return false;
 	}
 }

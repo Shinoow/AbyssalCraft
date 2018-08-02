@@ -26,6 +26,7 @@ import com.shinoow.abyssalcraft.common.entity.ai.EntityAIChagarothAttackMelee;
 import com.shinoow.abyssalcraft.common.network.PacketDispatcher;
 import com.shinoow.abyssalcraft.common.network.client.CleansingRitualMessage;
 import com.shinoow.abyssalcraft.lib.ACConfig;
+import com.shinoow.abyssalcraft.lib.ACLoot;
 import com.shinoow.abyssalcraft.lib.ACSounds;
 import com.shinoow.abyssalcraft.lib.util.SpecialTextUtil;
 
@@ -174,6 +175,12 @@ public class EntityChagaroth extends EntityMob implements IDreadEntity, com.gith
 	protected SoundEvent getDeathSound()
 	{
 		return ACSounds.dreadguard_death;
+	}
+
+	@Override
+	protected ResourceLocation getLootTable()
+	{
+		return ACLoot.ENTITY_CHAGAROTH;
 	}
 
 	@Override
@@ -806,5 +813,11 @@ public class EntityChagaroth extends EntityMob implements IDreadEntity, com.gith
 			attribute.applyModifier(attackDamageBoost);
 
 		return par1EntityLivingData;
+	}
+
+	@Override
+	public boolean canBeTurnedToStone() {
+
+		return false;
 	}
 }

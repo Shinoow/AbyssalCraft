@@ -39,12 +39,12 @@ public class DisruptionDrainNearbyPE extends DisruptionEntry {
 		int drained = 0;
 		TileEntity tile = world.getTileEntity(pos);
 		if(tile != null && tile instanceof IEnergyManipulator){
-			int range = (int) (PEUtils.getRangeAmplifiers(world, pos) + ((IEnergyManipulator)tile).getAmplifier(AmplifierType.RANGE)/2);
+			int range = (int) (PEUtils.getRangeAmplifiers(world, pos, (IEnergyManipulator)tile) + ((IEnergyManipulator)tile).getAmplifier(AmplifierType.RANGE)/2);
 			int xp = pos.getX();
 			int yp = pos.getY();
 			int zp = pos.getZ();
 			for(int x = -1*(3+range); x <= 3+range; x++)
-				for(int y = 0; y <= PEUtils.getRangeAmplifiers(world, pos); y++)
+				for(int y = 0; y <= PEUtils.getRangeAmplifiers(world, pos, (IEnergyManipulator)tile); y++)
 					for(int z = -1*(3+range); z <= 3+range; z++)
 						if(PEUtils.isCollector(world.getTileEntity(new BlockPos(xp + x, yp - y, zp + z)))){
 							BlockPos pos1 = new BlockPos(xp + x, yp - y, zp + z);
@@ -61,7 +61,7 @@ public class DisruptionDrainNearbyPE extends DisruptionEntry {
 			int yp = pos.getY();
 			int zp = pos.getZ();
 			for(int x = -1*(3+range); x <= 3+range; x++)
-				for(int y = 0; y <= PEUtils.getRangeAmplifiers(world, pos); y++)
+				for(int y = 0; y <= PEUtils.getRangeAmplifiers(world, pos, (IEnergyManipulator)tile); y++)
 					for(int z = -1*(3+range); z <= 3+range; z++)
 						if(PEUtils.isCollector(world.getTileEntity(new BlockPos(xp + x, yp - y, zp + z)))){
 							BlockPos pos1 = new BlockPos(xp + x, yp - y, zp + z);

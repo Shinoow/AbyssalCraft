@@ -22,6 +22,9 @@ import com.shinoow.abyssalcraft.api.energy.IEnergyContainerItem;
 import com.shinoow.abyssalcraft.api.item.ACItems;
 import com.shinoow.abyssalcraft.api.item.IUnlockableItem;
 import com.shinoow.abyssalcraft.api.necronomicon.condition.caps.NecroDataCapability;
+import com.shinoow.abyssalcraft.api.spell.IScroll;
+import com.shinoow.abyssalcraft.api.spell.Spell;
+import com.shinoow.abyssalcraft.api.spell.SpellUtils;
 import com.shinoow.abyssalcraft.client.ClientProxy;
 import com.shinoow.abyssalcraft.common.blocks.*;
 import com.shinoow.abyssalcraft.common.blocks.BlockCrystalCluster.EnumCrystalType;
@@ -243,6 +246,14 @@ public class AbyssalCraftClientEventHooks {
 		if(stack.getItem() instanceof IUnlockableItem && event.getEntityPlayer() != null && !NecroDataCapability.getCap(event.getEntityPlayer()).isUnlocked(((IUnlockableItem)stack.getItem()).getUnlockCondition(stack), event.getEntityPlayer())){
 			event.getToolTip().remove(0);
 			event.getToolTip().add(0, "Lorem ipsum");
+		}
+		if(stack.getItem() instanceof IScroll) {
+			Spell spell = SpellUtils.getSpell(stack);
+			if(spell != null){
+				event.getToolTip().add("Spell: "+TextFormatting.AQUA+spell.getLocalizedName());
+				event.getToolTip().add("Required PE per cast: "+(int)spell.getReqEnergy());
+				event.getToolTip().add("Cast type: "+TextFormatting.GOLD+(spell.requiresCharging() ? "Charge" : "Instant"));
+			}
 		}
 	}
 

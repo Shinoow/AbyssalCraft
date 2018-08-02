@@ -33,34 +33,13 @@ public class WorldGenShoggothMonolith extends WorldGenerator {
 		while(world.isAirBlock(pos) && pos.getY() > 2)
 			pos = pos.down();
 
-		//	if(world.getBlock(x, y, z).getMaterial() != Material.grass ||
-		//	world.getBlock(x, y, z).getMaterial() != Material.ground)
-		if(world.getBlockState(pos) != ACBlocks.shoggoth_ooze.getDefaultState())
+		if(world.getBlockState(pos).getBlock() != ACBlocks.shoggoth_ooze)
 			return false;
 		else {
 
 			int x = pos.getX();
 			int y = pos.getY();
 			int z = pos.getZ();
-
-			//	for(int x1 = 0; x1 < 7; x1++)
-			//	for(int z1 = 0; z1 < 7; z1++)
-			//	for(int x2 = 0; x2 < 7; x2++)
-			//	for(int z2 = 0; z2 < 7; z2++)
-			//	for(int y1 = -1; y1 < 4; y1++){
-			//	if(world.getBlock(x + x1, y + y1, z + z1).getMaterial() == Material.grass ||
-			//	world.getBlock(x + x1, y + y1, z + z1).getMaterial() == Material.ground)
-			//	func_150515_a(world,x + x1, y + y1, z + z1, AbyssalCraft.shoggothBlock);
-			//	if(world.getBlock(x - x2, y + y1, z - z2).getMaterial() == Material.grass ||
-			//	world.getBlock(x - x2, y + y1, z - z2).getMaterial() == Material.ground)
-			//	func_150515_a(world,x - x2, y + y1, z - z2, AbyssalCraft.shoggothBlock);
-			//	if(world.getBlock(x + x1, y + y1, z - z2).getMaterial() == Material.grass ||
-			//	world.getBlock(x + x1, y + y1, z - z2).getMaterial() == Material.ground)
-			//	func_150515_a(world,x + x1, y + y1, z - z2, AbyssalCraft.shoggothBlock);
-			//	if(world.getBlock(x - x2, y + y1, z  + z1).getMaterial() == Material.grass ||
-			//	world.getBlock(x - x2, y + y1, z  + z1).getMaterial() == Material.ground)
-			//	func_150515_a(world,x - x2, y + y1, z  + z1, AbyssalCraft.shoggothBlock);
-			//	}
 
 			int max = rand.nextInt(8) + 5;
 			for(int i = 0; i < max; i++){

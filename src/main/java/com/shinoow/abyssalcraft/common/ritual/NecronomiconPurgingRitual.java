@@ -41,7 +41,14 @@ public class NecronomiconPurgingRitual extends NecronomiconRitual {
 
 	@Override
 	public boolean canCompleteRitual(World world, BlockPos pos, EntityPlayer player) {
-		return world.getBiome(pos) instanceof IDreadlandsBiome && world.provider.getDimension() != ACLib.dreadlands_id;
+		if(world.provider.getDimension() != ACLib.dreadlands_id)
+			for(int x = pos.getX() - 24; x < pos.getX() + 25; x++)
+				for(int z = pos.getZ() - 24; z < pos.getZ() + 25; z++){
+					BlockPos pos1 = new BlockPos(x, 0, z);
+					if(world.getBiome(pos1) instanceof IDreadlandsBiome)
+						return true;
+				}
+		return false;
 	}
 
 	@Override
@@ -49,35 +56,35 @@ public class NecronomiconPurgingRitual extends NecronomiconRitual {
 
 	@Override
 	protected void completeRitualServer(World world, BlockPos pos, EntityPlayer player) {
-		for(int x = pos.getX() - 24; x < pos.getX() + 25; x++)
-			for(int z = pos.getZ() - 24; z < pos.getZ() + 25; z++){
+		for(int x = pos.getX() - 64; x < pos.getX() + 65; x++)
+			for(int z = pos.getZ() - 64; z < pos.getZ() + 65; z++){
 
 				BlockPos pos1 = new BlockPos(x, 0, z);
+
+				if(!(world.getBiome(pos1) instanceof IDreadlandsBiome)) continue;
 
 				for(EntityLivingBase e : world.getEntitiesWithinAABB(EntityLivingBase.class, new AxisAlignedBB(pos1).grow(0, 128, 0), EntitySelectors.IS_ALIVE))
 					if(!(e instanceof EntityPlayer))
 						world.removeEntity(e);
 
-				if(world.getBiome(pos1) == ACBiomes.purged) continue;
-
 				for(int y = 255; y > -1; y--){
+					if(world.isAirBlock(pos1.up(y))) continue;
 					IBlockState state = world.getBlockState(pos1.up(y));
+					if(state.getBlock().hasTileEntity(state)) continue;
 					if(state.getBlock() instanceof IPlantable)
-						world.setBlockToAir(pos1.up(y));
+						world.setBlockState(pos1.up(7), Blocks.AIR.getDefaultState(), 2);
 					else if(state.getMaterial().isLiquid())
-						world.setBlockToAir(pos1.up(y));
-					else if(state.getBlock() == ACBlocks.ritual_altar || state.getBlock() == ACBlocks.ritual_pedestal)
-						world.setBlockState(pos1.up(y), ACBlocks.calcified_stone.getDefaultState());
+						world.setBlockState(pos1.up(7), Blocks.AIR.getDefaultState(), 2);
 					else if(!state.isFullCube())
-						world.setBlockToAir(pos1.up(y));
-					else if(!world.isAirBlock(pos1.up(y)) && state.getBlock() != Blocks.BEDROCK)
-						world.setBlockState(pos1.up(y), ACBlocks.calcified_stone.getDefaultState());
+						world.setBlockState(pos1.up(7), Blocks.AIR.getDefaultState(), 2);
+					else if(state.getBlock() != Blocks.BEDROCK)
+						world.setBlockState(pos1.up(y), ACBlocks.calcified_stone.getDefaultState(), 2);
 				}
 
 				Chunk c = world.getChunkFromBlockCoords(pos1);
 				c.getBiomeArray()[(z & 0xF) << 4 | x & 0xF] = (byte)Biome.getIdForBiome(ACBiomes.purged);
 				c.setModified(true);
-				PacketDispatcher.sendToDimension(new CleansingRitualMessage(x, z, Biome.getIdForBiome(ACBiomes.purged)), world.provider.getDimension());
+				PacketDispatcher.sendToDimension(new CleansingRitualMessage(x, z, Biome.getIdForBiome(ACBiomes.purged), true), world.provider.getDimension());
 			}
 	}
 }

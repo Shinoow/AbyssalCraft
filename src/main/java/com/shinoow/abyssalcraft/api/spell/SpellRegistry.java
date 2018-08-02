@@ -80,8 +80,9 @@ public class SpellRegistry {
 			if(APIUtils.areItemStackArraysEqual(spell.getReagents(), reagents, spell.isNBTSensitive()))
 				if(spell.getParent() == null && (!parchment.hasTagCompound() || !parchment.getTagCompound().hasKey("Spell")) ||
 				spell.getParent().getUnlocalizedName().equals(parchment.getTagCompound().getString("Spell")))
-					return !spell.getParchment().isEmpty() ? APIUtils.areStacksEqual(parchment, spell.getParchment()) : true;
-					return false;
+					if(spell.getParchment().isEmpty() || APIUtils.areStacksEqual(parchment, spell.getParchment()))
+						return parchment.getItem() instanceof IScroll && ((IScroll) parchment.getItem()).getScrollType(parchment).getQuality() >= spell.getScrollType().getQuality();
+						return false;
 	}
 
 	public ItemStack inscribeSpell(Spell spell, ItemStack parchment){

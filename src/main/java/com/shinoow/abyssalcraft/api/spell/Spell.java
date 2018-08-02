@@ -13,6 +13,7 @@ package com.shinoow.abyssalcraft.api.spell;
 
 import com.shinoow.abyssalcraft.api.necronomicon.condition.DefaultCondition;
 import com.shinoow.abyssalcraft.api.necronomicon.condition.IUnlockCondition;
+import com.shinoow.abyssalcraft.api.spell.SpellEnum.ScrollType;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -40,6 +41,7 @@ public abstract class Spell {
 	private Spell parent;
 	private ResourceLocation glyph;
 	private IUnlockCondition condition = new DefaultCondition();
+	private ScrollType scrollType = ScrollType.BASIC;
 
 	/**
 	 * A Necronomicon Spell
@@ -129,6 +131,14 @@ public abstract class Spell {
 	}
 
 	/**
+	 * Sets a Scroll Type required in order to inscribe this spell
+	 */
+	public Spell setScrollType(ScrollType scrollType) {
+		this.scrollType = scrollType;
+		return this;
+	}
+
+	/**
 	 * Used to fetch the reagents used to inscribe this spell
 	 * @return An array of Objects representing reagents
 	 */
@@ -198,6 +208,14 @@ public abstract class Spell {
 	 */
 	public IUnlockCondition getUnlockCondition(){
 		return condition;
+	}
+
+	/**
+	 * Used to fetch the Scroll Type required to inscribe this spell
+	 * @return A Scroll Type corresponding to this spell
+	 */
+	public ScrollType getScrollType() {
+		return scrollType;
 	}
 
 	/**

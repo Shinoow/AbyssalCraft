@@ -14,6 +14,7 @@ package com.shinoow.abyssalcraft.common.entity;
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
 import com.shinoow.abyssalcraft.api.entity.EntityUtil;
 import com.shinoow.abyssalcraft.api.entity.ICoraliumEntity;
+import com.shinoow.abyssalcraft.lib.ACLoot;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -23,6 +24,7 @@ import net.minecraft.entity.passive.EntitySquid;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.potion.PotionEffect;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 
@@ -75,5 +77,11 @@ public class EntityCoraliumSquid extends EntitySquid implements ICoraliumEntity,
 	@Override
 	public void setSwingingArms(boolean swingingArms) {
 
+	}
+
+	@Override
+	protected ResourceLocation getLootTable()
+	{
+		return ACLoot.ENTITY_CORALIUM_INFESTED_SQUID;
 	}
 }

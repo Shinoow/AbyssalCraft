@@ -184,4 +184,5 @@ public class ACBlocks {
 	public static Block state_transformer;
 	public static Block energy_depositioner;
 	public static Block calcified_stone;
+	public static Block multi_block;
 }

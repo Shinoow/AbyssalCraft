@@ -619,7 +619,6 @@ public class AbyssalCrafting {
 		DisruptionHandler.instance().registerDisruption(new DisruptionLightning());
 		DisruptionHandler.instance().registerDisruption(new DisruptionFire());
 		DisruptionHandler.instance().registerDisruption(new DisruptionSpawn("spawnShoggoth", null, EntityLesserShoggoth.class));
-		DisruptionHandler.instance().registerDisruption(new DisruptionSpawn("spawnGatekeeperMinion", DeityType.JZAHAR, EntityGatekeeperMinion.class));
 		DisruptionHandler.instance().registerDisruption(new DisruptionPotion("poisonPotion", null, MobEffects.POISON));
 		DisruptionHandler.instance().registerDisruption(new DisruptionPotion("slownessPotion", null, MobEffects.SLOWNESS));
 		DisruptionHandler.instance().registerDisruption(new DisruptionPotion("weaknessPotion", null, MobEffects.WEAKNESS));

@@ -66,6 +66,8 @@ import net.minecraft.potion.*;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
+import net.minecraft.util.datafix.FixTypes;
+import net.minecraft.util.datafix.IFixableData;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.storage.loot.*;
 import net.minecraft.world.storage.loot.conditions.LootCondition;
@@ -79,6 +81,7 @@ import net.minecraftforge.common.crafting.CraftingHelper;
 import net.minecraftforge.common.crafting.CraftingHelper.ShapedPrimer;
 import net.minecraftforge.event.LootTableLoadEvent;
 import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.event.*;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
@@ -311,6 +314,58 @@ public class MiscHandler implements ILifeCycleHandler {
 		AbyssalCraftAPI.addGhoulArmorTextures(ACItems.plated_coralium_helmet, ACItems.plated_coralium_chestplate, ACItems.plated_coralium_leggings, ACItems.plated_coralium_boots, "abyssalcraft:textures/armor/ghoul/coraliump_1.png", "abyssalcraft:textures/armor/ghoul/coraliump_2.png");
 		AbyssalCraftAPI.addGhoulArmorTextures(ACItems.dreadium_samurai_helmet, ACItems.dreadium_samurai_chestplate, ACItems.dreadium_samurai_leggings, ACItems.dreadium_samurai_boots, "abyssalcraft:textures/armor/ghoul/dreadiums_1.png", "abyssalcraft:textures/armor/ghoul/dreadiums_2.png");
 		AbyssalCraftAPI.getInternalNDHandler().registerInternalPages();
+		//		StructureHandler.instance().registerStructure(new TestStructure());
+		FMLCommonHandler.instance().getDataFixer().init(modid, 1).registerFix(FixTypes.BLOCK_ENTITY, new IFixableData() {
+
+			@Override
+			public int getFixVersion() {
+
+				return 1;
+			}
+
+			@Override
+			public NBTTagCompound fixTagCompound(NBTTagCompound compound) {
+				final String id = compound.getString("id");
+				switch(id) {
+				case "minecraft:tileentitycrate":
+				case "minecraft:tileentitydghead":
+				case "minecraft:tileentityphead":
+				case "minecraft:tileentitywhead":
+				case "minecraft:tileentityohead":
+				case "minecraft:tileentitycrystallizer":
+				case "minecraft:tileentitytransmutator":
+				case "minecraft:tileentitydradguardspawner":
+				case "minecraft:tileentitychagarothspawner":
+				case "minecraft:tileentityengraver":
+				case "minecraft:tileentitymaterializer":
+				case "minecraft:tileentityritualaltar":
+				case "minecraft:tileentityritualpedestal":
+				case "minecraft:tileentitystatue":
+				case "minecraft:tileentitydecorativestatue":
+				case "minecraft:tileentityshoggothbiomass":
+				case "minecraft:tileentityenergypedestal":
+				case "minecraft:tileentitysacrificialaltar":
+				case "minecraft:tileentitytieredenergypedestal":
+				case "minecraft:tileentitytieredsacrificialaltar":
+				case "minecraft:tileentityjzaharspawner":
+				case "minecraft:tileentitygatekeeperminionspawner":
+				case "minecraft:tileentityenergycollector":
+				case "minecraft:tileentityenergyrelay":
+				case "minecraft:tileentityenergycontainer":
+				case "minecraft:tileentitytieredenergycollector":
+				case "minecraft:tileentitytieredenergyrelay":
+				case "minecraft:tileentitytieredenergycontainer":
+				case "minecraft:tileentityrendingpedestal":
+				case "minecraft:tileentitystatetransformer":
+				case "minecraft:tileentityenergydepositioner":
+					compound.setString("id", id.replace("minecraft", "abyssalcraft"));
+					break;
+				}
+
+				return compound;
+			}
+
+		});
 	}
 
 	@Override

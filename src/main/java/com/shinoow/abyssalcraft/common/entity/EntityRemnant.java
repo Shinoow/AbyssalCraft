@@ -356,7 +356,24 @@ public class EntityRemnant extends EntityMob implements IMerchant, IOmotholEntit
 
 	@Override
 	protected ResourceLocation getLootTable(){
-		return ACLoot.ENTITY_REMNANT;
+		switch(getProfession()) {
+		case 0:
+			return ACLoot.ENTITY_REMNANT;
+		case 1:
+			return ACLoot.ENTITY_REMNANT_LIBRARIAN;
+		case 2:
+			return ACLoot.ENTITY_REMNANT_PRIEST;
+		case 3:
+			return ACLoot.ENTITY_REMNANT_BLACKSMITH;
+		case 4:
+			return ACLoot.ENTITY_REMNANT_BUTCHER;
+		case 5:
+			return ACLoot.ENTITY_REMNANT_BANKER;
+		case 6:
+			return ACLoot.ENTITY_REMNANT_MASTER_BLACKSMITH;
+		default:
+			return ACLoot.ENTITY_REMNANT;
+		}
 	}
 
 	@Override

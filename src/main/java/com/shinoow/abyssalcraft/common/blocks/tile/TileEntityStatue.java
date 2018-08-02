@@ -17,7 +17,9 @@ import com.shinoow.abyssalcraft.api.energy.IEnergyManipulator;
 import com.shinoow.abyssalcraft.api.energy.IEnergyTransporterItem;
 import com.shinoow.abyssalcraft.api.energy.PEUtils;
 import com.shinoow.abyssalcraft.api.energy.disruption.DisruptionHandler;
+import com.shinoow.abyssalcraft.api.energy.structure.IStructureComponent;
 import com.shinoow.abyssalcraft.api.entity.EntityUtil;
+import com.shinoow.abyssalcraft.common.blocks.BlockStatue;
 import com.shinoow.abyssalcraft.lib.ACLib;
 
 import net.minecraft.block.state.IBlockState;
@@ -32,8 +34,9 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.util.math.BlockPos;
 
-public class TileEntityStatue extends TileEntity implements IEnergyManipulator, ITickable {
+public class TileEntityStatue extends TileEntity implements IEnergyManipulator, ITickable, IStructureComponent {
 
 	private int timer;
 	private final int timerMax = 120;
@@ -42,6 +45,8 @@ public class TileEntityStatue extends TileEntity implements IEnergyManipulator, 
 	private DeityType currentDeity;
 	private int tolerance;
 	private int facing;
+	private boolean isMultiblock;
+	private BlockPos basePos;
 
 	@Override
 	public void readFromNBT(NBTTagCompound nbttagcompound)
@@ -52,6 +57,8 @@ public class TileEntityStatue extends TileEntity implements IEnergyManipulator, 
 		tolerance = nbttagcompound.getInteger("Tolerance");
 		PEUtils.readManipulatorNBT(this, nbttagcompound);
 		facing = nbttagcompound.getInteger("Facing");
+		isMultiblock = nbttagcompound.getBoolean("IsMultiblock");
+		basePos = BlockPos.fromLong(nbttagcompound.getLong("BasePosition"));
 	}
 
 	@Override
@@ -63,6 +70,9 @@ public class TileEntityStatue extends TileEntity implements IEnergyManipulator, 
 		nbttagcompound.setInteger("Tolerance", tolerance);
 		PEUtils.writeManipulatorNBT(this, nbttagcompound);
 		nbttagcompound.setInteger("Facing", facing);
+		nbttagcompound.setBoolean("IsMultiblock", isMultiblock);
+		if(basePos != null)
+			nbttagcompound.setLong("BasePosition", basePos.toLong());
 
 		return nbttagcompound;
 	}
@@ -108,13 +118,30 @@ public class TileEntityStatue extends TileEntity implements IEnergyManipulator, 
 	@Override
 	public float getEnergyQuanta() {
 
-		return isActive() ? 10 * Math.max(getAmplifier(AmplifierType.POWER), 1.0F) : 5;
+		return isActive() ? 10 * (Math.max(getAmplifier(AmplifierType.POWER), 1.0F) + PEUtils.getStructureAmplifier(world, this, AmplifierType.POWER)) : 5;
 	}
 
 	@Override
 	public DeityType getDeity(IBlockState state) {
 
-		return null;
+		switch(state.getValue(BlockStatue.TYPE)) {
+		case AZATHOTH:
+			return DeityType.AZATHOTH;
+		case CTHULHU:
+			return DeityType.CTHULHU;
+		case HASTUR:
+			return DeityType.HASTUR;
+		case JZAHAR:
+			return DeityType.JZAHAR;
+		case NYARLATHOTEP:
+			return DeityType.NYARLATHOTEP;
+		case SHUBNIGGURATH:
+			return DeityType.SHUBNIGGURATH;
+		case YOGSOTHOTH:
+			return DeityType.YOGSOTHOTH;
+		default:
+			return null;
+		}
 	}
 
 	@Override
@@ -160,7 +187,8 @@ public class TileEntityStatue extends TileEntity implements IEnergyManipulator, 
 
 	@Override
 	public void addTolerance(int num) {
-		tolerance += num;
+		if(!isInMultiblock())
+			tolerance += num;
 	}
 
 	@Override
@@ -178,7 +206,7 @@ public class TileEntityStatue extends TileEntity implements IEnergyManipulator, 
 	@Override
 	public void disrupt() {
 		tolerance = 0;
-		if(world.provider.getDimension() != ACLib.omothol_id) {
+		if(world.provider.getDimension() != ACLib.omothol_id && !isInMultiblock()) {
 			world.addWeatherEffect(new EntityLightningBolt(world, pos.getX(), pos.getY() + 1, pos.getZ(), true));
 			DisruptionHandler.instance().generateDisruption(getDeity(world.getBlockState(pos)), world, pos, world.getEntitiesWithinAABB(EntityPlayer.class, new AxisAlignedBB(pos).grow(16, 16, 16)));
 		}
@@ -192,7 +220,7 @@ public class TileEntityStatue extends TileEntity implements IEnergyManipulator, 
 			world.spawnParticle(EnumParticleTypes.PORTAL, pos.getX() + 0.5, pos.getY() + 0.9, pos.getZ() + 0.5, 0, 0, 0);
 		} else PEUtils.clearManipulatorData(this);
 
-		int range = (int) (7 + PEUtils.getRangeAmplifiers(world, pos)*4 + getAmplifier(AmplifierType.RANGE));
+		int range = (int) (7 + PEUtils.getRangeAmplifiers(world, pos, this)*4 + getAmplifier(AmplifierType.RANGE));
 
 		int xp = pos.getX();
 		int yp = pos.getY();
@@ -207,7 +235,7 @@ public class TileEntityStatue extends TileEntity implements IEnergyManipulator, 
 					if(!item.isEmpty() && item.getItem() instanceof IEnergyTransporterItem ||
 							!item1.isEmpty() && item1.getItem() instanceof IEnergyTransporterItem){
 						timer++;
-						if(timer >= (int)(timerMax / Math.max(getAmplifier(AmplifierType.DURATION), 1.0F))){
+						if(timer >= (int)(timerMax / (Math.max(getAmplifier(AmplifierType.DURATION), 1.0F) + PEUtils.getStructureAmplifier(world, this, AmplifierType.DURATION)))){
 							timer = world.rand.nextInt(10);
 							PEUtils.transferPEToNearbyPlayers(world, pos, this, range);
 						}
@@ -215,7 +243,7 @@ public class TileEntityStatue extends TileEntity implements IEnergyManipulator, 
 				}
 
 				PEUtils.transferPEToNearbyDroppedItems(world, pos, this, range);
-				PEUtils.transferPEToCollectors(world, pos, this, (int)(PEUtils.getRangeAmplifiers(world, pos) + getAmplifier(AmplifierType.RANGE)/2));
+				PEUtils.transferPEToCollectors(world, pos, this, (int)(PEUtils.getRangeAmplifiers(world, pos, this) + getAmplifier(AmplifierType.RANGE)/2));
 			}
 		if(tolerance >= 100)
 			disrupt();
@@ -227,5 +255,28 @@ public class TileEntityStatue extends TileEntity implements IEnergyManipulator, 
 
 	public void setFacing(int face){
 		facing = face;
+	}
+
+	@Override
+	public boolean isInMultiblock() {
+
+		return isMultiblock;
+	}
+
+	@Override
+	public void setInMultiblock(boolean bool) {
+		isMultiblock = bool;
+
+	}
+
+	@Override
+	public BlockPos getBasePosition() {
+
+		return basePos;
+	}
+
+	@Override
+	public void setBasePosition(BlockPos pos) {
+		basePos = pos;
 	}
 }

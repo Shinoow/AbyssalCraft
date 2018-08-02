@@ -12,6 +12,7 @@
 package com.shinoow.abyssalcraft.client.render.entity;
 
 import com.shinoow.abyssalcraft.client.model.entity.ModelLesserShoggoth;
+import com.shinoow.abyssalcraft.client.render.entity.layers.LayerLesserShoggothEyes;
 import com.shinoow.abyssalcraft.common.entity.EntityLesserShoggoth;
 import com.shinoow.abyssalcraft.lib.ACLib;
 
@@ -36,6 +37,7 @@ public class RenderLesserShoggoth extends RenderLiving<EntityLesserShoggoth> {
 	public RenderLesserShoggoth(RenderManager manager)
 	{
 		super(manager, new ModelLesserShoggoth(), 1.6F);
+		addLayer(new LayerLesserShoggothEyes(this));
 	}
 
 	@Override

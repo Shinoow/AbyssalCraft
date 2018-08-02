@@ -26,6 +26,8 @@ import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
+import net.minecraft.nbt.NBTBase;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.oredict.OreDictionary;
@@ -175,7 +177,7 @@ public class APIUtils {
 	 */
 	public static boolean areStacksEqual(ItemStack stack1, ItemStack stack2, boolean nbt){
 		if(stack1.isEmpty() || stack2.isEmpty()) return false;
-		return nbt ? areStacksEqual(stack1, stack2) && ItemStack.areItemStackTagsEqual(stack2, stack1) :
+		return nbt ? areStacksEqual(stack1, stack2) && areItemStackTagsEqual(stack2, stack1, 0) :
 			areStacksEqual(stack1, stack2);
 	}
 
@@ -204,5 +206,83 @@ public class APIUtils {
 		INecroDataCapability cap = NecroDataCapability.getCap(Minecraft.getMinecraft().player);
 
 		return cap.isUnlocked(((IUnlockableItem) stack.getItem()).getUnlockCondition(stack), Minecraft.getMinecraft().player) ? null : AbyssalCraftAPI.getAkloFont();
+	}
+
+	/**
+	 * Checks if two ItemStacks have the same NBT tags ({@link ItemStack#areItemStackTagsEqual(ItemStack, ItemStack)} without comparing capabilities)
+	 * @param stackA First Item Stack
+	 * @param stackB Second Item Stack
+	 * @param strictness How strictly the Tags are compared,
+	 * <ul>
+	 * <li>0 = checks if stackAs tag contains stackBs</li>
+	 * <li>1 = checks if stackAs tag equals stackBs</li>
+	 * <li>2 = checks if stackAs tag and capabilities equals stackBs</li>
+	 * </ul>
+	 * @return True if the NBT tags match, otherwise false
+	 */
+	public static boolean areItemStackTagsEqual(ItemStack stackA, ItemStack stackB, int strictness)
+	{
+		switch(strictness) {
+		case 0:
+			if (stackA.isEmpty() && stackB.isEmpty())
+				return true;
+			else if (!stackA.isEmpty() && !stackB.isEmpty())
+			{
+				if (stackA.getTagCompound() == null && stackB.getTagCompound() != null)
+					return false;
+				else {
+					if(stackA.getTagCompound() == null)
+						return true;
+					else if(stackB.getTagCompound() == null)
+						return false;
+					return compoundContainsCompound(stackA.getTagCompound().copy(), stackB.getTagCompound().copy());
+				}
+			} else
+				return false;
+		case 1:
+			if (stackA.isEmpty() && stackB.isEmpty())
+				return true;
+			else if (!stackA.isEmpty() && !stackB.isEmpty())
+			{
+				if (stackA.getTagCompound() == null && stackB.getTagCompound() != null)
+					return false;
+				else
+					return stackA.getTagCompound() == null || stackA.getTagCompound().equals(stackB.getTagCompound());
+			} else
+				return false;
+		case 2:
+			return ItemStack.areItemStackTagsEqual(stackA, stackB);
+		default:
+			return false;
+		}
+	}
+
+	/**
+	 * Checks if the second NBT tag compound contains the tags of the first one
+	 * @param tag First tag compound
+	 * @param tag1 Second tag compound
+	 * @return True if the second compound contains all of the tags from the first one, otherwise false
+	 */
+	private static boolean compoundContainsCompound(NBTTagCompound tag, NBTTagCompound tag1) {
+
+		for (String s : tag.getKeySet())
+		{
+			NBTBase nbtbase = tag.getTag(s);
+
+			if (nbtbase.getId() == 10)
+			{
+				if (tag1.hasKey(s, 10))
+				{
+					NBTTagCompound nbttagcompound = tag1.getCompoundTag(s);
+					if(!compoundContainsCompound((NBTTagCompound)nbtbase, nbttagcompound))
+						return false;
+				} else
+					return false;
+			} else if(tag1.hasKey(s))
+				if(!tag1.getTag(s).equals(nbtbase))
+					return false;
+		}
+
+		return true;
 	}
 }

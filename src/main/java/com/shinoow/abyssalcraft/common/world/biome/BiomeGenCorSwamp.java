@@ -110,13 +110,13 @@ public class BiomeGenCorSwamp extends Biome {
 	@SideOnly(Side.CLIENT)
 	public int getGrassColorAtPos(BlockPos pos)
 	{
-		return 0x6EF5DE;
+		return 0x59c6b4;
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
 	public int getFoliageColorAtPos(BlockPos pos)
 	{
-		return 0x6EF5DE;
+		return 0x59c6b4;
 	}
 }
