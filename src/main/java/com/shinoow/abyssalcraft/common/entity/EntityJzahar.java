@@ -111,6 +111,12 @@ public class EntityJzahar extends EntityMob implements IRangedAttackMob, IOmotho
 	}
 
 	@Override
+	protected ResourceLocation getLootTable()
+	{
+		return ACLoot.ENTITY_JZAHAR;
+	}
+
+	@Override
 	protected float getSoundVolume()
 	{
 		return 5.0F;

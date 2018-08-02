@@ -133,15 +133,21 @@ public class PlagueEventHandler {
 				if(event.getEntityLiving().getRNG().nextFloat() > 0.5F)
 					event.getEntityLiving().addPotionEffect(getEffect(attacker.getActivePotionEffect(AbyssalCraftAPI.coralium_plague)));
 			if(attacker.isPotionActive(AbyssalCraftAPI.dread_plague) && !EntityUtil.isEntityDread(event.getEntityLiving()))
-				if(event.getEntityLiving().getRNG().nextFloat() > 0.5F)
-					event.getEntityLiving().addPotionEffect(getEffect(attacker.getActivePotionEffect(AbyssalCraftAPI.dread_plague)));
+				if(event.getEntityLiving().getRNG().nextFloat() > 0.5F) {
+					PotionEffect effect = event.getEntityLiving().getActivePotionEffect(AbyssalCraftAPI.dread_plague);
+					effect = effect != null && effect.getAmplifier() > 0 ? getEffect(effect, effect.getAmplifier()) : getEffect(attacker.getActivePotionEffect(AbyssalCraftAPI.dread_plague));
+					event.getEntityLiving().addPotionEffect(effect);
+				}
 		}
 	}
 
 	public static PotionEffect getEffect(PotionEffect effect) {
+		return getEffect(effect, effect.getAmplifier());
+	}
 
+	public static PotionEffect getEffect(PotionEffect effect, int amplifier) {
 		int duration = effect.getDuration() >= 600 ? effect.getDuration() : 600;
 
-		return new PotionEffect(effect.getPotion(), duration, effect.getAmplifier());
+		return new PotionEffect(effect.getPotion(), duration, amplifier);
 	}
 }

@@ -11,6 +11,7 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.common.blocks.tile;
 
+import com.shinoow.abyssalcraft.api.APIUtils;
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI.FuelType;
 import com.shinoow.abyssalcraft.api.item.ACItems;
@@ -360,7 +361,7 @@ public class TileEntityTransmutator extends TileEntity implements ISidedInventor
 			if (item == ACItems.transmutation_gem) return 10000;
 			if (item == ACItems.chunk_of_coralium) return 16200;
 			if (ItemStack.areItemStacksEqual(par1ItemStack, ACItems.liquid_coralium_bucket_stack)
-				&& ItemStack.areItemStackTagsEqual(par1ItemStack, ACItems.liquid_coralium_bucket_stack)) return 20000;
+				&& APIUtils.areItemStackTagsEqual(par1ItemStack, ACItems.liquid_coralium_bucket_stack, 0)) return 20000;
 			if (item == Items.BLAZE_POWDER) return 1200;
 			if (item == Items.BLAZE_ROD) return 2400;
 			if (item == ACItems.methane) return 10000;

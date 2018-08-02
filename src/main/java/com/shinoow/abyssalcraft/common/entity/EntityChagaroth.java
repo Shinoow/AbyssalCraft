@@ -25,9 +25,7 @@ import com.shinoow.abyssalcraft.api.item.ACItems;
 import com.shinoow.abyssalcraft.common.entity.ai.EntityAIChagarothAttackMelee;
 import com.shinoow.abyssalcraft.common.network.PacketDispatcher;
 import com.shinoow.abyssalcraft.common.network.client.CleansingRitualMessage;
-import com.shinoow.abyssalcraft.lib.ACAchievements;
-import com.shinoow.abyssalcraft.lib.ACConfig;
-import com.shinoow.abyssalcraft.lib.ACSounds;
+import com.shinoow.abyssalcraft.lib.*;
 import com.shinoow.abyssalcraft.lib.util.SpecialTextUtil;
 
 import net.minecraft.block.material.EnumPushReaction;
@@ -173,6 +171,12 @@ public class EntityChagaroth extends EntityMob implements IDreadEntity {
 	protected SoundEvent getDeathSound()
 	{
 		return ACSounds.dreadguard_death;
+	}
+
+	@Override
+	protected ResourceLocation getLootTable()
+	{
+		return ACLoot.ENTITY_CHAGAROTH;
 	}
 
 	@Override

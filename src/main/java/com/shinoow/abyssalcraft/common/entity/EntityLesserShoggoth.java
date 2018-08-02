@@ -20,10 +20,10 @@ import com.shinoow.abyssalcraft.api.entity.IOmotholEntity;
 import com.shinoow.abyssalcraft.api.item.ACItems;
 import com.shinoow.abyssalcraft.common.blocks.BlockShoggothOoze;
 import com.shinoow.abyssalcraft.common.entity.ai.EntityAILesserShoggothAttackMelee;
+import com.shinoow.abyssalcraft.common.entity.ai.EntityAILesserShoggothBuildMonolith;
 import com.shinoow.abyssalcraft.common.entity.ai.EntityAIWorship;
 import com.shinoow.abyssalcraft.common.entity.demon.EntityDemonPig;
 import com.shinoow.abyssalcraft.common.items.armor.ItemEthaxiumArmor;
-import com.shinoow.abyssalcraft.common.world.gen.WorldGenShoggothMonolith;
 import com.shinoow.abyssalcraft.lib.*;
 
 import net.minecraft.block.Block;
@@ -69,6 +69,7 @@ public class EntityLesserShoggoth extends EntityMob implements IOmotholEntity {
 	private int monolithTimer;
 	private float shoggothWidth = -1.0F;
 	private float shoggothHeight;
+	public boolean isBuilding, isAssisting;
 
 	public EntityLesserShoggoth(World par1World) {
 		super(par1World);
@@ -93,7 +94,8 @@ public class EntityLesserShoggoth extends EntityMob implements IOmotholEntity {
 		tasks.addTask(7, new EntityAIWatchClosest(this, EntityRemnant.class, 8.0F));
 		tasks.addTask(7, new EntityAIWatchClosest(this, EntityLesserShoggoth.class, 8.0F));
 		tasks.addTask(7, new EntityAIWatchClosest(this, EntityGatekeeperMinion.class, 8.0F));
-		tasks.addTask(8, new EntityAIWorship(this));
+		tasks.addTask(8, new EntityAILesserShoggothBuildMonolith(this));
+		tasks.addTask(9, new EntityAIWorship(this));
 		targetTasks.addTask(1, new EntityAIHurtByTarget(this, false));
 		targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityLivingBase.class, 20, true, false, entity -> EntityUtil.isShoggothFood((EntityLivingBase) entity)));
 		targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityPlayer.class, 10, true, false, null));
@@ -218,15 +220,36 @@ public class EntityLesserShoggoth extends EntityMob implements IOmotholEntity {
 		else monolithTimer = 0;
 	}
 
+	public void resetMonolithTimer() {
+		monolithTimer = 0;
+	}
+
+	public int getMonolithTimer() {
+		return monolithTimer;
+	}
+
+	@Override
+	public boolean isPushedByWater()
+	{
+		return false;
+	}
+
 	@Override
 	public void onLivingUpdate()
 	{
 		super.onLivingUpdate();
 
+		if(isInWater()) {
+			motionX += getLookVec().xCoord * 0.005;
+			motionY += getLookVec().yCoord * 0.005;
+			motionZ += getLookVec().zCoord * 0.005;
+		}
+
 		if(world.isRemote)
 			setChildSize(isChild());
 
-		monolithTimer++;
+		if(!isChild())
+			monolithTimer++;
 
 		if(getFoodLevel() >= 8 && !world.isRemote && ticksExisted % 20 == 0){
 			setFoodLevel(getFoodLevel()-8);
@@ -268,16 +291,6 @@ public class EntityLesserShoggoth extends EntityMob implements IOmotholEntity {
 					spawnOoze(x - 1, y, z - 1);
 				}
 			}
-
-		if(monolithTimer >= 1800){
-			monolithTimer = 0;
-			if(world.getEntitiesWithinAABB(getClass(), getEntityBoundingBox().expand(32D, 32D, 32D)).size() > 5 && !isChild()){
-				for(EntityLesserShoggoth shoggoth : world.getEntitiesWithinAABB(getClass(), getEntityBoundingBox().expand(32D, 32D, 32D)))
-					shoggoth.reduceMonolithTimer();
-				if(!world.isRemote)
-					new WorldGenShoggothMonolith().generate(world, rand, new BlockPos(MathHelper.floor(posX) + 3, MathHelper.floor(posY), MathHelper.floor(posZ) + 3));
-			}
-		}
 
 		if(ticksExisted % 40 == 0 && ACConfig.consumeItems && !world.isRemote)
 			for(EntityItem entity : world.getEntitiesWithinAABB(EntityItem.class, getEntityBoundingBox())) {
