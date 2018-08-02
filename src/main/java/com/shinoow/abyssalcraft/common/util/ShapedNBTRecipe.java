@@ -11,6 +11,8 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.common.util;
 
+import com.shinoow.abyssalcraft.api.APIUtils;
+
 import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.ShapedRecipes;
@@ -69,7 +71,7 @@ public class ShapedNBTRecipe extends ShapedRecipes {
 					if (itemstack.getMetadata() != 32767 && itemstack.getMetadata() != itemstack1.getMetadata())
 						return false;
 
-					if (!ItemStack.areItemStackTagsEqual(itemstack, itemstack1))
+					if (!APIUtils.areItemStackTagsEqual(itemstack, itemstack1, 0))
 						return false;
 				}
 			}

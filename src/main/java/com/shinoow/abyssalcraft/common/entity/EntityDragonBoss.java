@@ -19,6 +19,7 @@ import com.shinoow.abyssalcraft.api.entity.ICoraliumEntity;
 import com.shinoow.abyssalcraft.api.item.ACItems;
 import com.shinoow.abyssalcraft.lib.ACAchievements;
 import com.shinoow.abyssalcraft.lib.ACConfig;
+import com.shinoow.abyssalcraft.lib.ACLoot;
 import com.shinoow.abyssalcraft.lib.util.SpecialTextUtil;
 
 import net.minecraft.entity.*;
@@ -31,9 +32,7 @@ import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.DamageSource;
-import net.minecraft.util.EnumParticleTypes;
-import net.minecraft.util.SoundEvent;
+import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
@@ -660,6 +659,12 @@ public class EntityDragonBoss extends EntityMob implements IEntityMultiPart, ICo
 	protected SoundEvent getHurtSound()
 	{
 		return SoundEvents.ENTITY_ENDERDRAGON_HURT;
+	}
+
+	@Override
+	protected ResourceLocation getLootTable()
+	{
+		return ACLoot.ENTITY_ASORAH;
 	}
 
 	@Override

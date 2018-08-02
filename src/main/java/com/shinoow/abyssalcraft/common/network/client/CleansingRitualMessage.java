@@ -26,13 +26,19 @@ import net.minecraftforge.fml.relauncher.Side;
 public class CleansingRitualMessage extends AbstractClientMessage<CleansingRitualMessage> {
 
 	private int x, z, biomeID;
+	private boolean batched;
 
 	public CleansingRitualMessage() {}
 
 	public CleansingRitualMessage(int x, int z, int biomeID){
+		this(x, z, biomeID, false);
+	}
+
+	public CleansingRitualMessage(int x, int z, int biomeID, boolean batched){
 		this.x = x;
 		this.z = z;
 		this.biomeID = biomeID;
+		this.batched = batched;
 	}
 
 	@Override
@@ -40,6 +46,7 @@ public class CleansingRitualMessage extends AbstractClientMessage<CleansingRitua
 		x = ByteBufUtils.readVarInt(buffer, 5);
 		z = ByteBufUtils.readVarInt(buffer, 5);
 		biomeID = ByteBufUtils.readVarInt(buffer, 5);
+		batched = buffer.readBoolean();
 	}
 
 	@Override
@@ -47,6 +54,7 @@ public class CleansingRitualMessage extends AbstractClientMessage<CleansingRitua
 		ByteBufUtils.writeVarInt(buffer, x, 5);
 		ByteBufUtils.writeVarInt(buffer, z, 5);
 		ByteBufUtils.writeVarInt(buffer, biomeID, 5);
+		buffer.writeBoolean(batched);
 	}
 
 	@Override
@@ -56,7 +64,9 @@ public class CleansingRitualMessage extends AbstractClientMessage<CleansingRitua
 		int chunkX = x & 0xF;
 		int chunkZ = z & 0xF;
 		chunk.getBiomeArray()[ chunkZ << 4 | chunkX ] = (byte) biomeID;
-		Minecraft.getMinecraft().renderGlobal.markBlockRangeForRenderUpdate(x - 7, 0, z - 7, x + 7, 255, z + 7);
+
+		if(x % 14 == 0 || z % 14 == 0 || !batched)
+			Minecraft.getMinecraft().renderGlobal.markBlockRangeForRenderUpdate(x - 7, 0, z - 7, x + 7, 255, z + 7);
 	}
 
 }
