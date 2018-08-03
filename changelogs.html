@@ -16,7 +16,27 @@
 
 <p class="wb-stl-normal"> </p>
 
-<p><strong>1.9.4.10 (1.10.2, 1.11.2 & 1.12.2) (06/14/2018)</strong></p>
+<p><strong>1.9.4.11 (1.10.2, 1.11.2 & 1.12.2) (08/03/2018)</strong></p>
+
+<ul><li>The purging ritual now only converts biomes that are Dreadlands biomes</li>
+	<li>Added loot tables to all bosses (empty), Coralium Infested Squid and all Remnant types</li>
+	<li>Statues now have their Deity Type assigned to them again, instead of null (1.12.2 only)</li>
+	<li>Lesser Shoggoths now have an AI for monolith construction, which makes the construction happen more frequently</li>
+	<li>The biome transformation of the Dread Plague only happens to those inflicted with Dread Plague II</li>
+	<li>If two mobs/players/whatevers close to each other both have Dread Plague I, they can infect each other with Dread Plague II</li>
+	<li>If the Hardcode Mode config option is enabled biome transformation will happen regardless of Dread Plague amplifier</li>
+	<li>The purging ritual now checks the surrounding area instead of the position of the altar for nearby Dreadlands biomes when checking if the ritual can be performed</li>
+	<li>The cleansing and corruptions rituals now both do the same thing as the purging when checking if the ritual can be performed</li>
+	<li>Reduced the luminosity of the foliage color in the Coralium Infested Swamp, making it blend better with adjacent biomes</li>
+	<li>Lesser Shoggoths now swim faster (and can move against flowing water)</li>
+	<li>Increased the range of the Corruption, Cleansing and Purging rituals to 8x8 chunks (previously 3x3)</li>
+	<li>Eyes (and other luminous bits) now glow on Lesser Shoggoths</li>
+	<li>The crafting recipe for the Transmutator now works with used Transmutation Gems again (1.12.2 only)</li>
+	<li>Any NBT checks for crafting recipes and/or rituals are now a lot less strict (the placed item needs to contain the recipe item NBT tags)</li>
+	<li>Remapped the Tile Entities to use the proper prefix (stops log warnings on startup) (1.12.2 only)</li>
+	<li>Now runs on Forge 14.23.4.2705 (1.12.2 only)</li>
+	<li>Bump to JEI 4.11.0.202 (1.12.2 only)</li>
+</ul><p><strong>1.9.4.10 (1.10.2, 1.11.2 & 1.12.2) (06/14/2018)</strong></p>
 
 <ul><li>A bunch of textures have been revamped (courtesy of Dylan4ever)</li>
 	<li>Lesser Shoggoths can no longer break Bedrock (or other unbreakable blocks) with their acid</li>
