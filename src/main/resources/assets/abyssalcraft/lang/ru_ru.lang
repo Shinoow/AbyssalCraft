@@ -1,0 +1,1416 @@
+#Start of localization file
+
+#Achievements
+achievement.necro=Добро пожаловать в AbyssalCraft!
+achievement.necro.desc=Скрафтить некрономикон, что теперь?
+
+achievement.mineAby=Получше, чем алмазы!
+achievement.mineAby.desc=Добыть несколько абиссальнитов.
+
+achievement.mineCorgem=Жемчужины океана
+achievement.mineCorgem.desc=Добыть несколько кораллиевых ажемчужин.
+
+achievement.shadowGems=Жемчужины чистой тьмы
+achievement.shadowGems.desc=Получить тёмный жемчуг.
+
+achievement.mineCor=Зелёный посох
+achievement.mineCor.desc=Добыть несколько глубинного кораллия.
+
+achievement.mineAbyOres=Не их ли я видел в загробном мире?
+achievement.mineAbyOres.desc=Добыть несколько глубинных руд.
+
+achievement.mineDread=Минералы мёртвых земель
+achievement.mineDread.desc=Добыть несколько руд из мёртвых земель.
+
+achievement.dreadium=Чумо-бесплатные слитки
+achievement.dreadium.desc=Превратить несколько страхолита.
+
+achievement.ethaxium=Какие души сделаны из...
+achievement.ethaxium.desc=Скрафтить этаксиумный слиток.
+
+achievement.killghoul=Убить глубинного гуля
+achievement.killghoul.desc=Ура... почему это достижение?
+
+achievement.ghoulhead=Начнётся охота
+achievement.ghoulhead.desc=Это одна большая голова...
+
+achievement.petehead=Эта голова...
+achievement.petehead.desc=Ура, мы можем быть друзьями навсегда :D
+
+achievement.wilsonhead=Сердитая голова
+achievement.wilsonhead.desc=Где моё тело?
+
+achievement.orangehead=Медицинская голова
+achievement.orangehead.desc=Твой диагнос вернулся, у тебя есть хромосомы.
+
+achievement.necrou1=Знания пустоши
+achievement.necrou1.desc=Скрафтить некрономикон Абиссальномикон.
+
+achievement.necrou2=Знания испорченного
+achievement.necrou2.desc=Скрафтить некрономикон мёртвых земель.
+
+achievement.necrou3=Знания неизвестного
+achievement.necrou3.desc=Скрафтить некрономикон омотола
+
+achievement.abyssaln=Всё, что тебе не суждено было знать
+achievement.abyssaln.desc=Скрафтить Абиссальномикон. Джахар немного гордится тобой.
+
+achievement.ritual=Тёмные силы
+achievement.ritual.desc=Ты даже не представляешь во что ввязываешься, не так ли?
+
+achievement.ritualSummon=Узри ярость некрономикона!
+achievement.ritualSummon.desc=Провести рутиал призыва.
+
+achievement.ritualCreate=Верстак не обязателен
+achievement.ritualCreate.desc=Провести ритуал создания.
+
+achievement.ritualBreed=Воспроизведение с помощью магии
+achievement.ritualBreed.desc=Провести племенной ритуал.
+
+achievement.ritualPotion=Оккультная алхимия
+achievement.ritualPotion.desc=Провести ритуал зелья.
+
+achievement.ritualPotionAoE=Временный маяк
+achievement.ritualPotionAoE.desc=Провести ритуал зелья в зоне действия.
+
+achievement.ritualInfusion=Объединение силы
+achievement.ritualInfusion.desc=Провести ритуал наполнения.
+
+achievement.enterabyss=Добро пожаловать в пустошь 
+achievement.enterabyss.desc=Войти в первое измерение.
+
+achievement.killdragon=Мёртвый мёртвый восставший
+achievement.killdragon.desc=Ты убил призрачного дракона.
+
+achievement.summonAsorah=Падшие вернулись!
+achievement.summonAsorah.desc=Ты призвал Асору, Беги!!
+
+achievement.killAsorah=Минус 1, осталось ещё 2
+achievement.killAsorah.desc=Ты убил Асору... Забвенец теперь тебя ненавидит.
+
+achievement.enterdreadlands=Добро пожаловать в ад... эмм в мёртвые земли
+achievement.enterdreadlands.desc=Войти во второе измерение.
+
+achievement.killdreadguard=Покарать чуму
+achievement.killdreadguard.desc=Ты убил ужасного охранника.
+
+achievement.summonChagaroth=Логово ужасного зверя
+achievement.summonChagaroth.desc=Войти в логово ча'гарота.
+
+achievement.killChagaroth=Падение страшного зверя
+achievement.killChagaroth.desc=Ты убил ча'гарота... отличная работа.
+
+achievement.enterOmothol=Добро пожаловать в свой конец, серьезно.
+achievement.enterOmothol.desc=Ты достиг омотола, царство джахара.
+
+achievement.darkRealm=Дно ямы
+achievement.darkRealm.desc=Тебе нужно было просто упасть, не так ли?
+
+achievement.killOmotholelite=Эта штука была чертовски сильная
+achievement.killOmotholelite.desc=Ты убил могущественное существо из омотола.
+
+achievement.locateJzaharПоявляется дикий джахар
+achievement.locateJzahar.desc=Я надеюсь, ты принес зелья или ещё кое-что.
+
+achievement.killJzahar=Чтобы убить бога... если боги были марионетками...
+achievement.killJzahar.desc=Неужели ты думал, что сможешь убить древнего?
+
+achievement.GK1=Ключ нежити
+achievement.GK1.desc=Скрафтить ключ портала.
+
+achievement.findPSDL=Теперь это одинственный странный камень
+achievement.findPSDL.desc=Найти в тёмных землях наполненный камень силы
+
+achievement.GK2=Ужасный ключ
+achievement.GK2.desc=Скрафтить ужасный портальный ключ кору
+
+achievement.GK3=Древний ключ
+achievement.GK3.desc=Превратить неизвестный портальный ключ
+
+achievement.makeTransmutator=Нарушить все законы физики!
+achievement.makeTransmutator.desc=Скрафтить трансмутатор.
+
+achievement.makeCrystallizer=Кристаллизовать всё
+achievement.makeCrystallizer.desc=Скрафтить кристаллизатор.
+
+achievement.makeMaterializer=Создавай собственные материалы
+achievement.makeMaterializer.desc=Скрафтить материализатор.
+
+achievement.makeCrystalBag=Сохрани все свои кристаллы
+achievement.makeCrystalBag.desc=Скрафтить хрустальный мешок. Они могут быть улучшены.
+
+achievement.makeEngraver=Бесконечные поддельные монеты!
+achievement.makeEngraver.desc=Скрафти Гравировщик.
+
+#Text
+ac.text.none=Нет
+ac.text.amplifier=Усилитель
+ac.text.deity=Бог
+
+#Amplifier Types
+ac.amplifier.range=Дальность
+ac.amplifier.duration=Продолжительность
+ac.amplifier.power=Можность
+
+#Messages
+message.asorah.spawn=Хаха, глупый человек, Я ПРОБУДИЛСЯ!
+message.asorah.death.1=Асора? ... Асора?!
+message.asorah.death.2=ТЫ, ты заплатишь за этого смертного!
+message.asorah.death.3=Помимо, тебе никогда не пройти через мёртвые земели. Развлекайся, копай себе могилу.
+message.dreadaltar.error.1=Это работает только в мёртвых землях.
+message.dreadaltar.error.2=Ты должен быть в пределах горы мёртвых земель
+message.dreadaltar.error.3=Это всё ещё работает только в мёртвых землях
+message.dreadaltartop.enterНажми на верхний блок, чтобы войти в логово ча'гарота.
+message.dreadaltartop.spawn=Ага, похоже у меня гость. Ужасные стражи, пожалуйста сожрите нашего гостя, если вы сможете.
+message.chagaroth.death.1=Вот, получи свой ключ обратно, преобразуй его в рабочий.
+message.chagaroth.death.2=Сундук за моей спиной содержит "Легендарное сокровище мёртвых земель",
+message.chagaroth.death.3=оставленное теми, кто управлял шахтой, до моего появления.
+message.chagaroth.death.4=Особо не надейся, наверняка это просто кусок грязи или что-то в этом роде.
+message.jzahar.death.1=Поздравляю, ты меня "убил". Нет, я даже близко не подходил. Ты НЕ МОЖЕШЬ убить древнего.
+message.jzahar.death.2=Как ты убил симуракулума (всего лишь физическое воплощение бесконечной тьмы). Некоторые называют его марионеткой.
+message.jzahar.death.3=То, что избегает от человека, когда они углубляются в концепцию безумия - это реальность.
+message.jzahar.death.4=Примером этого является твоя вера в то, что ты убил древнего.
+message.jzahar.death.5=Любой нормальный человек поймёт, что преследуя за таким могущественным существом - это не что иное, как верная смерть.
+message.jzahar.death.6=Но ты... твоё сознание крутилось сильнее, чем больше знаний ты получил.
+message.jzahar.death.7=Факт, что ты на секунду подумал, что убил меня, показывает, насколько безумнее ты стал.
+message.jzahar.death.8=Мои показания уже привели тебя сюда, так что тебе не нужно больше знаний. Возможно, смерть - это то, чего ты действительно желаешь.
+message.jzahar.death.9=Позволь мне высвободить последнюю силу, заключённую в этой пустой кукле. Это даст мне ответ.
+message.jzahar.death.10=Если ты пережили взрыв, возьми этот простой фрагмент моего существа, он даст тебе доступ к Абиссальномикону.
+message.jzahar.banish.vanilla=Я никогда не просил быть в одном измерении с тобой. Изыди, грязное чудовище!
+message.jzahar.banish.ac=Гммм... Мне казалось, я давал тебе задание давным - давно, а тебе не приходило в голову, что оно было окончательное?
+message.jzahar.banish.jzh=Должен остаться только один! *Создает меч из воздуха*
+message.jzahar.banish.other=Я не уверен что мы знакомы, я единственный, кто изгоняет тебя из этого измерения.
+message.jzahar.creative.1=%s, ты в курсе, что я могу просто поменять твой режим игры и прикончить тебя прямо сейчас? Я именно такая сущность.
+message.jzahar.creative.2=Но да... формально это было бы жульничеством, поэтому я просто буду придерживаться "правил" и ничего не делать.
+message.sacthoth.spawn.1=Я развязан! Почувствуй гнев Тёмного царства, смертный.
+message.sacthoth.spawn.2=Но сперва, следи за взрывом.
+message.sacthoth.damage.explosion=Я не говорю, что ты \u00A7oможешь\u00A7r меня взорвать, он просто не будет работать.
+message.sacthoth.damage.projectile=Ха, твои снаряды мне не навредят.
+message.portalplacer.error.1=Ты чувствуешь присутствие отрицания, Джахар не одобряет.
+message.portalplacer.error.2=Ничего не произошло...
+message.necronomicon.nope=Похоже, ты не владеете этой книгой. Никогда не задумывался об этом, чтобы не пытаться прочитать его?
+message.remnant.busy=Извини, в данный момент у меня посетитель, зайди позже.
+message.remnant.insult.0=%s, ты говоришь Акло так же хорошо, как моддеры говорят 1.8.
+message.remnant.insult.1=Ты ничего не знаешь, %s.
+message.remnant.insult.2=Ты бесполезен без Некрономикона, %s.
+message.jzahar.respawn=Я чувствую, что время повернулось вспять. Тебе не удалось победить меня, %s?
+
+#Container Inventories
+container.abyssalcraft.crate=Ящик
+container.abyssalcraft.crystallizer=Кристаллизатор
+container.abyssalcraft.transmutator=Трансмутатор
+container.abyssalcraft.engraver=Гравировщик 
+container.abyssalcraft.materializer=Материализатор
+container.abyssalcraft.energycontainer=Контейнер энергии
+container.abyssalcraft.tieredenergycontainer=Многоуровневый контейнер энергии
+container.abyssalcraft.rendingpedestal=Разъедающий пьедестал
+container.abyssalcraft.statetransformer=Трансформатор состояния
+container.abyssalcraft.energydepositioner=Энергоотправитель
+
+#Gui Buttons
+gui.abyssalcraft.statetransformer.insert=Вставить
+gui.abyssalcraft.statetransformer.extract=Извлечь
+
+#NEI Integration
+container.abyssalcraft.crystallizer.nei=Кристаллизация
+container.abyssalcraft.transmutator.nei=Трансмутация
+container.abyssalcraft.engraver.nei=Гравировка монеты
+container.abyssalcraft.materializer.nei=Материализация
+container.abyssalcraft.rituals.nei=Ритуал некрономикона
+container.abyssalcraft.rending.nei=Посох раздирания
+container.abyssalcraft.upgrade.nei=Комплект модернизации
+
+#JEI Integration
+gui.acjei.category.fuel.transmutator=Трансмутаторное топливо
+gui.acjei.category.fuel.crystallizer=Кристаллизированное топливо
+
+#Necronomicon Labels
+necronomicon.index=Индекс
+necronomicon.information=Запретное знание
+necronomicon.spells=Книга заклинаний
+necronomicon.rituals=Ритуалы
+necronomicon.huh=Что это за книга?
+necronomicon.information.ac=AbyssalCraft
+necronomicon.information.goo=Великие Древний
+necronomicon.information.abyssalnomicon=Абиссальномикон
+necronomicon.information.overworld=Небесный мир
+necronomicon.information.overworld.title=Небесный мир
+necronomicon.information.abyssal=Бездная пустошь
+necronomicon.information.abyssal.title=Бездная пустошь
+necronomicon.information.dreadlands=Мёртвые земли
+necronomicon.information.dreadlands.title=Мёртвые земли
+necronomicon.information.omothol=Омотул
+necronomicon.information.omothol.title=Омотул
+necronomicon.information.darkrealm=Тёмное царство
+necronomicon.information.darkrealm.title=Тёмное царство
+necronomicon.information.materials=Материалы
+necronomicon.information.progression=Развитие
+necronomicon.information.entities=Сущности
+necronomicon.information.outergods=Внешние боги
+necronomicon.other=Другая информация
+necronomicon.locked=Заблокировано
+necronomicon.information.specialmaterials=Спец. материалы
+necronomicon.anywhere=Везде
+necronomicon.location=Расположение
+necronomicon.info=Информация
+necronomicon.normal=Нормальный
+necronomicon.patrons=Покровители
+necronomicon.information.armortools=Специальная броня и инструменты
+necronomicon.information.machines=Машины
+necronomicon.reqenergy=Необходимая энергия
+necronomicon.gettingstarted=Начало работы
+necronomicon.potentialenergy=Потенциальная энергия
+necronomicon.turnupindicator=Неожиданно %1$s  %2$s
+necronomicon.miscinformation=Разная информация
+necronomicon.information.enchantments=Заклинания
+necronomicon.sacrifice=Необходимая жертва
+necronomicon.information.decorativestatues=Декоративные статуи
+necronomicon.information.knowledge=Получение знания
+necronomicon.information.coraliumplague=Коралиумная чума
+necronomicon.information.dreadplague=Ужасная чума
+
+#Necronomicon Text
+#Примечание: максимальное кол-во букв в строке 368
+#Следующий текстовый пример имеет ограничения по буквам:
+#Всем привет это автор мода, и не я написал этот текст, а мой друг который знает второй язык и это латынский! Он передаёт привет всем игрокам которые играют в этот замечательный мод как AbyssalCraft, он очень огромен и сказочно-интересен, я думаю вы сможете пройти его полностью, и насладиться замечательным прохождением мода! Удачи!!!
+#Всего больше времени пройдёт, когда ты попытаешься прочесть это, но это вызовет сбой.
+necronomicon.text.necronomicon.1=Это Некрономикон, книга, написанная Абдулом Альхазредом, также известным как "Безумный Араб". Книга содержит знания о древних, их именах и как их призвать. Также доступна информация о заклинаниях и ритуалах, которая книга может их выполнять.
+necronomicon.text.necronomicon.2=Сам некрономикон глава абиссальномикон, который был зачитан Альхазредом, демон известный как Джахар, который создал Абиссальномикон от бесконечных знаний известных древними.
+necronomicon.text.necronomicon.3=Существует 4 типа некрономиконов в абиссальномиконе: Некрономикон, некрономикон бездная пустошь, некрономикон мёртвые земли и некрономикон омотола, каждый обладает знаниями, связанными с определёнными измерениями.
+necronomicon.text.necronomicon.4=Чтобы разблокировать знания, нужно отправиться в указанное измерение и наделить некрономикон плотью этого мира. Абиссальномикон содержит дополнительные знания известны только Джахару, знания человеку не суждено получить.
+
+necronomicon.text.abyssalnomicon.1=Это Абиссальномикон, книга написанная Джарахом, привратник бездны. Книга содержит знания 4-ёх некрономиконов, т.к они фактически являются главами этой книги. Существует также обширные знания не упомянутые в других.
+necronomicon.text.abyssalnomicon.2=Поскольку знания о заклинаниях и ритуалах ограничены указанным измерением (и предыдущими, в зависимости от типа Некрономикона), Абиссальномикон имеет все знания, собранные в одном месте, с дополнениями.
+
+necronomicon.text.abyssalcraft.1=AbyssalCraft это мод, который эта книга используется для тебя. Он в основном сконцентрирован на исследовании, с 4-мя новыми измерениями которые ты можешь исследовать.
+necronomicon.text.abyssalcraft.2=Измерения достигаются с помощью использования "портальных ключей", которые являются ключами, предназначенными для создания порталов между измерениями (4-е измерение достигается выпадением 3-го).
+necronomicon.text.abyssalcraft.3=Небесный мир был расширен с 6-ю новыми биомами: Тёмные земли (нормальный, равнины, лес, высокогорье, горы) и Коралиевые заражённые болота.
+necronomicon.text.abyssalcraft.4=Есть также 5 новых типов камня и 15 новых руд, найденных по всему миру рая и измерениям.
+necronomicon.text.abyssalcraft.5=Помимо изучения, AbyssalCraft представляет свой собственный тип магии, посредством использования ритуалов в целях поклонения древними.
+necronomicon.text.abyssalcraft.6=Кроме магии и исследования, есть также машины, позволяющие преобразовывать, кристаллизовать и материализовать объекты. Также есть гравировщик для монет.
+
+necronomicon.text.azathoth.1=Азатот, демон султан, является правителем и возможно, создателем всего сущего.
+necronomicon.text.azathoth.2=Он находится за пределами вселенной, усыпленный вечным звуком труб и барабанов. Несмотря на это, у него есть своя воля и он передаёт команды Ньярлатхотепу.
+necronomicon.text.nyarlathotep.1=Ньярлатхотеп, ползущий хаос, является внешним богом, который не изгнан и не заключён в тюрьму.
+necronomicon.text.nyarlathotep.2=Он ходит по земле скрытый среди людей, распространяя безумие. Кроме служения культам внешних богов, он исполняет желания Азатота, которому служит.
+necronomicon.text.yog-sothoth.1=Йог-Сотот, притаившийся у порога - внешний бог и отпрыск безымянного тумана.
+necronomicon.text.yog-sothoth.2=Это сильно подразумевает, если не прямо заявлено, что Йог-Сотот всезнающий и запертый вне вселенной, т.е он знает и может видеть всё пространство-времени одновременно, что ни для кого не секрет скрыто от Йога-Сотота.
+necronomicon.text.shub-niggurath.1=Шаб-Ниггурат, чёрный козел из леса с тысячей молодых, является внешним богом в пантеоне.
+necronomicon.text.shub-niggurath.2=Она - извращённое божество плодородия, которое как говорят, появляется в виде огромной облачной массы, которая выдавливает чёрные щупальца, слизистые рты и короткие извивающиеся козьи ноги. Маленькие существа постоянно выплевываются чудовищем, которое поглощается или убегает.
+necronomicon.text.cthulhu.1=Ктулху - великие древний, запертый в бесконечном сне под морем в городе Р’льех.
+necronomicon.text.cthulhu.2=У него голова осьминога и чешуйчатое тело с крыльями на спине. Его состояние бесконечного сна происходит от войны со старшими существами, которая закончилась тем, что Р'льех опустился на дно моря. Однажды он восстанет, чтобы править землей.
+necronomicon.text.hastur.1=Гастур, невыразимый, древний и сводный брат Ктулху.
+necronomicon.text.hastur.2=Мало что известно о Гастуре, но он известен тем, как он принимает облик короля в жёлтых робах, одетого в маску. Как и большинство древних, он способен принимать любую форму, какую пожелает.
+necronomicon.text.jzahar.1=Джахар, Привратник бездны - ублюдок Гастур.
+necronomicon.text.jzahar.2=Имея стремление к власти, и не желая изгнания к звёздам, Джахар вышел за пределы времени и пространства, чтобы достичь своей свободы. Результаты были подобны силам Йога-Сота и наказанию за вечную охрану своих заключенных собратьев-божеств.
+
+necronomicon.text.greatoldones=До эпохи человека, вселенной правила раса древних демонических богов, известных как "Великие Древние". Давным-давно в результате конфликта, все эти существа заключены в тюрьму далеко, куда не ступала нога человека.
+necronomicon.text.abyssalnomicon_info=Абиссальномикон - это дьявольский том, из которого некрономикон был написан, когда Джахар прочтёт этот раздел, чтобы Альхазред...
+necronomicon.text.integration=Если у тебя есть доступ к технологиям неизвестные древними, можно было бы применить их в технологиях, предоставленными из бездны для новых целей.
+
+necronomicon.text.overworld=Небесный мир был расширен в новых биомах, чтобы обнаружить среди них биомы Тёмные земли и заражённые Коралиевые болота. Ты также можешь встретить глубиных гулей и глубиных зомби входе своих путешествий, которые пребывают в небесный мир через бездну пустоши.
+necronomicon.text.abyssal=Это первый слой бездны, это место тёмное, зелёное, и населённое нежитью. Забвенец считается тот, кто приглядывал за этим местом, или его дракон, Асора. Скорее всего, там Кораллий исходит от...
+necronomicon.text.dreadlands=Ранее мир Абиссальнита, Царство грёз, получил своё название, когда на нём была выпущена страшная чума, убивая всех шахтёров и развращая мирных Абиссальнитовых големов. 2-ой слой бездны держит потерянные души живых.
+necronomicon.text.omothol=Бесконечный храмовый город, построенный на самом краю здравомыслия. Царство джахара имеет единственный вход туда, где обитают Великие Древние. Привратник всегда наблюдает, и никто не покидает последний слой Бездны живым.
+necronomicon.text.darkrealm=Под омотола лежит царство, где остатки бессмертных злых демонических души богов, ожидая их реинкарнации. Тёмное царство именно там рождаются живые тени, и последнее место, которое когда-либо должны посетить живые души, поскольку им предстоит столкнутся с вечными страданиями.
+
+necronomicon.text.miscinformation=В этом разделе ты можешь найти различную информацию, которая больше нигде не упоминается в Некрономиконе.
+
+necronomicon.text.materials.abyssalnite.1=Abyssalnite is a new ore found in Darklands biomes. It is stronger than diamonds, and can be used to create tools, weapons and armor. Can be found below Y = 32. When mined, it drops ore blocks to smelt for ingots. The ingots are purple, much like the ore itself.
+necronomicon.text.materials.darkstone.1=Darkstone is a new type of stone found in Darklands biomes. Darklands Mountains are made out of this stone. The Dark Realm also consists of this material. When mined, it drops Darkstone Cobblestone, and it can be turned into Darkstone Bricks.
+necronomicon.text.materials.darkstone.2=This material is slightly stronger than regular stone, and tools made from it are stronger than their counterparts.
+necronomicon.text.materials.coralium.1=Coralium is a new ore found in ocean biomes and swamp biomes. The gems from it has multiple uses, among them the creation of Coralium Pearls.
+necronomicon.text.materials.coralium.2=Large amounts of gems can be used to create Coralium Chunks, which can be smelted down for Refined Coralium Ingots. Coralium Pearls are required to create the first Gateway Key, used to reach the first dimension, the Abyssal Wasteland.
+necronomicon.text.materials.darklandsoak.1=Darklands Oak is a new tree commonly found in Darklands biomes. It's wood can be used to create planks, which can be used to craft stairs, slabs and fences. Compared to the normal Oak wood, it's darker in color, and could thus be more stylish in design patterns, shifting the different wood types.
+necronomicon.text.materials.nitre.1=Nitre is a new ore found randomly in the Overworld. It can be used to create gunpowder, but doesn't have that many uses past that. It can be crystallized into Potassium and Nitrate crystals.
+necronomicon.text.materials.liquidantimatter.1=Liquid Antimatter is a new liquid found underground in Coralium Infested Swamps. It has the ability to de-materialize entities, and can also force other liquids to solidify upon collision.
+necronomicon.text.materials.liquidantimatter.2=If you happen to fall into a pool of Liquid Antimatter, you will likely die within approximately 5 seconds, as it deals a large amount of damage in a very short time, making it quite hard to avoid certain death when getting in contact with it.
+necronomicon.text.materials.abyssalstone.1=Abyssal Stone is a new type of stone that the Abyssal Wasteland is made out of. You need iron tools or better to break it. Compared to other stone types, it is resistant to the transmutation produced by Liquid Coralium, and it can be turned into Abyssal Stone Bricks. Drops Abyssal Cobblestone when mined.
+necronomicon.text.materials.abyssalores.1=Inside the Abyssal Wasteland, you can find "abyssal" versions of ores found in the Overworld, which drops an abyssal version of their overworld counterpart's drops, if not the same.
+necronomicon.text.materials.abyssalores.2=There's an abyssal version of Iron, Gold, Diamond, Copper, Tin and Nitre ores. They generate at a similar heigh to their overworld counterparts.
+necronomicon.text.materials.abyssalcoralium.1=Abyssal Coralium is a variant of Coralium found within the Abyssal Wasteland. It is almost identical to it's overworld counterpart. Much like the regular Coralium Ore, the Abyssal Coralium Ore drops Coralium Gems, which has multiple uses. Generates around Y = 55 and below.
+necronomicon.text.materials.liquifiedcoralium.1=Liquified Coralium is a variant of Coralium found within the Abyssal Wasteland. Compared to the other variants, it doesn't drop Coralium Gems when mined. When mined, the dropped ore can be smelted down for Refined Coralium Ingots. Generates around Y = 22 and below.
+necronomicon.text.materials.pearlescentcoralium.1=Pearlescent Coralium is a variant of Coralium found within the Abyssal Wasteland. This variant drops Coralium Pearls when mined, instead of Coralium Gems. Due to the item gained from the ore, it is quite rare, and generates around Y = 10 and below.
+necronomicon.text.materials.liquidcoralium.1=Liquid Coralium is a new liquid found within the Abyssal Wasteland. It has the ability to transmute elements on contact, as in converting any water-based liquid into itself, and most stone types into Abyssal Stone.
+necronomicon.text.materials.liquidcoralium.2=It also infects entities that touches it with the Coralium Plague, killing them if they aren't immune. Some entities can be converted into Abyssal Zombies on death. If the liquid collides with Liquid Antimatter, it will convert into Coralium Stone.
+necronomicon.text.materials.powerstonedreadlands.1=Dreadlands Infused Powerstone is a special stone found deep within Abyssal Strongholds. You need a pickaxe stronger or equal to a Refined Coralium Pickaxe in order to mine it. Once mined, it can be used to upgrade your Gateway Key if you have the other components.
+necronomicon.text.materials.dreadstone.1=Dreadstone is a stone found commonly in the Dreadlands. It was formerly Abyssalnite Stone that was converted by the Dread Plague aeons ago. You can turn it into Dreadstone Bricks. It is also used in when crafting the Altar of Cha'garoth.
+necronomicon.text.materials.abyssalnitestone.1=Abyssalnite Stone is a stone found within the Purified Dreadlands biome inside the Dreadlands. You can turn it into Abyssalnite Stone Bricks.
+necronomicon.text.materials.abyssalnitestone.2=This was formerly what the Dreadlands was made out of before it became the Dreadlands, since the dimension was once a gigantic mine hosting the largest amount of pure Abyssalnite.
+necronomicon.text.materials.dreadlandsabyssalnite.1=Dreadlands Abyssalnite is a variant of Abyssalnite found in the Dreadlands. The ore gained from mining it can be smelted for Abyssalnite Ingots. Ironically enough, based on the conditions where this ore exist, this is the purest form of Abyssalnite Ore found anywhere.
+necronomicon.text.materials.dreadedabyssalnite.1=Dreaded Abyssalnite is a variant of Abyssalnite found in the Dreadlands. The ore gained from mining it can be smelted for Abyssalnite Ingots. If you crystallize this ore, you can get Dreadium Crystals, as this form of Abyssalnite has been corrupted by the Dread Plague.
+necronomicon.text.materials.dreadlandsgrass.1=Dreadlands Grass is a type of grass that grows in Dreadlands Forest biomes within the Dreadlands. Compared to regular grass, it is red.
+necronomicon.text.materials.dreadlandstree.1=Dreadlands Tree is a tree commonly found in Dreadlands Forest biomes inside the Dreadlands. It's wood can be used to make planks, which can be used to craft stairs, slabs and fence. Compared to the Oak, both the leaves and logs are red.
+necronomicon.text.materials.omotholstone.1=Omothol Stone is a new type of stone that Omothol is made out of. It can be combined with Ethaxium to create Dark Ethaxium.
+necronomicon.text.materials.ethaxium.1=Ethaxium is a new material most commonly appearing in Omothol as the material used for structures built there. Ethaxium is extremely hard, and can thus only be destroyed with tools made from it.
+necronomicon.text.materials.ethaxium.2=Ethaxium is said to be what souls are made out of, which likely explains why it's almost indestructible. No wonder J'zahar built his temple city from this.
+necronomicon.text.materials.darkethaxium.1=Dark Ethaxium is a stronger version of Ethaxium created by combining regular Ethaxium with Omothol Stone. This kind of Ethaxium is harder than it's normal counterpart. This material is only used in one structure, the Temple of J'zahar.
+necronomicon.text.materials.ritualaltar.1=The Ritual Altar is the main component in performing rituals. It's used by shift right-clicking on it with a Necronomicon that has sufficient Potential Energy. For successful rituals, the nearby Ritual Pedestals will need the correct offerings placed on them.
+necronomicon.text.materials.ritualpedestal.1=Ritual Pedestals are used to place offerings when performing rituals. This is done by interacting with the pedestal while holding the offering you wish to place.
+necronomicon.text.materials.monolithstone.1=Monolith Stone is a material used to some extent with Potential Energy. It's origins are unknown, other than that Shoggoths are capable of creating it. It can be obtained from Monoliths or Shoggoth Lairs scattered about.
+necronomicon.text.materials.abyssalsand=Abyssal Sand is found around the surface layers of the Abyssal Wasteland. It can be smelted into Abyssal Sand Glass, which is green.
+necronomicon.text.materials.fusedabyssalsand=Fused Abyssal Sand covers the surface of the Abyssal Wasteland. It's glassy texture is formed from the sand reacting to the atmosphere of the dimension.
+
+necronomicon.text.crafting.coraliuminfusedstone.1=Coralium Infused Stone is crafted with Coralium Gem Clusters and Stone. The three clusters can be of any size, but must add up to 9.
+necronomicon.text.crafting.coraliuminfusedstone.2=If you use a 9-gem cluster, surround it with Stone blocks instead of 2 rows. When this block is broken (or smelt) you get a Coralium Pearl.
+necronomicon.text.crafting.shadowgem.1=A Shadow Gem is crafted with Shadow Gem Shards. The Shards are crafted the same way, but with Shadow Fragments.
+necronomicon.text.crafting.shadowgem.2=Shadow Fragments are dropped by Shadow Creatures, Shadow Gem Shards are dropped by Shadow Monsters and Shadow Gems are dropped by Shadow Beasts. They spawn in Darklands Mountains biomes and the Dark Realm.
+necronomicon.text.crafting.oblivionshard=A Shard of Oblivion is crafted with Shadow Gems and a Transmutation Gem.
+necronomicon.text.crafting.gk1=The Gateway Key is crafted with Blaze Rods, Coralium Pearls and a Oblivion Catalyst.
+necronomicon.text.crafting.necro_c=A Abyssal Wasteland Necronomicon is crafted with Skin of The Abyssal Wasteland and a Necronomicon. It contains more knowledge.
+necronomicon.text.crafting.psdltracker=A Powerstone Tracker is crafted with Coralium Gems and a Eye of Ender.
+necronomicon.text.crafting.necro_d=A Dreadlands Necronomicon is crafted with Skin of The Dreadlands and a Abyssal Wasteland Necronomicon.
+necronomicon.text.crafting.transmutator.1=A Transmutator is crafted with Coralium Bricks, Blocks of Refined Coralium, a Transutation Gem and a Liquid Coralium Bucket.
+necronomicon.text.crafting.transmutator.2=To obtain Coralium Bricks, you must pour Liquid Antimatter on Liquid Coralium, then harvest the stone formed from the Liquid Coralium. Then you must smelt the Coralium Stone for Coralium Bricks.
+necronomicon.text.crafting.crystallizer.1=A Crystallizer is crafted using Dreadstone Bricks, Blocks of Dreadium and a Furnace.
+necronomicon.text.crafting.crystallizer.2=Dreadium Ingots are obtained by transmuting Dreaded Shards of Abyssalnite, which are dropped by Dreadguards inside the Dreadlands. Dreadium is a lot easier to obtain once you have a Crystallizer.
+necronomicon.text.crafting.necro_o=A Omothol Necronomicon is crafted with Skin of Omothol and a Dreadlands Necronomicon.
+necronomicon.text.crafting.lifecrystal.1=A Life Crystal is crafted with a Carbon, a Hydrogen, a Nitrogen, a Oxygen, a Phosphorus and a Sulfur Crystal.
+necronomicon.text.crafting.lifecrystal.2=The Crystals are gained from crystallizing Coal, Water, Nitre, Rotten Flesh and Lapis Lazuli. The Nitrogen Crystal comes from Crystallizing the Nitrate Crystal from the Nitre.
+necronomicon.text.crafting.ethaxiumingot.1=A Ethaxium Ingot is crafted with Ethaxium Bricks and a Life Crystal.
+necronomicon.text.crafting.ethaxiumingot.2=Ethaxium Bricks are gained from smelting Ethaxium, which is obtained by transmuting End Stone. Ethaxium Ingots can also be crafted with a Oblivion Catalyst surrounded by 4 Ethaxium Bricks, sparing 4 Ethaxium Bricks.
+necronomicon.text.crafting.engravingblank.1=A Blank Coin Engraving is crafted with Stone Slabs and a Iron Ingot.
+necronomicon.text.crafting.engravingblank.2=There are current 4 Coin Engravings: Blank, Cthulhu, Elder and J'zahar. Upgrading a Engraving Template (in the previous order), requires a Ethaxium Ingot.
+necronomicon.text.crafting.coin=A Coin is crafted with a piece of Flint and Iron Ingots. Can also be crafted with Tin and Copper Ingots.
+necronomicon.text.crafting.engraver=A Engraver is crafted with Stone, a Lever, an Anvil and Blank Coin Engravings.
+necronomicon.text.crafting.crystalbag.1=A Crystal bag is crafted with Leather and a Gold Ingot.
+necronomicon.text.crafting.crystalbag.2=They can be upgraded to hold more crystals by surrounding it with Skin of The Abyssal Wasteland, Skin of The Dreadlands, then Skin of Omothol.
+necronomicon.text.crafting.materializer.1=A Materializer is crafted with Ethaxium Bricks, Obsidian, Blocks of Ethaxium and a Liquid Antimatter Bucket.
+necronomicon.text.crafting.materializer.2=To use a Materializer, you need to place a Crystal Bag in the first slot, then a Necronomicon in the second, then you can create materials using the crystals inside the bag.
+necronomicon.text.crafting.abyssalnomicon.1=An Abyssalnomicon is crafted with Ethaxium Ingots, Eldritch Scales, a Essence of The Gatekeeper and a Omothol Necronomicon.
+necronomicon.text.crafting.abyssalnomicon.2=Eldritch Scales are gained from killing Remnants and Minions of The Gatekeeper.
+necronomicon.text.crafting.rendingstaff.1=A Staff of Rending is crafted with Shadow Gem Shards and a Shard of Oblivion. It can harvest energy from certain entities (by right clicking).
+necronomicon.text.crafting.rendingstaff.2=Abyssal Wasteland Energy can be harvested from any Coralium entity inside the Abyssal Wasteland. Dreadlands Energy can be harvested from any Dread entity inside the Dreadlands. Omothol Energy can be harvested from any entity inside Omothol. Shadow Energy are harvested from any living shadow. Essences are created when sufficient energy is collected.
+necronomicon.text.crafting.skin_aby=A Skin of The Abyssal Wasteland is crafted with Coralium-plagued Flesh and a Essence of The Abyssal Wasteland. The essence is obtained through the use of a Staff of Rending.
+necronomicon.text.crafting.skin_dre=A Skin of The Dreadlands is crafted with Dread Fragment and a Essence of The Dreadlands. The essence is obtained through the use of a Staff of Rending.
+necronomicon.text.crafting.skin_omt=A Skin of Omothol is crafted with Omothol Ghoul Flesh and a Essence of Omothol. The essence is obtained through the use of a Staff of Rending.
+necronomicon.text.crafting.dreadcloth=A Dread Cloth is crafted with Dread Fragments, Strings and a piece of Leather.
+necronomicon.text.crafting.dreadplate=A Dreadium Plate is crafted with Dreadium Ingots and a Dread Cloth.
+necronomicon.text.crafting.dreadiumhilt=A Dreadium Katana Hilt is crafted with Dreadium Ingots, Dreadlands Wood Planks and Dread Cloth.
+necronomicon.text.crafting.dreadiumblade=A Dreadium Katana Blade is crafted with Dreadium Crystals.
+necronomicon.text.crafting.dreadiumshelmet=A Dreadium Samurai Helmet is crafted with Dreadium Plates, a Dreadium Ingot and a Dreadium Helmet.
+necronomicon.text.crafting.dreadiumsplate=A Dreadium Samurai Chestplate is crafted with Dreadium Plates, Dread Cloth, a Dreadium Ingot and a Dreadium Chestplate.
+necronomicon.text.crafting.dreadiumslegs=Dreadium Samurai Leggings are crafted with Dreadium Plates, Dread Cloth and Dreadium Leggings.
+necronomicon.text.crafting.dreadiumsboots=Dreadium Boots are crafted with Dread Cloth, Dreadlands Wood Planks and Dreadium Boots.
+necronomicon.text.crafting.dreadiumkatana=A Dreadium Katana is crafted with a Dreadium Katana Blade and a Dreadium Katana Hilt.
+necronomicon.text.crafting.coraliumchunk=A Chunk of Coralium is crafted with 9-gem Coralium Clusters and an Abyssal Stone.
+necronomicon.text.crafting.coraliumplate=A Coralium Plate is crafted with Refined Coralium Ingots and Coralium Pearls.
+necronomicon.text.crafting.corhelmetp=A Plated Coralium Helmet is crafted with Coralium Pearls, Refined Coralium Ingots, Coralium Plates and a Refined Coralium Helmet.
+necronomicon.text.crafting.corplatep=A Plated Coralium Chestplate is crafted with Refined Coralium Ingots, Coralium Plates and a Refined Coralium Chestplate.
+necronomicon.text.crafting.corlegsp=Plated Coralium Leggings are crafted with Refined Coralium Ingots, Coralium Plates and Refined Coralium Leggings.
+necronomicon.text.crafting.corbootsp=Plated Coralium Boots are crafted with Refined Coralium Ingots, Coralium Plates and Refined Coralium Boots.
+necronomicon.text.crafting.corbow=A Coralium Longbow is crafted with Strings, Refined Coralium Ingots, a Coralium Pearl and a Bow.
+necronomicon.text.crafting.energypedestal.1=A Energy Pedestal is crafted with Monolith Stones, A Shadow Gem and a Coralium Pearl.
+necronomicon.text.crafting.energypedestal.2=This block serves as a method for obtaining Potential Energy. If you place Statues 3 blocks away from it (on the x or z axis), they will transfer energy to it at a fast rate. Place a Necronomicon (or other source that can hold Potential Energy) on it in order to drain it.
+necronomicon.text.crafting.dreadium.1=Dreadium can be obtained in numerous ways. One method is to transmute Dreaded Shards of Abyssalnite (dropped by Dreadguards, Greater Dread Spawns and Lesser Dreadbeasts).
+necronomicon.text.crafting.dreadium.2=When you have enough Dreadium Ingots to craft a Crystallizer, you can crystallize Dreaded materials to obtain Dreadium Crystals (mostly shards which you can combine into crystals that can be transmuted for Dreadium Ingots).
+necronomicon.text.crafting.monolithpillar.1=A Monolith Stone Pillar is crafted with Monolith Stone. It's primary use is to amplify the range of Potential Energy Manipulators (statues for example).
+necronomicon.text.crafting.ritualcharm.1=A Ritual Charm is crafted with Gold Ingots and a Diamond. By itself it has no effect, but through rituals it can amplify various stats of Potential Energy Manipulators.
+necronomicon.text.crafting.sacrificialaltar.1=A Sacrificial Altar is crafted with Shadow Fragments, Monolith Stone, A Shadow Gem and a Coralium Pearl. They convert life-force into Potential Energy.
+necronomicon.text.crafting.sacrificialaltar.2=When a entity is targeted, it will emit smoke particles. Once the entity dies, an amount of PE equal to it's max health will be collected. It only targets non-undead adult entities that aren't players. It should be noted that the altar goes on a cooldown after collecting a fifth of it's max capacity, preventing collection for a minute.
+necronomicon.text.crafting.energycollector=A Energy Collector is crafted with Monolith Stone and a Shadow Gem. They can collect PE, but require a Energy Relay to transport it.
+necronomicon.text.crafting.energyrelay=A Energy Relay is crafted with Monolith Stone, Shadow Gem Shards and a Shadow Gem. They can be used to transport PE between blocks capable of storing it.
+necronomicon.text.crafting.rendingpedestal=A Rending Pedestal is crafted with Monolith Stone, A Shard of Oblivion and a Coralium Pearl. They can be used to automate the Staff of Rending.
+necronomicon.text.crafting.stonetablet=A Stone Tablet is crafted with Monolith Stone, Shadow Gem Shards and a Shadow Gem. Can be used in the State Transformer and Energy Depositioner in order to generate PE.
+necronomicon.text.crafting.statetransformer.1=A State Transformer is crafted with Monolith Stone, a Transmutation Gem and a Chest. It allows you to store input objects as PE in a Stone Tablet.
+necronomicon.text.crafting.statetransformer.2=Fill the input slots with stacks of items, then place a empty Stone Tablet in the leftmost slot to fill it. Press the button to switch modes, allowing you to reverse the process, returning items previously stored in a Stone Tablet. The amount of PE per input item is 1 * (64/max stack size) PE/item. Input/output can be automated.
+necronomicon.text.crafting.energydepositioner.1=A Energy Depositioner is crafted with Monolith Stone, Shadow Gems, a Transmutation Gem and a Energy Relay. This is a PE manipulator, working like statues.
+necronomicon.text.crafting.energydepositioner.2=By placing a charged Stone Tablet in the input slot, the Depositioner will siphon out any PE stored in it, returning either a empty Stone Tablet or a cursed one. This operation will corrupt the surrounding area (17x17 blocks), converting it into Darklands (more Darklands increases the chance of cursed Stone Tablets). Output can be automated.
+necronomicon.text.crafting.ethaxiumpillar=Ethaxium Pillars are crafted with Ethaxium Bricks and Ethaxium blocks
+necronomicon.text.crafting.darkethaxiumpillar=Dark Ethaxium Pillars are crafted with Dark Ethaxium Bricks and Omothol Stone
+
+necronomicon.text.crafting.upgradekit.1=A Upgrade Kit is crafted with Wooden Planks, Cobblestone, String and Flint. Upgrade kits can upgrade tools and armor through an anvil.
+necronomicon.text.crafting.upgradekit.2=To upgrade a kit, you need 2 units of the next material and 1 of the current. Materials are Wood -> Cobblestone -> Iron -> Gold -> Diamond -> Abyssalnite -> Refined Coralium -> Dreadium -> Ethaxium.
+necronomicon.text.crafting.ironplate=A Iron Plate is crafted with 2 Iron Ingots. Iron Plates can enhance the saturation of certain food.
+necronomicon.text.crafting.washcloth=A Washcloth is crafted with Wool and Cobweb. It's used to clean Dirty Plates (given when eating plate food).
+necronomicon.text.crafting.mre=A MRE (Meal, Ready to Eat) is crafted with a Iron Plate, a Carrot, a Potato and a Steak. It fills the entire food bar when eaten.
+necronomicon.text.crafting.platefood=Any Vanilla foodstuffs (and Fried Eggs) combined with a Iron Plate will create plate food (which has twice the saturation of the normal). Returns a Dirty Plate when eaten.
+necronomicon.text.crafting.odbcore=A ODB Core is crafted with Abyssalnite Ingots, Iron Ingots, Iron Blocks and a Coralium Pearl. Can be used as an explosive.
+necronomicon.text.crafting.odb=A Oblivion Deathbomb is crafted with Obsidian, A ODB Core, A Oblivion Catalyst, a Liquid Coralium Bucket and a Liquid Antimatter Bucket. Heavy explosive.
+necronomicon.text.crafting.carboncluster=A Carbon Cluster is crafted with Crystallized Carbon. They are used in order to craft Dense Carbon Clusters.
+necronomicon.text.crafting.densecarboncluster=A Dense Carbon Cluster is crafted with Carbon Clusters and a block of Obsidian. Can be transmuted into a Diamond.
+necronomicon.text.crafting.crate=A Wooden Crate is crafted with Sticks, Wooden Planks and a Chest. Has an extra row of inventory slots more than a Chest.
+
+necronomicon.text.crafting.decorativeazathothstatue=A Decorative Azathoth Statue is crafted with Monolith Stone, Clay and Purple Dye.
+necronomicon.text.crafting.decorativecthulhustatue=A Decorative Cthulhu Statue is crafted with Monolith Stone, Clay and Cyan Dye.
+necronomicon.text.crafting.decorativehasturstatue=A Decorative Hastur Statue is crafted with Monolith Stone, Clay and Dandelion Yellow.
+necronomicon.text.crafting.decorativejzaharstatue=A Decorative J'zahar Statue is crafted with Monolith Stone, Clay and Gray Dye.
+necronomicon.text.crafting.decorativenyarlathotepstatue=A Decorative Nyarlathotep Statue is crafted with Monolith Stone, Clay and Lapis Lazuli.
+necronomicon.text.crafting.decorativeshubniggurathstatue=A Decorative Shub-Niggurath Statue is crafted with Monolith Stone, Clay and a Ink Sac.
+necronomicon.text.crafting.decorativeyogsothothstatue=A Decorative Yog-Sothoth Statue is crafted with Monolith Stone, Clay and Glowstone Dust.
+
+necronomicon.text.enchantment.coralium=The Coralium Enchantment allows you to infect any entity you hit with the Coralium Plague (that is, if they aren't immune). Can only be obtained through a ritual.
+necronomicon.text.enchantment.dread=The Dread Enchantment allows you to infect any entity you hit with the Dread Plague (that is, if they aren't immune). Can only be obtained through a ritual.
+necronomicon.text.enchantment.lightpierce=The Light Pierce Enchantment works like Bane of Arthropods, but on Shadow mobs.
+necronomicon.text.enchantment.ironwall=The Iron Wall Enchantment works as a anti-knockback enchantment, repelling knockback applied when hit.
+
+necronomicon.text.overworld.progression.1=In order to reach the Abyssal Wasteland, one must craft a Gateway Key, which requires one to travel to the Nether, and to visit a Darklands and a water-based biome. The water-based biome can be either a swamp or a ocean biome.
+necronomicon.text.overworld.progression.2=From the Nether you need 2 Blaze Rods, and probably a few more for later. From the Darklands biome you need to slay living shadows to finally obtain Shadow Gems. They are most commonly found in Darklands Mountains biomes. It is recommended to obtain a Staff of Rending in order to obtain Shadow Gems faster (more information in the special armor and tools section).
+necronomicon.text.overworld.progression.3=From the water-based biome you need Coralium Gems in order to create Coralium Pearls. Once you have obtained these items, you can create a Transmutation Gem through an Infusion Ritual (found in the ritual section). The recipe for Shards of Oblivion can be found in the special materials section.
+necronomicon.text.overworld.progression.4=When you have 4 Shards of Oblivion, use those and 4 units of Redstone Dust to infuse an Eye of Ender (through an infusion ritual, found in the ritual section of the Necronomicon) in order to create an Oblivion Catalyst, main component of the Gateway Key (the special materials section has the recipe).
+necronomicon.text.overworld.progression.5=Once the Gateway Key is crafted, simply right-click on the ground to form a portal. For more information, you will need the Abyssal Wasteland Necronomicon, which requires 8 Skins of The Abyssal Wasteland in order to upgrade. The Staff of Rending is needed in order to obtain essences used to craft those.
+
+necronomicon.text.abyssal.progression.1=Once you have reached the Abyssal Wasteland, your next goal is to reach the Dreadlands. You will need 3 components in order to upgrade your Gateway Key, an Eye of The Abyss, a Dreadlands Infused Powerstone and a Transmutation Gem. The first is obtained by defeating Asorah, The Fallen, summoned through the ritual "Ritual of The Sleeper" (in ritual section).
+necronomicon.text.abyssal.progression.2=Asorah uses Spectral Dragons to heal himself, so they should be taken out quickly throughout the fight. Once defeated, Asorah will drop his eye with a large quantity of exp and materials found in the dimension. The Dreadlands Infused Powerstone is located inside a Abyssal Stronghold, which can be found using Powerstone Trackers (recipe in special materials section).
+necronomicon.text.abyssal.progression.3=Once you have tracked down the Powerstone, you can mine it with a Refined Coralium Pickaxe. Lastly you can upgrade your Gateway Key by infusing it with the required components ("Asorah's Dreaded Gateway Key" ritual). Upgrading your Necronomicon to the Dreadlands Necronomicon requires 8 Skins of The Dreadlands.
+
+necronomicon.text.dreadlands.progression.1=Once you have reached the Dreadlands, your next goal is to reach Omothol. You will need to own a Transmutator, and you need to defeat Cha'garoth, The Dreadbeast. In order to reach Cha'garoth, you need the Altar of Cha'garoth, made out of 2 pieces. Both pieces are created through rituals.
+necronomicon.text.dreadlands.progression.2=Once you have both Altar pieces, you need to place them at Y = 40 inside a Dreadlands Mountain biome and right-click it. Doing so will grant you entry to The Lair of Cha'garoth. After fighting through Dreadguards and eventually killing Cha'garoth, you will receive a Dread-plagued Gateway Key, along with loot. The key needs to be transmuted into a functioning one.
+necronomicon.text.dreadlands.progression.3=With the aforementioned Transmutator (recipe in Abyssal Wasteland special materials section) you can transmute the Dread-plagued Gateway Key into Cha'garoth's R'lyehian Gateway Key, granting you access to Omothol. Upgrading your Necronomicon to the Omothol Necronomicon requires 8 Skins of Omothol.
+
+necronomicon.text.omothol.progression.1=Now that you've arrived in Omothol, it's time to battle J'zahar, Gatekeeper of The Abyss. The Temple of J'zahar can be located at the heart of Omothol (coordinates X=4, Y=53, Z=7). Once you have defeated the Gatekeeper, you will be able to unlock all hidden knowledge through the Abyssalnomicon.
+necronomicon.text.omothol.progression.2=The Abyssalnomicon requires Ethaxium Ingots, Eldritch Scales and the Essence of The Gatekeeper (dropped by J'zahar).
+necronomicon.text.omothol.progression.3=
+necronomicon.text.omothol.progression.4=
+necronomicon.text.omothol.progression.5=
+necronomicon.text.omothol.progression.6=
+
+necronomicon.text.darkrealm.progression.1=Once you have reached the Dark Realm, there isn't much to do down here apart from facing infinite waves of Shadow beings and Sacthoth, as this is his natural habitant.
+necronomicon.text.darkrealm.progression.2=Main reason to intentionally fall down here would be to obtain large quantities of Shadow Gems and/or Sacthoth's Soul Reaper Blade.
+
+necronomicon.text.entity.anti.1=Inside the Coralium Infested Swamp you can find several life forms made out of antimatter.
+necronomicon.text.entity.anti.2=If a anti-entity collides with it's normal counterpart, they explode. There are anti-versions of: Zombies, Abyssal Zombies, Skeletons, Depths Ghouls, Bats, Cows, Pigs, Chickens, Creepers, Spiders and Players. Anti-Players don't explode.
+necronomicon.text.entity.evilanimals.1=If you encounter any of these animals, you will quickly notice that it's hostile and screams when you hit it.
+necronomicon.text.entity.evilanimals.2=The Evil Animals are pre-evolving Demon Animals, which hatches when you kill the current animal-based organism. They are immune to fire, and spawn in most Overworld biomes.
+necronomicon.text.entity.abyssalzombie.1=Abyssal Zombies can be found in various Ocean, Swamp, Beach and Darklands biomes.
+necronomicon.text.entity.abyssalzombie.2=Abyssal Zombies are formerly Zombies who has been infected with the Coralium Plague, causing them to evolve into these beings. They are hostile against regular Zombies. They also spawn in the Abyssal Wasteland and the End.
+necronomicon.text.entity.depthsghoul.1=Depths Ghouls are evolved Coralium Infested undead. Spawns where Abyssal Zombies spawn.
+necronomicon.text.entity.depthsghoul.2=Depths Ghouls are the masterpiece of Coralium Plague evolution on Zombies, rarely mutating into these behemoths. Some of them gains new forms, such as Pete, Mr. Wilson and Dr. Orange, each stronger than the other.
+necronomicon.text.entity.skeletongoliath.1=Skeleton Goliaths are massive Skeletons with Cudgels roaming the Abyssal Wasteland. Unknown Origin.
+necronomicon.text.entity.skeletongoliath.2=Ever thought what a giant skeleton with a Cudgel would look like in Minecraft? Well, this. Skeleton Goliaths are big and powerful skeletons walking among the dead. They have a small chance of dropping the Cudgel on death.
+necronomicon.text.entity.spectraldragon.1=Spectral Dragons are transparent dragons rarely spawning in the Abyssal Wasteland.
+necronomicon.text.entity.spectraldragon.2=These ghastly dragons are mostly a nuisance to face, but probably more tricky when Asorah devours their life energy in order to regenerate himself. They can fly through solid matter without destroying it, unlike the Ender Dragon.
+necronomicon.text.entity.asorah.1=Asorah, The Fallen, is the first boss encountered in AbyssalCraft. Summoned inside the Abyssal Wasteland.
+necronomicon.text.entity.asorah.2=Asorah was formerly Oblivionaire's dragon, until he passed away aeons ago, after that he has been reanimated through the usage of Coralium until he was destroyed by an unknown enemy. Now his soul resides in the Dark Realm.
+necronomicon.text.entity.abyssalnitegolem.1=Abyssalnite Golems are living ore clusters found in the Dreadlands.
+necronomicon.text.entity.abyssalnitegolem.2=These creatures of solid Abyssalnite were the native population of the dimensional mine that became the Dreadlands. They tend to pick fights with their Dreaded counterpart, to avenge their lost world.
+necronomicon.text.entity.dreadgolem.1=Dreaded Abyssalnite Golems are living ore clusters found in the Dreadlands.
+necronomicon.text.entity.dreadgolem.2=Unlike the pure Abyssalnite Golems, these red chunks of corrupted Abyssalnite are slowly turning into Dreadium, while taking all measures on corrupting any remaining Abyssalnite.
+necronomicon.text.entity.dreadling.1=Dreadlings are mutated beings found in the Dreadlands.
+necronomicon.text.entity.dreadling.2=These beings were once Abyssalnite miners in the dimension that became the Dreadlands. They have no memory of their past, and now lives to worship Cha'garoth, The Dreadbeast, who controls them.
+necronomicon.text.entity.dreadspawn.1=Dread Spawns are mutated beings found in the Dreadlands. They are rumored to share certain genetic features with Shoggoths.
+necronomicon.text.entity.dreadspawn.2=It is not known what these beings are, but one thing is sure, Cha'garoth created them. Dread Spawns are slowly crawling mutants appearing often in Dreadlands Forests. If enough of them group up at one spot, they might merge, growing into a larger mass.
+necronomicon.text.entity.demonanimals.1=Demon Animals are demonic monsters found in the Nether and the Dreadlands.
+necronomicon.text.entity.demonanimals.2=These abominations are commonly found in Dreadlands Forests or randomly in the Nether. How these monsters were created is unknown, but someone hated humans enough to turn farm animals hostile against them.
+necronomicon.text.entity.chagarothspawn.1=Spawns of Cha'garoth are mutated beings found in the Dreadlands.
+necronomicon.text.entity.chagarothspawn.2=Compared to the Dread Spawn, these mutated beings are the offspring of Cha'garoth, having a few of his features. They are stronger than their lesser counterpart (the Dread Spawn), and are usually spawned by Cha'garoth.
+necronomicon.text.entity.chagarothfist.1=Fists of Cha'garoths are living hands found in the Dreadlands.
+necronomicon.text.entity.chagarothfist.2=As the Dreadbeast is immobile, he managed to create arms that stretched almost infinitely across the Dreadlands, with empty eyeballs for him to gaze through. This is literally a hand holding a eyeball.
+necronomicon.text.entity.dreadguard.1=Dreadguards are powerful mutants found in the Dreadlands.
+necronomicon.text.entity.dreadguard.2=These particular beings have been empowered by Cha'garoth, and placed in corrupted Abyssalnite Armor with the task of guarding their master, which they do quite well. They drop Dreaded Shards of Abyssalnite.
+necronomicon.text.entity.chagaroth.1=Cha'garoth, The Dreadbeast, is the Second boss in AbyssalCraft, encountered in the Dreadlands.
+necronomicon.text.entity.chagaroth.2=Cha'garoth is the result of a new dangerous virus, 3 chopped off hydra heads and a dead Shoggoth. Becoming a health hazard for The Great Old Ones, he was placed in the dimension that became the Dreadlands, killing and corrupting everything.
+necronomicon.text.entity.remnant.1=Remnants are the citizens of Omothol, found there.
+necronomicon.text.entity.remnant.2=Since all Great Old Ones has some type of offspring, J'zahar has the Remnants, whom are lesser beings of himself, incapable of obtaining the power he bears. Instead they worship him like his loyal breed, and trade goods with other life forms.
+necronomicon.text.entity.omotholghoul.1=Omothol ghouls are the final evolution, found in Omothol.
+necronomicon.text.entity.omotholghoul.2=The Omothol Ghoul is the final evolution of the Depths Ghoul, unlocking the full potential of death. Aeons in darkness has made these behemoths immune to fire, while strengthening them greatly.
+necronomicon.text.entity.omotholwarden.1=Omothol Wardens are demons found in Omothol.
+necronomicon.text.entity.omotholwarden.2=Omothol Wardens are demons tasked by J'zahar to patrol Omothol, searching for intruders to eliminate. These demonic beings are powerful guardians of the Abyss.
+necronomicon.text.entity.gatekeeperminion.1=Minions of The Gatekeeper are loyal servants to J'zahar found in Omothol.
+necronomicon.text.entity.gatekeeperminion.2=Minions of The Gatekeeper are an elite of more powerful Remnants serving their master. They are commonly found around The Temple of J'zahar, being loyal minions to the Gatekeeper.
+necronomicon.text.entity.jzahar.1=J'zahar, Gatekeeper of The Abyss, is the final boss in AbyssalCraft, found in Omothol.
+necronomicon.text.entity.jzahar.2=J'zahar was the only one among The Great Old Ones to not get banished to the eternal void. Due to the powers he obtained when he reverted time and space to re-create it, he is tasked with guarding his fellow demonic gods in their eternal slumber.
+necronomicon.text.entity.lessershoggoth.1=Lesser Shoggoths are a smaller breed of Shoggoths found throughout the Abyss.
+necronomicon.text.entity.lessershoggoth.2=Shoggoths are amorphous shapeshifting beings genetically engineered by the Elder Things as a race of servant-tools. Though being mindless, they became conscious and killed their masters. Now they sometimes build monoliths in honor of The Great Old Ones.
+necronomicon.text.entity.shadowcreature.1=Shadow Creatures are inhabitants of The Dark Realm, can be found in Darklands Mountains.
+necronomicon.text.entity.shadowcreature.2=Shadow Creatures are living shadows naturally found in The Dark Realm, but are capable of merging to Omothol and all the way to the Darklands. The Shadow Creature is the smallest evolution of living shadows.
+necronomicon.text.entity.shadowmonster.1=Shadow Monsters are inhabitants of The Dark Realm, can be found in Darklands Mountains.
+necronomicon.text.entity.shadowmonster.2=Shadow Monsters are living shadows naturally found in The Dark Realm, but are capable of merging to Omothol and all the way to the Darklands. The Shadow Monster is the middle evolution of living shadows.
+necronomicon.text.entity.shadowbeast.1=Shadow Beasts are inhabitants of The Dark Realm, can be found in Darklands Mountains.
+necronomicon.text.entity.shadowbeast.2=Shadow Beasts are living shadows naturally found in The Dark Realm, but are capable of merging to Omothol and all the way to the Darklands. The Shadow Beast is the greater evolution of living shadows.
+necronomicon.text.entity.shadowtitan.1=Shadow Titans are inhabitants of The Dark Realm.
+necronomicon.text.entity.shadowtitan.2=Shadow Titans are powerful living shadows roaming The Dark Realm. Compared to the Shadow Beast, Shadow Titans are armored, and more powerful. 
+necronomicon.text.entity.sacthoth.1=Sacthoth, Harbinger of Doom is found in The Dark Realm.
+necronomicon.text.entity.sacthoth.2=Sacthoth is the strongest being in The Dark Realm, and the ruler of living shadows. The only way for him to leave The Dark Realm is through the explosion of a Oblivion Deathbomb. He carries a powerful sword capable of tearing out the souls of the living.
+necronomicon.text.entity.coraliumsquid.1=Coralium Infested Squids are found in pools of Liquid Coralium inside the Abyssal Wasteland.
+necronomicon.text.entity.coraliumsquid.2=These Squids have been transformed by the Coralium Plague, enabling them to transfer it to victims touched by them, or the ink they squirt on their targets.
+
+necronomicon.text.rituals.info=Проверить раздел информации о ритуалах можно найти в разделе Информация, а информацию о доступных ритуалах в других разделах. "Местоположение" определяет, где ритуал может быть выполнен.
+
+necronomicon.text.rituals.1=In order to get started with rituals you need to create the altar to perform them at. There is a total of 8 materials you can create your Ritual Altar from.
+necronomicon.text.rituals.2=Those are: Cobblestone, Darkstone Cobblestone, Abyssal Cobblestone, Coralium Cobblestone, Dreadstone Cobblestone, Abyssalnite Cobblestone, Ethaxium Brick and Dark Ethaxium Brick. The materials can only be used in their specific dimension (eg. Cobblestone and Darkstone Cobblestone in the Overworld, Abyssal Cobblestone in the Abyssal Wasteland etc).
+necronomicon.text.rituals.3=To create the altar, simply place the blocks in the above formation (keep the colored area clear) and shift right-click the center block with a Necronomicon.
+necronomicon.text.rituals.4=After that, you can start performing rituals! In order to perform a ritual, place objects on the pedestals and shift right-click the altar with a Necronomicon.
+necronomicon.text.rituals.5=When performing, the pedestals project bits of their placed object towards the altar. Rituals where you gain objects always end with a bolt of lightning striking the altar.
+necronomicon.text.rituals.6=Potential Energy is required in order to perform rituals (each ritual entry shows how much you need). Potential Energy is a pure form of untapped energy originating from a higher plane of existence. It's mainly used to fuel sacrifices made to The Great Old Ones (any ritual). Statues placed on Shoggoth Monoliths are said to be capable of draining it.
+necronomicon.text.rituals.7=Some rituals require a living sacrifice. This means you need to have an adult animal within close proximity of the altar and pedestals. When the ritual starts, the target animal will begin to emit smoke particles, and needs to die before the ritual ends. Failing to complete a ritual will trigger a Disruption, which is bad.
+
+necronomicon.text.pe.1=Potential Energy (PE) is a new form of energy presented in AbyssalCraft. It originates from a higher plane of existence (where no mortal has wandered), and can only be collected by tapping into Ley Lines using various methods. There exist objects capable of doing so, which will be explained here.
+necronomicon.text.pe.2=A good place to start obtaining materials required to create some of the PE collecting objects is Shoggoth Lairs, found in swamps and rivers.
+necronomicon.text.pe.3=Shoggoth Monoliths are also constructed with Monolith Stone (hence the name), while having statues placed on them. These statues can collect PE.
+necronomicon.text.pe.4=It should be noted that the Lesser Shoggoths only build these monoliths under certain conditions. Theorists claim it has to do with power positions (but they're genderless, and don't understand the concept of hieracrchy). If 6 (or more) Lesser Shoggoths are within 32 blocks of each other, one is prone to rise a monolith out of the ooze.
+necronomicon.text.pe.5=You should take into account that the Lesser Shoggoths have no limit on how many monoliths they construct, leading to a possible infestation.
+necronomicon.text.pe.6=If you notice Shoggoth activity near your homestead, it is highly advised that you immediately evacuate your land, or construct a large wall (or other defensive measures) to ensure the infestation doesn't spread onto your land. Recovering your land from a Shoggoth infestation is quite difficult, so be cautious.
+necronomicon.text.pe.7=The statues come in different shapes, all depicting Great Old Ones. They can transport PE to nearby players holding Necronomicons when under open sky.
+necronomicon.text.pe.8=It should be noted that you harvesting PE isn't appreciated. This causes disruptions to occur (displayed by a bolt of lightning striking the statue, or other PE manipulator). Disruptions are random events that can affect the player, other entities or the environment. Their purpose is to punish those who tries to drain PE from the higher plane.
+necronomicon.text.pe.9=Statues have a limited PE transfer range to nearby collectors. Collectors need to be placed in the yellow frame (with a two block gap between it and the statue).
+necronomicon.text.pe.10=When placed on Monolith Stone Pillar Blocks, the statues range can be increased up to two blocks. Statues on pillars can transfer energy to Collectors further down.
+necronomicon.text.pe.11=A Energy Depositioner is another PE manipulator. It works like a generator, where the "fuel" are Stone Tablets charged with PE.
+necronomicon.text.pe.12=One way to boost the efficiency of statues (and other PE manipulators) is through the use of Ritual Charms. They can boost various stats (check the tooltip).
+necronomicon.text.pe.13=You can also craft a Energy Pedestal, which can collect PE from statues (and other PE manipulators). Items that can hold PE can be placed on the pedestal to charge.
+necronomicon.text.pe.14=Along with the Energy Pedestal there's the Sacrificial Altar, which can convert life-force from dying entities into PE (targeted entities emit smoke).
+necronomicon.text.pe.15=Another way to collect PE from manipulators is with a Energy Collector. It works like a Energy Pedestal (except you can't place items on it).
+necronomicon.text.pe.16=Energy Relays are used to transfer PE, and can do so in any direction (but it can't transport it through solid blocks, except glass).
+necronomicon.text.pe.17=Building networks with Energy Relays allows you to transport PE over larger distances. Energy Relays can drain PE from PE Collector placed next to it.
+necronomicon.text.pe.18=In order to store greater amounts of PE, you can create a Energy Container. They allow insertion through Energy Relays or interaction with the block.
+necronomicon.text.pe.19=If the PE production still is too slow, you can also upgrade the various PE handling blocks through infusion rituals to boost stats.
+necronomicon.text.pe.20=Upon reaching Omothol, you will be able to create deity-specific Ritual Charms (with an Abyssalnomicon), or buy them from Remnant Priests. Those charms will give an additional boost if used on manipulators associated with the same deity as the one displayed on the charm.
+
+necronomicon.text.machines.info=Проверь раздел информации для получения информации о различных машинах, или другие разделы для всех рецептов для указанной машины. Рецепты никоим образом не отсортированы.
+
+necronomicon.text.machines.1=The Transmutator is used to transmute objects into other objects, which can revert a process or simply convert an object into it's opposite. It's fueled by any Coralium materials, Coralium-plagued Flesh and any Crystallized element (full crystal or shard).
+necronomicon.text.machines.2=The Crystallizer is used to crystallize elements, isolating the base elements (or molecules) they're made from. It's fueled by any Dreaded material, Dread Fragments and any Crystallized element (full crystal or shard).
+necronomicon.text.machines.3=The Engraver is used to engrave coins, allowing you to trade things with Remnant. The "fuel" used in engraving is engraving templates, that wear out after a certain amount of uses. If you want to re-engrave a coin, you have to use a blank engraving on it first (to un-engrave it).
+necronomicon.text.machines.4=The Materializer is used to create objects by combining base elements (obtained through crystallization). The Materializer uses no fuel, but requires a Necronomicon to function, and a Crystal Bag with crystals to materialize objects from.
+
+necronomicon.text.knowledge.1=Some information in this book is incomprehensible to your puny, regular, untwisted mortal mind. By studying artifacts, listening to the whispers from statues, defeat monsters and explore the surroundings, you can expand your mind with new knowledge, enabling you to comprehend the information. Some Items and Blocks also require knowledge in order to be comprehended.
+necronomicon.text.knowledge.2=Treasure chests can contain lost pages with information, and in old structures scattered about, you can uncover murals that will grant you knowledge. Statues depicting Great Old Ones can sometimes be heard whispering things. Through combat you can gain knowledge of the enemy after defeating it. Exploring biomes and dimensions will grant you new knowledge.
+necronomicon.text.knowledge.3=Information you can't comprehend appears in Aklo glyphs rather than the human alphabet. The following page has an example of such glyphs:
+
+necronomicon.text.coraliumplague.1=The Coralium Plague is a disease originating from the Abyssal Wasteland. It's capable of transforming infected victims on death into stronger monsters. It's only considered a plague by those harmed by it.
+necronomicon.text.coraliumplague.2=An antidote for the Coralium Plague can be made with a Water Bottle, a Wasteland's Thorn, a piece of Anti-Plagued Flesh and a piece of Abyssal Shoggoth Flesh.
+
+necronomicon.text.dreadplague.1=The Dread Plague is a disease originating from the Dreadlands. It's a very infectious disease, swiftly travelling between hosts, but also transforming the ground around those afflicted by it, thus allowing the plague to grow stronger. The only place known to be completely immune to the Dread Plague is Omothol.
+necronomicon.text.dreadplague.2=An antidote for the Dread Plague can be made with a Water Bottle, a Dreadlands Sapling, a Dread Fragment and a piece of Dreaded Shoggoth Flesh.
+
+necronomicon.text.wip=Этот раздел незавершён.
+
+#Rituals
+ac.ritual.oblivionCatalyst=Oblivion Catalyst
+ac.ritual.oblivionCatalyst.desc=A Oblivion Catalyst is created by infusing an Eye of Ender with Shards of Oblivion and Redstone Dust.
+ac.ritual.transmutationGem=Transmutation Gem
+ac.ritual.transmutationGem.desc=A Transmutation Gem is created by infusing a Coralium Pearl with Diamonds, Ender Pearls and Blaze Powder.
+ac.ritual.asorahGatewayKey=Asorah's Dreaded Gateway Key
+ac.ritual.asorahGatewayKey.desc=Asorah's Dreaded Gateway Key is created by infusing a Gateway Key with an Eye of The Abyss, a Dreadlands Infused Powerstone and a Transmutation Gem.
+ac.ritual.summonAsorah=Ritual of The Sleeper
+ac.ritual.summonAsorah.desc=Summons Asorah, The Fallen, from the Dark Realm. The afterlife is commonly referred to as an eternal slumber, in which a sleeper is a entity beyond life and death.
+ac.ritual.summonSacthoth=Ritual of Shadows
+ac.ritual.summonSacthoth.desc=Summons Sacthoth, Harbinger of Doom, from the Dark Realm. Offer 4 pieces of Obsidian, a Liquid Coralium Bucket, a Liquid Antimatter Bucket, a ODB Core and a Oblivion Catalyst.
+ac.ritual.breeding=Ritual of Fertility
+ac.ritual.breeding.desc=Breeds nearby animals. Might also kill all of them, if unlucky enough.
+ac.ritual.depthsHelmet=Helmet of The Depths
+ac.ritual.depthsHelmet.desc=A Helmet of The Depths is created by infusing a Refined Coralium Helmet with 2 Coralium Gem Cluster (9 gems), Coralium Plagued Flesh, a Transmutation Gem, a Lily Pad, a Vine and a Liquid Coralium Bucket.
+ac.ritual.depthsChestplate=Chestplate of The Depths
+ac.ritual.depthsChestplate.desc=A Chestplate of The Depths is created by infusing a Refined Coralium Chestplate with 2 Coralium Gem Cluster (9 gems), Coralium Plagued Flesh, a Transmutation Gem, a Lily Pad, a Vine and a Liquid Coralium Bucket.
+ac.ritual.depthsLeggings=Leggings of The Depths
+ac.ritual.depthsLeggings.desc=Leggings of The Depths are created by infusing a Refined Coralium Leggings with 2 Coralium Gem Cluster (9 gems), Coralium Plagued Flesh, a Transmutation Gem, a Lily Pad, a Vine and a Liquid Coralium Bucket.
+ac.ritual.depthsBoots=Boots of The Depths
+ac.ritual.depthsBoots.desc=Boots of The Depths are created by infusing a Refined Coralium Boots with 2 Coralium Gem Cluster (9 gems), Coralium Plagued Flesh, a Transmutation Gem, a Lily Pad, a Vine and a Liquid Coralium Bucket.
+ac.ritual.dreadSpawn=Ritual of Evolving
+ac.ritual.dreadSpawn.desc=All nearby Dread Spawns (regardless of evolution stage) is cloned to produce a double. Offer a Dread Fragment, a Dreadstone, an Abyssalnite Stone, a Chunk of Abyssalnite, a Dreaded Chunk of Abyssalnite, a piece of Rotten Flesh, a Dreaded Shard of Abyssalnite and a Abyssalnite Ingot.
+ac.ritual.corPotionAoE=Coralium Plague Infection
+ac.ritual.corPotionAoE.desc=Spreads the Coralium Plague to nearby entities. Offer 4 Coralium Plagued Flesh, 3 Water Bottles and a piece of Gunpowder.
+ac.ritual.drePotionAoE=Dread Plague Infection
+ac.ritual.drePotionAoE.desc=Spreads the Dread Plague to nearby entities. Offer 4 Dread Fragments, 3 Water Bottles and a piece of Gunpowder.
+ac.ritual.antiPotionAoE=Antimatter Eradication
+ac.ritual.antiPotionAoE.desc=Exposes nearby entities to Liquid Antimatter. Offer 4 Rotten Anti-Flesh, 3 Water Bottles and a piece of Gunpowder.
+ac.ritual.cthulhuStatue=Cthulhu Statue
+ac.ritual.cthulhuStatue.desc=A Cthulhu Statue is created by infusing a Monolith Stone with Shoggoth Flesh, a Abyssal Wasteland Essence, a Dreadlands Essence and a Omothol Essence.
+ac.ritual.hasturStatue=Hastur Statue
+ac.ritual.hasturStatue.desc=A Hastur Statue is created by infusing a Monolith Stone with Abyssal Shoggoth Flesh, a Abyssal Wasteland Essence, a Dreadlands Essence and a Omothol Essence.
+ac.ritual.jzaharStatue=J'zahar Statue
+ac.ritual.jzaharStatue.desc=A J'zahar Statue is created by infusing a Monolith Stone with Eldritch Scales, a Abyssal Wasteland Essence, a Dreadlands Essence and a Omothol Essence.
+ac.ritual.azathothStatue=Azathoth Statue
+ac.ritual.azathothStatue.desc=A Azathoth Statue is created by infusing a Monolith Stone with Shoggoth Flesh of The Overworld (normal), Abyssal Wasteland, Dreadlands, Omothol and The Dark Realm, a Abyssal Wasteland Essence, a Dreadlands Essence and a Omothol Essence.
+ac.ritual.nyarlathotepStatue=Nyarlathotep Statue
+ac.ritual.nyarlathotepStatue.desc=A Nyarlathotep Statue is created by infusing a Monolith Stone with Dreaded Shoggoth Flesh, a Abyssal Wasteland Essence, a Dreadlands Essence and a Omothol Essence.
+ac.ritual.yogsothothStatue=Yog-Sothoth Statue
+ac.ritual.yogsothothStatue.desc=A Yog-Sothoth Statue is created by infusing a Monolith Stone with Omothol Shoggoth Flesh, a Abyssal Wasteland Essence, a Dreadlands Essence and a Omothol Essence.
+ac.ritual.shubniggurathStatue=Shub-Niggurath Statue
+ac.ritual.shubniggurathStatue.desc=A Shub-Niggurath Statue is created by infusing a Monolith Stone with Shadow Shoggoth Flesh, a Abyssal Wasteland Essence, a Dreadlands Essence and a Omothol Essence.
+ac.ritual.powerStone=Dreadlands Infused Powerstone
+ac.ritual.powerStone.desc=A Dreadlands Infused Powerstone is created by infusing Coralium Infused Stone with Dreadlands Essences.
+ac.ritual.ethaxiumIngot=Ethaxium Ingot
+ac.ritual.ethaxiumIngot.desc=A Ethaxium Ingot is created by Infusing a Life Crystal with Ethaxium Bricks.
+ac.ritual.dreadHelmet=Dreaded Abyssalnite Helmet
+ac.ritual.dreadHelmet.desc=A Dreaded Abyssalnite Helmet is created by infusing a Abyssalnite Helmet with Dreaded Shards of Abyssalnite and a Dreadlands Essence.
+ac.ritual.dreadChestplate=Dreaded Abyssalnite Chestplate
+ac.ritual.dreadChestplate.desc=A Dreaded Abyssalnite Chestplate is created by infusing a Abyssalnite Chestplate with Dreaded Shards of Abyssalnite and a Dreadlands Essence.
+ac.ritual.dreadLeggings=Dreaded Abyssalnite Leggings
+ac.ritual.dreadLeggings.desc=Dreaded Abyssalnite Leggings is created by infusing Abyssalnite Leggings with Dreaded Shards of Abyssalnite and a Dreadlands Essence.
+ac.ritual.dreadBoots=Dreaded Abyssalnite Boots
+ac.ritual.dreadBoots.desc=Dreaded Abyssalnite Boots is created by infusing Abyssalnite Boots with Dreaded Shards of Abyssalnite and a Dreadlands Essence.
+ac.ritual.rangeCharm=Ritual Charm (Range)
+ac.ritual.rangeCharm.desc=A Range Ritual Charm is made by infusion a Ritual Charm with Arrows and Shadow Fragments.
+ac.ritual.durationCharm=Ritual Charm (Duration)
+ac.ritual.durationCharm.desc=A Duration Ritual Charm is made by infusion a Ritual Charm with Redstone Dust and Shadow Fragments.
+ac.ritual.powerCharm=Ritual Charm (Power)
+ac.ritual.powerCharm.desc=A Power Ritual Charm is made by infusion a Ritual Charm with Glowstone Dust and Shadow Fragments.
+ac.ritual.crangeCharm=Cthulhu Charm (Range)
+ac.ritual.crangeCharm.desc=A Range Cthulhu Charm is made by infusion a Cthulhu Charm with Arrows and Shadow Fragments.
+ac.ritual.cdurationCharm=Cthulhu Charm (Duration)
+ac.ritual.cdurationCharm.desc=A Duration Cthulhu Charm is made by infusion a Cthulhu Charm with Redstone Dust and Shadow Fragments.
+ac.ritual.cpowerCharm=Cthulhu Charm (Power)
+ac.ritual.cpowerCharm.desc=A Power Cthulhu Charm is made by infusion a Cthulhu Charm with Glowstone Dust and Shadow Fragments.
+ac.ritual.hrangeCharm=Hastur Charm (Range)
+ac.ritual.hrangeCharm.desc=A Range Hastur Charm is made by infusion a Hastur Charm with Arrows and Shadow Fragments.
+ac.ritual.hdurationCharm=Hastur Charm (Duration)
+ac.ritual.hdurationCharm.desc=A Duration Hastur Charm is made by infusion a Hastur Charm with Redstone Dust and Shadow Fragments.
+ac.ritual.hpowerCharm=Hastur Charm (Power)
+ac.ritual.hpowerCharm.desc=A Power Hastur Charm is made by infusion a Hastur Charm with Glowstone Dust and Shadow Fragments.
+ac.ritual.jrangeCharm=J'zahar Charm (Range)
+ac.ritual.jrangeCharm.desc=A Range J'zahar Charm is made by infusion a J'zahar Charm with Arrows and Shadow Fragments.
+ac.ritual.jdurationCharm=J'zahar Charm (Duration)
+ac.ritual.jdurationCharm.desc=A Duration J'zahar Charm is made by infusion a J'zahar Charm with Redstone Dust and Shadow Fragments.
+ac.ritual.jpowerCharm=J'zahar Charm (Power)
+ac.ritual.jpowerCharm.desc=A Power J'zahar Charm is made by infusion a J'zahar Charm with Glowstone Dust and Shadow Fragments.
+ac.ritual.arangeCharm=Azathoth Charm (Range)
+ac.ritual.arangeCharm.desc=A Range Azathoth Charm is made by infusion a Azathoth Charm with Arrows and Shadow Fragments.
+ac.ritual.adurationCharm=Azathoth Charm (Duration)
+ac.ritual.adurationCharm.desc=A Duration Azathoth Charm is made by infusion a Azathoth Charm with Redstone Dust and Shadow Fragments.
+ac.ritual.apowerCharm=Azathoth Charm (Power)
+ac.ritual.apowerCharm.desc=A Power Azathoth Charm is made by infusion a Azathoth Charm with Glowstone Dust and Shadow Fragments.
+ac.ritual.nrangeCharm=Nyarlathotep Charm (Range)
+ac.ritual.nrangeCharm.desc=A Range Nyarlathotep Charm is made by infusion a Nyarlathotep Charm with Arrows and Shadow Fragments.
+ac.ritual.ndurationCharm=Nyarlathotep Charm (Duration)
+ac.ritual.ndurationCharm.desc=A Duration Nyarlathotep Charm is made by infusion a Nyarlathotep Charm with Redstone Dust and Shadow Fragments.
+ac.ritual.npowerCharm=Nyarlathotep Charm (Power)
+ac.ritual.npowerCharm.desc=A Power Nyarlathotep Charm is made by infusion a Nyarlathotep Charm with Glowstone Dust and Shadow Fragments.
+ac.ritual.yrangeCharm=Yog-Sothoth Charm (Range)
+ac.ritual.yrangeCharm.desc=A Range Yog-Sothoth Charm is made by infusion a Yog-Sothoth Charm with Arrows and Shadow Fragments.
+ac.ritual.ydurationCharm=Yog-Sothoth Charm (Duration)
+ac.ritual.ydurationCharm.desc=A Duration Yog-Sothoth Charm is made by infusion a Yog-Sothoth Charm with Redstone Dust and Shadow Fragments.
+ac.ritual.ypowerCharm=Yog-Sothoth Charm (Power)
+ac.ritual.ypowerCharm.desc=A Power Yog-Sothoth Charm is made by infusion a Yog-Sothoth Charm with Glowstone Dust and Shadow Fragments.
+ac.ritual.srangeCharm=Shub-Niggurath Charm (Range)
+ac.ritual.srangeCharm.desc=A Range Shub-Niggurath Charm is made by infusion a Shub-Niggurath Charm with Arrows and Shadow Fragments.
+ac.ritual.sdurationCharm=Shub-Niggurath Charm (Duration)
+ac.ritual.sdurationCharm.desc=A Duration Shub-Niggurath Charm is made by infusion a Shub-Niggurath Charm with Redstone Dust and Shadow Fragments.
+ac.ritual.spowerCharm=Shub-Niggurath Charm (Power)
+ac.ritual.spowerCharm.desc=A Power Shub-Niggurath Charm is made by infusion a Shub-Niggurath Charm with Glowstone Dust and Shadow Fragments.
+ac.ritual.cthulhuCharm=Cthulhu Charm
+ac.ritual.cthulhuCharm.desc=A Cthulhu Charm is made by infusing a Ritual Charm with Cthulhu Engraved Coins.
+ac.ritual.hasturCharm=Hastur Charm
+ac.ritual.hasturCharm.desc=A Hastur Charm is made by infusing a Ritual Charm with Hastur Engraved Coins.
+ac.ritual.jzaharCharm=J'zahar Charm
+ac.ritual.jzaharCharm.desc=A J'zahar Charm is made by infusing a Ritual Charm with J'zahar Engraved Coins.
+ac.ritual.azathothCharm=Azathoth Charm
+ac.ritual.azathothCharm.desc=A Azathoth Charm is made by infusing a Ritual Charm with Azathoth Engraved Coins.
+ac.ritual.nyarlathotepCharm=Nyarlathotep Charm
+ac.ritual.nyarlathotepCharm.desc=A Nyarlathotep Charm is made by infusing a Ritual Charm with Nyarlathotep Engraved Coins.
+ac.ritual.yogsothothCharm=Yog-Sothoth Charm
+ac.ritual.yogsothothCharm.desc=A Yog-Sothoth Charm is made by infusing a Ritual Charm with Yog-Sothoth Engraved Coins.
+ac.ritual.shubniggurathCharm=Shub-Niggurath Charm
+ac.ritual.shubniggurathCharm.desc=A Shub-Niggurath Charm is made by infusing a Ritual Charm with Shub-Niggurath Engraved Coins.
+ac.ritual.epOWupgrade=Overworld Energy Pedestal
+ac.ritual.epOWupgrade.desc=A Overworld Energy Pedestal is created by infusing a Energy Pedestal with Cobblestone, Darkstone Cobblestone, Shadow Gem Shards and Coralium Gems.
+ac.ritual.epAWupgrade=Abyssal Wasteland Energy Pedestal
+ac.ritual.epAWupgrade.desc=A Abyssal Wasteland Energy Pedestal is created by infusing a Overworld Energy Pedestal with Abyssal Stone Bricks, Coralium Bricks, Shadow Gem Shards and Coralium Gems.
+ac.ritual.epDLupgrade=Dreadlands Energy Pedestal
+ac.ritual.epDLupgrade.desc=A Dreadlands Energy Pedestal is created by infusing a Abyssal Wasteland Energy Pedestal with Dreadstone Bricks, Abyssalnite Stone Bricks, Shadow Gem Shards and Coralium Gems.
+ac.ritual.epOMTupgrade=Omothol Energy Pedestal
+ac.ritual.epOMTupgrade.desc=A Omothol Energy Pedestal is created by infusing a Dreadlands Energy Pedestal with Ethaxium Bricks, Dark Ethaxium Bricks, Shadow Gem Shards and Coralium Gems.
+ac.ritual.saOWupgrade=Overworld Sacrificial Altar
+ac.ritual.saOWupgrade.desc=A Overworld Sacrificial Altar is created by infusing a Sacrificial Altar with Cobblestone, Darkstone Cobblestone, Shadow Gem Shards and Coralium Gems.
+ac.ritual.saAWupgrade=Abyssal Wasteland Sacrificial Altar
+ac.ritual.saAWupgrade.desc=A Abyssal Wasteland Sacrificial Altar is created by infusing a Overworld Sacrificial Altar with Abyssal Stone Bricks, Coralium Bricks, Shadow Gem Shards and Coralium Gems.
+ac.ritual.saDLupgrade=Dreadlands Sacrificial Altar
+ac.ritual.saDLupgrade.desc=A Dreadlands Sacrificial Altar is created by infusing a Abyssal Wasteland Sacrificial Altar with Dreadstone Bricks, Abyssalnite Stone Bricks, Shadow Gem Shards and Coralium Gems.
+ac.ritual.saOMTupgrade=Omothol Sacrificial Altar
+ac.ritual.saOMTupgrade.desc=A Omothol Sacrificial is created by infusing a Dreadlands Sacrificial Altar with Ethaxium Bricks, Dark Ethaxium Bricks, Shadow Gem Shards and Coralium Gems.
+ac.ritual.jzaharStaff=Staff of The Gatekeeper
+ac.ritual.jzaharStaff.desc=A Staff of The Gatekeeper is created by infusing a Staff of Rending with a Abyssal Wasteland Essence, a Dreadlands Essence, a Omothol Essence, Eldritch Scales and Ethaxium Ingots.
+ac.ritual.respawnJzahar=Ritual of reversed time
+ac.ritual.respawnJzahar.desc=If you in some way failed to obtain a Essence of The Gatekeeper, you can revert time and fight J'zahar again. Can only be performed at the Ritual Altar inside the Temple of J'zahar (X=4, Y=54, Z=85).
+ac.ritual.altarOfChagarothBottom=Altar of Cha'garoth (bottom)
+ac.ritual.altarOfChagarothBottom.desc=An Altar of Cha'garoth (bottom) is created with Dreadstone. Dreadium Ingots, Asorah's Dreaded Gateway Key, Bones and a piece of Dread Cloth.
+ac.ritual.altarOfChagarothTop=Altar of Cha'garoth (top)
+ac.ritual.altarOfChagarothTop.desc=An Altar of Cha'garoth (top) is created with Sticks, a Bucket, Dread Cloths and Dreadium Ingots.
+ac.ritual.corEnchantment=Coralium Infusion
+ac.ritual.corEnchantment.desc=By combining a Abyssal Wasteland Essence, Abyssal Shoggoth Flesh, Refined Coralium Ingots, Coralium-plagued Flesh and a Book, you can enchant a weapon placed on the altar with the Coralium enchantment (if applicable).
+ac.ritual.dreEnchantment=Dread Infusion
+ac.ritual.dreEnchantment.desc=By combining a Dreadlands Essence, Dreaded Shoggoth Flesh, Dreadium Ingots, Dread Fragments and a Book, you can enchant a weapon placed on the altar with the Dread enchantment (if applicable).
+ac.ritual.weather=Ritual of Downpour
+ac.ritual.weather.desc=By sacrificing 8 Feathers, you can control the weather of the Biome you're inside (provided it can rain there). If it's not raining, it will rain. If it's raining, it will start thundering. If it's thundering the rain and thunder will cease.
+ac.ritual.energyContainer=Energy Container
+ac.ritual.energyContainer.desc=A Energy Container is created by infusing a Energy Pedestal with Energy Collectors and Shadow Gem Shards. The Energy Container can store large quantities of PE, while also capable if draining/filling input items.
+ac.ritual.interdimensionalcage=Interdimensional Cage
+ac.ritual.interdimensionalcage.desc=A Interdimensional Cage is created by infusing a Shard of Oblivion with Iron Bars. It can use Potential Energy to capture Entities. The amount of PE required is determined by the Entity's metric volume (ratio: 100 PE/m³), so larger entities require more PE to capture. PE is only drained when you capture an Entity.
+ac.ritual.ecolOWupgrade=Overworld Energy Collector
+ac.ritual.ecolOWupgrade.desc=A Overworld Energy Collector is created by infusing a Energy Collector with Cobblestone, Darkstone Cobblestone, Shadow Gem Shards and Coralium Gems.
+ac.ritual.ecolAWupgrade=Abyssal Wasteland Energy Collector
+ac.ritual.ecolAWupgrade.desc=A Abyssal Wasteland Energy Collector is created by infusing a Overworld Energy Collector with Abyssal Stone Bricks, Coralium Bricks, Shadow Gem Shards and Coralium Gems.
+ac.ritual.ecolDLupgrade=Dreadlands Energy Collector
+ac.ritual.ecolDLupgrade.desc=A Dreadlands Energy Collector is created by infusing a Abyssal Wasteland Energy Collector with Dreadstone Bricks, Abyssalnite Stone Bricks, Shadow Gem Shards and Coralium Gems.
+ac.ritual.ecolOMTupgrade=Omothol Energy Collector
+ac.ritual.ecolOMTupgrade.desc=A Omothol Energy Collector is created by infusing a Dreadlands Energy Collector with Ethaxium Bricks, Dark Ethaxium Bricks, Shadow Gem Shards and Coralium Gems.
+ac.ritual.erOWupgrade=Overworld Energy Relay
+ac.ritual.erOWupgrade.desc=A Overworld Energy Relay is created by infusing a Energy Relay with Cobblestone, Darkstone Cobblestone, Shadow Gem Shards and Coralium Gems.
+ac.ritual.erAWupgrade=Abyssal Wasteland Energy Relay
+ac.ritual.erAWupgrade.desc=A Abyssal Wasteland Energy Relay is created by infusing a Overworld Energy Relay with Abyssal Stone Bricks, Coralium Bricks, Shadow Gem Shards and Coralium Gems.
+ac.ritual.erDLupgrade=Dreadlands Energy Relay
+ac.ritual.erDLupgrade.desc=A Dreadlands Energy Relay is created by infusing a Abyssal Wasteland Energy Relay with Dreadstone Bricks, Abyssalnite Stone Bricks, Shadow Gem Shards and Coralium Gems.
+ac.ritual.erOMTupgrade=Omothol Energy Relay
+ac.ritual.erOMTupgrade.desc=A Omothol Energy Relay is created by infusing a Dreadlands Energy Relay with Ethaxium Bricks, Dark Ethaxium Bricks, Shadow Gem Shards and Coralium Gems.
+ac.ritual.econOWupgrade=Overworld Energy Container
+ac.ritual.econOWupgrade.desc=A Overworld Energy Container is created by infusing a Energy Container with Cobblestone, Darkstone Cobblestone, Shadow Gem Shards and Coralium Gems.
+ac.ritual.econAWupgrade=Abyssal Wasteland Energy Container
+ac.ritual.econAWupgrade.desc=A Abyssal Wasteland Energy Container is created by infusing a Overworld Energy Container with Abyssal Stone Bricks, Coralium Bricks, Shadow Gem Shards and Coralium Gems.
+ac.ritual.econDLupgrade=Dreadlands Energy Container
+ac.ritual.econDLupgrade.desc=A Dreadlands Energy Container is created by infusing a Abyssal Wasteland Energy Container with Dreadstone Bricks, Abyssalnite Stone Bricks, Shadow Gem Shards and Coralium Gems.
+ac.ritual.econOMTupgrade=Omothol Energy Container
+ac.ritual.econOMTupgrade.desc=A Omothol Energy Container is created by infusing a Dreadlands Energy Container with Ethaxium Bricks, Dark Ethaxium Bricks, Shadow Gem Shards and Coralium Gems.
+ac.ritual.sorAWupgrade=Abyssal Wasteland Staff of Rending
+ac.ritual.sorAWupgrade.desc=A Abyssal Wasteland Staff of Rending is created by infusing a Staff of Rending with Abyssal Stone, Coralium Plagued Flesh and and a Shadow Gem.
+ac.ritual.sorDLupgrade=Dreadlands Staff of Rending
+ac.ritual.sorDLupgrade.desc=A Dreadlands Staff of Rending is created by infusing a Abyssal Wasteland Staff of Rending with Dreadstone, Dread Fragment and and a Shadow Gem.
+ac.ritual.sorOMTupgrade=Omothol Staff of Rending
+ac.ritual.sorOMTupgrade.desc=A Omothol Staff of Rending is created by infusing a Dreadlands Staff of Rending with Omothol Stone, Omothol Flesh and and a Shadow Gem.
+ac.ritual.cleansing=Ritual of Cleansing
+ac.ritual.cleansing.desc=By presenting 8 random statues, a massive amount of energy and a living sacrifice, you revert the corruption of the Abyss from the surrounding area. With far too much power comes no responsibilities, what so ever. It purges the Darklands, restoring it to its pure Overworld state.
+ac.ritual.corruption=Ritual of Corruption
+ac.ritual.corruption.desc=By presenting 4 random statues, 4 blocks of Darkstone, a large amount of energy and a living sacrifice, you summon powers from the Abyss to corrupt the surrounding area. Defile the Overworld's purity in order to bring forth the Darklands.
+ac.ritual.resurrection=Dark Resurrection
+ac.ritual.resurrection.desc=By presenting crystallized compounds resembling the elements of life, a living sacrifice and a Name Tag with the name of a fallen companion, you resurrect it. The Crystal size scale with the companion (Shards for something the size of a Chicken, Clusters for a Horse, normal for anything inbetween). Life has limits, however.
+ac.ritual.purging=Ritual of Purging
+ac.ritual.purging.desc=By presenting 4 Crystallized Calcium Clusters and a large amount of energy, you purge every trace of the Dread Plague (and the Dreadlands) from the area, putting a stop to it here (also kills nearby mobs). While it renders the area uninhabitable, no plagues will be able to spread here. Doesn't work in the Dreadlands.
+
+#Spells
+ac.spell.lifedrain=Вампиризм
+ac.spell.entropy=Энтропия
+ac.spell.mining=Добыча
+
+#Rending
+ac.rending.shadowgem=Теневые жемчуги делаются из сбора тёмной энергии из живых теней.
+ac.rending.essence_aw=Эссенция бездной пустоши изготавливается из сбора энергии Бездной Пустоши из сущностей Кораллия.
+ac.rending.essence_dl=Эссенция мёртвых земель изготавливается из сбора энергии Мёртвых Земель из ужасных существ.
+ac.rending.essence_omt=Эссенция омотола изготавливается из сбора энергии омотола из существ омотола.
+
+#Configuration
+ac_dimensions=Измерение
+ac_dimensions.tooltip=Настройка ID измерения
+ac_biomes=Биомы
+ac_biomes.tooltip=Настройка ID биома
+ac_biomegen=Генерация биома
+ac_biomegen.tooltip=Настройка генерации биомов 
+ac_biomespawn=Появление биомов
+ac_biomespawn.tooltip=Настройка появления биомов
+ac_biomeweight=Значение биома
+ac_biomeweight.tooltip=Настройка значения биома
+ac_general=Главное
+ac_general.tooltip=Общие настройки
+ac_shoggoth=Шоггот
+ac_shoggoth.tooltip=Настройки шоггота
+ac_worldgen=Генерация мира
+ac_worldgen.tooltip=Настройки генерация мира
+ac_itemblacklist=Чёрный список предметов существ
+ac_itemblacklist.tooltip=Настройки Чёрного списка предметов существ
+ac_silly_settings=Нелепые настройки
+ac_silly_settings.tooltip=Настройки Нелепых настроек
+
+#Keybinds
+key.abyssalcraft.category=AbyssalCraft
+key.staff_mode.desc=Изменить режим посоха привратника
+
+#Damagesources
+death.attack.coralium=%1$s умер от Коралиевой чумы
+death.attack.coralium.player=%1$s скончался от Коралиевой чумы, пытаясь сбежать %2$s
+death.attack.dread=%1$s умер от Страшной Чумы
+death.attack.dread.player=%1$s скончался от Чагарота, пытаясь сбежать %2$s
+death.attack.antimatter=%1$s был молекулярно разобран
+death.attack.antimatter.player=%1$s был молекулярно разобран, пытаясь сбежать %2$s
+death.attack.shadow=%1$s был поглощён тьмой
+death.attack.shadow.player=%1$s был поглощён тьмой, пытаясь сбежать %2$s
+death.attack.shoggoth_acid=%1$s был растворён в кислоте Шоггота
+death.attack.shoggoth_acid.player=%1$s был растворён в кислоте Шоггота, пытаясь сбежать %2$s
+
+#Tooltips
+tooltip.portalplacer.1=Щёлкни ПКМ на месте, чтобы
+tooltip.portalplacer.2=создать портал. Бесконечное использование.
+tooltip.portalplacer.3=Щёлкни ПКМ, чтобы создать альтернативный портал.
+tooltip.portalplacer.4=Ты не можешь использовать этот предмет в этом измерении!
+tooltip.oc=Этот предмет обладает невероятной силой.
+tooltip.staff=Посох джахара, привратника бездны.
+tooltip.eoa=Глаз асоры, павшего дракона.
+tooltip.devblade.1=Этот клинок настолько дьявольский, что твоя
+tooltip.devblade.2=рука начинает гнить, когда ты держишь его.
+tooltip.antibucket=Эта жидкость, может сделать любую другую жидкость твёрдой.
+tooltip.cbucket.1=Эта жидкость имеет опасные эффекты
+tooltip.cbucket.2=при смешивании с любой другой жидкостью,
+tooltip.cbucket.3=за исключением Жидкой Антиматерии.
+tooltip.corbow.1=Стрелы будут применять
+tooltip.corbow.2=Кораллиемую чуму при попадании
+tooltip.corb=Этот предмет может изменять свойства других материалов.
+tooltip.odb=Мощная взрывчатка, используй на свой страх и риск.
+tooltip.crystal=Молекулярная формула
+tooltip.soulreaper=Души собраны
+tooltip.crystalbag=Эта сумка содержит кристаллизированные предметы
+tooltip.drainstaff.energy.1=Энергия бездой пустоши
+tooltip.drainstaff.energy.2=Энергия мёртвых земель
+tooltip.drainstaff.energy.3=Энергия омотола
+tooltip.drainstaff.energy.4=Тёмная энергия
+tooltip.gatekeeperessence.1=Простой фрагмент Джахара.
+tooltip.gatekeeperessence.2=Ты можешь чувствовать, как он пульсирует силой.
+tooltip.decorativestatue=Этот предназначен сугубо для декора, и ничего не будет делать
+tooltip.staff.mode.1=Режим
+tooltip.staff.mode.2=Нажми %s чтобы изменить режим
+tooltip.stonetablet.cursed=Проклятый
+tooltip.stonetablet.contents=%d стэк
+
+#Creative Tabs
+itemGroup.acblocks=AbyssalCraft: Блоки
+itemGroup.acitems=AbyssalCraft: Предметы
+itemGroup.actools=AbyssalCraft: Инструменты
+itemGroup.acctools=AbyssalCraft: Боевые Инструменты
+itemGroup.acfood=AbyssalCraft: Продукты Питания
+itemGroup.acdblocks=AbyssalCraft: Декоративные Блоки
+itemGroup.accrystals=AbyssalCraft: Кристаллизированные Кристаллы
+itemGroup.accoins=Abyssalcraft: Монеты
+
+#Fluids
+fluid.liquidcoralium=Жидкий кораллий
+fluid.liquidantimatter=Жидкая антиматерия
+
+#Blocks
+tile.stone.0.name=Тёмный камень
+tile.stone.1.name=Камень бездны
+tile.stone.2.name=Камень страха
+tile.stone.3.name=Abyssal камень
+tile.stone.4.name=Кораллиевый камень
+tile.stone.5.name=Итаксий
+tile.stone.6.name=Камень омотола
+tile.stone.7.name=Монолитовый камень
+tile.darkstone_brick.0.name=Тёмно-каменные кирпичи
+tile.darkstone_brick.1.name=Резные тёмно-каменные кирпичи
+tile.darkstone_brick.2.name=Потрескавшиеся тёмно-каменные кирпичи
+tile.cobblestone.0.name=Тёмно-каменный булыжник
+tile.cobblestone.1.name=Abyssal булыжник
+tile.cobblestone.2.name=Ужасный булыжник
+tile.cobblestone.3.name=Булыжник из ночной бездны
+tile.cobblestone.4.name=Кораллиевый булыжник
+tile.dsglow.name=Светящиеся тёмно-каменные кирпичи
+tile.darkbrickslab1.name=Тёмно-каменно-кирпичная плита
+tile.darkbrickslab2.name=Тёмно-каменно-кирпичная двойная плита
+tile.darkcobbleslab1.name=Тёмно-каменная плита из булыжника
+tile.darkcobbleslab2.name=Двойная плита из тёмно-каменного булыжника
+tile.dbstairs.name=Ступеньки из тёмного камня
+tile.dcstairs.name=Ступеньки из тёмного булыжника
+tile.dltleaves.name=Дубовые листья из тёмных земель
+tile.dltlog.name=Дуб из тёмных земель
+tile.dltsapling.name=Дубовый саженец из тёмных земель
+tile.abybrick.0.name=Глубинные каменные кирпичи
+tile.abybrick.1.name=Глубинные резные каменные кирпичи
+tile.abybrick.2.name=Глубинные потрескавшиеся каменные кирпичи
+tile.abyslab1.name=Глубинная каменно-кирпичная плита
+tile.abyslab2.name=Глубинная каменно-кирпичная двойная плита
+tile.abystairs.name=Глубинные каменно-кирпичные ступеньки
+tile.coraliumore.name=Коралиевная руда
+tile.abyore.name=Глубинная руда
+tile.abyfence.name=Глубинный каменно-кирпичный забор
+tile.dscwall.name=Тёмно-каменно-булыжниковая стена
+tile.odb.name=Смертельная бомба забвения
+tile.ingotblock.0.name=Глубинный блок
+tile.ingotblock.1.name=Изысканный коралиумный блок
+tile.ingotblock.2.name=Ужасный блок
+tile.ingotblock.3.name=Этаксиумный блок
+tile.coraliumstone.name=Коралиумный наполненный камень
+tile.odbcore.name=ОДБ Ядро
+tile.crate.name=Деревянный ящик
+tile.abyportal.name=Глубинные врата в 
+tile.darkstoneslab1.name=Тёмно-каменная плита
+tile.darkstoneslab2.name=Тёмно-каменная двойная плита
+tile.coraliumfire.name=Пламя коралия
+tile.dsbutton.name=Тёмно-каменная кнопка
+tile.dspplate.name=Тёмно-каменная нажимная пластина
+tile.dltplank.name=Дубовые доски из тёмных земель
+tile.dltbutton.name=Деревянная кнопка из тёмных земель
+tile.dltpplate.name=Деревянная нажимная пластина из тёмных земель
+tile.dltstairs.name=Деревянная ступеньки из тёмных земель
+tile.dltslab1.name=Деревянная плита из тёмных земель
+tile.dltslab2.name=Деревянная двойная плита из тёмных земель
+tile.cwater.name=Жидкий кораллий
+tile.psdl.name=Наполненный камень силы из мёртвых земель
+tile.abycorore.name=Бездная кораллиумная руда
+tile.altar.name=Алтарь
+tile.abybutton.name=Глубинная каменная кнопка
+tile.abypplate.name=Глубинная каменная нажимная пластина
+tile.dsbfence.name=Тёмно-каменно кирпичный забор
+tile.dltfence.name=Дубовый забор из тёмных земель
+tile.dreadore.name=Страшная абиссальнитовая руда
+tile.abydreadore.name=Абиссальнитовая руда из мёртвых земель
+tile.dreadbrick.0.name=Кирпичи из камня страха
+tile.dreadbrick.1.name=Резные кирпичи из камня страха
+tile.dreadbrick.2.name=Потрескавшиеся кирпичи из камня страха
+tile.abydreadbrick.0.name=Абиссальнитовые каменные кирпичи
+tile.abydreadbrick.1.name=Резные абиссальнитовые каменные кирпичи
+tile.abydreadbrick.2.name=Потрескавшиеся абиссальнитовые каменные кирпичи
+tile.dreadgrass.name=Трава из страшных земель
+tile.dreadlog.name=Дубовое бревно из страшных земель
+tile.dreadleaves.name=Дубовая листва из страшных земель
+tile.dreadsapling.name=Дубовый саженец из страшных земель
+tile.dreadplanks.name=Дубовые доски из страшных земель
+tile.dreadportal.name=Врата из страшных земель
+tile.dreadfire.name=Страшное пламя
+tile.dghead.name=Голова глубинного гуля
+tile.phead.name=Голова Пита
+tile.whead.name=Голова мр.Уилсона
+tile.ohead.name=Голова др.Оранжевого
+tile.dreadbrickstairs.name=Кирпичные ступеньки из страшного камня
+tile.dreadbrickfence.name=Кирпичный забор из страшного камня
+tile.dreadbrickslab1.name=Кирпичная плита из страшного камня
+tile.dreadbrickslab2.name=Кирпичная двойная плита из страшного камня
+tile.abydreadbrickstairs.name=Абиссальнитовая каменно-кирпичные ступеньки
+tile.abydreadbrickfence.name=Абиссальнитовая каменно-кирпичный забор
+tile.abydreadbrickslab1.name=Абиссальнитовая каменно-кирпичная плита
+tile.abydreadbrickslab2.name=Абиссальнитовая каменно-кирпичная двойная плита
+tile.antiwater.name=Жидкая антиматерия
+tile.cstonebrick.0.name=Кирпичи из коралия
+tile.cstonebrick.1.name=Резные кирпичи из коралия
+tile.cstonebrick.2.name=Потрескавшиеся Кирпичи из коралия
+tile.cstonebrickfence.name=Кирпичный забор из коралия
+tile.cstonebrickslab1.name=Кирпичная плита из коралия
+tile.cstonebrickslab2.name=Кирпичная двойная плита из коралия
+tile.cstonebrickstairs.name=Кирпичные ступеньки из коралия
+tile.cstonebutton.name=Каменная кнопка из коралия
+tile.cstonepplate.name=Каменная нажимная плита из коралия
+tile.dreadaltartop.name=Алтарь чагарота (верхний)
+tile.dreadaltarbottom.name=Алтарь чагарота (нижний)
+tile.crystallizer.name=Кристаллизатор
+tile.transmutator.name=Трансмутатор
+tile.dreadguardspawner.name=Спаунер страшного стража
+tile.chagarothspawner.name=Спаунер чагарота
+tile.drtfence.name=Деревянный забор из страшных земель
+tile.nitreore.name=Селитровая руда
+tile.abyiroore.name=Глубинная железная руда
+tile.abygolore.name=Глубинная золотая руда
+tile.abydiaore.name=Глубинная алмазная руда
+tile.abynitore.name=Глубинная селитровая руда
+tile.abytinore.name=Глубинная оловянная руда
+tile.abycopore.name=Глубинная медная руда
+tile.abypcorore.name=Перламутровая коралиевая руда
+tile.abylcorore.name=Сжиженная коралиевая руда
+tile.solidlava.name=Застывшей лава 
+tile.ethaxiumbrick.0.name=Этаксиумные кирпичи
+tile.ethaxiumbrick.1.name=Резные этаксиумные кирпичи
+tile.ethaxiumbrick.2.name=Потрескавшиеся этаксиумные кирпичи
+tile.ethaxiumpillar.name=Этаксиумный столб
+tile.ethaxiumbrickstairs.name=Этаксиумные кирпичные ступеньки
+tile.ethaxiumbrickslab1.name=Этаксиумная кирпичная плита
+tile.ethaxiumbrickslab2.name=Этаксиумная кирпичная двойная плита
+tile.ethaxiumfence.name=Этаксиумный кирпичный забор
+tile.omotholportal.name=Врата в омотол
+tile.omotholfire.name=Пламя омотола
+tile.engraver.name=Гравировщик 
+tile.engraver_on.name=Дом
+tile.materializer.name=Материализатор
+tile.darkethaxiumbrick.0.name=Тёмно-этаксиумный кирпич
+tile.darkethaxiumbrick.1.name=Резной тёмно-этаксиумный кирпич
+tile.darkethaxiumbrick.2.name=Потрескавшиеся тёмно-этаксиумный кирпич
+tile.darkethaxiumpillar.name=Тёмно-этаксиумный столб
+tile.darkethaxiumbrickstairs.name=Тёмно-этаксиумно-кирпичные ступеньки
+tile.darkethaxiumbrickslab1.name=Тёмно-этаксиумно-кирпичная плита
+tile.darkethaxiumbrickslab2.name=Тёмно-этаксиумно-кирпичная двойная плита
+tile.darkethaxiumbrickfence.name=Тёмно-этаксиумно-кирпичный забор
+tile.ritualaltar.name=Ритаульный алтарь
+tile.ritualpedestal.name=Ритаульный пьедестал
+tile.shoggothblock.name=Шогготовая слизь
+tile.statue.0.name=Статуя ктулху
+tile.statue.1.name=Статуя гастура
+tile.statue.2.name=Статуя джахара
+tile.statue.3.name=Статуя азатота
+tile.statue.4.name=Статуя ньярлатхотепа
+tile.statue.5.name=Статуя йога-сотота
+tile.statue.6.name=Статуя Шуба-Ниггурата
+tile.shoggothbiomass.name=Биомасса шоггота
+tile.energypedestal.name=Энергетический пьедестал
+tile.monolithpillar.name=Монолитная каменная колонна
+tile.sacrificialaltar.name=Жертвенный алтарь
+tile.tieredenergypedestal.0.name=Энергетический пьедестал небесного мира
+tile.tieredenergypedestal.1.name=Энергетический пьедестал безной пустоши
+tile.tieredenergypedestal.2.name=Энергетический пьедестал мёртвых земель
+tile.tieredenergypedestal.3.name=Энергетический пьедестал омотола
+tile.tieredsacrificialaltar.0.name=Overworld жертвенный алтарь
+tile.tieredsacrificialaltar.1.name=Жертвенный алтарь из безной пустоши
+tile.tieredsacrificialaltar.2.name=Жертвенный алтарь из мёртвых земель
+tile.tieredsacrificialaltar.3.name=Жертвенный алтарь из омотола
+tile.jzaharspawner.name=Рассадник джахара
+tile.gatekeeperminionspawner.name=Рассадник прислужника привратника
+tile.energycollector.name=Сборщик энергии
+tile.energyrelay.name=Реле энергии
+tile.energycontainer.name=Контейнер энергии
+tile.tieredenergycollector.0.name=Сборщик энергии из небесного мира
+tile.tieredenergycollector.1.name=Сборщик энергии из безной пустоши
+tile.tieredenergycollector.2.name=Сборщик энергии из мёртвых земель
+tile.tieredenergycollector.3.name=Сборщик энергии из омотола
+tile.tieredenergyrelay.0.name=Реле энергии из небесного мира
+tile.tieredenergyrelay.1.name=Реле энергии из безной пустоши
+tile.tieredenergyrelay.2.name=Реле энергии из мёртвых земель
+tile.tieredenergyrelay.3.name=Реле энергии омотола
+tile.tieredenergycontainer.0.name=Контейнер энергии из небесного мира
+tile.tieredenergycontainer.1.name=Контейнер энергии из безной пустоши
+tile.tieredenergycontainer.2.name=Контейнер энергии из мёртвых земель
+tile.tieredenergycontainer.3.name=Контейнер энергии омотола
+tile.abyssalsand.name=Бездный песок
+tile.fusedabyssalsand.name=Расплавленный бездный песок
+tile.abyssalsandglass.name=Бездные песочные часы
+tile.dreadlandsdirt.name=Земля из мёртвых земель
+tile.abyssalcobblestonestairs.name=Бездные булыжниковые ступеньки
+tile.abyssalcobblestoneslab1.name=Бездная булыжниковая плита
+tile.abyssalcobblestoneslab2.name=Бездная булыжниковая плита
+tile.abyssalcobblestonewall.name=Бездная булыжниковая стена
+tile.dreadstonecobblestonestairs.name=Булыжниковые ступеньки из страшного камня
+tile.dreadstonecobblestoneslab1.name=Булыжниковая плита из страшного камня
+tile.dreadstonecobblestoneslab2.name=Булыжниковая плита из страшного камня
+tile.dreadstonecobblestonewall.name=Булыжниковая стена из страшного камня
+tile.abyssalnitecobblestonestairs.name=Абиссальнитовые булыжниковые ступеньки
+tile.abyssalnitecobblestoneslab1.name=Абиссальнитовая булыжниковая плита
+tile.abyssalnitecobblestoneslab2.name=Абиссальнитовая булыжниковая плита
+tile.abyssalnitecobblestonewall.name=Абиссальнитовая булыжниковая стена
+tile.coraliumcobblestonestairs.name=Булыжниковые ступеньки из коралия
+tile.coraliumcobblestoneslab1.name=Булыжниковая плита из коралия
+tile.coraliumcobblestoneslab2.name=Булыжниковая плита из коралия
+tile.coraliumcobblestonewall.name=Булыжниковая стена из коралия
+tile.luminousthistle.name=Светящийся чертополох
+tile.wastelandsthorn.name=Колючка пустоши
+tile.rendingpedestal.name=Раздирающий пьедестал
+tile.statetransformer.name=Трансформатор состояния
+tile.energydepositioner.name=Энергоотправитель
+tile.calcifiedstone.name=Кальцинированный камень
+
+#Pre/Postfixes
+decorativestatue.prefix=Декоративный %s
+crystalcluster.postfix=%s Группа
+crystalshard.postfix=%s Осколок
+crystalfragment.postfix=%s Фрагмент
+
+#Items
+item.devsword.name=Лезвие дэва
+item.oc.name=Катализатор забвения
+item.staff.name=Посох привратника
+item.gatewaykey.name=Портальный ключ
+item.powerstonetracker.name=Отслежыватель камня силы
+item.eoa.name=Глаз бездны
+item.gatewaykeydl.name=Ключ асоры от страшных врат
+item.dreadshard.name=Ужасный абиссальнитовый осколок
+item.dreadchunk.name=Ужасный абиссальнитовый кусочек
+item.abychunk.name=Абиссальнитовый кусочек
+item.abyingot.name=Абиссальнитовый слиток
+item.ccluster.name=Кораллиумный жемчужный кластер
+item.cpearl.name=Кораллиумнный жемчуг
+item.cchunk.name=Кораллиумный кусок
+item.cingot.name=Изысканный коралиумный слиток
+item.platec.name=Кораллиумная пластина
+item.coralium.name=Кораллиумный жемчуг
+item.transmutationgem.name=Жемчуг трансмутации
+item.corflesh.name=Кораллиумная истерзавшая плоть
+item.corbone.name=Кораллиумная истерзавшая плоть на кости
+item.dpick.name=Кирка из тёмного камня
+item.daxe.name=Топор из тёмного камня
+item.dshovel.name=Лопата из тёмного камня
+item.dsword.name=Меч из тёмного камня
+item.dhoe.name=Мотыга из тёмного камня
+item.apick.name=Абиссальнитовая кирка
+item.aaxe.name=Абиссальнитовый топор
+item.ashovel.name=Абиссальнитовая лопата
+item.asword.name=Абиссальнитовый меч
+item.ahoe.name=Абиссальнитовая мотыга
+item.corpick.name=Изысканная кораллиумная кирка
+item.coraxe.name=Изысканный кораллиумный топор
+item.corshovel.name=Изысканная кораллиумная лопата
+item.corsword.name=Изысканный кораллиумный меч
+item.corhoe.name=Изысканная кораллиумная мотыга
+item.ahelmet.name=Абиссальнитовый шлем
+item.aplate.name=Абиссальнитовый нагрудник
+item.alegs.name=Абиссальнитовые поножи
+item.aboots.name=Абиссальнитовые ботинки
+item.dhelmet.name=Ужасный абиссальнитовый шлем
+item.dplate.name=Ужасный абиссальнитовый нагрудник
+item.dlegs.name=Ужасный абиссальнитовые поножи
+item.dboots.name=Ужасный абиссальнитовые ботинки
+item.corhelmet.name=Изящный кораллиумный шлем
+item.corplate.name=Изящный кораллиумный нагрудник
+item.corlegs.name=Изящный кораллиумные поножи
+item.corboots.name=Изящный кораллиумные ботинки
+item.corhelmetp.name=Покрытый кораллием шлем
+item.corplatep.name=Покрытый кораллием нагрудник
+item.corlegsp.name=Покрытый кораллием поножи
+item.corbootsp.name=Покрытый кораллием ботинки
+item.depthshelmet.name=Облик глубин
+item.depthsplate.name=Нагрудник глубин
+item.depthslegs.name=Поножи глубин
+item.depthsboots.name=Ботинки глубин
+item.cobbleu.name=Булыжниковый обновляющий набор
+item.ironu.name=Железный обновляющий набор
+item.goldu.name=Золотой обновляющий набор
+item.diamondu.name=Алмазный обновляющий набор
+item.abyssalniteu.name=Абиссальнитовый обновляющий набор
+item.coraliumu.name=Кораллиумнный обновляющий набор
+item.ironp.name=Железная пластина
+item.mre.name=МРЕ
+item.chickenp.name=Курица в тарелке
+item.porkp.name=Свиная отбивная в тарелке
+item.beefp.name=Говядина в тарелке
+item.fishp.name=Рыба в тарелке
+item.dirtyplate.name=Грязные тарелки
+item.friedegg.name=Яичница
+item.eggp.name=Яичница в тарелке
+item.cloth.name=Тряпка
+item.shadowfragment.name=Тёмный фрагмент
+item.shadowshard.name=Осколок тёмного жемчуга
+item.shadowgem.name=Тёмный жемчуг
+item.oblivionshard.name=Осколок забвения
+item.corbow.name=Коралиумный большой лук
+item.cbrick.name=Коралиумные кирпичи
+item.cudgel.name=Дубинка
+item.dreadiumingot.name=Страхолитовый слиток
+item.dreadfragment.name=Страхолитовый фрагмент
+item.dreadiumhelmet.name=Страхолитовый Шлем
+item.dreadiumplate.name=Страхолитовый Нагрудник
+item.dreadiumlegs.name=Страхолитовые Поножи
+item.dreadiumboots.name=Страхолитовые Ботинки
+item.dreadiumpickaxe.name=Страхолитовая Кирка
+item.dreadiumaxe.name=Страхолитовый Топор
+item.dreadiumshovel.name=Страхолитовая Лопата
+item.dreadiumsword.name=Страхолитовый Меч
+item.dreadiumhoe.name=Страхолитовый Мотыга
+item.dreadiumu.name=Страхолитовый обновляющий набор
+item.carboncluster.name=Углеродный кластер
+item.densecarboncluster.name=Плотный углеродный кластер
+item.methane.name=Метан
+item.nitre.name=Селитра
+item.sulfur.name=Сера
+item.crystal.Iron.name=Кристаллизованное железо
+item.crystal.Gold.name=Кристаллизованное золото
+item.crystal.Sulfur.name=Кристаллизованная сера
+item.crystal.Carbon.name=Кристаллизованный углерод
+item.crystal.Oxygen.name=Кристаллизованный кислород
+item.crystal.Hydrogen.name=Кристаллизованный водород
+item.crystal.Nitrogen.name=Кристаллизованный азот
+item.crystal.Phosphorus.name=Кристаллизованный фосфор
+item.crystal.Potassium.name=Кристаллизованный калий
+item.crystal.Nitrate.name=Кристаллизованный нитрат
+item.crystal.Methane.name=Кристаллизованный метан
+item.crystal.Redstone.name=Кристаллизованный красный камень
+item.crystal.Abyssalnite.name=Кристаллизованный абиссальнит
+item.crystal.Coralium.name=Кристаллизованный кораллий
+item.crystal.Dreadium.name=Кристаллизованный страхолит
+item.crystal.Blaze.name=Кристаллизованное пламя
+item.crystal.Tin.name=Кристаллизованный олово
+item.crystal.Copper.name=Кристаллизованная медь
+item.crystal.Silicon.name=Кристаллизованный кремний
+item.crystal.Magnesium.name=Кристаллизованный магний
+item.crystal.Aluminium.name=Кристаллизованный алюминий
+item.crystal.Silica.name=Кристаллизованный кремнезём
+item.crystal.Alumina.name=Кристаллизованный глинозём
+item.crystal.Magnesia.name=Кристаллизованная магнезия
+item.crystal.Zinc.name=Кристаллизованный цинк
+item.crystal.Calcium.name=Кристаллизованный кальций
+item.crystal.Beryllium.name=Кристаллизованный бериллий
+item.crystal.Beryl.name=Кристаллизованный берилл
+item.dreadcloth.name=Страхолитовая ткань
+item.dreadplate.name=Страхолитовая Пластина
+item.dreadblade.name=Страхолитовое лезвие катаны
+item.dreadhilt.name=Страхолитовая рукоять катаны
+item.dreadkatana.name=Страхолитовая катана
+item.dreadkey.name=Ужасно-истерзавший ключ от врат
+item.gatewaykeyjzh.name=Ключ от врат чагарота райляна
+item.dreadiumsamuraihelmet.name=Страхолитовый самурайский шлем
+item.dreadiumsamuraiplate.name=Страхолитовый самурайский нагрудник
+item.dreadiumsamurailegs.name=Страхолитовый самурайские поножи
+item.dreadiumsamuraiboots.name=Страхолитовый самурайские ботинки
+item.tiningot.name=Оловянный слиток
+item.copperingot.name=Медный слиток
+item.antibeef.nameАнти-говядина
+item.antichicken.name=Анти-курица
+item.antipork.name=Анти-свинина
+item.antiflesh.name=Гнилая анти-плоть
+item.antibone.name=Анти-кость
+item.antispidereye.name=Глаз анти-паука
+item.soulreaper.name=Лезвие жнеца душ сактота
+item.ethbrick.name=Этаксиумные кирпичи
+item.ethaxiumingot.name=Этаксиумный слиток
+item.lifecrystal.name=Кристалл жизни
+item.ethaxiumpickaxe.name=Этаксиумная кирка
+item.ethaxiumaxe.name=Этаксиумный топор
+item.ethaxiumshovel.name=Этаксиумная лопата
+item.ethaxiumsword.name=Этаксиумный меч
+item.ethaxiumhoe.name=Этаксиумная мотыга
+item.ethaxiumhelmet.name=Этаксиумный шлем
+item.ethaxiumplate.name=Этаксиумный нагрудник
+item.ethaxiumlegs.name=Этаксиумные поножи
+item.ethaxiumboots.name=Этаксиумные ботинки
+item.ethaxiumu.name=Этаксиумный обновляющий набор
+item.coin.name=Монета
+item.cthulhucoin.name=Гравированная монета Ктулху
+item.eldercoin.name=Гравированная монета древнего
+item.jzaharcoin.name=Гравированная монета Джахара
+item.engraving_blank.name=Пустая гравировка монеты
+item.engraving_cthulhu.name=Гравировка монеты ктулху
+item.engraving_elder.name=Гравировка монеты древнего
+item.engraving_jzahar.name=Гравировка монеты Джахара
+item.eldritchscale.name=Жуткая чешуйка
+item.omotholflesh.name=Плоть гуля омотола
+item.anticorflesh.name=Анти-истерзавшая плоть
+item.anticorbone.name=Анти-истерзавшая плоть на кости
+item.shoggothflesh.overworld.name=Плоть шоггота
+item.shoggothflesh.abyssalwasteland.name=Бездная плоть шоггота
+item.shoggothflesh.dreadlands.name=Страхолитовая плоть шоггота
+item.shoggothflesh.omothol.name=Плоть шоггота омотола
+item.shoggothflesh.darkrealm.name=Тёмная плоть шоггота
+item.shadowplate.name=Броневая пластина тёмного титана
+item.necronomicon.name=Некрономикон
+item.necronomicon_cor.name=Некрономикон бездной пустоши
+item.necronomicon_dre.name=Некрономикон мёртвых земель
+item.necronomicon_omt.name=Некрономикон омотола
+item.abyssalnomicon.name=Абиссальномикон
+item.crystalbag_small.name=Маленький хрустальный мешок
+item.crystalbag_medium.name=Средний хрустальный мешок
+item.crystalbag_large.name=Большой хрустальный мешок
+item.crystalbag_huge.name=Огромный хрустальный мешок
+item.nugget.abyssalnite.name=Абиссальнитовый самородок
+item.nugget.coralium.name=Изящный коралиумный самородок
+item.nugget.dreadium.name=Страхолитовый самородок
+item.nugget.ethaxium.name=Этаксиумный самородок
+item.drainstaff.normal.name=Посох раздирания
+item.drainstaff.aw.name=Посох раздирания бездной пустоши
+item.drainstaff.dl.name=Посох раздирания мёртвых земель
+item.drainstaff.omt.name=Посох раздирания омотола
+item.essence.abyssalwasteland.name=Эссенция бездной пустоши
+item.essence.dreadlands.name=Эссенция мёртвых земель
+item.essence.omothol.name=Эссенция омотола
+item.skin.abyssalwasteland.name=Кожа бездной пустоши
+item.skin.dreadlands.name=Кожа мёртвых земель
+item.skin.omothol.name=Кожа омотола
+item.ritualcharm.name=Ритуальный талисман
+item.cthulhucharm.name=Талисман ктулху
+item.hasturcharm.name=Талисман гастура
+item.jzaharcharm.name=Талисман джараха
+item.azathothcharm.name=Талисман азатота
+item.nyarlathotepcharm.name=Талисман ньярлатхотепа
+item.yogsothothcharm.name=Талисман йога-сотота
+item.shubniggurathcharm.name=Талисман шуб-ниггурата
+item.hasturcoin.name=Гравированная монета гастура
+item.azathothcoin.name=Гравированная монета азатота
+item.nyarlathotepcoin.name=Гравированная монета ньярлатхотепа
+item.yogsothothcoin.name=Гравированная монета йога-сотота
+item.shubniggurathcoin.name=Гравированная монета шуб-ниггурата
+item.engraving_hastur.name=Гравировка монеты гастура
+item.engraving_azathoth.name=Гравировка монеты азатота
+item.engraving_nyarlathotep.name=Гравировка монеты ньярлатхотепа
+item.engraving_yogsothoth.name=Гравировка монеты йога-сотота
+item.engraving_shubniggurath.name=Гравировка монеты шуб-ниггурата
+item.gatekeeperessence.name=Эссенция привратника
+item.interdimensionalcage.name=Межпространственная клетка
+item.stonetablet.name=Каменная табличка
+item.scroll.basic.name=Основной свиток
+item.scroll.lesser.name=Малый свиток
+item.scroll.moderate.name=Средний свиток
+item.scroll.greater.name=Большой свиток
+item.unique_scroll.antimatter.name=Свиток антиматерии
+item.unique_scroll.oblivion.name=Свиток забвения
+item.antidote.coralium.name=Противоядие от кораллиумной чумы
+item.antidote.dread.name=Противоядие от ужасной чумы
+
+#Entities
+entity.abyssalcraft.depthsghoul.name=Глубиный гуль
+entity.abyssalcraft.evilpig.name=Свинья
+entity.abyssalcraft.abyssalzombie.name=Бездный зомби
+entity.abyssalcraft.Primed ODB.name=Заряженное ОДБ
+entity.abyssalcraft.Jzahar.name=Джахар, привратник бездны
+entity.abyssalcraft.abygolem.name=Абиссальнитовый голем
+entity.abyssalcraft.dreadgolem.name=Ужасный абиссальнитовый голем
+entity.abyssalcraft.dreadguard.name=Ужасный страж
+entity.abyssalcraft.dragonminion.name=Призрачный дракон
+entity.abyssalcraft.dragonboss.name=Асора, павший
+entity.abyssalcraft.Primed ODB Core.name=Заряженное ОДБ ядро
+entity.abyssalcraft.shadowcreature.name=Тёмное существо
+entity.abyssalcraft.shadowmonster.name=Тёмный монстр
+entity.abyssalcraft.dreadling.name=Ужас
+entity.abyssalcraft.dreadspawn.name=Рассадник ужаса
+entity.abyssalcraft.demonpig.name=Демоническая свинья
+entity.abyssalcraft.chagaroth.name=Чагарот, ужасный зверь
+entity.abyssalcraft.chagarothfist.name=Кулак чагарота
+entity.abyssalcraft.shadowbeast.name=Тёмный зверь
+entity.abyssalcraft.shadowboss.name=Сактот, предвестник гибели
+entity.abyssalcraft.gskeleton.name=Скелет голиаф
+entity.abyssalcraft.chagarothspawn.name=Рассадник чагарота
+entity.abyssalcraft.antiabyssalzombie.name=Бездный анти-зомби
+entity.abyssalcraft.antibat.name=Анти-летучая мышь
+entity.abyssalcraft.antichicken.name=Анти-курица
+entity.abyssalcraft.anticow.name=Анти-корова
+entity.abyssalcraft.anticreeper.name=Анти-крипер
+entity.abyssalcraft.antighoul.name=Анти-гуль
+entity.abyssalcraft.antipig.name=Анти-свинья
+entity.abyssalcraft.antiplayer.name=Анти-игрок
+entity.abyssalcraft.antiskeleton.name=Анти-скелет
+entity.abyssalcraft.antispider.name=Анти-паук
+entity.abyssalcraft.antizombie.name=Анти-зомби
+entity.abyssalcraft.lessershoggoth.name=Маленький шоггот
+entity.abyssalcraft.shadowtitan.name=Тёмный титан
+entity.abyssalcraft.omotholwarden.name=Смотритель омотола
+entity.abyssalcraft.jzaharminion.name=Прислужник привратника
+entity.abyssalcraft.omotholghoul.name=Гуль омотола
+entity.abyssalcraft.remnant.name=Остаток
+entity.abyssalcraft.greaterdreadspawn.name=Рассадник большего страха
+entity.abyssalcraft.lesserdreadbeast.name=Маленький ужасный зверь
+entity.abyssalcraft.evilcow.name=Корова
+entity.abyssalcraft.evilchicken.name=Курица
+entity.abyssalcraft.demoncow.name=Демоническая корова
+entity.abyssalcraft.demonchicken.name=Демоническая курица
+entity.abyssalcraft.evilsheep.name=Овца
+entity.abyssalcraft.demonsheep.name=Демоническая овца
+entity.abyssalcraft.coraliumsquid.nameКораллиумный заражённый спрут
+
+#Potions
+potion.Cplague=Кораллиумная чума
+potion.effect.Cplague=Зелье кораллиумной чумы
+splash_potion.effect.Cplague=Взрывное зелье кораллиумной чумы
+lingering_potion.effect.Cplague=Затяжное зелье кораллиумной чумы
+potion.Dplague=Ужасная чума
+potion.effect.Dplague=Зелье ужасной чумы
+splash_potion.effect.Dplague=Взрывное зелье ужасной чумы
+lingering_potion.effect.Dplague=Затяжное зелье ужасной чумы
+potion.Antimatter=Антивещество
+potion.effect.Antimatter=Зелье уничтожения
+splash_potion.effect.Antimatter=Взрывное зелье уничтожения
+lingering_potion.effect.Antimatter=Затяжное зелье уничтожения
+
+#Enchantments
+enchantment.abyssalcraft.coralium=Кораллий
+enchantment.abyssalcraft.coralium.desc=Причиняет кораллиумную чуму на удар
+enchantment.abyssalcraft.dread=Ужас
+enchantment.abyssalcraft.dread.desc=Причиняет ужасную чуму на удар
+enchantment.abyssalcraft.iron_wall=Железный барьер
+enchantment.abyssalcraft.iron_wall.desc=Уменьшает кол-во ударов, наносимых при атаке.
+enchantment.abyssalcraft.light_pierce=Лёгкий пирс
+enchantment.abyssalcraft.light_pierce.desc=Увеличивает урон против тёмных монстров
+
+#Subtitles
+subtitle.abyssalcraft.dreadguard.death=Ужасный страж умирает
+subtitle.abyssalcraft.dreadguard.idle=Ужасный страж зловеще бормочет
+subtitle.abyssalcraft.dreadguard.hit=Ужасный страж ранен
+subtitle.abyssalcraft.ghoul.normal.idle=Глубинный гуль стонет
+subtitle.abyssalcraft.ghoul.hit=Глубинный гуль ранен
+subtitle.abyssalcraft.ghoul.death=Глубинный гуль умирает
+subtitle.abyssalcraft.ghoul.pete.idle=Пит стонет
+subtitle.abyssalcraft.ghoul.wilson.idle=Мр. Уилсон стонет
+subtitle.abyssalcraft.ghoul.orange.idle=Др. Оранжевый стонет
+subtitle.abyssalcraft.golem.death=Голем умирает
+subtitle.abyssalcraft.golem.hit=Голем ранен
+subtitle.abyssalcraft.golem.idle=Голем издаёт грохочущие звуки
+subtitle.abyssalcraft.sacthoth.death=Сактот умирает
+subtitle.abyssalcraft.shadow.death=Живая тень умирает
+subtitle.abyssalcraft.shadow.hit=Живая тень ранена
+subtitle.abyssalcraft.remnant.scream=Остаток ужасающе кричит
+subtitle.abyssalcraft.remnant.yes=Остаток говорит да
+subtitle.abyssalcraft.remnant.no=Остаток говорит да
+subtitle.abyssalcraft.remnant.priest.chant=Остаток священно поёт
+subtitle.abyssalcraft.shoggoth.idle=Маленький шоггот издаёт шум
+subtitle.abyssalcraft.shoggoth.hit=Маленький шоггот ранен
+subtitle.abyssalcraft.shoggoth.death=Маленький шоггот умирает
+subtitle.abyssalcraft.jzahar.charge=Джахар усиливается
+subtitle.abyssalcraft.chant.cthulhu=Голоса заклинают ктулху
+subtitle.abyssalcraft.chant.yog_sothoth=Голоса заклинают йога-сотота
+subtitle.abyssalcraft.chant.hastur=Голоса заклинают гастура
+subtitle.abyssalcraft.chant.sleeping=Голоса заклинают тому, кто спит
+subtitle.abyssalcraft.chant.cthugha=Голоса заклинают ситаху
+subtitle.abyssalcraft.dreadspawn.idle=Появление ужаса стонет
+subtitle.abyssalcraft.dreadspawn.hit=Появление ужаса ранено
+subtitle.abyssalcraft.dreadspawn.death=Появление ужаса умирает
+subtitle.abyssalcraft.abyssalzombie.idle=Бездный зомби стонет
+subtitle.abyssalcraft.abyssalzombie.hit=Бездный зомби ранено
+subtitle.abyssalcraft.abyssalzombie.death=Бездный зомби умирает
+subtitle.abyssalcraft.antiplayer.hurt=Анти-игрок ранен
+subtitle.abyssalcraft.dreadguard.barf=Ужасный страж блюёт
+
+#Localization done, Shin out.
