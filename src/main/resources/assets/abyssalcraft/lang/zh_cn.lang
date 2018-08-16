@@ -428,7 +428,7 @@ necronomicon.text.crafting.mre=预制食品由一个铁盘子、一个胡萝卜�
 necronomicon.text.crafting.platefood=任何原版食物（以及煎蛋）与铁盘子合成会得到盘装食物（饱和度是普通食物的两倍）。吃完留下脏盘子。
 necronomicon.text.crafting.odbcore=湮灭弹核心由深渊锭、铁锭、铁块和珊瑚珍珠合成。可用作爆炸物。
 necronomicon.text.crafting.odb=湮灭弹由黑曜石、一个湮灭弹核心、一个湮灭催化剂、一桶液态珊瑚和一桶液态反物质合成。高爆。
-necronomicon.text.crafting.carboncluster=碳簇由晶化碳合成。用于合成致密碳簇。
+necronomicon.text.crafting.carboncluster=碳簇由结晶碳合成。用于合成致密碳簇。
 necronomicon.text.crafting.densecarboncluster=致密碳簇由碳簇和黑曜石合成。可嬗变为钻石。
 necronomicon.text.crafting.crate=木质板条箱由木棍、木板和箱子合成。比箱子多一排物品栏。
 
@@ -529,7 +529,7 @@ necronomicon.text.entity.coraliumsquid.2=这些鱿鱼已经被珊瑚侵染改造
 necronomicon.text.rituals.info=检查关于仪式的部分信息，或者其它章节有关可用仪式的信息。“位置”指定仪式能在哪里进行。
 
 necronomicon.text.rituals.1=要想开始进行仪式你必须创造一个祭坛来举行。共有8种材料你能用来构建你的仪式祭坛。
-necronomicon.text.rituals.2=那些是：圆石、黑暗石圆石、深渊圆石、珊瑚圆石、恐惧石圆石、深渊之国圆石、伊桑斯砖和黑暗伊桑斯砖。材料只能在特定的维度找到（例如：圆石和黑暗石圆石在主世界，深渊圆石在深渊荒芜之地等）。
+necronomicon.text.rituals.2=那些是：圆石、黑暗石圆石、深渊圆石、珊瑚圆石、恐惧圆石、深渊之国圆石、伊桑斯砖块和黑暗伊桑斯砖。材料只能在特定的维度找到（例如：圆石和黑暗石圆石在主世界，深渊圆石在深渊荒芜之地等）。
 necronomicon.text.rituals.3=要建造祭坛，只需按上述方法摆放方块（保持涂色区域可见）然后手持死灵之书按住shift右击核心方块。
 necronomicon.text.rituals.4=然后，你能开始举行仪式！要进行一个仪式，将物品放在基座上然后手持死灵之书按住shift右击祭坛。
 necronomicon.text.rituals.5=仪式进行时，基座把放置的一部分物体投向祭坛。最终仪式获得物品的地方会有一束闪电击中祭坛。
@@ -866,7 +866,7 @@ fluid.liquidantimatter=液态反物质
 tile.stone.0.name=黑暗石
 tile.stone.1.name=深渊石
 tile.stone.2.name=恐惧石
-tile.stone.3.name=深渊石
+tile.stone.3.name=深渊之国石头
 tile.stone.4.name=珊瑚石
 tile.stone.5.name=伊桑斯石
 tile.stone.6.name=奥穆索石头
