@@ -436,8 +436,8 @@ necronomicon.text.crafting.decorativeazathothstatue=装饰用阿撒托斯雕像�
 necronomicon.text.crafting.decorativecthulhustatue=装饰用克苏鲁雕像用巨石块，粘土和青色染料合成。
 necronomicon.text.crafting.decorativehasturstatue=装饰用哈斯塔雕像用巨石块，粘土和蒲公英黄合成。
 necronomicon.text.crafting.decorativejzaharstatue=装饰用扎哈尔雕像用巨石块，粘土和灰色染料合成。
-necronomicon.text.crafting.decorativenyarlathotepstatue=装饰用奈亚斯托提普雕像用巨石块，粘土和青金石合成。
-necronomicon.text.crafting.decorativeshubniggurathstatue=装饰用莎布·尼古拉斯雕像用巨石块，粘土和墨囊合成。
+necronomicon.text.crafting.decorativenyarlathotepstatue=装饰用奈亚拉托提普雕像用巨石块，粘土和青金石合成。
+necronomicon.text.crafting.decorativeshubniggurathstatue=装饰用莎布·尼古拉丝雕像用巨石块，粘土和墨囊合成。
 necronomicon.text.crafting.decorativeyogsothothstatue=装饰用犹格·索托斯雕像用巨石块，粘土和荧石粉合成。
 
 necronomicon.text.enchantment.coralium=珊瑚附魔使你在击中任何实体后传染珊瑚侵染（如果不免疫的话）。只能通过仪式获取。
@@ -846,9 +846,9 @@ tooltip.gatekeeperessence.1=扎哈尔的碎片。
 tooltip.gatekeeperessence.2=你可以感觉到力量的波动。
 tooltip.decorativestatue=此方块为纯装饰，没有任何功用
 tooltip.staff.mode.1=模式
-tooltip.staff.mode.2=按下%s以改变模式
+tooltip.staff.mode.2=按下 %s 以改变模式
 tooltip.stonetablet.cursed=被诅咒的
-tooltip.stonetablet.contents=%d组
+tooltip.stonetablet.contents=%d 组
 
 #创造模式物品栏
 itemGroup.acblocks=深渊国度方块
@@ -958,8 +958,8 @@ tile.abydreadbrickslab1.name=深渊之国石砖台阶
 tile.abydreadbrickslab2.name=深渊之国石砖双层台阶
 tile.antiwater.name=液态反物质
 tile.cstonebrick.0.name=珊瑚砖块
-tile.cstonebrick.1.name=錾制珊瑚石砖
-tile.cstonebrick.2.name=裂珊瑚石砖
+tile.cstonebrick.1.name=錾制珊瑚砖块
+tile.cstonebrick.2.name=裂珊瑚砖块
 tile.cstonebrickfence.name=珊瑚砖栅栏
 tile.cstonebrickslab1.name=珊瑚砖台阶
 tile.cstonebrickslab2.name=珊瑚砖双层台阶
